@@ -13,7 +13,7 @@ use crate::i18n::study as tx;
 
 /// Item kinds this player can show; the session composer picks only these.
 /// A chunk that adds a renderer adds its kind here and an arm below.
-pub const PLAYABLE: &[&str] = &["card", "cloze", "enumerate", "essay"];
+pub const PLAYABLE: &[&str] = &["card", "cloze", "enumerate", "essay", "table", "order"];
 
 #[component]
 pub fn ItemView(
@@ -82,6 +82,8 @@ fn render(item: &Item, on_grade: EventHandler<Grade>) -> Element {
         Body::Cloze { .. } => rsx! { ClozeItem { item, on_grade } },
         Body::Enumerate { .. } => rsx! { EnumerateItem { item, on_grade } },
         Body::Essay { .. } => rsx! { EssayItem { item, on_grade } },
+        Body::Table { .. } => rsx! { crate::table::TableItem { item, on_grade } },
+        Body::Order { .. } => rsx! { crate::order::OrderItem { item, on_grade } },
         // Not in PLAYABLE yet: other chunks bring these screens.
         _ => rsx! {
             p { class: "muted", {tx::NOT_HERE_YET} }

@@ -37,7 +37,10 @@ pub fn Today() -> Element {
                 }
                 button {
                     class: "primary start",
-                    onclick: move |_| ui.screen.set(Screen::Study),
+                    onclick: move |_| {
+                        *crate::study::START.write() = Some(crate::study::Start { lectures: None, minutes: 10 });
+                        ui.screen.set(Screen::Study);
+                    },
                     {tx::START}
                 }
             } else if o.seen == 0 && o.unseen == 0 {

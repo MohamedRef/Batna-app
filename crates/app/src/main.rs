@@ -15,10 +15,13 @@ mod icons;
 mod import;
 mod oral;
 mod order;
+mod plan;
 mod platform;
 mod prefs;
 mod settings;
+mod stats;
 mod store;
+mod study;
 mod table;
 mod today;
 mod verify;
@@ -143,11 +146,11 @@ fn App() -> Element {
 fn screen_body(screen: Screen) -> Element {
     match screen {
         Screen::Today => rsx! { today::Today {} },
-        Screen::Study => rsx! { Soon { screen } },
+        Screen::Study => rsx! { study::Study {} },
         Screen::Bank => rsx! { Soon { screen } },
         Screen::Cases => rsx! { case::CasesScreen {} },
         Screen::Oral => rsx! { oral::Oral {} },
-        Screen::Stats => rsx! { Soon { screen } },
+        Screen::Stats => rsx! { stats::Stats {} },
         Screen::Settings => rsx! { Soon { screen } },
     }
 }

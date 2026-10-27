@@ -30,8 +30,6 @@ struct Blank {
     right: Option<bool>,
 }
 
-// Live once crate::study dispatches `table` items here (chunk 2).
-#[allow(dead_code)]
 #[component]
 pub fn TableItem(item: Item, on_grade: EventHandler<Grade>) -> Element {
     let Body::Table { title, columns, rows, blanks } = &item.body else {

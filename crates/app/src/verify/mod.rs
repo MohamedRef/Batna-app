@@ -15,9 +15,7 @@ use crate::store::use_review;
 
 pub(crate) const CSS: &str = include_str!("verify.css");
 
-// The study player's shared grade row (chunk 2, `study::grade::GradeRow`)
-// renders this; until that lands nothing in this crate does.
-#[allow(dead_code)]
+/// Rendered above the study player's grade row (`study::grade::GradeRow`).
 #[component]
 pub fn VerifyBar(item_id: String) -> Element {
     // Keyed, so a bar reused for the next item starts fresh.

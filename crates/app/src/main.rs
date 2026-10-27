@@ -7,7 +7,9 @@ mod calc;
 mod case;
 mod content;
 mod i18n;
+mod store;
 mod today;
+mod verify;
 
 use dioxus::prelude::*;
 
@@ -97,6 +99,7 @@ fn main() {
 #[component]
 fn App() -> Element {
     let ui = use_context_provider(|| Ui { screen: Signal::new(Screen::from_env().unwrap_or(Screen::Today)) });
+    store::use_provide_review();
     let current = *ui.screen.read();
     rsx! {
         document::Title { "Batna" }
@@ -128,7 +131,7 @@ fn screen_body(screen: Screen) -> Element {
         Screen::Cases => rsx! { case::CasesScreen {} },
         Screen::Oral => rsx! { Soon { screen } },
         Screen::Stats => rsx! { Soon { screen } },
-        Screen::Settings => rsx! { Soon { screen } },
+        Screen::Settings => rsx! { today::Settings {} },
     }
 }
 

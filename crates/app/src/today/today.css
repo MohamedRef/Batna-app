@@ -1,0 +1,77 @@
+/* Today and review settings. Calm: one accent for what's due, the rest quiet. */
+.today-hero { gap: var(--sp-3); }
+.tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-2); }
+.tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: var(--sp-3) var(--sp-2);
+  border-radius: var(--radius);
+  background: var(--bg);
+  text-align: center;
+}
+.tile-value { font-size: var(--fs-xl); font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.2; }
+.tile-label { font-size: var(--fs-sm); color: var(--muted); }
+.tile[data-accent="true"] { background: var(--accent-soft); }
+.tile[data-accent="true"] .tile-value { color: var(--accent); }
+
+button.primary {
+  min-height: 48px;
+  padding-inline: var(--sp-6);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  color: var(--surface);
+  font-weight: 700;
+  cursor: pointer;
+  align-self: start;
+}
+button.primary:disabled { opacity: 0.45; cursor: default; }
+@media (max-width: 599px) { button.primary.start { align-self: stretch; } }
+
+.in-progress { display: flex; flex-direction: column; gap: var(--sp-2); }
+.progress-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-2); }
+@media (min-width: 840px) { .progress-list { grid-template-columns: 1fr 1fr; } }
+.progress-row {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--sp-3);
+  min-width: 0;
+}
+.progress-row .num {
+  flex: none;
+  inline-size: 2.25rem;
+  block-size: 2.25rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--good-soft);
+  color: var(--good);
+  font-weight: 700;
+}
+.bar { block-size: 6px; border-radius: var(--radius-pill); background: var(--bg); overflow: hidden; margin-block: var(--sp-1); }
+.bar-fill { block-size: 100%; background: var(--good); border-radius: inherit; }
+.chip.due { background: var(--accent-soft); border-color: transparent; color: var(--accent); font-weight: 600; }
+
+.segmented { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+.segmented button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 48px;
+  min-inline-size: 4.5rem;
+  padding: var(--sp-2) var(--sp-3);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  cursor: pointer;
+  font-variant-numeric: tabular-nums;
+}
+.segmented button[aria-checked="true"] { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); font-weight: 700; }
+.seg-hint { font-size: 0.75rem; color: var(--muted); font-weight: 400; }
+.export-text { inline-size: 100%; font-family: var(--font-latin); font-size: var(--fs-sm); }

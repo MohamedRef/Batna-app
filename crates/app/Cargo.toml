@@ -14,6 +14,13 @@ path = "src/main.rs"
 batna-core.workspace = true
 dioxus = { version = "0.7.10", features = [] }
 serde_yaml_ng.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+rusqlite = { version = "0.37", features = ["bundled"] }
+chrono = { version = "0.4", default-features = false, features = ["clock", "std"] }
+
+[target.'cfg(not(target_os = "android"))'.dependencies]
+directories = "6"
 
 [build-dependencies]
 batna-core.workspace = true

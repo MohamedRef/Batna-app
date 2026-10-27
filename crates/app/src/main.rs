@@ -13,9 +13,11 @@ mod i18n;
 mod icons;
 mod oral;
 mod order;
+mod plan;
 mod platform;
 mod prefs;
 mod settings;
+mod stats;
 mod study;
 mod table;
 mod today;
@@ -143,7 +145,7 @@ fn screen_body(screen: Screen) -> Element {
         Screen::Bank => rsx! { Soon { screen } },
         Screen::Cases => rsx! { case::CasesScreen {} },
         Screen::Oral => rsx! { oral::Oral {} },
-        Screen::Stats => rsx! { Soon { screen } },
+        Screen::Stats => rsx! { stats::Stats {} },
         Screen::Settings => rsx! { Soon { screen } },
     }
 }

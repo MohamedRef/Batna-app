@@ -1,0 +1,109 @@
+//! The mistakes log: everything answered wrong in the last 14 days and not
+//! yet recovered, grouped by topic, with a one-tap session made from it.
+
+use std::rc::Rc;
+
+use batna_core::content::{Body, Item};
+use batna_core::stats;
+use dioxus::prelude::*;
+
+use super::{SessionButton, StudyData, lecture_number};
+use crate::i18n::stats as tx;
+
+#[component]
+pub fn Mistakes(data: Rc<StudyData>) -> Element {
+    let groups = stats::mistakes(&data.lectures, &data.events, &data.marks, data.clock.now_ms);
+    let ids = stats::mistakes_session(&groups);
+    let find = |id: &str| data.lectures.iter().flat_map(|l| &l.items).find(|i| i.id == id);
+    rsx! {
+        section { class: "card",
+            h1 { {tx::MISTAKES_TITLE} }
+            p { class: "muted small", {tx::MISTAKES_NOTE} }
+            if groups.is_empty() {
+                p { {tx::MISTAKES_EMPTY} }
+            } else {
+                SessionButton { label: tx::MISTAKES_START, ids }
+            }
+        }
+        for g in groups.iter() {
+            section { class: "card mistake-group", key: "{g.lecture}-{g.title}",
+                h2 {
+                    span { class: "num small", "{lecture_number(&g.lecture)}" }
+                    " "
+                    bdi { dir: "ltr", "{g.title}" }
+                }
+                ul { class: "mistakes",
+                    for m in g.items.iter() {
+                        li { key: "{m.item_id}",
+                            span { class: "mistake-text",
+                                bdi { dir: "ltr", {find(&m.item_id).map(preview).unwrap_or_default()} }
+                            }
+                            span { class: "chip bad", {missed(m.misses)} }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/// "غلطت مرة / مرتين / 3 مرات".
+fn missed(n: u32) -> String {
+    match n {
+        0 | 1 => format!("{} {}", tx::MISSED, tx::ONCE),
+        2 => format!("{} {}", tx::MISSED, tx::TWICE),
+        3..=10 => format!("{} {n} {}", tx::MISSED, tx::TIMES),
+        _ => format!("{} {n} {}", tx::MISSED, tx::TIMES_MANY),
+    }
+}
+
+/// The item's question, short enough for one line or two.
+pub fn preview(item: &Item) -> String {
+    let text = match &item.body {
+        Body::Card { front, .. } => front.clone(),
+        Body::Cloze { text, .. } => hide_clozes(text),
+        Body::Mcq { stem, .. } | Body::Case { stem, .. } | Body::Calc { stem, .. } => stem.clone(),
+        Body::Enumerate { prompt, .. } | Body::Essay { prompt, .. } | Body::Order { prompt, .. } => {
+            prompt.clone()
+        }
+        Body::Table { title, .. } => title.clone(),
+    };
+    let mut chars = text.chars();
+    let short: String = chars.by_ref().take(140).collect();
+    if chars.next().is_some() { format!("{short}…") } else { short }
+}
+
+/// `a {{c1::b}} c` → `a [...] c`, so the log doesn't give the answer away.
+fn hide_clozes(text: &str) -> String {
+    let mut out = String::new();
+    let mut rest = text;
+    while let Some(start) = rest.find("{{") {
+        out.push_str(&rest[..start]);
+        match rest[start..].find("}}") {
+            Some(end) => {
+                out.push_str("[…]");
+                rest = &rest[start + end + 2..];
+            }
+            None => {
+                rest = &rest[start..];
+                break;
+            }
+        }
+    }
+    out.push_str(rest);
+    out
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn clozes_are_hidden() {
+        assert_eq!(
+            hide_clozes("Class A = {{c1::5-6}} points, C = {{c2::10-15}}."),
+            "Class A = […] points, C = […]."
+        );
+        assert_eq!(hide_clozes("no blanks"), "no blanks");
+    }
+}

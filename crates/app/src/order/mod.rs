@@ -26,8 +26,6 @@ struct Draft {
     checked: bool,
 }
 
-// Live once crate::study dispatches `order` items here (chunk 2).
-#[allow(dead_code)]
 #[component]
 pub fn OrderItem(item: Item, on_grade: EventHandler<Grade>) -> Element {
     let Body::Order { prompt, steps } = &item.body else {

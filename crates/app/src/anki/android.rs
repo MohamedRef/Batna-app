@@ -74,8 +74,8 @@ pub fn save_and_open(name: &str, bytes: &[u8]) -> Result<String, String> {
         let args = env.new_object_array(2, jni_str!("java/lang/String"), JObject::null())?;
         let path_arg = env.new_string(RELATIVE_PATH)?;
         let name_arg = env.new_string(name)?;
-        env.set_object_array_element(&args, 0, &path_arg)?;
-        env.set_object_array_element(&args, 1, &name_arg)?;
+        args.set_element(env, 0, &path_arg)?;
+        args.set_element(env, 1, &name_arg)?;
         env.call_method(
             &resolver,
             jni_str!("delete"),

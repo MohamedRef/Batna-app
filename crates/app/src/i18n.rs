@@ -39,6 +39,7 @@ pub mod bank {
     pub const EMPTY_BODY: &str = "أول ما محاضرة فيها أسئلة MCQ تخلص، هتلاقيها هنا على طول.";
     pub const LECTURES: &str = "المحاضرات";
     pub const TOPICS: &str = "المواضيع";
+    pub const PICK_LECTURE_FOR_TOPICS: &str = "اختار محاضرة أو أكتر عشان تظهر مواضيعها.";
     pub const TAGS: &str = "نوع السؤال";
     pub const TAG_HIGH_YIELD: &str = "مهم جدًا";
     pub const TAG_BOOK: &str = "أسئلة الكتاب";

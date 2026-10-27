@@ -51,15 +51,28 @@ pub fn Setup() -> Element {
             _ => lectures.push((q.lecture.to_string(), 1)),
         }
     }
-    // Topics of the chosen lectures (all lectures when none is chosen).
-    let topics: BTreeSet<(String, String)> = pool
-        .iter()
-        .filter(|q| filter.lectures.is_empty() || filter.lectures.contains(q.lecture))
-        .filter_map(|q| Some((q.lecture.to_string(), q.topic?.to_string())))
-        .collect();
+    // Topics of the chosen lectures, in book order. With several lectures and
+    // none chosen there would be dozens, so they wait for a lecture pick.
+    let several_lectures = lectures.len() > 1;
+    let mut topics: Vec<(String, String)> = Vec::new();
+    if !several_lectures || !filter.lectures.is_empty() {
+        for q in pool.iter().filter(|q| filter.lectures.is_empty() || filter.lectures.contains(q.lecture)) {
+            if let Some(t) = q.topic {
+                let key = (q.lecture.to_string(), t.to_string());
+                if !topics.contains(&key) {
+                    topics.push(key);
+                }
+            }
+        }
+        let rank = |(l, t): &(String, String)| {
+            let pos = lib.lectures.get(l).and_then(|lec| lec.topics.iter().position(|x| &x.id == t));
+            (l.clone(), pos.unwrap_or(usize::MAX))
+        };
+        topics.sort_by_key(rank);
+    }
+    let topic_prefix = several_lectures && filter.lectures.len() != 1;
     let tags_present: BTreeSet<&str> = pool.iter().flat_map(|q| q.tags.iter().map(String::as_str)).collect();
     let tags: Vec<(&str, &str)> = TAGS.into_iter().filter(|(t, _)| tags_present.contains(t)).collect();
-    let several_lectures = lectures.len() > 1;
 
     let start_with = move |mode: Mode| {
         let filter = FILTER.read().clone();
@@ -104,8 +117,10 @@ pub fn Setup() -> Element {
                 }
             }
 
-            if !topics.is_empty() {
-                h2 { class: "label", {tx::TOPICS} }
+            h2 { class: "label", {tx::TOPICS} }
+            if topics.is_empty() {
+                p { class: "muted small", {tx::PICK_LECTURE_FOR_TOPICS} }
+            } else {
                 div { class: "chips",
                     for (lecture, topic) in topics {
                         Chip {
@@ -120,7 +135,7 @@ pub fn Setup() -> Element {
                                     }
                                 }
                             },
-                            if several_lectures {
+                            if topic_prefix {
                                 bdi { "L{lecture_number(&lecture)} · {topic_title(&lecture, &topic)}" }
                             } else {
                                 bdi { {topic_title(&lecture, &topic)} }

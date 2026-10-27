@@ -12,6 +12,7 @@
 use dioxus::prelude::*;
 
 use crate::i18n::{keys as tx, nav};
+use crate::settings::SettingsNav;
 use crate::{Screen, Ui};
 
 static SHEET_OPEN: GlobalSignal<bool> = Signal::global(|| false);
@@ -63,13 +64,14 @@ await new Promise(() => {});
 #[derive(Debug, PartialEq, Eq)]
 enum Command {
     Go(Screen),
+    Settings,
     Help,
 }
 
 fn parse(msg: &str) -> Option<Command> {
     match msg {
         "help" => Some(Command::Help),
-        "go:settings" => Some(Command::Go(Screen::Settings)),
+        "go:settings" => Some(Command::Settings),
         _ => {
             let n: usize = msg.strip_prefix("go:")?.parse().ok()?;
             Screen::NAV.get(n.checked_sub(1)?).copied().map(Command::Go)
@@ -79,14 +81,20 @@ fn parse(msg: &str) -> Option<Command> {
 
 pub fn use_shortcuts() {
     let ui = use_context::<Ui>();
+    let settings = use_context::<SettingsNav>();
     use_future(move || async move {
         let mut eval = document::eval(KEYS_JS);
         while let Ok(msg) = eval.recv::<String>().await {
             match parse(&msg) {
                 Some(Command::Go(screen)) => {
                     open_sheet(false);
+                    settings.close();
                     let mut s = ui.screen;
                     s.set(screen);
+                }
+                Some(Command::Settings) => {
+                    open_sheet(false);
+                    settings.show(None);
                 }
                 Some(Command::Help) => {
                     let open = !*SHEET_OPEN.peek();
@@ -164,7 +172,7 @@ mod tests {
     fn messages_map_to_screens() {
         assert_eq!(parse("go:1"), Some(Command::Go(Screen::Today)));
         assert_eq!(parse("go:6"), Some(Command::Go(Screen::Stats)));
-        assert_eq!(parse("go:settings"), Some(Command::Go(Screen::Settings)));
+        assert_eq!(parse("go:settings"), Some(Command::Settings));
         assert_eq!(parse("help"), Some(Command::Help));
         assert_eq!(parse("go:0"), None);
         assert_eq!(parse("go:7"), None);

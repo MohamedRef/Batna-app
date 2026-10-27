@@ -11,6 +11,7 @@ mod hover;
 mod i18n;
 mod oral;
 mod platform;
+mod prefs;
 mod settings;
 mod shortcuts;
 mod today;
@@ -31,7 +32,7 @@ pub enum Screen {
 }
 
 impl Screen {
-    /// Bottom bar on phones, side rail from 600dp. Settings sits in the top bar.
+    /// Bottom bar on phones, side rail from 600dp. Settings is a sheet opened from the top bar.
     pub const NAV: [Screen; 6] = [Self::Today, Self::Study, Self::Bank, Self::Cases, Self::Oral, Self::Stats];
 
     pub fn label(self) -> &'static str {
@@ -74,6 +75,8 @@ impl Screen {
 #[derive(Clone, Copy)]
 pub struct Ui {
     pub screen: Signal<Screen>,
+    /// This device's theme and text size (Settings › Look).
+    pub prefs: Signal<prefs::DevicePrefs>,
 }
 
 fn main() {
@@ -107,11 +110,17 @@ fn main() {
 
 #[component]
 fn App() -> Element {
-    let ui = use_context_provider(|| Ui { screen: Signal::new(Screen::from_env().unwrap_or(Screen::Today)) });
+    let ui = use_context_provider(|| Ui {
+        screen: Signal::new(Screen::from_env().unwrap_or(Screen::Today)),
+        prefs: Signal::new(prefs::DevicePrefs::load()),
+    });
+    let settings = use_context_provider(settings::SettingsNav::new);
     let current = *ui.screen.read();
+    let look = ui.prefs.read().css();
     rsx! {
         document::Title { "Batna" }
         style { {MAIN_CSS} }
+        style { {look} }
         desk::Chrome {}
         div { class: "app", lang: "ar", dir: "rtl",
             header { class: "topbar",
@@ -119,15 +128,29 @@ fn App() -> Element {
                     span { class: "brand-name", {i18n::app::NAME} }
                     span { class: "brand-tag", {i18n::app::TAGLINE} }
                 }
-                NavButton { screen: Screen::Settings, class: "icon-button" }
+                button {
+                    class: "icon-button",
+                    aria_label: Screen::Settings.label(),
+                    title: Screen::Settings.label(),
+                    onclick: move |_| settings.show(None),
+                    span { class: "glyph", aria_hidden: "true", {Screen::Settings.glyph()} }
+                }
             }
             nav { class: "nav", aria_label: "التنقل",
                 for screen in Screen::NAV {
                     NavButton { key: "{screen:?}", screen, class: "nav-item" }
                 }
-                NavButton { screen: Screen::Settings, class: "nav-item nav-foot" }
+                // From 840px the sidebar carries Settings at its foot (nav.css).
+                button {
+                    class: "nav-item nav-foot",
+                    aria_label: Screen::Settings.label(),
+                    onclick: move |_| settings.show(None),
+                    span { class: "glyph", aria_hidden: "true", {Screen::Settings.glyph()} }
+                    span { class: "label", {Screen::Settings.label()} }
+                }
             }
             main { class: "content", "data-screen": "{current:?}", {screen_body(current)} }
+            settings::SettingsSheet {}
         }
     }
 }
@@ -141,7 +164,7 @@ fn screen_body(screen: Screen) -> Element {
         Screen::Cases => rsx! { case::CasesScreen {} },
         Screen::Oral => rsx! { oral::Oral {} },
         Screen::Stats => rsx! { Soon { screen } },
-        Screen::Settings => rsx! { desk::DeviceSettings {} },
+        Screen::Settings => rsx! { Soon { screen } },
     }
 }
 

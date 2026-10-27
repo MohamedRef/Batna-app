@@ -8,6 +8,7 @@ use dioxus::desktop::muda::accelerator::{Accelerator, Code, Modifiers};
 use dioxus::desktop::muda::{AboutMetadata, Menu, MenuItem, PredefinedMenuItem, Submenu};
 use dioxus::prelude::*;
 
+use super::SettingsNav;
 use crate::{Screen, Ui};
 
 const SETTINGS: &str = "batna.settings";
@@ -106,18 +107,20 @@ pub fn menu_bar() -> Menu {
 /// Answers the menu's own items.
 pub fn use_menu_events() {
     let ui = use_context::<Ui>();
+    let settings = use_context::<SettingsNav>();
     dioxus::desktop::use_muda_event_handler(move |event| {
         let id = event.id().0.as_str();
         let mut screen = ui.screen;
         match id {
             SETTINGS => {
                 crate::shortcuts::open_sheet(false);
-                screen.set(Screen::Settings);
+                settings.show(None);
             }
             SHORTCUTS => crate::shortcuts::open_sheet(true),
             _ => {
                 if let Some((_, _, _, s)) = GO.iter().find(|(go, ..)| *go == id) {
                     crate::shortcuts::open_sheet(false);
+                    settings.close();
                     screen.set(*s);
                 }
             }

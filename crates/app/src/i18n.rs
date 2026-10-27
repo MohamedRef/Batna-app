@@ -140,8 +140,10 @@ pub mod calc {
 }
 
 pub mod desk {
-    pub const SECTION: &str = "التابلت والماك";
-    pub const SECTION_NOTE: &str = "الإعدادات دي للجهاز ده بس، ومش بتتزامن.";
+    pub const TABLET: &str = "التابلت والقلم";
+    pub const TABLET_SUB: &str = "القايمة الجانبية ولمحة القلم";
+    pub const MAC: &str = "الماك والكيبورد";
+    pub const MAC_SUB: &str = "القايمة الجانبية ولمحة الماوس والاختصارات";
     pub const NAV_STYLE: &str = "القايمة الجانبية في الشاشة العريضة";
     pub const NAV_LABELS: &str = "أيقونات وأسامي";
     pub const NAV_SLIM: &str = "أيقونات بس";
@@ -156,6 +158,7 @@ pub mod desk {
 }
 
 pub mod hover {
+    pub const TITLE: &str = "اللمحة";
     pub const PEN: &str = "لمحة بقلم S Pen";
     pub const PEN_NOTE: &str = "قرّب القلم من اختصار أو اسم دوا من غير ما تلمس الشاشة، هيظهرلك معناه.";
     pub const MOUSE: &str = "لمحة بالماوس";
@@ -178,4 +181,50 @@ pub mod keys {
     pub const NEXT: &str = "اللي بعده";
     pub const ESC: &str = "تقفل أي حاجة مفتوحة";
     pub const HELP: &str = "القايمة دي";
+}
+
+pub mod settings {
+    pub const TITLE: &str = "الإعدادات";
+    pub const CLOSE: &str = "اقفل";
+    pub const BACK: &str = "رجوع";
+    pub const SECTIONS: &str = "أقسام الإعدادات";
+    pub const THIS_DEVICE: &str = "للجهاز ده بس";
+
+    pub const LOOK: &str = "الشكل";
+    pub const LOOK_SUB: &str = "الألوان وحجم الخط";
+    pub const DATA: &str = "بياناتك";
+    pub const DATA_SUB: &str = "فين بتتحفظ، والتصدير";
+    pub const ABOUT: &str = "عن باطنة";
+    pub const ABOUT_SUB: &str = "النسخة والمحتوى";
+
+    pub const THEME: &str = "الألوان";
+    pub const THEME_SYSTEM: &str = "زي الجهاز";
+    pub const THEME_SYSTEM_SUB: &str = "فاتح بالنهار، وغامق لما الجهاز يبقى غامق";
+    pub const THEME_PAPER: &str = "ورق";
+    pub const THEME_PAPER_SUB: &str = "فاتح وهادي";
+    pub const THEME_NIGHT: &str = "ليل";
+    pub const THEME_NIGHT_SUB: &str = "غامق";
+    pub const THEME_SHIFT: &str = "نبطشية";
+    pub const THEME_SHIFT_SUB: &str = "غامق ودافي من غير ضوء أزرق، للمذاكرة متأخر قبل النوم";
+
+    pub const TEXT_SIZE: &str = "حجم الخط";
+    pub const TEXT_SMALL: &str = "صغير";
+    pub const TEXT_NORMAL: &str = "عادي";
+    pub const TEXT_LARGE: &str = "كبير";
+    pub const TEXT_LARGER: &str = "أكبر";
+    pub const TEXT_SAMPLE_AR: &str = "إيه أول علاج لـ";
+    pub const TEXT_SAMPLE_TERM: &str = "variceal bleeding";
+
+    pub const DATA_FOLDER: &str = "فولدر البيانات";
+    pub const DATA_NOWHERE: &str = "مش معروف على الجهاز ده";
+    pub const DATA_LOCAL: &str = "كل اللي بتذاكره متسجل على الجهاز ده. النسخة الاحتياطية والمزامنة جايين.";
+
+    pub const VERSION: &str = "النسخة";
+    pub const CONTENT: &str = "المحتوى";
+    pub const LECTURES_WRITTEN: &str = "محاضرة مكتوبة من";
+    pub const ITEMS: &str = "سؤال وكارت";
+    pub const SOURCE: &str = "المصدر";
+    pub const BOOK: &str =
+        "Internal Medicine Postgraduate Lectures, Alexandria Faculty of Medicine (2025), part 1";
+    pub const PERSONAL: &str = "نسخة شخصية، مش منشورة.";
 }

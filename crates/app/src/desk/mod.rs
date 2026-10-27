@@ -12,13 +12,12 @@
 //! - `"aria-keyshortcuts": "Space"` (or `"1"`, `"A"`, `"Enter"`, `"Escape"`)
 //!   on a button: that key presses it (see [`crate::shortcuts`]).
 
-mod prefs;
-
 use dioxus::prelude::*;
 
-pub use prefs::{MOUSE_HOVER, NAV_STYLE, NavStyle, PEN_HOVER};
-
+use crate::Ui;
 use crate::i18n::{desk as tx, hover as htx, keys as ktx};
+use crate::prefs::NavStyle;
+use crate::settings::{DeviceOnly, Section};
 
 const DESK_CSS: &str = include_str!("../../assets/desk.css");
 const NAV_CSS: &str = include_str!("../../assets/nav.css");
@@ -27,7 +26,18 @@ const NAV_CSS: &str = include_str!("../../assets/nav.css");
 /// switches, the hover script, the keyboard and (on the Mac) the menu.
 #[component]
 pub fn Chrome() -> Element {
-    prefs::use_prefs();
+    let ui = use_context::<Ui>();
+    // The device switches reach nav.css and hover.js as data-* on <html>.
+    use_effect(move || {
+        let p = *ui.prefs.read();
+        let on_off = |on: bool| if on { "on" } else { "off" };
+        document::eval(&format!(
+            "const d = document.documentElement.dataset; d.navStyle = {:?}; d.penHover = {:?}; d.mouseHover = {:?};",
+            p.nav_style.as_str(),
+            on_off(p.pen_hover),
+            on_off(p.mouse_hover),
+        ));
+    });
     crate::hover::use_hover();
     crate::shortcuts::use_shortcuts();
     #[cfg(all(feature = "desktop", not(target_os = "android")))]
@@ -77,38 +87,56 @@ pub fn ListDetail(list: Element, detail: Option<Element>) -> Element {
     }
 }
 
-/// Settings › Tablet and Mac: the sidebar style, hover peeks and the
-/// keyboard shortcut list. Chunk 1's settings sheet shows it as one section.
+/// Settings › Tablet (Android: pen hover) and Settings › Mac (mouse hover):
+/// the sidebar style, the hover peek and the keyboard shortcut list.
 #[component]
-pub fn DeviceSettings() -> Element {
-    let nav = *NAV_STYLE.read();
-    let pen = *PEN_HOVER.read();
-    let mouse = *MOUSE_HOVER.read();
+pub fn DeviceSettings(section: Section) -> Element {
+    let ui = use_context::<Ui>();
+    let mut prefs = ui.prefs;
+    let now = *prefs.read();
     let terms = crate::hover::term_count();
+    let mut set = move |f: &dyn Fn(&mut crate::prefs::DevicePrefs)| {
+        f(&mut prefs.write());
+        prefs.peek().save();
+    };
+    let tablet = section == Section::Tablet;
     rsx! {
         section { class: "card desk-settings",
-            h2 { {tx::SECTION} }
-            p { class: "muted small", {tx::SECTION_NOTE} }
-
-            fieldset { class: "desk-field",
-                legend { {tx::NAV_STYLE} }
-                div { class: "desk-segment", role: "radiogroup",
-                    for (style, label) in [(NavStyle::Labels, tx::NAV_LABELS), (NavStyle::Slim, tx::NAV_SLIM)] {
-                        button {
-                            key: "{style:?}",
-                            role: "radio",
-                            "aria-checked": if nav == style { "true" } else { "false" },
-                            onclick: move |_| *NAV_STYLE.write() = style,
-                            {label}
-                        }
+            h2 { {tx::NAV_STYLE} DeviceOnly {} }
+            div { class: "desk-segment", role: "radiogroup", aria_label: tx::NAV_STYLE,
+                for (style, label) in [(NavStyle::Labels, tx::NAV_LABELS), (NavStyle::Slim, tx::NAV_SLIM)] {
+                    button {
+                        key: "{style.as_str()}",
+                        role: "radio",
+                        aria_checked: if now.nav_style == style { "true" } else { "false" },
+                        onclick: move |_| set(&|p| p.nav_style = style),
+                        {label}
                     }
                 }
             }
-
-            Toggle { label: htx::PEN, note: htx::PEN_NOTE, on: pen, onchange: move |v| *PEN_HOVER.write() = v }
-            Toggle { label: htx::MOUSE, note: htx::MOUSE_NOTE, on: mouse, onchange: move |v| *MOUSE_HOVER.write() = v }
+        }
+        section { class: "card desk-settings",
+            h2 { {htx::TITLE} DeviceOnly {} }
+            if tablet {
+                Toggle {
+                    label: htx::PEN,
+                    note: htx::PEN_NOTE,
+                    on: now.pen_hover,
+                    onchange: move |v: bool| set(&|p| p.pen_hover = v),
+                }
+            } else {
+                Toggle {
+                    label: htx::MOUSE,
+                    note: htx::MOUSE_NOTE,
+                    on: now.mouse_hover,
+                    onchange: move |v: bool| set(&|p| p.mouse_hover = v),
+                }
+            }
             p { class: "muted small", bdi { "{terms}" } " " {htx::TERMS} }
-
+        }
+        section { class: "card desk-settings",
+            h2 { {ktx::TITLE} }
+            p { class: "muted small", {ktx::NOTE} }
             button {
                 class: "desk-keys-button",
                 onclick: move |_| crate::shortcuts::open_sheet(true),

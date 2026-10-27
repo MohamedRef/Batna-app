@@ -3,6 +3,7 @@
 
 pub mod content;
 pub mod layout;
+pub mod pack;
 pub mod plan;
 pub mod review;
 pub mod stats;

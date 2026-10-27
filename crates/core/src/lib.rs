@@ -7,6 +7,8 @@ pub mod layout;
 pub mod pack;
 pub mod plan;
 pub mod review;
+pub mod session;
 pub mod srs;
 pub mod stats;
+pub mod theme;
 pub mod validate;

@@ -1,0 +1,672 @@
+//! The study session: which items to show, in what order, and how a typed
+//! answer is checked. Pure logic; the app's `study` screen drives it.
+//!
+//! Order: due reviews first, interleaved across topics (mixing helps
+//! retrieval), then new items blocked by topic in book order (one idea at a
+//! time while it is first learned). Everything is capped at a time budget.
+
+use std::collections::{BTreeMap, HashSet};
+
+use crate::content::{Body, Item, Lecture, OutlineEntry, Status};
+use crate::review::Grade;
+
+/// A rough time for one item, in seconds, used to fit a session to its budget.
+pub fn estimate_secs(body: &Body) -> u32 {
+    match body {
+        Body::Card { .. } => 20,
+        Body::Cloze { text, .. } => {
+            let blanks = crate::content::cloze_blanks(text).map_or(1, |b| b.len().max(1));
+            15 + 10 * blanks as u32
+        }
+        Body::Mcq { .. } => 45,
+        Body::Enumerate { points, .. } => 30 + 6 * points.len() as u32,
+        Body::Essay { outline, .. } => 60 + 20 * outline.len() as u32,
+        Body::Case { steps, .. } => 30 + 40 * steps.len() as u32,
+        Body::Table { blanks, .. } => 15 + 20 * blanks.len() as u32,
+        Body::Order { steps, .. } => 10 + 8 * steps.len() as u32,
+        Body::Calc { .. } => 90,
+    }
+}
+
+/// What the composer gets from the review store and the learner's choices.
+#[derive(Debug, Clone)]
+pub struct Inputs<'a> {
+    /// The lectures to study from, in book order.
+    pub lectures: &'a [&'a Lecture],
+    /// Only these topics (`hb.L01/definition`); empty means every topic.
+    pub topics: &'a HashSet<String>,
+    /// Item kinds the player can show (`card`, `cloze`, …).
+    pub kinds: &'a [&'a str],
+    /// Due item ids, most overdue first.
+    pub due: &'a [String],
+    /// Ids already studied at least once (not new).
+    pub seen: &'a HashSet<String>,
+    /// Ids the learner marked wrong (✗): kept out until fixed.
+    pub hidden: &'a HashSet<String>,
+    /// How many new items may still start today.
+    pub max_new: usize,
+    /// Time budget in seconds.
+    pub budget_secs: u32,
+}
+
+/// One planned item.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Planned {
+    pub item_id: String,
+    pub lecture: String,
+    /// `hb.L01/definition`, or the lecture id when the item has no topic.
+    pub topic: String,
+    pub est_secs: u32,
+    /// First time ever seen.
+    pub fresh: bool,
+}
+
+/// Builds the ordered session. Always returns at least one item when anything
+/// is available, even if that one item is longer than the budget.
+pub fn compose(input: &Inputs<'_>) -> Vec<Planned> {
+    // Every eligible item, with its book position for stable ordering.
+    let mut pool: BTreeMap<&str, (usize, Planned)> = BTreeMap::new();
+    let mut book_pos = 0usize;
+    for lecture in input.lectures {
+        for item in &lecture.items {
+            book_pos += 1;
+            if !eligible(item, input) {
+                continue;
+            }
+            let topic = topic_key(&lecture.lecture, item);
+            if !input.topics.is_empty() && !input.topics.contains(&topic) {
+                continue;
+            }
+            let planned = Planned {
+                item_id: item.id.clone(),
+                lecture: lecture.lecture.clone(),
+                topic,
+                est_secs: estimate_secs(&item.body),
+                fresh: !input.seen.contains(&item.id),
+            };
+            pool.insert(item.id.as_str(), (book_pos, planned));
+        }
+    }
+
+    let mut taken: HashSet<String> = HashSet::new();
+    let due: Vec<Planned> = input
+        .due
+        .iter()
+        .filter_map(|id| pool.get(id.as_str()))
+        .filter(|(_, p)| taken.insert(p.item_id.clone()))
+        .map(|(_, p)| Planned { fresh: false, ..p.clone() })
+        .collect();
+
+    let mut fresh: Vec<(usize, Planned)> =
+        pool.values().filter(|(_, p)| p.fresh && !taken.contains(&p.item_id)).cloned().collect();
+    fresh.sort_by_key(|(pos, _)| *pos);
+    let fresh = block_by_topic(fresh.into_iter().map(|(_, p)| p).collect());
+    let mut new_left = input.max_new;
+
+    let mut out = Vec::new();
+    let mut used = 0u32;
+    for p in interleave(due).into_iter().chain(fresh) {
+        if p.fresh && new_left == 0 {
+            continue;
+        }
+        if out.is_empty() || used + p.est_secs <= input.budget_secs {
+            new_left -= usize::from(p.fresh);
+            used += p.est_secs;
+            out.push(p);
+        }
+    }
+    out
+}
+
+fn eligible(item: &Item, input: &Inputs<'_>) -> bool {
+    item.status != Status::Rejected
+        && !input.hidden.contains(&item.id)
+        && input.kinds.contains(&item.body.kind())
+}
+
+fn topic_key(lecture: &str, item: &Item) -> String {
+    match &item.topic {
+        Some(t) => format!("{lecture}/{t}"),
+        None => lecture.to_string(),
+    }
+}
+
+/// Keeps book order but pulls every item of a topic together, topics in the
+/// order they first appear.
+fn block_by_topic(items: Vec<Planned>) -> Vec<Planned> {
+    let mut order: Vec<String> = Vec::new();
+    let mut groups: BTreeMap<String, Vec<Planned>> = BTreeMap::new();
+    for p in items {
+        if !groups.contains_key(&p.topic) {
+            order.push(p.topic.clone());
+        }
+        groups.entry(p.topic.clone()).or_default().push(p);
+    }
+    order.into_iter().flat_map(|t| groups.remove(&t).unwrap_or_default()).collect()
+}
+
+/// Reorders so that two neighbours share a topic only when nothing else is
+/// left, while keeping the most overdue items near the front.
+fn interleave(mut items: Vec<Planned>) -> Vec<Planned> {
+    let mut out: Vec<Planned> = Vec::with_capacity(items.len());
+    while !items.is_empty() {
+        let last = out.last().map(|p| p.topic.clone());
+        let pick = items.iter().position(|p| Some(&p.topic) != last.as_ref()).unwrap_or(0);
+        out.push(items.remove(pick));
+    }
+    out
+}
+
+// ---------------------------------------------------------------------------
+// A running session
+
+/// How one item went.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Outcome {
+    pub item_id: String,
+    pub grade: Grade,
+    pub fresh: bool,
+    /// Graded again later in the same session after an Again.
+    pub retry: bool,
+}
+
+/// A session in progress. An item graded Again comes back once at the end of
+/// the session, so it is retrieved again while it is still fresh.
+#[derive(Debug, Clone, Default)]
+pub struct Session {
+    queue: Vec<Planned>,
+    pos: usize,
+    retried: HashSet<String>,
+    pub outcomes: Vec<Outcome>,
+}
+
+impl Session {
+    pub fn new(plan: Vec<Planned>) -> Self {
+        Self { queue: plan, ..Self::default() }
+    }
+
+    pub fn current(&self) -> Option<&Planned> {
+        self.queue.get(self.pos)
+    }
+
+    /// 0-based position and the current queue length (it grows on Again).
+    pub fn progress(&self) -> (usize, usize) {
+        (self.pos, self.queue.len())
+    }
+
+    pub fn is_done(&self) -> bool {
+        self.pos >= self.queue.len()
+    }
+
+    /// Whether the current item is a same-session retry.
+    pub fn is_retry(&self) -> bool {
+        self.current().is_some_and(|p| self.queue[..self.pos].iter().any(|q| q.item_id == p.item_id))
+    }
+
+    pub fn grade(&mut self, grade: Grade) {
+        let Some(p) = self.current().cloned() else { return };
+        let retry = self.is_retry();
+        self.outcomes.push(Outcome { item_id: p.item_id.clone(), grade, fresh: p.fresh, retry });
+        if grade == Grade::Again && self.retried.insert(p.item_id.clone()) {
+            self.queue.push(Planned { fresh: false, ..p });
+        }
+        self.pos += 1;
+    }
+
+    pub fn summary(&self) -> Summary {
+        // The first grade of each item is the one that counts for "right".
+        let mut first: Vec<&Outcome> = Vec::new();
+        for o in &self.outcomes {
+            if !first.iter().any(|f| f.item_id == o.item_id) {
+                first.push(o);
+            }
+        }
+        let right = first.iter().filter(|o| matches!(o.grade, Grade::Good | Grade::Easy)).count();
+        let shaky: Vec<String> = first
+            .iter()
+            .filter(|o| matches!(o.grade, Grade::Again | Grade::Hard))
+            .map(|o| o.item_id.clone())
+            .collect();
+        Summary { items: first.len(), right, fresh: first.iter().filter(|o| o.fresh).count(), shaky }
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Summary {
+    /// Distinct items answered.
+    pub items: usize,
+    /// Answered Good or Easy the first time.
+    pub right: usize,
+    /// Seen for the first time.
+    pub fresh: usize,
+    /// Graded Again or Hard the first time: these come back sooner.
+    pub shaky: Vec<String>,
+}
+
+// ---------------------------------------------------------------------------
+// Typed answers
+
+/// How close a typed answer is.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum Match {
+    Right,
+    /// The numbers are right but a sign (≥, <) is missing, or a word has a
+    /// small typo. Shown with the full answer.
+    Close,
+    Wrong,
+}
+
+#[derive(Debug, Clone, PartialEq)]
+enum Tok {
+    Num(f64),
+    Op(&'static str),
+    Word(String),
+}
+
+/// Lower-cases, maps Arabic-Indic digits and look-alike symbols to ASCII, and
+/// splits into numbers, comparison signs and words. Spacing, dashes and other
+/// punctuation are dropped, so "5 - 6", "5-6" and "5 to 6" read the same.
+fn tokens(s: &str) -> Vec<Tok> {
+    let mut norm = String::with_capacity(s.len());
+    for c in s.chars() {
+        match c {
+            '٠'..='٩' => norm.push(char::from(b'0' + (c as u32 - '٠' as u32) as u8)),
+            '۰'..='۹' => norm.push(char::from(b'0' + (c as u32 - '۰' as u32) as u8)),
+            '٫' => norm.push('.'),
+            '≥' | '⩾' => norm.push_str(">="),
+            '≤' | '⩽' => norm.push_str("<="),
+            '×' => norm.push('x'),
+            'µ' | 'μ' => norm.push('u'),
+            _ => norm.extend(c.to_lowercase()),
+        }
+    }
+    let chars: Vec<char> = norm.chars().collect();
+    let mut out = Vec::new();
+    let mut i = 0;
+    while i < chars.len() {
+        let c = chars[i];
+        if c.is_ascii_digit() || (c == '.' && chars.get(i + 1).is_some_and(|d| d.is_ascii_digit())) {
+            let start = i;
+            while i < chars.len() {
+                let d = chars[i];
+                let sep_then_digit =
+                    (d == '.' || d == ',') && chars.get(i + 1).is_some_and(|n| n.is_ascii_digit());
+                if d.is_ascii_digit() || sep_then_digit {
+                    i += 1;
+                } else {
+                    break;
+                }
+            }
+            let raw: String = chars[start..i].iter().collect();
+            out.push(Tok::Num(parse_number(&raw)));
+        } else if c == '>' || c == '<' {
+            let eq = chars.get(i + 1) == Some(&'=');
+            out.push(Tok::Op(match (c, eq) {
+                ('>', true) => ">=",
+                ('>', false) => ">",
+                ('<', true) => "<=",
+                _ => "<",
+            }));
+            i += if eq { 2 } else { 1 };
+        } else if c.is_alphanumeric() {
+            let start = i;
+            while i < chars.len() && chars[i].is_alphanumeric() && !chars[i].is_ascii_digit() {
+                i += 1;
+            }
+            let word: String = chars[start..i].iter().collect();
+            if word != "to" {
+                out.push(Tok::Word(word));
+            }
+        } else {
+            i += 1;
+        }
+    }
+    out
+}
+
+/// `1,000` is a thousand, `1,5` is one and a half, `2.5` is two and a half.
+fn parse_number(raw: &str) -> f64 {
+    let cleaned = match raw.split_once(',') {
+        Some((_, tail)) if tail.len() == 3 && !tail.contains(['.', ',']) => raw.replace(',', ""),
+        Some(_) if !raw.contains('.') => raw.replacen(',', ".", 1).replace(',', ""),
+        _ => raw.replace(',', ""),
+    };
+    cleaned.parse().unwrap_or(f64::NAN)
+}
+
+/// Checks a typed cloze answer against the expected one.
+///
+/// With numbers: the numbers must match in order; units and spacing don't
+/// matter; a missing comparison sign is Close, a different one is Wrong.
+/// Without numbers: the words must match, ignoring case and punctuation; a
+/// small typo is Close.
+pub fn check_typed(expected: &str, typed: &str) -> Match {
+    let exp = tokens(expected);
+    let got = tokens(typed);
+    if got.is_empty() {
+        return Match::Wrong;
+    }
+    let nums = |t: &[Tok]| -> Vec<f64> {
+        t.iter().filter_map(|x| if let Tok::Num(n) = x { Some(*n) } else { None }).collect()
+    };
+    let ops = |t: &[Tok]| -> Vec<&'static str> {
+        t.iter().filter_map(|x| if let Tok::Op(o) = x { Some(*o) } else { None }).collect()
+    };
+    let words = |t: &[Tok]| -> Vec<String> {
+        t.iter().filter_map(|x| if let Tok::Word(w) = x { Some(w.clone()) } else { None }).collect()
+    };
+
+    let exp_nums = nums(&exp);
+    if !exp_nums.is_empty() {
+        let got_nums = nums(&got);
+        let same = got_nums.len() == exp_nums.len()
+            && got_nums.iter().zip(&exp_nums).all(|(a, b)| (a - b).abs() <= 1e-9 * b.abs().max(1.0));
+        if !same {
+            return Match::Wrong;
+        }
+        let (exp_ops, got_ops) = (ops(&exp), ops(&got));
+        return if got_ops == exp_ops {
+            Match::Right
+        } else if got_ops.is_empty() {
+            Match::Close
+        } else {
+            Match::Wrong
+        };
+    }
+
+    let (exp_words, got_words) = (words(&exp), words(&got));
+    if exp_words == got_words {
+        return Match::Right;
+    }
+    let (a, b) = (exp_words.concat(), got_words.concat());
+    if a == b {
+        return Match::Right;
+    }
+    let len = a.chars().count();
+    let allowed = if len >= 9 {
+        2
+    } else if len >= 5 {
+        1
+    } else {
+        0
+    };
+    if allowed > 0 && edit_distance(&a, &b) <= allowed { Match::Close } else { Match::Wrong }
+}
+
+fn edit_distance(a: &str, b: &str) -> usize {
+    let a: Vec<char> = a.chars().collect();
+    let b: Vec<char> = b.chars().collect();
+    let mut prev: Vec<usize> = (0..=b.len()).collect();
+    for (i, ca) in a.iter().enumerate() {
+        let mut cur = vec![i + 1; b.len() + 1];
+        for (j, cb) in b.iter().enumerate() {
+            cur[j + 1] = (prev[j] + usize::from(ca != cb)).min(prev[j + 1] + 1).min(cur[j] + 1);
+        }
+        prev = cur;
+    }
+    prev[b.len()]
+}
+
+/// The grade a cloze attempt suggests: all right is Good, near misses Hard,
+/// anything wrong or revealed Again. The learner can still pick another.
+pub fn suggest_cloze(results: &[Match]) -> Grade {
+    if results.contains(&Match::Wrong) {
+        Grade::Again
+    } else if results.contains(&Match::Close) {
+        Grade::Hard
+    } else {
+        Grade::Good
+    }
+}
+
+const STOP: &[&str] =
+    &["the", "and", "of", "in", "with", "for", "a", "an", "or", "on", "by", "to", "from", "its"];
+
+fn key_words(s: &str) -> Vec<String> {
+    tokens(s)
+        .into_iter()
+        .filter_map(|t| match t {
+            Tok::Word(w) if w.chars().count() >= 2 && !STOP.contains(&w.as_str()) => Some(w),
+            Tok::Num(n) => Some(n.to_string()),
+            _ => None,
+        })
+        .collect()
+}
+
+fn word_hit(want: &str, have: &[String]) -> bool {
+    have.iter().any(|h| {
+        h == want || {
+            // "recurrent" ~ "recur", "bleeding" ~ "bleed": a shared stem of 4+ letters.
+            let n = want.chars().count().min(h.chars().count());
+            n >= 4 && want.chars().take(n).eq(h.chars().take(n))
+        }
+    })
+}
+
+/// Which points a free-typed recall already covers, to pre-tick them. A point
+/// counts when at least half of its key words appear somewhere in what was
+/// typed ("cardiomyopathy" covers "Cirrhotic cardiomyopathy").
+pub fn recalled(points: &[String], typed: &str) -> Vec<bool> {
+    let have = key_words(typed);
+    points
+        .iter()
+        .map(|p| {
+            let want = key_words(p);
+            if want.is_empty() || have.is_empty() {
+                return false;
+            }
+            let hits = want.iter().filter(|w| word_hit(w, &have)).count();
+            hits * 2 >= want.len()
+        })
+        .collect()
+}
+
+/// The headings of an essay outline with their bullet points.
+pub fn outline_sections(outline: &[OutlineEntry]) -> Vec<(String, Vec<String>)> {
+    outline
+        .iter()
+        .flat_map(|e| match e {
+            OutlineEntry::Heading(h) => vec![(h.clone(), Vec::new())],
+            OutlineEntry::Section(map) => map.iter().map(|(h, b)| (h.clone(), b.clone())).collect(),
+        })
+        .collect()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::content::Lecture;
+
+    fn sample() -> Lecture {
+        serde_yaml_ng::from_str(include_str!("../../../fixtures/content/sample.yaml")).unwrap()
+    }
+
+    const STUDY: &[&str] = &["card", "cloze", "enumerate", "essay"];
+
+    fn compose_with(lecture: &Lecture, due: &[&str], seen: &[&str], budget: u32) -> Vec<Planned> {
+        let lectures = [lecture];
+        let due: Vec<String> = due.iter().map(|s| s.to_string()).collect();
+        let seen: HashSet<String> = seen.iter().map(|s| s.to_string()).collect();
+        let empty = HashSet::new();
+        compose(&Inputs {
+            lectures: &lectures,
+            topics: &empty,
+            kinds: STUDY,
+            due: &due,
+            seen: &seen,
+            hidden: &empty,
+            max_new: usize::MAX,
+            budget_secs: budget,
+        })
+    }
+
+    fn ids(plan: &[Planned]) -> Vec<&str> {
+        plan.iter().map(|p| p.item_id.as_str()).collect()
+    }
+
+    #[test]
+    fn new_items_follow_book_order_and_only_playable_kinds() {
+        let plan = compose_with(&sample(), &[], &[], 600);
+        assert_eq!(ids(&plan), ["hb.L01.001", "hb.L01.002", "hb.L01.004", "hb.L01.005"]);
+        assert!(plan.iter().all(|p| p.fresh));
+    }
+
+    #[test]
+    fn due_reviews_come_first() {
+        let plan = compose_with(&sample(), &["hb.L01.005", "hb.L01.002"], &["hb.L01.002", "hb.L01.005"], 600);
+        assert_eq!(&ids(&plan)[..2], ["hb.L01.005", "hb.L01.002"]);
+        assert!(!plan[0].fresh && !plan[1].fresh);
+        assert_eq!(&ids(&plan)[2..], ["hb.L01.001", "hb.L01.004"]);
+    }
+
+    #[test]
+    fn due_reviews_interleave_topics() {
+        let mut lecture = sample();
+        // Two more child-pugh clozes, so three of the same topic are due together.
+        for n in ["101", "102"] {
+            let mut extra = lecture.items[1].clone();
+            extra.id = format!("hb.L01.{n}");
+            lecture.items.push(extra);
+        }
+        let due = ["hb.L01.002", "hb.L01.101", "hb.L01.102", "hb.L01.001"];
+        let plan = compose_with(&lecture, &due, &due, 600);
+        let topics: Vec<&str> = plan.iter().take(4).map(|p| p.topic.as_str()).collect();
+        assert_eq!(
+            topics,
+            ["hb.L01/child-pugh", "hb.L01/definition", "hb.L01/child-pugh", "hb.L01/child-pugh"]
+        );
+    }
+
+    #[test]
+    fn new_items_are_blocked_by_topic() {
+        let mut lecture = sample();
+        let mut late = lecture.items[0].clone();
+        late.id = "hb.L01.200".into();
+        lecture.items.push(late); // a "definition" card at the end of the file
+        let plan = compose_with(&lecture, &[], &[], 6000);
+        assert_eq!(&ids(&plan)[..2], ["hb.L01.001", "hb.L01.200"]);
+    }
+
+    #[test]
+    fn budget_caps_the_session_but_never_empties_it() {
+        let plan = compose_with(&sample(), &[], &[], 70);
+        let total: u32 = plan.iter().map(|p| p.est_secs).sum();
+        assert!(total <= 70, "{total}");
+        assert_eq!(ids(&plan), ["hb.L01.001", "hb.L01.002"]);
+        let tiny = compose_with(&sample(), &[], &[], 1);
+        assert_eq!(tiny.len(), 1);
+    }
+
+    #[test]
+    fn daily_new_cap_holds_back_new_items_not_reviews() {
+        let lecture = sample();
+        let lectures = [&lecture];
+        let due = vec!["hb.L01.004".to_string()];
+        let seen: HashSet<String> = due.iter().cloned().collect();
+        let empty = HashSet::new();
+        let plan = compose(&Inputs {
+            lectures: &lectures,
+            topics: &empty,
+            kinds: STUDY,
+            due: &due,
+            seen: &seen,
+            hidden: &empty,
+            max_new: 1,
+            budget_secs: 600,
+        });
+        assert_eq!(ids(&plan), ["hb.L01.004", "hb.L01.001"]);
+    }
+
+    #[test]
+    fn rejected_hidden_and_filtered_topics_stay_out() {
+        let mut lecture = sample();
+        lecture.items[0].status = Status::Rejected;
+        let lectures = [&lecture];
+        let topics: HashSet<String> = ["hb.L01/child-pugh".to_string(), "hb.L01/presentation".into()].into();
+        let hidden: HashSet<String> = ["hb.L01.004".to_string()].into();
+        let empty = HashSet::new();
+        let plan = compose(&Inputs {
+            lectures: &lectures,
+            topics: &topics,
+            kinds: STUDY,
+            due: &[],
+            seen: &empty,
+            hidden: &hidden,
+            max_new: usize::MAX,
+            budget_secs: 600,
+        });
+        assert_eq!(ids(&plan), ["hb.L01.002"]);
+    }
+
+    #[test]
+    fn again_comes_back_once_at_the_end() {
+        let plan = compose_with(&sample(), &[], &[], 600);
+        let mut s = Session::new(plan);
+        s.grade(Grade::Again); // 001
+        s.grade(Grade::Good);
+        s.grade(Grade::Hard);
+        s.grade(Grade::Easy);
+        assert_eq!(s.current().unwrap().item_id, "hb.L01.001");
+        assert!(s.is_retry());
+        s.grade(Grade::Again); // no second retry
+        assert!(s.is_done());
+        let sum = s.summary();
+        assert_eq!(sum.items, 4);
+        assert_eq!(sum.right, 2);
+        assert_eq!(sum.fresh, 4);
+        assert_eq!(sum.shaky, ["hb.L01.001", "hb.L01.004"]);
+    }
+
+    #[test]
+    fn typed_numbers_ignore_units_and_spacing() {
+        assert_eq!(check_typed("5-6", "5 - 6"), Match::Right);
+        assert_eq!(check_typed("5-6", "5 to 6"), Match::Right);
+        assert_eq!(check_typed("5-6", "٥-٦"), Match::Right);
+        assert_eq!(check_typed("≥250 cells/mm³", ">= 250"), Match::Right);
+        assert_eq!(check_typed("≥250", "250"), Match::Close);
+        assert_eq!(check_typed("≥250", "<250"), Match::Wrong);
+        assert_eq!(check_typed("1.1 g/dL", "1,1"), Match::Right);
+        assert_eq!(check_typed("1,000", "1000"), Match::Right);
+        assert_eq!(check_typed("10-15", "10-16"), Match::Wrong);
+        assert_eq!(check_typed("10-15", ""), Match::Wrong);
+    }
+
+    #[test]
+    fn typed_words_allow_case_and_small_typos() {
+        assert_eq!(check_typed("SBP", "sbp"), Match::Right);
+        assert_eq!(check_typed("Hepatopulmonary syndrome", "hepatopulmonary-syndrome"), Match::Right);
+        assert_eq!(check_typed("Terlipressin", "terlipresin"), Match::Close);
+        assert_eq!(check_typed("TIPS", "TIPSS"), Match::Wrong);
+        assert_eq!(check_typed("Propranolol", "Carvedilol"), Match::Wrong);
+    }
+
+    #[test]
+    fn grade_suggestions() {
+        assert_eq!(suggest_cloze(&[Match::Right, Match::Right]), Grade::Good);
+        assert_eq!(suggest_cloze(&[Match::Right, Match::Close]), Grade::Hard);
+        assert_eq!(suggest_cloze(&[Match::Close, Match::Wrong]), Grade::Again);
+    }
+
+    #[test]
+    fn free_recall_pre_ticks_matching_points() {
+        let points: Vec<String> =
+            ["Recurrent variceal bleeding", "Recurrent HE", "Refractory ascites", "SBP", "HRS-AKI", "ACLF"]
+                .map(String::from)
+                .to_vec();
+        let typed = "variceal bleed again\nrefractory ascites\nsbp\nhrs aki";
+        assert_eq!(recalled(&points, typed), [true, false, true, true, true, false]);
+        assert_eq!(recalled(&points, ""), [false; 6]);
+        let headings = ["Cirrhotic cardiomyopathy".to_string(), "Portopulmonary hypertension".into()];
+        assert_eq!(recalled(&headings, "cardiomyopathy"), [true, false]);
+    }
+
+    #[test]
+    fn outline_sections_flatten_headings() {
+        let lecture = sample();
+        let Body::Essay { outline, .. } = &lecture.items[4].body else { panic!() };
+        let s = outline_sections(outline);
+        assert_eq!(s.len(), 4);
+        assert_eq!(s[0].0, "Hyperdynamic circulatory syndrome");
+        assert_eq!(s[3].1.len(), 3);
+    }
+}

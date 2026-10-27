@@ -3,7 +3,7 @@
 ## Mac (desktop)
 1. Install Rust (`curl https://sh.rustup.rs -sSf | sh`) and `just` (`brew install just`).
 2. In the repo, switch to the Batna branch: `git fetch origin batna && git switch batna`.
-3. `just run` opens the app. `BATNA_WINDOW_SIZE=412x900 just run` previews the phone layout. `BATNA_OPEN_SCREEN=study just run` opens a screen directly.
+3. `just run` opens the app. `BATNA_WINDOW_SIZE=412x900 just run` previews the phone layout. `BATNA_OPEN_SCREEN=study just run` opens a screen directly. `BATNA_OPEN_SETTINGS=look just run` opens Settings on a section (`look`, `data`, `about`; empty for the list). Theme and text size are kept per device in `device-prefs.txt` in the data folder (Settings › Your data shows where).
    - Progress screen previews: `BATNA_OPEN_SCREEN=stats BATNA_STATS_TAB=plan BATNA_PLAN_EXAM=2027-01-20 BATNA_STATS_DEMO=1 just run` opens the exam planner with a preset exam day and demo numbers (labelled as demo on screen). `BATNA_STATS_TAB` is `progress`, `mistakes` or `plan`.
 
 ## S24 Ultra and Tab S11 (Android)

@@ -9,6 +9,8 @@ mod content;
 mod data_export;
 mod i18n;
 mod import;
+mod oral;
+mod platform;
 mod store;
 mod today;
 mod verify;
@@ -131,7 +133,7 @@ fn screen_body(screen: Screen) -> Element {
         Screen::Study => rsx! { Soon { screen } },
         Screen::Bank => rsx! { Soon { screen } },
         Screen::Cases => rsx! { case::CasesScreen {} },
-        Screen::Oral => rsx! { Soon { screen } },
+        Screen::Oral => rsx! { oral::Oral {} },
         Screen::Stats => rsx! { Soon { screen } },
         Screen::Settings => rsx! { today::Settings {} },
     }

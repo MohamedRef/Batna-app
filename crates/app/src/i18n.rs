@@ -190,7 +190,6 @@ pub mod plan {
     pub const CANCEL: &str = "إلغاء";
     pub const PICK_DAY: &str = "اختار يوم بعد النهارده.";
     pub const PICK_WEEKDAY: &str = "اختار يوم واحد على الأقل.";
-    pub const NOT_SAVED: &str = "لحد ما التخزين ينزل، الخطة بتتحفظ طول ما التطبيق مفتوح بس.";
     pub const WEEKDAYS: [&str; 7] = ["السبت", "الحد", "الاتنين", "التلات", "الأربع", "الخميس", "الجمعة"];
     pub const WEEKDAYS_SHORT: [&str; 7] = ["سبت", "حد", "اتنين", "تلات", "أربع", "خميس", "جمعة"];
     pub const MONTHS: [&str; 12] = [

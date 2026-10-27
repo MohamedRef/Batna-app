@@ -7,6 +7,8 @@ mod calc;
 mod case;
 mod content;
 mod i18n;
+mod oral;
+mod platform;
 mod today;
 
 use dioxus::prelude::*;
@@ -126,7 +128,7 @@ fn screen_body(screen: Screen) -> Element {
         Screen::Study => rsx! { Soon { screen } },
         Screen::Bank => rsx! { Soon { screen } },
         Screen::Cases => rsx! { case::CasesScreen {} },
-        Screen::Oral => rsx! { Soon { screen } },
+        Screen::Oral => rsx! { oral::Oral {} },
         Screen::Stats => rsx! { Soon { screen } },
         Screen::Settings => rsx! { Soon { screen } },
     }

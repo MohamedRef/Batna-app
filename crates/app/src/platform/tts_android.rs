@@ -33,7 +33,7 @@ const QUEUE_FLUSH: i32 = 0;
 const ERROR: i32 = -1;
 const LANG_MISSING_DATA: i32 = -1;
 
-fn with_activity<T>(f: impl FnOnce(&mut Env, &JObject) -> jni::errors::Result<T>) -> Result<T, String> {
+pub fn with_activity<T>(f: impl FnOnce(&mut Env, &JObject) -> jni::errors::Result<T>) -> Result<T, String> {
     let ctx = ndk_context::android_context();
     // SAFETY: tao initializes ndk_context with the process JavaVM and a global
     // reference to the Activity before any app code runs; both live for the

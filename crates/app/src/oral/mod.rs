@@ -12,6 +12,7 @@ use dioxus::prelude::*;
 
 use crate::content::Library;
 use crate::i18n::oral as tx;
+use crate::platform::background::{self, Labels, Remote};
 use crate::platform::tts;
 use session::{Entry, Pick, Session};
 
@@ -265,6 +266,36 @@ fn Runner() -> Element {
         }
     }));
 
+    // Screen off (Android): a foreground service keeps the session going,
+    // shows it on the lock screen and passes on headset and notification buttons.
+    use_hook(|| {
+        background::start(&Labels { show: tx::SHOW, again: tx::AGAIN, good: tx::GOOD, end: tx::END });
+    });
+    use_drop(background::stop);
+    let revealed_now = use_memo(move || *phase.read() == Phase::Answer);
+    use_effect(move || {
+        let revealed = revealed_now();
+        let session = SESSION.read();
+        let Some(entry) = session.as_ref().and_then(|s| s.current.as_ref()) else { return };
+        let title = format!("{} · {} {}", tx::TITLE, tx::LEFT, session.as_ref().map_or(0, Session::left));
+        let lines = if revealed { &entry.prompt.answer } else { &entry.prompt.question };
+        background::update(&title, &lines.join(" · "), revealed);
+    });
+    use_future(move || async move {
+        loop {
+            tokio::time::sleep(Duration::from_millis(300)).await;
+            let Some(remote) = background::take() else { continue };
+            let revealed = revealed_now();
+            match remote {
+                Remote::End => end_session(),
+                Remote::Again if revealed => rate_current(Some(Grade::Again), *asked_at.peek()),
+                Remote::Main | Remote::Good if revealed => rate_current(Some(Grade::Good), *asked_at.peek()),
+                Remote::Main | Remote::Good => drive(Step::Reveal),
+                Remote::Again => {}
+            }
+        }
+    });
+
     let session = SESSION.read();
     let Some(s) = session.as_ref() else { return rsx! {} };
     let Some(entry) = s.current.clone() else { return rsx! {} };
@@ -306,12 +337,7 @@ fn Runner() -> Element {
                 span { class: "muted small", bdi { "{lecture}" } " · {tx::PAGE} " bdi { "{p.page}" } }
                 button {
                     class: "oral-end",
-                    onclick: move |_| {
-                        tts::stop();
-                        if let Some(s) = SESSION.write().as_mut() {
-                            s.end();
-                        }
-                    },
+                    onclick: move |_| end_session(),
                     {tx::END}
                 }
             }
@@ -423,6 +449,14 @@ fn spoken_question(entry: &Entry) -> String {
         ""
     };
     format!("{lead}{}", entry.prompt.spoken_question())
+}
+
+/// Stops early; the summary shows what was done.
+fn end_session() {
+    tts::stop();
+    if let Some(s) = SESSION.write().as_mut() {
+        s.end();
+    }
 }
 
 /// Records the rating (none when heard without one) and moves on.

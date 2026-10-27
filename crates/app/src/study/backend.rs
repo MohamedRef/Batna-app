@@ -1,41 +1,14 @@
-//! The seam between the study player and the review store (chunk 3).
-//!
-//! `StudyStore` mirrors the trait chunk 3 is adding to `batna_core::review`;
-//! once that lands, this file re-exports it instead. Until a store is provided
-//! in `App`, the player keeps answers in memory for the run.
+//! The seam between the study player and the review store (chunk 3): the
+//! store `App` provides as a `StudyStoreHandle`, or, until it does, answers
+//! kept in memory for the run.
 
 use std::cell::RefCell;
 use std::collections::HashSet;
 use std::rc::Rc;
 
-use batna_core::content::Item;
 use batna_core::review::{MemorySink, ReviewEvent, ReviewSink};
+pub use batna_core::review::{StudyStore, StudyStoreHandle};
 use dioxus::prelude::*;
-
-pub trait StudyStore {
-    fn record(&mut self, event: ReviewEvent);
-    /// Due item ids, most overdue first.
-    fn due(&self, now_ms: i64) -> Vec<String>;
-    fn is_new(&self, item_id: &str) -> bool;
-    /// Marked wrong (✗) and kept out of study until fixed.
-    fn is_hidden(&self, item_id: &str) -> bool;
-    /// The item with the learner's own edit (✎) applied.
-    fn effective(&self, item: &Item) -> Item {
-        item.clone()
-    }
-    fn next_due_ms(&self, now_ms: i64) -> Option<i64>;
-    /// New items that may still start today.
-    fn new_left_today(&self, _now_ms: i64) -> usize {
-        usize::MAX
-    }
-    /// Days until the next review for Again, Hard, Good and Easy.
-    fn intervals(&self, _item_id: &str, _now_ms: i64) -> Option<[f32; 4]> {
-        None
-    }
-}
-
-#[derive(Clone)]
-pub struct StudyStoreHandle(pub Rc<RefCell<dyn StudyStore>>);
 
 /// Answers kept in memory for this run, used until the real store exists.
 #[derive(Default)]

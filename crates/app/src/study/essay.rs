@@ -2,8 +2,8 @@
 //! them with the model outline and rate yourself.
 
 use batna_core::content::{Body, Item};
-use batna_core::review::Grade;
-use batna_core::session::{outline_sections, recalled, suggest_enumerate};
+use batna_core::review::{Grade, enumerate_grade};
+use batna_core::session::{outline_sections, recalled};
 use dioxus::prelude::*;
 
 use super::grade::GradeRow;
@@ -79,7 +79,7 @@ pub fn EssayItem(item: Item, on_grade: EventHandler<Grade>) -> Element {
                 p { class: "st-verdict", "data-match": "close", "{tx::HEADINGS_GOT} {n} {tx::OF} {total}" }
                 GradeRow {
                     item_id: item.id.clone(),
-                    suggested: Some(suggest_enumerate(n, total, total.div_ceil(2) + total / 4)),
+                    suggested: Some(enumerate_grade(n, total, total.div_ceil(2) + total / 4)),
                     on_grade,
                 }
             },

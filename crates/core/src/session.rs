@@ -419,19 +419,6 @@ pub fn suggest_cloze(results: &[Match]) -> Grade {
     }
 }
 
-/// The grade an enumerate attempt suggests from how many points were ticked.
-pub fn suggest_enumerate(ticked: usize, total: usize, pass: usize) -> Grade {
-    if total > 0 && ticked >= total {
-        Grade::Easy
-    } else if ticked >= pass {
-        Grade::Good
-    } else if pass > 1 && ticked + 1 >= pass {
-        Grade::Hard
-    } else {
-        Grade::Again
-    }
-}
-
 const STOP: &[&str] =
     &["the", "and", "of", "in", "with", "for", "a", "an", "or", "on", "by", "to", "from", "its"];
 
@@ -658,10 +645,6 @@ mod tests {
         assert_eq!(suggest_cloze(&[Match::Right, Match::Right]), Grade::Good);
         assert_eq!(suggest_cloze(&[Match::Right, Match::Close]), Grade::Hard);
         assert_eq!(suggest_cloze(&[Match::Close, Match::Wrong]), Grade::Again);
-        assert_eq!(suggest_enumerate(7, 7, 5), Grade::Easy);
-        assert_eq!(suggest_enumerate(5, 7, 5), Grade::Good);
-        assert_eq!(suggest_enumerate(4, 7, 5), Grade::Hard);
-        assert_eq!(suggest_enumerate(2, 7, 5), Grade::Again);
     }
 
     #[test]

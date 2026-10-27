@@ -2,8 +2,8 @@
 //! to yourself), then tick the ones you got. Typed recall pre-ticks matches.
 
 use batna_core::content::{Body, Item};
-use batna_core::review::Grade;
-use batna_core::session::{recalled, suggest_enumerate};
+use batna_core::review::{Grade, enumerate_grade};
+use batna_core::session::recalled;
 use dioxus::prelude::*;
 
 use super::grade::GradeRow;
@@ -74,7 +74,7 @@ pub fn EnumerateItem(item: Item, on_grade: EventHandler<Grade>) -> Element {
                         p { lang: "en", dir: "ltr", "{typed}" }
                     }
                 }
-                GradeRow { item_id: item.id.clone(), suggested: Some(suggest_enumerate(n, total, pass)), on_grade }
+                GradeRow { item_id: item.id.clone(), suggested: Some(enumerate_grade(n, total, pass)), on_grade }
             },
         }
     }

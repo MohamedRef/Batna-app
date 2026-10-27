@@ -3,10 +3,14 @@
 //! Feature chunks (SPLIT.md §7) each own a module directory and register it
 //! with one line in `Screen` / `screen_body` below.
 
+mod back;
 mod calc;
 mod case;
 mod content;
+mod diag;
+mod fonts;
 mod i18n;
+mod icons;
 mod oral;
 mod order;
 mod platform;
@@ -47,19 +51,6 @@ impl Screen {
         }
     }
 
-    /// A one-glyph icon for the nav (text, no image assets).
-    fn glyph(self) -> &'static str {
-        match self {
-            Self::Today => "◐",
-            Self::Study => "✎",
-            Self::Bank => "?",
-            Self::Cases => "✚",
-            Self::Oral => "◉",
-            Self::Stats => "▤",
-            Self::Settings => "⚙",
-        }
-    }
-
     fn from_env() -> Option<Screen> {
         // BATNA_OPEN_SCREEN=study opens that screen at launch (previews and screenshots).
         let name = std::env::var("BATNA_OPEN_SCREEN").ok()?;
@@ -79,6 +70,7 @@ pub struct Ui {
 }
 
 fn main() {
+    diag::install_panic_hook();
     #[cfg(all(feature = "desktop", not(target_os = "android")))]
     {
         use dioxus::desktop::{Config, LogicalSize, WindowBuilder};
@@ -111,8 +103,10 @@ fn App() -> Element {
     let settings = use_context_provider(settings::SettingsNav::new);
     let current = *ui.screen.read();
     let look = ui.prefs.read().css();
+    back::use_back(ui, current, *settings.open.read());
     rsx! {
         document::Title { "Batna" }
+        style { {fonts::css()} }
         style { {MAIN_CSS} }
         style { {look} }
         div { class: "app", lang: "ar", dir: "rtl",
@@ -126,7 +120,7 @@ fn App() -> Element {
                     aria_label: Screen::Settings.label(),
                     title: Screen::Settings.label(),
                     onclick: move |_| settings.show(None),
-                    span { class: "glyph", aria_hidden: "true", {Screen::Settings.glyph()} }
+                    {icons::nav(Screen::Settings)}
                 }
             }
             nav { class: "nav", aria_label: "التنقل",
@@ -163,7 +157,7 @@ fn NavButton(screen: Screen, class: &'static str) -> Element {
             "aria-current": if active { "page" } else { "false" },
             "aria-label": screen.label(),
             onclick: move |_| ui.screen.set(screen),
-            span { class: "glyph", aria_hidden: "true", {screen.glyph()} }
+            span { class: "glyph", {icons::nav(screen)} }
             span { class: "label", {screen.label()} }
         }
     }

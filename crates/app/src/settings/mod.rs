@@ -139,13 +139,6 @@ pub fn SettingsSheet() -> Element {
                 let _ = e.set_focus(true).await;
             },
             header { class: "settings-head",
-                button {
-                    class: "icon-button settings-back",
-                    "data-back": "true",
-                    aria_label: tx::BACK,
-                    onclick: move |_| section_sig.set(None),
-                    span { aria_hidden: "true", "→" }
-                }
                 h2 { id: "settings-title",
                     span { class: "settings-title-list", {tx::TITLE} }
                     span { class: "settings-title-section", {current.title()} }
@@ -157,6 +150,15 @@ pub fn SettingsSheet() -> Element {
                     title: tx::CLOSE,
                     onclick: move |_| nav.close(),
                     span { aria_hidden: "true", "✕" }
+                }
+                // Last in the header, so system Back picks it over Close
+                // whenever it shows (the phone, inside a section).
+                button {
+                    class: "icon-button settings-back",
+                    "data-back": "true",
+                    aria_label: tx::BACK,
+                    onclick: move |_| section_sig.set(None),
+                    span { aria_hidden: "true", "→" }
                 }
             }
             div { class: "settings-body",

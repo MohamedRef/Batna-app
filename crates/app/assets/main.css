@@ -9,7 +9,7 @@
    picked in Settings › Look. */
 :root {
   --font: "IBM Plex Sans Arabic", "Noto Sans Arabic", "Segoe UI", "Roboto", system-ui, sans-serif;
-  --font-latin: "Inter", "Segoe UI", "Roboto", system-ui, sans-serif;
+  --font-latin: "Plus Jakarta Sans", "Segoe UI", "Roboto", system-ui, sans-serif;
   --fs-sm: 0.875rem;
   --fs-md: 1rem;
   --fs-lg: 1.2rem;
@@ -72,7 +72,18 @@ button { font: inherit; color: inherit; }
   min-height: 44px;
   cursor: pointer;
 }
+.icon-button { display: inline-grid; place-items: center; }
 .icon-button .label { display: none; }
+
+.button {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: var(--radius-pill);
+  min-height: 44px;
+  padding-inline: var(--sp-4);
+  cursor: pointer;
+}
+.row { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
 
 /* ---------- navigation: bottom bar (compact) ---------- */
 .nav {
@@ -99,7 +110,7 @@ button { font: inherit; color: inherit; }
   color: var(--muted);
   font-size: 0.75rem;
 }
-.nav-item .glyph { font-size: 1.25rem; line-height: 1.4; }
+.nav-item .glyph { display: grid; place-items: center; block-size: 1.75rem; }
 .nav-item[aria-current="page"] { color: var(--accent); font-weight: 700; }
 
 /* ---------- side rail (medium and expanded) ---------- */

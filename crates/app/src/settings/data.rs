@@ -17,5 +17,6 @@ pub fn DataSection() -> Element {
             }
             p { class: "muted small", {tx::DATA_LOCAL} }
         }
+        crate::diag::DiagnosticsCard {}
     }
 }

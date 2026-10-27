@@ -10,6 +10,11 @@
 2. Turn on USB debugging on the phone or tablet (Settings › About phone › Software information › tap Build number 7 times, then Developer options › USB debugging), and connect it with a cable.
 3. `just android` builds and installs a debug build. The app id is `app.batna`, so it sits next to Kabar without touching it.
 
+### Kotlin glue (`android/`)
+`android/` at the repo root is a small Gradle library module with the Kotlin that Rust calls through JNI (vibration now; reminders, export and updates later). Nothing to configure: the `#[manganis::ffi("../../android")]` marker in `crates/app/src/kotlin.rs` makes `dx` 0.7.10 copy the folder into its generated Gradle project, add it as an app dependency, and merge `android/src/main/AndroidManifest.xml` (permissions and receivers the glue needs) into the app's manifest.
+
+`scripts/android-check-apk.sh <apk>` fails if the Kotlin classes or their permissions are missing from an APK; CI runs it on every change to `android/`. When you add a Kotlin class that Rust looks up by name, add it to `CLASSES` in that script. `adb logcat` shows Kotlin errors on the device.
+
 A signed release APK will come with the release-prep work. Until then, the debug build is the way to try it.
 
 ## Study in Anki now

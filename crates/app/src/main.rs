@@ -5,6 +5,8 @@
 
 mod content;
 mod i18n;
+#[cfg(target_os = "android")]
+mod kotlin;
 mod today;
 
 use dioxus::prelude::*;

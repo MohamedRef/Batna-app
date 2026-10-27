@@ -245,4 +245,12 @@ pub mod settings {
     pub const BOOK: &str =
         "Internal Medicine Postgraduate Lectures, Alexandria Faculty of Medicine (2025), part 1";
     pub const PERSONAL: &str = "نسخة شخصية، مش منشورة.";
+
+    pub const DIAG: &str = "اللي حصل من مشاكل";
+    pub const DIAG_BODY: &str = "لو حاجة اشتغلت غلط، انسخ السطور دي وابعتها. مفيهاش أي حاجة من مذاكرتك.";
+    pub const DIAG_EMPTY: &str = "مفيش مشاكل لحد دلوقتي.";
+    pub const DIAG_LINES: &str = "سطر";
+    pub const DIAG_REFRESH: &str = "حدّث";
+    pub const DIAG_COPY: &str = "انسخ";
+    pub const DIAG_COPIED: &str = "اتنسخ";
 }

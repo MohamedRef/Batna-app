@@ -4,4 +4,5 @@
 pub mod content;
 pub mod layout;
 pub mod review;
+pub mod session;
 pub mod validate;

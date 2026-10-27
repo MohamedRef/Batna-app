@@ -16,7 +16,7 @@ pub fn GradeRow(item_id: String, suggested: Option<Grade>, on_grade: EventHandle
     let intervals = store.0.borrow().intervals(&item_id, now_ms());
     let mut done = use_signal(|| false);
     rsx! {
-        // chunk 3: crate::verify::VerifyBar { item_id: item_id.clone() } goes here.
+        crate::verify::VerifyBar { item_id: item_id.clone() }
         div { class: "st-grades", role: "group", aria_label: tx::GRADE_LABEL,
             if suggested.is_some() {
                 p { class: "st-suggest muted small", {tx::SUGGESTED} }

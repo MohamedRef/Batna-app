@@ -216,6 +216,51 @@ pub fn is_lecture_id(id: &str) -> bool {
         && num.bytes().all(|b| b.is_ascii_digit())
 }
 
+/// Checks `content/glossary.yaml` (the hover peeks, PARITY.md §6.3): the
+/// schema, one entry per spelling, short plain expansions, and no `approved`
+/// that Mohamed didn't give (`glossary.TERM` in `content/approved.txt`).
+pub fn glossary(g: &crate::glossary::Glossary, approved: Option<&BTreeSet<String>>) -> Vec<Problem> {
+    const MAX_WORDS: usize = 25;
+    let mut out = Vec::new();
+    let mut bad = |at: &str, message: String| out.push(Problem { at: at.to_string(), message });
+    if g.schema != crate::glossary::SCHEMA {
+        bad("glossary", format!("schema is {:?}, expected {:?}", g.schema, crate::glossary::SCHEMA));
+    }
+    // Abbreviations match exactly and drug names ignore case
+    // (`Glossary::find`), so `HBIG` and `HBIg` may both be abbreviations,
+    // but a drug name must not collide with anything in any case.
+    let (mut exact, mut lower, mut drugs) = (BTreeSet::new(), BTreeSet::new(), BTreeSet::new());
+    for e in &g.entries {
+        let at = e.id();
+        let drug = e.kind == crate::glossary::Kind::Drug;
+        for s in e.spellings() {
+            if s.trim().is_empty() || s.chars().any(char::is_whitespace) {
+                bad(&at, format!("`{s}` must be one word (the pointer picks one word)"));
+            }
+            let low = s.to_lowercase();
+            let clash =
+                !exact.insert(s.to_string()) || drugs.contains(&low) || (drug && lower.contains(&low));
+            if clash {
+                bad(&at, format!("`{s}` is listed twice"));
+            }
+            lower.insert(low.clone());
+            if drug {
+                drugs.insert(low);
+            }
+        }
+        let words = e.text.split_whitespace().count();
+        if words == 0 {
+            bad(&at, "text is empty".into());
+        } else if words > MAX_WORDS {
+            bad(&at, format!("text is {words} words; keep it to {MAX_WORDS} or fewer"));
+        }
+        if e.status == Status::Approved && !approved.is_some_and(|a| a.contains(&at)) {
+            bad(&at, "status approved: only Mohamed approves (add the id to content/approved.txt)".into());
+        }
+    }
+    out
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -291,5 +336,23 @@ mod tests {
         assert!(!is_lecture_id("hb.L1"));
         assert!(!is_lecture_id("HB.L01"));
         assert!(!is_lecture_id("hbL01"));
+    }
+
+    #[test]
+    fn glossary_rules() {
+        let g: crate::glossary::Glossary = serde_yaml_ng::from_str(
+            "schema: batna.glossary/v1
+entries:
+  - { term: HE, kind: abbr, text: Hepatic encephalopathy, status: unverified }
+  - { term: he, kind: drug, text: Duplicate spelling, status: unverified }
+  - { term: two words, kind: drug, text: x, status: approved }",
+        )
+        .unwrap();
+        let msgs: Vec<String> = glossary(&g, None).iter().map(|p| p.to_string()).collect();
+        assert!(msgs.iter().any(|m| m.contains("listed twice")), "{msgs:#?}");
+        assert!(msgs.iter().any(|m| m.contains("must be one word")));
+        assert!(msgs.iter().any(|m| m.contains("only Mohamed approves")));
+        let ok: BTreeSet<String> = ["glossary.two words".to_string()].into();
+        assert_eq!(glossary(&g, Some(&ok)).len(), 2);
     }
 }

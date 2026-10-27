@@ -4,7 +4,11 @@
 //! with one line in `Screen` / `screen_body` below.
 
 mod content;
+mod desk;
+mod hover;
 mod i18n;
+mod settings;
+mod shortcuts;
 mod today;
 
 use dioxus::prelude::*;
@@ -85,7 +89,12 @@ fn main() {
             .with_inner_size(LogicalSize::new(w, h))
             .with_min_inner_size(LogicalSize::new(360.0, 560.0));
         dioxus::LaunchBuilder::desktop()
-            .with_cfg(Config::new().with_window(window).with_menu(None).with_disable_context_menu(true))
+            .with_cfg(
+                Config::new()
+                    .with_window(window)
+                    .with_menu(settings::menu::initial())
+                    .with_disable_context_menu(true),
+            )
             .launch(App);
     }
     #[cfg(not(all(feature = "desktop", not(target_os = "android"))))]
@@ -99,6 +108,7 @@ fn App() -> Element {
     rsx! {
         document::Title { "Batna" }
         style { {MAIN_CSS} }
+        desk::Chrome {}
         div { class: "app", lang: "ar", dir: "rtl",
             header { class: "topbar",
                 div { class: "brand",
@@ -111,6 +121,7 @@ fn App() -> Element {
                 for screen in Screen::NAV {
                     NavButton { key: "{screen:?}", screen, class: "nav-item" }
                 }
+                NavButton { screen: Screen::Settings, class: "nav-item nav-foot" }
             }
             main { class: "content", "data-screen": "{current:?}", {screen_body(current)} }
         }
@@ -126,7 +137,7 @@ fn screen_body(screen: Screen) -> Element {
         Screen::Cases => rsx! { Soon { screen } },
         Screen::Oral => rsx! { Soon { screen } },
         Screen::Stats => rsx! { Soon { screen } },
-        Screen::Settings => rsx! { Soon { screen } },
+        Screen::Settings => rsx! { desk::DeviceSettings {} },
     }
 }
 

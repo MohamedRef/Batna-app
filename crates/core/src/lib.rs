@@ -7,4 +7,5 @@ pub mod layout;
 pub mod pack;
 pub mod review;
 pub mod srs;
+pub mod theme;
 pub mod validate;

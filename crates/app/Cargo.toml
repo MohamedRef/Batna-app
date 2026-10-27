@@ -11,9 +11,15 @@ name = "batna"
 path = "src/main.rs"
 
 [dependencies]
+batna-anki.workspace = true
 batna-core.workspace = true
 dioxus = { version = "0.7.10", features = [] }
 serde_yaml_ng.workspace = true
+
+[target.'cfg(target_os = "android")'.dependencies]
+# «Export to Anki»: MediaStore + ACTION_VIEW through JNI (src/anki/android.rs).
+jni = "0.22"
+ndk-context = "0.1"
 
 [build-dependencies]
 batna-core.workspace = true

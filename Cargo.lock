@@ -166,11 +166,28 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "72b3254f16251a8381aa12e40e3c4d2f0199f8c6508fbecb9d91f575e0fbb8c6"
 
 [[package]]
-name = "batna-app"
+name = "batna-anki"
 version = "0.1.0"
 dependencies = [
  "batna-core",
+ "rusqlite",
+ "serde_json",
+ "serde_yaml_ng",
+ "sha1",
+ "sha2",
+ "tempfile",
+ "zip",
+]
+
+[[package]]
+name = "batna-app"
+version = "0.1.0"
+dependencies = [
+ "batna-anki",
+ "batna-core",
  "dioxus",
+ "jni 0.22.4",
+ "ndk-context",
  "serde_yaml_ng",
 ]
 
@@ -189,15 +206,12 @@ dependencies = [
 name = "batna-tools"
 version = "0.1.0"
 dependencies = [
+ "batna-anki",
  "batna-core",
- "rusqlite",
  "serde",
  "serde_json",
  "serde_yaml_ng",
- "sha1",
- "sha2",
  "tempfile",
- "zip",
 ]
 
 [[package]]

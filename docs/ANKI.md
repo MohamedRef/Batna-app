@@ -2,6 +2,9 @@
 
 Batna's content is exported as **one Anki file, `batna.apkg`**. It holds a `Batna` deck with one subdeck per lecture (`Batna::L01 Liver Cirrhosis`, …), so you study it while the app is still being built, and you import only one file however many lectures exist.
 
+## From inside the app
+Settings › **صدّر لـ Anki**. The app builds `batna.apkg` from the lectures it carries, saves it (phone and tablet: `Download/Batna/`; Mac: `~/Downloads/`) and opens it in AnkiDroid or Anki, which shows its import screen. The app carries merged lectures only, so until every lecture is merged the file in the project folder has more cards; both use the same ids, so importing either one updates the same cards.
+
 ## Import it
 - **Phone or tablet:** open `batna.apkg` from the project files (or Files) and choose AnkiDroid. Then study the `Batna` deck, or one lecture's subdeck.
 - **Mac:** double-click `batna.apkg`, or use File › Import in Anki.
@@ -35,6 +38,7 @@ cargo run -q -p batna-tools -- anki --verdicts export.yaml
 - `--verdicts FILE` reads the app's ✓/✎/✗ export (`batna.verdicts/v1`). It leaves out items marked ✗, uses the edited text for ✎ items, and tags ✓ items `approved`.
 - A lecture that isn't merged yet comes from the project's shared folder (`content-wip/hb/LNN.yaml`, then `drafts/LNN.yaml` or `LNN.draft.yaml` under `/mnt/project-files/medstudy`, or `--drafts DIR`), so the file never shrinks; those notes are tagged `draft`. `--merged-only` uses only `content/`.
 - `content/approved.txt` also marks items `approved`. Items with `status: rejected` are always left out.
+- The deck itself is built by the `batna-anki` crate, shared with the app's export button.
 - The deck, note type and note ids match the old `make_apkg.py` (genanki), so decks imported from either one update each other. The Rust exporter replaces that script; `crates/tools/src/anki.rs` has the test that pins the ids.
 
 ## Fix list from the app

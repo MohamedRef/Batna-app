@@ -3,6 +3,7 @@
 //! Feature chunks (SPLIT.md §7) each own a module directory and register it
 //! with one line in `Screen` / `screen_body` below.
 
+mod anki;
 mod content;
 mod i18n;
 mod today;
@@ -126,7 +127,7 @@ fn screen_body(screen: Screen) -> Element {
         Screen::Cases => rsx! { Soon { screen } },
         Screen::Oral => rsx! { Soon { screen } },
         Screen::Stats => rsx! { Soon { screen } },
-        Screen::Settings => rsx! { Soon { screen } },
+        Screen::Settings => rsx! { anki::AnkiExport {} },
     }
 }
 

@@ -136,5 +136,18 @@ pub mod plan {
     pub const FIRST_PASS: &str = "اللفّة الأولى";
     pub const SECOND_PASS: &str = "اللفّة التانية";
     pub const WEEK: &str = "الأيام الجاية";
+    pub const LOAD_TITLE: &str = "الحِمل في الأسبوعين الجايين";
+    pub const LOAD_LABEL: &str = "مراجعات وجديد متوقعين كل يوم، النهارده على اليمين";
+    pub const LOAD_PEAK: &str = "أتقل يوم";
+    pub const LOAD_KEY_REVIEWS: &str = "مراجعة";
+    pub const LOAD_KEY_NEW: &str = "جديد";
+    pub const LOAD_KEY_CAP: &str = "الحد اليومي";
+    pub const PACE_TITLE: &str = "السرعة لحد الامتحان";
+    pub const PACE_LABEL: &str = "اللي شفته لحد النهارده، والخطة لحد الامتحان";
+    pub const PACE_KEY_PAST: &str = "اللي فات";
+    pub const PACE_KEY_PLAN: &str = "الخطة";
+    pub const PACE_KEY_FINAL: &str = "آخر ١٠ أيام";
+    pub const PACE_DONE_ON: &str = "على الخطة دي، هتكون شفت كل الأسئلة يوم";
+    pub const PACE_NOT_DONE: &str = "على الخطة دي، فيه أسئلة مش هتلحق تتشاف قبل آخر الأيام.";
     pub const ALL_DAYS: &str = "الخطة كلها لحد الامتحان";
 }

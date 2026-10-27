@@ -155,3 +155,26 @@ button.secondary { background: var(--surface); border: 1px solid var(--line); }
   .plan-day .plan-detail { grid-column: auto; }
 }
 
+
+/* ---------- planner charts ---------- */
+.chart-box { inline-size: 100%; }
+.chart-box svg { display: block; inline-size: 100%; block-size: 7.5rem; overflow: visible; }
+.forecast-svg .hit { fill: transparent; }
+.forecast-svg .bar, .key-bar { fill: var(--good); background: var(--good); }
+.forecast-svg .bar-new, .key-new { fill: var(--accent); background: var(--accent); opacity: 0.75; }
+.forecast-svg .fc.today .bar { fill: var(--accent); }
+.forecast-svg .rest { fill: var(--line); }
+.forecast-svg .fc:hover .bar, .forecast-svg .fc:hover .bar-new { opacity: 0.8; }
+.chart-box .baseline { stroke: var(--line); stroke-width: 1; }
+.forecast-svg .cap, .pace-svg .goal { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 3; vector-effect: non-scaling-stroke; }
+.pace-svg .final-band, .key-final { fill: var(--accent-soft); background: var(--accent-soft); }
+.pace-svg .today-mark { stroke: var(--line); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.pace-svg .line-past, .pace-svg .line-plan { fill: none; stroke-width: 2.5; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.pace-svg .line-past { stroke: var(--good); }
+.pace-svg .line-plan { stroke: var(--accent); stroke-dasharray: 6 4; }
+.chart-key { display: flex; flex-wrap: wrap; gap: var(--sp-3); }
+.chart-key > span { display: inline-flex; align-items: center; gap: var(--sp-1); }
+.key { display: inline-block; inline-size: 0.8rem; block-size: 0.8rem; border-radius: 3px; }
+.key-cap, .key-plan { block-size: 0; border-block-start: 2px dashed var(--muted); border-radius: 0; }
+.key-plan { border-color: var(--accent); }
+.key-past { block-size: 0; border-block-start: 2.5px solid var(--good); border-radius: 0; }

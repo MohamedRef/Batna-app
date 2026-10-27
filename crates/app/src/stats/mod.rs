@@ -2,6 +2,7 @@
 //! weakest topics, the mistakes log, and the exam planner's tab.
 //! The numbers come from `batna_core::stats`; this module only draws them.
 
+pub mod charts;
 mod demo;
 mod mistakes;
 

@@ -8,7 +8,7 @@ use batna_core::stats;
 use dioxus::prelude::*;
 
 use crate::i18n::plan as tx;
-use crate::stats::{StudyData, lecture_number};
+use crate::stats::{StudyData, charts, lecture_number};
 
 /// The planner settings. In memory until the store (chunk 3) can keep them.
 /// BATNA_PLAN_EXAM=2027-01-20 presets the exam day (previews and screenshots).
@@ -36,6 +36,8 @@ pub fn Planner(data: Rc<StudyData>) -> Element {
     rsx! {
         StatusCard { p: p.clone(), exam: settings.exam }
         TodayCard { p: p.clone() }
+        LoadCard { p: p.clone(), cap: settings.review_cap }
+        PaceCard { p: p.clone(), past: past_pace(&data) }
         ProgressCard { p: p.clone() }
         WeekCard { p: p.clone() }
         div { class: "plan-actions",
@@ -193,6 +195,109 @@ fn TodayCard(p: Plan) -> Element {
                 }
             }
             DayDetail { d: today.clone() }
+        }
+    }
+}
+
+/// Items seen by the end of each past day, as (offset from today, count),
+/// over the last [`PACE_PAST_DAYS`] days. Empty with no history.
+fn past_pace(data: &StudyData) -> Vec<(i32, u32)> {
+    let today = data.clock.today();
+    let by_day = stats::first_seen_by_day(&data.lectures, &data.events, &data.marks, data.clock);
+    let Some(first) = by_day.keys().next().copied() else { return Vec::new() };
+    let from = first.max(today.plus(-PACE_PAST_DAYS));
+    let mut seen: u32 = by_day.range(..from).map(|(_, n)| n).sum();
+    (today.until(from)..=0)
+        .map(|off| {
+            seen += by_day.get(&today.plus(off)).copied().unwrap_or(0);
+            (off, seen)
+        })
+        .collect()
+}
+
+const PACE_PAST_DAYS: i32 = 30;
+const LOAD_DAYS: usize = 14;
+
+#[component]
+fn LoadCard(p: Plan, cap: u32) -> Element {
+    let days: Vec<(Day, charts::Load)> = p
+        .days
+        .iter()
+        .take(LOAD_DAYS)
+        .map(|d| (d.day, charts::Load { reviews: d.reviews, new: d.new, rest: d.focus == Focus::Rest }))
+        .collect();
+    if days.is_empty() {
+        return rsx! {};
+    }
+    let loads: Vec<charts::Load> = days.iter().map(|(_, l)| *l).collect();
+    let svg = charts::forecast(&loads, cap, tx::LOAD_LABEL, |i, l| {
+        let day = short_date(days[i].0);
+        if l.rest {
+            format!("{day}: {}", tx::FOCUS_REST)
+        } else {
+            format!("{day}: {} {} · {} {}", l.reviews, tx::REVIEWS, l.new, tx::NEW_ITEMS)
+        }
+    });
+    let peak = days.iter().max_by_key(|(_, l)| l.reviews + l.new).map(|(d, l)| (*d, l.reviews + l.new));
+    rsx! {
+        section { class: "card chart-card",
+            h2 { {tx::LOAD_TITLE} }
+            div { class: "chart-box", dangerous_inner_html: "{svg}" }
+            div { class: "chart-key small muted",
+                span { span { class: "key key-bar" } {tx::LOAD_KEY_REVIEWS} }
+                span { span { class: "key key-new" } {tx::LOAD_KEY_NEW} }
+                span { span { class: "key key-cap" } "{tx::LOAD_KEY_CAP} ({cap})" }
+            }
+            if let Some((d, n)) = peak.filter(|(_, n)| *n > 0) {
+                p { class: "muted small", "{tx::LOAD_PEAK}: {short_date(d)} ({n})" }
+            }
+        }
+    }
+}
+
+#[component]
+fn PaceCard(p: Plan, past: Vec<(i32, u32)>) -> Element {
+    if p.days.is_empty() || p.total == 0 {
+        return rsx! {};
+    }
+    let today = p.days[0].day;
+    let mut planned = vec![(0, p.seen)];
+    let mut seen = p.seen;
+    let mut done_on = (p.seen >= p.total).then_some(today);
+    for (i, d) in p.days.iter().enumerate() {
+        seen += d.new;
+        if done_on.is_none() && seen >= p.total {
+            done_on = Some(d.day);
+        }
+        planned.push((i as i32 + 1, seen));
+    }
+    let to = p.days.len() as i32;
+    let svg = charts::pace(
+        &charts::Pace {
+            past: &past,
+            planned: &planned,
+            total: p.total,
+            from: past.first().map_or(0, |(o, _)| *o),
+            to,
+            final_from: p.final_from.map(|f| today.until(f)),
+        },
+        tx::PACE_LABEL,
+    );
+    rsx! {
+        section { class: "card chart-card",
+            h2 { {tx::PACE_TITLE} }
+            div { class: "chart-box", dangerous_inner_html: "{svg}" }
+            div { class: "chart-key small muted",
+                span { span { class: "key key-past" } {tx::PACE_KEY_PAST} }
+                span { span { class: "key key-plan" } {tx::PACE_KEY_PLAN} }
+                span { span { class: "key key-final" } {tx::PACE_KEY_FINAL} }
+            }
+            p { class: "small",
+                match done_on {
+                    Some(d) => format!("{} {}", tx::PACE_DONE_ON, long_date(d)),
+                    None => tx::PACE_NOT_DONE.to_string(),
+                }
+            }
         }
     }
 }

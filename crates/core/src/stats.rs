@@ -260,6 +260,27 @@ pub fn rough_forecast(
     out
 }
 
+/// Items seen for the first time per study day, oldest first: the past half
+/// of the pace chart. Rejected items left out.
+pub fn first_seen_by_day(
+    lectures: &[Lecture],
+    events: &[ReviewEvent],
+    marks: &BTreeMap<String, Status>,
+    clock: Clock,
+) -> BTreeMap<Day, u32> {
+    let by_item = answers_by_item(events);
+    let mut out = BTreeMap::new();
+    for item in lectures.iter().flat_map(|l| &l.items) {
+        if status_of(&item.id, item.status, marks) == Status::Rejected {
+            continue;
+        }
+        if let Some(first) = by_item.get(item.id.as_str()).and_then(|a| a.first()) {
+            *out.entry(clock.day_of(first.at_ms)).or_insert(0) += 1;
+        }
+    }
+    out
+}
+
 /// A topic that needs work, for the "study these" card.
 #[derive(Debug, Clone, PartialEq)]
 pub struct WeakTopic {
@@ -562,6 +583,19 @@ items:
         ];
         let f = rough_forecast(&lectures(), &events, &marks(), clock(), 5);
         assert_eq!(f, [1, 1, 1, 0, 0]);
+    }
+
+    #[test]
+    fn first_sightings_per_day() {
+        let events = [
+            ev("hb.L01.001", Grade::Good, 3),
+            ev("hb.L01.001", Grade::Good, 1),
+            ev("hb.L01.002", Grade::Again, 1),
+            ev("hb.L01.004", Grade::Good, 1), // rejected
+        ];
+        let today = clock().today();
+        let got = first_seen_by_day(&lectures(), &events, &marks(), clock());
+        assert_eq!(got, BTreeMap::from([(today.plus(-3), 1), (today.plus(-1), 1)]));
     }
 
     #[test]

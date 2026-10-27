@@ -23,13 +23,13 @@ use std::path::{Path, PathBuf};
 use batna_anki::{Options, build, to_apkg};
 use batna_core::content::{Item, Lecture};
 
-use crate::verdicts::{Verdict, Verdicts, apply_edit};
+use crate::verdicts::{Verdict, apply_edit};
 
 pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
     let out = crate::flag(args, "--out").map(PathBuf::from).unwrap_or_else(|| root.join("dist/anki"));
     let only = crate::flag(args, "--lecture");
     let verdicts = match crate::flag(args, "--verdicts") {
-        Some(f) => Some(Verdicts::read(Path::new(f)).map_err(|e| vec![e])?),
+        Some(f) => Some(crate::verdicts::read(Path::new(f)).map_err(|e| vec![e])?),
         None => None,
     };
     let (index, mut lectures) = crate::packs::load(root)?;
@@ -68,7 +68,7 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
     if let Some(v) = &verdicts {
         let items: BTreeMap<&str, &Item> =
             lectures.iter().flat_map(|l| &l.items).map(|i| (i.id.as_str(), i)).collect();
-        for (id, entry) in v.latest() {
+        for (id, entry) in crate::verdicts::latest(v) {
             match entry.verdict {
                 Verdict::Approved => {
                     approved.insert(id.to_string());
@@ -198,7 +198,7 @@ mod tests {
             .unwrap();
         std::fs::write(
             d.join("export.yaml"),
-            "schema: batna.verdicts/v1\nverdicts:\n  - { id: hb.L01.003, verdict: wrong }\n  - { id: hb.L01.001, verdict: edited, edit: { back: Fibrosis plus nodules. } }\n  - { id: hb.L01.002, verdict: edited, edit: { nope: x } }\n",
+            "schema: batna.verdicts/v1\nexported: x\nverdicts:\n  - { id: hb.L01.003, verdict: wrong, at: a }\n  - { id: hb.L01.001, verdict: edited, at: a, edit: { back: Fibrosis plus nodules. } }\n  - { id: hb.L01.002, verdict: edited, at: a, edit: { nope: x } }\n",
         )
         .unwrap();
         let args: Vec<String> =

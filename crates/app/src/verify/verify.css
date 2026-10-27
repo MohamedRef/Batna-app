@@ -1,0 +1,42 @@
+/* Verify-while-study: a quiet row above the grade buttons. */
+.verify {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2) var(--sp-3);
+  padding: var(--sp-3);
+  border: 1px dashed var(--line);
+  border-radius: var(--radius);
+  background: var(--bg);
+}
+.verify-q { color: var(--muted); font-size: var(--fs-sm); }
+.verify-actions { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+.verify-btn {
+  min-height: 44px;
+  padding-inline: var(--sp-4);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  cursor: pointer;
+}
+.verify-btn.ok { border-color: var(--good); color: var(--good); }
+.verify-btn.bad { border-color: var(--bad); color: var(--bad); }
+.verify-btn.edit { border-color: var(--accent); color: var(--accent); }
+.verify-btn.plain { color: var(--muted); }
+.verify-saved { flex: 1; font-size: var(--fs-sm); }
+.verify-saved[data-verdict="approved"] { color: var(--good); }
+.verify-saved[data-verdict="wrong"] { color: var(--bad); }
+.verify-undo { border: 0; background: none; color: var(--accent); text-decoration: underline; cursor: pointer; min-height: 44px; }
+.verify-editor, .verify-field { display: flex; flex-direction: column; gap: var(--sp-2); inline-size: 100%; }
+.verify-field > span { font-size: var(--fs-sm); font-weight: 600; }
+.verify-field textarea, .verify-field select {
+  font: inherit;
+  inline-size: 100%;
+  padding: var(--sp-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+}
+.verify-field textarea[dir="ltr"] { font-family: var(--font-latin); }
+.verify-error { color: var(--bad); font-size: var(--fs-sm); }

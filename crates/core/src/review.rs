@@ -9,11 +9,12 @@ pub mod verify;
 
 use std::cell::RefCell;
 use std::cmp::Ordering;
+use std::collections::BTreeMap;
 use std::rc::Rc;
 
 use serde::{Deserialize, Serialize};
 
-use crate::content::{Body, Item};
+use crate::content::{Body, Item, Status};
 
 /// The four FSRS ratings.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
@@ -245,6 +246,20 @@ pub trait StudyStore {
     /// the item now, for "1d · 3d · 9d" on the grade buttons.
     fn intervals(&self, _item_id: &str, _now_ms: i64) -> Option<[f32; 4]> {
         None
+    }
+    /// Every answer logged, oldest first (stats, mistakes, the planner).
+    fn log(&self) -> Vec<ReviewEvent> {
+        Vec::new()
+    }
+    /// Mohamed's verdicts that still match the content: ✓ and ✎ count as
+    /// `Approved`, ✗ as `Rejected`. Items he hasn't checked are absent.
+    fn marks(&self) -> BTreeMap<String, Status> {
+        BTreeMap::new()
+    }
+    /// Reviews falling due on each of the next `days` study days (index 0 is
+    /// today, overdue included), from FSRS. Empty when the store can't tell.
+    fn forecast(&self, _days: usize, _now_ms: i64) -> Vec<u32> {
+        Vec::new()
     }
 }
 

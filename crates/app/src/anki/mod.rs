@@ -8,13 +8,22 @@
 //! - Mac and other desktops: saved to `~/Downloads/batna.apkg` and opened with
 //!   the default app (Anki registers `.apkg`).
 //!
+//! His ✓/✎/✗ from verify-while-study apply: ✗ items are left out, ✎ items
+//! carry his edited text, ✓ items are tagged `approved`.
+//!
 //! The app holds merged lectures only; the shared-folder file can also carry
 //! drafts. Both use the same note ids, so either import updates the other.
 
 use dioxus::prelude::*;
 
+use std::collections::{BTreeMap, BTreeSet};
+
+use batna_core::content::{Item, Lecture};
+use batna_core::review::verify::{self, Check, Judgement, Verdict};
+
 use crate::content::Library;
 use crate::i18n::anki as tx;
+use crate::store::use_review;
 
 #[cfg(target_os = "android")]
 mod android;
@@ -42,6 +51,7 @@ enum State {
 #[component]
 pub fn AnkiExport() -> Element {
     let mut state = use_signal(|| State::Idle);
+    let review = use_review();
     let lib = Library::get();
     let lectures = lib.lectures.len();
     let items: usize = lib.lectures.values().map(|l| l.items.len()).sum();
@@ -50,9 +60,11 @@ pub fn AnkiExport() -> Element {
     let export = move |_| {
         state.set(State::Working);
         // Let the button show "working" before the (sub-second) build runs.
+        let review = review.clone();
         spawn(async move {
             futures_yield().await;
-            state.set(match export_now() {
+            let backend = review.backend.borrow();
+            state.set(match export_now(|id| backend.judgement(id)) {
                 Ok((notes, place)) => State::Done { notes, place },
                 Err(e) => State::Failed(e),
             });
@@ -99,12 +111,49 @@ async fn futures_yield() {
     .await
 }
 
-/// Builds the deck from the embedded content; returns the note count and
-/// where the file went.
-fn export_now() -> Result<(usize, String), String> {
+/// What his verdicts mean for the deck: ✗ ids, ✎ items with the edit
+/// applied, and ✓ ids. A verdict counts only while it matches the item's
+/// current text (`Judgement::current`), the same rule review uses.
+#[derive(Default)]
+struct Verdicts {
+    wrong: BTreeSet<String>,
+    edits: BTreeMap<String, Item>,
+    approved: BTreeSet<String>,
+}
+
+fn verdicts<'a>(lectures: &[Lecture], judgement: impl Fn(&str) -> Option<&'a Judgement>) -> Verdicts {
+    let mut out = Verdicts::default();
+    for item in lectures.iter().flat_map(|l| &l.items) {
+        let j = judgement(&item.id);
+        if verify::check(item, j) == Check::Hidden {
+            out.wrong.insert(item.id.clone());
+            continue;
+        }
+        match j.filter(|j| j.current(item)).map(|j| j.verdict) {
+            Some(Verdict::Edited) => {
+                out.edits.insert(item.id.clone(), verify::effective(item, j));
+            }
+            Some(Verdict::Approved) => {
+                out.approved.insert(item.id.clone());
+            }
+            _ => {}
+        }
+    }
+    out
+}
+
+/// Builds the deck from the embedded content and his verdicts; returns the
+/// note count and where the file went.
+fn export_now<'a>(judgement: impl Fn(&str) -> Option<&'a Judgement>) -> Result<(usize, String), String> {
     let lectures: Vec<_> = Library::get().lectures.values().cloned().collect();
-    // TODO(chunk 3): pass the in-app ✓/✎/✗ verdicts once the review store lands.
-    let deck = batna_anki::build(&lectures, &batna_anki::Options::default());
+    let v = verdicts(&lectures, judgement);
+    let opts = batna_anki::Options {
+        approved: Some(&v.approved),
+        wrong: Some(&v.wrong),
+        edits: Some(&v.edits),
+        drafts: None,
+    };
+    let deck = batna_anki::build(&lectures, &opts);
     let now_ms = std::time::SystemTime::now()
         .duration_since(std::time::UNIX_EPOCH)
         .map(|d| d.as_millis() as i64)

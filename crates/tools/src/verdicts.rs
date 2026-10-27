@@ -7,76 +7,37 @@
 //! The Anki exporter reads the same file (`anki --verdicts FILE`): ✗ items are
 //! left out and ✎ items use his edited text.
 //!
-//! Mirrors `batna_core::review::verify` until chunk 3's types land there.
+//! The types are `batna_core::review::verify`'s, the same ones the app writes.
 
 use std::collections::{BTreeMap, BTreeSet};
 use std::fmt::Write as _;
 use std::path::Path;
 
 use batna_core::content::Item;
-use serde::Deserialize;
+pub use batna_core::review::verify::{
+    FieldValue, VERDICTS_SCHEMA as SCHEMA, Verdict, VerdictEntry, Verdicts,
+};
 
-pub const SCHEMA: &str = "batna.verdicts/v1";
-
-#[derive(Debug, Clone, Deserialize)]
-pub struct Verdicts {
-    pub schema: String,
-    #[serde(default)]
-    pub exported: Option<String>,
-    #[serde(default)]
-    pub verdicts: Vec<VerdictEntry>,
-}
-
-#[derive(Debug, Clone, Deserialize)]
-pub struct VerdictEntry {
-    pub id: String,
-    pub verdict: Verdict,
-    #[serde(default)]
-    pub at: Option<String>,
-    #[serde(default)]
-    pub note: Option<String>,
-    /// The fields he overrode, keyed like the content YAML.
-    #[serde(default)]
-    pub edit: BTreeMap<String, FieldValue>,
-}
-
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize)]
-#[serde(rename_all = "snake_case")]
-pub enum Verdict {
-    Approved,
-    Edited,
-    Wrong,
-}
-
-#[derive(Debug, Clone, PartialEq, Deserialize, serde::Serialize)]
-#[serde(untagged)]
-pub enum FieldValue {
-    Text(String),
-    List(Vec<String>),
-}
-
-impl Verdicts {
-    pub fn read(path: &Path) -> Result<Self, String> {
-        let v: Verdicts = crate::read_yaml(path)?;
-        if v.schema != SCHEMA {
-            return Err(format!("{}: schema is {:?}, expected {SCHEMA:?}", path.display(), v.schema));
-        }
-        Ok(v)
+pub fn read(path: &Path) -> Result<Verdicts, String> {
+    let v: Verdicts = crate::read_yaml(path)?;
+    if v.schema != SCHEMA {
+        return Err(format!("{}: schema is {:?}, expected {SCHEMA:?}", path.display(), v.schema));
     }
+    Ok(v)
+}
 
-    /// The latest verdict for each item (the export may hold several).
-    pub fn latest(&self) -> BTreeMap<&str, &VerdictEntry> {
-        let mut out: BTreeMap<&str, &VerdictEntry> = BTreeMap::new();
-        for v in &self.verdicts {
-            match out.get(v.id.as_str()) {
-                Some(old) if old.at > v.at => {}
-                _ => {
-                    out.insert(&v.id, v);
-                }
+/// The latest verdict for each item (the export may hold several).
+pub fn latest(v: &Verdicts) -> BTreeMap<&str, &VerdictEntry> {
+    let mut out: BTreeMap<&str, &VerdictEntry> = BTreeMap::new();
+    for e in &v.verdicts {
+        match out.get(e.id.as_str()) {
+            Some(old) if old.at > e.at => {}
+            _ => {
+                out.insert(&e.id, e);
             }
         }
-        out
     }
+    out
 }
 
 /// `item` with his edited fields applied. Fields that don't fit the item's
@@ -104,14 +65,14 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
     let Some(file) = args.first().filter(|a| !a.starts_with("--")) else {
         return Err(vec!["usage: batna-tools verdicts FILE [--approve]".into()]);
     };
-    let verdicts = Verdicts::read(Path::new(file)).map_err(|e| vec![e])?;
+    let verdicts = read(Path::new(file)).map_err(|e| vec![e])?;
     let (_, lectures) = crate::packs::load(root)?;
     let items: BTreeMap<&str, (&str, &Item)> = lectures
         .iter()
         .flat_map(|l| l.items.iter().map(move |i| (i.id.as_str(), (l.lecture.as_str(), i))))
         .collect();
 
-    let latest = verdicts.latest();
+    let latest = latest(&verdicts);
     let mut fixes: BTreeMap<&str, Vec<String>> = BTreeMap::new();
     let mut approved = Vec::new();
     let mut unknown = Vec::new();
@@ -134,6 +95,7 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
         for (key, value) in &v.edit {
             let shown = match value {
                 FieldValue::Text(t) => t.clone(),
+                FieldValue::Index(i) => i.to_string(),
                 FieldValue::List(l) => l.join(" | "),
             };
             write!(line, "\n    {key} → {shown}").unwrap();
@@ -147,8 +109,8 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
     }
 
     let mut out = String::new();
-    if let Some(when) = &verdicts.exported {
-        writeln!(out, "From the app export of {when}\n").unwrap();
+    if !verdicts.exported.is_empty() {
+        writeln!(out, "From the app export of {}\n", verdicts.exported).unwrap();
     }
     if fixes.is_empty() {
         out.push_str("No ✎ or ✗ items: nothing to fix.\n");
@@ -205,6 +167,7 @@ verdicts:
   - { id: hb.L01.003, verdict: wrong, at: "2026-11-02T09:05:00Z", note: "B is 7-9, recount" }
   - { id: hb.L01.004, verdict: edited, at: "2026-11-02T09:06:00Z", edit: { points: [Recurrent bleeding, SBP], prompt: "Enumerate two." } }
   - { id: hb.L01.099, verdict: wrong, at: "2026-11-02T09:07:00Z" }
+  - { id: hb.L01.003, verdict: edited, at: "2026-11-01T08:00:00Z", edit: { answer: 2 } }
 "#;
 
     fn tree() -> tempfile::TempDir {

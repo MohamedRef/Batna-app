@@ -3,6 +3,7 @@
 //! Feature chunks (SPLIT.md §7) each own a module directory and register it
 //! with one line in `Screen` / `screen_body` below.
 
+mod bank;
 mod content;
 mod i18n;
 mod today;
@@ -122,7 +123,7 @@ fn screen_body(screen: Screen) -> Element {
     match screen {
         Screen::Today => rsx! { today::Today {} },
         Screen::Study => rsx! { Soon { screen } },
-        Screen::Bank => rsx! { Soon { screen } },
+        Screen::Bank => rsx! { bank::Bank {} },
         Screen::Cases => rsx! { Soon { screen } },
         Screen::Oral => rsx! { Soon { screen } },
         Screen::Stats => rsx! { Soon { screen } },

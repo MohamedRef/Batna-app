@@ -2,6 +2,7 @@
 //! native and wasm32.
 
 pub mod content;
+pub mod exam;
 pub mod layout;
 pub mod review;
 pub mod validate;

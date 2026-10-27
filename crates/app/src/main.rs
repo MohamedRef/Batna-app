@@ -4,8 +4,12 @@
 //! with one line in `Screen` / `screen_body` below.
 
 mod bank;
+mod calc;
+mod case;
 mod content;
 mod i18n;
+mod oral;
+mod platform;
 mod today;
 
 use dioxus::prelude::*;
@@ -124,8 +128,8 @@ fn screen_body(screen: Screen) -> Element {
         Screen::Today => rsx! { today::Today {} },
         Screen::Study => rsx! { Soon { screen } },
         Screen::Bank => rsx! { bank::Bank {} },
-        Screen::Cases => rsx! { Soon { screen } },
-        Screen::Oral => rsx! { Soon { screen } },
+        Screen::Cases => rsx! { case::CasesScreen {} },
+        Screen::Oral => rsx! { oral::Oral {} },
         Screen::Stats => rsx! { Soon { screen } },
         Screen::Settings => rsx! { Soon { screen } },
     }

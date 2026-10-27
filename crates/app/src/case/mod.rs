@@ -93,13 +93,13 @@ fn ItemList(kind: &'static str, on_open: EventHandler<String>) -> Element {
                 li { key: "{item.id}",
                     button { class: "case-row", dir: "auto", onclick: { let id = item.id.clone(); move |_| on_open.call(id.clone()) },
                         bdi { class: "case-row-stem", {first_line(item)} }
-                        span { class: "muted small",
-                            bdi { "{lecture}" }
+                        span { class: "muted small", dir: "rtl",
                             match &item.body {
-                                Body::Case { steps, .. } => rsx! { " · {steps.len()} {tx::STEPS}" },
-                                Body::Calc { calculator, .. } => rsx! { " · " bdi { {batna_core::calc::spec(calculator).map_or("", |s| s.name)} } },
+                                Body::Case { steps, .. } => rsx! { "{steps.len()} {tx::STEPS} · " },
+                                Body::Calc { calculator, .. } => rsx! { bdi { {batna_core::calc::spec(calculator).map_or("", |s| s.name)} } " · " },
                                 _ => rsx! {},
                             }
+                            bdi { "{lecture}" }
                         }
                     }
                 }

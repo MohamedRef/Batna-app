@@ -201,7 +201,7 @@ fn body_problems(body: &Body) -> Vec<String> {
                 None => p.push(format!("unknown calculator `{calculator}`")),
                 Some(spec) => {
                     // Compute it: the inputs must be complete and `expect` must agree.
-                    let inputs = crate::calc::Inputs(inputs.clone());
+                    let inputs = crate::calc::Inputs::for_spec(spec, inputs);
                     for key in crate::calc::unknown_inputs(spec, &inputs) {
                         p.push(format!("calc input `{key}` is not used by `{calculator}`"));
                     }

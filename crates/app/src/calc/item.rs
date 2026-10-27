@@ -45,7 +45,7 @@ pub fn CalcItem(item_id: String, on_back: EventHandler) -> Element {
         return rsx! {};
     };
     let Some(spec) = calc::spec(calculator) else { return rsx! {} };
-    let initial = Inputs(inputs.clone());
+    let initial = Inputs::for_spec(spec, inputs);
     let outcome = (spec.compute)(&initial).ok();
     let id = spec.id;
     let expect_text = expect.clone();

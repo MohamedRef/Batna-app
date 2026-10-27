@@ -1,6 +1,6 @@
 # Calculators
 
-Generated from `crates/core/src/calc` (run `cargo test -p batna-core -- --ignored print_reference`). A `calc` item names one of these in `calculator:` and gives its `inputs` by key. `just validate` computes every item, so a typo, a missing input or an `expect` that disagrees fails the check. `expect` may be the band id (`child_pugh.b`) or text that contains the result (`Child-Pugh B (8 points)`, `Stage C`).
+Generated from `crates/core/src/calc` (run `cargo test -p batna-core -- --ignored print_reference`). A `calc` item names one of these in `calculator:` and gives its `inputs` by key (a key may drop its unit suffix: `alt` for `alt_u_l`). `just validate` computes every item, so a typo, a missing input or an `expect` that disagrees fails the check. `expect` may be the band id (`child_pugh.b`) or text that contains the result (`Child-Pugh B (8 points)`, `Stage C`).
 
 ## `child_pugh`: Child-Pugh
 

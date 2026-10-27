@@ -45,6 +45,20 @@ impl Inputs {
         Self::default()
     }
 
+    /// Content inputs for one calculator. A key may drop its unit suffix
+    /// (`alt` for `alt_u_l`, `bilirubin` for `bilirubin_mg_dl`); it is renamed
+    /// to the field's key. Keys that match no field stay as written, so
+    /// [`unknown_inputs`] can report them.
+    pub fn for_spec(spec: &CalcSpec, raw: &BTreeMap<String, CalcValue>) -> Self {
+        let rename = |k: &String| {
+            spec.fields
+                .iter()
+                .find(|f| f.key == k || base_key(f.key) == k)
+                .map_or_else(|| k.clone(), |f| f.key.to_owned())
+        };
+        Self(raw.iter().map(|(k, v)| (rename(k), v.clone())).collect())
+    }
+
     pub fn num(mut self, key: &str, v: f64) -> Self {
         self.0.insert(key.to_owned(), CalcValue::Number(v));
         self
@@ -314,6 +328,16 @@ static REGISTRY: [CalcSpec; 16] = [
     bisap::SPEC,
 ];
 
+const UNIT_SUFFIXES: &[&str] = &[
+    "_10e9_l", "_per_mm3", "_mm_hg", "_meq_l", "_mmol_l", "_mg_dl", "_g_dl", "_iu_l", "_u_l", "_years",
+    "_points", "_days", "_pct", "_cm", "_s", "_l",
+];
+
+/// A field key without its unit suffix: `alt_uln_u_l` → `alt_uln`.
+fn base_key(key: &str) -> &str {
+    UNIT_SUFFIXES.iter().find_map(|s| key.strip_suffix(s)).unwrap_or(key)
+}
+
 /// Input keys in `inputs` that the calculator does not read: almost always a
 /// typo in content.
 pub fn unknown_inputs<'a>(spec: &CalcSpec, inputs: &'a Inputs) -> Vec<&'a str> {
@@ -328,10 +352,15 @@ pub fn expect_matches(outcome: &Outcome, expect: &str) -> bool {
     if expect == outcome.band {
         return true;
     }
-    if outcome.score.is_some() {
-        // A number written in `expect` equal to the score as shown.
-        let shown = numbers(&outcome.display);
-        if shown.first().is_some_and(|n| numbers(expect).contains(n)) {
+    if let Some(score) = outcome.score {
+        // A number written in `expect` equal to the score at the precision it
+        // is written with: "0.9" and "0.90" both match 0.898.
+        let matches = |n: &String| {
+            let dp = n.split_once('.').map_or(0, |(_, f)| f.len()) as i32;
+            let scale = 10f64.powi(dp);
+            n.parse::<f64>().is_ok_and(|v| ((score * scale).round() - v * scale).abs() < 0.5)
+        };
+        if numbers(expect).iter().any(matches) {
             return true;
         }
     }
@@ -362,7 +391,8 @@ pub fn reference_markdown() -> String {
     let mut out = String::from(
         "# Calculators\n\nGenerated from `crates/core/src/calc` (run \
          `cargo test -p batna-core -- --ignored print_reference`). A `calc` item names one of these in \
-         `calculator:` and gives its `inputs` by key. `just validate` computes every item, so a typo, a \
+         `calculator:` and gives its `inputs` by key (a key may drop its unit suffix: `alt` for \
+         `alt_u_l`). `just validate` computes every item, so a typo, a \
          missing input or an `expect` that disagrees fails the check. `expect` may be the band id \
          (`child_pugh.b`) or text that contains the result (`Child-Pugh B (8 points)`, `Stage C`).\n",
     );
@@ -458,6 +488,33 @@ mod tests {
         .unwrap();
         assert!(expect_matches(&bclc, "Stage C"));
         assert!(!expect_matches(&bclc, "Stage B"));
+    }
+
+    #[test]
+    fn keys_may_drop_their_unit_suffix() {
+        let spec = spec("r_ratio").unwrap();
+        let raw: BTreeMap<String, CalcValue> =
+            [("alt", 120.0), ("alt_uln", 40.0), ("alp", 600.0), ("alp_uln_u_l", 120.0)]
+                .into_iter()
+                .map(|(k, v)| (k.to_owned(), CalcValue::Number(v)))
+                .collect();
+        let i = Inputs::for_spec(spec, &raw);
+        assert!(unknown_inputs(spec, &i).is_empty());
+        let o = (spec.compute)(&i).unwrap();
+        assert!(expect_matches(&o, "R = 0.6, cholestatic"));
+    }
+
+    #[test]
+    fn numbers_match_at_the_written_precision() {
+        let i = Inputs::new()
+            .num("age_years", 45.0)
+            .num("ast_u_l", 30.0)
+            .num("alt_u_l", 36.0)
+            .num("platelets_10e9_l", 250.0);
+        let o = compute("fib4", &i).unwrap();
+        assert!(expect_matches(&o, "FIB-4 0.9"));
+        assert!(expect_matches(&o, "FIB-4 0.90"));
+        assert!(!expect_matches(&o, "FIB-4 1.9"));
     }
 
     #[test]

@@ -150,6 +150,38 @@ impl PlanSettings {
     fn is_study_day(&self, day: Day) -> bool {
         self.weekdays[day.weekday()]
     }
+
+    /// `key=value` lines, for the app's small settings file. Weekdays are
+    /// seven 0/1 digits, Saturday first.
+    pub fn render(&self) -> String {
+        let days: String = self.weekdays.iter().map(|on| if *on { '1' } else { '0' }).collect();
+        let exam = self.exam.map(Day::iso).unwrap_or_default();
+        format!(
+            "exam={exam}\nweekdays={days}\nreview_cap={}\nfinal_days={}\n",
+            self.review_cap, self.final_days
+        )
+    }
+
+    /// Reads [`PlanSettings::render`]'s format. Anything missing or broken
+    /// keeps its default, so an old or hand-edited file never loses the rest.
+    pub fn parse(text: &str) -> PlanSettings {
+        let mut out = PlanSettings::default();
+        for (key, value) in text.lines().filter_map(|l| l.split_once('=')) {
+            let value = value.trim();
+            match key.trim() {
+                "exam" => out.exam = Day::parse(value),
+                "weekdays" if value.len() == 7 && value.chars().all(|c| c == '0' || c == '1') => {
+                    for (w, c) in value.chars().enumerate() {
+                        out.weekdays[w] = c == '1';
+                    }
+                }
+                "review_cap" => out.review_cap = value.parse().unwrap_or(out.review_cap),
+                "final_days" => out.final_days = value.parse().unwrap_or(out.final_days),
+                _ => {}
+            }
+        }
+        out
+    }
 }
 
 /// One lecture's progress, in book order.
@@ -482,6 +514,19 @@ mod tests {
         assert_eq!(Day::from_unix_ms(ms, 120, 4), day(2026, 10, 26));
         let ms_after = ms + 3 * 3_600_000; // 04:30 Cairo
         assert_eq!(Day::from_unix_ms(ms_after, 120, 4), day(2026, 10, 27));
+    }
+
+    #[test]
+    fn settings_round_trip() {
+        let mut s = settings(day(2027, 1, 20));
+        s.weekdays = [true, false, true, false, true, false, true];
+        s.review_cap = 200;
+        assert_eq!(PlanSettings::parse(&s.render()), s);
+        let partial = PlanSettings::parse("weekdays=11\nreview_cap=abc\nexam=2027-01-21\n");
+        assert_eq!(partial.weekdays, PlanSettings::default().weekdays);
+        assert_eq!(partial.review_cap, DEFAULT_REVIEW_CAP);
+        assert_eq!(partial.exam, Some(day(2027, 1, 21)));
+        assert_eq!(PlanSettings::parse(""), PlanSettings::default());
     }
 
     #[test]

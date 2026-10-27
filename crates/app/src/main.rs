@@ -8,9 +8,11 @@ mod case;
 mod content;
 mod i18n;
 mod oral;
+mod order;
 mod plan;
 mod platform;
 mod stats;
+mod table;
 mod today;
 
 use dioxus::prelude::*;

@@ -5,14 +5,14 @@ mod settings;
 
 use dioxus::prelude::*;
 
-pub use settings::Settings;
+pub use settings::StudySection;
 
 use crate::content::Library;
 use crate::i18n::today as tx;
 use crate::store::{self, LectureProgress, use_review};
 use crate::{Screen, Ui};
 
-const CSS: &str = include_str!("today.css");
+pub(crate) const CSS: &str = include_str!("today.css");
 
 #[component]
 pub fn Today() -> Element {

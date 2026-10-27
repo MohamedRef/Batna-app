@@ -7,19 +7,7 @@ use std::path::PathBuf;
 /// The app's private data directory. `BATNA_DATA_DIR` overrides it
 /// (previews, screenshots, a fresh profile).
 pub fn data_dir() -> Result<PathBuf, String> {
-    if let Some(dir) = std::env::var_os("BATNA_DATA_DIR") {
-        return Ok(PathBuf::from(dir));
-    }
-    #[cfg(target_os = "android")]
-    {
-        Ok(PathBuf::from(format!("/data/data/{}/files", android_package()?)))
-    }
-    #[cfg(not(target_os = "android"))]
-    {
-        directories::ProjectDirs::from("app", "Batna", "Batna")
-            .map(|d| d.data_dir().to_path_buf())
-            .ok_or_else(|| "no home directory".to_string())
-    }
+    crate::prefs::data_dir().ok_or_else(|| "no home directory".to_string())
 }
 
 /// Where an export goes: `~/Downloads` on the Mac; on Android the app's

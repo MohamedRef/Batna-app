@@ -1,17 +1,14 @@
-//! Settings → review: desired retention, new items a day, and the export of
-//! his content checks. Other chunks can add their own sections here.
+//! Settings › Review: desired retention and new items a day. The export of
+//! his content checks and the backup rows live in Settings › Your data.
 
 use batna_core::srs::{MIN_REVIEWS_TO_OPTIMIZE, NEW_PER_DAY_CHOICES, Retention, ReviewSettings};
 use dioxus::prelude::*;
 
-use crate::i18n::settings as tx;
-use crate::store::{self, use_review};
-use crate::verify::ExportVerdicts;
-
-const CSS: &str = include_str!("today.css");
+use crate::i18n::study_settings as tx;
+use crate::store::use_review;
 
 #[component]
-pub fn Settings() -> Element {
+pub fn StudySection() -> Element {
     let review = use_review();
     let settings = review.backend.borrow().settings.clone();
     let reviews = review.backend.borrow().reviews_logged();
@@ -25,11 +22,7 @@ pub fn Settings() -> Element {
     let set_new = set;
 
     rsx! {
-        style { {CSS} }
-        style { {crate::verify::CSS} }
-        section { class: "card",
-            h1 { {tx::TITLE} }
-        }
+        style { {super::CSS} }
         section { class: "card",
             h2 { {tx::RETENTION} }
             p { class: "muted small", {tx::RETENTION_BODY} }
@@ -74,19 +67,6 @@ pub fn Settings() -> Element {
                     }
                 }
             }
-        }
-        ExportVerdicts {}
-        crate::data_export::ExportCard {}
-        crate::import::ImportCard {}
-        section { class: "card",
-            h2 { {tx::DATA} }
-            p { class: "muted small",
-                match &store::shared().path {
-                    Some(p) => rsx! { "{tx::DATA_AT} " bdi { dir: "ltr", "{p.display()}" } },
-                    None => rsx! { {tx::DATA_MEMORY} },
-                }
-            }
-            p { class: "muted small", "{tx::DEVICE} " bdi { dir: "ltr", "{store::shared().device()}" } }
         }
     }
 }

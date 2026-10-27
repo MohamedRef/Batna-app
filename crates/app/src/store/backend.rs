@@ -6,7 +6,7 @@ use std::cell::RefCell;
 use std::collections::{BTreeMap, HashMap};
 use std::rc::Rc;
 
-use batna_core::content::{Body, Item};
+use batna_core::content::{Body, Item, Status};
 use batna_core::review::verify::{self, Check, Edit, Judgement, Verdict, Verdicts};
 use batna_core::review::{LoggedReview, ReviewEvent, StudyStore, StudyStoreHandle};
 use batna_core::srs::{self, CardState, ReviewSettings, Scheduler};
@@ -175,7 +175,6 @@ impl ReviewBackend {
 
     /// Items falling due on each of the next `days` study days (index 0 is
     /// today, overdue included). Items marked ✗ are left out.
-    #[allow(dead_code)] // reminders and recap (chunk 20)
     pub fn due_forecast(&self, days: usize, now_ms: i64) -> Vec<u32> {
         self.scheduler.forecast(self.states.values().filter(|s| !self.hidden(&s.item_id)), now_ms, days)
     }
@@ -325,6 +324,28 @@ impl StudyStore for ReviewBackend {
         let state = self.states.get(item_id).cloned().unwrap_or_else(|| CardState::new(item_id));
         Some(self.scheduler.intervals(&state, now_ms))
     }
+
+    fn log(&self) -> Vec<ReviewEvent> {
+        self.log.iter().map(|l| l.event.clone()).collect()
+    }
+
+    fn marks(&self) -> BTreeMap<String, Status> {
+        self.judgements
+            .iter()
+            .filter(|(id, j)| self.entry(id).is_some_and(|e| j.current(&e.item)))
+            .map(|(id, j)| {
+                let status = match j.verdict {
+                    Verdict::Approved | Verdict::Edited => Status::Approved,
+                    Verdict::Wrong => Status::Rejected,
+                };
+                (id.clone(), status)
+            })
+            .collect()
+    }
+
+    fn forecast(&self, days: usize, now_ms: i64) -> Vec<u32> {
+        self.due_forecast(days, now_ms)
+    }
 }
 
 /// The review state in context, with a revision the screens subscribe to.
@@ -436,6 +457,29 @@ mod tests {
         assert_eq!(back, "Fibrosis + nodules");
         assert_eq!(b.check("hb.L01.001"), Check::Settled);
         assert_eq!(b.verdicts(T0).verdicts.len(), 1);
+    }
+
+    #[test]
+    fn stats_read_the_log_marks_and_forecast() {
+        let mut b = backend();
+        answer(&mut b, "hb.L01.001", Grade::Good, T0);
+        answer(&mut b, "hb.L01.002", Grade::Again, T0 + 1000);
+        let log = StudyStore::log(&b);
+        assert_eq!(log.len(), 2);
+        assert_eq!(log[1].item_id, "hb.L01.002");
+
+        b.judge("hb.L01.001", Verdict::Edited, Edit::new(), None);
+        b.judge("hb.L01.002", Verdict::Wrong, Edit::new(), None);
+        let marks = b.marks();
+        assert_eq!(marks.get("hb.L01.001"), Some(&Status::Approved));
+        assert_eq!(marks.get("hb.L01.002"), Some(&Status::Rejected));
+        assert_eq!(marks.len(), 2);
+
+        // The ✗ item is out of the forecast; the Good one is not due today.
+        let f = StudyStore::forecast(&b, 30, T0 + 2000);
+        assert_eq!(f.len(), 30);
+        assert_eq!(f[0], 0);
+        assert_eq!(f.iter().sum::<u32>(), 1);
     }
 
     #[test]

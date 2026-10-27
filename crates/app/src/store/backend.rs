@@ -108,6 +108,12 @@ impl ReviewBackend {
         self.replay();
     }
 
+    /// Re-reads everything and tells the screens (after an import).
+    pub fn reload_and_notify(&mut self) {
+        self.reload();
+        self.changed();
+    }
+
     fn replay(&mut self) {
         self.states = self.scheduler.replay_all(&self.log);
     }
@@ -165,6 +171,35 @@ impl ReviewBackend {
             self.replay();
             self.changed();
         }
+    }
+
+    /// Items falling due on each of the next `days` study days (index 0 is
+    /// today, overdue included). Items marked ✗ are left out.
+    #[allow(dead_code)] // reminders and recap (chunk 20)
+    pub fn due_forecast(&self, days: usize, now_ms: i64) -> Vec<u32> {
+        self.scheduler.forecast(self.states.values().filter(|s| !self.hidden(&s.item_id)), now_ms, days)
+    }
+
+    /// Answers logged today (every screen, evidence included).
+    #[allow(dead_code)] // reminders and recap (chunk 20)
+    pub fn answers_today(&self, now_ms: i64) -> usize {
+        let today = self.scheduler.day.day(now_ms);
+        self.log.iter().filter(|l| self.scheduler.day.day(l.event.at_ms) == today).count()
+    }
+
+    /// New items started on each of the last `days` study days, oldest
+    /// first (the last entry is today).
+    #[allow(dead_code)] // reminders and recap (chunk 20)
+    pub fn learned_per_day(&self, days: usize, now_ms: i64) -> Vec<u32> {
+        let today = self.scheduler.day.day(now_ms);
+        let mut out = vec![0; days];
+        for first in self.states.values().filter_map(|s| s.first_review_ms) {
+            let ago = today - self.scheduler.day.day(first);
+            if (0..days as i64).contains(&ago) {
+                out[days - 1 - ago as usize] += 1;
+            }
+        }
+        out
     }
 
     pub fn reviews_logged(&self) -> usize {
@@ -401,6 +436,18 @@ mod tests {
         assert_eq!(back, "Fibrosis + nodules");
         assert_eq!(b.check("hb.L01.001"), Check::Settled);
         assert_eq!(b.verdicts(T0).verdicts.len(), 1);
+    }
+
+    #[test]
+    fn counts_for_reminders_and_recap() {
+        let mut b = backend();
+        let day = 86_400_000;
+        answer(&mut b, "hb.L01.001", Grade::Good, T0 - day);
+        answer(&mut b, "hb.L01.002", Grade::Good, T0);
+        answer(&mut b, "hb.L01.002", Grade::Good, T0 + 1000);
+        assert_eq!(b.answers_today(T0 + 2000), 2);
+        assert_eq!(b.learned_per_day(3, T0 + 2000), vec![0, 1, 1]);
+        assert_eq!(b.due_forecast(30, T0).iter().sum::<u32>(), 2);
     }
 
     #[test]

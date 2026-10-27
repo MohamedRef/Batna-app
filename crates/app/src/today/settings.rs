@@ -26,6 +26,7 @@ pub fn Settings() -> Element {
 
     rsx! {
         style { {CSS} }
+        style { {crate::verify::CSS} }
         section { class: "card",
             h1 { {tx::TITLE} }
         }
@@ -75,6 +76,8 @@ pub fn Settings() -> Element {
             }
         }
         ExportVerdicts {}
+        crate::data_export::ExportCard {}
+        crate::import::ImportCard {}
         section { class: "card",
             h2 { {tx::DATA} }
             p { class: "muted small",

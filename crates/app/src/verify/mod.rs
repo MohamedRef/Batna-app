@@ -13,7 +13,7 @@ pub use export::ExportVerdicts;
 use crate::i18n::verify as tx;
 use crate::store::use_review;
 
-const CSS: &str = include_str!("verify.css");
+pub(crate) const CSS: &str = include_str!("verify.css");
 
 // The study player's shared grade row (chunk 2, `study::grade::GradeRow`)
 // renders this; until that lands nothing in this crate does.

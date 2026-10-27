@@ -7,6 +7,8 @@
 // adapted from kabar-app main: crates/app/src/store.rs
 
 mod backend;
+pub mod export;
+pub mod import;
 mod paths;
 
 use std::collections::BTreeMap;
@@ -17,6 +19,8 @@ use batna_core::review::verify::Judgement;
 use batna_core::review::{Grade, Hlc, HlcClock, LoggedReview, Origin, ReviewEvent};
 use batna_core::srs::ReviewSettings;
 use rusqlite::{Connection, OptionalExtension, params};
+use serde::Serialize;
+use serde::de::DeserializeOwned;
 
 pub use backend::{LectureProgress, use_provide_review, use_review};
 
@@ -261,24 +265,53 @@ impl Store {
         self.put_lww("item_status", "item_id", item_id, Some(status), &value, deleted, &hlc)
     }
 
-    pub fn review_settings(&self) -> ReviewSettings {
+    /// A synced setting (last writer wins across devices), by key.
+    pub fn setting<T: DeserializeOwned>(&self, key: &str) -> Option<T> {
         let conn = self.conn.lock().unwrap();
-        conn.query_row(
-            "SELECT value FROM settings WHERE key = ?1 AND deleted = 0",
-            [REVIEW_SETTINGS_KEY],
-            |r| r.get::<_, String>(0),
-        )
+        conn.query_row("SELECT value FROM settings WHERE key = ?1 AND deleted = 0", [key], |r| {
+            r.get::<_, String>(0)
+        })
         .optional()
         .ok()
         .flatten()
         .and_then(|v| serde_json::from_str(&v).ok())
-        .unwrap_or_default()
+    }
+
+    pub fn put_setting<T: Serialize>(&self, key: &str, value: &T) -> Result<()> {
+        let hlc = self.tick(now_ms());
+        self.put_lww("settings", "key", key, None, &serde_json::to_string(value)?, false, &hlc)
+    }
+
+    /// A setting for this device only (never synced, never imported), kept
+    /// in `meta` under `local.<key>`.
+    #[allow(dead_code)] // reminders and recap (chunk 20)
+    pub fn local_setting<T: DeserializeOwned>(&self, key: &str) -> Option<T> {
+        let conn = self.conn.lock().unwrap();
+        conn.query_row("SELECT value FROM meta WHERE key = ?1", [format!("local.{key}")], |r| {
+            r.get::<_, String>(0)
+        })
+        .optional()
+        .ok()
+        .flatten()
+        .and_then(|v| serde_json::from_str(&v).ok())
+    }
+
+    #[allow(dead_code)] // reminders and recap (chunk 20)
+    pub fn put_local_setting<T: Serialize>(&self, key: &str, value: &T) -> Result<()> {
+        self.conn.lock().unwrap().execute(
+            "INSERT INTO meta (key, value) VALUES (?1, ?2)
+             ON CONFLICT (key) DO UPDATE SET value = excluded.value",
+            params![format!("local.{key}"), serde_json::to_string(value)?],
+        )?;
+        Ok(())
+    }
+
+    pub fn review_settings(&self) -> ReviewSettings {
+        self.setting(REVIEW_SETTINGS_KEY).unwrap_or_default()
     }
 
     pub fn put_review_settings(&self, settings: &ReviewSettings) -> Result<()> {
-        let hlc = self.tick(now_ms());
-        let value = serde_json::to_string(settings)?;
-        self.put_lww("settings", "key", REVIEW_SETTINGS_KEY, None, &value, false, &hlc)
+        self.put_setting(REVIEW_SETTINGS_KEY, settings)
     }
 
     /// Last-writer-wins upsert: the row changes only when `hlc` is newer
@@ -427,6 +460,18 @@ mod tests {
         // Undo leaves a tombstone: unverified again.
         s.set_judgement("hb.L01.001", None).unwrap();
         assert!(s.judgements().unwrap().is_empty());
+    }
+
+    #[test]
+    fn generic_and_device_only_settings() {
+        let s = Store::open_in_memory().unwrap();
+        assert_eq!(s.setting::<u32>("sound"), None);
+        s.put_setting("sound", &2u32).unwrap();
+        s.put_setting("sound", &3u32).unwrap();
+        assert_eq!(s.setting::<u32>("sound"), Some(3));
+        s.put_local_setting("rings", &true).unwrap();
+        assert_eq!(s.local_setting::<bool>("rings"), Some(true));
+        assert_eq!(s.setting::<bool>("rings"), None);
     }
 
     #[test]

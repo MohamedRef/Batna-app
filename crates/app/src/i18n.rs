@@ -170,3 +170,44 @@ pub mod verify {
     pub const EXPORT_SHOW: &str = "اعرض النص (تقدر تنسخه)";
     pub const EXPORT_FAILED: &str = "ما عرفتش أحفظ الملف:";
 }
+
+pub mod data {
+    pub const EXPORT_TITLE: &str = "نسخة احتياطية من كل حاجة";
+    pub const EXPORT_BODY: &str =
+        "ملف واحد فيه مراجعاتك وعلاماتك على المحتوى وإعداداتك. تقدر ترجّعه على أي جهاز من «استرجع نسخة».";
+    pub const EXPORT_BUTTON: &str = "احفظ نسخة";
+    pub const EXPORT_SAVED_1: &str = "اتحفظت";
+    pub const EXPORT_SAVED_2: &str = "حاجة في:";
+    pub const EXPORT_ANDROID_HINT: &str =
+        "تلاقيه من تطبيق الملفات أو من الكمبيوتر بالكابل، في Android/data/app.batna/files.";
+    pub const EXPORT_FAILED: &str = "ما عرفتش أحفظ النسخة:";
+    pub const IMPORT_TITLE: &str = "استرجع نسخة";
+    pub const IMPORT_BODY: &str =
+        "بيدمج النسخة مع اللي على الجهاز ده. مفيش حاجة بتتمسح، واللي اتعدّل بعدين هو اللي بيكسب.";
+    pub const IMPORT_FOUND: &str = "نسخ لقيتها على الجهاز:";
+    pub const IMPORT_PICK: &str = "أو اختار ملف";
+    pub const IMPORT_PICK_FIRST: &str = "اختار ملف النسخة";
+    pub const IMPORT_PASTE: &str = "أو الزق النص";
+    pub const IMPORT_PASTED: &str = "نص ملزوق";
+    pub const IMPORT_READ: &str = "اقرا النص";
+    pub const IMPORT_FILE: &str = "الملف:";
+    pub const IMPORT_FROM: &str = "من جهاز";
+    pub const IMPORT_AT: &str = "اتعمل";
+    pub const IMPORT_NOTHING: &str = "كل اللي في النسخة دي موجود هنا بالفعل.";
+    pub const IMPORT_SAFE: &str = "الجديد هيتضاف، والأحدث هيحل محل القديم. مفيش حاجة هتتمسح.";
+    pub const IMPORT_APPLY_1: &str = "ادمج";
+    pub const IMPORT_APPLY_2: &str = "تغيير";
+    pub const IMPORT_CANCEL: &str = "إلغاء";
+    pub const IMPORT_BACK: &str = "رجوع";
+    pub const IMPORT_AGAIN: &str = "استرجع نسخة تانية";
+    pub const IMPORT_DONE_1: &str = "تمام، اتدمج";
+    pub const IMPORT_DONE_2: &str = "تغيير. الجدول اتحدّث.";
+    pub const IMPORT_FAILED: &str = "ما عرفتش أقرا النسخة دي:";
+    pub const COL_WHAT: &str = "إيه";
+    pub const COL_IN_FILE: &str = "في الملف";
+    pub const COL_NEW: &str = "جديد";
+    pub const COL_NEWER: &str = "أحدث";
+    pub const T_REVIEWS: &str = "المراجعات";
+    pub const T_CHECKS: &str = "علاماتك على المحتوى";
+    pub const T_SETTINGS: &str = "الإعدادات";
+}

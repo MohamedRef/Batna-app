@@ -100,6 +100,10 @@ fn Setup() -> Element {
         section { class: "card oral-setup",
             h1 { {tx::TITLE} }
             p { class: "muted", {tx::INTRO} }
+            if available > 0 {
+                p { class: "muted small", "{available} {tx::AVAILABLE}" }
+                button { class: "oral-start", onclick: move |_| start(), {tx::START} }
+            }
         }
         if lectures.is_empty() {
             p { class: "note", {tx::EMPTY} }
@@ -185,8 +189,6 @@ fn Setup() -> Element {
                     span { {tx::AUTO} }
                 }
                 p { class: "muted small", {tx::AUTO_HINT} }
-                p { class: "muted", "{available} {tx::AVAILABLE}" }
-                button { class: "oral-start", disabled: available == 0, onclick: move |_| start(), {tx::START} }
             }
         }
     }
@@ -206,11 +208,19 @@ fn Runner() -> Element {
     // Bumped by every new step, so a stale timer or voice stops on its own.
     let mut run = use_signal(|| 0u64);
     let mut asked_at = use_signal(Instant::now);
+    // Keys work after a click too: a rating button vanishes with its
+    // question, so focus goes back to the session for each step.
+    let mut root = use_signal(|| None::<std::rc::Rc<MountedData>>);
 
     let mut drive = move |step: Step| {
         let id = *run.peek() + 1;
         run.set(id);
         tts::stop();
+        if let Some(el) = root.peek().clone() {
+            spawn(async move {
+                let _ = el.set_focus(true).await;
+            });
+        }
         let Some(entry) = SESSION.peek().as_ref().and_then(|s| s.current.clone()) else { return };
         let Settings { think, voice, rate, auto_continue, .. } = SETTINGS.peek().clone();
         let rate = tts::RATES[rate.min(tts::RATES.len() - 1)];
@@ -259,11 +269,11 @@ fn Runner() -> Element {
     let Some(s) = session.as_ref() else { return rsx! {} };
     let Some(entry) = s.current.clone() else { return rsx! {} };
     let left = s.left();
-    let total = s.total;
     drop(session);
     let phase_now = *phase.read();
     let revealed = phase_now == Phase::Answer;
     let p = &entry.prompt;
+    let lecture = p.lecture.rsplit('.').next().unwrap_or(&p.lecture);
 
     let rate = move |grade: Grade| {
         rate_current(Some(grade), *asked_at.peek());
@@ -277,6 +287,7 @@ fn Runner() -> Element {
             tabindex: "0",
             onmounted: move |e| async move {
                 let _ = e.set_focus(true).await;
+                root.set(Some(e.data()));
             },
             onkeydown: move |e| match e.key() {
                 Key::Character(c) if c == " " && !revealed => drive(Step::Reveal),
@@ -285,14 +296,14 @@ fn Runner() -> Element {
                 _ => {}
             },
             header { class: "oral-top",
-                span { class: "muted small", "{tx::LEFT} " bdi { "{left}/{total}" } }
+                span { class: "muted small", "{tx::LEFT} " bdi { "{left}" } }
                 if entry.follow_up {
                     span { class: "chip accent", {tx::FOLLOW_UP} }
                 }
                 if entry.again {
                     span { class: "chip", {tx::AGAIN_BADGE} }
                 }
-                span { class: "muted small", "{tx::PAGE} " bdi { "{p.page}" } }
+                span { class: "muted small", bdi { "{lecture}" } " · {tx::PAGE} " bdi { "{p.page}" } }
                 button {
                     class: "oral-end",
                     onclick: move |_| {

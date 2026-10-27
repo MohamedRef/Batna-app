@@ -12,7 +12,7 @@ use dioxus::prelude::*;
 
 /// Answers kept in memory for this run, used until the real store exists.
 #[derive(Default)]
-struct MemoryStore {
+pub(super) struct MemoryStore {
     sink: MemorySink,
     seen: HashSet<String>,
 }

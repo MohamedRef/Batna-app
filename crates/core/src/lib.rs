@@ -4,5 +4,6 @@
 pub mod content;
 pub mod exam;
 pub mod layout;
+pub mod pack;
 pub mod review;
 pub mod validate;

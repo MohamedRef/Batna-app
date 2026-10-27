@@ -10,7 +10,7 @@
 2. Turn on USB debugging on the phone or tablet (Settings › About phone › Software information › tap Build number 7 times, then Developer options › USB debugging), and connect it with a cable.
 3. `just android` builds and installs a debug build. The app id is `app.batna`, so it sits next to Kabar without touching it.
 
-A signed release APK will come with the release-prep work. Until then, the debug build is the way to try it.
+Release builds (`just apk`, `just install-android`, `just bundle-mac`) and their one-time keys are described in [RELEASE.md](RELEASE.md). Nothing is released before Mohamed says go, so for now the debug build is the way to try Batna.
 
 ## Study in Anki now
 One file, `/mnt/project-files/medstudy/anki/batna.apkg`, holds every written lecture as a subdeck of `Batna`. Open it with AnkiDroid on the phone or tablet, or with Anki on the Mac. Importing a newer `batna.apkg` updates the cards in place and keeps your progress. `just anki` builds it into `dist/anki/`; details in [ANKI.md](ANKI.md).

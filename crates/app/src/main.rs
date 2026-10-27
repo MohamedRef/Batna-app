@@ -3,10 +3,14 @@
 //! Feature chunks (SPLIT.md §7) each own a module directory and register it
 //! with one line in `Screen` / `screen_body` below.
 
+mod calc;
+mod case;
 mod content;
 mod desk;
 mod hover;
 mod i18n;
+mod oral;
+mod platform;
 mod settings;
 mod shortcuts;
 mod today;
@@ -134,8 +138,8 @@ fn screen_body(screen: Screen) -> Element {
         Screen::Today => rsx! { today::Today {} },
         Screen::Study => rsx! { Soon { screen } },
         Screen::Bank => rsx! { Soon { screen } },
-        Screen::Cases => rsx! { Soon { screen } },
-        Screen::Oral => rsx! { Soon { screen } },
+        Screen::Cases => rsx! { case::CasesScreen {} },
+        Screen::Oral => rsx! { oral::Oral {} },
         Screen::Stats => rsx! { Soon { screen } },
         Screen::Settings => rsx! { desk::DeviceSettings {} },
     }

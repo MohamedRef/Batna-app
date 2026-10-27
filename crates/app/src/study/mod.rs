@@ -38,6 +38,10 @@ const MINUTES: [u32; 4] = [5, 10, 15, 20];
 pub struct Start {
     /// Lecture ids (`hb.L01`); `None` means every ready lecture.
     pub lectures: Option<Vec<String>>,
+    /// Exactly these item ids, in this order ("study these", a session from
+    /// mistakes). Overrides `lectures` and the time budget; ids the player
+    /// can't show or that are hidden are skipped.
+    pub items: Option<Vec<String>>,
     pub minutes: u32,
 }
 
@@ -87,6 +91,25 @@ fn plan(
     })
 }
 
+/// A session on exactly the given items, in order, skipping duplicates and
+/// anything this player can't show or the learner hid.
+fn plan_items(store: &StudyStoreHandle, ids: &[String]) -> Vec<Planned> {
+    let s = store.0.borrow();
+    let mut seen = HashSet::new();
+    ids.iter()
+        .filter(|id| seen.insert(id.as_str()))
+        .filter_map(|id| items().get(id))
+        .filter(|(_, i)| PLAYABLE.contains(&i.body.kind()) && !s.is_hidden(&i.id))
+        .map(|(l, i)| Planned {
+            item_id: i.id.clone(),
+            lecture: l.lecture.clone(),
+            topic: i.topic.as_ref().map_or_else(|| l.lecture.clone(), |t| format!("{}/{t}", l.lecture)),
+            est_secs: batna_core::session::estimate_secs(&i.body),
+            fresh: s.is_new(&i.id),
+        })
+        .collect()
+}
+
 #[derive(Clone, Copy, PartialEq)]
 enum Phase {
     Setup,
@@ -119,6 +142,14 @@ pub fn Study() -> Element {
     // Today's "start a session" button.
     use_hook(|| {
         if let Some(req) = START.write().take() {
+            if let Some(ids) = &req.items {
+                let planned = plan_items(&store, ids);
+                let empty = planned.is_empty();
+                session.set(Session::new(planned));
+                started.set(Instant::now());
+                phase.set(if empty { Phase::Summary } else { Phase::Running });
+                return;
+            }
             let picked: Vec<&Lecture> = ready_lectures()
                 .into_iter()
                 .filter(|l| req.lectures.as_ref().is_none_or(|ids| ids.contains(&l.lecture)))
@@ -414,6 +445,27 @@ fn when_label(ms: i64) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn explicit_items_keep_order_and_skip_unknown_and_duplicates() {
+        let mut ids: Vec<String> = items()
+            .values()
+            .filter(|(_, i)| PLAYABLE.contains(&i.body.kind()))
+            .map(|(_, i)| i.id.clone())
+            .collect();
+        ids.sort();
+        let ids: Vec<String> = ids.into_iter().take(2).rev().collect();
+        if ids.len() < 2 {
+            return; // no content embedded
+        }
+        let store =
+            StudyStoreHandle(std::rc::Rc::new(std::cell::RefCell::new(backend::MemoryStore::default())));
+        let asked = [ids[0].clone(), "nope.L99.001".into(), ids[1].clone(), ids[0].clone()];
+        let plan = plan_items(&store, &asked);
+        let got: Vec<&str> = plan.iter().map(|p| p.item_id.as_str()).collect();
+        assert_eq!(got, [ids[0].as_str(), ids[1].as_str()]);
+        assert!(plan.iter().all(|p| p.fresh));
+    }
 
     #[test]
     fn when_labels() {

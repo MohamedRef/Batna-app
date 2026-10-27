@@ -1,0 +1,157 @@
+/* Progress screen: stats, mistakes log and the exam planner.
+   Logical properties only (RTL). Layout by window width. */
+
+.tabs {
+  display: flex;
+  gap: var(--sp-1);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  padding: var(--sp-1);
+  align-self: stretch;
+}
+.tab {
+  flex: 1;
+  min-height: 44px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-weight: 600;
+}
+.tab[aria-selected="true"] { background: var(--accent-soft); color: var(--accent); }
+
+.summary { display: flex; flex-wrap: wrap; gap: var(--sp-4); }
+.big { display: flex; flex-direction: column; min-inline-size: 6rem; }
+.big-n { font-size: 2rem; font-weight: 700; line-height: 1.2; font-variant-numeric: tabular-nums; color: var(--accent); }
+.big-label { font-weight: 600; }
+
+button.primary, button.secondary {
+  min-height: 44px;
+  padding-inline: var(--sp-6);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  font-weight: 700;
+}
+button.primary { background: var(--accent); color: var(--surface); border: 0; }
+button.primary:disabled { opacity: 0.5; cursor: default; }
+button.secondary { background: var(--surface); border: 1px solid var(--line); }
+.session-start, .plan-actions { display: flex; align-items: center; flex-wrap: wrap; gap: var(--sp-3); }
+
+.weak-list { margin: 0; padding-inline-start: var(--sp-6); display: grid; gap: var(--sp-2); }
+.weak-list li { display: flex; flex-direction: column; }
+.weak-title { font-weight: 600; }
+
+/* ---------- lecture stats ---------- */
+.stat-lectures { display: grid; gap: var(--sp-2); }
+@media (min-width: 840px) { .stat-lectures { grid-template-columns: 1fr 1fr; align-items: start; } }
+.stat-lecture {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--sp-3);
+  min-width: 0;
+}
+.stat-lecture > summary {
+  display: flex;
+  gap: var(--sp-3);
+  align-items: flex-start;
+  cursor: pointer;
+  list-style: none;
+}
+.stat-lecture > summary::-webkit-details-marker { display: none; }
+.num {
+  flex: none;
+  inline-size: 2.25rem;
+  block-size: 2.25rem;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.num.small { inline-size: 1.75rem; block-size: 1.75rem; }
+
+.bars { display: grid; gap: 2px; margin-block-start: var(--sp-1); }
+.bar { display: grid; grid-template-columns: 5.5rem 1fr 3.5rem; align-items: center; gap: var(--sp-2); }
+.bar-track { block-size: 8px; border-radius: var(--radius-pill); background: var(--bg); border: 1px solid var(--line); overflow: hidden; }
+.bar-fill { display: block; block-size: 100%; background: var(--good); border-radius: var(--radius-pill); }
+.bar-value { text-align: end; font-variant-numeric: tabular-nums; }
+.bar[data-empty="yes"] .bar-value { color: var(--muted); }
+
+.topic-table { margin-block-start: var(--sp-3); display: grid; gap: 2px; font-size: var(--fs-sm); }
+.topic-row {
+  display: grid;
+  grid-template-columns: 1fr 4rem 4rem 4rem;
+  gap: var(--sp-2);
+  padding-block: var(--sp-1);
+  border-block-end: 1px solid var(--line);
+  font-variant-numeric: tabular-nums;
+}
+.topic-row > span:not(:first-child) { text-align: end; }
+.topic-row.head { color: var(--muted); font-weight: 600; }
+
+/* ---------- mistakes ---------- */
+.mistake-group h2 { display: flex; align-items: center; gap: var(--sp-2); }
+.mistakes { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-2); }
+.mistakes li {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--sp-3);
+  padding-block: var(--sp-2);
+  border-block-end: 1px solid var(--line);
+}
+.mistakes li:last-child { border-block-end: 0; }
+.mistake-text { min-width: 0; overflow-wrap: anywhere; }
+.chip.bad { background: var(--bad-soft); border-color: transparent; color: var(--bad); }
+
+/* ---------- planner ---------- */
+.field { display: flex; flex-direction: column; gap: var(--sp-1); border: 0; padding: 0; margin: 0; }
+.field > span, .field legend { font-weight: 600; padding: 0; }
+.field input {
+  font: inherit;
+  color: inherit;
+  min-height: 44px;
+  padding-inline: var(--sp-3);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg);
+  max-inline-size: 16rem;
+}
+.weekday-chips { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+.weekday {
+  min-height: 44px;
+  min-inline-size: 4.5rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--muted);
+  cursor: pointer;
+}
+.weekday[aria-pressed="true"] { background: var(--good-soft); border-color: transparent; color: var(--good); font-weight: 700; }
+.error { color: var(--bad); font-weight: 600; }
+
+.plan-days { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-1); }
+.plan-day {
+  display: grid;
+  grid-template-columns: 7.5rem 1fr;
+  column-gap: var(--sp-3);
+  padding-block: var(--sp-2);
+  border-block-end: 1px solid var(--line);
+}
+.plan-day .plan-detail { grid-column: 2; }
+.plan-date { font-variant-numeric: tabular-nums; color: var(--muted); }
+.plan-focus { font-weight: 600; }
+.plan-day[data-focus="Rest"] { opacity: 0.6; }
+.plan-day[data-focus="Mock"] .plan-focus, .plan-day[data-focus="WeakTopics"] .plan-focus { color: var(--accent); }
+.plan-day[data-focus="Revisit"] .plan-focus { color: var(--good); }
+.plan-all > summary { cursor: pointer; color: var(--accent); font-weight: 600; padding-block: var(--sp-2); }
+@media (min-width: 840px) {
+  .plan-day { grid-template-columns: 9rem 10rem 1fr; }
+  .plan-day .plan-detail { grid-column: auto; }
+}
+

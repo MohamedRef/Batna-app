@@ -3,5 +3,7 @@
 
 pub mod content;
 pub mod layout;
+pub mod plan;
 pub mod review;
+pub mod stats;
 pub mod validate;

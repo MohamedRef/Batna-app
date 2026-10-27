@@ -5,6 +5,8 @@
 
 mod content;
 mod i18n;
+mod plan;
+mod stats;
 mod today;
 
 use dioxus::prelude::*;
@@ -125,7 +127,7 @@ fn screen_body(screen: Screen) -> Element {
         Screen::Bank => rsx! { Soon { screen } },
         Screen::Cases => rsx! { Soon { screen } },
         Screen::Oral => rsx! { Soon { screen } },
-        Screen::Stats => rsx! { Soon { screen } },
+        Screen::Stats => rsx! { stats::Stats {} },
         Screen::Settings => rsx! { Soon { screen } },
     }
 }

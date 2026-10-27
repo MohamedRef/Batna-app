@@ -1,0 +1,220 @@
+/* Batna: the palette of the subject. Bile ochre for the accent, liver-tissue
+   green for "ready / right", on a faint green-grey paper. Logical properties
+   only, so the Arabic UI mirrors without extra rules. No image assets.
+   Layout by window width: bottom bar under 600px, side rail from 600px,
+   a wider reading column from 840px. */
+
+:root {
+  --bg: #f6f7f4;
+  --surface: #ffffff;
+  --text: #1d2420;
+  --muted: #5b665f;
+  --line: #d9ded8;
+  --accent: #9a6a12;
+  --accent-soft: #f3e7cc;
+  --good: #2f6b4f;
+  --good-soft: #e1efe7;
+  --bad: #a13a2c;
+  --bad-soft: #f6e1dc;
+
+  --font: "IBM Plex Sans Arabic", "Noto Sans Arabic", "Segoe UI", "Roboto", system-ui, sans-serif;
+  --font-latin: "Inter", "Segoe UI", "Roboto", system-ui, sans-serif;
+  --fs-sm: 0.875rem;
+  --fs-md: 1rem;
+  --fs-lg: 1.2rem;
+  --fs-xl: 1.44rem;
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-6: 1.5rem;
+  --radius: 12px;
+  --radius-pill: 999px;
+  --nav-h: 64px;
+  --rail-w: 88px;
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --dur: 180ms;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #141917;
+    --surface: #1b211e;
+    --text: #e6ebe7;
+    --muted: #9aa69f;
+    --line: #2f3833;
+    --accent: #e0b25a;
+    --accent-soft: #3a2f18;
+    --good: #7cc7a0;
+    --good-soft: #1d3329;
+    --bad: #ee8f80;
+    --bad-soft: #3d2320;
+    color-scheme: dark;
+  }
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--bg); }
+
+.app {
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: var(--fs-md);
+  line-height: 1.7;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas: "top" "content" "nav";
+}
+
+bdi { font-family: var(--font-latin); }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ---------- top bar ---------- */
+.topbar {
+  grid-area: top;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  padding-block: calc(var(--sp-2) + env(safe-area-inset-top, 0px)) var(--sp-2);
+  padding-inline: var(--sp-4);
+  border-block-end: 1px solid var(--line);
+  background: var(--surface);
+}
+.brand { display: flex; align-items: baseline; gap: var(--sp-2); min-width: 0; }
+.brand-name { font-weight: 700; font-size: var(--fs-lg); color: var(--accent); }
+.brand-tag { color: var(--muted); font-size: var(--fs-sm); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.icon-button {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: var(--radius-pill);
+  min-width: 44px;
+  min-height: 44px;
+  cursor: pointer;
+}
+.icon-button .label { display: none; }
+
+/* ---------- navigation: bottom bar (compact) ---------- */
+.nav {
+  grid-area: nav;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  border-block-start: 1px solid var(--line);
+  background: var(--surface);
+  padding-block-end: env(safe-area-inset-bottom, 0px);
+  position: sticky;
+  bottom: 0;
+}
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-height: var(--nav-h);
+  border: 0;
+  background: none;
+  cursor: pointer;
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+.nav-item .glyph { font-size: 1.25rem; line-height: 1.4; }
+.nav-item[aria-current="page"] { color: var(--accent); font-weight: 700; }
+
+/* ---------- side rail (medium and expanded) ---------- */
+@media (min-width: 600px) {
+  .app {
+    grid-template-columns: var(--rail-w) 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas: "top top" "nav content";
+  }
+  .nav {
+    grid-template-columns: none;
+    grid-auto-rows: min-content;
+    align-content: start;
+    gap: var(--sp-2);
+    padding-block: var(--sp-4);
+    border-block-start: 0;
+    border-inline-end: 1px solid var(--line);
+    position: static;
+  }
+}
+
+/* ---------- content ---------- */
+.content {
+  grid-area: content;
+  padding-block: var(--sp-4) var(--sp-6);
+  padding-inline: max(var(--sp-4), env(safe-area-inset-left, 0px));
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  min-width: 0;
+}
+@media (min-width: 840px) {
+  .content { padding-inline: var(--sp-6); max-width: 60rem; }
+}
+
+h1 { font-size: var(--fs-xl); margin: 0; line-height: 1.35; }
+h2 { font-size: var(--fs-lg); margin: 0; }
+p { margin: 0; }
+.muted { color: var(--muted); }
+.small { font-size: var(--fs-sm); }
+.note { background: var(--accent-soft); border-radius: var(--radius); padding: var(--sp-3) var(--sp-4); font-size: var(--fs-sm); }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+.soon h2 { color: var(--muted); font-weight: 500; }
+
+.chip {
+  display: inline-block;
+  padding: 0 var(--sp-3);
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-sm);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  color: var(--muted);
+  white-space: nowrap;
+}
+.chip.ready { background: var(--good-soft); border-color: transparent; color: var(--good); font-weight: 600; }
+
+/* ---------- Today: the lecture list ---------- */
+.lectures { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-2); }
+@media (min-width: 840px) { .lectures { grid-template-columns: 1fr 1fr; } }
+.lecture {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--sp-3);
+  min-width: 0;
+}
+.lecture .num {
+  flex: none;
+  inline-size: 2.25rem;
+  block-size: 2.25rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.lecture-main { display: flex; flex-direction: column; min-width: 0; flex: 1; }
+.lecture-title { font-weight: 600; overflow-wrap: anywhere; }
+.lecture[data-ready="no"] .lecture-title { color: var(--muted); }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}

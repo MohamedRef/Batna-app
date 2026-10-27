@@ -1,0 +1,24 @@
+[package]
+name = "batna-app"
+description = "Batna: the Dioxus app for the Mac, the S24 Ultra and the Tab S11."
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[[bin]]
+name = "batna"
+path = "src/main.rs"
+
+[dependencies]
+batna-core.workspace = true
+dioxus = { version = "0.7.10", features = [] }
+serde_yaml_ng.workspace = true
+
+[features]
+default = ["desktop"]
+desktop = ["dioxus/desktop"]
+mobile = ["dioxus/mobile"]
+
+[lints]
+workspace = true

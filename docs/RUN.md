@@ -1,0 +1,16 @@
+# Run Batna
+
+## Mac (desktop)
+1. Install Rust (`curl https://sh.rustup.rs -sSf | sh`) and `just` (`brew install just`).
+2. In the repo, switch to the Batna branch: `git fetch origin batna && git switch batna`.
+3. `just run` opens the app. `BATNA_WINDOW_SIZE=412x900 just run` previews the phone layout. `BATNA_OPEN_SCREEN=study just run` opens a screen directly.
+
+## S24 Ultra and Tab S11 (Android)
+1. One-time setup: install the Dioxus CLI 0.7.10 (`cargo install dioxus-cli --version 0.7.10 --locked`), Java 17, and Android Studio's SDK plus NDK r27c. Then run `rustup target add aarch64-linux-android`.
+2. Turn on USB debugging on the phone or tablet (Settings › About phone › Software information › tap Build number 7 times, then Developer options › USB debugging), and connect it with a cable.
+3. `just android` builds and installs a debug build. The app id is `app.batna`, so it sits next to Kabar without touching it.
+
+A signed release APK will come with the release-prep work. Until then, the debug build is the way to try it.
+
+## Study in Anki now
+Each lecture's deck is in `/mnt/project-files/medstudy/anki/` (`batna-hb-L01.apkg` and so on). Open it with AnkiDroid on the phone or tablet, or with Anki on the Mac. Re-importing a newer deck updates the cards and keeps your progress.

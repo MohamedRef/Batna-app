@@ -33,6 +33,8 @@ pub mod study {
         "اختار المحاضرات والوقت. هنبدأ بالمراجعات اللي عليها الدور، وبعدها الجديد موضوع موضوع.";
     pub const EMPTY_LIBRARY: &str = "لسه مفيش محاضرة جاهزة للمذاكرة هنا. أول ما محاضرة تتكتب هتلاقيها في القايمة، ولحد ده ما يحصل تقدر تذاكر من Anki.";
     pub const LECTURES: &str = "المحاضرات";
+    pub const PICK_ALL: &str = "اختار الكل";
+    pub const CLEAR_ALL: &str = "امسح الاختيار";
     pub const TOPICS: &str = "المواضيع";
     pub const TOPICS_HINT: &str = "سيبها فاضية عشان تذاكر المحاضرة كلها.";
     pub const TIME: &str = "الوقت";

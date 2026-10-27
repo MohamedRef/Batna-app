@@ -256,13 +256,52 @@ fn Setup(
         if c.len() == 1 { c.iter().next().and_then(|id| Library::get().lectures.get(id)) } else { None }
     };
     let reviews = preview_count - preview_new;
+    let all_ids: Vec<String> = ready.iter().map(|(id, _)| id.clone()).collect();
+    let all_chosen = chosen.read().len() == all_ids.len();
     rsx! {
         section { class: "card st-setup",
             h1 { {tx::TITLE} }
             p { class: "muted", {tx::SETUP_INTRO} }
 
-            h2 { {tx::LECTURES} }
-            div { class: "st-chips",
+            h2 { {tx::TIME} }
+            div { class: "st-segmented", role: "radiogroup", aria_label: tx::TIME,
+                for m in MINUTES {
+                    button {
+                        key: "{m}",
+                        role: "radio",
+                        "aria-checked": if minutes() == m { "true" } else { "false" },
+                        onclick: move |_| minutes.set(m),
+                        "{m} {tx::MINUTES}"
+                    }
+                }
+            }
+
+            if preview_count == 0 {
+                p { class: "note", {tx::NOTHING_NOW} }
+            } else {
+                p { class: "st-preview",
+                    "{preview_count} {tx::ITEMS} · {reviews} {tx::REVIEWS} · {preview_new} {tx::NEW} · {tx::ABOUT} {preview_mins} {tx::MINUTES}"
+                }
+                button { class: "st-primary st-start", onclick: move |_| on_start.call(()), {tx::START} }
+            }
+
+            div { class: "st-section-head",
+                h2 { {tx::LECTURES} }
+                button {
+                    class: "st-link",
+                    onclick: move |_| {
+                        let mut c = chosen.write();
+                        if c.len() == all_ids.len() {
+                            c.clear();
+                        } else {
+                            *c = all_ids.iter().cloned().collect();
+                        }
+                        topics.write().clear();
+                    },
+                    {if all_chosen { tx::CLEAR_ALL } else { tx::PICK_ALL }}
+                }
+            }
+            div { class: "st-chips st-lectures",
                 for (id , title) in ready {
                     button {
                         key: "{id}",
@@ -313,27 +352,6 @@ fn Setup(
                 }
             }
 
-            h2 { {tx::TIME} }
-            div { class: "st-segmented", role: "radiogroup", aria_label: tx::TIME,
-                for m in MINUTES {
-                    button {
-                        key: "{m}",
-                        role: "radio",
-                        "aria-checked": if minutes() == m { "true" } else { "false" },
-                        onclick: move |_| minutes.set(m),
-                        "{m} {tx::MINUTES}"
-                    }
-                }
-            }
-
-            if preview_count == 0 {
-                p { class: "note", {tx::NOTHING_NOW} }
-            } else {
-                p { class: "st-preview",
-                    "{preview_count} {tx::ITEMS} · {reviews} {tx::REVIEWS} · {preview_new} {tx::NEW} · {tx::ABOUT} {preview_mins} {tx::MINUTES}"
-                }
-                button { class: "st-primary st-start", onclick: move |_| on_start.call(()), {tx::START} }
-            }
         }
     }
 }

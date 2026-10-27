@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 # Fails loudly if an APK lacks Batna's Kotlin glue from android/, i.e. if dx
-# did not pick up the `#[manganis::ffi]` module (crates/app/src/kotlin.rs).
+# did not pick up the `#[manganis::ffi]` module (crates/app/src/platform/background.rs).
 # Adapted from kabar-app main: scripts/android-check-apk.sh.
 #
 # Usage: scripts/android-check-apk.sh path/to/batna.apk
 # When a chunk adds a Kotlin class that Rust calls by name, add it to CLASSES.
 set -euo pipefail
 APK="${1:-}"
-CLASSES=(app/batna/Haptics)
+CLASSES=(app/batna/Haptics app/batna/OralService app/batna/OralBridge)
 
 # Failures become annotations on GitHub, where job logs are hard to reach.
 fail() {

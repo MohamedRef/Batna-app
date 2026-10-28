@@ -232,6 +232,13 @@ pub mod bank {
     pub const SENT_TO_REVIEW: &str = "الأسئلة اللي غلطت فيها هترجعلك في المراجعة قريب.";
     pub const REPORT: &str = "بلّغ عن مشكلة في السؤال ده";
     pub const CLOSE: &str = "اقفل";
+    pub const LEAVE_TIMED_HINT: &str = "الامتحان هيستناك، والوقت شغّال";
+    pub const PAUSED_TITLE: &str = "عندك امتحان لسه مفتوح";
+    pub const PAUSED_BODY: &str = "جاوبت";
+    pub const PAUSED_LEFT: &str = "والوقت اللي فاضل حوالي";
+    pub const PAUSED_OVER: &str = "وقته خلص، فهيتسلّم زي ما هو.";
+    pub const RESUME: &str = "كمّل";
+    pub const SUBMIT_NOW: &str = "سلّمه دلوقتي";
 }
 
 pub mod stats {
@@ -882,6 +889,9 @@ pub mod onboard {
     pub const MIN: &str = "دقيقة";
     pub const STUDIED_TITLE: &str = "ذاكرت أنهي محاضرات قبل كده؟";
     pub const STUDIED_BODY: &str = "علّم اللي قريته قبل كده. لو مفيش، كمّل عادي.";
+    pub const ALL: &str = "كلهم";
+    pub const NONE: &str = "ولا واحدة";
+    pub const UP_TO_HERE: &str = "لحد هنا";
     pub const REMIND_TITLE: &str = "أفكّرك إمتى؟";
     pub const REMIND_BODY: &str = "إشعار هادي فيه عدد المراجعات المستنياك. بيرن على الموبايل بس.";
     pub const ADD_TIME: &str = "زوّد معاد";

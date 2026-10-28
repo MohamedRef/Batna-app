@@ -53,10 +53,18 @@ pub fn Chrome() -> Element {
 /// explanation, `why` lines, guideline update and book page). Narrower, the
 /// secondary pane follows the primary one. With no `secondary` yet (before
 /// the answer), wide windows keep the place with a quiet hint.
+///
+/// `wide_side` gives the secondary pane the wide column, for long answers.
+/// `footer` (the grade row) sits under both panes at full width.
 #[component]
-pub fn Panes(primary: Element, secondary: Option<Element>) -> Element {
+pub fn Panes(
+    primary: Element,
+    secondary: Option<Element>,
+    #[props(default)] wide_side: bool,
+    footer: Option<Element>,
+) -> Element {
     rsx! {
-        div { class: "desk-split",
+        div { class: "desk-split", "data-wide": if wide_side { "side" } else { "main" },
             div { class: "desk-main", {primary} }
             match secondary {
                 Some(side) => rsx! {
@@ -68,6 +76,9 @@ pub fn Panes(primary: Element, secondary: Option<Element>) -> Element {
                     }
                 },
             }
+        }
+        if let Some(f) = footer {
+            div { class: "desk-footer", {f} }
         }
     }
 }

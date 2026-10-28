@@ -118,103 +118,111 @@ fn Setup() -> Element {
     let available = all.iter().filter(|p| settings.lecture.as_ref().is_none_or(|l| *l == p.lecture)).count();
 
     rsx! {
-        section { class: "card oral-setup",
-            h1 { {tx::TITLE} }
-            p { class: "muted", {tx::INTRO} }
-            if available > 0 {
-                p { class: "muted small", "{tx::AVAILABLE} " {count(available, &QUESTION)} }
-                button {
-                    class: "oral-start",
-                    "aria-keyshortcuts": "Enter",
-                    onclick: move |_| start(&store.read()),
-                    {tx::START}
+        // Tablet landscape and the Mac: what oral mode is and Start on one
+        // side, its settings on the other.
+        div { class: "tab-cols oral-cols",
+            div { class: "tab-main tab-sticky",
+                section { class: "card oral-setup",
+                    h1 { {tx::TITLE} }
+                    p { class: "muted", {tx::INTRO} }
+                    if available > 0 {
+                        p { class: "muted small", "{tx::AVAILABLE} " {count(available, &QUESTION)} }
+                        button {
+                            class: "oral-start",
+                            "aria-keyshortcuts": "Enter",
+                            onclick: move |_| start(&store.read()),
+                            {tx::START}
+                        }
+                    }
                 }
             }
-        }
-        if lectures.is_empty() {
-            p { class: "note", {tx::EMPTY} }
-        } else {
-            section { class: "card oral-setup",
-                label { class: "oral-field",
-                    span { {tx::LECTURE} }
-                    select {
-                        onchange: move |e| {
-                            let v = e.value();
-                            SETTINGS.write().lecture = (!v.is_empty()).then_some(v);
-                        },
-                        option { value: "", selected: settings.lecture.is_none(), {tx::ALL_LECTURES} }
-                        for (id, title) in lectures {
-                            option {
-                                key: "{id}",
-                                value: "{id}",
-                                selected: settings.lecture.as_deref() == Some(id.as_str()),
-                                "{title}"
-                            }
-                        }
-                    }
-                }
-                div { class: "oral-field",
-                    span { {tx::SIZE} }
-                    div { class: "segmented", role: "radiogroup",
-                        for size in SIZES {
-                            button {
-                                key: "{size}",
-                                role: "radio",
-                                "aria-checked": "{settings.size == size}",
-                                onclick: move |_| SETTINGS.write().size = size,
-                                "{size}"
-                            }
-                        }
-                    }
-                }
-                label { class: "oral-field",
-                    span { "{tx::THINK}: " {count(settings.think, &SECOND)} }
-                    input {
-                        r#type: "range",
-                        min: "{THINK_MIN}",
-                        max: "{THINK_MAX}",
-                        step: "5",
-                        value: "{settings.think}",
-                        oninput: move |e| {
-                            if let Ok(v) = e.value().parse::<u32>() {
-                                SETTINGS.write().think = v.clamp(THINK_MIN, THINK_MAX);
-                            }
-                        },
-                    }
-                }
-                label { class: "oral-check",
-                    input {
-                        r#type: "checkbox",
-                        checked: settings.voice,
-                        onchange: move |e| SETTINGS.write().voice = e.checked(),
-                    }
-                    span { {tx::VOICE} }
-                }
-                if settings.voice {
-                    div { class: "oral-field",
-                        span { {tx::RATE} }
-                        div { class: "segmented", role: "radiogroup",
-                            for (i, name) in tx::RATES.iter().enumerate() {
-                                button {
-                                    key: "{i}",
-                                    role: "radio",
-                                    "aria-checked": "{settings.rate == i}",
-                                    onclick: move |_| SETTINGS.write().rate = i,
-                                    {*name}
+            div { class: "tab-aside",
+                if lectures.is_empty() {
+                    p { class: "note", {tx::EMPTY} }
+                } else {
+                    section { class: "card oral-setup",
+                        label { class: "oral-field",
+                            span { {tx::LECTURE} }
+                            select {
+                                onchange: move |e| {
+                                    let v = e.value();
+                                    SETTINGS.write().lecture = (!v.is_empty()).then_some(v);
+                                },
+                                option { value: "", selected: settings.lecture.is_none(), {tx::ALL_LECTURES} }
+                                for (id, title) in lectures {
+                                    option {
+                                        key: "{id}",
+                                        value: "{id}",
+                                        selected: settings.lecture.as_deref() == Some(id.as_str()),
+                                        "{title}"
+                                    }
                                 }
                             }
                         }
+                        div { class: "oral-field",
+                            span { {tx::SIZE} }
+                            div { class: "segmented", role: "radiogroup",
+                                for size in SIZES {
+                                    button {
+                                        key: "{size}",
+                                        role: "radio",
+                                        "aria-checked": "{settings.size == size}",
+                                        onclick: move |_| SETTINGS.write().size = size,
+                                        "{size}"
+                                    }
+                                }
+                            }
+                        }
+                        label { class: "oral-field",
+                            span { "{tx::THINK}: " {count(settings.think, &SECOND)} }
+                            input {
+                                r#type: "range",
+                                min: "{THINK_MIN}",
+                                max: "{THINK_MAX}",
+                                step: "5",
+                                value: "{settings.think}",
+                                oninput: move |e| {
+                                    if let Ok(v) = e.value().parse::<u32>() {
+                                        SETTINGS.write().think = v.clamp(THINK_MIN, THINK_MAX);
+                                    }
+                                },
+                            }
+                        }
+                        label { class: "oral-check",
+                            input {
+                                r#type: "checkbox",
+                                checked: settings.voice,
+                                onchange: move |e| SETTINGS.write().voice = e.checked(),
+                            }
+                            span { {tx::VOICE} }
+                        }
+                        if settings.voice {
+                            div { class: "oral-field",
+                                span { {tx::RATE} }
+                                div { class: "segmented", role: "radiogroup",
+                                    for (i, name) in tx::RATES.iter().enumerate() {
+                                        button {
+                                            key: "{i}",
+                                            role: "radio",
+                                            "aria-checked": "{settings.rate == i}",
+                                            onclick: move |_| SETTINGS.write().rate = i,
+                                            {*name}
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        label { class: "oral-check",
+                            input {
+                                r#type: "checkbox",
+                                checked: settings.auto_continue,
+                                onchange: move |e| SETTINGS.write().auto_continue = e.checked(),
+                            }
+                            span { {tx::AUTO} }
+                        }
+                        p { class: "muted small", {tx::AUTO_HINT} }
                     }
                 }
-                label { class: "oral-check",
-                    input {
-                        r#type: "checkbox",
-                        checked: settings.auto_continue,
-                        onchange: move |e| SETTINGS.write().auto_continue = e.checked(),
-                    }
-                    span { {tx::AUTO} }
-                }
-                p { class: "muted small", {tx::AUTO_HINT} }
             }
         }
     }

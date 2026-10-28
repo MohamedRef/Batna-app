@@ -105,9 +105,13 @@ object UpdateInstaller {
     }
 
     private fun ensureChannel(nm: NotificationManager) {
-        if (nm.getNotificationChannel(CHANNEL) == null) {
-            nm.createNotificationChannel(NotificationChannel(CHANNEL, "Batna updates", NotificationManager.IMPORTANCE_LOW))
-        }
+        // Creating it again only renames an existing channel; the user's
+        // settings stay.
+        nm.createNotificationChannel(
+            NotificationChannel(CHANNEL, "تحديثات باطنة", NotificationManager.IMPORTANCE_LOW).apply {
+                description = "تحديث جاهز يتثبّت، وباطنة اتحدّث"
+            },
+        )
     }
 
     /** Opens Batna's "Install unknown apps" switch in Android Settings. */
@@ -243,6 +247,8 @@ object UpdateInstaller {
         prefs.edit().clear().apply()
         val nm = context.getSystemService(NotificationManager::class.java) ?: return
         nm.cancel(CONFIRM_NOTIFICATION_ID)
+        // "A new Batna is out" is done with once it's in.
+        UpdateNotice.clear(context)
         if (!nm.areNotificationsEnabled()) return
         ensureChannel(nm)
         val launch = context.packageManager.getLaunchIntentForPackage(context.packageName) ?: return
@@ -267,7 +273,10 @@ object UpdateInstaller {
 class UpdateInstallReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         when (intent.action) {
-            Intent.ACTION_MY_PACKAGE_REPLACED -> UpdateInstaller.notifyUpdated(context)
+            Intent.ACTION_MY_PACKAGE_REPLACED -> {
+                UpdateInstaller.notifyUpdated(context)
+                UpdateNotice.rescheduleIfOn(context)
+            }
             UpdateInstaller.ACTION_STATUS -> status(context, intent)
         }
     }

@@ -143,18 +143,23 @@ fn Progress(data: std::rc::Rc<StudyData>) -> Element {
     let weak = stats::weakest_topics(&rows, 3);
     let weak_ids = stats::topics_session(&data.lectures, &weak, &data.events, &data.marks);
     rsx! {
-        section { class: "card",
-            h1 { {tx::SUMMARY} }
-            div { class: "summary",
-                Big { n: all.seen, of: all.total, label: tx::SEEN }
-                Big { n: all.seen_twice, of: all.total, label: tx::SEEN_TWICE }
-                Big { n: all.approved, of: all.total, label: tx::APPROVED }
+        // Tablet landscape and the Mac: the totals and the weakest topics side by side.
+        div { class: "tab-cols", "data-align": "stretch",
+            div { class: "tab-main",
+                section { class: "card",
+                    h1 { {tx::SUMMARY} }
+                    div { class: "summary",
+                        Big { n: all.seen, of: all.total, label: tx::SEEN }
+                        Big { n: all.seen_twice, of: all.total, label: tx::SEEN_TWICE }
+                        Big { n: all.approved, of: all.total, label: tx::APPROVED }
+                    }
+                    if all.seen == 0 {
+                        p { class: "muted", {tx::NOTHING_YET} }
+                    }
+                }
             }
-            if all.seen == 0 {
-                p { class: "muted", {tx::NOTHING_YET} }
-            }
+            div { class: "tab-aside", WeakCard { weak, ids: weak_ids } }
         }
-        WeakCard { weak, ids: weak_ids }
         section { class: "stat-lectures",
             for l in rows.iter() {
                 LectureCard { key: "{l.id}", l: l.clone() }
@@ -227,7 +232,7 @@ pub fn SessionButton(label: &'static str, ids: Vec<String>) -> Element {
     rsx! {
         div { class: "session-start",
             button {
-                class: "primary",
+                class: "btn btn-primary",
                 disabled: playable.is_empty(),
                 onclick: move |_| {
                     *crate::study::START.write() =

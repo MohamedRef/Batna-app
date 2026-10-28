@@ -8,7 +8,7 @@
 .st-chips { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
 .st-chip {
   display: inline-flex; align-items: center; gap: var(--sp-2);
-  min-block-size: 44px; padding-inline: var(--sp-3);
+  min-block-size: var(--tap); padding-inline: var(--sp-3);
   border: 1px solid var(--line); border-radius: var(--radius-pill);
   background: var(--surface); cursor: pointer; text-align: start;
 }
@@ -18,22 +18,25 @@
 .st-lectures .st-chip { border-radius: var(--radius); padding-block: var(--sp-1); line-height: 1.4; }
 .st-chip-num { color: var(--accent); font-weight: 700; font-variant-numeric: tabular-nums; }
 .st-segmented { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--line); border-radius: var(--radius-pill); overflow: hidden; }
-.st-segmented button { min-block-size: 44px; border: 0; background: var(--surface); cursor: pointer; }
+.st-segmented button { min-block-size: var(--tap); border: 0; background: var(--surface); cursor: pointer; }
 .st-segmented button + button { border-inline-start: 1px solid var(--line); }
 .st-segmented button[aria-checked="true"] { background: var(--accent); color: var(--surface); font-weight: 700; }
 .st-preview { color: var(--muted); }
 .st-start { align-self: stretch; }
 .st-setup .st-start + .st-section-head, .st-setup .note + .st-section-head { margin-block-start: var(--sp-3); }
 @media (min-width: 600px) { .st-start { align-self: flex-start; min-inline-size: 16rem; } }
-
-/* ---------- buttons ---------- */
-.st-primary, .st-secondary {
-  min-block-size: 48px; padding-inline: var(--sp-6);
-  border-radius: var(--radius-pill); cursor: pointer; font-weight: 600;
+.st-setup .tab-cols { gap: var(--sp-3); }
+.st-setup .tab-main, .st-setup .tab-aside { gap: var(--sp-2); }
+/* Tablet landscape and the Mac: setup uses the full width, the picker
+   beside the time and Start (desk.css .tab-cols). */
+@media (min-width: 840px) {
+  .st:has(> .st-setup) { max-inline-size: none; }
+  .st-setup .tab-cols { gap: var(--sp-6); }
+  .st-setup-go .st-start { align-self: stretch; }
+  .st-setup-pick { padding-inline-start: var(--sp-6); border-inline-start: 1px solid var(--line); }
 }
-.st-primary { background: var(--accent); color: var(--surface); border: 0; }
-.st-secondary { background: var(--surface); border: 1px solid var(--line); }
-.st-link { background: none; border: 0; color: var(--muted); cursor: pointer; text-decoration: underline; min-block-size: 44px; }
+
+/* ---------- buttons (the shared .btn set is in main.css) ---------- */
 .st-actions { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
 @media (max-width: 599px) { .st-actions > * { flex: 1 1 100%; } }
 
@@ -90,8 +93,8 @@
 .st-points, .st-outline { margin: 0; padding-inline-start: var(--sp-4); display: flex; flex-direction: column; gap: var(--sp-1); font-family: var(--font-latin); }
 .st-points, .st-outline { list-style: none; padding-inline-start: 0; }
 .st-outline > li { display: flex; flex-direction: column; }
-.st-point { display: flex; align-items: center; gap: var(--sp-3); min-block-size: 44px; cursor: pointer; }
-.st-point input { inline-size: 22px; block-size: 22px; accent-color: var(--good); flex: none; }
+.st-point { display: flex; align-items: center; gap: var(--sp-3); min-block-size: var(--tap); cursor: pointer; }
+.st-point input { inline-size: 22px; block-size: 22px; --check: var(--good); flex: none; }
 .st-outline ul { margin: 0 0 var(--sp-2); padding-inline-start: calc(22px + var(--sp-3) + var(--sp-4)); color: var(--muted); font-size: var(--fs-sm); }
 .st-compare { display: grid; gap: var(--sp-3); }
 .st-compare h3 { font-size: var(--fs-md); margin: 0 0 var(--sp-1); }
@@ -104,7 +107,7 @@
 .st-grade-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-2); }
 .st-grade {
   display: flex; flex-direction: column; align-items: center; justify-content: center;
-  min-block-size: 56px; border-radius: var(--radius); cursor: pointer;
+  min-block-size: var(--row); border-radius: var(--radius); cursor: pointer;
   border: 1px solid var(--line); background: var(--surface); font-weight: 600;
 }
 .st-grade[data-grade="again"] { color: var(--bad); }
@@ -112,9 +115,19 @@
 .st-grade[data-suggested="yes"] { border: 2px solid currentColor; background: var(--bg); }
 .st-grade:disabled { opacity: 0.6; cursor: default; }
 .st-grade-when { color: var(--muted); font-weight: 400; }
-@media (max-width: 599px) {
-  /* Thumb reach on the phone: keep the grades at the bottom of the screen. */
-  .st-grades { position: sticky; inset-block-end: calc(var(--nav-h) + env(safe-area-inset-bottom, 0px)); background: var(--surface); padding-block: var(--sp-2); }
+/* Tablets and the Mac: the item card fills the screen, so the grade row
+   sits at the foot of the window on every item, in the same place for the
+   thumb, the S Pen and the eye, however short the question is. */
+@media (min-width: 600px) {
+  .content[data-screen="Study"] > .st:has(> .st-item) { flex: 1 0 auto; }
+  .st > .st-item { flex: 1 0 auto; }
+  .st-item > .st-body { flex: 1 0 auto; }
+  .st-body > .desk-footer { margin-block-start: auto; }
+}
+@media (max-width: 839.98px) {
+  /* Thumb reach on the phone and the tablet in portrait: long items keep
+     the grades at the bottom of the screen. */
+  .st-grades { position: sticky; inset-block-end: 0; background: var(--surface); padding-block: var(--sp-2); }
 }
 
 /* ---------- summary ---------- */

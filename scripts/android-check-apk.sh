@@ -7,7 +7,7 @@
 # When a chunk adds a Kotlin class that Rust calls by name, add it to CLASSES.
 set -euo pipefail
 APK="${1:-}"
-CLASSES=(app/batna/Haptics app/batna/OralService app/batna/OralBridge app/batna/ReminderBridge app/batna/ReminderReceiver app/batna/UpdateInstaller app/batna/UpdateInstallReceiver app/batna/Documents app/batna/DocumentActivity)
+CLASSES=(app/batna/Haptics app/batna/OralService app/batna/OralBridge app/batna/ReminderBridge app/batna/ReminderReceiver app/batna/UpdateInstaller app/batna/UpdateInstallReceiver app/batna/Documents app/batna/DocumentActivity app/batna/ShareActivity app/batna/PendingShare app/batna/UpdateNotice app/batna/UpdateCheckJob app/batna/UpdateTapActivity)
 
 # Failures become annotations on GitHub, where job logs are hard to reach.
 fail() {
@@ -42,10 +42,24 @@ if command -v aapt2 >/dev/null; then
     grep -q "android.permission.$perm" <<<"$manifest" || fail "The merged manifest lost $perm (android/src/main/AndroidManifest.xml)."
   done
   grep -q "app.batna.ReminderReceiver" <<<"$manifest" || fail "The merged manifest lost ReminderReceiver (android/src/main/AndroidManifest.xml)."
+  grep -q "app.batna.ShareActivity" <<<"$manifest" || fail "The merged manifest lost ShareActivity (android/src/main/AndroidManifest.xml)."
   grep -q "app.batna.DocumentActivity" <<<"$manifest" || fail "The merged manifest lost DocumentActivity (android/src/main/AndroidManifest.xml)."
+  grep -q "app.batna.UpdateCheckJob" <<<"$manifest" || fail "The merged manifest lost UpdateCheckJob (android/src/main/AndroidManifest.xml)."
   echo "Merged manifest: glue permissions present"
 fi
 
 # The S24 Ultra and Tab S11 are arm64.
 unzip -Z1 "$APK" | grep -q '^lib/arm64-v8a/' || fail "The APK has no arm64-v8a library."
 echo "Native library: arm64-v8a present"
+
+# The background update check (UpdateNotice.kt) calls into Rust by its JNI
+# name: the library must export it, or the job quietly does nothing.
+if command -v readelf >/dev/null; then
+  libdir="$(mktemp -d)"
+  unzip -q -o "$APK" 'lib/arm64-v8a/*.so' -d "$libdir"
+  syms="$(for so in "$libdir"/lib/arm64-v8a/*.so; do readelf --dyn-syms -W "$so"; done)"
+  rm -rf "$libdir"
+  grep -q 'Java_app_batna_UpdateCheckJob_check' <<<"$syms" \
+    || fail "The native library doesn't export Java_app_batna_UpdateCheckJob_check: the background update check can't reach Rust."
+  echo "Native export for the background update check present"
+fi

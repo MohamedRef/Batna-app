@@ -6,7 +6,7 @@ use batna_core::exam::{self, Mode, Score};
 use dioxus::prelude::*;
 
 use super::question::QuestionView;
-use super::{PHASE, Phase, back_to_setup, lecture_title, lookup, minutes, start, topic_title};
+use super::{PHASE, Phase, back_to_setup, lookup, minutes, short_lecture_title, start, topic_title};
 use crate::content::lecture_code;
 use crate::i18n::bank as tx;
 use crate::i18n::count::{MINUTE, count};
@@ -75,7 +75,7 @@ pub fn Result() -> Element {
                 div { class: "review-detail",
                     div { class: "review-detail-head",
                         span { class: "run-count", "{tx::QUESTION} " bdi { "{i + 1}" } }
-                        button { class: "link", "aria-keyshortcuts": "Escape", onclick: move |_| open.set(None), {tx::CLOSE} }
+                        button { class: "btn-link", "aria-keyshortcuts": "Escape", onclick: move |_| open.set(None), {tx::CLOSE} }
                     }
                     QuestionView { key: "{i}", q, chosen: a.chosen, reveal: true }
                 }
@@ -109,7 +109,7 @@ pub fn Result() -> Element {
             section { class: "card",
                 h2 { {tx::BY_LECTURE} }
                 ScoreRows {
-                    rows: lectures.into_iter().map(|(l, s)| (format!("{} · {}", lecture_code(&l), lecture_title(&l)), s)).collect::<Vec<_>>(),
+                    rows: lectures.into_iter().map(|(l, s)| (format!("{} · {}", lecture_code(&l), short_lecture_title(&l)), s)).collect::<Vec<_>>(),
                 }
             }
         }
@@ -176,12 +176,12 @@ pub fn Result() -> Element {
         div { class: "start-row",
             if has_wrong {
                 button {
-                    class: "button primary",
+                    class: "btn btn-primary",
                     onclick: move |_| start(Mode::Tutor, wrong.clone()),
                     {tx::RETRY_WRONG}
                 }
             }
-            button { class: "button", onclick: move |_| back_to_setup(), {tx::BACK} }
+            button { class: "btn btn-secondary", onclick: move |_| back_to_setup(), {tx::BACK} }
         }
     }
 }

@@ -98,7 +98,7 @@ items:
 - id: hb.L10.008
   kind: table
   topic: overview
-  title: Prognosis of ALF by cause
+  title: Prognosis of ALF by cause (pp. 173, 176)
   columns:
   - Cause
   - Prognosis
@@ -171,6 +171,9 @@ items:
   tags:
   - numbers
   - high-yield
+  update:
+    text: AASLD defines ALF as illness of <26 weeks' duration; the book's cut-off is 28 weeks.
+    ref: 'AASLD position paper: management of acute liver failure, update 2011'
 - id: hb.L10.012
   kind: table
   topic: definition
@@ -380,10 +383,10 @@ items:
   - - Infections
     - HAV, HEV, HBV, CMV, HSV, VZV
     - Acute
-  - - Drugs/toxins (dose-related)
+  - - Drugs/toxins (acute ALF)
     - Acetaminophen, Amanita phalloides, phosphorus
     - Acute
-  - - Drugs (idiosyncratic)
+  - - Drugs (acute and subacute ALF)
     - Anti-TB drugs, chemotherapy, statins, NSAIDs, phenytoin, valproate, carbamazepine, ecstasy, flucloxacillin
     - Acute and subacute
   - - 'Vascular: Budd-Chiari'
@@ -432,7 +435,7 @@ items:
 - id: hb.L10.027
   kind: enumerate
   topic: etiology
-  prompt: Drugs causing acute and subacute ALF (idiosyncratic).
+  prompt: Drugs causing acute and subacute ALF.
   points:
   - Anti-tuberculous drugs
   - Chemotherapeutic drugs
@@ -740,6 +743,10 @@ items:
   tags:
   - numbers
   - high-yield
+  update:
+    text: The same page starts ICP-lowering measures at ICP >20 mmHg. EASL 2017 keeps ICP below 20–25 mmHg and CPP
+      above 50 mmHg. Learn <40 for the exam.
+    ref: EASL CPG acute (fulminant) liver failure 2017
 - id: hb.L10.058
   kind: card
   topic: care
@@ -957,7 +964,7 @@ items:
   - Glucocorticoids do not reduce mortality.
   - Intubation and ICP monitoring are usually instituted at stage 3 HE.
   src:
-    page: 178
+    page: 179
   status: unverified
 - id: hb.L10.076
   kind: card
@@ -1186,14 +1193,15 @@ items:
   - MARS
   - ELAD
   - Charcoal hemoperfusion
-  - High-volume plasma exchange in the first 3 days
+  - Plasma exchange in the first 3 days
   - Porcine hepatocyte bioartificial liver
   answer: 3
   why:
   - No overall mortality benefit.
   - Failed to show mortality benefit.
   - Early filters showed no survival benefit.
-  - 'Correct: plasma exchange in the first 3 days showed a mortality benefit in non-transplanted patients.'
+  - 'Correct: plasma exchange in the first 3 days of critical care showed a mortality benefit in non-transplanted
+    patients.'
   - Later studies failed to show mortality benefit.
   src:
     page: 183
@@ -1691,20 +1699,19 @@ items:
 - id: hb.L10.130
   kind: mcq
   topic: clinical
-  stem: In an ALF patient, which arterial ammonia level is associated with raised ICP and poor outcome?
+  stem: A 30-year-old with acetaminophen ALF has stage 3 HE and arterial ammonia 190 µmol/L. Best reading of the
+    ammonia, per the lecture?
   options:
-  - '>50 µmol/L'
-  - '>80 µmol/L'
-  - '>100 µmol/L'
-  - '>150 µmol/L'
-  - '>300 µmol/L'
-  answer: 3
+  - 'Expected in ALF: no change in care'
+  - 'Lab error: repeat in 48 hours'
+  - 'High ICP risk: intubate and monitor ICP'
+  - 'Recovery sign: step down to ward'
+  answer: 2
   why:
-  - Too low; not the lecture's threshold.
-  - Not the lecture's threshold.
-  - Not the lecture's threshold.
-  - 'Correct: >150 µmol/L.'
-  - Higher than the stated threshold.
+  - Ammonia >150 µmol/L is linked to raised ICP and poor outcome.
+  - Nothing suggests error, and waiting is unsafe.
+  - 'Correct: >150 µmol/L means raised-ICP risk; with stage 3 HE many centers intubate and place an ICP monitor.'
+  - High ammonia is not a recovery sign.
   src:
     page: 177
   status: unverified
@@ -1713,20 +1720,19 @@ items:
 - id: hb.L10.131
   kind: mcq
   topic: care
-  stem: Which serum sodium target with hypertonic saline lowers the risk of intracranial hypertension in ALF?
+  stem: A ventilated ALF patient with stage 4 HE has serum sodium 138 mmol/L. What does the lecture advise to lower
+    the risk of intracranial hypertension?
   options:
-  - 130–135 mmol/L
-  - 135–140 mmol/L
-  - 145–155 mmol/L
-  - 160–170 mmol/L
-  - '>170 mmol/L'
-  answer: 2
+  - Hypotonic fluid to Na 130–135 mmol/L
+  - Free water to keep Na 135–140 mmol/L
+  - Hypertonic saline to Na 160–170 mmol/L
+  - Hypertonic saline to Na 145–155 mmol/L
+  answer: 3
   why:
-  - Low sodium worsens brain swelling.
-  - Normal range; no specific effect.
-  - 'Correct: 145–155 mmol/L.'
+  - Hypotonic fluids can worsen ICP.
+  - Normal sodium gives no protection.
   - Above the target.
-  - Dangerous and above the target.
+  - 'Correct: hypertonic saline to 145–155 mmol/L lowers the risk of intracranial hypertension.'
   src:
     page: 179
   status: unverified
@@ -1756,40 +1762,41 @@ items:
 - id: hb.L10.133
   kind: mcq
   topic: care
-  stem: An ALF patient on vasopressors has a low random cortisol. What does the lecture say about glucocorticoids?
+  stem: A patient with ALF on vasopressors has a low random cortisol. Per the lecture, what is the effect of glucocorticoids
+    on mortality in ALF?
   options:
-  - They reduce mortality and are standard
-  - They do not reduce mortality, may lower survival at high MELD, but may reduce vasopressor need
-  - They prevent cerebral edema
-  - They are contraindicated in all ALF
-  - They treat hepatic encephalopathy
+  - They reduce mortality
+  - They do not reduce mortality
+  - They reduce mortality only in acetaminophen ALF
+  - They reduce mortality only with adrenal insufficiency
+  - They reduce mortality only at high MELD
   answer: 1
   why:
-  - They do not reduce mortality.
-  - 'Correct: as stated on pp. 179–180.'
-  - Not stated.
-  - The lecture does not forbid them; it says they are ineffective for mortality.
-  - Not stated.
+  - The lecture says they are ineffective to reduce mortality.
+  - 'Correct: despite frequent adrenal insufficiency, they do not reduce mortality (they may cut vasopressor need).'
+  - No cause-specific benefit is described.
+  - Adrenal insufficiency is common, but steroids still do not reduce mortality.
+  - At high MELD they may even lower survival.
   src:
     page: 179
   status: unverified
 - id: hb.L10.134
   kind: mcq
   topic: transplant
-  stem: Which simple score above a given value is associated with poor transplant-free survival in ALF?
+  stem: A 38-year-old with non-acetaminophen ALF has a MELD score of 35. What does this mean per the lecture?
   options:
-  - Child-Pugh >10
-  - MELD >32
-  - MELD >20
-  - Glasgow alcoholic hepatitis score >9
-  - Maddrey >32
-  answer: 1
+  - Poor transplant-free survival
+  - Good prognosis until MELD exceeds 40
+  - MELD is not used in ALF
+  - Only relevant with acetaminophen
+  - Indicates recovery is likely
+  answer: 0
   why:
-  - Not stated in the lecture.
-  - 'Correct: MELD >32.'
+  - 'Correct: MELD >32 is associated with poor transplant-free survival.'
   - The lecture's threshold is 32.
-  - For alcoholic hepatitis, not ALF.
-  - Maddrey ≥32 is for alcoholic hepatitis, not ALF.
+  - The lecture names MELD >32 as a simple marker.
+  - No cause restriction is given.
+  - A high MELD predicts the opposite.
   src:
     page: 186
   status: unverified
@@ -1825,37 +1832,41 @@ items:
   steps:
   - question: Which treatment is still indicated now?
     options:
-    - None, it is too late after 24 h
-    - IV NAC 150 mg/kg over 15 min, then 50 mg/kg over 4 h, then 100 mg/kg over 16 h
-    - Oral activated charcoal only
-    - Plasmapheresis with D-penicillamine
-    answer: 1
-    why: NAC is indicated up to 72 h after ingestion, and helps stage 1–2 HE of any cause.
+    - Oral NAC only if within 24 h of ingestion
+    - Activated charcoal only
+    - IV N-acetylcysteine
+    - No antidote after 24 h; supportive care
+    answer: 2
+    why: 'NAC is indicated up to 72 h after ingestion (IV: 150 mg/kg over 15 min, 50 mg/kg over 4 h, 100 mg/kg over
+      16 h), and helps stage 1–2 HE of any cause.'
   - question: How do you manage the glucose?
     options:
-    - Ignore it
-    - Continuous 10% dextrose aiming for 100–200 mg/dL, checked at least twice daily
-    - Insulin infusion
-    - Large volumes of hypotonic fluid
-    answer: 1
-    why: Hypoglycemia is common and a poor sign; prevent it with 5–10% dextrose.
+    - 50% dextrose boluses only when symptomatic
+    - Restrict glucose to avoid cerebral edema
+    - Insulin-dextrose infusion
+    - Continuous 10% dextrose infusion
+    answer: 3
+    why: Hypoglycemia is common and a poor sign; prevent it with 5–10% dextrose, keeping glucose 100–200 mg/dL and
+      checking at least twice daily.
   - reveal: 'Next day: confusion and drowsiness; creatinine 3.9 mg/dL; INR 7.0.'
     question: He becomes confused and sleepy (stage 2 HE). Where should he be?
     options:
-    - General ward with sedatives
-    - ICU, avoid sedatives, head CT to exclude other causes, discuss with a liver center
-    - Discharge with lactulose
-    - Psychiatric unit
-    answer: 1
-    why: Stage 2 HE goes to ICU; any HE should prompt specialist liver center discussion and transfer.
+    - ICU, no sedatives
+    - Ward with lactulose and rifaximin
+    - Ward with benzodiazepine sedation
+    - ICU with immediate intubation
+    answer: 0
+    why: Stage 2 HE goes to ICU; avoid sedatives, image the head, and discuss with a liver center. Intubation is
+      usually at stage 3.
   - question: Six hours later he is in grade 3 HE. Do King's College criteria apply?
     options:
-    - 'No'
-    - 'Yes: INR >6.5, creatinine >3.4 mg/dL and HE stage 3–4'
-    - Only if pH <7.0
-    - Only if factor V <20%
-    answer: 1
-    why: All three of INR >6.5, creatinine >300 µmol/L (>3.4 mg/dL) and HE 3–4 meet the acetaminophen criteria.
+    - 'No: pH is not below 7.3'
+    - 'No: lactate is not given'
+    - 'Yes: INR, creatinine and HE are all met'
+    - Only if factor V is <20%
+    answer: 2
+    why: All three of INR >6.5, creatinine >300 µmol/L (>3.4 mg/dL) and HE 3–4 together meet the
+      acetaminophen criteria (pH <7.3 or lactate >3 mmol/L would each be enough alone). Factor V belongs to Clichy.
   - question: He is intubated with an ICP monitor. ICP 25 mmHg, MAP 75 mmHg, kidneys failing. Which measure is NOT
       advised?
     options:
@@ -1873,8 +1884,8 @@ items:
 - id: hb.L10.137
   kind: case
   topic: etiology
-  stem: 'A 17-year-old girl has 2 weeks of jaundice and now confusion. Exam: splenomegaly, Kayser-Fleischer rings.
-    ALT 210 U/L, ALP 18 U/L, bilirubin 28 mg/dL, INR 3.5, hemoglobin 8.9 g/dL.'
+  stem: 'A 17-year-old girl has 2 weeks of jaundice and now confusion. Exam: splenomegaly. ALT 210 U/L, ALP 18 U/L,
+    bilirubin 28 mg/dL, INR 3.5, hemoglobin 8.9 g/dL.'
   steps:
   - question: Most likely cause?
     options:
@@ -1892,6 +1903,7 @@ items:
     - Only if HE is grade 4
     answer: 1
     why: Wilson disease is counted as ALF because it shares the poor prognosis and picture of acute failure.
+    reveal: Slit-lamp examination shows Kayser-Fleischer rings.
   - question: Prognosis and plan?
     options:
     - Good spontaneous recovery; observe

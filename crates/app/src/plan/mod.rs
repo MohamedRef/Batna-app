@@ -24,6 +24,17 @@ pub(crate) static SETTINGS: GlobalSignal<PlanSettings> = Signal::global(|| {
 
 const KEY: &str = "plan";
 
+/// Re-reads the plan after a sync or restore (see `crate::synced`).
+pub(crate) fn reload() {
+    if std::env::var_os("BATNA_PLAN_EXAM").is_some() {
+        return;
+    }
+    let fresh: PlanSettings = crate::store::shared().setting(KEY).unwrap_or_default();
+    if *SETTINGS.peek() != fresh {
+        *SETTINGS.write() = fresh;
+    }
+}
+
 /// Best effort: if the store can't write, the plan still holds for this run.
 pub(crate) fn save(settings: &PlanSettings) {
     if std::env::var_os("BATNA_PLAN_EXAM").is_none() {
@@ -55,7 +66,7 @@ pub fn Planner(data: Rc<StudyData>) -> Element {
         ProgressCard { p: p.clone() }
         WeekCard { p: p.clone() }
         div { class: "plan-actions",
-            button { class: "secondary", onclick: move |_| editing.set(true), {tx::EDIT} }
+            button { class: "btn btn-secondary", onclick: move |_| editing.set(true), {tx::EDIT} }
         }
     }
 }
@@ -137,9 +148,9 @@ fn Setup(today: Day, settings: PlanSettings, on_done: EventHandler<()>) -> Eleme
                 p { class: "error", role: "alert", {msg} }
             }
             div { class: "plan-actions",
-                button { class: "primary", onclick: save, {tx::SAVE} }
+                button { class: "btn btn-primary", onclick: save, {tx::SAVE} }
                 if had_exam {
-                    button { class: "secondary", onclick: move |_| on_done.call(()), {tx::CANCEL} }
+                    button { class: "btn btn-secondary", onclick: move |_| on_done.call(()), {tx::CANCEL} }
                 }
             }
         }

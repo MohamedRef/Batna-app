@@ -48,6 +48,14 @@ impl RemindPrefs {
 
 pub static PREFS: GlobalSignal<RemindPrefs> = Signal::global(RemindPrefs::load);
 
+/// Re-reads the reminder times after a sync or restore (see `crate::synced`).
+pub fn reload() {
+    let fresh = RemindPrefs::load();
+    if *PREFS.peek() != fresh {
+        *PREFS.write() = fresh;
+    }
+}
+
 /// This device rings. Device-only, never synced. Until he chooses, devices
 /// with a vibration motor ring (his phone), and tablets and the Mac stay
 /// quiet; it's a guess about the hardware, not the device's name.
@@ -174,7 +182,7 @@ pub fn RemindSection() -> Element {
                             }
                             if prefs.times.len() > 1 {
                                 button {
-                                    class: "secondary",
+                                    class: "btn btn-secondary",
                                     onclick: {
                                         let prefs = prefs.clone();
                                         move |_| {
@@ -190,7 +198,7 @@ pub fn RemindSection() -> Element {
                     }
                     if prefs.times.len() < MAX_TIMES {
                         button {
-                            class: "secondary",
+                            class: "btn btn-secondary",
                             onclick: {
                                 let prefs = prefs.clone();
                                 move |_| {
@@ -231,12 +239,12 @@ pub fn RemindSection() -> Element {
                     p { {tx::BLOCKED} }
                     div { class: "row",
                         button { onclick: move |_| native::request_permission(), {tx::ALLOW} }
-                        button { class: "secondary", onclick: move |_| native::open_notification_settings(), {tx::OPEN_NOTIFICATIONS} }
+                        button { class: "btn btn-secondary", onclick: move |_| native::open_notification_settings(), {tx::OPEN_NOTIFICATIONS} }
                     }
                 }
                 if here && unrestricted == Some(false) {
                     p { class: "muted small", {tx::BATTERY} }
-                    button { class: "secondary", onclick: move |_| native::open_app_settings(), {tx::OPEN_APP} }
+                    button { class: "btn btn-secondary", onclick: move |_| native::open_app_settings(), {tx::OPEN_APP} }
                 }
             }
         }

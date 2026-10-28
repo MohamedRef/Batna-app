@@ -53,7 +53,7 @@ pub fn Calculators() -> Element {
                 match current.and_then(calc::spec) {
                     Some(spec) => rsx! {
                         div { key: "{spec.id}",
-                            button { class: "link-button calc-back", onclick: move |_| open.set(None), "‹ " {tx::BACK} }
+                            button { class: "btn-link calc-back", "aria-keyshortcuts": "Escape", onclick: move |_| open.set(None), "‹ " {tx::BACK} }
                             CalcForm { id: spec.id, initial: Inputs::new() }
                         }
                     },
@@ -111,7 +111,7 @@ pub fn CalcForm(id: &'static str, initial: Inputs) -> Element {
                         if !field.hint.is_empty() { bdi { class: "muted small", {field.hint} } }
                     }
                 }
-                button { class: "link-button", onclick: move |_| values.set(BTreeMap::new()), {tx::RESET} }
+                button { class: "btn-link", onclick: move |_| values.set(BTreeMap::new()), {tx::RESET} }
             }
             match result {
                 Ok(o) => rsx! { OutcomeCard { id, outcome: o } },

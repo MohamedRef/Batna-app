@@ -6,7 +6,7 @@ use batna_core::exam::Question;
 use batna_core::review::verify::Check;
 use dioxus::prelude::*;
 
-use super::{lecture_title, lookup, topic_title};
+use super::{lookup, short_lecture_title, topic_title};
 use crate::content::lecture_code;
 use crate::i18n::bank as tx;
 use crate::store::use_review;
@@ -44,7 +44,7 @@ pub fn QuestionView(
     let primary = rsx! {
         article { class: "q card",
             div { class: "q-meta",
-                span { class: "chip", bdi { "{lecture_code(&lecture.lecture)} · {lecture_title(&lecture.lecture)}" } }
+                span { class: "chip", bdi { "{lecture_code(&lecture.lecture)} · {short_lecture_title(&lecture.lecture)}" } }
                 if let Some(t) = topic {
                     span { class: "chip", bdi { "{t}" } }
                 }
@@ -131,7 +131,7 @@ fn Report(item_id: String) -> Element {
     }
     rsx! {
         button {
-            class: "link small report",
+            class: "btn-link small report",
             onclick: move |_| {
                 review.backend.borrow_mut().undo_judgement(&item_id);
                 reopened.set(true);

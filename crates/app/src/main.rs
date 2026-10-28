@@ -17,9 +17,11 @@ mod hover;
 mod i18n;
 mod icons;
 mod import;
+mod more;
 mod onboarding;
 mod oral;
 mod order;
+mod own;
 mod plan;
 mod platform;
 mod prefs;
@@ -31,6 +33,7 @@ mod sounds;
 mod stats;
 mod store;
 mod study;
+mod synced;
 mod table;
 mod today;
 mod update;
@@ -39,6 +42,7 @@ mod verify;
 use dioxus::prelude::*;
 
 const MAIN_CSS: &str = include_str!("../assets/main.css");
+const SHAPE_CSS: &str = include_str!("../assets/shape.css");
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Screen {
@@ -135,10 +139,17 @@ fn App() -> Element {
     let look = ui.prefs.read().css();
     back::use_back(ui, current, *settings.open.read());
     update::view::use_android_install(ui);
+    update::view::use_update_notice_taps(settings);
+    // A screen opens at its top, not at the last screen's scroll offset (UX #102).
+    use_effect(move || {
+        let _ = ui.screen.read();
+        document::eval(r#"document.querySelector("main.content")?.scrollTo(0, 0);"#);
+    });
     rsx! {
         document::Title { "Batna" }
         style { {fonts::css()} }
         style { {MAIN_CSS} }
+        style { {SHAPE_CSS} }
         style { {look} }
         desk::Chrome {}
         div { class: "app", lang: "ar", dir: "rtl",
@@ -156,10 +167,22 @@ fn App() -> Element {
                 }
             }
             nav { class: "nav", aria_label: "التنقل",
-                for screen in Screen::NAV {
-                    NavButton { key: "{screen:?}", screen, class: "nav-item" }
+                // From 600px the top bar goes and the name heads the rail or
+                // sidebar, so the screen gets the full height (nav.css).
+                div { class: "nav-brand", aria_hidden: "true",
+                    span { class: "brand-name", {i18n::app::NAME} }
+                    span { class: "brand-tag", {i18n::app::TAGLINE} }
                 }
-                // From 840px the sidebar carries Settings at its foot (nav.css).
+                for screen in Screen::NAV {
+                    NavButton {
+                        key: "{screen:?}",
+                        screen,
+                        class: more::nav_class(screen),
+                    }
+                }
+                // Phones: Cases and Oral sit under More (more.rs).
+                more::More {}
+                // From 600px the rail or sidebar carries Settings at its foot (nav.css).
                 button {
                     class: "nav-item nav-foot",
                     aria_label: Screen::Settings.label(),
@@ -173,6 +196,7 @@ fn App() -> Element {
                 {screen_body(current)}
             }
             settings::SettingsSheet {}
+            own::ShareInbox {}
             onboarding::Onboarding {}
         }
     }

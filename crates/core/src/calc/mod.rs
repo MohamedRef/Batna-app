@@ -352,6 +352,11 @@ pub fn expect_matches(outcome: &Outcome, expect: &str) -> bool {
     if expect == outcome.band {
         return true;
     }
+    // A text that names another band ("Below 9", "Child-Pugh C") is wrong
+    // even when one of its numbers equals the score.
+    if named_bands(expect, outcome.band).iter().any(|b| *b != outcome.band) {
+        return false;
+    }
     if let Some(score) = outcome.score {
         // A number written in `expect` equal to the score at the precision it
         // is written with: "0.9" and "0.90" both match 0.898.
@@ -365,6 +370,78 @@ pub fn expect_matches(outcome: &Outcome, expect: &str) -> bool {
         }
     }
     expect.eq_ignore_ascii_case(&outcome.display) || expect.contains(outcome.label)
+}
+
+/// Words that name a band in a written result, per band id. Calculators
+/// whose bands are only numbers (MELD, Ranson) have none. Phrases are
+/// lower case and match whole words; the longest phrase wins, so "not met"
+/// is never read as "met".
+const BAND_WORDS: &[(&str, &[&str])] = &[
+    ("child_pugh.a", &["child-pugh a", "child pugh a", "class a"]),
+    ("child_pugh.b", &["child-pugh b", "child pugh b", "class b"]),
+    ("child_pugh.c", &["child-pugh c", "child pugh c", "class c"]),
+    ("albi.1", &["grade 1"]),
+    ("albi.2", &["grade 2"]),
+    ("albi.3", &["grade 3"]),
+    ("fib4.low", &["low risk"]),
+    ("fib4.mid", &["intermediate", "indeterminate"]),
+    ("fib4.high", &["high risk"]),
+    ("r_ratio.hepatocellular", &["hepatocellular"]),
+    ("r_ratio.cholestatic", &["cholestatic"]),
+    ("r_ratio.mixed", &["mixed"]),
+    ("maddrey.severe", &["severe"]),
+    ("maddrey.not_severe", &["not severe"]),
+    ("glasgow.high", &["9 or more", "9 or above"]),
+    ("glasgow.low", &["below 9", "less than 9"]),
+    ("saag.high", &["high"]),
+    ("saag.low", &["low"]),
+    ("ascitic.no_sbp", &["no sbp"]),
+    ("ascitic.bacterascites", &["bacterascites"]),
+    ("ascitic.secondary", &["secondary"]),
+    ("ascitic.polymicrobial", &["polymicrobial"]),
+    ("bclc.0", &["stage 0"]),
+    ("bclc.a", &["stage a"]),
+    ("bclc.b", &["stage b"]),
+    ("bclc.c", &["stage c"]),
+    ("bclc.d", &["stage d"]),
+    ("kings.met", &["met"]),
+    ("kings.not_met", &["not met"]),
+    ("clichy.met", &["met"]),
+    ("clichy.not_met", &["not met"]),
+    ("bisap.severe", &["severe", "2 or more"]),
+    ("bisap.mild", &["mild", "not severe"]),
+];
+
+/// The bands of `band`'s calculator that `text` names, longest phrase first.
+fn named_bands(text: &str, band: &str) -> Vec<&'static str> {
+    let calculator = band.split_once('.').map_or(band, |(c, _)| c);
+    let mut phrases: Vec<(&'static str, &'static str)> = BAND_WORDS
+        .iter()
+        .filter(|(b, _)| b.split_once('.').is_some_and(|(c, _)| c == calculator))
+        .flat_map(|(b, ws)| ws.iter().map(move |w| (*b, *w)))
+        .collect();
+    phrases.sort_by_key(|(_, w)| std::cmp::Reverse(w.len()));
+    let mut text: Vec<char> = text.to_lowercase().replace('–', "-").chars().collect();
+    let mut found = Vec::new();
+    for (b, w) in phrases {
+        let w: Vec<char> = w.chars().collect();
+        let mut i = 0;
+        while i + w.len() <= text.len() {
+            let edge = |j: Option<&char>| j.is_none_or(|c| !c.is_alphanumeric());
+            if text[i..i + w.len()] == w[..]
+                && edge(i.checked_sub(1).and_then(|j| text.get(j)))
+                && edge(text.get(i + w.len()))
+            {
+                // Blank it out so a shorter phrase inside it can't match too.
+                text[i..i + w.len()].fill(' ');
+                found.push(b);
+                i += w.len();
+            } else {
+                i += 1;
+            }
+        }
+    }
+    found
 }
 
 /// The numbers written in a text, as written ("8", "−2.59", "1.4").
@@ -488,6 +565,58 @@ mod tests {
         .unwrap();
         assert!(expect_matches(&bclc, "Stage C"));
         assert!(!expect_matches(&bclc, "Stage B"));
+    }
+
+    // Issue #42: a number equal to the score must not carry a wrong band.
+    #[test]
+    fn expect_naming_another_band_fails() {
+        let glasgow = |o: &Outcome| (o.band, o.score);
+        let i = Inputs::new()
+            .num("age_years", 55.0)
+            .num("wbc_10e9_l", 16.0)
+            .num("urea_mmol_l", 6.0)
+            .num("inr", 1.6)
+            .num("bilirubin_mg_dl", 5.0);
+        let o = compute("glasgow_ah", &i).unwrap();
+        assert_eq!(glasgow(&o), ("glasgow.high", Some(9.0)));
+        assert!(expect_matches(&o, "9 or more"));
+        assert!(expect_matches(&o, "GAHS 9"));
+        assert!(!expect_matches(&o, "Below 9"));
+        assert!(!expect_matches(&o, "glasgow.low"));
+
+        let cp = Inputs::new()
+            .choice("encephalopathy", "none")
+            .choice("ascites", "mild")
+            .num("bilirubin_mg_dl", 2.5)
+            .num("albumin_g_dl", 2.5)
+            .num("pt_prolonged_s", 3.0);
+        let o = compute("child_pugh", &cp).unwrap();
+        assert_eq!((o.band, o.score), ("child_pugh.b", Some(9.0)));
+        assert!(expect_matches(&o, "Child-Pugh B (9 points)"));
+        assert!(!expect_matches(&o, "Child-Pugh C (9 points)"));
+        assert!(!expect_matches(&o, "Class C, 9 points"));
+
+        let r = compute(
+            "r_ratio",
+            &Inputs::new()
+                .num("alt_u_l", 200.0)
+                .num("alt_uln_u_l", 40.0)
+                .num("alp_u_l", 120.0)
+                .num("alp_uln_u_l", 120.0),
+        )
+        .unwrap();
+        assert_eq!(r.band, "r_ratio.hepatocellular");
+        assert!(expect_matches(&r, "R = 5, hepatocellular"));
+        assert!(!expect_matches(&r, "R = 5, mixed"));
+    }
+
+    #[test]
+    fn longer_band_words_win() {
+        assert_eq!(named_bands("Criteria not met", "kings.met"), ["kings.not_met"]);
+        assert_eq!(named_bands("Criteria met: INR > 6.5", "kings.met"), ["kings.met"]);
+        assert_eq!(named_bands("DF 40, not severe", "maddrey.severe"), ["maddrey.not_severe"]);
+        assert_eq!(named_bands("Grade 2", "child_pugh.b"), Vec::<&str>::new());
+        assert_eq!(named_bands("metabolic", "clichy.met"), Vec::<&str>::new());
     }
 
     #[test]

@@ -228,6 +228,19 @@ impl Session {
         self.queue.len() + usize::from(self.current.is_some())
     }
 
+    /// Rates question number `turn` (its `asked` count) and moves on. A
+    /// stale turn, such as a double tap landing after the session moved on,
+    /// does nothing, so one question takes one rating. Returns what was rated.
+    pub fn rate_turn(&mut self, turn: u64, grade: Option<Grade>) -> Option<Prompt> {
+        if turn != self.asked {
+            return None;
+        }
+        let prompt = self.current.as_ref()?.prompt.clone();
+        self.rate(grade);
+        self.advance();
+        Some(prompt)
+    }
+
     /// Rates the current question and lines up what comes after it.
     pub fn rate(&mut self, grade: Option<Grade>) {
         let Some(entry) = self.current.take() else { return };
@@ -369,6 +382,24 @@ mod tests {
         assert_eq!(order.len(), 6);
         assert_eq!(order[AGAIN_GAP], (first, true));
         assert_eq!((s.tally.good, s.tally.again, s.tally.missed.len()), (6, 1, 1));
+    }
+
+    #[test]
+    fn a_double_tap_rates_one_question() {
+        let pool: Vec<_> = (0..3).map(|i| card(&format!("c{i}"), "t")).collect();
+        let mut s = Session::new(pool, &pick(3));
+        let first = s.advance().unwrap().prompt.item_id.clone();
+        let turn = s.asked;
+        let rated = s.rate_turn(turn, Some(Grade::Good)).map(|p| p.item_id);
+        assert_eq!(rated, Some(first));
+        // The second tap still carries the old turn: the next question is untouched.
+        let next = s.current.clone();
+        assert_eq!(s.rate_turn(turn, Some(Grade::Good)), None);
+        assert_eq!(s.current, next);
+        assert_eq!((s.tally.good, s.left()), (1, 2));
+        // The next question's own turn rates it as usual.
+        assert!(s.rate_turn(s.asked, Some(Grade::Again)).is_some());
+        assert_eq!(s.tally.again, 1);
     }
 
     #[test]

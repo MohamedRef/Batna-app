@@ -79,7 +79,7 @@ pub fn TodayRecap(due_left: usize, due_tomorrow: u32) -> Element {
     });
     let week = use_memo(move || {
         let _ = (review.revision)();
-        let data = StudyData::load();
+        let data = StudyData::load(&*review.backend.borrow());
         let rows = data.stats();
         let mut retention = Ratio::default();
         for l in &rows {

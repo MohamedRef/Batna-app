@@ -468,6 +468,7 @@ pub mod case {
     pub const NEW_DATA: &str = "بيانات جديدة";
     pub const RIGHT: &str = "صح، برافو.";
     pub const WRONG: &str = "مش دي. الإجابة الصح متعلّمة.";
+    pub const CORRECT_WAS: &str = "الصح:";
     pub const SHOW_ANSWER: &str = "ورّيني الإجابة";
     pub const GOT_IT: &str = "جاوبتها صح";
     pub const MISSED: &str = "فاتتني";
@@ -513,6 +514,21 @@ pub mod calc {
     pub const MEANING: &str = "يعني إيه النتيجة دي؟";
     pub const MEANING_HINT: &str = "قولها لنفسك الأول، وبعدين افتح التفسير.";
     pub const SHOW_MEANING: &str = "ورّيني التفسير";
+
+    /// The Arabic hint under a calculator field (core keeps the English one).
+    pub fn hint(calc: &str, field: &str) -> Option<&'static str> {
+        Some(match (calc, field) {
+            ("child_pugh", "pt_prolonged_s") => "دي طريقة الكتاب. سيبها فاضية لو هتستخدم الـ INR.",
+            ("child_pugh", "inr") => "بيتحسب بس لو خانة الـ PT فاضية.",
+            ("apri", "ast_uln_u_l") => "غالبًا 40 U/L.",
+            ("maddrey", "pt_control_s") => "غالبًا 12–13 ثانية.",
+            ("glasgow_ah", "urea_mmol_l") => "اليوريا بالـ mg/dL ÷ 6 = mmol/L.",
+            ("ascitic_pmn", "pmn_per_mm3") => "عدد كرات الدم البيضا الكلي × نسبة النيوتروفيل.",
+            ("bisap", "bun_mg_dl") => "اليوريا ÷ 2.14.",
+            ("ranson", "bun_rise_mg_dl") => "زيادة اليوريا ÷ 2.14.",
+            _ => return None,
+        })
+    }
 }
 
 pub mod desk {

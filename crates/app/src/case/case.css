@@ -72,14 +72,28 @@
 .option.right { background: var(--good-soft); border-color: var(--good); color: var(--good); font-weight: 600; }
 .option.wrong { background: var(--bad-soft); border-color: var(--bad); color: var(--bad); }
 .option.dim { opacity: 0.6; }
+/* Phone: once answered, keep only the picked and the right option so the
+   feedback fits on screen. */
+@media (max-width: 599px) { .case-step .option.dim { display: none; } }
+.case-feedback { display: flex; flex-direction: column; gap: var(--sp-3); scroll-margin-block-end: calc(var(--nav-h) + var(--sp-3)); }
+.case-history { display: flex; flex-direction: column; gap: var(--sp-2); }
+.case-done { display: flex; flex-direction: column; gap: 2px; padding-inline-start: var(--sp-2); border-inline-start: 3px solid var(--line); }
+.case-done p { margin: 0; }
+.case-done .case-done-q { display: block; color: var(--muted); }
+.case-done.ok { border-inline-start-color: var(--good); }
+.case-done.miss { border-inline-start-color: var(--bad); }
+.case-done.ok span { color: var(--good); }
+.case-done.miss span { color: var(--bad); }
 .verdict { font-weight: 700; }
 .verdict.good { color: var(--good); }
 .verdict.bad { color: var(--bad); }
 .case-why { display: flex; flex-direction: column; gap: var(--sp-1); background: var(--bg); border-radius: var(--radius); padding: var(--sp-3); }
 .case-score { font-size: var(--fs-xl); font-weight: 700; color: var(--accent); }
-.case-steps-done { margin: 0; padding-inline-start: var(--sp-4); display: grid; gap: var(--sp-1); }
-.case-steps-done .ok span { color: var(--good); }
-.case-steps-done .miss span { color: var(--bad); }
+.case-steps-done { margin: 0; padding-inline-start: var(--sp-4); display: grid; gap: var(--sp-2); text-align: start; }
+.case-steps-done p { margin: 0; }
+.case-done-q { font-weight: 600; }
+.case-steps-done .ok .case-done-q span { color: var(--good); }
+.case-steps-done .miss .case-done-q span { color: var(--bad); }
 
 /* ---------- calculators ---------- */
 .calcs { display: grid; gap: var(--sp-4); align-items: start; }
@@ -108,6 +122,8 @@
 @media (min-width: 1100px) { .calc-form > .calc-result, .calc-form > .calc-wait { order: 0; position: sticky; inset-block-start: var(--sp-4); } }
 @media (min-width: 1100px) { .calc-form { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
 .calc-field { display: flex; flex-direction: column; gap: var(--sp-1); }
+.calc-label { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--sp-1) var(--sp-2); }
+.calc-hint { margin: 0; }
 .calc-field input, .calc-field select, .calc-item input {
   font: inherit;
   color: var(--text);

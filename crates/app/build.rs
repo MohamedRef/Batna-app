@@ -65,6 +65,17 @@ fn main() {
         }
     }
 
+    // Open-licence lesson images go into the pack as data URLs.
+    let img = lessons_dir.join("img");
+    println!("cargo:rerun-if-changed={}", img.display());
+    for p in batna_core::lesson::embed_images(&mut lessons, |f| {
+        let path = img.join(f);
+        println!("cargo:rerun-if-changed={}", path.display());
+        std::fs::read(path).ok()
+    }) {
+        println!("cargo:warning=lesson image: {p}");
+    }
+
     let out = PathBuf::from(std::env::var("OUT_DIR").unwrap());
     let pack = out.join("content.pack");
     std::fs::write(&pack, Pack::new(index, lectures).with_lessons(lessons).encode()).unwrap();

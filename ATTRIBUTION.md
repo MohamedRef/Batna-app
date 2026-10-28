@@ -1,6 +1,7 @@
 # Attribution
 
 - Study content is written from the Alexandria Faculty of Medicine, Department of Internal Medicine, "Postgraduate Lectures" e-book (2025), for Mohamed's personal study. The book itself is not included in this repository.
+- Lesson figures in `content/lessons/img/` marked `book: true` are cropped from that e-book's own figures, with Mohamed's permission, for his personal study (2026-10-28). Each is cited by its printed page in the lesson. Some of the book's figures credit their own sources (for example a WebPathology watermark on the L01 histology). Open-licence images, if any, are listed below with author, licence and source.
 - Some code is adapted from Kabar (same repository, branch `main`); each adapted file says so.
 - Rust crates: see `Cargo.lock` (Dioxus, serde, serde_yaml_ng and others, under MIT or Apache-2.0).
 

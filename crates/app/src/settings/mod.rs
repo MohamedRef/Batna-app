@@ -232,7 +232,12 @@ pub fn SettingsSheet() -> Element {
 fn SectionView(section: Section) -> Element {
     match section {
         Section::Study => {
-            rsx! { crate::today::StudySection {} crate::sounds::SoundSection {} crate::onboarding::ReopenCard {} }
+            rsx! {
+                crate::today::StudySection {}
+                crate::learn::ViewSection {}
+                crate::sounds::SoundSection {}
+                crate::onboarding::ReopenCard {}
+            }
         }
         Section::Reminders => rsx! { crate::reminders::RemindSection {} },
         Section::Sync => rsx! { crate::cloud::SyncSection {} },

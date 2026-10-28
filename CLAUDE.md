@@ -9,11 +9,11 @@ The plan and the per-thread briefs are in `/mnt/project-files/medstudy/SPLIT.md`
 ## Non-negotiables
 - $0 a month. Ask before adding anything that could cost money.
 - No secrets in the repo, ever.
-- **The textbook never goes in git**: no PDF and no extracted text. Items paraphrase it, cite `src.page`, and quote at most 25 words. CI enforces this.
+- **The textbook never goes in git**: no PDF and no extracted text (cropped book figures for lessons are the one exception). Items paraphrase it, cite `src.page`, and quote at most 25 words. CI enforces this.
 - Every content item ships `status: unverified`. Only Mohamed approves (`content/approved.txt`, from his in-app export).
 - The book's answer is the exam answer. Guideline differences go in `update:` with the guideline name and year, never as silent changes.
 - No real patient data to any AI engine. Tests never call live APIs.
-- No generated images and no image assets.
+- No generated images. Lesson figures may be real images (Mohamed, 2026-10-28): crops of the book's own figures (`book: true`, cited by page) or open-licence images with credit, licence and source, in `content/lessons/img/` (see `docs/LESSONS.md` § Images). Only figures: the book's text still never goes in git.
 
 ## Language
 - Reply to Mohamed in Egyptian Arabic, and keep it short. Code, comments, commit messages and docs are in English.

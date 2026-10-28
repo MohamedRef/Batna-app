@@ -71,9 +71,66 @@ fn save_mark(id: &str, m: Mark) {
     reload();
 }
 
-/// Re-reads the marks (after a sync brought lessons finished elsewhere).
+/// Re-reads the marks and the lesson view (after a sync or a restore).
 pub fn reload() {
     *MARKS_REV.write() += 1;
+    let fresh = load_view();
+    if *VIEW.peek() != fresh {
+        *VIEW.write() = fresh;
+    }
+}
+
+/// How a lesson is shown: one step at a time with Back and Continue
+/// (`Steps`), or as book pages turned by swiping, with small arrows
+/// (`Pages`). Swiping works in both. A synced setting, `lesson_view`.
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum View {
+    #[default]
+    Steps,
+    Pages,
+}
+
+const VIEW_KEY: &str = "lesson_view";
+
+fn load_view() -> View {
+    // BATNA_LESSON_VIEW=pages, for previews and screenshots.
+    match std::env::var("BATNA_LESSON_VIEW").as_deref() {
+        Ok("pages") => View::Pages,
+        Ok("steps") => View::Steps,
+        _ => crate::store::shared().setting(VIEW_KEY).unwrap_or_default(),
+    }
+}
+
+pub static VIEW: GlobalSignal<View> = Signal::global(load_view);
+
+pub fn set_view(v: View) {
+    crate::store::save_setting(VIEW_KEY, &v);
+    *VIEW.write() = v;
+}
+
+/// Settings › Review: Steps or Pages.
+#[component]
+pub fn ViewSection() -> Element {
+    let now = VIEW();
+    rsx! {
+        section { class: "card",
+            h2 { {tx::VIEW_TITLE} }
+            p { class: "muted small", {tx::VIEW_BODY} }
+            div { class: "segmented", role: "radiogroup", aria_label: tx::VIEW_TITLE,
+                for (v , label , hint) in [(View::Steps, tx::VIEW_STEPS, tx::VIEW_STEPS_HINT), (View::Pages, tx::VIEW_PAGES, tx::VIEW_PAGES_HINT)] {
+                    button {
+                        key: "{label}",
+                        role: "radio",
+                        "aria-checked": now == v,
+                        onclick: move |_| set_view(v),
+                        {label}
+                        span { class: "seg-hint", {hint} }
+                    }
+                }
+            }
+        }
+    }
 }
 
 /// The lesson to do next: the first unfinished one of the earliest lecture
@@ -126,8 +183,12 @@ fn LessonList() -> Element {
     let total: usize = lib.lessons.values().map(|f| f.lessons.len()).sum();
     let done = lib.all_lessons().filter(|(_, l)| mark(&l.id).is_some()).count();
     let next = next_lesson(&[]);
+    let next_id = next.map(|l| l.id.clone());
     rsx! {
-        section { class: "card ls-hero",
+        // With a lesson to go to, the whole card opens it (the button's click bubbles up).
+        section {
+            class: if next_id.is_some() { "card card-action ls-hero" } else { "card ls-hero" },
+            onclick: move |_| if let Some(id) = &next_id { open(ui, id) },
             h1 { {tx::TITLE} }
             p { class: "muted", {tx::INTRO} }
             if total == 0 {
@@ -138,7 +199,6 @@ fn LessonList() -> Element {
                     if let Some(l) = next {
                         button {
                             class: "btn btn-primary",
-                            onclick: move |_| open(ui, &l.id),
                             // One inline label: flex would split each run into a column.
                             span { class: "ls-btn-label",
                                 {if done == 0 { tx::START_FIRST } else { tx::CONTINUE }}
@@ -240,12 +300,14 @@ pub fn TodayLesson(prefer: Vec<String>) -> Element {
     let title = Library::get().title(lecture).to_string();
     rsx! {
         style { {CSS} }
-        section { class: "card ls-today",
+        // The whole card opens the lesson (the button's click bubbles up).
+        section { class: "card card-action ls-today",
+            onclick: { let id = l.id.clone(); move |_| open(ui, &id) },
             p { class: "ls-kicker", {tx::TODAY_KICKER} }
             h2 { text::Line { text: l.title.clone() } }
             p { class: "muted small", bdi { "{title}" } " · " {count(l.minutes, &MINUTE)} }
             p { text::Line { text: l.hook.clone() } }
-            button { class: "btn btn-primary", onclick: move |_| open(ui, &l.id), {tx::OPEN_LESSON} }
+            button { class: "btn btn-primary", {tx::OPEN_LESSON} }
         }
     }
 }

@@ -99,7 +99,7 @@ fn plan(
         due: &s.due(now),
         seen: &seen,
         hidden: &hidden,
-        max_new: s.new_left_today(now),
+        max_new: crate::plan::new_left_today(&*s, now),
         budget_secs: minutes * 60,
     })
 }
@@ -236,7 +236,7 @@ pub fn Study() -> Element {
             match current.and_then(|p| find(&p.item_id).map(|(l, i)| (p, l, i))) {
                 // Only when content changed under a running session; "end" still works.
                 None => rsx! {
-                    button { class: "st-primary", onclick: move |_| phase.set(Phase::Summary), {tx::END} }
+                    button { class: "btn btn-primary btn-lg", onclick: move |_| phase.set(Phase::Summary), {tx::END} }
                 },
                 Some((p, lecture, item)) => {
                     let item = store.0.borrow().effective(item);
@@ -276,7 +276,7 @@ pub fn Study() -> Element {
                             }
                             span { class: "muted small", "{pos + 1} {tx::OF} {len}" }
                             button {
-                                class: "st-link",
+                                class: "btn-link",
                                 "aria-keyshortcuts": "Escape",
                                 onclick: move |_| phase.set(Phase::Summary),
                                 {tx::END}
@@ -346,92 +346,99 @@ fn Setup(
     let all_chosen = chosen.read().len() == all_ids.len();
     rsx! {
         section { class: "card st-setup",
-            h1 { {tx::TITLE} }
-            p { class: "muted", {tx::SETUP_INTRO} }
+            // Tablet landscape and the Mac: the time and Start stay in view
+            // beside the lecture and topic picker.
+            div { class: "tab-cols", "data-wide": "aside",
+                div { class: "tab-main tab-sticky st-setup-go",
+                    h1 { {tx::TITLE} }
+                    p { class: "muted", {tx::SETUP_INTRO} }
 
-            h2 { {tx::TIME} }
-            div { class: "st-segmented", role: "radiogroup", aria_label: tx::TIME,
-                for m in MINUTES {
-                    button {
-                        key: "{m}",
-                        role: "radio",
-                        "aria-checked": if minutes() == m { "true" } else { "false" },
-                        onclick: move |_| minutes.set(m),
-                        "{m} {tx::MINUTES}"
+                    h2 { {tx::TIME} }
+                    div { class: "segmented", role: "radiogroup", aria_label: tx::TIME,
+                        for m in MINUTES {
+                            button {
+                                key: "{m}",
+                                role: "radio",
+                                "aria-checked": if minutes() == m { "true" } else { "false" },
+                                onclick: move |_| minutes.set(m),
+                                "{m} {tx::MINUTES}"
+                            }
+                        }
+                    }
+
+                    if preview_count == 0 {
+                        p { class: "note", {tx::NOTHING_NOW} }
+                    } else {
+                        p { class: "st-preview",
+                            "{preview_count} {tx::ITEMS} · {reviews} {tx::REVIEWS} · {preview_new} {tx::NEW} · {tx::ABOUT} {preview_mins} {tx::MINUTES}"
+                        }
+                        button { class: "btn btn-primary btn-lg st-start", onclick: move |_| on_start.call(()), {tx::START} }
                     }
                 }
-            }
-
-            if preview_count == 0 {
-                p { class: "note", {tx::NOTHING_NOW} }
-            } else {
-                p { class: "st-preview",
-                    "{preview_count} {tx::ITEMS} · {reviews} {tx::REVIEWS} · {preview_new} {tx::NEW} · {tx::ABOUT} {preview_mins} {tx::MINUTES}"
-                }
-                button { class: "st-primary st-start", onclick: move |_| on_start.call(()), {tx::START} }
-            }
-
-            div { class: "st-section-head",
-                h2 { {tx::LECTURES} }
-                button {
-                    class: "st-link",
-                    onclick: move |_| {
-                        let mut c = chosen.write();
-                        if c.len() == all_ids.len() {
-                            c.clear();
-                        } else {
-                            *c = all_ids.iter().cloned().collect();
-                        }
-                        topics.write().clear();
-                    },
-                    {if all_chosen { tx::CLEAR_ALL } else { tx::PICK_ALL }}
-                }
-            }
-            div { class: "st-chips st-lectures",
-                for (id , title) in ready {
-                    button {
-                        key: "{id}",
-                        class: "st-chip",
-                        "aria-pressed": if chosen.read().contains(&id) { "true" } else { "false" },
-                        onclick: {
-                            let id = id.clone();
-                            move |_| {
+                div { class: "tab-aside st-setup-pick",
+                    div { class: "st-section-head",
+                        h2 { {tx::LECTURES} }
+                        button {
+                            class: "btn-link",
+                            onclick: move |_| {
                                 let mut c = chosen.write();
-                                if !c.remove(&id) {
-                                    c.insert(id.clone());
+                                if c.len() == all_ids.len() {
+                                    c.clear();
+                                } else {
+                                    *c = all_ids.iter().cloned().collect();
                                 }
                                 topics.write().clear();
-                            }
-                        },
-                        span { class: "st-chip-num",
-                            if id == batna_core::own::LECTURE { "✎" } else { {id.rsplit('.').next().unwrap_or(&id).to_string()} }
+                            },
+                            {if all_chosen { tx::CLEAR_ALL } else { tx::PICK_ALL }}
                         }
-                        bdi { "{title}" }
                     }
-                }
-            }
+                    div { class: "st-chips st-lectures",
+                        for (id , title) in ready {
+                            button {
+                                key: "{id}",
+                                class: "st-chip",
+                                "aria-pressed": if chosen.read().contains(&id) { "true" } else { "false" },
+                                onclick: {
+                                    let id = id.clone();
+                                    move |_| {
+                                        let mut c = chosen.write();
+                                        if !c.remove(&id) {
+                                            c.insert(id.clone());
+                                        }
+                                        topics.write().clear();
+                                    }
+                                },
+                                span { class: "st-chip-num",
+                                    if id == batna_core::own::LECTURE { "✎" } else { {id.rsplit('.').next().unwrap_or(&id).to_string()} }
+                                }
+                                bdi { "{title}" }
+                            }
+                        }
+                    }
 
-            if let Some(lecture) = single {
-                if !lecture.topics.is_empty() {
-                    h2 { {tx::TOPICS} }
-                    p { class: "muted small", {tx::TOPICS_HINT} }
-                    div { class: "st-chips",
-                        for t in lecture.topics.iter() {
-                            {
-                                let key = format!("{}/{}", lecture.lecture, t.id);
-                                let on = topics.read().contains(&key);
-                                rsx! {
-                                    button {
-                                        key: "{key}",
-                                        class: "st-chip",
-                                        "aria-pressed": if on { "true" } else { "false" },
-                                        onclick: move |_| {
-                                            let mut s = topics.write();
-                                            if !s.remove(&key) {
-                                                s.insert(key.clone());
+                    if let Some(lecture) = single {
+                        if !lecture.topics.is_empty() {
+                            h2 { {tx::TOPICS} }
+                            p { class: "muted small", {tx::TOPICS_HINT} }
+                            div { class: "st-chips",
+                                for t in lecture.topics.iter() {
+                                    {
+                                        let key = format!("{}/{}", lecture.lecture, t.id);
+                                        let on = topics.read().contains(&key);
+                                        rsx! {
+                                            button {
+                                                key: "{key}",
+                                                class: "st-chip",
+                                                "aria-pressed": if on { "true" } else { "false" },
+                                                onclick: move |_| {
+                                                    let mut s = topics.write();
+                                                    if !s.remove(&key) {
+                                                        s.insert(key.clone());
+                                                    }
+                                                },
+                                                bdi { "{t.title}" }
                                             }
-                                        },
-                                        bdi { "{t.title}" }
+                                        }
                                     }
                                 }
                             }
@@ -439,7 +446,6 @@ fn Setup(
                     }
                 }
             }
-
         }
     }
 }
@@ -481,7 +487,7 @@ fn SummaryView(
                 }
             }
             div { class: "st-actions",
-                button { class: "st-primary", onclick: move |_| on_again.call(()), {tx::ANOTHER} }
+                button { class: "btn btn-primary btn-lg", onclick: move |_| on_again.call(()), {tx::ANOTHER} }
             }
         }
     }

@@ -108,14 +108,14 @@ pub fn OrderItem(item: Item, on_grade: EventHandler<Grade>) -> Element {
             } else {
                 div { class: "or-actions",
                     button {
-                        class: "or-button primary",
+                        class: "btn btn-primary",
                         disabled: !full,
                         onclick: move |_| draft.write().checked = true,
                         {tx::CHECK}
                     }
                     if !d.placed.is_empty() {
                         button {
-                            class: "or-button",
+                            class: "btn btn-secondary",
                             onclick: move |_| draft.write().placed.clear(),
                             {tx::CLEAR}
                         }

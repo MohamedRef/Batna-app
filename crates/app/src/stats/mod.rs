@@ -17,8 +17,8 @@ use crate::content::Library;
 use crate::i18n::stats as tx;
 use crate::plan::Planner;
 
-/// The study day starts at 4 am, like the scheduler's.
-const ROLLOVER_HOUR: u32 = 4;
+/// The study day starts when the scheduler's does (4 am).
+const ROLLOVER_HOUR: u32 = batna_core::srs::ROLLOVER_HOUR as u32;
 /// How far ahead the scheduler's forecast is read: past any exam this year.
 const FORECAST_DAYS: usize = 400;
 const STATS_CSS: &str = include_str!("stats.css");

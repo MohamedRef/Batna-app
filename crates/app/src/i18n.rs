@@ -8,6 +8,7 @@ pub mod app {
 }
 
 pub mod nav {
+    pub const LABEL: &str = "التنقل";
     pub const TODAY: &str = "النهارده";
     pub const STUDY: &str = "مذاكرة";
     pub const BANK: &str = "الأسئلة";

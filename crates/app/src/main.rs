@@ -155,7 +155,7 @@ fn App() -> Element {
                     {icons::nav(Screen::Settings)}
                 }
             }
-            nav { class: "nav", aria_label: "التنقل",
+            nav { class: "nav", aria_label: i18n::nav::LABEL,
                 for screen in Screen::NAV {
                     NavButton { key: "{screen:?}", screen, class: "nav-item" }
                 }

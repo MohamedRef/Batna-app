@@ -7,7 +7,9 @@ mod session;
 
 use std::time::{Duration, Instant, SystemTime, UNIX_EPOCH};
 
-use batna_core::review::{Grade, Origin, ReviewEvent};
+use std::collections::BTreeSet;
+
+use batna_core::review::{Grade, Origin, ReviewEvent, StudyStoreHandle};
 use dioxus::prelude::*;
 
 use crate::content::Library;
@@ -54,11 +56,10 @@ enum Phase {
     Answer,
 }
 
-// Kept across screen changes, for this run of the app. Chunk 3's store keeps
-// the review events for good; until it lands they stay here.
+// Kept across screen changes, for this run of the app. Ratings go to the
+// review store (FSRS), like the study player's.
 static SETTINGS: GlobalSignal<Settings> = Signal::global(Settings::default);
 static SESSION: GlobalSignal<Option<Session>> = Signal::global(|| None);
-static EVENTS: GlobalSignal<Vec<ReviewEvent>> = Signal::global(Vec::new);
 
 #[component]
 pub fn Oral() -> Element {
@@ -74,28 +75,43 @@ pub fn Oral() -> Element {
     }
 }
 
-fn start() {
+/// The review store the app provides (FSRS, Mohamed's ✓/✎/✗).
+fn use_store() -> CopyValue<StudyStoreHandle> {
+    use_hook(|| CopyValue::new(consume_context::<StudyStoreHandle>()))
+}
+
+/// Askable items, minus what Mohamed marked wrong, with his edits applied.
+fn pool(store: &StudyStoreHandle, lecture: Option<&str>) -> Vec<session::Prompt> {
+    let s = store.0.borrow();
+    session::pool_with(Library::get().lectures.values(), lecture, |item| {
+        (!s.is_hidden(&item.id)).then(|| s.effective(item))
+    })
+}
+
+fn start(store: &StudyStoreHandle) {
     let settings = SETTINGS.peek().clone();
-    let lib = Library::get();
-    let pool = session::pool(lib.lectures.values(), settings.lecture.as_deref());
+    let pool = pool(store, settings.lecture.as_deref());
+    let due: BTreeSet<String> = store.0.borrow().due(now_ms()).into_iter().collect();
     let seed = SystemTime::now().duration_since(UNIX_EPOCH).map_or(1, |d| d.as_nanos() as u64);
-    let mut s = Session::new(pool, &Pick { lecture: settings.lecture, size: settings.size, seed });
+    let mut s = Session::new(pool, &Pick { lecture: settings.lecture, size: settings.size, seed, due });
     s.advance();
     *SESSION.write() = Some(s);
 }
 
 #[component]
 fn Setup() -> Element {
+    let store = use_store();
     let settings = SETTINGS.read().clone();
     let lib = Library::get();
+    let all = pool(&store.read(), None);
     let lectures: Vec<(String, String)> = lib
         .index
         .lectures
         .iter()
-        .filter(|e| lib.lectures.get(&e.id).is_some_and(|l| !session::pool([l], None).is_empty()))
+        .filter(|e| all.iter().any(|p| p.lecture == e.id))
         .map(|e| (e.id.clone(), e.title.clone()))
         .collect();
-    let available = session::pool(lib.lectures.values(), settings.lecture.as_deref()).len();
+    let available = all.iter().filter(|p| settings.lecture.as_ref().is_none_or(|l| *l == p.lecture)).count();
 
     rsx! {
         section { class: "card oral-setup",
@@ -103,7 +119,7 @@ fn Setup() -> Element {
             p { class: "muted", {tx::INTRO} }
             if available > 0 {
                 p { class: "muted small", "{available} {tx::AVAILABLE}" }
-                button { class: "oral-start", onclick: move |_| start(), {tx::START} }
+                button { class: "oral-start", onclick: move |_| start(&store.read()), {tx::START} }
             }
         }
         if lectures.is_empty() {
@@ -204,6 +220,7 @@ enum Step {
 
 #[component]
 fn Runner() -> Element {
+    let store = use_store();
     let mut phase = use_signal(|| Phase::Asking);
     let no_voice = use_signal(|| false);
     // Bumped by every new step, so a stale timer or voice stops on its own.
@@ -250,7 +267,7 @@ fn Runner() -> Element {
                 tokio::time::sleep(AUTO_WAIT).await;
                 if live() {
                     // Moving on changes the session, and the effect below asks the next one.
-                    rate_current(None, *asked_at.peek());
+                    rate_current(&store.read(), None, *asked_at.peek());
                 }
             }
         });
@@ -288,8 +305,12 @@ fn Runner() -> Element {
             let revealed = revealed_now();
             match remote {
                 Remote::End => end_session(),
-                Remote::Again if revealed => rate_current(Some(Grade::Again), *asked_at.peek()),
-                Remote::Main | Remote::Good if revealed => rate_current(Some(Grade::Good), *asked_at.peek()),
+                Remote::Again if revealed => {
+                    rate_current(&store.read(), Some(Grade::Again), *asked_at.peek())
+                }
+                Remote::Main | Remote::Good if revealed => {
+                    rate_current(&store.read(), Some(Grade::Good), *asked_at.peek())
+                }
                 Remote::Main | Remote::Good => drive(Step::Reveal),
                 Remote::Again => {}
             }
@@ -307,7 +328,7 @@ fn Runner() -> Element {
     let lecture = p.lecture.rsplit('.').next().unwrap_or(&p.lecture);
 
     let rate = move |grade: Grade| {
-        rate_current(Some(grade), *asked_at.peek());
+        rate_current(&store.read(), Some(grade), *asked_at.peek());
         tts::stop();
     };
 
@@ -387,6 +408,9 @@ fn Runner() -> Element {
                     },
                 }
             }
+            if revealed {
+                crate::verify::VerifyBar { item_id: p.item_id.clone() }
+            }
             div { class: "oral-actions",
                 if revealed {
                     button { class: "oral-big again", onclick: move |_| rate(Grade::Again),
@@ -451,6 +475,10 @@ fn spoken_question(entry: &Entry) -> String {
     format!("{lead}{}", entry.prompt.spoken_question())
 }
 
+fn now_ms() -> i64 {
+    SystemTime::now().duration_since(UNIX_EPOCH).map_or(0, |d| d.as_millis() as i64)
+}
+
 /// Stops early; the summary shows what was done.
 fn end_session() {
     tts::stop();
@@ -460,17 +488,16 @@ fn end_session() {
 }
 
 /// Records the rating (none when heard without one) and moves on.
-fn rate_current(grade: Option<Grade>, asked_at: Instant) {
+fn rate_current(store: &StudyStoreHandle, grade: Option<Grade>, asked_at: Instant) {
     let mut guard = SESSION.write();
     let Some(s) = guard.as_mut() else { return };
     let Some(entry) = &s.current else { return };
     if let Some(grade) = grade {
-        let at_ms = SystemTime::now().duration_since(UNIX_EPOCH).map_or(0, |d| d.as_millis() as i64);
-        EVENTS.write().push(ReviewEvent {
+        store.0.borrow_mut().record(ReviewEvent {
             item_id: entry.prompt.item_id.clone(),
             grade,
             origin: Origin::Oral,
-            at_ms,
+            at_ms: now_ms(),
             took_ms: asked_at.elapsed().as_millis().min(u32::MAX as u128) as u32,
         });
     }
@@ -480,6 +507,7 @@ fn rate_current(grade: Option<Grade>, asked_at: Instant) {
 
 #[component]
 fn Summary() -> Element {
+    let store = use_store();
     let session = SESSION.read();
     let Some(s) = session.as_ref() else { return rsx! {} };
     let t = s.tally.clone();
@@ -512,7 +540,7 @@ fn Summary() -> Element {
         }
         div { class: "oral-actions",
             button { class: "oral-small", onclick: move |_| *SESSION.write() = None, {tx::BACK} }
-            button { class: "oral-big good", onclick: move |_| start(),
+            button { class: "oral-big good", onclick: move |_| start(&store.read()),
                 span { class: "big-label", {tx::ANOTHER} }
             }
         }

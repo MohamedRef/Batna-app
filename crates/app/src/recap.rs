@@ -23,16 +23,13 @@ pub fn day_line(f: DayFacts) -> Option<String> {
     if f.answered == 0 {
         return None;
     }
-    let mut line = format!("{} {} {}", tx::TODAY_1, f.answered, tx::TODAY_ANSWERS);
+    let mut line = tx::answered(f.answered);
     if f.learned > 0 {
-        line += &format!("، {} {} {}", tx::AND, f.learned, tx::TODAY_NEW);
+        line += "، ";
+        line += &tx::learned(f.learned);
     }
     line += ". ";
-    line += &if f.due_left == 0 {
-        format!("{} {} {}", tx::DONE_REST, f.due_tomorrow, tx::REVIEWS)
-    } else {
-        format!("{} {} {}", tx::LEFT_1, f.due_left, tx::LEFT_2)
-    };
+    line += &if f.due_left == 0 { tx::done_rest(f.due_tomorrow) } else { tx::left(f.due_left) };
     Some(line)
 }
 
@@ -113,7 +110,7 @@ pub fn TodayRecap(due_left: usize, due_tomorrow: u32) -> Element {
                 onclick: move |_| crate::stats::open(ui, crate::stats::Tab::Progress),
                 h2 { {tx::WEEK_TITLE} span { class: "chev", aria_hidden: "true" } }
                 ul {
-                    li { "{tx::WEEK_LEARNED_1} {week.learned_total()} {tx::WEEK_LEARNED_2} {week.study_days()} {tx::WEEK_DAYS}" }
+                    li { {tx::week_learned(week.learned_total(), week.study_days())} }
                     if let Some(p) = week.retention.percent() {
                         li { "{tx::WEEK_RETENTION} {p}%" }
                     }
@@ -121,7 +118,7 @@ pub fn TodayRecap(due_left: usize, due_tomorrow: u32) -> Element {
                         li { "{tx::WEEK_WEAK} " bdi { {week.weak.join("، ")} } }
                     }
                     if let Some(d) = week.days_to_exam {
-                        li { "{tx::WEEK_EXAM_1} {d} {tx::WEEK_EXAM_2}" }
+                        li { {tx::exam_in(d)} }
                     }
                 }
             }
@@ -144,7 +141,9 @@ mod tests {
         assert!(done.contains("30") && done.contains('8') && done.contains("25"), "{done}");
         assert!(done.contains(tx::DONE_REST));
         let more = day_line(DayFacts { answered: 12, learned: 0, due_left: 9, due_tomorrow: 3 }).unwrap();
-        assert!(more.contains("12") && more.contains('9') && !more.contains(tx::TODAY_NEW), "{more}");
+        assert_eq!(more, "النهارده جاوبت 12 سؤال. فاضل 9 مراجعات لو عندك وقت، ولو لأ بكرة موجودة.");
+        let one = day_line(DayFacts { answered: 1, learned: 2, due_left: 0, due_tomorrow: 0 }).unwrap();
+        assert_eq!(one, "النهارده جاوبت سؤال واحد، واتعلمت حاجتين جداد. مراجعة النهارده خلصت، استريح.");
     }
 
     #[test]

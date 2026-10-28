@@ -26,6 +26,7 @@ pub use backend::{StudyStore, StudyStoreHandle};
 pub use item::{ItemView, PLAYABLE};
 
 use crate::content::Library;
+use crate::i18n::count::{DAY, HOUR, ITEM, MINUTE, REVIEW, count};
 use crate::i18n::study as tx;
 use backend::now_ms;
 use item::short_text;
@@ -62,7 +63,11 @@ fn items() -> &'static HashMap<String, (&'static Lecture, &'static Item)> {
 
 /// The name a lecture shows under: the book's title, or "your cards".
 fn lecture_title(l: &Lecture) -> String {
-    if l.lecture == batna_core::own::LECTURE { crate::i18n::own::TITLE.to_string() } else { l.title.clone() }
+    if l.lecture == batna_core::own::LECTURE {
+        crate::i18n::own::TITLE.to_string()
+    } else {
+        Library::get().title(&l.lecture).to_string()
+    }
 }
 
 /// Whether the study player can show this item (MCQs go to the bank, cases
@@ -367,7 +372,7 @@ fn Setup(
                                 role: "radio",
                                 "aria-checked": if minutes() == m { "true" } else { "false" },
                                 onclick: move |_| minutes.set(m),
-                                "{m} {tx::MINUTES}"
+                                {count(m, &MINUTE)}
                             }
                         }
                     }
@@ -376,7 +381,7 @@ fn Setup(
                         p { class: "note", {tx::NOTHING_NOW} }
                     } else {
                         p { class: "st-preview",
-                            "{preview_count} {tx::ITEMS} · {reviews} {tx::REVIEWS} · {preview_new} {tx::NEW} · {tx::ABOUT} {preview_mins} {tx::MINUTES}"
+                            {count(preview_count, &ITEM)} " · " {count(reviews, &REVIEW)} " · {preview_new} {tx::NEW} · {tx::ABOUT} " {count(preview_mins, &MINUTE)}
                         }
                         button { class: "btn btn-primary btn-lg st-start", onclick: move |_| on_start.call(()), {tx::START} }
                     }
@@ -499,15 +504,15 @@ fn SummaryView(
     }
 }
 
-/// "بعد ٢٠ دقيقة", "بكرة", "بعد ٣ أيام".
+/// "بعد 20 دقيقة", "بعد ساعتين", "بكرة", "بعد 3 أيام".
 fn when_label(ms: i64) -> String {
     let mins = (ms.max(0) as f64 / 60_000.0).round() as i64;
     match mins {
         0..=1 => tx::NOW.to_string(),
-        2..=59 => format!("{} {mins} {}", tx::AFTER, tx::MINUTES),
-        60..=1439 => format!("{} {} {}", tx::AFTER, (mins as f64 / 60.0).round(), tx::HOURS),
+        2..=59 => format!("{} {}", tx::AFTER, count(mins, &MINUTE)),
+        60..=1439 => format!("{} {}", tx::AFTER, count((mins as f64 / 60.0).round() as i64, &HOUR)),
         1440..=2879 => tx::TOMORROW.to_string(),
-        _ => format!("{} {} {}", tx::AFTER, mins / 1440, tx::DAYS),
+        _ => format!("{} {}", tx::AFTER, count(mins / 1440, &DAY)),
     }
 }
 
@@ -539,8 +544,10 @@ mod tests {
     #[test]
     fn when_labels() {
         assert_eq!(when_label(0), tx::NOW);
-        assert_eq!(when_label(20 * 60_000), format!("{} 20 {}", tx::AFTER, tx::MINUTES));
+        assert_eq!(when_label(20 * 60_000), "بعد 20 دقيقة");
+        assert_eq!(when_label(5 * 3_600_000), "بعد 5 ساعات");
+        assert_eq!(when_label(2 * 3_600_000), "بعد ساعتين");
         assert_eq!(when_label(26 * 3_600_000), tx::TOMORROW);
-        assert_eq!(when_label(3 * 86_400_000), format!("{} 3 {}", tx::AFTER, tx::DAYS));
+        assert_eq!(when_label(3 * 86_400_000), "بعد 3 أيام");
     }
 }

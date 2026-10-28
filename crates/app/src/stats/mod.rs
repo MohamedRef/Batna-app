@@ -13,7 +13,7 @@ use batna_core::review::{ReviewEvent, StudyStore};
 use batna_core::stats::{self, Clock, Counts, LectureStats, Ratio, WeakTopic};
 use dioxus::prelude::*;
 
-use crate::content::Library;
+use crate::content::{Library, lecture_code};
 use crate::i18n::stats as tx;
 use crate::plan::Planner;
 
@@ -235,7 +235,7 @@ fn WeakCard(weak: Vec<WeakTopic>, ids: Vec<String>, data: std::rc::Rc<StudyData>
                                 span { class: "tap-row-main",
                                     span { class: "weak-title", bdi { dir: "ltr", "{w.title}" } }
                                     span { class: "muted small",
-                                        "{tx::LECTURE} {lecture_number(&w.lecture)} · {tx::COL_RETENTION} "
+                                        "{lecture_code(&w.lecture)} · {tx::COL_RETENTION} "
                                         bdi { {pct(w.retention)} }
                                         " · "
                                         bdi { "MCQ" }
@@ -318,7 +318,7 @@ pub fn SessionButton(label: &'static str, ids: Vec<String>) -> Element {
                 },
                 {label}
             }
-            span { class: "muted small", "{count} {tx::SESSION_COUNT}" }
+            span { class: "muted small", {crate::i18n::count::count(count, &crate::i18n::count::QUESTION)} " {tx::SESSION_COUNT}" }
         }
     }
 }
@@ -332,9 +332,9 @@ fn LectureCard(l: LectureStats, data: std::rc::Rc<StudyData>) -> Element {
     rsx! {
         details { class: "stat-lecture",
             summary {
-                span { class: "num", "{lecture_number(&l.id)}" }
+                span { class: "num", "{lecture_code(&l.id)}" }
                 div { class: "lecture-main",
-                    span { class: "lecture-title", bdi { dir: "ltr", "{l.title}" } }
+                    span { class: "lecture-title", bdi { dir: "ltr", {Library::get().title(&l.id)} } }
                     div { class: "bars",
                         Bar { label: tx::COL_SEEN, r: seen }
                         Bar { label: tx::COL_RETENTION, r: c.retention }
@@ -389,19 +389,12 @@ pub fn pct(r: Ratio) -> String {
     r.percent().map_or_else(|| tx::NO_DATA.to_string(), |p| format!("{p}%"))
 }
 
-/// `hb.L01` → `1`.
-pub fn lecture_number(id: &str) -> String {
-    id.rsplit('.').next().unwrap_or(id).trim_start_matches('L').trim_start_matches('0').to_string()
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;
 
     #[test]
     fn lecture_numbers() {
-        assert_eq!(lecture_number("hb.L01"), "1");
-        assert_eq!(lecture_number("hb.L20"), "20");
         assert_eq!(pct(Ratio { right: 1, total: 4 }), "25%");
         assert_eq!(pct(Ratio::default()), tx::NO_DATA);
     }

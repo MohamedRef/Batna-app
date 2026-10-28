@@ -1,0 +1,475 @@
+schema: batna.lesson/v1
+lecture: hb.L16
+lessons:
+  # ------------------------------------------------------------------
+  - id: hb.L16.lesson1
+    title: "كتلة في الكبد بالصدفة: متتخضّش"
+    hook: "السونار كان للكلية فلقى حاجة في الكبد. أغلبها benign، بس الـ adenoma ليها 4 حالات لازم تتشال."
+    minutes: 8
+    pages: [311, 312]
+    topics: [fll, adenoma]
+    goals:
+      - "تصنّف الـ benign liver tumours في 3 عائلات"
+      - "ترتّب أشيع 3 أورام benign"
+      - "تعرف الـ adenoma: مين، ليه، وامتى تتشال"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 311
+        title: "يعني إيه FLL؟"
+        text: |
+          الـ **focal liver lesion (FLL)**: **abnormal area of tissue (mass/cyst)** جوه الكبد، وغالبًا بتتلقط **بالصدفة** في أشعة معمولة لعضو تاني (US، CT، MRI).
+
+          مع كترة الأشعة، ناس كتير بتلاقي FLL من غير أعراض. الخبر الحلو: **أغلبها benign**. بس لازم تتقيّم علشان **تستبعد** الحاجات الخطيرة: **HCC، cholangiocarcinoma، metastases**.
+      - kind: aside
+        tone: joke
+        page: 311
+        text: |
+          المريض بيدخل عليك ماسك تقرير سونار مكتوب فيه "focal lesion" وهو كاتب وصيته في الطريق. 😄
+
+          ابدأ بالجملة اللي في الكتاب: **most of these lesions are benign**، وبعدين قيّم علشان تستبعد الـ HCC والـ cholangio والـ mets.
+      - kind: figure
+        page: 311
+        title: "شجرة العيلة"
+        alt: "A classification tree. Benign hepatic tumors split into three groups. Hepatocellular: hepatocellular adenoma, focal nodular hyperplasia, nodular regenerative hyperplasia. Biliary and cystic: bile duct adenoma, biliary adenofibroma, biliary papillomatosis, simple hepatic cyst, polycystic disease. Mesenchymal: hemangioma, peliosis hepatis, angiomyolipoma."
+        caption: "3 عائلات بس: **Hepatocellular** (من خلايا الكبد)، **Biliary & cystic** (من المواسير والأكياس)، **Mesenchymal** (من الأوعية والنسيج الضام). ده سؤال essay صريح."
+        svg: |
+          <svg viewBox="0 0 330 470" xmlns="http://www.w3.org/2000/svg">
+            <rect x="60" y="6" width="210" height="36" rx="10" class="fg-ink"/>
+            <text x="165" y="29" text-anchor="middle" class="t-b">Benign hepatic tumors</text>
+            <path d="M20 42V432" class="fg-thin"/>
+            <path d="M20 74H34M20 194H34M20 352H34" class="fg-arrow"/>
+            <rect x="34" y="58" width="290" height="32" rx="8" class="fg-good"/>
+            <text x="46" y="79" class="t-b">I. Hepatocellular</text>
+            <text x="50" y="112" class="t-sm">Hepatocellular adenoma</text>
+            <text x="50" y="130" class="t-sm">Focal nodular hyperplasia (FNH)</text>
+            <text x="50" y="148" class="t-sm">Nodular regenerative hyperplasia (NRH)</text>
+            <rect x="34" y="178" width="290" height="32" rx="8" class="fg-acc"/>
+            <text x="46" y="199" class="t-b">II. Biliary and cystic</text>
+            <text x="50" y="232" class="t-sm">Bile duct adenoma</text>
+            <text x="50" y="250" class="t-sm">Biliary adenofibroma</text>
+            <text x="50" y="268" class="t-sm">Biliary papillomatosis</text>
+            <text x="50" y="286" class="t-sm">Simple hepatic cyst</text>
+            <text x="50" y="304" class="t-sm">Polycystic disease</text>
+            <rect x="34" y="336" width="290" height="32" rx="8" class="fg-bad"/>
+            <text x="46" y="357" class="t-b">III. Mesenchymal</text>
+            <text x="50" y="390" class="t-sm">Hemangioma (cavernous)</text>
+            <text x="50" y="408" class="t-sm">Peliosis hepatis</text>
+            <text x="50" y="426" class="t-sm">Angiomyolipoma</text>
+            <text x="165" y="460" text-anchor="middle" class="t-sm t-mut">Commonest: hemangioma, then FNH, then adenoma</text>
+          </svg>
+      - kind: sort
+        page: 311
+        prompt: "حط كل ورم في عيلته:"
+        bins: ["Hepatocellular", "Biliary and cystic", "Mesenchymal"]
+        cards:
+          - { text: "Adenoma", bin: 0 }
+          - { text: "FNH", bin: 0 }
+          - { text: "NRH", bin: 0 }
+          - { text: "Biliary papillomatosis", bin: 1 }
+          - { text: "Simple hepatic cyst", bin: 1 }
+          - { text: "Polycystic disease", bin: 1 }
+          - { text: "Hemangioma", bin: 2 }
+          - { text: "Peliosis hepatis", bin: 2 }
+          - { text: "Angiomyolipoma", bin: 2 }
+        why: "الـ hepatocellular التلاتة كلهم من **خلايا الكبد نفسها**: adenoma و FNH و NRH. الـ biliary فيها **bile/biliary/cyst**. والـ mesenchymal **دم ودهون وعضل**: hemangioma و peliosis و angiomyolipoma."
+      - kind: order
+        page: 311
+        prompt: "رتّب من الأشيع للأقل:"
+        steps:
+          - "Hemangioma"
+          - "Focal nodular hyperplasia"
+          - "Hepatocellular adenoma"
+        why: "الكتاب: hemangioma **first most common** (في 5–10% من الناس)، FNH **2nd**، adenoma **3rd**. احفظها **H-F-A**: زي «هفّة» الواحد لما يتخض من التقرير."
+      - kind: explain
+        page: 311
+        title: "Hepatocellular adenoma: البطاقة"
+        text: |
+          - **3rd most common** benign hepatic tumor.
+          - **Women > men**، غالبًا في **سن الإنجاب**، وغالبًا **single**.
+
+          **Clinical picture:**
+          - **Asymptomatic**.
+          - **Pressure** على اللي جنبه (blood vessel، bile duct).
+          - **Rt. hypochondrial pain** من شد الـ **capsule**.
+          - **Diffuse abdominal pain + intraperitoneal hemorrhage** لو **ruptured**.
+          - **Malignant transformation**: لحد **8%** من كل المرضى، ولحد **40–50% في الرجالة**.
+
+          **Lab:** **normal** (transaminases، ALP، AFP)، إلا لو بيضغط على الـ bile ducts ويعمل **obstructive jaundice**.
+      - kind: explain
+        page: 312
+        title: "جاي منين، وبنشوفه إزاي"
+        text: |
+          **Risk factors:**
+          - **Long standing OCP**: لحد **90%** من الحالات كان عندهم history طويل.
+          - **Glycogen storage diseases**.
+          - **Long standing anabolic steroids**.
+
+          **Diagnosis:**
+          - غالبًا بيتلقط في **routine abdominal US** (رخيص و sensitive).
+          - بعدها **contrast enhanced US أو MRI** علشان تفرّقه عن الـ **FNH**.
+          - و **liver biopsy**.
+      - kind: reveal
+        page: 312
+        prompt: "مريضة عندها adenoma وبتاخد حبوب منع حمل من 10 سنين. **إيه أول حاجة** تعملها قبل ما تفكر في أي جراحة؟"
+        answer: |
+          **Stop risk factors**: وقّف الـ **hormones (OCP)** والـ **anabolic steroids**. دي أول سطر في العلاج في الكتاب.
+
+          المنطق: الـ adenoma ورم حقيقي **بيتغذّى على الهرمونات**، ولو شلت الوقود ممكن يقف أو يصغر.
+      - kind: mnemonic
+        page: 312
+        word: "SLaP M"
+        parts:
+          - { key: "S", text: "Symptomatic" }
+          - { key: "La", text: "Large: more than 5 cm (liable to rupture and bleeding)" }
+          - { key: "P", text: "Pedunculated (torsion)" }
+          - { key: "M", text: "Men (high rate of malignant transformation)" }
+        hook: |
+          الـ adenoma اللي **تستاهل قلم** (SLaP) بالمشرط: لو عاملة أعراض، أو كبيرة **> 5 cm**، أو ليها رجل (pedunculated)، أو المريض **راجل** (Man).
+
+          ولو **بتنزف**: **TAE** (trans-arterial embolization).
+      - kind: check
+        page: 312
+        question: "A 26-year-old woman on the pill has an incidental **3 cm** single hepatic adenoma. She has no symptoms and it is not pedunculated. Best plan per the book?"
+        options:
+          - "Stop the pill and follow up"
+          - "Surgical excision now"
+          - "Trans-arterial embolization"
+          - "Nothing: adenomas never change"
+        answer: 0
+        why:
+          - "صح: مفيش ولا indication من **SLaP M** (مش symptomatic، أقل من 5 cm، مش pedunculated، ست). فالخطوة الأولى **stop risk factors** والمتابعة."
+          - "الجراحة لو SLaP M، ومفيش واحدة منهم هنا."
+          - "الـ TAE للـ **bleeding** adenoma."
+          - "غلط: ممكن تنزف أو تقلب malignant (لحد 8%)."
+      - kind: aside
+        tone: exam
+        page: 312
+        text: |
+          سؤال المحاضرة: **"Mention the treatment of hepatic adenoma"**. الإجابة في 3 سطور:
+          - **Stop risk factors** (hormones، anabolic steroids).
+          - **Surgical excision** لو: symptomatic، > 5 cm، pedunculated، male.
+          - **Bleeding**: TAE.
+      - kind: try
+        items: [hb.L16.003, hb.L16.009, hb.L16.012, hb.L16.006]
+    recap:
+      - "FLL غالبًا incidental وأغلبها benign، بس استبعد HCC و cholangio و mets."
+      - "3 عائلات: hepatocellular، biliary & cystic، mesenchymal."
+      - "الأشيع: hemangioma ثم FNH ثم adenoma."
+      - "Adenoma: ست في سن الإنجاب، single، OCP في 90%، labs normal، malignant لحد 8% (40–50% في الرجالة)."
+      - "العلاج: وقّف الهرمونات، **SLaP M** = excision، والنزيف = TAE."
+    practice: [hb.L16.001, hb.L16.002, hb.L16.003, hb.L16.004, hb.L16.005, hb.L16.006, hb.L16.007, hb.L16.008, hb.L16.009, hb.L16.010, hb.L16.011, hb.L16.012, hb.L16.013, hb.L16.014, hb.L16.015, hb.L16.016, hb.L16.041, hb.L16.042, hb.L16.043]
+
+  # ------------------------------------------------------------------
+  - id: hb.L16.lesson2
+    title: "FNH وNRH: رد فعل مش ورم"
+    hook: "الـ FNH مش بتخاف من حبوب منع الحمل، والـ NRH بيعمل portal hypertension من غير cirrhosis. الاتنين رد فعل على مواسير بايظة."
+    minutes: 8
+    pages: [313, 315]
+    topics: [fnh, nrh]
+    goals:
+      - "تفرّق الـ FNH عن الـ adenoma في جدول"
+      - "تشرح ليه الـ FNH مش contraindication للحمل والـ OCP"
+      - "تعرف أسباب الـ NRH وشكله تحت الميكروسكوب"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 313
+        title: "FNH: البطاقة"
+        quote: "FNH is thought to be a hyperplastic response to an artery to portal vein shunt."
+        text: |
+          - **2nd most frequent** benign hepatic tumor.
+          - الكتاب: **usually multiple**، **< 2 cm**.
+          - **Not a contraindication** للـ **hormonal therapy** أو **pregnancy**.
+          - **Pathogenesis:** **hyperplastic response to an artery to portal vein shunt**.
+          - **Histology:** **normal hepatocytes** + مناطق **fibrous tissue** فيها **large arteries** و **proliferating bile ducts**، و **central scar** في لحد **60%**. والـ **background liver normal**.
+          - **Diagnosis:** imaging (US، contrast enhanced US، MRI) و biopsy زي الـ adenoma.
+      - kind: update
+        page: 313
+        ref: "EASL CPG on benign liver tumours 2016"
+        text: |
+          الكتاب كاتب إن الـ FNH **usually multiple**. المراجع الحالية: الـ FNH غالبًا **solitary**، ومتعددة في حوالي **20%** بس.
+
+          في الامتحان اكتب كلام الكتاب.
+      - kind: reveal
+        page: 313
+        prompt: "ليه الـ adenoma لازم نوقف معاها الـ OCP، والـ FNH **لأ**؟"
+        answer: |
+          من كلام الكتاب نفسه:
+
+          - الـ **adenoma** ورم حقيقي، و **90%** من المرضى كانوا على **OCP** لفترة طويلة، فالهرمون **وقود**.
+          - الـ **FNH** مش ورم أصلًا: هي **hyperplastic response** لـ **shunt** في الأوعية. السبب **وعائي** مش هرموني، فالكتاب بيقول صراحة إنها **مش contraindication** للهرمونات ولا للحمل.
+      - kind: aside
+        tone: analogy
+        page: 313
+        text: |
+          الـ **adenoma** زي **مستأجر جديد** بيتغذى على الهرمونات وممكن يعمل مشاكل (نزيف، malignant).
+
+          الـ **FNH** زي **الزرع اللي بيطلع حوالين ماسورة بتهرّب** (artery-to-portal vein shunt): مش غريب عن البيت، ده الكبد العادي (normal hepatocytes) بيكبر حوالين المشكلة، وفي النص **ندبة** (central scar) مكان الماسورة.
+      - kind: figure
+        page: 313
+        title: "Adenoma ضد FNH"
+        alt: "Two liver sketches. Top: hepatic adenoma, a single round lesion with small dark spots of bleeding, labelled single, women on the pill, may bleed or rupture, malignant change up to 8 percent and 40 to 50 percent in men. Bottom: focal nodular hyperplasia, a lesion with a central star-shaped scar from which fibrous bands carry large arteries outward, in a normal background liver, labelled central scar in up to 60 percent, book says usually multiple and under 2 cm, conservative."
+        caption: "فوق: **adenoma**: كتلة واحدة ممكن تنزف. تحت: **FNH**: ندبة في النص وأشرطة fibrous فيها **large arteries** و bile ducts، والكبد حواليها **normal**."
+        svg: |
+          <svg viewBox="0 0 330 430" xmlns="http://www.w3.org/2000/svg">
+            <text x="165" y="18" text-anchor="middle" class="t-b t-lg t-bad">Hepatic adenoma</text>
+            <path d="M14 70Q30 26 160 28Q318 30 318 78Q304 126 226 136Q130 162 46 146Q8 124 14 70Z" class="fg-box"/>
+            <circle cx="120" cy="88" r="36" class="fg-bad"/>
+            <circle cx="108" cy="80" r="5" class="fg-dot-bad"/>
+            <circle cx="130" cy="98" r="6" class="fg-dot-bad"/>
+            <circle cx="122" cy="72" r="4" class="fg-dot-bad"/>
+            <text x="170" y="74" class="t-sm t-b">Single</text>
+            <text x="170" y="90" class="t-sm">OCP (up to 90%)</text>
+            <text x="170" y="106" class="t-sm">May bleed or rupture</text>
+            <text x="14" y="176" class="t-sm t-bad">Malignant: up to 8% (40–50% in men)</text>
+            <text x="14" y="194" class="t-sm">Stop hormones; excise if SLaP M; bleeding: TAE</text>
+            <g transform="translate(0,214)">
+              <text x="165" y="18" text-anchor="middle" class="t-b t-lg t-good">FNH</text>
+              <path d="M14 70Q30 26 160 28Q318 30 318 78Q304 126 226 136Q130 162 46 146Q8 124 14 70Z" class="fg-box"/>
+              <circle cx="120" cy="88" r="36" class="fg-good"/>
+              <path d="M120 88L120 56M120 88L148 70M120 88L150 100M120 88L126 122M120 88L92 112M120 88L88 76M120 88L104 58" class="fg-ink" stroke-width="2.4"/>
+              <circle cx="120" cy="88" r="7" class="fg-dot-good"/>
+              <text x="170" y="74" class="t-sm t-b">Central scar (up to 60%)</text>
+              <text x="170" y="90" class="t-sm">Large arteries, bile ducts</text>
+              <text x="170" y="106" class="t-sm">Normal background liver</text>
+              <text x="14" y="176" class="t-sm">Book: usually multiple, under 2 cm</text>
+              <text x="14" y="194" class="t-sm t-good">Static: conservative follow-up</text>
+            </g>
+          </svg>
+      - kind: table
+        page: 313
+        title: "Adenoma vs FNH"
+        columns: ["Feature", "Hepatic adenoma", "FNH"]
+        rows:
+          - ["Frequency", "3rd most common", "2nd most common"]
+          - ["Number (book)", "Usually single", "Usually multiple, < 2 cm"]
+          - ["Hormones / pregnancy", "OCP is the main risk factor: stop it", "Not a contraindication"]
+          - ["Malignant change", "Up to 8% (40–50% in men)", "Rare"]
+          - ["Histology clue", "Not given in the book", "Central scar (up to 60%), normal background"]
+          - ["Management", "Stop hormones; excise if SLaP M; bleeding: TAE", "Conservative follow-up"]
+        hide: [[1, 1], [1, 2], [2, 2], [3, 1], [4, 2], [5, 2]]
+      - kind: explain
+        page: 314
+        title: "علاج الـ FNH"
+        text: |
+          الـ FNH **STATIC lesion**: الـ **rupture** والـ **malignant transformation** **RARE**.
+
+          فالعلاج **conservative with follow up**، إلا لو **symptomatic**، أو **large**، أو **pedunculated**: ساعتها **فكّر في الجراحة**.
+      - kind: check
+        page: 313
+        question: "A 28-year-old woman with FNH on MRI asks if she can get pregnant. What does the book say?"
+        options:
+          - "Yes: FNH is not a contraindication to pregnancy or hormones"
+          - "No: resect it first"
+          - "Only after trans-arterial embolization"
+          - "Only if it is under 5 cm"
+        answer: 0
+        why:
+          - "صح: الكتاب صريح: **not a contraindication** للـ hormonal therapy أو الـ pregnancy."
+          - "الـ FNH static، والجراحة بس لو symptomatic أو large أو pedunculated."
+          - "الـ TAE للـ bleeding **adenoma**."
+          - "رقم الـ 5 cm ده بتاع الـ **adenoma**."
+      - kind: explain
+        page: 314
+        title: "NRH: كبد مليان حبيبات صغيرة"
+        text: |
+          الـ **nodular regenerative hyperplasia (NRH)**: **non specific response** لـ **obliteration of small portal veins**. السبب عادةً:
+          - **Systemic vasculitis**: **RA، PAN، SLE، SS**.
+          - **Portal vein thrombosis** (hyper-coagulable state).
+          - **Toxic injury by drugs**: **methotrexate، azathioprine**.
+
+          **Histology** (ص 315): **micro-nodules 1–2 mm** محوطة بمناطق **atrophy** و **without fibrous septa**.
+
+          **Clinical:** يا **asymptomatic**، يا علامات وأعراض **portal hypertension**.
+      - kind: reveal
+        page: 315
+        prompt: "مريض عنده varices و splenomegaly، والـ biopsy **مفيهاش fibrous septa**. ليه ده **مش** cirrhosis؟"
+        answer: |
+          افتكر تعريف الـ cirrhosis من **L01**: **fibrosis + regenerative nodules** مع بعض.
+
+          الـ **NRH** فيه **nodules (1–2 mm)** بس **من غير fibrous septa**، فمش cirrhosis.
+
+          والـ PHT جاي منين؟ الـ **small portal veins مقفولة** (obliteration)، فالدم بيلاقي مقاومة **قبل** الـ sinusoids. يعني **non-cirrhotic portal hypertension** (المنطق ده physiology مقبولة؛ الكتاب بيقول "signs and symptoms of PHT").
+      - kind: sort
+        page: 315
+        prompt: "Adenoma ولا FNH ولا NRH؟"
+        bins: ["Adenoma", "FNH", "NRH"]
+        cards:
+          - { text: "OCP in up to 90%", bin: 0 }
+          - { text: "Bleeding: TAE", bin: 0 }
+          - { text: "Central scar", bin: 1 }
+          - { text: "Artery-to-portal vein shunt", bin: 1 }
+          - { text: "Not a contraindication to pregnancy", bin: 1 }
+          - { text: "Obliterated small portal veins", bin: 2 }
+          - { text: "Methotrexate", bin: 2 }
+          - { text: "1–2 mm nodules without fibrous septa", bin: 2 }
+        why: "Adenoma = هرمونات ونزيف. FNH = shunt وندبة ومش بتخاف من الحمل. NRH = portal veins صغيرة مقفولة، أدوية وvasculitis، وحبيبات من غير septa."
+      - kind: try
+        items: [hb.L16.020, hb.L16.022, hb.L16.023, hb.L16.026, hb.L16.027]
+    recap:
+      - "FNH: التانية في الشيوع، hyperplastic response لـ artery-to-portal vein shunt، central scar لحد 60%، background normal."
+      - "الكتاب: FNH usually multiple و < 2 cm (المراجع: غالبًا solitary)."
+      - "FNH مش contraindication للـ OCP ولا الحمل، و static: conservative إلا لو symptomatic أو large أو pedunculated."
+      - "NRH: obliteration of small portal veins (vasculitis، PVT، methotrexate/azathioprine)."
+      - "NRH: micronodules 1–2 mm من غير fibrous septa، asymptomatic أو PHT."
+    practice: [hb.L16.017, hb.L16.018, hb.L16.019, hb.L16.020, hb.L16.021, hb.L16.022, hb.L16.023, hb.L16.024, hb.L16.025, hb.L16.026, hb.L16.027, hb.L16.028, hb.L16.029]
+
+  # ------------------------------------------------------------------
+  - id: hb.L16.lesson3
+    title: "Hemangioma والباقيين: الطيب والغريب"
+    hook: "أشيع ورم benign في الكبد ومبيبقاش malignant أبدًا، وإزاي تشخّصه بالـ CT من غير ما تلمسه."
+    minutes: 8
+    pages: [315, 317]
+    topics: [biliary-cystic, mesenchymal]
+    goals:
+      - "تعدّ الـ biliary and cystic lesions"
+      - "تعرف الـ hemangioma: أرقامه، أعراضه، ومين بيكبّره"
+      - "تفرّق peliosis عن hemangioma، وتفتكر مكونات الـ angiomyolipoma"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 315
+        title: "Biliary and cystic lesions"
+        text: |
+          - **Bile duct adenoma**.
+          - **Biliary adenofibroma**.
+          - **Biliary papillomatosis**: **benign tumor** في الـ biliary tree معاه **thick mucous secretion** ممكن يعمل **biliary obstruction من غير tumor mass واضحة**.
+          - **Simple hepatic cyst**: **solitary، non-parasitic**، غالبًا **developmental**. **Just follow-up**.
+          - **Polycystic disease**: **multiple cysts** ممكن تجيب الكبد والرئة والكلى (كلام الكتاب: **liver, lung and kidney**).
+      - kind: update
+        page: 315
+        ref: "EASL CPG on cystic liver diseases 2022"
+        text: |
+          الـ **polycystic disease** الكلاسيكي (ADPKD) بيجيب **الكلى والكبد** (وأحيانًا البنكرياس)، **مش الرئة**.
+
+          في الامتحان اكتب جملة الكتاب: **liver, lung and kidney**.
+      - kind: check
+        page: 315
+        question: "Jaundice from bile duct obstruction with thick mucus, but imaging shows **no obvious tumor mass**. Which benign lesion fits the book's description?"
+        options:
+          - "Biliary papillomatosis"
+          - "Simple hepatic cyst"
+          - "Bile duct adenoma"
+          - "Cavernous hemangioma"
+        answer: 0
+        why:
+          - "صح: الكتاب: thick mucous secretion ممكن تعمل obstruction **without obvious tumor mass**."
+          - "الـ simple cyst solitary و developmental، follow-up بس، ومش بيعمل mucus."
+          - "الكتاب بيذكر اسمه بس من غير وصف كده."
+          - "الـ hemangioma mesenchymal ومبيعملش mucus ولا obstruction بالشكل ده."
+      - kind: explain
+        page: 315
+        title: "Hemangioma: الطيب"
+        text: |
+          الـ **cavernous hemangioma**:
+          - **The first most common** benign hepatic tumor، في **5–10%** من الناس.
+          - **Small**: asymptomatic.
+          - **Large أو multiple**: **right hypochondrial pain**، **mass effect**، وممكن تسمع **vascular bruit**.
+          - **Rupture rare**، و **malignant transformation does not occur**.
+          - ممكن **يكبر** مع **pregnancy** و **OCP**.
+      - kind: aside
+        tone: joke
+        page: 315
+        text: |
+          الـ hemangioma ده **الطيب الوحيد في الفيلم**: أشهر واحد في الكبد، ومبيقلبش malignant **أبدًا**، ونادرًا لما يعمل مشكلة. بس متستفزّوش: الحمل والـ OCP ممكن **يكبّروه**. 😄
+      - kind: update
+        page: 317
+        ref: "EASL CPG on benign liver tumours 2016"
+        text: |
+          سؤال المحاضرة: **"How to diagnose liver hemangioma by contrast enhanced CT?"** والكتاب **مش شارح** الـ CT pattern في النص.
+
+          التدريس القياسي:
+          - **Arterial phase:** **peripheral, nodular, discontinuous** enhancement.
+          - **Portal / delayed:** **centripetal fill-in** تدريجي من البرّه للجوّه.
+          - في الـ delayed يفضل **iso- أو hyperdense زي الـ blood pool**، **من غير washout**.
+          - وعلى الـ MRI بيبقى **T2 bright جدًا**.
+      - kind: figure
+        page: 317
+        title: "Hemangioma على الـ contrast CT (مش من نص الكتاب)"
+        alt: "Three circles show a hemangioma over three CT phases. Arterial: separate bright nodules around the edge only. Portal venous: a thick bright rim filling inward, the centre still dark. Delayed: the whole lesion bright like blood, no washout."
+        caption: "من البرّه للجوّه، والصبغة **بتفضل** (no washout). ده رسم للتدريس القياسي (EASL 2016)، والكتاب بيسأل السؤال من غير ما يشرح الإجابة."
+        svg: |
+          <svg viewBox="0 0 330 230" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L16a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <circle cx="55" cy="80" r="42" class="fg-box"/>
+            <circle cx="55" cy="40" r="7" class="fg-dot-acc"/>
+            <circle cx="88" cy="58" r="6" class="fg-dot-acc"/>
+            <circle cx="92" cy="96" r="7" class="fg-dot-acc"/>
+            <circle cx="62" cy="120" r="6" class="fg-dot-acc"/>
+            <circle cx="24" cy="106" r="7" class="fg-dot-acc"/>
+            <circle cx="20" cy="66" r="6" class="fg-dot-acc"/>
+            <path d="M104 80H122" class="fg-arrow" marker-end="url(#L16a)"/>
+            <circle cx="165" cy="80" r="42" class="fg-dot-acc"/>
+            <circle cx="165" cy="80" r="22" class="fg-box"/>
+            <path d="M214 80H232" class="fg-arrow" marker-end="url(#L16a)"/>
+            <circle cx="275" cy="80" r="42" class="fg-dot-acc"/>
+            <text x="55" y="148" text-anchor="middle" class="t-sm t-b">Arterial</text>
+            <text x="55" y="164" text-anchor="middle" class="t-sm">peripheral</text>
+            <text x="55" y="180" text-anchor="middle" class="t-sm">nodular</text>
+            <text x="165" y="148" text-anchor="middle" class="t-sm t-b">Portal</text>
+            <text x="165" y="164" text-anchor="middle" class="t-sm">centripetal</text>
+            <text x="165" y="180" text-anchor="middle" class="t-sm">fill-in</text>
+            <text x="275" y="148" text-anchor="middle" class="t-sm t-b">Delayed</text>
+            <text x="275" y="164" text-anchor="middle" class="t-sm">like blood pool</text>
+            <text x="275" y="180" text-anchor="middle" class="t-sm">no washout</text>
+            <text x="165" y="214" text-anchor="middle" class="t-sm t-mut">Standard teaching (EASL 2016), not the book's text</text>
+          </svg>
+      - kind: order
+        page: 317
+        prompt: "رتّب شكل الـ hemangioma على الـ contrast CT من أول الصبغة لآخرها:"
+        steps:
+          - "Peripheral, nodular, discontinuous enhancement"
+          - "Progressive centripetal fill-in"
+          - "Whole lesion like the blood pool, no washout"
+        why: "Arterial ثم portal venous ثم delayed: من البرّه للجوّه، والصبغة بتفضل. الـ **washout** ده بتاع الـ HCC، مش الـ hemangioma."
+      - kind: explain
+        page: 316
+        title: "الاتنين الغريبين"
+        text: |
+          **Peliosis hepatis:** **blood filled cavities** زي الـ hemangioma، **بس**:
+          - الـ **walls** مش **well developed** زي الـ hemangioma.
+          - **History of anabolic steroids** غالبًا **positive**.
+
+          **Angiomyolipoma:**
+          - **Rare**، في الستات أكتر من الرجالة (**5:1**)، **mean age في العقد الخامس**، غالبًا **solitary**.
+          - **Mixed histology**: **lipomatous، myomatous، angiomatous، trabecular**.
+      - kind: mnemonic
+        page: 316
+        word: "MALT"
+        parts:
+          - { key: "M", text: "Myomatous" }
+          - { key: "A", text: "Angiomatous" }
+          - { key: "L", text: "Lipomatous" }
+          - { key: "T", text: "Trabecular" }
+        hook: |
+          الـ **angiomyolipoma** بيحب مشروب الشعير **MALT** اللي في تلاجة كل كشك. اسمه أصلًا فيه **angio + myo + lipo**، وزوّد عليهم **trabecular**.
+      - kind: match
+        page: 316
+        prompt: "وصّل كل lesion بأهم جملة عنه في الكتاب:"
+        pairs:
+          - ["Hemangioma", "Most common; grows in pregnancy and on OCP"]
+          - ["Peliosis hepatis", "Blood cavities with poor walls; anabolic steroids"]
+          - ["Angiomyolipoma", "Women 5:1, fifth decade, solitary"]
+          - ["Simple hepatic cyst", "Solitary, developmental: just follow-up"]
+          - ["Biliary papillomatosis", "Thick mucus, obstruction without a mass"]
+        why: "الـ peliosis والـ hemangioma الاتنين blood-filled، والفرق في **الجدار** و **الـ steroids**."
+      - kind: aside
+        tone: exam
+        page: 317
+        text: |
+          أسئلة المحاضرة التلاتة، وإجابتها في الدروس دي:
+          - **Classification of benign liver tumors**: الـ 3 عائلات (الدرس الأول).
+          - **Treatment of hepatic adenoma**: stop hormones، SLaP M، TAE (الدرس الأول).
+          - **Hemangioma by contrast CT**: peripheral nodular ← centripetal fill-in ← no washout (هنا، ومن الـ guideline).
+      - kind: try
+        items: [hb.L16.034, hb.L16.035, hb.L16.030, hb.L16.039, hb.L16.044]
+    recap:
+      - "Biliary & cystic: bile duct adenoma، adenofibroma، papillomatosis (mucus بيسد من غير mass)، simple cyst (follow-up)، polycystic."
+      - "Hemangioma: الأشيع (5–10%)، مبيقلبش malignant، rupture نادر، بيكبر مع الحمل والـ OCP."
+      - "CT: peripheral nodular ← centripetal fill-in ← no washout (standard teaching)."
+      - "Peliosis: blood cavities بجدار ضعيف + anabolic steroids."
+      - "Angiomyolipoma: ستات 5:1، العقد الخامس، solitary، **MALT**."
+    practice: [hb.L16.030, hb.L16.031, hb.L16.032, hb.L16.033, hb.L16.034, hb.L16.035, hb.L16.036, hb.L16.037, hb.L16.038, hb.L16.039, hb.L16.040, hb.L16.044]

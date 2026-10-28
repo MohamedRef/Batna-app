@@ -205,7 +205,7 @@ items:
     kind: cloze
     topic: screening
     text: "To estimate dry weight in fluid retention, subtract {{c1::5%}} for mild, {{c2::10%}} for moderate and {{c3::15%}} for severe ascites."
-    extra: Add another 5% if there is bilateral pedal oedema. Or use post-paracentesis weight or weight before fluid retention.
+    extra: Or use post-paracentesis weight, or weight before fluid retention, if available.
     src: { page: 406 }
     status: unverified
     tags: [numbers, high-yield]
@@ -223,7 +223,7 @@ items:
     columns: [Finding, Risk group, Next step]
     rows:
       - ["BMI <18.5 kg/m² or Child–Pugh C", High risk, "Detailed assessment by dietician (SGA/RFH-GA, intake) and assess sarcopenia (CT at L3; DEXA or BIA if no fluid retention)"]
-      - ["BMI 18.5–29.9 kg/m², Child A or B", "Screen with nutritional screening tools", "Medium or low risk by tool result"]
+      - ["BMI 18.5–29.9 kg/m², Child A or B", "Screen with nutritional screening tools", "High, medium or low risk by tool result (high or medium → detailed assessment)"]
       - ["Low risk", Low risk, "Re-screen at least once a year"]
       - ["BMI ≥30 kg/m²", Obesity, "Nutritional assessment and lifestyle intervention (compensated cirrhosis); consider sarcopenia"]
     blanks: [[0, 1], [2, 2], [3, 2]]
@@ -864,37 +864,37 @@ items:
     topic: he
     stem: A 58-year-old man with cirrhosis is admitted with grade II hepatic encephalopathy. He is eating. What is the right nutritional plan?
     options:
-      - Stop all protein for 72 hours
-      - Restrict protein to 0.5 g/kg/day
-      - Keep normal energy and protein intake, favouring vegetable and dairy protein
-      - Give only intravenous glucose
-      - Insert a PEG tube
+      - Protein-free diet for 72 hours
+      - Protein 0.5 g/kg/day until the HE clears
+      - Protein 1.2–1.5 g/kg/day, favouring vegetable and dairy protein
+      - BCAA supplements only, with no dietary protein
+      - Protein 0.8 g/kg/day, mainly animal protein
     answer: 2
     why:
       - Protein restriction should be avoided in HE.
-      - Protein should not be lower than the general 1.2–1.5 g/kg.
-      - Correct. HE needs the same energy and nitrogen as other cirrhotics; encourage vegetable and dairy protein.
-      - He can eat; oral intake is preferred.
-      - PEG is avoided in cirrhosis because of bleeding risk.
+      - Protein should not be lower than the general 1.2–1.5 g/kg for cirrhosis.
+      - Correct. HE needs the same energy and nitrogen as other cirrhotics, and vegetable and dairy protein should be encouraged (p413).
+      - BCAA may be added to reach the nitrogen target, but not instead of dietary protein.
+      - The amount is below the general target, and animal protein is tolerated less well than vegetable and dairy protein.
     src: { page: 413 }
     status: unverified
   - id: hb.L20.101
     kind: mcq
     topic: obesity
-    stem: A 52-year-old woman with compensated MASH cirrhosis has a BMI of 34 kg/m² with no fluid retention. Which plan matches the guideline in the lecture?
+    stem: A 52-year-old woman with compensated MASH cirrhosis has a BMI of 34 kg/m² with no fluid retention. Which diet matches the guideline in the lecture?
     options:
-      - No dietary change; obesity protects against malnutrition
-      - A moderately hypocaloric diet (−500 to −800 kcal/day) with protein >1.5 g/kg ideal BW, aiming for ≥5–10% weight loss
-      - A very low calorie diet with protein restriction
-      - 35 kcal/kg actual BW and 1.2 g/kg actual BW
-      - Bariatric surgery for everyone
+      - −1,000 to −1,500 kcal/day; protein 0.8 g/kg ideal BW
+      - −500 to −800 kcal/day; protein >1.5 g/kg ideal BW
+      - 35 kcal/kg actual BW; protein 1.2 g/kg actual BW
+      - 25 kcal/kg ideal BW; protein 2.0 g/kg ideal BW
+      - −500 to −800 kcal/day; protein 0.8 g/kg ideal BW
     answer: 1
     why:
-      - Obesity does not rule out malnutrition, and weight loss improves outcomes.
-      - Correct. Tailored hypocaloric diet, adequate protein, supervised moderate exercise.
-      - Protein restriction would worsen sarcopenia.
-      - 35 kcal/kg actual BW is for non-obese patients.
-      - Not part of the lecture's recommendations.
+      - Too large a deficit with too little protein; it would cost muscle.
+      - Correct. A tailored, moderately hypocaloric diet with adequate protein, aiming for progressive weight loss of 5–10% or more without losing protein stores (p412).
+      - 35 kcal/kg actual BW is the general target for non-obese cirrhotics.
+      - That is the book's tube or parenteral feeding target for obese patients after LT (p417).
+      - The calorie deficit is right, but 0.8 g/kg is below the >1.5 g/kg ideal BW the guideline asks for.
     src: { page: 412 }
     status: unverified
   - id: hb.L20.102
@@ -919,7 +919,7 @@ items:
   - id: hb.L20.103
     kind: mcq
     topic: micronutrients
-    stem: A patient with cholestatic liver disease has 25(OH)D of 14 ng/ml. What is the treatment target?
+    stem: A patient with PBC-related cirrhosis has 25(OH)D of 14 ng/ml. What is the treatment target?
     options:
       - Above 10 ng/ml
       - Above 20 ng/ml
@@ -929,8 +929,8 @@ items:
     answer: 2
     why:
       - Still deficient.
-      - 20 ng/ml is the deficiency threshold, not the target.
-      - Correct. Supplement orally to reach 25(OH)D >30 ng/ml.
+      - 20 ng/ml is the threshold for supplementing, not the target.
+      - Correct. In cirrhosis with vitamin D below 20 ng/ml, supplement orally to reach 25(OH)D >30 ng/ml.
       - Far above the target.
       - Vitamin D should be assessed because deficiency is common and affects outcome.
     src: { page: 412 }
@@ -996,39 +996,39 @@ items:
   - id: hb.L20.107
     kind: mcq
     topic: malnutrition
-    stem: Which statement about malnutrition in cirrhosis is correct?
+    stem: How common is malnutrition in cirrhosis, according to the lecture?
     options:
-      - It affects about 20% of decompensated patients
-      - Men lose fat stores faster, women lose muscle faster
-      - It affects more than half of decompensated patients and is an independent predictor of lower survival
-      - Obese patients cannot be malnourished
-      - It does not affect transplant outcomes
+      - About 20% of decompensated patients
+      - About 30% of decompensated patients
+      - More than 50% of decompensated patients
+      - About 50% of compensated patients
+      - About 80% of compensated patients
     answer: 2
     why:
-      - 20% is the compensated figure; decompensated is >50%.
-      - Reversed; women lose fat, men lose muscle faster.
-      - Correct.
-      - Sarcopenic obesity exists and obesity does not rule out malnutrition.
-      - It raises waiting-list mortality and post-operative complications.
+      - 20% is the compensated figure; in decompensated cirrhosis it is more than 50%.
+      - Too low; the book gives more than 50% in decompensated cirrhosis.
+      - Correct. Malnutrition affects 20% of compensated and more than 50% of decompensated patients (p402).
+      - Too high; the compensated figure is 20%.
+      - Far too high; the compensated figure is 20%.
     src: { page: 402 }
     status: unverified
   - id: hb.L20.108
     kind: mcq
     topic: critical
-    stem: A 45-year-old man with severe alcoholic hepatitis in the ICU is eating little. Which statement fits the lecture?
+    stem: A 45-year-old man with severe alcoholic hepatitis in the ICU is eating little. Which daily energy and protein targets does the lecture give?
     options:
-      - His REE is likely lower than normal, so give 20 kcal/kg
-      - Give at least 35–40 kcal/kg/day and protein at least 1.2–1.3 g/kg/day, measuring REE by indirect calorimetry if possible
-      - Insert a PEG tube for long-term feeding
-      - Avoid nutritional support until alcohol is stopped for 6 months
-      - Use immune-enhancing regimens because they reduce mortality
-    answer: 1
+      - 20 kcal/kg; protein 0.8 g/kg
+      - 25 kcal/kg; protein 2.0 g/kg ideal BW
+      - 35–40 kcal/kg; protein 1.2–1.3 g/kg
+      - 30 kcal/kg; protein 1.2 g/kg
+      - 45 kcal/kg; protein 0.6 g/kg
+    answer: 2
     why:
-      - Active alcohol abuse may raise REE.
-      - Correct. Critically ill targets, and nutritional support may improve HE and survival.
-      - PEG is avoided in cirrhosis because of bleeding.
-      - Nutritional support is recommended now.
-      - Specialised regimens have not been shown to improve outcomes.
+      - Too little of both; active alcohol use may even raise REE.
+      - That is the book's target for obese patients on tube or parenteral feeding after LT.
+      - Correct. Energy not lower than 35–40 kcal/kg/day (or 1.3× measured REE) and protein not lower than 1.2–1.3 g/kg/day; measuring REE by indirect calorimetry is advisable (p417).
+      - Both are below the critically ill floor of 35–40 kcal/kg and 1.2–1.3 g/kg.
+      - Protein restriction worsens sarcopenia; the protein floor is 1.2–1.3 g/kg.
     src: { page: 417 }
     status: unverified
   # ---------- cases ----------
@@ -1097,9 +1097,9 @@ items:
         answer: 0
         why: T-score ≤ −1.5 and > −2.5 is osteopenia.
       - question: What is the plan?
-        options: ["Ca + 25(OH)D, bisphosphonate depending on risk factors, repeat DEXA in 1–2 years", "Nothing, repeat in 5 years", "Start corticosteroids", "Repeat DEXA in 3 years only"]
-        answer: 0
-        why: Osteopenia gets Ca and 25(OH)D, bisphosphonates by risk factors (early menopause counts), and repeat DEXA in 1–2 years.
+        options: ["Ca + 25(OH)D; repeat DEXA in 2–3 years", "Ca + 25(OH)D ± bisphosphonate; repeat DEXA in 1–2 years", "Ca + 25(OH)D + bisphosphonate + new agents; repeat DEXA in 1 year", "No treatment; repeat DEXA in 2–3 years"]
+        answer: 1
+        why: "Osteopenia gets Ca and 25(OH)D, a bisphosphonate depending on additional risk factors (early menopause counts), and repeat DEXA in 1–2 years (p415). Other options. A: That is the plan for a normal T-score. C: That is the osteoporosis plan (T-score ≤ −2.5). D: Everyone gets Ca and 25(OH)D to preserve normal levels."
     src: { page: 415 }
     status: unverified
   # ---------- essays (p418) ----------

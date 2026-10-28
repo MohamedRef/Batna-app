@@ -88,7 +88,7 @@ fn items_in_library(kind: &str) -> Vec<(&'static str, &'static Item)> {
         .lectures
         .iter()
         .filter_map(|e| lib.lectures.get(&e.id))
-        .flat_map(|l| l.items.iter().map(move |i| (l.title.as_str(), i)))
+        .flat_map(|l| l.items.iter().map(move |i| (lib.title(&l.lecture), i)))
         .filter(|(_, i)| i.body.kind() == kind && i.status != Status::Rejected)
         .collect()
 }
@@ -98,7 +98,7 @@ pub fn find_item(id: &str) -> Option<(&'static str, &'static Item)> {
     let lib = Library::get();
     let lecture = id.rsplit_once('.').map(|(l, _)| l)?;
     let lec = lib.lectures.get(lecture)?;
-    lec.items.iter().find(|i| i.id == id).map(|i| (lec.title.as_str(), i))
+    lec.items.iter().find(|i| i.id == id).map(|i| (lib.title(&lec.lecture), i))
 }
 
 #[component]
@@ -277,7 +277,7 @@ pub fn CasePlayer(item_id: String, on_back: EventHandler) -> Element {
                                 }
                                 div { class: "case-why",
                                     bdi { "{steps[k].why}" }
-                                    BookPage { label: tx::PAGE, page, quote: item.src.quote.clone() }
+                                    BookPage { page, quote: item.src.quote.clone() }
                                 }
                                 if shown() && !answered {
                                     div { class: "row",

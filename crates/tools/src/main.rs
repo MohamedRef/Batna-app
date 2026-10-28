@@ -16,6 +16,7 @@ use batna_core::content::{Index, Lecture, SCHEMA};
 use batna_core::validate::{self, Context};
 
 mod anki;
+mod changes;
 mod lessons;
 mod packs;
 mod update;

@@ -23,6 +23,8 @@ The plan and the per-thread briefs are in `/mnt/project-files/medstudy/SPLIT.md`
 - Branch from `origin/main` and open PRs with base `main`. Before merging, merge the latest `origin/main`, run `just check`, wait for green CI, then squash-merge it yourself.
 - `just check` = check-tracked-files, `cargo fmt --all --check`, `cargo clippy --workspace --all-targets -- -D warnings`, `cargo test --workspace`, `batna-tools validate`.
 - Keep `docs/RUN.md` current.
+- The Mac workflow doesn't run on PRs. A PR that touches Mac-only code (`cfg(target_os = "macos")`, `objc2`, the .app bundle and update swap, the Mac menu, the Keychain session, or `.github/workflows/mac.yml`) must dispatch it on its branch before merging (Actions › Mac › Run workflow, pick the branch) and merge only when that run is green. Link the run in the PR.
+- A PR Mohamed would notice adds `changes/<topic>.yaml` (one line per change: `kind` new/improved/fixed, `ar_eg`, optional `en`); the app's "What's new" is built from these (`docs/RELEASE.md` §5). Housekeeping PRs add `[]` or nothing.
 
 ## Code
 - Rust stable, edition 2024. Workspace: `crates/core` (pure logic, no UI, no IO, builds for wasm32), `crates/app` (Dioxus 0.7 + HTML/CSS), and `crates/tools`.

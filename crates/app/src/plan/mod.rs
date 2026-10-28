@@ -8,8 +8,10 @@ use batna_core::review::StudyStore;
 use batna_core::stats;
 use dioxus::prelude::*;
 
+use crate::content::lecture_code;
+use crate::i18n::count::{REVIEW, count};
 use crate::i18n::plan as tx;
-use crate::stats::{StudyData, charts, lecture_number};
+use crate::stats::{StudyData, charts};
 
 /// The planner settings: a synced (LWW) setting in the review store, so the
 /// phone and the tablet share one plan. BATNA_PLAN_EXAM=2027-01-20 presets
@@ -349,7 +351,7 @@ fn LoadCard(p: Plan, cap: u32) -> Element {
         if l.rest {
             format!("{day}: {}", tx::FOCUS_REST)
         } else {
-            format!("{day}: {} {} · {} {}", l.reviews, tx::REVIEWS, l.new, tx::NEW_ITEMS)
+            format!("{day}: {} {} · {} {}", count(l.reviews, &REVIEW), tx::APPROX, l.new, tx::NEW_ITEMS)
         }
     });
     let peak = days.iter().max_by_key(|(_, l)| l.reviews + l.new).map(|(d, l)| (*d, l.reviews + l.new));
@@ -507,14 +509,14 @@ pub(crate) fn DayDetail(d: DayPlan) -> Element {
                 bdi { {lecture_list(&d.revisit)} }
                 " · "
             }
-            "{d.reviews} {tx::REVIEWS}"
+            {count(d.reviews, &REVIEW)} " {tx::APPROX}"
         }
     }
 }
 
-/// `["hb.L01", "hb.L02"]` → `L1, L2`.
+/// `["hb.L01", "hb.L02"]` → `L01, L02`.
 pub(crate) fn lecture_list(ids: &[String]) -> String {
-    ids.iter().map(|id| format!("L{}", lecture_number(id))).collect::<Vec<_>>().join(", ")
+    ids.iter().map(|id| lecture_code(id)).collect::<Vec<_>>().join(", ")
 }
 
 pub(crate) fn focus_label(f: Focus) -> &'static str {
@@ -548,7 +550,7 @@ mod tests {
         let d = Day::from_ymd(2027, 1, 20).unwrap();
         assert_eq!(long_date(d), "الأربع 20 يناير 2027");
         assert_eq!(short_date(d), "أربع 20 يناير");
-        assert_eq!(lecture_list(&["hb.L01".into(), "hb.L12".into()]), "L1, L12");
+        assert_eq!(lecture_list(&["hb.L01".into(), "hb.L12".into()]), "L01, L12");
     }
 
     #[test]

@@ -10,9 +10,9 @@ use batna_core::review::StudyStore;
 use batna_core::stats::WeakTopic;
 use dioxus::prelude::*;
 
-use crate::content::Library;
+use crate::content::{Library, lecture_code};
 use crate::i18n::lecture as tx;
-use crate::stats::{StudyData, lecture_number, pct};
+use crate::stats::{StudyData, pct};
 use crate::store::{now_ms, use_review};
 use crate::{Screen, Ui};
 
@@ -110,7 +110,7 @@ pub fn LecturePage(id: String) -> Element {
     let done_lessons =
         lessons.map_or(0, |f| f.lessons.iter().filter(|l| crate::learn::mark(&l.id).is_some()).count());
     let [first, last] = entry.pages;
-    let number = lecture_number(&id);
+    let number = lecture_code(&id);
     let (seen, total) = stats.as_ref().map_or((0, 0), |s| (s.counts.seen, s.counts.total));
     let share = (seen * 100).checked_div(total).unwrap_or(0);
     let due_n = due.len();

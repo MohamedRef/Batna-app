@@ -6,6 +6,8 @@
 .desk-split { display: flex; flex-direction: column; gap: var(--sp-4); min-width: 0; }
 .desk-main, .desk-side { min-width: 0; display: flex; flex-direction: column; gap: var(--sp-3); }
 .desk-waiting { display: none; }
+/* Under both panes, full width: the grade row stays in one place. */
+.desk-footer { display: flex; flex-direction: column; gap: var(--sp-3); margin-block-start: var(--sp-4); min-width: 0; }
 
 @media (min-width: 840px) {
   .content:has(.desk-split, .desk-list-detail) { max-width: none; }
@@ -23,6 +25,11 @@
     padding-inline-start: var(--sp-6);
     border-inline-start: 1px solid var(--line);
   }
+  /* Long answers (a 9-point list): the answer takes the wide column and the
+     question with what was typed stays in view beside it. */
+  .desk-split[data-wide="side"] { grid-template-columns: minmax(16rem, 2fr) minmax(0, 3fr); }
+  .desk-split[data-wide="side"] .desk-side { position: static; max-block-size: none; overflow: visible; }
+  .desk-split[data-wide="side"] .desk-main { position: sticky; top: var(--sp-4); }
   .desk-waiting {
     display: flex;
     justify-content: center;

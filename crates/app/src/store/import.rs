@@ -15,7 +15,7 @@ use rusqlite::types::Value as Sql;
 use serde_json::Value;
 
 use super::export::{EXPORT_FORMAT, EXPORT_FORMAT_VERSION};
-use super::{Result as StoreResult, Store, StoreError};
+use super::{Result as StoreResult, Store, StoreError, sync};
 
 const SYNC_COLUMNS: [&str; 3] = ["device_id", "hlc_wall", "hlc_counter"];
 
@@ -198,6 +198,7 @@ impl Store {
             }
         }
         let mut newest: Option<Hlc> = None;
+        let device = self.device();
         {
             let mut conn = self.conn.lock().unwrap();
             let tx = conn.transaction()?;
@@ -206,7 +207,13 @@ impl Store {
                     let Some(obj) = row.as_object() else { continue };
                     let Some((_, hlc)) = key_and_hlc(row, &target.key) else { continue };
                     // A row this build can't take (a missing NOT NULL column) is skipped.
-                    if merge_row(&tx, name, target, obj).is_ok() && newest.as_ref().is_none_or(|n| hlc > *n) {
+                    let Ok(changed) = merge_row(&tx, name, target, obj) else { continue };
+                    // What the backup brought goes on to Batna Cloud too, as a
+                    // relay when another device wrote it.
+                    if changed && let Some(key) = row[target.key.as_str()].as_str() {
+                        sync::enqueue(&tx, name, &target.key, key, &device)?;
+                    }
+                    if newest.as_ref().is_none_or(|n| hlc > *n) {
                         newest = Some(hlc);
                     }
                 }
@@ -306,6 +313,31 @@ mod tests {
         assert_eq!(tablet.plan_import(&doc).unwrap().changes(), 0);
         tablet.apply_import(&doc).unwrap();
         assert_eq!(tablet.reviews().unwrap().len(), 3);
+    }
+
+    #[test]
+    fn a_restore_goes_on_to_batna_cloud() {
+        let phone = Store::open_in_memory().unwrap();
+        let answer = phone.append_review(ev("hb.L01.001", 10)).unwrap();
+        phone.set_judgement("hb.L01.001", Some(&judged(Verdict::Approved))).unwrap();
+        let doc = round_trip(&phone);
+
+        let tablet = Store::open_in_memory().unwrap();
+        let before = tablet.outbox(100).unwrap().len();
+        tablet.apply_import(&doc).unwrap();
+        let outbox = tablet.outbox(100).unwrap();
+        let relayed: Vec<_> = outbox.iter().filter(|o| o.relay).collect();
+        assert!(relayed.iter().any(|o| o.table == "review_events" && o.row_id == answer.id));
+        assert!(relayed.iter().any(|o| o.table == "item_status" && o.row_id == "hb.L01.001"));
+        assert!(relayed.iter().all(|o| o.hlc.device == phone.device()));
+        // The ids match the phone's own ops, so the hub takes each only once.
+        let phone_ids: Vec<_> = phone.outbox(100).unwrap().into_iter().map(|o| o.id).collect();
+        assert!(relayed.iter().all(|o| phone_ids.contains(&o.id)), "{relayed:?} vs {phone_ids:?}");
+        // A second restore queues nothing more.
+        let after = outbox.len();
+        assert!(after > before);
+        tablet.apply_import(&doc).unwrap();
+        assert_eq!(tablet.outbox(100).unwrap().len(), after);
     }
 
     #[test]

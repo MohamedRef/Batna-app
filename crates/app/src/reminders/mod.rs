@@ -39,9 +39,7 @@ impl RemindPrefs {
         self.times.sort_unstable();
         self.times.dedup();
         self.times.truncate(MAX_TIMES);
-        if let Err(e) = shared().put_setting(Self::KEY, &self) {
-            crate::diag::report!("saving reminder settings: {e}");
-        }
+        crate::store::save_setting(Self::KEY, &self);
         *PREFS.write() = self;
     }
 }
@@ -182,7 +180,7 @@ pub fn RemindSection() -> Element {
                             }
                             if prefs.times.len() > 1 {
                                 button {
-                                    class: "secondary",
+                                    class: "btn btn-secondary",
                                     onclick: {
                                         let prefs = prefs.clone();
                                         move |_| {
@@ -198,7 +196,7 @@ pub fn RemindSection() -> Element {
                     }
                     if prefs.times.len() < MAX_TIMES {
                         button {
-                            class: "secondary",
+                            class: "btn btn-secondary",
                             onclick: {
                                 let prefs = prefs.clone();
                                 move |_| {
@@ -239,12 +237,12 @@ pub fn RemindSection() -> Element {
                     p { {tx::BLOCKED} }
                     div { class: "row",
                         button { onclick: move |_| native::request_permission(), {tx::ALLOW} }
-                        button { class: "secondary", onclick: move |_| native::open_notification_settings(), {tx::OPEN_NOTIFICATIONS} }
+                        button { class: "btn btn-secondary", onclick: move |_| native::open_notification_settings(), {tx::OPEN_NOTIFICATIONS} }
                     }
                 }
                 if here && unrestricted == Some(false) {
                     p { class: "muted small", {tx::BATTERY} }
-                    button { class: "secondary", onclick: move |_| native::open_app_settings(), {tx::OPEN_APP} }
+                    button { class: "btn btn-secondary", onclick: move |_| native::open_app_settings(), {tx::OPEN_APP} }
                 }
             }
         }

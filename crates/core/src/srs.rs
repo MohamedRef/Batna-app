@@ -8,6 +8,8 @@ use std::collections::{BTreeMap, HashMap, HashSet};
 use fsrs::{FSRS, FSRSItem, FSRSReview, MemoryState};
 use serde::{Deserialize, Serialize};
 
+use crate::zone::Zone;
+
 use crate::review::{Grade, LoggedReview, ReviewEvent};
 
 const DAY_MS: i64 = 86_400_000;
@@ -20,10 +22,11 @@ pub const REFIT_EVERY_MS: i64 = 7 * DAY_MS;
 pub const ROLLOVER_HOUR: u8 = 4;
 
 /// Where Mohamed's day starts, so "due today" matches his evening, not UTC.
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
+/// Each moment uses the offset in force then (`zone::Zone`), so a change to
+/// or from summer time never moves past answers to another day (#40).
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct DayClock {
-    /// Minutes east of UTC (Cairo: 120, or 180 in summer time).
-    pub utc_offset_minutes: i32,
+    pub zone: Zone,
     /// Answers after midnight but before this hour still count for yesterday.
     pub rollover_hour: u8,
 }
@@ -35,22 +38,23 @@ impl Default for DayClock {
 }
 
 impl DayClock {
+    /// A fixed offset, in minutes east of UTC.
     pub fn local(utc_offset_minutes: i32) -> Self {
-        Self { utc_offset_minutes, rollover_hour: ROLLOVER_HOUR }
+        Self::zoned(Zone::fixed(utc_offset_minutes))
     }
 
-    fn shift_ms(&self) -> i64 {
-        i64::from(self.utc_offset_minutes) * 60_000 - i64::from(self.rollover_hour) * 3_600_000
+    pub fn zoned(zone: Zone) -> Self {
+        Self { zone, rollover_hour: ROLLOVER_HOUR }
     }
 
     /// The study day number for a timestamp.
     pub fn day(&self, at_ms: i64) -> i64 {
-        (at_ms + self.shift_ms()).div_euclid(DAY_MS)
+        self.zone.day_from(at_ms, self.rollover_hour)
     }
 
     /// UTC ms at which study day `day` starts.
     pub fn day_start_ms(&self, day: i64) -> i64 {
-        day * DAY_MS - self.shift_ms()
+        self.zone.day_start_from(day, self.rollover_hour)
     }
 }
 
@@ -168,10 +172,15 @@ impl Scheduler {
 
     /// His scheduler: personal parameters when he has valid ones (else the
     /// FSRS defaults), his desired retention, and his day.
-    pub fn from_settings(settings: &ReviewSettings, utc_offset_minutes: i32) -> Self {
-        let day = DayClock::local(utc_offset_minutes);
+    /// `zone`: his time zone (or a fixed offset in minutes east of UTC).
+    pub fn from_settings(settings: &ReviewSettings, zone: impl Into<Zone>) -> Self {
+        let day = DayClock::zoned(zone.into());
         let retention = settings.retention.as_f32();
+        // Only a full FSRS-6 set: FSRS fills shorter ones with FSRS-5 values,
+        // and then the decay used for retrievability wouldn't match the intervals.
         if let Some(params) = &settings.fsrs
+            && params.weights.len() == fsrs::DEFAULT_PARAMETERS.len()
+            && params.weights.iter().all(|w| w.is_finite())
             && let Ok(s) = Self::new(&params.weights, retention, day)
         {
             return s;
@@ -394,6 +403,23 @@ mod tests {
 
     fn review(id: &str, item: &str, at_ms: i64, grade: Grade) -> LoggedReview {
         ev(id, item, at_ms, grade, Origin::Review)
+    }
+
+    #[test]
+    fn replay_keeps_summer_answers_on_their_study_day_after_the_clocks_go_back() {
+        // Egypt's summer time (UTC+3) ends 2026-10-29 21:00 UTC (#40).
+        static CAIRO: [(i64, i32); 1] = [(1_793_307_600_000, 120)];
+        let cairo = Zone { base: 180, changes: &CAIRO };
+        // 04:30 summer time on 1 and 3 October: two study days apart.
+        let first = 1_790_818_200_000; // 2026-10-01T01:30Z
+        let log = [review("e1", "x", first, Grade::Good), review("e2", "x", first + 2 * DAY_MS, Grade::Good)];
+        let summer = Scheduler::from_settings(&ReviewSettings::default(), 180).replay_all(&log);
+        let zoned = Scheduler::from_settings(&ReviewSettings::default(), cairo).replay_all(&log);
+        // With the offset in force when he answered, the log replays exactly as it did in October.
+        assert_eq!(zoned["x"], summer["x"]);
+        // Today's +2 alone would move the 04:30 answer back to the study day before.
+        let (z, w) = (DayClock::zoned(cairo), DayClock::local(120));
+        assert_eq!(w.day(first), z.day(first) - 1);
     }
 
     #[test]

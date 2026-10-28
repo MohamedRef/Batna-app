@@ -275,7 +275,9 @@ pub fn build(lectures: &[Lecture], opts: &Options<'_>) -> Result<Deck, Vec<Strin
             }
             let mut approved = opts.approved.contains(&item.id);
             let edited;
-            let item = match latest.get(item.id.as_str()) {
+            // A verdict on text that changed since he judged it no longer applies (#18).
+            let verdict = latest.get(item.id.as_str()).filter(|v| v.current(item) != Some(false));
+            let item = match verdict {
                 Some(v) if v.verdict == Verdict::Wrong => {
                     deck.skipped += 1;
                     continue;
@@ -292,7 +294,8 @@ pub fn build(lectures: &[Lecture], opts: &Options<'_>) -> Result<Deck, Vec<Strin
                     }
                 },
                 Some(v) if v.verdict == Verdict::Approved => {
-                    approved = true;
+                    // Only when the export shows he saw this exact text.
+                    approved |= v.current(item) == Some(true);
                     item
                 }
                 _ => item,
@@ -762,9 +765,12 @@ mod tests {
 
     #[test]
     fn verdicts_drop_wrong_items_and_use_edits() {
-        let verdicts: Verdicts = serde_yaml_ng::from_str(
-            "schema: batna.verdicts/v1\nverdicts:\n  - { id: hb.L01.003, verdict: wrong }\n  - { id: hb.L01.001, verdict: edited, edit: { back: Fibrosis plus nodules. } }\n  - { id: hb.L01.008, verdict: approved }\n",
-        )
+        let lec = fixture();
+        let fp8 =
+            batna_core::review::verify::fingerprint(lec.items.iter().find(|i| i.id == "hb.L01.008").unwrap());
+        let verdicts: Verdicts = serde_yaml_ng::from_str(&format!(
+            "schema: batna.verdicts/v1\nverdicts:\n  - {{ id: hb.L01.003, verdict: wrong }}\n  - {{ id: hb.L01.001, verdict: edited, edit: {{ back: Fibrosis plus nodules. }} }}\n  - {{ id: hb.L01.008, verdict: approved, fingerprint: \"{fp8}\" }}\n  - {{ id: hb.L01.002, verdict: wrong, fingerprint: \"0000000000000000\" }}\n",
+        ))
         .unwrap();
         let none = BTreeSet::new();
         let opts = Options { approved: &none, drafts: &none, verdicts: Some(&verdicts), now_ms: 0 };
@@ -775,6 +781,8 @@ mod tests {
         assert!(deck.notes[0].tags.contains(&"unverified".to_string()));
         let order = deck.notes.iter().find(|n| n.fields[4] == "hb.L01.008").unwrap();
         assert!(order.tags.contains(&"approved".to_string()));
+        // ✗ on text that changed since (#18): the item stays in.
+        assert!(deck.notes.iter().any(|n| n.fields[4].starts_with("hb.L01.002")));
     }
 
     #[test]

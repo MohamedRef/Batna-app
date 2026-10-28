@@ -28,9 +28,11 @@ class DocumentActivity : Activity() {
         if (savedInstanceState != null) return
         val request =
             if (intent.getStringExtra(EXTRA_PATH) != null) {
+                // A YAML file as octet-stream, so no provider adds ".json".
+                val name = intent.getStringExtra(EXTRA_NAME) ?: ""
                 Intent(Intent.ACTION_CREATE_DOCUMENT)
                     .addCategory(Intent.CATEGORY_OPENABLE)
-                    .setType("application/json")
+                    .setType(if (name.endsWith(".json")) "application/json" else "application/octet-stream")
                     .putExtra(Intent.EXTRA_TITLE, intent.getStringExtra(EXTRA_NAME) ?: "batna-export.json")
             } else {
                 // Some providers label JSON as octet-stream or plain text.

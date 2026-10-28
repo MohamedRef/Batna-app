@@ -8,6 +8,7 @@ pub mod app {
 }
 
 pub mod nav {
+    pub const LABEL: &str = "التنقل";
     pub const TODAY: &str = "النهارده";
     pub const STUDY: &str = "مذاكرة";
     pub const BANK: &str = "الأسئلة";
@@ -15,6 +16,7 @@ pub mod nav {
     pub const ORAL: &str = "شفوي";
     pub const STATS: &str = "تقدّمي";
     pub const SETTINGS: &str = "الإعدادات";
+    pub const MORE: &str = "المزيد";
 }
 
 pub mod today {
@@ -30,6 +32,7 @@ pub mod today {
     pub const TOMORROW: &str = "بكرة:";
     pub const NOTHING_WRITTEN: &str = "المحتوى لسه بيتكتب. أول ما محاضرة تجهز هتلاقيها هنا.";
     pub const STORE_FAILED: &str = "مش قادر أفتح قاعدة البيانات، فالمراجعات مش هتتحفظ بعد ما تقفل التطبيق:";
+    pub const WRITE_FAILED: &str = "في اختيار ما اتحفظش على الجهاز، جرّبه تاني:";
     pub const IN_PROGRESS: &str = "محاضرات شغّال فيها";
     pub const OF: &str = "من";
     pub const STARTED: &str = "بدأتهم";
@@ -596,6 +599,7 @@ pub mod verify {
     pub const SAVED_APPROVED: &str = "✓ اتسجّل إنه صح، ومش هيسألك عليه تاني.";
     pub const SAVED_EDITED: &str = "✎ اتسجّل تعديلك، وهتذاكره بكلامك من هنا ورايح.";
     pub const SAVED_WRONG: &str = "✗ اتشال من المراجعة لحد ما يتصلّح.";
+    pub const NOT_SAVED: &str = "ما اتحفظش. جرّب تاني بعد شوية.";
     pub const WRONG_NOTE: &str = "إيه الغلط؟ (اختياري)";
     pub const WRONG_PLACEHOLDER: &str = "مثلاً: الكتاب صفحة ١٤ بيقول ٧–٩ نقط";
     pub const WRONG_CONFIRM: &str = "شيله من المراجعة";
@@ -744,6 +748,8 @@ pub mod cloud {
     pub const P_NETWORK: &str = "مش قادر يوصل للسيرفر دلوقتي. هيحاول تاني لوحده، ومذاكرتك محفوظة على الجهاز.";
     pub const P_SERVER: &str = "السيرفر فيه مشكلة دلوقتي. هيحاول تاني لوحده.";
     pub const P_OUTDATED: &str = "السيرفر أحدث من النسخة دي. حدّث باطنة.";
+    pub const P_CLOCK: &str =
+        "ساعة الجهاز سابقة الوقت الحقيقي، فالتغييرات الجديدة مستنية. ظبط الساعة على التلقائي وهتتبعت لوحدها.";
 }
 
 pub mod settings {
@@ -754,7 +760,7 @@ pub mod settings {
     pub const THIS_DEVICE: &str = "للجهاز ده بس";
 
     pub const LOOK: &str = "الشكل";
-    pub const LOOK_SUB: &str = "الألوان وحجم الخط";
+    pub const LOOK_SUB: &str = "الألوان وحجم الواجهة";
     pub const DATA: &str = "بياناتك";
     pub const DATA_SUB: &str = "فين بتتحفظ، والتصدير";
     pub const ABOUT: &str = "عن باطنة";
@@ -770,7 +776,8 @@ pub mod settings {
     pub const THEME_SHIFT: &str = "نبطشية";
     pub const THEME_SHIFT_SUB: &str = "غامق ودافي من غير ضوء أزرق، للمذاكرة متأخر قبل النوم";
 
-    pub const TEXT_SIZE: &str = "حجم الخط";
+    pub const TEXT_SIZE: &str = "حجم الواجهة";
+    pub const TEXT_SMALLER: &str = "أصغر";
     pub const TEXT_SMALL: &str = "صغير";
     pub const TEXT_NORMAL: &str = "عادي";
     pub const TEXT_LARGE: &str = "كبير";
@@ -871,6 +878,16 @@ pub mod update {
     pub const DONE_BODY: &str = "افتحه وكمّل من مكانك.";
     #[cfg_attr(not(target_os = "android"), allow(dead_code))]
     pub const READY_TITLE: &str = "تحديث باطنة جاهز: دوس عشان تثبّته";
+
+    // The "new version" notification, and its switch.
+    pub const NOTICE_AVAILABLE: &str = "نزلت نسخة جديدة من باطنة";
+    pub const NOTICE_READY: &str = "نسخة باطنة الجديدة جاهزة تتثبّت";
+    pub const NOTICE_INSTALLED: &str = "نسخة باطنة الجديدة اتحطّت";
+    pub const NOTICE_TAP_AVAILABLE: &str = "دوس تشوف الجديد وتنزّلها.";
+    pub const NOTICE_TAP_READY: &str = "اتنزّلت واتفحصت. دوس عشان تثبّتها.";
+    pub const NOTICE_CHANNEL: &str = "نسخ باطنة الجديدة";
+    pub const NOTIFY: &str = "ابعتلي إشعار أول ما تنزل نسخة جديدة";
+    pub const NOTIFY_SUB: &str = "على أندرويد حتى لو باطنة مقفول (بيبص كل كام ساعة)، ومعاه الجديد في سطرين. مفتاح الإشعارات في الجهاز له الكلمة الأخيرة.";
 }
 
 pub mod sound {

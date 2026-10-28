@@ -36,7 +36,7 @@ pub fn available() -> bool {
 pub fn vibrate(kind: Haptic) {
     #[cfg(target_os = "android")]
     if let Err(e) = android::play(kind.code()) {
-        eprintln!("Haptics: {e}");
+        crate::diag::report!("Haptics: {e}");
     }
     #[cfg(not(target_os = "android"))]
     let _ = kind;

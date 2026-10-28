@@ -40,7 +40,7 @@ impl RemindPrefs {
         self.times.dedup();
         self.times.truncate(MAX_TIMES);
         if let Err(e) = shared().put_setting(Self::KEY, &self) {
-            eprintln!("saving reminder settings: {e}");
+            crate::diag::report!("saving reminder settings: {e}");
         }
         *PREFS.write() = self;
     }
@@ -58,7 +58,7 @@ const HERE_KEY: &str = "remind_here";
 
 pub fn set_here(here: bool) {
     if let Err(e) = shared().put_local_setting(HERE_KEY, &here) {
-        eprintln!("saving reminder device: {e}");
+        crate::diag::report!("saving reminder device: {e}");
     }
     *HERE.write() = here;
 }
@@ -81,7 +81,7 @@ pub fn use_local_reminders() {
             (b.due_forecast(14, now), b.answers_today(now))
         };
         let times = if prefs.on { prefs.times } else { Vec::new() };
-        let items = plan::schedule(&plan::Inputs {
+        let inputs = plan::Inputs {
             here,
             times: &times,
             weekdays,
@@ -90,7 +90,11 @@ pub fn use_local_reminders() {
             target_met: answered > 0 && due.first().is_none_or(|&d| d == 0),
             now_ms: now.max(0) as u64,
             utc_offset_min: utc_offset_minutes(),
-        });
+        };
+        // The fallback first, so a reminder firing in between finds it.
+        let repeat = plan::repeat(&inputs).and_then(|r| serde_json::to_string(&r).ok());
+        native::repeat(repeat.as_deref().unwrap_or("{}"));
+        let items = plan::schedule(&inputs);
         native::schedule(&serde_json::to_string(&items).unwrap_or_else(|_| "[]".into()));
     });
 }

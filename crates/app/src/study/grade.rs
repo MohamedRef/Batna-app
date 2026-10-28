@@ -15,6 +15,13 @@ pub fn GradeRow(item_id: String, suggested: Option<Grade>, on_grade: EventHandle
     let store = use_store();
     let intervals = store.0.borrow().intervals(&item_id, now_ms());
     let mut done = use_signal(|| false);
+    // The answer is out: let the frame show the book quote.
+    let revealed = try_use_context::<super::item::Revealed>();
+    use_effect(move || {
+        if let Some(super::item::Revealed(mut r)) = revealed {
+            r.set(true);
+        }
+    });
     rsx! {
         crate::verify::VerifyBar { item_id: item_id.clone() }
         div { class: "st-grades", role: "group", aria_label: tx::GRADE_LABEL,

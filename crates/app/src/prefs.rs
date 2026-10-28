@@ -14,6 +14,10 @@ const TEXT_SIZE: &str = "text_size";
 
 /// The app's own data folder: the local database and device files live here.
 pub fn data_dir() -> Option<PathBuf> {
+    // Previews and tests point the whole app at a scratch folder.
+    if let Some(dir) = std::env::var_os("BATNA_DATA_DIR") {
+        return Some(PathBuf::from(dir));
+    }
     if cfg!(target_os = "android") {
         // The app's private files directory (Context.getFilesDir for the
         // device owner). A JNI lookup can replace this once platform/ has one.

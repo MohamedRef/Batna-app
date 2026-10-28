@@ -7,10 +7,12 @@ mod back;
 mod calc;
 mod case;
 mod content;
+mod data_export;
 mod diag;
 mod fonts;
 mod i18n;
 mod icons;
+mod import;
 mod oral;
 mod order;
 mod plan;
@@ -18,9 +20,11 @@ mod platform;
 mod prefs;
 mod settings;
 mod stats;
+mod store;
 mod study;
 mod table;
 mod today;
+mod verify;
 
 use dioxus::prelude::*;
 
@@ -104,6 +108,7 @@ fn App() -> Element {
         prefs: Signal::new(prefs::DevicePrefs::load()),
     });
     let settings = use_context_provider(settings::SettingsNav::new);
+    store::use_provide_review();
     let current = *ui.screen.read();
     let look = ui.prefs.read().css();
     back::use_back(ui, current, *settings.open.read());

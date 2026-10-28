@@ -11,7 +11,17 @@
 2. Turn on USB debugging on the phone or tablet (Settings › About phone › Software information › tap Build number 7 times, then Developer options › USB debugging), and connect it with a cable.
 3. `just android` builds and installs a debug build. The app id is `app.batna`, so it sits next to Kabar without touching it.
 
+### Kotlin glue (`android/`)
+`android/` at the repo root is a small Gradle library module with the Kotlin that Rust calls through JNI (screen-off oral mode and vibration now; reminders, export and updates later). Nothing to configure: the `#[manganis::ffi("../../android")]` marker in `crates/app/src/platform/background.rs` makes `dx` 0.7.10 copy the folder into its generated Gradle project, add it as an app dependency, and merge `android/src/main/AndroidManifest.xml` (permissions and receivers the glue needs) into the app's manifest.
+
+`scripts/android-check-apk.sh <apk>` fails if the Kotlin classes or their permissions are missing from an APK; CI runs it on every change to `android/`. When you add a Kotlin class that Rust looks up by name, add it to `CLASSES` in that script. `adb logcat` shows Kotlin errors on the device.
+
 Release builds (`just apk`, `just install-android`, `just bundle-mac`) and their one-time keys are described in [RELEASE.md](RELEASE.md). Nothing is released before Mohamed says go, so for now the debug build is the way to try Batna.
 
 ## Study in Anki now
 One file, `/mnt/project-files/medstudy/anki/batna.apkg`, holds every written lecture as a subdeck of `Batna`. Open it with AnkiDroid on the phone or tablet, or with Anki on the Mac. Importing a newer `batna.apkg` updates the cards in place and keeps your progress. `just anki` builds it into `dist/anki/`; details in [ANKI.md](ANKI.md).
+
+## Your data and your content checks
+- Reviews, your ✓ / ✎ / ✗ checks and review settings live in one SQLite file on each device: `~/Library/Application Support/app.Batna.Batna/batna.db` on the Mac, and the app's private storage on Android. Settings › مذاكرتك shows the exact path. `BATNA_DATA_DIR=/some/folder just run` uses a separate profile (handy for previews).
+- Settings › صدّر مراجعاتك للمحتوى writes `batna-verdicts-YYYY-MM-DD.yaml` (format `batna.verdicts/v1`) to `~/Downloads` on the Mac, or to `Android/data/app.batna/files` on the phone and tablet (open it with the Files app or over USB). The same text is shown on screen, so you can copy it. Send it in the chat: `batna-tools` turns it into a fix list per lecture and adds your ✓ to `content/approved.txt`.
+- Settings also sets the desired retention (85, 90 or 95%) and new items a day (15, 30, 45 or 60). After 400 reviews the schedule is fitted to your own memory, and it is refitted once a week.

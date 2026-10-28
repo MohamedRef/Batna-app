@@ -38,7 +38,7 @@ pub fn Today() -> Element {
                 button {
                     class: "primary start",
                     onclick: move |_| {
-                        *crate::study::START.write() = Some(crate::study::Start { lectures: None, items: None, minutes: 10 });
+                        *crate::study::START.write() = Some(crate::study::Start { lectures: None, items: None, minutes: crate::onboarding::session_minutes() });
                         ui.screen.set(Screen::Study);
                     },
                     {tx::START}
@@ -56,6 +56,7 @@ pub fn Today() -> Element {
                 p { class: "note", "{tx::STORE_FAILED} " bdi { dir: "ltr", "{e}" } }
             }
         }
+        crate::recap::TodayRecap { due_left: o.due, due_tomorrow: o.due_tomorrow }
         if !o.lectures.is_empty() {
             section { class: "in-progress",
                 h2 { {tx::IN_PROGRESS} }

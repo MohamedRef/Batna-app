@@ -16,13 +16,17 @@ mod hover;
 mod i18n;
 mod icons;
 mod import;
+mod onboarding;
 mod oral;
 mod order;
 mod plan;
 mod platform;
 mod prefs;
+mod recap;
+mod reminders;
 mod settings;
 mod shortcuts;
+mod sounds;
 mod stats;
 mod store;
 mod study;
@@ -124,6 +128,7 @@ fn App() -> Element {
     });
     let settings = use_context_provider(settings::SettingsNav::new);
     store::use_provide_review();
+    reminders::use_local_reminders();
     let current = *ui.screen.read();
     let look = ui.prefs.read().css();
     back::use_back(ui, current, *settings.open.read());
@@ -166,6 +171,7 @@ fn App() -> Element {
                 {screen_body(current)}
             }
             settings::SettingsSheet {}
+            onboarding::Onboarding {}
         }
     }
 }

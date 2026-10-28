@@ -112,7 +112,18 @@
     state.timer = setTimeout(() => peekAt(x, y, target), e.pointerType === "pen" ? 60 : 250);
   }, { passive: true });
   document.addEventListener("pointerdown", hide, { passive: true });
-  document.addEventListener("pointerleave", hide, { passive: true });
+  document.addEventListener("pointercancel", hide, { passive: true });
+  // The pen lifting out of range, or the mouse leaving the window: the
+  // pointer goes out to nothing. pointerleave doesn't bubble, so it is caught
+  // on the way down, and only for the page itself, so crossing from one
+  // element to the next doesn't blink the card. hide() also drops a peek
+  // still waiting on its timer.
+  document.addEventListener("pointerout", (e) => {
+    if (e.pointerType !== "touch" && !e.relatedTarget) hide();
+  }, { passive: true });
+  document.addEventListener("pointerleave", (e) => {
+    if (e.pointerType !== "touch" && e.target === root) hide();
+  }, { passive: true, capture: true });
   document.addEventListener("scroll", hide, { passive: true, capture: true });
   window.addEventListener("blur", hide);
 

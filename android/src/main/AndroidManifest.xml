@@ -19,6 +19,27 @@
     <!-- Re-arms the local reminder schedule after a reboot (Reminders.kt). -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <application>
+        <!-- Share-to-Batna: text from any app, plus "Batna" in the text-selection
+             menu, becomes a draft of Mohamed's own card (Share.kt). Invisible;
+             it hands the text over and opens Batna. -->
+        <activity
+            android:name="app.batna.ShareActivity"
+            android:exported="true"
+            android:label="Batna"
+            android:excludeFromRecents="true"
+            android:noHistory="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.PROCESS_TEXT" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+        </activity>
         <service
             android:name="app.batna.OralService"
             android:exported="false"

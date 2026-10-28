@@ -52,7 +52,10 @@ pub fn ItemView(
                 {render(&item, on_grade)}
             }
             footer { class: "st-item-foot",
-                crate::hover::BookPage { label: tx::BOOK_PAGE, page: item.src.page, quote: item.src.quote.clone() }
+                // His own cards may have no page.
+                if item.src.page > 0 {
+                    crate::hover::BookPage { label: tx::BOOK_PAGE, page: item.src.page, quote: item.src.quote.clone() }
+                }
                 if let Some(q) = &item.src.quote {
                     details { class: "st-quote",
                         summary { {tx::BOOK_QUOTE} }

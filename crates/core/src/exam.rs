@@ -183,7 +183,7 @@ pub fn shufflable(options: &[String]) -> bool {
         o.contains("of the above")
             || o.starts_with("both ")
             || o.starts_with("neither ")
-            || matches!(o.trim(), "both" | "neither" | "all of these" | "none of these")
+            || matches!(o.trim(), "both" | "neither" | "none" | "all of these" | "none of these")
             || refers_by_letter(&o)
     })
 }
@@ -582,6 +582,7 @@ mod tests {
         assert!(shufflable(&s(&["Vitamin A and D deficiency", "x", "y", "z"])));
         assert!(!shufflable(&s(&["HPS", "PoPH", "Both", "Neither"])));
         assert!(!shufflable(&s(&["x", "y", "z", "All of these"])));
+        assert!(!shufflable(&s(&["x", "y", "None"])));
     }
 
     #[test]

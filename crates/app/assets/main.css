@@ -133,6 +133,42 @@ input[type="checkbox"]:disabled { opacity: 0.5; cursor: default; }
 }
 .row { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
 
+/* ---------- segmented control: the one radio row every screen uses (UX #160)
+   Equal segments that fill the row and never wrap, one pill outside and
+   square dividers inside. A segment may hold a .seg-hint second line. */
+.segmented {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  background: var(--surface);
+}
+.segmented > button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-block-size: var(--tap);
+  min-inline-size: 0;
+  padding: var(--sp-1) var(--sp-2);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+.segmented > button + button { border-inline-start: 1px solid var(--line); }
+.segmented > button[aria-checked="true"] { background: var(--accent-soft); color: var(--accent); font-weight: 700; }
+.segmented > button:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.segmented:has(.seg-hint) { border-radius: var(--radius); }
+.segmented:has(.seg-hint) > button { min-block-size: var(--tap-lg); }
+.seg-hint { font-size: 0.75rem; color: var(--muted); font-weight: 400; }
+
 /* ---------- navigation: bottom bar (compact) ---------- */
 .nav {
   grid-area: nav;

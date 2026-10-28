@@ -79,6 +79,12 @@ impl SyncClient {
         self.last_seq
     }
 
+    /// The store didn't take the ops it was given: go back to what it holds,
+    /// so the next hello asks for them again instead of skipping past them.
+    pub fn rewind(&mut self, stored_seq: u64) {
+        self.last_seq = stored_seq;
+    }
+
     /// The socket is open.
     pub fn on_open(&mut self) -> Vec<Effect> {
         self.phase = Phase::CatchingUp;
@@ -308,6 +314,17 @@ mod tests {
             ]
         );
         assert!(c.in_flight().is_empty());
+    }
+
+    #[test]
+    fn a_failed_merge_asks_for_the_same_ops_again() {
+        let mut c = SyncClient::new(4);
+        c.on_open();
+        c.on_message(ServerMsg::Ops { ops: vec![seq(5), seq(6)], more: false });
+        // The store's transaction failed, so it still holds 4.
+        c.rewind(4);
+        c.on_close();
+        assert_eq!(c.on_open(), vec![hello(4)]);
     }
 
     #[test]

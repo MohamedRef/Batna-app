@@ -605,9 +605,11 @@ mod tests {
                 .num("alp_uln_u_l", 120.0),
         )
         .unwrap();
-        assert_eq!(r.band, "r_ratio.hepatocellular");
-        assert!(expect_matches(&r, "R = 5, hepatocellular"));
-        assert!(!expect_matches(&r, "R = 5, mixed"));
+        // The book's bands (p. 129): exactly 5 is mixed, not the CIOMS
+        // hepatocellular.
+        assert_eq!(r.band, "r_ratio.mixed");
+        assert!(expect_matches(&r, "R = 5, mixed"));
+        assert!(!expect_matches(&r, "R = 5, hepatocellular"));
     }
 
     #[test]

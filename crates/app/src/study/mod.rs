@@ -21,15 +21,16 @@ use batna_core::review::{Grade, Origin, ReviewEvent};
 use batna_core::session::{Inputs, Planned, Session, compose};
 use dioxus::prelude::*;
 
+pub(crate) use backend::use_store;
 pub use backend::{StudyStore, StudyStoreHandle};
-pub use item::PLAYABLE;
+pub use item::{ItemView, PLAYABLE};
 
 use crate::content::Library;
 use crate::i18n::study as tx;
-use backend::{now_ms, use_store};
-use item::{ItemView, short_text};
+use backend::now_ms;
+use item::short_text;
 
-const STUDY_CSS: &str = include_str!("../../assets/study.css");
+pub(crate) const STUDY_CSS: &str = include_str!("../../assets/study.css");
 const MINUTES: [u32; 4] = [5, 10, 15, 20];
 
 /// A request to start a session straight away (Today's "start" button sets

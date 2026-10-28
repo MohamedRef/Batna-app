@@ -36,6 +36,8 @@ fn Bar(item_id: String) -> Element {
     // The verdict given in this bar, so it can say what happened and undo it.
     let mut done = use_signal(|| None::<Verdict>);
     let mut note = use_signal(String::new);
+    // The last tap wasn't saved.
+    let mut failed = use_signal(|| false);
 
     let check = review.backend.borrow().check(&item_id);
     if done().is_none() && check != Check::Ask {
@@ -46,9 +48,12 @@ fn Bar(item_id: String) -> Element {
     let judge = {
         let review = review.clone();
         move |verdict: Verdict, edit: Edit, n: Option<String>| {
-            review.backend.borrow_mut().judge(&id, verdict, edit, n);
-            done.set(Some(verdict));
-            mode.set(Mode::Ask);
+            let saved = review.backend.borrow_mut().judge(&id, verdict, edit, n);
+            failed.set(!saved);
+            if saved {
+                done.set(Some(verdict));
+                mode.set(Mode::Ask);
+            }
         }
     };
 
@@ -66,8 +71,11 @@ fn Bar(item_id: String) -> Element {
                 button {
                     class: "verify-undo",
                     onclick: move |_| {
-                        review.backend.borrow_mut().undo_judgement(&id);
-                        done.set(None);
+                        let saved = review.backend.borrow_mut().undo_judgement(&id);
+                        failed.set(!saved);
+                        if saved {
+                            done.set(None);
+                        }
                     },
                     {tx::UNDO}
                 }
@@ -125,7 +133,12 @@ fn Bar(item_id: String) -> Element {
     };
     rsx! {
         style { {CSS} }
-        div { class: "verify", role: "group", aria_label: tx::GROUP, {body} }
+        div { class: "verify", role: "group", aria_label: tx::GROUP,
+            {body}
+            if failed() {
+                p { class: "verify-failed", role: "alert", {tx::NOT_SAVED} }
+            }
+        }
     }
 }
 

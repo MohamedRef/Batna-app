@@ -100,8 +100,8 @@ items:
   kind: card
   topic: timing
   front: What does the MELD score measure, in one phrase?
-  back: The "sickness of the liver", a calculated number that predicts short-term mortality and sets priority on
-    the waiting list.
+  back: 'The "sickness of the liver": a number calculated from bilirubin, INR and creatinine, used to prioritize
+    ESLD patients for organ allocation.'
   src:
     page: 188
   status: unverified
@@ -170,8 +170,8 @@ items:
 - id: hb.L11.013
   kind: cloze
   topic: indications
-  text: 'Metabolic diseases treatable by LT (adult list): {{c1::hemochromatosis}}, {{c2::alpha-1 antitrypsin deficiency}},
-    {{c3::Wilson disease}}, tyrosinemia and cystic fibrosis.'
+  text: 'Metabolic diseases treatable by LT (adult list): {{c1::hemochromatosis, alpha-1 antitrypsin deficiency,
+    Wilson disease}}, tyrosinemia and cystic fibrosis.'
   src:
     page: 190
   status: unverified
@@ -208,16 +208,17 @@ items:
 - id: hb.L11.016
   kind: card
   topic: meld-exceptions
-  front: Why do some patients get MELD exception points?
-  back: Their real risk (for example HCC progression, hepatopulmonary syndrome, portopulmonary hypertension) is
-    not captured by bilirubin, INR and creatinine, so the calculated MELD understates their priority.
+  front: Name 3 cardiopulmonary or vascular conditions that earn MELD exception points.
+  back: Hepatopulmonary syndrome, portopulmonary hypertension and Budd-Chiari syndrome (the full list also has HCC,
+    recurrent cholangitis, intractable pruritus, cystic fibrosis, familial amyloidosis, polycystic liver and small-for-size
+    syndrome).
   src:
     page: 189
   status: unverified
 - id: hb.L11.017
   kind: cloze
   topic: meld-exceptions
-  text: 'Cardiopulmonary MELD exceptions: {{c1::hepatopulmonary syndrome}} and {{c2::portopulmonary hypertension}}.'
+  text: 'Cardiopulmonary MELD exceptions: {{c1::hepatopulmonary syndrome and portopulmonary hypertension}}.'
   src:
     page: 189
   status: unverified
@@ -294,7 +295,7 @@ items:
 - id: hb.L11.024
   kind: cloze
   topic: pediatric
-  text: 'Pediatric metabolic indications for LDLT: alpha-1 antitrypsin deficiency, {{c1::tyrosinemia}}, {{c2::hyperoxaluria}}
+  text: 'Pediatric metabolic indications for LDLT: alpha-1 antitrypsin deficiency, {{c1::tyrosinemia, hyperoxaluria}}
     and amyloidosis.'
   src:
     page: 191
@@ -611,21 +612,21 @@ items:
 - id: hb.L11.052
   kind: mcq
   topic: indications
-  stem: A 45-year-old woman with cirrhosis has Child-Pugh B (8) and MELD 13, but has had three admissions with overt
-    hepatic encephalopathy in four months despite lactulose and rifaximin. What does the book's program do?
+  stem: A 45-year-old woman with cirrhosis has MELD 13 and has had three admissions with overt hepatic encephalopathy
+    in four months despite lactulose and rifaximin. What does the book's program do?
   options:
-  - List her and wait until she becomes Child C
+  - Wait until her MELD reaches 15
+  - Wait until her MELD exceeds 30
+  - 'Transplant her: repeated HE allows LT below MELD 15'
   - Refer for TIPS instead
-  - Transplant her, because repeated HE allows LT below MELD 15
-  - Decline, as Child B patients are never transplanted
-  - Wait until MELD exceeds 30
+  - Treat with rifaximin alone and reassess yearly
   answer: 2
   why:
-  - That is the rule for Child B without refractory ascites or repeated HE.
-  - TIPS would worsen her encephalopathy and is not the book's answer.
-  - Correct. Refractory ascites or repeated HE justify LT even with MELD < 15.
-  - Child B patients are listed, and transplanted when an exception applies.
+  - Repeated HE is the book's exception to the MELD 15 threshold.
   - MELD > 30 is the case-by-case group, not a threshold to wait for.
+  - Correct. Refractory ascites or repeated HE justify LT even with MELD < 15.
+  - TIPS would worsen her encephalopathy and is not the book's answer.
+  - She already failed lactulose and rifaximin; the book transplants her.
   src:
     page: 189
   status: unverified
@@ -719,20 +720,20 @@ items:
 - id: hb.L11.057
   kind: mcq
   topic: evaluation
-  stem: Which previous procedure is still acceptable in a candidate for living donor LT?
+  stem: Which finding still allows a recipient to proceed to living donor LT?
   options:
-  - Portocaval shunt
-  - Splenorenal shunt
-  - Resected colon cancer with liver metastasis
-  - Percutaneous biliary stent left in place
-  - Mesocaval shunt
-  answer: 4
+  - Previous portocaval shunt
+  - Previous surgical splenorenal shunt
+  - Percutaneous biliary stent in place
+  - Previous mesocaval shunt
+  - Treated colon cancer with lung metastasis
+  answer: 3
   why:
   - A previous portocaval shunt excludes the recipient.
   - The book allows no portocaval shunt other than mesocaval.
-  - There must be no extrahepatic malignancy.
   - No percutaneous stents may be in place.
   - Correct. A mesocaval shunt is the only exception.
+  - There must be no extrahepatic malignancy.
   src:
     page: 192
   status: unverified
@@ -783,18 +784,18 @@ items:
   stem: A 38-year-old man with PSC and ulcerative colitis has new jaundice. His CA 19-9 is 140 U/mL. What is the
     best interpretation from the book?
   options:
+  - Suggestive, not diagnostic (sens 75%, spec 80%)
   - Diagnostic of cholangiocarcinoma
-  - Raises suspicion of cholangiocarcinoma, with sensitivity about 75% and specificity about 80% at this cut-off
-  - Proof of benign dominant stricture
-  - Irrelevant, because CA 19-9 is not raised in cholangiocarcinoma
-  - Only meaningful above 1000 U/mL
-  answer: 1
+  - Excludes cancer if imaging is normal
+  - Highly specific (> 95%) for cholangiocarcinoma
+  - Normal for PSC (cut-off 200 U/mL)
+  answer: 0
   why:
-  - Specificity is only 80%, so it is not diagnostic; early diagnosis stays difficult.
   - Correct. Above 100 U/mL in PSC, sensitivity is 75% and specificity 80%.
-  - A raised marker cannot prove a benign cause.
-  - CA 19-9 is raised in up to 85% of cholangiocarcinomas.
-  - The book's cut-off is 100 U/mL.
+  - Specificity is only 80%, so it is not diagnostic; early diagnosis stays difficult.
+  - A raised marker cannot exclude cancer; early diagnosis is hard.
+  - Specificity is 80% at this cut-off.
+  - The book's cut-off is 100 U/mL, and 140 is above it.
   src:
     page: 193
   status: unverified
@@ -825,14 +826,14 @@ items:
     ascites needing large-volume paracentesis every 2 weeks despite diuretics, bilirubin 2.4 mg/dL, INR 1.4, creatinine
     1.1 mg/dL. HBV DNA is detectable on lamivudine.
   steps:
-  - reveal: His Child-Pugh score is 9 (class B) and his MELD is 14.
+  - reveal: His MELD is 14.
     question: Is he a candidate for LDLT under the book's program rules?
     options:
-    - No, Child B is never transplanted
-    - Yes, refractory ascites allows LT below MELD 15
-    - No, MELD is below 15
+    - 'No: he must first reach MELD 15'
+    - 'No: he must first reach MELD 30'
+    - 'Yes: refractory ascites allows LT below MELD 15'
     - Only if he develops HCC
-    answer: 1
+    answer: 2
     why: Patients with MELD < 15 are transplanted if they have refractory ascites or repeated HE.
   - reveal: He is listed. His MELD rises to 19.
     question: How often should his MELD be updated now?

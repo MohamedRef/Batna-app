@@ -14,9 +14,10 @@ use batna_core::review::Grade;
 use dioxus::prelude::*;
 
 use crate::i18n::order as tx;
+use crate::look::{Css, css};
 use crate::study::grade::GradeRow;
 
-const CSS: &str = include_str!("order.css");
+const CSS: Css = css!("src/order/order.css");
 
 #[derive(Clone, Default, PartialEq)]
 struct Draft {
@@ -40,7 +41,7 @@ pub fn OrderItem(item: Item, on_grade: EventHandler<Grade>) -> Element {
     let full = d.placed.len() == n;
 
     rsx! {
-        style { {CSS} }
+        style { {CSS.text()} }
         section { class: "or-item",
             h2 { class: "or-prompt", dir: "ltr", lang: "en", "{prompt}" }
             if !d.checked {

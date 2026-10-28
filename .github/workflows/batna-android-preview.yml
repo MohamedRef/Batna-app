@@ -106,14 +106,6 @@ jobs:
         with:
           key: batna-android-preview
           save-if: ${{ github.ref == 'refs/heads/main' }}
-      - uses: actions/setup-java@v5
-        with:
-          distribution: temurin
-          java-version: "17"
-      - uses: cargo-bins/cargo-binstall@8a2045612414e945291083f820cd50b4d8fc2218 # v1.26.0
-      - name: Install dx 0.7.10
-        run: cargo binstall -y --force dioxus-cli@0.7.10
-
       # The update key comes first: its public half is built into the app.
       - name: Restore preview update key
         if: env.KEEP_KEY == 'true'
@@ -139,6 +131,46 @@ jobs:
             echo "::error::A preview key is missing from the Actions cache, and previews are already published. New keys would stop installed previews from updating. Run this workflow by hand with new_keys ticked to accept that (docs/RELEASE.md §3)."
             exit 1
           fi
+      # Content-only: when everything merged since the build on the feed is
+      # lectures, lessons, changes/ notes, docs or stylesheets, the feed keeps
+      # that APK and only the content pack (which carries the stylesheets,
+      # crates/app/src/look.rs) is new. Devices then switch over in the
+      # background with nothing to install. Any other file, a new version or
+      # a new key means a full build.
+      - name: Content-only update?
+        if: env.KEEP_KEY == 'true' && steps.update-key.outputs.cache-hit == 'true' && steps.key.outputs.cache-hit == 'true'
+        run: |
+          curl -fsSL --retry 3 -o /tmp/live-update.json \
+            "https://github.com/$GITHUB_REPOSITORY/releases/download/batna-preview/update.json" || exit 0
+          jq -e '.assets[] | select(.platform == "android-arm64")' /tmp/live-update.json >/dev/null || exit 0
+          prev="$(jq -r '.commit // empty' /tmp/live-update.json)"
+          version="$(sed -n 's/^version = "\(.*\)"/\1/p' Cargo.toml | head -1)"
+          if [ -z "$prev" ] || [ "$(jq -r .version /tmp/live-update.json)" != "$version" ] \
+            || ! git merge-base --is-ancestor "$prev" HEAD; then
+            exit 0
+          fi
+          changed="$(git diff --name-only "$prev" HEAD)"
+          if [ -z "$changed" ]; then
+            exit 0
+          fi
+          if grep -Ev '^(content/(index\.yaml|hb/|lessons/)|changes/|docs/|[^/]+\.md$|crates/app/.+\.css$)' <<<"$changed"; then
+            echo "Code changed since $prev (above): a full build."
+            exit 0
+          fi
+          echo "Only content or stylesheets changed since $prev: the feed keeps its APK."
+          echo "CONTENT_ONLY=true" >> "$GITHUB_ENV"
+
+      - uses: actions/setup-java@v5
+        if: env.CONTENT_ONLY != 'true'
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: cargo-bins/cargo-binstall@8a2045612414e945291083f820cd50b4d8fc2218 # v1.26.0
+        if: env.CONTENT_ONLY != 'true'
+      - name: Install dx 0.7.10
+        if: env.CONTENT_ONLY != 'true'
+        run: cargo binstall -y --force dioxus-cli@0.7.10
+
       - name: Create preview update key
         if: steps.update-key.outputs.cache-hit != 'true'
         run: |
@@ -162,6 +194,7 @@ jobs:
           } >> "$GITHUB_ENV"
 
       - name: Android environment
+        if: env.CONTENT_ONLY != 'true'
         run: |
           echo "ANDROID_HOME=$ANDROID_SDK_ROOT" >> "$GITHUB_ENV"
           echo "ANDROID_NDK_HOME=$ANDROID_NDK_LATEST_HOME" >> "$GITHUB_ENV"
@@ -169,6 +202,7 @@ jobs:
           echo "$BT" >> "$GITHUB_PATH"
 
       - name: Build APK
+        if: env.CONTENT_ONLY != 'true'
         working-directory: crates/app
         # Batna Cloud and Google sign-in are built in (crates/app/src/cloud/mod.rs).
         # The URL and client id are public (the id is in wrangler.toml too), so
@@ -186,11 +220,13 @@ jobs:
             --out-dir ../../dist/android/raw
 
       - name: Rebuild as a release APK (not debuggable, R8, versionCode)
+        if: env.CONTENT_ONLY != 'true'
         run: |
           APK="$(scripts/android-release-apk.sh)"
           mkdir -p dist/android/release && cp "$APK" dist/android/release/batna-unsigned.apk
 
       - name: Check the APK (Kotlin glue and its permissions)
+        if: env.CONTENT_ONLY != 'true'
         run: scripts/android-check-apk.sh dist/android/release/batna-unsigned.apk
 
       - name: Create preview signing key
@@ -209,6 +245,7 @@ jobs:
           key: batna-preview-key-v1
 
       - name: Sign
+        if: env.CONTENT_ONLY != 'true'
         run: |
           IN=dist/android/release/batna-unsigned.apk
           PASS="$(cat ~/.batna-preview/pass)"
@@ -232,20 +269,28 @@ jobs:
             "https://github.com/$GITHUB_REPOSITORY/releases/download/batna-preview/update.json" \
             || rm -f /tmp/previous-update.json
           cargo run -q -p batna-tools -- packs build --out dist/packs
+          if [ "${CONTENT_ONLY:-}" = true ]; then
+            app=(--carry android-arm64)
+          else
+            app=(--asset android-arm64=dist/android/batna-preview.apk)
+          fi
           cargo run -q -p batna-tools -- update manifest --channel preview --version "$VERSION" \
             --build "$BATNA_BUILD" --commit "$BATNA_COMMIT" \
-            --previous /tmp/previous-update.json --changes \
-            --asset android-arm64=dist/android/batna-preview.apk \
+            --previous /tmp/previous-update.json --changes "${app[@]}" \
             --asset content=dist/packs/batna-content.pack --out dist/update
           BATNA_UPDATE_SECRET="$(cat ~/.batna-preview-update/secret)" \
             cargo run -q -p batna-tools -- update sign dist/update --public-key ~/.batna-preview-update/key.pub
           cargo run -q -p batna-tools -- update verify dist/update --public-key ~/.batna-preview-update/key.pub
+          # Always there, so the artifact keeps its dist/ layout without an APK.
+          echo "${CONTENT_ONLY:-false}" > dist/content-only
           ls -l dist/update
 
       - uses: actions/upload-artifact@v4
         with:
           name: batna-preview-apk
+          # A content-only run has no APK; dist/content-only keeps the layout.
           path: |
+            dist/content-only
             dist/android/batna-preview.apk
             dist/update/
           retention-days: 14
@@ -313,14 +358,19 @@ jobs:
           for f in dist/update/*; do
             case "$(basename "$f")" in update.json|update.json.sig) ;; *) files+=("$f") ;; esac
           done
-          gh release upload "$TAG" dist/android/batna-preview.apk "${files[@]}" --clobber
+          # A content-only feed carries the APK already on the release.
+          if [ -f dist/android/batna-preview.apk ]; then
+            files+=(dist/android/batna-preview.apk)
+          fi
+          gh release upload "$TAG" "${files[@]}" --clobber
           gh release upload "$TAG" dist/update/update.json.sig dist/update/update.json --clobber
           # Feed files carry the build number, so nothing a live update.json
-          # names is ever overwritten. Keep this build's files and the ones
-          # before (a device may have just read the previous feed) and drop
-          # older ones so the release doesn't grow without end.
-          gh api "repos/$GH_REPO/releases/tags/$TAG" \
-            --jq '.assets[] | select(.name | test("-b[0-9]+-")) | "\(.name | capture("-b(?<b>[0-9]+)-").b) \(.id)"' \
-            | sort -rn | awk '{ if (!seen[$1]++) n++; if (n > 2) print $2 }' | while read -r id; do
-                gh api -X DELETE "repos/$GH_REPO/releases/assets/$id"
+          # names is ever overwritten. Keep the files this feed and the one
+          # before name (a device may have just read it; a content-only feed
+          # names an older APK) and drop the rest so the release doesn't grow
+          # without end.
+          keep="$( { jq -r '.assets[].file' dist/update/update.json; jq -r '.assets[].file' <<<"${live:-}" 2>/dev/null; } | sort -u)"
+          gh api "repos/$GH_REPO/releases/tags/$TAG" --jq '.assets[] | select(.name | test("-b[0-9]+-")) | "\(.id) \(.name)"' \
+            | while read -r id name; do
+                grep -qxF "$name" <<<"$keep" || gh api -X DELETE "repos/$GH_REPO/releases/assets/$id"
               done

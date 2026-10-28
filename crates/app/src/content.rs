@@ -1,8 +1,11 @@
 //! The study content built into the app: build.rs packs it
-//! (`batna_core::pack`) and this unpacks it once, on first use.
+//! (`batna_core::pack`) and this unpacks it on first use. A newer pack from
+//! the update feed replaces it, at start or live once he is between
+//! sessions ([`Library::reload`]), with no app install.
 
 use std::collections::BTreeMap;
-use std::sync::OnceLock;
+use std::sync::RwLock;
+use std::sync::atomic::{AtomicU64, Ordering};
 
 use batna_core::content::{Index, Lecture};
 use batna_core::lesson::{Lesson, LessonFile};
@@ -20,19 +23,51 @@ pub struct Library {
     pub lessons: BTreeMap<String, LessonFile>,
 }
 
+/// The library in use. Each one is leaked: screens hold `&'static` items,
+/// and it is replaced at most a few times a session.
+static LIB: RwLock<Option<&'static Library>> = RwLock::new(None);
+/// Bumped each time the library is replaced, so caches built from it know.
+static GENERATION: AtomicU64 = AtomicU64::new(0);
+
 impl Library {
     pub fn get() -> &'static Library {
-        static LIB: OnceLock<Library> = OnceLock::new();
-        LIB.get_or_init(|| {
-            // A newer pack from the update feed wins (checked and decoded
-            // there); else the embedded one, which build.rs wrote from types
-            // it just parsed, so it can't fail.
-            let Pack { index, lectures, lessons } = crate::update::installed_pack()
-                .unwrap_or_else(|| Pack::decode(embedded::PACK).expect("embedded content pack"));
-            let lectures = lectures.into_iter().map(|l| (l.lecture.clone(), l)).collect();
-            let lessons = lessons.into_iter().map(|l| (l.lecture.clone(), l)).collect();
-            Library { index, lectures, lessons }
-        })
+        if let Some(lib) = *LIB.read().unwrap_or_else(|e| e.into_inner()) {
+            return lib;
+        }
+        let mut lib = LIB.write().unwrap_or_else(|e| e.into_inner());
+        match *lib {
+            Some(l) => l,
+            None => {
+                let l: &'static Library = Box::leak(Box::new(Library::load()));
+                *lib = Some(l);
+                l
+            }
+        }
+    }
+
+    /// Opens the newest pack again (one the update feed just delivered).
+    /// Screens built from the old one must be shown again afterwards.
+    pub fn reload() {
+        let fresh: &'static Library = Box::leak(Box::new(Library::load()));
+        *LIB.write().unwrap_or_else(|e| e.into_inner()) = Some(fresh);
+        GENERATION.fetch_add(1, Ordering::SeqCst);
+    }
+
+    /// Changes each time the library is replaced.
+    pub fn generation() -> u64 {
+        GENERATION.load(Ordering::SeqCst)
+    }
+
+    fn load() -> Library {
+        // A newer pack from the update feed wins (checked and decoded
+        // there); else the embedded one, which build.rs wrote from types
+        // it just parsed, so it can't fail.
+        let Pack { index, lectures, lessons, look } = crate::update::installed_pack()
+            .unwrap_or_else(|| Pack::decode(embedded::PACK).expect("embedded content pack"));
+        crate::look::set(look);
+        let lectures = lectures.into_iter().map(|l| (l.lecture.clone(), l)).collect();
+        let lessons = lessons.into_iter().map(|l| (l.lecture.clone(), l)).collect();
+        Library { index, lectures, lessons }
     }
 
     /// Every lesson in book order, with its lecture id.
@@ -56,6 +91,33 @@ impl Library {
     pub fn title<'a>(&'a self, id: &'a str) -> &'a str {
         let indexed = self.index.lectures.iter().find(|e| e.id == id).map(|e| e.title.as_str());
         indexed.or_else(|| self.lectures.get(id).map(|l| l.title.as_str())).unwrap_or(id)
+    }
+}
+
+/// Bumped when the library is replaced while Batna is open; the shell
+/// draws its screens again under this key (`update::view::use_content_switch`).
+pub static REV: dioxus::prelude::GlobalSignal<u64> = dioxus::prelude::Signal::global(|| 0);
+
+/// Something built from the library once, and again after it is replaced.
+pub struct Derived<T: 'static> {
+    cell: RwLock<Option<(u64, &'static T)>>,
+}
+
+impl<T: Send + Sync + 'static> Derived<T> {
+    pub const fn new() -> Self {
+        Self { cell: RwLock::new(None) }
+    }
+
+    pub fn get(&self, build: impl FnOnce(&'static Library) -> T) -> &'static T {
+        let generation = Library::generation();
+        if let Some((g, value)) = *self.cell.read().unwrap_or_else(|e| e.into_inner())
+            && g == generation
+        {
+            return value;
+        }
+        let value: &'static T = Box::leak(Box::new(build(Library::get())));
+        *self.cell.write().unwrap_or_else(|e| e.into_inner()) = Some((generation, value));
+        value
     }
 }
 

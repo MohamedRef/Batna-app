@@ -163,11 +163,23 @@ pub struct UpdateManifest {
     /// Older apps ignore it.
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub history: Vec<BuildChanges>,
+    /// The app build the content pack's look (its stylesheets) was made
+    /// with: only a running build of this version and exactly this number
+    /// uses them, so a newer look never lands on older screens. Absent: the
+    /// pack carries content only for every build. Older apps ignore it.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub ui_build: Option<u64>,
 }
 
 impl UpdateManifest {
     pub fn asset(&self, platform: UpdatePlatform) -> Option<&UpdateAsset> {
         self.assets.iter().find(|a| a.platform == platform)
+    }
+
+    /// The build that made `asset`: an earlier one when a content-only feed
+    /// carries the app over unchanged, else this feed's.
+    pub fn build_of(&self, asset: &UpdateAsset) -> u64 {
+        asset.build.unwrap_or(self.build)
     }
 }
 
@@ -195,6 +207,10 @@ pub struct BuildChanges {
     /// RFC 3339, when the build was published.
     pub published_at: String,
     pub changes: Vec<Change>,
+    /// Lectures, lessons or the look only: it arrived without installing
+    /// the app (a content-only feed).
+    #[serde(default, skip_serializing_if = "std::ops::Not::not")]
+    pub content_only: bool,
 }
 
 impl BuildChanges {
@@ -241,6 +257,12 @@ pub struct UpdateAsset {
     /// over the old app to succeed.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub version_code: Option<u64>,
+    /// The build that made this file when it is carried over from an
+    /// earlier feed (a content-only feed keeps the app it had); absent, the
+    /// manifest's own build. Apps compare this, not the feed's build, so a
+    /// content-only feed never offers the app they already run.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub build: Option<u64>,
 }
 
 /// A workspace version: `1.0.0`, `1.0.0-alpha.2`, `1.0.0-beta.1`, `1.0.0-rc.1`.
@@ -458,10 +480,12 @@ pub enum Decision {
 pub fn decide(me: &Installed, m: &UpdateManifest, platform: UpdatePlatform) -> Result<Decision, UpdateError> {
     check_channel(me, m)?;
     let version = Version::parse(&m.version).ok_or_else(|| UpdateError::BadManifest(m.version.clone()))?;
-    if (version, m.build) <= (me.version, me.build) {
+    let asset = m.asset(platform);
+    let build = asset.map_or(m.build, |a| m.build_of(a));
+    if (version, build) <= (me.version, me.build) {
         return Ok(Decision::UpToDate);
     }
-    Ok(match m.asset(platform) {
+    Ok(match asset {
         Some(a) => Decision::Available(a.clone()),
         None => Decision::NotForThisPlatform,
     })
@@ -591,7 +615,14 @@ mod tests {
     }
 
     fn asset(platform: UpdatePlatform, file: &str, sha: &str) -> UpdateAsset {
-        UpdateAsset { platform, file: file.into(), size: 3, sha256: sha.into(), version_code: None }
+        UpdateAsset {
+            platform,
+            file: file.into(),
+            size: 3,
+            sha256: sha.into(),
+            version_code: None,
+            build: None,
+        }
     }
 
     fn manifest(channel: Channel, version: &str, build: u64) -> UpdateManifest {
@@ -611,7 +642,20 @@ mod tests {
                 asset(UpdatePlatform::Content, &format!("batna-content-{version}.pack"), &"cd".repeat(32)),
             ],
             history: Vec::new(),
+            ui_build: None,
         }
+    }
+
+    #[test]
+    fn a_content_only_feed_never_offers_the_app_again() {
+        let me = Installed { version: v("0.1.1-alpha.0"), build: 40, channel: Channel::Preview };
+        let mut m = manifest(Channel::Preview, "0.1.1-alpha.0", 45);
+        m.assets[0].build = Some(40);
+        let android = UpdatePlatform::AndroidArm64;
+        assert_eq!(decide(&me, &m, android), Ok(Decision::UpToDate), "the app it carries is the one running");
+        assert!(content_update(&me, &m, None).unwrap().is_some(), "the new pack still comes");
+        let older = Installed { build: 38, ..me };
+        assert!(matches!(decide(&older, &m, android), Ok(Decision::Available(_))));
     }
 
     #[test]

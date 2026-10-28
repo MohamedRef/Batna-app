@@ -3,25 +3,20 @@
 //! a real review: it goes to the store and FSRS schedules the item.
 
 use std::collections::HashMap;
-use std::sync::OnceLock;
 
 use batna_core::content::{Item, Lecture};
 use batna_core::review::{Grade, Origin, ReviewEvent};
 use dioxus::prelude::*;
 
-use crate::content::Library;
+use crate::content::Derived;
 use crate::i18n::learn as tx;
 use crate::study::{ItemView, PLAYABLE, use_store};
 
 /// Every item by id, with its lecture.
 pub fn find(id: &str) -> Option<(&'static Lecture, &'static Item)> {
-    static MAP: OnceLock<HashMap<&'static str, (&'static Lecture, &'static Item)>> = OnceLock::new();
-    MAP.get_or_init(|| {
-        Library::get()
-            .lectures
-            .values()
-            .flat_map(|l| l.items.iter().map(move |i| (i.id.as_str(), (l, i))))
-            .collect()
+    static MAP: Derived<HashMap<&'static str, (&'static Lecture, &'static Item)>> = Derived::new();
+    MAP.get(|lib| {
+        lib.lectures.values().flat_map(|l| l.items.iter().map(move |i| (i.id.as_str(), (l, i)))).collect()
     })
     .get(id)
     .copied()

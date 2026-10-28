@@ -6,9 +6,10 @@ use dioxus::prelude::*;
 
 use crate::content::Library;
 use crate::i18n::own as tx;
+use crate::look::{Css, css};
 use crate::store::{self, own::new_id, use_review};
 
-const CSS: &str = include_str!("own.css");
+const CSS: Css = css!("src/own/own.css");
 
 /// The card being written or edited; the sheet shows while it's set.
 pub static DRAFT: GlobalSignal<Option<Draft>> = Signal::global(|| None);
@@ -118,7 +119,7 @@ fn Sheet(draft: Draft) -> Element {
     };
     let c = card();
     rsx! {
-        style { {CSS} }
+        style { {CSS.text()} }
         div { class: "own-backdrop", onclick: move |_| close() }
         div {
             class: "own-sheet",
@@ -231,7 +232,7 @@ pub fn OwnCardsCard(on_study: EventHandler<()>) -> Element {
     let cards = super::cards();
     let mut confirm = use_signal(|| None::<String>);
     rsx! {
-        style { {CSS} }
+        style { {CSS.text()} }
         section { class: "card own",
             div { class: "own-head",
                 h2 { {tx::TITLE} }

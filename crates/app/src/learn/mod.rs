@@ -18,9 +18,10 @@ use serde::{Deserialize, Serialize};
 use crate::content::Library;
 use crate::i18n::count::{MINUTE, QUESTION, count};
 use crate::i18n::learn as tx;
+use crate::look::{Css, css};
 use crate::{Screen, Ui};
 
-pub(crate) const CSS: &str = include_str!("learn.css");
+pub(crate) const CSS: Css = css!("src/learn/learn.css");
 
 /// The lesson open in the player; set it, then switch to [`Screen::Learn`].
 /// `BATNA_OPEN_LESSON=hb.L01.lesson1` opens one at launch (previews, screenshots).
@@ -165,8 +166,8 @@ pub fn lesson_for_item(item_id: &str) -> Option<&'static Lesson> {
 pub fn Learn() -> Element {
     let open = OPEN();
     rsx! {
-        style { {crate::study::STUDY_CSS} }
-        style { {CSS} }
+        style { {crate::study::STUDY_CSS.text()} }
+        style { {CSS.text()} }
         match open.and_then(|id| Library::get().lesson(&id).map(|(lec, l)| (lec, l.clone()))) {
             Some((lecture, lesson)) => rsx! {
                 player::Player { key: "{lesson.id}", lesson, lecture_title: Library::get().title(&lecture.lecture).to_string() }
@@ -299,7 +300,7 @@ pub fn TodayLesson(prefer: Vec<String>) -> Element {
     let lecture = l.id.rsplit_once('.').map(|(l, _)| l).unwrap_or(&l.id);
     let title = Library::get().title(lecture).to_string();
     rsx! {
-        style { {CSS} }
+        style { {CSS.text()} }
         // The whole card opens the lesson (the button's click bubbles up).
         section { class: "card card-action ls-today",
             onclick: { let id = l.id.clone(); move |_| open(ui, &id) },

@@ -13,7 +13,6 @@ pub mod grade;
 mod item;
 
 use std::collections::{BTreeSet, HashMap, HashSet};
-use std::sync::OnceLock;
 use std::time::Instant;
 
 use batna_core::content::{Item, Lecture};
@@ -25,13 +24,14 @@ pub(crate) use backend::use_store;
 pub use backend::{StudyStore, StudyStoreHandle};
 pub use item::{ItemView, PLAYABLE};
 
-use crate::content::Library;
+use crate::content::{Derived, Library};
 use crate::i18n::count::{DAY, HOUR, ITEM, MINUTE, REVIEW, count};
 use crate::i18n::study as tx;
+use crate::look::{Css, css};
 use backend::now_ms;
 use item::short_text;
 
-pub(crate) const STUDY_CSS: &str = include_str!("../../assets/study.css");
+pub(crate) const STUDY_CSS: Css = css!("assets/study.css");
 const MINUTES: [u32; 4] = [5, 10, 15, 20];
 
 /// A request to start a session straight away (Today's "start" button sets
@@ -51,13 +51,9 @@ pub static START: GlobalSignal<Option<Start>> = Signal::global(|| None);
 
 /// Every item by id, with its lecture.
 fn items() -> &'static HashMap<String, (&'static Lecture, &'static Item)> {
-    static MAP: OnceLock<HashMap<String, (&'static Lecture, &'static Item)>> = OnceLock::new();
-    MAP.get_or_init(|| {
-        Library::get()
-            .lectures
-            .values()
-            .flat_map(|l| l.items.iter().map(move |i| (i.id.clone(), (l, i))))
-            .collect()
+    static MAP: Derived<HashMap<String, (&'static Lecture, &'static Item)>> = Derived::new();
+    MAP.get(|lib| {
+        lib.lectures.values().flat_map(|l| l.items.iter().map(move |i| (i.id.clone(), (l, i)))).collect()
     })
 }
 
@@ -341,7 +337,7 @@ pub fn Study() -> Element {
     };
 
     rsx! {
-        style { {STUDY_CSS} }
+        style { {STUDY_CSS.text()} }
         div { class: "st", {body} }
     }
 }

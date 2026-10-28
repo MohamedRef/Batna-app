@@ -115,6 +115,25 @@ off. A pack from an older build than the one installed is never taken, and
 the app decodes it with `batna_core::pack` before switching to it, so a pack
 this build can't read is never used.
 
+A pack also carries the app's stylesheets (`Pack::look`, every `.css` file
+under `crates/app`), so a change to the look needs no install either. The
+manifest's `ui_build` names the app build they were made with, and only a
+running build with exactly that number uses them (`crates/app/src/look.rs`);
+any other build takes the lectures and keeps its own look. Strings, icons,
+layout and logic are code and still come with an APK.
+
+**Content-only feeds.** When everything merged since the build on the
+preview feed is under `content/index.yaml`, `content/hb/`, `content/lessons/`,
+`changes/`, `docs/`, a top-level `.md` or a `crates/app/**/*.css` file, CI
+builds no APK: `batna-tools update manifest --carry android-arm64` keeps the
+feed's APK entry as it is (same file, its own `build`), and only the pack is
+new. Apps compare an asset's own `build`, so nothing is offered for install;
+the pack is downloaded in the background and switched to live once Mohamed
+is between sessions (the calm moments a quiet install waits for), and
+"What's new" opens once with that update's `changes/` lines, marked as a
+content update. The glossary is built into the app, so a glossary change is
+a full build.
+
 ### Keys
 
 | Key | Where it lives | Made by |
@@ -227,7 +246,7 @@ everything since the build that ran before.
 |---|---|
 | Android | `android/…/UpdateInstaller.kt` checks the APK (same package, same signing key, a versionCode no lower than the installed one) and hands it to PackageInstaller. Android asks once for "Install unknown apps", then shows its own confirmation. On Android 12+, once Batna installed itself, automatic mode updates quietly while Batna is in the background, and never during a study session, bank block, case or oral round. When notifications are allowed, one says the new version is in. |
 | Mac | The verified `Batna.app.zip` is unzipped with `ditto` next to the running app, its code signature is checked against the running one ("Batna Code Signing"), and the two are swapped with renames, so a failure leaves the old app in place. In automatic mode it goes in at the next launch; otherwise "ثبّتها وافتح تاني". |
-| Content pack | Kept in `<data>/updates/content.pack`, and used from the next start. |
+| Content pack | Kept in `<data>/updates/content.pack`, and switched to live once he is between sessions (else at the next start). No install. |
 
 Automatic downloads wait while Android says the network is metered (mobile
 data or Data Saver). Study data never moves: it stays in the data folder

@@ -6,7 +6,7 @@
 //! update keygen [--public-out FILE] [--force]
 //! update manifest --channel C [--version V] [--build N] [--commit SHA]
 //!                 --asset PLATFORM=PATH … [--notes-en T] [--notes-ar-eg T] [--out DIR]
-//!                 [--previous FEED/update.json] [--changes]
+//!                 [--previous FEED/update.json] [--changes] [--carry PLATFORM …]
 //! update changes [--since COMMIT]          what the next build's "what's new" says
 //! update channels [--version V]             the channels a version is published on
 //! update sign DIR [--public-key FILE]       secret from BATNA_UPDATE_SECRET
@@ -26,6 +26,10 @@
 //! - `--previous` keeps the channel's current history (a missing file is
 //!   fine); with `--changes`, `changes/` since that feed's commit becomes
 //!   this build's entry, and the notes when none are given (`crate::changes`).
+//! - `--carry PLATFORM` keeps that platform's file from `--previous` as it
+//!   is (same file, same build): a content-only feed carries the app over,
+//!   so devices get the new pack without installing anything. Its history
+//!   entry is marked `content_only`.
 //!
 //! Adapted from kabar-app main: `crates/tools/src/update.rs` (clap and
 //! anyhow swapped for this crate's plain argument handling).
@@ -87,6 +91,9 @@ fn run_inner(root: &Path, args: &[String]) -> Res<String> {
             if assets.is_empty() {
                 return Err("give at least one --asset PLATFORM=PATH".into());
             }
+            let carry = values(args, "--carry")
+                .map(|p| UpdatePlatform::parse(p).ok_or_else(|| format!("unknown platform {p:?}")))
+                .collect::<Res<Vec<_>>>()?;
             let mut notes = UpdateNotes {
                 en: flag(args, "--notes-en").unwrap_or_default().to_owned(),
                 ar_eg: flag(args, "--notes-ar-eg").unwrap_or_default().to_owned(),
@@ -104,6 +111,19 @@ fn run_inner(root: &Path, args: &[String]) -> Res<String> {
                 }
                 _ => None,
             };
+            let carried = carry
+                .iter()
+                .map(|p| {
+                    let m = previous.as_ref().ok_or("--carry needs a --previous feed")?;
+                    if m.version != version {
+                        return Err(format!("--carry: the previous feed is {}, not {version}", m.version));
+                    }
+                    let a = m
+                        .asset(*p)
+                        .ok_or_else(|| format!("--carry: no {} in the previous feed", p.as_str()))?;
+                    Ok(UpdateAsset { build: Some(m.build_of(a)), ..a.clone() })
+                })
+                .collect::<Res<Vec<_>>>()?;
             let mut entry = None;
             if args.iter().any(|a| a == "--changes") {
                 let since = previous.as_ref().and_then(|m| m.commit.as_deref());
@@ -117,11 +137,20 @@ fn run_inner(root: &Path, args: &[String]) -> Res<String> {
                     build,
                     published_at: now_rfc3339(),
                     changes: found,
+                    content_only: !carried.is_empty(),
                 });
             }
             let history = changes::history(previous.as_ref(), entry, &changes::retro(root)?);
-            let m =
-                write_manifest(&out, channel, &version, build, commit, &assets, WhatsNew { notes, history })?;
+            let m = write_manifest(
+                &out,
+                channel,
+                &version,
+                build,
+                commit,
+                &assets,
+                &carried,
+                WhatsNew { notes, history },
+            )?;
             Ok(format!(
                 "{} {} build {} → {} ({} file(s))",
                 m.channel.as_str(),
@@ -230,6 +259,7 @@ pub struct WhatsNew {
     pub history: Vec<BuildChanges>,
 }
 
+#[allow(clippy::too_many_arguments)] // each one is a part of the feed
 pub fn write_manifest(
     out: &Path,
     channel: Channel,
@@ -237,6 +267,7 @@ pub fn write_manifest(
     build: u64,
     commit: Option<String>,
     files: &[(UpdatePlatform, PathBuf)],
+    carried: &[UpdateAsset],
     whats_new: WhatsNew,
 ) -> Res<UpdateManifest> {
     let WhatsNew { notes, history } = whats_new;
@@ -276,8 +307,21 @@ pub fn write_manifest(
             size: bytes.len() as u64,
             sha256: sha256_hex(&bytes),
             version_code: (*platform == UpdatePlatform::AndroidArm64).then(|| parsed.version_code()),
+            build: None,
         });
     }
+    for a in carried {
+        if assets.iter().any(|b| b.platform == a.platform) {
+            return Err(format!("{} is both carried and given", a.platform.as_str()));
+        }
+        assets.push(a.clone());
+    }
+    // The look in the pack fits the app this feed carries: a carried app is
+    // older than the feed, and its screens are what the stylesheets style.
+    let ui_build = assets.iter().any(|a| a.platform == UpdatePlatform::Content).then(|| {
+        let app = assets.iter().filter(|a| a.platform != UpdatePlatform::Content);
+        app.map(|a| a.build.unwrap_or(build)).min().unwrap_or(build)
+    });
     let m = UpdateManifest {
         format: UPDATE_FORMAT,
         channel,
@@ -288,6 +332,7 @@ pub fn write_manifest(
         notes,
         assets,
         history,
+        ui_build,
     };
     let path = out.join(MANIFEST_FILE);
     let json = serde_json::to_vec_pretty(&m).map_err(|e| e.to_string())?;
@@ -382,6 +427,7 @@ mod tests {
             0,
             Some("abc1234".into()),
             &[(UpdatePlatform::AndroidArm64, apk), (UpdatePlatform::Content, pack)],
+            &[],
             WhatsNew::default(),
         )
         .unwrap();
@@ -411,9 +457,11 @@ mod tests {
         let assets = [(UpdatePlatform::MacosArm64, f)];
         let out = dir.path().join("feed");
         let none = WhatsNew::default;
-        assert!(write_manifest(&out, Channel::Stable, "1.0.0-alpha.1", 0, None, &assets, none()).is_err());
-        assert!(write_manifest(&out, Channel::Beta, "1.0.0", 0, None, &assets, none()).is_ok());
-        let preview = write_manifest(&out, Channel::Preview, "0.1.0", 7, None, &assets, none()).unwrap();
+        assert!(
+            write_manifest(&out, Channel::Stable, "1.0.0-alpha.1", 0, None, &assets, &[], none()).is_err()
+        );
+        assert!(write_manifest(&out, Channel::Beta, "1.0.0", 0, None, &assets, &[], none()).is_ok());
+        let preview = write_manifest(&out, Channel::Preview, "0.1.0", 7, None, &assets, &[], none()).unwrap();
         assert_eq!(
             preview.assets[0].file, "Batna-0.1.0-b7-macos-arm64.app.zip",
             "preview names carry the build"
@@ -452,6 +500,50 @@ mod tests {
             run(dir.path(), &strings(&["manifest", "--channel", "alpha", "--version", "1.0.0"])).is_err()
         );
         assert!(run(dir.path(), &strings(&["sign"])).is_err());
+    }
+
+    #[test]
+    fn a_content_only_feed_carries_the_app_over() {
+        let dir = tempfile::tempdir().unwrap();
+        let (apk, pack) = (dir.path().join("a.apk"), dir.path().join("c.pack"));
+        fs::write(&apk, b"a").unwrap();
+        fs::write(&pack, b"one").unwrap();
+        let feed = |build: &str, out: &str, extra: &[&str]| {
+            let mut args = strings(&[
+                "manifest",
+                "--channel",
+                "preview",
+                "--version",
+                "0.1.1-alpha.0",
+                "--build",
+                build,
+            ]);
+            args.extend(strings(&["--asset", &format!("content={}", pack.display()), "--out", out]));
+            args.extend(strings(extra));
+            run(dir.path(), &args)
+        };
+        let first = dir.path().join("first").display().to_string();
+        let apk_arg = format!("android-arm64={}", apk.display());
+        feed("40", &first, &["--asset", &apk_arg]).unwrap();
+        let previous = format!("{first}/{MANIFEST_FILE}");
+        assert!(
+            feed("41", &first, &["--carry", "android-arm64"]).is_err(),
+            "carrying needs the previous feed"
+        );
+
+        fs::write(&pack, b"two").unwrap();
+        let second = dir.path().join("second").display().to_string();
+        feed("45", &second, &["--previous", &previous, "--carry", "android-arm64"]).unwrap();
+        let m: UpdateManifest =
+            serde_json::from_slice(&fs::read(format!("{second}/{MANIFEST_FILE}")).unwrap()).unwrap();
+        let app = m.asset(UpdatePlatform::AndroidArm64).unwrap();
+        assert_eq!((app.file.as_str(), m.build_of(app)), ("batna-0.1.1-alpha.0-b40-android-arm64.apk", 40));
+        assert!(!Path::new(&second).join(&app.file).exists(), "the carried file stays where it is");
+        assert_eq!(
+            m.asset(UpdatePlatform::Content).unwrap().file,
+            "batna-content-0.1.1-alpha.0-b45-content.pack"
+        );
+        assert_eq!((m.build, m.ui_build), (45, Some(40)), "the look fits the app it carries");
     }
 
     #[test]
@@ -520,6 +612,7 @@ mod tests {
                     size: apk.len() as u64,
                     sha256: sha256_hex(&apk),
                     version_code: Some(100_999),
+                    build: None,
                 },
                 UpdateAsset {
                     platform: UpdatePlatform::Content,
@@ -527,6 +620,7 @@ mod tests {
                     size: pack.len() as u64,
                     sha256: sha256_hex(&pack),
                     version_code: None,
+                    build: None,
                 },
             ],
             history: vec![
@@ -540,14 +634,17 @@ mod tests {
                          - kind: fixed\n  ar_eg: التايمر في الامتحان التجريبي مبقاش بيقف\n",
                     )
                     .unwrap(),
+                    content_only: false,
                 },
                 BuildChanges {
                     version: "0.1.0".into(),
                     build: 40,
                     published_at: "2026-10-25T08:00:00Z".into(),
                     changes: changes::parse("- kind: new\n  ar_eg: أول نسخة تجريبية\n").unwrap(),
+                    content_only: false,
                 },
             ],
+            ui_build: None,
         };
         let json = serde_json::to_vec_pretty(&m).unwrap();
         fs::write(root.join(MANIFEST_FILE), &json).unwrap();

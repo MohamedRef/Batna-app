@@ -26,7 +26,7 @@ pub fn StudySection() -> Element {
     let set_new = set;
 
     rsx! {
-        style { {super::CSS} }
+        style { {super::CSS.text()} }
         section { class: "card",
             h2 { {tx::RETENTION} }
             p { class: "muted small", {tx::RETENTION_BODY} }

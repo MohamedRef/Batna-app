@@ -13,9 +13,10 @@ use batna_core::review::Grade;
 use dioxus::prelude::*;
 
 use crate::i18n::table as tx;
+use crate::look::{Css, css};
 use crate::study::grade::GradeRow;
 
-const CSS: &str = include_str!("table.css");
+const CSS: Css = css!("src/table/table.css");
 
 /// Cells longer than this are tap-to-reveal even with typing on.
 const TYPABLE_CHARS: usize = 40;
@@ -62,7 +63,7 @@ pub fn TableItem(item: Item, on_grade: EventHandler<Grade>) -> Element {
     };
 
     rsx! {
-        style { {CSS} }
+        style { {CSS.text()} }
         section { class: "tb-item",
             h2 { class: "tb-title", dir: "ltr", lang: "en", "{title}" }
             if hidden > 0 {

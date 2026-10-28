@@ -147,6 +147,7 @@ mod tests {
                     text: UpdateNotes { en: format!("change {i}"), ar_eg: format!("تغيير {i}") },
                 })
                 .collect(),
+            content_only: false,
         }
     }
 

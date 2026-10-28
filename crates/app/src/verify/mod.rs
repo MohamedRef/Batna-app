@@ -11,9 +11,10 @@ use dioxus::prelude::*;
 pub use export::ExportVerdicts;
 
 use crate::i18n::verify as tx;
+use crate::look::{Css, css};
 use crate::store::use_review;
 
-pub(crate) const CSS: &str = include_str!("verify.css");
+pub(crate) const CSS: Css = css!("src/verify/verify.css");
 
 /// Rendered above the study player's grade row (`study::grade::GradeRow`).
 #[component]
@@ -132,7 +133,7 @@ fn Bar(item_id: String) -> Element {
         }
     };
     rsx! {
-        style { {CSS} }
+        style { {CSS.text()} }
         div { class: "verify", role: "group", aria_label: tx::GROUP,
             {body}
             if failed() {

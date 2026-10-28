@@ -21,8 +21,8 @@ pub fn DataSection() -> Element {
                 p { class: "small", role: "alert", {crate::i18n::study_settings::STORE_MEMORY} }
             }
         }
-        style { {crate::today::CSS} }
-        style { {crate::verify::CSS} }
+        style { {crate::today::CSS.text()} }
+        style { {crate::verify::CSS.text()} }
         crate::verify::ExportVerdicts {}
         crate::data_export::ExportCard {}
         crate::anki::AnkiExport {}

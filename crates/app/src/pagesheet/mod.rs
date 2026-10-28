@@ -12,10 +12,11 @@ use dioxus::prelude::*;
 use crate::content::{Library, lecture_code};
 use crate::i18n::book as tx;
 use crate::i18n::count::{CASE, ITEM, QUESTION, count};
+use crate::look::{Css, css};
 use crate::store::use_review;
 use crate::{Screen, Ui};
 
-const CSS: &str = include_str!("pagesheet.css");
+const CSS: Css = css!("src/pagesheet/pagesheet.css");
 
 /// The open page and the quote its chip carried.
 static OPEN: GlobalSignal<Option<(u32, Option<String>)>> = Signal::global(|| None);
@@ -93,7 +94,7 @@ pub fn BookSheet() -> Element {
     let lecture_id = content.lecture.clone();
 
     rsx! {
-        style { {CSS} }
+        style { {CSS.text()} }
         div { class: "bk-backdrop", onclick: move |_| close() }
         div { class: "bk-sheet", role: "dialog", aria_modal: "true", aria_labelledby: "bk-title",
             div { class: "bk-head",

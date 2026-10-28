@@ -15,13 +15,14 @@ use dioxus::prelude::*;
 
 use crate::content::{Library, lecture_code};
 use crate::i18n::stats as tx;
+use crate::look::{Css, css};
 use crate::plan::Planner;
 
 /// The study day starts when the scheduler's does (4 am).
 const ROLLOVER_HOUR: u32 = batna_core::srs::ROLLOVER_HOUR as u32;
 /// How far ahead the scheduler's forecast is read: past any exam this year.
 const FORECAST_DAYS: usize = 400;
-const STATS_CSS: &str = include_str!("stats.css");
+const STATS_CSS: Css = css!("src/stats/stats.css");
 
 /// What the stats read: the content, the review log, Mohamed's marks and the
 /// scheduler's due forecast. Rebuilt after every answer or verdict.
@@ -122,7 +123,7 @@ pub fn Stats() -> Element {
     let tabs =
         [(Tab::Progress, tx::TAB_PROGRESS), (Tab::Mistakes, tx::TAB_MISTAKES), (Tab::Plan, tx::TAB_PLAN)];
     rsx! {
-        style { {STATS_CSS} }
+        style { {STATS_CSS.text()} }
         div { class: "tabs", role: "tablist", aria_label: tx::TABS_LABEL,
             for (t, label) in tabs {
                 button {

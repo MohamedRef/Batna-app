@@ -16,11 +16,12 @@ use dioxus::prelude::*;
 
 use crate::Ui;
 use crate::i18n::{desk as tx, hover as htx, keys as ktx};
+use crate::look::{Css, css};
 use crate::prefs::NavStyle;
 use crate::settings::{DeviceOnly, Section};
 
-const DESK_CSS: &str = include_str!("../../assets/desk.css");
-const NAV_CSS: &str = include_str!("../../assets/nav.css");
+const DESK_CSS: Css = css!("assets/desk.css");
+const NAV_CSS: Css = css!("assets/nav.css");
 
 /// Rendered once by the app root: the desk's styles, the stored device
 /// switches, the hover script, the keyboard and (on the Mac) the menu.
@@ -43,8 +44,8 @@ pub fn Chrome() -> Element {
     #[cfg(all(feature = "desktop", not(target_os = "android")))]
     crate::settings::menu::use_menu_events();
     rsx! {
-        style { {NAV_CSS} }
-        style { {DESK_CSS} }
+        style { {NAV_CSS.text()} }
+        style { {DESK_CSS.text()} }
         crate::shortcuts::KeysSheet {}
     }
 }

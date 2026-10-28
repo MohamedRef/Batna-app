@@ -21,6 +21,7 @@ mod icons;
 mod import;
 mod learn;
 mod lecture;
+mod look;
 mod more;
 mod onboarding;
 mod oral;
@@ -44,10 +45,11 @@ mod today;
 mod update;
 mod verify;
 
+use crate::look::{Css, css};
 use dioxus::prelude::*;
 
-const MAIN_CSS: &str = include_str!("../assets/main.css");
-const SHAPE_CSS: &str = include_str!("../assets/shape.css");
+const MAIN_CSS: Css = css!("assets/main.css");
+const SHAPE_CSS: Css = css!("assets/shape.css");
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Screen {
@@ -173,6 +175,7 @@ fn App() -> Element {
     lecture::use_lecture_page(ui);
     back::use_back(ui, current, *settings.open.read() || lecture::is_open() || pagesheet::is_open());
     update::view::use_android_install(ui);
+    update::view::use_content_switch(ui);
     update::view::use_update_notice_taps(settings);
     // A screen opens at its top, not at the last screen's scroll offset (UX #102).
     use_effect(move || {
@@ -182,8 +185,8 @@ fn App() -> Element {
     rsx! {
         document::Title { "Batna" }
         style { {fonts::css()} }
-        style { {MAIN_CSS} }
-        style { {SHAPE_CSS} }
+        style { {MAIN_CSS.text()} }
+        style { {SHAPE_CSS.text()} }
         style { {look} }
         desk::Chrome {}
         div { class: "app", lang: "ar", dir: "rtl",
@@ -228,9 +231,14 @@ fn App() -> Element {
             main { class: "content", "data-screen": "{current:?}",
                 update::view::UpdateBanner {}
                 // A lecture's page opens over the screen it came from (lecture.rs).
-                match lecture::shown(current) {
-                    Some(id) => rsx! { lecture::LecturePage { key: "{id}", id } },
-                    None => screen_body(current),
+                // A content update switched in while open draws it all again.
+                for rev in [*content::REV.read()] {
+                    div { key: "{rev}", class: "content-rev",
+                        match lecture::shown(current) {
+                            Some(id) => rsx! { lecture::LecturePage { key: "{id}", id } },
+                            None => screen_body(current),
+                        }
+                    }
                 }
             }
             settings::SettingsSheet {}

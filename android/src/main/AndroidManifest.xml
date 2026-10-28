@@ -43,5 +43,14 @@
                 <action android:name="android.intent.action.TIME_SET" />
             </intent-filter>
         </receiver>
+        <!-- Settings › Your data: the system "Save to" dialog for an export and
+             the file picker for a restore (Documents.kt). Invisible; it stays
+             alive under the system dialog to get the result. -->
+        <activity
+            android:name="app.batna.DocumentActivity"
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:configChanges="orientation|screenLayout|screenSize|smallestScreenSize|keyboardHidden"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
     </application>
 </manifest>

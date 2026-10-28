@@ -9,6 +9,7 @@ use dioxus::prelude::*;
 use serde_json::Value;
 
 use crate::i18n::data as tx;
+use crate::platform::documents::{self, DocState};
 use crate::store::import::{ImportPlan, parse};
 use crate::store::{self, use_review};
 
@@ -45,6 +46,7 @@ pub fn ImportCard() -> Element {
     let review = use_review();
     let mut step = use_signal(|| Step::Pick);
     let mut pasted = use_signal(String::new);
+    let mut picking = use_signal(|| false);
 
     let mut load = move |name: String, text: String| {
         let s = store::shared();
@@ -82,6 +84,36 @@ pub fn ImportCard() -> Element {
                         }
                     }
                 }
+                if cfg!(target_os = "android") {
+                    // The WebView has no file chooser here: the system picker copies the file in.
+                    button {
+                        class: "verify-btn plain",
+                        disabled: picking(),
+                        onclick: move |_| {
+                            if documents::open().is_ok() {
+                                picking.set(true);
+                                spawn(async move {
+                                    let done = documents::finished().await;
+                                    picking.set(false);
+                                    match done {
+                                        DocState::Opened { name, path } => match std::fs::read_to_string(&path) {
+                                            Ok(text) => {
+                                                let _ = std::fs::remove_file(&path);
+                                                load(name, text)
+                                            }
+                                            Err(e) => step.set(Step::Failed(e.to_string())),
+                                        },
+                                        DocState::Failed => step.set(Step::Failed(tx::IMPORT_PICK_FAILED.to_string())),
+                                        _ => {}
+                                    }
+                                });
+                            } else {
+                                step.set(Step::Failed(tx::IMPORT_PICK_FAILED.to_string()));
+                            }
+                        },
+                        if picking() { {tx::IMPORT_PICKING} } else if none_found { {tx::IMPORT_PICK_FIRST} } else { {tx::IMPORT_PICK} }
+                    }
+                } else {
                 label { class: "verify-field",
                     span { if none_found { {tx::IMPORT_PICK_FIRST} } else { {tx::IMPORT_PICK} } }
                     input {
@@ -96,6 +128,7 @@ pub fn ImportCard() -> Element {
                             }
                         },
                     }
+                }
                 }
                 details {
                     summary { class: "small", {tx::IMPORT_PASTE} }

@@ -1,8 +1,9 @@
 //! Settings › Your data › Export everything: one click writes the whole
 //! store to `batna-export-YYYY-MM-DD.json`. The document comes from
 //! `Store::export`; this module names, writes and reports the file.
-// adapted from kabar-app main: crates/app/src/data_export.rs (the Android
-// "Save to" dialog follows once the android/ module exists)
+//! On Android the file lands in the app's own folder first, then the system
+//! "Save to" dialog offers Downloads or Drive (`platform::documents`).
+// adapted from kabar-app main: crates/app/src/data_export.rs
 
 use std::io::Write;
 use std::path::{Path, PathBuf};
@@ -10,6 +11,7 @@ use std::path::{Path, PathBuf};
 use dioxus::prelude::*;
 
 use crate::i18n::data as tx;
+use crate::platform::documents::{self, DocState};
 use crate::store::{self, Store};
 
 /// `batna-export-2026-10-27.json`, or `…-2.json`, `…-3.json` when one exists.
@@ -52,10 +54,26 @@ pub fn save(store: &Store, dir: &Path, date: &str, now_ms: i64) -> Result<(PathB
 #[component]
 pub fn ExportCard() -> Element {
     let mut outcome = use_signal(|| None::<Result<(String, u64), String>>);
+    // Android: where the "Save to" dialog put the copy.
+    let mut moved = use_signal(|| None::<DocState>);
+    let mut save_to = move |path: String| {
+        let name = Path::new(&path).file_name().map(|n| n.to_string_lossy().into_owned()).unwrap_or_default();
+        moved.set(Some(DocState::Busy));
+        match documents::save(&path, &name) {
+            Ok(()) => {
+                spawn(async move { moved.set(Some(documents::finished().await)) });
+            }
+            Err(_) => moved.set(Some(DocState::Failed)),
+        }
+    };
     let run = move |_| {
         let result = store::export_dir()
             .and_then(|dir| save(store::shared(), &dir, &local_date(), store::now_ms()))
             .map(|(p, rows)| (p.display().to_string(), rows));
+        moved.set(None);
+        if let (true, Ok((path, _))) = (cfg!(target_os = "android"), &result) {
+            save_to(path.clone());
+        }
         outcome.set(Some(result));
     };
     rsx! {
@@ -69,7 +87,24 @@ pub fn ExportCard() -> Element {
                         p { class: "small", "{tx::EXPORT_SAVED_1} {rows} {tx::EXPORT_SAVED_2}" }
                         p { class: "small", bdi { dir: "ltr", "{path}" } }
                         if cfg!(target_os = "android") {
-                            p { class: "muted small", {tx::EXPORT_ANDROID_HINT} }
+                            match moved() {
+                                Some(DocState::Busy) => rsx! { p { class: "muted small", {tx::EXPORT_SAVING} } },
+                                Some(DocState::Saved(Some(name))) => rsx! {
+                                    p { class: "small", "{tx::EXPORT_SAVED_AS} " bdi { dir: "ltr", "{name}" } }
+                                },
+                                Some(DocState::Saved(None)) => rsx! { p { class: "small", {tx::EXPORT_SAVED_OUT} } },
+                                other => rsx! {
+                                    p { class: "muted small",
+                                        if other == Some(DocState::Cancelled) {
+                                            {tx::EXPORT_SAVE_CANCELLED}
+                                        } else if other.is_some() {
+                                            {tx::EXPORT_SAVE_FAILED}
+                                        }
+                                        " {tx::EXPORT_ANDROID_HINT}"
+                                    }
+                                    button { class: "verify-btn plain", onclick: move |_| save_to(path.clone()), {tx::EXPORT_SAVE_TO} }
+                                },
+                            }
                         }
                     }
                 },

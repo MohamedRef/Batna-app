@@ -3,6 +3,7 @@
 //! (background oral mode).
 
 pub mod background;
+pub mod documents;
 pub mod haptics;
 #[cfg(target_os = "android")]
 pub mod install;

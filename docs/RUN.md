@@ -24,6 +24,7 @@ One file, `/mnt/project-files/medstudy/anki/batna.apkg`, holds every written lec
 ## Your data and your content checks
 - Reviews, your ✓ / ✎ / ✗ checks and review settings live in one SQLite file on each device: `~/Library/Application Support/app.Batna.Batna/batna.db` on the Mac, and the app's private storage on Android. Settings › مذاكرتك shows the exact path. `BATNA_DATA_DIR=/some/folder just run` uses a separate profile (handy for previews).
 - Settings › صدّر مراجعاتك للمحتوى writes `batna-verdicts-YYYY-MM-DD.yaml` (format `batna.verdicts/v1`) to `~/Downloads` on the Mac, or to `Android/data/app.batna/files` on the phone and tablet (open it with the Files app or over USB). The same text is shown on screen, so you can copy it. Send it in the chat: `batna-tools` turns it into a fix list per lecture and adds your ✓ to `content/approved.txt`.
+- Settings › نسخة احتياطية من كل حاجة writes `batna-export-YYYY-MM-DD.json` (every review, check and setting) to `~/Downloads` on the Mac. On the phone and tablet it is written to the app's folder, then the system "Save to" dialog offers Downloads or Drive. Settings › استرجع نسخة merges such a file back (nothing is deleted; the newer row wins). On Android its button opens the system file picker, so a copy on Drive restores a new phone without any cloud.
 - Settings also sets the desired retention (85, 90 or 95%) and new items a day (15, 30, 45 or 60). After 400 reviews the schedule is fitted to your own memory, and it is refitted once a week.
 
 ## Sync between your devices (Batna Cloud)

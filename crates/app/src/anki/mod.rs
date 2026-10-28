@@ -31,12 +31,7 @@ mod android;
 const FILE_NAME: &str = "batna.apkg";
 
 const CSS: &str = "
-.anki-export .actions { display: flex; flex-wrap: wrap; gap: var(--sp-3); align-items: center; margin-block-start: var(--sp-3); }
-.anki-export .primary {
-  border: 0; border-radius: var(--radius); padding-block: var(--sp-3); padding-inline: var(--sp-4);
-  background: var(--accent); color: var(--bg, #fff); font-weight: 700; cursor: pointer;
-}
-.anki-export .primary[disabled] { opacity: .6; cursor: progress; }
+.anki-export .btn:disabled { cursor: progress; }
 .anki-export .result { margin-block-start: var(--sp-3); }
 ";
 
@@ -74,13 +69,11 @@ pub fn AnkiExport() -> Element {
     rsx! {
         style { {CSS} }
         section { class: "card anki-export",
-            h1 { {tx::TITLE} }
-            p { {tx::BODY} }
+            h2 { {tx::TITLE} }
+            p { class: "muted small", {tx::BODY} }
             p { class: "muted small", "{lectures} {tx::LECTURES} · {items} {tx::ITEMS}" }
-            div { class: "actions",
-                button { class: "primary", disabled: busy, onclick: export,
-                    if busy { {tx::WORKING} } else { {tx::BUTTON} }
-                }
+            button { class: "btn btn-primary", disabled: busy, onclick: export,
+                if busy { {tx::WORKING} } else { {tx::BUTTON} }
             }
             match &*state.read() {
                 State::Done { notes, place } => rsx! {
@@ -88,7 +81,7 @@ pub fn AnkiExport() -> Element {
                     p { class: "muted small", {tx::REIMPORT} }
                 },
                 State::Failed(e) => rsx! {
-                    p { class: "note result", {tx::FAILED} " " bdi { dir: "ltr", "{e}" } }
+                    p { class: "verify-error result", role: "alert", {tx::FAILED} " " bdi { dir: "ltr", "{e}" } }
                 },
                 _ => rsx! {},
             }

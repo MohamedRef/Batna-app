@@ -2,8 +2,11 @@
    Night and true black alike); logical properties only (RTL). */
 
 /* ---------- shared bits ---------- */
+.ls-nowrap { white-space: nowrap; }
 .ls-kicker {
   display: inline-block;
+  align-self: flex-start;
+  inline-size: fit-content;
   margin: 0 0 var(--sp-2);
   padding: 2px var(--sp-3);
   border-radius: var(--radius-pill);
@@ -13,27 +16,6 @@
   font-weight: 700;
 }
 .ls-h { font-size: var(--fs-lg); margin: 0 0 var(--sp-3); line-height: 1.4; }
-.ls-btn {
-  min-height: 44px;
-  padding-inline: var(--sp-4);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-pill);
-  background: var(--surface);
-  font-weight: 600;
-  cursor: pointer;
-}
-.ls-btn.primary { background: var(--accent); border-color: var(--accent); color: var(--surface); }
-.ls-btn:disabled { opacity: 0.4; cursor: default; }
-.ls-link {
-  border: 0;
-  background: none;
-  color: var(--accent);
-  padding: var(--sp-2);
-  min-height: 44px;
-  cursor: pointer;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
 .ls-row { display: flex; flex-wrap: wrap; gap: var(--sp-2); align-items: center; }
 .ls-verdict { font-weight: 700; margin-block: var(--sp-3) 0; }
 .ls-verdict.good { color: var(--good); }
@@ -139,6 +121,8 @@
   max-inline-size: 48rem;
   margin-inline: auto;
   inline-size: 100%;
+  /* Fills the screen so the footer sits at the bottom on every step. */
+  flex: 1 0 auto;
   display: flex;
   flex-direction: column;
   gap: var(--sp-2);
@@ -182,11 +166,13 @@
   min-block-size: 14rem;
   animation: ls-in 220ms var(--ease);
 }
+.ls-stage[hidden] { display: none; }
 @keyframes ls-in { from { opacity: 0; transform: translateX(-14px); } to { opacity: 1; transform: none; } }
 .ls-src { display: flex; justify-content: flex-end; border-block-start: 1px dashed var(--line); padding-block-start: var(--sp-2); }
 .ls-nav {
   position: sticky;
   bottom: 0;
+  margin-block-start: auto;
   z-index: 5;
   display: flex;
   align-items: center;
@@ -266,7 +252,7 @@
   border-radius: var(--radius);
   padding: var(--sp-3) var(--sp-4);
 }
-.ls-reveal .ls-btn { align-self: start; }
+.ls-reveal .btn { align-self: start; }
 
 /* mnemonic */
 .ls-mn-letters { display: flex; flex-wrap: wrap; gap: var(--sp-2); justify-content: center; }
@@ -291,7 +277,7 @@
 .ls-mn-lines li[data-open="yes"] { background: var(--accent-soft); }
 .ls-mn-k { flex: none; inline-size: 2.4rem; font-weight: 800; color: var(--accent); font-family: var(--font-latin); }
 .ls-mn-hook { border-block-start: 1px dashed var(--line); padding-block-start: var(--sp-2); }
-.ls-mnemonic .ls-link { align-self: center; }
+.ls-mnemonic .btn-link { align-self: center; }
 
 /* asides */
 .ls-aside {
@@ -409,7 +395,8 @@
   min-block-size: 6rem;
   transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease);
 }
-.ls-bin[data-armed="yes"] { border-color: var(--accent); background: var(--accent-soft); }
+.ls-bin[data-armed="yes"] { border-color: var(--accent); background: var(--accent-soft); cursor: pointer; }
+.ls-bin[data-armed="yes"]:active { transform: var(--press, scale(0.98)); }
 .ls-bin-head {
   border: 0;
   background: none;
@@ -434,7 +421,7 @@
 }
 .ls-bin-cards li[data-state="right"] .ls-chiplet { border-color: var(--good); background: var(--good-soft); }
 .ls-bin-cards li[data-state="wrong"] .ls-chiplet { border-color: var(--bad); background: var(--bad-soft); }
-.ls-sort > .ls-btn, .ls-order .ls-btn, .ls-case .ls-btn { align-self: start; }
+.ls-sort > .btn, .ls-order .btn, .ls-case .btn { align-self: start; }
 
 /* mini case */
 .ls-case-stem {
@@ -464,7 +451,7 @@
   font-weight: 800;
   cursor: pointer;
 }
-.ls-table .ls-link { align-self: start; }
+.ls-table .btn-link { align-self: start; }
 
 /* try */
 .ls-try .st-item { box-shadow: none; }
@@ -491,4 +478,7 @@
 .ls-summary-actions { display: flex; flex-direction: column; gap: var(--sp-2); inline-size: 100%; align-items: stretch; margin-block-start: var(--sp-2); }
 .ls-summary-actions button.primary { align-self: stretch; }
 @media (prefers-reduced-motion: reduce) { .ls-confetti, .ls-mn-key { animation: none; transition: none; } }
-.ls-today .ls-btn { align-self: start; }
+.ls-today .btn { align-self: start; }
+/* Lecture headings and unwritten lectures open the lecture's page. */
+button.ls-lecture-head { font-weight: 700; }
+button.ls-soon { background: none; border: 1px dashed var(--line); border-radius: var(--radius); font: inherit; color: var(--muted); }

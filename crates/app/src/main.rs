@@ -11,6 +11,7 @@ mod case;
 mod cloud;
 mod content;
 mod data_export;
+mod dead_ends;
 mod desk;
 mod diag;
 mod fonts;
@@ -19,6 +20,7 @@ mod i18n;
 mod icons;
 mod import;
 mod learn;
+mod lecture;
 mod more;
 mod onboarding;
 mod oral;
@@ -161,7 +163,8 @@ fn App() -> Element {
         let (day, night) = ui.prefs.read().theme.day_and_night();
         platform::system_bars::apply(day.bg, night.bg);
     });
-    back::use_back(ui, current, *settings.open.read());
+    lecture::use_lecture_page(ui);
+    back::use_back(ui, current, *settings.open.read() || lecture::is_open());
     update::view::use_android_install(ui);
     update::view::use_update_notice_taps(settings);
     // A screen opens at its top, not at the last screen's scroll offset (UX #102).
@@ -217,7 +220,11 @@ fn App() -> Element {
             }
             main { class: "content", "data-screen": "{current:?}",
                 update::view::UpdateBanner {}
-                {screen_body(current)}
+                // A lecture's page opens over the screen it came from (lecture.rs).
+                match lecture::shown(current) {
+                    Some(id) => rsx! { lecture::LecturePage { key: "{id}", id } },
+                    None => screen_body(current),
+                }
             }
             settings::SettingsSheet {}
             update::sheet::UpdateSheet {}

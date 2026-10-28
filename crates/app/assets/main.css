@@ -353,8 +353,9 @@ p { margin: 0; }
 /* Phones: the status chip drops under the title, so a long English title
    gets the whole row instead of one word per line. */
 @media (max-width: 599.98px) {
-  .lecture { display: grid; grid-template-columns: auto 1fr; column-gap: var(--sp-3); row-gap: var(--sp-1); }
+  .lecture { display: grid; grid-template-columns: auto 1fr auto; column-gap: var(--sp-3); row-gap: var(--sp-1); }
   .lecture .chip { grid-column: 2; justify-self: start; }
+  .lecture .chev { grid-column: 3; grid-row: 1; }
 }
 /* Two across in tablet portrait, the chip under the title; from 840px the
    library is a column of its own beside today's plan (desk.css). */
@@ -364,6 +365,41 @@ p { margin: 0; }
   .lecture-main { flex: 1 1 8rem; }
   .lecture .chip { margin-inline-start: calc(2.25rem + var(--sp-3)); }
 }
+
+/* ---------- tappable cards, tiles and rows ----------
+   Anything that shows a thing opens it: a lecture row its page, a count its
+   session, a summary its stats. Such an element is a real <button> with
+   .tap: it keeps the look of what it wraps (put the card or row class next
+   to it) and adds press feedback, a hover edge and the focus ring. */
+.tap {
+  font: inherit;
+  color: inherit;
+  /* Not the button's centring: an English title in an Arabic row lines up
+     as it does outside a button. */
+  text-align: inherit;
+  inline-size: 100%;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform var(--dur) var(--ease), border-color var(--dur) var(--ease), background-color var(--dur) var(--ease);
+}
+/* Rows and text-like taps have no frame of their own. */
+button.tap:is(.tap-row, .tap-plain) { background: none; border: 0; padding: 0; border-radius: 0; }
+.tap:not(:disabled):active { transform: var(--press, scale(0.98)); }
+@media (hover: hover) {
+  .tap:not(:disabled):hover { border-color: var(--accent); }
+}
+.tap:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.tap:disabled { cursor: default; }
+/* A forward chevron at a row's end (points left in Arabic). */
+.chev { flex: none; inline-size: 0.5rem; block-size: 0.5rem; border-block-start: 2px solid var(--muted); border-inline-end: 2px solid var(--muted); transform: rotate(45deg); opacity: 0.7; }
+[dir="rtl"] .chev { transform: rotate(-45deg); }
+/* A list of tappable rows: one rounded block split by hairlines. */
+.tap-list { list-style: none; margin: 0; padding: 0; background: var(--surface); border: 1px solid var(--line-soft, var(--line)); border-radius: var(--radius-lg, var(--radius)); overflow: hidden; }
+.tap-list > li + li { border-block-start: 1px solid var(--line-soft, var(--line)); }
+button.tap.tap-row { display: flex; align-items: center; gap: var(--sp-3); padding: var(--sp-3) var(--sp-4); min-block-size: var(--row, 48px); }
+.tap-row-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+@media (hover: hover) { button.tap.tap-row:not(:disabled):hover { background: var(--accent-soft); } }
+.tap-row:focus-visible { outline-offset: -2px; }
 
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }

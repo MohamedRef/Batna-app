@@ -32,7 +32,10 @@
 
 /* ---------- history ---------- */
 .history { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--sp-2); }
-.history li { display: flex; align-items: center; gap: var(--sp-2); }
+.history-paper > summary { display: flex; align-items: center; gap: var(--sp-2); cursor: pointer; list-style: none; min-block-size: var(--row, 44px); }
+.history-paper > summary::-webkit-details-marker { display: none; }
+.history-paper > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: var(--radius-sm, 6px); }
+.history-paper[open] > summary { margin-block-end: var(--sp-2); }
 .history .grow { flex: 1; }
 .history .score, .history .pct { font-variant-numeric: tabular-nums; }
 .history .pct { font-weight: 700; min-inline-size: 3.5rem; text-align: end; }
@@ -132,12 +135,13 @@
 .big-score { display: flex; align-items: baseline; gap: var(--sp-3); }
 .big-score .pct { font-size: 2.6rem; font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
 .score-rows { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--sp-2); }
-.score-rows li { display: grid; grid-template-columns: minmax(0, 1fr) 5rem 3.5rem; align-items: center; gap: var(--sp-3); }
+.score-row { display: grid; grid-template-columns: minmax(0, 1fr) 5rem 3.5rem; align-items: center; gap: var(--sp-3); padding-block: var(--sp-1); }
+@media (hover: hover) { .score-row:hover .score-label { color: var(--accent); } }
 .score-label { overflow-wrap: anywhere; font-size: var(--fs-sm); }
 .score-bar { block-size: 8px; border-radius: var(--radius-pill); background: var(--line); overflow: hidden; }
 .score-fill { block-size: 100%; background: var(--good); }
 .score-num { font-variant-numeric: tabular-nums; text-align: end; font-size: var(--fs-sm); }
-@media (min-width: 840px) { .score-rows li { grid-template-columns: minmax(0, 1fr) 10rem 4rem; } }
+@media (min-width: 840px) { .score-row { grid-template-columns: minmax(0, 1fr) 10rem 4rem; } }
 
 .review-list { display: flex; flex-direction: column; gap: var(--sp-2); }
 .review-item {

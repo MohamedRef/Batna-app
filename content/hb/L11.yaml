@@ -170,8 +170,8 @@ items:
 - id: hb.L11.013
   kind: cloze
   topic: indications
-  text: 'Metabolic diseases treatable by LT (adult list): {{c1::hemochromatosis, alpha-1 antitrypsin deficiency,
-    Wilson disease}}, tyrosinemia and cystic fibrosis.'
+  text: 'Metabolic diseases treatable by LT (adult list): tyrosinemia, cystic fibrosis and 3 others, {{c1::hemochromatosis,
+    alpha-1 antitrypsin deficiency and Wilson disease}}.'
   src:
     page: 190
   status: unverified
@@ -723,14 +723,14 @@ items:
   stem: Which finding still allows a recipient to proceed to living donor LT?
   options:
   - Previous portocaval shunt
-  - Previous surgical splenorenal shunt
+  - Previous end-to-side portocaval shunt
   - Percutaneous biliary stent in place
   - Previous mesocaval shunt
   - Treated colon cancer with lung metastasis
   answer: 3
   why:
   - A previous portocaval shunt excludes the recipient.
-  - The book allows no portocaval shunt other than mesocaval.
+  - Any previous portocaval shunt excludes the recipient; only mesocaval is allowed.
   - No percutaneous stents may be in place.
   - Correct. A mesocaval shunt is the only exception.
   - There must be no extrahepatic malignancy.
@@ -784,38 +784,48 @@ items:
   stem: A 38-year-old man with PSC and ulcerative colitis has new jaundice. His CA 19-9 is 140 U/mL. What is the
     best interpretation from the book?
   options:
-  - Suggestive, not diagnostic (sens 75%, spec 80%)
+  - Suggestive only above 200 U/mL
+  - Suggestive (sens 75%, spec 80%)
   - Diagnostic of cholangiocarcinoma
-  - Excludes cancer if imaging is normal
-  - Highly specific (> 95%) for cholangiocarcinoma
-  - Normal for PSC (cut-off 200 U/mL)
-  answer: 0
+  - Normal for PSC (cut-off 1000 U/mL)
+  - Suggestive (sens 50%, spec 95%)
+  answer: 1
   why:
-  - Correct. Above 100 U/mL in PSC, sensitivity is 75% and specificity 80%.
-  - Specificity is only 80%, so it is not diagnostic; early diagnosis stays difficult.
-  - A raised marker cannot exclude cancer; early diagnosis is hard.
-  - Specificity is 80% at this cut-off.
   - The book's cut-off is 100 U/mL, and 140 is above it.
+  - Correct. Above 100 U/mL in PSC, sensitivity is 75% and specificity 80%.
+  - Specificity is only 80%, so it is not diagnostic.
+  - The book's cut-off is 100 U/mL.
+  - 'Wrong figures: the book gives sensitivity 75%, specificity 80%.'
   src:
     page: 193
   status: unverified
 - id: hb.L11.061
   kind: mcq
   topic: meld-exceptions
-  stem: Which of these does NOT appear among the book's conditions for MELD exception points?
+  stem: Which of these is NOT on L11's list of conditions for MELD exception points (p.189)?
   options:
-  - Refractory ascites
+  - Recurrent hepatic encephalopathy
   - Intractable pruritus
   - Small-for-size syndrome
   - Polycystic liver disease
   - Hepatopulmonary syndrome
   answer: 0
   why:
-  - Correct. Refractory ascites is a reason to transplant below MELD 15 in this program, not on the exception list.
+  - Correct. Repeated HE is a reason to transplant below MELD 15 in this program (p.189), not on the exception list.
   - Intractable pruritus is listed.
   - Small-for-size syndrome is listed.
   - Polycystic liver disease is listed.
   - Hepatopulmonary syndrome is listed.
+  src:
+    page: 189
+  status: unverified
+- id: hb.L11.068
+  kind: card
+  topic: meld-exceptions
+  front: Is refractory ascites a MELD exception? (The book answers differently in L11 and L09.)
+  back: 'L11 p.189 does not list it: refractory ascites is a reason to transplant below MELD 15. L09 p.156 says
+    refractory ascites is an exception to the MELD score for waiting-list priority. Quote the lecture you are asked
+    about.'
   src:
     page: 189
   status: unverified
@@ -829,12 +839,13 @@ items:
   - reveal: His MELD is 14.
     question: Is he a candidate for LDLT under the book's program rules?
     options:
-    - 'No: he must first reach MELD 15'
-    - 'No: he must first reach MELD 30'
-    - 'Yes: refractory ascites allows LT below MELD 15'
-    - Only if he develops HCC
-    answer: 2
-    why: Patients with MELD < 15 are transplanted if they have refractory ascites or repeated HE.
+    - No, wait for MELD 15
+    - Yes, list and transplant now
+    - No, wait for Child C
+    - Only if HCC develops
+    answer: 1
+    why: The book transplants patients with MELD < 15 if they have refractory ascites or repeated HE, and he has
+      refractory ascites.
   - reveal: He is listed. His MELD rises to 19.
     question: How often should his MELD be updated now?
     options:

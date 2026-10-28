@@ -26,6 +26,7 @@ pub fn Result() -> Element {
     let mut show =
         use_signal(|| if outcome.total.right < outcome.total.total { Show::Wrong } else { Show::All });
     let timed = paper.mode.timed();
+    let ui = use_context::<crate::Ui>();
 
     let lectures: Vec<(String, Score)> = outcome.by_lecture.iter().map(|(l, s)| (l.clone(), *s)).collect();
     let topics: Vec<(String, String, Score)> = outcome
@@ -109,7 +110,7 @@ pub fn Result() -> Element {
             section { class: "card",
                 h2 { {tx::BY_LECTURE} }
                 ScoreRows {
-                    rows: lectures.into_iter().map(|(l, s)| (format!("{} · {}", lecture_code(&l), short_lecture_title(&l)), s)).collect::<Vec<_>>(),
+                    rows: lectures.into_iter().map(|(l, s)| (format!("{} · {}", lecture_code(&l), short_lecture_title(&l)), s, l, None)).collect::<Vec<_>>(),
                 }
             }
         }
@@ -117,15 +118,20 @@ pub fn Result() -> Element {
             section { class: "card",
                 h2 { {tx::BY_TOPIC} }
                 ScoreRows {
-                    rows: topics.into_iter().map(|(l, t, s)| (topic_title(&l, &t), s)).collect::<Vec<_>>(),
+                    rows: topics.into_iter().map(|(l, t, s)| (topic_title(&l, &t), s, l, Some(t))).collect::<Vec<_>>(),
                 }
                 h2 { class: "label", {tx::WEAK} }
                 if weak.is_empty() {
                     p { class: "muted small", {tx::ALL_STRONG} }
                 } else {
                     div { class: "chips",
+                        // A weak topic opens the bank set to practise just it.
                         for (l, t, s) in weak {
-                            span { key: "{l}/{t}", class: "chip weak",
+                            button {
+                                key: "{l}/{t}",
+                                class: "chip weak tap",
+                                title: tx::PRACTISE_TOPIC,
+                                onclick: { let (l, t) = (l.clone(), t.clone()); move |_| super::practise(ui, &l, Some(t.clone())) },
                                 bdi { {topic_title(&l, &t)} }
                                 " · " bdi { "{s.right}/{s.total}" }
                             }
@@ -186,17 +192,28 @@ pub fn Result() -> Element {
     }
 }
 
+/// Score per lecture (a row opens the lecture's page) or per topic (a row
+/// opens the bank set to that topic).
 #[component]
-fn ScoreRows(rows: Vec<(String, Score)>) -> Element {
+fn ScoreRows(rows: Vec<(String, Score, String, Option<String>)>) -> Element {
+    let ui = use_context::<crate::Ui>();
     rsx! {
         ul { class: "score-rows",
-            for (i, (label, s)) in rows.into_iter().enumerate() {
+            for (i, (label, s, lecture, topic)) in rows.into_iter().enumerate() {
                 li { key: "{i}",
-                    bdi { class: "score-label", "{label}" }
-                    div { class: "score-bar", aria_hidden: "true",
-                        div { class: "score-fill", style: "inline-size: {s.percent()}%;" }
+                    button {
+                        class: "tap tap-plain score-row",
+                        title: if topic.is_some() { tx::PRACTISE_TOPIC } else { tx::OPEN_LECTURE },
+                        onclick: move |_| match &topic {
+                            Some(t) => super::practise(ui, &lecture, Some(t.clone())),
+                            None => crate::lecture::open(ui, &lecture),
+                        },
+                        bdi { class: "score-label", "{label}" }
+                        div { class: "score-bar", aria_hidden: "true",
+                            div { class: "score-fill", style: "inline-size: {s.percent()}%;" }
+                        }
+                        bdi { class: "score-num", "{s.right}/{s.total}" }
                     }
-                    bdi { class: "score-num", "{s.right}/{s.total}" }
                 }
             }
         }

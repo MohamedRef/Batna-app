@@ -13,6 +13,13 @@ use crate::i18n::stats as tx;
 
 #[component]
 pub fn Mistakes(data: Rc<StudyData>) -> Element {
+    let mut ui = use_context::<crate::Ui>();
+    // A session on exactly these items (one mistake, or one topic's).
+    let mut session = move |ids: Vec<String>| {
+        *crate::study::START.write() =
+            Some(crate::study::Start { lectures: None, items: Some(ids), minutes: 10 });
+        ui.screen.set(crate::Screen::Study);
+    };
     let groups = stats::mistakes(&data.lectures, &data.events, &data.marks, data.clock.now_ms);
     let ids = stats::mistakes_session(&groups);
     let find = |id: &str| data.lectures.iter().flat_map(|l| &l.items).find(|i| i.id == id);
@@ -29,17 +36,32 @@ pub fn Mistakes(data: Rc<StudyData>) -> Element {
         for g in groups.iter() {
             section { class: "card mistake-group", key: "{g.lecture}-{g.title}",
                 h2 {
-                    span { class: "num small", "{lecture_code(&g.lecture)}" }
-                    " "
-                    bdi { dir: "ltr", {crate::content::Library::get().title(&g.lecture)} }
+                    button {
+                        class: "tap tap-plain mistake-topic",
+                        title: tx::MISTAKES_TOPIC_HINT,
+                        onclick: {
+                            let ids: Vec<String> = g.items.iter().map(|m| m.item_id.clone()).collect();
+                            move |_| session(ids.clone())
+                        },
+                        span { class: "num small", "{lecture_code(&g.lecture)}" }
+                        " "
+                        bdi { dir: "ltr", {crate::content::Library::get().title(&g.lecture)} }
+                        span { class: "chev", aria_hidden: "true" }
+                    }
                 }
-                ul { class: "mistakes",
+                ul { class: "mistakes tap-list",
                     for m in g.items.iter() {
                         li { key: "{m.item_id}",
-                            span { class: "mistake-text",
-                                bdi { dir: "ltr", {find(&m.item_id).map(preview).unwrap_or_default()} }
+                            button {
+                                class: "tap tap-row",
+                                title: tx::MISTAKE_HINT,
+                                onclick: { let id = m.item_id.clone(); move |_| session(vec![id.clone()]) },
+                                span { class: "mistake-text tap-row-main",
+                                    bdi { dir: "ltr", {find(&m.item_id).map(preview).unwrap_or_default()} }
+                                }
+                                span { class: "chip bad", {missed(m.misses)} }
+                                span { class: "chev", aria_hidden: "true" }
                             }
-                            span { class: "chip bad", {missed(m.misses)} }
                         }
                     }
                 }

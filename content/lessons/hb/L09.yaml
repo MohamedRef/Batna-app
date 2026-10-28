@@ -1,0 +1,1089 @@
+schema: batna.lesson/v1
+lecture: hb.L09
+lessons:
+  # ------------------------------------------------------------------
+  - id: hb.L09.lesson1
+    title: "المية بتتجمع في البطن ليه؟"
+    hook: "الكلية شايفة إن الجسم «عطشان» وهو غرقان مية: أغرب سوء تفاهم في الطب."
+    minutes: 9
+    pages: [145, 148]
+    topics: [causes, pathophysiology]
+    goals:
+      - "تعرّف الـ ascites وتقسم أسبابها لـ normal و diseased peritoneum"
+      - "تفرق بين الـ mechanical والـ biochemical factors"
+      - "تحكي الـ peripheral arterial vasodilatation hypothesis خطوة خطوة"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 145
+        title: "نبدأ بالتعريف"
+        quote: "Ascites is accumulation of free sterile fluid within the peritoneal cavity."
+        text: |
+          الـ ascites هي تجمّع **free sterile fluid** جوه الـ **peritoneal cavity**.
+
+          خد بالك من الكلمتين: **free** (مش محبوس في كيس) و **sterile** (مش صديد). لو اتلوّث يبقى عندنا مضاعفة اسمها **SBP** وهنوصلها في آخر درس.
+
+          الكتاب بيقسم الأسباب لعيلتين حسب حالة الـ peritoneum نفسه:
+          - **Normal peritoneum:** المشكلة جاية من برّه (ضغط أو بروتين أو هرمونات).
+          - **Diseased peritoneum:** الغشاء نفسه عيّان (عدوى أو ورم أو التهاب).
+      - kind: sort
+        page: 146
+        prompt: "حط كل سبب في العيلة بتاعته:"
+        bins: ["Normal peritoneum", "Diseased peritoneum"]
+        cards:
+          - { text: "Cirrhosis (portal hypertension)", bin: 0 }
+          - { text: "Constrictive pericarditis", bin: 0 }
+          - { text: "Nephrotic syndrome", bin: 0 }
+          - { text: "Meig's syndrome", bin: 0 }
+          - { text: "Tuberculosis", bin: 1 }
+          - { text: "Primary mesothelioma", bin: 1 }
+          - { text: "Familial mediterranean fever", bin: 1 }
+          - { text: "Chylous ascites", bin: 0 }
+        why: "الـ **normal peritoneum** فيها 6 مجموعات: portal hypertension، cardiac، hypoproteinemia، pancreatic، endocrine (زي Meig's)، و miscellaneous (chylous، bile، nephrogenic، urine). الـ **diseased peritoneum** 3 بس: infections (TB)، malignant (mesothelioma)، و other rare (FMF)."
+      - kind: mnemonic
+        page: 146
+        word: "IMO"
+        parts:
+          - { key: "I", text: "Infections: TB, Fitz-Hugh-Curtis, fungal (Coccidioidomycosis), HIV-associated peritonitis, Whipple's disease" }
+          - { key: "M", text: "Malignant: primary mesothelioma, pseudomyxoma peritonei, HCC, massive hepatic metastases, intra-abdominal tumors" }
+          - { key: "O", text: "Other rare: FMF, collagen vascular disease, granulomatous and eosinophilic peritonitis" }
+        hook: |
+          **IMO** يعني In My Opinion، والـ peritoneum بيقولك: في رأيي أنا اللي عيّان مش الكبد! تلات مجموعات بس، والباقي كله normal peritoneum.
+      - kind: explain
+        page: 146
+        title: "عيلتين من العوامل"
+        text: |
+          المية بتطلع من الشعيرات لما يحصل حاجتين مع بعض:
+
+          **Mechanical factors** (فيزيا Starling):
+          - **Hydrostatic pressure ↑:** portal hypertension، ضيق الـ IVC عند الـ diaphragm، أو block في الـ hepatic veins.
+          - **Colloid osmotic pressure ↓:** nephrotic، protein-losing enteropathy، hepatic insufficiency.
+          - **Capillary permeability** مضطربة.
+          - **Lymph** بيتكوّن أكتر من قدرة الـ drainage.
+
+          **Biochemical factors** (الكلية بتحبس Na والمية):
+          - **Anti-natriuretic ↑:** RAAS، ADH، thromboxane، endothelin، catecholamines، endotoxemia.
+          - **Natriuretic ↓:** atrial و renal natriuretic factors، kallikrein-kinin، PGE2، prostacyclin.
+      - kind: check
+        page: 146
+        question: "Which of these is a NATRIURETIC factor that falls in ascites?"
+        options:
+          - "Prostaglandin E2"
+          - "Endothelin"
+          - "Thromboxane"
+          - "Catecholamines"
+        answer: 0
+        why:
+          - "صح: PGE2 مع prostacyclin و kallikrein-kinin والـ natriuretic peptides بيطلّعوا Na، ونقصهم بيحبس الملح."
+          - "الـ endothelin من الـ **anti-natriuretic** اللي بتزيد."
+          - "الـ thromboxane برضه **anti-natriuretic**."
+          - "الـ catecholamines (الـ SNS) **anti-natriuretic**."
+      - kind: explain
+        page: 147
+        title: "في الـ cirrhosis: أول جرس إنذار"
+        quote: "The development of ascites in patients with cirrhosis is the most frequent first decompensating event."
+        text: |
+          الـ ascites هي **most frequent first decompensating event** في الـ cirrhosis. وحوالي **60%** من الـ compensated cirrhosis بيعملوا ascites خلال **10 سنين** لو مفيش علاج.
+
+          النظرية المقبولة أكتر حاجة: **peripheral arterial vasodilatation hypothesis**. تعالى نشوفها مرسومة.
+      - kind: figure
+        page: 147
+        title: "الـ peripheral arterial vasodilatation hypothesis"
+        alt: "A vertical chain: portal hypertension, then vasodilators accumulate (NO, CO, glucagon, prostaglandins, endocannabinoids), then splanchnic and systemic arterial vasodilatation, arterial underfilling, baroreceptors activate RAAS, SNS and ADH, renal vasoconstriction with sodium and water retention, portal hypertension localizes the fluid to the peritoneum, ascites and dilutional hyponatremia."
+        caption: "الـ portal hypertension بتظهر مرتين: في الأول هي اللي بتطلّع الـ vasodilators، وفي الآخر هي الـ **localizing factor** اللي بتخلي المية تروح البطن بالذات."
+        svg: |
+          <svg viewBox="0 0 330 494" xmlns="http://www.w3.org/2000/svg">
+          <defs><marker id="L09a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker></defs>
+          <rect x="12" y="10" width="306" height="40" rx="7" class="fg-bad"/>
+          <text x="165" y="27" text-anchor="middle" class="t-b">Portal hypertension</text>
+          <text x="165" y="42" text-anchor="middle" class="t-sm">the starting point</text>
+          <path d="M165 52v16" class="fg-arrow" marker-end="url(#L09a)"/>
+          <rect x="12" y="72" width="306" height="40" rx="7" class="fg-box"/>
+          <text x="165" y="89" text-anchor="middle" class="t-b">Vasodilators pile up</text>
+          <text x="165" y="104" text-anchor="middle" class="t-sm">NO, CO, glucagon, prostaglandins, endocannabinoids</text>
+          <path d="M165 114v16" class="fg-arrow" marker-end="url(#L09a)"/>
+          <rect x="12" y="134" width="306" height="40" rx="7" class="fg-box"/>
+          <text x="165" y="151" text-anchor="middle" class="t-b">Arterial vasodilatation</text>
+          <text x="165" y="166" text-anchor="middle" class="t-sm">splanchnic + systemic; gut bacteria add more NO</text>
+          <path d="M165 176v16" class="fg-arrow" marker-end="url(#L09a)"/>
+          <rect x="12" y="196" width="306" height="40" rx="7" class="fg-box"/>
+          <text x="165" y="213" text-anchor="middle" class="t-b">Arterial underfilling</text>
+          <text x="165" y="228" text-anchor="middle" class="t-sm">normal blood volume, much bigger arterial bed</text>
+          <path d="M165 238v16" class="fg-arrow" marker-end="url(#L09a)"/>
+          <rect x="12" y="258" width="306" height="40" rx="7" class="fg-acc"/>
+          <text x="165" y="275" text-anchor="middle" class="t-b">Baroreceptors fire</text>
+          <text x="165" y="290" text-anchor="middle" class="t-sm">RAAS + SNS + ADH switched on</text>
+          <path d="M165 300v16" class="fg-arrow" marker-end="url(#L09a)"/>
+          <rect x="12" y="320" width="306" height="40" rx="7" class="fg-box"/>
+          <text x="165" y="337" text-anchor="middle" class="t-b">Renal vasoconstriction</text>
+          <text x="165" y="352" text-anchor="middle" class="t-sm">Na and water retained: hypervolemia</text>
+          <path d="M165 362v16" class="fg-arrow" marker-end="url(#L09a)"/>
+          <rect x="12" y="382" width="306" height="40" rx="7" class="fg-acc"/>
+          <text x="165" y="399" text-anchor="middle" class="t-b">Portal hypertension localizes it</text>
+          <text x="165" y="414" text-anchor="middle" class="t-sm">fluid transudes into the peritoneal cavity</text>
+          <path d="M165 424v16" class="fg-arrow" marker-end="url(#L09a)"/>
+          <rect x="12" y="444" width="306" height="40" rx="7" class="fg-bad"/>
+          <text x="165" y="461" text-anchor="middle" class="t-b">ASCITES</text>
+          <text x="165" y="476" text-anchor="middle" class="t-sm">and ADH: free water kept, Na &lt; 130 (dilutional)</text>
+          </svg>
+      - kind: aside
+        tone: analogy
+        page: 147
+        text: |
+          تخيّل شقة فيها 4 أوض والمية بتاعتها على قدها. فجأة المقاول وسّع الأوض لـ 8 (**vasodilatation**). المية هي هي، بس دلوقتي الحنفيات ناشفة (**underfilling**).
+
+          الـ baroreceptors (البوّاب) يتصل بالكلية: «إلحقي، مفيش مية!». الكلية تقفل البلاعات وتحبس **Na** والمية. والمية الزيادة؟ بتتسرّب من أضعف ماسورة في البيت، وهي الـ **portal system** اللي ضغطها عالي، فتنزل البطن.
+      - kind: order
+        page: 147
+        prompt: "رتّب السلسلة من أولها:"
+        steps:
+          - "Portal hypertension"
+          - "Accumulation of endogenous vasodilators (NO and others)"
+          - "Splanchnic and systemic arterial vasodilatation"
+          - "Arterial underfilling"
+          - "RAAS, SNS and ADH activation"
+          - "Renal Na and water retention"
+          - "Fluid transudes into the peritoneum"
+        why: "الـ trigger هو تراكم الـ vasodilators بسبب الـ PH. الـ underfilling بيشغّل الـ baroreceptors، والـ vasoconstrictor systems بتحبس Na ومية، والـ PH (localizing factor) بتوجّه المية للبطن."
+      - kind: reveal
+        page: 147
+        prompt: "مريض ascites عنده **Na 127**. هو عنده مية زيادة ولا ناقصة؟ وليه الصوديوم واطي؟"
+        answer: |
+          عنده مية **زيادة** (hypervolemic). الـ **ADH** المتنشط بيقلل الـ **tubular free water clearance**، فالمية بتتحبس أكتر من الملح والصوديوم يتخفف.
+
+          ده اللي الكتاب بيسميه **dilutional hyponatremia**، وحدّه **serum Na < 130 mmol/L**. ومش علاجه إنك تديله ملح!
+      - kind: aside
+        tone: tip
+        page: 147
+        text: |
+          ومتنساش الـ **gut bacteria**: الـ **bacterial translocation** للـ mesenteric lymph nodes بتزوّد الـ endotoxin، فيطلع **pro-inflammatory cytokines** و **nitric oxide**، فالـ splanchnic vasodilatation تزيد. نفس البكتيريا دي هنقابلها تاني في الـ HRS والـ SBP.
+      - kind: try
+        items: [hb.L09.002, hb.L09.014, hb.L09.012]
+    recap:
+      - "Ascites = **free sterile fluid** في الـ peritoneal cavity."
+      - "Normal peritoneum: 6 مجموعات. Diseased peritoneum: **IMO** (Infections، Malignant، Other rare)."
+      - "Mechanical (Starling) + biochemical (Na retention) factors."
+      - "في الـ cirrhosis: vasodilators → underfilling → RAAS/SNS/ADH → Na ومية → PH بتوجّهها للبطن."
+      - "ADH → dilutional hyponatremia (Na < 130)."
+    practice: [hb.L09.001, hb.L09.002, hb.L09.003, hb.L09.004, hb.L09.005, hb.L09.006, hb.L09.007, hb.L09.008, hb.L09.009, hb.L09.010, hb.L09.011, hb.L09.012, hb.L09.013, hb.L09.014, hb.L09.015, hb.L09.016, hb.L09.017, hb.L09.175, hb.L09.185]
+
+  # ------------------------------------------------------------------
+  - id: hb.L09.lesson2
+    title: "تكشف على البطن: أسطى الـ grades"
+    hook: "لتر ولا اتنين مستخبيين قبل ما إيدك تحس بحاجة. اعرف إمتى تشوفهم وإمتى تخاف."
+    minutes: 7
+    pages: [148, 149]
+    topics: [clinical]
+    goals:
+      - "تعدّ علامات الـ ascites في الكشف"
+      - "تدرّج الـ ascites (1، 2، 3) وتعرّف الـ tense ascites"
+      - "تشرح الـ hepatic hydrothorax وعلاجه وتعرّف الـ complicated ascites"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 148
+        title: "إيه اللي بتشوفه؟"
+        text: |
+          الـ ascites ممكن تظهر **فجأة** أو تزحف على **شهور** مع انتفاخ (flatulent distension).
+
+          - لازم يبقى فيه **على الأقل 1–2 لتر** قبل ما تتلقط بالكشف.
+          - في الـ cirrhosis، الـ **ascites بتسبق الـ peripheral edema**.
+
+          العلامات: البطن بتكبر، **full flanks**، **wide subcostal angle**، **divarication of the recti**، السُرّة **shifted downward** و **everted** مع umbilical hernia، hernias تانية، و **scrotal swelling**.
+      - kind: reveal
+        page: 148
+        prompt: "ليه في الـ cirrhosis البطن بتتملي قبل الرجلين، عكس الـ heart failure؟"
+        answer: |
+          لأن الـ **portal hypertension** هي الـ **localizing factor**: المية الزيادة بتتسرب من الـ splanchnic bed الأول، فتنزل البطن قبل ما تلحق الـ peripheral tissues.
+
+          (الشرح ده من الـ physiology اللي في الدرس اللي فات؛ الكتاب بيكتفي بإن الـ ascites بتسبق الـ edema.)
+      - kind: mnemonic
+        page: 148
+        word: "UST"
+        parts:
+          - { key: "U", text: "Grade 1 (mild): seen on Ultrasound only" }
+          - { key: "S", text: "Grade 2 (moderate): symmetrical distension, flank bulging, Shifting dullness" }
+          - { key: "T", text: "Grade 3 (severe): marked distension with a fluid Thrill" }
+        hook: |
+          اقراها **«أُسطى»** 😄: يا أسطى، الـ grade 1 بالـ **U**ltrasound، الـ 2 بالـ **S**hifting dullness، والـ 3 بالـ fluid **T**hrill. حرف لكل درجة وبالترتيب.
+      - kind: check
+        page: 148
+        question: "A cirrhotic has symmetrical abdominal distension with flank bulging and shifting dullness, but no fluid thrill. Grade?"
+        options:
+          - "Grade 1"
+          - "Grade 2"
+          - "Grade 3"
+          - "Tense ascites"
+        answer: 1
+        why:
+          - "Grade 1 مش بتبان غير بالـ ultrasound، ودي باينة بالكشف."
+          - "صح: moderate symmetrical distension + flank bulging + shifting dullness = **grade 2**."
+          - "Grade 3 محتاجة **fluid thrill** و marked distension."
+          - "الـ tense محتاجة **pressure manifestations** (dyspnea، early satiety…)."
+      - kind: explain
+        page: 149
+        title: "Tense ascites"
+        text: |
+          الـ **tense ascites** هي severe ascites بترفع الـ **intra-abdominal pressure** لدرجة إنها تعمل **pressure manifestations**:
+          - **Dyspnea**
+          - **Early satiety**
+          - **Functional IVC block** و congested neck veins
+          - احتمال **rupture of umbilical hernia**
+      - kind: aside
+        tone: joke
+        text: |
+          الـ tense ascites زي أتوبيس النقل العام الساعة 8 الصبح: الكل مزنوق، الحجاب الحاجز مش لاقي مكان يتنفس، والمعدة بتقولك «شبعت» من أول لقمة. 🚌
+      - kind: explain
+        page: 149
+        title: "Hepatic hydrothorax: المية طلعت الدور اللي فوق"
+        text: |
+          - غالبًا **right-sided effusion**؛ الـ ascitic fluid بيعدّي من **diaphragmatic defects** للـ pleural space.
+          - ممكن يعمل **dyspnea**.
+          - السائل شبه الـ ascites: **transudate** (low protein) و **high serum-pleural albumin gradient (≥1.1 g/dl)**.
+          - ممكن يتعقّد بـ **spontaneous bacterial empyema**، وده يتعالج زي الـ **SBP**.
+          - العلاج نفس علاج الـ ascites. لو **refractory**: **TIPS** كـ bridge to LT، والـ **LT** هي best option. الـ **repetitive thoracentesis** والـ **pleurodesis** لو كل ده فشل.
+      - kind: check
+        page: 149
+        question: "Refractory hepatic hydrothorax: what does the book call the best option?"
+        options:
+          - "Liver transplantation"
+          - "Pleurodesis"
+          - "Repeated thoracentesis"
+          - "Chest tube drainage"
+        answer: 0
+        why:
+          - "صح: **LT** هي best option، و TIPS ممكن تبقى bridge ليها."
+          - "الـ pleurodesis تتجرّب بس لو العلاجات التانية فشلت."
+          - "الـ repetitive thoracentesis برضه آخر حل، مش الأحسن."
+          - "الكتاب مش بيذكر الـ chest tube كعلاج هنا."
+      - kind: sort
+        page: 149
+        prompt: "مين يخلي الـ ascites «complicated»؟"
+        bins: ["Complicated ascites", "Not in the definition"]
+        cards:
+          - { text: "Refractory ascites", bin: 0 }
+          - { text: "Dilutional hyponatremia", bin: 0 }
+          - { text: "Hepatorenal syndrome", bin: 0 }
+          - { text: "SBP", bin: 0 }
+          - { text: "Umbilical hernia", bin: 1 }
+          - { text: "Grade 3 ascites", bin: 1 }
+        why: "الكتاب بيعرّف الـ **complicated ascites** بأربعة: refractory، dilutional hyponatremia، HRS، و SBP. الـ hernia والـ grade 3 علامات حجم، مش complications بالتعريف ده."
+      - kind: try
+        items: [hb.L09.021, hb.L09.023, hb.L09.027]
+    recap:
+      - "لازم 1–2 لتر قبل ما تتلقط بالكشف؛ والـ ascites بتسبق الـ edema في الـ cirrhosis."
+      - "الـ grades: **UST** (Ultrasound، Shifting dullness، Thrill)."
+      - "Tense = pressure manifestations: dyspnea، early satiety، IVC block، hernia rupture."
+      - "Hepatic hydrothorax: يمين، transudate، gradient ≥1.1؛ empyema زي SBP؛ LT هي الأحسن."
+      - "Complicated = refractory + hyponatremia + HRS + SBP."
+    practice: [hb.L09.018, hb.L09.019, hb.L09.020, hb.L09.021, hb.L09.022, hb.L09.023, hb.L09.024, hb.L09.025, hb.L09.026, hb.L09.027, hb.L09.028, hb.L09.176, hb.L09.191]
+
+  # ------------------------------------------------------------------
+  - id: hb.L09.lesson3
+    title: "البزل بيقولك إيه؟ SAAG وأصحابه"
+    hook: "سرنجة مية واحدة بتقولك السبب، وفيه عدوى ولا لأ، وفيه ورم ولا لأ."
+    minutes: 9
+    pages: [149, 151]
+    topics: [diagnosis]
+    goals:
+      - "تعرف إمتى تعمل diagnostic paracentesis"
+      - "تقرا الـ ascitic fluid analysis: cells، protein، SAAG، LDH"
+      - "تعرف الـ special tests والـ prognosis"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 149
+        title: "التشخيص: من الكشف للسونار"
+        text: |
+          - الكشف الكويس بيلاقي الـ **free fluid**.
+          - الـ **sonography** بتشوف لحد **100 mL** بس (الكتاب كاتبها «100 m»، والمقصود mL).
+          - الـ **CT** بس لو فيه مشكلة في الـ **differential diagnosis**.
+      - kind: explain
+        page: 150
+        title: "مين يتبزل؟ وإيه اللي نطلبه؟"
+        text: |
+          **Diagnostic paracentesis** عند **أول ظهور** لـ grade 2 أو 3، ولما نشك في complication زي الـ **SBP**.
+
+          **Biochemical analysis:**
+          - **Appearance:** transparent، tinged yellow، hemorrhagic، أو chylous.
+          - **Cell count + differential:** **PMN ≥250/mm³** في الـ SBP، و **lymphocytes** في الـ TB.
+          - **Total protein:** واطي **<1.5 g/dL** في الـ cirrhosis، وعالي **>2.5 g/dL** في الـ heart failure والـ malignancy.
+          - **Albumin:** علشان نحسب الـ **SAAG**.
+          - **LDH:** عالي في الـ malignant ascites.
+
+          **Culture:** 10–20 mL في **زجاجتين blood culture** (aerobic + anaerobic) **at the bedside**.
+
+          **Cytology:** خلي بالك، الـ normal peritoneal epithelial cells ممكن تشبه الـ malignant cells فيحصل **over-diagnosis** للكانسر.
+      - kind: reveal
+        page: 150
+        prompt: "ليه نحط الـ ascitic fluid في blood culture bottles جنب السرير بدل ما نبعته في أنبوبة؟"
+        answer: |
+          الكتاب بيقول ده هو الصح (**inoculated at the bedside**). والسبب العملي إن عدد البكتيريا في الـ ascites قليل جدًا، فالـ inoculation الفوري في bottles بيزوّد فرصة إن الـ culture تطلع positive.
+      - kind: figure
+        page: 150
+        title: "تقرا الـ SAAG إزاي"
+        alt: "SAAG equals serum albumin minus ascitic albumin. At or above 1.1 g/dL means portal hypertension; below 1.1 means a non-portal-hypertension cause. Below that, total protein under 1.5 g/dL fits cirrhosis and above 2.5 g/dL fits heart failure or malignancy. A box notes that portal hypertension plus a second cause still gives a SAAG of 1.1 or more."
+        caption: "الـ SAAG بيقيس **الضغط**، والـ total protein بيقيس **الغشاء**: في الـ cirrhosis الـ sinusoids اتعملها capillarization فبتمسك البروتين، فالمية فقيرة. في الـ cardiac الـ sinusoids طبيعية وبتسرّب بروتين، فالمية غنية."
+        svg: |
+          <svg viewBox="0 0 330 400" xmlns="http://www.w3.org/2000/svg">
+          <defs><marker id="L09b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker></defs>
+          <rect x="40" y="10" width="250" height="52" rx="8" class="fg-acc"/>
+          <text x="165" y="32" text-anchor="middle" class="t-b">SAAG = serum albumin</text>
+          <text x="165" y="50" text-anchor="middle" class="t-b">minus ascitic albumin (g/dL)</text>
+          <path d="M120 64l-50 40" class="fg-arrow" marker-end="url(#L09b)"/>
+          <path d="M210 64l50 40" class="fg-arrow" marker-end="url(#L09b)"/>
+          <rect x="8" y="110" width="150" height="46" rx="8" class="fg-bad"/>
+          <text x="83" y="130" text-anchor="middle" class="t-b">≥ 1.1 g/dL</text>
+          <text x="83" y="147" text-anchor="middle" class="t-sm">high SAAG</text>
+          <rect x="172" y="110" width="150" height="46" rx="8" class="fg-good"/>
+          <text x="247" y="130" text-anchor="middle" class="t-b">&lt; 1.1 g/dL</text>
+          <text x="247" y="147" text-anchor="middle" class="t-sm">low SAAG</text>
+          <text x="83" y="180" text-anchor="middle" class="t-b t-bad">Portal hypertension</text>
+          <text x="83" y="198" text-anchor="middle" class="t-sm">cirrhosis, Budd-Chiari,</text>
+          <text x="83" y="213" text-anchor="middle" class="t-sm">cardiac ascites</text>
+          <text x="247" y="180" text-anchor="middle" class="t-b t-good">Not portal HTN</text>
+          <text x="247" y="198" text-anchor="middle" class="t-sm">TB, malignancy,</text>
+          <text x="247" y="213" text-anchor="middle" class="t-sm">pancreatic, nephrotic</text>
+          <path d="M12 232h306" class="fg-thin"/>
+          <text x="165" y="256" text-anchor="middle" class="t-b">Then read total protein</text>
+          <rect x="8" y="270" width="150" height="58" rx="8" class="fg-box"/>
+          <text x="83" y="291" text-anchor="middle" class="t-b">&lt; 1.5 g/dL</text>
+          <text x="83" y="308" text-anchor="middle" class="t-sm">cirrhosis</text>
+          <text x="83" y="321" text-anchor="middle" class="t-sm t-mut">capillarized sinusoids</text>
+          <rect x="172" y="270" width="150" height="58" rx="8" class="fg-box"/>
+          <text x="247" y="291" text-anchor="middle" class="t-b">&gt; 2.5 g/dL</text>
+          <text x="247" y="308" text-anchor="middle" class="t-sm">heart failure, malignancy</text>
+          <text x="247" y="321" text-anchor="middle" class="t-sm t-mut">leaky sinusoid, peritoneum</text>
+          <rect x="8" y="344" width="314" height="46" rx="8" class="fg-acc"/>
+          <text x="165" y="364" text-anchor="middle" class="t-sm t-b">Portal HTN + a second cause (e.g. TB)</text>
+          <text x="165" y="380" text-anchor="middle" class="t-sm">SAAG still ≥ 1.1: the gradient hides the 2nd cause</text>
+          </svg>
+      - kind: aside
+        tone: analogy
+        page: 150
+        text: |
+          الـ SAAG زي **فرق الضغط بين الشارع والبدروم**. لو الفرق كبير (**≥1.1**)، يبقى فيه ضغط عالي بيزق المية لتحت: **portal hypertension**.
+
+          لو الفرق صغير (**<1.1**)، يبقى المشكلة مش ضغط، الحيطة نفسها مخرومة: غشاء ملتهب أو ورم.
+      - kind: check
+        page: 150
+        question: "Serum albumin 3.0 g/dL, ascitic albumin 1.2 g/dL. What does it point to?"
+        options:
+          - "Portal hypertension (SAAG 1.8)"
+          - "Non-portal-hypertensive ascites (SAAG 1.8)"
+          - "Tuberculous peritonitis"
+          - "Nothing: SAAG needs total protein too"
+        answer: 0
+        why:
+          - "صح: 3.0 − 1.2 = **1.8**، يعني ≥1.1 = portal hypertension."
+          - "الحسبة صح بس التفسير غلط: high SAAG = portal HTN."
+          - "الـ TB لوحدها بتدي **low** SAAG (إلا لو فيه portal HTN معاها)."
+          - "الـ SAAG لوحده بيقول portal HTN ولا لأ؛ الـ protein بيساعد بعد كده."
+      - kind: aside
+        tone: trap
+        page: 151
+        text: |
+          فخ مشهور: مريض cirrhosis **و** TB peritonitis. الـ SAAG هيطلع **≥1.1** لأن الـ portal hypertension موجودة. يعني الـ high SAAG **مش بينفي** سبب تاني. الكتاب كاتبها صريحة.
+      - kind: match
+        page: 151
+        prompt: "وصّل كل special test باللي بيدوّر عليه:"
+        pairs:
+          - ["Amylase", "Pancreatic disease"]
+          - ["Triglycerides", "Chylous ascites"]
+          - ["Alpha fetoprotein", "Hepatocellular carcinoma"]
+          - ["CEA", "Metastasis"]
+          - ["Hyaluronic acid", "Mesothelioma"]
+          - ["PCR", "Tuberculosis"]
+        why: "والـ **glucose** بيقل في الـ infection والـ TB والـ malignancy. ومع الـ tap نطلب serum Na و K، الـ creatinine، و **urine sodium**."
+      - kind: explain
+        page: 151
+        title: "الـ prognosis: الجرس بيرن"
+        text: |
+          ظهور الـ ascites في chronic liver disease معناه إن الـ prognosis **بيسوء**:
+          - mortality **50% خلال سنتين** و **80% خلال 5 سنين** من أول episode.
+          - الـ high-risk: **persistent ascites**، **Na <130**، **SBP**، و **renal impairment**.
+      - kind: check
+        page: 151
+        question: "Which finding does the book NOT list among markers of high mortality in cirrhotic ascites?"
+        options:
+          - "Ascitic total protein above 2.5 g/dL"
+          - "Serum sodium below 130 mmol/L"
+          - "Renal impairment"
+          - "Spontaneous bacterial peritonitis"
+        answer: 0
+        why:
+          - "صح: ده مش من الـ predictors. الـ high protein بيرجّح heart failure أو malignancy، مش prognosis."
+          - "الـ low Na (<130) من الـ high-risk features."
+          - "الـ renal impairment منهم."
+          - "الـ SBP منهم."
+      - kind: try
+        items: [hb.L09.038, hb.L09.040, hb.L09.031]
+    recap:
+      - "Sono بيشوف 100 mL؛ CT بس للـ differential."
+      - "Tap عند أول grade 2/3 أو شك في SBP؛ culture في bottles جنب السرير."
+      - "PMN ≥250 = SBP؛ lymphocytes = TB؛ protein <1.5 cirrhosis، >2.5 HF/malignancy؛ LDH ↑ malignancy."
+      - "**SAAG ≥1.1 = portal HTN**، حتى لو فيه سبب تاني معاها."
+      - "Mortality 50% في سنتين و 80% في 5 سنين."
+    practice: [hb.L09.029, hb.L09.030, hb.L09.031, hb.L09.032, hb.L09.033, hb.L09.034, hb.L09.035, hb.L09.036, hb.L09.037, hb.L09.038, hb.L09.039, hb.L09.040, hb.L09.041, hb.L09.042, hb.L09.043, hb.L09.044, hb.L09.045, hb.L09.046, hb.L09.047, hb.L09.048, hb.L09.049, hb.L09.050, hb.L09.180, hb.L09.186]
+
+  # ------------------------------------------------------------------
+  - id: hb.L09.lesson4
+    title: "نصرّف المية: ملح، spironolactone، وبزل"
+    hook: "100 و 40، و 500 جرام في اليوم: الأرقام اللي هتحفظها مرة وتعيش بيها."
+    minutes: 10
+    pages: [151, 154]
+    topics: [treatment]
+    goals:
+      - "تعالج حسب الـ grade"
+      - "تكتب الـ diuretic regimen (sequential و combined) بالجرعات"
+      - "تحكم على الـ diuresis وتعرف المضاعفات وإمتى تعمل LVP بـ albumin"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 151
+        title: "قبل ما تبدأ"
+        text: |
+          قبل أي علاج: **عالج سبب الكبد**، **اعمل rule out للـ SBP**، **تابع الـ renal function والـ electrolytes**، و **استبعد أسباب تانية** للـ ascites.
+
+          والهدف كله في جملة: **negative sodium and water balance**.
+      - kind: table
+        page: 152
+        title: "العلاج حسب الـ grade"
+        columns: ["Grade", "Treatment"]
+        rows:
+          - ["1", "No treatment"]
+          - ["2", "Na restriction + diuretics"]
+          - ["3", "LVP, then Na restriction + diuretics"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: mnemonic
+        page: 152
+        word: "AAAAA"
+        parts:
+          - { key: "A", text: "Alcohol: stop it" }
+          - { key: "A", text: "ACE inhibitors: avoid" }
+          - { key: "A", text: "ARBs: avoid" }
+          - { key: "A", text: "Anti-inflammatories (NSAIDs): avoid" }
+          - { key: "A", text: "Aminoglycosides: avoid whenever possible" }
+        hook: |
+          الـ general measures هي **صرخة المريض: «AAAAA!»** خمس حاجات كلها بتبدأ بـ A وكلها ممنوعة. وزوّد عليهم: **protein 1.2–1.5 g/kg**، والـ **beta blockers** بتتوقف **بس** لو فيه low BP و renal dysfunction.
+      - kind: explain
+        page: 152
+        title: "الملح: معتدل مش متطرّف"
+        text: |
+          - **Na 2 g (90 mmol)/day**: «no added salt» و «avoid preprepared foodstuffs».
+          - **Strict** restriction لأ، لأنها بتبوّظ الـ **nutrition** (الأكل بيبقى ملوش طعم فالمريض مش بياكل).
+          - الـ restriction بتقلل احتياج الـ diuretics.
+          - وخلي بالك من الـ **saline** اللي بيتعلّق.
+
+          **Dilutional hyponatremia:**
+          - لو **Na <125**: fluid restriction **1–1.5 L/day**.
+          - الـ **vaptans** (V2 antagonists) بتعمل **aquaresis**: مية من غير electrolytes.
+          - الـ **3% saline** بس للحالات النادرة الخطيرة، و **ببطء ≤8 mmol/L/day** علشان الـ **osmotic demyelination**.
+      - kind: aside
+        tone: joke
+        text: |
+          الكتاب بيقول «no added salt»، مش «no salt». يعني الفول ينفع، بس من غير ما تنزل عليه بالملاحة كأنك بتملّح فسيخ. 🧂
+      - kind: explain
+        page: 153
+        title: "الـ diuretics"
+        text: |
+          **Spironolactone** هو الـ **first-line**. الـ furosemide لوحده **أضعف ومش recommended**.
+
+          **Sequential (grade 2):** spironolactone **100 mg/day**، تزوّد **كل 72 ساعة على الأقل** لحد **400 mg/day**. لو مفيش استجابة كفاية في **أول أسبوعين**، ضيف **furosemide 40 mg/day** وزوّد **كل 2–3 أيام** لحد **160 mg/day**.
+
+          **Combined (grade 3 أو recurrent):** spiro + furo من الأول بنسبة **100 : 40**، والـ titration بعد **4–5 أيام**.
+      - kind: reveal
+        page: 153
+        prompt: "ليه الـ spironolactone يكسب الـ furosemide في الـ cirrhosis؟"
+        answer: |
+          لأن المشكلة الأساسية **secondary hyperaldosteronism** (الـ RAAS متنشط من الـ underfilling). الـ aldosterone بيحبس Na في الـ distal tubule، فالـ loop diuretic بيطلّع Na فوق وبيرجع يتمسك تحت. الـ **aldosterone antagonist** بيضرب المشكلة في مكانها.
+
+          (ده الشرح الفسيولوجي؛ الكتاب بيكتفي بإن الـ furosemide monotherapy less effective.)
+      - kind: figure
+        page: 153
+        title: "سلم الـ diuretics"
+        alt: "A ladder: grade 1 no treatment; grade 2 sodium 2 g per day plus spironolactone 100 mg rising every 72 hours to 400; no response in 2 weeks add furosemide 40 rising every 2 to 3 days to 160; grade 3 or recurrent use combined spironolactone 100 to furosemide 40 from day one, titrated after 4 to 5 days; grade 3 starts with large volume paracentesis then salt restriction and diuretics."
+        caption: "Sequential = spiro لوحده الأول. Combined = الاتنين من أول يوم بنسبة 100:40."
+        svg: |
+          <svg viewBox="0 0 330 334" xmlns="http://www.w3.org/2000/svg">
+          <defs><marker id="L09c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker></defs>
+          <text x="165" y="22" text-anchor="middle" class="t-b t-lg">Sequential vs combined</text>
+          <rect x="12" y="36" width="306" height="40" rx="7" class="fg-good"/>
+          <text x="165" y="53" text-anchor="middle" class="t-b">Grade 1: no treatment</text>
+          <text x="165" y="68" text-anchor="middle" class="t-sm">seen only on ultrasound</text>
+          <path d="M165 78v16" class="fg-arrow" marker-end="url(#L09c)"/>
+          <rect x="12" y="98" width="306" height="40" rx="7" class="fg-box"/>
+          <text x="165" y="115" text-anchor="middle" class="t-b">Grade 2: Na 2 g/day + spironolactone</text>
+          <text x="165" y="130" text-anchor="middle" class="t-sm">start 100 mg/day, step up every 72 h to 400</text>
+          <path d="M165 140v16" class="fg-arrow" marker-end="url(#L09c)"/>
+          <rect x="12" y="160" width="306" height="40" rx="7" class="fg-box"/>
+          <text x="165" y="177" text-anchor="middle" class="t-b">No response in 2 weeks?</text>
+          <text x="165" y="192" text-anchor="middle" class="t-sm">add furosemide 40 mg/day, up every 2-3 days to 160</text>
+          <path d="M165 202v16" class="fg-arrow" marker-end="url(#L09c)"/>
+          <rect x="12" y="222" width="306" height="40" rx="7" class="fg-acc"/>
+          <text x="165" y="239" text-anchor="middle" class="t-b">Grade 3 or recurrent: combined</text>
+          <text x="165" y="254" text-anchor="middle" class="t-sm">spiro 100 : furo 40 from day 1, titrate after 4-5 days</text>
+          <path d="M165 264v16" class="fg-arrow" marker-end="url(#L09c)"/>
+          <rect x="12" y="284" width="306" height="40" rx="7" class="fg-bad"/>
+          <text x="165" y="301" text-anchor="middle" class="t-b">Grade 3: LVP first</text>
+          <text x="165" y="316" text-anchor="middle" class="t-sm">then salt restriction + diuretics again</text>
+          </svg>
+      - kind: explain
+        page: 153
+        title: "الـ diuresis ماشية صح؟"
+        text: |
+          - **Weight loss** ميزدش عن **500 g/day** لو **مفيش** edema، و **1 kg/day** لو **فيه** edema.
+          - **Spot urine Na/K > 1**.
+          - **Urinary Na > 78 mmol/day**.
+
+          ليه السقف ده؟ المية بتتسحب من البطن للدم ببطء، أما الـ edema فبيدّي احتياطي أكبر. لو سحبت أسرع، هتسحب من الـ intravascular volume وتعمل renal impairment.
+      - kind: check
+        page: 154
+        question: "Which is NOT one of the diuretic-induced complications in the book?"
+        options:
+          - "Hypercalcemia"
+          - "Hepatic encephalopathy"
+          - "Hyponatremia below 125 mmol/L"
+          - "Incapacitating muscle cramps"
+        answer: 0
+        why:
+          - "صح: مش في القائمة. القائمة: renal impairment، HE، hyponatremia، hypo/hyperkalemia، و muscle cramps."
+          - "الـ HE من المضاعفات."
+          - "الـ hyponatremia (<125) من المضاعفات."
+          - "الـ cramps من المضاعفات."
+      - kind: explain
+        page: 154
+        title: "الـ LVP والـ albumin"
+        text: |
+          - **LVP** = سحب **5 لتر أو أكتر**، وهو **أحسن** من الـ diuretics في الـ grade 3.
+          - لو **>5 لتر**: **albumin 6–8 g لكل لتر** علشان تمنع الـ **paracentesis-induced circulatory dysfunction** (الـ effective arterial volume بيقع فجأة والـ renin بيعلى).
+          - بعده **ارجع** للملح والـ diuretics.
+          - الـ LVP **symptomatic**: مش بيمنع الرجوع، مش بيطوّل العمر، وبيزوّد الـ malnutrition.
+          - و grade 2 أو 3 = فكّر في **referral للـ LT evaluation**.
+      - kind: check
+        page: 154
+        question: "8 L are removed by paracentesis. How much albumin, per the book?"
+        options:
+          - "48–64 g"
+          - "8 g"
+          - "100 g"
+          - "None: albumin is only for SBP"
+        answer: 0
+        why:
+          - "صح: 6–8 g × 8 لتر = **48–64 g**."
+          - "دي جرعة لتر واحد بس."
+          - "الكتاب بيحسبها بالتر، مش رقم ثابت."
+          - "الـ albumin مطلوب في الـ LVP >5 L كمان، علشان الـ circulatory dysfunction."
+      - kind: try
+        items: [hb.L09.053, hb.L09.063, hb.L09.066]
+    recap:
+      - "الهدف: negative Na and water balance. Grade 1 لا علاج، 2 ملح + diuretics، 3 LVP الأول."
+      - "**AAAAA**: alcohol، ACEi، ARBs، NSAIDs، aminoglycosides."
+      - "Na 2 g/day؛ Na <125 → fluid 1–1.5 L؛ 3% saline ≤8 mmol/L/day."
+      - "Spiro 100 → 400 (كل 72 h)؛ furo 40 → 160 (كل 2–3 أيام)؛ combined 100:40."
+      - "Weight loss ≤500 g (بدون edema) أو ≤1 kg (مع edema)؛ LVP >5 L → albumin 6–8 g/L."
+    practice: [hb.L09.051, hb.L09.052, hb.L09.053, hb.L09.054, hb.L09.055, hb.L09.056, hb.L09.057, hb.L09.058, hb.L09.059, hb.L09.060, hb.L09.061, hb.L09.062, hb.L09.063, hb.L09.064, hb.L09.065, hb.L09.066, hb.L09.067, hb.L09.068, hb.L09.069, hb.L09.070, hb.L09.071, hb.L09.072, hb.L09.073, hb.L09.074, hb.L09.075, hb.L09.076, hb.L09.077, hb.L09.187]
+
+  # ------------------------------------------------------------------
+  - id: hb.L09.lesson5
+    title: "لما المية تعاند: Refractory ascites"
+    hook: "عملت كل حاجة صح والبطن لسه مليانة؟ ده مش فشلك، ده تعريف."
+    minutes: 9
+    pages: [154, 158]
+    topics: [refractory]
+    goals:
+      - "تعرّف الـ refractory ascites بأرقامها ونوعيها"
+      - "ترتّب خيارات العلاج من LVP لـ LT"
+      - "تعرف دواعي ومضاعفات الـ TIPS والـ Alfapump والـ PVS"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 154
+        title: "التعريف بالأرقام"
+        quote: "ascites that cannot be mobilized or the early recurrence of ascites after therapeutic paracentesis despite dietary sodium restriction and diuretic therapy"
+        text: |
+          بيحصل في **5–10%** من مرضى الـ ascites، و الـ **one-year mortality > 40%**.
+
+          التعريف: ascites **cannot be mobilized** أو بترجع **بدري** بعد البزل، **رغم** الملح والـ diuretics.
+
+          - **Lack of response:** weight loss **<0.8 kg في 4 أيام** و urinary Na **أقل من** الـ intake.
+          - **Early recurrence:** grade 2 أو 3 يرجعوا خلال **4 أسابيع**.
+      - kind: sort
+        page: 155
+        prompt: "النوعين: حط كل مريض في النوع بتاعه:"
+        bins: ["Diuretic-resistant", "Diuretic-intractable"]
+        cards:
+          - { text: "Spiro 400 + furo 160 + 2 g Na, ascites stays", bin: 0 }
+          - { text: "Weight loss 0.5 kg in 4 days on maximum doses", bin: 0 }
+          - { text: "Creatinine rises each time spiro passes 100 mg", bin: 1 }
+          - { text: "Na falls to 120 on low-dose diuretics", bin: 1 }
+          - { text: "Hepatic encephalopathy stops dose escalation", bin: 1 }
+        why: "**Resistant** = المريض أخد الـ **maximum doses** ومفيش استجابة. **Intractable** = المضاعفات (**diuretic-induced complications**) منعتنا نوصل للجرعة الكاملة."
+      - kind: explain
+        page: 155
+        title: "نعمل إيه؟"
+        text: |
+          - المريض اللي **مش** داخل تقييم LT: **palliative care referral**.
+          - الـ **sodium restriction** لسه مهم.
+          - **أوقف الـ diuretics** لو الـ urinary Na **مش أكتر من 30 mmol/day** وهو عليها (مش جايبة نتيجة، بس بتعمل مضاعفات).
+          - الأساس: **repeated LVP + albumin** (الأشهر). والـ **total volume paracentesis** (سحب كله مرة واحدة) لناس مختارين علشان نقلل عدد المرات.
+          - البدائل: **TIPS**، **Alfapump**، و **LT**.
+      - kind: figure
+        page: 156
+        title: "الـ TIPS: كوبري جوه الكبد"
+        alt: "A liver outline with the IVC on the right. A hepatic vein (low pressure) joins the IVC. The portal vein (high pressure) enters from below. A dashed stent labelled TIPS, side-to-side, links the portal vein to the hepatic vein. A note says portal pressure falls, RAAS falls and sodium is excreted."
+        caption: "الـ TIPS = **side-to-side portocaval anastomosis**: بتوصّل الـ portal vein، اللي ضغطه عالي، بالـ hepatic vein، اللي ضغطه واطي."
+        svg: |
+          <svg viewBox="0 0 330 360" xmlns="http://www.w3.org/2000/svg">
+          <defs><marker id="L09d" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-acc"/></marker><marker id="L09e" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker></defs>
+          <path d="M28 80Q36 30 140 30L262 36Q300 44 296 110Q284 206 172 238Q62 262 34 172Z" class="fg-box"/>
+          <text x="60" y="70" class="t-sm t-mut">Liver</text>
+          <rect x="272" y="10" width="20" height="290" rx="6" class="fg-acc"/>
+          <path d="M282 40V14" class="fg-arrow" marker-end="url(#L09e)"/>
+          <text x="266" y="24" text-anchor="end" class="t-sm">to the heart</text>
+          <text x="266" y="294" text-anchor="end" class="t-sm t-b">IVC</text>
+          <path d="M272 78L196 100" class="fg-ink" style="stroke-width:7px"/>
+          <text x="196" y="124" class="t-sm t-b">Hepatic vein</text>
+          <text x="196" y="138" class="t-sm t-good t-b">low pressure</text>
+          <path d="M58 300C74 270 96 244 112 214" class="fg-arrow-bad" style="stroke-width:11px"/>
+          <path d="M112 214C120 196 112 176 92 162" class="fg-arrow-bad" style="stroke-width:5px"/>
+          <text x="112" y="262" class="t-sm t-b">Portal vein</text>
+          <text x="112" y="276" class="t-sm t-bad t-b">high pressure</text>
+          <path d="M114 210L192 102" class="fg-thin" style="stroke-width:9px"/>
+          <path d="M116 206L186 110" class="fg-arrow-acc" marker-end="url(#L09d)"/>
+          <text x="160" y="172" class="t-sm t-b">TIPS stent</text>
+          <text x="160" y="186" class="t-sm">side-to-side shunt</text>
+          <rect x="12" y="314" width="306" height="36" rx="7" class="fg-good"/>
+          <text x="165" y="337" text-anchor="middle" class="t-sm t-b">portal pressure ↓ → RAAS ↓ → more Na excreted</text>
+          </svg>
+      - kind: aside
+        tone: analogy
+        page: 156
+        text: |
+          الـ TIPS زي **كوبري أكتوبر** فوق زحمة الكبد: الدم بيعدّي من الـ portal للـ hepatic vein من غير ما يقف في الإشارات. الضغط بيقل، فالـ **RAAS يهدى** والـ **Na يخرج**.
+
+          بس الكوبري ده برضه بيعدّي **الـ ammonia** من غير ما الكبد يفلترها، علشان كده الـ **HE في 30%**.
+      - kind: table
+        page: 156
+        title: "TIPS في سطور"
+        columns: ["", "TIPS"]
+        rows:
+          - ["Consider when", "LVP needed more than 3 times a month, or paracentesis ineffective"]
+          - ["Complications", "Shunt dysfunction, hepatic encephalopathy (30%)"]
+          - ["Contraindications", "Severe liver failure, active infection, progressive renal failure, severe cardiopulmonary disease"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: check
+        page: 156
+        question: "Which of these contraindicates TIPS for refractory ascites?"
+        options:
+          - "Severe cardiopulmonary disease"
+          - "Needing paracentesis 4 times a month"
+          - "Grade 3 ascites"
+          - "Prior SBP that has resolved"
+        answer: 0
+        why:
+          - "صح: الـ TIPS بتزق دم أكتر للقلب اليمين، فالـ severe cardiopulmonary disease contraindication."
+          - "ده **indication** (أكتر من 3 مرات في الشهر)."
+          - "الـ grade 3 refractory مكان الـ TIPS الطبيعي."
+          - "اللي ممنوع هو **active** infection، مش واحدة خلصت."
+      - kind: explain
+        page: 156
+        title: "الـ LT والأجهزة"
+        text: |
+          - **LT** = الـ **definitive treatment**. والـ refractory ascites **exception to MELD** في أولوية القائمة.
+          - **Alfapump:** pump تحت الجلد بالبطارية، بيسحب الـ ascites من الـ peritoneum **للمثانة**. للي الـ **TIPS والـ LT ممنوعين** عندهم. Safe، بيحسّن الـ **nutrition**، والـ transient renal dysfunction بيتصلح بالـ volume expansion.
+          - **Vasoconstrictors + albumin:** terlipressin IV أو midodrine (alpha-1 agonist) oral؛ بيقللوا الـ splanchnic vasodilatation فالكلية تشتغل أحسن.
+          - **Vaptans:** بيقللوا الـ ascites والبزل من غير زيادة الـ diuretics؛ أخطرهم **overcorrection of Na** (osmotic demyelination)، dehydration، renal injury، hepatotoxicity.
+      - kind: aside
+        tone: joke
+        page: 157
+        text: |
+          الـ Alfapump أذكى سباك في العالم: بدل ما المريض ييجي المستشفى كل أسبوع يتبزل، الجهاز بيوصّل البطن **بالمثانة** والمريض بيصرّف الـ ascites في الحمام وهو بيقرا الجرنال. 🚽
+      - kind: match
+        page: 158
+        prompt: "وصّل كل وسيلة بالحاجة اللي تميّزها:"
+        pairs:
+          - ["CART", "Contraindicated in SBP"]
+          - ["Tunneled peritoneal catheter", "Home drainage into a vacuum bottle"]
+          - ["Peritoneovenous shunt", "Can cause DIC"]
+          - ["Alfapump", "Pumps ascites into the bladder"]
+          - ["TIPS", "Hepatic encephalopathy in 30%"]
+        why: "**CART**: بيفلتر الـ ascites من الخلايا ويركّزه ويرجّعه؛ ملوش تأثير على الكلية، بيقلل الـ albumin، و contraindicated في الـ **SBP**. **Tunneled catheter**: المريض بيصرّف في البيت، ومشاكله الـ catheter والـ peritonitis. **PVS**: بيرجّع الـ ascites للدورة، ومضاعفاته occlusion، peritonitis، **DIC** ونزيف؛ لمين مينفعش له بزل ولا LT ولا TIPS."
+      - kind: try
+        items: [hb.L09.079, hb.L09.082, hb.L09.090]
+    recap:
+      - "Refractory: 5–10%، mortality >40% في سنة؛ <0.8 kg في 4 أيام، أو رجوع في 4 أسابيع."
+      - "Resistant = max doses من غير فايدة؛ intractable = المضاعفات منعت الجرعة."
+      - "أوقف الـ diuretics لو urinary Na ≤30 mmol/day. الأساس repeated LVP + albumin."
+      - "TIPS لو LVP >3/شهر؛ HE 30%؛ ممنوعة في liver failure، infection، renal failure، cardiopulmonary."
+      - "LT definitive (MELD exception)؛ Alfapump للمثانة؛ CART ممنوع في SBP؛ PVS ممكن DIC."
+    practice: [hb.L09.078, hb.L09.079, hb.L09.080, hb.L09.081, hb.L09.082, hb.L09.083, hb.L09.084, hb.L09.085, hb.L09.086, hb.L09.087, hb.L09.088, hb.L09.089, hb.L09.090, hb.L09.091, hb.L09.092, hb.L09.093, hb.L09.094, hb.L09.095, hb.L09.096, hb.L09.097, hb.L09.098, hb.L09.099, hb.L09.100, hb.L09.101, hb.L09.102, hb.L09.177, hb.L09.183, hb.L09.184, hb.L09.188]
+
+  # ------------------------------------------------------------------
+  - id: hb.L09.lesson6
+    title: "الكلية سليمة بس واقفة: Hepatorenal syndrome"
+    hook: "كلية لو زرعتها في جسم سليم تشتغل فورًا. طب ليه بتفشل هنا؟"
+    minutes: 10
+    pages: [158, 166]
+    topics: [hrs]
+    goals:
+      - "تشرح ليه الـ HRS functional ومن أين جه الـ structural component"
+      - "تشخّص HRS-AKI بالـ KDIGO والـ exclusion criteria"
+      - "تعالج بالـ vasoconstrictor + albumin وتعرف مكان TIPS و RRT و LT"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 158
+        title: "التعريف"
+        text: |
+          الـ **HRS** = renal dysfunction في **severe liver disease** (acute أو chronic) **من غير أي سبب كلوي تاني**.
+
+          - حوالي **20%** من مرضى الـ ascites بكلى سليمة يعملوا HRS في **سنة**، و **39%** في **5 سنين**.
+          - كان بيتقال **functional** مش structural، بس دلوقتي فيه **structural component** كمان.
+      - kind: figure
+        page: 159
+        title: "الـ HRS: آخر محطة في نفس الخط"
+        alt: "Severe splanchnic vasodilatation lowers systemic vascular resistance and causes severe arterial underfilling. RAAS, SNS and ADH are fully active; cirrhotic cardiomyopathy lowers cardiac output. In the kidney a seesaw: vasoconstrictors (endothelin-1, thromboxane A2, leukotriene E4) outweigh local vasodilators (nitric oxide, prostaglandins, kallikrein-kinin). Renal blood flow and GFR fall with corticomedullary shunting, giving HRS. A dashed box adds the structural part: gut bacteria and cytokines."
+        caption: "الـ HRS **continuum** للـ ascites: نفس الـ vasodilatation بس أقوى. الكفة بتميل ناحية الـ vasoconstrictors (impaired autoregulation)."
+        svg: |
+          <svg viewBox="0 0 330 520" xmlns="http://www.w3.org/2000/svg">
+          <defs><marker id="L09f" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker></defs>
+          <rect x="12" y="10" width="306" height="40" rx="7" class="fg-box"/>
+          <text x="165" y="27" text-anchor="middle" class="t-b">Severe splanchnic vasodilatation</text>
+          <text x="165" y="42" text-anchor="middle" class="t-sm">SVR falls a lot: severe arterial underfilling</text>
+          <path d="M165 52v16" class="fg-arrow" marker-end="url(#L09f)"/>
+          <rect x="12" y="72" width="306" height="40" rx="7" class="fg-acc"/>
+          <text x="165" y="89" text-anchor="middle" class="t-b">RAAS + SNS + ADH at full blast</text>
+          <text x="165" y="104" text-anchor="middle" class="t-sm">cirrhotic cardiomyopathy: low CO makes it worse</text>
+          <path d="M165 114v16" class="fg-arrow" marker-end="url(#L09f)"/>
+          <text x="165" y="150" text-anchor="middle" class="t-b">Inside the kidney: a tug of war</text>
+          <path d="M30 230L300 196" class="fg-ink" style="stroke-width:3px"/>
+          <path d="M165 213l-12 40h24z" class="fg-ink"/>
+          <rect x="10" y="236" width="140" height="70" rx="7" class="fg-bad"/>
+          <text x="80" y="254" text-anchor="middle" class="t-sm t-b t-bad">Vasoconstrictors</text>
+          <text x="80" y="270" text-anchor="middle" class="t-sm">endothelin-1</text>
+          <text x="80" y="284" text-anchor="middle" class="t-sm">thromboxane A2</text>
+          <text x="80" y="298" text-anchor="middle" class="t-sm">leukotriene E4</text>
+          <rect x="180" y="160" width="140" height="70" rx="7" class="fg-good"/>
+          <text x="250" y="178" text-anchor="middle" class="t-sm t-b t-good">Local vasodilators</text>
+          <text x="250" y="194" text-anchor="middle" class="t-sm">nitric oxide</text>
+          <text x="250" y="208" text-anchor="middle" class="t-sm">prostaglandins</text>
+          <text x="250" y="222" text-anchor="middle" class="t-sm">kallikrein-kinin</text>
+          <text x="165" y="330" text-anchor="middle" class="t-sm t-mut">vasodilators lose: impaired autoregulation</text>
+          <path d="M165 338v16" class="fg-arrow" marker-end="url(#L09f)"/>
+          <rect x="12" y="358" width="306" height="40" rx="7" class="fg-bad"/>
+          <text x="165" y="375" text-anchor="middle" class="t-b">RBF and GFR collapse</text>
+          <text x="165" y="390" text-anchor="middle" class="t-sm">plus corticomedullary shunting</text>
+          <path d="M165 400v16" class="fg-arrow" marker-end="url(#L09f)"/>
+          <rect x="12" y="420" width="306" height="40" rx="7" class="fg-bad"/>
+          <text x="165" y="445" text-anchor="middle" class="t-b t-lg">HRS (functional kidney)</text>
+          <rect x="12" y="470" width="306" height="40" rx="7" class="fg-thin"/>
+          <text x="165" y="487" text-anchor="middle" class="t-sm t-b">+ structural part: gut bacteria, cytokines</text>
+          <text x="165" y="502" text-anchor="middle" class="t-sm">more NO, more splanchnic vasodilatation</text>
+          </svg>
+      - kind: reveal
+        page: 159
+        prompt: "إيه دخل القلب في فشل الكلية هنا؟"
+        answer: |
+          الـ **cirrhotic cardiomyopathy** مع **diastolic dysfunction** بتقلل الـ **cardiac output**. يعني الـ underfilling يزيد، الـ renal vasoconstriction يزيد، والكلية تجوع أكتر.
+
+          والـ structural part؟ **bacterial translocation** → **cytokines** → **NO** أكتر → vasodilatation أكتر.
+      - kind: explain
+        page: 160
+        title: "التقسيم (ICA)"
+        text: |
+          - **HRS-AKI**: KDIGO criteria + exclusion of other causes.
+          - **HRS-non-AKI**، وجواه نوعين:
+          - **HRS-AKD**: eGFR <60 لمدة **<3 شهور**، أو eGFR ↓ ≥35%، أو creatinine ↑ ≥50% في <3 شهور.
+          - **HRS-CKD**: eGFR <60 لمدة **≥3 شهور**.
+
+          الـ **AKI** سريع وبيزيد، و **أكتر حاجة بتعمله SBP**. الـ **non-AKI** هادي وثابت، وغالبًا مع **diuretic-resistant ascites**.
+      - kind: mnemonic
+        page: 161
+        word: "SNAP"
+        parts:
+          - { key: "S", text: "no Shock" }
+          - { key: "N", text: "no current or recent Nephrotoxic drugs" }
+          - { key: "A", text: "no response after 2 days of diuretic withdrawal + Albumin 1 g/kg/day (max 100 g)" }
+          - { key: "P", text: "no Parenchymal disease: proteinuria <500 mg/day, RBC <50/HPF, normal renal US" }
+        hook: |
+          الكلية في الـ HRS عملت **SNAP** (اتقصفت) من غير سبب واضح. علشان تقول HRS-AKI لازم تشيل الأسباب التانية بالحروف دي. والـ KDIGO قبلهم: creatinine **↑≥0.3 في 48 ساعة**، أو **↑≥50% في 7 أيام**، و/أو urine **≤0.5 ml/kg/h لمدة ≥6 ساعات**.
+      - kind: check
+        page: 161
+        question: "A cirrhotic with grade 3 ascites: creatinine rose from 1.0 to 1.4 mg/dL in 36 h. Diuretics stopped and albumin given for 2 days; no improvement. No shock, no NSAIDs, urine protein 150 mg/day, normal renal US. Diagnosis?"
+        options:
+          - "HRS-AKI"
+          - "HRS-CKD"
+          - "Prerenal AKI"
+          - "Acute tubular necrosis"
+        answer: 0
+        why:
+          - "صح: ↑0.4 في <48 h (KDIGO) + **SNAP** كلها سلبية = **HRS-AKI**."
+          - "الـ CKD محتاجة eGFR <60 لمدة **≥3 شهور**."
+          - "الـ prerenal كان هيستجيب للـ albumin وإيقاف الـ diuretics."
+          - "الـ ATN غالبًا بيبان في الـ urine (وفي الـ NGAL الأعلى)؛ وهنا الـ urine نضيفة."
+      - kind: explain
+        page: 161
+        title: "الـ urine في HRS: كلية «بتوفّر»"
+        text: |
+          الكلية سليمة وبتحبس كل حاجة كأنها في **dehydration**:
+          - **Urinary Na منخفض** (<10 mmol/L في p. 161؛ و p. 163 بيقول <5 risk لـ HRS).
+          - **FENa < 0.1%** (renal vasoconstriction).
+          - **Urine osmolality عالي**، **plasma osmolality واطي**، و **serum Na <130**.
+
+          والـ **NGAL** في الـ urine أعلى في الـ **ATN-AKI** من الـ HRS-AKI. والـ **renal US طبيعي** في الـ HRS. ولازم **ascitic tap** علشان الـ SBP.
+      - kind: aside
+        tone: exam
+        page: 163
+        text: |
+          الممتحن بيحب يسأل الـ **differential**: **prerenal** (diuretics زيادة، **lactulose diarrhea**، نزيف)، **intrarenal** (ATN، interstitial nephritis، GN، vasculitis)، و **postrenal** (obstruction).
+
+          والـ HRS-CKD نفرقها من: alcohol-related renal disease، **IgA** deposits، GN من الـ **HBV/HCV**، diabetic و hypertensive nephropathy، و renal vascular disease.
+      - kind: explain
+        page: 164
+        title: "الـ prognosis والـ prevention"
+        text: |
+          - **HRS-AKI** من غير علاج: **80% mortality في أسبوعين**.
+          - **HRS-non-AKI**: median survival **3–6 شهور**.
+
+          **الوقاية:** diuretics بحذر، اكتشف بدري الـ electrolytes والنزيف والعدوى، ابعد عن **NSAIDs و aminoglycosides**، صرّف الـ **tense ascites**، **albumin بعد total paracentesis وفي SBP (mandatory)**، و **prophylactic antibiotics** بعد أول SBP.
+      - kind: case
+        page: 164
+        stem: "A 60-year-old with cirrhosis and grade 3 ascites on spironolactone, furosemide, propranolol and lactulose (6 loose stools a day). Creatinine 2.0 mg/dL (0.9 last week)."
+        steps:
+          - question: "First move?"
+            options:
+              - "Stop diuretics, propranolol and nephrotoxic drugs"
+              - "Increase furosemide for the fluid"
+              - "Start hemodialysis"
+              - "Give IV contrast CT to look for obstruction"
+            answer: 0
+            why: "الـ general measures: **stop diuretics, beta blockers** وأي nephrotoxic drug على طول."
+          - reveal: "Lactulose is reduced. Albumin 1 g/kg is given for 2 days. Creatinine is 2.2. Ascitic PMN 90/mm³."
+            question: "Now what is first-line?"
+            options:
+              - "Terlipressin plus albumin"
+              - "Norepinephrine on the ward without a central line"
+              - "TIPS today"
+              - "Simultaneous liver-kidney transplant"
+            answer: 0
+            why: "**Vasoconstrictor + albumin** هو الـ first-line لـ HRS-AKI. الـ norepinephrine لازم **central line و ICU**. الـ TIPS لو العلاج الدوائي فشل. والـ SLKT لما الـ renal recovery مستبعد."
+      - kind: table
+        page: 165
+        title: "الـ vasoconstrictors في HRS-AKI"
+        columns: ["Drug", "Dose", "Note"]
+        rows:
+          - ["Albumin 20%", "20–40 g/day IV", "Given with every vasoconstrictor"]
+          - ["Terlipressin", "0.5–1 mg IV every 4–6 h, or 2 mg/day infusion", "Vasopressin analogue"]
+          - ["Norepinephrine", "0.5–3 mg/h IV infusion", "Central line, ICU monitoring"]
+          - ["Midodrine + octreotide", "7.5 mg/8 h oral (max 15) + 50 mcg/h IV or 100–200 mcg/8 h SC", "Less effective; only if the others are unavailable"]
+        hide: [[0, 1], [1, 1], [2, 2], [3, 2]]
+      - kind: update
+        page: 165
+        ref: "FDA terlipressin (Terlivaz) label 2022"
+        text: |
+          بعد الـ CONFIRM trial، الـ FDA وافقت على الـ terlipressin سنة 2022 مع **boxed warning** للـ **respiratory failure**: ميتديش لو الـ SpO2 أقل من 90%، وخلي بالك من الـ volume overload. في الامتحان، الجرعات اللي في الكتاب هي الإجابة.
+      - kind: explain
+        page: 166
+        title: "لو مفيش فايدة"
+        text: |
+          - **TIPS:** بيحسّن الـ renal perfusion ويهدّي الـ RAAS؛ لما العلاج الدوائي يفشل، كـ **bridge to LT**.
+          - **RRT:** للي مستجابوش للـ vasoconstrictors وللـ end-stage kidney. الـ **continuous RRT** أحسن تحمّلًا من الـ hemodialysis.
+          - **LT:** الـ **definitive treatment**.
+          - **SLKT:** الـ procedure of choice لو الكلية مش هترجع بالـ LT لوحده، أو فيه **significant CKD**.
+      - kind: try
+        items: [hb.L09.109, hb.L09.112, hb.L09.128]
+    recap:
+      - "HRS = فشل كلوي functional في liver disease شديد من غير سبب تاني؛ 20% في سنة، 39% في 5."
+      - "Vasodilatation شديدة → underfilling → vasoconstrictors تكسب جوه الكلية؛ cardiomyopathy وبكتيريا بيزوّدوا."
+      - "HRS-AKI = KDIGO + **SNAP**؛ urine نضيفة، FENa <0.1%، US طبيعي."
+      - "Untreated HRS-AKI: 80% يموتوا في أسبوعين؛ non-AKI: 3–6 شهور."
+      - "Stop diuretics/BB → albumin + terlipressin (أو NE في ICU) → TIPS/RRT → LT (أو SLKT)."
+    practice: [hb.L09.103, hb.L09.104, hb.L09.105, hb.L09.106, hb.L09.107, hb.L09.108, hb.L09.109, hb.L09.110, hb.L09.111, hb.L09.112, hb.L09.113, hb.L09.114, hb.L09.115, hb.L09.116, hb.L09.117, hb.L09.118, hb.L09.119, hb.L09.120, hb.L09.121, hb.L09.122, hb.L09.123, hb.L09.124, hb.L09.125, hb.L09.126, hb.L09.127, hb.L09.128, hb.L09.129, hb.L09.130, hb.L09.131, hb.L09.132, hb.L09.133, hb.L09.134, hb.L09.135, hb.L09.136, hb.L09.137, hb.L09.138, hb.L09.178, hb.L09.182, hb.L09.189]
+
+  # ------------------------------------------------------------------
+  - id: hb.L09.lesson7
+    title: "المية اتلوّثت: SBP و SFP"
+    hook: "مريض داخل بـ confusion بس، من غير سخونية ولا ألم. البزل هو اللي هيقولك الحقيقة."
+    minutes: 10
+    pages: [166, 171]
+    topics: [sbp, sfp]
+    goals:
+      - "تعدّ الـ risk factors وتشرح الـ leaky gut"
+      - "تشخّص SBP بالـ PMN وتفرقها عن secondary peritonitis"
+      - "تعالج وتعمل prophylaxis، وتعرف الـ SFP"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 166
+        title: "SBP يعني إيه؟"
+        text: |
+          **Acute bacterial infection of the ascitic fluid** من غير **أي intra-abdominal source**. من هنا كلمة **spontaneous**: محدش خرم حاجة.
+
+          **الـ pathogenesis:** **leaky gut** بسبب الـ PH (permeability و motility بايظين) → البكتيريا تعدّي للـ **mesenteric lymph nodes** ثم للـ ascites، والـ **local and systemic immunity** ضعيفة فمش قادرة تسيطر.
+      - kind: mnemonic
+        page: 166
+        word: "BLP"
+        parts:
+          - { key: "B", text: "acute GI Bleeding" }
+          - { key: "L", text: "Low ascitic protein (< 1 g/dL)" }
+          - { key: "P", text: "Previous SBP episode" }
+        hook: |
+          اقراها **«BLeeP»** زي صوت المونيتور في العناية: تلات risk factors بس في الكتاب. وزوّد عليهم إن الـ prevalence عالية في **Child-Pugh C**، والـ **long-term PPI** بيزوّد الـ risk لأنه بيكثّر البكتيريا في الأمعاء ويسهّل الـ translocation.
+      - kind: aside
+        tone: trap
+        page: 167
+        text: |
+          الـ SBP **frequently asymptomatic**. ممكن تيجي بـ low-grade fever وألم وقيء وإسهال، بس كتير جدًا بتيجي بس بـ **hepatic encephalopathy مش مفهومة** أو **renal dysfunction جديدة (HRS-AKI)**.
+
+          علشان كده: **كل** مريض cirrhosis + ascites **داخل المستشفى** يتعمله **diagnostic paracentesis**، وكل واحد حالته تسوء.
+      - kind: explain
+        page: 167
+        title: "التشخيص"
+        text: |
+          - **PMN ≥250 cells/mm³** = **neutrocytic ascites** = SBP، سواء الـ culture positive ولا لأ.
+          - الـ ascitic **protein <1 g/dl**.
+          - الـ culture غالبًا **monomicrobial** و **Gram-negative** (E. coli و Klebsiella). أقل: Strep، Staph، Enterococci.
+          - الـ **leukocyte esterase dipstick** بيلقط الـ PMN العالي جنب السرير (**100% sensitivity**). والـ procalcitonin والـ calprotectin تحت الدراسة.
+      - kind: figure
+        page: 168
+        title: "الـ PMN × الـ culture"
+        alt: "A grid with ascitic PMN count in two columns (at least 250, under 250) and culture in three rows. Bacteria grow: culture-positive neutrocytic ascites (SBP) versus bacterascites. Fungi grow: spontaneous fungal peritonitis versus fungal ascites. Culture negative: culture-negative neutrocytic ascites (think TB, carcinomatosis, fungi) versus no infection."
+        caption: "العمود الأحمر، يعني PMN ≥250، يتعالج فورًا. والـ **bacterascites** ممكن تكون SBP بتخف، اسمها resolving، أو بتبدأ، اسمها evolving."
+        svg: |
+          <svg viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg">
+          <text x="200" y="20" text-anchor="middle" class="t-b">Ascitic PMN count</text>
+          <text x="140" y="42" text-anchor="middle" class="t-sm t-b t-bad">≥ 250 /mm³</text>
+          <text x="260" y="42" text-anchor="middle" class="t-sm t-b t-good">&lt; 250 /mm³</text>
+          <text x="40" y="100" text-anchor="middle" class="t-sm t-b">Bacteria</text>
+          <text x="40" y="114" text-anchor="middle" class="t-sm t-b">grow</text>
+          <text x="40" y="180" text-anchor="middle" class="t-sm t-b">Fungi</text>
+          <text x="40" y="194" text-anchor="middle" class="t-sm t-b">grow</text>
+          <text x="40" y="262" text-anchor="middle" class="t-sm t-b">Culture</text>
+          <text x="40" y="276" text-anchor="middle" class="t-sm t-b">negative</text>
+          <rect x="82" y="56" width="116" height="74" rx="7" class="fg-bad"/>
+          <text x="140" y="88" text-anchor="middle" class="t-sm t-b">Culture-positive</text>
+          <text x="140" y="104" text-anchor="middle" class="t-sm t-b">neutrocytic = SBP</text>
+          <rect x="204" y="56" width="116" height="74" rx="7" class="fg-acc"/>
+          <text x="262" y="88" text-anchor="middle" class="t-sm t-b">Bacterascites</text>
+          <text x="262" y="104" text-anchor="middle" class="t-sm">resolving or evolving</text>
+          <rect x="82" y="138" width="116" height="74" rx="7" class="fg-bad"/>
+          <text x="140" y="170" text-anchor="middle" class="t-sm t-b">SFP</text>
+          <text x="140" y="186" text-anchor="middle" class="t-sm">fungal peritonitis</text>
+          <rect x="204" y="138" width="116" height="74" rx="7" class="fg-acc"/>
+          <text x="262" y="170" text-anchor="middle" class="t-sm t-b">Fungal ascites</text>
+          <text x="262" y="186" text-anchor="middle" class="t-sm">like bacterascites</text>
+          <rect x="82" y="220" width="116" height="74" rx="7" class="fg-bad"/>
+          <text x="140" y="246" text-anchor="middle" class="t-sm t-b">Culture-negative</text>
+          <text x="140" y="262" text-anchor="middle" class="t-sm t-b">neutrocytic</text>
+          <text x="140" y="280" text-anchor="middle" class="t-sm t-mut">TB, cancer, fungi?</text>
+          <rect x="204" y="220" width="116" height="74" rx="7" class="fg-good"/>
+          <text x="262" y="262" text-anchor="middle" class="t-sm t-b">No infection</text>
+          <text x="165" y="320" text-anchor="middle" class="t-sm t-mut">Red column = treat now, don't wait for culture</text>
+          </svg>
+      - kind: sort
+        page: 168
+        prompt: "ده SBP ولا secondary bacterial peritonitis؟"
+        bins: ["Suggests secondary", "Fits SBP"]
+        cards:
+          - { text: "Ascitic protein 2.4 g/dL", bin: 0 }
+          - { text: "PMN 7,000/mm³", bin: 0 }
+          - { text: "Polymicrobial culture", bin: 0 }
+          - { text: "Ascitic LDH above serum LDH", bin: 0 }
+          - { text: "PMN does not fall after 48 h of antibiotics", bin: 0 }
+          - { text: "E. coli alone, PMN 600/mm³", bin: 1 }
+          - { text: "Ascitic protein 0.7 g/dL", bin: 1 }
+        why: "الـ **secondary** (abscess أو perforation) بتدي: protein **>1.5**، PMN **>5,000**، **polymicrobial**، PMN مش بينزل بعد **48 h**، glucose **<50** (الكتاب كاتبها mg/l والمقصود mg/dL)، و **LDH ascitic > serum**. الـ SBP: monomicrobial و protein واطي."
+      - kind: aside
+        tone: analogy
+        page: 168
+        text: |
+          الـ SBP زي **تسريب صغير من الماسورة**: بكتيريا واحدة، عدد قليل، والمية فقيرة في البروتين.
+
+          الـ secondary زي **الماسورة اتكسرت**: كل أنواع البكتيريا (polymicrobial)، صديد بالآلاف، والجراح لازم ييجي.
+      - kind: explain
+        page: 168
+        title: "ليه نستعجل؟"
+        text: |
+          - من غير prophylaxis: **30–50%** يموتوا في نفس الـ admission، **69%** ترجعلهم في سنة، و **50%** يموتوا تاني.
+          - الـ predictors: severe liver disease، **renal impairment**، severe sepsis، و GI bleeding قريب.
+          - **Early paracentesis (خلال أول 11 ساعة)** + antibiotics بدري = mortality أقل.
+      - kind: explain
+        page: 169
+        title: "العلاج"
+        text: |
+          - **Empirical antibiotics فورًا** مع مجرد الشك.
+          - First-line: **cefotaxime 2 g IV كل 8–12 h** أو **ceftriaxone 2 g كل 24 h**.
+          - بدائل بنفس الكفاءة: **amoxicillin-clavulanic acid** أو **ciprofloxacin / ofloxacin**.
+          - عدّل حسب الـ culture؛ وفي الـ culture-negative neutrocytic كمّل الـ empirical.
+          - المدة **5–7 أيام على الأقل**.
+          - **Albumin 1.5 g/kg يوم التشخيص، و 1 g/kg يوم 3**، خصوصًا لو فيه AKI أو hepatic dysfunction.
+          - **Response:** الـ PMN يقل **أكتر من 25%** بعد **48 h** (الكتاب كاتبها بصيغة ملخبطة شوية، والمعنى نزول أكتر من 25%). لو مفيش: وسّع الـ coverage ودوّر على **secondary peritonitis**.
+          - اللي يخف من SBP وتوقعه طويل المدى وحش: **فكّر في LT**.
+      - kind: reveal
+        page: 169
+        prompt: "مريض SBP والـ creatinine كويس. ليه نديله albumin؟ مش ده دور الـ antibiotic؟"
+        answer: |
+          الـ SBP هي **أشهر trigger للـ HRS-AKI**. العدوى بتزوّد الـ vasodilatation والـ underfilling، والـ albumin بيحمي الـ effective circulating volume، فبيمنع الكلية تقع.
+
+          علشان كده الكتاب بيقول الـ albumin بعد الـ SBP **mandatory** في الـ HRS prevention.
+      - kind: check
+        page: 170
+        question: "A Child C cirrhotic with ascites has acute variceal bleeding. SBP prophylaxis of choice?"
+        options:
+          - "IV ceftriaxone 1 g/24 h, up to 7 days"
+          - "Oral norfloxacin 400 mg/day for life"
+          - "IV cefotaxime 2 g every 8 h for 14 days"
+          - "No prophylaxis unless PMN ≥250"
+        answer: 0
+        why:
+          - "صح: في الـ **acute GI bleeding** الكتاب بيقول **ceftriaxone 1 g/24 h**، **maximum 7 days**."
+          - "الـ norfloxacin للـ primary (low protein) والـ secondary prophylaxis، مش للنزيف الحاد."
+          - "دي جرعة **علاج** مش prophylaxis."
+          - "الـ GI bleeding نفسه risk factor، والـ prophylaxis لازم."
+      - kind: explain
+        page: 170
+        title: "الـ long-term prophylaxis"
+        text: |
+          **Norfloxacin 400 mg/day** أو **ciprofloxacin 500 mg/day** oral في:
+          - **Primary:** ascitic protein واطي (**<1.5**؛ الكتاب كاتبها g/L والمقصود g/dL) خصوصًا مع **Child-Pugh ≥9**، **bilirubin ≥3**، renal impairment، أو hyponatremia.
+          - **Secondary:** أي حد عمل SBP قبل كده.
+      - kind: aside
+        tone: trap
+        page: 170
+        text: |
+          متلخبطش بين رقمين:
+          - **<1 g/dL** = **risk factor** للـ SBP (p. 166) ورقم الـ protein في التشخيص (p. 167).
+          - **<1.5** = حد الـ **primary prophylaxis** (p. 170).
+      - kind: explain
+        page: 170
+        title: "SFP: لما الفطريات تدخل"
+        text: |
+          - **Spontaneous fungal peritonitis**: fungal infection في الـ ascites من غير source، وأقل شيوعًا.
+          - **Fungal translocation** يسهّلها: **antibiotics**، GI bleeding، immunosuppression، malnutrition.
+          - التشخيص: **PMN ≥250 + fungal culture positive** (حتى لو فيه بكتيريا معاها). و **fungal ascites** = culture positive مع PMN <250.
+          - الأشهر: **Candida albicans**. الاختبارات الأحدث: **pan-fungal PCR** و **1,3 beta-D-glucan**.
+          - العلاج: **echinocandins** للحالات الحرجة، و **fluconazole** للأخف.
+      - kind: check
+        page: 171
+        question: "A critically ill cirrhotic on broad-spectrum antibiotics has ascitic PMN 900/mm³ and Candida albicans in culture. Treatment?"
+        options:
+          - "An echinocandin"
+          - "Fluconazole"
+          - "Switch to cefotaxime"
+          - "Repeat the tap in 48 h"
+        answer: 0
+        why:
+          - "صح: **SFP** في مريض **critically ill** = **echinocandins** first-line."
+          - "الـ fluconazole للحالات **الأخف**."
+          - "دي فطريات، والـ antibiotics كمان من الـ risk factors."
+          - "الـ PMN ≥250 + fungal culture = SFP يتعالج دلوقتي."
+      - kind: try
+        items: [hb.L09.140, hb.L09.147, hb.L09.157, hb.L09.174]
+    recap:
+      - "SBP = عدوى الـ ascites من غير source؛ leaky gut + immunity ضعيفة."
+      - "Risk: **BLeeP** (Bleeding، Low protein <1، Previous SBP)؛ Child C؛ PPIs."
+      - "اعمل tap لكل مريض داخل المستشفى؛ PMN ≥250 = SBP؛ secondary: polymicrobial، protein >1.5، PMN >5,000."
+      - "Cefotaxime أو ceftriaxone 5–7 أيام + albumin 1.5 g/kg ثم 1 g/kg يوم 3؛ response = PMN ↓ >25% في 48 h."
+      - "Bleeding → ceftriaxone 1 g ≤7 أيام؛ long-term norfloxacin/cipro. SFP: Candida، echinocandins."
+    practice: [hb.L09.139, hb.L09.140, hb.L09.141, hb.L09.142, hb.L09.143, hb.L09.144, hb.L09.145, hb.L09.146, hb.L09.147, hb.L09.148, hb.L09.149, hb.L09.150, hb.L09.151, hb.L09.152, hb.L09.153, hb.L09.154, hb.L09.155, hb.L09.156, hb.L09.157, hb.L09.158, hb.L09.159, hb.L09.160, hb.L09.161, hb.L09.162, hb.L09.163, hb.L09.164, hb.L09.165, hb.L09.166, hb.L09.167, hb.L09.168, hb.L09.169, hb.L09.170, hb.L09.171, hb.L09.172, hb.L09.173, hb.L09.174, hb.L09.179, hb.L09.181, hb.L09.190, hb.L09.192]

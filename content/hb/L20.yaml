@@ -845,18 +845,18 @@ items:
     topic: practical-advice
     stem: A patient with cirrhosis asks how to space his meals. What is the best advice?
     options:
-      - Two large meals a day to rest the liver
-      - Three main meals and three snacks, with a late-evening snack as the most important
-      - Fasting overnight for 12 hours to reduce ammonia
-      - Avoid breakfast and eat a large lunch
-      - Only liquid supplements
-    answer: 1
+      - 3 meals + 3 snacks, including a late-evening snack
+      - 3 meals, no snacks
+      - 2 meals + 1 snack
+      - 3 meals + 3 snacks, none after 6 pm
+      - 2 meals + 3 snacks, skipping breakfast
+    answer: 0
     why:
-      - Long gaps worsen the accelerated starvation of cirrhosis.
-      - Correct. Split intake into 3 meals and 3 snacks; the late-evening snack matters most.
-      - Overnight fasting worsens proteolysis; the late snack shortens it.
+      - Correct. Split intake into 3 meals and 3 snacks (mid-morning, mid-afternoon, late evening); the late-evening snack is the most important (p407).
+      - Without snacks the gaps are long, which worsens the accelerated starvation of cirrhosis.
+      - Too few feeds; long gaps worsen the accelerated starvation.
+      - The late-evening snack is the most important one; it shortens the overnight fast.
       - Breakfast is specifically recommended.
-      - Normal food is preferred; supplements are added, not substituted.
     src: { page: 407 }
     status: unverified
   - id: hb.L20.100
@@ -1067,19 +1067,20 @@ items:
         options: [Low muscle mass is linked to higher ammonia, Muscle mass does not affect ammonia, High protein causes sarcopenia, HE needs fewer calories]
         answer: 0
         why: Muscle mass and blood ammonia are inversely related; HE is more common in malnourished patients, and hyperammonaemia worsens muscle loss.
-      - question: How should she be fed now?
-        options: [Nasogastric tube with airway protected or parenteral, PEG tube, Nothing by mouth for 5 days, Oral protein-free diet]
+      - reveal: She is intubated, so her airway is protected.
+        question: How should she be fed now?
+        options: [Nasogastric tube, PEG tube, Oral diet, Nil by mouth]
         answer: 0
-        why: In grade III–IV HE unable to eat, feed by NG tube (protected airway) or parenterally. PEG is avoided in cirrhosis.
+        why: "In grade III–IV HE in a patient unable to eat, feed by nasogastric tube (with a protected airway) or parenterally (p413). PEG tube: avoided in cirrhosis. Oral diet: she cannot swallow safely. Nil by mouth: she still needs nutrition."
       - question: Which supplement may improve her neuropsychiatric performance?
         options: [BCAA, Vitamin A, Calcium, Iron]
         answer: 0
         why: BCAA supplementation can improve neuropsychiatric performance and help reach nitrogen targets.
       - reveal: She recovers and goes home.
         question: What protein advice do you give?
-        options: ["Do not restrict protein; prefer vegetable and dairy proteins", "Keep the low-protein diet", "Avoid all dairy", "Protein only at breakfast"]
+        options: ["1.2–1.5 g/kg/day, vegetable and dairy", "0.6 g/kg/day, vegetable", "1.2–1.5 g/kg/day, red meat", "Protein-free"]
         answer: 0
-        why: Avoid protein restriction; nitrogen needs are the same as without HE, and vegetable and dairy protein are better tolerated.
+        why: "Avoid protein restriction; nitrogen needs are the same as without HE (not lower than the general 1.2–1.5 g/kg), and vegetable and dairy protein should be encouraged (p413). 0.6 g/kg: that is protein restriction. Red meat: animal protein is tolerated less well than vegetable and dairy. Protein-free: restriction is to be avoided."
     src: { page: 413 }
     status: unverified
   - id: hb.L20.111
@@ -1099,7 +1100,7 @@ items:
       - question: What is the plan?
         options: ["Ca + 25(OH)D; repeat DEXA in 2–3 years", "Ca + 25(OH)D ± bisphosphonate; repeat DEXA in 1–2 years", "Ca + 25(OH)D + bisphosphonate + new agents; repeat DEXA in 1 year", "No treatment; repeat DEXA in 2–3 years"]
         answer: 1
-        why: "Osteopenia gets Ca and 25(OH)D, a bisphosphonate depending on additional risk factors (early menopause counts), and repeat DEXA in 1–2 years (p415). Other options. A: That is the plan for a normal T-score. C: That is the osteoporosis plan (T-score ≤ −2.5). D: Everyone gets Ca and 25(OH)D to preserve normal levels."
+        why: "Osteopenia gets Ca and 25(OH)D, a bisphosphonate depending on additional risk factors (early menopause counts), and repeat DEXA in 1–2 years (p415). Other options. Ca + 25(OH)D with DEXA in 2–3 years: that is the plan for a normal T-score. Adding new agents with DEXA in 1 year: that is the osteoporosis plan (T-score ≤ −2.5). No treatment: everyone gets Ca and 25(OH)D to preserve normal levels."
     src: { page: 415 }
     status: unverified
   # ---------- essays (p418) ----------
@@ -1143,8 +1144,7 @@ items:
     topic: screening
     prompt: Nutritional screening and assessment pathway in cirrhosis
     steps:
-      - Correct body weight for fluid retention (dry weight)
-      - Calculate Child–Pugh and BMI
+      - "Calculate Child–Pugh; estimate dry weight if there is fluid retention, then BMI"
       - Classify risk (high if BMI <18.5 or Child C; screening tool otherwise)
       - Detailed assessment by dietician and assessment of sarcopenia
       - Treat with nutritional supplementation and reassess every 1–3 months in the first year

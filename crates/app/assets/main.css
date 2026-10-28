@@ -28,13 +28,15 @@
 }
 
 * { box-sizing: border-box; }
-html, body { margin: 0; height: 100%; background: var(--bg); }
+/* The window never scrolls: `main.content` does, so the top bar, the bottom
+   bar and the sidebar stay put (UX #102). */
+html, body { margin: 0; height: 100%; overflow: hidden; background: var(--bg); }
 /* Dioxus mounts the app in #main, which has no height of its own. */
-#main { min-height: 100%; }
+#main { height: 100%; }
 
 .app {
-  min-height: 100vh;
-  min-height: 100dvh;
+  height: 100vh;
+  height: 100dvh;
   background: var(--bg);
   color: var(--text);
   font-family: var(--font);
@@ -46,6 +48,13 @@ html, body { margin: 0; height: 100%; background: var(--bg); }
 }
 
 bdi { font-family: var(--font-latin); }
+/* Date, time and number fields read left to right inside the Arabic form:
+   otherwise WebKit lays 19:00 out as "PM 00:07" (UX #101). */
+input[type="date"], input[type="time"], input[type="datetime-local"], input[type="number"] {
+  direction: ltr;
+  unicode-bidi: isolate;
+  text-align: end;
+}
 button { font: inherit; color: inherit; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
@@ -93,9 +102,8 @@ button { font: inherit; color: inherit; }
   border-block-start: 1px solid var(--line);
   background: var(--surface);
   padding-block-end: env(safe-area-inset-bottom, 0px);
-  position: sticky;
-  bottom: 0;
-  /* Above sticky or positioned content inside screens (main comes later in the DOM). */
+  /* Above positioned content inside screens (main comes later in the DOM). */
+  position: relative;
   z-index: 10;
 }
 .nav-item {
@@ -128,13 +136,17 @@ button { font: inherit; color: inherit; }
     padding-block: var(--sp-4);
     border-block-start: 0;
     border-inline-end: 1px solid var(--line);
-    position: static;
+    overflow-y: auto;
   }
 }
 
 /* ---------- content ---------- */
 .content {
   grid-area: content;
+  /* The one scroll container (see html, body). */
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
   padding-block: var(--sp-4) var(--sp-6);
   padding-inline: max(var(--sp-4), env(safe-area-inset-left, 0px));
   display: flex;
@@ -143,7 +155,9 @@ button { font: inherit; color: inherit; }
   min-width: 0;
 }
 @media (min-width: 840px) {
-  .content { padding-inline: var(--sp-6); max-width: 60rem; }
+  /* A 60rem reading column at the start side; the padding, not a max-width,
+     keeps it there so the scrollbar stays at the window's edge. */
+  .content { padding-inline: var(--sp-6) max(var(--sp-6), calc(100% - 60rem - var(--sp-6))); }
 }
 
 h1 { font-size: var(--fs-xl); margin: 0; line-height: 1.35; }

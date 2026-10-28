@@ -6,6 +6,7 @@
 mod back;
 mod calc;
 mod case;
+mod cloud;
 mod content;
 mod data_export;
 mod diag;
@@ -109,6 +110,7 @@ fn App() -> Element {
     });
     let settings = use_context_provider(settings::SettingsNav::new);
     store::use_provide_review();
+    cloud::use_provide_cloud();
     let current = *ui.screen.read();
     let look = ui.prefs.read().css();
     back::use_back(ui, current, *settings.open.read());

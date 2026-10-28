@@ -534,6 +534,42 @@ pub mod data {
     pub const T_SETTINGS: &str = "الإعدادات";
 }
 
+pub mod cloud {
+    pub const SECTION: &str = "المزامنة";
+    pub const SECTION_SUB: &str = "حسابك وأجهزتك";
+    pub const TITLE: &str = "المزامنة بين أجهزتك";
+    pub const INTRO: &str = "سجّل دخول بجوجل على الموبايل والتابلت والماك، واللي بتذاكره وعلاماتك على المحتوى هيبقوا على التلاتة. مجاني، وعلى سيرفر باطنة لوحده.";
+    pub const NOT_CONFIGURED: &str = "المزامنة لسه ما اتفعّلتش في النسخة دي. مذاكرتك محفوظة على الجهاز، وتقدر تنقلها بنسخة احتياطية من «بياناتك».";
+    pub const SIGN_IN: &str = "سجّل دخول بجوجل";
+    pub const SIGNING_IN: &str = "كمّل تسجيل الدخول في المتصفح، وبعدين ارجع هنا.";
+    pub const SIGNED_IN_AS: &str = "داخل بـ";
+    pub const SIGN_OUT: &str = "اخرج من الجهاز ده";
+    pub const CONNECTING: &str = "بيتصل";
+    pub const CATCHING_UP: &str = "بيجيب اللي فاتك";
+    pub const LIVE: &str = "متزامن";
+    pub const OFFLINE: &str = "مش متصل، هيحاول تاني لوحده";
+    pub const STOPPED: &str = "واقف";
+    pub const PENDING: &str = "تغيير مستني يترفع";
+    pub const LAST: &str = "آخر مزامنة";
+    pub const JUST_NOW: &str = "دلوقتي";
+    pub const DEVICES: &str = "أجهزتك";
+    pub const REFRESH: &str = "حدّث";
+    pub const THIS_DEVICE: &str = "الجهاز ده";
+    pub const DEVICE_OUT: &str = "خرج";
+    pub const NEVER_SYNCED: &str = "لسه ما اتزامنش";
+    pub const SIGN_OUT_DEVICE: &str = "خرّجه";
+    pub const LOADING: &str = "بيحمّل…";
+
+    pub const P_NOT_CONFIGURED: &str = "تسجيل الدخول لسه ما اتظبطش في النسخة دي.";
+    pub const P_NOT_ALLOWED: &str = "الحساب ده مش مسموح له. ادخل بالجيميل اللي متسجل في السيرفر.";
+    pub const P_CANCELLED: &str = "تسجيل الدخول اتلغى.";
+    pub const P_FAILED: &str = "تسجيل الدخول ما نجحش. جرّب تاني.";
+    pub const P_REMOTE: &str = "الجهاز ده اتخرّج من جهاز تاني. سجّل دخول تاني وقت ما تحب.";
+    pub const P_NETWORK: &str = "مش قادر يوصل للسيرفر دلوقتي. هيحاول تاني لوحده، ومذاكرتك محفوظة على الجهاز.";
+    pub const P_SERVER: &str = "السيرفر فيه مشكلة دلوقتي. هيحاول تاني لوحده.";
+    pub const P_OUTDATED: &str = "السيرفر أحدث من النسخة دي. حدّث باطنة.";
+}
+
 pub mod settings {
     pub const TITLE: &str = "الإعدادات";
     pub const CLOSE: &str = "اقفل";

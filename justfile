@@ -1,6 +1,9 @@
 # Batna task runner. Install `just` first: `brew install just`.
 
 set shell := ["bash", "-euo", "pipefail", "-c"]
+set dotenv-load := true
+
+server := "crates/server"
 
 default:
     @just --list
@@ -32,3 +35,26 @@ run:
 # Android debug APK on a connected device (needs dx 0.7.10, Android SDK + NDK)
 android:
     cd crates/app && dx serve --platform android --no-default-features --features mobile
+
+# --- Batna Cloud (docs/CLOUD.md) ----------------------------------------------
+
+# Install the Worker tools once: wrangler 4 + worker-build
+cloud-tools:
+    npm install -g wrangler@4
+    cargo install worker-build --version ^0.8 --locked
+
+# One-time, after `wrangler login`: token signing key and your Gmail on the allowlist
+cloud-setup:
+    scripts/cloud-setup.sh
+
+# Run Batna Cloud locally on http://127.0.0.1:8787 (local workerd)
+cloud-dev:
+    cd {{server}} && wrangler dev
+
+# Deploy to batna-cloud.<your-subdomain>.workers.dev
+cloud-deploy:
+    cd {{server}} && wrangler deploy
+
+# Stream live logs from the deployed Worker
+cloud-logs:
+    cd {{server}} && wrangler tail

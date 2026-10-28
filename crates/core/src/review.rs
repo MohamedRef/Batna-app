@@ -8,7 +8,6 @@
 pub mod verify;
 
 use std::cell::RefCell;
-use std::cmp::Ordering;
 use std::collections::BTreeMap;
 use std::rc::Rc;
 
@@ -121,31 +120,9 @@ impl ReviewSink for MemorySink {
 }
 
 // --- Sync stamps ----------------------------------------------------------
-// adapted from kabar-app main: crates/protocol/src/hlc.rs
 
-/// Hybrid logical clock timestamp. Ordered by wall time, then counter, then
-/// device, so two devices never produce equal stamps and last-writer-wins is
-/// deterministic.
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
-pub struct Hlc {
-    /// Milliseconds since the Unix epoch.
-    pub wall_ms: i64,
-    /// Logical counter for stamps within the same millisecond.
-    pub counter: u32,
-    pub device: String,
-}
-
-impl Ord for Hlc {
-    fn cmp(&self, other: &Self) -> Ordering {
-        (self.wall_ms, self.counter, &self.device).cmp(&(other.wall_ms, other.counter, &other.device))
-    }
-}
-
-impl PartialOrd for Hlc {
-    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
-        Some(self.cmp(other))
-    }
-}
+/// The HLC lives in `batna-protocol`, which Batna Cloud shares.
+pub use batna_protocol::Hlc;
 
 /// Hands out increasing [`Hlc`]s for one device, even when the wall clock
 /// goes backwards.

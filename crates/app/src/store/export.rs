@@ -46,7 +46,7 @@ pub fn is_secret_name(name: &str) -> bool {
     SECRET_WORDS.iter().any(|w| lower.contains(w))
 }
 
-fn cell(v: ValueRef<'_>) -> Value {
+pub(super) fn cell(v: ValueRef<'_>) -> Value {
     match v {
         ValueRef::Null => Value::Null,
         ValueRef::Integer(i) => json!(i),

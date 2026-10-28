@@ -51,7 +51,7 @@ impl SoundPrefs {
     /// Saves and applies at once.
     pub fn save(self) {
         if let Err(e) = crate::store::shared().put_setting(Self::KEY, &self) {
-            eprintln!("saving sound settings: {e}");
+            crate::diag::report!("saving sound settings: {e}");
         }
         *PREFS.write() = self;
     }
@@ -59,6 +59,14 @@ impl SoundPrefs {
 
 /// The current prefs, read by every [`play`].
 pub static PREFS: GlobalSignal<SoundPrefs> = Signal::global(SoundPrefs::load);
+
+/// Re-reads the prefs after a sync or restore (see `crate::synced`).
+pub fn reload() {
+    let fresh = SoundPrefs::load();
+    if *PREFS.peek() != fresh {
+        *PREFS.write() = fresh;
+    }
+}
 
 pub const VARIATIONS: u8 = 3;
 

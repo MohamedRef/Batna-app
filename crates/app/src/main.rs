@@ -32,6 +32,7 @@ mod sounds;
 mod stats;
 mod store;
 mod study;
+mod synced;
 mod table;
 mod today;
 mod update;

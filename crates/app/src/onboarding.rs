@@ -22,7 +22,19 @@ const CSS: &str = r#"
 .onboard-chips { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
 .onboard-chips button { min-block-size: 44px; padding-inline: var(--sp-3); border-radius: var(--radius-pill); border: 1px solid var(--line); background: var(--surface); }
 .onboard-chips button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); font-weight: 700; }
-.onboard-actions { display: flex; gap: var(--sp-2); justify-content: space-between; flex-wrap: wrap; }
+.onboard-actions { display: flex; gap: var(--sp-2); justify-content: space-between; flex-wrap: wrap;
+  position: sticky; inset-block-end: 0; padding-block: var(--sp-2); background: var(--bg); border-block-start: 1px solid var(--line); }
+.onboard-lectures { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-1); }
+.onboard-lectures li { display: flex; align-items: center; gap: var(--sp-2); }
+.onboard-lecture { flex: 1; display: flex; align-items: center; gap: var(--sp-2); min-block-size: 44px; padding-inline: var(--sp-3);
+  text-align: start; border-radius: var(--radius); border: 1px solid var(--line); background: var(--surface); }
+.onboard-lecture[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); }
+.onboard-check { flex: none; inline-size: 1.1rem; block-size: 1.1rem; border-radius: 4px; border: 2px solid var(--line); }
+.onboard-lecture[aria-pressed="true"] .onboard-check { background: var(--accent); border-color: var(--accent); }
+.onboard-num { flex: none; font-variant-numeric: tabular-nums; color: var(--muted); }
+.onboard-upto { flex: none; min-block-size: 44px; padding-inline: var(--sp-2); border: 0; background: none; color: var(--accent); }
+.onboard-swatch { display: inline-block; vertical-align: middle; inline-size: 1.1rem; block-size: 1.1rem; margin-inline-end: var(--sp-1);
+  border-radius: 50%; border: 1px solid var(--line); background: linear-gradient(135deg, var(--sw-a) 50%, var(--sw-b) 50%); }
 "#;
 
 /// Session lengths offered, in minutes (the study screen's choices).
@@ -47,7 +59,7 @@ impl Answers {
 
     fn save(&self) {
         if let Err(e) = shared().put_setting(Self::KEY, self) {
-            eprintln!("saving first-run answers: {e}");
+            crate::diag::report!("saving first-run answers: {e}");
         }
     }
 }
@@ -73,7 +85,7 @@ const SEEN: &str = "onboarded";
 
 fn close() {
     if let Err(e) = shared().put_local_setting(SEEN, &true) {
-        eprintln!("saving first-run flag: {e}");
+        crate::diag::report!("saving first-run flag: {e}");
     }
     *OPEN.write() = false;
 }
@@ -116,6 +128,10 @@ fn Questions() -> Element {
     let mut minutes = use_signal(|| answers.minutes.unwrap_or(10));
     let mut studied = use_signal(|| answers.studied.clone());
     let mut times = use_signal(|| crate::reminders::PREFS.peek().times.clone());
+    // What each step showed at first. A step he clicks through unchanged
+    // saves nothing, so a new device that hasn't synced yet can't overwrite
+    // the real settings with its defaults (#32).
+    let initial = use_hook(|| (plan.clone(), answers.clone(), crate::reminders::PREFS.peek().times.clone()));
     let mut error = use_signal(|| None::<&'static str>);
 
     let current = STEPS[step()];
@@ -125,7 +141,7 @@ fn Questions() -> Element {
         match current {
             Step::Exam => {
                 let text = exam.read().clone();
-                if text.is_empty() {
+                if text.is_empty() || Some(text.as_str()) == initial.0.exam.map(Day::iso).as_deref() {
                     return true;
                 }
                 let Some(day) = Day::parse(&text).filter(|d| *d > today) else {
@@ -141,15 +157,33 @@ fn Questions() -> Element {
                     error.set(Some(tx::PICK_A_DAY));
                     return false;
                 }
-                let mut s = crate::plan::SETTINGS.write();
-                s.weekdays = *weekdays.read();
-                crate::plan::save(&s);
+                if *weekdays.read() != initial.0.weekdays {
+                    let mut s = crate::plan::SETTINGS.write();
+                    s.weekdays = *weekdays.read();
+                    crate::plan::save(&s);
+                }
             }
             Step::Minutes | Step::Studied => {
-                Answers { minutes: Some(minutes()), studied: studied.read().clone() }.save();
+                // Only the answers he changed, on top of what's stored now.
+                let mut a = Answers::load();
+                let mut touched = false;
+                if Some(minutes()) != initial.1.minutes && (initial.1.minutes.is_some() || minutes() != 10) {
+                    a.minutes = Some(minutes());
+                    touched = true;
+                }
+                if *studied.read() != initial.1.studied {
+                    a.studied = studied.read().clone();
+                    touched = true;
+                }
+                if touched {
+                    a.save();
+                }
             }
             Step::Reminders => {
                 let t = times.read().clone();
+                if t == initial.2 {
+                    return true;
+                }
                 let on = !t.is_empty();
                 RemindPrefs { on, times: if on { t } else { RemindPrefs::default().times } }.save();
                 if on && crate::reminders::HERE() {
@@ -211,31 +245,52 @@ fn Questions() -> Element {
                 }
             }
         },
-        Step::Studied => rsx! {
-            h1 { {tx::STUDIED_TITLE} }
-            p { class: "muted", {tx::STUDIED_BODY} }
-            div { class: "onboard-chips", role: "group", aria_label: tx::STUDIED_TITLE,
-                for l in Library::get().index.lectures.iter() {
-                    button {
-                        key: "{l.id}",
-                        "aria-pressed": if studied.read().contains(&l.id) { "true" } else { "false" },
-                        onclick: {
-                            let id = l.id.clone();
-                            move |_| {
-                                let mut s = studied.write();
-                                match s.iter().position(|x| *x == id) {
-                                    Some(i) => {
-                                        s.remove(i);
+        Step::Studied => {
+            let ids: Vec<String> = Library::get().index.lectures.iter().map(|l| l.id.clone()).collect();
+            let all = ids.clone();
+            rsx! {
+                h1 { {tx::STUDIED_TITLE} }
+                p { class: "muted", {tx::STUDIED_BODY} }
+                div { class: "row",
+                    button { class: "secondary", onclick: move |_| studied.set(all.clone()), {tx::ALL} }
+                    button { class: "secondary", onclick: move |_| studied.set(Vec::new()), {tx::NONE} }
+                }
+                ul { class: "onboard-lectures", aria_label: tx::STUDIED_TITLE,
+                    for (n , l) in Library::get().index.lectures.iter().enumerate() {
+                        li { key: "{l.id}",
+                            button {
+                                class: "onboard-lecture",
+                                "aria-pressed": if studied.read().contains(&l.id) { "true" } else { "false" },
+                                onclick: {
+                                    let id = l.id.clone();
+                                    move |_| {
+                                        let mut s = studied.write();
+                                        match s.iter().position(|x| *x == id) {
+                                            Some(i) => {
+                                                s.remove(i);
+                                            }
+                                            None => s.push(id.clone()),
+                                        }
                                     }
-                                    None => s.push(id.clone()),
-                                }
+                                },
+                                span { class: "onboard-check", aria_hidden: "true" }
+                                bdi { class: "onboard-num", "L{crate::stats::lecture_number(&l.id):0>2}" }
+                                bdi { {l.title.clone()} }
                             }
-                        },
-                        bdi { {l.title.clone()} }
+                            button {
+                                class: "onboard-upto small",
+                                title: tx::UP_TO_HERE,
+                                onclick: {
+                                    let upto = ids[..=n].to_vec();
+                                    move |_| studied.set(upto.clone())
+                                },
+                                {tx::UP_TO_HERE}
+                            }
+                        }
                     }
                 }
             }
-        },
+        }
         Step::Reminders => rsx! {
             h1 { {tx::REMIND_TITLE} }
             p { class: "muted", {tx::REMIND_BODY} }
@@ -281,6 +336,7 @@ fn Questions() -> Element {
                             ui.prefs.write().theme = t;
                             ui.prefs.peek().save();
                         },
+                        span { class: "onboard-swatch", aria_hidden: "true", style: swatch_style(t) }
                         {theme_name(t)}
                     }
                 }
@@ -322,6 +378,16 @@ fn Questions() -> Element {
             }
         }
     }
+}
+
+/// The page and accent colours (System: Paper and Night), as in Settings › Look.
+fn swatch_style(t: Theme) -> String {
+    use batna_core::theme::{NIGHT, PAPER};
+    let (a, b) = match t.palette() {
+        Some(p) => (p.bg, p.accent),
+        None => (PAPER.bg, NIGHT.bg),
+    };
+    format!("--sw-a:{a};--sw-b:{b};")
 }
 
 fn theme_name(t: Theme) -> &'static str {

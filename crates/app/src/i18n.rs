@@ -254,6 +254,13 @@ pub mod bank {
     pub const PAUSED_OVER: &str = "وقته خلص، فهيتسلّم زي ما هو.";
     pub const RESUME: &str = "كمّل";
     pub const SUBMIT_NOW: &str = "سلّمه دلوقتي";
+    pub const CONFIRM_TITLE: &str = "تسلّم دلوقتي؟";
+    pub const CONFIRM_BLANK_A: &str = "لسه";
+    pub const CONFIRM_BLANK_B: &str = "سؤال من غير إجابة، والفاضي مالوش درجة.";
+    pub const CONFIRM_FLAGGED: &str = "متعلّم عليهم كنت عايز ترجعلهم.";
+    pub const CONFIRM_BACK_TO: &str = "ارجع للسؤال";
+    pub const CONFIRM_BACK: &str = "ارجع للامتحان";
+    pub const CONFIRM_SUBMIT: &str = "سلّم كده";
 }
 
 pub mod stats {
@@ -904,6 +911,9 @@ pub mod onboard {
     pub const MIN: &str = "دقيقة";
     pub const STUDIED_TITLE: &str = "ذاكرت أنهي محاضرات قبل كده؟";
     pub const STUDIED_BODY: &str = "علّم اللي قريته قبل كده. لو مفيش، كمّل عادي.";
+    pub const ALL: &str = "كلهم";
+    pub const NONE: &str = "ولا واحدة";
+    pub const UP_TO_HERE: &str = "لحد هنا";
     pub const REMIND_TITLE: &str = "أفكّرك إمتى؟";
     pub const REMIND_BODY: &str = "إشعار هادي فيه عدد المراجعات المستنياك. بيرن على الموبايل بس.";
     pub const ADD_TIME: &str = "زوّد معاد";

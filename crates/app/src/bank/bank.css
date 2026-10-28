@@ -5,15 +5,20 @@
 .bank h2.label { font-size: var(--fs-sm); color: var(--muted); font-weight: 600; margin-block-start: var(--sp-2); }
 
 .chips { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+/* Lecture and topic titles can be longer than a phone is wide: let them wrap
+   inside the chip instead of running off the card. */
+.bank .chip { white-space: normal; overflow-wrap: anywhere; max-inline-size: 100%; text-align: start; line-height: 1.35; }
+.bank .chip.toggle { display: inline-flex; align-items: center; gap: var(--sp-2); }
 .chip.toggle {
   cursor: pointer;
   min-height: 40px;
+  padding-block: var(--sp-1);
   padding-inline: var(--sp-3);
   font-size: var(--fs-sm);
   background: var(--surface);
 }
 .chip.toggle[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--text); font-weight: 600; }
-.chip .count { color: var(--muted); font-variant-numeric: tabular-nums; margin-inline-start: var(--sp-2); }
+.chip .count { flex: none; color: var(--muted); font-variant-numeric: tabular-nums; }
 .chip.weak { background: var(--bad-soft); border-color: transparent; color: var(--text); }
 .chip.page { font-variant-numeric: tabular-nums; }
 
@@ -44,7 +49,9 @@
 .history .pct { font-weight: 700; min-inline-size: 3.5rem; text-align: end; }
 
 /* ---------- player ---------- */
-.bank-run { display: grid; gap: var(--sp-4); }
+/* One column that may shrink below its content, so the navigator scrolls
+   inside the card instead of widening the page under 840px. */
+.bank-run { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sp-4); }
 .run-main { display: flex; flex-direction: column; gap: var(--sp-3); min-width: 0; }
 .run-head { display: flex; align-items: center; gap: var(--sp-3); }
 .run-head .run-count { font-weight: 700; flex: 1; }
@@ -62,8 +69,8 @@
 }
 @keyframes bank-drain { from { inline-size: 100%; } to { inline-size: 0%; } }
 
-.run-side { display: flex; flex-direction: column; gap: var(--sp-3); }
-.navigator { display: flex; gap: var(--sp-1); overflow-x: auto; padding: 3px; }
+.run-side { display: flex; flex-direction: column; gap: var(--sp-3); min-inline-size: 0; }
+.navigator { display: flex; gap: var(--sp-1); overflow-x: auto; padding: 3px; max-inline-size: 100%; scroll-padding-inline: var(--sp-4); }
 .nav-cell {
   flex: none;
   inline-size: 40px;
@@ -87,7 +94,8 @@
 
 /* ---------- one question ---------- */
 .q { gap: var(--sp-3); }
-.q-meta { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+.q-meta { display: flex; flex-wrap: wrap; gap: var(--sp-2); min-inline-size: 0; }
+.q-stem, .q-text, .q-why { overflow-wrap: anywhere; }
 .q-stem { font-family: var(--font-latin); font-size: var(--fs-lg); line-height: 1.55; text-align: start; }
 .q-options { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--sp-2); font-family: var(--font-latin); }
 .q-option {
@@ -179,3 +187,21 @@
   .q-why-list { display: flex; }
   .desk-split .q-why { display: none; }
 }
+
+/* ---------- submit confirm ---------- */
+.bank-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: rgb(0 0 0 / 0.35);
+  display: grid;
+  place-items: center;
+  padding: var(--sp-4);
+}
+.bank-sheet {
+  inline-size: min(28rem, 100%);
+  max-block-size: calc(100dvh - 2rem);
+  overflow-y: auto;
+  box-shadow: 0 12px 40px rgb(0 0 0 / 0.25);
+}
+.bank-sheet .start-row .button { flex: 1 1 10rem; }

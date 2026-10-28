@@ -39,9 +39,7 @@ impl RemindPrefs {
         self.times.sort_unstable();
         self.times.dedup();
         self.times.truncate(MAX_TIMES);
-        if let Err(e) = shared().put_setting(Self::KEY, &self) {
-            crate::diag::report!("saving reminder settings: {e}");
-        }
+        crate::store::save_setting(Self::KEY, &self);
         *PREFS.write() = self;
     }
 }

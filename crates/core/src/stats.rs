@@ -32,13 +32,14 @@ const DAY_MS: i64 = 86_400_000;
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct Clock {
     pub now_ms: i64,
-    pub utc_offset_min: i32,
+    /// His time zone: each answer's day uses the offset in force then (#40).
+    pub zone: crate::zone::Zone,
     pub rollover_hour: u32,
 }
 
 impl Clock {
     pub fn day_of(&self, ms: i64) -> Day {
-        Day::from_unix_ms(ms, self.utc_offset_min, self.rollover_hour)
+        Day(self.zone.day_from(ms, self.rollover_hour as u8) as i32)
     }
 
     pub fn today(&self) -> Day {
@@ -539,7 +540,7 @@ items:
     }
 
     fn clock() -> Clock {
-        Clock { now_ms: NOW, utc_offset_min: 0, rollover_hour: 4 }
+        Clock { now_ms: NOW, zone: crate::zone::Zone::fixed(0), rollover_hour: 4 }
     }
 
     fn marks() -> BTreeMap<String, Status> {

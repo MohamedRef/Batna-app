@@ -28,6 +28,8 @@ type Ws = WebSocketStream<MaybeTlsStream<TcpStream>>;
 const PING_EVERY: Duration = Duration::from_secs(30);
 /// Writes from screens that don't send [`Command::Kick`] still go up this soon.
 const OUTBOX_EVERY: Duration = Duration::from_secs(2);
+/// After the hub says this device's clock is ahead, pushes wait this long.
+const CLOCK_RETRY: Duration = Duration::from_secs(60);
 
 pub struct Engine {
     store: Store,
@@ -47,6 +49,8 @@ pub struct Engine {
     last_status: Option<CloudStatus>,
     force_refresh: bool,
     problem: Option<Problem>,
+    /// Pushes wait until then (the clock was ahead); pulls go on.
+    hold_pushes_until: Option<Instant>,
     events: UnboundedSender<Event>,
 }
 
@@ -79,6 +83,7 @@ impl Engine {
             last_status: None,
             force_refresh: false,
             problem: None,
+            hold_pushes_until: None,
             events,
         }
     }
@@ -369,12 +374,21 @@ impl Engine {
                     for r in &rejected {
                         crate::diag::report!("op {} rejected: {:?}", r.op_id, r.reason);
                     }
+                    if self.problem == Some(Problem::ClockOff) && !done.is_empty() {
+                        self.problem = None;
+                    }
                     let ids =
                         done.iter().map(String::as_str).chain(rejected.iter().map(|r| r.op_id.as_str()));
                     if let Err(e) = self.store.remove_from_outbox(ids) {
                         crate::diag::report!("outbox: {e}");
                     }
                     self.touch_last_sync();
+                }
+                Effect::ClockAhead { kept } => {
+                    // Kept in the outbox; they go once the clock is right.
+                    crate::diag::report!("clock ahead of the server: {} ops wait", kept.len());
+                    self.problem = Some(Problem::ClockOff);
+                    self.hold_pushes_until = Some(Instant::now() + CLOCK_RETRY);
                 }
                 Effect::Reconnect { reason } => {
                     crate::diag::report!("sync reconnects: {reason}");
@@ -406,7 +420,7 @@ impl Engine {
 
     /// Pushes the next outbox batch if the socket can take it.
     async fn pump(&mut self) {
-        if self.ws.is_none() {
+        if self.ws.is_none() || self.hold_pushes_until.is_some_and(|t| Instant::now() < t) {
             return;
         }
         let outbox = match self.store.outbox(MAX_OPS_PER_PUSH) {

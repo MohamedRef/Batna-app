@@ -50,9 +50,7 @@ impl SoundPrefs {
 
     /// Saves and applies at once.
     pub fn save(self) {
-        if let Err(e) = crate::store::shared().put_setting(Self::KEY, &self) {
-            crate::diag::report!("saving sound settings: {e}");
-        }
+        crate::store::save_setting(Self::KEY, &self);
         *PREFS.write() = self;
     }
 }

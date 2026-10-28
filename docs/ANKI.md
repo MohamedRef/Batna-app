@@ -44,4 +44,5 @@ cargo run -q -p batna-tools -- anki --own batna-export-2026-10-28.json
 cargo run -q -p batna-tools -- verdicts export.yaml            # ✎/✗ items grouped by lecture, with notes and edits
 cargo run -q -p batna-tools -- verdicts export.yaml --approve  # also adds the ✓ ids to content/approved.txt
 ```
+Each verdict carries the item's fingerprint as he judged it. A verdict on an item whose text changed since is never approved or applied (here or in `anki --verdicts`): the tool lists it as "changed since he judged them" and the app asks him again. ✓ from exports made before fingerprints existed are not approved either; export again from the app.
 Content threads fix the YAML from this list; only Mohamed's own ✓ goes into `content/approved.txt`.

@@ -13,9 +13,25 @@ use super::{Mark, close, mark, next_lesson, save_mark};
 use crate::i18n::learn as tx;
 use crate::{Screen, Ui};
 
-/// Local (per device) setting: the step to reopen an unfinished lesson at.
+/// Local (per device) setting: where an unfinished lesson stands, so it
+/// reopens at the same step with the same score.
 fn pos_key(id: &str) -> String {
     format!("lessonpos.{id}")
+}
+
+#[derive(Debug, Clone, Default, serde::Serialize, serde::Deserialize)]
+struct Pos {
+    at: usize,
+    /// First response per step: Some(right). Reveals and Try steps record
+    /// too (they gate Continue), but only question steps are scored.
+    answers: Vec<Option<bool>>,
+    skipped: Vec<bool>,
+}
+
+fn save_pos(id: &str, pos: &Pos) {
+    if let Err(e) = crate::store::shared().put_local_setting(&pos_key(id), pos) {
+        crate::diag::report!("saving lesson position {id} failed: {e}");
+    }
 }
 
 #[component]
@@ -23,31 +39,40 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
     let ui = use_context::<Ui>();
     let n = lesson.steps.len();
     let id = lesson.id.clone();
-    let mut at = use_signal(|| {
+    let start = use_hook(|| {
         // BATNA_LESSON_STEP=4 opens at that step (1-based), for screenshots.
         let preview = std::env::var("BATNA_LESSON_STEP").ok().and_then(|s| s.parse::<usize>().ok());
         if let Some(s) = preview {
-            return s.saturating_sub(1).min(n);
+            return Pos { at: s.saturating_sub(1).min(n), ..Pos::default() };
         }
-        let saved: usize = crate::store::shared().local_setting(&pos_key(&id)).unwrap_or(0);
-        if saved < n && mark(&id).is_none() { saved } else { 0 }
+        let saved: Option<Pos> = crate::store::shared().local_setting(&pos_key(&id));
+        match saved {
+            Some(p) if p.at < n && p.answers.len() == n && p.skipped.len() == n && mark(&id).is_none() => p,
+            _ => Pos::default(),
+        }
     });
-    // First answer per step: Some(right).
-    let mut answers = use_signal(|| vec![None::<bool>; n]);
-    let mut skipped = use_signal(|| vec![false; n]);
+    let mut at = use_signal(|| start.at);
+    let mut answers =
+        use_signal(|| if start.answers.len() == n { start.answers.clone() } else { vec![None::<bool>; n] });
+    let mut skipped =
+        use_signal(|| if start.skipped.len() == n { start.skipped.clone() } else { vec![false; n] });
+    let questions: Vec<bool> = lesson.steps.iter().map(|s| s.body.is_question()).collect();
 
     let go = {
         let id = id.clone();
+        let questions = questions.clone();
         move |to: usize| {
             at.set(to);
-            let _ = crate::store::shared().put_local_setting(&pos_key(&id), &to.min(n.saturating_sub(1)));
             if to == n {
-                let a = answers.read();
-                let asked = lesson_questions(&a, &skipped.read());
-                let right = a.iter().filter(|x| **x == Some(true)).count() as u32;
+                let (right, asked) = score(&answers.read(), &skipped.read(), &questions);
                 save_mark(&id, Mark { done_ms: crate::store::now_ms(), right, asked });
-                let _ = crate::store::shared().put_local_setting(&pos_key(&id), &0usize);
+                save_pos(&id, &Pos::default());
                 crate::sounds::play(crate::sounds::Cue::SessionEnd);
+            } else {
+                save_pos(
+                    &id,
+                    &Pos { at: to, answers: answers.read().clone(), skipped: skipped.read().clone() },
+                );
             }
             document::eval(
                 "document.querySelector('.content')?.scrollTo({top: 0}); window.scrollTo({top: 0});",
@@ -56,12 +81,16 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
     };
 
     if at() >= n {
-        return rsx! { Summary { lesson: lesson.clone(), answers: answers.read().clone(), skipped: skipped.read().clone() } };
+        let (right, asked) = score(&answers.read(), &skipped.read(), &questions);
+        return rsx! { Summary { lesson: lesson.clone(), right, asked } };
     }
 
     let i = at();
     let step = lesson.steps[i].clone();
-    let is_q = step.body.is_question() || matches!(step.body, StepBody::Try { .. });
+    let is_try = matches!(step.body, StepBody::Try { .. });
+    let is_q = step.body.is_question() || is_try;
+    // A Try step already played isn't played again: its grades are reviews.
+    let try_done = is_try && (answers.read()[i].is_some() || skipped.read()[i]);
     let can_go = !is_q || answers.read()[i].is_some() || skipped.read()[i];
     let seed = format!("{}#{}", lesson.id, i);
     let mut go_next = go.clone();
@@ -98,15 +127,25 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                 bdi { "{lecture_title}" }
             }
             article { key: "{i}", class: "card ls-stage", "data-kind": step.body.kind(),
-                StepView {
-                    body: step.body.clone(),
-                    seed,
-                    on_answer: move |right: bool| {
-                        let mut a = answers.write();
-                        if a[i].is_none() {
-                            a[i] = Some(right);
-                        }
-                    },
+                if try_done {
+                    div { class: "ls-try-done",
+                        p { class: "ls-kicker", {tx::TRY} }
+                        p { {tx::TRY_DONE} }
+                        p { class: "muted small", {tx::TRY_DONE_HINT} }
+                    }
+                } else {
+                    StepView {
+                        body: step.body.clone(),
+                        seed,
+                        on_answer: move |right: bool| {
+                            let mut a = answers.write();
+                            if a[i].is_none() {
+                                a[i] = Some(right);
+                                // Answered after all: it counts.
+                                skipped.write()[i] = false;
+                            }
+                        },
+                    }
                 }
                 if let Some(page) = step.page {
                     footer { class: "ls-src",
@@ -143,16 +182,23 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
     }
 }
 
-/// Questions that count: answered ones (skips don't count against him).
-fn lesson_questions(answers: &[Option<bool>], skipped: &[bool]) -> u32 {
-    answers.iter().zip(skipped).filter(|(a, s)| a.is_some() && !**s).count() as u32
+/// `(right, asked)` over the question steps he answered: reveals and Try
+/// steps don't score, and skips don't count against him.
+fn score(answers: &[Option<bool>], skipped: &[bool], questions: &[bool]) -> (u32, u32) {
+    let counted = || {
+        answers
+            .iter()
+            .zip(skipped)
+            .zip(questions)
+            .filter(|((_, s), q)| **q && !**s)
+            .filter_map(|((a, _), _)| *a)
+    };
+    (counted().filter(|r| *r).count() as u32, counted().count() as u32)
 }
 
 #[component]
-fn Summary(lesson: Lesson, answers: Vec<Option<bool>>, skipped: Vec<bool>) -> Element {
+fn Summary(lesson: Lesson, right: u32, asked: u32) -> Element {
     let mut ui = use_context::<Ui>();
-    let asked = lesson_questions(&answers, &skipped);
-    let right = answers.iter().filter(|a| **a == Some(true)).count() as u32;
     let lecture = lesson.id.rsplit_once('.').map(|(l, _)| l.to_string()).unwrap_or_default();
     let next = next_lesson(std::slice::from_ref(&lecture)).filter(|l| l.id != lesson.id);
     let practice = lesson.practice.clone();
@@ -203,5 +249,19 @@ fn Summary(lesson: Lesson, answers: Vec<Option<bool>>, skipped: Vec<bool>) -> El
             }
             p { class: "muted small", {tx::PRACTICE_HINT} }
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::score;
+
+    #[test]
+    fn only_answered_questions_score() {
+        // check right, reveal, check wrong, try, skipped check.
+        let answers = [Some(true), Some(true), Some(false), Some(true), None];
+        let skipped = [false, false, false, false, true];
+        let questions = [true, false, true, false, true];
+        assert_eq!(score(&answers, &skipped, &questions), (1, 2));
     }
 }

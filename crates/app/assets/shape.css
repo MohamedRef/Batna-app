@@ -1,0 +1,143 @@
+/* Shape and surface language, after the calm grouped look of Morphe Manager
+   (ideas only; no code or assets taken). Size and shape live here; colours
+   come from batna_core::theme and layout from 600px from main.css, nav.css
+   and desk.css. Hairlines rather than shadows, so cards still show on the
+   true-black theme where --bg and --surface are both #000. */
+
+:root {
+  --radius-lg: 18px;
+  --radius-sm: 8px;
+  /* A fainter hairline for dividers inside a card. */
+  --line-soft: color-mix(in srgb, var(--line) 55%, transparent);
+  /* A raised step off --surface; the theme defines it, this is a fallback. */
+  --raised: var(--surface-2, color-mix(in srgb, var(--surface) 88%, var(--text)));
+  --press: scale(0.98);
+}
+
+/* ---------- cards ---------- */
+.card {
+  border-radius: var(--radius-lg);
+  border-color: var(--line-soft);
+}
+.card > h2:first-child, .card > h1:first-child { line-height: 1.3; }
+.note { border-radius: var(--radius); }
+
+/* ---------- buttons ---------- */
+.button, .icon-button { transition: transform var(--dur) var(--ease), background-color var(--dur) var(--ease); }
+.button:active, .icon-button:active, button.primary:active { transform: var(--press); }
+.button {
+  border-color: var(--line-soft);
+  background: var(--raised);
+  font-weight: 600;
+}
+.button.primary, .button.update-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--surface);
+  font-weight: 700;
+}
+/* Tonal: a soft accent pill for the second most important action. */
+.button.tonal { background: var(--accent-soft); border-color: transparent; color: var(--accent); }
+
+/* Round icon buttons in headers: a filled circle, no ring. */
+.icon-button {
+  border-color: transparent;
+  background: var(--raised);
+}
+.icon-button:hover { background: var(--accent-soft); }
+
+/* ---------- chips and badges ----------
+   Status badges are spans; chips that are buttons (filters) keep their size. */
+span.chip {
+  font-size: 0.75rem;
+  line-height: 1.6;
+  padding-inline: var(--sp-2);
+  border-color: var(--line-soft);
+  background: var(--raised);
+}
+span.chip.ready { font-weight: 700; }
+button.chip { border-color: var(--line-soft); }
+
+/* ---------- top bar: blends into the page ---------- */
+.topbar { background: var(--bg); border-block-end-color: transparent; }
+.brand-name { letter-spacing: 0.01em; }
+
+/* ---------- grouped choice rows (single column) ----------
+   One rounded block of rows split by thin dividers, a radio dot on the
+   start side, instead of a stack of separately bordered boxes. */
+@media (max-width: 839.98px) {
+  .choice-list {
+    gap: 0;
+    border: 1px solid var(--line-soft);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--surface);
+  }
+  .choice-list > .choice {
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+  .choice-list > .choice + .choice { border-block-start: 1px solid var(--line-soft); }
+  .choice-list > .choice[aria-checked="true"] { background: var(--accent-soft); box-shadow: none; }
+  .card .choice-list { background: transparent; }
+}
+.choice[role="radio"]::before {
+  content: "";
+  flex: none;
+  inline-size: 1.125rem;
+  block-size: 1.125rem;
+  border-radius: 50%;
+  border: 2px solid var(--muted);
+  box-sizing: border-box;
+}
+.choice[role="radio"][aria-checked="true"]::before {
+  border-color: var(--accent);
+  background: radial-gradient(circle, var(--accent) 0 40%, transparent 45%);
+}
+
+/* ---------- segmented controls ---------- */
+.segmented, .st-segmented { border-color: var(--line-soft); }
+
+/* ---------- phones ---------- */
+@media (max-width: 599.98px) {
+  /* Floating pill bar: inset from the edges, a soft pill behind the active
+     icon. Six tabs fit at 384dp. */
+  .nav {
+    margin-inline: var(--sp-3);
+    margin-block-end: calc(var(--sp-2) + env(safe-area-inset-bottom, 0px));
+    padding-block: var(--sp-1);
+    padding-inline: var(--sp-1);
+    border: 1px solid var(--line-soft);
+    border-radius: var(--radius-pill);
+    background: var(--raised);
+    box-shadow: 0 6px 24px rgb(0 0 0 / 0.12);
+  }
+  .app { background: var(--bg); }
+  .nav-item {
+    min-height: calc(var(--nav-h) - var(--sp-2));
+    justify-content: center;
+    font-size: 0.6875rem;
+    border-radius: var(--radius-pill);
+  }
+  .nav-item .glyph {
+    inline-size: 3rem;
+    block-size: 1.75rem;
+    border-radius: var(--radius-pill);
+    transition: background-color var(--dur) var(--ease);
+  }
+  .nav-item[aria-current="page"] .glyph { background: var(--accent-soft); }
+
+  /* Today's lecture list: one grouped block instead of a stack of cards. */
+  .lectures {
+    gap: 0;
+    border: 1px solid var(--line-soft);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--surface);
+  }
+  .lectures > .lecture { border: 0; border-radius: 0; background: transparent; }
+  .lectures > .lecture + .lecture { border-block-start: 1px solid var(--line-soft); }
+  .lecture .num { inline-size: 2rem; block-size: 2rem; font-size: var(--fs-sm); }
+}

@@ -223,7 +223,6 @@ pub mod stats {
     pub const TIMES_MANY: &str = "مرة";
     pub const LECTURE: &str = "محاضرة";
 
-    pub const SESSION_SOON: &str = "الأسئلة جاهزة. الزرار هيشتغل أول ما شاشة المذاكرة تنزل.";
     pub const SESSION_COUNT: &str = "سؤال في الجلسة";
     pub const DEMO: &str = "أرقام تجريبية للعرض بس، مش مذاكرتك.";
 }

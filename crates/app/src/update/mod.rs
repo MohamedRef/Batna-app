@@ -640,7 +640,7 @@ impl Updater {
     }
 
     /// What's installed, on the channel chosen now.
-    fn installed(&self) -> Installed {
+    pub(super) fn installed(&self) -> Installed {
         self.info.installed(self.tx.borrow().prefs.channel)
     }
 

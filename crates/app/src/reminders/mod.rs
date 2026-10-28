@@ -258,7 +258,7 @@ pub fn RemindSection() -> Element {
                 }
                 if here && cfg!(target_os = "macos") && allowed != Some(false) {
                     p { class: "muted small", {tx::MAC_HINT} }
-                    button { class: "secondary", onclick: move |_| native::open_notification_settings(), {tx::OPEN_NOTIFICATIONS} }
+                    button { class: "btn btn-secondary", onclick: move |_| native::open_notification_settings(), {tx::OPEN_NOTIFICATIONS} }
                 }
                 if here && unrestricted == Some(false) {
                     p { class: "muted small", {tx::BATTERY} }

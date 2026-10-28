@@ -9,8 +9,10 @@ mod calc;
 mod case;
 mod content;
 mod data_export;
+mod desk;
 mod diag;
 mod fonts;
+mod hover;
 mod i18n;
 mod icons;
 mod import;
@@ -20,6 +22,7 @@ mod plan;
 mod platform;
 mod prefs;
 mod settings;
+mod shortcuts;
 mod stats;
 mod store;
 mod study;
@@ -95,7 +98,12 @@ fn main() {
             .with_inner_size(LogicalSize::new(w, h))
             .with_min_inner_size(LogicalSize::new(360.0, 560.0));
         dioxus::LaunchBuilder::desktop()
-            .with_cfg(Config::new().with_window(window).with_menu(None).with_disable_context_menu(true))
+            .with_cfg(
+                Config::new()
+                    .with_window(window)
+                    .with_menu(settings::menu::initial())
+                    .with_disable_context_menu(true),
+            )
             .launch(App);
     }
     #[cfg(not(all(feature = "desktop", not(target_os = "android"))))]
@@ -118,6 +126,7 @@ fn App() -> Element {
         style { {fonts::css()} }
         style { {MAIN_CSS} }
         style { {look} }
+        desk::Chrome {}
         div { class: "app", lang: "ar", dir: "rtl",
             header { class: "topbar",
                 div { class: "brand",
@@ -135,6 +144,14 @@ fn App() -> Element {
             nav { class: "nav", aria_label: "التنقل",
                 for screen in Screen::NAV {
                     NavButton { key: "{screen:?}", screen, class: "nav-item" }
+                }
+                // From 840px the sidebar carries Settings at its foot (nav.css).
+                button {
+                    class: "nav-item nav-foot",
+                    aria_label: Screen::Settings.label(),
+                    onclick: move |_| settings.show(None),
+                    span { class: "glyph", aria_hidden: "true", {icons::nav(Screen::Settings)} }
+                    span { class: "label", {Screen::Settings.label()} }
                 }
             }
             main { class: "content", "data-screen": "{current:?}", {screen_body(current)} }

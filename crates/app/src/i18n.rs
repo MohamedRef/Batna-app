@@ -514,6 +514,50 @@ pub mod calc {
     pub const SHOW_MEANING: &str = "ورّيني التفسير";
 }
 
+pub mod desk {
+    pub const TABLET: &str = "التابلت والقلم";
+    pub const TABLET_SUB: &str = "القايمة الجانبية ولمحة القلم";
+    pub const MAC: &str = "الماك والكيبورد";
+    pub const MAC_SUB: &str = "القايمة الجانبية ولمحة الماوس والاختصارات";
+    pub const NAV_STYLE: &str = "القايمة الجانبية في الشاشة العريضة";
+    pub const NAV_LABELS: &str = "أيقونات وأسامي";
+    pub const NAV_SLIM: &str = "أيقونات بس";
+    // The pane labels are read by desk::Panes / ListDetail, which feature
+    // screens opt into one by one.
+    #[allow(dead_code)]
+    pub const SIDE_WAITING: &str = "الشرح وصفحة الكتاب هيظهروا هنا أول ما تجاوب.";
+    #[allow(dead_code)]
+    pub const SIDE_LABEL: &str = "الشرح";
+    #[allow(dead_code)]
+    pub const LIST_LABEL: &str = "القايمة";
+}
+
+pub mod hover {
+    pub const TITLE: &str = "اللمحة";
+    pub const PEN: &str = "لمحة بقلم S Pen";
+    pub const PEN_NOTE: &str = "قرّب القلم من اختصار أو اسم دوا من غير ما تلمس الشاشة، هيظهرلك معناه.";
+    pub const MOUSE: &str = "لمحة بالماوس";
+    pub const MOUSE_NOTE: &str =
+        "سيب الماوس ثانية على الكلمة، أو على رقم صفحة الكتاب، أو على اختيار بعد ما تجاوب.";
+    pub const UNVERIFIED: &str = "لسه ما اتراجعش";
+    pub const TERMS: &str = "مصطلح في القاموس";
+}
+
+pub mod keys {
+    pub const TITLE: &str = "اختصارات الكيبورد";
+    pub const OPEN: &str = "اعرض الاختصارات";
+    pub const CLOSE: &str = "اقفل";
+    pub const NOTE: &str = "بتشتغل على كيبورد التابلت والماك. على الماك استخدم ⌘ بدل Ctrl.";
+    pub const SCREENS: &str = "تروح لشاشة";
+    pub const SETTINGS: &str = "الإعدادات";
+    pub const REVEAL: &str = "تكشف الإجابة";
+    pub const RATE: &str = "تقيّم نفسك (من نسيت لسهل)";
+    pub const OPTIONS: &str = "تختار إجابة في سؤال الاختيارات";
+    pub const NEXT: &str = "اللي بعده";
+    pub const ESC: &str = "تقفل أي حاجة مفتوحة";
+    pub const HELP: &str = "القايمة دي";
+}
+
 pub mod verify {
     pub const GROUP: &str = "مراجعة المحتوى";
     pub const QUESTION: &str = "المحتوى ده مظبوط؟";

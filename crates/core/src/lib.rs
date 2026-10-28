@@ -4,6 +4,7 @@
 pub mod calc;
 pub mod content;
 pub mod exam;
+pub mod glossary;
 pub mod layout;
 pub mod pack;
 pub mod plan;

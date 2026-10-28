@@ -3,7 +3,7 @@
 Batna's content is exported as **one Anki file, `batna.apkg`**. It holds a `Batna` deck with one subdeck per lecture (`Batna::L01 Liver Cirrhosis`, …), so you study it while the app is still being built, and you import only one file however many lectures exist.
 
 ## From inside the app
-Settings › **صدّر لـ Anki**. The app builds `batna.apkg` from the lectures it carries, saves it (phone and tablet: `Download/Batna/`; Mac: `~/Downloads/`) and opens it in AnkiDroid or Anki, which shows its import screen. The app carries merged lectures only, so until every lecture is merged the file in the project folder has more cards; both use the same ids, so importing either one updates the same cards.
+Settings › Your data › **صدّر لـ Anki**. The app builds `batna.apkg` from the lectures it carries and your ✓/✎/✗ (✗ items left out, ✎ items with your text), saves it (phone and tablet: `Download/Batna/`; Mac: `~/Downloads/`) and opens it in AnkiDroid or Anki, which shows its import screen. The app carries merged lectures only, so until every lecture is merged the file in the project folder has more cards; both use the same ids, so importing either one updates the same cards.
 
 ## Import it
 - **Phone or tablet:** open `batna.apkg` from the project files (or Files) and choose AnkiDroid. Then study the `Batna` deck, or one lecture's subdeck.

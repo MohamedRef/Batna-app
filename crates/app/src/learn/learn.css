@@ -45,7 +45,9 @@
 /* **bold** is a term, set in weight only; ==key== is one of the step's few
    key terms and gets the marker (docs/LESSONS.md). */
 .ls-rich strong, .ls-mn-hook strong { font-weight: 700; }
-.ls-rich mark, .ls-mn-hook mark, .ls-h mark, .ls-q mark {
+/* Every lesson text, Line ones too (options, cards, cells, recap): never
+   the browser's yellow, which is unreadable at night (#321). */
+mark {
   color: inherit;
   font-weight: 700;
   background: linear-gradient(transparent 55%, var(--accent-soft) 55%);
@@ -195,10 +197,11 @@
 /* Focus: a lesson takes the whole phone screen. The app bar and the tab
    bar step aside (× closes the lesson); wider windows keep their rail. */
 .app:has(.ls-player) > .topbar { display: none; }
-.app:has(.ls-player) > .content { padding-block-start: env(safe-area-inset-top, 0px); }
 @media (max-width: 599px) {
   .app:has(.ls-player) > .nav { display: none; }
-  .app:has(.ls-player) > .content { padding-block-end: 0; }
+  .app:has(.ls-player) > .content {
+    padding-block: env(safe-area-inset-top, 0px) 0;
+  }
 }
 .ls-view {
   flex: none;
@@ -223,8 +226,11 @@
   /* One page fills the screen between the bar and the arrows. */
   min-block-size: calc(100dvh - 10.5rem);
   padding: var(--sp-6) var(--sp-4) var(--sp-4);
-  border-radius: 6px 16px 16px 6px;
-  /* The spine is on the right in a right-to-left book. */
+  /* The spine is at the start edge: the right, in a right-to-left book. */
+  border-start-start-radius: 6px;
+  border-end-start-radius: 6px;
+  border-start-end-radius: 16px;
+  border-end-end-radius: 16px;
   box-shadow:
     inset -14px 0 18px -16px rgb(0 0 0 / 0.35),
     0 1px 0 var(--line),

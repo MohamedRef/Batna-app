@@ -788,25 +788,58 @@ pub fn validate(file: &LessonFile, cx: &LessonContext<'_>) -> Vec<Problem> {
     out
 }
 
-fn step_problems(body: &StepBody, items: &BTreeSet<&str>) -> Vec<String> {
+/// `**` and `==` in every text a step shows, checked line by line the way
+/// [`spans`] reads them, and the step's key terms counted together (#321).
+fn markup_problems(body: &StepBody) -> Vec<String> {
+    fn strings<'a>(v: &'a serde_json::Value, key: &str, out: &mut Vec<(String, &'a str)>) {
+        match v {
+            // Drawings and pictures aren't lesson text.
+            serde_json::Value::String(s) if !matches!(key, "svg" | "image" | "alt" | "kind") => {
+                out.push((key.to_string(), s))
+            }
+            serde_json::Value::Array(a) => a.iter().for_each(|x| strings(x, key, out)),
+            serde_json::Value::Object(o) => o
+                .iter()
+                .filter(|(k, _)| !matches!(k.as_str(), "svg" | "image"))
+                .for_each(|(k, x)| strings(x, k, out)),
+            _ => {}
+        }
+    }
     let mut out = Vec::new();
+    let Ok(v) = serde_json::to_value(body) else { return out };
+    let mut texts = Vec::new();
+    strings(&v, "", &mut texts);
+    let mut keys = 0;
+    for (field, text) in texts {
+        for line in text.lines() {
+            if line.contains("===") {
+                out.push(format!("{field}: `===` (write `==term==` with no extra =)"));
+            }
+            if line.matches("**").count() % 2 == 1 {
+                out.push(format!("{field}: `**` is not closed on its line"));
+            }
+            let marks = line.matches("==").count();
+            if marks % 2 == 1 {
+                out.push(format!("{field}: `==` is not closed on its line"));
+            }
+            keys += marks / 2;
+        }
+    }
+    if keys > MAX_KEY_TERMS {
+        out.push(format!(
+            "{keys} key terms (`==`): keep the marker for the {MAX_KEY_TERMS} that matter most"
+        ));
+    }
+    out
+}
+
+fn step_problems(body: &StepBody, items: &BTreeSet<&str>) -> Vec<String> {
+    let mut out = markup_problems(body);
     let empty = |s: &str| s.trim().is_empty();
     match body {
         StepBody::Explain { text, .. } | StepBody::Aside { text, .. } => {
             if empty(text) {
                 out.push("text is empty".into());
-            }
-            if text.matches("**").count() % 2 == 1 {
-                out.push("`**` is not closed".into());
-            }
-            let marks = text.matches("==").count();
-            if marks % 2 == 1 {
-                out.push("`==` is not closed".into());
-            } else if marks / 2 > MAX_KEY_TERMS {
-                out.push(format!(
-                    "{} key terms (`==`): keep the marker for the {MAX_KEY_TERMS} that matter most",
-                    marks / 2
-                ));
             }
         }
         StepBody::Figure { svg, image, caption, alt, .. } => {
@@ -1074,6 +1107,12 @@ mod tests {
     #[test]
     fn key_terms_and_bare_punctuation() {
         let s = spans("دي ==portal hypertension== و **SAAG**");
+        let split = StepBody::Explain { title: None, text: "دي ==portal\nhypertension== كده".into() };
+        assert!(super::markup_problems(&split).iter().any(|p| p.contains("not closed")));
+        let cap = StepBody::Reveal { prompt: "==a== ==b==".into(), answer: "==c== و ==d==".into() };
+        assert!(super::markup_problems(&cap).iter().any(|p| p.contains("4 key terms")));
+        let ok = StepBody::Reveal { prompt: "**x** ==y==".into(), answer: "45 + 55 = 100".into() };
+        assert!(super::markup_problems(&ok).is_empty());
         assert!(super::license_ok("CC BY-SA 4.0") && super::license_ok("CC BY-NC-SA 3.0"));
         assert!(super::license_ok("Public domain") && !super::license_ok("CC BY-ND 4.0"));
         assert!(!super::license_ok("All rights reserved"));

@@ -129,7 +129,7 @@
   document.addEventListener("click", (e) => {
     if (!lastTouch || Date.now() - lastTouch > 800) return;
     const t = e.target;
-    if (!t || !t.closest || t.closest("button, a, input, textarea, select, summary, label, [role=button]")) return;
+    if (!t || !t.closest || t.closest("button, a, input, textarea, select, summary, label, [role=button], .card-action")) return;
     const el = t.closest("[data-peek]");
     if (el && el.dataset.peek) {
       if (touchShown === el) return; // the same element again: leave it closed
@@ -159,6 +159,8 @@
   }, { passive: true, capture: true });
   document.addEventListener("scroll", hide, { passive: true, capture: true });
   window.addEventListener("blur", hide);
+  // Android Back and screen changes take the peek's target away (#322).
+  window.addEventListener("popstate", hide);
 
   window.__batnaHover = {
     // exact: { term: [text, approved] } for abbreviations and drugs;

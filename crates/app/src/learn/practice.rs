@@ -13,6 +13,14 @@ use crate::i18n::learn as tx;
 use crate::study::{ItemView, PLAYABLE, use_store};
 
 /// Every item by id, with its lecture.
+fn try_context() -> Option<Tries> {
+    try_consume_context::<Tries>()
+}
+
+fn try_context_step() -> usize {
+    try_consume_context::<super::steps::StepAt>().map_or(0, |s| s.0)
+}
+
 pub fn find(id: &str) -> Option<(&'static Lecture, &'static Item)> {
     static MAP: Derived<HashMap<&'static str, (&'static Lecture, &'static Item)>> = Derived::new();
     MAP.get(|lib| {
@@ -20,6 +28,21 @@ pub fn find(id: &str) -> Option<(&'static Lecture, &'static Item)> {
     })
     .get(id)
     .copied()
+}
+
+/// A Try step part-way through: the cards graded so far and how many were
+/// "Again". Kept in the lesson's saved position (player.rs).
+#[derive(Debug, Clone, Default, PartialEq, serde::Serialize, serde::Deserialize)]
+pub struct TryLog {
+    pub graded: Vec<String>,
+    pub again: u32,
+}
+
+/// The player's Try logs, one per step, and a way to save them.
+#[derive(Clone, Copy)]
+pub struct Tries {
+    pub log: Signal<Vec<TryLog>>,
+    pub save: Callback<()>,
 }
 
 #[component]
@@ -38,14 +61,23 @@ pub fn TryItems(items: Vec<String>, on_answer: EventHandler<bool>) -> Element {
             .collect()
     });
     let n = playable.len();
+    // Cards graded before he left the lesson mid-step stay graded.
+    let tries = try_context();
+    let k = try_context_step();
+    // Taken once, like the list: later grades go to the log, not to this.
+    let before =
+        use_hook(|| tries.map(|t| t.log.peek().get(k).cloned().unwrap_or_default()).unwrap_or_default());
+    let n_before = playable.iter().filter(|id| before.graded.contains(id)).count();
+    let playable: Vec<String> = playable.into_iter().filter(|id| !before.graded.contains(id)).collect();
     let mut at = use_signal(|| 0usize);
-    let mut again = use_signal(|| 0usize);
+    let mut again = use_signal(|| before.again as usize);
     let mut started = use_signal(std::time::Instant::now);
     let mut reported = use_signal(|| false);
     use_effect(move || {
-        if n == 0 && !reported() {
+        // Nothing playable, or every card graded before he left mid-step.
+        if n == n_before && !reported() {
             reported.set(true);
-            on_answer.call(true);
+            on_answer.call(again() == 0);
         }
     });
 
@@ -71,17 +103,24 @@ pub fn TryItems(items: Vec<String>, on_answer: EventHandler<bool>) -> Element {
                 if grade == Grade::Again {
                     *again.write() += 1;
                 }
+                if let Some(mut t) = tries {
+                    if let Some(log) = t.log.write().get_mut(k) {
+                        log.graded.push(id.clone());
+                        log.again = again() as u32;
+                    }
+                    t.save.call(());
+                }
                 started.set(std::time::Instant::now());
                 let next = at() + 1;
                 at.set(next);
-                if next == n && !reported() {
+                if next + n_before == n && !reported() {
                     reported.set(true);
                     on_answer.call(again() == 0);
                 }
             };
             rsx! {
                 div { key: "{at()}-{item.id}", class: "ls-try-item",
-                    p { class: "muted small", "{tx::TRY_OF} {at() + 1} {tx::OF} {n}" }
+                    p { class: "muted small", "{tx::TRY_OF} {at() + n_before + 1} {tx::OF} {n}" }
                     ItemView {
                         item,
                         lecture_title: lecture.title.clone(),

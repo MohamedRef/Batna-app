@@ -180,7 +180,10 @@ fn App() -> Element {
     // A screen opens at its top, not at the last screen's scroll offset (UX #102).
     use_effect(move || {
         let _ = ui.screen.read();
-        document::eval(r#"document.querySelector("main.content")?.scrollTo(0, 0);"#);
+        // A tapped peek belongs to the screen it was on (#322).
+        document::eval(
+            r#"document.querySelector("main.content")?.scrollTo(0, 0); window.__batnaHover?.hide();"#,
+        );
     });
     rsx! {
         document::Title { "Batna" }

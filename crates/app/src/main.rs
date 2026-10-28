@@ -230,6 +230,9 @@ fn App() -> Element {
             }
             main { class: "content", "data-screen": "{current:?}",
                 update::view::UpdateBanner {}
+                if current == Screen::Today {
+                    update::view::ContentNote {}
+                }
                 // A lecture's page opens over the screen it came from (lecture.rs).
                 // A content update switched in while open draws it all again.
                 for rev in [*content::REV.read()] {

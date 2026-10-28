@@ -21,6 +21,9 @@ pub(super) const UPDATE_CSS: &str = r#"
 .update-banner { flex-direction: row; flex-wrap: wrap; align-items: center; gap: var(--sp-2) var(--sp-3);
   border-inline-start: 4px solid var(--accent); margin-block-end: var(--sp-3); }
 .update-banner .ub-text { flex: 1 1 14rem; min-inline-size: 0; display: grid; gap: var(--sp-1); }
+.content-note { flex-direction: row; flex-wrap: wrap; align-items: center; gap: var(--sp-2) var(--sp-3);
+  border-inline-start: 4px solid var(--accent); margin-block-end: var(--sp-3); padding-block: var(--sp-2); }
+.content-note p { flex: 1 1 12rem; min-inline-size: 0; margin: 0; }
 .update-toggle { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); }
 .update-toggle-text { display: grid; gap: var(--sp-1); }
 "#;
@@ -142,6 +145,12 @@ pub fn UpdatesSection() -> Element {
                 if build > 0 {
                     " · {tx::BUILD} "
                     bdi { dir: "ltr", "{build}" }
+                }
+                // A content-only update on top: the lectures are newer than
+                // the app (#336).
+                if let Some(c) = s.as_ref().and_then(Status::content_ahead) {
+                    " · {tx::CONTENT_FROM} "
+                    bdi { dir: "ltr", "{c}" }
                 }
                 if let Some(c) = commit {
                     " · "
@@ -425,6 +434,49 @@ pub fn UpdateBanner() -> Element {
     }
 }
 
+/// After a content-only update: one quiet line at the top of Today with the
+/// update's first change, instead of the sheet opening by itself. A tap
+/// opens "what's new"; ✕ marks it seen (#336).
+#[component]
+pub fn ContentNote() -> Element {
+    let status = use_update_status();
+    let Some(s) = status.read().clone() else { return rsx! {} };
+    if !s.content_only_news() {
+        return rsx! {};
+    }
+    let first = s
+        .whats_new()
+        .iter()
+        .flat_map(|b| b.changes.iter())
+        .map(|c| if c.text.ar_eg.is_empty() { c.text.en.clone() } else { c.text.ar_eg.clone() })
+        .next();
+    let sheet = try_use_context::<UpdateSheetNav>();
+    rsx! {
+        style { {UPDATE_CSS} }
+        section { class: "card content-note", role: "status",
+            p {
+                strong { {tx::CONTENT_NOTE} }
+                if let Some(f) = first {
+                    ": {f}"
+                }
+            }
+            if let Some(sheet) = sheet {
+                button { class: "btn btn-secondary", onclick: move |_| sheet.open(SheetMode::Updated), {tx::WHATS_NEW_ASK} }
+            }
+            button {
+                class: "icon-button",
+                aria_label: "{tx::CLOSE}",
+                onclick: move |_| {
+                    if let Some(u) = super::get() {
+                        u.close_whats_new();
+                    }
+                },
+                span { aria_hidden: "true", "✕" }
+            }
+        }
+    }
+}
+
 /// Follows a tap on the "new version" notification (Android): the "what's
 /// new" sheet opens, and the notification's button starts the download or
 /// the install. Mounted once in the shell.
@@ -486,19 +538,26 @@ fn overlay_open() -> bool {
 /// screens are drawn again. Mounted once in the shell.
 pub fn use_content_switch(ui: Ui) {
     let status = use_update_status();
-    use_future(move || async move {
-        if super::get().is_none() {
-            return;
-        }
-        loop {
-            tokio::time::sleep(std::time::Duration::from_secs(2)).await;
-            let waiting = status.peek().as_ref().is_some_and(|s| s.content_waiting);
-            if waiting
-                && calm(*ui.screen.peek())
-                && !overlay_open()
-                && super::get().is_some_and(|u| u.apply_content())
-            {
-                *crate::content::REV.write() += 1;
+    let review = try_use_context::<crate::store::Review>();
+    use_future(move || {
+        let review = review.clone();
+        async move {
+            if super::get().is_none() {
+                return;
+            }
+            loop {
+                tokio::time::sleep(std::time::Duration::from_secs(2)).await;
+                let waiting = status.peek().as_ref().is_some_and(|s| s.content_waiting);
+                if waiting
+                    && calm(*ui.screen.peek())
+                    && !overlay_open()
+                    && super::get().is_some_and(|u| u.apply_content())
+                {
+                    if let Some(r) = &review {
+                        r.backend.borrow_mut().library_replaced();
+                    }
+                    *crate::content::REV.write() += 1;
+                }
             }
         }
     });

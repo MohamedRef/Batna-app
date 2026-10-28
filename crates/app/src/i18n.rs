@@ -1024,6 +1024,10 @@ pub mod update {
     pub const TITLE: &str = "التحديثات";
     pub const THIS_BUILD: &str = "النسخة اللي معاك";
     pub const BUILD: &str = "بناء";
+    /// After the build: the content-only update he is on (#336).
+    pub const CONTENT_FROM: &str = "المحتوى من";
+    /// "بناء 40 · محتوى 45" in the "what's new" sheet.
+    pub const CONTENT_SHORT: &str = "محتوى";
 
     // Why updates are off here.
     pub const OFF_DEV: &str =
@@ -1123,6 +1127,11 @@ pub mod update {
     pub const HISTORY_EMPTY: &str = "لسه مفيش تغييرات متسجّلة. هتظهر هنا مع أول تحديث.";
     pub const UPDATED_TITLE: &str = "باطنة اتحدّثت";
     pub const UPDATED_SUB: &str = "ده اللي اتغيّر من آخر مرة فتحتها.";
+    /// A content-only update: the app itself didn't change (#336).
+    pub const CONTENT_UPDATED_TITLE: &str = "تحديث محتوى";
+    pub const CONTENT_UPDATED_SUB: &str = "الدروس والأسئلة اتحدّثت من غير ما تثبّت حاجة. ده اللي اتغيّر.";
+    /// The quiet card on Today after a content-only update.
+    pub const CONTENT_NOTE: &str = "الدروس اتحدّثت";
     pub const KIND_NEW: &str = "جديد";
     pub const KIND_IMPROVED: &str = "اتحسّن";
     pub const KIND_FIXED: &str = "اتصلّح";

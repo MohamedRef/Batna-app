@@ -116,6 +116,15 @@ impl ReviewBackend {
         self.replay();
     }
 
+    /// A content update switched the library while Batna is open: the
+    /// catalog follows it, so a verdict is stored with the item as he sees
+    /// it now (its fingerprint), and new items count on Today.
+    pub fn library_replaced(&mut self) {
+        self.catalog = catalog(Library::get());
+        self.reload();
+        self.changed();
+    }
+
     /// Puts his own cards in the catalog (and publishes the deck for the
     /// study player), replacing the previous set.
     fn refresh_own(&mut self) {
@@ -526,6 +535,24 @@ mod tests {
         b.delete_own("own.t1").unwrap();
         assert!(b.entry("own.t1").is_none());
         assert_eq!(b.catalog.len(), before);
+    }
+
+    #[test]
+    fn a_content_switch_rebuilds_the_catalog_and_keeps_his_cards() {
+        let mut b = backend();
+        let card = batna_core::own::OwnCard {
+            id: "own.t2".into(),
+            front: "R factor?".into(),
+            back: "(ALT/ULN) / (ALP/ULN)".into(),
+            lecture: None,
+            page: None,
+            source: None,
+            created_ms: T0,
+        };
+        b.save_own(&card).unwrap();
+        b.library_replaced();
+        assert_eq!(b.catalog.len(), catalog(Library::get()).len() + 1);
+        assert!(b.entry("own.t2").is_some());
     }
 
     #[test]

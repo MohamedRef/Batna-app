@@ -380,6 +380,18 @@ impl Status {
         self.build.max(self.content_build)
     }
 
+    /// The "what's new" to tell is only content-only updates: a quiet card
+    /// on Today says so instead of the sheet opening by itself (#336).
+    pub fn content_only_news(&self) -> bool {
+        let news = self.whats_new();
+        !news.is_empty() && news.iter().all(|b| b.content_only)
+    }
+
+    /// The content-only update on top of this build, when there is one.
+    pub fn content_ahead(&self) -> Option<u64> {
+        (self.content_build > self.build).then_some(self.content_build)
+    }
+
     /// `version+build` of [`Self::current`], the key "What's new" counts from.
     fn current_key(&self) -> String {
         format!("{}+{}", self.version, self.shown_build())
@@ -863,6 +875,12 @@ impl Updater {
             check_download(&asset, bytes.len() as u64, &sha256_hex(&bytes)).map_err(|e| e.to_string())?;
             Pack::decode(&bytes).map_err(|e| e.to_string())?;
             fs::create_dir_all(&self.dir).map_err(|e| e.to_string())?;
+            // The old pack's record goes first: stopped half-way, Batna finds
+            // no record and uses its built-in pack, never a mismatched pair.
+            match fs::remove_file(self.dir.join(PACK_INFO)) {
+                Err(e) if e.kind() != std::io::ErrorKind::NotFound => return Err(e.to_string()),
+                _ => {}
+            }
             let tmp = self.dir.join(format!("{PACK_FILE}.part"));
             fs::write(&tmp, &bytes).map_err(|e| e.to_string())?;
             fs::rename(&tmp, self.dir.join(PACK_FILE)).map_err(|e| e.to_string())?;
@@ -1714,7 +1732,12 @@ mod tests {
         assert_eq!((s.content_build, s.shown_build()), (45, 45));
         assert_eq!(s.whats_new().len(), 1, "what came opens once");
         assert!(s.whats_new()[0].content_only);
+        // A quiet note on Today, not the sheet; the app build stays 40 and
+        // the content is named apart (#336).
+        assert!(s.content_only_news());
+        assert_eq!((s.build, s.content_ahead()), (40, Some(45)));
         u.close_whats_new();
+        assert!(!u.status().content_only_news());
 
         // At the next start the pack is still in use: nothing new to say.
         let again = updater_in(data.path(), &url, info);

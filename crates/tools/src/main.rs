@@ -16,6 +16,8 @@ use batna_core::content::{Index, Lecture, SCHEMA};
 use batna_core::validate::{self, Context};
 
 mod anki;
+mod changes;
+mod lessons;
 mod packs;
 mod update;
 mod verdicts;
@@ -140,7 +142,7 @@ pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
     }
     // Lecture files that the index doesn't list.
     if let Ok(dirs) = std::fs::read_dir(&content) {
-        for dir in dirs.flatten().filter(|d| d.path().is_dir()) {
+        for dir in dirs.flatten().filter(|d| d.path().is_dir() && d.file_name() != "lessons") {
             let chapter = dir.file_name().to_string_lossy().to_string();
             for f in std::fs::read_dir(dir.path()).into_iter().flatten().flatten() {
                 let name = f.file_name().to_string_lossy().to_string();
@@ -167,9 +169,11 @@ pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
             Err(e) => problems.push(e),
         }
     }
+    // Lessons (docs/LESSONS.md).
+    let (_, lessons) = lessons::validate_all(root, &approved, &mut problems);
     if problems.is_empty() {
         Ok(format!(
-            "content OK: {files} of {} lectures written, {items} items, {terms} glossary terms",
+            "content OK: {files} of {} lectures written, {items} items, {lessons} lessons, {terms} glossary terms",
             index.lectures.len()
         ))
     } else {

@@ -58,10 +58,10 @@ pub fn ItemView(
                 {render(&item, on_grade)}
             }
             footer { class: "st-item-foot",
+                crate::learn::ExplainLink { item_id: item.id.clone() }
                 // His own cards may have no page.
                 if item.src.page > 0 {
                     crate::hover::BookPage {
-                        label: tx::BOOK_PAGE,
                         page: item.src.page,
                         quote: if revealed() { item.src.quote.clone() } else { None },
                     }

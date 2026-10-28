@@ -197,17 +197,7 @@ pub fn lecture_title(lecture: &str) -> String {
 /// The index's shorter title (`Hepatitis C virus`, not the chapter's full
 /// heading), for chips on a phone; falls back to the lecture's own title.
 pub fn short_lecture_title(lecture: &str) -> String {
-    Library::get()
-        .index
-        .lectures
-        .iter()
-        .find(|e| e.id == lecture)
-        .map_or_else(|| lecture_title(lecture), |e| e.title.clone())
-}
-
-/// `hb.L09` → `9`.
-pub fn lecture_number(lecture: &str) -> &str {
-    lecture.rsplit('.').next().unwrap_or(lecture).trim_start_matches('L').trim_start_matches('0')
+    Library::get().title(lecture).to_string()
 }
 
 /// Every finished paper on any device, oldest first.
@@ -233,7 +223,14 @@ pub fn start(mode: Mode, questions: Vec<Question>) {
     }
     if !questions.is_empty() {
         *PHASE.write() = Phase::Running(Paper::new(mode, questions));
+        to_top();
     }
+}
+
+/// A new bank view (paper, result, setup) opens at its top, not at the
+/// scroll offset of the long setup or result page before it.
+fn to_top() {
+    document::eval(r#"document.querySelector("main.content")?.scrollTo(0, 0);"#);
 }
 
 /// Pick an option. Tutor mode locks the first pick and sends it to review
@@ -304,6 +301,7 @@ pub fn finish() {
     };
     let outcome = close(paper.clone(), now);
     *PHASE.write() = Phase::Done { paper, outcome };
+    to_top();
 }
 
 /// Score a paper; for timed ones, record the answers and save the result.
@@ -340,6 +338,8 @@ pub fn leave() {
         *PAUSED.write() = Some(p.clone());
     }
     *phase = Phase::Setup;
+    drop(phase);
+    to_top();
 }
 
 /// Back to the paper he left. Its clock kept running; past the limit it is
@@ -350,6 +350,7 @@ pub fn resume() {
     p.shown_ms = now;
     let overdue = p.overdue(now);
     *PHASE.write() = Phase::Running(p);
+    to_top();
     if overdue {
         finish();
     }
@@ -365,6 +366,7 @@ pub fn submit_paused() {
 
 pub fn back_to_setup() {
     *PHASE.write() = Phase::Setup;
+    to_top();
 }
 
 pub fn minutes(ms: u64) -> u64 {
@@ -396,8 +398,6 @@ mod tests {
         assert_eq!(date(1_793_059_200_000), "2026-10-27");
         assert_eq!(minutes(48 * 60_000), 48);
         assert_eq!(minutes(1), 1);
-        assert_eq!(lecture_number("hb.L09"), "9");
-        assert_eq!(lecture_number("hb.L20"), "20");
     }
 
     fn outcome(at_ms: i64, right: u32) -> Outcome {
@@ -408,6 +408,15 @@ mod tests {
     fn papers_from_the_legacy_list_and_per_paper_keys_merge_once() {
         let merged = merge_papers(vec![outcome(30, 1), outcome(10, 2), outcome(30, 1), outcome(20, 3)]);
         assert_eq!(merged.iter().map(|o| o.at_ms).collect::<Vec<_>>(), vec![10, 20, 30]);
+    }
+
+    #[test]
+    fn question_counts_read_naturally() {
+        use crate::i18n::bank::questions;
+        assert_eq!(questions(1), "سؤال واحد");
+        assert_eq!(questions(2), "سؤالين");
+        assert_eq!(questions(7), "7 أسئلة");
+        assert_eq!(questions(34), "34 سؤال");
     }
 
     #[test]

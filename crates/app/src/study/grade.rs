@@ -72,15 +72,17 @@ pub fn grade_label(g: Grade) -> &'static str {
     }
 }
 
-/// "١٠ د", "٣ ي", "٢ ش": short enough to sit under the button.
+/// "10 دقايق", "5 ساعات", "يومين", "3 شهور": when this grade brings it back.
 fn interval_label(days: f32) -> String {
+    use crate::i18n::count::{DAY, HOUR, MINUTE, MONTH, count};
+    let n = |x: f32| x.round().max(1.0) as u64;
     if days < 1.0 / 24.0 {
-        format!("{} {}", (days * 24.0 * 60.0).round().max(1.0), tx::UNIT_MIN)
+        count(n(days * 24.0 * 60.0), &MINUTE)
     } else if days < 1.0 {
-        format!("{} {}", (days * 24.0).round(), tx::UNIT_HOUR)
+        count(n(days * 24.0), &HOUR)
     } else if days < 60.0 {
-        format!("{} {}", days.round(), tx::UNIT_DAY)
+        count(n(days), &DAY)
     } else {
-        format!("{} {}", (days / 30.0).round(), tx::UNIT_MONTH)
+        count(n(days / 30.0), &MONTH)
     }
 }

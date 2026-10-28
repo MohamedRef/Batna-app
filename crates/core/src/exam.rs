@@ -129,12 +129,7 @@ pub struct Question {
 
 impl Question {
     fn new(q: &Mcq, rng: &mut Rng) -> Self {
-        let mut order: Vec<usize> = (0..q.options.len()).collect();
-        if let Some(sorted) = numeric_order(q.options) {
-            order = sorted;
-        } else if shufflable(q.options) {
-            rng.shuffle(&mut order);
-        }
+        let order = option_order(q.options, rng);
         Self {
             id: q.id.to_string(),
             lecture: q.lecture.to_string(),
@@ -143,6 +138,20 @@ impl Question {
             order,
         }
     }
+}
+
+/// The order to show `options` in: `order[shown] = original index`.
+/// Numeric options go smallest first, options that point at other options
+/// keep the book's order, and the rest are shuffled. The Anki export uses it
+/// too, seeded per note.
+pub fn option_order(options: &[String], rng: &mut Rng) -> Vec<usize> {
+    let mut order: Vec<usize> = (0..options.len()).collect();
+    if let Some(sorted) = numeric_order(options) {
+        order = sorted;
+    } else if shufflable(options) {
+        rng.shuffle(&mut order);
+    }
+    order
 }
 
 /// Options that all start with a number ("250/mm³", "< 1.1 g/dL") read best
@@ -155,6 +164,12 @@ fn numeric_order(options: &[String]) -> Option<Vec<usize>> {
 }
 
 fn leading_number(o: &str) -> Option<f64> {
+    let o = o.trim_start();
+    // "Above 10 ng/ml", "Less than 2": the comparison word goes like `>`.
+    let o = ["above ", "below ", "over ", "under ", "more than ", "less than "]
+        .iter()
+        .find_map(|w| o.get(..w.len()).filter(|p| p.eq_ignore_ascii_case(w)).map(|_| &o[w.len()..]))
+        .unwrap_or(o);
     let o = o.trim_start_matches(|c: char| c.is_whitespace() || "<>≤≥=~".contains(c));
     let end = o.find(|c: char| !(c.is_ascii_digit() || c == '.' || c == ',')).unwrap_or(o.len());
     o[..end].replace(',', "").parse().ok()
@@ -164,8 +179,10 @@ fn leading_number(o: &str) -> Option<f64> {
 /// only make sense in the book's order.
 pub fn shufflable(options: &[String]) -> bool {
     !options.iter().any(|o| {
-        let o = o.to_ascii_lowercase();
+        let o = o.trim().to_ascii_lowercase();
         o.contains("of the above")
+            || o.contains("of these")
+            || matches!(o.as_str(), "both" | "neither" | "none")
             || o.starts_with("both ")
             || o.starts_with("neither ")
             || refers_by_letter(&o)
@@ -563,6 +580,10 @@ mod tests {
         assert!(!shufflable(&s(&["a", "b", "c", "All of the above"])));
         assert!(!shufflable(&s(&["a", "b", "Both a and b", "d"])));
         assert!(!shufflable(&s(&["x", "y", "z", "A and C"])));
+        assert!(!shufflable(&s(&["x", "y", "z", "All of these"])));
+        assert!(!shufflable(&s(&["Hepatitis B", "Hepatitis C", "Both", "Neither"])));
+        assert!(!shufflable(&s(&["x", "y", "None"])));
+        assert!(shufflable(&s(&["None while compensated", "x", "y"])));
         assert!(shufflable(&s(&["Vitamin A and D deficiency", "x", "y", "z"])));
     }
 
@@ -575,6 +596,10 @@ mod tests {
         );
         assert_eq!(numeric_order(&s(&["1.1 g/dL", "0.5 g/dL"])), Some(vec![1, 0]));
         assert_eq!(numeric_order(&s(&["Class A", "5"])), None);
+        assert_eq!(
+            numeric_order(&s(&["Above 20 ng/ml", "above 10 ng/ml", "Less than 5"])),
+            Some(vec![2, 1, 0])
+        );
     }
 
     #[test]

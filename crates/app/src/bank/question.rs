@@ -6,7 +6,8 @@ use batna_core::exam::Question;
 use batna_core::review::verify::Check;
 use dioxus::prelude::*;
 
-use super::{lecture_number, lookup, topic_title};
+use super::{lookup, short_lecture_title, topic_title};
+use crate::content::lecture_code;
 use crate::i18n::bank as tx;
 use crate::store::use_review;
 
@@ -43,7 +44,7 @@ pub fn QuestionView(
     let primary = rsx! {
         article { class: "q card",
             div { class: "q-meta",
-                span { class: "chip", bdi { "L{lecture_number(&lecture.lecture)} · {lecture.title}" } }
+                span { class: "chip", bdi { "{lecture_code(&lecture.lecture)} · {short_lecture_title(&lecture.lecture)}" } }
                 if let Some(t) = topic {
                     span { class: "chip", bdi { "{t}" } }
                 }
@@ -98,7 +99,7 @@ pub fn QuestionView(
                 }
             }
             div { class: "q-foot",
-                crate::hover::BookPage { label: tx::BOOK_PAGE, page: item.src.page, quote }
+                crate::hover::BookPage { page: item.src.page, quote }
             }
             Report { item_id: q.id.clone() }
             if let Some(u) = &item.update {

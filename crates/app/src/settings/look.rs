@@ -67,7 +67,7 @@ pub fn LookSection() -> Element {
         }
         section { class: "card",
             h2 { {tx::TEXT_SIZE} DeviceOnly {} }
-            div { class: "segmented", style: "grid-template-columns: repeat(5, 1fr)", role: "radiogroup", aria_label: tx::TEXT_SIZE,
+            div { class: "segmented", role: "radiogroup", aria_label: tx::TEXT_SIZE,
                 for s in TextSize::ALL {
                     button {
                         key: "{s.as_str()}",

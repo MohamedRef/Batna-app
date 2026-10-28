@@ -289,6 +289,23 @@ impl Store {
         .and_then(|v| serde_json::from_str(&v).ok())
     }
 
+    /// Every synced setting whose key starts with `prefix`, in key order.
+    /// For records that are one key each, so two devices never overwrite
+    /// each other (the bank's finished papers).
+    pub fn settings_with_prefix<T: DeserializeOwned>(&self, prefix: &str) -> Vec<(String, T)> {
+        let conn = self.conn.lock().unwrap();
+        let Ok(mut stmt) = conn.prepare(
+            "SELECT key, value FROM settings WHERE substr(key, 1, length(?1)) = ?1 AND deleted = 0 ORDER BY key",
+        ) else {
+            return Vec::new();
+        };
+        let rows = stmt.query_map([prefix], |r| Ok((r.get::<_, String>(0)?, r.get::<_, String>(1)?)));
+        rows.map(|rows| {
+            rows.flatten().filter_map(|(k, v)| Some((k, serde_json::from_str(&v).ok()?))).collect()
+        })
+        .unwrap_or_default()
+    }
+
     pub fn put_setting<T: Serialize>(&self, key: &str, value: &T) -> Result<()> {
         let hlc = self.tick(now_ms());
         self.put_lww("settings", "key", key, None, &serde_json::to_string(value)?, false, &hlc)
@@ -455,6 +472,17 @@ mod tests {
 
     fn judgement(verdict: Verdict) -> Judgement {
         Judgement { verdict, edit: Edit::new(), note: None, fingerprint: "f".into(), at_ms: 1 }
+    }
+
+    #[test]
+    fn settings_by_prefix() {
+        let s = Store::open_in_memory().unwrap();
+        s.put_setting("bank.paper.a.1", &1).unwrap();
+        s.put_setting("bank.paper.b.2", &2).unwrap();
+        s.put_setting("bank.papers", &vec![9]).unwrap();
+        s.put_setting("other", &3).unwrap();
+        let got: Vec<(String, i32)> = s.settings_with_prefix("bank.paper.");
+        assert_eq!(got, vec![("bank.paper.a.1".into(), 1), ("bank.paper.b.2".into(), 2)]);
     }
 
     #[test]

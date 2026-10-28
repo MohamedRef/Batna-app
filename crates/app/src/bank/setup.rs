@@ -7,7 +7,8 @@ use batna_core::exam::{self, Filter, MOCK_SIZE, Mode, Only};
 use dioxus::prelude::*;
 
 use super::{
-    HISTORY, date, lecture_number, lecture_title, minutes, now_ms, start, study_lectures, topic_title,
+    HISTORY, PAUSED, date, lecture_number, lecture_title, minutes, now_ms, resume, start, study_lectures,
+    submit_paused, topic_title,
 };
 use crate::content::Library;
 use crate::i18n::bank as tx;
@@ -94,6 +95,7 @@ pub fn Setup() -> Element {
     let mock_shown = mock_count.min(lectures.iter().map(|l| l.1).sum());
 
     rsx! {
+        Paused {}
         section { class: "card",
             h1 { {tx::TITLE} }
             p { class: "muted", {tx::LEAD} }
@@ -257,6 +259,34 @@ fn History() -> Element {
                         bdi { class: "pct", "{o.total.percent()}%" }
                     }
                 }
+            }
+        }
+    }
+}
+
+/// A timed paper he left part-way: go back to it, or submit it as it is.
+#[component]
+fn Paused() -> Element {
+    let Some(p) = PAUSED.read().clone() else {
+        return rsx! {};
+    };
+    let n = p.questions.len();
+    let answered = p.answers.iter().filter(|a| a.chosen.is_some()).count();
+    let left = exam::remaining_ms(n, p.started_ms, now_ms());
+    rsx! {
+        section { class: "card paused",
+            h2 { {tx::PAUSED_TITLE} }
+            p { class: "muted small",
+                "{tx::PAUSED_BODY} " bdi { "{answered}/{n}" }
+                if left > 0 {
+                    " {tx::PAUSED_LEFT} " bdi { "{minutes(left)}" } " {tx::MINUTES}"
+                } else {
+                    " · {tx::PAUSED_OVER}"
+                }
+            }
+            div { class: "start-row",
+                button { class: "button primary", onclick: move |_| resume(), {tx::RESUME} }
+                button { class: "button", onclick: move |_| submit_paused(), {tx::SUBMIT_NOW} }
             }
         }
     }

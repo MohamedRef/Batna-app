@@ -215,6 +215,21 @@ pub mod soon {
     pub const BODY: &str = "هتظهر هنا أول ما تخلص. لحد ما ده يحصل، تقدر تذاكر نفس المحتوى من Anki.";
 }
 
+pub mod anki {
+    pub const TITLE: &str = "ذاكر في Anki";
+    pub const BODY: &str =
+        "زرار واحد بيعمل ملف Anki فيه كل المحاضرات، كل محاضرة في ديك لوحدها، ويفتحه في AnkiDroid علطول.";
+    pub const LECTURES: &str = "محاضرة";
+    pub const ITEMS: &str = "سؤال وكارت";
+    pub const BUTTON: &str = "صدّر لـ Anki";
+    pub const WORKING: &str = "بجهّز الملف…";
+    pub const DONE: &str = "الملف جاهز";
+    pub const NOTES: &str = "كارت";
+    pub const SAVED_IN: &str = "اتحفظ في";
+    pub const REIMPORT: &str = "لو استوردته قبل كده، الكروت هتتحدّث مكانها ومراجعاتك هتفضل زي ما هي.";
+    pub const FAILED: &str = "معرفتش أكمّل التصدير:";
+}
+
 pub mod bank {
     pub const TITLE: &str = "بنك الأسئلة";
     pub const LEAD: &str = "اختار المحاضرات والمواضيع، وجاوب بالشرح بعد كل سؤال أو بالوقت زي الامتحان.";

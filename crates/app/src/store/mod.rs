@@ -171,6 +171,7 @@ impl Store {
             }
         };
         sync::seed(&conn, &device)?;
+        sync::check_tables(&conn)?;
         let mut clock = HlcClock::new(device);
         // Start past every stamp already stored, whichever device wrote it.
         if let Some(last) = newest_stamp(&conn)? {

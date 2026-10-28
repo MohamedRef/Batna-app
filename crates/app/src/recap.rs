@@ -25,7 +25,7 @@ pub fn day_line(f: DayFacts) -> Option<String> {
     }
     let mut line = tx::answered(f.answered);
     if f.learned > 0 {
-        line += "، ";
+        line += tx::COMMA;
         line += &tx::learned(f.learned);
     }
     line += ". ";
@@ -115,7 +115,7 @@ pub fn TodayRecap(due_left: usize, due_tomorrow: u32) -> Element {
                         li { "{tx::WEEK_RETENTION} {p}%" }
                     }
                     if !week.weak.is_empty() {
-                        li { "{tx::WEEK_WEAK} " bdi { {week.weak.join("، ")} } }
+                        li { "{tx::WEEK_WEAK} " bdi { {week.weak.join(tx::COMMA)} } }
                     }
                     if let Some(d) = week.days_to_exam {
                         li { {tx::exam_in(d)} }

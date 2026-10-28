@@ -246,6 +246,17 @@ pub mod bank {
     pub const CONFIRM_BACK_TO: &str = "ارجع للسؤال";
     pub const CONFIRM_BACK: &str = "ارجع للامتحان";
     pub const CONFIRM_SUBMIT: &str = "سلّم كده";
+
+    /// A question count the Egyptian way: سؤال واحد, سؤالين, 3–10 أسئلة,
+    /// 11 and up سؤال.
+    pub fn questions(n: usize) -> String {
+        match n {
+            1 => "سؤال واحد".into(),
+            2 => "سؤالين".into(),
+            3..=10 => format!("{n} أسئلة"),
+            _ => format!("{n} سؤال"),
+        }
+    }
 }
 
 pub mod stats {

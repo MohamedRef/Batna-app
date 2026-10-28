@@ -48,6 +48,19 @@ html, body { margin: 0; height: 100%; background: var(--bg); }
 bdi { font-family: var(--font-latin); }
 button { font: inherit; color: inherit; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* Checkboxes drawn from the theme: native boxes stay white in Night on some
+   engines (WKWebView), whatever color-scheme says. --check sets the fill. */
+input[type="checkbox"] {
+  appearance: none; -webkit-appearance: none; margin: 0; flex: none;
+  inline-size: 1.25rem; block-size: 1.25rem; display: inline-grid; place-content: center;
+  border: 2px solid var(--muted); border-radius: 5px; background: var(--surface); cursor: pointer;
+}
+input[type="checkbox"]:checked { background: var(--check, var(--accent)); border-color: var(--check, var(--accent)); }
+input[type="checkbox"]:checked::after {
+  content: ""; inline-size: 0.35em; block-size: 0.65em; margin-block-start: -0.15em;
+  border: solid var(--surface); border-width: 0 2px 2px 0; transform: rotate(45deg);
+}
+input[type="checkbox"]:disabled { opacity: 0.5; cursor: default; }
 
 /* ---------- top bar ---------- */
 .topbar {

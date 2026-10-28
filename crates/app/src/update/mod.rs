@@ -70,6 +70,15 @@ const MAX_PACK_BYTES: u64 = 64 * 1024 * 1024;
 
 const PACK_FILE: &str = "content.pack";
 const PACK_INFO: &str = "content.json";
+/// The sha256 of the last pack that failed its checks, so the same file
+/// isn't downloaded again (#344).
+const PACK_REJECTED: &str = "content.rejected";
+/// How many times a pack was opened without Batna running calmly after it
+/// (the crash-loop guard, #344).
+const PACK_STARTS: &str = "content.starts";
+/// Opens in a row that never got a couple of seconds past the first screen
+/// before the pack is dropped.
+const MAX_PACK_STARTS: u8 = 3;
 
 /// What Mohamed chose in Settings › Updates.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
@@ -111,13 +120,20 @@ pub struct Prefs {
     /// The last notification sent (`version+build:stage`), so each goes out once.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub notified: Option<String>,
-    /// The build (`version+build`) that ran last, to notice an update.
+    /// The app build (`version+build`) that ran last, to notice an update.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub last_run: Option<String>,
     /// Set at the first launch after an update to the build that ran
     /// before: "What's new" opens once for what came since, then clears it.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub whats_new_from: Option<String>,
+    /// The content-only update (`version+build` of its feed) in use, kept
+    /// apart from the app build so neither hides the other's notes (#348).
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub last_content: Option<String>,
+    /// Where the content-only notes count from, until seen.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub content_from: Option<String>,
 }
 
 fn yes() -> bool {
@@ -136,6 +152,8 @@ impl Default for Prefs {
             notified: None,
             last_run: None,
             whats_new_from: None,
+            last_content: None,
+            content_from: None,
         }
     }
 }
@@ -392,22 +410,44 @@ impl Status {
         (self.content_build > self.build).then_some(self.content_build)
     }
 
-    /// `version+build` of [`Self::current`], the key "What's new" counts from.
-    fn current_key(&self) -> String {
-        format!("{}+{}", self.version, self.shown_build())
+    /// `version+build` of the app build he runs.
+    fn app_key(&self) -> String {
+        format!("{}+{}", self.version, self.build)
     }
 
-    /// "What's new" to open by itself after an update: the builds after the
-    /// one that ran before, up to this one. Empty once seen.
+    /// `version+build` of the content-only update in use, if any.
+    fn content_key(&self) -> Option<String> {
+        (self.content_build > 0).then(|| format!("{}+{}", self.version, self.content_build))
+    }
+
+    /// "What's new" to open by itself after an update, newest first: the
+    /// app builds after the one that ran before, up to the one running, and
+    /// the content-only updates after the content seen last, up to the one
+    /// in use. App and content count apart, so a content update that is
+    /// ahead never tells an app build he hasn't installed, nor swallows its
+    /// notes once he does (#348). Empty once seen.
     pub fn whats_new(&self) -> Vec<BuildChanges> {
-        let (Some(from), Some(to)) = (self.prefs.whats_new_from.as_deref(), self.current()) else {
-            return Vec::new();
+        let order = |k: &str| k.split_once('+').and_then(|(v, b)| changelog::order(v, b.parse().ok()?));
+        let part = |from: Option<&String>, to: u64, content: bool| -> Vec<&BuildChanges> {
+            let (Some(from), Some(to)) = (from.and_then(|k| order(k)), changelog::order(&self.version, to))
+            else {
+                return Vec::new();
+            };
+            changelog::between(&self.history, Some(from), to)
+                .into_iter()
+                .filter(|b| b.content_only == content)
+                .collect()
         };
-        let from = from.split_once('+').and_then(|(v, b)| changelog::order(v, b.parse().ok()?));
-        if from.is_none() {
-            return Vec::new();
-        }
-        changelog::between(&self.history, from, to).into_iter().cloned().collect()
+        let mut all = part(self.prefs.whats_new_from.as_ref(), self.build, false);
+        all.extend(part(self.prefs.content_from.as_ref(), self.content_build, true));
+        all.sort_by_key(|b| std::cmp::Reverse(changelog::order(&b.version, b.build)));
+        all.dedup_by_key(|b| b.key());
+        all.into_iter().cloned().collect()
+    }
+
+    /// Whether "What's new" has anything waiting to be seen.
+    pub fn news_pending(&self) -> bool {
+        self.prefs.whats_new_from.is_some() || self.prefs.content_from.is_some()
     }
 
     /// The offer the banner should mention, unless closed for it.
@@ -606,13 +646,25 @@ impl Updater {
             None
         });
         let content_build = pack_in_use(&dir, &info).map_or(0, |p| p.build);
-        let this = format!("{}+{}", info.version, info.build.max(content_build));
-        if off.is_none() && prefs.last_run.as_deref() != Some(this.as_str()) {
+        let this = format!("{}+{}", info.version, info.build);
+        let content = (content_build > 0).then(|| format!("{}+{content_build}", info.version));
+        if off.is_none()
+            && (prefs.last_run.as_deref() != Some(this.as_str()) || prefs.last_content != content)
+        {
             // Updated (not a first install): say what's new once.
-            if let Some(prev) = prefs.last_run.take() {
+            if prefs.last_run.as_deref() != Some(this.as_str())
+                && let Some(prev) = prefs.last_run.replace(this.clone())
+            {
                 prefs.whats_new_from = Some(prev);
             }
-            prefs.last_run = Some(this);
+            // A content-only update taken while Batna was closed: its notes
+            // count from the content seen before, else from the app build.
+            if prefs.last_content != content {
+                if content.is_some() {
+                    prefs.content_from = prefs.last_content.clone().or(Some(this.clone()));
+                }
+                prefs.last_content = content;
+            }
             if let Err(e) = save_prefs(&dir, &prefs) {
                 report!("update prefs: {e}");
             }
@@ -868,22 +920,33 @@ impl Updater {
         if asset.size > MAX_PACK_BYTES {
             return report!("content pack: {} bytes is too large", asset.size);
         }
-        let result = (|| -> Result<(), String> {
+        if is_rejected(&self.dir, &asset.sha256) {
+            return;
+        }
+        // Err((true, _)): the file itself is bad, and is remembered so it
+        // isn't fetched again; Err((false, _)): try again next time.
+        let result = (|| -> Result<(), (bool, String)> {
             let url = format!("{}/{}", self.feed_url(), asset.file);
-            let bytes =
-                get_limited(&url, asset.size, Duration::from_secs(10 * 60)).map_err(|f| format!("{f:?}"))?;
-            check_download(&asset, bytes.len() as u64, &sha256_hex(&bytes)).map_err(|e| e.to_string())?;
-            Pack::decode(&bytes).map_err(|e| e.to_string())?;
-            fs::create_dir_all(&self.dir).map_err(|e| e.to_string())?;
+            let bytes = get_limited(&url, asset.size, Duration::from_secs(10 * 60))
+                .map_err(|f| (false, format!("{f:?}")))?;
+            check_download(&asset, bytes.len() as u64, &sha256_hex(&bytes))
+                .map_err(|e| (true, e.to_string()))?;
+            let pack = Pack::decode(&bytes).map_err(|e| (true, e.to_string()))?;
+            if let Some(bad) = crate::look::unsafe_sheet(&pack.look) {
+                return Err((true, format!("stylesheet {bad} isn't allowed")));
+            }
+            let io = |e: std::io::Error| (false, e.to_string());
+            fs::create_dir_all(&self.dir).map_err(io)?;
             // The old pack's record goes first: stopped half-way, Batna finds
             // no record and uses its built-in pack, never a mismatched pair.
             match fs::remove_file(self.dir.join(PACK_INFO)) {
-                Err(e) if e.kind() != std::io::ErrorKind::NotFound => return Err(e.to_string()),
+                Err(e) if e.kind() != std::io::ErrorKind::NotFound => return Err(io(e)),
                 _ => {}
             }
             let tmp = self.dir.join(format!("{PACK_FILE}.part"));
-            fs::write(&tmp, &bytes).map_err(|e| e.to_string())?;
-            fs::rename(&tmp, self.dir.join(PACK_FILE)).map_err(|e| e.to_string())?;
+            fs::write(&tmp, &bytes).map_err(io)?;
+            fs::rename(&tmp, self.dir.join(PACK_FILE)).map_err(io)?;
+            let _ = fs::remove_file(self.dir.join(PACK_STARTS));
             let info = PackInfo {
                 version: m.version.clone(),
                 build: m.build,
@@ -891,11 +954,16 @@ impl Updater {
                 published_at: published_secs(&m.published_at),
                 ui_build: m.ui_build,
             };
-            write_json(&self.dir, PACK_INFO, &info)
+            write_json(&self.dir, PACK_INFO, &info).map_err(|e| (false, e))
         })();
         match result {
             Ok(()) => self.tx.send_modify(|s| s.content_waiting = true),
-            Err(e) => report!("content pack {} not taken: {e}", asset.file),
+            Err((bad, e)) => {
+                if bad {
+                    reject(&self.dir, &asset.sha256);
+                }
+                report!("content pack {} not taken: {e}", asset.file)
+            }
         }
     }
 
@@ -910,15 +978,18 @@ impl Updater {
             self.tx.send_modify(|s| s.history = all);
         }
         let s = self.status();
-        if s.prefs.whats_new_from.is_some() && s.whats_new().is_empty() {
-            self.update_prefs(|p| p.whats_new_from = None);
+        if s.news_pending() && s.whats_new().is_empty() {
+            self.close_whats_new();
         }
     }
 
     /// "What's new" was seen (closed).
     pub fn close_whats_new(&self) {
-        if self.status().prefs.whats_new_from.is_some() {
-            self.update_prefs(|p| p.whats_new_from = None);
+        if self.status().news_pending() {
+            self.update_prefs(|p| {
+                p.whats_new_from = None;
+                p.content_from = None;
+            });
         }
     }
 
@@ -932,16 +1003,17 @@ impl Updater {
         }
         let Some(pack) = pack_in_use(&self.dir, &self.info) else { return false };
         crate::content::Library::reload();
-        let before = self.status().current_key();
+        let s = self.status();
+        let before = s.content_key().unwrap_or_else(|| s.app_key());
         self.tx.send_modify(|s| {
             s.content_waiting = false;
             s.content_build = pack.build.max(s.content_build);
         });
-        let now = self.status().current_key();
-        if now != before {
+        let now = self.status().content_key();
+        if now.as_ref() != Some(&before) {
             self.update_prefs(|p| {
-                p.whats_new_from = Some(before);
-                p.last_run = Some(now);
+                p.content_from = Some(before);
+                p.last_content = now;
             });
         }
         true
@@ -1092,8 +1164,10 @@ impl Updater {
         let Ok(entries) = fs::read_dir(&self.dir) else { return };
         for e in entries.flatten() {
             let name = e.file_name().to_string_lossy().into_owned();
-            if matches!(name.as_str(), "prefs.json" | changelog::FILE | PACK_FILE | PACK_INFO)
-                || Some(name.as_str()) == keep
+            if matches!(
+                name.as_str(),
+                "prefs.json" | changelog::FILE | PACK_FILE | PACK_INFO | PACK_REJECTED | PACK_STARTS
+            ) || Some(name.as_str()) == keep
             {
                 continue;
             }
@@ -1225,25 +1299,56 @@ fn installed_pack_in(dir: &Path, info: &BuildInfo) -> Option<Pack> {
         let _ = fs::remove_file(dir.join(PACK_INFO));
         return None;
     };
+    let drop = |why: &str| {
+        report!("content pack {why}; using the built-in one");
+        reject(dir, &meta.sha256);
+        let _ = fs::remove_file(dir.join(PACK_FILE));
+        let _ = fs::remove_file(dir.join(PACK_INFO));
+        let _ = fs::remove_file(dir.join(PACK_STARTS));
+        None
+    };
+    // Opened before without Batna running calmly after it: the pack may be
+    // what stops it, so it goes (#344).
+    let starts =
+        fs::read_to_string(dir.join(PACK_STARTS)).ok().and_then(|s| s.trim().parse::<u8>().ok()).unwrap_or(0);
+    if starts >= MAX_PACK_STARTS {
+        return drop("didn't let Batna start");
+    }
+    let _ = fs::write(dir.join(PACK_STARTS), (starts + 1).to_string());
     let fits = Version::parse(&meta.version) == Some(info.version) && meta.ui_build == Some(info.build);
     let bytes = fs::read(dir.join(PACK_FILE)).ok()?;
     if !sha256_hex(&bytes).eq_ignore_ascii_case(&meta.sha256) {
-        report!("content pack changed on disk; using the built-in one");
-        return None;
+        return drop("changed on disk");
     }
     match Pack::decode(&bytes) {
+        Err(e) => drop(&format!("doesn't open ({e})")),
         Ok(mut p) => {
             // The stylesheets style this build's screens only.
             if !fits {
                 p.look.clear();
+            } else if let Some(bad) = crate::look::unsafe_sheet(&p.look) {
+                return drop(&format!("stylesheet {bad} isn't allowed"));
             }
             Some(p)
         }
-        Err(e) => {
-            report!("content pack doesn't open ({e}); using the built-in one");
-            None
-        }
     }
+}
+
+/// Batna has run calmly for a while on the pack in use: the crash-loop
+/// guard starts counting again.
+pub fn pack_settled() {
+    if let Some(dir) = crate::prefs::data_dir() {
+        let _ = fs::remove_file(dir.join("updates").join(PACK_STARTS));
+    }
+}
+
+fn is_rejected(dir: &Path, sha256: &str) -> bool {
+    fs::read_to_string(dir.join(PACK_REJECTED)).is_ok_and(|s| s.trim().eq_ignore_ascii_case(sha256))
+}
+
+fn reject(dir: &Path, sha256: &str) {
+    let _ = fs::create_dir_all(dir);
+    let _ = fs::write(dir.join(PACK_REJECTED), sha256);
 }
 
 fn update_failure(e: UpdateError) -> Failure {
@@ -1369,6 +1474,33 @@ mod tests {
             preview,
             key: Some(parse_public_key(key).unwrap()),
         }
+    }
+
+    #[test]
+    fn app_and_content_notes_count_apart() {
+        let entry = |build: u64, content_only: bool| BuildChanges {
+            version: "0.1.0".into(),
+            build,
+            published_at: String::new(),
+            changes: vec![batna_core::update::Change {
+                kind: batna_core::update::ChangeKind::New,
+                text: UpdateNotes { en: String::new(), ar_eg: format!("بناء {build}") },
+            }],
+            content_only,
+        };
+        // APK 38 runs content 45; the feed's app is 40 (#348).
+        let mut s = status(Phase::UpToDate, Mode::Auto);
+        s.history = vec![entry(45, true), entry(44, true), entry(40, false), entry(39, false)];
+        (s.build, s.content_build) = (38, 45);
+        s.prefs.content_from = Some("0.1.0+38".into());
+        let keys = |s: &Status| s.whats_new().iter().map(BuildChanges::key).collect::<Vec<_>>();
+        assert_eq!(keys(&s), ["0.1.0+45", "0.1.0+44"], "no notes for an app he hasn't installed");
+        assert!(s.content_only_news());
+        // He installs APK 40 later: its notes open, content seen before stays seen.
+        s.prefs = Prefs { whats_new_from: Some("0.1.0+38".into()), ..Prefs::default() };
+        s.build = 40;
+        assert_eq!(keys(&s), ["0.1.0+40", "0.1.0+39"]);
+        assert!(!s.content_only_news());
     }
 
     #[test]
@@ -1754,6 +1886,9 @@ mod tests {
         u.check(false);
         assert!(!u.status().content_waiting);
         assert!(!data.path().join("updates").join(PACK_FILE).exists());
+        // A bad file is remembered, so it isn't fetched again (#344).
+        let rejected = fs::read_to_string(data.path().join("updates").join(PACK_REJECTED)).unwrap();
+        assert_eq!(rejected.len(), 64);
 
         // A real pack that matches the signed manifest is kept for the next start.
         let look = BTreeMap::from([("assets/main.css".to_owned(), ".x {}".to_owned())]);
@@ -1779,5 +1914,44 @@ mod tests {
         // A later build drops a pack from an older one.
         assert!(installed_pack_in(&dir, &BuildInfo { build: 43, ..info }).is_none());
         assert!(!dir.join(PACK_FILE).exists());
+    }
+
+    #[test]
+    fn a_pack_that_keeps_stopping_batna_goes_and_stays_gone() {
+        let pack = Pack::new(crate::content::Library::get().index.clone(), Vec::new()).encode();
+        let signer = ed25519_dalek::SigningKey::from_bytes(&[7; 32]);
+        let feed = pack_feed(&signer, 42, None, &pack, Vec::new());
+        let url = serve(feed.path().to_path_buf());
+        let info = BuildInfo { key: Some(signer.verifying_key()), ..build("0.1.0", 42, true) };
+        let (u, data) = updater(&url, info.clone());
+        u.check(false);
+        let dir = data.path().join("updates");
+        // Three opens with no calm stretch after them (pack_settled)...
+        for _ in 0..MAX_PACK_STARTS {
+            assert!(installed_pack_in(&dir, &info).is_some());
+        }
+        // ...and the third start uses the built-in content.
+        assert!(installed_pack_in(&dir, &info).is_none());
+        assert!(!dir.join(PACK_FILE).exists());
+        assert!(is_rejected(&dir, &sha256_hex(&pack)));
+        // The feed still names it: it isn't taken again.
+        u.check(false);
+        assert!(!dir.join(PACK_FILE).exists());
+    }
+
+    #[test]
+    fn a_pack_with_a_stylesheet_that_reaches_out_is_refused() {
+        let look =
+            BTreeMap::from([("assets/main.css".to_owned(), "@import 'https://x.example/a.css';".to_owned())]);
+        let pack =
+            Pack::new(crate::content::Library::get().index.clone(), Vec::new()).with_look(look).encode();
+        let signer = ed25519_dalek::SigningKey::from_bytes(&[8; 32]);
+        let feed = pack_feed(&signer, 42, None, &pack, Vec::new());
+        let url = serve(feed.path().to_path_buf());
+        let info = BuildInfo { key: Some(signer.verifying_key()), ..build("0.1.0", 42, true) };
+        let (u, data) = updater(&url, info);
+        u.check(false);
+        assert!(!u.status().content_waiting);
+        assert!(is_rejected(&data.path().join("updates"), &sha256_hex(&pack)));
     }
 }

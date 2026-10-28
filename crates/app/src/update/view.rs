@@ -21,9 +21,10 @@ pub(super) const UPDATE_CSS: &str = r#"
 .update-banner { flex-direction: row; flex-wrap: wrap; align-items: center; gap: var(--sp-2) var(--sp-3);
   border-inline-start: 4px solid var(--accent); margin-block-end: var(--sp-3); }
 .update-banner .ub-text { flex: 1 1 14rem; min-inline-size: 0; display: grid; gap: var(--sp-1); }
-.content-note { flex-direction: row; flex-wrap: wrap; align-items: center; gap: var(--sp-2) var(--sp-3);
+.content-note { flex-direction: row; flex-wrap: nowrap; align-items: center; gap: var(--sp-2);
   border-inline-start: 4px solid var(--accent); margin-block-end: var(--sp-3); padding-block: var(--sp-2); }
-.content-note p { flex: 1 1 12rem; min-inline-size: 0; margin: 0; }
+.content-note p { flex: 1 1 auto; min-inline-size: 0; margin: 0; }
+.content-note .btn, .content-note .icon-button { flex: none; }
 .update-toggle { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); }
 .update-toggle-text { display: grid; gap: var(--sp-1); }
 "#;
@@ -542,11 +543,19 @@ pub fn use_content_switch(ui: Ui) {
     use_future(move || {
         let review = review.clone();
         async move {
-            if super::get().is_none() {
-                return;
-            }
+            // Ticks since the pack in use was opened: once Batna has drawn
+            // its first screen and run a couple of seconds on it, the
+            // crash-loop guard starts counting again (#344).
+            let mut since_open = 0u32;
             loop {
                 tokio::time::sleep(std::time::Duration::from_secs(2)).await;
+                since_open += 1;
+                if since_open == 1 {
+                    super::pack_settled();
+                }
+                if super::get().is_none() {
+                    continue;
+                }
                 let waiting = status.peek().as_ref().is_some_and(|s| s.content_waiting);
                 if waiting
                     && calm(*ui.screen.peek())
@@ -557,6 +566,7 @@ pub fn use_content_switch(ui: Ui) {
                         r.backend.borrow_mut().library_replaced();
                     }
                     *crate::content::REV.write() += 1;
+                    since_open = 0;
                 }
             }
         }

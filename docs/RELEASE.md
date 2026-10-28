@@ -133,7 +133,12 @@ is between sessions (the calm moments a quiet install waits for). The sheet
 doesn't open by itself for it: a quiet card on Today names the first change
 and opens "What's new" (titled "تحديث محتوى") on a tap. Settings and the
 sheet show the app build and the content apart ("بناء 40 · المحتوى من 45").
-Open screens and the review catalog follow the new pack. The glossary is built into the app, so a glossary change is
+Open screens and the review catalog follow the new pack. A pack whose
+file fails its checks, won't decode, or carries a stylesheet that reaches
+outside the app (`@import`, a remote `url(…)`, script) is refused and its
+sha256 remembered, so it isn't fetched again; a pack that is opened three
+times in a row without Batna getting past its first screen goes the same way
+and the built-in content comes back (`crates/app/src/update/mod.rs`). The glossary is built into the app, so a glossary change is
 a full build.
 
 ### Keys

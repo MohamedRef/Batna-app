@@ -34,6 +34,32 @@ pub fn set(look: BTreeMap<String, String>) {
     *FROM_FEED.write().unwrap_or_else(|e| e.into_inner()) = look;
 }
 
+/// Largest stylesheet a pack may carry (the biggest built-in one is a few KB).
+const MAX_SHEET_BYTES: usize = 256 * 1024;
+
+/// The first stylesheet in a pack that could reach outside the app, run
+/// script or break out of its `<style>`, or is far too big: such a pack is
+/// refused whole (#344). Only `data:` and relative `url(…)`s pass.
+pub fn unsafe_sheet(look: &BTreeMap<String, String>) -> Option<&str> {
+    look.iter()
+        .find(|(path, text)| {
+            let lower = text.to_ascii_lowercase();
+            let bad_url = lower.match_indices("url(").any(|(i, _)| {
+                let target = lower[i + 4..].trim_start_matches([' ', '\t', '\n', '"', '\'']);
+                let target = &target[..target.find(')').unwrap_or(target.len())];
+                !target.starts_with("data:") && (target.starts_with("//") || target.contains(':'))
+            });
+            !path.ends_with(".css")
+                || path.contains("..")
+                || text.len() > MAX_SHEET_BYTES
+                || bad_url
+                || ["@import", "javascript:", "expression(", "</style", "-moz-binding"]
+                    .iter()
+                    .any(|p| lower.contains(p))
+        })
+        .map(|(path, _)| path.as_str())
+}
+
 impl Css {
     /// The text in use: the feed's copy when it has one.
     pub fn text(self) -> &'static str {
@@ -45,6 +71,45 @@ impl Css {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn only_harmless_stylesheets_come_from_a_pack() {
+        fn sheets(dir: &std::path::Path, root: &std::path::Path, out: &mut BTreeMap<String, String>) {
+            for e in std::fs::read_dir(dir).unwrap().flatten() {
+                let path = e.path();
+                if path.is_dir() {
+                    sheets(&path, root, out);
+                } else if path.extension().is_some_and(|x| x == "css") {
+                    let key = path.strip_prefix(root).unwrap().to_string_lossy().replace('\\', "/");
+                    out.insert(key, std::fs::read_to_string(&path).unwrap());
+                }
+            }
+        }
+        let root = std::path::Path::new(env!("CARGO_MANIFEST_DIR"));
+        let mut built_in = BTreeMap::new();
+        for d in ["src", "assets"] {
+            sheets(&root.join(d), root, &mut built_in);
+        }
+        assert!(built_in.len() > 5);
+        assert_eq!(unsafe_sheet(&built_in), None, "the app's own sheets pass");
+        let one = |path: &str, text: &str| BTreeMap::from([(path.to_owned(), text.to_owned())]);
+        assert_eq!(
+            unsafe_sheet(&one("assets/a.css", ".x { background: url(\"data:image/svg+xml,<svg/>\") }")),
+            None
+        );
+        assert_eq!(unsafe_sheet(&one("assets/a.css", ".x { background: url(img/a.png) }")), None);
+        for bad in [
+            "@import 'https://x.example/a.css';",
+            ".x { background: url( 'https://x.example/t.png') }",
+            ".x { background: url(//x.example/t.png) }",
+            "</style><script>alert(1)</script>",
+            ".x { width: expression(alert(1)) }",
+        ] {
+            assert_eq!(unsafe_sheet(&one("assets/a.css", bad)), Some("assets/a.css"), "{bad}");
+        }
+        assert!(unsafe_sheet(&one("../a.css", ".x{}")).is_some());
+        assert!(unsafe_sheet(&one("assets/a.css", &"a".repeat(MAX_SHEET_BYTES + 1))).is_some());
+    }
 
     #[test]
     fn the_feed_copy_wins_and_goes_away() {

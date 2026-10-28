@@ -740,6 +740,79 @@ pub mod settings {
     pub const DIAG_COPIED: &str = "اتنسخ";
 }
 
+pub mod update {
+    // Settings › Updates (crates/app/src/update/view.rs).
+    pub const SECTION: &str = "التحديثات";
+    pub const SECTION_SUB: &str = "نسخة جديدة ومحتوى جديد";
+    pub const TITLE: &str = "التحديثات";
+    pub const THIS_BUILD: &str = "النسخة اللي معاك";
+    pub const BUILD: &str = "بناء";
+
+    // Why updates are off here.
+    pub const OFF_DEV: &str =
+        "دي نسخة تطوير، فمش بتدوّر على تحديثات. النسخ اللي على الموبايل والتابلت والماك هي اللي بتتحدّث.";
+    pub const OFF_KEY: &str = "التحديثات لسه مش شغالة: مفتاح التوقيع لسه ما اتعملش. أول نسخة ألفا هتيجي بيه.";
+    pub const OFF_PLATFORM: &str = "مفيش تحديثات منشورة للجهاز ده.";
+    pub const OFF_BUNDLE: &str = "باطنة شغال من فولدر البناء، مش من Batna.app، فمش هيتحدّث لوحده.";
+
+    // Where things stand.
+    pub const CHECKING: &str = "بيدوّر على تحديث…";
+    pub const CHECK_NOW: &str = "دوّر دلوقتي";
+    pub const UP_TO_DATE: &str = "معاك آخر نسخة";
+    pub const NOT_FOR_DEVICE: &str = "فيه نسخة أحدث، بس لسه مش منشورة للجهاز ده.";
+    pub const AVAILABLE: &str = "فيه نسخة جديدة";
+    pub const DOWNLOAD: &str = "نزّلها";
+    pub const DOWNLOADING: &str = "بينزّل";
+    pub const READY: &str = "النسخة الجديدة جاهزة";
+    pub const INSTALL_NOW: &str = "ثبّتها";
+    pub const INSTALL_RESTART: &str = "ثبّتها وافتح تاني";
+    pub const INSTALLING: &str = "بيثبّت…";
+    pub const INSTALLING_ANDROID: &str = "أندرويد ممكن يسألك توافق. مذاكرتك محفوظة ومش هتضيع.";
+    pub const NEEDS_PERMISSION: &str = "أندرويد محتاج إذن \"تثبيت تطبيقات غير معروفة\" لباطنة";
+    pub const OPEN_PERMISSION: &str = "افتح الإذن";
+    pub const TRY_AGAIN: &str = "جرّب تاني";
+    pub const INSTALLED: &str = "اتثبّتت";
+    pub const RESTART_NOW: &str = "افتح باطنة تاني";
+    pub const NEXT_LAUNCH: &str = "النسخة الجديدة هتشتغل أول ما تفتح باطنة تاني.";
+    pub const FAILED_NETWORK: &str = "مقدرش يوصل للتحديثات. هيجرّب تاني بعدين.";
+    pub const FAILED_VERIFY: &str = "التحديث ما عداش من الفحص، فما اتثبّتش. مفيش حاجة اتغيّرت.";
+    pub const FAILED_INSTALL: &str = "التثبيت ما كملش. النسخة اللي معاك شغالة زي ما هي.";
+    pub const TOO_NEW: &str = "التحديث ده محتاج نسخة أحدث من باطنة. ثبّتها بإيدك مرة واحدة.";
+    pub const KEY_CHANGED: &str = "مفتاح نسخ التجربة اتغيّر. ثبّت آخر نسخة تجربة بإيدك مرة واحدة.";
+    pub const WAITING_WIFI: &str = "هينزّلها لوحده أول ما تبقى على واي فاي.";
+    pub const LATER: &str = "بعدين";
+    pub const WHATS_NEW: &str = "الجديد";
+    pub const CONTENT_WAITING: &str = "محتوى جديد نزل، وهيظهر أول ما تفتح باطنة تاني.";
+
+    // Mode and channel.
+    pub const MODE: &str = "إزاي يتحدّث";
+    pub const MODE_AUTO: &str = "لوحده";
+    pub const MODE_AUTO_SUB: &str = "ينزّل على الواي فاي ويثبّت في وقت هادي، عمره ما يقطع مذاكرة.";
+    pub const MODE_NOTIFY: &str = "قولّي الأول";
+    pub const MODE_NOTIFY_SUB: &str = "يقولك إن فيه نسخة جديدة، وإنت تختار امتى.";
+    pub const MODE_OFF: &str = "لأ";
+    pub const MODE_OFF_SUB: &str = "بس لما تدوس \"دوّر دلوقتي\".";
+    pub const CHANNEL: &str = "القناة";
+    pub const CHANNEL_SUB: &str = "ألفا بتوصل الأول، والثابتة بتوصل آخر حاجة.";
+    pub const ALPHA: &str = "ألفا";
+    pub const BETA: &str = "بيتا";
+    pub const STABLE: &str = "ثابتة";
+    pub const PREVIEW: &str = "تجربة";
+    pub const PREVIEW_SUB: &str = "نسخة تجربة من CI: بتتحدّث من نسخ التجربة بس.";
+    pub const SAFETY: &str =
+        "كل تحديث متوقّع بمفتاح باطنة، وكل ملف بيتفحص قبل ما يتثبّت. مذاكرتك بتفضل على الجهاز زي ما هي.";
+    pub const CONTENT: &str = "المحاضرات الجديدة بتيجي مع التحديثات، حتى لو تحديث التطبيق نفسه مقفول.";
+    pub const MB: &str = "ميجا";
+
+    // The notifications Android shows around an install.
+    #[cfg_attr(not(target_os = "android"), allow(dead_code))]
+    pub const DONE_TITLE: &str = "باطنة اتحدّث";
+    #[cfg_attr(not(target_os = "android"), allow(dead_code))]
+    pub const DONE_BODY: &str = "افتحه وكمّل من مكانك.";
+    #[cfg_attr(not(target_os = "android"), allow(dead_code))]
+    pub const READY_TITLE: &str = "تحديث باطنة جاهز: دوس عشان تثبّته";
+}
+
 pub mod sound {
     pub const TITLE: &str = "الأصوات والاهتزاز";
     pub const BODY: &str = "صوت هادي مع الإجابة الصح ونغمة في آخر الجلسة. الإجابة الغلط مالهاش صوت.";

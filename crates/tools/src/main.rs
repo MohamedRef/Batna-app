@@ -5,6 +5,7 @@
 //! batna-tools anki [--lecture hb.L01] [--verdicts FILE] [--out DIR]   Anki deck (docs/ANKI.md)
 //! batna-tools packs build [--out DIR] [--check]   the offline content pack
 //! batna-tools verdicts FILE [--approve]   fix list from the app's ✎/✗ export
+//! batna-tools update <keygen | manifest | sign | verify>   update feeds (docs/RELEASE.md §5)
 //! ```
 
 use std::collections::BTreeSet;
@@ -16,6 +17,7 @@ use batna_core::validate::{self, Context};
 
 mod anki;
 mod packs;
+mod update;
 mod verdicts;
 
 fn main() -> ExitCode {
@@ -44,6 +46,7 @@ fn main() -> ExitCode {
         Some("anki") => report(anki::run(&root, &args[1..])),
         Some("packs") => report(packs::run(&root, &args[1..])),
         Some("verdicts") => report(verdicts::run(&root, &args[1..])),
+        Some("update") => report(update::run(&root, &args[1..])),
         _ => usage(),
     }
 }
@@ -70,7 +73,7 @@ fn flag<'a>(args: &'a [String], name: &str) -> Option<&'a str> {
 
 fn usage() -> ExitCode {
     eprintln!(
-        "usage: batna-tools <validate | anki | packs build | verdicts FILE> [--root DIR] (see the top of crates/tools/src/main.rs)"
+        "usage: batna-tools <validate | anki | packs build | verdicts FILE | update …> [--root DIR] (see the top of crates/tools/src/main.rs)"
     );
     ExitCode::from(2)
 }

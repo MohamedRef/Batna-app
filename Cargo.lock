@@ -227,6 +227,7 @@ dependencies = [
  "chrono",
  "dioxus",
  "directories",
+ "ed25519-dalek",
  "futures-util",
  "getrandom 0.3.4",
  "jni 0.22.4",
@@ -238,6 +239,7 @@ dependencies = [
  "serde_json",
  "serde_yaml_ng",
  "sha2",
+ "tempfile",
  "tokio",
  "tokio-tungstenite",
  "ureq",
@@ -247,7 +249,9 @@ dependencies = [
 name = "batna-core"
 version = "0.1.0"
 dependencies = [
+ "base64 0.22.1",
  "batna-protocol",
+ "ed25519-dalek",
  "fsrs",
  "getrandom 0.4.3",
  "miniz_oxide 0.8.9",
@@ -288,7 +292,10 @@ dependencies = [
 name = "batna-tools"
 version = "0.1.0"
 dependencies = [
+ "base64 0.22.1",
  "batna-core",
+ "ed25519-dalek",
+ "getrandom 0.3.4",
  "rusqlite",
  "serde",
  "serde_json",

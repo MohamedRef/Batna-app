@@ -30,11 +30,12 @@ pub enum Section {
     /// Mouse hover, the sidebar and the keyboard, on the Mac and desktops.
     Mac,
     Data,
+    Updates,
     About,
 }
 
 impl Section {
-    pub const ALL: [Self; 8] = [
+    pub const ALL: [Self; 9] = [
         Self::Study,
         Self::Reminders,
         Self::Sync,
@@ -42,6 +43,7 @@ impl Section {
         Self::Tablet,
         Self::Mac,
         Self::Data,
+        Self::Updates,
         Self::About,
     ];
 
@@ -55,6 +57,7 @@ impl Section {
             Self::Tablet => "tablet",
             Self::Mac => "mac",
             Self::Data => "data",
+            Self::Updates => "updates",
             Self::About => "about",
         }
     }
@@ -81,6 +84,7 @@ impl Section {
             Self::Tablet => crate::i18n::desk::TABLET,
             Self::Mac => crate::i18n::desk::MAC,
             Self::Data => tx::DATA,
+            Self::Updates => crate::i18n::update::SECTION,
             Self::About => tx::ABOUT,
         }
     }
@@ -94,6 +98,7 @@ impl Section {
             Self::Tablet => crate::i18n::desk::TABLET_SUB,
             Self::Mac => crate::i18n::desk::MAC_SUB,
             Self::Data => tx::DATA_SUB,
+            Self::Updates => crate::i18n::update::SECTION_SUB,
             Self::About => tx::ABOUT_SUB,
         }
     }
@@ -234,6 +239,7 @@ fn SectionView(section: Section) -> Element {
         Section::Look => rsx! { look::LookSection {} },
         Section::Tablet | Section::Mac => rsx! { crate::desk::DeviceSettings { section } },
         Section::Data => rsx! { data::DataSection {} },
+        Section::Updates => rsx! { crate::update::view::UpdatesSection {} },
         Section::About => rsx! { about::AboutSection {} },
     }
 }

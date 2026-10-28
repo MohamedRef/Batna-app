@@ -21,8 +21,11 @@ impl Library {
     pub fn get() -> &'static Library {
         static LIB: OnceLock<Library> = OnceLock::new();
         LIB.get_or_init(|| {
-            // build.rs wrote the pack from types it just parsed, so this can't fail.
-            let Pack { index, lectures } = Pack::decode(embedded::PACK).expect("embedded content pack");
+            // A newer pack from the update feed wins (checked and decoded
+            // there); else the embedded one, which build.rs wrote from types
+            // it just parsed, so it can't fail.
+            let Pack { index, lectures } = crate::update::installed_pack()
+                .unwrap_or_else(|| Pack::decode(embedded::PACK).expect("embedded content pack"));
             let lectures = lectures.into_iter().map(|l| (l.lecture.clone(), l)).collect();
             Library { index, lectures }
         })

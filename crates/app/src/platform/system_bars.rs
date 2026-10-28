@@ -19,6 +19,17 @@ pub fn apply(day: &str, night: &str) {
     let _ = (day, night);
 }
 
+/// Whether the device is in dark mode, where the platform can tell
+/// (Android); `None` elsewhere, where `prefers-color-scheme` is right.
+pub fn device_dark() -> Option<bool> {
+    #[cfg(target_os = "android")]
+    {
+        android::is_night().map_err(|e| crate::diag::report!("Night mode: {e}")).ok()
+    }
+    #[cfg(not(target_os = "android"))]
+    None
+}
+
 #[cfg(target_os = "android")]
 mod android {
     use jni::objects::JClassLoader;
@@ -48,6 +59,30 @@ mod android {
                 &[JValue::Object(activity), JValue::Int(day), JValue::Int(night)],
             )
             .map(drop)
+        })
+    }
+
+    /// `SystemBars.isNight(activity)`.
+    pub fn is_night() -> Result<bool, String> {
+        with_activity(|env, activity| {
+            let loader = env
+                .call_method(
+                    activity,
+                    jni_str!("getClassLoader"),
+                    jni_sig!("()Ljava/lang/ClassLoader;"),
+                    &[],
+                )?
+                .l()?;
+            let loader = env.cast_local::<JClassLoader>(loader)?;
+            let class =
+                LoaderContext::Loader(&loader).load_class(env, jni_str!("app.batna.SystemBars"), true)?;
+            env.call_static_method(
+                &class,
+                jni_str!("isNight"),
+                jni_sig!("(Landroid/app/Activity;)Z"),
+                &[JValue::Object(activity)],
+            )?
+            .z()
         })
     }
 }

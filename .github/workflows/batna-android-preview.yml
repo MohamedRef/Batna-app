@@ -15,6 +15,11 @@ name: Android preview APK
 # can't update and need an uninstall (losing data not yet synced), so the run
 # fails until someone starts it by hand with "new_keys" ticked.
 #
+# The cache holds 10 GB per repository and drops the least recently used
+# entries past that: on 2026-10-28 PR build caches pushed the signing key out
+# and run 112 made a new one, so previews before it needed a reinstall. Build
+# caches are now saved from main only (every workflow's rust-cache save-if).
+#
 # Pull-request runs never touch the cached keys: they sign with one-off keys
 # (enough to prove the APK builds, signs and passes the checks) and get a
 # read-only token. Only pushes to main and manual runs restore the keys, and
@@ -100,6 +105,7 @@ jobs:
       - uses: Swatinem/rust-cache@v2
         with:
           key: batna-android-preview
+          save-if: ${{ github.ref == 'refs/heads/main' }}
       - uses: actions/setup-java@v5
         with:
           distribution: temurin
@@ -164,13 +170,15 @@ jobs:
 
       - name: Build APK
         working-directory: crates/app
-        # Batna Cloud and Google sign-in are built in (crates/app/src/cloud/mod.rs),
-        # from repo Settings → Secrets and variables → Actions (docs/CLOUD.md §3.5).
+        # Batna Cloud and Google sign-in are built in (crates/app/src/cloud/mod.rs).
+        # The URL and client id are public (the id is in wrangler.toml too), so
+        # they default to Batna's own; repo variables override them. The client
+        # secret is a repo secret (docs/CLOUD.md §3.5).
         # Push builds only: a PR's copy of this workflow gets empty values, and the
         # app then hides sign-in. Never echo these.
         env:
-          BATNA_CLOUD_URL: ${{ env.KEEP_KEY == 'true' && vars.BATNA_CLOUD_URL || '' }}
-          BATNA_GOOGLE_CLIENT_ID: ${{ env.KEEP_KEY == 'true' && vars.BATNA_GOOGLE_CLIENT_ID || '' }}
+          BATNA_CLOUD_URL: ${{ env.KEEP_KEY == 'true' && (vars.BATNA_CLOUD_URL || 'https://batna-cloud.hamorefaat85.workers.dev') || '' }}
+          BATNA_GOOGLE_CLIENT_ID: ${{ env.KEEP_KEY == 'true' && (vars.BATNA_GOOGLE_CLIENT_ID || '1001052243528-3d8bmf0efprgdvov9f663fm8u63kblck.apps.googleusercontent.com') || '' }}
           BATNA_GOOGLE_CLIENT_SECRET: ${{ env.KEEP_KEY == 'true' && secrets.BATNA_GOOGLE_CLIENT_SECRET || '' }}
         run: |
           dx bundle --platform android --release --package-types apk \

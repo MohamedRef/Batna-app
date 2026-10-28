@@ -1,0 +1,889 @@
+schema: batna.lesson/v1
+lecture: hb.L02
+lessons:
+  # ------------------------------------------------------------------
+  - id: hb.L02.lesson1
+    title: "نستبعد الأول: منطق الـ NITs"
+    hook: "ليه FIB-4 رخيص بيطمّنك أكتر ما بيخضّك؟ وإمتى تعيد الـ FibroScan بعد أسبوع من غير خمرة؟"
+    minutes: 9
+    pages: [23, 25]
+    topics: [principles, serum-tests, elastography, pathways]
+    goals:
+      - "تشرح ليه الـ NITs بتستبعد (rule out) أكتر ما بتشخّص في الناس قليلة الخطورة"
+      - "تفرّق بين الـ patented والـ non-patented وبين أنواع الـ elastography"
+      - "تمشي في الـ primary-care pathway: FIB-4 ثم TE ثم patented tests"
+      - "تحفظ أرقام الـ rule-out في NAFLD: 8 kPa و 0.48 و 1.3"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 23
+        title: "القاعدة رقم واحد"
+        quote: "should be used for ruling out rather than diagnosing advanced fibrosis in low prevalence populations"
+        text: |
+          الـ **non-invasive tests (NITs)** معمولة علشان نبطّل نعمل **liver biopsy** لكل واحد عنده إنزيمات عالية شوية.
+
+          والكتاب بيبدأ بأهم جملة: في الناس اللي الـ **advanced fibrosis** نادرة فيهم (**low prevalence**)، الـ NITs بتستخدم علشان **تستبعد (rule out)** مش علشان **تشخّص**.
+
+          ليه؟ لما المرض نادر، أغلب الـ positive results بتطلع **false positive**، لكن الـ negative result بيبقى مطمّن جدًا (الـ **negative predictive value** عالية). فالنتيجة الواطية بتقفل الملف، والعالية بتفتح تحقيق مش أكتر.
+
+          وعلشان كده بنستخدمها **في الناس اللي عندهم risk**: **metabolic risk factors** و/أو **harmful use of alcohol**، مش في الـ **unselected general population**.
+      - kind: aside
+        tone: analogy
+        page: 23
+        text: |
+          الـ NIT زي **كمين المرور**: لو عدّيت والجهاز ما صفّرش، غالبًا انت تمام وروّح.
+
+          لو صفّر؟ مش معناها إنك مجرم، معناها **ركّن على جنب** نتأكد (TE، patented test، أو biopsy). وما ينفعش تعمل كمين في كل شارع في البلد، اعمله في الطريق اللي فيه المشاكل: الـ metabolic والـ alcohol.
+      - kind: figure
+        page: 23
+        title: "صندوق العُدّة: من العيادة العامة لعيادة الكبد"
+        alt: "A vertical list of fibrosis tools from top to bottom: non-patented serum scores (AST/ALT ratio, APRI, FIB-4, NFS), patented serum tests (FibroTest, ELF, FibroMeter, Hepascore), transient elastography, ARFI or 2D-SWE, and MR elastography. An arrow on the left runs from primary care at the top, where tests are available and cheap, to liver clinics at the bottom, where they cost more."
+        caption: "كل ما تنزل في القايمة: الـ **availability** بتقل والـ **cost** بيزيد. الـ serum scores مكانها الـ **primary care**، والـ **MRE** مكانها عيادات الكبد."
+        svg: |
+          <svg viewBox="0 0 330 430" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L02a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <text x="12" y="18" class="t-sm t-b t-good">Primary care: available, cheap</text>
+            <path d="M22 32V398" class="fg-arrow" marker-end="url(#L02a)"/>
+            <rect x="40" y="32" width="282" height="74" rx="8" class="fg-good"/>
+            <text x="52" y="52" class="t-b">Non-patented serum scores</text>
+            <text x="52" y="72" class="t-sm">AST/ALT ratio · APRI · FIB-4 · NFS</text>
+            <text x="52" y="92" class="t-sm t-mut">built from routine labs</text>
+            <rect x="40" y="118" width="282" height="74" rx="8" class="fg-good"/>
+            <text x="52" y="138" class="t-b">Patented serum tests</text>
+            <text x="52" y="158" class="t-sm">FibroTest · ELF · FibroMeter · Hepascore</text>
+            <text x="52" y="178" class="t-sm t-mut">commercial kits</text>
+            <rect x="40" y="204" width="282" height="56" rx="8" class="fg-acc"/>
+            <text x="52" y="226" class="t-b">TE (transient elastography)</text>
+            <text x="52" y="246" class="t-sm t-mut">ultrasound-based, shear wave speed</text>
+            <rect x="40" y="272" width="282" height="56" rx="8" class="fg-acc"/>
+            <text x="52" y="294" class="t-b">ARFI / 2D-SWE</text>
+            <text x="52" y="314" class="t-sm t-mut">on an ultrasound machine</text>
+            <rect x="40" y="340" width="282" height="56" rx="8" class="fg-bad"/>
+            <text x="52" y="362" class="t-b">MRE (MR elastography)</text>
+            <text x="52" y="382" class="t-sm t-mut">most accurate, costly, limited</text>
+            <text x="12" y="420" class="t-sm t-b t-bad">Liver clinics: less available, costly</text>
+          </svg>
+      - kind: sort
+        page: 23
+        prompt: "حط كل test في مكانه:"
+        bins: ["Non-patented", "Patented"]
+        cards:
+          - { text: "FIB-4", bin: 0 }
+          - { text: "APRI", bin: 0 }
+          - { text: "AST/ALT ratio", bin: 0 }
+          - { text: "NAFLD fibrosis score (NFS)", bin: 0 }
+          - { text: "FibroTest", bin: 1 }
+          - { text: "ELF", bin: 1 }
+          - { text: "FibroMeter", bin: 1 }
+          - { text: "Hepascore", bin: 1 }
+        why: "الـ **non-patented** معادلات ببلاش من تحاليل روتينية (AST، ALT، platelets، age). الـ **patented** ليها براءة اختراع، يعني kit بفلوس فيه markers مش روتينية زي haptoglobin و hyaluronic acid."
+      - kind: explain
+        page: 24
+        title: "علشان المعادلات تشتغل، لازم التحاليل تبقى موجودة"
+        text: |
+          الكتاب بيوصّي إن **ALT و AST و platelet count** يبقوا جزء من الـ **routine investigations** في الـ primary care لأي حد مشكوك إن عنده liver disease. السبب بسيط: من التلاتة دول (ومعاهم السن) تقدر تحسب الـ scores البسيطة فورًا.
+
+          وبيوصّي كمان بـ **automatic calculation and systematic reporting** للـ **FIB-4** في الناس اللي عندهم risk (metabolic أو alcohol)، علشان الـ **risk stratification** يتحسن. يعني المعمل يطبع الـ FIB-4 تحت النتيجة لوحده من غير ما حد يفتكر.
+      - kind: explain
+        page: 24
+        title: "الـ elastography بتقيس إيه بالظبط؟"
+        text: |
+          الفكرة: بنزق النسيج زقّة صغيرة ونشوف بيتصرف إزاي. الكتاب بيقول فيه طريقتين نعرض بيهم النتيجة:
+
+          - **Display of displacement without further processing:** بنشوف الإزاحة نفسها، ودي اللي في الـ **ARFI imaging**.
+          - **Display of shear wave speed:** السرعة بتتحسب من **arrival time** بتاع الـ shear wave عند أماكن مختلفة في النسيج. ودي عيلة الـ **shear wave elastography (SWE)**: **transient elastography (TE)** و **point SWE (pSWE)** و **2D-SWE و 3D-SWE**.
+
+          وليه السرعة بتقول على التليف؟ لأن الموجة بتجري أسرع في النسيج الناشف: الكبد المتليف زي حبل مشدود، والكبد السليم زي حبل سايب.
+      - kind: check
+        page: 24
+        question: "According to the lecture, which elastography method displays **displacement without further processing**?"
+        options:
+          - "ARFI imaging"
+          - "Transient elastography (TE)"
+          - "Point shear wave elastography (pSWE)"
+          - "2D shear wave elastography"
+        answer: 0
+        why:
+          - "صح: الكتاب بيقول الـ displacement من غير processing هو اللي في الـ **ARFI imaging**."
+          - "الـ TE من عيلة الـ **shear wave speed** (SWE)، مش displacement."
+          - "الـ pSWE برضه **shear wave speed**، الكتاب حاططه مع الـ SWE."
+          - "الـ 2D-SWE و 3D-SWE هما الـ **multidimensional** SWE، يعني shear wave speed."
+      - kind: figure
+        page: 24
+        title: "الطريق في الـ primary care"
+        alt: "Flowchart. A patient at risk of chronic liver disease gets a risk-factor check and AST, ALT, GGT, ALP and platelets. If the cause is not only metabolic or alcohol (viral, other causes or signs of advanced disease) the patient goes to a liver specialist. If only metabolic or alcohol, calculate FIB-4. FIB-4 below 1.30 is low risk: no referral, lifestyle changes, re-test in 1 to 3 years. FIB-4 1.30 or more leads to transient elastography. Below 8 kPa is low risk. 8 kPa or more is intermediate-high risk and leads to patented serum tests: if not available or discordant, consider liver biopsy; if available and concordant, F3-F4 is highly likely."
+        caption: "شوف الشجرة: الـ FIB-4 هو البوّاب، الـ TE هو التفتيش التاني، والـ patented tests هي اللي بتحسم. والـ viral hepatitis أو علامات الـ cirrhosis بيروحوا للـ **liver specialist** على طول."
+        svg: |
+          <svg viewBox="0 0 330 476" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L02b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="8" y="8" width="314" height="62" rx="8" class="fg-box"/>
+            <text x="18" y="28" class="t-b">Patient at risk of chronic liver disease</text>
+            <text x="18" y="46" class="t-sm">1. Risk factors: metabolic, alcohol, HBV, HCV, family</text>
+            <text x="18" y="62" class="t-sm">2. Test AST, ALT, GGT, ALP and platelets</text>
+            <path d="M98 70V86" class="fg-arrow" marker-end="url(#L02b)"/>
+            <rect x="8" y="90" width="180" height="42" rx="8" class="fg-acc"/>
+            <text x="18" y="108" class="t-sm t-b">Metabolic and/or alcohol</text>
+            <text x="18" y="124" class="t-sm t-b">only?</text>
+            <path d="M188 111H214" class="fg-arrow" marker-end="url(#L02b)"/>
+            <text x="192" y="104" class="t-sm t-mut">No</text>
+            <rect x="218" y="80" width="104" height="70" rx="8" class="fg-bad"/>
+            <text x="226" y="96" class="t-sm">Viral or other</text>
+            <text x="226" y="110" class="t-sm">cause, or signs</text>
+            <text x="226" y="124" class="t-sm">of cirrhosis</text>
+            <text x="226" y="142" class="t-sm t-b">Liver specialist</text>
+            <path d="M98 132V158" class="fg-arrow" marker-end="url(#L02b)"/>
+            <text x="104" y="150" class="t-sm t-mut">Yes</text>
+            <rect x="8" y="162" width="180" height="42" rx="8" class="fg-box"/>
+            <text x="18" y="180" class="t-b">Calculate FIB-4</text>
+            <text x="18" y="196" class="t-sm t-mut">age, AST, ALT, platelets</text>
+            <path d="M188 183H214" class="fg-arrow" marker-end="url(#L02b)"/>
+            <text x="190" y="176" class="t-sm">&lt;1.30</text>
+            <rect x="218" y="158" width="104" height="74" rx="8" class="fg-good"/>
+            <text x="226" y="176" class="t-sm t-b">Low risk</text>
+            <text x="226" y="192" class="t-sm">No referral</text>
+            <text x="226" y="207" class="t-sm">Lifestyle changes</text>
+            <text x="226" y="222" class="t-sm">Re-test in 1–3 y</text>
+            <path d="M98 204V246" class="fg-arrow" marker-end="url(#L02b)"/>
+            <text x="104" y="230" class="t-sm">≥1.30</text>
+            <rect x="8" y="250" width="180" height="42" rx="8" class="fg-box"/>
+            <text x="18" y="268" class="t-b">Transient elastography</text>
+            <text x="18" y="284" class="t-sm t-mut">liver stiffness, kPa</text>
+            <path d="M188 271H214" class="fg-arrow" marker-end="url(#L02b)"/>
+            <text x="190" y="264" class="t-sm">&lt;8</text>
+            <rect x="218" y="250" width="104" height="42" rx="8" class="fg-good"/>
+            <text x="226" y="268" class="t-sm t-b">Low risk</text>
+            <text x="226" y="284" class="t-sm">as above</text>
+            <path d="M98 292V330" class="fg-arrow" marker-end="url(#L02b)"/>
+            <text x="104" y="310" class="t-sm">≥8 kPa: intermediate-high</text>
+            <rect x="8" y="334" width="314" height="40" rx="8" class="fg-acc"/>
+            <text x="18" y="352" class="t-b">Patented serum tests</text>
+            <text x="18" y="367" class="t-sm t-mut">for example FibroTest</text>
+            <path d="M80 374V400M250 374V400" class="fg-arrow" marker-end="url(#L02b)"/>
+            <rect x="8" y="404" width="150" height="64" rx="8" class="fg-box"/>
+            <text x="16" y="422" class="t-sm">Not available, or</text>
+            <text x="16" y="437" class="t-sm">discordance</text>
+            <text x="16" y="458" class="t-sm t-b">Consider biopsy</text>
+            <rect x="172" y="404" width="150" height="64" rx="8" class="fg-bad"/>
+            <text x="180" y="422" class="t-sm">Available and</text>
+            <text x="180" y="437" class="t-sm">concordance</text>
+            <text x="180" y="458" class="t-sm t-b">F3–F4 highly likely</text>
+          </svg>
+      - kind: case
+        page: 24
+        stem: "Three patients in a primary-care clinic. You follow the lecture's pathway."
+        steps:
+          - reveal: "Patient 1: 50-year-old woman, type 2 diabetes and obesity, no alcohol, no viral markers. FIB-4 is 1.1."
+            question: "What next?"
+            options:
+              - "Low risk: no referral, lifestyle changes, re-test in 1–3 years"
+              - "Transient elastography now"
+              - "Refer to a liver specialist"
+              - "Liver biopsy"
+            answer: 0
+            why: "FIB-4 **أقل من 1.30** = low risk. مفيش referral، lifestyle، ونعيد بعد **1–3 years**. الـ NIT هنا عمل شغلته: استبعد."
+          - reveal: "Patient 2: same profile, but FIB-4 is 1.9. TE shows 10 kPa. A FibroTest is available and agrees."
+            question: "How is this read?"
+            options:
+              - "F3–F4 highly likely"
+              - "Low risk, re-test in 1–3 years"
+              - "Consider liver biopsy"
+              - "No conclusion without MRE"
+            answer: 0
+            why: "FIB-4 1.30 أو أكتر ودّاه للـ TE، و **8 kPa أو أكتر** يبقى intermediate-high، والـ patented test **concordant** يبقى **F3–F4 highly likely**. لو كان discordant أو مش متاح: consider biopsy."
+          - reveal: "Patient 3: 40-year-old man, HBsAg positive, normal FIB-4."
+            question: "Where does he go?"
+            options:
+              - "Straight to a liver specialist"
+              - "Lifestyle advice and re-test in 1–3 years"
+              - "TE first, then decide"
+            answer: 0
+            why: "الشجرة دي للـ **metabolic و/أو alcohol only**. الـ viral hepatitis أو أي سبب تاني، أو علامات advanced disease، يروحوا **liver clinic** على طول مهما كان الـ FIB-4."
+      - kind: explain
+        page: 25
+        title: "ALD و HCV: الرقم ممكن يكدب"
+        text: |
+          **Alcohol (ALD):** لما المريض يتحوّل، **LSM by TE > 12–15 kPa** بيعمل **rule-in** للـ advanced fibrosis، بس **بعد ما تستبعد أسباب الـ false positive**.
+
+          ولو الـ stiffness عالية ومعاها التهاب واضح (**AST أو GGT > 2× ULN**): **أعد الـ TE بعد أسبوع على الأقل** من الامتناع عن الخمرة أو تقليلها. الالتهاب نفسه بيخلّي الكبد منفوخ وناشف، فالرقم بيطلع أعلى من التليف الحقيقي.
+
+          **HCV بعد الـ SVR:** الـ NITs والـ TE **مش موصى بيها روتينيًا** علشان نكشف الـ **fibrosis regression**، و الـ cut-offs بتاعة الـ untreated HCV **ما تتستخدمش** للـ staging بعد الـ SVR. الالتهاب راح فالـ stiffness نزلت، بس ده مش معناه إن التليف اتشال بنفس السرعة.
+      - kind: aside
+        tone: joke
+        page: 25
+        text: |
+          المريض: «يا دكتور أنا بطّلت شرب من امبارح، اعملّي FibroScan تاني.» 😄
+
+          الكتاب بيقول: **أسبوع على الأقل**. الكبد محتاج يفوق من السهرة قبل ما نصدّق رقمه.
+      - kind: explain
+        page: 25
+        title: "NAFLD: تلات أرقام تقفل الملف"
+        text: |
+          في **NAFLD**، أي واحد من دول بيعمل **rule out** للـ advanced fibrosis:
+
+          - **LSM by TE < 8 kPa**
+          - **FibroTest أقل من 0.48** (patented)
+          - **FIB-4 أقل من 1.3** (non-patented)
+
+          ولو FIB-4 **فوق 1.3**: استخدم **TE و/أو patented serum tests** علشان تعمل rule out أو rule in.
+
+          وخلي بالك: الـ **liver biopsy لسه هي الـ reference standard لتشخيص NASH**، لأن مفيش NIT دقته مقبولة في الـ NASH نفسه. وأدق NIT للـ staging هو **MRE**، بس هو بالكاد أحسن من الباقيين في F3–F4، وغالي ومش متاح، فـ **مش first-line**.
+      - kind: aside
+        tone: tip
+        page: 25
+        text: |
+          افتكر الأرقام كده: **8 بتتكرر مرتين**. 8 kPa للـ TE، و 0.4**8** للـ FibroTest. والتالت هو رقم الـ FIB-4 اللي هتشوفه في كل الـ pathways: **1.3**.
+      - kind: update
+        page: 25
+        text: "من 2023 الـ NAFLD اسمها **MASLD** والـ NASH اسمها **MASH**. الكتاب بيستخدم الأسامي القديمة، وفي الامتحان اكتب اللي في الكتاب (ولو حبيت حط الجديد بين قوسين)."
+        ref: "AASLD/EASL/ALEH multi-society nomenclature consensus, 2023"
+      - kind: check
+        page: 25
+        question: "A patient with NAFLD has these results. Which one does **NOT** rule out advanced fibrosis?"
+        options:
+          - "FIB-4 of 1.6"
+          - "LSM by TE of 7 kPa"
+          - "FibroTest of 0.40"
+          - "FIB-4 of 1.1"
+        answer: 0
+        why:
+          - "صح: 1.6 **فوق 1.3**، يبقى محتاج TE و/أو patented test."
+          - "أقل من **8 kPa**، يبقى rule out."
+          - "أقل من **0.48**، يبقى rule out."
+          - "أقل من **1.3**، يبقى rule out."
+      - kind: try
+        items: [hb.L02.003, hb.L02.012, hb.L02.018, hb.L02.015]
+    recap:
+      - "الـ NITs في الناس قليلة الخطورة **بتستبعد** أكتر ما بتشخّص، واستخدمها في الـ at-risk (metabolic و/أو alcohol)."
+      - "ALT و AST و platelets روتين في الـ primary care، والـ FIB-4 يتحسب ويتطبع أوتوماتيك."
+      - "SWE (TE، pSWE، 2D/3D-SWE) بتقيس **shear wave speed**، والـ ARFI بتعرض **displacement**."
+      - "FIB-4 أقل من 1.30: low risk. لو 1.30 أو أكتر: اعمل TE، وأقل من 8 kPa يبقى low، و 8 kPa أو أكتر يروح patented tests (لو concordance يبقى F3–F4)."
+      - "ALD: > 12–15 kPa rule-in، وأعد بعد أسبوع امتناع لو AST/GGT > 2× ULN. بعد SVR: ما تستخدمش cut-offs الـ untreated."
+      - "NAFLD rule-out: **8 kPa، 0.48، 1.3**. الـ biopsy هي الـ reference للـ NASH، والـ MRE الأدق بس مش first-line."
+    practice: [hb.L02.001, hb.L02.002, hb.L02.003, hb.L02.004, hb.L02.005, hb.L02.006, hb.L02.007, hb.L02.008, hb.L02.009, hb.L02.010, hb.L02.011, hb.L02.012, hb.L02.013, hb.L02.014, hb.L02.015, hb.L02.016, hb.L02.017, hb.L02.018, hb.L02.019, hb.L02.020, hb.L02.067, hb.L02.068, hb.L02.069, hb.L02.070]
+  # ------------------------------------------------------------------
+  - id: hb.L02.lesson2
+    title: "الـ biopsy: الحَكَم اللي بيغلط"
+    hook: "الـ gold standard بيختلف مع نفسه في ربع الحالات. يبقى نعمله لمين، وإزاي نقرأ Metavir A3F3؟"
+    minutes: 9
+    pages: [26, 29]
+    topics: [biopsy, principles, elastography]
+    goals:
+      - "تحفظ مواصفات الـ biopsy الكويسة وموانعها السبعة"
+      - "تقارن الـ biopsy بالـ blood tests والـ elastography في جدول واحد"
+      - "تقرأ Metavir (A و F) وأرقام الـ kPa اللي بتقابلها"
+      - "تعرف إمتى الـ LSM يغنيك عن الـ biopsy، وتقرأ الـ CAP"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 26
+        title: "عيّنة صغيرة من عضو كبير"
+        text: |
+          الـ **AASLD** بتقول الـ biopsy الكويسة:
+
+          - طولها **2–3 cm على الأقل**
+          - بإبرة **16-gauge**
+          - فيها **11 complete portal tracts** على الأقل. أقل من كده ممكن الـ **grading والـ staging** يطلعوا غلط.
+
+          ومع ذلك: حتى biopsy طولها **25 mm** عندها **25% discordance** في الـ fibrosis staging. السبب إن التليف مش متوزع بالتساوي، وإنت بتاخد خيط صغير جدًا من كبد وزنه كيلو ونص. ده اللي اسمه **sampling error**.
+      - kind: aside
+        tone: joke
+        page: 26
+        text: |
+          الـ biopsy هي الـ **gold standard**... اللي بيختلف مع نفسه في **ربع** الحالات. 😄
+
+          زي حكم الماتش اللي بيرجع للـ VAR ويطلع بقرار، وتاني يوم يتفرّج على نفس اللقطة ويطلع بقرار تاني.
+      - kind: mnemonic
+        page: 26
+        word: "CUBA CHA"
+        parts:
+          - { key: "C", text: "Cystic lesion" }
+          - { key: "U", text: "Uncooperative patient" }
+          - { key: "B", text: "Bleeding risk: disorders in the coagulation profile" }
+          - { key: "A", text: "Ascites (severe)" }
+          - { key: "C", text: "Congestive liver disease" }
+          - { key: "H", text: "Hemangioma (vascular tumour)" }
+          - { key: "A", text: "Amyloidosis" }
+        hook: |
+          الإبرة ما بتعرفش ترقص **CUBA CHA**. لو المريض بيتحرك (**U**)، أو بينزف (**B**)، أو الكبد مليان مية أو دم أو بروتين غريب (**A، C، H، A**)، أو فيه **cyst**، يبقى ما تدخلش.
+
+          والمنطق في كل واحدة: يا الإبرة مش هتوصل بأمان، يا اللي هتخبطه هينزف أو يسرّب.
+      - kind: check
+        page: 26
+        question: "Which of these is **NOT** a contraindication to liver biopsy in the lecture?"
+        options:
+          - "Obesity"
+          - "Severe ascites"
+          - "Hemangioma"
+          - "Amyloidosis"
+        answer: 0
+        why:
+          - "صح: الـ obesity مش في قايمة الـ biopsy. هي من **limitations of TE** (BMI أكتر من 30)، وهنشوفها في الدرس الجاي. فخ كلاسيكي."
+          - "دي **A** في CUBA CHA."
+          - "دي الـ **vascular tumour**، الـ H."
+          - "دي الـ **A** الأخيرة."
+      - kind: table
+        page: 27
+        title: "Comparison of methods for assessing liver fibrosis (book Table 1)"
+        columns: ["", "Biopsy", "Indirect blood", "Direct blood", "US elastography", "MR elastography"]
+        rows:
+          - ["Examples", "Percutaneous, transjugular, mini-laparoscopic", "APRI, FIB-4, NFS", "FibroTest, HepaScore, ELF", "VCTE, ARFI, 2D-SWE", "Different manufacturers"]
+          - ["Accuracy", "++ to +++", "+ to ++", "++", "++", "++ to +++"]
+          - ["Validation", "+++ (gold std)", "++", "++", "++ to +++", "++ to +++"]
+          - ["Safety", "-", "+++", "+++", "+++", "+++"]
+          - ["Availability", "++", "+++", "+", "++", "+"]
+          - ["Cost", "+++", "- to +", "+ to ++", "++", "+++"]
+          - ["Monitoring", "+", "+++", "+", "++", "+"]
+        hide: [[0, 2], [0, 3], [2, 1], [3, 1], [6, 2]]
+      - kind: reveal
+        page: 27
+        prompt: "ليه الـ **indirect blood tests** (APRI، FIB-4) واخدة **+++** في الـ monitoring، والـ biopsy واخدة **+** بس؟"
+        answer: |
+          بص على باقي العمود: الـ indirect tests **safety +++** و **availability +++** و **cost - to +**. يعني تقدر تكررها كل زيارة من نفس التحاليل الروتينية ومن غير ما تأذي حد.
+
+          الـ biopsy العكس: **safety -** و **cost +++**. ما ينفعش تعمل للمريض biopsy كل 6 شهور علشان تتابعه. هي الـ **gold standard للـ validation**، مش للمتابعة.
+      - kind: figure
+        page: 27
+        title: "مسطرة الـ kPa"
+        alt: "A horizontal stiffness scale from 2.5 to 75 kPa. Below it two rows: Metavir F0-F1 up to 7 kPa, F2 from 7 to 9.5, F3 from 9.5 to 12.5, F4 above 12.5. Fibrosis row: mild, significant, severe, cirrhosis."
+        caption: "أرقام المسطرة: **7** تبدأ F2، **9.5** تبدأ F3، **12.5** تبدأ F4. والمسطرة بتوصل لحد 75 kPa."
+        svg: |
+          <svg viewBox="0 0 330 176" xmlns="http://www.w3.org/2000/svg">
+            <text x="165" y="18" text-anchor="middle" class="t-b">Liver stiffness (kPa)</text>
+            <text x="12" y="40" text-anchor="middle" class="t-sm">2.5</text>
+            <text x="90" y="40" text-anchor="middle" class="t-sm t-b">7</text>
+            <text x="148" y="40" text-anchor="middle" class="t-sm t-b">9.5</text>
+            <text x="208" y="40" text-anchor="middle" class="t-sm t-b">12.5</text>
+            <text x="322" y="40" text-anchor="end" class="t-sm">75</text>
+            <rect x="12" y="48" width="78" height="30" class="fg-good"/>
+            <rect x="90" y="48" width="58" height="30" class="fg-acc"/>
+            <rect x="148" y="48" width="60" height="30" class="fg-bad"/>
+            <rect x="208" y="48" width="114" height="30" class="fg-dot-bad"/>
+            <path d="M262 44l-8 38M270 44l-8 38" class="fg-ink"/>
+            <rect x="12" y="92" width="78" height="30" rx="4" class="fg-box"/>
+            <rect x="90" y="92" width="58" height="30" rx="4" class="fg-box"/>
+            <rect x="148" y="92" width="60" height="30" rx="4" class="fg-box"/>
+            <rect x="208" y="92" width="114" height="30" rx="4" class="fg-box"/>
+            <text x="51" y="112" text-anchor="middle" class="t-b">F0–F1</text>
+            <text x="119" y="112" text-anchor="middle" class="t-b">F2</text>
+            <text x="178" y="112" text-anchor="middle" class="t-b">F3</text>
+            <text x="265" y="112" text-anchor="middle" class="t-b">F4</text>
+            <text x="51" y="146" text-anchor="middle" class="t-sm">Mild</text>
+            <text x="119" y="146" text-anchor="middle" class="t-sm">Significant</text>
+            <text x="178" y="146" text-anchor="middle" class="t-sm">Severe</text>
+            <text x="265" y="146" text-anchor="middle" class="t-sm t-bad t-b">Cirrhosis</text>
+            <text x="12" y="168" class="t-sm t-mut">Metavir stage (row 1), fibrosis (row 2)</text>
+          </svg>
+      - kind: explain
+        page: 28
+        title: "Metavir: درجتين مش درجة"
+        text: |
+          الـ **Metavir** هو الأشهر في تقارير الـ biopsy، وبيدّي **two scores**:
+
+          **1. Activity (A):** بيتوقع الـ progression.
+          - **A0** no activity، **A1** mild، **A2** moderate، **A3** severe
+
+          **2. Fibrosis (F):**
+          - **F0** no fibrosis
+          - **F1** portal fibrosis **without septa**
+          - **F2** portal fibrosis with **infrequent septa**
+          - **F3** **numerous septa** but no cirrhosis
+          - **F4** cirrhosis
+
+          وآخر محطة قبل الـ cirrhosis هي **A3F3**.
+      - kind: aside
+        tone: analogy
+        page: 28
+        text: |
+          الـ **A** هي **النار لسه شغالة قد إيه** (activity)، والـ **F** هي **الرماد اللي اتراكم** (fibrosis).
+
+          ممكن يكون عندك نار جامدة ورماد قليل (A3F1، لسه بدري بس خطر)، أو نار هادية ورماد كتير (A1F3). علشان كده الـ Metavir بيدّيك رقمين.
+      - kind: match
+        page: 28
+        prompt: "وصّل كل Metavir stage بوصفه:"
+        pairs:
+          - ["F0", "No fibrosis"]
+          - ["F1", "Portal fibrosis without septa"]
+          - ["F2", "Portal fibrosis with infrequent septa"]
+          - ["F3", "Numerous septa but no cirrhosis"]
+          - ["F4", "Cirrhosis"]
+        why: "الـ septa هي المفتاح: مفيش (F1)، قليلة (F2)، كتير (F3)، وبعدين nodules كاملة (F4)."
+      - kind: explain
+        page: 29
+        title: "إمتى الـ LSM يغنيك عن الـ biopsy؟"
+        text: |
+          الـ algorithm بتاع **Vizzutti** في الكتاب بيقسم الـ LSM لتلات مناطق:
+
+          - لو **6 kPa أو أقل**: الـ **F0–F1**، يعني no significant fibrosis، ومفيش biopsy.
+          - لو **12.5 kPa أو أكتر**: الـ **F3–F4**، يعني advanced fibrosis، ومفيش biopsy: علاج أو متابعة.
+          - لو بينهم، يعني الـ **grey area** والـ **F2**: اعمل **biopsy if results influence management**، أو استخدم **other non-invasive tests**.
+
+          المنطق: الطرفين واضحين، فالـ biopsy مش هتضيف حاجة. الـ biopsy مكانها المنطقة الرمادية، وبس لو نتيجتها هتغيّر قرارك.
+      - kind: check
+        page: 29
+        question: "A patient with chronic HCV has LSM of 9 kPa. According to the LSM algorithm in the lecture, what is the best approach?"
+        options:
+          - "Biopsy only if the result would change management, or use other non-invasive tests"
+          - "No biopsy: no significant fibrosis"
+          - "No biopsy: advanced fibrosis, start treatment or follow-up"
+          - "Biopsy in every case, since the reading is abnormal"
+        answer: 0
+        why:
+          - "صح: 9 kPa بين 6 و 12.5 = **grey area (F2)**، يبقى biopsy بس لو هتأثر على الـ management، أو NITs تانية."
+          - "ده لـ **6 kPa أو أقل**."
+          - "ده لـ **12.5 kPa أو أكتر**."
+          - "الكتاب ما بيقولش biopsy لكل حد، بيقول biopsy **if results influence management**."
+      - kind: table
+        page: 29
+        title: "CAP score and steatosis"
+        columns: ["CAP score", "Steatosis grade", "Liver with fatty change"]
+        rows:
+          - ["238–260 dB/m", "S1", "11–33%"]
+          - ["260–290 dB/m", "S2", "34–66%"]
+          - ["> 290 dB/m", "S3", "≥ 67%"]
+        hide: [[0, 1], [1, 2], [2, 0], [2, 2]]
+      - kind: aside
+        tone: trap
+        page: 29
+        text: |
+          الـ **CAP** و الـ **LSM** بيطلعوا من نفس الجهاز، بس كل واحد بيقيس حاجة:
+
+          - **CAP** بالـ **dB/m** = **الدهون** (steatosis، S1–S3)
+          - **LSM** بالـ **kPa** = **الصلابة** (fibrosis، F0–F4)
+
+          لو السؤال قال «290 dB/m» وإنت جاوبت F4، يبقى خلطت الدهن بالتليف.
+      - kind: try
+        items: [hb.L02.023, hb.L02.021, hb.L02.029, hb.L02.032]
+    recap:
+      - "Biopsy كويسة: طولها **2–3 cm** على الأقل، إبرة **16-gauge**، وفيها **11 portal tracts** على الأقل. وحتى 25 mm فيها **25% discordance**."
+      - "موانع الـ biopsy: **CUBA CHA** (cyst، uncooperative، bleeding، ascites، congestive، hemangioma، amyloidosis)."
+      - "Biopsy: أعلى validation وأقل safety. الـ indirect blood tests: الأحسن في الـ monitoring."
+      - "المسطرة: F2 من **7**، F3 من **9.5**، F4 من **12.5 kPa**."
+      - "Metavir = **A0–A3** (activity) + **F0–F4** (fibrosis). آخر محطة قبل الـ cirrhosis: **A3F3**."
+      - "الـ LSM لو 6 kPa أو أقل، أو 12.5 kPa أو أكتر: no biopsy. في الـ grey area: biopsy بس لو هتغيّر القرار."
+      - "CAP (dB/m) للدهون: S1 238–260، S2 260–290، S3 أكتر من 290."
+    practice: [hb.L02.021, hb.L02.022, hb.L02.023, hb.L02.024, hb.L02.025, hb.L02.026, hb.L02.027, hb.L02.028, hb.L02.029, hb.L02.030, hb.L02.031, hb.L02.032, hb.L02.071, hb.L02.078, hb.L02.080, hb.L02.088]
+  # ------------------------------------------------------------------
+  - id: hb.L02.lesson3
+    title: "الأرقام اللي بتتسأل: FIB-4 و APRI والـ kPa"
+    hook: "ليه الـ FibroScan بيكدب في الـ heart failure؟ وإزاي FIB-4 بيحسب التليف من غير ما يشوف الكبد؟"
+    minutes: 10
+    pages: [30, 35]
+    topics: [pathways, elastography, serum-tests]
+    goals:
+      - "تمشي في الـ stepwise pathway: FIB-4 (1.3 و 2.67) ثم LSM (8 و 12)"
+      - "تعرف ليه عتبة الـ F4 بتختلف حسب السبب"
+      - "تفرّق بين الـ false-high reading والـ failed measurement في الـ TE"
+      - "تحسب FIB-4 و APRI وتعرف مكونات FibroTest و FibroMeter و ELF"
+    status: unverified
+    steps:
+      - kind: figure
+        page: 30
+        title: "الـ pathway على أربع خطوات"
+        alt: "Step-wise pathway. Step 1 identify patients at risk: two or more metabolic risk factors, type 2 diabetes, steatosis on imaging or raised aminotransferases. Step 2 history and labs: alcohol intake, CBC, liver function tests. Step 3 FIB-4: below 1.3 low risk, 1.3 to 2.67 indeterminate, above 2.67 high risk. Indeterminate goes to step 4 liver stiffness: below 8 kPa low risk, 8 to 12 kPa indeterminate, above 12 kPa high risk. Low risk: repeat NIT in 2 to 3 years. Indeterminate: hepatologist for biopsy or MR elastography, or monitoring with re-evaluation in 2 to 3 years. High risk: refer to hepatologist."
+        caption: "الـ FIB-4 بيفرز، والـ LSM بيفك المنطقة الرمادية بس. لاحظ: **1.3 و 2.67** للـ FIB-4، و **8 و 12** للـ kPa."
+        svg: |
+          <svg viewBox="0 0 330 520" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L02c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="8" y="8" width="314" height="62" rx="8" class="fg-acc"/>
+            <text x="18" y="28" class="t-b">Step 1: identify patients at risk</text>
+            <text x="18" y="46" class="t-sm">≥ 2 metabolic risk factors · type 2 diabetes ·</text>
+            <text x="18" y="62" class="t-sm">steatosis on imaging or raised aminotransferases</text>
+            <path d="M165 70V86" class="fg-arrow" marker-end="url(#L02c)"/>
+            <rect x="8" y="90" width="314" height="44" rx="8" class="fg-acc"/>
+            <text x="18" y="108" class="t-b">Step 2: history and labs</text>
+            <text x="18" y="125" class="t-sm">alcohol intake, CBC, liver function tests</text>
+            <path d="M165 134V150" class="fg-arrow" marker-end="url(#L02c)"/>
+            <rect x="8" y="154" width="314" height="30" rx="8" class="fg-acc"/>
+            <text x="18" y="174" class="t-b">Step 3: non-invasive test (FIB-4)</text>
+            <path d="M58 184V198M165 184V198M272 184V198" class="fg-arrow" marker-end="url(#L02c)"/>
+            <rect x="8" y="202" width="100" height="44" rx="6" class="fg-good"/>
+            <text x="58" y="220" text-anchor="middle" class="t-b">&lt; 1.3</text>
+            <text x="58" y="237" text-anchor="middle" class="t-sm">low</text>
+            <rect x="115" y="202" width="100" height="44" rx="6" class="fg-box"/>
+            <text x="165" y="220" text-anchor="middle" class="t-b">1.3–2.67</text>
+            <text x="165" y="237" text-anchor="middle" class="t-sm">indeterminate</text>
+            <rect x="222" y="202" width="100" height="44" rx="6" class="fg-bad"/>
+            <text x="272" y="220" text-anchor="middle" class="t-b">&gt; 2.67</text>
+            <text x="272" y="237" text-anchor="middle" class="t-sm">high</text>
+            <path d="M165 246V262" class="fg-arrow" marker-end="url(#L02c)"/>
+            <rect x="8" y="266" width="314" height="30" rx="8" class="fg-acc"/>
+            <text x="18" y="286" class="t-b">Step 4: liver stiffness (LSM)</text>
+            <path d="M58 296V310M165 296V310M272 296V310" class="fg-arrow" marker-end="url(#L02c)"/>
+            <rect x="8" y="314" width="100" height="44" rx="6" class="fg-good"/>
+            <text x="58" y="332" text-anchor="middle" class="t-b">&lt; 8 kPa</text>
+            <text x="58" y="349" text-anchor="middle" class="t-sm">low</text>
+            <rect x="115" y="314" width="100" height="44" rx="6" class="fg-box"/>
+            <text x="165" y="332" text-anchor="middle" class="t-b">8–12 kPa</text>
+            <text x="165" y="349" text-anchor="middle" class="t-sm">indeterminate</text>
+            <rect x="222" y="314" width="100" height="44" rx="6" class="fg-bad"/>
+            <text x="272" y="332" text-anchor="middle" class="t-b">&gt; 12 kPa</text>
+            <text x="272" y="349" text-anchor="middle" class="t-sm">high</text>
+            <path d="M58 358V374M165 358V374M272 358V374" class="fg-arrow" marker-end="url(#L02c)"/>
+            <rect x="8" y="378" width="100" height="134" rx="6" class="fg-good"/>
+            <text x="16" y="396" class="t-sm t-b">Low risk</text>
+            <text x="16" y="414" class="t-sm">Repeat NIT</text>
+            <text x="16" y="429" class="t-sm">in 2–3 years</text>
+            <text x="16" y="444" class="t-sm">unless things</text>
+            <text x="16" y="459" class="t-sm">change</text>
+            <rect x="115" y="378" width="100" height="134" rx="6" class="fg-box"/>
+            <text x="123" y="396" class="t-sm t-b">Indeterminate</text>
+            <text x="123" y="414" class="t-sm">Hepatologist:</text>
+            <text x="123" y="429" class="t-sm">biopsy or MRE,</text>
+            <text x="123" y="444" class="t-sm">or monitor and</text>
+            <text x="123" y="459" class="t-sm">re-evaluate in</text>
+            <text x="123" y="474" class="t-sm">2–3 years</text>
+            <rect x="222" y="378" width="100" height="134" rx="6" class="fg-bad"/>
+            <text x="230" y="396" class="t-sm t-b">High risk</text>
+            <text x="230" y="414" class="t-sm">Refer to</text>
+            <text x="230" y="429" class="t-sm">hepatologist</text>
+          </svg>
+      - kind: order
+        page: 30
+        prompt: "رتّب خطوات الـ pathway:"
+        steps:
+          - "Identify patients at risk (metabolic risk factors, type 2 diabetes, steatosis or raised aminotransferases)"
+          - "History and laboratory tests (alcohol intake, CBC, liver function tests)"
+          - "Non-invasive fibrosis test such as FIB-4"
+          - "Liver stiffness measurement if FIB-4 is indeterminate"
+          - "Classify risk: repeat in 2–3 years, or refer to a hepatologist"
+        why: "الترتيب منطقي: تعرف مين في خطر، تستبعد الكحول وتعمل التحاليل، تحسب FIB-4 الرخيص الأول، وتستخدم الـ LSM بس للمنطقة الرمادية."
+      - kind: aside
+        tone: trap
+        page: 30
+        text: |
+          في الـ pathway ده الـ LSM عنده رقمين: **8** و **12 kPa**. ما تخلطهمش بمسطرة الـ Metavir (7، 9.5، 12.5) ولا بالـ Vizzutti (6 و 12.5).
+
+          القاعدة اللي تمشي بيها في سؤال **NAFLD**: **8 kPa** هي باب الـ rule-out، زي ما شفناها في الدرس الأول.
+      - kind: table
+        page: 31
+        title: "Liver stiffness cut-offs by cause (kPa)"
+        columns: ["Cause", "F0–F1", "F2", "F3", "F4"]
+        rows:
+          - ["Hepatitis B", "2–7", "8–9", "8–11", "≥ 18"]
+          - ["Hepatitis C", "2–7", "8–9", "9–14", "≥ 14"]
+          - ["HIV/HCV coinfection", "2–7", "7–11", "11–14", "≥ 14"]
+          - ["Cholestatic disease", "2–7", "7–9", "9–17", "≥ 17"]
+          - ["NAFLD or NASH", "2–7", "7.5–10", "10–14", "≥ 14"]
+          - ["Alcohol-related", "2–7", "7–11", "11–19", "≥ 19"]
+        hide: [[0, 4], [1, 4], [3, 4], [4, 4], [5, 4]]
+      - kind: aside
+        tone: tip
+        page: 31
+        text: |
+          عمود الـ F4 بسهولة: **الـ C والـ NAFLD والـ HIV/HCV = 14**. وبعدين الكبار: **cholestatic 17، HBV 18، alcohol 19**.
+
+          وليه الـ alcohol والـ cholestasis أعلى؟ لأن الالتهاب والـ cholestasis نفسهم بيرفعوا الـ stiffness من غير تليف (هتشوفها في الجدول اللي جاي)، فلازم رقم أعلى علشان تقول cirrhosis. والـ F0–F1 ثابتة في الكل: **2–7**.
+      - kind: explain
+        page: 32
+        title: "الـ FibroScan بيكدب إمتى؟"
+        text: |
+          الـ TE بيبعت موجة ويقيس سرعتها. فيه حاجتين ممكن يبوّظوا النتيجة:
+
+          **1. الموجة مش عارفة توصل، والقياس يبقى failed or unreliable**
+          - **Ascites:** الـ elastic waves **ما بتمشيش في السوائل**.
+          - **Obesity**: لو الـ BMI أكتر من 30 بتعمل TE failure، والـ **XL probe** قلّل الفشل.
+          - **Narrow intercostal spaces:** success أقل، والـ **S probe** قلّل الفشل.
+
+          **2. الكبد ناشف لسبب تاني غير التليف، والرقم يبقى false high**
+          - **Acute hepatitis:** التغيرات في النسيج بترفع الـ LSM.
+          - **Chronic hepatitis flare:** لو **ALT > 5× ULN** ممكن تعمل **overestimation** للـ stage.
+          - **Extrahepatic cholestasis:** بترفع الـ LSM **independently of fibrosis**.
+          - **Congestive heart failure:** **increased blood volume in the liver** بيرفع الـ LSM.
+      - kind: aside
+        tone: analogy
+        page: 32
+        text: |
+          الـ FibroScan زي إنك **تخبط على بطيخة** علشان تعرف حالتها:
+
+          - لو البطيخة **غرقانة في جردل مية** (ascites) أو **ملفوفة في بطانية** (obesity) أو **محشورة بين قضبان** (ribs ضيقة): الخبطة مش هتوصل أصلًا.
+          - لو البطيخة **منفوخة** من التهاب، أو **محقونة** بدم (CHF)، أو **مسدودة** (cholestasis): هتحس إنها ناشفة، بس ده مش معناه إنها «متليفة».
+      - kind: sort
+        page: 32
+        prompt: "كل limitation بتعمل إيه في الـ TE؟"
+        bins: ["False high stiffness", "Failed or unreliable reading"]
+        cards:
+          - { text: "Acute hepatitis", bin: 0 }
+          - { text: "ALT flare > 5× ULN", bin: 0 }
+          - { text: "Extrahepatic cholestasis", bin: 0 }
+          - { text: "Congestive heart failure", bin: 0 }
+          - { text: "Ascites", bin: 1 }
+          - { text: "BMI > 30", bin: 1 }
+          - { text: "Narrow intercostal spaces", bin: 1 }
+        why: "الالتهاب والـ cholestasis والاحتقان بيخلّوا الكبد **أنشف** فالرقم بيعلى (false high). الـ ascites والسمنة والضلوع الضيقة بيمنعوا الموجة توصل فالقياس **بيفشل** (وفيه XL probe للسمنة و S probe للضلوع)."
+      - kind: check
+        page: 32
+        question: "A 70-year-old man with severe congestive heart failure and no known liver disease has LSM of 15 kPa. What is the best explanation?"
+        options:
+          - "Increased blood volume in the liver raising stiffness"
+          - "Cirrhosis until proven otherwise"
+          - "Failed acquisition because of narrow intercostal spaces"
+          - "Steatosis grade S3"
+        answer: 0
+        why:
+          - "صح: الكتاب: CHF **may lead to increased LSM because of an increased blood volume in the liver**."
+          - "مفيش liver disease معروف، والـ CHF سبب معروف للـ false high. ما تشخّصش cirrhosis من رقم واحد في كبد محتقن."
+          - "ده بيعمل **failed** reading، مش رقم عالي."
+          - "الـ steatosis بتتقاس بالـ **CAP (dB/m)**، مش الـ kPa."
+      - kind: explain
+        page: 32
+        title: "FIB-4 و APRI: التليف من تحليل دم"
+        text: |
+          الكتاب بيقول تدخّل إيه في الحاسبة:
+
+          - **FIB-4:** age، AST، ALT، platelet count.
+          - **APRI:** AST، الـ upper limit، platelet count.
+
+          المعادلات المعروفة (مش مكتوبة في الكتاب، بس هي دي اللي الحاسبة بتعملها):
+
+          - **FIB-4 = (Age × AST) ÷ (Platelets × √ALT)**
+          - **APRI = (AST ÷ AST ULN) × 100 ÷ Platelets** (platelets بالـ 10⁹/L)
+
+          والمنطق: مع التليف الـ **AST بيعلى** أكتر من الـ ALT، والـ **platelets بتقل** (الـ portal hypertension بيحجز الصفايح في الطحال). والسن عامل خطر لوحده. فالكسر بيكبر.
+
+          **Ranges في الكتاب:**
+          - FIB-4: **أقل من 1.45** minimal or no fibrosis، **1.45–3.39** significant، **3.4 أو أكتر** advanced fibrosis or cirrhosis.
+          - APRI: **أقل من 0.5** minimal or no، **0.5–1.5** moderate or significant، **أكتر من 1.5** severe fibrosis or cirrhosis.
+      - kind: aside
+        tone: trap
+        page: 33
+        text: |
+          الكتاب فيه **مجموعتين** أرقام للـ FIB-4:
+
+          - في الـ **NAFLD pathways** (صفحة 24 و 25 و 30): **1.3** و **2.67**.
+          - في صورة **FIB-4 value range** (صفحة 33): **1.45** و **3.4**.
+
+          لو السؤال عن **NAFLD أو primary care** ← **1.3**. لو سألك «ranges of FIB-4» عمومًا ← **1.45 / 3.4**.
+
+          وكمان: صورة الـ APRI في الكتاب مكتوب فيها «ALT upper limit»، بس الاسم نفسه **AST to Platelet Ratio Index**، يعني الـ ULN بتاع الـ **AST**.
+      - kind: check
+        page: 34
+        question: "A man with chronic HCV has AST 90 U/L (ULN 40) and platelets 100 × 10⁹/L. APRI = (90/40) × 100 / 100 = 2.25. How is it read?"
+        options:
+          - "Severe fibrosis or cirrhosis"
+          - "Moderate or significant fibrosis"
+          - "Minimal or no fibrosis"
+          - "Cannot be read without ALT"
+        answer: 0
+        why:
+          - "صح: 2.25 **أكتر من 1.5** = severe fibrosis or cirrhosis."
+          - "دي لـ **0.5–1.5**."
+          - "دي لـ **أقل من 0.5**."
+          - "الـ APRI ما فيهوش ALT أصلًا. ده الـ FIB-4."
+      - kind: mnemonic
+        page: 34
+        word: "BAHGA"
+        parts:
+          - { key: "B", text: "Bilirubin (total)" }
+          - { key: "A", text: "Apolipoprotein A1" }
+          - { key: "H", text: "Haptoglobin" }
+          - { key: "G", text: "Gamma-GT" }
+          - { key: "A", text: "Alpha-2-macroglobulin" }
+        hook: |
+          الـ **FibroTest** بيجيب **البهجة (BAHGA)** لو طلع أقل من 0.48. 😄
+
+          خمس تحاليل، **وفوقهم السن والنوع** (age and gender). وهو **the most studied and extensively validated**، اسمه في أمريكا **FibroSure**، ومعمول أساسًا للـ **chronic viral hepatitis**.
+      - kind: match
+        page: 34
+        prompt: "وصّل كل score بمكوناته:"
+        pairs:
+          - ["FibroTest", "ApoA1, α2-macroglobulin, GGT, bilirubin, haptoglobin + age, gender"]
+          - ["FibroMeter", "Platelets, prothrombin index, AST, α2-macroglobulin, HA, urea"]
+          - ["ELF", "HA, TIMP-1, N-terminal propeptide of type III collagen"]
+          - ["FIB-4", "Age, AST, ALT, platelets"]
+          - ["APRI", "AST, its upper limit, platelets"]
+        why: "الـ **FibroMeter** فيه 6 (وفيهم urea و PT index)، والـ **ELF** تلاتة كلهم markers للـ matrix نفسها (HA، TIMP-1، PIIINP) وهو مفيد خصوصًا في **ALD و NAFLD**."
+      - kind: try
+        items: [hb.L02.035, hb.L02.047, hb.L02.054, hb.L02.053, hb.L02.045]
+    recap:
+      - "الـ pathway: الـ at risk، ثم labs، ثم **FIB-4** (أقل من 1.3 low، و 1.3–2.67 indeterminate، وأكتر من 2.67 high)، والـ LSM للرمادي بس (أقل من 8، و 8–12، وأكتر من 12 kPa)."
+      - "Low: أعد بعد 2–3 سنين. Indeterminate: hepatologist (biopsy أو MRE) أو متابعة. High: hepatologist."
+      - "F4 cut-off: HCV و HIV/HCV و NAFLD **14**، cholestatic **17**، HBV **18**، alcohol **19**."
+      - "TE: false high مع acute hepatitis، flare (ALT > 5× ULN)، cholestasis، CHF. Failed مع ascites، BMI > 30 (XL probe)، ribs ضيقة (S probe)."
+      - "FIB-4 ranges في الكتاب: **1.45 / 3.4**، وفي الـ NAFLD pathways **1.3 / 2.67**. APRI: **0.5 / 1.5**."
+      - "FibroTest = **BAHGA** + age و gender. FibroMeter 6 indices. ELF = HA + TIMP-1 + PIIINP."
+    practice: [hb.L02.033, hb.L02.034, hb.L02.035, hb.L02.036, hb.L02.037, hb.L02.045, hb.L02.046, hb.L02.047, hb.L02.048, hb.L02.049, hb.L02.050, hb.L02.051, hb.L02.052, hb.L02.053, hb.L02.054, hb.L02.055, hb.L02.056, hb.L02.057, hb.L02.075, hb.L02.076, hb.L02.079, hb.L02.081, hb.L02.084, hb.L02.085, hb.L02.086, hb.L02.087, hb.L02.089, hb.L02.090]
+  # ------------------------------------------------------------------
+  - id: hb.L02.lesson4
+    title: "الـ CSPH من غير قسطرة"
+    hook: "قاعدة الخمسات (10، 15، 20، 25) والصفايح: تعرف منهم مين محتاج منظار ومين يروّح."
+    minutes: 9
+    pages: [30, 36]
+    topics: [csph]
+    goals:
+      - "تحفظ قاعدة الخمسات بتاعة الـ LSM ومعنى كل درجة"
+      - "تطبّق Baveno VI: LSM < 20 kPa و platelets > 150 G/L"
+      - "تعرف ليه الـ HVPG لسه الأداة الوحيدة الدقيقة"
+      - "تعرف دور الـ spleen والـ CT والـ LSM في الـ prognosis"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 31
+        title: "من الـ fibrosis للضغط"
+        text: |
+          الدروس اللي فاتت كانت عن **التليف**. الدرس ده عن النتيجة الأخطر: **portal hypertension**، وبالذات الـ **clinically significant portal hypertension (CSPH)** اللي بيعمل varices و decompensation.
+
+          المريض اللي هنتكلم عنه عنده **compensated chronic liver disease** (ما حصلّوش decompensation قبل كده). أول سؤال: هل عنده **advanced chronic liver disease (cACLD)**؟
+
+          - **LSM > 10 kPa:** probable
+          - **LSM > 12–15 kPa:** very probable
+          - وعلامة imaging بتساعد: **nodularity of the liver surface**
+      - kind: figure
+        page: 30
+        title: "قاعدة الخمسات"
+        alt: "A staircase of four liver stiffness steps going down the page. 10 kPa: below it no cACLD and very low risk of liver-related events, at or above it cACLD. 15 kPa: below it with platelets above 150, no CSPH and low risk. 20 kPa: below it with platelets above 150, no endoscopy needed. 25 kPa: at or above it, CSPH and high risk of liver-related events. An arrow on the right shows risk rising down the page."
+        caption: "عدّ بالخمسة: **10** تفتح cACLD، **15** (مع platelets أكتر من 150) تقفل CSPH، **20** (مع platelets أكتر من 150) تلغي المنظار، **25** تأكد CSPH."
+        svg: |
+          <svg viewBox="0 0 330 336" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L02d" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-bad"/></marker>
+            </defs>
+            <text x="8" y="18" class="t-b">Liver stiffness, rule of five</text>
+            <rect x="8" y="32" width="66" height="58" rx="6" class="fg-good"/>
+            <text x="41" y="66" text-anchor="middle" class="t-lg t-b">10</text>
+            <text x="84" y="52" class="t-sm">&lt; 10 kPa: no cACLD</text>
+            <text x="84" y="67" class="t-sm t-mut">very low risk of LRE</text>
+            <text x="84" y="84" class="t-sm t-b">≥ 10 kPa: cACLD</text>
+            <rect x="24" y="102" width="66" height="58" rx="6" class="fg-acc"/>
+            <text x="57" y="136" text-anchor="middle" class="t-lg t-b">15</text>
+            <text x="100" y="122" class="t-sm">&lt; 15 kPa + platelets &gt; 150</text>
+            <text x="100" y="138" class="t-sm t-b">no CSPH</text>
+            <text x="100" y="154" class="t-sm t-mut">low risk of LRE</text>
+            <rect x="40" y="172" width="66" height="58" rx="6" class="fg-acc"/>
+            <text x="73" y="206" text-anchor="middle" class="t-lg t-b">20</text>
+            <text x="116" y="192" class="t-sm">&lt; 20 kPa + platelets &gt; 150</text>
+            <text x="116" y="208" class="t-sm t-b">no screening endoscopy</text>
+            <text x="116" y="224" class="t-sm t-mut">(Baveno VI criteria)</text>
+            <rect x="56" y="242" width="66" height="58" rx="6" class="fg-bad"/>
+            <text x="89" y="276" text-anchor="middle" class="t-lg t-b">25</text>
+            <text x="132" y="262" class="t-sm">≥ 25 kPa</text>
+            <text x="132" y="278" class="t-sm t-b t-bad">CSPH</text>
+            <text x="132" y="294" class="t-sm t-mut">risk of LRE</text>
+            <path d="M318 40V296" class="fg-arrow-bad" marker-end="url(#L02d)"/>
+            <text x="8" y="326" class="t-sm t-mut">LRE = liver-related events. Risk rises downwards.</text>
+          </svg>
+      - kind: aside
+        tone: tip
+        page: 30
+        text: |
+          افتكرها زي **الفكّة**: 10، 15، 20، 25. كل خمسة kPa بتقولك حاجة جديدة.
+
+          ولاحظ إن **الـ 15 والـ 20 لازم معاهم platelets أكتر من 150**. الرقم لوحده مش كفاية علشان تطمّن.
+      - kind: reveal
+        page: 35
+        prompt: "ليه الـ **platelet count** بيدخل في قرار الـ CSPH والـ varices؟"
+        answer: |
+          لأن الـ portal hypertension بيعمل **splenomegaly**، والطحال الكبير بيحجز الصفايح (**hypersplenism**)، والكبد المتليف بيعمل **thrombopoietin** أقل.
+
+          فالصفايح الواطية هي «بصمة» الضغط العالي في الدم. وعلشان كده الكتاب بيقول **platelet count و spleen size و spleen stiffness** كلهم additional NITs للـ CSPH.
+      - kind: explain
+        page: 35
+        title: "Baveno: مين يعمل منظار؟"
+        quote: "LSM by TE <20 kPa and platelet count >150 G/L (Baveno VI criteria) is a validated tool to rule-out high-risk varices"
+        text: |
+          - **LSM by TE > 20–25 kPa** بيشخّص **CSPH** في الـ cACLD. **أكتر من 20 kPa** = CSPH very likely (حوالي **90%**).
+          - **Portosystemic collaterals** على الـ US أو CT أو MRI = **sign of CSPH**، ولازم تتكتب في التقرير.
+          - **Baveno VI criteria:** لو **LSM < 20 kPa و platelets > 150 G/L**، الـ varices اللي محتاجة علاج **very unlikely (أقل من 5%)**: **ما تعملش screening endoscopy**، وأعد الـ LSM والـ platelets **كل سنة**.
+          - لو واحد من الاتنين مش متحقق (LSM 20 أو أكتر أو platelets أقل من 150): **perform screening endoscopy**.
+          - الـ criteria دي validated في الـ cACLD بسبب **untreated viral hepatitis، HIV-HCV، alcohol، NAFLD، PBC و PSC**.
+          - **Spleen stiffness** ممكن تساعد في تقدير الـ high-risk varices (weak recommendation).
+      - kind: sort
+        page: 35
+        prompt: "عندك 6 مرضى cACLD (بسبب alcohol أو NAFLD). مين محتاج screening endoscopy حسب Baveno VI؟"
+        bins: ["Can skip endoscopy", "Needs endoscopy"]
+        cards:
+          - { text: "LSM 14 kPa, platelets 210", bin: 0 }
+          - { text: "LSM 18 kPa, platelets 165", bin: 0 }
+          - { text: "LSM 22 kPa, platelets 200", bin: 1 }
+          - { text: "LSM 12 kPa, platelets 130", bin: 1 }
+          - { text: "LSM 26 kPa, platelets 90", bin: 1 }
+          - { text: "LSM 11 kPa, platelets 155", bin: 0 }
+        why: "لازم **الاتنين** مع بعض: LSM **أقل من 20** و platelets **أكتر من 150**. الـ 22 kPa فشل في الـ LSM، والـ 130 فشل في الصفايح حتى لو الـ LSM واطي."
+      - kind: explain
+        page: 35
+        title: "الـ HVPG: الترمومتر الحقيقي"
+        quote: "HVPG remains the only validated tool and should not be substituted by NITS"
+        text: |
+          الـ NITs بتقولك **فيه CSPH ولا لأ**. بس لو عايز تعرف:
+
+          - **severity** الـ portal hypertension بالظبط (فوق مجرد موجود/مش موجود)
+          - و **haemodynamic response to treatment** (مثلًا بعد الـ beta-blocker)
+
+          يبقى **HVPG** هو **الأداة الوحيدة الـ validated**، والـ NITs **ما تحلّش محله**. ولو الـ CSPH likely: المريض عنده **increased risk of clinical decompensation**، والـ HVPG هو اللي يقيس الشدة.
+      - kind: case
+        page: 31
+        stem: "A 58-year-old woman with compensated HCV cirrhosis, never bled, no ascites. She has not been treated for HCV yet."
+        steps:
+          - reveal: "LSM by TE is 18 kPa. Platelets are 120 G/L."
+            question: "Can she avoid screening endoscopy?"
+            options:
+              - "No: platelets below 150, so Baveno criteria are not met; do endoscopy"
+              - "Yes: LSM is below 20 kPa"
+              - "Yes: LSM is below 25 kPa, so no CSPH"
+            answer: 0
+            why: "الـ LSM تمام (أقل من 20)، بس الصفايح **أقل من 150**. الكتاب: **Baveno criteria not met if any of the two is present** ← screening endoscopy."
+          - reveal: "Ultrasound also shows portosystemic collaterals and a large spleen."
+            question: "What do these findings mean?"
+            options:
+              - "Signs of CSPH, with an increased risk of decompensation"
+              - "Nothing until HVPG is measured"
+              - "They exclude cACLD"
+            answer: 0
+            why: "الـ **collaterals** (والـ spleen size) علامات **CSPH** ولازم تتكتب في التقرير. والـ CSPH معناه **increased risk of clinical decompensation**."
+          - question: "The team later wants the exact severity of her portal hypertension and her response to a beta-blocker. Which test?"
+            options:
+              - "HVPG measurement"
+              - "Repeat LSM by TE"
+              - "Spleen stiffness"
+              - "Contrast CT"
+            answer: 0
+            why: "الـ **HVPG** هو الوحيد الـ validated للشدة الدقيقة وللـ haemodynamic response. الـ LSM والـ spleen stiffness بيعملوا risk stratification بس."
+      - kind: update
+        page: 35
+        text: "الكتاب بيقول **أكتر من 20–25 kPa** للـ CSPH. Baveno VII بيحدد: **LSM ≥ 25 kPa** بيعمل rule-in للـ CSPH، و **LSM ≤ 15 kPa مع platelets 150 أو أكتر** بيعمل rule-out (وده نفس اللي في صورة الكتاب صفحة 30). وفضّل قاعدة الـ أقل من 20 kPa و أكتر من 150 لتجنّب المنظار. في الامتحان اكتب رقم الكتاب."
+        ref: "Baveno VII consensus, 2021"
+      - kind: explain
+        page: 36
+        title: "الـ CT والـ prognosis"
+        text: |
+          - **CT مش للـ primary screening** للـ oesophageal و gastric varices. بس لو عملت CT لسبب تاني، **دوّر على الـ varices واكتبها**.
+          - **Liver stiffness at diagnosis** مع الـ **liver function tests** بتعمل risk stratification للـ **clinical decompensation and mortality** (strong).
+          - **Annual repeated LSM** ممكن تحسّن التقدير (weak recommendation).
+      - kind: check
+        page: 36
+        question: "Which statement about varices and imaging in cACLD matches the lecture?"
+        options:
+          - "CT is not for primary variceal screening, but varices seen on a routine CT should be reported"
+          - "CT is the preferred first screening test for oesophageal varices"
+          - "Varices seen on CT can be ignored until endoscopy confirms them"
+          - "Spleen stiffness can replace HVPG to measure treatment response"
+        answer: 0
+        why:
+          - "صح: الكتاب: CT **should not be used for primary screening**، بس **varices should be looked for and reported**."
+          - "العكس: الـ CT مش للـ primary screening."
+          - "الكتاب بيقول اكتبها في التقرير، مش تتجاهلها."
+          - "الـ HVPG **should not be substituted by NITs**، والـ spleen stiffness additional tool بس."
+      - kind: aside
+        tone: joke
+        page: 35
+        text: |
+          المريض: «يعني يا دكتور مش هعمل منظار السنة دي؟»
+
+          إنت: «لأ، الـ FibroScan 16 والصفايح 180، Baveno بيقول روّح. بس **السنة الجاية** تيجي نعيد الاتنين.» 😄
+
+          ده أحلى «روّح» في الهيباتولوجي.
+      - kind: try
+        items: [hb.L02.062, hb.L02.038, hb.L02.042, hb.L02.061, hb.L02.058]
+    recap:
+      - "cACLD: LSM **أكتر من 10** probable، **أكتر من 12–15** very probable، ومعاها nodular liver surface."
+      - "قاعدة الخمسات: **10** cACLD، **15 + plt أكتر من 150** no CSPH، **20 + plt أكتر من 150** no endoscopy، **25** CSPH."
+      - "CSPH: LSM **أكتر من 20–25 kPa** (أكتر من 20 = ~90%)، و collaterals على الـ imaging. Platelets و spleen size و spleen stiffness additional."
+      - "Baveno VI: **LSM أقل من 20 و platelets أكتر من 150** ← skip endoscopy وأعد كل سنة. أي واحد ناقص ← endoscopy."
+      - "الـ **HVPG** الوحيد للشدة الدقيقة والـ response للعلاج."
+      - "CT مش للـ screening بس اكتب الـ varices. الـ LSM عند التشخيص + LFTs للـ prognosis."
+    practice: [hb.L02.038, hb.L02.039, hb.L02.040, hb.L02.041, hb.L02.042, hb.L02.043, hb.L02.044, hb.L02.058, hb.L02.059, hb.L02.060, hb.L02.061, hb.L02.062, hb.L02.063, hb.L02.064, hb.L02.065, hb.L02.066, hb.L02.072, hb.L02.073, hb.L02.074, hb.L02.077, hb.L02.082, hb.L02.083]

@@ -3,18 +3,31 @@
 //! Feature chunks (SPLIT.md §7) each own a module directory and register it
 //! with one line in `Screen` / `screen_body` below.
 
+mod back;
 mod calc;
 mod case;
 mod content;
+mod data_export;
 mod desk;
+mod diag;
+mod fonts;
 mod hover;
 mod i18n;
+mod icons;
+mod import;
 mod oral;
+mod order;
+mod plan;
 mod platform;
 mod prefs;
 mod settings;
 mod shortcuts;
+mod stats;
+mod store;
+mod study;
+mod table;
 mod today;
+mod verify;
 
 use dioxus::prelude::*;
 
@@ -48,19 +61,6 @@ impl Screen {
         }
     }
 
-    /// A one-glyph icon for the nav (text, no image assets).
-    fn glyph(self) -> &'static str {
-        match self {
-            Self::Today => "◐",
-            Self::Study => "✎",
-            Self::Bank => "?",
-            Self::Cases => "✚",
-            Self::Oral => "◉",
-            Self::Stats => "▤",
-            Self::Settings => "⚙",
-        }
-    }
-
     fn from_env() -> Option<Screen> {
         // BATNA_OPEN_SCREEN=study opens that screen at launch (previews and screenshots).
         let name = std::env::var("BATNA_OPEN_SCREEN").ok()?;
@@ -80,6 +80,7 @@ pub struct Ui {
 }
 
 fn main() {
+    diag::install_panic_hook();
     #[cfg(all(feature = "desktop", not(target_os = "android")))]
     {
         use dioxus::desktop::{Config, LogicalSize, WindowBuilder};
@@ -115,10 +116,13 @@ fn App() -> Element {
         prefs: Signal::new(prefs::DevicePrefs::load()),
     });
     let settings = use_context_provider(settings::SettingsNav::new);
+    store::use_provide_review();
     let current = *ui.screen.read();
     let look = ui.prefs.read().css();
+    back::use_back(ui, current, *settings.open.read());
     rsx! {
         document::Title { "Batna" }
+        style { {fonts::css()} }
         style { {MAIN_CSS} }
         style { {look} }
         desk::Chrome {}
@@ -133,7 +137,7 @@ fn App() -> Element {
                     aria_label: Screen::Settings.label(),
                     title: Screen::Settings.label(),
                     onclick: move |_| settings.show(None),
-                    span { class: "glyph", aria_hidden: "true", {Screen::Settings.glyph()} }
+                    {icons::nav(Screen::Settings)}
                 }
             }
             nav { class: "nav", aria_label: "التنقل",
@@ -145,7 +149,7 @@ fn App() -> Element {
                     class: "nav-item nav-foot",
                     aria_label: Screen::Settings.label(),
                     onclick: move |_| settings.show(None),
-                    span { class: "glyph", aria_hidden: "true", {Screen::Settings.glyph()} }
+                    span { class: "glyph", aria_hidden: "true", {icons::nav(Screen::Settings)} }
                     span { class: "label", {Screen::Settings.label()} }
                 }
             }
@@ -159,11 +163,11 @@ fn App() -> Element {
 fn screen_body(screen: Screen) -> Element {
     match screen {
         Screen::Today => rsx! { today::Today {} },
-        Screen::Study => rsx! { Soon { screen } },
+        Screen::Study => rsx! { study::Study {} },
         Screen::Bank => rsx! { Soon { screen } },
         Screen::Cases => rsx! { case::CasesScreen {} },
         Screen::Oral => rsx! { oral::Oral {} },
-        Screen::Stats => rsx! { Soon { screen } },
+        Screen::Stats => rsx! { stats::Stats {} },
         Screen::Settings => rsx! { Soon { screen } },
     }
 }
@@ -178,7 +182,7 @@ fn NavButton(screen: Screen, class: &'static str) -> Element {
             "aria-current": if active { "page" } else { "false" },
             "aria-label": screen.label(),
             onclick: move |_| ui.screen.set(screen),
-            span { class: "glyph", aria_hidden: "true", {screen.glyph()} }
+            span { class: "glyph", {icons::nav(screen)} }
             span { class: "label", {screen.label()} }
         }
     }

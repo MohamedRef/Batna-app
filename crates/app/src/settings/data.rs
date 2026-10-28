@@ -15,7 +15,17 @@ pub fn DataSection() -> Element {
                 Some(f) => rsx! { bdi { class: "path", dir: "ltr", "{f}" } },
                 None => rsx! { p { class: "muted", {tx::DATA_NOWHERE} } },
             }
-            p { class: "muted small", {tx::DATA_LOCAL} }
+            if crate::store::shared().path.is_some() {
+                p { class: "muted small", {tx::DATA_LOCAL} }
+            } else {
+                p { class: "small", role: "alert", {crate::i18n::study_settings::STORE_MEMORY} }
+            }
         }
+        style { {crate::today::CSS} }
+        style { {crate::verify::CSS} }
+        crate::verify::ExportVerdicts {}
+        crate::data_export::ExportCard {}
+        crate::import::ImportCard {}
+        crate::diag::DiagnosticsCard {}
     }
 }

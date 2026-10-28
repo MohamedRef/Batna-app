@@ -21,6 +21,7 @@ const SETTINGS_CSS: &str = include_str!("../../assets/settings.css");
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
 pub enum Section {
+    Study,
     Look,
     /// Pen hover and the sidebar, on Android (the Tab S11, the S24 Ultra).
     Tablet,
@@ -31,11 +32,12 @@ pub enum Section {
 }
 
 impl Section {
-    pub const ALL: [Self; 5] = [Self::Look, Self::Tablet, Self::Mac, Self::Data, Self::About];
+    pub const ALL: [Self; 6] = [Self::Study, Self::Look, Self::Tablet, Self::Mac, Self::Data, Self::About];
 
     /// Stable id, for `BATNA_OPEN_SETTINGS=<id>` previews.
     pub fn id(self) -> &'static str {
         match self {
+            Self::Study => "study",
             Self::Look => "look",
             Self::Tablet => "tablet",
             Self::Mac => "mac",
@@ -59,6 +61,7 @@ impl Section {
 
     fn title(self) -> &'static str {
         match self {
+            Self::Study => crate::i18n::study_settings::SECTION,
             Self::Look => tx::LOOK,
             Self::Tablet => crate::i18n::desk::TABLET,
             Self::Mac => crate::i18n::desk::MAC,
@@ -69,6 +72,7 @@ impl Section {
 
     fn summary(self) -> &'static str {
         match self {
+            Self::Study => crate::i18n::study_settings::SECTION_SUB,
             Self::Look => tx::LOOK_SUB,
             Self::Tablet => crate::i18n::desk::TABLET_SUB,
             Self::Mac => crate::i18n::desk::MAC_SUB,
@@ -143,7 +147,6 @@ pub fn SettingsSheet() -> Element {
     let chosen = *nav.section.read();
     // Phones show the list until a section is picked; wider windows show both.
     let current = chosen.unwrap_or(Section::ALL[0]);
-    let listed = Section::ALL.into_iter().filter(|s| s.applies());
     let drilled = chosen.is_some();
     let mut section_sig = nav.section;
 
@@ -161,13 +164,6 @@ pub fn SettingsSheet() -> Element {
                 let _ = e.set_focus(true).await;
             },
             header { class: "settings-head",
-                button {
-                    class: "icon-button settings-back",
-                    "data-back": "true",
-                    aria_label: tx::BACK,
-                    onclick: move |_| section_sig.set(None),
-                    span { aria_hidden: "true", "→" }
-                }
                 h2 { id: "settings-title",
                     span { class: "settings-title-list", {tx::TITLE} }
                     span { class: "settings-title-section", {current.title()} }
@@ -180,10 +176,19 @@ pub fn SettingsSheet() -> Element {
                     onclick: move |_| nav.close(),
                     span { aria_hidden: "true", "✕" }
                 }
+                // Last in the header, so system Back picks it over Close
+                // whenever it shows (the phone, inside a section).
+                button {
+                    class: "icon-button settings-back",
+                    "data-back": "true",
+                    aria_label: tx::BACK,
+                    onclick: move |_| section_sig.set(None),
+                    span { aria_hidden: "true", "→" }
+                }
             }
             div { class: "settings-body",
                 nav { class: "settings-sections", aria_label: tx::SECTIONS,
-                    for s in listed {
+                    for s in Section::ALL.into_iter().filter(|s| s.applies()) {
                         button {
                             key: "{s.id()}",
                             aria_current: if current == s { "true" } else { "false" },
@@ -204,6 +209,7 @@ pub fn SettingsSheet() -> Element {
 #[component]
 fn SectionView(section: Section) -> Element {
     match section {
+        Section::Study => rsx! { crate::today::StudySection {} },
         Section::Look => rsx! { look::LookSection {} },
         Section::Tablet | Section::Mac => rsx! { crate::desk::DeviceSettings { section } },
         Section::Data => rsx! { data::DataSection {} },

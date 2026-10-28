@@ -27,6 +27,12 @@ derived from it (`scripts/android-release-apk.sh`). An alpha always sorts
 before its beta, and a beta before the release, so each stage installs over
 the previous one and keeps your data.
 
+Until the first alpha, the version stays `0.1.0-alpha.0`. A version with no
+pre-release counts as a final release (stage 999), so leaving it at `0.1.0`
+would make any build installed now look newer than the first alpha, and
+Android would refuse the alpha as a downgrade. Only move to a bare version
+(`1.0.0`) for a real stable release.
+
 ## 2. One-time setup on the Mac
 
 | Step | Command | Notes |

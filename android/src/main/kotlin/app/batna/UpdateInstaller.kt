@@ -105,9 +105,13 @@ object UpdateInstaller {
     }
 
     private fun ensureChannel(nm: NotificationManager) {
-        if (nm.getNotificationChannel(CHANNEL) == null) {
-            nm.createNotificationChannel(NotificationChannel(CHANNEL, "Batna updates", NotificationManager.IMPORTANCE_LOW))
-        }
+        // Creating it again only renames an existing channel; the user's
+        // settings stay.
+        nm.createNotificationChannel(
+            NotificationChannel(CHANNEL, "تحديثات باطنة", NotificationManager.IMPORTANCE_LOW).apply {
+                description = "تحديث جاهز يتثبّت، وباطنة اتحدّث"
+            },
+        )
     }
 
     /** Opens Batna's "Install unknown apps" switch in Android Settings. */

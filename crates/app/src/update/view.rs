@@ -17,7 +17,6 @@ const UPDATE_CSS: &str = r#"
   border-radius: var(--radius); background: var(--accent-soft); }
 .update-state progress { inline-size: 100%; accent-color: var(--accent); }
 .update-notes { white-space: pre-line; }
-.update-primary { background: var(--accent); color: var(--surface); border-color: transparent; font-weight: 600; }
 .update-banner { flex-direction: row; flex-wrap: wrap; align-items: center; gap: var(--sp-2) var(--sp-3);
   border-inline-start: 4px solid var(--accent); margin-block-end: var(--sp-3); }
 .update-banner .ub-text { flex: 1 1 14rem; min-inline-size: 0; display: grid; gap: var(--sp-1); }
@@ -140,7 +139,7 @@ pub fn UpdatesSection() -> Element {
                 }
                 div { class: "row",
                     button {
-                        class: "button",
+                        class: "btn btn-secondary",
                         disabled: busy,
                         onclick: move |_| work(|u| u.check(false)),
                         {tx::CHECK_NOW}
@@ -279,9 +278,9 @@ fn PhaseView(phase: Phase, auto: bool) -> Element {
             }
             if let Some((label, run)) = action {
                 div { class: "row",
-                    button { class: "button update-primary", onclick: move |_| run(), {label} }
+                    button { class: "btn btn-primary", onclick: move |_| run(), {label} }
                     if matches!(phase, Phase::NeedsPermission(_)) {
-                        button { class: "button", onclick: move |_| open_install_permission(), {tx::OPEN_PERMISSION} }
+                        button { class: "btn btn-secondary", onclick: move |_| open_install_permission(), {tx::OPEN_PERMISSION} }
                     }
                 }
             }
@@ -326,9 +325,9 @@ pub fn UpdateBanner() -> Element {
                 }
             }
             div { class: "row",
-                button { class: "button update-primary", onclick: move |_| run(), {label} }
+                button { class: "btn btn-primary", onclick: move |_| run(), {label} }
                 button {
-                    class: "button",
+                    class: "btn btn-secondary",
                     onclick: move |_| {
                         if let Some(u) = super::get() {
                             u.dismiss();

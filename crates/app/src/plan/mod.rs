@@ -53,7 +53,7 @@ pub fn Planner(data: Rc<StudyData>) -> Element {
         ProgressCard { p: p.clone() }
         WeekCard { p: p.clone() }
         div { class: "plan-actions",
-            button { class: "secondary", onclick: move |_| editing.set(true), {tx::EDIT} }
+            button { class: "btn btn-secondary", onclick: move |_| editing.set(true), {tx::EDIT} }
         }
     }
 }
@@ -135,9 +135,9 @@ fn Setup(today: Day, settings: PlanSettings, on_done: EventHandler<()>) -> Eleme
                 p { class: "error", role: "alert", {msg} }
             }
             div { class: "plan-actions",
-                button { class: "primary", onclick: save, {tx::SAVE} }
+                button { class: "btn btn-primary", onclick: save, {tx::SAVE} }
                 if had_exam {
-                    button { class: "secondary", onclick: move |_| on_done.call(()), {tx::CANCEL} }
+                    button { class: "btn btn-secondary", onclick: move |_| on_done.call(()), {tx::CANCEL} }
                 }
             }
         }

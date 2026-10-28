@@ -37,7 +37,7 @@ pub fn EnumerateItem(item: Item, on_grade: EventHandler<Grade>) -> Element {
                         oninput: move |e| typed.set(e.value()),
                     }
                     div { class: "st-actions",
-                        button { class: "st-primary", "aria-keyshortcuts": "Enter", onclick: open, {tx::SHOW_POINTS} }
+                        button { class: "btn btn-primary btn-lg", "aria-keyshortcuts": "Enter", onclick: open, {tx::SHOW_POINTS} }
                     }
                 } else if !wrote.is_empty() {
                     section { class: "st-mine-col",

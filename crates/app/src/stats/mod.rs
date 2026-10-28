@@ -227,7 +227,7 @@ pub fn SessionButton(label: &'static str, ids: Vec<String>) -> Element {
     rsx! {
         div { class: "session-start",
             button {
-                class: "primary",
+                class: "btn btn-primary",
                 disabled: playable.is_empty(),
                 onclick: move |_| {
                     *crate::study::START.write() =

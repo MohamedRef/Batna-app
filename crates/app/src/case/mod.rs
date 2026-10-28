@@ -147,7 +147,7 @@ pub fn ItemMeta(lecture: String, item_id: String, on_back: EventHandler) -> Elem
     let unverified = find_item(&item_id).is_some_and(|(_, i)| i.status == Status::Unverified);
     rsx! {
         div { class: "player-meta",
-            button { class: "link-button", onclick: move |_| on_back.call(()), "‹ " {tx::BACK} }
+            button { class: "btn-link", onclick: move |_| on_back.call(()), "‹ " {tx::BACK} }
             bdi { class: "muted small", "{lecture}" }
             if unverified { span { class: "chip", {tx::UNVERIFIED} } }
         }
@@ -219,7 +219,7 @@ pub fn CasePlayer(item_id: String, on_back: EventHandler) -> Element {
                                 }
                             }
                         } else if !shown() {
-                            button { class: "btn-primary", onclick: move |_| shown.set(true), {tx::SHOW_ANSWER} }
+                            button { class: "btn btn-primary", onclick: move |_| shown.set(true), {tx::SHOW_ANSWER} }
                         }
                         if picked().is_some() || shown() {
                             if let Some(p) = picked() {
@@ -233,13 +233,13 @@ pub fn CasePlayer(item_id: String, on_back: EventHandler) -> Element {
                             }
                             if shown() && !answered {
                                 div { class: "row",
-                                    button { class: "btn-good", onclick: move |_| answer(true), {tx::GOT_IT} }
-                                    button { class: "btn-secondary", onclick: move |_| answer(false), {tx::MISSED} }
+                                    button { class: "btn btn-good", onclick: move |_| answer(true), {tx::GOT_IT} }
+                                    button { class: "btn btn-secondary", onclick: move |_| answer(false), {tx::MISSED} }
                                 }
                             }
                             if answered {
                                 button {
-                                    class: "btn-primary",
+                                    class: "btn btn-primary",
                                     onclick: {
                                         let record_id = record_id.clone();
                                         move |_| {
@@ -315,8 +315,8 @@ fn Summary(
             }
             if let Some(u) = update { p { class: "small update", "{tx::UPDATE}: " bdi { "{u}" } } }
             div { class: "row",
-                button { class: "btn-secondary", onclick: move |_| on_again.call(()), {tx::AGAIN} }
-                button { class: "btn-primary", onclick: move |_| on_back.call(()), {tx::BACK} }
+                button { class: "btn btn-secondary", onclick: move |_| on_again.call(()), {tx::AGAIN} }
+                button { class: "btn btn-primary", onclick: move |_| on_back.call(()), {tx::BACK} }
             }
         }
     }

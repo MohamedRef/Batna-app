@@ -19,7 +19,7 @@ pub fn CardItem(item: Item, on_grade: EventHandler<Grade>) -> Element {
                 if !shown() {
                     p { class: "muted small", {tx::THINK_FIRST} }
                     button {
-                        class: "st-primary",
+                        class: "btn btn-primary btn-lg",
                         autofocus: true,
                         "aria-keyshortcuts": "Space",
                         onclick: move |_| shown.set(true),

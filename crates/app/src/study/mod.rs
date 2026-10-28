@@ -216,7 +216,7 @@ pub fn Study() -> Element {
             match current.and_then(|p| items().get(&p.item_id).map(|(l, i)| (p, *l, *i))) {
                 // Only when content changed under a running session; "end" still works.
                 None => rsx! {
-                    button { class: "st-primary", onclick: move |_| phase.set(Phase::Summary), {tx::END} }
+                    button { class: "btn btn-primary btn-lg", onclick: move |_| phase.set(Phase::Summary), {tx::END} }
                 },
                 Some((p, lecture, item)) => {
                     let item = store.0.borrow().effective(item);
@@ -256,7 +256,7 @@ pub fn Study() -> Element {
                             }
                             span { class: "muted small", "{pos + 1} {tx::OF} {len}" }
                             button {
-                                class: "st-link",
+                                class: "btn-link",
                                 "aria-keyshortcuts": "Escape",
                                 onclick: move |_| phase.set(Phase::Summary),
                                 {tx::END}
@@ -348,13 +348,13 @@ fn Setup(
                 p { class: "st-preview",
                     "{preview_count} {tx::ITEMS} · {reviews} {tx::REVIEWS} · {preview_new} {tx::NEW} · {tx::ABOUT} {preview_mins} {tx::MINUTES}"
                 }
-                button { class: "st-primary st-start", onclick: move |_| on_start.call(()), {tx::START} }
+                button { class: "btn btn-primary btn-lg st-start", onclick: move |_| on_start.call(()), {tx::START} }
             }
 
             div { class: "st-section-head",
                 h2 { {tx::LECTURES} }
                 button {
-                    class: "st-link",
+                    class: "btn-link",
                     onclick: move |_| {
                         let mut c = chosen.write();
                         if c.len() == all_ids.len() {
@@ -459,7 +459,7 @@ fn SummaryView(
                 }
             }
             div { class: "st-actions",
-                button { class: "st-primary", onclick: move |_| on_again.call(()), {tx::ANOTHER} }
+                button { class: "btn btn-primary btn-lg", onclick: move |_| on_again.call(()), {tx::ANOTHER} }
             }
         }
     }

@@ -11,6 +11,7 @@ The first content is Chapter 1 (Hepato-Biliary Pancreatic Unit) of the Alexandri
 | Review: FSRS scheduling, Today screen, ✓ / ✎ / ✗ content checks, export and restore | ✓ |
 | Sync between Mac, phone and tablet: Batna's own free Cloudflare Worker, Google sign-in, devices list ([docs/CLOUD.md](docs/CLOUD.md)) | ✓ (deploy pending) |
 | Your own cards: add-a-card form, Share-to-Batna on Android, their own study deck and Anki subdeck | ✓ |
+| Updates over the air: signed feed, "new version" notification, and what's new before and after each update with a changelog in Settings (Morphe-style sheet) | ✓ |
 | Study sessions, question bank, cases, oral mode, stats | in progress |
 | Anki export | `batna-tools anki`: one `batna.apkg`, a subdeck per lecture ([docs/ANKI.md](docs/ANKI.md)) |
 

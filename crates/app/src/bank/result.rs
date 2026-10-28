@@ -6,10 +6,10 @@ use batna_core::exam::{self, Mode, Score};
 use dioxus::prelude::*;
 
 use super::question::QuestionView;
-use super::{
-    PHASE, Phase, back_to_setup, lecture_number, lecture_title, lookup, minutes, start, topic_title,
-};
+use super::{PHASE, Phase, back_to_setup, lookup, minutes, short_lecture_title, start, topic_title};
+use crate::content::lecture_code;
 use crate::i18n::bank as tx;
+use crate::i18n::count::{MINUTE, count};
 
 #[derive(Clone, Copy, PartialEq)]
 enum Show {
@@ -94,7 +94,7 @@ pub fn Result() -> Element {
             }
             div { class: "muted small",
                 if timed {
-                    "{tx::TOOK} " bdi { "{minutes(outcome.took_ms)}" } " {tx::MINUTES}"
+                    "{tx::TOOK} " {count(minutes(outcome.took_ms), &MINUTE)}
                 }
                 if outcome.unanswered > 0 {
                     " · " bdi { "{outcome.unanswered}" } " {tx::UNANSWERED}"
@@ -109,7 +109,7 @@ pub fn Result() -> Element {
             section { class: "card",
                 h2 { {tx::BY_LECTURE} }
                 ScoreRows {
-                    rows: lectures.into_iter().map(|(l, s)| (format!("L{} · {}", lecture_number(&l), lecture_title(&l)), s)).collect::<Vec<_>>(),
+                    rows: lectures.into_iter().map(|(l, s)| (format!("{} · {}", lecture_code(&l), short_lecture_title(&l)), s)).collect::<Vec<_>>(),
                 }
             }
         }

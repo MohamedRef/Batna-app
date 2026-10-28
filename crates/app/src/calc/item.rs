@@ -105,7 +105,7 @@ pub fn CalcItem(item_id: String, on_back: EventHandler) -> Element {
                         button { class: "btn btn-primary", "aria-keyshortcuts": "Space", onclick: move |_| meaning_open.set(true), {tx::SHOW_MEANING} }
                     } else {
                         bdi { class: "case-why", "{interpret}" }
-                        BookPage { label: cx::PAGE, page: item.src.page, quote: item.src.quote.clone() }
+                        BookPage { page: item.src.page, quote: item.src.quote.clone() }
                         if let Some(u) = &item.update {
                             p { class: "small update", "{cx::UPDATE}: " bdi { "{u.text} ({u.reference})" } }
                         }

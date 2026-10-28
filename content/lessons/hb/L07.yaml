@@ -1,0 +1,1162 @@
+schema: batna.lesson/v1
+lecture: hb.L07
+lessons:
+  # ------------------------------------------------------------------
+  - id: hb.L07.lesson1
+    title: "فيروس بيعمل نسخة احتياطية في النواة"
+    hook: "ليه الـ HBV بيرجع كل ما توقف العلاج؟ الإجابة في حلقة صغيرة اسمها cccDNA."
+    minutes: 8
+    pages: [113, 114]
+    topics: [virology, acute]
+    goals:
+      - "تعرف مكوّنات الـ virion وكل antigen جاي منين"
+      - "تفهم الـ life cycle وفين بالظبط الـ NAs بتضرب"
+      - "تحفظ أرقام الـ perinatal transmission وحكاية الرضاعة"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 113
+        title: "الفيروس من بره لجوه"
+        text: |
+          الـ HBV فيروس DNA صغير، وكل طبقة فيه ليها antigen باسمها، وده سر الـ serology كلها بعدين:
+
+          - **Envelope** (الغلاف) عليه **HBsAg**: الـ s = surface.
+          - جواه **nuclear capsid** وده **HBcAg**: الـ c = core.
+          - **HBeAg**: الرسمة في الكتاب بتحطه مع الـ core.
+          - وفي القلب: **viral DNA** ومعاه **DNA polymerase**.
+
+          افتكر الترتيب ده كويس: لما نقرا الـ serology، كل antibody هيقولك الجهاز المناعي "شاف" أنهي طبقة.
+      - kind: match
+        page: 113
+        prompt: "وصّل كل جزء من الـ virion بالـ antigen أو الإنزيم بتاعه:"
+        pairs:
+          - ["Envelope", "HBsAg"]
+          - ["Nuclear capsid", "HBcAg"]
+          - ["Enzyme inside the core with the DNA", "DNA polymerase"]
+        why: "الغلاف = surface = **HBsAg**، الـ capsid = core = **HBcAg**، والإنزيم اللي جوه مع الـ DNA هو **DNA polymerase**."
+      - kind: aside
+        tone: exam
+        page: 113
+        text: |
+          **10 genotypes (A–J)**، والممتحن بيحب اتنين بس:
+
+          - **Genotype A**: افتكره **A+ student** مع الـ interferon، يعني **better response to interferon**.
+          - **Genotype C**: افتكره **Cancer + Converts late**، يعني **delayed HBeAg seroconversion** و **higher risk of HCC**.
+      - kind: explain
+        page: 113
+        title: "دورة حياة الفيروس في الـ hepatocyte"
+        text: |
+          الرسمة التانية في صفحة 113 بتحكي القصة دي:
+
+          - الـ virion بيمسك في **receptor** على الـ hepatocyte ويدخل بالـ **endocytosis**.
+          - يحصل **uncoating**، والـ DNA يروح النواة ويتقفل في حلقة اسمها **cccDNA** (covalently closed circular DNA).
+          - الـ cccDNA هو **القالب**: منه بيتعمل **transcription** لـ RNAs، منهم **pregenomic RNA (3.5 kb)**.
+          - الـ pregenomic RNA بيدخل capsid جديد (**encapsidation**)، وجوه الـ capsid بيتعمل **reverse transcription**: الأول negative-strand DNA وبعدين positive-strand DNA.
+          - الـ capsid ياخد **envelope protein** من الـ ER، يعمل **budding**، ويطلع بره (**secretion**).
+          - وجزء من الـ capsids بيرجع النواة يزوّد الـ cccDNA (**cccDNA amplification**).
+      - kind: figure
+        page: 113
+        title: "الـ life cycle وفين الـ NAs بتوقفه"
+        alt: "Vertical flow of the HBV life cycle: virion binds receptor, endocytosis and uncoating, then inside a dashed nucleus box cccDNA formation and transcription to pregenomic RNA, then encapsidation, reverse transcription (marked as blocked by nucleos(t)ide analogues), envelope from the ER with budding, and secretion. A dashed loop returns new capsids to the nucleus for cccDNA amplification."
+        caption: "الـ NAs بتوقف الـ **reverse transcription** جوه الـ capsid، بس الـ **cccDNA** اللي في النواة مش بتلمسه."
+        svg: |
+          <svg viewBox="0 0 330 430" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L07a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+              <marker id="L07b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-acc"/></marker>
+              <marker id="L07c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-bad"/></marker>
+            </defs>
+            <rect x="60" y="8" width="220" height="32" rx="6" class="fg-box"/>
+            <text x="170" y="29" text-anchor="middle" class="t-sm">Virion binds receptor</text>
+            <path d="M170 40v14" class="fg-arrow" marker-end="url(#L07a)"/>
+            <rect x="60" y="56" width="220" height="32" rx="6" class="fg-box"/>
+            <text x="170" y="77" text-anchor="middle" class="t-sm">Endocytosis, then uncoating</text>
+            <path d="M170 88v18" class="fg-arrow" marker-end="url(#L07a)"/>
+            <rect x="44" y="108" width="282" height="112" rx="10" class="fg-thin"/>
+            <text x="318" y="124" text-anchor="end" class="t-sm t-mut">Nucleus</text>
+            <rect x="60" y="130" width="220" height="32" rx="6" class="fg-acc"/>
+            <text x="170" y="151" text-anchor="middle" class="t-sm t-b">cccDNA = the template</text>
+            <path d="M170 162v14" class="fg-arrow" marker-end="url(#L07a)"/>
+            <rect x="60" y="178" width="220" height="32" rx="6" class="fg-box"/>
+            <text x="170" y="199" text-anchor="middle" class="t-sm">Transcription: 3.5 kb pgRNA</text>
+            <path d="M170 210v20" class="fg-arrow" marker-end="url(#L07a)"/>
+            <rect x="60" y="232" width="220" height="32" rx="6" class="fg-box"/>
+            <text x="170" y="253" text-anchor="middle" class="t-sm">Encapsidation of pgRNA</text>
+            <path d="M145 264v16" class="fg-arrow" marker-end="url(#L07a)"/>
+            <rect x="60" y="282" width="170" height="44" rx="6" class="fg-box"/>
+            <text x="145" y="300" text-anchor="middle" class="t-sm">Reverse transcription:</text>
+            <text x="145" y="316" text-anchor="middle" class="t-sm">(−) then (+) strand DNA</text>
+            <rect x="240" y="286" width="84" height="36" rx="6" class="fg-bad"/>
+            <text x="282" y="301" text-anchor="middle" class="t-sm t-b t-bad">NAs</text>
+            <text x="282" y="315" text-anchor="middle" class="t-sm t-bad">block here</text>
+            <path d="M240 304h-6" class="fg-arrow-bad" marker-end="url(#L07c)"/>
+            <path d="M145 326v16" class="fg-arrow" marker-end="url(#L07a)"/>
+            <rect x="60" y="344" width="220" height="32" rx="6" class="fg-box"/>
+            <text x="170" y="365" text-anchor="middle" class="t-sm">Envelope (HBsAg) from ER, budding</text>
+            <path d="M170 376v14" class="fg-arrow" marker-end="url(#L07a)"/>
+            <rect x="60" y="392" width="220" height="32" rx="6" class="fg-good"/>
+            <text x="170" y="413" text-anchor="middle" class="t-sm t-b">Secretion of new virions</text>
+            <path d="M60 300H16V146H56" class="fg-arrow-acc" stroke-dasharray="5 4" marker-end="url(#L07b)"/>
+            <text x="20" y="236" class="t-sm t-acc">back</text>
+            <text x="20" y="250" class="t-sm t-acc">to</text>
+            <text x="20" y="264" class="t-sm t-acc">cccDNA</text>
+          </svg>
+      - kind: reveal
+        page: 113
+        prompt: "لو الـ NAs بتوقف الفيروس بالقوة دي، ليه لما نوقفها الـ DNA بيرجع تاني؟"
+        answer: |
+          بص على الرسمة: الـ NAs بتضرب في **reverse transcription** جوه الـ capsid، يعني بتمنع تصنيع DNA جديد.
+
+          لكن الـ **cccDNA** قاعد في النواة زي نسخة احتياطية، ومش بيتأثر بيها. أول ما الدوا يقف، القالب لسه موجود ويبدأ يطلّع pgRNA من تاني.
+
+          ده المنطق اللي ورا إن علاج كتير من المرضى **long-term** (هتشوفه في درس العلاج).
+      - kind: check
+        page: 113
+        question: "Nucleos(t)ide analogues act on which step of the HBV life cycle?"
+        options:
+          - "Reverse transcription of pregenomic RNA into DNA"
+          - "Formation of cccDNA in the nucleus"
+          - "Viral entry through the receptor"
+          - "Transcription of cccDNA into RNA"
+        answer: 0
+        why:
+          - "صح: الرسمة بتحط الـ NAs على الـ **negative- and positive-strand DNA synthesis** جوه الـ capsid."
+          - "الـ cccDNA بيتكوّن في النواة والـ NAs مش بتمنعه، وعلشان كده الفيروس بيرجع لما العلاج يقف."
+          - "الدخول بالـ receptor والـ endocytosis مش ده مكان الـ NAs."
+          - "الـ transcription بيحصل من الـ cccDNA في النواة، قبل الخطوة اللي الـ NAs بتوقفها."
+      - kind: explain
+        page: 114
+        title: "بيتنقل إزاي؟"
+        text: |
+          - **Incubation period: 1 to 4 months**.
+          - **Blood borne infection**.
+          - **Perinatal transmission** من غير prophylaxis: **85–90%** لو الأم **HBeAg-positive**، و **30%** لو الأم **HBeAg-negative**.
+      - kind: reveal
+        page: 114
+        prompt: "ليه الأم الـ HBeAg-positive بتنقل للطفل أكتر بكتير؟"
+        answer: |
+          الـ **HBeAg** ماشي مع **replication** عالي، يعني فيروس أكتر في الدم. فيروس أكتر = فرصة انتقال أكبر وقت الولادة.
+
+          وعلشان كده في الحمل هتلاقي القرار كله مبني على **HBV DNA** (هنشوفه في آخر درس).
+      - kind: check
+        page: 114
+        question: "An HBsAg-positive mother asks if she can breastfeed. Per the lecture:"
+        options:
+          - "Yes: HBsAg is in breast milk, but there is no evidence of transmission by breastfeeding"
+          - "No: HBsAg in breast milk transmits the virus"
+          - "Only if she is HBeAg-negative"
+          - "Only after the baby's third vaccine dose"
+        answer: 0
+        why:
+          - "صح: الكتاب بيقول الـ HBsAg ممكن يتلاقى في اللبن، بس **no evidence** إن الرضاعة بتنقل العدوى."
+          - "وجود الـ HBsAg في اللبن مش معناه انتقال؛ الكتاب صريح إن مفيش دليل."
+          - "الكتاب مش بيربط الرضاعة بحالة الـ HBeAg."
+          - "الكتاب مش بيحط شرط تطعيم قبل الرضاعة."
+      - kind: aside
+        tone: joke
+        page: 114
+        text: |
+          الـ HBsAg في لبن الأم زي الضيف اللي بييجي الفرح ومش بياكل: **موجود**، بس **مش بيعمل حاجة**. 😄
+
+          فالأم ترضع عادي، والامتحان عايز منك الجملة دي بالظبط.
+      - kind: try
+        items: [hb.L07.003, hb.L07.004, hb.L07.005, hb.L07.008, hb.L07.009]
+    recap:
+      - "الـ virion: envelope (**HBsAg**)، capsid (**HBcAg**)، **HBeAg**، **DNA polymerase** والـ DNA."
+      - "Genotype **A** = better interferon response. Genotype **C** = late e-seroconversion + more HCC."
+      - "الـ **cccDNA** في النواة هو القالب؛ الـ NAs بتوقف الـ reverse transcription بس مش بتشيله."
+      - "Incubation **1–4 months**. Perinatal: **85–90%** (HBeAg+) مقابل **30%** (HBeAg−)."
+      - "الرضاعة مسموحة: HBsAg في اللبن بس **no evidence** of transmission."
+    practice: [hb.L07.001, hb.L07.002, hb.L07.003, hb.L07.004, hb.L07.005, hb.L07.006, hb.L07.007, hb.L07.008, hb.L07.009]
+
+  # ------------------------------------------------------------------
+  - id: hb.L07.lesson2
+    title: "الـ acute HBV: من دور برد لحد الصفرا"
+    hook: "عيان بقى أصفر... وفجأة نفسه اتفتحت وبقى أحسن. ليه؟ وإمتى نخاف ونبدأ antivirals؟"
+    minutes: 9
+    pages: [114, 116]
+    topics: [acute]
+    goals:
+      - "تعدّ الـ 3 صور الإكلينيكية والـ 3 مراحل للـ classic"
+      - "تحفظ الـ 3 علامات اللي بتقول severe acute hepatitis B"
+      - "تفهم ليه الـ antivirals مش لكل acute HBV"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 114
+        title: "تلات صور للمرض"
+        text: |
+          الـ acute HBV ممكن ييجي بتلات أشكال:
+
+          - **Asymptomatic**: مفيش غير **elevated transaminases**.
+          - **Anicteric**: أعراض **GI** وزي الـ **influenza**، ومن غير jaundice.
+          - **Classic**: تلات مراحل (prodromal، icteric، convalescent).
+
+          والأهم في الأرقام: حوالي **70%** subclinical أو anicteric، و **30%** بس icteric. يعني اللي بتشوفه أصفر في العيادة هو الأقلية.
+      - kind: order
+        page: 114
+        prompt: "رتّب اللي بيحصل في الـ classic acute hepatitis B:"
+        steps:
+          - "Prodrome (3–4 days): malaise, fever, anorexia, nausea"
+          - "Change of urine colour"
+          - "Jaundice and itching (icteric phase, 1–4 weeks)"
+          - "Convalescence"
+        why: "الكتاب: الـ prodromal **3–4 days**، وبعدين الـ icteric **1–4 weeks** وفيه **change of urine color followed by jaundice and itching**، وآخر حاجة الـ convalescent."
+      - kind: aside
+        tone: trap
+        page: 114
+        text: |
+          في الـ **icteric phase** العيان **feels generally better** و **appetite returns**، مع إنه أصفر ومعاه **tender hepatomegaly**.
+
+          يعني الصفرا هنا مش معناها إن الحالة بتسوء. لو السؤال وصف إن الصفرا ظهرت والعيان **felt better**، ده الطبيعي في الكتاب.
+      - kind: reveal
+        page: 114
+        prompt: "في الـ prodrome ممكن يطلع **fever، skin rash و arthralgia**. الكتاب بيسميه إيه، وليه بيحصل؟"
+        answer: |
+          الكتاب بيسميه **serum sickness–like syndrome**.
+
+          التفسير المقبول: الجسم بيعمل antibodies ضد الـ HBsAg وهو لسه كتير في الدم، فيتكوّن **immune complexes** تترسب في الجلد والمفاصل، زي الـ serum sickness بالظبط.
+      - kind: explain
+        page: 115
+        title: "التشخيص بالمعمل"
+        text: |
+          - **SGOT, SGPT**: بيوصلوا الـ **peak** قبل أو بعد بداية الـ jaundice بـ **1–2 days**، و **> 10 × ULN**.
+          - مفيدين في **early diagnosis** وفي اكتشاف الـ **anicteric cases**.
+          - **Bilirubin & ALP** عادة عاليين.
+          - **PT prolonged**.
+
+          والخبر الحلو: **less than 1%** من الـ acute hepatitis B بيعملوا **acute liver failure**.
+      - kind: explain
+        page: 115
+        title: "العلاج: غالبًا مش هتعمل حاجة"
+        text: |
+          - **Symptomatic & supportive** هو الأساس.
+          - **Antiviral treatment** بس في الـ **severe acute HB**: **lamivudine in double dose**، أو **entecavir**، أو **tenofovir**.
+
+          طب إمتى نسميها severe؟ عندنا 3 علامات.
+      - kind: mnemonic
+        page: 115
+        word: "CPE"
+        parts:
+          - { key: "C", text: "Coagulopathy: INR > 1.5" }
+          - { key: "P", text: "Protracted course: persistent symptoms or marked jaundice for > 4 weeks" }
+          - { key: "E", text: "Encephalopathy (hepatic) or ascites" }
+        hook: |
+          **CPE** زي الـ cytopathic effect في الميكروبيولوجي: لو الفيروس عمل **CPE** في الكبد، يبقى وقت الـ antivirals.
+      - kind: case
+        page: 115
+        stem: "A 29-year-old man has acute hepatitis B. Week 2: ALT 1,600 IU/L, bilirubin 6 mg/dL, INR 1.2, alert, no ascites."
+        steps:
+          - question: "What is the treatment now?"
+            options:
+              - "Symptomatic and supportive care"
+              - "Entecavir now"
+              - "Peginterferon"
+              - "Urgent transplant referral"
+            answer: 0
+            why: "مفيش ولا علامة من **CPE**: الـ INR تحت 1.5، لسه أسبوعين، ومفيش encephalopathy ولا ascites. يبقى supportive."
+          - reveal: "Week 5: he is still deeply jaundiced. INR is now 1.7."
+            question: "What now?"
+            options:
+              - "Start an antiviral (entecavir, tenofovir or double-dose lamivudine)"
+              - "Keep supportive care only; ALT is falling"
+              - "Start corticosteroids"
+              - "Give HBIG"
+            answer: 0
+            why: "بقى **severe**: coagulopathy (INR > 1.5) و protracted (jaundice > 4 weeks). الكتاب بيدي antivirals هنا."
+      - kind: reveal
+        page: 116
+        prompt: "طب ما ندي antivirals لكل acute HBV ونخلص؟ إيه الضرر؟"
+        answer: |
+          الكتاب بيقول استخدمها **judiciously** لسببين:
+
+          - **Adverse effects**: nephrotoxicity، lactic acidosis، resistance، و withdrawal flare، خصوصًا في **pregnant women، the elderly، and renal impairment**.
+          - **المناعة**: نزول الـ HBV proteins بسرعة بدري ممكن يقلل اللي بيتعرض على الجهاز المناعي، فيأثر بالسلب على **immunity against HBV**. يعني إنت كده بتشيل "المدرّب" من قدام المناعة قبل ما تتعلم.
+      - kind: explain
+        page: 116
+        title: "مين بيقلب chronic؟"
+        text: |
+          - حوالي **90%** من الـ acute infection في **infants** بتبقى chronic.
+          - حوالي **10%** بس في **adults**.
+
+          التفسير المقبول: مناعة الطفل لسه **tolerant** وبتتعامل مع الفيروس كأنه من البيت، فمبتطردوش.
+      - kind: check
+        page: 116
+        question: "Roughly what fraction of acute HBV becomes chronic in infants versus adults?"
+        options:
+          - "90% in infants, 10% in adults"
+          - "10% in infants, 90% in adults"
+          - "30% in infants, 30% in adults"
+          - "85–90% in infants, 30% in adults"
+        answer: 0
+        why:
+          - "صح: الكتاب **90%** للأطفال و **10%** للكبار."
+          - "بالعكس: الأطفال هم اللي بيزمنوا."
+          - "الـ 30% دي رقم الـ icteric أو انتقال الأم الـ HBeAg-negative، مش الـ chronicity."
+          - "الـ 85–90% و 30% دي أرقام **perinatal transmission**، مش التحوّل لـ chronic."
+      - kind: try
+        items: [hb.L07.011, hb.L07.014, hb.L07.019, hb.L07.021, hb.L07.022]
+    recap:
+      - "**70%** subclinical/anicteric و **30%** icteric. Classic = prodrome (3–4 days) ثم icteric (1–4 weeks) ثم convalescent."
+      - "في الـ icteric phase العيان بيتحسن ونفسه بتتفتح."
+      - "Serum sickness–like في الـ prodrome: fever، rash، arthralgia."
+      - "Transaminases > 10× ULN، peak حوالين بداية الصفرا. ALF أقل من **1%**."
+      - "Severe = **CPE** (INR > 1.5، > 4 weeks، encephalopathy أو ascites) → antivirals."
+      - "Chronicity: **90%** infants، **10%** adults."
+    practice: [hb.L07.010, hb.L07.011, hb.L07.012, hb.L07.013, hb.L07.014, hb.L07.015, hb.L07.016, hb.L07.017, hb.L07.018, hb.L07.019, hb.L07.020, hb.L07.021, hb.L07.022, hb.L07.079]
+
+  # ------------------------------------------------------------------
+  - id: hb.L07.lesson3
+    title: "اقرا الـ serology زي جواب"
+    hook: "تلات تحاليل بس (HBsAg، anti-HBc، anti-HBs) وتعرف العيان مطعّم ولا خف ولا لسه عيان."
+    minutes: 9
+    pages: [115, 118]
+    topics: [serology, phases]
+    goals:
+      - "تفهم منحنى الـ acute serology والـ window period"
+      - "تحل الـ screening algorithm بتاع الكتاب من غير حفظ أعمى"
+      - "تعدّ الـ extrahepatic manifestations"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 115
+        title: "مين بيظهر الأول؟"
+        text: |
+          في منحنى الـ acute HBV في الكتاب:
+
+          - **HBsAg** أول واحد يظهر، يعلى، وبعدين ينزل ويختفي.
+          - **HBeAg** و **HBV DNA** في الأول، مع فترة الـ replication.
+          - **anti-HBc IgM** يطلع مع الأعراض ويفضل لحد ما ينزل بعد شهور.
+          - **Total anti-HBc** يطلع ويفضل **مدى الحياة**.
+          - **anti-HBs** آخر واحد، بيظهر **بعد** ما الـ HBsAg يختفي.
+
+          الفترة اللي بين اختفاء HBsAg وظهور anti-HBs اسمها **window period**.
+      - kind: figure
+        page: 115
+        title: "خط زمني للـ markers"
+        alt: "Schematic timeline over weeks 0 to 36 and beyond. Bars: HBV DNA early, HBsAg from about week 4 to 24, HBeAg early, symptoms in the middle, anti-HBc IgM from about week 8 to 32, total anti-HBc from week 8 continuing for life, anti-HBs from about week 32 continuing. A shaded band between HBsAg disappearance and anti-HBs appearance is labelled window: anti-HBc IgM."
+        caption: "رسم تقريبي على منحنى صفحة 115. في الـ **window** الوحيد اللي بيقولك إن فيه عدوى حديثة هو **anti-HBc IgM**."
+        svg: |
+          <svg viewBox="0 0 330 290" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L07d" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-acc"/></marker>
+            </defs>
+            <rect x="244" y="10" width="48" height="214" class="fg-acc" stroke-dasharray="4 3"/>
+            <text x="4" y="32" class="t-sm">HBV DNA</text>
+            <rect x="112" y="22" width="132" height="14" rx="4" class="fg-dot-bad"/>
+            <text x="4" y="60" class="t-sm t-b">HBsAg</text>
+            <rect x="124" y="50" width="120" height="14" rx="4" class="fg-dot-bad"/>
+            <text x="4" y="88" class="t-sm">HBeAg</text>
+            <rect x="136" y="78" width="36" height="14" rx="4" class="fg-dot-bad"/>
+            <text x="4" y="116" class="t-sm t-mut">Symptoms</text>
+            <rect x="148" y="106" width="48" height="14" rx="4" class="fg-thin"/>
+            <text x="4" y="144" class="t-sm t-b t-acc">anti-HBc IgM</text>
+            <rect x="148" y="134" width="144" height="14" rx="4" class="fg-dot-acc"/>
+            <text x="4" y="172" class="t-sm">Total anti-HBc</text>
+            <rect x="148" y="162" width="168" height="14" rx="4" class="fg-dot-good"/>
+            <path d="M300 169h22" class="fg-arrow-acc" marker-end="url(#L07d)"/>
+            <text x="4" y="200" class="t-sm t-b">anti-HBs</text>
+            <rect x="292" y="190" width="24" height="14" rx="4" class="fg-dot-good"/>
+            <path d="M100 226h224" class="fg-ink"/>
+            <path d="M100 226v6M148 226v6M196 226v6M244 226v6M292 226v6" class="fg-ink"/>
+            <text x="100" y="246" text-anchor="middle" class="t-sm t-mut">0</text>
+            <text x="148" y="246" text-anchor="middle" class="t-sm t-mut">8</text>
+            <text x="196" y="246" text-anchor="middle" class="t-sm t-mut">16</text>
+            <text x="244" y="246" text-anchor="middle" class="t-sm t-mut">24</text>
+            <text x="292" y="246" text-anchor="middle" class="t-sm t-mut">32</text>
+            <text x="4" y="246" class="t-sm t-mut">weeks</text>
+            <text x="268" y="270" text-anchor="middle" class="t-sm t-b t-acc">Window:</text>
+            <text x="268" y="284" text-anchor="middle" class="t-sm t-acc">anti-HBc IgM</text>
+          </svg>
+      - kind: check
+        page: 115
+        question: "HBsAg has just disappeared and anti-HBs is not yet detectable. Which marker shows recent HBV infection?"
+        options:
+          - "Anti-HBc IgM"
+          - "HBsAg"
+          - "Anti-HBs"
+          - "HBeAg"
+        answer: 0
+        why:
+          - "صح: ده الـ **window period**، والـ anti-HBc IgM هو اللي لسه مرفوع."
+          - "الـ HBsAg لسه مختفي، وده تعريف الـ window."
+          - "الـ anti-HBs لسه مظهرش؛ بيظهر بعد الـ window."
+          - "الـ HBeAg بيختفي بدري، قبل الـ HBsAg كمان."
+      - kind: aside
+        tone: analogy
+        page: 115
+        text: |
+          - **anti-HBc IgG (total)** زي **الوشم**: بيفضل معاك طول العمر، ويقول إنك قابلت الفيروس الحقيقي في يوم.
+          - **anti-HBs** زي **شهادة التخرج**: معناها إنك بقيت immune.
+          - **anti-HBc IgM** زي **ختم الدخول على الباسبور**: بيقول إنك دخلت قريب.
+      - kind: explain
+        page: 118
+        title: "الـ screening panel"
+        text: |
+          الـ algorithm في الكتاب بيبدأ بتلات تحاليل: **HBsAg**، **IgG anti-HBc**، **anti-HBs**.
+
+          - **HBsAg موجب** → العيان عنده الفيروس دلوقتي. نشوف الـ anti-HBc: **IgM** → acute؛ **IgG** → likely chronic. ونطلب **liver panel، HBeAg، anti-HBe، HBV DNA**.
+          - **HBsAg سالب** → نفرّق بالـ anti-HBc والـ anti-HBs.
+      - kind: table
+        page: 118
+        title: "الـ HBV serology panel (algorithm الكتاب)"
+        columns: ["HBsAg", "Anti-HBc", "Anti-HBs", "Meaning"]
+        rows:
+          - ["+", "IgM +", "−", "Acute HBV: follow the clinical course"]
+          - ["+", "IgG +", "−", "Likely chronic HBV"]
+          - ["−", "IgG +", "−", "Occult HBV or false-positive anti-HBc: repeat in 4–6 weeks"]
+          - ["−", "IgG +", "+", "Immunity after recovery"]
+          - ["−", "−", "+", "Immunity after vaccination"]
+        hide: [[0, 3], [1, 3], [2, 3], [3, 3], [4, 3]]
+      - kind: aside
+        tone: trap
+        page: 118
+        text: |
+          في رسمة الكتاب صفحة 118، خانة **Immunity after vaccination** مكتوب فيها **IgG anti-HBc+** زي خانة الـ recovery بالظبط، ودي غلطة مطبعية.
+
+          الـ vaccine بيدي **anti-HBs بس**، فالصح: **HBsAg−، anti-HBc−، anti-HBs+**. ده اللي في الجدول فوق.
+      - kind: reveal
+        page: 118
+        prompt: "إزاي الـ anti-HBc لوحده بيفرق اللي اتطعّم عن اللي خف من العدوى؟"
+        answer: |
+          الـ vaccine فيه **HBsAg بس**، فاللي اتطعّم بيعمل **anti-HBs** بس.
+
+          اللي قابل الفيروس كله شاف الـ **core** كمان، فبيبقى عنده **anti-HBc** + anti-HBs.
+
+          يعني: **anti-HBs لوحده = vaccine**. **anti-HBs + anti-HBc = recovery**.
+      - kind: sort
+        page: 118
+        prompt: "حط كل نتيجة في مكانها:"
+        bins: ["Vaccinated", "Recovered", "Infected now"]
+        cards:
+          - { text: "Anti-HBs + only", bin: 0 }
+          - { text: "IgG anti-HBc + and anti-HBs +", bin: 1 }
+          - { text: "HBsAg + with IgM anti-HBc +", bin: 2 }
+          - { text: "HBsAg + with IgG anti-HBc +", bin: 2 }
+        why: "anti-HBs لوحده = vaccine. anti-HBc + anti-HBs = خف. أي **HBsAg موجب** = الفيروس موجود دلوقتي (IgM acute، IgG likely chronic)."
+      - kind: mnemonic
+        page: 118
+        word: "PAGE"
+        parts:
+          - { key: "P", text: "Polyarteritis nodosa" }
+          - { key: "A", text: "Papular Acrodermatitis: symmetrical, erythematous, maculopapular, non-itchy" }
+          - { key: "G", text: "Glomerulonephritis" }
+          - { key: "E", text: "Essential mixed cryoglobulinemia" }
+        hook: |
+          الـ HBV مش بيكتفي بالكبد، ده بيكتب **PAGE** كاملة بره الكبد: شرايين، جلد، كلى، و cryoglobulins.
+      - kind: check
+        page: 118
+        question: "How does the lecture describe papular acrodermatitis in HBV?"
+        options:
+          - "Symmetrical, erythematous, maculopapular, non-itchy eruption"
+          - "Itchy vesicles on the trunk"
+          - "Unilateral dermatomal rash"
+          - "Palpable purpura on the legs only"
+        answer: 0
+        why:
+          - "صح: الكتاب: **symmetrical, erythematous, maculopapular, non itchy eruptions**."
+          - "الكتاب بيقول **non itchy**، ومش vesicles."
+          - "الكتاب بيقول **symmetrical**، والـ dermatomal ده شكل الـ herpes zoster."
+          - "مش ده الوصف اللي في الكتاب للـ papular acrodermatitis."
+      - kind: try
+        items: [hb.L07.023, hb.L07.024, hb.L07.025, hb.L07.026, hb.L07.035]
+    recap:
+      - "HBsAg يظهر الأول، anti-HBs الأخير. بينهم **window** فيه anti-HBc IgM بس."
+      - "Total anti-HBc = مدى الحياة (الوشم)."
+      - "Screening = **HBsAg + IgG anti-HBc + anti-HBs**. HBsAg+ → liver panel، HBeAg، anti-HBe، DNA."
+      - "anti-HBs لوحده = vaccine. anti-HBc + anti-HBs = recovery. anti-HBc لوحده = occult أو false positive، كرر بعد 4–6 أسابيع."
+      - "Extrahepatic = **PAGE**: PAN، acrodermatitis، GN، essential mixed cryoglobulinemia."
+    practice: [hb.L07.023, hb.L07.024, hb.L07.025, hb.L07.026, hb.L07.027, hb.L07.035, hb.L07.071, hb.L07.072, hb.L07.081]
+
+  # ------------------------------------------------------------------
+  - id: hb.L07.lesson4
+    title: "مراحل الـ chronic HBV: هدنة وخناقة"
+    hook: "أربع مراحل بأسامي جديدة وقديمة؟ هتحتاج سؤالين بس: الـ HBeAg موجب؟ والكبد بيتأذي؟"
+    minutes: 9
+    pages: [116, 117]
+    topics: [phases]
+    goals:
+      - "تسمّي الـ 4 phases بالأسامي الجديدة والقديمة"
+      - "تعرف DNA و ALT في كل مرحلة من غير حفظ جدول أعمى"
+      - "تحط أي عيان في مرحلته من نتايجه"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 116
+        title: "الـ CHB بيبان إزاي؟"
+        text: |
+          - **Many patients have no symptoms**، وناس تانية عندها **fatigue** أو **right upper quadrant discomfort**.
+          - الكشف ممكن يبقى **normal** أو فيه **mild hepatomegaly**.
+          - أو تشوف **manifestations of cirrhosis** لو المرض اتقدم.
+
+          يعني مش هتعرف المرحلة من الكشف. هتعرفها من المعمل.
+      - kind: explain
+        page: 117
+        title: "سؤالين يحلّوا الجدول كله"
+        text: |
+          الأسامي الجديدة مبنية على سؤالين:
+
+          - **HBeAg positive ولا negative؟**
+          - **Infection ولا hepatitis؟** يعني الكبد سليم (ALT normal، مفيش أو شوية disease) ولا فيه التهاب (ALT elevated، disease moderate/severe).
+
+          فيطلعوا 4: **HBeAg+ chronic infection**، **HBeAg+ chronic hepatitis**، **HBeAg− chronic infection**، **HBeAg− chronic hepatitis**، وفي الآخر ممكن **HBsAg loss**.
+      - kind: aside
+        tone: analogy
+        page: 117
+        text: |
+          - **Infection** = الفيروس ساكن في البيت والمناعة **عاملة هدنة** معاه: مفيش خناق، فالـ ALT طبيعي.
+          - **Hepatitis** = **خناقة**: المناعة بتضرب الخلايا المصابة، فالـ ALT يطلع وينزل والـ DNA يتذبذب، والكبد هو اللي بيدفع التمن (fibrosis).
+      - kind: figure
+        page: 117
+        title: "الـ DNA والـ ALT في كل مرحلة"
+        alt: "Five stacked cards in natural order. HBeAg positive chronic infection: HBV DNA very high above ten to the seven, ALT normal, minimal fibrosis. HBeAg positive chronic hepatitis: DNA ten to the four to ten to the seven fluctuating, ALT elevated. HBeAg negative chronic infection: DNA below 2,000, ALT normal. HBeAg negative chronic hepatitis: DNA above 2,000 fluctuating, ALT elevated, moderate to severe fibrosis. HBsAg loss: DNA very low, ALT normal."
+        caption: "الأخضر = ALT طبيعي (هدنة). الأحمر = ALT عالي (خناقة)."
+        svg: |
+          <svg viewBox="0 0 330 420" xmlns="http://www.w3.org/2000/svg">
+            <g>
+              <rect x="4" y="4" width="322" height="76" rx="8" class="fg-box"/>
+              <text x="14" y="24" class="t-sm t-b">1. HBeAg+ chronic infection</text>
+              <text x="14" y="46" class="t-sm t-mut">DNA</text>
+              <rect x="50" y="36" width="200" height="12" rx="3" class="fg-dot-acc"/>
+              <text x="258" y="46" class="t-sm">&gt;10⁷</text>
+              <text x="14" y="68" class="t-sm t-mut">ALT</text>
+              <rect x="50" y="58" width="40" height="12" rx="3" class="fg-dot-good"/>
+              <text x="98" y="68" class="t-sm t-good">normal</text>
+            </g>
+            <g transform="translate(0,84)">
+              <rect x="4" y="4" width="322" height="76" rx="8" class="fg-bad"/>
+              <text x="14" y="24" class="t-sm t-b">2. HBeAg+ chronic hepatitis</text>
+              <text x="14" y="46" class="t-sm t-mut">DNA</text>
+              <rect x="50" y="36" width="150" height="12" rx="3" class="fg-dot-acc"/>
+              <text x="208" y="46" class="t-sm">10⁴–10⁷</text>
+              <text x="14" y="68" class="t-sm t-mut">ALT</text>
+              <rect x="50" y="58" width="150" height="12" rx="3" class="fg-dot-bad"/>
+              <text x="208" y="68" class="t-sm t-bad">elevated</text>
+            </g>
+            <g transform="translate(0,168)">
+              <rect x="4" y="4" width="322" height="76" rx="8" class="fg-box"/>
+              <text x="14" y="24" class="t-sm t-b">3. HBeAg− chronic infection</text>
+              <text x="14" y="46" class="t-sm t-mut">DNA</text>
+              <rect x="50" y="36" width="34" height="12" rx="3" class="fg-dot-acc"/>
+              <text x="92" y="46" class="t-sm">&lt;2,000 IU/mL</text>
+              <text x="14" y="68" class="t-sm t-mut">ALT</text>
+              <rect x="50" y="58" width="40" height="12" rx="3" class="fg-dot-good"/>
+              <text x="98" y="68" class="t-sm t-good">normal</text>
+            </g>
+            <g transform="translate(0,252)">
+              <rect x="4" y="4" width="322" height="76" rx="8" class="fg-bad"/>
+              <text x="14" y="24" class="t-sm t-b">4. HBeAg− chronic hepatitis</text>
+              <text x="14" y="46" class="t-sm t-mut">DNA</text>
+              <rect x="50" y="36" width="100" height="12" rx="3" class="fg-dot-acc"/>
+              <text x="158" y="46" class="t-sm">&gt;2,000 IU/mL</text>
+              <text x="14" y="68" class="t-sm t-mut">ALT</text>
+              <rect x="50" y="58" width="120" height="12" rx="3" class="fg-dot-bad"/>
+              <text x="178" y="68" class="t-sm t-bad">elevated</text>
+            </g>
+            <g transform="translate(0,336)">
+              <rect x="4" y="4" width="322" height="76" rx="8" class="fg-good"/>
+              <text x="14" y="24" class="t-sm t-b">5. HBsAg loss</text>
+              <text x="14" y="46" class="t-sm t-mut">DNA</text>
+              <rect x="50" y="36" width="12" height="12" rx="3" class="fg-dot-acc"/>
+              <text x="70" y="46" class="t-sm">very low</text>
+              <text x="14" y="68" class="t-sm t-mut">ALT</text>
+              <rect x="50" y="58" width="40" height="12" rx="3" class="fg-dot-good"/>
+              <text x="98" y="68" class="t-sm t-good">normal</text>
+            </g>
+          </svg>
+      - kind: table
+        page: 117
+        title: "الـ phases (جدول الكتاب)"
+        columns: ["Phase", "HBV DNA", "ALT", "Old name"]
+        rows:
+          - ["HBeAg+ chronic infection", ">10⁷ IU/mL", "Normal", "Immune tolerant"]
+          - ["HBeAg+ chronic hepatitis", "10⁴–10⁷ IU/mL", "Elevated", "Immune reactive HBeAg positive"]
+          - ["HBeAg− chronic infection", "<2,000 IU/mL", "Normal", "Inactive carrier"]
+          - ["HBeAg− chronic hepatitis", ">2,000 IU/mL", "Elevated", "HBeAg-negative chronic hepatitis"]
+        hide: [[0, 3], [1, 1], [2, 1], [2, 3], [3, 1]]
+      - kind: aside
+        tone: exam
+        page: 117
+        text: |
+          الـ **HBsAg** كمان بيقل مع المراحل: **high** في الأولى، **high/intermediate** في التانية، **low** في الـ inactive carrier، و **intermediate** في الـ HBeAg− hepatitis.
+
+          والـ liver disease: **none/minimal** في الـ infection phases، و **moderate/severe** في الـ hepatitis phases.
+      - kind: order
+        page: 117
+        prompt: "رتّب المراحل حسب الـ natural history:"
+        steps:
+          - "HBeAg-positive chronic infection"
+          - "HBeAg-positive chronic hepatitis"
+          - "HBeAg-negative chronic infection"
+          - "HBeAg-negative chronic hepatitis"
+          - "HBsAg loss"
+        why: "ده ترتيب رسمة صفحة 117: e+ هدنة، e+ خناقة، e− هدنة، e− خناقة، وأخيرًا HBsAg loss."
+      - kind: explain
+        page: 117
+        title: "مين بيدخل منين؟"
+        text: |
+          رسمة الـ Cleveland Clinic في الكتاب:
+
+          - **Perinatal transmission** → يبدأ من **immune tolerant** (HBeAg+ chronic infection).
+          - **Horizontal transmission** → يدخل على طول في **HBeAg+ immune active phase**.
+          - بعدها **e loss ± anti-HBe seroconversion** → يا إما **inactive HBV** (وممكن منه **clearance of HBsAg**)، يا إما **anti-HBe immune active phase**.
+
+          ومن الـ inactive ممكن يرجع يدخل الـ anti-HBe immune active، فالـ inactive carrier محتاج متابعة.
+      - kind: reveal
+        page: 117
+        prompt: "الـ HBeAg اختفى، ومع ذلك في المرحلة 4 الـ DNA عالي والكبد بيتأذي. إزاي؟"
+        answer: |
+          اختفاء الـ HBeAg مش معناه إن الفيروس بطّل يتكاثر.
+
+          التفسير المقبول (مش مكتوب في الكتاب): الفيروس بيعمل **mutations** (precore / core promoter) تخليه يوقف إنتاج الـ HBeAg بس يكمّل replication. فتلاقي **HBeAg−** و **DNA > 2,000** و **ALT elevated**.
+
+          علشان كده الـ HBeAg سالب لوحده مش طمأنينة؛ لازم تبص على الـ DNA والـ ALT.
+      - kind: check
+        page: 117
+        question: "HBsAg positive, HBeAg negative, anti-HBe positive. HBV DNA 800 IU/mL, ALT normal on repeated tests, no fibrosis. Which phase?"
+        options:
+          - "HBeAg-negative chronic infection (inactive carrier)"
+          - "HBeAg-negative chronic hepatitis"
+          - "HBeAg-positive chronic infection (immune tolerant)"
+          - "Occult HBV"
+        answer: 0
+        why:
+          - "صح: HBeAg سالب + DNA **< 2,000** + ALT normal = **inactive carrier**."
+          - "الـ HBeAg− hepatitis محتاج **DNA > 2,000** و **ALT elevated**."
+          - "الـ immune tolerant يعني **HBeAg موجب** و DNA > 10⁷."
+          - "الـ occult يعني **HBsAg سالب**، وهنا الـ HBsAg موجب."
+      - kind: case
+        page: 117
+        stem: "A 22-year-old man was infected at birth. HBsAg positive, HBeAg positive. HBV DNA 2 × 10⁸ IU/mL. ALT normal on repeated tests."
+        steps:
+          - question: "Which phase is he in?"
+            options:
+              - "HBeAg-positive chronic infection (immune tolerant)"
+              - "HBeAg-positive chronic hepatitis"
+              - "HBeAg-negative chronic infection"
+              - "Acute hepatitis B"
+            answer: 0
+            why: "اتعدى عند الولادة (perinatal → immune tolerant)، e موجب، DNA > 10⁷، ALT طبيعي: **هدنة**."
+          - reveal: "Five years later his ALT is fluctuating around 3 × ULN and HBV DNA swings between 10⁵ and 10⁷. HBeAg is still positive."
+            question: "Which phase now?"
+            options:
+              - "HBeAg-positive chronic hepatitis (immune reactive)"
+              - "HBeAg-negative chronic hepatitis"
+              - "Still immune tolerant"
+              - "HBsAg loss"
+            answer: 0
+            why: "الـ e لسه موجب، بس المناعة بدأت **الخناقة**: ALT عالي ومتذبذب و DNA 10⁴–10⁷. ده **HBeAg+ chronic hepatitis**."
+      - kind: try
+        items: [hb.L07.029, hb.L07.030, hb.L07.031, hb.L07.032, hb.L07.084]
+    recap:
+      - "سؤالين: **HBeAg ±**؟ و **infection** (ALT normal) ولا **hepatitis** (ALT elevated)؟"
+      - "HBeAg+ infection: DNA **> 10⁷**، ALT normal = immune tolerant."
+      - "HBeAg+ hepatitis: DNA **10⁴–10⁷**، ALT elevated."
+      - "HBeAg− infection: DNA **< 2,000**، ALT normal = inactive carrier."
+      - "HBeAg− hepatitis: DNA **> 2,000**، ALT elevated، moderate/severe disease."
+      - "Perinatal يبدأ من الـ immune tolerant. Horizontal يدخل على الـ HBeAg+ immune active."
+    practice: [hb.L07.028, hb.L07.029, hb.L07.030, hb.L07.031, hb.L07.032, hb.L07.033, hb.L07.034, hb.L07.073, hb.L07.083, hb.L07.084]
+
+  # ------------------------------------------------------------------
+  - id: hb.L07.lesson5
+    title: "نعالج مين، بإيه، ولحد إمتى؟"
+    hook: "رقم 2,000 ورقم 40 ورقم 9: تلات أرقام بيقرروا مين ياخد علاج. وليه الـ lamivudine خسر السباق."
+    minutes: 10
+    pages: [118, 121]
+    topics: [treat-who, drugs]
+    goals:
+      - "تمشي في الـ who-to-treat algorithm بالأرقام بتاعته"
+      - "تعرف الـ first-line drugs وليه هما"
+      - "تختار مدة العلاج وخطة الـ resistance"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 118
+        title: "تلات معايير"
+        text: |
+          الـ indications **generally the same** للـ HBeAg-positive والـ HBeAg-negative. والقرار مبني على **combination** من تلاتة:
+
+          - **Serum HBV DNA**.
+          - **Serum ALT**.
+          - **Severity of liver disease**.
+
+          الـ DNA = قد إيه الفيروس شغّال. الـ ALT = المناعة بتضرب ولا لأ. والـ fibrosis = الكبد اتأذى قد إيه.
+      - kind: figure
+        page: 119
+        title: "Who to treat (algorithm الكتاب)"
+        alt: "Algorithm. Chronic HBV splits by HBV DNA. DNA below 2,000 IU/mL: no treatment. DNA above 2,000 IU/mL splits by ALT. ALT abnormal (upper limit of normal 40 IU/L): treat. ALT normal: no treatment for now; if over 30 years old, liver biopsy or FibroScan. FibroScan above 9 kPa means severe fibrosis. Without biopsy or FibroScan: observe."
+        caption: "الأرقام: **DNA 2,000 IU/mL**، **ALT ULN 40 IU/L**، **age > 30**، **FibroScan > 9 kPa** = severe fibrosis. الكتاب مش كاتب treat في الخانة دي؛ العلاج هنا جاي من المعيار التالت (**severity of liver disease**، صفحة 118)."
+        svg: |
+          <svg viewBox="0 0 330 410" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L07e" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="95" y="6" width="140" height="32" rx="6" class="fg-acc"/>
+            <text x="165" y="27" text-anchor="middle" class="t-b">Chronic HBV</text>
+            <path d="M140 38L84 60M190 38L246 60" class="fg-arrow" marker-end="url(#L07e)"/>
+            <rect x="8" y="62" width="150" height="34" rx="6" class="fg-box"/>
+            <text x="83" y="84" text-anchor="middle" class="t-sm t-b">DNA &lt; 2,000 IU/mL</text>
+            <rect x="172" y="62" width="150" height="34" rx="6" class="fg-box"/>
+            <text x="247" y="84" text-anchor="middle" class="t-sm t-b">DNA &gt; 2,000 IU/mL</text>
+            <path d="M83 96v16" class="fg-arrow" marker-end="url(#L07e)"/>
+            <rect x="8" y="114" width="150" height="30" rx="6" class="fg-good"/>
+            <text x="83" y="134" text-anchor="middle" class="t-sm t-b">No treatment</text>
+            <path d="M247 96v58M232 96L100 156" class="fg-arrow" marker-end="url(#L07e)"/>
+            <rect x="172" y="158" width="150" height="34" rx="6" class="fg-box"/>
+            <text x="247" y="174" text-anchor="middle" class="t-sm t-b">ALT abnormal</text>
+            <text x="247" y="187" text-anchor="middle" class="t-sm t-mut">ULN 40 IU/L</text>
+            <rect x="8" y="158" width="150" height="34" rx="6" class="fg-box"/>
+            <text x="83" y="180" text-anchor="middle" class="t-sm t-b">ALT normal</text>
+            <path d="M247 192v16" class="fg-arrow" marker-end="url(#L07e)"/>
+            <rect x="172" y="210" width="150" height="30" rx="6" class="fg-bad"/>
+            <text x="247" y="230" text-anchor="middle" class="t-b t-bad">TREAT</text>
+            <path d="M83 192v16" class="fg-arrow" marker-end="url(#L07e)"/>
+            <rect x="8" y="210" width="150" height="48" rx="6" class="fg-box"/>
+            <text x="83" y="229" text-anchor="middle" class="t-sm">No treatment for now;</text>
+            <text x="83" y="246" text-anchor="middle" class="t-sm t-b">age &gt; 30: FibroScan</text>
+            <path d="M60 258v58M110 258L230 314" class="fg-arrow" marker-end="url(#L07e)"/>
+            <rect x="8" y="318" width="150" height="48" rx="6" class="fg-good"/>
+            <text x="83" y="338" text-anchor="middle" class="t-sm">No biopsy or</text>
+            <text x="83" y="355" text-anchor="middle" class="t-sm">FibroScan: observe</text>
+            <rect x="172" y="318" width="150" height="48" rx="6" class="fg-bad"/>
+            <text x="247" y="338" text-anchor="middle" class="t-sm t-b">&gt; 9 kPa = severe</text>
+            <text x="247" y="355" text-anchor="middle" class="t-sm t-b t-bad">fibrosis</text>
+            <text x="165" y="396" text-anchor="middle" class="t-sm t-mut">FibroScan or liver biopsy</text>
+          </svg>
+      - kind: case
+        page: 119
+        stem: "A 36-year-old man with chronic HBV (HBeAg negative) has HBV DNA 15,000 IU/mL and ALT 30 IU/L on repeated tests. No cirrhosis."
+        steps:
+          - question: "Next step by the book's algorithm?"
+            options:
+              - "FibroScan or liver biopsy, since he is over 30"
+              - "Start tenofovir now"
+              - "No follow-up needed"
+              - "Repeat HBsAg in 6 months only"
+            answer: 0
+            why: "DNA > 2,000 بس الـ ALT تحت 40. الـ algorithm بيقول **no treatment** لحد دلوقتي، وبما إنه **> 30 y** نعمل **FibroScan أو biopsy**."
+          - reveal: "FibroScan: 10.5 kPa."
+            question: "Decision?"
+            options:
+              - "Treat: above 9 kPa means severe fibrosis, so severity of liver disease is met"
+              - "Observe: ALT is normal"
+              - "Repeat FibroScan in 5 years"
+              - "Peginterferon is the only option"
+            answer: 0
+            why: "**> 9 kPa = severe fibrosis**. الكتاب بيبني القرار على 3 معايير، منها **severity of liver disease** (صفحة 118)، فالـ severe fibrosis مع DNA > 2,000 يتعالج حتى لو الـ ALT طبيعي."
+      - kind: explain
+        page: 120
+        title: "واللي مش هيتعالج؟ نتابعه كل قد إيه"
+        text: |
+          - **HBeAg-positive**: كل **3–6 months**.
+          - **HBeAg-negative**: كل **6–12 months**.
+          - **HBeAg-negative chronic infection** مع **DNA > 2,000 IU/mL**: كل **3 months** في أول سنة، وبعدها كل **6 months**.
+
+          المنطق: الـ e+ لسه ممكن يقلب خناقة في أي وقت، فبنقرّب المتابعة.
+      - kind: table
+        page: 119
+        title: "الـ oral drugs (جدول الكتاب؛ الـ Peg-IFN: Peg-Intron و Pegasys، S.C)"
+        columns: ["Drug", "Trade name", "Dose", "Route"]
+        rows:
+          - ["Lamivudine", "Zeffix", "100 mg/d", "Oral"]
+          - ["Adefovir", "Hepsera", "10 mg/d", "Oral"]
+          - ["Entecavir", "Baraclude", "0.5–1 mg/d", "Oral"]
+          - ["Tenofovir (TDF)", "Viread", "300 mg/d", "Oral"]
+          - ["TAF", "(book: Tenofenamide)", "25 mg/d", "Oral"]
+        hide: [[0, 2], [2, 2], [3, 2], [4, 2]]
+      - kind: mnemonic
+        page: 119
+        word: "PET"
+        parts:
+          - { key: "P", text: "Peg interferon alfa-2a" }
+          - { key: "E", text: "Entecavir" }
+          - { key: "T", text: "Tenofovir" }
+        hook: |
+          الـ first line اعملهم **PET scan**. والسبب في الكتاب: **superior efficacy، tolerability، and favorable resistance profiles**.
+      - kind: explain
+        page: 120
+        title: "لحد إمتى؟"
+        text: |
+          رسمة الـ treatment duration في الكتاب:
+
+          - **HBeAg positive** + حصل **HBeAg seroconversion** → **stop treatment after 12 months**.
+          - **HBeAg positive** من غير seroconversion → **long-term treatment**.
+          - **HBeAg negative** → **long-term treatment**.
+          - أي حد يوصل **HBsAg seroconversion** → **stop treatment**.
+
+          يعني الـ HBeAg negative مالوش "محطة نزول" غير الـ HBsAg seroconversion، وده نادر، فعمليًا علاج طويل.
+      - kind: check
+        page: 120
+        question: "An HBeAg-negative patient on entecavir has undetectable HBV DNA for 2 years. HBsAg is still positive. Per the duration algorithm:"
+        options:
+          - "Continue long-term treatment"
+          - "Stop after 12 months of undetectable DNA"
+          - "Stop now and monitor"
+          - "Switch to peginterferon for 48 weeks"
+        answer: 0
+        why:
+          - "صح: الـ HBeAg negative = **long-term treatment**، والوقف بس عند **HBsAg seroconversion**."
+          - "قاعدة الـ 12 months دي للـ **HBeAg-positive** اللي عمل **HBeAg seroconversion**."
+          - "الـ HBsAg لسه موجب، فمفيش endpoint للوقف."
+          - "مفيش في الـ algorithm ده تحويل لـ interferon."
+      - kind: figure
+        page: 121
+        title: "الـ NA resistance (رسمة الكتاب)"
+        alt: "Horizontal bar chart of cumulative resistance. Lamivudine 24 percent at 1 year rising to 70 percent at 5 years. Adefovir 29 percent at 5 years. Telbivudine 17 percent at 2 years. Entecavir 1.2 percent at 5 years. Tenofovir DF 0 percent and tenofovir alafenamide 0 percent."
+        caption: "الفرق بين **LAM 70%** و **ETV 1.2%** و **TDF/TAF 0%** هو سبب الـ first line كلها."
+        svg: |
+          <svg viewBox="0 0 330 230" xmlns="http://www.w3.org/2000/svg">
+            <text x="4" y="16" class="t-sm t-mut">Cumulative resistance (%)</text>
+            <path d="M60 26v186" class="fg-ink"/>
+            <text x="54" y="46" text-anchor="end" class="t-sm t-b">LAM</text>
+            <rect x="60" y="34" width="210" height="16" rx="3" class="fg-dot-bad"/>
+            <text x="276" y="46" class="t-sm t-b t-bad">70 (5 y)</text>
+            <text x="54" y="78" text-anchor="end" class="t-sm t-b">ADV</text>
+            <rect x="60" y="66" width="87" height="16" rx="3" class="fg-dot-bad"/>
+            <text x="153" y="78" class="t-sm">29 (5 y)</text>
+            <text x="54" y="110" text-anchor="end" class="t-sm t-b">TBV</text>
+            <rect x="60" y="98" width="51" height="16" rx="3" class="fg-dot-bad"/>
+            <text x="117" y="110" class="t-sm">17 (2 y)</text>
+            <text x="54" y="142" text-anchor="end" class="t-sm t-b">ETV</text>
+            <rect x="60" y="130" width="4" height="16" rx="1" class="fg-dot-good"/>
+            <text x="70" y="142" class="t-sm t-good">1.2 (5 y)</text>
+            <text x="54" y="174" text-anchor="end" class="t-sm t-b">TDF</text>
+            <text x="68" y="174" class="t-sm t-b t-good">0</text>
+            <text x="54" y="206" text-anchor="end" class="t-sm t-b">TAF</text>
+            <text x="68" y="206" class="t-sm t-b t-good">0</text>
+          </svg>
+      - kind: aside
+        tone: joke
+        page: 121
+        text: |
+          الـ **lamivudine** زي الموبايل الرخيص: أول سنة شغال حلو (24% بس اللي باظ)، وبعد 5 سنين **70%** منه عايز تصليح. 😅
+
+          أما الـ **tenofovir** فده الموبايل اللي جدك لسه شغال بيه: **0%**.
+      - kind: explain
+        page: 121
+        title: "الـ resistance اتعمل: هنعمل إيه؟"
+        text: |
+          جدول الـ rescue في الكتاب:
+
+          - **LAM**، **TBV**، أو **ETV resistance** → **switch to TDF or TAF**.
+          - **ADV resistance**: لو **LAM-naïve** → switch to **ETV** أو TDF أو TAF. لو **LAM-resistant** → **TDF أو TAF**. لو الـ DNA عمل **plateau** → **add ETV** أو switch to ETV.
+          - **TDF or TAF resistance**: لو **LAM-naïve** → **switch to ETV**. لو **LAM-R** → **add ETV**.
+          - **Multidrug resistance** → **ETV + TDF or TAF**.
+      - kind: reveal
+        page: 121
+        prompt: "ليه كل مرة الـ LAM أو الـ ETV يفشلوا بنروح على الـ TDF/TAF، وليه الكتاب بيسأل دايمًا \"LAM-naïve ولا لأ\"؟"
+        answer: |
+          التفسير المقبول: **LAM و TBV و ETV** كلهم **nucleosides** وبيشتركوا في جزء من طريق الـ resistance، و **ETV** بيبقى أضعف قدام فيروس عنده **LAM mutations**. أما **TDF/TAF** فهما **nucleotides** بطريق resistance مختلف.
+
+          فالقاعدة: **nucleoside فشل → روح nucleotide**. ولو العيان **LAM-naïve**، الـ ETV لسه سلاح كامل.
+      - kind: match
+        page: 121
+        prompt: "وصّل الـ resistance بالـ rescue:"
+        pairs:
+          - ["Lamivudine resistance", "Switch to TDF or TAF"]
+          - ["TDF resistance, LAM-naïve", "Switch to ETV"]
+          - ["Multidrug resistance", "ETV plus TDF or TAF"]
+          - ["Adefovir resistance with HBV DNA plateau", "Add ETV or switch to ETV"]
+        why: "LAM/TBV/ETV → TDF أو TAF. TDF/TAF وهو LAM-naïve → ETV. Multidrug → الاتنين مع بعض. ADV مع plateau → add أو switch to ETV."
+      - kind: try
+        items: [hb.L07.036, hb.L07.039, hb.L07.042, hb.L07.044, hb.L07.051]
+    recap:
+      - "القرار = **DNA + ALT + severity**، ونفس القواعد لـ e+ و e−."
+      - "DNA **< 2,000** → no treatment. DNA **> 2,000** + ALT abnormal (ULN **40**) → treat."
+      - "DNA > 2,000 + ALT normal + age **> 30** → FibroScan/biopsy؛ **> 9 kPa** = severe fibrosis، فيتعالج على معيار الـ severity."
+      - "Monitoring: e+ كل **3–6 m**، e− كل **6–12 m**، e− infection مع DNA > 2,000 كل **3 m** أول سنة."
+      - "First line = **PET**: Peg-IFN alfa-2a، entecavir، tenofovir."
+      - "e+ seroconversion → stop بعد **12 months**. غير كده long-term لحد **HBsAg seroconversion**."
+      - "Resistance: LAM **70%** في 5 سنين، ETV **1.2%**، TDF/TAF **0%**."
+    practice: [hb.L07.036, hb.L07.037, hb.L07.038, hb.L07.039, hb.L07.040, hb.L07.041, hb.L07.042, hb.L07.043, hb.L07.044, hb.L07.045, hb.L07.046, hb.L07.047, hb.L07.048, hb.L07.049, hb.L07.050, hb.L07.051, hb.L07.074, hb.L07.076]
+
+  # ------------------------------------------------------------------
+  - id: hb.L07.lesson6
+    title: "الـ cirrhosis والحالات اللي ليها قواعد خاصة"
+    hook: "في الـ cirrhosis ننسى رقم 2,000 خالص. وفيروس مستخبي من غير HBsAg؟ آه، اسمه occult."
+    minutes: 8
+    pages: [120, 122]
+    topics: [cirrhosis, special]
+    goals:
+      - "تعرف قواعد علاج الـ HBV في الـ compensated والـ decompensated cirrhosis"
+      - "تتعامل مع الـ healthcare worker والـ HBV/HCV coinfection"
+      - "تعرّف الـ occult HBV وتعرف بيتلاقي فين"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 120
+        title: "الـ cirrhosis: أي DNA يتعالج"
+        text: |
+          - **Compensated or decompensated cirrhosis** → **need treatment** مع **any detectable HBV DNA** و **regardless of ALT**.
+          - استخدم **NA with high barrier to resistance**.
+          - العيان يتقيّم لـ **liver transplantation**.
+      - kind: reveal
+        page: 120
+        prompt: "ليه في الـ cirrhosis بنعالج أي DNA، حتى لو 100 IU/mL والـ ALT طبيعي؟"
+        answer: |
+          التفسير المقبول: الكبد الـ cirrhotic **مالوش احتياطي**. أي flare، حتى لو صغير، ممكن يقلبه decompensated.
+
+          وعلشان كده كمان لازم **high barrier to resistance**: لو حصل resistance وطلع flare، التمن هنا غالي جدًا.
+      - kind: explain
+        page: 120
+        title: "الـ decompensated"
+        text: |
+          - **All NAs must be adjusted to renal function**.
+          - حوالي **35%** من اللي اتعالجوا **delisted for liver transplantation**.
+          - و **improvement of Child-Pugh Score > 2** في **40–50%** على الأقل.
+      - kind: aside
+        tone: joke
+        page: 120
+        text: |
+          **35%** اتشالوا من قايمة الزرع بسبب حباية في اليوم. ده أحسن خبر ممكن يسمعه حد واقف في طابور، أحسن من إن الطابور اتلغى. 😄
+      - kind: check
+        page: 120
+        question: "A man with decompensated HBV cirrhosis (Child B, with ascites) has HBV DNA 150 IU/mL and normal ALT. What does the book advise?"
+        options:
+          - "Start an NA with a high barrier to resistance, adjusted to renal function, and assess for transplant"
+          - "No treatment: DNA is below 2,000 IU/mL"
+          - "No treatment: ALT is normal"
+          - "Start lamivudine because it is cheapest"
+        answer: 0
+        why:
+          - "صح: في الـ cirrhosis **any detectable DNA** و **regardless of ALT**، NA بـ high barrier، dose على الكلى، وتقييم للزرع."
+          - "رقم الـ 2,000 للـ non-cirrhotic؛ في الـ cirrhosis أي DNA."
+          - "الكتاب بيقول **regardless of ALT levels**."
+          - "الـ lamivudine low barrier (70% resistance في 5 سنين)، والكتاب عايز **high barrier**."
+      - kind: explain
+        page: 121
+        title: "الـ healthcare worker"
+        text: |
+          الـ **healthcare workers** اللي بيعملوا **exposure prone procedures** ومعاهم **HBV DNA > 200 IU/mL** ممكن يتعالجوا بـ **NA** علشان نقلل **transmission risk**.
+
+          لاحظ: الهدف هنا حماية المرضى، مش بس الكبد بتاعه.
+      - kind: explain
+        page: 121
+        title: "HBV + HCV coinfection"
+        text: |
+          - علاج الـ HCV بالـ **DAAs** ممكن يعمل **reactivation of HBV**.
+          - اللي بيستوفي **standard criteria for HBV treatment** → ياخد **NA**.
+          - اللي مش بيستوفي → **monitored** ويتعمله **test for HBV reactivation in case of ALT elevation**.
+      - kind: reveal
+        page: 121
+        prompt: "إزاي علاج فيروس C يصحّي فيروس B؟"
+        answer: |
+          التفسير المقبول: الفيروسين بيتنافسوا جوه الكبد، والـ **HCV** كان بيكتم الـ **HBV**.
+
+          لما الـ DAAs تشيل الـ HCV بسرعة، الـ HBV يلاقي الساحة فاضية فيطلع. علشان كده الكتاب بيقول راقب الـ ALT.
+      - kind: explain
+        page: 122
+        title: "الـ occult HBV"
+        text: |
+          - **Detection of HBV DNA in the absence of HBsAg**.
+          - الـ DNA موجود **in the liver** في أغلب الحالات، وفي الـ **serum** يا مش موجود يا قليل.
+          - **Anti-HBc** عادة **positive**.
+          - أشهر في **cirrhosis أو HCC**: غالبًا كانوا chronic HBV لعشرات السنين، والكبد اتأذى، بس الـ HBsAg اختفى لما اتشخّصوا.
+      - kind: aside
+        tone: analogy
+        page: 122
+        text: |
+          الـ occult HBV زي حرامي **رمى الكارنيه** (HBsAg) بس **بصماته** لسه في المكان: **DNA في الكبد** و **anti-HBc** في الدم.
+
+          فلو عيان عنده cirrhosis أو HCC "من غير سبب" والـ HBsAg سالب، بص على الـ anti-HBc.
+      - kind: sort
+        page: 121
+        prompt: "مين ياخد NA ومين نراقبه بس؟"
+        bins: ["Give an NA", "Monitor"]
+        cards:
+          - { text: "Cirrhosis, HBV DNA 80 IU/mL, normal ALT", bin: 0 }
+          - { text: "Surgeon doing exposure-prone procedures, DNA 900 IU/mL", bin: 0 }
+          - { text: "HBV/HCV on DAAs, meets HBV treatment criteria", bin: 0 }
+          - { text: "HBV/HCV on DAAs, does not meet HBV criteria", bin: 1 }
+          - { text: "No cirrhosis, HBeAg negative, DNA 1,200 IU/mL, normal ALT", bin: 1 }
+        why: "الـ cirrhosis: أي DNA. الـ healthcare worker: > 200 IU/mL. الـ coinfection: اللي يستوفي criteria ياخد NA والباقي يتراقب. والـ inactive carrier (DNA < 2,000) يتابع."
+      - kind: try
+        items: [hb.L07.052, hb.L07.053, hb.L07.054, hb.L07.055, hb.L07.057]
+    recap:
+      - "Cirrhosis: treat **any detectable DNA**، **regardless of ALT**، NA بـ **high barrier**، وتقييم للزرع."
+      - "Decompensated: الـ NAs على الكلى. **35%** delisted، Child-Pugh يتحسن **> 2** في **40–50%**."
+      - "Healthcare worker مع DNA **> 200 IU/mL** ممكن ياخد NA."
+      - "DAAs ممكن يصحّوا الـ HBV: criteria → NA، غير كده monitor مع الـ ALT."
+      - "Occult = **DNA من غير HBsAg**، anti-HBc عادة +، أشهر في cirrhosis و HCC."
+    practice: [hb.L07.052, hb.L07.053, hb.L07.054, hb.L07.055, hb.L07.056, hb.L07.057, hb.L07.058, hb.L07.075, hb.L07.086]
+
+  # ------------------------------------------------------------------
+  - id: hb.L07.lesson7
+    title: "الحمل، الـ immunosuppression، ووخزة الإبرة"
+    hook: "حامل عندها HBV، عيان داخل على rituximab، وزميل اتشك بإبرة: تلات مواقف بقرار سريع."
+    minutes: 10
+    pages: [123, 124]
+    topics: [special, reactivation, pep]
+    goals:
+      - "تمشي في algorithm الحمل برقم 200,000"
+      - "تعرف مين ياخد prophylaxis قبل الـ immunosuppression وتعرّف الـ reactivation"
+      - "تدي الـ post-exposure prophylaxis الصح في الوقت الصح"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 123
+        title: "الحامل اللي عندها HBV"
+        text: |
+          - **1st trimester**: قيّم الـ **HBV replication** والـ **liver disease**. لو فيه **active disease / advanced fibrosis** → **consider initiating tenofovir**.
+          - **End of 2nd trimester**: **quantitative HBV DNA** و **ALT**.
+          - **DNA > 200,000 IU/mL** → **consider** **tenofovir، lamivudine، or telbivudine** at **28–32 wk**.
+          - **DNA < 200,000** → **monitor**.
+          - وفي الحالتين: الطفل ياخد **HBIG + vaccine at birth**.
+      - kind: figure
+        page: 123
+        title: "HBV في الحمل (algorithm الكتاب)"
+        alt: "Algorithm. Pregnant woman with HBV. First trimester: assess HBV replication and liver disease; side branch: active disease or advanced fibrosis, consider tenofovir. End of second trimester: quantitative HBV DNA and ALT. If HBV DNA below 200,000 IU/mL: monitor. If above 200,000 IU/mL: consider tenofovir, lamivudine or telbivudine at 28 to 32 weeks. Both branches end with the infant receiving HBIG and vaccine at birth."
+        caption: "الرقم السحري هنا **200,000 IU/mL**، والتوقيت **28–32 wk**. والطفل في **كل** الحالات ياخد **HBIG + vaccine**."
+        svg: |
+          <svg viewBox="0 0 330 400" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L07f" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="40" y="6" width="250" height="30" rx="6" class="fg-acc"/>
+            <text x="165" y="26" text-anchor="middle" class="t-sm t-b">Pregnant woman with HBV</text>
+            <path d="M110 36v16" class="fg-arrow" marker-end="url(#L07f)"/>
+            <rect x="6" y="54" width="200" height="46" rx="6" class="fg-box"/>
+            <text x="106" y="73" text-anchor="middle" class="t-sm t-b">1st trimester: assess</text>
+            <text x="106" y="90" text-anchor="middle" class="t-sm">replication + liver disease</text>
+            <path d="M206 77h12" class="fg-arrow" marker-end="url(#L07f)"/>
+            <rect x="220" y="50" width="104" height="56" rx="6" class="fg-bad"/>
+            <text x="272" y="67" text-anchor="middle" class="t-sm">Active disease /</text>
+            <text x="272" y="81" text-anchor="middle" class="t-sm">adv. fibrosis:</text>
+            <text x="272" y="97" text-anchor="middle" class="t-sm t-b">tenofovir</text>
+            <path d="M106 100v16" class="fg-arrow" marker-end="url(#L07f)"/>
+            <rect x="6" y="118" width="200" height="46" rx="6" class="fg-box"/>
+            <text x="106" y="137" text-anchor="middle" class="t-sm t-b">End of 2nd trimester:</text>
+            <text x="106" y="154" text-anchor="middle" class="t-sm">HBV DNA + ALT</text>
+            <path d="M70 164L70 196M150 164L240 196" class="fg-arrow" marker-end="url(#L07f)"/>
+            <rect x="6" y="198" width="150" height="34" rx="6" class="fg-good"/>
+            <text x="81" y="220" text-anchor="middle" class="t-sm t-b">DNA &lt; 200,000</text>
+            <rect x="170" y="198" width="154" height="34" rx="6" class="fg-bad"/>
+            <text x="247" y="220" text-anchor="middle" class="t-sm t-b">DNA &gt; 200,000</text>
+            <path d="M81 232v16M247 232v16" class="fg-arrow" marker-end="url(#L07f)"/>
+            <rect x="6" y="250" width="150" height="46" rx="6" class="fg-box"/>
+            <text x="81" y="278" text-anchor="middle" class="t-sm t-b">Monitor</text>
+            <rect x="170" y="250" width="154" height="62" rx="6" class="fg-box"/>
+            <text x="247" y="268" text-anchor="middle" class="t-sm">Consider tenofovir,</text>
+            <text x="247" y="284" text-anchor="middle" class="t-sm">lamivudine or</text>
+            <text x="247" y="300" text-anchor="middle" class="t-sm">telbivudine, 28–32 wk</text>
+            <path d="M81 296L140 346M247 312L200 346" class="fg-arrow" marker-end="url(#L07f)"/>
+            <rect x="60" y="348" width="210" height="44" rx="6" class="fg-acc"/>
+            <text x="165" y="367" text-anchor="middle" class="t-sm t-b">Infant at birth:</text>
+            <text x="165" y="384" text-anchor="middle" class="t-sm t-b">HBIG + vaccine</text>
+          </svg>
+      - kind: update
+        page: 123
+        text: "الـ EASL 2017 بتفضّل **tenofovir (TDF)** للـ prophylaxis في الحامل اللي الـ DNA بتاعها > 200,000 IU/mL، وبتبدأه من أسبوع **24–28**. في الامتحان: إجابة الكتاب (tenofovir أو lamivudine أو telbivudine، 28–32 wk)."
+        ref: "EASL HBV Clinical Practice Guidelines 2017"
+      - kind: check
+        page: 123
+        question: "A pregnant woman with chronic HBV has HBV DNA 5 × 10⁵ IU/mL and normal ALT at the end of the 2nd trimester. Per the book:"
+        options:
+          - "Consider tenofovir (or lamivudine/telbivudine) at 28–32 weeks; infant gets HBIG + vaccine at birth"
+          - "Monitor only; infant gets vaccine alone"
+          - "Start peginterferon now"
+          - "Advise against breastfeeding and give nothing else"
+        answer: 0
+        why:
+          - "صح: **> 200,000 IU/mL** → antiviral at **28–32 wk**، والطفل **HBIG + vaccine**."
+          - "الـ monitor بس للـ **< 200,000**، وحتى ساعتها الطفل ياخد **HBIG + vaccine** مش vaccine بس."
+          - "مش موجود في algorithm الحمل في الكتاب."
+          - "الرضاعة مسموحة (مفيش دليل على انتقال)، وده مش العلاج."
+      - kind: aside
+        tone: tip
+        page: 123
+        text: |
+          رقمين بيتلخبطوا:
+
+          - **200 IU/mL** → الـ healthcare worker.
+          - **200,000 IU/mL** → الحامل.
+
+          افتكرها كده: الحامل خدت **3 أصفار زيادة**.
+      - kind: explain
+        page: 123
+        title: "قبل أي immunosuppression"
+        text: |
+          **Screen for HBsAg and anti-HBc** قبل ما تبدأ الـ IS:
+
+          - **HBsAg−, anti-HBc−**: لو **anti-HBs+** فهو vaccinated. لو **anti-HBs−** (naïve) → **vaccinate if indicated**.
+          - **HBsAg−, anti-HBc+** (exposed): **moderate risk IS** → **monitor every 1–3 months** (ALT، HBV DNA، HBsAg) و **treat if reactivation**. **High-risk IS** (**B cell-depleting therapy or SCT**) → **antiviral prophylaxis**.
+          - **HBsAg+** (CHB) → **start antiviral prophylaxis**.
+      - kind: sort
+        page: 123
+        prompt: "العيان داخل على immunosuppression. نعمل إيه؟"
+        bins: ["Antiviral prophylaxis", "Monitor every 1–3 months", "Vaccinate if indicated"]
+        cards:
+          - { text: "HBsAg+ before chemotherapy", bin: 0 }
+          - { text: "HBsAg−, anti-HBc+, starting rituximab", bin: 0 }
+          - { text: "HBsAg−, anti-HBc+, stem cell transplant", bin: 0 }
+          - { text: "HBsAg−, anti-HBc+, moderate-risk IS", bin: 1 }
+          - { text: "HBsAg−, anti-HBc−, anti-HBs−", bin: 2 }
+        why: "HBsAg+ أو exposed مع **high-risk IS** (B-cell depleting زي rituximab، أو SCT) → prophylaxis. exposed مع moderate-risk → monitor. naïve → vaccinate."
+      - kind: table
+        page: 123
+        title: "تعريف الـ HBV reactivation"
+        columns: ["Patient", "Baseline", "Reactivation ="]
+        rows:
+          - ["HBsAg+, anti-HBc+", "DNA previously undetectable", "≥ 1,000 IU/mL"]
+          - ["HBsAg+, anti-HBc+", "DNA previously detectable", "≥ 100-fold increase"]
+          - ["HBsAg−, anti-HBc+", "—", "Detectable HBV DNA or reappearance of HBsAg"]
+        hide: [[0, 2], [1, 2], [2, 2]]
+      - kind: explain
+        page: 124
+        title: "الـ flare وعلاج الـ reactivation"
+        text: |
+          - **Clinical hepatitis flare** = **ALT ≥ 3 × baseline** و **> 100 U/L**.
+          - الـ immunosuppressed اللي عمل reactivation ياخد **antiviral treatment as early as possible regardless of ALT levels**.
+          - ليه الاستعجال؟ **Severe hepatitis and hepatic failure** بيحصلوا في **25–50%** من الـ HBV reactivation.
+      - kind: aside
+        tone: trap
+        page: 124
+        text: |
+          الـ ALT طبيعي **≠** استنى. في الـ reactivation الكتاب بيقول **regardless of ALT levels**. لو استنيت الـ flare تكون اتأخرت.
+      - kind: explain
+        page: 124
+        title: "وخزة إبرة (post-exposure prophylaxis)"
+        text: |
+          - **Vaccinated**: **anti-HBs > 10 mIU/mL** → no treatment. **< 10** → **HBIG + booster dose**.
+          - **Not vaccinated**: اعمل **HBsAg، anti-HBc، anti-HBs**. **anti-HBs > 10** → no treatment. **< 10** → **HBIG + vaccinate**.
+          - التوقيت: الـ **vaccine** في أسرع وقت و **not later than 7 days**، و الـ **HBIG** **within 72 hours**.
+          - المتابعة: **HBsAg، anti-HBc IgM** عند **6، 12، و 24 weeks**.
+      - kind: mnemonic
+        page: 124
+        word: "10772"
+        parts:
+          - { key: "10", text: "Anti-HBs cut-off: > 10 mIU/mL protected, no treatment" }
+          - { key: "7", text: "Vaccine no later than 7 days after exposure" }
+          - { key: "72", text: "HBIG within 72 hours" }
+        hook: |
+          رقم تليفون الطوارئ بتاع الإبرة: **10-7-72**. والمتابعة كمان بالـ 6: **6، 12، 24 weeks**.
+      - kind: case
+        page: 124
+        stem: "A nurse who was never vaccinated has a needlestick from an HBsAg-positive patient."
+        steps:
+          - question: "What do you test first?"
+            options:
+              - "HBsAg, anti-HBc and anti-HBs"
+              - "HBV DNA only"
+              - "ALT only"
+              - "Nothing; give the vaccine"
+            answer: 0
+            why: "الكتاب: الـ **not vaccinated** نعمله **HBs Ag، anti HBc Ab، anti HBs Ab**."
+          - reveal: "All three are negative (anti-HBs < 10 mIU/mL). It has been 20 hours since the stick."
+            question: "What now?"
+            options:
+              - "HBIG now and start vaccination"
+              - "Booster dose only"
+              - "No treatment"
+              - "Wait for the 6-week test"
+            answer: 0
+            why: "**< 10 mIU/mL** وهو مش متطعم → **HBIG + vaccinate**. لسه جوه الـ **72 hours** للـ HBIG."
+      - kind: try
+        items: [hb.L07.060, hb.L07.064, hb.L07.065, hb.L07.068, hb.L07.069]
+    recap:
+      - "الحمل: DNA **> 200,000** → tenofovir/lamivudine/telbivudine at **28–32 wk**. الطفل دايمًا **HBIG + vaccine**."
+      - "قبل الـ IS: HBsAg+ أو anti-HBc+ مع high-risk (B-cell depleting، SCT) → **prophylaxis**؛ anti-HBc+ moderate → monitor كل **1–3 months**."
+      - "Reactivation: **≥ 1,000** لو كان undetectable، **≥ 100-fold** لو detectable، أو DNA/HBsAg يرجعوا في الـ HBsAg−."
+      - "Flare = ALT **≥ 3×** baseline و **> 100 U/L**. علاج الـ reactivation **regardless of ALT** (25–50% severe)."
+      - "PEP = **10-7-72**، ومتابعة عند **6، 12، 24 weeks**."
+    practice: [hb.L07.059, hb.L07.060, hb.L07.061, hb.L07.062, hb.L07.063, hb.L07.064, hb.L07.065, hb.L07.066, hb.L07.067, hb.L07.068, hb.L07.069, hb.L07.070, hb.L07.077, hb.L07.078, hb.L07.080, hb.L07.082, hb.L07.085]

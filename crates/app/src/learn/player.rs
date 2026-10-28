@@ -149,7 +149,7 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                 }
                 if let Some(page) = step.page {
                     footer { class: "ls-src",
-                        crate::hover::BookPage { label: tx::BOOK_PAGE, page, quote: step.quote.clone() }
+                        crate::hover::BookPage { page, quote: step.quote.clone() }
                     }
                 }
             }

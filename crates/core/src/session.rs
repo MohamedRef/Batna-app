@@ -276,6 +276,7 @@ fn tokens(s: &str) -> Vec<Tok> {
             '≥' | '⩾' => norm.push_str(">="),
             '≤' | '⩽' => norm.push_str("<="),
             '×' => norm.push('x'),
+            '−' | '–' | '—' => norm.push('-'),
             'µ' | 'μ' => norm.push('u'),
             _ => norm.extend(c.to_lowercase()),
         }
@@ -283,9 +284,33 @@ fn tokens(s: &str) -> Vec<Tok> {
     let chars: Vec<char> = norm.chars().collect();
     let mut out = Vec::new();
     let mut i = 0;
+    // A dash before a number is a minus sign unless it joins a range ("5-6");
+    // after "to" or a comparison sign it is a minus again ("-2.6 to -1.4").
+    let mut after_to = false;
     while i < chars.len() {
         let c = chars[i];
-        if c.is_ascii_digit() || (c == '.' && chars.get(i + 1).is_some_and(|d| d.is_ascii_digit())) {
+        let digit_at = |j: usize| {
+            chars.get(j).is_some_and(|d| d.is_ascii_digit())
+                || (chars.get(j) == Some(&'.') && chars.get(j + 1).is_some_and(|d| d.is_ascii_digit()))
+        };
+        if c == '-' && digit_at(i + 1) && (after_to || !matches!(out.last(), Some(Tok::Num(_)))) {
+            i += 1;
+            let start = i;
+            while i < chars.len() {
+                let d = chars[i];
+                let sep_then_digit =
+                    (d == '.' || d == ',') && chars.get(i + 1).is_some_and(|n| n.is_ascii_digit());
+                if d.is_ascii_digit() || sep_then_digit {
+                    i += 1;
+                } else {
+                    break;
+                }
+            }
+            let raw: String = chars[start..i].iter().collect();
+            out.push(Tok::Num(-parse_number(&raw)));
+            after_to = false;
+        } else if c.is_ascii_digit() || (c == '.' && chars.get(i + 1).is_some_and(|d| d.is_ascii_digit())) {
+            after_to = false;
             let start = i;
             while i < chars.len() {
                 let d = chars[i];
@@ -308,13 +333,17 @@ fn tokens(s: &str) -> Vec<Tok> {
                 _ => "<",
             }));
             i += if eq { 2 } else { 1 };
+            after_to = true;
         } else if c.is_alphanumeric() {
             let start = i;
             while i < chars.len() && chars[i].is_alphanumeric() && !chars[i].is_ascii_digit() {
                 i += 1;
             }
             let word: String = chars[start..i].iter().collect();
-            if word != "to" {
+            if word == "to" {
+                after_to = true;
+            } else {
+                after_to = false;
                 out.push(Tok::Word(word));
             }
         } else {
@@ -324,14 +353,78 @@ fn tokens(s: &str) -> Vec<Tok> {
     out
 }
 
-/// `1,000` is a thousand, `1,5` is one and a half, `2.5` is two and a half.
+/// `1,000` and `1,000,000` are thousands, `1,5` is one and a half, `2.5` is
+/// two and a half, `1,000.5` is a thousand and a half.
 fn parse_number(raw: &str) -> f64 {
-    let cleaned = match raw.split_once(',') {
-        Some((_, tail)) if tail.len() == 3 && !tail.contains(['.', ',']) => raw.replace(',', ""),
-        Some(_) if !raw.contains('.') => raw.replacen(',', ".", 1).replace(',', ""),
-        _ => raw.replace(',', ""),
+    let int_part = raw.split('.').next().unwrap_or(raw);
+    let thousands = int_part.contains(',') && int_part.split(',').skip(1).all(|g| g.len() == 3);
+    let cleaned = if thousands || raw.contains('.') {
+        raw.replace(',', "")
+    } else {
+        raw.replacen(',', ".", 1).replace(',', "")
     };
     cleaned.parse().unwrap_or(f64::NAN)
+}
+
+/// Unit words and their spellings. Typed units are optional, but a different
+/// unit is a different answer ("7 weeks" for "7 days").
+const UNITS: &[(&str, &[&str])] = &[
+    ("sec", &["s", "sec", "secs", "second", "seconds"]),
+    ("min", &["min", "mins", "minute", "minutes"]),
+    ("hour", &["h", "hr", "hrs", "hour", "hours"]),
+    ("day", &["d", "day", "days"]),
+    ("week", &["wk", "wks", "week", "weeks"]),
+    ("month", &["mo", "mos", "month", "months"]),
+    ("year", &["y", "yr", "yrs", "year", "years"]),
+    ("kg", &["kg"]),
+    ("g", &["g", "gm", "gram", "grams"]),
+    ("mg", &["mg"]),
+    ("ug", &["ug", "mcg"]),
+    ("ng", &["ng"]),
+    ("l", &["l", "liter", "litre", "liters", "litres"]),
+    ("dl", &["dl"]),
+    ("ml", &["ml"]),
+    ("mmol", &["mmol"]),
+    ("umol", &["umol"]),
+    ("meq", &["meq"]),
+    ("iu", &["iu"]),
+    ("mmhg", &["mmhg"]),
+    ("cmh", &["cmh"]),
+    ("cm", &["cm"]),
+    ("mm", &["mm"]),
+    ("copies", &["copies", "copy"]),
+];
+
+fn unit_of(word: &str) -> Option<&'static str> {
+    UNITS.iter().find(|(_, spellings)| spellings.contains(&word)).map(|(unit, _)| *unit)
+}
+
+/// Opposite prefixes: one edit apart, opposite meanings. A typed word that
+/// swaps one for another is wrong, not a typo.
+const CONTRASTS: &[&[&str]] = &[
+    &["hypo", "hyper", "normo", "eu"],
+    &["intra", "extra", "inter"],
+    &["pre", "post"],
+    &["ante", "retro"],
+    &["brady", "tachy"],
+    &["micro", "macro"],
+    &["endo", "exo"],
+    &["ab", "ad"],
+    &["af", "ef"],
+    &["in", "ex"],
+    &["sub", "supra"],
+    &["mono", "poly", "oligo"],
+    &["hemi", "hemo", "haemo"],
+];
+
+/// Whether two words start with different prefixes from the same contrast
+/// group (hypokalaemia vs hyperkalaemia).
+fn contrasting(a: &str, b: &str) -> bool {
+    CONTRASTS.iter().any(|group| {
+        let pa = group.iter().filter(|p| a.starts_with(**p)).max_by_key(|p| p.len());
+        let pb = group.iter().filter(|p| b.starts_with(**p)).max_by_key(|p| p.len());
+        matches!((pa, pb), (Some(x), Some(y)) if x != y)
+    })
 }
 
 /// Checks a typed cloze answer against the expected one.
@@ -364,6 +457,13 @@ pub fn check_typed(expected: &str, typed: &str) -> Match {
         if !same {
             return Match::Wrong;
         }
+        let units = |t: &[Tok]| -> Vec<&'static str> {
+            t.iter().filter_map(|x| if let Tok::Word(w) = x { unit_of(w) } else { None }).collect()
+        };
+        let got_units = units(&got);
+        if !got_units.is_empty() && got_units != units(&exp) {
+            return Match::Wrong;
+        }
         let (exp_ops, got_ops) = (ops(&exp), ops(&got));
         return if got_ops == exp_ops {
             Match::Right
@@ -381,6 +481,14 @@ pub fn check_typed(expected: &str, typed: &str) -> Match {
     let (a, b) = (exp_words.concat(), got_words.concat());
     if a == b {
         return Match::Right;
+    }
+    let swapped = if exp_words.len() == got_words.len() {
+        exp_words.iter().zip(&got_words).any(|(e, g)| contrasting(e, g))
+    } else {
+        contrasting(&a, &b)
+    };
+    if swapped {
+        return Match::Wrong;
     }
     let len = a.chars().count();
     let allowed = if len >= 9 {
@@ -433,19 +541,71 @@ fn key_words(s: &str) -> Vec<String> {
         .collect()
 }
 
+/// Words that name a kind of thing rather than the thing ("syndrome",
+/// "hypertension") or qualify it ("recurrent"). A point is only recalled when
+/// its most specific word is.
+const GENERIC: &[&str] = &[
+    "syndrome",
+    "disease",
+    "disorder",
+    "failure",
+    "injury",
+    "hypertension",
+    "infection",
+    "infections",
+    "deficiency",
+    "cancer",
+    "carcinoma",
+    "tumor",
+    "tumour",
+    "test",
+    "level",
+    "levels",
+    "cell",
+    "cells",
+    "type",
+    "liver",
+    "hepatic",
+    "acute",
+    "chronic",
+    "primary",
+    "secondary",
+    "recurrent",
+    "refractory",
+    "severe",
+    "mild",
+    "early",
+    "late",
+    "high",
+    "low",
+    "increased",
+    "decreased",
+    "raised",
+    "reduced",
+    "elevated",
+    "risk",
+    "factor",
+    "factors",
+];
+
+/// A typed word covers a wanted one when they match, or share a stem that
+/// is most of the wanted word ("bleed" for "bleeding", not "hepa" for
+/// "hepatorenal").
 fn word_hit(want: &str, have: &[String]) -> bool {
+    let want_len = want.chars().count();
     have.iter().any(|h| {
         h == want || {
-            // "recurrent" ~ "recur", "bleeding" ~ "bleed": a shared stem of 4+ letters.
-            let n = want.chars().count().min(h.chars().count());
-            n >= 4 && want.chars().take(n).eq(h.chars().take(n))
+            let common = want.chars().zip(h.chars()).take_while(|(a, b)| a == b).count();
+            common >= 4 && common * 5 >= want_len * 3
         }
     })
 }
 
 /// Which points a free-typed recall already covers, to pre-tick them. A point
 /// counts when at least half of its key words appear somewhere in what was
-/// typed ("cardiomyopathy" covers "Cirrhotic cardiomyopathy").
+/// typed, its most specific word among them ("cardiomyopathy" covers
+/// "Cirrhotic cardiomyopathy"; "pulmonary hypertension" doesn't cover
+/// "Portal hypertension").
 pub fn recalled(points: &[String], typed: &str) -> Vec<bool> {
     let have = key_words(typed);
     points
@@ -456,7 +616,9 @@ pub fn recalled(points: &[String], typed: &str) -> Vec<bool> {
                 return false;
             }
             let hits = want.iter().filter(|w| word_hit(w, &have)).count();
-            hits * 2 >= want.len()
+            let key =
+                want.iter().filter(|w| !GENERIC.contains(&w.as_str())).max_by_key(|w| w.chars().count());
+            hits * 2 >= want.len() && key.is_none_or(|k| word_hit(k, &have))
         })
         .collect()
 }
@@ -638,6 +800,49 @@ mod tests {
         assert_eq!(check_typed("Terlipressin", "terlipresin"), Match::Close);
         assert_eq!(check_typed("TIPS", "TIPSS"), Match::Wrong);
         assert_eq!(check_typed("Propranolol", "Carvedilol"), Match::Wrong);
+    }
+
+    #[test]
+    fn opposite_prefixes_are_wrong_not_typos() {
+        assert_eq!(check_typed("Hypokalaemia", "hyperkalaemia"), Match::Wrong);
+        assert_eq!(check_typed("Hypothyroidism", "hyperthyroidism"), Match::Wrong);
+        assert_eq!(check_typed("Intrahepatic", "extrahepatic"), Match::Wrong);
+        assert_eq!(check_typed("Intrahepatic", "interhepatic"), Match::Wrong);
+        assert_eq!(check_typed("Bradycardia", "tachycardia"), Match::Wrong);
+        assert_eq!(check_typed("Microcytic", "macrocytic"), Match::Wrong);
+        assert_eq!(check_typed("Afferent", "efferent"), Match::Wrong);
+        assert_eq!(check_typed("Prehepatic", "posthepatic"), Match::Wrong);
+        assert_eq!(check_typed("Primary hypoaldosteronism", "primary hyperaldosteronism"), Match::Wrong);
+        // Real typos stay close.
+        assert_eq!(check_typed("Hypokalaemia", "hypokalemia"), Match::Close);
+        assert_eq!(check_typed("Hyponatraemia", "hyponatremia"), Match::Close);
+    }
+
+    #[test]
+    fn numbers_keep_units_signs_and_thousands() {
+        assert_eq!(check_typed("7 days", "7 weeks"), Match::Wrong);
+        assert_eq!(check_typed("7 days", "7 d"), Match::Right);
+        assert_eq!(check_typed("7 days", "7"), Match::Right);
+        assert_eq!(check_typed("1.5 mg/dL", "1.5 mmol/L"), Match::Wrong);
+        assert_eq!(check_typed("−2.60", "2.60"), Match::Wrong);
+        assert_eq!(check_typed("−2.60", "-2.6"), Match::Right);
+        assert_eq!(check_typed("≤ −2.60", "<=-2.60"), Match::Right);
+        assert_eq!(check_typed("−2.60 to −1.39", "-2.6 to -1.39"), Match::Right);
+        assert_eq!(check_typed("5-6", "5 - 6"), Match::Right);
+        assert_eq!(check_typed("1,000,000", "1000000"), Match::Right);
+        assert_eq!(check_typed("10,000,000 copies/mL", "10000000"), Match::Right);
+        assert_eq!(check_typed("1,000.5", "1000.5"), Match::Right);
+        assert_eq!(check_typed("1,5", "1.5"), Match::Right);
+    }
+
+    #[test]
+    fn recall_needs_more_than_a_shared_stem() {
+        let points: Vec<String> = ["Hepatorenal syndrome", "Hepatopulmonary syndrome", "Portal hypertension"]
+            .map(String::from)
+            .to_vec();
+        assert_eq!(recalled(&points, "hepatorenal syndrome\npulmonary hypertension"), [true, false, false]);
+        assert_eq!(recalled(&points, "hepa"), [false, false, false]);
+        assert_eq!(recalled(&points, "HRS, HPS\nportal htn"), [false, false, true]);
     }
 
     #[test]

@@ -20,6 +20,7 @@ mod import;
 mod onboarding;
 mod oral;
 mod order;
+mod own;
 mod plan;
 mod platform;
 mod prefs;
@@ -31,6 +32,7 @@ mod sounds;
 mod stats;
 mod store;
 mod study;
+mod synced;
 mod table;
 mod today;
 mod update;
@@ -184,6 +186,7 @@ fn App() -> Element {
                 {screen_body(current)}
             }
             settings::SettingsSheet {}
+            own::ShareInbox {}
             onboarding::Onboarding {}
         }
     }

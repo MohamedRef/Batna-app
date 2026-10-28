@@ -323,23 +323,123 @@ fn script_runs(text: &str) -> Vec<(String, bool)> {
         }
     };
     let chars: Vec<char> = text.chars().collect();
-    // Each neutral char takes the script of the run it sits in: Latin only
-    // when both its nearest strong neighbours are Latin, or it's at an edge
-    // next to Latin with digits/units ("≥ 250 cells").
     let strong: Vec<C> = chars.iter().map(|&c| class(c)).collect();
     let mut resolved = strong.clone();
-    for i in 0..chars.len() {
+    // Each run of neutral chars (spaces, digits, signs) between two strong
+    // chars: between two Latin words it is Latin ("Child-Pugh class C").
+    // Right after a Latin word, the numbers, units and closing brackets that
+    // continue it are Latin ("Zone 3", "PaO2 <80", "(MELD)"), but not the
+    // sentence's own punctuation. Right before one, an opening bracket or
+    // quote is Latin ("(morphology").
+    let mut i = 0;
+    while i < chars.len() {
         if strong[i] != C::Neutral {
+            i += 1;
             continue;
         }
-        let before = strong[..i].iter().rev().find(|c| **c != C::Neutral).copied();
-        let after = strong[i + 1..].iter().find(|c| **c != C::Neutral).copied();
-        resolved[i] = match (before, after) {
-            (Some(C::Latin), Some(C::Latin)) => C::Latin,
-            // Numbers and signs right after a Latin word: "PaO2 <80 mmHg".
-            (Some(C::Latin), _) if !chars[i].is_whitespace() && attached_to_latin(&chars, i) => C::Latin,
-            _ => C::Arabic,
-        };
+        let start = i;
+        while i < chars.len() && strong[i] == C::Neutral {
+            i += 1;
+        }
+        let before = start.checked_sub(1).map(|k| strong[k]);
+        let after = strong.get(i).copied();
+        let run = start..i;
+        for k in run.clone() {
+            resolved[k] = C::Arabic;
+        }
+        if before == Some(C::Latin) && after == Some(C::Latin) {
+            for k in run {
+                resolved[k] = C::Latin;
+            }
+            continue;
+        }
+        if before == Some(C::Latin) {
+            let continues = |c: char| c.is_ascii_digit() || c == ' ' || "%()[]+-−–≥≤<>/.×±°'\"·,".contains(c);
+            let mut end = start;
+            while end < i && continues(chars[end]) {
+                end += 1;
+            }
+            // Brackets stay only in pairs: an opening one must close inside
+            // the run ("Low risk (≤ 2%)"), a closing one must close a bracket
+            // the Latin term opened ("(morphology)"). The others are Arabic's
+            // ("(مع albumin 20%)").
+            let mut term = start;
+            while term > 0 && resolved[term - 1] == C::Latin {
+                term -= 1;
+            }
+            let mut opened = chars[term..start].iter().fold(0usize, |d, &c| match c {
+                '(' | '[' => d + 1,
+                ')' | ']' => d.saturating_sub(1),
+                _ => d,
+            });
+            let mut open: Vec<usize> = Vec::new();
+            for (k, &c) in chars.iter().enumerate().take(end).skip(start) {
+                match c {
+                    '(' | '[' => open.push(k),
+                    ')' | ']' if open.pop().is_none() => {
+                        if opened == 0 {
+                            end = k;
+                            break;
+                        }
+                        opened -= 1;
+                    }
+                    _ => {}
+                }
+            }
+            if let Some(&first) = open.first() {
+                end = first;
+            }
+            // Don't take the sentence's punctuation or trailing spaces.
+            while end > start && " .,-–·".contains(chars[end - 1]) {
+                end -= 1;
+            }
+            for r in &mut resolved[start..end] {
+                *r = C::Latin;
+            }
+        }
+        if after == Some(C::Latin) {
+            // A number that starts the term is part of it too ("20 cm",
+            // "1.5 ml/kg/h", "3–4 L").
+            let mut from = i;
+            while from > start
+                && (chars[from - 1].is_ascii_digit() || " .,–-×/~<>≥≤±%([\"'«".contains(chars[from - 1]))
+            {
+                from -= 1;
+            }
+            while from < i && !(chars[from].is_ascii_digit() || "<>≥≤±~([\"'«".contains(chars[from])) {
+                from += 1;
+            }
+            for r in &mut resolved[from..i] {
+                *r = C::Latin;
+            }
+        }
+    }
+    // Ranges and ratios ("5–6", "1/3") read right to left in an Arabic
+    // line ("6–5"), so they are isolated too.
+    let mut k = 0;
+    while k < chars.len() {
+        if !chars[k].is_ascii_digit() || resolved[k] == C::Latin {
+            k += 1;
+            continue;
+        }
+        let start = k;
+        let mut end = k;
+        let mut joined = false;
+        while end < chars.len() && chars[end].is_ascii_digit() {
+            end += 1;
+            if end + 1 < chars.len() && "–-/:×".contains(chars[end]) && chars[end + 1].is_ascii_digit() {
+                joined = true;
+                end += 1;
+            } else if end + 1 < chars.len() && chars[end] == '.' && chars[end + 1].is_ascii_digit() {
+                end += 1;
+            }
+        }
+        if joined {
+            for r in &mut resolved[start..end] {
+                *r = C::Latin;
+            }
+        }
+        k = end;
     }
     let mut out: Vec<(String, bool)> = Vec::new();
     for (i, &c) in chars.iter().enumerate() {
@@ -350,12 +450,6 @@ fn script_runs(text: &str) -> Vec<(String, bool)> {
         }
     }
     out
-}
-
-/// A neutral char joined to the Latin word before it with no space between
-/// ("PaO2", "Na+", "(MELD)").
-fn attached_to_latin(chars: &[char], i: usize) -> bool {
-    chars[..i].iter().rev().take_while(|c| !c.is_whitespace()).any(|c| c.is_ascii_alphabetic())
 }
 
 // ---------- checks ----------
@@ -672,6 +766,29 @@ mod tests {
         assert_eq!(latin_runs("الـ HSCs بتتنشط"), ["HSCs"]);
         assert_eq!(latin_runs("لما PaO2 <80 mmHg يبقى"), ["PaO2 <80 mmHg"]);
         assert_eq!(latin_runs("كله عربي"), Vec::<String>::new());
+        assert_eq!(latin_runs("Zone 3"), ["Zone 3"]);
+        assert_eq!(latin_runs("الشكل (morphology): كده"), ["(morphology)"]);
+        assert_eq!(latin_runs("الـ nodules. وبعدين"), ["nodules"]);
+        assert_eq!(latin_runs("الـ MELD ≥ 21 هنا"), ["MELD ≥ 21"]);
+        assert_eq!(latin_runs("لازم يتحققوا (all 5 must be fulfilled). تمام"), ["(all 5 must be fulfilled)"]);
+        assert_eq!(latin_runs("Low risk (≤ 2%)"), ["Low risk (≤ 2%)"]);
+        assert_eq!(latin_runs("Low risk (≤ 2%) يعني"), ["Low risk (≤ 2%)"]);
+        assert_eq!(latin_runs("الـ MELD (يعني"), ["MELD"]);
+        assert_eq!(latin_runs("طوله حوالي 20 cm تقريبا"), ["20 cm"]);
+        assert_eq!(latin_runs("20 cm"), ["20 cm"]);
+        assert_eq!(latin_runs("خليه 1.5 ml/kg/h كده"), ["1.5 ml/kg/h"]);
+        assert_eq!(latin_runs("حوالي 3–4 L في اليوم"), ["3–4 L"]);
+        assert_eq!(latin_runs("في 24 h"), ["24 h"]);
+        assert_eq!(latin_runs("من 5–6 نقط"), ["5–6"]);
+        assert_eq!(latin_runs("الـ OR 7.4 هنا"), ["OR 7.4"]);
+        assert_eq!(latin_runs("الـ CA 19-9 مش"), ["CA 19-9"]);
+        assert_eq!(latin_runs("الـ ECOG 0–1 بس"), ["ECOG 0–1"]);
+        assert_eq!(latin_runs("أكتر من (>80 g/day) كده"), ["(>80 g/day)"]);
+        assert_eq!(latin_runs("لو (PMN ≥250) يبقى"), ["(PMN ≥250)"]);
+        assert_eq!(latin_runs("الـ BCLC 2022"), ["BCLC 2022"]);
+        assert_eq!(latin_runs("لو ≥250 cells يبقى"), ["≥250 cells"]);
+        assert_eq!(latin_runs("(مع albumin 20%) كده"), ["albumin 20%"]);
+        assert_eq!(latin_runs("حوالي 1/3 العيانين و 40 واحد"), ["1/3"]);
     }
 
     #[test]

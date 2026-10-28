@@ -126,7 +126,7 @@ pub fn Setup() -> Element {
                                     },
                                     title: lecture_title(&id),
                                     bdi { class: "chip-label", "{lecture_code(&id)} · {short_lecture_title(&id)}" }
-                                    span { class: "count", bdi { "{n}" } }
+                                    span { class: "count", {tx::questions(n)} }
                                 }
                             }
                         }

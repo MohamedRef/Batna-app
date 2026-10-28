@@ -11,4 +11,5 @@ pub fn reload() {
     crate::sounds::reload();
     crate::reminders::reload();
     crate::bank::reload_history();
+    crate::learn::reload();
 }

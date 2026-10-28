@@ -363,6 +363,7 @@ impl Engine {
                     Err(e) => {
                         // Not saved, so the next hello brings them again.
                         crate::diag::report!("applying remote ops: {e}");
+                        self.client.rewind(self.store.last_seq());
                         self.drop_socket();
                         return;
                     }

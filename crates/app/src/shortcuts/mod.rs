@@ -1,5 +1,5 @@
 //! Keyboard shortcuts for tablet keyboards and the Mac (PARITY.md §6.5):
-//! Ctrl/⌘ + 1–6 for the screens, Ctrl/⌘ + , for Settings, and on study
+//! Ctrl/⌘ + 1–7 for the screens, Ctrl/⌘ + , for Settings, and on study
 //! screens Space to reveal, 1–4 to rate, A–E for MCQ options, Enter for next,
 //! Esc to close, ? for the list.
 //!
@@ -28,7 +28,7 @@ window.__batnaKeys = (e) => {
   const typing = t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.tagName === "SELECT" || t.isContentEditable);
   const mod = e.metaKey || e.ctrlKey;
   if (mod && !e.altKey && !e.shiftKey) {
-    if (/^Digit[1-6]$/.test(e.code)) { e.preventDefault(); dioxus.send("go:" + e.code.slice(5)); return; }
+    if (/^Digit[1-7]$/.test(e.code)) { e.preventDefault(); dioxus.send("go:" + e.code.slice(5)); return; }
     if (e.code === "Comma") { e.preventDefault(); dioxus.send("go:settings"); return; }
     return;
   }
@@ -115,7 +115,7 @@ pub fn KeysSheet() -> Element {
     }
     let screens = format!("{} … {}", nav::TODAY, nav::STATS);
     let rows: [(&[&str], String); 9] = [
-        (&["Ctrl", "1–6"], format!("{} ({screens})", tx::SCREENS)),
+        (&["Ctrl", "1–7"], format!("{} ({screens})", tx::SCREENS)),
         (&["Ctrl", ","], tx::SETTINGS.into()),
         (&["Space"], tx::REVEAL.into()),
         (&["1", "2", "3", "4"], tx::RATE.into()),
@@ -171,11 +171,11 @@ mod tests {
     #[test]
     fn messages_map_to_screens() {
         assert_eq!(parse("go:1"), Some(Command::Go(Screen::Today)));
-        assert_eq!(parse("go:6"), Some(Command::Go(Screen::Stats)));
+        assert_eq!(parse("go:7"), Some(Command::Go(Screen::Stats)));
         assert_eq!(parse("go:settings"), Some(Command::Settings));
         assert_eq!(parse("help"), Some(Command::Help));
         assert_eq!(parse("go:0"), None);
-        assert_eq!(parse("go:7"), None);
+        assert_eq!(parse("go:8"), None);
         assert_eq!(parse("other"), None);
     }
 }

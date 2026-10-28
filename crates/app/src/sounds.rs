@@ -60,6 +60,14 @@ impl SoundPrefs {
 /// The current prefs, read by every [`play`].
 pub static PREFS: GlobalSignal<SoundPrefs> = Signal::global(SoundPrefs::load);
 
+/// Re-reads the prefs after a sync or restore (see `crate::synced`).
+pub fn reload() {
+    let fresh = SoundPrefs::load();
+    if *PREFS.peek() != fresh {
+        *PREFS.write() = fresh;
+    }
+}
+
 pub const VARIATIONS: u8 = 3;
 
 const FILES: [(&str, &[u8]); 6] = [

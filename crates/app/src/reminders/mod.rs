@@ -48,6 +48,14 @@ impl RemindPrefs {
 
 pub static PREFS: GlobalSignal<RemindPrefs> = Signal::global(RemindPrefs::load);
 
+/// Re-reads the reminder times after a sync or restore (see `crate::synced`).
+pub fn reload() {
+    let fresh = RemindPrefs::load();
+    if *PREFS.peek() != fresh {
+        *PREFS.write() = fresh;
+    }
+}
+
 /// This device rings. Device-only, never synced. Until he chooses, devices
 /// with a vibration motor ring (his phone), and tablets and the Mac stay
 /// quiet; it's a guess about the hardware, not the device's name.

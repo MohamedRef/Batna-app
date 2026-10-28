@@ -140,8 +140,22 @@ fn record(event: ReviewEvent) {
     }
 }
 
-/// Fill the history once per launch: last results from the logged bank and
-/// mock answers, finished papers from the store's settings.
+/// After a sync or restore (see `crate::synced`): take the finished papers
+/// from the store now, and rebuild the last results from the log the next
+/// time the bank opens.
+pub fn reload_history() {
+    let papers = crate::store::shared().setting(PAPERS_KEY).unwrap_or_default();
+    if HISTORY.peek().papers != papers {
+        HISTORY.write().papers = papers;
+    }
+    if *HISTORY_LOADED.peek() {
+        *HISTORY_LOADED.write() = false;
+    }
+}
+
+/// Fill the history once per launch (and again after a sync): last results
+/// from the logged bank and mock answers, finished papers from the store's
+/// settings.
 fn load_history() {
     if *HISTORY_LOADED.peek() {
         return;
@@ -259,6 +273,9 @@ pub fn finish() {
         }
         let mut history = HISTORY.write();
         history.record(&paper.questions, &paper.answers);
+        // Start from the stored list, not this run's copy, so a paper
+        // another device finished meanwhile isn't dropped (#32).
+        history.papers = crate::store::shared().setting(PAPERS_KEY).unwrap_or_default();
         history.papers.push(outcome.clone());
         let _ = crate::store::shared().put_setting(PAPERS_KEY, &history.papers);
     }

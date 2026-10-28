@@ -122,8 +122,21 @@ pub fn RemindSection() -> Element {
     use crate::settings::DeviceOnly;
     let prefs = PREFS();
     let here = HERE();
-    // Re-read when the sheet re-renders (e.g. after he returns from Android's settings).
-    let allowed = native::enabled();
+    // Android: re-read when the sheet re-renders (e.g. after he returns from
+    // its settings). The Mac answers later, so it is polled while open.
+    let mut mac_allowed = use_signal(native::enabled);
+    use_future(move || async move {
+        if cfg!(target_os = "macos") {
+            loop {
+                tokio::time::sleep(std::time::Duration::from_secs(1)).await;
+                let now = native::enabled();
+                if *mac_allowed.peek() != now {
+                    mac_allowed.set(now);
+                }
+            }
+        }
+    });
+    let allowed = if cfg!(target_os = "macos") { mac_allowed() } else { native::enabled() };
     let unrestricted = native::battery_unrestricted();
     let on_off = |on: bool| if on { tx::ON } else { tx::OFF };
 
@@ -236,11 +249,14 @@ pub fn RemindSection() -> Element {
                 if here && allowed == Some(false) {
                     p { {tx::BLOCKED} }
                     div { class: "row",
-                        button { onclick: move |_| native::request_permission(), {tx::ALLOW} }
+                        // macOS asks only once; after a no, only System Settings can change it.
+                        if !cfg!(target_os = "macos") {
+                            button { onclick: move |_| native::request_permission(), {tx::ALLOW} }
+                        }
                         button { class: "btn btn-secondary", onclick: move |_| native::open_notification_settings(), {tx::OPEN_NOTIFICATIONS} }
                     }
                 }
-                if here && cfg!(target_os = "macos") {
+                if here && cfg!(target_os = "macos") && allowed != Some(false) {
                     p { class: "muted small", {tx::MAC_HINT} }
                     button { class: "secondary", onclick: move |_| native::open_notification_settings(), {tx::OPEN_NOTIFICATIONS} }
                 }

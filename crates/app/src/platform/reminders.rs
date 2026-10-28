@@ -37,11 +37,14 @@ pub fn repeat(json: &str) {
     let _ = json;
 }
 
-/// Whether notifications are allowed for Batna (None where unknown).
+/// Whether notifications are allowed for Batna (None where unknown). On the
+/// Mac the answer comes back later, so the first call says None.
 pub fn enabled() -> Option<bool> {
+    #[cfg(target_os = "macos")]
+    return mac::allowed();
     #[cfg(target_os = "android")]
     return android::flag("enabled").map_err(|e| crate::diag::report!("ReminderBridge: {e}")).ok();
-    #[cfg(not(target_os = "android"))]
+    #[cfg(not(any(target_os = "android", target_os = "macos")))]
     None
 }
 
@@ -188,14 +191,17 @@ mod android {
 /// [`plan::Repeat`]: crate::reminders::plan::Repeat
 #[cfg(target_os = "macos")]
 mod mac {
+    use std::ptr::NonNull;
     use std::sync::Mutex;
+    use std::sync::atomic::{AtomicU8, Ordering};
 
     use block2::RcBlock;
     use objc2::runtime::Bool;
     use objc2_foundation::{NSBundle, NSDateComponents, NSError, NSString};
     use objc2_user_notifications::{
-        UNAuthorizationOptions, UNCalendarNotificationTrigger, UNMutableNotificationContent,
-        UNNotificationRequest, UNUserNotificationCenter,
+        UNAuthorizationOptions, UNAuthorizationStatus, UNCalendarNotificationTrigger,
+        UNMutableNotificationContent, UNNotificationRequest, UNNotificationSettings, UNNotificationSound,
+        UNUserNotificationCenter,
     };
     use serde::Deserialize;
 
@@ -206,6 +212,9 @@ mod mac {
 
     /// The latest fallback from [`repeat`], read by the next [`schedule`].
     static REPEAT: Mutex<Option<Repeat>> = Mutex::new(None);
+
+    /// The last permission answer macOS gave: 0 unknown, 1 denied, 2 allowed.
+    static ALLOWED: AtomicU8 = AtomicU8::new(0);
 
     #[derive(Deserialize)]
     struct Item {
@@ -224,6 +233,7 @@ mod mac {
             return;
         }
         let done = RcBlock::new(|granted: Bool, _error: *mut NSError| {
+            ALLOWED.store(if granted.as_bool() { 2 } else { 1 }, Ordering::Relaxed);
             if !granted.as_bool() {
                 crate::diag::report!("notifications not allowed on this Mac");
             }
@@ -233,6 +243,33 @@ mod mac {
                 UNAuthorizationOptions::Alert | UNAuthorizationOptions::Sound,
                 &done,
             );
+    }
+
+    /// The last answer, and asks macOS again for the next call (Settings
+    /// polls this while it is open).
+    pub fn allowed() -> Option<bool> {
+        if !bundled() {
+            return None;
+        }
+        let done = RcBlock::new(|settings: NonNull<UNNotificationSettings>| {
+            // SAFETY: macOS passes a valid settings object for the length of
+            // the call.
+            #[allow(unsafe_code)]
+            let status = unsafe { settings.as_ref() }.authorizationStatus();
+            let answer = match status {
+                UNAuthorizationStatus::Denied => 1,
+                UNAuthorizationStatus::NotDetermined => 0,
+                _ => 2,
+            };
+            ALLOWED.store(answer, Ordering::Relaxed);
+        });
+        UNUserNotificationCenter::currentNotificationCenter()
+            .getNotificationSettingsWithCompletionHandler(&done);
+        match ALLOWED.load(Ordering::Relaxed) {
+            1 => Some(false),
+            2 => Some(true),
+            _ => None,
+        }
     }
 
     /// Keeps the fallback (`{}` for none) for the next [`schedule`].
@@ -273,6 +310,7 @@ mod mac {
             let content = UNMutableNotificationContent::new();
             content.setTitle(&NSString::from_str(&item.title));
             content.setBody(&NSString::from_str(&item.text));
+            content.setSound(Some(&UNNotificationSound::defaultSound()));
             let id = NSString::from_str(&format!("batna.reminder.{i}"));
             let request =
                 UNNotificationRequest::requestWithIdentifier_content_trigger(&id, &content, Some(&trigger));

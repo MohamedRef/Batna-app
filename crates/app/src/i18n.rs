@@ -232,6 +232,13 @@ pub mod bank {
     pub const SENT_TO_REVIEW: &str = "الأسئلة اللي غلطت فيها هترجعلك في المراجعة قريب.";
     pub const REPORT: &str = "بلّغ عن مشكلة في السؤال ده";
     pub const CLOSE: &str = "اقفل";
+    pub const LEAVE_TIMED_HINT: &str = "الامتحان هيستناك، والوقت شغّال";
+    pub const PAUSED_TITLE: &str = "عندك امتحان لسه مفتوح";
+    pub const PAUSED_BODY: &str = "جاوبت";
+    pub const PAUSED_LEFT: &str = "والوقت اللي فاضل حوالي";
+    pub const PAUSED_OVER: &str = "وقته خلص، فهيتسلّم زي ما هو.";
+    pub const RESUME: &str = "كمّل";
+    pub const SUBMIT_NOW: &str = "سلّمه دلوقتي";
 }
 
 pub mod stats {

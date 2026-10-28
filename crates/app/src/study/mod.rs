@@ -49,6 +49,10 @@ pub struct Start {
 
 pub static START: GlobalSignal<Option<Start>> = Signal::global(|| None);
 
+/// A START that came while a session was running, waiting for him to choose
+/// between adding it to the session, starting it instead, or dropping it.
+static PENDING: GlobalSignal<Option<Start>> = Signal::global(|| None);
+
 /// Every item by id, with its lecture.
 fn items() -> &'static HashMap<String, (&'static Lecture, &'static Item)> {
     static MAP: Derived<HashMap<String, (&'static Lecture, &'static Item)>> = Derived::new();
@@ -185,31 +189,54 @@ pub fn Study() -> Element {
         }
     };
 
+    // Starts what a START request asks for, replacing whatever is shown.
+    let apply = {
+        let store = store.clone();
+        let begin = begin.clone();
+        move |req: Start| {
+            if let Some(ids) = &req.items {
+                let planned = plan_items(&store, ids);
+                let empty = planned.is_empty();
+                session.set(Session::new(planned));
+                started.set(Instant::now());
+                phase.set(if empty { Phase::Summary } else { Phase::Running });
+                return;
+            }
+            let picked: Vec<&Lecture> = ready_lectures()
+                .into_iter()
+                .filter(|l| req.lectures.as_ref().is_none_or(|ids| ids.contains(&l.lecture)))
+                .collect();
+            minutes.set(req.minutes);
+            let mut begin = begin.clone();
+            begin(picked, HashSet::new(), req.minutes);
+        }
+    };
+    let mut pending = PENDING.signal();
+    // The question only makes sense while that session runs.
+    use_effect(move || {
+        if phase() != Phase::Running && pending.peek().is_some() {
+            pending.set(None);
+        }
+    });
+
     // Today's "start a session" button, and any "study these" asked for
     // while Study is already open (a book page's sheet, a lecture page over
-    // it): an effect, so a request made here is not left waiting.
+    // it): an effect, so a request made here is not left waiting. A session
+    // in progress is never dropped without asking (#319): the request waits
+    // in PENDING for his answer.
     use_effect({
-        let store = store.clone();
-        let mut begin = begin.clone();
+        let mut apply = apply.clone();
         move || {
             if START.read().is_none() {
                 return;
             }
             if let Some(req) = START.write().take() {
-                if let Some(ids) = &req.items {
-                    let planned = plan_items(&store, ids);
-                    let empty = planned.is_empty();
-                    session.set(Session::new(planned));
-                    started.set(Instant::now());
-                    phase.set(if empty { Phase::Summary } else { Phase::Running });
-                    return;
+                let live = *phase.peek() == Phase::Running && !session.peek().is_done();
+                if live {
+                    pending.set(Some(req));
+                } else {
+                    apply(req);
                 }
-                let picked: Vec<&Lecture> = ready_lectures()
-                    .into_iter()
-                    .filter(|l| req.lectures.as_ref().is_none_or(|ids| ids.contains(&l.lecture)))
-                    .collect();
-                minutes.set(req.minutes);
-                begin(picked, HashSet::new(), req.minutes);
             }
         }
     });
@@ -261,6 +288,7 @@ pub fn Study() -> Element {
                         .as_ref()
                         .and_then(|t| lecture.topics.iter().find(|x| &x.id == t))
                         .map(|t| t.title.clone());
+                    let store_for_add = store.clone();
                     let store = store.clone();
                     let item_id = p.item_id.clone();
                     let on_grade = move |grade: Grade| {
@@ -297,6 +325,26 @@ pub fn Study() -> Element {
                                 "aria-keyshortcuts": "Escape",
                                 onclick: move |_| phase.set(Phase::Summary),
                                 {tx::END}
+                            }
+                        }
+                        if let Some(req) = pending() {
+                            PendingCard {
+                                req,
+                                on_add: {
+                                    move |ids: Vec<String>| {
+                                        let more = plan_items(&store_for_add, &ids);
+                                        session.write().append(more);
+                                        pending.set(None);
+                                    }
+                                },
+                                on_replace: {
+                                    let mut apply = apply.clone();
+                                    move |req: Start| {
+                                        pending.set(None);
+                                        apply(req);
+                                    }
+                                },
+                                on_keep: move |_| pending.set(None),
                             }
                         }
                         // Keyed so every item (and a retry of the same one) starts fresh.
@@ -564,5 +612,37 @@ mod tests {
         // A 2-day interval lands at 04:00 two study days on: 47 hours away.
         assert_eq!(label(at(47)), "بعد يومين");
         assert_eq!(label(at(71)), "بعد 3 أيام");
+    }
+}
+
+/// Asked when "study this" arrives during a session: his session, its
+/// retries and its summary stay unless he says otherwise.
+#[component]
+fn PendingCard(
+    req: Start,
+    on_add: EventHandler<Vec<String>>,
+    on_replace: EventHandler<Start>,
+    on_keep: EventHandler<()>,
+) -> Element {
+    let n = req.items.as_ref().map(Vec::len);
+    rsx! {
+        section { class: "card st-pending", role: "alertdialog", aria_label: tx::PENDING_TITLE,
+            p { strong { {tx::PENDING_TITLE} } }
+            p { class: "muted small", {tx::PENDING_BODY} }
+            div { class: "st-actions",
+                if let (Some(ids), Some(n)) = (req.items.clone(), n) {
+                    button { class: "btn btn-primary", onclick: move |_| on_add.call(ids.clone()), "{tx::PENDING_ADD} ({n})" }
+                }
+                button {
+                    class: "btn btn-secondary",
+                    onclick: {
+                        let req = req.clone();
+                        move |_| on_replace.call(req.clone())
+                    },
+                    {tx::PENDING_REPLACE}
+                }
+                button { class: "btn-link", onclick: move |_| on_keep.call(()), {tx::PENDING_KEEP} }
+            }
+        }
     }
 }

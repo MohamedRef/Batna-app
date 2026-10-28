@@ -233,6 +233,11 @@ pub mod study {
     pub const NOTHING_NOW: &str =
         "مفيش حاجة عليها الدور في اللي اخترته دلوقتي. جرّب محاضرة تانية أو ارجع بعدين.";
     pub const END: &str = "إنهاء الجلسة";
+    pub const PENDING_TITLE: &str = "عندك جلسة شغّالة";
+    pub const PENDING_BODY: &str = "تحب تضيف الأسئلة دي بعد اللي فاضل في جلستك، ولا تبدأ جلسة جديدة بيها؟";
+    pub const PENDING_ADD: &str = "ضيفهم بعد جلستي";
+    pub const PENDING_REPLACE: &str = "ابدأ جلسة جديدة";
+    pub const PENDING_KEEP: &str = "لا، كمّل جلستي";
     pub const OF: &str = "من";
 
     pub const BADGE_NEW: &str = "جديد";

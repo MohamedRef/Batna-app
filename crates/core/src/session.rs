@@ -223,6 +223,20 @@ impl Session {
         }
     }
 
+    /// Queues more items after what's left, skipping any still to come, so
+    /// "study this page" during a session adds to it instead of replacing it.
+    /// Returns how many were added.
+    pub fn append(&mut self, more: Vec<Planned>) -> usize {
+        let mut added = 0;
+        for p in more {
+            if !self.queue[self.pos..].iter().any(|q| q.item_id == p.item_id) {
+                self.queue.push(p);
+                added += 1;
+            }
+        }
+        added
+    }
+
     pub fn summary(&self) -> Summary {
         // The first grade of each item is the one that counts for "right".
         let mut first: Vec<&Outcome> = Vec::new();
@@ -962,6 +976,26 @@ mod tests {
         assert_eq!(check_typed("10,000,000 copies/mL", "10000000"), Match::Right);
         assert_eq!(check_typed("1,000.5", "1000.5"), Match::Right);
         assert_eq!(check_typed("1,5", "1.5"), Match::Right);
+    }
+
+    #[test]
+    fn append_queues_after_whats_left_without_repeats() {
+        let p = |id: &str| Planned {
+            item_id: id.into(),
+            lecture: "L".into(),
+            topic: "L".into(),
+            est_secs: 10,
+            fresh: true,
+        };
+        let mut s = Session::new(vec![p("a"), p("b")]);
+        s.grade(Grade::Good);
+        assert_eq!(s.append(vec![p("b"), p("c"), p("a")]), 2);
+        let mut seen = Vec::new();
+        while let Some(c) = s.current() {
+            seen.push(c.item_id.clone());
+            s.grade(Grade::Good);
+        }
+        assert_eq!(seen, ["b", "c", "a"]);
     }
 
     #[test]

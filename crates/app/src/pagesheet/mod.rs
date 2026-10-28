@@ -159,6 +159,7 @@ pub fn BookSheet() -> Element {
                                 });
                                 close();
                                 crate::lecture::close();
+                                crate::learn::forget();
                                 let mut screen = ui.screen;
                                 screen.set(Screen::Study);
                             }

@@ -456,6 +456,10 @@ fn script_runs(text: &str) -> Vec<(String, bool)> {
                 end += 1;
             } else if end + 1 < chars.len() && chars[end] == '.' && chars[end + 1].is_ascii_digit() {
                 end += 1;
+            } else if let Some(skip) = spaced_operator(&chars[end..]) {
+                // A sum or product written with spaces: "45 + 55 = 100".
+                joined = true;
+                end += skip;
             }
         }
         let percent = chars.get(end) == Some(&'%');
@@ -495,6 +499,23 @@ fn script_runs(text: &str) -> Vec<(String, bool)> {
         }
     }
     out
+}
+
+/// The length of " + " (or "+", " = ", " × ", "−", "/") in front of a
+/// digit at the start of `rest`, so "45 + 55 = 100" reads as one formula.
+fn spaced_operator(rest: &[char]) -> Option<usize> {
+    let mut k = 0;
+    if rest.get(k) == Some(&' ') {
+        k += 1;
+    }
+    if !rest.get(k).is_some_and(|c| "+=×−÷".contains(*c)) {
+        return None;
+    }
+    k += 1;
+    if rest.get(k) == Some(&' ') {
+        k += 1;
+    }
+    rest.get(k).is_some_and(|c| c.is_ascii_digit()).then_some(k)
 }
 
 // ---------- checks ----------
@@ -840,6 +861,13 @@ mod tests {
         assert_eq!(latin_runs("لو FIB-4 < 1.3 ثم كده"), ["FIB-4 < 1.3"]);
         assert_eq!(latin_runs("الـ platelets ≥ 150 (يعني"), ["platelets ≥ 150"]);
         assert_eq!(latin_runs("المرحلة (F1) دي"), ["(F1)"]);
+        assert_eq!(latin_runs("**WAJH**: ≥ 2 خلال **20 يوم** بعد"), ["WAJH", "≥ 2"]);
+        assert_eq!(
+            latin_runs(
+                "ركّز في الأرقام كأزواج: **15–45** يخفّوا و **55–85** يزمنوا. الاتنين بيكمّلوا بعض لـ 100 (45 + 55 = 100، و 15 + 85 = 100)."
+            ),
+            ["15–45", "55–85", "45 + 55 = 100", "15 + 85 = 100"]
+        );
         assert_eq!(latin_runs("لو عدّى 12 h فكّر"), ["12 h"]);
         assert_eq!(latin_runs("حوالي 2 mm/yr بس"), ["2 mm/yr"]);
         assert_eq!(latin_runs("الـ 25(OH)D واطي"), ["25(OH)D"]);

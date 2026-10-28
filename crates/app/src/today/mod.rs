@@ -12,6 +12,7 @@ use batna_core::plan::{Focus, PlanStatus};
 use batna_core::review::StudyStore;
 
 use crate::content::Library;
+use crate::i18n::count::{ITEM, count};
 use crate::i18n::today as tx;
 use crate::plan::DailyTarget;
 use crate::stats::StudyData;
@@ -50,7 +51,7 @@ pub fn Today() -> Element {
                     }
                     if ready {
                         if o.due > 0 {
-                            p { class: "muted small", "{tx::DUE_TIME_1} {o.due_minutes} {tx::DUE_TIME_2}" }
+                            p { class: "muted small", {tx::due_time(o.due_minutes)} }
                         }
                         button {
                             class: "btn btn-primary btn-lg start",
@@ -145,7 +146,7 @@ fn PlanHero(t: DailyTarget, due: usize, due_minutes: u32) -> Element {
                                 "{due} {tx::PLAN_REVIEWS_ONLY}"
                             }
                             if minutes > 0 {
-                                " ({tx::ABOUT} {minutes} {tx::MINUTES})"
+                                " ({tx::ABOUT} " {count(minutes, &crate::i18n::count::MINUTE)} ")"
                             }
                         }
                         if !day.revisit.is_empty() {
@@ -230,7 +231,7 @@ fn Tile(value: usize, label: &'static str, #[props(default)] accent: bool) -> El
 #[component]
 fn Progress(lecture: LectureProgress) -> Element {
     let pct = lecture.seen * 100 / lecture.total.max(1);
-    let number = lecture.id.rsplit('.').next().unwrap_or(&lecture.id).trim_start_matches('L').to_string();
+    let number = crate::content::lecture_code(&lecture.id);
     rsx! {
         li { class: "progress-row",
             span { class: "num", "{number}" }
@@ -259,7 +260,7 @@ fn LibraryList() -> Element {
     let lib = Library::get();
     let rows = lib.index.lectures.iter().map(|entry| {
         let items = lib.lectures.get(&entry.id).map(|l| l.items.len());
-        let number = entry.id.rsplit('.').next().unwrap_or(&entry.id).trim_start_matches('L').to_string();
+        let number = crate::content::lecture_code(&entry.id);
         let [first, last] = entry.pages;
         (entry.id.clone(), number, entry.title.clone(), items, format!("{first}–{last}"))
     });
@@ -278,7 +279,7 @@ fn LibraryList() -> Element {
                         span { class: "muted small", "{tx::PAGES} " bdi { dir: "ltr", "{pages}" } }
                     }
                     match items {
-                        Some(n) => rsx! { span { class: "chip ready", "{tx::READY} · {n} {tx::ITEMS}" } },
+                        Some(n) => rsx! { span { class: "chip ready", "{tx::READY} · " {count(n, &ITEM)} } },
                         None => rsx! { span { class: "chip", {tx::WRITING} } },
                     }
                 }

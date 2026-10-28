@@ -41,12 +41,12 @@ pub fn use_hover() {
 /// The "Book p. 14" chip. Hovering it shows the item's short `src.quote`
 /// (when there is one), so the source can be checked without the book.
 #[component]
-pub fn BookPage(label: &'static str, page: u32, quote: Option<String>) -> Element {
+pub fn BookPage(page: u32, quote: Option<String>) -> Element {
     rsx! {
         span {
             class: "chip page",
             "data-peek": quote.unwrap_or_default(),
-            bdi { "{label} {page}" }
+            bdi { {crate::i18n::cite::page(page)} }
         }
     }
 }

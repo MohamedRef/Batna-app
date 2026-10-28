@@ -51,9 +51,33 @@ impl Library {
     }
 }
 
+impl Library {
+    /// A lecture's title as the index spells it, so every screen agrees.
+    pub fn title<'a>(&'a self, id: &'a str) -> &'a str {
+        let indexed = self.index.lectures.iter().find(|e| e.id == id).map(|e| e.title.as_str());
+        indexed.or_else(|| self.lectures.get(id).map(|l| l.title.as_str())).unwrap_or(id)
+    }
+}
+
+/// `hb.L1` or `hb.L01` → `L01`: the one way every screen names a lecture.
+pub fn lecture_code(id: &str) -> String {
+    let n = id.rsplit('.').next().unwrap_or(id).trim_start_matches('L').trim_start_matches('0');
+    format!("L{n:0>2}")
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn lecture_codes_and_titles_are_one_spelling() {
+        assert_eq!(lecture_code("hb.L01"), "L01");
+        assert_eq!(lecture_code("hb.L1"), "L01");
+        assert_eq!(lecture_code("hb.L20"), "L20");
+        let lib = Library::get();
+        let first = &lib.index.lectures[0];
+        assert_eq!(lib.title(&first.id), first.title);
+    }
 
     #[test]
     fn every_embedded_file_parses() {

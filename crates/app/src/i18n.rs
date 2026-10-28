@@ -860,6 +860,16 @@ pub mod update {
     pub const DONE_BODY: &str = "افتحه وكمّل من مكانك.";
     #[cfg_attr(not(target_os = "android"), allow(dead_code))]
     pub const READY_TITLE: &str = "تحديث باطنة جاهز: دوس عشان تثبّته";
+
+    // The "new version" notification, and its switch.
+    pub const NOTICE_AVAILABLE: &str = "نزلت نسخة جديدة من باطنة";
+    pub const NOTICE_READY: &str = "نسخة باطنة الجديدة جاهزة تتثبّت";
+    pub const NOTICE_INSTALLED: &str = "نسخة باطنة الجديدة اتحطّت";
+    pub const NOTICE_TAP_AVAILABLE: &str = "دوس تشوف الجديد وتنزّلها.";
+    pub const NOTICE_TAP_READY: &str = "اتنزّلت واتفحصت. دوس عشان تثبّتها.";
+    pub const NOTICE_CHANNEL: &str = "نسخ باطنة الجديدة";
+    pub const NOTIFY: &str = "ابعتلي إشعار أول ما تنزل نسخة جديدة";
+    pub const NOTIFY_SUB: &str = "على أندرويد حتى لو باطنة مقفول (بيبص كل كام ساعة)، ومعاه الجديد في سطرين. مفتاح الإشعارات في الجهاز له الكلمة الأخيرة.";
 }
 
 pub mod sound {

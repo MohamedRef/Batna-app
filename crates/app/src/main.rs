@@ -137,6 +137,7 @@ fn App() -> Element {
     let look = ui.prefs.read().css();
     back::use_back(ui, current, *settings.open.read());
     update::view::use_android_install(ui);
+    update::view::use_update_notice_taps(settings);
     // A screen opens at its top, not at the last screen's scroll offset (UX #102).
     use_effect(move || {
         let _ = ui.screen.read();

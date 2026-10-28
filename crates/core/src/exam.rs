@@ -379,6 +379,14 @@ pub fn weak_topics(o: &Outcome, below: u32, min: u32) -> Vec<(&str, Score)> {
     weak
 }
 
+/// What to revise first after a paper: topics under `below` percent with at
+/// least two questions, or, when a mixed mock spreads too thin for that, any
+/// topic under `below` (#233). Empty only when no topic is under `below`.
+pub fn focus_topics(o: &Outcome, below: u32) -> Vec<(&str, Score)> {
+    let weak = weak_topics(o, below, 2);
+    if weak.is_empty() { weak_topics(o, below, 1) } else { weak }
+}
+
 /// The bank's own memory: the last result per item (for "wrong or unseen")
 /// and every finished timed paper. Serde so the store can keep it.
 #[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize)]
@@ -638,6 +646,20 @@ mod tests {
         assert_eq!(Score::default().percent(), 0);
         let weak = weak_topics(&o, 60, 1);
         assert_eq!(weak.iter().map(|w| w.0).collect::<Vec<_>>(), ["hb.L01/mgmt", "hb.L09/sbp"]);
+    }
+
+    #[test]
+    fn a_thin_mock_still_names_topics_to_revise() {
+        // One question per topic, mostly wrong: no topic has two answers.
+        let qs = [q("1", "hb.L01", "cp", 1), q("2", "hb.L09", "sbp", 0), q("3", "hb.L13", "aih", 2)];
+        let o = score(&qs, &[a(Some(0)), a(Some(0)), a(None)], Mode::Mock, 0, 60_000);
+        assert!(weak_topics(&o, 60, 2).is_empty());
+        let focus: Vec<_> = focus_topics(&o, 60).into_iter().map(|w| w.0).collect();
+        assert_eq!(focus, ["hb.L01/cp", "hb.L13/aih"]);
+        // With two answers in a topic, the stricter list wins.
+        let qs = [q("1", "hb.L01", "cp", 1), q("2", "hb.L01", "cp", 0), q("3", "hb.L09", "sbp", 2)];
+        let o = score(&qs, &[a(Some(0)), a(None), a(Some(0))], Mode::Mock, 0, 60_000);
+        assert_eq!(focus_topics(&o, 60).into_iter().map(|w| w.0).collect::<Vec<_>>(), ["hb.L01/cp"]);
     }
 
     #[test]

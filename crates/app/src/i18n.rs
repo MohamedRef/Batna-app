@@ -567,6 +567,15 @@ pub mod order {
     pub fn should_be(position: usize) -> String {
         format!("مكانها {position}")
     }
+
+    /// When one early slip pushes many steps off their numbers.
+    pub fn moves_to_fix(moves: usize) -> String {
+        if moves == 1 {
+            "الترتيب قريب: نقل خطوة واحدة بس بيظبطه.".to_string()
+        } else {
+            format!("الترتيب قريب: نقل {moves} خطوات بس بيظبطه.")
+        }
+    }
 }
 
 pub mod oral {

@@ -138,7 +138,9 @@ pub fn ImportCard() -> Element {
                         if picking() { {tx::IMPORT_PICKING} } else if none_found { {tx::IMPORT_PICK_FIRST} } else { {tx::IMPORT_PICK} }
                     }
                 } else {
-                label { class: "verify-field",
+                // The native "Choose File" control is English; the shared button
+                // carries the Arabic label and the input stays hidden inside it.
+                label { class: "btn btn-secondary file-pick",
                     span { if none_found { {tx::IMPORT_PICK_FIRST} } else { {tx::IMPORT_PICK} } }
                     input {
                         r#type: "file",

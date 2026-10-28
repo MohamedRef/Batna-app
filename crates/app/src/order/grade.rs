@@ -5,33 +5,56 @@
 use batna_core::review::Grade;
 
 /// The order the steps start in: a shuffle seeded by the item id, so an item
-/// always opens the same way, and never already solved.
+/// always opens the same way. It never starts solved, and at most a third of
+/// the steps start at their own number, so it never starts nearly solved.
 pub fn shuffled(n: usize, seed: &str) -> Vec<usize> {
-    let mut out: Vec<usize> = (0..n).collect();
     // FNV-1a, then xorshift64: small, stable across platforms and versions.
     let mut state =
         seed.bytes().fold(0xcbf2_9ce4_8422_2325_u64, |h, b| (h ^ u64::from(b)).wrapping_mul(0x100_0000_01b3));
-    for i in (1..n).rev() {
+    let mut next = move || {
         state ^= state << 13;
         state ^= state >> 7;
         state ^= state << 17;
-        let j = (state % (i as u64 + 1)) as usize;
-        out.swap(i, j);
+        state
+    };
+    let mut out: Vec<usize> = (0..n).collect();
+    // Fisher-Yates, redrawn until few enough steps sit at their own number.
+    // Any n ≥ 2 passes within a few draws; the cap only bounds the loop.
+    for _ in 0..64 {
+        for i in (1..n).rev() {
+            let j = (next() % (i as u64 + 1)) as usize;
+            out.swap(i, j);
+        }
+        if scrambled_enough(&out) {
+            return out;
+        }
     }
-    if n > 1 && out.iter().enumerate().all(|(pos, &step)| pos == step) {
+    // A rotation has no step at its own number.
+    out.sort_unstable();
+    if n > 1 {
         out.rotate_left(1);
     }
     out
 }
 
-/// Positions in `answer` whose step is out of place.
-///
-/// A step counts as in place when it belongs to the longest run of steps that
-/// already sit in the right relative order. Comparing slot by slot would mark
-/// every step after one early slip as wrong; this marks only the slip.
+fn scrambled_enough(order: &[usize]) -> bool {
+    let n = order.len();
+    let fixed = order.iter().enumerate().filter(|&(pos, &step)| pos == step).count();
+    n < 2 || (fixed < n && fixed * 3 <= n)
+}
+
+/// Positions in `answer` whose step is not at its own number. Only these
+/// get "its place is N"; every other step is exactly where the book has it.
 pub fn misplaced(answer: &[usize]) -> Vec<usize> {
-    let keep = longest_increasing(answer);
-    (0..answer.len()).filter(|pos| !keep.contains(pos)).collect()
+    answer.iter().enumerate().filter(|&(pos, &step)| pos != step).map(|(pos, _)| pos).collect()
+}
+
+/// The fewest steps to move to put `answer` right: everything outside the
+/// longest run already in the right relative order. One step put first
+/// shifts every other step off its number but is still one slip, so this,
+/// not [`misplaced`], drives the suggested grade.
+pub fn slips(answer: &[usize]) -> usize {
+    answer.len() - longest_increasing(answer).len()
 }
 
 /// Positions of one longest strictly increasing subsequence (patience sort,
@@ -59,9 +82,9 @@ fn longest_increasing(values: &[usize]) -> Vec<usize> {
     out
 }
 
-/// The grade to suggest; the learner can still pick another.
-pub fn suggest(misplaced: usize) -> Grade {
-    match misplaced {
+/// The grade to suggest from [`slips`]; the learner can still pick another.
+pub fn suggest(slips: usize) -> Grade {
+    match slips {
         0 => Grade::Good,
         1 => Grade::Hard,
         _ => Grade::Again,
@@ -88,15 +111,38 @@ mod tests {
     }
 
     #[test]
-    fn one_early_slip_marks_only_that_step() {
-        // The last step was put first; everything else keeps its relative order.
-        assert_eq!(misplaced(&[4, 0, 1, 2, 3]), vec![0]);
-        // Two neighbours swapped: one of them is out of place.
-        assert_eq!(misplaced(&[0, 2, 1, 3]).len(), 1);
+    fn shuffle_never_starts_nearly_solved() {
+        // Many seeds and sizes: at most a third of the steps at their own number.
+        for n in 2..10 {
+            for k in 0..200 {
+                let a = shuffled(n, &format!("hb.L{k:02}.{n:03}"));
+                let fixed = a.iter().enumerate().filter(|&(p, &s)| p == s).count();
+                assert!(fixed * 3 <= n, "n={n} seed {k}: {fixed} in place in {a:?}");
+            }
+        }
+    }
+
+    #[test]
+    fn a_step_is_in_place_only_at_its_own_number() {
+        // The case from issue #173: none of the five is at its number, though
+        // 2 and 3 are in the right order relative to each other.
+        assert_eq!(misplaced(&[3, 2, 4, 1, 0]), vec![0, 1, 2, 3, 4]);
+        // The last step put first: every step is off its number...
+        assert_eq!(misplaced(&[4, 0, 1, 2, 3]), vec![0, 1, 2, 3, 4]);
+        assert_eq!(misplaced(&[0, 2, 1, 3]), vec![1, 2]);
         assert_eq!(misplaced(&[0, 1, 2, 3]), Vec::<usize>::new());
-        // Fully reversed: only one step can stay.
-        assert_eq!(misplaced(&[3, 2, 1, 0]).len(), 3);
         assert_eq!(misplaced(&[]), Vec::<usize>::new());
+    }
+
+    #[test]
+    fn slips_count_the_fewest_moves() {
+        // ...but moving one step fixes it.
+        assert_eq!(slips(&[4, 0, 1, 2, 3]), 1);
+        assert_eq!(slips(&[0, 2, 1, 3]), 1);
+        assert_eq!(slips(&[0, 1, 2, 3]), 0);
+        assert_eq!(slips(&[3, 2, 1, 0]), 3);
+        assert_eq!(slips(&[3, 2, 4, 1, 0]), 3);
+        assert_eq!(slips(&[]), 0);
     }
 
     #[test]

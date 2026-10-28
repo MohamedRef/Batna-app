@@ -137,7 +137,7 @@ fn LessonList() -> Element {
                     span { class: "chip", "{done} {tx::OF} {total} {tx::LESSONS_DONE}" }
                     if let Some(l) = next {
                         button {
-                            class: "ls-btn primary",
+                            class: "btn btn-primary",
                             onclick: move |_| open(ui, &l.id),
                             {if done == 0 { tx::START_FIRST } else { tx::CONTINUE }}
                             " · "
@@ -207,8 +207,14 @@ pub fn LessonCard(n: usize, lesson: Lesson) -> Element {
                     strong { class: "ls-card-title", text::Line { text: lesson.title.clone() } }
                     span { class: "ls-card-hook muted small", text::Line { text: lesson.hook.clone() } }
                     span { class: "ls-card-meta small",
-                        {count(lesson.minutes, &MINUTE)} " · " {count(questions, &QUESTION)} " · {tx::PAGES} "
-                        bdi { dir: "ltr", "{lesson.pages[0]}–{lesson.pages[1]}" }
+                        span { class: "ls-nowrap", {count(lesson.minutes, &MINUTE)} }
+                        " · "
+                        span { class: "ls-nowrap", {count(questions, &QUESTION)} }
+                        " · "
+                        span { class: "ls-nowrap",
+                            "{tx::PAGES} "
+                            bdi { dir: "ltr", "{lesson.pages[0]}–{lesson.pages[1]}" }
+                        }
                     }
                 }
                 match m {
@@ -236,7 +242,7 @@ pub fn TodayLesson(prefer: Vec<String>) -> Element {
             h2 { text::Line { text: l.title.clone() } }
             p { class: "muted small", bdi { "{title}" } " · " {count(l.minutes, &MINUTE)} }
             p { text::Line { text: l.hook.clone() } }
-            button { class: "ls-btn primary", onclick: move |_| open(ui, &l.id), {tx::OPEN_LESSON} }
+            button { class: "btn btn-primary", onclick: move |_| open(ui, &l.id), {tx::OPEN_LESSON} }
         }
     }
 }

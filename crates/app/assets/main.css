@@ -145,6 +145,10 @@ input[type="checkbox"]:disabled { opacity: 0.5; cursor: default; }
 }
 .btn-primary { background: var(--accent); border-color: var(--accent); color: var(--surface); font-weight: 700; }
 .btn-secondary { background: var(--surface); border-color: var(--line); }
+/* A file input dressed as a button: the label is the button, the input is hidden. */
+.file-pick { position: relative; cursor: pointer; }
+.file-pick input[type="file"] { position: absolute; inline-size: 1px; block-size: 1px; opacity: 0; overflow: hidden; pointer-events: none; }
+.file-pick:focus-within { outline: 2px solid var(--accent); outline-offset: 2px; }
 .btn-ghost { background: transparent; border-color: transparent; color: var(--accent); }
 .btn-good { background: var(--good-soft); border-color: transparent; color: var(--good); }
 /* A step that removes something. */

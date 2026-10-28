@@ -864,17 +864,20 @@ items:
         answer: 0
         why: DNA above 2,000 with normal ALT; over 30, so assess fibrosis.
       - reveal: FibroScan is 11 kPa.
-        question: Decision?
-        options: [Treat with entecavir or tenofovir, Observe every 12 months, Peginterferon is the only choice, Wait for ALT to rise]
+        question: What does 11 kPa mean in the book's algorithm?
+        options: [Severe fibrosis (>9 kPa), No significant fibrosis, Unreliable reading; repeat it, Cirrhosis with CSPH]
         answer: 0
-        why: Above 9 kPa means severe fibrosis, so treat; first-line NAs have a high barrier to resistance.
-      - reveal: He has started tenofovir.
+        why: "The p119 figure labels FibroScan >9 kPa as severe fibrosis; the figure stops there and draws no treatment arrow. Other options. No significant fibrosis: 11 kPa is above the 9 kPa cut-off. Unreliable reading: nothing in the report says so. Cirrhosis with CSPH: the algorithm does not stage CSPH from this reading."
+      - reveal: His hepatologist starts tenofovir.
         question: How long will he likely be treated?
         options: ["Long term, until HBsAg seroconversion", 12 months, 48 weeks, Until ALT normalizes]
         answer: 0
         why: HBeAg-negative patients need long-term treatment.
     src: { page: 119 }
     status: unverified
+    update:
+      text: "EASL treats HBeAg-negative chronic HBV with HBV DNA >2,000 IU/mL and at least moderate fibrosis, even when ALT is normal; the book's figure stops at 'severe fibrosis'."
+      ref: "EASL CPG on HBV 2017"
   - id: hb.L07.082
     kind: case
     topic: reactivation

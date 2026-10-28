@@ -216,12 +216,27 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2af50177e190e07a26ab74f8b1efbfe2ef87da2116221318cb1c2e82baf7de06"
 
 [[package]]
+name = "batna-anki"
+version = "0.1.1-alpha.0"
+dependencies = [
+ "batna-core",
+ "rusqlite",
+ "serde_json",
+ "serde_yaml_ng",
+ "sha1 0.10.7",
+ "sha2",
+ "tempfile",
+ "zip",
+]
+
+[[package]]
 name = "batna-app"
 version = "0.1.1-alpha.0"
 dependencies = [
  "android-native-keyring-store",
  "apple-native-keyring-store",
  "base64 0.22.1",
+ "batna-anki",
  "batna-core",
  "batna-protocol",
  "chrono",
@@ -293,17 +308,15 @@ name = "batna-tools"
 version = "0.1.1-alpha.0"
 dependencies = [
  "base64 0.22.1",
+ "batna-anki",
  "batna-core",
  "ed25519-dalek",
  "getrandom 0.3.4",
- "rusqlite",
  "serde",
  "serde_json",
  "serde_yaml_ng",
- "sha1 0.10.7",
  "sha2",
  "tempfile",
- "zip",
 ]
 
 [[package]]

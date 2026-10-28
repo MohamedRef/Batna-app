@@ -58,7 +58,8 @@ object UpdateNotice {
     }
 
     /**
-     * Shows the notice (`{"title", "body", "action", "button", "channel"}`)
+     * Shows the notice (`{"title", "body", "action", "button", "channel",
+     * "channel_description"}`)
      * unless notifications are off, or, with [onlyInBackground], Batna is in
      * front (its banner says it there). True once shown.
      */
@@ -77,7 +78,9 @@ object UpdateNotice {
                 // Rust always sends it (i18n.rs); the app's name is a fallback.
                 n.optString("channel").ifBlank { ctx.applicationInfo.loadLabel(ctx.packageManager).toString() },
                 NotificationManager.IMPORTANCE_DEFAULT,
-            ),
+            ).apply {
+                n.optString("channel_description").ifBlank { null }?.let { description = it }
+            },
         )
         val builder = Notification.Builder(ctx, CHANNEL)
             .setSmallIcon(app.batna.bridge.R.drawable.ic_stat_batna)

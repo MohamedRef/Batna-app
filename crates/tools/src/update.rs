@@ -119,7 +119,7 @@ fn run_inner(root: &Path, args: &[String]) -> Res<String> {
                     changes: found,
                 });
             }
-            let history = changes::history(previous.as_ref(), entry);
+            let history = changes::history(previous.as_ref(), entry, &changes::retro(root)?);
             let m =
                 write_manifest(&out, channel, &version, build, commit, &assets, WhatsNew { notes, history })?;
             Ok(format!(

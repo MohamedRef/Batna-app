@@ -130,7 +130,7 @@ fn Report(item_id: String) -> Element {
     }
     rsx! {
         button {
-            class: "link small report",
+            class: "btn-link small report",
             onclick: move |_| {
                 review.backend.borrow_mut().undo_judgement(&item_id);
                 reopened.set(true);

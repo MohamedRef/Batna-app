@@ -49,7 +49,7 @@ pub fn Player() -> Element {
                         span { class: "muted small", "{tx::RIGHT} " bdi { "{right}/{answered}" } }
                     }
                     button {
-                        class: "link",
+                        class: "btn-link",
                         title: if timed { tx::LEAVE_TIMED_HINT } else { "" },
                         onclick: move |_| leave(),
                         {tx::LEAVE}
@@ -67,9 +67,9 @@ pub fn Player() -> Element {
                 }
                 div { class: "run-actions",
                     if timed {
-                        button { class: "button ghost", disabled: at == 0, onclick: move |_| go(at.saturating_sub(1)), {tx::PREV} }
+                        button { class: "btn btn-ghost", disabled: at == 0, onclick: move |_| go(at.saturating_sub(1)), {tx::PREV} }
                         button {
-                            class: "button ghost",
+                            class: "btn btn-ghost",
                             "aria-pressed": if a.flagged { "true" } else { "false" },
                             onclick: move |_| toggle_flag(),
                             if a.flagged { "⚑ {tx::FLAGGED}" } else { "⚐ {tx::FLAG}" }
@@ -77,7 +77,7 @@ pub fn Player() -> Element {
                     }
                     if last {
                         button {
-                            class: "button primary",
+                            class: "btn btn-primary",
                             disabled: !timed && a.chosen.is_none(),
                             // A whole timed paper never goes in on a stray Enter.
                             "aria-keyshortcuts": if timed { "" } else { "Enter" },
@@ -86,7 +86,7 @@ pub fn Player() -> Element {
                         }
                     } else {
                         button {
-                            class: "button primary",
+                            class: "btn btn-primary",
                             disabled: !timed && a.chosen.is_none(),
                             "aria-keyshortcuts": "Enter",
                             onclick: move |_| go(at + 1),
@@ -112,7 +112,7 @@ pub fn Player() -> Element {
                         }
                     }
                     p { class: "muted small", bdi { "{n - answered}" } " {tx::UNANSWERED}" }
-                    button { class: "button primary", onclick: submit, {tx::SUBMIT} }
+                    button { class: "btn btn-primary", onclick: submit, {tx::SUBMIT} }
                 }
             }
             if timed && confirming() {
@@ -162,7 +162,7 @@ fn ConfirmSubmit(
                 p { class: "muted small", "{tx::LEFT_ABOUT} " bdi { "{left}" } " {tx::MINUTES}" }
                 div { class: "start-row",
                     button {
-                        class: "button primary",
+                        class: "btn btn-primary",
                         autofocus: true,
                         "aria-keyshortcuts": "Escape",
                         onclick: back,
@@ -173,7 +173,7 @@ fn ConfirmSubmit(
                         }
                     }
                     button {
-                        class: "button",
+                        class: "btn btn-secondary",
                         onclick: move |_| {
                             onclose.call(());
                             finish();

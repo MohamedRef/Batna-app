@@ -75,7 +75,7 @@ Every step may have `page:` and `quote:`.
 | `order` | `prompt`, `steps` (3–8, correct order), `why?` | Tap the steps in order. |
 | `match` | `prompt`, `pairs` (3–6 `[left, right]`), `why?` | Tap left then right. Right sides must differ. |
 | `sort` | `prompt`, `bins` (2–4), `cards` (3–10 `{text, bin}`), `why?` | Drop cards into bins. |
-| `case` | `stem`, `steps: [{reveal?, question, options?, answer?, why}]` | A mini case, one decision at a time. |
+| `case` | `stem`, `steps: [{reveal?, question, options?, answer?, why}]` | A mini case, one decision at a time. Options are shuffled in the app, like `check`. |
 | `table` | `title`, `columns`, `rows`, `hide?` (`[row, col]`) | A table with cells to recall. |
 | `try` | `items` (1–5 ids) | The lecture's own cards, graded into spaced review. |
 
@@ -87,7 +87,16 @@ grey), `fg-acc` / `fg-good` / `fg-bad` (tinted box with coloured border),
 `fg-arrow-acc`, `fg-arrow-bad` (lines; add `marker-end="url(#yourId)"`),
 `fg-head`, `fg-head-acc`, `fg-head-bad` (arrowhead fills inside `<marker>`).
 Text: default is body colour; `t-sm`, `t-lg`, `t-b`, `t-mut`, `t-acc`,
-`t-good`, `t-bad`. Give marker ids a lecture prefix (`L03a`).
+`t-good`, `t-bad`, `t-ar` (Arabic font, right to left). Give marker ids a
+lecture prefix (`L03a`). A `stroke-width="N"` attribute overrides the class
+width.
+
+SVG `<text>` has no `<bdi>`, so keep Arabic and English in separate `<text>`
+elements: brackets or numbers around an English term inside an Arabic
+`t-ar` label come out flipped. Lesson text (explain, captions, options) is
+isolated for you, so write it naturally there. Arrows don't flip: between
+Arabic words write `←` (it points along the reading direction), between
+English words `→`.
 
 ## Check before the PR
 

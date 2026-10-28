@@ -16,10 +16,9 @@ use dioxus::prelude::*;
 use crate::content::Library;
 use crate::i18n::stats as tx;
 use crate::plan::Planner;
-use crate::store::utc_offset_minutes;
 
-/// The study day starts at 4 am, like the scheduler's.
-const ROLLOVER_HOUR: u32 = 4;
+/// The study day starts when the scheduler's does (4 am).
+const ROLLOVER_HOUR: u32 = batna_core::srs::ROLLOVER_HOUR as u32;
 /// How far ahead the scheduler's forecast is read: past any exam this year.
 const FORECAST_DAYS: usize = 400;
 const STATS_CSS: &str = include_str!("stats.css");
@@ -50,7 +49,7 @@ impl StudyData {
             .duration_since(std::time::UNIX_EPOCH)
             .map(|d| d.as_millis() as i64)
             .unwrap_or_default();
-        let clock = Clock { now_ms, utc_offset_min: utc_offset_minutes(), rollover_hour: ROLLOVER_HOUR };
+        let clock = Clock { now_ms, zone: crate::store::zone(), rollover_hour: ROLLOVER_HOUR };
         if std::env::var("BATNA_STATS_DEMO").is_ok_and(|v| v == "1") {
             let events = demo::events(&lectures, now_ms);
             return StudyData { lectures, events, marks: demo::marks(), forecast: None, clock, demo: true };
@@ -143,18 +142,23 @@ fn Progress(data: std::rc::Rc<StudyData>) -> Element {
     let weak = stats::weakest_topics(&rows, 3);
     let weak_ids = stats::topics_session(&data.lectures, &weak, &data.events, &data.marks);
     rsx! {
-        section { class: "card",
-            h1 { {tx::SUMMARY} }
-            div { class: "summary",
-                Big { n: all.seen, of: all.total, label: tx::SEEN }
-                Big { n: all.seen_twice, of: all.total, label: tx::SEEN_TWICE }
-                Big { n: all.approved, of: all.total, label: tx::APPROVED }
+        // Tablet landscape and the Mac: the totals and the weakest topics side by side.
+        div { class: "tab-cols", "data-align": "stretch",
+            div { class: "tab-main",
+                section { class: "card",
+                    h1 { {tx::SUMMARY} }
+                    div { class: "summary",
+                        Big { n: all.seen, of: all.total, label: tx::SEEN }
+                        Big { n: all.seen_twice, of: all.total, label: tx::SEEN_TWICE }
+                        Big { n: all.approved, of: all.total, label: tx::APPROVED }
+                    }
+                    if all.seen == 0 {
+                        p { class: "muted", {tx::NOTHING_YET} }
+                    }
+                }
             }
-            if all.seen == 0 {
-                p { class: "muted", {tx::NOTHING_YET} }
-            }
+            div { class: "tab-aside", WeakCard { weak, ids: weak_ids } }
         }
-        WeakCard { weak, ids: weak_ids }
         section { class: "stat-lectures",
             for l in rows.iter() {
                 LectureCard { key: "{l.id}", l: l.clone() }
@@ -227,7 +231,7 @@ pub fn SessionButton(label: &'static str, ids: Vec<String>) -> Element {
     rsx! {
         div { class: "session-start",
             button {
-                class: "primary",
+                class: "btn btn-primary",
                 disabled: playable.is_empty(),
                 onclick: move |_| {
                     *crate::study::START.write() =

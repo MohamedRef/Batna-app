@@ -28,9 +28,11 @@ class DocumentActivity : Activity() {
         if (savedInstanceState != null) return
         val request =
             if (intent.getStringExtra(EXTRA_PATH) != null) {
+                // A YAML file as octet-stream, so no provider adds ".json".
+                val name = intent.getStringExtra(EXTRA_NAME) ?: ""
                 Intent(Intent.ACTION_CREATE_DOCUMENT)
                     .addCategory(Intent.CATEGORY_OPENABLE)
-                    .setType("application/json")
+                    .setType(if (name.endsWith(".json")) "application/json" else "application/octet-stream")
                     .putExtra(Intent.EXTRA_TITLE, intent.getStringExtra(EXTRA_NAME) ?: "batna-export.json")
             } else {
                 // Some providers label JSON as octet-stream or plain text.
@@ -75,12 +77,13 @@ class DocumentActivity : Activity() {
                     val copy = File(cache, "restore.json")
                     resolver.openInputStream(uri).use { input ->
                         requireNotNull(input) { "no input stream" }
-                        copy.outputStream().use { input.copyTo(it) }
+                        copy.outputStream().use { out -> copyCapped(input, out) }
                     }
                     Documents.done(Documents.OPENED, name, copy.absolutePath)
                 }
             } catch (e: Exception) {
                 Log.w(TAG, "Could not copy the document", e)
+                if (source == null) File(cache, "restore.json").delete()
                 Documents.done(Documents.FAILED, null, null)
             }
             runOnUiThread { finish() }
@@ -91,6 +94,19 @@ class DocumentActivity : Activity() {
         super.onDestroy()
         // Closed without a result (e.g. the system killed the dialog).
         if (isFinishing && Documents.state() == Documents.BUSY) Documents.done(Documents.CANCELLED, null, null)
+    }
+
+    /** A backup is a few MB; stop a wrong pick (a video, a big PDF) early. */
+    private fun copyCapped(input: java.io.InputStream, out: java.io.OutputStream) {
+        val buffer = ByteArray(64 * 1024)
+        var total = 0L
+        while (true) {
+            val n = input.read(buffer)
+            if (n < 0) break
+            total += n
+            if (total > MAX_RESTORE_BYTES) throw java.io.IOException("larger than a Batna backup")
+            out.write(buffer, 0, n)
+        }
     }
 
     private fun displayName(uri: Uri): String? =
@@ -105,6 +121,8 @@ class DocumentActivity : Activity() {
     companion object {
         private const val TAG = "BatnaDocuments"
         private const val REQUEST = 3
+        // A real backup is a few MB.
+        private const val MAX_RESTORE_BYTES = 50L * 1024 * 1024
         const val EXTRA_PATH = "app.batna.documents.PATH"
         const val EXTRA_NAME = "app.batna.documents.NAME"
     }

@@ -57,7 +57,7 @@ pub fn take() -> Option<Remote> {
                 _ => return None,
             }),
             Err(e) => {
-                eprintln!("OralBridge.take: {e}");
+                crate::diag::report!("OralBridge.take: {e}");
                 None
             }
         }
@@ -69,7 +69,7 @@ pub fn take() -> Option<Remote> {
 #[cfg(target_os = "android")]
 fn report(result: Result<(), String>) {
     if let Err(e) = result {
-        eprintln!("OralBridge: {e}");
+        crate::diag::report!("OralBridge: {e}");
     }
 }
 

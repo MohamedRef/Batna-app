@@ -313,18 +313,19 @@ mark {
 /* A small corner badge: tap for full screen. */
 .ls-zoom-hint {
   position: absolute;
-  inset-block-end: 6px;
-  inset-inline-end: 6px;
-  inline-size: 28px;
-  block-size: 28px;
+  inset-block-end: 4px;
+  inset-inline-end: 4px;
+  inline-size: 22px;
+  block-size: 22px;
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: var(--surface);
-  border: 1px solid var(--line);
+  /* See-through, so it hides as little of the figure's corner as it can. */
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
   color: var(--muted);
-  font-size: 15px;
+  font-size: 12px;
   line-height: 1;
+  opacity: 0.85;
   pointer-events: none;
 }
 

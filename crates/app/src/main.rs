@@ -41,6 +41,7 @@ mod verify;
 use dioxus::prelude::*;
 
 const MAIN_CSS: &str = include_str!("../assets/main.css");
+const SHAPE_CSS: &str = include_str!("../assets/shape.css");
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Screen {
@@ -146,6 +147,7 @@ fn App() -> Element {
         document::Title { "Batna" }
         style { {fonts::css()} }
         style { {MAIN_CSS} }
+        style { {SHAPE_CSS} }
         style { {look} }
         desk::Chrome {}
         div { class: "app", lang: "ar", dir: "rtl",

@@ -12,7 +12,7 @@
 .verify-q { color: var(--muted); font-size: var(--fs-sm); }
 .verify-actions { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
 .verify-btn {
-  min-height: 44px;
+  min-height: var(--tap);
   padding-inline: var(--sp-4);
   border-radius: var(--radius-pill);
   border: 1px solid var(--line);
@@ -26,7 +26,8 @@
 .verify-saved { flex: 1; font-size: var(--fs-sm); }
 .verify-saved[data-verdict="approved"] { color: var(--good); }
 .verify-saved[data-verdict="wrong"] { color: var(--bad); }
-.verify-undo { border: 0; background: none; color: var(--accent); text-decoration: underline; cursor: pointer; min-height: 44px; }
+.verify-failed { flex-basis: 100%; margin: 0; color: var(--bad); font-size: var(--fs-sm); }
+.verify-undo { border: 0; background: none; color: var(--accent); text-decoration: underline; cursor: pointer; min-height: var(--tap); }
 .verify-editor, .verify-field { display: flex; flex-direction: column; gap: var(--sp-2); inline-size: 100%; }
 .verify-field > span { font-size: var(--fs-sm); font-weight: 600; }
 .verify-field textarea, .verify-field select {

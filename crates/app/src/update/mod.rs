@@ -7,7 +7,8 @@
 //! Device-local, never synced:
 //!
 //! ```text
-//! <data>/updates/prefs.json      automatic / tell me first / off, channel, last check
+//! <data>/updates/prefs.json      automatic / tell me first / off, channel, last check,
+//!                                the last "new version" notification sent
 //! <data>/updates/staged.json     the verified app download waiting to install
 //! <data>/updates/<file>          that download (one at a time)
 //! <data>/updates/content.pack    the newest verified content pack
@@ -16,6 +17,11 @@
 //!
 //! The work runs on its own thread; the UI follows [`Status`] through a
 //! `tokio::sync::watch` channel.
+//!
+//! A new version is also announced with a system notification ([`Notice`]):
+//! by the running app's own checks, and on Android by a periodic background
+//! job (`app.batna.UpdateCheckJob`) that runs [`background_check`] even while
+//! Batna is closed.
 //!
 //! Adapted from kabar-app main: crates/app/src/update/mod.rs. Changes for
 //! Batna: `BATNA_*` build variables, the content pack (in place of Kabar's
@@ -32,9 +38,9 @@ use std::time::{Duration, SystemTime, UNIX_EPOCH};
 
 use batna_core::pack::Pack;
 use batna_core::update::{
-    Channel, Decision, Installed, MANIFEST_FILE, SIGNATURE_FILE, Stage, UpdateAsset, UpdateError,
+    Channel, Decision, Installed, MANIFEST_FILE, PackOrigin, SIGNATURE_FILE, Stage, UpdateAsset, UpdateError,
     UpdateManifest, UpdateNotes, UpdatePlatform, VerifyingKey, Version, check_download, content_update,
-    decide, parse_public_key, this_platform, verify_manifest,
+    decide, parse_public_key, published_secs, this_platform, verify_manifest,
 };
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
@@ -48,6 +54,10 @@ const RELEASE_KEY: &str = include_str!("../../update-key.pub");
 const CHECK_EVERY: Duration = Duration::from_secs(6 * 3600);
 /// First automatic check after launch: late enough not to slow the start.
 const FIRST_CHECK_AFTER: Duration = Duration::from_secs(20);
+/// Android's background job runs about every four hours
+/// (`UpdateNotice.PERIOD_MS`); it looks at the feed when the last look, its
+/// own or the app's, is at least this old.
+const BACKGROUND_EVERY: Duration = Duration::from_secs(3 * 3600);
 /// `update.json` and its signature are small; anything bigger is refused.
 const MAX_FEED_BYTES: u64 = 256 * 1024;
 /// Largest build accepted (the APK is a few tens of MB, Batna.app less).
@@ -77,7 +87,7 @@ impl Mode {
     pub const ALL: [Self; 3] = [Self::Auto, Self::Notify, Self::Off];
 }
 
-#[derive(Clone, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Prefs {
     #[serde(default)]
     pub mode: Mode,
@@ -92,6 +102,101 @@ pub struct Prefs {
     /// An automatic install of this download failed once; wait for a tap.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub auto_failed: Option<String>,
+    /// Announce a new version with a system notification (on by default).
+    #[serde(default = "yes")]
+    pub notify: bool,
+    /// The last notification sent (`version+build:stage`), so each goes out once.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub notified: Option<String>,
+}
+
+fn yes() -> bool {
+    true
+}
+
+impl Default for Prefs {
+    fn default() -> Self {
+        Self {
+            mode: Mode::default(),
+            channel: None,
+            last_check_ms: None,
+            dismissed: None,
+            auto_failed: None,
+            notify: true,
+            notified: None,
+        }
+    }
+}
+
+/// The "new version" notification, as `app.batna.UpdateNotice.show` reads
+/// it (JSON).
+#[derive(Clone, Debug, PartialEq, Eq, Serialize)]
+pub struct Notice {
+    /// `version+build:stage`: remembered once sent.
+    #[serde(skip)]
+    pub key: String,
+    pub title: String,
+    pub body: String,
+    /// What the notification's button does in the app: `download` or
+    /// `install`; empty for no button.
+    pub action: &'static str,
+    pub button: &'static str,
+    /// The Android notification channel's name.
+    pub channel: &'static str,
+}
+
+/// What's new, Egyptian Arabic first.
+pub(crate) fn notes_of(o: &Offer) -> String {
+    [&o.notes.ar_eg, &o.notes.en]
+        .into_iter()
+        .map(|s| s.trim())
+        .find(|s| !s.is_empty())
+        .unwrap_or_default()
+        .to_owned()
+}
+
+/// The notification due for `s`, if any: one per offer and step (out, then
+/// downloaded and ready), never for an offer whose banner was closed, and
+/// nothing with the switch off or in "only when I check" mode.
+pub fn notice(s: &Status) -> Option<Notice> {
+    use crate::i18n::update as tx;
+    if s.off.is_some() || s.prefs.mode == Mode::Off || !s.prefs.notify {
+        return None;
+    }
+    let (offer, stage, title, hint, action, button) = match &s.phase {
+        Phase::Available(o) => {
+            (o, "available", tx::NOTICE_AVAILABLE, tx::NOTICE_TAP_AVAILABLE, "download", tx::DOWNLOAD)
+        }
+        Phase::Ready(o) | Phase::NeedsPermission(o) => {
+            (o, "ready", tx::NOTICE_READY, tx::NOTICE_TAP_READY, "install", tx::INSTALL_NOW)
+        }
+        Phase::Installed(o) => (o, "installed", tx::NOTICE_INSTALLED, tx::NEXT_LAUNCH, "", ""),
+        _ => return None,
+    };
+    if s.prefs.dismissed.as_deref() == Some(offer.key().as_str()) {
+        return None;
+    }
+    let key = format!("{}:{stage}", offer.key());
+    if s.prefs.notified.as_deref() == Some(key.as_str()) {
+        return None;
+    }
+    let mut whats_new = notes_of(offer);
+    if whats_new.chars().count() > 300 {
+        whats_new = whats_new.chars().take(299).collect::<String>() + "…";
+    }
+    let body = if whats_new.is_empty() {
+        hint.to_owned()
+    } else {
+        format!("{}: {whats_new}\n{hint}", tx::WHATS_NEW)
+    };
+    Some(Notice {
+        key,
+        title: format!("{title} · {}", offer.label()),
+        body,
+        action,
+        button,
+        channel: tx::NOTICE_CHANNEL,
+    })
 }
 
 /// Why this build doesn't update itself.
@@ -146,6 +251,21 @@ struct PackInfo {
     version: String,
     build: u64,
     sha256: String,
+    /// The feed's `published_at` in seconds, so a stale feed of the same
+    /// build can't roll the pack back (absent in packs taken before).
+    #[serde(default)]
+    published_at: Option<i64>,
+}
+
+impl PackInfo {
+    fn origin(&self) -> Option<PackOrigin> {
+        Some(PackOrigin {
+            version: Version::parse(&self.version)?,
+            build: self.build,
+            published_at: self.published_at,
+            sha256: self.sha256.clone(),
+        })
+    }
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -311,7 +431,12 @@ pub fn init() {
     };
     let updater = Updater::new(data.join("updates"), BuildInfo::from_env(), platform, feed_override, off);
     let start = updater.status().off.is_none();
-    if UPDATER.set(updater).is_err() || !start {
+    let background = updater.background_checks();
+    if UPDATER.set(updater).is_err() {
+        return;
+    }
+    crate::platform::update_notice::schedule(background);
+    if !start {
         return;
     }
     let _ = std::thread::Builder::new().name("batna-update".into()).spawn(|| {
@@ -327,6 +452,23 @@ pub fn init() {
 
 pub fn get() -> Option<&'static Updater> {
     UPDATER.get()
+}
+
+/// Android's background job (`UpdateCheckJob`), in a process that may have
+/// no UI: the app's own updater if it's running here, else one opened for
+/// the job under `data_dir` (Context.getFilesDir). Returns the notification
+/// to post, if any.
+#[cfg_attr(not(target_os = "android"), allow(dead_code))]
+pub fn background_check(data_dir: &Path, metered: bool, can_notify: bool) -> Option<Notice> {
+    static HEADLESS: OnceLock<Updater> = OnceLock::new();
+    let u = match UPDATER.get() {
+        Some(u) => u,
+        None => HEADLESS.get_or_init(|| {
+            let off = cfg!(debug_assertions).then_some(Off::DevBuild);
+            Updater::new(data_dir.join("updates"), BuildInfo::from_env(), this_platform(), None, off)
+        }),
+    };
+    u.background(metered, can_notify)
 }
 
 fn now_ms() -> u64 {
@@ -429,24 +571,63 @@ impl Updater {
         });
     }
 
-    /// The background loop's step: check when due, download in Auto mode.
+    /// The background loop's step: check when due, download in Auto mode,
+    /// then announce what it found.
     fn tick(&'static self) {
+        self.step(CHECK_EVERY, crate::platform::network::metered());
+        self.send_notice(crate::platform::update_notice::post);
+    }
+
+    /// Checks when the last check is `every` old, or starts the download an
+    /// earlier check left waiting for Wi-Fi.
+    fn step(&'static self, every: Duration, metered: bool) {
         let s = self.status();
         if s.off.is_some() || s.prefs.mode == Mode::Off {
             return;
         }
-        let due = s
-            .prefs
-            .last_check_ms
-            .is_none_or(|t| now_ms().saturating_sub(t) >= CHECK_EVERY.as_millis() as u64);
+        let due =
+            s.prefs.last_check_ms.is_none_or(|t| now_ms().saturating_sub(t) >= every.as_millis() as u64);
         // Automatic downloads wait for Wi-Fi (an APK on mobile data, up to
         // every push on the preview channel); the offer still shows.
-        let wifi = !crate::platform::network::metered();
+        let wifi = !metered;
         let auto = s.prefs.mode == Mode::Auto && wifi;
         if due {
             self.check_with(auto, wifi);
         } else if auto && let Phase::Available(_) = s.phase {
             self.download();
+        }
+    }
+
+    /// Sends the notification due now through `post` (false: not shown, try
+    /// again at the next check) and remembers it once shown.
+    fn send_notice(&self, post: impl FnOnce(&Notice) -> bool) -> Option<Notice> {
+        let n = notice(&self.status())?;
+        if !post(&n) {
+            return None;
+        }
+        self.update_prefs(|p| p.notified = Some(n.key.clone()));
+        Some(n)
+    }
+
+    /// Android's background job: the app loop's step, then the notification
+    /// to post if `can_notify` (notifications allowed, Batna not in front).
+    /// Marked as sent before it's returned.
+    fn background(&'static self, metered: bool, can_notify: bool) -> Option<Notice> {
+        self.step(BACKGROUND_EVERY, metered);
+        self.send_notice(|_| can_notify)
+    }
+
+    /// Whether Android's background job should run: updates work here and
+    /// aren't switched off.
+    pub fn background_checks(&self) -> bool {
+        let s = self.status();
+        s.off.is_none() && s.prefs.mode != Mode::Off
+    }
+
+    pub fn set_notify(&self, on: bool) {
+        self.update_prefs(|p| p.notify = on);
+        if !on {
+            crate::platform::update_notice::clear();
         }
     }
 
@@ -547,8 +728,8 @@ impl Updater {
     /// use, checks it decodes, and keeps it for the next start. Failures
     /// are only reported: the pack built into the app keeps working.
     fn refresh_content(&self, m: &UpdateManifest) {
-        let current = load_pack_info(&self.dir).map(|i| i.sha256);
-        let asset = match content_update(&self.installed(), m, current.as_deref()) {
+        let current = load_pack_info(&self.dir).and_then(|i| i.origin());
+        let asset = match content_update(&self.installed(), m, current.as_ref()) {
             Ok(Some(a)) => a.clone(),
             Ok(None) => return,
             Err(e) => return report!("content pack: {e}"),
@@ -566,7 +747,12 @@ impl Updater {
             let tmp = self.dir.join(format!("{PACK_FILE}.part"));
             fs::write(&tmp, &bytes).map_err(|e| e.to_string())?;
             fs::rename(&tmp, self.dir.join(PACK_FILE)).map_err(|e| e.to_string())?;
-            let info = PackInfo { version: m.version.clone(), build: m.build, sha256: asset.sha256.clone() };
+            let info = PackInfo {
+                version: m.version.clone(),
+                build: m.build,
+                sha256: asset.sha256.clone(),
+                published_at: published_secs(&m.published_at),
+            };
             write_json(&self.dir, PACK_INFO, &info)
         })();
         match result {
@@ -677,6 +863,7 @@ impl Updater {
 
     pub fn set_mode(&self, mode: Mode) {
         self.update_prefs(|p| p.mode = mode);
+        crate::platform::update_notice::schedule(self.background_checks());
     }
 
     /// Switches release channel and looks again.
@@ -694,6 +881,7 @@ impl Updater {
     pub fn dismiss(&self) {
         let key = self.status().banner().map(Offer::key);
         self.update_prefs(|p| p.dismissed = key);
+        crate::platform::update_notice::clear();
     }
 
     /// Android: polls PackageInstaller after an install started.
@@ -744,7 +932,8 @@ fn install_build(path: &Path, offer: &Offer) -> Phase {
         &path,
         offer.asset.version_code.unwrap_or(0),
         tx::DONE_TITLE,
-        tx::DONE_BODY,
+        // "Batna was updated" says what's new when the feed says it.
+        &Some(notes_of(offer)).filter(|n| !n.is_empty()).unwrap_or_else(|| tx::DONE_BODY.to_owned()),
         tx::READY_TITLE,
     ) {
         Ok(()) => Phase::Installing(offer.clone()),
@@ -1103,6 +1292,62 @@ mod tests {
         let (u, _data) = updater(&url, build("0.1.0", 42, true));
         u.check(true);
         assert_eq!(u.status().phase, Phase::UpToDate);
+    }
+
+    #[test]
+    fn a_notice_goes_out_once_per_offer_and_step() {
+        use crate::i18n::update as tx;
+        let mut o = offer("0.1.0", 42);
+        o.notes.ar_eg = "محاضرة الاستسقاء اتضافت".into();
+        let mut s = status(Phase::Available(o.clone()), Mode::Notify);
+        let n = notice(&s).expect("a new version is announced");
+        assert_eq!(n.title, format!("{} · 0.1.0 (42)", tx::NOTICE_AVAILABLE));
+        assert!(n.body.starts_with(&format!("{}: محاضرة الاستسقاء اتضافت\n", tx::WHATS_NEW)), "{}", n.body);
+        assert_eq!((n.action, n.button), ("download", tx::DOWNLOAD));
+        s.prefs.notified = Some(n.key.clone());
+        assert!(notice(&s).is_none(), "sent once");
+        s.phase = Phase::Ready(o.clone());
+        let ready = notice(&s).unwrap();
+        assert_eq!(ready.action, "install");
+        let mut closed = s.clone();
+        closed.prefs.dismissed = Some(o.key());
+        assert!(notice(&closed).is_none());
+        let mut switch_off = s.clone();
+        switch_off.prefs.notify = false;
+        assert!(notice(&switch_off).is_none());
+        let mut off = s.clone();
+        off.prefs.mode = Mode::Off;
+        assert!(notice(&off).is_none());
+        assert!(notice(&status(Phase::UpToDate, Mode::Auto)).is_none());
+        // Old prefs files keep the switch on.
+        let dir = tempfile::tempdir().unwrap();
+        fs::write(dir.path().join("prefs.json"), r#"{"mode":"notify"}"#).unwrap();
+        assert!(load_prefs(dir.path()).notify);
+    }
+
+    #[test]
+    fn the_background_check_downloads_on_wifi_and_announces_once() {
+        let feed = fixture_feed();
+        let url = serve(feed.path().to_path_buf());
+
+        let (u, _data) = updater(&url, build("0.1.0", 41, true));
+        let n = u.background(false, true).expect("announced");
+        assert_eq!(n.action, "install");
+        assert!(matches!(u.status().phase, Phase::Ready(_)));
+        assert!(u.background(false, true).is_none(), "once");
+
+        // Mobile data: announced, not downloaded.
+        let (u, _data) = updater(&url, build("0.1.0", 41, true));
+        assert_eq!(u.background(true, true).unwrap().action, "download");
+        assert!(matches!(u.status().phase, Phase::Available(_)));
+
+        // Batna in front: kept for the next run.
+        let (u, _data) = updater(&url, build("0.1.0", 41, true));
+        assert!(u.background(true, false).is_none());
+        assert!(u.background(true, true).is_some());
+
+        let (u, _data) = updater(&url, build("0.1.0", 42, true));
+        assert!(u.background(false, true).is_none());
     }
 
     #[test]

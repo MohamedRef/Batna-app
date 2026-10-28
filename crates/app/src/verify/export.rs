@@ -2,7 +2,7 @@
 //! YAML. `batna-tools` reads it back to print a fix list per lecture and to
 //! add his approvals to `content/approved.txt`.
 
-use batna_core::review::verify::{Verdict, civil_from_days};
+use batna_core::review::verify::Verdict;
 use dioxus::prelude::*;
 
 use crate::i18n::verify as tx;
@@ -12,6 +12,8 @@ use crate::store::{export_dir, now_ms, use_review};
 pub fn ExportVerdicts() -> Element {
     let review = use_review();
     let mut result = use_signal(|| None::<Result<(String, String), String>>);
+    // Each export opens the Android "Save to" dialog afresh.
+    let mut attempt = use_signal(|| 0u32);
     let counts = review.backend.borrow().verdict_counts();
     let count = |v| counts.get(&v).copied().unwrap_or(0);
     let total: usize = counts.values().sum();
@@ -23,11 +25,13 @@ pub fn ExportVerdicts() -> Element {
             Ok(y) => y,
             Err(e) => return result.set(Some(Err(e.to_string()))),
         };
-        let (y, m, d) = civil_from_days(now.div_euclid(86_400_000));
+        // His local date, not UTC: an export at 1 am must not overwrite yesterday's (#36).
+        let date = crate::store::zone().calendar_day(now).iso();
         let saved = export_dir().and_then(|dir| {
-            let path = dir.join(format!("batna-verdicts-{y:04}-{m:02}-{d:02}.yaml"));
+            let path = dir.join(format!("batna-verdicts-{date}.yaml"));
             std::fs::write(&path, &yaml).map(|_| path.display().to_string()).map_err(|e| e.to_string())
         });
+        attempt += 1;
         result.set(Some(saved.map(|p| (p, yaml))));
     };
 
@@ -38,10 +42,13 @@ pub fn ExportVerdicts() -> Element {
             p { class: "small",
                 "✓ {count(Verdict::Approved)} · ✎ {count(Verdict::Edited)} · ✗ {count(Verdict::Wrong)}"
             }
-            button { class: "primary", disabled: total == 0, onclick: export, {tx::EXPORT_BUTTON} }
+            button { class: "btn btn-primary", disabled: total == 0, onclick: export, {tx::EXPORT_BUTTON} }
             match result() {
                 Some(Ok((path, yaml))) => rsx! {
                     p { class: "small", role: "status", "{tx::EXPORT_SAVED} " bdi { dir: "ltr", "{path}" } }
+                    if cfg!(target_os = "android") {
+                        crate::data_export::SaveTo { key: "{attempt}", path: path.clone() }
+                    }
                     details {
                         summary { class: "small", {tx::EXPORT_SHOW} }
                         textarea { class: "export-text", dir: "ltr", readonly: true, rows: 10, value: "{yaml}" }

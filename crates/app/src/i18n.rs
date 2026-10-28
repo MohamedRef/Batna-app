@@ -694,3 +694,103 @@ pub mod settings {
     pub const DIAG_COPY: &str = "انسخ";
     pub const DIAG_COPIED: &str = "اتنسخ";
 }
+
+pub mod sound {
+    pub const TITLE: &str = "الأصوات والاهتزاز";
+    pub const BODY: &str = "صوت هادي مع الإجابة الصح ونغمة في آخر الجلسة. الإجابة الغلط مالهاش صوت.";
+    pub const SOUNDS: &str = "الأصوات";
+    pub const ON: &str = "شغّالة";
+    pub const OFF: &str = "مقفولة";
+    pub const RIGHT: &str = "صوت الإجابة الصح";
+    pub const END: &str = "نغمة آخر الجلسة";
+    pub const PICK_HINT: &str = "دوس على أي واحد تسمعه وتختاره.";
+    pub const VARIATION: &str = "صوت";
+    pub const VIBRATE: &str = "الاهتزاز";
+    pub const VIBRATE_BODY: &str = "لمسة خفيفة مع كل إجابة. بيمشي على إعداد الاهتزاز في الموبايل.";
+}
+
+pub mod remind {
+    pub const TITLE: &str = "باطنة";
+    pub const SECTION: &str = "التذكير";
+    pub const SECTION_SUB: &str = "تذكير هادي بمراجعة اليوم";
+    pub const PHONE_ONLY: &str = "التذكير بيرن على الموبايل. على الماك مفيش تذكير لسه.";
+    pub const DAILY: &str = "تذكير المذاكرة اليومي";
+    pub const DAILY_BODY: &str = "إشعار واحد في المعاد اللي تختاره، فيه عدد المراجعات المستنياك.";
+    pub const ON: &str = "شغّال";
+    pub const OFF: &str = "مقفول";
+    pub const TIMES: &str = "المواعيد";
+    pub const TIME: &str = "معاد التذكير";
+    pub const ADD: &str = "زوّد معاد";
+    pub const REMOVE: &str = "شيل";
+    pub const RULES: &str =
+        "بيرن بس في أيام المذاكرة اللي في خطة الامتحان، ولو خلّصت مراجعات النهارده مش هيرن تاني لحد بكرة.";
+    pub const HERE: &str = "يرن على الجهاز ده";
+    pub const HERE_BODY: &str = "جهاز واحد بس يرن، عشان الموبايل والتابلت ما يرنّوش مع بعض.";
+    pub const BLOCKED: &str = "الإشعارات مقفولة لباطنة، فالتذكير مش هيظهر.";
+    pub const ALLOW: &str = "اسمح بالإشعارات";
+    pub const OPEN_NOTIFICATIONS: &str = "افتح إعدادات الإشعارات";
+    pub const BATTERY: &str =
+        "لو التذكير ما رنّش، خلّي البطارية لباطنة «من غير قيود» عشان الموبايل ما ينيّمهاش.";
+    pub const OPEN_APP: &str = "افتح إعدادات التطبيق";
+
+    /// The reminder line, with the reviews due that day when known.
+    pub fn text(due: Option<u32>) -> String {
+        match due {
+            Some(0) | None => "وقت جلسة قصيرة. كارت واحد أحسن من مفيش.".into(),
+            Some(1) => "عندك مراجعة واحدة النهارده. دقيقة وتخلص.".into(),
+            Some(n) => format!("عندك {n} مراجعة النهارده. يلا نبدأ بجلسة قصيرة."),
+        }
+    }
+}
+
+pub mod onboard {
+    pub const TITLE: &str = "أهلاً في باطنة";
+    pub const STEP: &str = "خطوة";
+    pub const OF: &str = "من";
+    pub const NEXT: &str = "التالي";
+    pub const BACK: &str = "رجوع";
+    pub const DONE: &str = "يلا نبدأ";
+    pub const SKIP_ALL: &str = "بعدين";
+    pub const EXAM_TITLE: &str = "امتحانك إمتى؟";
+    pub const EXAM_BODY: &str =
+        "عشان أوزّع المحاضرات والمراجعة على الأيام اللي فاضلة بهدوء. لو لسه مش متأكد، سيبها فاضية.";
+    pub const EXAM_DAY: &str = "يوم الامتحان";
+    pub const PICK_FUTURE: &str = "اختار يوم بعد النهارده.";
+    pub const DAYS_TITLE: &str = "بتذاكر أنهي أيام في الأسبوع؟";
+    pub const DAYS_BODY: &str = "الخطة والتذكير هيمشوا على الأيام دي بس. أيام الراحة راحة.";
+    pub const PICK_A_DAY: &str = "اختار يوم واحد على الأقل.";
+    pub const MINUTES_TITLE: &str = "قد إيه في اليوم؟";
+    pub const MINUTES_BODY: &str = "طول الجلسة العادي. تقدر تغيّره قبل أي جلسة.";
+    pub const MIN: &str = "دقيقة";
+    pub const STUDIED_TITLE: &str = "ذاكرت أنهي محاضرات قبل كده؟";
+    pub const STUDIED_BODY: &str = "علّم اللي قريته قبل كده. لو مفيش، كمّل عادي.";
+    pub const REMIND_TITLE: &str = "أفكّرك إمتى؟";
+    pub const REMIND_BODY: &str = "إشعار هادي فيه عدد المراجعات المستنياك. بيرن على الموبايل بس.";
+    pub const ADD_TIME: &str = "زوّد معاد";
+    pub const REMOVE: &str = "شيل";
+    pub const NO_REMINDERS: &str = "من غير تذكير. تقدر تشغّله بعدين من الإعدادات.";
+    pub const THEME_TITLE: &str = "تحب الألوان إزاي؟";
+    pub const THEME_BODY: &str = "«نبطشية» غامق ودافي، للمذاكرة بالليل.";
+    pub const REOPEN_TITLE: &str = "أسئلة البداية";
+    pub const REOPEN_BODY: &str = "يوم الامتحان، أيام المذاكرة، طول الجلسة، التذكير والألوان، في مكان واحد.";
+    pub const REOPEN: &str = "افتحها تاني";
+}
+
+pub mod recap {
+    pub const TODAY_1: &str = "النهارده جاوبت";
+    pub const TODAY_ANSWERS: &str = "سؤال";
+    pub const AND: &str = "واتعلمت";
+    pub const TODAY_NEW: &str = "حاجة جديدة";
+    pub const DONE_REST: &str = "مراجعة النهارده خلصت، استريح. بكرة عندك";
+    pub const REVIEWS: &str = "مراجعة.";
+    pub const LEFT_1: &str = "فاضل";
+    pub const LEFT_2: &str = "مراجعة لو عندك وقت، ولو لأ بكرة موجودة.";
+    pub const WEEK_TITLE: &str = "آخر ٧ أيام";
+    pub const WEEK_LEARNED_1: &str = "اتعلمت";
+    pub const WEEK_LEARNED_2: &str = "حاجة جديدة في";
+    pub const WEEK_DAYS: &str = "أيام.";
+    pub const WEEK_RETENTION: &str = "بتفتكر صح:";
+    pub const WEEK_WEAK: &str = "يستاهلوا رجوع:";
+    pub const WEEK_EXAM_1: &str = "فاضل على الامتحان";
+    pub const WEEK_EXAM_2: &str = "يوم.";
+}

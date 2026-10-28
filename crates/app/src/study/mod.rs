@@ -267,7 +267,8 @@ pub fn Study() -> Element {
                             at_ms: now_ms(),
                             took_ms: took,
                         });
-                        session.write().grade(grade);
+                        let hidden = |id: &str| store.0.borrow().is_hidden(id);
+                        session.write().grade_unless(grade, hidden);
                         started.set(Instant::now());
                         if session.read().is_done() {
                             phase.set(Phase::Summary);

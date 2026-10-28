@@ -213,7 +213,11 @@ impl ReviewBackend {
     }
 
     /// False when the settings weren't saved (reported to the log).
-    pub fn set_settings(&mut self, settings: ReviewSettings) -> bool {
+    pub fn set_settings(&mut self, mut settings: ReviewSettings) -> bool {
+        // The background refit writes `fsrs` straight to the store, so the
+        // copy these settings were built from may be older (#248). No screen
+        // edits the fit, so the stored one always wins.
+        settings.fsrs = self.store.review_settings().fsrs;
         if let Err(e) = self.store.put_review_settings(&settings) {
             super::write_failed("review settings", &e);
             return false;
@@ -542,6 +546,20 @@ mod tests {
         all.sort();
         assert_eq!(all, ["hb.L01.001", "hb.L01.006", "hb.L01.009"]);
         assert_eq!(b.due_forecast(1, later), vec![3]);
+    }
+
+    #[test]
+    fn a_settings_change_keeps_a_fit_made_meanwhile() {
+        let mut b = backend();
+        let stale = b.settings.clone();
+        // The refit thread stores a personal fit behind the backend's back.
+        let mut fitted = b.store.review_settings();
+        fitted.fsrs =
+            Some(batna_core::srs::FsrsParams { weights: Vec::new(), reviews: 400, trained_at_ms: T0 });
+        b.store.put_review_settings(&fitted).unwrap();
+        assert!(b.set_settings(ReviewSettings { new_per_day: 45, ..stale }));
+        assert_eq!(b.store.review_settings().fsrs.map(|p| p.reviews), Some(400));
+        assert_eq!(b.store.review_settings().new_per_day, 45);
     }
 
     #[test]

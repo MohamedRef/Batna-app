@@ -204,13 +204,23 @@ impl Session {
     }
 
     pub fn grade(&mut self, grade: Grade) {
+        self.grade_unless(grade, |_| false);
+    }
+
+    /// Grades the current item, then skips every item `hidden` says he
+    /// marked ✗ (here or by sync) from what's left (#246). A hidden item is
+    /// not queued for a retry either.
+    pub fn grade_unless(&mut self, grade: Grade, hidden: impl Fn(&str) -> bool) {
         let Some(p) = self.current().cloned() else { return };
         let retry = self.is_retry();
         self.outcomes.push(Outcome { item_id: p.item_id.clone(), grade, fresh: p.fresh, retry });
-        if grade == Grade::Again && self.retried.insert(p.item_id.clone()) {
+        if grade == Grade::Again && !hidden(&p.item_id) && self.retried.insert(p.item_id.clone()) {
             self.queue.push(Planned { fresh: false, ..p });
         }
         self.pos += 1;
+        while self.current().is_some_and(|q| hidden(&q.item_id)) {
+            self.pos += 1;
+        }
     }
 
     pub fn summary(&self) -> Summary {
@@ -399,8 +409,6 @@ fn unit_of(word: &str) -> Option<&'static str> {
     UNITS.iter().find(|(_, spellings)| spellings.contains(&word)).map(|(unit, _)| *unit)
 }
 
-/// Opposite prefixes: one edit apart, opposite meanings. A typed word that
-/// swaps one for another is wrong, not a typo.
 /// British spellings mapped to American ones, so both read the same
 /// (haemolysis = hemolysis, oesophagus = esophagus, anaemia = anemia).
 const SPELLINGS: &[(&str, &str)] = &[
@@ -433,7 +441,8 @@ fn us_spelling(word: String) -> String {
     w
 }
 
-/// Prefix pairs that mean opposite things. Each group lists prefixes that
+/// Opposite prefixes: one edit apart, opposite meanings. A typed word that
+/// swaps one for another is wrong, not a typo. Each group lists prefixes that
 /// stand for each other on the same stem; nothing else counts as a swap.
 const CONTRASTS: &[&[&str]] = &[
     &["hypo", "hyper", "normo", "eu"],
@@ -854,6 +863,21 @@ mod tests {
             budget_secs: 600,
         });
         assert_eq!(ids(&plan), ["hb.L01.002"]);
+    }
+
+    #[test]
+    fn hidden_items_are_skipped_and_never_retried() {
+        let plan = compose_with(&sample(), &[], &[], 600);
+        let mut s = Session::new(plan);
+        // He marks 001 ✗ and grades it Again; 002 arrives ✗ by sync.
+        let hidden = |id: &str| matches!(id, "hb.L01.001" | "hb.L01.002");
+        s.grade_unless(Grade::Again, hidden);
+        assert_ne!(s.current().unwrap().item_id, "hb.L01.002");
+        while !s.is_done() {
+            assert!(!hidden(&s.current().unwrap().item_id));
+            s.grade_unless(Grade::Good, hidden);
+        }
+        assert_eq!(s.outcomes.iter().filter(|o| o.item_id == "hb.L01.001").count(), 1);
     }
 
     #[test]

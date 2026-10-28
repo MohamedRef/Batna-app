@@ -373,7 +373,7 @@ pub fn UpdateSheet() -> Element {
                 div {
                     h2 { id: "us-title", "{title}" }
                     p {
-                        "باطنة · "
+                        "{crate::i18n::app::NAME} · "
                         bdi { dir: "ltr", class: "latin",
                             "v{offer.as_ref().filter(|_| m == SheetMode::Offer).map_or(this_label.clone(), |o| o.label())}"
                         }

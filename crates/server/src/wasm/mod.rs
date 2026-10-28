@@ -4,7 +4,7 @@
 mod account;
 mod do_sql;
 
-use std::cell::RefCell;
+use std::cell::{Cell, RefCell};
 
 // adapted from kabar-app main: crates/server/src/wasm/mod.rs (sign-in,
 // devices and sync only)
@@ -107,10 +107,18 @@ async fn call_do(
 thread_local! {
     /// Google's signing keys, cached for the isolate's life (or max-age).
     static JWKS: RefCell<Option<(Jwks, u64)>> = const { RefCell::new(None) };
+    /// When an unknown `kid` last forced a refetch (`google::may_refetch`).
+    static JWKS_FORCED: Cell<Option<u64>> = const { Cell::new(None) };
 }
 
 async fn google_jwks(url: &str, force: bool) -> Result<Jwks> {
     let now = now_ms();
+    // A forced refetch (unknown kid) only every few minutes; in between the
+    // cached keys answer, and an unknown kid fails verification.
+    let force = force && google::may_refetch(JWKS_FORCED.get(), now);
+    if force {
+        JWKS_FORCED.set(Some(now));
+    }
     if !force
         && let Some(jwks) =
             JWKS.with_borrow(|c| c.as_ref().filter(|(_, exp)| *exp > now).map(|(j, _)| j.clone()))

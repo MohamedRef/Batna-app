@@ -891,6 +891,11 @@ pub mod cloud {
     pub const NOT_CONFIGURED: &str = "المزامنة لسه ما اتفعّلتش في النسخة دي. مذاكرتك محفوظة على الجهاز، وتقدر تنقلها بنسخة احتياطية من «بياناتك».";
     pub const SIGN_IN: &str = "سجّل دخول بجوجل";
     pub const SIGNING_IN: &str = "كمّل تسجيل الدخول في المتصفح، وبعدين ارجع هنا.";
+    /// The browser page after Google sends him back (HTML).
+    pub const BROWSER_DONE: &str = "<h1>✓</h1><p>تمام، ارجع لباطنة.</p>";
+    pub const BROWSER_CANCELLED: &str = "<p>ما اتسجلتش. ارجع لباطنة وجرّب تاني.</p>";
+    /// "من" in "من 3 دقايق".
+    pub const AGO: &str = "من";
     pub const SIGNED_IN_AS: &str = "داخل بـ";
     pub const SIGN_OUT: &str = "اخرج من الجهاز ده";
     pub const CONNECTING: &str = "بيتصل";

@@ -217,6 +217,53 @@ pub fn progress(stats: &[LectureStats]) -> Vec<LectureProgress> {
         .collect()
 }
 
+/// The planner's view as it stood when today's study day began. Today's
+/// share of the plan is worked out from this, so it holds still while he
+/// works through it instead of shrinking with every answer.
+pub fn progress_at_day_start(
+    lectures: &[Lecture],
+    events: &[ReviewEvent],
+    marks: &BTreeMap<String, Status>,
+    clock: Clock,
+) -> Vec<LectureProgress> {
+    let today = clock.today();
+    let before: Vec<ReviewEvent> = events.iter().filter(|e| clock.day_of(e.at_ms) < today).cloned().collect();
+    progress(&lecture_stats(lectures, &before, marks, clock))
+}
+
+/// What today's study day has done so far.
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq)]
+pub struct DayDone {
+    /// Items answered for the first time today.
+    pub new: u32,
+    /// Answers today to items first seen on an earlier day.
+    pub reviews: u32,
+}
+
+/// Today's [`DayDone`]. Rejected items left out.
+pub fn done_today(
+    lectures: &[Lecture],
+    events: &[ReviewEvent],
+    marks: &BTreeMap<String, Status>,
+    clock: Clock,
+) -> DayDone {
+    let today = clock.today();
+    let by_item = answers_by_item(events);
+    let mut done = DayDone::default();
+    for item in lectures.iter().flat_map(|l| &l.items) {
+        if status_of(&item.id, item.status, marks) == Status::Rejected {
+            continue;
+        }
+        let Some(answers) = by_item.get(item.id.as_str()) else { continue };
+        if answers.first().is_some_and(|e| clock.day_of(e.at_ms) == today) {
+            done.new += 1;
+        } else {
+            done.reviews += answers.iter().filter(|e| clock.day_of(e.at_ms) == today).count() as u32;
+        }
+    }
+    done
+}
+
 /// Rough intervals (days) after the 1st, 2nd, 3rd… day an item was answered
 /// right; "Again" starts it over. A stand-in for FSRS's own forecast until
 /// the scheduler lands (chunk 3).
@@ -596,6 +643,21 @@ items:
         let today = clock().today();
         let got = first_seen_by_day(&lectures(), &events, &marks(), clock());
         assert_eq!(got, BTreeMap::from([(today.plus(-3), 1), (today.plus(-1), 1)]));
+    }
+
+    #[test]
+    fn day_start_progress_and_today_so_far() {
+        let events = [
+            ev("hb.L01.001", Grade::Good, 2),
+            ev("hb.L01.001", Grade::Good, 0),
+            ev("hb.L01.001", Grade::Again, 0),
+            ev("hb.L01.002", Grade::Good, 0),
+            ev("hb.L01.004", Grade::Good, 0), // rejected
+        ];
+        let p = progress_at_day_start(&lectures(), &events, &marks(), clock());
+        assert_eq!((p[0].total, p[0].seen, p[0].seen_twice), (3, 1, 0), "today's answers don't count yet");
+        let done = done_today(&lectures(), &events, &marks(), clock());
+        assert_eq!(done, DayDone { new: 1, reviews: 2 });
     }
 
     #[test]

@@ -24,7 +24,9 @@ pub mod today {
     pub const CHECKED: &str = "راجعت صحته";
     pub const DUE_TIME_1: &str = "المستحق ياخد حوالي";
     pub const DUE_TIME_2: &str = "دقيقة. الجلسة بتبدأ بالأضعف.";
-    pub const START: &str = "ابدأ جلسة ١٠ دقايق";
+    pub fn start(minutes: u32) -> String {
+        format!("ابدأ جلسة {minutes} {}", if minutes <= 10 { "دقايق" } else { "دقيقة" })
+    }
     pub const ALL_DONE: &str = "خلّصت المستحق النهارده. شغل حلو.";
     pub const NEW_CAP_REACHED: &str = "وخلّصت الجديد اللي محدّده لليوم";
     pub const TOMORROW: &str = "بكرة:";
@@ -41,6 +43,44 @@ pub mod today {
     pub const ITEMS: &str = "سؤال وكارت";
     pub const PAGES: &str = "صفحات";
     pub const UNVERIFIED_NOTE: &str = "كل المحتوى لسه ما اتراجعش. أول ما تشوف أي سؤال، علّم عليه صح أو غلط.";
+
+    // The exam plan on Today (#99).
+    pub fn exam_in(days: i32) -> String {
+        match days {
+            1 => "الامتحان بكرة. إنت جاهز أكتر مما فاكر.".to_string(),
+            2 => "فاضل يومين على الامتحان".to_string(),
+            n => format!("فاضل {n} يوم على الامتحان"),
+        }
+    }
+    pub const PLAN_TODAY: &str = "خطة النهارده:";
+    pub const PLAN_NEW: &str = "جديد";
+    pub const PLAN_REVIEWS: &str = "مراجعة";
+    pub const PLAN_REVIEWS_ONLY: &str = "مراجعة بس";
+    pub const ABOUT: &str = "حوالي";
+    pub const MINUTES: &str = "دقيقة";
+    pub const RING_LABEL: &str = "اللي خلّصته من خطة النهارده";
+    pub const NEW_LEFT_1: &str = "فاضل";
+    pub const NEW_LEFT_2: &str = "جديد من خطة النهارده. كل جلسة بتقرّبك.";
+    pub const NEW_DONE: &str = "خلّصت جديد النهارده. اللي فاضل مراجعة بس.";
+    pub const REVISIT: &str = "لفّة تانية على";
+    pub const MOCK: &str = "النهارده يوم امتحان تجريبي.";
+    pub const OPEN_BANK: &str = "افتح بنك الأسئلة";
+    pub const WEAK: &str = "النهارده للمواضيع الضعيفة.";
+    pub const WEAK_START: &str = "ذاكر المواضيع الضعيفة";
+    pub const REST: &str = "النهارده راحة في الخطة.";
+    pub const REST_DUE: &str = "لو عندك مستحق، جلسة قصيرة تكفي.";
+    pub const AHEAD: &str = "اسبق الخطة بشوية جديد";
+    pub fn tight_days(days: u32) -> String {
+        let days = if days == 1 {
+            "يوم مذاكرة زيادة".to_string()
+        } else {
+            format!("{days} أيام مذاكرة زيادة")
+        };
+        format!(
+            "الخطة محتاجة {days} في الأسبوع عشان كل الجديد يخلص قبل آخر الأيام. تقدر تعدّلها من تقدّمي ← خطة الامتحان."
+        )
+    }
+    pub const TIGHT_CAP: &str = "حد المراجعات اليومي مش مكفّي الخطة دي. تقدر تعلّيه من تقدّمي ← خطة الامتحان.";
 }
 
 pub mod study_settings {
@@ -60,6 +100,8 @@ pub mod study_settings {
     pub const DEFAULT_PARAMS_2: &str = "مراجعة. لحد دلوقتي:";
     pub const NEW_PER_DAY: &str = "أسئلة جديدة في اليوم";
     pub const NEW_PER_DAY_BODY: &str = "الجديد بيزوّد مراجعات الأيام الجاية، فاختار رقم تقدر تكمّل عليه.";
+    pub const NEW_FROM_PLAN_1: &str = "عندك ميعاد امتحان، فالخطة هي اللي بتحدد الجديد كل يوم. النهارده:";
+    pub const NEW_FROM_PLAN_2: &str = "جديد. تقدر تغيّر أيام المذاكرة وحد المراجعات من تقدّمي ← خطة الامتحان.";
 }
 
 pub mod study {

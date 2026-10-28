@@ -80,3 +80,31 @@ button.link { border: 0; background: none; color: var(--accent); text-decoration
 table.plan { border-collapse: collapse; font-size: var(--fs-sm); inline-size: 100%; }
 table.plan th, table.plan td { padding: var(--sp-1) var(--sp-2); border-block-end: 1px solid var(--line); text-align: start; font-variant-numeric: tabular-nums; }
 table.plan th { color: var(--muted); font-weight: 600; }
+
+/* The exam plan's day (#99): countdown, a ring for today's target, one line. */
+.plan-countdown { margin: 0; color: var(--muted); font-size: var(--fs-sm); }
+.plan-line { display: flex; align-items: center; gap: var(--sp-3); }
+.plan-text { display: flex; flex-direction: column; gap: var(--sp-1); min-width: 0; }
+.plan-text p { margin: 0; }
+.plan-target { font-weight: 600; }
+.ring {
+  flex: none;
+  inline-size: 64px;
+  block-size: 64px;
+  border-radius: 50%;
+  background: conic-gradient(var(--good) var(--p), var(--bg) 0);
+  display: grid;
+  place-items: center;
+}
+.ring-hole {
+  inline-size: 50px;
+  block-size: 50px;
+  border-radius: 50%;
+  background: var(--surface);
+  display: grid;
+  place-items: center;
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.today-hero .session-start { display: flex; align-items: center; flex-wrap: wrap; gap: var(--sp-3); }

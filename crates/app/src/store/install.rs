@@ -36,6 +36,9 @@ pub(super) fn check(conn: &Connection, marker: &Path, device: &str) -> Result<St
             // whole log again under its new name.
             conn.execute("DELETE FROM sync_outbox", [])?;
             sync::forget_position(conn)?;
+            // Device-only settings (`local.*`: which device rings reminders,
+            // theme, an open paper) belong to the other device (#284).
+            conn.execute("DELETE FROM meta WHERE key LIKE 'local.%'", [])?;
             fresh
         }
     };
@@ -67,6 +70,7 @@ mod tests {
         let marker = phone.join("no_backup/batna-install");
         let id = {
             let s = Store::open_marked(&db, Some(&marker)).unwrap();
+            s.put_local_setting("remind_here", &true).unwrap();
             s.append_review(batna_core::review::ReviewEvent {
                 item_id: "hb.L01.001".into(),
                 grade: batna_core::review::Grade::Good,
@@ -90,6 +94,7 @@ mod tests {
         assert_eq!(s.reviews().unwrap().len(), 1, "his answers come along");
         assert!(s.outbox(10).unwrap().is_empty(), "the phone sends its own answers");
         assert_eq!(s.last_seq(), 0);
+        assert_eq!(s.local_setting::<bool>("remind_here"), None, "the phone keeps ringing, not both");
         // And it stays that new id.
         let again = s.device();
         drop(s);

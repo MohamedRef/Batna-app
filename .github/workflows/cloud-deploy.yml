@@ -68,6 +68,8 @@ jobs:
         if: steps.ready.outputs.go == 'true'
         working-directory: crates/server
         run: |
+          # Without pipefail, tee's success would hide a failed deploy (#283).
+          set -o pipefail
           wrangler deploy 2>&1 | tee deploy.log
           url="$(grep -oE 'https://[a-z0-9.-]+\.workers\.dev' deploy.log | head -1 || true)"
           rm -f deploy.log

@@ -34,19 +34,33 @@ pub fn Line(text: String) -> Element {
 }
 
 fn runs(spans: Vec<Span>) -> Element {
+    // Neighbouring Latin spans (a bold word inside an English phrase) share
+    // one isolate, so the phrase keeps its order.
+    let mut groups: Vec<(bool, Vec<Span>)> = Vec::new();
+    for s in spans {
+        match groups.last_mut() {
+            Some((latin, g)) if *latin && s.latin => g.push(s),
+            _ => groups.push((s.latin, vec![s])),
+        }
+    }
+    rsx! {
+        for (i , (latin , g)) in groups.into_iter().enumerate() {
+            if latin {
+                bdi { key: "{i}", dir: "ltr", lang: "en", {styled(g)} }
+            } else {
+                span { key: "{i}", {styled(g)} }
+            }
+        }
+    }
+}
+
+fn styled(spans: Vec<Span>) -> Element {
     rsx! {
         for (i , s) in spans.into_iter().enumerate() {
-            {
-                let inner = if s.latin {
-                    rsx! { bdi { dir: "ltr", lang: "en", "{s.text}" } }
-                } else {
-                    rsx! { "{s.text}" }
-                };
-                if s.bold {
-                    rsx! { strong { key: "{i}", {inner} } }
-                } else {
-                    rsx! { span { key: "{i}", {inner} } }
-                }
+            if s.bold {
+                strong { key: "{i}", "{s.text}" }
+            } else {
+                span { key: "{i}", "{s.text}" }
             }
         }
     }

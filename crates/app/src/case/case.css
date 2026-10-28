@@ -6,17 +6,17 @@
   background: var(--surface);
   border-radius: var(--radius-pill);
   padding: var(--sp-1) var(--sp-4);
-  min-height: 44px;
+  min-height: var(--tap);
   cursor: pointer;
 }
 .tabs button[aria-selected="true"] { background: var(--accent-soft); border-color: transparent; color: var(--accent); font-weight: 700; }
 
-.link-button { border: 0; background: none; color: var(--accent); cursor: pointer; padding: var(--sp-1) 0; min-height: 44px; }
+.link-button { border: 0; background: none; color: var(--accent); cursor: pointer; padding: var(--sp-1) 0; min-height: var(--tap); }
 .row { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
 .btn-primary, .btn-secondary, .btn-good {
   border-radius: var(--radius-pill);
   padding: var(--sp-2) var(--sp-4);
-  min-height: 44px;
+  min-height: var(--tap);
   cursor: pointer;
   font-weight: 600;
   border: 1px solid transparent;
@@ -29,7 +29,8 @@
 
 /* ---------- lists ---------- */
 .case-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-2); }
-@media (min-width: 840px) { .case-list { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 600px) { .case-list { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1100px) { .case-list { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .case-row {
   inline-size: 100%;
   display: flex;
@@ -64,7 +65,7 @@
   background: var(--surface);
   border-radius: var(--radius);
   padding: var(--sp-3);
-  min-height: 48px;
+  min-height: var(--tap-lg);
   cursor: pointer;
   transition: background var(--dur) var(--ease);
 }
@@ -90,7 +91,7 @@
   background: var(--surface);
   border-radius: var(--radius-pill);
   padding: var(--sp-1) var(--sp-3);
-  min-height: 44px;
+  min-height: var(--tap);
   cursor: pointer;
 }
 .calc-chip[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); font-weight: 600; }
@@ -115,7 +116,7 @@
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: var(--sp-2) var(--sp-3);
-  min-height: 44px;
+  min-height: var(--tap);
   font-family: var(--font-latin);
 }
 .calc-toggle { display: flex; gap: var(--sp-2); }
@@ -124,7 +125,7 @@
   border: 1px solid var(--line);
   background: var(--surface);
   border-radius: var(--radius);
-  min-height: 44px;
+  min-height: var(--tap);
   cursor: pointer;
 }
 .calc-toggle button[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); font-weight: 600; }

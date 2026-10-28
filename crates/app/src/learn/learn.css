@@ -167,6 +167,9 @@
   animation: ls-in 220ms var(--ease);
 }
 .ls-stage[hidden] { display: none; }
+/* The next step enters from the left: in a right-to-left app, forward
+   moves leftward, so new content arrives from the left (the mirror of an
+   English carousel, where the next slide comes from the right). */
 @keyframes ls-in { from { opacity: 0; transform: translateX(-14px); } to { opacity: 1; transform: none; } }
 .ls-src { display: flex; justify-content: flex-end; border-block-start: 1px dashed var(--line); padding-block-start: var(--sp-2); }
 .ls-nav {

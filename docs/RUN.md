@@ -18,6 +18,8 @@ Study reminders on the Mac come from UNUserNotificationCenter and only work from
 
 `scripts/android-check-apk.sh <apk>` fails if the Kotlin classes or their permissions are missing from an APK; CI runs it on every change to `android/`. When you add a Kotlin class that Rust looks up by name, add it to `CLASSES` in that script. `adb logcat` shows Kotlin errors on the device.
 
+The Mac build (clippy, tests and `dx bundle`) runs in `.github/workflows/mac.yml` on every push to `main`, nightly and by hand (Actions › Mac › Run workflow), not on pull requests: hosted Mac runners are sometimes unavailable for most of an hour. Check that workflow on `main` after touching Mac-only code, or run `just check` plus `just bundle-mac` on the Mac.
+
 Release builds (`just apk`, `just install-android`, `just bundle-mac`), their one-time keys, the CI preview APK and updates over the air are described in [RELEASE.md](RELEASE.md). Nothing is released before Mohamed says go, so for now the debug build, or the CI preview APK on the `batna-preview` prerelease, is the way to try Batna.
 
 ## Study in Anki now

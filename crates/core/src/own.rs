@@ -16,6 +16,7 @@ pub const TAG: &str = "own";
 
 pub const MAX_FRONT: usize = 600;
 pub const MAX_BACK: usize = 3000;
+pub const MAX_SOURCE: usize = 200;
 
 /// One card, as stored (JSON in `own_cards.value`).
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -46,6 +47,7 @@ pub enum Problem {
     EmptyBack,
     FrontTooLong,
     BackTooLong,
+    SourceTooLong,
 }
 
 impl OwnCard {
@@ -65,6 +67,9 @@ impl OwnCard {
             (_, "") => Err(Problem::EmptyBack),
             (f, _) if f.chars().count() > MAX_FRONT => Err(Problem::FrontTooLong),
             (_, b) if b.chars().count() > MAX_BACK => Err(Problem::BackTooLong),
+            _ if self.source.as_deref().is_some_and(|s| s.chars().count() > MAX_SOURCE) => {
+                Err(Problem::SourceTooLong)
+            }
             _ => Ok(()),
         }
     }
@@ -85,23 +90,36 @@ impl OwnCard {
     }
 }
 
+/// At most `max` characters, cut at the last space when there is one in the
+/// final fifth (so a word isn't split). True when anything was cut.
+pub fn trim_at_word(text: &str, max: usize) -> (String, bool) {
+    if text.chars().count() <= max {
+        return (text.to_string(), false);
+    }
+    let head: String = text.chars().take(max).collect();
+    let cut = head.rfind(char::is_whitespace).filter(|&i| head[..i].chars().count() >= max * 4 / 5);
+    (cut.map_or(head.clone(), |i| head[..i].trim_end().to_string()), true)
+}
+
 /// A draft from shared text: the passage becomes the back, and the front
-/// starts with its first line as a prompt to rewrite into a question.
-pub fn draft_from_shared(text: &str, subject: Option<&str>, id: String, now_ms: i64) -> OwnCard {
+/// starts with its first line as a prompt to rewrite into a question. True
+/// when the passage was too long and its end was cut.
+pub fn draft_from_shared(text: &str, subject: Option<&str>, id: String, now_ms: i64) -> (OwnCard, bool) {
     let text = text.trim();
     let first = text.lines().map(str::trim).find(|l| !l.is_empty()).unwrap_or("");
-    let front: String = first.chars().take(160).collect();
-    let back: String = text.chars().take(MAX_BACK).collect();
-    OwnCard {
+    let (front, _) = trim_at_word(first, 160);
+    let (back, trimmed) = trim_at_word(text, MAX_BACK);
+    let card = OwnCard {
         id,
         front: if front == back { String::new() } else { front },
         back,
         lecture: None,
         page: None,
-        source: subject.map(str::to_string),
+        source: subject.map(|s| trim_at_word(s.trim(), MAX_SOURCE).0),
         created_ms: now_ms,
     }
-    .tidy()
+    .tidy();
+    (card, trimmed)
 }
 
 /// The cards as one lecture, newest first, so sessions and the Anki export
@@ -169,17 +187,36 @@ mod tests {
 
     #[test]
     fn shared_text_becomes_a_draft() {
-        let d = draft_from_shared(
+        let (d, trimmed) = draft_from_shared(
             "\n  SAAG ≥ 1.1 g/dL\nmeans portal hypertension.\n",
             Some("Chrome"),
             "own.x".into(),
             5,
         );
+        assert!(!trimmed);
         assert_eq!(d.front, "SAAG ≥ 1.1 g/dL");
         assert_eq!(d.back, "SAAG ≥ 1.1 g/dL\nmeans portal hypertension.");
         assert_eq!(d.source.as_deref(), Some("Chrome"));
         // One line only: no front to suggest.
-        assert_eq!(draft_from_shared("one line", None, "own.y".into(), 5).front, "");
+        assert_eq!(draft_from_shared("one line", None, "own.y".into(), 5).0.front, "");
+    }
+
+    #[test]
+    fn long_shares_are_cut_at_a_word_and_say_so() {
+        let text = "word ".repeat(1000);
+        let (d, trimmed) = draft_from_shared(&text, Some(&"s".repeat(500)), "own.z".into(), 5);
+        assert!(trimmed);
+        assert!(
+            d.back.chars().count() <= MAX_BACK && d.back.ends_with("word"),
+            "{}",
+            &d.back[d.back.len() - 10..]
+        );
+        assert_eq!(d.source.as_deref().map(|s| s.chars().count()), Some(MAX_SOURCE));
+        let long_source = OwnCard { source: Some("x".repeat(MAX_SOURCE + 1)), ..card("own.s", 1) };
+        assert_eq!(long_source.check(), Err(Problem::SourceTooLong));
+        // No space near the end: a plain cut.
+        assert_eq!(trim_at_word("abcdefghij", 4), ("abcd".into(), true));
+        assert_eq!(trim_at_word("short", 10), ("short".into(), false));
     }
 
     #[test]

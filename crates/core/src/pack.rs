@@ -12,6 +12,7 @@ use miniz_oxide::inflate::decompress_to_vec_with_limit;
 use serde::{Deserialize, Serialize};
 
 use crate::content::{Index, Lecture};
+use crate::lesson::LessonFile;
 
 /// The first bytes of every pack. Bump the digit when the layout changes.
 pub const MAGIC: &[u8; 8] = b"BATNAPK1";
@@ -27,6 +28,9 @@ pub struct Pack {
     pub index: Index,
     /// Written lectures, in index order.
     pub lectures: Vec<Lecture>,
+    /// Lessons (`batna.lesson/v1`), in lecture order. Older packs have none.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub lessons: Vec<LessonFile>,
 }
 
 #[derive(Debug, thiserror::Error)]
@@ -44,7 +48,15 @@ impl Pack {
     pub fn new(index: Index, mut lectures: Vec<Lecture>) -> Self {
         let pos = |id: &str| index.lectures.iter().position(|e| e.id == id).unwrap_or(usize::MAX);
         lectures.sort_by(|a, b| pos(&a.lecture).cmp(&pos(&b.lecture)).then(a.lecture.cmp(&b.lecture)));
-        Pack { index, lectures }
+        Pack { index, lectures, lessons: Vec::new() }
+    }
+
+    /// Adds the lesson files, in the lectures' order.
+    pub fn with_lessons(mut self, mut lessons: Vec<LessonFile>) -> Self {
+        let pos = |id: &str| self.index.lectures.iter().position(|e| e.id == id).unwrap_or(usize::MAX);
+        lessons.sort_by(|a, b| pos(&a.lecture).cmp(&pos(&b.lecture)).then(a.lecture.cmp(&b.lecture)));
+        self.lessons = lessons;
+        self
     }
 
     pub fn encode(&self) -> Vec<u8> {

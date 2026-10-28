@@ -9,6 +9,7 @@
 use std::sync::Mutex;
 
 use batna_core::content::{Body, Item, Status};
+use batna_core::exam::{self, Rng};
 use batna_core::review::{Grade, MemorySink, Origin, ReviewEvent, ReviewSink, StudyStoreHandle};
 use dioxus::prelude::*;
 
@@ -148,7 +149,10 @@ pub fn ItemMeta(lecture: String, item_id: String, on_back: EventHandler) -> Elem
     let unverified = find_item(&item_id).is_some_and(|(_, i)| i.status == Status::Unverified);
     rsx! {
         div { class: "player-meta",
-            button { class: "btn-link", "aria-keyshortcuts": "Escape", onclick: move |_| on_back.call(()), "‹ " {tx::BACK} }
+            button { class: "btn-link", "aria-keyshortcuts": "Escape", onclick: move |_| on_back.call(()),
+                span { aria_hidden: "true", "→ " }
+                {tx::BACK}
+            }
             bdi { class: "muted small", "{lecture}" }
             if unverified { span { class: "chip", {tx::UNVERIFIED} } }
         }
@@ -161,7 +165,9 @@ pub fn CasePlayer(item_id: String, on_back: EventHandler) -> Element {
     let mut step = use_signal(|| 0usize);
     let mut picked = use_signal(|| None::<usize>);
     let mut shown = use_signal(|| false);
-    let mut results = use_signal(Vec::<bool>::new);
+    // One entry per finished step: right or not, and the option picked
+    // (written index; `None` when he graded himself).
+    let mut results = use_signal(Vec::<(bool, Option<usize>)>::new);
     let mut started = use_signal(now_ms);
     let store = use_case_store();
 
@@ -175,10 +181,12 @@ pub fn CasePlayer(item_id: String, on_back: EventHandler) -> Element {
     let page = item.src.page;
     let record_id = item.id.clone();
     let step_answer = steps.get(k).and_then(|s| s.answer);
+    // A fresh order on every attempt, steady while the step is open.
+    let order = steps.get(k).map_or_else(Vec::new, |s| option_order(&s.options, started() as u64, k));
 
-    let mut answer = move |right: bool| {
+    let mut answer = move |right: bool, pick: Option<usize>| {
         if results.read().len() == step() {
-            results.write().push(right);
+            results.write().push((right, pick));
         }
     };
 
@@ -186,14 +194,39 @@ pub fn CasePlayer(item_id: String, on_back: EventHandler) -> Element {
         article { class: "player case",
             ItemMeta { lecture: lecture.to_owned(), item_id: item.id.clone(), on_back }
             div { class: "case-grid",
-                // What is known so far: the stem and every reveal up to this step.
+                // What is known so far: the stem, every reveal up to this
+                // step, and each finished step's question and answer.
                 section { class: "card case-data",
                     bdi { class: "case-stem", "{stem}" }
                     for (i, s) in steps.iter().enumerate().take(k + 1) {
-                        if let Some(reveal) = &s.reveal {
-                            div { key: "{i}", class: if i == k { "case-reveal new" } else { "case-reveal" },
-                                span { class: "small muted", "{tx::STEP} {i + 1}" if i == k { " · {tx::NEW_DATA}" } }
-                                bdi { "{reveal}" }
+                        div { key: "{i}", class: "case-history",
+                            if let Some(reveal) = &s.reveal {
+                                div { class: if i == k { "case-reveal new" } else { "case-reveal" },
+                                    span { class: "small muted", "{tx::STEP} {i + 1}" if i == k { " · {tx::NEW_DATA}" } }
+                                    bdi { "{reveal}" }
+                                }
+                            }
+                            if let Some((ok, pick)) = results.read().get(i).copied().filter(|_| i < k) {
+                                div { class: if ok { "case-done ok" } else { "case-done miss" },
+                                    bdi { class: "small case-done-q", dir: "ltr", "{s.question}" }
+                                    match pick.and_then(|p| s.options.get(p)) {
+                                        Some(o) => rsx! {
+                                            p { class: "small", dir: "ltr",
+                                                span { aria_hidden: "true", if ok { "✓ " } else { "✗ " } }
+                                                "{o}"
+                                            }
+                                        },
+                                        None => rsx! {
+                                            p { class: "small",
+                                                span { aria_hidden: "true", if ok { "✓ " } else { "✗ " } }
+                                                if ok { {tx::GOT_IT} } else { {tx::MISSED} }
+                                            }
+                                        },
+                                    }
+                                    if let Some(right) = s.answer.filter(|_| !ok).and_then(|a| s.options.get(a)) {
+                                        p { class: "small", "{tx::CORRECT_WAS} " bdi { "{right}" } }
+                                    }
+                                }
                             }
                         }
                     }
@@ -204,19 +237,19 @@ pub fn CasePlayer(item_id: String, on_back: EventHandler) -> Element {
                         bdi { class: "case-question", "{steps[k].question}" }
                         if !steps[k].options.is_empty() {
                             div { class: "options", role: "list",
-                                for (i, opt) in steps[k].options.iter().enumerate() {
+                                for (pos, i) in order.iter().copied().enumerate() {
                                     button {
                                         key: "{i}",
                                         role: "listitem",
                                         dir: "auto",
-                                        "aria-keyshortcuts": option_key(i),
+                                        "aria-keyshortcuts": option_key(pos),
                                         class: option_class(i, picked(), steps[k].answer),
                                         disabled: picked().is_some(),
                                         onclick: move |_| {
                                             picked.set(Some(i));
-                                            answer(step_answer == Some(i));
+                                            answer(step_answer == Some(i), Some(i));
                                         },
-                                        bdi { "{opt}" }
+                                        bdi { "{steps[k].options[i]}" }
                                     }
                                 }
                             }
@@ -224,46 +257,60 @@ pub fn CasePlayer(item_id: String, on_back: EventHandler) -> Element {
                             button { class: "btn btn-primary", "aria-keyshortcuts": "Space", onclick: move |_| shown.set(true), {tx::SHOW_ANSWER} }
                         }
                         if picked().is_some() || shown() {
-                            if let Some(p) = picked() {
-                                p { class: if steps[k].answer == Some(p) { "verdict good" } else { "verdict bad" },
-                                    if steps[k].answer == Some(p) { {tx::RIGHT} } else { {tx::WRONG} }
+                            // Brought into view on the phone, where it would
+                            // otherwise open below the fold.
+                            div {
+                                class: "case-feedback",
+                                onmounted: move |e: MountedEvent| async move {
+                                    let _ = e
+                                        .scroll_to_with_options(ScrollToOptions {
+                                            behavior: ScrollBehavior::Smooth,
+                                            vertical: ScrollLogicalPosition::Nearest,
+                                            horizontal: ScrollLogicalPosition::Nearest,
+                                        })
+                                        .await;
+                                },
+                                if let Some(p) = picked() {
+                                    p { class: if steps[k].answer == Some(p) { "verdict good" } else { "verdict bad" },
+                                        if steps[k].answer == Some(p) { {tx::RIGHT} } else { {tx::WRONG} }
+                                    }
                                 }
-                            }
-                            div { class: "case-why",
-                                bdi { "{steps[k].why}" }
-                                BookPage { label: tx::PAGE, page, quote: item.src.quote.clone() }
-                            }
-                            if shown() && !answered {
-                                div { class: "row",
-                                    button { class: "btn btn-good", "aria-keyshortcuts": "3", onclick: move |_| answer(true), {tx::GOT_IT} }
-                                    button { class: "btn btn-secondary", "aria-keyshortcuts": "1", onclick: move |_| answer(false), {tx::MISSED} }
+                                div { class: "case-why",
+                                    bdi { "{steps[k].why}" }
+                                    BookPage { label: tx::PAGE, page, quote: item.src.quote.clone() }
                                 }
-                            }
-                            if answered {
-                                button {
-                                    class: "btn btn-primary",
-                                    "aria-keyshortcuts": "Enter",
-                                    onclick: {
-                                        let record_id = record_id.clone();
-                                        move |_| {
-                                            if k + 1 == total {
-                                                let right = results.read().iter().filter(|r| **r).count() as u32;
-                                                record(store.as_ref(), &record_id, right, total as u32, started());
+                                if shown() && !answered {
+                                    div { class: "row",
+                                        button { class: "btn btn-good", "aria-keyshortcuts": "3", onclick: move |_| answer(true, None), {tx::GOT_IT} }
+                                        button { class: "btn btn-secondary", "aria-keyshortcuts": "1", onclick: move |_| answer(false, None), {tx::MISSED} }
+                                    }
+                                }
+                                if answered {
+                                    button {
+                                        class: "btn btn-primary",
+                                        "aria-keyshortcuts": "Enter",
+                                        onclick: {
+                                            let record_id = record_id.clone();
+                                            move |_| {
+                                                if k + 1 == total {
+                                                    let right = results.read().iter().filter(|r| r.0).count() as u32;
+                                                    record(store.as_ref(), &record_id, right, total as u32, started());
+                                                }
+                                                step.set(k + 1);
+                                                picked.set(None);
+                                                shown.set(false);
                                             }
-                                            step.set(k + 1);
-                                            picked.set(None);
-                                            shown.set(false);
-                                        }
-                                    },
-                                    if k + 1 == total { {tx::FINISH} } else { {tx::NEXT} }
+                                        },
+                                        if k + 1 == total { {tx::FINISH} } else { {tx::NEXT} }
+                                    }
                                 }
                             }
                         }
                     }
                 } else {
                     Summary {
-                        results: results(),
-                        whys: steps.iter().map(|s| s.why.clone()).collect::<Vec<_>>(),
+                        results: results().iter().map(|r| r.0).collect::<Vec<_>>(),
+                        steps: steps.iter().map(|s| (s.question.clone(), s.why.clone())).collect::<Vec<_>>(),
                         update: item.update.as_ref().map(|u| format!("{} ({})", u.text, u.reference)),
                         on_again: move |_| {
                             step.set(0);
@@ -280,9 +327,20 @@ pub fn CasePlayer(item_id: String, on_back: EventHandler) -> Element {
     }
 }
 
-/// "A"–"E": the key that picks option `i`.
-fn option_key(i: usize) -> &'static str {
-    ["A", "B", "C", "D", "E", "F"].get(i).copied().unwrap_or("")
+/// The order a step's options are shown in, as written indices. Shuffled
+/// per attempt (`seed`) so the key isn't always "A"; steps whose options
+/// refer to each other ("All of these", "A and C") keep their order.
+fn option_order(options: &[String], seed: u64, step: usize) -> Vec<usize> {
+    let mut order: Vec<usize> = (0..options.len()).collect();
+    if exam::shufflable(options) {
+        Rng::new(seed ^ (step as u64).wrapping_mul(0x9E37_79B9_7F4A_7C15)).shuffle(&mut order);
+    }
+    order
+}
+
+/// "A"–"E": the key that picks the option shown at `pos`.
+fn option_key(pos: usize) -> &'static str {
+    ["A", "B", "C", "D", "E", "F"].get(pos).copied().unwrap_or("")
 }
 
 fn option_class(i: usize, picked: Option<usize>, answer: Option<usize>) -> &'static str {
@@ -297,7 +355,8 @@ fn option_class(i: usize, picked: Option<usize>, answer: Option<usize>) -> &'sta
 #[component]
 fn Summary(
     results: Vec<bool>,
-    whys: Vec<String>,
+    /// Each step's question and explanation.
+    steps: Vec<(String, String)>,
     update: Option<String>,
     on_again: EventHandler,
     on_back: EventHandler,
@@ -313,11 +372,14 @@ fn Summary(
         section { class: "card case-summary",
             p { class: "case-score", bdi { dir: "ltr", "{right} / {total}" } " " {tx::SCORE} }
             p { {message} }
-            ol { class: "case-steps-done",
-                for (i, (ok, why)) in results.iter().zip(whys.iter()).enumerate() {
+            ol { class: "case-steps-done", dir: "ltr",
+                for (i, (ok, (question, why))) in results.iter().zip(steps.iter()).enumerate() {
                     li { key: "{i}", class: if *ok { "ok" } else { "miss" },
-                        span { aria_hidden: "true", if *ok { "✓ " } else { "✗ " } }
-                        bdi { "{why}" }
+                        p { class: "case-done-q",
+                            span { aria_hidden: "true", if *ok { "✓ " } else { "✗ " } }
+                            "{question}"
+                        }
+                        p { class: "small muted", "{why}" }
                     }
                 }
             }
@@ -389,6 +451,29 @@ mod tests {
         assert_eq!(option_class(1, Some(0), Some(1)), "option right");
         assert_eq!(option_class(0, Some(0), Some(1)), "option wrong");
         assert_eq!(option_class(2, Some(0), Some(1)), "option dim");
+    }
+
+    fn opts(xs: &[&str]) -> Vec<String> {
+        xs.iter().map(|x| (*x).to_owned()).collect()
+    }
+
+    // Issue #86: the key was "A" in 61% of steps because options were
+    // never shuffled.
+    #[test]
+    fn options_are_shuffled_per_attempt() {
+        let o = opts(&["Propranolol", "Carvedilol", "Band ligation", "TIPS", "Octreotide"]);
+        let a = option_order(&o, 1, 0);
+        assert_eq!(a, option_order(&o, 1, 0), "steady while the step is open");
+        let mut sorted = a.clone();
+        sorted.sort_unstable();
+        assert_eq!(sorted, [0, 1, 2, 3, 4]);
+        // Across attempts the written first option lands in every position.
+        let firsts: std::collections::BTreeSet<usize> =
+            (0..200u64).map(|seed| option_order(&o, seed, 0).iter().position(|&i| i == 0).unwrap()).collect();
+        assert_eq!(firsts.len(), 5);
+        // "All of the above" steps keep their written order.
+        let fixed = opts(&["a", "b", "c", "All of the above"]);
+        assert_eq!(option_order(&fixed, 7, 0), [0, 1, 2, 3]);
     }
 
     #[test]

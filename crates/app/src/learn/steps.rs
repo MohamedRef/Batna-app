@@ -13,6 +13,21 @@ use crate::order::grade::{misplaced, shuffled};
 
 const LETTERS: [&str; 5] = ["A", "B", "C", "D", "E"];
 
+/// The player's footer check button. A step whose answer is complete but
+/// not yet checked (order, sort) puts its check here; the footer then shows
+/// its primary as "صحّح" and calls it. One primary, always in the same place.
+#[derive(Clone, Copy)]
+pub struct CheckBar(pub Signal<Option<Callback<()>>>);
+
+/// Wires a step to the footer: while `can_check` holds, the footer's
+/// primary runs `check`.
+fn use_check_bar(can_check: impl Fn() -> bool + 'static, check: impl FnMut(()) + 'static) {
+    let CheckBar(mut slot) = use_context::<CheckBar>();
+    let check = use_callback(check);
+    use_effect(move || slot.set(can_check().then_some(check)));
+    use_drop(move || slot.set(None));
+}
+
 #[component]
 pub fn StepView(body: StepBody, seed: String, on_answer: EventHandler<bool>) -> Element {
     match body {
@@ -78,7 +93,7 @@ fn Reveal(prompt: String, answer: String, on_answer: EventHandler<bool>) -> Elem
             } else {
                 p { class: "muted small", {tx::THINK_HINT} }
                 button {
-                    class: "ls-btn primary",
+                    class: "btn btn-primary",
                     "aria-keyshortcuts": "Space",
                     onclick: move |_| {
                         open.set(true);
@@ -124,7 +139,7 @@ fn Mnemonic(word: String, parts: Vec<MnemonicPart>, hook: Option<String>) -> Ele
                 }
             }
             if !all {
-                button { class: "ls-link", onclick: move |_| shown.set(vec![true; n]), {tx::SHOW_ALL} }
+                button { class: "btn-link", onclick: move |_| shown.set(vec![true; n]), {tx::SHOW_ALL} }
             }
             if let Some(h) = hook {
                 div { class: "ls-mn-hook", Rich { text: h } }
@@ -223,6 +238,15 @@ fn Order(
     let mut checked = use_signal(|| false);
     let wrong = if checked() { misplaced(&placed.read()) } else { Vec::new() };
     let full = placed.read().len() == n;
+    use_check_bar(
+        move || placed.read().len() == n && !checked(),
+        move |_| {
+            checked.set(true);
+            let right = misplaced(&placed.peek()).is_empty();
+            on_answer.call(right);
+            crate::sounds::play(if right { crate::sounds::Cue::Right } else { crate::sounds::Cue::Wrong });
+        },
+    );
     rsx! {
         div { class: "ls-order",
             p { class: "ls-kicker", {tx::ORDER} }
@@ -255,19 +279,7 @@ fn Order(
                     }
                 }
             } else if !checked() {
-                div { class: "ls-row",
-                    button {
-                        class: "ls-btn primary",
-                        onclick: move |_| {
-                            checked.set(true);
-                            let right = misplaced(&placed.read()).is_empty();
-                            on_answer.call(right);
-                            crate::sounds::play(if right { crate::sounds::Cue::Right } else { crate::sounds::Cue::Wrong });
-                        },
-                        {tx::CHECK_IT}
-                    }
-                    button { class: "ls-link", onclick: move |_| placed.write().clear(), {tx::CLEAR} }
-                }
+                button { class: "btn-link", onclick: move |_| placed.write().clear(), {tx::CLEAR} }
             }
             if checked() {
                 p { class: if wrong.is_empty() { "ls-verdict good" } else { "ls-verdict bad" },
@@ -378,6 +390,16 @@ fn Sort(
     let mut checked = use_signal(|| false);
     let all_in = put.read().iter().all(Option::is_some);
     let wrong = put.read().iter().enumerate().filter(|(i, b)| **b != Some(cards[*i].bin)).count();
+    let key: Vec<usize> = cards.iter().map(|c| c.bin).collect();
+    use_check_bar(
+        move || put.read().iter().all(Option::is_some) && !checked(),
+        move |_| {
+            checked.set(true);
+            let right = put.peek().iter().zip(&key).all(|(p, b)| *p == Some(*b));
+            on_answer.call(right);
+            crate::sounds::play(if right { crate::sounds::Cue::Right } else { crate::sounds::Cue::Wrong });
+        },
+    );
     let mut drop_in = move |bin: usize| {
         if let Some(c) = held() {
             put.write()[c] = Some(bin);
@@ -410,6 +432,8 @@ fn Sort(
                         key: "b{b}",
                         class: "ls-bin",
                         "data-armed": if held().is_some() && !checked() { "yes" } else { "no" },
+                        // The whole bin takes a held card, not only its title.
+                        onclick: move |_| drop_in(b),
                         ondragover: move |e| e.prevent_default(),
                         ondrop: move |e| {
                             e.prevent_default();
@@ -425,7 +449,11 @@ fn Sort(
                                     button {
                                         class: "ls-chiplet",
                                         disabled: checked(),
-                                        onclick: move |_| put.write()[c] = None,
+                                        onclick: move |e| {
+                                            // Back to the pool, without dropping a held card here.
+                                            e.stop_propagation();
+                                            put.write()[c] = None;
+                                        },
                                         Line { text: cards[c].text.clone() }
                                     }
                                     if checked() && cards[c].bin != b {
@@ -435,17 +463,6 @@ fn Sort(
                             }
                         }
                     }
-                }
-            }
-            if all_in && !checked() {
-                button {
-                    class: "ls-btn primary",
-                    onclick: move |_| {
-                        checked.set(true);
-                        on_answer.call(wrong == 0);
-                        crate::sounds::play(if wrong == 0 { crate::sounds::Cue::Right } else { crate::sounds::Cue::Wrong });
-                    },
-                    {tx::CHECK_IT}
                 }
             }
             if checked() {
@@ -488,7 +505,7 @@ fn MiniCase(stem: String, steps: Vec<CaseStep>, seed: String, on_answer: EventHa
                             p { class: "ls-case-q", dir: "ltr", lang: "en", strong { Line { text: s.question.clone() } } }
                             if s.options.is_empty() {
                                 if pick.is_none() {
-                                    button { class: "ls-btn", "aria-keyshortcuts": "Space", onclick: move |_| picks.write()[si] = Some(0), {tx::CASE_SHOW} }
+                                    button { class: "btn btn-secondary", "aria-keyshortcuts": "Space", onclick: move |_| picks.write()[si] = Some(0), {tx::CASE_SHOW} }
                                 }
                             } else {
                                 div { class: "ls-options", dir: "ltr", lang: "en",
@@ -524,7 +541,7 @@ fn MiniCase(stem: String, steps: Vec<CaseStep>, seed: String, on_answer: EventHa
                                 div { class: "ls-why-box ls-pop", dir: "ltr", lang: "en", Rich { text: s.why.clone() } }
                                 if last && !reported() {
                                     button {
-                                        class: "ls-btn",
+                                        class: "btn btn-secondary",
                                         onclick: move |_| {
                                             if si + 1 < n {
                                                 at.set(si + 1);
@@ -576,7 +593,7 @@ fn Table(title: String, columns: Vec<String>, rows: Vec<Vec<String>>, hide: Vec<
                 }
             }
             if hidden_left > 0 {
-                button { class: "ls-link", onclick: move |_| open.set(hide.clone()), {tx::SHOW_ALL} }
+                button { class: "btn-link", onclick: move |_| open.set(hide.clone()), {tx::SHOW_ALL} }
             }
         }
     }

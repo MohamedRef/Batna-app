@@ -17,7 +17,7 @@ Source: Book Lecture 1, Table 2 (p. 14); INR bands: Pugh 1973 as used by AASLD
 
 ## `meld`: MELD
 
-Source: UNOS/OPTN MELD (Kamath 2001); book Lecture 1, p. 14–15
+Source: Formula: UNOS/OPTN MELD (Kamath 2001). The book (Lecture 1, p. 14) names MELD without a formula.
 
 | input | kind | |
 |---|---|---|
@@ -28,7 +28,7 @@ Source: UNOS/OPTN MELD (Kamath 2001); book Lecture 1, p. 14–15
 
 ## `meld_na`: MELD-Na
 
-Source: UNOS/OPTN MELD-Na 2016 (Kim 2008); book Lecture 1, p. 14–15
+Source: Formula: UNOS/OPTN MELD-Na 2016 (Kim 2008). The book (Lecture 1, p. 14) names MELD-Na without a formula.
 
 | input | kind | |
 |---|---|---|

@@ -4,12 +4,13 @@
 // letting go far or fast enough presses the footer's own Back or Continue
 // button, so the player's rules stay in one place: an unanswered question
 // doesn't turn (the page springs back and the footer nudges toward Skip or
-// Check). Drags that start on tiles, figures, tables or fields are theirs.
+// Check). Drags that start on tiles, tables, fields or the open figure
+// viewer are theirs; a figure in the lesson turns the page like text (#338).
 (() => {
   if (window.__batnaSwipe) return;
   window.__batnaSwipe = true;
   const NOT_HERE =
-    ".ls-tile, .ls-chiplet, .ls-pool, .ls-bins, .ls-order, .ls-match, .ls-svg, .ls-table-scroll, .ls-mn-letters, input, textarea, select, [data-noswipe]";
+    ".ls-tile, .ls-chiplet, .ls-pool, .ls-bins, .ls-order, .ls-match, .ls-viewer, .ls-table-scroll, .ls-mn-letters, input, textarea, select, [data-noswipe]";
   const rtl = () => (document.querySelector(".app")?.getAttribute("dir") || document.dir) === "rtl";
   const button = (fwd) => document.querySelector(`.ls-nav [data-nav=${fwd ? "next" : "back"}]:not(:disabled)`);
   let g = null;

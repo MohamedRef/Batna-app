@@ -45,6 +45,19 @@
    inside the card instead of widening the page under 840px. */
 .bank-run { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sp-4); }
 .run-main { display: flex; flex-direction: column; gap: var(--sp-3); min-width: 0; }
+/* Pinned to the very top of `main.content`: it reaches up through the
+   scroller's top padding so nothing shows above it. */
+.run-sticky {
+  position: sticky;
+  inset-block-start: calc(-1 * var(--sp-4));
+  margin-block-start: calc(-1 * var(--sp-4));
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  padding-block: var(--sp-4) var(--sp-2);
+  background: var(--bg);
+}
 .run-head { display: flex; align-items: center; gap: var(--sp-3); }
 .run-head .run-count { font-weight: 700; flex: 1; }
 .run-actions { display: flex; flex-wrap: wrap; gap: var(--sp-2); justify-content: flex-end; }

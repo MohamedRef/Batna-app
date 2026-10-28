@@ -61,8 +61,7 @@ The list lives in `batna_protocol::sync::TABLES`. **A new synced table must be a
 3. Add repo secrets (**Settings › Secrets and variables › Actions**):
    - `CLOUDFLARE_API_TOKEN`: the token.
    - `BATNA_ALLOWED_EMAILS`: your Gmail.
-4. If the token can see more than one Cloudflare account, also add the repo variable `CLOUDFLARE_ACCOUNT_ID`.
-5. Run **Actions › Deploy Batna Cloud › Run workflow**. The run summary shows the Worker URL.
+4. Run **Actions › Deploy Batna Cloud › Run workflow**. The run summary shows the Worker URL.
 
 The first run makes the token signing key inside Cloudflare, so `just cloud-setup` isn't needed. After that, every push to `main` that touches `crates/server` or `crates/protocol` redeploys the hub.
 
@@ -85,8 +84,6 @@ The auto-updating preview APK is built on GitHub, where there is no `.env`. Give
 
 | Kind | Name | Value |
 |---|---|---|
-| Variable | `BATNA_CLOUD_URL` | the Worker URL from §3.3 |
-| Variable | `BATNA_GOOGLE_CLIENT_ID` | the Desktop client's id |
 | Secret | `BATNA_GOOGLE_CLIENT_SECRET` | the Desktop client's secret |
 
 `batna-android-preview.yml` passes them to the build on pushes to `main` only; a PR's build gets none and its APK hides sign-in. The next preview build (and the update it ships) can sign in. GitHub masks the secret in logs, and nothing writes it to the repo. Like every installed-app secret it is readable inside the APK, which Google accepts for Desktop clients.

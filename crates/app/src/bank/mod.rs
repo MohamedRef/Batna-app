@@ -152,7 +152,7 @@ fn record(event: ReviewEvent) {
 /// from the store now, and rebuild the last results from the log the next
 /// time the bank opens.
 pub fn reload_history() {
-    let papers = crate::store::shared().setting(PAPERS_KEY).unwrap_or_default();
+    let papers = stored_papers();
     if HISTORY.peek().papers != papers {
         HISTORY.write().papers = papers;
     }
@@ -307,9 +307,9 @@ fn close(paper: Paper, now: i64) -> Outcome {
         }
         let mut history = HISTORY.write();
         history.record(&paper.questions, &paper.answers);
-        // Start from the stored list, not this run's copy, so a paper
-        // another device finished meanwhile isn't dropped (#32).
-        history.papers = crate::store::shared().setting(PAPERS_KEY).unwrap_or_default();
+        // Start from the stored papers, not this run's copy, so one another
+        // device finished meanwhile shows too (#32).
+        history.papers = stored_papers();
         history.papers.push(outcome.clone());
         let store = crate::store::shared();
         let _ = store.put_setting(&format!("{PAPER_PREFIX}{}.{}", store.device(), outcome.at_ms), &outcome);

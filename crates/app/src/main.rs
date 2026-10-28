@@ -133,6 +133,12 @@ fn App() -> Element {
     reminders::use_local_reminders();
     let current = *ui.screen.read();
     let look = ui.prefs.read().css();
+    // Android's status and navigation bars follow the theme, so True black
+    // keeps the whole OLED screen dark.
+    use_effect(move || {
+        let (day, night) = ui.prefs.read().theme.day_and_night();
+        platform::system_bars::apply(day.bg, night.bg);
+    });
     back::use_back(ui, current, *settings.open.read());
     update::view::use_android_install(ui);
     rsx! {

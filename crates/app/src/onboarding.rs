@@ -358,12 +358,12 @@ fn Questions() -> Element {
     }
 }
 
-/// The page and accent colours (System: Paper and Night), as in Settings › Look.
+/// The page and accent colours (System themes: the day and night page), as
+/// in Settings › Look.
 fn swatch_style(t: Theme) -> String {
-    use batna_core::theme::{NIGHT, PAPER};
     let (a, b) = match t.palette() {
         Some(p) => (p.bg, p.accent),
-        None => (PAPER.bg, NIGHT.bg),
+        None => (t.day_and_night().0.bg, t.day_and_night().1.bg),
     };
     format!("--sw-a:{a};--sw-b:{b};")
 }
@@ -372,8 +372,10 @@ fn theme_name(t: Theme) -> &'static str {
     use crate::i18n::settings as s;
     match t {
         Theme::System => s::THEME_SYSTEM,
+        Theme::SystemBlack => s::THEME_SYSTEM_BLACK,
         Theme::Paper => s::THEME_PAPER,
         Theme::Night => s::THEME_NIGHT,
+        Theme::Black => s::THEME_BLACK,
         Theme::NightShift => s::THEME_SHIFT,
     }
 }

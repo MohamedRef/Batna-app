@@ -714,6 +714,10 @@ pub mod settings {
     pub const THEME_PAPER_SUB: &str = "فاتح وهادي";
     pub const THEME_NIGHT: &str = "ليل";
     pub const THEME_NIGHT_SUB: &str = "غامق";
+    pub const THEME_SYSTEM_BLACK: &str = "زي الجهاز، وبالليل أسود";
+    pub const THEME_SYSTEM_BLACK_SUB: &str = "فاتح بالنهار، وأسود خالص لما الجهاز يبقى غامق";
+    pub const THEME_BLACK: &str = "أسود AMOLED";
+    pub const THEME_BLACK_SUB: &str = "أسود خالص، فبكسلات شاشة الأموليد بتطفي: أريح للعين بالليل وبتوفّر بطارية";
     pub const THEME_SHIFT: &str = "نبطشية";
     pub const THEME_SHIFT_SUB: &str = "غامق ودافي من غير ضوء أزرق، للمذاكرة متأخر قبل النوم";
 

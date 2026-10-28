@@ -11,8 +11,10 @@ use crate::prefs::TextSize;
 fn theme_label(t: Theme) -> (&'static str, &'static str) {
     match t {
         Theme::System => (tx::THEME_SYSTEM, tx::THEME_SYSTEM_SUB),
+        Theme::SystemBlack => (tx::THEME_SYSTEM_BLACK, tx::THEME_SYSTEM_BLACK_SUB),
         Theme::Paper => (tx::THEME_PAPER, tx::THEME_PAPER_SUB),
         Theme::Night => (tx::THEME_NIGHT, tx::THEME_NIGHT_SUB),
+        Theme::Black => (tx::THEME_BLACK, tx::THEME_BLACK_SUB),
         Theme::NightShift => (tx::THEME_SHIFT, tx::THEME_SHIFT_SUB),
     }
 }
@@ -26,12 +28,12 @@ fn size_label(s: TextSize) -> &'static str {
     }
 }
 
-/// Two halves of the swatch: the page and the accent (System: Paper and Night).
+/// Two halves of the swatch: the page and the accent (System themes: the
+/// day and the night page).
 fn swatch_style(t: Theme) -> String {
-    use batna_core::theme::{NIGHT, PAPER};
     let (a, b) = match t.palette() {
         Some(p) => (p.bg, p.accent),
-        None => (PAPER.bg, NIGHT.bg),
+        None => (t.day_and_night().0.bg, t.day_and_night().1.bg),
     };
     format!("--sw-a:{a};--sw-b:{b};")
 }

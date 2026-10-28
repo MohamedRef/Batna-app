@@ -10,10 +10,25 @@
     <!-- A light tap with answer feedback (app.batna.Haptics; Settings › Study
          can turn it off). -->
     <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- Android 13+: daily study reminders are notifications (Reminders.kt). -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- Re-arms the local reminder schedule after a reboot (Reminders.kt). -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <application>
         <service
             android:name="app.batna.OralService"
             android:exported="false"
             android:foregroundServiceType="mediaPlayback" />
+        <!-- Posts a planned reminder; re-arms the schedule after a reboot, an
+             update or a clock or time-zone change. Not exported: these
+             system broadcasts still reach it. -->
+        <receiver android:name="app.batna.ReminderReceiver" android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+                <action android:name="android.intent.action.TIME_SET" />
+            </intent-filter>
+        </receiver>
     </application>
 </manifest>

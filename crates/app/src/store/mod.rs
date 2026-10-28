@@ -191,7 +191,7 @@ impl Store {
         let logged =
             LoggedReview { id: format!("{}-{}-{}", hlc.device, hlc.wall_ms, hlc.counter), hlc, event };
         self.insert_review(&logged)?;
-        sync::enqueue(&self.conn.lock().unwrap(), "review_events", "id", &logged.id)?;
+        sync::enqueue(&self.conn.lock().unwrap(), "review_events", "id", &logged.id, &logged.hlc.device)?;
         Ok(logged)
     }
 
@@ -363,7 +363,7 @@ impl Store {
         };
         // This device's writes go to Batna Cloud too.
         if changed > 0 && hlc.device == self.clock.lock().unwrap().device() {
-            sync::enqueue(&conn, table, key_col, key)?;
+            sync::enqueue(&conn, table, key_col, key, &hlc.device)?;
         }
         Ok(())
     }

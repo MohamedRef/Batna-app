@@ -50,8 +50,9 @@ fn row_json(
     .optional()
 }
 
-/// The op for a row as it stands now.
-fn op_for(table: &str, key_col: &str, key: &str, row: Map<String, Value>) -> Option<Op> {
+/// The op for a row as it stands now. `device` is this device: a row another
+/// device wrote goes as a relay.
+fn op_for(table: &str, key_col: &str, key: &str, row: Map<String, Value>, device: &str) -> Option<Op> {
     let kind = table_kind(table)?;
     let value = Value::Object(row);
     let (_, hlc) = key_and_hlc(&value, key_col)?;
@@ -62,7 +63,8 @@ fn op_for(table: &str, key_col: &str, key: &str, row: Map<String, Value>) -> Opt
         SyncKind::Immutable if deleted => (OpKind::Delete, None),
         SyncKind::Immutable => (OpKind::Append, Some(value)),
     };
-    // Unique per write: every local write takes a fresh HLC.
+    // Unique per write: every write takes a fresh HLC. A relayed row keeps
+    // the id its own device gives it, so the hub takes it only once.
     let id = format!(
         "{}-{}-{}{}",
         hlc.device,
@@ -70,13 +72,24 @@ fn op_for(table: &str, key_col: &str, key: &str, row: Map<String, Value>) -> Opt
         hlc.counter,
         if kind == OpKind::Delete { "-x" } else { "" }
     );
-    Some(Op { id, table: table.into(), row_id: key.into(), kind, hlc, payload })
+    let relay = hlc.device != device;
+    Some(Op { id, table: table.into(), row_id: key.into(), kind, hlc, payload, relay })
 }
 
-/// Queues the current version of a row this device just wrote.
-pub(super) fn enqueue(conn: &Connection, table: &str, key_col: &str, key: &str) -> rusqlite::Result<()> {
+/// Queues the current version of a row: one this device just wrote, or one a
+/// restored backup brought in. Tables that don't sync are skipped.
+pub(super) fn enqueue(
+    conn: &Connection,
+    table: &str,
+    key_col: &str,
+    key: &str,
+    device: &str,
+) -> rusqlite::Result<()> {
+    if table_kind(table).is_none() {
+        return Ok(());
+    }
     let Some(row) = row_json(conn, table, key_col, key)? else { return Ok(()) };
-    let Some(op) = op_for(table, key_col, key, row) else { return Ok(()) };
+    let Some(op) = op_for(table, key_col, key, row, device) else { return Ok(()) };
     conn.execute(
         "INSERT OR IGNORE INTO sync_outbox (op_id, op) VALUES (?1, ?2)",
         params![op.id, serde_json::to_string(&op).unwrap_or_default()],
@@ -101,7 +114,7 @@ pub(super) fn seed(conn: &Connection, device: &str) -> rusqlite::Result<()> {
             stmt.query_map([device], |r| r.get(0))?.collect::<rusqlite::Result<_>>()?
         };
         for key in keys {
-            enqueue(conn, table, &key_col, &key)?;
+            enqueue(conn, table, &key_col, &key, device)?;
         }
     }
     conn.execute("INSERT INTO meta (key, value) VALUES (?1, '1')", [SEEDED])?;
@@ -334,6 +347,7 @@ mod tests {
             row_id: "device_id".into(),
             kind: OpKind::Upsert,
             hlc: Hlc { wall_ms: 1, counter: 0, device: "evil".into() },
+            relay: false,
             payload: Some(serde_json::json!({ "key": "device_id", "value": "stolen" })),
         };
         assert!(s.apply_remote(&[SeqOp { seq: 1, op }], 1).unwrap().is_empty());

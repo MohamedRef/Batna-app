@@ -11,6 +11,7 @@ use batna_protocol::{Hlc, PROTOCOL_VERSION};
 use serde::{Deserialize, Serialize};
 
 use crate::sql::{Row, Sql, SqlError, Value, col};
+use crate::tokens::SERVER_DEVICE_ID;
 
 /// Pages sent per `hello` before the device has to ask again. Keeps one
 /// Durable Object event small even for a fresh install after a long time.
@@ -287,7 +288,10 @@ impl<'a, S: Sql> Hub<'a, S> {
         if !valid_op_id(&op.id) || !valid_row_id(&op.row_id) {
             return reject(&op, RejectReason::InvalidId);
         }
-        if op.hlc.device != device {
+        // A relay passes on rows another device wrote (a restored backup);
+        // no device may write as the server.
+        let relayed = op.relay && valid_op_id(&op.hlc.device) && op.hlc.device != SERVER_DEVICE_ID;
+        if op.hlc.device != device && !relayed {
             return reject(&op, RejectReason::WrongDevice);
         }
         if op.hlc.wall_ms > now_ms as i64 + MAX_CLOCK_SKEW_MS {
@@ -383,6 +387,7 @@ fn row_to_op(r: &Row) -> Result<SeqOp, SqlError> {
                 device: text(7, "device")?,
             },
             payload,
+            relay: false,
         },
     })
 }
@@ -409,6 +414,7 @@ mod tests {
             row_id: item.into(),
             kind: OpKind::Upsert,
             hlc: Hlc { wall_ms, counter: 0, device: device.into() },
+            relay: false,
             payload: Some(json!({ "item_id": item, "status": status })),
         }
     }
@@ -600,6 +606,39 @@ mod tests {
         let out = send(&hub, &mut phone, &ClientMsg::Push { batch: 1, ops: vec![op] });
         let ServerMsg::Ack { rejected, .. } = &out.replies[0] else { panic!() };
         assert_eq!(rejected[0].reason, RejectReason::WrongDevice);
+        let mut relayed = word("y", "server", NOW_I, "rumah", "known");
+        relayed.relay = true;
+        let out = send(&hub, &mut phone, &ClientMsg::Push { batch: 2, ops: vec![relayed] });
+        let ServerMsg::Ack { rejected, .. } = &out.replies[0] else { panic!() };
+        assert_eq!(rejected[0].reason, RejectReason::WrongDevice);
+    }
+
+    #[test]
+    fn a_restored_backup_relays_another_devices_rows_once() {
+        let db = MemSql::new();
+        let hub = Hub::new(&db).unwrap();
+        let mut tab = conn("tab");
+        send(&hub, &mut tab, &hello(0));
+        // The old phone's verdict, restored on the tablet and passed on.
+        let mut old = word("oldphone-5-0", "oldphone", NOW_I - 1000, "rumah", "known");
+        old.relay = true;
+        let out = send(&hub, &mut tab, &ClientMsg::Push { batch: 1, ops: vec![old.clone()] });
+        let ServerMsg::Ack { done, rejected, .. } = &out.replies[0] else { panic!("{out:?}") };
+        assert_eq!((done.len(), rejected.len()), (1, 0));
+        assert_eq!(out.broadcast[0].op.hlc.device, "oldphone");
+        // The old phone signs in later and sends the same write: nothing new.
+        let mut phone = conn("oldphone");
+        send(&hub, &mut phone, &hello(1));
+        old.relay = false;
+        let out = send(&hub, &mut phone, &ClientMsg::Push { batch: 1, ops: vec![old] });
+        assert!(out.broadcast.is_empty());
+        // A relay never beats a newer write.
+        let newer = word("tab-9", "tab", NOW_I, "rumah", "unknown");
+        send(&hub, &mut tab, &ClientMsg::Push { batch: 2, ops: vec![newer] });
+        let mut stale = word("oldphone-1-0", "oldphone", NOW_I - 5000, "rumah", "known");
+        stale.relay = true;
+        let out = send(&hub, &mut tab, &ClientMsg::Push { batch: 3, ops: vec![stale] });
+        assert!(out.broadcast.is_empty());
     }
 
     #[test]
@@ -614,6 +653,7 @@ mod tests {
             row_id: "tab-1-0".into(),
             kind: OpKind::Append,
             hlc: Hlc { wall_ms: NOW_I, counter: 0, device: "tab".into() },
+            relay: false,
             payload: Some(json!({ "item_id": "hb.L01.001", "took_ms": 0.5 })),
         };
         let erase = Op { id: "s2".into(), kind: OpKind::Delete, payload: None, ..stroke.clone() };

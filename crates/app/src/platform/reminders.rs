@@ -14,6 +14,15 @@ pub fn schedule(json: &str) {
     let _ = json;
 }
 
+/// The fallback the platform arms once the planned reminders run out
+/// (`plan::Repeat` as JSON, `{}` for none).
+pub fn repeat(json: &str) {
+    #[cfg(target_os = "android")]
+    report(android::string_call("repeat", json));
+    #[cfg(not(target_os = "android"))]
+    let _ = json;
+}
+
 /// Whether notifications are allowed for Batna (None where unknown).
 pub fn enabled() -> Option<bool> {
     #[cfg(target_os = "android")]
@@ -83,11 +92,16 @@ mod android {
     }
 
     pub fn schedule(json: &str) -> Result<(), String> {
+        string_call("schedule", json)
+    }
+
+    /// A `(Context, String) -> Unit` method.
+    pub fn string_call(name: &'static str, json: &str) -> Result<(), String> {
         bridge(|env, class, activity| {
             let json = env.new_string(json)?;
             env.call_static_method(
                 class,
-                jni_str!("schedule"),
+                method(name),
                 jni_sig!("(Landroid/content/Context;Ljava/lang/String;)V"),
                 &[JValue::Object(activity), JValue::Object(&json)],
             )
@@ -124,6 +138,8 @@ mod android {
 
     fn method(name: &'static str) -> &'static JNIStr {
         match name {
+            "schedule" => jni_str!("schedule"),
+            "repeat" => jni_str!("repeat"),
             "enabled" => jni_str!("enabled"),
             "batteryUnrestricted" => jni_str!("batteryUnrestricted"),
             "requestPermission" => jni_str!("requestPermission"),

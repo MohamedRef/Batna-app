@@ -8,6 +8,7 @@ mod question;
 mod result;
 mod setup;
 
+use std::sync::atomic::{AtomicBool, Ordering};
 use std::time::{SystemTime, UNIX_EPOCH};
 
 use batna_core::content::Body;
@@ -15,13 +16,14 @@ use batna_core::content::{Item, Lecture};
 use batna_core::exam::{self, Answer, History, Mode, Outcome, Question};
 use batna_core::review::{Grade, Origin, ReviewEvent, StudyStoreHandle};
 use dioxus::prelude::*;
+use serde::{Deserialize, Serialize};
 
 use crate::content::Library;
 
 const BANK_CSS: &str = include_str!("bank.css");
 
 /// A paper in progress.
-#[derive(Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Paper {
     pub mode: Mode,
     pub questions: Vec<Question>,
@@ -85,6 +87,7 @@ pub static PAUSED: GlobalSignal<Option<Paper>> = Signal::global(|| None);
 #[component]
 pub fn Bank() -> Element {
     use_hook(load_history);
+    use_hook(restore_open);
     let phase = match &*PHASE.read() {
         Phase::Setup => 0,
         Phase::Running(_) => 1,
@@ -236,6 +239,43 @@ pub fn start(mode: Mode, questions: Vec<Question>) {
         *PHASE.write() = Phase::Running(Paper::new(mode, questions));
         to_top();
     }
+    keep_open();
+}
+
+/// The open timed paper (running or left), kept on this device so it
+/// survives Android killing the app (#255). Device-only: a paper half done
+/// on the phone is not one to continue on the tablet.
+const OPEN_KEY: &str = "bank.open_paper";
+/// Whether `OPEN_KEY` may hold a paper, so tutor clicks don't rewrite an
+/// empty key every time.
+static OPEN_STORED: AtomicBool = AtomicBool::new(true);
+
+/// Write the open timed paper, or clear it once none is open. Called after
+/// every change to a paper: answers, flags, moves, leave, submit.
+fn keep_open() {
+    let open = match (&*PHASE.peek(), &*PAUSED.peek()) {
+        (_, Some(p)) => Some(p.clone()),
+        (Phase::Running(p), None) if p.mode.timed() => Some(p.clone()),
+        _ => None,
+    };
+    if open.is_none() && !OPEN_STORED.load(Ordering::Relaxed) {
+        return;
+    }
+    OPEN_STORED.store(open.is_some(), Ordering::Relaxed);
+    let _ = crate::store::shared().put_local_setting(OPEN_KEY, &open);
+}
+
+/// Once per launch: a timed paper the app was killed in comes back as the
+/// left paper, with "continue" and "submit now". Its clock kept running,
+/// as it does after Leave.
+fn restore_open() {
+    if PAUSED.peek().is_some() || !matches!(*PHASE.peek(), Phase::Setup) {
+        return;
+    }
+    match crate::store::shared().local_setting::<Option<Paper>>(OPEN_KEY).flatten() {
+        Some(p) if p.mode.timed() && !p.questions.is_empty() => *PAUSED.write() = Some(p),
+        _ => OPEN_STORED.store(false, Ordering::Relaxed),
+    }
 }
 
 /// A new bank view (paper, result, setup) opens at its top, not at the
@@ -276,6 +316,7 @@ pub fn choose(option: usize) {
         }
         HISTORY.write().record(std::slice::from_ref(&q), std::slice::from_ref(&a));
     }
+    keep_open();
 }
 
 /// Move to question `to` (clamped).
@@ -290,6 +331,8 @@ pub fn go(to: usize) {
     };
     if overdue {
         finish();
+    } else {
+        keep_open();
     }
 }
 
@@ -298,6 +341,7 @@ pub fn toggle_flag() {
         let at = p.at;
         p.answers[at].flagged ^= true;
     }
+    keep_open();
 }
 
 /// End the paper: score it, and for timed papers send every answer to
@@ -313,6 +357,7 @@ pub fn finish() {
     let outcome = close(paper.clone(), now);
     *PHASE.write() = Phase::Done { paper, outcome };
     to_top();
+    keep_open();
 }
 
 /// Score a paper; for timed ones, record the answers and save the result.
@@ -351,6 +396,7 @@ pub fn leave() {
     *phase = Phase::Setup;
     drop(phase);
     to_top();
+    keep_open();
 }
 
 /// Back to the paper he left. Its clock kept running; past the limit it is
@@ -419,6 +465,19 @@ mod tests {
     fn papers_from_the_legacy_list_and_per_paper_keys_merge_once() {
         let merged = merge_papers(vec![outcome(30, 1), outcome(10, 2), outcome(30, 1), outcome(20, 3)]);
         assert_eq!(merged.iter().map(|o| o.at_ms).collect::<Vec<_>>(), vec![10, 20, 30]);
+    }
+
+    #[test]
+    fn an_open_paper_round_trips_through_json() {
+        let q =
+            Question { id: "x".into(), lecture: "hb.L01".into(), topic: None, answer: 0, order: vec![1, 0] };
+        let mut p = Paper::new(Mode::Mock, vec![q.clone(), q]);
+        p.answers[1].chosen = Some(0);
+        p.answers[0].flagged = true;
+        p.at = 1;
+        let json = serde_json::to_string(&Some(p.clone())).unwrap();
+        assert_eq!(serde_json::from_str::<Option<Paper>>(&json).unwrap(), Some(p));
+        assert_eq!(serde_json::from_str::<Option<Paper>>("null").unwrap(), None);
     }
 
     #[test]

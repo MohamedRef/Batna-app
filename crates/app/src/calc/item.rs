@@ -58,7 +58,7 @@ pub fn CalcItem(item_id: String, on_back: EventHandler) -> Element {
         let outcome = outcome.clone();
         move |_| {
             let t = typed.read().trim().to_owned();
-            let right = outcome.as_ref().is_some_and(|o| calc::expect_matches(o, &t))
+            let right = outcome.as_ref().is_some_and(|o| calc::answer_matches(o, &t))
                 || t.eq_ignore_ascii_case(expect_text.trim());
             computed.set(Computed::Typed(right));
         }

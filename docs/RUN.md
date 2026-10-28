@@ -12,7 +12,9 @@
 3. `just android` builds and installs a debug build. The app id is `app.batna`, so it sits next to Kabar without touching it.
 
 ### Kotlin glue (`android/`)
-`android/` at the repo root is a small Gradle library module with the Kotlin that Rust calls through JNI (screen-off oral mode and vibration now; reminders, export and updates later). Nothing to configure: the `#[manganis::ffi("../../android")]` marker in `crates/app/src/platform/background.rs` makes `dx` 0.7.10 copy the folder into its generated Gradle project, add it as an app dependency, and merge `android/src/main/AndroidManifest.xml` (permissions and receivers the glue needs) into the app's manifest.
+`android/` at the repo root is a small Gradle library module with the Kotlin that Rust calls through JNI (screen-off oral mode, vibration and study reminders; export and updates later). Nothing to configure: the `#[manganis::ffi("../../android")]` marker in `crates/app/src/platform/background.rs` makes `dx` 0.7.10 copy the folder into its generated Gradle project, add it as an app dependency, and merge `android/src/main/AndroidManifest.xml` (permissions and receivers the glue needs) into the app's manifest.
+
+Study reminders on the Mac come from UNUserNotificationCenter and only work from the bundled Batna.app (`cargo run` / `just run` has no bundle, so Settings › Reminders says reminders need the installed app). macOS asks for permission the first time the Mac is chosen as the device that rings.
 
 `scripts/android-check-apk.sh <apk>` fails if the Kotlin classes or their permissions are missing from an APK; CI runs it on every change to `android/`. When you add a Kotlin class that Rust looks up by name, add it to `CLASSES` in that script. `adb logcat` shows Kotlin errors on the device.
 

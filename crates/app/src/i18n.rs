@@ -1131,7 +1131,10 @@ pub mod remind {
     pub const TITLE: &str = "باطنة";
     pub const SECTION: &str = "التذكير";
     pub const SECTION_SUB: &str = "تذكير هادي بمراجعة اليوم";
-    pub const PHONE_ONLY: &str = "التذكير بيرن على الموبايل. على الماك مفيش تذكير لسه.";
+    pub const PHONE_ONLY: &str =
+        "التذكير بيرن من تطبيق باطنة المتثبّت على الموبايل أو الماك، مش من نسخة التطوير.";
+    pub const MAC_HINT: &str =
+        "على الماك الإشعار بيظهر حتى لو باطنة مقفولة. لو ما ظهرش، اسمح لباطنة من إعدادات النظام › الإشعارات.";
     pub const DAILY: &str = "تذكير المذاكرة اليومي";
     pub const DAILY_BODY: &str = "إشعار واحد في المعاد اللي تختاره، فيه عدد المراجعات المستنياك.";
     pub const ON: &str = "شغّال";

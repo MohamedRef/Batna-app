@@ -9,6 +9,8 @@
    inside the chip instead of running off the card. */
 .bank .chip { white-space: normal; overflow-wrap: anywhere; max-inline-size: 100%; text-align: start; line-height: 1.35; }
 .bank .chip.toggle { display: inline-flex; align-items: center; gap: var(--sp-2); }
+/* At most two lines; the full title is the chip's tooltip. */
+.chip-label { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; min-inline-size: 0; }
 .chip.toggle {
   cursor: pointer;
   min-height: 40px;

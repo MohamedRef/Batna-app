@@ -7,6 +7,7 @@
 use batna_core::lesson::{Lesson, Step, StepBody};
 use dioxus::prelude::*;
 
+use super::practice::{Tries, TryLog};
 use super::steps::{CheckBar, StepAt, StepView};
 use super::text::Line;
 use super::{Mark, VIEW, View, close, mark, next_lesson, save_mark, set_view};
@@ -26,6 +27,10 @@ struct Pos {
     /// too (they gate Continue), but only question steps are scored.
     answers: Vec<Option<bool>>,
     skipped: Vec<bool>,
+    /// Try steps part-way through: the cards already graded, so leaving
+    /// and coming back never grades a card twice (#318).
+    #[serde(default)]
+    tries: Vec<TryLog>,
 }
 
 fn save_pos(id: &str, pos: &Pos) {
@@ -59,6 +64,34 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
         use_signal(|| if start.answers.len() == n { start.answers.clone() } else { vec![None::<bool>; n] });
     let mut skipped =
         use_signal(|| if start.skipped.len() == n { start.skipped.clone() } else { vec![false; n] });
+    let tries = use_signal(|| {
+        let mut t = start.tries.clone();
+        t.resize(n, TryLog::default());
+        t
+    });
+    // Saves where he is now: after every answer and every graded card, not
+    // only on Back/Continue, since the lesson can close mid-step (the page
+    // chip's lecture, the rail).
+    let save_now = {
+        let id = id.clone();
+        move || {
+            if *at.peek() < n {
+                save_pos(
+                    &id,
+                    &Pos {
+                        at: *at.peek(),
+                        answers: answers.peek().clone(),
+                        skipped: skipped.peek().clone(),
+                        tries: tries.peek().clone(),
+                    },
+                );
+            }
+        }
+    };
+    use_context_provider({
+        let save_now = save_now.clone();
+        move || Tries { log: tries, save: Callback::new(move |_| save_now()) }
+    });
     let check = use_signal(|| vec![None::<Callback<()>>; n]);
     use_context_provider(|| CheckBar(check));
     // Steps stay mounted once seen (hidden when not current), so Back shows
@@ -98,7 +131,12 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
             } else {
                 save_pos(
                     &id,
-                    &Pos { at: to, answers: answers.read().clone(), skipped: skipped.read().clone() },
+                    &Pos {
+                        at: to,
+                        answers: answers.read().clone(),
+                        skipped: skipped.read().clone(),
+                        tries: tries.read().clone(),
+                    },
                 );
             }
             document::eval(
@@ -169,12 +207,16 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                     step: st.clone(),
                     seed: format!("{}#{}", lesson.id, k),
                     try_done: tried_before[k] && matches!(st.body, StepBody::Try { .. }),
-                    on_answer: move |right: bool| {
-                        let mut a = answers.write();
-                        if a[k].is_none() {
-                            a[k] = Some(right);
-                            // Answered after all: it counts.
-                            skipped.write()[k] = false;
+                    on_answer: {
+                        let save_now = save_now.clone();
+                        move |right: bool| {
+                            let fresh = answers.peek()[k].is_none();
+                            if fresh {
+                                answers.write()[k] = Some(right);
+                                // Answered after all: it counts.
+                                skipped.write()[k] = false;
+                                save_now();
+                            }
                         }
                     },
                 }

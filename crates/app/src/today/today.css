@@ -21,7 +21,8 @@
 
 .in-progress { display: flex; flex-direction: column; gap: var(--sp-2); }
 .progress-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-2); }
-@media (min-width: 840px) { .progress-list { grid-template-columns: 1fr 1fr; } }
+/* Two across in tablet portrait; from 840px Today is two columns already. */
+@media (min-width: 600px) and (max-width: 839.98px) { .progress-list { grid-template-columns: 1fr 1fr; } }
 .progress-row {
   display: flex;
   align-items: center;

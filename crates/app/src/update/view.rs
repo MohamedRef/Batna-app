@@ -9,7 +9,7 @@ use dioxus::prelude::*;
 
 use super::{Failure, Mode, Off, Offer, Phase, Status, Updater};
 use crate::i18n::update as tx;
-use crate::settings::DeviceOnly;
+use crate::settings::{DeviceOnly, Section, SettingsNav};
 use crate::{Screen, Ui};
 
 const UPDATE_CSS: &str = r#"
@@ -20,6 +20,8 @@ const UPDATE_CSS: &str = r#"
 .update-banner { flex-direction: row; flex-wrap: wrap; align-items: center; gap: var(--sp-2) var(--sp-3);
   border-inline-start: 4px solid var(--accent); margin-block-end: var(--sp-3); }
 .update-banner .ub-text { flex: 1 1 14rem; min-inline-size: 0; display: grid; gap: var(--sp-1); }
+.update-toggle { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); }
+.update-toggle-text { display: grid; gap: var(--sp-1); }
 "#;
 
 /// The updater's status, following its thread.
@@ -45,9 +47,8 @@ fn work(f: impl FnOnce(&'static Updater) + Send + 'static) {
     }
 }
 
-/// What's new, Egyptian Arabic first.
 fn notes(o: &Offer) -> String {
-    [&o.notes.ar_eg, &o.notes.en].into_iter().find(|s| !s.trim().is_empty()).cloned().unwrap_or_default()
+    super::notes_of(o)
 }
 
 fn megabytes(bytes: u64) -> String {
@@ -117,10 +118,16 @@ pub fn UpdatesSection() -> Element {
             h2 { id: "updates-title", {tx::TITLE} }
             p {
                 span { class: "muted", {tx::THIS_BUILD} ": " }
-                bdi { dir: "ltr",
-                    {env!("CARGO_PKG_VERSION")}
-                    if build > 0 { " · {tx::BUILD} {build}" }
-                    if let Some(c) = commit { " · {c}" }
+                // Each Latin piece isolated on its own, so the Arabic word
+                // "build" doesn't reorder the numbers around it.
+                bdi { dir: "ltr", {env!("CARGO_PKG_VERSION")} }
+                if build > 0 {
+                    " · {tx::BUILD} "
+                    bdi { dir: "ltr", "{build}" }
+                }
+                if let Some(c) = commit {
+                    " · "
+                    bdi { dir: "ltr", "{c}" }
                 }
             }
             if let Some(off) = off {
@@ -166,6 +173,26 @@ pub fn UpdatesSection() -> Element {
                                 span { class: "choice-title", {mode_label(m).0} }
                                 span { class: "muted small", {mode_label(m).1} }
                             }
+                        }
+                    }
+                }
+            }
+            if s.prefs.mode != Mode::Off {
+                section { class: "card",
+                    label { class: "update-toggle",
+                        span { class: "update-toggle-text",
+                            span { {tx::NOTIFY} DeviceOnly {} }
+                            span { class: "muted small", {tx::NOTIFY_SUB} }
+                        }
+                        input {
+                            r#type: "checkbox",
+                            role: "switch",
+                            checked: s.prefs.notify,
+                            onchange: move |e: FormEvent| {
+                                if let Some(u) = super::get() {
+                                    u.set_notify(e.checked());
+                                }
+                            },
                         }
                     }
                 }
@@ -338,6 +365,34 @@ pub fn UpdateBanner() -> Element {
             }
         }
     }
+}
+
+/// Follows a tap on the "new version" notification (Android): Settings ›
+/// Updates opens, and the notification's button starts the download or the
+/// install. Mounted once in the shell.
+pub fn use_update_notice_taps(nav: SettingsNav) {
+    use_future(move || async move {
+        if !cfg!(target_os = "android") || super::get().is_none() {
+            return;
+        }
+        let mut eval = document::eval(
+            r#"
+            const send = () => { if (!document.hidden) dioxus.send(true); };
+            document.addEventListener("visibilitychange", send);
+            send();
+            await new Promise(() => {});
+            "#,
+        );
+        while eval.recv::<bool>().await.is_ok() {
+            let Some(tap) = crate::platform::update_notice::take_tap() else { continue };
+            nav.show(Some(Section::Updates));
+            match tap.as_str() {
+                "download" => work(Updater::download),
+                "install" => work(Updater::install),
+                _ => {}
+            }
+        }
+    });
 }
 
 /// Whether installing now could cut a study session short: never in the

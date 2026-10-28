@@ -43,6 +43,25 @@
   .settings-window[data-drilled="true"] .settings-sections,
   .settings-window[data-drilled="true"] .settings-title-list { display: none; }
 }
+/* Phone: the header blends into the page and the section list is one
+   grouped block with a chevron on each row (shape.css language). */
+@media (max-width: 599.98px) {
+  .settings-head { background: var(--bg); border-block-end-color: transparent; }
+  .settings-sections {
+    margin: var(--sp-2) var(--sp-3) var(--sp-4); align-self: start;
+    border: 1px solid var(--line-soft, var(--line)); border-radius: var(--radius-lg, var(--radius));
+    overflow-y: auto; max-block-size: 100%;
+  }
+  .settings-sections button { position: relative; padding-inline-end: calc(var(--sp-4) + 1rem); min-block-size: var(--row); justify-content: center; }
+  .settings-sections button:last-child { border-block-end: 0; }
+  .settings-sections button { border-block-end-color: var(--line-soft, var(--line)); }
+  .settings-sections button::after {
+    content: ""; position: absolute; inset-inline-end: var(--sp-4); inset-block-start: 50%;
+    inline-size: 0.5rem; block-size: 0.5rem; margin-block-start: -0.25rem;
+    border-block-start: 2px solid var(--muted); border-inline-start: 2px solid var(--muted);
+    transform: rotate(-135deg);
+  }
+}
 @media (min-width: 600px) {
   .settings-window {
     inset-block: 4vh; inset-inline: max(var(--sp-6), calc((100vw - 56rem) / 2));

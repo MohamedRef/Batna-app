@@ -194,3 +194,20 @@
   box-shadow: 0 12px 40px rgb(0 0 0 / 0.25);
 }
 .bank-sheet .start-row .btn { flex: 1 1 10rem; }
+
+/* ---------- tablet ---------- */
+/* From 600px the practice Start buttons stay at the foot of the screen
+   while the filters scroll (desk.css .tab-cols puts the mock exam beside
+   them from 840px). */
+@media (min-width: 600px) {
+  .bank-cols .tab-main .start-row {
+    position: sticky;
+    inset-block-end: 0;
+    z-index: 1;
+    background: var(--surface);
+    padding-block: var(--sp-2);
+    border-block-start: 1px solid var(--line);
+    /* Covers the strip of padding under it, so no chip shows below. */
+    box-shadow: 0 var(--sp-6) 0 var(--surface);
+  }
+}

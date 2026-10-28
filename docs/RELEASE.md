@@ -52,7 +52,7 @@ preview workflow refuses to publish a build below the live feed's. Only move to 
 | Signed release APK | `just apk` | `dist/android/batna.apk` (arm64, not debuggable, R8, versionCode from the version) |
 | Install on a device | `just devices`, then `just install-android <serial>` | Installs over the previous Batna signed with the same key |
 | Mac app | `just bundle-mac` | `dist/mac/Batna.app`, signed "Batna Code Signing" once that exists |
-| CI preview APK | Every push to `main` (`.github/workflows/batna-android-preview.yml`) | `batna-preview.apk` on the `batna-preview` prerelease. Signed with a throwaway preview key kept in the Actions cache (never Kabar's, never the release key). It updates itself from the same release (§5). |
+| CI preview APK | Every push to `main` (`.github/workflows/batna-android-preview.yml`) | `batna-preview.apk` on the `batna-preview` prerelease. Signed with a throwaway preview key kept in the Actions cache (never Kabar's, never the release key). A run on Mondays and Thursdays keeps the keys from expiring, and a run fails rather than silently making new keys once previews are out. If it ever says a key is missing, the only way on is Actions › Android preview APK › Run workflow with **new_keys** ticked, then uninstall the old preview once. It updates itself from the same release (§5). |
 
 A preview APK and a release APK carry different keys. Uninstall one before
 installing the other, or keep only the release build.

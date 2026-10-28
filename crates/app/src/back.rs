@@ -9,8 +9,8 @@
 //!    confirm), clicked as if tapped;
 //! 2. the previous screen, then Today.
 //!
-//! On Today with nothing open no entry is kept, so Back leaves Batna as
-//! Android users expect.
+//! On Today with nothing open no entry is kept (one left over from a sheet
+//! closed by tap is popped), so Back leaves Batna as Android users expect.
 // adapted from kabar-app main: crates/app/src/back.rs
 
 use std::cell::{Cell, RefCell};
@@ -25,13 +25,28 @@ window.__batnaBackSend = (m) => dioxus.send(m);
 if (!window.__batnaBackInit) {
   window.__batnaBackInit = true;
   let trapped = false;
+  // Set while we pop our own trap: that popstate isn't a Back press.
+  let untrapping = false;
   window.__batnaTrap = () => {
     if (!trapped) {
       history.pushState({ batna: true }, "");
       trapped = true;
     }
   };
+  // Nowhere left to go back to (an overlay closed by tap on Today): drop
+  // the trap, so the next Back leaves Batna instead of doing nothing.
+  window.__batnaUntrap = () => {
+    if (trapped) {
+      trapped = false;
+      untrapping = true;
+      history.back();
+    }
+  };
   window.addEventListener("popstate", () => {
+    if (untrapping) {
+      untrapping = false;
+      return;
+    }
     trapped = false;
     // The last visible one: a control hidden at this width doesn't count.
     const targets = [...document.querySelectorAll('[data-back="true"]')]
@@ -97,21 +112,32 @@ impl Trail {
 pub fn use_back(ui: Ui, current: Screen, overlay_open: bool) {
     let trail = use_hook(|| Rc::new(RefCell::new(Trail::default())));
     let armed = use_hook(|| Rc::new(Cell::new(None::<(Screen, bool)>)));
+    let wants_trap = use_hook(|| Rc::new(Cell::new(false)));
 
-    // Re-arm the trap whenever the screen or an overlay changes.
+    // Re-arm the trap whenever the screen or an overlay changes, or drop it
+    // when there is nowhere left to go back to.
     let can_back = trail.borrow_mut().visit(current) || overlay_open;
-    if armed.replace(Some((current, overlay_open))) != Some((current, overlay_open)) && can_back {
-        document::eval("window.__batnaTrap && window.__batnaTrap();");
+    wants_trap.set(can_back);
+    if armed.replace(Some((current, overlay_open))) != Some((current, overlay_open)) {
+        document::eval(if can_back {
+            "window.__batnaTrap && window.__batnaTrap();"
+        } else {
+            "window.__batnaUntrap && window.__batnaUntrap();"
+        });
     }
 
     use_future({
         let trail = trail.clone();
         move || {
             let trail = trail.clone();
+            let wants_trap = wants_trap.clone();
             async move {
                 let mut eval = document::eval(BACK_JS);
-                // The first screen may already have somewhere to go.
-                document::eval("window.__batnaTrap && window.__batnaTrap();");
+                // The first screen may already have somewhere to go (the
+                // evals above ran before the script was there).
+                if wants_trap.get() {
+                    document::eval("window.__batnaTrap && window.__batnaTrap();");
+                }
                 while eval.recv::<bool>().await.is_ok() {
                     let now = *ui.screen.peek();
                     let to = trail.borrow_mut().back(now);

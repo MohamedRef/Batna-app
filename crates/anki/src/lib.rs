@@ -38,7 +38,8 @@ const LETTERS: &[u8] = b"ABCDEFGH";
 /// What decides which items go in, and how they are tagged.
 #[derive(Default)]
 pub struct Options<'a> {
-    /// Item ids Mohamed approved: tagged `approved`.
+    /// Item ids Mohamed approved: tagged `approved`, like items whose file
+    /// status is `approved`.
     pub approved: Option<&'a BTreeSet<String>>,
     /// Item ids he marked ✗ wrong: left out.
     pub wrong: Option<&'a BTreeSet<String>>,
@@ -152,7 +153,8 @@ pub fn build(lectures: &[Lecture], opts: &Options<'_>) -> Deck {
             // An edit is his own text, not yet checked against the book.
             let (item, approved) = match opts.edits.and_then(|e| e.get(&item.id)) {
                 Some(edited) => (edited, false),
-                None => (item, has(opts.approved, &item.id)),
+                // Approved in the content file, or by his ✓ / approved.txt (#254).
+                None => (item, item.status == Status::Approved || has(opts.approved, &item.id)),
             };
             let mut notes = notes_for(item, lec, did, approved);
             if draft {
@@ -583,6 +585,17 @@ mod tests {
         assert_eq!(option_order("hb.L01.001", &s(&["a", "b", "c", "All of the above"])), [0, 1, 2, 3]);
         assert_eq!(option_order("hb.L01.001", &s(&["HPS", "PoPH", "Both", "Neither"])), [0, 1, 2, 3]);
         assert_eq!(option_order("hb.L01.001", &s(&["Above 30", "Above 10", "Above 20"])), [1, 2, 0]);
+    }
+
+    #[test]
+    fn approved_status_in_the_file_tags_approved() {
+        let mut lec = fixture();
+        lec.items[1].status = Status::Approved;
+        let deck = build(std::slice::from_ref(&lec), &Options::default());
+        let id = lec.items[1].id.clone();
+        let note = deck.notes.iter().find(|n| n.fields[4] == id).unwrap();
+        assert!(note.tags.contains(&"approved".to_string()), "{:?}", note.tags);
+        assert!(deck.notes[0].tags.contains(&"unverified".to_string()));
     }
 
     #[test]

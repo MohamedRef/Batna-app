@@ -434,6 +434,63 @@ fn contrasting(a: &str, b: &str) -> bool {
 /// Without numbers: the words must match, ignoring case and punctuation; a
 /// small typo is Close.
 pub fn check_typed(expected: &str, typed: &str) -> Match {
+    let whole = check_one(expected, typed);
+    if whole != Match::Wrong {
+        return whole;
+    }
+    // A list answer ("vitamin A and retinoids", "ALT or AST"): every listed
+    // part typed, in any order, is Right; some of an "and" list is Close; any
+    // one of an "or" list is as good as that part.
+    let (exp_parts, either) = list_parts(expected);
+    if exp_parts.len() < 2 || exp_parts.iter().any(|p| p.chars().any(|c| c.is_ascii_digit())) {
+        return whole;
+    }
+    let (got_parts, _) = list_parts(typed);
+    let mut covered = vec![Match::Wrong; exp_parts.len()];
+    for g in &got_parts {
+        let best =
+            exp_parts.iter().enumerate().map(|(i, e)| (i, check_one(e, g))).min_by_key(|(_, m)| match m {
+                Match::Right => 0,
+                Match::Close => 1,
+                Match::Wrong => 2,
+            });
+        match best {
+            Some((i, m)) if m != Match::Wrong => {
+                if covered[i] != Match::Right {
+                    covered[i] = m;
+                }
+            }
+            // Something typed that is not on the list.
+            _ => return Match::Wrong,
+        }
+    }
+    let hits: Vec<Match> = covered.into_iter().filter(|m| *m != Match::Wrong).collect();
+    if hits.is_empty() {
+        Match::Wrong
+    } else if (either || hits.len() == exp_parts.len()) && hits.iter().all(|m| *m == Match::Right) {
+        Match::Right
+    } else {
+        Match::Close
+    }
+}
+
+/// Splits "a, b and c" / "a or b" / "a/b" into its parts, and says whether
+/// they are alternatives ("or", "/").
+fn list_parts(s: &str) -> (Vec<String>, bool) {
+    let lower = s.to_lowercase();
+    let either = lower.contains(" or ") || lower.contains('/');
+    let parts = lower
+        .replace(" and ", ",")
+        .replace(" or ", ",")
+        .replace(['/', ';', '&'], ",")
+        .split(',')
+        .map(|p| p.trim().to_string())
+        .filter(|p| !p.is_empty())
+        .collect();
+    (parts, either)
+}
+
+fn check_one(expected: &str, typed: &str) -> Match {
     let exp = tokens(expected);
     let got = tokens(typed);
     if got.is_empty() {
@@ -833,6 +890,18 @@ mod tests {
         assert_eq!(check_typed("10,000,000 copies/mL", "10000000"), Match::Right);
         assert_eq!(check_typed("1,000.5", "1000.5"), Match::Right);
         assert_eq!(check_typed("1,5", "1.5"), Match::Right);
+    }
+
+    #[test]
+    fn part_of_a_list_answer_is_close() {
+        let e = "vitamin A and retinoids";
+        assert_eq!(check_typed(e, "vitamin A"), Match::Close);
+        assert_eq!(check_typed(e, "retinoids"), Match::Close);
+        assert_eq!(check_typed(e, "retinoids and vitamin A"), Match::Right);
+        assert_eq!(check_typed(e, "vitamin A, iron"), Match::Wrong);
+        assert_eq!(check_typed(e, "glycogen"), Match::Wrong);
+        assert_eq!(check_typed("ALT or AST", "AST"), Match::Right);
+        assert_eq!(check_typed("hyperkalaemia and acidosis", "hypokalaemia"), Match::Wrong);
     }
 
     #[test]

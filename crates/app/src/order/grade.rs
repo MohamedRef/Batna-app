@@ -5,23 +5,42 @@
 use batna_core::review::Grade;
 
 /// The order the steps start in: a shuffle seeded by the item id, so an item
-/// always opens the same way, and never already solved.
+/// always opens the same way. It never starts solved, and at most a third of
+/// the steps start at their own number, so it never starts nearly solved.
 pub fn shuffled(n: usize, seed: &str) -> Vec<usize> {
-    let mut out: Vec<usize> = (0..n).collect();
     // FNV-1a, then xorshift64: small, stable across platforms and versions.
     let mut state =
         seed.bytes().fold(0xcbf2_9ce4_8422_2325_u64, |h, b| (h ^ u64::from(b)).wrapping_mul(0x100_0000_01b3));
-    for i in (1..n).rev() {
+    let mut next = move || {
         state ^= state << 13;
         state ^= state >> 7;
         state ^= state << 17;
-        let j = (state % (i as u64 + 1)) as usize;
-        out.swap(i, j);
+        state
+    };
+    let mut out: Vec<usize> = (0..n).collect();
+    // Fisher-Yates, redrawn until few enough steps sit at their own number.
+    // Any n ≥ 2 passes within a few draws; the cap only bounds the loop.
+    for _ in 0..64 {
+        for i in (1..n).rev() {
+            let j = (next() % (i as u64 + 1)) as usize;
+            out.swap(i, j);
+        }
+        if scrambled_enough(&out) {
+            return out;
+        }
     }
-    if n > 1 && out.iter().enumerate().all(|(pos, &step)| pos == step) {
+    // A rotation has no step at its own number.
+    out.sort_unstable();
+    if n > 1 {
         out.rotate_left(1);
     }
     out
+}
+
+fn scrambled_enough(order: &[usize]) -> bool {
+    let n = order.len();
+    let fixed = order.iter().enumerate().filter(|&(pos, &step)| pos == step).count();
+    n < 2 || (fixed < n && fixed * 3 <= n)
 }
 
 /// Positions in `answer` whose step is not at its own number. Only these
@@ -89,6 +108,18 @@ mod tests {
             }
         }
         assert_ne!(shuffled(6, "hb.L01.008"), shuffled(6, "hb.L03.040"));
+    }
+
+    #[test]
+    fn shuffle_never_starts_nearly_solved() {
+        // Many seeds and sizes: at most a third of the steps at their own number.
+        for n in 2..10 {
+            for k in 0..200 {
+                let a = shuffled(n, &format!("hb.L{k:02}.{n:03}"));
+                let fixed = a.iter().enumerate().filter(|&(p, &s)| p == s).count();
+                assert!(fixed * 3 <= n, "n={n} seed {k}: {fixed} in place in {a:?}");
+            }
+        }
     }
 
     #[test]

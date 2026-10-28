@@ -85,7 +85,7 @@ pub mod cite {
     }
 }
 
-/// A book page's sheet (book/mod.rs).
+/// A book page's sheet (pagesheet/mod.rs).
 pub mod book {
     pub const TITLE: &str = "صفحة الكتاب";
     pub const CLOSE: &str = "اقفل";

@@ -6,7 +6,6 @@
 mod anki;
 mod back;
 mod bank;
-mod book;
 mod calc;
 mod case;
 mod cloud;
@@ -27,6 +26,7 @@ mod onboarding;
 mod oral;
 mod order;
 mod own;
+mod pagesheet;
 mod plan;
 mod platform;
 mod prefs;
@@ -165,7 +165,7 @@ fn App() -> Element {
         platform::system_bars::apply(day.bg, night.bg);
     });
     lecture::use_lecture_page(ui);
-    back::use_back(ui, current, *settings.open.read() || lecture::is_open() || book::is_open());
+    back::use_back(ui, current, *settings.open.read() || lecture::is_open() || pagesheet::is_open());
     update::view::use_android_install(ui);
     update::view::use_update_notice_taps(settings);
     // A screen opens at its top, not at the last screen's scroll offset (UX #102).
@@ -229,7 +229,7 @@ fn App() -> Element {
             }
             settings::SettingsSheet {}
             update::sheet::UpdateSheet {}
-            book::BookSheet {}
+            pagesheet::BookSheet {}
             own::ShareInbox {}
             onboarding::Onboarding {}
         }

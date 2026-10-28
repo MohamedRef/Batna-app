@@ -15,7 +15,7 @@ use crate::i18n::count::{CASE, ITEM, QUESTION, count};
 use crate::store::use_review;
 use crate::{Screen, Ui};
 
-const CSS: &str = include_str!("book.css");
+const CSS: &str = include_str!("pagesheet.css");
 
 /// The open page and the quote its chip carried.
 static OPEN: GlobalSignal<Option<(u32, Option<String>)>> = Signal::global(|| None);

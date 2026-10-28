@@ -30,7 +30,7 @@ const TAPPABLE: &[&str] = &[
     "score-row",
     "tap",
     "tap-row",
-    // A book page's "ص N" chip (book/mod.rs).
+    // A book page's "ص N" chip (pagesheet/mod.rs).
     "page",
     "tap-chip",
 ];

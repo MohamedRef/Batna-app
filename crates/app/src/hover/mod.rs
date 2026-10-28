@@ -53,7 +53,7 @@ pub fn BookPage(page: u32, quote: Option<String>) -> Element {
             onclick: move |e| {
                 // Inside a card or row that has its own action, the chip only opens the page.
                 e.stop_propagation();
-                crate::book::open(page, quote.clone());
+                crate::pagesheet::open(page, quote.clone());
             },
             bdi { {crate::i18n::cite::page(page)} }
         }

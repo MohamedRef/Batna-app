@@ -143,7 +143,7 @@
 @media (min-width: 840px) { .score-rows li { grid-template-columns: minmax(0, 1fr) 10rem 4rem; } }
 
 .review-list { display: flex; flex-direction: column; gap: var(--sp-2); }
-.review-item > summary {
+.review-item {
   display: flex;
   align-items: center;
   gap: var(--sp-2);
@@ -153,9 +153,29 @@
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--surface);
+  text-align: start;
+  inline-size: 100%;
 }
-.review-item[open] > summary { margin-block-end: var(--sp-2); }
+.review-item[aria-current="true"] { border-color: var(--accent); background: var(--accent-soft); }
 .review-item .mark { font-weight: 700; }
 .review-item[data-right="yes"] .mark { color: var(--good); }
 .review-item[data-right="no"] .mark { color: var(--bad); }
-.review-item .stem-peek { flex: 1; min-width: 0; color: var(--muted); font-size: var(--fs-sm); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: var(--font-latin); }
+.review-item .stem-peek { flex: 1; min-width: 0; color: var(--muted); font-size: var(--fs-sm); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: var(--font-latin); text-align: start; }
+.review-detail { display: flex; flex-direction: column; gap: var(--sp-3); }
+.review-detail-head { display: flex; align-items: center; gap: var(--sp-3); }
+.review-detail-head .run-count { font-weight: 700; flex: 1; }
+/* In the review's detail pane the question and its explanation stack. */
+.desk-detail .desk-split { display: flex; flex-direction: column; }
+
+/* ---------- desk: explanation pane (≥840px) ---------- */
+.q-explain { gap: var(--sp-3); }
+.q-why-list { display: none; list-style: none; margin: 0; padding: 0; flex-direction: column; gap: var(--sp-2); font-family: var(--font-latin); font-size: var(--fs-sm); line-height: 1.5; }
+.q-why-list li { display: flex; gap: var(--sp-2); align-items: flex-start; color: var(--muted); }
+.q-why-list .q-letter { inline-size: 1.5rem; block-size: 1.5rem; font-size: 0.75rem; }
+.q-why-list li[data-state="right"] { color: var(--text); }
+.q-why-list li[data-state="right"] .q-letter { background: var(--good); color: var(--surface); }
+.q-why-list li[data-state="wrong"] .q-letter { background: var(--bad); color: var(--surface); }
+@media (min-width: 840px) {
+  .q-why-list { display: flex; }
+  .desk-split .q-why { display: none; }
+}

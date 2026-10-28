@@ -194,6 +194,17 @@ pub fn lecture_title(lecture: &str) -> String {
     Library::get().lectures.get(lecture).map_or_else(|| lecture.to_string(), |l| l.title.clone())
 }
 
+/// The index's shorter title (`Hepatitis C virus`, not the chapter's full
+/// heading), for chips on a phone; falls back to the lecture's own title.
+pub fn short_lecture_title(lecture: &str) -> String {
+    Library::get()
+        .index
+        .lectures
+        .iter()
+        .find(|e| e.id == lecture)
+        .map_or_else(|| lecture_title(lecture), |e| e.title.clone())
+}
+
 /// `hb.L09` → `9`.
 pub fn lecture_number(lecture: &str) -> &str {
     lecture.rsplit('.').next().unwrap_or(lecture).trim_start_matches('L').trim_start_matches('0')

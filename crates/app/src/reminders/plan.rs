@@ -7,8 +7,9 @@
 use batna_core::plan::Day;
 use serde::Serialize;
 
-/// Reminders armed ahead, enough for a few days without opening the app.
-pub const UPCOMING: usize = 6;
+/// Reminders armed ahead: a week or more even at three a day. After the
+/// last one the platform keeps going from [`Repeat`] (issue #26).
+pub const UPCOMING: usize = 24;
 
 /// How far ahead to look for study days, in days.
 const HORIZON: i32 = 14;
@@ -24,6 +25,34 @@ pub struct Scheduled {
     pub time: String,
     pub title: String,
     pub text: String,
+}
+
+/// What the platform arms by itself once the planned reminders run out
+/// (the app not opened for a week): the same times and study days, with a
+/// general line, since the due counts would be stale.
+#[derive(Clone, Debug, PartialEq, Eq, Serialize)]
+pub struct Repeat {
+    pub times: Vec<String>,
+    /// Study days, Saturday first, as `1` and `0`.
+    pub days: String,
+    pub title: String,
+    pub text: String,
+}
+
+/// The fallback for these inputs; `None` where nothing should ring.
+pub fn repeat(i: &Inputs) -> Option<Repeat> {
+    if !i.here || i.times.is_empty() || !i.weekdays.contains(&true) {
+        return None;
+    }
+    let mut times = i.times.to_vec();
+    times.sort_unstable();
+    times.dedup();
+    Some(Repeat {
+        times: times.iter().map(|&t| format!("{:02}:{:02}", t / 60, t % 60)).collect(),
+        days: i.weekdays.iter().map(|&on| if on { '1' } else { '0' }).collect(),
+        title: crate::i18n::remind::TITLE.into(),
+        text: crate::i18n::remind::text(None),
+    })
 }
 
 /// Everything [`schedule`] reads.
@@ -114,7 +143,7 @@ mod tests {
     fn reminders_follow_the_times_and_skip_past_ones() {
         let items = schedule(&inputs(&[19 * 60, 7 * 60, 9 * 60], &[12, 30]));
         assert_eq!(items.len(), UPCOMING);
-        let when: Vec<_> = items.iter().map(|s| (s.date.as_str(), s.time.as_str())).collect();
+        let when: Vec<_> = items.iter().take(6).map(|s| (s.date.as_str(), s.time.as_str())).collect();
         assert_eq!(
             when,
             [
@@ -151,6 +180,25 @@ mod tests {
         assert!(schedule(&Inputs { here: false, ..inputs(&[19 * 60], &[]) }).is_empty());
         assert!(schedule(&inputs(&[], &[])).is_empty());
         assert!(schedule(&Inputs { weekdays: [false; 7], ..inputs(&[19 * 60], &[]) }).is_empty());
+    }
+
+    #[test]
+    fn three_times_a_day_still_cover_a_week() {
+        let items = schedule(&inputs(&[7 * 60, 13 * 60, 21 * 60], &[]));
+        assert_eq!(items.len(), UPCOMING);
+        let last = Day::parse(&items[UPCOMING - 1].date).unwrap();
+        assert!(Day::from_unix_ms(NOW as i64, CAIRO, 0).until(last) >= 7, "{}", items[UPCOMING - 1].date);
+    }
+
+    #[test]
+    fn the_fallback_keeps_the_times_and_study_days() {
+        let weekdays = [true, true, true, false, false, true, false];
+        let r = repeat(&Inputs { weekdays, ..inputs(&[19 * 60, 7 * 60], &[]) }).unwrap();
+        assert_eq!(r.times, ["07:00", "19:00"]);
+        assert_eq!(r.days, "1110010");
+        assert!(!r.text.chars().any(|c| c.is_ascii_digit()), "no stale count: {}", r.text);
+        assert_eq!(repeat(&Inputs { here: false, ..inputs(&[19 * 60], &[]) }), None);
+        assert_eq!(repeat(&inputs(&[], &[])), None);
     }
 
     #[test]

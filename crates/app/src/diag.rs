@@ -141,9 +141,9 @@ pub fn DiagnosticsCard() -> Element {
                 }
             }
             div { class: "row",
-                button { class: "button", onclick: refresh, {tx::DIAG_REFRESH} }
+                button { class: "btn btn-secondary", onclick: refresh, {tx::DIAG_REFRESH} }
                 if count > 0 {
-                    button { class: "button", onclick: copy,
+                    button { class: "btn btn-secondary", onclick: copy,
                         if copied() { {tx::DIAG_COPIED} } else { {tx::DIAG_COPY} }
                     }
                 }

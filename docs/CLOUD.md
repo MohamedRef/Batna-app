@@ -60,6 +60,8 @@ just cloud-deploy
 curl https://batna-cloud.<your-subdomain>.workers.dev/v1/health
 ```
 
+Deploy the hub from `main` at PR #134 or later. An older hub rejects the `relay` ops that carry a restored backup to the other devices (as `wrong_device`), and the app then drops them for good. Whenever `batna_protocol::sync` changes, redeploy the hub before installing the new app.
+
 ### 3.4 Connect the app
 1. `cp .env.example .env` and fill in `BATNA_CLOUD_URL` (the URL above) and the Desktop client's id and secret. `.env` is git-ignored; `just` loads it and the app reads it at build time.
 2. `just run` → **Settings › المزامنة › سجّل دخول بجوجل**. The browser opens, you pick your Gmail, and the page says to go back to Batna.

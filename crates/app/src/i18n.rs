@@ -743,7 +743,7 @@ pub mod settings {
     pub const THIS_DEVICE: &str = "للجهاز ده بس";
 
     pub const LOOK: &str = "الشكل";
-    pub const LOOK_SUB: &str = "الألوان وحجم الخط";
+    pub const LOOK_SUB: &str = "الألوان وحجم الواجهة";
     pub const DATA: &str = "بياناتك";
     pub const DATA_SUB: &str = "فين بتتحفظ، والتصدير";
     pub const ABOUT: &str = "عن باطنة";
@@ -759,7 +759,8 @@ pub mod settings {
     pub const THEME_SHIFT: &str = "نبطشية";
     pub const THEME_SHIFT_SUB: &str = "غامق ودافي من غير ضوء أزرق، للمذاكرة متأخر قبل النوم";
 
-    pub const TEXT_SIZE: &str = "حجم الخط";
+    pub const TEXT_SIZE: &str = "حجم الواجهة";
+    pub const TEXT_SMALLER: &str = "أصغر";
     pub const TEXT_SMALL: &str = "صغير";
     pub const TEXT_NORMAL: &str = "عادي";
     pub const TEXT_LARGE: &str = "كبير";

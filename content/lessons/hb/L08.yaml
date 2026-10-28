@@ -19,13 +19,15 @@ lessons:
         page: 125
         title: "الصورة الكبيرة"
         text: |
-          الـ **DILI** شائع، وممكن ييجي من **almost all drug types**.
+          الـ **DILI** (drug-induced liver injury) شائع، وممكن ييجي من almost all drug types.
 
-          - أغلب الحالات **benign** وبتتحسن بعد **drug discontinuation**.
-          - أهم خطوة علشان نمنع **acute or chronic liver failure**: **identify and get rid of the offending substance** في أسرع وقت.
-          - مفيش **identified risk factors**، بس فيه ناس أكتر عرضة بسبب **genetic vulnerability** و **previous liver disease**.
-          - أغلبهم أعراضهم زي أي مرض كبد تاني، وبعضهم بيبان عليه **systemic hypersensitivity**.
-          - العلاج = **rapid drug withdrawal + supportive care**.
+          - **Course**: أغلب الحالات benign وبتتحسن بعد drug discontinuation.
+          - **Most important step**: identify and get rid of the offending substance في أسرع وقت، علشان نمنع acute or chronic liver failure.
+          - **Who gets it**: مفيش identified risk factors واضحة، بس فيه ناس أكتر عرضة بسبب **genetic vulnerability** و previous liver disease.
+          - **Picture**: أغلبهم أعراضهم زي أي مرض كبد تاني، وبعضهم بيبان عليه **systemic hypersensitivity**.
+          - **Treatment**: rapid drug withdrawal + supportive care.
+
+          يعني مفيش antidote سحري لأغلب الأدوية. السلاح الحقيقي إنك تشك بدري وتوقف الدوا بدري.
       - kind: table
         page: 125
         title: "تعريف الـ WHO للـ hepatotoxicity"
@@ -169,14 +171,65 @@ lessons:
         page: 128
         title: "كل خلية وإصابتها"
         text: |
-          رسمة الـ cells في صفحة 128:
+          رسمة الـ cells في صفحة 128 بتقول إن الدوا بيعمل مرض حسب الخلية اللي ضربها:
 
           - **Hepatocyte**: acute و chronic hepatitis، cholestasis، cirrhosis، steatosis، phospholipidosis، steatohepatitis، granulomatous hepatitis.
           - **Cholangiocyte**: acute و chronic cholangitis، sclerosing cholangitis.
           - **Endothelial cell**: veno-occlusive disease، sinusoidal dilation، peliosis hepatis، Budd-Chiari.
           - **Ito (stellate) cell**: perisinusoidal fibrosis.
 
-          و **histologically** 3 أنواع: **hepatocellular** (hepatocytes)، **cholestatic** (bile ducts or canaliculi)، و **mixed**.
+          المنطق سهل: الـ hepatocyte بيعمل كل حاجة فبيتصاب بكل حاجة. القنوات بتلتهب. الأوعية بتتسد. والـ stellate هي مصنع الـ fibrosis (زي ما شفنا في L01).
+
+          و histologically فيه 3 أنواع بس:
+
+          - **Hepatocellular**: الضرب في الـ hepatocytes.
+          - **Cholestatic**: الضرب في الـ bile ducts أو الـ canaliculi.
+          - **Mixed**: الاتنين.
+      - kind: figure
+        page: 128
+        title: "كل خلية والإصابة بتاعتها"
+        alt: "Sketch of a sinusoid. Top: a row of hepatocytes with the bile canaliculus between them draining to a bile duct lined by cholangiocytes. Middle: the space of Disse with a stellate (Ito) cell. Bottom: the sinusoid lined by endothelial cells. Labels: hepatocyte, hepatitis, cholestasis, steatosis, granulomas; cholangiocyte, cholangitis, sclerosing cholangitis; stellate cell, perisinusoidal fibrosis; endothelial cell, veno-occlusive disease, sinusoidal dilation, peliosis, Budd-Chiari."
+        caption: "الخلية اللي الدوا ضربها هي اللي بتحدد المرض: **hepatocyte** (hepatitis، steatosis)، **cholangiocyte** (cholangitis)، **stellate** (fibrosis)، **endothelium** (VOD، peliosis)."
+        svg: |
+          <svg viewBox="0 0 330 360" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="40" width="70" height="56" rx="8" class="fg-acc"/>
+            <rect x="86" y="40" width="70" height="56" rx="8" class="fg-acc"/>
+            <rect x="162" y="40" width="70" height="56" rx="8" class="fg-acc"/>
+            <circle cx="45" cy="68" r="9" class="fg-box"/>
+            <circle cx="121" cy="68" r="9" class="fg-box"/>
+            <circle cx="197" cy="68" r="9" class="fg-box"/>
+            <path d="M83 44v48M159 44v48" class="fg-ink" stroke-width="3"/>
+            <path d="M232 68h20" class="fg-ink" stroke-width="3"/>
+            <rect x="252" y="48" width="70" height="40" rx="20" class="fg-good"/>
+            <text x="287" y="72" text-anchor="middle" class="t-sm t-b">duct</text>
+            <text x="121" y="30" text-anchor="middle" class="t-sm t-b">Hepatocytes</text>
+            <text x="287" y="30" text-anchor="middle" class="t-sm t-b">Cholangiocytes</text>
+            <text x="121" y="112" text-anchor="middle" class="t-sm t-mut">canaliculi between cells</text>
+            <path d="M10 126h312" class="fg-thin" stroke-dasharray="4 3"/>
+            <text x="14" y="146" class="t-sm t-mut">Space of Disse</text>
+            <ellipse cx="200" cy="142" rx="30" ry="11" class="fg-bad"/>
+            <path d="M170 142h-14M230 142h14" class="fg-ink"/>
+            <text x="256" y="146" class="t-sm t-b">Stellate</text>
+            <rect x="10" y="160" width="312" height="14" rx="7" class="fg-box"/>
+            <text x="166" y="171" text-anchor="middle" class="t-sm">endothelial cells (fenestrated)</text>
+            <text x="166" y="196" text-anchor="middle" class="t-sm t-mut">Sinusoid (blood)</text>
+            <rect x="4" y="214" width="158" height="68" rx="6" class="fg-acc"/>
+            <text x="83" y="232" text-anchor="middle" class="t-sm t-b">Hepatocyte</text>
+            <text x="83" y="250" text-anchor="middle" class="t-sm">hepatitis, cholestasis</text>
+            <text x="83" y="268" text-anchor="middle" class="t-sm">steatosis, granulomas</text>
+            <rect x="168" y="214" width="158" height="68" rx="6" class="fg-good"/>
+            <text x="247" y="232" text-anchor="middle" class="t-sm t-b">Cholangiocyte</text>
+            <text x="247" y="250" text-anchor="middle" class="t-sm">cholangitis</text>
+            <text x="247" y="268" text-anchor="middle" class="t-sm">sclerosing cholangitis</text>
+            <rect x="4" y="288" width="158" height="66" rx="6" class="fg-bad"/>
+            <text x="83" y="306" text-anchor="middle" class="t-sm t-b">Stellate (Ito)</text>
+            <text x="83" y="326" text-anchor="middle" class="t-sm">perisinusoidal</text>
+            <text x="83" y="342" text-anchor="middle" class="t-sm">fibrosis</text>
+            <rect x="168" y="288" width="158" height="66" rx="6" class="fg-box"/>
+            <text x="247" y="306" text-anchor="middle" class="t-sm t-b">Endothelium</text>
+            <text x="247" y="324" text-anchor="middle" class="t-sm">VOD, sinusoidal dilation</text>
+            <text x="247" y="342" text-anchor="middle" class="t-sm">peliosis, Budd-Chiari</text>
+          </svg>
       - kind: match
         page: 128
         prompt: "وصّل الخلية بالإصابة:"
@@ -223,18 +276,20 @@ lessons:
         page: 129
         title: "التشخيص = شك + استبعاد"
         text: |
-          الكتاب:
+          التشخيص في الكتاب بيتبني على 3 حاجات:
 
-          - **High index of suspicion**، و enzymes متلخبطة، و **hepatitis-like symptoms**، و **jaundice**.
-          - **Drug history**: **dose**، **duration of therapy**، و **latency** (الوقت من بداية الدوا لحد الإصابة). والـ workflow بيسأل عن الأدوية والـ supplements في آخر **6 months**.
-          - **Exclusion of other causes**: **hepatitis B**، **hepatitis C**، **alcoholic liver disease**، **NAFLD**، و **hemochromatosis**.
+          - **High index of suspicion**: enzymes متلخبطة، hepatitis-like symptoms، أو jaundice في عيان بياخد أدوية.
+          - **Drug history**: الـ dose، الـ duration of therapy، والـ **latency** (الوقت من بداية الدوا لحد الإصابة). والـ workflow بيسأل عن الأدوية والـ supplements في آخر 6 months.
+          - **Exclusion of other causes**: hepatitis B، hepatitis C، alcoholic liver disease، NAFLD، و hemochromatosis.
+
+          الـ latency مهمة: دوا بدأ امبارح صعب يكون السبب، ودوا بقاله سنين من غير مشاكل أقل احتمالًا من دوا جديد.
       - kind: reveal
         page: 129
         prompt: "ليه الاستبعاد ده مهم أوي، مش كفاية إن العيان بياخد دوا؟"
         answer: |
           مفيش test واحد يثبت الـ DILI. الأمراض دي (HBV، HCV، alcohol، NAFLD، hemochromatosis) شائعة وبتعمل نفس الإنزيمات العالية، فلو لقيت ALT عالي على دوا، ممكن يكون الدوا بريء خالص وفيه مرض كبد قديم.
 
-          علشان كده DILI تشخيص **بالاستبعاد**: الخمسة دول لازم يتشالوا من الحسبة الأول.
+          علشان كده DILI تشخيص بالاستبعاد: الخمسة دول لازم يتشالوا من الحسبة الأول.
       - kind: explain
         page: 129
         title: "الـ R value"
@@ -250,7 +305,7 @@ lessons:
         page: 129
         title: "الـ R بيوديك فين؟"
         alt: "A horizontal R scale from 0 to 8 with bands: below 2 cholestatic, 2 to 5 mixed, above 5 hepatocellular. Below it two work-up boxes. For R below 2: abdominal ultrasound, then MRI or MRCP, then liver biopsy. For R of 2 or more (mixed or hepatocellular): abdominal ultrasound and hepatitis A, B, C, E; then other viruses (CMV, EBV, HSV), autoimmune hepatitis, Budd-Chiari syndrome, ischemic hepatitis and Wilson disease."
-        caption: "الـ cholestatic بيدوّر على **انسداد** (صور). الـ hepatocellular/mixed بيدوّر على **فيروسات وأمراض الخلية**."
+        caption: "الـ cholestatic بيدوّر على انسداد (صور). الـ hepatocellular/mixed بيدوّر على فيروسات وأمراض الخلية."
         svg: |
           <svg viewBox="0 0 330 360" xmlns="http://www.w3.org/2000/svg">
             <defs>
@@ -328,17 +383,19 @@ lessons:
         page: 130
         title: "التوقيت والـ dechallenge"
         text: |
-          - أغلب الـ **acute DILD** بيحصل خلال **1 week to 3 months** من التعرّض.
-          - **Positive dechallenge** يعني الإنزيمات تتحسن لما توقف الدوا.
-          - في الـ **acute hepatocellular**: **50% reduction** بعد **2 weeks**، و **normal by 4 weeks**.
-          - في الـ **cholestatic**: ممكن **prolonged recovery**، فبطء التحسن مش بينفي الـ DILI.
+          - **Onset**: أغلب الـ acute DILD بيحصل خلال 1 week to 3 months من التعرّض.
+          - **Positive dechallenge**: الإنزيمات تتحسن لما توقف الدوا. ده أقوى دليل إن الدوا هو السبب.
+          - **Acute hepatocellular**: 50% reduction بعد 2 weeks، و normal by 4 weeks.
+          - **Cholestatic**: ممكن prolonged recovery، فبطء التحسن هنا مش بينفي الـ DILI.
+
+          ليه الـ cholestatic أبطأ؟ التفسير المقبول إن الـ hepatocytes بتتجدد بسرعة، أما القنوات المتأذية فبتاخد وقت أطول تصلّح نفسها.
       - kind: aside
         tone: analogy
         page: 130
         text: |
-          الـ dechallenge زي ما تشيل صباعك من على الجرس: لو الصوت (الإنزيمات) **وطي للنص في أسبوعين** و **سكت خالص في 4**، يبقى إنت اللي كنت بترن.
+          الـ dechallenge زي ما تشيل صباعك من على الجرس: لو الصوت (الإنزيمات) وطي للنص في أسبوعين وسكت خالص في 4، يبقى إنت اللي كنت بترن.
 
-          افتكرها: **2 → النص، 4 → صفر**.
+          افتكرها: 2 → النص، 4 → صفر.
       - kind: case
         page: 130
         stem: "A 50-year-old man started a new drug 5 weeks ago. ALT 760 U/L (ULN 40), ALP 140 U/L (ULN 120). No alcohol."
@@ -405,9 +462,11 @@ lessons:
         text: |
           الكتاب بيقول الـ DILI **complex aetiology with several risk factors**، ورسمة صفحة 130 بتقسمهم:
 
-          - **Host**: age، race، sex، genetics، immunology، pregnancy، underlying disease، metabolic syndrome، microbiota، NAFLD.
-          - **Environmental**: alcohol، lifestyle، chemical exposure، workplace.
-          - **Drug**: **dose > 50 mg**، **greater lipophilicity**، **> 50% hepatic metabolism**، drug و herbal interactions، special chemical moieties.
+          - **Host** (العيان نفسه): age، race، sex، genetics، immunology، pregnancy، underlying disease، metabolic syndrome، microbiota، NAFLD.
+          - **Environmental** (اللي حواليه): alcohol، lifestyle، chemical exposure، workplace.
+          - **Drug** (الدوا نفسه): dose > 50 mg، greater lipophilicity، > 50% hepatic metabolism، drug و herbal interactions، special chemical moieties.
+
+          والتفسير المقبول إن خصائص الدوا التلاتة ماشية مع بعض: جرعة كبيرة + دوا بيدوب في الدهون + الكبد بيكسّر أغلبه = metabolites أكتر جوه الكبد.
       - kind: sort
         page: 130
         prompt: "حط كل risk factor في مجموعته:"
@@ -507,23 +566,25 @@ lessons:
         text: |
           **Asymptomatic elevation of liver enzymes** ليها مصيرين:
 
-          - **No progress despite continued use** (= **drug tolerance**): **INH**، **phenytoin**، **chlorpromazine**.
-          - **Progression with continued use**: **AST & ALT 3–5× ULN**، و **may progress to hepatic failure**.
+          - **Drug tolerance**: no progress despite continued use. الكبد بيتعوّد. أمثلة: INH، phenytoin، chlorpromazine.
+          - **Progression with continued use**: AST & ALT 3–5× ULN، و may progress to hepatic failure.
+
+          يعني ارتفاع الإنزيمات لوحده مش هو القصة كلها؛ المهم هو بيتقدّم ولا لأ.
       - kind: aside
         tone: joke
         page: 133
         text: |
-          الـ **drug tolerance** زي ساكن جديد في وسط البلد: أول أسبوع متضايق من الزحمة والكلاكسات (enzymes طالعة)، وبعدين **يتعوّد** ويكمّل عادي. 🚕
+          الـ **drug tolerance** زي ساكن جديد في وسط البلد: أول أسبوع متضايق من الزحمة والكلاكسات (enzymes طالعة)، وبعدين يتعوّد ويكمّل عادي. 🚕
 
           الكبد مع **INH، phenytoin، chlorpromazine** بيعمل كده.
       - kind: explain
         page: 133
         title: "الـ acute hepatocellular (direct toxic)"
         text: |
-          - **Marked elevation in ALT and AST**.
-          - **ALP normal or minimally elevated**.
-          - **Bilirubin variably increased**، ولو عالي → **worse prognosis**.
-          - مسؤول عن **1/3** من الـ fulminant hepatic failure في أمريكا: **20% acetaminophen** و **12–15% other drugs**.
+          - **ALT and AST**: marked elevation.
+          - **ALP**: normal or minimally elevated، يعني R عالي (hepatocellular).
+          - **Bilirubin**: variably increased، ولو عالي → worse prognosis (هتشوف السبب في آخر درس).
+          - **FHF share**: مسؤول عن 1/3 من الـ fulminant hepatic failure في أمريكا: 20% acetaminophen و 12–15% other drugs.
       - kind: table
         page: 133
         title: "الـ pattern بيقولك مين"
@@ -594,10 +655,12 @@ lessons:
         page: 134
         title: "يعني إيه cholestatic injury؟"
         text: |
-          - **Definition**: **reduction in bile flow** بسبب **reduced secretion** أو **obstruction**.
-          - **Biochemically**: **elevated ALP**، **GGT**، و **5' NT**.
-          - **Acute illness** بيروح لما الدوا يقف.
-          - **Clinical**: **jaundice** و **pruritus**.
+          - **Definition**: reduction in bile flow، يا بسبب reduced secretion من الخلية، يا بسبب obstruction في القنوات.
+          - **Biochemically**: elevated **ALP**، **GGT**، و **5' NT**.
+          - **Clinical**: jaundice و pruritus.
+          - **Course**: الـ acute illness بيروح لما الدوا يقف.
+
+          الصفرا جاية من إن الـ bilirubin مش لاقي طريق يطلع، والهرش من تراكم مكوّنات الصفرا (التفسير المقبول).
       - kind: reveal
         page: 134
         prompt: "ليه مش كفاية ALP لوحده، ولازم GGT أو 5' NT معاه؟"
@@ -622,10 +685,50 @@ lessons:
         text: |
           تخيّل مواسير مية في عمارة:
 
-          - **Bland (canalicular)** = المية **مش ماشية** بس مفيش حاجة مكسورة: مفيش inflammation ولا duct lesion. (الهرمونات)
-          - **Hepatocanalicular** = فيه **التهاب** في الشقة نفسها كمان، فالـ transaminases أعلى واحد (**2–10×**).
-          - **Cholangiodestructive** = حد بيكسّر **المواسير نفسها** لحد ما تختفي: **vanishing bile ducts**.
-          - **Cholangiosclerotic** = المواسير **اتكلّست وضاقت**: زي sclerosing cholangitis.
+          - **Bland (canalicular)** = المية مش ماشية بس مفيش حاجة مكسورة: مفيش inflammation ولا duct lesion. (الهرمونات)
+          - **Hepatocanalicular** = فيه التهاب في الشقة نفسها كمان، فالـ transaminases أعلى واحد (2–10×).
+          - **Cholangiodestructive** = حد بيكسّر المواسير نفسها لحد ما تختفي: **vanishing bile ducts**.
+          - **Cholangiosclerotic** = المواسير اتكلّست وضاقت: زي sclerosing cholangitis.
+      - kind: figure
+        page: 135
+        title: "الـ cholestasis بيضرب فين في طريق الصفرا؟"
+        alt: "A vertical bile path drawn on the left, from the hepatocyte and its canaliculus down through the ductule, the small interlobular ducts and the large ducts. Beside each level is the matching type. Canaliculus: bland canalicular, ALP below 3 times, transaminases below 5 times, contraceptives and anabolic steroids. Hepatocyte plus canaliculus: hepatocanalicular, ALP above 3 times, transaminases 2 to 10 times, chlorpromazine, Augmentin, erythromycin. Ductule: ductular, benoxaprofen. Small ducts destroyed: cholangiodestructive or vanishing bile ducts, paraquat, chlorpromazine. Large ducts narrowed: cholangiosclerotic, floxuridine, scolicides."
+        caption: "كل ما تنزل في طريق الصفرا، الضرب بيبقى في القنوات نفسها. الـ **bland** بس هو اللي ALP فيه **< 3×**، والـ **hepatocanalicular** بس هو اللي transaminases فيه لحد **10×**."
+        svg: |
+          <svg viewBox="0 0 330 420" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="8" width="64" height="60" rx="10" class="fg-acc"/>
+            <text x="40" y="34" text-anchor="middle" class="t-sm t-b">Hepato-</text>
+            <text x="40" y="50" text-anchor="middle" class="t-sm t-b">cyte</text>
+            <path d="M40 68v342" class="fg-ink" stroke-width="2"/>
+            <path d="M40 68v60" class="fg-ink" stroke-width="3"/>
+            <path d="M40 128v70" class="fg-ink" stroke-width="5"/>
+            <path d="M40 198v80" class="fg-ink" stroke-width="8" stroke-dasharray="6 6"/>
+            <path d="M34 286q6 60 0 120M46 286q-6 60 0 120" class="fg-ink" stroke-width="3"/>
+            <text x="54" y="100" class="t-sm t-mut">canaliculus</text>
+            <text x="54" y="168" class="t-sm t-mut">ductule</text>
+            <text x="54" y="240" class="t-sm t-mut">small ducts</text>
+            <text x="54" y="350" class="t-sm t-mut">large ducts</text>
+            <rect x="140" y="6" width="186" height="62" rx="6" class="fg-box"/>
+            <text x="150" y="24" class="t-sm t-b">Hepatocanalicular</text>
+            <text x="150" y="42" class="t-sm">ALP &gt; 3×, ALT 2–10×</text>
+            <text x="150" y="60" class="t-sm t-mut">chlorpromazine, Augmentin</text>
+            <rect x="140" y="74" width="186" height="62" rx="6" class="fg-good"/>
+            <text x="150" y="92" class="t-sm t-b">Canalicular (bland)</text>
+            <text x="150" y="110" class="t-sm">ALP &lt; 3×, ALT &lt; 5×</text>
+            <text x="150" y="128" class="t-sm t-mut">contraceptives, anabolics</text>
+            <rect x="140" y="142" width="186" height="50" rx="6" class="fg-box"/>
+            <text x="150" y="160" class="t-sm t-b">Ductular</text>
+            <text x="150" y="180" class="t-sm t-mut">benoxaprofen</text>
+            <rect x="140" y="198" width="186" height="80" rx="6" class="fg-bad"/>
+            <text x="150" y="216" class="t-sm t-b">Cholangiodestructive</text>
+            <text x="150" y="234" class="t-sm t-b t-bad">vanishing bile ducts</text>
+            <text x="150" y="252" class="t-sm">ALP &gt; 3×</text>
+            <text x="150" y="270" class="t-sm t-mut">paraquat, chlorpromazine</text>
+            <rect x="140" y="300" width="186" height="66" rx="6" class="fg-acc"/>
+            <text x="150" y="318" class="t-sm t-b">Cholangiosclerotic</text>
+            <text x="150" y="336" class="t-sm">ALP &gt; 3×, narrowed ducts</text>
+            <text x="150" y="354" class="t-sm t-mut">floxuridine, scolicides</text>
+          </svg>
       - kind: check
         page: 135
         question: "A young woman on oral contraceptives has jaundice. ALP is under 3× ULN, AST/ALT under 5×, no portal inflammation on biopsy. Which type?"
@@ -644,11 +747,15 @@ lessons:
         page: 135
         title: "أدوية الـ chronic cholestasis و الـ VBDS"
         text: |
-          الكتاب بيقسّمهم 3 مجموعات:
+          الـ **VBDS** (vanishing bile duct syndrome) هو آخر مرحلة من الـ cholangiodestructive: القنوات الصغيرة بتختفي، فالـ cholestasis بيبقى chronic.
 
-          - **Antibiotics**: ampicillin، **Augmentin**، clindamycin، erythromycin، organic arsenicals، **Septrin**، tetracycline، thiabendazole، troleandomycin.
-          - **Psychotropic**: amitriptyline، barbiturates، carbamazepine، **chlorpromazine**، haloperidol، imipramine، phenothiazines.
-          - **Miscellaneous**: منهم **azathioprine**، **terbinafine**، cimetidine، ibuprofen، tolbutamide، chlorothiazide، **ethinyl estradiol**، وغيرهم.
+          الكتاب بيقسّم الأدوية 3 مجموعات:
+
+          - **Antibiotics**: ampicillin، Augmentin، clindamycin، erythromycin، organic arsenicals، Septrin، tetracycline، thiabendazole، troleandomycin.
+          - **Psychotropic**: amitriptyline، barbiturates، carbamazepine، chlorpromazine، haloperidol، imipramine، phenothiazines.
+          - **Miscellaneous**: منهم azathioprine، terbinafine، cimetidine، ibuprofen، tolbutamide، chlorothiazide، ethinyl estradiol، وغيرهم.
+
+          لو هتحفظ واحد من كل مجموعة: Augmentin، chlorpromazine، azathioprine.
       - kind: sort
         page: 136
         prompt: "صنّف أدوية الـ vanishing bile duct syndrome حسب الكتاب:"
@@ -673,13 +780,15 @@ lessons:
         page: 137
         title: "PBC ولا drug-induced chronic cholestasis (DICC)؟"
         text: |
-          الاتنين ممكن يعملوا **pruritus، hypercholesterolemia، xanthomas** و **vanishing bile ducts**. الفرق:
+          الاتنين ممكن يعملوا pruritus، hypercholesterolemia، xanthomas، و vanishing bile ducts. فإزاي تفرّق؟
 
-          - **Gender/age**: الـ PBC **middle-aged women**؛ الـ DICC **both sexes، all ages**.
-          - **AMA**: **positive** في الـ PBC، **negative** في الـ DICC.
-          - **Onset**: PBC **insidious**، DICC **acute**؛ والـ jaundice **late** في PBC و **acute** في DICC.
-          - **Biopsy**: portal infiltrates **+++** و **granulomas** في PBC.
-          - **Prognosis**: PBC غالبًا يوصل **biliary cirrhosis**؛ الـ DICC الـ jaundice **usually resolves** و نادرًا cirrhosis.
+          - **Gender/age**: الـ PBC middle-aged women. الـ DICC both sexes، all ages.
+          - **AMA**: positive في الـ PBC، negative في الـ DICC. ده أسرع فرق.
+          - **Onset**: PBC insidious، DICC acute. والـ jaundice late في PBC و acute في DICC.
+          - **Biopsy**: portal infiltrates +++ و granulomas في PBC.
+          - **Prognosis**: PBC غالبًا يوصل biliary cirrhosis. الـ DICC الـ jaundice usually resolves، ونادرًا cirrhosis.
+
+          الخلاصة: لو فيه دوا في القصة، والبداية فجأة، والـ AMA سالب، فكّر في الـ DICC.
       - kind: table
         page: 137
         title: "PBC vs DICC"
@@ -739,9 +848,11 @@ lessons:
         page: 137
         title: "الـ granulomatous hepatitis"
         text: |
-          - **Fever**، **diaphoresis**، **malaise**، **anorexia**، **jaundice**، و **RUQ discomfort**.
-          - **Granuloma on liver biopsy**.
-          - بيحصل عادة في **first 2 months** من العلاج.
+          - **Picture**: fever، diaphoresis (عرق)، malaise، anorexia، jaundice، و RUQ discomfort.
+          - **Diagnosis**: **granuloma** on liver biopsy.
+          - **Timing**: عادة في الـ first 2 months من العلاج.
+
+          الصورة شبه عدوى (حمى وعرق)، فالدليل الحاسم هو الـ biopsy. والتفسير المقبول إن الـ granuloma هنا رد فعل مناعي للدوا، زي الـ hypersensitivity اللي شفناها في الـ FARE.
       - kind: mnemonic
         page: 137
         word: "GQ CHAMP"
@@ -773,9 +884,11 @@ lessons:
         page: 138
         title: "Drug-induced chronic hepatitis و AIH"
         text: |
-          الدوا ممكن يعمل صورة شبه **chronic active hepatitis** لحد **cirrhosis**، أو شكل من **chronic autoimmune hepatitis**.
+          الدوا ممكن يعمل صورة شبه **chronic active hepatitis** توصل لحد **cirrhosis**، أو شكل من **chronic autoimmune hepatitis**.
 
-          ملامح الـ **drug-induced AIH** في جدول الكتاب:
+          الـ drug-induced AIH شبه الـ AIH العادي في كل حاجة تقريبًا: female، ANA و ASMA، plasma cells. الفرق الكبير إنه بيروح لما الدوا يقف.
+
+          ملامحه في جدول الكتاب:
       - kind: table
         page: 138
         title: "الـ drug-induced autoimmune hepatitis"
@@ -808,14 +921,16 @@ lessons:
         page: 139
         title: "الأوعية: VOD"
         text: |
-          الـ **vascular injury** ممكن يمس **sinusoids، hepatic veins، hepatic arteries**.
+          الـ vascular injury ممكن يمس الـ sinusoids، الـ hepatic veins، أو الـ hepatic arteries.
 
-          **Veno-occlusive disease (VOD)**:
+          **Veno-occlusive disease (VOD)**: الأوردة الصغيرة جوه الكبد بتتسد، فالدم مش لاقي يطلع.
 
-          - أسبابه: **toxic plant alkaloids** (certain **herbal tea**)، و **serious complication of bone marrow transplant**.
-          - **Azathioprine** is probably the culprit.
-          - Clinically: **mild viral-like illness → fulminant hepatic failure**، **rapid weight gain**، **ascites**، **jaundice**، و **evidence of portal hypertension**.
-          - وفيه **chronic form** كمان.
+          - **Causes**: toxic plant alkaloids (certain herbal tea)، و serious complication of bone marrow transplant. والـ azathioprine is probably the culprit.
+          - **Picture**: من mild viral-like illness لحد fulminant hepatic failure.
+          - **Signs**: rapid weight gain، ascites، jaundice، و evidence of portal hypertension.
+          - **Forms**: فيه chronic form كمان.
+
+          افهمها كده: الدم بيتحجز في الكبد، فالكبد يكبر ويوجع، والمية تطلع في البطن، والوزن يزيد بسرعة.
       - kind: case
         page: 139
         stem: "Three weeks after a bone marrow transplant, a 40-year-old man gains 5 kg, develops tender hepatomegaly, ascites and jaundice."
@@ -845,12 +960,47 @@ lessons:
         page: 140
         title: "الأورام"
         text: |
-          جدول الـ **neoplastic lesions**:
+          جدول الـ neoplastic lesions فيه 2 benign و 2 malignant:
 
-          - **Focal nodular hyperplasia**: hepatic mass. **Contraceptive steroids**.
-          - **Adenoma**: hepatic mass، **hemoperitoneum**. Contraceptive steroids، **anabolic steroids**، **danazol**.
-          - **HCC**: malignant mass. Anabolic steroids، contraceptive steroids، **vinyl chloride**، **Thorotrast**.
-          - **Angiosarcoma**: malignant mass. Anabolic steroids، **inorganic arsenicals**، **Thorotrast**.
+          - **Focal nodular hyperplasia**: hepatic mass. Contraceptive steroids.
+          - **Adenoma**: hepatic mass، وممكن **hemoperitoneum** (بينزف). Contraceptive steroids، anabolic steroids، danazol.
+          - **HCC**: malignant mass. Anabolic steroids، contraceptive steroids، vinyl chloride، Thorotrast.
+          - **Angiosarcoma**: malignant mass. Anabolic steroids، inorganic arsenicals، Thorotrast.
+
+          لاحظ إن الـ sex hormones (contraceptive و anabolic) موجودين في كل الأورام تقريبًا. الرسمة الجاية بتوريك الشبكة كلها مرة واحدة.
+      - kind: figure
+        page: 140
+        title: "الورم ودواه (جدول الكتاب كشبكة)"
+        alt: "Grid with tumours as rows and agents as columns. Focal nodular hyperplasia: contraceptive steroids only. Adenoma: contraceptive steroids, anabolic steroids, danazol. HCC: contraceptive steroids, anabolic steroids, vinyl chloride, Thorotrast. Angiosarcoma: anabolic steroids, inorganic arsenicals, Thorotrast."
+        caption: "بص على الأعمدة: الـ **anabolic steroids** في 3 صفوف، والـ **Thorotrast** في الـ HCC والـ angiosarcoma. والـ FNH ليه دوا واحد بس."
+        svg: |
+          <svg viewBox="0 0 330 270" xmlns="http://www.w3.org/2000/svg">
+            <text x="100" y="20" text-anchor="middle" class="t-sm t-b">OCP</text>
+            <text x="138" y="20" text-anchor="middle" class="t-sm t-b">Anab</text>
+            <text x="176" y="20" text-anchor="middle" class="t-sm t-b">Dan</text>
+            <text x="214" y="20" text-anchor="middle" class="t-sm t-b">VC</text>
+            <text x="252" y="20" text-anchor="middle" class="t-sm t-b">Thor</text>
+            <text x="290" y="20" text-anchor="middle" class="t-sm t-b">As</text>
+            <path d="M80 30h240M80 76h240M80 122h240M80 168h240M80 214h240" class="fg-thin"/>
+            <text x="4" y="58" class="t-sm t-b">FNH</text>
+            <text x="4" y="104" class="t-sm t-b">Adenoma</text>
+            <text x="4" y="150" class="t-sm t-b t-bad">HCC</text>
+            <text x="4" y="196" class="t-sm t-b t-bad">Angio-</text>
+            <text x="4" y="210" class="t-sm t-b t-bad">sarcoma</text>
+            <circle cx="100" cy="53" r="10" class="fg-acc"/>
+            <circle cx="100" cy="99" r="10" class="fg-acc"/>
+            <circle cx="138" cy="99" r="10" class="fg-bad"/>
+            <circle cx="176" cy="99" r="10" class="fg-box"/>
+            <circle cx="100" cy="145" r="10" class="fg-acc"/>
+            <circle cx="138" cy="145" r="10" class="fg-bad"/>
+            <circle cx="214" cy="145" r="10" class="fg-box"/>
+            <circle cx="252" cy="145" r="10" class="fg-bad"/>
+            <circle cx="138" cy="191" r="10" class="fg-bad"/>
+            <circle cx="252" cy="191" r="10" class="fg-bad"/>
+            <circle cx="290" cy="191" r="10" class="fg-box"/>
+            <text x="4" y="238" class="t-sm t-mut">OCP contraceptive steroids · Anab anabolic steroids</text>
+            <text x="4" y="256" class="t-sm t-mut">Dan danazol · VC vinyl chloride · Thor Thorotrast · As arsenicals</text>
+          </svg>
       - kind: match
         page: 140
         prompt: "وصّل الورم بالدوا اللي بيظهر في الصف بتاعه بس:"
@@ -895,14 +1045,16 @@ lessons:
         page: 140
         title: "الـ serum biomarkers القديمة"
         text: |
-          جدول صفحة 140:
+          جدول صفحة 140 بيدي لكل marker ميزة وعيب:
 
-          - **ALT**: **highly specific to liver** وليه **prognostic value (Hy's law)**. عيبه: **damage has already occurred**.
+          - **ALT**: highly specific to liver، وليه prognostic value (**Hy's law**). عيبه: damage has already occurred.
           - **AST**: modified Hy's law (nR). مش liver-specific، والضرر برضه حصل خلاص.
-          - **ALP**: بيعكس الـ **cholestatic phenotype**. **مش liver-specific** (bone، salivary glands، intestine، biliary).
-          - **INR**: impairment of hepatic function. بيتلخبط مع **vitamin K deficiency** و **anticoagulants**.
-          - **Bilirubin**: prognostic (Hy's law)، بس **nothing specific**.
-          - **Albumin**: يقل مع **malnutrition، nephrotic syndrome، cirrhosis** من أي سبب.
+          - **ALP**: بيعكس الـ cholestatic phenotype. مش liver-specific (bone، salivary glands، intestine، biliary).
+          - **INR**: impairment of hepatic function. بيتلخبط مع vitamin K deficiency و anticoagulants.
+          - **Bilirubin**: prognostic (Hy's law)، بس nothing specific.
+          - **Albumin**: يقل مع malnutrition، nephrotic syndrome، cirrhosis من أي سبب.
+
+          المشكلة المشتركة: كلهم بيطلعوا بعد ما الضرر حصل، أو مش خاصين بالكبد. وده اللي خلّى الناس تدوّر على markers أذكى.
       - kind: update
         page: 140
         text: "الكتاب بيذكر **Hy's law** كـ prognostic value للـ ALT والـ bilirubin من غير ما يعرّفه. تعريفه في الـ EASL: **hepatocellular injury (ALT > 3× ULN) + jaundice (bilirubin > 2× ULN)** من غير سبب تاني، وده بيتوقع حوالي **10%** mortality أو transplant."
@@ -951,11 +1103,15 @@ lessons:
         page: 141
         title: "الـ mechanistic biomarkers"
         text: |
-          - **GLDH**: **mitochondrial dysfunction**. **Specific to the liver**، **early detection**، وبيفرّق بين **muscle and hepatic injuries**.
-          - **MDH**: **periportal** enzyme، **excellent association with ALT**، بس **مش liver-specific**.
-          - **HMGB1 (hyperacetylated)**: **DAMP** و immune activation marker، **greater sensitivity، predicts outcome**. عيبه في الجدول: **APAP DILI**، يعني الداتا أغلبها من الـ acetaminophen.
-          - **GSTs و alpha-GST**: phase II detoxification، **increased earlier than ALT**. ونفس العيب: الداتا أغلبها من **APAP DILI**.
-          - **M-CSFR1**، **osteopontin**، و **AFP**: **prognostic indicators** للـ **death and transplant**، والـ **AFP أضعف من الـ osteopontin**.
+          الـ markers دي بتقولك مش بس "الكبد اتأذى"، لكن اتأذى إزاي:
+
+          - **GLDH**: mitochondrial dysfunction. Specific to the liver، early detection، وبيفرّق بين muscle and hepatic injuries.
+          - **MDH**: periportal enzyme، excellent association with ALT، بس مش liver-specific.
+          - **HMGB1 (hyperacetylated)**: DAMP و immune activation marker، greater sensitivity، predicts outcome. عيبه في الجدول: APAP DILI، يعني الداتا أغلبها من الـ acetaminophen.
+          - **GSTs و alpha-GST**: phase II detoxification، increased earlier than ALT. ونفس العيب: الداتا أغلبها من APAP DILI.
+          - **M-CSFR1، osteopontin، و AFP**: prognostic indicators للـ death and transplant، والـ AFP أضعف من الـ osteopontin.
+
+          اربطها بالـ mechanisms من الدرس التالت: الـ GLDH للـ mitochondria، والـ HMGB1 للـ necrosis والمناعة.
       - kind: check
         page: 141
         question: "A marathon runner has raised AST and ALT after a race. Which biomarker best tells liver from muscle injury?"
@@ -984,11 +1140,13 @@ lessons:
         page: 141
         title: "الـ prognosis"
         text: |
-          - لو اتعرف بدري والدوا وقف → **most cases resolve without chronic sequelae**.
-          - الـ **mortality** بتعتمد أساسًا على **degree of hepatocellular injury**.
-          - **10% mortality** للأدوية اللي بتعمل **fulminant hepatitis** أو **toxic steatosis**.
-          - الـ **cholestatic** نادرًا جدًا (rarely, if ever) بيعمل **acute fatalities**.
-          - الـ prognosis **worse** لما الـ **jaundice** ييجي مع الـ **hepatocellular injury**.
+          - **Early recognition**: لو اتعرف بدري والدوا وقف، most cases resolve without chronic sequelae.
+          - **What decides mortality**: أساسًا degree of hepatocellular injury.
+          - **Worst drugs**: 10% mortality للأدوية اللي بتعمل fulminant hepatitis أو toxic steatosis.
+          - **Cholestatic**: rarely, if ever بيعمل acute fatalities.
+          - **Worst combination**: الـ prognosis worse لما الـ jaundice ييجي مع الـ hepatocellular injury.
+
+          ليه الصفرا مع الـ hepatocellular وحشة؟ التفسير المقبول: الـ bilirubin هنا عالي علشان الخلايا نفسها ماتت ومش قادرة تشيله، مش علشان قناة مسدودة. يعني ضرر كبير. ده نفس منطق الـ Hy's law.
       - kind: check
         page: 141
         question: "Which DILI picture carries the worst prognosis in the lecture?"
@@ -1007,7 +1165,7 @@ lessons:
         tone: analogy
         page: 141
         text: |
-          الـ **cholestatic** DILI زي ضيف تقيل: **بيطوّل** (الـ recovery ممكن ياخد شهور والهرش مزعج)، بس نادرًا جدًا بيموّت.
+          الـ **cholestatic** DILI زي ضيف تقيل: بيطوّل (الـ recovery ممكن ياخد شهور والهرش مزعج)، بس نادرًا جدًا بيموّت.
 
           الـ **hepatocellular + jaundice** هو اللي يستاهل كل انتباهك في الامتحان: ده اللي فيه الـ mortality.
       - kind: explain

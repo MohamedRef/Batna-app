@@ -9,6 +9,8 @@
    inside the chip instead of running off the card. */
 .bank .chip { white-space: normal; overflow-wrap: anywhere; max-inline-size: 100%; text-align: start; line-height: 1.35; }
 .bank .chip.toggle { display: inline-flex; align-items: center; gap: var(--sp-2); }
+/* At most two lines; the full title is the chip's tooltip. */
+.chip-label { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; min-inline-size: 0; }
 .chip.toggle {
   cursor: pointer;
   min-height: 40px;
@@ -23,7 +25,7 @@
 .chip.page { font-variant-numeric: tabular-nums; }
 
 .button {
-  min-height: 48px;
+  min-height: var(--tap-lg);
   padding-inline: var(--sp-4);
   border-radius: var(--radius);
   border: 1px solid var(--line);
@@ -35,7 +37,7 @@
 .button.ghost { background: none; }
 .button:disabled { opacity: 0.45; cursor: default; }
 .button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
-.link { background: none; border: 0; color: var(--muted); cursor: pointer; text-decoration: underline; min-height: 44px; }
+.link { background: none; border: 0; color: var(--muted); cursor: pointer; text-decoration: underline; min-height: var(--tap); }
 
 .start-row { display: flex; flex-wrap: wrap; gap: var(--sp-3); margin-block-start: var(--sp-2); }
 .button.start { display: flex; flex-direction: column; align-items: flex-start; padding-block: var(--sp-2); flex: 1 1 14rem; }
@@ -156,7 +158,7 @@
   align-items: center;
   gap: var(--sp-2);
   cursor: pointer;
-  min-height: 48px;
+  min-height: var(--tap-lg);
   padding-inline: var(--sp-3);
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -205,3 +207,20 @@
   box-shadow: 0 12px 40px rgb(0 0 0 / 0.25);
 }
 .bank-sheet .start-row .button { flex: 1 1 10rem; }
+
+/* ---------- tablet ---------- */
+/* From 600px the practice Start buttons stay at the foot of the screen
+   while the filters scroll (desk.css .tab-cols puts the mock exam beside
+   them from 840px). */
+@media (min-width: 600px) {
+  .bank-cols .tab-main .start-row {
+    position: sticky;
+    inset-block-end: 0;
+    z-index: 1;
+    background: var(--surface);
+    padding-block: var(--sp-2);
+    border-block-start: 1px solid var(--line);
+    /* Covers the strip of padding under it, so no chip shows below. */
+    box-shadow: 0 var(--sp-6) 0 var(--surface);
+  }
+}

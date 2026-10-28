@@ -4,10 +4,10 @@
 //! hands its practice items to a study session. The layout follows Kabar's
 //! lesson player (adapted from kabar-app main: crates/app/src/lesson.rs).
 
-use batna_core::lesson::{Lesson, StepBody};
+use batna_core::lesson::{Lesson, Step, StepBody};
 use dioxus::prelude::*;
 
-use super::steps::{CheckBar, StepView};
+use super::steps::{CheckBar, StepAt, StepView};
 use super::text::Line;
 use super::{Mark, close, mark, next_lesson, save_mark};
 use crate::i18n::learn as tx;
@@ -56,8 +56,19 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
         use_signal(|| if start.answers.len() == n { start.answers.clone() } else { vec![None::<bool>; n] });
     let mut skipped =
         use_signal(|| if start.skipped.len() == n { start.skipped.clone() } else { vec![false; n] });
-    let mut check = use_signal(|| None::<Callback<()>>);
+    let check = use_signal(|| vec![None::<Callback<()>>; n]);
     use_context_provider(|| CheckBar(check));
+    // Steps stay mounted once seen (hidden when not current), so Back shows
+    // an answered step as he left it, read-only, and never grades it again.
+    let mut seen = use_signal(|| (0..n).map(|k| k == start.at).collect::<Vec<_>>());
+    // Try steps answered in an earlier session: their grades are reviews
+    // already, so they show a done note instead of the cards.
+    let tried_before: Vec<bool> = (0..n)
+        .map(|k| {
+            start.answers.get(k).is_some_and(Option::is_some)
+                || start.skipped.get(k).copied().unwrap_or(false)
+        })
+        .collect();
     let questions: Vec<bool> = lesson.steps.iter().map(|s| s.body.is_question()).collect();
 
     let go = {
@@ -65,7 +76,9 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
         let questions = questions.clone();
         move |to: usize| {
             at.set(to);
-            check.set(None);
+            if to < n {
+                seen.write()[to] = true;
+            }
             if to == n {
                 let (right, asked) = score(&answers.read(), &skipped.read(), &questions);
                 save_mark(&id, Mark { done_ms: crate::store::now_ms(), right, asked });
@@ -92,10 +105,8 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
     let step = lesson.steps[i].clone();
     let is_try = matches!(step.body, StepBody::Try { .. });
     let is_q = step.body.is_question() || is_try;
-    // A Try step already played isn't played again: its grades are reviews.
-    let try_done = is_try && (answers.read()[i].is_some() || skipped.read()[i]);
     let can_go = !is_q || answers.read()[i].is_some() || skipped.read()[i];
-    let seed = format!("{}#{}", lesson.id, i);
+    let ready = check.read()[i];
     let mut go_next = go.clone();
     let mut go_back = go.clone();
     let mut go_skip = go.clone();
@@ -129,31 +140,22 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                 " · "
                 bdi { "{lecture_title}" }
             }
-            article { key: "{i}", class: "card ls-stage", "data-kind": step.body.kind(),
-                if try_done {
-                    div { class: "ls-try-done",
-                        p { class: "ls-kicker", {tx::TRY} }
-                        p { {tx::TRY_DONE} }
-                        p { class: "muted small", {tx::TRY_DONE_HINT} }
-                    }
-                } else {
-                    StepView {
-                        body: step.body.clone(),
-                        seed,
-                        on_answer: move |right: bool| {
-                            let mut a = answers.write();
-                            if a[i].is_none() {
-                                a[i] = Some(right);
-                                // Answered after all: it counts.
-                                skipped.write()[i] = false;
-                            }
-                        },
-                    }
-                }
-                if let Some(page) = step.page {
-                    footer { class: "ls-src",
-                        crate::hover::BookPage { page, quote: step.quote.clone() }
-                    }
+            for (k , st) in lesson.steps.iter().enumerate().filter(|(k, _)| seen.read()[*k]) {
+                Stage {
+                    key: "{k}",
+                    k,
+                    current: k == i,
+                    step: st.clone(),
+                    seed: format!("{}#{}", lesson.id, k),
+                    try_done: tried_before[k] && matches!(st.body, StepBody::Try { .. }),
+                    on_answer: move |right: bool| {
+                        let mut a = answers.write();
+                        if a[k].is_none() {
+                            a[k] = Some(right);
+                            // Answered after all: it counts.
+                            skipped.write()[k] = false;
+                        }
+                    },
                 }
             }
             footer { class: "ls-nav",
@@ -163,7 +165,7 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                     onclick: move |_| go_back(i - 1),
                     {tx::BACK}
                 }
-                if is_q && !can_go && check().is_none() {
+                if is_q && !can_go && ready.is_none() {
                     button {
                         class: "btn-link",
                         onclick: move |_| {
@@ -173,7 +175,7 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                         {tx::SKIP}
                     }
                 }
-                if let Some(run) = check().filter(|_| !can_go) {
+                if let Some(run) = ready.filter(|_| !can_go) {
                     button {
                         class: "btn btn-primary ls-next",
                         "aria-keyshortcuts": "Enter",
@@ -188,6 +190,37 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                         onclick: move |_| go_next(i + 1),
                         {if i + 1 == n { tx::FINISH } else { tx::NEXT }}
                     }
+                }
+            }
+        }
+    }
+}
+
+/// One step's card. It stays mounted after he leaves it, hidden.
+#[component]
+fn Stage(
+    k: usize,
+    current: bool,
+    step: Step,
+    seed: String,
+    try_done: bool,
+    on_answer: EventHandler<bool>,
+) -> Element {
+    use_context_provider(|| StepAt(k));
+    rsx! {
+        article { class: "card ls-stage", hidden: !current, "data-kind": step.body.kind(),
+            if try_done {
+                div { class: "ls-try-done",
+                    p { class: "ls-kicker", {tx::TRY} }
+                    p { {tx::TRY_DONE} }
+                    p { class: "muted small", {tx::TRY_DONE_HINT} }
+                }
+            } else {
+                StepView { body: step.body.clone(), seed, on_answer }
+            }
+            if let Some(page) = step.page {
+                footer { class: "ls-src",
+                    crate::hover::BookPage { page, quote: step.quote.clone() }
                 }
             }
         }

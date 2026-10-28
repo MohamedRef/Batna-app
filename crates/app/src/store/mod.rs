@@ -10,6 +10,7 @@
 mod backend;
 pub mod export;
 pub mod import;
+mod install;
 pub mod own;
 mod paths;
 pub mod sync;
@@ -136,19 +137,26 @@ pub struct Store {
 
 impl Store {
     pub fn open(path: &Path) -> Result<Self> {
+        Self::open_marked(path, None)
+    }
+
+    /// Opens the database and, with a `marker` in a folder that is never
+    /// backed up, gives a database copied from another install its own
+    /// device id (`install`).
+    pub fn open_marked(path: &Path, marker: Option<&Path>) -> Result<Self> {
         if let Some(dir) = path.parent() {
             let _ = std::fs::create_dir_all(dir);
         }
         let conn = Connection::open(path)?;
         conn.pragma_update(None, "journal_mode", "WAL")?;
-        Self::init(conn, Some(path.to_path_buf()))
+        Self::init(conn, Some(path.to_path_buf()), marker)
     }
 
     pub fn open_in_memory() -> Result<Self> {
-        Self::init(Connection::open_in_memory()?, None)
+        Self::init(Connection::open_in_memory()?, None, None)
     }
 
-    fn init(conn: Connection, path: Option<PathBuf>) -> Result<Self> {
+    fn init(conn: Connection, path: Option<PathBuf>, marker: Option<&Path>) -> Result<Self> {
         conn.pragma_update(None, "foreign_keys", "ON")?;
         let version: u32 = conn.pragma_query_value(None, "user_version", |r| r.get(0))?;
         if version as usize > MIGRATIONS.len() {
@@ -170,6 +178,10 @@ impl Store {
                 conn.execute("INSERT INTO meta (key, value) VALUES ('device_id', ?1)", [&d])?;
                 d
             }
+        };
+        let device = match marker {
+            Some(m) => install::check(&conn, m, &device)?,
+            None => device,
         };
         sync::seed(&conn, &device)?;
         sync::check_tables(&conn)?;
@@ -437,7 +449,8 @@ fn newest_stamp(conn: &Connection) -> Result<Option<Hlc>> {
 pub fn shared() -> &'static Store {
     STORE.get_or_init(|| {
         let opened = paths::data_dir().and_then(|dir| {
-            Store::open(&dir.join("batna.db")).map_err(|e| format!("{}: {e}", dir.display()))
+            Store::open_marked(&dir.join("batna.db"), paths::install_marker().as_deref())
+                .map_err(|e| format!("{}: {e}", dir.display()))
         });
         match opened {
             Ok(s) => s,

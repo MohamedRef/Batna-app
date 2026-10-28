@@ -68,6 +68,17 @@ Deploy the hub from `main` at PR #134 or later. An older hub rejects the `relay`
 3. Build the APK the same way (`.env` in place) and sign in on the S24 Ultra and the Tab S11.
 4. Review a card on one device: the review shows on the others within seconds. Until you sign in, everything stays on the device, exactly as before.
 
+### 3.5 The preview APK (GitHub Actions)
+The auto-updating preview APK is built on GitHub, where there is no `.env`. Give it the same values once, in the repo's **Settings › Secrets and variables › Actions**:
+
+| Kind | Name | Value |
+|---|---|---|
+| Variable | `BATNA_CLOUD_URL` | the Worker URL from §3.3 |
+| Variable | `BATNA_GOOGLE_CLIENT_ID` | the Desktop client's id |
+| Secret | `BATNA_GOOGLE_CLIENT_SECRET` | the Desktop client's secret |
+
+`batna-android-preview.yml` passes them to the build on pushes to `main` only; a PR's build gets none and its APK hides sign-in. The next preview build (and the update it ships) can sign in. GitHub masks the secret in logs, and nothing writes it to the repo. Like every installed-app secret it is readable inside the APK, which Google accepts for Desktop clients.
+
 ## 4. API
 
 All JSON. Authenticated routes take `Authorization: Bearer <access_token>`. Errors are `{ "code": "...", "message": "..." }` (`ErrorCode` in `crates/protocol/src/cloud.rs`).
@@ -95,6 +106,7 @@ cargo test -p batna-server -p batna-protocol   # hub, tokens, devices and merge 
 ## 6. Privacy and limits
 
 - Only your reviews, checks and settings leave the device. No patient data, no book text.
+- A phone moved with Smart Switch or another copy of the app's data is a new device to the hub. Android backup is off in the manifest, and on Android 12+, where a device-to-device transfer ignores that, the app notices it was copied (a marker in `no_backup/` is missing) and takes a new `device_id` with an empty outbox (`crates/app/src/store/install.rs`). Its reviews are already on the hub, so it simply syncs as a new device. Sign in again on the new phone.
 - Secrets (`TOKEN_SIGNING_KEY`, `ALLOWED_EMAILS`) are Worker secrets, never in git.
 - Free-plan limits (Workers 100,000 requests/day, Durable Objects 100,000 requests/day) are far above one learner's use. The Free plan has no card on file, so Cloudflare pauses at a limit instead of billing.
 - On Linux (development and CI only) the session is kept in memory, so you sign in on every launch. The Mac uses the Keychain and Android the Keystore.

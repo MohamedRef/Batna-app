@@ -239,6 +239,13 @@ pub mod bank {
     pub const PAUSED_OVER: &str = "وقته خلص، فهيتسلّم زي ما هو.";
     pub const RESUME: &str = "كمّل";
     pub const SUBMIT_NOW: &str = "سلّمه دلوقتي";
+    pub const CONFIRM_TITLE: &str = "تسلّم دلوقتي؟";
+    pub const CONFIRM_BLANK_A: &str = "لسه";
+    pub const CONFIRM_BLANK_B: &str = "سؤال من غير إجابة، والفاضي مالوش درجة.";
+    pub const CONFIRM_FLAGGED: &str = "متعلّم عليهم كنت عايز ترجعلهم.";
+    pub const CONFIRM_BACK_TO: &str = "ارجع للسؤال";
+    pub const CONFIRM_BACK: &str = "ارجع للامتحان";
+    pub const CONFIRM_SUBMIT: &str = "سلّم كده";
 }
 
 pub mod stats {

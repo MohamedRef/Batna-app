@@ -689,6 +689,8 @@ pub mod own {
     pub const FORM_EDIT: &str = "عدّل الكارت";
     pub const FORM_SHARED: &str = "كارت من نص شيّرته";
     pub const SHARED_HINT: &str = "النص اتحط في الضهر. اكتب السؤال في الوش.";
+    pub const SHARED_TRIMMED: &str = "النص كان أطول من ٣٠٠٠ حرف، فآخره اتشال. لو محتاجه، اعمل منه كارت تاني.";
+    pub const SHARE_WAITING: &str = "في نص تاني شيّرته مستني، هيفتح أول ما تخلّص الكارت ده.";
     pub const FRONT: &str = "الوش (السؤال)";
     pub const BACK: &str = "الضهر (الإجابة)";
     pub const LECTURE: &str = "المحاضرة";
@@ -703,6 +705,7 @@ pub mod own {
     pub const E_BACK: &str = "اكتب الإجابة في الضهر.";
     pub const E_FRONT_LONG: &str = "الوش طويل، خليه سؤال قصير (٦٠٠ حرف بالكتير).";
     pub const E_BACK_LONG: &str = "الضهر طويل، قسّمه على كذا كارت (٣٠٠٠ حرف بالكتير).";
+    pub const E_SOURCE_LONG: &str = "«منين» طويلة، خليها اسم قصير (٢٠٠ حرف بالكتير).";
     pub const FROM: &str = "من";
 }
 
@@ -730,6 +733,9 @@ pub mod data {
     pub const IMPORT_PICK_FIRST: &str = "اختار ملف النسخة";
     pub const IMPORT_PICKING: &str = "اختار الملف…";
     pub const IMPORT_PICK_FAILED: &str = "ما عرفتش أفتح اختيار الملفات";
+    pub const IMPORT_COPY_FAILED: &str =
+        "ما عرفتش أفتح الملف ده، أو هو أكبر من نسخة باطنة. اختار ملف batna-export.";
+    pub const IMPORT_TOO_BIG: &str = "الملف ده كبير أوي على إنه نسخة من باطنة. اختار ملف batna-export.";
     pub const IMPORT_PASTE: &str = "أو الزق النص";
     pub const IMPORT_PASTED: &str = "نص ملزوق";
     pub const IMPORT_READ: &str = "اقرا النص";

@@ -33,6 +33,25 @@ fn found_files() -> Vec<PathBuf> {
     out
 }
 
+/// A real export is a few MB; anything this big is the wrong file.
+const MAX_IMPORT_BYTES: u64 = 50 * 1024 * 1024;
+
+/// Reads, parses and plans a backup file off the UI thread.
+async fn read_plan(path: PathBuf) -> Result<(Value, ImportPlan), String> {
+    tokio::task::spawn_blocking(move || {
+        let len = std::fs::metadata(&path).map_err(|e| e.to_string())?.len();
+        if len > MAX_IMPORT_BYTES {
+            return Err(tx::IMPORT_TOO_BIG.to_string());
+        }
+        let text = std::fs::read_to_string(&path).map_err(|e| e.to_string())?;
+        let doc = parse(&text).map_err(|e| e.to_string())?;
+        let plan = store::shared().plan_import(&doc).map_err(|e| e.to_string())?;
+        Ok((doc, plan))
+    })
+    .await
+    .map_err(|e| e.to_string())?
+}
+
 #[derive(Clone, PartialEq)]
 enum Step {
     Pick,
@@ -48,6 +67,20 @@ pub fn ImportCard() -> Element {
     let mut pasted = use_signal(String::new);
     let mut picking = use_signal(|| false);
 
+    let mut load_file = move |name: String, path: PathBuf, remove: bool| {
+        picking.set(true);
+        spawn(async move {
+            let planned = read_plan(path.clone()).await;
+            if remove {
+                let _ = std::fs::remove_file(&path);
+            }
+            picking.set(false);
+            step.set(match planned {
+                Ok((doc, plan)) => Step::Preview { name, doc, plan },
+                Err(e) => Step::Failed(e),
+            });
+        });
+    };
     let mut load = move |name: String, text: String| {
         let s = store::shared();
         step.set(match parse(&text).and_then(|doc| s.plan_import(&doc).map(|plan| (doc, plan))) {
@@ -72,10 +105,7 @@ pub fn ImportCard() -> Element {
                                         let path = path.clone();
                                         move |_| {
                                             let name = path.file_name().map(|n| n.to_string_lossy().into_owned()).unwrap_or_default();
-                                            match std::fs::read_to_string(&path) {
-                                                Ok(text) => load(name, text),
-                                                Err(e) => step.set(Step::Failed(e.to_string())),
-                                            }
+                                            load_file(name, path.clone(), false);
                                         }
                                     },
                                     bdi { dir: "ltr", {path.file_name().map(|n| n.to_string_lossy().into_owned()).unwrap_or_default()} }
@@ -96,14 +126,8 @@ pub fn ImportCard() -> Element {
                                     let done = documents::finished().await;
                                     picking.set(false);
                                     match done {
-                                        DocState::Opened { name, path } => match std::fs::read_to_string(&path) {
-                                            Ok(text) => {
-                                                let _ = std::fs::remove_file(&path);
-                                                load(name, text)
-                                            }
-                                            Err(e) => step.set(Step::Failed(e.to_string())),
-                                        },
-                                        DocState::Failed => step.set(Step::Failed(tx::IMPORT_PICK_FAILED.to_string())),
+                                        DocState::Opened { name, path } => load_file(name, PathBuf::from(path), true),
+                                        DocState::Failed => step.set(Step::Failed(tx::IMPORT_COPY_FAILED.to_string())),
                                         _ => {}
                                     }
                                 });

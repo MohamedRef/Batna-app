@@ -12,6 +12,8 @@ use crate::store::{export_dir, now_ms, use_review};
 pub fn ExportVerdicts() -> Element {
     let review = use_review();
     let mut result = use_signal(|| None::<Result<(String, String), String>>);
+    // Each export opens the Android "Save to" dialog afresh.
+    let mut attempt = use_signal(|| 0u32);
     let counts = review.backend.borrow().verdict_counts();
     let count = |v| counts.get(&v).copied().unwrap_or(0);
     let total: usize = counts.values().sum();
@@ -29,6 +31,7 @@ pub fn ExportVerdicts() -> Element {
             let path = dir.join(format!("batna-verdicts-{date}.yaml"));
             std::fs::write(&path, &yaml).map(|_| path.display().to_string()).map_err(|e| e.to_string())
         });
+        attempt += 1;
         result.set(Some(saved.map(|p| (p, yaml))));
     };
 
@@ -43,6 +46,9 @@ pub fn ExportVerdicts() -> Element {
             match result() {
                 Some(Ok((path, yaml))) => rsx! {
                     p { class: "small", role: "status", "{tx::EXPORT_SAVED} " bdi { dir: "ltr", "{path}" } }
+                    if cfg!(target_os = "android") {
+                        crate::data_export::SaveTo { key: "{attempt}", path: path.clone() }
+                    }
                     details {
                         summary { class: "small", {tx::EXPORT_SHOW} }
                         textarea { class: "export-text", dir: "ltr", readonly: true, rows: 10, value: "{yaml}" }

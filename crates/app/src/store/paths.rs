@@ -31,6 +31,16 @@ pub fn export_dir() -> Result<PathBuf, String> {
     }
 }
 
+/// Android only: a file in the app's `no_backup` folder, which Auto Backup
+/// and device-to-device transfers never copy (`store::install`).
+pub fn install_marker() -> Option<PathBuf> {
+    if !cfg!(target_os = "android") || std::env::var_os("BATNA_DATA_DIR").is_some() {
+        return None;
+    }
+    let files = data_dir().ok()?;
+    Some(files.parent()?.join("no_backup").join("batna-install"))
+}
+
 #[cfg(target_os = "android")]
 fn android_package() -> Result<String, String> {
     let cmdline = std::fs::read("/proc/self/cmdline").map_err(|e| e.to_string())?;

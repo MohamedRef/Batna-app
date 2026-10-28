@@ -42,6 +42,9 @@ pub mod count {
             one: "حاجة جديدة", two: "حاجتين جداد", few: "حاجات جديدة", many: "حاجة جديدة"
         };
     pub const TIME: Noun = Noun { one: "مرة", two: "مرتين", few: "مرات", many: "مرة" };
+    /// Cases and calc items together.
+    pub const CASE: Noun =
+        Noun { one: "حالة واحدة", two: "حالتين", few: "حالات", many: "حالة" };
 
     /// Any integer type; a negative number counts as 0.
     pub fn count<N: TryInto<u64>>(n: N, noun: &Noun) -> String {
@@ -111,6 +114,10 @@ pub mod today {
     pub fn start(minutes: u32) -> String {
         format!("ابدأ جلسة {}", super::count::count(minutes, &super::count::MINUTE))
     }
+    /// "3 حالات مستنية مراجعة في شاشة الحالات".
+    pub fn due_cases(n: usize) -> String {
+        format!("{} مستنية مراجعة في شاشة الحالات", super::count::count(n, &super::count::CASE))
+    }
     pub const ALL_DONE: &str = "خلّصت المستحق النهارده. شغل حلو.";
     pub const NEW_CAP_REACHED: &str = "وخلّصت الجديد اللي محدّده لليوم";
     pub const TOMORROW: &str = "بكرة:";
@@ -169,7 +176,10 @@ pub mod today {
             "الخطة محتاجة {days} في الأسبوع عشان كل الجديد يخلص قبل آخر الأيام. تقدر تعدّلها من تقدّمي ← خطة الامتحان."
         )
     }
-    pub const TIGHT_CAP: &str = "حد المراجعات اليومي مش مكفّي الخطة دي. تقدر تعلّيه من تقدّمي ← خطة الامتحان.";
+    pub fn tight_cap(cap: u32) -> String {
+        format!("لو علّيت حد المراجعات اليومي لـ {cap}، الخطة تلحق كلها. تقدر تعدّله من تقدّمي ← خطة الامتحان.")
+    }
+    pub const TIGHT_HIGH_YIELD: &str = "الوقت مش مكفّي كل الجديد قبل آخر الأيام. ركّز على high-yield الأول.";
 }
 
 pub mod study_settings {
@@ -486,10 +496,16 @@ pub mod plan {
 
     pub const ON_TRACK: &str = "الخطة مريحة: كل المحاضرات هتخلص بدري وتلحق تلفّ عليها تاني.";
     pub const SNUG: &str = "الخطة ماشية، بس الجديد هياخد جزء من وقت اللفّة التانية.";
-    pub const TIGHT: &str = "عشان الحد اللي حاطه للمراجعات، فيه أسئلة مش هتلحق قبل آخر 10 أيام:";
+    pub const TIGHT: &str = "على الخطة دي، فيه أسئلة مش هتلحق قبل آخر 10 أيام:";
     pub const TIGHT_ADD: &str = "لو زوّدت أيام مذاكرة في الأسبوع هتلحق كلها. عدد الأيام:";
-    pub const TIGHT_CAP: &str =
-        "زيادة الأيام لوحدها مش كفاية. ممكن تعلّي حد المراجعات اليومي، أو تركّز على high-yield الأول.";
+    pub fn tight_cap(cap: u32) -> String {
+        format!("لو علّيت حد المراجعات اليومي لـ {cap} هتلحق كلها.")
+    }
+    pub const TIGHT_HIGH_YIELD: &str =
+        "حتى بأيام أكتر وحد مراجعات أعلى مش هتلحق كلها، فركّز على high-yield الأول.";
+    pub const TIGHT_FINAL: &str =
+        "إنت في آخر الأيام، فالوقت للامتحانات التجريبية والمواضيع الضعيفة. في الجديد، ركّز على high-yield بس.";
+    pub const PICK_DAY_FAR: &str = "اختار يوم في خلال 3 سنين من النهارده.";
     pub const FINAL_WINDOW: &str = "إنت في آخر الأيام: امتحانات تجريبية ومراجعة المواضيع الضعيفة. مفيش جديد.";
     pub const EXAM_DONE: &str = "الامتحان عدّى. ربنا يوفقك! لو عندك امتحان تاني، حط ميعاده.";
 
@@ -651,6 +667,7 @@ pub mod case {
     pub const BACK: &str = "رجوع للقائمة";
     pub const UNVERIFIED: &str = "لسه ما اتراجعش";
     pub const UPDATE: &str = "تحديث عن الكتاب";
+    pub const DUE: &str = "مستحقة مراجعة";
 }
 
 pub mod calc {
@@ -883,6 +900,11 @@ pub mod cloud {
     pub const NOT_CONFIGURED: &str = "المزامنة لسه ما اتفعّلتش في النسخة دي. مذاكرتك محفوظة على الجهاز، وتقدر تنقلها بنسخة احتياطية من «بياناتك».";
     pub const SIGN_IN: &str = "سجّل دخول بجوجل";
     pub const SIGNING_IN: &str = "كمّل تسجيل الدخول في المتصفح، وبعدين ارجع هنا.";
+    /// The browser page after Google sends him back (HTML).
+    pub const BROWSER_DONE: &str = "<h1>✓</h1><p>تمام، ارجع لباطنة.</p>";
+    pub const BROWSER_CANCELLED: &str = "<p>ما اتسجلتش. ارجع لباطنة وجرّب تاني.</p>";
+    /// "من" in "من 3 دقايق".
+    pub const AGO: &str = "من";
     pub const SIGNED_IN_AS: &str = "داخل بـ";
     pub const SIGN_OUT: &str = "اخرج من الجهاز ده";
     pub const CONNECTING: &str = "بيتصل";
@@ -1042,6 +1064,13 @@ pub mod update {
     pub const DONE_BODY: &str = "افتحه وكمّل من مكانك.";
     #[cfg_attr(not(target_os = "android"), allow(dead_code))]
     pub const READY_TITLE: &str = "تحديث باطنة جاهز: دوس عشان تثبّته";
+    /// The Android channel those two notifications go to.
+    #[cfg_attr(not(target_os = "android"), allow(dead_code))]
+    pub const INSTALL_CHANNEL: &str = "تحديثات باطنة";
+    #[cfg_attr(not(target_os = "android"), allow(dead_code))]
+    pub const INSTALL_CHANNEL_SUB: &str = "تحديث جاهز يتثبّت، وباطنة اتحدّث";
+    /// Before the version in the "what's new" sheet.
+    pub const SHEET_APP: &str = "باطنة · ";
 
     // The "new version" notification, and its switch.
     pub const NOTICE_AVAILABLE: &str = "نزلت نسخة جديدة من باطنة";
@@ -1174,6 +1203,7 @@ pub mod onboard {
         "عشان أوزّع المحاضرات والمراجعة على الأيام اللي فاضلة بهدوء. لو لسه مش متأكد، سيبها فاضية.";
     pub const EXAM_DAY: &str = "يوم الامتحان";
     pub const PICK_FUTURE: &str = "اختار يوم بعد النهارده.";
+    pub const PICK_FAR: &str = "اختار يوم في خلال 3 سنين من النهارده.";
     pub const DAYS_TITLE: &str = "بتذاكر أنهي أيام في الأسبوع؟";
     pub const DAYS_BODY: &str = "الخطة والتذكير هيمشوا على الأيام دي بس. أيام الراحة راحة.";
     pub const PICK_A_DAY: &str = "اختار يوم واحد على الأقل.";

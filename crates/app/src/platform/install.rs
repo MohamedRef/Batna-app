@@ -98,16 +98,18 @@ pub fn install_apk(
     done_title: &str,
     done_body: &str,
     ready_title: &str,
+    channel: (&str, &str),
 ) -> Result<(), String> {
     installer(|env, class, activity| {
         let (path, title, body) =
             (env.new_string(path)?, env.new_string(done_title)?, env.new_string(done_body)?);
         let ready = env.new_string(ready_title)?;
+        let (channel_name, channel_description) = (env.new_string(channel.0)?, env.new_string(channel.1)?);
         env.call_static_method(
             class,
             jni_str!("install"),
             jni_sig!(
-                "(Landroid/app/Activity;Ljava/lang/String;JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"
+                "(Landroid/app/Activity;Ljava/lang/String;JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"
             ),
             &[
                 JValue::Object(activity),
@@ -116,6 +118,8 @@ pub fn install_apk(
                 JValue::Object(&title),
                 JValue::Object(&body),
                 JValue::Object(&ready),
+                JValue::Object(&channel_name),
+                JValue::Object(&channel_description),
             ],
         )
         .map(drop)

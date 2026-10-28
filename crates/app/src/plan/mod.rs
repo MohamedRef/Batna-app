@@ -3,7 +3,7 @@
 
 use std::rc::Rc;
 
-use batna_core::plan::{self, Day, DayPlan, Focus, Plan, PlanInput, PlanSettings, PlanStatus};
+use batna_core::plan::{self, Day, DayPlan, Focus, Plan, PlanInput, PlanSettings, PlanStatus, TightFix};
 use batna_core::review::StudyStore;
 use batna_core::stats;
 use dioxus::prelude::*;
@@ -102,9 +102,40 @@ pub fn target_now(store: &dyn StudyStore) -> Option<DailyTarget> {
     target_for(store, SETTINGS.read().clone())
 }
 
+/// Today's target is read on every render of Today, Settings and the study
+/// setup, and building it replays the whole review log, so it is cached
+/// until the store changes, the study day rolls over or the plan is edited
+/// (#249).
+#[derive(Clone, PartialEq)]
+struct TargetKey {
+    revision: u64,
+    today: Day,
+    settings: PlanSettings,
+}
+
+thread_local! {
+    static TARGET: std::cell::RefCell<Option<(TargetKey, Option<DailyTarget>)>> =
+        const { std::cell::RefCell::new(None) };
+}
+
 fn target_for(store: &dyn StudyStore, settings: PlanSettings) -> Option<DailyTarget> {
     settings.exam?;
-    daily_target(&StudyData::load(store), &settings)
+    // No review context (tests, previews): no cache.
+    let Some(review) = try_consume_context::<crate::store::Review>() else {
+        return daily_target(&StudyData::load(store), &settings);
+    };
+    let clock = stats::Clock {
+        now_ms: crate::store::now_ms(),
+        zone: crate::store::zone(),
+        rollover_hour: batna_core::srs::ROLLOVER_HOUR as u32,
+    };
+    let key = TargetKey { revision: *review.revision.peek(), today: clock.today(), settings };
+    if let Some(hit) = TARGET.with_borrow(|c| c.as_ref().filter(|(k, _)| *k == key).map(|(_, t)| t.clone())) {
+        return hit;
+    }
+    let target = daily_target(&StudyData::load(store), &key.settings);
+    TARGET.set(Some((key, target.clone())));
+    target
 }
 
 /// New items a session may still start today: the exam plan's when there
@@ -152,11 +183,16 @@ fn Setup(today: Day, settings: PlanSettings, on_done: EventHandler<()>) -> Eleme
     let mut error = use_signal(|| None::<&'static str>);
     let had_exam = settings.exam.is_some();
     let min = today.plus(1).iso();
+    let max = today.plus(plan::MAX_DAYS_AHEAD).iso();
     let save = move |_| {
         let Some(exam) = Day::parse(&date.read()).filter(|d| *d > today) else {
             error.set(Some(tx::PICK_DAY));
             return;
         };
+        if !plan::exam_day_ok(today, exam) {
+            error.set(Some(tx::PICK_DAY_FAR));
+            return;
+        }
         if !weekdays.read().contains(&true) {
             error.set(Some(tx::PICK_WEEKDAY));
             return;
@@ -164,7 +200,7 @@ fn Setup(today: Day, settings: PlanSettings, on_done: EventHandler<()>) -> Eleme
         let mut s = SETTINGS.write();
         s.exam = Some(exam);
         s.weekdays = *weekdays.read();
-        s.review_cap = (*cap.read()).clamp(30, 1000);
+        s.review_cap = (*cap.read()).clamp(30, plan::MAX_REVIEW_CAP);
         save(&s);
         on_done.call(());
     };
@@ -177,6 +213,7 @@ fn Setup(today: Day, settings: PlanSettings, on_done: EventHandler<()>) -> Eleme
                 input {
                     r#type: "date",
                     min: "{min}",
+                    max: "{max}",
                     value: "{date}",
                     oninput: move |e| {
                         date.set(e.value());
@@ -235,11 +272,14 @@ fn StatusCard(p: Plan, exam: Option<Day>) -> Element {
     let message = match p.status {
         PlanStatus::OnTrack => tx::ON_TRACK.to_string(),
         PlanStatus::Snug => tx::SNUG.to_string(),
-        PlanStatus::Tight { left_over, extra_days: Some(n) } => {
-            format!("{} {left_over}. {} {n}.", tx::TIGHT, tx::TIGHT_ADD)
-        }
-        PlanStatus::Tight { left_over, extra_days: None } => {
-            format!("{} {left_over}. {}", tx::TIGHT, tx::TIGHT_CAP)
+        PlanStatus::Tight { left_over, fix } => {
+            let fix = match fix {
+                TightFix::MoreDays(n) => format!("{} {n}.", tx::TIGHT_ADD),
+                TightFix::HigherCap(cap) => tx::tight_cap(cap),
+                TightFix::HighYield => tx::TIGHT_HIGH_YIELD.to_string(),
+                TightFix::FinalWindow => tx::TIGHT_FINAL.to_string(),
+            };
+            format!("{} {left_over}. {fix}", tx::TIGHT)
         }
         PlanStatus::FinalWindow => tx::FINAL_WINDOW.to_string(),
         PlanStatus::ExamDone => tx::EXAM_DONE.to_string(),

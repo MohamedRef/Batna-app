@@ -91,7 +91,7 @@ pub fn speak(text: &str, rate: f32) -> Result<(), SpeakError> {
                 t.failed = None;
             }
             Err(e) => {
-                eprintln!("TextToSpeech could not start: {e}");
+                crate::diag::report!("TextToSpeech could not start: {e}");
                 t.failed = Some(Instant::now());
                 return Err(SpeakError::NoEngine);
             }
@@ -156,7 +156,7 @@ fn wait_until_ready() {
             if let Some(u) = t.pending.take()
                 && let Err(e) = say(engine, &u)
             {
-                eprintln!("TextToSpeech: {e:?}");
+                crate::diag::report!("TextToSpeech: {e:?}");
             }
             t.waiting = false;
             return;
@@ -164,7 +164,7 @@ fn wait_until_ready() {
         if t.created.is_none_or(|at| at.elapsed() > CONNECT_TIMEOUT) {
             // No engine ever answered (none installed or all disabled).
             // Release this one and allow a fresh try later.
-            eprintln!("TextToSpeech did not connect within {CONNECT_TIMEOUT:?}");
+            crate::diag::report!("TextToSpeech did not connect within {CONNECT_TIMEOUT:?}");
             if let Some(engine) = t.engine.take() {
                 let _ = with_activity(|env, _| {
                     env.call_method(engine.as_obj(), jni_str!("shutdown"), jni_sig!("()V"), &[])?;

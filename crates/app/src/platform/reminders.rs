@@ -20,7 +20,7 @@ pub fn schedule(json: &str) {
     report(android::schedule(json));
     #[cfg(target_os = "macos")]
     if let Err(e) = mac::schedule(json) {
-        eprintln!("Mac reminders: {e}");
+        crate::diag::report!("Mac reminders: {e}");
     }
     #[cfg(not(any(target_os = "android", target_os = "macos")))]
     let _ = json;
@@ -31,7 +31,9 @@ pub fn schedule(json: &str) {
 pub fn repeat(json: &str) {
     #[cfg(target_os = "android")]
     report(android::string_call("repeat", json));
-    #[cfg(not(target_os = "android"))]
+    #[cfg(target_os = "macos")]
+    mac::repeat(json);
+    #[cfg(not(any(target_os = "android", target_os = "macos")))]
     let _ = json;
 }
 
@@ -175,8 +177,19 @@ mod android {
 /// would abort, so everything checks for one first. Calendar triggers fire at
 /// the local date and time in the Mac's own zone, so daylight saving never
 /// moves a reminder.
+///
+/// macOS can't wake Batna when the last planned reminder fires (Android's
+/// `extend`), so the fallback is armed ahead instead: dated [`plan::Repeat`]
+/// reminders after the planned ones, up to macOS's 64 pending. That is two
+/// months at one a day and three weeks at three, and every launch of Batna
+/// re-plans from today. Weekly repeating triggers would ring twice on the
+/// planned days, and on days whose target is already met.
+///
+/// [`plan::Repeat`]: crate::reminders::plan::Repeat
 #[cfg(target_os = "macos")]
 mod mac {
+    use std::sync::Mutex;
+
     use block2::RcBlock;
     use objc2::runtime::Bool;
     use objc2_foundation::{NSBundle, NSDateComponents, NSError, NSString};
@@ -185,6 +198,14 @@ mod mac {
         UNNotificationRequest, UNUserNotificationCenter,
     };
     use serde::Deserialize;
+
+    use crate::reminders::plan::{self, Repeat};
+
+    /// macOS keeps the soonest 64 pending notifications per app.
+    const MAX: usize = 64;
+
+    /// The latest fallback from [`repeat`], read by the next [`schedule`].
+    static REPEAT: Mutex<Option<Repeat>> = Mutex::new(None);
 
     #[derive(Deserialize)]
     struct Item {
@@ -204,7 +225,7 @@ mod mac {
         }
         let done = RcBlock::new(|granted: Bool, _error: *mut NSError| {
             if !granted.as_bool() {
-                eprintln!("notifications not allowed on this Mac");
+                crate::diag::report!("notifications not allowed on this Mac");
             }
         });
         UNUserNotificationCenter::currentNotificationCenter()
@@ -214,12 +235,29 @@ mod mac {
             );
     }
 
-    /// Replaces Batna's pending notifications with `json`'s.
+    /// Keeps the fallback (`{}` for none) for the next [`schedule`].
+    pub fn repeat(json: &str) {
+        let spec = serde_json::from_str::<Repeat>(json).ok();
+        *REPEAT.lock().unwrap_or_else(|e| e.into_inner()) = spec;
+    }
+
+    /// Replaces Batna's pending notifications with `json`'s, then the
+    /// fallback after them.
     pub fn schedule(json: &str) -> Result<(), String> {
         if !bundled() {
             return Ok(());
         }
-        let items: Vec<Item> = serde_json::from_str(json).map_err(|e| e.to_string())?;
+        let mut items: Vec<Item> = serde_json::from_str(json).map_err(|e| e.to_string())?;
+        let spec = REPEAT.lock().unwrap_or_else(|e| e.into_inner()).clone();
+        if let (Some(r), Some(last)) = (spec, items.last().map(|i| i.date.clone())) {
+            let more = plan::after(&last, &r, MAX.saturating_sub(items.len()));
+            items.extend(more.into_iter().map(|(date, time)| Item {
+                date,
+                time,
+                title: r.title.clone(),
+                text: r.text.clone(),
+            }));
+        }
         let center = UNUserNotificationCenter::currentNotificationCenter();
         center.removeAllPendingNotificationRequests();
         for (i, item) in items.iter().enumerate() {

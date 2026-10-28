@@ -24,14 +24,18 @@ pub fn shuffled(n: usize, seed: &str) -> Vec<usize> {
     out
 }
 
-/// Positions in `answer` whose step is out of place.
-///
-/// A step counts as in place when it belongs to the longest run of steps that
-/// already sit in the right relative order. Comparing slot by slot would mark
-/// every step after one early slip as wrong; this marks only the slip.
+/// Positions in `answer` whose step is not at its own number. Only these
+/// get "its place is N"; every other step is exactly where the book has it.
 pub fn misplaced(answer: &[usize]) -> Vec<usize> {
-    let keep = longest_increasing(answer);
-    (0..answer.len()).filter(|pos| !keep.contains(pos)).collect()
+    answer.iter().enumerate().filter(|&(pos, &step)| pos != step).map(|(pos, _)| pos).collect()
+}
+
+/// The fewest steps to move to put `answer` right: everything outside the
+/// longest run already in the right relative order. One step put first
+/// shifts every other step off its number but is still one slip, so this,
+/// not [`misplaced`], drives the suggested grade.
+pub fn slips(answer: &[usize]) -> usize {
+    answer.len() - longest_increasing(answer).len()
 }
 
 /// Positions of one longest strictly increasing subsequence (patience sort,
@@ -59,9 +63,9 @@ fn longest_increasing(values: &[usize]) -> Vec<usize> {
     out
 }
 
-/// The grade to suggest; the learner can still pick another.
-pub fn suggest(misplaced: usize) -> Grade {
-    match misplaced {
+/// The grade to suggest from [`slips`]; the learner can still pick another.
+pub fn suggest(slips: usize) -> Grade {
+    match slips {
         0 => Grade::Good,
         1 => Grade::Hard,
         _ => Grade::Again,
@@ -88,15 +92,26 @@ mod tests {
     }
 
     #[test]
-    fn one_early_slip_marks_only_that_step() {
-        // The last step was put first; everything else keeps its relative order.
-        assert_eq!(misplaced(&[4, 0, 1, 2, 3]), vec![0]);
-        // Two neighbours swapped: one of them is out of place.
-        assert_eq!(misplaced(&[0, 2, 1, 3]).len(), 1);
+    fn a_step_is_in_place_only_at_its_own_number() {
+        // The case from issue #173: none of the five is at its number, though
+        // 2 and 3 are in the right order relative to each other.
+        assert_eq!(misplaced(&[3, 2, 4, 1, 0]), vec![0, 1, 2, 3, 4]);
+        // The last step put first: every step is off its number...
+        assert_eq!(misplaced(&[4, 0, 1, 2, 3]), vec![0, 1, 2, 3, 4]);
+        assert_eq!(misplaced(&[0, 2, 1, 3]), vec![1, 2]);
         assert_eq!(misplaced(&[0, 1, 2, 3]), Vec::<usize>::new());
-        // Fully reversed: only one step can stay.
-        assert_eq!(misplaced(&[3, 2, 1, 0]).len(), 3);
         assert_eq!(misplaced(&[]), Vec::<usize>::new());
+    }
+
+    #[test]
+    fn slips_count_the_fewest_moves() {
+        // ...but moving one step fixes it.
+        assert_eq!(slips(&[4, 0, 1, 2, 3]), 1);
+        assert_eq!(slips(&[0, 2, 1, 3]), 1);
+        assert_eq!(slips(&[0, 1, 2, 3]), 0);
+        assert_eq!(slips(&[3, 2, 1, 0]), 3);
+        assert_eq!(slips(&[3, 2, 4, 1, 0]), 3);
+        assert_eq!(slips(&[]), 0);
     }
 
     #[test]

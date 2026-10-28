@@ -7,7 +7,8 @@ use batna_core::content::{Body, Item};
 use batna_core::stats;
 use dioxus::prelude::*;
 
-use super::{SessionButton, StudyData, lecture_number};
+use super::{SessionButton, StudyData};
+use crate::content::lecture_code;
 use crate::i18n::stats as tx;
 
 #[component]
@@ -28,9 +29,9 @@ pub fn Mistakes(data: Rc<StudyData>) -> Element {
         for g in groups.iter() {
             section { class: "card mistake-group", key: "{g.lecture}-{g.title}",
                 h2 {
-                    span { class: "num small", "{lecture_number(&g.lecture)}" }
+                    span { class: "num small", "{lecture_code(&g.lecture)}" }
                     " "
-                    bdi { dir: "ltr", "{g.title}" }
+                    bdi { dir: "ltr", {crate::content::Library::get().title(&g.lecture)} }
                 }
                 ul { class: "mistakes",
                     for m in g.items.iter() {
@@ -49,12 +50,7 @@ pub fn Mistakes(data: Rc<StudyData>) -> Element {
 
 /// "غلطت مرة / مرتين / 3 مرات".
 fn missed(n: u32) -> String {
-    match n {
-        0 | 1 => format!("{} {}", tx::MISSED, tx::ONCE),
-        2 => format!("{} {}", tx::MISSED, tx::TWICE),
-        3..=10 => format!("{} {n} {}", tx::MISSED, tx::TIMES),
-        _ => format!("{} {n} {}", tx::MISSED, tx::TIMES_MANY),
-    }
+    format!("{} {}", tx::MISSED, crate::i18n::count::count(n.max(1), &crate::i18n::count::TIME))
 }
 
 /// The item's question, short enough for one line or two.

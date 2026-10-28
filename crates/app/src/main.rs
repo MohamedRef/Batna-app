@@ -3,6 +3,7 @@
 //! Feature chunks (SPLIT.md §7) each own a module directory and register it
 //! with one line in `Screen` / `screen_body` below.
 
+mod anki;
 mod back;
 mod bank;
 mod calc;
@@ -136,6 +137,7 @@ fn App() -> Element {
         prefs: Signal::new(prefs::DevicePrefs::load()),
     });
     let settings = use_context_provider(settings::SettingsNav::new);
+    use_context_provider(update::sheet::UpdateSheetNav::new);
     store::use_provide_review();
     cloud::use_provide_cloud();
     reminders::use_local_reminders();
@@ -218,6 +220,7 @@ fn App() -> Element {
                 {screen_body(current)}
             }
             settings::SettingsSheet {}
+            update::sheet::UpdateSheet {}
             own::ShareInbox {}
             onboarding::Onboarding {}
         }

@@ -13,6 +13,7 @@ use batna_core::review::{Grade, Origin, ReviewEvent, StudyStoreHandle};
 use dioxus::prelude::*;
 
 use crate::content::Library;
+use crate::i18n::count::{QUESTION, SECOND, count};
 use crate::i18n::oral as tx;
 use crate::platform::background::{self, Labels, Remote};
 use crate::platform::tts;
@@ -125,7 +126,7 @@ fn Setup() -> Element {
                     h1 { {tx::TITLE} }
                     p { class: "muted", {tx::INTRO} }
                     if available > 0 {
-                        p { class: "muted small", "{available} {tx::AVAILABLE}" }
+                        p { class: "muted small", "{tx::AVAILABLE} " {count(available, &QUESTION)} }
                         button {
                             class: "oral-start",
                             "aria-keyshortcuts": "Enter",
@@ -173,7 +174,7 @@ fn Setup() -> Element {
                             }
                         }
                         label { class: "oral-field",
-                            span { "{tx::THINK}: {settings.think} {tx::SECONDS}" }
+                            span { "{tx::THINK}: " {count(settings.think, &SECOND)} }
                             input {
                                 r#type: "range",
                                 min: "{THINK_MIN}",
@@ -363,7 +364,7 @@ fn Runner() -> Element {
                     span { class: "chip", {tx::AGAIN_BADGE} }
                 }
                 span { class: "muted small", bdi { "{lecture}" } }
-                crate::hover::BookPage { label: tx::PAGE, page: p.page, quote: p.quote.clone() }
+                crate::hover::BookPage { page: p.page, quote: p.quote.clone() }
                 button {
                     class: "oral-end",
                     "aria-keyshortcuts": "Escape",

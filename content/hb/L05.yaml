@@ -62,7 +62,7 @@ items:
   - id: hb.L05.007
     kind: enumerate
     topic: transmission
-    prompt: Enumerate the modes of HCV transmission, from most to least important.
+    prompt: Enumerate the modes of HCV transmission.
     points:
       - "Blood-borne (primary): needle sharing in IV drug use"
       - "Blood-borne: blood transfusions"
@@ -88,7 +88,7 @@ items:
   - id: hb.L05.009
     kind: cloze
     topic: transmission
-    text: "Vertical HCV transmission is {{c1::rare}}, and sexual transmission is {{c2::less common}}; the main route is {{c3::blood-borne}}."
+    text: "The main route of HCV transmission is {{c1::blood-borne}}; vertical transmission is rare, and sexual transmission is less common."
     src: { page: 91 }
     status: unverified
 
@@ -220,7 +220,8 @@ items:
     kind: cloze
     topic: daas
     text: "The -previr drugs (grazoprevir, glecaprevir) inhibit {{c1::NS3/4A protease}}; the -asvir drugs inhibit {{c2::NS5A}}; sofosbuvir inhibits {{c3::NS5B polymerase}}."
-    src: { page: 93 }
+    extra: The DAA table runs over p92–93; the NS5A and NS5B rows are on p93.
+    src: { page: 92 }
     status: unverified
   - id: hb.L05.026
     kind: table
@@ -246,16 +247,17 @@ items:
 
   # --- Management (p93) ---
   - id: hb.L05.028
-    kind: order
+    kind: enumerate
     topic: management
-    prompt: Put the pre-treatment work-up for HCV in the lecture's order.
-    steps:
+    prompt: Mention the pre-treatment work-up before starting DAAs for HCV.
+    points:
       - Confirm HCV RNA
       - Assess fibrosis (FIB-4, FibroScan)
       - Test for HIV and HBV, including total anti-HBc
       - Check liver and renal function
       - Pregnancy test if relevant
-      - Check for drug–drug interactions
+      - "Check for drug–drug interactions (e.g. amiodarone: serious bradycardia)"
+    pass: 5
     src: { page: 93 }
     status: unverified
   - id: hb.L05.029
@@ -284,7 +286,7 @@ items:
   - id: hb.L05.032
     kind: enumerate
     topic: management
-    prompt: After SVR in a cirrhotic HCV patient, what continued follow-up does the lecture require?
+    prompt: After DAA treatment in a cirrhotic HCV patient, what follow-up does the lecture require?
     points:
       - HCV RNA at 12 weeks post-treatment to confirm SVR12
       - HCC surveillance every 6 months
@@ -591,9 +593,9 @@ items:
     steps:
       - reveal: ""
         question: Should DAAs be started now?
-        options: ["No, DAAs are not approved in pregnancy", "Yes, sofosbuvir/velpatasvir", "Yes, glecaprevir/pibrentasvir", "Yes, with ribavirin"]
+        options: [Defer DAAs until after pregnancy and lactation, Start sofosbuvir/velpatasvir now, Start glecaprevir/pibrentasvir now, Start DAAs after the first trimester]
         answer: 0
-        why: DAAs are not currently approved in pregnancy or lactation.
+        why: "DAAs are not currently approved in pregnancy or lactation, so treatment waits until both are over (p94). Other options. Sofosbuvir/velpatasvir and glecaprevir/pibrentasvir: both are pangenotypic, but neither is approved in pregnancy. After the first trimester: there is no trimester in which the book approves DAAs."
       - reveal: She asks about the baby.
         question: How common is vertical transmission of HCV?
         options: [Rare, The main route, About 50%, Universal without treatment]

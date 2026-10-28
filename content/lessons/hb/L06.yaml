@@ -1,0 +1,1052 @@
+schema: batna.lesson/v1
+lecture: hb.L06
+lessons:
+  # ------------------------------------------------------------------
+  - id: hb.L06.lesson1
+    title: "من NAFLD لـ MASLD: الأسامي الجديدة"
+    hook: "الكبد الدهني غيّر اسمه. اعرف الشجرة الجديدة، وحسبة الـ alcohol اللي بتفرّق MASLD عن MetALD عن ALD."
+    minutes: 9
+    pages: [97, 98]
+    topics: [nomenclature]
+    goals:
+      - "تعدّ الـ 3 pathological aspects والـ 5 فروع تحت SLD"
+      - "تفرّق MASLD و MetALD و ALD بأرقام الـ alcohol"
+      - "تعرف إن معيار واحد من 5 cardiometabolic criteria كفاية"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 97
+        title: "3 حاجات بتحصل في الكبد"
+        text: |
+          الكتاب بيبدأ بالـ **pathological aspects** التلاتة: **Steatosis**، **Inflammation**، **Fibrosis**.
+
+          والـ spectrum في الصورة: **normal liver → simple steatosis → NASH**. والـ fibrosis بتبدأ حوالين الـ **central veins** والـ **portal tracts**، وبعدين تعمل **bridges**، وفي الآخر **nodules** (F4 = cirrhosis).
+      - kind: reveal
+        page: 97
+        prompt: "ليه غيّروا اسم NAFLD أصلًا؟ ما كان ماشي!"
+        answer: |
+          سببين (الكتاب بيقولهم في الـ conclusions):
+
+          - الاسم الجديد بيساعد الدكتور **يحدد السبب بدقة**، أو يعترف إن فيه **أسباب مختلطة** (metabolic + alcohol مثلًا).
+          - وبيتجنب الـ **stigmatization**: كلمة «non-alcoholic» بتعرّف المرض باللي هو مش هو، وكلمة «fatty» فيها وصمة.
+      - kind: figure
+        page: 98
+        title: "شجرة الـ SLD"
+        alt: "A tree. Steatotic liver disease (SLD) at the top branches into five: MASLD with its steatohepatitis form MASH; MetALD, MASLD with increased alcohol intake; ALD, alcohol-associated liver disease; specific aetiology SLD with DILI, monogenic diseases and miscellaneous; and cryptogenic SLD."
+        caption: "SLD هي المظلة. تحتها 5 فروع: **MASLD** (وجواها MASH)، **MetALD**، **ALD**، **Specific aetiology** (DILI، monogenic، misc)، و **Cryptogenic**."
+        svg: |
+          <svg viewBox="0 0 330 470" xmlns="http://www.w3.org/2000/svg">
+            <rect x="40" y="8" width="250" height="44" rx="8" class="fg-good"/>
+            <text x="165" y="28" text-anchor="middle" class="t-b">Steatotic Liver Disease</text>
+            <text x="165" y="45" text-anchor="middle" class="t-sm t-mut">SLD: the umbrella</text>
+            <path d="M24 52V436" class="fg-ink"/>
+            <path d="M24 90h20M24 172h20M24 246h20M24 320h20M24 412h20" class="fg-ink"/>
+            <rect x="44" y="66" width="280" height="76" rx="8" class="fg-acc"/>
+            <text x="54" y="86" class="t-b">MASLD</text>
+            <text x="54" y="104" class="t-sm">metabolic dysfunction-associated SLD</text>
+            <rect x="64" y="112" width="250" height="24" rx="12" class="fg-thin"/>
+            <text x="74" y="129" class="t-sm">MASH = its steatohepatitis form</text>
+            <rect x="44" y="152" width="280" height="44" rx="8" class="fg-acc"/>
+            <text x="54" y="171" class="t-b">MetALD</text>
+            <text x="54" y="188" class="t-sm">MASLD + increased alcohol intake</text>
+            <rect x="44" y="226" width="280" height="44" rx="8" class="fg-bad"/>
+            <text x="54" y="245" class="t-b t-bad">ALD</text>
+            <text x="54" y="262" class="t-sm">alcohol-associated liver disease</text>
+            <rect x="44" y="290" width="280" height="76" rx="8" class="fg-box"/>
+            <text x="54" y="310" class="t-b">Specific aetiology SLD</text>
+            <text x="54" y="330" class="t-sm">DILI (drug-induced liver injury)</text>
+            <text x="54" y="348" class="t-sm">monogenic diseases, miscellaneous</text>
+            <rect x="44" y="392" width="280" height="44" rx="8" class="fg-thin"/>
+            <text x="54" y="411" class="t-b">Cryptogenic SLD</text>
+            <text x="54" y="428" class="t-sm t-mut">no criteria, no cause found</text>
+            <text x="165" y="462" text-anchor="middle" class="t-sm t-mut">NAFLD → MASLD, NASH → MASH</text>
+          </svg>
+      - kind: match
+        page: 98
+        prompt: "وصّل كل وصف بالاسم الجديد:"
+        pairs:
+          - ["Old name NAFLD", "MASLD"]
+          - ["Old name NASH", "MASH"]
+          - ["Metabolic criteria plus moderate-heavy alcohol", "MetALD"]
+          - ["Steatosis, no criteria, no cause", "Cryptogenic SLD"]
+        why: "NAFLD بقت **MASLD** و NASH بقت **MASH**. لو فيه metabolic criteria + alcohol في الـ range المتوسط يبقى **MetALD**. ومن غير criteria ولا سبب: **cryptogenic**."
+      - kind: explain
+        page: 98
+        title: "الـ alcohol: فين الحدود؟"
+        text: |
+          الـ **MetALD** واقعة في النص بين MASLD و ALD: أولها «MASLD predominant» وآخرها «ALD predominant». تحت الحد التحتاني يبقى **MASLD**، وفوق الحد الفوقاني يبقى **ALD**.
+      - kind: table
+        page: 98
+        title: "MetALD alcohol range"
+        columns: ["Alcohol intake", "Women", "Men"]
+        rows:
+          - ["Average daily", "20–50 g", "30–60 g"]
+          - ["Weekly", "140–350 g", "210–420 g"]
+        hide: [[0, 1], [0, 2], [1, 1], [1, 2]]
+      - kind: aside
+        tone: exam
+        page: 98
+        text: |
+          ماتحفظش 8 أرقام. احفظ الـ **daily** بس واضرب في **7**:
+
+          - Women: 20 × 7 = **140**، و 50 × 7 = **350**.
+          - Men: 30 × 7 = **210**، و 60 × 7 = **420**.
+
+          والستات دايمًا الحد أقل (20/50 مقابل 30/60).
+      - kind: check
+        page: 98
+        question: "A 46-year-old man with steatosis, BMI 31 and TG 2.1 mmol/L drinks about 280 g of alcohol a week. Classification?"
+        options:
+          - "MetALD"
+          - "MASLD"
+          - "ALD"
+          - "Cryptogenic SLD"
+        answer: 0
+        why:
+          - "صح: عنده cardiometabolic criteria، و 280 g/week بين **210 و 420** للرجالة = MetALD (280 ÷ 7 = 40 g/day)."
+          - "الـ MASLD الصرف للرجالة تحت **210 g/week**."
+          - "الـ ALD فوق **420 g/week** للرجالة."
+          - "عنده criteria (BMI و TG)، فمش cryptogenic."
+      - kind: explain
+        page: 98
+        title: "الـ cardiometabolic criteria: واحد من 5 يكفي"
+        text: |
+          علشان steatosis تتسمّى **MASLD** لازم **at least 1 out of 5** من الـ **adult criteria**.
+
+          الخمسة كلهم مكونات الـ metabolic syndrome: **الوزن أو الوسط**، **السكر**، **الضغط**، **الـ TG**، و **الـ HDL**. وأي واحد منهم يتحسب كمان لو المريض **بياخد علاجه** (antihypertensive أو lipid-lowering أو علاج سكر).
+
+          الجدول الجاي فيه الأرقام. حاول تفتكرها قبل ما تكشف.
+      - kind: table
+        page: 98
+        title: "Adult cardiometabolic criteria (any 1 of 5)"
+        columns: ["Criterion", "Cut-off"]
+        rows:
+          - ["BMI", "≥ 25 kg/m² (≥ 23 in Asians)"]
+          - ["Waist", "> 94 cm men, > 80 cm women"]
+          - ["Fasting glucose", "≥ 5.6 mmol/L (100 mg/dL)"]
+          - ["HbA1c", "≥ 5.7%"]
+          - ["Blood pressure", "≥ 130/85 mmHg or treatment"]
+          - ["Triglycerides", "≥ 1.70 mmol/L (150 mg/dL)"]
+          - ["HDL", "≤ 1.0 mmol/L men, ≤ 1.3 mmol/L women"]
+        hide: [[0, 1], [1, 1], [3, 1], [5, 1], [6, 1]]
+      - kind: aside
+        tone: analogy
+        text: |
+          فكّر في الـ criteria زي **كارنيه النادي**: معاك أي كارنيه من الخمسة (وزن، سكر، ضغط، TG، HDL) تدخل نادي **MASLD**. مش محتاج الخمسة، ومش محتاج تبقى metabolic syndrome كاملة.
+
+          ومعاكش ولا كارنيه، ومفيش سبب تاني؟ يبقى **cryptogenic SLD**.
+      - kind: check
+        page: 98
+        question: "Which of these is NOT an adult cardiometabolic criterion for MASLD?"
+        options:
+          - "Serum ferritin 600 ng/mL"
+          - "HbA1c 5.8%"
+          - "Waist 96 cm in a man"
+          - "HDL 1.2 mmol/L in a woman"
+        answer: 0
+        why:
+          - "صح: الـ ferritin مش من الخمسة."
+          - "HbA1c ≥ **5.7%** معيار سكر."
+          - "Waist > **94 cm** في الرجالة معيار."
+          - "HDL ≤ **1.3 mmol/L** في الستات معيار."
+      - kind: try
+        items: [hb.L06.004, hb.L06.005, hb.L06.006, hb.L06.009, hb.L06.013]
+    recap:
+      - "Pathology: **steatosis، inflammation، fibrosis**."
+      - "SLD = مظلة لـ **MASLD (MASH)، MetALD، ALD، specific aetiology (DILI، monogenic، misc)، cryptogenic**."
+      - "الاسم الجديد: سبب أدق (أو مختلط) ومن غير **stigmatization**."
+      - "MetALD daily: **20–50 g** ستات، **30–60 g** رجالة؛ اضرب × 7 تطلع الأسبوعي (140–350، 210–420)."
+      - "MASLD = steatosis + **1 من 5** cardiometabolic criteria."
+    practice: [hb.L06.001, hb.L06.002, hb.L06.003, hb.L06.004, hb.L06.005, hb.L06.006, hb.L06.007, hb.L06.008, hb.L06.009, hb.L06.010, hb.L06.011, hb.L06.012, hb.L06.013, hb.L06.071, hb.L06.072, hb.L06.082]
+
+  # ------------------------------------------------------------------
+  - id: hb.L06.lesson2
+    title: "السكر والكبد: الفرخة ولا البيضة؟"
+    hook: "مريض سكر الـ ALT بتاعه نضيف... يبقى كبده كويس؟ الكتاب بيقولك: ماتثقش في الإنزيمات."
+    minutes: 8
+    pages: [99, 103]
+    topics: [t2dm, progression]
+    goals:
+      - "تعرف ليه الـ normal ALT مابيستبعدش NASH في السكر"
+      - "ترتّب مسار MASLD من steatosis لـ HCC وتعرف إيه اللي بيرجع"
+      - "تشرح العلاقة الـ bidirectional بين MASLD و T2DM"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 99
+        title: "ماتثقش في الإنزيمات"
+        quote: "Hunting for Progressive NAFLD in Type 2 Diabetes: Do Not Trust Liver Enzymes!"
+        text: |
+          السؤال اللي الكتاب بيسأله: هل الـ **normal transaminases** بتستبعد مرض في كبد مريض **T2DM**؟
+
+          الإجابة من دراسة **Diabetes Care 2023**: مرضى سكر اتعملهم biopsy رغم إن الإنزيمات **low cut-offs** (**63%** منهم ALT **< 30 IU/L**)، وطلع **NASH في حوالي 58%**، والـ advanced fibrosis كانت موجودة برضه.
+
+          والـ **clinical predictors of advanced fibrosis (F3–F4)** في الدراسة: **GGT**، **waist** (M > 102، F > 88 cm)، **low HDL** (M < 1.03، F < 1.29 mmol/L)، و **FIB-4**.
+      - kind: check
+        page: 99
+        question: "A 55-year-old man with type 2 diabetes has ALT 24 IU/L and a bright liver on ultrasound. What does the lecture teach?"
+        options:
+          - "Normal ALT does not exclude NASH or advanced fibrosis in T2DM"
+          - "ALT under 30 IU/L excludes NASH"
+          - "Normal ALT means simple steatosis only"
+          - "Only biopsy is useful in diabetics"
+        answer: 0
+        why:
+          - "صح: **Do not trust liver enzymes**: NASH كان في حوالي 58% من مرضى سكر إنزيماتهم واطية."
+          - "دي بالظبط الغلطة اللي الدراسة بتحذّر منها."
+          - "الـ ALT مابيفرقش بين steatosis و NASH و fibrosis هنا."
+          - "فيه predictors زي **FIB-4** و GGT و waist؛ مش لازم biopsy للكل."
+      - kind: explain
+        page: 100
+        title: "MASLD: الكبد بتاع الـ metabolic syndrome"
+        quote: "MASLD is the hepatic manifestation of metabolic syndrome."
+        text: |
+          - **MASLD is the hepatic manifestation of metabolic syndrome.**
+          - **T2DM و obesity** هما **أقوى risk factors** للـ fibrosis والـ cirrhosis والـ HCC والـ mortality.
+          - والـ MASLD ممكن **تسبق و/أو تزوّد** الـ T2DM وتزوّد مضاعفاته.
+      - kind: figure
+        page: 100
+        title: "مسار MASLD"
+        alt: "A vertical pathway. Obesity, insulin resistance and free fatty acids drive normal liver to steatosis. Normal liver, steatosis, MASH and fibrosis are joined by two-headed arrows. Activation of hepatic stellate cells drives MASH to fibrosis. Fibrosis goes one way to cirrhosis and then HCC. MASH also points out to type 2 diabetes and cardiovascular disease."
+        caption: "الأسهم اللي بوشين (لحد الـ fibrosis) معناها إن المرحلة **ممكن ترجع**. من الـ cirrhosis للـ HCC السهم في اتجاه واحد. والـ MASH بيطلّع برة الكبد: **T2DM** و **cardiovascular disease**."
+        svg: |
+          <svg viewBox="0 0 330 560" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L06a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+              <marker id="L06b" viewBox="0 0 10 10" refX="2" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M10 0L0 5L10 10z" class="fg-head"/></marker>
+              <marker id="L06c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-bad"/></marker>
+              <marker id="L06d" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-acc"/></marker>
+            </defs>
+            <rect x="196" y="8" width="128" height="78" rx="8" class="fg-acc"/>
+            <text x="206" y="28" class="t-sm t-b">Drivers</text>
+            <text x="206" y="46" class="t-sm">Obesity</text>
+            <text x="206" y="62" class="t-sm">Insulin resistance</text>
+            <text x="206" y="78" class="t-sm">Free fatty acids</text>
+            <rect x="20" y="14" width="140" height="40" rx="8" class="fg-good"/>
+            <text x="90" y="39" text-anchor="middle" class="t-b t-good">Normal liver</text>
+            <path d="M90 58v34" class="fg-arrow" marker-start="url(#L06b)" marker-end="url(#L06a)"/>
+            <path d="M196 70L164 110" class="fg-arrow-acc" marker-end="url(#L06d)"/>
+            <rect x="20" y="96" width="140" height="40" rx="8" class="fg-acc"/>
+            <text x="90" y="121" text-anchor="middle" class="t-b">Steatosis</text>
+            <path d="M90 140v34" class="fg-arrow" marker-start="url(#L06b)" marker-end="url(#L06a)"/>
+            <rect x="20" y="178" width="140" height="40" rx="8" class="fg-acc"/>
+            <text x="90" y="203" text-anchor="middle" class="t-b">MASH</text>
+            <path d="M160 190L210 160" class="fg-arrow-bad" marker-end="url(#L06c)"/>
+            <path d="M160 206L210 236" class="fg-arrow-bad" marker-end="url(#L06c)"/>
+            <rect x="212" y="134" width="112" height="36" rx="8" class="fg-bad"/>
+            <text x="268" y="157" text-anchor="middle" class="t-sm t-b">Type 2 DM</text>
+            <rect x="212" y="226" width="112" height="44" rx="8" class="fg-bad"/>
+            <text x="268" y="245" text-anchor="middle" class="t-sm t-b">Cardiovascular</text>
+            <text x="268" y="261" text-anchor="middle" class="t-sm t-b">disease</text>
+            <path d="M90 222v54" class="fg-arrow" marker-start="url(#L06b)" marker-end="url(#L06a)"/>
+            <text x="100" y="246" class="t-sm t-acc">activation of</text>
+            <text x="100" y="262" class="t-sm t-acc">hepatic stellate cells</text>
+            <rect x="20" y="280" width="140" height="40" rx="8" class="fg-box"/>
+            <text x="90" y="305" text-anchor="middle" class="t-b">Fibrosis</text>
+            <path d="M90 324v34" class="fg-arrow-bad" marker-end="url(#L06c)"/>
+            <rect x="20" y="362" width="140" height="40" rx="8" class="fg-bad"/>
+            <text x="90" y="387" text-anchor="middle" class="t-b t-bad">Cirrhosis</text>
+            <path d="M90 406v34" class="fg-arrow-bad" marker-end="url(#L06c)"/>
+            <rect x="20" y="444" width="140" height="40" rx="8" class="fg-bad"/>
+            <text x="90" y="469" text-anchor="middle" class="t-b t-bad">HCC</text>
+            <text x="180" y="356" class="t-sm t-mut">↕ two-headed = can</text>
+            <text x="180" y="372" class="t-sm t-mut">go back with treatment</text>
+            <text x="180" y="404" class="t-sm t-mut">→ one-way after</text>
+            <text x="180" y="420" class="t-sm t-mut">cirrhosis</text>
+            <text x="165" y="520" text-anchor="middle" class="t-sm t-b">Strongest risk factors for fibrosis,</text>
+            <text x="165" y="538" text-anchor="middle" class="t-sm t-b">cirrhosis, HCC and death: T2DM + obesity</text>
+          </svg>
+      - kind: order
+        page: 100
+        prompt: "رتّب مسار الـ MASLD زي صورة الكتاب:"
+        steps:
+          - "Normal liver"
+          - "Steatosis"
+          - "MASH"
+          - "Fibrosis"
+          - "Cirrhosis"
+          - "HCC"
+        why: "الكتاب: steatosis → **MASH** → (activation of **hepatic stellate cells**) → fibrosis → cirrhosis → HCC."
+      - kind: reveal
+        page: 100
+        prompt: "مين الخلية اللي بتنقل MASH لـ fibrosis؟ وفاكرها منين؟"
+        answer: |
+          **Hepatic stellate cells**: صاحبنا **أمين المخزن** من L01 اللي قاعد في Disse وبيخزّن vitamin A. لما يتنشط يبقى **مقاول** (myofibroblast) ويصب collagen.
+
+          يعني نفس الآلية بتاعة أي cirrhosis، والـ MASH هو اللي بيدّيله أمر الشغل.
+      - kind: explain
+        page: 103
+        title: "الفرخة ولا البيضة؟"
+        text: |
+          - العلاقة بين **MASLD و T2DM** **bidirectional** بقوة: epidemiology، clinical picture، diagnosis و pathomechanisms.
+          - **أغلب الباحثين** شايفين إن **MASLD هي اللي بتظهر الأول** وتبدأ سلسلة الأحداث اللي توصل لـ T2DM.
+          - **IR (insulin resistance) is the common root** للاتنين.
+          - والأهم من مين جه الأول: **the right diagnosis and management at the right time**.
+      - kind: aside
+        tone: joke
+        page: 103
+        text: |
+          الكتاب سأل «الفرخة ولا البيضة؟» وبعدين جاوب جواب مصري أصيل: **سيبك من مين جه الأول، اعمل الـ omelette** 🍳
+
+          يعني شخّص الاتنين وعالجهم في الوقت الصح، وده اللي يفرق مع المريض.
+      - kind: check
+        page: 103
+        question: "Which statement about MASLD and type 2 diabetes matches the lecture?"
+        options:
+          - "Insulin resistance is the common root of both"
+          - "T2DM always comes first and MASLD follows"
+          - "The relationship runs only from liver to pancreas"
+          - "Treating one has no effect on the other"
+        answer: 0
+        why:
+          - "صح: **IR is the common root of both MASLD and T2DM**."
+          - "بالعكس: أغلب الباحثين شايفين إن **MASLD** هي اللي بتظهر الأول."
+          - "العلاقة **bidirectional**، في الاتجاهين."
+          - "الكتاب بيقول المهم التشخيص والعلاج الصح في الوقت الصح، لأنهم مرتبطين."
+      - kind: try
+        items: [hb.L06.014, hb.L06.015, hb.L06.017, hb.L06.019, hb.L06.021]
+    recap:
+      - "في T2DM: **do not trust liver enzymes**: NASH في حوالي **58%** رغم ALT واطي."
+      - "Predictors للـ F3–F4: **GGT، waist، low HDL، FIB-4**."
+      - "MASLD = **hepatic manifestation of metabolic syndrome**؛ أقوى risk factors: **T2DM + obesity**."
+      - "Steatosis ⇄ MASH ⇄ fibrosis (بتتنشّط فيها **HSCs**) → cirrhosis → HCC، والـ MASH بيطلّع T2DM و CVD."
+      - "MASLD و T2DM **bidirectional**، و **IR** هو الجذر المشترك."
+    practice: [hb.L06.014, hb.L06.015, hb.L06.016, hb.L06.017, hb.L06.018, hb.L06.019, hb.L06.020, hb.L06.021, hb.L06.022, hb.L06.023, hb.L06.024, hb.L06.084, hb.L06.087]
+
+  # ------------------------------------------------------------------
+  - id: hb.L06.lesson3
+    title: "نقيس الدهون والتليف: FIB-4 والـ FibroScan"
+    hook: "أربع أرقام في معادلة واحدة بتقولك مين يحتاج FibroScan، وورقة FibroScan فيها رقم لو عدّى 30% ارميها."
+    minutes: 10
+    pages: [101, 102]
+    topics: [steatosis, fibrosis]
+    goals:
+      - "تعرف أدوات تقييم الـ steatosis الأربعة"
+      - "تعدّ الـ predictors of fibrosis وتفهم ليه الستات قبل الـ menopause أحسن"
+      - "تحسب FIB-4 وتقرا ورقة FibroScan صح"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 101
+        title: "بنفحص إيه؟ الدهون والتليف"
+        text: |
+          **Steatosis assessment:**
+
+          - **US**: الـ **preferred 1st line** imaging.
+          - **MRS** (Magnetic Resonance Spectroscopy): **quantitative** estimation of liver fat.
+          - **FLI** (Fatty Liver Index): من **TG، BMI، waist circumference و GGT**.
+          - **NLS** (NAFLD Liver Score): من **MS، T2DM، fasting serum insulin و aminotransferases**.
+      - kind: match
+        page: 101
+        prompt: "وصّل كل أداة بوصفها:"
+        pairs:
+          - ["Ultrasound", "Preferred first-line imaging"]
+          - ["MRS", "Quantitative liver fat"]
+          - ["FLI", "TG, BMI, waist, GGT"]
+          - ["NLS", "MS, T2DM, fasting insulin, aminotransferases"]
+        why: "الـ US أول خطوة، والـ MRS بيدّي رقم، والـ FLI والـ NLS scores من labs وقياسات."
+      - kind: table
+        page: 101
+        title: "Predictors of progression to fibrosis in MASH"
+        columns: ["Factor", "Detail"]
+        rows:
+          - ["Sex", "Men and post-menopausal women at higher risk"]
+          - ["Age", "Older age, more severe fibrosis"]
+          - ["Diabetes", "Its emergence parallels fibrosis progression"]
+          - ["BMI", "Rise or fall goes with progression or resolution"]
+          - ["Inflammation", "Degree linked to advanced fibrosis"]
+          - ["AST/ALT ratio", "Normal ratio is < 1"]
+          - ["Hepatic iron", "Iron in hepatocytes linked to mild NAFLD"]
+          - ["PNPLA3, TM6SF2", "Genes for proteins that make and break down fat"]
+        hide: [[0, 1], [2, 1], [5, 1], [7, 0]]
+      - kind: reveal
+        page: 101
+        prompt: "ليه الست قبل الـ menopause خطرها أقل من الراجل؟"
+        answer: |
+          الكتاب: **Estrogen inhibits stellate cell activation and fibrogenesis**.
+
+          يعني الـ estrogen بيمسك **أمين المخزن** (HSC) ويقوله «اقعد مكانك». بعد الـ menopause الـ estrogen يقل، فالحماية دي تروح والخطر يبقى زي الرجالة.
+      - kind: sort
+        page: 101
+        prompt: "مين يزوّد خطر الـ fibrosis ومين يقلله؟"
+        bins: ["Higher risk", "Lower risk"]
+        cards:
+          - { text: "Male sex", bin: 0 }
+          - { text: "Post-menopausal woman", bin: 0 }
+          - { text: "Older age", bin: 0 }
+          - { text: "New-onset diabetes", bin: 0 }
+          - { text: "PNPLA3 polymorphism", bin: 0 }
+          - { text: "Pre-menopausal woman", bin: 1 }
+          - { text: "Falling BMI", bin: 1 }
+        why: "الـ estrogen بيحمي قبل الـ menopause، ونزول الـ BMI مرتبط بـ **resolution** of fibrosis. الباقي كله في جدول الكتاب بيزوّد الخطر."
+      - kind: explain
+        page: 102
+        title: "FIB-4: أربع أرقام موجودة في أي ملف"
+        text: |
+          **FIB-4 = (age × AST) ÷ (platelet count × √ALT)**
+
+          الـ bands في الكتاب (ص 102): **< 1.3 low risk**، **1.3–3.25 intermediate**، **> 3.25 high risk**.
+      - kind: figure
+        page: 102
+        title: "مسطرة الـ FIB-4"
+        alt: "The FIB-4 formula, age times AST over platelet count times the square root of ALT, above a three-band scale: below 1.3 low risk, 1.3 to 3.25 intermediate risk, above 3.25 high risk."
+        caption: "فوق في البسط اللي بيزيد مع التليف (السن والـ AST)، وتحت في المقام اللي بيقل (الـ platelets). والحد التحتاني **1.3** ثابت في كل الـ pathways."
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <text x="165" y="22" text-anchor="middle" class="t-b">FIB-4 =</text>
+            <text x="165" y="50" text-anchor="middle" class="t-lg t-b">Age × AST</text>
+            <path d="M60 60h210" class="fg-ink"/>
+            <text x="165" y="84" text-anchor="middle" class="t-lg t-b">Platelets × √ALT</text>
+            <rect x="10" y="118" width="96" height="56" rx="6" class="fg-good"/>
+            <rect x="112" y="118" width="106" height="56" rx="6" class="fg-acc"/>
+            <rect x="224" y="118" width="96" height="56" rx="6" class="fg-bad"/>
+            <text x="58" y="142" text-anchor="middle" class="t-b t-good">&lt; 1.3</text>
+            <text x="58" y="162" text-anchor="middle" class="t-sm">low risk</text>
+            <text x="165" y="142" text-anchor="middle" class="t-b">1.3–3.25</text>
+            <text x="165" y="162" text-anchor="middle" class="t-sm">intermediate</text>
+            <text x="272" y="142" text-anchor="middle" class="t-b t-bad">&gt; 3.25</text>
+            <text x="272" y="162" text-anchor="middle" class="t-sm">high risk</text>
+            <text x="10" y="204" class="t-sm t-mut">Book p102 bands. ADA 2025 (p104) uses 2.67</text>
+            <text x="10" y="222" class="t-sm t-mut">as its upper cut-off; EASL 2021 uses 1.30 only.</text>
+          </svg>
+      - kind: reveal
+        page: 102
+        prompt: "ليه السن والـ AST فوق، والـ platelets تحت؟"
+        answer: |
+          كل حاجة فوق **بتزيد** مع التليف، وكل حاجة تحت **بتقل**:
+
+          - **Age:** التليف بيتراكم مع السنين (والكتاب: older age = more severe fibrosis).
+          - **AST:** مع تقدم التليف الـ AST بيعلى أكتر من الـ ALT، فالـ AST/ALT ratio يعدّي 1 (الطبيعي **< 1**).
+          - **Platelets:** بتقل مع الـ portal hypertension (splenic sequestration) ومع قلة الـ thrombopoietin من الكبد.
+
+          (الـ AST/ALT والـ age من جدول الكتاب؛ شرح الـ platelets physiology مقبول.)
+      - kind: check
+        page: 102
+        question: "Age 50, AST 40, ALT 25, platelets 200 (×10⁹/L). FIB-4 and band?"
+        options:
+          - "2.0, intermediate risk"
+          - "0.8, low risk"
+          - "4.0, high risk"
+          - "1.0, low risk"
+        answer: 0
+        why:
+          - "صح: (50 × 40) ÷ (200 × √25) = 2000 ÷ (200 × 5) = 2000 ÷ 1000 = **2.0**، بين 1.3 و 3.25."
+          - "غلط في الحساب: راجع إن √25 = 5."
+          - "نسيت الـ √ واستعملت ALT نفسه؟ لا: 2000 ÷ 1000 = 2.0."
+          - "2000 ÷ 1000 = 2.0 مش 1.0؛ راجع الضرب."
+      - kind: explain
+        page: 102
+        title: "اقرا ورقة الـ FibroScan"
+        text: |
+          فيها رقمين كبار:
+
+          - **E (kPa)** = liver **stiffness** → **fibrosis**.
+          - **CAP (dB/m)** → **steatosis**.
+
+          والـ **median** بيتحسب من **10 valid measurements**. والـ **IQR** هو انتشار نص القراءات اللي في النص، ولازم يبقى **صغير**. ولو **IQR/median > 30%** يبقى **no reliability**.
+      - kind: aside
+        tone: analogy
+        page: 102
+        text: |
+          الـ IQR/median زي إنك تسأل **10 أشخاص** في الشارع على عنوان: لو قالوا كلام قريب من بعض تصدّق. لو كل واحد قالك حاجة (> 30%)، يبقى ماتعتمدش على أي حد فيهم وتعيد السؤال.
+      - kind: check
+        page: 102
+        question: "A FibroScan shows E = 12 kPa with IQR/median 35%. How do you read it?"
+        options:
+          - "Not reliable: IQR/median is above 30%"
+          - "Reliable: advanced fibrosis"
+          - "Reliable: low risk"
+          - "It measures steatosis grade"
+        answer: 0
+        why:
+          - "صح: **IQR/median > 30% implies no reliability**، مهما كان الرقم."
+          - "الرقم كبير، بس القراءات مش متسقة، فماينفعش تبني عليه."
+          - "12 kPa مش واطي، والقراءة أصلًا مش reliable."
+          - "الـ steatosis بتتقاس بالـ **CAP (dB/m)** مش الـ E (kPa)."
+      - kind: try
+        items: [hb.L06.025, hb.L06.027, hb.L06.029, hb.L06.032, hb.L06.034]
+    recap:
+      - "Steatosis: **US first line**، **MRS** كمّي، **FLI** (TG، BMI، waist، GGT)، **NLS** (MS، T2DM، fasting insulin، transaminases)."
+      - "Predictors: male/post-menopausal، age، diabetes، BMI، inflammation، AST/ALT، iron، **PNPLA3/TM6SF2**. الـ estrogen بيمنع تنشيط الـ HSC."
+      - "**FIB-4 = age × AST ÷ (platelets × √ALT)**: < 1.3 low، 1.3–3.25 intermediate، > 3.25 high (ص 102)."
+      - "FibroScan: **E kPa = fibrosis**، **CAP dB/m = steatosis**، median من **10** قراءات، و IQR/median **> 30%** = مش reliable."
+    practice: [hb.L06.025, hb.L06.026, hb.L06.027, hb.L06.028, hb.L06.029, hb.L06.030, hb.L06.031, hb.L06.032, hb.L06.033, hb.L06.034, hb.L06.035, hb.L06.074, hb.L06.078, hb.L06.079, hb.L06.085]
+
+  # ------------------------------------------------------------------
+  - id: hb.L06.lesson4
+    title: "مين نفحصه وإمتى نحوّله؟"
+    hook: "مش هنعمل screening للبلد كلها. الكتاب بيدّيك pathwayين (EASL 2021 و ADA 2025) يوصّلوك للـ hepatologist في الوقت الصح."
+    minutes: 10
+    pages: [102, 105]
+    topics: [screening]
+    goals:
+      - "تعرف مين نفحصه ومين لأ"
+      - "تمشي في الـ EASL 2021 pathway خطوة بخطوة"
+      - "تعرف أرقام الـ ADA 2025 وتفرقها عن EASL وعن bands ص 102"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 102
+        title: "Who to screen?"
+        text: |
+          **General population-based screening for MASLD is not advised.** بس محتاجين 3 حاجات:
+
+          - **Screen all prediabetics and type 2 DM.**
+          - **Identify high-risk patients** of progressive disease.
+          - **Assess the degree of fibrosis** and **stage** the liver disease.
+      - kind: reveal
+        page: 102
+        prompt: "ليه مرضى السكر بالذات، وليس كل الناس؟"
+        answer: |
+          جمّع من الدروس اللي فاتت: **T2DM و obesity** أقوى risk factors للـ fibrosis والـ cirrhosis والـ HCC، والـ **enzymes مش بتكشفهم** (NASH في 58% رغم ALT واطي). يعني ده المكان اللي فيه المرض المخبّي اللي بيتطور.
+
+          أما الناس كلها: أعداد ضخمة وأغلبهم simple steatosis، فالكتاب مش بينصح بالـ screening الشامل.
+      - kind: explain
+        page: 104
+        title: "EASL 2021: primary care أو diabetology clinic"
+        text: |
+          - **Check for liver risk factors** واعمل **AST، ALT، GGT، ALP و platelets**.
+          - فيه **viral hepatitis** أو chronic liver disease تاني، أو **signs of advanced disease/cirrhosis**؟ → **referral to liver specialist** على طول.
+          - **Metabolic co-factors and/or alcohol only?** → احسب **FIB-4**.
+          - **< 1.30** = low risk: **no referral، lifestyle modifications، re-test in 1–3 years**.
+          - **≥ 1.30** → **transient elastography**: **< 8 kPa** low risk، **≥ 8 kPa** intermediate-high risk.
+          - بعد ≥ 8 kPa: **patented serum test** لو متاح (combine): **concordance** = **F3–F4 highly likely** → liver clinic. **Discordance** أو مفيش test → **consider liver biopsy**.
+      - kind: figure
+        page: 104
+        title: "EASL 2021 من فوق لتحت"
+        alt: "Flow chart. Patients at risk: check risk factors and test AST, ALT, GGT, ALP and platelets. Viral or other liver disease or signs of cirrhosis go straight to the liver specialist. Metabolic co-factors or alcohol only: calculate FIB-4. Below 1.30 low risk: no referral, lifestyle, re-test in 1 to 3 years. 1.30 or more: transient elastography. Below 8 kPa back to low risk. 8 kPa or more: patented serum tests. Concordance means F3 to F4 highly likely, refer. Not available or discordant: consider liver biopsy."
+        caption: "خطين بس تحفظهم: **FIB-4 1.30** و **stiffness 8 kPa**. تحت الاتنين = lifestyle وإعادة بعد 1–3 سنين."
+        svg: |
+          <svg viewBox="0 0 330 600" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L06e" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+              <marker id="L06f" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-bad"/></marker>
+            </defs>
+            <rect x="10" y="8" width="310" height="54" rx="8" class="fg-box"/>
+            <text x="165" y="29" text-anchor="middle" class="t-sm t-b">Patients at risk of chronic liver disease</text>
+            <text x="165" y="48" text-anchor="middle" class="t-sm t-mut">risk factors; AST, ALT, GGT, ALP, platelets</text>
+            <path d="M90 62v26" class="fg-arrow" marker-end="url(#L06e)"/>
+            <path d="M250 62v26" class="fg-arrow-bad" marker-end="url(#L06f)"/>
+            <rect x="10" y="92" width="160" height="54" rx="8" class="fg-acc"/>
+            <text x="90" y="114" text-anchor="middle" class="t-sm t-b">Metabolic co-factors</text>
+            <text x="90" y="132" text-anchor="middle" class="t-sm t-b">and/or alcohol only</text>
+            <rect x="180" y="92" width="140" height="70" rx="8" class="fg-bad"/>
+            <text x="250" y="112" text-anchor="middle" class="t-sm">Viral / other CLD or</text>
+            <text x="250" y="128" text-anchor="middle" class="t-sm">signs of cirrhosis</text>
+            <text x="250" y="150" text-anchor="middle" class="t-sm t-b t-bad">→ liver specialist</text>
+            <path d="M90 146v26" class="fg-arrow" marker-end="url(#L06e)"/>
+            <rect x="40" y="176" width="100" height="36" rx="8" class="fg-ink"/>
+            <text x="90" y="199" text-anchor="middle" class="t-b">FIB-4</text>
+            <path d="M60 212L40 244" class="fg-arrow" marker-end="url(#L06e)"/>
+            <path d="M120 212L200 244" class="fg-arrow" marker-end="url(#L06e)"/>
+            <text x="60" y="242" class="t-sm t-good">&lt;1.30</text>
+            <text x="164" y="226" class="t-sm t-bad">≥1.30</text>
+            <rect x="10" y="248" width="150" height="72" rx="8" class="fg-good"/>
+            <text x="85" y="268" text-anchor="middle" class="t-sm t-b t-good">Low risk</text>
+            <text x="85" y="286" text-anchor="middle" class="t-sm">no referral, lifestyle</text>
+            <text x="85" y="304" text-anchor="middle" class="t-sm">re-test in 1–3 years</text>
+            <rect x="170" y="248" width="150" height="54" rx="8" class="fg-acc"/>
+            <text x="245" y="270" text-anchor="middle" class="t-sm t-b">Transient</text>
+            <text x="245" y="288" text-anchor="middle" class="t-sm t-b">elastography</text>
+            <path d="M180 302L150 318" class="fg-arrow" marker-end="url(#L06e)"/>
+            <text x="150" y="340" class="t-sm t-good">&lt;8 kPa</text>
+            <path d="M245 302v36" class="fg-arrow-bad" marker-end="url(#L06f)"/>
+            <text x="252" y="326" class="t-sm t-bad">≥8 kPa</text>
+            <rect x="140" y="342" width="180" height="54" rx="8" class="fg-box"/>
+            <text x="230" y="364" text-anchor="middle" class="t-sm t-b">Patented serum tests</text>
+            <text x="230" y="382" text-anchor="middle" class="t-sm t-mut">available = combine</text>
+            <path d="M270 396v34" class="fg-arrow-bad" marker-end="url(#L06f)"/>
+            <path d="M190 396L110 430" class="fg-arrow" marker-end="url(#L06e)"/>
+            <text x="276" y="418" class="t-sm">agree</text>
+            <text x="12" y="420" class="t-sm">disagree or none</text>
+            <rect x="200" y="434" width="120" height="54" rx="8" class="fg-bad"/>
+            <text x="260" y="456" text-anchor="middle" class="t-sm t-b t-bad">F3–F4 highly</text>
+            <text x="260" y="474" text-anchor="middle" class="t-sm t-b t-bad">likely: refer</text>
+            <rect x="10" y="434" width="150" height="54" rx="8" class="fg-thin"/>
+            <text x="85" y="466" text-anchor="middle" class="t-sm t-b">Consider liver biopsy</text>
+            <text x="165" y="530" text-anchor="middle" class="t-sm t-mut">Two numbers to keep: FIB-4 1.30, stiffness 8 kPa</text>
+          </svg>
+      - kind: check
+        page: 104
+        question: "A 58-year-old woman with T2DM has normal ALT and FIB-4 1.9. Under EASL 2021, what is next?"
+        options:
+          - "Transient elastography"
+          - "Reassure and re-test in 3 years"
+          - "Liver biopsy"
+          - "No action because ALT is normal"
+        answer: 0
+        why:
+          - "صح: FIB-4 **≥ 1.30** = intermediate-high risk، فنقيس الـ stiffness."
+          - "الـ re-test بعد 1–3 سنين لـ FIB-4 **تحت 1.30** بس."
+          - "الـ biopsy آخر الطريق: بعد ≥ 8 kPa ومع discordance أو مفيش serum test."
+          - "افتكر: **do not trust liver enzymes** في السكر."
+      - kind: explain
+        page: 104
+        title: "ADA 2025: نفس الفكرة بأرقام مختلفة شوية"
+        text: |
+          **مين يدخل؟** **T2DM**، أو **obesity + ≥ 1 cardiometabolic risk factor**، أو **persistently elevated liver enzymes**.
+
+          - **FIB-4 < 1.3** → **re-assess FIB-4 every 1–3 years**.
+          - **FIB-4 1.3–2.67** → **VCTE** (أو alternative test): **≥ 8.0 kPa** → **hepatology referral**. **< 8.0 kPa** → **intensified management of comorbidities** وأعد FIB-4 في خلال **≤ 1 سنة**.
+          - **FIB-4 > 2.67** → **hepatology referral** على طول.
+      - kind: aside
+        tone: trap
+        page: 104
+        text: |
+          الحد التحتاني **1.3** في كل حتة. الفرق في **الحد الفوقاني**:
+
+          - **Book p102 bands:** high risk **> 3.25**.
+          - **ADA 2025:** referral مباشر لو **> 2.67**.
+          - **EASL 2021:** رقم واحد بس **1.30**، وبعده elastography.
+
+          اقرا السؤال كويس: بيسأل على أنهي pathway؟
+      - kind: table
+        page: 104
+        title: "EASL 2021 vs ADA 2025"
+        columns: ["Step", "EASL 2021", "ADA 2025"]
+        rows:
+          - ["FIB-4 low", "< 1.30: re-test in 1–3 years", "< 1.3: re-assess every 1–3 years"]
+          - ["Next test", "Transient elastography if ≥ 1.30", "VCTE if 1.3–2.67"]
+          - ["Direct referral", "Viral/other CLD or signs of cirrhosis", "FIB-4 > 2.67"]
+          - ["Stiffness cut-off", "≥ 8 kPa", "≥ 8.0 kPa: hepatology"]
+        hide: [[0, 1], [1, 2], [2, 2], [3, 1]]
+      - kind: case
+        page: 104
+        stem: "A 55-year-old man with T2DM (HbA1c 7.9%), BMI 33 and hypertension is seen in diabetes clinic. ALT 28 IU/L. Ultrasound shows a bright liver."
+        steps:
+          - reveal: "AST 34, ALT 28, platelets 190. FIB-4 is about 1.9."
+            question: "Under ADA 2025, what is next?"
+            options: ["VCTE (transient elastography)", "Re-assess FIB-4 in 3 years", "Hepatology referral now", "Liver biopsy"]
+            answer: 0
+            why: "FIB-4 بين **1.3 و 2.67** → VCTE أو alternative test."
+          - reveal: "Liver stiffness 10.5 kPa; IQR/median 12%."
+            question: "What now?"
+            options: ["Hepatology referral", "Reassure and re-test in 1–3 years", "Repeat FibroScan in 1 week", "Stop his diabetes drugs"]
+            answer: 0
+            why: "**≥ 8.0 kPa** → hepatology referral. والقراءة reliable لأن الـ IQR/median **أقل من 30%**."
+      - kind: explain
+        page: 105
+        title: "مين في الفريق، وبنتابع إزاي؟ (ADA)"
+        text: |
+          - **F0–F1:** primary care، dietitian، obesity و diabetes teams. المتابعة: **FIB-4 every 1–2 years**، و LSM (elastography أو ELF) لو FIB-4 **> 1.3**.
+          - **F2–F3 (at-risk MASH):** نفس الفريق + **hepatologist/GI** و **endocrinologist**. المتابعة: **annual imaging** (LSM أو MRE) و blood fibrosis biomarkers.
+          - **Cirrhosis:** نفس الفريق + **transplant team** (decompensated) و **social support team**. المتابعة **tailored**، و **screen for HCC**.
+      - kind: try
+        items: [hb.L06.037, hb.L06.038, hb.L06.039, hb.L06.041, hb.L06.043]
+    recap:
+      - "**No population screening**؛ بس **screen all prediabetics and T2DM**، حدد الـ high risk، و stage الـ fibrosis."
+      - "EASL 2021: FIB-4 **< 1.30** → lifestyle و re-test 1–3 سنين؛ **≥ 1.30** → elastography؛ **≥ 8 kPa** → serum test؛ agree = F3–F4 → refer."
+      - "ADA 2025: **< 1.3** كل 1–3 سنين، **1.3–2.67** → VCTE (≥ 8.0 kPa → hepatology)، **> 2.67** → hepatology."
+      - "الحد الفوقاني: ص 102 **3.25**، ADA **2.67**، EASL رقم واحد **1.30**."
+    practice: [hb.L06.036, hb.L06.037, hb.L06.038, hb.L06.039, hb.L06.040, hb.L06.041, hb.L06.042, hb.L06.043, hb.L06.073, hb.L06.081]
+
+  # ------------------------------------------------------------------
+  - id: hb.L06.lesson5
+    title: "العلاج الأول: الوزن، والقهوة، والمكمّلات"
+    hook: "أقوى دوا للكبد الدهني مش في الصيدلية. وبعدين نفتح صينية المكمّلات: مين recommended ومين مجرد مذكور."
+    minutes: 8
+    pages: [105, 106]
+    topics: [lifestyle]
+    goals:
+      - "تعرف إن نزول الوزن بأي طريقة حسّن الـ ALT في كل الدراسات تقريبًا، والـ histology في أغلب الدراسات اللي قاستها"
+      - "تحفظ مين ياخد vitamin E بالظبط"
+      - "تقسّم المكمّلات على مجموعاتها الثلاثة"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 105
+        title: "Treatment: weight loss"
+        text: |
+          جدول الكتاب جمع دراسات بـ **diet**، و **diet + exercise**، و **orlistat** (و sibutramine/orlistat)، و **surgery**.
+
+          النتيجة: الـ **ALT اتحسّن في كل الدراسات تقريبًا**، والـ **histology اتحسّنت** في أغلب الدراسات اللي قاستها.
+
+          يعني الطريق مش مهم قد ما **نزول الوزن نفسه** هو المهم.
+      - kind: reveal
+        page: 105
+        prompt: "ليه نزول الوزن بيشتغل على كل مراحل الـ MASLD؟"
+        answer: |
+          ارجع لمسار الدرس التاني: الـ **drivers** هم **obesity، insulin resistance و free fatty acids**.
+
+          نزول الوزن بيقلل الدهون، فيقل الـ **FFA flux** للكبد ويتحسّن الـ **IR**، فتقل الـ steatosis، والـ inflammation تهدى، والـ stellate cells تهدى. يعني بتقفل الحنفية من أولها بدل ما تمسح الأرض. (ربط physiology من الدروس، والكتاب بيسميه **main option** في الـ conclusions.)
+      - kind: explain
+        page: 106
+        title: "Antioxidants"
+        text: |
+          - **Vitamin E و vitamin C**: الـ vitamin E **only recommended in adults with NASH who do not have diabetes or cirrhosis**.
+          - **Resveratrol**: natural phenol في **قشر العنب الأحمر**.
+          - **Green tea extract**: قلّل زيادة الوزن، الدهون الكلية والـ visceral، الـ IR، الـ steatosis والـ cholesterol.
+          - **Coffee**: بيقلل خطر **T2DM** ومرتبط بـ **less fibrosis in NASH**.
+          - **Garlic**: الـ **S-allylmercaptocysteine (SAMC)** ليه دور في DM و NASH.
+          - **Ginger**.
+      - kind: aside
+        tone: trap
+        page: 106
+        quote: "vitamin E is only recommended in adults with NASH who do not have diabetes or cirrhosis"
+        text: |
+          الـ **vitamin E** هو الوحيد في القايمة اللي الكتاب قال عليه **recommended**، وبشروط تلاتة:
+
+          **adult** + **NASH** + **مفيش diabetes ولا cirrhosis**.
+
+          لو المريض في السؤال عنده سكر أو cirrhosis، الـ vitamin E غلط.
+      - kind: check
+        page: 106
+        question: "Which patient fits the lecture's recommendation for vitamin E?"
+        options:
+          - "A 40-year-old non-diabetic man with biopsy-proven NASH, F2, no cirrhosis"
+          - "A 55-year-old diabetic woman with NASH, F2"
+          - "A 60-year-old non-diabetic man with NASH cirrhosis"
+          - "A 15-year-old boy with simple steatosis"
+        answer: 0
+        why:
+          - "صح: adult + NASH + no diabetes + no cirrhosis."
+          - "عندها **diabetes**، فبرة الشرط."
+          - "عنده **cirrhosis**، فبرة الشرط."
+          - "مش adult، ومعندوش NASH."
+      - kind: aside
+        tone: joke
+        page: 106
+        text: |
+          الكتاب حط لك **صينية العصاري المصرية** كلها في قايمة الـ antioxidants: **قهوة**، **شاي أخضر**، **توم**، **جنزبيل**، و**عنب أحمر** 😄
+
+          بس خلي بالك: دول **مذكورين** كـ dietary agents، مش «recommended» زي vitamin E. ماتكتبش في الامتحان «العلاج: قهوة وتوم».
+      - kind: explain
+        page: 106
+        title: "Supplements: anti-inflammatory و insulin sensitizers"
+        text: |
+          **Anti-inflammatory agents:**
+
+          - **PUFA و MUFA**: بيساعدوا في نزول الوزن ويقللوا الـ hepatic TG.
+          - **Vitamin D**: نقصه ممكن يعمل **IR، metabolic syndrome و NAFLD**.
+          - **Probiotic، prebiotic، synbiotic**: لأن الـ **gut-liver axis** طريق مهم في الـ NAFLD.
+
+          **Insulin sensitizers and lipid-lowering agents:**
+
+          - **Cinnamon**: بيقلل امتصاص الجلوكوز بعد الأكل بتثبيط الـ pancreatic enzymes.
+          - **Curcumin**: antioxidant و anti-inflammatory قوي، بيقلل الـ lipids والـ steatosis ويمنع التقدم لـ steatohepatitis.
+          - **Carnitine**: essential component في الـ **mitochondrial beta-oxidation**.
+      - kind: mnemonic
+        page: 106
+        word: "CCC"
+        parts:
+          - { key: "C", text: "Cinnamon: less postprandial glucose absorption" }
+          - { key: "C", text: "Curcumin: antioxidant, anti-inflammatory, less lipids and steatosis" }
+          - { key: "C", text: "Carnitine: mitochondrial beta-oxidation" }
+        hook: |
+          الـ **insulin sensitizers and lipid-lowering** supplements كلهم بيبدأوا بـ **C**: **3C**. قرفة وكركم وكارنيتين.
+      - kind: sort
+        page: 106
+        prompt: "حط كل supplement في مجموعته زي الكتاب:"
+        bins: ["Antioxidant", "Anti-inflammatory", "Insulin sensitizer / lipid lowering"]
+        cards:
+          - { text: "Resveratrol", bin: 0 }
+          - { text: "Green tea extract", bin: 0 }
+          - { text: "Coffee", bin: 0 }
+          - { text: "Vitamin D", bin: 1 }
+          - { text: "Probiotics", bin: 1 }
+          - { text: "Omega-3 (PUFA)", bin: 1 }
+          - { text: "Cinnamon", bin: 2 }
+          - { text: "Curcumin", bin: 2 }
+          - { text: "Carnitine", bin: 2 }
+        why: "الـ antioxidants: vitamins E و C، resveratrol، green tea، coffee، garlic، ginger. الـ anti-inflammatory: PUFA/MUFA، vitamin D، pro/pre/synbiotics. والـ **3C** في المجموعة التالتة."
+      - kind: match
+        page: 106
+        prompt: "وصّل كل حاجة بآليتها:"
+        pairs:
+          - ["Probiotics", "Gut-liver axis"]
+          - ["Carnitine", "Mitochondrial beta-oxidation"]
+          - ["Cinnamon", "Less postprandial glucose absorption"]
+          - ["Coffee", "Less T2DM risk and less NASH fibrosis"]
+        why: "دي الجمل اللي الكتاب كتبها جنب كل واحد في ص 106."
+      - kind: try
+        items: [hb.L06.044, hb.L06.045, hb.L06.046, hb.L06.048, hb.L06.050]
+    recap:
+      - "**Weight loss** بأي طريقة (diet، exercise، orlistat، surgery) حسّن الـ ALT في كل الدراسات تقريبًا، والـ histology في أغلب الدراسات اللي قاستها."
+      - "**Vitamin E**: adults + NASH + **no diabetes, no cirrhosis**. ده الـ recommendation الوحيد."
+      - "Antioxidants: vit E/C، resveratrol، green tea، coffee، garlic (SAMC)، ginger."
+      - "Anti-inflammatory: PUFA/MUFA، vitamin D، probiotics (gut-liver axis)."
+      - "Insulin sensitizers / lipid lowering: **3C** = cinnamon، curcumin، carnitine."
+    practice: [hb.L06.044, hb.L06.045, hb.L06.046, hb.L06.047, hb.L06.048, hb.L06.049, hb.L06.050, hb.L06.051, hb.L06.075, hb.L06.086]
+
+  # ------------------------------------------------------------------
+  - id: hb.L06.lesson6
+    title: "أدوية السكر اللي بتفيد الكبد"
+    hook: "pioglitazone ولا metformin؟ GLP-1 ولا SGLT2؟ مين عنده دليل حقيقي ومين لسه في الفيران."
+    minutes: 8
+    pages: [107, 109]
+    topics: [drugs]
+    goals:
+      - "تعرف مين حسّن الـ histology في RCTs ومين لأ"
+      - "تعدّ أفعال الـ liraglutide"
+      - "تفرّق بين دليل في الفيران ودليل RCT"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 107
+        title: "Insulin sensitizing agents"
+        text: |
+          جدول الكتاب فيه دراسات على **TZDs** و **metformin**:
+
+          - **Pioglitazone** (لوحده، أو + **vitamin E**، أو ± **diet**): الـ **ALT** اتحسّن، والـ **histology** اتحسّنت في الدراسات اللي قاستها، **ومنهم RCTs** (Sanyal و Belfort).
+          - **Metformin**: الـ **ALT** اتحسّن، بس الـ **histology** بيانات قليلة ومتضاربة: **RCT إيجابي (Bugianesi)** و **RCT سلبي (Uygun)**.
+      - kind: check
+        page: 107
+        question: "In the insulin-sensitizer table, which drug improved liver histology in RCTs?"
+        options:
+          - "Pioglitazone"
+          - "Metformin, consistently"
+          - "Neither; only ALT improved"
+          - "Sulfonylureas"
+        answer: 0
+        why:
+          - "صح: pioglitazone (+ vit E أو ± diet) حسّن الـ histology في RCTs."
+          - "الـ metformin: RCT واحد إيجابي وواحد سلبي، يعني **mixed**."
+          - "الـ histology اتحسنت مع pioglitazone."
+          - "مش موجودة في الجدول أصلًا."
+      - kind: explain
+        page: 107
+        title: "GLP-1 analogue: liraglutide"
+        text: |
+          - **Controls serum glucose**
+          - **Induces insulin secretion**
+          - **Reduces glucagon secretion**
+          - **Weight loss**، **suppression of appetite** و **delayed gastric emptying**
+      - kind: aside
+        tone: analogy
+        text: |
+          الـ GLP-1 زي **بوّاب العمارة الشاطر**: بيفتح الباب للـ insulin، ويقفل في وش الـ glucagon، ويقول للمعدة «براحة، واحد واحد» (delayed gastric emptying)، ويقفل التلاجة بالليل (appetite). والنتيجة وزن أقل ودهون أقل في الكبد.
+      - kind: explain
+        page: 108
+        title: "DPP-4 و SGLT2: الدليل مختلف"
+        text: |
+          - **Linagliptin (DPP-4 inhibitor)**: عنده **high exposure in hepatic tissue**، وعمل **anti-inflammatory و anti-steatotic** activity، بس في **mouse model** of NASH (Klein, 2013).
+          - **Empagliflozin (SGLT2 inhibitor)**: **RCT** (double-blind، placebo-controlled) في **NAFLD without T2DM** (Taheri, 2020): حسّن الـ **steatosis**، والأهم الـ **fibrosis**، بالـ transient elastography والـ CAP.
+      - kind: match
+        page: 109
+        prompt: "وصّل كل دوا بنوع الدليل اللي في الكتاب:"
+        pairs:
+          - ["Pioglitazone", "RCTs: ALT and histology improved"]
+          - ["Metformin", "ALT improved; histology mixed"]
+          - ["Linagliptin", "Mouse model of NASH"]
+          - ["Empagliflozin", "RCT in non-diabetic NAFLD"]
+        why: "الامتحان بيحب يسأل عن **مستوى الدليل**: الفيران غير الـ RCT. Linagliptin لسه في الـ mouse model، و empagliflozin جه من RCT في ناس **من غير سكر**."
+      - kind: reveal
+        page: 109
+        prompt: "الـ empagliflozin بيعمل antifibrotic effect إزاي حسب الكتاب؟"
+        answer: |
+          تفسير محتمل في الكتاب: بيمنع الـ **hepatic expression of proinflammatory cytokines**:
+
+          - **IL-6**
+          - **TNF-α**
+          - **MCP-1** (monocyte chemoattractant protein 1)
+
+          ودول **the hallmarks of NAFLD**.
+      - kind: table
+        page: 109
+        title: "How antidiabetic agents improve NAFLD (book figure)"
+        columns: ["Agent", "Main liver-relevant effects"]
+        rows:
+          - ["Pioglitazone", "↓ insulin resistance, ↓ inflammation, ↓ FFA flux, body fat redistribution"]
+          - ["GLP-1 receptor agonists", "↓ FFA flux, ↓ body weight, ↓ gluconeogenesis, ↓ inflammation"]
+          - ["SGLT2 inhibitors", "↓ body weight, ↓ insulin/glucagon ratio, ↓ inflammation, ↓ oxidative stress, ↑ adiponectin"]
+          - ["Multi-agonists", "↓ insulin resistance, ↓ inflammation, ↓↓ body weight, ↓ FFA flux, glucagon receptor activation"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1]]
+      - kind: aside
+        tone: tip
+        page: 109
+        text: |
+          لاحظ إن الأربعة بيضربوا نفس الـ **drivers** اللي في مسار الدرس التاني: **IR**، **FFA flux**، **الوزن**، و **inflammation**. يعني مش لازم تحفظ كل خانة لوحدها: اسأل نفسك الدوا ده بيعمل إيه في الـ drivers دي.
+      - kind: check
+        page: 109
+        question: "What did empagliflozin show in the Taheri 2020 trial?"
+        options:
+          - "Improved steatosis and fibrosis in NAFLD patients without T2DM"
+          - "Improved fibrosis only in a mouse model"
+          - "Worsened steatosis in diabetics"
+          - "No effect on liver fibrosis"
+        answer: 0
+        why:
+          - "صح: RCT في **NAFLD without T2DM**، حسّن الـ steatosis و**أهم من كده الـ fibrosis**."
+          - "الـ mouse model ده بتاع **linagliptin**."
+          - "الدراسة كانت في ناس **من غير** سكر، والنتيجة تحسن."
+          - "بالعكس، الـ fibrosis اتحسنت بالـ elastography."
+      - kind: try
+        items: [hb.L06.052, hb.L06.053, hb.L06.055, hb.L06.056, hb.L06.057]
+    recap:
+      - "**Pioglitazone** حسّن الـ ALT والـ histology (RCTs). **Metformin**: ALT بس، والـ histology mixed."
+      - "**Liraglutide**: يضبط الجلوكوز، ↑ insulin، ↓ glucagon، وزن أقل، شهية أقل، delayed gastric emptying."
+      - "**Linagliptin**: mouse model. **Empagliflozin**: RCT في non-diabetic NAFLD حسّن steatosis و fibrosis (IL-6، TNF-α، MCP-1)."
+      - "كلهم بيضربوا نفس الـ drivers: IR، FFA flux، الوزن، inflammation."
+    practice: [hb.L06.052, hb.L06.053, hb.L06.054, hb.L06.055, hb.L06.056, hb.L06.057]
+
+  # ------------------------------------------------------------------
+  - id: hb.L06.lesson7
+    title: "السكر في الـ cirrhosis والأدوية الجديدة"
+    hook: "إمتى نقول insulin بس؟ وليه دوا من عيلة الـ thyroid بقى أول دوا معتمد للـ MASH؟"
+    minutes: 10
+    pages: [110, 112]
+    topics: [cirrhosis-dm, new-drugs, drugs]
+    goals:
+      - "تختار دوا السكر الصح في compensated و decompensated cirrhosis"
+      - "تعرف قصة obeticholic acid و resmetirom بالأرقام"
+      - "تمشي في الـ ADA treatment algorithm حسب الـ fibrosis stage"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 110
+        title: "T2DM + cirrhosis: افصل الأول compensated ولا لأ"
+        text: |
+          **Compensated cirrhosis** (كل دوا وتحذيره):
+
+          - **Metformin**: be cautious of **cirrhotic decompensation**.
+          - **Sulfonylurea**: ابدأ **low doses** علشان الـ **hypoglycemia**.
+          - **Alpha-glucosidase inhibitor**: may be useful، **limited data**.
+          - **Thiazolidinedione**: be cautious of **cardiovascular events**.
+          - **DPP-4 inhibitor**: be cautious of **decompensation and hepatic failure**.
+          - **GLP-1 RA** و **SGLT2 inhibitor**: **limited data**.
+
+          **Decompensated cirrhosis:** **basal long-acting insulin ± rapid-acting insulin analog**، مع **close titration** و **monitoring of glucose**.
+      - kind: figure
+        page: 110
+        title: "شجرة اختيار دوا السكر"
+        alt: "Decision tree. Patients with type 2 diabetes and liver cirrhosis split into compensated and decompensated. Compensated: metformin, caution decompensation; sulfonylurea, start low to avoid hypoglycaemia; alpha-glucosidase inhibitor, useful but limited data; thiazolidinedione, caution cardiovascular events; DPP-4 inhibitor, caution decompensation and hepatic failure; GLP-1 receptor agonist and SGLT2 inhibitor, limited data. Decompensated: basal long-acting insulin with or without rapid-acting analog, close titration and glucose monitoring."
+        caption: "Compensated: كل دوا ينفع بس معاه **تحذير**. Decompensated: **insulin** بس."
+        svg: |
+          <svg viewBox="0 0 330 560" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L06g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="65" y="8" width="200" height="44" rx="8" class="fg-ink"/>
+            <text x="165" y="28" text-anchor="middle" class="t-sm t-b">Type 2 diabetes</text>
+            <text x="165" y="44" text-anchor="middle" class="t-sm t-b">+ liver cirrhosis</text>
+            <path d="M165 52v22" class="fg-arrow" marker-end="url(#L06g)"/>
+            <rect x="10" y="78" width="310" height="30" rx="8" class="fg-acc"/>
+            <text x="165" y="98" text-anchor="middle" class="t-b">Compensated</text>
+            <g class="t-sm">
+              <rect x="10" y="114" width="310" height="34" rx="6" class="fg-box"/>
+              <text x="18" y="136" class="t-b">Metformin</text>
+              <text x="312" y="136" text-anchor="end">caution: decompensation</text>
+              <rect x="10" y="152" width="310" height="34" rx="6" class="fg-box"/>
+              <text x="18" y="174" class="t-b">Sulfonylurea</text>
+              <text x="312" y="174" text-anchor="end">start low: hypoglycaemia</text>
+              <rect x="10" y="190" width="310" height="34" rx="6" class="fg-box"/>
+              <text x="18" y="212" class="t-b">α-glucosidase inh.</text>
+              <text x="312" y="212" text-anchor="end">useful, limited data</text>
+              <rect x="10" y="228" width="310" height="34" rx="6" class="fg-box"/>
+              <text x="18" y="250" class="t-b">TZD (pioglitazone)</text>
+              <text x="312" y="250" text-anchor="end">caution: CV events</text>
+              <rect x="10" y="266" width="310" height="34" rx="6" class="fg-box"/>
+              <text x="18" y="288" class="t-b">DPP-4 inhibitor</text>
+              <text x="312" y="288" text-anchor="end">caution: hepatic failure</text>
+              <rect x="10" y="304" width="310" height="34" rx="6" class="fg-thin"/>
+              <text x="18" y="326" class="t-b">GLP-1 RA, SGLT2i</text>
+              <text x="312" y="326" text-anchor="end">limited data</text>
+            </g>
+            <path d="M165 342v26" class="fg-arrow" marker-end="url(#L06g)"/>
+            <text x="175" y="360" class="t-sm t-mut">decompensates</text>
+            <rect x="10" y="372" width="310" height="30" rx="8" class="fg-bad"/>
+            <text x="165" y="392" text-anchor="middle" class="t-b t-bad">Decompensated</text>
+            <rect x="10" y="408" width="310" height="76" rx="8" class="fg-good"/>
+            <text x="165" y="432" text-anchor="middle" class="t-b t-good">Insulin only</text>
+            <text x="165" y="452" text-anchor="middle" class="t-sm">basal long-acting ± rapid-acting analog</text>
+            <text x="165" y="472" text-anchor="middle" class="t-sm">close titration, glucose monitoring</text>
+          </svg>
+      - kind: reveal
+        page: 110
+        prompt: "ليه الأقراص بتتشال كلها في الـ decompensated cirrhosis ونفضل على الـ insulin؟"
+        answer: |
+          الكتاب بيقول «insulin» ويحذّر من كل قرص؛ والمنطق (physiology مقبول):
+
+          - الكبد المتعب مابيكسّرش الأدوية كويس، ومخزون الـ glycogen والـ **gluconeogenesis** عنده ضعاف، فأقراص زي الـ sulfonylurea ممكن تعمل **hypoglycemia** طويلة.
+          - الـ metformin مرتبط بالـ decompensation (والكتاب بيحذّر منه حتى في compensated).
+          - الـ insulin بقى الوحيد اللي تقدر **تظبطه بالوحدة** وتراقبه، فده معنى **close titration**.
+      - kind: check
+        page: 110
+        question: "A 64-year-old man with MASH cirrhosis, ascites and prior hepatic encephalopathy has HbA1c 8.6%. Which treatment fits the lecture?"
+        options:
+          - "Basal insulin with or without rapid-acting insulin"
+          - "Metformin"
+          - "Glimepiride"
+          - "Pioglitazone"
+        answer: 0
+        why:
+          - "صح: ascites و HE = **decompensated**، يعني insulin only مع close titration."
+          - "الـ metformin محتاج caution حتى في الـ compensated."
+          - "الـ sulfonylureas للـ compensated وبجرعة صغيرة."
+          - "الـ TZDs مش للـ decompensated (وفي الـ compensated: caution CV events)."
+      - kind: explain
+        page: 110
+        title: "Obeticholic acid: القصة اللي ماكملتش"
+        text: |
+          - **Obeticholic acid (Ocaliva)**: **bile acid analogue of chenodeoxycholic acid**، بس **100× more potent**.
+          - **First-in-class selective potent FXR (farnesoid-X receptor) agonist** بـ **anti-inflammatory و anti-fibrotic effect**.
+          - النتيجة: **FDA rejection twice** كعلاج للـ MASLD (NASH).
+      - kind: explain
+        page: 110
+        title: "Resmetirom (Rezdiffra): أول واحد عدّى"
+        text: |
+          - **FDA approval for MASLD: 14/3/2024**.
+          - للـ **MASLD F2، F3** **in conjunction with diet and exercise**.
+          - **Thyroid hormone receptor-beta (THR-β) agonist**: لما الـ receptors دي تتنشط في الكبد، الـ **intrahepatic triglyceride accumulation** بيقل.
+          - **Oral, once daily**: **NASH resolution** في **30%**، و **fibrosis regression** بمرحلة على الأقل في **26%**.
+      - kind: aside
+        tone: analogy
+        page: 110
+        text: |
+          الـ thyroid hormone هو **ترموستات الحرق** في الجسم. الـ resmetirom بيدوّر الترموستات ده **في الكبد بس** (لأنه بيختار receptor **β** اللي موجود في الكبد)، فالكبد يحرق دهونه من غير ما القلب يتعب ويدق جامد زي ما يحصل مع thyroid hormone عادي.
+
+          (الكتاب بيقول THR-β agonist يقلل الـ TG في الكبد؛ حكاية «القلب» شرح physiology مقبول.)
+      - kind: update
+        page: 111
+        text: "Semaglutide 2.4 mg (Wegovy) أخد FDA accelerated approval للـ non-cirrhotic MASH مع F2–F3 fibrosis في أغسطس 2025. في الامتحان: الكتاب بيقول resmetirom هو الـ newly approved."
+        ref: "FDA approval of Wegovy for MASH, August 2025"
+      - kind: table
+        page: 111
+        title: "ADA MASLD treatment algorithm (prediabetes or diabetes)"
+        columns: ["Stage", "Diabetes drugs", "MASH drugs"]
+        rows:
+          - ["F0–F1", "Prefer GLP-1RA, dual GIP/GLP-1RA, pioglitazone, SGLT2i", "Not indicated"]
+          - ["F2–F3 (at-risk MASH)", "Prefer GLP-1RA, dual GIP/GLP-1RA, pioglitazone", "Resmetirom, GLP-1RA"]
+          - ["Compensated cirrhosis", "As F2–F3, with caution", "Avoid"]
+          - ["Decompensated cirrhosis", "Only use insulin", "Avoid"]
+        hide: [[0, 2], [1, 2], [2, 2], [3, 1]]
+      - kind: aside
+        tone: trap
+        page: 111
+        text: |
+          الـ **resmetirom** للـ **F2–F3** بس:
+
+          - **F0–F1**: MASH drugs **not indicated**.
+          - **Cirrhosis** (compensated أو decompensated): **avoid**.
+
+          وفي الـ ADA، بنفكر فيه **بعد 6–12 شهر** من تظبيط علاج الـ obesity و/أو الـ diabetes.
+      - kind: case
+        page: 111
+        stem: "A 60-year-old woman with MASLD cirrhosis (Child-Pugh A, no varices) has T2DM on metformin and glimepiride."
+        steps:
+          - question: "Her doctor wants to add resmetirom. Is that right?"
+            options: ["No; avoid resmetirom in cirrhosis", "Yes; F4 is the main indication", "Yes, together with vitamin E", "Only after 3 months of metformin"]
+            answer: 0
+            why: "الـ resmetirom approved لـ **F2–F3**، والـ ADA بيقول **avoid** في الـ cirrhosis."
+          - reveal: "A year later she develops ascites and hepatic encephalopathy."
+            question: "How should her diabetes be treated now?"
+            options: ["Insulin only", "Add pioglitazone", "Keep metformin and glimepiride", "Switch to a DPP-4 inhibitor"]
+            answer: 0
+            why: "بقت **decompensated**: basal ± rapid-acting insulin مع close titration."
+      - kind: explain
+        page: 112
+        title: "الخلاصة بتاعة الكتاب"
+        text: |
+          - **SLD** اسم جديد بدل NAFLD: سبب أدق (أو مختلط) ومن غير stigma.
+          - **Diet، lifestyle modification و treatment of components of metabolic syndrome** هما **main options** المتاحة.
+          - **Resmetirom** newly FDA-approved بنتايج مبشرة.
+          - بعض أدوية السكر بتحسّن الـ histology، وده يبرر استخدامها **بس في مرضى السكر اللي عندهم MASLD** لو فيه indication.
+      - kind: try
+        items: [hb.L06.058, hb.L06.061, hb.L06.062, hb.L06.067, hb.L06.068]
+    recap:
+      - "Compensated cirrhosis: metformin (decompensation)، SU (low dose، hypoglycemia)، TZD (CV events)، DPP-4 (hepatic failure)، GLP-1/SGLT2 (limited data)."
+      - "Decompensated: **insulin only** (basal ± rapid)، close titration."
+      - "Obeticholic acid: FXR agonist، 100× CDCA، **FDA rejected twice**."
+      - "**Resmetirom**: THR-β agonist، approved **14/3/2024** لـ **F2–F3** + diet و exercise؛ NASH resolution **30%**، fibrosis regression **26%**؛ avoid في الـ cirrhosis."
+      - "ADA: F0–F1 مفيش MASH drug؛ F2–F3 resmetirom أو GLP-1RA؛ cirrhosis avoid؛ decompensated insulin only."
+    practice: [hb.L06.058, hb.L06.059, hb.L06.060, hb.L06.061, hb.L06.062, hb.L06.063, hb.L06.064, hb.L06.065, hb.L06.066, hb.L06.067, hb.L06.068, hb.L06.069, hb.L06.070, hb.L06.076, hb.L06.077, hb.L06.080, hb.L06.083]

@@ -1,0 +1,1131 @@
+schema: batna.lesson/v1
+lecture: hb.L03
+lessons:
+  # ------------------------------------------------------------------
+  - id: hb.L03.lesson1
+    title: "الضغط بيتحبس فين؟"
+    hook: "دم الأمعاء رايح للقلب، والزحمة ممكن تبقى قبل الكبد أو جوّاه أو بعده. البلهارسيا فين؟"
+    minutes: 9
+    pages: [37, 39]
+    topics: [overview, classification]
+    goals:
+      - "تقول هدف علاج الـ portal hypertension في الـ compensated والـ decompensated"
+      - "تحفظ أرقام الـ varices (30% ثم 90%) والـ predictors التلاتة"
+      - "تصنّف أي سبب: pre-hepatic، hepatic (pre / sinusoidal / post)، post-hepatic"
+      - "تقرأ wedged و free hepatic pressure وتعرف المستوى"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 37
+        title: "أهم مضاعفة للـ cirrhosis"
+        quote: "the most common complication of cirrhosis and represents the main driver of hepatic decompensation"
+        text: |
+          الـ **portal hypertension (PH)** هو **أشهر مضاعفة للـ cirrhosis**، وهو **المحرّك الأساسي للـ hepatic decompensation**. يعني لو فهمته، فهمت نص الهيباتولوجي.
+
+          والعلاج بيتغير حسب المريض فين:
+
+          - **Compensated cirrhosis:** الهدف الكبير إننا **نقلل خطر الـ decompensation**: ascites، variceal bleeding، hepatic encephalopathy.
+          - **Decompensated:** الهدف نمنع **further decompensation** (recurrent/refractory ascites، variceal rebleeding، recurrent encephalopathy، SBP، hepatorenal syndrome) **ونحسّن الـ survival**.
+      - kind: sort
+        page: 37
+        prompt: "كل حدث من دول بنمنعه في أنهي مرحلة حسب الكتاب؟"
+        bins: ["Compensated: prevent first decompensation", "Decompensated: prevent further decompensation"]
+        cards:
+          - { text: "First ascites", bin: 0 }
+          - { text: "First variceal bleeding", bin: 0 }
+          - { text: "First hepatic encephalopathy", bin: 0 }
+          - { text: "Variceal rebleeding", bin: 1 }
+          - { text: "Spontaneous bacterial peritonitis", bin: 1 }
+          - { text: "Hepatorenal syndrome", bin: 1 }
+          - { text: "Refractory ascites", bin: 1 }
+        why: "التلاتة الكبار (ascites، bleeding، encephalopathy) هما تعريف الـ **decompensation**. بعد ما تحصل، القايمة بتكبر: rebleeding، recurrent HE، refractory ascites، **SBP و HRS**، والهدف يبقى كمان **survival**."
+      - kind: explain
+        page: 37
+        title: "الـ varices: مسألة وقت"
+        text: |
+          - حوالي **30%** من مرضى الـ cirrhosis عندهم **esophageal varices وقت التشخيص**.
+          - النسبة بتزيد مع الوقت لحد **90% بعد حوالي 10 سنين**.
+
+          وفيه تلات حاجات بتتوقع وجود الـ varices:
+
+          - **INR أكتر من 1.5**
+          - **Portal vein diameter > 13 mm**
+          - **Thrombopenia** (صفايح واطية)
+
+          ودي ممكن تأثر على **قرار الـ gastroscopy** للبحث عن varices علشان الـ primary prophylaxis.
+      - kind: aside
+        tone: tip
+        page: 37
+        text: |
+          الـ predictors كلها منطقية: **INR أكتر من 1.5** = الكبد مش بيصنّع كويس (مرض متقدم)، **portal vein > 13 mm** = الوريد منفوخ من الضغط، و **platelets واطية** = طحال كبير بيحجزها.
+
+          ورقمين يتحفظوا مع بعض: **1.5 و 13**.
+      - kind: figure
+        page: 38
+        title: "رحلة الدم والزحمة فين"
+        alt: "Blood flows down the page from spleen and gut, through the splenic and portal veins, through the liver (portal venule, sinusoid, central venule), then the hepatic veins and IVC to the right heart. Causes are listed beside each level. Pre-hepatic: portal vein thrombosis, splenic vein thrombosis, massive splenomegaly. Pre-sinusoidal: schistosomiasis, congenital hepatic fibrosis. Sinusoidal: cirrhosis, alcoholic hepatitis. Post-sinusoidal: hepatic sinusoidal obstruction. Post-hepatic: Budd-Chiari syndrome, IVC webs, cardiac causes (restrictive cardiomyopathy, constrictive pericarditis, severe heart failure). Portal hypertension is a portal to hepatic vein pressure gradient above 10 mmHg."
+        caption: "امشي مع الدم من فوق لتحت: الانسداد **قبل** الكبد، **جوّاه** (قبل الـ sinusoid أو فيه أو بعده)، أو **بعده** لحد القلب. والـ **cirrhosis** sinusoidal."
+        svg: |
+          <svg viewBox="0 0 330 542" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L03a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="8" y="8" width="150" height="38" rx="8" class="fg-box"/>
+            <text x="18" y="26" class="t-b">Spleen and gut</text>
+            <text x="18" y="40" class="t-sm t-mut">splanchnic blood</text>
+            <path d="M83 46V62" class="fg-arrow" marker-end="url(#L03a)"/>
+            <rect x="8" y="66" width="150" height="66" rx="8" class="fg-box"/>
+            <text x="18" y="90" class="t-b">Splenic vein,</text>
+            <text x="18" y="106" class="t-b">portal vein</text>
+            <rect x="170" y="66" width="152" height="66" rx="8" class="fg-good"/>
+            <text x="178" y="82" class="t-sm t-b">PRE-HEPATIC</text>
+            <text x="178" y="97" class="t-sm">Portal vein thrombosis</text>
+            <text x="178" y="111" class="t-sm">Splenic vein thrombosis</text>
+            <text x="178" y="125" class="t-sm">Massive splenomegaly</text>
+            <path d="M83 132V146" class="fg-arrow" marker-end="url(#L03a)"/>
+            <rect x="4" y="148" width="322" height="228" rx="10" class="fg-thin"/>
+            <text x="14" y="166" class="t-b t-acc">Liver (hepatic)</text>
+            <rect x="8" y="174" width="150" height="56" rx="8" class="fg-box"/>
+            <text x="18" y="196" class="t-b">Portal venule</text>
+            <text x="18" y="214" class="t-sm t-mut">pre-sinusoidal</text>
+            <rect x="170" y="174" width="152" height="56" rx="8" class="fg-acc"/>
+            <text x="178" y="194" class="t-sm">Schistosomiasis</text>
+            <text x="178" y="209" class="t-sm">Congenital hepatic</text>
+            <text x="178" y="223" class="t-sm">fibrosis</text>
+            <path d="M83 230V240" class="fg-arrow" marker-end="url(#L03a)"/>
+            <rect x="8" y="244" width="150" height="56" rx="8" class="fg-box"/>
+            <text x="18" y="266" class="t-b">Sinusoid</text>
+            <text x="18" y="284" class="t-sm t-mut">sinusoidal</text>
+            <rect x="170" y="244" width="152" height="56" rx="8" class="fg-acc"/>
+            <text x="178" y="266" class="t-sm t-b">Cirrhosis</text>
+            <text x="178" y="284" class="t-sm">Alcoholic hepatitis</text>
+            <path d="M83 300V310" class="fg-arrow" marker-end="url(#L03a)"/>
+            <rect x="8" y="314" width="150" height="56" rx="8" class="fg-box"/>
+            <text x="18" y="336" class="t-b">Central venule</text>
+            <text x="18" y="354" class="t-sm t-mut">post-sinusoidal</text>
+            <rect x="170" y="314" width="152" height="56" rx="8" class="fg-acc"/>
+            <text x="178" y="336" class="t-sm">Hepatic sinusoidal</text>
+            <text x="178" y="351" class="t-sm">obstruction</text>
+            <path d="M83 376V392" class="fg-arrow" marker-end="url(#L03a)"/>
+            <rect x="8" y="396" width="150" height="106" rx="8" class="fg-box"/>
+            <text x="18" y="420" class="t-b">Hepatic veins,</text>
+            <text x="18" y="436" class="t-b">IVC,</text>
+            <text x="18" y="452" class="t-b">right heart</text>
+            <rect x="170" y="396" width="152" height="106" rx="8" class="fg-bad"/>
+            <text x="178" y="412" class="t-sm t-b">POST-HEPATIC</text>
+            <text x="178" y="427" class="t-sm">Budd-Chiari syndrome</text>
+            <text x="178" y="441" class="t-sm">IVC webs</text>
+            <text x="178" y="455" class="t-sm">Cardiac: restrictive</text>
+            <text x="178" y="469" class="t-sm">cardiomyopathy,</text>
+            <text x="178" y="483" class="t-sm">constrictive pericarditis,</text>
+            <text x="178" y="497" class="t-sm">severe heart failure</text>
+            <text x="8" y="520" class="t-sm t-b">Portal hypertension (book): ΔP portal to</text>
+            <text x="8" y="534" class="t-sm t-b">hepatic vein &gt; 10 mmHg</text>
+          </svg>
+      - kind: aside
+        tone: analogy
+        page: 38
+        text: |
+          تخيّل الدم عربيات طالعة من **الجيزة (الأمعاء والطحال)** رايحة **رمسيس (القلب)**، ولازم تعدّي على **وسط البلد (الكبد)**.
+
+          - حادثة على **الكوبري قبل وسط البلد** = **pre-hepatic** (portal vein thrombosis).
+          - زحمة **جوّه شوارع وسط البلد** = **hepatic**: في أول الشارع (pre-sinusoidal، البلهارسيا)، في الشارع نفسه (sinusoidal، الـ cirrhosis)، أو عند المخرج (post-sinusoidal).
+          - الزحمة **عند ميدان رمسيس نفسه** = **post-hepatic** (Budd-Chiari، IVC web، أو القلب).
+
+          في كل الحالات العربيات اللي ورا بتتكوّم، وده الـ portal hypertension.
+      - kind: sort
+        page: 38
+        prompt: "صنّف الأسباب دي:"
+        bins: ["Pre-hepatic", "Hepatic", "Post-hepatic"]
+        cards:
+          - { text: "Portal vein thrombosis", bin: 0 }
+          - { text: "Splenic vein thrombosis", bin: 0 }
+          - { text: "Massive splenomegaly", bin: 0 }
+          - { text: "Schistosomiasis", bin: 1 }
+          - { text: "Cirrhosis", bin: 1 }
+          - { text: "Congenital hepatic fibrosis", bin: 1 }
+          - { text: "Budd-Chiari syndrome", bin: 2 }
+          - { text: "Constrictive pericarditis", bin: 2 }
+          - { text: "Inferior vena caval web", bin: 2 }
+        why: "الـ **massive splenomegaly** pre-hepatic علشان بتزوّد الـ **flow** الداخل للـ portal (مش انسداد). البلهارسيا و congenital hepatic fibrosis **pre-sinusoidal** جوه الكبد، والـ cirrhosis **sinusoidal**. والقلب (restrictive cardiomyopathy، constrictive pericarditis، severe CHF) **post-hepatic**."
+      - kind: aside
+        tone: exam
+        page: 38
+        text: |
+          في مصر الـ **Schistosomiasis** نجمة الامتحان: هي **pre-sinusoidal** (البيض بيقعد في الـ portal venules).
+
+          سؤال الكتاب نفسه: «Which can cause **pre-sinusoidal** PH?» والاختيارات right heart failure و Budd-Chiari و constrictive pericarditis و IVC… كلهم **post-hepatic**، والإجابة **Schistosomiasis**.
+      - kind: reveal
+        page: 38
+        prompt: "لو عملنا قسطرة للـ hepatic vein: الـ **wedged** pressure (WHVP) بيقيس إيه؟ وإزاي ده بيفرّق بين المستويات؟"
+        answer: |
+          (ده من الـ physiology المعروفة، الكتاب بيسأل عنه في سؤال 6 من غير ما يشرحه.)
+
+          لما تسد الـ hepatic vein بالـ balloon، الضغط اللي بتقيسه بيبقى ضغط الـ **sinusoids**. والـ **HVPG = WHVP − free hepatic venous pressure (FHVP)**.
+
+          - **Sinusoidal** (cirrhosis): الـ wedged **عالي** والـ free طبيعي، فالـ HVPG **عالي**.
+          - **Pre-sinusoidal / pre-hepatic** (schistosomiasis، portal vein thrombosis): الانسداد **قبل** الـ sinusoid، فالـ wedged **طبيعي** والـ HVPG طبيعي رغم إن فيه PH.
+          - **Post-hepatic** (قلب، Budd-Chiari): الـ wedged والـ free **الاتنين عاليين**، فالفرق (HVPG) ممكن يبقى طبيعي.
+      - kind: check
+        page: 38
+        question: "Before TIPS, a woman's free hepatic venous pressure is 6 mmHg and her wedged hepatic venous pressure is 13 mmHg. Which cause best fits?"
+        options:
+          - "Alcoholic cirrhosis"
+          - "Portal vein thrombosis"
+          - "Constrictive pericarditis"
+          - "Schistosomiasis"
+        answer: 0
+        why:
+          - "صح: HVPG = 13 − 6 = **7 mmHg** مع wedged عالي وfree طبيعي، يعني المشكلة **sinusoidal**، زي الـ cirrhosis."
+          - "الـ PVT **pre-hepatic**: الـ wedged بيبقى طبيعي لأن الانسداد قبل الكبد."
+          - "الـ constrictive pericarditis **post-hepatic**: الـ free pressure نفسه كان هيبقى عالي، مش 6."
+          - "البلهارسيا **pre-sinusoidal**: الـ wedged بيبقى طبيعي أو قريب منه."
+      - kind: update
+        page: 38
+        text: "Baveno VII بيعرّف الـ portal hypertension بـ **HVPG > 5 mmHg** (الطبيعي 1–5)، والـ **CSPH بـ HVPG ≥ 10 mmHg**. رقم الكتاب **أكتر من 10 mmHg** هو رقم الـ CSPH، وفي الامتحان اكتب رقم الكتاب."
+        ref: "Baveno VII consensus, 2021"
+      - kind: try
+        items: [hb.L03.007, hb.L03.010, hb.L03.008, hb.L03.004, hb.L03.003]
+    recap:
+      - "الـ PH أشهر مضاعفة للـ cirrhosis والمحرّك الأساسي للـ decompensation."
+      - "Compensated: امنع أول decompensation. Decompensated: امنع اللي بعدها (rebleeding، SBP، HRS، …) وحسّن الـ survival."
+      - "Varices: **30%** وقت التشخيص، **90%** بعد 10 سنين. Predictors: **INR أكتر من 1.5، portal vein > 13 mm، thrombopenia**."
+      - "Pre-hepatic: PVT، splenic vein thrombosis، massive splenomegaly. Pre-sinusoidal: schistosomiasis، congenital hepatic fibrosis."
+      - "Sinusoidal: cirrhosis، alcoholic hepatitis. Post-sinusoidal: hepatic sinusoidal obstruction. Post-hepatic: Budd-Chiari، IVC webs، cardiac."
+      - "HVPG = wedged − free. عالي في الـ sinusoidal، طبيعي في الـ pre-sinusoidal والـ pre-hepatic."
+    practice: [hb.L03.001, hb.L03.002, hb.L03.003, hb.L03.004, hb.L03.005, hb.L03.006, hb.L03.007, hb.L03.008, hb.L03.009, hb.L03.010, hb.L03.011, hb.L03.094, hb.L03.097, hb.L03.099]
+  # ------------------------------------------------------------------
+  - id: hb.L03.lesson2
+    title: "P = R × F: ليه الضغط بيعلى؟"
+    hook: "الكبد بخيل بالـ NO على نفسه وكريم بيه على الأمعاء. ومن التناقض ده بتبدأ الحكاية كلها."
+    minutes: 9
+    pages: [39, 42]
+    topics: [pathophysiology]
+    goals:
+      - "تشرح الـ portal hypertension بمعادلة واحدة: P = R × F"
+      - "تقسّم الـ intrahepatic resistance لـ fixed (~70%) و dynamic (~30%)"
+      - "تعدّ الـ vasoconstrictors جوه الكبد والـ vasodilators في الـ splanchnic bed"
+      - "ترسم الـ vicious cycle من الـ vasodilation للـ hyperdynamic circulation"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 39
+        title: "قانون أوم بتاع الكبد"
+        text: |
+          الضغط (**P**) بيطلع من تفاعل الـ **resistance (R)** والـ **flow (F)**:
+
+          **P = R × F**
+
+          يعني الـ portal hypertension بييجي من:
+          - **زيادة الـ resistance** للـ portal flow، و/أو
+          - **زيادة الـ portal venous inflow**
+
+          والكبد الطبيعي عنده قدرة إنه **يستوعب تغييرات كبيرة في الـ flow من غير ما الضغط يتغير** تقريبًا. في الـ cirrhosis، الاتنين بيحصلوا مع بعض: الـ resistance بتعلى **و** الـ inflow بيزيد.
+      - kind: aside
+        tone: analogy
+        page: 39
+        text: |
+          افتكر **خرطوم الجنينة**: لو **ضغطت على آخره بصباعك** (resistance) **وفتحت الحنفية على الآخر** (flow)، المية بتطرطش بعيد.
+
+          الـ cirrhosis بتعمل الاتنين: الكبد المتليف هو الصباع، والـ splanchnic vasodilation هي الحنفية المفتوحة. وعلشان كده العلاج بيا يرخّي الصباع، يا يقفل الحنفية، يا الاتنين.
+      - kind: explain
+        page: 40
+        title: "الـ resistance جوه الكبد: جزء ثابت وجزء بيتحرك"
+        text: |
+          **1. Architectural disturbances (~70%):**
+          - تشوّه الـ vascular architecture بالـ **fibrosis و scarring و regenerative nodules**، وكمان **thrombosis**.
+          - ده الـ **mechanical component**: **fixed**.
+
+          **2. Functional alterations (~30%):**
+          - **Active contraction** للـ **hepatic stellate cells**، والـ **vascular smooth muscle cells** في الـ portal venules، والـ **myofibroblasts**.
+          - ده الـ **dynamic component**: **modifiable by drugs**.
+
+          فاكر الـ HSC اللي اتحوّلت لـ myofibroblast في درس الـ cirrhosis؟ هي نفسها اللي بتنقبض وتضيّق الـ sinusoid.
+      - kind: check
+        page: 40
+        question: "Which part of the increased intrahepatic resistance in cirrhosis can drugs modify?"
+        options:
+          - "The functional (dynamic) part, about 30%, from active contraction of stellate cells and myofibroblasts"
+          - "The architectural (fixed) part, about 70%, from fibrosis and nodules"
+          - "Both parts equally"
+          - "Neither: resistance is entirely structural"
+        answer: 0
+        why:
+          - "صح: الـ **dynamic component** (~30%) هو اللي الأدوية تقدر عليه، لأنه انقباض خلايا مش ندبة."
+          - "الـ 70% دي **mechanical, fixed**: ندبة و nodules، الدوا ما بيفكّهاش."
+          - "الكتاب بيفرّق بينهم بوضوح: **fixed** و **modifiable by drugs**."
+          - "فيه 30% functional، فالـ resistance مش كلها structural."
+      - kind: explain
+        page: 40
+        title: "جوه الكبد: الميزان مايل للتضييق"
+        text: |
+          الـ intrahepatic resistance كمان بتعلى بسبب **imbalance بين الـ vasodilators والـ vasoconstrictors**:
+
+          - **Vasoconstrictors** (كتير): **endothelin، angiotensin، norepinephrine، vasopressin، leukotrienes، thromboxane**.
+          - **Vasodilators** (مش كفاية جوه الكبد): **nitric oxide (NO)** و **carbon monoxide (CO)**.
+
+          النتيجة: الـ sinusoids والـ venules جوه الكبد **متضيّقة**.
+      - kind: explain
+        page: 41
+        title: "برّه الكبد: الميزان مايل للتوسيع"
+        text: |
+          في الـ **splanchnic circulation** (الأمعاء والطحال) الصورة **العكس**: فيه **splanchnic vasodilatation** بسبب **increased vasodilators**:
+
+          - **Glucagon**
+          - **Endocannabinoids**
+          - **Nitric oxide**
+          - **Prostacyclin**
+          - **Carbon monoxide**
+
+          ومعاهم **increased angiogenesis** (angiogenic factors زي **VEGF**) بتعمل أوعية جديدة.
+
+          والأوعية المتوسعة دي بتصب **دم أكتر** في الـ portal vein، فالـ **F** في المعادلة بتزيد.
+      - kind: aside
+        tone: trap
+        page: 41
+        text: |
+          الـ **NO** موجود في القايمتين، وده الفخ:
+
+          - **جوه الكبد: NO قليل** ← الـ resistance بتعلى.
+          - **في الـ splanchnic bed: NO كتير** ← vasodilation والـ inflow بيزيد.
+
+          الكبد بخيل بالـ NO على نفسه وكريم بيه على الأمعاء. 😄 والاتنين بيرفعوا الضغط.
+      - kind: sort
+        page: 40
+        prompt: "الحاجة دي بتزيد فين في الـ cirrhosis وبتعمل إيه؟"
+        bins: ["Intrahepatic vasoconstrictor (↑ R)", "Splanchnic vasodilator (↑ F)"]
+        cards:
+          - { text: "Endothelin", bin: 0 }
+          - { text: "Thromboxane", bin: 0 }
+          - { text: "Norepinephrine", bin: 0 }
+          - { text: "Leukotrienes", bin: 0 }
+          - { text: "Glucagon", bin: 1 }
+          - { text: "Endocannabinoids", bin: 1 }
+          - { text: "Prostacyclin", bin: 1 }
+        why: "الـ constrictors (endothelin، angiotensin، norepinephrine، vasopressin، leukotrienes، thromboxane) بيضيّقوا جوه الكبد فالـ **R** تعلى. الـ splanchnic dilators (glucagon، endocannabinoids، NO، prostacyclin، CO) بيوسّعوا برّه فالـ **F** تزيد."
+      - kind: figure
+        page: 42
+        title: "الدايرة اللي ما بتقفلش"
+        alt: "Top panel: cirrhosis raises resistance (fixed and functional), vasodilators such as NO, and angiogenic factors such as VEGF. Resistance raises portal pressure. Vasodilators cause splanchnic vasodilation and more portal inflow, which also raises portal pressure. Angiogenic factors form new vessels. Portal pressure and new vessels lead to varices, variceal growth and rupture. Bottom panel: lower splanchnic and systemic arteriolar resistance lowers effective arterial blood volume, activates neurohumoral systems such as RAAS, causes sodium and water retention and a hyperdynamic circulation, which feeds back into more portal inflow. Clinical results: variceal hemorrhage, ascites, encephalopathy."
+        caption: "فوق: الـ R والـ F بيرفعوا الضغط، والـ VEGF بيبني أوعية جديدة، والنتيجة **varices**. تحت: الـ vasodilation بيخدع الجسم إنه «ناشف»، فيحتفظ بالملح والمية، فالدورة الدموية تبقى **hyperdynamic** وتزوّد الـ inflow تاني."
+        svg: |
+          <svg viewBox="0 0 330 640" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L03b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+              <marker id="L03c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-bad"/></marker>
+            </defs>
+            <rect x="115" y="8" width="100" height="30" rx="8" class="fg-ink"/>
+            <text x="165" y="28" text-anchor="middle" class="t-b">Cirrhosis</text>
+            <path d="M140 38L64 54M165 38V54M190 38L266 54" class="fg-arrow" marker-end="url(#L03b)"/>
+            <rect x="8" y="58" width="102" height="44" rx="6" class="fg-acc"/>
+            <text x="59" y="76" text-anchor="middle" class="t-sm t-b">↑ Resistance</text>
+            <text x="59" y="93" text-anchor="middle" class="t-sm">fixed + functional</text>
+            <rect x="114" y="58" width="102" height="44" rx="6" class="fg-acc"/>
+            <text x="165" y="76" text-anchor="middle" class="t-sm t-b">↑ Vasodilators</text>
+            <text x="165" y="93" text-anchor="middle" class="t-sm">e.g. NO</text>
+            <rect x="220" y="58" width="102" height="44" rx="6" class="fg-acc"/>
+            <text x="271" y="76" text-anchor="middle" class="t-sm t-b">↑ Angiogenic</text>
+            <text x="271" y="93" text-anchor="middle" class="t-sm">e.g. VEGF</text>
+            <path d="M165 102V120M271 102V120" class="fg-arrow" marker-end="url(#L03b)"/>
+            <rect x="114" y="124" width="102" height="44" rx="6" class="fg-box"/>
+            <text x="165" y="142" text-anchor="middle" class="t-sm">Splanchnic</text>
+            <text x="165" y="158" text-anchor="middle" class="t-sm">vasodilation</text>
+            <rect x="220" y="124" width="102" height="44" rx="6" class="fg-box"/>
+            <text x="271" y="142" text-anchor="middle" class="t-sm">New vessels</text>
+            <text x="271" y="158" text-anchor="middle" class="t-sm">formed</text>
+            <path d="M165 168V184" class="fg-arrow" marker-end="url(#L03b)"/>
+            <rect x="114" y="188" width="102" height="30" rx="6" class="fg-box"/>
+            <text x="165" y="208" text-anchor="middle" class="t-sm t-b">↑ Portal inflow</text>
+            <path d="M59 102V236M165 218V236" class="fg-arrow" marker-end="url(#L03b)"/>
+            <rect x="8" y="240" width="208" height="34" rx="8" class="fg-bad"/>
+            <text x="112" y="262" text-anchor="middle" class="t-b">↑ Portal pressure</text>
+            <path d="M112 274V296M271 168V296" class="fg-arrow" marker-end="url(#L03b)"/>
+            <rect x="8" y="300" width="314" height="34" rx="8" class="fg-bad"/>
+            <text x="165" y="322" text-anchor="middle" class="t-b">Varices → growth → rupture</text>
+            <text x="8" y="366" class="t-b">The systemic side</text>
+            <rect x="8" y="376" width="250" height="32" rx="6" class="fg-box"/>
+            <text x="16" y="396" class="t-sm">↓ Splanchnic + systemic arteriolar resistance</text>
+            <path d="M133 408V418" class="fg-arrow" marker-end="url(#L03b)"/>
+            <rect x="8" y="420" width="250" height="32" rx="6" class="fg-box"/>
+            <text x="16" y="440" class="t-sm">↓ Effective arterial blood volume</text>
+            <path d="M133 452V462" class="fg-arrow" marker-end="url(#L03b)"/>
+            <rect x="8" y="464" width="250" height="32" rx="6" class="fg-box"/>
+            <text x="16" y="484" class="t-sm">Neurohumoral activation (RAAS, etc.)</text>
+            <path d="M133 496V506" class="fg-arrow" marker-end="url(#L03b)"/>
+            <rect x="8" y="508" width="250" height="32" rx="6" class="fg-box"/>
+            <text x="16" y="528" class="t-sm">Sodium and water retention</text>
+            <path d="M133 540V550" class="fg-arrow" marker-end="url(#L03b)"/>
+            <rect x="8" y="552" width="210" height="32" rx="6" class="fg-bad"/>
+            <text x="16" y="572" class="t-sm t-b">Hyperdynamic circulation</text>
+            <path d="M218 568H238" class="fg-arrow-bad" marker-end="url(#L03c)"/>
+            <rect x="242" y="546" width="80" height="44" rx="6" class="fg-bad"/>
+            <text x="282" y="564" text-anchor="middle" class="t-sm t-b">↑ Portal</text>
+            <text x="282" y="580" text-anchor="middle" class="t-sm t-b">inflow</text>
+            <rect x="8" y="598" width="314" height="36" rx="8" class="fg-acc"/>
+            <text x="165" y="620" text-anchor="middle" class="t-sm t-b">Variceal hemorrhage · ascites · encephalopathy</text>
+          </svg>
+      - kind: order
+        page: 42
+        prompt: "رتّب السلسلة اللي بتوصّل للـ hyperdynamic circulation:"
+        steps:
+          - "Splanchnic and systemic arteriolar vasodilation"
+          - "Decreased effective arterial blood volume"
+          - "Activation of neurohumoral systems (RAAS, etc.)"
+          - "Sodium and water retention"
+          - "Hyperdynamic circulatory state, adding to portal inflow"
+        why: "الأوعية المتوسعة بتخلّي الـ effective volume **يبان قليل**، فالجسم يشغّل الـ RAAS ويحتفظ بالملح والمية، والـ volume الزيادة بيعمل hyperdynamic circulation ويزوّد الـ portal inflow. ومن هنا كمان بتطلع الـ **ascites**."
+      - kind: aside
+        tone: tip
+        page: 41
+        text: |
+          جملة صغيرة في الكتاب بتتسأل: **portal pressure correlates well with severity of fibrosis in chronic hepatitis**. كل ما التليف يزيد، الضغط يعلى، وده نفس اللي خلّى الـ LSM يتنبأ بالـ CSPH في المحاضرة اللي فاتت.
+      - kind: try
+        items: [hb.L03.015, hb.L03.016, hb.L03.020, hb.L03.023, hb.L03.109]
+    recap:
+      - "**P = R × F**. الـ PH = ↑ resistance + ↑ portal inflow. الكبد الطبيعي بيستوعب الـ flow من غير ما الضغط يعلى."
+      - "Resistance: **~70% fixed** (fibrosis، nodules، thrombosis) + **~30% dynamic** (HSCs، smooth muscle، myofibroblasts)، والـ dynamic بس هو اللي الدوا يقدر عليه."
+      - "جوه الكبد: constrictors ↑ (endothelin، angiotensin، norepinephrine، vasopressin، leukotrienes، thromboxane) و NO/CO مش كفاية."
+      - "برّه: glucagon، endocannabinoids، NO، prostacyclin، CO + angiogenesis (VEGF) → splanchnic vasodilation → ↑ inflow."
+      - "Vasodilation → ↓ effective volume → RAAS → Na/water retention → hyperdynamic → inflow أكتر. النتيجة: varices، ascites، encephalopathy."
+    practice: [hb.L03.012, hb.L03.013, hb.L03.014, hb.L03.015, hb.L03.016, hb.L03.017, hb.L03.018, hb.L03.019, hb.L03.020, hb.L03.021, hb.L03.022, hb.L03.023, hb.L03.024, hb.L03.109]
+  # ------------------------------------------------------------------
+  - id: hb.L03.lesson3
+    title: "من الضغط للدوالي"
+    hook: "عشرة تبني، اتناشر تفرقع. وليه الدوالي اللي نزفت مرة هتنزف تاني في 63% من الحالات؟"
+    minutes: 8
+    pages: [43, 45]
+    topics: [csph, phg]
+    goals:
+      - "تعرّف الـ CSPH وتقول هو بيتنبأ بإيه"
+      - "تحفظ أرقام الـ HVPG: 10 للتكوين و 12 للنزيف"
+      - "ترسم الـ natural history للـ varices بالنسب، ومستوى الوقاية في كل مرحلة"
+      - "تعرف إن الـ PHG تشخيصها بالمنظار"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 43
+        title: "الـ CSPH: الرقم اللي بيفرق"
+        text: |
+          الـ **clinically significant portal hypertension (CSPH)** هو **HVPG > 10 mmHg**.
+
+          الضغط ده **بيتنبأ** بتلات حاجات:
+          - **Development of varices**
+          - **Clinical decompensation**
+          - **HCC**
+
+          وفي الـ biopsy بتاع مريض الـ cirrhosis، فيه finding**ين** بيتنبأوا بالـ CSPH **independently**: **thick fibrous septae** و **small nodule size**. (منطقي: septa تخينة ونودولز صغيرة كتير = كبد مقفول أكتر.)
+      - kind: figure
+        page: 43
+        title: "ترمومتر الـ HVPG"
+        alt: "A vertical HVPG scale in mmHg from 0 at the bottom to 25 at the top. 1 to 5 is normal. Above 5 is portal hypertension (Baveno VII). Above 10 is CSPH: varices form, and it predicts decompensation and HCC. Above 12 varices can rupture and bleed. Above 20 marks a high-risk bleeder in whom early TIPS improves survival."
+        caption: "اطلع على الترمومتر: **أكتر من 10** الدوالي تتكوّن، **أكتر من 12** ممكن تنفجر، **أكتر من 20** نزيف high-risk (هنرجعله مع الـ TIPS). الـ 5 من Baveno VII مش من الكتاب."
+        svg: |
+          <svg viewBox="0 0 330 310" xmlns="http://www.w3.org/2000/svg">
+            <text x="8" y="18" class="t-b">HVPG (mmHg)</text>
+            <rect x="40" y="250" width="36" height="40" class="fg-good"/>
+            <rect x="40" y="190" width="36" height="60" class="fg-acc"/>
+            <rect x="40" y="140" width="36" height="50" class="fg-bad"/>
+            <rect x="40" y="80" width="36" height="60" class="fg-dot-bad"/>
+            <rect x="40" y="34" width="36" height="46" class="fg-dot-bad"/>
+            <text x="34" y="294" text-anchor="end" class="t-sm">0</text>
+            <text x="34" y="254" text-anchor="end" class="t-sm t-b">5</text>
+            <text x="34" y="194" text-anchor="end" class="t-sm t-b">10</text>
+            <text x="34" y="144" text-anchor="end" class="t-sm t-b">12</text>
+            <text x="34" y="84" text-anchor="end" class="t-sm t-b">20</text>
+            <path d="M76 250H92M76 190H92M76 140H92M76 80H92" class="fg-ink"/>
+            <text x="98" y="274" class="t-sm">1–5: normal</text>
+            <text x="98" y="244" class="t-sm t-mut">&gt; 5: portal hypertension (Baveno VII)</text>
+            <text x="98" y="186" class="t-sm t-b">&gt; 10: CSPH, varices form</text>
+            <text x="98" y="202" class="t-sm t-mut">predicts decompensation, HCC</text>
+            <text x="98" y="136" class="t-sm t-b t-bad">&gt; 12: varices can rupture</text>
+            <text x="98" y="76" class="t-sm t-b t-bad">&gt; 20: high-risk bleeder</text>
+            <text x="98" y="92" class="t-sm t-mut">early TIPS improves survival</text>
+          </svg>
+      - kind: aside
+        tone: tip
+        page: 43
+        text: |
+          احفظها كده: **عشرة تبني، اتناشر تفرقع، عشرين نجري على TIPS.**
+
+          - فوق **10 mmHg**: الـ varices بتتكوّن، يعني formation.
+          - فوق **12 mmHg**: الـ varices ممكن تنفجر، يعني rupture.
+          - فوق **20 mmHg**: high risk، وده مريض الـ early TIPS (صفحة 55).
+      - kind: check
+        page: 43
+        question: "A patient with cirrhosis has an HVPG of 14 mmHg. What does this mean according to the lecture?"
+        options:
+          - "CSPH, and above the level at which varices can rupture"
+          - "Normal portal pressure"
+          - "Portal hypertension, but below the level at which varices form"
+          - "Varices can form but cannot yet bleed"
+        answer: 0
+        why:
+          - "صح: 14 **أكتر من 10** يعني CSPH، و **أكتر من 12** يعني الـ varices ممكن تنفجر."
+          - "طبيعي تحت 5 (Baveno VII)، و 14 بعيد خالص."
+          - "الـ varices بتتكوّن من **أكتر من 10**، و 14 فوقها."
+          - "ده يصح بين 10 و 12. الـ 14 عدّت عتبة الـ **rupture (أكتر من 12)**."
+      - kind: figure
+        page: 44
+        title: "التاريخ الطبيعي للـ varices"
+        alt: "A ladder of stages down the page with prevention levels beside them. No varices, about half of cirrhotics: varices form at 4 to 5 percent per year; prevention is preventing variceal formation. Small varices, under 10 percent bleed at 2 years: grow to large at 12 percent per year; prevention is preventing variceal growth. Large varices, over 25 percent bleed at 2 years: prevention is preventing first bleeding. Variceal bleeding: treating acute bleeding. Rebleeding, 63 percent at 2 years: prevention is preventing rebleeding."
+        caption: "كل درجة في السلم ليها وقاية: **pre-primary** (قبل ما تتكوّن)، منع النمو، **primary** (قبل أول نزيف)، علاج النزيف، و **secondary** (منع الـ rebleeding)."
+        svg: |
+          <svg viewBox="0 0 330 452" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L03d" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-bad"/></marker>
+              <marker id="L03e" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-acc"/></marker>
+            </defs>
+            <rect x="8" y="8" width="150" height="44" rx="8" class="fg-good"/>
+            <text x="18" y="28" class="t-b">No varices</text>
+            <text x="18" y="44" class="t-sm t-mut">~50% of cirrhotics</text>
+            <path d="M83 52V96" class="fg-arrow-bad" marker-end="url(#L03d)"/>
+            <text x="76" y="80" text-anchor="end" class="t-sm t-bad">4–5%/y</text>
+            <rect x="176" y="58" width="146" height="34" rx="8" class="fg-acc"/>
+            <text x="184" y="74" class="t-sm t-b">Prevent formation</text>
+            <text x="184" y="87" class="t-sm t-mut">(pre-primary)</text>
+            <path d="M176 75H96" class="fg-arrow-acc" marker-end="url(#L03e)"/>
+            <rect x="8" y="100" width="150" height="44" rx="8" class="fg-acc"/>
+            <text x="18" y="120" class="t-b">Small varices</text>
+            <text x="18" y="136" class="t-sm t-mut">&lt;10% bleed at 2 y</text>
+            <path d="M83 144V188" class="fg-arrow-bad" marker-end="url(#L03d)"/>
+            <text x="76" y="172" text-anchor="end" class="t-sm t-bad">12%/y</text>
+            <rect x="176" y="150" width="146" height="34" rx="8" class="fg-acc"/>
+            <text x="184" y="172" class="t-sm t-b">Prevent growth</text>
+            <path d="M176 167H96" class="fg-arrow-acc" marker-end="url(#L03e)"/>
+            <rect x="8" y="192" width="150" height="44" rx="8" class="fg-bad"/>
+            <text x="18" y="212" class="t-b">Large varices</text>
+            <text x="18" y="228" class="t-sm t-mut">&gt;25% bleed at 2 y</text>
+            <path d="M83 236V280" class="fg-arrow-bad" marker-end="url(#L03d)"/>
+            <rect x="176" y="242" width="146" height="34" rx="8" class="fg-acc"/>
+            <text x="184" y="258" class="t-sm t-b">Prevent first bleed</text>
+            <text x="184" y="271" class="t-sm t-mut">(primary prophylaxis)</text>
+            <path d="M176 259H96" class="fg-arrow-acc" marker-end="url(#L03e)"/>
+            <rect x="8" y="284" width="150" height="44" rx="8" class="fg-dot-bad"/>
+            <text x="18" y="311" class="t-b">Variceal bleeding</text>
+            <rect x="176" y="289" width="146" height="34" rx="8" class="fg-acc"/>
+            <text x="184" y="311" class="t-sm t-b">Treat acute bleeding</text>
+            <path d="M176 306H162" class="fg-arrow-acc" marker-end="url(#L03e)"/>
+            <path d="M83 328V372" class="fg-arrow-bad" marker-end="url(#L03d)"/>
+            <rect x="176" y="334" width="146" height="34" rx="8" class="fg-acc"/>
+            <text x="184" y="350" class="t-sm t-b">Prevent rebleeding</text>
+            <text x="184" y="363" class="t-sm t-mut">(secondary prophylaxis)</text>
+            <path d="M176 351H96" class="fg-arrow-acc" marker-end="url(#L03e)"/>
+            <rect x="8" y="376" width="150" height="44" rx="8" class="fg-dot-bad"/>
+            <text x="18" y="396" class="t-b">Rebleeding</text>
+            <text x="18" y="412" class="t-sm t-b">63% at 2 years</text>
+            <text x="8" y="444" class="t-sm t-mut">All cirrhotics: screen for varices at diagnosis.</text>
+          </svg>
+      - kind: match
+        page: 44
+        prompt: "وصّل كل مرحلة بالوقاية بتاعتها:"
+        pairs:
+          - ["No varices", "Pre-primary: prevent formation"]
+          - ["Small varices", "Prevent variceal growth"]
+          - ["Large varices, never bled", "Primary prophylaxis"]
+          - ["Bleeding now", "Treat acute bleeding"]
+          - ["Survived a first bleed", "Secondary prophylaxis"]
+        why: "الأسامي بتمشي مع الوقت: **pre-primary** قبل ما الـ varices تبقى موجودة، **primary** قبل أول نزيف، **secondary** بعد أول نزيف."
+      - kind: aside
+        tone: joke
+        page: 44
+        text: |
+          الدوالي اللي نزفت مرة زي **الحنفية اللي نقّطت مرة**: لو سبتها، هتنقّط تاني. **63% في سنتين** من غير وقاية. 😄
+
+          وعلشان كده الـ **secondary prophylaxis** مش اختيار، دي إلزامي بعد أي نزيف.
+      - kind: explain
+        page: 44
+        title: "المنظار بيوريك إيه؟"
+        text: |
+          - **«All cirrhotic patients should be screened for varices at diagnosis.»** كل مريض cirrhosis يعمل منظار وقت التشخيص (إلا لو عدّى Baveno من المحاضرة اللي فاتت).
+          - صورة الكتاب في الـ EGD: **large oesophageal varices with red colour signs** (علامات حمرا على الدوالي = جدارها رفيع وخطر نزيف) و **mild portal hypertensive gastropathy**.
+          - الـ **PHG (portal hypertensive gastropathy)**: **التشخيص بيتعمل endoscopically**. شكلها الكلاسيكي في الـ fundus والجزء القريب من المعدة: **mosaic أو snakeskin pattern**.
+      - kind: case
+        stem: "Two women with HCV cirrhosis and iron-deficiency anaemia have endoscopy. (The lecture shows PHG on p45 but gives no treatment; book questions 14 and 15 ask about it, so the answers below follow standard guidance.)"
+        steps:
+          - reveal: "Woman 1: melena for 3 days, Hb 10.8. Small varices without stigmata. The proximal stomach has a mosaic, snakeskin mucosa with diffuse oozing, and no gastric varices."
+            question: "What is the first-line treatment?"
+            options:
+              - "Non-selective beta-blocker (e.g. nadolol) and iron"
+              - "Band ligation of the small varices"
+              - "Argon plasma coagulation"
+              - "Liver transplantation"
+            answer: 0
+            why: "ده **PHG** (mosaic/snakeskin في الـ proximal stomach). مصدره الضغط نفسه، فالعلاج إنك **تنزّل الـ portal pressure** بـ NSBB ومعاه iron. الـ varices الصغيرة مش هي اللي بتنزف."
+          - reveal: "Woman 2: Hb 7.3. Flat red stripes radiate from the pylorus in the antrum, with some oozing."
+            question: "Which treatment would be least effective here?"
+            options:
+              - "TIPS"
+              - "Argon plasma coagulation"
+              - "Endoscopic radiofrequency ablation"
+              - "Antrectomy"
+            answer: 0
+            why: "ده **GAVE (watermelon stomach)**: خطوط في الـ **antrum**، ومش بيتسبب من الـ portal pressure، فالـ **TIPS ما بيفيدش**. العلاج موضعي (APC، RFA، heater probe) أو جراحة. الفرق: **PHG في الـ fundus وبتتحسن بنزول الضغط، GAVE في الـ antrum ومالهاش دعوة بالضغط**."
+      - kind: try
+        items: [hb.L03.025, hb.L03.028, hb.L03.030, hb.L03.033, hb.L03.027]
+    recap:
+      - "CSPH = **HVPG > 10 mmHg**، وبيتنبأ بالـ varices والـ decompensation والـ HCC."
+      - "Biopsy predictors للـ CSPH: **thick fibrous septae و small nodule size**."
+      - "**أكتر من 10** تتكوّن، **أكتر من 12** تنفجر، **أكتر من 20** high-risk."
+      - "Natural history: ~50% من غير varices، **4–5%/سنة** تتكوّن، small → large **12%/سنة**، نزيف **أقل من 10%** (small) و **أكتر من 25%** (large) في سنتين، rebleeding **63%** في سنتين."
+      - "كل cirrhotic يتعمله منظار وقت التشخيص. الـ PHG تشخيصها **endoscopic**."
+    practice: [hb.L03.025, hb.L03.026, hb.L03.027, hb.L03.028, hb.L03.029, hb.L03.030, hb.L03.031, hb.L03.032, hb.L03.033, hb.L03.034, hb.L03.088, hb.L03.096, hb.L03.101, hb.L03.106, hb.L03.107]
+  # ------------------------------------------------------------------
+  - id: hb.L03.lesson4
+    title: "قبل أول نزيف: beta-blocker ولا رباط؟"
+    hook: "الـ carvedilol بيقفل الحنفية ويرخّي الصباع في نفس الوقت. وإمتى الـ EBL يكسب؟"
+    minutes: 9
+    pages: [45, 48]
+    topics: [primary-prophylaxis]
+    goals:
+      - "تعرف إن مفيش pre-primary prophylaxis بالـ beta-blockers في الكتاب"
+      - "تختار بين NSBB و EBL في الـ primary prophylaxis"
+      - "تربط كل علاج بالـ R أو الـ F في المعادلة"
+      - "تشرح ميزة الـ carvedilol، تعريف الـ haemodynamic response، وجرعته"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 45
+        title: "Cirrhosis من غير varices"
+        text: |
+          الكتاب (**Conclusion I**):
+
+          - **No specific pre-primary prophylaxis**
+          - **Treat the underlying liver disease**
+          - **Follow-up endoscopy after 2–3 years**
+
+          والأهم: **beta-blockers cannot be recommended to prevent the formation of varices** (صفحة 46). يعني ما تدّيش propranolol لواحد معندوش دوالي علشان «ما تطلعش».
+      - kind: update
+        page: 46
+        text: "Baveno VII بيدّي **NSBB (carvedilol preferred)** لأي compensated cirrhosis عنده **CSPH** علشان يمنع الـ **decompensation**، سواء فيه varices ولا لأ. بس برضه مش علشان «يمنع تكوين الـ varices» في مريض معندوش CSPH. في الامتحان: الكتاب بيقول beta-blockers cannot be recommended to prevent the formation of varices."
+        ref: "Baveno VII consensus, 2021"
+      - kind: explain
+        page: 45
+        title: "الـ primary prophylaxis"
+        text: |
+          - **No indication to treat patients without varices.**
+          - **Small varices:** could be treated، **specially لو فيه red colour signs و/أو Child C**. والباقيين ممكن يتعالجوا علشان يمنعوا النمو، بس **further studies are needed**.
+          - **Moderate or large varices:** **beta-blockers = treatment of choice**، و **EBL** للي عندهم **contraindications أو intolerance** للـ beta-blockers.
+
+          **Baveno IV (2005)** للـ medium/large varices:
+          - **NSBBs** بتقلل خطر أول نزيف.
+          - **Prophylactic EBL** مفيد.
+          - **EBL أكثر فاعلية** من الـ NSBB في منع أول نزيف، **بس ما بيحسّنش الـ survival**، والـ long-term benefit مش أكيد لأن الـ follow-up كان قصير.
+      - kind: reveal
+        page: 46
+        prompt: "الـ EBL بيمنع النزيف أحسن... طب ليه ما بيحسّنش الـ survival؟"
+        answer: |
+          لأن الـ EBL **علاج موضعي**: بيربط الوريد اللي قدامك، بس **الـ portal pressure اللي وراه زي ما هو**.
+
+          الـ NSBB بيقلل الـ **F** في المعادلة، فبينزّل الضغط **في كل حتة**: مش بس الـ varices، كمان باقي مضاعفات الـ PH. (ده المنطق الفسيولوجي، الكتاب بيدّيك النتيجة بس.)
+      - kind: figure
+        page: 46
+        title: "كل علاج بيضرب في أنهي حتة من المعادلة؟"
+        alt: "Portal pressure equals resistance times flow. Left: increased hepatic resistance (mechanic or dynamic) is lowered by vasodilators such as nitrates and by TIPS. Right: increased splanchnic blood flow is lowered by vasoconstrictors: beta-blockers, terlipressin, somatostatin. Bottom: carvedilol acts on both, beta-blockade lowering flow and alpha-1 blockade lowering resistance."
+        caption: "الـ **R** بتنزل بالـ nitrates والـ TIPS، والـ **F** بتنزل بالـ beta-blockers والـ terlipressin والـ somatostatin. والـ **carvedilol** بيضرب في الاتنين."
+        svg: |
+          <svg viewBox="0 0 330 316" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L03f" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="8" y="8" width="314" height="36" rx="8" class="fg-bad"/>
+            <text x="165" y="31" text-anchor="middle" class="t-b">Portal pressure = Resistance × Flow</text>
+            <path d="M84 44V60M246 44V60" class="fg-arrow" marker-end="url(#L03f)"/>
+            <rect x="8" y="64" width="152" height="52" rx="8" class="fg-acc"/>
+            <text x="84" y="84" text-anchor="middle" class="t-sm t-b">↑ Hepatic resistance</text>
+            <text x="84" y="102" text-anchor="middle" class="t-sm">mechanic / dynamic</text>
+            <rect x="170" y="64" width="152" height="52" rx="8" class="fg-acc"/>
+            <text x="246" y="84" text-anchor="middle" class="t-sm t-b">↑ Splanchnic flow</text>
+            <text x="246" y="102" text-anchor="middle" class="t-sm">vasodilated gut bed</text>
+            <path d="M84 116V132M246 116V132" class="fg-arrow" marker-end="url(#L03f)"/>
+            <rect x="8" y="136" width="152" height="70" rx="8" class="fg-good"/>
+            <text x="16" y="156" class="t-sm t-b">Lower R:</text>
+            <text x="16" y="174" class="t-sm">Vasodilators (nitrates)</text>
+            <text x="16" y="192" class="t-sm">TIPS</text>
+            <rect x="170" y="136" width="152" height="70" rx="8" class="fg-good"/>
+            <text x="178" y="156" class="t-sm t-b">Lower F (vasoconstrict):</text>
+            <text x="178" y="174" class="t-sm">Beta-blockers</text>
+            <text x="178" y="192" class="t-sm">Terlipressin, somatostatin</text>
+            <path d="M84 206L140 246M246 206L190 246" class="fg-arrow" marker-end="url(#L03f)"/>
+            <rect x="8" y="250" width="314" height="58" rx="8" class="fg-ink"/>
+            <text x="165" y="272" text-anchor="middle" class="t-b">Carvedilol hits both</text>
+            <text x="165" y="292" text-anchor="middle" class="t-sm">β-blockade ↓ flow + α1-blockade ↓ resistance</text>
+          </svg>
+      - kind: sort
+        page: 46
+        prompt: "كل علاج بينزّل الضغط عن طريق إيه؟"
+        bins: ["Lowers resistance (R)", "Lowers flow (F)", "Both"]
+        cards:
+          - { text: "Long-acting nitrates", bin: 0 }
+          - { text: "TIPS", bin: 0 }
+          - { text: "Propranolol", bin: 1 }
+          - { text: "Terlipressin", bin: 1 }
+          - { text: "Somatostatin", bin: 1 }
+          - { text: "Carvedilol", bin: 2 }
+        why: "الـ nitrates بتوسّع جوه الكبد، والـ TIPS بيعمل طريق جانبي حوالين الـ resistance. الـ beta-blockers والـ terlipressin والـ somatostatin بيضيّقوا الـ splanchnic bed فالـ inflow يقل. والـ carvedilol **β + α1** فبيعمل الاتنين."
+      - kind: explain
+        page: 47
+        title: "الـ carvedilol: الدور التاني للي ما استجابش"
+        text: |
+          لو المريض عنده medium/large varices و **contraindications أو side-effects للـ beta-blockers**، الاختيارات اللي اتدرست: **no treatment، long-acting nitrates، EBL**.
+
+          وعن الـ **carvedilol**:
+          - بيعمل **decrease في الـ HVPG أكبر بكتير من الـ propranolol**.
+          - **نسبة كبيرة من الـ non-responders للـ propranolol** بيحققوا **haemodynamic response** عليه، وده مرتبط بنتايج أحسن: **أقل variceal bleeding، أقل decompensation، وأقل death**.
+          - السبب: **additional α-adrenergic blockade**.
+
+          **Haemodynamic response** = **HVPG ينزل 20% أو أكتر** أو **يوصل أقل من 12 mmHg**.
+
+          والكتاب بيقول: **NSBBs أو EBL** recommended للـ primary prophylaxis في مرضى الـ esophageal varices.
+      - kind: aside
+        tone: joke
+        page: 47
+        text: |
+          الـ propranolol non-responder؟ ما تزعلش. 😄
+
+          الـ **carvedilol** هو **الدور التاني**: نفس المادة (beta-blocker)، بس بميزة إضافية (α1-blockade) بتنجّح ناس كتير كانت ساقطة في الدور الأول.
+      - kind: explain
+        page: 48
+        title: "طب ولو عنده ascites؟"
+        text: |
+          - **Long-term carvedilol therapy is not harmful** في الـ decompensated cirrhosis مع ascites.
+          - في مرضى الـ ascites والـ varices: الـ carvedilol **safe and may improve survival**، **بشرط** ما يحصلش **impairment في الـ systemic haemodynamics أو renal dysfunction**.
+          - والـ **safety surrogate** اللي تراقبه: **maintained arterial blood pressure**.
+          - **Target dose = 12.5 mg/day.**
+      - kind: aside
+        tone: tip
+        page: 48
+        text: |
+          رقم **12** بيظهر في المحاضرة كتير، ما تلخبطش:
+
+          - **12 mmHg:** عتبة الـ rupture، والـ response لو الـ HVPG بقى **أقل من 12**.
+          - **12.5 mg/day:** الـ target dose بتاع الـ carvedilol.
+          - **12 hours:** الـ EBL في النزيف الحاد (الدرس الجاي).
+      - kind: case
+        page: 47
+        stem: "A 58-year-old woman with compensated HCV cirrhosis has screening endoscopy. She has never bled."
+        steps:
+          - reveal: "Endoscopy shows large oesophageal varices. BP 130/80, pulse 82. No asthma."
+            question: "Which primary prophylaxis does the lecture make the treatment of choice?"
+            options:
+              - "Non-selective beta-blocker"
+              - "Endoscopic band ligation"
+              - "TIPS"
+              - "Long-acting nitrates alone"
+            answer: 0
+            why: "الكتاب: **beta-blockers should be the treatment of choice**، والـ EBL للي عنده contraindication أو intolerance."
+          - reveal: "She starts propranolol. A later HVPG falls from 18 to 16 mmHg."
+            question: "How do you read this, and what could help?"
+            options:
+              - "No response; consider carvedilol"
+              - "Good response; continue"
+              - "No response; stop all drugs and observe"
+            answer: 0
+            why: "النزول **11%** بس (أقل من 20%) والـ HVPG لسه **12 أو أكتر**، فمفيش response. الـ **carvedilol** بيعمل HVPG decrease أكبر وكتير من الـ non-responders بيستجيبوا عليه."
+          - question: "What target carvedilol dose does the lecture give for portal hypertension?"
+            options:
+              - "12.5 mg/day"
+              - "25 mg twice daily"
+              - "6.25 mg/week"
+              - "Titrate to a resting pulse of 40"
+            answer: 0
+            why: "الكتاب: **the target dose of carvedilol to treat PH should be 12.5 mg/day**."
+      - kind: check
+        page: 45
+        question: "A 64-year-old woman with Child B cirrhosis has large varices that have never bled. BP 105/69, pulse 60, and she has frequent insulin hypoglycaemia because she skips meals. Best primary prophylaxis?"
+        options:
+          - "Endoscopic variceal ligation"
+          - "Nadolol"
+          - "Metoprolol"
+          - "Isosorbide mononitrate"
+        answer: 0
+        why:
+          - "صح: الضغط واطي والنبض 60 وعندها hypoglycaemia (والـ beta-blocker بيخبّي أعراضه)، فدي **contraindication/intolerance** والكتاب بيقول **EBL** في الحالة دي."
+          - "الـ NSBB هو الاختيار العادي، بس هنا الـ BP والـ pulse واطيين والـ hypoglycaemia خطر."
+          - "الـ metoprolol **cardioselective (β1)**: مفيهوش الـ β2 blockade اللي بيضيّق الـ splanchnic bed، فمش مستخدم في الـ PH، وكمان هيوطّي الضغط والنبض الواطيين أصلًا."
+          - "الـ nitrates لوحدها مش علاج primary prophylaxis موصى بيه، وكمان هتنزّل الضغط الواطي أصلًا."
+      - kind: try
+        items: [hb.L03.035, hb.L03.038, hb.L03.044, hb.L03.046, hb.L03.041]
+    recap:
+      - "من غير varices: مفيش pre-primary prophylaxis، عالج السبب، منظار بعد **2–3 سنين**. الـ beta-blockers **ما تمنعش تكوين** الـ varices."
+      - "Small varices: ممكن تتعالج، خصوصًا مع **red signs أو Child C**."
+      - "Medium/large: **NSBB = treatment of choice**، و EBL لو فيه contraindication أو intolerance."
+      - "Baveno IV: EBL أحسن في منع أول نزيف **بس من غير survival benefit**."
+      - "R تنزل بالـ nitrates والـ TIPS. F تنزل بالـ beta-blockers والـ terlipressin والـ somatostatin. Carvedilol = الاتنين."
+      - "Response = HVPG **↓ 20% أو أكتر** أو **أقل من 12 mmHg**. Carvedilol **12.5 mg/day**، و safe مع الـ ascites طول ما الضغط والكلى كويسين."
+    practice: [hb.L03.035, hb.L03.036, hb.L03.037, hb.L03.038, hb.L03.039, hb.L03.040, hb.L03.041, hb.L03.042, hb.L03.043, hb.L03.044, hb.L03.045, hb.L03.046, hb.L03.047, hb.L03.087, hb.L03.092, hb.L03.100, hb.L03.102, hb.L03.104]
+  # ------------------------------------------------------------------
+  - id: hb.L03.lesson5
+    title: "النزيف: أول 12 ساعة"
+    hook: "ليه نقل الدم الزيادة بيزوّد النزيف؟ وليه الـ FFP ما ينفعش رغم إن الـ INR 2؟ الـ ABCDE بتاع الدوالي."
+    minutes: 10
+    pages: [48, 52]
+    topics: [acute-bleeding, endoscopy]
+    goals:
+      - "ترتّب أول خطوات النزيف الحاد: airway، دم بحساب، antibiotics، أدوية، منظار"
+      - "تشرح ليه الـ Hb target 7–9 وليه الـ FFP ضار"
+      - "تحفظ أرقام الأدوية والمنظار: 80%، 90%، 3–5 أيام، 12 ساعة"
+      - "تقارن الـ band ligation بالـ sclerotherapy"
+    status: unverified
+    steps:
+      - kind: mnemonic
+        page: 48
+        word: "ABCDE"
+        parts:
+          - { key: "A", text: "Airway and circulation first: general resuscitation" }
+          - { key: "B", text: "Blood carefully: Hb between 7 and 9 g/dL; no FFP" }
+          - { key: "C", text: "Cover with antibiotics: short-term prophylaxis for all (IV ceftriaxone if advanced disease and unstable)" }
+          - { key: "D", text: "Drugs, vasoactive: terlipressin, somatostatin or octreotide, for 3–5 days" }
+          - { key: "E", text: "Endoscopy: band ligation within 12 hours (preferably 6)" }
+        hook: |
+          زي الـ **ABCDE** بتاع الطوارئ، بس **نسخة الدوالي**. كل حرف خطوة من الكتاب، والترتيب ده هو اللي هتكتبه في سؤال الـ essay.
+      - kind: explain
+        page: 48
+        title: "A و B: الإنعاش من غير ما تغرّق المريض"
+        text: |
+          - **Initial measures:** **general resuscitation**: **securing the airway** و **stabilization of the circulation**.
+          - **Careful replacement of volemia: Hb between 7 and 9 g/dL.**
+          - في **rat model** للـ portal hypertensive bleeding: **portal pressure و blood loss و mortality بيزيدوا مع الـ blood transfusion**.
+      - kind: reveal
+        page: 48
+        prompt: "المريض بينزف... ليه ما نرفعش الـ Hb لـ 10 أو 12 ونرتاح؟"
+        answer: |
+          ارجع للمعادلة **P = R × F**.
+
+          كل ما تزوّد الـ volume، الـ **flow** في الـ portal بيزيد، فالـ **portal pressure يعلى**، والـ clot اللي على الدوالي ممكن يتشال. يعني إنت بتطفي الحريقة بالبنزين. وده بالظبط اللي الـ rat model وريه: transfusion أكتر = ضغط أعلى ونزيف أكتر ووفيات أكتر.
+      - kind: update
+        page: 48
+        text: "Baveno VII بيستخدم **restrictive strategy**: transfusion لما الـ Hb يوصل حوالي **7 g/dL**، والـ target **7–8 g/dL**. رقم الكتاب **7–9 g/dL** هو اللي يتكتب في الامتحان."
+        ref: "Baveno VII consensus, 2021"
+      - kind: explain
+        page: 49
+        title: "الـ INR عالي... بس دي مش مشكلة تجلّط"
+        text: |
+          - الأدلة بتقول إن الـ variceal bleeding **unrelated to haemostatic failure**، وسببه **portal hypertension و local vascular abnormalities** بالكامل.
+          - ومع ذلك المرضى بياخدوا **blood products أو prohaemostatic therapy** كتير «زي أي نزيف كبير».
+          - الـ **FFP أو platelet concentrate** غالبًا **ineffective** ومرتبطين بـ **infection، TRALI، و TACO**.
+          - **Transfusion of FFP during acute variceal bleeding is ineffective and does harm**: مرتبط بـ **failure to control bleeding at 5 days** و **mortality at 42 days**.
+      - kind: aside
+        tone: trap
+        page: 49
+        text: |
+          الـ INR في الـ cirrhosis **ما بيعبّرش** عن خطر النزيف زي ما بيعبّر في مريض الـ warfarin. الكبد بيقلل الـ pro-coagulants والـ anti-coagulants مع بعض.
+
+          فلو السؤال قال «INR 2.1، platelets 60، variceal bleeding: give FFP?» ← **لأ**. الـ FFP كمان volume، يعني ضغط أعلى.
+      - kind: explain
+        page: 49
+        title: "C: الـ infection هو العدو الخفي"
+        text: |
+          - من أهم مضاعفات الـ variceal hemorrhage: **bacterial infection**.
+          - **Short-term antibiotic prophylaxis** بيقلل الـ infections **وبيزوّد الـ survival**، و **standard of care**.
+          - و RCT حديثة: **IV ceftriaxone** ممكن يكون **superior** في مرضى **advanced liver disease و haemodynamic instability**.
+      - kind: explain
+        page: 48
+        title: "D و E: الأدوية والمنظار"
+        text: |
+          **Vasoactive drugs:**
+          - **Octreotide** (synthetic **somatostatin analogue**) أو **terlipressin** (synthetic **vasopressin analogue**) بيوقفوا النزيف، على الأقل مؤقتًا، في **up to 80%**.
+          - **Somatostatin may be superior to octreotide.** بيمنع إفراز الـ **vasodilator hormones** ← **splanchnic vasoconstriction** و **decreased portal inflow** (الـ F تاني!). والاتنين safe وأعراضهم الجانبية قليلة جدًا.
+
+          **Endoscopy:**
+          - **Sclerotherapy و variceal ligation** بيوقفوا النزيف في **up to 90%**.
+          - **Octreotide (أو terlipressin) لمدة 3–5 أيام + endoscopic therapy** أحسن من أي واحد لوحده: **rebleeding أقل** و **transfusion أقل** في الأيام الأولى.
+      - kind: figure
+        page: 51
+        title: "الرباط بيشتغل إزاي؟"
+        alt: "Three panels down the page. First: a varix bulges from the oesophageal wall and is sucked up into a clear cap on the tip of the endoscope. Second: a rubber band is fired from the cap around the base of the varix, which becomes a strangled polyp. Third: after about seven days the strangled varix sloughs and leaves a shallow ulcer at the banding site."
+        caption: "شفط، رباط، وبعد حوالي **7 أيام** الوريد المخنوق بيقع ويسيب **ulcer** مكانه (صورة الكتاب صفحة 51)."
+        svg: |
+          <svg viewBox="0 0 330 432" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L03g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-acc"/></marker>
+            </defs>
+            <text x="8" y="18" class="t-b">1. Suck the varix into the cap</text>
+            <rect x="110" y="28" width="110" height="70" class="fg-box"/>
+            <path d="M110 28V98M220 28V98" class="fg-ink"/>
+            <text x="228" y="44" class="t-sm t-mut">scope cap</text>
+            <path d="M165 92V40" class="fg-arrow-acc" marker-end="url(#L03g)"/>
+            <text x="228" y="62" class="t-sm t-acc">suction</text>
+            <path d="M8 128H118Q130 128 135 110Q140 70 165 66Q190 70 195 110Q200 128 212 128H322" class="fg-bad"/>
+            <rect x="8" y="128" width="314" height="16" class="fg-box"/>
+            <text x="12" y="160" class="t-sm t-mut">oesophageal wall</text>
+            <text x="8" y="186" class="t-b">2. Fire a band around its base</text>
+            <path d="M8 286H140Q150 286 150 276V262Q132 250 135 226Q140 200 165 198Q190 200 195 226Q198 250 180 262V276Q180 286 190 286H322" class="fg-bad"/>
+            <rect x="8" y="286" width="314" height="16" class="fg-box"/>
+            <rect x="140" y="258" width="50" height="10" rx="5" class="fg-dot-acc"/>
+            <text x="200" y="268" class="t-sm t-b t-acc">rubber band</text>
+            <text x="200" y="226" class="t-sm">strangled varix</text>
+            <text x="8" y="336" class="t-b">3. About 7 days later</text>
+            <rect x="8" y="380" width="314" height="16" class="fg-box"/>
+            <ellipse cx="165" cy="382" rx="26" ry="9" class="fg-bad"/>
+            <text x="165" y="370" text-anchor="middle" class="t-sm t-bad t-b">ulcer at the banding site</text>
+            <text x="8" y="424" class="t-sm t-mut">Bleeding control ~90%, rebleeding 15–20%.</text>
+          </svg>
+      - kind: explain
+        page: 52
+        title: "الـ band ligation بالأرقام"
+        text: |
+          - **Timing:** في **أول 12 ساعة** (ويفضّل **أول 6**) **بعد ما المريض يستقر**.
+          - **Bleeding controlled in 90%**، و **rebleeding rate 15–20%**.
+          - مقارنة بالـ **sclerotherapy**: **less rebleeding، lower mortality، fewer complications، fewer treatment sessions**.
+          - بعد الـ sclerotherapy: **ulcers و erosions و adhesions** شائعين جدًا (صفحة 50). وبعد الـ banding بأسبوع: **ulceration at the site of banding**.
+      - kind: check
+        page: 48
+        question: "A 61-year-old woman with Child B alcoholic cirrhosis is in shock from massive hematemesis and is intubated. Which intervention may make her outcome **worse**?"
+        options:
+          - "Transfusing packed red cells to at least 10 g/dL"
+          - "Starting octreotide early"
+          - "Intravenous ceftriaxone"
+          - "Band ligation if oesophageal varices are the source"
+        answer: 0
+        why:
+          - "صح: الـ target **7–9 g/dL**. الـ over-transfusion بيرفع الـ portal pressure والـ blood loss والـ mortality."
+          - "الـ vasoactive drug بدري جزء أساسي من العلاج (up to 80%)."
+          - "الـ antibiotic prophylaxis **standard of care** وبيزوّد الـ survival، والـ ceftriaxone مفضّل مع الـ instability."
+          - "الـ EBL هو الـ endoscopic therapy المفضل (90% control)."
+      - kind: case
+        page: 48
+        stem: "A 54-year-old man with HCV cirrhosis has two large hematemeses. He is pale and drowsy. BP 85/50, pulse 120."
+        steps:
+          - question: "What comes first?"
+            options:
+              - "Secure the airway and stabilise the circulation"
+              - "Urgent endoscopy before anything else"
+              - "Transfuse 4 units of FFP"
+              - "Balloon tamponade"
+            answer: 0
+            why: "الكتاب: **initial measures are directed at general resuscitation**: airway (خصوصًا إنه drowsy وبيرجّع) و circulation."
+          - reveal: "Hb 6.8 g/dL, INR 2.1, platelets 60,000."
+            question: "How do you replace blood?"
+            options:
+              - "Packed cells carefully, aiming for Hb 7–9 g/dL, without FFP"
+              - "Packed cells to Hb 12 g/dL plus FFP for the INR"
+              - "No blood at all until endoscopy"
+            answer: 0
+            why: "**Careful replacement: Hb 7–9.** الـ INR العالي مش سبب النزيف، والـ FFP **ineffective and does harm**."
+          - question: "Which drugs start now, before endoscopy?"
+            options:
+              - "Vasoactive drug plus IV ceftriaxone"
+              - "Propranolol and omeprazole"
+              - "Vitamin K and tranexamic acid only"
+            answer: 0
+            why: "الـ vasoactive drug (terlipressin أو somatostatin أو octreotide) بيوقف النزيف في up to 80% وبيكمل **3–5 أيام** مع المنظار، والـ antibiotics بتقلل الـ infection وبتزوّد الـ survival. الـ propranolol **مش** للنزيف الحاد (هو للوقاية)."
+          - question: "When should band ligation be done?"
+            options:
+              - "Within 12 hours"
+              - "Within 72 hours"
+              - "Only if the drugs fail"
+            answer: 0
+            why: "الكتاب: **in the 1st 12 hours (preferably 1st 6 hrs), after stabilizing the patient**."
+      - kind: try
+        items: [hb.L03.053, hb.L03.061, hb.L03.063, hb.L03.057, hb.L03.108]
+    recap:
+      - "**ABCDE**: airway، blood بحساب (**Hb 7–9**)، cover بالـ antibiotics (IV ceftriaxone لو advanced و unstable)، drugs (vasoactive **3–5 أيام**)، endoscopy (**12 h أو أقل، يفضّل 6**)."
+      - "Transfusion زيادة = ↑ F = ↑ portal pressure ونزيف أكتر (rat model)."
+      - "النزيف مش haemostatic failure. الـ **FFP ineffective and harmful** (فشل في 5 أيام، وفيات في 42 يوم، TRALI، TACO، infection)."
+      - "Antibiotics: أقل infection وأعلى survival. IV **ceftriaxone** مع advanced disease و instability."
+      - "Octreotide/terlipressin **up to 80%**، endoscopy **up to 90%**، والاتنين مع بعض أحسن. Somatostatin ممكن أحسن من octreotide."
+      - "EBL: control **90%**، rebleeding **15–20%**، وأحسن من sclerotherapy في كل حاجة (rebleeding، mortality، complications، sessions)."
+    practice: [hb.L03.048, hb.L03.049, hb.L03.050, hb.L03.051, hb.L03.052, hb.L03.053, hb.L03.054, hb.L03.055, hb.L03.056, hb.L03.057, hb.L03.058, hb.L03.059, hb.L03.061, hb.L03.062, hb.L03.063, hb.L03.064, hb.L03.065, hb.L03.086, hb.L03.090, hb.L03.091, hb.L03.095, hb.L03.105, hb.L03.108]
+  # ------------------------------------------------------------------
+  - id: hb.L03.lesson6
+    title: "لما الرباط ما يكفيش: gastric varices و TIPS"
+    hook: "سوبر جلو جوه المعدة، بالونة في المريء، وماسورة جوه الكبد. وبعدين: إزاي نمنع النزيف يرجع؟"
+    minutes: 10
+    pages: [52, 56]
+    topics: [endoscopy, rescue-tips, secondary-prophylaxis]
+    goals:
+      - "تعرف أرقام الـ gastric varices وعلاجها (cyanoacrylate و thrombin)"
+      - "تمشي في الـ algorithm لحد الـ rescue TIPS"
+      - "تقارن الـ balloon tamponade بالـ covered metal stent"
+      - "تعرف الـ TIPS: تشريحه، early TIPS، ومضاعفاته"
+      - "تختار الـ secondary prophylaxis"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 52
+        title: "الـ gastric varices"
+        text: |
+          - موجودة في **5–30%** من مرضى الـ cirrhosis.
+          - مسؤولة عن **10–15%** من نوبات الـ variceal bleeding.
+          - **Risk factors** للنزيف: **size، Child class، presence of red spots**.
+          - **Standard endoscopic therapy: cyanoacrylate.**
+      - kind: table
+        page: 53
+        title: "Cyanoacrylate for gastric varices"
+        columns: ["Pros", "Cons"]
+        rows:
+          - ["Effective; most studied", "High risk of complications: local and systemic (embolic)"]
+          - ["Standard first line in many centres", "High rebleeding rate"]
+          - ["May avoid further interventions", "Cumbersome, difficult to use"]
+          - ["Cost-effective", "Can damage the scope; not approved in the USA and other countries"]
+        hide: [[0, 1], [1, 1], [3, 1]]
+      - kind: aside
+        tone: analogy
+        page: 53
+        text: |
+          الـ **cyanoacrylate** هو نفس كيميا **السوبر جلو**. 😄
+
+          وزي ما السوبر جلو بيلزق صوابعك في بعض، ممكن **يلزق في المنظار ويبوّظه**، ولو نقطة هربت في الدم تعمل **embolism**. وعلشان كده الـ **thrombin** بديل: بيحوّل الـ **fibrinogen لـ fibrin clot**، human (Evithrom) أو bovine، **5000 U/vial**، حوالي **5–10 mL** في الجلسة، و **no important side effects**.
+      - kind: figure
+        page: 54
+        title: "الـ algorithm لحد الـ rescue"
+        alt: "Flowchart. Cirrhosis with acute bleeding. Two parallel starts: general management (antibiotics, careful replacement of volume) and an early drug (terlipressin, somatostatin, octreotide or vapreotide). Then endoscopy with band ligation or sclerotherapy, keeping the drug for 2 to 5 days. If bleeding is not controlled or there is early rebleeding, a second course of endoscopic therapy. If that fails or rebleeding recurs, rescue covered TIPS, with balloon tamponade or a covered metal stent as a bridge."
+        caption: "خطة واحدة: إنعاش + دوا بدري ← منظار ← منظار تاني لو فشل ← **rescue covered TIPS**، والبالونة أو الـ stent **كوبري** لحد ما توصل للـ TIPS. الصورة دي بتقول الدوا **2–5 أيام**، والنص في صفحة 48 بيقول **3–5**."
+        svg: |
+          <svg viewBox="0 0 330 470" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L03h" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="60" y="8" width="210" height="32" rx="8" class="fg-bad"/>
+            <text x="165" y="29" text-anchor="middle" class="t-b">Cirrhosis + acute bleeding</text>
+            <path d="M110 40V56M220 40V56" class="fg-arrow" marker-end="url(#L03h)"/>
+            <rect x="8" y="60" width="152" height="72" rx="8" class="fg-box"/>
+            <text x="16" y="78" class="t-sm t-b">General management</text>
+            <text x="16" y="96" class="t-sm">Antibiotics</text>
+            <text x="16" y="112" class="t-sm">Careful volume</text>
+            <text x="16" y="126" class="t-sm">replacement</text>
+            <rect x="170" y="60" width="152" height="72" rx="8" class="fg-acc"/>
+            <text x="178" y="78" class="t-sm t-b">Early drug</text>
+            <text x="178" y="96" class="t-sm">Terlipressin</text>
+            <text x="178" y="112" class="t-sm">Somatostatin</text>
+            <text x="178" y="126" class="t-sm">Octreotide / vapreotide</text>
+            <path d="M84 132V152M246 132V152" class="fg-arrow" marker-end="url(#L03h)"/>
+            <rect x="8" y="156" width="314" height="44" rx="8" class="fg-good"/>
+            <text x="18" y="174" class="t-b">Endoscopy: EBL or EIS</text>
+            <text x="18" y="191" class="t-sm">keep the drug for 2–5 days</text>
+            <path d="M165 200V220" class="fg-arrow" marker-end="url(#L03h)"/>
+            <text x="172" y="214" class="t-sm t-mut">10–15% fail</text>
+            <rect x="8" y="224" width="314" height="44" rx="8" class="fg-acc"/>
+            <text x="18" y="242" class="t-sm t-b">Failure to control, or early rebleeding</text>
+            <text x="18" y="259" class="t-sm">→ second course of endoscopic therapy</text>
+            <path d="M165 268V288" class="fg-arrow" marker-end="url(#L03h)"/>
+            <rect x="8" y="292" width="314" height="44" rx="8" class="fg-bad"/>
+            <text x="18" y="310" class="t-sm t-b">Failure or rebleeding again</text>
+            <text x="18" y="327" class="t-sm">→ rescue covered TIPS</text>
+            <path d="M165 336V356" class="fg-arrow" marker-end="url(#L03h)"/>
+            <rect x="8" y="360" width="314" height="62" rx="8" class="fg-thin"/>
+            <text x="18" y="380" class="t-sm t-b">Bridge while waiting for TIPS</text>
+            <text x="18" y="397" class="t-sm">Balloon tamponade, or a fully covered</text>
+            <text x="18" y="412" class="t-sm">self-expanding metal stent</text>
+            <text x="8" y="446" class="t-sm t-mut">Rebleed = hematemesis &gt; 2 h after therapy,</text>
+            <text x="8" y="461" class="t-sm t-mut">or Hb drop &gt; 3 g/dL.</text>
+          </svg>
+      - kind: explain
+        page: 54
+        title: "الـ rescue: بالونة ولا stent؟"
+        text: |
+          - **10–15% do not respond.** والـ **rebleed** = **hematemesis > 2 hrs after therapy** أو **Hb drop > 3 g/dL**.
+          - **Severe bleed → balloon tamponade as a bridge.** الـ side effects **15–20%**: **perforation، pneumonia، pain**.
+          - استخدامها **بيقل** لأن فيه **high risk of rebleeding following deflation** و **major complications**.
+          - **Expandable completely covered metallic stents**: نوعين (**nitinol أو plastic**)، **بتتركب من غير endoscopy**، بتعمل hemostasis بالـ **direct compression**، **seem safe**، و **oral intake can be offered afterwards**.
+          - ومع ذلك البالونة **فعّالة مؤقتًا** في أغلب الحالات، ومكانها في الأماكن اللي **الـ TIPS مش متاح فيها**: بتكسب وقت لحد ما توصل للـ TIPS.
+      - kind: sort
+        page: 54
+        prompt: "دي ميزة/عيب البالونة ولا الـ stent؟"
+        bins: ["Balloon tamponade", "Covered metal stent"]
+        cards:
+          - { text: "Side effects 15–20%: perforation, pneumonia, pain", bin: 0 }
+          - { text: "High rebleeding after deflation", bin: 0 }
+          - { text: "Useful where TIPS is not available", bin: 0 }
+          - { text: "Nitinol or plastic", bin: 1 }
+          - { text: "Placed without endoscopy", bin: 1 }
+          - { text: "Oral intake can be offered afterwards", bin: 1 }
+        why: "الاتنين **bridge**. البالونة قديمة ومضاعفاتها كتير وبتنزف تاني لما تفضّيها، بس لسه مفيدة لو مفيش TIPS. الـ stent جديد، safe، ويسمح بالأكل."
+      - kind: update
+        page: 54
+        text: "Baveno VII بيفضّل الـ **self-expanding metal stent** على الـ balloon tamponade كـ bridge في الـ refractory oesophageal variceal bleeding."
+        ref: "Baveno VII consensus, 2021"
+      - kind: figure
+        page: 55
+        title: "الـ TIPS: ماسورة جوه الكبد"
+        alt: "Sketch of the liver. The portal vein enters from below and the hepatic vein leaves at the top into the inferior vena cava on the right, which goes up to the right heart. A metal stent runs inside the liver from a branch of the portal vein to the hepatic vein, so portal blood bypasses the sinusoids. Note: lower portal pressure, but gut blood reaches the brain without passing the liver, so hepatic encephalopathy is the main complication."
+        caption: "الـ stent بيوصّل **intrahepatic portal vein** بالـ **hepatic vein**: **nonselective portocaval shunt**. الضغط بينزل، بس دم الأمعاء بيعدّي من غير ما الكبد ينضفه، فالـ **HE** هي المشكلة."
+        svg: |
+          <svg viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L03i" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-acc"/></marker>
+            </defs>
+            <rect x="258" y="8" width="30" height="250" rx="12" class="fg-box"/>
+            <text x="273" y="276" text-anchor="middle" class="t-sm t-b">IVC</text>
+            <text x="250" y="20" text-anchor="end" class="t-sm t-mut">to right heart ↑</text>
+            <path d="M20 120Q30 40 150 44Q240 48 250 90Q252 160 200 200Q140 240 60 220Q14 200 20 120Z" class="fg-bad"/>
+            <text x="44" y="96" class="t-b">Liver</text>
+            <rect x="0" y="-7" width="62" height="14" rx="7" class="fg-box" transform="translate(200,82) rotate(-6)"/>
+            <text x="150" y="70" class="t-sm">hepatic vein</text>
+            <rect x="0" y="-9" width="160" height="18" rx="9" class="fg-box" transform="translate(66,322) rotate(-67.5)"/>
+            <text x="20" y="300" class="t-sm t-b">portal vein</text>
+            <text x="20" y="314" class="t-sm t-mut">from gut + spleen</text>
+            <g transform="translate(126,180) rotate(-49)">
+              <rect x="0" y="-9" width="122" height="18" rx="4" class="fg-acc"/>
+              <path d="M8 -9l10 18M22 -9l10 18M36 -9l10 18M50 -9l10 18M64 -9l10 18M78 -9l10 18M92 -9l10 18M106 -9l10 18" class="fg-thin"/>
+            </g>
+            <text x="180" y="156" class="t-sm t-b t-acc">TIPS stent</text>
+            <path d="M120 250Q150 240 160 196" class="fg-arrow-acc" marker-end="url(#L03i)"/>
+            <text x="150" y="268" class="t-sm t-acc">bypasses the sinusoids</text>
+          </svg>
+      - kind: explain
+        page: 55
+        title: "الـ TIPS في الكتاب"
+        text: |
+          - **TIPS** = interventional radiology بتحط **intrahepatic metallic stent** بين الـ **intrahepatic portal vein** والـ **hepatic vein** ← **nonselective portocaval shunt**.
+          - لو متاح: **good alternative when endoscopic treatment and pharmacotherapy fail**. ولسه بيعتبر **salvage therapy** للنزيف الحاد.
+          - **Early TIPS (within 24 hours)** حسّن الـ survival بشكل واضح في الـ **high-risk** (**HVPG > 20 mmHg**)، وممكن ياخد دور أبكر.
+          - واستخدم بنجاح كمان في الـ **secondary prophylaxis**.
+      - kind: update
+        page: 55
+        text: "Baveno VII: **pre-emptive covered TIPS خلال 72 ساعة (ويفضّل خلال 24)** في **Child C < 14 points**، أو **Child B أكتر من 7 مع active bleeding وقت المنظار**، أو **HVPG > 20 mmHg**."
+        ref: "Baveno VII consensus, 2021"
+      - kind: mnemonic
+        page: 56
+        word: "LADS"
+        parts:
+          - { key: "L", text: "Liver dysfunction" }
+          - { key: "A", text: "Age (increasing)" }
+          - { key: "D", text: "Diameter of the shunt" }
+          - { key: "S", text: "Stent bare (uncovered): more encephalopathy than coated" }
+        hook: |
+          الـ TIPS بيلخبط دماغ الـ **LADS**. 😄
+
+          **HE = the most important medical complication after TIPS**، وبتظهر كـ **acute worsening of mental status خلال 2–3 أسابيع**. والمنطق: دم الأمعاء (وفيه الـ ammonia) بيعدّي من الماسورة على المخ من غير ما الكبد ينضّفه، وكل ما الماسورة أوسع (D) والكبد أضعف (L) والمريض أكبر (A)، المخ يتعب أكتر.
+      - kind: explain
+        page: 56
+        title: "مضاعفات تانية، وبعدين: إزاي ما يرجعش ينزف؟"
+        text: |
+          **TIPS complications:**
+          - الـ **bare stents** كان معاها **encephalopathy أكتر**، والـ **coated stents** أقل.
+          - **TIPS-associated hemolysis**: نادر مع الـ coated stents.
+          - **Vegetative infections** of the stent: أغلبها مع الـ bare stents، وعلاجها **prolonged antibiotics**.
+
+          **Preventing variceal rebleeding (secondary prophylaxis):**
+          - **NSBBs** effective.
+          - إضافة **isosorbide-5-mononitrate (IsMN)** بيزوّد نزول الـ HVPG، و RCT قال إن **beta-blocker + IsMN** أحسن من الـ beta-blocker لوحده.
+          - **EBL أحسن من الـ sclerotherapy**: rebleeding أقل، side effects أقل، و **sessions أقل** لحد الـ eradication.
+      - kind: update
+        page: 56
+        text: "Baveno VI و VII: الـ first-line للـ secondary prophylaxis هو **NSBB (propranolol أو carvedilol) + EBL**، والـ **nitrates مبقتش موصى بيها**. في الامتحان اكتب اللي في الكتاب (BB + IsMN، و EBL أحسن من sclerotherapy)."
+        ref: "Baveno VII consensus, 2021"
+      - kind: check
+        page: 56
+        question: "Three weeks after a TIPS for refractory variceal bleeding, a 70-year-old man with Child B cirrhosis becomes confused and drowsy. What is the most likely cause?"
+        options:
+          - "Hepatic encephalopathy"
+          - "TIPS-associated hemolysis"
+          - "Rebleeding from the varices"
+          - "Vegetative infection of the stent"
+        answer: 0
+        why:
+          - "صح: **HE** هي أهم مضاعفة، وبتيجي خلال **2–3 weeks**. وهو كبير في السن وكبده Child B (الـ L و الـ A في LADS)."
+          - "الـ hemolysis نادر خصوصًا مع الـ coated stents، وما بيعملش confusion لوحده."
+          - "الـ rebleeding بيبان بـ hematemesis أو Hb drop، مش confusion معزول."
+          - "الـ vegetative infection نادرة وأغلبها مع الـ bare stents، والصورة هنا HE كلاسيكي."
+      - kind: try
+        items: [hb.L03.069, hb.L03.081, hb.L03.073, hb.L03.079, hb.L03.060]
+    recap:
+      - "Gastric varices: **5–30%** من الـ cirrhotics، **10–15%** من النزيف. Risk: size، Child class، red spots. العلاج: **cyanoacrylate** (embolism، يبوّظ المنظار) أو **thrombin**."
+      - "Algorithm: إنعاش + دوا ← EBL/EIS (الدوا 2–5 أيام) ← منظار تاني ← **rescue covered TIPS**."
+      - "**10–15%** ما بيستجيبوش. Rebleed: hematemesis **أكتر من 2 h** أو Hb ↓ **أكتر من 3 g/dL**."
+      - "Balloon: bridge، side effects **15–20%**، rebleeding بعد التفضية. Covered stent: nitinol/plastic، من غير منظار، safe، والمريض ياكل."
+      - "الـ TIPS بيوصّل الـ intrahepatic portal vein بالـ hepatic vein. والـ **early TIPS** خلال **24 ساعة** في الـ **HVPG أكتر من 20**."
+      - "بعد الـ TIPS: **HE** خلال 2–3 أسابيع (**LADS**). Coated stents أحسن (HE و hemolysis و infection أقل)."
+      - "Secondary prophylaxis: NSBB (± IsMN)، **EBL > sclerotherapy**، والـ TIPS كمان."
+    practice: [hb.L03.060, hb.L03.066, hb.L03.067, hb.L03.068, hb.L03.069, hb.L03.070, hb.L03.071, hb.L03.072, hb.L03.073, hb.L03.074, hb.L03.075, hb.L03.076, hb.L03.077, hb.L03.078, hb.L03.079, hb.L03.080, hb.L03.081, hb.L03.082, hb.L03.083, hb.L03.084, hb.L03.085, hb.L03.089, hb.L03.093, hb.L03.098, hb.L03.103]

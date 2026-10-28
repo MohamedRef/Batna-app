@@ -6,6 +6,8 @@
 //! update keygen [--public-out FILE] [--force]
 //! update manifest --channel C [--version V] [--build N] [--commit SHA]
 //!                 --asset PLATFORM=PATH … [--notes-en T] [--notes-ar-eg T] [--out DIR]
+//!                 [--previous FEED/update.json] [--changes]
+//! update changes [--since COMMIT]          what the next build's "what's new" says
 //! update sign DIR [--public-key FILE]       secret from BATNA_UPDATE_SECRET
 //! update verify DIR [--public-key FILE]
 //! ```
@@ -18,6 +20,9 @@
 //!   `macos-x86_64` or `content` (the pack from `batna-tools packs build`).
 //! - `sign` signs `update.json` and checks the result against the public key.
 //! - `verify` runs the app's checks on a feed folder.
+//! - `--previous` keeps the channel's current history (a missing file is
+//!   fine); with `--changes`, `changes/` since that feed's commit becomes
+//!   this build's entry, and the notes when none are given (`crate::changes`).
 //!
 //! Adapted from kabar-app main: `crates/tools/src/update.rs` (clap and
 //! anyhow swapped for this crate's plain argument handling).
@@ -28,12 +33,13 @@ use std::path::{Path, PathBuf};
 use base64::Engine as _;
 use base64::engine::general_purpose::STANDARD as B64;
 use batna_core::update::{
-    Channel, MANIFEST_FILE, SIGNATURE_FILE, UPDATE_FORMAT, UpdateAsset, UpdateManifest, UpdateNotes,
-    UpdatePlatform, Version, check_download, key_line, parse_public_key, verify_manifest,
+    BuildChanges, Channel, MANIFEST_FILE, SIGNATURE_FILE, UPDATE_FORMAT, UpdateAsset, UpdateManifest,
+    UpdateNotes, UpdatePlatform, Version, check_download, key_line, parse_public_key, verify_manifest,
 };
 use ed25519_dalek::{Signer, SigningKey};
 use sha2::{Digest, Sha256};
 
+use crate::changes;
 use crate::flag;
 
 /// The release public key the app builds in.
@@ -41,8 +47,7 @@ pub const RELEASE_KEY_FILE: &str = "crates/app/update-key.pub";
 /// The secret, base64, for `update sign`.
 const SECRET_ENV: &str = "BATNA_UPDATE_SECRET";
 
-const USAGE: &str =
-    "usage: batna-tools update <keygen | manifest | sign DIR | verify DIR> (see crates/tools/src/update.rs)";
+const USAGE: &str = "usage: batna-tools update <keygen | manifest | sign DIR | verify DIR | changes> (see crates/tools/src/update.rs)";
 
 type Res<T> = Result<T, String>;
 
@@ -79,13 +84,41 @@ fn run_inner(root: &Path, args: &[String]) -> Res<String> {
             if assets.is_empty() {
                 return Err("give at least one --asset PLATFORM=PATH".into());
             }
-            let notes = UpdateNotes {
+            let mut notes = UpdateNotes {
                 en: flag(args, "--notes-en").unwrap_or_default().to_owned(),
                 ar_eg: flag(args, "--notes-ar-eg").unwrap_or_default().to_owned(),
             };
             let out = flag(args, "--out").map_or_else(|| root.join("dist/update"), PathBuf::from);
             let commit = flag(args, "--commit").map(str::to_owned);
-            let m = write_manifest(&out, channel, &version, build, commit, &assets, notes)?;
+            let previous: Option<UpdateManifest> = match flag(args, "--previous").map(Path::new) {
+                Some(p) if p.exists() => {
+                    let m: UpdateManifest = serde_json::from_str(&read_text(p)?)
+                        .map_err(|e| format!("previous feed {}: {e}", p.display()))?;
+                    if m.channel != channel {
+                        return Err(format!("the previous feed is for {}", m.channel.as_str()));
+                    }
+                    Some(m)
+                }
+                _ => None,
+            };
+            let mut entry = None;
+            if args.iter().any(|a| a == "--changes") {
+                let since = previous.as_ref().and_then(|m| m.commit.as_deref());
+                let found = changes::collect(root, since)?;
+                eprintln!("{} change(s) since {}", found.len(), since.unwrap_or("HEAD^"));
+                if notes == UpdateNotes::default() {
+                    notes = changes::notes_from(&found);
+                }
+                entry = (!found.is_empty()).then(|| BuildChanges {
+                    version: version.clone(),
+                    build,
+                    published_at: now_rfc3339(),
+                    changes: found,
+                });
+            }
+            let history = changes::history(previous.as_ref(), entry);
+            let m =
+                write_manifest(&out, channel, &version, build, commit, &assets, WhatsNew { notes, history })?;
             Ok(format!(
                 "{} {} build {} → {} ({} file(s))",
                 m.channel.as_str(),
@@ -100,6 +133,14 @@ fn run_inner(root: &Path, args: &[String]) -> Res<String> {
             let secret = std::env::var(SECRET_ENV).map_err(|_| format!("{SECRET_ENV} is not set"))?;
             sign(Path::new(dir), &secret, &public_key(args)?)?;
             Ok(format!("signed {}", Path::new(dir).join(SIGNATURE_FILE).display()))
+        }
+        Some("changes") => {
+            let n = changes::check_all(root)?;
+            let mut out = format!("{n} file(s) in {}/ check out", changes::DIR);
+            for c in changes::collect(root, flag(args, "--since"))? {
+                out.push_str(&format!("\n{:?}\t{}\t{}", c.kind, c.text.ar_eg, c.text.en));
+            }
+            Ok(out)
         }
         Some("verify") => {
             let dir = args.get(1).filter(|a| !a.starts_with("--")).ok_or(USAGE)?;
@@ -171,6 +212,13 @@ pub fn keygen(public_out: &Path, force: bool) -> Res<(String, String)> {
     Ok((public, B64.encode(seed)))
 }
 
+/// The manifest's notes and history (`crate::changes`).
+#[derive(Default)]
+pub struct WhatsNew {
+    pub notes: UpdateNotes,
+    pub history: Vec<BuildChanges>,
+}
+
 pub fn write_manifest(
     out: &Path,
     channel: Channel,
@@ -178,8 +226,9 @@ pub fn write_manifest(
     build: u64,
     commit: Option<String>,
     files: &[(UpdatePlatform, PathBuf)],
-    notes: UpdateNotes,
+    whats_new: WhatsNew,
 ) -> Res<UpdateManifest> {
+    let WhatsNew { notes, history } = whats_new;
     let parsed = Version::parse(version).ok_or_else(|| format!("version {version:?}"))?;
     if channel != Channel::Preview && !parsed.channels().contains(&channel) {
         return Err(format!("{version} doesn't belong on the {} channel", channel.as_str()));
@@ -227,6 +276,7 @@ pub fn write_manifest(
         published_at: now_rfc3339(),
         notes,
         assets,
+        history,
     };
     let path = out.join(MANIFEST_FILE);
     let json = serde_json::to_vec_pretty(&m).map_err(|e| e.to_string())?;
@@ -321,7 +371,7 @@ mod tests {
             0,
             Some("abc1234".into()),
             &[(UpdatePlatform::AndroidArm64, apk), (UpdatePlatform::Content, pack)],
-            UpdateNotes::default(),
+            WhatsNew::default(),
         )
         .unwrap();
         assert_eq!(m.assets[0].file, "batna-1.0.0-alpha.2-android-arm64.apk");
@@ -349,7 +399,7 @@ mod tests {
         fs::write(&f, b"x").unwrap();
         let assets = [(UpdatePlatform::MacosArm64, f)];
         let out = dir.path().join("feed");
-        let none = UpdateNotes::default;
+        let none = WhatsNew::default;
         assert!(write_manifest(&out, Channel::Stable, "1.0.0-alpha.1", 0, None, &assets, none()).is_err());
         assert!(write_manifest(&out, Channel::Beta, "1.0.0", 0, None, &assets, none()).is_ok());
         let preview = write_manifest(&out, Channel::Preview, "0.1.0", 7, None, &assets, none()).unwrap();
@@ -456,6 +506,25 @@ mod tests {
                     size: pack.len() as u64,
                     sha256: sha256_hex(&pack),
                     version_code: None,
+                },
+            ],
+            history: vec![
+                BuildChanges {
+                    version: "0.1.0".into(),
+                    build: 42,
+                    published_at: "2026-10-27T08:00:00Z".into(),
+                    changes: changes::parse(
+                        "- kind: new\n  ar_eg: أسئلة جديدة في المحاضرة التاسعة\n  en: New L09 questions\n\
+                         - kind: improved\n  ar_eg: البنك بقى أسرع\n\
+                         - kind: fixed\n  ar_eg: التايمر في الامتحان التجريبي مبقاش بيقف\n",
+                    )
+                    .unwrap(),
+                },
+                BuildChanges {
+                    version: "0.1.0".into(),
+                    build: 40,
+                    published_at: "2026-10-25T08:00:00Z".into(),
+                    changes: changes::parse("- kind: new\n  ar_eg: أول نسخة تجريبية\n").unwrap(),
                 },
             ],
         };

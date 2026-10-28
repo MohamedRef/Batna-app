@@ -25,6 +25,7 @@ pub fn DataSection() -> Element {
         style { {crate::verify::CSS} }
         crate::verify::ExportVerdicts {}
         crate::data_export::ExportCard {}
+        crate::anki::AnkiExport {}
         crate::import::ImportCard {}
         crate::diag::DiagnosticsCard {}
     }

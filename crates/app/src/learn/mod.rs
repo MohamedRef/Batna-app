@@ -16,6 +16,7 @@ use dioxus::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::content::Library;
+use crate::i18n::count::{MINUTE, QUESTION, count};
 use crate::i18n::learn as tx;
 use crate::{Screen, Ui};
 
@@ -111,7 +112,7 @@ pub fn Learn() -> Element {
         style { {CSS} }
         match open.and_then(|id| Library::get().lesson(&id).map(|(lec, l)| (lec, l.clone()))) {
             Some((lecture, lesson)) => rsx! {
-                player::Player { key: "{lesson.id}", lesson, lecture_title: lecture.title.clone() }
+                player::Player { key: "{lesson.id}", lesson, lecture_title: Library::get().title(&lecture.lecture).to_string() }
             },
             None => rsx! { LessonList {} },
         }
@@ -136,7 +137,7 @@ fn LessonList() -> Element {
                     span { class: "chip", "{done} {tx::OF} {total} {tx::LESSONS_DONE}" }
                     if let Some(l) = next {
                         button {
-                            class: "ls-btn primary",
+                            class: "btn btn-primary",
                             onclick: move |_| open(ui, &l.id),
                             {if done == 0 { tx::START_FIRST } else { tx::CONTINUE }}
                             " · "
@@ -193,8 +194,14 @@ fn LessonCard(n: usize, lesson: Lesson) -> Element {
                     strong { class: "ls-card-title", text::Line { text: lesson.title.clone() } }
                     span { class: "ls-card-hook muted small", text::Line { text: lesson.hook.clone() } }
                     span { class: "ls-card-meta small",
-                        "{lesson.minutes} {tx::MINUTES} · {questions} {tx::QUESTIONS} · {tx::PAGES} "
-                        bdi { dir: "ltr", "{lesson.pages[0]}–{lesson.pages[1]}" }
+                        span { class: "ls-nowrap", {count(lesson.minutes, &MINUTE)} }
+                        " · "
+                        span { class: "ls-nowrap", {count(questions, &QUESTION)} }
+                        " · "
+                        span { class: "ls-nowrap",
+                            "{tx::PAGES} "
+                            bdi { dir: "ltr", "{lesson.pages[0]}–{lesson.pages[1]}" }
+                        }
                     }
                 }
                 match m {
@@ -214,15 +221,15 @@ pub fn TodayLesson(prefer: Vec<String>) -> Element {
         return rsx! {};
     };
     let lecture = l.id.rsplit_once('.').map(|(l, _)| l).unwrap_or(&l.id);
-    let title = Library::get().lectures.get(lecture).map(|l| l.title.clone()).unwrap_or_default();
+    let title = Library::get().title(lecture).to_string();
     rsx! {
         style { {CSS} }
         section { class: "card ls-today",
             p { class: "ls-kicker", {tx::TODAY_KICKER} }
             h2 { text::Line { text: l.title.clone() } }
-            p { class: "muted small", bdi { "{title}" } " · {l.minutes} {tx::MINUTES}" }
+            p { class: "muted small", bdi { "{title}" } " · " {count(l.minutes, &MINUTE)} }
             p { text::Line { text: l.hook.clone() } }
-            button { class: "ls-btn primary", onclick: move |_| open(ui, &l.id), {tx::OPEN_LESSON} }
+            button { class: "btn btn-primary", onclick: move |_| open(ui, &l.id), {tx::OPEN_LESSON} }
         }
     }
 }

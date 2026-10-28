@@ -11,15 +11,12 @@ batna-core.workspace = true
 serde.workspace = true
 serde_yaml_ng.workspace = true
 serde_json.workspace = true
-# Anki export: the .apkg is a zipped SQLite collection; ids are SHA-1/SHA-256 based.
-rusqlite = { version = "0.37", features = ["bundled"] }
-sha1 = "0.10"
+batna-anki.workspace = true
+# Update feeds (update.rs): hashes, signing and a fresh key.
 sha2 = "0.10"
-# Update feeds (update.rs): signing and a fresh key.
 ed25519-dalek = "2"
 base64 = "0.22"
 getrandom = "0.3"
-zip = { version = "4", default-features = false, features = ["deflate"] }
 
 [dev-dependencies]
 tempfile = "3"

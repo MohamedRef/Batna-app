@@ -83,9 +83,9 @@ items:
     columns: [Feature, Predictable, Unpredictable (idiosyncratic)]
     rows:
       - ["Dose relation", "Dose related", "Not dose related"]
-      - ["Drug", "Intrinsically hepatotoxic", "Any drug, in susceptible hosts"]
+      - ["Drug", "Intrinsically hepatotoxic", "— (not stated)"]
       - ["Onset", "Acute (hours)", "Weeks to months"]
-      - ["Frequency", "Common with overdose", "Rare (0.01–1%)"]
+      - ["Frequency", "— (not stated)", "Rare (0.01–1%)"]
       - ["Pattern", "Usually necrosis; fulminant acute hepatitis", "Immune (hypersensitivity) or metabolic idiosyncrasy"]
       - ["Example", "Acetaminophen", "Phenytoin, sulfonamides, valproate; INH, ketoconazole, diclofenac"]
     blanks: [[0, 1], [0, 2], [2, 1], [2, 2], [3, 2], [5, 1]]
@@ -251,16 +251,6 @@ items:
     back: Recovery may be prolonged.
     src: { page: 130 }
     status: unverified
-  - id: hb.L08.027
-    kind: card
-    topic: diagnosis
-    front: What is a structured tool for assessing DILI causality?
-    back: RUCAM (Roussel Uclaf Causality Assessment Method). It scores latency, course after dechallenge, risk factors, concomitant drugs, exclusion of other causes, known hepatotoxicity and rechallenge.
-    src: { page: 130 }
-    status: unverified
-    update:
-      text: "Not named in the book. EASL recommends RUCAM as a structured aid to causality assessment, on top of expert judgment."
-      ref: "EASL CPG drug-induced liver injury 2019"
   - id: hb.L08.028
     kind: calc
     topic: diagnosis
@@ -294,9 +284,9 @@ items:
   - id: hb.L08.031
     kind: enumerate
     topic: diagnosis
-    prompt: Mention the hypersensitivity features that may accompany DILI.
-    points: [Fever, Rash, Arthralgias, Eosinophilia]
-    pass: 3
+    prompt: Mention the extrahepatic manifestations of DILD.
+    points: ["Hypersensitivity reactions: fever, rash, arthralgias, eosinophilia", Unique clinical syndromes]
+    pass: 2
     src: { page: 130 }
     status: unverified
 
@@ -494,9 +484,11 @@ items:
     src: { page: 136 }
     status: unverified
   - id: hb.L08.052
-    kind: cloze
+    kind: enumerate
     topic: cholestatic
-    text: "Miscellaneous drugs causing vanishing bile duct syndrome include {{c1::azathioprine}}, {{c2::terbinafine}} and {{c3::ticlopidine}} (and ibuprofen, cimetidine, tolbutamide, ethinyl estradiol)."
+    prompt: Mention the miscellaneous drugs that cause vanishing bile duct syndrome.
+    points: [Aprindine, Azathioprine, Carbutamide, Cyproheptadine, Chlorothiazide, Cyamemazine, Ibuprofen, Cimetidine, Prochlorperazine, Terbinafine, Terfenadine, Tolbutamide, Ticlopidine, Xenalamine, Ethinyl estradiol]
+    pass: 4
     src: { page: 136 }
     status: unverified
   - id: hb.L08.053
@@ -571,9 +563,11 @@ items:
     status: unverified
     tags: [high-yield]
   - id: hb.L08.059
-    kind: cloze
+    kind: enumerate
     topic: other-patterns
-    text: "Drugs causing many cases of a type 1 AIH-like syndrome: {{c1::methyldopa}}, {{c2::nitrofurantoin}} and {{c3::minocycline}} (also clometacin and oxyphenisatin)."
+    prompt: Mention the drugs reported in multiple cases of a syndrome resembling type 1 autoimmune hepatitis.
+    points: ["Clometacin (ASMA, anti-DNA)", "Methyldopa (ANA 16%, ASMA 35%)", "Minocycline (ANA, anti-DNA)", "Nitrofurantoin (ANA 80%, ASMA 72%)", "Oxyphenisatin (ANA 67%, ASMA 67%, LE 33%)"]
+    pass: 3
     src: { page: 138 }
     status: unverified
     tags: [high-yield]
@@ -709,12 +703,12 @@ items:
   - id: hb.L08.075
     kind: card
     topic: prognosis
-    front: What is Hy's law in DILI?
-    back: Hepatocellular injury (ALT >3× ULN) with jaundice (bilirubin >2× ULN) and no other cause predicts about 10% mortality or transplant.
-    src: { page: 141 }
+    front: In the book's DILI biomarker table, which rule gives ALT and bilirubin their prognostic value?
+    back: Hy's law. (For AST the table gives the modified Hy's law, nR.)
+    src: { page: 140 }
     status: unverified
     update:
-      text: "The book names Hy's law as the prognostic value of ALT and bilirubin but does not define it; the definition here is from EASL."
+      text: "The book names Hy's law but does not define it. EASL: hepatocellular injury (ALT >3× ULN) with jaundice (bilirubin >2× ULN) and no other cause predicts about 10% mortality or transplant."
       ref: "EASL CPG drug-induced liver injury 2019"
 
   # --- MCQs ---
@@ -859,18 +853,18 @@ items:
     topic: other-patterns
     stem: A 62-year-old woman on long-term nitrofurantoin for recurrent UTI has fatigue, ALT 15× ULN, high gamma globulin and positive ANA and ASMA. Biopsy shows plasma cells. What is the most likely course after stopping the drug?
     options:
-      - Resolution on drug withdrawal
-      - Lifelong immunosuppression is always needed
-      - Progression to PBC
-      - Hepatocellular carcinoma
-      - No change
+      - Resolution on withdrawal of the drug
+      - Persistent AIH needing long-term azathioprine
+      - Progression to cirrhosis within a year
+      - Relapse in most patients despite withdrawal
+      - Resolution only with corticosteroids
     answer: 0
     why:
-      - Correct. Drug-induced AIH usually resolves when the drug is withdrawn.
-      - That fits idiopathic AIH, not the usual course of drug-induced AIH.
-      - This is a hepatitis, not AMA-positive cholestasis.
-      - Not the expected outcome.
-      - The book says it usually resolves.
+      - Correct. The book's usual course for drug-induced AIH is resolution on withdrawal of the drug.
+      - Long-term immunosuppression fits idiopathic AIH, not the usual course of the drug-induced form.
+      - Drug-induced chronic hepatitis can reach cirrhosis, but the usual course once the drug is stopped is resolution.
+      - Relapse after withdrawal is not the usual course the book gives.
+      - Steroids are not required; withdrawal alone usually leads to resolution.
     src: { page: 138 }
     status: unverified
   - id: hb.L08.084
@@ -917,18 +911,18 @@ items:
     topic: risk
     stem: Which patient has the highest risk of isoniazid hepatotoxicity, by the book's risk factors?
     options:
-      - A 25-year-old man, no other disease
-      - A 65-year-old woman with chronic HBV who drinks alcohol
-      - A 30-year-old man with osteoarthritis
-      - A 10-year-old on valproate
-      - A 40-year-old fast acetylator
+      - A 30-year-old woman with osteoarthritis
+      - A 68-year-old woman with chronic HBV who drinks alcohol
+      - An obese 40-year-old man with diabetes
+      - A 70-year-old man who is fasting
+      - A 35-year-old man with HIV who is a slow acetylator
     answer: 1
     why:
-      - Young, male and healthy, so lowest risk.
-      - Correct. Older age, female sex, HBV and alcohol are all INH risk factors.
-      - Osteoarthritis is a diclofenac risk factor.
-      - Young age with anticonvulsants is a valproate risk.
-      - Slow, not fast, acetylators are at risk with rifampicin and pyrazinamide.
+      - Female sex is an INH factor, but osteoarthritis is a diclofenac factor; one INH factor only.
+      - Correct. Older age, female sex, HBV and alcohol are four INH risk factors.
+      - Obesity and diabetes are methotrexate factors, not INH ones.
+      - Older age is an INH factor, but fasting is an acetaminophen factor; one INH factor only.
+      - HIV is an INH factor, but slow acetylation is listed for sulfonamides; one INH factor only.
     src: { page: 131 }
     status: unverified
   - id: hb.L08.087

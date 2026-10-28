@@ -136,6 +136,10 @@
 
 /* ---------- tablet and Mac: two panes (crate::desk::Panes) ---------- */
 @media (min-width: 840px) {
-  .st:has(.desk-split) { max-inline-size: 72rem; }
+  /* Every item card keeps one width, so it doesn't jump between a cloze and
+     a two-pane card; one-column items keep their text to a reading column
+     inside it, with the grade row still across the card. */
+  .st:has(> .st-item) { max-inline-size: 72rem; }
+  .st-body:not(:has(> .desk-split)) > :not(.st-grades, .desk-footer) { max-inline-size: 46rem; }
   .st-item .desk-side .st-grades { position: static; }
 }

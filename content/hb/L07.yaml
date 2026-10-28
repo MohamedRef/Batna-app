@@ -343,13 +343,12 @@ items:
   - id: hb.L07.038
     kind: order
     topic: treat-who
-    prompt: "Who to treat (book algorithm): order the decisions for a non-cirrhotic chronic HBV patient."
+    prompt: "Who to treat (book algorithm, p119): order the steps for a non-cirrhotic chronic HBV patient whose ALT turns out normal."
     steps:
-      - "Check HBV DNA: below 2,000 IU/mL means no treatment"
-      - "HBV DNA above 2,000 IU/mL: check ALT"
-      - "ALT abnormal: treat"
-      - "ALT normal: no treatment; liver biopsy or FibroScan if older than 30"
-      - "FibroScan above 9 kPa (severe fibrosis): treat; if no biopsy or FibroScan, observe"
+      - "Check HBV DNA (below 2,000 IU/mL: no treatment)"
+      - "HBV DNA above 2,000 IU/mL: check ALT (abnormal: treat)"
+      - "ALT normal (ULN 40 IU/L): no treatment for now; liver biopsy or FibroScan if older than 30 (observe if neither is available)"
+      - "Read the FibroScan: above 9 kPa means severe fibrosis"
     src: { page: 119 }
     status: unverified
   - id: hb.L07.039
@@ -653,7 +652,7 @@ items:
   - id: hb.L07.071
     kind: mcq
     topic: serology
-    stem: A 27-year-old man has jaundice 6 weeks after unprotected sex. ALT 1,450 IU/L. HBsAg negative, anti-HBc IgM positive, anti-HBs negative. What is the diagnosis?
+    stem: A 27-year-old man is seen 6 months after an unprotected sexual exposure. He was jaundiced 3 months ago and is now settling; ALT 180 IU/L. HBsAg negative, anti-HBc IgM positive, anti-HBs negative. What is the diagnosis?
     options:
       - Chronic HBV
       - Acute HBV in the window period
@@ -663,10 +662,10 @@ items:
     answer: 1
     why:
       - Chronic HBV needs HBsAg positivity with IgG anti-HBc.
-      - Correct. HBsAg has gone and anti-HBs has not yet appeared; anti-HBc IgM marks acute infection.
+      - Correct. HBsAg has gone and anti-HBs has not yet appeared; anti-HBc IgM marks recent (acute) infection.
       - Past infection shows IgG anti-HBc with anti-HBs.
       - Vaccination gives anti-HBs alone.
-      - Occult HBV is IgG anti-HBc with HBV DNA and no HBsAg, not IgM in an acute illness.
+      - Occult HBV is IgG anti-HBc with HBV DNA and no HBsAg, not IgM after a recent acute illness.
     src: { page: 115 }
     status: unverified
     tags: [high-yield]
@@ -830,18 +829,18 @@ items:
     topic: special
     stem: A 30-year-old pregnant woman with chronic HBV has HBV DNA 3 × 10^6 IU/mL and normal ALT at the end of the 2nd trimester. What does the book advise?
     options:
-      - No action until delivery
-      - Consider tenofovir from 28–32 weeks, and HBIG plus vaccine for the baby at birth
-      - Caesarean section only
-      - Peginterferon
-      - Avoid breastfeeding
+      - Monitor only; infant HBIG + vaccine at birth
+      - Consider tenofovir from 28–32 weeks; infant HBIG + vaccine at birth
+      - Consider tenofovir from 28–32 weeks; infant vaccine only
+      - Start peginterferon now; infant HBIG + vaccine at birth
+      - Monitor only; infant vaccine only
     answer: 1
     why:
-      - DNA above 200,000 IU/mL needs consideration of prophylaxis.
-      - Correct. DNA >200,000 IU/mL means consider an antiviral at 28–32 weeks, plus infant HBIG and vaccine.
-      - The algorithm does not mention caesarean section.
-      - Interferon is contraindicated in pregnancy.
-      - Breastfeeding does not transmit HBV.
+      - Monitoring alone is the plan for DNA below 200,000 IU/mL; hers is above.
+      - Correct. DNA >200,000 IU/mL means consider tenofovir (or lamivudine or telbivudine) at 28–32 weeks, and the infant gets HBIG plus vaccine at birth.
+      - The maternal plan is right, but in both arms of the book's algorithm the infant gets HBIG as well as the vaccine.
+      - Interferon is contraindicated in pregnancy; the book's options are tenofovir, lamivudine or telbivudine.
+      - Both halves are wrong; her DNA needs antiviral consideration, and the infant needs HBIG too.
     src: { page: 123 }
     status: unverified
     update:
@@ -865,17 +864,20 @@ items:
         answer: 0
         why: DNA above 2,000 with normal ALT; over 30, so assess fibrosis.
       - reveal: FibroScan is 11 kPa.
-        question: Decision?
-        options: [Treat with entecavir or tenofovir, Observe every 12 months, Peginterferon is the only choice, Wait for ALT to rise]
+        question: What does 11 kPa mean in the book's algorithm?
+        options: [Severe fibrosis (>9 kPa), No significant fibrosis, Unreliable reading; repeat it, Cirrhosis with CSPH]
         answer: 0
-        why: Above 9 kPa means severe fibrosis, so treat; first-line NAs have a high barrier to resistance.
-      - reveal: He has started tenofovir.
+        why: "The p119 figure labels FibroScan >9 kPa as severe fibrosis; the figure stops there and draws no treatment arrow. Other options. No significant fibrosis: 11 kPa is above the 9 kPa cut-off. Unreliable reading: nothing in the report says so. Cirrhosis with CSPH: the algorithm does not stage CSPH from this reading."
+      - reveal: His hepatologist starts tenofovir.
         question: How long will he likely be treated?
         options: ["Long term, until HBsAg seroconversion", 12 months, 48 weeks, Until ALT normalizes]
         answer: 0
         why: HBeAg-negative patients need long-term treatment.
     src: { page: 119 }
     status: unverified
+    update:
+      text: "EASL treats HBeAg-negative chronic HBV with HBV DNA >2,000 IU/mL and at least moderate fibrosis, even when ALT is normal; the book's figure stops at 'severe fibrosis'."
+      ref: "EASL CPG on HBV 2017"
   - id: hb.L07.082
     kind: case
     topic: reactivation

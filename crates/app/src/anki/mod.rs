@@ -31,7 +31,6 @@ mod android;
 const FILE_NAME: &str = "batna.apkg";
 
 const CSS: &str = "
-.anki-export .actions { display: flex; flex-wrap: wrap; gap: var(--sp-3); align-items: center; margin-block-start: var(--sp-3); }
 .anki-export .btn:disabled { cursor: progress; }
 .anki-export .result { margin-block-start: var(--sp-3); }
 ";
@@ -73,10 +72,8 @@ pub fn AnkiExport() -> Element {
             h2 { {tx::TITLE} }
             p { class: "muted small", {tx::BODY} }
             p { class: "muted small", "{lectures} {tx::LECTURES} · {items} {tx::ITEMS}" }
-            div { class: "actions",
-                button { class: "btn btn-primary", disabled: busy, onclick: export,
-                    if busy { {tx::WORKING} } else { {tx::BUTTON} }
-                }
+            button { class: "btn btn-primary", disabled: busy, onclick: export,
+                if busy { {tx::WORKING} } else { {tx::BUTTON} }
             }
             match &*state.read() {
                 State::Done { notes, place } => rsx! {

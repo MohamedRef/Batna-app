@@ -8,8 +8,12 @@ name: Android preview APK
 #
 # Signed with a throwaway *preview* key generated in CI: never committed, never
 # Kabar's, never the release key in ~/.batna. The key is kept in the Actions
-# cache so previews install over each other; if the cache expires (7 days
-# unused) a new key is made and the next preview needs an uninstall first.
+# cache so previews install over each other. GitHub drops a cache entry that
+# nobody reads for 7 days, so a twice-weekly scheduled run reads both keys
+# (`keep-keys`) and fails loudly if one is gone. Once a preview is published,
+# a missing key is never silently replaced: a new key means installed previews
+# can't update and need an uninstall (losing data not yet synced), so the run
+# fails until someone starts it by hand with "new_keys" ticked.
 #
 # Pull-request runs never touch the cached keys: they sign with one-off keys
 # (enough to prove the APK builds, signs and passes the checks) and get a
@@ -37,6 +41,14 @@ on:
       - scripts/android-check-apk.sh
       - scripts/android-release-apk.sh
   workflow_dispatch:
+    inputs:
+      new_keys:
+        description: "Make new preview keys if the cached ones are gone (installed previews then need an uninstall)"
+        type: boolean
+        default: false
+  # Keeps the cached keys from expiring during quiet weeks.
+  schedule:
+    - cron: "23 3 * * 1,4"
 
 # A pull request's newer push cancels its older run. On main, runs queue
 # instead, so a run is never cancelled halfway through publishing (which would
@@ -49,8 +61,28 @@ permissions:
   contents: read
 
 jobs:
+  keep-keys:
+    name: Keep the preview keys cached
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      # Restoring an entry marks it used, which resets its 7-day expiry.
+      - uses: actions/cache/restore@v4
+        with:
+          path: ~/.batna-preview-update
+          key: batna-preview-update-key-v1
+          fail-on-cache-miss: true
+      - uses: actions/cache/restore@v4
+        with:
+          path: ~/.batna-preview
+          key: batna-preview-key-v1
+          fail-on-cache-miss: true
+      - run: test -s ~/.batna-preview-update/secret && test -s ~/.batna-preview/preview.jks
+
   apk:
     name: Build preview APK
+    if: github.event_name != 'schedule'
     runs-on: ubuntu-24.04
     timeout-minutes: 60
     env:
@@ -84,6 +116,23 @@ jobs:
         with:
           path: ~/.batna-preview-update
           key: batna-preview-update-key-v1
+      - name: Restore preview signing key
+        if: env.KEEP_KEY == 'true'
+        id: key
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.batna-preview
+          key: batna-preview-key-v1
+      - name: Never replace a published preview's key silently
+        if: env.KEEP_KEY == 'true' && (steps.update-key.outputs.cache-hit != 'true' || steps.key.outputs.cache-hit != 'true')
+        env:
+          NEW_KEYS: ${{ github.event_name == 'workflow_dispatch' && inputs.new_keys }}
+        run: |
+          if [ "$NEW_KEYS" != "true" ] && curl -fsSL -o /dev/null \
+            "https://github.com/$GITHUB_REPOSITORY/releases/download/batna-preview/update.json"; then
+            echo "::error::A preview key is missing from the Actions cache, and previews are already published. New keys would stop installed previews from updating. Run this workflow by hand with new_keys ticked to accept that (docs/RELEASE.md §3)."
+            exit 1
+          fi
       - name: Create preview update key
         if: steps.update-key.outputs.cache-hit != 'true'
         run: |
@@ -128,13 +177,6 @@ jobs:
       - name: Check the APK (Kotlin glue and its permissions)
         run: scripts/android-check-apk.sh dist/android/release/batna-unsigned.apk
 
-      - name: Restore preview signing key
-        if: env.KEEP_KEY == 'true'
-        id: key
-        uses: actions/cache/restore@v4
-        with:
-          path: ~/.batna-preview
-          key: batna-preview-key-v1
       - name: Create preview signing key
         if: steps.key.outputs.cache-hit != 'true'
         run: |

@@ -132,7 +132,7 @@ const SHEET_CSS: &str = r#"
   border: 1px solid var(--line); background: color-mix(in srgb, var(--text) 5%, var(--bg)); color: var(--text);
   cursor: pointer; }
 .us-btn svg { inline-size: 1.2rem; block-size: 1.2rem; }
-.us-btn.primary { border-color: color-mix(in srgb, var(--us-new) 55%, var(--bg));
+.us-btn.us-go { border-color: color-mix(in srgb, var(--us-new) 55%, var(--bg));
   background: color-mix(in srgb, var(--us-new) 16%, var(--bg)); }
 .us-btn:active { transform: scale(0.98); }
 @media (prefers-reduced-motion: reduce) { .us-chevron { transition: none; } }
@@ -637,7 +637,7 @@ pub fn UpdateSheet() -> Element {
                 }
                 match action {
                     Some((label, run)) => rsx! {
-                        button { class: "us-btn primary", onclick: move |_| run(),
+                        button { class: "us-btn us-go", onclick: move |_| run(),
                             if matches!(s.phase, Phase::Available(_)) {
                                 {download_icon()}
                             }
@@ -645,7 +645,7 @@ pub fn UpdateSheet() -> Element {
                         }
                     },
                     None if m == SheetMode::Updated => rsx! {
-                        button { class: "us-btn primary", onclick: close, "{tx::GOT_IT}" }
+                        button { class: "us-btn us-go", onclick: close, "{tx::GOT_IT}" }
                     },
                     None => rsx! {},
                 }

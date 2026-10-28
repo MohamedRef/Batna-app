@@ -38,14 +38,17 @@
 
 /* ---------- progress ---------- */
 .st-progress {
-  /* Stays in view while a long item scrolls, like the lesson player's .ls-bar (#234). */
+  /* Stays in view while a long item scrolls (#234). Pinned to the very top
+     of `main.content`, reaching up through its top padding like the mock's
+     .run-sticky, so no scrolled text peeks out above it. */
   position: sticky;
-  inset-block-start: 0;
+  inset-block-start: calc(-1 * var(--sp-4));
+  margin-block-start: calc(-1 * var(--sp-4));
   z-index: 5;
   display: flex;
   align-items: center;
   gap: var(--sp-3);
-  padding-block: var(--sp-2);
+  padding-block: var(--sp-4) var(--sp-2);
   background: var(--bg);
 }
 .st-progress > span, .st-progress > button { white-space: nowrap; }

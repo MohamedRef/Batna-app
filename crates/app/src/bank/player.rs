@@ -25,6 +25,18 @@ pub fn Player() -> Element {
     let last = at + 1 == n;
     let cells: Vec<(usize, bool, bool)> =
         p.answers.iter().enumerate().map(|(i, a)| (i, a.chosen.is_some(), a.flagged)).collect();
+    let flagged = p.answers.iter().filter(|a| a.flagged).count();
+    let first_blank = p.answers.iter().position(|a| a.chosen.is_none());
+    // A timed paper with blanks or flags asks once before it goes in.
+    let mut confirming = use_signal(|| false);
+    let submit = move |_| {
+        if answered < n || flagged > 0 {
+            let mut confirming = confirming;
+            confirming.set(true);
+        } else {
+            finish();
+        }
+    };
 
     rsx! {
         div { class: "bank-run", "data-mode": if timed { "timed" } else { "tutor" },
@@ -69,7 +81,7 @@ pub fn Player() -> Element {
                             disabled: !timed && a.chosen.is_none(),
                             // A whole timed paper never goes in on a stray Enter.
                             "aria-keyshortcuts": if timed { "" } else { "Enter" },
-                            onclick: move |_| finish(),
+                            onclick: move |e| if timed { submit(e) } else { finish() },
                             if timed { {tx::SUBMIT} } else { {tx::FINISH} }
                         }
                     } else {
@@ -100,7 +112,74 @@ pub fn Player() -> Element {
                         }
                     }
                     p { class: "muted small", bdi { "{n - answered}" } " {tx::UNANSWERED}" }
-                    button { class: "button primary", onclick: move |_| finish(), {tx::SUBMIT} }
+                    button { class: "button primary", onclick: submit, {tx::SUBMIT} }
+                }
+            }
+            if timed && confirming() {
+                ConfirmSubmit {
+                    blank: n - answered,
+                    flagged,
+                    left,
+                    first_blank,
+                    onclose: move |_| confirming.set(false),
+                }
+            }
+        }
+    }
+}
+
+/// "Hand it in?" for a timed paper with blanks or flags. The safe choice,
+/// going back to the first blank, comes first and is what Escape does.
+#[component]
+fn ConfirmSubmit(
+    blank: usize,
+    flagged: usize,
+    left: u64,
+    first_blank: Option<usize>,
+    onclose: EventHandler<()>,
+) -> Element {
+    let back = move |_| {
+        onclose.call(());
+        if let Some(i) = first_blank {
+            go(i);
+        }
+    };
+    rsx! {
+        div { class: "bank-scrim", onclick: move |_| onclose.call(()),
+            div {
+                class: "bank-sheet card",
+                role: "alertdialog",
+                "aria-modal": "true",
+                "aria-labelledby": "bank-confirm-title",
+                onclick: move |e| e.stop_propagation(),
+                h2 { id: "bank-confirm-title", {tx::CONFIRM_TITLE} }
+                if blank > 0 {
+                    p { {tx::CONFIRM_BLANK_A} " " bdi { "{blank}" } " " {tx::CONFIRM_BLANK_B} }
+                }
+                if flagged > 0 {
+                    p { bdi { "{flagged}" } " " {tx::CONFIRM_FLAGGED} }
+                }
+                p { class: "muted small", "{tx::LEFT_ABOUT} " bdi { "{left}" } " {tx::MINUTES}" }
+                div { class: "start-row",
+                    button {
+                        class: "button primary",
+                        autofocus: true,
+                        "aria-keyshortcuts": "Escape",
+                        onclick: back,
+                        if let Some(i) = first_blank {
+                            {tx::CONFIRM_BACK_TO} " " bdi { "{i + 1}" }
+                        } else {
+                            {tx::CONFIRM_BACK}
+                        }
+                    }
+                    button {
+                        class: "button",
+                        onclick: move |_| {
+                            onclose.call(());
+                            finish();
+                        },
+                        {tx::CONFIRM_SUBMIT}
+                    }
                 }
             }
         }

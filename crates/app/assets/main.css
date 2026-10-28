@@ -21,31 +21,66 @@
   --sp-6: 1.5rem;
   --radius: 12px;
   --radius-pill: 999px;
+  /* Control heights in rem, so Settings › Look › text size scales them with
+     the text. --tap: buttons and toggles; --tap-lg: main actions; --row:
+     two-line list rows. */
+  --tap: 2.75rem;
+  --tap-lg: 3rem;
+  --row: 3.5rem;
+  --lh: 1.7;
   --nav-h: 64px;
   --rail-w: 88px;
   --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
   --dur: 180ms;
 }
+/* Phones (compact): one notch denser. A 384dp-wide S24 showed big type,
+   1rem padding nested two deep and 44-56px rows, so the type, spacing and
+   control scales each step down here. Touch targets stay at 40px or more. */
+@media (max-width: 599.98px) {
+  :root {
+    --fs-sm: 0.8125rem;
+    --fs-md: 0.9375rem;
+    --fs-lg: 1.0625rem;
+    --fs-xl: 1.25rem;
+    --sp-3: 0.625rem;
+    --sp-4: 0.75rem;
+    --sp-6: 1.125rem;
+    --tap: 2.5rem;
+    --tap-lg: 2.75rem;
+    --row: 3rem;
+    --lh: 1.5;
+    --nav-h: 56px;
+  }
+}
 
 * { box-sizing: border-box; }
-html, body { margin: 0; height: 100%; background: var(--bg); }
+/* The window never scrolls: `main.content` does, so the top bar, the bottom
+   bar and the sidebar stay put (UX #102). */
+html, body { margin: 0; height: 100%; overflow: hidden; background: var(--bg); }
 /* Dioxus mounts the app in #main, which has no height of its own. */
-#main { min-height: 100%; }
+#main { height: 100%; }
 
 .app {
-  min-height: 100vh;
-  min-height: 100dvh;
+  height: 100vh;
+  height: 100dvh;
   background: var(--bg);
   color: var(--text);
   font-family: var(--font);
   font-size: var(--fs-md);
-  line-height: 1.7;
+  line-height: var(--lh);
   display: grid;
   grid-template-rows: auto 1fr auto;
   grid-template-areas: "top" "content" "nav";
 }
 
 bdi { font-family: var(--font-latin); }
+/* Date, time and number fields read left to right inside the Arabic form:
+   otherwise WebKit lays 19:00 out as "PM 00:07" (UX #101). */
+input[type="date"], input[type="time"], input[type="datetime-local"], input[type="number"] {
+  direction: ltr;
+  unicode-bidi: isolate;
+  text-align: end;
+}
 button { font: inherit; color: inherit; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 /* Checkboxes drawn from the theme: native boxes stay white in Night on some
@@ -81,8 +116,8 @@ input[type="checkbox"]:disabled { opacity: 0.5; cursor: default; }
   border: 1px solid var(--line);
   background: var(--surface);
   border-radius: var(--radius-pill);
-  min-width: 44px;
-  min-height: 44px;
+  min-width: var(--tap);
+  min-height: var(--tap);
   cursor: pointer;
 }
 .icon-button { display: inline-grid; place-items: center; }
@@ -92,7 +127,7 @@ input[type="checkbox"]:disabled { opacity: 0.5; cursor: default; }
   border: 1px solid var(--line);
   background: var(--surface);
   border-radius: var(--radius-pill);
-  min-height: 44px;
+  min-height: var(--tap);
   padding-inline: var(--sp-4);
   cursor: pointer;
 }
@@ -106,9 +141,8 @@ input[type="checkbox"]:disabled { opacity: 0.5; cursor: default; }
   border-block-start: 1px solid var(--line);
   background: var(--surface);
   padding-block-end: env(safe-area-inset-bottom, 0px);
-  position: sticky;
-  bottom: 0;
-  /* Above sticky or positioned content inside screens (main comes later in the DOM). */
+  /* Above positioned content inside screens (main comes later in the DOM). */
+  position: relative;
   z-index: 10;
 }
 .nav-item {
@@ -141,13 +175,17 @@ input[type="checkbox"]:disabled { opacity: 0.5; cursor: default; }
     padding-block: var(--sp-4);
     border-block-start: 0;
     border-inline-end: 1px solid var(--line);
-    position: static;
+    overflow-y: auto;
   }
 }
 
 /* ---------- content ---------- */
 .content {
   grid-area: content;
+  /* The one scroll container (see html, body). */
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
   padding-block: var(--sp-4) var(--sp-6);
   padding-inline: max(var(--sp-4), env(safe-area-inset-left, 0px));
   display: flex;
@@ -156,7 +194,9 @@ input[type="checkbox"]:disabled { opacity: 0.5; cursor: default; }
   min-width: 0;
 }
 @media (min-width: 840px) {
-  .content { padding-inline: var(--sp-6); max-width: 60rem; }
+  /* A 60rem reading column at the start side; the padding, not a max-width,
+     keeps it there so the scrollbar stays at the window's edge. */
+  .content { padding-inline: var(--sp-6) max(var(--sp-6), calc(100% - 60rem - var(--sp-6))); }
 }
 
 h1 { font-size: var(--fs-xl); margin: 0; line-height: 1.35; }
@@ -217,6 +257,12 @@ p { margin: 0; }
 .lecture-main { display: flex; flex-direction: column; min-width: 0; flex: 1; }
 .lecture-title { font-weight: 600; overflow-wrap: anywhere; }
 .lecture[data-ready="no"] .lecture-title { color: var(--muted); }
+/* Phones: the status chip drops under the title, so a long English title
+   gets the whole row instead of one word per line. */
+@media (max-width: 599.98px) {
+  .lecture { display: grid; grid-template-columns: auto 1fr; column-gap: var(--sp-3); row-gap: var(--sp-1); }
+  .lecture .chip { grid-column: 2; justify-self: start; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }

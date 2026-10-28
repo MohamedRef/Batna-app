@@ -153,8 +153,25 @@ pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
             }
         }
     }
+    // The hover glossary (PARITY.md §6.3), when there is one.
+    let glossary_path = content.join("glossary.yaml");
+    let mut terms = 0;
+    if glossary_path.exists() {
+        match read_yaml::<batna_core::glossary::Glossary>(&glossary_path) {
+            Ok(g) => {
+                terms = g.entries.len();
+                for p in validate::glossary(&g, Some(&approved)) {
+                    problems.push(format!("content/glossary.yaml: {p}"));
+                }
+            }
+            Err(e) => problems.push(e),
+        }
+    }
     if problems.is_empty() {
-        Ok(format!("content OK: {files} of {} lectures written, {items} items", index.lectures.len()))
+        Ok(format!(
+            "content OK: {files} of {} lectures written, {items} items, {terms} glossary terms",
+            index.lectures.len()
+        ))
     } else {
         Err(problems)
     }

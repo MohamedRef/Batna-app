@@ -10,6 +10,8 @@
 mod about;
 mod data;
 mod look;
+#[cfg(all(feature = "desktop", not(target_os = "android")))]
+pub mod menu;
 
 use dioxus::prelude::*;
 
@@ -21,22 +23,38 @@ const SETTINGS_CSS: &str = include_str!("../../assets/settings.css");
 pub enum Section {
     Study,
     Look,
+    /// Pen hover and the sidebar, on Android (the Tab S11, the S24 Ultra).
+    Tablet,
+    /// Mouse hover, the sidebar and the keyboard, on the Mac and desktops.
+    Mac,
     Data,
     Updates,
     About,
 }
 
 impl Section {
-    pub const ALL: [Self; 5] = [Self::Study, Self::Look, Self::Data, Self::Updates, Self::About];
+    pub const ALL: [Self; 7] =
+        [Self::Study, Self::Look, Self::Tablet, Self::Mac, Self::Data, Self::Updates, Self::About];
 
     /// Stable id, for `BATNA_OPEN_SETTINGS=<id>` previews.
     pub fn id(self) -> &'static str {
         match self {
             Self::Study => "study",
             Self::Look => "look",
+            Self::Tablet => "tablet",
+            Self::Mac => "mac",
             Self::Data => "data",
             Self::Updates => "updates",
             Self::About => "about",
+        }
+    }
+
+    /// Only the sections that apply on this device are listed.
+    pub fn applies(self) -> bool {
+        match self {
+            Self::Tablet => cfg!(target_os = "android"),
+            Self::Mac => !cfg!(target_os = "android"),
+            _ => true,
         }
     }
 
@@ -48,6 +66,8 @@ impl Section {
         match self {
             Self::Study => crate::i18n::study_settings::SECTION,
             Self::Look => tx::LOOK,
+            Self::Tablet => crate::i18n::desk::TABLET,
+            Self::Mac => crate::i18n::desk::MAC,
             Self::Data => tx::DATA,
             Self::Updates => crate::i18n::update::SECTION,
             Self::About => tx::ABOUT,
@@ -58,6 +78,8 @@ impl Section {
         match self {
             Self::Study => crate::i18n::study_settings::SECTION_SUB,
             Self::Look => tx::LOOK_SUB,
+            Self::Tablet => crate::i18n::desk::TABLET_SUB,
+            Self::Mac => crate::i18n::desk::MAC_SUB,
             Self::Data => tx::DATA_SUB,
             Self::Updates => crate::i18n::update::SECTION_SUB,
             Self::About => tx::ABOUT_SUB,
@@ -171,7 +193,7 @@ pub fn SettingsSheet() -> Element {
             }
             div { class: "settings-body",
                 nav { class: "settings-sections", aria_label: tx::SECTIONS,
-                    for s in Section::ALL {
+                    for s in Section::ALL.into_iter().filter(|s| s.applies()) {
                         button {
                             key: "{s.id()}",
                             aria_current: if current == s { "true" } else { "false" },
@@ -194,6 +216,7 @@ fn SectionView(section: Section) -> Element {
     match section {
         Section::Study => rsx! { crate::today::StudySection {} },
         Section::Look => rsx! { look::LookSection {} },
+        Section::Tablet | Section::Mac => rsx! { crate::desk::DeviceSettings { section } },
         Section::Data => rsx! { data::DataSection {} },
         Section::Updates => rsx! { crate::update::view::UpdatesSection {} },
         Section::About => rsx! { about::AboutSection {} },

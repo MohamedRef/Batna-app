@@ -113,8 +113,17 @@ pub enum RejectReason {
     WrongDevice,
     MissingPayload,
     PayloadTooLarge,
+    /// The op's clock is too far ahead of the hub's. The op is fine; the
+    /// device keeps it and sends it again once its clock is right.
     ClockSkew,
     InvalidId,
+}
+
+impl RejectReason {
+    /// The hub will never take this op, however often it is sent.
+    pub fn is_final(self) -> bool {
+        self != RejectReason::ClockSkew
+    }
 }
 
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]

@@ -165,10 +165,16 @@ fn App() -> Element {
                 }
             }
             nav { class: "nav", aria_label: "التنقل",
+                // From 600px the top bar goes and the name heads the rail or
+                // sidebar, so the screen gets the full height (nav.css).
+                div { class: "nav-brand", aria_hidden: "true",
+                    span { class: "brand-name", {i18n::app::NAME} }
+                    span { class: "brand-tag", {i18n::app::TAGLINE} }
+                }
                 for screen in Screen::NAV {
                     NavButton { key: "{screen:?}", screen, class: "nav-item" }
                 }
-                // From 840px the sidebar carries Settings at its foot (nav.css).
+                // From 600px the rail or sidebar carries Settings at its foot (nav.css).
                 button {
                     class: "nav-item nav-foot",
                     aria_label: Screen::Settings.label(),

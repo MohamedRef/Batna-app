@@ -1,0 +1,872 @@
+schema: batna.lesson/v1
+lecture: hb.L20
+lessons:
+  # ------------------------------------------------------------------
+  - id: hb.L20.lesson1
+    title: "العيان التخين ممكن يكون malnourished؟"
+    hook: "الـ malnutrition في الـ cirrhosis مش بس جلد على عضم. اعرف تكشفها في 3 دقايق."
+    minutes: 9
+    pages: [402, 406]
+    topics: [malnutrition, screening]
+    goals:
+      - "تعرّف الـ malnutrition والـ sarcopenic obesity"
+      - "تشرح الـ vicious circle بين الـ cirrhosis والـ sarcopenia"
+      - "تعمل screening بمعيارين وتحسب الـ dry weight"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 402
+        title: "Malnutrition ليها وشّين"
+        text: |
+          الكلمة في المحاضرة دي معناها **deficiencies and excesses** مع بعض. يعني النحيف جدًا والتخين جدًا الاتنين ممكن يبقوا malnourished.
+
+          وأخطر صورة هي الـ **sarcopenic obesity**: **decreased muscle mass** في وجود **increased fat mass**.
+
+          ليه صعب تشوفها؟ لأن **الدهون بتداري ضمور العضل**، فمحتاج **dedicated testing**. وبتزيد لأن حالات الـ cirrhosis من **NASH** بتزيد.
+      - kind: table
+        page: 402
+        title: "مين عنده malnutrition؟"
+        columns: ["", "Number / fact"]
+        rows:
+          - ["Compensated cirrhosis", "≈ 20%"]
+          - ["Decompensated cirrhosis", "> 50%"]
+          - ["Women lose mostly", "Fat deposits"]
+          - ["Men lose faster", "Muscle tissue"]
+        hide: [[0, 1], [1, 1], [3, 1]]
+      - kind: explain
+        page: 403
+        title: "ليه نهتم؟"
+        text: |
+          الـ malnutrition بتمشي مع تقدّم الـ liver failure: **مستخبية** في الـ compensated، و **باينة** في الـ decompensated.
+
+          والـ **sarcopenia** (ضمور العضل، وكتير بتتاخد كـ **equivalent of severe malnutrition**) مرتبطة بـ:
+          - **susceptibility to infections**
+          - **hepatic encephalopathy**
+          - **ascites**
+          - و **independent predictor of lower survival**، في الـ cirrhosis وفي الـ liver transplantation.
+
+          علشان كده الكتاب بيقول نعاملهم كـ **complications of cirrhosis**، مش حاجة جانبية.
+      - kind: figure
+        page: 404
+        title: "الدايرة اللي بتقفل على العيان"
+        alt: "Vicious circle. Decompensated cirrhosis and malnutrition or sarcopenia feed each other with arrows both ways. Both lead to hepatic encephalopathy, bacterial infections and recurrent ascites, which in turn worsen both. That middle box leads down to reduced overall survival."
+        caption: "كل واحد بيزوّد التاني: الـ decompensation بتعمل sarcopenia، والـ sarcopenia بتزوّد الـ **HE والـ infections والـ ascites**، واللي بيرجعوا يزوّدوا الاتنين، والنتيجة **reduced survival**."
+        svg: |
+          <svg viewBox="0 0 330 270" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L20a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+              <marker id="L20b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-bad"/></marker>
+            </defs>
+            <path d="M84 36Q165 0 246 36" class="fg-arrow" marker-end="url(#L20a)"/>
+            <path d="M246 100Q165 126 84 100" class="fg-arrow" marker-end="url(#L20a)"/>
+            <rect x="4" y="40" width="148" height="56" rx="8" class="fg-acc"/>
+            <text x="78" y="64" text-anchor="middle" class="t-sm t-b">Decompensated</text>
+            <text x="78" y="82" text-anchor="middle" class="t-sm t-b">cirrhosis</text>
+            <rect x="178" y="40" width="148" height="56" rx="8" class="fg-acc"/>
+            <text x="252" y="64" text-anchor="middle" class="t-sm t-b">Malnutrition</text>
+            <text x="252" y="82" text-anchor="middle" class="t-sm t-b">and/or sarcopenia</text>
+            <path d="M40 98V140" class="fg-arrow" marker-end="url(#L20a)"/>
+            <path d="M290 98V140" class="fg-arrow" marker-end="url(#L20a)"/>
+            <path d="M24 160V100" class="fg-arrow" marker-end="url(#L20a)"/>
+            <path d="M306 160V100" class="fg-arrow" marker-end="url(#L20a)"/>
+            <rect x="4" y="144" width="322" height="66" rx="8" class="fg-box"/>
+            <text x="165" y="166" text-anchor="middle" class="t-sm t-b">Hepatic encephalopathy</text>
+            <text x="165" y="184" text-anchor="middle" class="t-sm t-b">Bacterial infections</text>
+            <text x="165" y="202" text-anchor="middle" class="t-sm t-b">Recurrent ascites</text>
+            <path d="M165 212V232" class="fg-arrow-bad" marker-end="url(#L20b)"/>
+            <rect x="60" y="234" width="210" height="32" rx="6" class="fg-bad"/>
+            <text x="165" y="255" text-anchor="middle" class="t-b t-bad">Reduced overall survival</text>
+          </svg>
+      - kind: check
+        page: 404
+        question: "Malnutrition in which setting is linked to **increased waiting-list mortality**?"
+        options:
+          - "Liver transplantation candidates"
+          - "Compensated cirrhosis only"
+          - "Patients after cholecystectomy"
+          - "Patients with HCC on surveillance only"
+        answer: 0
+        why:
+          - "صح: في الـ **LT**: increased waiting list mortality و post-operative complications."
+          - "الـ malnutrition بتبقى **أقل وضوحًا** في الـ compensated، ومفيش waiting list هنا."
+          - "مش موضوع المحاضرة دي خالص. 😄"
+          - "في الـ **HCC** الكتاب بيقول increased complications and reduced survival، مش waiting list."
+      - kind: explain
+        page: 404
+        title: "الـ screening: معيارين وبس"
+        text: |
+          كل عيان **cirrhosis/advanced CLD**، وخصوصًا الـ decompensated، ياخد **rapid nutritional screen**.
+
+          واعتبره **high risk** على طول لو:
+          - **BMI < 18.5 kg/m²** (underweight)، أو
+          - **Child–Pugh C**
+
+          غير كده استخدم **nutritional screening tools**. وأي حد at risk ياخد **detailed assessment** عند **registered dietician or nutrition expert**.
+      - kind: aside
+        tone: trap
+        page: 404
+        text: |
+          عيان **Child C** و BMI بتاعه **24**؟ **High risk** برضه. الـ **Child C** لوحده كفاية، والـ BMI الطبيعي ممكن يكون **ascites** أو دهون مدارية العضل.
+      - kind: figure
+        page: 406
+        title: "خريطة الـ screening (ملخص EASL في الكتاب)"
+        alt: "Flow chart. Cirrhosis or advanced chronic liver disease. Three columns by dry-weight BMI: under 18.5 or Child-Pugh C is high risk; 18.5 to 29.9 uses a screening tool to grade high, medium or low risk; 30 or more is obesity, managed with nutritional assessment, lifestyle change and a look for sarcopenia. High and medium risk go to detailed assessment by a dietician: SGA or RFH-GA, dietary intake, and sarcopenia by CT at L3, or DEXA or BIA if there is no fluid retention. Malnutrition or sarcopenia is treated with supplementation and reassessed every 1 to 3 months in the first year. Low risk is re-screened at least once a year."
+        caption: "الـ BMI يتحسب على الـ **dry weight**. الـ high والـ medium يروحوا للـ dietician، والـ low يتعمله re-screen **مرة في السنة على الأقل**."
+        svg: |
+          <svg viewBox="0 0 330 440" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L20c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="60" y="6" width="210" height="32" rx="6" class="fg-acc"/>
+            <text x="165" y="27" text-anchor="middle" class="t-sm t-b">Cirrhosis / advanced CLD</text>
+            <path d="M120 40L56 62M165 40V62M210 40L274 62" class="fg-arrow" marker-end="url(#L20c)"/>
+            <rect x="4" y="66" width="104" height="52" rx="6" class="fg-bad"/>
+            <text x="56" y="88" text-anchor="middle" class="t-sm t-b">BMI &lt; 18.5</text>
+            <text x="56" y="106" text-anchor="middle" class="t-sm t-b">or Child C</text>
+            <rect x="113" y="66" width="104" height="52" rx="6" class="fg-box"/>
+            <text x="165" y="88" text-anchor="middle" class="t-sm t-b">BMI 18.5–29.9</text>
+            <text x="165" y="106" text-anchor="middle" class="t-sm">screening tool</text>
+            <rect x="222" y="66" width="104" height="52" rx="6" class="fg-box"/>
+            <text x="274" y="88" text-anchor="middle" class="t-sm t-b">BMI ≥ 30</text>
+            <text x="274" y="106" text-anchor="middle" class="t-sm">obesity</text>
+            <path d="M56 120V142M165 120V142M274 120V142" class="fg-arrow" marker-end="url(#L20c)"/>
+            <rect x="4" y="146" width="104" height="40" rx="6" class="fg-bad"/>
+            <text x="56" y="171" text-anchor="middle" class="t-sm t-b t-bad">HIGH risk</text>
+            <rect x="113" y="146" width="104" height="40" rx="6" class="fg-box"/>
+            <text x="165" y="171" text-anchor="middle" class="t-sm">high · medium · low</text>
+            <rect x="222" y="146" width="104" height="58" rx="6" class="fg-box"/>
+            <text x="274" y="166" text-anchor="middle" class="t-sm">assessment +</text>
+            <text x="274" y="182" text-anchor="middle" class="t-sm">lifestyle; check</text>
+            <text x="274" y="198" text-anchor="middle" class="t-sm">sarcopenia</text>
+            <path d="M56 188V222M150 188L120 222" class="fg-arrow" marker-end="url(#L20c)"/>
+            <path d="M190 188L250 318" class="fg-thin" marker-end="url(#L20c)"/>
+            <text x="230" y="250" class="t-sm t-mut">low</text>
+            <rect x="4" y="226" width="200" height="100" rx="8" class="fg-acc"/>
+            <text x="104" y="246" text-anchor="middle" class="t-sm t-b">Detailed (dietician)</text>
+            <text x="14" y="266" class="t-sm">• SGA / RFH-GA</text>
+            <text x="14" y="282" class="t-sm">• dietary intake</text>
+            <text x="14" y="298" class="t-sm">• sarcopenia: CT at L3;</text>
+            <text x="24" y="314" class="t-sm">DEXA/BIA if no fluid</text>
+            <path d="M104 328V350" class="fg-arrow" marker-end="url(#L20c)"/>
+            <rect x="4" y="354" width="200" height="80" rx="8" class="fg-bad"/>
+            <text x="104" y="376" text-anchor="middle" class="t-sm t-b">Malnutrition / sarcopenia</text>
+            <text x="104" y="396" text-anchor="middle" class="t-sm">treat: supplementation</text>
+            <text x="104" y="414" text-anchor="middle" class="t-sm">reassess every 1–3 mo</text>
+            <text x="104" y="428" text-anchor="middle" class="t-sm t-mut">(first year)</text>
+            <rect x="212" y="322" width="114" height="62" rx="8" class="fg-good"/>
+            <text x="269" y="344" text-anchor="middle" class="t-sm t-b">Low risk</text>
+            <text x="269" y="362" text-anchor="middle" class="t-sm">re-screen</text>
+            <text x="269" y="378" text-anchor="middle" class="t-sm">≥ once a year</text>
+          </svg>
+      - kind: match
+        page: 405
+        prompt: "الـ detailed assessment: وصّل كل أداة باللي بتقيسه:"
+        pairs:
+          - ["CT image analysis at L3", "Skeletal muscle mass (only if CT done for another reason)"]
+          - ["DEXA", "Bone density, fat mass and fat-free mass"]
+          - ["Handgrip strength", "Muscle contractile function"]
+          - ["MAMC, MAMA, TSF", "Anthropometric body mass"]
+          - ["SGA / RFH-GA", "Status from clinical data, no objective measurements"]
+        why: "صفحة 405. ومحدش بيعمل CT مخصوص للعضل: الـ L3 بتتقاس لو فيه CT معمول لسبب تاني. والبدائل اللي تسمح بـ serial measurements: anthropometry، DEXA، BIA. والتكرار: كل 1–6 شهور في العيادة، وعند الدخول وبشكل دوري للـ inpatients."
+      - kind: case
+        stem: "A 60-year-old man with HCV cirrhosis weighs **70 kg** on the scale. He has **severe ascites** and **bilateral pedal oedema**. Height **1.75 m**. No post-paracentesis weight is available."
+        page: 406
+        steps:
+          - question: "Estimate his dry weight."
+            options:
+              - "56 kg"
+              - "59.5 kg"
+              - "63 kg"
+              - "70 kg"
+            answer: 0
+            why: "اطرح **15%** للـ severe ascites + **5%** للـ bilateral pedal oedema = **20%**. يعني 70 × 0.8 = **56 kg**. (mild 5%، moderate 10%، severe 15%)."
+          - question: "His dry-weight BMI is 56 ÷ 1.75² ≈ 18.3 kg/m². What is his malnutrition risk?"
+            options:
+              - "High risk"
+              - "Medium risk"
+              - "Low risk"
+            answer: 0
+            why: "**BMI < 18.5** = high risk على طول. لاحظ إنك لو حسبت على الـ 70 kg هتطلع 22.9 وتفوّته. **دايمًا dry weight.**"
+          - reveal: "He needs a detailed assessment by a dietician."
+            question: "He has fluid retention. Which test best measures his muscle mass, if a CT was done for another reason?"
+            options:
+              - "CT image analysis at L3"
+              - "BIA"
+              - "Body weight"
+            answer: 0
+            why: "الـ **DEXA** والـ **BIA** بيتلخبطوا مع الـ **fluid retention**، والوزن بيكدب. الـ **CT at L3** هو الـ direct quantification."
+      - kind: try
+        items: [hb.L20.013, hb.L20.024, hb.L20.008, hb.L20.105, hb.L20.026]
+    recap:
+      - "Malnutrition = deficiency **أو** excess. والـ **sarcopenic obesity**: عضل قليل تحت دهون كتير، ومحتاجة dedicated testing."
+      - "≈ 20% في الـ compensated و > 50% في الـ decompensated. الستات بيخسروا دهون، والرجالة بيخسروا عضل أسرع."
+      - "الـ sarcopenia ↔ HE، infections، ascites، وبتقلل الـ survival: complication of cirrhosis."
+      - "High risk = **BMI < 18.5** أو **Child–Pugh C** → detailed assessment عند dietician."
+      - "Dry weight: −5 / −10 / −15% للـ ascites (mild/moderate/severe) و −5% زيادة للـ bilateral pedal oedema."
+    practice: [hb.L20.001, hb.L20.002, hb.L20.003, hb.L20.004, hb.L20.005, hb.L20.006, hb.L20.007, hb.L20.008, hb.L20.009, hb.L20.010, hb.L20.011, hb.L20.012, hb.L20.013, hb.L20.014, hb.L20.015, hb.L20.016, hb.L20.017, hb.L20.018, hb.L20.019, hb.L20.020, hb.L20.021, hb.L20.022, hb.L20.023, hb.L20.024, hb.L20.025, hb.L20.026, hb.L20.027, hb.L20.097, hb.L20.105, hb.L20.107, hb.L20.109, hb.L20.114]
+  # ------------------------------------------------------------------
+  - id: hb.L20.lesson2
+    title: "العيان ياكل إيه وإمتى؟"
+    hook: "الكبد المتليّف بيجوّع صاحبه بالليل. السر في سندوتش قبل النوم."
+    minutes: 9
+    pages: [407, 408]
+    topics: [requirements, practical-advice]
+    goals:
+      - "تشرح يعني إيه accelerated starvation"
+      - "تحفظ الـ 35 kcal والـ 1.2–1.5 g وتحسبهم"
+      - "تكتب نصايح الأكل للعيان (سؤال الامتحان) من غير ما تنسى حاجة"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 407
+        title: "Accelerated starvation"
+        quote: "Cirrhosis is a state of accelerated starvation characterized by a rapid post-absorptive physiology and reduced respiratory quotient"
+        text: |
+          الـ cirrhotic بيدخل في **مود الصيام بسرعة** بعد الأكل (**rapid post-absorptive physiology**)، والـ **respiratory quotient** بيقل، يعني بيحرق دهون بدري.
+
+          - الـ **protein synthesis** بيقل.
+          - الـ **gluconeogenesis from amino acids** بيزيد، والأحماض الأمينية دي جاية منين؟ من **proteolysis** للعضل.
+          - والنتيجة: **sarcopenia**.
+      - kind: aside
+        tone: analogy
+        page: 407
+        text: |
+          الكبد السليم زي **تلاجة مليانة** (glycogen): لو فاتتك وجبة، تفتحها وتاكل.
+
+          الكبد المتليّف تلاجته **صغيرة وفاضية** (الكتاب في صفحة 416: liver glycogen is depleted). فأول ما تجوع شوية، الجسم يبتدي **يكسّر العفش** (العضل) علشان يعمل sugar.
+      - kind: table
+        page: 407
+        title: "الأرقام الأساسية"
+        columns: ["", "Target"]
+        rows:
+          - ["Energy", "≥ 35 kcal/kg actual BW/day (non-obese)"]
+          - ["Protein", "≥ 1.2–1.5 g/kg actual BW/day"]
+          - ["Body weight to use", "Actual BW corrected for ascites"]
+          - ["Malnourished + decompensated", "Add late-evening ONS and breakfast"]
+        hide: [[0, 1], [1, 1], [3, 1]]
+      - kind: check
+        page: 407
+        question: "A man with decompensated cirrhosis has a dry weight of **70 kg**. What daily protein intake should he get?"
+        options:
+          - "84–105 g"
+          - "42–56 g"
+          - "60–80 g, cut down to reduce ammonia"
+          - "140–175 g"
+        answer: 0
+        why:
+          - "صح: 70 × **1.2–1.5** = **84–105 g/day**."
+          - "ده 0.6–0.8 g/kg: أقل من الحد الأدنى، وهيكسّر عضله."
+          - "ده **protein restriction**، والمحاضرة دي بتقول **not advisable**."
+          - "ده 2–2.5 g/kg: أعلى من التارجت بتاع العيان المستقر. (الـ 2.0 g/kg ideal BW بييجي بس في الـ obese بعد الـ LT.)"
+      - kind: figure
+        page: 407
+        title: "ساعة الأكل: 3 وجبات + 3 سناكس"
+        alt: "A 24-hour dial with midnight at the top. Six meals are marked: breakfast in the morning, a mid-morning snack, lunch, a mid-afternoon snack, dinner, and a starred late-evening snack. A thick red arc runs from the late-evening snack through midnight to breakfast, marking the overnight fast, which the late snack keeps short."
+        caption: "أطول صيام في اليوم هو **صيام الليل**. السناك **المتأخر** بيقصّره، علشان كده الكتاب بيقول **late-evening snack is the most important**."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="165" cy="130" r="78" class="fg-box"/>
+            <path d="M144.8 54.7A78 78 0 0 1 232.5 169" class="fg-arrow-bad" stroke-width="7"/>
+            <text x="165" y="22" text-anchor="middle" class="t-sm t-mut">midnight</text>
+            <text x="252" y="104" class="t-sm t-bad t-b">overnight</text>
+            <text x="252" y="120" class="t-sm t-bad t-b">fast</text>
+            <text x="165" y="126" text-anchor="middle" class="t-b">3 meals</text>
+            <text x="165" y="146" text-anchor="middle" class="t-b">+ 3 snacks</text>
+            <circle cx="232.5" cy="169" r="8" class="fg-dot-acc"/>
+            <text x="246" y="182" class="t-sm t-b">Breakfast</text>
+            <circle cx="185.2" cy="205.3" r="6" class="fg-dot-good"/>
+            <text x="194" y="224" class="t-sm">Snack</text>
+            <circle cx="126" cy="197.5" r="8" class="fg-dot-acc"/>
+            <text x="114" y="218" text-anchor="end" class="t-sm t-b">Lunch</text>
+            <circle cx="89.7" cy="150.2" r="6" class="fg-dot-good"/>
+            <text x="76" y="155" text-anchor="end" class="t-sm">Snack</text>
+            <circle cx="97.5" cy="91" r="8" class="fg-dot-acc"/>
+            <text x="84" y="86" text-anchor="end" class="t-sm t-b">Dinner</text>
+            <circle cx="144.8" cy="54.7" r="9" class="fg-dot-good"/>
+            <text x="132" y="44" text-anchor="end" class="t-sm t-b t-good">Late snack ★</text>
+            <rect x="4" y="240" width="322" height="54" rx="8" class="fg-good"/>
+            <text x="165" y="262" text-anchor="middle" class="t-sm t-b">Late-evening snack = the most important</text>
+            <text x="165" y="282" text-anchor="middle" class="t-sm">shorter night fast, less muscle burnt</text>
+          </svg>
+      - kind: reveal
+        page: 407
+        prompt: "ليه بالذات **سناك آخر الليل** هو الأهم من الستة؟"
+        answer: |
+          لأن الليل هو **أطول فترة من غير أكل** (من العشا للفطار). ومع تلاجة glycogen فاضية، الصيام ده بيتحوّل لـ **gluconeogenesis from amino acids** يعني **تكسير عضل** طول الليل.
+
+          السناك المتأخر بيقصّر الصيام ده، فبيحمي العضل. (السبب ده physiology مقبولة؛ الكتاب بيقول الحكم بس: the most important.)
+      - kind: explain
+        page: 408
+        title: "نصايح للعيان (بالنص اللي بيحبه الممتحن)"
+        text: |
+          - **With the exception of alcohol, virtually no food damages the liver.** الممنوع الحقيقي واحد بس.
+          - **Fruit and vegetables** دايمًا، وكل ما كتر كل ما أحسن.
+          - **Salt should be restricted.** ولو النصيحة دي قللت أكله، يبلّغ الدكتور أو الـ dietician.
+          - اللي عنده **HE** ممكن **يستحمل vegetable and dairy proteins** أحسن من الـ animal proteins.
+          - **A reduction in total protein intake is not advisable in cirrhosis**، ومايغيّرش البروتين من دماغه من غير دكتور.
+          - لو عنده **concomitant disease** يبلّغ، لأنه ممكن يحتاج تعديل في الأكل.
+      - kind: aside
+        tone: joke
+        page: 408
+        text: |
+          العيان: "يا دكتور الفسيخ ممنوع علشان الكبد؟"
+
+          الكتاب: لأ، **virtually no food damages the liver** غير الـ alcohol.
+
+          بس الفسيخ ممنوع برضه... علشان **salt should be restricted**. 🐟🧂
+      - kind: sort
+        page: 408
+        prompt: "نصيحة صح ولا غلط للعيان الـ cirrhotic؟"
+        bins: ["Advise it", "Avoid it"]
+        cards:
+          - { text: "Three meals and three snacks", bin: 0 }
+          - { text: "A late-evening snack", bin: 0 }
+          - { text: "Restrict salt", bin: 0 }
+          - { text: "Vegetable and dairy protein if HE", bin: 0 }
+          - { text: "Cut total protein intake", bin: 1 }
+          - { text: "Alcohol", bin: 1 }
+          - { text: "Skipping breakfast", bin: 1 }
+        why: "الكتاب: 3 main meals + 3 snacks، والـ late evening أهمهم، والـ breakfast مذكور بالاسم في توصية الـ decompensated. الملح يتقلل. البروتين **ما يتقللش**. والممنوع الوحيد فعلًا هو الـ alcohol."
+      - kind: aside
+        tone: trap
+        page: 408
+        text: |
+          الكتاب نفسه بيقول حاجتين مختلفتين عن البروتين في الـ HE:
+
+          - **L20 (EASL 2018، صفحة 408 و 413):** **avoid protein restriction**.
+          - **L01 صفحة 15:** تقليل البروتين في الـ **acute episode of HE** بس، ولحد **60–80 g/day** مش أقل.
+
+          لو السؤال عن **nutrition in CLD** أو الـ EASL، جاوب بالـ L20. ولو جه صريح عن الـ acute HE من محاضرة الـ cirrhosis، اذكر الاتنين. (المشكلة دي متسجّلة في book-issues.)
+      - kind: reveal
+        prompt: "سؤال الامتحان (صفحة 418): **What would you advise your hepatic patient regarding eating?** اكتب الهيكل في دماغك وبعدين افتح."
+        answer: |
+          - **Energy** ≥ 35 kcal/kg و **protein** 1.2–1.5 g/kg (actual BW corrected for ascites).
+          - **Split meals:** 3 main meals + 3 snacks (mid-morning، mid-afternoon، **late evening = most important**).
+          - **Late-evening ONS + breakfast** للـ malnourished decompensated.
+          - **No food is forbidden except alcohol.**
+          - **Fruit and vegetables**؛ **restrict salt** (≈ 80 mmol Na/day = 5 g salt لو فيه ascites) وخلّي الأكل مستساغ.
+          - **No protein restriction**؛ في الـ HE: vegetable and dairy protein.
+          - يبلّغ عن قلة الأكل، أي مرض تاني، وما يغيّرش البروتين من نفسه.
+      - kind: try
+        items: [hb.L20.030, hb.L20.034, hb.L20.038, hb.L20.098, hb.L20.112]
+    recap:
+      - "Cirrhosis = **accelerated starvation**: protein synthesis ↓، gluconeogenesis من الـ amino acids ↑ → proteolysis → sarcopenia."
+      - "Energy ≥ **35 kcal/kg** (non-obese) و protein **1.2–1.5 g/kg** على الـ actual BW المصحح للـ ascites."
+      - "**3 meals + 3 snacks**؛ الـ **late-evening snack** أهمهم. والـ decompensated malnourished: late-evening ONS + breakfast."
+      - "مفيش أكل ممنوع غير الـ alcohol؛ fruit and vegetables؛ salt restricted."
+      - "**No protein restriction**؛ في الـ HE فضّل vegetable و dairy protein."
+    practice: [hb.L20.028, hb.L20.029, hb.L20.030, hb.L20.031, hb.L20.032, hb.L20.033, hb.L20.034, hb.L20.035, hb.L20.036, hb.L20.037, hb.L20.038, hb.L20.098, hb.L20.099, hb.L20.112]
+  # ------------------------------------------------------------------
+  - id: hb.L20.lesson3
+    title: "العضل اللي مش بيسمع الكلام"
+    hook: "ليه الأكل لوحده مش بيرجّع عضل الـ cirrhotic، وإزاي تخسّس العيان التخين من غير ما تكسر عضله."
+    minutes: 9
+    pages: [406, 412]
+    topics: [sarcopenia, obesity]
+    goals:
+      - "تشرح anabolic resistance و dysregulated proteostasis"
+      - "توصّل كل علاج بالـ mechanism اللي بيستهدفه"
+      - "تعرف تارجت التخسيس في الـ obese cirrhotic"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 409
+        title: "العضل: أكبر مخزن بروتين"
+        text: |
+          الـ **skeletal muscle** هو **the largest protein store in the body**، وحجمه بيعتمد على السن، الجنس، الـ ethnicity، وشدة وسبب مرض الكبد.
+
+          المشكلة إن الـ **anabolic resistance** و **dysregulated proteostasis** بيعملوا **sarcopenia** و **failure to respond to standard supplementation**. يعني تأكّله، والعضل مش بيبني.
+
+          والخبر الحلو: كل mechanism منهم **potential therapeutic target**.
+      - kind: figure
+        page: 409
+        title: "ليه العضل بيدوب؟"
+        alt: "A liver with portosystemic shunting and hepatocellular dysfunction at the top feeds six drivers: raised ammonia, raised myostatin, endotoxin, low testosterone and growth hormone, mitochondrial dysfunction with low ATP and high reactive oxygen species, and accelerated starvation with low amino acids and intermediates. All converge on dysregulated proteostasis, which lowers muscle mass and muscle contractile function. Three treatment boxes at the bottom: calories and protein by oral supplements then enteral feeding, BCAA and anaplerotic agents, and a structured exercise programme."
+        caption: "الصورة بتاعة صفحة 409–411 مبسّطة. العلاجات الخضرا تحت هي اللي الكتاب حطها على الرسمة."
+        svg: |
+          <svg viewBox="0 0 330 430" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L20d" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+              <marker id="L20e" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-bad"/></marker>
+            </defs>
+            <rect x="40" y="6" width="250" height="44" rx="10" class="fg-acc"/>
+            <text x="165" y="25" text-anchor="middle" class="t-sm t-b">Portosystemic shunting</text>
+            <text x="165" y="42" text-anchor="middle" class="t-sm t-b">+ hepatocellular dysfunction</text>
+            <path d="M165 52V64" class="fg-arrow" marker-end="url(#L20d)"/>
+            <rect x="4" y="68" width="157" height="34" rx="6" class="fg-box"/>
+            <text x="82" y="90" text-anchor="middle" class="t-sm">↑ Ammonia</text>
+            <rect x="169" y="68" width="157" height="34" rx="6" class="fg-box"/>
+            <text x="247" y="90" text-anchor="middle" class="t-sm">↑ Myostatin</text>
+            <rect x="4" y="108" width="157" height="34" rx="6" class="fg-box"/>
+            <text x="82" y="130" text-anchor="middle" class="t-sm">Endotoxin</text>
+            <rect x="169" y="108" width="157" height="34" rx="6" class="fg-box"/>
+            <text x="247" y="130" text-anchor="middle" class="t-sm">↓ Testosterone, ↓ GH</text>
+            <rect x="4" y="148" width="157" height="34" rx="6" class="fg-box"/>
+            <text x="82" y="170" text-anchor="middle" class="t-sm">Mitochondria: ↓ATP ↑ROS</text>
+            <rect x="169" y="148" width="157" height="34" rx="6" class="fg-box"/>
+            <text x="247" y="170" text-anchor="middle" class="t-sm">Starvation: ↓ amino acids</text>
+            <path d="M165 186V204" class="fg-arrow-bad" marker-end="url(#L20e)"/>
+            <rect x="40" y="208" width="250" height="40" rx="8" class="fg-bad"/>
+            <text x="165" y="226" text-anchor="middle" class="t-sm t-b">Dysregulated proteostasis</text>
+            <text x="165" y="242" text-anchor="middle" class="t-sm">(anabolic resistance)</text>
+            <path d="M110 250L82 272M220 250L247 272" class="fg-arrow-bad" marker-end="url(#L20e)"/>
+            <rect x="4" y="276" width="157" height="34" rx="6" class="fg-bad"/>
+            <text x="82" y="298" text-anchor="middle" class="t-sm t-b">↓ Muscle mass</text>
+            <rect x="169" y="276" width="157" height="34" rx="6" class="fg-bad"/>
+            <text x="247" y="298" text-anchor="middle" class="t-sm t-b">↓ Contractile function</text>
+            <text x="165" y="334" text-anchor="middle" class="t-sm t-b t-good">Targets</text>
+            <rect x="4" y="342" width="104" height="82" rx="6" class="fg-good"/>
+            <text x="56" y="362" text-anchor="middle" class="t-sm t-b">Calories,</text>
+            <text x="56" y="378" text-anchor="middle" class="t-sm t-b">protein</text>
+            <text x="56" y="396" text-anchor="middle" class="t-sm">ONS, then</text>
+            <text x="56" y="412" text-anchor="middle" class="t-sm">enteral</text>
+            <rect x="113" y="342" width="104" height="82" rx="6" class="fg-good"/>
+            <text x="165" y="362" text-anchor="middle" class="t-sm t-b">BCAA,</text>
+            <text x="165" y="378" text-anchor="middle" class="t-sm t-b">anaplerotic</text>
+            <text x="165" y="396" text-anchor="middle" class="t-sm">↑ amino acids,</text>
+            <text x="165" y="412" text-anchor="middle" class="t-sm">intermediates</text>
+            <rect x="222" y="342" width="104" height="82" rx="6" class="fg-good"/>
+            <text x="274" y="362" text-anchor="middle" class="t-sm t-b">Exercise</text>
+            <text x="274" y="378" text-anchor="middle" class="t-sm t-b">programme</text>
+            <text x="274" y="396" text-anchor="middle" class="t-sm">resistance +</text>
+            <text x="274" y="412" text-anchor="middle" class="t-sm">endurance</text>
+          </svg>
+      - kind: match
+        page: 410
+        prompt: "كل علاج بيستهدف إيه؟"
+        pairs:
+          - ["Oral supplements (calories, protein)", "Accelerated starvation"]
+          - ["BCAA and anaplerotic agents", "Low amino acids and intermediates"]
+          - ["Structured exercise programme", "Muscle contractile function"]
+        why: "صفحة 410–411. الـ ONS بتعالج الـ accelerated starvation، والـ BCAA بتعوّض الـ amino acids والـ intermediates، والـ exercise بيشتغل على الـ contractile function."
+      - kind: explain
+        page: 410
+        title: "التوصيات بالترتيب"
+        text: |
+          - مش قادر يوصل للتارجت بالأكل **حتى مع ONS**؟ → **a period of enteral nutrition**.
+          - **Decompensated** والـ nitrogen intake مش كفاية بالأكل؟ → **BCAA and leucine-enriched amino acid supplements**.
+          - **Avoid hypomobility** وزوّد النشاط تدريجيًا (صفحة 411).
+          - **Combination of resistance and endurance exercise** غالبًا مناسب ومفيد، رغم الـ potential adverse effects (صفحة 409).
+      - kind: reveal
+        page: 409
+        prompt: "ليه في الـ cirrhosis تأكّل العيان كويس ويفضل عضله يدوب؟"
+        answer: |
+          لأن المشكلة مش بس في **المدخلات**. الـ **anabolic resistance** معناها إن العضل نفسه **مش بيستجيب** للبروتين: الـ ammonia والـ myostatin والـ endotoxin وقلة الـ testosterone والـ mitochondrial dysfunction كلهم بيبوّظوا الـ proteostasis.
+
+          علشان كده الكتاب بيقول **failure to respond to standard supplementation**، والحل إنك تضرب أكتر من mechanism: أكل + BCAA + exercise.
+      - kind: explain
+        page: 411
+        title: "التخين ممكن يبقى malnourished"
+        text: |
+          - الـ **sedentary lifestyle** منتشر جدًا في الـ cirrhosis، وبيزوّد الـ obesity، وممكن يكون **cofactor** (صفحة 406).
+          - **Obesity does not rule out malnutrition.**
+          - الـ obesity موجودة في **most cases of NASH-related cirrhosis**.
+          - **Estimate and treat malnutrition routinely** في الـ obese cirrhotics (**BMI > 30** من غير fluid retention).
+          - وانت بتشخّص obesity، خلّي بالك من الـ **fluid retention** واحسب **dry weight**، رغم إن دقته قليلة.
+      - kind: table
+        page: 412
+        title: "تخسيس الـ obese cirrhotic"
+        columns: ["", "Target"]
+        rows:
+          - ["Who benefits", "Obese patients with compensated cirrhosis"]
+          - ["Weight loss goal", "Progressive, ≥ 5–10%"]
+          - ["Diet", "Moderately hypocaloric: −500 to −800 kcal/day"]
+          - ["Protein", "> 1.5 g/kg ideal BW/day"]
+          - ["Exercise", "Supervised, moderate intensity, tailored"]
+        hide: [[1, 1], [2, 1], [3, 1]]
+      - kind: aside
+        tone: analogy
+        page: 412
+        text: |
+          زي عربية نقل محمّلة زيادة: عايز **تنزّل الحمولة** (الدهون: −500 لـ −800 kcal) من غير ما **تفك الموتور** (العضل).
+
+          علشان كده السعرات تقل، بس البروتين يفضل **عالي: > 1.5 g/kg ideal BW**، والـ exercise معاه علشان الموتور يفضل شغال.
+      - kind: check
+        page: 411
+        question: "Which statement about obesity in cirrhosis is TRUE according to the lecture?"
+        options:
+          - "Obesity does not rule out malnutrition"
+          - "A BMI above 30 excludes sarcopenia"
+          - "Weight loss should be avoided in compensated cirrhosis"
+          - "Protein should be cut to help weight loss"
+        answer: 0
+        why:
+          - "صح: والـ **sarcopenic obesity** هي الدليل."
+          - "بالعكس: الدهون **بتداري** الـ sarcopenia."
+          - "الكتاب: multiple studies suggest weight reduction **improves outcomes** في الـ compensated."
+          - "البروتين يفضل **> 1.5 g/kg ideal BW** حتى وهو بيخسّ."
+      - kind: try
+        items: [hb.L20.040, hb.L20.046, hb.L20.052, hb.L20.101, hb.L20.047]
+    recap:
+      - "العضل أكبر مخزن بروتين. **Anabolic resistance + dysregulated proteostasis** → sarcopenia ومش بيستجيب للأكل العادي."
+      - "Drivers: ↑ammonia، ↑myostatin، endotoxin، ↓testosterone/GH، mitochondrial dysfunction، accelerated starvation."
+      - "العلاج: ONS ← لو مش كفاية enteral؛ BCAA/leucine في الـ decompensated؛ avoid hypomobility + resistance و endurance exercise."
+      - "Obesity does not rule out malnutrition. شخّص الـ obesity على الـ dry weight."
+      - "Obese compensated: خسارة ≥ 5–10%، −500 لـ −800 kcal/day، protein > 1.5 g/kg ideal BW، exercise متابَع."
+    practice: [hb.L20.039, hb.L20.040, hb.L20.041, hb.L20.042, hb.L20.043, hb.L20.044, hb.L20.045, hb.L20.046, hb.L20.047, hb.L20.048, hb.L20.049, hb.L20.050, hb.L20.051, hb.L20.052, hb.L20.053, hb.L20.101]
+  # ------------------------------------------------------------------
+  - id: hb.L20.lesson4
+    title: "العضل بيكنس الأمونيا"
+    hook: "سؤال الامتحان: role of sarcopenia in HE. هنا الإجابة كاملة، ومعاها الفيتامينات والملح."
+    minutes: 9
+    pages: [412, 413]
+    topics: [micronutrients, he]
+    goals:
+      - "تشرح العلاقة بين الـ sarcopenia والـ ammonia والـ HE"
+      - "تعرف توصيات الأكل في الـ HE ومين ياخد NG tube"
+      - "تحفظ أرقام vitamin D والصوديوم"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 412
+        title: "الفيتامينات"
+        text: |
+          الـ **vitamin deficiencies** في أمراض الكبد سببها **hepatic dysfunction** و **diminished reserves**، والـ **inadequate intake** والـ **malabsorption** بيزيدوا مع شدة المرض.
+
+          - **أغلب** المرشحين للـ LT عندهم نقص **vitamin A and D**.
+          - **Vitamin D < 20 ng/ml** في الـ chronic cholestatic conditions، وبيقل كل ما الـ severity والـ **Child–Pugh** يزيدوا.
+          - الـ vitamin D كمان بيرتبط بالـ **treatment response** في **HCV**، **NAFLD**، والـ **HCC**.
+
+          التوصيات: عالج أي نقص **confirmed or clinically suspected**؛ قيس الـ vitamin D؛ ولو **< 20 ng/ml** اديه **oral vitamin D** لحد **25(OH)D > 30 ng/ml**.
+      - kind: explain
+        page: 413
+        title: "الملح: قلّله، بس مش لدرجة إنه ما ياكلش"
+        text: |
+          - الـ **hyponatraemia** شائعة، وبتحصل أكتر لما الـ **sodium intake يقل والمية زي ما هي أو زيادة**. راقب الاتنين.
+          - في الـ **ascites** تحت sodium restriction: حوالي **80 mmol/day = 2 g sodium = 5 g added salt**.
+          - وخلّي بالك من **palatability**: الأكل المسلوق من غير ملح ممكن يخلي العيان ما ياكلش، و **calorie intake** يقل.
+      - kind: match
+        page: 413
+        prompt: "وصّل الأرقام:"
+        pairs:
+          - ["Sodium in ascites", "≈ 80 mmol/day (5 g salt)"]
+          - ["Vitamin D deficiency", "< 20 ng/ml"]
+          - ["Vitamin D target", "25(OH)D > 30 ng/ml"]
+          - ["Energy and protein in HE", "Same as cirrhotics without HE"]
+        why: "80 mmol Na = 2 g sodium = 5 g ملح. الـ vitamin D: عالج تحت 20 لحد ما يعدّي 30. والـ HE مش بتغيّر الاحتياجات."
+      - kind: figure
+        page: 413
+        title: "Sarcopenia ↔ ammonia ↔ HE"
+        alt: "A loop. Sarcopenia, meaning low muscle mass, leads to less ammonia cleared by muscle, so blood ammonia rises. High ammonia impairs muscle function and adds to muscle loss, closing the loop. High ammonia also leads to hepatic encephalopathy. A green box at the bottom lists how to break the loop: assess nutrition and sarcopenia, avoid protein restriction, prefer vegetable and dairy protein, consider BCAA, and feed orally, by nasogastric tube, or parenterally."
+        caption: "الكتاب: **inverse relationship between muscle mass and blood ammonia**، والـ hyperammonaemia بتضعّف العضل. (إن العضل بيشيل الـ ammonia عن طريق الـ glutamine ده physiology مقبولة، مش نص الكتاب.)"
+        svg: |
+          <svg viewBox="0 0 330 400" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L20f" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-bad"/></marker>
+            </defs>
+            <rect x="70" y="6" width="190" height="46" rx="10" class="fg-acc"/>
+            <text x="165" y="26" text-anchor="middle" class="t-b">Sarcopenia</text>
+            <text x="165" y="43" text-anchor="middle" class="t-sm">↓ muscle mass</text>
+            <path d="M110 54C84 80 84 112 108 134" class="fg-arrow-bad" marker-end="url(#L20f)"/>
+            <path d="M222 134C246 112 246 80 220 54" class="fg-arrow-bad" marker-end="url(#L20f)"/>
+            <text x="6" y="84" class="t-sm">less ammonia</text>
+            <text x="6" y="100" class="t-sm">cleared by</text>
+            <text x="6" y="116" class="t-sm">muscle</text>
+            <text x="326" y="84" text-anchor="end" class="t-sm">impairs</text>
+            <text x="326" y="100" text-anchor="end" class="t-sm">muscle, more</text>
+            <text x="326" y="116" text-anchor="end" class="t-sm">muscle loss</text>
+            <rect x="70" y="136" width="190" height="40" rx="10" class="fg-bad"/>
+            <text x="165" y="161" text-anchor="middle" class="t-b t-bad">↑ Blood ammonia</text>
+            <path d="M165 178V204" class="fg-arrow-bad" marker-end="url(#L20f)"/>
+            <rect x="60" y="208" width="210" height="40" rx="10" class="fg-bad"/>
+            <text x="165" y="233" text-anchor="middle" class="t-b t-bad">Hepatic encephalopathy</text>
+            <rect x="4" y="266" width="322" height="128" rx="8" class="fg-good"/>
+            <text x="165" y="288" text-anchor="middle" class="t-sm t-b t-good">Break the loop</text>
+            <text x="14" y="310" class="t-sm">• assess nutrition and sarcopenia</text>
+            <text x="14" y="328" class="t-sm">• NO protein restriction; usual energy</text>
+            <text x="14" y="346" class="t-sm">• vegetable and dairy protein</text>
+            <text x="14" y="364" class="t-sm">• consider BCAA</text>
+            <text x="14" y="382" class="t-sm">• oral → NG (airway protected) → parenteral</text>
+          </svg>
+      - kind: explain
+        page: 413
+        title: "يعني إيه للأكل في الـ HE؟"
+        text: |
+          - الـ **HE أكتر في الـ malnourished**.
+          - احتياجات **الطاقة** و **النيتروجين** في عيان الـ HE **زي** اللي ماعندوش HE، رغم إن الـ nitrogen metabolism ليه دور أساسي في الـ HE.
+
+          التوصيات (صفحة 413):
+          - **Evaluate** nutritional status و sarcopenia.
+          - **Avoid protein restriction.**
+          - Protein و energy **مش أقل** من أي cirrhotic.
+          - **Encourage vegetables and dairy protein.**
+          - **BCAA** لتحسين الـ **neuropsychiatric performance** وللوصول للـ nitrogen intake.
+          - **Oral preferred**. في **grade III–IV** ومش قادر ياكل: **nasogastric tube** لو الـ airway محمي، وإلا **parenterally**.
+      - kind: reveal
+        prompt: "سؤال الامتحان (صفحة 418): **What is the role of sarcopenia in hepatic encephalopathy?** جرّب تكتب النقط وبعدين افتح."
+        answer: |
+          - **HE is more common in malnourished cirrhotics.**
+          - **Inverse relationship** بين الـ muscle mass والـ blood ammonia: عضل أقل = ammonia أعلى.
+          - **Hyperammonaemia impairs muscle function** وبتزوّد الـ muscle loss → **vicious circle**.
+          - الـ sarcopenia + HE مع infections و ascites → **reduced survival** (صفحة 403–404).
+          - **Management:** evaluate sarcopenia؛ **avoid protein restriction**؛ نفس الـ energy والـ protein؛ vegetable و dairy protein؛ **BCAA**؛ late-evening snack؛ exercise؛ و NG أو parenteral في grade III–IV.
+      - kind: case
+        stem: "A 66-year-old woman with cirrhosis is admitted drowsy with **grade III HE**. She cannot swallow safely, and her airway is protected. Her family says another doctor told her to stop eating meat and eggs."
+        page: 413
+        steps:
+          - question: "How much protein should she get?"
+            options:
+              - "The usual cirrhosis target, without restriction"
+              - "Under 0.5 g/kg until she wakes up"
+              - "Nothing by mouth or tube for a week"
+            answer: 0
+            why: "**Avoid protein restriction**، والاحتياجات زي أي cirrhotic (1.2–1.5 g/kg). التقليل هيكسّر عضلها ويزوّد الـ ammonia على المدى الطويل."
+          - question: "By which route?"
+            options:
+              - "Nasogastric tube"
+              - "Parenteral nutrition first"
+              - "Oral diet despite the unsafe swallow"
+            answer: 0
+            why: "**Grade III–IV** ومش قادرة تاكل والـ **airway محمي** → **NG tube**. الـ parenteral لو الـ airway مش محمي. والـ NG tube **مش ممنوع** مع الـ non-bleeding varices (صفحة 418)."
+      - kind: try
+        items: [hb.L20.057, hb.L20.060, hb.L20.064, hb.L20.100, hb.L20.113]
+    recap:
+      - "أغلب مرشحين الـ LT عندهم نقص vitamin A و D. Vitamin D < 20 ng/ml → oral لحد 25(OH)D > 30."
+      - "Ascites: ≈ 80 mmol Na/day = 2 g Na = 5 g ملح، وخلّي الأكل مستساغ. الـ hyponatraemia أكتر لما الصوديوم يقل والمية لأ."
+      - "عضل أقل = ammonia أعلى، والـ ammonia بتضعّف العضل: **vicious circle** والـ HE أكتر في الـ malnourished."
+      - "HE: نفس الـ energy والـ protein، **no restriction**، vegetable و dairy protein، BCAA."
+      - "Grade III–IV مش قادر ياكل: NG لو الـ airway محمي، وإلا parenteral."
+    practice: [hb.L20.054, hb.L20.055, hb.L20.056, hb.L20.057, hb.L20.058, hb.L20.059, hb.L20.060, hb.L20.061, hb.L20.062, hb.L20.063, hb.L20.064, hb.L20.065, hb.L20.100, hb.L20.103, hb.L20.110, hb.L20.113]
+  # ------------------------------------------------------------------
+  - id: hb.L20.lesson5
+    title: "عضم الـ cirrhotic"
+    hook: "تلت عيانين الكبد عندهم osteoporosis. والـ T-score هنا بيبدأ من −1.5 مش −1."
+    minutes: 7
+    pages: [414, 415]
+    topics: [bone]
+    goals:
+      - "تعرف مين يعمل DEXA وإمتى يكرّرها"
+      - "تختار العلاج حسب الـ T-score"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 414
+        title: "حوالي 30%"
+        text: |
+          حوالي **30%** من مرضى الـ chronic liver disease عندهم **osteoporosis**، وأكتر في الـ **cholestasis**. وهي **loss of bone mass and quality** بتعمل **fragility fractures**.
+
+          عوامل الخطر في رسمة الكتاب: **male hypogonadism**، **alcohol abuse**، **smoking**، **BMI < 19**، **early menopause**، **family history of osteoporotic fracture**، **corticosteroids**، **advanced age**، و **secondary amenorrhoea > 6 months**.
+      - kind: explain
+        page: 414
+        title: "التشخيص"
+        text: |
+          الـ **WHO gold standard**: **bone densitometry (DEXA) of the lumbar spine and hip**.
+
+          اعملها في:
+          - **previous fragility fractures**
+          - **corticosteroids**
+          - **before liver transplantation**
+          - **cholestatic diseases**
+          - **cirrhosis**
+          - أي **risk factor** تاني
+
+          والـ **vertebral fractures**: **lateral X-rays of the dorsal and lumbar spine**. وكمان **lab tests** لاضطرابات الـ calcium والـ vitamin D.
+      - kind: check
+        page: 414
+        question: "Which of these is NOT among the osteoporosis risk factors in the lecture's figure?"
+        options:
+          - "Obesity"
+          - "Male hypogonadism"
+          - "BMI < 19 kg/m²"
+          - "Secondary amenorrhoea > 6 months"
+        answer: 0
+        why:
+          - "صح: الرسمة فيها **BMI < 19** يعني **النحافة** هي الخطر، مش الـ obesity."
+          - "موجود: **male hypogonadism** أول مربع في الرسمة."
+          - "موجود، وده عكس الـ obesity بالظبط."
+          - "موجود: **secondary amenorrhoea > 6 months**، ومعاه early menopause."
+      - kind: aside
+        tone: analogy
+        page: 414
+        text: |
+          افتكر الـ risk factors كأنها **«هرمونات قليلة + سموم + نحافة + سن»**:
+
+          - **هرمونات قليلة:** male hypogonadism، early menopause، secondary amenorrhoea.
+          - **سموم:** alcohol، smoking، corticosteroids.
+          - **نحافة:** BMI < 19.
+          - **سن ووراثة:** advanced age، family history of fracture.
+      - kind: figure
+        page: 415
+        title: "الـ T-score بيقولك تعمل إيه"
+        alt: "A T-score bar. Above minus 1.5 is normal: calcium and 25-hydroxy vitamin D, repeat DEXA in 2 to 3 years. From minus 1.5 down to above minus 2.5 is osteopenia: calcium and vitamin D, bisphosphonates depending on risk factors, repeat in 1 to 2 years. Minus 2.5 or below is osteoporosis: calcium, vitamin D and bisphosphonates or new agents, repeat in 1 year."
+        caption: "الحدود في ملخص الكتاب: **osteopenia من −1.5** (مش −1 زي الـ WHO العام)، و **osteoporosis ≤ −2.5**."
+        svg: |
+          <svg viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="30" width="93" height="34" class="fg-bad"/>
+            <rect x="103" y="30" width="62" height="34" class="fg-acc"/>
+            <rect x="165" y="30" width="155" height="34" class="fg-good"/>
+            <text x="56" y="52" text-anchor="middle" class="t-sm t-b">Osteoporosis</text>
+            <text x="134" y="52" text-anchor="middle" class="t-sm t-b">Penia</text>
+            <text x="242" y="52" text-anchor="middle" class="t-sm t-b">Normal</text>
+            <path d="M103 24V70M165 24V70" class="fg-ink"/>
+            <text x="103" y="86" text-anchor="middle" class="t-sm t-b">−2.5</text>
+            <text x="165" y="86" text-anchor="middle" class="t-sm t-b">−1.5</text>
+            <text x="165" y="16" text-anchor="middle" class="t-sm t-mut">T-score (DEXA)</text>
+            <rect x="4" y="100" width="322" height="66" rx="8" class="fg-good"/>
+            <text x="14" y="122" class="t-sm t-b">Normal: T &gt; −1.5</text>
+            <text x="14" y="140" class="t-sm">Ca + 25(OH)D</text>
+            <text x="14" y="158" class="t-sm">Repeat DEXA in 2–3 years</text>
+            <rect x="4" y="174" width="322" height="66" rx="8" class="fg-acc"/>
+            <text x="14" y="196" class="t-sm t-b">Osteopenia: −1.5 to −2.5</text>
+            <text x="14" y="214" class="t-sm">Ca + 25(OH)D ± bisphosphonates (risk factors)</text>
+            <text x="14" y="232" class="t-sm">Repeat in 1–2 years</text>
+            <rect x="4" y="248" width="322" height="76" rx="8" class="fg-bad"/>
+            <text x="14" y="270" class="t-sm t-b">Osteoporosis: T ≤ −2.5</text>
+            <text x="14" y="288" class="t-sm">Ca + 25(OH)D + bisphosphonates, new agents</text>
+            <text x="14" y="306" class="t-sm">Repeat in 1 year</text>
+          </svg>
+      - kind: explain
+        page: 415
+        title: "العلاج"
+        text: |
+          - **Balanced diet** مع **calcium (1,000–1,500 mg/day)** و **25(OH)D (400–800 IU/day)** علشان المستويات تفضل طبيعية.
+          - **Physical activity**، خصوصًا تمارين **mechanics of the spine**.
+          - قلّل اللي بيزوّد الـ bone loss: **alcohol**، **tobacco**، **corticosteroids**.
+          - الـ **bisphosphonates** (etidronate، alendronate، ibandronate) بتزوّد الـ bone mass في الـ **PBC** من غير serious adverse events، رغم إن الدراسات قليلة.
+          - كرّر الـ DEXA بعد **2–3 سنين** لو طبيعية، وخلال **سنة** لو متوقع **rapid bone loss**.
+      - kind: check
+        page: 415
+        question: "A 55-year-old woman with PBC has a lumbar T-score of **−2.8**. What is the plan?"
+        options:
+          - "Calcium + 25(OH)D + a bisphosphonate; repeat DEXA in 1 year"
+          - "Calcium + 25(OH)D only; repeat DEXA in 2–3 years"
+          - "No treatment; repeat DEXA in 5 years"
+          - "Stop vitamin D because of cholestasis"
+        answer: 0
+        why:
+          - "صح: **≤ −2.5** = osteoporosis → Ca + D + bisphosphonates وتكرار **خلال سنة**. والـ bisphosphonates اتجرّبت في الـ PBC بالذات."
+          - "ده علاج الـ **normal** (> −1.5)."
+          - "مفيش 5 سنين في الكتاب، وأطول فترة 2–3 سنين للطبيعي."
+          - "بالعكس: الـ cholestasis بتعمل vitamin D deficiency، والمكملات جزء من العلاج."
+      - kind: aside
+        tone: exam
+        page: 415
+        text: |
+          أي سؤال bone في الـ liver: ابدأ الإجابة بـ **Ca + 25(OH)D للكل**، وبعدين زوّد حسب الـ T-score. ولو العيان **PBC**، اذكر إن الـ bisphosphonates هي اللي ليها data فيه.
+      - kind: try
+        items: [hb.L20.066, hb.L20.069, hb.L20.072, hb.L20.104, hb.L20.111]
+    recap:
+      - "≈ 30% osteoporosis، أكتر في الـ cholestasis."
+      - "Gold standard: DEXA lumbar spine + hip. Vertebral fractures: lateral X-ray dorsal + lumbar."
+      - "DEXA في: fragility fracture، steroids، قبل الـ LT، cholestasis، cirrhosis، أي risk factor."
+      - "T > −1.5 طبيعي (كرّر 2–3 سنين)؛ −1.5 لـ −2.5 osteopenia (1–2 سنة)؛ ≤ −2.5 osteoporosis (سنة)."
+      - "Ca 1,000–1,500 mg + 25(OH)D 400–800 IU للكل؛ bisphosphonates في الـ PBC."
+    practice: [hb.L20.066, hb.L20.067, hb.L20.068, hb.L20.069, hb.L20.070, hb.L20.071, hb.L20.072, hb.L20.073, hb.L20.074, hb.L20.075, hb.L20.104, hb.L20.111]
+  # ------------------------------------------------------------------
+  - id: hb.L20.lesson6
+    title: "قبل العملية، بعد الزرع، وفي الـ ICU"
+    hook: "جدول أرقام واحد يلم كل التارجتس، وليه نوقف الأكل 48–72 ساعة بعد النزيف."
+    minutes: 10
+    pages: [416, 418]
+    topics: [surgery-lt, critical]
+    goals:
+      - "تحفظ تارجتس الطاقة والبروتين في كل موقف"
+      - "تعرف التغذية بعد الـ LT ومشاكلها"
+      - "تتعامل مع الـ critically ill والـ GI bleeding"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 416
+        title: "قبل العملية"
+        text: |
+          - **Severe undernutrition (BMI < 18.5)** أو **obesity (BMI > 40)** = morbidity و mortality أعلى في جراحة الكبد. وعيانين الـ **waiting list** معرضين برضه.
+          - الـ **liver glycogen is depleted** في الـ cirrhosis، فـ **قصّر فترات الصيام** قبل العملية.
+          - اعمل **screening** للـ malnutrition والـ sarcopenia قبل الـ LT أو الـ elective surgery، و **عالج الـ sarcopenia** قبل الـ elective.
+          - في الـ obese: دوّر على **sarcopenic obesity** بـ **body composition analysis**.
+          - استخدم **standard regimens**: الـ BCAA-enriched والـ immune-enhancing **ماثبتش** إنهم بيحسّنوا morbidity أو mortality.
+      - kind: table
+        page: 417
+        title: "جدول التارجتس (احفظه صورة)"
+        columns: ["Situation", "Energy", "Protein"]
+        rows:
+          - ["Stable cirrhosis (p407)", "≥ 35 kcal/kg", "1.2–1.5 g/kg"]
+          - ["Pre-op: maintain status", "30 kcal/kg", "1.2 g/kg"]
+          - ["Pre-op: improve status", "35 kcal/kg", "1.5 g/kg"]
+          - ["After acute post-LT phase", "35 kcal/kg", "1.5 g/kg"]
+          - ["Obese after LT, tube/PN", "25 kcal/kg ideal BW", "2.0 g/kg ideal BW"]
+          - ["Critically ill", "≥ 35–40 kcal/kg or 1.3 × REE", "≥ 1.2–1.3 g/kg"]
+        hide: [[1, 1], [1, 2], [2, 2], [4, 1], [5, 1]]
+      - kind: aside
+        tone: tip
+        page: 416
+        text: |
+          الجدول ده شكله مرعب بس فيه منطق: **35 / 1.5** هي "الأساس" تقريبًا في كل حتة.
+
+          - عايز **تحافظ** بس؟ انزل خطوة: **30 / 1.2**.
+          - **Critically ill**؟ اطلع خطوة في الطاقة: **35–40**.
+          - **Obese**؟ الطاقة تقل (**25**) والبروتين يعلى (**2.0**)، وعلى الـ **ideal** BW.
+      - kind: explain
+        page: 416
+        title: "بعد العملية والزرع"
+        text: |
+          الأكل بعد العملية، مقارنةً بـ fluids and electrolytes بس، بيقلل: **ventilator time**، **ICU stay**، **bacterial and viral infections**، و **bile duct and other complications**.
+
+          - بعد الـ **LT**: **normal food و/أو enteral tube feeding خلال 12–24 ساعة** علشان الـ infections تقل.
+          - مفيش oral ولا enteral؟ **parenteral أحسن من no feeding**.
+          - بعد عمليات تانية في الـ CLD: **ERAS protocols**.
+          - **Parenteral** في الـ HE مع **unprotected airways** لما الـ cough والـ swallow يضعفوا، أو لو الـ enteral ممنوع.
+          - بعد الـ LT العيان في **negative nitrogen balance** → زوّد البروتين.
+          - صحّح الـ **chronic dilutional hyponatraemia** بالراحة علشان **pontine myelinolysis**.
+          - على المدى الطويل: **weight gain/obesity** من الـ **metabolic syndrome**.
+      - kind: check
+        page: 417
+        question: "Why must chronic dilutional hyponatraemia be corrected **slowly** after liver transplantation?"
+        options:
+          - "To avoid pontine myelinolysis"
+          - "To avoid variceal re-bleeding"
+          - "Because sodium worsens anabolic resistance"
+          - "To prevent hepatic encephalopathy"
+        answer: 0
+        why:
+          - "صح: التصحيح السريع للـ hyponatraemia المزمنة بيعمل **(central) pontine myelinolysis**."
+          - "الـ re-bleeding هو سبب وقف الـ **enteral nutrition** بعد النزيف، مش الصوديوم."
+          - "مفيش علاقة في الكتاب."
+          - "مش السبب اللي الكتاب ذاكره."
+      - kind: explain
+        page: 417
+        title: "الـ critically ill"
+        text: |
+          مين؟ اللي **hospitalized for severe complications** of CLD، الـ **acute-on-chronic liver failure**، اللي في **ICU**، والـ **acute alcoholic hepatitis**.
+
+          - قيّم الـ nutrition والـ sarcopenia، وادعم التغذية وانت بتعالج الـ decompensation.
+          - قيس الـ **REE** بـ **indirect calorimetry** لو تقدر.
+          - **Tight glucose control** زي أي critically ill.
+          - **Enteral أو parenteral** غالبًا هتحتاجهم: enteral لو مش قادر ياكل، و parenteral لو الـ oral والـ enteral مش متحمَّلين أو ممنوعين.
+          - **Standard regimens**؛ وفي الـ **HE** فكّر في **BCAA-enriched solutions**.
+
+          والـ **active alcohol abuse** ممكن يرفع الـ **REE**. والتغذية في الـ severe alcoholic hepatitis ممكن **تسرّع تحسّن الـ HE** و **تحسّن الـ survival** في اللي أكلهم قليل.
+      - kind: reveal
+        page: 418
+        prompt: "عيان variceal bleeding ووقفناه بالـ banding. ليه **ما نأكلوش enteral** على طول؟"
+        answer: |
+          الكتاب: **withhold enteral nutrition for 48–72 hours** بسبب **increased portal pressure and variceal re-bleeding**.
+
+          المنطق: الأكل بيزوّد الدم الرايح للأمعاء (**splanchnic flow**)، وده بيرفع الـ portal pressure على دوالي لسه مقفولة جديد. (الجزء ده physiology مقبولة؛ الحكم والمدة من الكتاب.)
+      - kind: sort
+        page: 418
+        prompt: "مسموح ولا تتجنّبه؟"
+        bins: ["OK", "Avoid"]
+        cards:
+          - { text: "NG tube with non-bleeding varices", bin: 0 }
+          - { text: "Feeding within 12–24 h after LT", bin: 0 }
+          - { text: "BCAA-enriched solution in ICU HE", bin: 0 }
+          - { text: "PEG in a cirrhotic", bin: 1 }
+          - { text: "Enteral feeds 12 h after variceal bleed", bin: 1 }
+          - { text: "Fast correction of chronic hyponatraemia after LT", bin: 1 }
+        why: "الـ NG tube **مش ممنوع** مع الـ non-bleeding varices، بس الـ **PEG** يتجنّب بسبب الـ bleeding. الأكل بعد النزيف يستنى **48–72 h**. وبعد الـ LT الأكل بدري (12–24 h) والصوديوم بالراحة."
+      - kind: aside
+        tone: joke
+        page: 418
+        text: |
+          العيان بعد الـ banding: "يا دكتور أنا جعان، هات ساندوتش فول."
+
+          انت: "**48–72 hours** يا حاج، الدوالي لسه بتتعافى. وبعدها هنرجع لـ **late-evening snack** كمان." 🥪⏳
+      - kind: try
+        items: [hb.L20.078, hb.L20.081, hb.L20.090, hb.L20.095, hb.L20.096]
+    recap:
+      - "BMI < 18.5 أو > 40 = خطر أعلى في الجراحة. قصّر الصيام (glycogen فاضي) وعالج الـ sarcopenia قبل الـ elective."
+      - "Pre-op: 30/1.2 للحفاظ و 35/1.5 للتحسين؛ بعد الـ LT: أكل خلال 12–24 h ثم 35/1.5؛ obese بعد LT: 25 و 2.0 على الـ ideal BW."
+      - "بعد الـ LT: negative nitrogen balance، صحّح الـ hyponatraemia بالراحة (pontine myelinolysis)، وخد بالك من الـ metabolic syndrome."
+      - "Critically ill: ≥ 35–40 kcal/kg أو 1.3 × REE، protein ≥ 1.2–1.3، indirect calorimetry، tight glucose control."
+      - "بعد الـ GI bleeding: لا enteral لمدة 48–72 h. الـ NG مسموح مع non-bleeding varices، والـ PEG لأ."
+    practice: [hb.L20.076, hb.L20.077, hb.L20.078, hb.L20.079, hb.L20.080, hb.L20.081, hb.L20.082, hb.L20.083, hb.L20.084, hb.L20.085, hb.L20.086, hb.L20.087, hb.L20.088, hb.L20.089, hb.L20.090, hb.L20.091, hb.L20.092, hb.L20.093, hb.L20.094, hb.L20.095, hb.L20.096, hb.L20.102, hb.L20.106, hb.L20.108]

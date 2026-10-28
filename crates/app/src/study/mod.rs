@@ -189,23 +189,32 @@ pub fn Study() -> Element {
         }
     };
 
-    // Today's "start a session" button.
-    use_hook(|| {
-        if let Some(req) = START.write().take() {
-            if let Some(ids) = &req.items {
-                let planned = plan_items(&store, ids);
-                let empty = planned.is_empty();
-                session.set(Session::new(planned));
-                started.set(Instant::now());
-                phase.set(if empty { Phase::Summary } else { Phase::Running });
+    // Today's "start a session" button, and any "study these" asked for
+    // while Study is already open (a book page's sheet, a lecture page over
+    // it): an effect, so a request made here is not left waiting.
+    use_effect({
+        let store = store.clone();
+        let mut begin = begin.clone();
+        move || {
+            if START.read().is_none() {
                 return;
             }
-            let picked: Vec<&Lecture> = ready_lectures()
-                .into_iter()
-                .filter(|l| req.lectures.as_ref().is_none_or(|ids| ids.contains(&l.lecture)))
-                .collect();
-            minutes.set(req.minutes);
-            begin(picked, HashSet::new(), req.minutes);
+            if let Some(req) = START.write().take() {
+                if let Some(ids) = &req.items {
+                    let planned = plan_items(&store, ids);
+                    let empty = planned.is_empty();
+                    session.set(Session::new(planned));
+                    started.set(Instant::now());
+                    phase.set(if empty { Phase::Summary } else { Phase::Running });
+                    return;
+                }
+                let picked: Vec<&Lecture> = ready_lectures()
+                    .into_iter()
+                    .filter(|l| req.lectures.as_ref().is_none_or(|ids| ids.contains(&l.lecture)))
+                    .collect();
+                minutes.set(req.minutes);
+                begin(picked, HashSet::new(), req.minutes);
+            }
         }
     });
 

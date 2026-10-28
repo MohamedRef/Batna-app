@@ -85,6 +85,19 @@ pub mod cite {
     }
 }
 
+/// A book page's sheet (pagesheet/mod.rs).
+pub mod book {
+    pub const TITLE: &str = "صفحة الكتاب";
+    pub const CLOSE: &str = "اقفل";
+    pub const NO_LECTURE: &str = "الصفحة دي برّه المحاضرات اللي في باطنة.";
+    pub const QUOTE_NOTE: &str = "سطر قصير من الصفحة، عشان تتأكد من المصدر.";
+    pub const MADE: &str = "اللي في باطنة من الصفحة دي:";
+    pub const NOTHING_YET: &str = "لسه مفيش كروت أو أسئلة من الصفحة دي.";
+    pub const STUDY: &str = "ذاكر الصفحة دي";
+    pub const OPEN_LECTURE: &str = "افتح المحاضرة";
+    pub const CHIP_HINT: &str = "افتح صفحة الكتاب";
+}
+
 pub mod nav {
     pub const LABEL: &str = "التنقل";
     pub const TODAY: &str = "النهارده";

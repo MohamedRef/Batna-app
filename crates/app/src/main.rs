@@ -18,6 +18,7 @@ mod order;
 mod plan;
 mod platform;
 mod prefs;
+mod reminders;
 mod settings;
 mod sounds;
 mod stats;
@@ -110,6 +111,7 @@ fn App() -> Element {
     });
     let settings = use_context_provider(settings::SettingsNav::new);
     store::use_provide_review();
+    reminders::use_local_reminders();
     let current = *ui.screen.read();
     let look = ui.prefs.read().css();
     back::use_back(ui, current, *settings.open.read());

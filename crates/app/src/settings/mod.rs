@@ -20,18 +20,20 @@ const SETTINGS_CSS: &str = include_str!("../../assets/settings.css");
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
 pub enum Section {
     Study,
+    Reminders,
     Look,
     Data,
     About,
 }
 
 impl Section {
-    pub const ALL: [Self; 4] = [Self::Study, Self::Look, Self::Data, Self::About];
+    pub const ALL: [Self; 5] = [Self::Study, Self::Reminders, Self::Look, Self::Data, Self::About];
 
     /// Stable id, for `BATNA_OPEN_SETTINGS=<id>` previews.
     pub fn id(self) -> &'static str {
         match self {
             Self::Study => "study",
+            Self::Reminders => "reminders",
             Self::Look => "look",
             Self::Data => "data",
             Self::About => "about",
@@ -45,6 +47,7 @@ impl Section {
     fn title(self) -> &'static str {
         match self {
             Self::Study => crate::i18n::study_settings::SECTION,
+            Self::Reminders => crate::i18n::remind::SECTION,
             Self::Look => tx::LOOK,
             Self::Data => tx::DATA,
             Self::About => tx::ABOUT,
@@ -54,6 +57,7 @@ impl Section {
     fn summary(self) -> &'static str {
         match self {
             Self::Study => crate::i18n::study_settings::SECTION_SUB,
+            Self::Reminders => crate::i18n::remind::SECTION_SUB,
             Self::Look => tx::LOOK_SUB,
             Self::Data => tx::DATA_SUB,
             Self::About => tx::ABOUT_SUB,
@@ -189,6 +193,7 @@ pub fn SettingsSheet() -> Element {
 fn SectionView(section: Section) -> Element {
     match section {
         Section::Study => rsx! { crate::today::StudySection {} crate::sounds::SoundSection {} },
+        Section::Reminders => rsx! { crate::reminders::RemindSection {} },
         Section::Look => rsx! { look::LookSection {} },
         Section::Data => rsx! { data::DataSection {} },
         Section::About => rsx! { about::AboutSection {} },

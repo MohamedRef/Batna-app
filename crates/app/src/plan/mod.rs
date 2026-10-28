@@ -14,7 +14,7 @@ use crate::stats::{StudyData, charts, lecture_number};
 /// The planner settings, kept in `plan-settings.txt` in the app's data
 /// folder (per device until sync exists). BATNA_PLAN_EXAM=2027-01-20 presets
 /// the exam day instead (previews and screenshots; nothing is saved then).
-static SETTINGS: GlobalSignal<PlanSettings> = Signal::global(|| {
+pub(crate) static SETTINGS: GlobalSignal<PlanSettings> = Signal::global(|| {
     if let Some(exam) = std::env::var("BATNA_PLAN_EXAM").ok().and_then(|v| Day::parse(&v)) {
         return PlanSettings { exam: Some(exam), ..PlanSettings::default() };
     }

@@ -180,7 +180,6 @@ impl ReviewBackend {
     }
 
     /// Answers logged today (every screen, evidence included).
-    #[allow(dead_code)] // reminders and recap (chunk 20)
     pub fn answers_today(&self, now_ms: i64) -> usize {
         let today = self.scheduler.day.day(now_ms);
         self.log.iter().filter(|l| self.scheduler.day.day(l.event.at_ms) == today).count()

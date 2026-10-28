@@ -601,3 +601,37 @@ pub mod sound {
     pub const VIBRATE: &str = "الاهتزاز";
     pub const VIBRATE_BODY: &str = "لمسة خفيفة مع كل إجابة. بيمشي على إعداد الاهتزاز في الموبايل.";
 }
+
+pub mod remind {
+    pub const TITLE: &str = "باطنة";
+    pub const SECTION: &str = "التذكير";
+    pub const SECTION_SUB: &str = "تذكير هادي بمراجعة اليوم";
+    pub const PHONE_ONLY: &str = "التذكير بيرن على الموبايل. على الماك مفيش تذكير لسه.";
+    pub const DAILY: &str = "تذكير المذاكرة اليومي";
+    pub const DAILY_BODY: &str = "إشعار واحد في المعاد اللي تختاره، فيه عدد المراجعات المستنياك.";
+    pub const ON: &str = "شغّال";
+    pub const OFF: &str = "مقفول";
+    pub const TIMES: &str = "المواعيد";
+    pub const TIME: &str = "معاد التذكير";
+    pub const ADD: &str = "زوّد معاد";
+    pub const REMOVE: &str = "شيل";
+    pub const RULES: &str =
+        "بيرن بس في أيام المذاكرة اللي في خطة الامتحان، ولو خلّصت مراجعات النهارده مش هيرن تاني لحد بكرة.";
+    pub const HERE: &str = "يرن على الجهاز ده";
+    pub const HERE_BODY: &str = "جهاز واحد بس يرن، عشان الموبايل والتابلت ما يرنّوش مع بعض.";
+    pub const BLOCKED: &str = "الإشعارات مقفولة لباطنة، فالتذكير مش هيظهر.";
+    pub const ALLOW: &str = "اسمح بالإشعارات";
+    pub const OPEN_NOTIFICATIONS: &str = "افتح إعدادات الإشعارات";
+    pub const BATTERY: &str =
+        "لو التذكير ما رنّش، خلّي البطارية لباطنة «من غير قيود» عشان الموبايل ما ينيّمهاش.";
+    pub const OPEN_APP: &str = "افتح إعدادات التطبيق";
+
+    /// The reminder line, with the reviews due that day when known.
+    pub fn text(due: Option<u32>) -> String {
+        match due {
+            Some(0) | None => "وقت جلسة قصيرة. كارت واحد أحسن من مفيش.".into(),
+            Some(1) => "عندك مراجعة واحدة النهارده. دقيقة وتخلص.".into(),
+            Some(n) => format!("عندك {n} مراجعة النهارده. يلا نبدأ بجلسة قصيرة."),
+        }
+    }
+}

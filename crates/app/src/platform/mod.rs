@@ -4,6 +4,7 @@
 
 pub mod background;
 pub mod haptics;
+pub mod reminders;
 pub mod tts;
 #[cfg(target_os = "android")]
 pub(crate) mod tts_android;

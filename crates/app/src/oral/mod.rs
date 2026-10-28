@@ -472,7 +472,7 @@ async fn speak(text: String, voice: bool, rate: f32, mut no_voice: Signal<bool>)
         if !matches!(e, tts::SpeakError::Failed(_)) {
             no_voice.set(true);
         }
-        eprintln!("oral: speech failed: {e:?}");
+        crate::diag::report!("oral: speech failed: {e:?}");
     }
 }
 

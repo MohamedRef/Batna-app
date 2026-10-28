@@ -40,7 +40,7 @@ impl RemindPrefs {
         self.times.dedup();
         self.times.truncate(MAX_TIMES);
         if let Err(e) = shared().put_setting(Self::KEY, &self) {
-            eprintln!("saving reminder settings: {e}");
+            crate::diag::report!("saving reminder settings: {e}");
         }
         *PREFS.write() = self;
     }
@@ -58,7 +58,7 @@ const HERE_KEY: &str = "remind_here";
 
 pub fn set_here(here: bool) {
     if let Err(e) = shared().put_local_setting(HERE_KEY, &here) {
-        eprintln!("saving reminder device: {e}");
+        crate::diag::report!("saving reminder device: {e}");
     }
     *HERE.write() = here;
 }

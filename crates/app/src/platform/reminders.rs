@@ -26,7 +26,7 @@ pub fn repeat(json: &str) {
 /// Whether notifications are allowed for Batna (None where unknown).
 pub fn enabled() -> Option<bool> {
     #[cfg(target_os = "android")]
-    return android::flag("enabled").map_err(|e| eprintln!("ReminderBridge: {e}")).ok();
+    return android::flag("enabled").map_err(|e| crate::diag::report!("ReminderBridge: {e}")).ok();
     #[cfg(not(target_os = "android"))]
     None
 }
@@ -34,7 +34,9 @@ pub fn enabled() -> Option<bool> {
 /// Whether One UI lets Batna's alarms run while it sleeps (None where unknown).
 pub fn battery_unrestricted() -> Option<bool> {
     #[cfg(target_os = "android")]
-    return android::flag("batteryUnrestricted").map_err(|e| eprintln!("ReminderBridge: {e}")).ok();
+    return android::flag("batteryUnrestricted")
+        .map_err(|e| crate::diag::report!("ReminderBridge: {e}"))
+        .ok();
     #[cfg(not(target_os = "android"))]
     None
 }
@@ -60,7 +62,7 @@ pub fn open_app_settings() {
 #[cfg(target_os = "android")]
 fn report(result: Result<(), String>) {
     if let Err(e) = result {
-        eprintln!("ReminderBridge: {e}");
+        crate::diag::report!("ReminderBridge: {e}");
     }
 }
 

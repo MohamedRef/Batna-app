@@ -1,0 +1,679 @@
+schema: batna.lesson/v1
+lecture: hb.L14
+lessons:
+  # ------------------------------------------------------------------
+  - id: hb.L14.lesson1
+    title: "القلب والكبد: جيران بيتخانقوا"
+    hook: "القلب لما يتعب الكبد يتخنق، والكبد لما يتليّف القلب يتعب. نفهم الاتجاهين."
+    minutes: 8
+    pages: [252, 256]
+    topics: [overview, heart]
+    goals:
+      - "تعرف إمتى تلوم مرض systemic على LFTs بايظة"
+      - "تفرّق hypoxic من congestive hepatopathy"
+      - "تعرّف الـ cirrhotic cardiomyopathy وتعدّ الـ criteria"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 252
+        title: "الكبد ضحية أمراض غيره"
+        text: |
+          الأسباب المعتادة لـ LFTs بايظة: viral، alcohol، NAFLD، autoimmune، hereditary، malignancy أو infection، gallstones، و DILI.
+
+          بس الكبد ممكن يتأذي من **systemic diseases** أساسها في أعضاء تانية. فلو الـ **screening serology** والـ **imaging** مطلعوش سبب، والمريض عنده systemic disease، يبقى غالبًا **هي** السبب، و **تعالج الـ systemic disease الأول**.
+
+          الكتاب بيعدّ **6 مجموعات**: cardiovascular، collagen vascular، hematolymphoid، systemic infection و sepsis، chronic IBD، و granuloma formation.
+      - kind: mnemonic
+        page: 252
+        word: "CHIC GI"
+        parts:
+          - { key: "C", text: "Cardiovascular diseases" }
+          - { key: "H", text: "Hematolymphoid diseases" }
+          - { key: "I", text: "Infection and sepsis" }
+          - { key: "C", text: "Collagen vascular diseases" }
+          - { key: "G", text: "Granuloma formation" }
+          - { key: "I", text: "Inflammatory bowel disease" }
+        hook: |
+          الكبد **CHIC** ولابس **GI**: الـ 6 مجموعات اللي بتجرّه في أمراضها.
+      - kind: explain
+        page: 253
+        title: "التلات اتجاهات"
+        text: |
+          - **القلب بيعمل مرض كبد:** heart failure → **hypoxic hepatopathy** و **congestive hepatopathy**.
+          - **الكبد بيعمل مرض قلب:** cirrhosis → **cirrhotic cardiomyopathy**؛ و NAFLD → cardiovascular disease و ventricular dysfunction.
+          - **حاجات بتضرب الاتنين:** chronic alcoholism، infections (HCV، HIV، CMV، malaria، dengue، amebiasis، sepsis)، و systemic diseases (sarcoidosis، SLE، Graves، **hemochromatosis**، Wilson، **amyloidosis**).
+      - kind: figure
+        page: 254
+        title: "Forward ولا backward؟"
+        alt: "Two stacked panels. Top, acute heart failure: forward failure, arterial inflow to the liver drops sharply, causing hypoxic hepatopathy with a transaminase spike. Bottom, chronic heart failure: backward failure, raised systemic venous pressure congests the hepatic veins, causing congestive hepatopathy with a cholestatic pattern of raised GGT, ALP and bilirubin."
+        caption: "فوق: **acute HF**: الدم الداخل بيقل → **hypoxic**. تحت: **chronic HF**: الدم الخارج متزنّق → **congestive**، والـ labs **cholestatic**."
+        svg: |
+          <svg viewBox="0 0 330 470" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L14a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-bad"/></marker>
+              <marker id="L14b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-acc"/></marker>
+            </defs>
+            <rect x="5" y="6" width="320" height="214" rx="8" class="fg-bad"/>
+            <text x="14" y="28" class="t-b t-bad">Acute HF: forward failure</text>
+            <path d="M120 70q50-30 110-6q24 18 0 40q-60 26-110 6q-24-18 0-40z" class="fg-box"/>
+            <text x="175" y="92" text-anchor="middle" class="t-sm t-b">Liver</text>
+            <path d="M150 156v-30" class="fg-arrow-bad" style="stroke-width:1.2;stroke-dasharray:3 3" marker-end="url(#L14a)"/>
+            <text x="138" y="146" text-anchor="end" class="t-sm">Arterial inflow</text>
+            <text x="138" y="160" text-anchor="end" class="t-sm t-bad t-b">↓↓↓</text>
+            <text x="14" y="184" class="t-sm t-b">→ Hypoxic hepatopathy: transaminases spike</text>
+            <text x="14" y="196" class="t-sm t-mut">Hypoperfusion predominates in acute HF</text>
+            <rect x="5" y="236" width="320" height="226" rx="8" class="fg-acc"/>
+            <text x="14" y="258" class="t-b t-acc">Chronic HF: backward failure</text>
+            <path d="M150 266v20" class="fg-arrow-acc" marker-end="url(#L14b)"/>
+            <path d="M200 266v20" class="fg-arrow-acc" marker-end="url(#L14b)"/>
+            <text x="214" y="284" class="t-sm">blood backs up</text>
+            <path d="M120 300q50-30 110-6q24 18 0 40q-60 26-110 6q-24-18 0-40z" class="fg-box"/>
+            <text x="175" y="322" text-anchor="middle" class="t-sm t-b">Liver</text>
+            <text x="14" y="278" class="t-sm">Venous</text>
+            <text x="14" y="292" class="t-sm">pressure ↑</text>
+            <text x="14" y="376" class="t-sm t-b">Congestive hepatopathy</text>
+            <text x="14" y="394" class="t-sm">Cholestatic: GGT, ALP, bilirubin ↑</text>
+            <text x="14" y="410" class="t-sm">Transaminases normal or moderate</text>
+            <text x="14" y="436" class="t-sm t-mut">Hepatojugular reflux · pulsatile liver</text>
+            <text x="14" y="452" class="t-sm t-mut">Often asymptomatic</text>
+          </svg>
+      - kind: explain
+        page: 255
+        title: "الـ congestive hepatopathy"
+        text: |
+          الـ mechanisms الأساسية: **reduced arterial perfusion** (forward failure: hypoxic) اللي بتزيد مع الـ hypoxia، و **passive congestion** (backward failure: congestive) من الـ **systemic venous pressure** العالي.
+
+          الـ congestive hepatopathy **غالبًا asymptomatic**، وأحيانًا: jaundice، ascites، **hepatomegaly مع hepatojugular reflux**، و **pulsatile liver**.
+
+          الـ labs **cholestatic** أساسًا (GGT، ALP، bilirubin)، والـ transaminases **normal أو moderate**، **إلا لو** فيه forward component شديد معاها.
+      - kind: check
+        page: 255
+        question: "A man with long-standing heart failure has tender hepatomegaly, hepatojugular reflux and raised GGT, ALP and bilirubin; transaminases are near normal. What is the likely mechanism?"
+        options:
+          - "Passive congestion (backward failure)"
+          - "Acute arterial hypoperfusion (forward failure)"
+          - "Cirrhotic cardiomyopathy"
+          - "Drug-induced autoimmune hepatitis"
+        answer: 0
+        why:
+          - "صح: chronic HF + pattern **cholestatic** + hepatojugular reflux = **congestive hepatopathy**."
+          - "الـ forward failure بيعمل **transaminase spike** في الـ **acute** HF."
+          - "دي عكس الاتجاه: الكبد هو اللي بيأذي القلب."
+          - "مفيش drug ولا pattern hepatocellular هنا."
+      - kind: explain
+        page: 256
+        title: "الـ cirrhotic cardiomyopathy"
+        text: |
+          الـ cirrhosis بتأثر على القلب **حتى من غير** مرض قلب تاني: systolic و diastolic dysfunction و electrophysiological abnormalities.
+
+          **التعريف:** clinical syndrome في الـ cirrhosis فيه **abnormal, blunted response** للـ stress (physiologic أو pathologic أو pharmacologic)، بس الـ **cardiac output والـ contractility at rest normal أو زيادة**.
+
+          - لحد **50%** من اللي بيعملوا transplant عندهم cardiac dysfunction، و **7–21%** من الوفيات بعد الـ OLT من **overt heart failure**.
+
+          **الـ criteria:**
+
+          1. **Systolic dysfunction:** blunted زيادة في الـ cardiac output مع exercise أو volume أو drugs، و/أو **resting LVEF < 55%**.
+          2. **Diastolic dysfunction.**
+          3. **Supportive:** electrophysiological abnormalities، abnormal chronotropic response، electromechanical dyssynchrony، **prolonged QT**، enlarged LA، increased myocardial mass، **BNP** و **troponins** مرتفعين.
+      - kind: aside
+        tone: analogy
+        page: 256
+        text: |
+          الـ cirrhotic cardiomyopathy زي **عربية قديمة** شغّالة كويس في الركنة (**normal at rest**)، بس أول ما تدوس بنزين على الطريق الصحراوي (**stress**: exercise، نزيف، transplant) ما بتسحبش. علشان كده بتتكشف بعد الـ TIPS أو الـ transplant.
+      - kind: check
+        page: 256
+        question: "Which finding is part of the systolic criterion for cirrhotic cardiomyopathy?"
+        options:
+          - "Resting LVEF < 55%"
+          - "Prolonged QT interval"
+          - "Raised BNP"
+          - "Low cardiac output at rest"
+        answer: 0
+        why:
+          - "صح: الـ systolic criterion = blunted response للـ stress و/أو **resting LVEF < 55%**."
+          - "الـ prolonged QT من الـ **supportive** criteria."
+          - "الـ BNP برضه **supportive**."
+          - "بالعكس: الـ cardiac output at rest **normal أو زيادة**."
+      - kind: try
+        items: [hb.L14.003, hb.L14.004, hb.L14.007, hb.L14.010]
+    recap:
+      - "لو مفيش سبب واضح للـ LFTs والمريض عنده systemic disease، عالج الـ systemic disease الأول. الـ 6 مجموعات: **CHIC GI**."
+      - "Acute HF → forward failure → hypoxic hepatopathy (transaminases)."
+      - "Chronic HF → backward failure → congestive hepatopathy (cholestatic pattern، hepatojugular reflux، pulsatile liver)."
+      - "Cirrhotic cardiomyopathy: normal at rest بس blunted مع الـ stress. Systolic (LVEF < 55%) + diastolic + supportive."
+    practice: [hb.L14.001, hb.L14.002, hb.L14.003, hb.L14.004, hb.L14.005, hb.L14.006, hb.L14.007, hb.L14.008, hb.L14.009, hb.L14.010, hb.L14.011, hb.L14.012, hb.L14.095, hb.L14.097, hb.L14.118]
+
+  # ------------------------------------------------------------------
+  - id: hb.L14.lesson2
+    title: "الروماتيزم وأدويته والكبد"
+    hook: "الـ Still's بيرفع الـ ALT، الـ vasculitis بترفع الـ ALP، والـ azathioprine عامل 3 مصايب لوحده."
+    minutes: 8
+    pages: [257, 260]
+    topics: [ctd, rheum-drugs]
+    goals:
+      - "تعرف شكل الكبد في كل collagen disease"
+      - "تفرّق lupus hepatitis عن AIH/SLE overlap"
+      - "تحفظ جدول الـ rheumatologic drugs (سؤال امتحان)"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 257
+        title: "الكبد في الـ connective tissue disease"
+        text: |
+          - **شائع** وغالبًا **asymptomatic**، بس ممكن يبقى فيه أعراض، واتوصف حتى **fulminant hepatitis**.
+          - قبل ما تقول «ده من المرض نفسه» لازم **تستبعد** drug toxicity و viral hepatitis و autoimmune liver disease.
+          - النوعين: **hepatocellular** (ALT و AST) أو **cholestatic** (ALP و GGT). الارتفاع عمومًا **mild** ومرتبط بالـ **disease activity**.
+          - **ALT أعلى حاجة في adult-onset Still's disease.**
+          - **ALP و GGT أعلى حاجة في الـ vasculitis.**
+          - **RA:** transaminases و bilirubin عادةً **normal**، بس ALP مرتفع في **18–46%** و GGT في **23–77%** (ومرتبط بالـ activity).
+      - kind: sort
+        page: 257
+        prompt: "مين بيرفع إيه أكتر؟"
+        bins: ["Highest ALT", "Highest ALP / GGT"]
+        cards:
+          - { text: "Adult-onset Still's disease", bin: 0 }
+          - { text: "Vasculitis syndrome", bin: 1 }
+          - { text: "Hepatocellular pattern", bin: 0 }
+          - { text: "Cholestatic pattern", bin: 1 }
+        why: "الـ **Still's** هو بطل الـ ALT (hepatocellular)، والـ **vasculitis** بطلة الـ ALP و GGT (cholestatic)."
+      - kind: explain
+        page: 258
+        title: "RA و SLE"
+        text: |
+          **RA ومشتقاته (Still's و Felty's):** LFTs بايظة كتير. وممكن تلاقي: PBC، autoimmune hepatitis، **nodular regenerative hyperplasia**، necrotizing arteritis، أو amyloidosis، وحتى **rheumatoid nodules** في الكبد.
+
+          **SLE:**
+
+          - Liver dysfunction في **8.6–59.7%**، و ALT مرتفع في **21%**.
+          - الأسباب مش المرض بس: drugs، fatty infiltration، و overlapping autoimmune diseases.
+          - **Lupus hepatitis:** hypertransaminasemia الـ ALT فيها **بيطلع وينزل مع نشاط الـ SLE**. غالبًا **subclinical**، fluctuating، وبتستجيب لـ prednisone (moderate لـ high) **من غير** ما توصل لـ end-stage.
+          - أشهر histology: **steatosis** (ومش لازم تكون من الـ steroids).
+          - **SLE + AIH** مع بعض **uncommon**، بس الـ AIH ممكن تعمل **fulminant failure** أو cirrhosis، فلازم تفرّق.
+      - kind: reveal
+        page: 258
+        prompt: "ليه مهم تفرّق lupus hepatitis عن AIH/SLE overlap، طالما الاتنين بيتعالجوا بـ steroids؟"
+        answer: |
+          لأن **المصير مختلف**:
+
+          - الـ **lupus hepatitis** subclinical و fluctuating، ومش بتوصل لـ end-stage liver disease.
+          - الـ **AIH** ممكن تتطور لـ **fulminant hepatic failure** أو **cirrhosis**.
+
+          يعني لو سمّيتها lupus hepatitis وهي AIH، ممكن تفوّت مرض بيمشي لقدّام.
+      - kind: explain
+        page: 259
+        title: "HPS و PAN و GCA"
+        text: |
+          - **Reactive hemophagocytic syndrome (HPS):** ممكن يموّت. مرتبط بـ neoplasms و viral infections و autoimmune diseases منها **SLE**. شكله: **high fever**، lymphadenopathy، **hepatosplenomegaly**، **pancytopenia**، LFTs عالية، **hyperferritinemia**، و coagulopathy. السبب: **sustained macrophage activation** بعد cytokines زي **IL-6** و **TNF-α**.
+          - **Polyarteritis nodosa:** necrotizing arteritis في الكبد → **infarction**.
+          - **Polymyalgia rheumatica–giant cell arteritis:** **granulomatous arteritis** في الكبد.
+      - kind: table
+        page: 259
+        title: "الأدوية والكبد (سؤال امتحان مباشر)"
+        columns: ["Hepatotoxic effect", "Drugs"]
+        rows:
+          - ["Acute DILI: hepatocellular", "NSAIDs (diclofenac, sulindac, ibuprofen, ketoprofen, indomethacin); sulfasalazine, leflunomide"]
+          - ["Acute DILI: cholestatic", "NSAIDs (sulindac, ibuprofen, piroxicam, naproxen, celecoxib); sulfasalazine, azathioprine"]
+          - ["Nonalcoholic fatty liver", "Methotrexate"]
+          - ["Ductopenic (vanishing bile duct) syndrome", "Azathioprine, gold salts"]
+          - ["Nodular regenerative hyperplasia", "Azathioprine"]
+          - ["Drug-induced AIH", "Infliximab, diclofenac, indomethacin"]
+        hide: [[2, 1], [3, 1], [4, 1], [5, 1]]
+      - kind: mnemonic
+        page: 259
+        word: "AZA"
+        parts:
+          - { key: "A", text: "Acute cholestatic DILI" }
+          - { key: "Z", text: "Zero bile ducts: ductopenic (vanishing bile duct) syndrome, with gold salts" }
+          - { key: "A", text: "Adds nodules: nodular regenerative hyperplasia" }
+        hook: |
+          الـ **AZA** اسمه بيحكي مصايبه التلاتة في الكبد: **A**cute cholestasis، **Z**ero ducts، و **A**dds nodules (NRH). ولو المريض جالك بـ portal hypertension من غير cirrhosis وهو على AZA، افتكر الـ NRH.
+      - kind: check
+        page: 259
+        question: "Which rheumatologic drug is linked in the book to drug-induced autoimmune hepatitis?"
+        options:
+          - "Infliximab"
+          - "Methotrexate"
+          - "Gold salts"
+          - "Leflunomide"
+        answer: 0
+        why:
+          - "صح: الكتاب: **infliximab، diclofenac، indomethacin**."
+          - "الـ methotrexate = **nonalcoholic fatty liver**."
+          - "الـ gold salts = **ductopenic syndrome** (مع الـ azathioprine)."
+          - "الـ leflunomide = acute **hepatocellular** DILI."
+      - kind: aside
+        tone: joke
+        page: 259
+        text: |
+          الـ **diclofenac** واخد دور في كل مشهد: hepatocellular DILI **و** drug-induced AIH. زي الممثل اللي بيظهر في كل مسلسلات رمضان. افتكره في الخانتين. 😄
+      - kind: try
+        items: [hb.L14.014, hb.L14.019, hb.L14.026, hb.L14.028]
+    recap:
+      - "CTD: الكبد غالبًا asymptomatic؛ استبعد drugs و viral و AIH الأول."
+      - "ALT أعلى في Still's، ALP/GGT أعلى في الـ vasculitis. RA: ALP 18–46%، GGT 23–77%."
+      - "Lupus hepatitis: ALT مع الـ activity، subclinical، بتستجيب للـ prednisone. أشهر histology في SLE: steatosis."
+      - "HPS: fever + hepatosplenomegaly + pancytopenia + ferritin عالي (IL-6، TNF-α)."
+      - "MTX → fatty liver. AZA → cholestasis، ductopenia، NRH. Infliximab/diclofenac/indomethacin → drug-induced AIH."
+    practice: [hb.L14.013, hb.L14.014, hb.L14.015, hb.L14.016, hb.L14.017, hb.L14.018, hb.L14.019, hb.L14.020, hb.L14.021, hb.L14.022, hb.L14.023, hb.L14.024, hb.L14.025, hb.L14.026, hb.L14.027, hb.L14.028, hb.L14.029, hb.L14.030, hb.L14.098, hb.L14.099, hb.L14.100, hb.L14.101, hb.L14.119]
+
+  # ------------------------------------------------------------------
+  - id: hb.L14.lesson3
+    title: "الدم، الـ sepsis، الـ IBD، والـ granulomas"
+    hook: "ALT بـ 4000 بعد shock، bilirubin بيطلع ببطء في الـ ICU، و granuloma بتقولك «I'm fine» والـ ALP عالي."
+    minutes: 10
+    pages: [260, 266]
+    topics: [ctd, heme, sepsis, ibd, granuloma]
+    goals:
+      - "تعرف إزاي أمراض الدم وعلاجها بيأذوا الكبد"
+      - "تفرّق hypoxic hepatitis عن cholestatic liver dysfunction في الـ ICU"
+      - "تعرف الكبد في الـ IBD"
+      - "تعدّ الـ 5 categories بتوع الـ hepatic granulomas"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 260
+        title: "الكبد في أمراض الدم"
+        text: |
+          - في الـ liver failure الـ coagulation كلها متلخبطة: الـ **bleeding risk** من الـ **hemodynamic changes** (portal pressure و venous congestion)، والـ **thrombotic risk** من تغيّرات الـ **coagulation system**.
+          - أمراض الدم بتبان في الكبد بـ: LFTs بايظة، imaging بايظ، أو أعراض كبدية.
+          - **Hematologic malignancies:** الخلايا بتدخل الكبد → LFTs + hepatosplenomegaly أو nodules، وممكن fulminant failure.
+          - **العلاج نفسه بيأذي:** **iron overload** من نقل الدم المتكرر، **HBV reactivation** (fatal بس preventable) مع الـ chemo/immunosuppression، و **VOD (SOS)** بعد الـ hematopoietic cell transplant.
+          - **ALP و LDH** بيعلوا كتير، بس الـ imaging (scintigraphy، US، CT، MRI) ممكن ما يبيّنش. وفي الـ lymphoma فيه sinusoidal infiltration و granulomas و nodules، فممكن تحتاج **peritoneoscopy**.
+          - **Liver involvement بيتفترض** لو: كبد كبير + ALP أو LDH عالي + CRP أو ESR عالي.
+      - kind: explain
+        page: 262
+        title: "Extramedullary hemopoiesis"
+        text: |
+          - في الجنين والـ neonate **طبيعي**، في الكبير **pathological**.
+          - **Causes:** **aplastic anemia** و **marrow replacement**: myeloproliferative disease، osteomyelofibrosis، myelomatosis، marrow carcinomatosis، osteopetrosis.
+          - Hepatomegaly و **massive splenomegaly** و portal hypertension مع ascites. والـ **NRH** بعد انسداد فروع الـ portal vein جوه الكبد بتزوّد الـ portal hypertension.
+      - kind: aside
+        tone: analogy
+        page: 262
+        text: |
+          الـ EMH زي **مصنع اتقفل** (النخاع) فالعمّال راحوا يشتغلوا في **بيت العيلة القديم** (الكبد والطحال، اللي كانوا بيعملوا دم أيام الجنين). البيت يتزحم ويكبر، والدوشة توصل للـ portal vein.
+      - kind: explain
+        page: 262
+        title: "الـ sepsis والـ ICU"
+        text: |
+          الـ sepsis بيأذي الكبد بـ: **infection** مباشرة، أو **circulating toxins** والـ inflammatory/immune response، أو **ischemia** من الـ septic shock، أو مزيج. والـ lesions: abscess، cholangitis، **pylephlebitis**، vasculitis، granulomas، necrosis.
+
+          الكبد ليه دورين في الـ critical illness: **clearance** للميكروبات والـ toxins، و **acute phase reaction** (cytokines، mediators، coagulation factors). ولو الـ clearance ضعفت، الـ endotoxin بيـ «spillover» ويساعد في الـ **multiple organ failure**.
+
+          الـ liver dysfunction الجديد في الـ ICU نوعين: **hypoxic (ischemic) hepatitis** و **cholestatic liver dysfunction**.
+      - kind: table
+        page: 263
+        title: "HH ولا CLD؟"
+        columns: ["", "Hypoxic hepatitis (HH)", "Cholestatic liver dysfunction (CLD)"]
+        rows:
+          - ["Setting", "Cardiac, respiratory or circulatory failure", "Critical illness, days after ICU admission"]
+          - ["Onset", "Abrupt", "Insidious, progressive"]
+          - ["Labs", "Transaminases ≥ 20× ULN, very short-lived", "Bilirubin > 2–3 mg/dL; ALP and GGT 2–3× normal"]
+          - ["Then", "Coagulopathy; jaundice in a minority = worse outcome", "Rising bilirubin, ALP, GGT"]
+          - ["Key step", "Exclude viral and drug-induced necrosis", "Look for sepsis, parenteral nutrition, hyperglycemia, drugs"]
+        hide: [[1, 1], [1, 2], [2, 1], [2, 2]]
+      - kind: check
+        page: 263
+        question: "A 65-year-old in cardiogenic shock after an MI has ALT 4200 U/L on day 2. Viral markers are negative and no new drugs were given. What is the diagnosis?"
+        options:
+          - "Hypoxic (ischemic) hepatitis"
+          - "Cholestatic liver dysfunction of critical illness"
+          - "Acute viral hepatitis"
+          - "Congestive hepatopathy"
+        answer: 0
+        why:
+          - "صح: الـ triad: **circulatory failure** + ارتفاع مفاجئ **≥ 20× ULN** + استبعاد viral و drugs."
+          - "الـ CLD **insidious** وأيام بعد الدخول، والـ pattern **cholestatic**."
+          - "الـ viral markers سالبة، والاستبعاد جزء من الـ triad."
+          - "الـ congestive pattern **cholestatic** والـ transaminases normal أو moderate."
+      - kind: explain
+        page: 264
+        title: "ليه الـ sepsis بيعمل cholestasis؟"
+        text: |
+          - الـ CLD من **critical illness–induced alteration of hepatobiliary transport**.
+          - **Risk factors:** **sepsis** (endotoxemia + cytokines)، **parenteral nutrition**، **hyperglycemia**، و drug-induced cholestasis فوقهم.
+          - الـ cholestasis بتحصل مع **gram-negative** (E. coli، Klebsiella) **أو gram-positive** (S. aureus).
+          - الـ **TNF-α** و **IL-6** و **nitric oxide** بيـ **inhibit canalicular excretion of conjugated bilirubin**.
+      - kind: explain
+        page: 264
+        title: "الكبد في الـ IBD"
+        text: |
+          - الأمراض المصاحبة للـ UC و Crohn's: **fatty liver**، **PSC**، chronic hepatitis، cirrhosis، و hepatobiliary disease.
+          - **Steatosis** هي أشهر histology (لحد **50%**). الشديدة منها من **malnutrition** و **anemia** و **toxemia**، وممكن **تفضل بعد الـ colectomy**.
+          - Fatty change بتظهر كمان في الـ ileostomy، وبتزيد مع الـ **IV high-calorie nutrition**. فتجنّب الـ long-term high-calorie IV infusion والـ high-fat diet.
+      - kind: check
+        page: 264
+        question: "What is the most common liver histological abnormality in inflammatory bowel disease?"
+        options:
+          - "Steatosis"
+          - "Primary sclerosing cholangitis"
+          - "Granulomatous hepatitis"
+          - "Cirrhosis"
+        answer: 0
+        why:
+          - "صح: الـ **steatosis** لحد **50%**، من الـ malnutrition والـ anemia والـ toxemia."
+          - "الـ PSC أشهر **association** مهم، بس مش أشهر histology."
+          - "الـ granulomas مش في قايمة أمراض الـ IBD في الكتاب."
+          - "الـ cirrhosis في القايمة، بس أقل بكتير."
+      - kind: mnemonic
+        page: 265
+        word: "IMFIN"
+        parts:
+          - { key: "I", text: "Immunological: sarcoidosis, PBC, giant cell arteritis, Wegener's, chronic granulomatous disease, allergic granulomatosis" }
+          - { key: "M", text: "Medications: penicillins, diphenylhydantoin, allopurinol" }
+          - { key: "F", text: "Foreign body: beryllium, suture material" }
+          - { key: "I", text: "Infectious: viral (HCV, CMV, EBV, Q fever, syphilis), bacterial (TB, MAI in HIV, brucella, typhoid, Whipple's, leprosy, cat-scratch, tularaemia), fungal, parasitic (toxoplasma, schistosoma)" }
+          - { key: "N", text: "Neoplastic: Hodgkin's disease, renal cell carcinoma" }
+        hook: |
+          الـ granuloma دايمًا بتقول «**I'M FINe**»... بس الـ **ALP** عالي (أكثر test بيبوظ باستمرار) والكبد كبير. الـ 5 حروف = الـ 5 etiological categories.
+      - kind: sort
+        page: 265
+        prompt: "حط كل سبب granuloma في الـ category بتاعته:"
+        bins: ["Immunological", "Infectious", "Medication", "Neoplastic / foreign body"]
+        cards:
+          - { text: "Sarcoidosis", bin: 0 }
+          - { text: "Primary biliary cholangitis", bin: 0 }
+          - { text: "Brucellosis", bin: 1 }
+          - { text: "Schistosomiasis", bin: 1 }
+          - { text: "Q fever", bin: 1 }
+          - { text: "Allopurinol", bin: 2 }
+          - { text: "Diphenylhydantoin", bin: 2 }
+          - { text: "Hodgkin's disease", bin: 3 }
+          - { text: "Beryllium", bin: 3 }
+        why: "Immunological: sarcoid و PBC. Infectious: brucella (bacterial)، schistosoma (parasitic)، Q fever (الكتاب حاططها مع الـ viral). Medications: allopurinol و phenytoin و penicillins. Neoplastic: Hodgkin و RCC. Foreign body: beryllium و suture material."
+      - kind: aside
+        tone: tip
+        page: 265
+        text: |
+          لينا في مصر: **schistosomiasis** و **brucellosis** و **TB** أسباب granuloma هتشوفها في الـ ward فعلًا، مش بس في الكتاب. ولو المريض عنده HIV، فكّر في **Mycobacterium avium-intracellulare**.
+      - kind: try
+        items: [hb.L14.044, hb.L14.045, hb.L14.050, hb.L14.052, hb.L14.056]
+    recap:
+      - "Liver disease: bleeding من الـ hemodynamics، thrombosis من الـ coagulation."
+      - "علاج أمراض الدم: iron overload، HBV reactivation، و SOS بعد الـ HCT. Liver involvement = كبد كبير + ALP/LDH + CRP/ESR."
+      - "EMH في الكبير pathological: aplastic anemia و marrow replacement."
+      - "HH: shock + ≥ 20× ULN مفاجئ + استبعاد. CLD: insidious، bilirubin > 2–3، ALP/GGT 2–3×؛ TNF-α و IL-6 و NO بيوقفوا الـ canalicular excretion."
+      - "IBD: steatosis الأشهر (لحد 50%)، وممكن تفضل بعد الـ colectomy."
+      - "Granulomas: ALP عالي، والأسباب **I'M FIN**."
+    practice: [hb.L14.031, hb.L14.032, hb.L14.033, hb.L14.034, hb.L14.035, hb.L14.036, hb.L14.037, hb.L14.038, hb.L14.039, hb.L14.040, hb.L14.041, hb.L14.042, hb.L14.043, hb.L14.044, hb.L14.045, hb.L14.046, hb.L14.047, hb.L14.048, hb.L14.049, hb.L14.050, hb.L14.051, hb.L14.052, hb.L14.053, hb.L14.054, hb.L14.055, hb.L14.056, hb.L14.057, hb.L14.058, hb.L14.059, hb.L14.096, hb.L14.102, hb.L14.103, hb.L14.104, hb.L14.117, hb.L14.120]
+
+  # ------------------------------------------------------------------
+  - id: hb.L14.lesson4
+    title: "الحمل والكبد: الزمن هو التشخيص"
+    hook: "قولّي هي في أنهي أسبوع، أقولك غالبًا عندها إيه. خمس أمراض على خط زمني واحد."
+    minutes: 10
+    pages: [266, 269]
+    topics: [preg-general, preg-unique]
+    goals:
+      - "تصنّف أمراض الكبد في الحمل"
+      - "تعرف إيه الطبيعي في الحمل وإيه لأ"
+      - "ترتّب الـ 5 أمراض الخاصة بالحمل على الخط الزمني"
+      - "تفرّق HELLP عن AFLP عن ICP"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 266
+        title: "التقسيمة"
+        text: |
+          - **Unique to pregnancy (3%):** hyperemesis gravidarum، intrahepatic cholestasis of pregnancy، acute fatty liver of pregnancy، و hypertension-related (pre-eclampsia/eclampsia، HELLP، liver infarction/rupture).
+          - **Non pregnancy-related:**
+            - **Pre-existing:** viral، cirrhosis و portal hypertension، post-transplant، autoimmune.
+            - **Coincident:** autoimmune، viral، drug-induced، vascular (Budd-Chiari).
+      - kind: explain
+        page: 266
+        title: "إيه الطبيعي في الحمل؟"
+        text: |
+          - **Palmar erythema** و **spider angiomas** شائعين في الحمل، ووجودهم **مش معناه** chronic liver disease.
+          - **ALP** ممكن يعلى في الـ **third trimester** من **الـ placenta**.
+          - لكن **أي ارتفاع** في الـ **aminotransferases** أو الـ **bilirubin** أو الـ **PT/INR** = **abnormal** ولازم يتفحص.
+
+          **Imaging:**
+
+          - **Ultrasound** آمن وهو الـ **preferred**، خصوصًا لو الشك biliary.
+          - **MRI من غير gadolinium** في الـ second و third trimester.
+          - **CT** فيه risk teratogenesis و childhood hematologic malignancy، بس ممكن بحذر بـ protocol إشعاع قليل (**2–5 rads**).
+          - الـ **liver biopsy** نادرًا ما بنحتاجها.
+      - kind: check
+        page: 266
+        question: "A woman at 34 weeks has ALP twice the upper limit, with normal ALT, bilirubin and INR. What is the best interpretation?"
+        options:
+          - "Likely placental ALP, normal for the third trimester"
+          - "Intrahepatic cholestasis of pregnancy until proven otherwise"
+          - "Early acute fatty liver of pregnancy"
+          - "HELLP syndrome"
+        answer: 0
+        why:
+          - "صح: الـ ALP بيعلى في الـ third trimester من الـ **placenta**، والباقي سليم."
+          - "الـ ICP فيها **pruritus** و **serum bile acids** عالية و transaminases، ومفيش هنا حاجة من دول."
+          - "الـ AFLP فيها transaminases عالية جدًا و bilirubin و hypoglycemia."
+          - "الـ HELLP فيها **AST > 70** و LDH و platelets واطية."
+      - kind: figure
+        page: 268
+        title: "الخط الزمني"
+        alt: "A timeline of pregnancy from week 0 to after delivery, with five bars. Hyperemesis gravidarum from the first trimester to 20 weeks. Intrahepatic cholestasis of pregnancy in the late second and third trimester. Pre-eclampsia after 20 weeks. HELLP in the third trimester to the first week postpartum. Acute fatty liver of pregnancy in the third trimester."
+        caption: "الـ **HG** بس في البداية. بعد 20 أسبوع يبدأ الـ **pre-eclampsia**، و **ICP** آخر التاني والتالت، و **HELLP** و **AFLP** في التالت (والـ HELLP ممكن بعد الولادة بأسبوع)."
+        svg: |
+          <svg viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 40h300" class="fg-ink" stroke-width="2"/>
+            <path d="M10 34v12M100 34v12M190 34v12M280 34v12" class="fg-ink"/>
+            <text x="55" y="26" text-anchor="middle" class="t-sm t-b">T1</text>
+            <text x="145" y="26" text-anchor="middle" class="t-sm t-b">T2</text>
+            <text x="235" y="26" text-anchor="middle" class="t-sm t-b">T3</text>
+            <text x="300" y="26" text-anchor="middle" class="t-sm t-mut">post</text>
+            <text x="10" y="62" class="t-sm t-mut">0</text>
+            <text x="129" y="62" class="t-sm t-mut">20 wk</text>
+            <path d="M145 46v244" class="fg-thin"/>
+            <rect x="10" y="78" width="135" height="30" rx="6" class="fg-good"/>
+            <text x="18" y="98" class="t-sm t-b">Hyperemesis gravidarum</text>
+            <rect x="160" y="122" width="120" height="30" rx="6" class="fg-acc"/>
+            <text x="166" y="142" class="t-sm t-b">ICP</text>
+            <text x="190" y="142" class="t-sm">late T2 + T3</text>
+            <rect x="145" y="166" width="135" height="30" rx="6" class="fg-bad"/>
+            <text x="152" y="186" class="t-sm t-b">Pre-eclampsia &gt; 20 wk</text>
+            <rect x="190" y="210" width="125" height="30" rx="6" class="fg-bad"/>
+            <text x="198" y="230" class="t-sm t-b">HELLP</text>
+            <text x="244" y="230" class="t-sm">+1 wk pp</text>
+            <rect x="190" y="254" width="90" height="30" rx="6" class="fg-acc"/>
+            <text x="198" y="274" class="t-sm t-b">AFLP</text>
+            <text x="10" y="312" class="t-sm t-mut">After the book's table, page 268</text>
+          </svg>
+      - kind: sort
+        page: 268
+        prompt: "حامل في الأسبوع 10 ولا 35؟ حط كل مرض في وقته المعتاد:"
+        bins: ["First half (≤ 20 weeks)", "Third trimester"]
+        cards:
+          - { text: "Hyperemesis gravidarum", bin: 0 }
+          - { text: "Acute fatty liver of pregnancy", bin: 1 }
+          - { text: "HELLP syndrome", bin: 1 }
+          - { text: "Intrahepatic cholestasis of pregnancy", bin: 1 }
+        why: "الـ HG من الـ first trimester لحد 20 أسبوع. الـ AFLP في التالت، والـ HELLP من التالت لحد أسبوع بعد الولادة، والـ ICP آخر التاني والتالت."
+      - kind: table
+        page: 268
+        title: "الـ 5 أمراض في جدول واحد"
+        columns: ["", "Clue", "Labs", "Management"]
+        rows:
+          - ["HG", "Vomiting, dehydration, thiamine deficiency", "Mild AST/ALT rise", "Supportive, hydration"]
+          - ["ICP", "Pruritus, mild jaundice", "Serum bile acids ↑, mild transaminase rise", "UDCA 10–15 mg/kg; deliver at 37 weeks"]
+          - ["Pre-eclampsia", "High BP, proteinuria, edema, seizures", "AST/ALT can be striking", "Severe after 36 weeks: deliver promptly"]
+          - ["HELLP", "Malaise, nausea, high BP, proteinuria", "AST > 70, LDH > 600, platelets < 100,000", "Delivery after 34 weeks"]
+          - ["AFLP", "Jaundice, encephalopathy, hypoglycemia", "Severe transaminase rise, ammonia ↑, bilirubin ↑", "Prompt delivery; liver transplant"]
+        hide: [[1, 2], [1, 3], [3, 2], [4, 1], [4, 3]]
+      - kind: mnemonic
+        page: 268
+        word: "AFLP"
+        parts:
+          - { key: "A", text: "Ammonia high, with encephalopathy" }
+          - { key: "F", text: "Fat: microvesicular fatty infiltration" }
+          - { key: "L", text: "LCHAD mutation (fetal genetic); recurrence higher with it" }
+          - { key: "P", text: "Prompt delivery, liver transplant if needed; hypoglycemia is the clue" }
+        hook: |
+          اسمه بيحكي قصته: **A**mmonia، **F**at، **L**CHAD، **P**rompt delivery. ولو لقيت حامل في التالت عندها **jaundice + hypoglycemia + confusion**، ده AFLP لحد ما يثبت العكس.
+      - kind: case
+        stem: "A 26-year-old at 30 weeks has BP 160/105 and proteinuria. AST is 180 U/L, LDH 900 U/L and platelets 80,000."
+        steps:
+          - question: "What is the diagnosis?"
+            options:
+              - "HELLP syndrome"
+              - "Acute fatty liver of pregnancy"
+              - "Intrahepatic cholestasis of pregnancy"
+            answer: 0
+            why: "الـ thresholds بتاعة الكتاب: **AST > 70**، **LDH > 600**، **platelets < 100,000**، ومع pre-eclampsia picture. وده **hemolysis + elevated liver enzymes + low platelets**."
+          - reveal: "Shared pathogenesis with pre-eclampsia."
+            question: "What does the book give as the pathogenesis?"
+            answer: null
+            why: "**Capillary thrombi**، **fibrin deposition**، **endothelial injury**، و **coagulation activation**."
+          - reveal: "Two days later she has severe right upper quadrant pain, fever and AST 2500 U/L."
+            question: "What must you suspect, and how is it confirmed?"
+            options:
+              - "Parenchymal hemorrhage or subcapsular hematoma; CT or MRI"
+              - "Acute viral hepatitis; serology only"
+              - "Normal HELLP course; no imaging"
+            answer: 0
+            why: "الكتاب: pain + fever + ALT/AST **> 1000** = شك في **hepatic hemorrhage / subcapsular hematoma**؛ والـ **infarction** برضه complication نادرة للـ HELLP. التشخيص بـ **cross-sectional CT أو MRI**. العلاج: supportive، angiographic embolization، أو surgery."
+      - kind: aside
+        tone: exam
+        page: 268
+        text: |
+          الـ **ICP** بيتسأل من رقمين: **UDCA 10–15 mg/kg** و **delivery at 37 weeks**. والـ clue الأساسي **pruritus** (palms و soles، من غير rash) مع **serum bile acids** عالية.
+
+          والـ **HELLP**: «**70 / 600 / 100,000**».
+      - kind: try
+        items: [hb.L14.065, hb.L14.068, hb.L14.069, hb.L14.073, hb.L14.062]
+    recap:
+      - "Spider angiomas و palmar erythema طبيعيين في الحمل؛ ALP عالي في التالت من الـ placenta. أي ارتفاع في الـ transaminases أو bilirubin أو INR = abnormal."
+      - "US الأول؛ MRI من غير gadolinium في التاني والتالت؛ CT بحذر (2–5 rads)."
+      - "HG ≤ 20 wk؛ ICP آخر التاني والتالت؛ pre-eclampsia > 20 wk؛ HELLP التالت لحد أسبوع بعد الولادة؛ AFLP التالت."
+      - "ICP: bile acids، UDCA 10–15 mg/kg، deliver 37 wk. HELLP: 70/600/100,000، deliver بعد 34 wk."
+      - "AFLP: microvesicular fat، LCHAD، hypoglycemia، ammonia → prompt delivery."
+    practice: [hb.L14.060, hb.L14.061, hb.L14.062, hb.L14.063, hb.L14.064, hb.L14.065, hb.L14.066, hb.L14.067, hb.L14.068, hb.L14.069, hb.L14.070, hb.L14.071, hb.L14.072, hb.L14.073, hb.L14.074, hb.L14.075, hb.L14.076, hb.L14.077, hb.L14.078, hb.L14.105, hb.L14.106, hb.L14.107, hb.L14.108, hb.L14.109, hb.L14.113, hb.L14.114, hb.L14.115, hb.L14.121]
+
+  # ------------------------------------------------------------------
+  - id: hb.L14.lesson5
+    title: "حامل ومعاها مرض كبد قديم"
+    hook: "cirrhosis، HBV، HCV، AIH، أو transplant: إيه يكمل وإيه يتوقف وإمتى تعمل منظار."
+    minutes: 9
+    pages: [269, 273]
+    topics: [preg-coincident, preg-lt]
+    goals:
+      - "تعرف تعمل إيه في acute hepatitis و Budd-Chiari أثناء الحمل"
+      - "تمشي screening الـ varices للـ cirrhotic اللي عايزة تحمل"
+      - "تعرف prevention الـ HBV و HCV vertical transmission"
+      - "تعرف القواعد بعد الـ liver transplant"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 269
+        title: "Coincident: viral و Budd-Chiari"
+        text: |
+          - **Acute hepatitis في الحمل:** افحص HAV، HBV، **HEV**، و **herpes simplex**. ولو شاكك في **HSV**: ابدأ **acyclovir**.
+          - **Budd-Chiari:** hepatic venous outflow obstruction. Risk factors: trauma، hypercoagulable states، myeloproliferative disorders، OCPs، و **pregnancy**. بيظهر بـ **abdominal pain و hepatomegaly و ascites**، و **Doppler ultrasound** كفاية في أغلب الحالات.
+      - kind: explain
+        page: 270
+        title: "Cirrhosis و portal hypertension"
+        text: |
+          - الحمل مع الـ cirrhosis **uncommon** (عوامل metabolic و endocrine).
+          - التحديات: **decompensation**، **encephalopathy**، و portal hypertension أوحش.
+          - الـ fetal risks: spontaneous abortion، premature birth، stillbirth.
+          - **Variceal bleeding** في **18–32%**، وأكتر وقت في **الـ second trimester والـ delivery**.
+          - الـ bleeding بيتعالج **زي غير الحامل**: band ligation، أو **TIPS** لو لازم.
+      - kind: reveal
+        page: 270
+        prompt: "ليه الخطر الأكبر للنزيف في الـ second trimester والولادة؟"
+        answer: |
+          الكتاب بيدّي التوقيت بس. السبب الفسيولوجي المعروف: الـ **blood volume** بيزيد بسرعة ويوصل لقمته في التاني، والرحم الكبير بيضغط على الـ IVC فيزوّد الـ collateral flow، والـ **straining** في الولادة بيرفع الـ portal pressure فجأة.
+      - kind: order
+        page: 270
+        prompt: "رتّب خطوات واحدة عندها compensated cirrhosis وعايزة تحمل:"
+        steps:
+          - "Optimize her medically and control portal hypertension before pregnancy"
+          - "Screening EGD for oesophageal varices"
+          - "No varices: repeat EGD in the second trimester"
+          - "Medium or large varices: band ligation"
+        why: "الكتاب: optimize قبل الحمل → EGD screening → لو مفيش varices **كرّر في الـ second trimester** → الـ **band ligation** treatment of choice للـ medium/large varices. ولو محتاجة beta blocker: **propranolol** هو المفضّل، والـ prophylactic TIPS مالوش data."
+      - kind: check
+        page: 271
+        question: "When indicated, which non-selective beta blocker is preferred during pregnancy?"
+        options:
+          - "Propranolol"
+          - "Carvedilol"
+          - "Atenolol"
+          - "Nadolol"
+        answer: 0
+        why:
+          - "صح: الكتاب: **propranolol is the preferred non selective beta blocker** في الحمل."
+          - "الكتاب ما ذكرش الـ carvedilol في الحمل."
+          - "الـ atenolol أصلًا **selective**، مش NSBB."
+          - "الكتاب ما ذكرهوش؛ الإجابة propranolol."
+      - kind: explain
+        page: 271
+        title: "HBV و HCV"
+        text: |
+          **HBV:**
+
+          - **كل** الأطفال المولودين لأم HBV-infected: **HBIG + HBV vaccine** (active–passive immunoprophylaxis).
+          - الأم بـ **viral load > 200,000 IU/mL**: antiviral في الـ **third trimester**: **tenofovir** أو telbivudine.
+
+          **HCV:**
+
+          - افحص بـ **anti-HCV** الحوامل اللي **عندهم risk factors**.
+          - قلّل **invasive procedures** (amniocentesis، invasive fetal monitoring).
+          - **متدّيش** HCV treatment أثناء الحمل.
+      - kind: update
+        ref: "AASLD HBV guidance 2018; CDC HCV screening 2020"
+        text: |
+          - الـ **telbivudine** مبقاش بيُستخدم، والـ **tenofovir disoproxil (TDF)** هو المفضّل (AASLD 2018).
+          - الـ CDC (2020) بقت توصي بـ HCV screening **لكل حامل في كل حمل**، مش بس اللي عندهم risk factors.
+
+          في الامتحان: إجابة الكتاب.
+      - kind: explain
+        page: 271
+        title: "AIH و PBC و Wilson: كمّل"
+        text: |
+          - **AIH:** كمّل **corticosteroids و/أو azathioprine**.
+          - **PBC:** كمّل **UDCA**.
+          - **Wilson:** كمّل penicillamine أو trientine أو zinc، **مع تقليل الجرعة لو ممكن**.
+      - kind: aside
+        tone: trap
+        page: 271
+        text: |
+          الفخ إنك توقف العلاج «علشان الجنين». الكتاب بيقول **continue** في الـ AIH والـ PBC والـ Wilson. وقف الدوا ممكن يعمل flare أو decompensation، وده أخطر على الأم والجنين من الدوا.
+      - kind: explain
+        page: 272
+        title: "الحمل بعد الـ transplant"
+        text: |
+          - الـ **fertility** بترجع غالبًا خلال **سنة**.
+          - الحمل **مش recommended في أول سنة** بسبب **acute cellular rejection**.
+          - التخطيط مع فريق الـ transplant و maternal-fetal medicine.
+          - الـ **preconception renal function** بتتنبأ بالنتيجة.
+          - النتيجة كويسة، بس فيه زيادة في **preterm delivery**، **low birth weight**، **hypertension**، و **pre-eclampsia**.
+          - **Tacrolimus monotherapy** هو الـ ideal. البدائل: cyclosporine، azathioprine، prednisone.
+          - **Mycophenolate: avoid** (congenital malformations).
+          - **Monitoring** للـ graft و الـ CNI levels: كل **4 أسابيع** لحد 32، كل **أسبوعين** لحد 36، وبعدين **كل أسبوع** لحد الولادة.
+      - kind: check
+        page: 272
+        question: "A 28-year-old woman 8 months after liver transplant takes tacrolimus and mycophenolate and wants to conceive now. What is the best advice?"
+        options:
+          - "Wait until a year after transplant and stop mycophenolate before conception"
+          - "Conceive now; continue both drugs"
+          - "Conceive now; switch tacrolimus to mycophenolate alone"
+          - "Pregnancy is contraindicated after liver transplant"
+        answer: 0
+        why:
+          - "صح: مفيش حمل في **أول سنة** (rejection)، والـ **mycophenolate** لازم يتشال (malformations)، و tacrolimus monotherapy هو الـ ideal."
+          - "8 شهور لسه جوه السنة الأولى، والـ mycophenolate ممنوع."
+          - "بالعكس: الـ mycophenolate هو اللي يتشال."
+          - "غلط: الحمل **feasible** بعد الـ LT بنتايج كويسة."
+      - kind: aside
+        tone: joke
+        page: 272
+        text: |
+          الكبد الجديد عايز **سنة خطوبة** الأول قبل ما يدخل في حمل. 😄 وبعدها الـ tacrolimus يبقى المأذون الوحيد المسموح، والـ mycophenolate بره القاعة.
+      - kind: try
+        items: [hb.L14.081, hb.L14.084, hb.L14.088, hb.L14.090, hb.L14.093]
+    recap:
+      - "Acute hepatitis في الحمل: HAV، HBV، HEV، HSV؛ شك في HSV → acyclovir. BCS: Doppler US كفاية غالبًا."
+      - "Cirrhosis: varices تنزف في 18–32%، أكتر في التاني والولادة. EGD قبل الحمل، ولو سليم كرّر في التاني؛ banding للـ medium/large؛ propranolol المفضّل."
+      - "HBV: HBIG + vaccine لكل طفل؛ > 200,000 IU/mL → tenofovir في التالت. HCV: قلّل الـ invasive procedures ومفيش علاج أثناء الحمل."
+      - "AIH و PBC و Wilson: كمّل العلاج."
+      - "بعد الـ LT: استنى سنة، tacrolimus monotherapy، ممنوع mycophenolate، monitoring 4 ثم 2 ثم 1 أسبوع."
+    practice: [hb.L14.079, hb.L14.080, hb.L14.081, hb.L14.082, hb.L14.083, hb.L14.084, hb.L14.085, hb.L14.086, hb.L14.087, hb.L14.088, hb.L14.089, hb.L14.090, hb.L14.091, hb.L14.092, hb.L14.093, hb.L14.094, hb.L14.110, hb.L14.111, hb.L14.112, hb.L14.116]

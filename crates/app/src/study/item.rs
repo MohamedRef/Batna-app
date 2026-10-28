@@ -52,7 +52,7 @@ pub fn ItemView(
                 {render(&item, on_grade)}
             }
             footer { class: "st-item-foot",
-                span { class: "st-page", "{tx::BOOK_PAGE} " bdi { "{item.src.page}" } }
+                crate::hover::BookPage { label: tx::BOOK_PAGE, page: item.src.page, quote: item.src.quote.clone() }
                 if let Some(q) = &item.src.quote {
                     details { class: "st-quote",
                         summary { {tx::BOOK_QUOTE} }

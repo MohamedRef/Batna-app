@@ -9,7 +9,7 @@
 use std::sync::Mutex;
 
 use batna_core::content::{Body, Item, Status};
-use batna_core::review::{Grade, MemorySink, Origin, ReviewEvent, ReviewSink};
+use batna_core::review::{Grade, MemorySink, Origin, ReviewEvent, ReviewSink, StudyStoreHandle};
 use dioxus::prelude::*;
 
 use crate::calc::{Calculators, item::CalcItem};
@@ -59,8 +59,28 @@ pub fn CasesScreen() -> Element {
     }
 }
 
-/// Items of one kind across every written lecture, in book order.
-fn items_of(kind: &str) -> Vec<(&'static str, &'static Item)> {
+/// The review store from `App`'s context. `None` outside the app (tests,
+/// previews): answers then stay in memory.
+pub fn use_case_store() -> Option<StudyStoreHandle> {
+    use_hook(try_consume_context::<StudyStoreHandle>)
+}
+
+/// Items of one kind across every written lecture, in book order, without
+/// the ones Mohamed marked ✗ and with his ✎ edits applied.
+fn items_of(kind: &str, store: Option<&StudyStoreHandle>) -> Vec<(&'static str, Item)> {
+    items_in_library(kind)
+        .into_iter()
+        .filter(|(_, i)| !store.is_some_and(|s| s.0.borrow().is_hidden(&i.id)))
+        .map(|(l, i)| (l, effective(store, i)))
+        .collect()
+}
+
+/// The item as Mohamed should see it: with his ✎ edit, if he made one.
+pub fn effective(store: Option<&StudyStoreHandle>, item: &Item) -> Item {
+    store.map_or_else(|| item.clone(), |s| s.0.borrow().effective(item))
+}
+
+fn items_in_library(kind: &str) -> Vec<(&'static str, &'static Item)> {
     let lib = Library::get();
     lib.index
         .lectures
@@ -81,7 +101,8 @@ pub fn find_item(id: &str) -> Option<(&'static str, &'static Item)> {
 
 #[component]
 fn ItemList(kind: &'static str, on_open: EventHandler<String>) -> Element {
-    let items = items_of(kind);
+    let store = use_case_store();
+    let items = items_of(kind, store.as_ref());
     let empty = if kind == "case" { tx::EMPTY } else { tx::EMPTY_CALC };
     rsx! {
         if kind == "case" { p { class: "muted", {tx::INTRO} } }
@@ -92,7 +113,7 @@ fn ItemList(kind: &'static str, on_open: EventHandler<String>) -> Element {
             for (lecture, item) in items {
                 li { key: "{item.id}",
                     button { class: "case-row", dir: "auto", onclick: { let id = item.id.clone(); move |_| on_open.call(id.clone()) },
-                        bdi { class: "case-row-stem", {first_line(item)} }
+                        bdi { class: "case-row-stem", {first_line(&item)} }
                         span { class: "muted small", dir: "rtl",
                             match &item.body {
                                 Body::Case { steps, .. } => rsx! { "{steps.len()} {tx::STEPS} · " },
@@ -141,8 +162,10 @@ pub fn CasePlayer(item_id: String, on_back: EventHandler) -> Element {
     let mut shown = use_signal(|| false);
     let mut results = use_signal(Vec::<bool>::new);
     let mut started = use_signal(now_ms);
+    let store = use_case_store();
 
     let Some((lecture, item)) = find_item(&item_id) else { return rsx! {} };
+    let item = effective(store.as_ref(), item);
     let Body::Case { stem, steps } = &item.body else { return rsx! {} };
     let total = steps.len();
     let k = step();
@@ -222,7 +245,7 @@ pub fn CasePlayer(item_id: String, on_back: EventHandler) -> Element {
                                         move |_| {
                                             if k + 1 == total {
                                                 let right = results.read().iter().filter(|r| **r).count() as u32;
-                                                record(&record_id, right, total as u32, started());
+                                                record(store.as_ref(), &record_id, right, total as u32, started());
                                             }
                                             step.set(k + 1);
                                             picked.set(None);
@@ -316,11 +339,11 @@ pub fn now_ms() -> i64 {
     SystemTime::now().duration_since(UNIX_EPOCH).map_or(0, |d| d.as_millis() as i64)
 }
 
-/// Answers wait here until chunk 3's store takes `ReviewSink`; then this
-/// records straight into it.
+/// Answers given outside the app (no store in context) wait here.
 static EVENTS: Mutex<MemorySink> = Mutex::new(MemorySink { events: Vec::new() });
 
-pub fn record(item_id: &str, right: u32, total: u32, started_ms: i64) {
+/// One finished case or calc item as one review event in the store.
+pub fn record(store: Option<&StudyStoreHandle>, item_id: &str, right: u32, total: u32, started_ms: i64) {
     let at_ms = now_ms();
     let event = ReviewEvent {
         item_id: item_id.to_owned(),
@@ -329,8 +352,13 @@ pub fn record(item_id: &str, right: u32, total: u32, started_ms: i64) {
         at_ms,
         took_ms: u32::try_from(at_ms.saturating_sub(started_ms)).unwrap_or(u32::MAX),
     };
-    if let Ok(mut sink) = EVENTS.lock() {
-        sink.record(event);
+    match store {
+        Some(s) => s.0.borrow_mut().record(event),
+        None => {
+            if let Ok(mut sink) = EVENTS.lock() {
+                sink.record(event);
+            }
+        }
     }
 }
 
@@ -357,7 +385,7 @@ mod tests {
 
     #[test]
     fn record_keeps_the_case_as_one_review() {
-        record("hb.L03.050", 2, 3, now_ms() - 1500);
+        record(None, "hb.L03.050", 2, 3, now_ms() - 1500);
         let sink = EVENTS.lock().unwrap();
         let e = sink.events.iter().find(|e| e.item_id == "hb.L03.050").unwrap();
         assert_eq!(e.grade, Grade::Hard);

@@ -2,7 +2,7 @@
 //! each one is phrased, and the order they come in (Again comes back later in
 //! the same session; an examiner's follow-up comes straight after a card).
 
-use std::collections::VecDeque;
+use std::collections::{BTreeSet, VecDeque};
 
 use batna_core::content::{Body, Item, Lecture, OutlineEntry, Status};
 use batna_core::review::Grade;
@@ -128,14 +128,30 @@ pub struct Pick {
     /// Questions in the session (Agains come on top).
     pub size: usize,
     pub seed: u64,
+    /// Items due for review: asked first, then the rest.
+    pub due: BTreeSet<String>,
 }
 
 /// Every askable item of the chosen lectures.
+#[cfg(test)]
 pub fn pool<'a>(lectures: impl IntoIterator<Item = &'a Lecture>, lecture: Option<&str>) -> Vec<Prompt> {
+    pool_with(lectures, lecture, |item| Some(item.clone()))
+}
+
+/// Like [`pool`], with each item passed through `prep` first: the review
+/// store drops what Mohamed marked wrong (`None`) and applies his edits.
+pub fn pool_with<'a>(
+    lectures: impl IntoIterator<Item = &'a Lecture>,
+    lecture: Option<&str>,
+    prep: impl Fn(&Item) -> Option<Item>,
+) -> Vec<Prompt> {
     lectures
         .into_iter()
         .filter(|l| lecture.is_none_or(|id| l.lecture == id))
-        .flat_map(|l| l.items.iter().filter_map(|item| Prompt::from_item(&l.lecture, item)))
+        .flat_map(|l| {
+            let prep = &prep;
+            l.items.iter().filter_map(move |item| Prompt::from_item(&l.lecture, &prep(item)?))
+        })
         .collect()
 }
 
@@ -175,6 +191,8 @@ pub struct Session {
 impl Session {
     pub fn new(mut pool: Vec<Prompt>, pick: &Pick) -> Session {
         shuffle(&mut pool, pick.seed);
+        // Stable, so due items and the rest each keep their shuffled order.
+        pool.sort_by_key(|p| !pick.due.contains(&p.item_id));
         pool.truncate(pick.size.max(1));
         let total = pool.len();
         let essays = pool.iter().filter(|p| p.kind == "essay").cloned().collect();
@@ -273,7 +291,7 @@ mod tests {
     }
 
     fn pick(size: usize) -> Pick {
-        Pick { lecture: None, size, seed: 7 }
+        Pick { lecture: None, size, seed: 7, due: BTreeSet::new() }
     }
 
     #[test]
@@ -369,7 +387,8 @@ mod tests {
         // Find a seed that puts the essay last, so only the follow-up can pull it forward.
         let seed = (0..200)
             .find(|&seed| {
-                let mut s = Session::new(pool.clone(), &Pick { lecture: None, size: 6, seed });
+                let mut s =
+                    Session::new(pool.clone(), &Pick { lecture: None, size: 6, seed, due: BTreeSet::new() });
                 (0..5).all(|_| {
                     s.advance().is_some_and(|e| e.prompt.kind == "card") && {
                         s.current = None;
@@ -378,13 +397,45 @@ mod tests {
                 })
             })
             .expect("some seed puts the essay last");
-        let mut s = Session::new(pool, &Pick { lecture: None, size: 6, seed });
+        let mut s = Session::new(pool, &Pick { lecture: None, size: 6, seed, due: BTreeSet::new() });
         for _ in 0..3 {
             assert_eq!(s.advance().unwrap().prompt.kind, "card");
             s.rate(Some(Grade::Good));
         }
         let next = s.advance().unwrap();
         assert_eq!((next.prompt.kind, next.follow_up), ("essay", true));
+    }
+
+    #[test]
+    fn due_items_are_asked_first() {
+        let pool: Vec<_> = (0..20).map(|i| card(&format!("c{i}"), "t")).collect();
+        let due: BTreeSet<String> = ["c17", "c3", "c11"].map(String::from).into();
+        let mut s = Session::new(pool, &Pick { lecture: None, size: 5, seed: 3, due: due.clone() });
+        let first: BTreeSet<String> = (0..3)
+            .map(|_| {
+                let id = s.advance().unwrap().prompt.item_id.clone();
+                s.rate(Some(Grade::Good));
+                id
+            })
+            .collect();
+        assert_eq!(first, due);
+    }
+
+    #[test]
+    fn prep_hides_and_edits_items() {
+        let lecture = sample();
+        let all = pool([&lecture], None).len();
+        let none = pool_with([&lecture], None, |_| None);
+        assert!(none.is_empty());
+        let edited = pool_with([&lecture], None, |item| {
+            let mut item = item.clone();
+            if let Body::Card { back, .. } = &mut item.body {
+                *back = "Edited by Mohamed".into();
+            }
+            Some(item)
+        });
+        assert_eq!(edited.len(), all);
+        assert!(edited.iter().any(|p| p.answer == ["Edited by Mohamed"]));
     }
 
     #[test]

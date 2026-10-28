@@ -21,6 +21,8 @@ pub struct Prompt {
     pub topic: Option<String>,
     /// Printed book page, to check the answer against.
     pub page: u32,
+    /// The book's own words (≤25), shown when the page chip is hovered.
+    pub quote: Option<String>,
     /// What is read aloud and shown, in English. A case has its stem first.
     pub question: Vec<String>,
     /// The model answer, one line per point or heading.
@@ -65,6 +67,7 @@ impl Prompt {
             lecture: lecture.to_owned(),
             topic: item.topic.clone(),
             page: item.src.page,
+            quote: item.src.quote.clone(),
             question,
             answer,
             pass,
@@ -344,6 +347,7 @@ mod tests {
             lecture: "hb.L01".into(),
             topic: Some(topic.into()),
             page: 1,
+            quote: None,
             question: vec![format!("Q {id}")],
             answer: vec![format!("A {id}")],
             pass: None,

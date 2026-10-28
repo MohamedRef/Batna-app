@@ -820,6 +820,10 @@ mod tests {
         assert_eq!(latin_runs("فيه ≤ 2%، والـ عالي > 2%:"), ["≤ 2%", "> 2%"]);
         assert_eq!(latin_runs("لو أقل من < 3 شهور"), ["< 3"]);
         assert_eq!(latin_runs("حوالي 40% منهم"), ["40%"]);
+        assert_eq!(latin_runs("لو FIB-4 < 1.3 ثم كده"), ["FIB-4 < 1.3"]);
+        assert_eq!(latin_runs("الـ platelets ≥ 150 (يعني"), ["platelets ≥ 150"]);
+        assert_eq!(latin_runs("المرحلة (F1) دي"), ["(F1)"]);
+        assert_eq!(latin_runs("(الـ P في PATCH) كده"), ["P", "PATCH"]);
     }
 
     #[test]

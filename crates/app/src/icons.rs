@@ -10,6 +10,10 @@ pub fn nav_path(screen: Screen) -> &'static str {
     match screen {
         // sun over a horizon
         Screen::Today => "M4 18h16M7 18a5 5 0 0 1 10 0M12 6V4M5.6 9.6 4.2 8.2M18.4 9.6l1.4-1.4",
+        // a light bulb: understanding first
+        Screen::Learn => {
+            "M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"
+        }
         // open book
         Screen::Study => "M3 6c3-1 6-1 9 1 3-2 6-2 9-1v12c-3-1-6-1-9 1-3-2-6-2-9-1zM12 7v12",
         // a list of answer choices, the second one ticked

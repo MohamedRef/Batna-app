@@ -53,7 +53,7 @@ pub fn Calculators() -> Element {
                 match current.and_then(calc::spec) {
                     Some(spec) => rsx! {
                         div { key: "{spec.id}",
-                            button { class: "btn-link calc-back", "aria-keyshortcuts": "Escape", onclick: move |_| open.set(None), "‹ " {tx::BACK} }
+                            button { class: "btn-link calc-back", "aria-keyshortcuts": "Escape", onclick: move |_| open.set(None), span { aria_hidden: "true", "→ " } {tx::BACK} }
                             CalcForm { id: spec.id, initial: Inputs::new() }
                         }
                     },
@@ -98,17 +98,23 @@ pub fn CalcForm(id: &'static str, initial: Inputs) -> Element {
                 h1 { bdi { {spec.name} } }
                 for field in spec.fields {
                     div { key: "{field.key}", class: "calc-field",
-                        label { r#for: "f-{field.key}",
+                        // Name, unit and "optional" as separate pieces, so
+                        // the English name and the Arabic tag never mix.
+                        label { class: "calc-label", r#for: "f-{field.key}",
                             bdi { {field.label} }
                             if let FieldKind::Number { unit, .. } = field.kind {
-                                if !unit.is_empty() { " " bdi { class: "muted small", dir: "ltr", "({unit})" } }
+                                if !unit.is_empty() { bdi { class: "muted small", dir: "ltr", "({unit})" } }
                             }
                             if field.optional && !matches!(field.kind, FieldKind::Flag) {
-                                span { class: "muted small", " · {tx::OPTIONAL}" }
+                                span { class: "chip small", {tx::OPTIONAL} }
                             }
                         }
                         {field_input(field, values)}
-                        if !field.hint.is_empty() { bdi { class: "muted small", {field.hint} } }
+                        match tx::hint(spec.id, field.key) {
+                            Some(h) => rsx! { p { class: "muted small calc-hint", {h} } },
+                            None if !field.hint.is_empty() => rsx! { bdi { class: "muted small", {field.hint} } },
+                            None => rsx! {},
+                        }
                     }
                 }
                 button { class: "btn-link", onclick: move |_| values.set(BTreeMap::new()), {tx::RESET} }
@@ -238,6 +244,21 @@ pub fn OutcomeCard(id: &'static str, outcome: Outcome) -> Element {
             p { class: "small muted",
                 {tx::SOURCE} ": " bdi { "{source}" }
                 if let Some(page) = outcome.page { " · {tx::BOOK_PAGE} " bdi { "{page}" } }
+            }
+        }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    // Issue #110: hints show in Arabic; core keeps the English ones.
+    #[test]
+    fn every_field_hint_has_arabic() {
+        for spec in calc::all() {
+            for f in spec.fields.iter().filter(|f| !f.hint.is_empty()) {
+                assert!(tx::hint(spec.id, f.key).is_some(), "{}.{}", spec.id, f.key);
             }
         }
     }

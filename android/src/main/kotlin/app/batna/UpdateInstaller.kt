@@ -91,7 +91,7 @@ object UpdateInstaller {
         val title = prefs.getString("ready_title", null) ?: return
         val nm = context.getSystemService(NotificationManager::class.java) ?: return
         if (!nm.areNotificationsEnabled()) return
-        ensureChannel(nm)
+        ensureChannel(context, nm, prefs)
         val open = PendingIntent.getActivity(context, 1, confirm, PendingIntent.FLAG_IMMUTABLE)
         nm.notify(
             CONFIRM_NOTIFICATION_ID,
@@ -104,12 +104,23 @@ object UpdateInstaller {
         )
     }
 
-    private fun ensureChannel(nm: NotificationManager) {
+    /** The channel's name and description, as Rust passed them to [install]. */
+    private class ChannelText(prefs: android.content.SharedPreferences) {
+        val name: String? = prefs.getString("channel_name", null)
+        val description: String? = prefs.getString("channel_description", null)
+    }
+
+    private fun ensureChannel(context: Context, nm: NotificationManager, prefs: android.content.SharedPreferences) =
+        ensureChannel(context, nm, ChannelText(prefs))
+
+    private fun ensureChannel(context: Context, nm: NotificationManager, text: ChannelText) {
+        // The words come from Rust (i18n.rs); without them, the app's name.
         // Creating it again only renames an existing channel; the user's
         // settings stay.
+        val name = text.name ?: context.applicationInfo.loadLabel(context.packageManager).toString()
         nm.createNotificationChannel(
-            NotificationChannel(CHANNEL, "تحديثات باطنة", NotificationManager.IMPORTANCE_LOW).apply {
-                description = "تحديث جاهز يتثبّت، وباطنة اتحدّث"
+            NotificationChannel(CHANNEL, name, NotificationManager.IMPORTANCE_LOW).apply {
+                text.description?.let { description = it }
             },
         )
     }
@@ -153,6 +164,8 @@ object UpdateInstaller {
         doneTitle: String,
         doneBody: String,
         readyTitle: String,
+        channelName: String,
+        channelDescription: String,
     ) {
         current = WORKING
         message = null
@@ -162,7 +175,9 @@ object UpdateInstaller {
                 val file = File(path)
                 check(context, file, versionCode)
                 context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit()
-                    .putString("title", doneTitle).putString("body", doneBody).putString("ready_title", readyTitle).apply()
+                    .putString("title", doneTitle).putString("body", doneBody).putString("ready_title", readyTitle)
+                    .putString("channel_name", channelName).putString("channel_description", channelDescription)
+                    .apply()
                 commit(context, file)
             } catch (e: Exception) {
                 Log.w(TAG, "Update not installed", e)
@@ -205,16 +220,23 @@ object UpdateInstaller {
             }
         }
         val id = installer.createSession(params)
-        installer.openSession(id).use { session ->
-            session.openWrite("batna.apk", 0, file.length()).use { out ->
-                file.inputStream().use { it.copyTo(out) }
-                session.fsync(out)
+        try {
+            installer.openSession(id).use { session ->
+                session.openWrite("batna.apk", 0, file.length()).use { out ->
+                    file.inputStream().use { it.copyTo(out) }
+                    session.fsync(out)
+                }
+                val status = Intent(context, UpdateInstallReceiver::class.java).setAction(ACTION_STATUS)
+                // Mutable: the installer adds the status extras to it.
+                val flags = PendingIntent.FLAG_UPDATE_CURRENT or
+                    (if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) PendingIntent.FLAG_MUTABLE else 0)
+                session.commit(PendingIntent.getBroadcast(context, id, status, flags).intentSender)
             }
-            val status = Intent(context, UpdateInstallReceiver::class.java).setAction(ACTION_STATUS)
-            // Mutable: the installer adds the status extras to it.
-            val flags = PendingIntent.FLAG_UPDATE_CURRENT or
-                (if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) PendingIntent.FLAG_MUTABLE else 0)
-            session.commit(PendingIntent.getBroadcast(context, id, status, flags).intentSender)
+        } catch (e: Exception) {
+            // A full disk or a failed write: drop the session and its staged
+            // bytes now instead of leaving them for the system to clean up.
+            runCatching { installer.abandonSession(id) }
+            throw e
         }
     }
 
@@ -244,13 +266,14 @@ object UpdateInstaller {
         val prefs = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
         val title = prefs.getString("title", null) ?: return
         val body = prefs.getString("body", null) ?: ""
+        val channel = ChannelText(prefs)
         prefs.edit().clear().apply()
         val nm = context.getSystemService(NotificationManager::class.java) ?: return
         nm.cancel(CONFIRM_NOTIFICATION_ID)
         // "A new Batna is out" is done with once it's in.
         UpdateNotice.clear(context)
         if (!nm.areNotificationsEnabled()) return
-        ensureChannel(nm)
+        ensureChannel(context, nm, channel)
         val launch = context.packageManager.getLaunchIntentForPackage(context.packageName) ?: return
         val open = PendingIntent.getActivity(context, 0, launch, PendingIntent.FLAG_IMMUTABLE)
         val notification =

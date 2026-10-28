@@ -2,8 +2,9 @@
 //!
 //! Tap a step in the pool to place it next; tap a placed step to send it
 //! back, nudge it with ↑ ↓, or drag it with a mouse or pen. "Check" shows the
-//! correct order beside the learner's, with only the out-of-place steps
-//! marked (see [`grade::misplaced`]). The tile pattern is adapted from
+//! correct order beside the learner's: a step is green only at its own
+//! number, every other step says where it belongs (see [`grade::misplaced`]),
+//! and the fewest moves to fix it ([`grade::slips`]) sets the suggested grade. The tile pattern is adapted from
 //! kabar-app main: crates/app/src/lesson.rs (`Tiles`).
 
 pub mod grade;
@@ -104,7 +105,10 @@ pub fn OrderItem(item: Item, on_grade: EventHandler<Grade>) -> Element {
                         {tx::in_place(n - wrong.len(), n)}
                     }
                 }
-                GradeRow { item_id: item.id.clone(), suggested: Some(grade::suggest(wrong.len())), on_grade }
+                if grade::slips(&d.placed) < wrong.len() {
+                    p { class: "muted small", {tx::moves_to_fix(grade::slips(&d.placed))} }
+                }
+                GradeRow { item_id: item.id.clone(), suggested: Some(grade::suggest(grade::slips(&d.placed))), on_grade }
             } else {
                 div { class: "or-actions",
                     button {

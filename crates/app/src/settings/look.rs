@@ -19,6 +19,7 @@ fn theme_label(t: Theme) -> (&'static str, &'static str) {
 
 fn size_label(s: TextSize) -> &'static str {
     match s {
+        TextSize::Smaller => tx::TEXT_SMALLER,
         TextSize::Small => tx::TEXT_SMALL,
         TextSize::Normal => tx::TEXT_NORMAL,
         TextSize::Large => tx::TEXT_LARGE,
@@ -66,7 +67,7 @@ pub fn LookSection() -> Element {
         }
         section { class: "card",
             h2 { {tx::TEXT_SIZE} DeviceOnly {} }
-            div { class: "segmented", role: "radiogroup", aria_label: tx::TEXT_SIZE,
+            div { class: "segmented", style: "grid-template-columns: repeat(5, 1fr)", role: "radiogroup", aria_label: tx::TEXT_SIZE,
                 for s in TextSize::ALL {
                     button {
                         key: "{s.as_str()}",

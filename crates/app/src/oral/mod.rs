@@ -312,7 +312,14 @@ fn Runner() -> Element {
     // Screen off (Android): a foreground service keeps the session going,
     // shows it on the lock screen and passes on headset and notification buttons.
     use_hook(|| {
-        background::start(&Labels { show: tx::SHOW, again: tx::AGAIN, good: tx::GOOD, end: tx::END });
+        background::start(&Labels {
+            show: tx::SHOW,
+            again: tx::AGAIN,
+            good: tx::GOOD,
+            end: tx::END,
+            channel: tx::CHANNEL,
+            channel_hint: tx::CHANNEL_HINT,
+        });
     });
     use_drop(background::stop);
     let revealed_now = use_memo(move || *phase.read() == Phase::Answer);

@@ -188,7 +188,7 @@ fn device_model() -> Option<String> {
             )?
             .l()?;
         let model = env.cast_local::<jni::objects::JString>(model)?;
-        Ok(model.try_to_string(env)?)
+        model.try_to_string(env)
     })
     .ok()
 }

@@ -37,6 +37,11 @@ pub struct Repeat {
     pub days: String,
     pub title: String,
     pub text: String,
+    /// Android's notification channel name and description.
+    #[serde(default)]
+    pub channel: String,
+    #[serde(default)]
+    pub channel_about: String,
 }
 
 /// The fallback for these inputs; `None` where nothing should ring.
@@ -52,6 +57,8 @@ pub fn repeat(i: &Inputs) -> Option<Repeat> {
         days: i.weekdays.iter().map(|&on| if on { '1' } else { '0' }).collect(),
         title: crate::i18n::remind::TITLE.into(),
         text: crate::i18n::remind::text(None),
+        channel: crate::i18n::remind::CHANNEL.into(),
+        channel_about: crate::i18n::remind::CHANNEL_ABOUT.into(),
     })
 }
 
@@ -223,6 +230,8 @@ mod tests {
         assert!(!r.text.chars().any(|c| c.is_ascii_digit()), "no stale count: {}", r.text);
         assert_eq!(repeat(&Inputs { here: false, ..inputs(&[19 * 60], &[]) }), None);
         assert_eq!(repeat(&inputs(&[], &[])), None);
+        let json = serde_json::to_string(&r).unwrap();
+        assert!(json.contains(r#""channel":""#) && json.contains(r#""channel_about":""#), "{json}");
     }
 
     #[test]

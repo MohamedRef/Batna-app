@@ -1179,6 +1179,9 @@ pub mod remind {
     pub const TITLE: &str = "باطنة";
     pub const SECTION: &str = "التذكير";
     pub const SECTION_SUB: &str = "تذكير هادي بمراجعة اليوم";
+    /// Android's notification channel, as Settings › Notifications lists it.
+    pub const CHANNEL: &str = "تذكير المذاكرة";
+    pub const CHANNEL_ABOUT: &str = "تذكير هادي بمراجعة اليوم";
     pub const PHONE_ONLY: &str =
         "التذكير بيرن من تطبيق باطنة المتثبّت على الموبايل أو الماك، مش من نسخة التطوير.";
     pub const MAC_HINT: &str =
@@ -1253,6 +1256,8 @@ pub mod onboard {
 
 pub mod recap {
     pub const OPEN_PROGRESS: &str = "افتح تقدّمي";
+    /// Between list items and clauses.
+    pub const COMMA: &str = "، ";
     use super::count::{DAY, NEW_THING, QUESTION, REVIEW, count};
 
     pub const DONE_REST: &str = "مراجعة النهارده خلصت، استريح.";

@@ -23,6 +23,7 @@ const SETTINGS_CSS: &str = include_str!("../../assets/settings.css");
 pub enum Section {
     Study,
     Reminders,
+    Sync,
     Look,
     /// Pen hover and the sidebar, on Android (the Tab S11, the S24 Ultra).
     Tablet,
@@ -34,9 +35,10 @@ pub enum Section {
 }
 
 impl Section {
-    pub const ALL: [Self; 8] = [
+    pub const ALL: [Self; 9] = [
         Self::Study,
         Self::Reminders,
+        Self::Sync,
         Self::Look,
         Self::Tablet,
         Self::Mac,
@@ -50,6 +52,7 @@ impl Section {
         match self {
             Self::Study => "study",
             Self::Reminders => "reminders",
+            Self::Sync => "sync",
             Self::Look => "look",
             Self::Tablet => "tablet",
             Self::Mac => "mac",
@@ -76,6 +79,7 @@ impl Section {
         match self {
             Self::Study => crate::i18n::study_settings::SECTION,
             Self::Reminders => crate::i18n::remind::SECTION,
+            Self::Sync => crate::i18n::cloud::SECTION,
             Self::Look => tx::LOOK,
             Self::Tablet => crate::i18n::desk::TABLET,
             Self::Mac => crate::i18n::desk::MAC,
@@ -89,6 +93,7 @@ impl Section {
         match self {
             Self::Study => crate::i18n::study_settings::SECTION_SUB,
             Self::Reminders => crate::i18n::remind::SECTION_SUB,
+            Self::Sync => crate::i18n::cloud::SECTION_SUB,
             Self::Look => tx::LOOK_SUB,
             Self::Tablet => crate::i18n::desk::TABLET_SUB,
             Self::Mac => crate::i18n::desk::MAC_SUB,
@@ -230,6 +235,7 @@ fn SectionView(section: Section) -> Element {
             rsx! { crate::today::StudySection {} crate::sounds::SoundSection {} crate::onboarding::ReopenCard {} }
         }
         Section::Reminders => rsx! { crate::reminders::RemindSection {} },
+        Section::Sync => rsx! { crate::cloud::SyncSection {} },
         Section::Look => rsx! { look::LookSection {} },
         Section::Tablet | Section::Mac => rsx! { crate::desk::DeviceSettings { section } },
         Section::Data => rsx! { data::DataSection {} },

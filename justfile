@@ -1,6 +1,9 @@
 # Batna task runner. Install `just` first: `brew install just`.
 
 set shell := ["bash", "-euo", "pipefail", "-c"]
+set dotenv-load := true
+
+server := "crates/server"
 
 app := "crates/app"
 dist := "dist"
@@ -86,3 +89,26 @@ update-keygen:
 # Publish `just apk` + `just bundle-mac` as an update, only once Mohamed says go (docs/RELEASE.md §5)
 publish-update notes_en="" notes_ar_eg="":
     scripts/update-publish.sh "{{notes_en}}" "{{notes_ar_eg}}"
+
+# --- Batna Cloud (docs/CLOUD.md) ----------------------------------------------
+
+# Install the Worker tools once: wrangler 4 + worker-build
+cloud-tools:
+    npm install -g wrangler@4
+    cargo install worker-build --version ^0.8 --locked
+
+# One-time, after `wrangler login`: token signing key and your Gmail on the allowlist
+cloud-setup:
+    scripts/cloud-setup.sh
+
+# Run Batna Cloud locally on http://127.0.0.1:8787 (local workerd)
+cloud-dev:
+    cd {{server}} && wrangler dev
+
+# Deploy to batna-cloud.<your-subdomain>.workers.dev
+cloud-deploy:
+    cd {{server}} && wrangler deploy
+
+# Stream live logs from the deployed Worker
+cloud-logs:
+    cd {{server}} && wrangler tail

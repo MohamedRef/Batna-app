@@ -524,7 +524,7 @@ mod tests {
         };
         const DAY_MS: i64 = 86_400_000;
         let now_ms = 20_400 * DAY_MS + 12 * 3_600_000;
-        let clock = Clock { now_ms, utc_offset_min: 0, rollover_hour: 4 };
+        let clock = Clock { now_ms, zone: batna_core::zone::Zone::fixed(0), rollover_hour: 4 };
         let answer = |i: usize, days_ago: i64| ReviewEvent {
             item_id: lecture.items[i].id.clone(),
             grade: Grade::Good,

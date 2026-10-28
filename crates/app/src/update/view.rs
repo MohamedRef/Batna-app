@@ -119,10 +119,16 @@ pub fn UpdatesSection() -> Element {
             h2 { id: "updates-title", {tx::TITLE} }
             p {
                 span { class: "muted", {tx::THIS_BUILD} ": " }
-                bdi { dir: "ltr",
-                    {env!("CARGO_PKG_VERSION")}
-                    if build > 0 { " · {tx::BUILD} {build}" }
-                    if let Some(c) = commit { " · {c}" }
+                // Each Latin piece isolated on its own, so the Arabic word
+                // "build" doesn't reorder the numbers around it.
+                bdi { dir: "ltr", {env!("CARGO_PKG_VERSION")} }
+                if build > 0 {
+                    " · {tx::BUILD} "
+                    bdi { dir: "ltr", "{build}" }
+                }
+                if let Some(c) = commit {
+                    " · "
+                    bdi { dir: "ltr", "{c}" }
                 }
             }
             if let Some(off) = off {

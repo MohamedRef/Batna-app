@@ -8,6 +8,7 @@
 use std::path::PathBuf;
 
 use batna_core::content::{Index, Lecture};
+use batna_core::lesson::LessonFile;
 use batna_core::pack::Pack;
 
 fn main() {
@@ -46,9 +47,27 @@ fn main() {
         }
     }
 
+    // Lessons: content/lessons/<chapter>/LNN.yaml (batna.lesson/v1).
+    let mut lessons = Vec::new();
+    let lessons_dir = content.join("lessons");
+    println!("cargo:rerun-if-changed={}", lessons_dir.display());
+    for dir in std::fs::read_dir(&lessons_dir).into_iter().flatten().flatten() {
+        println!("cargo:rerun-if-changed={}", dir.path().display());
+        for f in std::fs::read_dir(dir.path()).into_iter().flatten().flatten() {
+            let p = f.path();
+            if p.extension().is_some_and(|e| e == "yaml") {
+                println!("cargo:rerun-if-changed={}", p.display());
+                match serde_yaml_ng::from_str::<LessonFile>(&std::fs::read_to_string(&p).unwrap()) {
+                    Ok(l) => lessons.push(l),
+                    Err(e) => println!("cargo:warning={}: left out of the app: {e}", p.display()),
+                }
+            }
+        }
+    }
+
     let out = PathBuf::from(std::env::var("OUT_DIR").unwrap());
     let pack = out.join("content.pack");
-    std::fs::write(&pack, Pack::new(index, lectures).encode()).unwrap();
+    std::fs::write(&pack, Pack::new(index, lectures).with_lessons(lessons).encode()).unwrap();
     std::fs::write(
         out.join("embedded.rs"),
         format!("pub const PACK: &[u8] = include_bytes!({:?});\n", pack.display().to_string()),

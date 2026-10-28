@@ -26,7 +26,7 @@ use rusqlite::{Connection, OptionalExtension, params};
 use serde::Serialize;
 use serde::de::DeserializeOwned;
 
-pub use backend::{LectureProgress, Review, use_provide_review, use_review};
+pub use backend::{LectureProgress, Overview, Review, use_provide_review, use_review};
 
 #[derive(Debug)]
 pub enum StoreError {

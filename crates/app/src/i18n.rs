@@ -680,6 +680,9 @@ pub mod data {
     pub const IMPORT_PICK_FIRST: &str = "اختار ملف النسخة";
     pub const IMPORT_PICKING: &str = "اختار الملف…";
     pub const IMPORT_PICK_FAILED: &str = "ما عرفتش أفتح اختيار الملفات";
+    pub const IMPORT_COPY_FAILED: &str =
+        "ما عرفتش أفتح الملف ده، أو هو أكبر من نسخة باطنة. اختار ملف batna-export.";
+    pub const IMPORT_TOO_BIG: &str = "الملف ده كبير أوي على إنه نسخة من باطنة. اختار ملف batna-export.";
     pub const IMPORT_PASTE: &str = "أو الزق النص";
     pub const IMPORT_PASTED: &str = "نص ملزوق";
     pub const IMPORT_READ: &str = "اقرا النص";

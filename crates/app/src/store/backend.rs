@@ -136,8 +136,11 @@ impl ReviewBackend {
     }
 
     /// Re-reads everything and tells the screens (after an import).
+    /// After the store changed from outside this run (a sync, a restore, an
+    /// import): reload the review state and every synced-setting global.
     pub fn reload_and_notify(&mut self) {
         self.reload();
+        crate::synced::reload();
         self.changed();
     }
 

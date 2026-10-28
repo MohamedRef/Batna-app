@@ -413,27 +413,83 @@ pub fn decide(me: &Installed, m: &UpdateManifest, platform: UpdatePlatform) -> R
     })
 }
 
-/// The feed's content pack, when it differs from the one in use (`current`
-/// is its SHA-256, or `None` for the pack built into the app).
+/// Where the content pack in use came from: the feed that delivered it.
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct PackOrigin {
+    pub version: Version,
+    pub build: u64,
+    /// The feed's `published_at`, in seconds since 1970 (`None` for a pack
+    /// taken before this was recorded).
+    pub published_at: Option<i64>,
+    /// SHA-256 of the pack, hex.
+    pub sha256: String,
+}
+
+/// The feed's content pack, when it is newer than the one in use (`current`
+/// is where that came from, or `None` for the pack built into the app).
 ///
 /// Content moves on its own: a pack is offered whenever its hash changes,
 /// even with the app build unchanged (the learner may keep updates of the
 /// app itself off). The pack must still come from a build of the same
 /// version or a newer one, since an older build's pack may lack lectures
-/// this one already has. The app decodes it with `batna_core::pack` before
-/// switching, so a pack this build can't read is never used.
+/// this one already has. Among feeds of one build, only a later
+/// `published_at` wins, so a stale cached or replayed feed (still validly
+/// signed) never rolls the lectures back. The app decodes it with
+/// `batna_core::pack` before switching, so a pack this build can't read is
+/// never used.
 pub fn content_update<'m>(
     me: &Installed,
     m: &'m UpdateManifest,
-    current: Option<&str>,
+    current: Option<&PackOrigin>,
 ) -> Result<Option<&'m UpdateAsset>, UpdateError> {
     check_channel(me, m)?;
     let version = Version::parse(&m.version).ok_or_else(|| UpdateError::BadManifest(m.version.clone()))?;
     if (version, m.build) < (me.version, me.build) {
         return Ok(None);
     }
-    Ok(m.asset(UpdatePlatform::Content)
-        .filter(|a| current.is_none_or(|sha| !a.sha256.eq_ignore_ascii_case(sha))))
+    let published = published_secs(&m.published_at)
+        .ok_or_else(|| UpdateError::BadManifest(format!("published_at {}", m.published_at)))?;
+    Ok(m.asset(UpdatePlatform::Content).filter(|a| {
+        current.is_none_or(|c| {
+            !a.sha256.eq_ignore_ascii_case(&c.sha256)
+                && (version, m.build, Some(published)) > (c.version, c.build, c.published_at)
+        })
+    }))
+}
+
+/// `2026-10-27T08:00:00Z` (fractions and a `+00:00` offset allowed) →
+/// seconds since 1970. Feeds are always signed in UTC.
+pub fn published_secs(s: &str) -> Option<i64> {
+    let s = s.trim();
+    let s = s.strip_suffix('Z').or_else(|| s.strip_suffix("+00:00"))?;
+    let s = s.split_once('.').map_or(
+        s,
+        |(whole, frac)| {
+            if frac.bytes().all(|b| b.is_ascii_digit()) { whole } else { s }
+        },
+    );
+    let (date, time) = s.split_once('T')?;
+    let num = |t: &str, len: usize| {
+        (t.len() == len && t.bytes().all(|b| b.is_ascii_digit())).then(|| t.parse::<i64>().ok()).flatten()
+    };
+    let mut d = date.split('-');
+    let (y, mo, day) = (num(d.next()?, 4)?, num(d.next()?, 2)?, num(d.next()?, 2)?);
+    let mut t = time.split(':');
+    let (h, mi, sec) = (num(t.next()?, 2)?, num(t.next()?, 2)?, num(t.next()?, 2)?);
+    if d.next().is_some() || t.next().is_some() {
+        return None;
+    }
+    if !(1..=12).contains(&mo) || !(1..=31).contains(&day) || h > 23 || mi > 59 || sec > 60 {
+        return None;
+    }
+    // Days from civil, proleptic Gregorian (Howard Hinnant's algorithm).
+    let y = if mo <= 2 { y - 1 } else { y };
+    let era = y.div_euclid(400);
+    let yoe = y.rem_euclid(400);
+    let doy = (153 * (if mo > 2 { mo - 3 } else { mo + 9 }) + 2) / 5 + day - 1;
+    let doe = yoe * 365 + yoe / 4 - yoe / 100 + doy;
+    let days = era * 146_097 + doe - 719_468;
+    Some(days * 86_400 + h * 3600 + mi * 60 + sec)
 }
 
 fn check_channel(me: &Installed, m: &UpdateManifest) -> Result<(), UpdateError> {
@@ -552,6 +608,12 @@ mod tests {
         assert_eq!(v("1.2.3-alpha.4").version_code(), 10_203_104);
         assert_eq!(v("1.0.0-alpha.1").version_code(), 10_000_101);
         assert_eq!(v("0.1.0").version_code(), 100_999);
+        // The workspace sits at 0.1.0-alpha.0 until the first alpha, so any
+        // build installed before then sorts below every real release.
+        assert!(v("0.1.0-alpha.0").version_code() < v("0.1.0-alpha.1").version_code());
+        assert!(v("0.1.0-alpha.0").version_code() < v("1.0.0-alpha.1").version_code());
+        assert!(v("0.1.0-alpha.1").version_code() < v("0.1.0").version_code());
+        assert!(v("0.1.0-alpha.0") < v("0.1.0-alpha.1"));
         let ladder =
             ["1.0.0-alpha.1", "1.0.0-alpha.2", "1.0.0-beta.1", "1.0.0-rc.1", "1.0.0", "1.0.1-alpha.1"];
         for pair in ladder.windows(2) {
@@ -644,13 +706,24 @@ mod tests {
         let me = Installed { version: v("0.1.0"), build: 140, channel: Channel::Preview };
         let same_build = manifest(Channel::Preview, "0.1.0", 140);
         let pack = &same_build.assets[1];
+        let from = |build, published: &str, sha: &str| PackOrigin {
+            version: v("0.1.0"),
+            build,
+            published_at: published_secs(published),
+            sha256: sha.into(),
+        };
         // The built-in pack is in use: the feed's is new.
         assert_eq!(content_update(&me, &same_build, None), Ok(Some(pack)));
         // Already using that one (case doesn't matter).
-        assert_eq!(content_update(&me, &same_build, Some(&"CD".repeat(32))), Ok(None));
+        let using = from(140, &same_build.published_at, &"CD".repeat(32));
+        assert_eq!(content_update(&me, &same_build, Some(&using)), Ok(None));
         // A newer build's pack is fine too, even if the app update is off.
         let newer = manifest(Channel::Preview, "0.1.0", 141);
-        assert!(content_update(&me, &newer, Some(&"ef".repeat(32))).unwrap().is_some());
+        assert!(
+            content_update(&me, &newer, Some(&from(140, &newer.published_at, &"ef".repeat(32))))
+                .unwrap()
+                .is_some()
+        );
         // An older build's pack is never taken.
         assert_eq!(content_update(&me, &manifest(Channel::Preview, "0.1.0", 139), None), Ok(None));
         // Nor another channel's.
@@ -659,6 +732,48 @@ mod tests {
         let mut bare = newer.clone();
         bare.assets.truncate(1);
         assert_eq!(content_update(&me, &bare, None), Ok(None));
+    }
+
+    #[test]
+    fn a_stale_feed_of_the_same_build_never_rolls_content_back() {
+        let me = Installed { version: v("1.0.0-alpha.2"), build: 0, channel: Channel::Alpha };
+        let mut older = manifest(Channel::Alpha, "1.0.0-alpha.2", 0);
+        older.published_at = "2026-11-01T08:00:00Z".into();
+        older.assets[1].sha256 = "aa".repeat(32);
+        let mut later = older.clone();
+        later.published_at = "2026-11-03T08:00:00Z".into();
+        later.assets[1].sha256 = "bb".repeat(32);
+        let holding = |m: &UpdateManifest| PackOrigin {
+            version: v(&m.version),
+            build: m.build,
+            published_at: published_secs(&m.published_at),
+            sha256: m.assets[1].sha256.clone(),
+        };
+        // Holding the older pack: the later feed's is taken.
+        assert!(content_update(&me, &later, Some(&holding(&older))).unwrap().is_some());
+        // Holding the later pack: a cached or replayed older feed is ignored.
+        assert_eq!(content_update(&me, &older, Some(&holding(&later))), Ok(None));
+        // A pack taken before the time was recorded still moves forward.
+        let legacy = PackOrigin { published_at: None, ..holding(&older) };
+        assert!(content_update(&me, &later, Some(&legacy)).unwrap().is_some());
+        // A feed whose time can't be read is refused.
+        let mut odd = later.clone();
+        odd.published_at = "yesterday".into();
+        assert!(content_update(&me, &odd, None).is_err());
+    }
+
+    #[test]
+    fn published_times_parse_as_utc_seconds() {
+        assert_eq!(published_secs("1970-01-01T00:00:00Z"), Some(0));
+        assert_eq!(published_secs("2000-03-01T00:00:00Z"), Some(951_868_800));
+        assert_eq!(published_secs("2026-10-27T08:00:00Z"), Some(1_793_088_000));
+        assert_eq!(published_secs("2026-10-27T08:00:00.250Z"), Some(1_793_088_000));
+        assert_eq!(published_secs("2026-10-27T08:00:00+00:00"), Some(1_793_088_000));
+        for bad in
+            ["", "2026-10-27", "2026-10-27T08:00:00", "2026-10-27T08:00:00+02:00", "2026-13-01T00:00:00Z"]
+        {
+            assert_eq!(published_secs(bad), None, "{bad}");
+        }
     }
 
     #[test]

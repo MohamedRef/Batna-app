@@ -38,14 +38,24 @@ pub fn use_hover() {
     });
 }
 
-/// The "Book p. 14" chip. Hovering it shows the item's short `src.quote`
-/// (when there is one), so the source can be checked without the book.
+/// The "ص 14" chip. Hovering it shows the item's short `src.quote` (when
+/// there is one), and a tap or click opens the page's sheet
+/// ([`crate::book`]): the quote, the lecture, and a session on that page.
 #[component]
 pub fn BookPage(page: u32, quote: Option<String>) -> Element {
+    let peek = quote.clone().unwrap_or_default();
     rsx! {
-        span {
-            class: "chip page",
-            "data-peek": quote.unwrap_or_default(),
+        button {
+            class: "chip page tap-chip",
+            "data-peek": peek,
+            "data-peek-note": crate::i18n::hover::FROM_BOOK,
+            aria_label: "{crate::i18n::book::CHIP_HINT} {page}",
+            aria_haspopup: "dialog",
+            onclick: move |e| {
+                // Inside a card or row that has its own action, the chip only opens the page.
+                e.stop_propagation();
+                crate::pagesheet::open(page, quote.clone());
+            },
             bdi { {crate::i18n::cite::page(page)} }
         }
     }

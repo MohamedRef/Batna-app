@@ -73,7 +73,16 @@ pub fn validate_all(root: &Path, approved: &BTreeSet<String>, problems: &mut Vec
         }
         lessons += file.lessons.len();
     }
-    (files.len(), lessons)
+    let mut all: Vec<LessonFile> = files.into_iter().map(|(_, f, _)| f).collect();
+    problems.extend(
+        lesson::embed_images(&mut all, read_image(root)).into_iter().map(|p| format!("lessons: {p}")),
+    );
+    (all.len(), lessons)
+}
+
+/// Reads `content/lessons/img/<path>`, for [`lesson::embed_images`].
+pub fn read_image(root: &Path) -> impl FnMut(&str) -> Option<Vec<u8>> + '_ {
+    move |path| std::fs::read(root.join("content/lessons/img").join(path)).ok()
 }
 
 /// The keys written on each step, by `(lesson, step)` index.

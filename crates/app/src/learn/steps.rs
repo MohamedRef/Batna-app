@@ -4,7 +4,7 @@
 //! reveal opens (that only unlocks Continue).
 
 use batna_core::content::CaseStep;
-use batna_core::lesson::{MnemonicPart, SortCard, StepBody, Tone};
+use batna_core::lesson::{MnemonicPart, Picture, SortCard, StepBody, Tone};
 use dioxus::prelude::*;
 
 use super::text::{Line, Rich, is_latin};
@@ -50,7 +50,9 @@ pub fn StepView(body: StepBody, seed: String, on_answer: EventHandler<bool>) -> 
             if let Some(t) = title { h2 { class: "ls-h", Line { text: t } } }
             Rich { text }
         },
-        StepBody::Figure { title, svg, caption, alt } => rsx! { Figure { title, svg, caption, alt } },
+        StepBody::Figure { title, svg, image, caption, alt } => rsx! {
+            Figure { title, svg, image, caption, alt }
+        },
         StepBody::Reveal { prompt, answer } => rsx! { Reveal { prompt, answer, on_answer } },
         StepBody::Mnemonic { word, parts, hook } => rsx! { Mnemonic { word, parts, hook } },
         StepBody::Aside { tone, text } => rsx! { Aside { tone, text } },
@@ -77,21 +79,47 @@ pub fn StepView(body: StepBody, seed: String, on_answer: EventHandler<bool>) -> 
 }
 
 #[component]
-fn Figure(title: Option<String>, svg: String, caption: String, alt: String) -> Element {
+fn Figure(
+    title: Option<String>,
+    svg: String,
+    image: Option<Picture>,
+    caption: String,
+    alt: String,
+) -> Element {
     let mut zoomed = use_signal(|| false);
+    // Open-licence images show their author and licence; a book figure's
+    // page chip is the step's own.
+    let credit = image
+        .as_ref()
+        .filter(|p| !p.book)
+        .and_then(|p| Some(format!("{} · {}", p.credit.as_deref()?, p.license.as_deref()?)));
     rsx! {
         figure { class: "ls-figure", "data-zoomed": if zoomed() { "yes" } else { "no" },
             if let Some(t) = title { h2 { class: "ls-h", Line { text: t } } }
-            // Content-made SVG, checked by the validator (no scripts, links or fixed colours).
-            button {
-                class: "ls-svg",
-                role: "img",
-                aria_label: "{alt}",
-                title: if zoomed() { tx::ZOOM_OUT } else { tx::ZOOM_IN },
-                onclick: move |_| zoomed.toggle(),
-                div { dir: "ltr", dangerous_inner_html: "{svg}" }
+            if image.is_none() {
+                // Content-made SVG, checked by the validator (no scripts, links or fixed colours).
+                button {
+                    class: "ls-svg",
+                    role: "img",
+                    aria_label: "{alt}",
+                    title: if zoomed() { tx::ZOOM_OUT } else { tx::ZOOM_IN },
+                    onclick: move |_| zoomed.toggle(),
+                    div { dir: "ltr", dangerous_inner_html: "{svg}" }
+                }
+            } else if let Some(p) = image {
+                button {
+                    class: "ls-svg ls-photo",
+                    title: if zoomed() { tx::ZOOM_OUT } else { tx::ZOOM_IN },
+                    onclick: move |_| zoomed.toggle(),
+                    img { src: p.data, alt: "{alt}", loading: "lazy", decoding: "async" }
+                }
             }
-            figcaption { Rich { text: caption } }
+            figcaption {
+                Rich { text: caption }
+                if let Some(c) = credit {
+                    p { class: "ls-credit muted small", bdi { dir: "ltr", lang: "en", "📷 {c}" } }
+                }
+            }
         }
     }
 }

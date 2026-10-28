@@ -122,7 +122,10 @@ fn Setup() -> Element {
         // side, its settings on the other.
         div { class: "tab-cols oral-cols",
             div { class: "tab-main tab-sticky",
-                section { class: "card oral-setup",
+                // With questions to ask, the whole card starts (the button's click bubbles up).
+                section {
+                    class: if available > 0 { "card card-action oral-setup" } else { "card oral-setup" },
+                    onclick: move |_| if available > 0 { start(&store.read()) },
                     h1 { {tx::TITLE} }
                     p { class: "muted", {tx::INTRO} }
                     if available > 0 {
@@ -130,7 +133,6 @@ fn Setup() -> Element {
                         button {
                             class: "oral-start",
                             "aria-keyshortcuts": "Enter",
-                            onclick: move |_| start(&store.read()),
                             {tx::START}
                         }
                     }
@@ -312,7 +314,14 @@ fn Runner() -> Element {
     // Screen off (Android): a foreground service keeps the session going,
     // shows it on the lock screen and passes on headset and notification buttons.
     use_hook(|| {
-        background::start(&Labels { show: tx::SHOW, again: tx::AGAIN, good: tx::GOOD, end: tx::END });
+        background::start(&Labels {
+            show: tx::SHOW,
+            again: tx::AGAIN,
+            good: tx::GOOD,
+            end: tx::END,
+            channel: tx::CHANNEL,
+            channel_hint: tx::CHANNEL_HINT,
+        });
     });
     use_drop(background::stop);
     let revealed_now = use_memo(move || *phase.read() == Phase::Answer);

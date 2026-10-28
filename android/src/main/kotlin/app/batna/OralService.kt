@@ -107,8 +107,8 @@ class OralService : Service() {
         // Low importance: no sound, no pop-up; just the controls. Creating it
         // again only renames an existing channel; the user's settings stay.
         nm.createNotificationChannel(
-            NotificationChannel(CHANNEL, "المذاكرة الشفوي", NotificationManager.IMPORTANCE_LOW).apply {
-                description = "التحكم في الشفوي وهو شغّال في الخلفية"
+            NotificationChannel(CHANNEL, OralBridge.channelName, NotificationManager.IMPORTANCE_LOW).apply {
+                description = OralBridge.channelHint
             },
         )
         val open = packageManager.getLaunchIntentForPackage(packageName)?.let {
@@ -170,15 +170,28 @@ object OralBridge {
     @Volatile var againLabel: String = "Again"
     @Volatile var goodLabel: String = "Good"
     @Volatile var endLabel: String = "End"
+    // UI text comes from Rust (crates/app/src/i18n.rs, mod oral).
+    @Volatile var channelName: String = "Oral"
+    @Volatile var channelHint: String = ""
     @Volatile private var pending: Int = 0
 
     /** Starts the service (from the foreground, when a session starts). */
     @JvmStatic
-    fun start(context: Context, show: String, again: String, good: String, end: String) {
+    fun start(
+        context: Context,
+        show: String,
+        again: String,
+        good: String,
+        end: String,
+        channel: String,
+        hint: String,
+    ) {
         showLabel = show
         againLabel = again
         goodLabel = good
         endLabel = end
+        channelName = channel
+        channelHint = hint
         pending = 0
         val app = context.applicationContext
         if (service == null) {

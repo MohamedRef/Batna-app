@@ -21,6 +21,9 @@ pub struct Labels {
     pub again: &'static str,
     pub good: &'static str,
     pub end: &'static str,
+    /// The notification channel's name and description in system settings.
+    pub channel: &'static str,
+    pub channel_hint: &'static str,
 }
 
 /// Starts background mode when a session starts (call it while in the foreground).
@@ -119,11 +122,13 @@ mod android {
             let again = env.new_string(labels.again)?;
             let good = env.new_string(labels.good)?;
             let end = env.new_string(labels.end)?;
+            let channel = env.new_string(labels.channel)?;
+            let channel_hint = env.new_string(labels.channel_hint)?;
             env.call_static_method(
                 class,
                 jni_str!("start"),
                 jni_sig!(
-                    "(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"
+                    "(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"
                 ),
                 &[
                     JValue::Object(activity),
@@ -131,6 +136,8 @@ mod android {
                     JValue::Object(&again),
                     JValue::Object(&good),
                     JValue::Object(&end),
+                    JValue::Object(&channel),
+                    JValue::Object(&channel_hint),
                 ],
             )
             .map(drop)

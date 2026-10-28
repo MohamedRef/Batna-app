@@ -38,6 +38,7 @@ pub fn data_dir() -> Option<PathBuf> {
 
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub enum TextSize {
+    Smaller,
     Small,
     #[default]
     Normal,
@@ -46,10 +47,11 @@ pub enum TextSize {
 }
 
 impl TextSize {
-    pub const ALL: [Self; 4] = [Self::Small, Self::Normal, Self::Large, Self::Larger];
+    pub const ALL: [Self; 5] = [Self::Smaller, Self::Small, Self::Normal, Self::Large, Self::Larger];
 
     pub fn as_str(self) -> &'static str {
         match self {
+            Self::Smaller => "smaller",
             Self::Small => "small",
             Self::Normal => "normal",
             Self::Large => "large",
@@ -61,9 +63,11 @@ impl TextSize {
         Self::ALL.into_iter().find(|t| t.as_str() == s).unwrap_or_default()
     }
 
-    /// The root font size: every rem in the app scales with it.
+    /// The root size: type, spacing and control heights are all in rem, so
+    /// this scales the whole interface, not only the text.
     pub fn percent(self) -> u32 {
         match self {
+            Self::Smaller => 82,
             Self::Small => 90,
             Self::Normal => 100,
             Self::Large => 112,
@@ -192,5 +196,12 @@ mod tests {
         let p = DevicePrefs { theme: Theme::Paper, text_size: TextSize::Large, ..DevicePrefs::default() };
         let css = p.css();
         assert!(css.contains("--bg:#f6f7f4") && css.ends_with("html{font-size:112%;}"), "{css}");
+    }
+
+    #[test]
+    fn smaller_interface_size_round_trips() {
+        let p = DevicePrefs { text_size: TextSize::Smaller, ..DevicePrefs::default() };
+        assert_eq!(DevicePrefs::parse(&p.render()), p);
+        assert!(p.css().ends_with("html{font-size:82%;}"));
     }
 }

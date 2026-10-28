@@ -107,7 +107,7 @@ pub fn ExportCard() -> Element {
         section { class: "card",
             h2 { {tx::EXPORT_TITLE} }
             p { class: "muted small", {tx::EXPORT_BODY} }
-            button { class: "primary", onclick: run, {tx::EXPORT_BUTTON} }
+            button { class: "btn btn-primary", onclick: run, {tx::EXPORT_BUTTON} }
             match outcome() {
                 Some(Ok((path, rows))) => rsx! {
                     div { role: "status",

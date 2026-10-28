@@ -12,3 +12,4 @@ pub mod reminders;
 pub mod tts;
 #[cfg(target_os = "android")]
 pub(crate) mod tts_android;
+pub mod update_notice;

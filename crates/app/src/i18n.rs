@@ -16,6 +16,7 @@ pub mod nav {
     pub const ORAL: &str = "شفوي";
     pub const STATS: &str = "تقدّمي";
     pub const SETTINGS: &str = "الإعدادات";
+    pub const MORE: &str = "المزيد";
 }
 
 pub mod today {
@@ -748,7 +749,7 @@ pub mod settings {
     pub const THIS_DEVICE: &str = "للجهاز ده بس";
 
     pub const LOOK: &str = "الشكل";
-    pub const LOOK_SUB: &str = "الألوان وحجم الخط";
+    pub const LOOK_SUB: &str = "الألوان وحجم الواجهة";
     pub const DATA: &str = "بياناتك";
     pub const DATA_SUB: &str = "فين بتتحفظ، والتصدير";
     pub const ABOUT: &str = "عن باطنة";
@@ -764,7 +765,8 @@ pub mod settings {
     pub const THEME_SHIFT: &str = "نبطشية";
     pub const THEME_SHIFT_SUB: &str = "غامق ودافي من غير ضوء أزرق، للمذاكرة متأخر قبل النوم";
 
-    pub const TEXT_SIZE: &str = "حجم الخط";
+    pub const TEXT_SIZE: &str = "حجم الواجهة";
+    pub const TEXT_SMALLER: &str = "أصغر";
     pub const TEXT_SMALL: &str = "صغير";
     pub const TEXT_NORMAL: &str = "عادي";
     pub const TEXT_LARGE: &str = "كبير";
@@ -865,6 +867,16 @@ pub mod update {
     pub const DONE_BODY: &str = "افتحه وكمّل من مكانك.";
     #[cfg_attr(not(target_os = "android"), allow(dead_code))]
     pub const READY_TITLE: &str = "تحديث باطنة جاهز: دوس عشان تثبّته";
+
+    // The "new version" notification, and its switch.
+    pub const NOTICE_AVAILABLE: &str = "نزلت نسخة جديدة من باطنة";
+    pub const NOTICE_READY: &str = "نسخة باطنة الجديدة جاهزة تتثبّت";
+    pub const NOTICE_INSTALLED: &str = "نسخة باطنة الجديدة اتحطّت";
+    pub const NOTICE_TAP_AVAILABLE: &str = "دوس تشوف الجديد وتنزّلها.";
+    pub const NOTICE_TAP_READY: &str = "اتنزّلت واتفحصت. دوس عشان تثبّتها.";
+    pub const NOTICE_CHANNEL: &str = "نسخ باطنة الجديدة";
+    pub const NOTIFY: &str = "ابعتلي إشعار أول ما تنزل نسخة جديدة";
+    pub const NOTIFY_SUB: &str = "على أندرويد حتى لو باطنة مقفول (بيبص كل كام ساعة)، ومعاه الجديد في سطرين. مفتاح الإشعارات في الجهاز له الكلمة الأخيرة.";
 }
 
 pub mod sound {

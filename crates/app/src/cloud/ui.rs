@@ -163,7 +163,7 @@ pub fn SyncSection() -> Element {
                 if *cloud.signing_in.read() {
                     p { class: "muted", aria_live: "polite", {tx::SIGNING_IN} }
                 } else {
-                    button { class: "primary", onclick: move |_| cloud.send(Command::SignInGoogle), {tx::SIGN_IN} }
+                    button { class: "btn btn-primary", onclick: move |_| cloud.send(Command::SignInGoogle), {tx::SIGN_IN} }
                 }
             }
             if let Some(p) = status.problem {

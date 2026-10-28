@@ -200,11 +200,11 @@ pub fn Setup() -> Element {
                     } else {
                         p { class: "muted small", bdi { "{available}" } " {tx::AVAILABLE}" }
                         div { class: "start-row",
-                            button { class: "button primary start", onclick: move |_| start_tutor(Mode::Tutor),
+                            button { class: "btn btn-primary start", onclick: move |_| start_tutor(Mode::Tutor),
                                 span { {tx::START_TUTOR} " · " bdi { "{shown}" } }
                                 span { class: "hint", {tx::TUTOR_HINT} }
                             }
-                            button { class: "button start", onclick: move |_| start_with(Mode::Timed),
+                            button { class: "btn btn-secondary start", onclick: move |_| start_with(Mode::Timed),
                                 span { {tx::START_TIMED} " · " bdi { "{minutes(exam::time_limit_ms(shown))}" } " {tx::MINUTES}" }
                                 span { class: "hint", {tx::TIMED_HINT} }
                             }
@@ -223,7 +223,7 @@ pub fn Setup() -> Element {
                         }
                     }
                     div { class: "start-row",
-                        button { class: "button primary start", onclick: start_mock,
+                        button { class: "btn btn-primary start", onclick: start_mock,
                             span { {tx::START_MOCK} " · " bdi { "{mock_shown}" } " {tx::QUESTION}" }
                             span { class: "hint", bdi { "{minutes(exam::time_limit_ms(mock_shown))}" } " {tx::MINUTES}" }
                         }
@@ -300,8 +300,8 @@ fn Paused() -> Element {
                 }
             }
             div { class: "start-row",
-                button { class: "button primary", onclick: move |_| resume(), {tx::RESUME} }
-                button { class: "button", onclick: move |_| submit_paused(), {tx::SUBMIT_NOW} }
+                button { class: "btn btn-primary", onclick: move |_| resume(), {tx::RESUME} }
+                button { class: "btn btn-secondary", onclick: move |_| submit_paused(), {tx::SUBMIT_NOW} }
             }
         }
     }

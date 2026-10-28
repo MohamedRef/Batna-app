@@ -1,0 +1,687 @@
+schema: batna.lesson/v1
+lecture: hb.L05
+lessons:
+  # ------------------------------------------------------------------
+  - id: hb.L05.lesson1
+    title: "فيروس C: مين هو وبيتنقل إزاي؟"
+    hook: "فيروس RNA صغير كان ساكن في كبد مصر كلها، ودلوقتي بيتعالج بحباية. نبدأ نعرفه."
+    minutes: 7
+    pages: [90, 91]
+    topics: [virology, transmission]
+    goals:
+      - "تعرف الـ family والـ genome والـ genotypes اللي بتتسأل"
+      - "تفهم ليه C فيروس دم في الأساس"
+      - "تعدّ الـ risk groups الخمسة من غير ما تبص"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 90
+        title: "الصورة الكبيرة في سطرين"
+        text: |
+          **HCV** فيروس **RNA** بيصيب الكبد، وغالبًا بيعمل **chronic infection**.
+
+          وهو من أهم أسباب الـ **chronic liver disease** والـ **cirrhosis** والـ **HCC**.
+
+          والخبر الحلو اللي المحاضرة بتبدأ بيه: **Effective cures now exist**. يعني ده من الأمراض القليلة في الكبد اللي بنقول فيها «اتعالج وخلص».
+      - kind: explain
+        page: 90
+        title: "البطاقة الشخصية للفيروس"
+        text: |
+          - **Family:** Flaviviridae، **Genus:** Hepacivirus.
+          - **Genome:** single-stranded positive-sense RNA.
+          - **Genotypes:** من **1 لـ 7**. الأشهر في مصر والشرق الأوسط: **1 و 3 و 4**.
+          - حوالي **58 million** عايشين بـ chronic HCV (**WHO, 2024**).
+      - kind: reveal
+        page: 90
+        prompt: "يعني إيه **positive-sense** RNA؟ وده هيفرق معانا في العلاج في إيه؟"
+        answer: |
+          الـ positive-sense RNA بيشتغل كأنه **mRNA جاهز**: الخلية بتقراه على طول وتعمل منه بروتين واحد طويل (polyprotein) لازم يتقص لحتت علشان الفيروس يشتغل.
+
+          والأهم: مفيش مرحلة DNA ولا نسخة بتستخبى في نواة الخلية (عكس HBV). علشان كده لما توقف تكاثره كفاية، بيختفي خالص، وده سر إن C **بيتعالج نهائيًا**. (ده شرح physiology مقبول، مش من نص الكتاب.)
+      - kind: check
+        page: 90
+        question: "HCV belongs to which family, and what is its genome?"
+        options:
+          - "Flaviviridae; single-stranded positive-sense RNA"
+          - "Hepadnaviridae; partially double-stranded DNA"
+          - "Picornaviridae; single-stranded positive-sense RNA"
+          - "Flaviviridae; double-stranded DNA"
+        answer: 0
+        why:
+          - "صح: Flaviviridae، genus Hepacivirus، والـ genome ssRNA positive-sense."
+          - "ده **HBV**، وهو الـ DNA virus الوحيد في الـ hepatitis viruses المشهورة."
+          - "دي family بتاعة **HAV**، مش C."
+          - "الـ family صح بس الـ genome غلط: C فيروس RNA."
+      - kind: aside
+        tone: joke
+        page: 90
+        text: |
+          الكتاب بيقول إن مصر كانت **the highest HCV prevalence globally**. زمان كلمة «فيروس» لوحدها في أي عيادة في مصر كانت مفهومة إنها C من غير ما حد يسأل «أنهي فيروس؟» 😅
+
+          والحمد لله إن الـ **national screening/treatment campaigns** قلبت الحكاية دي، وده هنرجعله في آخر درس.
+      - kind: explain
+        page: 90
+        title: "بيتنقل إزاي؟ الدم أولًا"
+        text: |
+          الـ mode الأساسي: **Blood-borne (primary)**، ومنه:
+
+          - **Needle sharing** (IV drug use)
+          - **Blood transfusions**
+          - **Unsafe medical procedures**
+
+          وبعدين حاجات أقل بكتير:
+
+          - **Vertical transmission (rare)**
+          - **Sexual transmission (less common)**
+      - kind: figure
+        page: 91
+        title: "سلّم طرق العدوى"
+        alt: "Three horizontal bars of decreasing length. Blood-borne (primary): needle sharing, transfusion, unsafe procedures, the longest bar. Sexual: less common, a medium bar. Vertical: rare, the shortest bar."
+        caption: "الدم هو الطريق الرئيسي. الـ sexual **less common**، والـ vertical **rare**. لو الممتحن قلب الترتيب ده، اعرف إنه بيختبرك."
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <text x="165" y="18" text-anchor="middle" class="t-b t-lg">HCV transmission</text>
+            <rect x="10" y="34" width="310" height="58" rx="8" class="fg-bad"/>
+            <text x="22" y="56" class="t-b t-bad">Blood-borne (primary)</text>
+            <text x="22" y="78" class="t-sm">needles (IVDU), transfusion, unsafe procedures</text>
+            <rect x="10" y="108" width="190" height="50" rx="8" class="fg-acc"/>
+            <text x="22" y="130" class="t-b">Sexual</text>
+            <text x="22" y="148" class="t-sm t-mut">less common</text>
+            <rect x="10" y="174" width="110" height="50" rx="8" class="fg-thin"/>
+            <text x="22" y="196" class="t-b">Vertical</text>
+            <text x="22" y="214" class="t-sm t-mut">rare</text>
+            <text x="320" y="244" text-anchor="end" class="t-sm t-mut">bar length = how important, not exact numbers</text>
+          </svg>
+      - kind: mnemonic
+        page: 91
+        word: "DRINK"
+        parts:
+          - { key: "D", text: "hemoDialysis patients" }
+          - { key: "R", text: "Recipients of unscreened blood" }
+          - { key: "I", text: "IV drug users" }
+          - { key: "N", text: "Needlestick injuries (healthcare workers)" }
+          - { key: "K", text: "Kids born to HCV-positive mothers" }
+        hook: |
+          الـ **risk groups** الخمسة في الكتاب = **DRINK**. وماتقلقش، مالهاش دعوة بالشرب خالص: C فيروس دم، بيعدّي من الإبرة مش من الكوباية.
+      - kind: sort
+        page: 91
+        prompt: "حط كل طريقة في مكانها حسب الكتاب:"
+        bins: ["Primary (blood-borne)", "Less common or rare"]
+        cards:
+          - { text: "Needle sharing (IVDU)", bin: 0 }
+          - { text: "Blood transfusions", bin: 0 }
+          - { text: "Unsafe medical procedures", bin: 0 }
+          - { text: "Sexual transmission", bin: 1 }
+          - { text: "Vertical transmission", bin: 1 }
+        why: "الكتاب حط الإبر والـ transfusion والـ unsafe procedures تحت **Blood-borne (primary)**، والـ sexual **less common** والـ vertical **rare**."
+      - kind: check
+        page: 91
+        question: "Which of these is NOT one of the HCV risk groups listed in the lecture?"
+        options:
+          - "Hemodialysis patients"
+          - "Healthcare workers with needlestick injuries"
+          - "Children born to HCV-positive mothers"
+          - "People who eat raw shellfish"
+        answer: 3
+        why:
+          - "موجودة: الـ D في DRINK."
+          - "موجودة: الـ N في DRINK."
+          - "موجودة: الـ K في DRINK."
+          - "صح: دي **fecal-oral** زي HAV. فيروس C بيمشي في الدم."
+      - kind: try
+        items: [hb.L05.001, hb.L05.003, hb.L05.007, hb.L05.008, hb.L05.009]
+    recap:
+      - "HCV: **Flaviviridae / Hepacivirus**، ssRNA **positive-sense**، genotypes **1–7** (مصر والشرق الأوسط: 1 و 3 و 4)."
+      - "حوالي **58 million** عندهم chronic HCV (WHO 2024). مصر كانت الأعلى في العالم، والحملات القومية قللت العبء."
+      - "العدوى **blood-borne** في الأساس. الـ sexual **less common** والـ vertical **rare**."
+      - "الـ risk groups: **DRINK** (Dialysis، Recipients of unscreened blood، IVDU، Needlestick، Kids of HCV+ mothers)."
+    practice: [hb.L05.001, hb.L05.002, hb.L05.003, hb.L05.004, hb.L05.005, hb.L05.006, hb.L05.007, hb.L05.008, hb.L05.009, hb.L05.054]
+
+  # ------------------------------------------------------------------
+  - id: hb.L05.lesson2
+    title: "الفيروس الساكت: natural history والتشخيص"
+    hook: "من كل 100 واحد اتعدوا، كام هيخف لوحده وكام هيوصل لـ cirrhosis؟ وإزاي تعرف إن العدوى لسه شغالة؟"
+    minutes: 9
+    pages: [91, 92]
+    topics: [natural-history, clinical, diagnosis]
+    goals:
+      - "تحفظ أرقام الـ clearance والـ chronicity والـ cirrhosis صح"
+      - "تعدّ الـ extrahepatic manifestations الأربعة"
+      - "تفرّق بين screening test و confirmatory test وتعرف ليه"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 91
+        title: "الأرقام اللي الممتحن بيحبها"
+        text: |
+          - **Acute infection:** **15–45%** بيعملوا **spontaneous clearance**.
+          - **Chronic infection:** **55–85%** الفيروس بيفضل معاهم **أكتر من 6 شهور**.
+
+          والمضاعفات: **chronic hepatitis**، و **cirrhosis (~15–30% over 20 years)**، و **HCC** (أغلبه **mainly with cirrhosis**).
+      - kind: figure
+        page: 91
+        title: "100 واحد اتعدوا: هيروحوا فين؟"
+        alt: "A funnel. 100 people with acute HCV split into 15 to 45 percent spontaneous clearance and 55 to 85 percent chronic infection over 6 months. Chronic infection leads to chronic hepatitis, then cirrhosis in about 15 to 30 percent over 20 years, then HCC, mainly in cirrhosis."
+        caption: "الفيروس بيكسب الجولة الأولى مع أغلب الناس (55–85% chronic). وبعد كده الـ cirrhosis بتيجي ببطء على مدى **20 سنة**، والـ HCC غالبًا فوق الـ cirrhosis."
+        svg: |
+          <svg viewBox="0 0 330 430" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L05a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+              <marker id="L05b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-bad"/></marker>
+            </defs>
+            <rect x="75" y="10" width="180" height="46" rx="8" class="fg-ink"/>
+            <text x="165" y="30" text-anchor="middle" class="t-b">100 with acute HCV</text>
+            <text x="165" y="47" text-anchor="middle" class="t-sm t-mut">often asymptomatic</text>
+            <path d="M120 56L72 96" class="fg-arrow" marker-end="url(#L05a)"/>
+            <path d="M210 56L258 96" class="fg-arrow-bad" marker-end="url(#L05b)"/>
+            <rect x="8" y="100" width="140" height="56" rx="8" class="fg-good"/>
+            <text x="78" y="122" text-anchor="middle" class="t-b t-good">15–45%</text>
+            <text x="78" y="142" text-anchor="middle" class="t-sm">spontaneous clearance</text>
+            <rect x="182" y="100" width="140" height="56" rx="8" class="fg-bad"/>
+            <text x="252" y="122" text-anchor="middle" class="t-b t-bad">55–85%</text>
+            <text x="252" y="142" text-anchor="middle" class="t-sm">chronic (&gt;6 months)</text>
+            <path d="M252 156v30" class="fg-arrow-bad" marker-end="url(#L05b)"/>
+            <rect x="152" y="190" width="170" height="40" rx="8" class="fg-box"/>
+            <text x="237" y="215" text-anchor="middle" class="t-sm t-b">Chronic hepatitis</text>
+            <path d="M237 230v30" class="fg-arrow-bad" marker-end="url(#L05b)"/>
+            <text x="230" y="250" text-anchor="end" class="t-sm t-mut">~20 years</text>
+            <rect x="122" y="264" width="200" height="56" rx="8" class="fg-bad"/>
+            <text x="222" y="286" text-anchor="middle" class="t-b t-bad">Cirrhosis ~15–30%</text>
+            <text x="222" y="306" text-anchor="middle" class="t-sm">over 20 years</text>
+            <path d="M222 320v30" class="fg-arrow-bad" marker-end="url(#L05b)"/>
+            <rect x="122" y="354" width="200" height="56" rx="8" class="fg-bad"/>
+            <text x="222" y="377" text-anchor="middle" class="t-b t-bad">HCC</text>
+            <text x="222" y="397" text-anchor="middle" class="t-sm">mainly with cirrhosis</text>
+            <text x="10" y="190" class="t-sm t-good">no chronic</text>
+            <text x="10" y="206" class="t-sm t-good">disease</text>
+          </svg>
+      - kind: aside
+        tone: exam
+        page: 91
+        text: |
+          ركّز في الأرقام كأزواج: **15–45** يخفّوا و **55–85** يزمنوا. الاتنين بيكمّلوا بعض لـ 100 (45 + 55 = 100، و 15 + 85 = 100).
+
+          والـ cirrhosis رقمين برضه: **15–30%** في **20 سنة**.
+      - kind: check
+        page: 91
+        question: "A nurse develops acute HCV after a needlestick injury. Which statement is most accurate?"
+        options:
+          - "Most patients (55–85%) stay infected beyond 6 months"
+          - "Almost all patients clear the virus spontaneously"
+          - "Cirrhosis develops in most patients within 5 years"
+          - "HCC usually arises in a non-cirrhotic liver"
+        answer: 0
+        why:
+          - "صح: الـ chronicity **55–85%**، والـ clearance بس **15–45%**."
+          - "بالعكس: الأقلية هي اللي بتخف لوحدها (15–45%)."
+          - "الـ cirrhosis في **15–30%** وعلى مدى **20 سنة**، مش أغلبهم في 5."
+          - "الكتاب: HCC **mainly with cirrhosis**."
+      - kind: explain
+        page: 92
+        title: "الأعراض: الساكت اللي بيتكلم أحيانًا"
+        text: |
+          **Acute HCV:** غالبًا **asymptomatic**، أو أعراض nonspecific: **fatigue, anorexia, nausea, jaundice**.
+
+          **Chronic HCV:** غالبًا **silent for years**، وأحيانًا **fatigue, RUQ discomfort, arthralgia**.
+
+          وفيه وش تاني برة الكبد، **extrahepatic**: **cryoglobulinemia, glomerulonephritis, lymphoma, insulin resistance**.
+      - kind: mnemonic
+        page: 92
+        word: "CLING"
+        parts:
+          - { key: "C", text: "Cryoglobulinemia" }
+          - { key: "L", text: "Lymphoma" }
+          - { key: "I", text: "Insulin resistance" }
+          - { key: "NG", text: "Nephritis: Glomerulonephritis" }
+        hook: |
+          فيروس C **بيلزق (CLING)** في الجسم كله مش في الكبد بس. الأربعة اللي في الكتاب: Cryoglobulinemia، Lymphoma، Insulin resistance، و GlomeruloNephritis (الـ NG).
+      - kind: aside
+        tone: analogy
+        text: |
+          ليه الكلى والجلد والـ lymph nodes؟ الشرح المقبول (مش من نص الكتاب): الفيروس بيحفّز الـ **B cells** باستمرار، فتطلّع **cryoglobulins** (immune complexes) تترسب في الأوعية الصغيرة: في الجلد (purpura)، في المفاصل، وفي الـ **glomeruli** (GN). ونفس التحفيز المزمن للـ B cells ممكن يوصل لـ **B-cell lymphoma**.
+
+          تخيّلها زي ماسورة بتنقّط **غِرا** في كل أوضة في البيت.
+      - kind: explain
+        page: 92
+        title: "التشخيص: اختبارين ولكل واحد شغلانة"
+        text: |
+          - **Screening test:** **HCV Ab (anti-HCV)**.
+          - **Confirmatory test:** **HCV RNA (PCR)** أو **HCV core antigen**.
+          - **Genotyping:** for treatment planning، بس **less critical now** بسبب الـ **pangenotypic DAAs**.
+          - **Fibrosis assessment:** non-invasive: **FibroScan, APRI, FIB-4**. والـ **liver biopsy rarely used now**.
+      - kind: reveal
+        page: 92
+        prompt: "واحد عنده **anti-HCV positive** بس **HCV RNA negative**. ده معناه إيه؟ وليه مانكتفيش بالـ antibody؟"
+        answer: |
+          الـ antibody زي **الندبة**: بتقول إن الجسم شاف الفيروس قبل كده، مش إن الفيروس لسه موجود.
+
+          افتكر إن **15–45%** بيعملوا **spontaneous clearance**، وكمان اللي اتعالجوا: الاتنين بيفضل عندهم anti-HCV positive. علشان كده لازم **RNA (أو core antigen)** يثبت إن العدوى **active**. وللسبب ده برضه الـ cure بيتقاس بالـ **RNA** مش بالـ antibody.
+      - kind: figure
+        page: 92
+        title: "خطوات التشخيص"
+        alt: "Flow chart. Anti-HCV screening. If negative, no infection. If positive, test HCV RNA by PCR or core antigen. If RNA negative, past or cleared infection. If RNA positive, active infection: assess fibrosis with FibroScan, APRI or FIB-4 and plan DAAs; genotype is less critical with pangenotypic DAAs."
+        caption: "الـ antibody بيفرز، والـ RNA بيأكد. بعد التأكيد: قيّم الـ fibrosis (FibroScan، APRI، FIB-4) واختار العلاج."
+        svg: |
+          <svg viewBox="0 0 330 420" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L05c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="65" y="10" width="200" height="46" rx="8" class="fg-acc"/>
+            <text x="165" y="30" text-anchor="middle" class="t-b">Anti-HCV (screening)</text>
+            <text x="165" y="47" text-anchor="middle" class="t-sm t-mut">HCV Ab</text>
+            <path d="M110 56L70 92" class="fg-arrow" marker-end="url(#L05c)"/>
+            <path d="M220 56L250 92" class="fg-arrow" marker-end="url(#L05c)"/>
+            <text x="74" y="78" text-anchor="end" class="t-sm t-mut">negative</text>
+            <text x="256" y="78" class="t-sm t-mut">positive</text>
+            <rect x="8" y="96" width="120" height="40" rx="8" class="fg-good"/>
+            <text x="68" y="121" text-anchor="middle" class="t-sm t-b">No infection</text>
+            <rect x="160" y="96" width="162" height="56" rx="8" class="fg-ink"/>
+            <text x="241" y="118" text-anchor="middle" class="t-b">HCV RNA (PCR)</text>
+            <text x="241" y="138" text-anchor="middle" class="t-sm">or HCV core antigen</text>
+            <path d="M200 152L150 196" class="fg-arrow" marker-end="url(#L05c)"/>
+            <path d="M270 152L282 196" class="fg-arrow" marker-end="url(#L05c)"/>
+            <text x="160" y="176" text-anchor="end" class="t-sm t-mut">negative</text>
+            <text x="286" y="176" class="t-sm t-mut">positive</text>
+            <rect x="8" y="200" width="170" height="56" rx="8" class="fg-thin"/>
+            <text x="93" y="222" text-anchor="middle" class="t-sm t-b">Past / cleared infection</text>
+            <text x="93" y="242" text-anchor="middle" class="t-sm t-mut">antibody = old scar</text>
+            <rect x="190" y="200" width="132" height="56" rx="8" class="fg-bad"/>
+            <text x="256" y="222" text-anchor="middle" class="t-b t-bad">Active HCV</text>
+            <text x="256" y="242" text-anchor="middle" class="t-sm">confirmed</text>
+            <path d="M256 256v30" class="fg-arrow" marker-end="url(#L05c)"/>
+            <rect x="60" y="290" width="262" height="56" rx="8" class="fg-box"/>
+            <text x="191" y="312" text-anchor="middle" class="t-sm t-b">Fibrosis: FibroScan, APRI, FIB-4</text>
+            <text x="191" y="332" text-anchor="middle" class="t-sm t-mut">biopsy rarely used now</text>
+            <path d="M191 346v24" class="fg-arrow" marker-end="url(#L05c)"/>
+            <rect x="60" y="374" width="262" height="40" rx="8" class="fg-good"/>
+            <text x="191" y="399" text-anchor="middle" class="t-sm t-b">Plan DAAs (genotype less critical)</text>
+          </svg>
+      - kind: check
+        page: 92
+        question: "A 34-year-old blood donor is anti-HCV positive. He feels well and his ALT is normal. Next step?"
+        options:
+          - "HCV RNA by PCR"
+          - "Start sofosbuvir/velpatasvir now"
+          - "HCV genotyping"
+          - "Liver biopsy"
+        answer: 0
+        why:
+          - "صح: الـ antibody screening بس. لازم **RNA (أو core antigen)** يأكد إن العدوى active."
+          - "مش قبل ما تتأكد إن فيه viremia: ممكن تكون عدوى قديمة خفت لوحدها."
+          - "الـ genotype للتخطيط بعد التأكيد، وبقى **less critical** مع الـ pangenotypic DAAs."
+          - "الكتاب: الـ biopsy **rarely used now**، والـ fibrosis بتتقيّم non-invasive."
+      - kind: try
+        items: [hb.L05.010, hb.L05.011, hb.L05.016, hb.L05.018, hb.L05.020]
+    recap:
+      - "Acute: **15–45%** clearance. Chronic: **55–85%** (> 6 months)."
+      - "Cirrhosis **~15–30% over 20 years**، والـ HCC **mainly with cirrhosis**."
+      - "Acute غالبًا asymptomatic، و chronic **silent for years** (fatigue، RUQ discomfort، arthralgia)."
+      - "Extrahepatic: **CLING** (Cryoglobulinemia، Lymphoma، Insulin resistance، Glomerulonephritis)."
+      - "Screening = **anti-HCV**، confirm = **HCV RNA or core Ag**. Fibrosis: FibroScan، APRI، FIB-4."
+    practice: [hb.L05.010, hb.L05.011, hb.L05.012, hb.L05.013, hb.L05.014, hb.L05.015, hb.L05.016, hb.L05.017, hb.L05.018, hb.L05.019, hb.L05.020, hb.L05.043, hb.L05.047, hb.L05.049, hb.L05.055, hb.L05.056]
+
+  # ------------------------------------------------------------------
+  - id: hb.L05.lesson3
+    title: "الـ DAAs: نضرب الفيروس في 3 أماكن"
+    hook: "من شهور interferon لحد حباية بتشفي أكتر من 95%. تعالى نفهم كل دوا بيقص فين."
+    minutes: 9
+    pages: [92, 93]
+    topics: [daas]
+    goals:
+      - "تعرّف SVR12 تعريف الامتحان"
+      - "تربط كل DAA class بالـ target بتاعها من آخر اسم الدوا"
+      - "تحفظ الـ regimens الأربعة ومددها، وتعرف مين مش pangenotypic"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 92
+        title: "إمتى نقول اتعالج؟"
+        quote: "Sustained Virologic Response (SVR) = undetectable HCV RNA 12 weeks after treatment (SVR12 = cure)."
+        text: |
+          الهدف: **SVR** = **undetectable HCV RNA** بعد **12 أسبوع** من **نهاية** العلاج. والـ **SVR12 = cure**.
+
+          لاحظ: 12 أسبوع **بعد** ما العلاج يخلص، مش آخر يوم في العلاج.
+      - kind: table
+        page: 92
+        title: "Old vs modern HCV treatment"
+        columns: ["Feature", "Interferon ± Ribavirin", "DAAs"]
+        rows:
+          - ["Route", "Injections (old regimen)", "Oral"]
+          - ["Duration", "Long", "Short"]
+          - ["Safety", "Toxic", "Well tolerated"]
+          - ["Efficacy", "Low", "> 95% cure"]
+        hide: [[1, 2], [2, 1], [3, 2]]
+      - kind: aside
+        tone: joke
+        text: |
+          الفرق بين الـ interferon والـ DAAs زي الفرق بين إنك تسافر من إسكندرية لأسوان **بالحنطور** وإنك تركب **الطيارة**: الحنطور طويل ومتعب وممكن ماتوصلش، والطيارة قصيرة ومريحة وبتوصل أكتر من 95% من المرات 😄
+      - kind: explain
+        page: 92
+        title: "الفيروس بيشتغل إزاي، وإحنا بنضربه فين؟"
+        text: |
+          الـ RNA بتاع الفيروس بيتترجم لبروتين واحد طويل (**polyprotein**) لازم يتقص علشان يطلع منه إنزيمات الفيروس. الـ DAAs بتضرب في 3 أماكن (جدول الكتاب):
+
+          - **NS3/4A protease inhibitors** (Grazoprevir، Glecaprevir): بتمنع **viral polyprotein cleavage**.
+          - **NS5A inhibitors** (Ledipasvir، Velpatasvir، Pibrentasvir): بتضرب الـ **replication complex**.
+          - **NS5B polymerase inhibitors** (Sofosbuvir): بتوقف **viral RNA replication**.
+      - kind: figure
+        page: 93
+        title: "3 أهداف على شريط واحد"
+        alt: "A long bar labelled HCV polyprotein with three highlighted segments. NS3/4A protease is blocked by previr drugs, grazoprevir and glecaprevir, which stop polyprotein cleavage. NS5A is blocked by asvir drugs, ledipasvir, velpatasvir and pibrentasvir, acting on the replication complex. NS5B polymerase is blocked by buvir, sofosbuvir, which stops RNA replication."
+        caption: "اقرا آخر اسم الدوا تعرف بيضرب فين: **-previr** على الـ protease، **-asvir** على NS5A، **-buvir** على NS5B."
+        svg: |
+          <svg viewBox="0 0 330 400" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L05d" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-acc"/></marker>
+            </defs>
+            <text x="165" y="18" text-anchor="middle" class="t-b">HCV polyprotein (one long chain)</text>
+            <rect x="5" y="30" width="320" height="34" rx="6" class="fg-box"/>
+            <rect x="80" y="30" width="70" height="34" class="fg-bad"/>
+            <rect x="170" y="30" width="60" height="34" class="fg-acc"/>
+            <rect x="240" y="30" width="80" height="34" class="fg-good"/>
+            <text x="40" y="52" text-anchor="middle" class="t-sm t-mut">core, E1, E2</text>
+            <text x="115" y="52" text-anchor="middle" class="t-sm t-b">NS3/4A</text>
+            <text x="200" y="52" text-anchor="middle" class="t-sm t-b">NS5A</text>
+            <text x="280" y="52" text-anchor="middle" class="t-sm t-b">NS5B</text>
+            <path d="M115 64v40" class="fg-arrow-acc" marker-end="url(#L05d)"/>
+            <path d="M200 64L200 208" class="fg-arrow-acc" marker-end="url(#L05d)"/>
+            <path d="M280 64L280 302" class="fg-arrow-acc" marker-end="url(#L05d)"/>
+            <rect x="5" y="108" width="190" height="80" rx="8" class="fg-bad"/>
+            <text x="14" y="128" class="t-b t-bad">-previr: protease</text>
+            <text x="14" y="148" class="t-sm">Grazoprevir, Glecaprevir</text>
+            <text x="14" y="168" class="t-sm t-mut">stop polyprotein cleavage</text>
+            <rect x="5" y="212" width="230" height="80" rx="8" class="fg-acc"/>
+            <text x="14" y="232" class="t-b">-asvir: NS5A</text>
+            <text x="14" y="252" class="t-sm">Ledipasvir, Velpatasvir, Pibrentasvir</text>
+            <text x="14" y="272" class="t-sm t-mut">replication complex</text>
+            <rect x="5" y="306" width="300" height="80" rx="8" class="fg-good"/>
+            <text x="14" y="326" class="t-b t-good">-buvir: NS5B polymerase</text>
+            <text x="14" y="346" class="t-sm">Sofosbuvir</text>
+            <text x="14" y="366" class="t-sm t-mut">stop viral RNA replication</text>
+          </svg>
+      - kind: mnemonic
+        page: 93
+        word: "PAB"
+        parts:
+          - { key: "P", text: "-Previr = Protease (NS3/4A) inhibitors" }
+          - { key: "A", text: "-Asvir = NS5A inhibitors" }
+          - { key: "B", text: "-Buvir = NS5B polymerase inhibitor" }
+        hook: |
+          الكتاب مش هيقولك الـ suffix، بس هو بيوفر عليك حفظ الجدول كله: الـ P في previr = protease، والـ A في asvir = NS5A، والـ B في buvir = NS5B.
+      - kind: match
+        page: 93
+        prompt: "وصّل كل دوا بالـ target بتاعه:"
+        pairs:
+          - ["Grazoprevir", "NS3/4A protease"]
+          - ["Velpatasvir", "NS5A replication complex"]
+          - ["Sofosbuvir", "NS5B polymerase"]
+        why: "-previr على الـ protease، -asvir على NS5A، -buvir على NS5B. Sofosbuvir هو الـ NS5B inhibitor الوحيد في جدول الكتاب."
+      - kind: reveal
+        prompt: "ليه كل الـ regimens فيها **دوايين من classes مختلفة** مش دوا واحد؟"
+        answer: |
+          الـ RNA polymerase بتاع الفيروس بيغلط كتير وهو بينسخ، فبيطلع طفرات طول الوقت. لو ضربت هدف واحد، طفرة واحدة ممكن تهرب منه.
+
+          لو ضربت **هدفين** مع بعض (مثلًا NS5B + NS5A)، الفيروس محتاج طفرتين في نفس الوقت علشان يهرب، وده صعب جدًا. ده شرح physiology مقبول للـ combination، مش جملة من الكتاب.
+      - kind: table
+        page: 93
+        title: "Common regimens (book list)"
+        columns: ["Regimen", "Brand", "Duration / genotypes"]
+        rows:
+          - ["Sofosbuvir + Velpatasvir", "Epclusa", "12 weeks, pangenotypic"]
+          - ["Glecaprevir + Pibrentasvir", "Mavyret", "8–12 weeks, pangenotypic"]
+          - ["Sofosbuvir + Ledipasvir", "Harvoni", "12 weeks, genotypes 1 and 4"]
+          - ["Sofosbuvir + Daclatasvir", "", "Pangenotypic; special considerations for genotype 3"]
+        hide: [[0, 2], [1, 2], [2, 2], [3, 2]]
+      - kind: aside
+        tone: trap
+        page: 93
+        text: |
+          **Harvoni (Sofosbuvir + Ledipasvir)** هو الوحيد في القايمة اللي الكتاب كاتب جنبه **Genotypes 1, 4**، يعني **مش pangenotypic**.
+
+          و **Mavyret** هو اللي مدته **8–12 أسبوع**. الباقي **12 أسبوع**.
+      - kind: check
+        page: 93
+        question: "Which regimen in the lecture is NOT listed as pangenotypic?"
+        options:
+          - "Sofosbuvir + Ledipasvir"
+          - "Sofosbuvir + Velpatasvir"
+          - "Glecaprevir + Pibrentasvir"
+          - "Sofosbuvir + Daclatasvir"
+        answer: 0
+        why:
+          - "صح: Harvoni مكتوب له **genotypes 1, 4** بس."
+          - "Epclusa تحت **Common Regimens (Pangenotypic)**، 12 أسبوع."
+          - "Mavyret pangenotypic، 8–12 أسبوع."
+          - "الكتاب: **pangenotypic**، مع special considerations لـ genotype 3."
+      - kind: try
+        items: [hb.L05.021, hb.L05.023, hb.L05.024, hb.L05.025, hb.L05.026]
+    recap:
+      - "**SVR12** = undetectable HCV RNA بعد **12 أسبوع من نهاية** العلاج = cure."
+      - "Interferon ± RBV: toxic، طويل، low efficacy. الـ DAAs: oral، قصيرة، **> 95%** cure."
+      - "**-previr** = NS3/4A protease، **-asvir** = NS5A، **-buvir** (sofosbuvir) = NS5B polymerase."
+      - "Epclusa 12w، Mavyret **8–12w**، Harvoni 12w بس **genotypes 1, 4**، SOF + daclatasvir pangenotypic (G3 special)."
+    practice: [hb.L05.021, hb.L05.022, hb.L05.023, hb.L05.024, hb.L05.025, hb.L05.026, hb.L05.027, hb.L05.045, hb.L05.057]
+
+  # ------------------------------------------------------------------
+  - id: hb.L05.lesson4
+    title: "قبل وأثناء وبعد العلاج، والحالات الخاصة"
+    hook: "حباية بتشفي، بس فيه 6 حاجات لازم تعملها قبلها، ودوا قلب واحد ممنوع خالص معاها."
+    minutes: 10
+    pages: [93, 94]
+    topics: [management, special]
+    goals:
+      - "ترتّب الـ pre-treatment work-up زي الكتاب"
+      - "تعرف ليه بنعمل HBcAb وليه amiodarone ممنوع"
+      - "تعرف المتابعة بعد الـ SVR في الـ cirrhosis"
+      - "تظبط العلاج في decompensated cirrhosis و CKD والحمل والـ coinfection"
+    status: unverified
+    steps:
+      - kind: order
+        page: 93
+        prompt: "رتّب الـ **Before Treatment** checklist زي الكتاب:"
+        steps:
+          - "Confirm HCV RNA"
+          - "Assess fibrosis (FIB-4, FibroScan)"
+          - "Test for HIV and HBV (including total HBcAb)"
+          - "Check liver and renal function"
+          - "Pregnancy test (if relevant)"
+          - "Check for drug-drug interactions"
+        why: "ده ترتيب الكتاب بالظبط في **Management Strategies: Before Treatment**. أول حاجة تتأكد إن فيه فيروس أصلًا، وآخر حاجة تراجع أدويته."
+      - kind: reveal
+        page: 94
+        prompt: "ليه نعمل **total HBcAb** مش HBsAg بس قبل الـ DAAs؟"
+        answer: |
+          الكتاب بيقول في الـ coinfection: **monitor HBV reactivation**.
+
+          الشرح المقبول: الـ HCV والـ HBV لما يبقوا مع بعض، الـ HCV غالبًا بيكتم الـ HBV. أول ما الـ DAAs تشيل الـ HCV، الـ HBV ممكن يصحى ويعمل flare. والـ **HBcAb** بيكشف حتى العدوى القديمة الكامنة اللي الـ HBsAg فيها ممكن يكون negative.
+      - kind: aside
+        tone: exam
+        page: 93
+        quote: "Amiodarone is absolutely contraindicated… can result in serious bradycardia."
+        text: |
+          المثال الوحيد اللي الكتاب اختاره للـ **drug-drug interactions**: **Amiodarone**، **absolutely contraindicated**، لأنه ممكن يعمل **serious bradycardia** (مع الـ sofosbuvir regimens).
+
+          لو شفت في السؤال «AF on amiodarone + HCV»، الإجابة جاهزة.
+      - kind: explain
+        page: 93
+        title: "أثناء العلاج وبعده"
+        text: |
+          **During treatment:** حاجتين بس: **monitor adherence** و **check for drug interactions**.
+
+          **After treatment:**
+
+          - **HCV RNA at 12 weeks post-treatment (SVR12)**.
+          - لو فيه **cirrhosis**: المتابعة مستمرة: **HCC surveillance every 6 months**، و **primary prophylaxis against variceal bleeding and decompensation** في اللي عندهم **CSPH**.
+      - kind: reveal
+        page: 93
+        prompt: "المريض بقى cured (SVR12). ليه لسه بنعمله **HCC surveillance كل 6 شهور** لو عنده cirrhosis؟"
+        answer: |
+          الـ DAAs بتشيل **الفيروس**، بس مابتشيلش **الـ cirrhosis** اللي اتعملت خلاص. الكبد المتليف نفسه هو أرض الـ HCC (افتكر: HCC **mainly with cirrhosis**). وكمان الـ portal hypertension (CSPH) ماتختفيش بالـ SVR، فالـ varices لسه محتاجة prophylaxis.
+
+          زي ما تطفي حريقة في بيت: النار طفت، بس الحيطان المحروقة لسه محتاجة كشف دوري.
+      - kind: check
+        page: 93
+        question: "A patient with HCV cirrhosis and CSPH achieves SVR12. What follow-up does the lecture require?"
+        options:
+          - "HCC surveillance every 6 months and primary prophylaxis against variceal bleeding"
+          - "Discharge: SVR12 means cure, no further follow-up"
+          - "Repeat anti-HCV every year to confirm cure"
+          - "Restart DAAs for another 12 weeks"
+        answer: 0
+        why:
+          - "صح: الكتاب: **continued monitoring if cirrhosis is present**."
+          - "الفيروس اتشال، بس الـ cirrhosis ومخاطرها لسه موجودة."
+          - "الـ anti-HCV بيفضل positive بعد الشفا؛ مابيقيسش حاجة هنا."
+          - "مفيش فيروس نعالجه؛ SVR12 = cure."
+      - kind: explain
+        page: 94
+        title: "Special populations"
+        text: |
+          - **Decompensated cirrhosis:** محتاجة **adjusted regimens**: **add ribavirin** أو **increase the duration to 24 weeks**.
+          - **Renal impairment:** الأفضل **avoid sofosbuvir in severe CKD** واستخدم **Glecaprevir/Pibrentasvir**. لو مش متاح: sofosbuvir-containing regimens **with close observation**، **من غير** ما تغيّر جرعة الـ sofosbuvir. والـ **ribavirin** جرعته تتظبط لو **CrCl < 50**.
+          - **Pregnancy:** الـ DAAs **not currently approved in pregnancy or lactation**.
+          - **Coinfection:** **treat HCV in HIV/HBV co-infection**، و **monitor HBV reactivation**.
+      - kind: update
+        page: 94
+        text: "الـ protease-inhibitor regimens (glecaprevir/pibrentasvir، grazoprevir) ممنوعة في الـ decompensated cirrhosis (Child-Pugh B أو C) حسب الـ guidelines؛ بيستخدموا sofosbuvir/velpatasvir ± ribavirin. في الامتحان اكتب إجابة الكتاب: add ribavirin أو 24 weeks."
+        ref: "EASL recommendations on treatment of hepatitis C, 2020"
+      - kind: table
+        page: 94
+        title: "Special populations (book rules)"
+        columns: ["Population", "What the lecture says"]
+        rows:
+          - ["Decompensated cirrhosis", "Add ribavirin, or extend to 24 weeks"]
+          - ["Severe CKD", "Prefer glecaprevir/pibrentasvir; else sofosbuvir with close observation, no dose change"]
+          - ["Ribavirin in renal impairment", "Adjust dose if CrCl < 50"]
+          - ["Pregnancy or lactation", "DAAs not currently approved"]
+          - ["HIV or HBV coinfection", "Treat HCV; monitor HBV reactivation"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+      - kind: case
+        page: 94
+        stem: "A 55-year-old woman on hemodialysis has chronic viremic HCV with a compensated liver. All DAAs are available."
+        steps:
+          - question: "Which regimen does the lecture prefer?"
+            options: ["Glecaprevir/Pibrentasvir", "Sofosbuvir/Velpatasvir", "Sofosbuvir/Ledipasvir", "Interferon plus ribavirin"]
+            answer: 0
+            why: "الكتاب: **better to avoid sofosbuvir in severe CKD** واستخدم **Glecaprevir/Pibrentasvir**."
+          - reveal: "Now imagine glecaprevir/pibrentasvir is not available in her hospital."
+            question: "What does the lecture allow?"
+            options: ["A sofosbuvir regimen with close observation, same sofosbuvir dose", "Halve the sofosbuvir dose", "Wait until she gets a kidney transplant", "No treatment is possible"]
+            answer: 0
+            why: "الكتاب: **use sofosbuvir containing regimens with close observation without modifying sofosbuvir dose**."
+      - kind: try
+        items: [hb.L05.028, hb.L05.029, hb.L05.030, hb.L05.033, hb.L05.034]
+    recap:
+      - "قبل العلاج: **RNA → fibrosis → HIV/HBV (total HBcAb) → liver/renal → pregnancy → interactions**."
+      - "**Amiodarone** absolutely contraindicated: **serious bradycardia**."
+      - "أثناء العلاج: adherence و interactions. بعده: **SVR12**."
+      - "Cirrhosis بعد الشفا: **HCC surveillance كل 6 شهور** و primary prophylaxis للـ varices لو فيه CSPH."
+      - "Decompensated: add RBV أو **24 weeks**. Severe CKD: **G/P**. RBV تتظبط لو CrCl < 50. الحمل: not approved. Coinfection: راقب HBV reactivation."
+    practice: [hb.L05.028, hb.L05.029, hb.L05.030, hb.L05.031, hb.L05.032, hb.L05.033, hb.L05.034, hb.L05.035, hb.L05.036, hb.L05.037, hb.L05.038, hb.L05.039, hb.L05.044, hb.L05.046, hb.L05.048, hb.L05.050, hb.L05.051, hb.L05.052, hb.L05.053, hb.L05.059, hb.L05.060]
+
+  # ------------------------------------------------------------------
+  - id: hb.L05.lesson5
+    title: "الوقاية والـ screening: إزاي مصر كسبت"
+    hook: "مرض ساكت وعلاجه بيشفي: يبقى السلاح الحقيقي إنك تدوّر عليه. ونختم بخطة الـ essays."
+    minutes: 7
+    pages: [94, 96]
+    topics: [prevention]
+    goals:
+      - "تعدّ وسايل الوقاية الثلاثة"
+      - "تحفظ مين نعمله screening ومرة كل قد إيه"
+      - "تعرف هيكل الـ 7 essay questions اللي في آخر المحاضرة"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 94
+        title: "الوقاية"
+        text: |
+          - **Safe injections and blood screening**
+          - **Harm reduction in IV drug users**
+          - **Safe healthcare practices**
+
+          كلها بتقفل نفس الباب: **الدم**. افتكر إن C **blood-borne** في الأساس.
+      - kind: explain
+        page: 94
+        title: "مين نعمله screening؟"
+        text: |
+          - 1. **All adults ≥ 18 years at least once**
+          - 2. **High-risk groups:** IV drug users، prisoners، dialysis patients
+          - 3. **Pregnant women: once during each pregnancy**
+      - kind: reveal
+        page: 94
+        prompt: "ليه نعمل screening لكل البالغين حتى لو مفيش أعراض؟"
+        answer: |
+          جمّع اللي اتعلمته:
+
+          - المرض **silent for years**، فالأعراض مش هتنبهك بدري.
+          - العلاج **curable in > 95%** و **oral, short-course**.
+          - و **early detection and treatment prevent cirrhosis and liver cancer** (take-home message من الكتاب).
+
+          مرض ساكت + علاج سهل بيشفي = لازم تدوّر عليه بنفسك.
+      - kind: check
+        page: 94
+        question: "According to the lecture, how often should pregnant women be screened for HCV?"
+        options:
+          - "Once during each pregnancy"
+          - "Only if they have risk factors"
+          - "Every trimester"
+          - "Never; DAAs are not approved in pregnancy"
+        answer: 0
+        why:
+          - "صح: **once during each pregnancy**."
+          - "الكتاب بيعمل screening لكل الحوامل، مش الـ high-risk بس."
+          - "مرة واحدة في كل حمل، مش كل trimester."
+          - "إن العلاج مش approved في الحمل مايلغيش الـ screening: بنعرف ونتابع الأم والطفل."
+      - kind: aside
+        tone: tip
+        page: 94
+        text: |
+          الكتاب بيختم بإن **Egypt's mass screening program is a global success model**. لو جالك essay عن الـ public health، خلّي مصر هي المثال الأول: من **highest prevalence globally** لنموذج عالمي بفضل الـ screening والـ treatment على مستوى الدولة.
+      - kind: match
+        page: 94
+        prompt: "وصّل كل take-home message بالكلمة اللي بتلخصها:"
+        pairs:
+          - ["HCV is curable in > 95% with DAAs", "Cure"]
+          - ["Early detection and treatment prevent cirrhosis and HCC", "Early"]
+          - ["DAAs are well tolerated, oral and short-course", "Easy"]
+          - ["Screening and harm reduction are key to elimination", "Eliminate"]
+          - ["Egypt's mass screening program", "Model"]
+        why: "دي الـ **Take-Home Messages** الخمسة بترتيب الكتاب."
+      - kind: aside
+        tone: exam
+        page: 95
+        text: |
+          آخر المحاضرة فيها **7 essay questions**، وكل واحد معاه **points to cover**. هم بالترتيب نفس دروسنا:
+
+          - 1. Epidemiology + transmission (درس 1)
+          - 2. Natural history (درس 2)
+          - 3. Diagnostic approach (درس 2)
+          - 4. Interferon vs DAAs (درس 3)
+          - 5. Public health strategies (الدرس ده)
+          - 6. Special populations (درس 4)
+          - 7. Comprehensive management plan (درس 4)
+
+          اكتب الـ points اللي الكتاب حاطها كعناوين، وكمّل تحت كل عنوان من الدروس.
+      - kind: check
+        page: 96
+        question: "In the essay on public health strategies, which point does the lecture list?"
+        options:
+          - "Role of WHO and global HCV elimination goals"
+          - "Routine liver biopsy for all screened adults"
+          - "HCV vaccination of newborns"
+          - "Mandatory genotyping before any screening"
+        answer: 0
+        why:
+          - "صح: من الـ points الأربعة: national screening، harm reduction، education and awareness، و **WHO elimination goals**."
+          - "الـ biopsy **rarely used now**."
+          - "مفيش vaccine لـ HCV في المحاضرة (ده HBV)."
+          - "الـ genotyping للتخطيط للعلاج بعد التأكيد، مش جزء من الـ screening."
+      - kind: try
+        items: [hb.L05.040, hb.L05.041, hb.L05.058, hb.L05.060]
+    recap:
+      - "الوقاية: **safe injections and blood screening**، **harm reduction in IVDU**، **safe healthcare practices**."
+      - "Screening: **كل البالغين ≥ 18 مرة واحدة**، الـ high-risk (IVDU، prisoners، dialysis)، و **كل حمل**."
+      - "Take-home: > 95% cure، early treatment يمنع cirrhosis و HCC، DAAs سهلة، الـ screening هو مفتاح الـ elimination، ومصر **global success model**."
+      - "الـ 7 essays هي المحاضرة كلها بالترتيب."
+    practice: [hb.L05.040, hb.L05.041, hb.L05.042, hb.L05.005, hb.L05.054, hb.L05.058, hb.L05.060]

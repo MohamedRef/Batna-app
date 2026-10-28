@@ -7,10 +7,6 @@ use batna_protocol::cloud::{DeviceInfo, DeviceSummary, Platform};
 use crate::sql::{Sql, SqlError, Value, col};
 use crate::tokens::REFRESH_TTL_MS;
 
-/// A client that lost the response to a refresh may retry with the old token
-/// for this long.
-pub const REFRESH_GRACE_MS: u64 = 2 * 60 * 1000;
-
 pub const SCHEMA: &str = "
 CREATE TABLE IF NOT EXISTS devices (
     device_id TEXT PRIMARY KEY,
@@ -32,7 +28,7 @@ CREATE TABLE IF NOT EXISTS devices (
 /// in as numbered steps through [`crate::sql::migrate`].
 pub fn migrate(db: &impl Sql) -> Result<(), SqlError> {
     db.exec_batch(SCHEMA)?;
-    crate::sql::migrate(db, "devices_schema", &[])
+    crate::sql::migrate(db, "devices_schema", &["ALTER TABLE devices ADD COLUMN retired_hash TEXT"])
 }
 
 #[derive(Debug, PartialEq, Eq, thiserror::Error)]
@@ -43,8 +39,9 @@ pub enum RefreshError {
     Revoked,
     #[error("refresh token expired")]
     Expired,
-    /// An old refresh token came back after its grace period: someone may
-    /// have copied it. The device is signed out to be safe.
+    /// A refresh token came back after the device had already used the one
+    /// that replaced it: someone may have copied it. The device is signed
+    /// out to be safe.
     #[error("refresh token reused")]
     Reused,
     #[error(transparent)]
@@ -111,7 +108,7 @@ impl<'a, S: Sql> Devices<'a, S> {
                 email = excluded.email, signed_in_ms = excluded.signed_in_ms,
                 last_seen_ms = excluded.last_seen_ms, refresh_hash = excluded.refresh_hash,
                 refresh_expires_ms = excluded.refresh_expires_ms,
-                prev_hash = NULL, rotated_ms = NULL, revoked_ms = NULL",
+                prev_hash = NULL, retired_hash = NULL, rotated_ms = NULL, revoked_ms = NULL",
             &[
                 info.device_id.as_str().into(),
                 name.into(),
@@ -129,6 +126,12 @@ impl<'a, S: Sql> Devices<'a, S> {
 
     /// Rotates the refresh token. Returns the new token's expiry and the
     /// email the device signed in with (to re-check the allowlist).
+    ///
+    /// A rotation commits when the device first presents the new token (#258).
+    /// Until then the previous one keeps working, however late, so a lost
+    /// response or a token the device couldn't save never signs it out. Once
+    /// the new token is used, the old one is retired, and presenting a retired
+    /// token signs the device out.
     pub fn refresh(
         &self,
         device: &str,
@@ -137,7 +140,7 @@ impl<'a, S: Sql> Devices<'a, S> {
         now_ms: u64,
     ) -> Result<Refreshed, RefreshError> {
         let rows = self.db.exec(
-            "SELECT refresh_hash, refresh_expires_ms, prev_hash, rotated_ms, revoked_ms, email
+            "SELECT refresh_hash, refresh_expires_ms, prev_hash, retired_hash, revoked_ms, email
              FROM devices WHERE device_id = ?",
             &[device.into()],
         )?;
@@ -148,36 +151,45 @@ impl<'a, S: Sql> Devices<'a, S> {
         let current = col(row, 0, "refresh_hash")?.as_str();
         let expires = col(row, 1, "refresh_expires_ms")?.as_u64().unwrap_or(0);
         let prev = col(row, 2, "prev_hash")?.as_str();
-        let rotated = col(row, 3, "rotated_ms")?.as_u64().unwrap_or(0);
+        let retired = col(row, 3, "retired_hash")?.as_str();
         let email = col(row, 5, "email")?.as_str().unwrap_or_default().to_owned();
 
-        if current == Some(presented_hash) {
-            if expires <= now_ms {
-                return Err(RefreshError::Expired);
-            }
+        // The current token commits the last rotation: the previous one retires.
+        // The previous token means the device never got (or kept) the current
+        // one: it gets a new one, and the previous stays valid.
+        let commit = if current == Some(presented_hash) {
+            true
         } else if prev == Some(presented_hash) {
-            if now_ms.saturating_sub(rotated) > REFRESH_GRACE_MS {
-                self.revoke(device, now_ms)?;
-                return Err(RefreshError::Reused);
-            }
+            false
+        } else if retired == Some(presented_hash) {
+            self.revoke(device, now_ms)?;
+            return Err(RefreshError::Reused);
         } else {
             return Err(RefreshError::Unknown);
+        };
+        if expires <= now_ms {
+            return Err(RefreshError::Expired);
         }
 
         let new_expires = now_ms + REFRESH_TTL_MS;
-        self.db.exec(
-            "UPDATE devices SET prev_hash = refresh_hash, refresh_hash = ?, refresh_expires_ms = ?,
-                                rotated_ms = ?, last_seen_ms = ?
-             WHERE device_id = ?",
-            &[new_hash.into(), new_expires.into(), now_ms.into(), now_ms.into(), device.into()],
-        )?;
+        let sql = if commit {
+            "UPDATE devices SET retired_hash = prev_hash, prev_hash = refresh_hash, refresh_hash = ?,
+                                refresh_expires_ms = ?, rotated_ms = ?, last_seen_ms = ?
+             WHERE device_id = ?"
+        } else {
+            "UPDATE devices SET refresh_hash = ?, refresh_expires_ms = ?, rotated_ms = ?, last_seen_ms = ?
+             WHERE device_id = ?"
+        };
+        self.db
+            .exec(sql, &[new_hash.into(), new_expires.into(), now_ms.into(), now_ms.into(), device.into()])?;
         Ok(Refreshed { expires_ms: new_expires, email })
     }
 
     /// Signs a device out. Returns false if it doesn't exist.
     pub fn revoke(&self, device: &str, now_ms: u64) -> Result<bool, SqlError> {
         let rows = self.db.exec(
-            "UPDATE devices SET revoked_ms = COALESCE(revoked_ms, ?), refresh_hash = NULL, prev_hash = NULL
+            "UPDATE devices SET revoked_ms = COALESCE(revoked_ms, ?), refresh_hash = NULL, prev_hash = NULL,
+                                retired_hash = NULL
              WHERE device_id = ? RETURNING device_id",
             &[now_ms.into(), device.into()],
         )?;
@@ -285,14 +297,16 @@ mod tests {
         assert_eq!(d.refresh(id("mac"), "wrong", "x", NOW), Err(RefreshError::Unknown));
         let r = d.refresh(id("mac"), "h1", "h2", NOW + 1000).unwrap();
         assert_eq!(r, Refreshed { expires_ms: NOW + 1000 + REFRESH_TTL_MS, email: "me@example.com".into() });
-        // Lost response: the old token works again within the grace period.
-        d.refresh(id("mac"), "h1", "h3", NOW + 2000).unwrap();
-        d.refresh(id("mac"), "h3", "h4", NOW + 3000).unwrap();
-        // Long after: reuse signs the device out.
-        assert_eq!(
-            d.refresh(id("mac"), "h3", "h5", NOW + 3000 + REFRESH_GRACE_MS + 1),
-            Err(RefreshError::Reused)
-        );
+        // Lost response (or a token the device couldn't save): the old token
+        // still works hours later, as long as h2 was never used (#258).
+        d.refresh(id("mac"), "h1", "h3", NOW + 3_600_000).unwrap();
+        // h2 never reached the device, so it is simply gone.
+        assert_eq!(d.refresh(id("mac"), "h2", "x", NOW + 3_600_001), Err(RefreshError::Unknown));
+        // Using h3 commits it: h1 retires, and h3 stays valid as the previous token.
+        d.refresh(id("mac"), "h3", "h4", NOW + 3_700_000).unwrap();
+        d.refresh(id("mac"), "h3", "h5", NOW + 3_800_000).unwrap();
+        // A retired token coming back signs the device out.
+        assert_eq!(d.refresh(id("mac"), "h1", "h6", NOW + 3_900_000), Err(RefreshError::Reused));
         assert!(!d.is_active(id("mac")).unwrap());
     }
 

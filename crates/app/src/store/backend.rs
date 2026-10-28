@@ -14,6 +14,10 @@ use dioxus::prelude::*;
 
 use super::{Store, now_ms};
 use crate::content::Library;
+use crate::study::PLAYABLE;
+
+/// Kinds the Cases screen plays, so they come back there when due (#242).
+pub const CASE_KINDS: &[&str] = &["case", "calc"];
 
 /// One study item with the lecture it belongs to.
 #[derive(Clone, Debug)]
@@ -61,7 +65,10 @@ pub fn seconds_for(body: &Body) -> u32 {
 /// What Today shows.
 #[derive(Clone, Debug, Default, PartialEq)]
 pub struct Overview {
+    /// Due items a study session plays (`study::PLAYABLE`).
     pub due: usize,
+    /// Due cases and calc items, which the Cases screen plays (#242).
+    pub due_cases: Vec<String>,
     pub due_minutes: u32,
     /// New items he can still start today (the daily cap and what's written).
     pub new_today: usize,
@@ -206,7 +213,11 @@ impl ReviewBackend {
     }
 
     /// False when the settings weren't saved (reported to the log).
-    pub fn set_settings(&mut self, settings: ReviewSettings) -> bool {
+    pub fn set_settings(&mut self, mut settings: ReviewSettings) -> bool {
+        // The background refit writes `fsrs` straight to the store, so the
+        // copy these settings were built from may be older (#248). No screen
+        // edits the fit, so the stored one always wins.
+        settings.fsrs = self.store.review_settings().fsrs;
         if let Err(e) = self.store.put_review_settings(&settings) {
             super::write_failed("review settings", &e);
             return false;
@@ -221,7 +232,7 @@ impl ReviewBackend {
     /// Items falling due on each of the next `days` study days (index 0 is
     /// today, overdue included). Items marked ✗ are left out.
     pub fn due_forecast(&self, days: usize, now_ms: i64) -> Vec<u32> {
-        self.scheduler.forecast(self.states.values().filter(|s| !self.hidden(&s.item_id)), now_ms, days)
+        self.scheduler.forecast(self.states.values().filter(|s| self.comes_back(&s.item_id)), now_ms, days)
     }
 
     /// Answers logged today (every screen, evidence included).
@@ -265,17 +276,36 @@ impl ReviewBackend {
         self.check(item_id) == Check::Hidden
     }
 
+    fn kind(&self, item_id: &str) -> Option<&'static str> {
+        self.entry(item_id).map(|e| e.item.body.kind())
+    }
+
+    /// Items some screen brings back when due: a session's kinds and the
+    /// Cases screen's. MCQs are scored in the bank and have no review round,
+    /// so their schedule never shows as work (#242).
+    fn comes_back(&self, item_id: &str) -> bool {
+        self.kind(item_id).is_some_and(|k| PLAYABLE.contains(&k) || CASE_KINDS.contains(&k))
+            && !self.hidden(item_id)
+    }
+
     fn due_states(&self, now_ms: i64) -> Vec<&CardState> {
-        self.scheduler.due(
-            self.states
-                .values()
-                .filter(|s| self.catalog.contains_key(&s.item_id) && !self.hidden(&s.item_id)),
-            now_ms,
-        )
+        self.scheduler.due(self.states.values().filter(|s| self.comes_back(&s.item_id)), now_ms)
+    }
+
+    /// Due items a study session can play, most urgent first.
+    pub fn session_due(&self, now_ms: i64) -> Vec<String> {
+        self.due_states(now_ms)
+            .into_iter()
+            .filter(|s| self.kind(&s.item_id).is_some_and(|k| PLAYABLE.contains(&k)))
+            .map(|s| s.item_id.clone())
+            .collect()
     }
 
     pub fn overview(&self, lib: &Library, now_ms: i64) -> Overview {
-        let due = self.due_states(now_ms);
+        let (due, cases): (Vec<_>, Vec<_>) = self
+            .due_states(now_ms)
+            .into_iter()
+            .partition(|s| self.kind(&s.item_id).is_some_and(|k| PLAYABLE.contains(&k)));
         let due_minutes = due
             .iter()
             .filter_map(|s| self.entry(&s.item_id))
@@ -288,7 +318,7 @@ impl ReviewBackend {
         let due_tomorrow = self
             .states
             .values()
-            .filter(|s| s.due_ms.is_some_and(|d| d > now_ms && d <= tomorrow) && !self.hidden(&s.item_id))
+            .filter(|s| s.due_ms.is_some_and(|d| d > now_ms && d <= tomorrow) && self.comes_back(&s.item_id))
             .count() as u32;
         let checked = self
             .catalog
@@ -314,6 +344,7 @@ impl ReviewBackend {
         }
         Overview {
             due: due.len(),
+            due_cases: cases.into_iter().map(|s| s.item_id.clone()).collect(),
             due_minutes,
             new_today: self.new_left_today(now_ms).min(unseen),
             unseen,
@@ -327,10 +358,15 @@ impl ReviewBackend {
 
 impl StudyStore for ReviewBackend {
     fn record(&mut self, event: ReviewEvent) {
-        if let Ok(logged) = self.store.append_review(event) {
-            self.log.push(logged);
-            self.replay();
-            self.changed();
+        let id = event.item_id.clone();
+        match self.store.append_review(event) {
+            Ok(logged) => {
+                self.log.push(logged);
+                self.replay();
+                self.changed();
+            }
+            // Today shows the note, so a lost answer is never silent (#244).
+            Err(e) => super::write_failed(&format!("the answer to {id}"), &e),
         }
     }
 
@@ -353,7 +389,7 @@ impl StudyStore for ReviewBackend {
     fn next_due_ms(&self, now_ms: i64) -> Option<i64> {
         self.states
             .values()
-            .filter(|s| !self.hidden(&s.item_id))
+            .filter(|s| self.comes_back(&s.item_id))
             .filter_map(|s| s.due_ms)
             .filter(|d| *d > now_ms)
             .min()
@@ -490,6 +526,40 @@ mod tests {
         b.delete_own("own.t1").unwrap();
         assert!(b.entry("own.t1").is_none());
         assert_eq!(b.catalog.len(), before);
+    }
+
+    #[test]
+    fn due_cases_go_to_the_cases_screen_and_mcqs_never_fall_due() {
+        let mut b = backend();
+        // A card, a case, a calc item and an MCQ, all missed (#242).
+        for id in ["hb.L01.001", "hb.L01.006", "hb.L01.009", "hb.L01.003"] {
+            answer(&mut b, id, Grade::Again, T0);
+        }
+        let later = T0 + 6 * 3_600_000;
+        let lib = Library::get();
+        let o = b.overview(lib, later);
+        assert_eq!(o.due, 1, "only the card plays in a session");
+        assert_eq!(o.due_cases, vec!["hb.L01.006".to_string(), "hb.L01.009".to_string()]);
+        assert_eq!(b.session_due(later), vec!["hb.L01.001".to_string()]);
+        // The Cases screen and oral still see the case and calc item.
+        let mut all = b.due(later);
+        all.sort();
+        assert_eq!(all, ["hb.L01.001", "hb.L01.006", "hb.L01.009"]);
+        assert_eq!(b.due_forecast(1, later), vec![3]);
+    }
+
+    #[test]
+    fn a_settings_change_keeps_a_fit_made_meanwhile() {
+        let mut b = backend();
+        let stale = b.settings.clone();
+        // The refit thread stores a personal fit behind the backend's back.
+        let mut fitted = b.store.review_settings();
+        fitted.fsrs =
+            Some(batna_core::srs::FsrsParams { weights: Vec::new(), reviews: 400, trained_at_ms: T0 });
+        b.store.put_review_settings(&fitted).unwrap();
+        assert!(b.set_settings(ReviewSettings { new_per_day: 45, ..stale }));
+        assert_eq!(b.store.review_settings().fsrs.map(|p| p.reviews), Some(400));
+        assert_eq!(b.store.review_settings().new_per_day, 45);
     }
 
     #[test]

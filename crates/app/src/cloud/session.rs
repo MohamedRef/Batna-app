@@ -10,7 +10,8 @@ use super::api::{Api, CloudError};
 /// Where the session is kept between launches.
 pub trait SessionVault: Send {
     fn load(&self) -> Option<Session>;
-    fn save(&self, session: &Session);
+    /// False when the session couldn't be kept for the next launch.
+    fn save(&self, session: &Session) -> bool;
     fn clear(&self);
 }
 
@@ -38,12 +39,10 @@ impl SessionVault for KeyringVault {
         serde_json::from_str(&json).ok()
     }
 
-    fn save(&self, session: &Session) {
-        let Some(entry) = &self.entry else { return };
+    fn save(&self, session: &Session) -> bool {
+        let Some(entry) = &self.entry else { return false };
         let json = serde_json::to_string(session).unwrap_or_default();
-        if let Err(e) = entry.set_password(&json) {
-            crate::diag::report!("saving the session failed: {e}");
-        }
+        entry.set_password(&json).map_err(|e| crate::diag::report!("saving the session failed: {e}")).is_ok()
     }
 
     fn clear(&self) {
@@ -81,10 +80,8 @@ impl SessionVault for MemoryVault {
         self.0.lock().ok()?.clone()
     }
 
-    fn save(&self, session: &Session) {
-        if let Ok(mut s) = self.0.lock() {
-            *s = Some(session.clone());
-        }
+    fn save(&self, session: &Session) -> bool {
+        self.0.lock().map(|mut s| *s = Some(session.clone())).is_ok()
     }
 
     fn clear(&self) {
@@ -124,8 +121,18 @@ impl Auth {
     pub fn access_token(&mut self, api: &Api, now_ms: u64, force: bool) -> Result<String, CloudError> {
         if force || now_ms + REFRESH_MARGIN_MS >= self.session.access_expires_at_ms {
             let fresh = api.refresh(&self.session.refresh_token)?;
-            self.vault.save(&fresh);
-            self.session = fresh;
+            self.session = if self.vault.save(&fresh) {
+                fresh
+            } else {
+                // The vault still holds the old refresh token, so keep using
+                // it: the hub accepts it until the new one is presented (#258),
+                // and the next launch, loading the old one, stays signed in.
+                Session {
+                    refresh_token: std::mem::take(&mut self.session.refresh_token),
+                    refresh_expires_at_ms: self.session.refresh_expires_at_ms,
+                    ..fresh
+                }
+            };
         }
         Ok(self.session.access_token.clone())
     }

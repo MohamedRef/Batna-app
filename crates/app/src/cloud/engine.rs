@@ -153,10 +153,7 @@ impl Engine {
                 }
             }
             Command::SignOut => {
-                if let Some(access) = self.access(false).await {
-                    let api = self.api.clone();
-                    let _ = blocking(move || api.sign_out(&access)).await;
-                }
+                let _ = self.authed(|api, access| api.sign_out(access)).await;
                 self.sign_out_locally();
             }
             Command::LoadDevices => self.load_devices().await,
@@ -164,11 +161,8 @@ impl Engine {
                 if device == self.device.device_id {
                     return Box::pin(self.command(Command::SignOut)).await;
                 }
-                if let Some(access) = self.access(false).await {
-                    let api = self.api.clone();
-                    if let Err(e) = blocking(move || api.revoke(&access, &device)).await {
-                        self.cloud_error(&e);
-                    }
+                if let Some(Err(e)) = self.authed(move |api, access| api.revoke(access, &device)).await {
+                    self.cloud_error(&e);
                 }
                 self.load_devices().await;
             }
@@ -214,9 +208,7 @@ impl Engine {
     }
 
     async fn load_devices(&mut self) {
-        let Some(access) = self.access(false).await else { return };
-        let api = self.api.clone();
-        let result = blocking(move || api.devices(&access)).await;
+        let Some(result) = self.authed(|api, access| api.devices(access)).await else { return };
         let devices: Result<Vec<DeviceSummary>, Problem> = match result {
             Ok(list) => Ok(list.devices),
             Err(e) => {
@@ -225,6 +217,25 @@ impl Engine {
             }
         };
         self.events.send(Event::Devices(devices)).ok();
+    }
+
+    /// Runs a call with an access token. A 401 means the token is older than
+    /// this device thinks (its clock runs behind the hub's), so it refreshes
+    /// once and retries before anything counts as signed out (#261). `None`
+    /// when there is no token (the reason is recorded).
+    async fn authed<T: Send + 'static>(
+        &mut self,
+        call: impl Fn(&Api, &str) -> Result<T, CloudError> + Send + Sync + Clone + 'static,
+    ) -> Option<Result<T, CloudError>> {
+        let mut force = false;
+        loop {
+            let access = self.access(force).await?;
+            let (api, call) = (self.api.clone(), call.clone());
+            match blocking(move || call(&api, &access)).await {
+                Err(CloudError::Api { code: ErrorCode::Unauthorized, .. }) if !force => force = true,
+                result => return Some(result),
+            }
+        }
     }
 
     /// A fresh access token, or `None` (with the reason recorded).

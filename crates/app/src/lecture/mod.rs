@@ -100,7 +100,8 @@ pub fn LecturePage(id: String) -> Element {
     let (due, playable, mcqs, cases) = {
         let b = review.backend.borrow();
         let prefix = format!("{id}.");
-        let due: Vec<String> = b.due(now_ms()).into_iter().filter(|i| i.starts_with(&prefix)).collect();
+        let due: Vec<String> =
+            b.session_due(now_ms()).into_iter().filter(|i| i.starts_with(&prefix)).collect();
         let items = lecture.map(|l| l.items.as_slice()).unwrap_or_default();
         let count = |kind: &[&str]| {
             items.iter().filter(|i| kind.contains(&i.body.kind()) && !b.is_hidden(&i.id)).count()

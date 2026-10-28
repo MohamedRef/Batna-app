@@ -42,6 +42,9 @@ pub mod count {
             one: "حاجة جديدة", two: "حاجتين جداد", few: "حاجات جديدة", many: "حاجة جديدة"
         };
     pub const TIME: Noun = Noun { one: "مرة", two: "مرتين", few: "مرات", many: "مرة" };
+    /// Cases and calc items together.
+    pub const CASE: Noun =
+        Noun { one: "حالة واحدة", two: "حالتين", few: "حالات", many: "حالة" };
 
     /// Any integer type; a negative number counts as 0.
     pub fn count<N: TryInto<u64>>(n: N, noun: &Noun) -> String {
@@ -110,6 +113,10 @@ pub mod today {
     /// "ابدأ جلسة 10 دقايق", with the session length he picked.
     pub fn start(minutes: u32) -> String {
         format!("ابدأ جلسة {}", super::count::count(minutes, &super::count::MINUTE))
+    }
+    /// "3 حالات مستنية مراجعة في شاشة الحالات".
+    pub fn due_cases(n: usize) -> String {
+        format!("{} مستنية مراجعة في شاشة الحالات", super::count::count(n, &super::count::CASE))
     }
     pub const ALL_DONE: &str = "خلّصت المستحق النهارده. شغل حلو.";
     pub const NEW_CAP_REACHED: &str = "وخلّصت الجديد اللي محدّده لليوم";
@@ -661,6 +668,7 @@ pub mod case {
     pub const BACK: &str = "رجوع للقائمة";
     pub const UNVERIFIED: &str = "لسه ما اتراجعش";
     pub const UPDATE: &str = "تحديث عن الكتاب";
+    pub const DUE: &str = "مستحقة مراجعة";
 }
 
 pub mod calc {
@@ -893,6 +901,11 @@ pub mod cloud {
     pub const NOT_CONFIGURED: &str = "المزامنة لسه ما اتفعّلتش في النسخة دي. مذاكرتك محفوظة على الجهاز، وتقدر تنقلها بنسخة احتياطية من «بياناتك».";
     pub const SIGN_IN: &str = "سجّل دخول بجوجل";
     pub const SIGNING_IN: &str = "كمّل تسجيل الدخول في المتصفح، وبعدين ارجع هنا.";
+    /// The browser page after Google sends him back (HTML).
+    pub const BROWSER_DONE: &str = "<h1>✓</h1><p>تمام، ارجع لباطنة.</p>";
+    pub const BROWSER_CANCELLED: &str = "<p>ما اتسجلتش. ارجع لباطنة وجرّب تاني.</p>";
+    /// "من" in "من 3 دقايق".
+    pub const AGO: &str = "من";
     pub const SIGNED_IN_AS: &str = "داخل بـ";
     pub const SIGN_OUT: &str = "اخرج من الجهاز ده";
     pub const CONNECTING: &str = "بيتصل";

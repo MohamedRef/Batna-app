@@ -33,6 +33,12 @@ const CSS: &str = r#"
 .onboard-lecture[aria-pressed="true"] .onboard-check { background: var(--accent); border-color: var(--accent); }
 .onboard-num { flex: none; font-variant-numeric: tabular-nums; color: var(--muted); }
 .onboard-upto { flex: none; min-block-size: 44px; padding-inline: var(--sp-2); border: 0; background: none; color: var(--accent); }
+/* Six themes with long names: whole-word rows, two columns once there is room (#232). */
+.onboard-themes { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 12rem), 1fr)); gap: var(--sp-2); }
+.onboard-theme { display: flex; align-items: center; gap: var(--sp-2); min-block-size: 44px; padding-inline: var(--sp-3);
+  text-align: start; border-radius: var(--radius); border: 1px solid var(--line); background: var(--surface); }
+.onboard-theme[aria-checked="true"] { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); font-weight: 700; }
+.onboard-theme .onboard-swatch { flex: none; margin-inline-end: 0; }
 .onboard-swatch { display: inline-block; vertical-align: middle; inline-size: 1.1rem; block-size: 1.1rem; margin-inline-end: var(--sp-1);
   border-radius: 50%; border: 1px solid var(--line); background: linear-gradient(135deg, var(--sw-a) 50%, var(--sw-b) 50%); }
 "#;
@@ -329,10 +335,11 @@ fn Questions() -> Element {
         Step::Theme => rsx! {
             h1 { {tx::THEME_TITLE} }
             p { class: "muted", {tx::THEME_BODY} }
-            div { class: "segmented", role: "radiogroup", aria_label: tx::THEME_TITLE,
+            div { class: "onboard-themes", role: "radiogroup", aria_label: tx::THEME_TITLE,
                 for t in Theme::ALL {
                     button {
                         key: "{t.as_str()}",
+                        class: "onboard-theme",
                         role: "radio",
                         "aria-checked": ui.prefs.read().theme == t,
                         onclick: move |_| {

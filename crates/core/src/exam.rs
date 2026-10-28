@@ -185,7 +185,6 @@ pub fn shufflable(options: &[String]) -> bool {
             || matches!(o.as_str(), "both" | "neither" | "none")
             || o.starts_with("both ")
             || o.starts_with("neither ")
-            || matches!(o.trim(), "both" | "neither" | "none" | "all of these" | "none of these")
             || refers_by_letter(&o)
     })
 }
@@ -586,9 +585,6 @@ mod tests {
         assert!(!shufflable(&s(&["x", "y", "None"])));
         assert!(shufflable(&s(&["None while compensated", "x", "y"])));
         assert!(shufflable(&s(&["Vitamin A and D deficiency", "x", "y", "z"])));
-        assert!(!shufflable(&s(&["HPS", "PoPH", "Both", "Neither"])));
-        assert!(!shufflable(&s(&["x", "y", "z", "All of these"])));
-        assert!(!shufflable(&s(&["x", "y", "None"])));
     }
 
     #[test]

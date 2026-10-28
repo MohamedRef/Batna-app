@@ -252,8 +252,8 @@ fn Questions() -> Element {
                 h1 { {tx::STUDIED_TITLE} }
                 p { class: "muted", {tx::STUDIED_BODY} }
                 div { class: "row",
-                    button { class: "secondary", onclick: move |_| studied.set(all.clone()), {tx::ALL} }
-                    button { class: "secondary", onclick: move |_| studied.set(Vec::new()), {tx::NONE} }
+                    button { class: "btn btn-secondary", onclick: move |_| studied.set(all.clone()), {tx::ALL} }
+                    button { class: "btn btn-secondary", onclick: move |_| studied.set(Vec::new()), {tx::NONE} }
                 }
                 ul { class: "onboard-lectures", aria_label: tx::STUDIED_TITLE,
                     for (n , l) in Library::get().index.lectures.iter().enumerate() {
@@ -306,12 +306,12 @@ fn Questions() -> Element {
                             }
                         },
                     }
-                    button { class: "secondary", onclick: move |_| { times.write().remove(i); }, {tx::REMOVE} }
+                    button { class: "btn btn-secondary", onclick: move |_| { times.write().remove(i); }, {tx::REMOVE} }
                 }
             }
             if times.read().len() < MAX_TIMES {
                 button {
-                    class: "secondary",
+                    class: "btn btn-secondary",
                     onclick: move |_| {
                         let next = times.read().last().map_or(19 * 60, |t| (t + 120).min(23 * 60));
                         times.write().push(next);
@@ -359,13 +359,13 @@ fn Questions() -> Element {
                     p { class: "error", role: "alert", {msg} }
                 }
                 div { class: "onboard-actions",
-                    button { class: "secondary", onclick: move |_| close(), {tx::SKIP_ALL} }
+                    button { class: "btn btn-ghost", onclick: move |_| close(), {tx::SKIP_ALL} }
                     div { class: "row",
                         if step() > 0 {
-                            button { class: "secondary", onclick: move |_| { error.set(None); step -= 1; }, {tx::BACK} }
+                            button { class: "btn btn-secondary", onclick: move |_| { error.set(None); step -= 1; }, {tx::BACK} }
                         }
                         button {
-                            class: "primary",
+                            class: "btn btn-primary",
                             onclick: move |_| {
                                 if commit() {
                                     if last { close() } else { step += 1 }
@@ -407,7 +407,7 @@ pub fn ReopenCard() -> Element {
         section { class: "card",
             h2 { {tx::REOPEN_TITLE} }
             p { class: "muted small", {tx::REOPEN_BODY} }
-            button { class: "secondary", onclick: move |_| reopen(), {tx::REOPEN} }
+            button { class: "btn btn-secondary", onclick: move |_| reopen(), {tx::REOPEN} }
         }
     }
 }

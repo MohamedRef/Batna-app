@@ -23,21 +23,12 @@
 .note { border-radius: var(--radius); }
 
 /* ---------- buttons ---------- */
-.button, .icon-button { transition: transform var(--dur) var(--ease), background-color var(--dur) var(--ease); }
-.button:active, .icon-button:active, button.primary:active { transform: var(--press); }
-.button {
-  border-color: var(--line-soft);
-  background: var(--raised);
-  font-weight: 600;
-}
-.button.primary, .button.update-primary {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--surface);
-  font-weight: 700;
-}
+/* The shared .btn set is in main.css; this gives it the calmer surface. */
+.btn, .icon-button { transition: transform var(--dur) var(--ease), background-color var(--dur) var(--ease); }
+.btn:not(:disabled):active, .icon-button:active { transform: var(--press); }
+.btn-secondary { border-color: var(--line-soft); background: var(--raised); }
 /* Tonal: a soft accent pill for the second most important action. */
-.button.tonal { background: var(--accent-soft); border-color: transparent; color: var(--accent); }
+.btn-tonal { background: var(--accent-soft); border-color: transparent; color: var(--accent); }
 
 /* Round icon buttons in headers: a filled circle, no ring. */
 .icon-button {
@@ -49,7 +40,7 @@
 /* ---------- chips and badges ----------
    Status badges are spans; chips that are buttons (filters) keep their size. */
 span.chip {
-  font-size: 0.75rem;
+  font-size: max(0.75rem, 11px);
   line-height: 1.6;
   padding-inline: var(--sp-2);
   border-color: var(--line-soft);
@@ -103,7 +94,7 @@ button.chip { border-color: var(--line-soft); }
 /* ---------- phones ---------- */
 @media (max-width: 599.98px) {
   /* Floating pill bar: inset from the edges, a soft pill behind the active
-     icon. Six tabs fit at 384dp. */
+     icon. Phones show four or five tabs plus More (more.rs). */
   .nav {
     margin-inline: var(--sp-3);
     margin-block-end: calc(var(--sp-2) + env(safe-area-inset-bottom, 0px));
@@ -113,16 +104,26 @@ button.chip { border-color: var(--line-soft); }
     border-radius: var(--radius-pill);
     background: var(--raised);
     box-shadow: 0 6px 24px rgb(0 0 0 / 0.12);
+    /* One column per visible tab, whatever their number; minmax(0, 1fr): a
+       long label shrinks into its tab instead of widening the bar past a
+       360px screen (#152). */
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    min-inline-size: 0;
   }
-  .app { background: var(--bg); }
+  /* The one column never grows past the window for a wide child. */
+  .app { background: var(--bg); grid-template-columns: minmax(0, 1fr); }
+  .nav-item { min-inline-size: 0; }
+  .nav-item .label { max-inline-size: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .nav-item {
     min-height: calc(var(--nav-h) - var(--sp-2));
     justify-content: center;
-    font-size: 0.6875rem;
+    font-size: max(0.6875rem, 11px);
     border-radius: var(--radius-pill);
   }
   .nav-item .glyph {
-    inline-size: 3rem;
+    inline-size: min(3rem, 100%);
     block-size: 1.75rem;
     border-radius: var(--radius-pill);
     transition: background-color var(--dur) var(--ease);
@@ -141,3 +142,40 @@ button.chip { border-color: var(--line-soft); }
   .lectures > .lecture + .lecture { border-block-start: 1px solid var(--line-soft); }
   .lecture .num { inline-size: 2rem; block-size: 2rem; font-size: var(--fs-sm); }
 }
+
+/* ---------- More (more.rs) ----------
+   Phones: Cases and Oral leave the bar for a small sheet that rises above
+   it; the bar keeps four screens and More. From 600dp the rail and the
+   sidebar have room for every screen, so More and its sheet hide. */
+.nav-more, .more-sheet, .more-backdrop { display: none; }
+@media (max-width: 599.98px) {
+  .nav-extra { display: none; }
+  .nav-more { display: flex; }
+  .more-backdrop { display: block; position: fixed; inset: 0; z-index: 20; background: rgb(0 0 0 / 0.25); }
+  .more-sheet {
+    display: flex; flex-direction: column;
+    position: fixed; z-index: 21;
+    inset-inline: var(--sp-3);
+    inset-block-end: calc(var(--nav-h) + var(--sp-4) + env(safe-area-inset-bottom, 0px));
+    padding: var(--sp-1);
+    border: 1px solid var(--line-soft);
+    border-radius: var(--radius-lg);
+    background: var(--raised);
+    box-shadow: 0 12px 32px rgb(0 0 0 / 0.18);
+    animation: more-rise var(--dur) var(--ease);
+  }
+  .more-row {
+    display: flex; align-items: center; gap: var(--sp-3);
+    min-block-size: var(--tap-lg);
+    padding-inline: var(--sp-3);
+    border: 0; border-radius: var(--radius);
+    background: transparent; text-align: start; cursor: pointer;
+    font-weight: 600;
+  }
+  .more-row + .more-row { border-block-start: 1px solid var(--line-soft); }
+  .more-row .glyph { display: grid; place-items: center; color: var(--muted); }
+  .more-row[aria-current="page"] { background: var(--accent-soft); color: var(--accent); }
+  .more-row[aria-current="page"] .glyph { color: var(--accent); }
+  .nav-more[aria-expanded="true"] .glyph { background: var(--accent-soft); }
+}
+@keyframes more-rise { from { opacity: 0; transform: translateY(8px); } }

@@ -53,7 +53,7 @@ pub fn Today() -> Element {
                             p { class: "muted small", "{tx::DUE_TIME_1} {o.due_minutes} {tx::DUE_TIME_2}" }
                         }
                         button {
-                            class: "primary start",
+                            class: "btn btn-primary btn-lg start",
                             onclick: move |_| {
                                 *crate::study::START.write() = Some(crate::study::Start { lectures: None, items: None, minutes });
                                 ui.screen.set(Screen::Study);

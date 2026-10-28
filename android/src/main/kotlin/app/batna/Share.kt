@@ -36,7 +36,7 @@ class ShareActivity : Activity() {
                 val json =
                     JSONObject()
                         .put("text", text.take(MAX_CHARS))
-                        .put("subject", received?.getStringExtra(Intent.EXTRA_SUBJECT))
+                        .put("subject", received?.getStringExtra(Intent.EXTRA_SUBJECT)?.take(MAX_SUBJECT))
                         .put("app", app)
                 PendingShare.put(applicationContext, json.toString())
             } catch (e: Exception) {
@@ -58,6 +58,8 @@ class ShareActivity : Activity() {
         const val TAG = "BatnaShare"
         // A card's back holds 3,000 characters; a little more lets Rust trim at a word.
         const val MAX_CHARS = 4000
+        // The card's "from" line holds 200 (`own::MAX_SOURCE`); Rust trims the rest.
+        const val MAX_SUBJECT = 400
     }
 }
 

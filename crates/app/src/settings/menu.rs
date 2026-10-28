@@ -1,5 +1,5 @@
 //! The Mac menu bar: Batna › Settings… (⌘,), the standard Edit and Window
-//! menus (so ⌘C, ⌘V and ⌘W work as everywhere else), Go with ⌘1–⌘6, and
+//! menus (so ⌘C, ⌘V and ⌘W work as everywhere else), Go with ⌘1–⌘7, and
 //! Help › Keyboard Shortcuts (also the "?" key).
 //! Built on every desktop so it is type-checked here; only macOS installs it.
 // adapted from kabar-app main: crates/app/src/settings/menu.rs
@@ -16,13 +16,14 @@ const SHORTCUTS: &str = "batna.shortcuts";
 
 /// Go menu: (id, title, key, screen). Titles are English like the rest of
 /// the macOS menu bar.
-const GO: [(&str, &str, Code, Screen); 6] = [
+const GO: [(&str, &str, Code, Screen); 7] = [
     ("batna.go.today", "Today", Code::Digit1, Screen::Today),
-    ("batna.go.study", "Study", Code::Digit2, Screen::Study),
-    ("batna.go.bank", "Question Bank", Code::Digit3, Screen::Bank),
-    ("batna.go.cases", "Cases", Code::Digit4, Screen::Cases),
-    ("batna.go.oral", "Oral", Code::Digit5, Screen::Oral),
-    ("batna.go.stats", "Progress", Code::Digit6, Screen::Stats),
+    ("batna.go.learn", "Lessons", Code::Digit2, Screen::Learn),
+    ("batna.go.study", "Study", Code::Digit3, Screen::Study),
+    ("batna.go.bank", "Question Bank", Code::Digit4, Screen::Bank),
+    ("batna.go.cases", "Cases", Code::Digit5, Screen::Cases),
+    ("batna.go.oral", "Oral", Code::Digit6, Screen::Oral),
+    ("batna.go.stats", "Progress", Code::Digit7, Screen::Stats),
 ];
 
 fn cmd(key: Code) -> Option<Accelerator> {

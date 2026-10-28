@@ -12,11 +12,16 @@ const CSS: &str = include_str!("own.css");
 
 /// The card being written or edited; the sheet shows while it's set.
 pub static DRAFT: GlobalSignal<Option<Draft>> = Signal::global(|| None);
+/// A share that arrived while he was writing a card: it waits, and opens
+/// once that sheet closes, so nothing he typed is replaced.
+static QUEUED: GlobalSignal<Option<Draft>> = Signal::global(|| None);
 
 #[derive(Clone, Debug, PartialEq)]
 pub struct Draft {
     pub card: OwnCard,
     pub kind: DraftKind,
+    /// A shared passage was longer than a card's back and its end was cut.
+    pub trimmed: bool,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -36,7 +41,7 @@ fn open_new() {
         source: None,
         created_ms: store::now_ms(),
     };
-    *DRAFT.write() = Some(Draft { card, kind: DraftKind::New });
+    *DRAFT.write() = Some(Draft { card, kind: DraftKind::New, trimmed: false });
 }
 
 /// Mounted once in the app: picks up text shared from other apps (Android),
@@ -47,18 +52,38 @@ pub fn ShareInbox() -> Element {
         if !cfg!(target_os = "android") {
             return;
         }
-        // Cheap (a file check); catches a share whether Batna was open or not.
-        loop {
-            if let Some(shared) = super::share::take() {
-                let card = core_own::draft_from_shared(
-                    &shared.text,
-                    shared.source().as_deref(),
-                    new_id(),
-                    store::now_ms(),
-                );
-                *DRAFT.write() = Some(Draft { card, kind: DraftKind::Shared });
+        // A share brings Batna to the front, so look each time the page
+        // becomes visible (and once at start, for a cold start), not on a timer.
+        let mut eval = document::eval(
+            r#"
+            const send = () => { if (!document.hidden) dioxus.send(true); };
+            document.addEventListener("visibilitychange", send);
+            send();
+            await new Promise(() => {});
+            "#,
+        );
+        while eval.recv::<bool>().await.is_ok() {
+            let Some(shared) = super::share::take() else { continue };
+            let (card, trimmed) = core_own::draft_from_shared(
+                &shared.text,
+                shared.source().as_deref(),
+                new_id(),
+                store::now_ms(),
+            );
+            let draft = Draft { card, kind: DraftKind::Shared, trimmed };
+            if DRAFT.peek().is_some() {
+                *QUEUED.write() = Some(draft);
+            } else {
+                *DRAFT.write() = Some(draft);
             }
-            tokio::time::sleep(std::time::Duration::from_millis(800)).await;
+        }
+    });
+    // The sheet closed: the share that waited opens now.
+    use_effect(|| {
+        if DRAFT.read().is_none()
+            && let Some(next) = QUEUED.write().take()
+        {
+            *DRAFT.write() = Some(next);
         }
     });
     rsx! {
@@ -108,6 +133,12 @@ fn Sheet(draft: Draft) -> Element {
             h2 { {title} }
             if draft.kind == DraftKind::Shared {
                 p { class: "muted small", {tx::SHARED_HINT} }
+            }
+            if draft.trimmed {
+                p { class: "muted small", {tx::SHARED_TRIMMED} }
+            }
+            if QUEUED.read().is_some() {
+                p { class: "small own-waiting", role: "status", {tx::SHARE_WAITING} }
             }
             label { class: "own-field",
                 span { {tx::FRONT} }
@@ -187,6 +218,7 @@ fn problem_text(p: Problem) -> &'static str {
         Problem::EmptyBack => tx::E_BACK,
         Problem::FrontTooLong => tx::E_FRONT_LONG,
         Problem::BackTooLong => tx::E_BACK_LONG,
+        Problem::SourceTooLong => tx::E_SOURCE_LONG,
     }
 }
 
@@ -245,7 +277,9 @@ pub fn OwnCardsCard(on_study: EventHandler<()>) -> Element {
                                         let id = c.id.clone();
                                         let review = review.clone();
                                         move |_| {
-                                            let _ = review.backend.borrow_mut().delete_own(&id);
+                                            if let Err(e) = review.backend.borrow_mut().delete_own(&id) {
+                                                crate::store::write_failed(&format!("deleting own card {id}"), &e);
+                                            }
                                             confirm.set(None);
                                         }
                                     },
@@ -259,7 +293,7 @@ pub fn OwnCardsCard(on_study: EventHandler<()>) -> Element {
                                     class: "btn btn-secondary",
                                     onclick: {
                                         let c = c.clone();
-                                        move |_| *DRAFT.write() = Some(Draft { card: c.clone(), kind: DraftKind::Edit })
+                                        move |_| *DRAFT.write() = Some(Draft { card: c.clone(), kind: DraftKind::Edit, trimmed: false })
                                     },
                                     {tx::EDIT}
                                 }

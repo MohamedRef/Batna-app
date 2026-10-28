@@ -60,7 +60,7 @@ just cloud-deploy
 curl https://batna-cloud.<your-subdomain>.workers.dev/v1/health
 ```
 
-Deploy the hub from `main` at PR #134 or later. An older hub rejects the `relay` ops that carry a restored backup to the other devices (as `wrong_device`), and the app then drops them for good. Whenever `batna_protocol::sync` changes, redeploy the hub before installing the new app.
+Deploy the hub from `main` at PR #134 or later. An older hub rejects the `relay` ops that carry a restored backup to the other devices (as `wrong_device`), and the app then drops them for good. Whenever `batna_protocol::sync` changes, redeploy the hub before installing the new app. Refresh tokens rotate on use: an old one keeps working until the device presents its replacement, so a lost response or a failed Keychain/Keystore save never signs a device out, and a token that comes back after its replacement was used signs that device out. A signed-out device can't list or sign out the others, even while its access token lasts.
 
 ### 3.4 Connect the app
 1. `cp .env.example .env` and fill in `BATNA_CLOUD_URL` (the URL above) and the Desktop client's id and secret. `.env` is git-ignored; `just` loads it and the app reads it at build time.

@@ -354,10 +354,15 @@ impl ReviewBackend {
 
 impl StudyStore for ReviewBackend {
     fn record(&mut self, event: ReviewEvent) {
-        if let Ok(logged) = self.store.append_review(event) {
-            self.log.push(logged);
-            self.replay();
-            self.changed();
+        let id = event.item_id.clone();
+        match self.store.append_review(event) {
+            Ok(logged) => {
+                self.log.push(logged);
+                self.replay();
+                self.changed();
+            }
+            // Today shows the note, so a lost answer is never silent (#244).
+            Err(e) => super::write_failed(&format!("the answer to {id}"), &e),
         }
     }
 

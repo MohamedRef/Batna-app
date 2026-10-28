@@ -279,11 +279,12 @@ async fn route(req: Request, env: &Env, cfg: &Config, method: Method, path: &str
                         return api_error(ErrorCode::InvalidRequest, "bad device id");
                     }
                     let revoke = Revoke { device: id.to_owned() };
-                    call_do(env, &claims.sub, Method::Post, "/revoke", None, Some(&revoke)).await
+                    // The hub checks the caller is still signed in (#259).
+                    call_do(env, &claims.sub, Method::Post, "/revoke", Some(&claims.dev), Some(&revoke)).await
                 }
                 (Method::Post, "/v1/auth/signout") => {
                     let revoke = Revoke { device: claims.dev.clone() };
-                    call_do(env, &claims.sub, Method::Post, "/revoke", None, Some(&revoke)).await
+                    call_do(env, &claims.sub, Method::Post, "/revoke", Some(&claims.dev), Some(&revoke)).await
                 }
                 _ => api_error(ErrorCode::NotFound, "not found"),
             }

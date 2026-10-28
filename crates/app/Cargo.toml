@@ -11,6 +11,7 @@ name = "batna"
 path = "src/main.rs"
 
 [dependencies]
+batna-anki.workspace = true
 batna-core.workspace = true
 batna-protocol.workspace = true
 dioxus = { version = "0.7.10", features = [] }
@@ -33,7 +34,8 @@ sha2 = "0.10"
 tokio-tungstenite = { version = "0.30", default-features = false, features = ["connect", "rustls-tls-webpki-roots"] }
 ureq = { version = "3", default-features = false, features = ["rustls", "json"] }
 
-# Android TextToSpeech through JNI (src/platform/tts_android.rs).
+# Android TextToSpeech (src/platform/tts_android.rs) and «export to Anki»
+# (src/anki/android.rs) through JNI.
 [target.'cfg(target_os = "android")'.dependencies]
 jni = "0.22"
 android-native-keyring-store = "1"

@@ -82,8 +82,10 @@
 .peek[hidden] { display: none; }
 .peek-note { font-family: var(--font); opacity: 0.75; }
 [data-peek]:not([data-peek=""]) { text-decoration: underline dotted; text-underline-offset: 3px; }
-/* The page chip opens its quote on a tap too (hover.js). */
-.chip.page[data-peek]:not([data-peek=""]) { cursor: pointer; }
+/* A chip that opens a sheet is plainly a button; and on touch an answered
+   option's why is printed under it, so neither needs the hover underline. */
+button.tap-chip[data-peek] { text-decoration: none; }
+@media (hover: none) { .q-option[data-peek] { text-decoration: none; } }
 
 /* ---------- keyboard shortcut sheet ---------- */
 .keys-scrim {

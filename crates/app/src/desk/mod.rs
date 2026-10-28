@@ -145,12 +145,13 @@ pub fn DeviceSettings(section: Section) -> Element {
             }
             p { class: "muted small", bdi { "{terms}" } " " {htx::TERMS} }
         }
-        section { class: "card desk-settings",
+        // The whole card opens the shortcut sheet (the button's click bubbles up).
+        section { class: "card card-action desk-settings",
+            onclick: move |_| crate::shortcuts::open_sheet(true),
             h2 { {ktx::TITLE} }
             p { class: "muted small", {ktx::NOTE} }
             button {
                 class: "desk-keys-button",
-                onclick: move |_| crate::shortcuts::open_sheet(true),
                 "⌨ " {ktx::OPEN}
             }
         }

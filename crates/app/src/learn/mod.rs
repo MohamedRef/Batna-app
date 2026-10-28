@@ -183,8 +183,12 @@ fn LessonList() -> Element {
     let total: usize = lib.lessons.values().map(|f| f.lessons.len()).sum();
     let done = lib.all_lessons().filter(|(_, l)| mark(&l.id).is_some()).count();
     let next = next_lesson(&[]);
+    let next_id = next.map(|l| l.id.clone());
     rsx! {
-        section { class: "card ls-hero",
+        // With a lesson to go to, the whole card opens it (the button's click bubbles up).
+        section {
+            class: if next_id.is_some() { "card card-action ls-hero" } else { "card ls-hero" },
+            onclick: move |_| if let Some(id) = &next_id { open(ui, id) },
             h1 { {tx::TITLE} }
             p { class: "muted", {tx::INTRO} }
             if total == 0 {
@@ -195,7 +199,6 @@ fn LessonList() -> Element {
                     if let Some(l) = next {
                         button {
                             class: "btn btn-primary",
-                            onclick: move |_| open(ui, &l.id),
                             // One inline label: flex would split each run into a column.
                             span { class: "ls-btn-label",
                                 {if done == 0 { tx::START_FIRST } else { tx::CONTINUE }}
@@ -297,12 +300,14 @@ pub fn TodayLesson(prefer: Vec<String>) -> Element {
     let title = Library::get().title(lecture).to_string();
     rsx! {
         style { {CSS} }
-        section { class: "card ls-today",
+        // The whole card opens the lesson (the button's click bubbles up).
+        section { class: "card card-action ls-today",
+            onclick: { let id = l.id.clone(); move |_| open(ui, &id) },
             p { class: "ls-kicker", {tx::TODAY_KICKER} }
             h2 { text::Line { text: l.title.clone() } }
             p { class: "muted small", bdi { "{title}" } " · " {count(l.minutes, &MINUTE)} }
             p { text::Line { text: l.hook.clone() } }
-            button { class: "btn btn-primary", onclick: move |_| open(ui, &l.id), {tx::OPEN_LESSON} }
+            button { class: "btn btn-primary", {tx::OPEN_LESSON} }
         }
     }
 }

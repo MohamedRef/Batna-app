@@ -174,8 +174,8 @@ fn Sheet(draft: Draft) -> Element {
                 p { class: "own-error", role: "alert", "{p}" }
             }
             div { class: "own-actions",
-                button { class: "own-btn primary", onclick: save, {tx::SAVE} }
-                button { class: "own-btn", onclick: move |_| close(), {tx::CANCEL} }
+                button { class: "btn btn-primary", onclick: save, {tx::SAVE} }
+                button { class: "btn btn-secondary", onclick: move |_| close(), {tx::CANCEL} }
             }
         }
     }
@@ -212,9 +212,9 @@ pub fn OwnCardsCard(on_study: EventHandler<()>) -> Element {
                 p { class: "muted small", {tx::SHARE_HINT} }
             }
             div { class: "own-actions",
-                button { class: "own-btn primary", onclick: move |_| open_new(), {tx::NEW} }
+                button { class: "btn btn-primary", onclick: move |_| open_new(), {tx::NEW} }
                 if !cards.is_empty() {
-                    button { class: "own-btn", onclick: move |_| on_study.call(()), {tx::STUDY_THEM} }
+                    button { class: "btn btn-secondary", onclick: move |_| on_study.call(()), {tx::STUDY_THEM} }
                 }
             }
             if cards.is_empty() {
@@ -240,7 +240,7 @@ pub fn OwnCardsCard(on_study: EventHandler<()>) -> Element {
                             div { class: "own-actions",
                                 span { class: "small", {tx::DELETE_SURE} }
                                 button {
-                                    class: "own-btn bad",
+                                    class: "btn btn-danger",
                                     onclick: {
                                         let id = c.id.clone();
                                         let review = review.clone();
@@ -251,12 +251,12 @@ pub fn OwnCardsCard(on_study: EventHandler<()>) -> Element {
                                     },
                                     {tx::DELETE_YES}
                                 }
-                                button { class: "own-btn", onclick: move |_| confirm.set(None), {tx::CANCEL} }
+                                button { class: "btn btn-secondary", onclick: move |_| confirm.set(None), {tx::CANCEL} }
                             }
                         } else {
                             div { class: "own-actions",
                                 button {
-                                    class: "own-btn",
+                                    class: "btn btn-secondary",
                                     onclick: {
                                         let c = c.clone();
                                         move |_| *DRAFT.write() = Some(Draft { card: c.clone(), kind: DraftKind::Edit })
@@ -264,7 +264,7 @@ pub fn OwnCardsCard(on_study: EventHandler<()>) -> Element {
                                     {tx::EDIT}
                                 }
                                 button {
-                                    class: "own-btn",
+                                    class: "btn btn-secondary",
                                     onclick: {
                                         let id = c.id.clone();
                                         move |_| confirm.set(Some(id.clone()))

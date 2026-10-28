@@ -23,21 +23,12 @@
 .note { border-radius: var(--radius); }
 
 /* ---------- buttons ---------- */
-.button, .icon-button { transition: transform var(--dur) var(--ease), background-color var(--dur) var(--ease); }
-.button:active, .icon-button:active, button.primary:active { transform: var(--press); }
-.button {
-  border-color: var(--line-soft);
-  background: var(--raised);
-  font-weight: 600;
-}
-.button.primary, .button.update-primary {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--surface);
-  font-weight: 700;
-}
+/* The shared .btn set is in main.css; this gives it the calmer surface. */
+.btn, .icon-button { transition: transform var(--dur) var(--ease), background-color var(--dur) var(--ease); }
+.btn:not(:disabled):active, .icon-button:active { transform: var(--press); }
+.btn-secondary { border-color: var(--line-soft); background: var(--raised); }
 /* Tonal: a soft accent pill for the second most important action. */
-.button.tonal { background: var(--accent-soft); border-color: transparent; color: var(--accent); }
+.btn-tonal { background: var(--accent-soft); border-color: transparent; color: var(--accent); }
 
 /* Round icon buttons in headers: a filled circle, no ring. */
 .icon-button {

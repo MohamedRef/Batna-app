@@ -38,7 +38,7 @@ pub fn ExportVerdicts() -> Element {
             p { class: "small",
                 "✓ {count(Verdict::Approved)} · ✎ {count(Verdict::Edited)} · ✗ {count(Verdict::Wrong)}"
             }
-            button { class: "primary", disabled: total == 0, onclick: export, {tx::EXPORT_BUTTON} }
+            button { class: "btn btn-primary", disabled: total == 0, onclick: export, {tx::EXPORT_BUTTON} }
             match result() {
                 Some(Ok((path, yaml))) => rsx! {
                     p { class: "small", role: "status", "{tx::EXPORT_SAVED} " bdi { dir: "ltr", "{path}" } }

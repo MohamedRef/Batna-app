@@ -4,7 +4,9 @@
 //     option's `why` after answering);
 //   - over any English word that is in the glossary: its expansion.
 // Settings turn pen and mouse peeks off per device: data-pen-hover="off" /
-// data-mouse-hover="off" on <html>. Touch never peeks.
+// data-mouse-hover="off" on <html>. A finger has no hover, so a tap on a
+// glossary word in plain text shows the same card, and the next tap or a
+// scroll hides it (no dead highlighted words on the phone).
 // Adapted from kabar-app main: crates/app/assets/reader.js (pointer plumbing).
 (() => {
   if (window.__batnaHover) return;
@@ -111,7 +113,28 @@
     const { clientX: x, clientY: y, target } = e;
     state.timer = setTimeout(() => peekAt(x, y, target), e.pointerType === "pen" ? 60 : 250);
   }, { passive: true });
-  document.addEventListener("pointerdown", hide, { passive: true });
+  // Touch: a tap on a glossary word (not on a control) toggles its card.
+  let touchShown = null;
+  document.addEventListener("pointerdown", (e) => {
+    touchShown = e.pointerType === "touch" ? state.shownFor : null;
+    hide();
+  }, { passive: true });
+  document.addEventListener("click", (e) => {
+    if (!lastTouch || Date.now() - lastTouch > 800) return;
+    const t = e.target;
+    if (!t || !t.closest || t.closest("button, a, input, textarea, select, summary, label, [role=button]")) return;
+    const hit = wordAt(e.clientX, e.clientY);
+    const entry = hit && lookup(hit.word);
+    if (!entry) return;
+    const key = hit.word + "@" + hit.a;
+    if (touchShown === key) return; // the same word again: leave it closed
+    state.shownFor = key;
+    show(entry[0], entry[1] ? "" : state.unverified, hit.rect);
+  });
+  let lastTouch = 0;
+  document.addEventListener("pointerup", (e) => {
+    if (e.pointerType === "touch") lastTouch = Date.now();
+  }, { passive: true, capture: true });
   document.addEventListener("pointercancel", hide, { passive: true });
   // The pen lifting out of range, or the mouse leaving the window: the
   // pointer goes out to nothing. pointerleave doesn't bubble, so it is caught

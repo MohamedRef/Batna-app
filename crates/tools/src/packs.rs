@@ -38,7 +38,11 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
     let out = crate::flag(args, "--out").map(PathBuf::from).unwrap_or_else(|| root.join("dist/packs"));
 
     let (index, lectures) = load(root)?;
-    let lessons = crate::lessons::load(root)?.into_iter().map(|(_, f, _)| f).collect();
+    let mut lessons: Vec<_> = crate::lessons::load(root)?.into_iter().map(|(_, f, _)| f).collect();
+    let missing = batna_core::lesson::embed_images(&mut lessons, crate::lessons::read_image(root));
+    if !missing.is_empty() {
+        return Err(missing);
+    }
     let pack = Pack::new(index, lectures).with_lessons(lessons);
     let bytes = pack.encode();
     match Pack::decode(&bytes) {

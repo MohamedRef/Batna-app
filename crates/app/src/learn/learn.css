@@ -38,15 +38,23 @@
 }
 
 /* ---------- text ---------- */
-.ls-rich { display: flex; flex-direction: column; gap: var(--sp-2); font-size: 1.05rem; line-height: 1.9; }
+.ls-rich { display: flex; flex-direction: column; gap: var(--sp-3); font-size: 1.05rem; line-height: 1.95; }
 .ls-rich p { margin: 0; }
-.ls-rich ul { margin: 0; padding-inline-start: 1.4rem; display: grid; gap: var(--sp-1); }
+.ls-rich ul { margin: 0; padding-inline-start: 1.4rem; display: grid; gap: var(--sp-2); }
 .ls-rich li::marker { color: var(--accent); }
-.ls-rich strong, .ls-mn-hook strong {
-  background: linear-gradient(transparent 58%, var(--accent-soft) 58%);
+/* **bold** is a term, set in weight only; ==key== is one of the step's few
+   key terms and gets the marker (docs/LESSONS.md). */
+.ls-rich strong, .ls-mn-hook strong { font-weight: 700; }
+.ls-rich mark, .ls-mn-hook mark, .ls-h mark, .ls-q mark {
+  color: inherit;
+  font-weight: 700;
+  background: linear-gradient(transparent 55%, var(--accent-soft) 55%);
   padding-inline: 2px;
+  border-radius: 2px;
 }
 .ls-rich bdi { font-size: 0.97em; }
+/* A short English term stays on one line ("vitamin A and"). */
+.ls-nw { white-space: nowrap; }
 
 /* ---------- the list ---------- */
 .ls-hero { gap: var(--sp-3); }
@@ -208,7 +216,13 @@
 .ls-figure[data-zoomed="yes"] .ls-svg { cursor: zoom-out; }
 .ls-figure[data-zoomed="yes"] .ls-svg svg { inline-size: 170%; max-block-size: none; }
 @media (min-width: 840px) { .ls-figure[data-zoomed="yes"] .ls-svg svg { inline-size: 100%; } }
-.ls-figure figcaption { color: var(--muted); }
+.ls-photo { padding: 0; overflow: hidden; }
+.ls-photo img { display: block; inline-size: 100%; block-size: auto; max-block-size: 70vh; object-fit: contain; }
+.ls-figure[data-zoomed="yes"] .ls-photo { overflow-x: auto; }
+.ls-figure[data-zoomed="yes"] .ls-photo img { inline-size: 170%; max-block-size: none; }
+@media (min-width: 840px) { .ls-figure[data-zoomed="yes"] .ls-photo img { inline-size: 100%; } }
+.ls-figure figcaption { color: var(--muted); display: flex; flex-direction: column; gap: var(--sp-1); }
+.ls-credit { margin: 0; }
 .ls-figure figcaption .ls-rich { font-size: var(--fs-sm); }
 
 /* Classes figure authors use (docs/LESSONS.md): theme colours only. */

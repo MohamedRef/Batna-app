@@ -742,6 +742,8 @@ pub mod hover {
     pub const MOUSE_NOTE: &str =
         "سيب الماوس ثانية على الكلمة، أو على رقم صفحة الكتاب، أو على اختيار بعد ما تجاوب.";
     pub const UNVERIFIED: &str = "لسه ما اتراجعش";
+    /// Under a book quote shown from the page chip.
+    pub const FROM_BOOK: &str = "من الكتاب بالنص";
     pub const TERMS: &str = "مصطلح في القاموس";
 }
 

@@ -113,8 +113,15 @@ button.chip { border-color: var(--line-soft); }
     border-radius: var(--radius-pill);
     background: var(--raised);
     box-shadow: 0 6px 24px rgb(0 0 0 / 0.12);
+    /* minmax(0, 1fr): a long label shrinks into its tab instead of widening
+       the bar past a 360px screen (#152). */
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    min-inline-size: 0;
   }
-  .app { background: var(--bg); }
+  /* The one column never grows past the window for a wide child. */
+  .app { background: var(--bg); grid-template-columns: minmax(0, 1fr); }
+  .nav-item { min-inline-size: 0; }
+  .nav-item .label { max-inline-size: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .nav-item {
     min-height: calc(var(--nav-h) - var(--sp-2));
     justify-content: center;
@@ -122,7 +129,7 @@ button.chip { border-color: var(--line-soft); }
     border-radius: var(--radius-pill);
   }
   .nav-item .glyph {
-    inline-size: 3rem;
+    inline-size: min(3rem, 100%);
     block-size: 1.75rem;
     border-radius: var(--radius-pill);
     transition: background-color var(--dur) var(--ease);

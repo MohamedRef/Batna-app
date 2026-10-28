@@ -15,3 +15,4 @@ pub mod stats;
 pub mod theme;
 pub mod update;
 pub mod validate;
+pub mod zone;

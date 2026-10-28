@@ -273,7 +273,7 @@ pub fn minutes(ms: u64) -> u64 {
     ms.div_ceil(60_000)
 }
 
-/// Unix ms → `2026-10-27` (UTC; only for the history list).
+/// Unix ms → `2026-10-27`. Pass local wall-clock ms (`store::zone().local_ms`).
 pub fn date(ms: i64) -> String {
     // Howard Hinnant's civil_from_days.
     let z = ms.div_euclid(86_400_000) + 719_468;

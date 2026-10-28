@@ -12,7 +12,7 @@ use batna_core::review::{LoggedReview, ReviewEvent, StudyStore, StudyStoreHandle
 use batna_core::srs::{self, CardState, ReviewSettings, Scheduler};
 use dioxus::prelude::*;
 
-use super::{Store, now_ms, utc_offset_minutes};
+use super::{Store, now_ms};
 use crate::content::Library;
 
 /// One study item with the lecture it belongs to.
@@ -102,7 +102,7 @@ impl ReviewBackend {
     /// Re-reads everything from the store.
     pub fn reload(&mut self) {
         self.settings = self.store.review_settings();
-        self.scheduler = Scheduler::from_settings(&self.settings, utc_offset_minutes());
+        self.scheduler = Scheduler::from_settings(&self.settings, super::zone());
         self.log = self.store.reviews().unwrap_or_default();
         self.judgements = self.store.judgements().unwrap_or_default();
         self.replay();
@@ -167,7 +167,7 @@ impl ReviewBackend {
     pub fn set_settings(&mut self, settings: ReviewSettings) {
         if self.store.put_review_settings(&settings).is_ok() {
             self.settings = settings;
-            self.scheduler = Scheduler::from_settings(&self.settings, utc_offset_minutes());
+            self.scheduler = Scheduler::from_settings(&self.settings, super::zone());
             self.replay();
             self.changed();
         }
@@ -387,7 +387,7 @@ fn spawn_refit() {
             return;
         }
         let Ok(log) = store.reviews() else { return };
-        let scheduler = Scheduler::from_settings(&settings, utc_offset_minutes());
+        let scheduler = Scheduler::from_settings(&settings, super::zone());
         if let Some(params) = scheduler.optimize(&log, now) {
             // Re-read so a settings change made meanwhile isn't lost.
             let mut latest = store.review_settings();

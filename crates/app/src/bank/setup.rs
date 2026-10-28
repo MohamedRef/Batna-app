@@ -251,7 +251,7 @@ fn History() -> Element {
                 for (i, o) in papers.iter().enumerate().rev() {
                     li { key: "{i}",
                         span { class: "chip", if o.mode == Mode::Mock { {tx::MODE_MOCK} } else { {tx::MODE_TIMED} } }
-                        bdi { class: "muted small", {date(o.at_ms)} }
+                        bdi { class: "muted small", {date(crate::store::zone().local_ms(o.at_ms))} }
                         span { class: "grow" }
                         bdi { class: "score", "{o.total.right}/{o.total.total}" }
                         bdi { class: "pct", "{o.total.percent()}%" }

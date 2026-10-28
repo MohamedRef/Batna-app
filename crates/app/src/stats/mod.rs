@@ -16,7 +16,6 @@ use dioxus::prelude::*;
 use crate::content::Library;
 use crate::i18n::stats as tx;
 use crate::plan::Planner;
-use crate::store::utc_offset_minutes;
 
 /// The study day starts at 4 am, like the scheduler's.
 const ROLLOVER_HOUR: u32 = 4;
@@ -50,7 +49,7 @@ impl StudyData {
             .duration_since(std::time::UNIX_EPOCH)
             .map(|d| d.as_millis() as i64)
             .unwrap_or_default();
-        let clock = Clock { now_ms, utc_offset_min: utc_offset_minutes(), rollover_hour: ROLLOVER_HOUR };
+        let clock = Clock { now_ms, zone: crate::store::zone(), rollover_hour: ROLLOVER_HOUR };
         if std::env::var("BATNA_STATS_DEMO").is_ok_and(|v| v == "1") {
             let events = demo::events(&lectures, now_ms);
             return StudyData { lectures, events, marks: demo::marks(), forecast: None, clock, demo: true };

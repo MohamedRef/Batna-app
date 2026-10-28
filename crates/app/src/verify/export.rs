@@ -2,7 +2,7 @@
 //! YAML. `batna-tools` reads it back to print a fix list per lecture and to
 //! add his approvals to `content/approved.txt`.
 
-use batna_core::review::verify::{Verdict, civil_from_days};
+use batna_core::review::verify::Verdict;
 use dioxus::prelude::*;
 
 use crate::i18n::verify as tx;
@@ -23,9 +23,10 @@ pub fn ExportVerdicts() -> Element {
             Ok(y) => y,
             Err(e) => return result.set(Some(Err(e.to_string()))),
         };
-        let (y, m, d) = civil_from_days(now.div_euclid(86_400_000));
+        // His local date, not UTC: an export at 1 am must not overwrite yesterday's (#36).
+        let date = crate::store::zone().calendar_day(now).iso();
         let saved = export_dir().and_then(|dir| {
-            let path = dir.join(format!("batna-verdicts-{y:04}-{m:02}-{d:02}.yaml"));
+            let path = dir.join(format!("batna-verdicts-{date}.yaml"));
             std::fs::write(&path, &yaml).map(|_| path.display().to_string()).map_err(|e| e.to_string())
         });
         result.set(Some(saved.map(|p| (p, yaml))));

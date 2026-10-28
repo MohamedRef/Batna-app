@@ -20,6 +20,7 @@ use std::sync::{Mutex, OnceLock};
 use batna_core::review::verify::Judgement;
 use batna_core::review::{Grade, Hlc, HlcClock, LoggedReview, Origin, ReviewEvent};
 use batna_core::srs::ReviewSettings;
+use batna_core::zone::Zone;
 use rusqlite::{Connection, OptionalExtension, params};
 use serde::Serialize;
 use serde::de::DeserializeOwned;
@@ -432,6 +433,44 @@ pub fn utc_offset_minutes() -> i32 {
     chrono::Local::now().offset().fix().local_minus_utc() / 60
 }
 
+/// This device's time zone as a table of UTC offsets, 2020–2040, so every
+/// moment uses the offset in force then (a change to or from summer time
+/// never moves past answers to another day, #40). Built once: an hourly scan
+/// of the system time zone, a few milliseconds.
+pub fn zone() -> Zone {
+    static ZONE: std::sync::OnceLock<Zone> = std::sync::OnceLock::new();
+    *ZONE.get_or_init(|| {
+        let offset = |ms: i64| {
+            use chrono::{Offset, TimeZone};
+            chrono::Local
+                .timestamp_millis_opt(ms)
+                .single()
+                .map_or(0, |t| t.offset().fix().local_minus_utc() / 60)
+        };
+        const HOUR: i64 = 3_600_000;
+        let (from, to) = (1_577_836_800_000_i64, 2_208_988_800_000_i64); // 2020-01-01 .. 2040-01-01 UTC
+        let base = offset(from);
+        let mut changes = Vec::new();
+        let mut last = base;
+        let mut t = from;
+        while t < to {
+            let o = offset(t + HOUR);
+            if o != last {
+                // Narrow the change to the minute.
+                let (mut lo, mut hi) = (t, t + HOUR);
+                while hi - lo > 60_000 {
+                    let mid = lo + (hi - lo) / 2;
+                    if offset(mid) == last { lo = mid } else { hi = mid }
+                }
+                changes.push((hi, o));
+                last = o;
+            }
+            t += HOUR;
+        }
+        Zone { base, changes: Box::leak(changes.into_boxed_slice()) }
+    })
+}
+
 /// A random-enough id for this installation, without a crypto dependency:
 /// it only has to differ between Mohamed's three devices.
 fn new_device_id() -> String {
@@ -455,6 +494,12 @@ mod tests {
 
     fn judgement(verdict: Verdict) -> Judgement {
         Judgement { verdict, edit: Edit::new(), note: None, fingerprint: "f".into(), at_ms: 1 }
+    }
+
+    #[test]
+    fn zone_matches_the_system_offset_now() {
+        assert_eq!(zone().offset_at(now_ms()), utc_offset_minutes());
+        assert!(zone().changes.windows(2).all(|w| w[0].0 < w[1].0));
     }
 
     #[test]

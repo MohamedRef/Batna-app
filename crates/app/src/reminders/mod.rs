@@ -95,11 +95,11 @@ pub fn use_local_reminders() {
     });
 }
 
-fn hhmm(t: u16) -> String {
+pub(crate) fn hhmm(t: u16) -> String {
     format!("{:02}:{:02}", t / 60, t % 60)
 }
 
-fn parse_hhmm(s: &str) -> Option<u16> {
+pub(crate) fn parse_hhmm(s: &str) -> Option<u16> {
     let (h, m) = s.split_once(':')?;
     let (h, m): (u16, u16) = (h.parse().ok()?, m.get(..2)?.parse().ok()?);
     (h < 24 && m < 60).then_some(h * 60 + m)

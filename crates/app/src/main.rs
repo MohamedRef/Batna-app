@@ -13,6 +13,7 @@ mod fonts;
 mod i18n;
 mod icons;
 mod import;
+mod onboarding;
 mod oral;
 mod order;
 mod plan;
@@ -141,6 +142,7 @@ fn App() -> Element {
             }
             main { class: "content", "data-screen": "{current:?}", {screen_body(current)} }
             settings::SettingsSheet {}
+            onboarding::Onboarding {}
         }
     }
 }

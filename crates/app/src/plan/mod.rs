@@ -26,7 +26,7 @@ const FILE: &str = "plan-settings.txt";
 
 /// Best effort, like the device prefs: a folder that can't be written keeps
 /// the plan for this run.
-fn save(settings: &PlanSettings) {
+pub(crate) fn save(settings: &PlanSettings) {
     if std::env::var_os("BATNA_PLAN_EXAM").is_some() {
         return;
     }

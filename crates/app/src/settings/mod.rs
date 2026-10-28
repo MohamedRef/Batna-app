@@ -192,7 +192,9 @@ pub fn SettingsSheet() -> Element {
 #[component]
 fn SectionView(section: Section) -> Element {
     match section {
-        Section::Study => rsx! { crate::today::StudySection {} crate::sounds::SoundSection {} },
+        Section::Study => {
+            rsx! { crate::today::StudySection {} crate::sounds::SoundSection {} crate::onboarding::ReopenCard {} }
+        }
         Section::Reminders => rsx! { crate::reminders::RemindSection {} },
         Section::Look => rsx! { look::LookSection {} },
         Section::Data => rsx! { data::DataSection {} },

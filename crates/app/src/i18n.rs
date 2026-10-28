@@ -635,3 +635,36 @@ pub mod remind {
         }
     }
 }
+
+pub mod onboard {
+    pub const TITLE: &str = "أهلاً في باطنة";
+    pub const STEP: &str = "خطوة";
+    pub const OF: &str = "من";
+    pub const NEXT: &str = "التالي";
+    pub const BACK: &str = "رجوع";
+    pub const DONE: &str = "يلا نبدأ";
+    pub const SKIP_ALL: &str = "بعدين";
+    pub const EXAM_TITLE: &str = "امتحانك إمتى؟";
+    pub const EXAM_BODY: &str =
+        "عشان أوزّع المحاضرات والمراجعة على الأيام اللي فاضلة بهدوء. لو لسه مش متأكد، سيبها فاضية.";
+    pub const EXAM_DAY: &str = "يوم الامتحان";
+    pub const PICK_FUTURE: &str = "اختار يوم بعد النهارده.";
+    pub const DAYS_TITLE: &str = "بتذاكر أنهي أيام في الأسبوع؟";
+    pub const DAYS_BODY: &str = "الخطة والتذكير هيمشوا على الأيام دي بس. أيام الراحة راحة.";
+    pub const PICK_A_DAY: &str = "اختار يوم واحد على الأقل.";
+    pub const MINUTES_TITLE: &str = "قد إيه في اليوم؟";
+    pub const MINUTES_BODY: &str = "طول الجلسة العادي. تقدر تغيّره قبل أي جلسة.";
+    pub const MIN: &str = "دقيقة";
+    pub const STUDIED_TITLE: &str = "ذاكرت أنهي محاضرات قبل كده؟";
+    pub const STUDIED_BODY: &str = "علّم اللي قريته قبل كده. لو مفيش، كمّل عادي.";
+    pub const REMIND_TITLE: &str = "أفكّرك إمتى؟";
+    pub const REMIND_BODY: &str = "إشعار هادي فيه عدد المراجعات المستنياك. بيرن على الموبايل بس.";
+    pub const ADD_TIME: &str = "زوّد معاد";
+    pub const REMOVE: &str = "شيل";
+    pub const NO_REMINDERS: &str = "من غير تذكير. تقدر تشغّله بعدين من الإعدادات.";
+    pub const THEME_TITLE: &str = "تحب الألوان إزاي؟";
+    pub const THEME_BODY: &str = "«نبطشية» غامق ودافي، للمذاكرة بالليل.";
+    pub const REOPEN_TITLE: &str = "أسئلة البداية";
+    pub const REOPEN_BODY: &str = "يوم الامتحان، أيام المذاكرة، طول الجلسة، التذكير والألوان، في مكان واحد.";
+    pub const REOPEN: &str = "افتحها تاني";
+}

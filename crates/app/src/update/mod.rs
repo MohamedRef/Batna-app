@@ -120,13 +120,20 @@ pub struct Prefs {
     /// The last notification sent (`version+build:stage`), so each goes out once.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub notified: Option<String>,
-    /// The build (`version+build`) that ran last, to notice an update.
+    /// The app build (`version+build`) that ran last, to notice an update.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub last_run: Option<String>,
     /// Set at the first launch after an update to the build that ran
     /// before: "What's new" opens once for what came since, then clears it.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub whats_new_from: Option<String>,
+    /// The content-only update (`version+build` of its feed) in use, kept
+    /// apart from the app build so neither hides the other's notes (#348).
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub last_content: Option<String>,
+    /// Where the content-only notes count from, until seen.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub content_from: Option<String>,
 }
 
 fn yes() -> bool {
@@ -145,6 +152,8 @@ impl Default for Prefs {
             notified: None,
             last_run: None,
             whats_new_from: None,
+            last_content: None,
+            content_from: None,
         }
     }
 }
@@ -401,22 +410,44 @@ impl Status {
         (self.content_build > self.build).then_some(self.content_build)
     }
 
-    /// `version+build` of [`Self::current`], the key "What's new" counts from.
-    fn current_key(&self) -> String {
-        format!("{}+{}", self.version, self.shown_build())
+    /// `version+build` of the app build he runs.
+    fn app_key(&self) -> String {
+        format!("{}+{}", self.version, self.build)
     }
 
-    /// "What's new" to open by itself after an update: the builds after the
-    /// one that ran before, up to this one. Empty once seen.
+    /// `version+build` of the content-only update in use, if any.
+    fn content_key(&self) -> Option<String> {
+        (self.content_build > 0).then(|| format!("{}+{}", self.version, self.content_build))
+    }
+
+    /// "What's new" to open by itself after an update, newest first: the
+    /// app builds after the one that ran before, up to the one running, and
+    /// the content-only updates after the content seen last, up to the one
+    /// in use. App and content count apart, so a content update that is
+    /// ahead never tells an app build he hasn't installed, nor swallows its
+    /// notes once he does (#348). Empty once seen.
     pub fn whats_new(&self) -> Vec<BuildChanges> {
-        let (Some(from), Some(to)) = (self.prefs.whats_new_from.as_deref(), self.current()) else {
-            return Vec::new();
+        let order = |k: &str| k.split_once('+').and_then(|(v, b)| changelog::order(v, b.parse().ok()?));
+        let part = |from: Option<&String>, to: u64, content: bool| -> Vec<&BuildChanges> {
+            let (Some(from), Some(to)) = (from.and_then(|k| order(k)), changelog::order(&self.version, to))
+            else {
+                return Vec::new();
+            };
+            changelog::between(&self.history, Some(from), to)
+                .into_iter()
+                .filter(|b| b.content_only == content)
+                .collect()
         };
-        let from = from.split_once('+').and_then(|(v, b)| changelog::order(v, b.parse().ok()?));
-        if from.is_none() {
-            return Vec::new();
-        }
-        changelog::between(&self.history, from, to).into_iter().cloned().collect()
+        let mut all = part(self.prefs.whats_new_from.as_ref(), self.build, false);
+        all.extend(part(self.prefs.content_from.as_ref(), self.content_build, true));
+        all.sort_by_key(|b| std::cmp::Reverse(changelog::order(&b.version, b.build)));
+        all.dedup_by_key(|b| b.key());
+        all.into_iter().cloned().collect()
+    }
+
+    /// Whether "What's new" has anything waiting to be seen.
+    pub fn news_pending(&self) -> bool {
+        self.prefs.whats_new_from.is_some() || self.prefs.content_from.is_some()
     }
 
     /// The offer the banner should mention, unless closed for it.
@@ -615,13 +646,25 @@ impl Updater {
             None
         });
         let content_build = pack_in_use(&dir, &info).map_or(0, |p| p.build);
-        let this = format!("{}+{}", info.version, info.build.max(content_build));
-        if off.is_none() && prefs.last_run.as_deref() != Some(this.as_str()) {
+        let this = format!("{}+{}", info.version, info.build);
+        let content = (content_build > 0).then(|| format!("{}+{content_build}", info.version));
+        if off.is_none()
+            && (prefs.last_run.as_deref() != Some(this.as_str()) || prefs.last_content != content)
+        {
             // Updated (not a first install): say what's new once.
-            if let Some(prev) = prefs.last_run.take() {
+            if prefs.last_run.as_deref() != Some(this.as_str())
+                && let Some(prev) = prefs.last_run.replace(this.clone())
+            {
                 prefs.whats_new_from = Some(prev);
             }
-            prefs.last_run = Some(this);
+            // A content-only update taken while Batna was closed: its notes
+            // count from the content seen before, else from the app build.
+            if prefs.last_content != content {
+                if content.is_some() {
+                    prefs.content_from = prefs.last_content.clone().or(Some(this.clone()));
+                }
+                prefs.last_content = content;
+            }
             if let Err(e) = save_prefs(&dir, &prefs) {
                 report!("update prefs: {e}");
             }
@@ -935,15 +978,18 @@ impl Updater {
             self.tx.send_modify(|s| s.history = all);
         }
         let s = self.status();
-        if s.prefs.whats_new_from.is_some() && s.whats_new().is_empty() {
-            self.update_prefs(|p| p.whats_new_from = None);
+        if s.news_pending() && s.whats_new().is_empty() {
+            self.close_whats_new();
         }
     }
 
     /// "What's new" was seen (closed).
     pub fn close_whats_new(&self) {
-        if self.status().prefs.whats_new_from.is_some() {
-            self.update_prefs(|p| p.whats_new_from = None);
+        if self.status().news_pending() {
+            self.update_prefs(|p| {
+                p.whats_new_from = None;
+                p.content_from = None;
+            });
         }
     }
 
@@ -957,16 +1003,17 @@ impl Updater {
         }
         let Some(pack) = pack_in_use(&self.dir, &self.info) else { return false };
         crate::content::Library::reload();
-        let before = self.status().current_key();
+        let s = self.status();
+        let before = s.content_key().unwrap_or_else(|| s.app_key());
         self.tx.send_modify(|s| {
             s.content_waiting = false;
             s.content_build = pack.build.max(s.content_build);
         });
-        let now = self.status().current_key();
-        if now != before {
+        let now = self.status().content_key();
+        if now.as_ref() != Some(&before) {
             self.update_prefs(|p| {
-                p.whats_new_from = Some(before);
-                p.last_run = Some(now);
+                p.content_from = Some(before);
+                p.last_content = now;
             });
         }
         true
@@ -1427,6 +1474,33 @@ mod tests {
             preview,
             key: Some(parse_public_key(key).unwrap()),
         }
+    }
+
+    #[test]
+    fn app_and_content_notes_count_apart() {
+        let entry = |build: u64, content_only: bool| BuildChanges {
+            version: "0.1.0".into(),
+            build,
+            published_at: String::new(),
+            changes: vec![batna_core::update::Change {
+                kind: batna_core::update::ChangeKind::New,
+                text: UpdateNotes { en: String::new(), ar_eg: format!("بناء {build}") },
+            }],
+            content_only,
+        };
+        // APK 38 runs content 45; the feed's app is 40 (#348).
+        let mut s = status(Phase::UpToDate, Mode::Auto);
+        s.history = vec![entry(45, true), entry(44, true), entry(40, false), entry(39, false)];
+        (s.build, s.content_build) = (38, 45);
+        s.prefs.content_from = Some("0.1.0+38".into());
+        let keys = |s: &Status| s.whats_new().iter().map(BuildChanges::key).collect::<Vec<_>>();
+        assert_eq!(keys(&s), ["0.1.0+45", "0.1.0+44"], "no notes for an app he hasn't installed");
+        assert!(s.content_only_news());
+        // He installs APK 40 later: its notes open, content seen before stays seen.
+        s.prefs = Prefs { whats_new_from: Some("0.1.0+38".into()), ..Prefs::default() };
+        s.build = 40;
+        assert_eq!(keys(&s), ["0.1.0+40", "0.1.0+39"]);
+        assert!(!s.content_only_news());
     }
 
     #[test]

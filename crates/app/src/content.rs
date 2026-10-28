@@ -62,7 +62,7 @@ impl Library {
         // A newer pack from the update feed wins (checked and decoded
         // there); else the embedded one, which build.rs wrote from types
         // it just parsed, so it can't fail.
-        let Pack { index, lectures, lessons, look } = crate::update::installed_pack()
+        let Pack { index, lectures, lessons, look, .. } = crate::update::installed_pack()
             .unwrap_or_else(|| Pack::decode(embedded::PACK).expect("embedded content pack"));
         crate::look::set(look);
         let lectures = lectures.into_iter().map(|l| (l.lecture.clone(), l)).collect();

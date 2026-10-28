@@ -21,9 +21,10 @@ pub(super) const UPDATE_CSS: &str = r#"
 .update-banner { flex-direction: row; flex-wrap: wrap; align-items: center; gap: var(--sp-2) var(--sp-3);
   border-inline-start: 4px solid var(--accent); margin-block-end: var(--sp-3); }
 .update-banner .ub-text { flex: 1 1 14rem; min-inline-size: 0; display: grid; gap: var(--sp-1); }
-.content-note { flex-direction: row; flex-wrap: wrap; align-items: center; gap: var(--sp-2) var(--sp-3);
+.content-note { flex-direction: row; flex-wrap: nowrap; align-items: center; gap: var(--sp-2);
   border-inline-start: 4px solid var(--accent); margin-block-end: var(--sp-3); padding-block: var(--sp-2); }
-.content-note p { flex: 1 1 12rem; min-inline-size: 0; margin: 0; }
+.content-note p { flex: 1 1 auto; min-inline-size: 0; margin: 0; }
+.content-note .btn, .content-note .icon-button { flex: none; }
 .update-toggle { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); }
 .update-toggle-text { display: grid; gap: var(--sp-1); }
 "#;

@@ -19,6 +19,13 @@ use crate::lesson::LessonFile;
 /// The first bytes of every pack. Bump the digit when the layout changes.
 pub const MAGIC: &[u8; 8] = b"BATNAPK1";
 
+/// The content types this build reads. Bump it whenever an item, lesson,
+/// step or picture gains a field or a variant that an older app would drop
+/// or misread: an older app then refuses the newer pack (and keeps its
+/// built-in content) instead of showing it with pieces silently missing.
+/// Packs from before the field read as 0.
+pub const SCHEMA: u32 = 1;
+
 /// Highest miniz level: slower to pack (only when content changes), not to unpack.
 const LEVEL: u8 = 10;
 
@@ -27,6 +34,9 @@ const MAX_UNPACKED: usize = 256 * 1024 * 1024;
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Pack {
+    /// [`SCHEMA`] of the build that wrote it.
+    #[serde(default)]
+    pub schema: u32,
     pub index: Index,
     /// Written lectures, in index order.
     pub lectures: Vec<Lecture>,
@@ -49,6 +59,8 @@ pub enum PackError {
     Inflate(String),
     #[error("the pack's JSON doesn't match the content types: {0}")]
     Json(#[from] serde_json::Error),
+    #[error("the pack needs content types {0}, this build reads up to {SCHEMA}")]
+    TooNew(u32),
 }
 
 impl Pack {
@@ -56,7 +68,7 @@ impl Pack {
     pub fn new(index: Index, mut lectures: Vec<Lecture>) -> Self {
         let pos = |id: &str| index.lectures.iter().position(|e| e.id == id).unwrap_or(usize::MAX);
         lectures.sort_by(|a, b| pos(&a.lecture).cmp(&pos(&b.lecture)).then(a.lecture.cmp(&b.lecture)));
-        Pack { index, lectures, lessons: Vec::new(), look: BTreeMap::new() }
+        Pack { schema: SCHEMA, index, lectures, lessons: Vec::new(), look: BTreeMap::new() }
     }
 
     /// Adds the lesson files, in the lectures' order.
@@ -84,7 +96,11 @@ impl Pack {
         let body = bytes.strip_prefix(MAGIC.as_slice()).ok_or(PackError::Magic)?;
         let json = decompress_to_vec_with_limit(body, MAX_UNPACKED)
             .map_err(|e| PackError::Inflate(format!("{e:?}")))?;
-        Ok(serde_json::from_slice(&json)?)
+        let pack: Pack = serde_json::from_slice(&json)?;
+        if pack.schema > SCHEMA {
+            return Err(PackError::TooNew(pack.schema));
+        }
+        Ok(pack)
     }
 
     pub fn item_count(&self) -> usize {
@@ -106,6 +122,20 @@ mod tests {
             "schema: batna.content/v1\nlectures:\n  - { id: hb.L01, title: Liver Cirrhosis, pages: [1, 22], chunk: 10 }\n  - { id: hb.L02, title: Two, pages: [23, 36], chunk: 10 }\n",
         )
         .unwrap()
+    }
+
+    #[test]
+    fn a_pack_for_newer_content_types_is_refused() {
+        let mut pack = Pack::new(index(), vec![sample()]);
+        assert_eq!(pack.schema, SCHEMA);
+        pack.schema = SCHEMA + 1;
+        assert!(matches!(Pack::decode(&pack.encode()), Err(PackError::TooNew(n)) if n == SCHEMA + 1));
+        // A pack from before the field still opens.
+        let json =
+            serde_json::to_string(&Pack::new(index(), vec![sample()])).unwrap().replace("\"schema\":1,", "");
+        let mut old = MAGIC.to_vec();
+        old.extend(compress_to_vec(json.as_bytes(), LEVEL));
+        assert_eq!(Pack::decode(&old).unwrap().schema, 0);
     }
 
     #[test]

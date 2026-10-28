@@ -1137,6 +1137,8 @@ pub mod update {
     pub const KIND_FIXED: &str = "اتصلّح";
     pub const BADGE_LATEST: &str = "الأحدث";
     pub const BADGE_INSTALLED: &str = "اللي معاك";
+    /// The content-only update in use, next to the app build he runs (#349).
+    pub const BADGE_CONTENT_IN_USE: &str = "المحتوى اللي معاك";
     pub const BADGE_NEW: &str = "جديد عليك";
     /// A content-only update: lectures, lessons or the look, no install.
     pub const BADGE_CONTENT: &str = "تحديث محتوى";
@@ -1173,6 +1175,16 @@ pub mod update {
             2 => "نسختين جداد".to_owned(),
             3..=10 => format!("{n} نسخ جديدة"),
             _ => format!("{n} نسخة جديدة"),
+        }
+    }
+
+    /// The same count for content-only updates: no new app came (#349).
+    pub fn content_updates_count(n: usize) -> String {
+        match n {
+            1 => "تحديث محتوى".to_owned(),
+            2 => "تحديثين محتوى".to_owned(),
+            3..=10 => format!("{n} تحديثات محتوى"),
+            _ => format!("{n} تحديث محتوى"),
         }
     }
 }

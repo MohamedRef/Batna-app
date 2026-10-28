@@ -443,8 +443,12 @@ pub fn UpdateSheet() -> Element {
     let today = today();
     let badge_of = |b: &BuildChanges| -> Option<(&'static str, &'static str)> {
         let o = changelog::order(&b.version, b.build);
-        if Some(b.key()) == Some(format!("{}+{}", s.version, s.shown_build())) {
+        // The app build he runs, and apart from it the content-only update
+        // in use, so a (45) row never says "yours" under a (40) header (#349).
+        if b.key() == format!("{}+{}", s.version, s.build) {
             Some(("installed", tx::BADGE_INSTALLED))
+        } else if s.content_ahead().is_some_and(|c| b.key() == format!("{}+{c}", s.version)) {
+            Some(("installed", tx::BADGE_CONTENT_IN_USE))
         } else if latest_key.as_deref() == Some(b.key().as_str()) {
             Some(("latest", tx::BADGE_LATEST))
         } else if o.is_some() && o > current {
@@ -522,7 +526,13 @@ pub fn UpdateSheet() -> Element {
                             }
                         }
                         if !top.is_empty() {
-                            p { class: "us-count", "{tx::builds_count(top.len())}" }
+                            p { class: "us-count",
+                                if top.iter().all(|b| b.content_only) {
+                                    "{tx::content_updates_count(top.len())}"
+                                } else {
+                                    "{tx::builds_count(top.len())}"
+                                }
+                            }
                         }
                         if !pills.is_empty() {
                             div { class: "us-pills",

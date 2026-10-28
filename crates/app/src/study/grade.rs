@@ -26,6 +26,7 @@ pub fn GradeRow(item_id: String, suggested: Option<Grade>, on_grade: EventHandle
                     button {
                         key: "{i}",
                         class: "st-grade",
+                        "aria-keyshortcuts": "{i + 1}",
                         "data-grade": grade_name(grade),
                         "data-suggested": if suggested == Some(grade) { "yes" } else { "no" },
                         disabled: done(),

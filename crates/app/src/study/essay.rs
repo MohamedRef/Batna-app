@@ -35,7 +35,7 @@ pub fn EssayItem(item: Item, on_grade: EventHandler<Grade>) -> Element {
                     oninput: move |e| typed.set(e.value()),
                 }
                 div { class: "st-actions",
-                    button { class: "st-primary", onclick: compare, {tx::COMPARE} }
+                    button { class: "st-primary", "aria-keyshortcuts": "Enter", onclick: compare, {tx::COMPARE} }
                 }
             },
             Some(n) => rsx! {

@@ -127,8 +127,8 @@ pub fn ClozeItem(item: Item, on_grade: EventHandler<Grade>) -> Element {
         match done {
             None => rsx! {
                 div { class: "st-actions",
-                    button { class: "st-primary", onclick: move |_| check_typed_now(false), {tx::CHECK} }
-                    button { class: "st-secondary", onclick: move |_| reveal_now(true), {tx::REVEAL_BLANKS} }
+                    button { class: "st-primary", "aria-keyshortcuts": "Enter", onclick: move |_| check_typed_now(false), {tx::CHECK} }
+                    button { class: "st-secondary", "aria-keyshortcuts": "Space", onclick: move |_| reveal_now(true), {tx::REVEAL_BLANKS} }
                 }
                 p { class: "muted small", {tx::CLOZE_TIP} }
             },

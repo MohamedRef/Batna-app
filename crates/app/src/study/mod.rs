@@ -225,7 +225,12 @@ pub fn Study() -> Element {
                                 div { class: "st-bar-fill", style: "inline-size: {pos * 100 / len.max(1)}%" }
                             }
                             span { class: "muted small", "{pos + 1} {tx::OF} {len}" }
-                            button { class: "st-link", onclick: move |_| phase.set(Phase::Summary), {tx::END} }
+                            button {
+                                class: "st-link",
+                                "aria-keyshortcuts": "Escape",
+                                onclick: move |_| phase.set(Phase::Summary),
+                                {tx::END}
+                            }
                         }
                         // Keyed so every item (and a retry of the same one) starts fresh.
                         for (item , topic_title , on_grade) in std::iter::once((item, topic_title, on_grade)) {

@@ -22,7 +22,7 @@ pub const MELD: CalcSpec = CalcSpec {
     name: "MELD",
     area: Area::Liver,
     fields: FIELDS_MELD,
-    source: "UNOS/OPTN MELD (Kamath 2001); book Lecture 1, p. 14–15",
+    source: "Formula: UNOS/OPTN MELD (Kamath 2001). The book (Lecture 1, p. 14) names MELD without a formula.",
     compute: compute_meld,
 };
 
@@ -37,7 +37,7 @@ pub const MELD_NA: CalcSpec = CalcSpec {
         flag("dialysis", "Dialysis twice in the past week"),
         num("sodium_mmol_l", "Sodium", "mmol/L", 100.0, 170.0, 1.0),
     ],
-    source: "UNOS/OPTN MELD-Na 2016 (Kim 2008); book Lecture 1, p. 14–15",
+    source: "Formula: UNOS/OPTN MELD-Na 2016 (Kim 2008). The book (Lecture 1, p. 14) names MELD-Na without a formula.",
     compute: compute_meld_na,
 };
 

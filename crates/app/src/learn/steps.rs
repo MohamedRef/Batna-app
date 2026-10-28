@@ -78,7 +78,7 @@ fn Reveal(prompt: String, answer: String, on_answer: EventHandler<bool>) -> Elem
             } else {
                 p { class: "muted small", {tx::THINK_HINT} }
                 button {
-                    class: "ls-btn primary",
+                    class: "btn btn-primary",
                     "aria-keyshortcuts": "Space",
                     onclick: move |_| {
                         open.set(true);
@@ -124,7 +124,7 @@ fn Mnemonic(word: String, parts: Vec<MnemonicPart>, hook: Option<String>) -> Ele
                 }
             }
             if !all {
-                button { class: "ls-link", onclick: move |_| shown.set(vec![true; n]), {tx::SHOW_ALL} }
+                button { class: "btn-link", onclick: move |_| shown.set(vec![true; n]), {tx::SHOW_ALL} }
             }
             if let Some(h) = hook {
                 div { class: "ls-mn-hook", Rich { text: h } }
@@ -257,7 +257,7 @@ fn Order(
             } else if !checked() {
                 div { class: "ls-row",
                     button {
-                        class: "ls-btn primary",
+                        class: "btn btn-primary",
                         onclick: move |_| {
                             checked.set(true);
                             let right = misplaced(&placed.read()).is_empty();
@@ -266,7 +266,7 @@ fn Order(
                         },
                         {tx::CHECK_IT}
                     }
-                    button { class: "ls-link", onclick: move |_| placed.write().clear(), {tx::CLEAR} }
+                    button { class: "btn-link", onclick: move |_| placed.write().clear(), {tx::CLEAR} }
                 }
             }
             if checked() {
@@ -439,7 +439,7 @@ fn Sort(
             }
             if all_in && !checked() {
                 button {
-                    class: "ls-btn primary",
+                    class: "btn btn-primary",
                     onclick: move |_| {
                         checked.set(true);
                         on_answer.call(wrong == 0);
@@ -488,7 +488,7 @@ fn MiniCase(stem: String, steps: Vec<CaseStep>, seed: String, on_answer: EventHa
                             p { class: "ls-case-q", dir: "ltr", lang: "en", strong { Line { text: s.question.clone() } } }
                             if s.options.is_empty() {
                                 if pick.is_none() {
-                                    button { class: "ls-btn", "aria-keyshortcuts": "Space", onclick: move |_| picks.write()[si] = Some(0), {tx::CASE_SHOW} }
+                                    button { class: "btn btn-secondary", "aria-keyshortcuts": "Space", onclick: move |_| picks.write()[si] = Some(0), {tx::CASE_SHOW} }
                                 }
                             } else {
                                 div { class: "ls-options", dir: "ltr", lang: "en",
@@ -524,7 +524,7 @@ fn MiniCase(stem: String, steps: Vec<CaseStep>, seed: String, on_answer: EventHa
                                 div { class: "ls-why-box ls-pop", dir: "ltr", lang: "en", Rich { text: s.why.clone() } }
                                 if last && !reported() {
                                     button {
-                                        class: "ls-btn",
+                                        class: "btn btn-secondary",
                                         onclick: move |_| {
                                             if si + 1 < n {
                                                 at.set(si + 1);
@@ -576,7 +576,7 @@ fn Table(title: String, columns: Vec<String>, rows: Vec<Vec<String>>, hide: Vec<
                 }
             }
             if hidden_left > 0 {
-                button { class: "ls-link", onclick: move |_| open.set(hide.clone()), {tx::SHOW_ALL} }
+                button { class: "btn-link", onclick: move |_| open.set(hide.clone()), {tx::SHOW_ALL} }
             }
         }
     }

@@ -137,7 +137,7 @@ fn LessonList() -> Element {
                     span { class: "chip", "{done} {tx::OF} {total} {tx::LESSONS_DONE}" }
                     if let Some(l) = next {
                         button {
-                            class: "ls-btn primary",
+                            class: "btn btn-primary",
                             onclick: move |_| open(ui, &l.id),
                             {if done == 0 { tx::START_FIRST } else { tx::CONTINUE }}
                             " · "
@@ -223,7 +223,7 @@ pub fn TodayLesson(prefer: Vec<String>) -> Element {
             h2 { text::Line { text: l.title.clone() } }
             p { class: "muted small", bdi { "{title}" } " · " {count(l.minutes, &MINUTE)} }
             p { text::Line { text: l.hook.clone() } }
-            button { class: "ls-btn primary", onclick: move |_| open(ui, &l.id), {tx::OPEN_LESSON} }
+            button { class: "btn btn-primary", onclick: move |_| open(ui, &l.id), {tx::OPEN_LESSON} }
         }
     }
 }

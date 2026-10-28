@@ -155,14 +155,14 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
             }
             footer { class: "ls-nav",
                 button {
-                    class: "ls-btn",
+                    class: "btn btn-secondary",
                     disabled: i == 0,
                     onclick: move |_| go_back(i - 1),
                     {tx::BACK}
                 }
                 if is_q && !can_go {
                     button {
-                        class: "ls-link",
+                        class: "btn-link",
                         onclick: move |_| {
                             skipped.write()[i] = true;
                             go_skip(i + 1);
@@ -171,7 +171,7 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                     }
                 }
                 button {
-                    class: "ls-btn primary ls-next",
+                    class: "btn btn-primary ls-next",
                     "aria-keyshortcuts": "Enter",
                     disabled: !can_go,
                     onclick: move |_| go_next(i + 1),
@@ -224,7 +224,7 @@ fn Summary(lesson: Lesson, right: u32, asked: u32) -> Element {
             div { class: "ls-summary-actions",
                 if n_practice > 0 {
                     button {
-                        class: "ls-btn primary",
+                        class: "btn btn-primary",
                         onclick: move |_| {
                             *crate::study::START.write() = Some(crate::study::Start {
                                 lectures: None,
@@ -239,13 +239,13 @@ fn Summary(lesson: Lesson, right: u32, asked: u32) -> Element {
                 }
                 if let Some(l) = next {
                     button {
-                        class: "ls-btn",
+                        class: "btn btn-secondary",
                         onclick: move |_| super::open(ui, &l.id),
                         "{tx::NEXT_LESSON}: "
                         Line { text: l.title.clone() }
                     }
                 }
-                button { class: "ls-link", onclick: move |_| close(ui), {tx::BACK_TO_LIST} }
+                button { class: "btn-link", onclick: move |_| close(ui), {tx::BACK_TO_LIST} }
             }
             p { class: "muted small", {tx::PRACTICE_HINT} }
         }

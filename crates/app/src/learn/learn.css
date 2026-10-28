@@ -13,27 +13,6 @@
   font-weight: 700;
 }
 .ls-h { font-size: var(--fs-lg); margin: 0 0 var(--sp-3); line-height: 1.4; }
-.ls-btn {
-  min-height: 44px;
-  padding-inline: var(--sp-4);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-pill);
-  background: var(--surface);
-  font-weight: 600;
-  cursor: pointer;
-}
-.ls-btn.primary { background: var(--accent); border-color: var(--accent); color: var(--surface); }
-.ls-btn:disabled { opacity: 0.4; cursor: default; }
-.ls-link {
-  border: 0;
-  background: none;
-  color: var(--accent);
-  padding: var(--sp-2);
-  min-height: 44px;
-  cursor: pointer;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
 .ls-row { display: flex; flex-wrap: wrap; gap: var(--sp-2); align-items: center; }
 .ls-verdict { font-weight: 700; margin-block: var(--sp-3) 0; }
 .ls-verdict.good { color: var(--good); }
@@ -266,7 +245,7 @@
   border-radius: var(--radius);
   padding: var(--sp-3) var(--sp-4);
 }
-.ls-reveal .ls-btn { align-self: start; }
+.ls-reveal .btn { align-self: start; }
 
 /* mnemonic */
 .ls-mn-letters { display: flex; flex-wrap: wrap; gap: var(--sp-2); justify-content: center; }
@@ -291,7 +270,7 @@
 .ls-mn-lines li[data-open="yes"] { background: var(--accent-soft); }
 .ls-mn-k { flex: none; inline-size: 2.4rem; font-weight: 800; color: var(--accent); font-family: var(--font-latin); }
 .ls-mn-hook { border-block-start: 1px dashed var(--line); padding-block-start: var(--sp-2); }
-.ls-mnemonic .ls-link { align-self: center; }
+.ls-mnemonic .btn-link { align-self: center; }
 
 /* asides */
 .ls-aside {
@@ -434,7 +413,7 @@
 }
 .ls-bin-cards li[data-state="right"] .ls-chiplet { border-color: var(--good); background: var(--good-soft); }
 .ls-bin-cards li[data-state="wrong"] .ls-chiplet { border-color: var(--bad); background: var(--bad-soft); }
-.ls-sort > .ls-btn, .ls-order .ls-btn, .ls-case .ls-btn { align-self: start; }
+.ls-sort > .btn, .ls-order .btn, .ls-case .btn { align-self: start; }
 
 /* mini case */
 .ls-case-stem {
@@ -464,7 +443,7 @@
   font-weight: 800;
   cursor: pointer;
 }
-.ls-table .ls-link { align-self: start; }
+.ls-table .btn-link { align-self: start; }
 
 /* try */
 .ls-try .st-item { box-shadow: none; }
@@ -491,4 +470,4 @@
 .ls-summary-actions { display: flex; flex-direction: column; gap: var(--sp-2); inline-size: 100%; align-items: stretch; margin-block-start: var(--sp-2); }
 .ls-summary-actions button.primary { align-self: stretch; }
 @media (prefers-reduced-motion: reduce) { .ls-confetti, .ls-mn-key { animation: none; transition: none; } }
-.ls-today .ls-btn { align-self: start; }
+.ls-today .btn { align-self: start; }

@@ -50,9 +50,7 @@ impl SoundPrefs {
 
     /// Saves and applies at once.
     pub fn save(self) {
-        if let Err(e) = crate::store::shared().put_setting(Self::KEY, &self) {
-            crate::diag::report!("saving sound settings: {e}");
-        }
+        crate::store::save_setting(Self::KEY, &self);
         *PREFS.write() = self;
     }
 }
@@ -142,7 +140,7 @@ pub fn SoundSection() -> Element {
             h2 { {tx::TITLE} }
             p { class: "muted small", {tx::BODY} }
             h3 { {tx::SOUNDS} }
-            div { class: "segmented", style: "grid-template-columns: repeat(2, 1fr)", role: "radiogroup", aria_label: tx::SOUNDS,
+            div { class: "segmented", role: "radiogroup", aria_label: tx::SOUNDS,
                 for (on , label) in [(true, tx::ON), (false, tx::OFF)] {
                     button {
                         key: "{on}",
@@ -157,7 +155,7 @@ pub fn SoundSection() -> Element {
                 p { class: "muted small", {tx::PICK_HINT} }
                 for (cue , title) in [(Cue::Right, tx::RIGHT), (Cue::SessionEnd, tx::END)] {
                     h3 { key: "{title}", {title} }
-                    div { class: "segmented", style: "grid-template-columns: repeat(3, 1fr)", role: "radiogroup", aria_label: title,
+                    div { class: "segmented", role: "radiogroup", aria_label: title,
                         for v in 1..=VARIATIONS {
                             button {
                                 key: "{v}",
@@ -176,7 +174,7 @@ pub fn SoundSection() -> Element {
             if crate::platform::haptics::available() {
                 h3 { {tx::VIBRATE} }
                 p { class: "muted small", {tx::VIBRATE_BODY} }
-                div { class: "segmented", style: "grid-template-columns: repeat(2, 1fr)", role: "radiogroup", aria_label: tx::VIBRATE,
+                div { class: "segmented", role: "radiogroup", aria_label: tx::VIBRATE,
                     for (on , label) in [(true, tx::ON), (false, tx::OFF)] {
                         button {
                             key: "{on}",

@@ -12,7 +12,7 @@ use batna_core::review::{LoggedReview, ReviewEvent, StudyStore, StudyStoreHandle
 use batna_core::srs::{self, CardState, ReviewSettings, Scheduler};
 use dioxus::prelude::*;
 
-use super::{Store, now_ms, utc_offset_minutes};
+use super::{Store, now_ms};
 use crate::content::Library;
 
 /// One study item with the lecture it belongs to.
@@ -102,7 +102,7 @@ impl ReviewBackend {
     /// Re-reads everything from the store.
     pub fn reload(&mut self) {
         self.settings = self.store.review_settings();
-        self.scheduler = Scheduler::from_settings(&self.settings, utc_offset_minutes());
+        self.scheduler = Scheduler::from_settings(&self.settings, super::zone());
         self.log = self.store.reviews().unwrap_or_default();
         self.judgements = self.store.judgements().unwrap_or_default();
         self.refresh_own();
@@ -170,9 +170,13 @@ impl ReviewBackend {
         }
     }
 
-    /// Records ✓ / ✎ / ✗ on the item as it is now.
-    pub fn judge(&mut self, item_id: &str, verdict: Verdict, edit: Edit, note: Option<String>) {
-        let Some(entry) = self.entry(item_id) else { return };
+    /// Records ✓ / ✎ / ✗ on the item as it is now. False when it wasn't
+    /// saved (reported to the log).
+    pub fn judge(&mut self, item_id: &str, verdict: Verdict, edit: Edit, note: Option<String>) -> bool {
+        let Some(entry) = self.entry(item_id) else {
+            crate::diag::report!("no item {item_id} to judge");
+            return false;
+        };
         let j = Judgement {
             verdict,
             edit: if verdict == Verdict::Edited { edit } else { Edit::new() },
@@ -180,27 +184,38 @@ impl ReviewBackend {
             fingerprint: verify::fingerprint(&entry.item),
             at_ms: now_ms(),
         };
-        if self.store.set_judgement(item_id, Some(&j)).is_ok() {
-            self.judgements.insert(item_id.to_string(), j);
-            self.changed();
+        if let Err(e) = self.store.set_judgement(item_id, Some(&j)) {
+            super::write_failed(&format!("the verdict on {item_id}"), &e);
+            return false;
         }
+        self.judgements.insert(item_id.to_string(), j);
+        self.changed();
+        true
     }
 
-    /// Takes a verdict back: the item is unverified again.
-    pub fn undo_judgement(&mut self, item_id: &str) {
-        if self.store.set_judgement(item_id, None).is_ok() {
-            self.judgements.remove(item_id);
-            self.changed();
+    /// Takes a verdict back: the item is unverified again. False when it
+    /// wasn't saved (reported to the log).
+    pub fn undo_judgement(&mut self, item_id: &str) -> bool {
+        if let Err(e) = self.store.set_judgement(item_id, None) {
+            super::write_failed(&format!("taking back the verdict on {item_id}"), &e);
+            return false;
         }
+        self.judgements.remove(item_id);
+        self.changed();
+        true
     }
 
-    pub fn set_settings(&mut self, settings: ReviewSettings) {
-        if self.store.put_review_settings(&settings).is_ok() {
-            self.settings = settings;
-            self.scheduler = Scheduler::from_settings(&self.settings, utc_offset_minutes());
-            self.replay();
-            self.changed();
+    /// False when the settings weren't saved (reported to the log).
+    pub fn set_settings(&mut self, settings: ReviewSettings) -> bool {
+        if let Err(e) = self.store.put_review_settings(&settings) {
+            super::write_failed("review settings", &e);
+            return false;
         }
+        self.settings = settings;
+        self.scheduler = Scheduler::from_settings(&self.settings, super::zone());
+        self.replay();
+        self.changed();
+        true
     }
 
     /// Items falling due on each of the next `days` study days (index 0 is
@@ -417,7 +432,7 @@ fn spawn_refit() {
             return;
         }
         let Ok(log) = store.reviews() else { return };
-        let scheduler = Scheduler::from_settings(&settings, utc_offset_minutes());
+        let scheduler = Scheduler::from_settings(&settings, super::zone());
         if let Some(params) = scheduler.optimize(&log, now) {
             // Re-read so a settings change made meanwhile isn't lost.
             let mut latest = store.review_settings();

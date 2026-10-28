@@ -2,8 +2,11 @@
    Night and true black alike); logical properties only (RTL). */
 
 /* ---------- shared bits ---------- */
+.ls-nowrap { white-space: nowrap; }
 .ls-kicker {
   display: inline-block;
+  align-self: flex-start;
+  inline-size: fit-content;
   margin: 0 0 var(--sp-2);
   padding: 2px var(--sp-3);
   border-radius: var(--radius-pill);
@@ -118,6 +121,8 @@
   max-inline-size: 48rem;
   margin-inline: auto;
   inline-size: 100%;
+  /* Fills the screen so the footer sits at the bottom on every step. */
+  flex: 1 0 auto;
   display: flex;
   flex-direction: column;
   gap: var(--sp-2);
@@ -166,6 +171,7 @@
 .ls-nav {
   position: sticky;
   bottom: 0;
+  margin-block-start: auto;
   z-index: 5;
   display: flex;
   align-items: center;
@@ -388,7 +394,8 @@
   min-block-size: 6rem;
   transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease);
 }
-.ls-bin[data-armed="yes"] { border-color: var(--accent); background: var(--accent-soft); }
+.ls-bin[data-armed="yes"] { border-color: var(--accent); background: var(--accent-soft); cursor: pointer; }
+.ls-bin[data-armed="yes"]:active { transform: var(--press, scale(0.98)); }
 .ls-bin-head {
   border: 0;
   background: none;

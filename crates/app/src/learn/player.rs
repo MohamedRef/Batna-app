@@ -7,7 +7,7 @@
 use batna_core::lesson::{Lesson, StepBody};
 use dioxus::prelude::*;
 
-use super::steps::StepView;
+use super::steps::{CheckBar, StepView};
 use super::text::Line;
 use super::{Mark, close, mark, next_lesson, save_mark};
 use crate::i18n::learn as tx;
@@ -56,6 +56,8 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
         use_signal(|| if start.answers.len() == n { start.answers.clone() } else { vec![None::<bool>; n] });
     let mut skipped =
         use_signal(|| if start.skipped.len() == n { start.skipped.clone() } else { vec![false; n] });
+    let mut check = use_signal(|| None::<Callback<()>>);
+    use_context_provider(|| CheckBar(check));
     let questions: Vec<bool> = lesson.steps.iter().map(|s| s.body.is_question()).collect();
 
     let go = {
@@ -63,6 +65,7 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
         let questions = questions.clone();
         move |to: usize| {
             at.set(to);
+            check.set(None);
             if to == n {
                 let (right, asked) = score(&answers.read(), &skipped.read(), &questions);
                 save_mark(&id, Mark { done_ms: crate::store::now_ms(), right, asked });
@@ -160,7 +163,7 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                     onclick: move |_| go_back(i - 1),
                     {tx::BACK}
                 }
-                if is_q && !can_go {
+                if is_q && !can_go && check().is_none() {
                     button {
                         class: "btn-link",
                         onclick: move |_| {
@@ -170,12 +173,21 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                         {tx::SKIP}
                     }
                 }
-                button {
-                    class: "btn btn-primary ls-next",
-                    "aria-keyshortcuts": "Enter",
-                    disabled: !can_go,
-                    onclick: move |_| go_next(i + 1),
-                    {if i + 1 == n { tx::FINISH } else { tx::NEXT }}
+                if let Some(run) = check().filter(|_| !can_go) {
+                    button {
+                        class: "btn btn-primary ls-next",
+                        "aria-keyshortcuts": "Enter",
+                        onclick: move |_| run.call(()),
+                        {tx::CHECK_IT}
+                    }
+                } else {
+                    button {
+                        class: "btn btn-primary ls-next",
+                        "aria-keyshortcuts": "Enter",
+                        disabled: !can_go,
+                        onclick: move |_| go_next(i + 1),
+                        {if i + 1 == n { tx::FINISH } else { tx::NEXT }}
+                    }
                 }
             }
         }

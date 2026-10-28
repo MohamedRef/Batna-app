@@ -194,8 +194,14 @@ fn LessonCard(n: usize, lesson: Lesson) -> Element {
                     strong { class: "ls-card-title", text::Line { text: lesson.title.clone() } }
                     span { class: "ls-card-hook muted small", text::Line { text: lesson.hook.clone() } }
                     span { class: "ls-card-meta small",
-                        {count(lesson.minutes, &MINUTE)} " · " {count(questions, &QUESTION)} " · {tx::PAGES} "
-                        bdi { dir: "ltr", "{lesson.pages[0]}–{lesson.pages[1]}" }
+                        span { class: "ls-nowrap", {count(lesson.minutes, &MINUTE)} }
+                        " · "
+                        span { class: "ls-nowrap", {count(questions, &QUESTION)} }
+                        " · "
+                        span { class: "ls-nowrap",
+                            "{tx::PAGES} "
+                            bdi { dir: "ltr", "{lesson.pages[0]}–{lesson.pages[1]}" }
+                        }
                     }
                 }
                 match m {

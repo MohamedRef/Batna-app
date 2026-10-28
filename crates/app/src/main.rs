@@ -17,6 +17,7 @@ mod hover;
 mod i18n;
 mod icons;
 mod import;
+mod learn;
 mod more;
 mod onboarding;
 mod oral;
@@ -47,6 +48,7 @@ const SHAPE_CSS: &str = include_str!("../assets/shape.css");
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Screen {
     Today,
+    Learn,
     Study,
     Bank,
     Cases,
@@ -57,12 +59,14 @@ pub enum Screen {
 
 impl Screen {
     /// Bottom bar on phones, side rail from 600dp. Settings is a sheet opened from the top bar.
-    pub const NAV: [Screen; 6] = [Self::Today, Self::Study, Self::Bank, Self::Cases, Self::Oral, Self::Stats];
+    pub const NAV: [Screen; 7] =
+        [Self::Today, Self::Learn, Self::Study, Self::Bank, Self::Cases, Self::Oral, Self::Stats];
 
     pub fn label(self) -> &'static str {
         use i18n::nav;
         match self {
             Self::Today => nav::TODAY,
+            Self::Learn => nav::LEARN,
             Self::Study => nav::STUDY,
             Self::Bank => nav::BANK,
             Self::Cases => nav::CASES,
@@ -138,6 +142,24 @@ fn App() -> Element {
     reminders::use_local_reminders();
     let current = *ui.screen.read();
     let look = ui.prefs.read().css();
+    // Android's status and navigation bars follow the theme, so True black
+    // keeps the whole OLED screen dark. A System theme also repaints them
+    // when the device switches dark mode while Batna is open.
+    let mut os_scheme = use_signal(|| 0u32);
+    use_future(move || async move {
+        let mut eval = document::eval(
+            r#"matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => dioxus.send(1));
+            await new Promise(() => {});"#,
+        );
+        while eval.recv::<u32>().await.is_ok() {
+            os_scheme += 1;
+        }
+    });
+    use_effect(move || {
+        os_scheme.read();
+        let (day, night) = ui.prefs.read().theme.day_and_night();
+        platform::system_bars::apply(day.bg, night.bg);
+    });
     back::use_back(ui, current, *settings.open.read());
     update::view::use_android_install(ui);
     update::view::use_update_notice_taps(settings);
@@ -208,6 +230,7 @@ fn App() -> Element {
 fn screen_body(screen: Screen) -> Element {
     match screen {
         Screen::Today => rsx! { today::Today {} },
+        Screen::Learn => rsx! { learn::Learn {} },
         Screen::Study => rsx! { study::Study {} },
         Screen::Bank => rsx! { bank::Bank {} },
         Screen::Cases => rsx! { case::CasesScreen {} },

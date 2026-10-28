@@ -35,15 +35,6 @@ pub fn repeat(json: &str) {
     let _ = json;
 }
 
-/// The fallback the platform arms once the planned reminders run out
-/// (`plan::Repeat` as JSON, `{}` for none).
-pub fn repeat(json: &str) {
-    #[cfg(target_os = "android")]
-    report(android::string_call("repeat", json));
-    #[cfg(not(target_os = "android"))]
-    let _ = json;
-}
-
 /// Whether notifications are allowed for Batna (None where unknown).
 pub fn enabled() -> Option<bool> {
     #[cfg(target_os = "android")]

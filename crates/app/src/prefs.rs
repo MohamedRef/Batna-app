@@ -170,7 +170,13 @@ impl DevicePrefs {
 
     /// The page-wide CSS for these choices: colour tokens and root text size.
     pub fn css(&self) -> String {
-        format!("{}html{{font-size:{}%;}}", self.theme.css(), self.text_size.percent())
+        self.css_for(None)
+    }
+
+    /// [`DevicePrefs::css`] with the device's dark mode when the platform
+    /// knows it (Android), so System themes follow it.
+    pub fn css_for(&self, device_dark: Option<bool>) -> String {
+        format!("{}html{{font-size:{}%;}}", self.theme.css_for(device_dark), self.text_size.percent())
     }
 }
 

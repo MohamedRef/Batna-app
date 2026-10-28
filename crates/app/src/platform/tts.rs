@@ -52,7 +52,7 @@ pub async fn say(text: &str, rate: f32) -> Result<(), SpeakError> {
 pub fn stop() {
     #[cfg(target_os = "android")]
     if let Err(e) = tts_android::stop() {
-        eprintln!("TextToSpeech.stop: {e}");
+        crate::diag::report!("TextToSpeech.stop: {e}");
     }
     #[cfg(not(target_os = "android"))]
     {

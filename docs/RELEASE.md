@@ -165,7 +165,8 @@ per-device choices:
 | Channel | Alpha, beta or stable for release builds. A preview build always follows `batna-preview`. |
 
 When something is ready, a card above the current screen says so, with the
-notes from the feed. "بعدين" hides it until the next version.
+first two lines of what's new (below) and "إيه الجديد؟". "بعدين" hides it
+until the next version.
 
 **"A new Batna is out" notification.** On Android a JobScheduler job
 (`UpdateCheckJob` in `android/…/UpdateNotice.kt`) runs about every four hours,
@@ -174,13 +175,50 @@ library and calls Rust's `update::background_check` over JNI, so the feed is
 checked with the same signature and hash checks, and in automatic mode on
 Wi-Fi the build is downloaded too. The app's own six-hourly checks send the
 notification as well, when Batna is in the background. There is one per
-version and step (out, then downloaded and ready), with the feed's notes and a
-**نزّلها** or **ثبّتها** button. A tap opens Settings › Updates and the button
-starts the download or the install. Nothing is sent while Batna is in front
+version and step (out, then downloaded and ready), with the first three lines
+of what's new and a **نزّلها** or **ثبّتها** button. A tap opens the "what's
+new" sheet and the button starts the download or the install. A tap while
+Batna is already open is picked up within two seconds (the tap's activity is
+translucent, so the page may never hide), and a tap left over a minute is
+dropped. The job marks a notification as sent only after Android showed it
+(`UpdateCheckJob.shown`), so one Android refused goes out at the next run
+(Batna-app#165). Nothing is sent while Batna is in front
 (the card covers that), for a version whose card was closed, in "لأ" mode, with
 Settings › Updates' switch off, or when Android's notification switch is off.
 The Mac gets the same notification once UNUserNotificationCenter lands
 (Batna-app#50).
+
+**What's new.** Every pull request Mohamed would notice adds
+`changes/<topic>.yaml`, one line per change, in Egyptian Arabic (`en`
+optional), each `new`, `improved` or `fixed`:
+
+```yaml
+- kind: fixed
+  ar_eg: المؤقت في الامتحان التجريبي مبقاش بيقف
+  en: The mock timer no longer stops
+```
+
+A file holding `[]` says there's nothing to tell (CI, refactors, docs). When
+a feed is built (CI for `batna-preview`, `just publish-update` for releases),
+`batna-tools update manifest --previous <current update.json> --changes`
+gathers the files added since the commit the feed carries now, one pull
+request at a time; a merged pull request with no file falls back to its
+title (English), and titles starting with CI, docs, refactor, test and the
+like are skipped. That build's entry goes on top of the feed's `history` (40
+builds, inside the signed `update.json`, so nothing extra to download or
+trust), and the notes older apps read are its first three lines. CI warns on
+an app pull request with no changes file; `batna-tools update changes
+[--since <commit>]` previews what the next build will say.
+
+The app keeps every history it verifies (`updates/history.json`) and shows
+it in one sheet, laid out like Morphe Manager's update dialog (ideas only,
+none of its code): the installed build → the new one, how many builds that
+is and a count per kind, then a timeline with the newest build open and a
+card per kind ("اعرض الكل" past six lines). It opens from the banner's "إيه
+الجديد؟", from the notification, and from Settings › التحديثات (also "سجل
+التغييرات": every build so far); downloading and installing happen in it
+too. At the first launch after an update it opens once by itself, listing
+everything since the build that ran before.
 
 | Device | How the new build goes in |
 |---|---|

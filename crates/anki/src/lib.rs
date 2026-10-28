@@ -185,13 +185,16 @@ pub fn notes_for(item: &Item, lec: &Lecture, deck: i64, approved: bool) -> Vec<N
         guid: guid_for(&format!("{id}{suffix}")),
     };
     let letter = |i: usize| LETTERS.get(i).map(|&b| b as char).unwrap_or('?');
-    let options = |opts: &[String]| {
-        opts.iter()
+    // `order[shown] = original index`; see `option_order`.
+    let options = |opts: &[String], order: &[usize]| {
+        order
+            .iter()
             .enumerate()
-            .map(|(i, o)| format!("{}. {}", letter(i), esc(o)))
+            .map(|(shown, &i)| format!("{}. {}", letter(shown), esc(&opts[i])))
             .collect::<Vec<_>>()
             .join("<br>")
     };
+    let shown_letter = |order: &[usize], i: usize| letter(order.iter().position(|&o| o == i).unwrap_or(i));
 
     match &item.body {
         Body::Card { front, back } => vec![basic(esc(front), esc(back), "")],
@@ -209,14 +212,16 @@ pub fn notes_for(item: &Item, lec: &Lecture, deck: i64, approved: bool) -> Vec<N
             guid: guid_for(id),
         }],
         Body::Mcq { stem, options: opts, answer, why } => {
-            let why: String = why
+            let order = option_order(id, opts);
+            let why: String = order
                 .iter()
                 .enumerate()
-                .map(|(i, w)| format!(r#"<div class="why"><b>{}</b>: {}</div>"#, letter(i), esc(w)))
+                .filter_map(|(shown, &i)| Some((shown, why.get(i)?)))
+                .map(|(shown, w)| format!(r#"<div class="why"><b>{}</b>: {}</div>"#, letter(shown), esc(w)))
                 .collect();
             vec![basic(
-                format!("{}<br><br>{}", esc(stem), options(opts)),
-                format!("<b>{}</b><br>{why}", letter(*answer)),
+                format!("{}<br><br>{}", esc(stem), options(opts, &order)),
+                format!("<b>{}</b><br>{why}", shown_letter(&order, *answer)),
                 "",
             )]
         }
@@ -248,15 +253,16 @@ pub fn notes_for(item: &Item, lec: &Lecture, deck: i64, approved: bool) -> Vec<N
                 if let Some(reveal) = step.reveal.as_deref().filter(|r| !r.is_empty()) {
                     shown.push_str(&format!("<br><br>{}", esc(reveal)));
                 }
+                let order = option_order(&format!("{id}#s{n}"), &step.options);
                 let answer = match step.answer {
-                    Some(a) if !step.options.is_empty() => format!("<b>{}</b> ", letter(a)),
+                    Some(a) if !step.options.is_empty() => format!("<b>{}</b> ", shown_letter(&order, a)),
                     _ => String::new(),
                 };
                 out.push(basic(
                     format!(
                         "{shown}<br><br><b>Step {n}:</b> {}<br>{}",
                         esc(&step.question),
-                        options(&step.options)
+                        options(&step.options, &order)
                     ),
                     format!("{answer}{}", esc(&step.why)),
                     &format!("#s{n}"),
@@ -324,6 +330,15 @@ pub fn stable_id(name: &str) -> i64 {
 }
 
 /// genanki's `guid_for`: the first 8 bytes of SHA-256, in Anki's base91.
+/// The order a note shows its options in (`order[shown] = original index`):
+/// the bank's rule (`batna_core::exam::option_order`), seeded by the note id,
+/// so the book's key isn't always A and a re-import keeps the same order.
+pub fn option_order(note_id: &str, options: &[String]) -> Vec<usize> {
+    let digest = Sha256::digest(note_id.as_bytes());
+    let seed = u64::from_be_bytes(digest[..8].try_into().unwrap());
+    batna_core::exam::option_order(options, &mut batna_core::exam::Rng::new(seed))
+}
+
 pub fn guid_for(value: &str) -> String {
     const TABLE: &[u8] =
         b"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!#$%&()*+,-./:;<=>?@[]^_`{|}~";
@@ -539,6 +554,23 @@ mod tests {
     }
 
     #[test]
+    fn options_shuffle_per_note_and_keep_the_book_order_when_they_must() {
+        let s = |xs: &[&str]| xs.iter().map(|x| x.to_string()).collect::<Vec<_>>();
+        let four = s(&["Propranolol", "Carvedilol", "Band ligation", "TIPS"]);
+        // Same id, same order: a re-import doesn't move the options.
+        assert_eq!(option_order("hb.L04.001", &four), option_order("hb.L04.001", &four));
+        // Across notes the key lands on every letter, not always A.
+        let keys: BTreeSet<usize> = (1..=40)
+            .map(|n| option_order(&format!("hb.L04.{n:03}"), &four).iter().position(|&i| i == 0).unwrap())
+            .collect();
+        assert_eq!(keys.len(), 4, "{keys:?}");
+        // "All of the above" and number ladders keep their sense.
+        assert_eq!(option_order("hb.L01.001", &s(&["a", "b", "c", "All of the above"])), [0, 1, 2, 3]);
+        assert_eq!(option_order("hb.L01.001", &s(&["HPS", "PoPH", "Both", "Neither"])), [0, 1, 2, 3]);
+        assert_eq!(option_order("hb.L01.001", &s(&["Above 30", "Above 10", "Above 20"])), [1, 2, 0]);
+    }
+
+    #[test]
     fn every_kind_becomes_notes() {
         let lec = fixture();
         let approved = BTreeSet::from(["hb.L01.001".to_string()]);
@@ -552,14 +584,23 @@ mod tests {
             deck.notes[1].tags,
             ["hb::L01", "topic::child-pugh", "unverified", "numbers", "high-yield"]
         );
+        // Options are shuffled per note id (#87); the answer and the why lines follow.
         let mcq = &deck.notes[2];
-        assert!(mcq.fields[0].ends_with("B. Class B<br>C. Class C<br>D. Cannot be scored without the INR"));
         assert!(
-            mcq.fields[1].starts_with("<b>B</b><br><div class=\"why\"><b>A</b>: Class A needs 5-6 points")
+            mcq.fields[0]
+                .ends_with("A. Class A<br>B. Cannot be scored without the INR<br>C. Class C<br>D. Class B")
         );
+        assert!(mcq.fields[1].starts_with(
+            "<b>D</b><br><div class=\"why\"><b>A</b>: Class A needs 5-6 points; he has 8.</div><div class=\"why\"><b>B</b>: The book&#x27;s table"
+        ));
         let step2 = deck.notes.iter().find(|n| n.fields[4] == "hb.L01.006#s2").unwrap();
         assert!(step2.fields[0].contains("PaO2 falls by 6 mmHg on standing.<br><br><b>Step 2:</b>"));
-        assert_eq!(step2.fields[1], "<b>C</b> LT improves oxygenation at 1 year. TIPS can worsen shunting.");
+        assert!(
+            step2.fields[0].ends_with(
+                "A. Liver transplantation<br>B. Long-term oxygen alone<br>C. TIPS<br>D. Carvedilol"
+            )
+        );
+        assert_eq!(step2.fields[1], "<b>A</b> LT improves oxygenation at 1 year. TIPS can worsen shunting.");
         let blank = deck.notes.iter().find(|n| n.fields[4] == "hb.L01.007#r2c1").unwrap();
         assert_eq!(blank.fields[0], "Child-Pugh points: <b>Bilirubin (mg/dL)</b> → <b>1 point</b>?");
         assert_eq!(blank.fields[1], "&lt;2");

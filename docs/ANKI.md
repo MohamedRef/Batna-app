@@ -17,10 +17,10 @@ Import the newer `batna.apkg` the same way. Every note has a fixed id that comes
 |---|---|
 | card | Basic note: front, back |
 | cloze | Cloze note, one card per `{{cN::…}}` |
-| mcq | Basic: the stem and options A–E on the front; the answer letter and one line on why each option is right or wrong on the back |
+| mcq | Basic: the stem and options A–E on the front; the answer letter and one line on why each option is right or wrong on the back. Options are shuffled the way the question bank shuffles them (number ladders smallest first, "all of the above" and "Both" kept in the book's order), seeded by the note id, so the order never changes between re-imports |
 | enumerate | Basic: the prompt with "N points; pass at P", then the points |
 | essay | Basic: "Essay outline: …", then the outline headings and bullets |
-| case | One Basic note per step; each step shows the data revealed so far |
+| case | One Basic note per step; each step shows the data revealed so far, with its options shuffled like an mcq |
 | table | One Basic note per blank cell: "Table: row → column?" |
 | order | Basic: "Put in order: …", then the steps in order |
 | calc | Basic: the vignette, then the expected score and what it means |

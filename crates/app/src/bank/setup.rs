@@ -7,8 +7,8 @@ use batna_core::exam::{self, Filter, MOCK_SIZE, Mode, Only};
 use dioxus::prelude::*;
 
 use super::{
-    HISTORY, PAUSED, date, lecture_number, lecture_title, minutes, now_ms, resume, start, study_lectures,
-    submit_paused, topic_title,
+    HISTORY, PAUSED, date, lecture_number, lecture_title, minutes, now_ms, resume, short_lecture_title,
+    start, study_lectures, submit_paused, topic_title,
 };
 use crate::content::Library;
 use crate::i18n::bank as tx;
@@ -118,7 +118,8 @@ pub fn Setup() -> Element {
                                     f.topics.retain(|(l, _)| keep.is_empty() || keep.contains(l));
                                 }
                             },
-                            bdi { "L{lecture_number(&id)} · {lecture_title(&id)}" }
+                            title: lecture_title(&id),
+                            bdi { class: "chip-label", "L{lecture_number(&id)} · {short_lecture_title(&id)}" }
                             span { class: "count", bdi { "{n}" } }
                         }
                     }
@@ -229,10 +230,18 @@ pub fn Setup() -> Element {
 }
 
 #[component]
-fn Chip(on: bool, onclick: EventHandler<MouseEvent>, children: Element) -> Element {
+fn Chip(
+    on: bool,
+    onclick: EventHandler<MouseEvent>,
+    /// The full text when the label is shortened (long press or hover).
+    #[props(default)]
+    title: String,
+    children: Element,
+) -> Element {
     rsx! {
         button {
             class: "chip toggle",
+            title,
             "aria-pressed": if on { "true" } else { "false" },
             onclick: move |e| onclick.call(e),
             {children}

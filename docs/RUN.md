@@ -16,7 +16,7 @@
 
 `scripts/android-check-apk.sh <apk>` fails if the Kotlin classes or their permissions are missing from an APK; CI runs it on every change to `android/`. When you add a Kotlin class that Rust looks up by name, add it to `CLASSES` in that script. `adb logcat` shows Kotlin errors on the device.
 
-Release builds (`just apk`, `just install-android`, `just bundle-mac`), their one-time keys, the CI preview APK and updates over the air are described in [RELEASE.md](RELEASE.md). Nothing is released before Mohamed says go, so for now the debug build, or the CI preview APK on the `batna-preview` prerelease, is the way to try Batna.
+Release builds (`just apk`, `just install-android`, `just bundle-mac`), their one-time keys, the CI preview APK and updates over the air are described in [RELEASE.md](RELEASE.md). Nothing is released before Mohamed says go, so for now the debug build, or the CI preview APK on the `batna-preview` prerelease, is the way to try Batna. Each update says what changed (from `changes/*.yaml`, RELEASE.md §5): before installing, once after, and in Settings › التحديثات › سجل التغييرات.
 
 ## Study in Anki now
 One file, `/mnt/project-files/medstudy/anki/batna.apkg`, holds every written lecture as a subdeck of `Batna`. Open it with AnkiDroid on the phone or tablet, or with Anki on the Mac. Importing a newer `batna.apkg` updates the cards in place and keeps your progress. `just anki` builds it into `dist/anki/`; details in [ANKI.md](ANKI.md).

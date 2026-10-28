@@ -888,6 +888,56 @@ pub mod update {
     pub const NOTICE_CHANNEL: &str = "نسخ باطنة الجديدة";
     pub const NOTIFY: &str = "ابعتلي إشعار أول ما تنزل نسخة جديدة";
     pub const NOTIFY_SUB: &str = "على أندرويد حتى لو باطنة مقفول (بيبص كل كام ساعة)، ومعاه الجديد في سطرين. مفتاح الإشعارات في الجهاز له الكلمة الأخيرة.";
+    pub const NOTICE_MORE: &str = "و{n} حاجات كمان";
+
+    // The "what's new" sheet (crates/app/src/update/sheet.rs).
+    pub const WHATS_NEW_ASK: &str = "إيه الجديد؟";
+    pub const HISTORY: &str = "سجل التغييرات";
+    pub const HISTORY_SUB: &str = "كل نسخة واللي اتغيّر فيها، من الأحدث للأقدم.";
+    pub const HISTORY_EMPTY: &str = "لسه مفيش تغييرات متسجّلة. هتظهر هنا مع أول تحديث.";
+    pub const UPDATED_TITLE: &str = "باطنة اتحدّثت";
+    pub const UPDATED_SUB: &str = "ده اللي اتغيّر من آخر مرة فتحتها.";
+    pub const KIND_NEW: &str = "جديد";
+    pub const KIND_IMPROVED: &str = "اتحسّن";
+    pub const KIND_FIXED: &str = "اتصلّح";
+    pub const BADGE_LATEST: &str = "الأحدث";
+    pub const BADGE_INSTALLED: &str = "اللي معاك";
+    pub const BADGE_NEW: &str = "جديد عليك";
+    pub const TODAY: &str = "النهارده";
+    pub const YESTERDAY: &str = "امبارح";
+    pub const TWO_DAYS_AGO: &str = "من يومين";
+    pub const DAYS_AGO: &str = "من {n} أيام";
+    pub const SHOW_ALL: &str = "اعرض الكل ({n})";
+    pub const SHOW_LESS: &str = "اعرض أقل";
+    pub const EARLIER: &str = "نسخ قبل كده";
+    pub const SHOW_OLDER: &str = "اعرض الأقدم";
+    pub const CLOSE: &str = "اقفل";
+    pub const GOT_IT: &str = "تمام";
+    pub const NO_DETAILS: &str = "النسخة دي مفيهاش تفاصيل مكتوبة.";
+    pub const MONTHS: [&str; 12] = [
+        "يناير",
+        "فبراير",
+        "مارس",
+        "أبريل",
+        "مايو",
+        "يونيو",
+        "يوليو",
+        "أغسطس",
+        "سبتمبر",
+        "أكتوبر",
+        "نوفمبر",
+        "ديسمبر",
+    ];
+
+    /// "3 new builds", with Arabic's dual and plural.
+    pub fn builds_count(n: usize) -> String {
+        match n {
+            1 => "نسخة جديدة".to_owned(),
+            2 => "نسختين جداد".to_owned(),
+            3..=10 => format!("{n} نسخ جديدة"),
+            _ => format!("{n} نسخة جديدة"),
+        }
+    }
 }
 
 pub mod sound {

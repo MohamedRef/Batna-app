@@ -7,12 +7,13 @@
 use batna_core::update::Channel;
 use dioxus::prelude::*;
 
+use super::sheet::{SheetMode, UpdateSheetNav};
 use super::{Failure, Mode, Off, Offer, Phase, Status, Updater};
 use crate::i18n::update as tx;
 use crate::settings::{DeviceOnly, Section, SettingsNav};
 use crate::{Screen, Ui};
 
-const UPDATE_CSS: &str = r#"
+pub(super) const UPDATE_CSS: &str = r#"
 .update-state { display: grid; gap: var(--sp-2); padding: var(--sp-3);
   border-radius: var(--radius); background: var(--accent-soft); }
 .update-state progress { inline-size: 100%; accent-color: var(--accent); }
@@ -47,11 +48,17 @@ fn work(f: impl FnOnce(&'static Updater) + Send + 'static) {
     }
 }
 
-fn notes(o: &Offer) -> String {
-    super::notes_of(o)
+/// What's new in `o`: up to `max` of its changes (new things first), or
+/// the feed's notes from before the changelog.
+fn notes(o: &Offer, max: usize) -> String {
+    if o.changes.is_empty() {
+        super::notes_of(o)
+    } else {
+        super::changelog::lines_upto(&o.changes, tx::NOTICE_MORE, max)
+    }
 }
 
-fn megabytes(bytes: u64) -> String {
+pub(super) fn megabytes(bytes: u64) -> String {
     format!("{:.1} {}", bytes as f64 / (1024.0 * 1024.0), tx::MB)
 }
 
@@ -73,7 +80,7 @@ fn mode_label(m: Mode) -> (&'static str, &'static str) {
 }
 
 /// The button that moves an offer forward, for the card and the banner.
-fn primary_action(phase: &Phase) -> Option<(&'static str, fn())> {
+pub(super) fn primary_action(phase: &Phase) -> Option<(&'static str, fn())> {
     fn download() {
         work(Updater::download);
     }
@@ -111,6 +118,17 @@ pub fn UpdatesSection() -> Element {
     // Updates that are off for a reason this build already knows (no data
     // folder at all counts as a development build).
     let off = s.as_ref().map_or(Some(Off::DevBuild), |s| s.off);
+    let has_offer = s.as_ref().is_some_and(|s| {
+        matches!(
+            s.phase,
+            Phase::Available(_)
+                | Phase::Downloading { .. }
+                | Phase::Ready(_)
+                | Phase::NeedsPermission(_)
+                | Phase::Installed(_)
+        )
+    });
+    let sheet = try_use_context::<UpdateSheetNav>();
 
     rsx! {
         style { {UPDATE_CSS} }
@@ -150,6 +168,12 @@ pub fn UpdatesSection() -> Element {
                         disabled: busy,
                         onclick: move |_| work(|u| u.check(false)),
                         {tx::CHECK_NOW}
+                    }
+                    if let Some(sheet) = sheet {
+                        if has_offer {
+                            button { class: "btn btn-secondary", onclick: move |_| sheet.open(SheetMode::Offer), {tx::WHATS_NEW_ASK} }
+                        }
+                        button { class: "btn btn-ghost", onclick: move |_| sheet.open(SheetMode::History), {tx::HISTORY} }
                     }
                 }
             }
@@ -266,7 +290,9 @@ fn PhaseView(phase: Phase, auto: bool) -> Element {
         Phase::Downloading { offer, done } => Some((*done, offer.asset.size.max(1))),
         _ => None,
     };
-    let what_new = offer.as_ref().map(notes).filter(|n| !n.is_empty() && !failed);
+    let what_new = offer.as_ref().map(|o| notes(o, 3)).filter(|n| !n.is_empty() && !failed);
+    // Changelog lines are bullets already; old notes get a "What's new:".
+    let prefix = offer.as_ref().is_some_and(|o| o.changes.is_empty());
     rsx! {
         div { class: "update-state", role: "status", aria_live: "polite",
             p {
@@ -296,7 +322,9 @@ fn PhaseView(phase: Phase, auto: bool) -> Element {
             }
             if let Some(n) = what_new {
                 p { class: "update-notes",
-                    span { class: "muted", {tx::WHATS_NEW} ": " }
+                    if prefix {
+                        span { class: "muted", {tx::WHATS_NEW} ": " }
+                    }
                     "{n}"
                 }
             }
@@ -337,7 +365,9 @@ pub fn UpdateBanner() -> Element {
         Phase::NeedsPermission(_) => tx::NEEDS_PERMISSION,
         _ => tx::READY,
     };
-    let what_new = notes(&offer);
+    // The banner stays short: two lines, the sheet has the rest.
+    let what_new = notes(&offer, 2);
+    let sheet = try_use_context::<UpdateSheetNav>();
     rsx! {
         style { {UPDATE_CSS} }
         section { class: "card update-banner", role: "status",
@@ -353,8 +383,11 @@ pub fn UpdateBanner() -> Element {
             }
             div { class: "row",
                 button { class: "btn btn-primary", onclick: move |_| run(), {label} }
+                if let Some(sheet) = sheet {
+                    button { class: "btn btn-secondary", onclick: move |_| sheet.open(SheetMode::Offer), {tx::WHATS_NEW_ASK} }
+                }
                 button {
-                    class: "btn btn-secondary",
+                    class: "btn btn-ghost",
                     onclick: move |_| {
                         if let Some(u) = super::get() {
                             u.dismiss();
@@ -367,10 +400,16 @@ pub fn UpdateBanner() -> Element {
     }
 }
 
-/// Follows a tap on the "new version" notification (Android): Settings ›
-/// Updates opens, and the notification's button starts the download or the
-/// install. Mounted once in the shell.
+/// Follows a tap on the "new version" notification (Android): the "what's
+/// new" sheet opens, and the notification's button starts the download or
+/// the install. Mounted once in the shell.
+///
+/// The tap's trampoline activity is translucent, so a tap while Batna is
+/// open may not hide the page at all: besides visibilitychange, it looks on
+/// focus, pageshow and every two seconds while visible (Batna-app#165). The
+/// Kotlin side drops taps over a minute old.
 pub fn use_update_notice_taps(nav: SettingsNav) {
+    let sheet = try_use_context::<UpdateSheetNav>();
     use_future(move || async move {
         if !cfg!(target_os = "android") || super::get().is_none() {
             return;
@@ -379,13 +418,21 @@ pub fn use_update_notice_taps(nav: SettingsNav) {
             r#"
             const send = () => { if (!document.hidden) dioxus.send(true); };
             document.addEventListener("visibilitychange", send);
+            window.addEventListener("focus", send);
+            window.addEventListener("pageshow", send);
+            setInterval(send, 2000);
             send();
             await new Promise(() => {});
             "#,
         );
         while eval.recv::<bool>().await.is_ok() {
             let Some(tap) = crate::platform::update_notice::take_tap() else { continue };
-            nav.show(Some(Section::Updates));
+            // The sheet says what's new and holds the button; without it
+            // (never in the shell), Settings › Updates does.
+            match sheet {
+                Some(sheet) => sheet.open_offer(),
+                None => nav.show(Some(Section::Updates)),
+            }
             match tap.as_str() {
                 "download" => work(Updater::download),
                 "install" => work(Updater::install),

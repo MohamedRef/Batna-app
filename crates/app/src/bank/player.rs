@@ -5,7 +5,7 @@ use batna_core::exam::{self, Mode};
 use dioxus::prelude::*;
 
 use super::question::QuestionView;
-use super::{PHASE, Phase, back_to_setup, choose, finish, go, minutes, now_ms, toggle_flag};
+use super::{PHASE, Phase, choose, finish, go, leave, minutes, now_ms, toggle_flag};
 use crate::i18n::bank as tx;
 
 #[component]
@@ -36,7 +36,12 @@ pub fn Player() -> Element {
                     } else {
                         span { class: "muted small", "{tx::RIGHT} " bdi { "{right}/{answered}" } }
                     }
-                    button { class: "link", onclick: move |_| back_to_setup(), {tx::LEAVE} }
+                    button {
+                        class: "link",
+                        title: if timed { tx::LEAVE_TIMED_HINT } else { "" },
+                        onclick: move |_| leave(),
+                        {tx::LEAVE}
+                    }
                 }
                 if timed {
                     Timer { key: "{p.started_ms}", n, started_ms: p.started_ms }

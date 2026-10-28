@@ -211,6 +211,18 @@ impl Theme {
 
     /// The CSS that applies this theme to the whole page.
     pub fn css(self) -> String {
+        self.css_for(None)
+    }
+
+    /// Like [`Theme::css`], but when the platform knows the device's dark
+    /// mode (`Some`), a System theme takes that side directly instead of
+    /// trusting `prefers-color-scheme`: Android's WebView reports light
+    /// whenever the activity theme isn't DayNight, even in night mode.
+    pub fn css_for(self, device_dark: Option<bool>) -> String {
+        if let (None, Some(dark)) = (self.palette(), device_dark) {
+            let (day, night) = self.day_and_night();
+            return format!(":root{{{}}}", if dark { night } else { day }.css());
+        }
         match self.palette() {
             Some(p) => format!(":root{{{}}}", p.css()),
             None => {
@@ -306,6 +318,15 @@ mod tests {
         let auto = Theme::SystemBlack.css();
         assert!(auto.contains("prefers-color-scheme: dark){:root{--bg:#000000;"), "{auto}");
         assert!(auto.starts_with(":root{--bg:#f6f7f4;"));
+    }
+
+    #[test]
+    fn system_follows_the_device_when_the_platform_knows_it() {
+        assert_eq!(Theme::System.css_for(Some(true)), format!(":root{{{}}}", NIGHT.css()));
+        assert_eq!(Theme::SystemBlack.css_for(Some(true)), format!(":root{{{}}}", BLACK.css()));
+        assert_eq!(Theme::SystemBlack.css_for(Some(false)), format!(":root{{{}}}", PAPER.css()));
+        assert_eq!(Theme::Night.css_for(Some(false)), Theme::Night.css());
+        assert_eq!(Theme::System.css_for(None), Theme::System.css());
     }
 
     #[test]

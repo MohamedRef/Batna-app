@@ -42,6 +42,9 @@ pub mod count {
             one: "حاجة جديدة", two: "حاجتين جداد", few: "حاجات جديدة", many: "حاجة جديدة"
         };
     pub const TIME: Noun = Noun { one: "مرة", two: "مرتين", few: "مرات", many: "مرة" };
+    /// Cases and calc items together.
+    pub const CASE: Noun =
+        Noun { one: "حالة واحدة", two: "حالتين", few: "حالات", many: "حالة" };
 
     /// Any integer type; a negative number counts as 0.
     pub fn count<N: TryInto<u64>>(n: N, noun: &Noun) -> String {
@@ -110,6 +113,10 @@ pub mod today {
     /// "ابدأ جلسة 10 دقايق", with the session length he picked.
     pub fn start(minutes: u32) -> String {
         format!("ابدأ جلسة {}", super::count::count(minutes, &super::count::MINUTE))
+    }
+    /// "3 حالات مستنية مراجعة في شاشة الحالات".
+    pub fn due_cases(n: usize) -> String {
+        format!("{} مستنية مراجعة في شاشة الحالات", super::count::count(n, &super::count::CASE))
     }
     pub const ALL_DONE: &str = "خلّصت المستحق النهارده. شغل حلو.";
     pub const NEW_CAP_REACHED: &str = "وخلّصت الجديد اللي محدّده لليوم";
@@ -651,6 +658,7 @@ pub mod case {
     pub const BACK: &str = "رجوع للقائمة";
     pub const UNVERIFIED: &str = "لسه ما اتراجعش";
     pub const UPDATE: &str = "تحديث عن الكتاب";
+    pub const DUE: &str = "مستحقة مراجعة";
 }
 
 pub mod calc {

@@ -54,7 +54,7 @@ pub fn Today() -> Element {
                             hint: if o.due > 0 { tx::DUE_HINT } else { tx::FORECAST_HINT },
                             accent: o.due > 0,
                             onclick: {
-                                let due = review.backend.borrow().due(store::now_ms());
+                                let due = review.backend.borrow().session_due(store::now_ms());
                                 move |_| if due.is_empty() { crate::stats::open(ui, crate::stats::Tab::Plan) } else { session(ui, due.clone()) }
                             },
                         }
@@ -73,6 +73,9 @@ pub fn Today() -> Element {
                             hint: tx::CHECKED_HINT,
                             onclick: move |_| settings.show(Some(crate::settings::Section::Data)),
                         }
+                    }
+                    if !o.due_cases.is_empty() {
+                        DueCases { ids: o.due_cases.clone() }
                     }
                     if ready {
                         if o.due > 0 {
@@ -118,6 +121,22 @@ pub fn Today() -> Element {
                 }
             }
             div { class: "tab-aside", LibraryList {} }
+        }
+    }
+}
+
+/// Cases and calc items that fell due: they play on the Cases screen, not
+/// in a session, so Today points there with how many are waiting (#242).
+#[component]
+fn DueCases(ids: Vec<String>) -> Element {
+    let ui = use_context::<Ui>();
+    let calc_only =
+        ids.iter().all(|id| crate::case::find_item(id).is_some_and(|(_, i)| i.body.kind() == "calc"));
+    rsx! {
+        button {
+            class: "btn-link due-cases",
+            onclick: move |_| crate::case::open_due(ui, calc_only),
+            {tx::due_cases(ids.len())}
         }
     }
 }

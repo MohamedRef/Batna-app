@@ -55,6 +55,18 @@ The list lives in `batna_protocol::sync::TABLES`. **A new synced table must be a
    The id is not a secret; commit it.
 
 ### 3.3 Deploy
+**From GitHub (no Mac needed).** The `Deploy Batna Cloud` workflow builds and deploys the Worker.
+1. In Cloudflare, open **Workers & Pages** once so the account gets its `workers.dev` subdomain.
+2. At **My Profile › API Tokens**, create a token from the **Edit Cloudflare Workers** template.
+3. Add repo secrets (**Settings › Secrets and variables › Actions**):
+   - `CLOUDFLARE_API_TOKEN`: the token.
+   - `BATNA_ALLOWED_EMAILS`: your Gmail.
+4. If the token can see more than one Cloudflare account, also add the repo variable `CLOUDFLARE_ACCOUNT_ID`.
+5. Run **Actions › Deploy Batna Cloud › Run workflow**. The run summary shows the Worker URL.
+
+The first run makes the token signing key inside Cloudflare, so `just cloud-setup` isn't needed. After that, every push to `main` that touches `crates/server` or `crates/protocol` redeploys the hub.
+
+**From the Mac:**
 ```bash
 just cloud-deploy
 curl https://batna-cloud.<your-subdomain>.workers.dev/v1/health

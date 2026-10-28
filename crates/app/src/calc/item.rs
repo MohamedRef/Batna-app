@@ -7,7 +7,7 @@ use batna_core::content::Body;
 use dioxus::prelude::*;
 
 use super::{CalcForm, OutcomeCard};
-use crate::case::{ItemMeta, find_item, record};
+use crate::case::{ItemMeta, effective, find_item, record, use_case_store};
 use crate::i18n::{calc as tx, case as cx};
 
 #[derive(Clone, Copy, PartialEq)]
@@ -27,8 +27,10 @@ pub fn CalcItem(item_id: String, on_back: EventHandler) -> Element {
     let mut meaning_open = use_signal(|| false);
     let mut verdict = use_signal(|| None::<bool>);
     let mut started = use_signal(crate::case::now_ms);
+    let store = use_case_store();
     let finish = use_callback({
         let item_id = item_id.clone();
+        let store = store.clone();
         move |right: bool| {
             verdict.set(Some(right));
             // Two decisions when he typed a result, one when he used the calculator.
@@ -36,11 +38,12 @@ pub fn CalcItem(item_id: String, on_back: EventHandler) -> Element {
                 Computed::Typed(ok) => (u32::from(ok) + u32::from(right), 2),
                 _ => (u32::from(right), 1),
             };
-            record(&item_id, got, total, started());
+            record(store.as_ref(), &item_id, got, total, started());
         }
     });
 
     let Some((lecture, item)) = find_item(&item_id) else { return rsx! {} };
+    let item = effective(store.as_ref(), item);
     let Body::Calc { calculator, stem, question, inputs, expect, interpret } = &item.body else {
         return rsx! {};
     };

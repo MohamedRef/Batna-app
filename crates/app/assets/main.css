@@ -161,22 +161,26 @@ input[type="checkbox"]:disabled { opacity: 0.5; cursor: default; }
 .nav-item[aria-current="page"] { color: var(--accent); font-weight: 700; }
 
 /* ---------- side rail (medium and expanded) ---------- */
+/* Tablets (Tab S11: 753dp portrait, 1205dp landscape) and the Mac: no top
+   bar. The name heads the rail and Settings sits at its foot, so every
+   screen gets the full height of the window. */
 @media (min-width: 600px) {
   .app {
     grid-template-columns: var(--rail-w) 1fr;
-    grid-template-rows: auto 1fr;
-    grid-template-areas: "top top" "nav content";
+    grid-template-rows: 1fr;
+    grid-template-areas: "nav content";
   }
+  .topbar { display: none; }
   .nav {
-    grid-template-columns: none;
-    grid-auto-rows: min-content;
-    align-content: start;
+    display: flex;
+    flex-direction: column;
     gap: var(--sp-2);
-    padding-block: var(--sp-4);
+    padding-block: calc(var(--sp-3) + env(safe-area-inset-top, 0px)) var(--sp-3);
     border-block-start: 0;
     border-inline-end: 1px solid var(--line);
     overflow-y: auto;
   }
+  .nav-item { min-height: var(--row); justify-content: center; }
 }
 
 /* ---------- content ---------- */
@@ -194,9 +198,10 @@ input[type="checkbox"]:disabled { opacity: 0.5; cursor: default; }
   min-width: 0;
 }
 @media (min-width: 840px) {
-  /* A 60rem reading column at the start side; the padding, not a max-width,
-     keeps it there so the scrollbar stays at the window's edge. */
-  .content { padding-inline: var(--sp-6) max(var(--sp-6), calc(100% - 60rem - var(--sp-6))); }
+  /* A reading column (60rem, 80rem on dashboards: desk.css) at the start
+     side; the padding, not a max-width, keeps it there so the scrollbar
+     stays at the window's edge. */
+  .content { padding-inline: var(--sp-6) max(var(--sp-6), calc(100% - var(--content-max, 60rem) - var(--sp-6))); }
 }
 
 h1 { font-size: var(--fs-xl); margin: 0; line-height: 1.35; }
@@ -231,7 +236,6 @@ p { margin: 0; }
 
 /* ---------- Today: the lecture list ---------- */
 .lectures { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-2); }
-@media (min-width: 840px) { .lectures { grid-template-columns: 1fr 1fr; } }
 .lecture {
   display: flex;
   align-items: center;
@@ -262,6 +266,14 @@ p { margin: 0; }
 @media (max-width: 599.98px) {
   .lecture { display: grid; grid-template-columns: auto 1fr; column-gap: var(--sp-3); row-gap: var(--sp-1); }
   .lecture .chip { grid-column: 2; justify-self: start; }
+}
+/* Two across in tablet portrait, the chip under the title; from 840px the
+   library is a column of its own beside today's plan (desk.css). */
+@media (min-width: 600px) and (max-width: 839.98px) {
+  .lectures { grid-template-columns: 1fr 1fr; }
+  .lecture { flex-wrap: wrap; align-content: start; }
+  .lecture-main { flex: 1 1 8rem; }
+  .lecture .chip { margin-inline-start: calc(2.25rem + var(--sp-3)); }
 }
 
 @media (prefers-reduced-motion: reduce) {

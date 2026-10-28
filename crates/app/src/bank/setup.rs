@@ -95,137 +95,143 @@ pub fn Setup() -> Element {
     let mock_shown = mock_count.min(lectures.iter().map(|l| l.1).sum());
 
     rsx! {
-        Paused {}
-        section { class: "card",
-            h1 { {tx::TITLE} }
-            p { class: "muted", {tx::LEAD} }
+        // Tablet landscape and the Mac: practice filters in the wide column,
+        // the mock exam and past papers beside them.
+        div { class: "tab-cols bank-cols", "data-wide": "main",
+            div { class: "tab-main",
+                Paused {}
+                section { class: "card",
+                    h1 { {tx::TITLE} }
+                    p { class: "muted", {tx::LEAD} }
 
-            if several_lectures {
-                h2 { class: "label", {tx::LECTURES} }
-                div { class: "chips",
-                    for (id, n) in lectures {
-                        Chip {
-                            key: "{id}",
-                            on: filter.lectures.contains(&id),
-                            onclick: {
-                                let id = id.clone();
-                                move |_| {
-                                    let mut f = FILTER.write();
-                                    if !f.lectures.remove(&id) {
-                                        f.lectures.insert(id.clone());
-                                    }
-                                    let keep = f.lectures.clone();
-                                    f.topics.retain(|(l, _)| keep.is_empty() || keep.contains(l));
+                    if several_lectures {
+                        h2 { class: "label", {tx::LECTURES} }
+                        div { class: "chips",
+                            for (id, n) in lectures {
+                                Chip {
+                                    key: "{id}",
+                                    on: filter.lectures.contains(&id),
+                                    onclick: {
+                                        let id = id.clone();
+                                        move |_| {
+                                            let mut f = FILTER.write();
+                                            if !f.lectures.remove(&id) {
+                                                f.lectures.insert(id.clone());
+                                            }
+                                            let keep = f.lectures.clone();
+                                            f.topics.retain(|(l, _)| keep.is_empty() || keep.contains(l));
+                                        }
+                                    },
+                                    title: lecture_title(&id),
+                                    bdi { class: "chip-label", "L{lecture_number(&id)} · {short_lecture_title(&id)}" }
+                                    span { class: "count", bdi { "{n}" } }
                                 }
-                            },
-                            title: lecture_title(&id),
-                            bdi { class: "chip-label", "L{lecture_number(&id)} · {short_lecture_title(&id)}" }
-                            span { class: "count", bdi { "{n}" } }
+                            }
                         }
                     }
-                }
-            }
 
-            h2 { class: "label", {tx::TOPICS} }
-            if topics.is_empty() {
-                p { class: "muted small", {tx::PICK_LECTURE_FOR_TOPICS} }
-            } else {
-                div { class: "chips",
-                    for (lecture, topic) in topics {
-                        Chip {
-                            key: "{lecture}/{topic}",
-                            on: filter.topics.contains(&(lecture.clone(), topic.clone())),
-                            onclick: {
-                                let key = (lecture.clone(), topic.clone());
-                                move |_| {
-                                    let mut f = FILTER.write();
-                                    if !f.topics.remove(&key) {
-                                        f.topics.insert(key.clone());
+                    h2 { class: "label", {tx::TOPICS} }
+                    if topics.is_empty() {
+                        p { class: "muted small", {tx::PICK_LECTURE_FOR_TOPICS} }
+                    } else {
+                        div { class: "chips",
+                            for (lecture, topic) in topics {
+                                Chip {
+                                    key: "{lecture}/{topic}",
+                                    on: filter.topics.contains(&(lecture.clone(), topic.clone())),
+                                    onclick: {
+                                        let key = (lecture.clone(), topic.clone());
+                                        move |_| {
+                                            let mut f = FILTER.write();
+                                            if !f.topics.remove(&key) {
+                                                f.topics.insert(key.clone());
+                                            }
+                                        }
+                                    },
+                                    if topic_prefix {
+                                        bdi { "L{lecture_number(&lecture)} · {topic_title(&lecture, &topic)}" }
+                                    } else {
+                                        bdi { {topic_title(&lecture, &topic)} }
                                     }
                                 }
+                            }
+                        }
+                    }
+
+                    h2 { class: "label", {tx::TAGS} }
+                    div { class: "chips",
+                        for (tag, label) in tags {
+                            Chip {
+                                key: "{tag}",
+                                on: filter.tags.contains(tag),
+                                onclick: move |_| {
+                                    let mut f = FILTER.write();
+                                    if !f.tags.remove(tag) {
+                                        f.tags.insert(tag.to_string());
+                                    }
+                                },
+                                {label}
+                            }
+                        }
+                        Chip {
+                            on: filter.only == Only::WrongOrUnseen,
+                            onclick: move |_| {
+                                let mut f = FILTER.write();
+                                f.only = if f.only == Only::All { Only::WrongOrUnseen } else { Only::All };
                             },
-                            if topic_prefix {
-                                bdi { "L{lecture_number(&lecture)} · {topic_title(&lecture, &topic)}" }
-                            } else {
-                                bdi { {topic_title(&lecture, &topic)} }
+                            {tx::ONLY_WRONG}
+                        }
+                    }
+
+                    h2 { class: "label", {tx::COUNT} }
+                    div { class: "chips",
+                        for c in COUNTS {
+                            Chip {
+                                key: "{c}",
+                                on: count == c,
+                                onclick: move |_| *COUNT.write() = c,
+                                if c == usize::MAX { {tx::ALL} } else { bdi { "{c}" } }
+                            }
+                        }
+                    }
+
+                    if available == 0 {
+                        p { class: "note", {tx::NONE_MATCH} }
+                    } else {
+                        p { class: "muted small", bdi { "{available}" } " {tx::AVAILABLE}" }
+                        div { class: "start-row",
+                            button { class: "button primary start", onclick: move |_| start_tutor(Mode::Tutor),
+                                span { {tx::START_TUTOR} " · " bdi { "{shown}" } }
+                                span { class: "hint", {tx::TUTOR_HINT} }
+                            }
+                            button { class: "button start", onclick: move |_| start_with(Mode::Timed),
+                                span { {tx::START_TIMED} " · " bdi { "{minutes(exam::time_limit_ms(shown))}" } " {tx::MINUTES}" }
+                                span { class: "hint", {tx::TIMED_HINT} }
                             }
                         }
                     }
                 }
             }
-
-            h2 { class: "label", {tx::TAGS} }
-            div { class: "chips",
-                for (tag, label) in tags {
-                    Chip {
-                        key: "{tag}",
-                        on: filter.tags.contains(tag),
-                        onclick: move |_| {
-                            let mut f = FILTER.write();
-                            if !f.tags.remove(tag) {
-                                f.tags.insert(tag.to_string());
-                            }
-                        },
-                        {label}
+            div { class: "tab-aside tab-sticky",
+                section { class: "card",
+                    h1 { {tx::MOCK_TITLE} }
+                    p { class: "muted", {tx::MOCK_LEAD} }
+                    h2 { class: "label", {tx::COUNT} }
+                    div { class: "chips",
+                        for c in MOCK_COUNTS {
+                            Chip { key: "{c}", on: mock_count == c, onclick: move |_| *MOCK_COUNT.write() = c, bdi { "{c}" } }
+                        }
+                    }
+                    div { class: "start-row",
+                        button { class: "button primary start", onclick: start_mock,
+                            span { {tx::START_MOCK} " · " bdi { "{mock_shown}" } " {tx::QUESTION}" }
+                            span { class: "hint", bdi { "{minutes(exam::time_limit_ms(mock_shown))}" } " {tx::MINUTES}" }
+                        }
                     }
                 }
-                Chip {
-                    on: filter.only == Only::WrongOrUnseen,
-                    onclick: move |_| {
-                        let mut f = FILTER.write();
-                        f.only = if f.only == Only::All { Only::WrongOrUnseen } else { Only::All };
-                    },
-                    {tx::ONLY_WRONG}
-                }
-            }
-
-            h2 { class: "label", {tx::COUNT} }
-            div { class: "chips",
-                for c in COUNTS {
-                    Chip {
-                        key: "{c}",
-                        on: count == c,
-                        onclick: move |_| *COUNT.write() = c,
-                        if c == usize::MAX { {tx::ALL} } else { bdi { "{c}" } }
-                    }
-                }
-            }
-
-            if available == 0 {
-                p { class: "note", {tx::NONE_MATCH} }
-            } else {
-                p { class: "muted small", bdi { "{available}" } " {tx::AVAILABLE}" }
-                div { class: "start-row",
-                    button { class: "button primary start", onclick: move |_| start_tutor(Mode::Tutor),
-                        span { {tx::START_TUTOR} " · " bdi { "{shown}" } }
-                        span { class: "hint", {tx::TUTOR_HINT} }
-                    }
-                    button { class: "button start", onclick: move |_| start_with(Mode::Timed),
-                        span { {tx::START_TIMED} " · " bdi { "{minutes(exam::time_limit_ms(shown))}" } " {tx::MINUTES}" }
-                        span { class: "hint", {tx::TIMED_HINT} }
-                    }
-                }
+                History {}
             }
         }
-
-        section { class: "card",
-            h1 { {tx::MOCK_TITLE} }
-            p { class: "muted", {tx::MOCK_LEAD} }
-            h2 { class: "label", {tx::COUNT} }
-            div { class: "chips",
-                for c in MOCK_COUNTS {
-                    Chip { key: "{c}", on: mock_count == c, onclick: move |_| *MOCK_COUNT.write() = c, bdi { "{c}" } }
-                }
-            }
-            div { class: "start-row",
-                button { class: "button primary start", onclick: start_mock,
-                    span { {tx::START_MOCK} " · " bdi { "{mock_shown}" } " {tx::QUESTION}" }
-                    span { class: "hint", bdi { "{minutes(exam::time_limit_ms(mock_shown))}" } " {tx::MINUTES}" }
-                }
-            }
-        }
-
-        History {}
     }
 }
 

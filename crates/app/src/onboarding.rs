@@ -47,7 +47,7 @@ impl Answers {
 
     fn save(&self) {
         if let Err(e) = shared().put_setting(Self::KEY, self) {
-            eprintln!("saving first-run answers: {e}");
+            crate::diag::report!("saving first-run answers: {e}");
         }
     }
 }
@@ -73,7 +73,7 @@ const SEEN: &str = "onboarded";
 
 fn close() {
     if let Err(e) = shared().put_local_setting(SEEN, &true) {
-        eprintln!("saving first-run flag: {e}");
+        crate::diag::report!("saving first-run flag: {e}");
     }
     *OPEN.write() = false;
 }

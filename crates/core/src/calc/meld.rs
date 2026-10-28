@@ -116,8 +116,9 @@ fn compute_meld(i: &Inputs) -> Result<Outcome, CalcError> {
 
 fn compute_meld_na(i: &Inputs) -> Result<Outcome, CalcError> {
     let (v, mut parts, mut notes) = meld_i(i)?;
-    // UNOS: round MELD(i) to the tenth before the sodium step.
-    let m = (v * 10.0).round() / 10.0;
+    // OPTN: MELD(i) is rounded to the tenth and multiplied by 10, a whole
+    // number, before the > 11 gate and the sodium step. `v` is already × 10.
+    let m = v.round();
     let na_in = i.get_num("sodium_mmol_l")?;
     let na = na_in.clamp(125.0, 137.0);
     if na != na_in {
@@ -181,8 +182,7 @@ mod tests {
 
     #[test]
     fn meld_na_worked_example() {
-        // MELD(i) 26.1 (rounded to the tenth), Na 130:
-        // 26.1 + 1.32·7 − 0.033·26.1·7 = 26.1 + 9.24 − 6.03 = 29.31 → 29.
+        // MELD(i) 26, Na 130: 26 + 1.32·7 − 0.033·26·7 = 26 + 9.24 − 6.01 = 29.23 → 29.
         let o = compute_meld_na(&labs(4.0, 2.0, 2.0).num("sodium_mmol_l", 130.0)).unwrap();
         assert_eq!(o.score, Some(29.0));
         assert_eq!(o.band, "meld_na.15_30");
@@ -195,5 +195,14 @@ mod tests {
         assert_eq!(low.score, at125.score);
         let normal = compute_meld_na(&labs(1.0, 1.0, 1.0).num("sodium_mmol_l", 125.0)).unwrap();
         assert_eq!(normal.score, Some(6.0));
+    }
+
+    // Issue #253: MELD(i) 11.09 is 11 by OPTN, so no sodium step (it gave
+    // 23 when the gate saw 11.1).
+    #[test]
+    fn meld_na_gate_uses_the_whole_meld() {
+        let o = compute_meld_na(&labs(2.0, 1.2, 1.0).num("sodium_mmol_l", 125.0)).unwrap();
+        assert_eq!(o.score, Some(11.0));
+        assert!(o.parts.iter().all(|p| p.label != "Sodium adjustment"));
     }
 }

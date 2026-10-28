@@ -344,6 +344,18 @@ pub fn unknown_inputs<'a>(spec: &CalcSpec, inputs: &'a Inputs) -> Vec<&'a str> {
     inputs.0.keys().map(String::as_str).filter(|k| !spec.fields.iter().any(|f| f.key == *k)).collect()
 }
 
+/// Whether an answer Mohamed typed for a `calc` item is right: anything
+/// [`expect_matches`] accepts, or a text that names only the right band
+/// ("Child-Pugh C", "class c", "met"). The validator keeps the stricter
+/// [`expect_matches`], since content should show the number.
+pub fn answer_matches(outcome: &Outcome, typed: &str) -> bool {
+    if expect_matches(outcome, typed) {
+        return true;
+    }
+    let named = named_bands(typed, outcome.band);
+    !named.is_empty() && named.iter().all(|b| *b == outcome.band)
+}
+
 /// Whether a content item's `expect` agrees with the computed outcome. It
 /// may be the band id (`child_pugh.b`) or free text that shows the result,
 /// such as "Child-Pugh B (8 points)" (contains "8") or "Stage C" for BCLC.
@@ -610,6 +622,27 @@ mod tests {
         assert_eq!(r.band, "r_ratio.mixed");
         assert!(expect_matches(&r, "R = 5, mixed"));
         assert!(!expect_matches(&r, "R = 5, hepatocellular"));
+    }
+
+    // Issue #252: naming the right band is a right typed answer.
+    #[test]
+    fn typed_band_names_are_accepted() {
+        let i = Inputs::new()
+            .choice("encephalopathy", "grade_3_4")
+            .choice("ascites", "severe")
+            .num("bilirubin_mg_dl", 5.0)
+            .num("albumin_g_dl", 2.0)
+            .num("pt_prolonged_s", 8.0);
+        let o = compute("child_pugh", &i).unwrap();
+        assert_eq!((o.band, o.score), ("child_pugh.c", Some(15.0)));
+        for t in ["Child-Pugh C", "class c", "Child-Pugh class C", "C (15)", "15"] {
+            assert!(answer_matches(&o, t), "{t}");
+        }
+        for t in ["Child-Pugh B", "class b", "14", "", "C"] {
+            assert!(!answer_matches(&o, t), "{t}");
+        }
+        // The validator stays strict: content shows the number.
+        assert!(!expect_matches(&o, "Child-Pugh C"));
     }
 
     #[test]

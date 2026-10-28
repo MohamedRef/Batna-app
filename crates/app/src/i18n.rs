@@ -7,6 +7,81 @@ pub mod app {
     pub const TAGLINE: &str = "مذاكرة الباطنة، جلسة قصيرة كل مرة";
 }
 
+/// Counted nouns in Egyptian Arabic, so no screen writes "5 ساعة" or
+/// "1 أيام": `count(1, &HOUR)` is "ساعة", 2 is "ساعتين", 3–10 take the
+/// plural ("5 ساعات") and 11 and up the singular ("11 ساعة"). Digits are
+/// always 0–9.
+pub mod count {
+    /// The forms of one noun: alone for 1, the dual for 2, the plural for
+    /// 3–10, and the singular that follows 0 and 11 up.
+    pub struct Noun {
+        pub one: &'static str,
+        pub two: &'static str,
+        pub few: &'static str,
+        pub many: &'static str,
+    }
+
+    pub const SECOND: Noun =
+        Noun { one: "ثانية", two: "ثانيتين", few: "ثواني", many: "ثانية" };
+    pub const MINUTE: Noun =
+        Noun { one: "دقيقة", two: "دقيقتين", few: "دقايق", many: "دقيقة" };
+    pub const HOUR: Noun = Noun { one: "ساعة", two: "ساعتين", few: "ساعات", many: "ساعة" };
+    pub const DAY: Noun = Noun { one: "يوم", two: "يومين", few: "أيام", many: "يوم" };
+    pub const MONTH: Noun = Noun { one: "شهر", two: "شهرين", few: "شهور", many: "شهر" };
+    pub const QUESTION: Noun =
+        Noun { one: "سؤال واحد", two: "سؤالين", few: "أسئلة", many: "سؤال" };
+    /// Questions and cards together.
+    pub const ITEM: Noun = Noun {
+        one: "سؤال واحد", two: "سؤالين", few: "أسئلة وكروت", many: "سؤال وكارت"
+    };
+    pub const REVIEW: Noun = Noun {
+        one: "مراجعة واحدة", two: "مراجعتين", few: "مراجعات", many: "مراجعة"
+    };
+    pub const NEW_THING: Noun =
+        Noun {
+            one: "حاجة جديدة", two: "حاجتين جداد", few: "حاجات جديدة", many: "حاجة جديدة"
+        };
+    pub const TIME: Noun = Noun { one: "مرة", two: "مرتين", few: "مرات", many: "مرة" };
+
+    /// Any integer type; a negative number counts as 0.
+    pub fn count<N: TryInto<u64>>(n: N, noun: &Noun) -> String {
+        let n: u64 = n.try_into().unwrap_or(0);
+        let rest = n % 100;
+        match n {
+            1 => noun.one.to_string(),
+            2 => noun.two.to_string(),
+            _ if (3..=10).contains(&rest) => format!("{n} {}", noun.few),
+            _ => format!("{n} {}", noun.many),
+        }
+    }
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
+        #[test]
+        fn egyptian_number_agreement() {
+            assert_eq!(count(1, &HOUR), "ساعة");
+            assert_eq!(count(2, &HOUR), "ساعتين");
+            assert_eq!(count(5, &HOUR), "5 ساعات");
+            assert_eq!(count(10, &DAY), "10 أيام");
+            assert_eq!(count(11, &HOUR), "11 ساعة");
+            assert_eq!(count(0, &QUESTION), "0 سؤال");
+            assert_eq!(count(103, &DAY), "103 أيام");
+            assert_eq!(count(120, &DAY), "120 يوم");
+            assert_eq!(count(1, &QUESTION), "سؤال واحد");
+        }
+    }
+}
+
+/// How every screen cites the book and names a lecture.
+pub mod cite {
+    /// "ص 179".
+    pub fn page(page: u32) -> String {
+        format!("ص {page}")
+    }
+}
+
 pub mod nav {
     pub const TODAY: &str = "النهارده";
     pub const STUDY: &str = "مذاكرة";
@@ -22,9 +97,17 @@ pub mod today {
     pub const DUE: &str = "مستحق مراجعة";
     pub const NEW: &str = "جديد متاح";
     pub const CHECKED: &str = "راجعت صحته";
-    pub const DUE_TIME_1: &str = "المستحق ياخد حوالي";
-    pub const DUE_TIME_2: &str = "دقيقة. الجلسة بتبدأ بالأضعف.";
-    pub const START: &str = "ابدأ جلسة ١٠ دقايق";
+    /// "المستحق ياخد حوالي 12 دقيقة. …"
+    pub fn due_time(minutes: u32) -> String {
+        format!(
+            "المستحق ياخد حوالي {}. الجلسة بتبدأ بالأضعف.",
+            super::count::count(minutes, &super::count::MINUTE)
+        )
+    }
+    /// "ابدأ جلسة 10 دقايق", with the session length he picked.
+    pub fn start(minutes: u32) -> String {
+        format!("ابدأ جلسة {}", super::count::count(minutes, &super::count::MINUTE))
+    }
     pub const ALL_DONE: &str = "خلّصت المستحق النهارده. شغل حلو.";
     pub const NEW_CAP_REACHED: &str = "وخلّصت الجديد اللي محدّده لليوم";
     pub const TOMORROW: &str = "بكرة:";
@@ -38,7 +121,6 @@ pub mod today {
     pub const CHAPTER: &str = "Hepato-Biliary Pancreatic Unit";
     pub const READY: &str = "جاهزة";
     pub const WRITING: &str = "بتتكتب";
-    pub const ITEMS: &str = "سؤال وكارت";
     pub const PAGES: &str = "صفحات";
     pub const UNVERIFIED_NOTE: &str = "كل المحتوى لسه ما اتراجعش. أول ما تشوف أي سؤال، علّم عليه صح أو غلط.";
 }
@@ -73,11 +155,6 @@ pub mod study {
     pub const TOPICS: &str = "المواضيع";
     pub const TOPICS_HINT: &str = "سيبها فاضية عشان تذاكر المحاضرة كلها.";
     pub const TIME: &str = "الوقت";
-    pub const MINUTES: &str = "دقيقة";
-    pub const HOURS: &str = "ساعة";
-    pub const DAYS: &str = "أيام";
-    pub const ITEMS: &str = "سؤال";
-    pub const REVIEWS: &str = "مراجعة";
     pub const NEW: &str = "جديد";
     pub const ABOUT: &str = "حوالي";
     pub const START: &str = "يلا نبدأ";
@@ -100,7 +177,6 @@ pub mod study {
     pub const KIND_TABLE: &str = "جدول";
     pub const KIND_ORDER: &str = "رتّب";
     pub const KIND_CALC: &str = "حساب";
-    pub const BOOK_PAGE: &str = "الكتاب ص";
     pub const BOOK_QUOTE: &str = "من الكتاب";
     pub const UPDATE_TITLE: &str = "تحديث عن الكتاب";
     pub const UPDATE_AFTER: &str = "افتحه بعد ما تجاوب";
@@ -143,10 +219,6 @@ pub mod study {
     pub const HARD: &str = "صعب";
     pub const GOOD: &str = "تمام";
     pub const EASY: &str = "سهل";
-    pub const UNIT_MIN: &str = "د";
-    pub const UNIT_HOUR: &str = "س";
-    pub const UNIT_DAY: &str = "ي";
-    pub const UNIT_MONTH: &str = "ش";
 
     pub const SUMMARY_TITLE: &str = "خلصت الجلسة، برافو عليك";
     pub const SUMMARY_EMPTY: &str = "الجلسة خلصت";
@@ -184,7 +256,7 @@ pub mod bank {
     pub const ONLY_WRONG: &str = "الغلط واللي ما اتشافش بس";
     pub const ALL: &str = "الكل";
     pub const COUNT: &str = "عدد الأسئلة";
-    pub const AVAILABLE: &str = "سؤال متاح";
+    pub const AVAILABLE: &str = "متاح:";
     pub const NONE_MATCH: &str = "مفيش أسئلة بالاختيارات دي. جرّب توسّع الفلتر.";
     pub const START_TUTOR: &str = "ابدأ بالشرح";
     pub const START_TIMED: &str = "ابدأ بالوقت";
@@ -194,7 +266,6 @@ pub mod bank {
     pub const MOCK_LEAD: &str =
         "أسئلة متلخبطة من كل المحاضرات اللي خلصت، بالوقت، ودرجتك لكل محاضرة ولكل موضوع.";
     pub const START_MOCK: &str = "ابدأ الامتحان";
-    pub const MINUTES: &str = "دقيقة";
     pub const HISTORY: &str = "امتحاناتك اللي فاتت";
     pub const MODE_TIMED: &str = "بالوقت";
     pub const MODE_MOCK: &str = "تجريبي";
@@ -210,7 +281,6 @@ pub mod bank {
     pub const LEAVE: &str = "اخرج";
     pub const LEFT_ABOUT: &str = "فاضل حوالي";
     pub const UNANSWERED: &str = "من غير إجابة";
-    pub const BOOK_PAGE: &str = "Book p.";
     pub const UPDATE: &str = "تحديث من الإرشادات الحالية";
     pub const UPDATE_NOTE: &str = "إجابة الامتحان هي إجابة الكتاب.";
     pub const RIGHT: &str = "صح";
@@ -222,7 +292,7 @@ pub mod bank {
     pub const BY_LECTURE: &str = "حسب المحاضرة";
     pub const BY_TOPIC: &str = "حسب الموضوع";
     pub const WEAK: &str = "ابدأ مراجعتك بدول";
-    pub const ALL_STRONG: &str = "مفيش موضوع تحت ٦٠٪. شغل حلو.";
+    pub const ALL_STRONG: &str = "مفيش موضوع تحت 60٪. شغل حلو.";
     pub const REVIEW: &str = "راجع الأسئلة";
     pub const SHOW_ALL: &str = "الكل";
     pub const SHOW_WRONG: &str = "الغلط";
@@ -263,24 +333,19 @@ pub mod stats {
     pub const UNTAGGED: &str = "من غير موضوع";
     pub const NOT_WRITTEN: &str = "المحاضرات اللي لسه بتتكتب هتظهر هنا أول ما تنزل.";
     pub const RETENTION_HINT: &str =
-        "«بتفتكر» = نسبة الأسئلة اللي جاوبتها صح لما رجعتلك بعد يوم أو أكتر، آخر ٣٠ يوم.";
+        "«بتفتكر» = نسبة الأسئلة اللي جاوبتها صح لما رجعتلك بعد يوم أو أكتر، آخر 30 يوم.";
 
-    pub const WEAK_TITLE: &str = "أضعف ٣ مواضيع دلوقتي";
+    pub const WEAK_TITLE: &str = "أضعف 3 مواضيع دلوقتي";
     pub const WEAK_EMPTY: &str = "لسه بدري نحكم. بعد كام مراجعة هنعرف إيه اللي محتاج شغل زيادة.";
     pub const WEAK_START: &str = "ذاكر دول";
 
-    pub const MISTAKES_TITLE: &str = "اللي غلطت فيه آخر ١٤ يوم";
+    pub const MISTAKES_TITLE: &str = "اللي غلطت فيه آخر 14 يوم";
     pub const MISTAKES_NOTE: &str = "الغلطة بتختفي من هنا لما تجاوبها صح مرتين.";
     pub const MISTAKES_EMPTY: &str = "مفيش غلطات مفتوحة. كمّل كده.";
     pub const MISTAKES_START: &str = "جلسة من الغلطات";
     pub const MISSED: &str = "غلطت";
-    pub const ONCE: &str = "مرة";
-    pub const TWICE: &str = "مرتين";
-    pub const TIMES: &str = "مرات";
-    pub const TIMES_MANY: &str = "مرة";
-    pub const LECTURE: &str = "محاضرة";
 
-    pub const SESSION_COUNT: &str = "سؤال في الجلسة";
+    pub const SESSION_COUNT: &str = "في الجلسة";
     pub const DEMO: &str = "أرقام تجريبية للعرض بس، مش مذاكرتك.";
 }
 
@@ -320,6 +385,7 @@ pub mod plan {
     pub const TODAY: &str = "النهارده";
     pub const NEW_ITEMS: &str = "جديد";
     pub const REVIEWS: &str = "مراجعة تقريبًا";
+    pub const APPROX: &str = "تقريبًا";
     pub const FROM: &str = "من";
     pub const REVISIT: &str = "لفّة تانية على";
     pub const REST_TODAY: &str = "النهارده راحة. المذاكرة الجاية:";
@@ -332,7 +398,7 @@ pub mod plan {
 
     pub const ON_TRACK: &str = "الخطة مريحة: كل المحاضرات هتخلص بدري وتلحق تلفّ عليها تاني.";
     pub const SNUG: &str = "الخطة ماشية، بس الجديد هياخد جزء من وقت اللفّة التانية.";
-    pub const TIGHT: &str = "عشان الحد اللي حاطه للمراجعات، فيه أسئلة مش هتلحق قبل آخر ١٠ أيام:";
+    pub const TIGHT: &str = "عشان الحد اللي حاطه للمراجعات، فيه أسئلة مش هتلحق قبل آخر 10 أيام:";
     pub const TIGHT_ADD: &str = "لو زوّدت أيام مذاكرة في الأسبوع هتلحق كلها. عدد الأيام:";
     pub const TIGHT_CAP: &str =
         "زيادة الأيام لوحدها مش كفاية. ممكن تعلّي حد المراجعات اليومي، أو تركّز على high-yield الأول.";
@@ -353,7 +419,7 @@ pub mod plan {
     pub const PACE_LABEL: &str = "اللي شفته لحد النهارده، والخطة لحد الامتحان";
     pub const PACE_KEY_PAST: &str = "اللي فات";
     pub const PACE_KEY_PLAN: &str = "الخطة";
-    pub const PACE_KEY_FINAL: &str = "آخر ١٠ أيام";
+    pub const PACE_KEY_FINAL: &str = "آخر 10 أيام";
     pub const PACE_DONE_ON: &str = "على الخطة دي، هتكون شفت كل الأسئلة يوم";
     pub const PACE_NOT_DONE: &str = "على الخطة دي، فيه أسئلة مش هتلحق تتشاف قبل آخر الأيام.";
     pub const ALL_DAYS: &str = "الخطة كلها لحد الامتحان";
@@ -422,14 +488,13 @@ pub mod oral {
     pub const ALL_LECTURES: &str = "كل المحاضرات الجاهزة";
     pub const SIZE: &str = "عدد الأسئلة";
     pub const THINK: &str = "وقت التفكير";
-    pub const SECONDS: &str = "ثانية";
     pub const VOICE: &str = "اقرا الأسئلة بصوت عالي";
     pub const RATE: &str = "سرعة الصوت";
     pub const RATES: [&str; 3] = ["أبطأ", "عادي", "أسرع"];
     pub const AUTO: &str = "كمّل لوحدك بعد الإجابة";
     pub const AUTO_HINT: &str =
-        "لو ما ضغطتش على تقييم في ٨ ثواني، يعدّي للسؤال اللي بعده من غير ما يسجّل حاجة.";
-    pub const AVAILABLE: &str = "سؤال ينفع يتسأل شفوي";
+        "لو ما ضغطتش على تقييم في 8 ثواني، يعدّي للسؤال اللي بعده من غير ما يسجّل حاجة.";
+    pub const AVAILABLE: &str = "ينفع يتسألوا شفوي:";
     pub const START: &str = "ابدأ";
     pub const EMPTY: &str = "لسه مفيش محاضرات جاهزة فيها أسئلة شفوي. أول ما محاضرة تخلص هتلاقيها هنا.";
     pub const NO_VOICE: &str = "مفيش صوت إنجليزي شغّال على الجهاز ده، فالأسئلة هتظهر مكتوبة بس. على أندرويد: الإعدادات ← تحويل النص إلى كلام ← نزّل صوت English.";
@@ -442,12 +507,11 @@ pub mod oral {
     pub const AGAIN_BADGE: &str = "تاني مرة";
     pub const PASS: &str = "كفاية تذكر";
     pub const OF: &str = "من";
-    pub const PAGE: &str = "صفحة";
     pub const LEFT: &str = "فاضل";
     pub const SHOW: &str = "اعرض الإجابة";
     pub const REPEAT: &str = "عيد السؤال";
     pub const AGAIN: &str = "تاني";
-    pub const AGAIN_HINT: &str = "هيرجعلك بعد ٣ أسئلة";
+    pub const AGAIN_HINT: &str = "هيرجعلك بعد 3 أسئلة";
     pub const GOOD: &str = "تمام";
     pub const GOOD_HINT: &str = "جاوبت صح";
     pub const END: &str = "إنهاء";
@@ -480,7 +544,6 @@ pub mod case {
     pub const MISSED: &str = "فاتتني";
     pub const NEXT: &str = "الخطوة اللي بعدها";
     pub const FINISH: &str = "خلّص الحالة";
-    pub const PAGE: &str = "الكتاب صفحة";
     pub const SCORE: &str = "خطوات صح";
     pub const ALL_RIGHT: &str = "كل الخطوات صح. الحالة دي هترجعلك بعد مدة أطول.";
     pub const SOME_RIGHT: &str = "حلو. بص على الخطوات اللي فاتتك، والحالة هترجعلك قريب في المراجعة.";
@@ -502,7 +565,6 @@ pub mod calc {
     pub const RESULT: &str = "النتيجة";
     pub const BREAKDOWN: &str = "التفاصيل";
     pub const SOURCE: &str = "المصدر";
-    pub const BOOK_PAGE: &str = "الكتاب صفحة";
     pub const RESET: &str = "امسح";
     pub const BACK: &str = "كل الحاسبات";
     pub const AREA_LIVER: &str = "الكبد";
@@ -579,7 +641,7 @@ pub mod verify {
     pub const SAVED_EDITED: &str = "✎ اتسجّل تعديلك، وهتذاكره بكلامك من هنا ورايح.";
     pub const SAVED_WRONG: &str = "✗ اتشال من المراجعة لحد ما يتصلّح.";
     pub const WRONG_NOTE: &str = "إيه الغلط؟ (اختياري)";
-    pub const WRONG_PLACEHOLDER: &str = "مثلاً: الكتاب صفحة ١٤ بيقول ٧–٩ نقط";
+    pub const WRONG_PLACEHOLDER: &str = "مثلاً: الكتاب صفحة 14 بيقول 7–9 نقط";
     pub const WRONG_CONFIRM: &str = "شيله من المراجعة";
     pub const EDITOR_HINT: &str = "عدّل اللي محتاج يتعدّل بس. الكتاب هو المرجع.";
     pub const EDIT_NOTE: &str = "ملاحظة للي هيصلّح المحتوى (اختياري)";
@@ -731,8 +793,7 @@ pub mod settings {
 
     pub const VERSION: &str = "النسخة";
     pub const CONTENT: &str = "المحتوى";
-    pub const LECTURES_WRITTEN: &str = "محاضرة مكتوبة من";
-    pub const ITEMS: &str = "سؤال وكارت";
+    pub const LECTURES_WRITTEN: &str = "المحاضرات المكتوبة:";
     pub const SOURCE: &str = "المصدر";
     pub const BOOK: &str =
         "Internal Medicine Postgraduate Lectures, Alexandria Faculty of Medicine (2025), part 1";
@@ -863,7 +924,10 @@ pub mod remind {
         match due {
             Some(0) | None => "وقت جلسة قصيرة. كارت واحد أحسن من مفيش.".into(),
             Some(1) => "عندك مراجعة واحدة النهارده. دقيقة وتخلص.".into(),
-            Some(n) => format!("عندك {n} مراجعة النهارده. يلا نبدأ بجلسة قصيرة."),
+            Some(n) => format!(
+                "عندك {} النهارده. يلا نبدأ بجلسة قصيرة.",
+                super::count::count(n, &super::count::REVIEW)
+            ),
         }
     }
 }
@@ -886,7 +950,6 @@ pub mod onboard {
     pub const PICK_A_DAY: &str = "اختار يوم واحد على الأقل.";
     pub const MINUTES_TITLE: &str = "قد إيه في اليوم؟";
     pub const MINUTES_BODY: &str = "طول الجلسة العادي. تقدر تغيّره قبل أي جلسة.";
-    pub const MIN: &str = "دقيقة";
     pub const STUDIED_TITLE: &str = "ذاكرت أنهي محاضرات قبل كده؟";
     pub const STUDIED_BODY: &str = "علّم اللي قريته قبل كده. لو مفيش، كمّل عادي.";
     pub const ALL: &str = "كلهم";
@@ -905,20 +968,43 @@ pub mod onboard {
 }
 
 pub mod recap {
-    pub const TODAY_1: &str = "النهارده جاوبت";
-    pub const TODAY_ANSWERS: &str = "سؤال";
-    pub const AND: &str = "واتعلمت";
-    pub const TODAY_NEW: &str = "حاجة جديدة";
-    pub const DONE_REST: &str = "مراجعة النهارده خلصت، استريح. بكرة عندك";
-    pub const REVIEWS: &str = "مراجعة.";
-    pub const LEFT_1: &str = "فاضل";
-    pub const LEFT_2: &str = "مراجعة لو عندك وقت، ولو لأ بكرة موجودة.";
-    pub const WEEK_TITLE: &str = "آخر ٧ أيام";
-    pub const WEEK_LEARNED_1: &str = "اتعلمت";
-    pub const WEEK_LEARNED_2: &str = "حاجة جديدة في";
-    pub const WEEK_DAYS: &str = "أيام.";
+    use super::count::{DAY, NEW_THING, QUESTION, REVIEW, count};
+
+    pub const DONE_REST: &str = "مراجعة النهارده خلصت، استريح.";
+    pub const WEEK_TITLE: &str = "آخر 7 أيام";
     pub const WEEK_RETENTION: &str = "بتفتكر صح:";
     pub const WEEK_WEAK: &str = "يستاهلوا رجوع:";
-    pub const WEEK_EXAM_1: &str = "فاضل على الامتحان";
-    pub const WEEK_EXAM_2: &str = "يوم.";
+
+    /// "النهارده جاوبت 12 سؤال".
+    pub fn answered(n: usize) -> String {
+        format!("النهارده جاوبت {}", count(n, &QUESTION))
+    }
+
+    /// "واتعلمت حاجتين جداد".
+    pub fn learned(n: u32) -> String {
+        format!("واتعلمت {}", count(n, &NEW_THING))
+    }
+
+    pub fn done_rest(tomorrow: u32) -> String {
+        match tomorrow {
+            0 => DONE_REST.to_string(),
+            n => format!("{DONE_REST} بكرة عندك {}.", count(n, &REVIEW)),
+        }
+    }
+
+    pub fn left(n: usize) -> String {
+        format!("فاضل {} لو عندك وقت، ولو لأ بكرة موجودة.", count(n, &REVIEW))
+    }
+
+    /// "اتعلمت 10 حاجات جديدة في 3 أيام."
+    pub fn week_learned(learned: u32, days: usize) -> String {
+        format!("اتعلمت {} في {}.", count(learned, &NEW_THING), count(days, &DAY))
+    }
+
+    pub fn exam_in(days: i32) -> String {
+        match days {
+            ..=0 => "الامتحان النهارده. بالتوفيق.".to_string(),
+            n => format!("فاضل على الامتحان {}.", count(n, &DAY)),
+        }
+    }
 }

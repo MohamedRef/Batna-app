@@ -177,12 +177,7 @@ pub fn topic_title(lecture: &str, topic: &str) -> String {
 }
 
 pub fn lecture_title(lecture: &str) -> String {
-    Library::get().lectures.get(lecture).map_or_else(|| lecture.to_string(), |l| l.title.clone())
-}
-
-/// `hb.L09` → `9`.
-pub fn lecture_number(lecture: &str) -> &str {
-    lecture.rsplit('.').next().unwrap_or(lecture).trim_start_matches('L').trim_start_matches('0')
+    Library::get().title(lecture).to_string()
 }
 
 /// Every finished paper on any device, oldest first.
@@ -368,8 +363,6 @@ mod tests {
         assert_eq!(date(1_793_059_200_000), "2026-10-27");
         assert_eq!(minutes(48 * 60_000), 48);
         assert_eq!(minutes(1), 1);
-        assert_eq!(lecture_number("hb.L09"), "9");
-        assert_eq!(lecture_number("hb.L20"), "20");
     }
 
     fn outcome(at_ms: i64, right: u32) -> Outcome {

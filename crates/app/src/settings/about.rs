@@ -3,6 +3,7 @@
 use dioxus::prelude::*;
 
 use crate::content::Library;
+use crate::i18n::count::{ITEM, count};
 use crate::i18n::{app, settings as tx};
 
 #[component]
@@ -20,7 +21,7 @@ pub fn AboutSection() -> Element {
         }
         section { class: "card",
             h2 { {tx::CONTENT} }
-            p { "{written} {tx::LECTURES_WRITTEN} {total} · {items} {tx::ITEMS}" }
+            p { "{tx::LECTURES_WRITTEN} {written}/{total} · " {count(items, &ITEM)} }
             p { class: "muted small", {tx::SOURCE} ": " bdi { {tx::BOOK} } }
         }
     }

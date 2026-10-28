@@ -7,6 +7,7 @@ use dioxus::prelude::*;
 use super::question::QuestionView;
 use super::{PHASE, Phase, choose, finish, go, leave, minutes, now_ms, toggle_flag};
 use crate::i18n::bank as tx;
+use crate::i18n::count::{MINUTE, count};
 
 #[component]
 pub fn Player() -> Element {
@@ -32,7 +33,7 @@ pub fn Player() -> Element {
                 div { class: "run-head",
                     span { class: "run-count", "{tx::QUESTION} " bdi { "{at + 1}" } " {tx::OF} " bdi { "{n}" } }
                     if timed {
-                        span { class: "muted small", "{tx::LEFT_ABOUT} " bdi { "{left}" } " {tx::MINUTES}" }
+                        span { class: "muted small", "{tx::LEFT_ABOUT} " {count(left, &MINUTE)} }
                     } else {
                         span { class: "muted small", "{tx::RIGHT} " bdi { "{right}/{answered}" } }
                     }

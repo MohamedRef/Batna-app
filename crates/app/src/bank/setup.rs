@@ -7,11 +7,13 @@ use batna_core::exam::{self, Filter, MOCK_SIZE, Mode, Only};
 use dioxus::prelude::*;
 
 use super::{
-    HISTORY, PAUSED, date, lecture_number, lecture_title, minutes, now_ms, resume, start, study_lectures,
-    submit_paused, topic_title,
+    HISTORY, PAUSED, date, lecture_title, minutes, now_ms, resume, start, study_lectures, submit_paused,
+    topic_title,
 };
 use crate::content::Library;
+use crate::content::lecture_code;
 use crate::i18n::bank as tx;
+use crate::i18n::count::{MINUTE, QUESTION, count as counted};
 
 /// The filters stay put between papers.
 static FILTER: GlobalSignal<Filter> = Signal::global(Filter::default);
@@ -118,7 +120,7 @@ pub fn Setup() -> Element {
                                     f.topics.retain(|(l, _)| keep.is_empty() || keep.contains(l));
                                 }
                             },
-                            bdi { "L{lecture_number(&id)} · {lecture_title(&id)}" }
+                            bdi { "{lecture_code(&id)} · {lecture_title(&id)}" }
                             span { class: "count", bdi { "{n}" } }
                         }
                     }
@@ -144,7 +146,7 @@ pub fn Setup() -> Element {
                                 }
                             },
                             if topic_prefix {
-                                bdi { "L{lecture_number(&lecture)} · {topic_title(&lecture, &topic)}" }
+                                bdi { "{lecture_code(&lecture)} · {topic_title(&lecture, &topic)}" }
                             } else {
                                 bdi { {topic_title(&lecture, &topic)} }
                             }
@@ -193,14 +195,14 @@ pub fn Setup() -> Element {
             if available == 0 {
                 p { class: "note", {tx::NONE_MATCH} }
             } else {
-                p { class: "muted small", bdi { "{available}" } " {tx::AVAILABLE}" }
+                p { class: "muted small", "{tx::AVAILABLE} " {counted(available, &QUESTION)} }
                 div { class: "start-row",
                     button { class: "button primary start", onclick: move |_| start_tutor(Mode::Tutor),
                         span { {tx::START_TUTOR} " · " bdi { "{shown}" } }
                         span { class: "hint", {tx::TUTOR_HINT} }
                     }
                     button { class: "button start", onclick: move |_| start_with(Mode::Timed),
-                        span { {tx::START_TIMED} " · " bdi { "{minutes(exam::time_limit_ms(shown))}" } " {tx::MINUTES}" }
+                        span { {tx::START_TIMED} " · " {counted(minutes(exam::time_limit_ms(shown)), &MINUTE)} }
                         span { class: "hint", {tx::TIMED_HINT} }
                     }
                 }
@@ -218,8 +220,8 @@ pub fn Setup() -> Element {
             }
             div { class: "start-row",
                 button { class: "button primary start", onclick: start_mock,
-                    span { {tx::START_MOCK} " · " bdi { "{mock_shown}" } " {tx::QUESTION}" }
-                    span { class: "hint", bdi { "{minutes(exam::time_limit_ms(mock_shown))}" } " {tx::MINUTES}" }
+                    span { {tx::START_MOCK} " · " {counted(mock_shown, &QUESTION)} }
+                    span { class: "hint", {counted(minutes(exam::time_limit_ms(mock_shown)), &MINUTE)} }
                 }
             }
         }
@@ -279,7 +281,7 @@ fn Paused() -> Element {
             p { class: "muted small",
                 "{tx::PAUSED_BODY} " bdi { "{answered}/{n}" }
                 if left > 0 {
-                    " {tx::PAUSED_LEFT} " bdi { "{minutes(left)}" } " {tx::MINUTES}"
+                    " {tx::PAUSED_LEFT} " {counted(minutes(left), &MINUTE)}
                 } else {
                     " · {tx::PAUSED_OVER}"
                 }

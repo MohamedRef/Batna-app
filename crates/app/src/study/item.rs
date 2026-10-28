@@ -59,7 +59,6 @@ pub fn ItemView(
             }
             footer { class: "st-item-foot",
                 crate::hover::BookPage {
-                    label: tx::BOOK_PAGE,
                     page: item.src.page,
                     quote: if revealed() { item.src.quote.clone() } else { None },
                 }

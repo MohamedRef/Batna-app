@@ -104,7 +104,7 @@ pub fn CalcItem(item_id: String, on_back: EventHandler) -> Element {
                         button { class: "btn-primary", onclick: move |_| meaning_open.set(true), {tx::SHOW_MEANING} }
                     } else {
                         bdi { class: "case-why", "{interpret}" }
-                        p { class: "small muted", "{cx::PAGE} " bdi { "{item.src.page}" } }
+                        p { class: "small muted", {crate::i18n::cite::page(item.src.page)} }
                         if let Some(u) = &item.update {
                             p { class: "small update", "{cx::UPDATE}: " bdi { "{u.text} ({u.reference})" } }
                         }

@@ -237,7 +237,7 @@ pub fn OutcomeCard(id: &'static str, outcome: Outcome) -> Element {
             }
             p { class: "small muted",
                 {tx::SOURCE} ": " bdi { "{source}" }
-                if let Some(page) = outcome.page { " · {tx::BOOK_PAGE} " bdi { "{page}" } }
+                if let Some(page) = outcome.page { " · " {crate::i18n::cite::page(page)} }
             }
         }
     }

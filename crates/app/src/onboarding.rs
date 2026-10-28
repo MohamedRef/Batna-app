@@ -218,7 +218,7 @@ fn Questions() -> Element {
                         role: "radio",
                         "aria-checked": minutes() == m,
                         onclick: move |_| minutes.set(m),
-                        "{m} {tx::MIN}"
+                        {crate::i18n::count::count(m, &crate::i18n::count::MINUTE)}
                     }
                 }
             }
@@ -252,7 +252,7 @@ fn Questions() -> Element {
                                     }
                                 },
                                 span { class: "onboard-check", aria_hidden: "true" }
-                                bdi { class: "onboard-num", "L{crate::stats::lecture_number(&l.id):0>2}" }
+                                bdi { class: "onboard-num", "{crate::content::lecture_code(&l.id)}" }
                                 bdi { {l.title.clone()} }
                             }
                             button {

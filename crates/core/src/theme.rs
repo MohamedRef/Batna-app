@@ -26,6 +26,9 @@ pub struct Palette {
     pub scheme: Scheme,
     pub bg: &'static str,
     pub surface: &'static str,
+    /// A raised container one step off `surface`: grouped rows, chips, the
+    /// floating bar. On True black it is the only lit background.
+    pub surface_2: &'static str,
     pub text: &'static str,
     pub muted: &'static str,
     pub line: &'static str,
@@ -41,10 +44,11 @@ pub struct Palette {
 
 impl Palette {
     /// `(css variable, value)` for every token.
-    pub fn tokens(&self) -> [(&'static str, &'static str); 11] {
+    pub fn tokens(&self) -> [(&'static str, &'static str); 12] {
         [
             ("--bg", self.bg),
             ("--surface", self.surface),
+            ("--surface-2", self.surface_2),
             ("--text", self.text),
             ("--muted", self.muted),
             ("--line", self.line),
@@ -78,6 +82,7 @@ pub const PAPER: Palette = Palette {
     scheme: Scheme::Light,
     bg: "#f6f7f4",
     surface: "#ffffff",
+    surface_2: "#eef0ec",
     text: "#1d2420",
     muted: "#5b665f",
     line: "#d9ded8",
@@ -94,6 +99,7 @@ pub const NIGHT: Palette = Palette {
     scheme: Scheme::Dark,
     bg: "#141917",
     surface: "#1b211e",
+    surface_2: "#232a26",
     text: "#e6ebe7",
     muted: "#9aa69f",
     line: "#2f3833",
@@ -105,12 +111,33 @@ pub const NIGHT: Palette = Palette {
     bad_soft: "#3d2320",
 };
 
+/// True black, for OLED screens: the page and cards are `#000000`, so those
+/// pixels switch off. Cards are told apart by their `line` outline instead of
+/// a grey surface. Text is a soft off-white, which smears less than pure
+/// white when an OLED screen scrolls.
+pub const BLACK: Palette = Palette {
+    scheme: Scheme::Dark,
+    bg: "#000000",
+    surface: "#000000",
+    surface_2: "#141414",
+    text: "#e6ebe7",
+    muted: "#9fa9a3",
+    line: "#353c38",
+    accent: "#e0b25a",
+    accent_soft: "#2e2410",
+    good: "#7cc7a0",
+    good_soft: "#10251b",
+    bad: "#ee8f80",
+    bad_soft: "#331a17",
+};
+
 /// Night shift: for studying late. Very dark and warm, with no colour where
 /// blue outweighs red, so the screen stays easy on the eyes before sleep.
 pub const NIGHT_SHIFT: Palette = Palette {
     scheme: Scheme::Dark,
     bg: "#110d0a",
     surface: "#1a1511",
+    surface_2: "#231c16",
     text: "#e8dccb",
     muted: "#a8998a",
     line: "#3a3029",
@@ -128,20 +155,27 @@ pub enum Theme {
     /// Paper by day, Night when the device is dark.
     #[default]
     System,
+    /// Paper by day, True black when the device is dark.
+    SystemBlack,
     Paper,
     Night,
+    /// True black (AMOLED).
+    Black,
     NightShift,
 }
 
 impl Theme {
-    pub const ALL: [Self; 4] = [Self::System, Self::Paper, Self::Night, Self::NightShift];
+    pub const ALL: [Self; 6] =
+        [Self::System, Self::SystemBlack, Self::Paper, Self::Night, Self::Black, Self::NightShift];
 
     /// Stored value.
     pub fn as_str(self) -> &'static str {
         match self {
             Self::System => "system",
+            Self::SystemBlack => "system-black",
             Self::Paper => "paper",
             Self::Night => "night",
+            Self::Black => "black",
             Self::NightShift => "night-shift",
         }
     }
@@ -150,13 +184,28 @@ impl Theme {
         Self::ALL.into_iter().find(|t| t.as_str() == s).unwrap_or_default()
     }
 
-    /// The fixed palette, or `None` for System (it follows the device).
+    /// The fixed palette, or `None` for the System themes (they follow the
+    /// device; see [`Theme::day_and_night`]).
     pub fn palette(self) -> Option<&'static Palette> {
         match self {
-            Self::System => None,
+            Self::System | Self::SystemBlack => None,
             Self::Paper => Some(&PAPER),
             Self::Night => Some(&NIGHT),
+            Self::Black => Some(&BLACK),
             Self::NightShift => Some(&NIGHT_SHIFT),
+        }
+    }
+
+    /// The palettes shown by day and when the device is dark: the same one
+    /// for a fixed theme.
+    pub fn day_and_night(self) -> (&'static Palette, &'static Palette) {
+        match self {
+            Self::System => (&PAPER, &NIGHT),
+            Self::SystemBlack => (&PAPER, &BLACK),
+            fixed => {
+                let p = fixed.palette().unwrap_or(&PAPER);
+                (p, p)
+            }
         }
     }
 
@@ -164,11 +213,14 @@ impl Theme {
     pub fn css(self) -> String {
         match self.palette() {
             Some(p) => format!(":root{{{}}}", p.css()),
-            None => format!(
-                ":root{{{}}}@media (prefers-color-scheme: dark){{:root{{{}}}}}",
-                PAPER.css(),
-                NIGHT.css()
-            ),
+            None => {
+                let (day, night) = self.day_and_night();
+                format!(
+                    ":root{{{}}}@media (prefers-color-scheme: dark){{:root{{{}}}}}",
+                    day.css(),
+                    night.css()
+                )
+            }
         }
     }
 }
@@ -200,7 +252,8 @@ fn rgb(hex: &str) -> (u8, u8, u8) {
 mod tests {
     use super::*;
 
-    const ALL: [(&str, &Palette); 3] = [("paper", &PAPER), ("night", &NIGHT), ("night-shift", &NIGHT_SHIFT)];
+    const ALL: [(&str, &Palette); 4] =
+        [("paper", &PAPER), ("night", &NIGHT), ("black", &BLACK), ("night-shift", &NIGHT_SHIFT)];
 
     #[test]
     fn every_theme_meets_wcag_aa_for_text() {
@@ -215,6 +268,8 @@ mod tests {
                 ("good on good-soft", p.good, p.good_soft),
                 ("bad on bad-soft", p.bad, p.bad_soft),
                 ("text on accent-soft", p.text, p.accent_soft),
+                ("text on surface-2", p.text, p.surface_2),
+                ("muted on surface-2", p.muted, p.surface_2),
             ];
             for (what, fg, bg) in pairs {
                 let c = contrast(fg, bg);
@@ -239,6 +294,18 @@ mod tests {
         assert_eq!(Theme::parse("neon"), Theme::System);
         assert!(Theme::System.css().contains("prefers-color-scheme"));
         assert!(Theme::NightShift.css().starts_with(":root{--bg:#110d0a;"));
+    }
+
+    #[test]
+    fn black_switches_oled_pixels_off() {
+        assert_eq!(BLACK.bg, "#000000");
+        assert_eq!(BLACK.surface, "#000000");
+        // With surface == bg, cards are drawn by their outline alone.
+        assert!(contrast(BLACK.line, BLACK.bg) >= 1.5, "card outlines must show on black");
+        assert_eq!(Theme::Black.css(), format!(":root{{{}}}", BLACK.css()));
+        let auto = Theme::SystemBlack.css();
+        assert!(auto.contains("prefers-color-scheme: dark){:root{--bg:#000000;"), "{auto}");
+        assert!(auto.starts_with(":root{--bg:#f6f7f4;"));
     }
 
     #[test]

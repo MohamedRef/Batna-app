@@ -21,11 +21,12 @@ use std::sync::{Mutex, OnceLock};
 use batna_core::review::verify::Judgement;
 use batna_core::review::{Grade, Hlc, HlcClock, LoggedReview, Origin, ReviewEvent};
 use batna_core::srs::ReviewSettings;
+use batna_core::zone::Zone;
 use rusqlite::{Connection, OptionalExtension, params};
 use serde::Serialize;
 use serde::de::DeserializeOwned;
 
-pub use backend::{LectureProgress, Review, use_provide_review, use_review};
+pub use backend::{LectureProgress, Overview, Review, use_provide_review, use_review};
 
 #[derive(Debug)]
 pub enum StoreError {
@@ -203,31 +204,13 @@ impl Store {
         let hlc = self.tick(now_ms().max(event.at_ms));
         let logged =
             LoggedReview { id: format!("{}-{}-{}", hlc.device, hlc.wall_ms, hlc.counter), hlc, event };
-        self.insert_review(&logged)?;
-        sync::enqueue(&self.conn.lock().unwrap(), "review_events", "id", &logged.id)?;
+        // The answer and its outbox entry land together or not at all.
+        let mut conn = self.conn.lock().unwrap();
+        let tx = conn.transaction()?;
+        insert_review(&tx, &logged)?;
+        sync::enqueue(&tx, "review_events", "id", &logged.id, &logged.hlc.device)?;
+        tx.commit()?;
         Ok(logged)
-    }
-
-    /// Inserts a logged event (local or, later, from sync). Duplicates are ignored.
-    pub fn insert_review(&self, l: &LoggedReview) -> Result<()> {
-        let e = &l.event;
-        self.conn.lock().unwrap().execute(
-            "INSERT OR IGNORE INTO review_events
-             (id, item_id, grade, origin, at_ms, took_ms, device_id, hlc_wall, hlc_counter)
-             VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9)",
-            params![
-                l.id,
-                e.item_id,
-                e.grade.as_str(),
-                e.origin.as_str(),
-                e.at_ms,
-                e.took_ms,
-                l.hlc.device,
-                l.hlc.wall_ms,
-                l.hlc.counter
-            ],
-        )?;
-        Ok(())
     }
 
     /// The whole review log, in HLC order. Rows this build can't read are skipped.
@@ -381,22 +364,48 @@ impl Store {
              WHERE (excluded.hlc_wall, excluded.hlc_counter, excluded.device_id)
                  > ({table}.hlc_wall, {table}.hlc_counter, {table}.device_id)"
         );
-        let conn = self.conn.lock().unwrap();
+        let mine = hlc.device == self.clock.lock().unwrap().device();
+        let mut conn = self.conn.lock().unwrap();
+        // The row and its outbox entry land together or not at all.
+        let tx = conn.transaction()?;
         let base = params![key, value, hlc.device, hlc.wall_ms, hlc.counter, deleted];
         let changed = match status {
             Some(s) => {
                 let mut all: Vec<&dyn rusqlite::ToSql> = base.to_vec();
                 all.push(&s);
-                conn.execute(&sql, all.as_slice())?
+                tx.execute(&sql, all.as_slice())?
             }
-            None => conn.execute(&sql, base)?,
+            None => tx.execute(&sql, base)?,
         };
         // This device's writes go to Batna Cloud too.
-        if changed > 0 && hlc.device == self.clock.lock().unwrap().device() {
-            sync::enqueue(&conn, table, key_col, key)?;
+        if changed > 0 && mine {
+            sync::enqueue(&tx, table, key_col, key, &hlc.device)?;
         }
+        tx.commit()?;
         Ok(())
     }
+}
+
+/// Inserts a logged event. Duplicates are ignored.
+fn insert_review(conn: &rusqlite::Connection, l: &LoggedReview) -> Result<()> {
+    let e = &l.event;
+    conn.execute(
+        "INSERT OR IGNORE INTO review_events
+         (id, item_id, grade, origin, at_ms, took_ms, device_id, hlc_wall, hlc_counter)
+         VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9)",
+        params![
+            l.id,
+            e.item_id,
+            e.grade.as_str(),
+            e.origin.as_str(),
+            e.at_ms,
+            e.took_ms,
+            l.hlc.device,
+            l.hlc.wall_ms,
+            l.hlc.counter
+        ],
+    )?;
+    Ok(())
 }
 
 /// The newest HLC in any synced table.
@@ -448,6 +457,31 @@ pub fn open_error() -> Option<&'static str> {
     OPEN_ERROR.get().map(String::as_str)
 }
 
+static WRITE_ERROR: Mutex<Option<String>> = Mutex::new(None);
+
+/// Saves a synced setting in the app's store. A failure is reported to the
+/// log and shown on Today, so a choice never vanishes silently.
+pub fn save_setting<T: Serialize>(key: &str, value: &T) -> bool {
+    match shared().put_setting(key, value) {
+        Ok(()) => true,
+        Err(e) => {
+            write_failed(&format!("setting {key}"), &e);
+            false
+        }
+    }
+}
+
+/// Reports a write that didn't land, to the log and on Today.
+pub fn write_failed(what: &str, e: &dyn std::fmt::Display) {
+    crate::diag::report!("saving {what}: {e}");
+    *WRITE_ERROR.lock().unwrap() = Some(format!("{what}: {e}"));
+}
+
+/// The last setting that couldn't be saved, if any.
+pub fn write_error() -> Option<String> {
+    WRITE_ERROR.lock().unwrap().clone()
+}
+
 pub use paths::export_dir;
 
 pub fn now_ms() -> i64 {
@@ -461,6 +495,44 @@ pub fn now_ms() -> i64 {
 pub fn utc_offset_minutes() -> i32 {
     use chrono::Offset;
     chrono::Local::now().offset().fix().local_minus_utc() / 60
+}
+
+/// This device's time zone as a table of UTC offsets, 2020–2040, so every
+/// moment uses the offset in force then (a change to or from summer time
+/// never moves past answers to another day, #40). Built once: an hourly scan
+/// of the system time zone, a few milliseconds.
+pub fn zone() -> Zone {
+    static ZONE: std::sync::OnceLock<Zone> = std::sync::OnceLock::new();
+    *ZONE.get_or_init(|| {
+        let offset = |ms: i64| {
+            use chrono::{Offset, TimeZone};
+            chrono::Local
+                .timestamp_millis_opt(ms)
+                .single()
+                .map_or(0, |t| t.offset().fix().local_minus_utc() / 60)
+        };
+        const HOUR: i64 = 3_600_000;
+        let (from, to) = (1_577_836_800_000_i64, 2_208_988_800_000_i64); // 2020-01-01 .. 2040-01-01 UTC
+        let base = offset(from);
+        let mut changes = Vec::new();
+        let mut last = base;
+        let mut t = from;
+        while t < to {
+            let o = offset(t + HOUR);
+            if o != last {
+                // Narrow the change to the minute.
+                let (mut lo, mut hi) = (t, t + HOUR);
+                while hi - lo > 60_000 {
+                    let mid = lo + (hi - lo) / 2;
+                    if offset(mid) == last { lo = mid } else { hi = mid }
+                }
+                changes.push((hi, o));
+                last = o;
+            }
+            t += HOUR;
+        }
+        Zone { base, changes: Box::leak(changes.into_boxed_slice()) }
+    })
 }
 
 /// A random-enough id for this installation, without a crypto dependency:
@@ -500,6 +572,22 @@ mod tests {
     }
 
     #[test]
+    fn a_write_and_its_outbox_entry_land_together() {
+        let s = Store::open_in_memory().unwrap();
+        s.conn.lock().unwrap().execute("DROP TABLE sync_outbox", []).unwrap();
+        assert!(s.append_review(ev("hb.L01.001", Grade::Good, 10)).is_err());
+        assert!(s.reviews().unwrap().is_empty(), "the answer rolls back with its outbox entry");
+        assert!(s.set_judgement("hb.L01.001", Some(&judgement(Verdict::Approved))).is_err());
+        assert!(s.judgements().unwrap().is_empty());
+    }
+
+    #[test]
+    fn zone_matches_the_system_offset_now() {
+        assert_eq!(zone().offset_at(now_ms()), utc_offset_minutes());
+        assert!(zone().changes.windows(2).all(|w| w[0].0 < w[1].0));
+    }
+
+    #[test]
     fn reviews_are_appended_in_order_and_survive_reopening() {
         let dir = std::env::temp_dir().join(format!("batna-store-{}", new_device_id()));
         let path = dir.join("batna.db");
@@ -517,7 +605,7 @@ mod tests {
         assert!(log[0].hlc < log[1].hlc);
         assert_eq!(log[1].event.grade, Grade::Again);
         // A re-inserted event (sync echo) is not duplicated.
-        s.insert_review(&log[0]).unwrap();
+        insert_review(&s.conn.lock().unwrap(), &log[0]).unwrap();
         assert_eq!(s.reviews().unwrap().len(), 2);
         // New stamps sort after the stored ones.
         let next = s.append_review(ev("hb.L01.003", Grade::Good, 0)).unwrap();

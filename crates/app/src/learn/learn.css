@@ -34,7 +34,7 @@
   75% { transform: translateX(4px); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .ls-pop, .ls-stage, [data-state="wrong"] { animation: none !important; }
+  .ls-pop, .ls-stage, [data-state="wrong"], .ls-nav * { animation: none !important; }
 }
 
 /* ---------- text ---------- */
@@ -178,13 +178,100 @@
 .ls-stage {
   gap: var(--sp-3);
   min-block-size: 14rem;
-  animation: ls-in 220ms var(--ease);
+  animation: ls-in 240ms var(--ease);
+  /* Sideways drags turn the page (swipe.js); up and down still scroll. */
+  touch-action: pan-y pinch-zoom;
 }
 .ls-stage[hidden] { display: none; }
 /* The next step enters from the left: in a right-to-left app, forward
    moves leftward, so new content arrives from the left (the mirror of an
-   English carousel, where the next slide comes from the right). */
-@keyframes ls-in { from { opacity: 0; transform: translateX(-14px); } to { opacity: 1; transform: none; } }
+   English carousel, where the next slide comes from the right). Back
+   brings the earlier step in from the right. */
+@keyframes ls-in { from { opacity: 0; transform: translateX(-28px); } to { opacity: 1; transform: none; } }
+@keyframes ls-in-back { from { opacity: 0; transform: translateX(28px); } to { opacity: 1; transform: none; } }
+.ls-player[data-dir="back"] .ls-stage { animation-name: ls-in-back; }
+
+/* Focus: a lesson takes the whole phone screen. The app bar and the tab
+   bar step aside (× closes the lesson); wider windows keep their rail. */
+.app:has(.ls-player) > .topbar { display: none; }
+.app:has(.ls-player) > .content { padding-block-start: env(safe-area-inset-top, 0px); }
+@media (max-width: 599px) {
+  .app:has(.ls-player) > .nav { display: none; }
+  .app:has(.ls-player) > .content { padding-block-end: 0; }
+}
+.ls-view {
+  flex: none;
+  inline-size: 40px;
+  block-size: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--muted);
+  cursor: pointer;
+}
+.ls-view:hover { color: var(--accent); border-color: var(--accent); }
+.ls-view .icon { inline-size: 20px; block-size: 20px; }
+
+/* A swipe that can't turn the page yet points at Skip or Check. */
+.ls-nav.ls-nudge .ls-skip, .ls-nav.ls-nudge [data-nav="check"] { animation: ls-shake 360ms var(--ease) 2; }
+
+/* ---------- Pages: the lesson as a book ---------- */
+.ls-player[data-view="pages"] .ls-stage {
+  /* One page fills the screen between the bar and the arrows. */
+  min-block-size: calc(100dvh - 10.5rem);
+  padding: var(--sp-6) var(--sp-4) var(--sp-4);
+  border-radius: 6px 16px 16px 6px;
+  /* The spine is on the right in a right-to-left book. */
+  box-shadow:
+    inset -14px 0 18px -16px rgb(0 0 0 / 0.35),
+    0 1px 0 var(--line),
+    0 3px 0 -1px var(--surface),
+    0 4px 0 -1px var(--line),
+    0 6px 0 -2px var(--surface),
+    0 7px 0 -2px var(--line);
+  transform-origin: 100% 50%;
+  animation: ls-turn 380ms cubic-bezier(.2, .7, .2, 1);
+}
+.ls-player[data-view="pages"][data-dir="back"] .ls-stage { animation-name: ls-turn-back; transform-origin: 0% 50%; }
+@keyframes ls-turn {
+  from { opacity: 0.2; transform: perspective(1400px) rotateY(-75deg); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes ls-turn-back {
+  from { opacity: 0.2; transform: perspective(1400px) rotateY(75deg); }
+  to { opacity: 1; transform: none; }
+}
+/* The page number at the foot of the page, like the book's. */
+.ls-player[data-view="pages"] .ls-stage::after {
+  content: "— " attr(data-n) " —";
+  margin-block-start: auto;
+  align-self: center;
+  color: var(--muted);
+  font-size: var(--fs-sm);
+  font-variant-numeric: tabular-nums;
+}
+.ls-player[data-view="pages"] .ls-nav { justify-content: space-between; }
+.ls-player[data-view="pages"] .ls-nav .ls-next { flex: 0 1 auto; margin-inline-start: 0; }
+.ls-page-of { font-variant-numeric: tabular-nums; }
+.ls-arrow {
+  flex: none;
+  inline-size: 52px;
+  block-size: 52px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  transition: transform var(--dur) var(--ease), background var(--dur) var(--ease);
+}
+.ls-arrow .icon { inline-size: 24px; block-size: 24px; }
+.ls-arrow:active:not(:disabled) { transform: scale(0.94); }
+.ls-arrow:disabled { opacity: 0.35; cursor: default; }
+.ls-arrow-next { background: var(--accent); border-color: var(--accent); color: var(--surface); }
 .ls-src { display: flex; justify-content: flex-end; border-block-start: 1px dashed var(--line); padding-block-start: var(--sp-2); }
 .ls-nav {
   position: sticky;

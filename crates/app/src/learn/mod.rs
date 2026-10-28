@@ -139,9 +139,12 @@ fn LessonList() -> Element {
                         button {
                             class: "btn btn-primary",
                             onclick: move |_| open(ui, &l.id),
-                            {if done == 0 { tx::START_FIRST } else { tx::CONTINUE }}
-                            " · "
-                            text::Line { text: l.title.clone() }
+                            // One inline label: flex would split each run into a column.
+                            span { class: "ls-btn-label",
+                                {if done == 0 { tx::START_FIRST } else { tx::CONTINUE }}
+                                " · "
+                                text::Line { text: l.title.clone() }
+                            }
                         }
                     } else {
                         span { class: "ls-verdict good", {tx::ALL_LESSONS_DONE} }

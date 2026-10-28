@@ -42,6 +42,9 @@ pub fn Player() -> Element {
     rsx! {
         div { class: "bank-run", "data-mode": if timed { "timed" } else { "tutor" },
             div { class: "run-main",
+                // The count, time left and clock stay in view while he
+                // scrolls a long question (#234).
+                div { class: "run-sticky",
                 div { class: "run-head",
                     span { class: "run-count", "{tx::QUESTION} " bdi { "{at + 1}" } " {tx::OF} " bdi { "{n}" } }
                     if timed {
@@ -58,6 +61,7 @@ pub fn Player() -> Element {
                 }
                 if timed {
                     Timer { key: "{p.started_ms}", n, started_ms: p.started_ms }
+                }
                 }
                 QuestionView {
                     key: "{q.id}-{at}",

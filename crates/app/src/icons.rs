@@ -60,6 +60,21 @@ fn stroke(d: &'static str) -> Element {
     }
 }
 
+/// Lesson view toggle: an open book (pages).
+pub fn book() -> Element {
+    stroke(nav_path(Screen::Study))
+}
+
+/// Lesson view toggle: stacked cards (steps).
+pub fn steps() -> Element {
+    stroke("M5 8h14v11H5zM7 5h10M9 2.5h6")
+}
+
+/// A page-turn arrow. The app is right to left, so "next" points left.
+pub fn chevron(next: bool) -> Element {
+    stroke(if next { "M15 5l-7 7 7 7" } else { "M9 5l7 7-7 7" })
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

@@ -668,3 +668,22 @@ pub mod onboard {
     pub const REOPEN_BODY: &str = "يوم الامتحان، أيام المذاكرة، طول الجلسة، التذكير والألوان، في مكان واحد.";
     pub const REOPEN: &str = "افتحها تاني";
 }
+
+pub mod recap {
+    pub const TODAY_1: &str = "النهارده جاوبت";
+    pub const TODAY_ANSWERS: &str = "سؤال";
+    pub const AND: &str = "واتعلمت";
+    pub const TODAY_NEW: &str = "حاجة جديدة";
+    pub const DONE_REST: &str = "مراجعة النهارده خلصت، استريح. بكرة عندك";
+    pub const REVIEWS: &str = "مراجعة.";
+    pub const LEFT_1: &str = "فاضل";
+    pub const LEFT_2: &str = "مراجعة لو عندك وقت، ولو لأ بكرة موجودة.";
+    pub const WEEK_TITLE: &str = "آخر ٧ أيام";
+    pub const WEEK_LEARNED_1: &str = "اتعلمت";
+    pub const WEEK_LEARNED_2: &str = "حاجة جديدة في";
+    pub const WEEK_DAYS: &str = "أيام.";
+    pub const WEEK_RETENTION: &str = "بتفتكر صح:";
+    pub const WEEK_WEAK: &str = "يستاهلوا رجوع:";
+    pub const WEEK_EXAM_1: &str = "فاضل على الامتحان";
+    pub const WEEK_EXAM_2: &str = "يوم.";
+}

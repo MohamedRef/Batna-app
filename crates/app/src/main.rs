@@ -19,6 +19,7 @@ mod order;
 mod plan;
 mod platform;
 mod prefs;
+mod recap;
 mod reminders;
 mod settings;
 mod sounds;

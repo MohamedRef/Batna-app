@@ -187,7 +187,6 @@ impl ReviewBackend {
 
     /// New items started on each of the last `days` study days, oldest
     /// first (the last entry is today).
-    #[allow(dead_code)] // reminders and recap (chunk 20)
     pub fn learned_per_day(&self, days: usize, now_ms: i64) -> Vec<u32> {
         let today = self.scheduler.day.day(now_ms);
         let mut out = vec![0; days];

@@ -74,7 +74,8 @@ object UpdateNotice {
         nm.createNotificationChannel(
             NotificationChannel(
                 CHANNEL,
-                n.optString("channel").ifBlank { "نسخ باطنة الجديدة" },
+                // Rust always sends it (i18n.rs); the app's name is a fallback.
+                n.optString("channel").ifBlank { ctx.applicationInfo.loadLabel(ctx.packageManager).toString() },
                 NotificationManager.IMPORTANCE_DEFAULT,
             ),
         )

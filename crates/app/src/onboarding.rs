@@ -146,6 +146,10 @@ fn Questions() -> Element {
                     error.set(Some(tx::PICK_FUTURE));
                     return false;
                 };
+                if !batna_core::plan::exam_day_ok(today, day) {
+                    error.set(Some(tx::PICK_FAR));
+                    return false;
+                }
                 let mut s = crate::plan::SETTINGS.write();
                 s.exam = Some(day);
                 crate::plan::save(&s);
@@ -203,6 +207,7 @@ fn Questions() -> Element {
                 input {
                     r#type: "date",
                     min: "{today.plus(1).iso()}",
+                    max: "{today.plus(batna_core::plan::MAX_DAYS_AHEAD).iso()}",
                     value: "{exam}",
                     oninput: move |e| {
                         exam.set(e.value());

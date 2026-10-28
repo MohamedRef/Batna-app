@@ -5,7 +5,7 @@
 //! daylight-saving switch keeps 19:00 at 19:00.
 
 use batna_core::plan::Day;
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 
 /// Reminders armed ahead: a week or more even at three a day. After the
 /// last one the platform keeps going from [`Repeat`] (issue #26).
@@ -30,7 +30,7 @@ pub struct Scheduled {
 /// What the platform arms by itself once the planned reminders run out
 /// (the app not opened for a week): the same times and study days, with a
 /// general line, since the due counts would be stale.
-#[derive(Clone, Debug, PartialEq, Eq, Serialize)]
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Repeat {
     pub times: Vec<String>,
     /// Study days, Saturday first, as `1` and `0`.
@@ -53,6 +53,30 @@ pub fn repeat(i: &Inputs) -> Option<Repeat> {
         title: crate::i18n::remind::TITLE.into(),
         text: crate::i18n::remind::text(None),
     })
+}
+
+/// The next `n` fallback reminders after the day `last` (`YYYY-MM-DD`), as
+/// `(date, time)`. For a platform that can't wake Batna when the planned
+/// reminders run out (the Mac), so it arms these ahead instead.
+#[cfg_attr(not(target_os = "macos"), allow(dead_code))]
+pub fn after(last: &str, r: &Repeat, n: usize) -> Vec<(String, String)> {
+    let Some(last) = Day::parse(last) else { return Vec::new() };
+    let days: Vec<bool> = r.days.chars().map(|c| c == '1').collect();
+    let mut out = Vec::new();
+    // A year is plenty: an empty week or no times would loop forever.
+    for d in 1..=366 {
+        let day = last.plus(d);
+        if !days.get(day.weekday()).copied().unwrap_or(false) {
+            continue;
+        }
+        for t in &r.times {
+            if out.len() == n {
+                return out;
+            }
+            out.push((day.iso(), t.clone()));
+        }
+    }
+    out
 }
 
 /// Everything [`schedule`] reads.
@@ -199,6 +223,24 @@ mod tests {
         assert!(!r.text.chars().any(|c| c.is_ascii_digit()), "no stale count: {}", r.text);
         assert_eq!(repeat(&Inputs { here: false, ..inputs(&[19 * 60], &[]) }), None);
         assert_eq!(repeat(&inputs(&[], &[])), None);
+    }
+
+    #[test]
+    fn the_mac_fallback_picks_up_after_the_last_planned_day() {
+        let weekdays = [true, false, true, true, true, true, true];
+        let r = repeat(&Inputs { weekdays, ..inputs(&[19 * 60, 7 * 60], &[]) }).unwrap();
+        // 2026-10-30 is a Friday, so Saturday comes next and Sunday is a rest day.
+        let next = after("2026-10-30", &r, 5);
+        let want = [
+            ("2026-10-31", "07:00"),
+            ("2026-10-31", "19:00"),
+            ("2026-11-02", "07:00"),
+            ("2026-11-02", "19:00"),
+            ("2026-11-03", "07:00"),
+        ];
+        assert_eq!(next, want.map(|(d, t)| (d.to_string(), t.to_string())));
+        assert!(after("2026-10-30", &Repeat { days: "0000000".into(), ..r.clone() }, 5).is_empty());
+        assert!(after("not a day", &r, 5).is_empty());
     }
 
     #[test]

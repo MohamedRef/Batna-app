@@ -465,7 +465,13 @@ pub struct Updater {
     job: Mutex<()>,
 }
 
+/// The one updater of this process. On Android the background job may open
+/// it before the activity starts ([`job_updater`]); [`init`] then adopts it,
+/// so two updaters never share the `updates/` folder.
 static UPDATER: OnceLock<Updater> = OnceLock::new();
+/// Set once [`init`] has run (the UI is up), so [`get`] stays `None` for a
+/// job-only process.
+static STARTED: OnceLock<()> = OnceLock::new();
 
 /// Opens the updater under the app's data folder and starts the background
 /// checks. Called once at start.
@@ -481,12 +487,14 @@ pub fn init() {
     } else {
         None
     };
-    let updater = Updater::new(data.join("updates"), BuildInfo::from_env(), platform, feed_override, off);
-    let start = updater.status().off.is_none();
-    let background = updater.background_checks();
-    if UPDATER.set(updater).is_err() {
+    if STARTED.set(()).is_err() {
         return;
     }
+    let updater = UPDATER.get_or_init(|| {
+        Updater::new(data.join("updates"), BuildInfo::from_env(), platform, feed_override, off)
+    });
+    let start = updater.status().off.is_none();
+    let background = updater.background_checks();
     crate::platform::update_notice::schedule(background);
     if !start {
         return;
@@ -503,22 +511,19 @@ pub fn init() {
 }
 
 pub fn get() -> Option<&'static Updater> {
-    UPDATER.get()
+    STARTED.get().and(UPDATER.get())
 }
 
 /// The updater Android's background job (`UpdateCheckJob`) works with, in a
 /// process that may have no UI: the app's own if it's running here, else
-/// one opened for the job under `data_dir` (Context.getFilesDir).
+/// one opened under `data_dir` (Context.getFilesDir) that the app adopts if
+/// it starts later in the same process.
 #[cfg_attr(not(target_os = "android"), allow(dead_code))]
 fn job_updater(data_dir: &Path) -> &'static Updater {
-    static HEADLESS: OnceLock<Updater> = OnceLock::new();
-    match UPDATER.get() {
-        Some(u) => u,
-        None => HEADLESS.get_or_init(|| {
-            let off = cfg!(debug_assertions).then_some(Off::DevBuild);
-            Updater::new(data_dir.join("updates"), BuildInfo::from_env(), this_platform(), None, off)
-        }),
-    }
+    UPDATER.get_or_init(|| {
+        let off = cfg!(debug_assertions).then_some(Off::DevBuild);
+        Updater::new(data_dir.join("updates"), BuildInfo::from_env(), this_platform(), None, off)
+    })
 }
 
 /// Android's background job: checks when due and returns the notification
@@ -1051,6 +1056,7 @@ fn install_build(path: &Path, offer: &Offer) -> Phase {
         // "Batna was updated" says what's new when the feed says it.
         &Some(notes_of(offer)).filter(|n| !n.is_empty()).unwrap_or_else(|| tx::DONE_BODY.to_owned()),
         tx::READY_TITLE,
+        (tx::INSTALL_CHANNEL, tx::INSTALL_CHANNEL_SUB),
     ) {
         Ok(()) => Phase::Installing(offer.clone()),
         Err(e) => Phase::Failed { offer: Some(offer.clone()), why: Failure::Install(e) },

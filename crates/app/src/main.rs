@@ -166,7 +166,7 @@ fn App() -> Element {
                     {icons::nav(Screen::Settings)}
                 }
             }
-            nav { class: "nav", aria_label: "التنقل",
+            nav { class: "nav", aria_label: i18n::nav::LABEL,
                 // From 600px the top bar goes and the name heads the rail or
                 // sidebar, so the screen gets the full height (nav.css).
                 div { class: "nav-brand", aria_hidden: "true",

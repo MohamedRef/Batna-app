@@ -358,7 +358,7 @@ fn Setup(
                     p { class: "muted", {tx::SETUP_INTRO} }
 
                     h2 { {tx::TIME} }
-                    div { class: "st-segmented", role: "radiogroup", aria_label: tx::TIME,
+                    div { class: "segmented", role: "radiogroup", aria_label: tx::TIME,
                         for m in MINUTES {
                             button {
                                 key: "{m}",

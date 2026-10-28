@@ -39,9 +39,7 @@ impl RemindPrefs {
         self.times.sort_unstable();
         self.times.dedup();
         self.times.truncate(MAX_TIMES);
-        if let Err(e) = shared().put_setting(Self::KEY, &self) {
-            crate::diag::report!("saving reminder settings: {e}");
-        }
+        crate::store::save_setting(Self::KEY, &self);
         *PREFS.write() = self;
     }
 }
@@ -141,7 +139,7 @@ pub fn RemindSection() -> Element {
         section { class: "card",
             h2 { {tx::DAILY} }
             p { class: "muted small", {tx::DAILY_BODY} }
-            div { class: "segmented", style: "grid-template-columns: repeat(2, 1fr)", role: "radiogroup", aria_label: tx::DAILY,
+            div { class: "segmented", role: "radiogroup", aria_label: tx::DAILY,
                 for on in [true, false] {
                     button {
                         key: "{on}",
@@ -219,7 +217,7 @@ pub fn RemindSection() -> Element {
             section { class: "card",
                 h2 { {tx::HERE} DeviceOnly {} }
                 p { class: "muted small", {tx::HERE_BODY} }
-                div { class: "segmented", style: "grid-template-columns: repeat(2, 1fr)", role: "radiogroup", aria_label: tx::HERE,
+                div { class: "segmented", role: "radiogroup", aria_label: tx::HERE,
                     for on in [true, false] {
                         button {
                             key: "{on}",

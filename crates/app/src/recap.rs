@@ -2,13 +2,12 @@
 //! what he learned, how much stuck, the topics to revisit and the days to
 //! the exam. Facts only: no streaks, no guilt, nothing about missed days.
 
-use batna_core::plan::Day;
 use batna_core::stats::{self, Ratio};
 use dioxus::prelude::*;
 
 use crate::i18n::recap as tx;
 use crate::stats::StudyData;
-use crate::store::{now_ms, use_review, utc_offset_minutes};
+use crate::store::{now_ms, use_review};
 
 /// What today's line is built from.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
@@ -83,7 +82,8 @@ pub fn TodayRecap(due_left: usize, due_tomorrow: u32) -> Element {
             retention.right += l.counts.retention.right;
             retention.total += l.counts.retention.total;
         }
-        let today = Day::from_unix_ms(now_ms(), utc_offset_minutes(), 0);
+        // The study day, like the planner, so "days to the exam" agree (#36).
+        let today = crate::store::zone().study_day(now_ms());
         Week {
             learned: review.backend.borrow().learned_per_day(7, now_ms()),
             retention,

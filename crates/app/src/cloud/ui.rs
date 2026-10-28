@@ -93,6 +93,7 @@ fn problem_text(p: Problem) -> &'static str {
         Problem::Network => tx::P_NETWORK,
         Problem::Server => tx::P_SERVER,
         Problem::Outdated => tx::P_OUTDATED,
+        Problem::ClockOff => tx::P_CLOCK,
     }
 }
 

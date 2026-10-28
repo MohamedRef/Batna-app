@@ -16,7 +16,9 @@ pub fn StudySection() -> Element {
 
     let set = {
         let review = review.clone();
-        move |s: ReviewSettings| review.backend.borrow_mut().set_settings(s)
+        move |s: ReviewSettings| {
+            review.backend.borrow_mut().set_settings(s);
+        }
     };
     let set_retention = set.clone();
     let set_new = set;

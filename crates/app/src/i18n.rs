@@ -231,6 +231,7 @@ pub mod bank {
     pub const BACK: &str = "رجوع للبنك";
     pub const SENT_TO_REVIEW: &str = "الأسئلة اللي غلطت فيها هترجعلك في المراجعة قريب.";
     pub const REPORT: &str = "بلّغ عن مشكلة في السؤال ده";
+    pub const CLOSE: &str = "اقفل";
 }
 
 pub mod stats {

@@ -37,8 +37,10 @@ pub fn QuestionView(
         };
         Some((orig, letter, text, reason, state))
     });
+    let rows: Vec<_> = rows.collect();
     let locked = onchoose.is_none();
-    rsx! {
+    let quote = item.src.quote.clone();
+    let primary = rsx! {
         article { class: "q card",
             div { class: "q-meta",
                 span { class: "chip", bdi { "L{lecture_number(&lecture.lecture)} · {lecture.title}" } }
@@ -48,13 +50,15 @@ pub fn QuestionView(
             }
             p { class: "q-stem", lang: "en", dir: "ltr", "{stem}" }
             ol { class: "q-options", lang: "en", dir: "ltr",
-                for (orig, letter, text, reason, state) in rows {
+                for (orig, letter, text, reason, state) in rows.clone() {
                     li { key: "{orig}",
                         button {
                             class: "q-option",
                             "data-state": state,
                             disabled: locked,
                             "aria-pressed": if chosen == Some(orig) { "true" } else { "false" },
+                            "aria-keyshortcuts": if locked { "" } else { letter.to_string() },
+                            "data-peek": if reveal { reason.clone() } else { String::new() },
                             onclick: move |_| {
                                 if let Some(h) = onchoose {
                                     h.call(orig);
@@ -69,26 +73,45 @@ pub fn QuestionView(
                                 span { class: "q-mark", lang: "ar", dir: "rtl", "✗ {tx::YOUR_ANSWER}" }
                             }
                         }
+                        // Under each option on phones; the side pane has them on wide windows.
                         if reveal && !reason.is_empty() {
                             p { class: "q-why", "{reason}" }
                         }
                     }
                 }
             }
-            if reveal {
-                div { class: "q-foot",
-                    span { class: "chip page", bdi { "{tx::BOOK_PAGE} {item.src.page}" } }
-                }
-                Report { item_id: q.id.clone() }
-                if let Some(u) = &item.update {
-                    aside { class: "q-update",
-                        strong { {tx::UPDATE} }
-                        p { lang: "en", dir: "ltr", "{u.text}" }
-                        p { class: "muted small", bdi { "{u.reference}" } " · " {tx::UPDATE_NOTE} }
+        }
+    };
+    if !reveal {
+        return primary;
+    }
+    // The explanation: why for every option (wide windows), the book page,
+    // the ✓ / ✎ / ✗ check and any guideline update.
+    let secondary = rsx! {
+        div { class: "q-explain card",
+            ol { class: "q-why-list", lang: "en", dir: "ltr",
+                for (orig, letter, _, reason, state) in rows {
+                    li { key: "{orig}", "data-state": state,
+                        span { class: "q-letter", "{letter}" }
+                        span { "{reason}" }
                     }
                 }
             }
+            div { class: "q-foot",
+                crate::hover::BookPage { label: tx::BOOK_PAGE, page: item.src.page, quote }
+            }
+            Report { item_id: q.id.clone() }
+            if let Some(u) = &item.update {
+                aside { class: "q-update",
+                    strong { {tx::UPDATE} }
+                    p { lang: "en", dir: "ltr", "{u.text}" }
+                    p { class: "muted small", bdi { "{u.reference}" } " · " {tx::UPDATE_NOTE} }
+                }
+            }
         }
+    };
+    rsx! {
+        crate::desk::Panes { primary, secondary: Some(secondary) }
     }
 }
 

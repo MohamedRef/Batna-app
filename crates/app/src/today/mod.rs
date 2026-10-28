@@ -29,6 +29,7 @@ pub fn Today() -> Element {
     let target = crate::plan::target_now(&*review.backend.borrow());
     let new_today = target.as_ref().map_or(o.new_today, |t| (t.new_left() as usize).min(o.unseen));
     let mut ui = use_context::<Ui>();
+    let settings = use_context::<crate::settings::SettingsNav>();
     let ready = o.due + new_today > 0;
     let minutes = crate::onboarding::session_minutes();
 
@@ -43,10 +44,34 @@ pub fn Today() -> Element {
                     if let Some(t) = target.clone() {
                         PlanHero { t, due: o.due, due_minutes: o.due_minutes }
                     }
+                    // Each count opens what it counts: what's due, today's new
+                    // items, or the checks he has made.
                     div { class: "tiles",
-                        Tile { value: o.due, label: tx::DUE, accent: o.due > 0 }
-                        Tile { value: new_today, label: tx::NEW }
-                        Tile { value: o.checked, label: tx::CHECKED }
+                        Tile {
+                            value: o.due,
+                            label: tx::DUE,
+                            hint: if o.due > 0 { tx::DUE_HINT } else { tx::FORECAST_HINT },
+                            accent: o.due > 0,
+                            onclick: {
+                                let due = review.backend.borrow().due(store::now_ms());
+                                move |_| if due.is_empty() { crate::stats::open(ui, crate::stats::Tab::Plan) } else { session(ui, due.clone()) }
+                            },
+                        }
+                        Tile {
+                            value: new_today,
+                            label: tx::NEW,
+                            hint: if new_today > 0 { tx::NEW_HINT } else { tx::FORECAST_HINT },
+                            onclick: {
+                                let fresh = unseen(&*review.backend.borrow(), &o, new_today);
+                                move |_| if fresh.is_empty() { crate::stats::open(ui, crate::stats::Tab::Plan) } else { session(ui, fresh.clone()) }
+                            },
+                        }
+                        Tile {
+                            value: o.checked,
+                            label: tx::CHECKED,
+                            hint: tx::CHECKED_HINT,
+                            onclick: move |_| settings.show(Some(crate::settings::Section::Data)),
+                        }
                     }
                     if ready {
                         if o.due > 0 {
@@ -66,7 +91,7 @@ pub fn Today() -> Element {
                         p { {tx::ALL_DONE} }
                         p { class: "muted small", "{tx::NEW_CAP_REACHED} · {tx::TOMORROW} {o.due_tomorrow}" }
                         if target.is_some() {
-                            crate::stats::SessionButton { label: tx::AHEAD, ids: ahead(&*review.backend.borrow(), &o) }
+                            crate::stats::SessionButton { label: tx::AHEAD, ids: unseen(&*review.backend.borrow(), &o, AHEAD_ITEMS) }
                         }
                     } else {
                         p { {tx::ALL_DONE} }
@@ -120,17 +145,28 @@ fn PlanHero(t: DailyTarget, due: usize, due_minutes: u32) -> Element {
     };
     let mut ui = use_context::<Ui>();
     rsx! {
-        p { class: "plan-countdown", {tx::exam_in(t.days_left)} }
+        button {
+            class: "tap tap-plain plan-countdown",
+            title: tx::PLAN_HINT,
+            onclick: move |_| crate::stats::open(ui, crate::stats::Tab::Plan),
+            {tx::exam_in(t.days_left)}
+        }
         div { class: "plan-line",
-            div {
-                class: "ring",
-                role: "progressbar",
-                aria_label: tx::RING_LABEL,
-                aria_valuemin: "0",
-                aria_valuemax: "100",
-                aria_valuenow: "{pct}",
-                style: "--p: {pct}%",
-                span { class: "ring-hole", bdi { "{pct}%" } }
+            button {
+                class: "tap tap-plain ring-tap",
+                aria_label: tx::PLAN_HINT,
+                title: tx::PLAN_HINT,
+                onclick: move |_| crate::stats::open(ui, crate::stats::Tab::Plan),
+                div {
+                    class: "ring",
+                    role: "progressbar",
+                    aria_label: tx::RING_LABEL,
+                    aria_valuemin: "0",
+                    aria_valuemax: "100",
+                    aria_valuenow: "{pct}",
+                    style: "--p: {pct}%",
+                    span { class: "ring-hole", bdi { "{pct}%" } }
+                }
             }
             div { class: "plan-text",
                 match day.focus {
@@ -195,10 +231,10 @@ fn WeakStart() -> Element {
     }
 }
 
-/// The next few unseen items once today's plan is done: lectures already
-/// started first, then book order. The session button keeps only what the
-/// player can show.
-fn ahead(store: &dyn StudyStore, o: &Overview) -> Vec<String> {
+/// The next `n` unseen items the player can show: lectures already started
+/// first, then book order (today's new items, or "get ahead" once today's
+/// plan is done).
+fn unseen(store: &dyn StudyStore, o: &Overview, n: usize) -> Vec<String> {
     let lib = Library::get();
     let mut order: Vec<&str> = o.lectures.iter().map(|l| l.id.as_str()).collect();
     for e in &lib.index.lectures {
@@ -212,15 +248,34 @@ fn ahead(store: &dyn StudyStore, o: &Overview) -> Vec<String> {
         .flat_map(|l| &l.items)
         .filter(|i| crate::study::PLAYABLE.contains(&i.body.kind()))
         .filter(|i| store.is_new(&i.id) && !store.is_hidden(&i.id))
-        .take(AHEAD_ITEMS)
+        .take(n)
         .map(|i| i.id.clone())
         .collect()
 }
 
+/// A session on exactly these items, from a count on Today.
+fn session(mut ui: Ui, items: Vec<String>) {
+    let minutes = crate::onboarding::session_minutes();
+    *crate::study::START.write() = Some(crate::study::Start { lectures: None, items: Some(items), minutes });
+    ui.screen.set(Screen::Study);
+}
+
+/// A count that opens what it counts; `hint` says where it goes.
 #[component]
-fn Tile(value: usize, label: &'static str, #[props(default)] accent: bool) -> Element {
+fn Tile(
+    value: usize,
+    label: &'static str,
+    hint: &'static str,
+    #[props(default)] accent: bool,
+    onclick: EventHandler<MouseEvent>,
+) -> Element {
     rsx! {
-        div { class: "tile", "data-accent": accent,
+        button {
+            class: "tile tap",
+            "data-accent": accent,
+            aria_label: "{value} {label}. {hint}",
+            title: hint,
+            onclick: move |e| onclick.call(e),
             span { class: "tile-value", "{value}" }
             span { class: "tile-label", {label} }
         }
@@ -229,25 +284,31 @@ fn Tile(value: usize, label: &'static str, #[props(default)] accent: bool) -> El
 
 #[component]
 fn Progress(lecture: LectureProgress) -> Element {
+    let ui = use_context::<Ui>();
     let pct = lecture.seen * 100 / lecture.total.max(1);
     let number = lecture.id.rsplit('.').next().unwrap_or(&lecture.id).trim_start_matches('L').to_string();
     rsx! {
-        li { class: "progress-row",
-            span { class: "num", "{number}" }
-            div { class: "lecture-main",
-                bdi { class: "lecture-title", "{lecture.title}" }
-                div {
-                    class: "bar",
-                    role: "progressbar",
-                    aria_valuemin: "0",
-                    aria_valuemax: "{lecture.total}",
-                    aria_valuenow: "{lecture.seen}",
-                    div { class: "bar-fill", style: "inline-size: {pct}%" }
+        li {
+            button {
+                class: "progress-row tap",
+                onclick: { let id = lecture.id.clone(); move |_| crate::lecture::open(ui, &id) },
+                span { class: "num", "{number}" }
+                div { class: "lecture-main",
+                    bdi { class: "lecture-title", "{lecture.title}" }
+                    div {
+                        class: "bar",
+                        role: "progressbar",
+                        aria_valuemin: "0",
+                        aria_valuemax: "{lecture.total}",
+                        aria_valuenow: "{lecture.seen}",
+                        div { class: "bar-fill", style: "inline-size: {pct}%" }
+                    }
+                    span { class: "muted small", "{lecture.seen} {tx::OF} {lecture.total} {tx::STARTED}" }
                 }
-                span { class: "muted small", "{lecture.seen} {tx::OF} {lecture.total} {tx::STARTED}" }
-            }
-            if lecture.due > 0 {
-                span { class: "chip due", "{lecture.due} {tx::DUE_CHIP}" }
+                if lecture.due > 0 {
+                    span { class: "chip due", "{lecture.due} {tx::DUE_CHIP}" }
+                }
+                span { class: "chev", aria_hidden: "true" }
             }
         }
     }
@@ -256,6 +317,8 @@ fn Progress(lecture: LectureProgress) -> Element {
 /// The chapter's lectures and how many items each has.
 #[component]
 fn LibraryList() -> Element {
+    let ui = use_context::<Ui>();
+    let settings = use_context::<crate::settings::SettingsNav>();
     let lib = Library::get();
     let rows = lib.index.lectures.iter().map(|entry| {
         let items = lib.lectures.get(&entry.id).map(|l| l.items.len());
@@ -264,22 +327,35 @@ fn LibraryList() -> Element {
         (entry.id.clone(), number, entry.title.clone(), items, format!("{first}–{last}"))
     });
     rsx! {
-        section { class: "card",
+        // A heading, not a card: the lectures under it are what open.
+        div { class: "library-head",
             h2 { {tx::LIBRARY} }
             p { class: "muted", bdi { {tx::CHAPTER} } }
-            p { class: "note", {tx::UNVERIFIED_NOTE} }
+            // The note says to mark items; the marks are sent from Settings › Data.
+            button {
+                class: "note tap library-note",
+                title: tx::UNVERIFIED_HINT,
+                onclick: move |_| settings.show(Some(crate::settings::Section::Data)),
+                {tx::UNVERIFIED_NOTE}
+            }
         }
         ol { class: "lectures",
             for (id, number, title, items, pages) in rows {
-                li { key: "{id}", class: "lecture", "data-ready": if items.is_some() { "yes" } else { "no" },
-                    span { class: "num", "{number}" }
-                    div { class: "lecture-main",
-                        bdi { class: "lecture-title", "{title}" }
-                        span { class: "muted small", "{tx::PAGES} " bdi { dir: "ltr", "{pages}" } }
-                    }
-                    match items {
-                        Some(n) => rsx! { span { class: "chip ready", "{tx::READY} · {n} {tx::ITEMS}" } },
-                        None => rsx! { span { class: "chip", {tx::WRITING} } },
+                li { key: "{id}",
+                    button {
+                        class: "lecture tap",
+                        "data-ready": if items.is_some() { "yes" } else { "no" },
+                        onclick: { let id = id.clone(); move |_| crate::lecture::open(ui, &id) },
+                        span { class: "num", "{number}" }
+                        div { class: "lecture-main",
+                            bdi { class: "lecture-title", "{title}" }
+                            span { class: "muted small", "{tx::PAGES} " bdi { dir: "ltr", "{pages}" } }
+                        }
+                        match items {
+                            Some(n) => rsx! { span { class: "chip ready", "{tx::READY} · {n} {tx::ITEMS}" } },
+                            None => rsx! { span { class: "chip", {tx::WRITING} } },
+                        }
+                        span { class: "chev", aria_hidden: "true" }
                     }
                 }
             }

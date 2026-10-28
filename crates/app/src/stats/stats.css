@@ -29,8 +29,7 @@
 
 .session-start, .plan-actions { display: flex; align-items: center; flex-wrap: wrap; gap: var(--sp-3); }
 
-.weak-list { margin: 0; padding-inline-start: var(--sp-6); display: grid; gap: var(--sp-2); }
-.weak-list li { display: flex; flex-direction: column; }
+.weak-list { margin: 0; }
 .weak-title { font-weight: 600; }
 
 /* ---------- lecture stats ---------- */
@@ -87,16 +86,8 @@
 
 /* ---------- mistakes ---------- */
 .mistake-group h2 { display: flex; align-items: center; gap: var(--sp-2); }
-.mistakes { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-2); }
-.mistakes li {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: var(--sp-3);
-  padding-block: var(--sp-2);
-  border-block-end: 1px solid var(--line);
-}
-.mistakes li:last-child { border-block-end: 0; }
+.mistakes { margin: 0; }
+.mistake-topic { display: inline-flex; align-items: center; gap: var(--sp-2); inline-size: auto; font-weight: inherit; }
 .mistake-text { min-width: 0; overflow-wrap: anywhere; }
 .chip.bad { background: var(--bad-soft); border-color: transparent; color: var(--bad); }
 
@@ -138,6 +129,9 @@
 .plan-date { font-variant-numeric: tabular-nums; color: var(--muted); }
 .plan-focus { font-weight: 600; }
 .plan-day[data-focus="Rest"] { opacity: 0.6; }
+button.plan-day.tap-plain { padding-block: var(--sp-2); border-block-end: 1px solid var(--line); border-radius: 0; }
+@media (hover: hover) { button.plan-day:hover { background: var(--accent-soft); } }
+.card.tap > h2 { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-2); }
 .plan-day[data-focus="Mock"] .plan-focus, .plan-day[data-focus="WeakTopics"] .plan-focus { color: var(--accent); }
 .plan-day[data-focus="Revisit"] .plan-focus { color: var(--good); }
 .plan-all > summary { cursor: pointer; color: var(--accent); font-weight: 600; padding-block: var(--sp-2); }
@@ -169,3 +163,18 @@
 .key-cap, .key-plan { block-size: 0; border-block-start: 2px dashed var(--muted); border-radius: 0; }
 .key-plan { border-color: var(--accent); }
 .key-past { block-size: 0; border-block-start: 2.5px solid var(--good); border-radius: 0; }
+
+/* ---------- taps (main.css .tap) ---------- */
+/* The summary numbers open where they grow: studying, or the checks. */
+button.big {
+  flex: 1 1 6rem;
+  inline-size: auto;
+  align-items: flex-start;
+  padding: var(--sp-2) var(--sp-3);
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  background: var(--bg);
+}
+/* A topic's name in the per-lecture table starts a session on it. */
+.topic-link { text-decoration: underline dotted; text-underline-offset: 3px; text-decoration-color: var(--muted); }
+.stat-open { margin-block-start: var(--sp-3); }

@@ -25,6 +25,7 @@ pub fn QuestionView(
         return rsx! { p { class: "note", {tx::NOT_FOUND} } };
     };
     let topic = item.topic.as_deref().map(|t| topic_title(&lecture.lecture, t));
+    let ui = use_context::<crate::Ui>();
     let rows = q.order.iter().enumerate().filter_map(|(shown, &orig)| {
         let text = options.get(orig)?.clone();
         let reason = why.get(orig).cloned().unwrap_or_default();
@@ -42,8 +43,20 @@ pub fn QuestionView(
     let quote = item.src.quote.clone();
     let primary = rsx! {
         article { class: "q card",
+            // Once the answer shows, the lecture chip opens the lecture's
+            // page. While a paper runs it stays a label, so a stray tap never
+            // leaves the paper.
             div { class: "q-meta",
-                span { class: "chip", bdi { "L{lecture_number(&lecture.lecture)} · {lecture.title}" } }
+                if reveal {
+                    button {
+                        class: "chip tap",
+                        title: tx::OPEN_LECTURE,
+                        onclick: { let id = lecture.lecture.clone(); move |_| crate::lecture::open(ui, &id) },
+                        bdi { "L{lecture_number(&lecture.lecture)} · {lecture.title}" }
+                    }
+                } else {
+                    span { class: "chip", bdi { "L{lecture_number(&lecture.lecture)} · {lecture.title}" } }
+                }
                 if let Some(t) = topic {
                     span { class: "chip", bdi { "{t}" } }
                 }

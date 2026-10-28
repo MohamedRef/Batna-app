@@ -14,6 +14,11 @@
 .tile-value { font-size: var(--fs-xl); font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.2; }
 .tile-label { font-size: var(--fs-sm); color: var(--muted); }
 .tile[data-accent="true"] { background: var(--accent-soft); }
+button.tile { border: 1px solid transparent; }
+/* Rows that open a lecture: the chevron sits at the far end. */
+.progress-row .chev, .lecture .chev { margin-inline-start: auto; }
+.library-head { display: flex; flex-direction: column; gap: var(--sp-2); padding-block-start: var(--sp-2); }
+button.library-note { border: 0; color: inherit; }
 .tile[data-accent="true"] .tile-value { color: var(--accent); }
 
 .today-hero .btn.start { align-self: start; }
@@ -48,9 +53,12 @@
 .bar-fill { block-size: 100%; background: var(--good); border-radius: inherit; }
 .chip.due { background: var(--accent-soft); border-color: transparent; color: var(--accent); font-weight: 600; }
 @media (max-width: 599px) {
-  .progress-row { display: grid; grid-template-columns: auto minmax(0, 1fr); }
+  .progress-row { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; }
   .progress-row > .chip { grid-column: 2; justify-self: start; }
+  .progress-row > .chev { grid-column: 3; grid-row: 1; }
 }
+.ring-tap { inline-size: auto; flex: none; border-radius: 50%; }
+.plan-countdown { inline-size: auto; align-self: start; }
 
 .export-text { inline-size: 100%; font-family: var(--font-latin); font-size: var(--fs-sm); }
 .import-files { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-1); }
@@ -85,3 +93,7 @@ table.plan th { color: var(--muted); font-weight: 600; }
   font-variant-numeric: tabular-nums;
 }
 .today-hero .session-start { display: flex; align-items: center; flex-wrap: wrap; gap: var(--sp-3); }
+
+/* Today's line and the week card open the progress screen. */
+.recap-week h2 { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-2); }
+.recap-week ul { margin: 0; padding-inline-start: var(--sp-4); }

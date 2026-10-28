@@ -47,6 +47,12 @@ pub mod today {
     pub const ITEMS: &str = "سؤال وكارت";
     pub const PAGES: &str = "صفحات";
     pub const UNVERIFIED_NOTE: &str = "كل المحتوى لسه ما اتراجعش. أول ما تشوف أي سؤال، علّم عليه صح أو غلط.";
+    pub const UNVERIFIED_HINT: &str = "علاماتك بتتبعت من الإعدادات › البيانات";
+    pub const DUE_HINT: &str = "ابدأ مراجعة المستحق";
+    pub const NEW_HINT: &str = "ابدأ جلسة على الجديد";
+    pub const FORECAST_HINT: &str = "شوف الخطة والأيام الجاية";
+    pub const CHECKED_HINT: &str = "علاماتك وتصديرها في الإعدادات";
+    pub const PLAN_HINT: &str = "افتح خطة المذاكرة";
 
     // The exam plan on Today (#99).
     pub fn exam_in(days: i32) -> String {
@@ -216,6 +222,8 @@ pub mod soon {
 }
 
 pub mod bank {
+    pub const PRACTISE_TOPIC: &str = "اتمرّن على الموضوع ده";
+    pub const OPEN_LECTURE: &str = "افتح المحاضرة";
     pub const TITLE: &str = "بنك الأسئلة";
     pub const LEAD: &str = "اختار المحاضرات والمواضيع، وجاوب بالشرح بعد كل سؤال أو بالوقت زي الامتحان.";
     pub const EMPTY_TITLE: &str = "لسه مفيش أسئلة اختيار من متعدد";
@@ -345,10 +353,19 @@ pub mod stats {
     pub const LECTURE: &str = "محاضرة";
 
     pub const SESSION_COUNT: &str = "سؤال في الجلسة";
+    pub const STUDY_HINT: &str = "افتح المذاكرة";
+    pub const APPROVED_HINT: &str = "علاماتك وتصديرها في الإعدادات";
+    pub const TOPIC_HINT: &str = "ذاكر الموضوع ده لوحده";
+    pub const OPEN_LECTURE: &str = "افتح المحاضرة";
+    pub const MISTAKE_HINT: &str = "جرّب السؤال ده تاني";
+    pub const MISTAKES_TOPIC_HINT: &str = "جرّب أخطاء الموضوع ده";
     pub const DEMO: &str = "أرقام تجريبية للعرض بس، مش مذاكرتك.";
 }
 
 pub mod plan {
+    pub const START_HINT: &str = "ابدأ جلسة النهارده";
+    pub const PROGRESS_HINT: &str = "افتح التقدّم بالتفصيل";
+    pub const DAY_HINT: &str = "افتح محاضرة اليوم ده";
     pub const SETUP_TITLE: &str = "امتحانك إمتى؟";
     pub const SETUP_BODY: &str =
         "قولّي يوم الامتحان والأيام اللي تقدر تذاكر فيها، وأنا أوزّع المحاضرات عليها بهدوء.";
@@ -480,6 +497,7 @@ pub mod order {
 }
 
 pub mod oral {
+    pub const MISSED_HINT: &str = "راجع السؤال ده في المذاكرة";
     pub const TITLE: &str = "امتحان شفوي";
     pub const INTRO: &str = "التطبيق يسألك بصوت عالي، وانت تجاوب بصوتك. بعد وقت التفكير يقولك الإجابة، وانت تقيّم نفسك. ينفع وانت ماشي.";
     pub const LECTURE: &str = "المحاضرة";
@@ -1044,6 +1062,7 @@ pub mod onboard {
 }
 
 pub mod recap {
+    pub const OPEN_PROGRESS: &str = "افتح تقدّمي";
     pub const TODAY_1: &str = "النهارده جاوبت";
     pub const TODAY_ANSWERS: &str = "سؤال";
     pub const AND: &str = "واتعلمت";
@@ -1082,6 +1101,7 @@ pub mod learn {
     pub const OPEN_LESSON: &str = "افتح الدرس";
     pub const EXPLAIN: &str = "اشرحهولي";
     pub const EXPLAIN_HINT: &str = "افتح الدرس اللي بيشرح السؤال ده";
+    pub const OPEN_LECTURE: &str = "افتح المحاضرة";
 
     pub const CLOSE: &str = "اقفل الدرس";
     pub const BOOK_PAGE: &str = "الكتاب ص";
@@ -1162,4 +1182,23 @@ pub mod learn {
             "عادي جدًا من أول مرة، ده درس جديد. الكروت هتثبّته."
         }
     }
+}
+
+pub mod lecture {
+    pub const BACK: &str = "رجوع";
+    pub const KICKER: &str = "المحاضرة";
+    pub const PAGES: &str = "صفحات";
+    pub const PROGRESS: &str = "اللي بدأته من المحاضرة";
+    pub const OF: &str = "من";
+    pub const STARTED: &str = "بدأتهم";
+    pub const DUE: &str = "مستحق";
+    pub const STUDY: &str = "ذاكر المحاضرة دي";
+    pub const REVIEW_DUE: &str = "راجع المستحق";
+    pub const WRITING: &str = "المحاضرة دي لسه بتتكتب. أول ما تجهز هتلاقي أسئلتها هنا.";
+    pub const LESSONS: &str = "الدروس";
+    pub const PRACTICE: &str = "اتمرّن";
+    pub const MCQS: &str = "سؤال اختيارات في البنك";
+    pub const CASES: &str = "حالة";
+    pub const TOPICS: &str = "المواضيع";
+    pub const TOPICS_HINT: &str = "اضغط على موضوع تذاكره لوحده.";
 }

@@ -526,8 +526,21 @@ fn rate_current(store: &StudyStoreHandle, turn: u64, grade: Option<Grade>, asked
     true
 }
 
+/// One missed item in a study session, or its lecture's page when the study
+/// player can't show it.
+fn study_one(mut ui: crate::Ui, id: String) {
+    if crate::study::is_playable(&id) {
+        *crate::study::START.write() =
+            Some(crate::study::Start { lectures: None, items: Some(vec![id]), minutes: 5 });
+        ui.screen.set(crate::Screen::Study);
+    } else if let Some((lecture, _)) = id.rsplit_once('.') {
+        crate::lecture::open(ui, lecture);
+    }
+}
+
 #[component]
 fn Summary() -> Element {
+    let ui = use_context::<crate::Ui>();
     let store = use_store();
     let session = SESSION.read();
     let Some(s) = session.as_ref() else { return rsx! {} };
@@ -549,11 +562,21 @@ fn Summary() -> Element {
             if t.missed.is_empty() {
                 p { class: "muted", {tx::NONE_MISSED} }
             } else {
-                ul { class: "en oral-missed", dir: "ltr", lang: "en",
+                // A missed question opens on its card in a study session.
+                ul { class: "en oral-missed tap-list", dir: "ltr", lang: "en",
                     for p in t.missed {
                         li { key: "{p.item_id}",
-                            span { "{p.question.last().cloned().unwrap_or_default()}" }
-                            span { class: "muted small", " (p. {p.page})" }
+                            button {
+                                class: "tap tap-row",
+                                lang: "ar",
+                                title: tx::MISSED_HINT,
+                                onclick: { let id = p.item_id.clone(); move |_| study_one(ui, id.clone()) },
+                                span { class: "tap-row-main", lang: "en",
+                                    span { "{p.question.last().cloned().unwrap_or_default()}" }
+                                    span { class: "muted small", " (p. {p.page})" }
+                                }
+                                span { class: "chev", aria_hidden: "true" }
+                            }
                         }
                     }
                 }

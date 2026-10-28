@@ -226,6 +226,17 @@ fn merge_papers(mut papers: Vec<Outcome>) -> Vec<Outcome> {
     papers
 }
 
+/// Opens the bank's setup narrowed to a lecture (or one of its topics), ready
+/// to start. A paper in progress stays on screen; the filters wait for the next.
+pub fn practise(mut ui: crate::Ui, lecture: &str, topic: Option<String>) {
+    setup::focus(lecture, topic);
+    if matches!(*PHASE.peek(), Phase::Done { .. }) {
+        *PHASE.write() = Phase::Setup;
+    }
+    ui.screen.set(crate::Screen::Bank);
+    to_top();
+}
+
 pub fn start(mode: Mode, questions: Vec<Question>) {
     // A new paper never throws away one he left: that one is scored first.
     if let Some(paused) = PAUSED.write().take() {

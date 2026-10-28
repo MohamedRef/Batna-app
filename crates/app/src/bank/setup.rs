@@ -18,6 +18,16 @@ static FILTER: GlobalSignal<Filter> = Signal::global(Filter::default);
 static COUNT: GlobalSignal<usize> = Signal::global(|| 20);
 static MOCK_COUNT: GlobalSignal<usize> = Signal::global(|| MOCK_SIZE);
 
+/// Narrows the filters to one lecture, or one of its topics (a lecture
+/// page's "questions", a weak topic after a paper).
+pub fn focus(lecture: &str, topic: Option<String>) {
+    *FILTER.write() = Filter {
+        lectures: BTreeSet::from([lecture.to_string()]),
+        topics: topic.into_iter().map(|t| (lecture.to_string(), t)).collect(),
+        ..Filter::default()
+    };
+}
+
 const COUNTS: [usize; 4] = [10, 20, 40, usize::MAX];
 const MOCK_COUNTS: [usize; 4] = [20, 40, 60, 100];
 const TAGS: [(&str, &str); 3] =
@@ -257,6 +267,7 @@ fn Chip(
 
 #[component]
 fn History() -> Element {
+    let ui = use_context::<crate::Ui>();
     let papers = HISTORY.read().papers.clone();
     if papers.is_empty() {
         return rsx! {};
@@ -265,13 +276,32 @@ fn History() -> Element {
         section { class: "card",
             h2 { {tx::HISTORY} }
             ol { class: "history", reversed: true,
+                // A paper opens to its score per lecture; each lecture opens its page.
                 for (i, o) in papers.iter().enumerate().rev() {
                     li { key: "{i}",
-                        span { class: "chip", if o.mode == Mode::Mock { {tx::MODE_MOCK} } else { {tx::MODE_TIMED} } }
-                        bdi { class: "muted small", {date(crate::store::zone().local_ms(o.at_ms))} }
-                        span { class: "grow" }
-                        bdi { class: "score", "{o.total.right}/{o.total.total}" }
-                        bdi { class: "pct", "{o.total.percent()}%" }
+                        details { class: "history-paper",
+                            summary {
+                                span { class: "chip", if o.mode == Mode::Mock { {tx::MODE_MOCK} } else { {tx::MODE_TIMED} } }
+                                bdi { class: "muted small", {date(crate::store::zone().local_ms(o.at_ms))} }
+                                span { class: "grow" }
+                                bdi { class: "score", "{o.total.right}/{o.total.total}" }
+                                bdi { class: "pct", "{o.total.percent()}%" }
+                            }
+                            ul { class: "tap-list",
+                                for (l, s) in o.by_lecture.iter() {
+                                    li { key: "{l}",
+                                        button {
+                                            class: "tap tap-row",
+                                            title: tx::OPEN_LECTURE,
+                                            onclick: { let l = l.clone(); move |_| crate::lecture::open(ui, &l) },
+                                            bdi { class: "tap-row-main", "L{lecture_number(l)} · {short_lecture_title(l)}" }
+                                            bdi { class: "score", "{s.right}/{s.total}" }
+                                            span { class: "chev", aria_hidden: "true" }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }

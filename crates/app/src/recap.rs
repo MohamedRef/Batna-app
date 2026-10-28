@@ -64,6 +64,7 @@ impl Week {
 /// The line and, when there is a week behind him, the weekly card.
 #[component]
 pub fn TodayRecap(due_left: usize, due_tomorrow: u32) -> Element {
+    let ui = use_context::<crate::Ui>();
     let review = use_review();
     let now = now_ms();
     let (answered, learned) = {
@@ -96,12 +97,21 @@ pub fn TodayRecap(due_left: usize, due_tomorrow: u32) -> Element {
     });
     let week = week.read().clone();
     rsx! {
+        // Both open the progress screen, where the numbers come from.
         if let Some(line) = line {
-            p { class: "card recap-line", {line} }
+            button {
+                class: "card tap recap-line",
+                title: tx::OPEN_PROGRESS,
+                onclick: move |_| crate::stats::open(ui, crate::stats::Tab::Progress),
+                {line}
+            }
         }
         if week.worth_showing() {
-            section { class: "card recap-week",
-                h2 { {tx::WEEK_TITLE} }
+            button {
+                class: "card tap recap-week",
+                title: tx::OPEN_PROGRESS,
+                onclick: move |_| crate::stats::open(ui, crate::stats::Tab::Progress),
+                h2 { {tx::WEEK_TITLE} span { class: "chev", aria_hidden: "true" } }
                 ul {
                     li { "{tx::WEEK_LEARNED_1} {week.learned_total()} {tx::WEEK_LEARNED_2} {week.study_days()} {tx::WEEK_DAYS}" }
                     if let Some(p) = week.retention.percent() {

@@ -260,8 +260,19 @@ fn StatusCard(p: Plan, exam: Option<Day>) -> Element {
     }
 }
 
+/// Starts a session on these lectures (all when empty) with the usual budget.
+fn start_on(mut ui: crate::Ui, lectures: &[String]) {
+    *crate::study::START.write() = Some(crate::study::Start {
+        lectures: (!lectures.is_empty()).then(|| lectures.to_vec()),
+        items: None,
+        minutes: crate::onboarding::session_minutes(),
+    });
+    ui.screen.set(crate::Screen::Study);
+}
+
 #[component]
 fn TodayCard(p: Plan) -> Element {
+    let ui = use_context::<crate::Ui>();
     let Some(today) = p.today() else { return rsx! {} };
     if today.focus == Focus::Rest {
         let next = p.next_study_day();
@@ -279,13 +290,20 @@ fn TodayCard(p: Plan) -> Element {
         section { class: "card plan-today",
             h2 { "{tx::TODAY}: {focus_label(today.focus)}" }
             div { class: "summary",
+                // Both start today's session: on today's lectures, or on everything due.
                 if today.new > 0 {
-                    div { class: "big",
+                    button {
+                        class: "big tap",
+                        title: tx::START_HINT,
+                        onclick: { let l = today.new_lectures.clone(); move |_| start_on(ui, &l) },
                         span { class: "big-n", "{today.new}" }
                         span { class: "big-label", {tx::NEW_ITEMS} }
                     }
                 }
-                div { class: "big",
+                button {
+                    class: "big tap",
+                    title: tx::START_HINT,
+                    onclick: move |_| start_on(ui, &[]),
                     span { class: "big-n", "{today.reviews}" }
                     span { class: "big-label", {tx::REVIEWS} }
                 }
@@ -400,10 +418,15 @@ fn PaceCard(p: Plan, past: Vec<(i32, u32)>) -> Element {
 
 #[component]
 fn ProgressCard(p: Plan) -> Element {
+    let ui = use_context::<crate::Ui>();
     let share = |n: u32| if p.total == 0 { 0.0 } else { n as f32 * 100.0 / p.total as f32 };
     rsx! {
-        section { class: "card",
-            h2 { {tx::PROGRESS} }
+        // The per-lecture numbers behind these bars are on the progress tab.
+        button {
+            class: "card tap",
+            title: tx::PROGRESS_HINT,
+            onclick: move |_| crate::stats::open(ui, crate::stats::Tab::Progress),
+            h2 { {tx::PROGRESS} span { class: "chev", aria_hidden: "true" } }
             for (label, n) in [(tx::FIRST_PASS, p.seen), (tx::SECOND_PASS, p.seen_twice)] {
                 div { class: "bar", key: "{label}",
                     span { class: "bar-label small", {label} }
@@ -441,16 +464,32 @@ fn WeekCard(p: Plan) -> Element {
     }
 }
 
+/// A day of the plan. A day with lectures opens the first one's page; a
+/// rest day refers to nothing, so it stays a plain line.
 #[component]
 fn DayLine(d: DayPlan) -> Element {
-    rsx! {
-        div { class: "plan-day", "data-focus": "{d.focus:?}",
-            span { class: "plan-date", {short_date(d.day)} }
-            span { class: "plan-focus", {focus_label(d.focus)} }
-            if d.focus != Focus::Rest {
-                DayDetail { d: d.clone() }
-            }
+    let ui = use_context::<crate::Ui>();
+    let first = d.new_lectures.first().or(d.revisit.first()).cloned();
+    let body = rsx! {
+        span { class: "plan-date", {short_date(d.day)} }
+        span { class: "plan-focus", {focus_label(d.focus)} }
+        if d.focus != Focus::Rest {
+            DayDetail { d: d.clone() }
         }
+    };
+    match first {
+        Some(id) => rsx! {
+            button {
+                class: "plan-day tap tap-plain",
+                "data-focus": "{d.focus:?}",
+                title: tx::DAY_HINT,
+                onclick: move |_| crate::lecture::open(ui, &id),
+                {body}
+            }
+        },
+        None => rsx! {
+            div { class: "plan-day", "data-focus": "{d.focus:?}", {body} }
+        },
     }
 }
 

@@ -78,7 +78,7 @@ impl StudyData {
 }
 
 #[derive(Clone, Copy, PartialEq, Eq, Debug)]
-enum Tab {
+pub enum Tab {
     Progress,
     Mistakes,
     Plan,
@@ -95,9 +95,26 @@ impl Tab {
     }
 }
 
+/// The tab the next visit opens on, set by [`open`].
+static WANT: GlobalSignal<Option<Tab>> = Signal::global(|| None);
+
+/// Opens the progress screen on a tab (Today's summary and week cards, a
+/// count that the progress screen explains).
+pub fn open(mut ui: crate::Ui, tab: Tab) {
+    *WANT.write() = Some(tab);
+    ui.screen.set(crate::Screen::Stats);
+}
+
 #[component]
 pub fn Stats() -> Element {
-    let mut tab = use_signal(|| Tab::from_env().unwrap_or(Tab::Progress));
+    let mut tab = use_signal(|| WANT.write().take().or_else(Tab::from_env).unwrap_or(Tab::Progress));
+    // Asked for a tab while already here (the planner's progress card).
+    use_effect(move || {
+        if let Some(t) = WANT() {
+            tab.set(t);
+            *WANT.write() = None;
+        }
+    });
     // Subscribed: the screen refreshes after every answer and verdict.
     let review = crate::store::use_review();
     let data = std::rc::Rc::new(StudyData::load(&*review.backend.borrow()));
@@ -141,6 +158,8 @@ fn Progress(data: std::rc::Rc<StudyData>) -> Element {
     }
     let weak = stats::weakest_topics(&rows, 3);
     let weak_ids = stats::topics_session(&data.lectures, &weak, &data.events, &data.marks);
+    let mut ui = use_context::<crate::Ui>();
+    let settings = use_context::<crate::settings::SettingsNav>();
     rsx! {
         // Tablet landscape and the Mac: the totals and the weakest topics side by side.
         div { class: "tab-cols", "data-align": "stretch",
@@ -148,20 +167,28 @@ fn Progress(data: std::rc::Rc<StudyData>) -> Element {
                 section { class: "card",
                     h1 { {tx::SUMMARY} }
                     div { class: "summary",
-                        Big { n: all.seen, of: all.total, label: tx::SEEN }
-                        Big { n: all.seen_twice, of: all.total, label: tx::SEEN_TWICE }
-                        Big { n: all.approved, of: all.total, label: tx::APPROVED }
+                        // Seen and seen twice grow by studying; approved by the
+                        // checks, whose export is in Settings › Data.
+                        Big { n: all.seen, of: all.total, label: tx::SEEN, hint: tx::STUDY_HINT, onclick: move |_| ui.screen.set(crate::Screen::Study) }
+                        Big { n: all.seen_twice, of: all.total, label: tx::SEEN_TWICE, hint: tx::STUDY_HINT, onclick: move |_| ui.screen.set(crate::Screen::Study) }
+                        Big {
+                            n: all.approved,
+                            of: all.total,
+                            label: tx::APPROVED,
+                            hint: tx::APPROVED_HINT,
+                            onclick: move |_| settings.show(Some(crate::settings::Section::Data)),
+                        }
                     }
                     if all.seen == 0 {
                         p { class: "muted", {tx::NOTHING_YET} }
                     }
                 }
             }
-            div { class: "tab-aside", WeakCard { weak, ids: weak_ids } }
+            div { class: "tab-aside", WeakCard { weak, ids: weak_ids, data: data.clone() } }
         }
         section { class: "stat-lectures",
             for l in rows.iter() {
-                LectureCard { key: "{l.id}", l: l.clone() }
+                LectureCard { key: "{l.id}", l: l.clone(), data: data.clone() }
             }
         }
         p { class: "muted small", {tx::RETENTION_HINT} }
@@ -172,9 +199,19 @@ fn Progress(data: std::rc::Rc<StudyData>) -> Element {
 }
 
 #[component]
-fn Big(n: u32, of: u32, label: &'static str) -> Element {
+fn Big(
+    n: u32,
+    of: u32,
+    label: &'static str,
+    hint: &'static str,
+    onclick: EventHandler<MouseEvent>,
+) -> Element {
     rsx! {
-        div { class: "big",
+        button {
+            class: "big tap",
+            aria_label: "{n} {tx::OF} {of} {label}. {hint}",
+            title: hint,
+            onclick: move |e| onclick.call(e),
             span { class: "big-n", "{n}" }
             span { class: "muted small", "{tx::OF} {of}" }
             span { class: "big-label", {label} }
@@ -183,29 +220,70 @@ fn Big(n: u32, of: u32, label: &'static str) -> Element {
 }
 
 #[component]
-fn WeakCard(weak: Vec<WeakTopic>, ids: Vec<String>) -> Element {
+fn WeakCard(weak: Vec<WeakTopic>, ids: Vec<String>, data: std::rc::Rc<StudyData>) -> Element {
     rsx! {
         section { class: "card",
             h2 { {tx::WEAK_TITLE} }
             if weak.is_empty() {
                 p { class: "muted", {tx::WEAK_EMPTY} }
             } else {
-                ol { class: "weak-list",
+                // Each topic starts a session on just that topic.
+                ol { class: "weak-list tap-list",
                     for w in weak.iter() {
                         li { key: "{w.lecture}-{w.title}",
-                            span { class: "weak-title", bdi { dir: "ltr", "{w.title}" } }
-                            span { class: "muted small",
-                                "{tx::LECTURE} {lecture_number(&w.lecture)} · {tx::COL_RETENTION} "
-                                bdi { {pct(w.retention)} }
-                                " · "
-                                bdi { "MCQ" }
-                                " "
-                                bdi { {pct(w.mcq)} }
+                            TopicButton { lecture: w.lecture.clone(), topic: w.topic.clone(), data: data.clone(),
+                                span { class: "tap-row-main",
+                                    span { class: "weak-title", bdi { dir: "ltr", "{w.title}" } }
+                                    span { class: "muted small",
+                                        "{tx::LECTURE} {lecture_number(&w.lecture)} · {tx::COL_RETENTION} "
+                                        bdi { {pct(w.retention)} }
+                                        " · "
+                                        bdi { "MCQ" }
+                                        " "
+                                        bdi { {pct(w.mcq)} }
+                                    }
+                                }
                             }
                         }
                     }
                 }
                 SessionButton { label: tx::WEAK_START, ids }
+            }
+        }
+    }
+}
+
+/// A row (or, `inline`, a link in a table cell) that starts a session on one
+/// topic of a lecture: its cards when it has any, else the bank's questions on it.
+#[component]
+pub fn TopicButton(
+    lecture: String,
+    topic: Option<String>,
+    data: std::rc::Rc<StudyData>,
+    #[props(default)] inline: bool,
+    children: Element,
+) -> Element {
+    let mut ui = use_context::<crate::Ui>();
+    let ids: Vec<String> = crate::lecture::topic_session(&data, &lecture, topic.clone())
+        .into_iter()
+        .filter(|i| crate::study::is_playable(i))
+        .collect();
+    rsx! {
+        button {
+            class: if inline { "tap tap-plain topic-link" } else { "tap tap-row" },
+            title: tx::TOPIC_HINT,
+            onclick: move |_| {
+                if ids.is_empty() {
+                    crate::bank::practise(ui, &lecture, topic.clone());
+                } else {
+                    *crate::study::START.write() =
+                        Some(crate::study::Start { lectures: None, items: Some(ids.clone()), minutes: 10 });
+                    ui.screen.set(crate::Screen::Study);
+                }
+            },
+            {children}
+            if !inline {
+                span { class: "chev", aria_hidden: "true" }
             }
         }
     }
@@ -246,7 +324,8 @@ pub fn SessionButton(label: &'static str, ids: Vec<String>) -> Element {
 }
 
 #[component]
-fn LectureCard(l: LectureStats) -> Element {
+fn LectureCard(l: LectureStats, data: std::rc::Rc<StudyData>) -> Element {
+    let ui = use_context::<crate::Ui>();
     let c = &l.counts;
     let seen = Ratio { right: c.seen, total: c.total };
     let approved = Ratio { right: c.approved, total: c.total };
@@ -274,13 +353,20 @@ fn LectureCard(l: LectureStats) -> Element {
                 for t in l.topics.iter() {
                     div { class: "topic-row", role: "row", key: "{t.title}",
                         span { role: "cell",
-                            if t.id.is_some() { bdi { dir: "ltr", "{t.title}" } } else { {tx::UNTAGGED} }
+                            TopicButton { lecture: l.id.clone(), topic: t.id.clone(), data: data.clone(), inline: true,
+                                if t.id.is_some() { bdi { dir: "ltr", "{t.title}" } } else { {tx::UNTAGGED} }
+                            }
                         }
                         span { role: "cell", bdi { "{t.counts.seen}/{t.counts.total}" } }
                         span { role: "cell", bdi { {pct(t.counts.retention)} } }
                         span { role: "cell", bdi { {pct(t.counts.mcq)} } }
                     }
                 }
+            }
+            button {
+                class: "btn btn-tonal stat-open",
+                onclick: { let id = l.id.clone(); move |_| crate::lecture::open(ui, &id) },
+                {tx::OPEN_LECTURE}
             }
         }
     }

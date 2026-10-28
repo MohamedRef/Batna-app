@@ -22,6 +22,9 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v5
+        with:
+          # The merge commit and its first parent, for the What's new check.
+          fetch-depth: 2
       - name: No build output, book text or huge files in git
         run: scripts/check-tracked-files.sh
       - name: System libraries for the desktop WebView
@@ -43,19 +46,12 @@ jobs:
       # changes/<topic>.yaml (docs/RELEASE.md §5, "What's new"): new lines in
       # a new or existing file, or a new file holding [] when there is
       # nothing to tell. Without one the update showed the PR's English
-      # title under the wrong kind. The files must parse.
+      # title under the wrong kind. The files must parse. HEAD is the merge
+      # commit; HEAD^1 is the base it was made on, so a base that moved
+      # since can't lend this PR its files (#320).
       - name: What's new file
         if: github.event_name == 'pull_request'
-        env:
-          BASE: ${{ github.base_ref }}
-        run: |
-          git fetch -q --depth=1 origin "$BASE"
-          files="$(git diff --name-only --diff-filter=AM FETCH_HEAD HEAD -- 'changes/*.yaml')"
-          if ! grep -qE '^changes/[^/]+\.yaml$' <<<"$files"; then
-            echo "::error::No changes/<topic>.yaml in this pull request. Add one line per change Mohamed can see (kind new/improved/fixed, ar_eg in Egyptian Arabic, optional en), or a file holding [] when there is nothing to tell. See docs/RELEASE.md §5."
-            exit 1
-          fi
-          cargo run -q -p batna-tools -- update changes >/dev/null
+        run: cargo run -q -p batna-tools -- update changes --gate HEAD^1
 
   android:
     name: Android arm64 compiles

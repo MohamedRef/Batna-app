@@ -268,6 +268,10 @@ jobs:
           curl -fsSL --retry 3 -o /tmp/previous-update.json \
             "https://github.com/$GITHUB_REPOSITORY/releases/download/batna-preview/update.json" \
             || rm -f /tmp/previous-update.json
+          # Content reaches the phone without an install now, so the same
+          # checks as CI (schema, sources, approvals) run before the pack
+          # is built (#332).
+          cargo run -q -p batna-tools -- validate
           cargo run -q -p batna-tools -- packs build --out dist/packs
           if [ "${CONTENT_ONLY:-}" = true ]; then
             app=(--carry android-arm64)

@@ -170,21 +170,8 @@ pub fn collect(root: &Path, since: Option<&str>) -> Res<Vec<Change>> {
     let mut out = Vec::new();
     for c in &commits {
         let parent = git(root, &["rev-parse", "--verify", "--quiet", &format!("{c}^1")]).ok();
-        let parent = parent.as_deref().map(str::trim);
-        let touched = match parent {
-            Some(p) => git(root, &["diff", "--name-status", "--diff-filter=AM", p, c, "--", DIR])?,
-            None => git(root, &["ls-tree", "-r", "--name-only", c, "--", DIR])?
-                .lines()
-                .map(|f| format!("A\t{f}\n"))
-                .collect(),
-        };
-        // Fragments only: `changes/<topic>.yaml`, not the retro folder.
-        let files: Vec<(&str, &str)> = touched
-            .lines()
-            .filter_map(|l| l.split_once('\t'))
-            .filter(|(_, f)| f.ends_with(".yaml") && f.matches('/').count() == 1)
-            .collect();
-        if files.is_empty() {
+        let fragments = fragments(root, parent.as_deref().map(str::trim), c)?;
+        if fragments.files == 0 {
             let log = git(root, &["log", "-1", "--format=%s%x00%b", c])?;
             let (subject, body) = log.split_once('\0').unwrap_or((&log, ""));
             let title = title_of(subject.trim(), body);
@@ -194,18 +181,73 @@ pub fn collect(root: &Path, since: Option<&str>) -> Res<Vec<Change>> {
             }
             continue;
         }
-        let at = |e: String, f: &str| format!("{f} at {}: {e}", &c[..7.min(c.len())]);
-        for (status, f) in files {
-            let now = parse(&git(root, &["show", &format!("{c}:{f}")])?).map_err(|e| at(e, f))?;
-            // A file that grew: only the lines this commit added.
-            let before = match (status, parent) {
-                ("M", Some(p)) => parse(&git(root, &["show", &format!("{p}:{f}")])?).unwrap_or_default(),
-                _ => Vec::new(),
-            };
-            out.extend(now.into_iter().filter(|l| !before.contains(l)));
-        }
+        out.extend(fragments.lines);
     }
     Ok(out)
+}
+
+/// What one commit did to `changes/<topic>.yaml`.
+struct Fragments {
+    /// Fragment files added or changed.
+    files: usize,
+    /// The lines it added.
+    lines: Vec<Change>,
+    /// A new file holding `[]`: nothing to tell.
+    nothing_to_tell: bool,
+}
+
+fn fragments(root: &Path, parent: Option<&str>, c: &str) -> Res<Fragments> {
+    // `--no-renames`: a fragment moved or replaced by a similar one is a
+    // delete plus an add (#320). Lines a deleted file held aren't new when
+    // they show up again in another file.
+    let touched = match parent {
+        Some(p) => {
+            git(root, &["diff", "--no-renames", "--name-status", "--diff-filter=AMD", p, c, "--", DIR])?
+        }
+        None => git(root, &["ls-tree", "-r", "--name-only", c, "--", DIR])?
+            .lines()
+            .map(|f| format!("A\t{f}\n"))
+            .collect(),
+    };
+    // Fragments only: `changes/<topic>.yaml`, not the retro folder.
+    let all: Vec<(&str, &str)> = touched
+        .lines()
+        .filter_map(|l| l.split_once('\t'))
+        .filter(|(_, f)| f.ends_with(".yaml") && f.matches('/').count() == 1)
+        .collect();
+    let old = |f: &str| match parent {
+        Some(p) => parse(&git(root, &["show", &format!("{p}:{f}")]).unwrap_or_default()).unwrap_or_default(),
+        None => Vec::new(),
+    };
+    let mut before: Vec<Change> = all.iter().filter(|(s, _)| *s == "D").flat_map(|(_, f)| old(f)).collect();
+    let files: Vec<(&str, &str)> = all.into_iter().filter(|(s, _)| *s != "D").collect();
+    let at = |e: String, f: &str| format!("{f} at {}: {e}", &c[..7.min(c.len())]);
+    let mut out = Fragments { files: files.len(), lines: Vec::new(), nothing_to_tell: false };
+    for (status, f) in files {
+        let now = parse(&git(root, &["show", &format!("{c}:{f}")])?).map_err(|e| at(e, f))?;
+        out.nothing_to_tell |= status == "A" && now.is_empty();
+        // A file that grew: only the lines this commit added.
+        if status == "M" {
+            before.extend(old(f));
+        }
+        out.lines.extend(now.into_iter().filter(|l| !before.contains(l)));
+    }
+    Ok(out)
+}
+
+/// The pull request check (`.github/workflows/ci.yml`): `HEAD` against
+/// `base` (the merge commit's own first parent, so a base that moved since
+/// can't lend its files) must add at least one line, or a new file holding
+/// `[]`. An edit that adds nothing doesn't count. Returns the lines added.
+pub fn gate(root: &Path, base: &str) -> Res<Vec<Change>> {
+    let base = git(root, &["rev-parse", "--verify", base])?.trim().to_owned();
+    let found = fragments(root, Some(&base), "HEAD")?;
+    if found.lines.is_empty() && !found.nothing_to_tell {
+        return Err(format!(
+            "no new line in {DIR}/<topic>.yaml: add one line per change Mohamed can see (kind new/improved/fixed, ar_eg in Egyptian Arabic, optional en), or a new file holding [] when there is nothing to tell (docs/RELEASE.md §5)"
+        ));
+    }
+    Ok(found.lines)
 }
 
 /// This build's entry on top of the previous feed's history (same channel),
@@ -287,6 +329,58 @@ mod tests {
     fn every_changes_file_checks_out() {
         let root = Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
         assert!(check_all(&root).unwrap() > 0);
+    }
+
+    /// A throwaway repository.
+    fn repo() -> tempfile::TempDir {
+        let dir = tempfile::tempdir().unwrap();
+        for args in [&["init", "-q"][..], &["config", "user.email", "t@t"], &["config", "user.name", "t"]] {
+            git(dir.path(), args).unwrap();
+        }
+        dir
+    }
+
+    /// Writes (or with `None`, deletes) files and commits them.
+    fn step(root: &Path, files: &[(&str, Option<&str>)]) -> String {
+        for (f, text) in files {
+            let path = root.join(f);
+            match text {
+                Some(t) => {
+                    std::fs::create_dir_all(path.parent().unwrap()).unwrap();
+                    std::fs::write(&path, t).unwrap();
+                }
+                None => std::fs::remove_file(&path).unwrap(),
+            }
+        }
+        git(root, &["add", "-A"]).unwrap();
+        git(root, &["commit", "-q", "--allow-empty", "-m", "step"]).unwrap();
+        git(root, &["rev-parse", "HEAD"]).unwrap().trim().to_owned()
+    }
+
+    const ONE: &str = "- kind: new\n  ar_eg: درس جديد عن الكبد\n  en: A new liver lesson\n";
+    const TWO: &str = "- kind: new\n  ar_eg: درس جديد عن الكبد\n  en: A new liver lesson\n- kind: fixed\n  ar_eg: الصورة بقت أوضح\n";
+
+    #[test]
+    fn the_gate_wants_a_new_line() {
+        let dir = repo();
+        let root = dir.path();
+        let step = |files: &[(&str, Option<&str>)]| step(root, files);
+        let base = step(&[("changes/liver.yaml", Some(ONE))]);
+        // A comment or whitespace edit adds nothing.
+        step(&[("changes/liver.yaml", Some(&format!("# note\n{ONE}")))]);
+        assert!(gate(root, &base).is_err());
+        // An append counts, even when the file is renamed on the way.
+        step(&[("changes/liver.yaml", None), ("changes/hepar.yaml", Some(TWO))]);
+        let lines = gate(root, &base).unwrap();
+        assert_eq!(lines.iter().map(|c| c.text.ar_eg.as_str()).collect::<Vec<_>>(), ["الصورة بقت أوضح"]);
+        assert_eq!(collect(root, Some(&base)).unwrap().len(), 1);
+        // A new file holding [] says "nothing to tell".
+        let base = step(&[]);
+        step(&[("changes/ci.yaml", Some("[]\n"))]);
+        assert!(gate(root, &base).unwrap().is_empty());
+        let base = step(&[]);
+        step(&[("README", Some("x"))]);
+        assert!(gate(root, &base).is_err());
     }
 
     #[test]

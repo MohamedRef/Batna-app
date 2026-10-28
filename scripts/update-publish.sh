@@ -35,6 +35,8 @@ esac
 # ditto keeps the bundle's symlinks, modes and signature; the app unzips with ditto too.
 rm -f dist/mac/Batna.app.zip
 ditto -c -k --keepParent "$app" dist/mac/Batna.app.zip
+# The pack reaches phones without an install: check the content first (#332).
+$tools validate
 $tools packs build --out dist/packs
 
 # The tool says which channels this version goes on, and fails loudly on a

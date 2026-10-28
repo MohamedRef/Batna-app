@@ -107,6 +107,13 @@ What a device checks before it uses anything:
 
 Size caps: 256 KB for `update.json` and its signature, 400 MB for a build.
 
+A build download that stops (the line drops, Batna is closed) keeps its
+`<file>.part`; the next try, a few seconds later or at the next check or tap,
+asks only for the rest with an HTTP `Range` request (GitHub's release CDN
+serves ranges). The whole file is still hashed at the end, and a resumed
+file that doesn't match is fetched once more from the start. Content packs
+are a few MB and download whole.
+
 ### Content packs
 
 A new content pack is offered whenever its SHA-256 differs from the pack in

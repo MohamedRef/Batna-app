@@ -39,7 +39,7 @@ pub fn StepView(body: StepBody, seed: String, on_answer: EventHandler<bool>) -> 
         StepBody::Sort { prompt, bins, cards, why } => {
             rsx! { Sort { prompt, bins, cards, why, seed, on_answer } }
         }
-        StepBody::Case { stem, steps } => rsx! { MiniCase { stem, steps, on_answer } },
+        StepBody::Case { stem, steps } => rsx! { MiniCase { stem, steps, seed, on_answer } },
         StepBody::Table { title, columns, rows, hide } => rsx! { Table { title, columns, rows, hide } },
         StepBody::Try { items } => rsx! { super::practice::TryItems { items, on_answer } },
     }
@@ -458,8 +458,16 @@ fn Sort(
 }
 
 #[component]
-fn MiniCase(stem: String, steps: Vec<CaseStep>, on_answer: EventHandler<bool>) -> Element {
+fn MiniCase(stem: String, steps: Vec<CaseStep>, seed: String, on_answer: EventHandler<bool>) -> Element {
     let n = steps.len();
+    // Each question's options in a stable shuffled order, like a check step.
+    let orders = use_hook(|| {
+        steps
+            .iter()
+            .enumerate()
+            .map(|(si, s)| shuffled(s.options.len(), &format!("{seed}.{si}")))
+            .collect::<Vec<_>>()
+    });
     let mut at = use_signal(|| 0usize);
     // The option picked at each step (a step without options: Some(0) once shown).
     let mut picks = use_signal(|| vec![None::<usize>; n]);
@@ -483,11 +491,11 @@ fn MiniCase(stem: String, steps: Vec<CaseStep>, on_answer: EventHandler<bool>) -
                                 }
                             } else {
                                 div { class: "ls-options", dir: "ltr", lang: "en",
-                                    for (oi , o) in s.options.iter().enumerate() {
+                                    for (pos , &oi) in orders[si].iter().enumerate() {
                                         button {
                                             key: "{oi}",
                                             class: "ls-option",
-                                            "aria-keyshortcuts": if last { LETTERS.get(oi).copied().unwrap_or("") } else { "" },
+                                            "aria-keyshortcuts": if last { LETTERS.get(pos).copied().unwrap_or("") } else { "" },
                                             "data-state": match pick {
                                                 None => "open",
                                                 Some(_) if Some(oi) == s.answer => "right",
@@ -505,8 +513,8 @@ fn MiniCase(stem: String, steps: Vec<CaseStep>, on_answer: EventHandler<bool>) -
                                                     crate::sounds::play(if right { crate::sounds::Cue::Right } else { crate::sounds::Cue::Wrong });
                                                 }
                                             },
-                                            span { class: "ls-letter", "{LETTERS.get(oi).copied().unwrap_or(\"\")}" }
-                                            Line { text: o.clone() }
+                                            span { class: "ls-letter", "{LETTERS.get(pos).copied().unwrap_or(\"\")}" }
+                                            Line { text: s.options[oi].clone() }
                                         }
                                     }
                                 }

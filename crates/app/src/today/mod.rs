@@ -38,7 +38,7 @@ pub fn Today() -> Element {
                 button {
                     class: "primary start",
                     onclick: move |_| {
-                        *crate::study::START.write() = Some(crate::study::Start { lectures: None, minutes: 10 });
+                        *crate::study::START.write() = Some(crate::study::Start { lectures: None, items: None, minutes: 10 });
                         ui.screen.set(Screen::Study);
                     },
                     {tx::START}

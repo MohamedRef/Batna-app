@@ -13,10 +13,14 @@ pub fn StudySection() -> Element {
     let settings = review.backend.borrow().settings.clone();
     let reviews = review.backend.borrow().reviews_logged();
     let personal = settings.fsrs.as_ref().map(|p| p.reviews);
+    // With an exam day the plan sets the new items, so only its number shows (#99).
+    let plan_new = crate::plan::target_now(&*review.backend.borrow()).map(|t| t.new_goal());
 
     let set = {
         let review = review.clone();
-        move |s: ReviewSettings| review.backend.borrow_mut().set_settings(s)
+        move |s: ReviewSettings| {
+            review.backend.borrow_mut().set_settings(s);
+        }
     };
     let set_retention = set.clone();
     let set_new = set;
@@ -51,19 +55,23 @@ pub fn StudySection() -> Element {
         }
         section { class: "card",
             h2 { {tx::NEW_PER_DAY} }
-            p { class: "muted small", {tx::NEW_PER_DAY_BODY} }
-            div { class: "segmented", role: "radiogroup", aria_label: tx::NEW_PER_DAY,
-                for n in NEW_PER_DAY_CHOICES {
-                    button {
-                        key: "{n}",
-                        role: "radio",
-                        "aria-checked": settings.new_per_day == n,
-                        onclick: {
-                            let s = settings.clone();
-                            let f = set_new.clone();
-                            move |_| f(ReviewSettings { new_per_day: n, ..s.clone() })
-                        },
-                        "{n}"
+            if let Some(n) = plan_new {
+                p { "{tx::NEW_FROM_PLAN_1} {n} {tx::NEW_FROM_PLAN_2}" }
+            } else {
+                p { class: "muted small", {tx::NEW_PER_DAY_BODY} }
+                div { class: "segmented", role: "radiogroup", aria_label: tx::NEW_PER_DAY,
+                    for n in NEW_PER_DAY_CHOICES {
+                        button {
+                            key: "{n}",
+                            role: "radio",
+                            "aria-checked": settings.new_per_day == n,
+                            onclick: {
+                                let s = settings.clone();
+                                let f = set_new.clone();
+                                move |_| f(ReviewSettings { new_per_day: n, ..s.clone() })
+                            },
+                            "{n}"
+                        }
                     }
                 }
             }

@@ -1,6 +1,7 @@
 //! One component per lesson step kind. Each takes the step and calls
 //! `on_answer(right)` once when a question step is answered (the player
-//! counts first tries only), or `on_answer(true)` when a reveal opens.
+//! counts first tries of question steps only), or `on_answer(true)` when a
+//! reveal opens (that only unlocks Continue).
 
 use batna_core::content::CaseStep;
 use batna_core::lesson::{MnemonicPart, SortCard, StepBody, Tone};

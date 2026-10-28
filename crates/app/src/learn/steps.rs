@@ -78,6 +78,9 @@ pub fn StepView(body: StepBody, seed: String, on_answer: EventHandler<bool>) -> 
     }
 }
 
+/// Pinch, zoom buttons and double-tap in the full-screen figure viewer.
+const VIEWER_JS: &str = include_str!("viewer.js");
+
 #[component]
 fn Figure(
     title: Option<String>,
@@ -86,39 +89,78 @@ fn Figure(
     caption: String,
     alt: String,
 ) -> Element {
-    let mut zoomed = use_signal(|| false);
+    // A tap opens the figure full screen at every width (#337); in the
+    // lesson it stays a plain picture, so a swipe on it turns the page (#338).
+    let mut open = use_signal(|| false);
+    use_hook(|| {
+        document::eval(VIEWER_JS);
+    });
     // Open-licence images show their author and licence; a book figure's
     // page chip is the step's own.
     let credit = image
         .as_ref()
         .filter(|p| !p.book)
         .and_then(|p| Some(format!("{} · {}", p.credit.as_deref()?, p.license.as_deref()?)));
+    let picture = match &image {
+        // Content-made SVG, checked by the validator (no scripts, links or fixed colours).
+        None => rsx! { div { class: "ls-fig-svg", dir: "ltr", dangerous_inner_html: "{svg}" } },
+        Some(p) => rsx! { img { src: "{p.data}", alt: "{alt}", decoding: "async" } },
+    };
     rsx! {
-        figure { class: "ls-figure", "data-zoomed": if zoomed() { "yes" } else { "no" },
-            if let Some(t) = title { h2 { class: "ls-h", Line { text: t } } }
-            if image.is_none() {
-                // Content-made SVG, checked by the validator (no scripts, links or fixed colours).
-                button {
-                    class: "ls-svg",
-                    role: "img",
-                    aria_label: "{alt}",
-                    title: if zoomed() { tx::ZOOM_OUT } else { tx::ZOOM_IN },
-                    onclick: move |_| zoomed.toggle(),
-                    div { dir: "ltr", dangerous_inner_html: "{svg}" }
-                }
-            } else if let Some(p) = image {
-                button {
-                    class: "ls-svg ls-photo",
-                    title: if zoomed() { tx::ZOOM_OUT } else { tx::ZOOM_IN },
-                    onclick: move |_| zoomed.toggle(),
-                    img { src: p.data, alt: "{alt}", loading: "lazy", decoding: "async" }
-                }
+        figure { class: "ls-figure",
+            if let Some(t) = title.clone() { h2 { class: "ls-h", Line { text: t } } }
+            button {
+                class: if image.is_some() { "ls-svg ls-photo" } else { "ls-svg" },
+                // English figures read from the top left.
+                dir: "ltr",
+                aria_label: "{alt}",
+                title: tx::ZOOM_IN,
+                onclick: move |_| open.set(true),
+                {picture.clone()}
+                span { class: "ls-zoom-hint", aria_hidden: "true", "⤢" }
             }
             figcaption {
-                Rich { text: caption }
+                Rich { text: caption.clone() }
                 if let Some(c) = credit {
                     p { class: "ls-credit muted small", bdi { dir: "ltr", lang: "en", "📷 {c}" } }
                 }
+            }
+        }
+        if open() {
+            div {
+                class: "ls-viewer",
+                role: "dialog",
+                aria_modal: "true",
+                aria_label: "{alt}",
+                tabindex: "-1",
+                onkeydown: move |e: KeyboardEvent| {
+                    if e.key() == Key::Escape {
+                        open.set(false);
+                    }
+                },
+                onmounted: move |e: MountedEvent| async move {
+                    let _ = e.set_focus(true).await;
+                },
+                header { class: "ls-viewer-bar",
+                    button {
+                        class: "ls-close",
+                        "data-back": "true",
+                        aria_label: tx::ZOOM_CLOSE,
+                        title: tx::ZOOM_CLOSE,
+                        onclick: move |_| open.set(false),
+                        "×"
+                    }
+                    if let Some(t) = title { strong { class: "ls-viewer-title", Line { text: t } } }
+                    div { class: "ls-viewer-zoom", dir: "ltr",
+                        button { class: "ls-arrow", "data-zoom": "out", aria_label: tx::ZOOM_OUT, title: tx::ZOOM_OUT, "−" }
+                        button { class: "ls-arrow", "data-zoom": "fit", aria_label: tx::ZOOM_FIT, title: tx::ZOOM_FIT, "1:1" }
+                        button { class: "ls-arrow", "data-zoom": "in", aria_label: tx::ZOOM_IN, title: tx::ZOOM_IN, "+" }
+                    }
+                }
+                div { class: "ls-viewer-scroll", dir: "ltr",
+                    div { class: "ls-viewer-inner", {picture} }
+                }
+                p { class: "ls-viewer-hint muted small", {tx::ZOOM_HINT} }
             }
         }
     }

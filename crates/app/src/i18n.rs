@@ -707,8 +707,8 @@ pub mod own {
     pub const FAILED: &str = "ما عرفتش أحفظ الكارت:";
     pub const E_FRONT: &str = "اكتب السؤال في الوش.";
     pub const E_BACK: &str = "اكتب الإجابة في الضهر.";
-    pub const E_FRONT_LONG: &str = "الوش طويل، خليه سؤال قصير (٦٠٠ حرف بالكتير).";
-    pub const E_BACK_LONG: &str = "الضهر طويل، قسّمه على كذا كارت (٣٠٠٠ حرف بالكتير).";
+    pub const E_FRONT_LONG: &str = "الوش طويل، خليه سؤال قصير (600 حرف بالكتير).";
+    pub const E_BACK_LONG: &str = "الضهر طويل، قسّمه على كذا كارت (3000 حرف بالكتير).";
     pub const FROM: &str = "من";
 }
 

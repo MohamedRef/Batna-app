@@ -44,9 +44,16 @@ fn runs(spans: Vec<Span>) -> Element {
         }
     }
     rsx! {
-        for (i , (latin , g)) in groups.into_iter().enumerate() {
+        for (i , (latin , nw , g)) in groups.into_iter().map(|(l, g)| (l, short(&g), g)).enumerate() {
             if latin {
-                bdi { key: "{i}", dir: "ltr", lang: "en", {styled(g)} }
+                bdi {
+                    key: "{i}",
+                    dir: "ltr",
+                    lang: "en",
+                    // A short term ("vitamin A and") stays on one line.
+                    class: if nw { "ls-nw" } else { "" },
+                    {styled(g)}
+                }
             } else {
                 span { key: "{i}", {styled(g)} }
             }
@@ -57,13 +64,22 @@ fn runs(spans: Vec<Span>) -> Element {
 fn styled(spans: Vec<Span>) -> Element {
     rsx! {
         for (i , s) in spans.into_iter().enumerate() {
-            if s.bold {
+            if s.key {
+                mark { key: "{i}", "{s.text}" }
+            } else if s.bold {
                 strong { key: "{i}", "{s.text}" }
             } else {
                 span { key: "{i}", "{s.text}" }
             }
         }
     }
+}
+
+/// Up to three words and 24 letters: kept whole on its line.
+fn short(g: &[Span]) -> bool {
+    let len: usize = g.iter().map(|s| s.text.trim().chars().count()).sum();
+    let words: usize = g.iter().map(|s| s.text.split_whitespace().count()).sum();
+    len <= 24 && words <= 3
 }
 
 /// Mostly-English text (an option, a table cell) runs left-to-right.

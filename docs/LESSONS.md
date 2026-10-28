@@ -35,10 +35,19 @@ The model to copy is `content/lessons/hb/L01.yaml`.
 9. **Link to the cards.** End with a `try` step (1–5 playable items: card,
    cloze, enumerate, essay, table, order) and list the lecture items the
    lesson teaches in `practice:`.
-10. **Figures are drawn, not pasted.** Inline SVG only, with theme classes
-    (below) or `var(--token)` colours; no scripts, links, images, `<style>`
-    or fixed colours. Labels in English. Under 24 KB. Draw what helps:
-    pathways, vicious cycles, algorithms, anatomy sketches, scales.
+10. **A picture in every lesson.** At least one figure per lesson, more where
+    they teach. Draw diagrams, pathways, vicious cycles, algorithms, scales
+    and anatomy sketches as inline SVG, with theme classes (below) or
+    `var(--token)` colours; no scripts, links, embedded images, `<style>` or
+    fixed colours. Labels in English. Under 24 KB. Use a real image
+    (see [Images](#images)) where it teaches better than a drawing:
+    histology, US/CT/MRI, endoscopy, clinical signs, or the book's own figure.
+11. **Rich and easy to read.** Never cut information to make a step
+    shorter; add the explanation that makes it click. Readability comes from
+    shape: short paragraphs (about 3 lines), bullets for lists,
+    `**term**: meaning` rows for definitions. Use `**bold**` for real terms
+    only, and mark the 1–3 terms that matter most in the step with
+    `==term==` (the marker highlight; the validator allows at most 3).
 
 ## File shape
 
@@ -65,8 +74,8 @@ Every step may have `page:` and `quote:`.
 
 | kind | fields | what he sees |
 |---|---|---|
-| `explain` | `title?`, `text` | Prose. Blank line = new paragraph, `- ` = bullet, `**bold**` = highlighter. |
-| `figure` | `title?`, `svg`, `caption`, `alt` | A drawing; tap to zoom. |
+| `explain` | `title?`, `text` | Prose. Blank line = new paragraph, `- ` = bullet, `**bold**` = a term (weight only), `==key==` = one of the step's 1–3 key terms (marker). |
+| `figure` | `title?`, `svg` or `image`, `caption`, `alt` | A drawing or a picture; tap to zoom. |
 | `reveal` | `prompt`, `answer` | "فكّر الأول": think, then tap to see the answer. Use for every "why?". |
 | `mnemonic` | `word`, `parts: [{key, text}]`, `hook?` | Letter tiles that open one by one. The keys must spell the word. |
 | `aside` | `tone` (tip, exam, trap, analogy, joke), `text` | A coloured box. |
@@ -98,8 +107,47 @@ isolated for you, so write it naturally there. Arrows don't flip: between
 Arabic words write `←` (it points along the reading direction), between
 English words `→`.
 
+## Images
+
+A figure takes `image:` instead of `svg:`. The file goes in
+**`content/lessons/img/hb/`** (name it `L05-ascites-us.webp`: lecture,
+then what it shows). WebP, about 800 px wide, under 150 KB.
+
+From the book (Mohamed allowed book figures in the repo, 2026-10-28; the
+book's *text* still never goes in git). The step's `page:` cites it:
+
+```yaml
+- kind: figure
+  page: 23
+  title: "شكل الـ varices في المنظار"
+  image: { file: hb/L03-varices-endoscopy.webp, book: true }
+  caption: "..."
+  alt: "Endoscopy view of three large oesophageal varices with red wale signs."
+```
+
+Crop it from `/mnt/project-files/medstudy/book/internal-medicine-pg-part1.pdf`:
+`pdftoppm -r 200 -f P -l P -png book.pdf /tmp/p` renders PDF page P (the
+printed page differs; check the page number on the render), then crop and
+save as WebP with Pillow (`img.crop(box).save(out, "WEBP", quality=80)`).
+
+Open-licence images (public domain, CC0, CC BY, CC BY-SA, CC BY-NC; never
+ND) need `credit`, `license` and `source` (the https page it came from), and
+a line in `ATTRIBUTION.md`:
+
+```yaml
+  image:
+    file: hb/L05-ascites-us.webp
+    credit: "James Heilman, MD"
+    license: CC BY-SA 4.0
+    source: https://commons.wikimedia.org/wiki/File:...
+```
+
+The app shows the credit under the caption. The pack build embeds the file,
+so nothing is fetched at runtime.
+
 ## Check before the PR
 
 `cargo run -p batna-tools -- validate` checks schema, ids, pages, quotes,
-item links, SVG safety, mnemonic spelling and option counts. Then run the
+item links, SVG safety, image files, sizes and licences, key-term counts,
+mnemonic spelling and option counts. Then run the
 app (`just run`, or `BATNA_OPEN_SCREEN=learn`) and play every lesson once.

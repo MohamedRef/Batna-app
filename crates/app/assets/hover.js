@@ -4,11 +4,13 @@
 //     option's `why` after answering);
 //   - over any English word that is in the glossary: its expansion.
 // Settings turn pen and mouse peeks off per device: data-pen-hover="off" /
-// data-mouse-hover="off" on <html>. Touch never peeks.
+// data-mouse-hover="off" on <html>. A finger has no hover, so a tap on a
+// data-peek element (the book page chip) shows its card, and a second tap
+// or any other touch hides it. Touch never peeks at glossary words.
 // Adapted from kabar-app main: crates/app/assets/reader.js (pointer plumbing).
 (() => {
   if (window.__batnaHover) return;
-  const state = { exact: {}, lower: {}, unverified: "", timer: 0, shownFor: null };
+  const state = { exact: {}, lower: {}, unverified: "", timer: 0, shownFor: null, downOn: null };
   const card = document.createElement("div");
   card.className = "peek";
   card.setAttribute("role", "tooltip");
@@ -111,7 +113,19 @@
     const { clientX: x, clientY: y, target } = e;
     state.timer = setTimeout(() => peekAt(x, y, target), e.pointerType === "pen" ? 60 : 250);
   }, { passive: true });
-  document.addEventListener("pointerdown", hide, { passive: true });
+  document.addEventListener("pointerdown", (e) => {
+    // Remember what was showing, so a second tap on the same chip closes it.
+    state.downOn = state.shownFor;
+    hide();
+  }, { passive: true });
+  document.addEventListener("click", (e) => {
+    const el = e.target && e.target.closest ? e.target.closest("[data-peek]") : null;
+    // Buttons with a peek (an answered MCQ option) keep their own tap.
+    if (!el || !el.dataset.peek || el.matches("button, a, [role=button]")) return;
+    if (state.downOn === el) return;
+    state.shownFor = el;
+    show(el.dataset.peek, el.dataset.peekNote || "", el.getBoundingClientRect());
+  });
   document.addEventListener("pointercancel", hide, { passive: true });
   // The pen lifting out of range, or the mouse leaving the window: the
   // pointer goes out to nothing. pointerleave doesn't bubble, so it is caught

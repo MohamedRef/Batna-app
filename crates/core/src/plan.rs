@@ -118,6 +118,16 @@ pub const REVIEW_LADDER: [usize; 4] = [1, 3, 7, 14];
 pub const DEFAULT_REVIEW_CAP: u32 = 150;
 /// Default length of the final window, in days.
 pub const DEFAULT_FINAL_DAYS: u32 = 10;
+/// The furthest exam day the planner takes, in days from today: a typo like
+/// 2207 would otherwise spread the items to a trickle over decades (#249).
+pub const MAX_DAYS_AHEAD: i32 = 3 * 366;
+/// The highest daily review cap the planner suggests or accepts.
+pub const MAX_REVIEW_CAP: u32 = 1000;
+
+/// An exam day the planner accepts: after today and within [`MAX_DAYS_AHEAD`].
+pub fn exam_day_ok(today: Day, exam: Day) -> bool {
+    exam > today && today.until(exam) <= MAX_DAYS_AHEAD
+}
 
 /// What Mohamed sets in the planner. LWW-synced as one settings row.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -219,10 +229,22 @@ pub enum PlanStatus {
     OnTrack,
     /// Fits only by using the second pass for new items.
     Snug,
-    /// `left_over` items don't fit before the final window. `extra_days` more
-    /// study days a week would make them fit (`None`: even seven days a week
-    /// doesn't, so the review cap is what needs to give).
-    Tight { left_over: u32, extra_days: Option<u32> },
+    /// `left_over` items don't fit before the final window; `fix` says what
+    /// would make them fit.
+    Tight { left_over: u32, fix: TightFix },
+}
+
+/// What would make a tight plan fit, checked by re-planning (#251).
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum TightFix {
+    /// This many more study days a week.
+    MoreDays(u32),
+    /// A daily review cap of this much (up to [`MAX_REVIEW_CAP`]).
+    HigherCap(u32),
+    /// Neither is enough before the final window: high-yield first.
+    HighYield,
+    /// Already inside the final window: no learn days are left to change.
+    FinalWindow,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -266,6 +288,7 @@ pub fn plan(settings: &PlanSettings, input: PlanInput) -> Plan {
         seen_twice,
     };
     let Some(exam) = settings.exam else { return out };
+    let exam = exam.min(input.today.plus(MAX_DAYS_AHEAD));
     out.final_from = Some(exam.plus(-(settings.final_days as i32)));
     if exam <= input.today {
         out.status = PlanStatus::ExamDone;
@@ -282,7 +305,8 @@ pub fn plan(settings: &PlanSettings, input: PlanInput) -> Plan {
         0 if built.learn_days == 0 => PlanStatus::FinalWindow,
         0 if built.used_second_pass => PlanStatus::Snug,
         0 => PlanStatus::OnTrack,
-        left_over => PlanStatus::Tight { left_over, extra_days: extra_days_needed(settings, input, exam) },
+        left_over if built.learn_days == 0 => PlanStatus::Tight { left_over, fix: TightFix::FinalWindow },
+        left_over => PlanStatus::Tight { left_over, fix: tight_fix(settings, input, exam) },
     };
     out
 }
@@ -426,16 +450,27 @@ fn second_pass_days(learn_days: usize) -> usize {
 
 /// How many more study days a week would fit every new item, adding the
 /// free weekdays in order (Friday last).
-fn extra_days_needed(settings: &PlanSettings, input: PlanInput, exam: Day) -> Option<u32> {
+/// More study days first, then a higher review cap (in steps of 50), and
+/// only what re-planning shows would actually fit.
+fn tight_fix(settings: &PlanSettings, input: PlanInput, exam: Day) -> TightFix {
     let free: Vec<usize> = (0..7).filter(|&w| !settings.weekdays[w]).collect();
     let mut more = settings.clone();
     for (n, w) in free.iter().enumerate() {
         more.weekdays[*w] = true;
         if build(&more, input, exam).left_over == 0 {
-            return Some(n as u32 + 1);
+            return TightFix::MoreDays(n as u32 + 1);
         }
     }
-    None
+    let mut higher = settings.clone();
+    let mut cap = (settings.review_cap / 50 + 1) * 50;
+    while cap <= MAX_REVIEW_CAP {
+        higher.review_cap = cap;
+        if build(&higher, input, exam).left_over == 0 {
+            return TightFix::HigherCap(cap);
+        }
+        cap += 50;
+    }
+    TightFix::HighYield
 }
 
 #[cfg(test)]
@@ -564,9 +599,9 @@ mod tests {
         s.weekdays = [true, false, true, false, true, false, false];
         let lectures = [lecture("hb.L01", 3000, 0)];
         let p = plan(&s, PlanInput { today, lectures: &lectures, review_forecast: &[] });
-        let PlanStatus::Tight { left_over, extra_days } = p.status else { panic!("{:?}", p.status) };
+        let PlanStatus::Tight { left_over, fix } = p.status else { panic!("{:?}", p.status) };
         assert!(left_over > 0);
-        if let Some(n) = extra_days {
+        if let TightFix::MoreDays(n) = fix {
             assert!((1..=4).contains(&n));
             let mut more = s.clone();
             let free: Vec<usize> = (0..7).filter(|&w| !s.weekdays[w]).collect();
@@ -578,6 +613,41 @@ mod tests {
                 p.status
             );
         }
+    }
+
+    #[test]
+    fn suggests_a_higher_cap_only_when_it_fits() {
+        let today = day(2026, 10, 27);
+        let mut s = settings(day(2026, 12, 15));
+        s.weekdays = [true; 7];
+        s.review_cap = 60;
+        let input =
+            |l: &[LectureProgress]| plan(&s, PlanInput { today, lectures: l, review_forecast: &[] }).status;
+        let some = [lecture("hb.L01", 600, 0)];
+        let PlanStatus::Tight { fix: TightFix::HigherCap(cap), .. } = input(&some) else {
+            panic!("{:?}", input(&some))
+        };
+        assert!(cap > 60 && cap <= MAX_REVIEW_CAP && cap % 50 == 0);
+        let mut raised = s.clone();
+        raised.review_cap = cap;
+        assert!(!matches!(
+            plan(&raised, PlanInput { today, lectures: &some, review_forecast: &[] }).status,
+            PlanStatus::Tight { .. }
+        ));
+        let huge = [lecture("hb.L01", 100_000, 0)];
+        assert!(matches!(input(&huge), PlanStatus::Tight { fix: TightFix::HighYield, .. }));
+    }
+
+    #[test]
+    fn far_exam_days_are_clamped() {
+        let today = day(2026, 10, 27);
+        assert!(exam_day_ok(today, day(2027, 1, 20)));
+        assert!(!exam_day_ok(today, today));
+        assert!(!exam_day_ok(today, day(2207, 1, 20)));
+        let lectures = [lecture("hb.L01", 100, 0)];
+        let p =
+            plan(&settings(day(9999, 1, 1)), PlanInput { today, lectures: &lectures, review_forecast: &[] });
+        assert_eq!(p.days.len(), MAX_DAYS_AHEAD as usize);
     }
 
     #[test]
@@ -611,7 +681,7 @@ mod tests {
         let today = exam.plus(-6);
         let lectures = [lecture("hb.L01", 40, 10)];
         let p = plan(&settings(exam), PlanInput { today, lectures: &lectures, review_forecast: &[] });
-        assert_eq!(p.status, PlanStatus::Tight { left_over: 30, extra_days: None });
+        assert_eq!(p.status, PlanStatus::Tight { left_over: 30, fix: TightFix::FinalWindow });
         assert!(p.days.iter().all(|d| matches!(d.focus, Focus::Mock | Focus::WeakTopics | Focus::Rest)));
         let done = [lecture("hb.L01", 40, 40)];
         let p = plan(&settings(exam), PlanInput { today, lectures: &done, review_forecast: &[] });

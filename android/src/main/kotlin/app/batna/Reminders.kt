@@ -59,7 +59,9 @@ object ReminderBridge {
 
     /**
      * The fallback for when Batna isn't opened for days:
-     * `{"times": ["HH:MM"], "days": "1111110" (Saturday first), "title", "text"}`.
+     * `{"times": ["HH:MM"], "days": "1111110" (Saturday first), "title", "text",
+     * "channel", "channel_about"}` (the channel's name and description, in
+     * the app's language, since every UI string comes from Rust).
      * When the last armed reminder fires, or nothing armed is left after a
      * reboot, the next [FALLBACK_DAYS] days are armed from it with its
      * general text (the due counts would be stale). `{}` turns it off.
@@ -207,9 +209,15 @@ object ReminderBridge {
 
     fun show(context: Context, title: String, text: String) {
         val nm = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val names = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).getString(REPEAT, null)
+            ?.let { runCatching { JSONObject(it) }.getOrNull() }
         nm.createNotificationChannel(
-            NotificationChannel(CHANNEL, "تذكير المذاكرة", NotificationManager.IMPORTANCE_DEFAULT).apply {
-                description = "تذكير هادي بمراجعة اليوم"
+            NotificationChannel(
+                CHANNEL,
+                names?.optString("channel")?.ifBlank { null } ?: "Batna",
+                NotificationManager.IMPORTANCE_DEFAULT,
+            ).apply {
+                names?.optString("channel_about")?.ifBlank { null }?.let { description = it }
             },
         )
         val open = context.packageManager.getLaunchIntentForPackage(context.packageName)

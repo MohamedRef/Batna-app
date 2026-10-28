@@ -5,12 +5,14 @@
 //   - over any English word that is in the glossary: its expansion.
 // Settings turn pen and mouse peeks off per device: data-pen-hover="off" /
 // data-mouse-hover="off" on <html>. A finger has no hover, so a tap on a
-// data-peek element (the book page chip) shows its card, and a second tap
-// or any other touch hides it. Touch never peeks at glossary words.
+// glossary word in plain text, or on a plain element with data-peek, shows
+// the same card, and the next tap or a scroll hides it (no dead
+// highlighted words on the phone). The book page chip is a button that
+// opens its own sheet.
 // Adapted from kabar-app main: crates/app/assets/reader.js (pointer plumbing).
 (() => {
   if (window.__batnaHover) return;
-  const state = { exact: {}, lower: {}, unverified: "", timer: 0, shownFor: null, downOn: null };
+  const state = { exact: {}, lower: {}, unverified: "", timer: 0, shownFor: null };
   const card = document.createElement("div");
   card.className = "peek";
   card.setAttribute("role", "tooltip");
@@ -113,18 +115,35 @@
     const { clientX: x, clientY: y, target } = e;
     state.timer = setTimeout(() => peekAt(x, y, target), e.pointerType === "pen" ? 60 : 250);
   }, { passive: true });
+  // Touch: a tap on a glossary word or a plain data-peek element (not on
+  // a control) toggles its card.
+  let touchShown = null;
+  let lastTouch = 0;
+  document.addEventListener("pointerup", (e) => {
+    if (e.pointerType === "touch") lastTouch = Date.now();
+  }, { passive: true, capture: true });
   document.addEventListener("pointerdown", (e) => {
-    // Remember what was showing, so a second tap on the same chip closes it.
-    state.downOn = state.shownFor;
+    touchShown = e.pointerType === "touch" ? state.shownFor : null;
     hide();
   }, { passive: true });
   document.addEventListener("click", (e) => {
-    const el = e.target && e.target.closest ? e.target.closest("[data-peek]") : null;
-    // Buttons with a peek (an answered MCQ option) keep their own tap.
-    if (!el || !el.dataset.peek || el.matches("button, a, [role=button]")) return;
-    if (state.downOn === el) return;
-    state.shownFor = el;
-    show(el.dataset.peek, el.dataset.peekNote || "", el.getBoundingClientRect());
+    if (!lastTouch || Date.now() - lastTouch > 800) return;
+    const t = e.target;
+    if (!t || !t.closest || t.closest("button, a, input, textarea, select, summary, label, [role=button]")) return;
+    const el = t.closest("[data-peek]");
+    if (el && el.dataset.peek) {
+      if (touchShown === el) return; // the same element again: leave it closed
+      state.shownFor = el;
+      show(el.dataset.peek, el.dataset.peekNote || "", el.getBoundingClientRect());
+      return;
+    }
+    const hit = wordAt(e.clientX, e.clientY);
+    const entry = hit && lookup(hit.word);
+    if (!entry) return;
+    const key = hit.word + "@" + hit.a;
+    if (touchShown === key) return;
+    state.shownFor = key;
+    show(entry[0], entry[1] ? "" : state.unverified, hit.rect);
   });
   document.addEventListener("pointercancel", hide, { passive: true });
   // The pen lifting out of range, or the mouse leaving the window: the

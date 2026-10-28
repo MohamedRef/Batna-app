@@ -85,6 +85,19 @@ pub mod cite {
     }
 }
 
+/// A book page's sheet (pagesheet/mod.rs).
+pub mod book {
+    pub const TITLE: &str = "صفحة الكتاب";
+    pub const CLOSE: &str = "اقفل";
+    pub const NO_LECTURE: &str = "الصفحة دي برّه المحاضرات اللي في باطنة.";
+    pub const QUOTE_NOTE: &str = "سطر قصير من الصفحة، عشان تتأكد من المصدر.";
+    pub const MADE: &str = "اللي في باطنة من الصفحة دي:";
+    pub const NOTHING_YET: &str = "لسه مفيش كروت أو أسئلة من الصفحة دي.";
+    pub const STUDY: &str = "ذاكر الصفحة دي";
+    pub const OPEN_LECTURE: &str = "افتح المحاضرة";
+    pub const CHIP_HINT: &str = "افتح صفحة الكتاب";
+}
+
 pub mod nav {
     pub const LABEL: &str = "التنقل";
     pub const TODAY: &str = "النهارده";
@@ -1166,6 +1179,9 @@ pub mod remind {
     pub const TITLE: &str = "باطنة";
     pub const SECTION: &str = "التذكير";
     pub const SECTION_SUB: &str = "تذكير هادي بمراجعة اليوم";
+    /// Android's notification channel, as Settings › Notifications lists it.
+    pub const CHANNEL: &str = "تذكير المذاكرة";
+    pub const CHANNEL_ABOUT: &str = "تذكير هادي بمراجعة اليوم";
     pub const PHONE_ONLY: &str =
         "التذكير بيرن من تطبيق باطنة المتثبّت على الموبايل أو الماك، مش من نسخة التطوير.";
     pub const MAC_HINT: &str =
@@ -1240,6 +1256,8 @@ pub mod onboard {
 
 pub mod recap {
     pub const OPEN_PROGRESS: &str = "افتح تقدّمي";
+    /// Between list items and clauses.
+    pub const COMMA: &str = "، ";
     use super::count::{DAY, NEW_THING, QUESTION, REVIEW, count};
 
     pub const DONE_REST: &str = "مراجعة النهارده خلصت، استريح.";

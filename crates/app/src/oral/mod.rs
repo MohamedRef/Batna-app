@@ -122,7 +122,10 @@ fn Setup() -> Element {
         // side, its settings on the other.
         div { class: "tab-cols oral-cols",
             div { class: "tab-main tab-sticky",
-                section { class: "card oral-setup",
+                // With questions to ask, the whole card starts (the button's click bubbles up).
+                section {
+                    class: if available > 0 { "card card-action oral-setup" } else { "card oral-setup" },
+                    onclick: move |_| if available > 0 { start(&store.read()) },
                     h1 { {tx::TITLE} }
                     p { class: "muted", {tx::INTRO} }
                     if available > 0 {
@@ -130,7 +133,6 @@ fn Setup() -> Element {
                         button {
                             class: "oral-start",
                             "aria-keyshortcuts": "Enter",
-                            onclick: move |_| start(&store.read()),
                             {tx::START}
                         }
                     }

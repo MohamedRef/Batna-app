@@ -217,7 +217,7 @@ The app keeps every history it verifies (`updates/history.json`) and shows
 it in one sheet, laid out like Morphe Manager's update dialog (ideas only,
 none of its code): the installed build → the new one, how many builds that
 is and a count per kind, then a timeline with the newest build open and a
-card per kind ("اعرض الكل" past six lines). It opens from the banner's "إيه
+card per kind ("اعرض الكل" past six lines). On a phone it fills the screen under Batna's icon; GitHub (the channel's releases page) and the download or install button stay pinned at the bottom. It opens from the banner's "إيه
 الجديد؟", from the notification, and from Settings › التحديثات (also "سجل
 التغييرات": every build so far); downloading and installing happen in it
 too. At the first launch after an update it opens once by itself, listing

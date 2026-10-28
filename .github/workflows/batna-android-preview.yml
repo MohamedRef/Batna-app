@@ -15,6 +15,11 @@ name: Android preview APK
 # can't update and need an uninstall (losing data not yet synced), so the run
 # fails until someone starts it by hand with "new_keys" ticked.
 #
+# The cache holds 10 GB per repository and drops the least recently used
+# entries past that: on 2026-10-28 PR build caches pushed the signing key out
+# and run 112 made a new one, so previews before it needed a reinstall. Build
+# caches are now saved from main only (every workflow's rust-cache save-if).
+#
 # Pull-request runs never touch the cached keys: they sign with one-off keys
 # (enough to prove the APK builds, signs and passes the checks) and get a
 # read-only token. Only pushes to main and manual runs restore the keys, and
@@ -100,6 +105,7 @@ jobs:
       - uses: Swatinem/rust-cache@v2
         with:
           key: batna-android-preview
+          save-if: ${{ github.ref == 'refs/heads/main' }}
       - uses: actions/setup-java@v5
         with:
           distribution: temurin

@@ -307,8 +307,8 @@ pub enum Failure {
     Install(String),
     /// The feed needs a newer Batna: install by hand once.
     TooNew,
-    /// Preview only: CI's signing key was renewed; install the newest
-    /// preview by hand once.
+    /// Preview only: CI's update or APK signing key was renewed; install
+    /// the newest preview by hand once.
     KeyChanged,
 }
 
@@ -1014,7 +1014,7 @@ impl Updater {
             Ok(InstallState::Idle | InstallState::Cancelled) => self.set_phase(Phase::Ready(offer)),
             Ok(InstallState::Failed(why)) | Err(why) => {
                 self.update_prefs(|p| p.auto_failed = Some(offer.key()));
-                self.set_phase(Phase::Failed { offer: Some(offer), why: Failure::Install(why) });
+                self.set_phase(Phase::Failed { offer: Some(offer), why: install_failure(why) });
             }
         }
     }
@@ -1059,8 +1059,19 @@ fn install_build(path: &Path, offer: &Offer) -> Phase {
         (tx::INSTALL_CHANNEL, tx::INSTALL_CHANNEL_SUB),
     ) {
         Ok(()) => Phase::Installing(offer.clone()),
-        Err(e) => Phase::Failed { offer: Some(offer.clone()), why: Failure::Install(e) },
+        Err(e) => Phase::Failed { offer: Some(offer.clone()), why: install_failure(e) },
     }
+}
+
+/// What `UpdateInstaller.check` says when the download is signed with
+/// another key (a renewed preview key): kept in step with the Kotlin text.
+const KEY_MISMATCH: &str = "the APK isn't signed with this Batna's key";
+
+/// An install failure from Android; a signing-key mismatch is the renewed
+/// key case, which no retry fixes (one reinstall by hand does).
+#[cfg_attr(not(target_os = "android"), allow(dead_code))]
+fn install_failure(why: String) -> Failure {
+    if why.contains(KEY_MISMATCH) { Failure::KeyChanged } else { Failure::Install(why) }
 }
 
 #[cfg(target_os = "macos")]
@@ -1397,6 +1408,14 @@ mod tests {
         );
         u.retry_after = Duration::from_millis(10);
         Box::leak(Box::new(u))
+    }
+
+    #[test]
+    fn a_renewed_signing_key_is_its_own_failure() {
+        // UpdateInstaller.check's text (android/…/UpdateInstaller.kt).
+        let why = "java.lang.IllegalArgumentException: the APK isn't signed with this Batna's key";
+        assert_eq!(install_failure(why.into()), Failure::KeyChanged);
+        assert_eq!(install_failure("disk full".into()), Failure::Install("disk full".into()));
     }
 
     #[test]

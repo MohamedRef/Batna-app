@@ -193,6 +193,7 @@ object UpdateInstaller {
         val apk = pm.getPackageArchiveInfo(file.path, flags) ?: error("not an APK Android can read")
         require(apk.packageName == context.packageName) { "the APK is ${apk.packageName}, not Batna" }
         val installed = pm.getPackageInfo(context.packageName, flags)
+        // Rust matches this text (update::KEY_MISMATCH) to explain a renewed key in Arabic.
         require(signers(apk) == signers(installed) && signers(apk).isNotEmpty()) {
             "the APK isn't signed with this Batna's key"
         }

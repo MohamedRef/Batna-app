@@ -1018,7 +1018,15 @@ pub mod update {
     pub const FAILED_VERIFY: &str = "التحديث ما عداش من الفحص، فما اتثبّتش. مفيش حاجة اتغيّرت.";
     pub const FAILED_INSTALL: &str = "التثبيت ما كملش. النسخة اللي معاك شغالة زي ما هي.";
     pub const TOO_NEW: &str = "التحديث ده محتاج نسخة أحدث من باطنة. ثبّتها بإيدك مرة واحدة.";
-    pub const KEY_CHANGED: &str = "مفتاح نسخ التجربة اتغيّر. ثبّت آخر نسخة تجربة بإيدك مرة واحدة.";
+    pub const KEY_CHANGED: &str = "مفتاح نسخ التجربة اتغيّر، فالنسخة الجديدة مش هتتركّب فوق دي.";
+    /// What to do about it, once, without losing anything.
+    pub const KEY_CHANGED_STEPS: [&str; 4] = [
+        "احفظ نسخة من الإعدادات › بياناتك، واختار «احفظها في Downloads أو Drive».",
+        "امسح باطنة من الموبايل.",
+        "نزّل آخر نسخة تجربة من الزرار ده وركّبها.",
+        "افتحها واسترجع النسخة من الإعدادات › بياناتك.",
+    ];
+    pub const GET_PREVIEW: &str = "نزّل آخر نسخة تجربة";
     pub const WAITING_WIFI: &str = "هينزّلها لوحده أول ما تبقى على واي فاي.";
     pub const LATER: &str = "بعدين";
     pub const WHATS_NEW: &str = "الجديد";

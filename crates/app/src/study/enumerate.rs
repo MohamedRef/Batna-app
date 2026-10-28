@@ -19,28 +19,37 @@ pub fn EnumerateItem(item: Item, on_grade: EventHandler<Grade>) -> Element {
     let open = move |_| ticks.set(Some(recalled(&pts, &typed.read())));
 
     let got = ticks.read().as_ref().map(|t| t.iter().filter(|x| **x).count());
+    let wrote = typed.read().trim().to_string();
+    // Tablet and Mac: the prompt and the recall on one side, the points on the other.
     rsx! {
-        p { class: "st-prompt", lang: "en", dir: "ltr", "{prompt}" }
-        p { class: "muted small", "{tx::ENUM_GOAL_A} {total} {tx::ENUM_GOAL_B} {pass} {tx::ENUM_GOAL_C}" }
-        match got {
-            None => rsx! {
-                textarea {
-                    class: "st-recall",
-                    lang: "en",
-                    dir: "ltr",
-                    rows: "5",
-                    placeholder: tx::ENUM_PLACEHOLDER,
-                    value: "{typed}",
-                    oninput: move |e| typed.set(e.value()),
-                }
-                div { class: "st-actions",
-                    button { class: "st-primary", onclick: open, {tx::SHOW_POINTS} }
+        crate::desk::Panes {
+            primary: rsx! {
+                p { class: "st-prompt", lang: "en", dir: "ltr", "{prompt}" }
+                p { class: "muted small", "{tx::ENUM_GOAL_A} {total} {tx::ENUM_GOAL_B} {pass} {tx::ENUM_GOAL_C}" }
+                if got.is_none() {
+                    textarea {
+                        class: "st-recall",
+                        lang: "en",
+                        dir: "ltr",
+                        rows: "5",
+                        placeholder: tx::ENUM_PLACEHOLDER,
+                        value: "{typed}",
+                        oninput: move |e| typed.set(e.value()),
+                    }
+                    div { class: "st-actions",
+                        button { class: "st-primary", "aria-keyshortcuts": "Enter", onclick: open, {tx::SHOW_POINTS} }
+                    }
+                } else if !wrote.is_empty() {
+                    section { class: "st-mine-col",
+                        h3 { {tx::WHAT_I_WROTE} }
+                        p { lang: "en", dir: "ltr", class: "st-pre", "{wrote}" }
+                    }
                 }
             },
-            Some(n) => rsx! {
+            secondary: got.map(|n| rsx! {
                 p { class: "muted small",
                     {tx::TICK_WHAT_YOU_GOT}
-                    if !typed.read().trim().is_empty() {
+                    if !wrote.is_empty() {
                         " {tx::PRE_TICKED}"
                     }
                 }
@@ -68,14 +77,8 @@ pub fn EnumerateItem(item: Item, on_grade: EventHandler<Grade>) -> Element {
                     "{n} {tx::OF} {total} · "
                     if n >= pass { {tx::ENUM_PASS} } else { "{tx::ENUM_SHORT_A} {pass - n} {tx::ENUM_SHORT_B}" }
                 }
-                if !typed.read().trim().is_empty() {
-                    details { class: "st-mine",
-                        summary { {tx::WHAT_I_WROTE} }
-                        p { lang: "en", dir: "ltr", "{typed}" }
-                    }
-                }
                 GradeRow { item_id: item.id.clone(), suggested: Some(enumerate_grade(n, total, pass)), on_grade }
-            },
+            }),
         }
     }
 }

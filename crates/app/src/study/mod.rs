@@ -123,10 +123,16 @@ pub fn Study() -> Element {
     let ready = ready_lectures();
     let chosen = use_signal(|| ready.iter().map(|l| l.lecture.clone()).collect::<BTreeSet<String>>());
     let topics = use_signal(HashSet::<String>::new);
-    let mut minutes = use_signal(|| 10u32);
+    let mut minutes = use_signal(crate::onboarding::session_minutes);
     let mut session = use_signal(Session::default);
     let mut phase = use_signal(|| Phase::Setup);
     let mut started = use_signal(Instant::now);
+    // The calm end-of-session tone, however the session ended.
+    use_effect(move || {
+        if phase() == Phase::Summary && session.peek().summary().items > 0 {
+            crate::sounds::play(crate::sounds::Cue::SessionEnd);
+        }
+    });
 
     let mut begin = {
         let store = store.clone();
@@ -216,6 +222,12 @@ pub fn Study() -> Element {
                         started.set(Instant::now());
                         if session.read().is_done() {
                             phase.set(Phase::Summary);
+                        } else {
+                            crate::sounds::play(if grade == Grade::Again {
+                                crate::sounds::Cue::Wrong
+                            } else {
+                                crate::sounds::Cue::Right
+                            });
                         }
                     };
                     rsx! {
@@ -225,7 +237,12 @@ pub fn Study() -> Element {
                                 div { class: "st-bar-fill", style: "inline-size: {pos * 100 / len.max(1)}%" }
                             }
                             span { class: "muted small", "{pos + 1} {tx::OF} {len}" }
-                            button { class: "st-link", onclick: move |_| phase.set(Phase::Summary), {tx::END} }
+                            button {
+                                class: "st-link",
+                                "aria-keyshortcuts": "Escape",
+                                onclick: move |_| phase.set(Phase::Summary),
+                                {tx::END}
+                            }
                         }
                         // Keyed so every item (and a retry of the same one) starts fresh.
                         for (item , topic_title , on_grade) in std::iter::once((item, topic_title, on_grade)) {

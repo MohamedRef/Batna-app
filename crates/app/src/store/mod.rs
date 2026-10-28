@@ -296,7 +296,6 @@ impl Store {
 
     /// A setting for this device only (never synced, never imported), kept
     /// in `meta` under `local.<key>`.
-    #[allow(dead_code)] // reminders and recap (chunk 20)
     pub fn local_setting<T: DeserializeOwned>(&self, key: &str) -> Option<T> {
         let conn = self.conn.lock().unwrap();
         conn.query_row("SELECT value FROM meta WHERE key = ?1", [format!("local.{key}")], |r| {
@@ -308,7 +307,6 @@ impl Store {
         .and_then(|v| serde_json::from_str(&v).ok())
     }
 
-    #[allow(dead_code)] // reminders and recap (chunk 20)
     pub fn put_local_setting<T: Serialize>(&self, key: &str, value: &T) -> Result<()> {
         self.conn.lock().unwrap().execute(
             "INSERT INTO meta (key, value) VALUES (?1, ?2)

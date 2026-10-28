@@ -7,7 +7,9 @@ mod session;
 
 use std::time::{Duration, Instant, SystemTime, UNIX_EPOCH};
 
-use batna_core::review::{Grade, Origin, ReviewEvent};
+use std::collections::BTreeSet;
+
+use batna_core::review::{Grade, Origin, ReviewEvent, StudyStoreHandle};
 use dioxus::prelude::*;
 
 use crate::content::Library;
@@ -54,11 +56,10 @@ enum Phase {
     Answer,
 }
 
-// Kept across screen changes, for this run of the app. Chunk 3's store keeps
-// the review events for good; until it lands they stay here.
+// Kept across screen changes, for this run of the app. Ratings go to the
+// review store (FSRS), like the study player's.
 static SETTINGS: GlobalSignal<Settings> = Signal::global(Settings::default);
 static SESSION: GlobalSignal<Option<Session>> = Signal::global(|| None);
-static EVENTS: GlobalSignal<Vec<ReviewEvent>> = Signal::global(Vec::new);
 
 #[component]
 pub fn Oral() -> Element {
@@ -74,28 +75,43 @@ pub fn Oral() -> Element {
     }
 }
 
-fn start() {
+/// The review store the app provides (FSRS, Mohamed's ✓/✎/✗).
+fn use_store() -> CopyValue<StudyStoreHandle> {
+    use_hook(|| CopyValue::new(consume_context::<StudyStoreHandle>()))
+}
+
+/// Askable items, minus what Mohamed marked wrong, with his edits applied.
+fn pool(store: &StudyStoreHandle, lecture: Option<&str>) -> Vec<session::Prompt> {
+    let s = store.0.borrow();
+    session::pool_with(Library::get().lectures.values(), lecture, |item| {
+        (!s.is_hidden(&item.id)).then(|| s.effective(item))
+    })
+}
+
+fn start(store: &StudyStoreHandle) {
     let settings = SETTINGS.peek().clone();
-    let lib = Library::get();
-    let pool = session::pool(lib.lectures.values(), settings.lecture.as_deref());
+    let pool = pool(store, settings.lecture.as_deref());
+    let due: BTreeSet<String> = store.0.borrow().due(now_ms()).into_iter().collect();
     let seed = SystemTime::now().duration_since(UNIX_EPOCH).map_or(1, |d| d.as_nanos() as u64);
-    let mut s = Session::new(pool, &Pick { lecture: settings.lecture, size: settings.size, seed });
+    let mut s = Session::new(pool, &Pick { lecture: settings.lecture, size: settings.size, seed, due });
     s.advance();
     *SESSION.write() = Some(s);
 }
 
 #[component]
 fn Setup() -> Element {
+    let store = use_store();
     let settings = SETTINGS.read().clone();
     let lib = Library::get();
+    let all = pool(&store.read(), None);
     let lectures: Vec<(String, String)> = lib
         .index
         .lectures
         .iter()
-        .filter(|e| lib.lectures.get(&e.id).is_some_and(|l| !session::pool([l], None).is_empty()))
+        .filter(|e| all.iter().any(|p| p.lecture == e.id))
         .map(|e| (e.id.clone(), e.title.clone()))
         .collect();
-    let available = session::pool(lib.lectures.values(), settings.lecture.as_deref()).len();
+    let available = all.iter().filter(|p| settings.lecture.as_ref().is_none_or(|l| *l == p.lecture)).count();
 
     rsx! {
         section { class: "card oral-setup",
@@ -103,7 +119,12 @@ fn Setup() -> Element {
             p { class: "muted", {tx::INTRO} }
             if available > 0 {
                 p { class: "muted small", "{available} {tx::AVAILABLE}" }
-                button { class: "oral-start", onclick: move |_| start(), {tx::START} }
+                button {
+                    class: "oral-start",
+                    "aria-keyshortcuts": "Enter",
+                    onclick: move |_| start(&store.read()),
+                    {tx::START}
+                }
             }
         }
         if lectures.is_empty() {
@@ -204,24 +225,17 @@ enum Step {
 
 #[component]
 fn Runner() -> Element {
+    let store = use_store();
     let mut phase = use_signal(|| Phase::Asking);
     let no_voice = use_signal(|| false);
     // Bumped by every new step, so a stale timer or voice stops on its own.
     let mut run = use_signal(|| 0u64);
     let mut asked_at = use_signal(Instant::now);
-    // Keys work after a click too: a rating button vanishes with its
-    // question, so focus goes back to the session for each step.
-    let mut root = use_signal(|| None::<std::rc::Rc<MountedData>>);
 
     let mut drive = move |step: Step| {
         let id = *run.peek() + 1;
         run.set(id);
         tts::stop();
-        if let Some(el) = root.peek().clone() {
-            spawn(async move {
-                let _ = el.set_focus(true).await;
-            });
-        }
         let Some(entry) = SESSION.peek().as_ref().and_then(|s| s.current.clone()) else { return };
         let Settings { think, voice, rate, auto_continue, .. } = SETTINGS.peek().clone();
         let rate = tts::RATES[rate.min(tts::RATES.len() - 1)];
@@ -250,7 +264,7 @@ fn Runner() -> Element {
                 tokio::time::sleep(AUTO_WAIT).await;
                 if live() {
                     // Moving on changes the session, and the effect below asks the next one.
-                    rate_current(None, *asked_at.peek());
+                    rate_current(&store.read(), None, *asked_at.peek());
                 }
             }
         });
@@ -288,8 +302,12 @@ fn Runner() -> Element {
             let revealed = revealed_now();
             match remote {
                 Remote::End => end_session(),
-                Remote::Again if revealed => rate_current(Some(Grade::Again), *asked_at.peek()),
-                Remote::Main | Remote::Good if revealed => rate_current(Some(Grade::Good), *asked_at.peek()),
+                Remote::Again if revealed => {
+                    rate_current(&store.read(), Some(Grade::Again), *asked_at.peek())
+                }
+                Remote::Main | Remote::Good if revealed => {
+                    rate_current(&store.read(), Some(Grade::Good), *asked_at.peek())
+                }
                 Remote::Main | Remote::Good => drive(Step::Reveal),
                 Remote::Again => {}
             }
@@ -307,7 +325,7 @@ fn Runner() -> Element {
     let lecture = p.lecture.rsplit('.').next().unwrap_or(&p.lecture);
 
     let rate = move |grade: Grade| {
-        rate_current(Some(grade), *asked_at.peek());
+        rate_current(&store.read(), Some(grade), *asked_at.peek());
         tts::stop();
     };
 
@@ -315,17 +333,6 @@ fn Runner() -> Element {
         div {
             class: "oral-run",
             "data-phase": if revealed { "answer" } else { "ask" },
-            tabindex: "0",
-            onmounted: move |e| async move {
-                let _ = e.set_focus(true).await;
-                root.set(Some(e.data()));
-            },
-            onkeydown: move |e| match e.key() {
-                Key::Character(c) if c == " " && !revealed => drive(Step::Reveal),
-                Key::Character(c) if c == "1" && revealed => rate(Grade::Again),
-                Key::Character(c) if (c == "2" || c == " ") && revealed => rate(Grade::Good),
-                _ => {}
-            },
             header { class: "oral-top",
                 span { class: "muted small", "{tx::LEFT} " bdi { "{left}" } }
                 if entry.follow_up {
@@ -334,9 +341,11 @@ fn Runner() -> Element {
                 if entry.again {
                     span { class: "chip", {tx::AGAIN_BADGE} }
                 }
-                span { class: "muted small", bdi { "{lecture}" } " · {tx::PAGE} " bdi { "{p.page}" } }
+                span { class: "muted small", bdi { "{lecture}" } }
+                crate::hover::BookPage { label: tx::PAGE, page: p.page, quote: p.quote.clone() }
                 button {
                     class: "oral-end",
+                    "aria-keyshortcuts": "Escape",
                     onclick: move |_| end_session(),
                     {tx::END}
                 }
@@ -344,62 +353,77 @@ fn Runner() -> Element {
             if *no_voice.read() {
                 p { class: "note small", {tx::NO_VOICE} }
             }
-            div { class: "oral-panes",
-                section { class: "card oral-question",
-                    h2 { class: "muted small", {tx::LISTEN} }
-                    div { class: "en", dir: "ltr", lang: "en",
-                        for (i, line) in p.question.iter().enumerate() {
-                            p { key: "{i}", class: if i + 1 == p.question.len() { "oral-ask" } else { "" }, "{line}" }
+            crate::desk::Panes {
+                primary: rsx! {
+                    section { class: "card oral-question",
+                        h2 { class: "muted small", {tx::LISTEN} }
+                        div { class: "en", dir: "ltr", lang: "en",
+                            for (i, line) in p.question.iter().enumerate() {
+                                p { key: "{i}", class: if i + 1 == p.question.len() { "oral-ask" } else { "" }, "{line}" }
+                            }
+                        }
+                        if let Some((pass, of)) = p.pass {
+                            span { class: "chip", "{tx::PASS} " bdi { "{pass}" } " {tx::OF} " bdi { "{of}" } }
                         }
                     }
-                    if let Some((pass, of)) = p.pass {
-                        span { class: "chip", "{tx::PASS} " bdi { "{pass}" } " {tx::OF} " bdi { "{of}" } }
-                    }
-                }
-                match phase_now {
-                    Phase::Asking => rsx! {
-                        section { class: "oral-timer", "aria-live": "polite",
-                            span { class: "oral-status", {tx::LISTEN} }
-                        }
-                    },
-                    Phase::Thinking(n) | Phase::WhatElse(n) => {
-                        let what_else = matches!(phase_now, Phase::WhatElse(_));
-                        let full = if what_else { (SETTINGS.peek().think / 2).max(THINK_MIN) } else { SETTINGS.peek().think };
-                        let pct = 100 * n / full.max(1);
-                        rsx! {
+                    match phase_now {
+                        Phase::Asking => rsx! {
                             section { class: "oral-timer", "aria-live": "polite",
-                                div { class: "oral-ring", style: "--p: {pct}", span { "{n}" } }
-                                span { class: "oral-status",
-                                    if what_else { {tx::WHAT_ELSE} } else { {tx::THINKING} }
+                                span { class: "oral-status", {tx::LISTEN} }
+                            }
+                        },
+                        Phase::Thinking(n) | Phase::WhatElse(n) => {
+                            let what_else = matches!(phase_now, Phase::WhatElse(_));
+                            let full = if what_else { (SETTINGS.peek().think / 2).max(THINK_MIN) } else { SETTINGS.peek().think };
+                            let pct = 100 * n / full.max(1);
+                            rsx! {
+                                section { class: "oral-timer", "aria-live": "polite",
+                                    div { class: "oral-ring", style: "--p: {pct}", span { "{n}" } }
+                                    span { class: "oral-status",
+                                        if what_else { {tx::WHAT_ELSE} } else { {tx::THINKING} }
+                                    }
                                 }
+                            }
+                        }
+                        Phase::Answer => rsx! {},
+                    }
+                },
+                secondary: revealed.then(|| rsx! {
+                    section { class: "card oral-answer",
+                        h2 { class: "small", {tx::ANSWER} }
+                        ul { class: "en", dir: "ltr", lang: "en",
+                            for (i, line) in p.answer.iter().enumerate() {
+                                li { key: "{i}", "{line}" }
                             }
                         }
                     }
-                    Phase::Answer => rsx! {
-                        section { class: "card oral-answer",
-                            h2 { class: "small", {tx::ANSWER} }
-                            ul { class: "en", dir: "ltr", lang: "en",
-                                for (i, line) in p.answer.iter().enumerate() {
-                                    li { key: "{i}", "{line}" }
-                                }
-                            }
-                        }
-                    },
-                }
+                }),
+            }
+            if revealed {
+                crate::verify::VerifyBar { item_id: p.item_id.clone() }
             }
             div { class: "oral-actions",
                 if revealed {
-                    button { class: "oral-big again", onclick: move |_| rate(Grade::Again),
+                    button {
+                        class: "oral-big again",
+                        "aria-keyshortcuts": "1",
+                        onclick: move |_| rate(Grade::Again),
                         span { class: "big-label", {tx::AGAIN} }
                         span { class: "big-hint", {tx::AGAIN_HINT} }
                     }
-                    button { class: "oral-big good", onclick: move |_| rate(Grade::Good),
+                    button {
+                        class: "oral-big good",
+                        "aria-keyshortcuts": "3 2 Space",
+                        onclick: move |_| rate(Grade::Good),
                         span { class: "big-label", {tx::GOOD} }
                         span { class: "big-hint", {tx::GOOD_HINT} }
                     }
                 } else {
                     button { class: "oral-small", onclick: move |_| drive(Step::Ask), {tx::REPEAT} }
-                    button { class: "oral-big show", onclick: move |_| drive(Step::Reveal),
+                    button {
+                        class: "oral-big show",
+                        "aria-keyshortcuts": "Space Enter",
+                        onclick: move |_| drive(Step::Reveal),
                         span { class: "big-label", {tx::SHOW} }
                     }
                 }
@@ -451,6 +475,10 @@ fn spoken_question(entry: &Entry) -> String {
     format!("{lead}{}", entry.prompt.spoken_question())
 }
 
+fn now_ms() -> i64 {
+    SystemTime::now().duration_since(UNIX_EPOCH).map_or(0, |d| d.as_millis() as i64)
+}
+
 /// Stops early; the summary shows what was done.
 fn end_session() {
     tts::stop();
@@ -460,17 +488,16 @@ fn end_session() {
 }
 
 /// Records the rating (none when heard without one) and moves on.
-fn rate_current(grade: Option<Grade>, asked_at: Instant) {
+fn rate_current(store: &StudyStoreHandle, grade: Option<Grade>, asked_at: Instant) {
     let mut guard = SESSION.write();
     let Some(s) = guard.as_mut() else { return };
     let Some(entry) = &s.current else { return };
     if let Some(grade) = grade {
-        let at_ms = SystemTime::now().duration_since(UNIX_EPOCH).map_or(0, |d| d.as_millis() as i64);
-        EVENTS.write().push(ReviewEvent {
+        store.0.borrow_mut().record(ReviewEvent {
             item_id: entry.prompt.item_id.clone(),
             grade,
             origin: Origin::Oral,
-            at_ms,
+            at_ms: now_ms(),
             took_ms: asked_at.elapsed().as_millis().min(u32::MAX as u128) as u32,
         });
     }
@@ -480,6 +507,7 @@ fn rate_current(grade: Option<Grade>, asked_at: Instant) {
 
 #[component]
 fn Summary() -> Element {
+    let store = use_store();
     let session = SESSION.read();
     let Some(s) = session.as_ref() else { return rsx! {} };
     let t = s.tally.clone();
@@ -512,7 +540,10 @@ fn Summary() -> Element {
         }
         div { class: "oral-actions",
             button { class: "oral-small", onclick: move |_| *SESSION.write() = None, {tx::BACK} }
-            button { class: "oral-big good", onclick: move |_| start(),
+            button {
+                class: "oral-big good",
+                "aria-keyshortcuts": "Enter",
+                onclick: move |_| start(&store.read()),
                 span { class: "big-label", {tx::ANOTHER} }
             }
         }

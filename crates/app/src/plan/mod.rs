@@ -13,7 +13,7 @@ use crate::stats::{StudyData, charts, lecture_number};
 /// The planner settings: a synced (LWW) setting in the review store, so the
 /// phone and the tablet share one plan. BATNA_PLAN_EXAM=2027-01-20 presets
 /// the exam day instead (previews and screenshots; nothing is saved then).
-static SETTINGS: GlobalSignal<PlanSettings> = Signal::global(|| {
+pub(crate) static SETTINGS: GlobalSignal<PlanSettings> = Signal::global(|| {
     if let Some(exam) = std::env::var("BATNA_PLAN_EXAM").ok().and_then(|v| Day::parse(&v)) {
         return PlanSettings { exam: Some(exam), ..PlanSettings::default() };
     }
@@ -23,7 +23,7 @@ static SETTINGS: GlobalSignal<PlanSettings> = Signal::global(|| {
 const KEY: &str = "plan";
 
 /// Best effort: if the store can't write, the plan still holds for this run.
-fn save(settings: &PlanSettings) {
+pub(crate) fn save(settings: &PlanSettings) {
     if std::env::var_os("BATNA_PLAN_EXAM").is_none() {
         let _ = crate::store::shared().put_setting(KEY, settings);
     }

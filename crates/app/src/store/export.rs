@@ -72,7 +72,8 @@ impl Store {
 
         let mut tables = Map::new();
         let mut total = 0u64;
-        for name in names.into_iter().filter(|n| !is_secret_name(n)) {
+        // The sync outbox is this device's queue, not data: restore re-reads rows.
+        for name in names.into_iter().filter(|n| !is_secret_name(n) && n != "sync_outbox") {
             let mut stmt = conn.prepare(&format!("SELECT * FROM \"{}\"", name.replace('"', "\"\"")))?;
             let columns: Vec<String> = stmt.column_names().into_iter().map(String::from).collect();
             let keep: Vec<bool> = columns.iter().map(|c| !is_secret_name(c)).collect();

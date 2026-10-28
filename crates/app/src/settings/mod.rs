@@ -10,6 +10,8 @@
 mod about;
 mod data;
 mod look;
+#[cfg(all(feature = "desktop", not(target_os = "android")))]
+pub mod menu;
 
 use dioxus::prelude::*;
 
@@ -20,23 +22,49 @@ const SETTINGS_CSS: &str = include_str!("../../assets/settings.css");
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
 pub enum Section {
     Study,
+    Reminders,
     Sync,
     Look,
+    /// Pen hover and the sidebar, on Android (the Tab S11, the S24 Ultra).
+    Tablet,
+    /// Mouse hover, the sidebar and the keyboard, on the Mac and desktops.
+    Mac,
     Data,
     About,
 }
 
 impl Section {
-    pub const ALL: [Self; 5] = [Self::Study, Self::Sync, Self::Look, Self::Data, Self::About];
+    pub const ALL: [Self; 8] = [
+        Self::Study,
+        Self::Reminders,
+        Self::Sync,
+        Self::Look,
+        Self::Tablet,
+        Self::Mac,
+        Self::Data,
+        Self::About,
+    ];
 
     /// Stable id, for `BATNA_OPEN_SETTINGS=<id>` previews.
     pub fn id(self) -> &'static str {
         match self {
             Self::Study => "study",
+            Self::Reminders => "reminders",
             Self::Sync => "sync",
             Self::Look => "look",
+            Self::Tablet => "tablet",
+            Self::Mac => "mac",
             Self::Data => "data",
             Self::About => "about",
+        }
+    }
+
+    /// Only the sections that apply on this device are listed.
+    pub fn applies(self) -> bool {
+        match self {
+            Self::Tablet => cfg!(target_os = "android"),
+            Self::Mac => !cfg!(target_os = "android"),
+            _ => true,
         }
     }
 
@@ -47,8 +75,11 @@ impl Section {
     fn title(self) -> &'static str {
         match self {
             Self::Study => crate::i18n::study_settings::SECTION,
+            Self::Reminders => crate::i18n::remind::SECTION,
             Self::Sync => crate::i18n::cloud::SECTION,
             Self::Look => tx::LOOK,
+            Self::Tablet => crate::i18n::desk::TABLET,
+            Self::Mac => crate::i18n::desk::MAC,
             Self::Data => tx::DATA,
             Self::About => tx::ABOUT,
         }
@@ -57,8 +88,11 @@ impl Section {
     fn summary(self) -> &'static str {
         match self {
             Self::Study => crate::i18n::study_settings::SECTION_SUB,
+            Self::Reminders => crate::i18n::remind::SECTION_SUB,
             Self::Sync => crate::i18n::cloud::SECTION_SUB,
             Self::Look => tx::LOOK_SUB,
+            Self::Tablet => crate::i18n::desk::TABLET_SUB,
+            Self::Mac => crate::i18n::desk::MAC_SUB,
             Self::Data => tx::DATA_SUB,
             Self::About => tx::ABOUT_SUB,
         }
@@ -171,7 +205,7 @@ pub fn SettingsSheet() -> Element {
             }
             div { class: "settings-body",
                 nav { class: "settings-sections", aria_label: tx::SECTIONS,
-                    for s in Section::ALL {
+                    for s in Section::ALL.into_iter().filter(|s| s.applies()) {
                         button {
                             key: "{s.id()}",
                             aria_current: if current == s { "true" } else { "false" },
@@ -192,9 +226,13 @@ pub fn SettingsSheet() -> Element {
 #[component]
 fn SectionView(section: Section) -> Element {
     match section {
-        Section::Study => rsx! { crate::today::StudySection {} },
+        Section::Study => {
+            rsx! { crate::today::StudySection {} crate::sounds::SoundSection {} crate::onboarding::ReopenCard {} }
+        }
+        Section::Reminders => rsx! { crate::reminders::RemindSection {} },
         Section::Sync => rsx! { crate::cloud::SyncSection {} },
         Section::Look => rsx! { look::LookSection {} },
+        Section::Tablet | Section::Mac => rsx! { crate::desk::DeviceSettings { section } },
         Section::Data => rsx! { data::DataSection {} },
         Section::About => rsx! { about::AboutSection {} },
     }

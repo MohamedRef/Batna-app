@@ -48,7 +48,7 @@ pub fn open() -> Result<(), String> {
 pub fn state() -> DocState {
     #[cfg(target_os = "android")]
     return android::state().unwrap_or_else(|e| {
-        eprintln!("Documents: {e}");
+        crate::diag::report!("Documents: {e}");
         DocState::Failed
     });
     #[cfg(not(target_os = "android"))]

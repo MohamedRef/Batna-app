@@ -206,8 +206,13 @@ jobs:
         run: |
           # Publish only when this commit is newer than the one the release
           # carries, so a run that finishes after a newer one never rolls the
-          # release back.
-          published="$(gh api "repos/$GH_REPO/git/refs/tags/$TAG" --jq .object.sha 2>/dev/null || true)"
+          # release back. Before the first publish the tag doesn't exist: gh
+          # then exits non-zero but still prints the 404 body on stdout, so
+          # only a successful call that returns a commit SHA counts.
+          if ! published="$(gh api "repos/$GH_REPO/git/refs/tags/$TAG" --jq .object.sha 2>/dev/null)" \
+            || ! [[ "$published" =~ ^[0-9a-f]{40}$ ]]; then
+            published=""
+          fi
           if [ -n "$published" ]; then
             status="$(gh api "repos/$GH_REPO/compare/$published...$GITHUB_SHA" --jq .status)"
             if [ "$status" != "ahead" ]; then

@@ -469,6 +469,23 @@ fn script_runs(text: &str) -> Vec<(String, bool)> {
         }
         k = end;
     }
+    // A bracket pair goes into an isolate only when all of it does: in
+    // "(black أو brown)" the brackets stay Arabic, so they mirror right.
+    let mut open: Vec<usize> = Vec::new();
+    for k in 0..chars.len() {
+        match chars[k] {
+            '(' | '[' => open.push(k),
+            ')' | ']' => {
+                if let Some(o) = open.pop()
+                    && resolved[o..=k].iter().any(|r| *r != C::Latin)
+                {
+                    resolved[o] = C::Arabic;
+                    resolved[k] = C::Arabic;
+                }
+            }
+            _ => {}
+        }
+    }
     let mut out: Vec<(String, bool)> = Vec::new();
     for (i, &c) in chars.iter().enumerate() {
         let latin = resolved[i] == C::Latin;
@@ -823,6 +840,10 @@ mod tests {
         assert_eq!(latin_runs("لو FIB-4 < 1.3 ثم كده"), ["FIB-4 < 1.3"]);
         assert_eq!(latin_runs("الـ platelets ≥ 150 (يعني"), ["platelets ≥ 150"]);
         assert_eq!(latin_runs("المرحلة (F1) دي"), ["(F1)"]);
+        assert_eq!(latin_runs("لو عدّى 12 h فكّر"), ["12 h"]);
+        assert_eq!(latin_runs("حوالي 2 mm/yr بس"), ["2 mm/yr"]);
+        assert_eq!(latin_runs("الـ 25(OH)D واطي"), ["25(OH)D"]);
+        assert_eq!(latin_runs("لونه (black أو brown) كده"), ["black", "brown"]);
         assert_eq!(latin_runs("(الـ P في PATCH) كده"), ["P", "PATCH"]);
     }
 

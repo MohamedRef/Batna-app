@@ -68,6 +68,7 @@ const SHEET_CSS: &str = r#"
 .us-arrow svg { inline-size: 1.25rem; block-size: 1.25rem; }
 [dir="rtl"] .us-arrow svg { transform: scaleX(-1); }
 .us-count { margin: 0; font-weight: 700; font-size: 1.0625rem; }
+.us-content-line { margin: 0; color: var(--muted); font-variant-numeric: tabular-nums; }
 .us-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
 .us-pill { display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.55rem 1.1rem;
   border-radius: 999px; font-size: 0.9375rem; font-weight: 600;
@@ -311,8 +312,9 @@ fn today() -> i64 {
     (super::now_ms() as i64).div_euclid(86_400_000)
 }
 
-/// The sheet; mounted once in the shell. Opens by itself once after an
-/// update that brought something to tell.
+/// The sheet; mounted once in the shell. Opens by itself once after an app
+/// update that brought something to tell; after a content-only update a
+/// quiet card on Today offers it instead (`view::ContentNote`, #336).
 #[component]
 pub fn UpdateSheet() -> Element {
     let UpdateSheetNav(mut mode) = use_context::<UpdateSheetNav>();
@@ -328,7 +330,7 @@ pub fn UpdateSheet() -> Element {
         let from = status
             .read()
             .as_ref()
-            .filter(|s| !s.whats_new().is_empty())
+            .filter(|s| !s.whats_new().is_empty() && !s.content_only_news())
             .and_then(|s| s.prefs.whats_new_from.clone());
         if from.is_some() && *opened_after_update.peek() != from && mode.peek().is_none() {
             opened_after_update.set(from);
@@ -361,7 +363,12 @@ pub fn UpdateSheet() -> Element {
         _ => None,
     };
     let current = s.current();
-    let this_label = label(&s.version, s.shown_build());
+    // The app build he runs; a content-only update on top is named apart
+    // ("بناء 40 · محتوى 45"), so the sheet and Settings agree (#336).
+    let this_label = label(&s.version, s.build);
+    let content_line =
+        s.content_ahead().map(|c| format!("{} {} · {} {c}", tx::BUILD, s.build, tx::CONTENT_SHORT));
+    let content_news = s.content_only_news();
     let latest_key = s.history.first().map(BuildChanges::key);
 
     // What the timeline shows first, the jump the summary names, and what
@@ -390,6 +397,15 @@ pub fn UpdateSheet() -> Element {
             let to = offer.as_ref().map(|o| o.label());
             (head.to_owned(), None, top, Some(this_label.clone()), to, earlier)
         }
+        SheetMode::Updated if content_news => (
+            // Not a new version: no jump, the content line says where he is.
+            tx::CONTENT_UPDATED_TITLE.to_owned(),
+            Some(tx::CONTENT_UPDATED_SUB.to_owned()),
+            s.whats_new(),
+            None,
+            None,
+            Vec::new(),
+        ),
         SheetMode::Updated => {
             let top = s.whats_new();
             let from = s.prefs.whats_new_from.as_deref().map(|k| {
@@ -490,6 +506,9 @@ pub fn UpdateSheet() -> Element {
                 }
                 if m != SheetMode::History && (from_label.is_some() || !pills.is_empty() || progress.is_some()) {
                     div { class: "us-summary",
+                        if let Some(c) = content_line.clone().filter(|_| m == SheetMode::Updated) {
+                            p { class: "us-content-line", "data-badge": "content", "{c}" }
+                        }
                         if let (Some(f), Some(t)) = (from_label.clone(), to_label.clone()) {
                             {
                                 let (f, t) = jump_labels(&f, &t);

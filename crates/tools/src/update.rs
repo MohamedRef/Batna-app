@@ -8,6 +8,7 @@
 //!                 --asset PLATFORM=PATH … [--notes-en T] [--notes-ar-eg T] [--out DIR]
 //!                 [--previous FEED/update.json] [--changes] [--carry PLATFORM …]
 //! update changes [--since COMMIT]          what the next build's "what's new" says
+//! update changes --gate BASE               fails unless HEAD adds a line (CI, #320)
 //! update channels [--version V]             the channels a version is published on
 //! update sign DIR [--public-key FILE]       secret from BATNA_UPDATE_SECRET
 //! update verify DIR [--public-key FILE]
@@ -169,7 +170,11 @@ fn run_inner(root: &Path, args: &[String]) -> Res<String> {
         Some("changes") => {
             let n = changes::check_all(root)?;
             let mut out = format!("{n} file(s) in {}/ check out", changes::DIR);
-            for c in changes::collect(root, flag(args, "--since"))? {
+            let found = match flag(args, "--gate") {
+                Some(base) => changes::gate(root, base)?,
+                None => changes::collect(root, flag(args, "--since"))?,
+            };
+            for c in found {
                 out.push_str(&format!("\n{:?}\t{}\t{}", c.kind, c.text.ar_eg, c.text.en));
             }
             Ok(out)

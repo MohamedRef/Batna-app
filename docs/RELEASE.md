@@ -127,11 +127,13 @@ preview feed is under `content/index.yaml`, `content/hb/`, `content/lessons/`,
 `changes/`, `docs/`, a top-level `.md` or a `crates/app/**/*.css` file, CI
 builds no APK: `batna-tools update manifest --carry android-arm64` keeps the
 feed's APK entry as it is (same file, its own `build`), and only the pack is
-new. Apps compare an asset's own `build`, so nothing is offered for install;
+new; `batna-tools validate` runs before the pack is built. Apps compare an asset's own `build`, so nothing is offered for install;
 the pack is downloaded in the background and switched to live once Mohamed
-is between sessions (the calm moments a quiet install waits for), and
-"What's new" opens once with that update's `changes/` lines, marked as a
-content update. The glossary is built into the app, so a glossary change is
+is between sessions (the calm moments a quiet install waits for). The sheet
+doesn't open by itself for it: a quiet card on Today names the first change
+and opens "What's new" (titled "تحديث محتوى") on a tap. Settings and the
+sheet show the app build and the content apart ("بناء 40 · المحتوى من 45").
+Open screens and the review catalog follow the new pack. The glossary is built into the app, so a glossary change is
 a full build.
 
 ### Keys
@@ -208,7 +210,9 @@ The Mac gets the same notification once UNUserNotificationCenter lands
 (Batna-app#50).
 
 **What's new.** Every pull request adds or extends
-`changes/<topic>.yaml` (CI fails one that doesn't), one line per change, in Egyptian Arabic (`en`
+`changes/<topic>.yaml` (CI fails one that adds no line: `batna-tools update
+changes --gate HEAD^1` compares the merge commit with its own base, and a
+comment or whitespace edit doesn't count), one line per change, in Egyptian Arabic (`en`
 optional), each `new`, `improved` or `fixed`:
 
 ```yaml
@@ -222,7 +226,7 @@ a feed is built (CI for `batna-preview`, `just publish-update` for releases),
 `batna-tools update manifest --previous <current update.json> --changes`
 gathers the files added since the commit the feed carries now, one pull
 request at a time, plus the lines a pull request appended to an existing
-file. A commit with no file (pushed straight to main, or merged before the
+file (a fragment that is moved or renamed keeps its old lines old). A commit with no file (pushed straight to main, or merged before the
 check) is looked up by title in `changes/retro/titles.yaml`, which also
 rewrites the English-only lines older feeds carry; failing that it falls
 back to its title in English, and titles starting with CI, docs, refactor,

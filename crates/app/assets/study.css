@@ -25,6 +25,16 @@
 .st-start { align-self: stretch; }
 .st-setup .st-start + .st-section-head, .st-setup .note + .st-section-head { margin-block-start: var(--sp-3); }
 @media (min-width: 600px) { .st-start { align-self: flex-start; min-inline-size: 16rem; } }
+.st-setup .tab-cols { gap: var(--sp-3); }
+.st-setup .tab-main, .st-setup .tab-aside { gap: var(--sp-2); }
+/* Tablet landscape and the Mac: setup uses the full width, the picker
+   beside the time and Start (desk.css .tab-cols). */
+@media (min-width: 840px) {
+  .st:has(> .st-setup) { max-inline-size: none; }
+  .st-setup .tab-cols { gap: var(--sp-6); }
+  .st-setup-go .st-start { align-self: stretch; }
+  .st-setup-pick { padding-inline-start: var(--sp-6); border-inline-start: 1px solid var(--line); }
+}
 
 /* ---------- buttons ---------- */
 .st-primary, .st-secondary {
@@ -112,8 +122,18 @@
 .st-grade[data-suggested="yes"] { border: 2px solid currentColor; background: var(--bg); }
 .st-grade:disabled { opacity: 0.6; cursor: default; }
 .st-grade-when { color: var(--muted); font-weight: 400; }
-@media (max-width: 599px) {
-  /* Thumb reach on the phone: keep the grades at the bottom of the screen. */
+/* Tablets and the Mac: the item card fills the screen, so the grade row
+   sits at the foot of the window on every item, in the same place for the
+   thumb, the S Pen and the eye, however short the question is. */
+@media (min-width: 600px) {
+  .content[data-screen="Study"] > .st:has(> .st-item) { flex: 1 0 auto; }
+  .st > .st-item { flex: 1 0 auto; }
+  .st-item > .st-body { flex: 1 0 auto; }
+  .st-body > .desk-footer { margin-block-start: auto; }
+}
+@media (max-width: 839.98px) {
+  /* Thumb reach on the phone and the tablet in portrait: long items keep
+     the grades at the bottom of the screen. */
   .st-grades { position: sticky; inset-block-end: 0; background: var(--surface); padding-block: var(--sp-2); }
 }
 

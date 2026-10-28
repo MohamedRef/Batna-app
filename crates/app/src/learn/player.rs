@@ -9,7 +9,7 @@ use dioxus::prelude::*;
 
 use super::steps::{CheckBar, StepAt, StepView};
 use super::text::Line;
-use super::{Mark, close, mark, next_lesson, save_mark};
+use super::{Mark, VIEW, View, close, mark, next_lesson, save_mark, set_view};
 use crate::i18n::learn as tx;
 use crate::{Screen, Ui};
 
@@ -33,6 +33,9 @@ fn save_pos(id: &str, pos: &Pos) {
         crate::diag::report!("saving lesson position {id} failed: {e}");
     }
 }
+
+/// Swiping between steps, with the page following the finger (swipe.js).
+const SWIPE_JS: &str = include_str!("swipe.js");
 
 #[component]
 pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
@@ -70,11 +73,19 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
         })
         .collect();
     let questions: Vec<bool> = lesson.steps.iter().map(|s| s.body.is_question()).collect();
+    // Which way the last move went, for the enter animation.
+    let mut dir = use_signal(|| "fwd");
+    use_hook(|| {
+        document::eval(SWIPE_JS);
+    });
+    let view = VIEW();
+    let pages = view == View::Pages;
 
     let go = {
         let id = id.clone();
         let questions = questions.clone();
         move |to: usize| {
+            dir.set(if to < *at.peek() { "back" } else { "fwd" });
             at.set(to);
             if to < n {
                 seen.write()[to] = true;
@@ -112,7 +123,10 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
     let mut go_skip = go.clone();
 
     rsx! {
-        div { class: "ls-player",
+        div {
+            class: "ls-player",
+            "data-view": if pages { "pages" } else { "steps" },
+            "data-dir": dir(),
             header { class: "ls-bar",
                 button {
                     class: "ls-close",
@@ -134,6 +148,13 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                     }
                 }
                 span { class: "muted small ls-count", "{i + 1}/{n}" }
+                button {
+                    class: "ls-view",
+                    aria_label: if pages { tx::TO_STEPS } else { tx::TO_PAGES },
+                    title: if pages { tx::TO_STEPS } else { tx::TO_PAGES },
+                    onclick: move |_| set_view(if pages { View::Steps } else { View::Pages }),
+                    {if pages { crate::icons::steps() } else { crate::icons::book() }}
+                }
             }
             p { class: "ls-where muted small",
                 Line { text: lesson.title.clone() }
@@ -160,31 +181,53 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
             }
             footer { class: "ls-nav",
                 button {
-                    class: "btn btn-secondary",
+                    class: if pages { "ls-arrow" } else { "btn btn-secondary" },
+                    "data-nav": "back",
+                    aria_label: tx::BACK,
+                    title: tx::BACK,
                     disabled: i == 0,
                     onclick: move |_| go_back(i - 1),
-                    {tx::BACK}
+                    if pages {
+                        {crate::icons::chevron(false)}
+                    } else {
+                        {tx::BACK}
+                    }
                 }
                 if is_q && !can_go && ready.is_none() {
                     button {
-                        class: "btn-link",
+                        class: "btn-link ls-skip",
                         onclick: move |_| {
                             skipped.write()[i] = true;
                             go_skip(i + 1);
                         },
                         {tx::SKIP}
                     }
+                } else if pages {
+                    span { class: "ls-page-of muted small", "{tx::PAGE_OF} {i + 1} {tx::OF_N} {n}" }
                 }
                 if let Some(run) = ready.filter(|_| !can_go) {
                     button {
                         class: "btn btn-primary ls-next",
+                        "data-nav": "check",
                         "aria-keyshortcuts": "Enter",
                         onclick: move |_| run.call(()),
                         {tx::CHECK_IT}
                     }
+                } else if pages && i + 1 < n {
+                    button {
+                        class: "ls-arrow ls-arrow-next",
+                        "data-nav": "next",
+                        "aria-keyshortcuts": "Enter",
+                        aria_label: tx::NEXT,
+                        title: tx::NEXT,
+                        disabled: !can_go,
+                        onclick: move |_| go_next(i + 1),
+                        {crate::icons::chevron(true)}
+                    }
                 } else {
                     button {
                         class: "btn btn-primary ls-next",
+                        "data-nav": "next",
                         "aria-keyshortcuts": "Enter",
                         disabled: !can_go,
                         onclick: move |_| go_next(i + 1),
@@ -208,7 +251,7 @@ fn Stage(
 ) -> Element {
     use_context_provider(|| StepAt(k));
     rsx! {
-        article { class: "card ls-stage", hidden: !current, "data-kind": step.body.kind(),
+        article { class: "card ls-stage", hidden: !current, "data-kind": step.body.kind(), "data-n": k + 1,
             if try_done {
                 div { class: "ls-try-done",
                     p { class: "ls-kicker", {tx::TRY} }

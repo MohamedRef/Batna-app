@@ -27,7 +27,9 @@ pub mod today {
     pub const CHECKED: &str = "راجعت صحته";
     pub const DUE_TIME_1: &str = "المستحق ياخد حوالي";
     pub const DUE_TIME_2: &str = "دقيقة. الجلسة بتبدأ بالأضعف.";
-    pub const START: &str = "ابدأ جلسة ١٠ دقايق";
+    pub fn start(minutes: u32) -> String {
+        format!("ابدأ جلسة {minutes} {}", if minutes <= 10 { "دقايق" } else { "دقيقة" })
+    }
     pub const ALL_DONE: &str = "خلّصت المستحق النهارده. شغل حلو.";
     pub const NEW_CAP_REACHED: &str = "وخلّصت الجديد اللي محدّده لليوم";
     pub const TOMORROW: &str = "بكرة:";
@@ -45,6 +47,44 @@ pub mod today {
     pub const ITEMS: &str = "سؤال وكارت";
     pub const PAGES: &str = "صفحات";
     pub const UNVERIFIED_NOTE: &str = "كل المحتوى لسه ما اتراجعش. أول ما تشوف أي سؤال، علّم عليه صح أو غلط.";
+
+    // The exam plan on Today (#99).
+    pub fn exam_in(days: i32) -> String {
+        match days {
+            1 => "الامتحان بكرة. إنت جاهز أكتر مما فاكر.".to_string(),
+            2 => "فاضل يومين على الامتحان".to_string(),
+            n => format!("فاضل {n} يوم على الامتحان"),
+        }
+    }
+    pub const PLAN_TODAY: &str = "خطة النهارده:";
+    pub const PLAN_NEW: &str = "جديد";
+    pub const PLAN_REVIEWS: &str = "مراجعة";
+    pub const PLAN_REVIEWS_ONLY: &str = "مراجعة بس";
+    pub const ABOUT: &str = "حوالي";
+    pub const MINUTES: &str = "دقيقة";
+    pub const RING_LABEL: &str = "اللي خلّصته من خطة النهارده";
+    pub const NEW_LEFT_1: &str = "فاضل";
+    pub const NEW_LEFT_2: &str = "جديد من خطة النهارده. كل جلسة بتقرّبك.";
+    pub const NEW_DONE: &str = "خلّصت جديد النهارده. اللي فاضل مراجعة بس.";
+    pub const REVISIT: &str = "لفّة تانية على";
+    pub const MOCK: &str = "النهارده يوم امتحان تجريبي.";
+    pub const OPEN_BANK: &str = "افتح بنك الأسئلة";
+    pub const WEAK: &str = "النهارده للمواضيع الضعيفة.";
+    pub const WEAK_START: &str = "ذاكر المواضيع الضعيفة";
+    pub const REST: &str = "النهارده راحة في الخطة.";
+    pub const REST_DUE: &str = "لو عندك مستحق، جلسة قصيرة تكفي.";
+    pub const AHEAD: &str = "اسبق الخطة بشوية جديد";
+    pub fn tight_days(days: u32) -> String {
+        let days = if days == 1 {
+            "يوم مذاكرة زيادة".to_string()
+        } else {
+            format!("{days} أيام مذاكرة زيادة")
+        };
+        format!(
+            "الخطة محتاجة {days} في الأسبوع عشان كل الجديد يخلص قبل آخر الأيام. تقدر تعدّلها من تقدّمي ← خطة الامتحان."
+        )
+    }
+    pub const TIGHT_CAP: &str = "حد المراجعات اليومي مش مكفّي الخطة دي. تقدر تعلّيه من تقدّمي ← خطة الامتحان.";
 }
 
 pub mod study_settings {
@@ -64,6 +104,8 @@ pub mod study_settings {
     pub const DEFAULT_PARAMS_2: &str = "مراجعة. لحد دلوقتي:";
     pub const NEW_PER_DAY: &str = "أسئلة جديدة في اليوم";
     pub const NEW_PER_DAY_BODY: &str = "الجديد بيزوّد مراجعات الأيام الجاية، فاختار رقم تقدر تكمّل عليه.";
+    pub const NEW_FROM_PLAN_1: &str = "عندك ميعاد امتحان، فالخطة هي اللي بتحدد الجديد كل يوم. النهارده:";
+    pub const NEW_FROM_PLAN_2: &str = "جديد. تقدر تغيّر أيام المذاكرة وحد المراجعات من تقدّمي ← خطة الامتحان.";
 }
 
 pub mod study {
@@ -250,6 +292,17 @@ pub mod bank {
     pub const CONFIRM_BACK_TO: &str = "ارجع للسؤال";
     pub const CONFIRM_BACK: &str = "ارجع للامتحان";
     pub const CONFIRM_SUBMIT: &str = "سلّم كده";
+
+    /// A question count the Egyptian way: سؤال واحد, سؤالين, 3–10 أسئلة,
+    /// 11 and up سؤال.
+    pub fn questions(n: usize) -> String {
+        match n {
+            1 => "سؤال واحد".into(),
+            2 => "سؤالين".into(),
+            3..=10 => format!("{n} أسئلة"),
+            _ => format!("{n} سؤال"),
+        }
+    }
 }
 
 pub mod stats {
@@ -486,6 +539,7 @@ pub mod case {
     pub const NEW_DATA: &str = "بيانات جديدة";
     pub const RIGHT: &str = "صح، برافو.";
     pub const WRONG: &str = "مش دي. الإجابة الصح متعلّمة.";
+    pub const CORRECT_WAS: &str = "الصح:";
     pub const SHOW_ANSWER: &str = "ورّيني الإجابة";
     pub const GOT_IT: &str = "جاوبتها صح";
     pub const MISSED: &str = "فاتتني";
@@ -531,6 +585,21 @@ pub mod calc {
     pub const MEANING: &str = "يعني إيه النتيجة دي؟";
     pub const MEANING_HINT: &str = "قولها لنفسك الأول، وبعدين افتح التفسير.";
     pub const SHOW_MEANING: &str = "ورّيني التفسير";
+
+    /// The Arabic hint under a calculator field (core keeps the English one).
+    pub fn hint(calc: &str, field: &str) -> Option<&'static str> {
+        Some(match (calc, field) {
+            ("child_pugh", "pt_prolonged_s") => "دي طريقة الكتاب. سيبها فاضية لو هتستخدم الـ INR.",
+            ("child_pugh", "inr") => "بيتحسب بس لو خانة الـ PT فاضية.",
+            ("apri", "ast_uln_u_l") => "غالبًا 40 U/L.",
+            ("maddrey", "pt_control_s") => "غالبًا 12–13 ثانية.",
+            ("glasgow_ah", "urea_mmol_l") => "اليوريا بالـ mg/dL ÷ 6 = mmol/L.",
+            ("ascitic_pmn", "pmn_per_mm3") => "عدد كرات الدم البيضا الكلي × نسبة النيوتروفيل.",
+            ("bisap", "bun_mg_dl") => "اليوريا ÷ 2.14.",
+            ("ranson", "bun_rise_mg_dl") => "زيادة اليوريا ÷ 2.14.",
+            _ => return None,
+        })
+    }
 }
 
 pub mod desk {
@@ -637,6 +706,8 @@ pub mod own {
     pub const FORM_EDIT: &str = "عدّل الكارت";
     pub const FORM_SHARED: &str = "كارت من نص شيّرته";
     pub const SHARED_HINT: &str = "النص اتحط في الضهر. اكتب السؤال في الوش.";
+    pub const SHARED_TRIMMED: &str = "النص كان أطول من ٣٠٠٠ حرف، فآخره اتشال. لو محتاجه، اعمل منه كارت تاني.";
+    pub const SHARE_WAITING: &str = "في نص تاني شيّرته مستني، هيفتح أول ما تخلّص الكارت ده.";
     pub const FRONT: &str = "الوش (السؤال)";
     pub const BACK: &str = "الضهر (الإجابة)";
     pub const LECTURE: &str = "المحاضرة";
@@ -651,6 +722,7 @@ pub mod own {
     pub const E_BACK: &str = "اكتب الإجابة في الضهر.";
     pub const E_FRONT_LONG: &str = "الوش طويل، خليه سؤال قصير (٦٠٠ حرف بالكتير).";
     pub const E_BACK_LONG: &str = "الضهر طويل، قسّمه على كذا كارت (٣٠٠٠ حرف بالكتير).";
+    pub const E_SOURCE_LONG: &str = "«منين» طويلة، خليها اسم قصير (٢٠٠ حرف بالكتير).";
     pub const FROM: &str = "من";
 }
 
@@ -678,6 +750,9 @@ pub mod data {
     pub const IMPORT_PICK_FIRST: &str = "اختار ملف النسخة";
     pub const IMPORT_PICKING: &str = "اختار الملف…";
     pub const IMPORT_PICK_FAILED: &str = "ما عرفتش أفتح اختيار الملفات";
+    pub const IMPORT_COPY_FAILED: &str =
+        "ما عرفتش أفتح الملف ده، أو هو أكبر من نسخة باطنة. اختار ملف batna-export.";
+    pub const IMPORT_TOO_BIG: &str = "الملف ده كبير أوي على إنه نسخة من باطنة. اختار ملف batna-export.";
     pub const IMPORT_PASTE: &str = "أو الزق النص";
     pub const IMPORT_PASTED: &str = "نص ملزوق";
     pub const IMPORT_READ: &str = "اقرا النص";
@@ -763,6 +838,10 @@ pub mod settings {
     pub const THEME_PAPER_SUB: &str = "فاتح وهادي";
     pub const THEME_NIGHT: &str = "ليل";
     pub const THEME_NIGHT_SUB: &str = "غامق";
+    pub const THEME_SYSTEM_BLACK: &str = "زي الجهاز، وبالليل أسود";
+    pub const THEME_SYSTEM_BLACK_SUB: &str = "فاتح بالنهار، وأسود خالص لما الجهاز يبقى غامق";
+    pub const THEME_BLACK: &str = "أسود AMOLED";
+    pub const THEME_BLACK_SUB: &str = "أسود خالص، فبكسلات شاشة الأموليد بتطفي: أريح للعين بالليل وبتوفّر بطارية";
     pub const THEME_SHIFT: &str = "نبطشية";
     pub const THEME_SHIFT_SUB: &str = "غامق ودافي من غير ضوء أزرق، للمذاكرة متأخر قبل النوم";
 

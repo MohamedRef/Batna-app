@@ -164,8 +164,10 @@ fn leading_number(o: &str) -> Option<f64> {
 /// only make sense in the book's order.
 pub fn shufflable(options: &[String]) -> bool {
     !options.iter().any(|o| {
-        let o = o.to_ascii_lowercase();
+        let o = o.trim().to_ascii_lowercase();
         o.contains("of the above")
+            || o.contains("of these")
+            || matches!(o.as_str(), "both" | "neither" | "none")
             || o.starts_with("both ")
             || o.starts_with("neither ")
             || refers_by_letter(&o)
@@ -563,6 +565,10 @@ mod tests {
         assert!(!shufflable(&s(&["a", "b", "c", "All of the above"])));
         assert!(!shufflable(&s(&["a", "b", "Both a and b", "d"])));
         assert!(!shufflable(&s(&["x", "y", "z", "A and C"])));
+        assert!(!shufflable(&s(&["x", "y", "z", "All of these"])));
+        assert!(!shufflable(&s(&["Hepatitis B", "Hepatitis C", "Both", "Neither"])));
+        assert!(!shufflable(&s(&["x", "y", "None"])));
+        assert!(shufflable(&s(&["None while compensated", "x", "y"])));
         assert!(shufflable(&s(&["Vitamin A and D deficiency", "x", "y", "z"])));
     }
 

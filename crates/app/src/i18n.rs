@@ -630,6 +630,9 @@ pub mod oral {
     pub const GOOD: &str = "تمام";
     pub const GOOD_HINT: &str = "جاوبت صح";
     pub const END: &str = "إنهاء";
+    /// The Android notification channel for oral mode in the background.
+    pub const CHANNEL: &str = "المذاكرة الشفوي";
+    pub const CHANNEL_HINT: &str = "التحكم في الشفوي وهو شغّال في الخلفية";
 
     pub const DONE: &str = "خلصت الجلسة";
     pub const DONE_GOOD: &str = "تمام";

@@ -9,36 +9,39 @@ mod mistakes;
 use std::collections::BTreeMap;
 
 use batna_core::content::{Lecture, Status};
-use batna_core::review::ReviewEvent;
+use batna_core::review::{ReviewEvent, StudyStore};
 use batna_core::stats::{self, Clock, Counts, LectureStats, Ratio, WeakTopic};
 use dioxus::prelude::*;
 
 use crate::content::Library;
 use crate::i18n::stats as tx;
 use crate::plan::Planner;
+use crate::store::utc_offset_minutes;
 
-/// Egypt's standard time. Summer time moves the 4 am rollover to 3 am, which
-/// doesn't change which day a study session belongs to in practice.
-const UTC_OFFSET_MIN: i32 = 120;
+/// The study day starts at 4 am, like the scheduler's.
 const ROLLOVER_HOUR: u32 = 4;
+/// How far ahead the scheduler's forecast is read: past any exam this year.
+const FORECAST_DAYS: usize = 400;
 const STATS_CSS: &str = include_str!("stats.css");
 
-/// What the stats read: the content, the review log and Mohamed's marks.
-/// Loaded once per visit to the screen.
+/// What the stats read: the content, the review log, Mohamed's marks and the
+/// scheduler's due forecast. Rebuilt after every answer or verdict.
 #[derive(PartialEq)]
 pub struct StudyData {
     pub lectures: Vec<Lecture>,
     pub events: Vec<ReviewEvent>,
     pub marks: BTreeMap<String, Status>,
+    /// Reviews due per study day from FSRS, today first. `None` in demo mode,
+    /// where the planner falls back to `stats::rough_forecast`.
+    pub forecast: Option<Vec<u32>>,
     pub clock: Clock,
     /// Demo numbers (BATNA_STATS_DEMO=1), labelled on screen.
     pub demo: bool,
 }
 
 impl StudyData {
-    /// Today's data. Until the review store lands (chunk 3) the log is empty,
-    /// so the screen shows the calm "nothing yet" state.
-    pub fn load() -> StudyData {
+    /// Today's data from the review store, or demo numbers for previews.
+    pub fn load(store: &dyn StudyStore) -> StudyData {
         let lib = Library::get();
         // Book order, from the index.
         let lectures: Vec<Lecture> =
@@ -47,12 +50,27 @@ impl StudyData {
             .duration_since(std::time::UNIX_EPOCH)
             .map(|d| d.as_millis() as i64)
             .unwrap_or_default();
-        let clock = Clock { now_ms, utc_offset_min: UTC_OFFSET_MIN, rollover_hour: ROLLOVER_HOUR };
+        let clock = Clock { now_ms, utc_offset_min: utc_offset_minutes(), rollover_hour: ROLLOVER_HOUR };
         if std::env::var("BATNA_STATS_DEMO").is_ok_and(|v| v == "1") {
             let events = demo::events(&lectures, now_ms);
-            return StudyData { lectures, events, marks: demo::marks(), clock, demo: true };
+            return StudyData { lectures, events, marks: demo::marks(), forecast: None, clock, demo: true };
         }
-        StudyData { lectures, events: Vec::new(), marks: BTreeMap::new(), clock, demo: false }
+        StudyData {
+            lectures,
+            events: store.log(),
+            marks: store.marks(),
+            forecast: Some(store.forecast(FORECAST_DAYS, now_ms)),
+            clock,
+            demo: false,
+        }
+    }
+
+    /// Reviews due per day for `days` days, today first.
+    pub fn due_forecast(&self, days: usize) -> Vec<u32> {
+        match &self.forecast {
+            Some(f) => f.iter().copied().chain(std::iter::repeat(0)).take(days).collect(),
+            None => stats::rough_forecast(&self.lectures, &self.events, &self.marks, self.clock, days),
+        }
     }
 
     pub fn stats(&self) -> Vec<LectureStats> {
@@ -81,7 +99,9 @@ impl Tab {
 #[component]
 pub fn Stats() -> Element {
     let mut tab = use_signal(|| Tab::from_env().unwrap_or(Tab::Progress));
-    let data = use_hook(|| std::rc::Rc::new(StudyData::load()));
+    // Subscribed: the screen refreshes after every answer and verdict.
+    let review = crate::store::use_review();
+    let data = std::rc::Rc::new(StudyData::load(&*review.backend.borrow()));
     let current = *tab.read();
     let tabs =
         [(Tab::Progress, tx::TAB_PROGRESS), (Tab::Mistakes, tx::TAB_MISTAKES), (Tab::Plan, tx::TAB_PLAN)];
@@ -187,18 +207,36 @@ fn WeakCard(weak: Vec<WeakTopic>, ids: Vec<String>) -> Element {
     }
 }
 
-/// Starts a session from a list of item ids. The study session player
-/// (chunk 2) hasn't landed yet, so for now it says the items are ready.
+/// Starts a study session on exactly these items, in this order. Items the
+/// player can't show yet are left out of the count and the session.
 #[component]
 pub fn SessionButton(label: &'static str, ids: Vec<String>) -> Element {
-    let mut pressed = use_signal(|| false);
+    let mut ui = use_context::<crate::Ui>();
+    let lib = Library::get();
+    let playable: Vec<String> = ids
+        .into_iter()
+        .filter(|id| {
+            lib.lectures
+                .values()
+                .flat_map(|l| &l.items)
+                .find(|i| &i.id == id)
+                .is_some_and(|i| crate::study::PLAYABLE.contains(&i.body.kind()))
+        })
+        .collect();
+    let count = playable.len();
     rsx! {
         div { class: "session-start",
-            button { class: "primary", disabled: ids.is_empty(), onclick: move |_| pressed.set(true), {label} }
-            span { class: "muted small", "{ids.len()} {tx::SESSION_COUNT}" }
-        }
-        if *pressed.read() {
-            p { class: "note", {tx::SESSION_SOON} }
+            button {
+                class: "primary",
+                disabled: playable.is_empty(),
+                onclick: move |_| {
+                    *crate::study::START.write() =
+                        Some(crate::study::Start { lectures: None, items: Some(playable.clone()), minutes: 10 });
+                    ui.screen.set(crate::Screen::Study);
+                },
+                {label}
+            }
+            span { class: "muted small", "{count} {tx::SESSION_COUNT}" }
         }
     }
 }

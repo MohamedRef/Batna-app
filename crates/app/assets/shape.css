@@ -50,8 +50,13 @@ span.chip.ready { font-weight: 700; }
 button.chip { border-color: var(--line-soft); }
 
 /* ---------- top bar: blends into the page ---------- */
-.topbar { background: var(--bg); border-block-end-color: transparent; }
+.topbar { background: var(--bg); border-block-end-color: transparent; padding-inline-end: var(--sp-2); }
 .brand-name { letter-spacing: 0.01em; }
+/* The header gear is a bare icon in the corner, like Morphe's header
+   actions: no filled disc, a quiet colour, and the tint only while pressed
+   or hovered. The hit area stays a full --tap. */
+.topbar .icon-button { background: transparent; color: var(--muted); }
+.topbar .icon-button:hover, .topbar .icon-button:active { background: var(--accent-soft); color: var(--accent); }
 
 /* ---------- grouped choice rows (single column) ----------
    One rounded block of rows split by thin dividers, a radio dot on the

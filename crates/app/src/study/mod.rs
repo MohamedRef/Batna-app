@@ -127,6 +127,12 @@ pub fn Study() -> Element {
     let mut session = use_signal(Session::default);
     let mut phase = use_signal(|| Phase::Setup);
     let mut started = use_signal(Instant::now);
+    // The calm end-of-session tone, however the session ended.
+    use_effect(move || {
+        if phase() == Phase::Summary && session.peek().summary().items > 0 {
+            crate::sounds::play(crate::sounds::Cue::SessionEnd);
+        }
+    });
 
     let mut begin = {
         let store = store.clone();
@@ -216,6 +222,12 @@ pub fn Study() -> Element {
                         started.set(Instant::now());
                         if session.read().is_done() {
                             phase.set(Phase::Summary);
+                        } else {
+                            crate::sounds::play(if grade == Grade::Again {
+                                crate::sounds::Cue::Wrong
+                            } else {
+                                crate::sounds::Cue::Right
+                            });
                         }
                     };
                     rsx! {

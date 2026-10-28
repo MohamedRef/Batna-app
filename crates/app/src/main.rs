@@ -19,6 +19,7 @@ mod plan;
 mod platform;
 mod prefs;
 mod settings;
+mod sounds;
 mod stats;
 mod store;
 mod study;

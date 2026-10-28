@@ -3,6 +3,7 @@
 //! (background oral mode).
 
 pub mod background;
+pub mod haptics;
 pub mod tts;
 #[cfg(target_os = "android")]
 pub(crate) mod tts_android;

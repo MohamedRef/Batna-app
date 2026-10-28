@@ -587,3 +587,17 @@ pub mod settings {
     pub const DIAG_COPY: &str = "انسخ";
     pub const DIAG_COPIED: &str = "اتنسخ";
 }
+
+pub mod sound {
+    pub const TITLE: &str = "الأصوات والاهتزاز";
+    pub const BODY: &str = "صوت هادي مع الإجابة الصح ونغمة في آخر الجلسة. الإجابة الغلط مالهاش صوت.";
+    pub const SOUNDS: &str = "الأصوات";
+    pub const ON: &str = "شغّالة";
+    pub const OFF: &str = "مقفولة";
+    pub const RIGHT: &str = "صوت الإجابة الصح";
+    pub const END: &str = "نغمة آخر الجلسة";
+    pub const PICK_HINT: &str = "دوس على أي واحد تسمعه وتختاره.";
+    pub const VARIATION: &str = "صوت";
+    pub const VIBRATE: &str = "الاهتزاز";
+    pub const VIBRATE_BODY: &str = "لمسة خفيفة مع كل إجابة. بيمشي على إعداد الاهتزاز في الموبايل.";
+}

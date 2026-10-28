@@ -359,9 +359,9 @@ fn the_scanner_sees_built_classes() {
 const LINKISH_OK: &[&str] = &["button", "summary", "a", "label", "input", "select", "textarea"];
 
 /// Class sets the CSS draws as a link or a control: a rule with
-/// `cursor: pointer` or an underline whose selector ends in those classes
-/// (`.chip.toggle` → both) on no element, or on one that can't be pressed.
-fn linkish_classes(css: &str) -> Vec<Vec<String>> {
+/// `cursor: pointer` or an underline whose selector is just those classes
+/// (`.chip.toggle` → both), on no element or on one that can't be pressed.
+fn linkish_classes(css: &str) -> Vec<(String, Vec<String>)> {
     let mut out = Vec::new();
     let css = strip_comments(css);
     for rule in css.split('}') {
@@ -371,8 +371,14 @@ fn linkish_classes(css: &str) -> Vec<Vec<String>> {
             continue;
         }
         for sel in selectors.split(',') {
-            // The subject: the last compound, before any pseudo-class.
-            let subject = sel.trim().rsplit([' ', '>', '+', '~']).next().unwrap_or("");
+            // Only a rule on the element itself: `.row .name { cursor }` is
+            // about a name inside a row, which the row's own check covers.
+            let sel = sel.trim();
+            if sel.contains([' ', '>', '+', '~']) {
+                continue;
+            }
+            // The subject, before any pseudo-class.
+            let subject = sel;
             let subject = subject.split(':').next().unwrap_or("");
             let element: String = subject.chars().take_while(|c| c.is_ascii_alphanumeric()).collect();
             if LINKISH_OK.contains(&element.as_str()) {
@@ -388,8 +394,10 @@ fn linkish_classes(css: &str) -> Vec<Vec<String>> {
                 })
                 .filter(|c| !c.is_empty())
                 .collect();
-            if !set.is_empty() && !out.contains(&set) {
-                out.push(set);
+            // `mark.target` is about a mark only; `.row` about any element.
+            let entry = (element, set);
+            if !entry.1.is_empty() && !out.contains(&entry) {
+                out.push(entry);
             }
         }
     }
@@ -435,8 +443,10 @@ fn link_looks_are_pressable() {
             {
                 continue;
             }
-            for set in &linkish {
-                if set.iter().all(|c| f.classes.contains(c)) {
+            for (element, set) in &linkish {
+                let on = element.is_empty() || *element == f.element;
+                let allowed = set.iter().any(|c| ALLOWED.contains(&(f.element.as_str(), c.as_str())));
+                if on && !allowed && set.iter().all(|c| f.classes.contains(c)) {
                     dead.push(format!(
                         "{path}:{}: `{}.{}` looks like a link or control (CSS: pointer or underline) but can't be pressed",
                         f.line,
@@ -476,7 +486,10 @@ fn css_files(dir: &Path, out: &mut Vec<std::path::PathBuf>) {
 
 #[test]
 fn the_css_check_reads_link_looks() {
-    let css = "/* .note { cursor: pointer } */\n.topic-link { text-decoration: underline dotted; }\nbutton.tap-chip { cursor: pointer; }\n.list > .row:hover { cursor: pointer }\nlabel.check { cursor: pointer }\n.plain { color: red }";
-    let want: Vec<Vec<String>> = vec![vec!["topic-link".into()], vec!["row".into()]];
+    let css = "/* .note { cursor: pointer } */\n.topic-link { text-decoration: underline dotted; }\nbutton.tap-chip { cursor: pointer; }\n.row:hover { cursor: pointer }\n.list .name { cursor: pointer }\nlabel.check { cursor: pointer }\nmark.hit { text-decoration: underline }\n.plain { color: red }";
+    let want: Vec<(String, Vec<String>)> =
+        vec![(String::new(), vec!["topic-link".into()]), (String::new(), vec!["row".into()])];
+    let mut want = want;
+    want.push(("mark".into(), vec!["hit".into()]));
     assert_eq!(linkish_classes(css), want);
 }

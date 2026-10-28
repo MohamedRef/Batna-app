@@ -49,13 +49,39 @@ span.chip {
 span.chip.ready { font-weight: 700; }
 button.chip { border-color: var(--line-soft); }
 
-/* ---------- top bar: blends into the page ---------- */
-.topbar { background: var(--bg); border-block-end-color: transparent; padding-inline-end: var(--sp-2); }
+/* ---------- top bar: blends into the page ----------
+   Morphe's header: a bold title on the start side and round 40dp icon
+   buttons with a faint translucent fill on the end side, both centred on
+   one row. The row is at least one button tall, so the title and the gear
+   share a centre line instead of the gear riding above the text. */
+.topbar {
+  background: var(--bg);
+  border-block-end-color: transparent;
+  align-items: center;
+  min-block-size: calc(2.5rem + 2 * var(--sp-2));
+  padding-inline: var(--sp-4) var(--sp-3);
+}
+.topbar .brand { align-items: baseline; align-self: center; line-height: 1.25; }
+/* Arabic letters sit low in their line box; a small lift puts their
+   visual middle on the button's centre line. */
+.topbar .brand { padding-block-end: 0.2rem; }
 .brand-name { letter-spacing: 0.01em; }
-/* The header gear is a bare icon in the corner, like Morphe's header
-   actions: no filled disc, a quiet colour, and the tint only while pressed
-   or hovered. The hit area stays a full --tap. */
-.topbar .icon-button { background: transparent; color: var(--muted); }
+@media (max-width: 599.98px) {
+  .topbar .brand-name { font-size: var(--fs-xl); }
+}
+.topbar .icon-button {
+  flex: none;
+  inline-size: 2.5rem;
+  block-size: 2.5rem;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  border: 1px solid var(--line-soft);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--text) 7%, transparent);
+  color: var(--text);
+}
+.topbar .icon-button svg { inline-size: 1.5rem; block-size: 1.5rem; }
 .topbar .icon-button:hover, .topbar .icon-button:active { background: var(--accent-soft); color: var(--accent); }
 
 /* ---------- grouped choice rows (single column) ----------

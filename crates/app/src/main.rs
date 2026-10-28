@@ -144,22 +144,28 @@ fn App() -> Element {
     cloud::use_provide_cloud();
     reminders::use_local_reminders();
     let current = *ui.screen.read();
-    let look = ui.prefs.read().css();
-    // Android's status and navigation bars follow the theme, so True black
-    // keeps the whole OLED screen dark. A System theme also repaints them
-    // when the device switches dark mode while Batna is open.
-    let mut os_scheme = use_signal(|| 0u32);
+    // System themes follow the device's dark mode. Android's WebView can't
+    // be trusted for it (it reports light under a light activity theme), so
+    // there the platform is asked directly and re-asked every few seconds;
+    // elsewhere `prefers-color-scheme` does the job (device_dark is None).
+    let mut device_dark = use_signal(platform::system_bars::device_dark);
     use_future(move || async move {
-        let mut eval = document::eval(
-            r#"matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => dioxus.send(1));
-            await new Promise(() => {});"#,
-        );
-        while eval.recv::<u32>().await.is_ok() {
-            os_scheme += 1;
+        if device_dark.peek().is_none() {
+            return;
+        }
+        loop {
+            tokio::time::sleep(std::time::Duration::from_secs(2)).await;
+            let now = platform::system_bars::device_dark();
+            if now.is_some() && now != *device_dark.peek() {
+                device_dark.set(now);
+            }
         }
     });
+    let look = ui.prefs.read().css_for(*device_dark.read());
+    // Android's status and navigation bars follow the theme, so True black
+    // keeps the whole OLED screen dark.
     use_effect(move || {
-        os_scheme.read();
+        device_dark.read();
         let (day, night) = ui.prefs.read().theme.day_and_night();
         platform::system_bars::apply(day.bg, night.bg);
     });

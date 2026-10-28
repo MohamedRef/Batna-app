@@ -331,6 +331,24 @@ fn PhaseView(phase: Phase, auto: bool) -> Element {
             if let Some(d) = detail {
                 p { class: "muted small", dir: "ltr", bdi { "{d}" } }
             }
+            if matches!(phase, Phase::Failed { why: Failure::KeyChanged, .. }) {
+                ol { class: "small",
+                    for (i, step) in tx::KEY_CHANGED_STEPS.iter().enumerate() {
+                        li { key: "{i}", {*step} }
+                    }
+                }
+                div { class: "row",
+                    button {
+                        class: "btn btn-primary",
+                        onclick: move |_| {
+                            if let Err(e) = crate::cloud::open_url(&preview_apk_url()) {
+                                crate::diag::report!("{e}");
+                            }
+                        },
+                        {tx::GET_PREVIEW}
+                    }
+                }
+            }
             if let Some((label, run)) = action {
                 div { class: "row",
                     button { class: "btn btn-primary", onclick: move |_| run(), {label} }
@@ -341,6 +359,13 @@ fn PhaseView(phase: Phase, auto: bool) -> Element {
             }
         }
     }
+}
+
+/// The newest preview APK, next to the preview feed.
+fn preview_apk_url() -> String {
+    let feed = Channel::Preview.feed_url();
+    let base = feed.rsplit_once('/').map_or(feed.as_str(), |(b, _)| b);
+    format!("{base}/batna-preview.apk")
 }
 
 fn open_install_permission() {

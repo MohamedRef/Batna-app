@@ -71,6 +71,28 @@ pub struct Step {
     pub quote: Option<String>,
 }
 
+/// A picture in a figure step: an image file under `content/lessons/img/`.
+/// Either an open-licence image (with `credit`, `license` and `source`), or
+/// a figure cropped from the textbook (`book: true`; the step's `page`
+/// cites it). Mohamed allowed book figures in the repo on 2026-10-28; the
+/// book's text still never goes in.
+#[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize)]
+pub struct Picture {
+    pub file: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub credit: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub license: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub source: Option<String>,
+    #[serde(default, skip_serializing_if = "std::ops::Not::not")]
+    pub book: bool,
+    /// The file as a `data:` URL, filled in when the pack is built
+    /// ([`embed_images`]); never written in YAML.
+    #[serde(default, skip_serializing_if = "String::is_empty")]
+    pub data: String,
+}
+
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(tag = "kind", rename_all = "snake_case")]
 pub enum StepBody {
@@ -80,11 +102,15 @@ pub enum StepBody {
         title: Option<String>,
         text: String,
     },
-    /// A diagram drawn as inline SVG with theme colours only.
+    /// A diagram drawn as inline SVG with theme colours only, or a picture
+    /// ([`Picture`]): an open-licence image, or a figure from the book.
     Figure {
         #[serde(default, skip_serializing_if = "Option::is_none")]
         title: Option<String>,
+        #[serde(default, skip_serializing_if = "String::is_empty")]
         svg: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        image: Option<Picture>,
         caption: String,
         /// What the figure shows, for a screen reader.
         alt: String,
@@ -183,7 +209,7 @@ impl StepBody {
 pub fn allowed_keys(kind: &str) -> Option<&'static [&'static str]> {
     Some(match kind {
         "explain" => &["title", "text"],
-        "figure" => &["title", "svg", "caption", "alt"],
+        "figure" => &["title", "svg", "image", "caption", "alt"],
         "reveal" => &["prompt", "answer"],
         "mnemonic" => &["word", "parts", "hook"],
         "aside" => &["tone", "text"],
@@ -239,6 +265,8 @@ pub enum Tone {
 pub struct Span {
     pub text: String,
     pub bold: bool,
+    /// One of the step's few key terms (`==term==`): drawn with a marker.
+    pub key: bool,
     /// Latin script (English terms, numbers with units): isolated left-to-right.
     pub latin: bool,
 }
@@ -251,7 +279,8 @@ pub enum Block {
 }
 
 /// Splits lesson text into paragraphs (blank lines) and bullet lists
-/// (lines starting `- `), with `**bold**` and Latin runs marked.
+/// (lines starting `- `), with `**bold**`, `==key terms==` and Latin runs
+/// marked.
 pub fn blocks(text: &str) -> Vec<Block> {
     let mut out = Vec::new();
     for chunk in text.split("\n\n").map(str::trim).filter(|c| !c.is_empty()) {
@@ -270,7 +299,7 @@ pub fn blocks(text: &str) -> Vec<Block> {
                         out.push(Block::Bullets(std::mem::take(&mut list)));
                     }
                     if !para.is_empty() {
-                        para.push(Span { text: " ".into(), bold: false, latin: false });
+                        para.push(Span { text: " ".into(), bold: false, key: false, latin: false });
                     }
                     para.extend(spans(l));
                 }
@@ -287,30 +316,59 @@ pub fn blocks(text: &str) -> Vec<Block> {
     out
 }
 
-/// One line of lesson text as spans: `**bold**`, and runs of Latin script
-/// apart from Arabic so the UI can isolate them (`<bdi dir="ltr">`).
+/// One line of lesson text as spans: `**bold**`, `==key term==`, and runs
+/// of Latin script apart from Arabic so the UI can isolate them
+/// (`<bdi dir="ltr">`). Bold on punctuation alone (the colon after
+/// "**(SECs)**:") is dropped, so it doesn't stand apart from its term.
 pub fn spans(line: &str) -> Vec<Span> {
     // Script runs come from the whole line, so bold can't split an English
     // phrase ("**Genome:** single-stranded") into runs that flip.
     let mut plain = String::new();
-    let mut bold_at: Vec<bool> = Vec::new();
-    for (i, part) in line.split("**").enumerate() {
-        plain.push_str(part);
-        bold_at.extend(part.chars().map(|_| i % 2 == 1));
+    let mut look: Vec<(bool, bool)> = Vec::new();
+    let (mut bold, mut key) = (false, false);
+    let mut rest = line;
+    while let Some(c) = rest.chars().next() {
+        if let Some(r) = rest.strip_prefix("**") {
+            bold = !bold;
+            rest = r;
+        } else if let Some(r) = rest.strip_prefix("==") {
+            key = !key;
+            rest = r;
+        } else {
+            plain.push(c);
+            look.push((bold, key));
+            rest = &rest[c.len_utf8()..];
+        }
     }
     let mut out: Vec<Span> = Vec::new();
     let mut at = 0;
     for (text, latin) in script_runs(&plain) {
         for c in text.chars() {
-            let bold = bold_at[at];
+            let (bold, key) = look[at];
             at += 1;
             match out.last_mut() {
-                Some(last) if last.bold == bold && last.latin == latin => last.text.push(c),
-                _ => out.push(Span { text: c.to_string(), bold, latin }),
+                Some(last) if last.bold == bold && last.key == key && last.latin == latin => {
+                    last.text.push(c)
+                }
+                _ => out.push(Span { text: c.to_string(), bold, key, latin }),
             }
         }
     }
-    out
+    for s in &mut out {
+        if s.text.chars().all(|c| !c.is_alphanumeric()) {
+            s.bold = false;
+            s.key = false;
+        }
+    }
+    // Neighbours that now look the same join up again.
+    let mut joined: Vec<Span> = Vec::with_capacity(out.len());
+    for s in out {
+        match joined.last_mut() {
+            Some(l) if l.bold == s.bold && l.key == s.key && l.latin == s.latin => l.text.push_str(&s.text),
+            _ => joined.push(s),
+        }
+    }
+    joined
 }
 
 /// Runs of Latin and non-Latin text. Spaces, digits and punctuation between
@@ -529,6 +587,101 @@ pub struct LessonContext<'a> {
     pub raw_step_keys: Vec<((usize, usize), Vec<String>)>,
 }
 
+/// An image file in git can't be bigger than this (WebP, about 800 px wide).
+pub const MAX_IMAGE_BYTES: usize = 150 * 1024;
+
+/// Image files a figure may use, by extension, with their MIME type.
+pub const IMAGE_TYPES: [(&str, &str); 4] =
+    [("webp", "image/webp"), ("jpg", "image/jpeg"), ("jpeg", "image/jpeg"), ("png", "image/png")];
+
+/// Problems with a figure's picture (the file itself is checked by [`embed_images`]).
+pub fn picture_problems(p: &Picture) -> Vec<String> {
+    let mut out = Vec::new();
+    if !p.data.is_empty() {
+        out.push("image.data is filled in by the pack build; don't write it".into());
+    }
+    let file = &p.file;
+    let ext = file.rsplit_once('.').map(|(_, e)| e.to_ascii_lowercase()).unwrap_or_default();
+    if !IMAGE_TYPES.iter().any(|(e, _)| *e == ext) {
+        out.push(format!("image file {file:?} must be .webp, .jpg or .png"));
+    }
+    if file.is_empty() || file.contains("..") || file.starts_with('/') || file.contains('\\') {
+        out.push(format!("image file {file:?} must be a path under content/lessons/img/"));
+    }
+    let has = |o: &Option<String>| o.as_deref().is_some_and(|s| !s.trim().is_empty());
+    if p.book {
+        if has(&p.credit) || has(&p.license) || has(&p.source) {
+            out.push("a book figure takes no credit, license or source (the step's page cites it)".into());
+        }
+        return out;
+    }
+    if !has(&p.credit) || !has(&p.license) || !has(&p.source) {
+        out.push("an image needs credit, license and source (or book: true for a book figure)".into());
+    }
+    if let Some(l) = &p.license
+        && !license_ok(l)
+    {
+        out.push(format!(
+            "license {l:?}: use public domain, CC0 or a CC BY licence without ND (no-derivatives)"
+        ));
+    }
+    if let Some(s) = &p.source
+        && !s.starts_with("https://")
+    {
+        out.push("source must be the https:// page the image came from".into());
+    }
+    out
+}
+
+/// Public domain, CC0, or CC BY (also -SA and -NC: Batna is personal and
+/// free), but never -ND, since images get resized and cropped.
+fn license_ok(l: &str) -> bool {
+    let u = l.to_ascii_uppercase().replace('-', " ");
+    let open = u.starts_with("PUBLIC DOMAIN")
+        || u.starts_with("PD")
+        || u.starts_with("CC0")
+        || u.starts_with("CC BY");
+    open && !u.split_whitespace().any(|w| w == "ND")
+}
+
+/// Fills in every open-licence picture's `data` from its file under
+/// `content/lessons/img/` (`read` is handed that relative path). Returns
+/// the problems: missing files and files that are too big.
+pub fn embed_images(files: &mut [LessonFile], mut read: impl FnMut(&str) -> Option<Vec<u8>>) -> Vec<String> {
+    use base64::Engine;
+    let mut out = Vec::new();
+    for f in files.iter_mut() {
+        for l in &mut f.lessons {
+            for (k, step) in l.steps.iter_mut().enumerate() {
+                let StepBody::Figure { image: Some(p), .. } = &mut step.body else { continue };
+                let file = p.file.clone();
+                let at = format!("{} step {}", l.id, k + 1);
+                let Some(bytes) = read(&file) else {
+                    out.push(format!("{at}: content/lessons/img/{file} is missing"));
+                    continue;
+                };
+                if bytes.len() > MAX_IMAGE_BYTES {
+                    out.push(format!(
+                        "{at}: {file} is {} KB; keep images under {} KB (WebP, about 800 px wide)",
+                        bytes.len() / 1024,
+                        MAX_IMAGE_BYTES / 1024
+                    ));
+                }
+                let ext = file.rsplit_once('.').map(|(_, e)| e.to_ascii_lowercase()).unwrap_or_default();
+                let mime = IMAGE_TYPES.iter().find(|(e, _)| *e == ext).map_or("image/webp", |(_, m)| m);
+                p.data = format!(
+                    "data:{mime};base64,{}",
+                    base64::engine::general_purpose::STANDARD.encode(&bytes)
+                );
+            }
+        }
+    }
+    out
+}
+
+/// Key terms (`==term==`) per step: the marker only helps when it's rare.
+pub const MAX_KEY_TERMS: usize = 3;
+
 /// Figures can't be bigger than this (they are drawn, not pasted).
 pub const MAX_SVG_BYTES: usize = 24 * 1024;
 
@@ -621,6 +774,12 @@ pub fn validate(file: &LessonFile, cx: &LessonContext<'_>) -> Vec<Problem> {
                     bad(&sat, "a quote needs its page".into());
                 }
             }
+            if let StepBody::Figure { image: Some(p), .. } = &step.body
+                && p.book
+                && step.page.is_none()
+            {
+                bad(&sat, "a book figure needs its page".into());
+            }
             for m in step_problems(&step.body, &items) {
                 bad(&sat, m);
             }
@@ -640,9 +799,24 @@ fn step_problems(body: &StepBody, items: &BTreeSet<&str>) -> Vec<String> {
             if text.matches("**").count() % 2 == 1 {
                 out.push("`**` is not closed".into());
             }
+            let marks = text.matches("==").count();
+            if marks % 2 == 1 {
+                out.push("`==` is not closed".into());
+            } else if marks / 2 > MAX_KEY_TERMS {
+                out.push(format!(
+                    "{} key terms (`==`): keep the marker for the {MAX_KEY_TERMS} that matter most",
+                    marks / 2
+                ));
+            }
         }
-        StepBody::Figure { svg, caption, alt, .. } => {
-            out.extend(svg_problems(svg));
+        StepBody::Figure { svg, image, caption, alt, .. } => {
+            match image {
+                None => out.extend(svg_problems(svg)),
+                Some(_) if !svg.trim().is_empty() => {
+                    out.push("a figure has either svg or image, not both".into())
+                }
+                Some(p) => out.extend(picture_problems(p)),
+            }
             if empty(caption) || empty(alt) {
                 out.push("a figure needs a caption and an alt text".into());
             }
@@ -895,6 +1069,22 @@ mod tests {
         // A list right under a lead-in line, with no blank line between.
         let b = blocks("الأسباب:\n- Viral\n- Alcohol");
         assert!(matches!(&b[..], [Block::Para(_), Block::Bullets(l)] if l.len() == 2));
+    }
+
+    #[test]
+    fn key_terms_and_bare_punctuation() {
+        let s = spans("دي ==portal hypertension== و **SAAG**");
+        assert!(super::license_ok("CC BY-SA 4.0") && super::license_ok("CC BY-NC-SA 3.0"));
+        assert!(super::license_ok("Public domain") && !super::license_ok("CC BY-ND 4.0"));
+        assert!(!super::license_ok("All rights reserved"));
+        let key: Vec<_> = s.iter().filter(|s| s.key).map(|s| s.text.as_str()).collect();
+        assert_eq!(key, ["portal hypertension"]);
+        assert!(s.iter().any(|s| s.bold && s.text == "SAAG"));
+        // "**(SECs):**" and "**(SECs)**:" look the same: the colon isn't bold.
+        for line in ["**cells (SECs):** دي", "**cells (SECs)**: دي"] {
+            let s = spans(line);
+            assert!(s.iter().all(|s| !s.bold || s.text.chars().any(char::is_alphanumeric)), "{line}: {s:?}");
+        }
     }
 
     #[test]

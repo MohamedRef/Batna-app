@@ -321,6 +321,21 @@ p { margin: 0; }
   color: var(--muted);
   white-space: nowrap;
 }
+/* A card with one job (today's lesson, the oral round) opens on a tap
+   anywhere; its button stays the visible, focusable target, and its click
+   bubbles up to the card's own onclick. Adapted from kabar-app main. */
+.card-action { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+@media (hover: hover) and (pointer: fine) { .card-action:hover { border-color: var(--accent); } }
+@media (prefers-reduced-motion: no-preference) {
+  .card-action { transition: transform 120ms ease; }
+  .card-action:active { transform: scale(0.99); }
+}
+/* A chip that opens something (a book page's "ص 14"): a real button that
+   keeps the chip look, with the accent edge and press of other tappables. */
+button.tap-chip { cursor: pointer; min-block-size: 1.75rem; line-height: 1.6; color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--line)); -webkit-tap-highlight-color: transparent; }
+button.tap-chip:active { transform: var(--press, scale(0.97)); }
+@media (hover: hover) and (pointer: fine) { button.tap-chip:hover { border-color: var(--accent); } }
 .chip.ready { background: var(--good-soft); border-color: transparent; color: var(--good); font-weight: 600; }
 
 /* ---------- Today: the lecture list ---------- */

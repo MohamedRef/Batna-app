@@ -77,6 +77,8 @@ pub fn topic_session(data: &StudyData, lecture: &str, topic: Option<String>) -> 
 /// Starts a study session: on exactly `items` when given, else on the
 /// lecture with the usual time budget.
 fn start(mut ui: Ui, lecture: &str, items: Option<Vec<String>>) {
+    // Over Study itself the screen doesn't change, so close the page here.
+    close();
     *crate::study::START.write() = Some(crate::study::Start {
         lectures: Some(vec![lecture.to_string()]),
         items,

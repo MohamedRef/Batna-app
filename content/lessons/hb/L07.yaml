@@ -408,6 +408,13 @@ lessons:
           - ["−", "IgG +", "+", "Immunity after recovery"]
           - ["−", "−", "+", "Immunity after vaccination"]
         hide: [[0, 3], [1, 3], [2, 3], [3, 3], [4, 3]]
+      - kind: aside
+        tone: trap
+        page: 118
+        text: |
+          في رسمة الكتاب صفحة 118، خانة **Immunity after vaccination** مكتوب فيها **IgG anti-HBc+** زي خانة الـ recovery بالظبط، ودي غلطة مطبعية.
+
+          الـ vaccine بيدي **anti-HBs بس**، فالصح: **HBsAg−، anti-HBc−، anti-HBs+**. ده اللي في الجدول فوق.
       - kind: reveal
         page: 118
         prompt: "إزاي الـ anti-HBc لوحده بيفرق اللي اتطعّم عن اللي خف من العدوى؟"
@@ -677,8 +684,8 @@ lessons:
       - kind: figure
         page: 119
         title: "Who to treat (algorithm الكتاب)"
-        alt: "Algorithm. Chronic HBV splits by HBV DNA. DNA below 2,000 IU/mL: no treatment. DNA above 2,000 IU/mL splits by ALT. ALT abnormal (upper limit of normal 40 IU/L): treat. ALT normal: no treatment for now; if over 30 years old, liver biopsy or FibroScan. FibroScan above 9 kPa means severe fibrosis: treat. Without biopsy or FibroScan: observe."
-        caption: "الأرقام: **DNA 2,000 IU/mL**، **ALT ULN 40 IU/L**، **age > 30**، **FibroScan > 9 kPa** = severe fibrosis."
+        alt: "Algorithm. Chronic HBV splits by HBV DNA. DNA below 2,000 IU/mL: no treatment. DNA above 2,000 IU/mL splits by ALT. ALT abnormal (upper limit of normal 40 IU/L): treat. ALT normal: no treatment for now; if over 30 years old, liver biopsy or FibroScan. FibroScan above 9 kPa means severe fibrosis. Without biopsy or FibroScan: observe."
+        caption: "الأرقام: **DNA 2,000 IU/mL**، **ALT ULN 40 IU/L**، **age > 30**، **FibroScan > 9 kPa** = severe fibrosis. الكتاب مش كاتب treat في الخانة دي؛ العلاج هنا جاي من المعيار التالت (**severity of liver disease**، صفحة 118)."
         svg: |
           <svg viewBox="0 0 330 410" xmlns="http://www.w3.org/2000/svg">
             <defs>
@@ -713,7 +720,7 @@ lessons:
             <text x="83" y="355" text-anchor="middle" class="t-sm">FibroScan: observe</text>
             <rect x="172" y="318" width="150" height="48" rx="6" class="fg-bad"/>
             <text x="247" y="338" text-anchor="middle" class="t-sm t-b">&gt; 9 kPa = severe</text>
-            <text x="247" y="355" text-anchor="middle" class="t-sm t-b t-bad">fibrosis: treat</text>
+            <text x="247" y="355" text-anchor="middle" class="t-sm t-b t-bad">fibrosis</text>
             <text x="165" y="396" text-anchor="middle" class="t-sm t-mut">FibroScan or liver biopsy</text>
           </svg>
       - kind: case
@@ -731,12 +738,12 @@ lessons:
           - reveal: "FibroScan: 10.5 kPa."
             question: "Decision?"
             options:
-              - "Treat: above 9 kPa means severe fibrosis"
+              - "Treat: above 9 kPa means severe fibrosis, so severity of liver disease is met"
               - "Observe: ALT is normal"
               - "Repeat FibroScan in 5 years"
               - "Peginterferon is the only option"
             answer: 0
-            why: "**> 9 kPa = severe fibrosis**، يعني الكبد بيتأذي حتى لو الـ ALT طبيعي. يتعالج."
+            why: "**> 9 kPa = severe fibrosis**. الكتاب بيبني القرار على 3 معايير، منها **severity of liver disease** (صفحة 118)، فالـ severe fibrosis مع DNA > 2,000 يتعالج حتى لو الـ ALT طبيعي."
       - kind: explain
         page: 120
         title: "واللي مش هيتعالج؟ نتابعه كل قد إيه"
@@ -856,7 +863,7 @@ lessons:
     recap:
       - "القرار = **DNA + ALT + severity**، ونفس القواعد لـ e+ و e−."
       - "DNA **< 2,000** → no treatment. DNA **> 2,000** + ALT abnormal (ULN **40**) → treat."
-      - "DNA > 2,000 + ALT normal + age **> 30** → FibroScan/biopsy؛ **> 9 kPa** → treat."
+      - "DNA > 2,000 + ALT normal + age **> 30** → FibroScan/biopsy؛ **> 9 kPa** = severe fibrosis، فيتعالج على معيار الـ severity."
       - "Monitoring: e+ كل **3–6 m**، e− كل **6–12 m**، e− infection مع DNA > 2,000 كل **3 m** أول سنة."
       - "First line = **PET**: Peg-IFN alfa-2a، entecavir، tenofovir."
       - "e+ seroconversion → stop بعد **12 months**. غير كده long-term لحد **HBsAg seroconversion**."
@@ -904,7 +911,7 @@ lessons:
           **35%** اتشالوا من قايمة الزرع بسبب حباية في اليوم. ده أحسن خبر ممكن يسمعه حد واقف في طابور، أحسن من إن الطابور اتلغى. 😄
       - kind: check
         page: 120
-        question: "A man with HBV cirrhosis (Child B) has HBV DNA 150 IU/mL and normal ALT. What does the book advise?"
+        question: "A man with decompensated HBV cirrhosis (Child B, with ascites) has HBV DNA 150 IU/mL and normal ALT. What does the book advise?"
         options:
           - "Start an NA with a high barrier to resistance, adjusted to renal function, and assess for transplant"
           - "No treatment: DNA is below 2,000 IU/mL"

@@ -45,6 +45,8 @@ pub const TABLES: &[(&str, SyncKind)] = &[
     ("item_status", SyncKind::Lww),
     // Synced settings by key (every chunk, through `Store::put_setting`).
     ("settings", SyncKind::Lww),
+    // Mohamed's own cards, one JSON row each (chunk 21, `batna_core::own`).
+    ("own_cards", SyncKind::Lww),
 ];
 
 pub fn table_kind(table: &str) -> Option<SyncKind> {

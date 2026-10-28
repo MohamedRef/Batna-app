@@ -30,3 +30,5 @@ One file, `/mnt/project-files/medstudy/anki/batna.apkg`, holds every written lec
 ## Sync between your devices (Batna Cloud)
 Batna works fully offline. To keep the Mac, phone and tablet in step, deploy Batna's own free Cloudflare Worker once and sign in under Settings › المزامنة; the steps are in [CLOUD.md](CLOUD.md). The cloud URL and Google client come from `.env` (copy `.env.example`), which `just` loads at build time. Without them, the Sync section says sync isn't set up and nothing leaves the device.
 
+## Your own cards
+Study › كروتك holds cards you write yourself: «＋ كارت جديد» opens a short form (front, back, and optionally the lecture, book page and where it came from). On the phone and tablet, select text in any app and pick «Batna» from the menu, or share text to Batna: it opens the same form with the text on the back, ready for you to write the question. Your cards study like the book's, as their own deck («ذاكر كروتك بس», or the ✎ chip with the lectures), skip the ✓ / ✎ / ✗ check, sync with Batna Cloud, and go into Anki with `--own` ([ANKI.md](ANKI.md)).

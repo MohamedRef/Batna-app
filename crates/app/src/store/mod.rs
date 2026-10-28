@@ -10,6 +10,7 @@
 mod backend;
 pub mod export;
 pub mod import;
+pub mod own;
 mod paths;
 pub mod sync;
 
@@ -109,6 +110,18 @@ const MIGRATIONS: &[&str] = &[
         op    TEXT NOT NULL
     ) STRICT;
 ",
+    "
+    -- Mohamed's own cards (batna_core::own::OwnCard as JSON). Last writer wins.
+    CREATE TABLE own_cards (
+        id          TEXT PRIMARY KEY,
+        value       TEXT NOT NULL,
+        account_id  TEXT,
+        device_id   TEXT NOT NULL,
+        hlc_wall    INTEGER NOT NULL,
+        hlc_counter INTEGER NOT NULL,
+        deleted     INTEGER NOT NULL DEFAULT 0
+    ) STRICT;
+",
 ];
 
 const REVIEW_SETTINGS_KEY: &str = "review";
@@ -158,6 +171,7 @@ impl Store {
             }
         };
         sync::seed(&conn, &device)?;
+        sync::check_tables(&conn)?;
         let mut clock = HlcClock::new(device);
         // Start past every stamp already stored, whichever device wrote it.
         if let Some(last) = newest_stamp(&conn)? {

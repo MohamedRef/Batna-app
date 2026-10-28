@@ -1,4 +1,4 @@
-//! `batna-tools anki [--lecture hb.L01] [--verdicts FILE] [--out DIR]`: Anki
+//! `batna-tools anki [--lecture hb.L01] [--verdicts FILE] [--own EXPORT] [--out DIR]`: Anki
 //! decks from the content YAML, so Mohamed can study before the app is done.
 //!
 //! By default it writes one file, `dist/anki/batna.apkg`, with a `Batna`
@@ -17,6 +17,10 @@
 //! Model, deck and note ids, field names and GUIDs match the interim
 //! `/mnt/project-files/medstudy/anki/make_apkg.py` (genanki), so decks
 //! imported from either one update in place and keep their review history.
+//!
+//! `--own batna-export-….json` adds Mohamed's own cards (the app's Settings ›
+//! Your data export) as one more subdeck, `Batna::My own cards`, tagged
+//! `own` and never `unverified`.
 //!
 //! Note types: Batna Basic (Front, Back, Source, Update, Id) and Batna Cloze
 //! (Text, Extra, Source, Update, Id). MCQ, enumerate, essay, order and calc
@@ -85,6 +89,14 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
             return Err(vec![format!("{id}: no such lecture written yet")]);
         }
     }
+    if let Some(file) = crate::flag(args, "--own") {
+        let cards = own_cards(Path::new(file)).map_err(|e| vec![e])?;
+        if cards.is_empty() {
+            warnings.push(format!("{file}: no own cards in this export"));
+        } else if only.is_none() {
+            lectures.push(batna_core::own::lecture(&cards));
+        }
+    }
     let approved = crate::read_approved(&root.join("content/approved.txt"));
     let opts =
         Options { approved: &approved, verdicts: verdicts.as_ref(), drafts: &drafts, now_ms: now_ms() };
@@ -110,6 +122,21 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
         report.push_str(&format!("\n  warning: {w}"));
     }
     Ok(report)
+}
+
+/// His live own cards from an app export (`tables.own_cards`).
+pub fn own_cards(path: &Path) -> Result<Vec<batna_core::own::OwnCard>, String> {
+    let text = std::fs::read_to_string(path).map_err(|e| format!("{}: {e}", path.display()))?;
+    let doc: Value = serde_json::from_str(&text).map_err(|e| format!("{}: {e}", path.display()))?;
+    if doc["format"] != "batna-export" {
+        return Err(format!("{}: not a Batna export (Settings › Your data)", path.display()));
+    }
+    let rows = doc["tables"]["own_cards"]["rows"].as_array().cloned().unwrap_or_default();
+    Ok(rows
+        .iter()
+        .filter(|r| r["deleted"].as_i64() == Some(0))
+        .filter_map(|r| r["value"].as_str().and_then(|v| serde_json::from_str(v).ok()))
+        .collect())
 }
 
 /// The project's shared folder, where unmerged lectures wait.
@@ -210,6 +237,9 @@ impl Deck {
 /// `Batna::L01 Liver Cirrhosis`, as make_apkg.py names it (Anki matches
 /// decks by name on import, so this must not change).
 pub fn deck_name(lec: &Lecture) -> String {
+    if lec.lecture == batna_core::own::LECTURE {
+        return format!("Batna::{}", batna_core::own::TITLE);
+    }
     let num = lec.lecture.split_once('.').map(|(_, n)| n).unwrap_or(&lec.lecture);
     format!("Batna::{num} {}", lec.title)
 }
@@ -225,13 +255,17 @@ pub fn build(lectures: &[Lecture], opts: &Options<'_>) -> Result<Deck, Vec<Strin
     };
     for lec in lectures {
         let did = stable_id(&format!("batna-deck-{}", lec.lecture));
-        let desc = format!(
-            "{} · Book pp. {}–{}{}",
-            esc(&lec.title),
-            lec.book.pages[0],
-            lec.book.pages[1],
-            lec.author.as_deref().map(|a| format!(" · {}", esc(a))).unwrap_or_default()
-        );
+        let desc = if lec.lecture == batna_core::own::LECTURE {
+            "Cards Mohamed wrote himself in Batna.".to_string()
+        } else {
+            format!(
+                "{} · Book pp. {}–{}{}",
+                esc(&lec.title),
+                lec.book.pages[0],
+                lec.book.pages[1],
+                lec.author.as_deref().map(|a| format!(" · {}", esc(a))).unwrap_or_default()
+            )
+        };
         deck.decks.push((did, deck_name(lec), desc));
         let before = deck.notes.len();
         for item in &lec.items {
@@ -280,7 +314,11 @@ are not checked yet: trust the book page on the back.";
 
 /// The notes for one item, ported from make_apkg.py's `notes_for`.
 pub fn notes_for(item: &Item, lec: &Lecture, deck: i64, approved: bool) -> Vec<Note> {
-    let src = format!("{} · Book p. {}", esc(&lec.title), item.src.page);
+    let own = batna_core::own::is_own(&item.id);
+    let src = match (own, item.src.page) {
+        (true, 0) => esc(&lec.title),
+        _ => format!("{} · Book p. {}", esc(&lec.title), item.src.page),
+    };
     let upd =
         item.update.as_ref().map(|u| format!("{} ({})", esc(&u.text), esc(&u.reference))).unwrap_or_default();
     let (chapter, num) = lec.lecture.split_once('.').unwrap_or((&lec.lecture, ""));
@@ -289,6 +327,10 @@ pub fn notes_for(item: &Item, lec: &Lecture, deck: i64, approved: bool) -> Vec<N
         format!("topic::{}", item.topic.as_deref().unwrap_or("misc")),
         if approved { "approved" } else { "unverified" }.to_string(),
     ];
+    if own {
+        // His own cards carry `own` (from the item) and the lecture they belong with.
+        tags.truncate(1);
+    }
     tags.extend(item.tags.iter().cloned());
     let tags: Vec<String> = tags.iter().map(|t| t.split_whitespace().collect::<Vec<_>>().join("-")).collect();
     let id = item.id.as_str();
@@ -643,6 +685,31 @@ mod tests {
 
     fn fixture() -> Lecture {
         serde_yaml_ng::from_str(include_str!("../../../fixtures/content/sample.yaml")).unwrap()
+    }
+
+    #[test]
+    fn own_cards_from_an_export_get_their_own_subdeck() {
+        let card = |id: &str, deleted: i64| {
+            let value = format!(
+                r#"{{"id":"{id}","front":"SAAG?","back":"≥ 1.1","lecture":"hb.L09","created_ms":1}}"#
+            );
+            json!({"id": id, "value": value, "deleted": deleted})
+        };
+        let doc = json!({"format": "batna-export", "tables": {"own_cards": {"rows": [card("own.a", 0), card("own.b", 1)]}}});
+        let path = std::env::temp_dir().join(format!("batna-own-{}.json", now_ms()));
+        std::fs::write(&path, doc.to_string()).unwrap();
+        let cards = own_cards(&path).unwrap();
+        let _ = std::fs::remove_file(&path);
+        assert_eq!(cards.len(), 1, "deleted cards stay out");
+
+        let lec = batna_core::own::lecture(&cards);
+        let none = BTreeSet::new();
+        let opts = Options { approved: &none, verdicts: None, drafts: &none, now_ms: 1 };
+        let deck = build(std::slice::from_ref(&lec), &opts).unwrap();
+        assert_eq!(deck.decks[1].1, "Batna::My own cards");
+        let note = &deck.notes[0];
+        assert_eq!(note.tags, ["own::cards", "own", "hb.L09"]);
+        assert_eq!(note.fields[2], "My own cards");
     }
 
     #[test]

@@ -59,12 +59,24 @@ fn items() -> &'static HashMap<String, (&'static Lecture, &'static Item)> {
     })
 }
 
-/// Lectures that have at least one item this player can show.
+/// The name a lecture shows under: the book's title, or "your cards".
+fn lecture_title(l: &Lecture) -> String {
+    if l.lecture == batna_core::own::LECTURE { crate::i18n::own::TITLE.to_string() } else { l.title.clone() }
+}
+
+/// A book item or one of his own cards, by id.
+fn find(id: &str) -> Option<(&'static Lecture, &'static Item)> {
+    items().get(id).copied().or_else(|| crate::own::find(id))
+}
+
+/// Lectures that have at least one item this player can show, then his own
+/// cards' deck when he has any.
 fn ready_lectures() -> Vec<&'static Lecture> {
     Library::get()
         .lectures
         .values()
         .filter(|l| l.items.iter().any(|i| PLAYABLE.contains(&i.body.kind())))
+        .chain(crate::own::lecture())
         .collect()
 }
 
@@ -98,7 +110,7 @@ fn plan_items(store: &StudyStoreHandle, ids: &[String]) -> Vec<Planned> {
     let mut seen = HashSet::new();
     ids.iter()
         .filter(|id| seen.insert(id.as_str()))
-        .filter_map(|id| items().get(id))
+        .filter_map(|id| find(id))
         .filter(|(_, i)| PLAYABLE.contains(&i.body.kind()) && !s.is_hidden(&i.id))
         .map(|(l, i)| Planned {
             item_id: i.id.clone(),
@@ -124,6 +136,8 @@ enum Phase {
 #[component]
 pub fn Study() -> Element {
     let store = use_store();
+    // His own cards' deck changes with the review store (a save, an import, a sync).
+    let _ = crate::store::use_review().revision.read();
     let ready = ready_lectures();
     let chosen = use_signal(|| ready.iter().map(|l| l.lecture.clone()).collect::<BTreeSet<String>>());
     let topics = use_signal(HashSet::<String>::new);
@@ -189,14 +203,16 @@ pub fn Study() -> Element {
                 h1 { {tx::TITLE} }
                 p { {tx::EMPTY_LIBRARY} }
             }
+            crate::own::OwnCardsCard { on_study: move |_| {} }
         },
         Phase::Setup => {
             let picked: Vec<&Lecture> =
                 ready.iter().copied().filter(|l| chosen.read().contains(&l.lecture)).collect();
             let preview = plan(&store, &picked, &topics.read(), minutes());
+            let mut begin_own = begin.clone();
             rsx! {
                 Setup {
-                    ready: ready.iter().map(|l| (l.lecture.clone(), l.title.clone())).collect::<Vec<_>>(),
+                    ready: ready.iter().map(|l| (l.lecture.clone(), lecture_title(l))).collect::<Vec<_>>(),
                     chosen,
                     topics,
                     minutes,
@@ -204,6 +220,9 @@ pub fn Study() -> Element {
                     preview_new: preview.iter().filter(|p| p.fresh).count(),
                     preview_mins: preview.iter().map(|p| p.est_secs).sum::<u32>().div_ceil(60),
                     on_start: move |_| begin(picked.clone(), topics.read().clone(), minutes()),
+                }
+                crate::own::OwnCardsCard {
+                    on_study: move |_| begin_own(crate::own::lecture().into_iter().collect(), HashSet::new(), minutes()),
                 }
             }
         }
@@ -213,7 +232,7 @@ pub fn Study() -> Element {
             let current = s.current().cloned();
             let retry = s.is_retry();
             drop(s);
-            match current.and_then(|p| items().get(&p.item_id).map(|(l, i)| (p, *l, *i))) {
+            match current.and_then(|p| find(&p.item_id).map(|(l, i)| (p, l, i))) {
                 // Only when content changed under a running session; "end" still works.
                 None => rsx! {
                     button { class: "st-primary", onclick: move |_| phase.set(Phase::Summary), {tx::END} }
@@ -267,7 +286,7 @@ pub fn Study() -> Element {
                             ItemView {
                                 key: "{pos}-{p.item_id}",
                                 item,
-                                lecture_title: lecture.title.clone(),
+                                lecture_title: lecture_title(lecture),
                                 topic_title,
                                 fresh: p.fresh,
                                 retry,
@@ -284,7 +303,7 @@ pub fn Study() -> Element {
             let shaky: Vec<(String, String)> = summary
                 .shaky
                 .iter()
-                .filter_map(|id| items().get(id).map(|(_, i)| (id.clone(), short_text(i))))
+                .filter_map(|id| find(id).map(|(_, i)| (id.clone(), short_text(i))))
                 .collect();
             rsx! {
                 SummaryView {
@@ -383,7 +402,9 @@ fn Setup(
                                 topics.write().clear();
                             }
                         },
-                        span { class: "st-chip-num", {id.rsplit('.').next().unwrap_or(&id).to_string()} }
+                        span { class: "st-chip-num",
+                            if id == batna_core::own::LECTURE { "✎" } else { {id.rsplit('.').next().unwrap_or(&id).to_string()} }
+                        }
                         bdi { "{title}" }
                     }
                 }

@@ -20,6 +20,7 @@ mod import;
 mod onboarding;
 mod oral;
 mod order;
+mod own;
 mod plan;
 mod platform;
 mod prefs;
@@ -136,6 +137,11 @@ fn App() -> Element {
     let look = ui.prefs.read().css();
     back::use_back(ui, current, *settings.open.read());
     update::view::use_android_install(ui);
+    // A screen opens at its top, not at the last screen's scroll offset (UX #102).
+    use_effect(move || {
+        let _ = ui.screen.read();
+        document::eval(r#"document.querySelector("main.content")?.scrollTo(0, 0);"#);
+    });
     rsx! {
         document::Title { "Batna" }
         style { {fonts::css()} }
@@ -174,6 +180,7 @@ fn App() -> Element {
                 {screen_body(current)}
             }
             settings::SettingsSheet {}
+            own::ShareInbox {}
             onboarding::Onboarding {}
         }
     }

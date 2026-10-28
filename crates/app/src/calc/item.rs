@@ -8,6 +8,7 @@ use dioxus::prelude::*;
 
 use super::{CalcForm, OutcomeCard};
 use crate::case::{ItemMeta, effective, find_item, record, use_case_store};
+use crate::hover::BookPage;
 use crate::i18n::{calc as tx, case as cx};
 
 #[derive(Clone, Copy, PartialEq)]
@@ -84,8 +85,8 @@ pub fn CalcItem(item_id: String, on_back: EventHandler) -> Element {
                     }
                     p { class: "small muted", {tx::YOUR_RESULT_HINT} }
                     div { class: "row",
-                        button { class: "btn-primary", disabled: typed.read().trim().is_empty(), onclick: check, {tx::CHECK} }
-                        button { class: "btn-secondary", onclick: move |_| computed.set(Computed::Calculator), {tx::USE_CALC} }
+                        button { class: "btn btn-primary", "aria-keyshortcuts": "Enter", disabled: typed.read().trim().is_empty(), onclick: check, {tx::CHECK} }
+                        button { class: "btn btn-secondary", onclick: move |_| computed.set(Computed::Calculator), {tx::USE_CALC} }
                     }
                 }
             } else {
@@ -101,24 +102,24 @@ pub fn CalcItem(item_id: String, on_back: EventHandler) -> Element {
                     h2 { {tx::MEANING} }
                     if !meaning_open() {
                         p { class: "small muted", {tx::MEANING_HINT} }
-                        button { class: "btn-primary", onclick: move |_| meaning_open.set(true), {tx::SHOW_MEANING} }
+                        button { class: "btn btn-primary", "aria-keyshortcuts": "Space", onclick: move |_| meaning_open.set(true), {tx::SHOW_MEANING} }
                     } else {
                         bdi { class: "case-why", "{interpret}" }
-                        p { class: "small muted", "{cx::PAGE} " bdi { "{item.src.page}" } }
+                        BookPage { label: cx::PAGE, page: item.src.page, quote: item.src.quote.clone() }
                         if let Some(u) = &item.update {
                             p { class: "small update", "{cx::UPDATE}: " bdi { "{u.text} ({u.reference})" } }
                         }
                         match verdict() {
                             None => rsx! {
                                 div { class: "row",
-                                    button { class: "btn-good", onclick: move |_| finish.call(true), {cx::GOT_IT} }
-                                    button { class: "btn-secondary", onclick: move |_| finish.call(false), {cx::MISSED} }
+                                    button { class: "btn btn-good", "aria-keyshortcuts": "3", onclick: move |_| finish.call(true), {cx::GOT_IT} }
+                                    button { class: "btn btn-secondary", "aria-keyshortcuts": "1", onclick: move |_| finish.call(false), {cx::MISSED} }
                                 }
                             },
                             Some(_) => rsx! {
                                 div { class: "row",
                                     button {
-                                        class: "btn-secondary",
+                                        class: "btn btn-secondary",
                                         onclick: move |_| {
                                             typed.set(String::new());
                                             computed.set(Computed::Open);
@@ -128,7 +129,7 @@ pub fn CalcItem(item_id: String, on_back: EventHandler) -> Element {
                                         },
                                         {cx::AGAIN}
                                     }
-                                    button { class: "btn-primary", onclick: move |_| on_back.call(()), {cx::BACK} }
+                                    button { class: "btn btn-primary", "aria-keyshortcuts": "Enter", onclick: move |_| on_back.call(()), {cx::BACK} }
                                 }
                             },
                         }

@@ -11,7 +11,7 @@ use crate::Ui;
 use crate::content::Library;
 use crate::i18n::onboard as tx;
 use crate::reminders::{MAX_TIMES, RemindPrefs, hhmm, parse_hhmm};
-use crate::store::{now_ms, shared, utc_offset_minutes};
+use crate::store::{now_ms, shared};
 
 const CSS: &str = r#"
 .onboard-backdrop { position: fixed; inset: 0; z-index: 50; background: var(--bg); overflow-y: auto; }
@@ -58,9 +58,7 @@ impl Answers {
     }
 
     fn save(&self) {
-        if let Err(e) = shared().put_setting(Self::KEY, self) {
-            eprintln!("saving first-run answers: {e}");
-        }
+        crate::store::save_setting(Self::KEY, self);
     }
 }
 
@@ -85,7 +83,7 @@ const SEEN: &str = "onboarded";
 
 fn close() {
     if let Err(e) = shared().put_local_setting(SEEN, &true) {
-        eprintln!("saving first-run flag: {e}");
+        crate::diag::report!("saving first-run flag: {e}");
     }
     *OPEN.write() = false;
 }
@@ -122,12 +120,16 @@ fn Questions() -> Element {
     let mut step = use_signal(|| 0usize);
     let plan = crate::plan::SETTINGS.peek().clone();
     let answers = Answers::load();
-    let today = Day::from_unix_ms(now_ms(), utc_offset_minutes(), 0);
+    let today = crate::store::zone().study_day(now_ms());
     let mut exam = use_signal(|| plan.exam.map(Day::iso).unwrap_or_default());
     let mut weekdays = use_signal(|| plan.weekdays);
     let mut minutes = use_signal(|| answers.minutes.unwrap_or(10));
     let mut studied = use_signal(|| answers.studied.clone());
     let mut times = use_signal(|| crate::reminders::PREFS.peek().times.clone());
+    // What each step showed at first. A step he clicks through unchanged
+    // saves nothing, so a new device that hasn't synced yet can't overwrite
+    // the real settings with its defaults (#32).
+    let initial = use_hook(|| (plan.clone(), answers.clone(), crate::reminders::PREFS.peek().times.clone()));
     let mut error = use_signal(|| None::<&'static str>);
 
     let current = STEPS[step()];
@@ -137,7 +139,7 @@ fn Questions() -> Element {
         match current {
             Step::Exam => {
                 let text = exam.read().clone();
-                if text.is_empty() {
+                if text.is_empty() || Some(text.as_str()) == initial.0.exam.map(Day::iso).as_deref() {
                     return true;
                 }
                 let Some(day) = Day::parse(&text).filter(|d| *d > today) else {
@@ -153,15 +155,33 @@ fn Questions() -> Element {
                     error.set(Some(tx::PICK_A_DAY));
                     return false;
                 }
-                let mut s = crate::plan::SETTINGS.write();
-                s.weekdays = *weekdays.read();
-                crate::plan::save(&s);
+                if *weekdays.read() != initial.0.weekdays {
+                    let mut s = crate::plan::SETTINGS.write();
+                    s.weekdays = *weekdays.read();
+                    crate::plan::save(&s);
+                }
             }
             Step::Minutes | Step::Studied => {
-                Answers { minutes: Some(minutes()), studied: studied.read().clone() }.save();
+                // Only the answers he changed, on top of what's stored now.
+                let mut a = Answers::load();
+                let mut touched = false;
+                if Some(minutes()) != initial.1.minutes && (initial.1.minutes.is_some() || minutes() != 10) {
+                    a.minutes = Some(minutes());
+                    touched = true;
+                }
+                if *studied.read() != initial.1.studied {
+                    a.studied = studied.read().clone();
+                    touched = true;
+                }
+                if touched {
+                    a.save();
+                }
             }
             Step::Reminders => {
                 let t = times.read().clone();
+                if t == initial.2 {
+                    return true;
+                }
                 let on = !t.is_empty();
                 RemindPrefs { on, times: if on { t } else { RemindPrefs::default().times } }.save();
                 if on && crate::reminders::HERE() {
@@ -230,8 +250,8 @@ fn Questions() -> Element {
                 h1 { {tx::STUDIED_TITLE} }
                 p { class: "muted", {tx::STUDIED_BODY} }
                 div { class: "row",
-                    button { class: "secondary", onclick: move |_| studied.set(all.clone()), {tx::ALL} }
-                    button { class: "secondary", onclick: move |_| studied.set(Vec::new()), {tx::NONE} }
+                    button { class: "btn btn-secondary", onclick: move |_| studied.set(all.clone()), {tx::ALL} }
+                    button { class: "btn btn-secondary", onclick: move |_| studied.set(Vec::new()), {tx::NONE} }
                 }
                 ul { class: "onboard-lectures", aria_label: tx::STUDIED_TITLE,
                     for (n , l) in Library::get().index.lectures.iter().enumerate() {
@@ -284,12 +304,12 @@ fn Questions() -> Element {
                             }
                         },
                     }
-                    button { class: "secondary", onclick: move |_| { times.write().remove(i); }, {tx::REMOVE} }
+                    button { class: "btn btn-secondary", onclick: move |_| { times.write().remove(i); }, {tx::REMOVE} }
                 }
             }
             if times.read().len() < MAX_TIMES {
                 button {
-                    class: "secondary",
+                    class: "btn btn-secondary",
                     onclick: move |_| {
                         let next = times.read().last().map_or(19 * 60, |t| (t + 120).min(23 * 60));
                         times.write().push(next);
@@ -337,13 +357,13 @@ fn Questions() -> Element {
                     p { class: "error", role: "alert", {msg} }
                 }
                 div { class: "onboard-actions",
-                    button { class: "secondary", onclick: move |_| close(), {tx::SKIP_ALL} }
+                    button { class: "btn btn-ghost", onclick: move |_| close(), {tx::SKIP_ALL} }
                     div { class: "row",
                         if step() > 0 {
-                            button { class: "secondary", onclick: move |_| { error.set(None); step -= 1; }, {tx::BACK} }
+                            button { class: "btn btn-secondary", onclick: move |_| { error.set(None); step -= 1; }, {tx::BACK} }
                         }
                         button {
-                            class: "primary",
+                            class: "btn btn-primary",
                             onclick: move |_| {
                                 if commit() {
                                     if last { close() } else { step += 1 }
@@ -385,7 +405,7 @@ pub fn ReopenCard() -> Element {
         section { class: "card",
             h2 { {tx::REOPEN_TITLE} }
             p { class: "muted small", {tx::REOPEN_BODY} }
-            button { class: "secondary", onclick: move |_| reopen(), {tx::REOPEN} }
+            button { class: "btn btn-secondary", onclick: move |_| reopen(), {tx::REOPEN} }
         }
     }
 }

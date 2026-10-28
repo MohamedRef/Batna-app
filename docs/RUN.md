@@ -3,7 +3,7 @@
 ## Mac (desktop)
 1. Install Rust (`curl https://sh.rustup.rs -sSf | sh`) and `just` (`brew install just`).
 2. Clone the repo: `git clone https://github.com/MohamedRef/Batna-app && cd Batna-app` (Batna's code is on `main`).
-3. `just run` opens the app. `BATNA_WINDOW_SIZE=412x900 just run` previews the phone layout. `BATNA_OPEN_SCREEN=study just run` opens a screen directly. `BATNA_OPEN_SETTINGS=look just run` opens Settings on a section (`study`, `reminders`, `sync`, `look`, `tablet`, `mac`, `data`, `updates`, `about`; empty for the list). Theme and text size are kept per device in `device-prefs.txt` in the data folder (Settings › Your data shows where).
+3. `just run` opens the app. `BATNA_WINDOW_SIZE=412x900 just run` previews the phone layout. `BATNA_OPEN_SCREEN=study just run` opens a screen directly. `BATNA_OPEN_SETTINGS=look just run` opens Settings on a section (`study`, `reminders`, `sync`, `look`, `tablet`, `mac`, `data`, `updates`, `about`; empty for the list). Theme and interface size (`text_size`) are kept per device in `device-prefs.txt` in the data folder (Settings › Your data shows where).
    - Progress screen previews: `BATNA_OPEN_SCREEN=stats BATNA_STATS_TAB=plan BATNA_PLAN_EXAM=2027-01-20 BATNA_STATS_DEMO=1 just run` opens the exam planner with a preset exam day and demo numbers (labelled as demo on screen). `BATNA_STATS_TAB` is `progress`, `mistakes` or `plan`.
 
 ## S24 Ultra and Tab S11 (Android)
@@ -32,3 +32,5 @@ One file, `/mnt/project-files/medstudy/anki/batna.apkg`, holds every written lec
 ## Sync between your devices (Batna Cloud)
 Batna works fully offline. To keep the Mac, phone and tablet in step, deploy Batna's own free Cloudflare Worker once and sign in under Settings › المزامنة; the steps are in [CLOUD.md](CLOUD.md). The cloud URL and Google client come from `.env` (copy `.env.example`), which `just` loads at build time. Without them, the Sync section says sync isn't set up and nothing leaves the device.
 
+## Your own cards
+Study › كروتك holds cards you write yourself: «＋ كارت جديد» opens a short form (front, back, and optionally the lecture, book page and where it came from). On the phone and tablet, select text in any app and pick «Batna» from the menu, or share text to Batna: it opens the same form with the text on the back, ready for you to write the question. Your cards study like the book's, as their own deck («ذاكر كروتك بس», or the ✎ chip with the lectures), skip the ✓ / ✎ / ✗ check, sync with Batna Cloud, and go into Anki with `--own` ([ANKI.md](ANKI.md)).

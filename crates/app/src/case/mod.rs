@@ -14,6 +14,7 @@ use dioxus::prelude::*;
 
 use crate::calc::{Calculators, item::CalcItem};
 use crate::content::Library;
+use crate::hover::BookPage;
 use crate::i18n::case as tx;
 
 const CSS: &str = include_str!("case.css");
@@ -147,7 +148,7 @@ pub fn ItemMeta(lecture: String, item_id: String, on_back: EventHandler) -> Elem
     let unverified = find_item(&item_id).is_some_and(|(_, i)| i.status == Status::Unverified);
     rsx! {
         div { class: "player-meta",
-            button { class: "link-button", onclick: move |_| on_back.call(()), "‹ " {tx::BACK} }
+            button { class: "btn-link", "aria-keyshortcuts": "Escape", onclick: move |_| on_back.call(()), "‹ " {tx::BACK} }
             bdi { class: "muted small", "{lecture}" }
             if unverified { span { class: "chip", {tx::UNVERIFIED} } }
         }
@@ -208,6 +209,7 @@ pub fn CasePlayer(item_id: String, on_back: EventHandler) -> Element {
                                         key: "{i}",
                                         role: "listitem",
                                         dir: "auto",
+                                        "aria-keyshortcuts": option_key(i),
                                         class: option_class(i, picked(), steps[k].answer),
                                         disabled: picked().is_some(),
                                         onclick: move |_| {
@@ -219,7 +221,7 @@ pub fn CasePlayer(item_id: String, on_back: EventHandler) -> Element {
                                 }
                             }
                         } else if !shown() {
-                            button { class: "btn-primary", onclick: move |_| shown.set(true), {tx::SHOW_ANSWER} }
+                            button { class: "btn btn-primary", "aria-keyshortcuts": "Space", onclick: move |_| shown.set(true), {tx::SHOW_ANSWER} }
                         }
                         if picked().is_some() || shown() {
                             if let Some(p) = picked() {
@@ -229,17 +231,18 @@ pub fn CasePlayer(item_id: String, on_back: EventHandler) -> Element {
                             }
                             div { class: "case-why",
                                 bdi { "{steps[k].why}" }
-                                p { class: "small muted", "{tx::PAGE} " bdi { "{page}" } }
+                                BookPage { label: tx::PAGE, page, quote: item.src.quote.clone() }
                             }
                             if shown() && !answered {
                                 div { class: "row",
-                                    button { class: "btn-good", onclick: move |_| answer(true), {tx::GOT_IT} }
-                                    button { class: "btn-secondary", onclick: move |_| answer(false), {tx::MISSED} }
+                                    button { class: "btn btn-good", "aria-keyshortcuts": "3", onclick: move |_| answer(true), {tx::GOT_IT} }
+                                    button { class: "btn btn-secondary", "aria-keyshortcuts": "1", onclick: move |_| answer(false), {tx::MISSED} }
                                 }
                             }
                             if answered {
                                 button {
-                                    class: "btn-primary",
+                                    class: "btn btn-primary",
+                                    "aria-keyshortcuts": "Enter",
                                     onclick: {
                                         let record_id = record_id.clone();
                                         move |_| {
@@ -275,6 +278,11 @@ pub fn CasePlayer(item_id: String, on_back: EventHandler) -> Element {
             }
         }
     }
+}
+
+/// "A"–"E": the key that picks option `i`.
+fn option_key(i: usize) -> &'static str {
+    ["A", "B", "C", "D", "E", "F"].get(i).copied().unwrap_or("")
 }
 
 fn option_class(i: usize, picked: Option<usize>, answer: Option<usize>) -> &'static str {
@@ -315,8 +323,8 @@ fn Summary(
             }
             if let Some(u) = update { p { class: "small update", "{tx::UPDATE}: " bdi { "{u}" } } }
             div { class: "row",
-                button { class: "btn-secondary", onclick: move |_| on_again.call(()), {tx::AGAIN} }
-                button { class: "btn-primary", onclick: move |_| on_back.call(()), {tx::BACK} }
+                button { class: "btn btn-secondary", "aria-keyshortcuts": "Space", onclick: move |_| on_again.call(()), {tx::AGAIN} }
+                button { class: "btn btn-primary", "aria-keyshortcuts": "Enter", onclick: move |_| on_back.call(()), {tx::BACK} }
             }
         }
     }

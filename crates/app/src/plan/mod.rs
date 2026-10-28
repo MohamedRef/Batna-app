@@ -8,33 +8,24 @@ use batna_core::stats;
 use dioxus::prelude::*;
 
 use crate::i18n::plan as tx;
-use crate::prefs::data_dir;
 use crate::stats::{StudyData, charts, lecture_number};
 
-/// The planner settings, kept in `plan-settings.txt` in the app's data
-/// folder (per device until sync exists). BATNA_PLAN_EXAM=2027-01-20 presets
+/// The planner settings: a synced (LWW) setting in the review store, so the
+/// phone and the tablet share one plan. BATNA_PLAN_EXAM=2027-01-20 presets
 /// the exam day instead (previews and screenshots; nothing is saved then).
 static SETTINGS: GlobalSignal<PlanSettings> = Signal::global(|| {
     if let Some(exam) = std::env::var("BATNA_PLAN_EXAM").ok().and_then(|v| Day::parse(&v)) {
         return PlanSettings { exam: Some(exam), ..PlanSettings::default() };
     }
-    let text = data_dir().and_then(|d| std::fs::read_to_string(d.join(FILE)).ok()).unwrap_or_default();
-    PlanSettings::parse(&text)
+    crate::store::shared().setting(KEY).unwrap_or_default()
 });
 
-const FILE: &str = "plan-settings.txt";
+const KEY: &str = "plan";
 
-/// Best effort, like the device prefs: a folder that can't be written keeps
-/// the plan for this run.
+/// Best effort: if the store can't write, the plan still holds for this run.
 fn save(settings: &PlanSettings) {
-    if std::env::var_os("BATNA_PLAN_EXAM").is_some() {
-        return;
-    }
-    let Some(dir) = data_dir() else { return };
-    let _ = std::fs::create_dir_all(&dir);
-    let tmp = dir.join(format!("{FILE}.tmp"));
-    if std::fs::write(&tmp, settings.render()).is_ok() {
-        let _ = std::fs::rename(&tmp, dir.join(FILE));
+    if std::env::var_os("BATNA_PLAN_EXAM").is_none() {
+        let _ = crate::store::shared().put_setting(KEY, settings);
     }
 }
 
@@ -49,10 +40,10 @@ pub fn Planner(data: Rc<StudyData>) -> Element {
     }
     let rows = data.stats();
     let progress = stats::progress(&rows);
-    // A rough forecast of reviews already due, until FSRS's own (chunk 3).
+    // Reviews already due, from FSRS.
     let today = data.clock.today();
     let span = settings.exam.map_or(0, |e| today.until(e).max(0) as usize);
-    let forecast = stats::rough_forecast(&data.lectures, &data.events, &data.marks, data.clock, span);
+    let forecast = data.due_forecast(span);
     let p = plan::plan(&settings, PlanInput { today, lectures: &progress, review_forecast: &forecast });
     rsx! {
         StatusCard { p: p.clone(), exam: settings.exam }

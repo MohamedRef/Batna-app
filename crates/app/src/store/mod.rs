@@ -10,6 +10,7 @@
 mod backend;
 pub mod export;
 pub mod import;
+mod install;
 pub mod own;
 mod paths;
 pub mod sync;
@@ -136,19 +137,26 @@ pub struct Store {
 
 impl Store {
     pub fn open(path: &Path) -> Result<Self> {
+        Self::open_marked(path, None)
+    }
+
+    /// Opens the database and, with a `marker` in a folder that is never
+    /// backed up, gives a database copied from another install its own
+    /// device id (`install`).
+    pub fn open_marked(path: &Path, marker: Option<&Path>) -> Result<Self> {
         if let Some(dir) = path.parent() {
             let _ = std::fs::create_dir_all(dir);
         }
         let conn = Connection::open(path)?;
         conn.pragma_update(None, "journal_mode", "WAL")?;
-        Self::init(conn, Some(path.to_path_buf()))
+        Self::init(conn, Some(path.to_path_buf()), marker)
     }
 
     pub fn open_in_memory() -> Result<Self> {
-        Self::init(Connection::open_in_memory()?, None)
+        Self::init(Connection::open_in_memory()?, None, None)
     }
 
-    fn init(conn: Connection, path: Option<PathBuf>) -> Result<Self> {
+    fn init(conn: Connection, path: Option<PathBuf>, marker: Option<&Path>) -> Result<Self> {
         conn.pragma_update(None, "foreign_keys", "ON")?;
         let version: u32 = conn.pragma_query_value(None, "user_version", |r| r.get(0))?;
         if version as usize > MIGRATIONS.len() {
@@ -170,6 +178,10 @@ impl Store {
                 conn.execute("INSERT INTO meta (key, value) VALUES ('device_id', ?1)", [&d])?;
                 d
             }
+        };
+        let device = match marker {
+            Some(m) => install::check(&conn, m, &device)?,
+            None => device,
         };
         sync::seed(&conn, &device)?;
         sync::check_tables(&conn)?;
@@ -380,6 +392,9 @@ impl Store {
         // This device's writes go to Batna Cloud too.
         if changed > 0 && mine {
             sync::enqueue(&tx, table, key_col, key, &hlc.device)?;
+        } else if mine {
+            // Our clock should always be past every stored stamp (#257).
+            crate::diag::report!("a local {table} write lost to a newer stored stamp: {key}");
         }
         tx.commit()?;
         Ok(())
@@ -411,7 +426,8 @@ fn insert_review(conn: &rusqlite::Connection, l: &LoggedReview) -> Result<()> {
 /// The newest HLC in any synced table.
 fn newest_stamp(conn: &Connection) -> Result<Option<Hlc>> {
     let mut newest: Option<Hlc> = None;
-    for table in ["review_events", "item_status", "settings"] {
+    // From the sync list, so a new synced table can't be missed (#257).
+    for (table, _) in batna_protocol::sync::TABLES {
         let last: Option<(i64, u32, String)> = conn
             .query_row(
                 &format!(
@@ -437,7 +453,8 @@ fn newest_stamp(conn: &Connection) -> Result<Option<Hlc>> {
 pub fn shared() -> &'static Store {
     STORE.get_or_init(|| {
         let opened = paths::data_dir().and_then(|dir| {
-            Store::open(&dir.join("batna.db")).map_err(|e| format!("{}: {e}", dir.display()))
+            Store::open_marked(&dir.join("batna.db"), paths::install_marker().as_deref())
+                .map_err(|e| format!("{}: {e}", dir.display()))
         });
         match opened {
             Ok(s) => s,
@@ -585,6 +602,33 @@ mod tests {
     fn zone_matches_the_system_offset_now() {
         assert_eq!(zone().offset_at(now_ms()), utc_offset_minutes());
         assert!(zone().changes.windows(2).all(|w| w[0].0 < w[1].0));
+    }
+
+    #[test]
+    fn an_own_card_from_a_clock_ahead_moves_this_clock_past_it() {
+        let dir = std::env::temp_dir().join(format!("batna-store-{}", new_device_id()));
+        let path = dir.join("batna.db");
+        let card = |front: &str| batna_core::own::OwnCard {
+            id: "own.t".into(),
+            front: front.into(),
+            back: "A".into(),
+            lecture: None,
+            page: None,
+            source: None,
+            created_ms: 1,
+        };
+        {
+            // The tablet, two minutes ahead, wrote the card; it synced here.
+            let s = Store::open(&path).unwrap();
+            let ahead = Hlc { wall_ms: now_ms() + 120_000, counter: 0, device: "tablet".into() };
+            let value = serde_json::to_string(&card("Q")).unwrap();
+            s.put_lww("own_cards", "id", "own.t", None, &value, false, &ahead).unwrap();
+        }
+        // Edited here right after a restart, the edit still wins (#257).
+        let s = Store::open(&path).unwrap();
+        s.put_own_card(&card("Q edited")).unwrap();
+        assert_eq!(s.own_cards()[0].front, "Q edited");
+        let _ = std::fs::remove_dir_all(dir);
     }
 
     #[test]

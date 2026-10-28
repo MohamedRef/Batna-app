@@ -271,12 +271,16 @@ impl Store {
     /// Forgets the account's log position: the next sign-in reads it all
     /// again (merging is idempotent, so nothing doubles).
     pub fn reset_sync(&self) -> Result<()> {
-        self.conn
-            .lock()
-            .unwrap()
-            .execute("DELETE FROM meta WHERE key IN (?1, ?2)", [LAST_SEQ, LAST_SYNC_MS])?;
+        forget_position(&self.conn.lock().unwrap())?;
         Ok(())
     }
+}
+
+/// Forgets how far this device has read the log, so the next hello asks for
+/// all of it.
+pub(super) fn forget_position(conn: &Connection) -> rusqlite::Result<()> {
+    conn.execute("DELETE FROM meta WHERE key IN (?1, ?2)", [LAST_SEQ, LAST_SYNC_MS])?;
+    Ok(())
 }
 
 #[cfg(test)]

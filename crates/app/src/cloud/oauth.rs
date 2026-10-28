@@ -117,7 +117,8 @@ async fn wait_for_code(listener: &TcpListener, state: &str) -> Result<String, OA
             let _ = stream.write_all(b"HTTP/1.1 404 Not Found\r\ncontent-length: 0\r\n\r\n").await;
             continue;
         };
-        let page = if result.is_ok() { DONE_PAGE } else { CANCELLED_PAGE };
+        use crate::i18n::cloud::{BROWSER_CANCELLED, BROWSER_DONE};
+        let page = page(if result.is_ok() { BROWSER_DONE } else { BROWSER_CANCELLED });
         let response = format!(
             "HTTP/1.1 200 OK\r\ncontent-type: text/html; charset=utf-8\r\ncontent-length: {}\r\nconnection: close\r\n\r\n{page}",
             page.len()
@@ -146,8 +147,10 @@ pub fn parse_redirect(request: &str, expected_state: &str) -> Option<Result<Stri
             _ => {}
         }
     }
+    // Not our sign-in (another page or process on this port): a stray, so
+    // the listener answers 404 and keeps waiting for the real one (#262).
     if state.as_deref() != Some(expected_state) {
-        return Some(Err(OAuthError::Failed("state mismatch".into())));
+        return None;
     }
     Some(match (code, error) {
         (Some(code), None) => Ok(code),
@@ -230,13 +233,14 @@ fn decode(s: &str) -> String {
     String::from_utf8_lossy(&out).into_owned()
 }
 
-const DONE_PAGE: &str = r#"<!doctype html><html lang="ar" dir="rtl"><meta charset="utf-8"><title>باطنة</title>
-<body style="font-family:system-ui;text-align:center;padding:3rem">
-<h1>✓</h1><p>تمام، ارجع لباطنة.</p></body></html>"#;
-
-const CANCELLED_PAGE: &str = r#"<!doctype html><html lang="ar" dir="rtl"><meta charset="utf-8"><title>باطنة</title>
-<body style="font-family:system-ui;text-align:center;padding:3rem">
-<p>ما اتسجلتش. ارجع لباطنة وجرّب تاني.</p></body></html>"#;
+/// The page the browser shows once Google sends it back here.
+fn page(body: &str) -> String {
+    format!(
+        r#"<!doctype html><html lang="ar" dir="rtl"><meta charset="utf-8"><title>{}</title>
+<body style="font-family:system-ui;text-align:center;padding:3rem">{body}</body></html>"#,
+        crate::i18n::app::NAME
+    )
+}
 
 #[cfg(test)]
 mod tests {
@@ -266,7 +270,7 @@ mod tests {
         let denied = "GET /?error=access_denied&state=s1 HTTP/1.1\r\n";
         assert_eq!(parse_redirect(denied, "s1"), Some(Err(OAuthError::Cancelled)));
         let forged = "GET /?state=evil&code=x HTTP/1.1\r\n";
-        assert!(matches!(parse_redirect(forged, "s1"), Some(Err(OAuthError::Failed(_)))));
+        assert_eq!(parse_redirect(forged, "s1"), None);
         assert_eq!(parse_redirect("GET /favicon.ico HTTP/1.1\r\n", "s1"), None);
     }
 

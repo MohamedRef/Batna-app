@@ -130,13 +130,23 @@ impl DurableObject for Account {
                     Err(e) => api_error(ErrorCode::Unauthorized, e.to_string()),
                 }
             }
+            // A signed-out device's access token lives on for up to 15
+            // minutes; it gets no say over the other devices (#259).
             (Method::Get, "/devices") => {
                 let current = Self::device_header(&req)?;
+                if !devices.is_active(&current).map_err(sql_err)? {
+                    return api_error(ErrorCode::DeviceRevoked, "this device was signed out");
+                }
                 let list = devices.list(&current).map_err(sql_err)?;
                 Response::from_json(&DeviceList { devices: list })
             }
             (Method::Post, "/revoke") => {
+                let caller = Self::device_header(&req)?;
                 let body: Revoke = req.json().await?;
+                // Signing itself out again is harmless, so only others are checked.
+                if body.device != caller && !devices.is_active(&caller).map_err(sql_err)? {
+                    return api_error(ErrorCode::DeviceRevoked, "this device was signed out");
+                }
                 if devices.revoke(&body.device, now).map_err(sql_err)? {
                     self.close_device(&body.device);
                     Response::empty()

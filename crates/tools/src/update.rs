@@ -8,6 +8,7 @@
 //!                 --asset PLATFORM=PATH … [--notes-en T] [--notes-ar-eg T] [--out DIR]
 //!                 [--previous FEED/update.json] [--changes]
 //! update changes [--since COMMIT]          what the next build's "what's new" says
+//! update channels [--version V]             the channels a version is published on
 //! update sign DIR [--public-key FILE]       secret from BATNA_UPDATE_SECRET
 //! update verify DIR [--public-key FILE]
 //! ```
@@ -20,6 +21,8 @@
 //!   `macos-x86_64` or `content` (the pack from `batna-tools packs build`).
 //! - `sign` signs `update.json` and checks the result against the public key.
 //! - `verify` runs the app's checks on a feed folder.
+//! - `channels` prints one channel per line (an alpha → alpha; a beta → alpha
+//!   and beta; a release → all three), for `scripts/update-publish.sh`.
 //! - `--previous` keeps the channel's current history (a missing file is
 //!   fine); with `--changes`, `changes/` since that feed's commit becomes
 //!   this build's entry, and the notes when none are given (`crate::changes`).
@@ -47,7 +50,7 @@ pub const RELEASE_KEY_FILE: &str = "crates/app/update-key.pub";
 /// The secret, base64, for `update sign`.
 const SECRET_ENV: &str = "BATNA_UPDATE_SECRET";
 
-const USAGE: &str = "usage: batna-tools update <keygen | manifest | sign DIR | verify DIR | changes> (see crates/tools/src/update.rs)";
+const USAGE: &str = "usage: batna-tools update <keygen | manifest | sign DIR | verify DIR | changes | channels> (see crates/tools/src/update.rs)";
 
 type Res<T> = Result<T, String>;
 
@@ -141,6 +144,14 @@ fn run_inner(root: &Path, args: &[String]) -> Res<String> {
                 out.push_str(&format!("\n{:?}\t{}\t{}", c.kind, c.text.ar_eg, c.text.en));
             }
             Ok(out)
+        }
+        Some("channels") => {
+            let v = match flag(args, "--version") {
+                Some(v) => v.to_owned(),
+                None => workspace_version(root)?,
+            };
+            let parsed = Version::parse(&v).ok_or_else(|| format!("{v:?} isn't a version"))?;
+            Ok(parsed.channels().iter().map(|c| c.as_str()).collect::<Vec<_>>().join("\n"))
         }
         Some("verify") => {
             let dir = args.get(1).filter(|a| !a.starts_with("--")).ok_or(USAGE)?;
@@ -441,6 +452,16 @@ mod tests {
             run(dir.path(), &strings(&["manifest", "--channel", "alpha", "--version", "1.0.0"])).is_err()
         );
         assert!(run(dir.path(), &strings(&["sign"])).is_err());
+    }
+
+    #[test]
+    fn channels_follow_the_version() {
+        let dir = tempfile::tempdir().unwrap();
+        let channels = |v: &str| run(dir.path(), &strings(&["channels", "--version", v]));
+        assert_eq!(channels("0.1.1-alpha.1").unwrap(), "alpha");
+        assert_eq!(channels("0.2.0-beta.1").unwrap(), "alpha\nbeta");
+        assert_eq!(channels("1.0.0").unwrap(), "alpha\nbeta\nstable");
+        assert!(channels("one").is_err(), "a bad version fails instead of publishing nowhere");
     }
 
     #[test]

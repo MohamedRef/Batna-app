@@ -448,6 +448,13 @@ fn calm(screen: Screen) -> bool {
     matches!(screen, Screen::Today | Screen::Stats | Screen::Settings)
 }
 
+/// Whether something open over a calm screen would be lost by the restart:
+/// a lecture he is reading (and where he scrolled to), a card he is
+/// writing, or the first-run questions.
+fn overlay_open() -> bool {
+    crate::lecture::is_open() || crate::own::drafting() || *crate::onboarding::OPEN.peek()
+}
+
 /// Android: follows an install in progress, picks up after "Install unknown
 /// apps" was allowed, and, in automatic mode, installs a ready update
 /// quietly while Batna is in the background (never mid-session, and only
@@ -483,7 +490,7 @@ pub fn use_android_install(ui: Ui) {
                 (Phase::NeedsPermission(_), Some(false)) if install_allowed() => work(Updater::install),
                 (Phase::Ready(o), Some(true)) if s.prefs.mode == Mode::Auto => {
                     let tried = s.prefs.auto_failed.as_deref() == Some(o.key().as_str());
-                    if calm(*ui.screen.peek()) && !tried && install_quietly() {
+                    if calm(*ui.screen.peek()) && !overlay_open() && !tried && install_quietly() {
                         work(Updater::install);
                     }
                 }

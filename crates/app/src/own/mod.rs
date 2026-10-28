@@ -33,6 +33,11 @@ pub fn publish(cards: Vec<OwnCard>) -> &'static Lecture {
     lec
 }
 
+/// Whether the add-a-card sheet is open (with whatever he has typed).
+pub fn drafting() -> bool {
+    dioxus::prelude::ReadableExt::peek(&form::DRAFT).is_some()
+}
+
 /// The deck, when it has at least one card.
 pub fn lecture() -> Option<&'static Lecture> {
     DECK.lock().unwrap().as_ref().map(|(_, l)| *l).filter(|l| !l.items.is_empty())

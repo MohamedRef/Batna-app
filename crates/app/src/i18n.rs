@@ -1042,6 +1042,13 @@ pub mod update {
     pub const DONE_BODY: &str = "افتحه وكمّل من مكانك.";
     #[cfg_attr(not(target_os = "android"), allow(dead_code))]
     pub const READY_TITLE: &str = "تحديث باطنة جاهز: دوس عشان تثبّته";
+    /// The Android channel those two notifications go to.
+    #[cfg_attr(not(target_os = "android"), allow(dead_code))]
+    pub const INSTALL_CHANNEL: &str = "تحديثات باطنة";
+    #[cfg_attr(not(target_os = "android"), allow(dead_code))]
+    pub const INSTALL_CHANNEL_SUB: &str = "تحديث جاهز يتثبّت، وباطنة اتحدّث";
+    /// Before the version in the "what's new" sheet.
+    pub const SHEET_APP: &str = "باطنة · ";
 
     // The "new version" notification, and its switch.
     pub const NOTICE_AVAILABLE: &str = "نزلت نسخة جديدة من باطنة";

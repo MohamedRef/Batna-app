@@ -817,7 +817,7 @@ items:
   topic: treatment
   prompt: How is proper diuresis judged?
   points:
-  - Daily weight loss ≤500 g without peripheral edema, ≤1 kg with edema
+  - Daily weight loss within the safe limit for patients with or without edema
   - Spot urine sodium/potassium ratio >1
   - Urinary sodium excretion >78 mmol/day
   pass: 3
@@ -914,17 +914,17 @@ items:
   stem: A cirrhotic patient with ascites and no leg edema has been on spironolactone 200 mg/day for 5 days. Which
     finding shows the diuresis is adequate and safe?
   options:
-  - Weight loss of 1.5 kg/day
-  - Spot urine Na/K ratio of 0.6
-  - Weight loss of 400 g/day with a spot urine Na/K ratio of 1.8
-  - Urinary sodium excretion of 40 mmol/day
-  - Serum sodium falling to 123 mmol/L
+  - Weight loss 1.5 kg/day with spot urine Na/K 1.8
+  - Weight loss 400 g/day with spot urine Na/K 0.6
+  - Weight loss 400 g/day with spot urine Na/K 1.8
+  - Weight loss 300 g/day with urine sodium 40 mmol/day
+  - Weight loss 450 g/day with serum sodium 123 mmol/L
   answer: 2
   why:
   - Without edema, weight loss should not exceed 500 g/day.
-  - A Na/K ratio >1 is needed.
+  - A spot Na/K ratio >1 is needed.
   - 'Correct: ≤500 g/day without edema and Na/K >1 mean proper diuresis.'
-  - Proper diuresis needs >78 mmol/day.
+  - Proper diuresis needs urinary sodium >78 mmol/day.
   - Na <125 mmol/L is a diuretic complication.
   src:
     page: 153
@@ -954,21 +954,20 @@ items:
 - id: hb.L09.076
   kind: mcq
   topic: treatment
-  stem: A patient with cirrhotic ascites asks which drug is safe for knee pain and for his blood pressure. Which
-    is acceptable per the lecture?
+  stem: A man with cirrhotic ascites has his medicines reviewed. Which drug class does the lecture say to AVOID?
   options:
-  - Ibuprofen
-  - Lisinopril
-  - Losartan
-  - Paracetamol in usual doses
-  - Gentamicin for a UTI
-  answer: 3
+  - Spironolactone
+  - Furosemide
+  - NSAIDs such as ibuprofen
+  - Third-generation cephalosporins
+  - Albumin infusion
+  answer: 2
   why:
-  - NSAIDs must be avoided in ascites.
-  - ACE inhibitors must be avoided.
-  - ARBs must be avoided.
-  - 'Correct: not on the lecture''s avoid list (ACEi, ARBs, NSAIDs, aminoglycosides).'
-  - Aminoglycosides should be avoided whenever possible.
+  - First-line diuretic in cirrhotic ascites.
+  - Added to spironolactone when the response is insufficient.
+  - 'Correct: NSAIDs, ACE inhibitors and ARBs should be avoided (aminoglycosides too, when possible).'
+  - First-line antibiotics for SBP, not on the avoid list.
+  - Given with large-volume paracentesis and in SBP.
   src:
     page: 152
   status: unverified
@@ -1718,14 +1717,14 @@ items:
   stem: Which finding argues AGAINST hepatorenal syndrome in a cirrhotic with AKI?
   options:
   - FENa 0.05%
-  - Urine sodium 6 mmol/L
+  - Urine sodium 4 mmol/L
   - Proteinuria 1.2 g/day with 80 RBC/HPF
   - Serum sodium 127 mmol/L
   - Normal renal ultrasound
   answer: 2
   why:
   - FENa <0.1% fits HRS (renal vasoconstriction).
-  - Low urine sodium fits HRS.
+  - Low urine sodium fits HRS (below both the p. 161 and p. 163 cut-offs).
   - 'Correct: proteinuria >500 mg/day and >50 RBC/HPF point to parenchymal kidney disease.'
   - Dilutional hyponatremia <130 is associated with HRS-AKI.
   - Renal ultrasound is normal in HRS.
@@ -1881,7 +1880,7 @@ items:
 - id: hb.L09.147
   kind: table
   topic: sbp
-  title: Variants of ascitic infection
+  title: Variants of ascitic infection (pp. 168, 170)
   columns:
   - Variant
   - PMN (/mm³)
@@ -2219,12 +2218,20 @@ items:
   - question: He recovers. What should he receive afterwards?
     options:
     - No prophylaxis
-    - Long-term norfloxacin 400 mg/day (secondary prophylaxis), and LT evaluation
-    - Ceftriaxone 1 g for 7 days only
-    - Monthly paracentesis
+    - Long-term oral norfloxacin 400 mg/day
+    - Ceftriaxone 1 g/day for 7 days only
+    - Monthly diagnostic paracentesis
     answer: 1
-    why: Any previous SBP is an indication for secondary prophylaxis; LT should be considered after SBP. His long-term
-      PPI is a risk factor worth reviewing.
+    why: Any previous SBP is an indication for secondary prophylaxis (norfloxacin 400 mg/day or ciprofloxacin 500
+      mg/day). His long-term PPI is a risk factor worth reviewing.
+  - question: What else should be considered once he has recovered from SBP?
+    options:
+    - Liver transplant evaluation
+    - TIPS
+    - Peritoneovenous shunt
+    - Nothing further
+    answer: 0
+    why: LT should be considered for patients who recover from SBP, because long-term survival is poor (p. 169).
   src:
     page: 167
   status: unverified
@@ -2401,22 +2408,23 @@ items:
   - question: First step to find the cause?
     options:
     - Start spironolactone
-    - Diagnostic paracentesis with albumin, protein, cell count, culture and cytology
+    - Diagnostic paracentesis
     - Large-volume paracentesis
-    - CT for everyone
+    - CT abdomen
     answer: 1
     why: A diagnostic tap at first presentation of grade 2–3 ascites guides the cause; CT is only for differential
       diagnosis problems.
   - reveal: 'Fluid: straw coloured. Serum albumin 3.8, ascitic albumin 3.1, total protein 4.5 g/dL, LDH high, PMN
       40, lymphocytes 300/mm³.'
-    question: Serum albumin 3.8 g/dL, ascitic albumin 3.1 g/dL, protein 4.5 g/dL, LDH high. Interpretation?
+    question: Interpretation?
     options:
-    - High SAAG, portal hypertension
-    - 'Low SAAG (0.7), exudative: consider malignancy or TB'
-    - Cirrhotic ascites
-    - Nephrotic syndrome
+    - 'High SAAG: portal hypertension'
+    - 'Low SAAG: peritoneal disease (malignancy or TB)'
+    - 'Low SAAG: nephrotic syndrome'
+    - 'High SAAG: heart failure'
     answer: 1
-    why: SAAG 0.7 g/dL is low (non-portal-hypertensive), high protein and LDH suggest malignant ascites.
+    why: SAAG 3.8 − 3.1 = 0.7 g/dL (low, non-portal-hypertensive). High protein and LDH point to peritoneal disease
+      such as malignancy; nephrotic ascites has low protein.
   - question: Which ascitic test helps if mesothelioma is suspected?
     options:
     - Amylase
@@ -2485,15 +2493,15 @@ items:
   options:
   - Repeated LVP with albumin
   - CART
-  - Antibiotics
-  - Albumin infusion
+  - Alfapump
+  - Vaptans
   - Sodium restriction
   answer: 1
   why:
-  - LVP is not listed as contraindicated by SBP in the lecture.
-  - 'Correct: SBP is the contraindication to cell-free concentrated ascites reinfusion.'
-  - Antibiotics treat SBP.
-  - Albumin is given in SBP.
+  - Not listed as contraindicated by SBP in the lecture.
+  - 'Correct: SBP is the contraindication to cell-free and concentrated ascites reinfusion.'
+  - Used when TIPS and LT are contraindicated; SBP is not its listed contraindication.
+  - Listed adverse effects are overcorrection, dehydration, renal injury and hepatotoxicity, not SBP.
   - Still important in refractory ascites.
   src:
     page: 158
@@ -2501,20 +2509,21 @@ items:
 - id: hb.L09.184
   kind: mcq
   topic: refractory
-  stem: Which complication of TIPS for refractory ascites occurs in about 30% of patients?
+  stem: Three weeks after TIPS for refractory ascites, a 60-year-old becomes confused and drowsy with a flapping
+    tremor; the shunt is patent on Doppler. What is this, and how common is it after TIPS per the lecture?
   options:
-  - Shunt infection
-  - Hepatic encephalopathy
-  - Heart failure
-  - SBP
-  - Hemobilia
-  answer: 1
+  - Shunt dysfunction, about 30%
+  - Hepatic encephalopathy, about 5%
+  - Hepatic encephalopathy, about 30%
+  - SBP, about 30%
+  - Stroke from shunt embolism, about 10%
+  answer: 2
   why:
-  - Not named in the lecture.
-  - 'Correct: hepatic encephalopathy, about 30%.'
-  - Severe cardiopulmonary disease is a contraindication, not the 30% complication.
-  - Not a TIPS complication in the lecture.
-  - Not mentioned.
+  - The shunt is patent; dysfunction is a separate complication.
+  - The lecture gives about 30%.
+  - 'Correct: TIPS raises the risk of hepatic encephalopathy, about 30%.'
+  - Not a TIPS complication in the lecture, and confusion with a flap is encephalopathy.
+  - Not mentioned in the lecture.
   src:
     page: 156
   status: unverified

@@ -13,6 +13,7 @@
 //! <data>/updates/<file>          that download (one at a time)
 //! <data>/updates/content.pack    the newest verified content pack
 //! <data>/updates/content.json    which feed it came from (version, build, SHA-256)
+//! <data>/updates/history.json    what each build changed (changelog.rs)
 //! ```
 //!
 //! The work runs on its own thread; the UI follows [`Status`] through a
@@ -28,6 +29,8 @@
 //! offline packs), and one language.
 
 pub mod bundle;
+pub mod changelog;
+pub mod sheet;
 pub mod view;
 
 use std::fs;
@@ -38,9 +41,9 @@ use std::time::{Duration, SystemTime, UNIX_EPOCH};
 
 use batna_core::pack::Pack;
 use batna_core::update::{
-    Channel, Decision, Installed, MANIFEST_FILE, PackOrigin, SIGNATURE_FILE, Stage, UpdateAsset, UpdateError,
-    UpdateManifest, UpdateNotes, UpdatePlatform, VerifyingKey, Version, check_download, content_update,
-    decide, parse_public_key, published_secs, this_platform, verify_manifest,
+    BuildChanges, Channel, Decision, Installed, MANIFEST_FILE, PackOrigin, SIGNATURE_FILE, Stage,
+    UpdateAsset, UpdateError, UpdateManifest, UpdateNotes, UpdatePlatform, VerifyingKey, Version,
+    check_download, content_update, decide, parse_public_key, published_secs, this_platform, verify_manifest,
 };
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
@@ -108,6 +111,13 @@ pub struct Prefs {
     /// The last notification sent (`version+build:stage`), so each goes out once.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub notified: Option<String>,
+    /// The build (`version+build`) that ran last, to notice an update.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub last_run: Option<String>,
+    /// Set at the first launch after an update to the build that ran
+    /// before: "What's new" opens once for what came since, then clears it.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub whats_new_from: Option<String>,
 }
 
 fn yes() -> bool {
@@ -124,6 +134,8 @@ impl Default for Prefs {
             auto_failed: None,
             notify: true,
             notified: None,
+            last_run: None,
+            whats_new_from: None,
         }
     }
 }
@@ -132,8 +144,8 @@ impl Default for Prefs {
 /// it (JSON).
 #[derive(Clone, Debug, PartialEq, Eq, Serialize)]
 pub struct Notice {
-    /// `version+build:stage`: remembered once sent.
-    #[serde(skip)]
+    /// `version+build:stage`: remembered once shown. Android's job hands it
+    /// back through `UpdateCheckJob.shown` after the notification is up.
     pub key: String,
     pub title: String,
     pub body: String,
@@ -180,14 +192,20 @@ pub fn notice(s: &Status) -> Option<Notice> {
     if s.prefs.notified.as_deref() == Some(key.as_str()) {
         return None;
     }
-    let mut whats_new = notes_of(offer);
+    let mut whats_new = if offer.changes.is_empty() {
+        notes_of(offer)
+    } else {
+        changelog::lines_upto(&offer.changes, tx::NOTICE_MORE, 3)
+    };
     if whats_new.chars().count() > 300 {
         whats_new = whats_new.chars().take(299).collect::<String>() + "…";
     }
     let body = if whats_new.is_empty() {
         hint.to_owned()
-    } else {
+    } else if offer.changes.is_empty() {
         format!("{}: {whats_new}\n{hint}", tx::WHATS_NEW)
+    } else {
+        format!("{whats_new}\n{hint}")
     };
     Some(Notice {
         key,
@@ -222,16 +240,27 @@ pub struct Offer {
     #[serde(default)]
     pub notes: UpdateNotes,
     pub asset: UpdateAsset,
+    /// What it brings: the feed's builds after the installed one, newest first.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub changes: Vec<BuildChanges>,
 }
 
 impl Offer {
-    fn from_manifest(m: &UpdateManifest, asset: UpdateAsset) -> Self {
+    fn from_manifest(m: &UpdateManifest, asset: UpdateAsset, me: &Installed) -> Self {
+        let changes = match changelog::order(&m.version, m.build) {
+            Some(to) => changelog::between(&m.history, Some((me.version, me.build)), to)
+                .into_iter()
+                .cloned()
+                .collect(),
+            None => Vec::new(),
+        };
         Self {
             version: m.version.clone(),
             build: m.build,
             commit: m.commit.clone(),
             notes: m.notes.clone(),
             asset,
+            changes,
         }
     }
 
@@ -322,9 +351,32 @@ pub struct Status {
     /// A newer content pack is downloaded and verified; it opens at the
     /// next start.
     pub content_waiting: bool,
+    /// This build: version and build number.
+    pub version: String,
+    pub build: u64,
+    /// Every build's changes seen so far, newest first (changelog.rs).
+    pub history: Vec<BuildChanges>,
 }
 
 impl Status {
+    /// This build's place among the history's builds.
+    pub fn current(&self) -> Option<(Version, u64)> {
+        changelog::order(&self.version, self.build)
+    }
+
+    /// "What's new" to open by itself after an update: the builds after the
+    /// one that ran before, up to this one. Empty once seen.
+    pub fn whats_new(&self) -> Vec<BuildChanges> {
+        let (Some(from), Some(to)) = (self.prefs.whats_new_from.as_deref(), self.current()) else {
+            return Vec::new();
+        };
+        let from = from.split_once('+').and_then(|(v, b)| changelog::order(v, b.parse().ok()?));
+        if from.is_none() {
+            return Vec::new();
+        }
+        changelog::between(&self.history, from, to).into_iter().cloned().collect()
+    }
+
     /// The offer the banner should mention, unless closed for it.
     pub fn banner(&self) -> Option<&Offer> {
         let offer = match &self.phase {
@@ -454,21 +506,33 @@ pub fn get() -> Option<&'static Updater> {
     UPDATER.get()
 }
 
-/// Android's background job (`UpdateCheckJob`), in a process that may have
-/// no UI: the app's own updater if it's running here, else one opened for
-/// the job under `data_dir` (Context.getFilesDir). Returns the notification
-/// to post, if any.
+/// The updater Android's background job (`UpdateCheckJob`) works with, in a
+/// process that may have no UI: the app's own if it's running here, else
+/// one opened for the job under `data_dir` (Context.getFilesDir).
 #[cfg_attr(not(target_os = "android"), allow(dead_code))]
-pub fn background_check(data_dir: &Path, metered: bool, can_notify: bool) -> Option<Notice> {
+fn job_updater(data_dir: &Path) -> &'static Updater {
     static HEADLESS: OnceLock<Updater> = OnceLock::new();
-    let u = match UPDATER.get() {
+    match UPDATER.get() {
         Some(u) => u,
         None => HEADLESS.get_or_init(|| {
             let off = cfg!(debug_assertions).then_some(Off::DevBuild);
             Updater::new(data_dir.join("updates"), BuildInfo::from_env(), this_platform(), None, off)
         }),
-    };
-    u.background(metered, can_notify)
+    }
+}
+
+/// Android's background job: checks when due and returns the notification
+/// to post, if any. It isn't marked as sent yet: the job calls
+/// [`background_shown`] once Android has shown it.
+#[cfg_attr(not(target_os = "android"), allow(dead_code))]
+pub fn background_check(data_dir: &Path, metered: bool, can_notify: bool) -> Option<Notice> {
+    job_updater(data_dir).background(metered, can_notify)
+}
+
+/// The job's notification `key` is up: it doesn't go out again.
+#[cfg_attr(not(target_os = "android"), allow(dead_code))]
+pub fn background_shown(data_dir: &Path, key: &str) {
+    job_updater(data_dir).shown(key);
 }
 
 fn now_ms() -> u64 {
@@ -495,7 +559,7 @@ impl Updater {
         feed_override: Option<String>,
         off: Option<Off>,
     ) -> Self {
-        let prefs = load_prefs(&dir);
+        let mut prefs = load_prefs(&dir);
         let off = off.or(if platform.is_none() {
             Some(Off::NoPlatform)
         } else if info.key.is_none() {
@@ -503,6 +567,18 @@ impl Updater {
         } else {
             None
         });
+        let this = format!("{}+{}", info.version, info.build);
+        if off.is_none() && prefs.last_run.as_deref() != Some(this.as_str()) {
+            // Updated (not a first install): say what's new once.
+            if let Some(prev) = prefs.last_run.take() {
+                prefs.whats_new_from = Some(prev);
+            }
+            prefs.last_run = Some(this);
+            if let Err(e) = save_prefs(&dir, &prefs) {
+                report!("update prefs: {e}");
+            }
+        }
+        let history = changelog::load(&dir);
         let installed = info.installed(prefs.channel);
         let mut phase = Phase::Idle;
         if off.is_none()
@@ -519,6 +595,9 @@ impl Updater {
             preview: info.preview,
             prefs,
             content_waiting: false,
+            version: info.version.to_string(),
+            build: info.build,
+            history,
         };
         let (tx, _) = watch::channel(status);
         Self {
@@ -611,10 +690,21 @@ impl Updater {
 
     /// Android's background job: the app loop's step, then the notification
     /// to post if `can_notify` (notifications allowed, Batna not in front).
-    /// Marked as sent before it's returned.
+    /// Not marked as sent: a notification Android doesn't show is tried
+    /// again at the next run ([`Self::shown`] marks it).
     fn background(&'static self, metered: bool, can_notify: bool) -> Option<Notice> {
         self.step(BACKGROUND_EVERY, metered);
-        self.send_notice(|_| can_notify)
+        if !can_notify {
+            return None;
+        }
+        notice(&self.status())
+    }
+
+    /// The notification `key` was shown.
+    fn shown(&self, key: &str) {
+        if self.status().prefs.notified.as_deref() != Some(key) {
+            self.update_prefs(|p| p.notified = Some(key.to_owned()));
+        }
     }
 
     /// Whether Android's background job should run: updates work here and
@@ -654,6 +744,7 @@ impl Updater {
             Ok(m) => m,
             Err(why) => return self.set_phase(Phase::Failed { offer: None, why }),
         };
+        self.remember_history(&m.history);
         if content {
             self.refresh_content(&m);
         }
@@ -719,7 +810,7 @@ impl Updater {
                 if asset.size > MAX_BUILD_BYTES {
                     return Err(Failure::Verify("build too large".into()));
                 }
-                Ok(Some(Offer::from_manifest(m, asset)))
+                Ok(Some(Offer::from_manifest(m, asset, &self.installed())))
             }
         }
     }
@@ -758,6 +849,29 @@ impl Updater {
         match result {
             Ok(()) => self.tx.send_modify(|s| s.content_waiting = true),
             Err(e) => report!("content pack {} not taken: {e}", asset.file),
+        }
+    }
+
+    /// Keeps a verified feed's history, and lets a pending "What's new" go
+    /// when the feed has nothing to say about this build.
+    fn remember_history(&self, fresh: &[BuildChanges]) {
+        let known = self.status().history;
+        if let Some(all) = changelog::merge(&known, fresh) {
+            if let Err(e) = write_json(&self.dir, changelog::FILE, &all) {
+                report!("update history: {e}");
+            }
+            self.tx.send_modify(|s| s.history = all);
+        }
+        let s = self.status();
+        if s.prefs.whats_new_from.is_some() && s.whats_new().is_empty() {
+            self.update_prefs(|p| p.whats_new_from = None);
+        }
+    }
+
+    /// "What's new" was seen (closed).
+    pub fn close_whats_new(&self) {
+        if self.status().prefs.whats_new_from.is_some() {
+            self.update_prefs(|p| p.whats_new_from = None);
         }
     }
 
@@ -901,12 +1015,14 @@ impl Updater {
     }
 
     /// Removes every app download except `keep`, and the staged record
-    /// unless kept. Prefs and the content pack stay.
+    /// unless kept. Prefs, the changelog and the content pack stay.
     fn clear_downloads(&self, keep: Option<&str>) {
         let Ok(entries) = fs::read_dir(&self.dir) else { return };
         for e in entries.flatten() {
             let name = e.file_name().to_string_lossy().into_owned();
-            if matches!(name.as_str(), "prefs.json" | PACK_FILE | PACK_INFO) || Some(name.as_str()) == keep {
+            if matches!(name.as_str(), "prefs.json" | changelog::FILE | PACK_FILE | PACK_INFO)
+                || Some(name.as_str()) == keep
+            {
                 continue;
             }
             if name == "staged.json" && keep.is_some() {
@@ -1126,6 +1242,7 @@ mod tests {
                 sha256: "00".repeat(32),
                 version_code: None,
             },
+            changes: Vec::new(),
         }
     }
 
@@ -1137,6 +1254,9 @@ mod tests {
             channel: Channel::Alpha,
             preview: false,
             content_waiting: false,
+            version: "0.1.0".into(),
+            build: 41,
+            history: Vec::new(),
         }
     }
 
@@ -1258,15 +1378,52 @@ mod tests {
 
     fn updater(feed: &str, info: BuildInfo) -> (&'static Updater, tempfile::TempDir) {
         let data = tempfile::tempdir().unwrap();
+        (updater_in(data.path(), feed, info), data)
+    }
+
+    fn updater_in(data: &Path, feed: &str, info: BuildInfo) -> &'static Updater {
         let mut u = Updater::new(
-            data.path().join("updates"),
+            data.join("updates"),
             info,
             Some(UpdatePlatform::AndroidArm64),
             Some(feed.to_owned()),
             None,
         );
         u.retry_after = Duration::from_millis(10);
-        (Box::leak(Box::new(u)), data)
+        Box::leak(Box::new(u))
+    }
+
+    #[test]
+    fn whats_new_before_and_after_an_update() {
+        use crate::i18n::update as tx;
+        let feed = fixture_feed();
+        let url = serve(feed.path().to_path_buf());
+        let data = tempfile::tempdir().unwrap();
+
+        // A first install says nothing about what's new.
+        let u = updater_in(data.path(), &url, build("0.1.0", 39, true));
+        assert!(u.status().whats_new().is_empty());
+        assert_eq!(u.status().prefs.last_run.as_deref(), Some("0.1.0+39"));
+
+        // Before installing: the offer brings the builds after this one.
+        u.check(false);
+        let Phase::Available(o) = u.status().phase else { panic!("{:?}", u.status().phase) };
+        assert_eq!(o.changes.iter().map(BuildChanges::key).collect::<Vec<_>>(), ["0.1.0+42", "0.1.0+40"]);
+        assert_eq!(u.status().history.len(), 2, "the feed's history is kept");
+        let mut s = u.status();
+        s.prefs.mode = Mode::Notify;
+        let n = notice(&s).unwrap();
+        assert!(n.body.starts_with("• "), "{}", n.body);
+        assert!(!n.body.starts_with(tx::WHATS_NEW), "{}", n.body);
+
+        // The first launch of the new build opens "What's new" once.
+        let u = updater_in(data.path(), &url, build("0.1.0", 42, true));
+        let w = u.status().whats_new();
+        assert_eq!(w.iter().map(BuildChanges::key).collect::<Vec<_>>(), ["0.1.0+42", "0.1.0+40"]);
+        u.close_whats_new();
+        assert!(u.status().whats_new().is_empty());
+        let u = updater_in(data.path(), &url, build("0.1.0", 42, true));
+        assert!(u.status().whats_new().is_empty(), "seen stays seen");
     }
 
     #[test]
@@ -1334,7 +1491,11 @@ mod tests {
         let n = u.background(false, true).expect("announced");
         assert_eq!(n.action, "install");
         assert!(matches!(u.status().phase, Phase::Ready(_)));
-        assert!(u.background(false, true).is_none(), "once");
+        // Not shown (Android said no): offered again at the next run.
+        assert_eq!(u.background(false, true).as_ref(), Some(&n));
+        u.shown(&n.key);
+        assert!(u.background(false, true).is_none(), "once shown, never again");
+        assert!(serde_json::to_string(&n).unwrap().contains(&format!("\"key\":\"{}\"", n.key)));
 
         // Mobile data: announced, not downloaded.
         let (u, _data) = updater(&url, build("0.1.0", 41, true));
@@ -1345,6 +1506,7 @@ mod tests {
         let (u, _data) = updater(&url, build("0.1.0", 41, true));
         assert!(u.background(true, false).is_none());
         assert!(u.background(true, true).is_some());
+        assert_eq!(u.status().prefs.notified, None, "marked only once shown");
 
         let (u, _data) = updater(&url, build("0.1.0", 42, true));
         assert!(u.background(false, true).is_none());
@@ -1407,6 +1569,7 @@ mod tests {
             commit: None,
             published_at: "2026-10-27T08:00:00Z".into(),
             notes: UpdateNotes::default(),
+            history: Vec::new(),
             assets: vec![UpdateAsset {
                 platform: UpdatePlatform::Content,
                 file: "batna-content.pack".into(),

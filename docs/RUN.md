@@ -18,7 +18,7 @@
 
 The Mac build (clippy, tests and `dx bundle`) runs in `.github/workflows/mac.yml` on every push to `main`, nightly and by hand (Actions › Mac › Run workflow), not on pull requests: hosted Mac runners are sometimes unavailable for most of an hour. Check that workflow on `main` after touching Mac-only code, or run `just check` plus `just bundle-mac` on the Mac.
 
-Release builds (`just apk`, `just install-android`, `just bundle-mac`), their one-time keys, the CI preview APK and updates over the air are described in [RELEASE.md](RELEASE.md). Nothing is released before Mohamed says go, so for now the debug build, or the CI preview APK on the `batna-preview` prerelease, is the way to try Batna.
+Release builds (`just apk`, `just install-android`, `just bundle-mac`), their one-time keys, the CI preview APK and updates over the air are described in [RELEASE.md](RELEASE.md). Nothing is released before Mohamed says go, so for now the debug build, or the CI preview APK on the `batna-preview` prerelease, is the way to try Batna. Each update says what changed (from `changes/*.yaml`, RELEASE.md §5): before installing, once after, and in Settings › التحديثات › سجل التغييرات.
 
 ## Study in Anki now
 One file, `/mnt/project-files/medstudy/anki/batna.apkg`, holds every written lecture as a subdeck of `Batna`. Open it with AnkiDroid on the phone or tablet, or with Anki on the Mac. Importing a newer `batna.apkg` updates the cards in place and keeps your progress. `just anki` builds it into `dist/anki/`; details in [ANKI.md](ANKI.md).

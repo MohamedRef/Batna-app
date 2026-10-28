@@ -10,6 +10,10 @@
     <!-- A light tap with answer feedback (app.batna.Haptics; Settings › Study
          can turn it off). -->
     <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- Updates over the air (UpdateInstaller, chunk 22): Batna installs its
+         own signed, hash-checked APK with PackageInstaller. Android still
+         asks once for "Install unknown apps". -->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <!-- Android 13+: daily study reminders are notifications (Reminders.kt). -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <!-- Re-arms the local reminder schedule after a reboot (Reminders.kt). -->
@@ -19,6 +23,15 @@
             android:name="app.batna.OralService"
             android:exported="false"
             android:foregroundServiceType="mediaPlayback" />
+        <!-- Settings › Updates: the installer's verdict on a self-update
+             (explicit PendingIntent), and "Batna was updated" afterwards. -->
+        <receiver
+            android:name="app.batna.UpdateInstallReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+        </receiver>
         <!-- Posts a planned reminder; re-arms the schedule after a reboot, an
              update or a clock or time-zone change. Not exported: these
              system broadcasts still reach it. -->

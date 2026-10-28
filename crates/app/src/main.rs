@@ -33,6 +33,7 @@ mod store;
 mod study;
 mod table;
 mod today;
+mod update;
 mod verify;
 
 use dioxus::prelude::*;
@@ -87,6 +88,11 @@ pub struct Ui {
 
 fn main() {
     diag::install_panic_hook();
+    // Mac, automatic updates: a verified Batna.app staged last time goes in
+    // before the window opens (and Batna reopens as the new version).
+    #[cfg(target_os = "macos")]
+    update::apply_staged_on_launch();
+    update::init();
     #[cfg(all(feature = "desktop", not(target_os = "android")))]
     {
         use dioxus::desktop::{Config, LogicalSize, WindowBuilder};
@@ -128,6 +134,7 @@ fn App() -> Element {
     let current = *ui.screen.read();
     let look = ui.prefs.read().css();
     back::use_back(ui, current, *settings.open.read());
+    update::view::use_android_install(ui);
     rsx! {
         document::Title { "Batna" }
         style { {fonts::css()} }
@@ -161,7 +168,10 @@ fn App() -> Element {
                     span { class: "label", {Screen::Settings.label()} }
                 }
             }
-            main { class: "content", "data-screen": "{current:?}", {screen_body(current)} }
+            main { class: "content", "data-screen": "{current:?}",
+                update::view::UpdateBanner {}
+                {screen_body(current)}
+            }
             settings::SettingsSheet {}
             onboarding::Onboarding {}
         }

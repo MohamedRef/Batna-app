@@ -22,7 +22,8 @@ chrono = { version = "0.4", default-features = false, features = ["clock", "std"
 # Oral mode's think timer and speech waits (Dioxus already runs on tokio),
 # and Batna Cloud's sync thread (crates/app/src/cloud).
 tokio = { version = "1", features = ["rt", "net", "time", "sync", "macros", "io-util"] }
-# Batna Cloud client: TLS is rustls + ring with webpki roots everywhere, so the
+# Batna Cloud client and updates over the air (src/update/: the feed, SHA-256
+# per download): TLS is rustls + ring with webpki roots everywhere, so the
 # Android build needs no Java trust-store glue.
 base64 = "0.22"
 futures-util = { version = "0.3", default-features = false, features = ["sink", "std"] }
@@ -46,6 +47,11 @@ directories = "6"
 
 [target.'cfg(target_os = "macos")'.dependencies]
 apple-native-keyring-store = { version = "1", features = ["keychain"] }
+
+[dev-dependencies]
+tempfile = "3"
+# Signing test feeds in src/update/mod.rs.
+ed25519-dalek = "2"
 
 [build-dependencies]
 batna-core.workspace = true

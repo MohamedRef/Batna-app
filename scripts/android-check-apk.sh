@@ -7,7 +7,7 @@
 # When a chunk adds a Kotlin class that Rust calls by name, add it to CLASSES.
 set -euo pipefail
 APK="${1:-}"
-CLASSES=(app/batna/Haptics app/batna/OralService app/batna/OralBridge)
+CLASSES=(app/batna/Haptics app/batna/OralService app/batna/OralBridge app/batna/UpdateInstaller app/batna/UpdateInstallReceiver)
 
 # Failures become annotations on GitHub, where job logs are hard to reach.
 fail() {
@@ -39,6 +39,7 @@ echo "Kotlin glue present: ${CLASSES[*]}"
 if command -v aapt2 >/dev/null; then
   manifest="$(aapt2 dump xmltree --file AndroidManifest.xml "$APK")"
   grep -q "android.permission.VIBRATE" <<<"$manifest" || fail "The merged manifest lost VIBRATE (android/src/main/AndroidManifest.xml)."
+  grep -q "android.permission.REQUEST_INSTALL_PACKAGES" <<<"$manifest" || fail "The merged manifest lost REQUEST_INSTALL_PACKAGES (updates, android/src/main/AndroidManifest.xml)."
   echo "Merged manifest: glue permissions present"
 fi
 

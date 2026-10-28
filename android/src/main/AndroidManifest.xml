@@ -10,10 +10,23 @@
     <!-- A light tap with answer feedback (app.batna.Haptics; Settings › Study
          can turn it off). -->
     <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- Updates over the air (UpdateInstaller, chunk 22): Batna installs its
+         own signed, hash-checked APK with PackageInstaller. Android still
+         asks once for "Install unknown apps". -->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <application>
         <service
             android:name="app.batna.OralService"
             android:exported="false"
             android:foregroundServiceType="mediaPlayback" />
+        <!-- Settings › Updates: the installer's verdict on a self-update
+             (explicit PendingIntent), and "Batna was updated" afterwards. -->
+        <receiver
+            android:name="app.batna.UpdateInstallReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+        </receiver>
     </application>
 </manifest>

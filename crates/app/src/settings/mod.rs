@@ -22,11 +22,12 @@ pub enum Section {
     Study,
     Look,
     Data,
+    Updates,
     About,
 }
 
 impl Section {
-    pub const ALL: [Self; 4] = [Self::Study, Self::Look, Self::Data, Self::About];
+    pub const ALL: [Self; 5] = [Self::Study, Self::Look, Self::Data, Self::Updates, Self::About];
 
     /// Stable id, for `BATNA_OPEN_SETTINGS=<id>` previews.
     pub fn id(self) -> &'static str {
@@ -34,6 +35,7 @@ impl Section {
             Self::Study => "study",
             Self::Look => "look",
             Self::Data => "data",
+            Self::Updates => "updates",
             Self::About => "about",
         }
     }
@@ -47,6 +49,7 @@ impl Section {
             Self::Study => crate::i18n::study_settings::SECTION,
             Self::Look => tx::LOOK,
             Self::Data => tx::DATA,
+            Self::Updates => crate::i18n::update::SECTION,
             Self::About => tx::ABOUT,
         }
     }
@@ -56,6 +59,7 @@ impl Section {
             Self::Study => crate::i18n::study_settings::SECTION_SUB,
             Self::Look => tx::LOOK_SUB,
             Self::Data => tx::DATA_SUB,
+            Self::Updates => crate::i18n::update::SECTION_SUB,
             Self::About => tx::ABOUT_SUB,
         }
     }
@@ -191,6 +195,7 @@ fn SectionView(section: Section) -> Element {
         Section::Study => rsx! { crate::today::StudySection {} },
         Section::Look => rsx! { look::LookSection {} },
         Section::Data => rsx! { data::DataSection {} },
+        Section::Updates => rsx! { crate::update::view::UpdatesSection {} },
         Section::About => rsx! { about::AboutSection {} },
     }
 }

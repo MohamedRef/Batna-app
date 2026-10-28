@@ -51,7 +51,7 @@ android-keystore:
 # Build a signed release APK into dist/android/batna.apk
 apk:
     rm -rf {{dist}}/android && mkdir -p {{dist}}/android
-    cd {{app}} && dx bundle --platform android --release --package-types apk --target aarch64-linux-android --no-default-features --features mobile --out-dir ../../{{dist}}/android/raw
+    cd {{app}} && BATNA_COMMIT="$(git rev-parse --short HEAD)" dx bundle --platform android --release --package-types apk --target aarch64-linux-android --no-default-features --features mobile --out-dir ../../{{dist}}/android/raw
     # dx leaves a debug build; rebuild it as a release (not debuggable, R8, versionCode).
     apk="$(scripts/android-release-apk.sh)" && \
       { [ ! -x scripts/android-check-apk.sh ] || scripts/android-check-apk.sh "$apk"; } && \
@@ -67,7 +67,7 @@ install-android device="":
 
 # Build a release Batna.app for the Mac into dist/mac/Batna.app
 bundle-mac:
-    rm -rf {{dist}}/mac/raw && cd {{app}} && dx bundle --platform macos --release --package-types macos --out-dir ../../{{dist}}/mac/raw
+    rm -rf {{dist}}/mac/raw && cd {{app}} && BATNA_COMMIT="$(git rev-parse --short HEAD)" dx bundle --platform macos --release --package-types macos --out-dir ../../{{dist}}/mac/raw
     app="$(find {{dist}}/mac/raw -maxdepth 4 -name '*.app' | head -1)"; \
       rm -rf {{dist}}/mac/Batna.app && cp -R "$app" {{dist}}/mac/Batna.app
     # The same code identity on every build, once `just mac-codesign-cert` made it.
@@ -78,3 +78,11 @@ bundle-mac:
 # One-time: a free self-signed code-signing certificate for Batna.app
 mac-codesign-cert:
     scripts/mac-codesign-cert.sh
+
+# One-time: the update signing key (public half → crates/app/update-key.pub, secret → Keychain)
+update-keygen:
+    scripts/update-keygen.sh
+
+# Publish `just apk` + `just bundle-mac` as an update, only once Mohamed says go (docs/RELEASE.md §5)
+publish-update notes_en="" notes_ar_eg="":
+    scripts/update-publish.sh "{{notes_en}}" "{{notes_ar_eg}}"

@@ -12,4 +12,5 @@ pub mod session;
 pub mod srs;
 pub mod stats;
 pub mod theme;
+pub mod update;
 pub mod validate;

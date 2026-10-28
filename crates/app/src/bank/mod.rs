@@ -194,6 +194,17 @@ pub fn lecture_title(lecture: &str) -> String {
     Library::get().lectures.get(lecture).map_or_else(|| lecture.to_string(), |l| l.title.clone())
 }
 
+/// The index's shorter title (`Hepatitis C virus`, not the chapter's full
+/// heading), for chips on a phone; falls back to the lecture's own title.
+pub fn short_lecture_title(lecture: &str) -> String {
+    Library::get()
+        .index
+        .lectures
+        .iter()
+        .find(|e| e.id == lecture)
+        .map_or_else(|| lecture_title(lecture), |e| e.title.clone())
+}
+
 /// `hb.L09` → `9`.
 pub fn lecture_number(lecture: &str) -> &str {
     lecture.rsplit('.').next().unwrap_or(lecture).trim_start_matches('L').trim_start_matches('0')
@@ -312,7 +323,7 @@ fn close(paper: Paper, now: i64) -> Outcome {
         history.papers = stored_papers();
         history.papers.push(outcome.clone());
         let store = crate::store::shared();
-        let _ = store.put_setting(&format!("{PAPER_PREFIX}{}.{}", store.device(), outcome.at_ms), &outcome);
+        crate::store::save_setting(&format!("{PAPER_PREFIX}{}.{}", store.device(), outcome.at_ms), &outcome);
     }
     outcome
 }
@@ -360,7 +371,7 @@ pub fn minutes(ms: u64) -> u64 {
     ms.div_ceil(60_000)
 }
 
-/// Unix ms → `2026-10-27` (UTC; only for the history list).
+/// Unix ms → `2026-10-27`. Pass local wall-clock ms (`store::zone().local_ms`).
 pub fn date(ms: i64) -> String {
     // Howard Hinnant's civil_from_days.
     let z = ms.div_euclid(86_400_000) + 719_468;

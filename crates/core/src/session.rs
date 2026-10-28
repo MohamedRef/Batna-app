@@ -344,7 +344,7 @@ fn tokens(s: &str) -> Vec<Tok> {
                 after_to = true;
             } else {
                 after_to = false;
-                out.push(Tok::Word(word));
+                out.push(Tok::Word(us_spelling(word)));
             }
         } else {
             i += 1;
@@ -401,6 +401,40 @@ fn unit_of(word: &str) -> Option<&'static str> {
 
 /// Opposite prefixes: one edit apart, opposite meanings. A typed word that
 /// swaps one for another is wrong, not a typo.
+/// British spellings mapped to American ones, so both read the same
+/// (haemolysis = hemolysis, oesophagus = esophagus, anaemia = anemia).
+const SPELLINGS: &[(&str, &str)] = &[
+    ("haem", "hem"),
+    ("aem", "em"),
+    ("oesoph", "esoph"),
+    ("oedem", "edem"),
+    ("oestr", "estr"),
+    ("paed", "ped"),
+    ("foet", "fet"),
+    ("coeli", "celi"),
+    ("isation", "ization"),
+    ("ise", "ize"),
+    ("our", "or"),
+];
+
+fn us_spelling(word: String) -> String {
+    let mut w = word;
+    for (uk, us) in SPELLINGS {
+        // "our" and "ise" only as endings (tumour, localise), not "four", "wise".
+        if matches!(*uk, "our" | "ise") {
+            if w.len() >= uk.len() + 3 && w.ends_with(uk) {
+                w.truncate(w.len() - uk.len());
+                w.push_str(us);
+            }
+        } else if w.contains(uk) {
+            w = w.replace(uk, us);
+        }
+    }
+    w
+}
+
+/// Prefix pairs that mean opposite things. Each group lists prefixes that
+/// stand for each other on the same stem; nothing else counts as a swap.
 const CONTRASTS: &[&[&str]] = &[
     &["hypo", "hyper", "normo", "eu"],
     &["intra", "extra", "inter"],
@@ -414,16 +448,21 @@ const CONTRASTS: &[&[&str]] = &[
     &["in", "ex"],
     &["sub", "supra"],
     &["mono", "poly", "oligo"],
-    &["hemi", "hemo", "haemo"],
 ];
 
-/// Whether two words start with different prefixes from the same contrast
-/// group (hypokalaemia vs hyperkalaemia).
+/// Whether two words are the same stem behind opposite prefixes
+/// (hypokalaemia vs hyperkalaemia, abduct vs adduct). The stems must be
+/// identical, so a typo or an unrelated word never counts as a swap.
 fn contrasting(a: &str, b: &str) -> bool {
     CONTRASTS.iter().any(|group| {
-        let pa = group.iter().filter(|p| a.starts_with(**p)).max_by_key(|p| p.len());
-        let pb = group.iter().filter(|p| b.starts_with(**p)).max_by_key(|p| p.len());
-        matches!((pa, pb), (Some(x), Some(y)) if x != y)
+        group.iter().any(|pa| {
+            group.iter().any(|pb| {
+                pa != pb
+                    && a.strip_prefix(pa)
+                        .zip(b.strip_prefix(pb))
+                        .is_some_and(|(sa, sb)| sa.len() >= 3 && sa == sb)
+            })
+        })
     })
 }
 
@@ -870,9 +909,18 @@ mod tests {
         assert_eq!(check_typed("Afferent", "efferent"), Match::Wrong);
         assert_eq!(check_typed("Prehepatic", "posthepatic"), Match::Wrong);
         assert_eq!(check_typed("Primary hypoaldosteronism", "primary hyperaldosteronism"), Match::Wrong);
-        // Real typos stay close.
-        assert_eq!(check_typed("Hypokalaemia", "hypokalemia"), Match::Close);
-        assert_eq!(check_typed("Hyponatraemia", "hyponatremia"), Match::Close);
+        assert_eq!(check_typed("Abduction", "adduction"), Match::Wrong);
+        // British and American spellings are the same answer.
+        assert_eq!(check_typed("Hypokalaemia", "hypokalemia"), Match::Right);
+        assert_eq!(check_typed("Haemolysis", "hemolysis"), Match::Right);
+        assert_eq!(check_typed("Oesophageal varices", "esophageal varices"), Match::Right);
+        assert_eq!(check_typed("Haemochromatosis", "hemochromatosis"), Match::Right);
+        assert_eq!(check_typed("Tumour", "tumor"), Match::Right);
+        // Shared first letters are not a prefix swap: typos stay close.
+        assert_eq!(check_typed("Hemolysis", "hemolisis"), Match::Close);
+        assert_eq!(check_typed("Abdominal", "adbominal"), Match::Close);
+        assert_eq!(check_typed("Infection", "infaction"), Match::Close);
+        assert_eq!(check_typed("Hyponatremia", "hyponatreima"), Match::Close);
     }
 
     #[test]

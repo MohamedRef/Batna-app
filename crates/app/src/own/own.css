@@ -2,17 +2,6 @@
 .own-head { display: flex; align-items: center; gap: var(--sp-2); }
 .own-head h2 { margin: 0; flex: 1; }
 .own-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-2); }
-.own-btn {
-  min-block-size: 44px;
-  padding-inline: var(--sp-4);
-  border-radius: var(--radius-pill);
-  border: 1px solid var(--line);
-  background: var(--surface);
-  color: var(--text);
-  cursor: pointer;
-}
-.own-btn.primary { background: var(--accent); border-color: var(--accent); color: var(--surface); font-weight: 600; }
-.own-btn.bad { border-color: var(--bad); color: var(--bad); }
 .own-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
 .own-list li {
   display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--sp-2);
@@ -32,7 +21,7 @@
   padding-block-end: max(var(--sp-4), env(safe-area-inset-bottom, 0px));
   background: var(--bg); color: var(--text);
   border-start-start-radius: var(--radius); border-start-end-radius: var(--radius);
-  font-family: var(--font); line-height: 1.6;
+  font-family: var(--font); line-height: var(--lh);
 }
 .own-sheet h2 { margin: 0; font-size: var(--fs-lg); }
 .own-field { display: flex; flex-direction: column; gap: var(--sp-1); inline-size: 100%; }
@@ -40,7 +29,7 @@
 .own-field textarea, .own-field input, .own-field select {
   font: inherit;
   inline-size: 100%;
-  min-block-size: 44px;
+  min-block-size: var(--tap);
   padding: var(--sp-2);
   border: 1px solid var(--line);
   border-radius: 8px;

@@ -290,13 +290,23 @@ pub fn blocks(text: &str) -> Vec<Block> {
 /// One line of lesson text as spans: `**bold**`, and runs of Latin script
 /// apart from Arabic so the UI can isolate them (`<bdi dir="ltr">`).
 pub fn spans(line: &str) -> Vec<Span> {
-    let mut out: Vec<Span> = Vec::new();
+    // Script runs come from the whole line, so bold can't split an English
+    // phrase ("**Genome:** single-stranded") into runs that flip.
+    let mut plain = String::new();
+    let mut bold_at: Vec<bool> = Vec::new();
     for (i, part) in line.split("**").enumerate() {
-        let bold = i % 2 == 1;
-        for (text, latin) in script_runs(part) {
+        plain.push_str(part);
+        bold_at.extend(part.chars().map(|_| i % 2 == 1));
+    }
+    let mut out: Vec<Span> = Vec::new();
+    let mut at = 0;
+    for (text, latin) in script_runs(&plain) {
+        for c in text.chars() {
+            let bold = bold_at[at];
+            at += 1;
             match out.last_mut() {
-                Some(last) if last.bold == bold && last.latin == latin => last.text.push_str(&text),
-                _ => out.push(Span { text, bold, latin }),
+                Some(last) if last.bold == bold && last.latin == latin => last.text.push(c),
+                _ => out.push(Span { text: c.to_string(), bold, latin }),
             }
         }
     }
@@ -414,15 +424,29 @@ fn script_runs(text: &str) -> Vec<(String, bool)> {
             }
         }
     }
-    // Ranges and ratios ("5–6", "1/3") read right to left in an Arabic
-    // line ("6–5"), so they are isolated too.
+    // Numbers with a sign, a range or a ratio ("≤ 2%", "> 3", "5–6",
+    // "1/3") read wrong in an Arabic line: bidi mirrors "≤" into "≥" and
+    // turns "5–6" into "6–5". They are isolated left to right too.
     let mut k = 0;
     while k < chars.len() {
         if !chars[k].is_ascii_digit() || resolved[k] == C::Latin {
             k += 1;
             continue;
         }
-        let start = k;
+        // A sign right before the number, maybe with one space ("≤ 2").
+        let mut start = k;
+        let mut signed = false;
+        let mut j = k;
+        if j > 0 && chars[j - 1] == ' ' {
+            j -= 1;
+        }
+        while j > 0 && "<>≤≥±~=+−".contains(chars[j - 1]) && resolved[j - 1] != C::Latin {
+            j -= 1;
+            signed = true;
+        }
+        if signed {
+            start = j;
+        }
         let mut end = k;
         let mut joined = false;
         while end < chars.len() && chars[end].is_ascii_digit() {
@@ -434,12 +458,33 @@ fn script_runs(text: &str) -> Vec<(String, bool)> {
                 end += 1;
             }
         }
-        if joined {
+        let percent = chars.get(end) == Some(&'%');
+        if percent {
+            end += 1;
+        }
+        if signed || joined || percent {
             for r in &mut resolved[start..end] {
                 *r = C::Latin;
             }
         }
         k = end;
+    }
+    // A bracket pair goes into an isolate only when all of it does: in
+    // "(black أو brown)" the brackets stay Arabic, so they mirror right.
+    let mut open: Vec<usize> = Vec::new();
+    for k in 0..chars.len() {
+        match chars[k] {
+            '(' | '[' => open.push(k),
+            ')' | ']' => {
+                if let Some(o) = open.pop()
+                    && resolved[o..=k].iter().any(|r| *r != C::Latin)
+                {
+                    resolved[o] = C::Arabic;
+                    resolved[k] = C::Arabic;
+                }
+            }
+            _ => {}
+        }
     }
     let mut out: Vec<(String, bool)> = Vec::new();
     for (i, &c) in chars.iter().enumerate() {
@@ -789,6 +834,26 @@ mod tests {
         assert_eq!(latin_runs("لو ≥250 cells يبقى"), ["≥250 cells"]);
         assert_eq!(latin_runs("(مع albumin 20%) كده"), ["albumin 20%"]);
         assert_eq!(latin_runs("حوالي 1/3 العيانين و 40 واحد"), ["1/3"]);
+        assert_eq!(latin_runs("فيه ≤ 2%، والـ عالي > 2%:"), ["≤ 2%", "> 2%"]);
+        assert_eq!(latin_runs("لو أقل من < 3 شهور"), ["< 3"]);
+        assert_eq!(latin_runs("حوالي 40% منهم"), ["40%"]);
+        assert_eq!(latin_runs("لو FIB-4 < 1.3 ثم كده"), ["FIB-4 < 1.3"]);
+        assert_eq!(latin_runs("الـ platelets ≥ 150 (يعني"), ["platelets ≥ 150"]);
+        assert_eq!(latin_runs("المرحلة (F1) دي"), ["(F1)"]);
+        assert_eq!(latin_runs("لو عدّى 12 h فكّر"), ["12 h"]);
+        assert_eq!(latin_runs("حوالي 2 mm/yr بس"), ["2 mm/yr"]);
+        assert_eq!(latin_runs("الـ 25(OH)D واطي"), ["25(OH)D"]);
+        assert_eq!(latin_runs("لونه (black أو brown) كده"), ["black", "brown"]);
+        assert_eq!(latin_runs("(الـ P في PATCH) كده"), ["P", "PATCH"]);
+    }
+
+    #[test]
+    fn bold_does_not_split_terms() {
+        let s = spans("**Genome:** single-stranded **positive-sense RNA**. تمام");
+        let latin: Vec<_> = s.iter().filter(|s| s.latin).map(|s| (s.text.as_str(), s.bold)).collect();
+        assert_eq!(latin, [("Genome:", true), (" single-stranded ", false), ("positive-sense RNA", true)]);
+        let s = spans("حوالي **58 million** عايشين");
+        assert_eq!(s.iter().filter(|s| s.latin).map(|s| s.text.as_str()).collect::<Vec<_>>(), ["58 million"]);
     }
 
     #[test]

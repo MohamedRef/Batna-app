@@ -11,7 +11,7 @@ use crate::Ui;
 use crate::content::Library;
 use crate::i18n::onboard as tx;
 use crate::reminders::{MAX_TIMES, RemindPrefs, hhmm, parse_hhmm};
-use crate::store::{now_ms, shared, utc_offset_minutes};
+use crate::store::{now_ms, shared};
 
 const CSS: &str = r#"
 .onboard-backdrop { position: fixed; inset: 0; z-index: 50; background: var(--bg); overflow-y: auto; }
@@ -58,9 +58,7 @@ impl Answers {
     }
 
     fn save(&self) {
-        if let Err(e) = shared().put_setting(Self::KEY, self) {
-            crate::diag::report!("saving first-run answers: {e}");
-        }
+        crate::store::save_setting(Self::KEY, self);
     }
 }
 
@@ -122,7 +120,7 @@ fn Questions() -> Element {
     let mut step = use_signal(|| 0usize);
     let plan = crate::plan::SETTINGS.peek().clone();
     let answers = Answers::load();
-    let today = Day::from_unix_ms(now_ms(), utc_offset_minutes(), 0);
+    let today = crate::store::zone().study_day(now_ms());
     let mut exam = use_signal(|| plan.exam.map(Day::iso).unwrap_or_default());
     let mut weekdays = use_signal(|| plan.weekdays);
     let mut minutes = use_signal(|| answers.minutes.unwrap_or(10));
@@ -252,8 +250,8 @@ fn Questions() -> Element {
                 h1 { {tx::STUDIED_TITLE} }
                 p { class: "muted", {tx::STUDIED_BODY} }
                 div { class: "row",
-                    button { class: "secondary", onclick: move |_| studied.set(all.clone()), {tx::ALL} }
-                    button { class: "secondary", onclick: move |_| studied.set(Vec::new()), {tx::NONE} }
+                    button { class: "btn btn-secondary", onclick: move |_| studied.set(all.clone()), {tx::ALL} }
+                    button { class: "btn btn-secondary", onclick: move |_| studied.set(Vec::new()), {tx::NONE} }
                 }
                 ul { class: "onboard-lectures", aria_label: tx::STUDIED_TITLE,
                     for (n , l) in Library::get().index.lectures.iter().enumerate() {
@@ -306,12 +304,12 @@ fn Questions() -> Element {
                             }
                         },
                     }
-                    button { class: "secondary", onclick: move |_| { times.write().remove(i); }, {tx::REMOVE} }
+                    button { class: "btn btn-secondary", onclick: move |_| { times.write().remove(i); }, {tx::REMOVE} }
                 }
             }
             if times.read().len() < MAX_TIMES {
                 button {
-                    class: "secondary",
+                    class: "btn btn-secondary",
                     onclick: move |_| {
                         let next = times.read().last().map_or(19 * 60, |t| (t + 120).min(23 * 60));
                         times.write().push(next);
@@ -359,13 +357,13 @@ fn Questions() -> Element {
                     p { class: "error", role: "alert", {msg} }
                 }
                 div { class: "onboard-actions",
-                    button { class: "secondary", onclick: move |_| close(), {tx::SKIP_ALL} }
+                    button { class: "btn btn-ghost", onclick: move |_| close(), {tx::SKIP_ALL} }
                     div { class: "row",
                         if step() > 0 {
-                            button { class: "secondary", onclick: move |_| { error.set(None); step -= 1; }, {tx::BACK} }
+                            button { class: "btn btn-secondary", onclick: move |_| { error.set(None); step -= 1; }, {tx::BACK} }
                         }
                         button {
-                            class: "primary",
+                            class: "btn btn-primary",
                             onclick: move |_| {
                                 if commit() {
                                     if last { close() } else { step += 1 }
@@ -407,7 +405,7 @@ pub fn ReopenCard() -> Element {
         section { class: "card",
             h2 { {tx::REOPEN_TITLE} }
             p { class: "muted small", {tx::REOPEN_BODY} }
-            button { class: "secondary", onclick: move |_| reopen(), {tx::REOPEN} }
+            button { class: "btn btn-secondary", onclick: move |_| reopen(), {tx::REOPEN} }
         }
     }
 }

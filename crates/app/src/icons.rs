@@ -31,6 +31,13 @@ pub fn nav_path(screen: Screen) -> &'static str {
 /// Settings: a cog with eight teeth.
 const GEAR: &str = "M12 9a3 3 0 1 0 0 6 3 3 0 1 0 0-6zM10.6 3h2.8l.5 2.3 1.7.9 2.2-.8 1.4 2.4-1.7 1.6v1.9l1.7 1.6-1.4 2.4-2.2-.8-1.7.9-.5 2.3h-2.8l-.5-2.3-1.7-.9-2.2.8-1.4-2.4 1.7-1.6v-1.9L4.8 7.8l1.4-2.4 2.2.8 1.7-.9z";
 
+/// More: three dots in a row.
+pub fn more() -> Element {
+    stroke(
+        "M4 12a1.5 1.5 0 1 0 3 0 1.5 1.5 0 1 0-3 0zM10.5 12a1.5 1.5 0 1 0 3 0 1.5 1.5 0 1 0-3 0zM17 12a1.5 1.5 0 1 0 3 0 1.5 1.5 0 1 0-3 0z",
+    )
+}
+
 pub fn nav(screen: Screen) -> Element {
     stroke(nav_path(screen))
 }

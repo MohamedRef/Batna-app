@@ -218,8 +218,7 @@ object ReminderBridge {
             PendingIntent.getActivity(context, 0, it, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
         }
         val note = Notification.Builder(context, CHANNEL)
-            // A system icon: Batna ships no image assets.
-            .setSmallIcon(android.R.drawable.ic_popup_reminder)
+            .setSmallIcon(app.batna.bridge.R.drawable.ic_stat_batna)
             .setContentTitle(title)
             .setContentText(text)
             .setStyle(Notification.BigTextStyle().bigText(text))

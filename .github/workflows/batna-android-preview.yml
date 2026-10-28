@@ -170,6 +170,14 @@ jobs:
 
       - name: Build APK
         working-directory: crates/app
+        # Batna Cloud and Google sign-in are built in (crates/app/src/cloud/mod.rs),
+        # from repo Settings → Secrets and variables → Actions (docs/CLOUD.md §3.5).
+        # Push builds only: a PR's copy of this workflow gets empty values, and the
+        # app then hides sign-in. Never echo these.
+        env:
+          BATNA_CLOUD_URL: ${{ env.KEEP_KEY == 'true' && vars.BATNA_CLOUD_URL || '' }}
+          BATNA_GOOGLE_CLIENT_ID: ${{ env.KEEP_KEY == 'true' && vars.BATNA_GOOGLE_CLIENT_ID || '' }}
+          BATNA_GOOGLE_CLIENT_SECRET: ${{ env.KEEP_KEY == 'true' && secrets.BATNA_GOOGLE_CLIENT_SECRET || '' }}
         run: |
           dx bundle --platform android --release --package-types apk \
             --target aarch64-linux-android --no-default-features --features mobile \

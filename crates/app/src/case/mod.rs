@@ -20,6 +20,16 @@ use crate::i18n::case as tx;
 
 const CSS: &str = include_str!("case.css");
 
+/// The tab the screen opens on next, when Today sends him to due items.
+static START_TAB: GlobalSignal<Option<Tab>> = Signal::global(|| None);
+
+/// Open the Cases screen on its due items (#242): the cases tab, or the calc
+/// items tab when only calc items are due. Due items sit first in each list.
+pub fn open_due(mut ui: crate::Ui, calc_only: bool) {
+    *START_TAB.write() = Some(if calc_only { Tab::CalcItems } else { Tab::Cases });
+    ui.screen.set(crate::Screen::Cases);
+}
+
 #[derive(Clone, Copy, PartialEq, Eq, Debug)]
 enum Tab {
     Cases,
@@ -29,7 +39,7 @@ enum Tab {
 
 #[component]
 pub fn CasesScreen() -> Element {
-    let mut tab = use_signal(|| Tab::Cases);
+    let mut tab = use_signal(|| START_TAB.write().take().unwrap_or(Tab::Cases));
     let mut open = use_signal(|| None::<String>);
     let back = move |_| open.set(None);
     rsx! {
@@ -104,7 +114,11 @@ pub fn find_item(id: &str) -> Option<(&'static str, &'static Item)> {
 #[component]
 fn ItemList(kind: &'static str, on_open: EventHandler<String>) -> Element {
     let store = use_case_store();
-    let items = items_of(kind, store.as_ref());
+    let mut items = items_of(kind, store.as_ref());
+    // Due ones first (#242); the sort is stable, so each part keeps book order.
+    let due: std::collections::HashSet<String> =
+        store.as_ref().map(|s| s.0.borrow().due(now_ms()).into_iter().collect()).unwrap_or_default();
+    items.sort_by_key(|(_, i)| !due.contains(&i.id));
     let empty = if kind == "case" { tx::EMPTY } else { tx::EMPTY_CALC };
     rsx! {
         if kind == "case" { p { class: "muted", {tx::INTRO} } }
@@ -115,6 +129,9 @@ fn ItemList(kind: &'static str, on_open: EventHandler<String>) -> Element {
             for (lecture, item) in items {
                 li { key: "{item.id}",
                     button { class: "case-row", dir: "auto", onclick: { let id = item.id.clone(); move |_| on_open.call(id.clone()) },
+                        if due.contains(&item.id) {
+                            span { class: "chip due case-due", {tx::DUE} }
+                        }
                         bdi { class: "case-row-stem", {first_line(&item)} }
                         span { class: "muted small", dir: "rtl",
                             match &item.body {

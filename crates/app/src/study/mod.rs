@@ -267,7 +267,8 @@ pub fn Study() -> Element {
                             at_ms: now_ms(),
                             took_ms: took,
                         });
-                        session.write().grade(grade);
+                        let hidden = |id: &str| store.0.borrow().is_hidden(id);
+                        session.write().grade_unless(grade, hidden);
                         started.set(Instant::now());
                         if session.read().is_done() {
                             phase.set(Phase::Summary);
@@ -323,7 +324,7 @@ pub fn Study() -> Element {
                     right: summary.right,
                     fresh: summary.fresh,
                     shaky,
-                    next: next.map(|t| when_label(t - now_ms())),
+                    next: next.map(|t| when_label(now_ms(), t, &crate::store::zone())),
                     on_again: move |_| phase.set(Phase::Setup),
                 }
             }
@@ -504,15 +505,17 @@ fn SummaryView(
     }
 }
 
-/// "بعد 20 دقيقة", "بعد ساعتين", "بكرة", "بعد 3 أيام".
-fn when_label(ms: i64) -> String {
-    let mins = (ms.max(0) as f64 / 60_000.0).round() as i64;
-    match mins {
-        0..=1 => tx::NOW.to_string(),
-        2..=59 => format!("{} {}", tx::AFTER, count(mins, &MINUTE)),
-        60..=1439 => format!("{} {}", tx::AFTER, count((mins as f64 / 60.0).round() as i64, &HOUR)),
-        1440..=2879 => tx::TOMORROW.to_string(),
-        _ => format!("{} {}", tx::AFTER, count(mins / 1440, &DAY)),
+/// "بعد 20 دقيقة", "بعد ساعتين", "بكرة", "بعد 3 أيام". Days count study
+/// days (from 4 am), the days due dates land on, not 24-hour spans (#245).
+fn when_label(now: i64, due: i64, zone: &batna_core::zone::Zone) -> String {
+    let days = zone.study_day(due).0 - zone.study_day(now).0;
+    let mins = ((due - now).max(0) as f64 / 60_000.0).round() as i64;
+    match (days, mins) {
+        (..=0, 0..=1) => tx::NOW.to_string(),
+        (..=0, 2..=59) => format!("{} {}", tx::AFTER, count(mins, &MINUTE)),
+        (..=0, _) => format!("{} {}", tx::AFTER, count((mins as f64 / 60.0).round() as i64, &HOUR)),
+        (1, _) => tx::TOMORROW.to_string(),
+        _ => format!("{} {}", tx::AFTER, count(days, &DAY)),
     }
 }
 
@@ -543,11 +546,18 @@ mod tests {
 
     #[test]
     fn when_labels() {
-        assert_eq!(when_label(0), tx::NOW);
-        assert_eq!(when_label(20 * 60_000), "بعد 20 دقيقة");
-        assert_eq!(when_label(5 * 3_600_000), "بعد 5 ساعات");
-        assert_eq!(when_label(2 * 3_600_000), "بعد ساعتين");
-        assert_eq!(when_label(26 * 3_600_000), tx::TOMORROW);
-        assert_eq!(when_label(3 * 86_400_000), "بعد 3 أيام");
+        // UTC, so study days start at 04:00 UTC. `now` is 05:00 on a day.
+        let zone = batna_core::zone::Zone::fixed(0);
+        let now = 20_000 * 86_400_000 + 5 * 3_600_000;
+        let at = |h: i64| now + h * 3_600_000;
+        let label = |due: i64| when_label(now, due, &zone);
+        assert_eq!(label(now), tx::NOW);
+        assert_eq!(label(now + 20 * 60_000), "بعد 20 دقيقة");
+        assert_eq!(label(at(5)), "بعد 5 ساعات");
+        assert_eq!(label(at(2)), "بعد ساعتين");
+        assert_eq!(label(at(23)), tx::TOMORROW, "04:00 tomorrow");
+        // A 2-day interval lands at 04:00 two study days on: 47 hours away.
+        assert_eq!(label(at(47)), "بعد يومين");
+        assert_eq!(label(at(71)), "بعد 3 أيام");
     }
 }

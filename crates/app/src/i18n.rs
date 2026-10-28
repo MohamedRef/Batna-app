@@ -616,6 +616,40 @@ pub mod verify {
     pub const EXPORT_FAILED: &str = "ما عرفتش أحفظ الملف:";
 }
 
+pub mod own {
+    pub const TITLE: &str = "كروتك";
+    pub const INTRO: &str = "كروت إنت كاتبها: من ورقة، من محاضرة، أو نص شيّرته من أي تطبيق. بتتذاكر مع الباقي، ومش محتاجة ✓ / ✎ / ✗ عشان إنت اللي كاتبها، ولها deck لوحدها في Anki.";
+    pub const SHARE_HINT: &str =
+        "على الموبايل والتابلت: حدّد أي نص واختار «Batna»، أو شيّره لـ Batna، وهيبقى مسودة كارت.";
+    pub const NEW: &str = "＋ كارت جديد";
+    pub const COUNT: &str = "كارت";
+    pub const NONE_YET: &str = "لسه مفيش كروت.";
+    pub const EDIT: &str = "عدّل";
+    pub const DELETE: &str = "امسح";
+    pub const DELETE_SURE: &str = "أمسحه من كل أجهزتك؟";
+    pub const DELETE_YES: &str = "أيوه امسحه";
+    pub const STUDY_THEM: &str = "ذاكر كروتك بس";
+    pub const FORM_NEW: &str = "كارت جديد";
+    pub const FORM_EDIT: &str = "عدّل الكارت";
+    pub const FORM_SHARED: &str = "كارت من نص شيّرته";
+    pub const SHARED_HINT: &str = "النص اتحط في الضهر. اكتب السؤال في الوش.";
+    pub const FRONT: &str = "الوش (السؤال)";
+    pub const BACK: &str = "الضهر (الإجابة)";
+    pub const LECTURE: &str = "المحاضرة";
+    pub const NO_LECTURE: &str = "من غير محاضرة";
+    pub const PAGE: &str = "صفحة الكتاب";
+    pub const SOURCE: &str = "منين";
+    pub const SOURCE_HINT: &str = "مثلاً: محاضرة د. فلان، أو اسم الموقع";
+    pub const SAVE: &str = "احفظ";
+    pub const CANCEL: &str = "إلغاء";
+    pub const FAILED: &str = "ما عرفتش أحفظ الكارت:";
+    pub const E_FRONT: &str = "اكتب السؤال في الوش.";
+    pub const E_BACK: &str = "اكتب الإجابة في الضهر.";
+    pub const E_FRONT_LONG: &str = "الوش طويل، خليه سؤال قصير (٦٠٠ حرف بالكتير).";
+    pub const E_BACK_LONG: &str = "الضهر طويل، قسّمه على كذا كارت (٣٠٠٠ حرف بالكتير).";
+    pub const FROM: &str = "من";
+}
+
 pub mod data {
     pub const EXPORT_TITLE: &str = "نسخة احتياطية من كل حاجة";
     pub const EXPORT_BODY: &str =
@@ -663,6 +697,7 @@ pub mod data {
     pub const T_REVIEWS: &str = "المراجعات";
     pub const T_CHECKS: &str = "علاماتك على المحتوى";
     pub const T_SETTINGS: &str = "الإعدادات";
+    pub const T_OWN: &str = "كروتك";
 }
 
 pub mod cloud {

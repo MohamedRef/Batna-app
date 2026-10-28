@@ -32,9 +32,9 @@ use std::time::{Duration, SystemTime, UNIX_EPOCH};
 
 use batna_core::pack::Pack;
 use batna_core::update::{
-    Channel, Decision, Installed, MANIFEST_FILE, SIGNATURE_FILE, Stage, UpdateAsset, UpdateError,
+    Channel, Decision, Installed, MANIFEST_FILE, PackOrigin, SIGNATURE_FILE, Stage, UpdateAsset, UpdateError,
     UpdateManifest, UpdateNotes, UpdatePlatform, VerifyingKey, Version, check_download, content_update,
-    decide, parse_public_key, this_platform, verify_manifest,
+    decide, parse_public_key, published_secs, this_platform, verify_manifest,
 };
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
@@ -146,6 +146,21 @@ struct PackInfo {
     version: String,
     build: u64,
     sha256: String,
+    /// The feed's `published_at` in seconds, so a stale feed of the same
+    /// build can't roll the pack back (absent in packs taken before).
+    #[serde(default)]
+    published_at: Option<i64>,
+}
+
+impl PackInfo {
+    fn origin(&self) -> Option<PackOrigin> {
+        Some(PackOrigin {
+            version: Version::parse(&self.version)?,
+            build: self.build,
+            published_at: self.published_at,
+            sha256: self.sha256.clone(),
+        })
+    }
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -547,8 +562,8 @@ impl Updater {
     /// use, checks it decodes, and keeps it for the next start. Failures
     /// are only reported: the pack built into the app keeps working.
     fn refresh_content(&self, m: &UpdateManifest) {
-        let current = load_pack_info(&self.dir).map(|i| i.sha256);
-        let asset = match content_update(&self.installed(), m, current.as_deref()) {
+        let current = load_pack_info(&self.dir).and_then(|i| i.origin());
+        let asset = match content_update(&self.installed(), m, current.as_ref()) {
             Ok(Some(a)) => a.clone(),
             Ok(None) => return,
             Err(e) => return report!("content pack: {e}"),
@@ -566,7 +581,12 @@ impl Updater {
             let tmp = self.dir.join(format!("{PACK_FILE}.part"));
             fs::write(&tmp, &bytes).map_err(|e| e.to_string())?;
             fs::rename(&tmp, self.dir.join(PACK_FILE)).map_err(|e| e.to_string())?;
-            let info = PackInfo { version: m.version.clone(), build: m.build, sha256: asset.sha256.clone() };
+            let info = PackInfo {
+                version: m.version.clone(),
+                build: m.build,
+                sha256: asset.sha256.clone(),
+                published_at: published_secs(&m.published_at),
+            };
             write_json(&self.dir, PACK_INFO, &info)
         })();
         match result {

@@ -24,6 +24,8 @@ use super::{Result, Store};
 const LAST_SEQ: &str = "sync.last_seq";
 const LAST_SYNC_MS: &str = "sync.last_sync_ms";
 const SEEDED: &str = "sync.seeded";
+/// The synced tables this device last read the log with.
+const TABLES_READ: &str = "sync.tables";
 
 /// Columns that stay on the device: the account a row belongs to is the
 /// account the hub serves.
@@ -81,6 +83,29 @@ pub(super) fn enqueue(conn: &Connection, table: &str, key_col: &str, key: &str) 
         "INSERT OR IGNORE INTO sync_outbox (op_id, op) VALUES (?1, ?2)",
         params![op.id, serde_json::to_string(&op).unwrap_or_default()],
     )?;
+    Ok(())
+}
+
+/// When this build syncs a table the last one didn't, reads the account's
+/// log again from the start (#21): an older build skipped those ops but
+/// still moved `last_seq` past them. Re-reading is harmless, since merging
+/// ignores what is already here.
+pub(super) fn check_tables(conn: &Connection) -> rusqlite::Result<()> {
+    let now: Vec<&str> = TABLES.iter().map(|(t, _)| *t).collect();
+    let before = meta_get(conn, TABLES_READ)?;
+    let grew = match &before {
+        None => true,
+        Some(b) => {
+            let b: Vec<&str> = b.split(',').collect();
+            now.iter().any(|t| !b.contains(t))
+        }
+    };
+    if grew {
+        conn.execute("DELETE FROM meta WHERE key = ?1", [LAST_SEQ])?;
+    }
+    if before.as_deref() != Some(now.join(",").as_str()) {
+        meta_set(conn, TABLES_READ, &now.join(","))?;
+    }
     Ok(())
 }
 
@@ -144,8 +169,8 @@ impl Store {
             let mut conn = self.conn.lock().unwrap();
             let tx = conn.transaction()?;
             for SeqOp { op, .. } in ops {
-                // A table this build doesn't keep is skipped; a newer build
-                // reads it again from the log after a fresh sign-in.
+                // A table this build doesn't keep is skipped; the build that
+                // adds it reads the log again (`check_tables`).
                 let Some(Some(target)) = targets.get(&op.table) else { continue };
                 let applied = match (op.kind, &op.payload) {
                     (OpKind::Delete, _) => {
@@ -157,7 +182,13 @@ impl Store {
                             [&op.row_id],
                         )? > 0
                     }
-                    (_, Some(Value::Object(row))) => merge_row(&tx, &op.table, target, row).unwrap_or(false),
+                    // A row that won't merge stops the page: `last_seq` stays put
+                    // and the page is fetched again on the next connection (#21).
+                    (_, Some(Value::Object(row))) => {
+                        merge_row(&tx, &op.table, target, row).inspect_err(|e| {
+                            crate::diag::report!("sync: op {} on {} did not merge: {e}", op.id, op.table)
+                        })?
+                    }
                     _ => false,
                 };
                 if applied {
@@ -256,6 +287,36 @@ mod tests {
         let ops = from.outbox(500).unwrap();
         from.remove_from_outbox(ops.iter().map(|o| o.id.as_str())).unwrap();
         ops.into_iter().enumerate().map(|(i, op)| SeqOp { seq: seq + i as u64, op }).collect()
+    }
+
+    #[test]
+    fn a_build_that_syncs_a_new_table_reads_the_log_again() {
+        let s = Store::open_in_memory().unwrap();
+        s.set_last_seq(50).unwrap();
+        let conn = s.conn.lock().unwrap();
+        // Same tables as last time: the position stays.
+        check_tables(&conn).unwrap();
+        assert_eq!(meta_get(&conn, LAST_SEQ).unwrap().as_deref(), Some("50"));
+        // The previous build had no own_cards: it skipped those ops, so start over.
+        meta_set(&conn, TABLES_READ, "review_events,item_status,settings").unwrap();
+        check_tables(&conn).unwrap();
+        assert_eq!(meta_get(&conn, LAST_SEQ).unwrap(), None);
+        assert!(meta_get(&conn, TABLES_READ).unwrap().unwrap().contains("own_cards"));
+    }
+
+    #[test]
+    fn a_row_that_does_not_merge_keeps_last_seq() {
+        let tablet = Store::open_in_memory().unwrap();
+        tablet.set_last_seq(7).unwrap();
+        let phone = Store::open_in_memory().unwrap();
+        phone.put_setting("sound", &2u32).unwrap();
+        let mut ops = relay(&phone, 8);
+        // A payload this build can't store (`value` is NOT NULL).
+        if let Some(Value::Object(row)) = &mut ops[0].op.payload {
+            row.insert("value".into(), Value::Null);
+        }
+        assert!(tablet.apply_remote(&ops, 8).is_err());
+        assert_eq!(tablet.last_seq(), 7);
     }
 
     #[test]

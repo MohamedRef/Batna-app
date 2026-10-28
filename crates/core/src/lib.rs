@@ -7,6 +7,7 @@ pub mod exam;
 pub mod glossary;
 pub mod layout;
 pub mod lesson;
+pub mod own;
 pub mod pack;
 pub mod plan;
 pub mod review;

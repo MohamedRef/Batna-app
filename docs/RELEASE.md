@@ -27,6 +27,14 @@ derived from it (`scripts/android-release-apk.sh`). An alpha always sorts
 before its beta, and a beta before the release, so each stage installs over
 the previous one and keeps your data.
 
+Until the first alpha, the version stays `0.1.1-alpha.0` (versionCode
+101100). A version with no pre-release counts as a final release (stage
+999); early previews shipped as `0.1.0` (100999), so the pre-alpha version
+must sort above that, and the first alpha is `0.1.1-alpha.1` or later
+(`1.0.0-alpha.1` is fine too). The versionCode may never go down: the
+preview workflow refuses to publish a build below the live feed's. Only move to a bare version
+(`1.0.0`) for a real stable release.
+
 ## 2. One-time setup on the Mac
 
 | Step | Command | Notes |

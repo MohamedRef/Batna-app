@@ -220,6 +220,17 @@ jobs:
               exit 0
             fi
           fi
+          # Never publish a lower versionCode than the live feed: installed
+          # previews would never update again, and Android refuses the
+          # downgrade unless the app (and its data) is uninstalled.
+          new_code="$(jq -r '.assets[] | select(.platform == "android-arm64") | .version_code' dist/update/update.json)"
+          if live="$(gh release download "$TAG" -p update.json -O - 2>/dev/null)"; then
+            old_code="$(jq -r '.assets[] | select(.platform == "android-arm64") | .version_code // 0' <<<"$live")"
+            if [[ "$old_code" =~ ^[0-9]+$ && "$new_code" =~ ^[0-9]+$ ]] && (( new_code < old_code )); then
+              echo "::error::versionCode $new_code is below the published preview's $old_code. Raise version in Cargo.toml (docs/RELEASE.md §1)."
+              exit 1
+            fi
+          fi
           NOTES="Preview build of ${GITHUB_SHA::7}, signed with a CI preview key (not the release key). Install: download batna-preview.apk on the phone or tablet and allow installs from your browser. Not a release: the first release will be an alpha."
           # The release stays in place and only its tag and files change, so
           # the download link and the update feed never 404.

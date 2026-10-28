@@ -470,23 +470,38 @@ lessons:
     pages: [93, 94]
     topics: [management, special]
     goals:
-      - "ترتّب الـ pre-treatment work-up زي الكتاب"
+      - "تفتكر الـ 6 حاجات اللي في الـ pre-treatment checklist"
       - "تعرف ليه بنعمل HBcAb وليه amiodarone ممنوع"
       - "تعرف المتابعة بعد الـ SVR في الـ cirrhosis"
       - "تظبط العلاج في decompensated cirrhosis و CKD والحمل والـ coinfection"
     status: unverified
     steps:
-      - kind: order
+      - kind: explain
         page: 93
-        prompt: "رتّب الـ **Before Treatment** checklist زي الكتاب:"
-        steps:
-          - "Confirm HCV RNA"
-          - "Assess fibrosis (FIB-4, FibroScan)"
-          - "Test for HIV and HBV (including total HBcAb)"
-          - "Check liver and renal function"
-          - "Pregnancy test (if relevant)"
+        title: "قبل العلاج: 6 حاجات"
+        text: |
+          الكتاب حاططها checklist من 6 نقط. مش خطوات لازم تتعمل بالترتيب، إلا أول واحدة: لازم **تأكد إن فيه فيروس** الأول.
+
+          - **Confirm HCV RNA**
+          - **Assess fibrosis** (FIB-4, FibroScan)
+          - **Test for HIV and HBV**، ومعاهم **total HBcAb**
+          - **Check liver and renal function**
+          - **Pregnancy test** (if relevant)
+          - **Check for drug-drug interactions**
+      - kind: check
+        page: 93
+        question: "Which of these is NOT in the lecture's pre-treatment checklist for DAAs?"
+        options:
+          - "Routine liver biopsy"
+          - "Test for HIV and HBV, including total HBcAb"
+          - "Pregnancy test, if relevant"
           - "Check for drug-drug interactions"
-        why: "ده ترتيب الكتاب بالظبط في **Management Strategies: Before Treatment**. أول حاجة تتأكد إن فيه فيروس أصلًا، وآخر حاجة تراجع أدويته."
+        answer: 0
+        why:
+          - "صح: الـ fibrosis بتتقيّم بـ **FIB-4 و FibroScan**، والـ biopsy **rarely used now**."
+          - "موجودة في الـ checklist، والـ HBcAb علشان الـ HBV reactivation."
+          - "موجودة: الـ DAAs **not approved in pregnancy**."
+          - "موجودة، ومثالها **amiodarone**."
       - kind: reveal
         page: 94
         prompt: "ليه نعمل **total HBcAb** مش HBsAg بس قبل الـ DAAs؟"
@@ -572,7 +587,7 @@ lessons:
       - kind: try
         items: [hb.L05.028, hb.L05.029, hb.L05.030, hb.L05.033, hb.L05.034]
     recap:
-      - "قبل العلاج: **RNA → fibrosis → HIV/HBV (total HBcAb) → liver/renal → pregnancy → interactions**."
+      - "قبل العلاج 6 حاجات: **confirm RNA** (دي الأول)، fibrosis، HIV و HBV (total HBcAb)، liver و renal function، pregnancy test، و drug interactions."
       - "**Amiodarone** absolutely contraindicated: **serious bradycardia**."
       - "أثناء العلاج: adherence و interactions. بعده: **SVR12**."
       - "Cirrhosis بعد الشفا: **HCC surveillance كل 6 شهور** و primary prophylaxis للـ varices لو فيه CSPH."

@@ -1,0 +1,733 @@
+schema: batna.lesson/v1
+lecture: hb.L11
+lessons:
+  # ------------------------------------------------------------------
+  - id: hb.L11.lesson1
+    title: "إمتى نزرع كبد؟"
+    hook: "الـ decompensation بتقص العمر من 12 سنة لسنتين. السؤال مش «نزرع ولا لأ»، السؤال «إمتى بالظبط»."
+    minutes: 9
+    pages: [188, 189]
+    topics: [timing, indications, meld-exceptions]
+    goals:
+      - "تقول إمتى المريض يتحوّل لتقييم الزرع حسب AASLD"
+      - "تعرف الـ MELD معمول من إيه، واتعمل ليه أصلًا"
+      - "تعدّ indications الـ LDLT في Child C وقواعد الـ listing بالأرقام"
+      - "تعرف ليه فيه أمراض بتاخد MELD exception points"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 188
+        title: "الرقم اللي يخضّ"
+        quote: "the development of decompansation is associated with a decreased median survival from greater than 12 years to 2 years"
+        text: |
+          الـ compensated cirrhosis ممكن تعيش معاها **أكتر من 12 سنة** (median survival). أول ما يحصل **decompensation** (ascites، variceal bleeding، HE، jaundice) الرقم بينزل لـ **سنتين بس**.
+
+          علشان كده الـ decompensation هي جرس الإنذار الأول اللي بيقول: «ابدأ فكّر في الزرع».
+
+          والكتاب بيقول كمان إن كل transplant program ليه **program specific guidelines** خاصة بيه، واللي جاي ده هو بروتوكول البرنامج اللي في الكتاب.
+      - kind: figure
+        page: 188
+        title: "التوقيت المثالي"
+        alt: "A graph of risk against time. The risk of dying from liver disease starts low and rises steeply after decompensation. The risk of dying from the operation rises slowly. Where the two lines cross is marked as the ideal timing of transplantation."
+        caption: "الخط الأحمر: خطر الموت من المرض. الخط التاني: خطر الموت من العملية. **الزرع المثالي** لما الأحمر يعدّي التاني."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L11a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <text x="165" y="18" text-anchor="middle" class="t-b t-lg">When to transplant?</text>
+            <path d="M30 230V40" class="fg-arrow" marker-end="url(#L11a)"/>
+            <path d="M30 230H318" class="fg-arrow" marker-end="url(#L11a)"/>
+            <text x="36" y="48" class="t-sm t-mut">risk of death</text>
+            <text x="316" y="248" text-anchor="end" class="t-sm t-mut">time</text>
+            <polyline points="30,215 120,205 190,175 240,135 290,85 315,60" class="fg-arrow-bad"/>
+            <polyline points="30,140 315,155" class="fg-arrow-acc"/>
+            <text x="300" y="56" text-anchor="end" class="t-sm t-bad t-b">dying of the liver disease</text>
+            <text x="34" y="132" class="t-sm t-acc t-b">dying of the operation</text>
+            <path d="M150 230V100" class="fg-thin"/>
+            <text x="150" y="262" text-anchor="middle" class="t-sm">decompensation</text>
+            <text x="150" y="276" text-anchor="middle" class="t-sm t-mut">survival: &gt;12 y to 2 y</text>
+            <circle cx="225" cy="147" r="7" class="fg-dot-good"/>
+            <rect x="178" y="176" width="146" height="38" rx="6" class="fg-good"/>
+            <text x="251" y="192" text-anchor="middle" class="t-sm t-b">Ideal timing:</text>
+            <text x="251" y="206" text-anchor="middle" class="t-sm">disease risk &gt; surgery risk</text>
+          </svg>
+      - kind: reveal
+        page: 188
+        prompt: "طب ليه منزرعش بدري «احتياطي»؟ وليه منستناش لحد آخر لحظة؟"
+        answer: |
+          الكتاب بيقول التوقيت المثالي لما **risk of dying from the liver disease** يبقى **أكبر من** **risk of dying from the surgical procedure**.
+
+          - **بدري قوي:** بتعرّض واحد كان هيعيش سنين لخطر عملية كبيرة و immunosuppression طول العمر من غير داعي.
+          - **متأخر قوي:** المريض بيبقى أضعف من إنه يستحمل العملية، فبتخسره على الترابيزة.
+
+          (السببين دول منطق مقبول، الكتاب كاتب القاعدة بس.)
+      - kind: explain
+        page: 188
+        title: "إمتى نبدأ التقييم؟ و MELD ده إيه؟"
+        text: |
+          **AASLD** بتقول ابدأ **candidate evaluation** لما يحصل واحدة من التلاتة:
+
+          - **decompensation**
+          - **CTP score ≥ 7**
+          - **MELD score ≥ 10**
+
+          الـ **MELD** بيقيس **«sickness of the liver»**، وهو رقم محسوب من **serum bilirubin** و **INR** و **creatinine**.
+
+          اتعمل أصلًا في **Mayo Clinic** (Rochester, Minnesota) علشان **يتوقع الـ survival بعد TIPS** في الـ cirrhosis، وبعدين اتعمل بيه **organ allocation** من **February 2002**.
+      - kind: mnemonic
+        page: 188
+        word: "BIC"
+        parts:
+          - { key: "B", text: "Bilirubin (serum)" }
+          - { key: "I", text: "INR" }
+          - { key: "C", text: "Creatinine" }
+        hook: |
+          الـ MELD زي **قلم BIC** الأزرق: أرخص حاجة في الشنطة، بس هو اللي بيكتب مين ياخد الكبد الأول. ✍️
+      - kind: aside
+        tone: joke
+        page: 188
+        text: |
+          الـ MELD اتولد في Mayo Clinic علشان يجاوب سؤال صغير: «المريض ده هيعيش بعد الـ TIPS؟»
+
+          وبعدين لقى نفسه بيوزّع الأكباد على أمريكا كلها. زي واحد دخل الشغل «مساعد مؤقت» وطلع بعد كام سنة المدير العام. 😄
+
+          **الممتحن بيحب السؤال ده:** الـ MELD اتعمل originally لإيه؟ **TIPS.**
+      - kind: check
+        page: 188
+        question: "A compensated cirrhotic (no ascites, bleeding or HE) has CTP 6 and MELD 11. Per AASLD in the book, what now?"
+        options:
+          - "Start transplant candidate evaluation"
+          - "Wait until the first decompensation"
+          - "Wait until CTP reaches 10 (Child C)"
+          - "Wait until MELD reaches 15"
+        answer: 0
+        why:
+          - "صح: **MELD ≥ 10** لوحده كفاية علشان يبدأ التقييم، حتى من غير decompensation ولا CTP ≥ 7."
+          - "الـ decompensation واحدة من التلاتة، مش شرط. الـ MELD 11 كفاية."
+          - "CTP ≥ 7 هو اللي يبدأ التقييم، مش 10. وهنا أصلًا الـ MELD كفّى."
+          - "MELD 15 ده رقم **الزرع** في البرنامج، مش رقم بداية **التقييم**."
+      - kind: mnemonic
+        page: 189
+        word: "PHASE C"
+        parts:
+          - { key: "P", text: "Portal hypertension: bleeding varices and/or intractable ascites" }
+          - { key: "H", text: "Hyperbilirubinemia" }
+          - { key: "A", text: "Albumin falling and PT rising: synthetic dysfunction" }
+          - { key: "S", text: "Sick of life: unacceptable quality of life (weakness, malaise, cholestasis, itching)" }
+          - { key: "E", text: "Encephalopathy: recurrent HE" }
+          - { key: "C", text: "CTP score C (10-15): the frame for all of the above" }
+        hook: |
+          المريض دخل **«PHASE C»**: المرحلة اللي فيها Child C، وكل حرف indication من الخمسة اللي في الكتاب لـ LDLT في ESLD.
+      - kind: explain
+        page: 189
+        title: "قواعد البرنامج بالأرقام"
+        text: |
+          - **Child B** (CPS > 7): بيتعمله **listing بس من غير زرع**، لحد ما يبقى **Child C** أو **MELD 15**.
+          - **MELD ≥ 15:** بنزرع.
+          - **MELD > 30:** **case by case**.
+          - **MELD < 15:** بنزرع **لو** فيه **refractory ascites** أو **repeated HE**.
+
+          يعني الـ MELD هو البوابة، بس فيه حالتين بيعدّوا من الباب الجانبي: الـ ascites اللي مش بتخلص، والـ HE اللي بتتكرر. الاتنين بيبوّظوا حياة المريض مع إن رقم الـ MELD «شكله كويس».
+      - kind: aside
+        tone: trap
+        page: 189
+        text: |
+          الكتاب قال «We do not transplant child B patients» وفي نفس الصفحة «We transplant patients with MELD < 15 if they have refractory ascites or repeated HE». مريض Child B عنده repeated HE يدخل في الاتنين!
+
+          في الامتحان: لو السؤال عن **MELD < 15 + refractory ascites أو repeated HE** جاوب **بنزرع**. ولو عن Child B من غير كده: **listed but not transplanted**.
+      - kind: figure
+        page: 189
+        title: "مسطرة الـ MELD"
+        alt: "A vertical MELD ruler from 6 to 40. At 10: AASLD evaluation starts. Below 15: transplant only for refractory ascites or repeated HE. At 15 and above: transplant. Above 30: case by case."
+        caption: "10 = ابدأ التقييم. 15 = ازرع. فوق 30 = نقعد نتناقش. وتحت 15 فيه باب جانبي: refractory ascites أو repeated HE."
+        svg: |
+          <svg viewBox="0 0 330 360" xmlns="http://www.w3.org/2000/svg">
+            <text x="165" y="18" text-anchor="middle" class="t-b t-lg">The MELD ruler (book program)</text>
+            <rect x="40" y="36" width="34" height="300" rx="6" class="fg-box"/>
+            <rect x="40" y="36" width="34" height="75" rx="6" class="fg-bad"/>
+            <rect x="40" y="111" width="34" height="112" class="fg-good"/>
+            <rect x="40" y="223" width="34" height="113" rx="6" class="fg-acc"/>
+            <text x="34" y="40" text-anchor="end" class="t-sm t-mut">40</text>
+            <path d="M74 111h20" class="fg-ink"/>
+            <text x="34" y="115" text-anchor="end" class="t-sm t-b">30</text>
+            <path d="M74 223h20" class="fg-ink"/>
+            <text x="34" y="227" text-anchor="end" class="t-sm t-b">15</text>
+            <path d="M74 279h20" class="fg-ink"/>
+            <text x="34" y="283" text-anchor="end" class="t-sm t-b">10</text>
+            <text x="34" y="340" text-anchor="end" class="t-sm t-mut">6</text>
+            <text x="102" y="70" class="t-sm t-bad t-b">MELD &gt; 30</text>
+            <text x="102" y="86" class="t-sm">discussed case by case</text>
+            <text x="102" y="160" class="t-sm t-good t-b">MELD ≥ 15</text>
+            <text x="102" y="176" class="t-sm">we transplant</text>
+            <text x="102" y="240" class="t-sm t-acc t-b">MELD &lt; 15</text>
+            <text x="102" y="256" class="t-sm">only if refractory ascites</text>
+            <text x="102" y="270" class="t-sm">or repeated HE</text>
+            <rect x="98" y="290" width="222" height="40" rx="6" class="fg-acc"/>
+            <text x="106" y="306" class="t-sm t-b">MELD ≥ 10 or CTP ≥ 7 or decompensation</text>
+            <text x="106" y="322" class="t-sm">AASLD: start candidate evaluation</text>
+          </svg>
+      - kind: explain
+        page: 189
+        title: "MELD exception points: ليه الرقم ساعات بيكدب؟"
+        text: |
+          الـ MELD بيبص على **bilirubin و INR و creatinine** بس. فيه أمراض بتموّت المريض من طريق تاني خالص والتلاتة دول لسه كويسين، فبنديلها **exception points** علشان متتظلمش في الطابور.
+
+          الكتاب بيعدّ **10**:
+
+          - **HCC**
+          - **Hepatopulmonary syndrome** و **Portopulmonary hypertension** (الرئة)
+          - **Recurrent cholangitis** و **Intractable pruritus** (المرارة والحكة)
+          - **Budd-Chiari syndrome**
+          - **Cystic fibrosis** و **Familial amyloidosis** و **Polycystic liver disease**
+          - **Small for size syndrome** (بعد زرع graft صغير)
+      - kind: sort
+        page: 189
+        prompt: "مين في قائمة الـ MELD exception points اللي في الكتاب، ومين لأ؟"
+        bins: ["MELD exception (book list)", "Not on the list"]
+        cards:
+          - { text: "Hepatopulmonary syndrome", bin: 0 }
+          - { text: "Recurrent cholangitis", bin: 0 }
+          - { text: "Small for size syndrome", bin: 0 }
+          - { text: "Familial amyloidosis", bin: 0 }
+          - { text: "Intractable pruritus", bin: 0 }
+          - { text: "Refractory ascites", bin: 1 }
+          - { text: "Repeated hepatic encephalopathy", bin: 1 }
+          - { text: "Hepatorenal syndrome", bin: 1 }
+        why: "الـ refractory ascites والـ repeated HE مش exception points؛ دول بيخلّونا **نزرع تحت MELD 15**. والـ HRS بيرفع الـ creatinine فالـ MELD شايفه لوحده، وفي الكتاب هو **high risk factor** (الدرس التالت)."
+      - kind: try
+        items: [hb.L11.003, hb.L11.008, hb.L11.010, hb.L11.015, hb.L11.011]
+    recap:
+      - "Decompensation: الـ median survival من **> 12 سنة لسنتين**."
+      - "AASLD: ابدأ التقييم عند **decompensation أو CTP ≥ 7 أو MELD ≥ 10**."
+      - "MELD = **BIC** (bilirubin، INR، creatinine)، اتعمل في Mayo علشان **TIPS**، واتعمل بيه allocation من **2002**."
+      - "التوقيت المثالي: خطر المرض أكبر من خطر العملية."
+      - "Indications في Child C: **PHASE C**. نزرع عند **MELD ≥ 15**، وتحت 15 لو refractory ascites أو repeated HE، وفوق 30 case by case."
+      - "الـ MELD exception points عشرة، أولها HCC."
+    practice: [hb.L11.001, hb.L11.002, hb.L11.003, hb.L11.004, hb.L11.005, hb.L11.006, hb.L11.007, hb.L11.008, hb.L11.009, hb.L11.010, hb.L11.011, hb.L11.015, hb.L11.016, hb.L11.017, hb.L11.051, hb.L11.052, hb.L11.061, hb.L11.065]
+  # ------------------------------------------------------------------
+  - id: hb.L11.lesson2
+    title: "مين كمان يستاهل كبد جديد؟"
+    hook: "الـ HCC لازم يعدّي 4 بوابات، والعيال ليهم قايمة لوحدهم أولها biliary atresia."
+    minutes: 8
+    pages: [190, 191]
+    topics: [hcc, indications, pediatric]
+    goals:
+      - "تعدّ الـ 4 شروط علشان مريض HCC يتقبل للـ LDLT"
+      - "تعرف يعني إيه bridging therapy وليه"
+      - "تقسّم باقي الأمراض اللي بتتعالج بالزرع لمجموعاتها"
+      - "تعدّ الـ pediatric indications ومين أشهرهم"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 190
+        title: "الـ HCC: أهم exception"
+        text: |
+          علشان مريض الـ **HCC** يدخل الزرع لازم الأربعة دول:
+
+          - **Within accepted criteria:** **Milan** و **San Francisco** criteria.
+          - **No extrahepatic spread:** بـ **normal CT chest** و **bone scan**.
+          - **No macrovascular invasion** في radiological work up كامل.
+          - **AFP < 400 ng/ml**.
+
+          والمنطق: الزرع بيشيل الكبد كله. لو الورم **جوه** الكبد بس، شلته معاه. لو **برّه** الكبد، الكبد الجديد مش هيعالجه.
+      - kind: figure
+        page: 190
+        title: "أربع بوابات"
+        alt: "A vertical flow of four gates for an HCC patient: within Milan or San Francisco criteria, no extrahepatic spread on CT chest and bone scan, no macrovascular invasion, AFP below 400 ng/ml. Passing all four leads to listing with locoregional bridging therapy while waiting. Failing any gate leads to not eligible."
+        caption: "يعدّي الأربعة كلهم → يتعمله listing و **bridging** لحد ما الـ donor يتوفر. يقع في واحدة → مش هيتزرع."
+        svg: |
+          <svg viewBox="0 0 330 430" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L11b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+              <marker id="L11c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-bad"/></marker>
+            </defs>
+            <rect x="70" y="8" width="150" height="30" rx="15" class="fg-ink"/>
+            <text x="145" y="28" text-anchor="middle" class="t-b">HCC in cirrhosis</text>
+            <path d="M145 38v16" class="fg-arrow" marker-end="url(#L11b)"/>
+            <rect x="20" y="58" width="220" height="44" rx="6" class="fg-acc"/>
+            <text x="30" y="76" class="t-sm t-b">1. Within accepted criteria</text>
+            <text x="30" y="92" class="t-sm">Milan and San Francisco</text>
+            <path d="M145 102v16" class="fg-arrow" marker-end="url(#L11b)"/>
+            <rect x="20" y="122" width="220" height="44" rx="6" class="fg-acc"/>
+            <text x="30" y="140" class="t-sm t-b">2. No extrahepatic spread</text>
+            <text x="30" y="156" class="t-sm">normal CT chest and bone scan</text>
+            <path d="M145 166v16" class="fg-arrow" marker-end="url(#L11b)"/>
+            <rect x="20" y="186" width="220" height="44" rx="6" class="fg-acc"/>
+            <text x="30" y="204" class="t-sm t-b">3. No macrovascular invasion</text>
+            <text x="30" y="220" class="t-sm">on a devoted radiological work up</text>
+            <path d="M145 230v16" class="fg-arrow" marker-end="url(#L11b)"/>
+            <rect x="20" y="250" width="220" height="44" rx="6" class="fg-acc"/>
+            <text x="30" y="268" class="t-sm t-b">4. AFP &lt; 400 ng/ml</text>
+            <text x="30" y="284" class="t-sm">tumour biology still acceptable</text>
+            <path d="M240 80h40v234" class="fg-arrow-bad"/>
+            <path d="M240 144h40M240 208h40M240 272h40" class="fg-arrow-bad"/>
+            <path d="M280 314v10" class="fg-arrow-bad" marker-end="url(#L11c)"/>
+            <rect x="248" y="328" width="76" height="40" rx="6" class="fg-bad"/>
+            <text x="286" y="345" text-anchor="middle" class="t-sm t-b">any fails:</text>
+            <text x="286" y="360" text-anchor="middle" class="t-sm">not eligible</text>
+            <path d="M130 294v40" class="fg-arrow" marker-end="url(#L11b)"/>
+            <rect x="10" y="338" width="230" height="72" rx="6" class="fg-good"/>
+            <text x="20" y="358" class="t-sm t-b t-good">All four passed: list for LDLT</text>
+            <text x="20" y="376" class="t-sm">while waiting for a donor:</text>
+            <text x="20" y="394" class="t-sm t-b">locoregional bridging therapy</text>
+          </svg>
+      - kind: aside
+        tone: tip
+        page: 190
+        text: |
+          الكتاب ذكر **Milan** بالاسم من غير أرقام. الأرقام المعروفة (Mazzaferro 1996، **مش من الكتاب**): **ورم واحد ≤ 5 cm**، أو **لحد 3 أورام كل واحد ≤ 3 cm**، ومن غير vascular invasion ولا extrahepatic spread.
+
+          افتكرها **«5 أو 3×3»**.
+      - kind: reveal
+        page: 190
+        prompt: "ليه بالذات CT chest و bone scan؟ وليه نهتم بالـ AFP لو الورم صغير؟"
+        answer: |
+          - الـ HCC لما يطلع برّه الكبد بيروح أكتر حاجة **للرئة والعضم**، فدول اللي بنصورهم قبل ما نقرر. (منطق مقبول، الكتاب كاتب الفحوص بس.)
+          - الـ **AFP العالي** بيعني ورم **biology** بتاعته عدوانية، واحتمال يرجع بعد الزرع أعلى، خصوصًا إن الـ **immunosuppression** بعد الزرع بتساعد أي خلية ورم فاضلة. علشان كده الكتاب حاطط حد: **< 400 ng/ml**.
+      - kind: explain
+        page: 190
+        title: "Bridging therapy: نمسك الورم مكانه"
+        quote: "Locoregional Bridging therapy, if possible, is one of options used to manage patients on waiting list till a donor becomes available."
+        text: |
+          المريض بيستنى donor، والورم مش بيستنى. فبنعمل **locoregional therapy** (زي ablation أو chemoembolization) علشان الورم **يفضل جوه الـ criteria** لحد ما الكبد يتوفر.
+
+          يعني الـ bridging زي ما تحط الأكل في التلاجة لحد ما الضيوف يوصلوا: مش بيعالج، بس بيمنع إنه يبوظ.
+      - kind: check
+        page: 190
+        question: "A cirrhotic has a single 4 cm HCC, normal CT chest and bone scan, no macrovascular invasion, and AFP 650 ng/ml. Can he be listed under the book's criteria?"
+        options:
+          - "No: AFP must be below 400 ng/ml"
+          - "Yes: he is within Milan criteria"
+          - "No: a 4 cm tumour is beyond Milan"
+          - "Yes, but only after a negative PET scan"
+        answer: 0
+        why:
+          - "صح: الأربع بوابات كلهم لازم يتعدّوا، والـ AFP هنا فوق 400."
+          - "الـ Milan بوابة واحدة بس من أربعة؛ الـ AFP وقّعه."
+          - "ورم واحد 4 cm جوه Milan (الحد 5 cm لورم واحد)."
+          - "الكتاب مش بيطلب PET؛ بيطلب CT chest و bone scan، والـ AFP هو المشكلة."
+      - kind: explain
+        page: 190
+        title: "أمراض تانية بتتعالج بالزرع"
+        text: |
+          الكتاب بيقسمهم أربع مجموعات:
+
+          - **Cholestatic:** **PBC**، **PSC**.
+          - **Metabolic:** **Hemochromatosis**، **Alpha1-antitrypsin deficiency**، **Wilson's disease**، **Tyrosinemia**، **Cystic fibrosis**.
+          - **Hepatic malignancy (other than HCC):** **Hepatoblastoma**، **hepatic carcinoid**، بشرط within accepted criteria ومن غير extrahepatic spread ولا vascular invasion.
+          - **Miscellaneous:** **Cryptogenic cirrhosis**، **Polycystic liver disease**، **Budd-Chiari syndrome**، **Amyloidosis**.
+
+          الـ metabolic دي بالذات هتقابلها تاني في Lecture 12: الزرع فيها مش بس بيغيّر كبد بايظ، ده بيغيّر **المصنع اللي فيه العيب الجيني**.
+      - kind: match
+        page: 190
+        prompt: "وصّل كل مرض بالمجموعة بتاعته في الكتاب:"
+        pairs:
+          - ["PSC", "Cholestatic disorders"]
+          - ["Tyrosinemia", "Metabolic diseases"]
+          - ["Hepatic carcinoid", "Malignancy other than HCC"]
+          - ["Polycystic liver disease", "Miscellaneous"]
+        why: "الـ hepatic carcinoid و hepatoblastoma هما الـ malignancy غير الـ HCC، بنفس الشروط: within criteria ومن غير spread ولا vascular invasion."
+      - kind: explain
+        page: 190
+        title: "الأطفال: قايمة لوحدها"
+        text: |
+          **Pediatric indications of LDLT:**
+
+          - **EHBA** (extrahepatic biliary atresia): **50-60% of cases**، يعني نص الحالات تقريبًا.
+          - **Familial Intrahepatic Cholestasis (FIHC)**
+          - **Alagille's syndrome**
+          - **Budd-Chiari syndrome**
+          - **AIH**
+          - **Rarely** viral hepatitis leading to ESLD
+
+          وفيه كمان **metabolic** خاصة بالأطفال (صفحة 191): **Alpha one antitrypsin deficiency**، **Tyrosinemia**، **Hyperoxaluria**، **Amyloidosis**.
+      - kind: aside
+        tone: analogy
+        page: 190
+        text: |
+          الـ **biliary atresia** زي شقة جديدة اتسلّمت **من غير مواسير صرف**. الكبد بيعمل bile عادي، بس مفيش طريق يخرج منه، فالـ bile بيرجع يحرق الكبد من جوه وبيوصل لـ cirrhosis بدري جدًا. علشان كده هي **أشهر سبب** لزرع الكبد في العيال.
+      - kind: mnemonic
+        page: 191
+        word: "A HAT"
+        parts:
+          - { key: "A", text: "Alpha one antitrypsin deficiency" }
+          - { key: "H", text: "Hyperoxaluria" }
+          - { key: "A", text: "Amyloidosis" }
+          - { key: "T", text: "Tyrosinemia" }
+        hook: |
+          العيل الصغير رايح الزرع لابس **A HAT** (طاقية): دي الـ metabolic indications بتاعة الأطفال.
+      - kind: check
+        page: 191
+        question: "Which of these is in the book's **pediatric metabolic** list for LDLT, but not in the adult metabolic list?"
+        options:
+          - "Hyperoxaluria"
+          - "Wilson's disease"
+          - "Hemochromatosis"
+          - "Cystic fibrosis"
+        answer: 0
+        why:
+          - "صح: الـ hyperoxaluria موجودة في قايمة الأطفال بس (الـ H في A HAT)."
+          - "Wilson في الـ metabolic بتاعة الكبار في صفحة 190."
+          - "Hemochromatosis في قايمة الكبار، وده منطقي: الحديد بياخد سنين يتراكم."
+          - "Cystic fibrosis في قايمة الكبار (وكمان MELD exception)."
+      - kind: try
+        items: [hb.L11.018, hb.L11.012, hb.L11.023, hb.L11.019, hb.L11.024]
+    recap:
+      - "HCC للزرع: **within Milan/San Francisco**، **CT chest + bone scan normal**، **no macrovascular invasion**، **AFP < 400**."
+      - "**Bridging** locoregional therapy بتمسك الورم جوه الـ criteria لحد ما الـ donor يتوفر."
+      - "باقي الأمراض: cholestatic (PBC، PSC)، metabolic، malignancy غير HCC، و miscellaneous."
+      - "الأطفال: **EHBA = 50-60%**، وبعدها FIHC، Alagille، Budd-Chiari، AIH، ونادرًا viral."
+      - "Metabolic الأطفال: **A HAT**."
+    practice: [hb.L11.012, hb.L11.013, hb.L11.014, hb.L11.018, hb.L11.019, hb.L11.020, hb.L11.021, hb.L11.022, hb.L11.023, hb.L11.024, hb.L11.053, hb.L11.059, hb.L11.063]
+  # ------------------------------------------------------------------
+  - id: hb.L11.lesson3
+    title: "مين ممنوع يتزرع؟"
+    hook: "8 موانع مطلقة، 8 عوامل خطر بنتناقش فيها، وساعة الـ MELD اللي بتتسرّع كل ما المريض يتعب."
+    minutes: 9
+    pages: [191, 192]
+    topics: [contraindications, evaluation]
+    goals:
+      - "تعدّ الـ contraindications الـ 8 للـ LDLT"
+      - "تفرّق بين contraindication و high risk factor"
+      - "تقول الـ MELD بيتحدّث كل قد إيه"
+      - "تعدّ الـ recipient criteria للـ living donor transplant"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 191
+        title: "الموانع: Exclusion criteria"
+        text: |
+          - **Age > 70**، والـ **physiological age** بيتقيّم case by case.
+          - **Active uncontrolled systemic infection** (sepsis).
+          - **Advanced cardio/pulmonary disease**.
+          - **HIV**، متأكد بـ **ELISA و PCR مرتين**.
+          - **Active ongoing alcoholism or substance abuse** في **آخر 6 شهور**.
+          - **HCC beyond acceptable criteria**.
+          - **Cholangiocarcinoma**.
+          - **Total / extensive occlusion of splanchnic venous inflow (SMV)**.
+
+          الفكرة الواحدة ورا الكل: **هل الكبد الجديد هيعيش، والمريض هيستفيد؟** عدوى شغالة + immunosuppression = كارثة، قلب ضعيف مش هيستحمل العملية، ورم برّه الكبد هيرجع، وإدمان شغال هيبوّظ الكبد الجديد.
+      - kind: mnemonic
+        page: 191
+        word: "CASH CASH"
+        parts:
+          - { key: "C", text: "Cardio/pulmonary disease, advanced" }
+          - { key: "A", text: "Age > 70 (physiological age case by case)" }
+          - { key: "S", text: "Sepsis: active uncontrolled systemic infection" }
+          - { key: "H", text: "HIV, confirmed with ELISA and PCR twice" }
+          - { key: "C", text: "Cholangiocarcinoma" }
+          - { key: "A", text: "Alcoholism or substance abuse, active in the last 6 months" }
+          - { key: "S", text: "SMV: total / extensive occlusion of splanchnic venous inflow" }
+          - { key: "H", text: "HCC beyond acceptable criteria" }
+        hook: |
+          **CASH CASH**: ثمانية موانع، كل حرف مرتين. ومتقلقش، الكتاب ما قالش ولا كلمة عن الفلوس. 😄
+      - kind: reveal
+        page: 191
+        prompt: "ليه الـ total SMV occlusion مانع مطلق، بس الـ portal vein thrombosis مجرد high risk؟"
+        answer: |
+          الكبد الجديد لازم ياخد دم **portal** داخل عليه. لو الـ **splanchnic venous inflow كله مسدود**، مفيش وريد نوصّل عليه الكبد أصلًا.
+
+          أما الـ **PVT** لوحده فالجراح غالبًا يقدر يتعامل معاه وقت العملية، فالكتاب حاطه في **high risk factors** اللي بتتقيّم case by case. (التفسير منطق جراحي مقبول، الكتاب كاتب التقسيم بس.)
+      - kind: explain
+        page: 191
+        title: "High risk factors: صعب، مش مستحيل"
+        quote: "These factors are evaluated on a case by case basis and do not necessarily preclude transplantation."
+        text: |
+          - **Active variceal hemorrhage**
+          - **Renal failure / HRS**
+          - **Multiple previous hepatobiliary operations**
+          - **Severe malnutrition / cachexia**
+          - **Diabetes Mellitus**
+          - **Previous organ transplant**
+          - **Need for simultaneous organ transplant** (زي liver/kidney)
+          - **Portal vein thrombosis**
+
+          دول بيخلّوا العملية أصعب أو أخطر، بس **مش بيقفلوا الباب**.
+      - kind: sort
+        page: 191
+        prompt: "مانع مطلق ولا high risk بنتناقش فيه؟"
+        bins: ["Contraindication", "High risk factor"]
+        cards:
+          - { text: "HIV confirmed by ELISA and PCR twice", bin: 0 }
+          - { text: "Cholangiocarcinoma", bin: 0 }
+          - { text: "Stopped drinking 3 months ago", bin: 0 }
+          - { text: "Total SMV occlusion", bin: 0 }
+          - { text: "Portal vein thrombosis", bin: 1 }
+          - { text: "Hepatorenal syndrome", bin: 1 }
+          - { text: "Diabetes mellitus", bin: 1 }
+          - { text: "Previous kidney transplant", bin: 1 }
+          - { text: "Active variceal hemorrhage", bin: 1 }
+        why: "الـ alcohol لازم يكون بطّل **أكتر من 6 شهور**؛ 3 شهور يبقى لسه **active in the last 6 months** = مانع. والـ variceal bleeding النشط والـ HRS والـ PVT كلهم high risk، مش موانع."
+      - kind: aside
+        tone: joke
+        page: 191
+        text: |
+          الكتاب قال «Age more than 70» وبعدين على طول «physiological age is considered».
+
+          يعني فيه حاج عنده 72 بيلعب كورة كل جمعة بعد الصلاة، وفيه واحد عنده 45 بيقعد يرتاح على بسطة الدور التاني. العمر في البطاقة حاجة، والعمر في الركب حاجة تانية. 😄
+      - kind: aside
+        tone: trap
+        page: 191
+        text: |
+          الـ contraindications في **L01 (صفحة 18)** مش زي **L11** بالظبط:
+
+          - L01 بيقول age > 70 **relative**، وبيضيف **morbid obesity** و **poor patient understanding**.
+          - L11 بيقول age > 70 **exclusion** (مع physiological age case by case)، وبيضيف **HIV** و **cholangiocarcinoma** و **SMV occlusion**.
+
+          جاوب من المحاضرة اللي السؤال جاي منها.
+      - kind: figure
+        page: 192
+        title: "ساعة الـ MELD"
+        alt: "Three rows, one per MELD band. MELD below 18: update monthly, one dot per month. MELD 18 to 25: every 2 weeks, two dots per month. MELD above 25: weekly, four dots per month."
+        caption: "كل ما الـ MELD يعلى، المريض بيتغيّر أسرع، فبنحدّث رقمه أسرع: **شهري → كل أسبوعين → أسبوعي**."
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <text x="165" y="18" text-anchor="middle" class="t-b t-lg">How often is MELD updated?</text>
+            <text x="165" y="36" text-anchor="middle" class="t-sm t-mut">each dot = one update in a month</text>
+            <rect x="10" y="50" width="310" height="54" rx="8" class="fg-good"/>
+            <text x="22" y="72" class="t-b">MELD &lt; 18</text>
+            <text x="22" y="90" class="t-sm">monthly</text>
+            <path d="M150 77H306" class="fg-thin"/>
+            <circle cx="306" cy="77" r="7" class="fg-dot-good"/>
+            <rect x="10" y="114" width="310" height="54" rx="8" class="fg-acc"/>
+            <text x="22" y="136" class="t-b">MELD 18-25</text>
+            <text x="22" y="154" class="t-sm">every 2 weeks</text>
+            <path d="M150 141H306" class="fg-thin"/>
+            <circle cx="228" cy="141" r="7" class="fg-dot-acc"/>
+            <circle cx="306" cy="141" r="7" class="fg-dot-acc"/>
+            <rect x="10" y="178" width="310" height="54" rx="8" class="fg-bad"/>
+            <text x="22" y="200" class="t-b">MELD &gt; 25</text>
+            <text x="22" y="218" class="t-sm">weekly</text>
+            <path d="M150 205H306" class="fg-thin"/>
+            <circle cx="189" cy="205" r="7" class="fg-dot-bad"/>
+            <circle cx="228" cy="205" r="7" class="fg-dot-bad"/>
+            <circle cx="267" cy="205" r="7" class="fg-dot-bad"/>
+            <circle cx="306" cy="205" r="7" class="fg-dot-bad"/>
+          </svg>
+      - kind: explain
+        page: 192
+        title: "Recipient criteria للـ living donor"
+        text: |
+          - **No evidence of extra-hepatic malignancy**
+          - **No percutaneous stents in place**
+          - **No previous portocaval shunts**، والاستثناء الوحيد **mesocaval shunt**
+
+          وكمان الـ **initial assessment** هدفه يحدد ويتأكد من **السبب (etiology)** بتاع الـ chronic liver disease، ويحسب **CP score** و **MELD score**.
+
+          ليه السبب مهم؟ لأن بعض الأسباب (زي HBV) لازم تتعالج قبل وبعد الزرع وإلا هتاكل الكبد الجديد. ده الدرس الجاي.
+      - kind: case
+        page: 192
+        stem: "A 56-year-old man with HCV cirrhosis, type 2 diabetes and a previous open cholecystectomy is being worked up for living donor LT. His MELD is 19."
+        steps:
+          - question: "Do his diabetes and his previous operation exclude him?"
+            options:
+              - "No: both are high risk factors judged case by case"
+              - "Yes: diabetes is an exclusion criterion"
+              - "Yes: any previous abdominal surgery excludes LDLT"
+            answer: 0
+            why: "Diabetes mellitus و multiple previous hepatobiliary operations في الـ **high risk factors**: do not necessarily preclude transplantation."
+          - question: "How often should his MELD be updated?"
+            options:
+              - "Monthly"
+              - "Every 2 weeks"
+              - "Weekly"
+            answer: 1
+            why: "MELD 19 في الـ band بتاع **18-25**، فبيتحدّث **every 2 weeks**."
+          - reveal: "His old notes show that years ago he had a portocaval shunt for variceal bleeding."
+            question: "What does this mean for living donor LT?"
+            options:
+              - "He fails the recipient criteria"
+              - "Nothing: only a mesocaval shunt counts"
+              - "He gains MELD exception points"
+            answer: 0
+            why: "Recipient criteria: **no previous portocaval shunts**، والاستثناء الوحيد هو الـ **mesocaval** shunt."
+      - kind: aside
+        tone: exam
+        page: 192
+        text: |
+          سؤالين من أسئلة المحاضرة نفسها: **«Enumerate the contraindications»** و **«Mention the recipient criteria»**.
+
+          الأول: اكتب **CASH CASH** كاملة، وبعدها سطر إن فيه **high risk factors** بتتقيّم case by case.
+          التاني: التلات criteria (malignancy، stents، shunts مع استثناء mesocaval) + الـ initial assessment (etiology + CP + MELD).
+      - kind: try
+        items: [hb.L11.025, hb.L11.029, hb.L11.031, hb.L11.032, hb.L11.067]
+    recap:
+      - "Contraindications = **CASH CASH**: cardiopulmonary، age > 70، sepsis، HIV، cholangiocarcinoma، alcohol < 6 months، SMV occlusion، HCC beyond criteria."
+      - "High risk (case by case): variceal bleeding نشط، HRS، عمليات سابقة، cachexia، DM، زرع سابق، زرع مزدوج، PVT."
+      - "MELD update: **< 18 شهري**، **18-25 كل أسبوعين**، **> 25 أسبوعي**."
+      - "Recipient: no extrahepatic malignancy، no percutaneous stents، no portocaval shunt (mesocaval مسموح)."
+    practice: [hb.L11.025, hb.L11.026, hb.L11.027, hb.L11.028, hb.L11.029, hb.L11.030, hb.L11.031, hb.L11.032, hb.L11.033, hb.L11.034, hb.L11.054, hb.L11.055, hb.L11.056, hb.L11.057, hb.L11.062, hb.L11.064, hb.L11.066, hb.L11.067]
+  # ------------------------------------------------------------------
+  - id: hb.L11.lesson4
+    title: "نعالج المرض الأصلي قبل ما ياكل الكبد الجديد"
+    hook: "HBV ممكن يرجع يهجم على الـ graft من أول يوم. الحل: قفلين، واحد بالـ antiviral وواحد بالـ HBIg."
+    minutes: 9
+    pages: [192, 194]
+    topics: [hbv, underlying]
+    goals:
+      - "تشرح خطة الـ antiviral للـ HBV قبل وبعد الزرع"
+      - "تحفظ بروتوكول الـ HBIg بالجرعات والمدد"
+      - "تعرف علاج الـ HHC و PBC و PSC و AIH قبل الزرع بالأرقام اللي في الكتاب"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 192
+        title: "HBV: القفل الأول، الـ antivirals"
+        text: |
+          - في **HBV-related cirrhosis**: نفكّر في **antiviral therapy** لو فيه **replication** (**HBV DNA +ve**).
+          - اللي جاي على **lamivudine**: لو الـ **HBV DNA negative** يكمّل lamivudine، ولو **HBV DNA +ve** نحوّله **entecavir 1 mg daily**.
+          - الـ **nucleotide or nucleoside analogue** بيكمل **مدى الحياة**، قبل وبعد الـ LTx.
+      - kind: reveal
+        page: 192
+        prompt: "مريض على lamivudine من سنين والـ HBV DNA طلع موجب. الدوا مش شغال ليه؟ وليه entecavir بالـ 1 mg؟"
+        answer: |
+          الـ DNA الموجب وهو بياخد الدوا معناه غالبًا إن الفيروس عمل **resistance** للـ lamivudine (ده منطق مقبول، الكتاب كاتب القرار بس).
+
+          والـ **1 mg** (مش 0.5 mg) هي جرعة الـ entecavir للي جايين من lamivudine. والكتاب قال: **shift to entecavir 1mg daily**.
+      - kind: update
+        page: 192
+        text: |
+          الـ guidelines الحديثة بتفضّل **tenofovir** (TDF أو TAF) في الـ **lamivudine resistance**، لأن الـ entecavir resistance بتطلع أسهل في الحالة دي. **في الامتحان: entecavir 1 mg زي الكتاب.**
+        ref: "EASL HBV guidelines 2017; AASLD HBV guidance 2018"
+      - kind: figure
+        page: 192
+        title: "بروتوكول الـ HBIg"
+        alt: "A vertical timeline of HBIg after liver transplant. Intraoperative: 4000 IU IM. Week 1: 2000 IU daily until anti-HBs above 300 to 500. Rest of month 1: 2000 IU weekly guided by anti-HBs. Months 2 to 12: monthly, to keep anti-HBs about 300 for one year. Stop if HBsAg turns negative. Nucleos(t)ide analogue continues for life alongside."
+        caption: "القفل التاني: **HBIg**. 4000 في العمليات، 2000 يوميًا أول أسبوع، 2000 أسبوعيًا باقي الشهر، وبعدين شهري لحد سنة. والـ antiviral شغال جنبه طول العمر."
+        svg: |
+          <svg viewBox="0 0 330 420" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L11d" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <text x="165" y="18" text-anchor="middle" class="t-b t-lg">HBIg after LT (book protocol)</text>
+            <rect x="290" y="34" width="30" height="340" rx="6" class="fg-good"/>
+            <text x="305" y="200" text-anchor="middle" class="t-sm t-b" transform="rotate(-90 305 200)">NA (entecavir) for life</text>
+            <rect x="10" y="34" width="268" height="54" rx="6" class="fg-acc"/>
+            <text x="20" y="54" class="t-b">Intraoperative</text>
+            <text x="20" y="74" class="t-sm">4000 IU IM</text>
+            <path d="M140 88v14" class="fg-arrow" marker-end="url(#L11d)"/>
+            <rect x="10" y="106" width="268" height="62" rx="6" class="fg-acc"/>
+            <text x="20" y="126" class="t-b">Week 1</text>
+            <text x="20" y="144" class="t-sm">2000 IU daily</text>
+            <text x="20" y="160" class="t-sm t-mut">until anti-HBs &gt; 300-500</text>
+            <path d="M140 168v14" class="fg-arrow" marker-end="url(#L11d)"/>
+            <rect x="10" y="186" width="268" height="62" rx="6" class="fg-acc"/>
+            <text x="20" y="206" class="t-b">Rest of month 1</text>
+            <text x="20" y="224" class="t-sm">2000 IU weekly</text>
+            <text x="20" y="240" class="t-sm t-mut">according to anti-HBs level</text>
+            <path d="M140 248v14" class="fg-arrow" marker-end="url(#L11d)"/>
+            <rect x="10" y="266" width="268" height="62" rx="6" class="fg-acc"/>
+            <text x="20" y="286" class="t-b">Then monthly, for 1 year</text>
+            <text x="20" y="304" class="t-sm">to sustain anti-HBs about 300</text>
+            <rect x="10" y="342" width="268" height="40" rx="6" class="fg-bad"/>
+            <text x="20" y="366" class="t-sm t-b">Stop HBIg if HBsAg turned negative</text>
+            <text x="165" y="408" text-anchor="middle" class="t-sm t-mut">All donors should be vaccinated</text>
+          </svg>
+      - kind: aside
+        tone: analogy
+        page: 192
+        text: |
+          الكبد الجديد شقة جديدة والفيروس حرامي من الحتة القديمة.
+
+          - الـ **antiviral** (entecavir) بيقفل **المصنع** اللي بيطلّع حرامية (replication).
+          - الـ **HBIg** هو **البواب**: أجسام مضادة جاهزة بتمسك أي فيروس واقف على الباب قبل ما يدخل الـ graft.
+
+          قفلين أحسن من قفل واحد، خصوصًا في السنة الأولى.
+      - kind: explain
+        page: 193
+        title: "الـ donor والـ anti-HBc"
+        text: |
+          - **All donors should be vaccinated** (ضد HBV).
+          - البرنامج بيقبل **HBcIgG positive donor** بشرط إن الـ **recipient كمان HBcIgG positive** ويقبل **lifelong prophylaxis**.
+
+          ليه؟ كبد الـ donor اللي عنده anti-HBc ممكن يكون شايل فيروس كامن جواه، فالـ recipient لازم يبقى على حماية طول عمره.
+      - kind: check
+        page: 192
+        question: "In the book's protocol, how is HBIg given during the first postoperative week?"
+        options:
+          - "2000 IU daily until anti-HBs exceeds 300-500"
+          - "4000 IU daily for one week"
+          - "2000 IU weekly"
+          - "Monthly, to keep anti-HBs about 300"
+        answer: 0
+        why:
+          - "صح: بعد الـ **4000 IU IM intraoperative**، بيبقى **2000 IU daily** أسبوع لحد ما الـ HBsAb يعدّي 300-500."
+          - "الـ 4000 IU جرعة واحدة **وقت العملية** بس."
+          - "الـ weekly ده لباقي **الشهر الأول**، بعد الأسبوع الأول."
+          - "الـ monthly بيبدأ بعد الشهر الأول، ولحد سنة."
+      - kind: explain
+        page: 193
+        title: "Hemochromatosis و PBC"
+        text: |
+          **HHC:** حسب AASLD، أي مريض عنده **iron overload** نشجعه بقوة على **regular phlebotomies** لحد ما الـ **iron stores** تخلص، وبعدين **phlebotomy for life**، والـ maintenance frequency حسب الـ **serum ferritin**.
+
+          **PBC:** أي مريض PBC عنده **abnormal liver enzymes** يتفكّر له في **specific therapy**. الـ **UDCA**:
+          - بيحسّن الـ **biochemical markers of cholestasis** بشكل واضح
+          - **بيبطّأ الـ progression**
+          - بس **مش بيخلّص المرض** (no resolution)
+          - الجرعة: **13-15 mg/kg**، single أو divided
+      - kind: update
+        page: 193
+        text: |
+          الكتاب بيقول **Primary Biliary Cirrhosis**. الاسم اتغيّر رسميًا لـ **Primary Biliary Cholangitis** (نفس الاختصار PBC) لأن معظم المرضى مش بيوصلوا cirrhosis. نفس المرض، نفس الجرعة.
+        ref: "EASL PBC guideline 2017 (renaming 2015)"
+      - kind: explain
+        page: 193
+        title: "PSC: خلّي عينك على الـ cholangiocarcinoma"
+        text: |
+          - الـ **PSC** (مع أو من غير ulcerative colitis) هي **the most common known predisposing factor for cholangiocarcinoma**.
+          - علشان كده لازم **regular screening**.
+          - الـ **CA 19-9** عالي في **up to 85%** من الـ cholangiocarcinoma.
+          - في الـ PSC: **CA 19-9 > 100 U/mL** ليه **sensitivity 75%** و **specificity 80%**.
+          - ومع ده كله: **early diagnosis is extremely challenging**.
+      - kind: reveal
+        page: 193
+        prompt: "Sensitivity 75% و specificity 80%... يعني إيه ده عمليًا لمريض الـ PSC قدامك؟"
+        answer: |
+          - **Sensitivity 75%:** من كل 4 عندهم cholangiocarcinoma، **واحد هيطلع الـ CA 19-9 بتاعه أقل من 100**. يعني رقم طبيعي **مش بيطمّنك**.
+          - **Specificity 80%:** من كل 5 **من غير** ورم، **واحد** هيطلع عنده أعلى من 100 (مثلًا من الـ cholangitis أو الـ obstruction، وده تفسير مقبول).
+
+          علشان كده الكتاب بيقول التشخيص المبكر **extremely challenging** حتى مع الـ marker.
+      - kind: explain
+        page: 194
+        title: "Autoimmune hepatitis"
+        text: |
+          الـ **immunosuppression ممكن متبقاش indicated** في:
+          - **inactive cirrhosis**
+          - **preexisting comorbid conditions**
+          - **drug intolerance**
+
+          **AASLD** (في الكتاب): **prednisone 10 mg/day + azathioprine**، أو **prednisone 20 mg/day لوحده** (higher dose).
+
+          لو فيه toxicity من prednisone أو azathioprine: **cyclosporine**، **6-mercaptopurine**، **cyclophosphamide**، **mycophenolate mofetil** اتستخدموا بنجاح في isolated cases.
+      - kind: update
+        page: 194
+        text: |
+          الجرعات اللي في الكتاب (10 mg مع AZA أو 20 mg لوحده) شكلها جرعات **maintenance**. الـ **induction** في AASLD أعلى: **prednisone 20-40 mg + azathioprine** أو **40-60 mg لوحده**. **في الامتحان: أرقام الكتاب.**
+        ref: "AASLD AIH practice guidance 2019"
+      - kind: aside
+        tone: trap
+        page: 194
+        text: |
+          الكتاب مكتوب فيه **«G-mercaptopurine»**: دي غلطة طباعة، المقصود **6-mercaptopurine** (الـ 6 اتقرت G). لو كتبتها في الورقة اكتب **6-MP**.
+      - kind: match
+        page: 193
+        prompt: "وصّل كل مرض بالخطوة اللي الكتاب بيعملها قبل الزرع:"
+        pairs:
+          - ["HBV with HBV DNA +ve", "Nucleos(t)ide analogue for life"]
+          - ["Hemochromatosis", "Phlebotomy for life, guided by ferritin"]
+          - ["PBC", "UDCA 13-15 mg/kg"]
+          - ["PSC", "Regular screening for cholangiocarcinoma"]
+          - ["Autoimmune hepatitis", "Prednisone with azathioprine"]
+        why: "كل مرض أصلي ليه خطة: نوقف الفيروس، نفضّي الحديد، نبطّأ الـ cholestasis، ندوّر على الورم، ونهدّي المناعة."
+      - kind: try
+        items: [hb.L11.038, hb.L11.039, hb.L11.043, hb.L11.048, hb.L11.049]
+    recap:
+      - "HBV DNA +ve: antiviral. على lamivudine و DNA +ve: **entecavir 1 mg**. الـ NA **مدى الحياة**."
+      - "HBIg: **4000 IU IM** في العمليات، **2000 IU daily** أسبوع، **weekly** باقي الشهر، **monthly** لحد سنة (anti-HBs ~300). بيقف لو HBsAg بقى negative."
+      - "Anti-HBc +ve donor مقبول لو الـ recipient كمان +ve ويقبل lifelong prophylaxis."
+      - "HHC: phlebotomy لحد ما الحديد يخلص وبعدين for life. PBC: **UDCA 13-15 mg/kg** بيبطّأ بس مش بيشفي."
+      - "PSC = أشهر سبب للـ cholangiocarcinoma؛ CA 19-9 > 100: sens **75%**، spec **80%**."
+      - "AIH في الكتاب: **prednisone 10 + AZA** أو **20 لوحده**."
+    practice: [hb.L11.035, hb.L11.036, hb.L11.037, hb.L11.038, hb.L11.039, hb.L11.040, hb.L11.041, hb.L11.042, hb.L11.043, hb.L11.044, hb.L11.045, hb.L11.046, hb.L11.047, hb.L11.048, hb.L11.049, hb.L11.050, hb.L11.058, hb.L11.060]

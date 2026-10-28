@@ -924,6 +924,9 @@ pub mod onboard {
     pub const MIN: &str = "دقيقة";
     pub const STUDIED_TITLE: &str = "ذاكرت أنهي محاضرات قبل كده؟";
     pub const STUDIED_BODY: &str = "علّم اللي قريته قبل كده. لو مفيش، كمّل عادي.";
+    pub const ALL: &str = "كلهم";
+    pub const NONE: &str = "ولا واحدة";
+    pub const UP_TO_HERE: &str = "لحد هنا";
     pub const REMIND_TITLE: &str = "أفكّرك إمتى؟";
     pub const REMIND_BODY: &str = "إشعار هادي فيه عدد المراجعات المستنياك. بيرن على الموبايل بس.";
     pub const ADD_TIME: &str = "زوّد معاد";

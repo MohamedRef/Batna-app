@@ -122,6 +122,10 @@ fn plan_items(store: &StudyStoreHandle, ids: &[String]) -> Vec<Planned> {
         .collect()
 }
 
+static SESSION: GlobalSignal<Session> = Signal::global(Session::default);
+static PHASE: GlobalSignal<Phase> = Signal::global(|| Phase::Setup);
+static STARTED: GlobalSignal<Instant> = Signal::global(Instant::now);
+
 #[derive(Clone, Copy, PartialEq)]
 enum Phase {
     Setup,
@@ -138,12 +142,26 @@ pub fn Study() -> Element {
     let chosen = use_signal(|| ready.iter().map(|l| l.lecture.clone()).collect::<BTreeSet<String>>());
     let topics = use_signal(HashSet::<String>::new);
     let mut minutes = use_signal(crate::onboarding::session_minutes);
-    let mut session = use_signal(Session::default);
-    let mut phase = use_signal(|| Phase::Setup);
-    let mut started = use_signal(Instant::now);
-    // The calm end-of-session tone, however the session ended.
+    // Global, so a session survives switching tabs (like Bank and Oral).
+    let mut session = SESSION.signal();
+    let mut phase = PHASE.signal();
+    let mut started = STARTED.signal();
+    // Coming back to a running session: don't count the time away.
+    let mut quiet = use_hook(|| {
+        if *phase.peek() == Phase::Running {
+            started.set(Instant::now());
+        }
+        Signal::new(*phase.peek() == Phase::Summary)
+    });
+    // The calm end-of-session tone, however the session ended (not again when
+    // coming back to a summary already shown).
     use_effect(move || {
-        if phase() == Phase::Summary && session.peek().summary().items > 0 {
+        let ended = phase() == Phase::Summary;
+        if *quiet.peek() {
+            quiet.set(false);
+            return;
+        }
+        if ended && session.peek().summary().items > 0 {
             crate::sounds::play(crate::sounds::Cue::SessionEnd);
         }
     });

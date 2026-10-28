@@ -323,23 +323,59 @@ fn script_runs(text: &str) -> Vec<(String, bool)> {
         }
     };
     let chars: Vec<char> = text.chars().collect();
-    // Each neutral char takes the script of the run it sits in: Latin only
-    // when both its nearest strong neighbours are Latin, or it's at an edge
-    // next to Latin with digits/units ("≥ 250 cells").
     let strong: Vec<C> = chars.iter().map(|&c| class(c)).collect();
     let mut resolved = strong.clone();
-    for i in 0..chars.len() {
+    // Each run of neutral chars (spaces, digits, signs) between two strong
+    // chars: between two Latin words it is Latin ("Child-Pugh class C").
+    // Right after a Latin word, the numbers, units and closing brackets that
+    // continue it are Latin ("Zone 3", "PaO2 <80", "(MELD)"), but not the
+    // sentence's own punctuation. Right before one, an opening bracket or
+    // quote is Latin ("(morphology").
+    let mut i = 0;
+    while i < chars.len() {
         if strong[i] != C::Neutral {
+            i += 1;
             continue;
         }
-        let before = strong[..i].iter().rev().find(|c| **c != C::Neutral).copied();
-        let after = strong[i + 1..].iter().find(|c| **c != C::Neutral).copied();
-        resolved[i] = match (before, after) {
-            (Some(C::Latin), Some(C::Latin)) => C::Latin,
-            // Numbers and signs right after a Latin word: "PaO2 <80 mmHg".
-            (Some(C::Latin), _) if !chars[i].is_whitespace() && attached_to_latin(&chars, i) => C::Latin,
-            _ => C::Arabic,
-        };
+        let start = i;
+        while i < chars.len() && strong[i] == C::Neutral {
+            i += 1;
+        }
+        let before = start.checked_sub(1).map(|k| strong[k]);
+        let after = strong.get(i).copied();
+        let run = start..i;
+        for k in run.clone() {
+            resolved[k] = C::Arabic;
+        }
+        if before == Some(C::Latin) && after == Some(C::Latin) {
+            for k in run {
+                resolved[k] = C::Latin;
+            }
+            continue;
+        }
+        if before == Some(C::Latin) {
+            let continues = |c: char| c.is_ascii_digit() || c == ' ' || "%)]+-−–≥≤<>/.×±°'\"·,".contains(c);
+            let mut end = start;
+            while end < i && continues(chars[end]) {
+                end += 1;
+            }
+            // Don't take the sentence's punctuation or trailing spaces.
+            while end > start && " .,-–·".contains(chars[end - 1]) {
+                end -= 1;
+            }
+            for r in &mut resolved[start..end] {
+                *r = C::Latin;
+            }
+        }
+        if after == Some(C::Latin) {
+            let mut from = i;
+            while from > start && "([\"'«".contains(chars[from - 1]) {
+                from -= 1;
+            }
+            for r in &mut resolved[from..i] {
+                *r = C::Latin;
+            }
+        }
     }
     let mut out: Vec<(String, bool)> = Vec::new();
     for (i, &c) in chars.iter().enumerate() {
@@ -350,12 +386,6 @@ fn script_runs(text: &str) -> Vec<(String, bool)> {
         }
     }
     out
-}
-
-/// A neutral char joined to the Latin word before it with no space between
-/// ("PaO2", "Na+", "(MELD)").
-fn attached_to_latin(chars: &[char], i: usize) -> bool {
-    chars[..i].iter().rev().take_while(|c| !c.is_whitespace()).any(|c| c.is_ascii_alphabetic())
 }
 
 // ---------- checks ----------
@@ -672,6 +702,10 @@ mod tests {
         assert_eq!(latin_runs("الـ HSCs بتتنشط"), ["HSCs"]);
         assert_eq!(latin_runs("لما PaO2 <80 mmHg يبقى"), ["PaO2 <80 mmHg"]);
         assert_eq!(latin_runs("كله عربي"), Vec::<String>::new());
+        assert_eq!(latin_runs("Zone 3"), ["Zone 3"]);
+        assert_eq!(latin_runs("الشكل (morphology): كده"), ["(morphology)"]);
+        assert_eq!(latin_runs("الـ nodules. وبعدين"), ["nodules"]);
+        assert_eq!(latin_runs("الـ MELD ≥ 21 هنا"), ["MELD ≥ 21"]);
     }
 
     #[test]

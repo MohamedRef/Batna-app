@@ -36,7 +36,7 @@ pub fn take() -> Option<Shared> {
         match android::take() {
             Ok(json) => json.as_deref().and_then(parse),
             Err(e) => {
-                eprintln!("Share: {e}");
+                crate::diag::report!("Share: {e}");
                 None
             }
         }

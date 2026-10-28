@@ -1041,6 +1041,7 @@ impl Updater {
                 self.set_phase(Phase::Ready(offer));
             }
             Err(why) => {
+                // The `.part` stays, so the next try picks up from there.
                 let _ = fs::remove_file(&path);
                 self.set_phase(Phase::Failed { offer: Some(offer), why });
             }
@@ -1049,38 +1050,101 @@ impl Updater {
 
     /// Streams the build to `<file>.part` while hashing it, checks size and
     /// SHA-256 against the signed manifest, then renames it into place.
+    ///
+    /// A download that stops (the network drops, Batna closes) keeps its
+    /// `.part`, and the next try asks only for the rest (an HTTP `Range`),
+    /// within this call (a few tries, a little apart) and on the next check
+    /// or tap. The whole file is still checked at the end; a resumed file
+    /// that doesn't match is thrown away and fetched once more from the
+    /// start.
     fn fetch_build(&self, url: &str, offer: &Offer, path: &Path) -> Result<(), Failure> {
-        let mut res =
-            agent(url, Duration::from_secs(30 * 60)).get(url).call().map_err(|_| Failure::Network)?;
-        if res.status().as_u16() != 200 {
-            return Err(Failure::Network);
-        }
-        let part = path.with_extension("part");
-        let mut file = fs::File::create(&part).map_err(|e| Failure::Install(e.to_string()))?;
-        let mut reader = res.body_mut().as_reader().take(offer.asset.size + 1);
-        let mut hash = Sha256::new();
-        let (mut done, mut shown) = (0u64, 0u64);
-        let mut buf = vec![0u8; 64 * 1024];
+        let part = part_of(path);
+        let mut fresh_after_bad = false;
+        let mut tries = 0;
         loop {
-            let n = reader.read(&mut buf).map_err(|_| Failure::Network)?;
-            if n == 0 {
-                break;
+            let before = fs::metadata(&part).map_or(0, |m| m.len());
+            match self.fetch_some(url, offer, &part) {
+                Ok(()) => {}
+                // It got somewhere before the line dropped: go on from there.
+                Err(Failure::Network)
+                    if tries < RESUME_TRIES && fs::metadata(&part).map_or(0, |m| m.len()) > before =>
+                {
+                    tries += 1;
+                    if !cfg!(test) {
+                        std::thread::sleep(Duration::from_secs(2u64 << tries));
+                    }
+                    continue;
+                }
+                Err(e) => return Err(e),
             }
-            hash.update(&buf[..n]);
-            file.write_all(&buf[..n]).map_err(|e| Failure::Install(e.to_string()))?;
+            let (size, sha) = hash_file(&part).map_err(|e| Failure::Install(e.to_string()))?;
+            match check_download(&offer.asset, size, &sha) {
+                Ok(()) => return fs::rename(&part, path).map_err(|e| Failure::Install(e.to_string())),
+                Err(e) => {
+                    let _ = fs::remove_file(&part);
+                    if fresh_after_bad {
+                        return Err(update_failure(e));
+                    }
+                    fresh_after_bad = true;
+                }
+            }
+        }
+    }
+
+    /// Appends what `part` still lacks (all of it when it's empty).
+    fn fetch_some(&self, url: &str, offer: &Offer, part: &Path) -> Result<(), Failure> {
+        let size = offer.asset.size;
+        let mut have = fs::metadata(part).map_or(0, |m| m.len());
+        if have > size {
+            let _ = fs::remove_file(part);
+            have = 0;
+        }
+        if have == size {
+            return Ok(());
+        }
+        let mut req = agent(url, Duration::from_secs(30 * 60)).get(url);
+        if have > 0 {
+            req = req.header("Range", format!("bytes={have}-"));
+        }
+        let mut res = req.call().map_err(|_| Failure::Network)?;
+        let mut file = match res.status().as_u16() {
+            206 if have > 0 => fs::OpenOptions::new().append(true).open(part),
+            // The server sent all of it: start over.
+            200 => fs::File::create(part),
+            // The part is no use to the server (changed file): start over.
+            416 if have > 0 => {
+                let _ = fs::remove_file(part);
+                return self.fetch_some(url, offer, part);
+            }
+            _ => return Err(Failure::Network),
+        }
+        .map_err(|e| Failure::Install(e.to_string()))?;
+        if res.status().as_u16() == 200 {
+            have = 0;
+        }
+        let mut reader = res.body_mut().as_reader().take(size - have);
+        let (mut done, mut shown) = (have, have);
+        self.set_phase(Phase::Downloading { offer: offer.clone(), done });
+        let mut buf = vec![0u8; 64 * 1024];
+        let result = loop {
+            let n = match reader.read(&mut buf) {
+                Ok(0) => break Ok(()),
+                Ok(n) => n,
+                Err(_) => break Err(Failure::Network),
+            };
+            if let Err(e) = file.write_all(&buf[..n]) {
+                break Err(Failure::Install(e.to_string()));
+            }
             done += n as u64;
-            if done - shown > offer.asset.size / 100 {
+            if done - shown > size / 100 {
                 shown = done;
                 self.set_phase(Phase::Downloading { offer: offer.clone(), done });
             }
-        }
+        };
+        // What came is kept for the next try, even when the line dropped.
         file.sync_all().map_err(|e| Failure::Install(e.to_string()))?;
-        drop(file);
-        if let Err(e) = check_download(&offer.asset, done, &hex(&hash.finalize())) {
-            let _ = fs::remove_file(&part);
-            return Err(update_failure(e));
-        }
-        fs::rename(&part, path).map_err(|e| Failure::Install(e.to_string()))
+        result?;
+        if done < size { Err(Failure::Network) } else { Ok(()) }
     }
 
     /// Re-hashes the staged file: whatever sat on disk since the download
@@ -1168,6 +1232,7 @@ impl Updater {
                 name.as_str(),
                 "prefs.json" | changelog::FILE | PACK_FILE | PACK_INFO | PACK_REJECTED | PACK_STARTS
             ) || Some(name.as_str()) == keep
+                || keep.is_some_and(|k| name == format!("{k}.part"))
             {
                 continue;
             }
@@ -1368,6 +1433,23 @@ fn agent(url: &str, timeout: Duration) -> ureq::Agent {
     config.build().into()
 }
 
+/// Tries within one download before it waits for the next check or tap.
+const RESUME_TRIES: u32 = 3;
+
+/// Where a build downloads to until it is whole: `<file>.part`.
+fn part_of(path: &Path) -> PathBuf {
+    let mut name = path.file_name().unwrap_or_default().to_os_string();
+    name.push(".part");
+    path.with_file_name(name)
+}
+
+/// Size and SHA-256 (hex) of a file on disk.
+fn hash_file(path: &Path) -> std::io::Result<(u64, String)> {
+    let mut hash = Sha256::new();
+    let size = std::io::copy(&mut fs::File::open(path)?, &mut hash)?;
+    Ok((size, hex(&hash.finalize())))
+}
+
 fn get_small(url: &str) -> Result<Vec<u8>, Failure> {
     let bytes = get_limited(url, MAX_FEED_BYTES, Duration::from_secs(30))?;
     if bytes.len() as u64 > MAX_FEED_BYTES {
@@ -1563,10 +1645,22 @@ mod tests {
 
     /// Serves `dir` over plain HTTP on localhost, one request per connection.
     fn serve(dir: PathBuf) -> String {
+        serve_logged(dir, None).0
+    }
+
+    /// Requests seen: (path, Range header).
+    type Seen = std::sync::Arc<Mutex<Vec<(String, Option<String>)>>>;
+
+    /// A tiny file server that honours `Range: bytes=N-`. With `cut`, the
+    /// first whole-file answer for an `.apk` stops after that many bytes.
+    fn serve_logged(dir: PathBuf, cut: Option<usize>) -> (String, Seen) {
         use std::io::{BufRead as _, BufReader};
         let listener = std::net::TcpListener::bind("127.0.0.1:0").unwrap();
         let url = format!("http://{}", listener.local_addr().unwrap());
+        let seen: Seen = Default::default();
+        let log = seen.clone();
         std::thread::spawn(move || {
+            let mut cut = cut;
             for stream in listener.incoming().flatten() {
                 let mut reader = BufReader::new(stream);
                 let mut line = String::new();
@@ -1574,28 +1668,99 @@ mod tests {
                     continue;
                 }
                 let path = line.split_whitespace().nth(1).unwrap_or("/").trim_start_matches('/').to_owned();
+                let mut range = None;
                 loop {
                     let mut h = String::new();
                     if reader.read_line(&mut h).is_err() || h.trim().is_empty() {
                         break;
                     }
-                }
-                let mut stream = reader.into_inner();
-                let _ = match fs::read(dir.join(&path)) {
-                    Ok(body) => {
-                        let head = format!(
-                            "HTTP/1.1 200 OK\r\nContent-Length: {}\r\nConnection: close\r\n\r\n",
-                            body.len()
-                        );
-                        stream.write_all(head.as_bytes()).and_then(|()| stream.write_all(&body))
+                    if let Some((k, v)) = h.split_once(':')
+                        && k.eq_ignore_ascii_case("range")
+                    {
+                        range = Some(v.trim().to_owned());
                     }
+                }
+                log.lock().unwrap().push((path.clone(), range.clone()));
+                let mut stream = reader.into_inner();
+                let from = range
+                    .as_deref()
+                    .and_then(|r| r.strip_prefix("bytes="))
+                    .and_then(|r| r.trim_end_matches('-').parse::<usize>().ok());
+                let _ = match fs::read(dir.join(&path)) {
+                    Ok(body) => match from {
+                        Some(n) if n >= body.len() => stream.write_all(
+                            b"HTTP/1.1 416 Range Not Satisfiable\r\nContent-Length: 0\r\nConnection: close\r\n\r\n",
+                        ),
+                        Some(n) => {
+                            let head = format!(
+                                "HTTP/1.1 206 Partial Content\r\nContent-Length: {}\r\nContent-Range: bytes {n}-{}/{}\r\nConnection: close\r\n\r\n",
+                                body.len() - n,
+                                body.len() - 1,
+                                body.len()
+                            );
+                            stream.write_all(head.as_bytes()).and_then(|()| stream.write_all(&body[n..]))
+                        }
+                        None => {
+                            let head = format!(
+                                "HTTP/1.1 200 OK\r\nContent-Length: {}\r\nConnection: close\r\n\r\n",
+                                body.len()
+                            );
+                            let send = match cut.filter(|_| path.ends_with(".apk")) {
+                                Some(c) => {
+                                    cut = None;
+                                    &body[..c]
+                                }
+                                None => &body[..],
+                            };
+                            stream.write_all(head.as_bytes()).and_then(|()| stream.write_all(send))
+                        }
+                    },
                     Err(_) => stream.write_all(
                         b"HTTP/1.1 404 Not Found\r\nContent-Length: 0\r\nConnection: close\r\n\r\n",
                     ),
                 };
             }
         });
-        url
+        (url, seen)
+    }
+
+    #[test]
+    fn a_dropped_download_goes_on_from_where_it_stopped() {
+        let feed = fixture_feed();
+        let (url, seen) = serve_logged(feed.path().to_path_buf(), Some(8));
+        let (u, _data) = updater(&url, build("0.1.0", 41, true));
+        u.check(true);
+        assert!(matches!(u.status().phase, Phase::Ready(_)), "{:?}", u.status().phase);
+        let apk: Vec<_> = seen.lock().unwrap().iter().filter(|(p, _)| p.ends_with(".apk")).cloned().collect();
+        assert_eq!(apk.iter().map(|(_, r)| r.as_deref()).collect::<Vec<_>>(), [None, Some("bytes=8-")]);
+    }
+
+    #[test]
+    fn a_part_left_from_before_is_resumed_and_a_bad_one_fetched_again() {
+        let feed = fixture_feed();
+        let (url, seen) = serve_logged(feed.path().to_path_buf(), None);
+        let (u, _data) = updater(&url, build("0.1.0", 41, true));
+        let file = "batna-0.1.0-b42-android-arm64.apk";
+        fs::create_dir_all(&u.dir).unwrap();
+        // Batna closed half-way last time.
+        fs::write(u.dir.join(format!("{file}.part")), &FIXTURE_APK[..5]).unwrap();
+        u.check(true);
+        assert!(matches!(u.status().phase, Phase::Ready(_)), "{:?}", u.status().phase);
+        let ranges = |seen: &Seen| -> Vec<Option<String>> {
+            seen.lock().unwrap().iter().filter(|(p, _)| p.ends_with(".apk")).map(|(_, r)| r.clone()).collect()
+        };
+        assert_eq!(ranges(&seen), [Some("bytes=5-".to_owned())]);
+
+        // A part that doesn't match: the whole file is checked, so it is
+        // fetched once more from the start.
+        let feed = fixture_feed();
+        let (url, seen) = serve_logged(feed.path().to_path_buf(), None);
+        let (u, _data) = updater(&url, build("0.1.0", 41, true));
+        fs::create_dir_all(&u.dir).unwrap();
+        fs::write(u.dir.join(format!("{file}.part")), b"XXXXX").unwrap();
+        u.check(true);
+        assert!(matches!(u.status().phase, Phase::Ready(_)), "{:?}", u.status().phase);
+        assert_eq!(ranges(&seen), [Some("bytes=5-".to_owned()), None]);
     }
 
     fn fixture_feed() -> tempfile::TempDir {

@@ -114,6 +114,9 @@ impl Deck {
 /// `Batna::L01 Liver Cirrhosis`, as make_apkg.py names it (Anki matches
 /// decks by name on import, so this must not change).
 pub fn deck_name(lec: &Lecture) -> String {
+    if lec.lecture == batna_core::own::LECTURE {
+        return format!("Batna::{}", batna_core::own::TITLE);
+    }
     let num = lec.lecture.split_once('.').map(|(_, n)| n).unwrap_or(&lec.lecture);
     format!("Batna::{num} {}", lec.title)
 }
@@ -127,13 +130,17 @@ pub fn build(lectures: &[Lecture], opts: &Options<'_>) -> Deck {
     };
     for lec in lectures {
         let did = stable_id(&format!("batna-deck-{}", lec.lecture));
-        let desc = format!(
-            "{} · Book pp. {}–{}{}",
-            esc(&lec.title),
-            lec.book.pages[0],
-            lec.book.pages[1],
-            lec.author.as_deref().map(|a| format!(" · {}", esc(a))).unwrap_or_default()
-        );
+        let desc = if lec.lecture == batna_core::own::LECTURE {
+            "Cards Mohamed wrote himself in Batna.".to_string()
+        } else {
+            format!(
+                "{} · Book pp. {}–{}{}",
+                esc(&lec.title),
+                lec.book.pages[0],
+                lec.book.pages[1],
+                lec.author.as_deref().map(|a| format!(" · {}", esc(a))).unwrap_or_default()
+            )
+        };
         deck.decks.push((did, deck_name(lec), desc));
         let before = deck.notes.len();
         let draft = has(opts.drafts, &lec.lecture);
@@ -164,7 +171,11 @@ are not checked yet: trust the book page on the back.";
 
 /// The notes for one item, ported from make_apkg.py's `notes_for`.
 pub fn notes_for(item: &Item, lec: &Lecture, deck: i64, approved: bool) -> Vec<Note> {
-    let src = format!("{} · Book p. {}", esc(&lec.title), item.src.page);
+    let own = batna_core::own::is_own(&item.id);
+    let src = match (own, item.src.page) {
+        (true, 0) => esc(&lec.title),
+        _ => format!("{} · Book p. {}", esc(&lec.title), item.src.page),
+    };
     let upd =
         item.update.as_ref().map(|u| format!("{} ({})", esc(&u.text), esc(&u.reference))).unwrap_or_default();
     let (chapter, num) = lec.lecture.split_once('.').unwrap_or((&lec.lecture, ""));
@@ -173,6 +184,10 @@ pub fn notes_for(item: &Item, lec: &Lecture, deck: i64, approved: bool) -> Vec<N
         format!("topic::{}", item.topic.as_deref().unwrap_or("misc")),
         if approved { "approved" } else { "unverified" }.to_string(),
     ];
+    if own {
+        // His own cards carry `own` (from the item) and the lecture they belong with.
+        tags.truncate(1);
+    }
     tags.extend(item.tags.iter().cloned());
     let tags: Vec<String> = tags.iter().map(|t| t.split_whitespace().collect::<Vec<_>>().join("-")).collect();
     let id = item.id.as_str();

@@ -145,7 +145,9 @@ fn verdicts<'a>(lectures: &[Lecture], judgement: impl Fn(&str) -> Option<&'a Jud
 /// Builds the deck from the embedded content and his verdicts; returns the
 /// note count and where the file went.
 fn export_now<'a>(judgement: impl Fn(&str) -> Option<&'a Judgement>) -> Result<(usize, String), String> {
-    let lectures: Vec<_> = Library::get().lectures.values().cloned().collect();
+    let mut lectures: Vec<_> = Library::get().lectures.values().cloned().collect();
+    // His own cards ride along as `Batna::My own cards`.
+    lectures.extend(crate::own::lecture().cloned());
     let v = verdicts(&lectures, judgement);
     let opts = batna_anki::Options {
         approved: Some(&v.approved),

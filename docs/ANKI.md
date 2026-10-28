@@ -3,7 +3,7 @@
 Batna's content is exported as **one Anki file, `batna.apkg`**. It holds a `Batna` deck with one subdeck per lecture (`Batna::L01 Liver Cirrhosis`, …), so you study it while the app is still being built, and you import only one file however many lectures exist.
 
 ## From inside the app
-Settings › Your data › **صدّر لـ Anki**. The app builds `batna.apkg` from the lectures it carries and your ✓/✎/✗ (✗ items left out, ✎ items with your text), saves it (phone and tablet: `Download/Batna/`; Mac: `~/Downloads/`) and opens it in AnkiDroid or Anki, which shows its import screen. The app carries merged lectures only, so until every lecture is merged the file in the project folder has more cards; both use the same ids, so importing either one updates the same cards.
+Settings › Your data › **صدّر لـ Anki**. The app builds `batna.apkg` from the lectures it carries and your ✓/✎/✗ (✗ items left out, ✎ items with your text) plus your own cards (`Batna::My own cards`), saves it (phone and tablet: `Download/Batna/`; Mac: `~/Downloads/`) and opens it in AnkiDroid or Anki, which shows its import screen. The app carries merged lectures only, so until every lecture is merged the file in the project folder has more cards; both use the same ids, so importing either one updates the same cards.
 
 ## Import it
 - **Phone or tablet:** open `batna.apkg` from the project files (or Files) and choose AnkiDroid. Then study the `Batna` deck, or one lecture's subdeck.
@@ -34,7 +34,9 @@ Tags: `hb::L01` (lecture), `topic::<slug>`, `unverified` or `approved`, `draft` 
 just anki                                              # dist/anki/batna.apkg, every written lecture
 cargo run -q -p batna-tools -- anki --lecture hb.L01   # dist/anki/batna-hb-L01.apkg, one lecture
 cargo run -q -p batna-tools -- anki --verdicts export.yaml
+cargo run -q -p batna-tools -- anki --own batna-export-2026-10-28.json
 ```
+- `--own FILE` reads a full backup from the app (Settings › نسخة احتياطية من كل حاجة) and adds your own cards as one more subdeck, `Batna::My own cards`. They are tagged `own` (plus their lecture, e.g. `hb.L09`), never `unverified`, because you wrote them. Deleted cards are left out.
 - `--verdicts FILE` reads the app's ✓/✎/✗ export (`batna.verdicts/v1`). It leaves out items marked ✗, uses the edited text for ✎ items, and tags ✓ items `approved`.
 - A lecture that isn't merged yet comes from the project's shared folder (`content-wip/hb/LNN.yaml`, then `drafts/LNN.yaml` or `LNN.draft.yaml` under `/mnt/project-files/medstudy`, or `--drafts DIR`), so the file never shrinks; those notes are tagged `draft`. `--merged-only` uses only `content/`.
 - `content/approved.txt` also marks items `approved`. Items with `status: rejected` are always left out.
@@ -46,4 +48,5 @@ cargo run -q -p batna-tools -- anki --verdicts export.yaml
 cargo run -q -p batna-tools -- verdicts export.yaml            # ✎/✗ items grouped by lecture, with notes and edits
 cargo run -q -p batna-tools -- verdicts export.yaml --approve  # also adds the ✓ ids to content/approved.txt
 ```
+Each verdict carries the item's fingerprint as he judged it. A verdict on an item whose text changed since is never approved or applied (here or in `anki --verdicts`): the tool lists it as "changed since he judged them" and the app asks him again. ✓ from exports made before fingerprints existed are not approved either; export again from the app.
 Content threads fix the YAML from this list; only Mohamed's own ✓ goes into `content/approved.txt`.

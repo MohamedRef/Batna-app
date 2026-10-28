@@ -27,10 +27,12 @@ derived from it (`scripts/android-release-apk.sh`). An alpha always sorts
 before its beta, and a beta before the release, so each stage installs over
 the previous one and keeps your data.
 
-Until the first alpha, the version stays `0.1.0-alpha.0`. A version with no
-pre-release counts as a final release (stage 999), so leaving it at `0.1.0`
-would make any build installed now look newer than the first alpha, and
-Android would refuse the alpha as a downgrade. Only move to a bare version
+Until the first alpha, the version stays `0.1.1-alpha.0` (versionCode
+101100). A version with no pre-release counts as a final release (stage
+999); early previews shipped as `0.1.0` (100999), so the pre-alpha version
+must sort above that, and the first alpha is `0.1.1-alpha.1` or later
+(`1.0.0-alpha.1` is fine too). The versionCode may never go down: the
+preview workflow refuses to publish a build below the live feed's. Only move to a bare version
 (`1.0.0`) for a real stable release.
 
 ## 2. One-time setup on the Mac
@@ -164,6 +166,21 @@ per-device choices:
 
 When something is ready, a card above the current screen says so, with the
 notes from the feed. "بعدين" hides it until the next version.
+
+**"A new Batna is out" notification.** On Android a JobScheduler job
+(`UpdateCheckJob` in `android/…/UpdateNotice.kt`) runs about every four hours,
+even while Batna is closed and across reboots. It loads Batna's native
+library and calls Rust's `update::background_check` over JNI, so the feed is
+checked with the same signature and hash checks, and in automatic mode on
+Wi-Fi the build is downloaded too. The app's own six-hourly checks send the
+notification as well, when Batna is in the background. There is one per
+version and step (out, then downloaded and ready), with the feed's notes and a
+**نزّلها** or **ثبّتها** button. A tap opens Settings › Updates and the button
+starts the download or the install. Nothing is sent while Batna is in front
+(the card covers that), for a version whose card was closed, in "لأ" mode, with
+Settings › Updates' switch off, or when Android's notification switch is off.
+The Mac gets the same notification once UNUserNotificationCenter lands
+(Batna-app#50).
 
 | Device | How the new build goes in |
 |---|---|

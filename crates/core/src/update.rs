@@ -608,12 +608,14 @@ mod tests {
         assert_eq!(v("1.2.3-alpha.4").version_code(), 10_203_104);
         assert_eq!(v("1.0.0-alpha.1").version_code(), 10_000_101);
         assert_eq!(v("0.1.0").version_code(), 100_999);
-        // The workspace sits at 0.1.0-alpha.0 until the first alpha, so any
-        // build installed before then sorts below every real release.
-        assert!(v("0.1.0-alpha.0").version_code() < v("0.1.0-alpha.1").version_code());
-        assert!(v("0.1.0-alpha.0").version_code() < v("1.0.0-alpha.1").version_code());
-        assert!(v("0.1.0-alpha.1").version_code() < v("0.1.0").version_code());
-        assert!(v("0.1.0-alpha.0") < v("0.1.0-alpha.1"));
+        // The workspace sits at 0.1.1-alpha.0 until the first alpha: above
+        // the early previews (0.1.0, stage 999) so they keep updating, and
+        // below every real alpha.
+        assert!(v("0.1.0").version_code() < v("0.1.1-alpha.0").version_code());
+        assert!(v("0.1.0") < v("0.1.1-alpha.0"));
+        assert!(v("0.1.1-alpha.0").version_code() < v("0.1.1-alpha.1").version_code());
+        assert!(v("0.1.1-alpha.0").version_code() < v("1.0.0-alpha.1").version_code());
+        assert!(v("0.1.1-alpha.0") < v("0.1.1-alpha.1"));
         let ladder =
             ["1.0.0-alpha.1", "1.0.0-alpha.2", "1.0.0-beta.1", "1.0.0-rc.1", "1.0.0", "1.0.1-alpha.1"];
         for pair in ladder.windows(2) {

@@ -40,6 +40,12 @@ pub fn latest(v: &Verdicts) -> BTreeMap<&str, &VerdictEntry> {
     out
 }
 
+/// Whether he judged `item` as it is written now (`verify::fingerprint`).
+/// `None`: the export is too old to say.
+pub fn current(v: &VerdictEntry, item: &Item) -> Option<bool> {
+    v.fingerprint.as_ref().map(|f| *f == batna_core::review::verify::fingerprint(item))
+}
+
 /// `item` with his edited fields applied. Fields that don't fit the item's
 /// kind are reported, and the item is kept as written.
 pub fn apply_edit(item: &Item, edit: &BTreeMap<String, FieldValue>) -> Result<Item, String> {
@@ -76,12 +82,24 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
     let mut fixes: BTreeMap<&str, Vec<String>> = BTreeMap::new();
     let mut approved = Vec::new();
     let mut unknown = Vec::new();
+    // Changed since he judged them: never approved, never applied (#18).
+    let mut changed = Vec::new();
+    // ✓ from an export without fingerprints: can't tell, so not approved.
+    let mut unchecked = Vec::new();
     for (id, v) in &latest {
         let Some((lecture, item)) = items.get(id) else {
             unknown.push(id.to_string());
             continue;
         };
+        if current(v, item) == Some(false) {
+            changed.push(id.to_string());
+            continue;
+        }
         let mut line = match v.verdict {
+            Verdict::Approved if current(v, item).is_none() => {
+                unchecked.push(id.to_string());
+                continue;
+            }
             Verdict::Approved => {
                 approved.push(id.to_string());
                 continue;
@@ -121,6 +139,22 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
             writeln!(out, "{l}").unwrap();
         }
         out.push('\n');
+    }
+    if !changed.is_empty() {
+        writeln!(
+            out,
+            "Changed since he judged them, re-check in the app (not approved, not applied): {}",
+            changed.join(", ")
+        )
+        .unwrap();
+    }
+    if !unchecked.is_empty() {
+        writeln!(
+            out,
+            "✓ from an older export without fingerprints, not approved (export again from the app): {}",
+            unchecked.join(", ")
+        )
+        .unwrap();
     }
     if !unknown.is_empty() {
         writeln!(out, "Not in the content any more (renumbered or not merged yet): {}", unknown.join(", "))
@@ -162,7 +196,7 @@ mod tests {
 schema: batna.verdicts/v1
 exported: "2026-11-02T10:00:00Z"
 verdicts:
-  - { id: hb.L01.001, verdict: approved, at: "2026-11-02T09:00:00Z" }
+  - { id: hb.L01.001, verdict: approved, at: "2026-11-02T09:00:00Z", fingerprint: FP001 }
   - { id: hb.L01.003, verdict: approved, at: "2026-11-01T09:00:00Z" }
   - { id: hb.L01.003, verdict: wrong, at: "2026-11-02T09:05:00Z", note: "B is 7-9, recount" }
   - { id: hb.L01.004, verdict: edited, at: "2026-11-02T09:06:00Z", edit: { points: [Recurrent bleeding, SBP], prompt: "Enumerate two." } }
@@ -182,8 +216,41 @@ verdicts:
         let root = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../..");
         std::fs::copy(root.join("fixtures/content/sample.yaml"), hb.join("L01.yaml")).unwrap();
         std::fs::write(dir.path().join("content/approved.txt"), "# header\nhb.L01.009").unwrap();
-        std::fs::write(dir.path().join("export.yaml"), EXPORT).unwrap();
+        std::fs::write(dir.path().join("export.yaml"), EXPORT.replace("FP001", &fp("hb.L01.001"))).unwrap();
         dir
+    }
+
+    /// The fingerprint of a fixture item as the app computes it.
+    fn fp(id: &str) -> String {
+        let lec: batna_core::content::Lecture =
+            serde_yaml_ng::from_str(include_str!("../../../fixtures/content/sample.yaml")).unwrap();
+        batna_core::review::verify::fingerprint(lec.items.iter().find(|i| i.id == id).unwrap())
+    }
+
+    #[test]
+    fn changed_items_and_old_exports_are_never_approved() {
+        let dir = tree();
+        let export = format!(
+            "schema: batna.verdicts/v1\nexported: x\nverdicts:\n  - {{ id: hb.L01.001, verdict: approved, at: \"2026-11-02T09:00:00Z\", fingerprint: \"0000000000000000\" }}\n  - {{ id: hb.L01.002, verdict: approved, at: \"2026-11-02T09:00:00Z\" }}\n  - {{ id: hb.L01.003, verdict: wrong, at: \"2026-11-02T09:00:00Z\", fingerprint: \"{}\" }}\n",
+            fp("hb.L01.003")
+        );
+        let file = dir.path().join("stale.yaml");
+        std::fs::write(&file, export).unwrap();
+        let out = run(dir.path(), &[file.display().to_string(), "--approve".into()]).unwrap();
+        assert!(
+            out.contains(
+                "Changed since he judged them, re-check in the app (not approved, not applied): hb.L01.001"
+            ),
+            "{out}"
+        );
+        assert!(
+            out.contains("without fingerprints, not approved (export again from the app): hb.L01.002"),
+            "{out}"
+        );
+        assert!(out.contains("✗ hb.L01.003"), "{out}");
+        assert!(out.ends_with("0 new approval(s) of 0 ✓"), "{out}");
+        let text = std::fs::read_to_string(dir.path().join("content/approved.txt")).unwrap();
+        assert_eq!(text, "# header\nhb.L01.009");
     }
 
     #[test]

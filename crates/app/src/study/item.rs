@@ -58,10 +58,13 @@ pub fn ItemView(
                 {render(&item, on_grade)}
             }
             footer { class: "st-item-foot",
-                crate::hover::BookPage {
-                    label: tx::BOOK_PAGE,
-                    page: item.src.page,
-                    quote: if revealed() { item.src.quote.clone() } else { None },
+                // His own cards may have no page.
+                if item.src.page > 0 {
+                    crate::hover::BookPage {
+                        label: tx::BOOK_PAGE,
+                        page: item.src.page,
+                        quote: if revealed() { item.src.quote.clone() } else { None },
+                    }
                 }
                 if let Some(q) = item.src.quote.as_ref().filter(|_| revealed()) {
                     details { class: "st-quote",
@@ -97,7 +100,7 @@ fn render(item: &Item, on_grade: EventHandler<Grade>) -> Element {
         // Not in PLAYABLE yet: other chunks bring these screens.
         _ => rsx! {
             p { class: "muted", {tx::NOT_HERE_YET} }
-            button { class: "st-secondary", onclick: move |_| on_grade.call(Grade::Good), {tx::SKIP} }
+            button { class: "btn btn-secondary btn-lg", onclick: move |_| on_grade.call(Grade::Good), {tx::SKIP} }
         },
     }
 }

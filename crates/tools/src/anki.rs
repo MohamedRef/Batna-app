@@ -1,5 +1,5 @@
-//! `batna-tools anki [--lecture hb.L01] [--verdicts FILE] [--drafts DIR]
-//! [--merged-only] [--out DIR]`: the Anki file, so Mohamed can study before
+//! `batna-tools anki [--lecture hb.L01] [--verdicts FILE] [--own EXPORT]
+//! [--drafts DIR] [--merged-only] [--out DIR]`: the Anki file, so Mohamed can study before
 //! the app is done. The deck itself is built by the `batna-anki` crate, which
 //! the app's «export to Anki» button shares; see docs/ANKI.md.
 //!
@@ -15,7 +15,13 @@
 //! `--merged-only` turns this off. Those notes get a `draft` tag.
 //!
 //! `--verdicts FILE` reads the app's ✓/✎/✗ export: ✗ items are left out, ✎
-//! items use his edited text, ✓ items are tagged `approved`.
+//! items use his edited text, ✓ items are tagged `approved`. A verdict on an
+//! item whose text changed since he judged it is ignored (#18), and a ✓
+//! without a fingerprint doesn't approve.
+//!
+//! `--own batna-export-….json` adds Mohamed's own cards (the app's Settings ›
+//! Your data export) as one more subdeck, `Batna::My own cards`, tagged
+//! `own` and never `unverified`.
 
 use std::collections::{BTreeMap, BTreeSet};
 use std::path::{Path, PathBuf};
@@ -23,7 +29,9 @@ use std::path::{Path, PathBuf};
 use batna_anki::{Options, build, to_apkg};
 use batna_core::content::{Item, Lecture};
 
-use crate::verdicts::{Verdict, apply_edit};
+use serde_json::Value;
+
+use crate::verdicts::{Verdict, apply_edit, current};
 
 pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
     let out = crate::flag(args, "--out").map(PathBuf::from).unwrap_or_else(|| root.join("dist/anki"));
@@ -62,6 +70,14 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
             return Err(vec![format!("{id}: no such lecture written yet")]);
         }
     }
+    if let Some(file) = crate::flag(args, "--own") {
+        let cards = own_cards(Path::new(file)).map_err(|e| vec![e])?;
+        if cards.is_empty() {
+            warnings.push(format!("{file}: no own cards in this export"));
+        } else if only.is_none() {
+            lectures.push(batna_core::own::lecture(&cards));
+        }
+    }
     let mut approved = crate::read_approved(&root.join("content/approved.txt"));
     let mut wrong = BTreeSet::new();
     let mut edits = BTreeMap::new();
@@ -69,7 +85,14 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
         let items: BTreeMap<&str, &Item> =
             lectures.iter().flat_map(|l| &l.items).map(|i| (i.id.as_str(), i)).collect();
         for (id, entry) in crate::verdicts::latest(v) {
+            // A verdict on text that changed since he judged it no longer applies (#18).
+            let now = items.get(id).and_then(|item| current(entry, item));
+            if now == Some(false) {
+                continue;
+            }
             match entry.verdict {
+                // Only when the export shows he saw this exact text.
+                Verdict::Approved if now != Some(true) => {}
                 Verdict::Approved => {
                     approved.insert(id.to_string());
                 }
@@ -114,6 +137,21 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
         report.push_str(&format!("\n  warning: {w}"));
     }
     Ok(report)
+}
+
+/// His live own cards from an app export (`tables.own_cards`).
+pub fn own_cards(path: &Path) -> Result<Vec<batna_core::own::OwnCard>, String> {
+    let text = std::fs::read_to_string(path).map_err(|e| format!("{}: {e}", path.display()))?;
+    let doc: Value = serde_json::from_str(&text).map_err(|e| format!("{}: {e}", path.display()))?;
+    if doc["format"] != "batna-export" {
+        return Err(format!("{}: not a Batna export (Settings › Your data)", path.display()));
+    }
+    let rows = doc["tables"]["own_cards"]["rows"].as_array().cloned().unwrap_or_default();
+    Ok(rows
+        .iter()
+        .filter(|r| r["deleted"].as_i64() == Some(0))
+        .filter_map(|r| r["value"].as_str().and_then(|v| serde_json::from_str(v).ok()))
+        .collect())
 }
 
 /// The project's shared folder, where unmerged lectures wait.
@@ -198,7 +236,7 @@ mod tests {
             .unwrap();
         std::fs::write(
             d.join("export.yaml"),
-            "schema: batna.verdicts/v1\nexported: x\nverdicts:\n  - { id: hb.L01.003, verdict: wrong, at: a }\n  - { id: hb.L01.001, verdict: edited, at: a, edit: { back: Fibrosis plus nodules. } }\n  - { id: hb.L01.002, verdict: edited, at: a, edit: { nope: x } }\n",
+            "schema: batna.verdicts/v1\nexported: x\nverdicts:\n  - { id: hb.L01.003, verdict: wrong, at: a }\n  - { id: hb.L01.001, verdict: edited, at: a, edit: { back: Fibrosis plus nodules. } }\n  - { id: hb.L01.002, verdict: edited, at: a, edit: { nope: x } }\n  - { id: hb.L01.004, verdict: wrong, at: b, fingerprint: \"0000000000000000\" }\n",
         )
         .unwrap();
         let args: Vec<String> =
@@ -213,5 +251,28 @@ mod tests {
             report.contains("hb.L01.002: a cloze has no field `nope` (kept the book version)"),
             "{report}"
         );
+    }
+
+    #[test]
+    fn own_cards_from_an_export_get_their_own_subdeck() {
+        let card = |id: &str, deleted: i64| {
+            let value = format!(
+                r#"{{"id":"{id}","front":"SAAG?","back":"≥ 1.1","lecture":"hb.L09","created_ms":1}}"#
+            );
+            serde_json::json!({"id": id, "value": value, "deleted": deleted})
+        };
+        let doc = serde_json::json!({"format": "batna-export", "tables": {"own_cards": {"rows": [card("own.a", 0), card("own.b", 1)]}}});
+        let dir = tempfile::tempdir().unwrap();
+        let path = dir.path().join("export.json");
+        std::fs::write(&path, doc.to_string()).unwrap();
+        let cards = own_cards(&path).unwrap();
+        assert_eq!(cards.len(), 1, "deleted cards stay out");
+
+        let lec = batna_core::own::lecture(&cards);
+        let deck = build(std::slice::from_ref(&lec), &Options::default());
+        assert_eq!(deck.decks[1].1, "Batna::My own cards");
+        let note = &deck.notes[0];
+        assert_eq!(note.tags, ["own::cards", "own", "hb.L09"]);
+        assert_eq!(note.fields[2], "My own cards");
     }
 }

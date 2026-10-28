@@ -1,0 +1,141 @@
+//! One MCQ on screen: stem, options, and (once revealed) the right answer,
+//! why each option is right or wrong, the book page and any guideline update.
+
+use batna_core::content::Body;
+use batna_core::exam::Question;
+use batna_core::review::verify::Check;
+use dioxus::prelude::*;
+
+use super::{lecture_number, lookup, topic_title};
+use crate::i18n::bank as tx;
+use crate::store::use_review;
+
+#[component]
+pub fn QuestionView(
+    q: Question,
+    chosen: Option<usize>,
+    reveal: bool,
+    /// Called with the original option index; `None` makes the options read-only.
+    onchoose: Option<EventHandler<usize>>,
+) -> Element {
+    let Some((lecture, item)) = lookup(&q.id) else {
+        return rsx! { p { class: "note", {tx::NOT_FOUND} } };
+    };
+    let Body::Mcq { stem, options, why, .. } = &item.body else {
+        return rsx! { p { class: "note", {tx::NOT_FOUND} } };
+    };
+    let topic = item.topic.as_deref().map(|t| topic_title(&lecture.lecture, t));
+    let rows = q.order.iter().enumerate().filter_map(|(shown, &orig)| {
+        let text = options.get(orig)?.clone();
+        let reason = why.get(orig).cloned().unwrap_or_default();
+        let letter = char::from(b'A' + shown as u8);
+        let state = match (reveal, orig == q.answer, chosen == Some(orig)) {
+            (true, true, _) => "right",
+            (true, false, true) => "wrong",
+            (false, _, true) => "picked",
+            _ => "",
+        };
+        Some((orig, letter, text, reason, state))
+    });
+    let rows: Vec<_> = rows.collect();
+    let locked = onchoose.is_none();
+    let quote = item.src.quote.clone();
+    let primary = rsx! {
+        article { class: "q card",
+            div { class: "q-meta",
+                span { class: "chip", bdi { "L{lecture_number(&lecture.lecture)} · {lecture.title}" } }
+                if let Some(t) = topic {
+                    span { class: "chip", bdi { "{t}" } }
+                }
+            }
+            p { class: "q-stem", lang: "en", dir: "ltr", "{stem}" }
+            ol { class: "q-options", lang: "en", dir: "ltr",
+                for (orig, letter, text, reason, state) in rows.clone() {
+                    li { key: "{orig}",
+                        button {
+                            class: "q-option",
+                            "data-state": state,
+                            disabled: locked,
+                            "aria-pressed": if chosen == Some(orig) { "true" } else { "false" },
+                            "aria-keyshortcuts": if locked { "" } else { letter.to_string() },
+                            "data-peek": if reveal { reason.clone() } else { String::new() },
+                            onclick: move |_| {
+                                if let Some(h) = onchoose {
+                                    h.call(orig);
+                                }
+                            },
+                            span { class: "q-letter", "{letter}" }
+                            span { class: "q-text", "{text}" }
+                            if reveal && state == "right" {
+                                span { class: "q-mark", lang: "ar", dir: "rtl", "✓ {tx::RIGHT}" }
+                            }
+                            if reveal && state == "wrong" {
+                                span { class: "q-mark", lang: "ar", dir: "rtl", "✗ {tx::YOUR_ANSWER}" }
+                            }
+                        }
+                        // Under each option on phones; the side pane has them on wide windows.
+                        if reveal && !reason.is_empty() {
+                            p { class: "q-why", "{reason}" }
+                        }
+                    }
+                }
+            }
+        }
+    };
+    if !reveal {
+        return primary;
+    }
+    // The explanation: why for every option (wide windows), the book page,
+    // the ✓ / ✎ / ✗ check and any guideline update.
+    let secondary = rsx! {
+        div { class: "q-explain card",
+            ol { class: "q-why-list", lang: "en", dir: "ltr",
+                for (orig, letter, _, reason, state) in rows {
+                    li { key: "{orig}", "data-state": state,
+                        span { class: "q-letter", "{letter}" }
+                        span { "{reason}" }
+                    }
+                }
+            }
+            div { class: "q-foot",
+                crate::hover::BookPage { label: tx::BOOK_PAGE, page: item.src.page, quote }
+            }
+            Report { item_id: q.id.clone() }
+            if let Some(u) = &item.update {
+                aside { class: "q-update",
+                    strong { {tx::UPDATE} }
+                    p { lang: "en", dir: "ltr", "{u.text}" }
+                    p { class: "muted small", bdi { "{u.reference}" } " · " {tx::UPDATE_NOTE} }
+                }
+            }
+        }
+    };
+    rsx! {
+        crate::desk::Panes { primary, secondary: Some(secondary) }
+    }
+}
+
+/// ✓ / ✎ / ✗ the first time he sees the question (the review store's verify
+/// bar), and afterwards a "report a problem" link that reopens that check.
+#[component]
+fn Report(item_id: String) -> Element {
+    let review = use_review();
+    let mut reopened = use_signal(|| false);
+    let check = review.backend.borrow().check(&item_id);
+    if check == Check::Ask || reopened() {
+        return rsx! { crate::verify::VerifyBar { item_id } };
+    }
+    if check == Check::Hidden {
+        return rsx! {};
+    }
+    rsx! {
+        button {
+            class: "link small report",
+            onclick: move |_| {
+                review.backend.borrow_mut().undo_judgement(&item_id);
+                reopened.set(true);
+            },
+            {tx::REPORT}
+        }
+    }
+}

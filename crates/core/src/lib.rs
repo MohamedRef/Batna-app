@@ -3,6 +3,8 @@
 
 pub mod calc;
 pub mod content;
+pub mod exam;
+pub mod glossary;
 pub mod layout;
 pub mod pack;
 pub mod plan;
@@ -11,4 +13,5 @@ pub mod session;
 pub mod srs;
 pub mod stats;
 pub mod theme;
+pub mod update;
 pub mod validate;

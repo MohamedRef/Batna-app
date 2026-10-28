@@ -1,0 +1,250 @@
+name: Android preview APK
+
+# Builds an installable arm64 APK for trying Batna on the phone and tablet
+# without the Mac, and the signed update feed that lets an installed preview
+# update itself (docs/RELEASE.md §3 and §5). Adapted from kabar-app main:
+# .github/workflows/android-preview.yml; it also folds in chunk 20's
+# android-apk.yml (scripts/android-check-apk.sh runs on every build).
+#
+# Signed with a throwaway *preview* key generated in CI: never committed, never
+# Kabar's, never the release key in ~/.batna. The key is kept in the Actions
+# cache so previews install over each other; if the cache expires (7 days
+# unused) a new key is made and the next preview needs an uninstall first.
+#
+# Pull-request runs never touch the cached keys: they sign with one-off keys
+# (enough to prove the APK builds, signs and passes the checks) and get a
+# read-only token. Only pushes to main and manual runs restore the keys, and
+# only the separate `publish` job can write.
+#
+# Self-updates: the APK is built for the `preview` channel with the public half
+# of a second CI key (Ed25519, also in the Actions cache), and the release
+# carries a signed update.json naming the APK and the content pack, so an
+# installed preview updates itself (and its lectures) after every merge.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+    paths:
+      - .github/workflows/batna-android-preview.yml
+      - android/**
+      - crates/app/AndroidManifest.xml
+      - crates/app/Dioxus.toml
+      - crates/app/Cargo.toml
+      - crates/app/src/platform/**
+      - crates/app/src/update/**
+      - scripts/android-check-apk.sh
+      - scripts/android-release-apk.sh
+  workflow_dispatch:
+
+# A pull request's newer push cancels its older run. On main, runs queue
+# instead, so a run is never cancelled halfway through publishing (which would
+# leave the feed missing until the next merge). Only one run waits at a time.
+concurrency:
+  group: batna-android-preview-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+jobs:
+  apk:
+    name: Build preview APK
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    env:
+      # A PR's own copy of this workflow runs here, so it must not reach the keys.
+      KEEP_KEY: ${{ github.event_name != 'pull_request' }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: aarch64-linux-android
+      - uses: Swatinem/rust-cache@v2
+        with:
+          key: batna-android-preview
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: cargo-bins/cargo-binstall@8a2045612414e945291083f820cd50b4d8fc2218 # v1.26.0
+      - name: Install dx 0.7.10
+        run: cargo binstall -y --force dioxus-cli@0.7.10
+
+      # The update key comes first: its public half is built into the app.
+      - name: Restore preview update key
+        if: env.KEEP_KEY == 'true'
+        id: update-key
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.batna-preview-update
+          key: batna-preview-update-key-v1
+      - name: Create preview update key
+        if: steps.update-key.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p ~/.batna-preview-update
+          cargo run -q -p batna-tools -- update keygen --public-out ~/.batna-preview-update/key.pub \
+            > ~/.batna-preview-update/secret
+          chmod 600 ~/.batna-preview-update/secret
+      - name: Save preview update key
+        if: env.KEEP_KEY == 'true' && steps.update-key.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: ~/.batna-preview-update
+          key: batna-preview-update-key-v1
+      - name: Preview build identity
+        run: |
+          {
+            echo "BATNA_UPDATE_CHANNEL=preview"
+            echo "BATNA_UPDATE_KEY=$(grep -v '^#' ~/.batna-preview-update/key.pub | head -1)"
+            echo "BATNA_BUILD=${{ github.run_number }}"
+            echo "BATNA_COMMIT=${GITHUB_SHA::7}"
+          } >> "$GITHUB_ENV"
+
+      - name: Android environment
+        run: |
+          echo "ANDROID_HOME=$ANDROID_SDK_ROOT" >> "$GITHUB_ENV"
+          echo "ANDROID_NDK_HOME=$ANDROID_NDK_LATEST_HOME" >> "$GITHUB_ENV"
+          BT="$(ls -d "$ANDROID_SDK_ROOT"/build-tools/* | sort -V | tail -1)"
+          echo "$BT" >> "$GITHUB_PATH"
+
+      - name: Build APK
+        working-directory: crates/app
+        run: |
+          dx bundle --platform android --release --package-types apk \
+            --target aarch64-linux-android --no-default-features --features mobile \
+            --out-dir ../../dist/android/raw
+
+      - name: Rebuild as a release APK (not debuggable, R8, versionCode)
+        run: |
+          APK="$(scripts/android-release-apk.sh)"
+          mkdir -p dist/android/release && cp "$APK" dist/android/release/batna-unsigned.apk
+
+      - name: Check the APK (Kotlin glue and its permissions)
+        run: scripts/android-check-apk.sh dist/android/release/batna-unsigned.apk
+
+      - name: Restore preview signing key
+        if: env.KEEP_KEY == 'true'
+        id: key
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.batna-preview
+          key: batna-preview-key-v1
+      - name: Create preview signing key
+        if: steps.key.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p ~/.batna-preview
+          openssl rand -hex 24 > ~/.batna-preview/pass
+          keytool -genkeypair -keystore ~/.batna-preview/preview.jks -alias preview \
+            -keyalg RSA -keysize 4096 -validity 3650 -dname "CN=Batna preview" \
+            -storepass "$(cat ~/.batna-preview/pass)" -keypass "$(cat ~/.batna-preview/pass)"
+      - name: Save preview signing key
+        if: env.KEEP_KEY == 'true' && steps.key.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: ~/.batna-preview
+          key: batna-preview-key-v1
+
+      - name: Sign
+        run: |
+          IN=dist/android/release/batna-unsigned.apk
+          PASS="$(cat ~/.batna-preview/pass)"
+          zipalign -f -p 4 "$IN" /tmp/aligned.apk
+          apksigner sign --ks ~/.batna-preview/preview.jks --ks-key-alias preview \
+            --ks-pass "pass:$PASS" --key-pass "pass:$PASS" --out dist/android/batna-preview.apk /tmp/aligned.apk
+          apksigner verify --print-certs dist/android/batna-preview.apk
+          # The S24 Ultra and Tab S11 are arm64; dx defaults to the emulator ABI.
+          unzip -l dist/android/batna-preview.apk | grep -q 'lib/arm64-v8a/' \
+            || { echo "APK has no arm64-v8a library"; unzip -l dist/android/batna-preview.apk; exit 1; }
+          ls -lh dist/android/batna-preview.apk
+
+      - name: Signed update feed (APK, content pack, update.json + signature)
+        env:
+          COMMIT_SUBJECT: ${{ github.event.head_commit.message || github.event.pull_request.title || 'Preview build' }}
+        run: |
+          VERSION="$(sed -n 's/^version = "\(.*\)"/\1/p' Cargo.toml | head -1)"
+          NOTES="$(printf '%s' "$COMMIT_SUBJECT" | head -1 | cut -c1-200)"
+          cargo run -q -p batna-tools -- packs build --out dist/packs
+          cargo run -q -p batna-tools -- update manifest --channel preview --version "$VERSION" \
+            --build "$BATNA_BUILD" --commit "$BATNA_COMMIT" --notes-en "$NOTES" \
+            --asset android-arm64=dist/android/batna-preview.apk \
+            --asset content=dist/packs/batna-content.pack --out dist/update
+          BATNA_UPDATE_SECRET="$(cat ~/.batna-preview-update/secret)" \
+            cargo run -q -p batna-tools -- update sign dist/update --public-key ~/.batna-preview-update/key.pub
+          cargo run -q -p batna-tools -- update verify dist/update --public-key ~/.batna-preview-update/key.pub
+          ls -l dist/update
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: batna-preview-apk
+          path: |
+            dist/android/batna-preview.apk
+            dist/update/
+          retention-days: 14
+
+  publish:
+    name: Publish the batna-preview release
+    needs: apk
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: batna-preview-apk
+          path: dist
+      - name: Publish as the "batna-preview" prerelease
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          TAG: batna-preview
+        run: |
+          # Publish only when this commit is newer than the one the release
+          # carries, so a run that finishes after a newer one never rolls the
+          # release back. Before the first publish the tag doesn't exist: gh
+          # then exits non-zero but still prints the 404 body on stdout, so
+          # only a successful call that returns a commit SHA counts.
+          if ! published="$(gh api "repos/$GH_REPO/git/refs/tags/$TAG" --jq .object.sha 2>/dev/null)" \
+            || ! [[ "$published" =~ ^[0-9a-f]{40}$ ]]; then
+            published=""
+          fi
+          if [ -n "$published" ]; then
+            status="$(gh api "repos/$GH_REPO/compare/$published...$GITHUB_SHA" --jq .status)"
+            if [ "$status" != "ahead" ]; then
+              echo "The release already carries ${published::7} ($status); nothing to publish."
+              exit 0
+            fi
+          fi
+          NOTES="Preview build of ${GITHUB_SHA::7}, signed with a CI preview key (not the release key). Install: download batna-preview.apk on the phone or tablet and allow installs from your browser. Not a release: the first release will be an alpha."
+          # The release stays in place and only its tag and files change, so
+          # the download link and the update feed never 404.
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh api -X PATCH "repos/$GH_REPO/git/refs/tags/$TAG" -f sha="$GITHUB_SHA" -F force=true >/dev/null
+            gh release edit "$TAG" --notes "$NOTES"
+          else
+            gh release create "$TAG" --prerelease --latest=false --target "$GITHUB_SHA" \
+              --title "Batna preview (Android)" --notes "$NOTES"
+          fi
+          # The APK under its usual name for people, plus the signed feed for
+          # the app. The files go up before update.json and its signature, so
+          # the feed never names a file that isn't there yet.
+          files=()
+          for f in dist/update/*; do
+            case "$(basename "$f")" in update.json|update.json.sig) ;; *) files+=("$f") ;; esac
+          done
+          gh release upload "$TAG" dist/android/batna-preview.apk "${files[@]}" --clobber
+          gh release upload "$TAG" dist/update/update.json.sig dist/update/update.json --clobber
+          # Feed files carry the build number, so nothing a live update.json
+          # names is ever overwritten. Keep this build's files and the ones
+          # before (a device may have just read the previous feed) and drop
+          # older ones so the release doesn't grow without end.
+          gh api "repos/$GH_REPO/releases/tags/$TAG" \
+            --jq '.assets[] | select(.name | test("-b[0-9]+-")) | "\(.name | capture("-b(?<b>[0-9]+)-").b) \(.id)"' \
+            | sort -rn | awk '{ if (!seen[$1]++) n++; if (n > 2) print $2 }' | while read -r id; do
+                gh api -X DELETE "repos/$GH_REPO/releases/assets/$id"
+              done

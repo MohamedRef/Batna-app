@@ -5,26 +5,36 @@
 
 mod anki;
 mod back;
+mod bank;
 mod calc;
 mod case;
+mod cloud;
 mod content;
 mod data_export;
+mod desk;
 mod diag;
 mod fonts;
+mod hover;
 mod i18n;
 mod icons;
 mod import;
+mod onboarding;
 mod oral;
 mod order;
 mod plan;
 mod platform;
 mod prefs;
+mod recap;
+mod reminders;
 mod settings;
+mod shortcuts;
+mod sounds;
 mod stats;
 mod store;
 mod study;
 mod table;
 mod today;
+mod update;
 mod verify;
 
 use dioxus::prelude::*;
@@ -79,6 +89,11 @@ pub struct Ui {
 
 fn main() {
     diag::install_panic_hook();
+    // Mac, automatic updates: a verified Batna.app staged last time goes in
+    // before the window opens (and Batna reopens as the new version).
+    #[cfg(target_os = "macos")]
+    update::apply_staged_on_launch();
+    update::init();
     #[cfg(all(feature = "desktop", not(target_os = "android")))]
     {
         use dioxus::desktop::{Config, LogicalSize, WindowBuilder};
@@ -95,7 +110,12 @@ fn main() {
             .with_inner_size(LogicalSize::new(w, h))
             .with_min_inner_size(LogicalSize::new(360.0, 560.0));
         dioxus::LaunchBuilder::desktop()
-            .with_cfg(Config::new().with_window(window).with_menu(None).with_disable_context_menu(true))
+            .with_cfg(
+                Config::new()
+                    .with_window(window)
+                    .with_menu(settings::menu::initial())
+                    .with_disable_context_menu(true),
+            )
             .launch(App);
     }
     #[cfg(not(all(feature = "desktop", not(target_os = "android"))))]
@@ -110,14 +130,18 @@ fn App() -> Element {
     });
     let settings = use_context_provider(settings::SettingsNav::new);
     store::use_provide_review();
+    cloud::use_provide_cloud();
+    reminders::use_local_reminders();
     let current = *ui.screen.read();
     let look = ui.prefs.read().css();
     back::use_back(ui, current, *settings.open.read());
+    update::view::use_android_install(ui);
     rsx! {
         document::Title { "Batna" }
         style { {fonts::css()} }
         style { {MAIN_CSS} }
         style { {look} }
+        desk::Chrome {}
         div { class: "app", lang: "ar", dir: "rtl",
             header { class: "topbar",
                 div { class: "brand",
@@ -136,9 +160,21 @@ fn App() -> Element {
                 for screen in Screen::NAV {
                     NavButton { key: "{screen:?}", screen, class: "nav-item" }
                 }
+                // From 840px the sidebar carries Settings at its foot (nav.css).
+                button {
+                    class: "nav-item nav-foot",
+                    aria_label: Screen::Settings.label(),
+                    onclick: move |_| settings.show(None),
+                    span { class: "glyph", aria_hidden: "true", {icons::nav(Screen::Settings)} }
+                    span { class: "label", {Screen::Settings.label()} }
+                }
             }
-            main { class: "content", "data-screen": "{current:?}", {screen_body(current)} }
+            main { class: "content", "data-screen": "{current:?}",
+                update::view::UpdateBanner {}
+                {screen_body(current)}
+            }
             settings::SettingsSheet {}
+            onboarding::Onboarding {}
         }
     }
 }
@@ -148,7 +184,7 @@ fn screen_body(screen: Screen) -> Element {
     match screen {
         Screen::Today => rsx! { today::Today {} },
         Screen::Study => rsx! { study::Study {} },
-        Screen::Bank => rsx! { Soon { screen } },
+        Screen::Bank => rsx! { bank::Bank {} },
         Screen::Cases => rsx! { case::CasesScreen {} },
         Screen::Oral => rsx! { oral::Oral {} },
         Screen::Stats => rsx! { stats::Stats {} },

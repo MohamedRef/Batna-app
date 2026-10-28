@@ -1,5 +1,6 @@
 //! The local SQLite store: review events, Mohamed's verdicts and review
-//! settings. One file on each device; no server yet.
+//! settings. One file on each device, synced through Batna Cloud when
+//! Mohamed signs in (`sync.rs`).
 //!
 //! Every synced table carries `account_id`, `device_id`, an HLC and a
 //! tombstone, so sync can be added without a schema change. Review events
@@ -10,6 +11,7 @@ mod backend;
 pub mod export;
 pub mod import;
 mod paths;
+pub mod sync;
 
 use std::collections::BTreeMap;
 use std::path::{Path, PathBuf};
@@ -22,7 +24,7 @@ use rusqlite::{Connection, OptionalExtension, params};
 use serde::Serialize;
 use serde::de::DeserializeOwned;
 
-pub use backend::{LectureProgress, use_provide_review, use_review};
+pub use backend::{LectureProgress, Review, use_provide_review, use_review};
 
 #[derive(Debug)]
 pub enum StoreError {
@@ -56,7 +58,8 @@ impl From<serde_json::Error> for StoreError {
 pub type Result<T> = std::result::Result<T, StoreError>;
 
 /// Numbered migrations; the index + 1 is the schema version.
-const MIGRATIONS: &[&str] = &["
+const MIGRATIONS: &[&str] = &[
+    "
     CREATE TABLE meta (
         key   TEXT PRIMARY KEY,
         value TEXT NOT NULL
@@ -97,7 +100,16 @@ const MIGRATIONS: &[&str] = &["
         hlc_counter INTEGER NOT NULL,
         deleted     INTEGER NOT NULL DEFAULT 0
     ) STRICT;
-"];
+",
+    "
+    -- Local writes waiting for Batna Cloud (store/sync.rs), oldest first.
+    CREATE TABLE sync_outbox (
+        seq   INTEGER PRIMARY KEY AUTOINCREMENT,
+        op_id TEXT NOT NULL UNIQUE,
+        op    TEXT NOT NULL
+    ) STRICT;
+",
+];
 
 const REVIEW_SETTINGS_KEY: &str = "review";
 
@@ -145,24 +157,23 @@ impl Store {
                 d
             }
         };
+        sync::seed(&conn, &device)?;
         let mut clock = HlcClock::new(device);
         // Start past every stamp already stored, whichever device wrote it.
-        for table in ["review_events", "item_status", "settings"] {
-            let last: Option<(i64, u32, String)> = conn
-                .query_row(
-                    &format!(
-                        "SELECT hlc_wall, hlc_counter, device_id FROM {table}
-                         ORDER BY hlc_wall DESC, hlc_counter DESC LIMIT 1"
-                    ),
-                    [],
-                    |r| Ok((r.get(0)?, r.get(1)?, r.get(2)?)),
-                )
-                .optional()?;
-            if let Some((wall_ms, counter, device)) = last {
-                clock.observe(&Hlc { wall_ms, counter, device });
-            }
+        if let Some(last) = newest_stamp(&conn)? {
+            clock.observe(&last);
         }
         Ok(Self { conn: Mutex::new(conn), clock: Mutex::new(clock), path })
+    }
+
+    /// Moves the clock past rows another connection wrote (the sync
+    /// thread), so this device's next write sorts after them.
+    pub fn observe_stored(&self) -> Result<()> {
+        let last = newest_stamp(&self.conn.lock().unwrap())?;
+        if let Some(last) = last {
+            self.clock.lock().unwrap().observe(&last);
+        }
+        Ok(())
     }
 
     pub fn device(&self) -> String {
@@ -179,6 +190,7 @@ impl Store {
         let logged =
             LoggedReview { id: format!("{}-{}-{}", hlc.device, hlc.wall_ms, hlc.counter), hlc, event };
         self.insert_review(&logged)?;
+        sync::enqueue(&self.conn.lock().unwrap(), "review_events", "id", &logged.id)?;
         Ok(logged)
     }
 
@@ -277,6 +289,23 @@ impl Store {
         .and_then(|v| serde_json::from_str(&v).ok())
     }
 
+    /// Every synced setting whose key starts with `prefix`, in key order.
+    /// For records that are one key each, so two devices never overwrite
+    /// each other (the bank's finished papers).
+    pub fn settings_with_prefix<T: DeserializeOwned>(&self, prefix: &str) -> Vec<(String, T)> {
+        let conn = self.conn.lock().unwrap();
+        let Ok(mut stmt) = conn.prepare(
+            "SELECT key, value FROM settings WHERE substr(key, 1, length(?1)) = ?1 AND deleted = 0 ORDER BY key",
+        ) else {
+            return Vec::new();
+        };
+        let rows = stmt.query_map([prefix], |r| Ok((r.get::<_, String>(0)?, r.get::<_, String>(1)?)));
+        rows.map(|rows| {
+            rows.flatten().filter_map(|(k, v)| Some((k, serde_json::from_str(&v).ok()?))).collect()
+        })
+        .unwrap_or_default()
+    }
+
     pub fn put_setting<T: Serialize>(&self, key: &str, value: &T) -> Result<()> {
         let hlc = self.tick(now_ms());
         self.put_lww("settings", "key", key, None, &serde_json::to_string(value)?, false, &hlc)
@@ -284,7 +313,6 @@ impl Store {
 
     /// A setting for this device only (never synced, never imported), kept
     /// in `meta` under `local.<key>`.
-    #[allow(dead_code)] // reminders and recap (chunk 20)
     pub fn local_setting<T: DeserializeOwned>(&self, key: &str) -> Option<T> {
         let conn = self.conn.lock().unwrap();
         conn.query_row("SELECT value FROM meta WHERE key = ?1", [format!("local.{key}")], |r| {
@@ -296,7 +324,6 @@ impl Store {
         .and_then(|v| serde_json::from_str(&v).ok())
     }
 
-    #[allow(dead_code)] // reminders and recap (chunk 20)
     pub fn put_local_setting<T: Serialize>(&self, key: &str, value: &T) -> Result<()> {
         self.conn.lock().unwrap().execute(
             "INSERT INTO meta (key, value) VALUES (?1, ?2)
@@ -315,7 +342,7 @@ impl Store {
     }
 
     /// Last-writer-wins upsert: the row changes only when `hlc` is newer
-    /// than what is stored. Sync will merge remote rows through this too.
+    /// than what is stored.
     #[allow(clippy::too_many_arguments)]
     fn put_lww(
         &self,
@@ -342,7 +369,7 @@ impl Store {
         );
         let conn = self.conn.lock().unwrap();
         let base = params![key, value, hlc.device, hlc.wall_ms, hlc.counter, deleted];
-        match status {
+        let changed = match status {
             Some(s) => {
                 let mut all: Vec<&dyn rusqlite::ToSql> = base.to_vec();
                 all.push(&s);
@@ -350,8 +377,36 @@ impl Store {
             }
             None => conn.execute(&sql, base)?,
         };
+        // This device's writes go to Batna Cloud too.
+        if changed > 0 && hlc.device == self.clock.lock().unwrap().device() {
+            sync::enqueue(&conn, table, key_col, key)?;
+        }
         Ok(())
     }
+}
+
+/// The newest HLC in any synced table.
+fn newest_stamp(conn: &Connection) -> Result<Option<Hlc>> {
+    let mut newest: Option<Hlc> = None;
+    for table in ["review_events", "item_status", "settings"] {
+        let last: Option<(i64, u32, String)> = conn
+            .query_row(
+                &format!(
+                    "SELECT hlc_wall, hlc_counter, device_id FROM {table}
+                     ORDER BY hlc_wall DESC, hlc_counter DESC LIMIT 1"
+                ),
+                [],
+                |r| Ok((r.get(0)?, r.get(1)?, r.get(2)?)),
+            )
+            .optional()?;
+        if let Some((wall_ms, counter, device)) = last {
+            let h = Hlc { wall_ms, counter, device };
+            if newest.as_ref().is_none_or(|n| h > *n) {
+                newest = Some(h);
+            }
+        }
+    }
+    Ok(newest)
 }
 
 /// The app's store, opened once in the data directory. If that fails the
@@ -417,6 +472,17 @@ mod tests {
 
     fn judgement(verdict: Verdict) -> Judgement {
         Judgement { verdict, edit: Edit::new(), note: None, fingerprint: "f".into(), at_ms: 1 }
+    }
+
+    #[test]
+    fn settings_by_prefix() {
+        let s = Store::open_in_memory().unwrap();
+        s.put_setting("bank.paper.a.1", &1).unwrap();
+        s.put_setting("bank.paper.b.2", &2).unwrap();
+        s.put_setting("bank.papers", &vec![9]).unwrap();
+        s.put_setting("other", &3).unwrap();
+        let got: Vec<(String, i32)> = s.settings_with_prefix("bank.paper.");
+        assert_eq!(got, vec![("bank.paper.a.1".into(), 1), ("bank.paper.b.2".into(), 2)]);
     }
 
     #[test]

@@ -11,14 +11,26 @@ use crate::i18n::study as tx;
 pub fn CardItem(item: Item, on_grade: EventHandler<Grade>) -> Element {
     let Body::Card { front, back } = &item.body else { return rsx! {} };
     let mut shown = use_signal(|| false);
+    // Tablet and Mac: the question on one side, the answer on the other.
     rsx! {
-        p { class: "st-prompt", lang: "en", dir: "ltr", "{front}" }
-        if shown() {
-            div { class: "st-answer", lang: "en", dir: "ltr", "{back}" }
-            GradeRow { item_id: item.id.clone(), suggested: None, on_grade }
-        } else {
-            p { class: "muted small", {tx::THINK_FIRST} }
-            button { class: "st-primary", autofocus: true, onclick: move |_| shown.set(true), {tx::REVEAL} }
+        crate::desk::Panes {
+            primary: rsx! {
+                p { class: "st-prompt", lang: "en", dir: "ltr", "{front}" }
+                if !shown() {
+                    p { class: "muted small", {tx::THINK_FIRST} }
+                    button {
+                        class: "st-primary",
+                        autofocus: true,
+                        "aria-keyshortcuts": "Space",
+                        onclick: move |_| shown.set(true),
+                        {tx::REVEAL}
+                    }
+                }
+            },
+            secondary: shown().then(|| rsx! {
+                div { class: "st-answer", lang: "en", dir: "ltr", "{back}" }
+                GradeRow { item_id: item.id.clone(), suggested: None, on_grade }
+            }),
         }
     }
 }

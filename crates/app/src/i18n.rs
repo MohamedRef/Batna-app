@@ -184,6 +184,78 @@ pub mod anki {
     pub const FAILED: &str = "معرفتش أكمّل التصدير:";
 }
 
+pub mod bank {
+    pub const TITLE: &str = "بنك الأسئلة";
+    pub const LEAD: &str = "اختار المحاضرات والمواضيع، وجاوب بالشرح بعد كل سؤال أو بالوقت زي الامتحان.";
+    pub const EMPTY_TITLE: &str = "لسه مفيش أسئلة اختيار من متعدد";
+    pub const EMPTY_BODY: &str = "أول ما محاضرة فيها أسئلة MCQ تخلص، هتلاقيها هنا على طول.";
+    pub const LECTURES: &str = "المحاضرات";
+    pub const TOPICS: &str = "المواضيع";
+    pub const PICK_LECTURE_FOR_TOPICS: &str = "اختار محاضرة أو أكتر عشان تظهر مواضيعها.";
+    pub const TAGS: &str = "نوع السؤال";
+    pub const TAG_HIGH_YIELD: &str = "مهم جدًا";
+    pub const TAG_BOOK: &str = "أسئلة الكتاب";
+    pub const TAG_NUMBERS: &str = "أرقام";
+    pub const ONLY_WRONG: &str = "الغلط واللي ما اتشافش بس";
+    pub const ALL: &str = "الكل";
+    pub const COUNT: &str = "عدد الأسئلة";
+    pub const AVAILABLE: &str = "سؤال متاح";
+    pub const NONE_MATCH: &str = "مفيش أسئلة بالاختيارات دي. جرّب توسّع الفلتر.";
+    pub const START_TUTOR: &str = "ابدأ بالشرح";
+    pub const START_TIMED: &str = "ابدأ بالوقت";
+    pub const TUTOR_HINT: &str = "الشرح وصفحة الكتاب بعد كل سؤال";
+    pub const TIMED_HINT: &str = "دقيقة وخُمس للسؤال، والمراجعة في الآخر";
+    pub const MOCK_TITLE: &str = "امتحان تجريبي";
+    pub const MOCK_LEAD: &str =
+        "أسئلة متلخبطة من كل المحاضرات اللي خلصت، بالوقت، ودرجتك لكل محاضرة ولكل موضوع.";
+    pub const START_MOCK: &str = "ابدأ الامتحان";
+    pub const MINUTES: &str = "دقيقة";
+    pub const HISTORY: &str = "امتحاناتك اللي فاتت";
+    pub const MODE_TIMED: &str = "بالوقت";
+    pub const MODE_MOCK: &str = "تجريبي";
+
+    pub const QUESTION: &str = "سؤال";
+    pub const OF: &str = "من";
+    pub const NEXT: &str = "التالي";
+    pub const PREV: &str = "السابق";
+    pub const FLAG: &str = "علّم للمراجعة";
+    pub const FLAGGED: &str = "متعلّم";
+    pub const SUBMIT: &str = "سلّم";
+    pub const FINISH: &str = "خلّص";
+    pub const LEAVE: &str = "اخرج";
+    pub const LEFT_ABOUT: &str = "فاضل حوالي";
+    pub const UNANSWERED: &str = "من غير إجابة";
+    pub const BOOK_PAGE: &str = "Book p.";
+    pub const UPDATE: &str = "تحديث من الإرشادات الحالية";
+    pub const UPDATE_NOTE: &str = "إجابة الامتحان هي إجابة الكتاب.";
+    pub const RIGHT: &str = "صح";
+    pub const YOUR_ANSWER: &str = "إجابتك";
+    pub const NOT_FOUND: &str = "السؤال ده اتشال من المحتوى.";
+
+    pub const RESULT: &str = "النتيجة";
+    pub const TOOK: &str = "الوقت";
+    pub const BY_LECTURE: &str = "حسب المحاضرة";
+    pub const BY_TOPIC: &str = "حسب الموضوع";
+    pub const WEAK: &str = "ابدأ مراجعتك بدول";
+    pub const ALL_STRONG: &str = "مفيش موضوع تحت ٦٠٪. شغل حلو.";
+    pub const REVIEW: &str = "راجع الأسئلة";
+    pub const SHOW_ALL: &str = "الكل";
+    pub const SHOW_WRONG: &str = "الغلط";
+    pub const SHOW_FLAGGED: &str = "المتعلّم عليها";
+    pub const RETRY_WRONG: &str = "جاوب الغلط تاني بالشرح";
+    pub const BACK: &str = "رجوع للبنك";
+    pub const SENT_TO_REVIEW: &str = "الأسئلة اللي غلطت فيها هترجعلك في المراجعة قريب.";
+    pub const REPORT: &str = "بلّغ عن مشكلة في السؤال ده";
+    pub const CLOSE: &str = "اقفل";
+    pub const LEAVE_TIMED_HINT: &str = "الامتحان هيستناك، والوقت شغّال";
+    pub const PAUSED_TITLE: &str = "عندك امتحان لسه مفتوح";
+    pub const PAUSED_BODY: &str = "جاوبت";
+    pub const PAUSED_LEFT: &str = "والوقت اللي فاضل حوالي";
+    pub const PAUSED_OVER: &str = "وقته خلص، فهيتسلّم زي ما هو.";
+    pub const RESUME: &str = "كمّل";
+    pub const SUBMIT_NOW: &str = "سلّمه دلوقتي";
+}
+
 pub mod stats {
     pub const TAB_PROGRESS: &str = "تقدّمي";
     pub const TAB_MISTAKES: &str = "الغلطات";
@@ -465,6 +537,50 @@ pub mod calc {
     pub const SHOW_MEANING: &str = "ورّيني التفسير";
 }
 
+pub mod desk {
+    pub const TABLET: &str = "التابلت والقلم";
+    pub const TABLET_SUB: &str = "القايمة الجانبية ولمحة القلم";
+    pub const MAC: &str = "الماك والكيبورد";
+    pub const MAC_SUB: &str = "القايمة الجانبية ولمحة الماوس والاختصارات";
+    pub const NAV_STYLE: &str = "القايمة الجانبية في الشاشة العريضة";
+    pub const NAV_LABELS: &str = "أيقونات وأسامي";
+    pub const NAV_SLIM: &str = "أيقونات بس";
+    // The pane labels are read by desk::Panes / ListDetail, which feature
+    // screens opt into one by one.
+    #[allow(dead_code)]
+    pub const SIDE_WAITING: &str = "الشرح وصفحة الكتاب هيظهروا هنا أول ما تجاوب.";
+    #[allow(dead_code)]
+    pub const SIDE_LABEL: &str = "الشرح";
+    #[allow(dead_code)]
+    pub const LIST_LABEL: &str = "القايمة";
+}
+
+pub mod hover {
+    pub const TITLE: &str = "اللمحة";
+    pub const PEN: &str = "لمحة بقلم S Pen";
+    pub const PEN_NOTE: &str = "قرّب القلم من اختصار أو اسم دوا من غير ما تلمس الشاشة، هيظهرلك معناه.";
+    pub const MOUSE: &str = "لمحة بالماوس";
+    pub const MOUSE_NOTE: &str =
+        "سيب الماوس ثانية على الكلمة، أو على رقم صفحة الكتاب، أو على اختيار بعد ما تجاوب.";
+    pub const UNVERIFIED: &str = "لسه ما اتراجعش";
+    pub const TERMS: &str = "مصطلح في القاموس";
+}
+
+pub mod keys {
+    pub const TITLE: &str = "اختصارات الكيبورد";
+    pub const OPEN: &str = "اعرض الاختصارات";
+    pub const CLOSE: &str = "اقفل";
+    pub const NOTE: &str = "بتشتغل على كيبورد التابلت والماك. على الماك استخدم ⌘ بدل Ctrl.";
+    pub const SCREENS: &str = "تروح لشاشة";
+    pub const SETTINGS: &str = "الإعدادات";
+    pub const REVEAL: &str = "تكشف الإجابة";
+    pub const RATE: &str = "تقيّم نفسك (من نسيت لسهل)";
+    pub const OPTIONS: &str = "تختار إجابة في سؤال الاختيارات";
+    pub const NEXT: &str = "اللي بعده";
+    pub const ESC: &str = "تقفل أي حاجة مفتوحة";
+    pub const HELP: &str = "القايمة دي";
+}
+
 pub mod verify {
     pub const GROUP: &str = "مراجعة المحتوى";
     pub const QUESTION: &str = "المحتوى ده مظبوط؟";
@@ -517,12 +633,20 @@ pub mod data {
     pub const EXPORT_ANDROID_HINT: &str =
         "تلاقيه من تطبيق الملفات أو من الكمبيوتر بالكابل، في Android/data/app.batna/files.";
     pub const EXPORT_FAILED: &str = "ما عرفتش أحفظ النسخة:";
+    pub const EXPORT_SAVE_TO: &str = "احفظها في Downloads أو Drive";
+    pub const EXPORT_SAVING: &str = "اختار مكان النسخة…";
+    pub const EXPORT_SAVED_AS: &str = "اتحفظت برّه التطبيق باسم";
+    pub const EXPORT_SAVED_OUT: &str = "اتحفظت في المكان اللي اخترته.";
+    pub const EXPORT_SAVE_CANCELLED: &str = "ما اخترتش مكان، النسخة لسه في فولدر التطبيق.";
+    pub const EXPORT_SAVE_FAILED: &str = "ما عرفتش أنقلها، النسخة لسه في فولدر التطبيق.";
     pub const IMPORT_TITLE: &str = "استرجع نسخة";
     pub const IMPORT_BODY: &str =
         "بيدمج النسخة مع اللي على الجهاز ده. مفيش حاجة بتتمسح، واللي اتعدّل بعدين هو اللي بيكسب.";
     pub const IMPORT_FOUND: &str = "نسخ لقيتها على الجهاز:";
     pub const IMPORT_PICK: &str = "أو اختار ملف";
     pub const IMPORT_PICK_FIRST: &str = "اختار ملف النسخة";
+    pub const IMPORT_PICKING: &str = "اختار الملف…";
+    pub const IMPORT_PICK_FAILED: &str = "ما عرفتش أفتح اختيار الملفات";
     pub const IMPORT_PASTE: &str = "أو الزق النص";
     pub const IMPORT_PASTED: &str = "نص ملزوق";
     pub const IMPORT_READ: &str = "اقرا النص";
@@ -546,6 +670,42 @@ pub mod data {
     pub const T_REVIEWS: &str = "المراجعات";
     pub const T_CHECKS: &str = "علاماتك على المحتوى";
     pub const T_SETTINGS: &str = "الإعدادات";
+}
+
+pub mod cloud {
+    pub const SECTION: &str = "المزامنة";
+    pub const SECTION_SUB: &str = "حسابك وأجهزتك";
+    pub const TITLE: &str = "المزامنة بين أجهزتك";
+    pub const INTRO: &str = "سجّل دخول بجوجل على الموبايل والتابلت والماك، واللي بتذاكره وعلاماتك على المحتوى هيبقوا على التلاتة. مجاني، وعلى سيرفر باطنة لوحده.";
+    pub const NOT_CONFIGURED: &str = "المزامنة لسه ما اتفعّلتش في النسخة دي. مذاكرتك محفوظة على الجهاز، وتقدر تنقلها بنسخة احتياطية من «بياناتك».";
+    pub const SIGN_IN: &str = "سجّل دخول بجوجل";
+    pub const SIGNING_IN: &str = "كمّل تسجيل الدخول في المتصفح، وبعدين ارجع هنا.";
+    pub const SIGNED_IN_AS: &str = "داخل بـ";
+    pub const SIGN_OUT: &str = "اخرج من الجهاز ده";
+    pub const CONNECTING: &str = "بيتصل";
+    pub const CATCHING_UP: &str = "بيجيب اللي فاتك";
+    pub const LIVE: &str = "متزامن";
+    pub const OFFLINE: &str = "مش متصل، هيحاول تاني لوحده";
+    pub const STOPPED: &str = "واقف";
+    pub const PENDING: &str = "تغيير مستني يترفع";
+    pub const LAST: &str = "آخر مزامنة";
+    pub const JUST_NOW: &str = "دلوقتي";
+    pub const DEVICES: &str = "أجهزتك";
+    pub const REFRESH: &str = "حدّث";
+    pub const THIS_DEVICE: &str = "الجهاز ده";
+    pub const DEVICE_OUT: &str = "خرج";
+    pub const NEVER_SYNCED: &str = "لسه ما اتزامنش";
+    pub const SIGN_OUT_DEVICE: &str = "خرّجه";
+    pub const LOADING: &str = "بيحمّل…";
+
+    pub const P_NOT_CONFIGURED: &str = "تسجيل الدخول لسه ما اتظبطش في النسخة دي.";
+    pub const P_NOT_ALLOWED: &str = "الحساب ده مش مسموح له. ادخل بالجيميل اللي متسجل في السيرفر.";
+    pub const P_CANCELLED: &str = "تسجيل الدخول اتلغى.";
+    pub const P_FAILED: &str = "تسجيل الدخول ما نجحش. جرّب تاني.";
+    pub const P_REMOTE: &str = "الجهاز ده اتخرّج من جهاز تاني. سجّل دخول تاني وقت ما تحب.";
+    pub const P_NETWORK: &str = "مش قادر يوصل للسيرفر دلوقتي. هيحاول تاني لوحده، ومذاكرتك محفوظة على الجهاز.";
+    pub const P_SERVER: &str = "السيرفر فيه مشكلة دلوقتي. هيحاول تاني لوحده.";
+    pub const P_OUTDATED: &str = "السيرفر أحدث من النسخة دي. حدّث باطنة.";
 }
 
 pub mod settings {
@@ -600,4 +760,177 @@ pub mod settings {
     pub const DIAG_REFRESH: &str = "حدّث";
     pub const DIAG_COPY: &str = "انسخ";
     pub const DIAG_COPIED: &str = "اتنسخ";
+}
+
+pub mod update {
+    // Settings › Updates (crates/app/src/update/view.rs).
+    pub const SECTION: &str = "التحديثات";
+    pub const SECTION_SUB: &str = "نسخة جديدة ومحتوى جديد";
+    pub const TITLE: &str = "التحديثات";
+    pub const THIS_BUILD: &str = "النسخة اللي معاك";
+    pub const BUILD: &str = "بناء";
+
+    // Why updates are off here.
+    pub const OFF_DEV: &str =
+        "دي نسخة تطوير، فمش بتدوّر على تحديثات. النسخ اللي على الموبايل والتابلت والماك هي اللي بتتحدّث.";
+    pub const OFF_KEY: &str = "التحديثات لسه مش شغالة: مفتاح التوقيع لسه ما اتعملش. أول نسخة ألفا هتيجي بيه.";
+    pub const OFF_PLATFORM: &str = "مفيش تحديثات منشورة للجهاز ده.";
+    pub const OFF_BUNDLE: &str = "باطنة شغال من فولدر البناء، مش من Batna.app، فمش هيتحدّث لوحده.";
+
+    // Where things stand.
+    pub const CHECKING: &str = "بيدوّر على تحديث…";
+    pub const CHECK_NOW: &str = "دوّر دلوقتي";
+    pub const UP_TO_DATE: &str = "معاك آخر نسخة";
+    pub const NOT_FOR_DEVICE: &str = "فيه نسخة أحدث، بس لسه مش منشورة للجهاز ده.";
+    pub const AVAILABLE: &str = "فيه نسخة جديدة";
+    pub const DOWNLOAD: &str = "نزّلها";
+    pub const DOWNLOADING: &str = "بينزّل";
+    pub const READY: &str = "النسخة الجديدة جاهزة";
+    pub const INSTALL_NOW: &str = "ثبّتها";
+    pub const INSTALL_RESTART: &str = "ثبّتها وافتح تاني";
+    pub const INSTALLING: &str = "بيثبّت…";
+    pub const INSTALLING_ANDROID: &str = "أندرويد ممكن يسألك توافق. مذاكرتك محفوظة ومش هتضيع.";
+    pub const NEEDS_PERMISSION: &str = "أندرويد محتاج إذن \"تثبيت تطبيقات غير معروفة\" لباطنة";
+    pub const OPEN_PERMISSION: &str = "افتح الإذن";
+    pub const TRY_AGAIN: &str = "جرّب تاني";
+    pub const INSTALLED: &str = "اتثبّتت";
+    pub const RESTART_NOW: &str = "افتح باطنة تاني";
+    pub const NEXT_LAUNCH: &str = "النسخة الجديدة هتشتغل أول ما تفتح باطنة تاني.";
+    pub const FAILED_NETWORK: &str = "مقدرش يوصل للتحديثات. هيجرّب تاني بعدين.";
+    pub const FAILED_VERIFY: &str = "التحديث ما عداش من الفحص، فما اتثبّتش. مفيش حاجة اتغيّرت.";
+    pub const FAILED_INSTALL: &str = "التثبيت ما كملش. النسخة اللي معاك شغالة زي ما هي.";
+    pub const TOO_NEW: &str = "التحديث ده محتاج نسخة أحدث من باطنة. ثبّتها بإيدك مرة واحدة.";
+    pub const KEY_CHANGED: &str = "مفتاح نسخ التجربة اتغيّر. ثبّت آخر نسخة تجربة بإيدك مرة واحدة.";
+    pub const WAITING_WIFI: &str = "هينزّلها لوحده أول ما تبقى على واي فاي.";
+    pub const LATER: &str = "بعدين";
+    pub const WHATS_NEW: &str = "الجديد";
+    pub const CONTENT_WAITING: &str = "محتوى جديد نزل، وهيظهر أول ما تفتح باطنة تاني.";
+
+    // Mode and channel.
+    pub const MODE: &str = "إزاي يتحدّث";
+    pub const MODE_AUTO: &str = "لوحده";
+    pub const MODE_AUTO_SUB: &str = "ينزّل على الواي فاي ويثبّت في وقت هادي، عمره ما يقطع مذاكرة.";
+    pub const MODE_NOTIFY: &str = "قولّي الأول";
+    pub const MODE_NOTIFY_SUB: &str = "يقولك إن فيه نسخة جديدة، وإنت تختار امتى.";
+    pub const MODE_OFF: &str = "لأ";
+    pub const MODE_OFF_SUB: &str = "بس لما تدوس \"دوّر دلوقتي\".";
+    pub const CHANNEL: &str = "القناة";
+    pub const CHANNEL_SUB: &str = "ألفا بتوصل الأول، والثابتة بتوصل آخر حاجة.";
+    pub const ALPHA: &str = "ألفا";
+    pub const BETA: &str = "بيتا";
+    pub const STABLE: &str = "ثابتة";
+    pub const PREVIEW: &str = "تجربة";
+    pub const PREVIEW_SUB: &str = "نسخة تجربة من CI: بتتحدّث من نسخ التجربة بس.";
+    pub const SAFETY: &str =
+        "كل تحديث متوقّع بمفتاح باطنة، وكل ملف بيتفحص قبل ما يتثبّت. مذاكرتك بتفضل على الجهاز زي ما هي.";
+    pub const CONTENT: &str = "المحاضرات الجديدة بتيجي مع التحديثات، حتى لو تحديث التطبيق نفسه مقفول.";
+    pub const MB: &str = "ميجا";
+
+    // The notifications Android shows around an install.
+    #[cfg_attr(not(target_os = "android"), allow(dead_code))]
+    pub const DONE_TITLE: &str = "باطنة اتحدّث";
+    #[cfg_attr(not(target_os = "android"), allow(dead_code))]
+    pub const DONE_BODY: &str = "افتحه وكمّل من مكانك.";
+    #[cfg_attr(not(target_os = "android"), allow(dead_code))]
+    pub const READY_TITLE: &str = "تحديث باطنة جاهز: دوس عشان تثبّته";
+}
+
+pub mod sound {
+    pub const TITLE: &str = "الأصوات والاهتزاز";
+    pub const BODY: &str = "صوت هادي مع الإجابة الصح ونغمة في آخر الجلسة. الإجابة الغلط مالهاش صوت.";
+    pub const SOUNDS: &str = "الأصوات";
+    pub const ON: &str = "شغّالة";
+    pub const OFF: &str = "مقفولة";
+    pub const RIGHT: &str = "صوت الإجابة الصح";
+    pub const END: &str = "نغمة آخر الجلسة";
+    pub const PICK_HINT: &str = "دوس على أي واحد تسمعه وتختاره.";
+    pub const VARIATION: &str = "صوت";
+    pub const VIBRATE: &str = "الاهتزاز";
+    pub const VIBRATE_BODY: &str = "لمسة خفيفة مع كل إجابة. بيمشي على إعداد الاهتزاز في الموبايل.";
+}
+
+pub mod remind {
+    pub const TITLE: &str = "باطنة";
+    pub const SECTION: &str = "التذكير";
+    pub const SECTION_SUB: &str = "تذكير هادي بمراجعة اليوم";
+    pub const PHONE_ONLY: &str = "التذكير بيرن على الموبايل. على الماك مفيش تذكير لسه.";
+    pub const DAILY: &str = "تذكير المذاكرة اليومي";
+    pub const DAILY_BODY: &str = "إشعار واحد في المعاد اللي تختاره، فيه عدد المراجعات المستنياك.";
+    pub const ON: &str = "شغّال";
+    pub const OFF: &str = "مقفول";
+    pub const TIMES: &str = "المواعيد";
+    pub const TIME: &str = "معاد التذكير";
+    pub const ADD: &str = "زوّد معاد";
+    pub const REMOVE: &str = "شيل";
+    pub const RULES: &str =
+        "بيرن بس في أيام المذاكرة اللي في خطة الامتحان، ولو خلّصت مراجعات النهارده مش هيرن تاني لحد بكرة.";
+    pub const HERE: &str = "يرن على الجهاز ده";
+    pub const HERE_BODY: &str = "جهاز واحد بس يرن، عشان الموبايل والتابلت ما يرنّوش مع بعض.";
+    pub const BLOCKED: &str = "الإشعارات مقفولة لباطنة، فالتذكير مش هيظهر.";
+    pub const ALLOW: &str = "اسمح بالإشعارات";
+    pub const OPEN_NOTIFICATIONS: &str = "افتح إعدادات الإشعارات";
+    pub const BATTERY: &str =
+        "لو التذكير ما رنّش، خلّي البطارية لباطنة «من غير قيود» عشان الموبايل ما ينيّمهاش.";
+    pub const OPEN_APP: &str = "افتح إعدادات التطبيق";
+
+    /// The reminder line, with the reviews due that day when known.
+    pub fn text(due: Option<u32>) -> String {
+        match due {
+            Some(0) | None => "وقت جلسة قصيرة. كارت واحد أحسن من مفيش.".into(),
+            Some(1) => "عندك مراجعة واحدة النهارده. دقيقة وتخلص.".into(),
+            Some(n) => format!("عندك {n} مراجعة النهارده. يلا نبدأ بجلسة قصيرة."),
+        }
+    }
+}
+
+pub mod onboard {
+    pub const TITLE: &str = "أهلاً في باطنة";
+    pub const STEP: &str = "خطوة";
+    pub const OF: &str = "من";
+    pub const NEXT: &str = "التالي";
+    pub const BACK: &str = "رجوع";
+    pub const DONE: &str = "يلا نبدأ";
+    pub const SKIP_ALL: &str = "بعدين";
+    pub const EXAM_TITLE: &str = "امتحانك إمتى؟";
+    pub const EXAM_BODY: &str =
+        "عشان أوزّع المحاضرات والمراجعة على الأيام اللي فاضلة بهدوء. لو لسه مش متأكد، سيبها فاضية.";
+    pub const EXAM_DAY: &str = "يوم الامتحان";
+    pub const PICK_FUTURE: &str = "اختار يوم بعد النهارده.";
+    pub const DAYS_TITLE: &str = "بتذاكر أنهي أيام في الأسبوع؟";
+    pub const DAYS_BODY: &str = "الخطة والتذكير هيمشوا على الأيام دي بس. أيام الراحة راحة.";
+    pub const PICK_A_DAY: &str = "اختار يوم واحد على الأقل.";
+    pub const MINUTES_TITLE: &str = "قد إيه في اليوم؟";
+    pub const MINUTES_BODY: &str = "طول الجلسة العادي. تقدر تغيّره قبل أي جلسة.";
+    pub const MIN: &str = "دقيقة";
+    pub const STUDIED_TITLE: &str = "ذاكرت أنهي محاضرات قبل كده؟";
+    pub const STUDIED_BODY: &str = "علّم اللي قريته قبل كده. لو مفيش، كمّل عادي.";
+    pub const REMIND_TITLE: &str = "أفكّرك إمتى؟";
+    pub const REMIND_BODY: &str = "إشعار هادي فيه عدد المراجعات المستنياك. بيرن على الموبايل بس.";
+    pub const ADD_TIME: &str = "زوّد معاد";
+    pub const REMOVE: &str = "شيل";
+    pub const NO_REMINDERS: &str = "من غير تذكير. تقدر تشغّله بعدين من الإعدادات.";
+    pub const THEME_TITLE: &str = "تحب الألوان إزاي؟";
+    pub const THEME_BODY: &str = "«نبطشية» غامق ودافي، للمذاكرة بالليل.";
+    pub const REOPEN_TITLE: &str = "أسئلة البداية";
+    pub const REOPEN_BODY: &str = "يوم الامتحان، أيام المذاكرة، طول الجلسة، التذكير والألوان، في مكان واحد.";
+    pub const REOPEN: &str = "افتحها تاني";
+}
+
+pub mod recap {
+    pub const TODAY_1: &str = "النهارده جاوبت";
+    pub const TODAY_ANSWERS: &str = "سؤال";
+    pub const AND: &str = "واتعلمت";
+    pub const TODAY_NEW: &str = "حاجة جديدة";
+    pub const DONE_REST: &str = "مراجعة النهارده خلصت، استريح. بكرة عندك";
+    pub const REVIEWS: &str = "مراجعة.";
+    pub const LEFT_1: &str = "فاضل";
+    pub const LEFT_2: &str = "مراجعة لو عندك وقت، ولو لأ بكرة موجودة.";
+    pub const WEEK_TITLE: &str = "آخر ٧ أيام";
+    pub const WEEK_LEARNED_1: &str = "اتعلمت";
+    pub const WEEK_LEARNED_2: &str = "حاجة جديدة في";
+    pub const WEEK_DAYS: &str = "أيام.";
+    pub const WEEK_RETENTION: &str = "بتفتكر صح:";
+    pub const WEEK_WEAK: &str = "يستاهلوا رجوع:";
+    pub const WEEK_EXAM_1: &str = "فاضل على الامتحان";
+    pub const WEEK_EXAM_2: &str = "يوم.";
 }

@@ -1,0 +1,162 @@
+//! Plans the next few study reminders on the device, so they work offline.
+//! Pattern adapted from Kabar's `crates/app/src/coach/notify.rs` (main):
+//! Rust words and times them, and the platform arms each one from its
+//! wall-clock `date` and `time` in the device's own zone, so Egypt's
+//! daylight-saving switch keeps 19:00 at 19:00.
+
+use batna_core::plan::Day;
+use serde::Serialize;
+
+/// Reminders armed ahead, enough for a few days without opening the app.
+pub const UPCOMING: usize = 6;
+
+/// How far ahead to look for study days, in days.
+const HORIZON: i32 = 14;
+
+const DAY_MS: i64 = 86_400_000;
+
+/// One notification, as `ReminderBridge.schedule` reads it. `at` is the same
+/// moment by the stored UTC offset, the fallback when the zone is unknown.
+#[derive(Clone, Debug, PartialEq, Eq, Serialize)]
+pub struct Scheduled {
+    pub at: u64,
+    pub date: String,
+    pub time: String,
+    pub title: String,
+    pub text: String,
+}
+
+/// Everything [`schedule`] reads.
+#[derive(Clone, Debug)]
+pub struct Inputs<'a> {
+    /// This device rings (phone by default).
+    pub here: bool,
+    /// Reminder times as minutes after local midnight.
+    pub times: &'a [u16],
+    /// Study days, Saturday first (`PlanSettings::weekdays`).
+    pub weekdays: [bool; 7],
+    /// Reviews due per day, today first (overdue counted today).
+    pub due: &'a [u32],
+    /// Today's target is already met, so today stays quiet.
+    pub target_met: bool,
+    pub now_ms: u64,
+    pub utc_offset_min: i32,
+}
+
+/// What to arm now, soonest first. Empty on a quiet device or with no times.
+pub fn schedule(i: &Inputs) -> Vec<Scheduled> {
+    if !i.here || i.times.is_empty() || !i.weekdays.contains(&true) {
+        return Vec::new();
+    }
+    let mut times = i.times.to_vec();
+    times.sort_unstable();
+    times.dedup();
+    let offset_ms = i64::from(i.utc_offset_min) * 60_000;
+    let local_now = i.now_ms as i64 + offset_ms;
+    let today = Day::from_unix_ms(i.now_ms as i64, i.utc_offset_min, 0);
+    let midnight = local_now - local_now.rem_euclid(DAY_MS);
+    let mut out = Vec::new();
+    for d in 0..HORIZON {
+        let day = today.plus(d);
+        if !i.weekdays[day.weekday()] || (d == 0 && i.target_met) {
+            continue;
+        }
+        let due = i.due.get(d as usize).copied();
+        for &t in &times {
+            let local = midnight + i64::from(d) * DAY_MS + i64::from(t) * 60_000;
+            if local <= local_now {
+                continue;
+            }
+            out.push(Scheduled {
+                at: (local - offset_ms).max(0) as u64,
+                date: day.iso(),
+                time: format!("{:02}:{:02}", t / 60, t % 60),
+                title: crate::i18n::remind::TITLE.into(),
+                text: crate::i18n::remind::text(due),
+            });
+            if out.len() == UPCOMING {
+                return out;
+            }
+        }
+    }
+    out
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    const CAIRO: i32 = 180;
+    /// 2026-10-27 (a Tuesday) 08:00 Cairo summer time.
+    const NOW: u64 = 1_793_077_200_000;
+    const ALL: [bool; 7] = [true; 7];
+
+    fn inputs<'a>(times: &'a [u16], due: &'a [u32]) -> Inputs<'a> {
+        Inputs {
+            here: true,
+            times,
+            weekdays: ALL,
+            due,
+            target_met: false,
+            now_ms: NOW,
+            utc_offset_min: CAIRO,
+        }
+    }
+
+    #[test]
+    fn now_is_a_tuesday_in_cairo() {
+        let today = Day::from_unix_ms(NOW as i64, CAIRO, 0);
+        assert_eq!(today.iso(), "2026-10-27");
+        assert_eq!(today.weekday(), 3, "Saturday-first: a Tuesday");
+    }
+
+    #[test]
+    fn reminders_follow_the_times_and_skip_past_ones() {
+        let items = schedule(&inputs(&[19 * 60, 7 * 60, 9 * 60], &[12, 30]));
+        assert_eq!(items.len(), UPCOMING);
+        let when: Vec<_> = items.iter().map(|s| (s.date.as_str(), s.time.as_str())).collect();
+        assert_eq!(
+            when,
+            [
+                ("2026-10-27", "09:00"),
+                ("2026-10-27", "19:00"),
+                ("2026-10-28", "07:00"),
+                ("2026-10-28", "09:00"),
+                ("2026-10-28", "19:00"),
+                ("2026-10-29", "07:00"),
+            ]
+        );
+        assert_eq!(items[0].at, NOW + 3_600_000);
+        assert!(items[0].text.contains("12"), "{}", items[0].text);
+        assert!(items[2].text.contains("30"), "{}", items[2].text);
+        assert!(items.iter().all(|s| !s.title.is_empty() && !s.text.contains('{')));
+    }
+
+    #[test]
+    fn today_stays_quiet_once_the_target_is_met() {
+        let items = schedule(&Inputs { target_met: true, ..inputs(&[19 * 60], &[5]) });
+        assert_eq!(items[0].date, "2026-10-28");
+    }
+
+    #[test]
+    fn rest_days_are_skipped() {
+        // Tuesday and Wednesday off (Saturday first).
+        let weekdays = [true, true, true, false, false, true, true];
+        let items = schedule(&Inputs { weekdays, ..inputs(&[19 * 60], &[]) });
+        assert_eq!(items[0].date, "2026-10-29");
+    }
+
+    #[test]
+    fn a_quiet_device_or_no_times_arms_nothing() {
+        assert!(schedule(&Inputs { here: false, ..inputs(&[19 * 60], &[]) }).is_empty());
+        assert!(schedule(&inputs(&[], &[])).is_empty());
+        assert!(schedule(&Inputs { weekdays: [false; 7], ..inputs(&[19 * 60], &[]) }).is_empty());
+    }
+
+    #[test]
+    fn the_bridge_reads_this_json_shape() {
+        let items = schedule(&inputs(&[19 * 60], &[3]));
+        let json = serde_json::to_string(&items[..1]).unwrap();
+        assert!(json.starts_with(r#"[{"at":"#) && json.contains(r#""time":"19:00""#), "{json}");
+    }
+}

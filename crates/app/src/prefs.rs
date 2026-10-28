@@ -11,6 +11,9 @@ use batna_core::theme::Theme;
 const FILE: &str = "device-prefs.txt";
 const THEME: &str = "theme";
 const TEXT_SIZE: &str = "text_size";
+const NAV_STYLE: &str = "nav_style";
+const PEN_HOVER: &str = "pen_hover";
+const MOUSE_HOVER: &str = "mouse_hover";
 
 /// The app's own data folder: the local database and device files live here.
 pub fn data_dir() -> Option<PathBuf> {
@@ -69,10 +72,53 @@ impl TextSize {
     }
 }
 
+/// The sidebar on wide windows (tablet landscape, the Mac).
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub enum NavStyle {
+    /// Icons with labels.
+    #[default]
+    Labels,
+    /// The narrow icon rail, as on medium widths.
+    Slim,
+}
+
+impl NavStyle {
+    pub const ALL: [Self; 2] = [Self::Labels, Self::Slim];
+
+    /// Stored value and `data-nav-style` on `<html>` (nav.css).
+    pub fn as_str(self) -> &'static str {
+        match self {
+            Self::Labels => "labels",
+            Self::Slim => "slim",
+        }
+    }
+
+    fn parse(s: &str) -> Self {
+        Self::ALL.into_iter().find(|t| t.as_str() == s).unwrap_or_default()
+    }
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct DevicePrefs {
     pub theme: Theme,
     pub text_size: TextSize,
+    pub nav_style: NavStyle,
+    /// Peeks while the S Pen hovers (Settings › Tablet).
+    pub pen_hover: bool,
+    /// Peeks when the mouse rests on a word (Settings › Mac).
+    pub mouse_hover: bool,
+}
+
+impl Default for DevicePrefs {
+    fn default() -> Self {
+        Self {
+            theme: Theme::default(),
+            text_size: TextSize::default(),
+            nav_style: NavStyle::default(),
+            pen_hover: true,
+            mouse_hover: true,
+        }
+    }
 }
 
 impl DevicePrefs {
@@ -97,11 +143,22 @@ impl DevicePrefs {
         Self {
             theme: map.get(THEME).map_or_else(Theme::default, |v| Theme::parse(v)),
             text_size: map.get(TEXT_SIZE).map_or_else(TextSize::default, |v| TextSize::parse(v)),
+            nav_style: map.get(NAV_STYLE).map_or_else(NavStyle::default, |v| NavStyle::parse(v)),
+            pen_hover: map.get(PEN_HOVER) != Some(&"off"),
+            mouse_hover: map.get(MOUSE_HOVER) != Some(&"off"),
         }
     }
 
     fn render(&self) -> String {
-        format!("{THEME}={}\n{TEXT_SIZE}={}\n", self.theme.as_str(), self.text_size.as_str())
+        let on_off = |on: bool| if on { "on" } else { "off" };
+        format!(
+            "{THEME}={}\n{TEXT_SIZE}={}\n{NAV_STYLE}={}\n{PEN_HOVER}={}\n{MOUSE_HOVER}={}\n",
+            self.theme.as_str(),
+            self.text_size.as_str(),
+            self.nav_style.as_str(),
+            on_off(self.pen_hover),
+            on_off(self.mouse_hover),
+        )
     }
 
     /// The page-wide CSS for these choices: colour tokens and root text size.
@@ -116,14 +173,20 @@ mod tests {
 
     #[test]
     fn round_trips_and_ignores_junk() {
-        let p = DevicePrefs { theme: Theme::NightShift, text_size: TextSize::Larger };
+        let p = DevicePrefs {
+            theme: Theme::NightShift,
+            text_size: TextSize::Larger,
+            nav_style: NavStyle::Slim,
+            pen_hover: false,
+            mouse_hover: true,
+        };
         assert_eq!(DevicePrefs::parse(&p.render()), p);
         assert_eq!(DevicePrefs::parse("theme=neon\nnonsense\ntext_size=huge"), DevicePrefs::default());
     }
 
     #[test]
     fn css_carries_theme_and_size() {
-        let p = DevicePrefs { theme: Theme::Paper, text_size: TextSize::Large };
+        let p = DevicePrefs { theme: Theme::Paper, text_size: TextSize::Large, ..DevicePrefs::default() };
         let css = p.css();
         assert!(css.contains("--bg:#f6f7f4") && css.ends_with("html{font-size:112%;}"), "{css}");
     }

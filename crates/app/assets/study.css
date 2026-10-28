@@ -37,7 +37,18 @@
 @media (max-width: 599px) { .st-actions > * { flex: 1 1 100%; } }
 
 /* ---------- progress ---------- */
-.st-progress { display: flex; align-items: center; gap: var(--sp-3); }
+.st-progress {
+  /* Stays in view while a long item scrolls, like the lesson player's .ls-bar (#234). */
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding-block: var(--sp-2);
+  background: var(--bg);
+}
+.st-progress > span, .st-progress > button { white-space: nowrap; }
 .st-bar { flex: 1; block-size: 6px; border-radius: var(--radius-pill); background: var(--line); overflow: hidden; }
 .st-bar-fill { block-size: 100%; background: var(--good); transition: inline-size var(--dur) var(--ease); }
 

@@ -38,14 +38,16 @@ pub fn use_hover() {
     });
 }
 
-/// The "Book p. 14" chip. Hovering it shows the item's short `src.quote`
-/// (when there is one), so the source can be checked without the book.
+/// The "Book p. 14" chip. Hovering or tapping it shows the item's short
+/// `src.quote` (when there is one), so the source can be checked without
+/// the book. With no quote it's a plain label, nothing to press.
 #[component]
 pub fn BookPage(page: u32, quote: Option<String>) -> Element {
     rsx! {
         span {
             class: "chip page",
             "data-peek": quote.unwrap_or_default(),
+            "data-peek-note": crate::i18n::hover::FROM_BOOK,
             bdi { {crate::i18n::cite::page(page)} }
         }
     }

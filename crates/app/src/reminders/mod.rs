@@ -72,7 +72,7 @@ pub fn use_local_reminders() {
         let prefs = PREFS.read().clone();
         let here = *HERE.read();
         let weekdays = crate::plan::SETTINGS.read().weekdays;
-        if !native::LOCAL {
+        if !native::local() {
             return;
         }
         let now = now_ms();
@@ -121,7 +121,7 @@ pub fn RemindSection() -> Element {
     let unrestricted = native::battery_unrestricted();
     let on_off = |on: bool| if on { tx::ON } else { tx::OFF };
 
-    if !native::LOCAL {
+    if !native::local() {
         return rsx! {
             section { class: "card",
                 h2 { {tx::SECTION} }
@@ -233,6 +233,10 @@ pub fn RemindSection() -> Element {
                         button { onclick: move |_| native::request_permission(), {tx::ALLOW} }
                         button { class: "secondary", onclick: move |_| native::open_notification_settings(), {tx::OPEN_NOTIFICATIONS} }
                     }
+                }
+                if here && cfg!(target_os = "macos") {
+                    p { class: "muted small", {tx::MAC_HINT} }
+                    button { class: "secondary", onclick: move |_| native::open_notification_settings(), {tx::OPEN_NOTIFICATIONS} }
                 }
                 if here && unrestricted == Some(false) {
                     p { class: "muted small", {tx::BATTERY} }

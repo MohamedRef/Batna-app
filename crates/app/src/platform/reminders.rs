@@ -1,16 +1,28 @@
-//! Local notifications for the daily study reminder, through
-//! `app.batna.ReminderBridge` (android/). Android only for now; elsewhere
-//! every call is a no-op and [`LOCAL`] is false, so Settings hides the rows.
-// Adapted from kabar-app main: crates/app/src/platform/android.rs (reminders).
+//! Local notifications for the daily study reminder: through
+//! `app.batna.ReminderBridge` (android/) on Android, and
+//! UNUserNotificationCenter from the bundled Batna.app on the Mac. Elsewhere
+//! (and from `cargo run`, which has no bundle) every call is a no-op and
+//! [`local`] is false, so Settings hides the rows.
+// Adapted from kabar-app main: crates/app/src/platform/android.rs and
+// crates/app/src/platform/macos.rs (reminders).
 
-/// This platform arms reminders itself.
-pub const LOCAL: bool = cfg!(target_os = "android");
+/// This device can arm reminders itself.
+pub fn local() -> bool {
+    #[cfg(target_os = "macos")]
+    return mac::bundled();
+    #[cfg(not(target_os = "macos"))]
+    cfg!(target_os = "android")
+}
 
 /// Replaces the armed reminders with `json` (`[]` clears them).
 pub fn schedule(json: &str) {
     #[cfg(target_os = "android")]
     report(android::schedule(json));
-    #[cfg(not(target_os = "android"))]
+    #[cfg(target_os = "macos")]
+    if let Err(e) = mac::schedule(json) {
+        eprintln!("Mac reminders: {e}");
+    }
+    #[cfg(not(any(target_os = "android", target_os = "macos")))]
     let _ = json;
 }
 
@@ -39,16 +51,23 @@ pub fn battery_unrestricted() -> Option<bool> {
     None
 }
 
-/// Android 13+: the system prompt for notifications, if not granted yet.
+/// The system prompt for notifications, if not answered yet (Android 13+,
+/// and the Mac).
 pub fn request_permission() {
     #[cfg(target_os = "android")]
     report(android::activity_call("requestPermission"));
+    #[cfg(target_os = "macos")]
+    mac::request();
 }
 
-/// Batna's notification page in Android's settings.
+/// Batna's notification page in the system settings.
 pub fn open_notification_settings() {
     #[cfg(target_os = "android")]
     report(android::activity_call("openNotificationSettings"));
+    #[cfg(target_os = "macos")]
+    let _ = std::process::Command::new("open")
+        .arg("x-apple.systempreferences:com.apple.Notifications-Settings.extension")
+        .spawn();
 }
 
 /// Batna's app page in Android's settings (battery: Unrestricted).
@@ -146,5 +165,89 @@ mod android {
             "openNotificationSettings" => jni_str!("openNotificationSettings"),
             _ => jni_str!("openAppSettings"),
         }
+    }
+}
+
+/// The bundled Mac app's notifications. UNUserNotificationCenter needs a real
+/// bundle (`app.batna`): from `cargo run` there is none and the framework
+/// would abort, so everything checks for one first. Calendar triggers fire at
+/// the local date and time in the Mac's own zone, so daylight saving never
+/// moves a reminder.
+#[cfg(target_os = "macos")]
+mod mac {
+    use block2::RcBlock;
+    use objc2::runtime::Bool;
+    use objc2_foundation::{NSBundle, NSDateComponents, NSError, NSString};
+    use objc2_user_notifications::{
+        UNAuthorizationOptions, UNCalendarNotificationTrigger, UNMutableNotificationContent,
+        UNNotificationRequest, UNUserNotificationCenter,
+    };
+    use serde::Deserialize;
+
+    #[derive(Deserialize)]
+    struct Item {
+        date: String,
+        time: String,
+        title: String,
+        text: String,
+    }
+
+    pub fn bundled() -> bool {
+        NSBundle::mainBundle().bundleIdentifier().is_some()
+    }
+
+    pub fn request() {
+        if !bundled() {
+            return;
+        }
+        let done = RcBlock::new(|granted: Bool, _error: *mut NSError| {
+            if !granted.as_bool() {
+                eprintln!("notifications not allowed on this Mac");
+            }
+        });
+        UNUserNotificationCenter::currentNotificationCenter()
+            .requestAuthorizationWithOptions_completionHandler(
+                UNAuthorizationOptions::Alert | UNAuthorizationOptions::Sound,
+                &done,
+            );
+    }
+
+    /// Replaces Batna's pending notifications with `json`'s.
+    pub fn schedule(json: &str) -> Result<(), String> {
+        if !bundled() {
+            return Ok(());
+        }
+        let items: Vec<Item> = serde_json::from_str(json).map_err(|e| e.to_string())?;
+        let center = UNUserNotificationCenter::currentNotificationCenter();
+        center.removeAllPendingNotificationRequests();
+        for (i, item) in items.iter().enumerate() {
+            let (Some((y, mo, d)), Some((h, mi))) = (ymd(&item.date), hm(&item.time)) else { continue };
+            let when = NSDateComponents::new();
+            when.setYear(y);
+            when.setMonth(mo);
+            when.setDay(d);
+            when.setHour(h);
+            when.setMinute(mi);
+            let trigger =
+                UNCalendarNotificationTrigger::triggerWithDateMatchingComponents_repeats(&when, false);
+            let content = UNMutableNotificationContent::new();
+            content.setTitle(&NSString::from_str(&item.title));
+            content.setBody(&NSString::from_str(&item.text));
+            let id = NSString::from_str(&format!("batna.reminder.{i}"));
+            let request =
+                UNNotificationRequest::requestWithIdentifier_content_trigger(&id, &content, Some(&trigger));
+            center.addNotificationRequest_withCompletionHandler(&request, None);
+        }
+        Ok(())
+    }
+
+    fn ymd(s: &str) -> Option<(isize, isize, isize)> {
+        let mut parts = s.split('-').map(|p| p.parse().ok());
+        Some((parts.next()??, parts.next()??, parts.next()??))
+    }
+
+    fn hm(s: &str) -> Option<(isize, isize)> {
+        let (h, m) = s.split_once(':')?;
+        Some((h.parse().ok()?, m.parse().ok()?))
     }
 }

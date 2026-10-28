@@ -15,6 +15,7 @@ pub mod nav {
     pub const ORAL: &str = "شفوي";
     pub const STATS: &str = "تقدّمي";
     pub const SETTINGS: &str = "الإعدادات";
+    pub const MORE: &str = "المزيد";
 }
 
 pub mod today {

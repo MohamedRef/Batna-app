@@ -361,6 +361,7 @@ pub mod bank {
     pub const BY_LECTURE: &str = "حسب المحاضرة";
     pub const BY_TOPIC: &str = "حسب الموضوع";
     pub const WEAK: &str = "ابدأ مراجعتك بدول";
+    pub const START_WITH_WRONG: &str = "ابدأ بالأسئلة اللي غلطت فيها تحت، كل واحد معاه شرحه وصفحته.";
     pub const ALL_STRONG: &str = "مفيش موضوع تحت 60٪. شغل حلو.";
     pub const REVIEW: &str = "راجع الأسئلة";
     pub const SHOW_ALL: &str = "الكل";

@@ -88,6 +88,7 @@ mod tests {
             row_id: "hb.L01.001".into(),
             kind,
             hlc: Hlc { wall_ms, counter: 0, device: device.into() },
+            relay: false,
             payload: (kind != OpKind::Delete).then(|| json!({ "status": "known" })),
         }
     }

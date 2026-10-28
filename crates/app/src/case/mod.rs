@@ -149,7 +149,7 @@ pub fn ItemMeta(lecture: String, item_id: String, on_back: EventHandler) -> Elem
     let unverified = find_item(&item_id).is_some_and(|(_, i)| i.status == Status::Unverified);
     rsx! {
         div { class: "player-meta",
-            button { class: "link-button", "aria-keyshortcuts": "Escape", onclick: move |_| on_back.call(()),
+            button { class: "btn-link", "aria-keyshortcuts": "Escape", onclick: move |_| on_back.call(()),
                 span { aria_hidden: "true", "→ " }
                 {tx::BACK}
             }
@@ -254,7 +254,7 @@ pub fn CasePlayer(item_id: String, on_back: EventHandler) -> Element {
                                 }
                             }
                         } else if !shown() {
-                            button { class: "btn-primary", "aria-keyshortcuts": "Space", onclick: move |_| shown.set(true), {tx::SHOW_ANSWER} }
+                            button { class: "btn btn-primary", "aria-keyshortcuts": "Space", onclick: move |_| shown.set(true), {tx::SHOW_ANSWER} }
                         }
                         if picked().is_some() || shown() {
                             // Brought into view on the phone, where it would
@@ -281,13 +281,13 @@ pub fn CasePlayer(item_id: String, on_back: EventHandler) -> Element {
                                 }
                                 if shown() && !answered {
                                     div { class: "row",
-                                        button { class: "btn-good", "aria-keyshortcuts": "3", onclick: move |_| answer(true, None), {tx::GOT_IT} }
-                                        button { class: "btn-secondary", "aria-keyshortcuts": "1", onclick: move |_| answer(false, None), {tx::MISSED} }
+                                        button { class: "btn btn-good", "aria-keyshortcuts": "3", onclick: move |_| answer(true, None), {tx::GOT_IT} }
+                                        button { class: "btn btn-secondary", "aria-keyshortcuts": "1", onclick: move |_| answer(false, None), {tx::MISSED} }
                                     }
                                 }
                                 if answered {
                                     button {
-                                        class: "btn-primary",
+                                        class: "btn btn-primary",
                                         "aria-keyshortcuts": "Enter",
                                         onclick: {
                                             let record_id = record_id.clone();
@@ -385,8 +385,8 @@ fn Summary(
             }
             if let Some(u) = update { p { class: "small update", "{tx::UPDATE}: " bdi { "{u}" } } }
             div { class: "row",
-                button { class: "btn-secondary", "aria-keyshortcuts": "Space", onclick: move |_| on_again.call(()), {tx::AGAIN} }
-                button { class: "btn-primary", "aria-keyshortcuts": "Enter", onclick: move |_| on_back.call(()), {tx::BACK} }
+                button { class: "btn btn-secondary", "aria-keyshortcuts": "Space", onclick: move |_| on_again.call(()), {tx::AGAIN} }
+                button { class: "btn btn-primary", "aria-keyshortcuts": "Enter", onclick: move |_| on_back.call(()), {tx::BACK} }
             }
         }
     }

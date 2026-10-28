@@ -56,6 +56,45 @@ jobs:
           export CARGO_TARGET_AARCH64_LINUX_ANDROID_LINKER="$BIN/aarch64-linux-android28-clang"
           cargo clippy -p batna-app --target aarch64-linux-android --no-default-features --features mobile -- -D warnings
 
+  macos:
+    # The Mac-only code (the .app swap for updates, the Mac menu, the Keychain
+    # session) never compiles on Linux. Free on a public repo. Not a required
+    # check, so a slow Mac runner never blocks a merge, but it runs on every
+    # PR so a break shows up before `just bundle-mac` does.
+    # adapted from kabar-app main: .github/workflows/ci.yml (macos)
+    name: Mac app compiles
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          # dx strips the release binary with rust-objcopy, which needs
+          # libLLVM from llvm-tools.
+          components: clippy, llvm-tools
+      - uses: Swatinem/rust-cache@v2
+        with:
+          key: macos
+      - run: cargo clippy -p batna-app --all-targets -- -D warnings
+      - run: cargo test -p batna-app
+      # Built from source: the prebuilt macOS dx links Homebrew's OpenSSL at
+      # the Intel path, which Apple-silicon runners don't have.
+      - name: Install dx 0.7.10
+        run: |
+          if ! dx --version 2>/dev/null | grep -q '0.7.10'; then
+            cargo install dioxus-cli --version 0.7.10 --locked
+          fi
+      - name: Bundle Batna.app
+        run: |
+          cd crates/app
+          if ! dx bundle --platform macos --release --package-types macos --out-dir ../../dist/mac > ../../dx-bundle.log 2>&1; then
+            grep -iE 'error|failed|panick|not found|no such' ../../dx-bundle.log | grep -v ' INFO Compiled' | tail -n 9 | sed 's/^/::error::/'
+            exit 1
+          fi
+          tail -n 5 ../../dx-bundle.log
+          app="$(find ../../dist/mac -maxdepth 3 -name '*.app' -print -quit)"
+          test -n "$app"
+          plutil -lint "$app/Contents/Info.plist"
+
   worker:
     name: Batna Cloud Worker compiles (wasm32)
     runs-on: ubuntu-24.04

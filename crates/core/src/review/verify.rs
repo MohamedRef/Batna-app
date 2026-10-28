@@ -256,6 +256,11 @@ pub struct VerdictEntry {
     pub note: Option<String>,
     #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
     pub edit: Edit,
+    /// [`fingerprint`] of the item as he judged it, so `batna-tools` never
+    /// approves or applies a verdict to text that changed since (#18).
+    /// Missing in exports made before this field existed.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub fingerprint: Option<String>,
 }
 
 impl Verdicts {
@@ -272,6 +277,7 @@ impl Verdicts {
                 at: rfc3339(j.at_ms),
                 note: j.note.clone(),
                 edit: j.edit.clone(),
+                fingerprint: Some(j.fingerprint.clone()),
             })
             .collect();
         verdicts.sort_by(|a, b| a.id.cmp(&b.id));

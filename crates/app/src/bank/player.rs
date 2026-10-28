@@ -25,6 +25,18 @@ pub fn Player() -> Element {
     let last = at + 1 == n;
     let cells: Vec<(usize, bool, bool)> =
         p.answers.iter().enumerate().map(|(i, a)| (i, a.chosen.is_some(), a.flagged)).collect();
+    let flagged = p.answers.iter().filter(|a| a.flagged).count();
+    let first_blank = p.answers.iter().position(|a| a.chosen.is_none());
+    // A timed paper with blanks or flags asks once before it goes in.
+    let mut confirming = use_signal(|| false);
+    let submit = move |_| {
+        if answered < n || flagged > 0 {
+            let mut confirming = confirming;
+            confirming.set(true);
+        } else {
+            finish();
+        }
+    };
 
     rsx! {
         div { class: "bank-run", "data-mode": if timed { "timed" } else { "tutor" },
@@ -37,7 +49,7 @@ pub fn Player() -> Element {
                         span { class: "muted small", "{tx::RIGHT} " bdi { "{right}/{answered}" } }
                     }
                     button {
-                        class: "link",
+                        class: "btn-link",
                         title: if timed { tx::LEAVE_TIMED_HINT } else { "" },
                         onclick: move |_| leave(),
                         {tx::LEAVE}
@@ -55,9 +67,9 @@ pub fn Player() -> Element {
                 }
                 div { class: "run-actions",
                     if timed {
-                        button { class: "button ghost", disabled: at == 0, onclick: move |_| go(at.saturating_sub(1)), {tx::PREV} }
+                        button { class: "btn btn-ghost", disabled: at == 0, onclick: move |_| go(at.saturating_sub(1)), {tx::PREV} }
                         button {
-                            class: "button ghost",
+                            class: "btn btn-ghost",
                             "aria-pressed": if a.flagged { "true" } else { "false" },
                             onclick: move |_| toggle_flag(),
                             if a.flagged { "⚑ {tx::FLAGGED}" } else { "⚐ {tx::FLAG}" }
@@ -65,16 +77,16 @@ pub fn Player() -> Element {
                     }
                     if last {
                         button {
-                            class: "button primary",
+                            class: "btn btn-primary",
                             disabled: !timed && a.chosen.is_none(),
                             // A whole timed paper never goes in on a stray Enter.
                             "aria-keyshortcuts": if timed { "" } else { "Enter" },
-                            onclick: move |_| finish(),
+                            onclick: move |e| if timed { submit(e) } else { finish() },
                             if timed { {tx::SUBMIT} } else { {tx::FINISH} }
                         }
                     } else {
                         button {
-                            class: "button primary",
+                            class: "btn btn-primary",
                             disabled: !timed && a.chosen.is_none(),
                             "aria-keyshortcuts": "Enter",
                             onclick: move |_| go(at + 1),
@@ -100,7 +112,74 @@ pub fn Player() -> Element {
                         }
                     }
                     p { class: "muted small", bdi { "{n - answered}" } " {tx::UNANSWERED}" }
-                    button { class: "button primary", onclick: move |_| finish(), {tx::SUBMIT} }
+                    button { class: "btn btn-primary", onclick: submit, {tx::SUBMIT} }
+                }
+            }
+            if timed && confirming() {
+                ConfirmSubmit {
+                    blank: n - answered,
+                    flagged,
+                    left,
+                    first_blank,
+                    onclose: move |_| confirming.set(false),
+                }
+            }
+        }
+    }
+}
+
+/// "Hand it in?" for a timed paper with blanks or flags. The safe choice,
+/// going back to the first blank, comes first and is what Escape does.
+#[component]
+fn ConfirmSubmit(
+    blank: usize,
+    flagged: usize,
+    left: u64,
+    first_blank: Option<usize>,
+    onclose: EventHandler<()>,
+) -> Element {
+    let back = move |_| {
+        onclose.call(());
+        if let Some(i) = first_blank {
+            go(i);
+        }
+    };
+    rsx! {
+        div { class: "bank-scrim", onclick: move |_| onclose.call(()),
+            div {
+                class: "bank-sheet card",
+                role: "alertdialog",
+                "aria-modal": "true",
+                "aria-labelledby": "bank-confirm-title",
+                onclick: move |e| e.stop_propagation(),
+                h2 { id: "bank-confirm-title", {tx::CONFIRM_TITLE} }
+                if blank > 0 {
+                    p { {tx::CONFIRM_BLANK_A} " " bdi { "{blank}" } " " {tx::CONFIRM_BLANK_B} }
+                }
+                if flagged > 0 {
+                    p { bdi { "{flagged}" } " " {tx::CONFIRM_FLAGGED} }
+                }
+                p { class: "muted small", "{tx::LEFT_ABOUT} " bdi { "{left}" } " {tx::MINUTES}" }
+                div { class: "start-row",
+                    button {
+                        class: "btn btn-primary",
+                        autofocus: true,
+                        "aria-keyshortcuts": "Escape",
+                        onclick: back,
+                        if let Some(i) = first_blank {
+                            {tx::CONFIRM_BACK_TO} " " bdi { "{i + 1}" }
+                        } else {
+                            {tx::CONFIRM_BACK}
+                        }
+                    }
+                    button {
+                        class: "btn btn-secondary",
+                        onclick: move |_| {
+                            onclose.call(());
+                            finish();
+                        },
+                        {tx::CONFIRM_SUBMIT}
+                    }
                 }
             }
         }

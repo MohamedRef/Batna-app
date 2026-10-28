@@ -30,13 +30,18 @@ pub fn find(id: &str) -> Option<(&'static Lecture, &'static Item)> {
 #[component]
 pub fn TryItems(items: Vec<String>, on_answer: EventHandler<bool>) -> Element {
     let store = use_store();
-    // Kinds the study player can't show yet are left out, and hidden (✗) items.
-    let playable: Vec<String> = items
-        .iter()
-        .filter(|id| find(id).is_some_and(|(_, i)| PLAYABLE.contains(&i.body.kind())))
-        .filter(|id| !store.0.borrow().is_hidden(id))
-        .cloned()
-        .collect();
+    // Kinds the study player can't show yet are left out, and hidden (✗)
+    // items. The list is taken once: a ✗ he marks here hides the card from
+    // the next visit on, so the position always points at the same list.
+    let playable: Vec<String> = use_hook(|| {
+        let store = store.0.borrow();
+        items
+            .iter()
+            .filter(|id| find(id).is_some_and(|(_, i)| PLAYABLE.contains(&i.body.kind())))
+            .filter(|id| !store.is_hidden(id))
+            .cloned()
+            .collect()
+    });
     let n = playable.len();
     let mut at = use_signal(|| 0usize);
     let mut again = use_signal(|| 0usize);

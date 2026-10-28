@@ -4,6 +4,7 @@
 //! with one line in `Screen` / `screen_body` below.
 
 mod back;
+mod bank;
 mod calc;
 mod case;
 mod content;
@@ -164,7 +165,7 @@ fn screen_body(screen: Screen) -> Element {
     match screen {
         Screen::Today => rsx! { today::Today {} },
         Screen::Study => rsx! { study::Study {} },
-        Screen::Bank => rsx! { Soon { screen } },
+        Screen::Bank => rsx! { bank::Bank {} },
         Screen::Cases => rsx! { case::CasesScreen {} },
         Screen::Oral => rsx! { oral::Oral {} },
         Screen::Stats => rsx! { stats::Stats {} },

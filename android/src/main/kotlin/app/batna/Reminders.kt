@@ -16,6 +16,7 @@ import android.os.Build
 import android.os.PowerManager
 import android.provider.Settings
 import org.json.JSONArray
+import org.json.JSONObject
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.ZoneId
@@ -38,8 +39,11 @@ object ReminderBridge {
     const val CHANNEL = "study"
     private const val PREFS = "batna_reminders"
     private const val KEY = "schedule"
+    private const val REPEAT = "repeat"
     /** Alarms are request codes 0 until this; Rust never sends more. */
-    const val MAX = 8
+    const val MAX = 32
+    /** Days the fallback plans ahead when the app hasn't re-planned. */
+    private const val FALLBACK_DAYS = 7L
     private const val PERMISSION_REQUEST = 4120
 
     /**
@@ -53,27 +57,83 @@ object ReminderBridge {
         arm(app, json)
     }
 
+    /**
+     * The fallback for when Batna isn't opened for days:
+     * `{"times": ["HH:MM"], "days": "1111110" (Saturday first), "title", "text"}`.
+     * When the last armed reminder fires, or nothing armed is left after a
+     * reboot, the next [FALLBACK_DAYS] days are armed from it with its
+     * general text (the due counts would be stale). `{}` turns it off.
+     */
+    @JvmStatic
+    fun repeat(context: Context, json: String) {
+        context.applicationContext.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
+            .edit().putString(REPEAT, json).apply()
+    }
+
     /** Re-arms the stored schedule (after a reboot, an update or a clock change). */
     fun rearm(context: Context) {
-        val json = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).getString(KEY, null) ?: return
+        val json = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).getString(KEY, null) ?: "[]"
+        if (arm(context, json) == 0) extend(context)
+    }
+
+    /** Arms the next days from the fallback, so reminders never run dry. */
+    fun extend(context: Context) {
+        val prefs = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
+        val spec = try {
+            JSONObject(prefs.getString(REPEAT, null) ?: return)
+        } catch (e: org.json.JSONException) {
+            return
+        }
+        val times = spec.optJSONArray("times") ?: return
+        val days = spec.optString("days")
+        if (times.length() == 0 || days.length != 7) return
+        val now = java.time.LocalDateTime.now()
+        val items = JSONArray()
+        var day = now.toLocalDate()
+        while (day <= now.toLocalDate().plusDays(FALLBACK_DAYS) && items.length() < MAX) {
+            // DayOfWeek: Monday 1 … Sunday 7; Batna's week starts on Saturday.
+            if (days[(day.dayOfWeek.value + 1) % 7] == '1') {
+                for (t in 0 until times.length()) {
+                    val time = try { LocalTime.parse(times.getString(t)) } catch (e: Exception) { continue }
+                    if (!day.atTime(time).isAfter(now)) continue
+                    items.put(
+                        JSONObject()
+                            .put("at", 0)
+                            .put("date", day.toString())
+                            .put("time", times.getString(t))
+                            .put("title", spec.optString("title"))
+                            .put("text", spec.optString("text")),
+                    )
+                }
+            }
+            day = day.plusDays(1)
+        }
+        val json = items.toString()
+        prefs.edit().putString(KEY, json).apply()
         arm(context, json)
     }
 
-    private fun arm(context: Context, json: String) {
+    /** Arms `json`'s reminders still ahead; returns how many. */
+    private fun arm(context: Context, json: String): Int {
         val alarms = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         for (i in 0 until MAX) {
             alarms.cancel(pending(context, i, null, null))
         }
         val items = try { JSONArray(json) } catch (e: org.json.JSONException) { JSONArray() }
         val now = System.currentTimeMillis()
-        for (i in 0 until minOf(items.length(), MAX)) {
+        val ahead = (0 until minOf(items.length(), MAX)).mapNotNull { i ->
             val item = items.getJSONObject(i)
             val at = wallClock(item.optString("date"), item.optString("time")) ?: item.getLong("at")
-            if (at <= now) continue
-            val intent = pending(context, i, item.getString("title"), item.getString("text"))
+            if (at > now) Pair(i, at) else null
+        }
+        for ((n, entry) in ahead.withIndex()) {
+            val (i, at) = entry
+            val item = items.getJSONObject(i)
+            val intent = pending(context, i, item.getString("title"), item.getString("text"), n == ahead.size - 1)
             // Inexact while idle: Doze may hold it a few minutes, which suits a nudge.
             alarms.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, at, intent)
         }
+        return ahead.size
     }
 
     /** The local date and time in the device's zone now, as unix ms. */
@@ -84,10 +144,17 @@ object ReminderBridge {
         null
     }
 
-    private fun pending(context: Context, code: Int, title: String?, text: String?): PendingIntent {
+    private fun pending(
+        context: Context,
+        code: Int,
+        title: String?,
+        text: String?,
+        last: Boolean = false,
+    ): PendingIntent {
         val intent = Intent(context, ReminderReceiver::class.java).setAction("app.batna.REMIND")
         title?.let { intent.putExtra("title", it) }
         text?.let { intent.putExtra("text", it) }
+        intent.putExtra("last", last)
         return PendingIntent.getBroadcast(
             context, code, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
         )
@@ -173,6 +240,8 @@ class ReminderReceiver : BroadcastReceiver() {
                 val title = intent.getStringExtra("title") ?: return
                 val text = intent.getStringExtra("text") ?: return
                 if (ReminderBridge.enabled(context)) ReminderBridge.show(context, title, text)
+                // The app hasn't re-planned since: keep the next days covered.
+                if (intent.getBooleanExtra("last", false)) ReminderBridge.extend(context)
             }
         }
     }

@@ -36,7 +36,7 @@ pub(crate) fn reload() {
 /// Best effort: if the store can't write, the plan still holds for this run.
 pub(crate) fn save(settings: &PlanSettings) {
     if std::env::var_os("BATNA_PLAN_EXAM").is_none() {
-        let _ = crate::store::shared().put_setting(KEY, settings);
+        crate::store::save_setting(KEY, settings);
     }
 }
 

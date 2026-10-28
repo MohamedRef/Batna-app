@@ -71,8 +71,16 @@ pub static PHASE: GlobalSignal<Phase> = Signal::global(|| Phase::Setup);
 pub static HISTORY: GlobalSignal<History> = Signal::global(History::default);
 static HISTORY_LOADED: GlobalSignal<bool> = Signal::global(|| false);
 
-/// Finished timed papers and mocks, as a synced setting in the review store.
-const PAPERS_KEY: &str = "bank.papers";
+/// Finished timed papers and mocks: one synced setting per paper,
+/// `bank.paper.<device>.<at_ms>`, so papers from two devices never
+/// overwrite each other (#33).
+const PAPER_PREFIX: &str = "bank.paper.";
+/// The single list the first version kept; still read, never written.
+const LEGACY_PAPERS_KEY: &str = "bank.papers";
+
+/// A timed paper Mohamed left part-way: kept, with its clock running, until
+/// he goes back to it or submits it (#35).
+pub static PAUSED: GlobalSignal<Option<Paper>> = Signal::global(|| None);
 
 #[component]
 pub fn Bank() -> Element {
@@ -169,7 +177,7 @@ fn load_history() {
             }
         }
     }
-    history.papers = crate::store::shared().setting(PAPERS_KEY).unwrap_or_default();
+    history.papers = stored_papers();
     *HISTORY.write() = history;
 }
 
@@ -191,7 +199,27 @@ pub fn lecture_number(lecture: &str) -> &str {
     lecture.rsplit('.').next().unwrap_or(lecture).trim_start_matches('L').trim_start_matches('0')
 }
 
+/// Every finished paper on any device, oldest first.
+fn stored_papers() -> Vec<Outcome> {
+    let store = crate::store::shared();
+    let mut papers: Vec<Outcome> = store.setting(LEGACY_PAPERS_KEY).unwrap_or_default();
+    papers.extend(store.settings_with_prefix::<Outcome>(PAPER_PREFIX).into_iter().map(|(_, o)| o));
+    merge_papers(papers)
+}
+
+/// Oldest first, each paper once (the legacy list and the per-paper keys
+/// can both hold one).
+fn merge_papers(mut papers: Vec<Outcome>) -> Vec<Outcome> {
+    papers.sort_by_key(|o| o.at_ms);
+    papers.dedup();
+    papers
+}
+
 pub fn start(mode: Mode, questions: Vec<Question>) {
+    // A new paper never throws away one he left: that one is scored first.
+    if let Some(paused) = PAUSED.write().take() {
+        close(paused, now_ms());
+    }
     if !questions.is_empty() {
         *PHASE.write() = Phase::Running(Paper::new(mode, questions));
     }
@@ -263,6 +291,12 @@ pub fn finish() {
         p.leave(now);
         p.clone()
     };
+    let outcome = close(paper.clone(), now);
+    *PHASE.write() = Phase::Done { paper, outcome };
+}
+
+/// Score a paper; for timed ones, record the answers and save the result.
+fn close(paper: Paper, now: i64) -> Outcome {
     let took = u64::try_from(now.saturating_sub(paper.started_ms)).unwrap_or(0);
     let outcome = exam::score(&paper.questions, &paper.answers, paper.mode, now, took);
     if paper.mode.timed() {
@@ -277,9 +311,45 @@ pub fn finish() {
         // another device finished meanwhile isn't dropped (#32).
         history.papers = crate::store::shared().setting(PAPERS_KEY).unwrap_or_default();
         history.papers.push(outcome.clone());
-        let _ = crate::store::shared().put_setting(PAPERS_KEY, &history.papers);
+        let store = crate::store::shared();
+        let _ = store.put_setting(&format!("{PAPER_PREFIX}{}.{}", store.device(), outcome.at_ms), &outcome);
     }
-    *PHASE.write() = Phase::Done { paper, outcome };
+    outcome
+}
+
+/// "Leave" on the player. Tutor answers are already recorded, so a tutor set
+/// just ends; a timed paper is kept for later instead of thrown away.
+pub fn leave() {
+    let now = now_ms();
+    let mut phase = PHASE.write();
+    if let Phase::Running(p) = &mut *phase
+        && p.mode.timed()
+    {
+        p.leave(now);
+        *PAUSED.write() = Some(p.clone());
+    }
+    *phase = Phase::Setup;
+}
+
+/// Back to the paper he left. Its clock kept running; past the limit it is
+/// submitted as it stands.
+pub fn resume() {
+    let Some(mut p) = PAUSED.write().take() else { return };
+    let now = now_ms();
+    p.shown_ms = now;
+    let overdue = p.overdue(now);
+    *PHASE.write() = Phase::Running(p);
+    if overdue {
+        finish();
+    }
+}
+
+/// Submit the paper he left without going back to it.
+pub fn submit_paused() {
+    let Some(mut p) = PAUSED.write().take() else { return };
+    p.shown_ms = now_ms();
+    *PHASE.write() = Phase::Running(p);
+    finish();
 }
 
 pub fn back_to_setup() {
@@ -317,6 +387,16 @@ mod tests {
         assert_eq!(minutes(1), 1);
         assert_eq!(lecture_number("hb.L09"), "9");
         assert_eq!(lecture_number("hb.L20"), "20");
+    }
+
+    fn outcome(at_ms: i64, right: u32) -> Outcome {
+        Outcome { total: exam::Score { right, total: 4 }, ..exam::score(&[], &[], Mode::Mock, at_ms, 0) }
+    }
+
+    #[test]
+    fn papers_from_the_legacy_list_and_per_paper_keys_merge_once() {
+        let merged = merge_papers(vec![outcome(30, 1), outcome(10, 2), outcome(30, 1), outcome(20, 3)]);
+        assert_eq!(merged.iter().map(|o| o.at_ms).collect::<Vec<_>>(), vec![10, 20, 30]);
     }
 
     #[test]

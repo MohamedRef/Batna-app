@@ -167,6 +167,21 @@ per-device choices:
 When something is ready, a card above the current screen says so, with the
 notes from the feed. "بعدين" hides it until the next version.
 
+**"A new Batna is out" notification.** On Android a JobScheduler job
+(`UpdateCheckJob` in `android/…/UpdateNotice.kt`) runs about every four hours,
+even while Batna is closed and across reboots. It loads Batna's native
+library and calls Rust's `update::background_check` over JNI, so the feed is
+checked with the same signature and hash checks, and in automatic mode on
+Wi-Fi the build is downloaded too. The app's own six-hourly checks send the
+notification as well, when Batna is in the background. There is one per
+version and step (out, then downloaded and ready), with the feed's notes and a
+**نزّلها** or **ثبّتها** button. A tap opens Settings › Updates and the button
+starts the download or the install. Nothing is sent while Batna is in front
+(the card covers that), for a version whose card was closed, in "لأ" mode, with
+Settings › Updates' switch off, or when Android's notification switch is off.
+The Mac gets the same notification once UNUserNotificationCenter lands
+(Batna-app#50).
+
 | Device | How the new build goes in |
 |---|---|
 | Android | `android/…/UpdateInstaller.kt` checks the APK (same package, same signing key, a versionCode no lower than the installed one) and hands it to PackageInstaller. Android asks once for "Install unknown apps", then shows its own confirmation. On Android 12+, once Batna installed itself, automatic mode updates quietly while Batna is in the background, and never during a study session, bank block, case or oral round. When notifications are allowed, one says the new version is in. |

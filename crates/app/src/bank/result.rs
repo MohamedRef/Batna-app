@@ -183,7 +183,7 @@ fn ScoreRows(rows: Vec<(String, Score)>) -> Element {
 }
 
 fn stem_peek(id: &str) -> String {
-    match lookup(id).map(|(_, i)| &i.body) {
+    match lookup(id).map(|(_, i)| i.body) {
         Some(Body::Mcq { stem, .. }) => stem.chars().take(90).collect(),
         _ => String::new(),
     }

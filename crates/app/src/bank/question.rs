@@ -3,10 +3,12 @@
 
 use batna_core::content::Body;
 use batna_core::exam::Question;
+use batna_core::review::verify::Check;
 use dioxus::prelude::*;
 
 use super::{lecture_number, lookup, topic_title};
 use crate::i18n::bank as tx;
+use crate::store::use_review;
 
 #[component]
 pub fn QuestionView(
@@ -77,6 +79,7 @@ pub fn QuestionView(
                 div { class: "q-foot",
                     span { class: "chip page", bdi { "{tx::BOOK_PAGE} {item.src.page}" } }
                 }
+                Report { item_id: q.id.clone() }
                 if let Some(u) = &item.update {
                     aside { class: "q-update",
                         strong { {tx::UPDATE} }
@@ -85,6 +88,31 @@ pub fn QuestionView(
                     }
                 }
             }
+        }
+    }
+}
+
+/// ✓ / ✎ / ✗ the first time he sees the question (the review store's verify
+/// bar), and afterwards a "report a problem" link that reopens that check.
+#[component]
+fn Report(item_id: String) -> Element {
+    let review = use_review();
+    let mut reopened = use_signal(|| false);
+    let check = review.backend.borrow().check(&item_id);
+    if check == Check::Ask || reopened() {
+        return rsx! { crate::verify::VerifyBar { item_id } };
+    }
+    if check == Check::Hidden {
+        return rsx! {};
+    }
+    rsx! {
+        button {
+            class: "link small report",
+            onclick: move |_| {
+                review.backend.borrow_mut().undo_judgement(&item_id);
+                reopened.set(true);
+            },
+            {tx::REPORT}
         }
     }
 }

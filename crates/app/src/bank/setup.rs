@@ -6,7 +6,9 @@ use std::collections::BTreeSet;
 use batna_core::exam::{self, Filter, MOCK_SIZE, Mode, Only};
 use dioxus::prelude::*;
 
-use super::{HISTORY, date, lecture_number, lecture_title, minutes, now_ms, start, topic_title};
+use super::{
+    HISTORY, date, lecture_number, lecture_title, minutes, now_ms, start, study_lectures, topic_title,
+};
 use crate::content::Library;
 use crate::i18n::bank as tx;
 
@@ -23,7 +25,8 @@ const TAGS: [(&str, &str); 3] =
 #[component]
 pub fn Setup() -> Element {
     let lib = Library::get();
-    let pool = exam::mcqs(lib.lectures.values());
+    let owned = study_lectures();
+    let pool = exam::mcqs(&owned);
     if pool.is_empty() {
         return rsx! {
             section { class: "card",
@@ -76,12 +79,15 @@ pub fn Setup() -> Element {
 
     let start_with = move |mode: Mode| {
         let filter = FILTER.read().clone();
+        let lectures = study_lectures();
+        let pool = exam::mcqs(&lectures);
         let selected = filter.select(&pool, &HISTORY.read().last);
         start(mode, exam::practice(&selected, *COUNT.read(), now_ms() as u64));
     };
-    let start_tutor = start_with.clone();
+    let start_tutor = start_with;
     let start_mock = move |_| {
-        let pool = exam::mcqs(Library::get().lectures.values());
+        let lectures = study_lectures();
+        let pool = exam::mcqs(&lectures);
         start(Mode::Mock, exam::mock(&pool, *MOCK_COUNT.read(), now_ms() as u64));
     };
     let shown = count.min(available);
@@ -252,7 +258,6 @@ fn History() -> Element {
                     }
                 }
             }
-            p { class: "muted small", {tx::HISTORY_NOTE} }
         }
     }
 }

@@ -10,9 +10,10 @@ mod setup;
 
 use std::time::{SystemTime, UNIX_EPOCH};
 
+use batna_core::content::Body;
 use batna_core::content::{Item, Lecture};
 use batna_core::exam::{self, Answer, History, Mode, Outcome, Question};
-use batna_core::review::{MemorySink, ReviewSink};
+use batna_core::review::{Grade, Origin, ReviewEvent, StudyStoreHandle};
 use dioxus::prelude::*;
 
 use crate::content::Library;
@@ -68,11 +69,14 @@ pub enum Phase {
 // Globals, so a paper survives switching tabs mid-exam.
 pub static PHASE: GlobalSignal<Phase> = Signal::global(|| Phase::Setup);
 pub static HISTORY: GlobalSignal<History> = Signal::global(History::default);
-/// Answers wait here until chunk 3's store implements `ReviewSink`.
-pub static SINK: GlobalSignal<MemorySink> = Signal::global(MemorySink::default);
+static HISTORY_LOADED: GlobalSignal<bool> = Signal::global(|| false);
+
+/// Finished timed papers and mocks, as a synced setting in the review store.
+const PAPERS_KEY: &str = "bank.papers";
 
 #[component]
 pub fn Bank() -> Element {
+    use_hook(load_history);
     let phase = match &*PHASE.read() {
         Phase::Setup => 0,
         Phase::Running(_) => 1,
@@ -80,6 +84,7 @@ pub fn Bank() -> Element {
     };
     rsx! {
         style { {BANK_CSS} }
+        style { {crate::verify::CSS} }
         div { class: "bank",
             match phase {
                 0 => rsx! { setup::Setup {} },
@@ -95,10 +100,63 @@ pub fn now_ms() -> i64 {
 }
 
 /// The lecture and item behind a question id.
-pub fn lookup(id: &str) -> Option<(&'static Lecture, &'static Item)> {
+/// With Mohamed's ✎ edit applied.
+pub fn lookup(id: &str) -> Option<(&'static Lecture, Item)> {
     let lecture_id = id.rsplit_once('.').map(|(l, _)| l)?;
     let lecture = Library::get().lectures.get(lecture_id)?;
-    lecture.items.iter().find(|i| i.id == id).map(|i| (lecture, i))
+    let item = lecture.items.iter().find(|i| i.id == id)?;
+    let item = match try_consume_context::<StudyStoreHandle>() {
+        Some(store) => store.0.borrow().effective(item),
+        None => item.clone(),
+    };
+    Some((lecture, item))
+}
+
+/// The MCQs of every written lecture as Mohamed should see them: his ✎
+/// edits applied, his ✗ items left out.
+pub fn study_lectures() -> Vec<Lecture> {
+    let store = try_consume_context::<StudyStoreHandle>();
+    let store = store.as_ref().map(|s| s.0.borrow());
+    Library::get()
+        .lectures
+        .values()
+        .map(|l| Lecture {
+            items: l
+                .items
+                .iter()
+                .filter(|i| matches!(i.body, Body::Mcq { .. }))
+                .filter(|i| !store.as_ref().is_some_and(|s| s.is_hidden(&i.id)))
+                .map(|i| store.as_ref().map_or_else(|| i.clone(), |s| s.effective(i)))
+                .collect(),
+            ..l.clone()
+        })
+        .collect()
+}
+
+/// Send an answer to the review store, where FSRS counts it as evidence.
+fn record(event: ReviewEvent) {
+    if let Some(store) = try_consume_context::<StudyStoreHandle>() {
+        store.0.borrow_mut().record(event);
+    }
+}
+
+/// Fill the history once per launch: last results from the logged bank and
+/// mock answers, finished papers from the store's settings.
+fn load_history() {
+    if *HISTORY_LOADED.peek() {
+        return;
+    }
+    *HISTORY_LOADED.write() = true;
+    let mut history = History::default();
+    if let Some(store) = try_consume_context::<StudyStoreHandle>() {
+        for e in store.0.borrow().log() {
+            if matches!(e.origin, Origin::Bank | Origin::Mock) {
+                history.last.insert(e.item_id, e.grade != Grade::Again);
+            }
+        }
+    }
+    history.papers = crate::store::shared().setting(PAPERS_KEY).unwrap_or_default();
+    *HISTORY.write() = history;
 }
 
 /// A lecture's topic title, falling back to the slug.
@@ -153,7 +211,7 @@ pub fn choose(option: usize) {
     }
     if let Some((q, a)) = sent {
         if let Some(e) = exam::review_event(&q, &a, Mode::Tutor, now) {
-            SINK.write().record(e);
+            record(e);
         }
         HISTORY.write().record(std::slice::from_ref(&q), std::slice::from_ref(&a));
     }
@@ -194,15 +252,15 @@ pub fn finish() {
     let took = u64::try_from(now.saturating_sub(paper.started_ms)).unwrap_or(0);
     let outcome = exam::score(&paper.questions, &paper.answers, paper.mode, now, took);
     if paper.mode.timed() {
-        let mut sink = SINK.write();
         for (q, a) in paper.questions.iter().zip(&paper.answers) {
             if let Some(e) = exam::review_event(q, a, paper.mode, now) {
-                sink.record(e);
+                record(e);
             }
         }
         let mut history = HISTORY.write();
         history.record(&paper.questions, &paper.answers);
         history.papers.push(outcome.clone());
+        let _ = crate::store::shared().put_setting(PAPERS_KEY, &history.papers);
     }
     *PHASE.write() = Phase::Done { paper, outcome };
 }

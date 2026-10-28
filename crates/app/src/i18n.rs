@@ -611,12 +611,20 @@ pub mod data {
     pub const EXPORT_ANDROID_HINT: &str =
         "تلاقيه من تطبيق الملفات أو من الكمبيوتر بالكابل، في Android/data/app.batna/files.";
     pub const EXPORT_FAILED: &str = "ما عرفتش أحفظ النسخة:";
+    pub const EXPORT_SAVE_TO: &str = "احفظها في Downloads أو Drive";
+    pub const EXPORT_SAVING: &str = "اختار مكان النسخة…";
+    pub const EXPORT_SAVED_AS: &str = "اتحفظت برّه التطبيق باسم";
+    pub const EXPORT_SAVED_OUT: &str = "اتحفظت في المكان اللي اخترته.";
+    pub const EXPORT_SAVE_CANCELLED: &str = "ما اخترتش مكان، النسخة لسه في فولدر التطبيق.";
+    pub const EXPORT_SAVE_FAILED: &str = "ما عرفتش أنقلها، النسخة لسه في فولدر التطبيق.";
     pub const IMPORT_TITLE: &str = "استرجع نسخة";
     pub const IMPORT_BODY: &str =
         "بيدمج النسخة مع اللي على الجهاز ده. مفيش حاجة بتتمسح، واللي اتعدّل بعدين هو اللي بيكسب.";
     pub const IMPORT_FOUND: &str = "نسخ لقيتها على الجهاز:";
     pub const IMPORT_PICK: &str = "أو اختار ملف";
     pub const IMPORT_PICK_FIRST: &str = "اختار ملف النسخة";
+    pub const IMPORT_PICKING: &str = "اختار الملف…";
+    pub const IMPORT_PICK_FAILED: &str = "ما عرفتش أفتح اختيار الملفات";
     pub const IMPORT_PASTE: &str = "أو الزق النص";
     pub const IMPORT_PASTED: &str = "نص ملزوق";
     pub const IMPORT_READ: &str = "اقرا النص";

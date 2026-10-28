@@ -166,6 +166,7 @@
   min-block-size: 14rem;
   animation: ls-in 220ms var(--ease);
 }
+.ls-stage[hidden] { display: none; }
 @keyframes ls-in { from { opacity: 0; transform: translateX(-14px); } to { opacity: 1; transform: none; } }
 .ls-src { display: flex; justify-content: flex-end; border-block-start: 1px dashed var(--line); padding-block-start: var(--sp-2); }
 .ls-nav {
@@ -478,3 +479,6 @@
 .ls-summary-actions button.primary { align-self: stretch; }
 @media (prefers-reduced-motion: reduce) { .ls-confetti, .ls-mn-key { animation: none; transition: none; } }
 .ls-today .btn { align-self: start; }
+/* Lecture headings and unwritten lectures open the lecture's page. */
+button.ls-lecture-head { font-weight: 700; }
+button.ls-soon { background: none; border: 1px dashed var(--line); border-radius: var(--radius); font: inherit; color: var(--muted); }

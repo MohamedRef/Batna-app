@@ -14,18 +14,33 @@ use crate::order::grade::{misplaced, shuffled};
 const LETTERS: [&str; 5] = ["A", "B", "C", "D", "E"];
 
 /// The player's footer check button. A step whose answer is complete but
-/// not yet checked (order, sort) puts its check here; the footer then shows
-/// its primary as "صحّح" and calls it. One primary, always in the same place.
+/// not yet checked (order, sort) puts its check in its slot; the footer
+/// then shows its primary as "صحّح" and calls it. One primary, always in
+/// the same place. Slots are per step because visited steps stay mounted.
 #[derive(Clone, Copy)]
-pub struct CheckBar(pub Signal<Option<Callback<()>>>);
+pub struct CheckBar(pub Signal<Vec<Option<Callback<()>>>>);
+
+/// The index of the step a component belongs to.
+#[derive(Clone, Copy)]
+pub struct StepAt(pub usize);
 
 /// Wires a step to the footer: while `can_check` holds, the footer's
 /// primary runs `check`.
 fn use_check_bar(can_check: impl Fn() -> bool + 'static, check: impl FnMut(()) + 'static) {
-    let CheckBar(mut slot) = use_context::<CheckBar>();
+    let CheckBar(mut slots) = use_context::<CheckBar>();
+    let StepAt(k) = use_context::<StepAt>();
     let check = use_callback(check);
-    use_effect(move || slot.set(can_check().then_some(check)));
-    use_drop(move || slot.set(None));
+    use_effect(move || {
+        let v = can_check().then_some(check);
+        if let Some(slot) = slots.write().get_mut(k) {
+            *slot = v;
+        }
+    });
+    use_drop(move || {
+        if let Some(slot) = slots.write().get_mut(k) {
+            *slot = None;
+        }
+    });
 }
 
 #[component]

@@ -20,7 +20,7 @@ use crate::i18n::count::{MINUTE, QUESTION, count};
 use crate::i18n::learn as tx;
 use crate::{Screen, Ui};
 
-const CSS: &str = include_str!("learn.css");
+pub(crate) const CSS: &str = include_str!("learn.css");
 
 /// The lesson open in the player; set it, then switch to [`Screen::Learn`].
 /// `BATNA_OPEN_LESSON=hb.L01.lesson1` opens one at launch (previews, screenshots).
@@ -156,9 +156,16 @@ fn LessonList() -> Element {
                 match lib.lessons.get(&entry.id) {
                     Some(file) => rsx! {
                         section { key: "{entry.id}", class: "ls-lecture",
-                            h2 { class: "ls-lecture-head",
-                                span { class: "num", "{number}" }
-                                bdi { "{entry.title}" }
+                            // The heading opens the lecture's page (its cards, questions, topics).
+                            h2 {
+                                button {
+                                    class: "ls-lecture-head tap tap-plain",
+                                    title: tx::OPEN_LECTURE,
+                                    onclick: { let id = entry.id.clone(); move |_| crate::lecture::open(ui, &id) },
+                                    span { class: "num", "{number}" }
+                                    bdi { "{entry.title}" }
+                                    span { class: "chev", aria_hidden: "true" }
+                                }
                             }
                             ol { class: "ls-cards",
                                 for (i , l) in file.lessons.iter().enumerate() {
@@ -168,10 +175,15 @@ fn LessonList() -> Element {
                         }
                     },
                     None => rsx! {
-                        div { key: "{entry.id}", class: "ls-lecture ls-soon",
+                        button {
+                            key: "{entry.id}",
+                            class: "ls-lecture ls-soon tap",
+                            title: tx::OPEN_LECTURE,
+                            onclick: { let id = entry.id.clone(); move |_| crate::lecture::open(ui, &id) },
                             span { class: "num", "{number}" }
                             bdi { "{entry.title}" }
                             span { class: "chip", {tx::WRITING} }
+                            span { class: "chev", aria_hidden: "true" }
                         }
                     },
                 }
@@ -180,8 +192,9 @@ fn LessonList() -> Element {
     }
 }
 
+/// One lesson in a list (the lessons screen, a lecture's page).
 #[component]
-fn LessonCard(n: usize, lesson: Lesson) -> Element {
+pub fn LessonCard(n: usize, lesson: Lesson) -> Element {
     let ui = use_context::<Ui>();
     let m = mark(&lesson.id);
     let id = lesson.id.clone();

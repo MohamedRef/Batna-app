@@ -70,6 +70,12 @@ fn lecture_title(l: &Lecture) -> String {
     }
 }
 
+/// Whether the study player can show this item (MCQs go to the bank, cases
+/// to their own screen).
+pub fn is_playable(id: &str) -> bool {
+    find(id).is_some_and(|(_, i)| PLAYABLE.contains(&i.body.kind()))
+}
+
 /// A book item or one of his own cards, by id.
 fn find(id: &str) -> Option<(&'static Lecture, &'static Item)> {
     items().get(id).copied().or_else(|| crate::own::find(id))

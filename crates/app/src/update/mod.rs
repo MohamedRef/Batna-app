@@ -153,8 +153,9 @@ pub struct Notice {
     /// `install`; empty for no button.
     pub action: &'static str,
     pub button: &'static str,
-    /// The Android notification channel's name.
+    /// The Android notification channel's name and description.
     pub channel: &'static str,
+    pub channel_description: &'static str,
 }
 
 /// What's new, Egyptian Arabic first.
@@ -214,6 +215,7 @@ pub fn notice(s: &Status) -> Option<Notice> {
         action,
         button,
         channel: tx::NOTICE_CHANNEL,
+        channel_description: tx::NOTICE_CHANNEL_SUB,
     })
 }
 

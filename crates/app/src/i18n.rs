@@ -1087,6 +1087,7 @@ pub mod update {
     pub const NOTICE_TAP_AVAILABLE: &str = "دوس تشوف الجديد وتنزّلها.";
     pub const NOTICE_TAP_READY: &str = "اتنزّلت واتفحصت. دوس عشان تثبّتها.";
     pub const NOTICE_CHANNEL: &str = "نسخ باطنة الجديدة";
+    pub const NOTICE_CHANNEL_SUB: &str = "نسخة جديدة نزلت، وإيه الجديد فيها";
     pub const NOTIFY: &str = "ابعتلي إشعار أول ما تنزل نسخة جديدة";
     pub const NOTIFY_SUB: &str = "على أندرويد حتى لو باطنة مقفول (بيبص كل كام ساعة)، ومعاه الجديد في سطرين. مفتاح الإشعارات في الجهاز له الكلمة الأخيرة.";
     pub const NOTICE_MORE: &str = "و{n} حاجات كمان";

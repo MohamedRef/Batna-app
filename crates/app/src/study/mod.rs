@@ -98,7 +98,7 @@ fn plan(
         due: &s.due(now),
         seen: &seen,
         hidden: &hidden,
-        max_new: s.new_left_today(now),
+        max_new: crate::plan::new_left_today(&*s, now),
         budget_secs: minutes * 60,
     })
 }

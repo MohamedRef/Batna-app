@@ -70,6 +70,15 @@ const MAX_PACK_BYTES: u64 = 64 * 1024 * 1024;
 
 const PACK_FILE: &str = "content.pack";
 const PACK_INFO: &str = "content.json";
+/// The sha256 of the last pack that failed its checks, so the same file
+/// isn't downloaded again (#344).
+const PACK_REJECTED: &str = "content.rejected";
+/// How many times a pack was opened without Batna running calmly after it
+/// (the crash-loop guard, #344).
+const PACK_STARTS: &str = "content.starts";
+/// Opens in a row that never got a couple of seconds past the first screen
+/// before the pack is dropped.
+const MAX_PACK_STARTS: u8 = 3;
 
 /// What Mohamed chose in Settings › Updates.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
@@ -868,22 +877,33 @@ impl Updater {
         if asset.size > MAX_PACK_BYTES {
             return report!("content pack: {} bytes is too large", asset.size);
         }
-        let result = (|| -> Result<(), String> {
+        if is_rejected(&self.dir, &asset.sha256) {
+            return;
+        }
+        // Err((true, _)): the file itself is bad, and is remembered so it
+        // isn't fetched again; Err((false, _)): try again next time.
+        let result = (|| -> Result<(), (bool, String)> {
             let url = format!("{}/{}", self.feed_url(), asset.file);
-            let bytes =
-                get_limited(&url, asset.size, Duration::from_secs(10 * 60)).map_err(|f| format!("{f:?}"))?;
-            check_download(&asset, bytes.len() as u64, &sha256_hex(&bytes)).map_err(|e| e.to_string())?;
-            Pack::decode(&bytes).map_err(|e| e.to_string())?;
-            fs::create_dir_all(&self.dir).map_err(|e| e.to_string())?;
+            let bytes = get_limited(&url, asset.size, Duration::from_secs(10 * 60))
+                .map_err(|f| (false, format!("{f:?}")))?;
+            check_download(&asset, bytes.len() as u64, &sha256_hex(&bytes))
+                .map_err(|e| (true, e.to_string()))?;
+            let pack = Pack::decode(&bytes).map_err(|e| (true, e.to_string()))?;
+            if let Some(bad) = crate::look::unsafe_sheet(&pack.look) {
+                return Err((true, format!("stylesheet {bad} isn't allowed")));
+            }
+            let io = |e: std::io::Error| (false, e.to_string());
+            fs::create_dir_all(&self.dir).map_err(io)?;
             // The old pack's record goes first: stopped half-way, Batna finds
             // no record and uses its built-in pack, never a mismatched pair.
             match fs::remove_file(self.dir.join(PACK_INFO)) {
-                Err(e) if e.kind() != std::io::ErrorKind::NotFound => return Err(e.to_string()),
+                Err(e) if e.kind() != std::io::ErrorKind::NotFound => return Err(io(e)),
                 _ => {}
             }
             let tmp = self.dir.join(format!("{PACK_FILE}.part"));
-            fs::write(&tmp, &bytes).map_err(|e| e.to_string())?;
-            fs::rename(&tmp, self.dir.join(PACK_FILE)).map_err(|e| e.to_string())?;
+            fs::write(&tmp, &bytes).map_err(io)?;
+            fs::rename(&tmp, self.dir.join(PACK_FILE)).map_err(io)?;
+            let _ = fs::remove_file(self.dir.join(PACK_STARTS));
             let info = PackInfo {
                 version: m.version.clone(),
                 build: m.build,
@@ -891,11 +911,16 @@ impl Updater {
                 published_at: published_secs(&m.published_at),
                 ui_build: m.ui_build,
             };
-            write_json(&self.dir, PACK_INFO, &info)
+            write_json(&self.dir, PACK_INFO, &info).map_err(|e| (false, e))
         })();
         match result {
             Ok(()) => self.tx.send_modify(|s| s.content_waiting = true),
-            Err(e) => report!("content pack {} not taken: {e}", asset.file),
+            Err((bad, e)) => {
+                if bad {
+                    reject(&self.dir, &asset.sha256);
+                }
+                report!("content pack {} not taken: {e}", asset.file)
+            }
         }
     }
 
@@ -1092,8 +1117,10 @@ impl Updater {
         let Ok(entries) = fs::read_dir(&self.dir) else { return };
         for e in entries.flatten() {
             let name = e.file_name().to_string_lossy().into_owned();
-            if matches!(name.as_str(), "prefs.json" | changelog::FILE | PACK_FILE | PACK_INFO)
-                || Some(name.as_str()) == keep
+            if matches!(
+                name.as_str(),
+                "prefs.json" | changelog::FILE | PACK_FILE | PACK_INFO | PACK_REJECTED | PACK_STARTS
+            ) || Some(name.as_str()) == keep
             {
                 continue;
             }
@@ -1225,25 +1252,56 @@ fn installed_pack_in(dir: &Path, info: &BuildInfo) -> Option<Pack> {
         let _ = fs::remove_file(dir.join(PACK_INFO));
         return None;
     };
+    let drop = |why: &str| {
+        report!("content pack {why}; using the built-in one");
+        reject(dir, &meta.sha256);
+        let _ = fs::remove_file(dir.join(PACK_FILE));
+        let _ = fs::remove_file(dir.join(PACK_INFO));
+        let _ = fs::remove_file(dir.join(PACK_STARTS));
+        None
+    };
+    // Opened before without Batna running calmly after it: the pack may be
+    // what stops it, so it goes (#344).
+    let starts =
+        fs::read_to_string(dir.join(PACK_STARTS)).ok().and_then(|s| s.trim().parse::<u8>().ok()).unwrap_or(0);
+    if starts >= MAX_PACK_STARTS {
+        return drop("didn't let Batna start");
+    }
+    let _ = fs::write(dir.join(PACK_STARTS), (starts + 1).to_string());
     let fits = Version::parse(&meta.version) == Some(info.version) && meta.ui_build == Some(info.build);
     let bytes = fs::read(dir.join(PACK_FILE)).ok()?;
     if !sha256_hex(&bytes).eq_ignore_ascii_case(&meta.sha256) {
-        report!("content pack changed on disk; using the built-in one");
-        return None;
+        return drop("changed on disk");
     }
     match Pack::decode(&bytes) {
+        Err(e) => drop(&format!("doesn't open ({e})")),
         Ok(mut p) => {
             // The stylesheets style this build's screens only.
             if !fits {
                 p.look.clear();
+            } else if let Some(bad) = crate::look::unsafe_sheet(&p.look) {
+                return drop(&format!("stylesheet {bad} isn't allowed"));
             }
             Some(p)
         }
-        Err(e) => {
-            report!("content pack doesn't open ({e}); using the built-in one");
-            None
-        }
     }
+}
+
+/// Batna has run calmly for a while on the pack in use: the crash-loop
+/// guard starts counting again.
+pub fn pack_settled() {
+    if let Some(dir) = crate::prefs::data_dir() {
+        let _ = fs::remove_file(dir.join("updates").join(PACK_STARTS));
+    }
+}
+
+fn is_rejected(dir: &Path, sha256: &str) -> bool {
+    fs::read_to_string(dir.join(PACK_REJECTED)).is_ok_and(|s| s.trim().eq_ignore_ascii_case(sha256))
+}
+
+fn reject(dir: &Path, sha256: &str) {
+    let _ = fs::create_dir_all(dir);
+    let _ = fs::write(dir.join(PACK_REJECTED), sha256);
 }
 
 fn update_failure(e: UpdateError) -> Failure {
@@ -1754,6 +1812,9 @@ mod tests {
         u.check(false);
         assert!(!u.status().content_waiting);
         assert!(!data.path().join("updates").join(PACK_FILE).exists());
+        // A bad file is remembered, so it isn't fetched again (#344).
+        let rejected = fs::read_to_string(data.path().join("updates").join(PACK_REJECTED)).unwrap();
+        assert_eq!(rejected.len(), 64);
 
         // A real pack that matches the signed manifest is kept for the next start.
         let look = BTreeMap::from([("assets/main.css".to_owned(), ".x {}".to_owned())]);
@@ -1779,5 +1840,44 @@ mod tests {
         // A later build drops a pack from an older one.
         assert!(installed_pack_in(&dir, &BuildInfo { build: 43, ..info }).is_none());
         assert!(!dir.join(PACK_FILE).exists());
+    }
+
+    #[test]
+    fn a_pack_that_keeps_stopping_batna_goes_and_stays_gone() {
+        let pack = Pack::new(crate::content::Library::get().index.clone(), Vec::new()).encode();
+        let signer = ed25519_dalek::SigningKey::from_bytes(&[7; 32]);
+        let feed = pack_feed(&signer, 42, None, &pack, Vec::new());
+        let url = serve(feed.path().to_path_buf());
+        let info = BuildInfo { key: Some(signer.verifying_key()), ..build("0.1.0", 42, true) };
+        let (u, data) = updater(&url, info.clone());
+        u.check(false);
+        let dir = data.path().join("updates");
+        // Three opens with no calm stretch after them (pack_settled)...
+        for _ in 0..MAX_PACK_STARTS {
+            assert!(installed_pack_in(&dir, &info).is_some());
+        }
+        // ...and the third start uses the built-in content.
+        assert!(installed_pack_in(&dir, &info).is_none());
+        assert!(!dir.join(PACK_FILE).exists());
+        assert!(is_rejected(&dir, &sha256_hex(&pack)));
+        // The feed still names it: it isn't taken again.
+        u.check(false);
+        assert!(!dir.join(PACK_FILE).exists());
+    }
+
+    #[test]
+    fn a_pack_with_a_stylesheet_that_reaches_out_is_refused() {
+        let look =
+            BTreeMap::from([("assets/main.css".to_owned(), "@import 'https://x.example/a.css';".to_owned())]);
+        let pack =
+            Pack::new(crate::content::Library::get().index.clone(), Vec::new()).with_look(look).encode();
+        let signer = ed25519_dalek::SigningKey::from_bytes(&[8; 32]);
+        let feed = pack_feed(&signer, 42, None, &pack, Vec::new());
+        let url = serve(feed.path().to_path_buf());
+        let info = BuildInfo { key: Some(signer.verifying_key()), ..build("0.1.0", 42, true) };
+        let (u, data) = updater(&url, info);
+        u.check(false);
+        assert!(!u.status().content_waiting);
+        assert!(is_rejected(&data.path().join("updates"), &sha256_hex(&pack)));
     }
 }

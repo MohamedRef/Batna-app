@@ -542,11 +542,19 @@ pub fn use_content_switch(ui: Ui) {
     use_future(move || {
         let review = review.clone();
         async move {
-            if super::get().is_none() {
-                return;
-            }
+            // Ticks since the pack in use was opened: once Batna has drawn
+            // its first screen and run a couple of seconds on it, the
+            // crash-loop guard starts counting again (#344).
+            let mut since_open = 0u32;
             loop {
                 tokio::time::sleep(std::time::Duration::from_secs(2)).await;
+                since_open += 1;
+                if since_open == 1 {
+                    super::pack_settled();
+                }
+                if super::get().is_none() {
+                    continue;
+                }
                 let waiting = status.peek().as_ref().is_some_and(|s| s.content_waiting);
                 if waiting
                     && calm(*ui.screen.peek())
@@ -557,6 +565,7 @@ pub fn use_content_switch(ui: Ui) {
                         r.backend.borrow_mut().library_replaced();
                     }
                     *crate::content::REV.write() += 1;
+                    since_open = 0;
                 }
             }
         }

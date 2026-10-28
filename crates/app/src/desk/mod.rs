@@ -39,6 +39,8 @@ pub fn Chrome() -> Element {
             on_off(p.mouse_hover),
         ));
     });
+    // A content pack switched in while open restyles the nav and desk too.
+    let _ = crate::content::REV.read();
     crate::hover::use_hover();
     crate::shortcuts::use_shortcuts();
     #[cfg(all(feature = "desktop", not(target_os = "android")))]

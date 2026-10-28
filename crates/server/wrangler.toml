@@ -5,6 +5,8 @@ name = "batna-cloud"
 main = "build/index.js"
 compatibility_date = "2026-10-01"
 workers_dev = true
+# Batna's Cloudflare account (not a secret), so deploys need only the API token.
+account_id = "1175d52eeec515162f1dad1b5b76ddd3"
 
 [build]
 command = "CARGO_PROFILE_RELEASE_STRIP=false worker-build --release"
@@ -25,5 +27,5 @@ new_sqlite_classes = ["Account"]
 # `wrangler secret put`.
 [vars]
 # Batna's own Google OAuth client id(s), comma-separated.
-GOOGLE_CLIENT_IDS = ""
+GOOGLE_CLIENT_IDS = "1001052243528-3d8bmf0efprgdvov9f663fm8u63kblck.apps.googleusercontent.com"
 

@@ -577,6 +577,12 @@ fn MiniCase(stem: String, steps: Vec<CaseStep>, seed: String, on_answer: EventHa
     }
 }
 
+/// A short value ("8–11", "F0–F1", "> 12.5") that must not break inside a
+/// table cell.
+fn is_value(cell: &str) -> bool {
+    cell.chars().count() <= 14 && !cell.contains(' ') || cell.chars().count() <= 9
+}
+
 #[component]
 fn Table(title: String, columns: Vec<String>, rows: Vec<Vec<String>>, hide: Vec<[usize; 2]>) -> Element {
     let mut open = use_signal(Vec::<[usize; 2]>::new);
@@ -587,7 +593,13 @@ fn Table(title: String, columns: Vec<String>, rows: Vec<Vec<String>>, hide: Vec<
             if hidden_left > 0 { p { class: "muted small", {tx::TABLE_HINT} } }
             div { class: "ls-table-scroll", dir: "ltr", lang: "en",
                 table {
-                    thead { tr { for (c , h) in columns.iter().enumerate() { th { key: "{c}", "{h}" } } } }
+                    thead {
+                        tr {
+                            for (c , h) in columns.iter().enumerate() {
+                                th { key: "{c}", "data-short": if is_value(h) { "yes" } else { "no" }, "{h}" }
+                            }
+                        }
+                    }
                     tbody {
                         for (r , row) in rows.iter().enumerate() {
                             tr { key: "{r}",
@@ -599,7 +611,12 @@ fn Table(title: String, columns: Vec<String>, rows: Vec<Vec<String>>, hide: Vec<
                                     } else if c == 0 {
                                         th { key: "{c}", scope: "row", "{cell}" }
                                     } else {
-                                        td { key: "{c}", "data-opened": if hide.contains(&[r, c]) { "yes" } else { "no" }, "{cell}" }
+                                        td {
+                                            key: "{c}",
+                                            "data-opened": if hide.contains(&[r, c]) { "yes" } else { "no" },
+                                            "data-short": if is_value(cell) { "yes" } else { "no" },
+                                            "{cell}"
+                                        }
                                     }
                                 }
                             }

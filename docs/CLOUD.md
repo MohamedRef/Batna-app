@@ -55,18 +55,38 @@ The list lives in `batna_protocol::sync::TABLES`. **A new synced table must be a
    The id is not a secret; commit it.
 
 ### 3.3 Deploy
+**From GitHub (no Mac needed).** The `Deploy Batna Cloud` workflow builds and deploys the Worker.
+1. In Cloudflare, open **Workers & Pages** once so the account gets its `workers.dev` subdomain.
+2. At **My Profile › API Tokens**, create a token from the **Edit Cloudflare Workers** template.
+3. Add repo secrets (**Settings › Secrets and variables › Actions**):
+   - `CLOUDFLARE_API_TOKEN`: the token.
+   - `BATNA_ALLOWED_EMAILS`: your Gmail.
+4. Run **Actions › Deploy Batna Cloud › Run workflow**. The run summary shows the Worker URL.
+
+The first run makes the token signing key inside Cloudflare, so `just cloud-setup` isn't needed. After that, every push to `main` that touches `crates/server` or `crates/protocol` redeploys the hub.
+
+**From the Mac:**
 ```bash
 just cloud-deploy
 curl https://batna-cloud.<your-subdomain>.workers.dev/v1/health
 ```
 
-Deploy the hub from `main` at PR #134 or later. An older hub rejects the `relay` ops that carry a restored backup to the other devices (as `wrong_device`), and the app then drops them for good. Whenever `batna_protocol::sync` changes, redeploy the hub before installing the new app.
+Deploy the hub from `main` at PR #134 or later. An older hub rejects the `relay` ops that carry a restored backup to the other devices (as `wrong_device`), and the app then drops them for good. Whenever `batna_protocol::sync` changes, redeploy the hub before installing the new app. Refresh tokens rotate on use: an old one keeps working until the device presents its replacement, so a lost response or a failed Keychain/Keystore save never signs a device out, and a token that comes back after its replacement was used signs that device out. A signed-out device can't list or sign out the others, even while its access token lasts.
 
 ### 3.4 Connect the app
 1. `cp .env.example .env` and fill in `BATNA_CLOUD_URL` (the URL above) and the Desktop client's id and secret. `.env` is git-ignored; `just` loads it and the app reads it at build time.
 2. `just run` → **Settings › المزامنة › سجّل دخول بجوجل**. The browser opens, you pick your Gmail, and the page says to go back to Batna.
 3. Build the APK the same way (`.env` in place) and sign in on the S24 Ultra and the Tab S11.
 4. Review a card on one device: the review shows on the others within seconds. Until you sign in, everything stays on the device, exactly as before.
+
+### 3.5 The preview APK (GitHub Actions)
+The auto-updating preview APK is built on GitHub, where there is no `.env`. Give it the same values once, in the repo's **Settings › Secrets and variables › Actions**:
+
+| Kind | Name | Value |
+|---|---|---|
+| Secret | `BATNA_GOOGLE_CLIENT_SECRET` | the Desktop client's secret |
+
+`batna-android-preview.yml` passes them to the build on pushes to `main` only; a PR's build gets none and its APK hides sign-in. The next preview build (and the update it ships) can sign in. GitHub masks the secret in logs, and nothing writes it to the repo. Like every installed-app secret, it can be read out of the APK. That is only acceptable because the client is a **Desktop app** (installed-app) OAuth client, which Google treats as public: its "secret" grants nothing without the user's own consent and PKCE. Never put a Web-application client's secret here, because that one is truly confidential.
 
 ## 4. API
 
@@ -95,6 +115,7 @@ cargo test -p batna-server -p batna-protocol   # hub, tokens, devices and merge 
 ## 6. Privacy and limits
 
 - Only your reviews, checks and settings leave the device. No patient data, no book text.
+- A phone moved with Smart Switch or another copy of the app's data is a new device to the hub. Android backup is off in the manifest, and on Android 12+, where a device-to-device transfer ignores that, the app notices it was copied (a marker in `no_backup/` is missing) and takes a new `device_id` with an empty outbox (`crates/app/src/store/install.rs`). Its reviews are already on the hub, so it simply syncs as a new device. Sign in again on the new phone.
 - Secrets (`TOKEN_SIGNING_KEY`, `ALLOWED_EMAILS`) are Worker secrets, never in git.
 - Free-plan limits (Workers 100,000 requests/day, Durable Objects 100,000 requests/day) are far above one learner's use. The Free plan has no card on file, so Cloudflare pauses at a limit instead of billing.
 - On Linux (development and CI only) the session is kept in memory, so you sign in on every launch. The Mac uses the Keychain and Android the Keystore.

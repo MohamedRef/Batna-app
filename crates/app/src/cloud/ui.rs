@@ -114,23 +114,13 @@ pub fn ago(then_ms: u64, now_ms: u64) -> String {
     if secs < 60 {
         return tx::JUST_NOW.to_string();
     }
-    let (n, unit) = match secs {
-        s if s < 3600 => (s / 60, 0),
-        s if s < 86_400 => (s / 3600, 1),
-        s => (s / 86_400, 2),
+    use crate::i18n::count::{DAY, HOUR, MINUTE, count};
+    let (n, noun) = match secs {
+        s if s < 3600 => (s / 60, &MINUTE),
+        s if s < 86_400 => (s / 3600, &HOUR),
+        s => (s / 86_400, &DAY),
     };
-    // [one, two, 3–10, 11+]
-    let forms = [
-        ["دقيقة", "دقيقتين", "دقايق", "دقيقة"],
-        ["ساعة", "ساعتين", "ساعات", "ساعة"],
-        ["يوم", "يومين", "أيام", "يوم"],
-    ][unit];
-    match n {
-        1 => format!("من {}", forms[0]),
-        2 => format!("من {}", forms[1]),
-        3..=10 => format!("من {n} {}", forms[2]),
-        _ => format!("من {n} {}", forms[3]),
-    }
+    format!("{} {}", tx::AGO, count(n, noun))
 }
 
 fn now_ms() -> u64 {

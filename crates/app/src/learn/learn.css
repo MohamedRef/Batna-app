@@ -2,6 +2,12 @@
    Night and true black alike); logical properties only (RTL). */
 
 /* ---------- shared bits ---------- */
+/* A button's label as one inline run: .btn is a flex box, and each text or
+   bdi child would otherwise become its own column. */
+.ls-btn-label { display: inline; min-inline-size: 0; overflow-wrap: anywhere; }
+/* A long unbroken term ("chemo/thiopurines/irradiation") breaks rather than
+   widening the card past the screen. */
+.ls-stage, .ls-summary { min-inline-size: 0; overflow-wrap: anywhere; }
 .ls-nowrap { white-space: nowrap; }
 .ls-kicker {
   display: inline-block;
@@ -384,7 +390,8 @@
 }
 .ls-should { color: var(--bad); padding-inline: var(--sp-2); }
 .ls-key { margin: 0; padding-inline-start: 1.4rem; color: var(--muted); }
-.ls-match-cols { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-3); }
+.ls-match-cols { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--sp-3); }
+.ls-match-col .ls-tile { overflow-wrap: anywhere; hyphens: auto; }
 .ls-match-col { display: flex; flex-direction: column; gap: var(--sp-2); }
 .ls-match-col .ls-tile { inline-size: 100%; }
 .ls-bins { display: grid; grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr)); gap: var(--sp-2); }
@@ -444,6 +451,10 @@
 .ls-table thead th { background: var(--accent-soft); color: var(--accent); }
 .ls-table tbody th { font-weight: 700; background: var(--bg); }
 .ls-table td[data-opened="yes"] { background: var(--good-soft); }
+/* Ranges and cut-offs stay whole; the table scrolls inside its card and
+   the row label stays in view. */
+.ls-table [data-short="yes"] { white-space: nowrap; }
+.ls-table tbody th { position: sticky; inset-inline-start: 0; z-index: 1; overflow-wrap: anywhere; min-inline-size: 6rem; }
 .ls-cell-hidden {
   inline-size: 100%;
   min-height: 36px;

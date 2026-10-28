@@ -154,6 +154,16 @@ pub fn jwks_max_age_ms(cache_control: Option<&str>) -> u64 {
         .map_or(DEFAULT, |s| s * 1000)
 }
 
+/// An unknown `kid` refetches Google's keys at most this often. Google rotates
+/// keys over days, and anyone can send a sign-in with a made-up `kid`, so
+/// this keeps them from spending the free plan's subrequests (#263).
+pub const JWKS_REFETCH_GAP_MS: u64 = 5 * 60 * 1000;
+
+/// Whether an unknown `kid` may refetch the keys now.
+pub fn may_refetch(last_forced_ms: Option<u64>, now_ms: u64) -> bool {
+    last_forced_ms.is_none_or(|t| now_ms.saturating_sub(t) >= JWKS_REFETCH_GAP_MS)
+}
+
 #[cfg(test)]
 pub(crate) mod testing {
     //! A fake Google: an RSA key that signs ID tokens, and its JWKS.
@@ -219,6 +229,13 @@ mod tests {
 
     fn ids() -> Vec<String> {
         vec!["batna-mac.apps.googleusercontent.com".into(), CLIENT_ID.into()]
+    }
+
+    #[test]
+    fn unknown_kids_refetch_at_most_every_five_minutes() {
+        assert!(may_refetch(None, NOW));
+        assert!(!may_refetch(Some(NOW), NOW + 60_000));
+        assert!(may_refetch(Some(NOW), NOW + JWKS_REFETCH_GAP_MS));
     }
 
     #[test]

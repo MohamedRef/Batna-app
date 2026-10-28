@@ -286,8 +286,10 @@ fn Summary(lesson: Lesson, right: u32, asked: u32) -> Element {
                     button {
                         class: "btn btn-secondary",
                         onclick: move |_| super::open(ui, &l.id),
-                        "{tx::NEXT_LESSON}: "
-                        Line { text: l.title.clone() }
+                        span { class: "ls-btn-label",
+                            "{tx::NEXT_LESSON}: "
+                            Line { text: l.title.clone() }
+                        }
                     }
                 }
                 button { class: "btn-link", onclick: move |_| close(ui), {tx::BACK_TO_LIST} }

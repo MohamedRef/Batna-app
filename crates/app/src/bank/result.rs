@@ -37,7 +37,7 @@ pub fn Result() -> Element {
             (l.to_string(), t.to_string(), *s)
         })
         .collect();
-    let weak: Vec<(String, String, Score)> = exam::weak_topics(&outcome, 60, 2)
+    let weak: Vec<(String, String, Score)> = exam::focus_topics(&outcome, 60)
         .into_iter()
         .take(5)
         .map(|(k, s)| {
@@ -121,8 +121,12 @@ pub fn Result() -> Element {
                     rows: topics.into_iter().map(|(l, t, s)| (topic_title(&l, &t), s, l, Some(t))).collect::<Vec<_>>(),
                 }
                 h2 { class: "label", {tx::WEAK} }
-                if weak.is_empty() {
+                // Praise only a score that earns it; otherwise point at the
+                // review list below (#233).
+                if weak.is_empty() && outcome.total.percent() >= 60 {
                     p { class: "muted small", {tx::ALL_STRONG} }
+                } else if weak.is_empty() {
+                    p { class: "muted small", {tx::START_WITH_WRONG} }
                 } else {
                     div { class: "chips",
                         // A weak topic opens the bank set to practise just it.

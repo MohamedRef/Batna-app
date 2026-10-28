@@ -24,8 +24,12 @@
 
   document.addEventListener("pointerdown", (e) => {
     if (e.pointerType === "mouse" || !e.isPrimary || !e.target.closest) return;
-    const el = e.target.closest(".ls-player .ls-stage");
-    if (!el || el.hidden || e.target.closest(NOT_HERE)) return;
+    // Anywhere on the lesson turns it, the empty space under a short step
+    // too (#311), except the top bar and the footer's buttons.
+    const player = e.target.closest(".ls-player");
+    if (!player || e.target.closest(".ls-bar, .ls-nav") || e.target.closest(NOT_HERE)) return;
+    const el = player.querySelector(".ls-stage:not([hidden])");
+    if (!el) return;
     g = { x: e.clientX, y: e.clientY, t: performance.now(), el, on: false, dx: 0 };
   }, { passive: true });
 
@@ -79,7 +83,7 @@
   }, { passive: true });
 
   document.addEventListener("click", (e) => {
-    if (performance.now() < swallowUntil && e.isTrusted && e.target.closest && e.target.closest(".ls-stage")) {
+    if (performance.now() < swallowUntil && e.isTrusted && e.target.closest && e.target.closest(".ls-player")) {
       e.preventDefault();
       e.stopPropagation();
     }

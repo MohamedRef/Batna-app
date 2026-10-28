@@ -179,10 +179,11 @@
   gap: var(--sp-3);
   min-block-size: 14rem;
   animation: ls-in 240ms var(--ease);
-  /* Sideways drags turn the page (swipe.js); up and down still scroll. */
-  touch-action: pan-y pinch-zoom;
 }
 .ls-stage[hidden] { display: none; }
+/* Sideways drags anywhere on the lesson turn the page (swipe.js); up and
+   down still scroll. */
+.ls-player { touch-action: pan-y pinch-zoom; }
 /* The next step enters from the left: in a right-to-left app, forward
    moves leftward, so new content arrives from the left (the mirror of an
    English carousel, where the next slide comes from the right). Back

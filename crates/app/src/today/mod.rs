@@ -24,51 +24,57 @@ pub fn Today() -> Element {
 
     rsx! {
         style { {CSS} }
-        section { class: "card today-hero",
-            h1 { {tx::TITLE} }
-            div { class: "tiles",
-                Tile { value: o.due, label: tx::DUE, accent: o.due > 0 }
-                Tile { value: o.new_today, label: tx::NEW }
-                Tile { value: o.checked, label: tx::CHECKED }
-            }
-            if ready {
-                if o.due > 0 {
-                    p { class: "muted small", "{tx::DUE_TIME_1} {o.due_minutes} {tx::DUE_TIME_2}" }
+        // Tablet landscape and the Mac: today's plan stays in view on one
+        // side while the lecture library scrolls on the other.
+        div { class: "tab-cols today-cols", "data-wide": "aside",
+            div { class: "tab-main tab-sticky",
+                section { class: "card today-hero",
+                    h1 { {tx::TITLE} }
+                    div { class: "tiles",
+                        Tile { value: o.due, label: tx::DUE, accent: o.due > 0 }
+                        Tile { value: o.new_today, label: tx::NEW }
+                        Tile { value: o.checked, label: tx::CHECKED }
+                    }
+                    if ready {
+                        if o.due > 0 {
+                            p { class: "muted small", "{tx::DUE_TIME_1} {o.due_minutes} {tx::DUE_TIME_2}" }
+                        }
+                        button {
+                            class: "primary start",
+                            onclick: move |_| {
+                                *crate::study::START.write() = Some(crate::study::Start { lectures: None, items: None, minutes: crate::onboarding::session_minutes() });
+                                ui.screen.set(Screen::Study);
+                            },
+                            {tx::START}
+                        }
+                    } else if o.seen == 0 && o.unseen == 0 {
+                        p { class: "muted", {tx::NOTHING_WRITTEN} }
+                    } else if o.unseen > 0 {
+                        p { {tx::ALL_DONE} }
+                        p { class: "muted small", "{tx::NEW_CAP_REACHED} · {tx::TOMORROW} {o.due_tomorrow}" }
+                    } else {
+                        p { {tx::ALL_DONE} }
+                        p { class: "muted small", "{tx::TOMORROW} {o.due_tomorrow}" }
+                    }
+                    if let Some(e) = store::open_error() {
+                        p { class: "note", "{tx::STORE_FAILED} " bdi { dir: "ltr", "{e}" } }
+                    }
                 }
-                button {
-                    class: "primary start",
-                    onclick: move |_| {
-                        *crate::study::START.write() = Some(crate::study::Start { lectures: None, items: None, minutes: crate::onboarding::session_minutes() });
-                        ui.screen.set(Screen::Study);
-                    },
-                    {tx::START}
-                }
-            } else if o.seen == 0 && o.unseen == 0 {
-                p { class: "muted", {tx::NOTHING_WRITTEN} }
-            } else if o.unseen > 0 {
-                p { {tx::ALL_DONE} }
-                p { class: "muted small", "{tx::NEW_CAP_REACHED} · {tx::TOMORROW} {o.due_tomorrow}" }
-            } else {
-                p { {tx::ALL_DONE} }
-                p { class: "muted small", "{tx::TOMORROW} {o.due_tomorrow}" }
-            }
-            if let Some(e) = store::open_error() {
-                p { class: "note", "{tx::STORE_FAILED} " bdi { dir: "ltr", "{e}" } }
-            }
-        }
-        crate::learn::TodayLesson { prefer: o.lectures.iter().map(|l| l.id.clone()).collect::<Vec<_>>() }
-        crate::recap::TodayRecap { due_left: o.due, due_tomorrow: o.due_tomorrow }
-        if !o.lectures.is_empty() {
-            section { class: "in-progress",
-                h2 { {tx::IN_PROGRESS} }
-                ul { class: "progress-list",
-                    for l in o.lectures.iter() {
-                        Progress { key: "{l.id}", lecture: l.clone() }
+                crate::learn::TodayLesson { prefer: o.lectures.iter().map(|l| l.id.clone()).collect::<Vec<_>>() }
+                crate::recap::TodayRecap { due_left: o.due, due_tomorrow: o.due_tomorrow }
+                if !o.lectures.is_empty() {
+                    section { class: "in-progress",
+                        h2 { {tx::IN_PROGRESS} }
+                        ul { class: "progress-list",
+                            for l in o.lectures.iter() {
+                                Progress { key: "{l.id}", lecture: l.clone() }
+                            }
+                        }
                     }
                 }
             }
+            div { class: "tab-aside", LibraryList {} }
         }
-        LibraryList {}
     }
 }
 

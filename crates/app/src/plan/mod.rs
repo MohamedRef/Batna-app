@@ -4,6 +4,7 @@
 use std::rc::Rc;
 
 use batna_core::plan::{self, Day, DayPlan, Focus, Plan, PlanInput, PlanSettings, PlanStatus};
+use batna_core::review::StudyStore;
 use batna_core::stats;
 use dioxus::prelude::*;
 
@@ -36,7 +37,80 @@ pub(crate) fn reload() {
 /// Best effort: if the store can't write, the plan still holds for this run.
 pub(crate) fn save(settings: &PlanSettings) {
     if std::env::var_os("BATNA_PLAN_EXAM").is_none() {
-        let _ = crate::store::shared().put_setting(KEY, settings);
+        crate::store::save_setting(KEY, settings);
+    }
+}
+
+/// The plan from the start of today's study day: progress as it stood this
+/// morning, plus the reviews FSRS has due from now on. Today's share stays
+/// put while he works through it.
+pub fn plan_for(data: &StudyData, settings: &PlanSettings) -> Plan {
+    let today = data.clock.today();
+    let progress = stats::progress_at_day_start(&data.lectures, &data.events, &data.marks, data.clock);
+    let span = settings.exam.map_or(0, |e| today.until(e).max(0) as usize);
+    let forecast = data.due_forecast(span);
+    plan::plan(settings, PlanInput { today, lectures: &progress, review_forecast: &forecast })
+}
+
+/// Today's share of the exam plan: the one daily target that Today, the
+/// study session and Settings › Review all read (#99).
+#[derive(Clone, Debug, PartialEq)]
+pub struct DailyTarget {
+    pub plan: Plan,
+    pub exam: Day,
+    /// Calendar days until the exam.
+    pub days_left: i32,
+    /// What today has done so far.
+    pub done: stats::DayDone,
+}
+
+impl DailyTarget {
+    /// Today's line of the plan (`None` once the exam day has come).
+    pub fn today(&self) -> Option<&DayPlan> {
+        self.plan.today()
+    }
+
+    /// New items the plan gives today.
+    pub fn new_goal(&self) -> u32 {
+        self.today().map_or(0, |d| d.new)
+    }
+
+    /// New items still to start today.
+    pub fn new_left(&self) -> u32 {
+        self.new_goal().saturating_sub(self.done.new)
+    }
+}
+
+/// The plan's target for today, or `None` without an exam day, before any
+/// study day is ticked, or once the exam has passed: the review settings'
+/// daily cap rules then.
+pub fn daily_target(data: &StudyData, settings: &PlanSettings) -> Option<DailyTarget> {
+    let exam = settings.exam?;
+    let p = plan_for(data, settings);
+    if matches!(p.status, PlanStatus::NoExamDate | PlanStatus::NoStudyDays | PlanStatus::ExamDone) {
+        return None;
+    }
+    let done = stats::done_today(&data.lectures, &data.events, &data.marks, data.clock);
+    Some(DailyTarget { days_left: data.clock.today().until(exam), plan: p, exam, done })
+}
+
+/// The target from the store and the saved plan. Reading `SETTINGS` here
+/// subscribes a component to plan edits.
+pub fn target_now(store: &dyn StudyStore) -> Option<DailyTarget> {
+    target_for(store, SETTINGS.read().clone())
+}
+
+fn target_for(store: &dyn StudyStore, settings: PlanSettings) -> Option<DailyTarget> {
+    settings.exam?;
+    daily_target(&StudyData::load(store), &settings)
+}
+
+/// New items a session may still start today: the exam plan's when there
+/// is one, else the review settings' daily cap.
+pub fn new_left_today(store: &dyn StudyStore, now_ms: i64) -> usize {
+    match target_for(store, SETTINGS.peek().clone()) {
+        Some(t) => t.new_left() as usize,
+        None => store.new_left_today(now_ms),
     }
 }
 
@@ -49,22 +123,21 @@ pub fn Planner(data: Rc<StudyData>) -> Element {
             Setup { today: data.clock.today(), settings, on_done: move |_| editing.set(false) }
         };
     }
-    let rows = data.stats();
-    let progress = stats::progress(&rows);
-    // Reviews already due, from FSRS.
-    let today = data.clock.today();
-    let span = settings.exam.map_or(0, |e| today.until(e).max(0) as usize);
-    let forecast = data.due_forecast(span);
-    let p = plan::plan(&settings, PlanInput { today, lectures: &progress, review_forecast: &forecast });
+    let p = plan_for(&data, &settings);
+    // The plan starts from this morning; the progress bars show right now.
+    let live = stats::progress(&data.stats());
+    let mut now = p.clone();
+    now.seen = live.iter().map(|l| l.seen.min(l.total)).sum();
+    now.seen_twice = live.iter().map(|l| l.seen_twice.min(l.total)).sum();
     rsx! {
         StatusCard { p: p.clone(), exam: settings.exam }
         TodayCard { p: p.clone() }
         LoadCard { p: p.clone(), cap: settings.review_cap }
         PaceCard { p: p.clone(), past: past_pace(&data) }
-        ProgressCard { p: p.clone() }
+        ProgressCard { p: now }
         WeekCard { p: p.clone() }
         div { class: "plan-actions",
-            button { class: "secondary", onclick: move |_| editing.set(true), {tx::EDIT} }
+            button { class: "btn btn-secondary", onclick: move |_| editing.set(true), {tx::EDIT} }
         }
     }
 }
@@ -146,9 +219,9 @@ fn Setup(today: Day, settings: PlanSettings, on_done: EventHandler<()>) -> Eleme
                 p { class: "error", role: "alert", {msg} }
             }
             div { class: "plan-actions",
-                button { class: "primary", onclick: save, {tx::SAVE} }
+                button { class: "btn btn-primary", onclick: save, {tx::SAVE} }
                 if had_exam {
-                    button { class: "secondary", onclick: move |_| on_done.call(()), {tx::CANCEL} }
+                    button { class: "btn btn-secondary", onclick: move |_| on_done.call(()), {tx::CANCEL} }
                 }
             }
         }
@@ -382,17 +455,17 @@ fn DayLine(d: DayPlan) -> Element {
 }
 
 #[component]
-fn DayDetail(d: DayPlan) -> Element {
+pub(crate) fn DayDetail(d: DayPlan) -> Element {
     rsx! {
         span { class: "plan-detail muted small",
             if d.new > 0 {
                 "{d.new} {tx::NEW_ITEMS} {tx::FROM} "
-                bdi { {lectures(&d.new_lectures)} }
+                bdi { {lecture_list(&d.new_lectures)} }
                 " · "
             }
             if !d.revisit.is_empty() {
                 "{tx::REVISIT} "
-                bdi { {lectures(&d.revisit)} }
+                bdi { {lecture_list(&d.revisit)} }
                 " · "
             }
             "{d.reviews} {tx::REVIEWS}"
@@ -401,11 +474,11 @@ fn DayDetail(d: DayPlan) -> Element {
 }
 
 /// `["hb.L01", "hb.L02"]` → `L1, L2`.
-fn lectures(ids: &[String]) -> String {
+pub(crate) fn lecture_list(ids: &[String]) -> String {
     ids.iter().map(|id| format!("L{}", lecture_number(id))).collect::<Vec<_>>().join(", ")
 }
 
-fn focus_label(f: Focus) -> &'static str {
+pub(crate) fn focus_label(f: Focus) -> &'static str {
     match f {
         Focus::Learn => tx::FOCUS_LEARN,
         Focus::Revisit => tx::FOCUS_REVISIT,
@@ -436,6 +509,50 @@ mod tests {
         let d = Day::from_ymd(2027, 1, 20).unwrap();
         assert_eq!(long_date(d), "الأربع 20 يناير 2027");
         assert_eq!(short_date(d), "أربع 20 يناير");
-        assert_eq!(lectures(&["hb.L01".into(), "hb.L12".into()]), "L1, L12");
+        assert_eq!(lecture_list(&["hb.L01".into(), "hb.L12".into()]), "L1, L12");
+    }
+
+    #[test]
+    fn todays_target_holds_still_while_he_studies() {
+        use batna_core::review::{Grade, Origin, ReviewEvent};
+        use batna_core::stats::Clock;
+
+        let Some(lecture) =
+            crate::content::Library::get().lectures.values().find(|l| l.items.len() >= 6).cloned()
+        else {
+            return; // no content embedded
+        };
+        const DAY_MS: i64 = 86_400_000;
+        let now_ms = 20_400 * DAY_MS + 12 * 3_600_000;
+        let clock = Clock { now_ms, zone: batna_core::zone::Zone::fixed(0), rollover_hour: 4 };
+        let answer = |i: usize, days_ago: i64| ReviewEvent {
+            item_id: lecture.items[i].id.clone(),
+            grade: Grade::Good,
+            origin: Origin::Review,
+            at_ms: now_ms - days_ago * DAY_MS,
+            took_ms: 5000,
+        };
+        let data = |events: Vec<ReviewEvent>| StudyData {
+            lectures: vec![lecture.clone()],
+            events,
+            marks: Default::default(),
+            forecast: Some(Vec::new()),
+            clock,
+            demo: false,
+        };
+        let settings = PlanSettings { exam: Some(clock.today().plus(60)), ..PlanSettings::default() };
+        assert!(
+            daily_target(&data(Vec::new()), &PlanSettings::default()).is_none(),
+            "no exam day, no target"
+        );
+
+        let morning = daily_target(&data(vec![answer(0, 1)]), &settings).unwrap();
+        let later =
+            daily_target(&data(vec![answer(0, 1), answer(0, 0), answer(1, 0), answer(2, 0)]), &settings)
+                .unwrap();
+        assert_eq!(morning.days_left, 60);
+        assert_eq!(later.new_goal(), morning.new_goal(), "today's share doesn't shrink as he works");
+        assert_eq!(later.done, stats::DayDone { new: 2, reviews: 1 });
+        assert_eq!(later.new_left(), morning.new_goal().saturating_sub(2));
     }
 }

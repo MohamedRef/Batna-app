@@ -38,7 +38,8 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
     let out = crate::flag(args, "--out").map(PathBuf::from).unwrap_or_else(|| root.join("dist/packs"));
 
     let (index, lectures) = load(root)?;
-    let pack = Pack::new(index, lectures);
+    let lessons = crate::lessons::load(root)?.into_iter().map(|(_, f, _)| f).collect();
+    let pack = Pack::new(index, lectures).with_lessons(lessons);
     let bytes = pack.encode();
     match Pack::decode(&bytes) {
         Ok(back) if back == pack => {}
@@ -46,9 +47,10 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
         Err(e) => return Err(vec![format!("the pack doesn't decode: {e}")]),
     }
     let summary = format!(
-        "{} lecture(s), {} items, {:.1} KB packed",
+        "{} lecture(s), {} items, {} lesson(s), {:.1} KB packed",
         pack.lectures.len(),
         pack.item_count(),
+        pack.lessons.iter().map(|f| f.lessons.len()).sum::<usize>(),
         bytes.len() as f64 / 1024.0
     );
     if check {

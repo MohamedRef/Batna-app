@@ -5,6 +5,7 @@ use std::collections::BTreeMap;
 use std::sync::OnceLock;
 
 use batna_core::content::{Index, Lecture};
+use batna_core::lesson::{Lesson, LessonFile};
 use batna_core::pack::Pack;
 
 mod embedded {
@@ -15,6 +16,8 @@ pub struct Library {
     pub index: Index,
     /// Written lectures, by id (`hb.L01`).
     pub lectures: BTreeMap<String, Lecture>,
+    /// Lesson files, by lecture id (`hb.L01`), in book order.
+    pub lessons: BTreeMap<String, LessonFile>,
 }
 
 impl Library {
@@ -24,11 +27,27 @@ impl Library {
             // A newer pack from the update feed wins (checked and decoded
             // there); else the embedded one, which build.rs wrote from types
             // it just parsed, so it can't fail.
-            let Pack { index, lectures } = crate::update::installed_pack()
+            let Pack { index, lectures, lessons } = crate::update::installed_pack()
                 .unwrap_or_else(|| Pack::decode(embedded::PACK).expect("embedded content pack"));
             let lectures = lectures.into_iter().map(|l| (l.lecture.clone(), l)).collect();
-            Library { index, lectures }
+            let lessons = lessons.into_iter().map(|l| (l.lecture.clone(), l)).collect();
+            Library { index, lectures, lessons }
         })
+    }
+
+    /// Every lesson in book order, with its lecture id.
+    pub fn all_lessons(&self) -> impl Iterator<Item = (&str, &Lesson)> {
+        self.index
+            .lectures
+            .iter()
+            .filter_map(|e| self.lessons.get(&e.id))
+            .flat_map(|f| f.lessons.iter().map(move |l| (f.lecture.as_str(), l)))
+    }
+
+    pub fn lesson(&self, id: &str) -> Option<(&Lecture, &Lesson)> {
+        let lecture = id.rsplit_once('.').map(|(l, _)| l)?;
+        let lesson = self.lessons.get(lecture)?.lessons.iter().find(|l| l.id == id)?;
+        Some((self.lectures.get(lecture)?, lesson))
     }
 }
 

@@ -3,7 +3,7 @@
 ## Mac (desktop)
 1. Install Rust (`curl https://sh.rustup.rs -sSf | sh`) and `just` (`brew install just`).
 2. Clone the repo: `git clone https://github.com/MohamedRef/Batna-app && cd Batna-app` (Batna's code is on `main`).
-3. `just run` opens the app. `BATNA_WINDOW_SIZE=412x900 just run` previews the phone layout. `BATNA_OPEN_SCREEN=study just run` opens a screen directly. `BATNA_OPEN_SETTINGS=look just run` opens Settings on a section (`study`, `reminders`, `sync`, `look`, `tablet`, `mac`, `data`, `updates`, `about`; empty for the list). Theme and text size are kept per device in `device-prefs.txt` in the data folder (Settings › Your data shows where).
+3. `just run` opens the app. `BATNA_WINDOW_SIZE=412x900 just run` previews the phone layout. `BATNA_OPEN_SCREEN=study just run` opens a screen directly. `BATNA_OPEN_SETTINGS=look just run` opens Settings on a section (`study`, `reminders`, `sync`, `look`, `tablet`, `mac`, `data`, `updates`, `about`; empty for the list). Theme and interface size (`text_size`) are kept per device in `device-prefs.txt` in the data folder (Settings › Your data shows where).
    - Progress screen previews: `BATNA_OPEN_SCREEN=stats BATNA_STATS_TAB=plan BATNA_PLAN_EXAM=2027-01-20 BATNA_STATS_DEMO=1 just run` opens the exam planner with a preset exam day and demo numbers (labelled as demo on screen). `BATNA_STATS_TAB` is `progress`, `mistakes` or `plan`.
 
 ## S24 Ultra and Tab S11 (Android)
@@ -15,6 +15,8 @@
 `android/` at the repo root is a small Gradle library module with the Kotlin that Rust calls through JNI (screen-off oral mode and vibration now; reminders, export and updates later). Nothing to configure: the `#[manganis::ffi("../../android")]` marker in `crates/app/src/platform/background.rs` makes `dx` 0.7.10 copy the folder into its generated Gradle project, add it as an app dependency, and merge `android/src/main/AndroidManifest.xml` (permissions and receivers the glue needs) into the app's manifest.
 
 `scripts/android-check-apk.sh <apk>` fails if the Kotlin classes or their permissions are missing from an APK; CI runs it on every change to `android/`. When you add a Kotlin class that Rust looks up by name, add it to `CLASSES` in that script. `adb logcat` shows Kotlin errors on the device.
+
+The Mac build (clippy, tests and `dx bundle`) runs in `.github/workflows/mac.yml` on every push to `main`, nightly and by hand (Actions › Mac › Run workflow), not on pull requests: hosted Mac runners are sometimes unavailable for most of an hour. Check that workflow on `main` after touching Mac-only code, or run `just check` plus `just bundle-mac` on the Mac.
 
 Release builds (`just apk`, `just install-android`, `just bundle-mac`), their one-time keys, the CI preview APK and updates over the air are described in [RELEASE.md](RELEASE.md). Nothing is released before Mohamed says go, so for now the debug build, or the CI preview APK on the `batna-preview` prerelease, is the way to try Batna.
 

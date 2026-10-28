@@ -58,6 +58,7 @@ pub fn ItemView(
                 {render(&item, on_grade)}
             }
             footer { class: "st-item-foot",
+                crate::learn::ExplainLink { item_id: item.id.clone() }
                 // His own cards may have no page.
                 if item.src.page > 0 {
                     crate::hover::BookPage {
@@ -100,7 +101,7 @@ fn render(item: &Item, on_grade: EventHandler<Grade>) -> Element {
         // Not in PLAYABLE yet: other chunks bring these screens.
         _ => rsx! {
             p { class: "muted", {tx::NOT_HERE_YET} }
-            button { class: "st-secondary", onclick: move |_| on_grade.call(Grade::Good), {tx::SKIP} }
+            button { class: "btn btn-secondary btn-lg", onclick: move |_| on_grade.call(Grade::Good), {tx::SKIP} }
         },
     }
 }

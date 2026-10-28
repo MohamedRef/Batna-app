@@ -75,7 +75,7 @@ pub fn Result() -> Element {
                 div { class: "review-detail",
                     div { class: "review-detail-head",
                         span { class: "run-count", "{tx::QUESTION} " bdi { "{i + 1}" } }
-                        button { class: "link", "aria-keyshortcuts": "Escape", onclick: move |_| open.set(None), {tx::CLOSE} }
+                        button { class: "btn-link", "aria-keyshortcuts": "Escape", onclick: move |_| open.set(None), {tx::CLOSE} }
                     }
                     QuestionView { key: "{i}", q, chosen: a.chosen, reveal: true }
                 }
@@ -176,12 +176,12 @@ pub fn Result() -> Element {
         div { class: "start-row",
             if has_wrong {
                 button {
-                    class: "button primary",
+                    class: "btn btn-primary",
                     onclick: move |_| start(Mode::Tutor, wrong.clone()),
                     {tx::RETRY_WRONG}
                 }
             }
-            button { class: "button", onclick: move |_| back_to_setup(), {tx::BACK} }
+            button { class: "btn btn-secondary", onclick: move |_| back_to_setup(), {tx::BACK} }
         }
     }
 }

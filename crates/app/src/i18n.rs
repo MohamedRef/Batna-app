@@ -1062,7 +1062,7 @@ pub mod update {
     pub const WAITING_WIFI: &str = "هينزّلها لوحده أول ما تبقى على واي فاي.";
     pub const LATER: &str = "بعدين";
     pub const WHATS_NEW: &str = "الجديد";
-    pub const CONTENT_WAITING: &str = "محتوى جديد نزل، وهيظهر أول ما تفتح باطنة تاني.";
+    pub const CONTENT_WAITING: &str = "محتوى جديد نزل، وهيظهر لوحده أول ما تخلّص اللي بتذاكره.";
 
     // Mode and channel.
     pub const MODE: &str = "إزاي يتحدّث";
@@ -1124,6 +1124,8 @@ pub mod update {
     pub const BADGE_LATEST: &str = "الأحدث";
     pub const BADGE_INSTALLED: &str = "اللي معاك";
     pub const BADGE_NEW: &str = "جديد عليك";
+    /// A content-only update: lectures, lessons or the look, no install.
+    pub const BADGE_CONTENT: &str = "تحديث محتوى";
     pub const TODAY: &str = "النهارده";
     pub const YESTERDAY: &str = "امبارح";
     pub const TWO_DAYS_AGO: &str = "من يومين";

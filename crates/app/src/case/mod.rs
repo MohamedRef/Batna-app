@@ -17,8 +17,9 @@ use crate::calc::{Calculators, item::CalcItem};
 use crate::content::Library;
 use crate::hover::BookPage;
 use crate::i18n::case as tx;
+use crate::look::{Css, css};
 
-const CSS: &str = include_str!("case.css");
+const CSS: Css = css!("src/case/case.css");
 
 /// The tab the screen opens on next, when Today sends him to due items.
 static START_TAB: GlobalSignal<Option<Tab>> = Signal::global(|| None);
@@ -43,7 +44,7 @@ pub fn CasesScreen() -> Element {
     let mut open = use_signal(|| None::<String>);
     let back = move |_| open.set(None);
     rsx! {
-        style { {CSS} }
+        style { {CSS.text()} }
         if let Some(id) = open() {
             if tab() == Tab::Cases {
                 CasePlayer { key: "{id}", item_id: id, on_back: back }

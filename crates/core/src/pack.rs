@@ -7,6 +7,8 @@
 //! than a binary format because items use `#[serde(flatten)]` and untagged
 //! enums, which only self-describing formats support.
 
+use std::collections::BTreeMap;
+
 use miniz_oxide::deflate::compress_to_vec;
 use miniz_oxide::inflate::decompress_to_vec_with_limit;
 use serde::{Deserialize, Serialize};
@@ -31,6 +33,12 @@ pub struct Pack {
     /// Lessons (`batna.lesson/v1`), in lecture order. Older packs have none.
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub lessons: Vec<LessonFile>,
+    /// The app's stylesheets, by path under `crates/app` (`src/lecture/lecture.css`),
+    /// so a change to the look reaches devices without a new app build. Only
+    /// the build the feed names in `ui_build` uses them (`update::UpdateManifest`);
+    /// the pack built into the app has none.
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+    pub look: BTreeMap<String, String>,
 }
 
 #[derive(Debug, thiserror::Error)]
@@ -48,7 +56,7 @@ impl Pack {
     pub fn new(index: Index, mut lectures: Vec<Lecture>) -> Self {
         let pos = |id: &str| index.lectures.iter().position(|e| e.id == id).unwrap_or(usize::MAX);
         lectures.sort_by(|a, b| pos(&a.lecture).cmp(&pos(&b.lecture)).then(a.lecture.cmp(&b.lecture)));
-        Pack { index, lectures, lessons: Vec::new() }
+        Pack { index, lectures, lessons: Vec::new(), look: BTreeMap::new() }
     }
 
     /// Adds the lesson files, in the lectures' order.
@@ -56,6 +64,12 @@ impl Pack {
         let pos = |id: &str| self.index.lectures.iter().position(|e| e.id == id).unwrap_or(usize::MAX);
         lessons.sort_by(|a, b| pos(&a.lecture).cmp(&pos(&b.lecture)).then(a.lecture.cmp(&b.lecture)));
         self.lessons = lessons;
+        self
+    }
+
+    /// Adds the app's stylesheets (path under `crates/app` → CSS).
+    pub fn with_look(mut self, look: BTreeMap<String, String>) -> Self {
+        self.look = look;
         self
     }
 

@@ -1,5 +1,6 @@
 //! `batna-tools packs build [--out DIR] [--check]`: the offline content pack
-//! (`batna_core::pack`), the same bytes `crates/app/build.rs` embeds.
+//! (`batna_core::pack`): the content `crates/app/build.rs` embeds, plus the
+//! app's stylesheets (`Pack::look`) so the update feed can carry the look.
 //!
 //! - `build` writes `dist/packs/batna-content.pack` and prints what is in it.
 //! - `--check` (CI) writes nothing. It fails when a lecture file doesn't
@@ -7,6 +8,7 @@
 //!
 //! Also home of [`load`], which the Anki exporter shares.
 
+use std::collections::BTreeMap;
 use std::path::{Path, PathBuf};
 
 use batna_core::content::{Index, Lecture};
@@ -43,7 +45,7 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
     if !missing.is_empty() {
         return Err(missing);
     }
-    let pack = Pack::new(index, lectures).with_lessons(lessons);
+    let pack = Pack::new(index, lectures).with_lessons(lessons).with_look(look(root)?);
     let bytes = pack.encode();
     match Pack::decode(&bytes) {
         Ok(back) if back == pack => {}
@@ -51,10 +53,11 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
         Err(e) => return Err(vec![format!("the pack doesn't decode: {e}")]),
     }
     let summary = format!(
-        "{} lecture(s), {} items, {} lesson(s), {:.1} KB packed",
+        "{} lecture(s), {} items, {} lesson(s), {} stylesheet(s), {:.1} KB packed",
         pack.lectures.len(),
         pack.item_count(),
         pack.lessons.iter().map(|f| f.lessons.len()).sum::<usize>(),
+        pack.look.len(),
         bytes.len() as f64 / 1024.0
     );
     if check {
@@ -66,6 +69,30 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
     Ok(format!("{}: {summary}", path.display()))
 }
 
+/// Every stylesheet of the app, by path under `crates/app`, so the pack can
+/// carry the look (`Pack::look`); none outside a full checkout.
+fn look(root: &Path) -> Result<BTreeMap<String, String>, Vec<String>> {
+    let app = root.join("crates/app");
+    let mut out = BTreeMap::new();
+    let mut dirs = vec![app.join("src"), app.join("assets")];
+    while let Some(dir) = dirs.pop() {
+        let Ok(entries) = std::fs::read_dir(&dir) else { continue };
+        for entry in entries {
+            let path = entry.map_err(|e| vec![format!("{}: {e}", dir.display())])?.path();
+            if path.is_dir() {
+                dirs.push(path);
+            } else if path.extension().is_some_and(|e| e == "css") {
+                let text =
+                    std::fs::read_to_string(&path).map_err(|e| vec![format!("{}: {e}", path.display())])?;
+                let key =
+                    path.strip_prefix(&app).expect("under crates/app").to_string_lossy().replace('\\', "/");
+                out.insert(key, text);
+            }
+        }
+    }
+    Ok(out)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -75,6 +102,11 @@ mod tests {
         let root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../..");
         let report = run(&root, &["build".into(), "--check".into()]).unwrap();
         assert!(report.starts_with("pack OK"), "{report}");
+        let look = look(&root).unwrap();
+        assert!(
+            look.contains_key("assets/main.css") && look.contains_key("src/lecture/lecture.css"),
+            "{look:?}"
+        );
     }
 
     #[test]

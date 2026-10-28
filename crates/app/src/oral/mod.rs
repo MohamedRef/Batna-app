@@ -15,11 +15,12 @@ use dioxus::prelude::*;
 use crate::content::Library;
 use crate::i18n::count::{QUESTION, SECOND, count};
 use crate::i18n::oral as tx;
+use crate::look::{Css, css};
 use crate::platform::background::{self, Labels, Remote};
 use crate::platform::tts;
 use session::{Entry, Pick, Session};
 
-const ORAL_CSS: &str = include_str!("oral.css");
+const ORAL_CSS: Css = css!("src/oral/oral.css");
 
 /// Think-timer choices, in seconds (the brief's 10–30 s range).
 const THINK_MIN: u32 = 10;
@@ -70,7 +71,7 @@ pub fn Oral() -> Element {
     use_drop(tts::stop);
     let active = SESSION.read().as_ref().map(|s| s.current.is_some() || s.left() > 0);
     rsx! {
-        style { {ORAL_CSS} }
+        style { {ORAL_CSS.text()} }
         match active {
             None => rsx! { Setup {} },
             Some(true) => rsx! { Runner {} },

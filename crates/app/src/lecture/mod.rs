@@ -12,11 +12,12 @@ use dioxus::prelude::*;
 
 use crate::content::{Library, lecture_code};
 use crate::i18n::lecture as tx;
+use crate::look::{Css, css};
 use crate::stats::{StudyData, pct};
 use crate::store::{now_ms, use_review};
 use crate::{Screen, Ui};
 
-const CSS: &str = include_str!("lecture.css");
+const CSS: Css = css!("src/lecture/lecture.css");
 
 /// The open lecture and the screen it opened over. `BATNA_OPEN_LECTURE=hb.L01`
 /// opens one at launch over the first screen (previews, screenshots).
@@ -119,8 +120,8 @@ pub fn LecturePage(id: String) -> Element {
     let due_n = due.len();
 
     rsx! {
-        style { {crate::learn::CSS} }
-        style { {CSS} }
+        style { {crate::learn::CSS.text()} }
+        style { {CSS.text()} }
         div { class: "lec-page",
             div { class: "lec-top",
                 button {

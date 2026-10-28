@@ -480,6 +480,30 @@ fn overlay_open() -> bool {
     crate::lecture::is_open() || crate::own::drafting() || *crate::onboarding::OPEN.peek()
 }
 
+/// Switches to a content pack that arrived while Batna is open, once he is
+/// between sessions (the calm moments a quiet install waits for too): the
+/// lectures, lessons and look change under him with no install, and the
+/// screens are drawn again. Mounted once in the shell.
+pub fn use_content_switch(ui: Ui) {
+    let status = use_update_status();
+    use_future(move || async move {
+        if super::get().is_none() {
+            return;
+        }
+        loop {
+            tokio::time::sleep(std::time::Duration::from_secs(2)).await;
+            let waiting = status.peek().as_ref().is_some_and(|s| s.content_waiting);
+            if waiting
+                && calm(*ui.screen.peek())
+                && !overlay_open()
+                && super::get().is_some_and(|u| u.apply_content())
+            {
+                *crate::content::REV.write() += 1;
+            }
+        }
+    });
+}
+
 /// Android: follows an install in progress, picks up after "Install unknown
 /// apps" was allowed, and, in automatic mode, installs a ready update
 /// quietly while Batna is in the background (never mid-session, and only

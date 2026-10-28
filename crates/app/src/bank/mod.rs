@@ -19,8 +19,9 @@ use dioxus::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::content::Library;
+use crate::look::{Css, css};
 
-const BANK_CSS: &str = include_str!("bank.css");
+const BANK_CSS: Css = css!("src/bank/bank.css");
 
 /// A paper in progress.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -94,8 +95,8 @@ pub fn Bank() -> Element {
         Phase::Done { .. } => 2,
     };
     rsx! {
-        style { {BANK_CSS} }
-        style { {crate::verify::CSS} }
+        style { {BANK_CSS.text()} }
+        style { {crate::verify::CSS.text()} }
         div { class: "bank",
             match phase {
                 0 => rsx! { setup::Setup {} },

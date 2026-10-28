@@ -16,8 +16,9 @@ pub mod menu;
 use dioxus::prelude::*;
 
 use crate::i18n::settings as tx;
+use crate::look::{Css, css};
 
-const SETTINGS_CSS: &str = include_str!("../../assets/settings.css");
+const SETTINGS_CSS: Css = css!("assets/settings.css");
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
 pub enum Section {
@@ -173,7 +174,7 @@ pub fn SettingsSheet() -> Element {
     let mut section_sig = nav.section;
 
     rsx! {
-        style { {SETTINGS_CSS} }
+        style { {SETTINGS_CSS.text()} }
         div { class: "settings-backdrop", onclick: move |_| nav.close() }
         div {
             class: "settings-window",

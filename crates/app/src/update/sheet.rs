@@ -86,6 +86,7 @@ const SHEET_CSS: &str = r#"
 .us-chevron { grid-row: 1 / span 2; grid-column: 2; align-self: center; color: var(--muted);
   transition: transform var(--dur) var(--ease); }
 .us-rel-head[aria-expanded="true"] .us-chevron { transform: rotate(180deg); }
+.us-badge.us-content { background: var(--accent-soft); color: var(--text); }
 .us-badge { font-size: 0.75rem; font-weight: 600; padding: 0.1rem 0.55rem; border-radius: var(--radius-sm);
   background: color-mix(in srgb, var(--node, var(--muted)) 22%, var(--surface)); color: var(--node, var(--muted)); }
 .us-kinds { display: grid; gap: var(--sp-2); margin-block-start: var(--sp-2); }
@@ -222,15 +223,21 @@ fn today() -> i64 {
 pub fn UpdateSheet() -> Element {
     let UpdateSheetNav(mut mode) = use_context::<UpdateSheetNav>();
     let status = use_update_status();
-    let mut opened_after_update = use_signal(|| false);
+    // The update "What's new" last opened for (a content update can bring
+    // another while Batna stays open).
+    let mut opened_after_update = use_signal(|| None::<String>);
     let mut open_builds = use_signal(Vec::<String>::new);
     let mut open_kinds = use_signal(Vec::<String>::new);
     let mut earlier_shown = use_signal(|| EARLIER_STEP);
 
     use_effect(move || {
-        let has = status.read().as_ref().is_some_and(|s| !s.whats_new().is_empty());
-        if has && !*opened_after_update.peek() && mode.peek().is_none() {
-            opened_after_update.set(true);
+        let from = status
+            .read()
+            .as_ref()
+            .filter(|s| !s.whats_new().is_empty())
+            .and_then(|s| s.prefs.whats_new_from.clone());
+        if from.is_some() && *opened_after_update.peek() != from && mode.peek().is_none() {
+            opened_after_update.set(from);
             mode.set(Some(SheetMode::Updated));
         }
     });
@@ -260,7 +267,7 @@ pub fn UpdateSheet() -> Element {
         _ => None,
     };
     let current = s.current();
-    let this_label = label(&s.version, s.build);
+    let this_label = label(&s.version, s.shown_build());
     let latest_key = s.history.first().map(BuildChanges::key);
 
     // What the timeline shows first, the jump the summary names, and what
@@ -326,7 +333,7 @@ pub fn UpdateSheet() -> Element {
     let today = today();
     let badge_of = |b: &BuildChanges| -> Option<(&'static str, &'static str)> {
         let o = changelog::order(&b.version, b.build);
-        if Some(b.key()) == Some(format!("{}+{}", s.version, s.build)) {
+        if Some(b.key()) == Some(format!("{}+{}", s.version, s.shown_build())) {
             Some(("installed", tx::BADGE_INSTALLED))
         } else if latest_key.as_deref() == Some(b.key().as_str()) {
             Some(("latest", tx::BADGE_LATEST))
@@ -353,7 +360,7 @@ pub fn UpdateSheet() -> Element {
         .collect();
     // As in Morphe, the installed build closes the main list and "Earlier
     // builds" starts after it.
-    let this_key = format!("{}+{}", s.version, s.build);
+    let this_key = format!("{}+{}", s.version, s.shown_build());
     let first_earlier = shown.iter().position(|(e, b)| *e && b.key() != this_key);
     let more_earlier = earlier.len() > show_earlier;
     let empty = shown.is_empty();
@@ -454,6 +461,9 @@ pub fn UpdateSheet() -> Element {
                                             bdi { dir: "ltr", class: "latin", "v{label(&b.version, b.build)}" }
                                             if let Some((_, u)) = badge {
                                                 span { class: "us-badge", "{u}" }
+                                            }
+                                            if b.content_only {
+                                                span { class: "us-badge us-content", {tx::BADGE_CONTENT} }
                                             }
                                         }
                                         span { class: "us-rel-meta", "{meta}" }

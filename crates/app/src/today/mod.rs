@@ -14,12 +14,13 @@ use batna_core::review::StudyStore;
 use crate::content::Library;
 use crate::i18n::count::{ITEM, count};
 use crate::i18n::today as tx;
+use crate::look::{Css, css};
 use crate::plan::DailyTarget;
 use crate::stats::StudyData;
 use crate::store::{self, LectureProgress, Overview, use_review};
 use crate::{Screen, Ui};
 
-pub(crate) const CSS: &str = include_str!("today.css");
+pub(crate) const CSS: Css = css!("src/today/today.css");
 
 #[component]
 pub fn Today() -> Element {
@@ -35,7 +36,7 @@ pub fn Today() -> Element {
     let minutes = crate::onboarding::session_minutes();
 
     rsx! {
-        style { {CSS} }
+        style { {CSS.text()} }
         // Tablet landscape and the Mac: today's plan stays in view on one
         // side while the lecture library scrolls on the other.
         div { class: "tab-cols today-cols", "data-wide": "aside",

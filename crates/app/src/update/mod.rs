@@ -249,7 +249,7 @@ pub struct Offer {
 
 impl Offer {
     fn from_manifest(m: &UpdateManifest, asset: UpdateAsset, me: &Installed) -> Self {
-        let changes = match changelog::order(&m.version, m.build) {
+        let changes = match changelog::order(&m.version, m.build_of(&asset)) {
             Some(to) => changelog::between(&m.history, Some((me.version, me.build)), to)
                 .into_iter()
                 .cloned()
@@ -258,7 +258,8 @@ impl Offer {
         };
         Self {
             version: m.version.clone(),
-            build: m.build,
+            // A content-only feed carries an older app; offer that build.
+            build: m.build_of(&asset),
             commit: m.commit.clone(),
             notes: m.notes.clone(),
             asset,
@@ -286,6 +287,10 @@ struct PackInfo {
     /// build can't roll the pack back (absent in packs taken before).
     #[serde(default)]
     published_at: Option<i64>,
+    /// The app build the pack's stylesheets were made with (the feed's
+    /// `ui_build`); any other build uses only its content.
+    #[serde(default)]
+    ui_build: Option<u64>,
 }
 
 impl PackInfo {
@@ -350,12 +355,15 @@ pub struct Status {
     pub channel: Channel,
     /// A preview build: the channel is fixed.
     pub preview: bool,
-    /// A newer content pack is downloaded and verified; it opens at the
-    /// next start.
+    /// A newer content pack is downloaded and verified; it opens once he
+    /// is between sessions ([`Updater::apply_content`]) or at the next start.
     pub content_waiting: bool,
     /// This build: version and build number.
     pub version: String,
     pub build: u64,
+    /// The feed build whose content pack is in use, when newer than this
+    /// build (a content-only update), else 0.
+    pub content_build: u64,
     /// Every build's changes seen so far, newest first (changelog.rs).
     pub history: Vec<BuildChanges>,
 }
@@ -363,7 +371,18 @@ pub struct Status {
 impl Status {
     /// This build's place among the history's builds.
     pub fn current(&self) -> Option<(Version, u64)> {
-        changelog::order(&self.version, self.build)
+        changelog::order(&self.version, self.shown_build())
+    }
+
+    /// The build number he is on: this build, or the content-only update
+    /// on top of it.
+    pub fn shown_build(&self) -> u64 {
+        self.build.max(self.content_build)
+    }
+
+    /// `version+build` of [`Self::current`], the key "What's new" counts from.
+    fn current_key(&self) -> String {
+        format!("{}+{}", self.version, self.shown_build())
     }
 
     /// "What's new" to open by itself after an update: the builds after the
@@ -574,7 +593,8 @@ impl Updater {
         } else {
             None
         });
-        let this = format!("{}+{}", info.version, info.build);
+        let content_build = pack_in_use(&dir, &info).map_or(0, |p| p.build);
+        let this = format!("{}+{}", info.version, info.build.max(content_build));
         if off.is_none() && prefs.last_run.as_deref() != Some(this.as_str()) {
             // Updated (not a first install): say what's new once.
             if let Some(prev) = prefs.last_run.take() {
@@ -604,6 +624,7 @@ impl Updater {
             content_waiting: false,
             version: info.version.to_string(),
             build: info.build,
+            content_build,
             history,
         };
         let (tx, _) = watch::channel(status);
@@ -850,6 +871,7 @@ impl Updater {
                 build: m.build,
                 sha256: asset.sha256.clone(),
                 published_at: published_secs(&m.published_at),
+                ui_build: m.ui_build,
             };
             write_json(&self.dir, PACK_INFO, &info)
         })();
@@ -880,6 +902,31 @@ impl Updater {
         if self.status().prefs.whats_new_from.is_some() {
             self.update_prefs(|p| p.whats_new_from = None);
         }
+    }
+
+    /// Opens a waiting content pack now (he is between sessions): the
+    /// library and the stylesheets switch over, and "What's new" says what
+    /// came. Returns whether anything changed; screens must then be shown
+    /// again.
+    pub fn apply_content(&self) -> bool {
+        if !self.status().content_waiting {
+            return false;
+        }
+        let Some(pack) = pack_in_use(&self.dir, &self.info) else { return false };
+        crate::content::Library::reload();
+        let before = self.status().current_key();
+        self.tx.send_modify(|s| {
+            s.content_waiting = false;
+            s.content_build = pack.build.max(s.content_build);
+        });
+        let now = self.status().current_key();
+        if now != before {
+            self.update_prefs(|p| {
+                p.whats_new_from = Some(before);
+                p.last_run = Some(now);
+            });
+        }
+        true
     }
 
     /// Downloads the offered build (a tap in "tell me first" mode).
@@ -1155,20 +1202,25 @@ pub fn installed_pack() -> Option<Pack> {
 }
 
 fn installed_pack_in(dir: &Path, info: &BuildInfo) -> Option<Pack> {
-    let meta = load_pack_info(dir)?;
-    let from = Version::parse(&meta.version).map(|v| (v, meta.build));
-    if from.is_none_or(|from| from < (info.version, info.build)) {
+    let Some(meta) = pack_in_use(dir, info) else {
         let _ = fs::remove_file(dir.join(PACK_FILE));
         let _ = fs::remove_file(dir.join(PACK_INFO));
         return None;
-    }
+    };
+    let fits = Version::parse(&meta.version) == Some(info.version) && meta.ui_build == Some(info.build);
     let bytes = fs::read(dir.join(PACK_FILE)).ok()?;
     if !sha256_hex(&bytes).eq_ignore_ascii_case(&meta.sha256) {
         report!("content pack changed on disk; using the built-in one");
         return None;
     }
     match Pack::decode(&bytes) {
-        Ok(p) => Some(p),
+        Ok(mut p) => {
+            // The stylesheets style this build's screens only.
+            if !fits {
+                p.look.clear();
+            }
+            Some(p)
+        }
         Err(e) => {
             report!("content pack doesn't open ({e}); using the built-in one");
             None
@@ -1228,6 +1280,14 @@ fn save_staged(dir: &Path, offer: &Offer) -> Result<(), String> {
     write_json(dir, "staged.json", offer)
 }
 
+/// The feed's pack, when it is at least as new as this build (a pack from an
+/// older build is stale: the app was updated since).
+fn pack_in_use(dir: &Path, info: &BuildInfo) -> Option<PackInfo> {
+    let meta = load_pack_info(dir)?;
+    let from = Version::parse(&meta.version).map(|v| (v, meta.build))?;
+    (from >= (info.version, info.build)).then_some(meta)
+}
+
 fn load_pack_info(dir: &Path) -> Option<PackInfo> {
     serde_json::from_slice(&fs::read(dir.join(PACK_INFO)).ok()?).ok()
 }
@@ -1242,6 +1302,8 @@ fn write_json(dir: &Path, name: &str, value: &impl Serialize) -> Result<(), Stri
 
 #[cfg(test)]
 mod tests {
+    use std::collections::BTreeMap;
+
     use super::*;
 
     /// The bytes behind the signed fixture's assets (no .apk is tracked).
@@ -1260,6 +1322,7 @@ mod tests {
                 size: 1,
                 sha256: "00".repeat(32),
                 version_code: None,
+                build: None,
             },
             changes: Vec::new(),
         }
@@ -1275,6 +1338,7 @@ mod tests {
             content_waiting: false,
             version: "0.1.0".into(),
             build: 41,
+            content_build: 0,
             history: Vec::new(),
         }
     }
@@ -1574,6 +1638,90 @@ mod tests {
         assert!(matches!(u.status().phase, Phase::Failed { why: Failure::Network, .. }));
     }
 
+    /// A signed preview feed of `build` with a content pack (and the app,
+    /// carried over from `app_build`, when given).
+    fn pack_feed(
+        signer: &ed25519_dalek::SigningKey,
+        build: u64,
+        app_build: Option<u64>,
+        pack: &[u8],
+        history: Vec<BuildChanges>,
+    ) -> tempfile::TempDir {
+        use base64::Engine as _;
+        use ed25519_dalek::Signer as _;
+        let feed = tempfile::tempdir().unwrap();
+        let mut assets = vec![UpdateAsset {
+            platform: UpdatePlatform::Content,
+            file: "batna-content.pack".into(),
+            size: pack.len() as u64,
+            sha256: sha256_hex(pack),
+            version_code: None,
+            build: None,
+        }];
+        if let Some(b) = app_build {
+            assets.push(UpdateAsset {
+                platform: UpdatePlatform::AndroidArm64,
+                file: format!("batna-0.1.0-b{b}-android-arm64.apk"),
+                size: 9,
+                sha256: "ab".repeat(32),
+                version_code: Some(100_999),
+                build: Some(b),
+            });
+        }
+        let manifest = UpdateManifest {
+            format: batna_core::update::UPDATE_FORMAT,
+            channel: Channel::Preview,
+            version: "0.1.0".into(),
+            build,
+            commit: None,
+            published_at: "2026-10-27T08:00:00Z".into(),
+            notes: UpdateNotes::default(),
+            history,
+            assets,
+            ui_build: Some(app_build.unwrap_or(build)),
+        };
+        let json = serde_json::to_vec(&manifest).unwrap();
+        fs::write(feed.path().join(MANIFEST_FILE), &json).unwrap();
+        let sig = base64::engine::general_purpose::STANDARD.encode(signer.sign(&json).to_bytes());
+        fs::write(feed.path().join(SIGNATURE_FILE), sig).unwrap();
+        fs::write(feed.path().join("batna-content.pack"), pack).unwrap();
+        feed
+    }
+
+    #[test]
+    fn a_content_only_update_needs_no_install_and_says_what_came() {
+        let pack = Pack::new(crate::content::Library::get().index.clone(), Vec::new()).encode();
+        let signer = ed25519_dalek::SigningKey::from_bytes(&[6; 32]);
+        let came = BuildChanges {
+            version: "0.1.0".into(),
+            build: 45,
+            published_at: "2026-10-27T08:00:00Z".into(),
+            changes: vec![batna_core::update::Change {
+                kind: batna_core::update::ChangeKind::New,
+                text: UpdateNotes { en: String::new(), ar_eg: "أسئلة جديدة".into() },
+            }],
+            content_only: true,
+        };
+        let feed = pack_feed(&signer, 45, Some(40), &pack, vec![came]);
+        let url = serve(feed.path().to_path_buf());
+        let info = BuildInfo { key: Some(signer.verifying_key()), ..build("0.1.0", 40, true) };
+        let (u, data) = updater(&url, info.clone());
+        u.check(true);
+        assert_eq!(u.status().phase, Phase::UpToDate, "the feed carries the app he runs");
+        assert!(u.status().content_waiting);
+        assert!(u.apply_content());
+        let s = u.status();
+        assert_eq!((s.content_build, s.shown_build()), (45, 45));
+        assert_eq!(s.whats_new().len(), 1, "what came opens once");
+        assert!(s.whats_new()[0].content_only);
+        u.close_whats_new();
+
+        // At the next start the pack is still in use: nothing new to say.
+        let again = updater_in(data.path(), &url, info);
+        assert_eq!(again.status().content_build, 45);
+        assert!(again.status().whats_new().is_empty());
+    }
+
     #[test]
     fn a_content_pack_must_verify_and_decode_before_it_is_kept() {
         // The fixture's pack bytes match the manifest but aren't a real pack.
@@ -1585,33 +1733,11 @@ mod tests {
         assert!(!data.path().join("updates").join(PACK_FILE).exists());
 
         // A real pack that matches the signed manifest is kept for the next start.
-        let pack = Pack::new(crate::content::Library::get().index.clone(), Vec::new()).encode();
+        let look = BTreeMap::from([("assets/main.css".to_owned(), ".x {}".to_owned())]);
+        let pack =
+            Pack::new(crate::content::Library::get().index.clone(), Vec::new()).with_look(look).encode();
         let signer = ed25519_dalek::SigningKey::from_bytes(&[5; 32]);
-        let feed = tempfile::tempdir().unwrap();
-        let manifest = UpdateManifest {
-            format: batna_core::update::UPDATE_FORMAT,
-            channel: Channel::Preview,
-            version: "0.1.0".into(),
-            build: 42,
-            commit: None,
-            published_at: "2026-10-27T08:00:00Z".into(),
-            notes: UpdateNotes::default(),
-            history: Vec::new(),
-            assets: vec![UpdateAsset {
-                platform: UpdatePlatform::Content,
-                file: "batna-content.pack".into(),
-                size: pack.len() as u64,
-                sha256: sha256_hex(&pack),
-                version_code: None,
-            }],
-        };
-        let json = serde_json::to_vec(&manifest).unwrap();
-        fs::write(feed.path().join(MANIFEST_FILE), &json).unwrap();
-        use base64::Engine as _;
-        use ed25519_dalek::Signer as _;
-        let sig = base64::engine::general_purpose::STANDARD.encode(signer.sign(&json).to_bytes());
-        fs::write(feed.path().join(SIGNATURE_FILE), sig).unwrap();
-        fs::write(feed.path().join("batna-content.pack"), &pack).unwrap();
+        let feed = pack_feed(&signer, 42, None, &pack, Vec::new());
         let url = serve(feed.path().to_path_buf());
         let info = BuildInfo { key: Some(signer.verifying_key()), ..build("0.1.0", 42, true) };
         let (u, data) = updater(&url, info.clone());
@@ -1619,7 +1745,14 @@ mod tests {
         assert_eq!(u.status().phase, Phase::UpToDate, "the same build: only the pack is new");
         assert!(u.status().content_waiting);
         let dir = data.path().join("updates");
-        assert_eq!(installed_pack_in(&dir, &info).unwrap().lectures.len(), 0);
+        let taken = installed_pack_in(&dir, &info).unwrap();
+        assert_eq!(taken.lectures.len(), 0);
+        assert_eq!(taken.look.len(), 1, "the build the look was made with uses it");
+        let older = installed_pack_in(&dir, &BuildInfo { build: 40, ..info.clone() }).unwrap();
+        assert!(older.look.is_empty(), "an older build takes the content but keeps its own look");
+        assert!(u.apply_content());
+        assert!(!u.status().content_waiting);
+        assert!(!u.apply_content(), "once");
         // A later build drops a pack from an older one.
         assert!(installed_pack_in(&dir, &BuildInfo { build: 43, ..info }).is_none());
         assert!(!dir.join(PACK_FILE).exists());

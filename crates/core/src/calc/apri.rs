@@ -1,10 +1,10 @@
 //! APRI (AST to platelet ratio index).
 //!
 //! Formula: (AST / AST upper limit of normal) × 100 / platelets [10⁹/L]
-//! (Wai et al., Hepatology 2003). The book (Lecture 1, p. 10) names APRI but
-//! gives no cut-offs, so the bands follow Wai 2003 and the WHO hepatitis C
-//! guidelines (2016): < 0.5 significant fibrosis unlikely, > 1.5 significant
-//! fibrosis likely, > 2.0 cirrhosis likely.
+//! (Wai et al., Hepatology 2003). Bands follow the book's figure (Lecture 2,
+//! p. 34): < 0.5 minimal or no fibrosis, 0.5–1.5 moderate or significant
+//! fibrosis, > 1.5 severe fibrosis or cirrhosis. The WHO hepatitis C
+//! guidelines (2016) use > 2.0 for cirrhosis; a note says so above 2.0.
 
 use super::{Area, CalcError, CalcSpec, Inputs, Outcome, Part, num, show};
 
@@ -17,7 +17,7 @@ pub const SPEC: CalcSpec = CalcSpec {
         num("ast_uln_u_l", "AST upper limit of normal", "U/L", 10.0, 100.0, 1.0).hint("Often 40 U/L."),
         num("platelets_10e9_l", "Platelets", "×10⁹/L", 1.0, 1500.0, 1.0),
     ],
-    source: "Wai 2003; WHO HCV guidelines 2016 (book Lecture 1, p. 10 names the test)",
+    source: "Book Lecture 2, p. 34; Wai 2003; WHO HCV guidelines 2016",
     compute,
 };
 
@@ -27,13 +27,11 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
     let plt = i.get_pos("platelets_10e9_l")?;
     let score = ast / uln * 100.0 / plt;
     let (band, label, meaning) = if score < 0.5 {
-        ("apri.low", "Below 0.5", "Significant fibrosis unlikely.")
+        ("apri.low", "Below 0.5", "Minimal or no fibrosis.")
     } else if score <= 1.5 {
-        ("apri.mid", "0.5–1.5", "Indeterminate: confirm with elastography.")
-    } else if score <= 2.0 {
-        ("apri.fibrosis", "Above 1.5", "Significant fibrosis likely.")
+        ("apri.mid", "0.5–1.5", "Moderate or significant fibrosis.")
     } else {
-        ("apri.cirrhosis", "Above 2.0", "Cirrhosis likely.")
+        ("apri.high", "Above 1.5", "Severe fibrosis or cirrhosis.")
     };
     Ok(Outcome {
         score: Some(score),
@@ -41,9 +39,13 @@ fn compute(i: &Inputs) -> Result<Outcome, CalcError> {
         band,
         label,
         meaning: meaning.to_owned(),
-        page: None,
+        page: Some(34),
         parts: vec![Part::new("AST ÷ ULN", ast / uln)],
-        notes: Vec::new(),
+        notes: if score > 2.0 {
+            vec!["WHO 2016 (hepatitis C): above 2.0 suggests cirrhosis.".to_owned()]
+        } else {
+            Vec::new()
+        },
     })
 }
 
@@ -58,11 +60,18 @@ mod tests {
 
     #[test]
     fn worked_examples() {
-        // (80/40) × 100 / 100 = 2.0, the top of "fibrosis likely".
+        // (80/40) × 100 / 100 = 2.0: above 1.5 is severe fibrosis or
+        // cirrhosis in the book (p. 34), whatever WHO's 2.0 line says.
         let o = run(80.0, 40.0, 100.0);
         assert!((o.score.unwrap() - 2.0).abs() < 1e-9);
-        assert_eq!(o.band, "apri.fibrosis");
+        assert_eq!(o.band, "apri.high");
+        assert!(o.notes.is_empty());
+        // 1.75 sat in "significant fibrosis likely" before #90.
+        assert_eq!(run(70.0, 40.0, 100.0).band, "apri.high");
+        assert_eq!(run(60.0, 40.0, 100.0).band, "apri.mid");
         assert_eq!(run(30.0, 40.0, 250.0).band, "apri.low");
-        assert_eq!(run(120.0, 40.0, 90.0).band, "apri.cirrhosis");
+        let high = run(120.0, 40.0, 90.0);
+        assert_eq!(high.band, "apri.high");
+        assert_eq!(high.notes.len(), 1);
     }
 }

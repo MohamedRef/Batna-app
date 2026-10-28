@@ -30,6 +30,7 @@ pub mod today {
     pub const TOMORROW: &str = "بكرة:";
     pub const NOTHING_WRITTEN: &str = "المحتوى لسه بيتكتب. أول ما محاضرة تجهز هتلاقيها هنا.";
     pub const STORE_FAILED: &str = "مش قادر أفتح قاعدة البيانات، فالمراجعات مش هتتحفظ بعد ما تقفل التطبيق:";
+    pub const WRITE_FAILED: &str = "في اختيار ما اتحفظش على الجهاز، جرّبه تاني:";
     pub const IN_PROGRESS: &str = "محاضرات شغّال فيها";
     pub const OF: &str = "من";
     pub const STARTED: &str = "بدأتهم";
@@ -571,6 +572,7 @@ pub mod verify {
     pub const SAVED_APPROVED: &str = "✓ اتسجّل إنه صح، ومش هيسألك عليه تاني.";
     pub const SAVED_EDITED: &str = "✎ اتسجّل تعديلك، وهتذاكره بكلامك من هنا ورايح.";
     pub const SAVED_WRONG: &str = "✗ اتشال من المراجعة لحد ما يتصلّح.";
+    pub const NOT_SAVED: &str = "ما اتحفظش. جرّب تاني بعد شوية.";
     pub const WRONG_NOTE: &str = "إيه الغلط؟ (اختياري)";
     pub const WRONG_PLACEHOLDER: &str = "مثلاً: الكتاب صفحة ١٤ بيقول ٧–٩ نقط";
     pub const WRONG_CONFIRM: &str = "شيله من المراجعة";

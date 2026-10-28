@@ -46,9 +46,7 @@ impl Answers {
     }
 
     fn save(&self) {
-        if let Err(e) = shared().put_setting(Self::KEY, self) {
-            eprintln!("saving first-run answers: {e}");
-        }
+        crate::store::save_setting(Self::KEY, self);
     }
 }
 

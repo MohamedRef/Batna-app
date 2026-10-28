@@ -190,31 +190,13 @@ impl Store {
         let hlc = self.tick(now_ms().max(event.at_ms));
         let logged =
             LoggedReview { id: format!("{}-{}-{}", hlc.device, hlc.wall_ms, hlc.counter), hlc, event };
-        self.insert_review(&logged)?;
-        sync::enqueue(&self.conn.lock().unwrap(), "review_events", "id", &logged.id, &logged.hlc.device)?;
+        // The answer and its outbox entry land together or not at all.
+        let mut conn = self.conn.lock().unwrap();
+        let tx = conn.transaction()?;
+        insert_review(&tx, &logged)?;
+        sync::enqueue(&tx, "review_events", "id", &logged.id, &logged.hlc.device)?;
+        tx.commit()?;
         Ok(logged)
-    }
-
-    /// Inserts a logged event (local or, later, from sync). Duplicates are ignored.
-    pub fn insert_review(&self, l: &LoggedReview) -> Result<()> {
-        let e = &l.event;
-        self.conn.lock().unwrap().execute(
-            "INSERT OR IGNORE INTO review_events
-             (id, item_id, grade, origin, at_ms, took_ms, device_id, hlc_wall, hlc_counter)
-             VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9)",
-            params![
-                l.id,
-                e.item_id,
-                e.grade.as_str(),
-                e.origin.as_str(),
-                e.at_ms,
-                e.took_ms,
-                l.hlc.device,
-                l.hlc.wall_ms,
-                l.hlc.counter
-            ],
-        )?;
-        Ok(())
     }
 
     /// The whole review log, in HLC order. Rows this build can't read are skipped.
@@ -351,22 +333,48 @@ impl Store {
              WHERE (excluded.hlc_wall, excluded.hlc_counter, excluded.device_id)
                  > ({table}.hlc_wall, {table}.hlc_counter, {table}.device_id)"
         );
-        let conn = self.conn.lock().unwrap();
+        let mine = hlc.device == self.clock.lock().unwrap().device();
+        let mut conn = self.conn.lock().unwrap();
+        // The row and its outbox entry land together or not at all.
+        let tx = conn.transaction()?;
         let base = params![key, value, hlc.device, hlc.wall_ms, hlc.counter, deleted];
         let changed = match status {
             Some(s) => {
                 let mut all: Vec<&dyn rusqlite::ToSql> = base.to_vec();
                 all.push(&s);
-                conn.execute(&sql, all.as_slice())?
+                tx.execute(&sql, all.as_slice())?
             }
-            None => conn.execute(&sql, base)?,
+            None => tx.execute(&sql, base)?,
         };
         // This device's writes go to Batna Cloud too.
-        if changed > 0 && hlc.device == self.clock.lock().unwrap().device() {
-            sync::enqueue(&conn, table, key_col, key, &hlc.device)?;
+        if changed > 0 && mine {
+            sync::enqueue(&tx, table, key_col, key, &hlc.device)?;
         }
+        tx.commit()?;
         Ok(())
     }
+}
+
+/// Inserts a logged event. Duplicates are ignored.
+fn insert_review(conn: &rusqlite::Connection, l: &LoggedReview) -> Result<()> {
+    let e = &l.event;
+    conn.execute(
+        "INSERT OR IGNORE INTO review_events
+         (id, item_id, grade, origin, at_ms, took_ms, device_id, hlc_wall, hlc_counter)
+         VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9)",
+        params![
+            l.id,
+            e.item_id,
+            e.grade.as_str(),
+            e.origin.as_str(),
+            e.at_ms,
+            e.took_ms,
+            l.hlc.device,
+            l.hlc.wall_ms,
+            l.hlc.counter
+        ],
+    )?;
+    Ok(())
 }
 
 /// The newest HLC in any synced table.
@@ -416,6 +424,31 @@ static OPEN_ERROR: OnceLock<String> = OnceLock::new();
 /// Why the store fell back to memory, if it did.
 pub fn open_error() -> Option<&'static str> {
     OPEN_ERROR.get().map(String::as_str)
+}
+
+static WRITE_ERROR: Mutex<Option<String>> = Mutex::new(None);
+
+/// Saves a synced setting in the app's store. A failure is reported to the
+/// log and shown on Today, so a choice never vanishes silently.
+pub fn save_setting<T: Serialize>(key: &str, value: &T) -> bool {
+    match shared().put_setting(key, value) {
+        Ok(()) => true,
+        Err(e) => {
+            write_failed(&format!("setting {key}"), &e);
+            false
+        }
+    }
+}
+
+/// Reports a write that didn't land, to the log and on Today.
+pub fn write_failed(what: &str, e: &dyn std::fmt::Display) {
+    crate::diag::report!("saving {what}: {e}");
+    *WRITE_ERROR.lock().unwrap() = Some(format!("{what}: {e}"));
+}
+
+/// The last setting that couldn't be saved, if any.
+pub fn write_error() -> Option<String> {
+    WRITE_ERROR.lock().unwrap().clone()
 }
 
 pub use paths::export_dir;
@@ -497,6 +530,16 @@ mod tests {
     }
 
     #[test]
+    fn a_write_and_its_outbox_entry_land_together() {
+        let s = Store::open_in_memory().unwrap();
+        s.conn.lock().unwrap().execute("DROP TABLE sync_outbox", []).unwrap();
+        assert!(s.append_review(ev("hb.L01.001", Grade::Good, 10)).is_err());
+        assert!(s.reviews().unwrap().is_empty(), "the answer rolls back with its outbox entry");
+        assert!(s.set_judgement("hb.L01.001", Some(&judgement(Verdict::Approved))).is_err());
+        assert!(s.judgements().unwrap().is_empty());
+    }
+
+    #[test]
     fn zone_matches_the_system_offset_now() {
         assert_eq!(zone().offset_at(now_ms()), utc_offset_minutes());
         assert!(zone().changes.windows(2).all(|w| w[0].0 < w[1].0));
@@ -520,7 +563,7 @@ mod tests {
         assert!(log[0].hlc < log[1].hlc);
         assert_eq!(log[1].event.grade, Grade::Again);
         // A re-inserted event (sync echo) is not duplicated.
-        s.insert_review(&log[0]).unwrap();
+        insert_review(&s.conn.lock().unwrap(), &log[0]).unwrap();
         assert_eq!(s.reviews().unwrap().len(), 2);
         // New stamps sort after the stored ones.
         let next = s.append_review(ev("hb.L01.003", Grade::Good, 0)).unwrap();

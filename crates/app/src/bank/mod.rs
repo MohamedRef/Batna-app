@@ -260,7 +260,7 @@ pub fn finish() {
         let mut history = HISTORY.write();
         history.record(&paper.questions, &paper.answers);
         history.papers.push(outcome.clone());
-        let _ = crate::store::shared().put_setting(PAPERS_KEY, &history.papers);
+        crate::store::save_setting(PAPERS_KEY, &history.papers);
     }
     *PHASE.write() = Phase::Done { paper, outcome };
 }

@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [batna]
+    branches: [main]
   pull_request:
-    branches: [batna]
+    branches: [main]
 
 concurrency:
   group: ci-${{ github.ref }}-${{ github.event_name == 'pull_request' && 'pr' || github.sha }}

@@ -55,3 +55,15 @@ jobs:
           export AR_aarch64_linux_android="$BIN/llvm-ar"
           export CARGO_TARGET_AARCH64_LINUX_ANDROID_LINKER="$BIN/aarch64-linux-android28-clang"
           cargo clippy -p batna-app --target aarch64-linux-android --no-default-features --features mobile -- -D warnings
+
+  worker:
+    name: Batna Cloud Worker compiles (wasm32)
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+          components: clippy
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo clippy -p batna-server --target wasm32-unknown-unknown -- -D warnings

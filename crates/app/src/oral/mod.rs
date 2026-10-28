@@ -119,7 +119,12 @@ fn Setup() -> Element {
             p { class: "muted", {tx::INTRO} }
             if available > 0 {
                 p { class: "muted small", "{available} {tx::AVAILABLE}" }
-                button { class: "oral-start", onclick: move |_| start(&store.read()), {tx::START} }
+                button {
+                    class: "oral-start",
+                    "aria-keyshortcuts": "Enter",
+                    onclick: move |_| start(&store.read()),
+                    {tx::START}
+                }
             }
         }
         if lectures.is_empty() {
@@ -226,19 +231,11 @@ fn Runner() -> Element {
     // Bumped by every new step, so a stale timer or voice stops on its own.
     let mut run = use_signal(|| 0u64);
     let mut asked_at = use_signal(Instant::now);
-    // Keys work after a click too: a rating button vanishes with its
-    // question, so focus goes back to the session for each step.
-    let mut root = use_signal(|| None::<std::rc::Rc<MountedData>>);
 
     let mut drive = move |step: Step| {
         let id = *run.peek() + 1;
         run.set(id);
         tts::stop();
-        if let Some(el) = root.peek().clone() {
-            spawn(async move {
-                let _ = el.set_focus(true).await;
-            });
-        }
         let Some(entry) = SESSION.peek().as_ref().and_then(|s| s.current.clone()) else { return };
         let Settings { think, voice, rate, auto_continue, .. } = SETTINGS.peek().clone();
         let rate = tts::RATES[rate.min(tts::RATES.len() - 1)];
@@ -336,17 +333,6 @@ fn Runner() -> Element {
         div {
             class: "oral-run",
             "data-phase": if revealed { "answer" } else { "ask" },
-            tabindex: "0",
-            onmounted: move |e| async move {
-                let _ = e.set_focus(true).await;
-                root.set(Some(e.data()));
-            },
-            onkeydown: move |e| match e.key() {
-                Key::Character(c) if c == " " && !revealed => drive(Step::Reveal),
-                Key::Character(c) if c == "1" && revealed => rate(Grade::Again),
-                Key::Character(c) if (c == "2" || c == " ") && revealed => rate(Grade::Good),
-                _ => {}
-            },
             header { class: "oral-top",
                 span { class: "muted small", "{tx::LEFT} " bdi { "{left}" } }
                 if entry.follow_up {
@@ -355,9 +341,11 @@ fn Runner() -> Element {
                 if entry.again {
                     span { class: "chip", {tx::AGAIN_BADGE} }
                 }
-                span { class: "muted small", bdi { "{lecture}" } " · {tx::PAGE} " bdi { "{p.page}" } }
+                span { class: "muted small", bdi { "{lecture}" } }
+                crate::hover::BookPage { label: tx::PAGE, page: p.page, quote: p.quote.clone() }
                 button {
                     class: "oral-end",
+                    "aria-keyshortcuts": "Escape",
                     onclick: move |_| end_session(),
                     {tx::END}
                 }
@@ -365,65 +353,77 @@ fn Runner() -> Element {
             if *no_voice.read() {
                 p { class: "note small", {tx::NO_VOICE} }
             }
-            div { class: "oral-panes",
-                section { class: "card oral-question",
-                    h2 { class: "muted small", {tx::LISTEN} }
-                    div { class: "en", dir: "ltr", lang: "en",
-                        for (i, line) in p.question.iter().enumerate() {
-                            p { key: "{i}", class: if i + 1 == p.question.len() { "oral-ask" } else { "" }, "{line}" }
+            crate::desk::Panes {
+                primary: rsx! {
+                    section { class: "card oral-question",
+                        h2 { class: "muted small", {tx::LISTEN} }
+                        div { class: "en", dir: "ltr", lang: "en",
+                            for (i, line) in p.question.iter().enumerate() {
+                                p { key: "{i}", class: if i + 1 == p.question.len() { "oral-ask" } else { "" }, "{line}" }
+                            }
+                        }
+                        if let Some((pass, of)) = p.pass {
+                            span { class: "chip", "{tx::PASS} " bdi { "{pass}" } " {tx::OF} " bdi { "{of}" } }
                         }
                     }
-                    if let Some((pass, of)) = p.pass {
-                        span { class: "chip", "{tx::PASS} " bdi { "{pass}" } " {tx::OF} " bdi { "{of}" } }
-                    }
-                }
-                match phase_now {
-                    Phase::Asking => rsx! {
-                        section { class: "oral-timer", "aria-live": "polite",
-                            span { class: "oral-status", {tx::LISTEN} }
-                        }
-                    },
-                    Phase::Thinking(n) | Phase::WhatElse(n) => {
-                        let what_else = matches!(phase_now, Phase::WhatElse(_));
-                        let full = if what_else { (SETTINGS.peek().think / 2).max(THINK_MIN) } else { SETTINGS.peek().think };
-                        let pct = 100 * n / full.max(1);
-                        rsx! {
+                    match phase_now {
+                        Phase::Asking => rsx! {
                             section { class: "oral-timer", "aria-live": "polite",
-                                div { class: "oral-ring", style: "--p: {pct}", span { "{n}" } }
-                                span { class: "oral-status",
-                                    if what_else { {tx::WHAT_ELSE} } else { {tx::THINKING} }
+                                span { class: "oral-status", {tx::LISTEN} }
+                            }
+                        },
+                        Phase::Thinking(n) | Phase::WhatElse(n) => {
+                            let what_else = matches!(phase_now, Phase::WhatElse(_));
+                            let full = if what_else { (SETTINGS.peek().think / 2).max(THINK_MIN) } else { SETTINGS.peek().think };
+                            let pct = 100 * n / full.max(1);
+                            rsx! {
+                                section { class: "oral-timer", "aria-live": "polite",
+                                    div { class: "oral-ring", style: "--p: {pct}", span { "{n}" } }
+                                    span { class: "oral-status",
+                                        if what_else { {tx::WHAT_ELSE} } else { {tx::THINKING} }
+                                    }
                                 }
+                            }
+                        }
+                        Phase::Answer => rsx! {},
+                    }
+                },
+                secondary: revealed.then(|| rsx! {
+                    section { class: "card oral-answer",
+                        h2 { class: "small", {tx::ANSWER} }
+                        ul { class: "en", dir: "ltr", lang: "en",
+                            for (i, line) in p.answer.iter().enumerate() {
+                                li { key: "{i}", "{line}" }
                             }
                         }
                     }
-                    Phase::Answer => rsx! {
-                        section { class: "card oral-answer",
-                            h2 { class: "small", {tx::ANSWER} }
-                            ul { class: "en", dir: "ltr", lang: "en",
-                                for (i, line) in p.answer.iter().enumerate() {
-                                    li { key: "{i}", "{line}" }
-                                }
-                            }
-                        }
-                    },
-                }
+                }),
             }
             if revealed {
                 crate::verify::VerifyBar { item_id: p.item_id.clone() }
             }
             div { class: "oral-actions",
                 if revealed {
-                    button { class: "oral-big again", onclick: move |_| rate(Grade::Again),
+                    button {
+                        class: "oral-big again",
+                        "aria-keyshortcuts": "1",
+                        onclick: move |_| rate(Grade::Again),
                         span { class: "big-label", {tx::AGAIN} }
                         span { class: "big-hint", {tx::AGAIN_HINT} }
                     }
-                    button { class: "oral-big good", onclick: move |_| rate(Grade::Good),
+                    button {
+                        class: "oral-big good",
+                        "aria-keyshortcuts": "3 2 Space",
+                        onclick: move |_| rate(Grade::Good),
                         span { class: "big-label", {tx::GOOD} }
                         span { class: "big-hint", {tx::GOOD_HINT} }
                     }
                 } else {
                     button { class: "oral-small", onclick: move |_| drive(Step::Ask), {tx::REPEAT} }
-                    button { class: "oral-big show", onclick: move |_| drive(Step::Reveal),
+                    button {
+                        class: "oral-big show",
+                        "aria-keyshortcuts": "Space Enter",
+                        onclick: move |_| drive(Step::Reveal),
                         span { class: "big-label", {tx::SHOW} }
                     }
                 }
@@ -540,7 +540,10 @@ fn Summary() -> Element {
         }
         div { class: "oral-actions",
             button { class: "oral-small", onclick: move |_| *SESSION.write() = None, {tx::BACK} }
-            button { class: "oral-big good", onclick: move |_| start(&store.read()),
+            button {
+                class: "oral-big good",
+                "aria-keyshortcuts": "Enter",
+                onclick: move |_| start(&store.read()),
                 span { class: "big-label", {tx::ANOTHER} }
             }
         }

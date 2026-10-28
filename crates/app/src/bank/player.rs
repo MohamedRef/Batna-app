@@ -62,6 +62,8 @@ pub fn Player() -> Element {
                         button {
                             class: "button primary",
                             disabled: !timed && a.chosen.is_none(),
+                            // A whole timed paper never goes in on a stray Enter.
+                            "aria-keyshortcuts": if timed { "" } else { "Enter" },
                             onclick: move |_| finish(),
                             if timed { {tx::SUBMIT} } else { {tx::FINISH} }
                         }
@@ -69,6 +71,7 @@ pub fn Player() -> Element {
                         button {
                             class: "button primary",
                             disabled: !timed && a.chosen.is_none(),
+                            "aria-keyshortcuts": "Enter",
                             onclick: move |_| go(at + 1),
                             {tx::NEXT}
                         }

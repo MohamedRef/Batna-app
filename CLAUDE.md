@@ -1,8 +1,8 @@
 # Batna: working conventions
 
-Batna (باطنة) is a personal internal-medicine study app in Rust, for one learner: Mohamed, who is studying for an Egyptian MSc in General Internal Medicine. His exam is in January 2027. Batna is private and is never published.
+Batna (باطنة) is a personal internal-medicine study app in Rust, for one learner: Mohamed, who is studying for an Egyptian MSc in General Internal Medicine. His exam is in January 2027. Batna is personal and is never published to a store. The `MohamedRef/Batna-app` repo stays public on purpose while testing (free Actions minutes); Mohamed makes it private afterwards, so do not flag its visibility.
 
-It lives on the orphan branch `batna` of `mohamedref/kabar-app`. **Kabar (on `main`) is a separate app: never change `main`, never open PRs against it, and never depend on Kabar crates.** Copy a Kabar module when it helps, adapt it, and credit the source path in a comment.
+It lives in its own repo, `MohamedRef/Batna-app`, on `main`. It moved there from the old `batna` branch of `MohamedRef/Kabar-app` on 2026-10-28, with its full history. **Kabar (`MohamedRef/Kabar-app`) is a separate app: never push or open PRs there for Batna work, and never depend on Kabar crates.** Copy a Kabar module when it helps, adapt it, and credit the source path in a comment ("adapted from kabar-app main: <path>").
 
 The plan and the per-thread briefs are in `/mnt/project-files/medstudy/SPLIT.md` and `chunks/`. Where this file and SPLIT.md differ, SPLIT.md wins.
 
@@ -20,7 +20,7 @@ The plan and the per-thread briefs are in `/mnt/project-files/medstudy/SPLIT.md`
 - UI text is Egyptian Arabic (`crates/app/src/i18n.rs`, one module per feature). Medical content is in English, wrapped in `<bdi>` inside Arabic UI.
 
 ## Workflow
-- Branch from `origin/batna` and open PRs with base `batna`. Before merging, merge the latest `origin/batna`, run `just check`, wait for green CI, then squash-merge it yourself.
+- Branch from `origin/main` and open PRs with base `main`. Before merging, merge the latest `origin/main`, run `just check`, wait for green CI, then squash-merge it yourself.
 - `just check` = check-tracked-files, `cargo fmt --all --check`, `cargo clippy --workspace --all-targets -- -D warnings`, `cargo test --workspace`, `batna-tools validate`.
 - Keep `docs/RUN.md` current.
 

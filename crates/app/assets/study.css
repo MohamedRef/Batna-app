@@ -124,3 +124,9 @@
 .st-stats dd { margin: 0; font-size: var(--fs-xl); font-weight: 700; font-variant-numeric: tabular-nums; }
 .st-shaky { margin: 0; padding-inline-start: var(--sp-4); font-family: var(--font-latin); display: flex; flex-direction: column; gap: var(--sp-1); }
 .st-next { background: var(--good-soft); border-radius: var(--radius); padding: var(--sp-3) var(--sp-4); }
+
+/* ---------- tablet and Mac: two panes (crate::desk::Panes) ---------- */
+@media (min-width: 840px) {
+  .st:has(.desk-split) { max-inline-size: 72rem; }
+  .st-item .desk-side .st-grades { position: static; }
+}

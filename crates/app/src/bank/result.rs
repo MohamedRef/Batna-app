@@ -68,6 +68,20 @@ pub fn Result() -> Element {
         .map(|(i, (q, a))| (i, q.clone(), a.clone()))
         .collect();
     let any_flagged = paper.answers.iter().any(|a| a.flagged);
+    let mut open = use_signal(|| None::<usize>);
+    let detail = open().and_then(|i| Some((i, paper.questions.get(i)?.clone(), paper.answers.get(i)?.clone()))).map(
+        |(i, q, a)| {
+            rsx! {
+                div { class: "review-detail",
+                    div { class: "review-detail-head",
+                        span { class: "run-count", "{tx::QUESTION} " bdi { "{i + 1}" } }
+                        button { class: "link", "aria-keyshortcuts": "Escape", onclick: move |_| open.set(None), {tx::CLOSE} }
+                    }
+                    QuestionView { key: "{i}", q, chosen: a.chosen, reveal: true }
+                }
+            }
+        },
+    );
 
     rsx! {
         section { class: "card result",
@@ -136,20 +150,27 @@ pub fn Result() -> Element {
                 }
             }
         }
-        div { class: "review-list",
-            for (i, q, a) in rows {
-                details { key: "{i}", class: "review-item", "data-right": if a.correct(&q) { "yes" } else { "no" },
-                    summary {
-                        span { class: "mark", if a.correct(&q) { "✓" } else { "✗" } }
-                        span { "{tx::QUESTION} " bdi { "{i + 1}" } }
-                        bdi { class: "stem-peek", {stem_peek(&q.id)} }
-                        if a.flagged {
-                            span { class: "muted", " ⚑" }
+        crate::desk::ListDetail {
+            list: rsx! {
+                div { class: "review-list",
+                    for (i, q, a) in rows {
+                        button {
+                            key: "{i}",
+                            class: "review-item",
+                            "data-right": if a.correct(&q) { "yes" } else { "no" },
+                            "aria-current": if open() == Some(i) { "true" } else { "false" },
+                            onclick: move |_| open.set(Some(i)),
+                            span { class: "mark", if a.correct(&q) { "✓" } else { "✗" } }
+                            span { "{tx::QUESTION} " bdi { "{i + 1}" } }
+                            bdi { class: "stem-peek", {stem_peek(&q.id)} }
+                            if a.flagged {
+                                span { class: "muted", " ⚑" }
+                            }
                         }
                     }
-                    QuestionView { q: q.clone(), chosen: a.chosen, reveal: true }
                 }
-            }
+            },
+            detail: detail,
         }
 
         div { class: "start-row",

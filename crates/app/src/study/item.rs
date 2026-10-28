@@ -58,6 +58,7 @@ pub fn ItemView(
                 {render(&item, on_grade)}
             }
             footer { class: "st-item-foot",
+                crate::learn::ExplainLink { item_id: item.id.clone() }
                 crate::hover::BookPage {
                     label: tx::BOOK_PAGE,
                     page: item.src.page,

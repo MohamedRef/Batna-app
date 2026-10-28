@@ -17,6 +17,7 @@ mod hover;
 mod i18n;
 mod icons;
 mod import;
+mod learn;
 mod onboarding;
 mod oral;
 mod order;
@@ -43,6 +44,7 @@ const MAIN_CSS: &str = include_str!("../assets/main.css");
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Screen {
     Today,
+    Learn,
     Study,
     Bank,
     Cases,
@@ -53,12 +55,14 @@ pub enum Screen {
 
 impl Screen {
     /// Bottom bar on phones, side rail from 600dp. Settings is a sheet opened from the top bar.
-    pub const NAV: [Screen; 6] = [Self::Today, Self::Study, Self::Bank, Self::Cases, Self::Oral, Self::Stats];
+    pub const NAV: [Screen; 7] =
+        [Self::Today, Self::Learn, Self::Study, Self::Bank, Self::Cases, Self::Oral, Self::Stats];
 
     pub fn label(self) -> &'static str {
         use i18n::nav;
         match self {
             Self::Today => nav::TODAY,
+            Self::Learn => nav::LEARN,
             Self::Study => nav::STUDY,
             Self::Bank => nav::BANK,
             Self::Cases => nav::CASES,
@@ -182,6 +186,7 @@ fn App() -> Element {
 fn screen_body(screen: Screen) -> Element {
     match screen {
         Screen::Today => rsx! { today::Today {} },
+        Screen::Learn => rsx! { learn::Learn {} },
         Screen::Study => rsx! { study::Study {} },
         Screen::Bank => rsx! { bank::Bank {} },
         Screen::Cases => rsx! { case::CasesScreen {} },

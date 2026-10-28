@@ -56,6 +56,7 @@ pub fn Today() -> Element {
                 p { class: "note", "{tx::STORE_FAILED} " bdi { dir: "ltr", "{e}" } }
             }
         }
+        crate::learn::TodayLesson { prefer: o.lectures.iter().map(|l| l.id.clone()).collect::<Vec<_>>() }
         crate::recap::TodayRecap { due_left: o.due, due_tomorrow: o.due_tomorrow }
         if !o.lectures.is_empty() {
             section { class: "in-progress",

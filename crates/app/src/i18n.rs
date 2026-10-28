@@ -9,6 +9,7 @@ pub mod app {
 
 pub mod nav {
     pub const TODAY: &str = "النهارده";
+    pub const LEARN: &str = "الدروس";
     pub const STUDY: &str = "مذاكرة";
     pub const BANK: &str = "الأسئلة";
     pub const CASES: &str = "حالات";
@@ -928,4 +929,106 @@ pub mod recap {
     pub const WEEK_WEAK: &str = "يستاهلوا رجوع:";
     pub const WEEK_EXAM_1: &str = "فاضل على الامتحان";
     pub const WEEK_EXAM_2: &str = "يوم.";
+}
+
+pub mod learn {
+    pub const TITLE: &str = "الدروس";
+    pub const INTRO: &str = "افهم الأول، وبعدين راجع. كل درس شرح بالمصري، رسومات، حاجات تحفظ بيها، وأسئلة صغيرة في النص علشان تتأكد إنك ماشي صح.";
+    pub const NONE_YET: &str = "الدروس لسه بتتكتب. أول ما درس يجهز هتلاقيه هنا.";
+    pub const OF: &str = "من";
+    pub const LESSONS_DONE: &str = "درس خلّصته";
+    pub const START_FIRST: &str = "ابدأ أول درس";
+    pub const CONTINUE: &str = "كمّل";
+    pub const ALL_LESSONS_DONE: &str = "خلّصت كل الدروس المكتوبة. عاش!";
+    pub const UNVERIFIED_NOTE: &str =
+        "الدروس لسه ما اتراجعتش: الكتاب هو المرجع، ولو لقيت حاجة مش مظبوطة قولّي.";
+    pub const WRITING: &str = "بتتكتب";
+    pub const MINUTES: &str = "دقيقة";
+    pub const QUESTIONS: &str = "سؤال";
+    pub const PAGES: &str = "صفحات";
+    pub const NEW: &str = "جديد";
+    pub const TODAY_KICKER: &str = "درس النهارده";
+    pub const OPEN_LESSON: &str = "افتح الدرس";
+    pub const EXPLAIN: &str = "اشرحهولي";
+    pub const EXPLAIN_HINT: &str = "افتح الدرس اللي بيشرح السؤال ده";
+
+    pub const CLOSE: &str = "اقفل الدرس";
+    pub const BOOK_PAGE: &str = "الكتاب ص";
+    pub const BACK: &str = "رجوع";
+    pub const NEXT: &str = "كمّل";
+    pub const FINISH: &str = "خلّصت";
+    pub const SKIP: &str = "عدّي السؤال ده";
+
+    pub const THINK: &str = "فكّر الأول";
+    pub const THINK_HINT: &str = "قول الإجابة في دماغك، وبعدين اكشف.";
+    pub const REVEAL: &str = "اكشف";
+    pub const SHOW_ALL: &str = "اكشف الكل";
+    pub const MNEMONIC: &str = "احفظها كده";
+    pub const ZOOM_IN: &str = "كبّر الرسمة";
+    pub const ZOOM_OUT: &str = "صغّر الرسمة";
+    pub const TIP: &str = "نصيحة";
+    pub const EXAM: &str = "الممتحن بيحب دي";
+    pub const TRAP: &str = "خلّي بالك";
+    pub const ANALOGY: &str = "تخيّل كده";
+    pub const JOKE: &str = "تحشيشة";
+    pub const UPDATE: &str = "تحديث من الجايدلاين";
+    pub const BOOK_WINS: &str = "في الامتحان اكتب إجابة الكتاب.";
+
+    pub const CHECK: &str = "سؤال سريع";
+    pub const ORDER: &str = "رتّب";
+    pub const ORDER_HINT: &str = "دوس على الخطوات بالترتيب. دوس على خطوة اترصّت علشان ترجعها.";
+    pub const MATCH: &str = "وصّل";
+    pub const MATCH_HINT: &str = "اختار من الشمال، وبعدين اللي يناسبه من اليمين.";
+    pub const SORT: &str = "صنّف";
+    pub const SORT_HINT: &str = "دوس على كارت، وبعدين على الخانة بتاعته. (أو اسحبه بالماوس أو القلم.)";
+    pub const CASE: &str = "حالة صغيرة";
+    pub const CASE_NEXT: &str = "اللي بعده";
+    pub const CASE_SHOW: &str = "اكشف";
+    pub const CASE_DONE: &str = "خلّصت الحالة";
+    pub const TABLE_HINT: &str = "فيه خانات مستخبية: فكّر فيها ودوس علشان تتأكد.";
+    pub const CHECK_IT: &str = "صحّح";
+    pub const CLEAR: &str = "امسح";
+    pub const RIGHT: &str = "صح كده! 👏";
+    pub const NOT_QUITE: &str = "قريب، بس مش دي. اقرا السبب تحت.";
+
+    pub const TRY: &str = "جرّب بنفسك";
+    pub const TRY_HINT: &str = "دي كروت المحاضرة نفسها. إجابتك هنا بتتحسب مراجعة.";
+    pub const TRY_OF: &str = "كارت";
+    pub const TRY_DONE: &str = "تمام كده ✓";
+    pub const TRY_DONE_HINT: &str = "الكروت دي هترجعلك في المراجعة في ميعادها.";
+
+    pub const DONE_TITLE: &str = "خلّصت الدرس";
+    pub const FIRST_TRY: &str = "صح من أول مرة";
+    pub const RECAP: &str = "الخلاصة";
+    pub const PRACTICE: &str = "راجع كروت الدرس";
+    pub const NEXT_LESSON: &str = "الدرس الجاي";
+    pub const BACK_TO_LIST: &str = "رجوع للدروس";
+    pub const PRACTICE_HINT: &str =
+        "أحسن وقت تراجع الكروت هو دلوقتي، وهي لسه سخنة. وبعدين التطبيق يرجّعهالك قبل ما تنساها.";
+
+    pub fn should_be(n: usize) -> String {
+        format!("مكانها رقم {n}")
+    }
+
+    pub fn in_place(right: usize, n: usize) -> String {
+        format!("{right} من {n} في مكانهم. شوف الصح تحت.")
+    }
+
+    pub fn misses(n: usize) -> String {
+        if n == 1 {
+            "وصّلتهم كلهم، بغلطة واحدة في السكة.".into()
+        } else {
+            format!("وصّلتهم كلهم، بـ {n} غلطات في السكة.")
+        }
+    }
+
+    pub fn score_line(right: u32, asked: u32) -> &'static str {
+        if right == asked {
+            "ولا غلطة. الدرس ده بقى بتاعك."
+        } else if right * 2 >= asked {
+            "كويس جدًا. اللي غلطت فيه هيرجعلك في المراجعة."
+        } else {
+            "عادي جدًا من أول مرة، ده درس جديد. الكروت هتثبّته."
+        }
+    }
 }

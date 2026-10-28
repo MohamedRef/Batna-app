@@ -1,0 +1,118 @@
+//! Lesson files: `content/lessons/<chapter>/LNN.yaml` (`batna.lesson/v1`).
+//! `batna-tools validate` checks them against their lecture
+//! ([`batna_core::lesson::validate`]); `packs` puts them in the content pack.
+
+use std::collections::BTreeSet;
+use std::path::{Path, PathBuf};
+
+use batna_core::content::Lecture;
+use batna_core::lesson::{self, LessonContext, LessonFile};
+
+/// Every lesson file, sorted by path: `(path, parsed, raw text)`.
+pub fn load(root: &Path) -> Result<Vec<(PathBuf, LessonFile, String)>, Vec<String>> {
+    let dir = root.join("content/lessons");
+    let mut paths = Vec::new();
+    for chapter in std::fs::read_dir(&dir).into_iter().flatten().flatten() {
+        for f in std::fs::read_dir(chapter.path()).into_iter().flatten().flatten() {
+            if f.path().extension().is_some_and(|e| e == "yaml") {
+                paths.push(f.path());
+            }
+        }
+    }
+    paths.sort();
+    let mut out = Vec::new();
+    let mut problems = Vec::new();
+    for p in paths {
+        let text = match std::fs::read_to_string(&p) {
+            Ok(t) => t,
+            Err(e) => {
+                problems.push(format!("{}: {e}", p.display()));
+                continue;
+            }
+        };
+        match serde_yaml_ng::from_str::<LessonFile>(&text) {
+            Ok(f) => out.push((p, f, text)),
+            Err(e) => problems.push(format!("{}: {e}", crate::rel(root, &p))),
+        }
+    }
+    if problems.is_empty() { Ok(out) } else { Err(problems) }
+}
+
+/// Checks every lesson file. Returns `(files, lessons)` and pushes problems.
+pub fn validate_all(root: &Path, approved: &BTreeSet<String>, problems: &mut Vec<String>) -> (usize, usize) {
+    let files = match load(root) {
+        Ok(f) => f,
+        Err(p) => {
+            problems.extend(p);
+            return (0, 0);
+        }
+    };
+    let content = root.join("content");
+    let mut lessons = 0;
+    for (path, file, text) in &files {
+        let at = crate::rel(root, path);
+        // content/lessons/hb/L01.yaml teaches hb.L01.
+        let chapter = path.parent().and_then(|p| p.file_name()).map(|s| s.to_string_lossy().to_string());
+        let stem = path.file_stem().map(|s| s.to_string_lossy().to_string());
+        let named = format!("{}.{}", chapter.unwrap_or_default(), stem.unwrap_or_default());
+        if file.lecture != named {
+            problems.push(format!("{at}: lecture is {}, the file name says {named}", file.lecture));
+        }
+        let lecture_path = crate::lecture_path(&content, &file.lecture);
+        let lecture: Lecture = match crate::read_yaml(&lecture_path) {
+            Ok(l) => l,
+            Err(_) => {
+                problems.push(format!("{at}: its lecture {} has no content file yet", file.lecture));
+                continue;
+            }
+        };
+        let cx =
+            LessonContext { lecture: &lecture, approved: Some(approved), raw_step_keys: raw_step_keys(text) };
+        for p in lesson::validate(file, &cx) {
+            problems.push(format!("{at}: {p}"));
+        }
+        lessons += file.lessons.len();
+    }
+    (files.len(), lessons)
+}
+
+/// The keys written on each step, by `(lesson, step)` index.
+fn raw_step_keys(text: &str) -> Vec<((usize, usize), Vec<String>)> {
+    let mut out = Vec::new();
+    let Ok(doc) = serde_yaml_ng::from_str::<serde_yaml_ng::Value>(text) else {
+        return out;
+    };
+    let seq = |v: &serde_yaml_ng::Value, k: &str| {
+        v.get(k).and_then(|s| s.as_sequence()).cloned().unwrap_or_default()
+    };
+    for (li, lesson) in seq(&doc, "lessons").iter().enumerate() {
+        for (si, step) in seq(lesson, "steps").iter().enumerate() {
+            let keys = step
+                .as_mapping()
+                .map(|m| m.keys().filter_map(|k| k.as_str().map(String::from)).collect())
+                .unwrap_or_default();
+            out.push(((li, si), keys));
+        }
+    }
+    out
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn repo_lessons_are_valid() {
+        let root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../..");
+        let approved = BTreeSet::new();
+        let mut problems = Vec::new();
+        validate_all(&root, &approved, &mut problems);
+        assert!(problems.is_empty(), "{problems:#?}");
+    }
+
+    #[test]
+    fn typos_in_step_keys_are_caught() {
+        let keys = raw_step_keys("lessons:\n  - steps:\n      - { kind: check, anwser: 1 }\n");
+        assert_eq!(keys, vec![((0, 0), vec!["kind".to_string(), "anwser".to_string()])]);
+    }
+}

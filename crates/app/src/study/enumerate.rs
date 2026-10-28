@@ -20,9 +20,11 @@ pub fn EnumerateItem(item: Item, on_grade: EventHandler<Grade>) -> Element {
 
     let got = ticks.read().as_ref().map(|t| t.iter().filter(|x| **x).count());
     let wrote = typed.read().trim().to_string();
-    // Tablet and Mac: the prompt and the recall on one side, the points on the other.
+    // Tablet and Mac: the prompt and the recall on one side, the points on the
+    // other. Once open, the points take the wide column; grading sits under both.
     rsx! {
         crate::desk::Panes {
+            wide_side: got.is_some(),
             primary: rsx! {
                 p { class: "st-prompt", lang: "en", dir: "ltr", "{prompt}" }
                 p { class: "muted small", "{tx::ENUM_GOAL_A} {total} {tx::ENUM_GOAL_B} {pass} {tx::ENUM_GOAL_C}" }
@@ -77,6 +79,8 @@ pub fn EnumerateItem(item: Item, on_grade: EventHandler<Grade>) -> Element {
                     "{n} {tx::OF} {total} · "
                     if n >= pass { {tx::ENUM_PASS} } else { "{tx::ENUM_SHORT_A} {pass - n} {tx::ENUM_SHORT_B}" }
                 }
+            }),
+            footer: got.map(|n| rsx! {
                 GradeRow { item_id: item.id.clone(), suggested: Some(enumerate_grade(n, total, pass)), on_grade }
             }),
         }

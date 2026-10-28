@@ -232,6 +232,7 @@ fn table_label(name: &str) -> String {
         "review_events" => tx::T_REVIEWS.to_string(),
         "item_status" => tx::T_CHECKS.to_string(),
         "settings" => tx::T_SETTINGS.to_string(),
+        "own_cards" => tx::T_OWN.to_string(),
         other => other.replace('_', " "),
     }
 }

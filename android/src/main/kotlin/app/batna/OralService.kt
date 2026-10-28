@@ -104,15 +104,18 @@ class OralService : Service() {
 
     private fun notification(s: MediaSession): Notification {
         val nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        if (nm.getNotificationChannel(CHANNEL) == null) {
-            // Low importance: no sound, no pop-up; just the controls.
-            nm.createNotificationChannel(NotificationChannel(CHANNEL, "Batna oral", NotificationManager.IMPORTANCE_LOW))
-        }
+        // Low importance: no sound, no pop-up; just the controls. Creating it
+        // again only renames an existing channel; the user's settings stay.
+        nm.createNotificationChannel(
+            NotificationChannel(CHANNEL, "المذاكرة الشفوي", NotificationManager.IMPORTANCE_LOW).apply {
+                description = "التحكم في الشفوي وهو شغّال في الخلفية"
+            },
+        )
         val open = packageManager.getLaunchIntentForPackage(packageName)?.let {
             PendingIntent.getActivity(this, 0, it, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
         }
         val b = Notification.Builder(this, CHANNEL)
-            .setSmallIcon(android.R.drawable.ic_btn_speak_now)
+            .setSmallIcon(app.batna.bridge.R.drawable.ic_stat_batna)
             .setContentTitle(OralBridge.title)
             .setContentText(OralBridge.text)
             .setContentIntent(open)

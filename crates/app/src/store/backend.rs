@@ -105,12 +105,42 @@ impl ReviewBackend {
         self.scheduler = Scheduler::from_settings(&self.settings, utc_offset_minutes());
         self.log = self.store.reviews().unwrap_or_default();
         self.judgements = self.store.judgements().unwrap_or_default();
+        self.refresh_own();
         self.replay();
     }
 
+    /// Puts his own cards in the catalog (and publishes the deck for the
+    /// study player), replacing the previous set.
+    fn refresh_own(&mut self) {
+        let lec = crate::own::publish(self.store.own_cards());
+        self.catalog.retain(|id, _| !batna_core::own::is_own(id));
+        for item in &lec.items {
+            self.catalog.insert(item.id.clone(), Entry { lecture: lec.lecture.clone(), item: item.clone() });
+        }
+    }
+
+    /// Adds or changes one of his cards.
+    pub fn save_own(&mut self, card: &batna_core::own::OwnCard) -> super::Result<()> {
+        self.store.put_own_card(card)?;
+        self.refresh_own();
+        self.changed();
+        Ok(())
+    }
+
+    /// Deletes one of his cards on every device. Its reviews stay in the log.
+    pub fn delete_own(&mut self, id: &str) -> super::Result<()> {
+        self.store.delete_own_card(id)?;
+        self.refresh_own();
+        self.changed();
+        Ok(())
+    }
+
     /// Re-reads everything and tells the screens (after an import).
+    /// After the store changed from outside this run (a sync, a restore, an
+    /// import): reload the review state and every synced-setting global.
     pub fn reload_and_notify(&mut self) {
         self.reload();
+        crate::synced::reload();
         self.changed();
     }
 
@@ -423,6 +453,28 @@ mod tests {
             b,
             ReviewEvent { item_id: id.into(), grade, origin: Origin::Study, at_ms, took_ms: 5000 },
         );
+    }
+
+    #[test]
+    fn own_cards_join_the_catalog_and_never_ask_to_verify() {
+        let mut b = backend();
+        let before = b.catalog.len();
+        let card = batna_core::own::OwnCard {
+            id: "own.t1".into(),
+            front: "SAAG?".into(),
+            back: "≥ 1.1".into(),
+            lecture: None,
+            page: None,
+            source: None,
+            created_ms: T0,
+        };
+        b.save_own(&card).unwrap();
+        assert_eq!(b.catalog.len(), before + 1);
+        assert_eq!(b.entry("own.t1").unwrap().lecture, batna_core::own::LECTURE);
+        assert_eq!(b.check("own.t1"), Check::Settled);
+        b.delete_own("own.t1").unwrap();
+        assert!(b.entry("own.t1").is_none());
+        assert_eq!(b.catalog.len(), before);
     }
 
     #[test]

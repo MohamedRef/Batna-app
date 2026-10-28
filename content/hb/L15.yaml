@@ -287,7 +287,7 @@ items:
 - id: hb.L15.027
   kind: enumerate
   topic: ap-cause
-  prompt: Diagnostic criteria of acute pancreatitis (how many are needed?).
+  prompt: Diagnostic criteria of acute pancreatitis.
   points:
   - 'Clinical: abdominal pain consistent with the disease'
   - 'Lab: serum amylase and/or lipase > 3 times the upper limit of normal'
@@ -659,7 +659,7 @@ items:
 - id: hb.L15.058
   kind: enumerate
   topic: ap-severity
-  prompt: SIRS criteria (≥ 2 needed).
+  prompt: SIRS criteria (≥ 2 needed; the book prints "> 2", the standard definition is ≥ 2).
   points:
   - Pulse > 90/min
   - Respirations > 20/min or PaCO2 < 32 mmHg (the book prints "> 32")
@@ -741,10 +741,15 @@ items:
 - id: hb.L15.064
   kind: card
   topic: ap-severity
-  front: Atlanta grade vs morphology — which grades are interstitial and which necrotizing?
-  back: Mild = interstitial AP. Moderately severe and severe = necrotizing AP.
+  front: 'Atlanta grade vs morphology: how does the book link them?'
+  back: 'The book: mild = interstitial AP; moderately severe and severe = necrotizing AP. But grade is set by organ
+    failure and complications, so transient organ failure without necrosis is still moderately severe.'
   src:
     page: 285
+  update:
+    text: 'In the revised Atlanta classification, severity (organ failure and complications) and morphology (interstitial
+      vs necrotizing) are independent: moderately severe and even severe AP can be interstitial.'
+    ref: Banks et al., Revised Atlanta classification, Gut 2013
   status: unverified
 - id: hb.L15.065
   kind: enumerate
@@ -971,15 +976,16 @@ items:
   tags:
   - book-question
 - id: hb.L15.077
-  kind: order
+  kind: enumerate
   topic: ap-treatment
-  prompt: Treatment steps of acute pancreatitis as listed in the lecture.
-  steps:
+  prompt: Headings of acute pancreatitis treatment in the lecture.
+  points:
   - Hydration
-  - Antibiotics (when indicated)
+  - Antibiotics (only when indicated)
   - Nutrition
   - Role of ERCP
   - Role of surgery
+  pass: 4
   src:
     page: 288
   status: unverified
@@ -1566,7 +1572,7 @@ items:
 - id: hb.L15.129
   kind: card
   topic: tumors
-  front: Classical presentation of carcinoma of the head of the pancreas?
+  front: Classical presentation of pancreatic cancer (book)?
   back: Painless jaundice.
   src:
     page: 299
@@ -1670,7 +1676,7 @@ items:
   - Percutaneous celiac ganglion block for pain
   - Biliary stent to decompress the bile duct
   - Percutaneous transhepatic drainage (PTD) for jaundice
-  - Chemoradiotherapy
+  - Chemoradiotherapy (may become an alternative in the future)
   pass: 3
   src:
     page: 300
@@ -2374,7 +2380,8 @@ items:
   why:
   - Severe needs persistent organ failure > 48 h.
   - Not a grade in the revised Atlanta 2012.
-  - Correct. Organ failure that resolves within 48 h is transient, which makes it moderately severe.
+  - Correct. Organ failure that resolves within 48 h is transient, which makes it moderately severe. Grade depends
+    on how long organ failure lasts, not on morphology.
   - Mild means no organ failure at all.
   - Atlanta does not depend on Ranson.
   src:
@@ -2499,7 +2506,7 @@ items:
   stem: On day 12 of necrotizing pancreatitis, a patient becomes febrile and is worsening. Procalcitonin is 5 ng/ml.
     He is hemodynamically stable. What is the best next step?
   options:
-  - Start a carbapenem and delay any drainage, ideally beyond 4 weeks
+  - Start a carbapenem and delay drainage
   - Immediate open necrosectomy
   - CT-guided FNA before any antibiotics
   - Withhold antibiotics until cultures return
@@ -2907,7 +2914,7 @@ items:
 - id: hb.L15.199
   kind: case
   topic: ap-severity
-  stem: A 62-year-old woman is admitted with gallstone pancreatitis. Admission data are in front of you.
+  stem: A 62-year-old woman is admitted with gallstone pancreatitis. Score her with the book's Ranson criteria.
   steps:
   - reveal: Age 62, WBC 18,000, glucose 240 mg/dl, LDH 300 IU/L, AST 120 IU/L.
     question: How many Ranson points does she have on admission?
@@ -2918,7 +2925,7 @@ items:
     - '5'
     answer: 1
     why: Age > 55, WBC > 16,000 and glucose > 200 = 3. LDH ≤ 350 and AST ≤ 250 score 0.
-  - reveal: 'Over 48 h: Hct falls by 12%, BUN rises by 3, calcium 7.6 mg/dl, base deficit 2, PaO2 70, fluid sequestration
+  - reveal: 'Over 48 h: Hct falls by 12%, BUN rises by 1, calcium 7.6 mg/dl, base deficit 2, PaO2 70, fluid sequestration
       4 L.'
     question: What is her total Ranson score and predicted mortality?
     options:
@@ -2978,12 +2985,13 @@ items:
       from gastric outlet obstruction.
     question: What is the collection now and what is done?
     options:
-    - Pseudocyst; open surgery
-    - Walled-off necrosis; EUS or percutaneous drainage, minimally invasive necrosectomy if needed
-    - Walled-off necrosis; observe because it is beyond 4 weeks
+    - Walled-off necrosis; open necrosectomy
+    - Walled-off necrosis; EUS or percutaneous drainage
+    - Walled-off necrosis; observe only
     - Pseudocyst; follow up
     answer: 1
     why: Beyond 4 weeks, encapsulated necrosis = WON. Gastric outlet obstruction is an indication for drainage.
+      Symptomatic necrosis is handled by minimally invasive methods, not open surgery.
   src:
     page: 292
   status: unverified
@@ -2994,8 +3002,8 @@ items:
   topic: cysts
   stem: A 64-year-old surgically fit man has an incidental 2.5 cm cyst in the pancreatic head on CT.
   steps:
-  - reveal: MRI shows a cyst communicating with a side branch of the pancreatic duct. Main duct 6 mm. No mural nodule,
-      no jaundice, no symptoms.
+  - reveal: MRI shows a cyst that communicates with the pancreatic duct. Main duct 6 mm. No mural nodule, no jaundice,
+      no symptoms.
     question: What is the most likely type of cyst?
     options:
     - Branch-duct IPMN

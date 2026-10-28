@@ -16,7 +16,7 @@
 
 `scripts/android-check-apk.sh <apk>` fails if the Kotlin classes or their permissions are missing from an APK; CI runs it on every change to `android/`. When you add a Kotlin class that Rust looks up by name, add it to `CLASSES` in that script. `adb logcat` shows Kotlin errors on the device.
 
-The Mac build (clippy, tests and `dx bundle`) runs in `.github/workflows/mac.yml` on every push to `main`, nightly and by hand (Actions › Mac › Run workflow), not on pull requests: hosted Mac runners are sometimes unavailable for most of an hour. Check that workflow on `main` after touching Mac-only code, or run `just check` plus `just bundle-mac` on the Mac.
+The Mac build (clippy, tests and `dx bundle`) runs in `.github/workflows/mac.yml` on every push to `main`, nightly and by hand (Actions › Mac › Run workflow), not on pull requests: hosted Mac runners are sometimes unavailable for most of an hour. A PR that touches Mac-only code (`cfg(target_os = "macos")`, `objc2`, the .app bundle and update swap, the Mac menu, the Keychain session, or `mac.yml` itself) must run this workflow on its own branch before it merges: Actions › Mac › Run workflow, pick the PR's branch, and merge only on green (link the run in the PR). Running `just check` plus `just bundle-mac` on the Mac counts too.
 
 Release builds (`just apk`, `just install-android`, `just bundle-mac`), their one-time keys, the CI preview APK and updates over the air are described in [RELEASE.md](RELEASE.md). Nothing is released before Mohamed says go, so for now the debug build, or the CI preview APK on the `batna-preview` prerelease, is the way to try Batna. Each update says what changed (from `changes/*.yaml`, RELEASE.md §5): before installing, once after, and in Settings › التحديثات › سجل التغييرات.
 

@@ -12,18 +12,30 @@ path = "src/main.rs"
 
 [dependencies]
 batna-core.workspace = true
+batna-protocol.workspace = true
 dioxus = { version = "0.7.10", features = [] }
 serde_yaml_ng.workspace = true
 serde.workspace = true
 serde_json.workspace = true
 rusqlite = { version = "0.37", features = ["bundled"] }
 chrono = { version = "0.4", default-features = false, features = ["clock", "std"] }
-# Oral mode's think timer and speech waits (Dioxus already runs on tokio).
-tokio = { version = "1", features = ["time"] }
+# Oral mode's think timer and speech waits (Dioxus already runs on tokio),
+# and Batna Cloud's sync thread (crates/app/src/cloud).
+tokio = { version = "1", features = ["rt", "net", "time", "sync", "macros", "io-util"] }
+# Batna Cloud client: TLS is rustls + ring with webpki roots everywhere, so the
+# Android build needs no Java trust-store glue.
+base64 = "0.22"
+futures-util = { version = "0.3", default-features = false, features = ["sink", "std"] }
+getrandom = "0.3"
+keyring-core = "1"
+sha2 = "0.10"
+tokio-tungstenite = { version = "0.30", default-features = false, features = ["connect", "rustls-tls-webpki-roots"] }
+ureq = { version = "3", default-features = false, features = ["rustls", "json"] }
 
 # Android TextToSpeech through JNI (src/platform/tts_android.rs).
 [target.'cfg(target_os = "android")'.dependencies]
 jni = "0.22"
+android-native-keyring-store = "1"
 ndk-context = "0.1"
 # Only for `#[manganis::ffi]`, which tells dx to build android/ into the APK.
 # Keep in lockstep with the dioxus version.
@@ -31,6 +43,9 @@ manganis = "=0.7.10"
 
 [target.'cfg(not(target_os = "android"))'.dependencies]
 directories = "6"
+
+[target.'cfg(target_os = "macos")'.dependencies]
+apple-native-keyring-store = { version = "1", features = ["keychain"] }
 
 [build-dependencies]
 batna-core.workspace = true

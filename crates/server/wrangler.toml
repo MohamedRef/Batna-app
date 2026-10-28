@@ -1,0 +1,29 @@
+# Batna Cloud on the Cloudflare Workers Free plan. Its own Worker, its own
+# Durable Object storage and its own secrets: nothing is shared with Kabar
+# Cloud. See docs/CLOUD.md.
+name = "batna-cloud"
+main = "build/index.js"
+compatibility_date = "2026-10-01"
+workers_dev = true
+
+[build]
+command = "CARGO_PROFILE_RELEASE_STRIP=false worker-build --release"
+
+[observability]
+enabled = true
+
+# One Durable Object per account: devices + sync hub (SQLite storage, the
+# only kind on the Free plan). Batna needs no D1 database.
+[durable_objects]
+bindings = [{ name = "ACCOUNT", class_name = "Account" }]
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["Account"]
+
+# Not secret. Secrets (ALLOWED_EMAILS, TOKEN_SIGNING_KEY) go in with
+# `wrangler secret put`.
+[vars]
+# Batna's own Google OAuth client id(s), comma-separated.
+GOOGLE_CLIENT_IDS = ""
+

@@ -1,6 +1,6 @@
 # Batna: working conventions
 
-Batna (باطنة) is a personal internal-medicine study app in Rust, for one learner: Mohamed, who is studying for an Egyptian MSc in General Internal Medicine. His exam is in January 2027. Batna is private and is never published.
+Batna (باطنة) is a personal internal-medicine study app in Rust, for one learner: Mohamed, who is studying for an Egyptian MSc in General Internal Medicine. His exam is in January 2027. Batna is personal and is never published to a store. The `MohamedRef/Batna-app` repo stays public on purpose while testing (free Actions minutes); Mohamed makes it private afterwards, so do not flag its visibility.
 
 It lives in its own repo, `MohamedRef/Batna-app`, on `main`. It moved there from the old `batna` branch of `MohamedRef/Kabar-app` on 2026-10-28, with its full history. **Kabar (`MohamedRef/Kabar-app`) is a separate app: never push or open PRs there for Batna work, and never depend on Kabar crates.** Copy a Kabar module when it helps, adapt it, and credit the source path in a comment ("adapted from kabar-app main: <path>").
 

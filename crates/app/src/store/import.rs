@@ -95,14 +95,41 @@ pub fn parse(text: &str) -> Result<Value, ImportError> {
     Ok(doc)
 }
 
-/// A local table the import may merge into: its columns and its key.
-struct Target {
-    columns: Vec<String>,
-    key: String,
+/// A local table the import (and sync) may merge into: its columns and its key.
+pub(super) struct Target {
+    pub columns: Vec<String>,
+    pub key: String,
+}
+
+/// Inserts one row, or replaces the local copy when the row's HLC is newer
+/// (last writer wins). Columns this build doesn't have are ignored. Returns
+/// whether anything changed.
+pub(super) fn merge_row(
+    conn: &rusqlite::Connection,
+    name: &str,
+    target: &Target,
+    obj: &serde_json::Map<String, Value>,
+) -> rusqlite::Result<bool> {
+    let cols: Vec<&String> = target.columns.iter().filter(|c| obj.contains_key(c.as_str())).collect();
+    let values: Vec<Sql> = cols.iter().map(|c| to_sql(&obj[c.as_str()])).collect();
+    let quoted: Vec<String> = cols.iter().map(|c| format!("\"{c}\"")).collect();
+    let marks: Vec<String> = (1..=cols.len()).map(|i| format!("?{i}")).collect();
+    let set: Vec<String> =
+        cols.iter().filter(|c| **c != &target.key).map(|c| format!("\"{c}\" = excluded.\"{c}\"")).collect();
+    let sql = format!(
+        "INSERT INTO \"{name}\" ({}) VALUES ({}) ON CONFLICT (\"{key}\") DO UPDATE SET {}
+         WHERE (excluded.hlc_wall, excluded.hlc_counter, excluded.device_id)
+             > (\"{name}\".hlc_wall, \"{name}\".hlc_counter, \"{name}\".device_id)",
+        quoted.join(", "),
+        marks.join(", "),
+        set.join(", "),
+        key = target.key,
+    );
+    Ok(conn.execute(&sql, rusqlite::params_from_iter(values))? > 0)
 }
 
 impl Store {
-    fn target(&self, table: &str) -> StoreResult<Option<Target>> {
+    pub(super) fn target(&self, table: &str) -> StoreResult<Option<Target>> {
         if table == "meta" {
             return Ok(None);
         }
@@ -178,29 +205,8 @@ impl Store {
                 for row in rows_of(&tables[name]) {
                     let Some(obj) = row.as_object() else { continue };
                     let Some((_, hlc)) = key_and_hlc(row, &target.key) else { continue };
-                    let cols: Vec<&String> =
-                        target.columns.iter().filter(|c| obj.contains_key(c.as_str())).collect();
-                    let values: Vec<Sql> = cols.iter().map(|c| to_sql(&obj[c.as_str()])).collect();
-                    let quoted: Vec<String> = cols.iter().map(|c| format!("\"{c}\"")).collect();
-                    let marks: Vec<String> = (1..=cols.len()).map(|i| format!("?{i}")).collect();
-                    let set: Vec<String> = cols
-                        .iter()
-                        .filter(|c| **c != &target.key)
-                        .map(|c| format!("\"{c}\" = excluded.\"{c}\""))
-                        .collect();
-                    let sql = format!(
-                        "INSERT INTO \"{name}\" ({}) VALUES ({}) ON CONFLICT (\"{key}\") DO UPDATE SET {}
-                         WHERE (excluded.hlc_wall, excluded.hlc_counter, excluded.device_id)
-                             > (\"{name}\".hlc_wall, \"{name}\".hlc_counter, \"{name}\".device_id)",
-                        quoted.join(", "),
-                        marks.join(", "),
-                        set.join(", "),
-                        key = target.key,
-                    );
                     // A row this build can't take (a missing NOT NULL column) is skipped.
-                    if tx.execute(&sql, rusqlite::params_from_iter(values)).is_ok()
-                        && newest.as_ref().is_none_or(|n| hlc > *n)
-                    {
+                    if merge_row(&tx, name, target, obj).is_ok() && newest.as_ref().is_none_or(|n| hlc > *n) {
                         newest = Some(hlc);
                     }
                 }
@@ -219,7 +225,7 @@ fn rows_of(table: &Value) -> &[Value] {
     table["rows"].as_array().map(Vec::as_slice).unwrap_or_default()
 }
 
-fn key_and_hlc(row: &Value, key: &str) -> Option<(Sql, Hlc)> {
+pub(super) fn key_and_hlc(row: &Value, key: &str) -> Option<(Sql, Hlc)> {
     let id = to_sql(row.get(key)?);
     let hlc = Hlc {
         wall_ms: row["hlc_wall"].as_i64()?,

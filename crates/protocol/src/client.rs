@@ -32,11 +32,16 @@ pub enum Effect {
     },
     /// Save `last_seq` (nothing to merge).
     SaveLastSeq(u64),
-    /// Remove these ops from the outbox. Rejected ops will never be accepted,
-    /// so they leave too; the reasons are for the log.
+    /// Remove these ops from the outbox. `rejected` ops will never be
+    /// accepted, so they leave too; the reasons are for the log.
     Acked {
         done: Vec<String>,
         rejected: Vec<Rejected>,
+    },
+    /// The hub found this device's clock too far ahead. These ops stay in the
+    /// outbox; hold pushes for a while and tell the user to fix the clock.
+    ClockAhead {
+        kept: Vec<String>,
     },
     /// Close the socket and reconnect after a backoff.
     Reconnect {
@@ -118,7 +123,12 @@ impl SyncClient {
                 if self.in_flight.as_ref().is_some_and(|f| f.batch == batch) {
                     self.in_flight = None;
                 }
+                let (rejected, kept): (Vec<_>, Vec<_>) =
+                    rejected.into_iter().partition(|r| r.reason.is_final());
                 let mut out = vec![Effect::Acked { done, rejected }];
+                if !kept.is_empty() {
+                    out.push(Effect::ClockAhead { kept: kept.into_iter().map(|r| r.op_id).collect() });
+                }
                 // Live sockets get every other op before the ack of a later
                 // push, so everything up to head_seq is here now.
                 if self.phase == Phase::Live && head_seq > self.last_seq {
@@ -208,6 +218,7 @@ mod tests {
             row_id: "hb.L01.001".into(),
             kind: OpKind::Upsert,
             hlc: Hlc { wall_ms: 1, counter: 0, device: "s24u".into() },
+            relay: false,
             payload: Some(json!({ "status": "approved" })),
         }
     }
@@ -259,7 +270,7 @@ mod tests {
         assert_eq!(ops.len(), MAX_OPS_PER_PUSH);
         assert_eq!(c.next_push(&outbox), None);
 
-        let rejected = vec![Rejected { op_id: "p1".into(), reason: RejectReason::ClockSkew }];
+        let rejected = vec![Rejected { op_id: "p1".into(), reason: RejectReason::InvalidId }];
         let done: Vec<String> = ops.iter().skip(2).map(|o| o.id.clone()).collect();
         let fx = c.on_message(ServerMsg::Ack {
             batch: 1,
@@ -271,6 +282,32 @@ mod tests {
         let Some(ClientMsg::Push { batch: 2, .. }) = c.next_push(&outbox[MAX_OPS_PER_PUSH..]) else {
             panic!()
         };
+    }
+
+    #[test]
+    fn clock_skew_keeps_the_op_for_later() {
+        let mut c = live(0);
+        let Some(ClientMsg::Push { batch, .. }) = c.next_push(&[op("a"), op("b"), op("c")]) else { panic!() };
+        let fx = c.on_message(ServerMsg::Ack {
+            batch,
+            done: vec!["a".into()],
+            rejected: vec![
+                Rejected { op_id: "b".into(), reason: RejectReason::ClockSkew },
+                Rejected { op_id: "c".into(), reason: RejectReason::UnknownTable },
+            ],
+            head_seq: 0,
+        });
+        assert_eq!(
+            fx,
+            vec![
+                Effect::Acked {
+                    done: vec!["a".into()],
+                    rejected: vec![Rejected { op_id: "c".into(), reason: RejectReason::UnknownTable }],
+                },
+                Effect::ClockAhead { kept: vec!["b".into()] },
+            ]
+        );
+        assert!(c.in_flight().is_empty());
     }
 
     #[test]

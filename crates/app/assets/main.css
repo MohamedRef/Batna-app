@@ -217,6 +217,11 @@ p { margin: 0; }
 .lecture-main { display: flex; flex-direction: column; min-width: 0; flex: 1; }
 .lecture-title { font-weight: 600; overflow-wrap: anywhere; }
 .lecture[data-ready="no"] .lecture-title { color: var(--muted); }
+/* Compact: the status chip goes under the title, so long titles keep the row (#111). */
+@media (max-width: 599px) {
+  .lecture { display: grid; grid-template-columns: auto minmax(0, 1fr); }
+  .lecture > .chip { grid-column: 2; justify-self: start; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }

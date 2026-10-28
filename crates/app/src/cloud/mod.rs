@@ -94,6 +94,8 @@ pub enum Problem {
     Network,
     Server,
     Outdated,
+    /// The hub turned changes away because this device's clock is ahead.
+    ClockOff,
 }
 
 #[derive(Clone, Debug, PartialEq)]

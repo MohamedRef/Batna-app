@@ -51,10 +51,11 @@ pub fn save(store: &Store, dir: &Path, date: &str, now_ms: i64) -> Result<(PathB
     Ok((path, export.rows))
 }
 
+/// Android: hands a file the app just wrote to the system "Save to" dialog
+/// (Downloads, Drive …), once on its own, then again on a tap. Key it by
+/// attempt so each new export opens the dialog.
 #[component]
-pub fn ExportCard() -> Element {
-    let mut outcome = use_signal(|| None::<Result<(String, u64), String>>);
-    // Android: where the "Save to" dialog put the copy.
+pub fn SaveTo(path: String) -> Element {
     let mut moved = use_signal(|| None::<DocState>);
     let mut save_to = move |path: String| {
         let name = Path::new(&path).file_name().map(|n| n.to_string_lossy().into_owned()).unwrap_or_default();
@@ -66,14 +67,40 @@ pub fn ExportCard() -> Element {
             Err(_) => moved.set(Some(DocState::Failed)),
         }
     };
+    use_hook({
+        let path = path.clone();
+        move || save_to(path)
+    });
+    match moved() {
+        Some(DocState::Busy) => rsx! { p { class: "muted small", {tx::EXPORT_SAVING} } },
+        Some(DocState::Saved(Some(name))) => rsx! {
+            p { class: "small", "{tx::EXPORT_SAVED_AS} " bdi { dir: "ltr", "{name}" } }
+        },
+        Some(DocState::Saved(None)) => rsx! { p { class: "small", {tx::EXPORT_SAVED_OUT} } },
+        other => rsx! {
+            p { class: "muted small",
+                if other == Some(DocState::Cancelled) {
+                    {tx::EXPORT_SAVE_CANCELLED}
+                } else if other.is_some() {
+                    {tx::EXPORT_SAVE_FAILED}
+                }
+                " {tx::EXPORT_ANDROID_HINT}"
+            }
+            button { class: "verify-btn plain", onclick: move |_| save_to(path.clone()), {tx::EXPORT_SAVE_TO} }
+        },
+    }
+}
+
+#[component]
+pub fn ExportCard() -> Element {
+    let mut outcome = use_signal(|| None::<Result<(String, u64), String>>);
+    // Each export opens the "Save to" dialog afresh.
+    let mut attempt = use_signal(|| 0u32);
     let run = move |_| {
         let result = store::export_dir()
             .and_then(|dir| save(store::shared(), &dir, &local_date(), store::now_ms()))
             .map(|(p, rows)| (p.display().to_string(), rows));
-        moved.set(None);
-        if let (true, Ok((path, _))) = (cfg!(target_os = "android"), &result) {
-            save_to(path.clone());
-        }
+        attempt += 1;
         outcome.set(Some(result));
     };
     rsx! {
@@ -87,24 +114,7 @@ pub fn ExportCard() -> Element {
                         p { class: "small", "{tx::EXPORT_SAVED_1} {rows} {tx::EXPORT_SAVED_2}" }
                         p { class: "small", bdi { dir: "ltr", "{path}" } }
                         if cfg!(target_os = "android") {
-                            match moved() {
-                                Some(DocState::Busy) => rsx! { p { class: "muted small", {tx::EXPORT_SAVING} } },
-                                Some(DocState::Saved(Some(name))) => rsx! {
-                                    p { class: "small", "{tx::EXPORT_SAVED_AS} " bdi { dir: "ltr", "{name}" } }
-                                },
-                                Some(DocState::Saved(None)) => rsx! { p { class: "small", {tx::EXPORT_SAVED_OUT} } },
-                                other => rsx! {
-                                    p { class: "muted small",
-                                        if other == Some(DocState::Cancelled) {
-                                            {tx::EXPORT_SAVE_CANCELLED}
-                                        } else if other.is_some() {
-                                            {tx::EXPORT_SAVE_FAILED}
-                                        }
-                                        " {tx::EXPORT_ANDROID_HINT}"
-                                    }
-                                    button { class: "verify-btn plain", onclick: move |_| save_to(path.clone()), {tx::EXPORT_SAVE_TO} }
-                                },
-                            }
+                            SaveTo { key: "{attempt}", path }
                         }
                     }
                 },

@@ -57,6 +57,10 @@ button.primary:disabled { opacity: 0.45; cursor: default; }
 .bar { block-size: 6px; border-radius: var(--radius-pill); background: var(--bg); overflow: hidden; margin-block: var(--sp-1); }
 .bar-fill { block-size: 100%; background: var(--good); border-radius: inherit; }
 .chip.due { background: var(--accent-soft); border-color: transparent; color: var(--accent); font-weight: 600; }
+@media (max-width: 599px) {
+  .progress-row { display: grid; grid-template-columns: auto minmax(0, 1fr); }
+  .progress-row > .chip { grid-column: 2; justify-self: start; }
+}
 
 .segmented { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
 .segmented button {

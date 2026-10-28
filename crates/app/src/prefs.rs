@@ -127,13 +127,16 @@ impl DevicePrefs {
         Self::parse(&text)
     }
 
-    /// Best effort: a folder that can't be written keeps the choice for this run.
+    /// Best effort: a folder that can't be written keeps the choice for this
+    /// run, and says why in the log.
     pub fn save(&self) {
         let Some(dir) = data_dir() else { return };
-        let _ = std::fs::create_dir_all(&dir);
         let tmp = dir.join(format!("{FILE}.tmp"));
-        if std::fs::write(&tmp, self.render()).is_ok() {
-            let _ = std::fs::rename(&tmp, dir.join(FILE));
+        let saved = std::fs::create_dir_all(&dir)
+            .and_then(|()| std::fs::write(&tmp, self.render()))
+            .and_then(|()| std::fs::rename(&tmp, dir.join(FILE)));
+        if let Err(e) = saved {
+            crate::diag::report!("saving device prefs in {}: {e}", dir.display());
         }
     }
 

@@ -11,7 +11,7 @@ use crate::Ui;
 use crate::content::Library;
 use crate::i18n::onboard as tx;
 use crate::reminders::{MAX_TIMES, RemindPrefs, hhmm, parse_hhmm};
-use crate::store::{now_ms, shared, utc_offset_minutes};
+use crate::store::{now_ms, shared};
 
 const CSS: &str = r#"
 .onboard-backdrop { position: fixed; inset: 0; z-index: 50; background: var(--bg); overflow-y: auto; }
@@ -58,9 +58,7 @@ impl Answers {
     }
 
     fn save(&self) {
-        if let Err(e) = shared().put_setting(Self::KEY, self) {
-            crate::diag::report!("saving first-run answers: {e}");
-        }
+        crate::store::save_setting(Self::KEY, self);
     }
 }
 
@@ -122,7 +120,7 @@ fn Questions() -> Element {
     let mut step = use_signal(|| 0usize);
     let plan = crate::plan::SETTINGS.peek().clone();
     let answers = Answers::load();
-    let today = Day::from_unix_ms(now_ms(), utc_offset_minutes(), 0);
+    let today = crate::store::zone().study_day(now_ms());
     let mut exam = use_signal(|| plan.exam.map(Day::iso).unwrap_or_default());
     let mut weekdays = use_signal(|| plan.weekdays);
     let mut minutes = use_signal(|| answers.minutes.unwrap_or(10));

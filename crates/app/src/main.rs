@@ -17,6 +17,7 @@ mod hover;
 mod i18n;
 mod icons;
 mod import;
+mod more;
 mod onboarding;
 mod oral;
 mod order;
@@ -173,8 +174,14 @@ fn App() -> Element {
                     span { class: "brand-tag", {i18n::app::TAGLINE} }
                 }
                 for screen in Screen::NAV {
-                    NavButton { key: "{screen:?}", screen, class: "nav-item" }
+                    NavButton {
+                        key: "{screen:?}",
+                        screen,
+                        class: more::nav_class(screen),
+                    }
                 }
+                // Phones: Cases and Oral sit under More (more.rs).
+                more::More {}
                 // From 600px the rail or sidebar carries Settings at its foot (nav.css).
                 button {
                     class: "nav-item nav-foot",

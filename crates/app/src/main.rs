@@ -17,6 +17,7 @@ mod hover;
 mod i18n;
 mod icons;
 mod import;
+mod more;
 mod onboarding;
 mod oral;
 mod order;
@@ -156,6 +157,7 @@ fn App() -> Element {
     });
     back::use_back(ui, current, *settings.open.read());
     update::view::use_android_install(ui);
+    update::view::use_update_notice_taps(settings);
     // A screen opens at its top, not at the last screen's scroll offset (UX #102).
     use_effect(move || {
         let _ = ui.screen.read();
@@ -182,7 +184,7 @@ fn App() -> Element {
                     {icons::nav(Screen::Settings)}
                 }
             }
-            nav { class: "nav", aria_label: "التنقل",
+            nav { class: "nav", aria_label: i18n::nav::LABEL,
                 // From 600px the top bar goes and the name heads the rail or
                 // sidebar, so the screen gets the full height (nav.css).
                 div { class: "nav-brand", aria_hidden: "true",
@@ -190,8 +192,14 @@ fn App() -> Element {
                     span { class: "brand-tag", {i18n::app::TAGLINE} }
                 }
                 for screen in Screen::NAV {
-                    NavButton { key: "{screen:?}", screen, class: "nav-item" }
+                    NavButton {
+                        key: "{screen:?}",
+                        screen,
+                        class: more::nav_class(screen),
+                    }
                 }
+                // Phones: Cases and Oral sit under More (more.rs).
+                more::More {}
                 // From 600px the rail or sidebar carries Settings at its foot (nav.css).
                 button {
                     class: "nav-item nav-foot",

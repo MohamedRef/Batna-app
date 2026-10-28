@@ -40,7 +40,7 @@ pub fn Today() -> Element {
                             p { class: "muted small", "{tx::DUE_TIME_1} {o.due_minutes} {tx::DUE_TIME_2}" }
                         }
                         button {
-                            class: "primary start",
+                            class: "btn btn-primary btn-lg start",
                             onclick: move |_| {
                                 *crate::study::START.write() = Some(crate::study::Start { lectures: None, items: None, minutes: crate::onboarding::session_minutes() });
                                 ui.screen.set(Screen::Study);
@@ -58,6 +58,8 @@ pub fn Today() -> Element {
                     }
                     if let Some(e) = store::open_error() {
                         p { class: "note", "{tx::STORE_FAILED} " bdi { dir: "ltr", "{e}" } }
+                    } else if let Some(e) = store::write_error() {
+                        p { class: "note", "{tx::WRITE_FAILED} " bdi { dir: "ltr", "{e}" } }
                     }
                 }
                 crate::recap::TodayRecap { due_left: o.due, due_tomorrow: o.due_tomorrow }

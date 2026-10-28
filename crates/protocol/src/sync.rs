@@ -78,6 +78,11 @@ pub struct Op {
     /// The row's columns. `None` for deletes.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub payload: Option<serde_json::Value>,
+    /// A row another device wrote, passed on by this one (from a restored
+    /// backup). The hub takes it although `hlc.device` is not the device
+    /// that is connected, and merges it by HLC like any other op.
+    #[serde(default, skip_serializing_if = "std::ops::Not::not")]
+    pub relay: bool,
 }
 
 /// An op as stored by the hub, with its position in the account's log.
@@ -115,8 +120,17 @@ pub enum RejectReason {
     WrongDevice,
     MissingPayload,
     PayloadTooLarge,
+    /// The op's clock is too far ahead of the hub's. The op is fine; the
+    /// device keeps it and sends it again once its clock is right.
     ClockSkew,
     InvalidId,
+}
+
+impl RejectReason {
+    /// The hub will never take this op, however often it is sent.
+    pub fn is_final(self) -> bool {
+        self != RejectReason::ClockSkew
+    }
 }
 
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
@@ -191,6 +205,7 @@ mod tests {
             row_id: "hb.L01.001".into(),
             kind: OpKind::Upsert,
             hlc: Hlc { wall_ms: 5, counter: 0, device: "s24u".into() },
+            relay: false,
             payload: Some(serde_json::json!({ "status": "approved" })),
         };
         let json =

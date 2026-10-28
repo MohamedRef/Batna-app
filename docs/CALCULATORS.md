@@ -60,7 +60,7 @@ Source: Sterling 2006; book Lecture 6, p. 102
 
 ## `apri`: APRI
 
-Source: Wai 2003; WHO HCV guidelines 2016 (book Lecture 1, p. 10 names the test)
+Source: Book Lecture 2, p. 34; Wai 2003; WHO HCV guidelines 2016
 
 | input | kind | |
 |---|---|---|
@@ -70,7 +70,7 @@ Source: Wai 2003; WHO HCV guidelines 2016 (book Lecture 1, p. 10 names the test)
 
 ## `r_ratio`: R ratio (DILI pattern)
 
-Source: EASL DILI 2019; Kullak-Ublick 2017 (book Lecture 8, p. 129)
+Source: Book Lecture 8, p. 129; EASL DILI 2019; Kullak-Ublick 2017
 
 | input | kind | |
 |---|---|---|

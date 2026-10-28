@@ -21,6 +21,7 @@ fn theme_label(t: Theme) -> (&'static str, &'static str) {
 
 fn size_label(s: TextSize) -> &'static str {
     match s {
+        TextSize::Smaller => tx::TEXT_SMALLER,
         TextSize::Small => tx::TEXT_SMALL,
         TextSize::Normal => tx::TEXT_NORMAL,
         TextSize::Large => tx::TEXT_LARGE,

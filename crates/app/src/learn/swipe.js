@@ -23,6 +23,12 @@
   }
 
   document.addEventListener("pointerdown", (e) => {
+    // A second finger makes it a pinch or a mistake, never a turn (#322).
+    if (g && e.pointerId !== g.id) {
+      settle(g.el, true);
+      g = null;
+      return;
+    }
     if (e.pointerType === "mouse" || !e.isPrimary || !e.target.closest) return;
     // Anywhere on the lesson turns it, the empty space under a short step
     // too (#311), except the top bar and the footer's buttons.
@@ -30,11 +36,11 @@
     if (!player || e.target.closest(".ls-bar, .ls-nav") || e.target.closest(NOT_HERE)) return;
     const el = player.querySelector(".ls-stage:not([hidden])");
     if (!el) return;
-    g = { x: e.clientX, y: e.clientY, t: performance.now(), el, on: false, dx: 0 };
+    g = { id: e.pointerId, x: e.clientX, y: e.clientY, t: performance.now(), el, on: false, dx: 0 };
   }, { passive: true });
 
   document.addEventListener("pointermove", (e) => {
-    if (!g) return;
+    if (!g || e.pointerId !== g.id) return;
     const dx = e.clientX - g.x;
     const dy = e.clientY - g.y;
     if (!g.on) {
@@ -52,8 +58,8 @@
     g.el.style.opacity = String(1 - Math.min(Math.abs(d) / 700, 0.3));
   }, { passive: true });
 
-  document.addEventListener("pointerup", () => {
-    if (!g) return;
+  document.addEventListener("pointerup", (e) => {
+    if (!g || e.pointerId !== g.id) return;
     const { el, on, dx, t } = g;
     g = null;
     if (!on) return;
@@ -77,8 +83,9 @@
     btn.click();
   }, { passive: true });
 
-  document.addEventListener("pointercancel", () => {
-    if (g) settle(g.el, true);
+  document.addEventListener("pointercancel", (e) => {
+    if (!g || e.pointerId !== g.id) return;
+    settle(g.el, true);
     g = null;
   }, { passive: true });
 

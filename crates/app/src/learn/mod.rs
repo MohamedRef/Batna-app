@@ -55,7 +55,7 @@ pub struct Mark {
 
 const PREFIX: &str = "lesson.";
 
-/// Bumped when a lesson is finished, so lists re-read the marks.
+/// Bumped when a lesson is finished or a sync lands, so lists re-read the marks.
 static MARKS_REV: GlobalSignal<u64> = Signal::global(|| 0);
 
 pub fn mark(id: &str) -> Option<Mark> {
@@ -64,7 +64,14 @@ pub fn mark(id: &str) -> Option<Mark> {
 }
 
 fn save_mark(id: &str, m: Mark) {
-    let _ = crate::store::shared().put_setting(&format!("{PREFIX}{id}"), &m);
+    if let Err(e) = crate::store::shared().put_setting(&format!("{PREFIX}{id}"), &m) {
+        crate::diag::report!("saving lesson mark {id} failed: {e}");
+    }
+    reload();
+}
+
+/// Re-reads the marks (after a sync brought lessons finished elsewhere).
+pub fn reload() {
     *MARKS_REV.write() += 1;
 }
 

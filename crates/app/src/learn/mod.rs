@@ -46,6 +46,14 @@ pub fn close(mut ui: Ui) {
     }
 }
 
+/// Lets go of the open lesson without switching screen, for a jump
+/// elsewhere (a book page's "study this page"): the Learn tab then shows the
+/// list, not a half-finished lesson.
+pub fn forget() {
+    *OPEN.write() = None;
+    *FROM.write() = Screen::Learn;
+}
+
 /// A finished lesson, saved as the synced setting `lesson.<id>`.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Mark {

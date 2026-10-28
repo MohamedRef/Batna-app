@@ -159,7 +159,7 @@ fn PlanHero(t: DailyTarget, due: usize, due_minutes: u32) -> Element {
                     },
                     Focus::Mock => rsx! {
                         p { class: "plan-target", {tx::MOCK} }
-                        button { class: "link", onclick: move |_| ui.screen.set(Screen::Bank), {tx::OPEN_BANK} }
+                        button { class: "btn-link", onclick: move |_| ui.screen.set(Screen::Bank), {tx::OPEN_BANK} }
                     },
                     Focus::WeakTopics => rsx! {
                         p { class: "plan-target", {tx::WEAK} }

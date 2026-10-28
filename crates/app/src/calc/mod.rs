@@ -53,7 +53,7 @@ pub fn Calculators() -> Element {
                 match current.and_then(calc::spec) {
                     Some(spec) => rsx! {
                         div { key: "{spec.id}",
-                            button { class: "link-button calc-back", onclick: move |_| open.set(None), "‹ " {tx::BACK} }
+                            button { class: "link-button calc-back", "aria-keyshortcuts": "Escape", onclick: move |_| open.set(None), "‹ " {tx::BACK} }
                             CalcForm { id: spec.id, initial: Inputs::new() }
                         }
                     },

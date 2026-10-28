@@ -5,8 +5,8 @@
 //! `report!("…", args)` writes the line where it can be read later: logcat
 //! on Android (an app's stderr goes nowhere there, `adb logcat -s batna`),
 //! stderr on the Mac and in development, and a ring of the last [`KEEP`]
-//! lines that Settings › Your data shows and copies. Use it instead of
-//! `eprintln!` in the app crate.
+//! lines that Settings › Your data shows and copies. `eprintln!` is
+//! disallowed in this crate (clippy.toml), so new code reports through here.
 // adapted from kabar-app main: crates/app/src/diag.rs
 
 use std::collections::VecDeque;
@@ -24,13 +24,11 @@ pub const KEEP: usize = 200;
 static LINES: Mutex<VecDeque<String>> = Mutex::new(VecDeque::new());
 
 /// `report!("reading the review log failed: {e}")`: see the module docs.
-#[allow(unused_macros)] // the first callers arrive with the feature chunks
 macro_rules! report {
     ($($arg:tt)*) => {
         $crate::diag::emit(format_args!($($arg)*))
     };
 }
-#[allow(unused_imports)]
 pub(crate) use report;
 
 pub fn emit(args: fmt::Arguments<'_>) {
@@ -75,6 +73,7 @@ fn write_out(line: &str) {
 }
 
 #[cfg(not(target_os = "android"))]
+#[allow(clippy::disallowed_macros)]
 fn write_out(line: &str) {
     eprintln!("batna: {line}");
 }

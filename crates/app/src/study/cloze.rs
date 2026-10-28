@@ -49,6 +49,7 @@ pub fn ClozeItem(item: Item, on_grade: EventHandler<Grade>) -> Element {
         .iter()
         .filter_map(|s| if let Seg::Blank { answer, .. } = s { Some(answer.clone()) } else { None })
         .collect();
+    let any_numeric = answers.iter().any(|a| a.chars().any(|c| c.is_ascii_digit()));
     let mut typed = use_signal(|| vec![String::new(); answers.len()]);
     // None while answering; Some(results) once checked or revealed.
     let mut results = use_signal(|| None::<Vec<Match>>);
@@ -127,10 +128,12 @@ pub fn ClozeItem(item: Item, on_grade: EventHandler<Grade>) -> Element {
         match done {
             None => rsx! {
                 div { class: "st-actions",
-                    button { class: "st-primary", "aria-keyshortcuts": "Enter", onclick: move |_| check_typed_now(false), {tx::CHECK} }
-                    button { class: "st-secondary", "aria-keyshortcuts": "Space", onclick: move |_| reveal_now(true), {tx::REVEAL_BLANKS} }
+                    button { class: "btn btn-primary btn-lg", "aria-keyshortcuts": "Enter", onclick: move |_| check_typed_now(false), {tx::CHECK} }
+                    button { class: "btn btn-secondary btn-lg", "aria-keyshortcuts": "Space", onclick: move |_| reveal_now(true), {tx::REVEAL_BLANKS} }
                 }
-                p { class: "muted small", {tx::CLOZE_TIP} }
+                if any_numeric {
+                    p { class: "muted small", {tx::CLOZE_TIP} }
+                }
             },
             Some(r) => rsx! {
                 p { class: "st-verdict", "data-match": match_name(overall(&r)), {verdict(&r)} }

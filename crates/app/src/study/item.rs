@@ -11,6 +11,11 @@ use super::enumerate::EnumerateItem;
 use super::essay::EssayItem;
 use crate::i18n::study as tx;
 
+/// Set once the item's answer is out (its `GradeRow` is shown), so the frame
+/// can keep the book quote, which often is the answer, hidden until then.
+#[derive(Clone, Copy)]
+pub struct Revealed(pub Signal<bool>);
+
 /// Item kinds this player can show; the session composer picks only these.
 /// A chunk that adds a renderer adds its kind here and an arm below.
 pub const PLAYABLE: &[&str] = &["card", "cloze", "enumerate", "essay", "table", "order"];
@@ -24,6 +29,7 @@ pub fn ItemView(
     retry: bool,
     on_grade: EventHandler<Grade>,
 ) -> Element {
+    let revealed = use_context_provider(|| Revealed(Signal::new(false))).0;
     let badge = if retry {
         tx::BADGE_RETRY
     } else if fresh {
@@ -52,8 +58,15 @@ pub fn ItemView(
                 {render(&item, on_grade)}
             }
             footer { class: "st-item-foot",
-                crate::hover::BookPage { label: tx::BOOK_PAGE, page: item.src.page, quote: item.src.quote.clone() }
-                if let Some(q) = &item.src.quote {
+                // His own cards may have no page.
+                if item.src.page > 0 {
+                    crate::hover::BookPage {
+                        label: tx::BOOK_PAGE,
+                        page: item.src.page,
+                        quote: if revealed() { item.src.quote.clone() } else { None },
+                    }
+                }
+                if let Some(q) = item.src.quote.as_ref().filter(|_| revealed()) {
                     details { class: "st-quote",
                         summary { {tx::BOOK_QUOTE} }
                         q { lang: "en", dir: "ltr", "{q}" }
@@ -87,7 +100,7 @@ fn render(item: &Item, on_grade: EventHandler<Grade>) -> Element {
         // Not in PLAYABLE yet: other chunks bring these screens.
         _ => rsx! {
             p { class: "muted", {tx::NOT_HERE_YET} }
-            button { class: "st-secondary", onclick: move |_| on_grade.call(Grade::Good), {tx::SKIP} }
+            button { class: "btn btn-secondary btn-lg", onclick: move |_| on_grade.call(Grade::Good), {tx::SKIP} }
         },
     }
 }

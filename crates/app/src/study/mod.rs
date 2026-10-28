@@ -59,12 +59,24 @@ fn items() -> &'static HashMap<String, (&'static Lecture, &'static Item)> {
     })
 }
 
-/// Lectures that have at least one item this player can show.
+/// The name a lecture shows under: the book's title, or "your cards".
+fn lecture_title(l: &Lecture) -> String {
+    if l.lecture == batna_core::own::LECTURE { crate::i18n::own::TITLE.to_string() } else { l.title.clone() }
+}
+
+/// A book item or one of his own cards, by id.
+fn find(id: &str) -> Option<(&'static Lecture, &'static Item)> {
+    items().get(id).copied().or_else(|| crate::own::find(id))
+}
+
+/// Lectures that have at least one item this player can show, then his own
+/// cards' deck when he has any.
 fn ready_lectures() -> Vec<&'static Lecture> {
     Library::get()
         .lectures
         .values()
         .filter(|l| l.items.iter().any(|i| PLAYABLE.contains(&i.body.kind())))
+        .chain(crate::own::lecture())
         .collect()
 }
 
@@ -98,7 +110,7 @@ fn plan_items(store: &StudyStoreHandle, ids: &[String]) -> Vec<Planned> {
     let mut seen = HashSet::new();
     ids.iter()
         .filter(|id| seen.insert(id.as_str()))
-        .filter_map(|id| items().get(id))
+        .filter_map(|id| find(id))
         .filter(|(_, i)| PLAYABLE.contains(&i.body.kind()) && !s.is_hidden(&i.id))
         .map(|(l, i)| Planned {
             item_id: i.id.clone(),
@@ -110,6 +122,10 @@ fn plan_items(store: &StudyStoreHandle, ids: &[String]) -> Vec<Planned> {
         .collect()
 }
 
+static SESSION: GlobalSignal<Session> = Signal::global(Session::default);
+static PHASE: GlobalSignal<Phase> = Signal::global(|| Phase::Setup);
+static STARTED: GlobalSignal<Instant> = Signal::global(Instant::now);
+
 #[derive(Clone, Copy, PartialEq)]
 enum Phase {
     Setup,
@@ -120,16 +136,32 @@ enum Phase {
 #[component]
 pub fn Study() -> Element {
     let store = use_store();
+    // His own cards' deck changes with the review store (a save, an import, a sync).
+    let _ = crate::store::use_review().revision.read();
     let ready = ready_lectures();
     let chosen = use_signal(|| ready.iter().map(|l| l.lecture.clone()).collect::<BTreeSet<String>>());
     let topics = use_signal(HashSet::<String>::new);
     let mut minutes = use_signal(crate::onboarding::session_minutes);
-    let mut session = use_signal(Session::default);
-    let mut phase = use_signal(|| Phase::Setup);
-    let mut started = use_signal(Instant::now);
-    // The calm end-of-session tone, however the session ended.
+    // Global, so a session survives switching tabs (like Bank and Oral).
+    let mut session = SESSION.signal();
+    let mut phase = PHASE.signal();
+    let mut started = STARTED.signal();
+    // Coming back to a running session: don't count the time away.
+    let mut quiet = use_hook(|| {
+        if *phase.peek() == Phase::Running {
+            started.set(Instant::now());
+        }
+        Signal::new(*phase.peek() == Phase::Summary)
+    });
+    // The calm end-of-session tone, however the session ended (not again when
+    // coming back to a summary already shown).
     use_effect(move || {
-        if phase() == Phase::Summary && session.peek().summary().items > 0 {
+        let ended = phase() == Phase::Summary;
+        if *quiet.peek() {
+            quiet.set(false);
+            return;
+        }
+        if ended && session.peek().summary().items > 0 {
             crate::sounds::play(crate::sounds::Cue::SessionEnd);
         }
     });
@@ -171,14 +203,16 @@ pub fn Study() -> Element {
                 h1 { {tx::TITLE} }
                 p { {tx::EMPTY_LIBRARY} }
             }
+            crate::own::OwnCardsCard { on_study: move |_| {} }
         },
         Phase::Setup => {
             let picked: Vec<&Lecture> =
                 ready.iter().copied().filter(|l| chosen.read().contains(&l.lecture)).collect();
             let preview = plan(&store, &picked, &topics.read(), minutes());
+            let mut begin_own = begin.clone();
             rsx! {
                 Setup {
-                    ready: ready.iter().map(|l| (l.lecture.clone(), l.title.clone())).collect::<Vec<_>>(),
+                    ready: ready.iter().map(|l| (l.lecture.clone(), lecture_title(l))).collect::<Vec<_>>(),
                     chosen,
                     topics,
                     minutes,
@@ -186,6 +220,9 @@ pub fn Study() -> Element {
                     preview_new: preview.iter().filter(|p| p.fresh).count(),
                     preview_mins: preview.iter().map(|p| p.est_secs).sum::<u32>().div_ceil(60),
                     on_start: move |_| begin(picked.clone(), topics.read().clone(), minutes()),
+                }
+                crate::own::OwnCardsCard {
+                    on_study: move |_| begin_own(crate::own::lecture().into_iter().collect(), HashSet::new(), minutes()),
                 }
             }
         }
@@ -195,10 +232,10 @@ pub fn Study() -> Element {
             let current = s.current().cloned();
             let retry = s.is_retry();
             drop(s);
-            match current.and_then(|p| items().get(&p.item_id).map(|(l, i)| (p, *l, *i))) {
+            match current.and_then(|p| find(&p.item_id).map(|(l, i)| (p, l, i))) {
                 // Only when content changed under a running session; "end" still works.
                 None => rsx! {
-                    button { class: "st-primary", onclick: move |_| phase.set(Phase::Summary), {tx::END} }
+                    button { class: "btn btn-primary btn-lg", onclick: move |_| phase.set(Phase::Summary), {tx::END} }
                 },
                 Some((p, lecture, item)) => {
                     let item = store.0.borrow().effective(item);
@@ -238,7 +275,7 @@ pub fn Study() -> Element {
                             }
                             span { class: "muted small", "{pos + 1} {tx::OF} {len}" }
                             button {
-                                class: "st-link",
+                                class: "btn-link",
                                 "aria-keyshortcuts": "Escape",
                                 onclick: move |_| phase.set(Phase::Summary),
                                 {tx::END}
@@ -249,7 +286,7 @@ pub fn Study() -> Element {
                             ItemView {
                                 key: "{pos}-{p.item_id}",
                                 item,
-                                lecture_title: lecture.title.clone(),
+                                lecture_title: lecture_title(lecture),
                                 topic_title,
                                 fresh: p.fresh,
                                 retry,
@@ -266,7 +303,7 @@ pub fn Study() -> Element {
             let shaky: Vec<(String, String)> = summary
                 .shaky
                 .iter()
-                .filter_map(|id| items().get(id).map(|(_, i)| (id.clone(), short_text(i))))
+                .filter_map(|id| find(id).map(|(_, i)| (id.clone(), short_text(i))))
                 .collect();
             rsx! {
                 SummaryView {
@@ -308,90 +345,99 @@ fn Setup(
     let all_chosen = chosen.read().len() == all_ids.len();
     rsx! {
         section { class: "card st-setup",
-            h1 { {tx::TITLE} }
-            p { class: "muted", {tx::SETUP_INTRO} }
+            // Tablet landscape and the Mac: the time and Start stay in view
+            // beside the lecture and topic picker.
+            div { class: "tab-cols", "data-wide": "aside",
+                div { class: "tab-main tab-sticky st-setup-go",
+                    h1 { {tx::TITLE} }
+                    p { class: "muted", {tx::SETUP_INTRO} }
 
-            h2 { {tx::TIME} }
-            div { class: "st-segmented", role: "radiogroup", aria_label: tx::TIME,
-                for m in MINUTES {
-                    button {
-                        key: "{m}",
-                        role: "radio",
-                        "aria-checked": if minutes() == m { "true" } else { "false" },
-                        onclick: move |_| minutes.set(m),
-                        "{m} {tx::MINUTES}"
+                    h2 { {tx::TIME} }
+                    div { class: "segmented", role: "radiogroup", aria_label: tx::TIME,
+                        for m in MINUTES {
+                            button {
+                                key: "{m}",
+                                role: "radio",
+                                "aria-checked": if minutes() == m { "true" } else { "false" },
+                                onclick: move |_| minutes.set(m),
+                                "{m} {tx::MINUTES}"
+                            }
+                        }
+                    }
+
+                    if preview_count == 0 {
+                        p { class: "note", {tx::NOTHING_NOW} }
+                    } else {
+                        p { class: "st-preview",
+                            "{preview_count} {tx::ITEMS} · {reviews} {tx::REVIEWS} · {preview_new} {tx::NEW} · {tx::ABOUT} {preview_mins} {tx::MINUTES}"
+                        }
+                        button { class: "btn btn-primary btn-lg st-start", onclick: move |_| on_start.call(()), {tx::START} }
                     }
                 }
-            }
-
-            if preview_count == 0 {
-                p { class: "note", {tx::NOTHING_NOW} }
-            } else {
-                p { class: "st-preview",
-                    "{preview_count} {tx::ITEMS} · {reviews} {tx::REVIEWS} · {preview_new} {tx::NEW} · {tx::ABOUT} {preview_mins} {tx::MINUTES}"
-                }
-                button { class: "st-primary st-start", onclick: move |_| on_start.call(()), {tx::START} }
-            }
-
-            div { class: "st-section-head",
-                h2 { {tx::LECTURES} }
-                button {
-                    class: "st-link",
-                    onclick: move |_| {
-                        let mut c = chosen.write();
-                        if c.len() == all_ids.len() {
-                            c.clear();
-                        } else {
-                            *c = all_ids.iter().cloned().collect();
-                        }
-                        topics.write().clear();
-                    },
-                    {if all_chosen { tx::CLEAR_ALL } else { tx::PICK_ALL }}
-                }
-            }
-            div { class: "st-chips st-lectures",
-                for (id , title) in ready {
-                    button {
-                        key: "{id}",
-                        class: "st-chip",
-                        "aria-pressed": if chosen.read().contains(&id) { "true" } else { "false" },
-                        onclick: {
-                            let id = id.clone();
-                            move |_| {
+                div { class: "tab-aside st-setup-pick",
+                    div { class: "st-section-head",
+                        h2 { {tx::LECTURES} }
+                        button {
+                            class: "btn-link",
+                            onclick: move |_| {
                                 let mut c = chosen.write();
-                                if !c.remove(&id) {
-                                    c.insert(id.clone());
+                                if c.len() == all_ids.len() {
+                                    c.clear();
+                                } else {
+                                    *c = all_ids.iter().cloned().collect();
                                 }
                                 topics.write().clear();
-                            }
-                        },
-                        span { class: "st-chip-num", {id.rsplit('.').next().unwrap_or(&id).to_string()} }
-                        bdi { "{title}" }
+                            },
+                            {if all_chosen { tx::CLEAR_ALL } else { tx::PICK_ALL }}
+                        }
                     }
-                }
-            }
+                    div { class: "st-chips st-lectures",
+                        for (id , title) in ready {
+                            button {
+                                key: "{id}",
+                                class: "st-chip",
+                                "aria-pressed": if chosen.read().contains(&id) { "true" } else { "false" },
+                                onclick: {
+                                    let id = id.clone();
+                                    move |_| {
+                                        let mut c = chosen.write();
+                                        if !c.remove(&id) {
+                                            c.insert(id.clone());
+                                        }
+                                        topics.write().clear();
+                                    }
+                                },
+                                span { class: "st-chip-num",
+                                    if id == batna_core::own::LECTURE { "✎" } else { {id.rsplit('.').next().unwrap_or(&id).to_string()} }
+                                }
+                                bdi { "{title}" }
+                            }
+                        }
+                    }
 
-            if let Some(lecture) = single {
-                if !lecture.topics.is_empty() {
-                    h2 { {tx::TOPICS} }
-                    p { class: "muted small", {tx::TOPICS_HINT} }
-                    div { class: "st-chips",
-                        for t in lecture.topics.iter() {
-                            {
-                                let key = format!("{}/{}", lecture.lecture, t.id);
-                                let on = topics.read().contains(&key);
-                                rsx! {
-                                    button {
-                                        key: "{key}",
-                                        class: "st-chip",
-                                        "aria-pressed": if on { "true" } else { "false" },
-                                        onclick: move |_| {
-                                            let mut s = topics.write();
-                                            if !s.remove(&key) {
-                                                s.insert(key.clone());
+                    if let Some(lecture) = single {
+                        if !lecture.topics.is_empty() {
+                            h2 { {tx::TOPICS} }
+                            p { class: "muted small", {tx::TOPICS_HINT} }
+                            div { class: "st-chips",
+                                for t in lecture.topics.iter() {
+                                    {
+                                        let key = format!("{}/{}", lecture.lecture, t.id);
+                                        let on = topics.read().contains(&key);
+                                        rsx! {
+                                            button {
+                                                key: "{key}",
+                                                class: "st-chip",
+                                                "aria-pressed": if on { "true" } else { "false" },
+                                                onclick: move |_| {
+                                                    let mut s = topics.write();
+                                                    if !s.remove(&key) {
+                                                        s.insert(key.clone());
+                                                    }
+                                                },
+                                                bdi { "{t.title}" }
                                             }
-                                        },
-                                        bdi { "{t.title}" }
+                                        }
                                     }
                                 }
                             }
@@ -399,7 +445,6 @@ fn Setup(
                     }
                 }
             }
-
         }
     }
 }
@@ -441,7 +486,7 @@ fn SummaryView(
                 }
             }
             div { class: "st-actions",
-                button { class: "st-primary", onclick: move |_| on_again.call(()), {tx::ANOTHER} }
+                button { class: "btn btn-primary btn-lg", onclick: move |_| on_again.call(()), {tx::ANOTHER} }
             }
         }
     }

@@ -24,6 +24,8 @@ use super::{Result, Store};
 const LAST_SEQ: &str = "sync.last_seq";
 const LAST_SYNC_MS: &str = "sync.last_sync_ms";
 const SEEDED: &str = "sync.seeded";
+/// The synced tables this device last read the log with.
+const TABLES_READ: &str = "sync.tables";
 
 /// Columns that stay on the device: the account a row belongs to is the
 /// account the hub serves.
@@ -50,8 +52,9 @@ fn row_json(
     .optional()
 }
 
-/// The op for a row as it stands now.
-fn op_for(table: &str, key_col: &str, key: &str, row: Map<String, Value>) -> Option<Op> {
+/// The op for a row as it stands now. `device` is this device: a row another
+/// device wrote goes as a relay.
+fn op_for(table: &str, key_col: &str, key: &str, row: Map<String, Value>, device: &str) -> Option<Op> {
     let kind = table_kind(table)?;
     let value = Value::Object(row);
     let (_, hlc) = key_and_hlc(&value, key_col)?;
@@ -62,7 +65,8 @@ fn op_for(table: &str, key_col: &str, key: &str, row: Map<String, Value>) -> Opt
         SyncKind::Immutable if deleted => (OpKind::Delete, None),
         SyncKind::Immutable => (OpKind::Append, Some(value)),
     };
-    // Unique per write: every local write takes a fresh HLC.
+    // Unique per write: every write takes a fresh HLC. A relayed row keeps
+    // the id its own device gives it, so the hub takes it only once.
     let id = format!(
         "{}-{}-{}{}",
         hlc.device,
@@ -70,17 +74,51 @@ fn op_for(table: &str, key_col: &str, key: &str, row: Map<String, Value>) -> Opt
         hlc.counter,
         if kind == OpKind::Delete { "-x" } else { "" }
     );
-    Some(Op { id, table: table.into(), row_id: key.into(), kind, hlc, payload })
+    let relay = hlc.device != device;
+    Some(Op { id, table: table.into(), row_id: key.into(), kind, hlc, payload, relay })
 }
 
-/// Queues the current version of a row this device just wrote.
-pub(super) fn enqueue(conn: &Connection, table: &str, key_col: &str, key: &str) -> rusqlite::Result<()> {
+/// Queues the current version of a row: one this device just wrote, or one a
+/// restored backup brought in. Tables that don't sync are skipped.
+pub(super) fn enqueue(
+    conn: &Connection,
+    table: &str,
+    key_col: &str,
+    key: &str,
+    device: &str,
+) -> rusqlite::Result<()> {
+    if table_kind(table).is_none() {
+        return Ok(());
+    }
     let Some(row) = row_json(conn, table, key_col, key)? else { return Ok(()) };
-    let Some(op) = op_for(table, key_col, key, row) else { return Ok(()) };
+    let Some(op) = op_for(table, key_col, key, row, device) else { return Ok(()) };
     conn.execute(
         "INSERT OR IGNORE INTO sync_outbox (op_id, op) VALUES (?1, ?2)",
         params![op.id, serde_json::to_string(&op).unwrap_or_default()],
     )?;
+    Ok(())
+}
+
+/// When this build syncs a table the last one didn't, reads the account's
+/// log again from the start (#21): an older build skipped those ops but
+/// still moved `last_seq` past them. Re-reading is harmless, since merging
+/// ignores what is already here.
+pub(super) fn check_tables(conn: &Connection) -> rusqlite::Result<()> {
+    let now: Vec<&str> = TABLES.iter().map(|(t, _)| *t).collect();
+    let before = meta_get(conn, TABLES_READ)?;
+    let grew = match &before {
+        None => true,
+        Some(b) => {
+            let b: Vec<&str> = b.split(',').collect();
+            now.iter().any(|t| !b.contains(t))
+        }
+    };
+    if grew {
+        conn.execute("DELETE FROM meta WHERE key = ?1", [LAST_SEQ])?;
+    }
+    if before.as_deref() != Some(now.join(",").as_str()) {
+        meta_set(conn, TABLES_READ, &now.join(","))?;
+    }
     Ok(())
 }
 
@@ -101,7 +139,7 @@ pub(super) fn seed(conn: &Connection, device: &str) -> rusqlite::Result<()> {
             stmt.query_map([device], |r| r.get(0))?.collect::<rusqlite::Result<_>>()?
         };
         for key in keys {
-            enqueue(conn, table, &key_col, &key)?;
+            enqueue(conn, table, &key_col, &key, device)?;
         }
     }
     conn.execute("INSERT INTO meta (key, value) VALUES (?1, '1')", [SEEDED])?;
@@ -144,8 +182,8 @@ impl Store {
             let mut conn = self.conn.lock().unwrap();
             let tx = conn.transaction()?;
             for SeqOp { op, .. } in ops {
-                // A table this build doesn't keep is skipped; a newer build
-                // reads it again from the log after a fresh sign-in.
+                // A table this build doesn't keep is skipped; the build that
+                // adds it reads the log again (`check_tables`).
                 let Some(Some(target)) = targets.get(&op.table) else { continue };
                 let applied = match (op.kind, &op.payload) {
                     (OpKind::Delete, _) => {
@@ -157,7 +195,13 @@ impl Store {
                             [&op.row_id],
                         )? > 0
                     }
-                    (_, Some(Value::Object(row))) => merge_row(&tx, &op.table, target, row).unwrap_or(false),
+                    // A row that won't merge stops the page: `last_seq` stays put
+                    // and the page is fetched again on the next connection (#21).
+                    (_, Some(Value::Object(row))) => {
+                        merge_row(&tx, &op.table, target, row).inspect_err(|e| {
+                            crate::diag::report!("sync: op {} on {} did not merge: {e}", op.id, op.table)
+                        })?
+                    }
                     _ => false,
                 };
                 if applied {
@@ -259,6 +303,36 @@ mod tests {
     }
 
     #[test]
+    fn a_build_that_syncs_a_new_table_reads_the_log_again() {
+        let s = Store::open_in_memory().unwrap();
+        s.set_last_seq(50).unwrap();
+        let conn = s.conn.lock().unwrap();
+        // Same tables as last time: the position stays.
+        check_tables(&conn).unwrap();
+        assert_eq!(meta_get(&conn, LAST_SEQ).unwrap().as_deref(), Some("50"));
+        // The previous build had no own_cards: it skipped those ops, so start over.
+        meta_set(&conn, TABLES_READ, "review_events,item_status,settings").unwrap();
+        check_tables(&conn).unwrap();
+        assert_eq!(meta_get(&conn, LAST_SEQ).unwrap(), None);
+        assert!(meta_get(&conn, TABLES_READ).unwrap().unwrap().contains("own_cards"));
+    }
+
+    #[test]
+    fn a_row_that_does_not_merge_keeps_last_seq() {
+        let tablet = Store::open_in_memory().unwrap();
+        tablet.set_last_seq(7).unwrap();
+        let phone = Store::open_in_memory().unwrap();
+        phone.put_setting("sound", &2u32).unwrap();
+        let mut ops = relay(&phone, 8);
+        // A payload this build can't store (`value` is NOT NULL).
+        if let Some(Value::Object(row)) = &mut ops[0].op.payload {
+            row.insert("value".into(), Value::Null);
+        }
+        assert!(tablet.apply_remote(&ops, 8).is_err());
+        assert_eq!(tablet.last_seq(), 7);
+    }
+
+    #[test]
     fn a_phone_answer_and_verdict_reach_the_tablet() {
         let phone = Store::open_in_memory().unwrap();
         let tablet = Store::open_in_memory().unwrap();
@@ -334,6 +408,7 @@ mod tests {
             row_id: "device_id".into(),
             kind: OpKind::Upsert,
             hlc: Hlc { wall_ms: 1, counter: 0, device: "evil".into() },
+            relay: false,
             payload: Some(serde_json::json!({ "key": "device_id", "value": "stolen" })),
         };
         assert!(s.apply_remote(&[SeqOp { seq: 1, op }], 1).unwrap().is_empty());

@@ -67,7 +67,7 @@ pub fn ImportCard() -> Element {
                         for path in files {
                             li { key: "{path.display()}",
                                 button {
-                                    class: "link",
+                                    class: "btn-link",
                                     onclick: {
                                         let path = path.clone();
                                         move |_| {
@@ -165,7 +165,7 @@ pub fn ImportCard() -> Element {
                     p { class: "muted small", {tx::IMPORT_SAFE} }
                     div { class: "verify-actions",
                         button {
-                            class: "primary",
+                            class: "btn btn-primary",
                             onclick: move |_| {
                                 step.set(match store::shared().apply_import(&doc) {
                                     Ok(plan) => {
@@ -232,6 +232,7 @@ fn table_label(name: &str) -> String {
         "review_events" => tx::T_REVIEWS.to_string(),
         "item_status" => tx::T_CHECKS.to_string(),
         "settings" => tx::T_SETTINGS.to_string(),
+        "own_cards" => tx::T_OWN.to_string(),
         other => other.replace('_', " "),
     }
 }

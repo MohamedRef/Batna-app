@@ -8,6 +8,7 @@ pub mod app {
 }
 
 pub mod nav {
+    pub const LABEL: &str = "التنقل";
     pub const TODAY: &str = "النهارده";
     pub const STUDY: &str = "مذاكرة";
     pub const BANK: &str = "الأسئلة";
@@ -15,6 +16,7 @@ pub mod nav {
     pub const ORAL: &str = "شفوي";
     pub const STATS: &str = "تقدّمي";
     pub const SETTINGS: &str = "الإعدادات";
+    pub const MORE: &str = "المزيد";
 }
 
 pub mod today {
@@ -30,6 +32,7 @@ pub mod today {
     pub const TOMORROW: &str = "بكرة:";
     pub const NOTHING_WRITTEN: &str = "المحتوى لسه بيتكتب. أول ما محاضرة تجهز هتلاقيها هنا.";
     pub const STORE_FAILED: &str = "مش قادر أفتح قاعدة البيانات، فالمراجعات مش هتتحفظ بعد ما تقفل التطبيق:";
+    pub const WRITE_FAILED: &str = "في اختيار ما اتحفظش على الجهاز، جرّبه تاني:";
     pub const IN_PROGRESS: &str = "محاضرات شغّال فيها";
     pub const OF: &str = "من";
     pub const STARTED: &str = "بدأتهم";
@@ -239,6 +242,24 @@ pub mod bank {
     pub const PAUSED_OVER: &str = "وقته خلص، فهيتسلّم زي ما هو.";
     pub const RESUME: &str = "كمّل";
     pub const SUBMIT_NOW: &str = "سلّمه دلوقتي";
+    pub const CONFIRM_TITLE: &str = "تسلّم دلوقتي؟";
+    pub const CONFIRM_BLANK_A: &str = "لسه";
+    pub const CONFIRM_BLANK_B: &str = "سؤال من غير إجابة، والفاضي مالوش درجة.";
+    pub const CONFIRM_FLAGGED: &str = "متعلّم عليهم كنت عايز ترجعلهم.";
+    pub const CONFIRM_BACK_TO: &str = "ارجع للسؤال";
+    pub const CONFIRM_BACK: &str = "ارجع للامتحان";
+    pub const CONFIRM_SUBMIT: &str = "سلّم كده";
+
+    /// A question count the Egyptian way: سؤال واحد, سؤالين, 3–10 أسئلة,
+    /// 11 and up سؤال.
+    pub fn questions(n: usize) -> String {
+        match n {
+            1 => "سؤال واحد".into(),
+            2 => "سؤالين".into(),
+            3..=10 => format!("{n} أسئلة"),
+            _ => format!("{n} سؤال"),
+        }
+    }
 }
 
 pub mod stats {
@@ -578,6 +599,7 @@ pub mod verify {
     pub const SAVED_APPROVED: &str = "✓ اتسجّل إنه صح، ومش هيسألك عليه تاني.";
     pub const SAVED_EDITED: &str = "✎ اتسجّل تعديلك، وهتذاكره بكلامك من هنا ورايح.";
     pub const SAVED_WRONG: &str = "✗ اتشال من المراجعة لحد ما يتصلّح.";
+    pub const NOT_SAVED: &str = "ما اتحفظش. جرّب تاني بعد شوية.";
     pub const WRONG_NOTE: &str = "إيه الغلط؟ (اختياري)";
     pub const WRONG_PLACEHOLDER: &str = "مثلاً: الكتاب صفحة ١٤ بيقول ٧–٩ نقط";
     pub const WRONG_CONFIRM: &str = "شيله من المراجعة";
@@ -606,6 +628,40 @@ pub mod verify {
     pub const EXPORT_SAVED: &str = "اتحفظ في:";
     pub const EXPORT_SHOW: &str = "اعرض النص (تقدر تنسخه)";
     pub const EXPORT_FAILED: &str = "ما عرفتش أحفظ الملف:";
+}
+
+pub mod own {
+    pub const TITLE: &str = "كروتك";
+    pub const INTRO: &str = "كروت إنت كاتبها: من ورقة، من محاضرة، أو نص شيّرته من أي تطبيق. بتتذاكر مع الباقي، ومش محتاجة ✓ / ✎ / ✗ عشان إنت اللي كاتبها، ولها deck لوحدها في Anki.";
+    pub const SHARE_HINT: &str =
+        "على الموبايل والتابلت: حدّد أي نص واختار «Batna»، أو شيّره لـ Batna، وهيبقى مسودة كارت.";
+    pub const NEW: &str = "＋ كارت جديد";
+    pub const COUNT: &str = "كارت";
+    pub const NONE_YET: &str = "لسه مفيش كروت.";
+    pub const EDIT: &str = "عدّل";
+    pub const DELETE: &str = "امسح";
+    pub const DELETE_SURE: &str = "أمسحه من كل أجهزتك؟";
+    pub const DELETE_YES: &str = "أيوه امسحه";
+    pub const STUDY_THEM: &str = "ذاكر كروتك بس";
+    pub const FORM_NEW: &str = "كارت جديد";
+    pub const FORM_EDIT: &str = "عدّل الكارت";
+    pub const FORM_SHARED: &str = "كارت من نص شيّرته";
+    pub const SHARED_HINT: &str = "النص اتحط في الضهر. اكتب السؤال في الوش.";
+    pub const FRONT: &str = "الوش (السؤال)";
+    pub const BACK: &str = "الضهر (الإجابة)";
+    pub const LECTURE: &str = "المحاضرة";
+    pub const NO_LECTURE: &str = "من غير محاضرة";
+    pub const PAGE: &str = "صفحة الكتاب";
+    pub const SOURCE: &str = "منين";
+    pub const SOURCE_HINT: &str = "مثلاً: محاضرة د. فلان، أو اسم الموقع";
+    pub const SAVE: &str = "احفظ";
+    pub const CANCEL: &str = "إلغاء";
+    pub const FAILED: &str = "ما عرفتش أحفظ الكارت:";
+    pub const E_FRONT: &str = "اكتب السؤال في الوش.";
+    pub const E_BACK: &str = "اكتب الإجابة في الضهر.";
+    pub const E_FRONT_LONG: &str = "الوش طويل، خليه سؤال قصير (٦٠٠ حرف بالكتير).";
+    pub const E_BACK_LONG: &str = "الضهر طويل، قسّمه على كذا كارت (٣٠٠٠ حرف بالكتير).";
+    pub const FROM: &str = "من";
 }
 
 pub mod data {
@@ -655,6 +711,7 @@ pub mod data {
     pub const T_REVIEWS: &str = "المراجعات";
     pub const T_CHECKS: &str = "علاماتك على المحتوى";
     pub const T_SETTINGS: &str = "الإعدادات";
+    pub const T_OWN: &str = "كروتك";
 }
 
 pub mod cloud {
@@ -691,6 +748,8 @@ pub mod cloud {
     pub const P_NETWORK: &str = "مش قادر يوصل للسيرفر دلوقتي. هيحاول تاني لوحده، ومذاكرتك محفوظة على الجهاز.";
     pub const P_SERVER: &str = "السيرفر فيه مشكلة دلوقتي. هيحاول تاني لوحده.";
     pub const P_OUTDATED: &str = "السيرفر أحدث من النسخة دي. حدّث باطنة.";
+    pub const P_CLOCK: &str =
+        "ساعة الجهاز سابقة الوقت الحقيقي، فالتغييرات الجديدة مستنية. ظبط الساعة على التلقائي وهتتبعت لوحدها.";
 }
 
 pub mod settings {
@@ -701,7 +760,7 @@ pub mod settings {
     pub const THIS_DEVICE: &str = "للجهاز ده بس";
 
     pub const LOOK: &str = "الشكل";
-    pub const LOOK_SUB: &str = "الألوان وحجم الخط";
+    pub const LOOK_SUB: &str = "الألوان وحجم الواجهة";
     pub const DATA: &str = "بياناتك";
     pub const DATA_SUB: &str = "فين بتتحفظ، والتصدير";
     pub const ABOUT: &str = "عن باطنة";
@@ -717,7 +776,8 @@ pub mod settings {
     pub const THEME_SHIFT: &str = "نبطشية";
     pub const THEME_SHIFT_SUB: &str = "غامق ودافي من غير ضوء أزرق، للمذاكرة متأخر قبل النوم";
 
-    pub const TEXT_SIZE: &str = "حجم الخط";
+    pub const TEXT_SIZE: &str = "حجم الواجهة";
+    pub const TEXT_SMALLER: &str = "أصغر";
     pub const TEXT_SMALL: &str = "صغير";
     pub const TEXT_NORMAL: &str = "عادي";
     pub const TEXT_LARGE: &str = "كبير";
@@ -818,6 +878,16 @@ pub mod update {
     pub const DONE_BODY: &str = "افتحه وكمّل من مكانك.";
     #[cfg_attr(not(target_os = "android"), allow(dead_code))]
     pub const READY_TITLE: &str = "تحديث باطنة جاهز: دوس عشان تثبّته";
+
+    // The "new version" notification, and its switch.
+    pub const NOTICE_AVAILABLE: &str = "نزلت نسخة جديدة من باطنة";
+    pub const NOTICE_READY: &str = "نسخة باطنة الجديدة جاهزة تتثبّت";
+    pub const NOTICE_INSTALLED: &str = "نسخة باطنة الجديدة اتحطّت";
+    pub const NOTICE_TAP_AVAILABLE: &str = "دوس تشوف الجديد وتنزّلها.";
+    pub const NOTICE_TAP_READY: &str = "اتنزّلت واتفحصت. دوس عشان تثبّتها.";
+    pub const NOTICE_CHANNEL: &str = "نسخ باطنة الجديدة";
+    pub const NOTIFY: &str = "ابعتلي إشعار أول ما تنزل نسخة جديدة";
+    pub const NOTIFY_SUB: &str = "على أندرويد حتى لو باطنة مقفول (بيبص كل كام ساعة)، ومعاه الجديد في سطرين. مفتاح الإشعارات في الجهاز له الكلمة الأخيرة.";
 }
 
 pub mod sound {
@@ -889,6 +959,9 @@ pub mod onboard {
     pub const MIN: &str = "دقيقة";
     pub const STUDIED_TITLE: &str = "ذاكرت أنهي محاضرات قبل كده؟";
     pub const STUDIED_BODY: &str = "علّم اللي قريته قبل كده. لو مفيش، كمّل عادي.";
+    pub const ALL: &str = "كلهم";
+    pub const NONE: &str = "ولا واحدة";
+    pub const UP_TO_HERE: &str = "لحد هنا";
     pub const REMIND_TITLE: &str = "أفكّرك إمتى؟";
     pub const REMIND_BODY: &str = "إشعار هادي فيه عدد المراجعات المستنياك. بيرن على الموبايل بس.";
     pub const ADD_TIME: &str = "زوّد معاد";

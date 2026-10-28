@@ -110,12 +110,12 @@ pub fn TableItem(item: Item, on_grade: EventHandler<Grade>) -> Element {
             if hidden > 0 {
                 div { class: "tb-actions",
                     if *typing.read() {
-                        button { class: "tb-button primary", onclick: check_all, {tx::CHECK_TYPED} }
+                        button { class: "btn btn-primary", onclick: check_all, {tx::CHECK_TYPED} }
                     } else {
-                        button { class: "tb-button primary", onclick: check_all, {tx::REVEAL_ALL} }
+                        button { class: "btn btn-primary", onclick: check_all, {tx::REVEAL_ALL} }
                     }
                     button {
-                        class: "tb-button",
+                        class: "btn btn-secondary",
                         aria_pressed: if *typing.read() { "true" } else { "false" },
                         onclick: move |_| typing.toggle(),
                         if *typing.read() { {tx::TYPING_OFF} } else { {tx::TYPING_ON} }

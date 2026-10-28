@@ -39,14 +39,20 @@ impl RemindPrefs {
         self.times.sort_unstable();
         self.times.dedup();
         self.times.truncate(MAX_TIMES);
-        if let Err(e) = shared().put_setting(Self::KEY, &self) {
-            eprintln!("saving reminder settings: {e}");
-        }
+        crate::store::save_setting(Self::KEY, &self);
         *PREFS.write() = self;
     }
 }
 
 pub static PREFS: GlobalSignal<RemindPrefs> = Signal::global(RemindPrefs::load);
+
+/// Re-reads the reminder times after a sync or restore (see `crate::synced`).
+pub fn reload() {
+    let fresh = RemindPrefs::load();
+    if *PREFS.peek() != fresh {
+        *PREFS.write() = fresh;
+    }
+}
 
 /// This device rings. Device-only, never synced. Until he chooses, devices
 /// with a vibration motor ring (his phone), and tablets and the Mac stay
@@ -58,7 +64,7 @@ const HERE_KEY: &str = "remind_here";
 
 pub fn set_here(here: bool) {
     if let Err(e) = shared().put_local_setting(HERE_KEY, &here) {
-        eprintln!("saving reminder device: {e}");
+        crate::diag::report!("saving reminder device: {e}");
     }
     *HERE.write() = here;
 }
@@ -81,7 +87,7 @@ pub fn use_local_reminders() {
             (b.due_forecast(14, now), b.answers_today(now))
         };
         let times = if prefs.on { prefs.times } else { Vec::new() };
-        let items = plan::schedule(&plan::Inputs {
+        let inputs = plan::Inputs {
             here,
             times: &times,
             weekdays,
@@ -90,7 +96,11 @@ pub fn use_local_reminders() {
             target_met: answered > 0 && due.first().is_none_or(|&d| d == 0),
             now_ms: now.max(0) as u64,
             utc_offset_min: utc_offset_minutes(),
-        });
+        };
+        // The fallback first, so a reminder firing in between finds it.
+        let repeat = plan::repeat(&inputs).and_then(|r| serde_json::to_string(&r).ok());
+        native::repeat(repeat.as_deref().unwrap_or("{}"));
+        let items = plan::schedule(&inputs);
         native::schedule(&serde_json::to_string(&items).unwrap_or_else(|_| "[]".into()));
     });
 }
@@ -129,7 +139,7 @@ pub fn RemindSection() -> Element {
         section { class: "card",
             h2 { {tx::DAILY} }
             p { class: "muted small", {tx::DAILY_BODY} }
-            div { class: "segmented", style: "grid-template-columns: repeat(2, 1fr)", role: "radiogroup", aria_label: tx::DAILY,
+            div { class: "segmented", role: "radiogroup", aria_label: tx::DAILY,
                 for on in [true, false] {
                     button {
                         key: "{on}",
@@ -170,7 +180,7 @@ pub fn RemindSection() -> Element {
                             }
                             if prefs.times.len() > 1 {
                                 button {
-                                    class: "secondary",
+                                    class: "btn btn-secondary",
                                     onclick: {
                                         let prefs = prefs.clone();
                                         move |_| {
@@ -186,7 +196,7 @@ pub fn RemindSection() -> Element {
                     }
                     if prefs.times.len() < MAX_TIMES {
                         button {
-                            class: "secondary",
+                            class: "btn btn-secondary",
                             onclick: {
                                 let prefs = prefs.clone();
                                 move |_| {
@@ -207,7 +217,7 @@ pub fn RemindSection() -> Element {
             section { class: "card",
                 h2 { {tx::HERE} DeviceOnly {} }
                 p { class: "muted small", {tx::HERE_BODY} }
-                div { class: "segmented", style: "grid-template-columns: repeat(2, 1fr)", role: "radiogroup", aria_label: tx::HERE,
+                div { class: "segmented", role: "radiogroup", aria_label: tx::HERE,
                     for on in [true, false] {
                         button {
                             key: "{on}",
@@ -227,12 +237,12 @@ pub fn RemindSection() -> Element {
                     p { {tx::BLOCKED} }
                     div { class: "row",
                         button { onclick: move |_| native::request_permission(), {tx::ALLOW} }
-                        button { class: "secondary", onclick: move |_| native::open_notification_settings(), {tx::OPEN_NOTIFICATIONS} }
+                        button { class: "btn btn-secondary", onclick: move |_| native::open_notification_settings(), {tx::OPEN_NOTIFICATIONS} }
                     }
                 }
                 if here && unrestricted == Some(false) {
                     p { class: "muted small", {tx::BATTERY} }
-                    button { class: "secondary", onclick: move |_| native::open_app_settings(), {tx::OPEN_APP} }
+                    button { class: "btn btn-secondary", onclick: move |_| native::open_app_settings(), {tx::OPEN_APP} }
                 }
             }
         }

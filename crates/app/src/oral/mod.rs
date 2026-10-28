@@ -26,6 +26,9 @@ const THINK_MAX: u32 = 30;
 const SIZES: [usize; 3] = [10, 20, 30];
 /// With auto-continue on, how long the answer waits for a rating.
 const AUTO_WAIT: Duration = Duration::from_secs(8);
+/// After a rating, "show answer" waits this long, so a double tap or a held
+/// key cannot flash the next question's answer.
+const SETTLE: Duration = Duration::from_millis(700);
 
 #[derive(Clone, Debug, PartialEq)]
 struct Settings {
@@ -114,103 +117,111 @@ fn Setup() -> Element {
     let available = all.iter().filter(|p| settings.lecture.as_ref().is_none_or(|l| *l == p.lecture)).count();
 
     rsx! {
-        section { class: "card oral-setup",
-            h1 { {tx::TITLE} }
-            p { class: "muted", {tx::INTRO} }
-            if available > 0 {
-                p { class: "muted small", "{available} {tx::AVAILABLE}" }
-                button {
-                    class: "oral-start",
-                    "aria-keyshortcuts": "Enter",
-                    onclick: move |_| start(&store.read()),
-                    {tx::START}
+        // Tablet landscape and the Mac: what oral mode is and Start on one
+        // side, its settings on the other.
+        div { class: "tab-cols oral-cols",
+            div { class: "tab-main tab-sticky",
+                section { class: "card oral-setup",
+                    h1 { {tx::TITLE} }
+                    p { class: "muted", {tx::INTRO} }
+                    if available > 0 {
+                        p { class: "muted small", "{available} {tx::AVAILABLE}" }
+                        button {
+                            class: "oral-start",
+                            "aria-keyshortcuts": "Enter",
+                            onclick: move |_| start(&store.read()),
+                            {tx::START}
+                        }
+                    }
                 }
             }
-        }
-        if lectures.is_empty() {
-            p { class: "note", {tx::EMPTY} }
-        } else {
-            section { class: "card oral-setup",
-                label { class: "oral-field",
-                    span { {tx::LECTURE} }
-                    select {
-                        onchange: move |e| {
-                            let v = e.value();
-                            SETTINGS.write().lecture = (!v.is_empty()).then_some(v);
-                        },
-                        option { value: "", selected: settings.lecture.is_none(), {tx::ALL_LECTURES} }
-                        for (id, title) in lectures {
-                            option {
-                                key: "{id}",
-                                value: "{id}",
-                                selected: settings.lecture.as_deref() == Some(id.as_str()),
-                                "{title}"
-                            }
-                        }
-                    }
-                }
-                div { class: "oral-field",
-                    span { {tx::SIZE} }
-                    div { class: "segmented", role: "radiogroup",
-                        for size in SIZES {
-                            button {
-                                key: "{size}",
-                                role: "radio",
-                                "aria-checked": "{settings.size == size}",
-                                onclick: move |_| SETTINGS.write().size = size,
-                                "{size}"
-                            }
-                        }
-                    }
-                }
-                label { class: "oral-field",
-                    span { "{tx::THINK}: {settings.think} {tx::SECONDS}" }
-                    input {
-                        r#type: "range",
-                        min: "{THINK_MIN}",
-                        max: "{THINK_MAX}",
-                        step: "5",
-                        value: "{settings.think}",
-                        oninput: move |e| {
-                            if let Ok(v) = e.value().parse::<u32>() {
-                                SETTINGS.write().think = v.clamp(THINK_MIN, THINK_MAX);
-                            }
-                        },
-                    }
-                }
-                label { class: "oral-check",
-                    input {
-                        r#type: "checkbox",
-                        checked: settings.voice,
-                        onchange: move |e| SETTINGS.write().voice = e.checked(),
-                    }
-                    span { {tx::VOICE} }
-                }
-                if settings.voice {
-                    div { class: "oral-field",
-                        span { {tx::RATE} }
-                        div { class: "segmented", role: "radiogroup",
-                            for (i, name) in tx::RATES.iter().enumerate() {
-                                button {
-                                    key: "{i}",
-                                    role: "radio",
-                                    "aria-checked": "{settings.rate == i}",
-                                    onclick: move |_| SETTINGS.write().rate = i,
-                                    {*name}
+            div { class: "tab-aside",
+                if lectures.is_empty() {
+                    p { class: "note", {tx::EMPTY} }
+                } else {
+                    section { class: "card oral-setup",
+                        label { class: "oral-field",
+                            span { {tx::LECTURE} }
+                            select {
+                                onchange: move |e| {
+                                    let v = e.value();
+                                    SETTINGS.write().lecture = (!v.is_empty()).then_some(v);
+                                },
+                                option { value: "", selected: settings.lecture.is_none(), {tx::ALL_LECTURES} }
+                                for (id, title) in lectures {
+                                    option {
+                                        key: "{id}",
+                                        value: "{id}",
+                                        selected: settings.lecture.as_deref() == Some(id.as_str()),
+                                        "{title}"
+                                    }
                                 }
                             }
                         }
+                        div { class: "oral-field",
+                            span { {tx::SIZE} }
+                            div { class: "segmented", role: "radiogroup",
+                                for size in SIZES {
+                                    button {
+                                        key: "{size}",
+                                        role: "radio",
+                                        "aria-checked": "{settings.size == size}",
+                                        onclick: move |_| SETTINGS.write().size = size,
+                                        "{size}"
+                                    }
+                                }
+                            }
+                        }
+                        label { class: "oral-field",
+                            span { "{tx::THINK}: {settings.think} {tx::SECONDS}" }
+                            input {
+                                r#type: "range",
+                                min: "{THINK_MIN}",
+                                max: "{THINK_MAX}",
+                                step: "5",
+                                value: "{settings.think}",
+                                oninput: move |e| {
+                                    if let Ok(v) = e.value().parse::<u32>() {
+                                        SETTINGS.write().think = v.clamp(THINK_MIN, THINK_MAX);
+                                    }
+                                },
+                            }
+                        }
+                        label { class: "oral-check",
+                            input {
+                                r#type: "checkbox",
+                                checked: settings.voice,
+                                onchange: move |e| SETTINGS.write().voice = e.checked(),
+                            }
+                            span { {tx::VOICE} }
+                        }
+                        if settings.voice {
+                            div { class: "oral-field",
+                                span { {tx::RATE} }
+                                div { class: "segmented", role: "radiogroup",
+                                    for (i, name) in tx::RATES.iter().enumerate() {
+                                        button {
+                                            key: "{i}",
+                                            role: "radio",
+                                            "aria-checked": "{settings.rate == i}",
+                                            onclick: move |_| SETTINGS.write().rate = i,
+                                            {*name}
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        label { class: "oral-check",
+                            input {
+                                r#type: "checkbox",
+                                checked: settings.auto_continue,
+                                onchange: move |e| SETTINGS.write().auto_continue = e.checked(),
+                            }
+                            span { {tx::AUTO} }
+                        }
+                        p { class: "muted small", {tx::AUTO_HINT} }
                     }
                 }
-                label { class: "oral-check",
-                    input {
-                        r#type: "checkbox",
-                        checked: settings.auto_continue,
-                        onchange: move |e| SETTINGS.write().auto_continue = e.checked(),
-                    }
-                    span { {tx::AUTO} }
-                }
-                p { class: "muted small", {tx::AUTO_HINT} }
             }
         }
     }
@@ -231,12 +242,29 @@ fn Runner() -> Element {
     // Bumped by every new step, so a stale timer or voice stops on its own.
     let mut run = use_signal(|| 0u64);
     let mut asked_at = use_signal(Instant::now);
+    let mut rated_at = use_signal(|| None::<Instant>);
+    let settled = move || rated_at.peek().is_none_or(|at| at.elapsed() >= SETTLE);
+    // Rates question `turn` once and shows the next one as unasked right away
+    // (the driver's own task runs later), so a second tap finds nothing to grade.
+    let mut grade_turn = move |turn: u64, grade: Option<Grade>| {
+        if rate_current(&store.read(), turn, grade, *asked_at.peek()) {
+            phase.set(Phase::Asking);
+            rated_at.set(Some(Instant::now()));
+            tts::stop();
+        }
+    };
 
     let mut drive = move |step: Step| {
         let id = *run.peek() + 1;
         run.set(id);
         tts::stop();
-        let Some(entry) = SESSION.peek().as_ref().and_then(|s| s.current.clone()) else { return };
+        if step == Step::Reveal && !settled() {
+            return;
+        }
+        let Some((entry, turn)) = SESSION.peek().as_ref().and_then(|s| Some((s.current.clone()?, s.asked)))
+        else {
+            return;
+        };
         let Settings { think, voice, rate, auto_continue, .. } = SETTINGS.peek().clone();
         let rate = tts::RATES[rate.min(tts::RATES.len() - 1)];
         let say = move |text: String| speak(text, voice, rate, no_voice);
@@ -264,7 +292,7 @@ fn Runner() -> Element {
                 tokio::time::sleep(AUTO_WAIT).await;
                 if live() {
                     // Moving on changes the session, and the effect below asks the next one.
-                    rate_current(&store.read(), None, *asked_at.peek());
+                    grade_turn(turn, None);
                 }
             }
         });
@@ -300,14 +328,11 @@ fn Runner() -> Element {
             tokio::time::sleep(Duration::from_millis(300)).await;
             let Some(remote) = background::take() else { continue };
             let revealed = revealed_now();
+            let turn = SESSION.peek().as_ref().map_or(0, |s| s.asked);
             match remote {
                 Remote::End => end_session(),
-                Remote::Again if revealed => {
-                    rate_current(&store.read(), Some(Grade::Again), *asked_at.peek())
-                }
-                Remote::Main | Remote::Good if revealed => {
-                    rate_current(&store.read(), Some(Grade::Good), *asked_at.peek())
-                }
+                Remote::Again if revealed => grade_turn(turn, Some(Grade::Again)),
+                Remote::Main | Remote::Good if revealed => grade_turn(turn, Some(Grade::Good)),
                 Remote::Main | Remote::Good => drive(Step::Reveal),
                 Remote::Again => {}
             }
@@ -318,16 +343,12 @@ fn Runner() -> Element {
     let Some(s) = session.as_ref() else { return rsx! {} };
     let Some(entry) = s.current.clone() else { return rsx! {} };
     let left = s.left();
+    let turn = s.asked;
     drop(session);
     let phase_now = *phase.read();
     let revealed = phase_now == Phase::Answer;
     let p = &entry.prompt;
     let lecture = p.lecture.rsplit('.').next().unwrap_or(&p.lecture);
-
-    let rate = move |grade: Grade| {
-        rate_current(&store.read(), Some(grade), *asked_at.peek());
-        tts::stop();
-    };
 
     rsx! {
         div {
@@ -407,14 +428,14 @@ fn Runner() -> Element {
                     button {
                         class: "oral-big again",
                         "aria-keyshortcuts": "1",
-                        onclick: move |_| rate(Grade::Again),
+                        onclick: move |_| grade_turn(turn, Some(Grade::Again)),
                         span { class: "big-label", {tx::AGAIN} }
                         span { class: "big-hint", {tx::AGAIN_HINT} }
                     }
                     button {
                         class: "oral-big good",
                         "aria-keyshortcuts": "3 2 Space",
-                        onclick: move |_| rate(Grade::Good),
+                        onclick: move |_| grade_turn(turn, Some(Grade::Good)),
                         span { class: "big-label", {tx::GOOD} }
                         span { class: "big-hint", {tx::GOOD_HINT} }
                     }
@@ -459,7 +480,7 @@ async fn speak(text: String, voice: bool, rate: f32, mut no_voice: Signal<bool>)
         if !matches!(e, tts::SpeakError::Failed(_)) {
             no_voice.set(true);
         }
-        eprintln!("oral: speech failed: {e:?}");
+        crate::diag::report!("oral: speech failed: {e:?}");
     }
 }
 
@@ -487,22 +508,22 @@ fn end_session() {
     }
 }
 
-/// Records the rating (none when heard without one) and moves on.
-fn rate_current(store: &StudyStoreHandle, grade: Option<Grade>, asked_at: Instant) {
+/// Records the rating of question `turn` (none when heard without one) and
+/// moves on. `false` when that question is already past (a second tap).
+fn rate_current(store: &StudyStoreHandle, turn: u64, grade: Option<Grade>, asked_at: Instant) -> bool {
     let mut guard = SESSION.write();
-    let Some(s) = guard.as_mut() else { return };
-    let Some(entry) = &s.current else { return };
+    let Some(s) = guard.as_mut() else { return false };
+    let Some(prompt) = s.rate_turn(turn, grade) else { return false };
     if let Some(grade) = grade {
         store.0.borrow_mut().record(ReviewEvent {
-            item_id: entry.prompt.item_id.clone(),
+            item_id: prompt.item_id,
             grade,
             origin: Origin::Oral,
             at_ms: now_ms(),
             took_ms: asked_at.elapsed().as_millis().min(u32::MAX as u128) as u32,
         });
     }
-    s.rate(grade);
-    s.advance();
+    true
 }
 
 #[component]

@@ -48,6 +48,7 @@ pub fn BookPage(page: u32, quote: Option<String>) -> Element {
         button {
             class: "chip page tap-chip",
             "data-peek": peek,
+            "data-peek-note": crate::i18n::hover::FROM_BOOK,
             aria_label: "{crate::i18n::book::CHIP_HINT} {page}",
             aria_haspopup: "dialog",
             onclick: move |e| {

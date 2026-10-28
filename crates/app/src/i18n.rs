@@ -758,6 +758,8 @@ pub mod hover {
     pub const MOUSE_NOTE: &str =
         "سيب الماوس ثانية على الكلمة، أو على رقم صفحة الكتاب، أو على اختيار بعد ما تجاوب.";
     pub const UNVERIFIED: &str = "لسه ما اتراجعش";
+    /// Under a book quote shown from the page chip.
+    pub const FROM_BOOK: &str = "من الكتاب بالنص";
     pub const TERMS: &str = "مصطلح في القاموس";
 }
 
@@ -1313,6 +1315,17 @@ pub mod learn {
     pub const OPEN_LECTURE: &str = "افتح المحاضرة";
 
     pub const CLOSE: &str = "اقفل الدرس";
+    pub const VIEW_TITLE: &str = "شكل الدرس";
+    pub const VIEW_BODY: &str =
+        "في الاتنين تقدر تسحب الشاشة يمين وشمال علشان تقلب. لو فيه سؤال لسه ما جاوبتوش، الصفحة مش هتتقلب.";
+    pub const VIEW_STEPS: &str = "خطوات";
+    pub const VIEW_STEPS_HINT: &str = "زرار «كمّل» كبير تحت";
+    pub const VIEW_PAGES: &str = "صفحات";
+    pub const VIEW_PAGES_HINT: &str = "زي الكتاب، بتقلب الصفحة";
+    pub const TO_PAGES: &str = "اعرض الدرس صفحات زي الكتاب";
+    pub const TO_STEPS: &str = "اعرض الدرس خطوات";
+    pub const PAGE_OF: &str = "صفحة";
+    pub const OF_N: &str = "من";
     pub const BACK: &str = "رجوع";
     pub const NEXT: &str = "كمّل";
     pub const FINISH: &str = "خلّصت";

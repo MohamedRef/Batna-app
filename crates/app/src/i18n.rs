@@ -1350,6 +1350,9 @@ pub mod learn {
     pub const MNEMONIC: &str = "احفظها كده";
     pub const ZOOM_IN: &str = "كبّر الرسمة";
     pub const ZOOM_OUT: &str = "صغّر الرسمة";
+    pub const ZOOM_FIT: &str = "على قد الشاشة";
+    pub const ZOOM_CLOSE: &str = "اقفل الصورة";
+    pub const ZOOM_HINT: &str = "قرّب بصباعين أو بالزراير، ودوس مرتين علشان تكبّر أو ترجع.";
     pub const TIP: &str = "نصيحة";
     pub const EXAM: &str = "الممتحن بيحب دي";
     pub const TRAP: &str = "خلّي بالك";

@@ -1,0 +1,817 @@
+schema: batna.content/v1
+lecture: rheum.L18
+title: "Sjögren syndrome"
+author: "Prof. Eman Hassan El-Sayed"
+book: { chapter: 3, pages: [301, 308] }
+topics:
+  - { id: definition, title: "Definition, epidemiology and types" }
+  - { id: pathogenesis, title: "Pathogenesis: genes, triggers, interferon and BAFF" }
+  - { id: glandular, title: "Glandular manifestations" }
+  - { id: extraglandular, title: "Skin, kidney, nerve, joint, lung and gut" }
+  - { id: lymphoma, title: "Lymphoma and its predictors" }
+  - { id: criteria, title: "2016 ACR-EULAR classification criteria" }
+  - { id: investigations, title: "Investigations" }
+  - { id: management, title: "EULAR 2019 management" }
+items:
+  # ---------- p301-302: definition, epidemiology, types ----------
+  - id: rheum.L18.001
+    kind: card
+    topic: definition
+    front: Define Sjögren syndrome.
+    back: A chronic multisystem autoimmune rheumatic disease in which lymphocytes and plasma cells infiltrate exocrine glands, mainly the salivary and lacrimal glands, causing xerostomia and xerophthalmia.
+    src: { page: 301, quote: "chronic multisystem autoimmune rheumatic disease, associated in the majority of cases with infiltration of exocrine glands, particularly the salivary and lacrimal glands" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L18.002
+    kind: cloze
+    topic: definition
+    text: "In Sjögren syndrome the infiltrating cells are {{c1::lymphocytes and plasma cells}}, and the result is {{c2::xerostomia}} (dry mouth) and {{c3::xerophthalmia}} (dry eyes)."
+    src: { page: 301, quote: "by lymphocytes and plasma cells , resulting in xerostomia and xerophthalmia." }
+    status: unverified
+  - id: rheum.L18.003
+    kind: enumerate
+    topic: definition
+    prompt: Which systems can the systemic (life-threatening) features of Sjögren syndrome affect?
+    points:
+      - Neurological
+      - Renal
+      - Musculoskeletal
+      - Dermatological
+      - Hematological
+      - Pulmonary
+    pass: 4
+    src: { page: 301, quote: "systemic features affecting the neurological, renal, musculoskeletal, dermatological , hematological, and pulmonary systems." }
+    status: unverified
+  - id: rheum.L18.004
+    kind: cloze
+    topic: definition
+    text: "Sjögren syndrome affects {{c1::1–23}} persons per 10 000 in European countries and is {{c2::9–20}} times more common in females than males."
+    src: { page: 301, quote: "affects 1–23 persons per 10 000 inhabitants in European countries. This autoimmune rheumatic disease is 9–20 times more common in females than males." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: rheum.L18.005
+    kind: cloze
+    topic: definition
+    text: "Sjögren syndrome is commonest between the ages of {{c1::30 and 60}}, but it is also described in younger and older groups."
+    src: { page: 301, quote: "Although commonest between the ages of 30 and 60, it is also described in younger and older age groups." }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L18.006
+    kind: card
+    topic: definition
+    front: Define primary Sjögren syndrome.
+    back: Sjögren syndrome in the absence of another autoimmune disease, with dry eyes (keratoconjunctivitis sicca) and dry mouth (xerostomia), together called the sicca syndrome.
+    src: { page: 302, quote: "Primary Sjogren‘s syndrome (pSS) occurs in the absence of other autoimmune diseases and is characterized by keratoconjunctiva sicca (dry eyes) and xerostomia" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L18.007
+    kind: card
+    topic: definition
+    front: What is the sicca syndrome?
+    back: Dry eyes (keratoconjunctivitis sicca) plus dry mouth (xerostomia).
+    src: { page: 302, quote: "keratoconjunctiva sicca (dry eyes) and xerostomia (dry mouth), collectively called the sicca syndrome." }
+    status: unverified
+  - id: rheum.L18.008
+    kind: card
+    topic: definition
+    front: What is secondary Sjögren syndrome? Give the book's three examples.
+    back: Sjögren syndrome occurring with another autoimmune disease, such as rheumatoid arthritis, systemic sclerosis or SLE.
+    src: { page: 302, quote: "secondary Sjogren‘s syndrome presents along with other autoimmune diseases such as rheumatoid arthritis (RA), systemic sclerosis and systemic lupus erythematosus (SLE)." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L18.009
+    kind: mcq
+    topic: definition
+    stem: A 52-year-old woman with long-standing seropositive rheumatoid arthritis complains of gritty eyes and needing water to swallow bread. How is her dryness classified?
+    options:
+      - Secondary Sjögren syndrome
+      - Primary Sjögren syndrome
+      - Sicca from methotrexate toxicity
+      - IgG4-related disease
+      - Normal ageing of the glands
+    answer: 0
+    why:
+      - "Correct: Sjögren features alongside another autoimmune disease (RA) is secondary Sjögren syndrome (p302)."
+      - Primary Sjögren occurs in the absence of another autoimmune disease.
+      - The book does not list methotrexate as a cause of sicca; her RA explains it.
+      - IgG4-related disease is an exclusion criterion for Sjögren, not the label for sicca in RA.
+      - Her age is within the commonest range for Sjögren (30–60); dryness with RA should not be dismissed.
+    src: { page: 302, quote: "secondary Sjogren‘s syndrome presents along with other autoimmune diseases such as rheumatoid arthritis (RA), systemic sclerosis" }
+    status: unverified
+  # ---------- p302-303: pathogenesis ----------
+  - id: rheum.L18.010
+    kind: card
+    topic: pathogenesis
+    front: Which HLA types are associated with Sjögren syndrome, and which is linked to Sjögren with Raynaud phenomenon?
+    back: The stronger association is with HLA-B8 (printed "D8") and DR3; DR4 is more closely linked to Sjögren with Raynaud phenomenon.
+    src: { page: 302, quote: "there is a stronger association with HLA D8, DR3,although DR4 is more closely associated with syndrome occurring with Raynaud phenomenon." }
+    status: unverified
+  - id: rheum.L18.011
+    kind: enumerate
+    topic: pathogenesis
+    prompt: Which viral triggers does the book list for Sjögren syndrome?
+    points:
+      - EBV
+      - CMV
+      - HCV
+    pass: 3
+    src: { page: 302, quote: "Environmental trigger Viral infection (EBV, CMV, HCV) Hormonal factors:" }
+    status: unverified
+  - id: rheum.L18.012
+    kind: card
+    topic: pathogenesis
+    front: Which hormonal factor is associated with Sjögren syndrome?
+    back: Estrogen and the female sex hormones.
+    src: { page: 302, quote: "Associated with estrogen and female sex hormones." }
+    status: unverified
+  - id: rheum.L18.013
+    kind: enumerate
+    topic: pathogenesis
+    prompt: List the tissue events in the pathogenesis of Sjögren syndrome.
+    points:
+      - Infiltration of target tissues by lymphocytes and plasma cells
+      - Autoantibody (anti-Ro) production
+      - Connective tissue proliferation
+      - Glandular cell apoptosis
+      - Atrophy of glandular structures (salivary, sebaceous, sweat glands)
+      - Secondary changes and edema of the conjunctiva
+    pass: 4
+    src: { page: 302, quote: "Infiltration of target tissues by lymphocytes and plasma cells. - Autoantibody production (Anti-RO) production. - Connective tissue proliferation. - Glandular cell apoptosis." }
+    status: unverified
+  - id: rheum.L18.014
+    kind: card
+    topic: pathogenesis
+    front: Which glands atrophy in Sjögren syndrome, per the book?
+    back: Salivary glands, sebaceous glands and sweat glands.
+    src: { page: 302, quote: "Atrophy of glandular structures in affected tissues (salivary glands, sebaceous glands, sweat glands)." }
+    status: unverified
+  - id: rheum.L18.015
+    kind: card
+    topic: pathogenesis
+    front: In a genetically predisposed person with a trigger, what do glandular epithelial cells do first in Sjögren syndrome?
+    back: They become deregulated and release chemokines and adhesion molecules, which bring dendritic cells and lymphocytes (T and B cells) into the glands.
+    src: { page: 302, quote: "glandular epithelial cells become deregulated and release chemokines and adhesion molecules." }
+    status: unverified
+  - id: rheum.L18.016
+    kind: cloze
+    topic: pathogenesis
+    text: "Dendritic cells in the glands produce high levels of {{c1::interferons}}, which retain and activate lymphocytes and stimulate production of {{c2::BAFF}}."
+    src: { page: 303, quote: "Dendritic cells in the glands produce high levels of interferons (IFN), which causes further retention of lymphocytes in the tissues" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L18.017
+    kind: card
+    topic: pathogenesis
+    front: What does BAFF do in Sjögren syndrome, and which cells make it?
+    back: Made by epithelial cells, dendritic cells and T cells (under interferon), BAFF drives irregular B-cell maturation into autoimmune B cells that secrete autoantibodies locally.
+    src: { page: 303, quote: "BAFF promotes irregular B-cell maturation, leading to the formation of autoimmune B-cells, which secrete autoantibodies locally." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L18.018
+    kind: order
+    topic: pathogenesis
+    prompt: Put the steps of Sjögren pathogenesis in order.
+    steps:
+      - Genetic predisposition plus an environmental or hormonal trigger
+      - Glandular epithelial cells release chemokines and adhesion molecules
+      - Dendritic cells and T and B cells migrate into the glands
+      - Dendritic cells produce high levels of interferon
+      - Interferon stimulates BAFF production
+      - BAFF drives autoimmune B cells that secrete autoantibodies locally
+    src: { page: 303, quote: "Interferons stimulate the production of BAFF by epithelial cells, dendritic cells and T cells." }
+    status: unverified
+  - id: rheum.L18.019
+    kind: mcq
+    topic: pathogenesis
+    stem: In the book's model of Sjögren syndrome, which cytokine links interferon to the formation of autoimmune B cells in the glands?
+    options:
+      - BAFF
+      - IL-17
+      - TNF-alpha
+      - IL-6
+      - TGF-beta
+    answer: 0
+    why:
+      - "Correct: interferons stimulate BAFF, which promotes irregular B-cell maturation into autoimmune B cells (p303)."
+      - IL-17 is not named in the book's Sjögren pathway.
+      - TNF-alpha is not named in the book's Sjögren pathway.
+      - IL-6 is not named in the book's Sjögren pathway.
+      - TGF-beta is not named in the book's Sjögren pathway.
+    src: { page: 303, quote: "Interferons stimulate the production of BAFF by epithelial cells, dendritic cells and T cells." }
+    status: unverified
+  # ---------- p303: glandular ----------
+  - id: rheum.L18.020
+    kind: enumerate
+    topic: glandular
+    prompt: List the oral (salivary) manifestations of Sjögren syndrome.
+    points:
+      - Dry mouth (xerostomia)
+      - Parotitis, swelling of salivary glands
+      - Cracked, peeling, atrophic lips
+      - Dry fissured tongue
+      - Oral candidiasis
+      - Dental caries and loss of teeth
+    pass: 4
+    src: { page: 303, quote: "Cracked, peeling and atrophic appearance of lips. * Dry fissured tongue, oral candidiasis. * Dental caries and loss of teeth." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L18.021
+    kind: card
+    topic: glandular
+    front: Ocular symptoms of lacrimal involvement in Sjögren syndrome?
+    back: Burning and itchy eyes, and dryness of the eyes (keratoconjunctivitis sicca).
+    src: { page: 303, quote: "Burning and itchy eye sensation. * Dryness of the eyes (keratoconjunctivits sicca." }
+    status: unverified
+  - id: rheum.L18.022
+    kind: card
+    topic: glandular
+    front: Which genital symptom can Sjögren syndrome cause?
+    back: Dry vagina, with dryness and a burning sensation.
+    src: { page: 303, quote: "Dry vagina Dryness and burning sensation of vagina" }
+    status: unverified
+  - id: rheum.L18.023
+    kind: mcq
+    topic: glandular
+    stem: "A 45-year-old woman has had a dry mouth for a year. Which oral finding is part of Sjögren syndrome in the lecture?"
+    options:
+      - Dental caries with loss of teeth
+      - Gingival hypertrophy
+      - Macroglossia
+      - Hairy leukoplakia
+      - Excess drooling at night
+    answer: 0
+    why:
+      - "Correct: without saliva teeth decay; the book lists dental caries and loss of teeth (p303)."
+      - Gingival hypertrophy is a drug effect (phenytoin, cyclosporine), not in the book's list.
+      - The book describes a dry fissured tongue, not a large one.
+      - Hairy leukoplakia is an EBV lesion of immunosuppression, not a Sjögren sign.
+      - Sjögren is dryness; drooling is the opposite.
+    src: { page: 303, quote: "Dry fissured tongue, oral candidiasis. * Dental caries and loss of teeth." }
+    status: unverified
+  # ---------- p303-304: extraglandular ----------
+  - id: rheum.L18.024
+    kind: cloze
+    topic: extraglandular
+    text: "Dermatological manifestations represent {{c1::50%}} of manifestations: xeroderma, scaling, pruritus, and annular papular erythema including {{c2::Sweet}} syndrome."
+    src: { page: 303, quote: "Dermatological manifestations: It represents 50% of manifestations. 1- Xeroderma, scaling, pruritus. 2- Annular, popular erythema including SWEET syndrome." }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L18.025
+    kind: enumerate
+    topic: extraglandular
+    prompt: List the renal manifestations of Sjögren syndrome.
+    points:
+      - Hematuria
+      - Proteinuria, nephrotic syndrome
+      - Renal vasculitis with significant hypertension
+      - Renal insufficiency
+    pass: 3
+    src: { page: 303, quote: "1- Hematuria, proteinuria, nephrotic syndrome. 2- Renal vasculitis with significant hypertension. 3- Renal insufficiency." }
+    status: unverified
+  - id: rheum.L18.026
+    kind: cloze
+    topic: extraglandular
+    text: "Peripheral neuropathy, primarily {{c1::sensory}}, was found in {{c2::22%}} of patients with primary Sjögren; CNS disease is believed to be {{c3::very rare}}."
+    src: { page: 304, quote: "Peripheral neuropathy, primarily sensory, was found in 22% of patients with primary SS." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: rheum.L18.027
+    kind: card
+    topic: extraglandular
+    front: Describe the joint disease of primary Sjögren syndrome.
+    back: Intermittent, asymmetrical polyarthritis mainly of small joints; deformity and mild erosions can occur.
+    src: { page: 304, quote: "Joint disease in primary SS is typically an intermittent asymmetrical poly-articular. 2- Arthropathy primarily affecting small joints." }
+    status: unverified
+  - id: rheum.L18.028
+    kind: cloze
+    topic: extraglandular
+    text: "In Sjögren syndrome, arthralgias occur in as many as {{c1::53%}} of patients and myalgias in as many as {{c2::22%}}."
+    src: { page: 304, quote: "Arthralgia's exist in as many as 53% of patients. 5- Myalgia's in as many as 22% of Sijogren patients." }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L18.029
+    kind: card
+    topic: extraglandular
+    front: What is the usual main respiratory symptom in Sjögren syndrome, and why?
+    back: Cough, usually from xerotrachea (a dry trachea). Lung involvement is common but seldom clinically significant.
+    src: { page: 304, quote: "Cough is often the main respiratory symptom and is usually a symptom of xero-trachea." }
+    status: unverified
+  - id: rheum.L18.030
+    kind: enumerate
+    topic: extraglandular
+    prompt: List the pulmonary complications of Sjögren syndrome other than cough.
+    points:
+      - Lymphocytic alveolitis
+      - Lymphocytic interstitial pneumonitis
+      - Fibrosis
+      - Pseudolymphoma
+    pass: 3
+    src: { page: 304, quote: "Other potential pulmonary complications include lymphocytic alveolitis. 3- Lymphocytic interstitial pneumonitis and fibrosis, and pseudo-lymphoma." }
+    status: unverified
+  - id: rheum.L18.031
+    kind: card
+    topic: extraglandular
+    front: Gastrointestinal involvement in Sjögren syndrome?
+    back: Malabsorption syndrome, pancreatitis, hepatitis and sialadenitis.
+    src: { page: 304, quote: "Malabsorption syndrome. 2- Pancreatitis and hepatitis, sialadenitis." }
+    status: unverified
+  - id: rheum.L18.032
+    kind: table
+    topic: extraglandular
+    title: Extraglandular Sjögren syndrome by system
+    columns: [System, Manifestations]
+    rows:
+      - [Skin (50%), "Xeroderma, scaling, pruritus; annular papular erythema incl. Sweet syndrome"]
+      - [Kidney, "Hematuria, proteinuria, nephrotic syndrome; renal vasculitis with hypertension; renal insufficiency"]
+      - [Nerves, "Sensory peripheral neuropathy (22%); CNS very rare"]
+      - [Joints and muscles, "Intermittent asymmetrical small-joint polyarthritis; mild erosions; arthralgia 53%, myalgia 22%"]
+      - [Lungs, "Cough from xerotrachea; lymphocytic alveolitis, LIP, fibrosis, pseudolymphoma"]
+      - [Gut, "Malabsorption, pancreatitis, hepatitis, sialadenitis"]
+    blanks: [[0, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 304, quote: "Peripheral neuropathy, primarily sensory, was found in 22% of patients with primary SS." }
+    status: unverified
+  - id: rheum.L18.033
+    kind: mcq
+    topic: extraglandular
+    stem: A 48-year-old woman with primary Sjögren syndrome reports numbness and burning in both feet. Which statement about her neurology fits the lecture?
+    options:
+      - Peripheral, mainly sensory neuropathy occurs in about 22% of primary Sjögren
+      - Central nervous system disease is the commonest neurological form
+      - Motor neuropathy is typical and sensory loss is rare
+      - Neuropathy excludes Sjögren and points to sarcoidosis
+      - Neuropathy occurs only in secondary Sjögren
+    answer: 0
+    why:
+      - "Correct: peripheral neuropathy, primarily sensory, in 22% of primary SS (p304)."
+      - CNS disease is believed to be very rare.
+      - The neuropathy is primarily sensory.
+      - Sarcoidosis is an exclusion diagnosis, but neuropathy itself is part of Sjögren.
+      - The 22% figure is from primary Sjögren.
+    src: { page: 304, quote: "Central nervous system disease in patients with SS is believed to be very rare." }
+    status: unverified
+  - id: rheum.L18.034
+    kind: mcq
+    topic: extraglandular
+    stem: A woman with Sjögren syndrome has a chronic dry cough. Chest examination and imaging are unremarkable. What is the most likely cause per the lecture?
+    options:
+      - Xerotrachea
+      - Lymphocytic interstitial pneumonitis
+      - Pulmonary fibrosis
+      - Pseudolymphoma
+      - Pulmonary embolism
+    answer: 0
+    why:
+      - "Correct: cough is often the main respiratory symptom and is usually due to xerotrachea (p304)."
+      - LIP is a complication, but imaging would usually show it.
+      - Fibrosis would show on imaging and examination.
+      - Pseudolymphoma would show as a lesion.
+      - PE is not part of the book's Sjögren lung list and gives acute dyspnea.
+    src: { page: 304, quote: "Cough is often the main respiratory symptom and is usually a symptom of xero-trachea." }
+    status: unverified
+  # ---------- p304-305: lymphoma ----------
+  - id: rheum.L18.035
+    kind: cloze
+    topic: lymphoma
+    text: "In one study, patients with Sjögren syndrome had a {{c1::44}} times higher relative risk of {{c2::non-Hodgkin lymphoma}}."
+    src: { page: 304, quote: "Patients with SS in one study had a 44 times higher relative risk of non Hodgkin lymphoma" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: rheum.L18.036
+    kind: enumerate
+    topic: lymphoma
+    prompt: List the clinical predictors of lymphoma in Sjögren syndrome.
+    points:
+      - Persistent enlargement of the parotid glands
+      - Splenomegaly
+      - Lymphadenopathy
+      - Palpable purpura
+      - Leg ulcers
+    pass: 4
+    src: { page: 305, quote: "2- Splenomegaly. 3- Lymphadenopathy. 4- Palpable purpura. 5- Leg ulcers." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L18.037
+    kind: enumerate
+    topic: lymphoma
+    prompt: List the serologic predictors of lymphoma in Sjögren syndrome.
+    points:
+      - Low C4
+      - Mixed monoclonal cryoglobulinemia
+      - Cross-reactive idiotypes of monoclonal rheumatoid factors
+    pass: 3
+    src: { page: 305, quote: "1- Low levels of C4. 2- Mixed monoclonal cryoglobulinemia. 3- Cross-reactive idiotypes of monoclonal. 4- Rheumatoid factors." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L18.038
+    kind: table
+    topic: lymphoma
+    title: Predictors of lymphoma in Sjögren syndrome
+    columns: [Type, Predictors]
+    rows:
+      - [Clinical, "Persistent parotid enlargement; splenomegaly; lymphadenopathy; palpable purpura; leg ulcers"]
+      - [Serologic, "Low C4; mixed monoclonal cryoglobulinemia; cross-reactive idiotypes of monoclonal rheumatoid factors"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 305, quote: "1- Low levels of C4. 2- Mixed monoclonal cryoglobulinemia." }
+    status: unverified
+  - id: rheum.L18.039
+    kind: mcq
+    topic: lymphoma
+    stem: "Which is the most common hematological malignancy associated with Sjögren syndrome?"
+    options: [Acute leukemia, Lymphoma, Multiple myeloma, Chronic leukemia]
+    answer: 1
+    why:
+      - Not the association the lecture describes.
+      - "Correct: one study found a 44 times higher relative risk of non-Hodgkin lymphoma (p304)."
+      - Not the association the lecture describes.
+      - Not the association the lecture describes.
+    src: { page: 304, quote: "Patients with SS in one study had a 44 times higher relative risk of non Hodgkin lymphoma" }
+    status: unverified
+    tags: [book-question]
+  - id: rheum.L18.040
+    kind: mcq
+    topic: lymphoma
+    stem: A 58-year-old woman with 12 years of primary Sjögren syndrome now has a parotid swelling that has not gone down for 6 months and palpable purpura on her legs. Which laboratory result would most support the same concern?
+    options:
+      - Low C4
+      - High C4
+      - Negative rheumatoid factor
+      - Normal serum proteins
+      - Raised anti-dsDNA
+    answer: 0
+    why:
+      - "Correct: low C4 is a serologic predictor of lymphoma, joining her persistent parotid enlargement and palpable purpura (p304-305)."
+      - It is low C4, not high, that predicts lymphoma.
+      - Monoclonal rheumatoid factors, not their absence, are the predictor.
+      - Mixed monoclonal cryoglobulinemia is the predictor; normal proteins do not add concern.
+      - Anti-dsDNA is an SLE marker, not a lymphoma predictor in Sjögren.
+    src: { page: 305, quote: "1- Low levels of C4. 2- Mixed monoclonal cryoglobulinemia." }
+    status: unverified
+  # ---------- p305-306: criteria ----------
+  - id: rheum.L18.041
+    kind: card
+    topic: criteria
+    front: Who is classified as primary Sjögren by the 2016 ACR-EULAR criteria?
+    back: A person who meets the inclusion criteria, has none of the exclusion criteria, and scores ≥4 on the weighted items.
+    src: { page: 305, quote: "does not have any condition listed as exclusion criteria, 2 and who has a score ≥ 4 when summing the weights from the following items:" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L18.042
+    kind: table
+    topic: criteria
+    title: 2016 ACR-EULAR classification criteria for primary Sjögren (score ≥4)
+    columns: [Item, Weight]
+    rows:
+      - ["Labial salivary gland: focal lymphocytic sialadenitis, focus score ≥1", "3"]
+      - ["Anti-SSA (Ro) positive", "3"]
+      - ["Ocular staining score ≥5 (or van Bijsterveld ≥4) in at least one eye", "1"]
+      - ["Schirmer ≤5 mm/5 min in at least one eye", "1"]
+      - ["Unstimulated whole saliva flow ≤0.1 ml/min", "1"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 305, quote: "Labial salivary gland with focal lymphocytic sialadenitis and focus score ≥ 1. (score: 3). • Anti-SSA (Ro) + (score: 3)." }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: rheum.L18.043
+    kind: cloze
+    topic: criteria
+    text: "In the 2016 criteria, a Schirmer test of {{c1::≤5 mm/5 min}} and an unstimulated whole saliva flow of {{c2::≤0.1 ml/min}} each score {{c3::1}}."
+    src: { page: 305, quote: "Schirmer ≤ 5 mm/5min on at least one eye (score: 1). • Unstimulated whole saliva flow rate ≤ 0.1 ml/min5 (score: 1)." }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L18.044
+    kind: cloze
+    topic: criteria
+    text: "An ocular staining score of {{c1::≥5}} (or a van Bijsterveld score of {{c2::≥4}}) in at least one eye scores 1."
+    src: { page: 305, quote: "Ocular staining score ≥ 5 (or van Bijsterfeld score ≥ 4) on at least one eye (score: 1)." }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L18.045
+    kind: card
+    topic: criteria
+    front: Which two items carry 3 points each in the 2016 ACR-EULAR Sjögren criteria?
+    back: Labial gland biopsy with focal lymphocytic sialadenitis (focus score ≥1), and anti-SSA (Ro) positivity.
+    src: { page: 305, quote: "Labial salivary gland with focal lymphocytic sialadenitis and focus score ≥ 1. (score: 3). • Anti-SSA (Ro) + (score: 3)." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L18.046
+    kind: card
+    topic: criteria
+    front: What is the entry (inclusion) requirement of the 2016 ACR-EULAR Sjögren criteria?
+    back: At least one symptom of ocular or oral dryness, defined as a positive answer to at least one of five screening questions.
+    src: { page: 305, quote: "These criteria are applicable to any patient with at least one symptom of ocular or oral dryness" }
+    status: unverified
+  - id: rheum.L18.047
+    kind: enumerate
+    topic: criteria
+    prompt: List the five dryness questions of the 2016 inclusion criteria.
+    points:
+      - Daily, persistent, troublesome dry eyes for more than 3 months
+      - Recurrent sensation of sand or gravel in the eyes
+      - Tear substitutes more than 3 times a day
+      - Daily feeling of dry mouth for more than 3 months
+      - Frequently drinking liquids to aid in swallowing dry food
+    pass: 4
+    src: { page: 306, quote: "Do you have a recurrent sensation of sand or gravel in the eyes? • Do you use tear substitutes more than 3 times a day?" }
+    status: unverified
+  - id: rheum.L18.048
+    kind: cloze
+    topic: criteria
+    text: "Inclusion questions: dry eyes or dry mouth daily for more than {{c1::3 months}}, or tear substitutes more than {{c2::3 times a day}}."
+    src: { page: 306, quote: "Do you use tear substitutes more than 3 times a day? • Have you had a daily feeling of dry mouth" }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L18.049
+    kind: enumerate
+    topic: criteria
+    prompt: List the exclusion criteria of the 2016 ACR-EULAR Sjögren criteria.
+    points:
+      - History of head and neck radiation
+      - Active hepatitis C (positive PCR)
+      - AIDS
+      - Sarcoidosis
+      - Amyloidosis
+      - Graft versus host disease
+      - IgG4-related disease
+    pass: 5
+    src: { page: 306, quote: "History of head and neck radiation treatment. • Active Hepatitis C infection (with positive PCR). • Acquired immunodeficiency syndrome. • Sarcoidosis. • Amyloidosis." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L18.050
+    kind: mcq
+    topic: criteria
+    stem: "A 50-year-old woman has dry eyes and mouth for a year. Anti-SSA (Ro) is positive and Schirmer is 4 mm/5 min in the right eye. No biopsy has been done. She has no exclusion. What is her 2016 ACR-EULAR score?"
+    options:
+      - "4: classified as primary Sjögren"
+      - "3: not classified"
+      - "2: not classified"
+      - "6: classified"
+      - "Cannot score without a biopsy"
+    answer: 0
+    why:
+      - "Correct: anti-SSA 3 + Schirmer ≤5 mm/5 min 1 = 4, which reaches the ≥4 threshold (p305)."
+      - That counts only the anti-Ro.
+      - Anti-Ro alone is worth 3, not 1.
+      - Six would need the biopsy as well.
+      - The criteria are a weighted sum; a biopsy is not mandatory if the other items reach 4.
+    src: { page: 305, quote: "Anti-SSA (Ro) + (score: 3)." }
+    status: unverified
+  - id: rheum.L18.051
+    kind: mcq
+    topic: criteria
+    stem: "A 55-year-old man has dry mouth and eyes, anti-SSA positive, and a labial biopsy with focus score 2. Which history would stop you from classifying him as Sjögren?"
+    options:
+      - Active hepatitis C with positive PCR
+      - Rheumatoid arthritis
+      - Hashimoto thyroiditis
+      - Raynaud phenomenon
+      - Age over 60
+    answer: 0
+    why:
+      - "Correct: active HCV (positive PCR) is an exclusion criterion (p306)."
+      - RA gives secondary Sjögren; it does not exclude the diagnosis.
+      - Not on the book's exclusion list.
+      - Raynaud is linked to DR4-associated Sjögren, not an exclusion.
+      - Sjögren is described in older age groups too.
+    src: { page: 306, quote: "Active Hepatitis C infection (with positive PCR)." }
+    status: unverified
+  # ---------- p306: investigations ----------
+  - id: rheum.L18.052
+    kind: enumerate
+    topic: investigations
+    prompt: List the investigations for Sjögren syndrome in the lecture.
+    points:
+      - "Blood: ANA, anti-SS-A (Ro) and anti-SS-B (La)"
+      - Schirmer test
+      - Ocular surface staining
+      - Salivary gland function scan (parotid scintigraphy)
+      - Labial gland biopsy
+      - Sialometry
+      - Ultrasonography of the major salivary glands
+    pass: 5
+    src: { page: 306, quote: "B) Schrimer test. C) Ocular surface staining. D) Salivary gland function scan (parotid scintigraphy). E) Labial gland biopsy." }
+    status: unverified
+  - id: rheum.L18.053
+    kind: mcq
+    topic: investigations
+    stem: "The most important lab markers in primary Sjögren include which of the following?"
+    options: [Anti-SS-Ro and anti-SS-La, Anti-dsDNA, RF, Anti-CCP]
+    answer: 0
+    why:
+      - "Correct: the blood tests are ANA with anti-SS-A (Ro) and anti-SS-B (La) positivity (p306)."
+      - Anti-dsDNA is the SLE marker.
+      - RF appears in Sjögren but as a lymphoma predictor (monoclonal RF), not the key diagnostic marker.
+      - Anti-CCP is the rheumatoid arthritis marker.
+    src: { page: 306, quote: "ANTI-SS-A(RO), ANTI-SS-B(LA) positivity." }
+    status: unverified
+    tags: [book-question]
+  - id: rheum.L18.054
+    kind: card
+    topic: investigations
+    front: Which test measures salivary flow directly, and which imaging tests assess the salivary glands?
+    back: Sialometry measures flow; parotid scintigraphy (salivary function scan) and ultrasonography of the major salivary glands image them.
+    src: { page: 306, quote: "F) Sialometery (salivary glands function test). G) Ultrasonography of the major salivary gland." }
+    status: unverified
+  # ---------- p307-308: management ----------
+  - id: rheum.L18.055
+    kind: enumerate
+    topic: management
+    prompt: State the three overarching principles of Sjögren management (EULAR).
+    points:
+      - Manage at, or with, centres of expertise with a multidisciplinary approach
+      - First approach to dryness is symptomatic relief with topical treatment
+      - Systemic therapies may be considered for active systemic disease
+    pass: 3
+    src: { page: 307, quote: "The first therapeutic approach for dryness should be symptomatic relief using topical. C. Systemic therapies may be considered for the treatment of active systemic disease." }
+    status: unverified
+  - id: rheum.L18.056
+    kind: card
+    topic: management
+    front: What should be done before starting treatment for oral dryness (EULAR 2019)?
+    back: A baseline evaluation of salivary gland function.
+    src: { page: 307, quote: "Baseline evaluation of salivary gland function is recommended before starting treatment for oral dryness." }
+    status: unverified
+  - id: rheum.L18.057
+    kind: table
+    topic: management
+    title: First approach to oral dryness by salivary gland function (EULAR 2019)
+    columns: [Gland dysfunction, First approach]
+    rows:
+      - [Mild, Non-pharmacological stimulation]
+      - [Moderate, Pharmacological stimulation]
+      - [Severe, Saliva substitution]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 307, quote: "Non-pharmacological stimulation for mild dysfunction. 2. Pharmacological stimulation* for moderate dysfunction. 3. Saliva substitution for severe dysfunction." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L18.058
+    kind: card
+    topic: management
+    front: First-line and refractory treatment of ocular dryness in Sjögren (EULAR 2019)?
+    back: First line, artificial tears and ocular gels or ointments; refractory or severe, topical immunosuppressive drops and autologous serum eye drops.
+    src: { page: 307, quote: "Refractory/severe ocular dryness may be managed using topical immunosuppressive-containing drops* and autologous serum eye drops." }
+    status: unverified
+  - id: rheum.L18.059
+    kind: card
+    topic: management
+    front: How should fatigue or pain be handled in Sjögren syndrome (EULAR 2019)?
+    back: Evaluate for concomitant diseases and score severity with specific tools; consider analgesics or other pain-modifying agents for musculoskeletal pain, weighing benefits against side effects.
+    src: { page: 307, quote: "Concomitant diseases should be evaluated in patients presenting with fatigue/pain, whose severity should be scored using specific tools." }
+    status: unverified
+  - id: rheum.L18.060
+    kind: card
+    topic: management
+    front: How is treatment of systemic Sjögren disease tailored (EULAR 2019)?
+    back: To organ-specific severity, using the ESSDAI definitions.
+    src: { page: 307, quote: "Treatment of systemic disease should be tailored to organ-specific severity using the ESSDAI definitions." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L18.061
+    kind: cloze
+    topic: management
+    text: "Glucocorticoids should be used at the {{c1::minimum dose and length of time}} needed; immunosuppressive agents are used mainly as {{c2::GC-sparing}} agents, with no evidence favouring one agent."
+    src: { page: 308, quote: "Immunosuppressive agents should be mainly used as GC-sparing agents, with no evidence supporting the choice of one agent over another." }
+    status: unverified
+  - id: rheum.L18.062
+    kind: card
+    topic: management
+    front: When may B-cell targeted therapy be considered in Sjögren syndrome?
+    back: In severe, refractory systemic disease.
+    src: { page: 308, quote: "B-cell targeted therapies may be considered in patients with severe, refractory systemic disease." }
+    status: unverified
+  - id: rheum.L18.063
+    kind: order
+    topic: management
+    prompt: Order the general sequence of systemic organ-specific therapy in Sjögren (EULAR 2019).
+    steps:
+      - Glucocorticoids (minimum dose and duration)
+      - Immunosuppressive agents as GC-sparing agents
+      - Biologics (B-cell targeted) for severe refractory disease
+    src: { page: 308, quote: "the sequential (or combined) use of GCs, immuno-suppressive agents and biologics." }
+    status: unverified
+  - id: rheum.L18.064
+    kind: card
+    topic: management
+    front: How is B-cell lymphoma in Sjögren treated (EULAR 2019)?
+    back: Individualized by the specific histological subtype and disease stage.
+    src: { page: 308, quote: "Treatment of B-cell lymphoma should be individualized according to the specific histological subtype and disease stage" }
+    status: unverified
+  - id: rheum.L18.065
+    kind: mcq
+    topic: management
+    stem: A 40-year-old woman with primary Sjögren has moderately reduced salivary gland function on baseline testing. What is the preferred first approach to her dry mouth per EULAR 2019?
+    options:
+      - Pharmacological stimulation
+      - Saliva substitution
+      - Non-pharmacological stimulation only
+      - Rituximab
+      - Oral glucocorticoids
+    answer: 0
+    why:
+      - "Correct: moderate dysfunction gets pharmacological stimulation (p307)."
+      - Saliva substitution is for severe dysfunction.
+      - Non-pharmacological stimulation is for mild dysfunction.
+      - B-cell therapy is for severe refractory systemic disease, not dryness.
+      - Glucocorticoids are for active systemic disease, not dryness.
+    src: { page: 307, quote: "Pharmacological stimulation* for moderate dysfunction." }
+    status: unverified
+  - id: rheum.L18.066
+    kind: mcq
+    topic: management
+    stem: A woman with Sjögren has severe dry eyes despite regular artificial tears and gels. What does EULAR 2019 suggest next?
+    options:
+      - Topical immunosuppressive drops and autologous serum eye drops
+      - Oral prednisolone 1 mg/kg
+      - Rituximab
+      - Stop artificial tears
+      - Oral hydroxychloroquine for the eyes
+    answer: 0
+    why:
+      - "Correct: refractory or severe ocular dryness may be managed with topical immunosuppressive drops and autologous serum drops (p307)."
+      - Systemic glucocorticoids are for active systemic disease, not dryness.
+      - B-cell therapy is for severe refractory systemic disease.
+      - Topical lubrication stays the base of treatment.
+      - The book does not recommend a systemic drug for ocular dryness.
+    src: { page: 307, quote: "Refractory/severe ocular dryness may be managed using topical immunosuppressive-containing drops* and autologous serum eye drops." }
+    status: unverified
+  # ---------- cases and essays ----------
+  - id: rheum.L18.067
+    kind: case
+    topic: criteria
+    stem: A 46-year-old woman has had dry mouth for 8 months; she drinks water to swallow bread and her eyes feel gritty. No other autoimmune disease.
+    steps:
+      - reveal: She answers yes to two of the five dryness questions.
+        question: Does she enter the 2016 ACR-EULAR criteria?
+        options: ["Yes: at least one dryness symptom is enough", "No: she needs all five", "No: symptoms must last 12 months", "Only if anti-Ro is positive"]
+        answer: 0
+        why: "One positive answer to the five ocular or oral dryness questions meets the inclusion criteria (p305). The time limit is 3 months, and serology is a scored item, not an entry rule."
+      - reveal: "Anti-SSA (Ro) negative. Schirmer 3 mm/5 min in the left eye. Unstimulated saliva flow 0.08 ml/min."
+        question: What is her score so far?
+        options: ["2: not yet classified", "4: classified", "5: classified", "1: not classified"]
+        answer: 0
+        why: "Schirmer ≤5 = 1, saliva ≤0.1 ml/min = 1, anti-Ro negative = 0. Total 2, below 4 (p305)."
+      - reveal: A labial salivary gland biopsy shows focal lymphocytic sialadenitis with focus score 1.5.
+        question: Classification now?
+        options: ["Score 5: primary Sjögren", "Score 3: still not classified", "Score 4: borderline, repeat biopsy", "Biopsy cannot be scored without anti-Ro"]
+        answer: 0
+        why: "A focus score ≥1 adds 3: 2 + 3 = 5, above the ≥4 threshold. The biopsy counts even with negative anti-Ro."
+      - question: She has moderate salivary dysfunction. First approach for the dry mouth?
+        options: [Pharmacological stimulation, Saliva substitution, Glucocorticoids, B-cell therapy]
+        answer: 0
+        why: "EULAR 2019: moderate dysfunction → pharmacological stimulation; severe → substitution (p307). Systemic drugs are for active systemic disease."
+    src: { page: 305, quote: "Labial salivary gland with focal lymphocytic sialadenitis and focus score ≥ 1. (score: 3)." }
+    status: unverified
+  - id: rheum.L18.068
+    kind: case
+    topic: lymphoma
+    stem: A 60-year-old woman with 15 years of primary Sjögren syndrome comes for follow-up.
+    steps:
+      - reveal: Her right parotid has been enlarged for 5 months. She has palpable purpura on both shins and a small leg ulcer.
+        question: What is the main concern?
+        options: [Non-Hodgkin lymphoma, Acute bacterial parotitis, Drug allergy, Venous insufficiency only]
+        answer: 0
+        why: "Persistent parotid enlargement, palpable purpura and leg ulcers are clinical predictors of lymphoma; Sjögren carries a 44 times higher relative risk of NHL (p304-305)."
+      - reveal: Labs show low C4 and mixed monoclonal cryoglobulins.
+        question: How do these labs change the picture?
+        options: ["They are serologic lymphoma predictors and raise concern", "They are reassuring", "They confirm SLE overlap", "They are irrelevant to lymphoma"]
+        answer: 0
+        why: "Low C4 and mixed monoclonal cryoglobulinemia are serologic predictors of lymphoma (p305)."
+      - reveal: Biopsy confirms a B-cell lymphoma.
+        question: How is it treated per EULAR 2019?
+        options: ["Individualized by histological subtype and stage", "Hydroxychloroquine", "Topical immunosuppressive drops", "Artificial saliva and observation"]
+        answer: 0
+        why: "Treatment of B-cell lymphoma should be individualized according to histological subtype and disease stage (p308)."
+    src: { page: 305, quote: "2- Splenomegaly. 3- Lymphadenopathy. 4- Palpable purpura. 5- Leg ulcers." }
+    status: unverified
+  - id: rheum.L18.069
+    kind: essay
+    topic: criteria
+    prompt: Discuss the diagnosis of primary Sjögren syndrome, including the 2016 ACR-EULAR classification criteria.
+    outline:
+      - "Inclusion": ["At least one symptom of ocular or oral dryness (five questions)", "Dry eyes or mouth >3 months, sand or gravel, tears >3 times a day, liquids to swallow"]
+      - "Weighted items (≥4)": ["Labial biopsy focus score ≥1: 3; anti-SSA (Ro): 3", "Ocular staining ≥5 (van Bijsterveld ≥4): 1; Schirmer ≤5 mm/5 min: 1; saliva ≤0.1 ml/min: 1"]
+      - "Exclusions": ["Head and neck radiation, active HCV (PCR), AIDS", "Sarcoidosis, amyloidosis, GVHD, IgG4-related disease"]
+      - "Investigations": ["ANA, anti-Ro, anti-La", "Schirmer, ocular staining, scintigraphy, labial biopsy, sialometry, salivary ultrasound"]
+    src: { page: 305, quote: "The classification of SS applies to any individual who meets the inclusion criteria" }
+    status: unverified
+  - id: rheum.L18.070
+    kind: essay
+    topic: management
+    prompt: Outline the EULAR 2019 recommendations for managing Sjögren syndrome.
+    outline:
+      - "Principles": ["Expert centres, multidisciplinary", "Topical symptomatic relief first for dryness", "Systemic therapy for active systemic disease"]
+      - "Oral dryness": ["Baseline salivary function", "Mild: non-pharmacological stimulation; moderate: pharmacological; severe: substitution"]
+      - "Ocular dryness": ["Artificial tears, gels, ointments", "Refractory: topical immunosuppressive and autologous serum drops"]
+      - "Fatigue and pain": ["Look for concomitant disease, score severity", "Analgesics weighing benefit and harm"]
+      - "Systemic disease": ["Tailor to ESSDAI organ severity", "GCs minimum dose and time; immunosuppressants as GC-sparing", "B-cell therapy for severe refractory disease; lymphoma by subtype and stage"]
+    src: { page: 307, quote: "Treatment of systemic disease should be tailored to organ-specific severity using the ESSDAI definitions." }
+    status: unverified
+  - id: rheum.L18.071
+    kind: essay
+    topic: extraglandular
+    prompt: Describe the clinical picture of Sjögren syndrome.
+    outline:
+      - "Glandular": ["Xerostomia, parotitis, cracked lips, fissured tongue, candidiasis, caries", "Burning itchy dry eyes (keratoconjunctivitis sicca); dry vagina"]
+      - "Skin and kidney": ["Skin 50%: xeroderma, pruritus, annular erythema, Sweet syndrome", "Hematuria, proteinuria, nephrotic, renal vasculitis with hypertension, renal insufficiency"]
+      - "Nerve, joint, lung, gut": ["Sensory neuropathy 22%, CNS very rare", "Asymmetric small-joint polyarthritis; arthralgia 53%", "Cough from xerotrachea, LIP, pseudolymphoma; malabsorption, pancreatitis, hepatitis"]
+      - "Lymphoma": ["NHL relative risk 44", "Predictors: parotid enlargement, splenomegaly, nodes, purpura, leg ulcers, low C4, cryoglobulins, monoclonal RF"]
+    src: { page: 303, quote: "Glandular manifestations Dry mouth (xerostomia)." }
+    status: unverified

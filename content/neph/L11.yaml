@@ -1,0 +1,2154 @@
+schema: batna.content/v1
+lecture: neph.L11
+title: "Pregnancy and the kidney"
+author: "Prof. Hala Saddik El-Wakil"
+# Pages 395-409 are the reference list; the teaching text is pp352-395.
+book: { chapter: 8, pages: [352, 409] }
+topics:
+  - { id: physiology, title: "Kidney physiology in pregnancy" }
+  - { id: aki-epi, title: "Pregnancy-related AKI: burden and definition" }
+  - { id: aki-causes, title: "Causes of AKI by trimester" }
+  - { id: preeclampsia, title: "Preeclampsia and AKI" }
+  - { id: hellp, title: "HELLP syndrome" }
+  - { id: aflp, title: "Acute fatty liver of pregnancy" }
+  - { id: tma, title: "TTP and atypical HUS" }
+  - { id: aki-outcomes, title: "Maternal and fetal outcomes of AKI" }
+  - { id: aki-dx, title: "Diagnosis of AKI in pregnancy and kidney biopsy" }
+  - { id: aki-rx, title: "Management of AKI in pregnancy" }
+  - { id: ckd-fertility, title: "Fertility and sexual function in CKD and dialysis" }
+  - { id: dialysis-outcomes, title: "Pregnancy rates and outcomes on dialysis" }
+  - { id: dialysis-contraception, title: "Contraception on maintenance dialysis" }
+  - { id: dialysis-care, title: "Prenatal care, anticoagulation and drugs on dialysis" }
+  - { id: dialysis-htn, title: "Hypertension and preeclampsia on dialysis, monitoring" }
+  - { id: hd-rx, title: "Hemodialysis prescription in pregnancy" }
+  - { id: pd-rx, title: "Peritoneal dialysis prescription in pregnancy" }
+  - { id: tx-risk, title: "Transplant: fertility, graft and pregnancy risks" }
+  - { id: tx-plan, title: "Transplant: planning a pregnancy" }
+  - { id: tx-contraception, title: "Transplant: contraception" }
+  - { id: tx-drugs, title: "Transplant: immunosuppression and other drugs" }
+  - { id: tx-delivery, title: "Transplant: delivery and breastfeeding" }
+items:
+  # ---------- p352-353: physiology ----------
+  - id: neph.L11.001
+    kind: cloze
+    topic: physiology
+    text: "In pregnancy renal volume rises by {{c1::30%}}, the bipolar diameter by {{c2::1.0-1.5 cm}}, and renal blood flow by {{c3::50-80%}} (mostly in the first trimester)."
+    src: { page: 352, quote: "there is a 30% increase in renal volume; from 1.0 to 1.5 cm enlargement in renal bipolar diameter; and 50-80% increase in renal blood flow" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L11.002
+    kind: card
+    topic: physiology
+    front: Up to what level is proteinuria considered normal in pregnancy, and why is it higher than outside pregnancy?
+    back: Up to 300 mg/24 h, because GFR rises and the glomerular basement membrane becomes more permeable.
+    src: { page: 352, quote: "proteinuria is considered normal up to 300 mg/24 hours" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: neph.L11.003
+    kind: card
+    topic: physiology
+    front: Why does urinary frequency rise early in pregnancy and again at the end?
+    back: Early it is mainly hormonal; at the end it is mechanical.
+    src: { page: 352, quote: "mainly due to hormonal factors, and at the end of pregnancy this frequency also increases, but for mechanical reasons" }
+    status: unverified
+  - id: neph.L11.004
+    kind: cloze
+    topic: physiology
+    text: "A normal pregnancy adds {{c1::10-14 kg}} of weight, about {{c2::9 liters}} of it water, giving hemodilution and a physiological rise in cardiac output."
+    src: { page: 352, quote: "A normal pregnancy generates an average weight increase of 10 to 14 kg, corresponding to about 9" }
+    status: unverified
+    tags: [numbers]
+  # ---------- p353-354: burden and definition of AKI ----------
+  - id: neph.L11.005
+    kind: enumerate
+    topic: aki-epi
+    prompt: Mention the long-term consequences linked to pregnancy-related AKI.
+    points:
+      - Decline in kidney function to CKD and ESKD
+      - Higher risk of adverse cardiovascular events
+      - Higher health care utilization
+      - Longer hospital stays
+    pass: 3
+    src: { page: 353, quote: "AKI is associated with a decline in kidney function resulting in chronic kidney disease (CKD) and end-stage kidney disease (ESKD)" }
+    status: unverified
+  - id: neph.L11.006
+    kind: enumerate
+    topic: aki-epi
+    prompt: Why has pregnancy-related AKI risen almost three-fold in the US in the last decade?
+    points:
+      - Older maternal age with more comorbidities
+      - Higher detection rates of AKI
+      - More hypertensive disorders of pregnancy
+      - Rising obesity rates
+    pass: 3
+    src: { page: 353, quote: "possibly due to older maternal age with more comorbidities, higher detection rates of AKI, increase in the incidence of hypertensive disorders of pregnancy" }
+    status: unverified
+  - id: neph.L11.007
+    kind: cloze
+    topic: aki-epi
+    text: "In US pregnancy-related hospitalizations, the AKI rate rose from {{c1::0.04%}} in 2006 to {{c2::0.12%}} in 2015."
+    src: { page: 353, quote: "an increase in the rate of AKI during pregnancy-related hospitalizations from 0.04% in 2006 to 0.12% in 2015" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L11.008
+    kind: card
+    topic: aki-epi
+    front: Why do developing countries still have higher pregnancy-related AKI rates than developed ones?
+    back: Lack of antenatal care and more septic abortions.
+    src: { page: 353, quote: "continue to remain higher than in the developed countries due to lack of antenatal care and higher frequency of septic abortions" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.009
+    kind: cloze
+    topic: aki-epi
+    text: "In India, pregnancy-related AKI among hospitalized women fell from {{c1::15%}} in the 1980s to {{c2::1.5%}} in the 2010s."
+    src: { page: 353, quote: "there was a decline in pregnancy-related AKI from 15% in the 1980s to 1.5% in the 2010s among hospitalized women" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L11.010
+    kind: card
+    topic: aki-epi
+    front: Which US groups have a higher likelihood of AKI in pregnancy than white women, and why?
+    back: Black women (52% higher) and Native American women (45% higher), likely from unequal access to obstetric care and education.
+    src: { page: 354, quote: "black women having a 52% higher likelihood of AKI during pregnancy and Native American women having a 45% higher likelihood" }
+    status: unverified
+  - id: neph.L11.011
+    kind: card
+    topic: aki-epi
+    front: Why are RIFLE, AKIN and KDIGO hard to apply to pregnancy-related AKI?
+    back: They have not been validated in pregnant women, and the physiological fall in creatinine and the frequent lack of a pre-pregnancy value confound them.
+    src: { page: 354, quote: "pregnancy-related AKI is difficult to determine due to non-validation of these AKI diagnostic criteria in the pregnant population" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.012
+    kind: cloze
+    topic: aki-epi
+    text: "In pregnancy GFR rises by {{c1::40-60%}}, so the normal serum creatinine is about {{c2::0.4-0.6 mg/dL}}."
+    src: { page: 354, quote: "glomerular filtration rate increases by 40-60%, resulting in a physiological reduction in serum creatinine" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: neph.L11.013
+    kind: order
+    topic: aki-epi
+    prompt: Order the chain that lowers serum creatinine in normal pregnancy.
+    steps:
+      - Blood volume and cardiac output rise, systemic vascular resistance falls
+      - Intrarenal vasodilation increases effective renal plasma flow
+      - Hyperfiltration raises GFR by 40-60%
+      - Serum creatinine falls to about 0.4-0.6 mg/dL
+    src: { page: 354, quote: "Pregnancy results in an increase in blood volume, a decrease in systemic vascular resistance, and an increase in cardiac output." }
+    status: unverified
+  - id: neph.L11.014
+    kind: mcq
+    topic: aki-epi
+    stem: "A 29-year-old at 26 weeks has a serum creatinine of 0.9 mg/dL. She has no earlier value. How should this be read?"
+    options:
+      - It is normal, because 0.9 mg/dL is within the adult reference range
+      - It may reflect kidney injury, because normal creatinine in pregnancy is about 0.4-0.6 mg/dL
+      - It is diagnostic of KDIGO stage 3 AKI
+      - It can only be interpreted after a 24-hour urine collection
+      - It is explained by hemoconcentration of late pregnancy
+    answer: 1
+    why:
+      - The non-pregnant range does not apply; hyperfiltration lowers the baseline.
+      - "Correct: the lower pregnancy baseline means a 'normal-looking' value can hide AKI."
+      - Staging needs a baseline; none is available, and KDIGO is not validated in pregnancy.
+      - The book stresses trends in creatinine, not a mandatory 24-hour collection.
+      - Pregnancy causes hemodilution, not hemoconcentration.
+    src: { page: 354, quote: "The normal level of serum creatinine in pregnancy is lower than the baseline usually ranging between 0.4 and 0.6 mg/dL range." }
+    status: unverified
+  # ---------- p354-356: causes by trimester ----------
+  - id: neph.L11.015
+    kind: card
+    topic: aki-causes
+    front: Which two factors are key determinants of the cause of AKI in a pregnant woman?
+    back: The gestational age and the clinical presentation.
+    src: { page: 354, quote: "Age of gestation and clinical presentation are important determinants of AKI in a" }
+    status: unverified
+  - id: neph.L11.016
+    kind: enumerate
+    topic: aki-causes
+    prompt: Mention the causes of AKI in the first trimester.
+    points:
+      - Hyperemesis gravidarum (volume depletion)
+      - Septic abortion (acute tubular necrosis)
+      - De novo or flare of glomerulonephritis such as lupus nephritis
+      - Placental rupture and hemorrhage (prerenal)
+    pass: 3
+    src: { page: 355, quote: "Hyperemesis gravidarum, with the associated volume depletion, can result in AKI. Septic abortion is another common cause of AKI" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.017
+    kind: card
+    topic: aki-causes
+    front: Why are pregnant women at high risk of acute cortical necrosis?
+    back: Pregnancy is hypercoagulable, so severe hypotension can lead to cortical necrosis.
+    src: { page: 355, quote: "Due to the hypercoagulable nature of pregnancy, women have a high risk of acute cortical necrosis in the setting of severe hypotension" }
+    status: unverified
+  - id: neph.L11.018
+    kind: enumerate
+    topic: aki-causes
+    prompt: Mention the pregnancy-specific causes of AKI in the second and third trimesters.
+    points:
+      - Preeclampsia
+      - HELLP syndrome
+      - Acute fatty liver of pregnancy
+      - TTP and atypical HUS
+      - Urinary tract infection and pyelonephritis
+      - Obstruction by the growing uterus
+    pass: 4
+    src: { page: 355, quote: "These include preeclampsia, hemolysis, elevated liver enzymes, low platelet count (HELLP) syndrome, acute fatty liver of pregnancy" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.019
+    kind: card
+    topic: aki-causes
+    front: Why is post-obstructive AKI more common in the second and third trimesters?
+    back: The growing uterus directly compresses the nearby ureters.
+    src: { page: 355, quote: "Post-obstructive AKI is more common in the second and third trimester due to the growing uterus" }
+    status: unverified
+  - id: neph.L11.020
+    kind: table
+    topic: aki-causes
+    title: "Fig 1: timing of AKI in pregnancy"
+    columns: [Cause, When it occurs]
+    rows:
+      - [Septic abortion, First trimester]
+      - [Hyperemesis gravidarum, First trimester]
+      - [Acute pyelonephritis, Late first to third trimester]
+      - ["Preeclampsia, eclampsia, HELLP", Late second to early postpartum]
+      - [Acute fatty liver, Third trimester]
+      - [TTP, Second and third trimesters]
+      - [Atypical HUS, Postpartum]
+      - [Cortical necrosis, Third trimester to postpartum]
+      - [NSAID use, Postpartum]
+      - [Glomerulonephritis flare, Any time]
+    blanks: [[0, 1], [3, 1], [4, 1], [6, 1], [8, 1]]
+    src: { page: 356, quote: "Fig 1: Timing of AKI in pregnancy" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p356-357: preeclampsia ----------
+  - id: neph.L11.021
+    kind: cloze
+    topic: preeclampsia
+    text: "Preeclampsia affects {{c1::5-8%}} of pregnancies and causes {{c2::15-20%}} of pregnancy-related AKI."
+    src: { page: 356, quote: "Preeclampsia affects 5-8% of pregnancies and accounts for 15-20% of pregnancy- related AKI." }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L11.022
+    kind: card
+    topic: preeclampsia
+    front: How is preeclampsia diagnosed?
+    back: "New-onset hypertension after 20 weeks in a previously normotensive woman, with proteinuria (or, without proteinuria, signs of end-organ dysfunction)."
+    src: { page: 356, quote: "Diagnosis of preeclampsia is made by the new onset of hypertension after 20 weeks of gestation in a previously normotensive woman." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.023
+    kind: cloze
+    topic: preeclampsia
+    text: "Hypertension in preeclampsia is BP {{c1::≥140/90 mm Hg on two occasions 4 hours apart}}, or {{c2::≥160/110 mm Hg}} within a shorter interval."
+    src: { page: 356, quote: "Hypertension is defined by blood pressure ≥ 140/90 mm Hg on two occasions 4 hours apart, or ≥160/110 mm Hg within a shorter interval" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: neph.L11.024
+    kind: cloze
+    topic: preeclampsia
+    text: "Proteinuria for preeclampsia is {{c1::≥300 mg/24 h}}, or a spot protein creatinine ratio of {{c2::0.3}} (dipstick {{c3::1+}})."
+    src: { page: 356, quote: "proteinuria ≥ 300-mg/24-hour urine or spot urine protein creatinine ratio 0.3g (dipstick 1+)" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: neph.L11.025
+    kind: enumerate
+    topic: preeclampsia
+    prompt: Mention the end-organ signs that allow preeclampsia to be diagnosed without proteinuria.
+    points:
+      - Serum creatinine > 1.1 mg/dL or doubling without other kidney disease
+      - Platelets < 100,000/µL
+      - Transaminases ≥ twice normal
+      - Pulmonary edema
+      - Cerebral or visual symptoms
+    pass: 4
+    src: { page: 356, quote: "preeclampsia can be diagnosed in the absence of proteinuria if any of the following signs of end-organ dysfunction are present" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.026
+    kind: card
+    topic: preeclampsia
+    front: Define preeclampsia with severe features.
+    back: "Systolic ≥160 or diastolic ≥110 mm Hg with proteinuria, or BP ≥140/90 mm Hg with or without proteinuria but with end-organ dysfunction. About 40-50% of preeclampsia."
+    src: { page: 356, quote: "about 40-50% will experience preeclampsia with severe features, which is defined as systolic blood ≥160 mmHg or diastolic blood pressure ≥110 mmHg" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.027
+    kind: card
+    topic: preeclampsia
+    front: By how much does GFR fall in preeclampsia?
+    back: Only 30-40%, so serum creatinine rises only slightly.
+    src: { page: 357, quote: "the glomerular filtration rate decreases by only 30% to 40%, which causes a small increase in serum creatinine" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L11.028
+    kind: cloze
+    topic: preeclampsia
+    text: "In a South African cohort of women with preeclampsia, {{c1::15.3%}} met AKI criteria and only {{c2::two-thirds}} recovered kidney function; hypertension in a previous pregnancy raised the odds of AKI stage 2-3 {{c3::2.2}}-fold."
+    src: { page: 357, quote: "Of the study cohort, 15.3% met AKI criteria" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L11.029
+    kind: card
+    topic: preeclampsia
+    front: How can preeclampsia be told apart from progression of pre-existing CKD?
+    back: The rate of kidney function decline, worsening proteinuria, and the angiogenic markers sFlt-1, PlGF and the sFlt-1/PlGF ratio.
+    src: { page: 357, quote: "maternal serum levels of soluble angiogenic factors soluble fms-like tyrosine kinase-1 and placental growth factor may be utilized to distinguish between preeclampsia and CKD" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.030
+    kind: cloze
+    topic: preeclampsia
+    text: "Rolfo et al: the median sFlt-1/PlGF ratio was {{c1::436}} in preeclampsia versus {{c2::4}} in CKD."
+    src: { page: 357, quote: "soluble fms-like tyrosine kinase-1 to placental growth factor ratio (median 436) as compared to women with CKD (median 4)" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L11.031
+    kind: mcq
+    topic: preeclampsia
+    stem: "A 32-year-old with known IgA nephropathy is at 30 weeks. Her BP and proteinuria are rising. Which test best helps separate superimposed preeclampsia from CKD progression?"
+    options:
+      - Serum complement C3 and C4
+      - sFlt-1/PlGF ratio
+      - Urine sodium
+      - Kidney ultrasound
+      - Serum uric acid alone
+    answer: 1
+    why:
+      - Complement rises in pregnancy and is used for lupus, not this question.
+      - "Correct: a very high sFlt-1/PlGF ratio (median 436 vs 4 in CKD) points to preeclampsia."
+      - Urine sodium does not separate these two.
+      - Ultrasound looks for obstruction, not preeclampsia.
+      - The book names angiogenic factors, not uric acid alone, for this distinction.
+    src: { page: 357, quote: "Rolfo et al showed that women with preeclampsia had a significant increase in soluble fms-like tyrosine kinase- 1 levels" }
+    status: unverified
+  # ---------- p357-358: HELLP ----------
+  - id: neph.L11.032
+    kind: cloze
+    topic: hellp
+    text: "AKI occurs in {{c1::3-15%}} of HELLP syndrome, and even severe AKI has a kidney recovery rate of up to {{c2::80%}}."
+    src: { page: 357, quote: "AKI occurs in 3- 15% of patients with HELLP syndrome." }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L11.033
+    kind: card
+    topic: hellp
+    front: Why is AKI in HELLP syndrome multifactorial?
+    back: The kidney changes of preeclampsia plus coagulopathy causing bleeding and acute tubular necrosis.
+    src: { page: 358, quote: "in addition to the kidney changes characteristic of preeclampsia, there is associated coagulopathy, resulting in bleeding and acute tubular necrosis" }
+    status: unverified
+  - id: neph.L11.034
+    kind: card
+    topic: hellp
+    front: What does a kidney biopsy usually show in HELLP syndrome?
+    back: Mostly acute tubular necrosis; thrombotic microangiopathy only occasionally.
+    src: { page: 358, quote: "show manifestations consistent with acute tubular necrosis" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.035
+    kind: card
+    topic: hellp
+    front: Why is HELLP called a thrombotic microangiopathy-like syndrome?
+    back: It combines thrombocytopenia, hemolysis and AKI.
+    src: { page: 358, quote: "HELLP syndrome is considered a thrombotic microangiopathy like syndrome due to occurrence of thrombocytopenia, hemolysis, and AKI." }
+    status: unverified
+  # ---------- p358: AFLP ----------
+  - id: neph.L11.036
+    kind: card
+    topic: aflp
+    front: When is acute fatty liver of pregnancy usually diagnosed?
+    back: Late in pregnancy, mostly after 30 weeks (third trimester).
+    src: { page: 358, quote: "AFLP is diagnosed later in the pregnancy, mostly after 30 weeks." }
+    status: unverified
+  - id: neph.L11.037
+    kind: card
+    topic: aflp
+    front: What is the pathogenesis of about 20% of AFLP cases?
+    back: Fetal long-chain 3-hydroxyacyl CoA dehydrogenase (LCHAD) deficiency; fetal free fatty acids cross the placenta and are hepatotoxic to the mother.
+    src: { page: 358, quote: "The pathogenesis in 20% of cases of AFLP is secondary to fetal long-chain 3- hydroxyacyl CoA dehydrogenase deficiency" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.038
+    kind: cloze
+    topic: aflp
+    text: "AKI is more common in AFLP than in HELLP, present in {{c1::20-100%}} of women, and behaves like {{c2::hepatorenal syndrome}}."
+    src: { page: 358, quote: "AKI is more common in AFLP, being present in 20-100% of women. AKI in AFLP usually manifests similarly to hepatorenal syndrome" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.039
+    kind: enumerate
+    topic: aflp
+    prompt: Mention the features of the Swanson criteria that separate AFLP from HELLP or preeclampsia.
+    points:
+      - Encephalopathy
+      - Hyperbilirubinemia
+      - Ascites
+      - Hypoglycemia
+      - Microvesicular steatosis on liver biopsy
+    pass: 4
+    src: { page: 358, quote: "encephalopathy, hyperbilirubinemia, abdominal ascites, hypoglycemia, and micro vesicular steatosis on liver biopsy, can differentiate AFLP from HELLP" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.040
+    kind: card
+    topic: aflp
+    front: How is AFLP managed?
+    back: Expectant (prompt) delivery, platelet transfusion before delivery if platelets < 40,000/µL, and liver transplant evaluation in severe cases.
+    src: { page: 358, quote: "platelet transfusion prior to delivery if platelet count less than 40,000 per microliter, and evaluation for liver transplant in severe cases" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.041
+    kind: mcq
+    topic: aflp
+    stem: "At 34 weeks a woman has vomiting, jaundice, confusion, ascites and a glucose of 45 mg/dL. Creatinine is 2.4 mg/dL. Which diagnosis fits best?"
+    options:
+      - HELLP syndrome
+      - Acute fatty liver of pregnancy
+      - Hyperemesis gravidarum
+      - Atypical HUS
+      - Septic abortion
+    answer: 1
+    why:
+      - HELLP overlaps, but encephalopathy, ascites and hypoglycemia are Swanson features of AFLP.
+      - "Correct: third trimester, liver failure picture with hypoglycemia; AKI is common and hepatorenal-like."
+      - Hyperemesis is a first-trimester cause of prerenal AKI.
+      - aHUS is usually postpartum with hemolysis and thrombocytopenia.
+      - Septic abortion is a first-trimester cause.
+    src: { page: 358, quote: "Swanson Criteria, defined by clinical symptoms and laboratory derangements of encephalopathy, hyperbilirubinemia, abdominal ascites, hypoglycemia" }
+    status: unverified
+  # ---------- p359: TTP and aHUS ----------
+  - id: neph.L11.042
+    kind: card
+    topic: tma
+    front: Why is TTP usually seen in the second and third trimesters?
+    back: ADAMTS13 (the von Willebrand factor protease) falls as pregnancy progresses.
+    src: { page: 359, quote: "ADAMTS13 levels tend to decline as the pregnancy progresses, and as such, TTP is usually seen in the second and third trimesters" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.043
+    kind: enumerate
+    topic: tma
+    prompt: Mention the diagnostic criteria of TTP in pregnancy.
+    points:
+      - Thrombocytopenia
+      - Schistocytosis
+      - Neurologic manifestations
+      - No coagulation abnormalities of DIC
+    pass: 4
+    src: { page: 359, quote: "Diagnostic criteria for TTP includes thrombocytopenia, schistocytosis, neurologic manifestations and absence of coagulation abnormalities" }
+    status: unverified
+  - id: neph.L11.044
+    kind: cloze
+    topic: tma
+    text: "Severe AKI is seen in up to {{c1::10%}} of TTP in pregnancy."
+    src: { page: 359, quote: "Severe AKI is seen in up to 10% of patients with TTP during pregnancy." }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L11.045
+    kind: table
+    topic: tma
+    title: TTP versus atypical HUS in pregnancy
+    columns: [Feature, TTP, Atypical HUS]
+    rows:
+      - [Mechanism, ADAMTS13 deficiency, Complement dysregulation and uncontrolled activation]
+      - [Timing, Second and third trimesters (mostly third), Postpartum]
+      - [Who, Any pregnancy, More common in multiparous women]
+      - [Treatment, Plasma exchange, Plasma exchange and eculizumab]
+    blanks: [[0, 1], [0, 2], [1, 2], [2, 2], [3, 2]]
+    src: { page: 359, quote: "aHUS is typically diagnosed in the postpartum period and is more common in multiparous women" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.046
+    kind: card
+    topic: tma
+    front: When should plasma exchange be started for suspected TTP or aHUS in pregnancy?
+    back: As soon as either is suspected, without waiting for the ADAMTS13 result.
+    src: { page: 359, quote: "Plasma exchange should be started when TTP or aHUS is suspected while waiting for the ADAMTS13 levels." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.047
+    kind: card
+    topic: tma
+    front: When should a kidney biopsy be considered in pregnancy-related TMA?
+    back: If the AKI does not resolve despite appropriate treatment.
+    src: { page: 359, quote: "A kidney biopsy can be considered if the AKI is not resolving despite appropriate treatment." }
+    status: unverified
+  - id: neph.L11.048
+    kind: mcq
+    topic: tma
+    stem: "Ten days after an uneventful delivery of her third child, a woman has hemoglobin 7.8 g/dL with schistocytes, platelets 60,000/µL, normal coagulation and creatinine 3.5 mg/dL. BP is 135/85. What is the most likely diagnosis and first step?"
+    options:
+      - HELLP syndrome; urgent delivery
+      - Atypical HUS; start plasma exchange while awaiting ADAMTS13
+      - Acute fatty liver; liver transplant evaluation
+      - Postpartum NSAID nephropathy; stop NSAIDs only
+      - DIC from retained products; give fresh frozen plasma
+    answer: 1
+    why:
+      - She has already delivered; HELLP is a preeclampsia-spectrum disease before or just around delivery.
+      - "Correct: postpartum MAHA, low platelets and AKI in a multiparous woman suggests aHUS; plasma exchange starts while ADAMTS13 is pending, eculizumab helps."
+      - There are no liver failure features.
+      - NSAIDs do not cause hemolysis with schistocytes and thrombocytopenia.
+      - Normal coagulation argues against DIC.
+    src: { page: 359, quote: "aHUS is characterized by microangiopathic hemolytic anemia, thrombocytopenia, and decreased kidney function" }
+    status: unverified
+  # ---------- p359-360: outcomes ----------
+  - id: neph.L11.049
+    kind: cloze
+    topic: aki-outcomes
+    text: "In Liu's meta-analysis, maternal deaths were {{c1::13.3%}} with pregnancy-related AKI versus {{c2::4.2%}} without, with a {{c3::2.1-day}} longer ICU stay."
+    src: { page: 360, quote: "deaths (13.3% vs. 4.2%), and a longer intensive care unit stay of 2.1 days than did women without pregnancy- related AKI" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L11.050
+    kind: table
+    topic: aki-outcomes
+    title: Obstetric risks with pregnancy-related AKI (Liu meta-analysis)
+    columns: [Outcome, Fold increase]
+    rows:
+      - [Cesarean delivery, "1.5"]
+      - [Hemorrhage, "1.3"]
+      - [HELLP syndrome, "1.9"]
+      - [Placental abruption, "2.0"]
+      - [Stillbirth and perinatal death, "3.4"]
+    blanks: [[0, 1], [3, 1], [4, 1]]
+    src: { page: 360, quote: "associated with a 1.5-fold higher likelihood of cesarean deliveries, a 1.3-fold high likelihood of hemorrhage, a 1.9- fold higher likelihood of HELLP" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L11.051
+    kind: cloze
+    topic: aki-outcomes
+    text: "In a US study, pregnancy-related AKI carried a {{c1::13.5}}-fold higher inpatient mortality and a {{c2::10}}-fold higher risk of cardiovascular events; {{c3::8.9%}} needed acute dialysis."
+    src: { page: 360, quote: "reported a 13.5-fold higher likelihood of inpatient mortality and a 10-fold higher likelihood of cardiovascular events" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L11.052
+    kind: cloze
+    topic: aki-outcomes
+    text: "About {{c1::2.4%}} of women with pregnancy-related AKI progress to ESKD needing dialysis."
+    src: { page: 360, quote: "pregnancy-related AKI progress to ESKD needing dialysis" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L11.053
+    kind: cloze
+    topic: aki-outcomes
+    text: "A Canadian study: {{c1::1 in 10,000}} pregnancies had AKI needing dialysis, and {{c2::3.9%}} were still on dialysis 4 months after delivery."
+    src: { page: 360, quote: "1 in 10000 pregnancies were complicated by AKI needing dialysis and 3.9% remained on dialysis four months after delivery" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L11.054
+    kind: card
+    topic: aki-outcomes
+    front: What are the fetal effects of pregnancy-related AKI?
+    back: Delivery about 0.7 week earlier, birth weight about 740 g lower, and 3.4-fold more stillbirths and perinatal deaths; with dialysis, 3.4-fold more low birth weight, SGA or preterm birth.
+    src: { page: 360, quote: "lower mean gestational age at delivery (−0.70 week), lower mean birth weight (−740 grams)" }
+    status: unverified
+  # ---------- p361-362: diagnosis and biopsy ----------
+  - id: neph.L11.055
+    kind: card
+    topic: aki-dx
+    front: Why can a creatinine rise of 0.4 mg/dL in pregnancy mean significant kidney injury?
+    back: Hyperfiltration lowers baseline creatinine, so a rise that is only AKIN stage 1 may reflect a large loss of GFR.
+    src: { page: 361, quote: "an increase in serum creatinine concentration by 0.4 mg/dl, consistent with stage 1 in the AKIN criteria, may point towards significant kidney injury" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.056
+    kind: card
+    topic: aki-dx
+    front: Are there distinct criteria for AKI in pregnancy? What should guide the diagnosis?
+    back: No. Follow the trend in serum creatinine; even small changes are sensitive for early injury in the right setting.
+    src: { page: 361, quote: "Currently, there are no distinct criteria for the diagnosis of AKI in pregnancy. Attention should be paid to trends in serum creatinine" }
+    status: unverified
+  - id: neph.L11.057
+    kind: cloze
+    topic: aki-dx
+    text: "In a woman with new-onset hypertension, a creatinine rise of {{c1::0.3 mg/dL}} with raised liver enzymes and thrombocytopenia represents {{c2::AKI}}."
+    src: { page: 361, quote: "concomitant increase in serum creatinine by 0.3 mg/dl with increases in liver enzymes and thrombocytopenia, represents AKI" }
+    status: unverified
+  - id: neph.L11.058
+    kind: enumerate
+    topic: aki-dx
+    prompt: Mention the past history to review first in a pregnant woman with AKI.
+    points:
+      - CKD
+      - Chronic hypertension
+      - Diabetes
+      - Preeclampsia in prior pregnancies
+      - SLE
+      - Pre-existing glomerular disease
+    pass: 4
+    src: { page: 361, quote: "comprehensive review of the patient's history of CKD, chronic hypertension, diabetes, preeclampsia in prior pregnancies, systemic lupus erythematous" }
+    status: unverified
+  - id: neph.L11.059
+    kind: card
+    topic: aki-dx
+    front: Which causes of AKI are common in the postpartum period?
+    back: Atypical HUS and NSAID-induced kidney injury.
+    src: { page: 361, quote: "Atypical HUS and NSAID's induced kidney injury are common causes of AKI in the postpartum period." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.060
+    kind: enumerate
+    topic: aki-dx
+    prompt: Mention the diagnostic work-up of AKI in pregnancy.
+    points:
+      - Urinalysis and urine microscopy
+      - Comprehensive metabolic panel
+      - Coagulation panel
+      - Serology as indicated
+      - Medication review
+      - Kidney ultrasound (and Doppler if embolic disease suspected)
+    pass: 4
+    src: { page: 361, quote: "Diagnostic evaluation should include urinalysis, urine microscopy, comprehensive metabolic panel, coagulation panel, and appropriate serological workup" }
+    status: unverified
+  - id: neph.L11.061
+    kind: card
+    topic: aki-dx
+    front: Why can serum complement mislead in suspected lupus nephritis during pregnancy?
+    back: The liver makes more complement in pregnancy, so levels can be raised.
+    src: { page: 362, quote: "liver and can complicate the diagnosis of lupus nephritis" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.062
+    kind: card
+    topic: aki-dx
+    front: What is the role of kidney ultrasound in pregnancy-related AKI?
+    back: To rule out obstruction, separating pathological from physiological hydronephrosis; add Doppler if embolic disease is suspected (hypercoagulable state).
+    src: { page: 362, quote: "Pathological hydronephrosis should be differentiated from physiological hydronephrosis." }
+    status: unverified
+  - id: neph.L11.063
+    kind: card
+    topic: aki-dx
+    front: When should a kidney biopsy be considered in pregnancy?
+    back: When the lab work-up is non-diagnostic and a definite diagnosis would guide treatment enough to outweigh the biopsy risks.
+    src: { page: 362, quote: "Kidney biopsy should be considered when the laboratory evaluation for AKI is non-diagnostic" }
+    status: unverified
+  - id: neph.L11.064
+    kind: cloze
+    topic: aki-dx
+    text: "Kidney biopsy in pregnancy is best done in the {{c1::first and second}} trimesters; complication risk rises notably after {{c2::25 weeks}}."
+    src: { page: 362, quote: "notably after 25 weeks, it is recommended to biopsy in the first and second trimesters, and best to avoid in the third trimester" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: neph.L11.065
+    kind: enumerate
+    topic: aki-dx
+    prompt: Mention the biopsy risks to discuss with a pregnant woman.
+    points:
+      - Major bleeding needing transfusion
+      - Embolization
+      - Severe obstetric complications
+      - Early preterm delivery
+      - Fetal death
+    pass: 4
+    src: { page: 362, quote: "including the risk of major bleeding requiring transfusion, embolization, severe obstetric complications, early preterm delivery, and fetal death" }
+    status: unverified
+  - id: neph.L11.066
+    kind: mcq
+    topic: aki-dx
+    stem: "At 32 weeks with a viable fetus, a woman has unexplained AKI and nephrotic proteinuria after a non-diagnostic work-up. What does the book advise?"
+    options:
+      - Biopsy now, because the third trimester is the safest time
+      - Consider delivery first, then biopsy
+      - Never biopsy during or after pregnancy
+      - Start mycophenolate empirically
+      - Biopsy only after 40 weeks
+    answer: 1
+    why:
+      - Late-pregnancy biopsy has more complications, notably after 25 weeks.
+      - "Correct: in late-term pregnancy with a viable fetus, delivery before biopsy may be the more prudent option."
+      - Biopsy is reasonable when it changes treatment, ideally in the first two trimesters.
+      - Mycophenolate is teratogenic and contraindicated in pregnancy.
+      - Waiting to 40 weeks delays care and is not advised.
+    src: { page: 362, quote: "Delivery prior to biopsy may be a more prudent option for the late-term pregnancies, especially if the fetus has reached viability." }
+    status: unverified
+  - id: neph.L11.067
+    kind: card
+    topic: aki-dx
+    front: Which women need postpartum follow-up of BP, kidney function and proteinuria?
+    back: Women at high risk of AKI, including those with CKD before pregnancy and those who had preeclampsia.
+    src: { page: 362, quote: "This includes women with CKD prior to pregnancy, as well as those who developed preeclampsia during pregnancy." }
+    status: unverified
+  - id: neph.L11.068
+    kind: card
+    topic: aki-dx
+    front: Why is hemodynamic monitoring needed in high-risk pregnancies after delivery?
+    back: Postpartum derangements may herald postpartum cardiomyopathy or HUS.
+    src: { page: 362, quote: "postpartum derangements may be associated with developing postpartum cardiomyopathy or HUS" }
+    status: unverified
+  # ---------- p363-364: management ----------
+  - id: neph.L11.069
+    kind: enumerate
+    topic: aki-rx
+    prompt: Mention the general measures in managing pregnancy-related AKI.
+    points:
+      - Identify the underlying cause
+      - Intravenous fluid resuscitation
+      - Timely dialysis if needed
+      - Prompt delivery if necessary
+    pass: 4
+    src: { page: 363, quote: "include identification of the underlying cause of kidney injury, intravenous fluid resuscitation, timely initiation of dialysis if needed, and prompt delivery of fetus" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.070
+    kind: card
+    topic: aki-rx
+    front: Who manages AKI in pregnancy?
+    back: A multidisciplinary team of nephrologists, obstetricians and neonatologists.
+    src: { page: 363, quote: "multidisciplinary team consisting of nephrologists, obstetricians, and neonatologists" }
+    status: unverified
+  - id: neph.L11.071
+    kind: card
+    topic: aki-rx
+    front: What is the caution with IV fluids in pregnancy-related AKI?
+    back: Fluids are key in prerenal AKI, but risk pulmonary edema in preeclampsia or endotoxin-mediated injury.
+    src: { page: 363, quote: "should be performed with caution due to the risk of developing pulmonary edema in women with preeclampsia or endotoxin-mediated injury" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.072
+    kind: card
+    topic: aki-rx
+    front: Why must a blood gas be used to diagnose metabolic acidosis in pregnancy?
+    back: Pregnancy is a state of physiological respiratory alkalosis, so bicarbonate alone misleads.
+    src: { page: 363, quote: "Since pregnancy is a state of physiological respiratory alkalosis, arterial or venous blood gas should be used to diagnose metabolic acidosis" }
+    status: unverified
+  - id: neph.L11.073
+    kind: table
+    topic: aki-rx
+    title: Immunosuppressants in pregnancy (AKI management)
+    columns: [Drug, Status in pregnancy, Note]
+    rows:
+      - [Mycophenolate mofetil, Contraindicated, Teratogenic antimetabolite]
+      - [Low-dose steroids, May be used, Monitor for gestational diabetes]
+      - [Azathioprine, Commonly used, Not teratogenic]
+      - [Cyclosporine and tacrolimus, Commonly used, Need higher doses; monitor trough levels]
+    blanks: [[0, 1], [1, 2], [2, 1], [3, 2]]
+    src: { page: 363, quote: "Azathioprine and calcineurin inhibitors (cyclosporine and tacrolimus) are not teratogenic and commonly used immunosuppressive drugs in pregnancy." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.074
+    kind: card
+    topic: aki-rx
+    front: Why are tacrolimus and cyclosporine trough levels monitored often in pregnancy?
+    back: Higher doses are needed in pregnancy to reach therapeutic targets.
+    src: { page: 363, quote: "higher doses of tacrolimus and cyclosporine are needed to achieve therapeutic targets" }
+    status: unverified
+  - id: neph.L11.075
+    kind: card
+    topic: aki-rx
+    front: What is the treatment of severe preeclampsia, HELLP and AFLP, and what is added before 34 weeks?
+    back: Prompt delivery; glucocorticoids if delivery is before 34 weeks to reduce neonatal respiratory distress syndrome.
+    src: { page: 363, quote: "Treatment of severe preeclampsia, HELLP syndrome and AFLP, require prompt delivery of the fetus." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.076
+    kind: card
+    topic: aki-rx
+    front: In ADAMTS13-deficient TMA in pregnancy, what is the goal and what if plasma exchange fails?
+    back: Restore ADAMTS13 activity with plasma exchange; if it fails, rituximab is an option (with caution in pregnancy).
+    src: { page: 364, quote: "In ADAMTS13-deficient TMA, the goal is to regain enzymatic activity through plasma exchange, and if plasma exchange is unsuccessful, rituximab is" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.077
+    kind: cloze
+    topic: aki-rx
+    text: "Rituximab in pregnancy-related TMA caused neonatal toxicity (thrombocytopenia, neutropenia, B-cell depletion) in {{c1::<10%}} of neonates; long-term safety data are {{c2::not available}}."
+    src: { page: 364, quote: "fetal toxicity (thrombocytopenia, neutropenia, and B-cell depletion) was seen in <10% of neonates" }
+    status: unverified
+  - id: neph.L11.078
+    kind: case
+    topic: aki-rx
+    stem: "A 27-year-old primigravida at 31 weeks presents with headache and BP 168/112 mm Hg."
+    steps:
+      - reveal: "Urine PCR 1.2 g/g. Platelets 85,000/µL, AST 210 U/L, LDH 900 U/L, schistocytes on film. Creatinine 1.4 mg/dL (0.5 at booking)."
+        question: What is the diagnosis?
+        options:
+          - HELLP syndrome with AKI
+          - Acute fatty liver of pregnancy
+          - Lupus nephritis flare
+          - Atypical HUS
+        answer: 0
+        why: "Hypertension and proteinuria after 20 weeks with hemolysis, raised liver enzymes and low platelets is HELLP; the creatinine has nearly tripled from her pregnancy baseline."
+      - question: What is the definitive treatment?
+        options:
+          - Prompt delivery
+          - Plasma exchange
+          - Eculizumab
+          - High-dose steroids and wait to term
+        answer: 0
+        why: "Severe preeclampsia, HELLP and AFLP need prompt delivery of the fetus. Plasma exchange and eculizumab are for TTP and aHUS."
+      - question: Delivery is planned at 31 weeks. What is given to the mother?
+        options:
+          - Glucocorticoids for fetal lung maturity
+          - Mycophenolate
+          - ACE inhibitor
+          - Large fluid boluses
+        answer: 0
+        why: "Before 34 weeks, glucocorticoids reduce neonatal respiratory distress. Fluids must be cautious in preeclampsia because of pulmonary edema; ACE inhibitors and MMF are teratogenic."
+      - question: What does a kidney biopsy most often show in HELLP?
+        options:
+          - Acute tubular necrosis
+          - Crescentic glomerulonephritis
+          - Membranous nephropathy
+          - Acute interstitial nephritis
+        answer: 0
+        why: "Biopsies occasionally show TMA but usually show acute tubular necrosis."
+    src: { page: 363, quote: "Glucocorticoids are administered if delivery is" }
+    status: unverified
+  # ---------- p364-365: fertility and sexual function in CKD ----------
+  - id: neph.L11.079
+    kind: card
+    topic: ckd-fertility
+    front: How does CKD affect female reproductive function?
+    back: It disrupts the hypothalamic-gonadal axis, causing irregular cycles, anovulation, low libido and impaired fertility.
+    src: { page: 364, quote: "disruption of the hypothalamic- gonadal axis that leads to irregularity in the menstrual cycle, anovulation, decreased libido, and impaired fertility" }
+    status: unverified
+  - id: neph.L11.080
+    kind: table
+    topic: ckd-fertility
+    title: Hormones in women on maintenance dialysis
+    columns: [Hormone, Change, Reason]
+    rows:
+      - [Prolactin, High, Impaired kidney clearance]
+      - [LH and FSH, High, Loss of negative feedback]
+      - [Estradiol and progesterone, Low, Gonadal suppression]
+      - [LH surge, Absent, Leads to anovulation]
+    blanks: [[0, 1], [0, 2], [1, 1], [3, 1]]
+    src: { page: 364, quote: "have high serum prolactin because of impaired kidney clearance, increased luteinizing hormone and follicular stimulating hormone, and decreased estradiol and progesterone concentration" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.081
+    kind: card
+    topic: ckd-fertility
+    front: What does the recovery of gonadotropins and prolactin after transplantation tell us?
+    back: The hormonal imbalance comes from kidney dysfunction, not permanent damage to the hypothalamic-pituitary-ovarian axis.
+    src: { page: 364, quote: "restoration of hormones such as gonadotropins and prolactin after kidney transplantation" }
+    status: unverified
+  - id: neph.L11.082
+    kind: cloze
+    topic: ckd-fertility
+    text: "Women on maintenance dialysis have irregular menses in {{c1::47%}} and amenorrhea in {{c2::41%}}."
+    src: { page: 365, quote: "specifically irregular menses (47%) and amenorrhea (41%)" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L11.083
+    kind: table
+    topic: ckd-fertility
+    title: Menstrual disturbance by kidney replacement therapy (Lin et al)
+    columns: [Modality, Prevalence]
+    rows:
+      - [Nocturnal hemodialysis, 55%]
+      - [CAPD, 72.1%]
+      - [Hemodialysis, 76.1%]
+    blanks: [[0, 1], [2, 1]]
+    src: { page: 365, quote: "nocturnal hemodialysis (55%), continuous ambulatory peritoneal dialysis (72.1%), and hemodialysis (76.1%)" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L11.084
+    kind: enumerate
+    topic: ckd-fertility
+    prompt: Mention the causes of sexual dysfunction in women on dialysis.
+    points:
+      - Hormonal derangements (dry skin, hot flashes, vaginal dryness and atrophy, incontinence)
+      - Anxiety and depression
+      - Poor social and body image (edema, fistula, catheters, equipment at home)
+    pass: 2
+    src: { page: 365, quote: "caused by hormonal derangements in addition to psychosocial factors, such as anxiety, depression, and poor social and body image" }
+    status: unverified
+  # ---------- p365-367: pregnancy rates and outcomes on dialysis ----------
+  - id: neph.L11.085
+    kind: cloze
+    topic: dialysis-outcomes
+    text: "The US pregnancy rate on dialysis (age 15-44) is about {{c1::18}} per 1,000 person-years, highest at age {{c2::20-24}} (about 41)."
+    src: { page: 365, quote: "receiving dialysis is ∼18 per 1,000 person-years in the United States, with the highest rate being observed in women aged 20-24" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L11.086
+    kind: card
+    topic: dialysis-outcomes
+    front: Why are women on peritoneal dialysis less likely to conceive than those on hemodialysis?
+    back: They have a 53% lower likelihood, possibly because hypertonic dextrose and intraperitoneal fluid interfere with ovum transit to the uterus.
+    src: { page: 365, quote: "Women treated with peritoneal dialysis have a 53% lower likelihood of pregnancy than those treated with hemodialysis." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.087
+    kind: card
+    topic: dialysis-outcomes
+    front: Which cause of kidney failure carries the lowest pregnancy rate on dialysis?
+    back: Diabetes; malignancy, glomerulonephritis, hypertension and vasculitis carry higher rates.
+    src: { page: 366, quote: "have a higher pregnancy rate than women with kidney failure because of diabetes" }
+    status: unverified
+  - id: neph.L11.088
+    kind: table
+    topic: dialysis-outcomes
+    title: Preterm birth in hemodialysis pregnancies by source
+    columns: [Source, Preterm births]
+    rows:
+      - [Piccoli 2016 meta-analysis, 88%]
+      - [ANZDATA 1991-2013, 80%]
+      - [Recent US registry (>300 women), 45%]
+    blanks: [[0, 1], [2, 1]]
+    src: { page: 366, quote: "88% of births were preterm among patients treated with dialysis" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L11.089
+    kind: card
+    topic: dialysis-outcomes
+    front: Why must the era of the data be considered when quoting preterm rates on dialysis?
+    back: Preterm rates have changed over time (88% in older series versus 45% in a recent US registry).
+    src: { page: 366, quote: "it is crucial to consider the era of the source data when considering the incidence of preterm delivery" }
+    status: unverified
+  - id: neph.L11.090
+    kind: enumerate
+    topic: dialysis-outcomes
+    prompt: Mention the peripartum problems of pregnant women on hemodialysis.
+    points:
+      - Cesarean section >60%
+      - More blood transfusions
+      - Longer stays (over half >6 days)
+      - Sepsis in 6% of deliveries
+    pass: 3
+    src: { page: 366, quote: "have a higher rate of cesarean section,>60%, and poorer peripartum outcomes, including a higher rate of blood transfusions" }
+    status: unverified
+  - id: neph.L11.091
+    kind: table
+    topic: dialysis-outcomes
+    title: Pregnancy outcomes on dialysis (USRDS, Shah et al)
+    columns: [Outcome, Share of pregnancies]
+    rows:
+      - [Live birth, 27%]
+      - [Spontaneous abortion, 29%]
+      - [Therapeutic abortion, 8%]
+      - [Stillbirth, 3%]
+      - [Ectopic or trophoblastic, 3%]
+      - [Unknown, One-third]
+    blanks: [[0, 1], [1, 1], [3, 1]]
+    src: { page: 366, quote: "live births occurred in 27% of pregnancies, whereas 3% of pregnancies resulted in stillbirth, 29% resulted in spontaneous abortion" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L11.092
+    kind: cloze
+    topic: dialysis-outcomes
+    text: "ANZDATA: perinatal deaths were {{c1::162}} per 1,000 births on dialysis versus {{c2::9}} per 1,000 without kidney replacement therapy."
+    src: { page: 367, quote: "births) than in the nondialysis cohort defined by women who did not receive any kidney replacement therapy (9 per 1,000 births)" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L11.093
+    kind: card
+    topic: dialysis-outcomes
+    front: How much higher is the risk of birth weight under 2,500 g for preterm babies of mothers on dialysis?
+    back: 11-fold.
+    src: { page: 367, quote: "including an 11-fold higher risk of birth weight lower than 2,500 gm" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L11.094
+    kind: enumerate
+    topic: dialysis-outcomes
+    prompt: Who forms the team caring for a pregnant woman on maintenance dialysis?
+    points:
+      - Obstetrician
+      - Nephrologist
+      - Dietitian
+      - Maternal-fetal medicine physician
+    pass: 4
+    src: { page: 367, quote: "A multidisciplinary team consisting of the obstetrician, the nephrologist, a dietitian, and a maternal-fetal medicine physician" }
+    status: unverified
+  # ---------- p367-370: contraception on dialysis ----------
+  - id: neph.L11.095
+    kind: card
+    topic: dialysis-contraception
+    front: What should preconception counseling encourage in a woman on dialysis who wants a pregnancy?
+    back: Kidney transplantation, because reproductive function improves and pregnancy after transplant has fewer maternal and fetal complications.
+    src: { page: 367, quote: "Kidney transplantation should be encouraged, as reproductive function improves after kidney transplantation" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.096
+    kind: card
+    topic: dialysis-contraception
+    front: Why can't women on dialysis rely on natural family planning?
+    back: Their cycles are irregular.
+    src: { page: 367, quote: "Irregular menstrual cycles in this population make it difficult to rely solely on natural family planning methods" }
+    status: unverified
+  - id: neph.L11.097
+    kind: cloze
+    topic: dialysis-contraception
+    text: "Only {{c1::46%}} of US nephrologists counseled women about contraception, and contraceptive use on dialysis was only {{c2::5.3%}}."
+    src: { page: 368, quote: "only 46% of nephrologists or their staff members counseled childbearing women about contraception" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L11.098
+    kind: card
+    topic: dialysis-contraception
+    front: In which dialysis patients should combined estrogen-progestin contraceptives be used with caution, and why?
+    back: Uncontrolled hypertension, or lupus with positive antiphospholipid antibodies, because estrogen raises cardiovascular and thrombotic risk.
+    src: { page: 368, quote: "receiving dialysis with uncontrolled hypertension or systemic lupus with positive antiphospholipid antibodies" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.099
+    kind: card
+    topic: dialysis-contraception
+    front: What are the benefits and risks of combined hormonal contraceptives?
+    back: Benefits are protection against ovarian and endometrial cancer; risks are hypertension, cervical and breast cancer, and ischemic stroke.
+    src: { page: 368, quote: "combined hormonal contraceptives are associated with an increased risk of hypertension, cervical cancer, breast cancer, and ischemic stroke" }
+    status: unverified
+  - id: neph.L11.100
+    kind: card
+    topic: dialysis-contraception
+    front: Why may drospirenone be a problem in kidney failure?
+    back: This fourth-generation progestin has anti-mineralocorticoid activity and may raise potassium.
+    src: { page: 369, quote: "drospirenone, may theoretically increase potassium levels because of its anti- mineralocorticoid activity" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.101
+    kind: card
+    topic: dialysis-contraception
+    front: Which progestin-only method raised thrombotic risk in a meta-analysis, and which did not?
+    back: Progestin-only injections raised it (RR 2.67); progestin-only pills and IUDs did not.
+    src: { page: 369, quote: "the thrombotic risk was higher in women using progestin-only injections than non-users (relative ratio [RR], 2.67" }
+    status: unverified
+  - id: neph.L11.102
+    kind: card
+    topic: dialysis-contraception
+    front: What long-term risk is linked to depot medroxyprogesterone acetate?
+    back: Bone mass loss and osteoporosis.
+    src: { page: 369, quote: "depot medroxyprogesterone acetate, has been associated with bone mass loss and osteoporosis" }
+    status: unverified
+  - id: neph.L11.103
+    kind: card
+    topic: dialysis-contraception
+    front: What is the preferred contraception for women on dialysis (text, p369), and why?
+    back: The intrauterine device, because of low failure rates and no added risk of hypertension, thrombosis or cardiovascular events.
+    src: { page: 369, quote: "Intrauterine devices remain the preferred method of contraception because of low failure rates" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.104
+    kind: card
+    topic: dialysis-contraception
+    front: Why are barrier methods not recommended alone on dialysis?
+    back: Their failure rate is high; the male condom is the only method that lowers sexually transmitted disease risk, so use it with another method.
+    src: { page: 369, quote: "Barrier methods, which include condoms, diaphragms, cervical caps, and sponges, are nonhormonal contraceptives and not recommended for use because of their high failure rate" }
+    status: unverified
+  - id: neph.L11.105
+    kind: table
+    topic: dialysis-contraception
+    title: "Fig 2: contraception in women on maintenance hemodialysis"
+    columns: [Method, Failure rate (%), Kidney-failure point]
+    rows:
+      - [Sterilization, 0.15-0.5, Higher hemorrhage and infection risk]
+      - [Intrauterine device, "<0.1", "Avoid with urinary malformations, pyelonephritis or peritoneal dialysis"]
+      - [Progesterone injection, "0.2", Spotting from dialysis anticoagulation; WHO advises against with antiphospholipid antibodies]
+      - [Estrogen/progesterone combination, "0.3", "Contraindicated with APS, rejection, uncontrolled HTN, diabetic nephropathy"]
+      - [Progesterone-only pill, "0.3", WHO advises against with lupus and antiphospholipid antibodies]
+      - [Barrier methods, "Male condom 2, female 5", Never alone]
+    blanks: [[1, 1], [1, 2], [2, 2], [3, 2]]
+    src: { page: 370, quote: "Figure 2. Contraception options for women receiving maintenance dialysis." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.106
+    kind: mcq
+    topic: dialysis-contraception
+    stem: "A 26-year-old on CAPD for lupus nephritis has positive antiphospholipid antibodies and asks for contraception. Which option is least suitable per Fig 2?"
+    options:
+      - Combined estrogen-progestin pill
+      - Male condom combined with another method
+      - Sterilization if she wants no more children
+      - Counseling about transplantation before any planned pregnancy
+    answer: 0
+    why:
+      - "Correct: estrogen combinations are contraindicated with antiphospholipid syndrome because of thrombotic risk."
+      - Condoms are fine if paired with another method.
+      - Sterilization is permanent but allowed for those who want no more children.
+      - Transplant counseling is recommended for all.
+    src: { page: 370, quote: "Figure 2. Contraception options for women receiving maintenance dialysis." }
+    status: unverified
+  # ---------- p371-374: prenatal care, anticoagulation, medications on dialysis ----------
+  - id: neph.L11.107
+    kind: card
+    topic: dialysis-care
+    front: How long should lupus nephritis be inactive before conception?
+    back: At least 6 months.
+    src: { page: 371, quote: "postpone conception until the disease is inactive for at least 6 months before conception" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: neph.L11.108
+    kind: card
+    topic: dialysis-care
+    front: When is low-dose aspirin started in pregnant women on dialysis, and why?
+    back: By the end of the first trimester (Fig 4 says 12 weeks), to reduce the risk of preeclampsia.
+    src: { page: 371, quote: "Low-dose aspirin should be started by the end of the first trimester for all pregnant women receiving maintenance dialysis to reduce the risk of preeclampsia." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.109
+    kind: cloze
+    topic: dialysis-care
+    text: "BP goal in pregnancy on dialysis is {{c1::<140/90 mm Hg}}. Folic acid is removed by hemodialysis, so the dose is raised to {{c2::5 mg}} after conception."
+    src: { page: 371, quote: "Folic acid is removed with hemodialysis, and the dose should be increased to 5mg following conception." }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: neph.L11.110
+    kind: enumerate
+    topic: dialysis-care
+    prompt: Mention the risk factors that make anticoagulation recommended in pregnant women with kidney failure.
+    points:
+      - Nephrotic-range proteinuria
+      - Hypoalbuminemia (albumin < 2)
+      - Antiphospholipid syndrome
+      - Previous thrombosis
+    pass: 3
+    src: { page: 371, quote: "including nephrotic range proteinuria, hypoalbuminemia with serum albumin<2mg/dL, positive antiphospholipid syndrome, and previous history of thrombosis" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.111
+    kind: card
+    topic: dialysis-care
+    front: Which anticoagulants are recommended in pregnancy, and for how long?
+    back: Unfractionated or low-molecular-weight heparin, during pregnancy and for 6 weeks postpartum.
+    src: { page: 371, quote: "Current guidelines recommend unfractionated heparin or low molecular weight heparin for anticoagulation during pregnancy and 6 weeks postpartum." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.112
+    kind: card
+    topic: dialysis-care
+    front: Which extra factors may justify anticoagulation in pregnancy with kidney disease?
+    back: Immobility and obesity, and high-thrombosis diseases such as membranous nephropathy and vasculitis.
+    src: { page: 371, quote: "Anticoagulation can be considered for patients with additional risk factors such as immobility and obesity" }
+    status: unverified
+  - id: neph.L11.113
+    kind: cloze
+    topic: dialysis-care
+    text: "Teratogenic drugs are stopped at least {{c1::6 weeks}} before planned conception, or {{c2::immediately}} when an unplanned pregnancy is diagnosed."
+    src: { page: 371, quote: "Teratogenic medications should be discontinued at least 6 weeks before planned conception." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.114
+    kind: card
+    topic: dialysis-care
+    front: What applies to a woman who has had more than 10 g cumulative cyclophosphamide?
+    back: Early assessment for infertility, and single embryo transfer if assisted reproduction is used.
+    src: { page: 372, quote: "past should be assessed early for infertility, and, if assisted reproduction techniques are sought, single embryo transfer should be pursued" }
+    status: unverified
+  - id: neph.L11.115
+    kind: card
+    topic: dialysis-care
+    front: What is the first-line replacement for mycophenolate in pregnancy?
+    back: Azathioprine; calcineurin inhibitors are the other safe option.
+    src: { page: 372, quote: "Azathioprine is the first-line agent to replace mycophenolate during pregnancy." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.116
+    kind: cloze
+    topic: dialysis-care
+    text: "Unmonitored tacrolimus in pregnancy is linked to infection ({{c1::22%}}), hypertension ({{c2::56%}}), preeclampsia (32%) and low birth weight ({{c3::46%}})."
+    src: { page: 372, quote: "can lead to complications including infection (22%), hypertension (56%), preeclampsia (32%), and low birth weight infants (46%)" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L11.117
+    kind: card
+    topic: dialysis-care
+    front: What do manufacturers advise for biologics (infliximab, etanercept, adalimumab, rituximab) before pregnancy?
+    back: Stop them before conception, because evidence in pregnancy is limited.
+    src: { page: 372, quote: "manufacturers recommend discontinuation of them before conception" }
+    status: unverified
+  - id: neph.L11.118
+    kind: card
+    topic: dialysis-care
+    front: When should ACE inhibitors and ARBs be stopped in a woman planning pregnancy?
+    back: 6 weeks before conception, or at the diagnosis of pregnancy, because of their high teratogenic risk.
+    src: { page: 372, quote: "should be discontinued 6 weeks before conception or at the diagnosis of pregnancy because of their high risk for teratogenicity" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.119
+    kind: table
+    topic: dialysis-care
+    title: ACEi/ARB exposure in pregnancy
+    columns: [Exposure, Effect]
+    rows:
+      - [First trimester, "Fetal malformations (OR 1.81), cardiovascular malformations (OR 2.50), stillbirth (OR 1.75)"]
+      - [Second and third trimesters, Oligohydramnios and fetal and neonatal death]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 373, quote: "Second trimester and third-trimester use of ACEi/ARB is associated with complications, such as oligohydramnios and fetal and neonatal death." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.120
+    kind: card
+    topic: dialysis-care
+    front: What does the book say about diuretics and SGLT2 inhibitors in pregnancy with kidney failure?
+    back: Diuretics can be used. SGLT2 inhibitors have no human data, may affect fetal kidney development in animals, and are stopped 6 weeks before conception.
+    src: { page: 373, quote: "Diuretics can be used during pregnancy in women with kidney failure." }
+    status: unverified
+  - id: neph.L11.121
+    kind: card
+    topic: dialysis-care
+    front: What is the status of statins in pregnancy per the book?
+    back: Long contraindicated (teratogenic in animals, more with lipophilic atorvastatin than hydrophilic pravastatin), but in July 2021 the FDA asked to remove the contraindication; human data show no major malformations, though one study found more low birth weight and preterm birth.
+    src: { page: 373, quote: "In July 2021, however, the United States Food and Drug Administration requested to remove this recommendation" }
+    status: unverified
+  - id: neph.L11.122
+    kind: card
+    topic: dialysis-care
+    front: How is anemia managed in a pregnant woman on dialysis?
+    back: Higher doses of iron and erythropoiesis-stimulating agents to keep hemoglobin at 10-11 (g/dL), because volume expansion and fetal demand worsen anemia.
+    src: { page: 373, quote: "Increased doses of parenteral iron (oral or intravenous) and erythropoietin-stimulating agents may be needed during pregnancy" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.123
+    kind: card
+    topic: dialysis-care
+    front: Which phosphate-lowering drugs are preferred in pregnancy on dialysis?
+    back: Calcium-based binders and vitamin D analogs (calcitriol); non-calcium binders and calcimimetics have little data.
+    src: { page: 373, quote: "calcium-based binders and vitamin D analogs are preferred over non-calcium-based phosphate binders or calcimimetics" }
+    status: unverified
+  - id: neph.L11.124
+    kind: table
+    topic: dialysis-care
+    title: "Fig 3: medication safety during pregnancy on dialysis"
+    columns: [Group, Safe, Unsafe]
+    rows:
+      - [Antihypertensives, "Labetalol, nifedipine/amlodipine, methyldopa, hydralazine", "RAS inhibitors, atenolol, spironolactone"]
+      - [Immunosuppression, "Glucocorticoids, calcineurin inhibitors, hydroxychloroquine, azathioprine", "Mycophenolate, mTOR inhibitors, cyclophosphamide"]
+      - [Anemia, "Erythropoietin, iron", "HIF prolyl hydroxylase inhibitors (roxadustat)"]
+      - [Mineral bone disease, "Calcium-based binders, calcitriol", "Sevelamer, lanthanum (little data), cinacalcet"]
+      - [Anticoagulants, "Heparin, LMWH", "Warfarin, direct anticoagulants"]
+      - [Other, "Double water-soluble vitamins, folic acid, low-dose aspirin", "NSAIDs, statins"]
+    blanks: [[0, 2], [1, 2], [2, 2], [4, 2], [5, 1]]
+    src: { page: 374, quote: "Figure 3: Safety of medications during pregnancy among patients receiving maintenance dialysis." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.125
+    kind: mcq
+    topic: dialysis-care
+    stem: "A 30-year-old on hemodialysis for lupus nephritis is 7 weeks pregnant. She takes mycophenolate, lisinopril, warfarin, sevelamer and atorvastatin. Which drug is on the book's safe list?"
+    options:
+      - Mycophenolate
+      - Lisinopril
+      - Warfarin
+      - Hydroxychloroquine
+      - Sevelamer
+    answer: 3
+    why:
+      - Teratogenic; swap to azathioprine.
+      - RAS inhibitors are teratogenic; switch to labetalol, nifedipine, methyldopa or hydralazine.
+      - Warfarin is unsafe; use heparin or LMWH.
+      - "Correct: hydroxychloroquine is listed as safe immunosuppression in Fig 3."
+      - Non-calcium binders have little pregnancy data; calcium-based binders are preferred.
+    src: { page: 374, quote: "Figure 3: Safety of medications during pregnancy among patients receiving maintenance dialysis." }
+    status: unverified
+  # ---------- p375-378: hypertension, preeclampsia on dialysis, monitoring ----------
+  - id: neph.L11.126
+    kind: table
+    topic: dialysis-htn
+    title: ACOG categories of hypertension in pregnancy
+    columns: [Category, Definition]
+    rows:
+      - [Chronic hypertension, Hypertension before 20 weeks or persisting >12 weeks postpartum]
+      - [Gestational hypertension, "New BP ≥140/90 after 20 weeks, no proteinuria or end-organ damage"]
+      - [Preeclampsia, "New hypertension after 20 weeks with proteinuria ≥300 mg/d or end-organ dysfunction"]
+      - [Superimposed preeclampsia, New proteinuria or end-organ dysfunction with worsening hypertension after 20 weeks in chronic hypertension]
+    blanks: [[0, 1], [1, 1], [3, 1]]
+    src: { page: 375, quote: "classified hypertension in pregnancy into 4 categories: chronic hypertension, gestational hypertension, preeclampsia, and preeclampsia superimposed on chronic hypertension" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.127
+    kind: card
+    topic: dialysis-htn
+    front: Why is preeclampsia hard to diagnose in women on dialysis, and how is it diagnosed?
+    back: Anuria makes the protein creatinine ratio useless. Use new or worsening hypertension after 20 weeks plus symptoms (headache, nausea, vomiting, epigastric pain, visual change) and labs (hemolysis, low platelets, liver dysfunction, high uric acid).
+    src: { page: 375, quote: "because of limited utility of urine protein creatinine ratio with anuria" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.128
+    kind: cloze
+    topic: dialysis-htn
+    text: "Preeclampsia on dialysis carries a {{c1::1.7-3.6}}-fold rise in cardiovascular mortality."
+    src: { page: 376, quote: "is associated with a 1.7 to 3.6-fold increase in risk for cardiovascular mortality" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L11.129
+    kind: card
+    topic: dialysis-htn
+    front: What are the kidney findings of preeclampsia in the non-dialysis population?
+    back: Glomerular endotheliosis and podocyturia, leading to kidney dysfunction and reduced nephron mass.
+    src: { page: 376, quote: "kidney findings include glomerular endotheliosis and podocyturia leading to kidney dysfunction and reduced nephron mass" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.130
+    kind: enumerate
+    topic: dialysis-htn
+    prompt: Mention the proposed mechanisms of preeclampsia.
+    points:
+      - Imbalance of angiogenic factors
+      - Increased renin-angiotensin-aldosterone activity
+      - Oxidative stress
+      - Immunologic dysfunction
+      - Impaired amino acid metabolism
+    pass: 3
+    src: { page: 376, quote: "An imbalance of angiogenic factors, increased renin-angiotensin-aldosterone system" }
+    status: unverified
+  - id: neph.L11.131
+    kind: order
+    topic: dialysis-htn
+    prompt: Order the angiogenic pathway to endothelial dysfunction in preeclampsia.
+    steps:
+      - Abnormal placental perfusion and failed spiral artery remodeling
+      - The placenta secretes sFlt-1
+      - sFlt-1 binds circulating PlGF and VEGF
+      - PlGF and VEGF can no longer maintain vascular homeostasis
+      - Endothelial dysfunction
+    src: { page: 376, quote: "the placenta secretes sFLT1, which binds to circulating P1GF and vascular endothelial growth factor, inhibiting their action and leading to endothelial dysfunction" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.132
+    kind: cloze
+    topic: dialysis-htn
+    text: "An sFlt-1/PlGF ratio of {{c1::38 or less}} has a negative predictive value of {{c2::99.3%}} for ruling out preeclampsia within {{c3::1 week}}."
+    src: { page: 376, quote: "SFlt-1/P1GF ratio of 38 or less has a high negative predictive value of 99.3%" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: neph.L11.133
+    kind: card
+    topic: dialysis-htn
+    front: What did the CHIPS trial (tight diastolic 85 vs less tight 100 mm Hg) show?
+    back: Tight control reduced severe hypertension (>160/110) but did not significantly change adverse pregnancy outcomes.
+    src: { page: 377, quote: "that the tight BP group had less incidence of severe hypertension" }
+    status: unverified
+  - id: neph.L11.134
+    kind: card
+    topic: dialysis-htn
+    front: What did the CHAP trial show, and what BP goal does the book recommend on dialysis?
+    back: BP <140/90 mm Hg lowered adverse pregnancy outcomes (30.2% vs 37.0%); the goal on maintenance dialysis is <140/90 mm Hg.
+    src: { page: 377, quote: "Achieving a BP of<140/90mm Hg was associated with lower adverse pregnancy outcomes (30.2%) in comparison with the control group (37.0%)" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.135
+    kind: table
+    topic: dialysis-htn
+    title: Timing of delivery in preeclampsia
+    columns: [Situation, Delivery]
+    rows:
+      - [No severe features, At 37 weeks or later]
+      - ["Severe features or adverse maternal/fetal conditions", Stabilize and deliver at or after 34 weeks]
+      - [Delivery before 34 weeks, Give corticosteroids for fetal lung maturity]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 377, quote: "delivery is recommended at 37 weeks or later if no severe features such as hemolysis, thrombocytopenia, or liver dysfunction are observed" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.136
+    kind: card
+    topic: dialysis-htn
+    front: How is magnesium sulfate used in preeclampsia with kidney failure?
+    back: At a lower dose, because magnesium is excreted by the kidneys; monitor clinical signs and magnesium levels.
+    src: { page: 377, quote: "As magnesium is excreted by kidneys, a lower dose is recommended forwomen with kidney failure." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.137
+    kind: cloze
+    topic: dialysis-htn
+    text: "On dialysis, only {{c1::75-80%}} of pregnancies reach the second trimester with surviving infants, and {{c2::82%}} of these are premature."
+    src: { page: 377, quote: "only 75%-80% of pregnancies reach the second trimester with surviving infants, out of which 82% are born premature" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L11.138
+    kind: card
+    topic: dialysis-htn
+    front: What are the causes of fetal morbidity in dialysis pregnancies?
+    back: Premature rupture of membranes, premature labor and cervical incompetence.
+    src: { page: 377, quote: "Fetal morbidity can be because of premature rupture of membranes, premature labor, and cervical incompetence." }
+    status: unverified
+  - id: neph.L11.139
+    kind: table
+    topic: dialysis-htn
+    title: Monitoring a dialysis pregnancy
+    columns: [What, How or when]
+    rows:
+      - [Cervical incompetence, Screen at 18-20 weeks]
+      - [Preeclampsia, "BP, CBC and liver function twice a month"]
+      - [Uteroplacental insufficiency, Minimize BP swings during dialysis]
+      - [Fetus, Fetal anomaly screening (high-risk pregnancy)]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 378, quote: "The incidence of cervical incompetence is high in women treated with dialysis, and screening is suggested between 18 and 20 weeks." }
+    status: unverified
+  # ---------- p378-380: hemodialysis prescription ----------
+  - id: neph.L11.140
+    kind: cloze
+    topic: hd-rx
+    text: "Intensive hemodialysis in pregnancy: up to {{c1::36}} hours a week, targeting predialysis BUN {{c2::<50 mg/dL}}, usually {{c3::4-6 sessions of 4-6 hours}} a week."
+    src: { page: 378, quote: "Up to 36 hours of dialysis weekly is recommended for women, targeting predialysis serum blood urea nitrogen of<50mg/dL" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: neph.L11.141
+    kind: card
+    topic: hd-rx
+    front: What did Okundaye et al find about dialysis hours in pregnancy?
+    back: More than 20 hours a week gave longer gestation and higher birth weight.
+    src: { page: 378, quote: "infants born to women who had>20 hours/wk of dialysis had prolonged gestational age and a higher birth weight" }
+    status: unverified
+  - id: neph.L11.142
+    kind: enumerate
+    topic: hd-rx
+    prompt: Mention the outcomes improved by intensive hemodialysis in pregnancy.
+    points:
+      - Less prematurity
+      - Higher live birth rate
+      - Higher birth weight
+      - Lower neonatal mortality
+    pass: 3
+    src: { page: 378, quote: "Intensive hemodialysis is associated with improved pregnancy outcomes with a lower incidence of prematurity, a higher incidence of live birth rate" }
+    status: unverified
+  - id: neph.L11.143
+    kind: card
+    topic: hd-rx
+    front: Why are biocompatible single-use dialyzers recommended in pregnancy?
+    back: To avoid fetal toxicity from reuse agents such as formaldehyde and ethylene oxide.
+    src: { page: 378, quote: "Biocompatible and single-use dialyzers are recommended to prevent fetal toxicity secondary to reuse agents such as formaldehyde and ethylene oxide." }
+    status: unverified
+  - id: neph.L11.144
+    kind: card
+    topic: hd-rx
+    front: Why does a pregnant woman need a low-bicarbonate dialysate, and what level?
+    back: Pregnancy causes respiratory alkalosis with compensatory metabolic acidosis, so standard bicarbonate risks alkalemia; use 25-30 mmol/L.
+    src: { page: 378, quote: "dialyzing a pregnant woman would mandate low bicarbonate dialysate to avoid alkalemia" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.145
+    kind: table
+    topic: hd-rx
+    title: "Fig 4: hemodialysis prescription in pregnancy"
+    columns: [Element, Prescription]
+    rows:
+      - [Frequency, 4-6 sessions of 4-6 hours a week]
+      - [Target, Predialysis blood urea <50 mg/dL]
+      - [Dialysate potassium, 3-3.5 mEq/L]
+      - [Dialysate bicarbonate, 25-30 mmol/L]
+      - [Dialysate calcium, 2.5 mEq/L]
+      - [Dialyzer, Biocompatible and single use]
+      - [Dry weight, Increase by up to 0.5 kg/week in 2nd and 3rd trimesters]
+      - [Calories, 35 kcal/kg/day]
+      - [Protein, 1.8 g/kg/day (text 1.5-1.8)]
+      - [Low-dose aspirin, Start at 12 weeks]
+    blanks: [[1, 1], [2, 1], [3, 1], [4, 1], [7, 1], [8, 1]]
+    src: { page: 380, quote: "Figure 4: Hemodialysis during pregnancy" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: neph.L11.146
+    kind: card
+    topic: hd-rx
+    front: Why does dialysate in pregnancy use calcium 2.5 mEq/L and potassium 3-3.5 mEq/L?
+    back: Intensive dialysis risks maternal hypocalcemia, hypokalemia and hypophosphatemia; monitor calcium, phosphorus and other electrolytes.
+    src: { page: 379, quote: "it is recommended to use dialysate with a calcium concentration of 2.5 mEq/L and dialysate potassium between 3 and 3.5 mEq/L" }
+    status: unverified
+  - id: neph.L11.147
+    kind: card
+    topic: hd-rx
+    front: How is the dry weight adjusted during pregnancy on hemodialysis (text, p379)?
+    back: If euvolemic, raise it by 400 g a week, to match fetal growth after the first trimester (0.3-0.5 kg a week).
+    src: { page: 379, quote: "the dry weight can be increased by 400 gm per week to account for the growing fetus weight" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.148
+    kind: card
+    topic: hd-rx
+    front: What is used for excessive weight gain or refractory fluid overload in pregnancy on hemodialysis?
+    back: Slow continuous ultrafiltration.
+    src: { page: 379, quote: "Slow continuous ultrafiltration can be considered for excessive weight gain or refractory fluid overload states during pregnancy." }
+    status: unverified
+  - id: neph.L11.149
+    kind: cloze
+    topic: hd-rx
+    text: "Diet on hemodialysis in pregnancy: calories {{c1::35 kcal/kg/day}}, protein {{c2::1.5-1.8 g/kg/day}}, and continue {{c3::water-soluble vitamins}}."
+    src: { page: 379, quote: "The suggested calorie intake during pregnancy in women receiving hemodialysis is 35kcal/kg/day. Protein intake of 1.5-1.8 gm/kg/day is recommended" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L11.150
+    kind: card
+    topic: hd-rx
+    front: Describe nocturnal hemodialysis in pregnancy.
+    back: Safe; sessions of 7-8 hours, 5-7 days a week. It lowers peripheral resistance, so fewer BP swings and less volume overload, but may need dialysate phosphate to avoid hypophosphatemia.
+    src: { page: 379, quote: "Nocturnal hemodialysis prescriptions during pregnancy usually require 7-8-hour sessions, 5-7 days a week." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.151
+    kind: mcq
+    topic: hd-rx
+    stem: "A 28-year-old on thrice-weekly hemodialysis (4 h) is 10 weeks pregnant. Which prescription change is correct?"
+    options:
+      - Keep 12 h/week and use dialysate bicarbonate 38 mmol/L
+      - Move to 4-6 sessions of 4-6 h a week targeting predialysis BUN <50 mg/dL
+      - Reuse dialyzers to save cost
+      - Lower dialysate potassium to 1 mEq/L
+      - Fix the dry weight for the whole pregnancy
+    answer: 1
+    why:
+      - Too little dialysis, and high bicarbonate risks alkalemia; use 25-30 mmol/L.
+      - "Correct: intensive dialysis improves fetal outcomes."
+      - Single-use biocompatible dialyzers avoid reuse agents like formaldehyde.
+      - Daily dialysis risks hypokalemia; use 3-3.5 mEq/L.
+      - Dry weight rises about 400-500 g a week after the first trimester.
+    src: { page: 378, quote: "4-6 hours of dialysis per week are usually needed" }
+    status: unverified
+  # ---------- p380-382: peritoneal dialysis ----------
+  - id: neph.L11.152
+    kind: enumerate
+    topic: pd-rx
+    prompt: Mention the advantages of peritoneal dialysis in pregnancy.
+    points:
+      - Controlled ultrafiltration
+      - Better hemodynamic stability
+      - Less anemia
+      - Better BP control
+      - No anticoagulation
+    pass: 4
+    src: { page: 380, quote: "The advantages of peritoneal dialysis during pregnancy are controlled ultrafiltration, better hemodynamic stability, a lesser incidence of anemia, better control of BP" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.153
+    kind: card
+    topic: pd-rx
+    front: Why does PD become harder as pregnancy advances?
+    back: The enlarging uterus reduces the effective peritoneal surface area, although the membrane keeps its clearance and ultrafiltration capacity.
+    src: { page: 380, quote: "With the increasing size of the uterus, effective peritoneal exchanges may not take place because of a reduction in effective peritoneal surface area" }
+    status: unverified
+  - id: neph.L11.154
+    kind: card
+    topic: pd-rx
+    front: What residual urine output predicts better outcomes for pregnancy on PD?
+    back: More than 500 mL a day.
+    src: { page: 381, quote: "Women with residual urine output of>500mL have been shown to have better fetal and maternal outcomes." }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L11.155
+    kind: enumerate
+    topic: pd-rx
+    prompt: Mention the peritoneal dialysis prescription changes in pregnancy (Fig 5).
+    points:
+      - Smaller dwell volumes with more frequent exchanges (cycler from the second trimester)
+      - Manual daytime plus cycler overnight exchanges in the third trimester
+      - Tidal PD leaving 15% of the volume in to cut drain pain and reflux
+      - Minimize hypertonic 4.25% dextrose
+      - Lateral decubitus position while draining
+    pass: 4
+    src: { page: 381, quote: "Intensify the prescription by decreasing the dwell volume and increasing the frequency of exchanges." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.156
+    kind: cloze
+    topic: pd-rx
+    text: "Tidal PD in pregnancy leaves {{c1::15%}} of the dwell volume in while draining, to reduce {{c2::drain pain and gastroesophageal reflux}}."
+    src: { page: 381, quote: "Use tidal peritoneal dialysis, which leaves 15% of the dwell volume in situ while draining, to reduce drain pain and gastroesophageal reflux." }
+    status: unverified
+  - id: neph.L11.157
+    kind: cloze
+    topic: pd-rx
+    text: "PD adequacy target in pregnancy: Kt/V {{c1::2.2-2.4}}, usually about {{c2::20 liters}} of dialysate a day; calories {{c3::25 kcal/kg/day}}."
+    src: { page: 381, quote: "a Kt/V between 2.2 and 2.4 is recommended, which usually requires a daily dialysate volume of about 20 liters" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L11.158
+    kind: enumerate
+    topic: pd-rx
+    prompt: Mention the complications of peritoneal dialysis during pregnancy.
+    points:
+      - Peritonitis and exit-site infection
+      - Catheter displacement
+      - Hemoperitoneum
+      - Drain pain and gastroesophageal reflux
+      - Rarely postpartum peritonitis or uterine rupture from the catheter
+      - Polyhydramnios
+    pass: 4
+    src: { page: 381, quote: "include peritonitis, exit site infections, catheter displacement, hemoperitoneum, drain pain, gastroesophageal reflux" }
+    status: unverified
+  - id: neph.L11.159
+    kind: card
+    topic: pd-rx
+    front: How can high maternal urea cause polyhydramnios?
+    back: Urea crosses to the fetus and causes an osmotic diuresis, so the fetus makes more urine.
+    src: { page: 382, quote: "may occur if maternal urea levels are high enough to cause an osmotic diuresis in the fetus causing increased urine production by the fetus" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.160
+    kind: table
+    topic: pd-rx
+    title: Hemodialysis versus peritoneal dialysis in pregnancy
+    columns: [Point, Hemodialysis, Peritoneal dialysis]
+    rows:
+      - [Intensity, "4-6 sessions of 4-6 h, BUN <50", "Smaller dwells, more exchanges, cycler"]
+      - [Adequacy, Predialysis BUN <50 mg/dL, Kt/V 2.2-2.4 (about 20 L/day)]
+      - [Calories, 35 kcal/kg/day, 25 kcal/kg/day]
+      - [Main electrolyte watch, "Low K, Ca, phosphate", "Hypokalemia, hypophosphatemia"]
+      - [Special risks, Anticoagulation and BP swings, "Peritonitis, drain pain, reflux, polyhydramnios"]
+    blanks: [[1, 2], [2, 1], [2, 2]]
+    src: { page: 381, quote: "A suggested calorie intake of 25kcal/kg/d is recommended during pregnancy for those receiving peritoneal dialysis." }
+    status: unverified
+  # ---------- p382-385: transplant fertility, graft and pregnancy risks ----------
+  - id: neph.L11.161
+    kind: card
+    topic: tx-risk
+    front: How does a successful kidney transplant restore fertility?
+    back: The hypothalamic-pituitary-ovarian dysfunction remits; LH, FSH and prolactin fall and estrogen rises by the end of the first year, with return of menses and ovulation.
+    src: { page: 382, quote: "A successful renal transplant restores ovulation due to remission of hypothalamus- pituitary-ovarian axis dysfunction" }
+    status: unverified
+  - id: neph.L11.162
+    kind: cloze
+    topic: tx-risk
+    text: "After transplant, {{c1::20%}} of ESRD patients may have premature ovarian failure, and up to {{c2::31%}} do not regain their menses."
+    src: { page: 383, quote: "develop premature ovarian failure. As many as 31% of women with end-stage kidney disease do not regain their menses after a renal transplant" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L11.163
+    kind: card
+    topic: tx-risk
+    front: Why must every transplant recipient of childbearing age be counseled early?
+    back: Fertility returns quickly, so an unplanned pregnancy can happen and puts the mother, the child and the graft at great risk.
+    src: { page: 383, quote: "any unplanned pregnancy poses a great risk to both the mother and the child, as well as to the allograft" }
+    status: unverified
+  - id: neph.L11.164
+    kind: card
+    topic: tx-risk
+    front: Does pregnancy harm long-term allograft survival?
+    back: No, as long as baseline graft function is excellent.
+    src: { page: 383, quote: "pregnancy does not negatively impact long-term allograft function or survival as long as the baseline function of the allograft is excellent" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.165
+    kind: table
+    topic: tx-risk
+    title: Baseline graft creatinine and pregnancy outcome
+    columns: [Baseline creatinine, Outcome]
+    rows:
+      - [≤1.5 mg/dL, 90% of pregnancies successful]
+      - [">1.5 mg/dL with proteinuria >500 mg/24 h (Davison)", Strong predictors of irreversible graft loss]
+      - [1.8-2 mg/dL or higher, Graft loss more likely within 2 years of conception]
+      - [">1.9 mg/dL (Fischer)", Rapid decline in pregnancy that may progress to ESRD]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 383, quote: "For women with a serum creatinine of 1.5 mg/dl or lesser, 90% of pregnancies were reported to be successful." }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: neph.L11.166
+    kind: card
+    topic: tx-risk
+    front: Why do predamaged grafts fail faster in pregnancy?
+    back: With fewer functioning nephrons already hyperfiltering, they have no reserve for the pregnancy load.
+    src: { page: 383, quote: "Predamaged kidneys with fewer functioning nephrons already exhibiting hyperfiltration do not have sufficient reserves" }
+    status: unverified
+  - id: neph.L11.167
+    kind: cloze
+    topic: tx-risk
+    text: "Acute rejection during pregnancy occurs in {{c1::2-14.5%}}; urinary tract infection affects up to {{c2::40%}} of pregnant transplant recipients."
+    src: { page: 384, quote: "its incidence ranges from 2 to 14.5%" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L11.168
+    kind: card
+    topic: tx-risk
+    front: Why is acute rejection hard to diagnose in pregnancy, and how is it confirmed and treated?
+    back: It overlaps with UTI and with preeclampsia (worsening BP and proteinuria). Confirm with allograft biopsy before changing immunosuppression; high-dose steroids are first-line.
+    src: { page: 384, quote: "Allograft biopsy should be done to confirm acute rejection before modifying immunosuppression. High-dose steroids have been successful" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.169
+    kind: cloze
+    topic: tx-risk
+    text: "The pregnancy rate in kidney transplant recipients is {{c1::5.5-8.3}} per 1,000 women."
+    src: { page: 384, quote: "In kidney transplant patients, the estimated pregnancy rate ranges from 5.5 to 8.3 per 1000 women." }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L11.170
+    kind: cloze
+    topic: tx-risk
+    text: "Shah meta-analysis in transplant recipients: preeclampsia {{c1::21.5%}}, cesarean {{c2::62.6%}}, preterm birth (<37 weeks) {{c3::43.1%}}."
+    src: { page: 384, quote: "higher rates of preeclampsia in 21.5% (based on geographical distribution), a higher cesarean rate in 62.6%, preterm births (<37 weeks of gestation) in 43.1%" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L11.171
+    kind: table
+    topic: tx-risk
+    title: "Table 1: adverse pregnancy outcomes in kidney transplant recipients"
+    columns: [Outcome, Rate]
+    rows:
+      - [Live birth, 71-90%]
+      - [Spontaneous abortion, 12-25%]
+      - [Preterm birth, 21-60%]
+      - [Fetal growth retardation, 19-52%]
+      - [NICU admission, 35%]
+      - [Pregnancy-induced hypertension, 24-65%]
+      - [Preeclampsia, 22-45%]
+      - [Graft rejection, 1-5%]
+      - [Graft loss, 5-20%]
+      - [Cesarean delivery, 43-62%]
+      - [Urinary obstruction, 10%]
+    blanks: [[0, 1], [6, 1], [7, 1], [8, 1], [9, 1]]
+    src: { page: 385, quote: "Table 1: Adverse outcomes of pregnancy in kidney transplant recipients" }
+    status: unverified
+    tags: [numbers]
+  # ---------- p385-386: planning ----------
+  - id: neph.L11.172
+    kind: card
+    topic: tx-plan
+    front: Does the preconception immunosuppressive regimen affect graft survival or pregnancy outcome?
+    back: No, although stopping MMF/MPA or mTOR inhibitors was thought to raise the risk of acute rejection.
+    src: { page: 385, quote: "Preconception immunosuppressive types have no impact on allograft survival, and on obstetric and perinatal outcomes" }
+    status: unverified
+  - id: neph.L11.173
+    kind: enumerate
+    topic: tx-plan
+    prompt: "Table 2: mention the criteria for a safe pregnancy in a kidney transplant recipient."
+    points:
+      - At least 1 year after transplantation
+      - Stable graft, creatinine <2.0 (preferably <1.5) mg/dL
+      - No acute rejection in the past 6 months
+      - Stable minimal pregnancy-safe immunosuppression (cyclosporine or tacrolimus, azathioprine, steroids)
+      - Normotensive or controlled on one drug
+      - Proteinuria minimal (<300 mg/24 h) or none
+      - Normal graft ultrasound
+    pass: 5
+    src: { page: 386, quote: "Table 2: Suggested criteria for safe pregnancy in kidney transplant recipients" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.174
+    kind: cloze
+    topic: tx-plan
+    text: "Safe transplant pregnancy: creatinine {{c1::<2.0 mg/dL}} (preferably <1.5), no rejection for {{c2::6 months}}, and an eGFR of {{c3::40}} mL/min/1.73 m² is the lowest range for planning."
+    src: { page: 386, quote: "Table 2: Suggested criteria for safe pregnancy in kidney transplant recipients" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L11.175
+    kind: card
+    topic: tx-plan
+    front: How soon can fertility return after a kidney transplant, and how long should pregnancy be deferred?
+    back: Fertility returns within 1-6 months; defer pregnancy at least 1 year after transplant and use contraception until then.
+    src: { page: 386, quote: "fertility can be restored within 1-6 months following a kidney transplant" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.176
+    kind: card
+    topic: tx-plan
+    front: Besides contraception, what else belongs in pretransplant reproductive counseling?
+    back: Psychological concerns, genetic counseling for hereditary kidney disease, and the long-term outlook for the patient and the graft.
+    src: { page: 386, quote: "provide genetic counseling to any recipient with hereditary kidney disease" }
+    status: unverified
+  - id: neph.L11.177
+    kind: mcq
+    topic: tx-plan
+    stem: "A 30-year-old, 8 months after a living-donor transplant, wants to conceive. Creatinine 1.3 mg/dL, no rejection, BP controlled on amlodipine, proteinuria 150 mg/day, on tacrolimus, MMF and prednisolone. What should she be told?"
+    options:
+      - She meets all criteria and can conceive now
+      - Wait until at least 1 year post-transplant and switch MMF to azathioprine first
+      - Pregnancy is contraindicated after any transplant
+      - Stop all immunosuppression before conception
+      - She must first lower creatinine below 1.0 mg/dL
+    answer: 1
+    why:
+      - She is under 1 year post-transplant and on MMF, which is teratogenic.
+      - "Correct: defer to at least 1 year, withdraw MMF before trying, and keep contraception for at least 3 months after withdrawal."
+      - Pregnancy is possible when the criteria are met.
+      - Stopping all immunosuppression risks rejection; switch to pregnancy-safe drugs.
+      - "The target is <2.0, preferably <1.5 mg/dL; 1.3 is fine."
+    src: { page: 386, quote: "patients are advised to defer pregnancy to a minimum of 1-year posttransplant, and contraception should be practiced until then" }
+    status: unverified
+  # ---------- p387-390: contraception after transplant ----------
+  - id: neph.L11.178
+    kind: card
+    topic: tx-contraception
+    front: What are the pros and cons of barrier contraception after transplant?
+    back: Safe, easy and free of drug interactions, but efficacy depends on compliance; cervical caps doubled UTI in graft recipients.
+    src: { page: 387, quote: "cervical caps were associated with a twofold increase in urinary tract infections in graft recipients" }
+    status: unverified
+  - id: neph.L11.179
+    kind: card
+    topic: tx-contraception
+    front: Why are IUDs a good choice after kidney transplant?
+    back: Copper and levonorgestrel IUDs are safe, effective, reversible, have no interaction with immunosuppressants and no added pelvic infection risk.
+    src: { page: 387, quote: "intrauterine devices, both copper and levonorgestrel, represent a safer and more effective choice for kidney transplant women" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.180
+    kind: card
+    topic: tx-contraception
+    front: Why must combined hormonal contraceptives be watched in transplant recipients on CNIs?
+    back: They are metabolized by CYP3A4, the same pathway as calcineurin inhibitors, and they can cause hypertension, migraine and thromboembolism.
+    src: { page: 387, quote: "As combined hormone contraceptives are metabolized primarily by cytochrome P 450 3A4, careful attention to their interactions with calcineurin inhibitors" }
+    status: unverified
+  - id: neph.L11.181
+    kind: card
+    topic: tx-contraception
+    front: Why might a patch or vaginal ring interact less with CNIs than the combined pill?
+    back: They skip first-pass liver metabolism, so they interfere less with CYP3A4.
+    src: { page: 388, quote: "transdermal and vaginal preparations do not undergo first-pass liver metabolism" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.182
+    kind: card
+    topic: tx-contraception
+    front: What is the two-way interaction between hormonal contraceptives and CNIs?
+    back: Combined and progestin-only pills inhibit CYP3A4 and raise CNI (especially cyclosporine) levels; CNIs (especially tacrolimus) induce CYP3A4 and may lower contraceptive efficacy.
+    src: { page: 388, quote: "Combined oral contraceptive and progestin-only contraceptives have an inhibitory effect on P 450 3A4, thus increasing the concentration of CNI" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.183
+    kind: card
+    topic: tx-contraception
+    front: What is the advantage of the vaginal ring?
+    back: It contains less ethinylestradiol than combined pills, so fewer adverse reactions, and it can control the cycle.
+    src: { page: 388, quote: "advantage of containing a lower concentration of ethinylestradiol in comparison to combined hormonal contraceptives" }
+    status: unverified
+  - id: neph.L11.184
+    kind: table
+    topic: tx-contraception
+    title: Progestin-only methods after transplant
+    columns: [Method, Key point]
+    rows:
+      - [Progestin-only pill, "Avoids estrogen effects, but weight gain and needs CNI monitoring"]
+      - [Depot medroxyprogesterone (3-monthly), "Safe, no immunosuppressant interaction; main worry is thromboembolism"]
+      - [Etonogestrel implant, ">99% effective for up to 3 years; may cause irregular menses"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 389, quote: "Etonogestrel implant is safe in kidney recipients and is highly effective (effectiveness of >99%) with long-lasting protection for up to 3 years." }
+    status: unverified
+  - id: neph.L11.185
+    kind: table
+    topic: tx-contraception
+    title: "Table 3: contraceptive interactions with CNI"
+    columns: [Method, Interaction with CNI]
+    rows:
+      - [Oral combined hormonal contraceptive, "Yes"]
+      - [Transdermal patch, No or low risk]
+      - [Vaginal ring, No or low risk]
+      - [Combined injectable, No or low risk]
+      - [Oral progestin-only pill, "Yes"]
+      - [Depot medroxyprogesterone acetate, No or low risk]
+      - [Etonogestrel or levonorgestrel implant, No or low risk]
+    blanks: [[0, 1], [4, 1], [5, 1]]
+    src: { page: 390, quote: "Table 3: Contraceptive types" }
+    status: unverified
+  - id: neph.L11.186
+    kind: card
+    topic: tx-contraception
+    front: What renal effect can combined oral contraceptives have (Table 3)?
+    back: They can induce or worsen albuminuria, usually reversible on stopping; the mechanism is unknown.
+    src: { page: 390, quote: "Table 3: Contraceptive types" }
+    status: unverified
+  # ---------- p390-392: immunosuppression ----------
+  - id: neph.L11.187
+    kind: card
+    topic: tx-drugs
+    front: Which immunosuppressants are withdrawn before a transplant recipient tries to conceive, and for how long is contraception continued?
+    back: MMF/MPA and sirolimus; continue contraception for at least 3 months after withdrawal.
+    src: { page: 390, quote: "MMF/MPA and sirolimus should be withdrawn before attempting conception and replaced with other immunosuppressant regimens" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.188
+    kind: card
+    topic: tx-drugs
+    front: What are the fetal effects of mycophenolate?
+    back: Early pregnancy loss and congenital malformation in 27%, mostly craniofacial (cleft lip and palate, microtia or anotia with ear canal atresia, hypertelorism, coloboma, micrognathia) and cardiac (conotruncal, aortic arch).
+    src: { page: 390, quote: "with early pregnancy loss and a 27% incidence of congenital fetal malformation" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.189
+    kind: cloze
+    topic: tx-drugs
+    text: "MMF is replaced by {{c1::azathioprine}} at a dose of {{c2::2 mg/kg or less}}."
+    src: { page: 391, quote: "MMF should be replaced with azathioprine, in a dosage of 2 mg/kg or less" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.190
+    kind: card
+    topic: tx-drugs
+    front: What do guidelines advise about mTOR inhibitors in pregnancy?
+    back: Avoid sirolimus and everolimus (FDA category C, fetal deaths in animals, no safety data); switch to a CNI and prednisolone.
+    src: { page: 391, quote: "advise against using sirolimus and everolimus in pregnant transplant recipients" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.191
+    kind: card
+    topic: tx-drugs
+    front: What is the caution with cyclosporine in pregnancy?
+    back: Not teratogenic, but linked to growth retardation and prematurity (probably vasoconstriction); CNI metabolism may rise, so monitor and adjust the dose.
+    src: { page: 391, quote: "There have been reports of intrauterine growth retardation and prematurity in some cases with cyclosporine use" }
+    status: unverified
+  - id: neph.L11.192
+    kind: card
+    topic: tx-drugs
+    front: Why is prednisolone safe in pregnancy?
+    back: Although it crosses the placenta, it does not suppress fetal corticotropin and no consistent anomalies are reported.
+    src: { page: 391, quote: "prednisolone does not suppress fetal corticotropin" }
+    status: unverified
+  # ---------- p392-394: other drugs ----------
+  - id: neph.L11.193
+    kind: card
+    topic: tx-drugs
+    front: How does BP above 140/90 affect transplant pregnancies?
+    back: Preterm birth rises six-fold and preeclampsia five-fold; with normal BP over 90% of pregnancies succeed.
+    src: { page: 392, quote: "can increase the risks of pre- birth by six fold and preeclampsia by fivefold" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L11.194
+    kind: enumerate
+    topic: tx-drugs
+    prompt: Mention the fetal effects of ACE inhibitors and ARBs.
+    points:
+      - Oligohydramnios
+      - Intrauterine growth retardation
+      - Skull hypoplasia
+      - Limb deformities
+      - Fetal renal dysplasia
+      - Pulmonary hypoplasia
+      - Patent ductus arteriosus
+    pass: 4
+    src: { page: 392, quote: "Adverse effects might include oligohydramnios, intrauterine growth retardation, skull hypoplasia, limb deformities, fetal renal dysplasia, pulmonary hypoplasia" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.195
+    kind: card
+    topic: tx-drugs
+    front: Which antihypertensives are safe in transplant pregnancy, and which beta-blocker is avoided?
+    back: Methyldopa, hydralazine, labetalol and calcium channel blockers are safe; atenolol is avoided because of fetal growth retardation.
+    src: { page: 392, quote: "Atenolol is better avoided because of the possibility of fetal growth retardation." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.196
+    kind: card
+    topic: tx-drugs
+    front: What preventive drugs are given to a transplant recipient planning pregnancy?
+    back: Folic acid from 3 months before, low-dose aspirin against preeclampsia, and prophylactic LMWH if proteinuria >2 g.
+    src: { page: 392, quote: "Folic acid is started 3 months before a planned pregnancy, as well as aspirin in small doses to reduce preeclampsia." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.197
+    kind: card
+    topic: tx-drugs
+    front: What does the book advise about valganciclovir and valaciclovir in pregnancy?
+    back: Ganciclovir is toxic and teratogenic in animals. Stop valaciclovir before conception (though used off-label without reported teratogenicity); avoid valganciclovir unless maternal benefit outweighs fetal risk.
+    src: { page: 393, quote: "valganciclovir should not be used in pregnancy unless the therapeutic benefit for the mother outweighs the potential risk" }
+    status: unverified
+  - id: neph.L11.198
+    kind: card
+    topic: tx-drugs
+    front: Is cotrimoxazole safe in pregnancy per the book?
+    back: Folate inhibition raised concern for neural tube, cardiac, urinary and oral cleft defects, but Ford's meta-analysis found rates no higher than the general population, suggesting it is safe.
+    src: { page: 393, quote: "the overall pooled prevalence did not exceed the reported rates in the general population, suggesting its safe use during conception" }
+    status: unverified
+  - id: neph.L11.199
+    kind: mcq
+    topic: tx-drugs
+    stem: "A transplant recipient planning pregnancy takes sirolimus, prednisolone, ramipril, atenolol and cotrimoxazole. Which drug may be continued according to the book?"
+    options:
+      - Sirolimus
+      - Ramipril
+      - Atenolol
+      - Prednisolone
+      - None of them
+    answer: 3
+    why:
+      - mTOR inhibitors are withdrawn and switched to a CNI plus prednisolone.
+      - ACE inhibitors are teratogenic and stopped before conception.
+      - Atenolol is avoided because of fetal growth retardation.
+      - "Correct: prednisolone does not suppress fetal corticotropin and is safe. (Cotrimoxazole is also judged safe by meta-analysis.)"
+      - Prednisolone is safe.
+    src: { page: 391, quote: "Renal transplant recipients on mTOR inhibitor-based immunosuppression should be switched over to safer regimens including CNI and prednisolone." }
+    status: unverified
+  # ---------- p394-395: delivery and breastfeeding ----------
+  - id: neph.L11.200
+    kind: card
+    topic: tx-delivery
+    front: What is the preferred mode of delivery in a kidney transplant recipient, and why?
+    back: Normal vaginal delivery without abdominal compression; the graft lies in the false pelvis, so it rarely obstructs labor or gets injured. Cesarean only for obstetric reasons.
+    src: { page: 394, quote: "the renal allograft is placed in the false pelvis, and there is little risk of obstruction of the birth" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.201
+    kind: cloze
+    topic: tx-delivery
+    text: "Spontaneous labor can be allowed up to {{c1::38-40 weeks}}. During labor give hydrocortisone {{c2::100 mg every 6 h}} to cover stress and prevent postpartum rejection."
+    src: { page: 394, quote: "Hydrocortisone, 100 mg every 6 h, should be given during labor and delivery." }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: neph.L11.202
+    kind: card
+    topic: tx-delivery
+    front: Which drugs did the 2019 pregnancy and renal disease guideline allow during breastfeeding?
+    back: Prednisolone, azathioprine, tacrolimus, cyclosporine, captopril, enalapril, amlodipine, nifedipine, labetalol and atenolol (grade 1C).
+    src: { page: 394, quote: "recommended breastfeeding in females taking prednisolone, azathioprine, tacrolimus, cyclosporine, captopril, enalapril, amlodipine, nifedipine, labetalol, and atenolol" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L11.203
+    kind: card
+    topic: tx-delivery
+    front: Which immunosuppressants have no breastfeeding data?
+    back: MMF/MPA, sirolimus and everolimus.
+    src: { page: 395, quote: "Similarly, sirolimus and everolimus have not been tested in breastfeeding mothers." }
+    status: unverified
+  - id: neph.L11.204
+    kind: mcq
+    topic: tx-delivery
+    stem: "A kidney transplant recipient on prednisolone 5 mg, tacrolimus and azathioprine goes into spontaneous labor at 38 weeks. What is correct?"
+    options:
+      - Elective cesarean because the graft blocks the birth canal
+      - Vaginal delivery with hydrocortisone 100 mg every 6 h, and she may breastfeed
+      - Stop tacrolimus during labor
+      - Vaginal delivery, but breastfeeding is forbidden on tacrolimus
+      - Give fundal pressure to shorten the second stage
+    answer: 1
+    why:
+      - The graft sits in the false pelvis; cesarean is for obstetric indications only.
+      - "Correct: stress-dose steroids cover labor, and these drugs are compatible with breastfeeding."
+      - Immunosuppression continues; stopping it risks rejection.
+      - The 2019 guideline allows breastfeeding on tacrolimus.
+      - Delivery should be without abdominal compression.
+    src: { page: 394, quote: "Normal vaginal delivery without abdominal compression is the safest and recommended method of delivery in transplant recipients" }
+    status: unverified
+  # ---------- cases and essays across the lecture ----------
+  - id: neph.L11.205
+    kind: case
+    topic: dialysis-care
+    stem: "A 31-year-old on hemodialysis three times a week for lupus nephritis finds she is 7 weeks pregnant. She wants to continue the pregnancy."
+    steps:
+      - reveal: "Her drugs: mycophenolate, ramipril, warfarin for a past DVT, sevelamer, folic acid 1 mg."
+        question: Which immunosuppressant replaces mycophenolate first-line?
+        options:
+          - Azathioprine
+          - Cyclophosphamide
+          - Sirolimus
+          - Rituximab
+        answer: 0
+        why: "Azathioprine is first-line; CNIs are the other safe choice. Cyclophosphamide and sirolimus are on the unsafe list; biologics are stopped."
+      - question: What replaces warfarin?
+        options:
+          - Low-molecular-weight heparin, through 6 weeks postpartum
+          - A direct oral anticoagulant
+          - Aspirin alone
+          - Stop anticoagulation
+        answer: 0
+        why: "Previous thrombosis is an indication; heparin or LMWH is used through pregnancy and 6 weeks postpartum. Warfarin and DOACs are unsafe."
+      - question: How is her dialysis changed?
+        options:
+          - "4-6 sessions of 4-6 h, BUN <50, bicarbonate 25-30, single-use dialyzer"
+          - Keep the same schedule
+          - Switch to PD immediately
+          - Twice-weekly long sessions
+        answer: 0
+        why: "Intensive dialysis improves outcomes; low-bicarbonate dialysate avoids alkalemia in pregnancy's respiratory alkalosis."
+      - question: What else is started or changed?
+        options:
+          - Folic acid 5 mg and low-dose aspirin by the end of the first trimester
+          - A statin
+          - Cinacalcet
+          - Spironolactone for BP
+        answer: 0
+        why: "Hemodialysis removes folate, so 5 mg; aspirin prevents preeclampsia. Statins, cinacalcet and spironolactone are on the unsafe list; swap ramipril for labetalol, nifedipine, methyldopa or hydralazine."
+    src: { page: 372, quote: "Azathioprine is the first-line agent to replace mycophenolate during pregnancy." }
+    status: unverified
+  - id: neph.L11.206
+    kind: case
+    topic: pd-rx
+    stem: "A 33-year-old on CAPD (4 × 2 L exchanges) is 22 weeks pregnant. She has drain pain and heartburn, and needs 4.25% bags to stay dry."
+    steps:
+      - question: How should the PD prescription change?
+        options:
+          - Smaller dwell volumes with more exchanges, using a cycler
+          - Larger 3 L dwells, fewer exchanges
+          - Stop PD and wait for delivery
+          - Keep the prescription
+        answer: 0
+        why: "The growing uterus cuts the effective surface area; smaller dwells and more frequent exchanges keep clearance."
+      - question: What eases the drain pain and reflux?
+        options:
+          - Tidal PD leaving 15% of the volume in, and lateral decubitus while draining
+          - More 4.25% dextrose
+          - Supine drain with abdominal binder
+          - Shorter dwell, no other change
+        answer: 0
+        why: "Tidal PD reduces drain pain and reflux; lateral decubitus helps drainage. Highly hypertonic bags should be minimized."
+      - question: What adequacy target and calorie intake apply?
+        options:
+          - "Kt/V 2.2-2.4 (about 20 L/day), 25 kcal/kg/day"
+          - "Kt/V 1.7, 35 kcal/kg/day"
+          - "Predialysis BUN <50, 35 kcal/kg/day"
+          - No target in pregnancy
+        answer: 0
+        why: "Kt/V 2.2-2.4 is recommended in pregnancy on PD; 35 kcal/kg/day is the hemodialysis figure."
+      - reveal: "At 30 weeks, ultrasound shows polyhydramnios. Her urea is high."
+        question: What is the likely mechanism?
+        options:
+          - Fetal osmotic diuresis from maternal urea
+          - Fetal renal agenesis
+          - Maternal diabetes insipidus
+          - Peritonitis
+        answer: 0
+        why: "High maternal urea causes a fetal osmotic diuresis and more fetal urine. Intensify dialysis."
+    src: { page: 381, quote: "Intensify the prescription by decreasing the dwell volume and increasing the frequency of exchanges." }
+    status: unverified
+  - id: neph.L11.207
+    kind: case
+    topic: tx-risk
+    stem: "A 29-year-old transplant recipient, 3 years post-transplant, is 24 weeks pregnant. Baseline creatinine 1.2 mg/dL; now 1.8 mg/dL, BP 150/95 and proteinuria rising."
+    steps:
+      - question: Which differential diagnoses matter most?
+        options:
+          - Acute rejection, preeclampsia and urinary tract infection
+          - Hyperemesis and septic abortion
+          - Physiological rise of pregnancy
+          - Atypical HUS only
+        answer: 0
+        why: "Rejection can mimic preeclampsia, and UTI affects up to 40% of pregnant recipients. Creatinine normally falls in pregnancy."
+      - reveal: "Urine culture is negative. sFlt-1/PlGF ratio is low."
+        question: What is the next step before changing immunosuppression?
+        options:
+          - Allograft biopsy
+          - Empirical antithymocyte globulin
+          - Immediate delivery
+          - Switch tacrolimus to sirolimus
+        answer: 0
+        why: "Biopsy should confirm rejection before immunosuppression is modified."
+      - reveal: "Biopsy shows acute cellular rejection."
+        question: What is first-line treatment?
+        options:
+          - High-dose steroids
+          - Rituximab
+          - Antithymocyte globulin
+          - Mycophenolate
+        answer: 0
+        why: "High-dose steroids are first-line in pregnancy; data on ATG and rituximab are limited, and MMF is teratogenic."
+    src: { page: 384, quote: "Allograft biopsy should be done to confirm acute rejection before modifying immunosuppression." }
+    status: unverified
+  - id: neph.L11.208
+    kind: essay
+    topic: aki-causes
+    prompt: Discuss the causes of pregnancy-related AKI by trimester, and how to approach its diagnosis.
+    outline:
+      - "First trimester: hyperemesis gravidarum, septic abortion (ATN), GN flare, hemorrhage; cortical necrosis with severe hypotension"
+      - "Second and third: preeclampsia, HELLP, AFLP, TTP, pyelonephritis, obstruction by the uterus"
+      - "Postpartum: atypical HUS, NSAIDs"
+      - "Diagnosis: no pregnancy-specific criteria; baseline creatinine 0.4-0.6, follow trends; history, urine, metabolic and coagulation panels, serology, drugs, ultrasound"
+      - "Biopsy: when non-diagnostic and it changes treatment; first or second trimester, avoid after 25 weeks or deliver first"
+    src: { page: 361, quote: "The onset of AKI during pregnancy by trimester can point towards the underlying etiology." }
+    status: unverified
+  - id: neph.L11.209
+    kind: essay
+    topic: hd-rx
+    prompt: Discuss the management of pregnancy in a woman on maintenance dialysis.
+    outline:
+      - "Preconception: counsel risks, encourage transplant, contraception (IUD preferred), lupus quiet 6 months, stop teratogens 6 weeks before"
+      - "Drugs: aspirin by end of first trimester, folic acid 5 mg, heparin/LMWH if thrombotic risk, safe antihypertensives, more iron and ESA"
+      - "BP <140/90; diagnose preeclampsia clinically; deliver at 37 weeks (34 with severe features), steroids before 34, low-dose magnesium"
+      - "HD: 4-6 × 4-6 h, BUN <50, bicarbonate 25-30, K 3-3.5, Ca 2.5, single-use dialyzer, dry weight +400 g/week, 35 kcal and 1.5-1.8 g protein/kg"
+      - "PD: smaller dwells, more exchanges, tidal, lateral drain, Kt/V 2.2-2.4, 25 kcal/kg"
+      - "Monitoring: cervix at 18-20 weeks, labs twice monthly, anomaly scan"
+    src: { page: 378, quote: "Intensive hemodialysis is recommended during pregnancy because it is associated with better fetal and maternal outcomes." }
+    status: unverified
+  - id: neph.L11.210
+    kind: essay
+    topic: tx-plan
+    prompt: Discuss pregnancy in a kidney transplant recipient.
+    outline:
+      - "Fertility returns in 1-6 months; contraception and counseling; risks to mother, fetus and graft"
+      - "Graft: safe if creatinine ≤1.5; >1.5 with proteinuria >500 mg predicts loss; rejection 2-14.5%, biopsy then steroids"
+      - "Criteria (Table 2): ≥1 year, creatinine <2 (pref <1.5), no rejection 6 months, safe drugs, BP controlled on one drug, proteinuria <300 mg, normal US"
+      - "Drugs: stop MMF/MPA and mTOR (contraception 3 months), azathioprine ≤2 mg/kg, CNI, prednisolone; stop ACEi/ARB, avoid atenolol; folic acid, aspirin, LMWH if proteinuria >2 g"
+      - "Delivery: vaginal, hydrocortisone 100 mg q6h; breastfeeding allowed on prednisolone, azathioprine, CNI"
+    src: { page: 386, quote: "Table 2: Suggested criteria for safe pregnancy in kidney transplant recipients" }
+    status: unverified

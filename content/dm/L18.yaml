@@ -1,0 +1,1076 @@
+schema: batna.content/v1
+lecture: dm.L18
+title: "Uric acid metabolism and gout"
+author: "Prof. Dr. Adel Anwar"
+book: { chapter: 6, pages: [233, 245] }
+topics:
+  - { id: definition, title: "Definition and hyperuricemia" }
+  - { id: causes, title: "Causes of hyperuricemia" }
+  - { id: presentation, title: "Clinical presentations and prevalence" }
+  - { id: acute, title: "Acute gouty arthritis and its fate" }
+  - { id: pathogenesis, title: "Pathogenesis of the acute attack" }
+  - { id: acute-tx, title: "Treatment of acute attacks" }
+  - { id: chronic-tx, title: "Intercritical and chronic gout: target, general measures, uricosurics" }
+  - { id: xo, title: "Xanthine oxidase inhibitors: allopurinol and febuxostat" }
+  - { id: uricase, title: "Urate oxidase: rasburicase and pegloticase" }
+  - { id: strategy, title: "Strategy of drug treatment" }
+  - { id: tophi, title: "Tophaceous gout" }
+  - { id: kidney, title: "Gouty nephropathy and uric acid stones" }
+  - { id: workup, title: "Investigations and differential diagnosis" }
+items:
+  # ---------- p233: definition ----------
+  - id: dm.L18.001
+    kind: card
+    topic: definition
+    front: Define gout.
+    back: A heterogeneous group of congenital and acquired disorders with chronic hyperuricemia and urate deposition in tissues, showing one or more of acute inflammatory arthritis, tophi, urate interstitial nephropathy, and uric acid urolithiasis.
+    src: { page: 233, quote: "A term representing a heterogeneous group of congenital and acquired disorders characterized by chronic hyperuricemia" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L18.002
+    kind: enumerate
+    topic: definition
+    prompt: Gout manifests as one or more of which four disease entities?
+    points:
+      - Acute inflammatory arthritis
+      - Urate crystal aggregates (tophi)
+      - Urate interstitial nephropathy
+      - Uric acid urolithiasis
+    pass: 4
+    src: { page: 233, quote: "manifested by one or more of the following disease entities;" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L18.003
+    kind: cloze
+    topic: definition
+    text: "Hyperuricemia is plasma uric acid above {{c1::7 mg/dl}} in males and above {{c2::6 mg/dl}} in females."
+    src: { page: 233, quote: "It is defined as plasma uric acid >7mg/dl in males and > 6 mg /dl in females" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L18.004
+    kind: card
+    topic: definition
+    front: Uric acid is the end product of what?
+    back: Purine metabolism.
+    src: { page: 233, quote: "Uric acid is the end product of purine metabolism" }
+    status: unverified
+  - id: dm.L18.005
+    kind: card
+    topic: definition
+    front: Hallmark of gout, and its commonest cause?
+    back: Hyperuricemia; mostly idiopathic.
+    src: { page: 233, quote: "Hyperuricemia is a hallmark of gout." }
+    status: unverified
+  # ---------- p234: causes ----------
+  - id: dm.L18.006
+    kind: card
+    topic: causes
+    front: What does idiopathic hyperuricemia include?
+    back: Increased urate production, decreased urinary clearance, or both.
+    src: { page: 234, quote: "Idiopathic: including increased urate production or decreased urinary clearance or both" }
+    status: unverified
+  - id: dm.L18.007
+    kind: enumerate
+    topic: causes
+    prompt: Name the congenital enzyme defects that increase urate production.
+    points:
+      - HGPRT deficiency
+      - PRPP synthetase defects
+      - Glucose-6-phosphatase deficiency
+    pass: 3
+    src: { page: 234, quote: "Congenital Enzyme Defects: a- HGPRT deficiency b- PRP synthase defects c- Glucose 6-phosphatase deficiency" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L18.008
+    kind: enumerate
+    topic: causes
+    prompt: Which states of increased nucleic acid turnover cause hyperuricemia?
+    points:
+      - "RBCs: chemical hemolysis, polycythemia"
+      - "WBCs: leukemia"
+      - "Lymphocytes: lymphomas"
+      - Cytotoxic drugs
+      - Disseminated cancer
+      - Extensive psoriasis
+    pass: 5
+    src: { page: 234, quote: "Increased nucleic acid turnover: 1. RBCs; chemical hemolysis, polycythemia 2. WBCs; leukemia 3. Lymphocytes; lymphomas" }
+    status: unverified
+  - id: dm.L18.009
+    kind: enumerate
+    topic: causes
+    prompt: Name the renal causes of decreased uric acid excretion (other than impaired tubular excretion).
+    points:
+      - Intrinsic renal disease
+      - Renal toxins (chronic lead poisoning)
+    pass: 2
+    src: { page: 234, quote: "Intrinsic renal disease 2. Renal toxins (Ch. Lead poisoning)" }
+    status: unverified
+  - id: dm.L18.010
+    kind: enumerate
+    topic: causes
+    prompt: Causes of impaired tubular excretion of uric acid?
+    points:
+      - "Drugs: salicylates, L-dopa, thiazides"
+      - "Metabolic acidosis: alcohol and salicylate intoxication, diabetic and lactic acidosis"
+      - Nephrogenic diabetes insipidus (vasopressin resistant)
+      - Metabolic syndrome
+    pass: 4
+    src: { page: 234, quote: "Drugs: salicylates, L-dopa, Thiazides" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L18.011
+    kind: table
+    topic: causes
+    title: Secondary hyperuricemia
+    columns: [Mechanism, Causes]
+    rows:
+      - [Congenital enzyme defects, "HGPRT deficiency, PRPP synthetase defects, G6Pase deficiency"]
+      - [Increased nucleic acid turnover, "Hemolysis, polycythemia, leukemia, lymphoma, cytotoxics, disseminated cancer, extensive psoriasis"]
+      - [Renal disease or toxins, "Intrinsic renal disease, chronic lead poisoning"]
+      - [Impaired tubular excretion, "Salicylates, L-dopa, thiazides; metabolic acidosis; nephrogenic DI; metabolic syndrome"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 234, quote: "Secondary: 1. Increased production" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L18.012
+    kind: mcq
+    topic: causes
+    stem: A 62-year-old man with hypertension starts a new tablet and two months later has his first attack of podagra. Which drug most likely raised his uric acid by impairing tubular excretion?
+    options:
+      - Thiazide diuretic
+      - Losartan
+      - Amlodipine
+      - Fenofibrate
+      - Allopurinol
+    answer: 0
+    why:
+      - "Correct: thiazides impair tubular excretion of uric acid (p234)."
+      - The lecture lists losartan as having a uricosuric action (p242).
+      - Amlodipine is also listed as uricosuric (p242).
+      - Fenofibrate is listed as uricosuric (p242).
+      - Allopurinol lowers uric acid.
+    src: { page: 234, quote: "Drugs: salicylates, L-dopa, Thiazides" }
+    status: unverified
+  - id: dm.L18.013
+    kind: mcq
+    topic: causes
+    stem: A child with self-mutilation, developmental delay and very high uric acid has an X-linked enzyme defect. Which defect does the lecture list as a congenital cause of increased urate production?
+    options:
+      - HGPRT deficiency
+      - Glucose-6-phosphate dehydrogenase deficiency
+      - Xanthine oxidase deficiency
+      - Adenosine deaminase deficiency
+      - Urate oxidase deficiency
+    answer: 0
+    why:
+      - "Correct: HGPRT deficiency (Lesch-Nyhan when complete) is the first congenital enzyme defect on p234."
+      - The lecture lists glucose-6-PHOSPHATASE deficiency, not G6PD.
+      - Lack of xanthine oxidase would LOWER uric acid.
+      - Not on the lecture's list.
+      - Humans have no functional urate oxidase; that is why uricase drugs exist, not a disease.
+    src: { page: 234, quote: "Congenital Enzyme Defects: a- HGPRT deficiency" }
+    status: unverified
+  # ---------- p235: presentations and prevalence ----------
+  - id: dm.L18.014
+    kind: enumerate
+    topic: presentation
+    prompt: Mention the clinical presentations of gout.
+    points:
+      - Acute gouty arthritis
+      - Tophaceous gout
+      - Gouty nephropathy
+      - Uric acid stones
+    pass: 4
+    src: { page: 235, quote: "Clinical presentations: Acute gouty artheritis Tophaceous gout Gouty nephropathy Uric acid stones" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L18.015
+    kind: card
+    topic: presentation
+    front: Besides the four classic presentations, in which phases may gout patients be seen?
+    back: The intercritical phase or a phase of chronic arthropathy.
+    src: { page: 235, quote: "patients may also be encountered in the intercritical phase or in a phase of chronic arthropathy" }
+    status: unverified
+  - id: dm.L18.016
+    kind: cloze
+    topic: presentation
+    text: "Gout is mainly a disease of adult men, with a peak incidence at {{c1::40–45}} years of age in men and in {{c2::postmenopausal}} women."
+    src: { page: 235, quote: "Gout is primarily a disease of adult men, with a peak incidence between 40 and 45 years of age in men and postmenopausal women." }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L18.017
+    kind: cloze
+    topic: presentation
+    text: "Only {{c1::20%}} of hyperuricemic persons ever develop clinical gout, depending on the {{c2::degree of hyperuricemia}}."
+    src: { page: 235, quote: "Only 20% of hyperuricemic persons ever develop clinical gout, depending on the degree of hyperuricemia" }
+    status: unverified
+    tags: [numbers, high-yield]
+  # ---------- p235-236: acute gouty arthritis ----------
+  - id: dm.L18.018
+    kind: cloze
+    topic: acute
+    text: "{{c1::90%}} of first gout attacks are monoarticular, and {{c2::50%}} of them are in the {{c3::first MTP joint (podagra)}}."
+    src: { page: 235, quote: "90% of the first attacks are monoarticular, and 50% of them occur in the 1 st MTPJ (podagra)" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L18.019
+    kind: order
+    topic: acute
+    prompt: After the first MTP joint, order the other joints gout affects, from most to least frequent.
+    steps:
+      - Ankles
+      - Heels
+      - Knees
+      - Wrists
+      - Fingers
+      - Elbows
+    src: { page: 235, quote: "Other joints are affected in frequency order: ankles, heels, knees, wrists, fingers, elbows" }
+    status: unverified
+  - id: dm.L18.020
+    kind: card
+    topic: acute
+    front: Which sites does gout rarely involve?
+    back: Shoulders, hips and soft tissues.
+    src: { page: 235, quote: "Rarely, shoulders, hips, and soft tissues are involved" }
+    status: unverified
+  - id: dm.L18.021
+    kind: card
+    topic: acute
+    front: How severe is the first gout attack, and what does the skin look like?
+    back: Usually very severe and incapacitating; the overlying skin is typically dusky red.
+    src: { page: 235, quote: "the first attack is usually very severe and incapacitating. The overlying skin is typically dusky red." }
+    status: unverified
+  - id: dm.L18.022
+    kind: card
+    topic: acute
+    front: Systemic signs that may accompany acute gout?
+    back: Fever, malaise and leukocytosis.
+    src: { page: 235, quote: "Systemic signs of inflammation may occur, e.g, fever, malaise, and leukocytosis." }
+    status: unverified
+  - id: dm.L18.023
+    kind: enumerate
+    topic: acute
+    prompt: Mention the precipitating factors of an acute gout attack.
+    points:
+      - Trauma
+      - Surgery
+      - Infection
+      - Alcohol
+      - Dietary overindulgence
+      - Exercise
+      - Low temperature
+    pass: 5
+    src: { page: 235, quote: "Precipitating factors include trauma, surgery, infection, alcohol, dietary overindulgence, exercise, and low temperature." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L18.024
+    kind: card
+    topic: acute
+    front: How does an untreated acute gout attack end?
+    back: It resolves spontaneously within a few hours to a few weeks, and the patient enters the asymptomatic intercritical phase.
+    src: { page: 235, quote: "The attack resolves spontaneously, lasting from a few hours to a few weeks." }
+    status: unverified
+  - id: dm.L18.025
+    kind: enumerate
+    topic: acute
+    prompt: What is the fate after an acute gout attack?
+    points:
+      - Recurrent acute attacks involving more joints
+      - Chronic gouty arthritis (attacks do not resolve completely)
+      - No recurrence in some patients
+    pass: 3
+    src: { page: 236, quote: "Recurrent acute attacks involving more joints 2. Chronic gouty arthritis, where subsequent attacks do not resolve completely" }
+    status: unverified
+  - id: dm.L18.026
+    kind: mcq
+    topic: acute
+    stem: A 44-year-old man wakes at night with an exquisitely painful, swollen big toe with dusky red skin after a wedding feast. Temperature 38.1 °C, WBC 12,500. What is the most likely diagnosis?
+    options:
+      - Acute gouty arthritis (podagra)
+      - Tophaceous gout
+      - Gouty nephropathy
+      - Intercritical gout
+      - Chronic gouty arthritis
+    answer: 0
+    why:
+      - "Correct: monoarticular first MTP, dusky red skin, dietary overindulgence trigger, fever and leukocytosis (p235)."
+      - Tophi are painless chalky deposits, not an acute hot joint.
+      - Nephropathy is a renal medullary lesion.
+      - The intercritical phase is asymptomatic.
+      - Chronic arthritis follows repeated attacks that do not resolve.
+    src: { page: 235, quote: "Precipitating factors include trauma, surgery, infection, alcohol, dietary overindulgence, exercise, and low temperature." }
+    status: unverified
+  # ---------- p236: pathogenesis ----------
+  - id: dm.L18.027
+    kind: card
+    topic: pathogenesis
+    front: Initial pathogenic event of an acute gout attack?
+    back: Disruption of a subcortical tophus, releasing urate crystals into the synovial fluid.
+    src: { page: 236, quote: "Disruption of a subcortical tophus, resulting in the release of urate crystals into the synovial fluid, is the initial pathogenic event" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L18.028
+    kind: order
+    topic: pathogenesis
+    prompt: Order the steps of an acute gout attack as the lecture describes them.
+    steps:
+      - A subcortical tophus disrupts and releases urate crystals into synovial fluid
+      - Crystals are coated by IgM and ingested by leukocytes and synovial cells
+      - Leukocytes release leukotriene B4 and glycoprotein chemotactic factor
+      - More leukocytes come; Hageman factor, kallikrein, kinins, complement and IL-1 beta are released
+      - Widespread inflammation with vasodilation, edema, redness, warmth, pain and swelling
+    src: { page: 236, quote: "Urate crystals are rapidly coated by IgM, with a subsequent ingestion by leukocytes and synovial lining cells" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L18.029
+    kind: cloze
+    topic: pathogenesis
+    text: "Leukocytes that ingest urate crystals release {{c1::leukotriene B4}} and glycoprotein chemotactic factor; this step is blocked by {{c2::colchicine}}."
+    src: { page: 236, quote: "Leukocytes release bioactive mediators, such as leukotriene B4 and glycoprotein chemotactic factor. This step is blocked by colchicine." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L18.030
+    kind: enumerate
+    topic: pathogenesis
+    prompt: Which later inflammatory mediators amplify the gout attack?
+    points:
+      - Hageman factor
+      - Kallikrein
+      - Kinin-like peptides
+      - Complement activation
+      - Interleukin-1 beta
+    pass: 4
+    src: { page: 236, quote: "including Hegman factor, kallikrein, kinin-like peptides, and complement activation, as well as interleukin-1 beta." }
+    status: unverified
+  - id: dm.L18.031
+    kind: mcq
+    topic: pathogenesis
+    stem: Which step of the acute gout cascade does the lecture say colchicine blocks?
+    options:
+      - Release of leukotriene B4 and chemotactic factor from leukocytes
+      - Disruption of the subcortical tophus
+      - Coating of crystals by IgM
+      - Formation of uric acid from xanthine
+      - Renal excretion of urate
+    answer: 0
+    why:
+      - "Correct: the leukocyte mediator step is blocked by colchicine (p236)."
+      - The initial event is not drug-blocked in the lecture.
+      - The lecture names no drug for this step.
+      - That is the xanthine oxidase step, blocked by allopurinol and febuxostat.
+      - Uricosurics act on renal excretion.
+    src: { page: 236, quote: "Leukocytes release bioactive mediators, such as leukotriene B4 and glycoprotein chemotactic factor. This step is blocked by colchicine." }
+    status: unverified
+  # ---------- p236: acute treatment ----------
+  - id: dm.L18.032
+    kind: enumerate
+    topic: acute-tx
+    prompt: Mention the treatment of an acute gout attack.
+    points:
+      - Joint rest
+      - NSAIDs
+      - Colchicine
+      - Steroids
+      - Interleukin inhibitors (canakinumab, rilonacept) in selected cases
+    pass: 4
+    src: { page: 236, quote: "Treatment of acute attacks: 1. Joint rest 2. NSAID 3. Colchicine 4. Steroids" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L18.033
+    kind: card
+    topic: acute-tx
+    front: Which interleukin inhibitors does the lecture name for selected acute gout attacks?
+    back: Canakinumab and rilonacept.
+    src: { page: 236, quote: "In selected cases, interleukin inhibitors, eg, canakinumab and rilonacept." }
+    status: unverified
+  # ---------- p237-238: chronic gout ----------
+  - id: dm.L18.034
+    kind: cloze
+    topic: chronic-tx
+    text: "In intercritical and chronic gout, aim to keep plasma uric acid below {{c1::6 mg/dl}}."
+    src: { page: 237, quote: "Managing Intercritical and Chronic Gout: Aim to keep plasma uric acid < 6 mg/dl" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L18.035
+    kind: enumerate
+    topic: chronic-tx
+    prompt: General measures in intercritical and chronic gout?
+    points:
+      - Weight reduction
+      - Moderate-protein, low-fat diet
+      - Avoid alcohol
+      - Revise drugs
+      - High fluid intake to keep urine over 2000 ml/day
+    pass: 4
+    src: { page: 237, quote: "1. Weight reduction 2. Diet: moderate protein and low-fat diet 3. Avoid alcohol 4. Revise drugs" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L18.036
+    kind: cloze
+    topic: chronic-tx
+    text: "Fluid intake in gout should keep the urine output above {{c1::2000 ml/day}}."
+    src: { page: 237, quote: "High fluid intake to maintain urine >2000 ml/day" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L18.037
+    kind: table
+    topic: chronic-tx
+    title: Drugs for chronic gout (lecture groups)
+    columns: [Group, Drugs]
+    rows:
+      - [Uricosuric, "Probenecid, sulfinpyrazone, benzbromarone, lesinurad"]
+      - [Urine alkalinizing, "Sodium bicarbonate, sodium citrate, acetazolamide"]
+      - [Uricostatic (xanthine oxidase inhibitors), "Allopurinol, febuxostat"]
+      - [Urate oxidase, "Rasburicase, pegloticase"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 238, quote: "Uricostatic drugs (Xanthine oxidase inhibitors)" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L18.038
+    kind: card
+    topic: chronic-tx
+    front: How does lesinurad work?
+    back: A selective uric acid reabsorption inhibitor (SURI) that blocks URAT1, the main renal urate reabsorption transporter, and also OAT4 (linked to diuretic-induced hyperuricemia).
+    src: { page: 237, quote: "It acts by inhibiting the urate transporter, URAT1, which is primarily responsible for reabsorbing uric acid in the kidneys." }
+    status: unverified
+    tags: [high-yield]
+    update:
+      text: "Lesinurad (Zurampic, Duzallo) was withdrawn from the US market by its maker in 2019 for business reasons."
+      ref: "Ironwood Pharmaceuticals market withdrawal, 2019"
+  - id: dm.L18.039
+    kind: card
+    topic: chronic-tx
+    front: How must lesinurad be used, and why?
+    back: 200 mg together with a xanthine oxidase inhibitor, in gout not at target on the XO inhibitor alone; monotherapy or higher doses raise serum creatinine.
+    src: { page: 237, quote: "Lesinurad (200mg) must be coadministered with a xanthine oxidase inhibitor" }
+    status: unverified
+  - id: dm.L18.040
+    kind: mcq
+    topic: chronic-tx
+    stem: A man with gout is not at target on allopurinol alone. His doctor wants to add lesinurad. Which statement fits the lecture?
+    options:
+      - "It must be given with the xanthine oxidase inhibitor; alone or at high dose it raises creatinine"
+      - It replaces allopurinol as monotherapy
+      - It works by blocking xanthine oxidase
+      - It is a urate oxidase given IV
+      - Higher-than-recommended doses improve renal function
+    answer: 0
+    why:
+      - "Correct: lesinurad 200 mg must be coadministered with an XO inhibitor; monotherapy or higher doses raise creatinine (p237)."
+      - Monotherapy is what raises creatinine.
+      - It blocks URAT1 and OAT4, a uricosuric action.
+      - Urate oxidases are rasburicase and pegloticase.
+      - "The opposite: higher doses raise creatinine."
+    src: { page: 237, quote: "Monotherapy or higher-than-recommended doses are associated with an increased serum creatinine level." }
+    status: unverified
+  - id: dm.L18.041
+    kind: enumerate
+    topic: chronic-tx
+    prompt: Name the urine alkalinizing drugs used in gout.
+    points:
+      - Sodium bicarbonate
+      - Sodium citrate
+      - Acetazolamide
+    pass: 3
+    src: { page: 238, quote: "Urine alkalinizing drugs 1. Sodium Bicarbonat 2. Sodium Citrate 3. Acetazolamide" }
+    status: unverified
+  # ---------- p238-241: XO inhibitors ----------
+  - id: dm.L18.042
+    kind: card
+    topic: xo
+    front: How does allopurinol lower uric acid?
+    back: It inhibits xanthine oxidase, blocking hypoxanthine to xanthine and xanthine to uric acid.
+    src: { page: 238, quote: "Xanthine oxidase inhibitors that inhibit the conversion of xanthine and hypoxanthine to uric acid" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L18.043
+    kind: card
+    topic: xo
+    front: Gold standard uricostatic drug?
+    back: Allopurinol; it fits most hyperuricemic patients with an acceptable side-effect profile.
+    src: { page: 238, quote: "Till now, allopurinol remains the gold standard uricostatic drug" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L18.044
+    kind: cloze
+    topic: xo
+    text: "Allopurinol is approved at {{c1::100–800 mg/day}}, but the common dose of {{c2::300 mg/day}} fails to reach urate below 6 mg/dl in {{c3::50%}} of cases."
+    src: { page: 238, quote: "the most common dose of 300 mg/ day failed to achieve a serum urate level of < 6 mg/ dl in 50%" }
+    status: unverified
+    tags: [numbers, high-yield]
+    update:
+      text: "Start allopurinol at no more than 100 mg/day (lower in CKD stage 4 and above) and titrate to the urate target, rather than a fixed 300 mg; test for HLA-B*5801 before starting in Southeast Asian and African American patients."
+      ref: "ACR Guideline for the Management of Gout 2020"
+  - id: dm.L18.045
+    kind: card
+    topic: xo
+    front: "Purine catabolism (p239 figure): where do the urate-lowering drugs act?"
+    back: "Purines → hypoxanthine → (XO) xanthine → (XO) uric acid → (uricase) allantoin. XO inhibitors (allopurinol, oxipurinol, febuxostat) block both XO steps; uric oxidase (rasburicase, PEG-uricase) turns uric acid into allantoin."
+    src: { page: 239, quote: "Purine Nucleotide Catabolism" }
+    status: unverified
+  - id: dm.L18.046
+    kind: enumerate
+    topic: xo
+    prompt: Mention the considerations during allopurinol therapy.
+    points:
+      - Induction of an acute attack of gout
+      - GIT side effects
+      - Bone marrow suppression
+      - Renal impairment
+    pass: 4
+    src: { page: 239, quote: "Considerations during allopurinol therapy: Induction of an acute attack of gout GIT side effects Bone marrow suppression Renal impairment" }
+    status: unverified
+  - id: dm.L18.047
+    kind: table
+    topic: xo
+    title: Allopurinol drug interactions
+    columns: [Drug, Interaction]
+    rows:
+      - [Azathioprine and 6-mercaptopurine, Metabolized by XO (allopurinol raises their levels)]
+      - [Large doses of salicylates, Increase oxipurinol excretion and reduce allopurinol's effect]
+      - [Phenytoin, Reduces hepatic oxidation of allopurinol]
+      - [Theophylline, Allopurinol reduces its metabolism and induces toxicity]
+      - [Ampicillin and related drugs, More skin reactions]
+    blanks: [[0, 1], [1, 1], [3, 1], [4, 1]]
+    src: { page: 239, quote: "Azathioprine and 6-mercaptopurine are metabolized by XO" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L18.048
+    kind: mcq
+    topic: xo
+    stem: A renal transplant patient on azathioprine develops gout and is started on allopurinol at the usual dose. Two weeks later he has severe pancytopenia. Why?
+    options:
+      - Azathioprine is metabolized by xanthine oxidase, so allopurinol raises its levels
+      - Allopurinol increases azathioprine excretion
+      - Salicylates reduced the effect of allopurinol
+      - Phenytoin reduced hepatic oxidation of allopurinol
+      - Ampicillin rash
+    answer: 0
+    why:
+      - "Correct: azathioprine and 6-MP are metabolized by XO (p239); blocking XO lets them accumulate and suppress the marrow."
+      - "The opposite: XO inhibition reduces their breakdown."
+      - Salicylates are not in the story.
+      - Phenytoin is not in the story.
+      - Skin reactions with ampicillin do not cause pancytopenia.
+    src: { page: 239, quote: "Azathioprine and 6-mercaptopurine are metabolized by XO" }
+    status: unverified
+  - id: dm.L18.049
+    kind: card
+    topic: xo
+    front: Why is allopurinol difficult in renal impairment?
+    back: Its dose must be reduced as GFR falls, which makes the urate target hard to reach.
+    src: { page: 240, quote: "allopurinol dose should be reduced with a reduction of GFR. This imposes difficulty in achieving the target serum urate values" }
+    status: unverified
+  - id: dm.L18.050
+    kind: card
+    topic: xo
+    front: Problems with allopurinol in hematological malignancy and tumor lysis?
+    back: Heavy uricosuria is hard to control, and heavy xanthinuria develops.
+    src: { page: 240, quote: "In hematological malignancy and tumor lysis, heavy uricosuria is hard to control with allopurinol." }
+    status: unverified
+  - id: dm.L18.051
+    kind: cloze
+    topic: xo
+    text: "Skin reactions occur in {{c1::2–5%}} on allopurinol, up to Stevens-Johnson syndrome; allopurinol hypersensitivity syndrome has {{c2::20%}} fatality."
+    src: { page: 240, quote: "Skin reactions (2-5%): varying from mild to severe Stevens-Johnson Syndrome" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L18.052
+    kind: enumerate
+    topic: xo
+    prompt: Features of allopurinol hypersensitivity syndrome?
+    points:
+      - Fever
+      - Rash
+      - Reduced renal function
+      - Hepatic injury
+      - Leukocytosis
+      - Eosinophilia
+      - Vasculitis
+    pass: 5
+    src: { page: 240, quote: "Allopurinol hypersensitivity syndrome: fever, rash, reduced renal function, hepatic injury, leukocytosis, eosinophilia, vasculitis (20% fatality)" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L18.053
+    kind: cloze
+    topic: xo
+    text: "Febuxostat starts at {{c1::40 mg}} daily; if urate is not below 6 mg/dl within {{c2::2 weeks}}, increase to {{c3::80 mg/day}}."
+    src: { page: 240, quote: "If the target urate level of 6mg/dL is not achieved within 2 weeks, the dose can be increased to 80 mg/day." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L18.054
+    kind: card
+    topic: xo
+    front: Febuxostat tablet strengths?
+    back: 40, 80 and 120 mg.
+    src: { page: 240, quote: "It is available in 40, 80 mg, and 120 mg tablet forms." }
+    status: unverified
+  - id: dm.L18.055
+    kind: card
+    topic: xo
+    front: Does febuxostat need dose adjustment in renal or hepatic impairment?
+    back: Not in mild to moderate impairment; there are no data in severe renal or hepatic failure, so it is currently not used there.
+    src: { page: 240, quote: "No dose adjustments are necessary in mild to moderate renal or hepatic impairment." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L18.056
+    kind: cloze
+    topic: xo
+    text: "Febuxostat side effects (liver enzyme elevation, arthralgia, nausea, rash) are reported in {{c1::0.5%}} of cases."
+    src: { page: 241, quote: "Side effects: liver enzyme elevation, arthralgia, nausea, and skin rash, are reported in 0.5 % of cases." }
+    status: unverified
+    tags: [numbers]
+    update:
+      text: "Febuxostat carries an FDA boxed warning for higher cardiovascular death than allopurinol (CARES trial); ACR advises switching to another urate-lowering drug in patients with a history of cardiovascular disease or a new CV event when possible."
+      ref: "FDA Drug Safety Communication 2019; ACR gout guideline 2020"
+  - id: dm.L18.057
+    kind: card
+    topic: xo
+    front: In which patients has febuxostat not yet been studied?
+    back: Secondary hyperuricemia, such as hematological malignancy, organ transplant recipients and Lesch-Nyhan syndrome.
+    src: { page: 241, quote: "no studies have been conducted to evaluate its use in secondary hyperuricemia, such as in hematological malignancies, organ transplant patients, and individuals with Lesch-Nyhan syndrome." }
+    status: unverified
+  - id: dm.L18.058
+    kind: table
+    topic: xo
+    title: Allopurinol vs febuxostat (Becker 2010, 6000 patients)
+    columns: [Setting, Result]
+    rows:
+      - [Normal renal function, "Febuxostat 40 mg = allopurinol; 80 mg superior to allopurinol 300 mg"]
+      - [Mild to moderate renal impairment, Febuxostat superior to allopurinol at any dose]
+      - [Adverse effects and safety, Comparable]
+      - [Conclusion, Febuxostat is a reasonable alternative when allopurinol is not tolerated]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 241, quote: "febuxostat in a dose of 40mg daily is equivalent to allopurinol, but the 80 mg daily dose is superior to the 300 mg daily allopurinol." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L18.059
+    kind: mcq
+    topic: xo
+    stem: A 58-year-old man with gout and eGFR 45 ml/min has urate 9.4 mg/dl despite the allopurinol dose allowed for his GFR. Which drug does the lecture present as the reasonable alternative here?
+    options:
+      - Febuxostat, which needs no dose change in mild to moderate renal impairment
+      - Rasburicase, as routine long-term therapy
+      - Probenecid alone
+      - Pegloticase as first choice
+      - Increase allopurinol to 800 mg regardless of GFR
+    answer: 0
+    why:
+      - "Correct: febuxostat is a reasonable alternative in mild to moderate renal impairment and was superior there (p240-242)."
+      - Rasburicase is for chemotherapy-induced hyperuricemia in selected acute cases.
+      - Uricosurics are added for poor responders, not the main alternative here.
+      - Pegloticase is for non-responders and intolerant patients.
+      - The allopurinol dose must fall with GFR (p240).
+    src: { page: 241, quote: "In patients with mild to moderate renal impairment, febuxostat was superior to allopurinol at any dose in lowering uric acid levels." }
+    status: unverified
+  # ---------- p241-242: urate oxidase ----------
+  - id: dm.L18.060
+    kind: card
+    topic: uricase
+    front: What is rasburicase and what is its indication?
+    back: A recombinant Aspergillus urate oxidase, to prevent acute hyperuricemia induced by chemotherapy for hematological malignancies.
+    src: { page: 241, quote: "It is indicated to prevent acute hyperuricemia induced by chemotherapy for hematological malignancies." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L18.061
+    kind: card
+    topic: uricase
+    front: Factors limiting the use of rasburicase?
+    back: It must be given IV, and it lacks marketing authorization in some countries.
+    src: { page: 242, quote: "Factors limiting its use are the need for IV administration and the absence of marketing authorization in some countries." }
+    status: unverified
+  - id: dm.L18.062
+    kind: cloze
+    topic: uricase
+    text: "About {{c1::3%}} of patients cannot reach or keep urate at 6 mg/dl on conventional therapy; for them {{c2::pegloticase}} was developed."
+    src: { page: 242, quote: "3% of patients cannot achieve or cannot maintain a target UA level of 6 mg/dl despite conventional therapy" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L18.063
+    kind: cloze
+    topic: uricase
+    text: "Pegloticase is given IV {{c1::8 mg}} every {{c2::2 weeks}} or monthly; its commonest adverse effects are {{c3::gout flares and infusion reactions}}."
+    src: { page: 242, quote: "Pegloticase administered in IV doses of 8 mg every 2 weeks or monthly" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L18.064
+    kind: card
+    topic: uricase
+    front: Effects of pegloticase in refractory gout?
+    back: Marked fall in serum urate, symptom control and gradual resolution of tophi.
+    src: { page: 242, quote: "resulted in significant reductions of serum urates, control of symptoms, and gradual resolution of tophi in patients with refractory and disabling gout." }
+    status: unverified
+  # ---------- p242: strategy ----------
+  - id: dm.L18.065
+    kind: order
+    topic: strategy
+    prompt: Order the lecture's strategy for drug treatment of hyperuricemia and gout.
+    steps:
+      - Non-pharmacological measures
+      - Drugs with uricosuric action (losartan, fenofibrate, amlodipine)
+      - Allopurinol (normal renal function)
+      - Febuxostat (mild to moderate renal impairment)
+      - "Poor responders: add specific uricosuric drugs"
+      - "Non-responders and intolerant patients: pegloticase"
+    src: { page: 242, quote: "Strategies for Pharmacological Treatment: 1. In addition to non-pharmacological measures" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L18.066
+    kind: card
+    topic: strategy
+    front: Which common drugs have a uricosuric action useful in gout patients?
+    back: Losartan, fenofibrate and amlodipine.
+    src: { page: 242, quote: "Drugs with uricosuric action: losartan, fenofibrate, amlodipine" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L18.067
+    kind: table
+    topic: strategy
+    title: Which patient gets which urate drug?
+    columns: [Patient, Drug]
+    rows:
+      - [Normal renal function, Allopurinol]
+      - [Mild to moderate renal impairment, Febuxostat]
+      - [Poor responder, Add a specific uricosuric]
+      - [Non-responder or intolerant, Pegloticase]
+      - [Selected acute cases (chemotherapy), Rasburicase]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 242, quote: "Febuxostat: appears as a reasonable alternative in patients with mild to moderate renal impairment" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L18.068
+    kind: mcq
+    topic: strategy
+    stem: A 50-year-old man with gout, hypertension and high triglycerides needs drugs for both. Which pair also has a uricosuric action, per the lecture?
+    options:
+      - Losartan and fenofibrate
+      - Hydrochlorothiazide and niacin
+      - Atenolol and atorvastatin
+      - Furosemide and gemfibrozil
+      - Low-dose aspirin and amlodipine
+    answer: 0
+    why:
+      - "Correct: losartan and fenofibrate are listed as uricosuric (p242)."
+      - Thiazides impair urate excretion (p234).
+      - Neither is listed as uricosuric.
+      - Loop diuretics are not listed; furosemide is not uricosuric.
+      - Salicylates impair tubular urate excretion (p234), even though amlodipine is uricosuric.
+    src: { page: 242, quote: "Drugs with uricosuric action: losartan, fenofibrate, amlodipine" }
+    status: unverified
+  # ---------- p242-243: tophi ----------
+  - id: dm.L18.069
+    kind: cloze
+    topic: tophi
+    text: "Before effective urate-lowering treatment, {{c1::50%}} of hyperuricemic patients developed tophi."
+    src: { page: 242, quote: "Before effective treatment of hyperuricemia had been established, 50% of hyperuricemic patients developed tophi." }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L18.070
+    kind: card
+    topic: tophi
+    front: Where do tophi commonly appear?
+    back: White-yellow deposits in the external ear, subcutaneous tissue (fingertips, palms, soles) and around joints; later the Achilles tendon and olecranon bursa.
+    src: { page: 243, quote: "Tophi appear as white, yellowish deposits commonly in the external ear, subcutaneous deposits, especially of the finger tips, palms, soles" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L18.071
+    kind: card
+    topic: tophi
+    front: Late tendon and bursal changes of tophaceous gout?
+    back: Fusiform or nodular enlargement of the Achilles tendon, or saccular distension of the olecranon bursa.
+    src: { page: 243, quote: "At later stages, fusiform or nodular enlargement of the Achilis tendon or saccular distension of the olecranon bursa may occur" }
+    status: unverified
+  - id: dm.L18.072
+    kind: card
+    topic: tophi
+    front: Are tophi painful? What do they do as they grow?
+    back: They are painless, but progressive enlargement limits joint movement; the tense shiny skin may ulcerate and extrude white chalky or pasty material.
+    src: { page: 243, quote: "Tophi are painless, but as they enlarge progressively, they cause joint movement limitations." }
+    status: unverified
+  - id: dm.L18.073
+    kind: card
+    topic: tophi
+    front: Pathology of a tophus?
+    back: Monosodium urate needles surrounded by a mononuclear cell and giant multinucleated cell reaction.
+    src: { page: 243, quote: "Pathologically, tophi are deposits of monosodium urate needles surrounded by a mononuclear cell and a giant multinucleated cell reaction" }
+    status: unverified
+  - id: dm.L18.074
+    kind: card
+    topic: tophi
+    front: Radiological appearance of tophi?
+    back: Radiolucent punched-out lesions or cortical erosions with characteristic overhanging margins.
+    src: { page: 243, quote: "Radiologically, they appear as radiolucent punched-out lesions or cortical erosions with characteristic overhanging margins" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L18.075
+    kind: mcq
+    topic: tophi
+    stem: A man with 15 years of untreated gout has a painless hard nodule on the ear helix that discharges white chalky material. Foot X-ray shows punched-out erosions with overhanging edges. What is the lesion?
+    options:
+      - Tophus
+      - Rheumatoid nodule
+      - Calcium pyrophosphate deposit (pseudogout)
+      - Pyogenic abscess
+      - Osteophyte of osteoarthritis
+    answer: 0
+    why:
+      - "Correct: painless chalky deposits in the external ear and punched-out lesions with overhanging margins are tophi (p243)."
+      - RA nodules do not extrude chalky material or give overhanging erosions.
+      - Pseudogout is a differential of the acute joint (p244), not chalky ear deposits.
+      - An abscess is painful and acute.
+      - Osteophytes are bony outgrowths, not radiolucent punched-out lesions.
+    src: { page: 243, quote: "Radiologically, they appear as radiolucent punched-out lesions or cortical erosions with characteristic overhanging margins" }
+    status: unverified
+  # ---------- p243-244: kidney ----------
+  - id: dm.L18.076
+    kind: card
+    topic: kidney
+    front: What is gouty (urate) nephropathy?
+    back: Tophi in the renal medulla and pyramids with mild fibrosis and minimal tubular atrophy; GFR is usually kept because the cortex is spared.
+    src: { page: 243, quote: "Describes the pathological entity of tophi formation in the renal medulla and pyramids, resulting in mild fibrosis and minimal tubular atrophy." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L18.077
+    kind: card
+    topic: kidney
+    front: What may appear in severe gouty nephropathy?
+    back: Isosthenuria and moderate proteinuria.
+    src: { page: 243, quote: "however, in severe cases, isothenuria and moderate proteinuria may be detected." }
+    status: unverified
+  - id: dm.L18.078
+    kind: table
+    topic: kidney
+    title: Gouty (urate) nephropathy vs uric acid nephropathy
+    columns: [Feature, Gouty (urate) nephropathy, Uric acid nephropathy]
+    rows:
+      - [Deposit, Urate tophi in medulla and pyramids, Uric acid crystals (not urates) in tubules]
+      - [Kidney function, GFR generally maintained, Acute renal failure]
+      - [Mechanism, Mild fibrosis and minimal tubular atrophy, Complete tubular obstruction]
+      - [Setting, Chronic gout, "Tumor lysis syndrome, leukemias, lymphomas"]
+    blanks: [[1, 1], [1, 2], [2, 2], [3, 2]]
+    src: { page: 243, quote: "uric acid nephropathy, which involves complete obstruction of the renal tubules by uric acid crystals (not urates), leading to acute renal failure." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L18.079
+    kind: mcq
+    topic: kidney
+    stem: Two days after induction chemotherapy for acute leukemia, a patient becomes oliguric with a sharp rise in creatinine and very high uric acid. Which renal lesion is this?
+    options:
+      - Uric acid nephropathy from tubular obstruction by uric acid crystals
+      - Gouty (urate) nephropathy with medullary tophi
+      - Calcium oxalate stone
+      - Chronic lead nephropathy
+      - Isosthenuria from gout
+    answer: 0
+    why:
+      - "Correct: tumor lysis in leukemia gives complete tubular obstruction by uric acid crystals and acute renal failure (p243)."
+      - Gouty nephropathy is chronic and keeps the GFR.
+      - A stone would not explain this setting and speed.
+      - Lead causes chronic hyperuricemia, not this acute picture.
+      - Isosthenuria is a feature of severe chronic gouty nephropathy.
+    src: { page: 243, quote: "This occurs in tumor lysis syndrome, Leukemias, and lymphomas." }
+    status: unverified
+  - id: dm.L18.080
+    kind: cloze
+    topic: kidney
+    text: "Uric acid stones occur in {{c1::20%}} of gout patients ({{c2::200}} times the general population), rising to {{c3::50%}} at serum uric acid of 12 mg/dl."
+    src: { page: 243, quote: "The incidence of uric acid stones in gout patients is 20% i.e., 200 times more common than in the general population." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L18.081
+    kind: card
+    topic: kidney
+    front: What are gout stones made of, and what drives their formation?
+    back: Mostly pure uric acid (not urates); formation depends on the degree of uricosuria, i.e. urinary uric acid concentration and urine acidity.
+    src: { page: 244, quote: "Stones are commonly composed of pure uric acid (not urates). Their formation is highly dependent on the degree of uricosuria." }
+    status: unverified
+  - id: dm.L18.082
+    kind: card
+    topic: kidney
+    front: Why do gout patients get more calcium oxalate stones?
+    back: Uric acid deposits act as nuclei for other stones.
+    src: { page: 244, quote: "Uric acid deposits also serve as nuclei for the formation of other stones. These patients have a higher incidence of calcium oxalate stones." }
+    status: unverified
+  - id: dm.L18.083
+    kind: card
+    topic: kidney
+    front: How do uric acid stones appear on imaging (lecture)?
+    back: Radiolucent; they appear only with contrast (IVP).
+    src: { page: 244, quote: "Uric acid stones are radiolucent and appear only with contrast media (IVP)" }
+    status: unverified
+    tags: [high-yield]
+    update:
+      text: "Non-contrast low-dose CT is the standard test for suspected stones and detects uric acid stones, which are radiolucent only on plain X-ray."
+      ref: "EAU Guidelines on Urolithiasis 2024"
+  - id: dm.L18.084
+    kind: card
+    topic: kidney
+    front: Can stones be the only presentation of gout?
+    back: Yes; they may be the only presentation and may form before or after the arthritis.
+    src: { page: 244, quote: "Stones can be the only presentation of gout or may form before or after the onset of arthritis." }
+    status: unverified
+  - id: dm.L18.085
+    kind: card
+    topic: kidney
+    front: Why do urine alkalinizers and high fluid intake help prevent gout stones?
+    back: Stone formation depends on the urinary uric acid concentration and the acidity of urine; fluids dilute it and alkali makes it more soluble.
+    src: { page: 244, quote: "Factors Causing Stone Formation: Concentration of uric acid in urine and Acidity of urine" }
+    status: unverified
+  # ---------- p244-245: workup and ddx ----------
+  - id: dm.L18.086
+    kind: enumerate
+    topic: workup
+    prompt: Mention the investigations of gout.
+    points:
+      - Plasma uric acid
+      - Renal function tests
+      - CBC
+      - Joint aspiration
+      - X-ray of involved joints
+      - Ultrasound, X-ray and IVP of the urinary tract
+    pass: 5
+    src: { page: 244, quote: "Investigations: I- Laboratory 1. Plasma uric acid 2. Renal Function tests 3. CBC 4. Joint aspiration" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L18.087
+    kind: table
+    topic: workup
+    title: Differential diagnosis of gout
+    columns: [Group, Conditions]
+    rows:
+      - [Other joint lesions, "Pseudogout, traumatic osteoarthritis, pyogenic arthritis"]
+      - [Soft tissue lesions, "Bursitis, tendinitis, thrombophlebitis, cellulitis"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 244, quote: "Other Joint Lesions Pseudogout, Traumatic osteoarthritis, and Pyogenic arthritis" }
+    status: unverified
+  - id: dm.L18.088
+    kind: mcq
+    topic: workup
+    stem: A 70-year-old woman has an acutely hot, swollen knee with fever. Which test best separates gout from pyogenic arthritis and pseudogout?
+    options:
+      - Joint aspiration
+      - Plasma uric acid
+      - CBC
+      - Renal function tests
+      - IVP
+    answer: 0
+    why:
+      - "Correct: joint aspiration is the lab test on the lecture's list that looks at the joint fluid itself (p244); pyogenic arthritis and pseudogout are on its differential."
+      - Uric acid can be normal during an attack and high without gout (only 20% of hyperuricemics get gout).
+      - Leukocytosis occurs in both gout and sepsis.
+      - Renal function does not identify the joint lesion.
+      - IVP is for the urinary tract.
+    src: { page: 244, quote: "Investigations: I- Laboratory 1. Plasma uric acid 2. Renal Function tests 3. CBC 4. Joint aspiration" }
+    status: unverified
+  # ---------- cases ----------
+  - id: dm.L18.089
+    kind: case
+    topic: chronic-tx
+    stem: A 48-year-old obese man has had three attacks of podagra this year. He drinks beer at weekends and takes hydrochlorothiazide. Serum uric acid 9.2 mg/dl; eGFR normal.
+    steps:
+      - question: What urate target does the lecture set?
+        options: [Below 6 mg/dl, Below 7 mg/dl, Below 8 mg/dl, Normal for his sex only]
+        answer: 0
+        why: "Aim to keep plasma uric acid below 6 mg/dl (p237)."
+      - question: Which general measure fits his history?
+        options: ["Weight loss, avoid alcohol and revise drugs (stop the thiazide)", "High-protein, high-fat diet", "Restrict fluids", "Add aspirin 3 g/day"]
+        answer: 0
+        why: "Weight reduction, avoid alcohol and revise drugs (p237); thiazides impair urate excretion (p234)."
+      - question: First urate-lowering drug with normal renal function?
+        options: [Allopurinol, Pegloticase, Rasburicase, Lesinurad alone]
+        answer: 0
+        why: "Allopurinol in normal renal function (p242); lesinurad must be combined with an XO inhibitor."
+      - reveal: "Six weeks after starting allopurinol he has a new flare."
+        question: What explains it?
+        options: [Starting allopurinol can induce an acute attack, Allopurinol hypersensitivity syndrome, Febuxostat interaction, Uric acid nephropathy]
+        answer: 0
+        why: "Induction of an acute attack is a listed consideration during allopurinol therapy (p239)."
+    src: { page: 237, quote: "Managing Intercritical and Chronic Gout: Aim to keep plasma uric acid < 6 mg/dl" }
+    status: unverified
+  - id: dm.L18.090
+    kind: case
+    topic: xo
+    stem: Three weeks after starting allopurinol, a 60-year-old man has fever and a widespread rash.
+    steps:
+      - reveal: "Creatinine has risen, ALT is 4 times normal, eosinophils 1,800/µl."
+        question: Diagnosis?
+        options: [Allopurinol hypersensitivity syndrome, Acute gout flare, Simple drug rash, Uric acid nephropathy]
+        answer: 0
+        why: "Fever, rash, reduced renal function, hepatic injury, leukocytosis, eosinophilia (p240)."
+      - question: Its fatality, per the lecture?
+        options: [About 20%, About 2%, About 0.5%, About 50%]
+        answer: 0
+        why: "Allopurinol hypersensitivity syndrome has 20% fatality (p240)."
+      - reveal: "He recovers off allopurinol; urate remains 8.8 mg/dl with mild renal impairment."
+        question: Reasonable alternative?
+        options: [Febuxostat, Restart allopurinol at half dose, Rasburicase monthly, Probenecid with thiazide]
+        answer: 0
+        why: "Febuxostat is a reasonable alternative for patients who cannot tolerate allopurinol, and in mild to moderate renal impairment (p241-242)."
+    src: { page: 240, quote: "Allopurinol hypersensitivity syndrome: fever, rash, reduced renal function, hepatic injury, leukocytosis, eosinophilia, vasculitis (20% fatality)" }
+    status: unverified
+  - id: dm.L18.091
+    kind: case
+    topic: uricase
+    stem: A 55-year-old man has disabling tophaceous gout. Urate stays above 6 mg/dl despite maximal allopurinol, then febuxostat, then an added uricosuric.
+    steps:
+      - question: Which drug was developed for this group?
+        options: [Pegloticase, Rasburicase, Colchicine, Lesinurad alone]
+        answer: 0
+        why: "Pegloticase is for the 3% who cannot reach or keep target despite conventional therapy (p242)."
+      - question: Dose?
+        options: [8 mg IV every 2 weeks or monthly, 40 mg oral daily, 200 mg oral daily, 7.5 mg IV once]
+        answer: 0
+        why: "8 mg IV every 2 weeks or monthly (p242)."
+      - question: Most common adverse effects?
+        options: [Gout flares and infusion reactions, Osteonecrosis of the jaw, Pancytopenia, Stevens-Johnson syndrome]
+        answer: 0
+        why: "Gout flares and infusion reactions (p242)."
+    src: { page: 242, quote: "Gout flares and infusion reactions are the most common adverse effects." }
+    status: unverified
+  # ---------- p245: end-of-lecture questions ----------
+  - id: dm.L18.092
+    kind: essay
+    topic: definition
+    prompt: Define gout.
+    outline:
+      - "Definition": ["Heterogeneous group of congenital and acquired disorders", "Chronic hyperuricemia with urate deposition in tissues"]
+      - "Manifested by one or more of": ["Acute inflammatory arthritis", "Tophi", "Urate interstitial nephropathy", "Uric acid urolithiasis"]
+      - "Hyperuricemia": ["Above 7 mg/dl in males, above 6 mg/dl in females"]
+    src: { page: 233, quote: "A term representing a heterogeneous group of congenital and acquired disorders characterized by chronic hyperuricemia" }
+    status: unverified
+    tags: [book-question]
+  - id: dm.L18.093
+    kind: essay
+    topic: causes
+    prompt: What are the causes of chronic hyperuricemia?
+    outline:
+      - "Idiopathic (most)": ["Increased production, decreased clearance, or both"]
+      - "Increased production": ["Enzyme defects: HGPRT, PRPP synthetase, glucose-6-phosphatase", "Nucleic acid turnover: hemolysis, polycythemia, leukemia, lymphoma, cytotoxics, disseminated cancer, psoriasis"]
+      - "Decreased renal excretion": ["Intrinsic renal disease, chronic lead poisoning", "Tubular: salicylates, L-dopa, thiazides; metabolic acidosis; nephrogenic DI; metabolic syndrome"]
+    src: { page: 234, quote: "Idiopathic: including increased urate production or decreased urinary clearance or both" }
+    status: unverified
+    tags: [book-question]
+  - id: dm.L18.094
+    kind: essay
+    topic: presentation
+    prompt: Mention the clinical presentation of gout.
+    outline:
+      - "Acute gouty arthritis": ["90% monoarticular first attack, 50% podagra", "Severe, dusky red skin, fever and leukocytosis; triggers; resolves to intercritical phase"]
+      - "Tophaceous gout": ["Painless chalky deposits in ear, fingertips, around joints", "Punched-out lesions with overhanging margins"]
+      - "Gouty nephropathy": ["Medullary tophi, GFR kept; severe: isosthenuria, proteinuria"]
+      - "Uric acid stones": ["20% of gout patients, radiolucent, may be the only presentation"]
+      - "Also": ["Intercritical phase, chronic arthropathy"]
+    src: { page: 235, quote: "Clinical presentations: Acute gouty artheritis Tophaceous gout Gouty nephropathy Uric acid stones" }
+    status: unverified
+    tags: [book-question]
+  - id: dm.L18.095
+    kind: essay
+    topic: strategy
+    prompt: Mention the lines of management of a case of chronic hyperuricemia and gout.
+    outline:
+      - "Acute attack": ["Joint rest, NSAIDs, colchicine, steroids; IL-1 inhibitors in selected cases"]
+      - "Target and general measures": ["Uric acid below 6 mg/dl", "Weight loss, moderate protein low-fat diet, no alcohol, revise drugs, urine over 2000 ml/day"]
+      - "Drugs": ["Uricosuric action drugs (losartan, fenofibrate, amlodipine)", "Allopurinol (normal kidneys) or febuxostat (mild-moderate CKD)", "Poor responders: add uricosuric (probenecid, sulfinpyrazone, benzbromarone, lesinurad with XO inhibitor)", "Non-responders: pegloticase; acute chemotherapy cases: rasburicase", "Urine alkalinizers for stones"]
+    src: { page: 237, quote: "Managing Intercritical and Chronic Gout: Aim to keep plasma uric acid < 6 mg/dl" }
+    status: unverified
+    tags: [book-question]

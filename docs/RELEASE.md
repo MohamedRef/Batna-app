@@ -190,13 +190,18 @@ cargo run -q -p batna-tools -- update verify dist/update/alpha
 ### On the device
 
 `crates/app/src/update/` checks the feed 20 seconds after launch and then
-every 6 hours, in the background. **Settings › التحديثات** shows the build
-(version, CI build number, commit), where things stand, "دوّر دلوقتي", and two
-per-device choices:
+every 6 hours, in the background. **Settings › التحديثات** opens with what is
+on this device: the app (version, CI build number, commit) and, apart from
+it, the lessons, questions and look (the content-only build in use and when
+it was published, or "came with the app"), marked "جديد عليك" until its
+"What's new" is seen; each row opens the changes. Then one "دوّر على تحديث"
+looks for both at once and says what it found for each half (the app's
+phase, and for the content: up to date, new and waiting for a calm moment,
+or not reachable), with when it last looked. Then two per-device choices:
 
 | Choice | Options |
 |---|---|
-| How it updates | **لوحده** (automatic, the default): downloads on Wi-Fi only and installs at a calm moment. **قولّي الأول** (tell me first): says so, and downloads and installs on a tap. **لأ** (off): only on "دوّر دلوقتي". |
+| How it updates | **لوحده** (automatic, the default): downloads on Wi-Fi only and installs at a calm moment. **قولّي الأول** (tell me first): says so, and downloads and installs on a tap. **لأ** (off): only on "دوّر على تحديث". |
 | Channel | Alpha, beta or stable for release builds. A preview build always follows `batna-preview`. |
 
 When something is ready, a card above the current screen says so, with the

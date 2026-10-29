@@ -20,7 +20,7 @@ use batna_protocol::cloud::{DeviceInfo, DeviceSummary, Platform};
 use tokio::sync::mpsc::{UnboundedReceiver, UnboundedSender, unbounded_channel};
 
 use self::oauth::GoogleClient;
-pub use ui::{SyncSection, use_provide_cloud};
+pub use ui::{SyncSection, ago, use_provide_cloud};
 
 /// Where Batna Cloud is and which Google client signs in. Set at build time
 /// from `.env` (`BATNA_CLOUD_URL`, `BATNA_GOOGLE_CLIENT_ID`,

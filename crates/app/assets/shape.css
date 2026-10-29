@@ -178,8 +178,9 @@ button.chip { border-color: var(--line-soft); }
 }
 
 /* ---------- More (more.rs) ----------
-   Phones: Cases and Oral leave the bar for a small sheet that rises above
-   it; the bar keeps four screens and More. From 600dp the rail and the
+   Phones: Cases, Oral and Progress leave the bar for a bounded sheet that
+   rises above it, in two groups, with Settings at the end; the bar keeps
+   Today, Lessons, Review, Questions and More. From 600dp the rail and the
    sidebar have room for every screen, so More and its sheet hide. */
 .nav-more, .more-sheet, .more-backdrop { display: none; }
 @media (max-width: 599.98px) {
@@ -187,29 +188,40 @@ button.chip { border-color: var(--line-soft); }
   .nav-more { display: flex; }
   .more-backdrop { display: block; position: fixed; inset: 0; z-index: 20; background: rgb(0 0 0 / 0.25); }
   .more-sheet {
-    display: flex; flex-direction: column;
+    display: flex; flex-direction: column; gap: var(--sp-2);
     position: fixed; z-index: 21;
     inset-inline: var(--sp-3);
     inset-block-end: calc(var(--nav-h) + var(--sp-4) + env(safe-area-inset-bottom, 0px));
-    padding: var(--sp-1);
+    max-block-size: calc(100dvh - var(--nav-h) - 4rem - env(safe-area-inset-bottom, 0px) - env(safe-area-inset-top, 0px));
+    overflow-y: auto; overscroll-behavior: contain;
+    padding: var(--sp-2);
     border: 1px solid var(--line-soft);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-sheet, var(--radius-lg));
     background: var(--raised);
     box-shadow: 0 12px 32px rgb(0 0 0 / 0.18);
     animation: more-rise var(--dur) var(--ease);
   }
+  .more-group { display: flex; flex-direction: column; }
+  .more-group-title { margin: 0; padding: var(--sp-1) var(--sp-3); font-size: var(--fs-sm); font-weight: 600; color: var(--muted); }
+  .more-group + .more-group { padding-block-start: var(--sp-2); border-block-start: 1px solid var(--line-soft); }
   .more-row {
     display: flex; align-items: center; gap: var(--sp-3);
-    min-block-size: var(--tap-lg);
-    padding-inline: var(--sp-3);
-    border: 0; border-radius: var(--radius);
+    min-block-size: var(--target, 48px);
+    padding-inline: var(--sp-2) var(--sp-3);
+    border: 0; border-radius: var(--radius-control, var(--radius));
     background: transparent; text-align: start; cursor: pointer;
     font-weight: 600;
   }
-  .more-row + .more-row { border-block-start: 1px solid var(--line-soft); }
-  .more-row .glyph { display: grid; place-items: center; color: var(--muted); }
-  .more-row[aria-current="page"] { background: var(--accent-soft); color: var(--accent); }
-  .more-row[aria-current="page"] .glyph { color: var(--accent); }
+  .more-row .label { flex: 1; min-width: 0; }
+  .more-row .row-icon { inline-size: 2rem; block-size: 2rem; }
+  .more-row[aria-current="page"] { background: var(--accent-soft); color: var(--accent-ink); }
+  .more-close { align-self: stretch; }
   .nav-more[aria-expanded="true"] .glyph { background: var(--accent-soft); }
+
+  /* Focused study (parts::use_focus_mode): the task gets the screen; its
+     own close or finish button is the way out. */
+  .app[data-focus="true"] { grid-template-rows: 0 1fr 0; }
+  .app[data-focus="true"] :is(.nav, .topbar) { display: none; }
+  .app[data-focus="true"] .content { padding-block-start: calc(var(--sp-2) + env(safe-area-inset-top, 0px)); padding-block-end: calc(var(--sp-6) + env(safe-area-inset-bottom, 0px)); }
 }
 @keyframes more-rise { from { opacity: 0; transform: translateY(8px); } }

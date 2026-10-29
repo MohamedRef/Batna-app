@@ -285,6 +285,9 @@ input[type="file"]::file-selector-button {
   flex-direction: column;
   gap: var(--sp-4);
   min-width: 0;
+  /* A field or card scrolled into view (keyboard focus, the Android
+     keyboard) stops clear of a screen's sticky bar instead of under it. */
+  scroll-padding-block: var(--sp-6) calc(var(--tap-lg) + var(--sp-6));
 }
 /* Redrawn when a content update switches in (main.rs); adds no box. */
 .content-rev { display: contents; }

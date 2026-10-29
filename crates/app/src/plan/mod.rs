@@ -473,7 +473,7 @@ fn ProgressCard(p: Plan) -> Element {
                 div { class: "bar", key: "{label}",
                     span { class: "bar-label small", {label} }
                     span { class: "bar-track", span { class: "bar-fill", style: "inline-size: {share(n):.0}%" } }
-                    span { class: "bar-value small", bdi { "{n}/{p.total}" } }
+                    span { class: "bar-value small", crate::parts::Count { done: n as usize, total: p.total as usize } }
                 }
             }
         }

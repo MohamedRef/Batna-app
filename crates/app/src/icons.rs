@@ -14,8 +14,10 @@ pub fn nav_path(screen: Screen) -> &'static str {
         Screen::Learn => {
             "M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"
         }
-        // open book
-        Screen::Study => "M3 6c3-1 6-1 9 1 3-2 6-2 9-1v12c-3-1-6-1-9 1-3-2-6-2-9-1zM12 7v12",
+        // two stacked review cards
+        Screen::Study => {
+            "M8 4h10a2 2 0 0 1 2 2v10M6 8h9a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2z"
+        }
         // a list of answer choices, the second one ticked
         Screen::Bank => "M4 6h.01M4 12l1.5 1.5L8 11M4 18h.01M10 6h10M11 12h9M10 18h10",
         // stethoscope

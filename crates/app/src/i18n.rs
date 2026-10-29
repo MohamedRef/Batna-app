@@ -1403,7 +1403,9 @@ pub mod learn {
     pub const REMOVE: &str = "شيل";
     pub const CHECK_HINT: &str = "اختار إجابة، وبعدين صحّح. تقدر تغيّر رأيك قبل التصحيح.";
     pub const PICK_FIRST: &str = "اختار إجابة الأول.";
-    pub const PICKED: &str = "اختيارك";
+    pub const MARK_MINE_RIGHT: &str = "✓ اختيارك";
+    pub const MARK_MINE_WRONG: &str = "✗ اختيارك";
+    pub const MARK_RIGHT: &str = "✓ الصح";
     pub const READY: &str = "جاهز؟ دوس صحّح.";
     pub const REVEAL_FIRST: &str = "اكشف الإجابة الأول، أو عدّي.";
     pub const MATCH_FIRST: &str = "وصّل كل الأزواج الأول.";

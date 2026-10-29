@@ -165,7 +165,7 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                         }
                     }
                 }
-                span { class: "muted small ls-count", "{i + 1}/{n}" }
+                span { class: "muted small ls-count num-ltr", "{i + 1}/{n}" }
                 button {
                     class: "ls-view",
                     aria_label: if pages { tx::TO_STEPS } else { tx::TO_PAGES },
@@ -232,7 +232,7 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                 }
                 if let Some(run) = ready.filter(|_| !can_go) {
                     button {
-                        class: "btn btn-primary ls-next",
+                        class: "btn btn-primary btn-lg ls-next",
                         "data-nav": "check",
                         "aria-keyshortcuts": "Enter",
                         onclick: move |_| run.call(()),
@@ -251,7 +251,7 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                     }
                 } else {
                     button {
-                        class: "btn btn-primary ls-next",
+                        class: "btn btn-primary btn-lg ls-next",
                         "data-nav": "next",
                         "aria-keyshortcuts": "Enter",
                         disabled: !can_go,

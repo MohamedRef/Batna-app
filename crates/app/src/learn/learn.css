@@ -23,9 +23,16 @@
 }
 .ls-h { font-size: var(--fs-lg); margin: 0 0 var(--sp-3); line-height: 1.4; }
 .ls-row { display: flex; flex-wrap: wrap; gap: var(--sp-2); align-items: center; }
-.ls-verdict { font-weight: 700; margin-block: var(--sp-3) 0; }
-.ls-verdict.good { color: var(--good); }
-.ls-verdict.bad { color: var(--bad); }
+.ls-verdict {
+  font-weight: 700;
+  margin-block: var(--sp-2) 0;
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--radius-control, var(--radius));
+  background: var(--soft, var(--accent-soft));
+  color: var(--text);
+}
+.ls-verdict.good { color: var(--good); background: var(--good-soft); }
+.ls-verdict.bad { color: var(--bad); background: var(--bad-soft); }
 .ls-pop { animation: ls-pop var(--dur) var(--ease); }
 @keyframes ls-pop { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 @keyframes ls-shake {
@@ -415,7 +422,7 @@ mark {
   gap: var(--sp-2);
 }
 .ls-reveal > *, .ls-check > *, .ls-mnemonic > * { margin: 0; }
-.ls-q { font-size: 1.1rem; font-weight: 600; }
+.ls-q { font-size: 1.25rem; font-weight: 600; line-height: 1.6; }
 .ls-q .ls-rich { font-size: inherit; }
 .ls-answer {
   border-inline-start: 4px solid var(--good);
@@ -476,38 +483,9 @@ mark {
 /* check + case options */
 .ls-options { display: flex; flex-direction: column; gap: var(--sp-2); }
 .ls-option-wrap { display: flex; flex-direction: column; gap: 2px; }
-.ls-option {
-  display: flex;
-  align-items: center;
-  gap: var(--sp-3);
-  inline-size: 100%;
-  min-height: 48px;
-  padding: var(--sp-2) var(--sp-3);
-  border: 1.5px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--surface);
-  text-align: start;
-  cursor: pointer;
-}
-.ls-option:hover:not(:disabled) { border-color: var(--accent); }
-.ls-option:disabled { cursor: default; }
-.ls-option[data-state="right"] { border-color: var(--good); background: var(--good-soft); }
-.ls-option[data-state="wrong"] { border-color: var(--bad); background: var(--bad-soft); animation: ls-shake 260ms; }
-.ls-option[data-state="other"] { opacity: 0.55; }
-.ls-option[data-state="picked"] { border-color: var(--accent); background: var(--accent-soft); box-shadow: 0 0 0 2px var(--accent-soft); }
-.ls-mine { margin-inline-start: auto; color: var(--muted); font-weight: 600; }
-.ls-letter {
-  flex: none;
-  inline-size: 1.7rem;
-  block-size: 1.7rem;
-  display: grid;
-  place-items: center;
-  border-radius: 6px;
-  background: var(--bg);
-  font-family: var(--font-latin);
-  font-weight: 700;
-  font-size: var(--fs-sm);
-}
+/* Choices are parts.css `button.answer`; here only what a lesson adds. */
+.ls-options .answer:disabled:not([data-state]) { opacity: 0.6; }
+.ls-options .answer[data-state="wrong"] { animation: ls-shake 260ms; }
 .ls-why { margin: 0; padding-inline: var(--sp-3); color: var(--muted); }
 .ls-why-box {
   border-radius: var(--radius);
@@ -526,7 +504,7 @@ mark {
   min-height: 44px;
   padding: var(--sp-2) var(--sp-3);
   border: 1.5px solid var(--line);
-  border-radius: 10px;
+  border-radius: var(--radius-control, 13px);
   background: var(--surface);
   text-align: start;
   cursor: pointer;
@@ -694,3 +672,16 @@ button.ls-slot:hover { border-color: var(--accent); }
 /* Lecture headings and unwritten lectures open the lecture's page. */
 button.ls-lecture-head { font-weight: 700; }
 button.ls-soon { background: none; border: 1px dashed var(--line); border-radius: var(--radius); font: inherit; color: var(--muted); }
+
+/* ---------- Glossy · Material You (lesson player) ----------
+   Tonal, rounded tiles and slots; solid fills keep every state readable. */
+.app[data-appearance="glossy"] :is(.ls-tile, .ls-slot, .ls-chiplet, .ls-chiplet-done) {
+  border-radius: var(--radius-card);
+  box-shadow: var(--glass-hi);
+}
+.app[data-appearance="glossy"] .ls-slots li[data-state="filled"] .ls-slot {
+  background: var(--soft, var(--accent-soft));
+  border-color: var(--accent);
+}
+.app[data-appearance="glossy"] .ls-verdict { border-radius: var(--radius-card); }
+.app[data-appearance="glossy"] .ls-bin { border-radius: var(--radius-card); }

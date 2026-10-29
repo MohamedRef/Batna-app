@@ -1,0 +1,389 @@
+schema: batna.lesson/v1
+lecture: geri.L12
+lessons:
+  # ------------------------------------------------------------------
+  - id: geri.L12.lesson1
+    title: "الإساءة اللي محدش بيشوفها"
+    hook: "واحد من كل 10 كبار بيتأذي من اللي بيرعاه كل سنة، وأغلبهم مش هيقولولك. إزاي تسأل صح؟"
+    minutes: 8
+    pages: [210, 213]
+    topics: [definition, prevalence, easi, barriers]
+    goals:
+      - "تعرّف الـ elder abuse بتعريف الـ WHO"
+      - "تعرف تعمل screening بالـ EASI وإمتى تبدأ بالـ Mini-Cog"
+      - "تعرف ليه الأرقام دايمًا أقل من الحقيقة"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 210
+        quote: "Elder abuse is a single, or repeated act, or lack of appropriate action, occurring within any relationship where there is an expectation of trust"
+        title: "التعريف"
+        text: |
+          تعريف الـ **WHO (2008)**: الـ ==elder abuse== هو فعل مرة واحدة أو متكرر، **أو غياب الفعل المناسب**، في أي علاقة فيها **توقّع ثقة**، وبيسبب أذى أو ضيق لشخص كبير.
+
+          لاحظ الحاجتين المهمين:
+          - **lack of appropriate action**: يعني الإهمال إساءة.
+          - **expectation of trust**: الإساءة جاية من حد المفروض نثق فيه.
+
+          والتعريف بيختلف بالثقافة: النرويج بتحط **family disharmony**، وفرنسا **moral cruelty**.
+      - kind: explain
+        page: 211
+        quote: "U.S. estimates indicate that one out of 10 older adults experiences abuse or neglect by a caregiver each year."
+        title: "قد إيه منتشر؟"
+        text: |
+          - موجود في الدول النامية والمتقدمة، و ==underreported== في كل حتة.
+          - الأرقام موجودة بس في دول متقدمة قليلة: **1-10%**.
+          - في أمريكا: **1 من كل 10** كبار بيتعرض لإساءة أو إهمال من اللي بيرعاه كل سنة.
+          - التقارير بتزيد (APS: investigated +16.3%، substantiated +15.6% من 2000 لـ 2004)، بس اللي بيتبلّغ عنه جزء صغير بس.
+          - ثقافيًا: أرامل بيتجوّزوا غصب، وستات كبار لوحدهم بيتّهموا بالسحر.
+      - kind: explain
+        page: 212
+        quote: "The EASI includes five patient-answered items, plus one physician question"
+        title: "الـ EASI"
+        text: |
+          الـ **Elder Abuse Suspicion Index**: اتعمله validation في الـ primary care، للمرضى ==cognitively intact== في الزيارات العادية.
+
+          - **5 أسئلة** المريض بيجاوبها + **سؤال واحد** للدكتور.
+          - **أي "yes" واحدة** في الأسئلة من 2 لـ 6 = محتاج assessment أكتر.
+          - **Sensitivity 0.47**، **specificity 0.75**.
+      - kind: figure
+        page: 212
+        quote: "When the physician does not know the patient or suspects dementia, the two-step process begins with screening for cognitive impairment with the Mini-Cog."
+        title: "خطوة ولا خطوتين؟"
+        alt: "Flow chart. Top question: do you know this patient over time and are they cognitively intact? Yes leads to one-step screening with EASI. No, or dementia suspected, leads to Mini-Cog. Mini-Cog negative leads to EASI. Mini-Cog positive leads to clarifying cognitive impairment before abuse screening. EASI with at least one yes to questions 2 to 6 leads to further assessment."
+        caption: "مريض تعرفه وسليم ذهنيًا: EASI على طول. مريض جديد أو شاكك في dementia: Mini-Cog الأول."
+        svg: |
+          <svg viewBox="0 0 330 380" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="GL12a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="20" y="6" width="290" height="50" rx="8" class="fg-ink"/>
+            <text x="32" y="27" class="t-sm t-b">Known over time and</text>
+            <text x="32" y="45" class="t-sm t-b">cognitively intact?</text>
+            <path d="M90 56L60 86" class="fg-arrow" marker-end="url(#GL12a)"/>
+            <path d="M240 56L270 86" class="fg-arrow" marker-end="url(#GL12a)"/>
+            <text x="40" y="76" class="t-sm t-good">yes</text>
+            <text x="262" y="72" class="t-sm t-bad">no</text>
+            <rect x="6" y="90" width="140" height="44" rx="8" class="fg-good"/>
+            <text x="16" y="117" class="t-sm t-b">One step: EASI</text>
+            <rect x="184" y="90" width="140" height="44" rx="8" class="fg-acc"/>
+            <text x="194" y="117" class="t-sm t-b">Mini-Cog first</text>
+            <path d="M220 134L190 170" class="fg-arrow" marker-end="url(#GL12a)"/>
+            <path d="M290 134V170" class="fg-arrow" marker-end="url(#GL12a)"/>
+            <text x="170" y="160" class="t-sm">neg</text>
+            <text x="296" y="160" class="t-sm">pos</text>
+            <rect x="120" y="174" width="110" height="40" rx="8" class="fg-good"/>
+            <text x="138" y="199" class="t-sm t-b">EASI</text>
+            <rect x="238" y="174" width="88" height="60" rx="8" class="fg-bad"/>
+            <text x="244" y="194" class="t-sm">Clarify</text>
+            <text x="244" y="210" class="t-sm">cognition</text>
+            <text x="244" y="226" class="t-sm">first</text>
+            <path d="M76 134V260M175 214V260" class="fg-thin"/>
+            <rect x="20" y="262" width="290" height="50" rx="8" class="fg-box"/>
+            <text x="32" y="284" class="t-sm t-b">1 or more yes to Q2-Q6</text>
+            <text x="32" y="302" class="t-sm">= further assessment</text>
+            <text x="20" y="346" class="t-sm t-mut">Sensitivity 0.47, specificity 0.75</text>
+            <text x="20" y="366" class="t-sm t-mut">Mini-Cog: under 5 min, like MMSE</text>
+          </svg>
+      - kind: check
+        page: 212
+        quote: "When the physician does not know the patient or suspects dementia, the two-step process begins with screening for cognitive impairment with the Mini-Cog."
+        question: "A new patient, 82, seems forgetful. First step in screening for abuse?"
+        options: ["Mini-Cog", "EASI", "Ask the caregiver", "MMSE then EASI the same day"]
+        answer: 0
+        why:
+          - "صح: مريض جديد وشاكك في dementia = two-step، أوله Mini-Cog."
+          - "الـ EASI لوحده لمريض تعرفه وسليم ذهنيًا."
+          - "الـ caregiver ممكن يكون هو اللي بيأذي."
+          - "الكتاب بيقول Mini-Cog (أقل من 5 دقايق وكفاءته زي الـ MMSE)."
+      - kind: aside
+        tone: trap
+        page: 212
+        quote: "It has a sensitivity of 0.47 and a specificity of 0.75."
+        text: "الـ EASI sensitivity بتاعته **0.47** بس. يعني أكتر من نص المرضى المتأذيين ممكن يطلعوا negative. الـ screen السلبي مش براءة؛ عينك تفضل مفتوحة على العلامات."
+      - kind: explain
+        page: 213
+        quote: "Elder abuse is largely a hidden problem and tends to be committed in the privacy of the elderly person's home"
+        title: "ليه الأرقام أقل من الحقيقة؟"
+        text: |
+          1. مشكلة ==hidden==: في البيت، وغالبًا من العيلة.
+          2. الضحية **مش عايز يبلّغ**: خايف محدش يصدقه، يفقد استقلاله، يتحط في دار، يخسر السند الوحيد اللي ليه (لو المؤذي قريب)، أو ينتقم منه.
+          3. الضحية **مش قادر يبلّغ**: cognitive decline ومرض.
+          4. **قلة تدريب** الـ social workers والشرطة والتمريض.
+          5. الإساءة **subjective**، بتعتمد على تفسير كل واحد.
+          6. خلاف: نحسب الـ **self-neglect** ولا لأ؟ (مفيهوش مؤذي تاني).
+      - kind: mnemonic
+        page: 213
+        quote: "fear of others' disbelief, fear of loss of independence, fear of being institutionalized, fear of losing their only social support"
+        word: "DIIRS"
+        parts:
+          - { key: "D", text: "Disbelief: nobody will believe me" }
+          - { key: "I", text: "Independence: I'll lose it" }
+          - { key: "I", text: "Institution: they'll put me in a home" }
+          - { key: "R", text: "Retaliation by the abuser" }
+          - { key: "S", text: "Support: losing my only social support" }
+        hook: |
+          خمس مخاوف بتسكّت الضحية. لو المؤذي ابنه، الخوف الأكبر غالبًا الـ **S**: «لو بلّغت، مين هيرعاني؟»
+      - kind: try
+        items: [geri.L12.001, geri.L12.008, geri.L12.011, geri.L12.013, geri.L12.018]
+    recap:
+      - "WHO: فعل أو غياب فعل، في علاقة فيها ثقة، بيسبب أذى."
+      - "Underreported؛ 1-10% في الدول المتقدمة؛ 1 من 10 في أمريكا."
+      - "EASI: 5 + 1 سؤال؛ yes واحدة في 2-6 = assess؛ sens 0.47، spec 0.75."
+      - "مريض معروف وسليم: EASI. جديد أو dementia: Mini-Cog الأول."
+      - "Barriers: hidden، مخاوف الضحية، cognition، قلة تدريب، subjective، self-neglect."
+    practice: [geri.L12.001, geri.L12.002, geri.L12.003, geri.L12.004, geri.L12.005, geri.L12.006, geri.L12.007, geri.L12.008, geri.L12.009, geri.L12.010, geri.L12.011, geri.L12.012, geri.L12.013, geri.L12.014, geri.L12.015, geri.L12.016, geri.L12.017, geri.L12.018, geri.L12.019, geri.L12.020, geri.L12.053, geri.L12.054, geri.L12.055, geri.L12.056, geri.L12.057, geri.L12.058, geri.L12.071, geri.L12.072, geri.L12.073]
+  # ------------------------------------------------------------------
+  - id: geri.L12.lesson2
+    title: "خمس أنواع، ومين اللي بيأذي"
+    hook: "الإساءة مش بس ضرب. ساعات بتبقى كارت فيزا، وساعات تهديد بدار مسنين، وساعات أكل مااتقدمش."
+    minutes: 8
+    pages: [214, 216]
+    topics: [types, risk]
+    goals:
+      - "تفرّق الخمس أنواع بالأمثلة"
+      - "تعرف مين المؤذي في العادة"
+      - "تعرف الـ risk factors في الكبير وفي اللي بيرعاه"
+    status: unverified
+    steps:
+      - kind: table
+        page: 214
+        quote: "Financial or material Illegal or improper use of funds Theft of debit or credit cards,"
+        title: "الخمس أنواع"
+        columns: ["Type", "What it is", "Example"]
+        rows:
+          - ["Financial", "Improper use of funds, exploitation", "Card theft, forced transfer of property"]
+          - ["Neglect", "Caregiver fails to meet needs (intent or not)", "No food, hygiene, medical care"]
+          - ["Physical", "Pain or injury", "Hitting, force-feeding, restraint"]
+          - ["Psychological", "Mental anguish", "Threat of a care home, isolation"]
+          - ["Sexual", "Nonconsensual contact or talk", "Touching a nonconsenting person"]
+        hide: [[0, 2], [1, 1], [2, 2], [3, 2]]
+      - kind: aside
+        tone: exam
+        page: 214
+        quote: "Neglect or abandonment Intentional or unintentional Failure to provide adequate"
+        text: "فخ امتحان: الـ ==neglect== ممكن يكون **unintentional**. البنت التعبانة اللي مش بتأكّل أبوها كفاية من غير قصد، ده برضه neglect."
+      - kind: sort
+        page: 214
+        quote: "Slapping, hitting, kicking, force-feeding, restraint, striking with objects"
+        prompt: "حط كل موقف في نوعه:"
+        bins: ["Financial", "Neglect", "Physical", "Psychological"]
+        cards:
+          - { text: "Son keeps her pension card", bin: 0 }
+          - { text: "Forced transfer of the flat", bin: 0 }
+          - { text: "No bath for weeks", bin: 1 }
+          - { text: "No glasses or hearing aid provided", bin: 1 }
+          - { text: "Force-feeding", bin: 2 }
+          - { text: "Tied to the bed", bin: 2 }
+          - { text: "'We'll put you in a home'", bin: 3 }
+          - { text: "Kept away from friends", bin: 3 }
+        why: "الـ force-feeding والـ restraint physical حتى لو شكلهم «رعاية». العزل الاجتماعي والتهديد بالدار psychological."
+      - kind: explain
+        page: 214
+        quote: "Children and living relatives who have a history of substance abuse or have had other life troubles are of particular .concern."
+        title: "مين المؤذي؟"
+        text: |
+          أي حد: زوج أو زوجة، ولاد، قرايب، جار، متطوع، عامل بأجر، ممارس صحي، محامي، أو أي حد عايز ياخد موارد شخص ضعيف.
+
+          الأخطر: ==children and relatives== اللي عندهم **substance abuse** أو مشاكل في حياتهم.
+
+          والمكان؟ **غالبًا البيت** (ولاد كبار، أحفاد، أزواج)، وممكن في **long-term care facilities**.
+      - kind: explain
+        page: 215
+        quote: "Has memory problems (such as dementia). Has physical disabilities. Has depression, loneliness, or lack of social support."
+        title: "Risk factors في الكبير"
+        text: |
+          - **Dementia** و memory problems.
+          - Physical disabilities.
+          - Depression، وحدة، مفيش support.
+          - Alcohol أو substances.
+          - بيتخانق مع الـ caregiver لفظيًا أو جسديًا، أو عنده ميل للعدوانية.
+          - ==Shared living==، و **isolation**: هو والـ caregiver لوحدهم طول الوقت.
+          - كان هو نفسه أب أو زوج مؤذي زمان، أو فيه domestic violence في البيت.
+      - kind: explain
+        page: 215
+        quote: "Feels overwhelmed or resentful. Has a history of substance abuse or a history of abusing others."
+        title: "Risk factors في الـ caregiver"
+        text: |
+          - **Overwhelmed** أو **resentful**، ومش قادر يتعامل مع الضغط.
+          - Substance abuse، أو أذى ناس تانيين قبل كده، أو **criminal history**.
+          - ==Dependent== على الكبير في السكن أو الفلوس.
+          - Mental health problems، و **depression** (شائع في الـ caregivers).
+          - Unemployed.
+          - Shared living، ومفيش حد تاني يساعده.
+          - شايف الرعاية **عبء من غير أي مقابل نفسي**.
+      - kind: figure
+        page: 215
+        quote: "There are also several risk factors, which increase the likelihood that a caregiver will participate in elder abuse."
+        title: "العاصفة الكاملة"
+        alt: "Two overlapping circles. Left circle, the elder: dementia, disability, depression, aggression, past abuser. Right circle, the caregiver: overwhelmed, substance abuse, dependent on the elder, unemployed, depressed. The overlap is labelled shared living and isolation, with the words highest risk."
+        caption: "لما الكبير الضعيف والـ caregiver المضغوط يعيشوا لوحدهم مع بعض، ده أعلى خطر."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="115" cy="150" r="105" class="fg-acc"/>
+            <circle cx="215" cy="150" r="105" class="fg-bad" fill-opacity="0.6"/>
+            <text x="30" y="40" class="t-sm t-b">Elder</text>
+            <text x="250" y="40" class="t-sm t-b">Caregiver</text>
+            <text x="22" y="105" class="t-sm">dementia</text>
+            <text x="22" y="125" class="t-sm">disability</text>
+            <text x="22" y="145" class="t-sm">depression</text>
+            <text x="22" y="165" class="t-sm">aggression</text>
+            <text x="22" y="185" class="t-sm">past abuser</text>
+            <text x="232" y="105" class="t-sm">overwhelmed</text>
+            <text x="232" y="125" class="t-sm">substances</text>
+            <text x="232" y="145" class="t-sm">dependent</text>
+            <text x="232" y="165" class="t-sm">unemployed</text>
+            <text x="232" y="185" class="t-sm">depressed</text>
+            <text x="135" y="140" class="t-sm t-b">shared</text>
+            <text x="135" y="158" class="t-sm t-b">living,</text>
+            <text x="135" y="176" class="t-sm t-b">isolated</text>
+            <text x="110" y="290" class="t-sm t-b t-bad">highest risk</text>
+          </svg>
+      - kind: check
+        page: 215
+        quote: "Is dependent on the older person for housing, finances, or other needs."
+        question: "Which caregiver feature is a risk factor for elder abuse?"
+        options: ["Depends on the elder for housing and money", "Has a full-time job", "Gets regular respite", "Lives in another city"]
+        answer: 0
+        why:
+          - "صح: الـ dependency من أهم الـ risk factors."
+          - "الـ unemployment هو الـ risk factor، مش الشغل."
+          - "الـ respite بيقلل الضغط وبيحمي."
+          - "الـ shared living هو الـ risk factor."
+      - kind: try
+        items: [geri.L12.021, geri.L12.022, geri.L12.027, geri.L12.028]
+    recap:
+      - "Financial، neglect (حتى من غير قصد)، physical (منها force-feeding و restraint)، psychological (تهديد بالدار، عزل)، sexual."
+      - "المؤذي غالبًا من العيلة، خصوصًا مع substance abuse؛ المكان غالبًا البيت."
+      - "الكبير: dementia، disability، depression، aggression، shared living، isolation."
+      - "الـ caregiver: overwhelmed، substances، dependent، unemployed، depressed، شايفها عبء."
+    practice: [geri.L12.021, geri.L12.022, geri.L12.023, geri.L12.024, geri.L12.025, geri.L12.026, geri.L12.027, geri.L12.028, geri.L12.029, geri.L12.030, geri.L12.031, geri.L12.032, geri.L12.033, geri.L12.059, geri.L12.060, geri.L12.061, geri.L12.062, geri.L12.063, geri.L12.074]
+  # ------------------------------------------------------------------
+  - id: geri.L12.lesson3
+    title: "العلامات، وإزاي نمنع"
+    hook: "النضارة المكسورة، الحبوب اللي زايدة في العلبة، والابن اللي مش عايز يسيبك مع أمه لوحدها. دي مش صدف."
+    minutes: 9
+    pages: [216, 219]
+    topics: [signs, prevention]
+    goals:
+      - "تعرف العلامات لكل نوع"
+      - "متقبلش تفسير «ده من الـ dementia» بسهولة"
+      - "تنصح الكبير والـ caregiver إزاي يمنعوا الإساءة"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 216
+        quote: "They may appear to be symptoms of dementia or signs of the elderly person‘s frailty—or caregivers may explain them to you that way."
+        title: "ليه بنفوّتها؟"
+        text: |
+          العلامات ممكن تبان زي ==dementia== أو frailty، والـ caregiver نفسه ممكن يفسّرها كده. فيه overlap فعلًا مع التدهور الذهني، بس **ده مش سبب** تصدّق كلام الـ caregiver وتمشي.
+
+          **علامات عامة**: خناق أو توتر دايم بين الـ caregiver والكبير، وتغيير في شخصية الكبير أو سلوكه. لو مش متأكد، دوّر على **clusters** من العلامات الجسدية والسلوكية.
+      - kind: explain
+        page: 216
+        quote: "Unexplained signs of injury, such as bruises, welts, or scars, burns especially if they appear symmetrically on two sides of the body."
+        title: "علامات الـ physical abuse"
+        text: |
+          - كدمات أو حروق مش مفهومة، خصوصًا لو ==symmetrical== على الناحيتين.
+          - كسور، التواءات، خلع.
+          - Overdose، أو أدوية **زايدة** في العلبة عن المفروض (مش بتتاخد).
+          - نضارة أو إطار مكسور.
+          - علامات **restraint**: آثار حبل على الرسغ.
+          - الـ caregiver **رافض** يسيبك مع المريض لوحده.
+      - kind: aside
+        tone: tip
+        page: 217
+        quote: "Signs of being restrained, such as rope marks on wrists Caregiver's refusal to allow you to see the elder alone."
+        text: "عادة كويسة في عيادة المسنين: اكشف على المريض **لوحده** جزء من الزيارة. لو الـ caregiver رفض بإصرار، ده نفسه علامة."
+      - kind: match
+        page: 217
+        quote: "Behavior from the elder that mimics dementia, such as rocking, sucking, or mumbling to oneself."
+        prompt: "وصّل العلامة بنوع الإساءة:"
+        pairs:
+          - ["Rocking and mumbling; belittling caregiver", "Emotional"]
+          - ["Bruises around breasts or genitals", "Sexual"]
+          - ["Bed sores, dehydration, dirty bedding", "Neglect"]
+          - ["ATM use while bedridden", "Financial"]
+          - ["Duplicate billing, over-medication", "Healthcare fraud"]
+        why: "الـ emotional abuse ممكن يعمل سلوك شبه الـ dementia (rocking، sucking، mumbling). الـ neglect بيبان في الجسم والبيت. والـ financial بيبان في الحساب والورق."
+      - kind: explain
+        page: 217
+        quote: "Significant withdrawals from the elder's accounts. Sudden changes in the elder's financial condition."
+        title: "Neglect و financial"
+        text: |
+          **Neglect** (من الـ caregiver أو self-neglect): وزن نازل، malnutrition، dehydration، **bed sores** مش متعالجة، بيت وسخ وحشرات، لبس مش مناسب للجو، متساب من غير حمّام، بيت مش آمن (مفيش تدفئة أو مية، كهربا بايظة)، أو اتساب في مكان عام.
+
+          **Financial**: سحب كبير من الحساب، تغيير مفاجئ في وضعه المادي، فلوس أو حاجات بتختفي، تغيير مريب في ==wills== أو power of attorney، أسماء جديدة على الـ signature card، فواتير مش مدفوعة رغم إن معاه فلوس، ونشاط مستحيل يعمله (ATM وهو في السرير).
+      - kind: explain
+        page: 218
+        quote: "Duplicate billings for the same medical service or device. Evidence of overmedication or under-medication."
+        title: "Healthcare fraud"
+        text: |
+          - **Duplicate billing** لنفس الخدمة أو الجهاز.
+          - ==Over- or under-medication==.
+          - رعاية ضعيفة والفواتير مدفوعة كاملة.
+          - مشاكل في المكان: staff قليل أو مش متدرب أو مرتبه ضعيف، زحمة، وردود مش واضحة على أسئلتك.
+      - kind: case
+        page: 217
+        quote: "Unusual weight loss, malnutrition, dehydration. Untreated physical problems, such as bed sores."
+        stem: "An 85-year-old man is brought from home by his nephew, who handles his pension. He is thin and dehydrated with a heel pressure sore."
+        steps:
+          - question: "The nephew says: 'It's his dementia, he refuses food.' What do you do?"
+            options: ["Look for a cluster of signs; don't accept the explanation on his say-so", "Accept it and discharge", "Blame the patient", "Start an antidepressant only"]
+            answer: 0
+            why: "العلامات بتتداخل مع الـ dementia، بس ده مش سبب تتجاهلها بكلام الـ caregiver."
+          - reveal: "His bank shows large withdrawals; his electricity bill is unpaid."
+            question: "What does this add?"
+            options: ["Financial exploitation", "Healthcare fraud", "Sexual abuse", "Nothing"]
+            answer: 0
+            why: "سحب كبير وفواتير مش مدفوعة مع إن معاه فلوس = financial exploitation."
+          - question: "Which caregiver risk factor is present?"
+            options: ["Dependence on the elder's money", "Full-time employment", "Good support network", "None"]
+            answer: 0
+            why: "الـ caregiver اللي معتمد على فلوس الكبير risk factor."
+      - kind: explain
+        page: 218
+        quote: "Posting and opening your own mail. Not giving personal information over the phone. Using direct deposit for all checks. Having your own phone."
+        title: "نصايح للكبير"
+        text: |
+          الـ ==education== للكل هو أساس المنع. ولو انت الكبير:
+
+          - خلي بالك من صحتك، واطلب مساعدة للـ drugs والكحول والاكتئاب (ليك ولعيلتك).
+          - Support groups، وخطط لمستقبلك: **power of attorney** أو **living will**.
+          - استشير حد مستقل تثق فيه **قبل ما تمضي** أي ورقة.
+          - خليك active ومتواصل: الـ **isolation** مرتبط بالإساءة.
+          - ابعت وافتح جواباتك بنفسك، ومتديش بياناتك في التليفون.
+          - **Direct deposit**، وتليفون خاص بيك، وراجع الوصية كل فترة.
+          - اعرف حقوقك؛ في دار المسنين اتصل بالـ **Long Term Care Ombudsman**.
+      - kind: mnemonic
+        page: 219
+        quote: "Take immediate steps to relieve caregiver stress and burnout."
+        word: "BREAK"
+        parts:
+          - { key: "B", text: "Burnout: relieve stress now" }
+          - { key: "R", text: "Respite: friends, relatives or respite agencies for a break" }
+          - { key: "E", text: "Everyday adult day care program" }
+          - { key: "A", text: "Addiction or depression: get help" }
+          - { key: "K", text: "Keep healthy and join a caregiver support group" }
+        hook: |
+          اللي بيرعى محتاج **BREAK**. الـ caregiver المرتاح أقل احتمال يأذي. حتى ساعتين راحة فارقين.
+      - kind: check
+        page: 219
+        quote: "Listen to seniors and their caregivers. Intervening when you suspect elder abuse."
+        question: "Which is one of the book's four conclusions for preventing elder abuse?"
+        options: ["Intervene when you suspect abuse", "Wait for certain proof before acting", "Speak only to the caregiver", "Leave it to the family"]
+        answer: 0
+        why:
+          - "صح: اسمع، تدخّل، علّم، واحمي."
+          - "الكتاب بيقول تدخّل لما تشك."
+          - "اسمع الكبار والـ caregivers الاتنين."
+          - "المؤذي غالبًا من العيلة."
+      - kind: try
+        items: [geri.L12.037, geri.L12.040, geri.L12.043, geri.L12.047, geri.L12.051]
+    recap:
+      - "متقبلش «ده من الـ dementia» من غير ما تدوّر على cluster."
+      - "Physical: كدمات symmetrical، كسور، أدوية زايدة، نضارة مكسورة، restraint، رفض تشوفه لوحده."
+      - "Emotional: سلوك شبه الـ dementia + caregiver بيهين."
+      - "Neglect: وزن، bed sores، بيت وسخ. Financial: سحب، wills، ATM وهو في السرير."
+      - "المنع: education، direct deposit، استشارة قبل التوقيع، ombudsman؛ الـ caregiver محتاج BREAK."
+    practice: [geri.L12.034, geri.L12.035, geri.L12.036, geri.L12.037, geri.L12.038, geri.L12.039, geri.L12.040, geri.L12.041, geri.L12.042, geri.L12.043, geri.L12.044, geri.L12.045, geri.L12.046, geri.L12.047, geri.L12.048, geri.L12.049, geri.L12.050, geri.L12.051, geri.L12.052, geri.L12.064, geri.L12.065, geri.L12.066, geri.L12.067, geri.L12.068, geri.L12.069, geri.L12.070]

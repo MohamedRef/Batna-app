@@ -1,0 +1,386 @@
+schema: batna.lesson/v1
+lecture: dm.L16
+lessons:
+  # ------------------------------------------------------------------
+  - id: dm.L16.lesson1
+    title: "DKA والسكر 105؟ أيوه ممكن"
+    hook: "مريض T1DM بيرجّع، والسكر طبيعي. لو بصيت على السكر بس، هتروّحه وهو في DKA."
+    minutes: 7
+    pages: [196, 200]
+    topics: [eudka]
+    goals:
+      - "تعرف الـ euglycemic DKA من غير ما السكر يضحك عليك"
+      - "تشرح ليه الصيام بيعمل كيتونات والسكر طبيعي"
+      - "تعدّ أسباب الـ euglycemic ketoacidosis والـ differential"
+    status: unverified
+    steps:
+      - kind: case
+        page: 198
+        quote: "He was treated with 0.9% saline rehydration, 10% dextrose, & intravenous insulin"
+        stem: "Case 1: a 34-year-old with T1DM for 19 years, 4 days of vomiting and flu-like illness. He raised his NPH without checking glucose."
+        steps:
+          - reveal: "Glucose 105 mg/dL, pH 7.3, HCO3 10, anion gap 29, urine ketones 4+, lactate normal, no toxins."
+            question: "Diagnosis?"
+            options: ["Euglycemic DKA", "Lactic acidosis", "Simple starvation ketosis", "Salicylate poisoning"]
+            answer: 0
+            why: "high anion gap + كيتونات 4+ والسكر 105: ده euglycemic DKA."
+          - question: "Treatment?"
+            options: ["0.9% saline, 10% dextrose and IV insulin", "Hold insulin; glucose is normal", "Bicarbonate only", "Oral fluids"]
+            answer: 0
+            why: "الـ dextrose بيخلّي الإنسولين يكمّل شغله على الكيتونات من غير hypo."
+          - reveal: "HbA1c 11.5%. Anhedonia, no interest in food or his diabetes; barely ate for 2-3 weeks."
+            question: "Underlying cause?"
+            options: ["Severe depression with prolonged poor intake", "Insulin overdose", "SGLT2 inhibitor", "Pancreatitis"]
+            answer: 0
+            why: "الطب النفسي شخّص severe depression، والصيام الطويل عمل الصورة دي."
+      - kind: explain
+        page: 198
+        quote: "patients with DM who continue taking sufficient amounts of insulin may maintain euglycemia, but are unable to stop the ketone body formation"
+        title: "إزاي السكر طبيعي والكيتونات طالعة؟ (euglycemia + ketone formation)"
+        text: |
+          - المريض بياخد إنسولين **كفاية يمسك السكر**، بس ==مش كفاية يوقف الكيتونات==.
+          - الصيام الطويل: ==glycogen depletion== شبه كامل، فالسكر مش لاقي مصدر يطلع منه.
+          - في نفس الوقت الصيام بيزوّد **lipolysis** و **FFA**، والإنسولين بيبقى أضعف في إنه يوقف الـ ketogenesis.
+      - kind: figure
+        page: 198
+        quote: "In cases of prolonged fasting, near-total glycogen depletion contributes to the normoglycemia as metabolic acidosis continues to develop."
+        title: "الصيام + الإنسولين"
+        alt: "Two arrows from prolonged fasting with insulin. One path: glycogen depleted, so glucose stays near normal. Other path: lipolysis and free fatty acids rise, ketogenesis continues, so ketoacidosis develops. Both meet at euglycemic DKA."
+        caption: "السكر هادي، والكيتونات شغالة في الخلفية."
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L16a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker></defs>
+            <rect x="65" y="10" width="200" height="40" rx="8" class="fg-box"/>
+            <text x="165" y="35" text-anchor="middle" class="t-b">Fasting + some insulin</text>
+            <path d="M120 50L75 95" class="fg-arrow" marker-end="url(#L16a)"/>
+            <path d="M210 50L255 95" class="fg-arrow" marker-end="url(#L16a)"/>
+            <rect x="10" y="98" width="145" height="62" rx="8" class="fg-acc"/>
+            <text x="82" y="122" text-anchor="middle" class="t-sm">Glycogen depleted</text>
+            <text x="82" y="145" text-anchor="middle" class="t-b t-acc">Glucose ~normal</text>
+            <rect x="175" y="98" width="145" height="62" rx="8" class="fg-bad"/>
+            <text x="247" y="122" text-anchor="middle" class="t-sm">Lipolysis, FFA ↑</text>
+            <text x="247" y="145" text-anchor="middle" class="t-b t-bad">Ketogenesis on</text>
+            <path d="M82 160L150 195" class="fg-arrow" marker-end="url(#L16a)"/>
+            <path d="M247 160L180 195" class="fg-arrow" marker-end="url(#L16a)"/>
+            <rect x="75" y="198" width="180" height="40" rx="8" class="fg-bad"/>
+            <text x="165" y="223" text-anchor="middle" class="t-b">Euglycemic DKA</text>
+          </svg>
+      - kind: table
+        page: 199
+        quote: "Causes of Euglycemic Ketoacidosis"
+        title: "أسباب الـ euglycemic ketoacidosis"
+        columns: ["الآلية", "الأسباب"]
+        rows:
+          - ["Low circulating glucose", "Starvation، vomiting، dieting، depression، pregnancy، glycogen storage، cirrhosis"]
+          - ["Endogenous H+", "Lactic acidosis، pancreatitis، sepsis، RTA"]
+          - ["Exogenous H+", "Salicylate، methanol"]
+        hide: [[0, 1], [2, 1]]
+      - kind: mnemonic
+        page: 199
+        quote: "Differential diagnoses include: prolonged starvation, excess alcohol consumption, salicylate overdose, lactic acidosis, tricyclic antidepressant overdose, & renal tubular acidosis."
+        word: "STARSL"
+        hook: "الـ differential لـ acidosis في مريض سكر غير الـ DKA:"
+        parts:
+          - { key: "S", text: "Starvation (prolonged)" }
+          - { key: "T", text: "Tricyclic antidepressant overdose" }
+          - { key: "A", text: "Alcohol excess" }
+          - { key: "R", text: "Renal tubular acidosis" }
+          - { key: "S", text: "Salicylate overdose" }
+          - { key: "L", text: "Lactic acidosis" }
+      - kind: aside
+        tone: joke
+        page: 200
+        quote: "Patients with T1DM presenting with nausea & vomiting & found to have a normal glucose may still have life-threatening ketoacidosis"
+        text: |
+          الجلوكوميتر قالك 105 وانت ارتحت؟ الجهاز ده ==مش بيقيس كيتونات==. مريض T1DM بيرجّع: اعمل **blood gas** حتى لو السكر بيضحكلك.
+      - kind: check
+        page: 200
+        quote: "an assessment of their acid/base status is still indicated."
+        question: "A T1DM patient has 3 days of vomiting, kept full basal insulin, glucose 140 mg/dL, urine ketones 3+. Next?"
+        options:
+          - "Assess acid-base status (blood gas, ketones)"
+          - "Reassure; glucose is normal"
+          - "Stop insulin"
+          - "Give glucagon"
+        answer: 0
+        why:
+          - "صح: السكر الطبيعي مش بينفي ketoacidosis."
+          - "ده بالظبط شكل الـ euglycemic DKA."
+          - "وقف الإنسولين يزوّد الكيتونات."
+          - "الجلوكاجون بيرفع السكر ومش بيعالج الكيتونات."
+      - kind: try
+        items: [dm.L16.001, dm.L16.002, dm.L16.007, dm.L16.008, dm.L16.049]
+    recap:
+      - "Euglycemic DKA: كيتونات و acidosis والسكر شبه طبيعي."
+      - "السبب: إنسولين كفاية للسكر بس مش للكيتونات + صيام فرّغ الـ glycogen."
+      - "Case 1: depression وأسابيع من غير أكل في T1DM؛ العلاج saline + 10% dextrose + IV insulin."
+      - "T1DM + vomiting + سكر طبيعي = لازم blood gas."
+    practice: [dm.L16.001, dm.L16.002, dm.L16.003, dm.L16.004, dm.L16.005, dm.L16.006, dm.L16.007, dm.L16.008, dm.L16.009, dm.L16.010, dm.L16.046, dm.L16.048, dm.L16.049]
+  # ------------------------------------------------------------------
+  - id: dm.L16.lesson2
+    title: "شربات الدوا و HHS في طفل"
+    hook: "تلات أدوية برد عادية ودّت طفل الـ DKA. وطفل تاني جاله HHS، اللي المفروض مرض كبار."
+    minutes: 7
+    pages: [200, 205]
+    topics: [excipients, child-hhs]
+    goals:
+      - "تفتكر إن الـ excipients ممكن تبوّظ السكر"
+      - "تعرف الـ HHS في الأطفال وقد إيه خطير"
+      - "تعالج pediatric HHS: الإنسولين والسوائل والـ dextrose"
+    status: unverified
+    steps:
+      - kind: reveal
+        page: 201
+        quote: "High sugar base in all 3 formulations went unnoticed by the practitioner & the dispensing pharmacist."
+        prompt: "طفل 6 سنين T1DM أخد paracetamol و chlorpheniramine و amoxicillin/clavulanate شراب للـ sinusitis. يوم 3: DKA. إيه السبب؟"
+        answer: "الشربات التلاتة فيهم ==sucrose== كـ syrup base، حوالي ==90 g/day== سكر. لا الدكتور ولا الصيدلي خدوا بالهم. والـ **sinusitis** نفسها ممكن تكون ساعدت."
+      - kind: explain
+        page: 201
+        quote: "Therapeutically inactive ingredients of a medicine are known as excipients."
+        title: "الـ excipients: مش دايمًا بريئة"
+        text: |
+          - الـ **excipients** هي المكونات ==therapeutically inactive== في الدوا: binders، fillers، preservatives، و ==sweeteners==.
+          - المفروض إنها آمنة، بس ده **مش صح دايمًا**.
+          - مع مريض سكر: خد history كويس وبص على مكونات الدوا، خصوصًا ==الشربات==.
+      - kind: aside
+        tone: joke
+        page: 201
+        quote: "Total sucrose content (including relative sugars) of ~90 g/day in the form of syrup base."
+        text: |
+          90 جرام سكر في اليوم؟ ده تقريبًا ==كيس حلاوة كامل== متخبي في "ملعقة كل 8 ساعات". الدوا بيعالج البرد وبيعمل DKA ببلاش.
+      - kind: case
+        page: 205
+        quote: "Management of HHS in pediatrics is the same for DKA; exogenous insulin infusion at a rate of 0.1 U/kg/h is recommended."
+        stem: "Case 3: a 7-year-old, a week of polyuria, polydipsia, weight loss and enuresis, 4 weeks after a viral illness."
+        steps:
+          - reveal: "GCS 13, severely dehydrated. Glucose 954, corrected Na 152, osmolality 412, pH 7.21, HCO3 19.8, no urine ketones."
+            question: "Diagnosis?"
+            options: ["HHS", "Severe DKA", "Diabetes insipidus", "AKI only"]
+            answer: 0
+            why: "سكر فوق 600، osmolality 412، ومفيش كيتونات: HHS."
+          - question: "Insulin rate?"
+            options: ["0.1 units/kg/h", "1 unit/kg/h", "No insulin", "s.c. only"]
+            answer: 0
+            why: "Pediatric HHS زي الـ DKA: 0.1 U/kg/h."
+          - question: "Fluids?"
+            options: ["0.9% saline, then 0.45-0.75%", "5% dextrose first", "Hypertonic saline", "Oral only"]
+            answer: 0
+            why: "Isotonic الأول (وهو hypotonic بالنسبة لهم)، بعدين 0.45-0.75%."
+      - kind: explain
+        page: 203
+        quote: "HHS is characterized by hyperglycemia more than 600 mg/dL, hyperosmolality more than 330 mOsm/L, & a mild metabolic acidosis (pH>7.2)."
+        title: "تعريف الـ HHS في الحالة دي"
+        text: |
+          - Glucose ==>600== mg/dL
+          - Osmolality ==>330== mOsm/L
+          - Mild acidosis، pH ==>7.2==
+
+          خلي بالك: **L15** كانت بتقول effective osmolality >300 و pH ≥7.3. الحالة دي بتستخدم أرقام تانية.
+      - kind: update
+        ref: "ADA/EASD/JBDS/AACE/DTS hyperglycemic crises consensus 2024"
+        text: "الـ consensus الجديد بيعرّف HHS بـ glucose ≥600 و effective osmolality >300 و pH ≥7.3 (زي L15). لو السؤال عن Case 3، جاوب بأرقام الحالة."
+      - kind: table
+        page: 204
+        quote: "Recent reports suggest high mortality rates in children with HHS (~10-35%)."
+        title: "DKA ضد HHS في الأطفال"
+        columns: ["", "DKA", "HHS"]
+        rows:
+          - ["Mortality", "<1%", "~10-35%"]
+          - ["Ketones", "عالية", "قليلة أو مفيش"]
+          - ["أخطر مضاعفات", "Cerebral edema، ARDS", "Cerebral edema، ARDS"]
+        hide: [[0, 2], [2, 2]]
+      - kind: mnemonic
+        page: 205
+        quote: "Dextrose is added to intravenous fluids when serum glucose drops to 300 mg/dl to avoid overly precipitous drops in glucose levels."
+        word: "ISD"
+        hook: "علاج pediatric HHS:"
+        parts:
+          - { key: "I", text: "Insulin 0.1 U/kg/h" }
+          - { key: "S", text: "Saline 0.9%، بعدين 0.45-0.75%" }
+          - { key: "D", text: "Dextrose لما السكر ينزل 300" }
+      - kind: try
+        items: [dm.L16.011, dm.L16.016, dm.L16.018, dm.L16.026, dm.L16.050]
+    recap:
+      - "الـ excipients (زي سكر الشربات) ممكن تعمل DKA: بص على مكونات الدوا."
+      - "Case 3 HHS: glucose >600، osmolality >330، pH >7.2."
+      - "Mortality في الأطفال: DKA <1%، HHS ~10-35%."
+      - "العلاج: insulin 0.1 U/kg/h، saline، و dextrose عند 300."
+    practice: [dm.L16.011, dm.L16.012, dm.L16.013, dm.L16.014, dm.L16.015, dm.L16.016, dm.L16.017, dm.L16.018, dm.L16.019, dm.L16.020, dm.L16.021, dm.L16.022, dm.L16.023, dm.L16.024, dm.L16.025, dm.L16.026, dm.L16.027, dm.L16.047, dm.L16.050]
+  # ------------------------------------------------------------------
+  - id: dm.L16.lesson3
+    title: "DKA بالشلل: لما البوتاسيوم 1.3"
+    hook: "ست جت مشلولة الأربع أطراف وبتنهج. مش Guillain-Barré: ده بوتاسيوم ودّع."
+    minutes: 6
+    pages: [205, 208]
+    topics: [hypokalemia]
+    goals:
+      - "تربط الشلل الـ flaccid مع hypokalemia في DKA"
+      - "تفتكر ليه الإنسولين يستنى"
+      - "تعدّ الحالات اللي فيها hypokalemia + metabolic acidosis"
+    status: unverified
+    steps:
+      - kind: case
+        page: 207
+        quote: "Due to severe hypokalemia, treatment with insulin had to be withheld temporarily till her serum potassium levels were corrected."
+        stem: "Case 4: a 45-year-old woman, fever and cough for 2 days, then 8 hours of rapidly progressive weakness of all limbs and breathlessness."
+        steps:
+          - reveal: "Flaccid 0/5 quadriparesis, absent reflexes, normal sensation, diaphragm involved."
+            question: "Which electrolyte?"
+            options: ["Severe hypokalemia", "Hypercalcemia", "Hypernatremia", "Hypermagnesemia"]
+            answer: 0
+            why: "Hypokalemia شديدة ممكن تعمل شلل كامل حتى عضلات التنفس."
+          - reveal: "Glucose 474, K 1.3, ketonuria, high anion gap, HbA1c 9%. ECG: AF, ST depression, flat T, U waves."
+            question: "Diagnosis?"
+            options: ["DKA with severe hypokalemia (new T2DM)", "Guillain-Barré", "Thyrotoxic periodic paralysis", "Myasthenic crisis"]
+            answer: 0
+            why: "Ketoacidosis + K 1.3، والغدة والـ CPK والأشعة طبيعيين."
+          - question: "Insulin?"
+            options: ["Withhold until K is corrected", "0.1 units/kg/h now", "Bolus now", "s.c. only"]
+            answer: 0
+            why: "الإنسولين يدخّل الـ K الخلايا فينزل أكتر: يستنى."
+      - kind: figure
+        page: 206
+        quote: "features of hypokalemia manifesting as ST segment depression, T-wave flattening & prominent U-waves."
+        title: "رسم القلب في الـ hypokalemia"
+        alt: "A schematic ECG beat with a depressed ST segment, a flattened T wave and a prominent U wave after it, each labelled."
+        caption: "ST نازل، T مفرود، و U باين."
+        svg: |
+          <svg viewBox="0 0 330 170" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L16b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker></defs>
+            <path d="M10 100H50Q58 90 66 100H80L88 110L98 30L108 118L116 100L130 108H170Q185 98 200 108H215Q232 80 250 100H320" class="fg-arrow" fill="none"/>
+            <path d="M150 140L150 112" class="fg-arrow" marker-end="url(#L16b)"/>
+            <text x="150" y="156" text-anchor="middle" class="t-sm">ST depression</text>
+            <path d="M185 70L185 98" class="fg-arrow" marker-end="url(#L16b)"/>
+            <text x="185" y="62" text-anchor="middle" class="t-sm">Flat T</text>
+            <path d="M265 60L245 88" class="fg-arrow" marker-end="url(#L16b)"/>
+            <text x="275" y="52" text-anchor="middle" class="t-b t-bad">U wave</text>
+          </svg>
+      - kind: explain
+        page: 208
+        quote: "The most characteristic abnormality associated with DKA is loss of total body potassium."
+        title: "البوتاسيوم في الـ DKA"
+        text: |
+          - أشهر حاجة في الـ DKA: ==total body K loss==، حوالي ==300-600 mEq==.
+          - بس الـ **serum K** بيبان طبيعي أو عالي، لأن الـ acidosis بتطلّع الـ K من الخلايا (مقابل H+).
+          - أول ما تبدأ insulin وسوائل، الـ K ممكن ==ينزل فجأة==.
+      - kind: reveal
+        page: 208
+        quote: "insulin treatment should be delayed until K+ concentration is restored to >3.3 mEq/L."
+        prompt: "DKA والـ K جاي 2.9. تبدأ إيه الأول؟"
+        answer: "الـ **K مع السوائل** الأول، والإنسولين ==يستنى== لحد ما الـ K يبقى ==>3.3== (حسب الحالة دي)."
+      - kind: update
+        ref: "ADA/EASD/JBDS/AACE/DTS hyperglycemic crises consensus 2024"
+        text: "الـ algorithm في L15 (p190) بيستنى لحد 3.5. الكتاب نفسه فيه الرقمين: 3.3 في Case 4 و 3.5 في L15."
+      - kind: mnemonic
+        page: 207
+        quote: "The coexistence of hypokalemia with metabolic acidosis is encountered in very few conditions"
+        word: "PDDAA"
+        hook: "Hypokalemia مع metabolic acidosis في حالات قليلة:"
+        parts:
+          - { key: "P", text: "Proximal RTA" }
+          - { key: "D", text: "Distal RTA" }
+          - { key: "D", text: "DKA" }
+          - { key: "A", text: "Amphotericin toxicity" }
+          - { key: "A", text: "Acetazolamide overdose" }
+      - kind: aside
+        tone: analogy
+        page: 208
+        quote: "Serum K+ levels can fall precipitously upon the initiation of insulin treatment & volume replacement"
+        text: |
+          الـ **serum K** في الـ DKA زي حساب بنكي فاضي بس الـ **ATM** لسه بيطلّع فلوس من "الخزنة الجوانية". أول ما الـ **insulin treatment** يقفل الخزنة، هتكتشف إنك ==مفلس==.
+      - kind: try
+        items: [dm.L16.028, dm.L16.030, dm.L16.031, dm.L16.034, dm.L16.036]
+    recap:
+      - "Flaccid quadriparesis + ketoacidosis + K 1.3 = DKA مع hypokalemic paralysis."
+      - "DKA: total body K ناقص 300-600 mEq رغم إن الـ serum K طبيعي."
+      - "K قليل: ابدأ K مع السوائل، والإنسولين يستنى (>3.3 هنا، 3.5 في L15)."
+      - "Hypokalemia + acidosis: RTA (proximal/distal)، DKA، amphotericin، acetazolamide."
+    practice: [dm.L16.028, dm.L16.029, dm.L16.030, dm.L16.031, dm.L16.032, dm.L16.033, dm.L16.034, dm.L16.035, dm.L16.036, dm.L16.037]
+  # ------------------------------------------------------------------
+  - id: dm.L16.lesson4
+    title: "الحمل: تلات حالات، تلات تشخيصات"
+    hook: "واحدة جالها T1DM جديد في الشهر الثامن، وواحدة سكر حمل من الأسبوع السادس، وواحدة كيتونات من الجوع."
+    minutes: 7
+    pages: [209, 213]
+    topics: [pregnancy]
+    goals:
+      - "تفرق بين new T1DM و early GDM و starvation ketoacidosis في الحمل"
+      - "تعرف امتى تعمل OGTT بدري"
+      - "تفتكر الـ euglycemic DKA كـ differential"
+    status: unverified
+    steps:
+      - kind: case
+        page: 210
+        quote: "Islet cells antibodies (ICA), antibodies to glutamate decarboxylase (anti- GAD) & IA2 antibodies: Positive."
+        stem: "Case 5: 20 years, 32 weeks, preterm labor and reduced fetal movements. Normal 50 g challenge at 28 weeks."
+        steps:
+          - reveal: "Hyperventilating, ketotic; glucose 618 mg/dL; weeks of thirst and polyuria."
+            question: "What is happening?"
+            options: ["DKA in pregnancy", "Starvation ketosis", "HHS", "Preeclampsia"]
+            answer: 0
+            why: "سكر عالي جدًا + كيتونات + hyperventilation."
+          - reveal: "Glucose stays 494-569 despite IV insulin; NST shows null variability."
+            question: "Next?"
+            options: ["Cesarean section", "Wait 48 h", "Slow induction", "Bicarbonate and reassess"]
+            answer: 0
+            why: "حالة الأم + الجنين مش مطمّن: cesarean، والطفل اتولد كويس 2,410 g."
+          - reveal: "Serum insulin zero; ICA, anti-GAD and IA2 positive."
+            question: "Final diagnosis?"
+            options: ["New-onset T1DM", "GDM", "MODY", "T2DM"]
+            answer: 0
+            why: "إنسولين صفر + antibodies = T1DM جديد."
+      - kind: explain
+        page: 212
+        quote: "She underwent a 75 g OGTT at 6 weeks postpartum, which was normal."
+        title: "Case 6: سكر حمل بدري"
+        text: |
+          - ممرضة 29 سنة، BMI 23، أبوها وأمها T2DM وأختها GDM.
+          - **OGTT في أسبوع 6** غير طبيعي، والحمل الأول ==أجهض==.
+          - الحمل التاني: OGTT ==بدري أول ما يتعرف الحمل==، وبرضه غير طبيعي، فاتعالجت بـ **basal-bolus insulin**.
+          - بعد الولادة السكر رجع طبيعي، و OGTT بعد 6 أسابيع ==طبيعي==، ونصحوها عن خطر T2DM بعدين.
+      - kind: aside
+        tone: analogy
+        page: 212
+        quote: "Early-onset gestational diabetes"
+        text: |
+          الكتاب سمّاها **early-onset GDM** رغم إن الـ HbA1c كان 6.6% في أسبوع 6. في L13 الرقم ده بدري كان ممكن يتحسب ==overt diabetes==. في الامتحان عن Case 6: جاوب بتشخيص الكتاب.
+      - kind: case
+        page: 213
+        quote: "Starvation ketoacidosis in pregnancy"
+        stem: "Case 7: 40 years, 35 weeks, GDM on diet and insulin. Sore throat, then 24 hours of vomiting and no intake."
+        steps:
+          - reveal: "Glucose 53-85, pH 7.29, HCO3 13.7, AG 18.9, normal lactate, urine ketones 4+."
+            question: "Diagnosis?"
+            options: ["Starvation ketoacidosis in pregnancy", "SGLT2 euglycemic DKA", "Lactic acidosis", "HELLP"]
+            answer: 0
+            why: "كيتونات و acidosis والسكر واطي بعد جوع في آخر الحمل."
+          - question: "Fluids failed. Then?"
+            options: ["Emergency cesarean, then ICU", "Bicarbonate only", "Observe", "Induce over 48 h"]
+            answer: 0
+            why: "الـ acidosis اتحلت بسرعة بعد الولادة."
+      - kind: reveal
+        page: 213
+        quote: "The definition of euglycaemic DKA is a glucose concentration of less than 180 mg/dl in association with a bicarbonate concentration less than 10 mmol/L."
+        prompt: "إيه تعريف الـ euglycemic DKA في الحالة دي؟"
+        answer: "Glucose ==<180== mg/dL مع bicarbonate ==<10== mmol/L. (L15 كانت بتقول <200 للـ euDKA، فخلي بالك من الرقمين.)"
+      - kind: sort
+        page: 213
+        quote: "Starvation ketoacidosis in pregnancy"
+        prompt: "الحاجة دي تخص أنهي حالة؟"
+        bins: ["Case 5", "Case 6", "Case 7"]
+        cards:
+          - { text: "Zero insulin, positive GAD", bin: 0 }
+          - { text: "Glucose 618 at 32 weeks", bin: 0 }
+          - { text: "Abnormal OGTT at 6 weeks", bin: 1 }
+          - { text: "Normal OGTT 6 weeks postpartum", bin: 1 }
+          - { text: "Glucose 53-85, ketones 4+", bin: 2 }
+          - { text: "24 h vomiting, no intake", bin: 2 }
+        why: "Case 5 = new T1DM، Case 6 = early GDM، Case 7 = starvation ketoacidosis."
+      - kind: try
+        items: [dm.L16.038, dm.L16.040, dm.L16.042, dm.L16.044, dm.L16.045]
+    recap:
+      - "Case 5: DKA في 32 أسبوع، إنسولين صفر و antibodies: new T1DM."
+      - "Case 6: family history قوي: OGTT أول ما الحمل يتعرف؛ early GDM اتعالج بـ basal-bolus."
+      - "Case 7: جوع في 35 أسبوع: starvation ketoacidosis، والـ differential euglycemic DKA."
+      - "euDKA في Case 7: glucose <180 و HCO3 <10."
+    practice: [dm.L16.038, dm.L16.039, dm.L16.040, dm.L16.041, dm.L16.042, dm.L16.043, dm.L16.044, dm.L16.045]

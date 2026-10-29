@@ -1,0 +1,360 @@
+schema: batna.lesson/v1
+lecture: dm.L10
+lessons:
+  # ------------------------------------------------------------------
+  - id: dm.L10.lesson1
+    title: "امتى نبدأ insulin؟ وقوته قد إيه"
+    hook: "الـ insulin مش عقاب ولا آخر الطريق: هو أقوى دوا للسكر، وليه دواعي واضحة."
+    minutes: 7
+    pages: [125, 126]
+    topics: [indications, power]
+    goals:
+      - "تعدّ دواعي الـ insulin في type 1 و type 2 (سؤال كتاب)"
+      - "تحفظ جدول الـ A1C reduction"
+      - "تعرف إيه اللي بيحدّ من قوة الـ insulin"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 125
+        title: "الدواعي"
+        quote: "Patients in whom oral therapy has failed. 2. Hyperglycemic crises (DKA or HHS)."
+        text: |
+          - **Type 1 DM**: ==for survival==. من غيره مفيش حياة.
+          - **Type 2 DM**:
+          - **Oral therapy failed**
+          - **Hyperglycemic crises**: DKA أو HHS
+          - **Stress**: ACS، ICU، major surgery، severe infection، corticosteroids
+          - **Pregnancy** أو بتخطط تحمل
+          - **Significant liver or kidney disease**
+      - kind: mnemonic
+        page: 125
+        quote: "Stressful situations (ACS, ICU, major surgery, severe infection, corticosteroid therapy, etc)."
+        word: "FCSPL"
+        parts:
+          - { key: "F", text: "Failure of oral therapy" }
+          - { key: "C", text: "Crises: DKA or HHS" }
+          - { key: "S", text: "Stress: ACS, ICU, surgery, infection, steroids" }
+          - { key: "P", text: "Pregnancy or planning it" }
+          - { key: "L", text: "Liver or kidney disease (significant)" }
+        hook: "**FCSPL**: Failure، Crises، Stress، Pregnancy، Liver/kidney. الخمسة دول بيدخّلوا عيان الـ type 2 على الـ insulin."
+      - kind: check
+        page: 125
+        quote: "Significant liver or kidney disease."
+        question: "Which is NOT an indication for insulin in type 2 DM in this lecture?"
+        options:
+          - "Newly diagnosed, HbA1c 7.0%, no complications"
+          - "Severe infection"
+          - "Planning pregnancy"
+          - "Significant kidney disease"
+        answer: 0
+        why:
+          - "صح: ده يبدأ oral monotherapy (dm.L09)."
+          - "Severe infection = stressful situation."
+          - "Pregnancy أو planning = indication."
+          - "Significant liver or kidney disease = indication."
+      - kind: table
+        page: 126
+        quote: "Insulin ≥ 2.5 GLP analogues 0.6 Amylin analogues 0.6"
+        title: "A1C reduction (جدول المحاضرة دي)"
+        columns: [Agent, A1C ↓ %]
+        rows:
+          - [Sulfonylureas, "1.5"]
+          - [Metformin, "1.5"]
+          - [Glinides, "1.0–1.5"]
+          - [TZDs, "0.8–1.0"]
+          - [DPP-4i, "0.5–0.9"]
+          - [AGIs, "0.5–0.8"]
+          - [Insulin, "≥2.5"]
+          - [GLP analogues, "0.6"]
+        hide: [[0, 1], [3, 1], [6, 1]]
+      - kind: aside
+        tone: trap
+        page: 126
+        quote: "GLP analogues 0.6"
+        text: "خلي بالك: الجدول ده بيدّي **GLP analogues 0.6%** و TZDs 0.8–1.0، بينما محاضرة الأدوية بالبُق قالت oral semaglutide **>2%** و TZDs 0.5–1.4. كل سؤال جاوبه برقم المحاضرة اللي بيسأل منها."
+      - kind: figure
+        page: 126
+        quote: "Insulin has essentially unlimited power to reduce plasma glucose."
+        title: "قوة الـ insulin وحدّها"
+        alt: "A horizontal bar chart of A1C reduction: alpha-glucosidase inhibitors about 0.65, DPP-4 inhibitors about 0.7, TZDs about 0.9, glinides about 1.25, sulfonylureas and metformin 1.5, and insulin at 2.5 or more with an arrow continuing off the scale. A red brake labelled hypoglycemia sits at the end of the insulin bar."
+        caption: "الـ insulin ==unlimited power==، الفرامل الوحيدة هي ==hypoglycemia==."
+        svg: |
+          <svg viewBox="0 0 330 230" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L10a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="fg-head-acc"/></marker></defs>
+            <text x="10" y="30" class="t-sm">AGIs</text><rect x="95" y="18" width="52" height="16" rx="4" class="fg-box"/>
+            <text x="10" y="58" class="t-sm">DPP-4i</text><rect x="95" y="46" width="56" height="16" rx="4" class="fg-box"/>
+            <text x="10" y="86" class="t-sm">TZDs</text><rect x="95" y="74" width="72" height="16" rx="4" class="fg-box"/>
+            <text x="10" y="114" class="t-sm">Glinides</text><rect x="95" y="102" width="100" height="16" rx="4" class="fg-box"/>
+            <text x="10" y="142" class="t-sm">SU, metformin</text><rect x="95" y="130" width="120" height="16" rx="4" class="fg-acc"/>
+            <text x="10" y="170" class="t-sm t-b">Insulin</text><rect x="95" y="158" width="200" height="16" rx="4" class="fg-good"/>
+            <path d="M297 166 H322" class="fg-arrow-acc" marker-end="url(#L10a)"/>
+            <text x="95" y="198" class="t-sm t-mut">A1C reduction, % (insulin ≥2.5)</text>
+            <rect x="200" y="205" width="120" height="20" rx="6" class="fg-bad"/>
+            <text x="260" y="219" text-anchor="middle" class="t-sm t-bad t-b">limit: hypoglycemia</text>
+          </svg>
+      - kind: reveal
+        page: 126
+        quote: "The primary limitation to insulin's usefulness as a diabetes drug is hypoglycemia."
+        prompt: "لو الـ insulin قوته مالهاش حدود، ليه ما ندّيش كل العيانين جرعات كبيرة ونخلص؟"
+        answer: |
+          لأن ==hypoglycemia== هي الـ **primary limitation**. كل وحدة زيادة بتقرّبك من الهبوط، خصوصًا لو الأكل أو المجهود اتغيّر.
+
+          علشان كده بنبدأ بجرعة صغيرة ونعمل **titration** بالـ fasting glucose (الدرس الجاي).
+      - kind: try
+        items: [dm.L10.002, dm.L10.006, dm.L10.008]
+    recap:
+      - "Type 1: insulin for survival. Type 2: failure، crises، stress، pregnancy، liver/kidney (**FCSPL**)."
+      - "Insulin A1C ↓ ≥2.5%: الأقوى. SU و metformin 1.5، DPP-4i 0.5–0.9، AGIs 0.5–0.8."
+      - "قوته unlimited؛ حدّه الأساسي hypoglycemia."
+    practice: [dm.L10.001, dm.L10.002, dm.L10.003, dm.L10.004, dm.L10.005, dm.L10.006, dm.L10.007, dm.L10.008, dm.L10.035]
+  # ------------------------------------------------------------------
+  - id: dm.L10.lesson2
+    title: "أنواع الـ insulin: سريع على الأكل وطويل للخلفية"
+    hook: "كل insulin ليه onset و peak و duration. لو حفظتهم، هتعرف الهبوط هيجي امتى قبل ما يجي."
+    minutes: 8
+    pages: [126, 127]
+    topics: [types]
+    goals:
+      - "تحفظ الـ mealtime insulins بأرقامهم"
+      - "تحفظ الـ basal insulins (سؤال كتاب)"
+      - "تربط الـ peak بالـ hypoglycemia"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 126
+        title: "Mealtime insulins"
+        quote: "Lispro (Humalog) 10 min 1h 4h Aspart 10 min 1h 4h"
+        text: |
+          - **Rapid analogues**: ==lispro (Humalog)==، **aspart (NovoRapid)**، **glulisine (Apidra)**: onset **10 min**، peak **1 h**، duration **4 h**.
+          - **Regular (Actrapid)**: onset **30 min**، peak **2–4 h**، duration **6 h**.
+
+          يعني الـ analogue تاخده وانت قاعد على السفرة، والـ regular قبلها بنص ساعة.
+      - kind: table
+        page: 127
+        quote: "NPH 2h 5-7 h 12-16 h"
+        title: "Basal insulins"
+        columns: [Insulin, Peak, Duration]
+        rows:
+          - [NPH (Insulatard), "5–7 h", "12–16 h"]
+          - [Detemir (Levemir), "6–8 h", "20–24 h"]
+          - [Glargine U100, Minimal, "Up to 30 h"]
+          - [Glargine U300, Minimal, "30–36 h"]
+          - [Degludec, Minimal, ">42 h"]
+        hide: [[0, 1], [0, 2], [1, 2], [3, 2], [4, 2]]
+      - kind: figure
+        page: 127
+        quote: "Degludec 0.5-1.5 h Minimal peak ˃ 42"
+        title: "شكل المنحنيات"
+        alt: "Action curves over 48 hours. Regular rises at 30 minutes and peaks at 2 to 4 hours. NPH peaks at 5 to 7 hours and fades by 12 to 16. Detemir peaks at 6 to 8 hours and lasts 20 to 24. Glargine is a flat line to 30 hours, U300 to 36, degludec flat beyond 42 hours."
+        caption: "كل ما المنحنى **أفلط** وأطول، كل ما الهبوط أقل مفاجآت. ==NPH== و **detemir** ليهم peak، والـ glargine والـ ==degludec== تقريبًا خط مستقيم."
+        svg: |
+          <svg viewBox="0 0 330 260" xmlns="http://www.w3.org/2000/svg">
+            <path d="M30 220 H320" class="fg-arrow"/>
+            <path d="M30 220 V20" class="fg-arrow"/>
+            <text x="30" y="238" class="t-sm t-mut">0</text>
+            <text x="96" y="238" class="t-sm t-mut">12</text>
+            <text x="162" y="238" class="t-sm t-mut">24</text>
+            <text x="228" y="238" class="t-sm t-mut">36</text>
+            <text x="284" y="238" class="t-sm t-mut">48 h</text>
+            <path d="M30 220 Q44 40 63 218" class="fg-arrow-bad" fill="none"/>
+            <text x="44" y="38" class="t-sm t-bad">Regular 6 h</text>
+            <path d="M30 220 Q66 90 118 218" class="fg-arrow-acc" fill="none"/>
+            <text x="76" y="112" class="t-sm t-acc">NPH 12–16 h</text>
+            <path d="M30 220 Q90 130 162 218" class="fg-arrow" fill="none"/>
+            <text x="120" y="158" class="t-sm">Detemir 20–24 h</text>
+            <path d="M30 220 C38 188 50 186 70 186 H200 C206 186 208 210 212 218" class="fg-arrow" fill="none"/>
+            <text x="170" y="180" class="t-sm">Glargine U100 / U300</text>
+            <path d="M30 220 C34 204 42 202 56 202 H272 C278 202 282 212 286 218" class="fg-arrow-acc" fill="none" stroke-width="2.5"/>
+            <text x="230" y="256" class="t-sm t-acc t-b">Degludec &gt;42 h</text>
+          </svg>
+      - kind: aside
+        tone: analogy
+        page: 127
+        quote: "Glargine 2-3 h Minimal peak Up to 30 h"
+        text: "الـ basal insulin زي **التكييف** اللي شغال طول اليوم على درجة ثابتة، والـ mealtime insulin زي **المروحة** اللي بتشغّلها لما تطبخ. ==Minimal peak== = تكييف ما بيعملش لسعات برد فجأة."
+      - kind: match
+        page: 127
+        quote: "Detemir 2-3 h 6-8 h 20-24 h"
+        prompt: "وصّل الـ insulin بالـ duration بتاعه"
+        pairs:
+          - ["Regular", "6 h"]
+          - ["NPH", "12–16 h"]
+          - ["Detemir", "20–24 h"]
+          - ["Glargine U300", "30–36 h"]
+          - ["Degludec", "More than 42 h"]
+        why: "الترتيب من الأقصر للأطول: regular ← NPH ← detemir ← glargine U100 (لحد 30) ← U300 ← degludec."
+      - kind: case
+        page: 127
+        quote: "NPH 2h 5-7 h 12-16 h"
+        stem: "A man takes NPH at 10 pm. He wakes at 3–4 am sweating, glucose 55 mg/dl."
+        steps:
+          - question: "Why at that hour?"
+            options: ["NPH peaks 5–7 h after injection", "NPH lasts more than 42 h", "NPH acts in 10 minutes", "NPH has no peak"]
+            answer: 0
+            why: "10 pm + 5–7 h = 3–5 am: ده الـ peak بتاع الـ NPH."
+          - question: "Which basal insulin would reduce this peak effect?"
+            options: ["Glargine or degludec (minimal peak)", "Regular insulin at bedtime", "A bigger NPH dose", "Lispro at bedtime"]
+            answer: 0
+            why: "الـ glargine والـ degludec minimal peak. الـ regular والـ lispro بيعملوا peak أسرع وأعلى، والجرعة الأكبر تزوّد الهبوط."
+      - kind: check
+        page: 126
+        quote: "Regular 30 min 2-4 h 6h"
+        question: "Regular insulin: onset, peak, duration?"
+        options:
+          - "30 min, 2–4 h, 6 h"
+          - "10 min, 1 h, 4 h"
+          - "2 h, 5–7 h, 12–16 h"
+          - "0.5–1.5 h, minimal, >42 h"
+        answer: 0
+        why:
+          - "صح."
+          - "ده الـ rapid analogues."
+          - "ده الـ NPH."
+          - "ده الـ degludec."
+      - kind: try
+        items: [dm.L10.009, dm.L10.013, dm.L10.015]
+    recap:
+      - "Rapid (lispro، aspart، glulisine): 10 min / 1 h / 4 h. Regular: 30 min / 2–4 h / 6 h."
+      - "NPH 2 h / 5–7 / 12–16. Detemir 2–3 / 6–8 / 20–24."
+      - "Glargine U100 لحد 30 h، U300 30–36، degludec >42؛ الثلاثة minimal peak."
+      - "الـ peak = ميعاد الهبوط المتوقع."
+    practice: [dm.L10.009, dm.L10.010, dm.L10.011, dm.L10.012, dm.L10.013, dm.L10.014, dm.L10.015, dm.L10.016, dm.L10.017, dm.L10.018, dm.L10.034, dm.L10.036]
+  # ------------------------------------------------------------------
+  - id: dm.L10.lesson3
+    title: "الـ regimens: من basal only لحد basal-bolus"
+    hook: "10 وحدات بالليل، وقاعدة 3–0–3، وبعدين نزوّد الأكل خطوة خطوة. ولا نختار biphasic؟"
+    minutes: 9
+    pages: [127, 129]
+    topics: [basal, biphasic]
+    goals:
+      - "تبدأ basal insulin وتعمل titration بالـ 3–0–3"
+      - "تعرف امتى تنقل لـ basal plus و basal-bolus"
+      - "تحسب جرعة الـ biphasic وتعرف عيوبه"
+    status: unverified
+    steps:
+      - kind: figure
+        page: 127
+        quote: "Add prandial insulin at main meal"
+        title: "سلّم الـ insulin intensification"
+        alt: "Three rising steps. Basal only: add basal insulin and titrate, when HbA1c and fasting glucose are both above target. Basal plus: add prandial insulin at the main meal, when HbA1c is above target but fasting glucose is at target. Basal-bolus: add prandial insulin as doses required, when HbA1c is still above target."
+        caption: "طول ما الـ ==FBG== عالي، اشتغل على الـ basal. لما الـ FBG يوصل والـ HbA1c لسه عالي، يبقى المشكلة بعد الأكل ← **prandial insulin**."
+        svg: |
+          <svg viewBox="0 0 330 260" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="190" width="150" height="60" rx="8" class="fg-acc"/>
+            <text x="20" y="212" class="t-b">Basal only</text>
+            <text x="20" y="230" class="t-sm">Add basal, titrate</text>
+            <text x="20" y="245" class="t-sm t-mut">HbA1c ↑, FBG ↑</text>
+            <rect x="90" y="110" width="150" height="60" rx="8" class="fg-box"/>
+            <text x="100" y="132" class="t-b">Basal plus</text>
+            <text x="100" y="150" class="t-sm">+ prandial at main meal</text>
+            <text x="100" y="165" class="t-sm t-mut">HbA1c ↑, FBG at target</text>
+            <rect x="170" y="30" width="150" height="60" rx="8" class="fg-good"/>
+            <text x="180" y="52" class="t-b">Basal-bolus</text>
+            <text x="180" y="70" class="t-sm">+ prandial as required</text>
+            <text x="180" y="85" class="t-sm t-mut">HbA1c ↑, FBG at target</text>
+            <text x="10" y="20" class="t-sm t-mut">Insulin intensification →</text>
+          </svg>
+      - kind: explain
+        page: 127
+        title: "Basal only: إزاي نبدأ"
+        quote: "Continue the Maximal dose of OADs. 2. Add NPH, Detemir, Glargine, or Degludec at bedtime. 3. Start by 10 units (or: 0.15 U/Kg)."
+        text: |
+          1. ==Continue the maximal dose of OADs== (ما توقفش الأقراص).
+          2. ضيف **NPH أو detemir أو glargine أو degludec** ==at bedtime==.
+          3. ابدأ بـ **10 units** (أو **0.15 U/kg**).
+      - kind: table
+        page: 127
+        quote: "If FPG > 130 mg/dl → Add 3 units. 2. If FPG = 70 – 130 mg/dl → Add 0 units."
+        title: "The 3–0–3 rule"
+        columns: [FPG, Change]
+        rows:
+          - [">130 mg/dl", "+3 units"]
+          - ["70–130 mg/dl", "0"]
+          - ["<70 mg/dl", "−3 units"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: aside
+        tone: tip
+        page: 127
+        quote: "Titration of basal insulin (The 3 – 0 – 3 Rule):"
+        text: "الاسم نفسه هو القاعدة: **3 – 0 – 3** = زوّد 3، سيب، نقّص 3. والحدود هي هدف الـ preprandial بتاع الـ ADA: **70–130**."
+      - kind: case
+        page: 127
+        quote: "Start by 10 units (or: 0.15 U/Kg)."
+        stem: "Woman, 70 kg, on maximal metformin + gliclazide. HbA1c 9.0%, FPG 180."
+        steps:
+          - question: "Starting basal dose?"
+            options: ["10 units at bedtime", "0.3 U/kg split 2/3 and 1/3", "40 units in the morning", "0.5 U/kg at bedtime"]
+            answer: 0
+            why: "10 units (أو 0.15 U/kg ≈ 10.5) at bedtime. الـ 0.3 U/kg للـ biphasic."
+          - reveal: "Day 4: FPG 155."
+            question: "Titrate?"
+            options: ["+3 units", "No change", "−3 units", "Stop gliclazide"]
+            answer: 0
+            why: "FPG >130 ← +3."
+          - reveal: "Week 6: FPG 105, but HbA1c 8.0% after 3 months."
+            question: "Next?"
+            options: ["Basal plus: prandial insulin at the main meal", "+3 basal units", "Biphasic is the only option", "Stop insulin"]
+            answer: 0
+            why: "FBG at target و HbA1c فوق ← basal plus. لو زوّدت basal هتنزل الـ FPG تحت 70."
+      - kind: explain
+        page: 128
+        title: "Basal-bolus: الأقرب للطبيعي"
+        quote: "Gives more flexibility over type of food and when it can be eaten."
+        text: |
+          مزاياه (سؤال كتاب):
+          - ==Closest to natural insulin production==
+          - **More flexibility**: تاكل إيه وامتى
+          - مناسب لـ ==erratic mealtimes== أو **variable shifts**
+      - kind: explain
+        page: 128
+        title: "Biphasic twice daily"
+        quote: "Starting daily dose = 0.3 U/Kg body weight. 2. Give 2/3 of the total daily dose before breakfast and 1/3 before dinner."
+        text: |
+          **Indication**: type 2 مش متظبط على ==once-daily regimen==.
+
+          - Starting dose: **0.3 U/kg/day**
+          - ==2/3 before breakfast==، **1/3 before dinner**
+          - Titrate بالـ **FBG و PPG**
+      - kind: check
+        page: 128
+        quote: "Starting daily dose = 0.3 U/Kg body weight."
+        question: "90 kg man starts biphasic twice daily. Doses?"
+        options:
+          - "18 U before breakfast, 9 U before dinner"
+          - "9 U before breakfast, 18 U before dinner"
+          - "13.5 U twice"
+          - "10 U at bedtime"
+        answer: 0
+        why:
+          - "صح: 0.3 × 90 = 27؛ 2/3 = 18 الصبح و 1/3 = 9 بالليل."
+          - "مقلوبة."
+          - "الكتاب مش بيقسمها نصين."
+          - "ده basal only."
+      - kind: sort
+        page: 128
+        quote: "Must have 3 meals a day. 3. You cannot skip a meal."
+        prompt: "صنّف: ميزة الـ basal-bolus ولا عيب الـ biphasic؟"
+        bins: ["Basal-bolus +", "Biphasic −"]
+        cards:
+          - { text: "Closest to natural insulin", bin: 0 }
+          - { text: "Flexible food type and timing", bin: 0 }
+          - { text: "Fits shift work", bin: 0 }
+          - { text: "Must have 3 meals a day", bin: 1 }
+          - { text: "Cannot skip a meal", bin: 1 }
+          - { text: "Hard to adjust to meal carbohydrate changes", bin: 1 }
+          - { text: "Hard to adjust to sudden exercise", bin: 1 }
+        why: "الـ biphasic جرعة ثابتة متخلّطة، فلازم حياتك تبقى ثابتة. الـ basal-bolus بيفصل الخلفية عن الأكل، فبيتظبط مع حياتك."
+      - kind: aside
+        tone: joke
+        page: 128
+        quote: "Not flexible."
+        text: "الـ biphasic زي المدير القديم: «الفطار 8، الغدا 2، العشا 8، وممنوع تفوّت وجبة». ==Not flexible==. 😄 والـ basal-bolus زي الشغل الـ remote."
+      - kind: try
+        items: [dm.L10.021, dm.L10.023, dm.L10.026, dm.L10.028, dm.L10.030]
+    recap:
+      - "Basal only: كمّل OADs maximal، basal at bedtime، 10 U أو 0.15 U/kg."
+      - "3–0–3: FPG >130 ← +3، 70–130 ← 0، <70 ← −3."
+      - "FBG at target و HbA1c عالي ← basal plus (main meal) ← basal-bolus."
+      - "Basal-bolus: أقرب للطبيعي، flexible، للـ shifts."
+      - "Biphasic: 0.3 U/kg، 2/3 الصبح و 1/3 بالليل؛ مش flexible و 3 وجبات إجباري."
+    practice: [dm.L10.019, dm.L10.020, dm.L10.021, dm.L10.022, dm.L10.023, dm.L10.024, dm.L10.025, dm.L10.026, dm.L10.027, dm.L10.028, dm.L10.029, dm.L10.030, dm.L10.031, dm.L10.032, dm.L10.033, dm.L10.037]

@@ -1,0 +1,695 @@
+schema: batna.lesson/v1
+lecture: rheum.L19
+lessons:
+  # ------------------------------------------------------------------
+  - id: rheum.L19.lesson1
+    title: "مين بيجيله lupus وليه؟"
+    hook: "ست في العشرينات، شمس، دوا ضغط، وكروموسوم X زيادة: كل واحد فيهم بيزوّد الحكاية."
+    minutes: 9
+    pages: [309, 312]
+    topics: [definition, genetics, environment]
+    goals:
+      - "تعرّف SLE وتحفظ أرقام الـ epidemiology"
+      - "تفهم ليه الستات أكتر: الـ X chromosome مش الهرمونات بس"
+      - "تعدّ الـ environmental triggers والأدوية"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 309
+        title: "التعريف"
+        quote: "Chronic relapsing inflammatory, multisystem autoimmune disorder of connective tissue characterized by involvement of the skin, joints and serosal membranes."
+        text: |
+          الـ **SLE** مرض ==chronic relapsing== inflammatory، **multisystem autoimmune** في الـ connective tissue.
+
+          التلات أماكن اللي بتميّزه: **skin**، **joints**، و **serosal membranes** (pleura و pericardium).
+      - kind: table
+        page: 309
+        quote: "> 90% cases of SLE occur in women 9:1. - Frequently during childbearing age (20-40years)."
+        title: "الأرقام"
+        columns: [Fact, Number]
+        rows:
+          - ["Highest rate (African/Caribbean women)", "1:250"]
+          - ["Women", ">90%, F:M 9:1"]
+          - ["Usual age", "20–40 years"]
+          - ["Diagnosed in first 2 decades", "20%"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1]]
+      - kind: reveal
+        page: 309
+        quote: "suggesting that there may be an environmental trigger, as well as a genetic basis, for disease in the UK population."
+        prompt: "الـ SLE نادر في السود في أفريقيا، بس عالي في السود في بريطانيا. ده بيقولك إيه؟"
+        answer: |
+          نفس الجينات، بيئة مختلفة، نتيجة مختلفة. يبقى فيه ==environmental trigger== جنب الـ **genetic basis**.
+
+          الجينات بتحمّل المسدس، والبيئة بتدوس على الزناد.
+      - kind: explain
+        page: 310
+        title: "الجينات: HLA والـ complement"
+        quote: "Complete deficiency of the early complement components C2, C4, and C1q results in SLE in 75%, 10%, and 90% of cases, respectively."
+        text: |
+          - **HLA** (الـ MHC على chromosome 6): أول genetic link، بيدي **~2-fold risk**. أثبتهم في الـ Caucasians: ==HLA-DR2 و DR3==. والـ DQ/DR مرتبطين بالـ autoantibodies.
+          - **Complement:** الـ complete deficiency نادر، بس لما يحصل: **C1q 90%**، **C2 75%**، **C4 10%** (أرقام الكتاب).
+          - الأشيع: **low C4 copy number** = risk، و high copy number = protective.
+      - kind: update
+        page: 310
+        quote: "Complete deficiency of the early complement components C2, C4, and C1q results in SLE in 75%, 10%, and 90% of cases, respectively."
+        text: "أغلب المراجع بتقول العكس في C2 و C4: حوالي 75% مع **C4** deficiency و 10–30% مع **C2**، والـ C1q فوق 90%. في الامتحان اكتب أرقام الكتاب."
+        ref: "Macedo & Isaac, Frontiers in Immunology 2016"
+      - kind: reveal
+        page: 310
+        quote: "a low gene copy number of C4 is seen as a risk factor for SLE"
+        prompt: "ليه نقص الـ complement المبكر (C1q، C2، C4) يعمل lupus، مع إن المنطقي إن نقص المناعة يقلل الـ autoimmunity؟"
+        answer: |
+          الـ early complement بيلم الـ **apoptotic debris** والـ immune complexes ويخلّص منهم بهدوء.
+
+          لو ناقص (أو الـ **C4 gene copy number** قليل)، الحطام النووي يفضل موجود، والجهاز المناعي يشوفه ويعمل ضده **autoantibodies**. ده تفسير مقبول، وهتشوف في الدرس الجاي إن الـ **defective clearance of apoptotic material** هو قلب المرض.
+      - kind: explain
+        page: 311
+        title: "الـ X chromosome هو السر"
+        quote: "the predisposition of women to developing SLE is related to X chromosome copy number, not to sex or sex hormones."
+        text: |
+          - الرجالة اللي عندهم SLE عندهم **Klinefelter (47,XXY)** بـ **15 ضعف**، والـ XXY risk بتاعهم **زي الستات**.
+          - والـ **47,XXX** أكتر في الستات اللي عندهم SLE.
+          - الخلاصة: ==X chromosome copy number==، مش الجنس ولا الهرمونات لوحدها.
+
+          **Twins:** monozygotic **24–35%** مقابل dizygotic **2–5%**. و **10–12%** عندهم قريب درجة أولى أو تانية.
+      - kind: check
+        page: 311
+        quote: "concordance in monozygotic twins is 24%-35%, compared to 2%–5% in dizygotic twin pairs."
+        question: "Monozygotic twin concordance for SLE is only 24–35%. What does that tell you?"
+        options:
+          - "Genes matter, but environment is needed too"
+          - "SLE is purely genetic"
+          - "SLE is purely environmental"
+          - "SLE is X-linked recessive"
+        answer: 0
+        why:
+          - "صح: لو جينات بس كانت هتبقى قريبة من 100%؛ ولو بيئة بس ما كانتش هتبقى أعلى من الـ dizygotic (2–5%) بالشكل ده."
+          - "الـ identical twins نفس الجينات، ومع ذلك أغلبهم مش بيتصابوا."
+          - "الفرق الكبير بين MZ و DZ بيقول إن الجينات ليها دور."
+          - "مش single-gene X-linked؛ الكتاب بيتكلم عن X dose."
+      - kind: explain
+        page: 311
+        title: "الـ triggers من بره"
+        quote: "Ultraviolet light stimulates keratinocytes, which leads to the secretion of cytokines that simulate increased autoantibody production."
+        text: |
+          - ==Ultraviolet light==: بيحفّز الـ **keratinocytes** يطلّعوا cytokines تزوّد الـ autoantibodies. **تلتين** العيانين UV sensitive.
+          - **Viruses:** EBV، CMV، **parvovirus B19**، **HBV**، human endogenous retroviruses.
+          - **Silica dust**، **stress**، **smoking**.
+          - **Diet:** high caloric؛ الستات بـ **BMI > 21** risk أعلى.
+          - **Hormones:** بيزيد في الـ reproductive years، ويتعب مع الحمل والدورة ← **estrogen**.
+      - kind: mnemonic
+        page: 312
+        quote: "Anti hypertension - Hydralazine, methyldopa, and captopril. - Anti arrhythmics - Procainamide and quinidine."
+        word: "HMC PQ PS"
+        parts:
+          - { key: "H", text: "Hydralazine (antihypertensive)" }
+          - { key: "M", text: "Methyldopa (antihypertensive)" }
+          - { key: "C", text: "Captopril (antihypertensive)" }
+          - { key: "P", text: "Procainamide (antiarrhythmic)" }
+          - { key: "Q", text: "Quinidine (antiarrhythmic)" }
+          - { key: "P", text: "Penicillamine (anti-inflammatory)" }
+          - { key: "S", text: "Sulfasalazine (anti-inflammatory)" }
+        hook: "تلات مجموعات: **ضغط** (HMC)، **قلب** (PQ)، **التهاب** (PS). وفي قايمة الـ triggers كمان **chlorpromazine** و **isoniazid**."
+      - kind: aside
+        tone: joke
+        page: 311
+        quote: "About two-thirds of the people with lupus are UV light sensitive."
+        text: "عيانة الـ lupus في مصر في أغسطس: «الشمس مش بتحبني يا دكتور». معاها حق: **تلتين** العيانين UV sensitive. الـ sunscreen هنا مش رفاهية. ☀️🧴"
+      - kind: try
+        items: [rheum.L19.005, rheum.L19.011, rheum.L19.014, rheum.L19.021, rheum.L19.017]
+    recap:
+      - "SLE: chronic relapsing multisystem autoimmune؛ skin، joints، serosa."
+      - "F:M 9:1، سن 20–40، 1:250 في الـ African/Caribbean women."
+      - "HLA-DR2/DR3؛ complement: C1q 90%، C2 75%، C4 10% (الكتاب)؛ low C4 copy = risk."
+      - "X dose: XXY risk زي الستات. MZ 24–35% مقابل DZ 2–5%."
+      - "UV (تلتين)، viruses، silica، BMI > 21، smoking، estrogen. أدوية: HMC PQ PS."
+    practice: [rheum.L19.001, rheum.L19.002, rheum.L19.003, rheum.L19.004, rheum.L19.005, rheum.L19.006, rheum.L19.007, rheum.L19.008, rheum.L19.009, rheum.L19.010, rheum.L19.011, rheum.L19.012, rheum.L19.013, rheum.L19.014, rheum.L19.015, rheum.L19.016, rheum.L19.017, rheum.L19.018, rheum.L19.019, rheum.L19.020, rheum.L19.021, rheum.L19.022, rheum.L19.023, rheum.L19.024, rheum.L19.025, rheum.L19.026, rheum.L19.027, rheum.L19.105]
+  # ------------------------------------------------------------------
+  - id: rheum.L19.lesson2
+    title: "الحطام النووي والأجسام المضادة"
+    hook: "الخلايا بتموت كتير والزبالة مش بتتشال، فالجسم يعمل antibodies ضد الـ DNA بتاعه."
+    minutes: 9
+    pages: [312, 316]
+    topics: [immunology, antibodies, pathology]
+    goals:
+      - "تفهم دور الـ B cells والـ T cells والـ apoptosis"
+      - "توصّل كل antibody بمرضه ونسبته"
+      - "تعرف الـ pathology، والكلية أوضح مثال"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 312
+        title: "الـ B cells"
+        quote: "associated with the loss of B-cell tolerance, B-cell dysregulation and autoantibody production."
+        text: |
+          الـ SLE فيه ==loss of B-cell tolerance== و B-cell dysregulation.
+
+          الـ immune stimulation + impaired regulation ← **polyclonal activation** للـ B cells ← autoantibodies كتير ضد **nuclear self antigens**.
+
+          الـ antibodies دي بتعمل **immune complexes** مع الـ nuclear antigens، تترسب في الأنسجة، وتعمل **inflammation**.
+      - kind: explain
+        page: 313
+        title: "والـ T cells كمان"
+        quote: "Regulatory T cells have been shown to be low in SLE and their suppressive function impaired."
+        text: |
+          - **Abnormal signaling** وبيطلّعوا cytokines تزوّد الالتهاب.
+          - ==Regulatory T cells== قليلة ووظيفتها ضعيفة.
+          - الـ **cytotoxic** والـ **suppressor T cells** (اللي المفروض تهدّي المناعة) قليلة.
+
+          يعني الفرامل بايظة والبنزين زيادة.
+      - kind: figure
+        page: 314
+        quote: "Apoptosis (programmed cell death) of lymphoid cells leads to release of DNA constituents"
+        title: "الـ pathogenesis في أربع خطوات"
+        alt: "Four stacked boxes with arrows. Genetically susceptible person plus environmental trigger; apoptosis of lymphoid cells releases DNA constituents, with defective clearance and antigens in surface blebs; T lymphocytes stimulate B cells; autoantibodies form immune complexes that deposit and cause inflammation and vasculitis."
+        caption: "المشكلة الأساسية: ==apoptosis زيادة + clearance ضعيف==. الـ autoantigens بتتجمع في الـ **surface blebs** للخلايا الميتة، فالمناعة تشوفها."
+        svg: |
+          <svg viewBox="0 0 330 360" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L19a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="fg-head"/></marker></defs>
+            <rect x="25" y="10" width="280" height="56" rx="10" class="fg-acc"/>
+            <text x="165" y="33" text-anchor="middle" class="t-sm t-b">Susceptible genes</text>
+            <text x="165" y="52" text-anchor="middle" class="t-sm">+ UV, virus, drug, oxidative stress</text>
+            <path d="M165 66 V88" class="fg-arrow" marker-end="url(#L19a)"/>
+            <rect x="25" y="90" width="280" height="72" rx="10" class="fg-box"/>
+            <text x="165" y="113" text-anchor="middle" class="t-sm t-b">Apoptosis of lymphoid cells</text>
+            <text x="165" y="131" text-anchor="middle" class="t-sm">DNA and hidden antigens exposed</text>
+            <text x="165" y="149" text-anchor="middle" class="t-sm t-mut">in surface blebs; clearance defective</text>
+            <path d="M165 162 V184" class="fg-arrow" marker-end="url(#L19a)"/>
+            <rect x="25" y="186" width="280" height="56" rx="10" class="fg-box"/>
+            <text x="165" y="209" text-anchor="middle" class="t-sm t-b">T lymphocytes stimulate B cells</text>
+            <text x="165" y="228" text-anchor="middle" class="t-sm t-mut">low Treg, abnormal signaling</text>
+            <path d="M165 242 V264" class="fg-arrow" marker-end="url(#L19a)"/>
+            <rect x="25" y="266" width="280" height="80" rx="10" class="fg-bad"/>
+            <text x="165" y="289" text-anchor="middle" class="t-sm t-b t-bad">Autoantibodies</text>
+            <text x="165" y="308" text-anchor="middle" class="t-sm">immune complexes deposit</text>
+            <text x="165" y="327" text-anchor="middle" class="t-sm">inflammation, vasculitis, fibrinoid</text>
+          </svg>
+      - kind: order
+        page: 314
+        quote: "Apoptosis (programmed cell death) of lymphoid cells leads to release of DNA constituents"
+        prompt: "رتّب الـ pathogenesis زي الكتاب:"
+        steps:
+          - "Trigger in a susceptible person"
+          - "Lymphoid cells die and release DNA"
+          - "T cells stimulate B cells"
+          - "Autoantibodies against DNA constituents"
+        why: "الـ trigger بيزوّد الـ oxidative stress والـ apoptosis، فالـ DNA يطلع، والـ T cells تساعد الـ B cells تعمل antibodies ضده."
+      - kind: table
+        page: 315
+        quote: "Anti dsDNA 70 % Increased risk for Lupus Nephritis Anti-histone Drug Induced LE"
+        title: "الـ antibodies اللي لازم تحفظها"
+        columns: [Antibody, Disease, "%"]
+        rows:
+          - ["Anti-dsDNA", "SLE, lupus nephritis", "70%"]
+          - ["Anti-Sm", "SLE, CNS and kidney", "10–25%"]
+          - ["Anti-histone", "Drug-induced LE", "–"]
+          - ["Anti-U1-RNP", "SLE, MCTD, overlap", "30%"]
+          - ["Anti-centromere", "Limited SSc, PBC", "70%"]
+          - ["Anti-topo-1", "Diffuse SSc", "30%"]
+          - ["Antiphospholipid", "SLE, APS, abortions", "10–30%"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1]]
+      - kind: match
+        page: 315
+        quote: "Anti-topoisomerase-1 Diffuse Cutaneous Systemic Sclerosis 30%"
+        prompt: "لعبة التوصيل: كل antibody بمرضه"
+        pairs:
+          - ["Anti-dsDNA", "Lupus nephritis risk"]
+          - ["Anti-histone", "Drug-induced lupus"]
+          - ["Anti-centromere", "Limited systemic sclerosis"]
+          - ["Anti-topoisomerase-1", "Diffuse cutaneous systemic sclerosis"]
+          - ["Anti-Ro / anti-La", "Neonatal lupus, Sjögren"]
+          - ["Anti-U1-RNP", "Mixed connective tissue disease"]
+        why: "الـ dsDNA للكلية، الـ histone للدوا، الـ centromere للـ limited و الـ topo للـ diffuse SSc، الـ Ro/La للـ Sjögren وقلب الجنين، والـ U1-RNP للـ MCTD."
+      - kind: aside
+        tone: exam
+        page: 315
+        quote: "associated with CNS and kidney diseases"
+        text: "فخ متكرر: الـ **anti-dsDNA** أشيع (70%) ومرتبط بالـ nephritis، أما الـ **anti-Sm** أقل (10–25%) ومرتبط بالـ **CNS والكلية**. الـ anti-Ro/La في الجدول مع **Sjögren** و **SSc** و **cardiac neonatal lupus**."
+      - kind: explain
+        page: 316
+        title: "الـ pathology والكلية"
+        quote: "Immune complex deposition seen in mesangium & subendothelial/subepithelial surface of basement membrane."
+        text: |
+          **الأساسيات (p315):** inflammation، **band or occlusive vasculopathy**، vasculitis، immune complex deposition. والـ **fibrinoid** (مادة eosinophilic) على الأوعية والألياف.
+
+          **الكلية** أوضح organ:
+          - **Light/IF:** mesangial proliferation، **fibrinoid necrosis**، inflammation، Ig أو complement deposits.
+          - **EM:** deposits في الـ ==mesangium== والـ **subendothelial / subepithelial** surfaces.
+      - kind: check
+        page: 315
+        quote: "Anti dsDNA 70 % Increased risk for Lupus Nephritis Anti-histone Drug Induced LE"
+        question: "A man on hydralazine gets arthritis and serositis. ANA positive, anti-dsDNA negative. Which antibody do you expect?"
+        options: ["Anti-histone", "Anti-Sm", "Anti-centromere", "Anti-topoisomerase-1"]
+        answer: 0
+        why:
+          - "صح: hydralazine من أدوية الـ lupus، والـ anti-histone علامة الـ drug-induced LE."
+          - "الـ anti-Sm للـ SLE مع CNS والكلية."
+          - "الـ anti-centromere للـ limited SSc."
+          - "الـ anti-topo-1 للـ diffuse SSc."
+      - kind: try
+        items: [rheum.L19.029, rheum.L19.031, rheum.L19.035, rheum.L19.032, rheum.L19.043]
+    recap:
+      - "Loss of B-cell tolerance ← polyclonal B cells ← immune complexes ← inflammation."
+      - "T cells: abnormal signaling، Treg قليلة، cytotoxic و suppressor قليلين."
+      - "Apoptosis زيادة + clearance ضعيف؛ الـ antigens في الـ blebs."
+      - "dsDNA 70% nephritis؛ Sm 10–25% CNS/kidney؛ histone drug؛ U1-RNP MCTD؛ centromere limited، topo diffuse."
+      - "الكلية: mesangial proliferation، fibrinoid؛ EM: mesangium + subendothelial/subepithelial."
+    practice: [rheum.L19.028, rheum.L19.029, rheum.L19.030, rheum.L19.031, rheum.L19.032, rheum.L19.033, rheum.L19.034, rheum.L19.035, rheum.L19.036, rheum.L19.037, rheum.L19.038, rheum.L19.039, rheum.L19.040, rheum.L19.041, rheum.L19.042, rheum.L19.043, rheum.L19.044, rheum.L19.045]
+  # ------------------------------------------------------------------
+  - id: rheum.L19.lesson3
+    title: "الجلد والمفاصل والصدر"
+    hook: "فراشة على الخدود، صوابع زي رقبة البجعة بترجع لمكانها، ونَفَس بيوجع."
+    minutes: 9
+    pages: [316, 318]
+    topics: [skin-msk, cardiopulmonary]
+    goals:
+      - "تفرّق الـ malar من الـ discoid"
+      - "تفهم ليه الـ Jaccoud مش erosive"
+      - "تعرف أشيع حاجة في الرئة والقلب"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 316
+        title: "الجلد"
+        quote: "Cutaneous vascular lesions. - Photosensitivity. - Butterfly rash (Malar Rash). - Oral/nasopharyngeal ulcers. - Alopecia."
+        text: |
+          الـ dermatologic: **cutaneous vascular lesions**، ==photosensitivity==، **butterfly (malar) rash**، **oral/nasopharyngeal ulcers**، **alopecia**.
+      - kind: figure
+        page: 316
+        quote: "Red to violaceous raised patches that can occur anywhere on the skin."
+        title: "Malar ولا discoid؟"
+        alt: "Two stacked face sketches. Top: a butterfly-shaped red rash over both cheeks and the nose bridge, with the nasolabial folds left clear, labelled malar rash. Bottom: scattered raised round patches with pale scarred centres, labelled discoid rash, can occur anywhere, may scar and depigment."
+        caption: "الـ **malar** بيسيب الـ ==nasolabial fold== فاضي. الـ **discoid** patches مرتفعة، ممكن تسيب scar و depigmentation."
+        svg: |
+          <svg viewBox="0 0 330 380" xmlns="http://www.w3.org/2000/svg">
+            <text x="165" y="20" text-anchor="middle" class="t-b">Malar (butterfly) rash</text>
+            <ellipse cx="110" cy="105" rx="60" ry="75" class="fg-box"/>
+            <path d="M68 100 Q85 80 104 98 L110 92 L116 98 Q135 80 152 100 Q140 125 118 118 L110 112 L102 118 Q80 125 68 100 Z" class="fg-bad"/>
+            <path d="M95 120 Q92 140 98 150" class="fg-thin"/>
+            <path d="M125 120 Q128 140 122 150" class="fg-thin"/>
+            <text x="185" y="80" class="t-sm">Over cheek bones</text>
+            <text x="185" y="98" class="t-sm">and nose bridge</text>
+            <text x="185" y="130" class="t-sm t-b t-good">Spares nasolabial</text>
+            <text x="185" y="148" class="t-sm t-b t-good">folds (dashed)</text>
+            <text x="165" y="215" text-anchor="middle" class="t-b">Discoid rash</text>
+            <ellipse cx="110" cy="295" rx="60" ry="75" class="fg-box"/>
+            <circle cx="85" cy="270" r="12" class="fg-bad"/>
+            <circle cx="85" cy="270" r="5" class="fg-thin"/>
+            <circle cx="135" cy="310" r="14" class="fg-bad"/>
+            <circle cx="135" cy="310" r="6" class="fg-thin"/>
+            <circle cx="100" cy="330" r="9" class="fg-bad"/>
+            <text x="185" y="270" class="t-sm">Raised red-violet</text>
+            <text x="185" y="288" class="t-sm">patches, anywhere</text>
+            <text x="185" y="318" class="t-sm t-b t-bad">Chronic: scar,</text>
+            <text x="185" y="336" class="t-sm t-b t-bad">depigmentation</text>
+            <text x="185" y="354" class="t-sm t-mut">usually painless</text>
+          </svg>
+      - kind: table
+        page: 316
+        quote: "Physician-observed mouth (oral) or throat (nasopharyngeal) ulcers. Such ulcers are usually painless."
+        title: "التعريفات الدقيقة"
+        columns: [Criterion, Definition]
+        rows:
+          - ["Malar", "Red over cheek bones, spares nasolabial folds"]
+          - ["Discoid", "Raised red-violet patches; may scar"]
+          - ["Photosensitive", "Rash after sun, by history or exam"]
+          - ["Oral ulcers", "Physician-observed, usually painless"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1]]
+      - kind: aside
+        tone: trap
+        page: 316
+        quote: "Physician-observed mouth (oral) or throat (nasopharyngeal) ulcers. Such ulcers are usually painless."
+        text: "قرح الـ lupus **painless**، علشان كده لازم **الدكتور يشوفها**. لو العيان بيشتكي من قرحة بتوجع جامد، فكّر في حاجة تانية. وبرضو الـ **Raynaud** شائع في الـ lupus بس **مش specific**: أبيض ← أزرق ← أحمر مع البرد أو الانفعال."
+      - kind: explain
+        page: 317
+        title: "المفاصل: Jaccoud arthropathy"
+        quote: "Subluxation with hyperlaxity of joints."
+        text: |
+          - **Polyarthralgia** مع morning stiffness
+          - **Avascular necrosis**
+          - Arthritis **bilateral**: hands، wrists، knees
+          - **Swan neck**، **ulnar deviation**، و ==subluxation with hyperlaxity==
+      - kind: reveal
+        page: 317
+        quote: "Subluxation with hyperlaxity of joints."
+        prompt: "الـ swan neck والـ ulnar deviation موجودين في RA وفي lupus. إيه الفرق؟"
+        answer: |
+          في الـ **RA** الـ synovitis بياكل العضم (**erosions**) فالتشوّه **fixed**.
+
+          في الـ **lupus** المشكلة في الأوتار والأربطة: **hyperlaxity** و **subluxation**. التشوّه **reducible** (لما تفرد إيده على الترابيزة بيرجع) ومن غير erosions. علشان كده **erosive deformed arthritis** هي الإجابة الغلط في سؤال الكتاب.
+      - kind: explain
+        page: 317
+        title: "الرئة"
+        quote: "It is the most common manifestation of pulmonary involvement of SLE."
+        text: |
+          - ==Pleurisy== = **أشيع** حاجة في الرئة. الـ effusion **small to moderate**، uni أو bilateral، **exudative**. الـ large نادر. (وممكن الـ effusion يكون من nephrotic أو infection أو heart failure.)
+          - **Acute lupus pneumonitis:** fever، dyspnea، cough بـ scanty sputum، **hemoptysis**، tachypnea، pleuritic pain.
+          - **Pulmonary hemorrhage** و **chronic interstitial lung disease**.
+      - kind: aside
+        tone: exam
+        page: 318
+        quote: "The diagnosis should not be made until infectious processes such as viral pneumonia, tuberculosis, and other bacterial, fungal and pneumocystis carinii infection"
+        text: "قبل ما تكتب «lupus pneumonitis»: **استبعد الـ infection تمامًا**: viral، **TB**، bacterial، fungal، و **Pneumocystis**. العيانة واخدة immunosuppression، والعدوى بتلبس نفس اللبس."
+      - kind: explain
+        page: 318
+        title: "القلب"
+        quote: "Pericarditis is the most common cardiac manifestation of SLE."
+        text: |
+          - ==Pericarditis== = **أشيع** حاجة في القلب.
+          - **Myocarditis** شبه الـ viral myocarditis.
+          - **Libman-Sacks endocarditis**: vegetations **flat, reddish-tan** على الـ **mitral valve** والـ chordae.
+          - **Hypertension**، heart failure، **accelerated CAD**، dysrhythmias.
+      - kind: check
+        page: 318
+        quote: "Libman-Sacks endocarditis and valvular disease."
+        question: "Cardiopulmonary manifestations of SLE include all EXCEPT:"
+        options: ["Bronchiectasis", "Pleuropericardial effusion", "Libman-Sacks endocarditis", "Acute lupus pneumonitis"]
+        answer: 0
+        why:
+          - "صح: الـ bronchiectasis مش من مظاهر الـ SLE."
+          - "الـ pleurisy أشيع رئة والـ pericarditis أشيع قلب."
+          - "في قايمة القلب في الكتاب."
+          - "في قايمة الرئة في الكتاب."
+      - kind: try
+        items: [rheum.L19.047, rheum.L19.049, rheum.L19.051, rheum.L19.058, rheum.L19.060]
+    recap:
+      - "Malar بيسيب الـ nasolabial folds؛ discoid ممكن يعمل scar؛ القرح painless."
+      - "Raynaud شائع بس مش specific: أبيض، أزرق، أحمر."
+      - "Jaccoud: swan neck و ulnar deviation من hyperlaxity، non-erosive، reducible. و AVN."
+      - "Pleurisy أشيع رئة (exudate small-moderate)؛ استبعد العدوى قبل الـ pneumonitis."
+      - "Pericarditis أشيع قلب؛ Libman-Sacks على الـ mitral."
+    practice: [rheum.L19.046, rheum.L19.047, rheum.L19.048, rheum.L19.049, rheum.L19.050, rheum.L19.051, rheum.L19.052, rheum.L19.053, rheum.L19.054, rheum.L19.055, rheum.L19.056, rheum.L19.057, rheum.L19.058, rheum.L19.059, rheum.L19.060, rheum.L19.061, rheum.L19.062, rheum.L19.063, rheum.L19.104]
+  # ------------------------------------------------------------------
+  - id: rheum.L19.lesson4
+    title: "الكلية والمخ والدم والـ APS"
+    hook: "ست كلاسات للكلية، وأربع خطط للحمل حسب التاريخ."
+    minutes: 10
+    pages: [319, 322]
+    topics: [renal, neuro-heme, aps]
+    goals:
+      - "تحفظ الـ 6 classes للـ lupus nephritis"
+      - "تعرف أرقام الدم"
+      - "تختار علاج الـ APS في الحمل حسب التاريخ"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 319
+        title: "Lupus nephritis"
+        quote: "Hypertension – new onset. o Peripheral edema, weight gain. o Haematuria. o Proteinure (>0.5g protein/d or 3+). o Casts in urine."
+        text: |
+          من **mild proteinuria** لحد **glomerulonephritis**. الهدف الأساسي: ==slowing the progression==.
+
+          - **New-onset hypertension**
+          - Edema و زيادة وزن
+          - **Hematuria**
+          - **Proteinuria > 0.5 g/day** أو **3+**
+          - **Casts**
+      - kind: figure
+        page: 319
+        quote: "Class III Focal proliferative <50% glomeruli involved Class IV Diffuse proliferative >50% glomeruli involved; segmental/global"
+        title: "السلّم: class I لـ VI"
+        alt: "Six stacked steps for lupus nephritis classes. I minimal mesangial: normal on light microscopy, abnormal on electron microscopy. II mesangial proliferative: hypercellular. III focal proliferative: under 50% of glomeruli, shown as 2 of 6 glomeruli shaded. IV diffuse proliferative: over 50%, 5 of 6 shaded. V membranous: nephrotic. VI advanced sclerosing: chronic sclerosis."
+        caption: "III و IV هم الـ ==proliferative==: الفرق **50% من الـ glomeruli**. والـ V هو الـ **nephrotic**."
+        svg: |
+          <svg viewBox="0 0 330 360" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="10" width="310" height="50" rx="8" class="fg-box"/>
+            <text x="25" y="41" class="t-lg t-b">I</text>
+            <text x="60" y="31" class="t-sm t-b">Minimal mesangial</text>
+            <text x="60" y="49" class="t-sm t-mut">LM normal, EM abnormal</text>
+            <rect x="10" y="68" width="310" height="50" rx="8" class="fg-box"/>
+            <text x="22" y="99" class="t-lg t-b">II</text>
+            <text x="60" y="89" class="t-sm t-b">Mesangial proliferative</text>
+            <text x="60" y="107" class="t-sm t-mut">hypercellular on LM</text>
+            <rect x="10" y="126" width="310" height="50" rx="8" class="fg-acc"/>
+            <text x="18" y="157" class="t-lg t-b">III</text>
+            <text x="60" y="147" class="t-sm t-b">Focal proliferative</text>
+            <text x="60" y="165" class="t-sm">&lt;50% glomeruli</text>
+            <circle cx="215" cy="151" r="7" class="fg-dot-bad"/><circle cx="235" cy="151" r="7" class="fg-dot-bad"/><circle cx="255" cy="151" r="7" class="fg-box"/><circle cx="275" cy="151" r="7" class="fg-box"/><circle cx="295" cy="151" r="7" class="fg-box"/>
+            <rect x="10" y="184" width="310" height="50" rx="8" class="fg-bad"/>
+            <text x="18" y="215" class="t-lg t-b">IV</text>
+            <text x="60" y="205" class="t-sm t-b">Diffuse proliferative</text>
+            <text x="60" y="223" class="t-sm">&gt;50%, segmental/global</text>
+            <circle cx="215" cy="209" r="7" class="fg-dot-bad"/><circle cx="235" cy="209" r="7" class="fg-dot-bad"/><circle cx="255" cy="209" r="7" class="fg-dot-bad"/><circle cx="275" cy="209" r="7" class="fg-dot-bad"/><circle cx="295" cy="209" r="7" class="fg-box"/>
+            <rect x="10" y="242" width="310" height="50" rx="8" class="fg-box"/>
+            <text x="22" y="273" class="t-lg t-b">V</text>
+            <text x="60" y="263" class="t-sm t-b">Membranous</text>
+            <text x="60" y="281" class="t-sm">predominantly nephrotic</text>
+            <rect x="10" y="300" width="310" height="50" rx="8" class="fg-thin"/>
+            <text x="18" y="331" class="t-lg t-b">VI</text>
+            <text x="60" y="321" class="t-sm t-b">Advanced sclerosing</text>
+            <text x="60" y="339" class="t-sm t-mut">chronic lesions, sclerosis</text>
+          </svg>
+      - kind: check
+        page: 319
+        quote: "Class IV Diffuse proliferative >50% glomeruli involved; segmental/global"
+        question: "Biopsy: proliferative lesions in 30% of glomeruli. Class?"
+        options: ["III", "IV", "II", "V"]
+        answer: 0
+        why:
+          - "صح: proliferative في أقل من 50% = focal = III."
+          - "الـ IV فوق 50%."
+          - "الـ II mesangial hypercellularity بس."
+          - "الـ V membranous، nephrotic."
+      - kind: explain
+        page: 319
+        title: "الأعصاب والدم"
+        quote: "Haemolytic anemia as detected by the Coombs‘ test is the feature of SLE."
+        text: |
+          **Nervous system:** seizures (generalized أو focal)، peripheral neuropathy، cognitive dysfunction (disorientation، memory)، psychiatric (severe depression، **psychosis**).
+
+          **الدم:**
+          - **Normochromic normocytic** anemia شائعة (chronic inflammation، drug-related bleeding)، بس الـ ==Coombs-positive hemolytic anemia== هي الـ feature.
+          - **Thrombocytopenia < 100×10⁹/L**: anti-platelet أو antiphospholipid antibodies.
+          - **Leucopenia < 4.0×10⁹/L**: autoantibodies، marrow، splenic pooling، complement. والـ immunosuppressants نفسها ممكن تعملها.
+      - kind: explain
+        page: 320
+        title: "APS جوه الـ SLE"
+        quote: "40% SLE patients have Antiphospholipid Antibody. o Only half develop thrombosis and or miscarriages."
+        text: |
+          - ستات **5x**، سن **30–40**.
+          - ==40%== من عيانين الـ SLE عندهم aPL، بس **النص بس** بيعملوا thrombosis أو miscarriage.
+
+          **Sapporo:**
+          1. **Vascular thrombosis** (arterial، venous، small vessel)
+          2. **Pregnancy morbidity:** loss بعد **10 أسابيع**، أو preterm قبل **34 أسبوع**، أو **3+** abortions متتالية
+          3. **Lab:** LA أو aCL medium titre، positive **over 6 weeks**
+      - kind: update
+        page: 321
+        quote: "3- Laboratory: A- LA or aCL medium titre. B- Positive over 6 wks."
+        text: "الـ revised criteria بتطلب الـ antibodies مرتين بينهم **12 أسبوع** على الأقل، وزوّدت **anti-β2-glycoprotein I**. في الامتحان: 6 أسابيع زي الكتاب."
+        ref: "Revised Sapporo (Sydney) APS criteria, 2006"
+      - kind: explain
+        page: 321
+        title: "العلاج"
+        quote: "low-dose aspirin may be considered for primary prevention of thrombosis and pregnancy loss."
+        text: |
+          - **Primary prevention:** ==low-dose aspirin== + قيّم باقي الـ risk factors. الـ **estrogen** بيزوّد الجلطات.
+          - **بعد thrombosis (مش حامل):** **long-term oral anticoagulation**.
+          - **حامل:** **heparin (UFH أو LMWH) + aspirin**.
+      - kind: table
+        page: 321
+        quote: "Past thrombosis: Low dose Aspirin + therapeutic Heparin."
+        title: "APS والحمل: التاريخ بيحدد الخطة"
+        columns: [History, Plan]
+        rows:
+          - ["No prior poor outcome", "Low-dose aspirin"]
+          - ["One 1st-trimester loss", "Low-dose aspirin"]
+          - ["Multiple early losses or one late fetal death", "Aspirin + prophylactic heparin"]
+          - ["Past thrombosis", "Aspirin + therapeutic heparin"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1]]
+      - kind: aside
+        tone: analogy
+        page: 321
+        quote: "Multiple first trimester losses or one: Low dose Aspirin + late intrauterine fetal demise prophylactic Heparin."
+        text: "فكّر فيها زي سلّم: **aspirin** هو الدرجة الأولى للكل. **خسارة كتير أو متأخرة** ← تطلع درجة (heparin **prophylactic**). **جلطة قبل كده** ← أعلى درجة (heparin **therapeutic**)."
+      - kind: case
+        page: 321
+        quote: "Past thrombosis: Low dose Aspirin + therapeutic Heparin."
+        stem: "SLE, lupus anticoagulant positive, now 8 weeks pregnant."
+        steps:
+          - reveal: "No previous pregnancies, no thrombosis."
+            question: "Plan?"
+            options: ["Low-dose aspirin", "Aspirin + therapeutic heparin", "Warfarin", "Nothing"]
+            answer: 0
+            why: "مفيش poor outcome قبل كده ← low-dose aspirin."
+          - reveal: "Correction: she had a femoral DVT 3 years ago."
+            question: "Plan now?"
+            options: ["Aspirin + therapeutic heparin", "Aspirin + prophylactic heparin", "Aspirin alone", "Estrogen-containing pill"]
+            answer: 0
+            why: "Past thrombosis ← aspirin + **therapeutic** heparin. والـ estrogen بيزوّد الجلطات."
+      - kind: explain
+        page: 322
+        title: "تشخيص الـ APS"
+        quote: "Anticardiolipin Ab.  Lupus Anticoagulant.  Anti B2 Glycoprotein 1."
+        text: |
+          **Clinical:** recurrent abortion، thrombosis متكررة في **أماكن غريبة**، hemolytic anemia، thrombocytopenia.
+
+          **Lab:** ==anticardiolipin==، **lupus anticoagulant**، **anti-β2 glycoprotein 1**.
+      - kind: try
+        items: [rheum.L19.066, rheum.L19.064, rheum.L19.075, rheum.L19.080, rheum.L19.081]
+    recap:
+      - "LN: new HTN، hematuria، proteinuria > 0.5 g/day أو 3+، casts. الهدف: إبطاء التدهور."
+      - "Classes: I minimal، II mesangial، III focal < 50%، IV diffuse > 50%، V membranous nephrotic، VI sclerosing."
+      - "Coombs hemolytic anemia = الـ feature. Platelets < 100، WBC < 4."
+      - "40% aPL، النص بس يتعبوا. Sapporo: thrombosis، pregnancy (10 wk، 34 wk، 3 abortions)، lab 6 wk."
+      - "Aspirin للكل؛ losses كتير ← + prophylactic heparin؛ thrombosis ← + therapeutic heparin."
+    practice: [rheum.L19.064, rheum.L19.065, rheum.L19.066, rheum.L19.067, rheum.L19.068, rheum.L19.069, rheum.L19.070, rheum.L19.071, rheum.L19.072, rheum.L19.073, rheum.L19.074, rheum.L19.075, rheum.L19.076, rheum.L19.077, rheum.L19.078, rheum.L19.079, rheum.L19.080, rheum.L19.081, rheum.L19.082, rheum.L19.083, rheum.L19.106]
+  # ------------------------------------------------------------------
+  - id: rheum.L19.lesson5
+    title: "التشخيص والعلاج والحمل"
+    hook: "4 من 11، MMF مكان الـ cyclophosphamide، وأدوية مسموحة وممنوعة في الحمل."
+    minutes: 10
+    pages: [322, 325]
+    topics: [criteria, ln-treatment, pregnancy, nonrenal]
+    goals:
+      - "تعدّ الـ 11 criteria"
+      - "تعرف علاج ومتابعة الـ lupus nephritis"
+      - "تفرّق الأدوية المسموحة والممنوعة في الحمل"
+      - "تدرّج الـ non-renal SLE: mild، moderate، severe"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 322
+        title: "الـ 11 criteria"
+        quote: "Classification criteria for diagnosis of SLE (>4 of 11) o Malar rash. o Discoid rash. o Photosensitivity. o Oral ulcers. o Arthritis. o Serositis."
+        text: |
+          محتاج ==4 من 11== أو أكتر. (الكتاب مطبوع فيه **>4 of 11**، والقاعدة الأصلية 4 أو أكتر.)
+
+          1. **Malar rash**
+          2. **Discoid rash**
+          3. **Photosensitivity**
+          4. **Oral ulcers**
+          5. **Arthritis**
+          6. **Serositis**
+          7. **Renal:** proteinuria > 0.5 g أو cells/casts
+          8. **Neurological:** seizure أو psychosis
+          9. **Haematologic:** hemolytic anemia، leukopenia/lymphopenia، thrombocytopenia
+          10. **Immunological:** anti-DNA، anti-Sm، anticardiolipin
+          11. **ANA**
+      - kind: mnemonic
+        page: 322
+        quote: "Classification criteria for diagnosis of SLE (>4 of 11) o Malar rash. o Discoid rash. o Photosensitivity. o Oral ulcers. o Arthritis. o Serositis."
+        word: "SOAP BRAIN MD"
+        parts:
+          - { key: "S", text: "Serositis" }
+          - { key: "O", text: "Oral ulcers" }
+          - { key: "A", text: "Arthritis" }
+          - { key: "P", text: "Photosensitivity" }
+          - { key: "B", text: "Blood (haematologic disorder)" }
+          - { key: "R", text: "Renal disorder" }
+          - { key: "A", text: "ANA positivity" }
+          - { key: "I", text: "Immunological (anti-DNA, anti-Sm, anticardiolipin)" }
+          - { key: "N", text: "Neurological (seizure, psychosis)" }
+          - { key: "M", text: "Malar rash" }
+          - { key: "D", text: "Discoid rash" }
+        hook: "الـ mnemonic المشهور: **SOAP BRAIN MD**، صابونة للمخ يا دكتور. 11 حرف = 11 criteria."
+      - kind: update
+        page: 322
+        quote: "Classification criteria for diagnosis of SLE (>4 of 11)"
+        text: "الـ criteria الأحدث بتبدأ بـ **ANA ≥ 1:80** كشرط دخول، وبعدين نقط موزونة، ومحتاج **≥ 10** مع criterion إكلينيكي واحد على الأقل. الامتحان: الـ 11 بتوع الكتاب."
+        ref: "EULAR/ACR SLE classification criteria, 2019"
+      - kind: explain
+        page: 323
+        title: "متابعة وعلاج الـ lupus nephritis"
+        quote: "Mycophenolate mofetil has demonstrated similar efficacy compared with pulse cyclophosphamide and a more favourable toxicity profile."
+        text: |
+          **المتابعة:** **biopsy**، sediment، proteinuria، و kidney function (مع بعض). الـ **anti-dsDNA و C3** دورهم **محدود**، supplemental بس.
+
+          **العلاج:**
+          - **Proliferative LN** ← **glucocorticoids + immunosuppressant** بيمنعوا الـ ESRD.
+          - **Cyclophosphamide** الوحيد اللي اتثبتت كفاءته long-term، بس side effects كتير.
+          - ==Mycophenolate mofetil== نفس كفاءة الـ pulse cyclophosphamide وأأمن.
+          - الـ **flares** بعد الـ remission مش نادرة ← follow-up.
+          - **ESRD:** dialysis و transplant نتايجهم زي غير الـ SLE؛ الـ **transplant** هو الـ method of choice.
+      - kind: check
+        page: 323
+        quote: "Changes in immunological tests (anti-dsDNA, serum C3) have only limited ability to predict the response to treatment"
+        question: "Which best predicts the outcome of lupus nephritis therapy, per the lecture?"
+        options:
+          - "Biopsy, sediment, proteinuria and kidney function together"
+          - "Anti-dsDNA titre alone"
+          - "Serum C3 alone"
+          - "ANA titre"
+        answer: 0
+        why:
+          - "صح: ليهم independent predictive ability، ويتفسّروا مع بعض."
+          - "الـ anti-dsDNA دوره محدود، supplemental."
+          - "الـ C3 كمان محدود."
+          - "الـ ANA مش أداة متابعة."
+      - kind: explain
+        page: 323
+        title: "الحمل"
+        quote: "There is no significant difference in fertility in lupus patients. o Pregnancy may increase lupus disease activity, but these flares are usually mild."
+        text: |
+          - **الخصوبة:** مفيش فرق كبير.
+          - الحمل ممكن يزوّد النشاط، بس الـ flares غالبًا ==mild==.
+          - **LN + aPL** ← risk أعلى لـ **pre-eclampsia** ← متابعة أقرب.
+          - **الجنين** (لو LN أو aPL أو anti-Ro/La): miscarriage، stillbirth، preterm، **IUGR**، و **congenital heart block**.
+      - kind: sort
+        page: 324
+        quote: "Prednisolone, azathioprine, hydroxychloroquine and low-dose aspirin may be used in lupus pregnancies."
+        prompt: "الدوا ده في الحمل: ينفع ولا ممنوع؟"
+        bins: ["May be used", "Must be avoided"]
+        cards:
+          - { text: "Prednisolone", bin: 0 }
+          - { text: "Azathioprine", bin: 0 }
+          - { text: "Hydroxychloroquine", bin: 0 }
+          - { text: "Low-dose aspirin", bin: 0 }
+          - { text: "Mycophenolate mofetil", bin: 1 }
+          - { text: "Cyclophosphamide", bin: 1 }
+          - { text: "Methotrexate", bin: 1 }
+        why: "المسموح: **pred، AZA، HCQ، aspirin**. الممنوع: **MMF، CYC، MTX** (كلهم teratogenic). خليها: «الـ M والـ C بره الحمل»."
+      - kind: table
+        page: 324
+        quote: "rash 9%-18% BSA; PLTs 20-50×109/L; serositis; SLEDAI 7–12; ≥2 BILAG B manifestations."
+        title: "شدة الـ non-renal SLE"
+        columns: [Feature, Mild, Moderate]
+        rows:
+          - ["Rash BSA", "≤9%", "9–18%"]
+          - ["Platelets", "50–100", "20–50"]
+          - ["SLEDAI", "≤6", "7–12"]
+          - ["BILAG", "C or ≤1 B", "≥2 B"]
+        hide: [[0, 1], [1, 2], [2, 1], [2, 2]]
+      - kind: explain
+        page: 324
+        title: "الـ severe والأدوية"
+        quote: "For patients with severe neuropsychiatric disease, anifrolumab and belimumab are not recommended."
+        text: |
+          **Severe** لو فيه واحدة من دول:
+          - **Major organ threat:** cerebritis، myelitis، pneumonitis، mesenteric vasculitis
+          - **Platelets < 20**، أو **TTP-like** أو **hemophagocytic** syndrome
+          - **Rash > 18%** أو **SLEDAI > 12** أو **≥1 BILAG A**
+
+          **الأدوية:**
+
+          - **MTX، AZA، MMF** متساويين: second-line في الـ mild، first-line في الـ moderate.
+          - **Belimumab و anifrolumab** first-line في الـ severe **extrarenal** من غير major organ (جلد ومفاصل كتير). الـ anifrolumab add-on غالبًا للجلد.
+          - في الـ ==severe neuropsychiatric==: **مش recommended**.
+      - kind: aside
+        tone: tip
+        page: 324
+        quote: "*Mild disease: constitutional symptoms; mild arthritis; rash ≤9% body surface area; PLT 50– 100 × 109/L; SLEDAI ≤6"
+        text: "أرقام سهلة: الـ rash **9 / 18**، والـ platelets **100 / 50 / 20**، والـ SLEDAI **6 / 12**. كل عتبة بتنقلك درجة."
+      - kind: case
+        page: 324
+        quote: "*Severe disease: major organ threatening disease (cerebritis, myelitis, pneumonitis, mesenteric vasculitis); thrombocytopenia with PLTs <20 ×"
+        stem: "SLE patient: severe abdominal pain, platelets 15×10⁹/L, SLEDAI 16."
+        steps:
+          - question: "Severity?"
+            options: ["Severe", "Moderate", "Mild", "Cannot grade"]
+            answer: 0
+            why: "platelets < 20 و SLEDAI > 12، وألم البطن ممكن يكون mesenteric vasculitis: كلها severe."
+          - reveal: "Another patient: severe lupus psychosis."
+            question: "Is belimumab or anifrolumab recommended here?"
+            options: ["No", "Yes, first-line", "Yes, add-on", "Only anifrolumab"]
+            answer: 0
+            why: "في الـ severe neuropsychiatric disease الاتنين **not recommended**."
+      - kind: try
+        items: [rheum.L19.084, rheum.L19.090, rheum.L19.096, rheum.L19.098, rheum.L19.107]
+    recap:
+      - "4 من 11: SOAP BRAIN MD. الأحدث: ANA ≥ 1:80 ثم ≥ 10 نقط."
+      - "LN: biopsy + sediment + proteinuria + function؛ dsDNA و C3 supplemental."
+      - "Proliferative: GCs + immunosuppressant؛ MMF زي الـ CYC وأأمن؛ transplant للـ ESRD."
+      - "حمل: flares mild، LN + aPL ← pre-eclampsia. مسموح pred/AZA/HCQ/aspirin؛ ممنوع MMF/CYC/MTX."
+      - "Severity: rash 9/18، platelets 100/50/20، SLEDAI 6/12. لا biologics في الـ severe NPSLE."
+    practice: [rheum.L19.084, rheum.L19.085, rheum.L19.086, rheum.L19.087, rheum.L19.088, rheum.L19.089, rheum.L19.090, rheum.L19.091, rheum.L19.092, rheum.L19.093, rheum.L19.094, rheum.L19.095, rheum.L19.096, rheum.L19.097, rheum.L19.098, rheum.L19.099, rheum.L19.100, rheum.L19.101, rheum.L19.102, rheum.L19.103, rheum.L19.107]

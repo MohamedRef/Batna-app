@@ -1,0 +1,1026 @@
+schema: batna.content/v1
+lecture: dm.L02
+title: "ADA Guidelines"
+author: "Dr. Amr El Feky"
+book: { chapter: 6, pages: [18, 26] }
+topics:
+  - { id: diagnosis, title: "Diagnosis: A1C method and when to use glucose only" }
+  - { id: screening, title: "Screening for prediabetes, type 2 and GDM" }
+  - { id: prevention, title: "Prevention or delay of type 2 diabetes" }
+  - { id: targets, title: "Glycemic targets" }
+  - { id: weight, title: "Obesity and weight management, metabolic surgery" }
+  - { id: pharm-t1, title: "Glucose-lowering treatment: type 1" }
+  - { id: pharm-t2, title: "Glucose-lowering treatment: type 2 algorithm" }
+  - { id: hypertension, title: "Hypertension" }
+  - { id: lipids, title: "Lipid management and statins" }
+items:
+  # ---------- p18: diagnosis ----------
+  - id: dm.L02.001
+    kind: table
+    topic: diagnosis
+    title: "ADA cut-offs (the p18 traffic light)"
+    columns: [Test, Prediabetes, Diabetes]
+    rows:
+      - [A1C, "5.7–6.4%", "≥6.5%"]
+      - [Fasting glucose, "100–125 mg/dL", "≥126 mg/dL"]
+      - [Glucose tolerance (2 h), "140–199 mg/dL", "≥200 mg/dL"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 1], [2, 2]]
+    src: { page: 18, quote: "DIABETES 6.5% or above PREDIABETES 5.7 – 6.4% NORMAL Below 5.7%" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L02.002
+    kind: cloze
+    topic: diagnosis
+    text: "In the ADA figure, an A1C of {{c1::5.7–6.4%}} is prediabetes and {{c2::below 5.7%}} is normal."
+    src: { page: 18, quote: "DIABETES 6.5% or above PREDIABETES 5.7 – 6.4% NORMAL Below 5.7%" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L02.003
+    kind: card
+    topic: diagnosis
+    front: How should A1C be measured to avoid misdiagnosis or missed diagnosis?
+    back: With a method certified by the National Glycohemoglobin Standardization Program (NGSP).
+    src: { page: 18, quote: "the A1C test should be performed using a method that is certified by the National Glycohemoglobin Standardization Program (NGSP)" }
+    status: unverified
+  - id: dm.L02.004
+    kind: enumerate
+    topic: diagnosis
+    prompt: In which conditions should only plasma glucose criteria diagnose diabetes (not A1C)?
+    points: [Hemoglobinopathies, HIV, Hemodialysis, Recent blood loss or transfusion, Erythropoietin therapy]
+    pass: 4
+    src: { page: 18, quote: "In conditions such as hemoglobinopathies, HIV, hemodialysis, recent blood loss or transfusion, or erythropoietin therapy, only plasma blood glucose criteria should be used" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p18-20: screening ----------
+  - id: dm.L02.005
+    kind: cloze
+    topic: screening
+    text: "Test asymptomatic adults of any age for prediabetes/type 2 if BMI {{c1::≥25 kg/m²}} with {{c2::one or more}} risk factors."
+    src: { page: 18, quote: "should be considered in adults of any age with overweight or obesity (BMI ≥25 kg/m2 who have one or more risk factors" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L02.006
+    kind: enumerate
+    topic: screening
+    prompt: Risk factors that make an overweight adult a candidate for diabetes screening?
+    points:
+      - First-degree relative with diabetes
+      - High-risk race/ethnicity
+      - History of CVD
+      - Hypertension
+      - "HDL <35 mg/dL and/or TG >250 mg/dL"
+      - Polycystic ovary syndrome
+      - Physical inactivity
+      - "Insulin-resistance conditions (e.g. acanthosis nigricans)"
+    pass: 5
+    src: { page: 19, quote: "Hypertension Physical inactivity Polycystic ovary syndrome HDL level <35 mg/dL and/or a triglyceride level >250 mg/dL" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L02.007
+    kind: cloze
+    topic: screening
+    text: "Lipid screening triggers: HDL {{c1::<35 mg/dL}} and/or triglycerides {{c2::>250 mg/dL}}."
+    src: { page: 19, quote: "HDL level <35 mg/dL and/or a triglyceride level >250 mg/dL" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L02.008
+    kind: cloze
+    topic: screening
+    text: "For all individuals, diabetes screening should begin at age {{c1::35}}."
+    src: { page: 19, quote: "For all individuals, screening should begin at age 35 ." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L02.009
+    kind: card
+    topic: screening
+    front: Which infection is listed as a reason to screen for diabetes regardless of weight?
+    back: HIV.
+    src: { page: 19, quote: "screening should begin at age 35 . People with HIV" }
+    status: unverified
+  - id: dm.L02.010
+    kind: card
+    topic: screening
+    front: Screening before pregnancy, per ADA?
+    back: Screen those planning pregnancy who have risk factors, and consider testing all women of childbearing potential for undiagnosed diabetes.
+    src: { page: 19, quote: "In individuals who are planning pregnancy, screen those with risk factors and consider testing all women of childbearing potential for undiagnosed diabetes" }
+    status: unverified
+  - id: dm.L02.011
+    kind: cloze
+    topic: screening
+    text: "Before {{c1::15}} weeks, test those with risk factors (and consider testing everyone) for undiagnosed diabetes at the {{c2::first prenatal visit}}, using standard criteria, if not screened preconception."
+    src: { page: 19, quote: "Before 15 weeks of gestation, test individuals with risk factors and consider testing all individuals for undiagnosed diabetes at the first prenatal visit" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L02.012
+    kind: cloze
+    topic: screening
+    text: "Screen for GDM at {{c1::24–28}} weeks in those not previously found to have diabetes or high-risk abnormal glucose metabolism; after GDM, screen at {{c2::4–12 weeks}} postpartum."
+    src: { page: 19, quote: "Screen individuals with gestational diabetes mellitus for prediabetes or diabetes at 4–12 weeks postpartum" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L02.013
+    kind: table
+    topic: screening
+    title: When to repeat testing
+    columns: [Group, Interval]
+    rows:
+      - [Prediabetes, Yearly]
+      - [Previous GDM, "Lifelong, at least every 3 years"]
+      - [Normal results, "At least every 3 years"]
+      - ["Very high risk (e.g. weight gain)", Shorter intervals may help]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 20, quote: "People with prediabetes should be tested yearly. People who were diagnosed with GDM should have lifelong testing at least every 3 years" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L02.014
+    kind: card
+    topic: screening
+    front: How often should someone with prior GDM be tested for diabetes?
+    back: Lifelong, at least every 3 years.
+    src: { page: 20, quote: "People who were diagnosed with GDM should have lifelong testing at least every 3 years" }
+    status: unverified
+  # ---------- p20: prevention ----------
+  - id: dm.L02.015
+    kind: card
+    topic: prevention
+    front: How often should people with prediabetes be monitored for type 2 diabetes?
+    back: At least annually.
+    src: { page: 20, quote: "Monitor: for the development of type 2 diabetes in those with prediabetes at least annually" }
+    status: unverified
+  - id: dm.L02.016
+    kind: cloze
+    topic: prevention
+    text: "Refer overweight/obese adults at high risk of type 2 diabetes to an intensive lifestyle program to lose and keep off at least {{c1::7%}} of initial body weight."
+    src: { page: 20, quote: "intensive lifestyle behavior change program to achieve and maintain a weight reduction of at least 7% of initial body weight." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L02.017
+    kind: enumerate
+    topic: prevention
+    prompt: Who with prediabetes should be considered for metformin?
+    points:
+      - Aged 25–59 years
+      - BMI ≥35 kg/m²
+      - "Higher FPG (e.g. ≥110 mg/dL)"
+      - "Higher A1C (e.g. ≥6.0%)"
+      - Prior GDM
+    pass: 4
+    src: { page: 20, quote: "especially those aged 25–59 years with BMI ≥35 kg/m2, higher FPG (e.g., ≥110 mg/dL), and higher A1C (e.g., ≥6.0%), and in individuals with prior GDM." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L02.018
+    kind: cloze
+    topic: prevention
+    text: "Metformin for prevention: especially age {{c1::25–59}}, BMI {{c2::≥35}}, FPG ≥110 mg/dL, A1C {{c3::≥6.0%}}, or prior GDM."
+    src: { page: 20, quote: "especially those aged 25–59 years with BMI ≥35 kg/m2, higher FPG (e.g., ≥110 mg/dL), and higher A1C (e.g., ≥6.0%)" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L02.019
+    kind: card
+    topic: prevention
+    front: When may pioglitazone be considered in prediabetes, and what are its costs?
+    back: With a history of stroke plus insulin resistance and prediabetes, to lower stroke or MI risk; balance against weight gain, edema and fracture.
+    src: { page: 20, quote: "pioglitazone may be considered to lower the risk of stroke or myocardial infarction." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L02.020
+    kind: enumerate
+    topic: prevention
+    prompt: Risks of pioglitazone that must be balanced against its benefit?
+    points: [Weight gain, Edema, Fracture]
+    pass: 3
+    src: { page: 20, quote: "this benefit must be balanced against the increased risks of weight gain, edema, and fracture." }
+    status: unverified
+  # ---------- p20-21: targets ----------
+  - id: dm.L02.021
+    kind: cloze
+    topic: targets
+    text: "A1C goal for many nonpregnant adults: {{c1::<7%}} without significant hypoglycemia."
+    src: { page: 20, quote: "An A1C goal for many nonpregnant adults of <7% without significant hypoglycemia is appropriate." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L02.022
+    kind: cloze
+    topic: targets
+    text: "CGM targets: time in range {{c1::>70%}}, time below range {{c2::<4%}}, time below 54 mg/dL {{c3::<1%}}."
+    src: { page: 21, quote: "time in range of >70% with time below range <4% and time <54 mg/dL <1%." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L02.023
+    kind: card
+    topic: targets
+    front: When is a less stringent A1C goal (e.g. <8%) appropriate?
+    back: Limited life expectancy, or when the harms of treatment outweigh its benefits.
+    src: { page: 21, quote: "Less stringent A1C goals (such as <8%) may be appropriate for patients with limited life expectancy" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L02.024
+    kind: card
+    topic: targets
+    front: Is an A1C below 7% acceptable?
+    back: Yes, and even beneficial, if reached safely without significant hypoglycemia or other adverse effects.
+    src: { page: 21, quote: "Achievement of lower A1C levels than the goal of 7% may be acceptable and even beneficial if it can be achieved safely without significant hypoglycemia" }
+    status: unverified
+  # ---------- p21-23: weight ----------
+  - id: dm.L02.025
+    kind: cloze
+    topic: weight
+    text: "Nutrition, activity and behavioral therapy should achieve and maintain {{c1::≥5%}} weight loss in most overweight/obese people with type 2 diabetes."
+    src: { page: 21, quote: "Nutrition, physical activity, and behavioral therapy to achieve and maintain ≥5% weight loss are recommended" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L02.026
+    kind: card
+    topic: weight
+    front: Which matters for weight loss, the energy deficit or the macronutrient mix?
+    back: The energy deficit. Behavioral changes that create it cause weight loss regardless of macronutrient composition; nutrition advice is individualized.
+    src: { page: 21, quote: "Behavioral changes that create an energy deficit, regardless of macronutrient composition, will result in weight loss." }
+    status: unverified
+  - id: dm.L02.027
+    kind: cloze
+    topic: weight
+    text: "Relatively small weight loss ({{c1::3–7%}} of baseline) improves glycemia; larger sustained loss ({{c2::>10%}}) may bring remission of type 2 diabetes."
+    src: { page: 21, quote: "Relatively small weight loss (approximately 3–7% of baseline weight) improves glycemia and other intermediate cardiovascular risk factors." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L02.028
+    kind: card
+    topic: weight
+    front: What can a sustained weight loss of more than 10% achieve?
+    back: Greater benefits, including disease-modifying effects and possible remission of type 2 diabetes, and maybe better long-term cardiovascular outcomes and mortality.
+    src: { page: 21, quote: "Larger, sustained weight losses (>10%) usually confer greater benefits, including disease-modifying effects and possible remission of type 2 diabetes" }
+    status: unverified
+  - id: dm.L02.029
+    kind: card
+    topic: weight
+    front: Are nutrition supplements effective for weight loss?
+    back: There is no clear evidence that they are.
+    src: { page: 22, quote: "There is no clear evidence that nutrition supplements are effective for weight loss." }
+    status: unverified
+  - id: dm.L02.030
+    kind: card
+    topic: weight
+    front: In overweight type 2 patients, what should guide the choice of glucose-lowering drug?
+    back: Consider each drug's effect on weight.
+    src: { page: 22, quote: "consider the medication‘s effect on weight." }
+    status: unverified
+  - id: dm.L02.031
+    kind: cloze
+    topic: weight
+    text: "Obesity pharmacotherapy is an adjunct for selected type 2 patients with BMI {{c1::≥27 kg/m²}}; it counts as effective with {{c2::≥5%}} weight loss after {{c3::3 months}}."
+    src: { page: 22, quote: "effective as an adjunct to nutrition, physical activity, and behavioral counseling for selected people with type 2 diabetes and BMI ≥27 kg/m2." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L02.032
+    kind: card
+    topic: weight
+    front: What if the early response to obesity pharmacotherapy is insufficient or it is poorly tolerated?
+    back: Consider stopping it and evaluate alternative drugs or approaches.
+    src: { page: 22, quote: "When early response is insufficient or if there are significant safety or tolerability issues, consider discontinuation of the medication" }
+    status: unverified
+  - id: dm.L02.033
+    kind: table
+    topic: weight
+    title: Metabolic surgery for type 2 diabetes by BMI
+    columns: [Recommendation, BMI (kg/m²)]
+    rows:
+      - [Recommended option, "≥40"]
+      - ["Recommended if nonsurgical methods fail to give durable weight loss and comorbidity improvement", "35.0–39.9"]
+      - ["May be considered if nonsurgical methods fail", "30.0–34.9"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 22, quote: "Metabolic surgery should be a recommended option to treat type 2 diabetes with BMI ≥40 kg/m2 and in adults with BMI 35.0–39.9 kg/m2" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L02.034
+    kind: card
+    topic: weight
+    front: Where should metabolic surgery be done?
+    back: In high-volume centers with multidisciplinary teams experienced in obesity, diabetes and GI surgery.
+    src: { page: 22, quote: "Metabolic surgery should be performed in high-volume centers with multidisciplinary teams" }
+    status: unverified
+  - id: dm.L02.035
+    kind: card
+    topic: weight
+    front: What follow-up do people need after metabolic surgery?
+    back: Long-term medical and behavioral support, with routine micronutrient, nutritional and metabolic monitoring.
+    src: { page: 23, quote: "People who undergo metabolic surgery should receive long-term medical and behavioral support and routine micronutrient, nutritional, and metabolic status monitoring." }
+    status: unverified
+  # ---------- p23: type 1 ----------
+  - id: dm.L02.036
+    kind: card
+    topic: pharm-t1
+    front: How should most people with type 1 diabetes be treated?
+    back: Multiple daily injections of prandial and basal insulin, or continuous subcutaneous insulin infusion (pump).
+    src: { page: 23, quote: "Most individuals with type 1 diabetes should be treated with multiple daily injections of prandial and basal insulin, or continuous subcutaneous insulin infusion." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L02.037
+    kind: card
+    topic: pharm-t1
+    front: Which insulin type should most people with type 1 use, and why?
+    back: Rapid-acting insulin analogs, to reduce the risk of hypoglycemia.
+    src: { page: 23, quote: "Most individuals with type 1 diabetes should use rapid-acting insulin analogs to reduce hypoglycemia risk." }
+    status: unverified
+  # ---------- p24: type 2 algorithm (image page) ----------
+  - id: dm.L02.038
+    kind: card
+    topic: pharm-t2
+    front: What are the two goals of the ADA type 2 treatment algorithm?
+    back: Cardiovascular and kidney risk reduction in high-risk people, and achieving and maintaining weight and glycemic goals.
+    src: { page: 24, quote: "Goal: Cardiovascular and Kidney Risk Reduction in High-Risk Individuals with Type 2 Diabetes" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L02.039
+    kind: card
+    topic: pharm-t2
+    front: "Type 2 diabetes with ASCVD or indicators of high CVD risk: which drug?"
+    back: A GLP-1 RA with proven CVD benefit OR an SGLT2i with proven CVD benefit.
+    src: { page: 24, quote: "GLP-1 RA with proven CVD benefit OR SGLT2i with proven CVD benefit" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L02.040
+    kind: card
+    topic: pharm-t2
+    front: In the ASCVD branch, if A1C stays above goal, what next?
+    back: On a GLP-1 RA, consider adding an SGLT2i with proven CVD benefit (or vice versa); or pioglitazone.
+    src: { page: 24, quote: "For individuals on a GLP-1 RA, consider adding SGLT2i with proven CVD benefit or vice versa" }
+    status: unverified
+  - id: dm.L02.041
+    kind: card
+    topic: pharm-t2
+    front: "Type 2 diabetes with heart failure (HFrEF or HFpEF): which drug?"
+    back: An SGLT2i with proven HF benefit in this population.
+    src: { page: 24, quote: "SGLT2i with proven HF benefit in this population" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L02.042
+    kind: cloze
+    topic: pharm-t2
+    text: "CKD in the ADA algorithm: eGFR {{c1::<60}} mL/min/1.73 m² or albuminuria (ACR {{c2::≥3.0 mg/mmol}}, 30 mg/g), confirmed by repeat measurement."
+    src: { page: 24, quote: "eGFR <60 mL/min/1.73 m2 OR albuminuria (ACR ≥3.0 mg/mmol [30 mg/g]). Repeat measurement is required to confirm CKD" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L02.043
+    kind: card
+    topic: pharm-t2
+    front: "Type 2 diabetes with CKD on maximally tolerated ACEi or ARB: which drug?"
+    back: An SGLT2i with primary evidence of slowing CKD progression, OR a GLP-1 RA with proven CKD benefit.
+    src: { page: 24, quote: "SGLT2i with primary evidence of reducing CKD progression" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L02.044
+    kind: cloze
+    topic: pharm-t2
+    text: "In CKD, an SGLT2i can be started with eGFR {{c1::≥20}}, continued until {{c2::dialysis or transplantation}}; its glucose-lowering effect falls below eGFR {{c3::45}}."
+    src: { page: 24, quote: "SGLT2i can be started with eGFR ≥20 mL/min/1.73 m2 Continue until initiation of dialysis or transplantation" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L02.045
+    kind: table
+    topic: pharm-t2
+    title: Efficacy for weight loss (ADA figure)
+    columns: [Efficacy, Drugs]
+    rows:
+      - [Very high, "Semaglutide, tirzepatide"]
+      - [High, "Dulaglutide, liraglutide"]
+      - [Intermediate, "GLP-1 RA (not listed above), SGLT2i"]
+      - [Neutral, "Metformin, DPP-4i"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 24, quote: "Efficacy for weight loss Very high: Semaglutide, Tirzepatide" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L02.046
+    kind: table
+    topic: pharm-t2
+    title: Efficacy for glucose lowering (ADA figure)
+    columns: [Efficacy, Drugs]
+    rows:
+      - [Very high, "Dulaglutide (high dose), semaglutide, tirzepatide, insulin; oral or injectable combinations"]
+      - [High, "GLP-1 RA (not listed above), metformin, pioglitazone, SGLT2i, sulfonylurea"]
+      - [Intermediate, DPP-4i]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 24, quote: "Efficacy for glucose lowering Intermediate: DPP-4i" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L02.047
+    kind: card
+    topic: pharm-t2
+    front: For glycemic goals without a compelling CV/kidney indication, what does the algorithm suggest?
+    back: Metformin or another agent (including combinations) with enough efficacy to reach and keep goals, prioritizing avoidance of hypoglycemia in high-risk people.
+    src: { page: 24, quote: "Metformin or other agent (including combination therapy) that provides adequate EFFICACY to achieve and maintain glycemic treatment goals" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L02.048
+    kind: card
+    topic: pharm-t2
+    front: Which glucose-lowering agents have potential benefit in MASLD or MASH?
+    back: GLP-1 RA, dual GIP and GLP-1 RA, pioglitazone, or GLP-1 RA plus pioglitazone; use insulin in decompensated cirrhosis.
+    src: { page: 24, quote: "Agents with potential benefit in MASLD or MASH GLP-1 RA, dual GIP and GLP-1 RA, pioglitazone, or combination of GLP-1 RA with pioglitazone" }
+    status: unverified
+  - id: dm.L02.049
+    kind: enumerate
+    topic: pharm-t2
+    prompt: If A1C is above goal, or significant hypo/hyperglycemia or barriers to care appear, what does the algorithm add?
+    points:
+      - Refer to DSMES to support self-efficacy
+      - "Consider technology (diagnostic or personal CGM)"
+      - Identify and address social determinants of health
+    pass: 2
+    src: { page: 24, quote: "Refer to DSMES to support self-efficacy in achievement of treatment goals" }
+    status: unverified
+  - id: dm.L02.050
+    kind: card
+    topic: pharm-t2
+    front: "CKD branch, A1C above goal on an SGLT2i: what next?"
+    back: Consider adding a GLP-1 RA (or vice versa).
+    src: { page: 24, quote: "If A1C is above goal, for individuals on SGLT2i, consider incorporating a GLP-1 RA or vice versa" }
+    status: unverified
+  # ---------- p25: hypertension ----------
+  - id: dm.L02.051
+    kind: cloze
+    topic: hypertension
+    text: "In diabetes, hypertension = SBP {{c1::≥130}} or DBP {{c2::≥80}} mmHg, averaged over ≥2 measurements on {{c3::≥2 occasions}}."
+    src: { page: 25, quote: "Hypertension is defined as a systolic blood pressure ≥130 mmHg or a diastolic blood pressure ≥80 mmHg" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L02.052
+    kind: card
+    topic: hypertension
+    front: When can hypertension be diagnosed at a single visit?
+    back: BP ≥180/110 mmHg with cardiovascular disease.
+    src: { page: 25, quote: "Individuals with blood pressure ≥180/110 mmHg and cardiovascular disease could be diagnosed with hypertension at a single visit." }
+    status: unverified
+  - id: dm.L02.053
+    kind: cloze
+    topic: hypertension
+    text: "Start antihypertensive drugs in diabetes when BP is persistently {{c1::≥130/80}} mmHg; the on-treatment target is {{c2::<130/80}} mmHg if safely attainable."
+    src: { page: 25, quote: "The on-treatment target blood pressure goal is <130/80 mmHg, if it can be safely attained." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L02.054
+    kind: table
+    topic: hypertension
+    title: Starting antihypertensives in diabetes (ADA figure)
+    columns: [Initial BP, Albuminuria or CAD, Start]
+    rows:
+      - ["≥130/80 and <150/90", "No", "One agent: ACEi or ARB or CCB or diuretic"]
+      - ["≥130/80 and <150/90", "Yes", "ACEi or ARB"]
+      - ["≥150/90", "No", "Two drugs from ACEi or ARB, CCB or diuretic"]
+      - ["≥150/90", "Yes", "ACEi or ARB plus CCB or diuretic"]
+    blanks: [[0, 2], [1, 2], [2, 2], [3, 2]]
+    src: { page: 25, quote: "Initial BP ≥150/90 mmHg Start two agents" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L02.055
+    kind: order
+    topic: hypertension
+    prompt: Order the steps when BP is not at goal in a person with diabetes.
+    steps:
+      - Lifestyle management plus the starting agent(s)
+      - Add an agent from a complementary class (ACEi or ARB, CCB, diuretic)
+      - Reach a drug from each of the three classes
+      - Add a mineralocorticoid receptor antagonist; refer to a BP specialist
+    src: { page: 25, quote: "Consider addition of mineralocorticoid receptor antagonist; refer to specialist with expertise in BP management" }
+    status: unverified
+  - id: dm.L02.056
+    kind: card
+    topic: hypertension
+    front: "Not at goal (or adverse effects) on a drug from each of three classes: what next?"
+    back: Consider adding a mineralocorticoid receptor antagonist and refer to a specialist in BP management.
+    src: { page: 25, quote: "Consider addition of mineralocorticoid receptor antagonist; refer to specialist with expertise in BP management" }
+    status: unverified
+  # ---------- p26: lipids ----------
+  - id: dm.L02.057
+    kind: table
+    topic: lipids
+    title: Statin intensity
+    columns: [Intensity, LDL fall, Doses]
+    rows:
+      - [High, "≥50%", "Rosuvastatin 20–40 mg, atorvastatin 40–80 mg"]
+      - [Moderate, "30–49%", "Rosuvastatin 5–10 mg, atorvastatin 10–20 mg"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2]]
+    src: { page: 26, quote: "High-intensity statin therapy (lowers LDL cholesterol by ≥50%) Rosuvastatin 20–40 mg, Atorvastatin 40–80 mg" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L02.058
+    kind: cloze
+    topic: lipids
+    text: "High-intensity statins: rosuvastatin {{c1::20–40 mg}} or atorvastatin {{c2::40–80 mg}}, lowering LDL by ≥50%."
+    src: { page: 26, quote: "Rosuvastatin 20–40 mg, Atorvastatin 40–80 mg" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L02.059
+    kind: cloze
+    topic: lipids
+    text: "Moderate-intensity statins: rosuvastatin {{c1::5–10 mg}} or atorvastatin {{c2::10–20 mg}}, lowering LDL by {{c3::30–49%}}."
+    src: { page: 26, quote: "Moderate-intensity statin therapy (lowers LDL cholesterol by 30–49%) Rosuvastatin 5–10 mg, Atorvastatin 10–20 mg" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L02.060
+    kind: table
+    topic: lipids
+    title: Statins in diabetes by age (ADA figure)
+    columns: [Age, Recommendation]
+    rows:
+      - ["20–39", "Consider a statin if there are additional ASCVD risk factors"]
+      - ["40–75, no ASCVD risk factor", "Moderate-intensity statin"]
+      - ["40–75, ≥1 ASCVD risk factor", "High-intensity statin; LDL goal <70 mg/dL (<1.8 mmol/L)"]
+      - [">75", "Continue the current statin, or consider starting a moderate-intensity statin after weighing benefits and risks"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 26, quote: "Use a high-intensity statin in those with ≥1 ASCVD risk factor, with an LDL cholesterol goal of <70 mg/dL (<1.8 mmol/L)." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L02.061
+    kind: cloze
+    topic: lipids
+    text: "Age 40–75 with ≥1 ASCVD risk factor: high-intensity statin with an LDL goal of {{c1::<70 mg/dL}} ({{c2::<1.8 mmol/L}})."
+    src: { page: 26, quote: "Use a high-intensity statin in those with ≥1 ASCVD risk factor, with an LDL cholesterol goal of <70 mg/dL (<1.8 mmol/L)." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L02.062
+    kind: card
+    topic: lipids
+    front: "LDL goal not reached on maximum tolerated statin (age 40–75): what may be added?"
+    back: Ezetimibe or a PCSK9 inhibitor.
+    src: { page: 26, quote: "It may be reasonable to add ezetimibe or PCSK9 inhibitor to maximum tolerated statin therapy if LDL goal is not achieved." }
+    status: unverified
+  - id: dm.L02.063
+    kind: card
+    topic: lipids
+    front: Which non-statin does the ADA figure name for people who are statin intolerant?
+    back: Bempedoic acid.
+    src: { page: 26, quote: "Use bempedoic acid for those who are statin intolerant." }
+    status: unverified
+  - id: dm.L02.064
+    kind: enumerate
+    topic: lipids
+    prompt: Options for statin intolerance listed in the lecture?
+    points:
+      - Switch to a different high-intensity statin
+      - Lower the statin dose
+      - Use nondaily dosing
+      - Add non-statin therapy to the maximum tolerated statin
+    pass: 3
+    src: { page: 26, quote: "Switching to a different high-intensity statin - Lowering the statin dose - Using nondaily dosing of statins" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- MCQs ----------
+  - id: dm.L02.065
+    kind: mcq
+    topic: diagnosis
+    stem: A 35-year-old woman with a recent postpartum hemorrhage and 2 units of blood transfused 3 weeks ago is being checked for diabetes. Which criterion should be used?
+    options:
+      - Plasma glucose criteria only
+      - A1C only
+      - Either A1C or glucose
+      - A1C repeated twice
+      - Urine glucose
+    answer: 0
+    why:
+      - "Correct: recent blood loss or transfusion → plasma glucose only (p18)."
+      - New red cells make A1C falsely low.
+      - A1C is excluded in this setting.
+      - Repeating doesn't fix the red-cell problem.
+      - Glycosuria is not diagnostic.
+    src: { page: 18, quote: "In conditions such as hemoglobinopathies, HIV, hemodialysis, recent blood loss or transfusion, or erythropoietin therapy, only plasma blood glucose criteria should be used" }
+    status: unverified
+  - id: dm.L02.066
+    kind: mcq
+    topic: screening
+    stem: A 30-year-old asymptomatic man has BMI 29 and hypertension. Should he be screened for diabetes?
+    options:
+      - "Yes: BMI ≥25 with one risk factor, at any age"
+      - "No: screening starts at 35"
+      - "No: he has no symptoms"
+      - "Only if BMI ≥30"
+      - "Only if a first-degree relative has diabetes"
+    answer: 0
+    why:
+      - "Correct (p18–19)."
+      - Age 35 is the start for everyone, but overweight with a risk factor is tested at any age.
+      - Screening is for asymptomatic people.
+      - The cut-off is BMI ≥25.
+      - Hypertension alone is enough.
+    src: { page: 18, quote: "should be considered in adults of any age with overweight or obesity (BMI ≥25 kg/m2 who have one or more risk factors" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L02.067
+    kind: mcq
+    topic: screening
+    stem: A woman had GDM in her last pregnancy, delivered 6 weeks ago. What testing is due?
+    options:
+      - "Test now (4–12 weeks postpartum), then lifelong at least every 3 years"
+      - Test once at 1 year only
+      - No testing; GDM resolves after delivery
+      - Yearly A1C for 2 years then stop
+      - Test only in the next pregnancy
+    answer: 0
+    why:
+      - "Correct (p19–20)."
+      - Testing is lifelong.
+      - GDM may persist and tends to recur; testing is required.
+      - It does not stop.
+      - Testing is needed between pregnancies.
+    src: { page: 19, quote: "Screen individuals with gestational diabetes mellitus for prediabetes or diabetes at 4–12 weeks postpartum" }
+    status: unverified
+  - id: dm.L02.068
+    kind: mcq
+    topic: prevention
+    stem: A 40-year-old woman with prediabetes, BMI 37, FPG 115 mg/dL and A1C 6.2%. Besides intensive lifestyle change, what else?
+    options:
+      - Consider metformin
+      - Start pioglitazone
+      - Start insulin
+      - Start a sulfonylurea
+      - Nothing more until diabetes develops
+    answer: 0
+    why:
+      - "Correct: age 25–59, BMI ≥35, FPG ≥110, A1C ≥6.0% (p20)."
+      - Pioglitazone is for prediabetes with prior stroke and insulin resistance.
+      - Insulin is not a prevention drug.
+      - Not a prevention option in the lecture.
+      - She is high risk; prevention is recommended.
+    src: { page: 20, quote: "especially those aged 25–59 years with BMI ≥35 kg/m2, higher FPG (e.g., ≥110 mg/dL), and higher A1C (e.g., ≥6.0%), and in individuals with prior GDM." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L02.069
+    kind: mcq
+    topic: prevention
+    stem: A 62-year-old man with prediabetes and evidence of insulin resistance had an ischemic stroke last year. Which drug may lower his risk of stroke or MI?
+    options: [Pioglitazone, Metformin, Sitagliptin, Glimepiride, Acarbose]
+    answer: 0
+    why:
+      - "Correct; balance against weight gain, edema and fracture (p20)."
+      - Metformin's prevention indication is about diabetes, not stroke.
+      - Not mentioned for prevention.
+      - Not mentioned for prevention.
+      - Not mentioned in the lecture.
+    src: { page: 20, quote: "pioglitazone may be considered to lower the risk of stroke or myocardial infarction." }
+    status: unverified
+  - id: dm.L02.070
+    kind: mcq
+    topic: prevention
+    stem: An overweight 45-year-old with prediabetes joins an intensive lifestyle program. What weight-loss goal does ADA set?
+    options: ["At least 7% of initial weight", "At least 3%", "At least 15%", "Reach BMI <25", "At least 2 kg"]
+    answer: 0
+    why:
+      - "Correct (p20)."
+      - Too small for prevention.
+      - More than the target.
+      - Not the ADA target.
+      - Not the ADA target.
+    src: { page: 20, quote: "intensive lifestyle behavior change program to achieve and maintain a weight reduction of at least 7% of initial body weight." }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L02.071
+    kind: mcq
+    topic: targets
+    stem: An 84-year-old with type 2 diabetes, advanced dementia and recurrent falls from hypoglycemia. Best A1C goal?
+    options: ["Less stringent, such as <8%", "<6.5%", "<7%", "<6%", "Normal A1C"]
+    answer: 0
+    why:
+      - "Correct: limited life expectancy and harms > benefits (p21)."
+      - Too tight; more hypoglycemia.
+      - The usual goal, but not for him.
+      - Dangerous here.
+      - Dangerous here.
+    src: { page: 21, quote: "Less stringent A1C goals (such as <8%) may be appropriate for patients with limited life expectancy" }
+    status: unverified
+  - id: dm.L02.072
+    kind: mcq
+    topic: targets
+    stem: A CGM report shows time in range 74%, time below range 6%, time below 54 mg/dL 2%. Which goal is missed?
+    options:
+      - Time below range (and below 54)
+      - Time in range
+      - None; all goals are met
+      - Time above range only
+      - A1C
+    answer: 0
+    why:
+      - "Correct: TBR should be <4% and <54 mg/dL <1% (p21)."
+      - TIR >70% is met.
+      - Two hypoglycemia goals are missed.
+      - Not given in the lecture's goals.
+      - A1C is not part of the CGM report here.
+    src: { page: 21, quote: "time in range of >70% with time below range <4% and time <54 mg/dL <1%." }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L02.073
+    kind: mcq
+    topic: weight
+    stem: A 50-year-old with type 2 diabetes and BMI 36 failed 2 years of diet, exercise and drugs; his diabetes is uncontrolled. Metabolic surgery?
+    options:
+      - "Recommended option (BMI 35–39.9 without durable response)"
+      - Only if BMI ≥40
+      - May be considered only
+      - Contraindicated in diabetes
+      - Only after insulin fails
+    answer: 0
+    why:
+      - "Correct (p22)."
+      - BMI ≥40 is not required here.
+      - "\"May be considered\" is the 30–34.9 band."
+      - It treats type 2 diabetes.
+      - Not a condition in the lecture.
+    src: { page: 22, quote: "Metabolic surgery should be a recommended option to treat type 2 diabetes with BMI ≥40 kg/m2 and in adults with BMI 35.0–39.9 kg/m2" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L02.074
+    kind: mcq
+    topic: weight
+    stem: After 3 months on an obesity drug, a patient lost 2% of body weight. What does the lecture advise?
+    options:
+      - Consider stopping it and look at alternatives
+      - Continue; more loss comes later
+      - Double the dose regardless
+      - Add a nutrition supplement
+      - Stop all diabetes drugs
+    answer: 0
+    why:
+      - "Correct: effective = ≥5% at 3 months; insufficient early response → consider stopping (p22)."
+      - Further loss is expected only when it was effective.
+      - Not advised.
+      - No clear evidence supplements work (p22).
+      - Unrelated.
+    src: { page: 22, quote: "If obesity pharmacotherapy is effective (typically defined as ≥5% weight loss after 3 months‘ use), further weight loss is likely with continued use." }
+    status: unverified
+  - id: dm.L02.075
+    kind: mcq
+    topic: pharm-t2
+    stem: A 64-year-old with type 2 diabetes had an MI last year. A1C 7.6% on metformin. Which addition fits the ADA algorithm?
+    options:
+      - GLP-1 RA or SGLT2i with proven CVD benefit
+      - Sulfonylurea
+      - DPP-4 inhibitor
+      - Basal insulin
+      - Acarbose
+    answer: 0
+    why:
+      - "Correct: ASCVD → GLP-1 RA or SGLT2i with proven CVD benefit, regardless of A1C (p24)."
+      - Lowers glucose but has no CV benefit in the algorithm.
+      - Intermediate glucose lowering, no CV benefit.
+      - Not the first choice for CV risk.
+      - Not in the algorithm.
+    src: { page: 24, quote: "GLP-1 RA with proven CVD benefit OR SGLT2i with proven CVD benefit" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L02.076
+    kind: mcq
+    topic: pharm-t2
+    stem: A 70-year-old with type 2 diabetes and HFrEF (EF 30%). Which glucose-lowering class is preferred?
+    options: [SGLT2i with proven HF benefit, Pioglitazone, Sulfonylurea, DPP-4i, GLP-1 RA as the only HF drug]
+    answer: 0
+    why:
+      - "Correct (p24)."
+      - Pioglitazone causes edema (p20) and is not the HF choice.
+      - No HF benefit.
+      - No HF benefit.
+      - The HF branch names SGLT2i.
+    src: { page: 24, quote: "SGLT2i with proven HF benefit in this population" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L02.077
+    kind: mcq
+    topic: pharm-t2
+    stem: Type 2 diabetes with eGFR 28 and albuminuria, on maximum ACEi. Can an SGLT2i be started?
+    options:
+      - "Yes: it can be started with eGFR ≥20, for kidney protection"
+      - "No: only above eGFR 45"
+      - "No: only above eGFR 60"
+      - Only once on dialysis
+      - Only as a glucose-lowering drug
+    answer: 0
+    why:
+      - "Correct (p24). Its glucose-lowering effect is reduced below 45, but kidney benefit remains."
+      - 45 is where glucose-lowering efficacy falls, not the start limit.
+      - CKD itself is defined as eGFR <60.
+      - Continue until dialysis; don't start at dialysis.
+      - Here the aim is slowing CKD.
+    src: { page: 24, quote: "SGLT2i can be started with eGFR ≥20 mL/min/1.73 m2" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L02.078
+    kind: mcq
+    topic: pharm-t2
+    stem: An obese patient with type 2 diabetes wants the drug with the greatest effect on weight. Which?
+    options: [Tirzepatide, Metformin, Sitagliptin, Empagliflozin, Liraglutide]
+    answer: 0
+    why:
+      - "Correct: very high for weight loss, with semaglutide (p24)."
+      - Weight neutral.
+      - Weight neutral.
+      - SGLT2i is intermediate.
+      - Liraglutide is high, not very high.
+    src: { page: 24, quote: "Efficacy for weight loss Very high: Semaglutide, Tirzepatide" }
+    status: unverified
+  - id: dm.L02.079
+    kind: mcq
+    topic: pharm-t2
+    stem: Which glucose-lowering class has only intermediate glucose-lowering efficacy in the ADA figure?
+    options: [DPP-4 inhibitors, Sulfonylureas, Metformin, Insulin, SGLT2 inhibitors]
+    answer: 0
+    why:
+      - "Correct (p24)."
+      - High.
+      - High.
+      - Very high.
+      - High.
+    src: { page: 24, quote: "Efficacy for glucose lowering Intermediate: DPP-4i" }
+    status: unverified
+  - id: dm.L02.080
+    kind: mcq
+    topic: hypertension
+    stem: A 58-year-old with diabetes and albuminuria has BP 156/94 mmHg on repeated visits. Initial treatment?
+    options:
+      - ACEi or ARB plus a CCB or diuretic
+      - One agent from any class
+      - Lifestyle only for 6 months
+      - CCB plus diuretic
+      - Mineralocorticoid receptor antagonist
+    answer: 0
+    why:
+      - "Correct: ≥150/90 with albuminuria → two agents including ACEi or ARB (p25)."
+      - "≥150/90 needs two agents."
+      - Drugs are needed at ≥130/80 persistently.
+      - With albuminuria, ACEi or ARB must be one of them.
+      - MRA comes after three classes fail.
+    src: { page: 25, quote: "Initial BP ≥150/90 mmHg Start two agents" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L02.081
+    kind: mcq
+    topic: hypertension
+    stem: A patient with diabetes has an average BP of 134/82 mmHg over two visits. Which is true?
+    options:
+      - He has hypertension and qualifies for drug therapy; target <130/80
+      - He is normotensive by the ADA definition
+      - Treat only above 140/90
+      - Diagnosis needs a single reading ≥180/110
+      - Target <140/90
+    answer: 0
+    why:
+      - "Correct (p25)."
+      - "≥130/80 on ≥2 occasions is hypertension."
+      - The threshold in diabetes is 130/80.
+      - The single-visit rule is for ≥180/110 with CVD.
+      - The target is <130/80.
+    src: { page: 25, quote: "People with diabetes and hypertension qualify for antihypertensive drug therapy when the blood pressure is persistently elevated ≥130/80 mmHg." }
+    status: unverified
+  - id: dm.L02.082
+    kind: mcq
+    topic: lipids
+    stem: A 55-year-old with type 2 diabetes, smoker and hypertensive, no ASCVD. Statin?
+    options:
+      - High-intensity statin, LDL goal <70 mg/dL
+      - Moderate-intensity statin
+      - No statin
+      - Statin only if LDL >190
+      - Ezetimibe first
+    answer: 0
+    why:
+      - "Correct: age 40–75 with ≥1 ASCVD risk factor (p26)."
+      - Moderate is for 40–75 without risk factors.
+      - Statins are indicated at 40–75.
+      - Not the lecture's rule.
+      - Ezetimibe is added to a maximum tolerated statin.
+    src: { page: 26, quote: "Use a high-intensity statin in those with ≥1 ASCVD risk factor, with an LDL cholesterol goal of <70 mg/dL (<1.8 mmol/L)." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L02.083
+    kind: mcq
+    topic: lipids
+    stem: Which regimen is high-intensity statin therapy?
+    options: [Atorvastatin 40 mg, Atorvastatin 20 mg, Rosuvastatin 10 mg, Rosuvastatin 5 mg, Atorvastatin 10 mg]
+    answer: 0
+    why:
+      - "Correct: atorvastatin 40–80 or rosuvastatin 20–40 (p26)."
+      - Moderate.
+      - Moderate.
+      - Moderate.
+      - Moderate.
+    src: { page: 26, quote: "Rosuvastatin 20–40 mg, Atorvastatin 40–80 mg" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L02.084
+    kind: mcq
+    topic: lipids
+    stem: A 30-year-old with type 1 diabetes, no other risk factors. Statin?
+    options:
+      - Consider only if there are additional ASCVD risk factors
+      - High-intensity statin
+      - Moderate-intensity statin for all
+      - Never before 40
+      - Ezetimibe
+    answer: 0
+    why:
+      - "Correct: age 20–39 (p26)."
+      - For 40–75 with risk factors.
+      - For 40–75 without risk factors.
+      - Can be considered from 20 with risk factors.
+      - Not first line.
+    src: { page: 26, quote: "Consider statin therapy if there are additional ASCVD risk factors." }
+    status: unverified
+  # ---------- cases ----------
+  - id: dm.L02.085
+    kind: case
+    topic: pharm-t2
+    stem: A 60-year-old man with type 2 diabetes for 8 years, on metformin. BMI 33. A1C 8.1%.
+    steps:
+      - reveal: "eGFR 52 mL/min/1.73 m², urine ACR 45 mg/mmol on two occasions. On maximum ramipril."
+        question: Which branch of the ADA algorithm applies?
+        options: ["CKD: SGLT2i with proven CKD benefit (or GLP-1 RA with CKD benefit)", "Glycemic only: add a sulfonylurea", "HF branch", "No change needed"]
+        answer: 0
+        why: "eGFR <60 or ACR ≥3 mg/mmol, confirmed = CKD; on maximal ACEi → SGLT2i with primary CKD evidence, or GLP-1 RA with proven CKD benefit (p24)."
+      - reveal: "Started on an SGLT2i. Three months later A1C 7.6%."
+        question: Next?
+        options: [Add a GLP-1 RA, Stop the SGLT2i, Add a DPP-4i, Add pioglitazone only]
+        answer: 0
+        why: "If A1C is above goal on an SGLT2i, consider a GLP-1 RA, which also helps his weight (p24)."
+      - reveal: "BP 142/88 mmHg on ramipril."
+        question: BP step?
+        options: [Add a CCB or diuretic, Target is reached, Add an MRA now, Switch ramipril to an ARB]
+        answer: 0
+        why: "Target <130/80; not at goal → add an agent from a complementary class (p25). MRA is after three classes."
+      - question: Statin?
+        options: ["High-intensity, LDL goal <70 mg/dL", "Moderate", "None", "Bempedoic acid first"]
+        answer: 0
+        why: "Age 40–75 with ≥1 ASCVD risk factor (hypertension, CKD) → high-intensity (p26)."
+    src: { page: 24, quote: "SGLT2i with primary evidence of reducing CKD progression" }
+    status: unverified
+  - id: dm.L02.086
+    kind: case
+    topic: prevention
+    stem: A 38-year-old woman, BMI 31, had GDM 2 years ago. She feels well.
+    steps:
+      - question: Should she be screened now?
+        options: ["Yes: overweight with a risk factor; prior GDM needs lifelong testing", "No: under 35", "No: no symptoms", "Only in the next pregnancy"]
+        answer: 0
+        why: "BMI ≥25 + risk factor = test at any age; prior GDM = lifelong testing at least every 3 years (p18–20)."
+      - reveal: "FPG 118 mg/dL, A1C 6.1%."
+        question: Category?
+        options: [Prediabetes, Diabetes, Normal, Cannot classify]
+        answer: 0
+        why: "FPG 100–125 and A1C 5.7–6.4% (p18)."
+      - question: Management?
+        options: ["Intensive lifestyle (≥7% weight loss) and consider metformin (prior GDM)", "Insulin", "Pioglitazone for all", "Nothing; repeat in 3 years"]
+        answer: 0
+        why: "Lifestyle program for ≥7% loss; metformin especially with prior GDM; monitor yearly (p20)."
+    src: { page: 20, quote: "Metformin: should be considered in adults at high risk of type 2 diabetes" }
+    status: unverified
+  - id: dm.L02.087
+    kind: case
+    topic: lipids
+    stem: A 52-year-old woman with type 2 diabetes and hypertension starts atorvastatin 40 mg.
+    steps:
+      - reveal: "She stops it after 3 weeks because of muscle aches."
+        question: First options?
+        options: ["Switch statin, lower the dose, or use nondaily dosing", "Never use statins again", "Start a PCSK9 inhibitor alone", "Fibrate instead"]
+        answer: 0
+        why: "Statin intolerance: switch, lower the dose, nondaily dosing, add non-statin to the maximum tolerated statin (p26)."
+      - reveal: "On rosuvastatin 5 mg every other day, LDL is 110 mg/dL."
+        question: What may be added?
+        options: [Ezetimibe or PCSK9 inhibitor (or bempedoic acid if intolerant), Nothing; LDL is fine, Niacin, Omega-3 only]
+        answer: 0
+        why: "Goal <70 mg/dL with risk factors; add ezetimibe or PCSK9i; bempedoic acid for statin intolerance (p26)."
+    src: { page: 26, quote: "Using nondaily dosing of statins" }
+    status: unverified
+  # ---------- end-of-lecture questions (p26) ----------
+  - id: dm.L02.088
+    kind: essay
+    topic: pharm-t2
+    prompt: Mention the algorithm for starting oral hypoglycemic drugs in patients with type 2 diabetes.
+    outline:
+      - "Two goals": ["CV and kidney risk reduction in high-risk people", "Achieve and keep weight and glycemic goals"]
+      - "ASCVD or high CVD risk": ["GLP-1 RA or SGLT2i with proven CVD benefit", "A1C above goal: add the other, or pioglitazone"]
+      - "HF and CKD": ["HF: SGLT2i with proven HF benefit", "CKD (eGFR <60 or ACR ≥3 mg/mmol) on max ACEi/ARB: SGLT2i (start eGFR ≥20) or GLP-1 RA with CKD benefit"]
+      - "Glycemic and weight goals": ["Metformin or other agent with adequate efficacy; avoid hypoglycemia", "Weight: semaglutide/tirzepatide very high; metformin, DPP-4i neutral"]
+      - "Then": ["MASLD: GLP-1 RA, GIP/GLP-1 RA, pioglitazone", "Not at goal: DSMES, CGM, social determinants"]
+    src: { page: 24, quote: "Goal: Cardiovascular and Kidney Risk Reduction in High-Risk Individuals with Type 2 Diabetes" }
+    status: unverified
+    tags: [book-question]
+  - id: dm.L02.089
+    kind: essay
+    topic: lipids
+    prompt: Discuss statin therapy in patients with diabetes.
+    outline:
+      - "Intensity": ["High (≥50% LDL fall): rosuvastatin 20–40, atorvastatin 40–80 mg", "Moderate (30–49%): rosuvastatin 5–10, atorvastatin 10–20 mg"]
+      - "By age": ["20–39: consider if additional ASCVD risk factors", "40–75: moderate without risk factors; high with ≥1, LDL goal <70 mg/dL", ">75: continue, or start moderate after weighing benefit and risk"]
+      - "Add-ons": ["Ezetimibe or PCSK9 inhibitor if LDL goal not met", "Bempedoic acid if statin intolerant"]
+      - "Statin intolerance": ["Switch statin, lower dose, nondaily dosing", "Add non-statin to maximum tolerated statin"]
+    src: { page: 26, quote: "High-intensity statin therapy (lowers LDL cholesterol by ≥50%) Rosuvastatin 20–40 mg, Atorvastatin 40–80 mg" }
+    status: unverified
+    tags: [book-question]
+  - id: dm.L02.090
+    kind: essay
+    topic: prevention
+    prompt: Discuss the management of patients with prediabetes.
+    outline:
+      - "Diagnosis": ["A1C 5.7–6.4%, FPG 100–125, 2-h 140–199 mg/dL"]
+      - "Monitoring": ["Test for type 2 diabetes at least yearly"]
+      - "Lifestyle": ["Intensive program; lose and keep off ≥7% of initial weight"]
+      - "Metformin": ["High risk, especially age 25–59, BMI ≥35, FPG ≥110, A1C ≥6.0%, prior GDM"]
+      - "Pioglitazone": ["Prior stroke with insulin resistance: lowers stroke/MI risk", "Weigh weight gain, edema, fracture"]
+    src: { page: 20, quote: "Monitor: for the development of type 2 diabetes in those with prediabetes at least annually" }
+    status: unverified
+    tags: [book-question]

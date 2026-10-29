@@ -252,6 +252,39 @@ Source: Book Nephrology Lecture 1, p. 20
 | `glucose_mg_dl` | number, mg/dL | Glucose |
 | `bun_mg_dl` | number, mg/dL | BUN |
 
+## `kdigo_aki`: KDIGO AKI stage
+
+Source: KDIGO 2012; book Nephrology Lecture 5, p. 100
+
+| input | kind | |
+|---|---|---|
+| `baseline_cr_mg_dl` | number, mg/dL | Baseline creatinine |
+| `current_cr_mg_dl` | number, mg/dL | Current creatinine |
+| `urine_output` | `normal`, `lt05_6h`, `lt05_12h`, `lt03_24h_or_anuria` | Urine output |
+| `rrt` | true / false (default false) | Renal replacement therapy started |
+
+## `fena`: FENa (fractional excretion of sodium)
+
+Source: Book Nephrology Lecture 5, p. 109
+
+| input | kind | |
+|---|---|---|
+| `urine_na_meq_l` | number, mEq/L | Urine sodium |
+| `plasma_na_meq_l` | number, mEq/L | Plasma sodium |
+| `urine_cr_mg_dl` | number, mg/dL | Urine creatinine |
+| `plasma_cr_mg_dl` | number, mg/dL | Plasma creatinine |
+
+## `feurea`: FEurea (fractional excretion of urea)
+
+Source: Book Nephrology Lecture 5, p. 109
+
+| input | kind | |
+|---|---|---|
+| `urine_urea_mg_dl` | number, mg/dL | Urine urea |
+| `plasma_urea_mg_dl` | number, mg/dL | Plasma urea |
+| `urine_cr_mg_dl` | number, mg/dL | Urine creatinine |
+| `plasma_cr_mg_dl` | number, mg/dL | Plasma creatinine |
+
 ## `cockcroft_gault`: Cockcroft-Gault creatinine clearance
 
 Source: Book Geriatrics Lecture 2, p. 30; Lecture 3, p. 42
@@ -293,6 +326,18 @@ Source: Book Diabetology Lecture 15, pp. 189, 192
 | `na_meq_l` | number, mEq/L | Sodium |
 | `glucose_mg_dl` | number, mg/dL | Glucose |
 | `urea_mmol_l` | number, mmol/L | Urea; optional |
+
+## `ipss_mf`: IPSS (primary myelofibrosis)
+
+Source: Cervantes 2009; book Hematology Lecture 9, p. 151
+
+| input | kind | |
+|---|---|---|
+| `age_years` | number, years | Age |
+| `wbc_10e9_l` | number, × 10⁹/L | WBC |
+| `hb_g_dl` | number, g/dL | Haemoglobin |
+| `blasts_pct` | number, % | Peripheral blasts |
+| `constitutional` | true / false (default false) | Constitutional symptoms |
 
 ## `incidence`: Incidence rate
 

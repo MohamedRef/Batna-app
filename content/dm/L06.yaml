@@ -1,0 +1,602 @@
+schema: batna.content/v1
+lecture: dm.L06
+title: "Diabetic Foot Disease"
+author: "Prof. Dr. Magdy Helmy"
+book: { chapter: 6, pages: [66, 75] }
+topics:
+  - { id: why, title: "Diabetic neuropathy: why we care" }
+  - { id: pathway, title: "Pathway from diabetes to foot ulcer" }
+  - { id: stages, title: "Diabetic foot stages and amputation" }
+  - { id: neuro, title: "Neurological evaluation and nerve conduction" }
+  - { id: vascular, title: "Vascular evaluation and ABI" }
+  - { id: pressure, title: "Plantar pressure, insoles and footwear" }
+  - { id: causal, title: "Glycemic control and insulin neuritis" }
+  - { id: pain, title: "Symptomatic drugs for painful neuropathy" }
+items:
+  # ---------- p66: why care ----------
+  - id: dm.L06.001
+    kind: cloze
+    topic: why
+    text: "Up to {{c1::40–60%}} of people with diabetes will develop peripheral neuropathy."
+    src: { page: 66, quote: "Up to 40-60% of those with diabetes will develop PN." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L06.002
+    kind: card
+    topic: why
+    front: How is the pain of diabetic peripheral neuropathy described, and how does it spread?
+    back: Burning, tingling, prickling or dull-aching pain, beginning in the feet and extending upward over time.
+    src: { page: 66, quote: "Beginning in the feet and extending upward over time." }
+    status: unverified
+  - id: dm.L06.003
+    kind: enumerate
+    topic: why
+    prompt: Why does painful diabetic neuropathy affect quality of life?
+    points: [Intractable pain, Decreased mobility, Sleep disorders]
+    pass: 3
+    src: { page: 66, quote: "Due to intractable pain, decreased mobility & sleep disorders." }
+    status: unverified
+  - id: dm.L06.004
+    kind: card
+    topic: why
+    front: What happens later in diabetic neuropathy after the painful phase?
+    back: Loss of sensation, leading to the insensate diabetic foot.
+    src: { page: 66, quote: "Later on, there is ―Loss of Sensation‖." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p67: pathway figure and stages ----------
+  - id: dm.L06.005
+    kind: card
+    topic: pathway
+    front: Which three risk factors drive PVD in the diabetic foot pathway figure?
+    back: Smoking, hypertension and dyslipidemia.
+    src: { page: 67, quote: "Smoking Hypertension Dyslipidemia" }
+    status: unverified
+  - id: dm.L06.006
+    kind: order
+    topic: pathway
+    prompt: Motor neuropathy pathway to a diabetic foot ulcer?
+    steps: [Motor neuropathy, Intrinsic muscle imbalance and wasting, Foot deformities, High pressure points, Diabetic foot ulcer]
+    src: { page: 67, quote: "Intrinsic muscles Imbalance & Wasting Dry Skin" }
+    status: unverified
+  - id: dm.L06.007
+    kind: order
+    topic: pathway
+    prompt: Autonomic neuropathy pathway to a diabetic foot ulcer?
+    steps: [Autonomic neuropathy, Reduced sweating, Dry skin, Cracks and fissures, Diabetic foot ulcer]
+    src: { page: 67, quote: "Reduced Sweating" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L06.008
+    kind: table
+    topic: pathway
+    title: From diabetes to foot ulcer (pathway figure)
+    columns: [Arm, Pathway]
+    rows:
+      - [PVD, "Ischemia + trauma → ulcer"]
+      - [Sensory neuropathy, "Loss of protective sensation + trauma → ulcer"]
+      - [Motor neuropathy, "Intrinsic muscle imbalance and wasting → deformities → high pressure points → ulcer"]
+      - [Autonomic neuropathy, "Reduced sweating → dry skin → cracks and fissures → ulcer"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 67, quote: "Loss of Protective Sensation Foot Deformities" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L06.009
+    kind: mcq
+    topic: pathway
+    stem: A 57-year-old man with long-standing diabetes has dry, cracked skin on both heels, with a fissure that has become an ulcer. His feet barely sweat. Which arm of neuropathy explains this ulcer?
+    options: [Autonomic, Motor, Sensory, Ischemic, Proximal motor]
+    answer: 0
+    why:
+      - "Correct: autonomic neuropathy → reduced sweating → dry skin → cracks and fissures → ulcer (p67)."
+      - Motor neuropathy acts through muscle imbalance, deformity and high pressure points.
+      - Sensory neuropathy acts through loss of protective sensation and unnoticed trauma.
+      - Ischemia belongs to the PVD arm, not neuropathy.
+      - Proximal motor neuropathy is not on the pathway and does not cause dry skin.
+    src: { page: 67, quote: "Reduced Sweating" }
+    status: unverified
+  - id: dm.L06.010
+    kind: card
+    topic: stages
+    front: Define the high-risk foot stage.
+    back: Presence of neuropathy, ischemia and/or deformity.
+    src: { page: 67, quote: "High-risk Foot: Presence of Neuropathy, Ischemia &/or Deformity." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L06.011
+    kind: order
+    topic: stages
+    prompt: Put the diabetic foot stages of this lecture in order.
+    steps: [High-risk foot, Ulcerated foot, Infected foot, Necrotic foot]
+    src: { page: 67, quote: "DF Stages: (Ulcerated Foot): Neuropathic Ulcer or Ischaemic Ulcer." }
+    status: unverified
+  - id: dm.L06.012
+    kind: card
+    topic: stages
+    front: What does the infected-foot stage include?
+    back: Local ulcer infection, cellulitis and/or osteomyelitis.
+    src: { page: 67, quote: "Local Ulcer Infection, Cellulitis &/or Osteomyelitis" }
+    status: unverified
+  # ---------- p68: necrosis, amputation ----------
+  - id: dm.L06.013
+    kind: cloze
+    topic: stages
+    text: "In the necrotic foot, {{c1::wet}} necrosis goes with the neuropathic foot and {{c2::dry}} necrosis with the ischaemic foot."
+    src: { page: 68, quote: "Wet Necrosis (Neuropathic Foot)" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L06.014
+    kind: cloze
+    topic: stages
+    text: "Among diabetic patients worldwide there is a lower-limb amputation every {{c1::30 seconds}}."
+    src: { page: 68, quote: "Among Diabetic Patients, There is an AMPUTATION every 30 Seconds Throughout the World." }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L06.015
+    kind: mcq
+    topic: stages
+    stem: A diabetic woman has a black, shrivelled, cold second toe with a clear line of demarcation and absent foot pulses. In this lecture's staging, what is it?
+    options: [Necrotic foot with dry necrosis (ischaemic), Necrotic foot with wet necrosis (neuropathic), Infected foot, Ulcerated foot, High-risk foot]
+    answer: 0
+    why:
+      - "Correct: dry necrosis belongs to the ischaemic foot (p68)."
+      - Wet necrosis is the neuropathic pattern.
+      - Infected foot = ulcer infection, cellulitis or osteomyelitis without necrosis as the main feature.
+      - Ulcerated foot = neuropathic or ischaemic ulcer.
+      - High-risk foot has neuropathy, ischemia or deformity without ulcer.
+    src: { page: 68, quote: "Dry Necrosis (Ischaemic Foot)." }
+    status: unverified
+  # ---------- p69-70: neurological tests, NCS ----------
+  - id: dm.L06.016
+    kind: enumerate
+    topic: neuro
+    prompt: Neurological tests used to examine the foot in diabetes (this lecture)?
+    points: [10-gram monofilament, Vibration sense with a tuning fork, Vibration perception threshold (VPT)]
+    pass: 3
+    src: { page: 69, quote: "Vibration Perception Threshold (VPT)" }
+    status: unverified
+  - id: dm.L06.017
+    kind: card
+    topic: neuro
+    front: Are nerve conduction studies needed to assess diabetic peripheral neuropathy?
+    back: No; they are not necessary.
+    src: { page: 69, quote: "NOT necessary to assess diabetic peripheral neuropathy." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L06.018
+    kind: card
+    topic: neuro
+    front: When are nerve conduction studies indicated in a diabetic patient?
+    back: Only when you suspect a non-diabetic cause of the neurogenic dysfunction.
+    src: { page: 70, quote: "Only indicated if you are suspecting non-diabetic cause for neurogenic dysfunction!" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L06.019
+    kind: mcq
+    topic: neuro
+    stem: A 50-year-old man with type 2 diabetes has symmetric burning feet. He cannot feel the 10-g monofilament at three sites and has reduced vibration at the big toe. Ankle reflexes are absent. What is the next step to confirm diabetic peripheral neuropathy?
+    options:
+      - No further test is needed; nerve conduction is not necessary
+      - Nerve conduction studies for all patients
+      - Sural nerve biopsy
+      - MRI of the lumbar spine
+      - Electromyography of the thigh muscles
+    answer: 0
+    why:
+      - "Correct: nerve conduction studies are not necessary to assess DPN (p69)."
+      - NCS are only for a suspected non-diabetic cause (p70).
+      - Biopsy is not part of the lecture's assessment.
+      - A symmetric distal picture does not call for spine imaging.
+      - EMG is not needed for typical DPN.
+    src: { page: 69, quote: "NOT necessary to assess diabetic peripheral neuropathy." }
+    status: unverified
+  # ---------- p70: vascular ----------
+  - id: dm.L06.020
+    kind: card
+    topic: vascular
+    front: What do absent foot pulses mean?
+    back: Severe PAD.
+    src: { page: 70, quote: "Absent foot pulses: Severe PAD." }
+    status: unverified
+  - id: dm.L06.021
+    kind: card
+    topic: vascular
+    front: Do palpable foot pulses exclude PAD?
+    back: No; palpable pulses cannot exclude PAD.
+    src: { page: 70, quote: "Palpable foot pulses: Can NOT exclude PAD." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L06.022
+    kind: card
+    topic: vascular
+    front: How do you screen for mild-to-moderate PAD?
+    back: By measuring the ankle brachial index (ABI).
+    src: { page: 70, quote: "Screening for mild-to-moderate PAD: by measuring the ABI." }
+    status: unverified
+  - id: dm.L06.023
+    kind: table
+    topic: vascular
+    title: ABI interpretation (lecture 6)
+    columns: [Interpretation, ABI]
+    rows:
+      - [Normal, "0.9–1.3"]
+      - [Mild PAD, "0.7–0.9"]
+      - [Moderate PAD, "0.4–0.7"]
+      - [Severe PAD, "<0.4"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 70, quote: "Normal 0.9 - 1.3 Mild PAD 0.7- 0.9 Moderate PAD 0.4 - 0.7 Severe PAD <0.4" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L06.024
+    kind: cloze
+    topic: vascular
+    text: "Normal ABI is {{c1::0.9–1.3}}; moderate PAD is {{c2::0.4–0.7}}; severe PAD is below {{c3::0.4}}."
+    src: { page: 70, quote: "Normal 0.9 - 1.3 Mild PAD 0.7- 0.9 Moderate PAD 0.4 - 0.7 Severe PAD <0.4" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L06.025
+    kind: mcq
+    topic: vascular
+    stem: A 61-year-old diabetic woman has palpable but weak foot pulses and calf pain after 300 m. Her ABI is 0.62. How is this classified?
+    options: [Moderate PAD, Mild PAD, Severe PAD, Normal, PAD excluded because pulses are palpable]
+    answer: 0
+    why:
+      - "Correct: 0.4–0.7 is moderate PAD (p70)."
+      - Mild PAD is 0.7–0.9.
+      - Severe PAD is below 0.4.
+      - Normal is 0.9–1.3.
+      - Palpable foot pulses cannot exclude PAD (p70).
+    src: { page: 70, quote: "Palpable foot pulses: Can NOT exclude PAD." }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L06.026
+    kind: mcq
+    topic: vascular
+    stem: A 70-year-old diabetic man has absent dorsalis pedis and posterior tibial pulses, rest pain and an ABI of 0.32. What does this mean?
+    options: [Severe PAD, Moderate PAD, Mild PAD, Normal, Calcified vessels with falsely low ABI]
+    answer: 0
+    why:
+      - "Correct: absent pulses mean severe PAD, and ABI <0.4 is severe (p70)."
+      - Moderate is 0.4–0.7.
+      - Mild is 0.7–0.9.
+      - Normal is 0.9–1.3.
+      - Calcified, incompressible vessels give a falsely high ABI, not low.
+    src: { page: 70, quote: "Absent foot pulses: Severe PAD." }
+    status: unverified
+  # ---------- p71-72: plantar pressure, insoles, footwear ----------
+  - id: dm.L06.027
+    kind: card
+    topic: pressure
+    front: Which assessment of the foot is shown with a pressure plate and pressure maps?
+    back: Assessment of plantar pressure (Lavery et al., Diabetes Care 2003).
+    src: { page: 71, quote: "Predictive value of foot pressure assessment when part of a population based diabetes disease management programme." }
+    status: unverified
+  - id: dm.L06.028
+    kind: card
+    topic: pressure
+    front: What do pressure-relieving insoles do?
+    back: Cushion the plantar surface and redistribute pressure over a wider surface area.
+    src: { page: 72, quote: "Pressure-relieving Insoles: Cushion the plantar surface & redistribute pressure over a wider surface area." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L06.029
+    kind: card
+    topic: pressure
+    front: What do patients with gross foot deformities need, and why?
+    back: Therapeutic footwear, because standard shoes cannot accommodate their feet.
+    src: { page: 72, quote: "Patients with gross foot deformities cannot be accommodated by standard shoes!" }
+    status: unverified
+  - id: dm.L06.030
+    kind: table
+    topic: causal
+    title: Two therapeutic strategies for diabetic neuropathy
+    columns: [Strategy, Aims]
+    rows:
+      - [Causal therapies, "Target the underlying pathogenesis; hold the progress of neuropathy"]
+      - [Symptomatic therapies, "Relieve neuropathic pain; improve the quality of life"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 72, quote: "Target the underlying pathogenesis." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p73: glycemic control, insulin neuritis ----------
+  - id: dm.L06.031
+    kind: card
+    topic: causal
+    front: What did the DCCT show about intensive treatment and diabetic neuropathy?
+    back: Intensive treatment significantly reduced both the incidence and progression of diabetic neuropathy in type 1 diabetes.
+    src: { page: 73, quote: "Intensive treatment significantly reduced both the incidence & progression of DN in patients with T1DM." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L06.032
+    kind: card
+    topic: causal
+    front: In the DCCT figure, which neuropathy measure was most common at 5 years in the conventional arm, and what did intensive therapy do to it?
+    back: Abnormal nerve conduction (about 40% conventional); intensive therapy cut it to under 20%.
+    src: { page: 73, quote: "Abn. Nerve Cond." }
+    status: unverified
+  - id: dm.L06.033
+    kind: card
+    topic: causal
+    front: What is insulin neuritis?
+    back: Treatment-associated neuropathic pain (neuralgia) in poorly controlled patients shortly after starting aggressive insulin therapy.
+    src: { page: 73, quote: "Occur in poorly-controlled patients shortly after starting aggressive insulin therapy." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L06.034
+    kind: card
+    topic: causal
+    front: How do you tell insulin neuritis from DPN?
+    back: Insulin neuritis has no sensory loss and no weakness.
+    src: { page: 73, quote: "DD from DPN: No Sensory loss and No weakness." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L06.035
+    kind: card
+    topic: causal
+    front: Treatment of insulin neuritis?
+    back: Temporarily relaxing glycemic control.
+    src: { page: 73, quote: "Temporarily relaxing glycemic control." }
+    status: unverified
+  - id: dm.L06.036
+    kind: mcq
+    topic: causal
+    stem: A 34-year-old with type 1 diabetes and HbA1c 13% started an intensive basal-bolus regimen 4 weeks ago; HbA1c is falling fast. She now has severe burning pain in both feet. Sensation to monofilament and vibration is normal and there is no weakness. What is the best management?
+    options:
+      - Temporarily relax glycemic control
+      - Intensify insulin further
+      - Nerve conduction studies and sural biopsy
+      - Stop insulin completely
+      - Start high-dose steroids
+    answer: 0
+    why:
+      - "Correct: insulin neuritis (pain soon after aggressive insulin in poor control, no sensory loss, no weakness) is treated by temporarily relaxing glycemic control (p73)."
+      - Faster correction is the trigger, not the cure.
+      - The picture is typical; NCS are only for suspected non-diabetic causes.
+      - A type 1 patient can never stop insulin.
+      - Steroids have no role and worsen glucose.
+    src: { page: 73, quote: "Temporarily relaxing glycemic control." }
+    status: unverified
+  # ---------- p74: drugs ----------
+  - id: dm.L06.037
+    kind: table
+    topic: pain
+    title: Drugs for painful diabetic neuropathy
+    columns: [Drug, Dose, Notes]
+    rows:
+      - [Pregabalin, "150–600 mg/day", "Better GI absorption; twice daily"]
+      - [Gabapentin, "900–3600 mg/day", "Divided three times daily; slow titration"]
+      - [Duloxetine (SNRI), "60 mg, up to 120 mg daily", "Good efficacy; higher dose = more side effects"]
+    blanks: [[0, 1], [1, 1], [1, 2], [2, 1]]
+    src: { page: 74, quote: "Pregabalin is effective in a dose of 150–600 mg/day." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L06.038
+    kind: cloze
+    topic: pain
+    text: "Pregabalin is effective at {{c1::150–600 mg/day}}, given {{c2::twice}} daily, with better GI absorption."
+    src: { page: 74, quote: "Pregabalin is effective in a dose of 150–600 mg/day." }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L06.039
+    kind: cloze
+    topic: pain
+    text: "Gabapentin's effective dose is {{c1::900–3600 mg/day}}, in {{c2::three}} divided doses, with slow titration."
+    src: { page: 74, quote: "Gabapentin effective Dose: 900-3600 mg/day." }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L06.040
+    kind: card
+    topic: pain
+    front: Side effects of pregabalin and gabapentin?
+    back: Dizziness, sedation, ankle edema and weight gain.
+    src: { page: 74, quote: "SEs: Dizziness, sedation, ankle edema & weight gain." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L06.041
+    kind: cloze
+    topic: pain
+    text: "Duloxetine dose: {{c1::60 mg}}, up to {{c2::120 mg}} daily."
+    src: { page: 74, quote: "Dose: 60 mg, up to 120 mg daily." }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L06.042
+    kind: card
+    topic: pain
+    front: Side effects of duloxetine?
+    back: Nausea, constipation, dizziness and sedation (more frequent at higher doses).
+    src: { page: 74, quote: "SEs: Nausea, constipation, dizziness & sedation." }
+    status: unverified
+  - id: dm.L06.043
+    kind: card
+    topic: pain
+    front: To which drug class does duloxetine belong?
+    back: Antidepressants (SNRIs).
+    src: { page: 74, quote: "Anti-depressants: SNRIs" }
+    status: unverified
+  - id: dm.L06.044
+    kind: mcq
+    topic: pain
+    stem: A 64-year-old diabetic woman with painful neuropathy and heart failure (ankle edema) asks for treatment. She also has chronic constipation. Which side-effect profile matters most when choosing between pregabalin and duloxetine?
+    options:
+      - "Pregabalin may worsen ankle edema; duloxetine may worsen constipation"
+      - "Pregabalin causes constipation; duloxetine causes edema"
+      - Both are free of side effects at standard doses
+      - "Duloxetine causes weight gain and edema; pregabalin causes nausea"
+      - Neither drug causes dizziness
+    answer: 0
+    why:
+      - "Correct: pregabalin and gabapentin cause dizziness, sedation, ankle edema and weight gain; duloxetine causes nausea, constipation, dizziness and sedation (p74)."
+      - This swaps the two profiles.
+      - Both have listed side effects.
+      - This swaps the two profiles.
+      - Both list dizziness.
+    src: { page: 74, quote: "SEs: Dizziness, sedation, ankle edema & weight gain." }
+    status: unverified
+  - id: dm.L06.045
+    kind: mcq
+    topic: pain
+    stem: Which drug for diabetic neuropathic pain needs three divided doses a day and slow titration?
+    options: [Gabapentin, Pregabalin, Duloxetine, Amitriptyline, Paracetamol]
+    answer: 0
+    why:
+      - "Correct: gabapentin 900–3600 mg/day, divided tds, slow titration (p74)."
+      - Pregabalin is given twice daily with better absorption.
+      - Duloxetine is once daily, 60 mg up to 120 mg.
+      - Amitriptyline is not in this lecture's list.
+      - Paracetamol is not a neuropathic pain drug here.
+    src: { page: 74, quote: "Divided dosing of tds is necessary." }
+    status: unverified
+  # ---------- p75: selection ----------
+  - id: dm.L06.046
+    kind: cloze
+    topic: pain
+    text: "Complete disappearance of neuropathic pain is {{c1::rarely}} achieved; a pain decrease of more than {{c2::30%}} counts as effective therapy."
+    src: { page: 75, quote: "A decrease in pain > 30%: ―Effective‖ therapy." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L06.047
+    kind: order
+    topic: pain
+    prompt: Steps in choosing a drug for painful diabetic neuropathy?
+    steps:
+      - Set realistic expectations (complete relief is rare)
+      - Start an anticonvulsant or an antidepressant
+      - Increase the dose gradually
+      - "Judge response: more than 30% pain reduction is effective"
+      - "Not effective: stop and switch to another class; effective but pain persists: add another class"
+    src: { page: 75, quote: "Start with Anticonvulsant or Antidepressant." }
+    status: unverified
+  - id: dm.L06.048
+    kind: card
+    topic: pain
+    front: A neuropathic pain drug reduces pain by less than 30%. What do you do?
+    back: Stop it and try another drug from a different class.
+    src: { page: 75, quote: "If a drug is NOT effective (<30% pain reduction): STOP it & Try ―another‖ drug from a different class." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L06.049
+    kind: card
+    topic: pain
+    front: A neuropathic pain drug works but pain remains a problem. What do you do?
+    back: Add another drug from a different class, e.g. antidepressant + anticonvulsant.
+    src: { page: 75, quote: "If a drug is effective, but pain remains to be a problem: ―ADD‖ another drug from a different class." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L06.050
+    kind: mcq
+    topic: pain
+    stem: After 8 weeks of pregabalin titrated to 300 mg/day, a patient's neuropathic pain score falls from 8 to 5 (about 37%), but night pain still disturbs his sleep. What next?
+    options:
+      - Add duloxetine
+      - Stop pregabalin and start gabapentin
+      - Stop all drugs; complete relief is the goal
+      - Switch to duloxetine and stop pregabalin
+      - Nerve conduction studies
+    answer: 0
+    why:
+      - "Correct: >30% is effective; if pain remains a problem, add a drug from a different class (antidepressant + anticonvulsant) (p75)."
+      - Gabapentin is the same class (anticonvulsant), and the current drug is working.
+      - Complete relief is rarely achieved; be realistic.
+      - Switching is for a drug that is not effective (<30%).
+      - NCS are only for suspected non-diabetic causes.
+    src: { page: 75, quote: "If a drug is effective, but pain remains to be a problem: ―ADD‖ another drug from a different class." }
+    status: unverified
+  - id: dm.L06.051
+    kind: mcq
+    topic: pain
+    stem: After 8 weeks of duloxetine 60 mg daily, a diabetic patient's pain score falls from 7 to 6. What is the best next step?
+    options:
+      - Stop duloxetine and try pregabalin
+      - Add a second SNRI
+      - Continue the same dose; this is an effective response
+      - Add pregabalin and keep duloxetine
+      - Accept that pain will never improve
+    answer: 0
+    why:
+      - "Correct: a 14% fall is <30%, so the drug is not effective: stop it and try a drug from a different class (p75)."
+      - Another SNRI is the same class.
+      - Effective means more than 30% reduction.
+      - Adding is for a drug that is effective but not enough.
+      - The plan is to try another class, not give up.
+    src: { page: 75, quote: "If a drug is NOT effective (<30% pain reduction): STOP it & Try ―another‖ drug from a different class." }
+    status: unverified
+    tags: [numbers]
+  # ---------- cases ----------
+  - id: dm.L06.052
+    kind: case
+    topic: vascular
+    stem: A 66-year-old man with type 2 diabetes, hypertension and dyslipidemia smokes 20 cigarettes a day. He has a small ulcer on the tip of the big toe.
+    steps:
+      - reveal: Both foot pulses are palpable but weak.
+        question: Can you exclude PAD?
+        options: ["No: palpable pulses cannot exclude PAD", "Yes: palpable pulses exclude PAD", "Yes: weak pulses are normal in the elderly", "Only angiography can say"]
+        answer: 0
+        why: "Palpable foot pulses cannot exclude PAD; screen for mild-to-moderate PAD with the ABI (p70)."
+      - reveal: His ABI is 0.78.
+        question: Interpretation?
+        options: [Mild PAD, Moderate PAD, Severe PAD, Normal]
+        answer: 0
+        why: "0.7–0.9 is mild PAD in this lecture's table (p70)."
+      - reveal: You draw his risk pathway.
+        question: Which risk factors on the pathway figure drive his PVD?
+        options: ["Smoking, hypertension, dyslipidemia", "Reduced sweating and dry skin", "Intrinsic muscle wasting", "Loss of protective sensation"]
+        answer: 0
+        why: "Smoking, hypertension and dyslipidemia feed the PVD → ischaemia → trauma → ulcer arm (p67). The others are neuropathy arms."
+    src: { page: 70, quote: "Palpable foot pulses: Can NOT exclude PAD." }
+    status: unverified
+  - id: dm.L06.053
+    kind: case
+    topic: pain
+    stem: A 52-year-old woman with type 2 diabetes for 12 years has burning, tingling feet that started in the toes and are spreading up the legs. The pain wakes her at night.
+    steps:
+      - reveal: She asks if the pain will disappear completely.
+        question: What should you tell her?
+        options: ["Complete disappearance is rarely achieved; a fall of more than 30% is a good result", "Yes, within a week", "Nothing helps neuropathic pain", "Only surgery helps"]
+        answer: 0
+        why: "Be realistic: complete relief is rare; more than 30% reduction is effective therapy (p75)."
+      - reveal: She is overweight and worried about gaining more.
+        question: Which first drug avoids weight gain?
+        options: [Duloxetine, Pregabalin, Gabapentin, Insulin dose increase]
+        answer: 0
+        why: "Pregabalin and gabapentin cause weight gain and ankle edema; duloxetine's side effects are nausea, constipation, dizziness and sedation (p74)."
+      - reveal: "Duloxetine 60 mg reduces her pain by 40%, but some pain remains."
+        question: Next step?
+        options: [Add pregabalin or gabapentin, Stop duloxetine, Add a second antidepressant, Stop and wait]
+        answer: 0
+        why: "Effective (>30%) but pain remains: add another drug from a different class, antidepressant + anticonvulsant (p75)."
+    src: { page: 75, quote: "Start with Anticonvulsant or Antidepressant." }
+    status: unverified
+  # ---------- book questions ----------
+  - id: dm.L06.054
+    kind: essay
+    topic: pathway
+    prompt: What are the risk factors for the development of diabetic foot disease?
+    outline:
+      - "Neuropathy": ["Sensory: loss of protective sensation + trauma", "Motor: intrinsic muscle imbalance and wasting → deformities → high pressure points", "Autonomic: reduced sweating → dry skin → cracks and fissures"]
+      - "Peripheral vascular disease": ["Ischaemia + trauma", "Driven by smoking, hypertension and dyslipidemia"]
+      - "High-risk foot": ["Neuropathy, ischemia and/or deformity", "Gross deformities that standard shoes cannot accommodate"]
+    src: { page: 67, quote: "High-risk Foot: Presence of Neuropathy, Ischemia &/or Deformity." }
+    status: unverified
+    tags: [book-question]
+  - id: dm.L06.055
+    kind: essay
+    topic: neuro
+    prompt: How do you diagnose diabetic neuropathy?
+    outline:
+      - "Symptoms": ["Burning, tingling, prickling, dull-aching pain", "Starts in the feet and spreads upward; later loss of sensation"]
+      - "Bedside tests": ["10-g monofilament", "Vibration with a tuning fork", "Vibration perception threshold"]
+      - "Nerve conduction studies": ["Not necessary for DPN", "Only if a non-diabetic cause is suspected"]
+      - "Differential": ["Insulin neuritis: pain soon after aggressive insulin, no sensory loss, no weakness"]
+    src: { page: 69, quote: "NOT necessary to assess diabetic peripheral neuropathy." }
+    status: unverified
+    tags: [book-question]
+  - id: dm.L06.056
+    kind: essay
+    topic: vascular
+    prompt: How do you assess the vascular status of the lower limb in diabetes?
+    outline:
+      - "Foot pulses": ["Dorsalis pedis and posterior tibial", "Absent = severe PAD; palpable cannot exclude PAD"]
+      - "ABI": ["Screens for mild-to-moderate PAD", "Normal 0.9–1.3; mild 0.7–0.9; moderate 0.4–0.7; severe <0.4"]
+    src: { page: 70, quote: "Screening for mild-to-moderate PAD: by measuring the ABI." }
+    status: unverified
+    tags: [book-question]

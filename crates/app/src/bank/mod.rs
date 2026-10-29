@@ -156,14 +156,16 @@ pub fn lookup(id: &str) -> Option<(&'static Lecture, Item)> {
     Some((lecture, item))
 }
 
-/// The MCQs of every written lecture as Mohamed should see them: his ✎
-/// edits applied, his ✗ items left out.
+/// The MCQs of every written lecture of the course in view
+/// (`courses::focus`) as Mohamed should see them: his ✎ edits applied, his
+/// ✗ items left out.
 pub fn study_lectures() -> Vec<Lecture> {
     let store = try_consume_context::<StudyStoreHandle>();
     let store = store.as_ref().map(|s| s.0.borrow());
     Library::get()
         .lectures
         .values()
+        .filter(|l| crate::courses::focus::shows(&l.lecture))
         .map(|l| Lecture {
             items: l
                 .items
@@ -255,12 +257,20 @@ fn merge_papers(mut papers: Vec<Outcome>) -> Vec<Outcome> {
 /// Opens the bank's setup narrowed to a lecture (or one of its topics), ready
 /// to start. A paper in progress stays on screen; the filters wait for the next.
 pub fn practise(mut ui: crate::Ui, lecture: &str, topic: Option<String>) {
+    // Another course's lecture brings its course into view, or its
+    // questions wouldn't be in the pool.
+    crate::courses::focus::follow(lecture);
     setup::focus(lecture, topic);
     if matches!(*PHASE.peek(), Phase::Done { .. }) {
         *PHASE.write() = Phase::Setup;
     }
     ui.screen.set(crate::Screen::Bank);
     to_top();
+}
+
+/// The course in view changed: lecture and topic picks of other courses go.
+pub fn course_changed() {
+    setup::course_changed();
 }
 
 pub fn start(mode: Mode, questions: Vec<Question>) {

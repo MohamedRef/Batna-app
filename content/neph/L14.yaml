@@ -1,0 +1,1986 @@
+schema: batna.content/v1
+lecture: neph.L14
+title: "Kidney in Systemic Diseases"
+author: "Prof. Rasha Gawish"
+book: { chapter: 8, pages: [447, 503] }
+topics:
+  - { id: ln-overview, title: "Lupus nephritis: incidence, risk and monitoring" }
+  - { id: ln-classes, title: "ISN/RPS classes of lupus nephritis" }
+  - { id: ln-general, title: "Screening, biopsy and general measures" }
+  - { id: ln-class12, title: "Class I/II and lupus podocytopathy" }
+  - { id: ln-initial, title: "Initial therapy of class III/IV" }
+  - { id: ln-steroids, title: "Glucocorticoid schemes" }
+  - { id: ln-cyc, title: "Cyclophosphamide regimens and toxicity" }
+  - { id: ln-mpaa-cni, title: "MPAA, CNI, belimumab and other agents" }
+  - { id: ln-maintenance, title: "Maintenance therapy" }
+  - { id: ln-class5, title: "Class V (membranous) lupus nephritis" }
+  - { id: ln-response, title: "Treatment response and unsatisfactory response" }
+  - { id: ln-relapse, title: "Relapse and LN with TMA" }
+  - { id: tma, title: "Thrombotic microangiopathy: definition, causes, workup" }
+  - { id: hus, title: "Typical, atypical and secondary HUS" }
+  - { id: ttp, title: "Thrombotic thrombocytopenic purpura" }
+  - { id: hcv, title: "HCV-associated glomerular disease" }
+  - { id: hbv-hiv, title: "HBV and HIV kidney disease" }
+  - { id: hrs, title: "Hepatorenal syndrome" }
+  - { id: dysprot, title: "Dysproteinemia, MGRS and myeloma kidney" }
+  - { id: sarcoid, title: "Sarcoidosis and the kidney" }
+items:
+  # ---------- p447-449: overview and classes ----------
+  - id: neph.L14.001
+    kind: enumerate
+    topic: ln-overview
+    prompt: The six systemic diseases on the agenda of Lecture 14 (kidney in systemic diseases)?
+    points:
+      - Lupus nephritis
+      - Thrombotic microangiopathy (TMA)
+      - Viral related GN
+      - Hepatorenal syndrome
+      - Dysproteinemia
+      - Sarcoidosis
+    pass: 5
+    src: { page: 447, quote: "Lupus Nephritis. TMA. Viral related GN. Hepatorenal syndrome. Dysproteinemia. Sarcoidosis." }
+    status: unverified
+  - id: neph.L14.002
+    kind: cloze
+    topic: ln-overview
+    text: "The lifetime incidence of lupus nephritis among patients with SLE is {{c1::20%-60%}}."
+    src: { page: 448, quote: "the reported lifetime incidence of lupus nephritis (LN) is 20%–60%." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L14.003
+    kind: card
+    topic: ln-overview
+    front: Which SLE patients have the highest mortality from kidney involvement?
+    back: Those progressing to kidney failure.
+    src: { page: 448, quote: "Kidney involvement in SLE has been associated with higher mortality, especially for patients progressing to kidney failure." }
+    status: unverified
+  - id: neph.L14.004
+    kind: card
+    topic: ln-overview
+    front: What is the ultimate goal of treating lupus nephritis?
+    back: Preserve kidney function and reduce CKD and kidney-failure morbidity and mortality, while minimizing medication toxicity.
+    src: { page: 448, quote: "The ultimate goal of treating LN is to preserve kidney function and reduce the morbidity and mortality associated with chronic kidney disease" }
+    status: unverified
+  - id: neph.L14.005
+    kind: card
+    topic: ln-overview
+    front: Why must SLE patients be monitored actively and regularly for nephritis?
+    back: Kidney involvement can stay silent or asymptomatic for a long time.
+    src: { page: 448, quote: "the clinical presentation of kidney involvement can remain silent or asymptomatic for a significant period of time." }
+    status: unverified
+  - id: neph.L14.006
+    kind: enumerate
+    topic: ln-overview
+    prompt: In which ethnic groups should a high index of suspicion for lupus nephritis be kept?
+    points:
+      - Asian
+      - African/Caribbean
+      - Hispanic
+    pass: 3
+    src: { page: 448, quote: "A high index of suspicion should be maintained for patients of Asian, African/Caribbean, and Hispanic descent." }
+    status: unverified
+  - id: neph.L14.007
+    kind: card
+    topic: ln-overview
+    front: How does childhood-onset SLE differ from adult-onset SLE in the kidney?
+    back: Higher incidence of lupus nephritis and more severe disease.
+    src: { page: 448, quote: "Childhood-onset SLE is associated with a higher incidence of LN and more severe disease than adult-onset SLE." }
+    status: unverified
+  - id: neph.L14.008
+    kind: card
+    topic: ln-overview
+    front: What should inform clinical decisions in lupus nephritis, rather than a single test?
+    back: A holistic assessment of clinical, urinary and laboratory parameters, repeated over time to follow the trend.
+    src: { page: 449, quote: "A holistic assessment including clinical, urinary, and laboratory parameters, and repeated investigations to note the progression of abnormal findings over time" }
+    status: unverified
+  - id: neph.L14.009
+    kind: table
+    topic: ln-classes
+    title: ISN/RPS classes of lupus nephritis (Figure 3, p449)
+    columns: [Class, Name, Key finding]
+    rows:
+      - [I, Minimal mesangial, "Normal glomeruli on light microscopy; mesangial immune deposits on IF"]
+      - [II, Mesangial proliferative, "Mesangial hypercellularity or matrix expansion with mesangial deposits"]
+      - [III, Focal, "Endo/extracapillary GN in <50% of glomeruli; A, C or A/C lesions"]
+      - [IV, Diffuse, "≥50% of glomeruli, subendothelial deposits; IV-S or IV-G"]
+      - [V, Membranous, "Subepithelial deposits; may combine with class III or IV"]
+      - [VI, Advanced sclerosing, "≥90% of glomeruli globally sclerosed"]
+    blanks: [[0, 1], [2, 2], [3, 2], [4, 2], [5, 2]]
+    src: { page: 449, quote: "Histopathology classification of lupus nephritis according to the criteria established by the international Society of Nephrology and the Renal Pathology Society" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L14.010
+    kind: cloze
+    topic: ln-classes
+    text: "The ISN/RPS lupus nephritis classification dates from {{c1::2003}} and was revised in {{c2::2018}}."
+    src: { page: 449, quote: "Renal Pathology Society (ISN/RPS) in 2003 revised in 2018" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L14.011
+    kind: cloze
+    topic: ln-classes
+    text: "Class III lupus nephritis involves {{c1::<50%}} of glomeruli; class IV involves {{c2::≥50%}}."
+    src: { page: 449, quote: "Active or inactive focal, segmental or global endo/extracapillary glomerulonephritis involving <50% of all glomeruli" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L14.012
+    kind: card
+    topic: ln-classes
+    front: How is class IV lupus nephritis split into IV-S and IV-G?
+    back: "IV-S (diffuse segmental): ≥50% of involved glomeruli have segmental lesions. IV-G (diffuse global): ≥50% have global lesions."
+    src: { page: 449, quote: "diffuse segmental (IV-S), when ≥50% of the involved glomeruli have segmental lesions, and diffuse global (IV-G)" }
+    status: unverified
+  - id: neph.L14.013
+    kind: card
+    topic: ln-classes
+    front: "In class III/IV lupus nephritis, what do A, C and A/C mean?"
+    back: "Active lesions (A), chronic inactive lesions (C), or both active and chronic lesions (A/C)."
+    src: { page: 449, quote: "Manifestations include active lesions (A), inactive lesions (C) or active and chronic lesions (A/C)" }
+    status: unverified
+  - id: neph.L14.014
+    kind: card
+    topic: ln-classes
+    front: Which lupus nephritis class can occur together with class III or IV?
+    back: Class V (membranous lupus nephritis).
+    src: { page: 449, quote: "It can occur in combination with class III or IV" }
+    status: unverified
+  - id: neph.L14.015
+    kind: cloze
+    topic: ln-classes
+    text: "Class VI (advanced sclerosing) lupus nephritis means {{c1::≥90%}} of glomeruli are globally sclerosed, with a {{c2::terminal}} prognosis."
+    src: { page: 449, quote: "Lupus Nephritis with terminal prognosis ≥90% of the glomeruli in global sclerosis" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L14.016
+    kind: mcq
+    topic: ln-classes
+    stem: "A lupus biopsy shows endocapillary proliferation with subendothelial deposits in 60% of glomeruli; most involved glomeruli show segmental lesions. Which class?"
+    options:
+      - Class IV-S
+      - Class IV-G
+      - Class III
+      - Class V
+      - Class II
+    answer: 0
+    why:
+      - "Correct: ≥50% of glomeruli = class IV; ≥50% of involved glomeruli segmental = IV-S (p449)."
+      - IV-G needs ≥50% of involved glomeruli with global lesions.
+      - Class III is <50% of glomeruli.
+      - Class V is subepithelial (membranous) deposits.
+      - Class II is mesangial only.
+    src: { page: 449, quote: "This class is also divided in diffuse segmental (IV-S)" }
+    status: unverified
+  # ---------- p450: general measures ----------
+  - id: neph.L14.017
+    kind: enumerate
+    topic: ln-general
+    prompt: Urinary findings that count as abnormal when screening SLE patients for kidney involvement (Figure, p450)?
+    points:
+      - Dipstick protein ≥2+ (or 1+ at low specific gravity)
+      - Spot PCR >500 mg/g (50 mg/mmol)
+      - Glomerular hematuria with ≥5% acanthocytes
+      - Red or white cell casts
+    pass: 3
+    src: { page: 450, quote: "Abnormal proteinuria assessed by dipstick protein ≥2+" }
+    status: unverified
+  - id: neph.L14.018
+    kind: enumerate
+    topic: ln-general
+    prompt: Kidney-protective general measures in lupus nephritis (Figure, p450)?
+    points:
+      - Avoid a high-sodium diet
+      - Optimize blood pressure
+      - RAAS blockade and SGLT2 inhibitor in stable patients without AKI
+      - Avoid nephrotoxic insults and prevent AKI
+    pass: 3
+    src: { page: 450, quote: "Renoprotective medications, such as RAAS blockade, SGLT2 inhibitor, etc, in stable patients without AKI" }
+    status: unverified
+  - id: neph.L14.019
+    kind: enumerate
+    topic: ln-general
+    prompt: Infection-related measures before immunosuppression in lupus nephritis (Figure, p450)?
+    points:
+      - Ask about prior herpes zoster and tuberculosis
+      - Screen for HBV, HCV and HIV, and vaccinate against HBV
+      - Pneumocystis jirovecii prophylaxis
+      - Influenza and pneumococcal vaccination
+      - Consider recombinant zoster vaccine
+    pass: 4
+    src: { page: 450, quote: "Assess medical history of herpes zoster and tuberculosis" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L14.020
+    kind: enumerate
+    topic: ln-general
+    prompt: Bone protection measures in lupus nephritis (Figure, p450)?
+    points:
+      - Bone mineral density and fracture risk assessment
+      - Calcium and vitamin D supplementation
+      - Bisphosphonates when appropriate
+    pass: 3
+    src: { page: 450, quote: "Bone mineral density and fracture risk assessment" }
+    status: unverified
+  - id: neph.L14.021
+    kind: card
+    topic: ln-general
+    front: Which cardiovascular and pregnancy measures does the general-care figure list for lupus nephritis?
+    back: Dyslipidemia management, blood pressure control, and low-dose aspirin during pregnancy.
+    src: { page: 450, quote: "Low-dose aspirin during pregnancy" }
+    status: unverified
+  - id: neph.L14.022
+    kind: card
+    topic: ln-general
+    front: What skin measures are part of general care in lupus nephritis?
+    back: Broad-spectrum sunscreen and limiting ultraviolet light exposure.
+    src: { page: 450, quote: "Broad-spectrum sunscreen" }
+    status: unverified
+  - id: neph.L14.023
+    kind: card
+    topic: ln-general
+    front: How is ovarian function protected during cyclophosphamide for lupus nephritis (Figure, p450)?
+    back: With a GnRH agonist such as leuprolide.
+    src: { page: 450, quote: "Gonadotropin-releasing hormone agonists (i.e. leuprolide)" }
+    status: unverified
+  - id: neph.L14.024
+    kind: enumerate
+    topic: ln-general
+    prompt: When should an SLE patient have a kidney biopsy (Figure, p451)?
+    points:
+      - Proteinuria >0.5 g/24 h
+      - Urinary sediment abnormalities (dysmorphic RBCs, RBC or leukocyte casts) with proteinuria
+      - Impaired kidney function secondary to SLE
+    pass: 2
+    src: { page: 451, quote: "Proteinuria > 0.5 g/24-hours" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L14.025
+    kind: card
+    topic: ln-general
+    front: What must every lupus nephritis biopsy report include?
+    back: The NIH activity and chronicity index, tubulo-interstitial and vascular involvement, and the types of deposits on IF.
+    src: { page: 451, quote: "Activity and Chronicity Index (NIH)" }
+    status: unverified
+  # ---------- p451-452: class I/II and podocytopathy ----------
+  - id: neph.L14.026
+    kind: card
+    topic: ln-class12
+    front: How are class I or II lupus nephritis with low-grade proteinuria treated?
+    back: No specific immunosuppression beyond what the nonrenal (extrarenal) lupus needs.
+    src: { page: 451, quote: "no specific immunosuppressive therapy beyond what is being given for nonrenal lupus is needed." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L14.027
+    kind: card
+    topic: ln-class12
+    front: What is the usual clinical picture of class I or II lupus nephritis?
+    back: Normal kidney function, or at most low-grade sub-nephrotic proteinuria, sometimes with microscopic hematuria.
+    src: { page: 451, quote: "low- grade proteinuria that is well below the nephrotic-range, and sometimes microscopic hematuria." }
+    status: unverified
+  - id: neph.L14.028
+    kind: card
+    topic: ln-class12
+    front: What is lupus podocytopathy?
+    back: Class I or II histology with nephrotic-range proteinuria or nephrotic syndrome; diffuse podocyte effacement on EM.
+    src: { page: 452, quote: "Patients with Class I or II histology but with nephrotic-range proteinuria or NS are considered to have lupus podocytopathy." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L14.029
+    kind: card
+    topic: ln-class12
+    front: Which primary glomerular diseases does lupus podocytopathy resemble?
+    back: Minimal change disease (MCD) or FSGS, clinically and histologically.
+    src: { page: 452, quote: "these patients are similar to those MCD or FSGS , often showing a good response to glucocorticoid treatment." }
+    status: unverified
+  - id: neph.L14.030
+    kind: cloze
+    topic: ln-class12
+    text: "In lupus podocytopathy, over {{c1::90%}} of patients remit on glucocorticoid monotherapy, within a median of {{c2::4 weeks}}."
+    src: { page: 452, quote: "over 90% of patients given glucocorticoid monotherapy achieved remission within a median time of 4 weeks." }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L14.031
+    kind: card
+    topic: ln-class12
+    front: What maintenance is suggested for lupus podocytopathy, especially after relapses?
+    back: Low-dose glucocorticoid plus another agent such as an MPAA, azathioprine or a CNI.
+    src: { page: 452, quote: "maintenance with low-dose glucocorticoid plus an additional agent such as mycophenolic acid analogues (MPAA), azathioprine, or a CNI is suggested" }
+    status: unverified
+  # ---------- p452-454: initial therapy of class III/IV ----------
+  - id: neph.L14.032
+    kind: enumerate
+    topic: ln-initial
+    prompt: "Recommendation 10.2.3.1.1: glucocorticoids plus any one of which four options for active class III or IV lupus nephritis?"
+    points:
+      - Mycophenolic acid analogs (MPAA)
+      - Low-dose intravenous cyclophosphamide
+      - Belimumab with either MPAA or low-dose IV cyclophosphamide
+      - MPAA plus a calcineurin inhibitor, if eGFR is not severely impaired
+    pass: 4
+    src: { page: 452, quote: "be treated initially with glucocorticoids plus any one of the following" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L14.033
+    kind: card
+    topic: ln-initial
+    front: What eGFR limit applies to adding a CNI to MPAA for initial class III/IV therapy?
+    back: Kidney function must not be severely impaired (the book quotes eGFR <45 as severe impairment).
+    src: { page: 452, quote: "MPAA and a calcineurin inhibitor (CNI) when kidney function is not severely impaired" }
+    status: unverified
+  - id: neph.L14.034
+    kind: card
+    topic: ln-initial
+    front: What is the starting dose of hydroxychloroquine in lupus nephritis?
+    back: 4-5 mg/kg/day, maximum 400 mg daily; no more than 200 mg daily if eGFR <30.
+    src: { page: 453, quote: "HCQ: initial dose 4-5 mg/kg/day (maximum 400 mg daily)." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L14.035
+    kind: card
+    topic: ln-initial
+    front: Which cyclophosphamide regimen is preferred in the initial-therapy figure for class III/IV?
+    back: Euro-Lupus, six biweekly IV pulses of 500 mg (cumulative 3 g).
+    src: { page: 453, quote: "Cyclophosphamide: Eurolupus regimen preferred (6 biweekly i.v. pulses of 500 mg each, cumulative dose 3 g)." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L14.036
+    kind: table
+    topic: ln-initial
+    title: Drug doses in initial lupus nephritis therapy (Figure 4, p453)
+    columns: [Drug, Dose, Target level]
+    rows:
+      - [Hydroxychloroquine, "4-5 mg/kg/day, max 400 mg (200 mg if eGFR <30)", "—"]
+      - [MPAA, "Equivalent to MMF 2 g/day", "—"]
+      - [Cyclosporine, "100-200 mg/day", "60-100 ng/mL"]
+      - [Tacrolimus, "0.05-0.07 mg/kg/day", "4-7 ng/mL"]
+      - [Voclosporin, "23.7 mg twice daily for 1-2 years", "Not required"]
+      - [Belimumab, "10 mg/kg IV on days 1, 15, 29, then every 28 days", "—"]
+    blanks: [[2, 2], [3, 1], [3, 2], [4, 1], [5, 1]]
+    src: { page: 453, quote: "tacrolimus (initial dose 0.05-0.07 mg/kg/day, blood target level 4-7 ng/ml)" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L14.037
+    kind: card
+    topic: ln-initial
+    front: What do you add if proteinuria has not fallen by ≥25% after 2-3 months of initial class III/IV therapy (Figure 4, p453)?
+    back: Add belimumab or a CNI.
+    src: { page: 453, quote: "If no reduction in proteinuria ≥25% after 2-3 months add" }
+    status: unverified
+  - id: neph.L14.038
+    kind: card
+    topic: ln-initial
+    front: How long are MPAA and CNI continued in lupus nephritis (Figure 4, p453)?
+    back: "MPAA: maintenance for 3-5 years. CNI: 12-18 months, then 6-12 months of gradual tapering."
+    src: { page: 453, quote: "MPAA: maintenance treatment for 3-5 years." }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L14.039
+    kind: card
+    topic: ln-initial
+    front: When is IV cyclophosphamide the initial choice for active class III/IV lupus nephritis?
+    back: When the patient may have difficulty adhering to an oral regimen.
+    src: { page: 455, quote: "Intravenous cyclophosphamide should be used as the initial therapy for active Class III and Class IV LN in patients who may have difficulty adhering" }
+    status: unverified
+  - id: neph.L14.040
+    kind: card
+    topic: ln-initial
+    front: When is an MPAA-based regimen the preferred initial therapy for proliferative lupus nephritis?
+    back: In patients at high risk of infertility, such as those with moderate-to-high prior cyclophosphamide exposure.
+    src: { page: 457, quote: "An MPAA-based regimen is the preferred initial therapy" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L14.041
+    kind: enumerate
+    topic: ln-initial
+    prompt: When may a CNI-containing initial regimen (voclosporin, tacrolimus or cyclosporine) be preferred?
+    points:
+      - Relatively preserved kidney function
+      - Nephrotic-range proteinuria from extensive podocyte injury
+      - Cannot tolerate standard-dose MPAA
+      - Unfit for or unwilling to use cyclophosphamide
+    pass: 3
+    src: { page: 457, quote: "may be preferred in patients with relatively ved kidney function and nephrotic-range proteinuria" }
+    status: unverified
+  - id: neph.L14.042
+    kind: card
+    topic: ln-mpaa-cni
+    front: Why do CNIs reduce proteinuria quickly in lupus nephritis?
+    back: Besides blocking T-cell activation and IL-2 release, they stabilize the podocyte cytoskeleton.
+    src: { page: 458, quote: "They also modulate the podocyte cytoskeleton" }
+    status: unverified
+  - id: neph.L14.043
+    kind: card
+    topic: ln-mpaa-cni
+    front: When is triple therapy with belimumab, glucocorticoids and MPAA or reduced-dose cyclophosphamide considered?
+    back: In repeated renal flares or high risk of progression to kidney failure.
+    src: { page: 458, quote: "may be considered in patients with repeated renal flares or at high-risk for progression to kidney failure." }
+    status: unverified
+  - id: neph.L14.044
+    kind: card
+    topic: ln-mpaa-cni
+    front: When may azathioprine or leflunomide with glucocorticoids replace the standard initial drugs, and at what cost?
+    back: With intolerance, lack of availability or excessive cost of standard drugs; they may be less effective with more flares or toxicity.
+    src: { page: 458, quote: "such as azathioprine or leflunomide combined with glucocorticoids, may be considered in lieu of the recommended initial drugs" }
+    status: unverified
+  - id: neph.L14.045
+    kind: card
+    topic: ln-mpaa-cni
+    front: When may rituximab be considered in lupus nephritis?
+    back: Persistent disease activity or inadequate response to initial standard-of-care therapy.
+    src: { page: 458, quote: "Rituximab may be considered for patients with persistent disease activity or inadequate response to initial standard-of-care therapy." }
+    status: unverified
+  - id: neph.L14.046
+    kind: cloze
+    topic: ln-mpaa-cni
+    text: "MMF for initial treatment of proliferative lupus nephritis targets {{c1::2-3 g/day}}."
+    src: { page: 457, quote: "MMF for initial treatment of proliferative LN have targeted dosing of 2-3 g/d." }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L14.047
+    kind: card
+    topic: ln-mpaa-cni
+    front: What do you try if MMF causes gastrointestinal intolerance?
+    back: Enteric-coated mycophenolic acid (MPA), which is better tolerated by the gut.
+    src: { page: 457, quote: "a trial of enteric-coated mycophenolic acid (MPA)" }
+    status: unverified
+  - id: neph.L14.048
+    kind: card
+    topic: ln-mpaa-cni
+    front: How does MMF compare with cyclophosphamide for induction in proliferative lupus nephritis?
+    back: Comparable short-term efficacy (complete and partial renal responses) to oral or IV cyclophosphamide.
+    src: { page: 457, quote: "MMF has comparable short-term efficacy to oral or i.v. cyclophosphat complete and partial renal responses" }
+    status: unverified
+  # ---------- p455: steroids ----------
+  - id: neph.L14.049
+    kind: table
+    topic: ln-steroids
+    title: Glucocorticoid schemes for lupus nephritis (Figure 7, p455)
+    columns: [Scheme, IV methylprednisolone, "Oral prednisone weeks 0-2", "After week 25"]
+    rows:
+      - [High-dose, "Nil or 0.25-0.5 g/day up to 3 days", "0.8-1.0 mg/kg (max 80 mg)", "<5 mg"]
+      - [Moderate-dose, "0.25-0.5 g/day up to 3 days, often", "0.6-0.7 mg/kg (max 50 mg)", "<5 mg"]
+      - [Reduced-dose, "0.25-0.5 g/day up to 3 days, usually", "0.5-0.6 mg/kg (max 40 mg)", "<2.5 mg"]
+    blanks: [[0, 2], [1, 2], [2, 2], [2, 3]]
+    src: { page: 455, quote: "Examples of glucocorticoid regimens for lupus nephritis." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L14.050
+    kind: card
+    topic: ln-steroids
+    front: When may the reduced-dose glucocorticoid scheme be used in active lupus nephritis?
+    back: After a short course of methylprednisolone pulses, when both kidney and extrarenal manifestations improve satisfactorily.
+    src: { page: 455, quote: "A regimen of reduced-dose glucocorticoids following a short course of methylprednisolone pulses may be considered" }
+    status: unverified
+  - id: neph.L14.051
+    kind: cloze
+    topic: ln-steroids
+    text: "In the reduced-dose scheme, prednisone reaches {{c1::5 mg}} by weeks 11-12 and {{c2::2.5 mg}} by weeks 13-14."
+    src: { page: 455, quote: "Week 11-12" }
+    status: unverified
+    tags: [numbers]
+  # ---------- p455-457: cyclophosphamide ----------
+  - id: neph.L14.052
+    kind: table
+    topic: ln-cyc
+    title: Cyclophosphamide regimens for class III/IV lupus nephritis (Figure 7, p456)
+    columns: [Regimen, Dose, Duration]
+    rows:
+      - ["Standard-dose IV (modified NIH)", "0.5-1 g/m² monthly", "6 months"]
+      - ["Low-dose IV (Euro-Lupus)", "500 mg every 2 weeks", "3 months"]
+      - ["Oral", "1.0-1.5 mg/kg/day (max 150 mg/day)", "2-6 months"]
+    blanks: [[0, 1], [1, 1], [1, 2], [2, 1]]
+    src: { page: 456, quote: "Cyclophosphamide dosing regimens, combined with glucocorticoids, in initial treatment for active Class III/IV lupus nephritis." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L14.053
+    kind: card
+    topic: ln-cyc
+    front: What are the other names of standard-dose and low-dose cyclophosphamide in lupus nephritis?
+    back: "Standard-dose = modified NIH (high-dose) regimen; low-dose = Euro-Lupus regimen."
+    src: { page: 455, quote: "standard-dose (also known as the modified National Institutes of Health (NIH) regimen or high-dose regimen) or low-dose (also known as the Euro-Lupus" }
+    status: unverified
+  - id: neph.L14.054
+    kind: enumerate
+    topic: ln-cyc
+    prompt: Four factors in choosing a cyclophosphamide regimen (p456)?
+    points:
+      - Efficacy
+      - Cost
+      - Convenience
+      - Toxicity
+    pass: 4
+    src: { page: 456, quote: "The choice of which regimen to use depends on several factors and can be individualized" }
+    status: unverified
+  - id: neph.L14.055
+    kind: card
+    topic: ln-cyc
+    front: What limits the evidence for Euro-Lupus low-dose cyclophosphamide?
+    back: It matched standard-dose efficacy but was tested mainly in White patients; data in Asian, Hispanic and Black patients lack direct comparison.
+    src: { page: 456, quote: "Reduced-dose cyclophosphamide (Euro- Lupus regimen) shows equivalent efficacy to standard-dose cyclophosphamide but was tested mainly in White patients." }
+    status: unverified
+  - id: neph.L14.056
+    kind: card
+    topic: ln-cyc
+    front: Compare oral and IV cyclophosphamide on cost and convenience.
+    back: IV costs more and needs an infusion suite and staff; oral lets patients keep working and family activities.
+    src: { page: 456, quote: "Intravenous cyclophosphamide is more expensive than oral and requires the availability of an infusion suite and experienced staff." }
+    status: unverified
+  - id: neph.L14.057
+    kind: card
+    topic: ln-cyc
+    front: Give immediate and delayed toxicities of cyclophosphamide.
+    back: "Immediate: gastrointestinal upset, infection. Delayed: loss of fertility, future malignancy."
+    src: { page: 456, quote: "The toxicities of cyclophosphamide may be considered immediate (e.g., gastrointestinal, susceptibility to infection) or delayed" }
+    status: unverified
+  - id: neph.L14.058
+    kind: card
+    topic: ln-cyc
+    front: Which cyclophosphamide regimen has the most favorable immediate toxicity profile?
+    back: Reduced-dose IV (Euro-Lupus). IV also has less bladder toxicity than oral.
+    src: { page: 457, quote: "Reduced-dose i.v. cyclophosphamide has the most favorable immediate toxicity profile among the 3 cyclophosphamide regimens." }
+    status: unverified
+  - id: neph.L14.059
+    kind: cloze
+    topic: ln-cyc
+    text: "Cyclophosphamide raises the risk of hematologic malignancy above a lifetime dose of {{c1::36 g}} and of myelofibrosis above {{c2::80 g}}."
+    src: { page: 457, quote: "The risk of future hematologic malignancy is related to total lifetime exposure (>36 g), as is myelofibrosis (>80 g)." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L14.060
+    kind: cloze
+    topic: ln-cyc
+    text: "Premature ovarian failure risk rises with cumulative cyclophosphamide above {{c1::300 mg/kg}} in adults (7.5-15 g/m² in children)."
+    src: { page: 457, quote: "300 mg/kg for adults" }
+    status: unverified
+    tags: [numbers]
+  # ---------- p459-460, 463: maintenance ----------
+  - id: neph.L14.061
+    kind: table
+    topic: ln-maintenance
+    title: Maintenance for class III/IV lupus nephritis (Figure 8, p459)
+    columns: [Choice, Drug and dose]
+    rows:
+      - [First choice, "MMF 1-2 g/day or mycophenolic acid 720-1440 mg/day"]
+      - [Individual cases or no access to MPAA, "Azathioprine 1.5-2.0 mg/kg/day"]
+      - [MPAA or azathioprine not tolerated or unavailable, "CNI, or mizoribine 3-5 mg/kg/day, or leflunomide 10-20 mg/day"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 459, quote: "Maintenance therapy for Class III and Class IV lupus nephritis" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L14.062
+    kind: cloze
+    topic: ln-maintenance
+    text: "During maintenance of class III/IV lupus nephritis, prednisone is reduced to {{c1::<5 mg/day}}."
+    src: { page: 459, quote: "Reduce prednisone to <5 mg/d" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L14.063
+    kind: enumerate
+    topic: ln-maintenance
+    prompt: When is azathioprine used instead of MPAA after initial lupus nephritis therapy?
+    points:
+      - Intolerance of MPAA
+      - No access to MPAA
+      - Considering pregnancy
+    pass: 3
+    src: { page: 459, quote: "Azathioprine is an alternative to MPAA after completion of initial therapy in patients who do not tolerate MPAA" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L14.064
+    kind: card
+    topic: ln-maintenance
+    front: When can glucocorticoids be stopped in lupus nephritis maintenance?
+    back: After a complete clinical renal response maintained for ≥12 months, unless extrarenal lupus needs them.
+    src: { page: 460, quote: "discontinuation of glucocorticoids can be considered after patients have maintained a complete clinical renal response for ≥12 months." }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L14.065
+    kind: cloze
+    topic: ln-maintenance
+    text: "Early maintenance dose: MMF about {{c1::750-1000 mg}} twice daily, or MPA about {{c2::540-720 mg}} twice daily."
+    src: { page: 460, quote: "approximately 750-1000 mg twice daily, and for mycophelolic acid (MPA), approximately 540-720 mg twice daily." }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L14.066
+    kind: cloze
+    topic: ln-maintenance
+    text: "Total initial plus maintenance immunosuppression for proliferative lupus nephritis should be {{c1::≥36 months}}."
+    src: { page: 460, quote: "plus combination maintenance immunosuppression for proliferative LN should be ≥36 months." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L14.067
+    kind: card
+    topic: ln-maintenance
+    front: Can patients induced with belimumab or a CNI triple regimen stay on triple therapy?
+    back: Yes, they can continue the triple regimen as maintenance.
+    src: { page: 463, quote: "can continue with a triple immunosuppressive regimen as maintenance therapy." }
+    status: unverified
+  - id: neph.L14.068
+    kind: table
+    topic: ln-maintenance
+    title: Maintenance details for classes III/IV ± V and V (Figure 6, p459)
+    columns: [Drug, Maintenance rule]
+    rows:
+      - [Hydroxychloroquine, "Lifelong unless contraindicated or not tolerated"]
+      - [RAS blockade, "Dose to BP targets; proteinuria ≤0.5-0.7 g/24 h"]
+      - [Corticosteroids, "Prednisone 2.5-5 mg/day; consider stopping after ≥18-24 months of remission"]
+      - [MPAA, "Taper after 18-24 months of remission; stop after at least 3-5 years"]
+      - [CNI, "Taper after 9-18 months, over 6-12 months (CR) or 12-24 months (PR)"]
+    blanks: [[0, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 459, quote: "Maintenance treatment for classes III/IVV and V." }
+    status: unverified
+  - id: neph.L14.069
+    kind: enumerate
+    topic: ln-maintenance
+    prompt: When is belimumab added during lupus nephritis maintenance (Figure 6, p459)?
+    points:
+      - Intolerance or contraindication to HCQ and/or corticosteroids
+      - Relapsing patients
+      - Persistent extrarenal manifestations
+      - Persistent intense serological activity
+    pass: 3
+    src: { page: 459, quote: "Relapsing patients" }
+    status: unverified
+  - id: neph.L14.070
+    kind: card
+    topic: ln-maintenance
+    front: Which maintenance option is preferred, and why over azathioprine (Figure 9, p463)?
+    back: MPAA, based on high-certainty evidence, with fewer flares than azathioprine. Azathioprine is cheap and safe in pregnancy.
+    src: { page: 463, quote: "Preferred treatment based on high-certainty evidence; lower flare rate than azathioprine maintenance" }
+    status: unverified
+  - id: neph.L14.071
+    kind: card
+    topic: ln-maintenance
+    front: Which trials support belimumab and voclosporin in lupus nephritis?
+    back: "Belimumab: BLISS-LN. Voclosporin: AURORA 1 and AURORA 2."
+    src: { page: 463, quote: "BLISS-LN, Efficacy and Safety of Belimumab in Patients with Active Lupus Nephritis" }
+    status: unverified
+  - id: neph.L14.072
+    kind: card
+    topic: ln-maintenance
+    front: Which CNIs are safe in pregnancy?
+    back: Tacrolimus and cyclosporine; pregnancy data on voclosporin are insufficient.
+    src: { page: 463, quote: "Tacrolimus and cyclosporine safe in pregnancy; insufficient pregnancy data on voclosporin" }
+    status: unverified
+  # ---------- p460-461: class V ----------
+  - id: neph.L14.073
+    kind: table
+    topic: ln-class5
+    title: Initial treatment of class V lupus nephritis by proteinuria (Figure 5, p461)
+    columns: [Proteinuria, Treatment]
+    rows:
+      - ["<1 g/24 h", "General treatment: HCQ, RAS blockade and CV protection, treat extrarenal SLE"]
+      - ["1-3.5 g/24 h", "HCQ + corticosteroids + CNI"]
+      - [">3.5 g/24 h or nephrotic", "Triple therapy: corticosteroids + MPAA + CNI"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 461, quote: "Initial treatment for class V (membranous)." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L14.074
+    kind: card
+    topic: ln-class5
+    front: In class V lupus nephritis with proteinuria 1-3.5 g/24 h, what if proteinuria has not fallen ≥25% after 2-3 months?
+    back: Add MPAA.
+    src: { page: 461, quote: "If no reduction in proteinuria ≥ 25% after 2-3 months add MPAA" }
+    status: unverified
+  - id: neph.L14.075
+    kind: card
+    topic: ln-class5
+    front: What is the voclosporin dose in lupus nephritis, and does it need levels?
+    back: 23.7 mg twice daily for 1-2 years; no blood target level is needed.
+    src: { page: 461, quote: "voclosporine (23.7 mg twice daily for 1-2 years, no blood target level required)." }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L14.076
+    kind: card
+    topic: ln-class5
+    front: What is the core management of pure class V lupus nephritis (Figure 10, p460)?
+    back: Antiproteinuric/RAS blockade and hydroxychloroquine for all; add glucocorticoids plus an immunosuppressant when proteinuria is nephrotic.
+    src: { page: 460, quote: "Management of patients with pure Class V lupus nephritis." }
+    status: unverified
+  # ---------- p461-465: response, unsatisfactory response ----------
+  - id: neph.L14.077
+    kind: table
+    topic: ln-response
+    title: Response definitions in lupus nephritis trials (Figure 11, p464)
+    columns: [Criteria, Proteinuria, Kidney function, Timing]
+    rows:
+      - [Complete response, "PCR <0.5 g/g (50 mg/mmol)", "Stable or improved (±10-15%)", "6-12 months, could take >12"]
+      - [Primary efficacy renal response, "PCR ≤0.7 g/g (70 mg/mmol)", "eGFR ≤20% below pre-flare or ≥60, no rescue therapy", "—"]
+      - [Partial response, "≥50% reduction and to <3 g/g", "Stable or improved (±10-15%)", "6-12 months"]
+      - [No kidney response, "Neither partial nor complete", "—", "Within 6-12 months"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 464, quote: "Definitions of response commonly used in clinical trials of lupus nephritis." }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: neph.L14.078
+    kind: card
+    topic: ln-response
+    front: How is complete response defined in children with lupus nephritis?
+    back: Proteinuria <0.5 g/1.73 m² per day or <300 mg/m² per day on a 24-hour urine.
+    src: { page: 464, quote: "For children <18 years old, complete response is defined as proteinuria <0.5 g/1.73 m² per day or <300 mg/m² per day" }
+    status: unverified
+  - id: neph.L14.079
+    kind: cloze
+    topic: ln-response
+    text: "If a lupus nephritis patient keeps improving, allowing {{c1::18-24 months}} to reach complete response is reasonable."
+    src: { page: 464, quote: "Allowing 18-24 months to achieve a complete response is reasonable in patients who show continuous improvement." }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L14.080
+    kind: card
+    topic: ln-response
+    front: Which early markers predicted favorable kidney outcomes in the ALMS post hoc analysis?
+    back: Normalization of complement levels and a 25% reduction of proteinuria after the first weeks of treatment.
+    src: { page: 464, quote: "favorable kidney outcomes are predicted by normalization of complement levels and 25 reduction of proteinuria" }
+    status: unverified
+  - id: neph.L14.081
+    kind: order
+    topic: ln-response
+    prompt: Put the steps for an unsatisfactory response to lupus nephritis therapy in order (Figure 12).
+    steps:
+      - Verify adherence to treatment
+      - Ensure adequate dosing (drug levels, MPA level, infusion records)
+      - Repeat biopsy if chronicity or another diagnosis (such as TMA) is suspected
+      - Switch to an alternative first-line regimen if disease stays active
+      - "Refractory: add rituximab or another biologic, extended IV pulse cyclophosphamide, or a clinical trial"
+    src: { page: 461, quote: "Management of patients who show unsatisfactory response to initial therapy for active lupus nephritis." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L14.082
+    kind: card
+    topic: ln-response
+    front: Why repeat the biopsy in unsatisfactory response to lupus nephritis therapy?
+    back: To look for chronicity or another diagnosis, such as thrombotic microangiopathy.
+    src: { page: 465, quote: "Repeat biopsy if concern for chronicity or other diagnosis (e.g., thrombotic microangiopathy)" }
+    status: unverified
+  # ---------- p462, 465-466: relapse ----------
+  - id: neph.L14.083
+    kind: cloze
+    topic: ln-relapse
+    text: "Lupus nephritis flare rates of {{c1::10%-50%}} are reported; a flare predicts {{c2::poor long-term kidney survival}}."
+    src: { page: 462, quote: "LN flare is an important predictor of poor long-term kidney survival. 270-273 LN flare rates of 10%-50% have been reported" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L14.084
+    kind: table
+    topic: ln-relapse
+    title: Relapse after complete versus partial remission (p462)
+    columns: [Remission, Relapse rate, Time to relapse]
+    rows:
+      - [Complete, "39%", "36 months"]
+      - [Partial, "64%", "18 months"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2]]
+    src: { page: 462, quote: "Relapse rates of 39% and 64% were found in patients who achieved complete remission or partial remission, respectively" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L14.085
+    kind: card
+    topic: ln-relapse
+    front: How is a lupus nephritis relapse treated after complete or partial remission?
+    back: With the same initial therapy that achieved the original response, or another recommended first-line therapy.
+    src: { page: 462, quote: "LN relapse should be treated with the same initial therapy used to achieve the original response" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L14.086
+    kind: card
+    topic: ln-relapse
+    front: What cumulative cyclophosphamide limit applies when re-treating a relapse (Figure 8, p462)?
+    back: Do not exceed a total cumulative dose of 10 g.
+    src: { page: 462, quote: "we suggest not to exceed a total cumulative dose > 10 g" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L14.087
+    kind: enumerate
+    topic: ln-relapse
+    prompt: Maintenance measures in relapsing lupus nephritis patients (Figure 8, p462)?
+    points:
+      - Ensure therapeutic compliance
+      - Extend MPAA beyond 3-5 years after relapse
+      - Indefinite low-dose MPAA for repeated relapses
+      - Consider adding belimumab
+      - Consider a new biopsy for activity and chronicity
+    pass: 3
+    src: { page: 462, quote: "Extend MPAA treatment duration beyond 3-5 years after relapse" }
+    status: unverified
+  - id: neph.L14.088
+    kind: card
+    topic: ln-relapse
+    front: What is the short-term goal after treating a lupus renal flare (Figure 8, p462)?
+    back: Rapid clinical and serological remission within 3 months, then move to maintenance.
+    src: { page: 462, quote: "Achieve rapid clinical and serological remission (<3 months)" }
+    status: unverified
+  - id: neph.L14.089
+    kind: enumerate
+    topic: ln-relapse
+    prompt: Points to weigh when choosing therapy for a lupus nephritis relapse (p465)?
+    points:
+      - Lifetime cyclophosphamide exposure (malignancy rises after 36 g; ovarian failure)
+      - Pregnancy limits the choices
+      - Patient preference, tolerance and adherence to the initial regimen
+      - Verify activity, as proteinuria may be from CKD
+    pass: 3
+    src: { page: 465, quote: "Disease activity should be verified as proteinuria may be secondary to CKD." }
+    status: unverified
+  - id: neph.L14.090
+    kind: card
+    topic: ln-relapse
+    front: How should lupus nephritis with thrombotic microangiopathy be managed?
+    back: According to the underlying cause of the TMA (Figure 13).
+    src: { page: 466, quote: "Patients with LN and thrombotic microangiopathy (TMA) should be managed according to the underlying etiology of TMA" }
+    status: unverified
+  # ---------- cases and essays ----------
+  - id: neph.L14.091
+    kind: case
+    topic: ln-initial
+    stem: "A 24-year-old Egyptian woman with SLE has new ankle swelling. Urine: protein/creatinine 2.1 g/g, RBC casts. Creatinine 1.1 mg/dL, eGFR 70."
+    steps:
+      - question: What is the next step?
+        options:
+          - Kidney biopsy
+          - Start cyclophosphamide without a biopsy
+          - Repeat urine in 6 months
+          - Kidney ultrasound only
+        answer: 0
+        why: "Proteinuria >0.5 g/24 h with active sediment = biopsy (p451)."
+      - reveal: "Biopsy: endocapillary proliferation with subendothelial deposits in 70% of glomeruli, mostly global lesions, active (A)."
+        question: Which class?
+        options:
+          - Class IV-G (A)
+          - Class III (A)
+          - Class V
+          - Class II
+        answer: 0
+        why: "≥50% of glomeruli = IV; mostly global = IV-G (p449)."
+      - question: She wants children later. Which initial regimen fits best?
+        options:
+          - Glucocorticoids + MPAA
+          - Glucocorticoids + NIH monthly IV cyclophosphamide
+          - Glucocorticoids alone
+          - Azathioprine alone
+        answer: 0
+        why: "MPAA-based regimens are preferred when infertility risk matters (p457)."
+      - question: Which hydroxychloroquine dose?
+        options:
+          - 4-5 mg/kg/day, max 400 mg
+          - 10 mg/kg/day
+          - 200 mg weekly
+          - Not needed in nephritis
+        answer: 0
+        why: "HCQ 4-5 mg/kg/day, max 400 mg; 200 mg if eGFR <30 (p453)."
+      - reveal: "After 3 months, proteinuria has fallen only 10%."
+        question: What does the initial-therapy figure suggest?
+        options:
+          - Add belimumab or a CNI
+          - Stop all treatment
+          - Switch to azathioprine
+          - Double prednisone to 2 mg/kg
+        answer: 0
+        why: "No ≥25% fall after 2-3 months: add belimumab or a CNI (p453)."
+    src: { page: 452, quote: "We recommend thatpatients with active Class III or IV LN, with or without a membranous component, be treated initially with glucocorticoids" }
+    status: unverified
+  - id: neph.L14.092
+    kind: case
+    topic: ln-maintenance
+    stem: "A 30-year-old woman finished 6 months of initial therapy for class IV lupus nephritis and is in complete response. She plans a pregnancy next year."
+    steps:
+      - question: Which maintenance drug suits her best?
+        options:
+          - Azathioprine 1.5-2 mg/kg/day
+          - Mycophenolate 2 g/day
+          - Cyclophosphamide monthly
+          - Leflunomide
+        answer: 0
+        why: "Azathioprine is the alternative to MPAA when pregnancy is planned (p459)."
+      - question: What prednisone target in maintenance?
+        options:
+          - "<5 mg/day"
+          - 20 mg/day
+          - 1 mg/kg/day
+          - Stop now
+        answer: 0
+        why: "Reduce prednisone to <5 mg/day (Figure 8, p459)."
+      - question: When can steroids be stopped?
+        options:
+          - After ≥12 months of complete response
+          - After 1 month
+          - Never
+          - Once anti-dsDNA is negative
+        answer: 0
+        why: "Practice Point: stop after ≥12 months of complete clinical renal response (p460)."
+      - question: Minimum total immunosuppression for proliferative LN?
+        options:
+          - "≥36 months"
+          - 6 months
+          - 12 months
+          - 10 years
+        answer: 0
+        why: "Initial plus maintenance ≥36 months (p460)."
+    src: { page: 459, quote: "Azathioprine is an alternative to MPAA after completion of initial therapy in patients who do not tolerate MPAA, who do not have access to MPAA" }
+    status: unverified
+  - id: neph.L14.093
+    kind: essay
+    topic: ln-initial
+    prompt: Discuss the classification and initial management of class III/IV lupus nephritis.
+    outline:
+      - "ISN/RPS 2003/2018: III focal <50%, IV diffuse ≥50% (IV-S/IV-G), A/C lesions, NIH activity/chronicity"
+      - "Biopsy if proteinuria >0.5 g/24 h, active sediment or impaired function"
+      - "General: HCQ 4-5 mg/kg, RAAS blockade, SGLT2i, infection screening and vaccines, bone, sunscreen"
+      - "Initial: steroids + MPAA, or Euro-Lupus IV cyclophosphamide, or belimumab triple, or MPAA + CNI"
+      - "Add belimumab or CNI if proteinuria falls <25% after 2-3 months"
+    src: { page: 452, quote: "be treated initially with glucocorticoids plus any one of the following" }
+    status: unverified
+  - id: neph.L14.094
+    kind: essay
+    topic: ln-maintenance
+    prompt: Outline maintenance therapy and relapse management in lupus nephritis.
+    outline:
+      - "Prednisone <5 mg/day; stop after ≥12 months complete response"
+      - "MMF 1-2 g/day first choice; azathioprine in pregnancy or MPAA intolerance; CNI, mizoribine or leflunomide otherwise"
+      - "Total therapy ≥36 months; MPAA 3-5 years"
+      - "Flares 10-50%; relapse 39% after CR vs 64% after PR"
+      - "Treat relapse with the original regimen; cyclophosphamide cumulative ≤10 g in re-treatment, malignancy >36 g"
+    src: { page: 462, quote: "Relapses of LN are common, and LN flare is an important predictor of poor long-term kidney survival." }
+    status: unverified
+  # ---------- added: p448 EULAR/ACR, p450 testing, p451 forms ----------
+  - id: neph.L14.095
+    kind: card
+    topic: ln-overview
+    front: What is the entry criterion and the points threshold in the 2019 EULAR/ACR SLE classification (p448)?
+    back: ANA ≥1:80 is the entry criterion; at least 10 points, with at least one clinical domain.
+    src: { page: 448, quote: "All patients classified as having SLE must have ANA ≥ 1:80 (entry criterion)" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L14.096
+    kind: table
+    topic: ln-overview
+    title: Renal domain of the EULAR/ACR SLE criteria (p448)
+    columns: [Renal finding, Points]
+    rows:
+      - ["Proteinuria >0.5 g/24 h", "4"]
+      - ["Class II or V lupus nephritis", "8"]
+      - ["Class III or IV lupus nephritis", "10"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 448, quote: "Proteinuria > 0.5 g/24 hr Class II or V lupus nephritis Class III or IV lupus nephritis" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L14.097
+    kind: card
+    topic: ln-overview
+    front: In the EULAR/ACR SLE criteria, how are items counted within a domain?
+    back: Only the highest criterion in a domain counts, and only if there is no more likely cause. They are classification, not diagnostic, criteria.
+    src: { page: 448, quote: "Only the highest criterion in a given domain counts" }
+    status: unverified
+  - id: neph.L14.098
+    kind: cloze
+    topic: ln-overview
+    text: "In the EULAR/ACR criteria, anti-dsDNA or anti-Sm scores {{c1::6}} points, and low C3 and low C4 together score {{c2::4}}."
+    src: { page: 448, quote: "Low C3 and low C4" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L14.099
+    kind: enumerate
+    topic: ln-general
+    prompt: The testing panel when lupus nephritis is suspected (Figure, p450)?
+    points:
+      - Serum creatinine and eGFR
+      - Urinalysis (dipstick and sediment)
+      - Spot protein-creatinine ratio
+      - Serology (anti-dsDNA and complement)
+    pass: 3
+    src: { page: 450, quote: "Serology (anti-dsDNA and complement)" }
+    status: unverified
+  - id: neph.L14.100
+    kind: card
+    topic: ln-general
+    front: After abnormal urine in an SLE patient, what proteinuria level leads toward biopsy (Figure, p450)?
+    back: 24-hour proteinuria ≥500 mg/day.
+    src: { page: 450, quote: "Is 24-hour proteinuria ≥500 mg/d?" }
+    status: unverified
+  - id: neph.L14.101
+    kind: enumerate
+    topic: ln-general
+    prompt: Non-LN clinico-histological forms that a lupus kidney biopsy may show (Figure, p451)?
+    points:
+      - Lupus podocytopathy
+      - Thrombotic microangiopathy (aHUS, TTP, APS)
+      - Interstitial nephritis
+      - Cryoglobulinemic glomerulonephritis
+      - Acute tubular necrosis
+    pass: 4
+    src: { page: 451, quote: "Thrombotic microangiopathy (aHUS, TTP, APS)" }
+    status: unverified
+  - id: neph.L14.102
+    kind: card
+    topic: ln-class12
+    front: How is class I/II lupus nephritis with nephrotic syndrome managed (Figure 4, p451)?
+    back: Evaluate for lupus podocytopathy (EM helps), treat as minimal change disease, then consider low-dose glucocorticoid plus another immunosuppressant.
+    src: { page: 451, quote: "Evaluate for lupus podocytopathy (electron microscopy would be useful)" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p467: refractory LN ----------
+  - id: neph.L14.103
+    kind: card
+    topic: ln-response
+    front: "Refractory lupus nephritis after 2-3 months of triple therapy: what next, by initial regimen (p467)?"
+    back: "After MPAA-based therapy: rituximab or Euro-Lupus cyclophosphamide. After cyclophosphamide: rituximab or an extended cyclophosphamide course (up to 6 months). Still no response: newest anti-B-cell or anti-plasma-cell drugs or a clinical trial."
+    src: { page: 467, quote: "extended course of Cyclophosphamide (up to 6 months)" }
+    status: unverified
+  - id: neph.L14.104
+    kind: card
+    topic: ln-response
+    front: Which genetic factor does the refractory-LN figure suggest checking in Black patients?
+    back: APOL1, alongside checking adherence, optimal doses, and a repeat biopsy for chronicity or other lesions.
+    src: { page: 467, quote: "Evaluate possible genetic factors (eg, APOL1 in black patients)" }
+    status: unverified
+  # ---------- p467-470: TMA ----------
+  - id: neph.L14.105
+    kind: enumerate
+    topic: tma
+    prompt: Clinical definition of thrombotic microangiopathy (Table 1, p467)?
+    points:
+      - "Microangiopathic hemolytic anemia: low Hb, high LDH, low haptoglobin and/or schistocytes"
+      - "Thrombocytopenia: platelets <150,000 or >25% fall from baseline"
+      - "End-organ damage: kidney, heart, GI tract, brain, lungs"
+    pass: 3
+    src: { page: 467, quote: "Platelet count <150,000/L or >25% decrease of the baseline value" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L14.106
+    kind: card
+    topic: tma
+    front: What is the histological picture of thrombotic microangiopathy?
+    back: Thickened, swollen arteriolar and capillary walls with detached endothelial cells and platelet thrombi occluding the lumen.
+    src: { page: 467, quote: "Thickened and swollen walls of arterioles and capillaries with detached endothelial cells and the presence of platelet thrombi" }
+    status: unverified
+  - id: neph.L14.107
+    kind: order
+    topic: tma
+    prompt: Order the decision steps in the TMA classification algorithm (p468).
+    steps:
+      - Confirm TMA (MAHA, thrombocytopenia, end-organ damage)
+      - "ADAMTS13 activity: <10% means TTP"
+      - ">10%: look for co-existing diseases (secondary TMA)"
+      - "None: Shiga toxin/STEC positive means STEC-HUS"
+      - "STEC negative means atypical HUS"
+    src: { page: 468, quote: "ADAMTS13 activity" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L14.108
+    kind: enumerate
+    topic: tma
+    prompt: Groups of causes of secondary TMA (p468)?
+    points:
+      - "Infections: S. pneumoniae, HIV, influenza"
+      - "Drugs: CNIs, mTOR inhibitors, mitomycin C, gemcitabine, cisplatin, VEGF and tyrosine kinase inhibitors"
+      - Malignant hypertension
+      - Pregnancy and HELLP syndrome
+      - "Autoimmune: SLE, antiphospholipid syndrome, scleroderma"
+      - Bone marrow or solid organ transplant
+      - "Inborn errors: methylmalonic acidemia, vitamin B12 deficiency"
+    pass: 5
+    src: { page: 468, quote: "Secondary thrombotic microangiopathy" }
+    status: unverified
+  - id: neph.L14.109
+    kind: card
+    topic: tma
+    front: Which workup differentiates secondary TMA (p469)?
+    back: "Autoimmune serology (C3, C4, ANA, anticardiolipin, anti-Scl70), infection tests (stool Shiga toxin/STEC, urine pneumococcal antigen, T-antigen, HIV), inborn errors (homocysteine, B12, urine organic acids), complement assays and genetics."
+    src: { page: 469, quote: "Differentiate secondary thrombotic microangiopathy" }
+    status: unverified
+  - id: neph.L14.110
+    kind: table
+    topic: tma
+    title: Management after a first episode of TMA (p469)
+    columns: [Category, Treatment]
+    rows:
+      - [Secondary TMA, Treat the underlying disease]
+      - [Uncertain aHUS, "Plasma therapy (infusion or exchange)"]
+      - [aHUS, First-line eculizumab]
+      - [aHUS with anti-CFH antibody, "Eculizumab or plasma exchange plus steroid ± immunosuppressant"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 469, quote: "First-line Eculizumab therapy" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L14.111
+    kind: card
+    topic: tma
+    front: In aHUS with ESRD, when is kidney transplantation not suggested (Figure 3, p470)?
+    back: When the living related donor carries the same mutation. Moderate-high recurrence risk without that donor = transplant with eculizumab prophylaxis.
+    src: { page: 470, quote: "Prophylactic anti-C5 monoclonal antibody is determined by the relapse risk after transplantation by the molecular results." }
+    status: unverified
+  - id: neph.L14.112
+    kind: table
+    topic: tma
+    title: aHUS recurrence risk after transplantation (Figure 3, p470)
+    columns: [Risk, Genetics]
+    rows:
+      - [Low, "MCP or DGKE defects"]
+      - [Moderate-high, "CFH, CFI, C3, CFB defects; CFHR deletions; prior relapse; unknown defect; high anti-CFH titer"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 470, quote: "Management of patients with end-stage renal disease caused by atypical hemolytic uremic syndrome (aHUS)." }
+    status: unverified
+  - id: neph.L14.113
+    kind: card
+    topic: tma
+    front: What is the basic pathology of thrombotic microangiopathy?
+    back: Endothelial damage causes microvascular thrombosis with platelet consumption, mechanical RBC shearing, Coombs-negative hemolysis and end-organ damage.
+    src: { page: 470, quote: "This leads to mechanical shearing of the red blood cells (RBCs), Coombs- negative hemolytic anemia, and end-organ damage." }
+    status: unverified
+  - id: neph.L14.114
+    kind: enumerate
+    topic: tma
+    prompt: Common TMAs from which HUS must be differentiated?
+    points:
+      - Thrombotic thrombocytopenic purpura (TTP)
+      - HELLP syndrome
+      - Disseminated intravascular coagulation (DIC)
+    pass: 3
+    src: { page: 470, quote: "thrombotic thrombocytopenic purpura (TTP); syndrome of hemolysis, elevated liver enzymes and low platelets (HELLP); and disseminated intravascular coagulation (DIC)." }
+    status: unverified
+  # ---------- p471-477: HUS ----------
+  - id: neph.L14.115
+    kind: card
+    topic: hus
+    front: Define hemolytic uremic syndrome.
+    back: A TMA with thrombocytopenia, microangiopathic hemolytic anemia and AKI.
+    src: { page: 471, quote: "characterized by thrombocytopenia, microangiopathic hemolytic anemia, and AKI." }
+    status: unverified
+  - id: neph.L14.116
+    kind: table
+    topic: hus
+    title: Typical versus atypical HUS (p471-472)
+    columns: [Feature, Typical (STEC) HUS, Atypical HUS]
+    rows:
+      - [Share of HUS, "90-95%", "5-10%"]
+      - [Cause, "Shiga toxin-producing E. coli", "Alternative complement pathway mutations"]
+      - [Kidney recovery, Usual, "Often fails without treatment; ~50% dialysis, 25% mortality"]
+      - [Relapse, Uncommon, Common]
+    blanks: [[0, 1], [0, 2], [1, 2], [2, 2]]
+    src: { page: 472, quote: "Atypical HUS (aHUS) constitutes 5% to 10% of HUS cases and is linked to genetic mutations affecting the alternative complement pathway." }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: neph.L14.117
+    kind: cloze
+    topic: hus
+    text: "HUS develops in {{c1::5-15%}} of STEC infections, mostly in children under {{c2::5}}. Bloody diarrhea appears on day 2-3 and HUS {{c3::3-10 days}} after diarrhea starts."
+    src: { page: 472, quote: "The incidence of HUS among individuals infected with STEC ranges from 5% to 15%, predominantly affecting children younger than 5." }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L14.118
+    kind: card
+    topic: hus
+    front: How does aHUS usually present?
+    back: Nonspecific fatigue, pallor or somnolence, progressing to AKI (oliguria, uremia, fluid overload); extrarenal cardiac and neurological involvement is common.
+    src: { page: 472, quote: "The initial clinical manifestation of aHUS typically involves nonspecific symptoms like fatigue, pallor, or somnolence." }
+    status: unverified
+  - id: neph.L14.119
+    kind: card
+    topic: hus
+    front: Which is the only cause of Coombs-positive HUS, and what does it need?
+    back: Streptococcus pneumoniae (neuraminidase exposes cell antigens); give antibiotics early.
+    src: { page: 473, quote: "This is the only cause of Coombs-positive HUS, and early antibiotic administration is indicated." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L14.120
+    kind: cloze
+    topic: hus
+    text: "S. pneumoniae causes {{c1::5-15%}} of HUS in children."
+    src: { page: 473, quote: "HUS caused by Streptococcus pneumoniae, accounting for 5% to 15% of all cases of HUS in children." }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L14.121
+    kind: enumerate
+    topic: hus
+    prompt: Causes of secondary aHUS (p473)?
+    points:
+      - Inherited vitamin B12 (cobalamin) metabolism disorders
+      - DGKE mutations
+      - HIV and influenza
+      - SLE and antiphospholipid syndrome
+      - Drugs (quinine, CNIs, chemotherapy)
+      - Malignant hypertension
+      - COVID-19 and pregnancy as triggers
+    pass: 5
+    src: { page: 473, quote: "Other causes of secondary aHUS are as follows" }
+    status: unverified
+  - id: neph.L14.122
+    kind: order
+    topic: hus
+    prompt: Order the steps of Shiga toxin injury in typical HUS.
+    steps:
+      - Undercooked beef or unpasteurized milk is eaten
+      - STEC penetrates the intestinal mucus and secretes Shiga toxin
+      - Toxin binds the Gb3 receptor
+      - Toxin-Gb3 complex binds ribosomes, blocks protein synthesis, causes apoptosis
+      - Endothelial damage in the glomerular microvasculature starts TMA
+    src: { page: 473, quote: "STEC penetrates the mucous layer of the intestine and secretes Shiga toxin, which binds to the receptor Gb3." }
+    status: unverified
+  - id: neph.L14.123
+    kind: enumerate
+    topic: hus
+    prompt: Four mechanisms of endothelial damage by Shiga toxin?
+    points:
+      - Direct cytotoxicity
+      - Disturbance of the hemostatic pathway
+      - Increased cytokine release
+      - Alternative complement pathway activation (factor H inhibition)
+    pass: 4
+    src: { page: 474, quote: "Endothelial damage is caused by 1) direct cytotoxicity of Shiga toxin, 2) disturbance of the hemostatic pathway" }
+    status: unverified
+  - id: neph.L14.124
+    kind: card
+    topic: hus
+    front: What is the role of factor H in aHUS?
+    back: Factor H regulates the alternative pathway by stabilizing C3 and inactivating C3b; genetic defects plus a trigger (such as infection) cause aHUS.
+    src: { page: 474, quote: "with particular emphasis on regulatory Factor H that stabilizes C3 and inactivates C3b." }
+    status: unverified
+  - id: neph.L14.125
+    kind: enumerate
+    topic: hus
+    prompt: Lab evidence of hemolytic anemia in HUS?
+    points:
+      - High LDH
+      - High indirect bilirubin
+      - Low haptoglobin
+      - High plasma hemoglobin
+      - Schistocytes on the smear
+    pass: 4
+    src: { page: 474, quote: "Elevated LDH and indirect bilirubin, as well as low haptoglobin and elevated plasma hemoglobin, are diagnostic of hemolytic anemia" }
+    status: unverified
+  - id: neph.L14.126
+    kind: card
+    topic: hus
+    front: Why are amylase and lipase raised in some HUS patients?
+    back: Pancreatic damage, in up to 20%, sometimes with hyperglycemia.
+    src: { page: 474, quote: "Up to 20% of patients have ve elevated amylase and lipase due to pancreatic damage" }
+    status: unverified
+  - id: neph.L14.127
+    kind: card
+    topic: hus
+    front: Why can the stool Shiga toxin test be negative in typical HUS?
+    back: The toxin may have been cleared or be avidly bound to the endothelium.
+    src: { page: 475, quote: "The results may not be positive for the Shiga toxin if it has been cleared or is avidly bound to the endothelium." }
+    status: unverified
+  - id: neph.L14.128
+    kind: card
+    topic: hus
+    front: In suspected HUS, what do low complement, ADAMTS13 and abnormal coagulation tests point to?
+    back: "Low complement: suggests (not specific for) aHUS. ADAMTS13: sent to rule out TTP. Prolonged PT/aPTT, high D-dimer and FDPs: DIC."
+    src: { page: 475, quote: "An ADAMTS13 level should be sent to rule out TTP." }
+    status: unverified
+  - id: neph.L14.129
+    kind: table
+    topic: hus
+    title: Genetic abnormalities and clinical outcome in atypical hemolytic-uremic syndrome (Table 2, p475)
+    columns: [Gene, Frequency, Death or ESRD, Recurrence after transplant]
+    rows:
+      - [CFH, "20-30%", "70-80%", "80-90%"]
+      - [CFHR1/3 (anti-factor H antibodies), "6%", "ESRD 30-40%", "20%"]
+      - [MCP, "10-15%", "<20%", "15-20%"]
+      - [CFI, "4-10%", "60-70%", "70-80%"]
+    blanks: [[0, 1], [0, 3], [2, 2], [3, 3]]
+    src: { page: 475, quote: "Genetic Abnormalities and Clinical Outcome in Patients with Atypical Hemolytic-Uremic Syndrome." }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L14.130
+    kind: enumerate
+    topic: hus
+    prompt: Supportive care in typical (STEC) HUS?
+    points:
+      - Volume resuscitation (under-filling raises the need for dialysis)
+      - Dialysis when needed (about half need it)
+      - Blood transfusion as needed; platelets sparingly
+      - Avoid antimotility drugs and antibiotics
+    pass: 3
+    src: { page: 476, quote: "The management of typical HUS caused by STEC is generally supportive." }
+    status: unverified
+  - id: neph.L14.131
+    kind: mcq
+    topic: hus
+    stem: "A 4-year-old has bloody diarrhea for 5 days, then pallor, oliguria, Hb 7, platelets 40,000 and schistocytes. Stool is positive for Shiga toxin. Which drug should be avoided?"
+    options:
+      - Antibiotics and antimotility agents
+      - IV fluids
+      - Red cell transfusion
+      - Dialysis
+    answer: 0
+    why:
+      - "Correct: in STEC-HUS they worsen outcomes, likely by raising Shiga toxin exposure (p476)."
+      - Volume resuscitation is part of supportive care.
+      - Transfusion is given when clinically needed.
+      - About half need renal replacement therapy.
+    src: { page: 476, quote: "Antimotility agents and antibiotics are avoided in typical HUS caused by STEC, as they correlate with poorer outcomes" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L14.132
+    kind: card
+    topic: hus
+    front: What are first- and second-line treatments for aHUS?
+    back: First-line eculizumab (anti-C5); second-line plasma exchange.
+    src: { page: 476, quote: "The cornerstones of treatment for aHUS are first-line treatment with eculizumab and second-line with plasma exchange." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L14.133
+    kind: cloze
+    topic: hus
+    text: "Eculizumab cut progression to ESRD or death in children from 30-50% to {{c1::9%}}, and in adults from 60% to {{c2::6-15%}}."
+    src: { page: 476, quote: "decreased progression to ESRD or death in children from 30% to 50% down to 9% and in adults from 60% down to 6% to 15%." }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L14.134
+    kind: card
+    topic: hus
+    front: How does ravulizumab compare with eculizumab?
+    back: Also a C5 inhibitor with similar efficacy but a half-life 4 times longer (approved USA 2019, EU 2020).
+    src: { page: 476, quote: "it has similar efficacy to eculizumab but with 4 times as long of a half-life." }
+    status: unverified
+  - id: neph.L14.135
+    kind: card
+    topic: hus
+    front: What is the main adverse effect of eculizumab, and how is it prevented?
+    back: Infection by encapsulated organisms (S. pneumoniae, H. influenzae); vaccinate and monitor.
+    src: { page: 477, quote: "Adverse effects of eculizumab are infection by encapsulated organisms such as S pneumoniae and Haemophilus influenzae" }
+    status: unverified
+  - id: neph.L14.136
+    kind: card
+    topic: hus
+    front: Why give prophylactic eculizumab to some aHUS kidney transplant recipients?
+    back: aHUS recurs often in the graft; prophylaxis in high-risk patients prolongs graft survival and may be cost-effective.
+    src: { page: 477, quote: "prophylactic administration of eculizumab in patients with a high risk of aHUS recurrence prolongs graft survival" }
+    status: unverified
+  # ---------- p477-483: TTP ----------
+  - id: neph.L14.137
+    kind: enumerate
+    topic: ttp
+    prompt: The classic pentad of TTP?
+    points:
+      - Fever
+      - Thrombocytopenia
+      - Hemolytic anemia
+      - Renal dysfunction
+      - Neurologic dysfunction
+    pass: 5
+    src: { page: 477, quote: "classically has been characterized by the pentad of fever, thrombocytopenia, hemolytic anemia, renal dysfunction, and neurologic dysfunction." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L14.138
+    kind: card
+    topic: ttp
+    front: What is the mechanism of TTP?
+    back: Low ADAMTS13 (VWF-cleaving protease) leaves ultra-large VWF multimers that bind platelets and form microthrombi, causing end-organ ischemia.
+    src: { page: 478, quote: "This is due to the inability of the ADAMTS13 to inactivate the large multimer von Willebrand factor (VWF)" }
+    status: unverified
+  - id: neph.L14.139
+    kind: cloze
+    topic: ttp
+    text: "Untreated TTP has a mortality of about {{c1::90%}}; about {{c2::80%}} respond to initial treatment, and post-treatment mortality is {{c3::10-15%}}."
+    src: { page: 478, quote: "without treatment, has a mortality of about 90%. About 80% of patients respond to initial treatment, and the post-treatment mortality is 10 to 15%." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L14.140
+    kind: card
+    topic: ttp
+    front: Which form of TTP is more common, and what causes it?
+    back: Acquired TTP, from autoantibodies against ADAMTS13. Congenital TTP comes from ADAMTS13 mutations and needs a trigger such as infection or pregnancy.
+    src: { page: 478, quote: "Acquired TTP is more common than the congenital type and is caused by autoantibodies targeting ADAMTS13." }
+    status: unverified
+  - id: neph.L14.141
+    kind: enumerate
+    topic: ttp
+    prompt: Common triggers of ADAMTS13 autoantibodies (acquired TTP)?
+    points:
+      - Antiplatelet drugs
+      - Immunosuppressive agents
+      - HIV
+      - Estrogen-containing contraceptives
+      - Pregnancy
+    pass: 4
+    src: { page: 478, quote: "Antiplatelet drugs, immunosuppressive agents, HIV, estrogen-containing birth control, and pregnancy are the most commonly listed triggers" }
+    status: unverified
+  - id: neph.L14.142
+    kind: table
+    topic: ttp
+    title: Presenting features of TTP (p479)
+    columns: [Feature, Frequency]
+    rows:
+      - [Gastrointestinal symptoms, "69%"]
+      - [Weakness, "63%"]
+      - [Bleeding or purpura, "54%"]
+      - [Major neurologic findings, "41%"]
+      - [Minor neurologic findings, "26%"]
+      - [Fever and chills, "10%"]
+      - [Full classic pentad, "<5%"]
+    blanks: [[0, 1], [3, 1], [6, 1]]
+    src: { page: 479, quote: "Classical pentad comprising of hemolytic anemia, thrombocytopenia, fever, acute kidney injury, and severe neurologic findings less than 5%." }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L14.143
+    kind: enumerate
+    topic: ttp
+    prompt: The seven PLASMIC score items (1 point each)?
+    points:
+      - "Platelets <30,000/µL"
+      - "Hemolysis (retics >2.5%, undetectable haptoglobin or indirect bilirubin >2 mg/dL)"
+      - "No active cancer"
+      - "No solid-organ or stem-cell transplant"
+      - "MCV <90 fL"
+      - "INR <1.5"
+      - "Creatinine <2.0 mg/dL"
+    pass: 6
+    src: { page: 479, quote: "The PLASMIC score is calculated using findings on presentation and predicts the likelihood of ADAMTS13 activity being less than or equal to 10%" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L14.144
+    kind: card
+    topic: ttp
+    front: What is required before applying the PLASMIC score, and how is it read?
+    back: Schistocytes on the smear. Higher score = likelier TTP (>5 high, <5 low probability); sensitivity 99%, specificity 57%, so it is a rule-out screen.
+    src: { page: 480, quote: "This score has been validated with a reported sensitivity of 99% and a specificity of 57%." }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L14.145
+    kind: card
+    topic: ttp
+    front: What ADAMTS13 levels confirm TTP and define relapse?
+    back: "<10% with hemolysis and thrombocytopenia confirms TTP (not specific: also sepsis, cancer). A fall to <20% after recovery = relapse, even without hemolysis."
+    src: { page: 480, quote: "A decrease of the ADAMTS13 activity to less than 20% after initial recovery from an acute episode is considered a relapse" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L14.146
+    kind: card
+    topic: ttp
+    front: What is the mainstay of TTP treatment?
+    back: Plasma exchange (PEX) with high-dose corticosteroids, started as soon as possible.
+    src: { page: 480, quote: "The mainstay of treatment in TTP is plasma exchange (PEX) with high-dose corticosteroid therapy." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L14.147
+    kind: card
+    topic: ttp
+    front: Give the steroid doses in TTP.
+    back: "Prednisone 1 mg/kg/day if neurologically intact; if severely ill, IV methylprednisolone 1000 mg daily for 3 days or 125 mg 2-4 times daily."
+    src: { page: 480, quote: "The generally recommended dose for corticosteroids is 1 mg/kg per 1 mg/kg per day of prednisone in neurologically intact patients." }
+    status: unverified
+  - id: neph.L14.148
+    kind: card
+    topic: ttp
+    front: How is plasma exchange done in TTP?
+    back: One plasma volume (about 40 mL/kg) once daily, replaced with plasma because it repletes ADAMTS13. Stop abruptly at remission, without tapering.
+    src: { page: 481, quote: "Plasma is used as the preferred fluid replacement during the treatment because it repletes ADAMTS13." }
+    status: unverified
+  - id: neph.L14.149
+    kind: card
+    topic: ttp
+    front: Which second-line agent is favoured for refractory or relapsed TTP?
+    back: Rituximab (anti-CD20), over splenectomy, vincristine, cyclophosphamide and cyclosporine.
+    src: { page: 481, quote: "It has gained more favour than other nonspecific immunosuppressive agents." }
+    status: unverified
+  - id: neph.L14.150
+    kind: card
+    topic: ttp
+    front: How does caplacizumab work, and what does it not do?
+    back: It binds the A1 domain of VWF and blocks platelet adhesion, rapidly halting microthrombi; it does not reduce ADAMTS13 autoantibody production.
+    src: { page: 482, quote: "However, it does not reduce the production of the autoantibody against ADAMTS13." }
+    status: unverified
+  - id: neph.L14.151
+    kind: card
+    topic: ttp
+    front: How long is caplacizumab given, and its main risk?
+    back: IV dose then SC daily for 30 days after PEX stops (until ADAMTS13 >20%); it increases bleeding risk.
+    src: { page: 482, quote: "Caplacizumab is given as an initial intravenous dose followed by subcutaneous injections for 30 days after PEX has been stopped." }
+    status: unverified
+  - id: neph.L14.152
+    kind: card
+    topic: ttp
+    front: Should platelets be transfused in TTP?
+    back: Considered contraindicated unless there is major bleeding. Packed RBCs are given if indicated.
+    src: { page: 482, quote: "Platelet transfusion is controversial but is considered to be contraindicated unless major bleeding is present." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L14.153
+    kind: card
+    topic: ttp
+    front: Is plasma infusion without exchange enough for TTP?
+    back: No; it is only a temporizing measure while PEX is unavailable, since equivalent volumes are rarely feasible.
+    src: { page: 482, quote: "Plasma infusion without exchange is not an adequate treatment for TTP." }
+    status: unverified
+  - id: neph.L14.154
+    kind: table
+    topic: ttp
+    title: ISTH 2020 TTP treatment guidance (p483)
+    columns: [Situation, Recommendation]
+    rows:
+      - [Initial treatment, "Corticosteroids + PEX (strong), over PEX alone"]
+      - [First acute event, "Add rituximab to steroids and PEX (conditional)"]
+      - [Relapsing TTP, "PEX + steroids + rituximab + caplacizumab"]
+      - ["Remission with low ADAMTS13", Prophylactic rituximab]
+      - ["Pregnant with low ADAMTS13, no symptoms", Prophylactic plasma infusion]
+    blanks: [[0, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 483, quote: "2020 Treatment Guidelines by the International Society on Thrombosis and Hemostasis" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L14.155
+    kind: mcq
+    topic: ttp
+    stem: "A 32-year-old woman on oral contraceptives has confusion, platelets 12,000, schistocytes, MCV 84, INR 1.1, creatinine 1.3 mg/dL, no cancer or transplant: unexplained hemolytic anemia and thrombocytopenia. Which step is right?"
+    options:
+      - Start plasma exchange and corticosteroids now
+      - Transfuse platelets before anything else
+      - Wait for the ADAMTS13 result before treating
+      - Give fresh frozen plasma infusion as definitive therapy
+    answer: 0
+    why:
+      - "Correct: PLASMIC 7 (high); start PEX with steroids at once (p479-480)."
+      - Platelets are contraindicated unless major bleeding.
+      - TTP is an emergency; treat on suspicion.
+      - Plasma infusion is only temporizing.
+    src: { page: 480, quote: "This should be initiated as soon as possible in all patients with unexplained hemolytic anemia and thrombocytopenia with a normal coagulation profile." }
+    status: unverified
+  # ---------- p483-490: viral GN ----------
+  - id: neph.L14.156
+    kind: card
+    topic: hcv
+    front: Which glomerular lesions are most often described with HCV?
+    back: MPGN (most frequent, mainly cryoglobulinemic) and membranous GN.
+    src: { page: 484, quote: "The frequently described lesions were membranoproliferative glomerulonephritis (MPGN) and membranous glomerulonephritis (MGN)." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L14.157
+    kind: cloze
+    topic: hcv
+    text: "Type II cryoglobulinemia is linked to HCV in {{c1::90%}} and type III in {{c2::70%}}."
+    src: { page: 484, quote: "Type II cryoglobulinemia is more significantly associated with HCV than type III (90% and 70% respectively)." }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L14.158
+    kind: enumerate
+    topic: hcv
+    prompt: Light and electron microscopic features of HCV cryoglobulinemic MPGN?
+    points:
+      - Subendothelial IgM and IgG deposits, sometimes intraluminal thrombi
+      - Hypercellularity from leukocyte infiltration
+      - Lobular tuft accentuation with mesangial increase
+      - GBM double contours from monocyte interposition
+      - Large subendothelial deposits on EM
+      - Small-artery vasculitis in 30%
+    pass: 4
+    src: { page: 485, quote: "The glomerular basement membrane often shows double contours." }
+    status: unverified
+  - id: neph.L14.159
+    kind: card
+    topic: hcv
+    front: What evidence supports a direct link between HCV and membranous GN?
+    back: Egyptian series with MGN alone and no cryoglobulins; HCV proteins in the capillary wall; 8.3% of MGN patients had anti-HCV or HCV RNA (Yamabe).
+    src: { page: 486, quote: "According to Yamabe et Al. 8.3% of patients with MGN had anti-HCV antibodies or detectable HCV RNA." }
+    status: unverified
+  - id: neph.L14.160
+    kind: card
+    topic: hcv
+    front: How might HCV cause FSGS?
+    back: By directly damaging podocytes, like HIV.
+    src: { page: 486, quote: "HCV is suspected to damage podocytes directly. just like HIV-associated kidney injuries." }
+    status: unverified
+  - id: neph.L14.161
+    kind: card
+    topic: hcv
+    front: Which receptor may let HCV directly infect kidney cells?
+    back: CD81, the receptor used for B cells and hepatocytes; infected endothelium undergoes apoptosis, and podocytes and Bowman capsule cells are damaged.
+    src: { page: 487, quote: "Kidney tissue may express CD81" }
+    status: unverified
+  - id: neph.L14.162
+    kind: table
+    topic: hcv
+    title: KDIGO recommendations for HCV glomerular disease (p488)
+    columns: [Situation, Recommendation]
+    rows:
+      - [Clinical glomerular disease, Kidney biopsy]
+      - [Stable function and/or non-nephrotic proteinuria, DAA first]
+      - ["Cryoglobulinemic flare, nephrotic syndrome or RPGN", "DAA + immunosuppression ± plasma exchange"]
+      - [Active disease not responding to antivirals, "Immunosuppression; rituximab first-line"]
+    blanks: [[1, 1], [2, 1], [3, 1]]
+    src: { page: 488, quote: "We recommend that patients with HCV-associated glomerular disease be treated for HCV (1A)." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L14.163
+    kind: card
+    topic: hbv-hiv
+    front: What is the most common glomerular lesion in HBV?
+    back: Membranous nephropathy. Less often IgAN, MPGN, FSGS and crescentic GN; rarely MCD.
+    src: { page: 489, quote: "The most common pattern of glomerular injury seen in HBV infection is MN." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L14.164
+    kind: card
+    topic: hbv-hiv
+    front: How is replicative HBV infection with GN treated?
+    back: "Nucleos(t)ide analogues as for the general HBV population (replicative = HBV DNA ≥2000 IU/mL)."
+    src: { page: 489, quote: "receive treatment with nucleos(t)ide analogues as recommended for the general population by standard clinical practice guidelines for HBV infection" }
+    status: unverified
+  - id: neph.L14.165
+    kind: card
+    topic: hbv-hiv
+    front: Which vasculitis is a classic extrahepatic manifestation of chronic HBV?
+    back: Polyarteritis nodosa (Kussmaul-Maier disease); also type II and III cryoglobulinemia.
+    src: { page: 489, quote: "systemic vasculitis (especially polyarteritis nodosa/Kussmaul-Maier disease)." }
+    status: unverified
+  - id: neph.L14.166
+    kind: card
+    topic: hbv-hiv
+    front: When should antiretroviral therapy start in HIV with CKD or HIVAN?
+    back: In all patients, regardless of CD4 count, with doses adjusted to kidney function; CKD is not a contraindication (START and TEMPRANO trials).
+    src: { page: 491, quote: "The presence of CKD is not a contraindication for antiretroviral therapy (ART) of HIV infection." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L14.167
+    kind: card
+    topic: hbv-hiv
+    front: Which diagnoses appear on kidney biopsy in HIV (Figure, p490)?
+    back: Immune-complex GN, diabetic nephropathy, HIVAN, tenofovir toxicity, FSGS, global sclerosis, acute tubular injury and others; 17% had dual diagnoses.
+    src: { page: 490, quote: "Dual diagnoses were present in 17% of cases" }
+    status: unverified
+  # ---------- p491-494: HRS ----------
+  - id: neph.L14.168
+    kind: card
+    topic: hrs
+    front: What is hepatorenal syndrome?
+    back: A functional disease with marked renal vasoconstriction from vasoconstrictor systems compensating for splanchnic and systemic vasodilation; always with ascites.
+    src: { page: 491, quote: "HRS is a functional disease characterised by marked vasoconstriction of the renal arteries" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L14.169
+    kind: enumerate
+    topic: hrs
+    prompt: New diagnostic criteria for HRS-AKI (Box 1, p491)?
+    points:
+      - "Cirrhosis, acute liver failure or acute-on-chronic liver failure"
+      - "Creatinine rise ≥0.3 mg/dL in 48 h or ≥50% from baseline, and/or urine ≤0.5 mL/kg/h for ≥6 h"
+      - "No response after 2 days of diuretic withdrawal and albumin 1 g/kg/day (max 100 g)"
+      - Absence of shock
+      - No current or recent nephrotoxic drugs
+      - "No parenchymal disease (proteinuria >500 mg/day, >50 RBC/HPF, abnormal ultrasound)"
+    pass: 5
+    src: { page: 491, quote: "New diagnostic criteria for HRS-AKI." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L14.170
+    kind: card
+    topic: hrs
+    front: What FENa suggests renal vasoconstriction in HRS-AKI?
+    back: FENa <0.2%, with <0.1% highly predictive.
+    src: { page: 491, quote: "Suggestion of renal vasoconstriction with FENa of <0.2% (with levels <0.1% being highly predictive)" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L14.171
+    kind: table
+    topic: hrs
+    title: Old and new hepatorenal syndrome terms (p492)
+    columns: [Old, New, Criteria]
+    rows:
+      - [HRS-1, HRS-AKI, "Creatinine ↑ ≥0.3 mg/dL in 48 h or ≥50% in 3 months"]
+      - [HRS-2, "HRS-NAKI: HRS-AKD", "Creatinine ↑ <50% in 3 months, eGFR <60"]
+      - [HRS-2, "HRS-NAKI: HRS-CKD", "eGFR <60 for ≥3 months, no other cause"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 492, quote: "HEPATORENAL SYNDROME" }
+    status: unverified
+  - id: neph.L14.172
+    kind: enumerate
+    topic: hrs
+    prompt: General measures when AKI appears in cirrhosis?
+    points:
+      - Stop diuretics and beta-blockers
+      - Stop vasodilators, NSAIDs and other nephrotoxic drugs
+      - Replace volume according to the cause and severity of losses
+    pass: 3
+    src: { page: 492, quote: "In patients taking diuretics and/or b-blockers these should be discontinued." }
+    status: unverified
+  - id: neph.L14.173
+    kind: card
+    topic: hrs
+    front: Give the terlipressin doses in HRS.
+    back: "IV boluses 0.5-1 mg every 4-6 h up to 2 mg every 4 h, or continuous infusion 2 mg/day up to 12 mg/day; always with albumin."
+    src: { page: 492, quote: "starting from 0.5-1 mg every 4-6 h to a maximum dose of 2 mg every 4 h" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L14.174
+    kind: card
+    topic: hrs
+    front: What albumin dose is used with vasoconstrictors in HRS, and why does albumin help?
+    back: 20-40 g/day guided by CVP; it maintains cardiac output and has antioxidant and anti-inflammatory (non-oncotic) actions.
+    src: { page: 493, quote: "To date, albumin has been given at a dose of 20-40 g/day" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L14.175
+    kind: card
+    topic: hrs
+    front: Compare terlipressin with midodrine-octreotide and noradrenaline in HRS.
+    back: Terlipressin + albumin beat midodrine + octreotide + albumin, and beat noradrenaline in ACLF. Noradrenaline is cheaper but needs a central line and ICU.
+    src: { page: 493, quote: "terlipressin was shown to be more effective than noradrenaline in the treatment of HRS in patients with ACLF" }
+    status: unverified
+  - id: neph.L14.176
+    kind: card
+    topic: hrs
+    front: When do you stop vasoconstrictors plus albumin in HRS?
+    back: Continue until creatinine is within 0.3 mg/dL of baseline; stop by 14 days if there is no or only partial response.
+    src: { page: 493, quote: "In patients with no response or partial response, the treatment should be discontinued within 14 days." }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L14.177
+    kind: card
+    topic: hrs
+    front: What is the optimal treatment of HRS-AKI?
+    back: Liver transplantation, whatever the response to drugs. SLK versus LT alone depends on AKI duration, dialysis need and CKD.
+    src: { page: 494, quote: "LT represents the optimal treatment for patients with HRS-AKI regardless of their response to phar-macological treatment." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p494-502: dysproteinemia ----------
+  - id: neph.L14.178
+    kind: card
+    topic: dysprot
+    front: What are dysproteinemic kidney diseases?
+    back: Kidney damage from pathogenic monoclonal immunoglobulins or light chains made by B-cell or plasma-cell clones.
+    src: { page: 494, quote: "Dysproteinemic kidney diseases occur when B or plasma cell clones produce pathogenic monoclonal immunoglobulins or light chains that cause kidney damage." }
+    status: unverified
+  - id: neph.L14.179
+    kind: card
+    topic: dysprot
+    front: MGUS versus MGRS?
+    back: "MGUS: monoclonal gammopathy without end-organ damage. MGRS: monoclonal gammopathy causing kidney damage without overt malignancy."
+    src: { page: 495, quote: "When monoclonal gammopathy-related kidney damage occurs in the absence of overt malignancy, the hematologic disorder is categorized as monoclonal gammopathy of renal significance" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L14.180
+    kind: card
+    topic: dysprot
+    front: What is the treatment goal in dysproteinemic kidney disease?
+    back: A hematologic response (fall or loss of the monoclonal protein) by eradicating the clone; organ response depends on it.
+    src: { page: 495, quote: "the goal of treatment is to achieve a hematologic response" }
+    status: unverified
+  - id: neph.L14.181
+    kind: cloze
+    topic: dysprot
+    text: "Myeloma incidence is about {{c1::11}} per 100,000/year; {{c2::20-30%}} present with reduced GFR at diagnosis."
+    src: { page: 495, quote: "Multiple myeloma is one of the most common hematologic malignancies with an annual incidence of about 11 per 100,000 patients." }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L14.182
+    kind: card
+    topic: dysprot
+    front: What is the commonest cause of reduced GFR in multiple myeloma, and its mechanism?
+    back: Light chain cast nephropathy; free light chains bind Tamm-Horsfall protein (uromodulin) in the distal nephron, obstruct tubules and cause giant-cell reaction and interstitial inflammation.
+    src: { page: 496, quote: "The most common cause of decreased GFR in patients with multiple myeloma is light chain cast nephropathy." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L14.183
+    kind: card
+    topic: dysprot
+    front: How do free light chains injure proximal tubule cells?
+    back: Excess endocytosis via cubilin-megalin triggers NF-κB/MAPK, inflammatory and fibrotic cytokines (IL-6, IL-8, CCL2, TGF-β1).
+    src: { page: 497, quote: "The excessive endocytosis of FLCs by the cubilin-megalin complex expressed on PTCs can trigger apoptotic, proinflammatory and fibrotic pathways." }
+    status: unverified
+  - id: neph.L14.184
+    kind: table
+    topic: dysprot
+    title: Where light chains injure the nephron (Figure, p499)
+    columns: [Lesion, Site and finding]
+    rows:
+      - [AL amyloidosis, FLC fibrils within the glomerulus]
+      - [Light chain deposition disease, FLC deposits along basement membranes]
+      - [Fanconi syndrome, FLC crystals within proximal tubular cells]
+      - [Cast nephropathy (myeloma kidney), Waxy FLC casts in the distal tubule lumen]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 499, quote: "Cast Nephropathy (also known as Myeloma Kidney)" }
+    status: unverified
+  - id: neph.L14.185
+    kind: table
+    topic: dysprot
+    title: Dysproteinemia-associated kidney diseases (Table 2, p498-499)
+    columns: [Diagnosis, Presentation, Mechanism]
+    rows:
+      - [Light chain cast nephropathy, "AKI, nonalbumin proteinuria", "Light chain binds uromodulin, distal obstruction"]
+      - [Ig amyloidosis (AL/AH/AHL), "Proteinuria, nephrotic syndrome", "Amyloid fibrils in extracellular tissue"]
+      - ["MIDD (LCDD, HCDD)", "Decreased function, proteinuria", "Deposition of pathogenic light or heavy chain"]
+      - [Light chain proximal tubulopathy, "Fanconi syndrome", "Vκ1 light chains resist proteolysis"]
+      - [Monoclonal gammopathy C3 glomerulopathy, "Proteinuria, decreased function", "Alternative pathway activation"]
+    blanks: [[0, 2], [1, 1], [3, 1], [4, 2]]
+    src: { page: 498, quote: "Dysproteinemia-Associated Kidney Diseases" }
+    status: unverified
+  - id: neph.L14.186
+    kind: card
+    topic: dysprot
+    front: Why are diuretics handled differently in AL amyloidosis and cast nephropathy?
+    back: Amyloidosis usually causes nephrotic syndrome needing diuretics; in cast nephropathy diuretics are unnecessary and may be contraindicated.
+    src: { page: 500, quote: "while diuretic is not necessary and is potentially contraindicated in light chain cast nephropathy." }
+    status: unverified
+  - id: neph.L14.187
+    kind: card
+    topic: dysprot
+    front: What decides treatment of MGRS-type kidney disease now?
+    back: The nature of the clone producing the M protein, not the renal histology; RAS blockade and traditional immunosuppression rarely prevent ESRD.
+    src: { page: 501, quote: "Treatment is no longer decided by the renal histology but rather, is decided by the nature of the clone producing the M protein." }
+    status: unverified
+  - id: neph.L14.188
+    kind: card
+    topic: dysprot
+    front: Which drug is most important in monoclonal gammopathy glomerular disease, and with what results?
+    back: Bortezomib; with cyclophosphamide and dexamethasone, response up to 94%, VGPR 66-71%. Also most effective in MIDD.
+    src: { page: 501, quote: "In combination with cyclophosphamide and dexamethasone, bortezomib produced response rates as high as 94%" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L14.189
+    kind: card
+    topic: dysprot
+    front: How is a very good partial response (VGPR) measured?
+    back: "Involved minus uninvolved serum FLC (dFLC) <40 mg/L, or >90% fall in dFLC; it predicts overall and renal survival."
+    src: { page: 501, quote: "the involved minus the uninvolved sFLC of <40 mg/L or >90% reduction of difference" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L14.190
+    kind: card
+    topic: dysprot
+    front: How do immunomodulatory drugs compare, and what improves response?
+    back: Thalidomide and lenalidomide are less effective at VGPR; autologous stem cell transplant improves hematologic response.
+    src: { page: 502, quote: "the hematologic response can be improved by the addition of autologous stem cell transplant." }
+    status: unverified
+  # ---------- p503: sarcoidosis ----------
+  - id: neph.L14.191
+    kind: table
+    topic: sarcoid
+    title: Kidney involvement in sarcoidosis and its treatment (p503)
+    columns: [Lesion, First line, Alternatives]
+    rows:
+      - ["Hypercalcemia, hypercalciuria", "Prednisone 0.3-0.5 mg/kg/d, then 5-10 mg/d", "HCQ 200-400 mg/d, ketoconazole 200-800 mg/d; hydration, less sun, low Ca/vit D/oxalate, avoid thiazide"]
+      - ["Granulomatous interstitial nephritis", "Prednisone 1 mg/kg/d (mild 0.5), then 5-10 mg/d", "Azathioprine 2 mg/kg/d, MMF 1 g twice daily, infliximab 3-5 mg/kg"]
+      - ["Glomerular disease or tubular dysfunction", "Prednisone 1 mg/kg/d, then 5-10 mg/d", "Methotrexate 10-20 mg/week with folic acid"]
+      - ["Nephrolithiasis, nephrocalcinosis", "Metabolic control", "Surgery for stones; control Ca"]
+    blanks: [[0, 1], [1, 1], [1, 2], [2, 2]]
+    src: { page: 503, quote: "Granulomatous Interstitial Nephritis" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L14.192
+    kind: card
+    topic: sarcoid
+    front: In sarcoid granulomatous interstitial nephritis, when is a steroid-sparing agent added?
+    back: On relapse or difficulty tapering steroids.
+    src: { page: 503, quote: "Add a steroid-sparing agent to the threatment if relapse or dificulty to taper" }
+    status: unverified
+  - id: neph.L14.193
+    kind: card
+    topic: sarcoid
+    front: Which diuretic should be avoided in sarcoid hypercalciuria?
+    back: Thiazides (they raise calcium).
+    src: { page: 503, quote: "Avoid thiazide" }
+    status: unverified
+  # ---------- cases and essays ----------
+  - id: neph.L14.194
+    kind: case
+    topic: hrs
+    stem: "A 55-year-old man with HCV cirrhosis and tense ascites, on furosemide, spironolactone and propranolol, has creatinine 1.0 rising to 1.6 mg/dL in 48 h. BP 100/60, no shock."
+    steps:
+      - question: First step?
+        options:
+          - Stop diuretics and beta-blocker, give albumin 1 g/kg/day for 2 days
+          - Start terlipressin immediately
+          - Give furosemide infusion
+          - Kidney biopsy
+        answer: 0
+        why: "Stop diuretics and beta-blockers; volume expansion with albumin 1 g/kg/day (max 100 g) for 2 days (p491-492)."
+      - reveal: "After 48 h creatinine is 2.0. Urine protein 120 mg/day, no hematuria, normal ultrasound, FENa 0.1%."
+        question: Diagnosis?
+        options:
+          - HRS-AKI
+          - Acute tubular necrosis
+          - HCV cryoglobulinemic GN
+          - Prerenal AKI responding to fluid
+        answer: 0
+        why: "No response to albumin, no shock, no parenchymal disease, FENa <0.1% = HRS-AKI (Box 1)."
+      - question: Drug treatment?
+        options:
+          - Terlipressin plus albumin
+          - Albumin alone
+          - Dopamine
+          - Norepinephrine on the ward without a central line
+        answer: 0
+        why: "Terlipressin + albumin beats albumin alone; noradrenaline needs ICU (p492-493)."
+      - question: Definitive treatment?
+        options:
+          - Liver transplantation
+          - Lifelong dialysis
+          - TIPS for everyone
+          - Kidney transplant alone
+        answer: 0
+        why: "LT is optimal regardless of drug response (p494)."
+    src: { page: 492, quote: "When HRS-AKI is diagnosed, a specific pharmacological treatment should start as soon as possible." }
+    status: unverified
+  - id: neph.L14.195
+    kind: case
+    topic: hus
+    stem: "A 28-year-old woman 2 weeks postpartum has Hb 7.5, platelets 60,000, schistocytes, LDH 1400, creatinine 4.2 mg/dL. No diarrhea. Coombs negative."
+    steps:
+      - question: Which test separates TTP from the rest?
+        options:
+          - ADAMTS13 activity
+          - Stool Shiga toxin
+          - Anti-dsDNA
+          - Serum C3
+        answer: 0
+        why: "ADAMTS13 <10% = TTP; >10% = non-TTP TMA (p468)."
+      - reveal: "ADAMTS13 is 55%. Stool STEC negative. No other disease found."
+        question: Most likely diagnosis?
+        options:
+          - Atypical HUS
+          - TTP
+          - STEC-HUS
+          - DIC
+        answer: 0
+        why: "ADAMTS13 >10%, no co-existing disease, STEC negative = aHUS; pregnancy can trigger it (p468, p473)."
+      - question: First-line treatment?
+        options:
+          - Eculizumab
+          - Antibiotics
+          - Platelet transfusion
+          - Rituximab
+        answer: 0
+        why: "aHUS: eculizumab first-line, plasma exchange second-line (p476)."
+      - question: Before eculizumab, what must she receive?
+        options:
+          - Vaccines against encapsulated organisms
+          - Iron infusion
+          - Hepatitis A vaccine only
+          - Nothing
+        answer: 0
+        why: "Eculizumab raises risk of S. pneumoniae and H. influenzae infection (p477)."
+    src: { page: 476, quote: "The cornerstones of treatment for aHUS are first-line treatment with eculizumab and second-line with plasma exchange." }
+    status: unverified
+  - id: neph.L14.196
+    kind: essay
+    topic: tma
+    prompt: Compare typical HUS, atypical HUS and TTP in cause, diagnosis and treatment.
+    outline:
+      - "TMA: MAHA + thrombocytopenia (<150,000 or >25% fall) + end-organ damage"
+      - "Typical HUS: STEC 90-95%, children <5, bloody diarrhea; supportive, no antibiotics or antimotility"
+      - "aHUS: complement mutations (CFH, CFI, MCP), 5-10%; eculizumab first, PEX second; graft recurrence"
+      - "TTP: ADAMTS13 <10%, acquired autoantibody; PLASMIC; PEX + steroids, rituximab, caplacizumab; no platelets"
+    src: { page: 470, quote: "The triad of thrombocytopenia, hemolytic anemia, and ischemic end-organ damage defines thrombotic microangiopathy." }
+    status: unverified
+  - id: neph.L14.197
+    kind: essay
+    topic: hcv
+    prompt: Discuss HCV-associated glomerular disease and its management.
+    outline:
+      - "MPGN (cryoglobulinemic, type II 90%), MGN, FSGS, rare others"
+      - "Pathology: subendothelial IgM/IgG, double contours, intraluminal thrombi, vasculitis 30%"
+      - "Pathogenesis: immune complexes with HCV, B-cell clone, direct CD81 entry"
+      - "KDIGO: biopsy; DAA for all; add immunosuppression ± PEX for flare, NS or RPGN; rituximab first-line"
+    src: { page: 488, quote: "We recommend that patients with HCV-associated glomerular disease be treated for HCV (1A)." }
+    status: unverified
+  - id: neph.L14.198
+    kind: essay
+    topic: dysprot
+    prompt: Outline the kidney in monoclonal gammopathies (MGUS, MGRS, myeloma).
+    outline:
+      - "MGUS vs MGRS vs myeloma; 20-30% of myeloma present with low GFR"
+      - "Cast nephropathy: FLC + Tamm-Horsfall in distal tubule; PTC injury via cubilin-megalin"
+      - "Others: AL amyloid, MIDD, Fanconi, PGNMID, C3 glomerulopathy"
+      - "Clone-directed therapy: bortezomib-CyDex (94%, VGPR 66-71%), ASCT; VGPR = dFLC <40 mg/L"
+    src: { page: 496, quote: "The most common cause of decreased GFR in patients with multiple myeloma is light chain cast nephropathy." }
+    status: unverified

@@ -5,18 +5,16 @@
 use batna_core::program::{CourseStatus, Group};
 use dioxus::prelude::*;
 
+use super::CSS;
 use super::{Summary, fmt_hours, hours, set_status, summaries};
 use crate::content::Library;
 use crate::i18n::courses as tx;
-use crate::look::{Css, css};
-
-const CSS: Css = css!("src/courses/courses.css");
 
 /// The order of the map's groups.
 const ORDER: [CourseStatus; 4] =
     [CourseStatus::Active, CourseStatus::Maintenance, CourseStatus::Later, CourseStatus::Archived];
 
-fn status_label(s: CourseStatus) -> &'static str {
+pub(super) fn status_label(s: CourseStatus) -> &'static str {
     match s {
         CourseStatus::Active => tx::ACTIVE,
         CourseStatus::Maintenance => tx::MAINTENANCE,
@@ -43,7 +41,7 @@ fn group_label(g: Group) -> &'static str {
     }
 }
 
-fn group_key(g: Group) -> &'static str {
+pub(super) fn group_key(g: Group) -> &'static str {
     match g {
         Group::Research => "research",
         Group::Clinical => "clinical",

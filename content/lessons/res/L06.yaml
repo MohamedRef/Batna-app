@@ -1,0 +1,1043 @@
+schema: batna.lesson/v1
+lecture: res.L06
+lessons:
+  # ------------------------------------------------------------------
+  - id: res.L06.lesson1
+    title: "التجربة: لما الباحث هو اللي يختار"
+    hook: "في كل الدراسات اللي فاتت كنا بنتفرّج. النهارده الباحث هو اللي بيدّي الـ exposure بإيده."
+    minutes: 8
+    pages: [2, 12]
+    topics: [design-tree, interventions]
+    goals:
+      - "تفرّق بين experimental و observational بسؤال واحد"
+      - "تعرف مكان الـ RCT في هرم الـ evidence وليه هو فوق"
+      - "تعرّف الـ RCT وتعدّ أنواع الـ control"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 3
+        quote: "Did investigator assign exposures?"
+        title: "السؤال اللي بيقسم الشجرة نصين"
+        text: |
+          في المحاضرات اللي فاتت، الـ descriptive والـ analytic، الباحث كان **بيتفرّج** بس: الناس اختاروا بنفسهم يشربوا شيشة أو لأ، وهو بيقيس.
+
+          النهارده السؤال الأول في الشجرة: هل الباحث هو اللي ==assigned the exposure==؟
+
+          - **أيوه** ← **experimental study**: الباحث هو اللي قرّر مين ياخد الـ intervention.
+          - **لأ** ← **observational study**: زي الـ cohort والـ case-control والـ cross-sectional والـ descriptive.
+
+          مثال: عايز تعرف الشيشة بتعمل lung cancer؟ مش هتقدر تقول لنص الناس «اشربوا شيشة» علشان تشوف. فهتعمل observational. لكن عايز تعرف دوا جديد للضغط بينزّله؟ تقدر **تدّيه** بإيدك: experimental.
+      - kind: figure
+        page: 3
+        quote: "Did investigator assign exposures?"
+        title: "شجرة الـ study designs"
+        alt: "Decision tree. Did the investigator assign exposures? Yes leads to experimental study, then random allocation: yes is a randomised controlled trial, no is a non-randomised controlled trial. No leads to observational study, then comparison group: no is descriptive, yes is analytical, which splits by direction into cohort, case-control and cross-sectional."
+        caption: "السؤال الأول: مين اللي اختار الـ exposure؟ لو الباحث، يبقى السؤال التاني: اتوزّع **random** ولا لأ؟"
+        svg: |
+          <svg viewBox="0 0 330 360" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="R06a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="75" y="6" width="180" height="40" rx="6" class="fg-ink"/>
+            <text x="165" y="23" text-anchor="middle" class="t-sm t-b">Did investigator</text>
+            <text x="165" y="39" text-anchor="middle" class="t-sm t-b">assign exposure?</text>
+            <path d="M120 46L70 84" class="fg-arrow" marker-end="url(#R06a)"/>
+            <path d="M210 46L260 84" class="fg-arrow" marker-end="url(#R06a)"/>
+            <text x="78" y="66" class="t-sm t-good t-b">Yes</text>
+            <text x="238" y="66" class="t-sm t-bad t-b">No</text>
+            <rect x="5" y="88" width="150" height="30" rx="6" class="fg-acc"/>
+            <text x="80" y="108" text-anchor="middle" class="t-sm t-b">Experimental</text>
+            <rect x="175" y="88" width="150" height="30" rx="6" class="fg-box"/>
+            <text x="250" y="108" text-anchor="middle" class="t-sm t-b">Observational</text>
+            <text x="80" y="140" text-anchor="middle" class="t-sm t-mut">Random allocation?</text>
+            <path d="M60 146L40 176" class="fg-arrow" marker-end="url(#R06a)"/>
+            <path d="M100 146L120 176" class="fg-arrow" marker-end="url(#R06a)"/>
+            <rect x="5" y="180" width="72" height="44" rx="6" class="fg-good"/>
+            <text x="41" y="198" text-anchor="middle" class="t-sm t-b">RCT</text>
+            <text x="41" y="214" text-anchor="middle" class="t-sm t-mut">yes</text>
+            <rect x="83" y="180" width="72" height="44" rx="6" class="fg-thin"/>
+            <text x="119" y="198" text-anchor="middle" class="t-sm">Quasi-</text>
+            <text x="119" y="214" text-anchor="middle" class="t-sm">experimental</text>
+            <text x="250" y="140" text-anchor="middle" class="t-sm t-mut">Comparison group?</text>
+            <path d="M230 146L205 176" class="fg-arrow" marker-end="url(#R06a)"/>
+            <path d="M270 146L295 176" class="fg-arrow" marker-end="url(#R06a)"/>
+            <rect x="160" y="180" width="80" height="30" rx="6" class="fg-box"/>
+            <text x="200" y="200" text-anchor="middle" class="t-sm">Analytical</text>
+            <rect x="248" y="180" width="77" height="30" rx="6" class="fg-thin"/>
+            <text x="286" y="200" text-anchor="middle" class="t-sm">Descriptive</text>
+            <path d="M200 210L200 236" class="fg-arrow" marker-end="url(#R06a)"/>
+            <text x="200" y="252" text-anchor="middle" class="t-sm t-mut">Direction?</text>
+            <rect x="5" y="270" width="100" height="44" rx="6" class="fg-box"/>
+            <text x="55" y="288" text-anchor="middle" class="t-sm t-b">Cohort</text>
+            <text x="55" y="304" text-anchor="middle" class="t-sm t-mut">forward</text>
+            <rect x="115" y="270" width="100" height="44" rx="6" class="fg-box"/>
+            <text x="165" y="288" text-anchor="middle" class="t-sm t-b">Case-control</text>
+            <text x="165" y="304" text-anchor="middle" class="t-sm t-mut">backward</text>
+            <rect x="225" y="270" width="100" height="44" rx="6" class="fg-box"/>
+            <text x="275" y="288" text-anchor="middle" class="t-sm t-b">Cross-sectional</text>
+            <text x="275" y="304" text-anchor="middle" class="t-sm t-mut">same time</text>
+            <path d="M190 258L60 266M200 258L165 266M210 258L270 266" class="fg-thin"/>
+            <text x="165" y="345" text-anchor="middle" class="t-sm t-acc t-b">Today: the left branch only</text>
+          </svg>
+      - kind: check
+        page: 8
+        quote: "Non randomized interventional studies (Quazi experimental trials)"
+        question: "A surgeon gives a new wound dressing to all patients on his own ward and compares infection rates with the ward next door. Which design is this?"
+        options:
+          - "Non-randomised (quasi-experimental) trial"
+          - "Randomised controlled trial"
+          - "Cohort study"
+          - "Case-control study"
+        answer: 0
+        why:
+          - "صح: هو اللي اختار مين ياخد الـ dressing (assigned)، بس من غير random allocation."
+          - "مفيش randomization؛ العنبر هو اللي حدّد، مش القرعة."
+          - "في الـ cohort الباحث بيتفرّج على exposure موجود، هنا هو اللي ادّاه."
+          - "الـ case-control بيبدأ من الـ outcome ويرجع يدوّر على الـ exposure."
+      - kind: explain
+        page: 4
+        quote: "Based on ability to control for bias and to demonstrate cause and effect in humans"
+        title: "هرم الـ evidence: ليه الـ RCT فوق؟"
+        text: |
+          الهرم مترتّب على حاجة واحدة: ==ability to control for bias== وإن التصميم يقدر **يثبت cause and effect في البني آدمين**.
+
+          - فوق خالص: **clinical practice guidelines** و **meta-analysis / systematic reviews**. دول **secondary (filtered, pre-appraised)**: بيلمّوا دراسات تانية.
+          - بعدهم الـ **primary studies**: الـ **RCT** (prospective, tests treatment)، تحته **cohort**، تحته **case-control**.
+          - تحتهم **case report / case series** و expert opinion و editorials: الهرم بيسميهم **no design**.
+          - وفي القاع **animal and laboratory studies**: مفيهاش بني آدمين أصلًا.
+      - kind: figure
+        page: 4
+        quote: "Hierarchy of Research Designs & Levels of Scientific Evidence"
+        title: "الهرم"
+        alt: "Evidence pyramid from top to bottom: clinical practice guidelines, meta-analysis and systematic reviews (secondary, filtered), randomized controlled trial, cohort studies, case-control studies (primary), case reports and series and expert opinion (no design), animal and laboratory studies (not in humans)."
+        caption: "كل ما تطلع لفوق، الـ bias بيقل والقدرة على إثبات السببية بتزيد. الـ RCT أعلى **primary** design."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <path d="M145 10h40l11 34h-62z" class="fg-thin"/>
+            <text x="165" y="32" text-anchor="middle" class="t-sm">Guidelines</text>
+            <path d="M134 44h62l11 34h-85z" class="fg-thin"/>
+            <text x="165" y="66" text-anchor="middle" class="t-sm">Meta-analysis / SR</text>
+            <path d="M123 78h85l11 34h-107z" class="fg-good"/>
+            <text x="165" y="100" text-anchor="middle" class="t-sm t-b">RCT</text>
+            <path d="M111 112h107l11 34h-130z" class="fg-box"/>
+            <text x="165" y="134" text-anchor="middle" class="t-sm">Cohort</text>
+            <path d="M100 146h130l11 34h-152z" class="fg-box"/>
+            <text x="165" y="168" text-anchor="middle" class="t-sm">Case-control</text>
+            <path d="M89 180h152l11 34h-174z" class="fg-bad"/>
+            <text x="165" y="202" text-anchor="middle" class="t-sm">Case report / series, opinion</text>
+            <path d="M78 214h174l11 34h-197z" class="fg-thin"/>
+            <text x="165" y="236" text-anchor="middle" class="t-sm">Animal and lab (no humans)</text>
+            <text x="8" y="50" class="t-sm t-mut">Secondary</text>
+            <text x="8" y="134" class="t-sm t-acc t-b">Primary</text>
+            <text x="8" y="202" class="t-sm t-bad">No design</text>
+            <text x="165" y="276" text-anchor="middle" class="t-sm t-mut">Up = less bias, stronger cause and effect</text>
+          </svg>
+      - kind: order
+        page: 4
+        quote: "Hierarchy of Research Designs & Levels of Scientific Evidence"
+        prompt: "رتّب هرم الـ evidence من فوق لتحت:"
+        steps:
+          - "Clinical practice guidelines"
+          - "Meta-analysis and systematic reviews"
+          - "Randomized controlled trial"
+          - "Cohort studies"
+          - "Case-control studies"
+          - "Case reports and expert opinion"
+          - "Animal and laboratory studies"
+        why: "الترتيب على قد ما التصميم يقدر **يتحكم في الـ bias ويثبت cause and effect في الإنسان**. الـ RCT أعلى primary study لأن الباحث هو اللي بيوزّع الـ exposure بالقرعة."
+      - kind: explain
+        page: 6
+        quote: "New methods of primary prevention New programs of screening"
+        title: "بنجرّب إيه بالـ RCT؟ مش أدوية بس"
+        text: |
+          ناس كتير فاكرة الـ trial يعني دوا. المحاضرة بتعدّ **7 حاجات** ممكن نقيّمها:
+
+          - **New drugs** و new treatment of diseases
+          - **New medical and health care technology** (جهاز، عملية)
+          - **New methods of primary prevention** (vaccine مثلًا)
+          - **New programs of screening**
+          - **New ways of organizing and delivering health services** (زي نظام حجز جديد في العيادات)
+          - **New community health programs**
+          - **New behavioral intervention programs** (برنامج للإقلاع عن التدخين)
+      - kind: aside
+        tone: joke
+        page: 7
+        quote: "published in the British Medical Journal in 1948, tested whether streptomycin is effective in treating tuberculosis"
+        text: |
+          أول RCT في الطب: **Sir Austin Bradford Hill**، الـ Medical Research Council في إنجلترا، اتنشر في الـ **BMJ سنة 1948**، وجرّب **streptomycin** في الـ **tuberculosis**.
+
+          قبلها كان الـ evidence عبارة عن: «يا دكتور أنا جرّبته على تلات عيانين وبقوا زي الفل». 😄 ومن ساعتها الجملة دي بقت **case series**، تحت في الهرم.
+      - kind: explain
+        page: 12
+        quote: "RCT is an experiment in which subjects in a population are randomly allocated into groups"
+        title: "يعني إيه RCT بالظبط؟"
+        text: |
+          ==RCT== = experiment الناس فيه بيتوزّعوا **randomly** على مجموعتين:
+
+          - **Intervention group**: بياخد الـ preventive أو therapeutic intervention.
+          - **Control group**: بياخد واحد من 3: **placebo**، أو **no treatment**، أو **usual care** (اسمها **active control**).
+
+          وبعدين **نقارن الـ outcomes**.
+
+          وفي الـ RCT إحنا اللي **بنتحكم في الـ exposure**: نوعه، كميته، ومدته.
+      - kind: mnemonic
+        page: 11
+        quote: "We are controlling the exposure (intervention ) regarding: Type Amount Duration"
+        word: "TAD"
+        parts:
+          - { key: "T", text: "Type: نوع الـ intervention (أنهي دوا، أنهي برنامج)" }
+          - { key: "A", text: "Amount: الجرعة أو الكمية" }
+          - { key: "D", text: "Duration: المدة" }
+        hook: "في الـ cohort الناس بتختار الـ exposure بمزاجها. في الـ RCT إنت اللي ماسك **TAD**: النوع والكمية والمدة."
+      - kind: match
+        page: 12
+        quote: "A control to receive : placebo no treatment usual care (active control)"
+        prompt: "وصّل كل control group بنوعه:"
+        pairs:
+          - ["Sugar pills that look like the new drug", "Placebo"]
+          - ["The drug they would get in clinic anyway", "Usual care (active control)"]
+          - ["Nothing at all, just follow-up visits", "No treatment"]
+        why: "الـ **placebo** شكله زي الدوا ومفيهوش مادة فعالة. الـ **usual care** هو العلاج المعتاد، فاسمه **active control**. والـ **no treatment** متابعة بس."
+      - kind: reveal
+        page: 8
+        quote: "Randomization is a key feature"
+        prompt: "المحاضرة بتقول ==Randomization is a key feature==. ليه القرعة مهمة أوي كده؟"
+        answer: |
+          لأن القرعة بتوزّع كل حاجة **بالتساوي** بين المجموعتين: السن، الشدة، التدخين، وحتى الحاجات اللي إنت متعرفهاش ومش بتقيسها.
+
+          فلو لقيت فرق في الـ outcome، يبقى غالبًا من الـ intervention نفسه، مش من إن الدكتور ادّى الدوا الجديد للعيانين الأحسن. (الـ randomization بتمنع **confounding bias**، وهنرجعلها في درس الـ blinding.)
+      - kind: try
+        items: [res.L06.001, res.L06.012, res.L06.013]
+    recap:
+      - "Experimental = الباحث هو اللي **assigned** الـ exposure. لو بالقرعة: RCT. من غير قرعة: quasi-experimental."
+      - "الهرم مترتّب على التحكم في الـ bias وإثبات السببية؛ الـ RCT أعلى primary design."
+      - "أول RCT: Bradford Hill، BMJ 1948، streptomycin للـ TB."
+      - "الـ control: placebo، no treatment، أو usual care (active control)."
+      - "في الـ RCT بنتحكم في الـ exposure: Type, Amount, Duration."
+    practice: [res.L06.001, res.L06.002, res.L06.003, res.L06.004, res.L06.005, res.L06.006, res.L06.007, res.L06.008, res.L06.009, res.L06.010, res.L06.011, res.L06.012, res.L06.013, res.L06.014]
+  # ------------------------------------------------------------------
+  - id: res.L06.lesson2
+    title: "علاج ولا وقاية؟ أحسن ولا مش أوحش؟"
+    hook: "دوا أرخص وأقل أعراض جانبية... محتاج يثبت إنه أحسن؟ ولا كفاية إنه مش أوحش؟"
+    minutes: 9
+    pages: [13, 35]
+    topics: [trial-types, superiority]
+    goals:
+      - "تفرّق بين therapeutic و preventive trial"
+      - "تفرّق بين efficacy و effectiveness"
+      - "تختار بين superiority و equivalence و non-inferiority"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 13
+        quote: "Based on the aspects of interventions being evaluated Based on how participants are exposed to interventions"
+        title: "4 طرق نصنّف بيها الـ RCT"
+        text: |
+          نفس التجربة ممكن توصفها بـ 4 طرق مختلفة، وكل طريقة بتجاوب سؤال:
+
+          - **Aspect of the intervention**: علاج ولا وقاية؟ (الدرس ده)
+          - **How participants are exposed**: parallel، crossover، factorial... (الدرس الجاي)
+          - **Superiority vs equivalence**: عايز تثبت إيه؟ (الدرس ده)
+          - **Who knows what**: الـ blinding (درس لوحده)
+
+          يعني تجربة واحدة ممكن تبقى «therapeutic, parallel, non-inferiority, double-blind» في نفس الوقت.
+      - kind: explain
+        page: 14
+        quote: "Testing the efficacy of a therapeutic procedure (Drug, Surgical procedure etc.)"
+        title: "Therapeutic ولا preventive؟"
+        text: |
+          - ==Clinical (therapeutic) trial==: بيختبر efficacy لـ **therapeutic procedure**: دوا، عملية جراحية.
+          - ==Preventive trial==: بيختبر efficacy لـ **preventive procedure**: vaccine، sera، chemoprophylaxis، personal protective measure، exercise programme.
+
+          أمثلة المحاضرة:
+          - Therapeutic: **β-Blocker Heart Attack Trial (B-HAT)**، JAMA 1981.
+          - Prevention: تجربة **perinatal transmission of HIV**، NEJM 1994.
+      - kind: sort
+        page: 14
+        quote: "Testing the efficacy of a preventive procedure (Vaccine, Sera, Chemoprophylaxis, personal protective measure, exercise programme etc.)"
+        prompt: "حط كل trial في نوعه:"
+        bins: ["Therapeutic", "Preventive"]
+        cards:
+          - { text: "Beta-blocker after a heart attack", bin: 0 }
+          - { text: "New laparoscopic surgical procedure", bin: 0 }
+          - { text: "Hepatitis B vaccine for healthcare workers", bin: 1 }
+          - { text: "Chemoprophylaxis for travellers", bin: 1 }
+          - { text: "Exercise programme to prevent diabetes", bin: 1 }
+          - { text: "Antiretroviral drug to stop mother-to-baby HIV", bin: 1 }
+        why: "اسأل نفسك: الناس دي **عيانة** وبنعالجها؟ ولا **سليمة** وبنمنع عنها المرض؟ الـ B-HAT علاج بعد الـ MI. الـ HIV trial وقاية للطفل من العدوى، حتى لو الدوا اتدّى للأم."
+      - kind: explain
+        page: 17
+        quote: "Efficacy—does the intervention work in the people who actually receive it ?"
+        title: "Efficacy ولا effectiveness؟"
+        text: |
+          - ==Efficacy==: الـ intervention **بيشتغل في اللي فعلًا خدوه**؟ تجارب **explanatory**، على ناس **highly selected**، تحت ظروف **research**.
+          - ==Effectiveness==: بيشتغل إزاي **في اللي اتعرض عليهم**؟ تجارب **pragmatic**، تحت ظروف **usual**.
+
+          الفرق في كلمة: **received** ولا **offered**.
+      - kind: aside
+        tone: analogy
+        page: 17
+        quote: "Efficacy—does the intervention work in the people who actually receive it ?"
+        text: |
+          **Efficacy** زي وصفة الكشري في مطبخ الشيف: المكونات متقاسة بالجرام، والشيف واقف بنفسه. هل الوصفة **ممكن** تطلع حلوة؟
+
+          **Effectiveness** نفس الوصفة في بيتك، بالحلّة اللي عندك، ومراتك نسيت الدقة. هل هتطلع حلوة **في الحقيقة**؟
+
+          الدوا ممكن يبقى efficacious جدًا في التجربة، ومع العيانين اللي بينسوا الجرعات في العيادة الـ effectiveness بتاعته تقل.
+      - kind: check
+        page: 17
+        quote: "Effectiveness—how does the intervention work in those offered. it tend to be pragmatic"
+        question: "A trial gives a new asthma inhaler to every patient who attends the outpatient clinics of a health-insurance hospital, with no extra visits or reminders. What does it measure?"
+        options:
+          - "Effectiveness (pragmatic trial)"
+          - "Efficacy (explanatory trial)"
+          - "Safety only (phase I)"
+          - "Equivalence"
+        answer: 0
+        why:
+          - "صح: اتعرض على كل اللي جايين، تحت ظروف **usual**؛ ده pragmatic."
+          - "الـ efficacy محتاج ناس highly selected وظروف research."
+          - "الـ phase I على healthy volunteers علشان الـ dose، مش في العيادة."
+          - "الـ equivalence عن الـ hypothesis (مفيش فرق)، مش عن الظروف."
+      - kind: explain
+        page: 18
+        quote: "Superiority trials Equivalence trials Non inferiority trials"
+        title: "عايز تثبت إيه؟"
+        text: |
+          3 أنواع على حسب **السؤال**:
+
+          - ==Superiority==: الجديد **أحسن** من القديم.
+          - ==Equivalence==: الجديد **زي** القديم (لا أحسن ولا أوحش).
+          - ==Non-inferiority==: الجديد **مش أوحش** من القديم.
+      - kind: figure
+        page: 18
+        quote: "Superiority trials Equivalence trials Non inferiority trials"
+        title: "3 أسئلة على نفس الخط"
+        alt: "A horizontal line from new drug worse on the left to new drug better on the right, with the old drug at the centre. Superiority claims the right side only; equivalence claims a narrow band around the centre; non-inferiority claims everything from just left of centre to the right."
+        caption: "Superiority: عايز توقع يمين. Equivalence: في الحتة اللي في النص. Non-inferiority: أي حاجة **مش** شمال الخط المتقطع."
+        svg: |
+          <svg viewBox="0 0 330 240" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="R06b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <path d="M10 40h306" class="fg-arrow" marker-end="url(#R06b)"/>
+            <path d="M165 28v24" class="fg-ink"/>
+            <text x="10" y="24" class="t-sm t-bad">New worse</text>
+            <text x="320" y="24" text-anchor="end" class="t-sm t-good">New better</text>
+            <text x="165" y="70" text-anchor="middle" class="t-sm t-mut">= old drug</text>
+            <path d="M135 30v190" class="fg-thin"/>
+            <path d="M195 30v190" class="fg-thin"/>
+            <text x="8" y="104" class="t-sm t-b">Superiority</text>
+            <rect x="195" y="90" width="125" height="22" rx="4" class="fg-good"/>
+            <text x="8" y="154" class="t-sm t-b">Equivalence</text>
+            <rect x="135" y="140" width="60" height="22" rx="4" class="fg-acc"/>
+            <text x="8" y="204" class="t-sm t-b">Non-inferiority</text>
+            <rect x="135" y="190" width="185" height="22" rx="4" class="fg-acc"/>
+          </svg>
+      - kind: reveal
+        page: 19
+        quote: "Fewer side effects, Greater convenience, Lower cost, Higher quality of life . Fewer drug interaction"
+        prompt: "طب ليه حد يعمل trial علشان يثبت إن دواه **مش أوحش** بس؟ ما يثبت إنه أحسن!"
+        answer: |
+          لأن الجديد ساعات مش محتاج يبقى أقوى؛ كفاية إن عنده ميزة تانية:
+
+          - **Fewer side effects**
+          - **Greater convenience** (برشامة مرة في اليوم بدل حقنة)
+          - **Lower cost**
+          - **Higher quality of life**
+          - **Fewer drug interactions**
+          - وبصراحة المحاضرة بتقولها: وسيلة لملء السوق بأدوية متشابهة **علشان العيان يبقى عنده اختيارات**.
+      - kind: explain
+        page: 26
+        quote: "Comparison of oral amoxicillin and intravenous benzyl penicillin for community acquired pneumonia in children"
+        title: "مثال: PIVOT trial"
+        text: |
+          أطفال داخلين المستشفى بـ **community-acquired pneumonia**. نص ياخد **oral amoxicillin**، ونص **IV benzyl penicillin**.
+
+          ده **multicentre pragmatic randomised equivalence trial** (Thorax 2007). والنتيجة: **equivalent**؛ الحرارة نزلت في **1.3 days** في المجموعتين.
+
+          المكسب؟ الطفل ميتعذبش بالـ **cannula**، ويقعد في المستشفى أقل. ودي ميزة الـ equivalence: نفس النتيجة بوجع أقل.
+      - kind: case
+        page: 35
+        quote: "less expensive and has fewer side effects, but its efficacy, relative to drug A, is not well established."
+        stem: "Antibiotic A is the standard for community-acquired pneumonia but is expensive with many side effects. New antibiotic B is cheaper with fewer side effects; its efficacy relative to A is not established."
+        steps:
+          - question: "What is the best kind of trial to evaluate B?"
+            options: ["Superiority", "Cross-over", "Cluster", "Non-inferiority", "Equivalence"]
+            answer: 3
+            why: "B مش محتاج يغلب A؛ ميزته السعر والأمان. كفاية نثبت إنه **مش أوحش**: non-inferiority، ودي إجابة المحاضرة. الـ crossover مينفعش في مرض acute زي الـ pneumonia."
+          - question: "What should the control group receive?"
+            options: ["Placebo", "No treatment", "Antibiotic A (active control)"]
+            answer: 2
+            why: "مينفعش تسيب pneumonia من غير antibiotic. المقارنة بالعلاج المعتاد، يعني active control."
+      - kind: try
+        items: [res.L06.021, res.L06.024, res.L06.027]
+    recap:
+      - "Therapeutic = بنعالج (دوا، عملية). Preventive = بنمنع (vaccine، chemoprophylaxis، exercise)."
+      - "Efficacy: في اللي **خدوه**، explanatory، ظروف research. Effectiveness: في اللي **اتعرض عليهم**، pragmatic، ظروف usual."
+      - "Superiority = أحسن. Equivalence = زيّه. Non-inferiority = مش أوحش."
+      - "ليه non-inferiority؟ side effects أقل، أسهل، أرخص، quality of life أعلى، interactions أقل، اختيارات أكتر."
+    practice: [res.L06.015, res.L06.016, res.L06.017, res.L06.018, res.L06.019, res.L06.020, res.L06.021, res.L06.022, res.L06.023, res.L06.024, res.L06.025, res.L06.026, res.L06.027, res.L06.083]
+  # ------------------------------------------------------------------
+  - id: res.L06.lesson3
+    title: "اتوزّعوا إزاي؟ من parallel لـ cluster"
+    hook: "العيان ياخد علاج واحد؟ ولا الاتنين بالدور؟ ولا نوزّع قرى بحالها؟"
+    minutes: 10
+    pages: [20, 34]
+    topics: [allocation]
+    goals:
+      - "تعرّف parallel و crossover و factorial و split-body و cluster"
+      - "تعدّ مميزات وعيوب وشروط الـ crossover"
+      - "تحسب الـ washout period"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 20
+        quote: "Each participant is randomly assigned to a group, and all the participants in the group receives (or does not receive) an intervention"
+        title: "Parallel: كل واحد في حارته"
+        text: |
+          ==Parallel-group==: كل مشارك بيتوزّع **randomly** على مجموعة، وكل المجموعة دي بتاخد (أو مبتاخدش) الـ intervention **طول التجربة**.
+
+          زي حارتين في طريق سريع: كل عربية في حارتها لحد الآخر، وفي الآخر بنقارن مين وصل الأول. ده الأشهر: **78%** من الـ RCTs.
+      - kind: figure
+        page: 24
+        quote: "Follow-up and outcome assessment"
+        title: "Parallel قصاد crossover"
+        alt: "Parallel design: group 1 gets treatment A then follow-up, group 2 gets treatment B then follow-up. Crossover design: group 1 gets A, washout, then B, then follow-up; group 2 gets B, washout, then A, then follow-up."
+        caption: "في الـ parallel كل مجموعة بعلاج واحد. في الـ crossover المجموعتين بياخدوا الاتنين بالعكس، وفي النص **washout**."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <text x="165" y="18" text-anchor="middle" class="t-b">Parallel</text>
+            <text x="8" y="50" class="t-sm">Group 1</text>
+            <rect x="64" y="34" width="110" height="26" rx="5" class="fg-acc"/>
+            <text x="119" y="52" text-anchor="middle" class="t-sm">Treatment A</text>
+            <rect x="180" y="34" width="142" height="26" rx="5" class="fg-thin"/>
+            <text x="251" y="52" text-anchor="middle" class="t-sm">Follow-up, outcome</text>
+            <text x="8" y="90" class="t-sm">Group 2</text>
+            <rect x="64" y="74" width="110" height="26" rx="5" class="fg-good"/>
+            <text x="119" y="92" text-anchor="middle" class="t-sm">Treatment B</text>
+            <rect x="180" y="74" width="142" height="26" rx="5" class="fg-thin"/>
+            <text x="251" y="92" text-anchor="middle" class="t-sm">Follow-up, outcome</text>
+            <text x="165" y="146" text-anchor="middle" class="t-b">Crossover</text>
+            <text x="8" y="178" class="t-sm">Group 1</text>
+            <rect x="64" y="162" width="70" height="26" rx="5" class="fg-acc"/>
+            <text x="99" y="180" text-anchor="middle" class="t-sm">A</text>
+            <rect x="138" y="162" width="74" height="26" rx="5" class="fg-thin"/>
+            <text x="175" y="180" text-anchor="middle" class="t-sm t-mut">Washout</text>
+            <rect x="216" y="162" width="70" height="26" rx="5" class="fg-good"/>
+            <text x="251" y="180" text-anchor="middle" class="t-sm">B</text>
+            <text x="8" y="218" class="t-sm">Group 2</text>
+            <rect x="64" y="202" width="70" height="26" rx="5" class="fg-good"/>
+            <text x="99" y="220" text-anchor="middle" class="t-sm">B</text>
+            <rect x="138" y="202" width="74" height="26" rx="5" class="fg-thin"/>
+            <text x="175" y="220" text-anchor="middle" class="t-sm t-mut">Washout</text>
+            <rect x="216" y="202" width="70" height="26" rx="5" class="fg-acc"/>
+            <text x="251" y="220" text-anchor="middle" class="t-sm">A</text>
+            <text x="165" y="262" text-anchor="middle" class="t-sm t-acc t-b">Each subject is their own control</text>
+          </svg>
+      - kind: explain
+        page: 22
+        quote: "subjects are randomised to therapy 1 or 2 and after being observed for a period they switch therapy."
+        title: "Crossover: كل واحد بياخد الاتنين"
+        text: |
+          في الـ ==planned crossover==: المشاركين بيتوزّعوا randomly على therapy 1 أو 2، وبعد فترة متابعة **بيبدّلوا**.
+
+          فكل مشارك بقى ==his own control==. ده بيخلّي الخصائص الثابتة (السن، الوزن، الجينات، شدة المرض) **constant** بين العلاجين.
+
+          وفيه كمان ==unplanned crossover==: مثال المحاضرة **bypass surgery**: ناس اتقرعوا على surgery ورفضوا العملية، وناس اتقرعوا على medical واحتاجوا عملية. دي مش تصميم، دي مشكلة بتحصل.
+      - kind: reveal
+        page: 25
+        quote: "Comparisons within individuals Subjective outcomes can be used (with blinding) Reduces sample size needed"
+        prompt: "ليه الـ crossover بيحتاج **sample size أصغر**؟"
+        answer: |
+          لأن المقارنة **within individuals**: بتقارن الحاج محمد بنفسه، مش بحد تاني.
+
+          في الـ parallel الفرق بين الناس (واحد ضغطه 140 وواحد 180) بيعمل «دوشة» محتاج ناس كتير علشان تغطيها. لما الشخص هو control نفسه الدوشة دي بتختفي، فعدد أقل يكفي.
+      - kind: sort
+        page: 25
+        quote: "Carryover Washout period Need to consider effect of the order of interventions (psychological response) Dropouts from 2nd treatment"
+        prompt: "مميزات ولا عيوب الـ crossover؟"
+        bins: ["Advantage", "Disadvantage"]
+        cards:
+          - { text: "Comparisons within individuals", bin: 0 }
+          - { text: "Subjective outcomes can be used (with blinding)", bin: 0 }
+          - { text: "Smaller sample size", bin: 0 }
+          - { text: "Carryover", bin: 1 }
+          - { text: "Washout period needed", bin: 1 }
+          - { text: "Order effect (psychological response)", bin: 1 }
+          - { text: "Dropouts from the 2nd treatment", bin: 1 }
+        why: "العيوب كلها من فكرة «بالدور»: الدوا الأول ممكن يفضل شغّال (**carryover**)، فلازم **washout** يطوّل التجربة، والترتيب نفسه ممكن يأثر نفسيًا، والناس بتزهق وتمشي قبل العلاج التاني."
+      - kind: explain
+        page: 27
+        quote: "The disease should be chronic ( Asthma , osteoarthritis ) and stable"
+        title: "امتى ينفع crossover؟"
+        text: |
+          6 شروط في المحاضرة:
+
+          - المرض **chronic and stable** (asthma، osteoarthritis). لو acute هيخف قبل الفترة التانية.
+          - تأثير الدوا **يظهر جوه فترة العلاج**.
+          - ==Washout = five times the half-life== للدوا.
+          - **مينفعش غالبًا في vaccine trials** لأن الـ **immune system** اتأثر خلاص.
+          - **ينفع في phase I**.
+          - بيحتاج **sample size أصغر**.
+      - kind: check
+        page: 27
+        quote: "Wash out period five times half life of the drug"
+        question: "In a crossover trial of a drug with a half-life of 8 hours, what is the minimum washout period?"
+        options: ["8 hours", "16 hours", "40 hours", "80 hours"]
+        answer: 2
+        why:
+          - "ده half-life واحد بس؛ لسه نص الدوا موجود."
+          - "اتنين half-lives لسه ربع الدوا موجود."
+          - "صح: **5 × 8 = 40 hours**؛ بعد 5 half-lives الدوا تقريبًا خلص (أقل من 4%)."
+          - "ده 10 half-lives؛ أطول من اللي المحاضرة طالباه."
+      - kind: aside
+        tone: trap
+        page: 27
+        quote: "Generally can not be used in vaccine trials because the immune system is affected"
+        text: |
+          فخ متكرر: «crossover vaccine trial». الـ vaccine بيسيب **memory** في الـ immune system، يعني الـ carryover **دايم**. مفيش washout ينفع. نفس المنطق لأي علاج بيشفي خالص (زي eradication الـ H. pylori).
+      - kind: explain
+        page: 28
+        quote: "In which the two or more modalities are tested (both given, either one given, none given)."
+        title: "Factorial: سؤالين بتجربة واحدة"
+        text: |
+          ==Factorial design==: بنختبر **two or more modalities** (interventions) في نفس التجربة: الاتنين (both given)، أو واحد بس، أو ولا حاجة (none given).
+
+          مثال المحاضرة: **aspirin** للـ primary prevention من الـ cardiovascular disease، و **beta-carotene** للـ primary prevention من الـ cancer. بنقرع مرتين، فيطلع **4 مجموعات**.
+
+          - الميزة: **informative, efficient and less expensive**.
+          - العيوب: ممكن يبقى فيه **interaction** بين الاتنين، وده بيأثر على الـ sample size. وكمان **complexity**، وتأثير على الـ compliance والـ recruitment، و adverse effects من الـ **polypharmacy**.
+      - kind: figure
+        page: 29
+        quote: "Two-by-two factorial study design"
+        title: "الـ 2×2"
+        alt: "Two-by-two factorial table. Rows: aspirin or aspirin placebo. Columns: beta-carotene or beta-carotene placebo. Four cells: both active, aspirin only, beta-carotene only, both placebos."
+        caption: "قرعة أولى للـ aspirin، وقرعة تانية للـ beta-carotene. نص التجربة بيجاوب سؤال الـ aspirin، ونفس الناس بيجاوبوا سؤال الـ beta-carotene: **efficiency**."
+        svg: |
+          <svg viewBox="0 0 330 220" xmlns="http://www.w3.org/2000/svg">
+            <text x="210" y="18" text-anchor="middle" class="t-sm t-b">Beta-carotene</text>
+            <text x="160" y="40" text-anchor="middle" class="t-sm">Active</text>
+            <text x="260" y="40" text-anchor="middle" class="t-sm">Placebo</text>
+            <text x="8" y="90" class="t-sm t-b">Aspirin</text>
+            <text x="8" y="106" class="t-sm">active</text>
+            <text x="8" y="170" class="t-sm t-b">Aspirin</text>
+            <text x="8" y="186" class="t-sm">placebo</text>
+            <rect x="110" y="50" width="100" height="70" rx="6" class="fg-good"/>
+            <text x="160" y="82" text-anchor="middle" class="t-sm t-b">Both</text>
+            <text x="160" y="100" text-anchor="middle" class="t-sm">active</text>
+            <rect x="215" y="50" width="100" height="70" rx="6" class="fg-acc"/>
+            <text x="265" y="82" text-anchor="middle" class="t-sm t-b">Aspirin</text>
+            <text x="265" y="100" text-anchor="middle" class="t-sm">only</text>
+            <rect x="110" y="128" width="100" height="70" rx="6" class="fg-acc"/>
+            <text x="160" y="160" text-anchor="middle" class="t-sm t-b">Beta-carotene</text>
+            <text x="160" y="178" text-anchor="middle" class="t-sm">only</text>
+            <rect x="215" y="128" width="100" height="70" rx="6" class="fg-thin"/>
+            <text x="265" y="160" text-anchor="middle" class="t-sm t-b">Both</text>
+            <text x="265" y="178" text-anchor="middle" class="t-sm">placebo</text>
+          </svg>
+      - kind: check
+        page: 30
+        quote: "Possibility of the existence of interaction and its impact on the sample size"
+        question: "The factorial study design increases which of the following?"
+        options: ["Power of the study", "Generalizability", "Internal validity", "Study efficiency"]
+        answer: 3
+        why:
+          - "بالعكس، الـ interaction ممكن تكبّر الـ sample size المطلوب."
+          - "الـ generalizability من مين اشترك، مش من شكل التصميم."
+          - "الـ internal validity من الـ randomization والـ blinding، موجودين في أي RCT."
+          - "صح، وده سؤال المحاضرة: سؤالين بتجربة واحدة = **efficient, less expensive**."
+      - kind: explain
+        page: 32
+        quote: "pre-existing groups of participants (e.g., villages, schools) are randomly selected to receive (or not receive) an intervention"
+        title: "Split-body و cluster"
+        text: |
+          - ==Split-body==: **أجزاء من جسم نفس الشخص** بتتقرع: الناحية اليمين من الوش تاخد الكريم الجديد والشمال القديم. (طب الجلد والأسنان بيحبوه.)
+          - ==Cluster==: بنقرع **مجموعات موجودة أصلًا**: قرى، مدارس. مثلًا 40 قرية في سوهاج، 20 ياخدوا برنامج مياه نضيفة و20 لأ.
+
+          ليه cluster؟ لأن فيه interventions مينفعش تدّيها لفرد: مينفعش تعمل حملة توعية لنص التلاميذ في نفس الفصل، الكلام هيتنقل في الفسحة.
+      - kind: match
+        page: 32
+        quote: "separate parts of the body of each participant (e.g., the left and right sides of the face) are randomized"
+        prompt: "وصّل كل سيناريو بالتصميم:"
+        pairs:
+          - ["New acne cream on one random side of each face", "Split-body"]
+          - ["Schools randomised to a hand-washing campaign", "Cluster"]
+          - ["Asthma patients take inhaler A then B after a washout", "Crossover"]
+          - ["Aspirin or placebo, then beta-carotene or placebo", "Factorial"]
+          - ["Each patient stays on drug A or drug B throughout", "Parallel"]
+      - kind: aside
+        tone: exam
+        page: 33
+        quote: "78% were parallel-group trials, 16% were crossover, 2% were split-body, 2% were cluster."
+        text: |
+          رقم ممكن يجي: من **616 RCT** في PubMed (ديسمبر 2006): **parallel 78%**، **crossover 16%**، **split-body 2%**، **cluster 2%**.
+
+          افتكرها كده: الـ parallel هو «الفول» بتاع الـ RCTs، كل يوم على السفرة. والـ split-body والـ cluster «فسيخ شم النسيم»، مرة في السنة. 😄
+      - kind: try
+        items: [res.L06.029, res.L06.035, res.L06.036]
+    recap:
+      - "Parallel: كل واحد بعلاج واحد طول التجربة (78%)."
+      - "Crossover: كل واحد بياخد الاتنين بالدور، فهو control نفسه؛ sample أصغر، بس carryover و washout و order effect و dropouts."
+      - "شروط الـ crossover: مرض chronic stable، washout = 5 half-lives، مش للـ vaccines، ينفع في phase I."
+      - "Factorial: intervention اتنين في تجربة واحدة (aspirin + beta-carotene)؛ بيزوّد الـ efficiency."
+      - "Split-body: أجزاء من نفس الجسم. Cluster: قرى أو مدارس."
+    practice: [res.L06.028, res.L06.029, res.L06.030, res.L06.031, res.L06.032, res.L06.033, res.L06.034, res.L06.035, res.L06.036, res.L06.037, res.L06.038, res.L06.039, res.L06.040, res.L06.041, res.L06.042, res.L06.043, res.L06.044, res.L06.045, res.L06.046, res.L06.047, res.L06.048, res.L06.082]
+  # ------------------------------------------------------------------
+  - id: res.L06.lesson4
+    title: "من المعمل للصيدلية: الـ phases"
+    hook: "من 10,000 مادة بتتجرّب، واحدة بس بتوصل الصيدلية. الـ 9,999 التانيين وقعوا فين؟"
+    minutes: 9
+    pages: [5, 41]
+    topics: [drug-phases]
+    goals:
+      - "ترتّب مراحل تطوير الدوا"
+      - "تعرف كل phase بيسأل إيه، على مين، وكام واحد"
+      - "تعرف ليه phase IV موجودة"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 5
+        quote: "New Product Development – A Risky and Expensive Proposition"
+        title: "مشوار طويل وغالي"
+        text: |
+          الدوا الجديد ==A Risky and Expensive Proposition==:
+
+          - **Discovery** (2–10 سنين)، بعدها **preclinical testing** في المعمل وعلى الحيوانات.
+          - بعدها **Phase I، II، III**، وبعدين **FDA review approval**، وبعدها **post-marketing testing**.
+          - من **5,000–10,000** مادة بيتعملهم screening: **250** يدخلوا preclinical، **5** يدخلوا clinical testing، وواحدة بس **approved**.
+          - التكلفة على الشريحة: حوالي **$802 million** على مدى **15 سنة**.
+      - kind: figure
+        page: 5
+        quote: "New Product Development – A Risky and Expensive Proposition"
+        title: "القمع"
+        alt: "New drug development as a funnel narrowing from 5,000 to 10,000 compounds screened, to 250 entering preclinical testing, to 5 entering clinical testing, to 1 approved by the FDA."
+        caption: "كل مرحلة بتصفّي. لما تقرا «Phase III failed» في الأخبار، افتكر إن ده الطبيعي مش الاستثناء."
+        svg: |
+          <svg viewBox="0 0 330 260" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 10h300l-50 56h-200z" class="fg-thin"/>
+            <text x="165" y="34" text-anchor="middle" class="t-b">5,000-10,000</text>
+            <text x="165" y="54" text-anchor="middle" class="t-sm t-mut">screened</text>
+            <path d="M65 72h200l-40 56h-120z" class="fg-box"/>
+            <text x="165" y="96" text-anchor="middle" class="t-b">250</text>
+            <text x="165" y="116" text-anchor="middle" class="t-sm t-mut">enter preclinical</text>
+            <path d="M95 134h140l-25 56h-90z" class="fg-acc"/>
+            <text x="165" y="158" text-anchor="middle" class="t-b">5</text>
+            <text x="165" y="178" text-anchor="middle" class="t-sm t-mut">enter clinical</text>
+            <rect x="120" y="196" width="90" height="44" rx="8" class="fg-good"/>
+            <text x="165" y="214" text-anchor="middle" class="t-b">1</text>
+            <text x="165" y="232" text-anchor="middle" class="t-sm">approved</text>
+          </svg>
+      - kind: order
+        page: 5
+        quote: "New Product Development – A Risky and Expensive Proposition"
+        prompt: "رتّب مشوار الـ drug development من الفكرة للسوق:"
+        steps:
+          - "Discovery"
+          - "Preclinical: laboratory and animal testing"
+          - "Safety and dosage in 20-80 healthy volunteers"
+          - "Efficacy and side effects in 100-300 patients"
+          - "Long-term adverse reactions in 1,000-5,000 patients"
+          - "FDA review approval"
+          - "Additional post-marketing testing"
+      - kind: explain
+        page: 37
+        quote: "To find safe range of dose"
+        title: "Phase I: هل هو آمن؟ وبأنهي جرعة؟"
+        text: |
+          - الهدف: ==To find safe range of dose==، ونختبر **pharmacokinetics** و **dose-response**.
+          - على **healthy volunteers**، **إلا في الـ cancer والـ HIV**.
+          - **Open label**، **non randomized**، **uncontrolled**.
+          - لحد **100** متطوع.
+      - kind: reveal
+        page: 37
+        quote: "On healthy volunteers ( Except cancer and HIV)"
+        prompt: "ليه phase I في الـ cancer والـ HIV بيتعمل على **عيانين** مش متطوعين أصحاء؟"
+        answer: |
+          لأن أدوية الـ cancer (chemotherapy) والـ HIV ليها toxicity عالية. مينفعش أخلاقيًا تدّي سم لواحد سليم مش هيستفيد حاجة.
+
+          العيان على الأقل عنده فرصة يستفيد، فالـ risk بيبقى ليه مقابل.
+      - kind: explain
+        page: 38
+        quote: "clinical trials to evaluate efficacy ( and safety) in selected patients"
+        title: "Phase II و Phase III"
+        text: |
+          **Phase II (therapeutic exploratory)**: على **selected patients** علشان نشوف الـ **efficacy** (والـ safety). الأسئلة: الـ dose-response، أنهي نوع عيانين، كام مرة في اليوم.
+
+          **Phase III**: التجربة «الكبيرة»:
+          - ==Large sample (1000-3000)==
+          - **Randomized**، **active-controlled**، **double blind**، **parallel**، **multicentre**.
+          - بنقارن بالـ **current gold standard**.
+      - kind: table
+        page: 36
+        quote: "20-100 volunteers 100-500 patients 1,000-5,000 patients"
+        title: "الـ 4 phases في جدول"
+        columns: ["Phase", "Question", "Who and how many"]
+        rows:
+          - ["Phase 1", "Safety (first in humans)", "20-100 volunteers"]
+          - ["Phase 2", "Efficacy: how well does it work?", "100-500 patients"]
+          - ["Phase 3", "Confirm; compare with the gold standard", "1,000-5,000 patients"]
+          - ["Phase 4", "Safety surveillance", "Real-life patients"]
+        hide: [[0, 1], [1, 1], [2, 2], [3, 1]]
+      - kind: aside
+        tone: trap
+        page: 38
+        quote: "Large sample ( 1000-3000) Randomized Active- controlled Double blind Parallel Multicentre"
+        text: |
+          الأرقام مختلفة شوية بين الشرايح: شريحة بتقول phase I **20–80** وشريحة **20–100** (وشريحة تانية «up to 100»)، و phase III **1,000–5,000** في مكان و **1000–3000** في مكان.
+
+          في الامتحان الـ MCQ غالبًا بيسأل عن **الترتيب**: phase I أقل من 100، phase II بالمئات، phase III بالآلاف. لو الاختيارات فيها رقم من الشرايح، اختار اللي في نفس الـ range.
+      - kind: explain
+        page: 39
+        quote: "Involve long term safety surveillance to detect rare side effects"
+        title: "Phase IV: بعد ما الدوا نزل"
+        text: |
+          ==Postmarketing surveillance==: **long-term safety surveillance** علشان نلقط الـ **rare side effects**.
+
+          - ساعات الـ FDA بتطلبها: interactions مع أدوية تانية، أو فئات معينة.
+          - لو ظهرت adverse effects ممكن الدوا **يتسحب أو يتقيّد**. المثال: **Vioxx**.
+          - وهي **uncontrolled, observational**.
+
+          ليه الـ rare side effects مبتظهرش قبل كده؟ side effect بيحصل لواحد من 10,000 مش هيظهر في phase III فيها 3,000 عيان.
+      - kind: check
+        page: 40
+        quote: "It usually involves a comparison between different treatments."
+        question: "Which of the following characterizes phase III drug testing?"
+        options:
+          - "It usually requires small patient numbers."
+          - "It can be done without approval."
+          - "It usually involves a comparison between different treatments."
+          - "It always demonstrates superiority of the new approach."
+        answer: 2
+        why:
+          - "Phase III بالآلاف."
+          - "كل phase محتاج approval."
+          - "صح: active-controlled، بيقارن بالـ gold standard."
+          - "مفيش «always»؛ ممكن يطلع non-inferior أو يفشل."
+      - kind: case
+        page: 41
+        quote: "Incorrect because there is no comparison group"
+        stem: "82 patients with recurrent duodenal ulcers got triple therapy to eradicate H. pylori. The ulcer healed in 78 of those available for endoscopy. The authors say triple therapy is the therapy of choice."
+        steps:
+          - question: "Their inference is:"
+            options: ["Correct", "Incorrect because it is not based on rates", "Incorrect because there is no comparison group", "None of the above"]
+            answer: 2
+            why: "مفيش **comparison group**. يمكن القرحة كانت هتخف لوحدها، أو بعلاج تاني أحسن. «of choice» يعني أحسن من حاجة، وإحنا مقارناش بحاجة."
+          - question: "Which design would answer the question properly?"
+            options: ["A larger case series", "A randomised controlled trial against the current standard treatment", "A cross-sectional survey"]
+            answer: 1
+            why: "علشان تقول «therapy of choice» لازم تقارن بالعلاج المعتاد في RCT؛ ده بالظبط شغل phase III."
+      - kind: try
+        items: [res.L06.051, res.L06.052, res.L06.049]
+    recap:
+      - "5,000–10,000 مادة ← 250 preclinical ← 5 clinical ← 1 approved؛ حوالي $802 million على 15 سنة."
+      - "Phase I: safe dose، healthy volunteers (إلا cancer و HIV)، open label، non-randomized، uncontrolled، لحد 100."
+      - "Phase II: efficacy في selected patients (100–500)."
+      - "Phase III: large، randomized، active-controlled، double blind، parallel، multicentre."
+      - "Phase IV: post-marketing، rare side effects، ممكن سحب الدوا (Vioxx)."
+    practice: [res.L06.049, res.L06.050, res.L06.051, res.L06.052, res.L06.053, res.L06.054, res.L06.055, res.L06.056, res.L06.057, res.L06.058, res.L06.059, res.L06.060]
+  # ------------------------------------------------------------------
+  - id: res.L06.lesson5
+    title: "الـ Blinding: محدش يعرف مين خد إيه"
+    hook: "الدكتور اللي عارف إن العيان خد الدوا الجديد... هيشوف تحسّن حتى لو مفيش."
+    minutes: 7
+    pages: [42, 45]
+    topics: [blinding]
+    goals:
+      - "تشرح ليه الـ blinding بيحمي الـ randomization"
+      - "تربط كل خطوة في الـ RCT بالـ bias اللي بتمنعه"
+      - "تفرّق single و double و triple"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 42
+        quote: "Blinding is important because it preserves the benefits of randomization by preventing the biased assessment of outcomes."
+        title: "ليه نعمّي حد؟"
+        text: |
+          الـ ==blinding (masking)== تاني أهم ميزة في الـ RCT بعد الـ randomization.
+
+          الـ randomization عملت مجموعتين متساويتين في الأول. بس لو الدكتور اللي بيقيس **عارف** مين خد الجديد، هيقيس بعين متحيزة، فيبوّظ اللي القرعة عملته.
+
+          علشان كده: الـ blinding **بيحافظ على مكاسب الـ randomization** لأنه بيمنع **biased assessment of outcomes**، يعني ==measurement bias==.
+      - kind: table
+        page: 42
+        quote: "Blinding therefore prevents measurement bias (as opposed to randomization and concealment which prevent confounding bias and selection bias, respectively)."
+        title: "كل أداة بتمنع bias معين"
+        columns: ["RCT feature", "Bias it prevents"]
+        rows:
+          - ["Randomization", "Confounding bias"]
+          - ["Allocation concealment", "Selection bias"]
+          - ["Blinding", "Measurement bias"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: aside
+        tone: analogy
+        page: 42
+        quote: "preventing the biased assessment of outcomes."
+        text: |
+          عايز تعرف أنهي عربية فول أحلى: عم سيد ولا عم حسن؟ لو صاحبك عارف إن الطبق من عند عم سيد (اللي بيحبه)، هيقول «ده أحلى» قبل ما يدوق.
+
+          حط الطبقين في أطباق شبه بعض ومتقولش مين مين: ده **blinding**، وبيمنع الـ **biased assessment** للطعم. وكمان لو اللي بيعدّ الأصوات مايعرفش، يبقى **triple**.
+      - kind: explain
+        page: 43
+        quote: "Ideally, blinding should occur at all of the following levels: Patients Caregivers"
+        title: "نعمّي مين؟"
+        text: |
+          الأحسن يكون الـ blinding على **كل المستويات** دي:
+
+          - **Patients**
+          - **Caregivers**
+          - **Collectors of outcome data** (research assistants أو study physicians)
+          - **The data analyst**
+
+          والـ blinding بيتغلب على ==ascertainment bias==.
+      - kind: figure
+        page: 45
+        quote: "Type of blinding Single Double Triple Subject"
+        title: "Single, double, triple"
+        alt: "Grid with three rows: single, double and triple blinding. Columns: subject, observer, data analyst. Single blinds the subject only; double blinds subject and observer; triple blinds all three."
+        caption: "كل مستوى بيضيف واحد: **subject**، بعدين **observer**، بعدين **data analyst**."
+        svg: |
+          <svg viewBox="0 0 330 200" xmlns="http://www.w3.org/2000/svg">
+            <text x="140" y="22" text-anchor="middle" class="t-sm t-b">Subject</text>
+            <text x="210" y="22" text-anchor="middle" class="t-sm t-b">Observer</text>
+            <text x="285" y="22" text-anchor="middle" class="t-sm t-b">Analyst</text>
+            <text x="8" y="66" class="t-b">Single</text>
+            <text x="8" y="116" class="t-b">Double</text>
+            <text x="8" y="166" class="t-b">Triple</text>
+            <circle cx="140" cy="60" r="16" class="fg-dot-acc"/>
+            <circle cx="210" cy="60" r="16" class="fg-thin"/>
+            <circle cx="285" cy="60" r="16" class="fg-thin"/>
+            <circle cx="140" cy="110" r="16" class="fg-dot-acc"/>
+            <circle cx="210" cy="110" r="16" class="fg-dot-acc"/>
+            <circle cx="285" cy="110" r="16" class="fg-thin"/>
+            <circle cx="140" cy="160" r="16" class="fg-dot-acc"/>
+            <circle cx="210" cy="160" r="16" class="fg-dot-acc"/>
+            <circle cx="285" cy="160" r="16" class="fg-dot-acc"/>
+            <text x="165" y="196" text-anchor="middle" class="t-sm t-mut">filled = blinded</text>
+          </svg>
+      - kind: check
+        page: 44
+        quote: "Triple blinding –neither subject, observer or person analysing the data have any information about allocation of the subject"
+        question: "In an antiemetic trial, the patients, the nurses counting vomiting episodes and the statistician only see packs coded X and Y. What type of blinding is this?"
+        options: ["Single blind", "Double blind", "Triple blind", "Open label"]
+        answer: 2
+        why:
+          - "الـ single بيعمّي الـ subject بس."
+          - "الـ double: subject و observer، بس الـ analyst عارف."
+          - "صح: الـ subject والـ observer واللي بيحلل الداتا، التلاتة."
+          - "الـ open label يعني مفيش أي محاولة blinding."
+      - kind: reveal
+        page: 43
+        quote: "Blinding overcomes ascertainment bias"
+        prompt: "يعني إيه **ascertainment bias** بكلامنا؟"
+        answer: |
+          إن طريقة **التأكد من الـ outcome** تختلف بين المجموعتين لأن اللي بيقيس عارف مين خد إيه.
+
+          مثال: الطبيب اللي عارف إن العيان على الدوا الجديد يسأله «الصداع بقى أحسن صح؟»، والتاني يسأله «لسه عندك صداع؟». نفس العيان، إجابتين مختلفتين. الـ blinding بيقفل الباب ده.
+      - kind: aside
+        tone: joke
+        page: 44
+        quote: "Unblinded or open label studies – no attempt at blinding"
+        text: |
+          ==Open label== = **no attempt at blinding**: الكل عارف كل حاجة. زي فرح في حارة مصرية: مفيش سر، والعروسة لسه في الكوافير والجيران عارفين الشبكة بكام. 😄
+
+          ده مقبول في phase I، بس في phase III لازم **double blind**.
+      - kind: try
+        items: [res.L06.062, res.L06.065, res.L06.063]
+    recap:
+      - "الـ blinding بيحافظ على مكاسب الـ randomization: بيمنع biased assessment of outcomes (measurement bias)."
+      - "Randomization ← confounding bias. Concealment ← selection bias. Blinding ← measurement bias."
+      - "المستويات: patients، caregivers، outcome collectors، data analyst. وبيتغلب على ascertainment bias."
+      - "Single: subject. Double: + observer. Triple: + data analyst. Open label: مفيش blinding."
+    practice: [res.L06.061, res.L06.062, res.L06.063, res.L06.064, res.L06.065, res.L06.066, res.L06.067]
+  # ------------------------------------------------------------------
+  - id: res.L06.lesson6
+    title: "خطوات الـ RCT: من الفكرة للتحليل"
+    hook: "12 خطوة. أول واحدة فيهم: «هو أنا محتاج أعمل التجربة دي أصلًا؟»"
+    minutes: 10
+    pages: [46, 56]
+    topics: [planning]
+    goals:
+      - "ترتّب الـ 12 خطوة"
+      - "تعرف أنواع الـ outcomes وصفات أحسنها"
+      - "تفرّق inclusion و exclusion criteria والـ target population"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 46
+        quote: "Steps in Planning, Designing and Conduct of a Randomized Controlled Clinical trial"
+        title: "الخريطة: 12 خطوة"
+        text: |
+          الـ ==RCT== بيمشي في 12 خطوة، من التخطيط للتنفيذ للتحليل.
+
+          - **1** Deciding: محتاجين trial؟ ينفع؟ نقدر؟
+          - **2** Hypothesis
+          - **3** Inclusion and exclusion criteria
+          - **4** Defining the populations
+          - **5** Sample size
+          - **6** Measurement protocols
+          - **7** Enrolling the participants
+          - **8** Randomization
+          - **9** Intervention and placebo control
+          - **10** Blinding
+          - **11** Follow up and assessment
+          - **12** Statistical analysis
+      - kind: figure
+        page: 47
+        quote: "Step 8 – Randomization Step 9 - Introduce the Intervention and Placebo Control Modalities"
+        title: "سلّم الـ RCT"
+        alt: "A staircase of three landings. Plan: steps 1 to 6, from deciding whether a trial is needed to measurement protocols. Run: steps 7 to 10, enrolling, randomization, intervention and placebo, blinding. Finish: steps 11 and 12, follow-up and statistical analysis."
+        caption: "قسّمها 3 حتت: **تخطيط** (1–6)، **تنفيذ** (7–10)، **نهاية** (11–12). الـ randomization بييجي **بعد** الـ enrolment، مش قبله."
+        svg: |
+          <svg viewBox="0 0 330 270" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6" y="180" width="170" height="84" rx="6" class="fg-thin"/>
+            <text x="91" y="200" text-anchor="middle" class="t-b">Plan 1-6</text>
+            <text x="91" y="218" text-anchor="middle" class="t-sm">need, hypothesis,</text>
+            <text x="91" y="234" text-anchor="middle" class="t-sm">criteria, population,</text>
+            <text x="91" y="250" text-anchor="middle" class="t-sm">size, protocols</text>
+            <rect x="80" y="96" width="170" height="76" rx="6" class="fg-acc"/>
+            <text x="165" y="118" text-anchor="middle" class="t-b">Run 7-10</text>
+            <text x="165" y="136" text-anchor="middle" class="t-sm">enrol, randomize,</text>
+            <text x="165" y="152" text-anchor="middle" class="t-sm">intervention, blinding</text>
+            <rect x="154" y="16" width="170" height="72" rx="6" class="fg-good"/>
+            <text x="239" y="38" text-anchor="middle" class="t-b">Finish 11-12</text>
+            <text x="239" y="56" text-anchor="middle" class="t-sm">follow up,</text>
+            <text x="239" y="72" text-anchor="middle" class="t-sm">statistical analysis</text>
+          </svg>
+      - kind: order
+        page: 46
+        quote: "Step 1 - Deciding - Is clinical trial really required? Should it be done? Can it be done?"
+        prompt: "رتّب أول 7 خطوات:"
+        steps:
+          - "Is a trial really required?"
+          - "State the research hypothesis"
+          - "Inclusion and exclusion criteria"
+          - "Define the populations"
+          - "Sample size calculation"
+          - "Measurement protocols"
+          - "Enrol the participants"
+      - kind: explain
+        page: 48
+        quote: "Firstly, a detailed review of literature should be undertaken"
+        title: "Step 1: هو احنا محتاجين؟"
+        text: |
+          قبل ما تصرف فلوس وتعرّض ناس لدوا: ==detailed review of literature==.
+
+          ويُفضّل كمان **meta-analysis** للـ published وحتى الـ **unpublished** papers، لأن ممكن تلاقي السؤال **اتجاوب خلاص**. مفيش داعي تعيد اختراع العجلة على حساب العيانين.
+      - kind: explain
+        page: 49
+        quote: "We hypothesize that the 2-year mortality risk in patients receiving treatment A is 30% lower"
+        title: "Step 2: الـ hypothesis والـ variables"
+        text: |
+          الـ hypothesis لازم تبقى **محددة**. مثال المحاضرة:
+
+          «We hypothesize that the **2-year mortality risk** in patients receiving **treatment A** is **30% lower** than among those receiving **standard treatment**.»
+
+          شايف؟ فيها الـ outcome، والمدة، والمقارنة، وحجم الفرق.
+
+          وحدد كمان الـ variables: ==exposure variable==، **co-interventions**، **outcome variable**، و **confounding variables**.
+      - kind: reveal
+        page: 50
+        quote: "In people who take long-haul flights does wearing graduated compression stockings prevent DVT?"
+        prompt: "السؤال ده: «In people who take long-haul flights does wearing graduated compression stockings prevent DVT?» فكّكه: مين، إيه، قصاد إيه، والنتيجة؟"
+        answer: |
+          - **Population**: ناس راكبين **long-haul flights**.
+          - **Intervention**: **graduated compression stockings**.
+          - **Comparison**: من غير stockings.
+          - **Outcome**: **DVT**.
+
+          ده نفس الـ PICO اللي خدتها في محاضرة الـ research question. السؤال الواضح بيطلّع trial واضح.
+      - kind: explain
+        page: 51
+        quote: "Disease aspect: Mortality or survival rate, lab tests, complications, major events, side effects"
+        title: "الـ outcomes: 3 زوايا"
+        text: |
+          - ==Disease aspect==: mortality أو survival rate، lab tests، complications، major events، side effects.
+          - ==Patient aspect==: health-related **quality of life**، symptoms، activities of daily life.
+          - ==Economic aspect==: service utilization زي **length of hospital stay**.
+      - kind: sort
+        page: 51
+        quote: "Health-related quality of life, symptoms, activities of daily life"
+        prompt: "كل outcome تبع أنهي زاوية؟"
+        bins: ["Disease", "Patient", "Economic"]
+        cards:
+          - { text: "28-day mortality", bin: 0 }
+          - { text: "Serum creatinine", bin: 0 }
+          - { text: "Variceal bleeding complication", bin: 0 }
+          - { text: "Quality-of-life score", bin: 1 }
+          - { text: "Can dress and bathe alone", bin: 1 }
+          - { text: "Length of hospital stay", bin: 2 }
+        why: "Disease: الموت، التحاليل، المضاعفات. Patient: إحساسه وحياته اليومية. Economic: استخدام الخدمة، زي عدد أيام المستشفى."
+      - kind: explain
+        page: 52
+        quote: "The best outcome measures are: 1. Objective 2. Clinically relevant end points"
+        title: "أحسن outcome يبقى إزاي؟"
+        text: |
+          - **Objective**
+          - **Clinically relevant end points**: disease rates، death، recovery، complications
+          - أو **hospital/ER use**
+          - متقاس بـ **accuracy and precision**
+          - و ==measured in the same manner in both groups==
+
+          آخر نقطة دي أهم واحدة: لو مجموعة بتتقاس بجهاز والتانية بالعين، الفرق ممكن يبقى من القياس مش من الدوا.
+      - kind: explain
+        page: 53
+        quote: "balance between picking the people who are most likely to benefit without sacrificing the generalizability of the study."
+        title: "Step 3: الـ inclusion criteria"
+        text: |
+          الهدف: نلاقي الـ **sub-population** اللي الـ intervention **feasible** فيهم وهيعمل التأثير المطلوب.
+
+          والاختيار ده ==balance==: تختار اللي **أغلب ظنك هيستفيدوا** من غير ما تضيّع الـ **generalizability**.
+
+          الـ inclusion criteria بتحسّن 4 حاجات: **rate of the primary outcome**، الـ **expected efficacy**، الـ **generalizability**، والـ **recruitment, follow-up and compliance**.
+      - kind: explain
+        page: 54
+        quote: "When the patient is unlikely to complete follow-up or adhere to the protocol."
+        title: "الـ exclusion criteria"
+        text: |
+          بنستبعد لما:
+
+          - العلاج **مش متوقع يشتغل**: المرض **too severe** أو **too mild**، أو العيان **جرّب العلاج وفشل** قبل كده.
+          - فيه ==co-morbidities== هتبوّظ الـ intervention، أو قياس الـ outcome، أو مدة الـ follow-up (زي **terminal cancer**).
+          - العيان **مش هيكمّل الـ follow-up** أو مش هيلتزم بالـ protocol.
+          - أسباب عملية: **language/cognitive barriers**، أو **no phone at home**.
+      - kind: check
+        page: 54
+        quote: "interfere with the intervention, or the measurement of the outcome, or the expected length of follow-up e.g., terminal cancer."
+        question: "A 5-year statin trial excludes a man with terminal pancreatic cancer. Which exclusion reason fits best?"
+        options:
+          - "The disease studied is too mild"
+          - "A co-morbidity would cut short the expected follow-up"
+          - "He already failed the treatment"
+          - "A language barrier"
+        answer: 1
+        why:
+          - "الـ mild/severe عن المرض اللي بندرسه (الـ lipids)، مش الـ cancer."
+          - "صح: الـ terminal cancer هو مثال المحاضرة نفسه لـ co-morbidity بتأثر على الـ follow-up."
+          - "مفيش حاجة بتقول إنه خد statin قبل كده."
+          - "مفيش مشكلة تواصل."
+      - kind: aside
+        tone: trap
+        page: 55
+        quote: "Pregnant women Children Individuals with co-morbidities The elderly Individuals with mental illness, including dementia"
+        text: |
+          نتيجة الـ exclusion دي إن فيه ناس **under-represented** في الـ trials: **pregnant women**، **children**، أصحاب الـ **co-morbidities**، **the elderly**، و **mental illness including dementia**.
+
+          يعني بالظبط عيانين الباطنة اللي بتشوفهم في العنبر: الحاجّة اللي عندها 80 سنة وسكر وضغط وفشل كلوي. علشان كده لما تقرا trial اسأل: «هل العيان اللي قدامي شبه اللي في التجربة؟»
+      - kind: explain
+        page: 56
+        quote: "The group of people to whom the study results may be applied or generalized"
+        title: "Step 4: الـ populations"
+        text: |
+          الـ ==reference population== (اسمها كمان **universe** أو **target population**): الناس اللي ممكن **نطبّق أو نعمّم** عليهم نتايج الدراسة.
+
+          والـ **study population** بتعتمد على **purpose of the trial**.
+      - kind: try
+        items: [res.L06.068, res.L06.069, res.L06.081]
+    recap:
+      - "12 خطوة: need، hypothesis، criteria، populations، sample size، protocols، enrol، randomize، intervention/placebo، blinding، follow-up، analysis."
+      - "Step 1: literature review و meta-analysis (حتى الـ unpublished) يمكن السؤال اتجاوب."
+      - "Hypothesis محددة: outcome، مدة، مقارنة، حجم فرق. والـ variables: exposure، co-interventions، outcome، confounders."
+      - "Outcomes: disease، patient، economic. أحسنها objective، clinically relevant، ومتقاس بنفس الطريقة في المجموعتين."
+      - "Inclusion = balance بين الفايدة والـ generalizability. والنتيجة: الحوامل والأطفال والكبار وأصحاب الـ co-morbidities والـ mental illness under-represented."
+    practice: [res.L06.068, res.L06.069, res.L06.070, res.L06.071, res.L06.072, res.L06.073, res.L06.074, res.L06.075, res.L06.076, res.L06.077, res.L06.078, res.L06.079, res.L06.080, res.L06.081]

@@ -1,0 +1,1026 @@
+schema: batna.content/v1
+lecture: res.L06
+title: Experimental studies, part 1
+author: Prof. Afaf Gaber Ibrahim
+book: { chapter: 1, pages: [1, 56] }
+topics:
+  - { id: design-tree, title: Where trials sit among study designs }
+  - { id: interventions, title: What trials test and what an RCT is }
+  - { id: drug-phases, title: New drug development and trial phases }
+  - { id: trial-types, title: "Therapeutic vs preventive, efficacy vs effectiveness" }
+  - { id: superiority, title: "Superiority, equivalence and non-inferiority" }
+  - { id: allocation, title: "Parallel, crossover, factorial, split-body and cluster designs" }
+  - { id: blinding, title: Blinding (masking) }
+  - { id: planning, title: Steps in planning an RCT }
+items:
+  # ---------------- design-tree (slides 2-4, 8) ----------------
+  - id: res.L06.001
+    kind: card
+    topic: design-tree
+    front: In the epidemiologic study-design tree, which question separates experimental from observational studies?
+    back: Did the investigator assign the exposure? Yes = experimental study; no = observational study.
+    src: { page: 3, quote: "Did investigator assign exposures?" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L06.002
+    kind: mcq
+    topic: design-tree
+    stem: >-
+      Investigators give a new oral hygiene programme to the patients of two clinics they choose themselves,
+      and compare gingivitis rates with two other clinics that do not get it. No randomisation is done.
+      What is this design?
+    options:
+      - Randomised controlled trial
+      - Non-randomised (quasi-experimental) trial
+      - Cohort study
+      - Case-control study
+      - Cross-sectional study
+    answer: 1
+    why:
+      - An RCT needs random allocation, and here the investigators chose the clinics.
+      - The investigator assigned the exposure without randomisation, so it is a non-randomised (quasi-experimental) trial.
+      - In a cohort study the investigator only observes an exposure; here they assigned it.
+      - A case-control study starts from the outcome and looks back for the exposure.
+      - A cross-sectional study measures exposure and outcome at the same time, with no assigned exposure.
+    src: { page: 8, quote: "Non randomized interventional studies (Quazi experimental trials)" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L06.003
+    kind: card
+    topic: design-tree
+    front: What are the two types of intervention studies, and what is their key distinguishing feature?
+    back: Randomized interventional studies and non-randomized interventional (quasi-experimental) trials. Randomization is the key feature.
+    src: { page: 8, quote: "Randomization is a key feature" }
+    status: unverified
+  - id: res.L06.004
+    kind: order
+    topic: design-tree
+    prompt: Order the hierarchy of research designs and evidence, from the top of the pyramid down.
+    steps:
+      - Clinical practice guidelines
+      - Meta-analysis and systematic reviews
+      - Randomized controlled trial
+      - Cohort studies
+      - Case-control studies
+      - Case reports, case series, narrative reviews, expert opinions, editorials
+      - Animal and laboratory studies
+    src: { page: 4, quote: "Hierarchy of Research Designs & Levels of Scientific Evidence" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L06.005
+    kind: card
+    topic: design-tree
+    front: On what basis is the hierarchy of research designs (evidence pyramid) ranked?
+    back: On the design's ability to control for bias and to demonstrate cause and effect in humans.
+    src: { page: 4, quote: "Based on ability to control for bias and to demonstrate cause and effect in humans" }
+    status: unverified
+  - id: res.L06.006
+    kind: cloze
+    topic: design-tree
+    text: >-
+      In the evidence pyramid, meta-analyses, systematic reviews and guidelines are {{c1::secondary (pre-appraised, filtered)}}
+      studies; RCT, cohort and case-control are {{c2::primary}} studies; case reports, expert opinions and editorials
+      count as {{c3::no design}}.
+    src: { page: 4, quote: "Secondary, pre-appraised, or filtered Studies" }
+    status: unverified
+  - id: res.L06.007
+    kind: mcq
+    topic: design-tree
+    stem: Which primary study design sits highest in the hierarchy of evidence?
+    options:
+      - Cohort study
+      - Case-control study
+      - Randomized controlled trial
+      - Case series
+      - Systematic review
+    answer: 2
+    why:
+      - Cohort studies are observational and sit just below the RCT.
+      - Case-control studies are retrospective and sit below cohorts.
+      - The RCT is prospective, tests a treatment and is the top primary design.
+      - Case series are labelled "no design" near the base.
+      - A systematic review is higher, but it is a secondary (filtered) study, not a primary one.
+    src: { page: 4, quote: "Randomized Controlled Trial Prospective, tests treatment" }
+    status: unverified
+  # ---------------- interventions (slides 6-7, 9, 11-12) ----------------
+  - id: res.L06.008
+    kind: enumerate
+    topic: interventions
+    prompt: Enumerate the interventions that can be evaluated by experimental studies.
+    points:
+      - New drugs and new treatment of diseases
+      - New medical and health care technology
+      - New methods of primary prevention
+      - New programs of screening
+      - New ways of organizing and delivering health services
+      - New community health programs
+      - New behavioral intervention programs
+    pass: 5
+    src: { page: 6, quote: "New methods of primary prevention New programs of screening" }
+    status: unverified
+  - id: res.L06.009
+    kind: card
+    topic: interventions
+    front: Who is credited with the first RCT in medicine, and what did it test?
+    back: Sir A. Bradford Hill (England's Medical Research Council); published in the BMJ in 1948, it tested whether streptomycin is effective in treating tuberculosis.
+    src: { page: 7, quote: "Credited to Sir A. Bradford Hill, an epidemiologist for England's Medical Research Council." }
+    status: unverified
+  - id: res.L06.010
+    kind: cloze
+    topic: interventions
+    text: The first RCT in medicine, published in the BMJ in {{c1::1948}}, tested {{c2::streptomycin}} in treating {{c3::tuberculosis}}.
+    src: { page: 7, quote: "published in the British Medical Journal in 1948, tested whether streptomycin is effective in treating tuberculosis" }
+    status: unverified
+    tags: [numbers]
+  - id: res.L06.011
+    kind: enumerate
+    topic: interventions
+    prompt: In an RCT we control the exposure (intervention). Enumerate the three aspects we control.
+    points: [Type, Amount, Duration]
+    pass: 3
+    src: { page: 11, quote: "We are controlling the exposure (intervention ) regarding: Type Amount Duration" }
+    status: unverified
+  - id: res.L06.012
+    kind: card
+    topic: interventions
+    front: Define a randomized controlled trial (RCT).
+    back: >-
+      An experiment in which subjects are randomly allocated into an experimental (intervention) group that receives a
+      preventive or therapeutic intervention and a control group that receives placebo, no treatment or usual care;
+      the outcomes of the groups are then compared.
+    src: { page: 12, quote: "RCT is an experiment in which subjects in a population are randomly allocated into groups" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L06.013
+    kind: enumerate
+    topic: interventions
+    prompt: Enumerate what the control group of an RCT may receive.
+    points: [Placebo, No treatment, Usual care (active control)]
+    pass: 3
+    src: { page: 12, quote: "A control to receive : placebo no treatment usual care (active control)" }
+    status: unverified
+  - id: res.L06.014
+    kind: mcq
+    topic: interventions
+    stem: >-
+      In a trial of a new antihypertensive, the control group keeps taking amlodipine, the drug they would get in
+      clinic anyway. What kind of control is this?
+    options:
+      - Placebo control
+      - No-treatment control
+      - Active control (usual care)
+      - Historical control
+    answer: 2
+    why:
+      - A placebo is an inactive look-alike; here the control gets a real drug.
+      - The control group is treated, so it is not a no-treatment control.
+      - Usual care given to the control group is an active control.
+      - A historical control is a past group, not a concurrent randomised arm.
+    src: { page: 12, quote: "usual care (active control)" }
+    status: unverified
+  # ---------------- trial-types (slides 13-17) ----------------
+  - id: res.L06.015
+    kind: enumerate
+    topic: trial-types
+    prompt: Enumerate the four schemes used to classify RCTs.
+    points:
+      - The aspects of the interventions being evaluated (therapeutic vs preventive)
+      - How participants are exposed to the interventions (parallel, crossover, factorial, split-body, cluster)
+      - Whether the goal is superiority or equivalence
+      - Whether investigators and/or participants know which intervention is being studied (blinding)
+    pass: 3
+    src: { page: 13, quote: "Based on the aspects of interventions being evaluated Based on how participants are exposed to interventions" }
+    status: unverified
+  - id: res.L06.016
+    kind: card
+    topic: trial-types
+    front: Therapeutic (clinical) trial vs preventive trial?
+    back: >-
+      A therapeutic trial tests the efficacy of a therapeutic procedure (drug, surgical procedure). A preventive trial
+      tests the efficacy of a preventive procedure (vaccine, sera, chemoprophylaxis, personal protective measure,
+      exercise programme).
+    src: { page: 14, quote: "Testing the efficacy of a therapeutic procedure (Drug, Surgical procedure etc.)" }
+    status: unverified
+  - id: res.L06.017
+    kind: mcq
+    topic: trial-types
+    stem: >-
+      Schoolchildren in Alexandria are randomised to receive a new typhoid vaccine or a placebo injection, and typhoid
+      cases are counted over two years. Which type of trial is this, by the aspect of the intervention?
+    options:
+      - Therapeutic (clinical) trial
+      - Preventive trial
+      - Crossover trial
+      - Phase IV trial
+    answer: 1
+    why:
+      - A therapeutic trial treats people who already have the disease.
+      - A vaccine prevents disease in healthy people, so this is a preventive trial.
+      - Crossover describes how groups switch treatments, not the aspect of the intervention; vaccines are generally unsuitable for crossover.
+      - Phase IV is post-marketing surveillance of an approved drug.
+    src: { page: 14, quote: "Testing the efficacy of a preventive procedure (Vaccine, Sera, Chemoprophylaxis, personal protective measure, exercise programme etc.)" }
+    status: unverified
+  - id: res.L06.018
+    kind: card
+    topic: trial-types
+    front: The lecture's examples of a therapeutic and a prevention trial?
+    back: Therapeutic, the β-Blocker Heart Attack Trial (B-HAT, JAMA 1981). Prevention, the trial of perinatal transmission of HIV (NEJM 1994).
+    src: { page: 15, quote: "Example of a therapeutic trial: The β-Blocker Heart Attack Trial (B-HAT)" }
+    status: unverified
+  - id: res.L06.019
+    kind: card
+    topic: trial-types
+    front: Define efficacy, as asked by a trial.
+    back: Does the intervention work in the people who actually receive it? Efficacy trials tend to be explanatory, in highly selected participants, under "research" conditions.
+    src: { page: 17, quote: "Efficacy—does the intervention work in the people who actually receive it ?" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L06.020
+    kind: card
+    topic: trial-types
+    front: Define effectiveness, as asked by a trial.
+    back: How does the intervention work in those offered it? Effectiveness trials tend to be pragmatic, under "usual" conditions.
+    src: { page: 17, quote: "Effectiveness—how does the intervention work in those offered. it tend to be pragmatic" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L06.021
+    kind: table
+    topic: trial-types
+    title: Efficacy vs effectiveness
+    columns: [Feature, Efficacy, Effectiveness]
+    rows:
+      - [Question, "Does it work in those who actually receive it?", "How does it work in those offered it?"]
+      - [Trial style, Explanatory, Pragmatic]
+      - [Participants, Highly selected, Those offered it in practice]
+      - [Conditions, '"Research" conditions', '"Usual" conditions']
+    blanks: [[1, 1], [1, 2], [3, 2]]
+    src: { page: 17, quote: "Provide treatment under “research” vs. “usual” conditions" }
+    status: unverified
+  - id: res.L06.022
+    kind: mcq
+    topic: trial-types
+    stem: >-
+      A health-insurance hospital offers a new once-weekly diabetes injection to every eligible patient in its
+      outpatient clinics, with no extra visits, and compares HbA1c with clinics that keep usual care. Which question
+      does this trial answer?
+    options:
+      - Efficacy, because it is randomised
+      - Effectiveness, because it tests the drug in those offered it under usual conditions
+      - Efficacy, because HbA1c is an objective outcome
+      - Equivalence, because both groups are treated
+    answer: 1
+    why:
+      - Both efficacy and effectiveness trials can be randomised; randomisation does not decide which question is asked.
+      - Offered to everyone under usual clinic conditions = a pragmatic effectiveness trial.
+      - An objective outcome is good in any trial; it does not make the trial explanatory.
+      - Equivalence is about the hypothesis (no difference), not about usual vs research conditions.
+    src: { page: 17, quote: "Effectiveness—how does the intervention work in those offered. it tend to be pragmatic" }
+    status: unverified
+  # ---------------- superiority (slides 18-19, 26, 35) ----------------
+  - id: res.L06.023
+    kind: enumerate
+    topic: superiority
+    prompt: Enumerate the types of RCT according to what we want to test.
+    points: [Superiority trials, Equivalence trials, Non-inferiority trials]
+    pass: 3
+    src: { page: 18, quote: "Superiority trials Equivalence trials Non inferiority trials" }
+    status: unverified
+  - id: res.L06.024
+    kind: enumerate
+    topic: superiority
+    prompt: Why do an equivalence or non-inferiority trial? Enumerate the reasons.
+    points:
+      - Fewer side effects
+      - Greater convenience
+      - Lower cost
+      - Higher quality of life
+      - Fewer drug interactions
+      - More choice for patients (flooding the market with identical drugs)
+    pass: 4
+    src: { page: 19, quote: "Fewer side effects, Greater convenience, Lower cost, Higher quality of life . Fewer drug interaction" }
+    status: unverified
+  - id: res.L06.025
+    kind: mcq
+    topic: superiority
+    stem: >-
+      Antibiotic A is the established treatment for community-acquired pneumonia but is expensive with many side
+      effects. New antibiotic B is cheaper with fewer side effects, but its efficacy relative to A is not established.
+      What is the best kind of trial to evaluate B?
+    options:
+      - Superiority
+      - Cross-over
+      - Cluster
+      - Non-inferiority
+      - Equivalence
+    answer: 3
+    why:
+      - B does not need to beat A; its advantages are cost and safety.
+      - Pneumonia is acute, and crossover needs a chronic stable disease.
+      - Cluster describes randomising groups, and it does not answer the question asked.
+      - We only need to show B is not worse than A, given its lower cost and fewer side effects; this is the lecture's answer.
+      - Equivalence asks whether B is neither better nor worse; the question here is one-sided (not worse).
+    src: { page: 35, quote: "less expensive and has fewer side effects, but its efficacy, relative to drug A, is not well established." }
+    status: unverified
+    tags: [high-yield, book-question]
+  - id: res.L06.026
+    kind: card
+    topic: superiority
+    front: What did the PIVOT trial (Thorax 2007), the lecture's example of an equivalence trial, compare and find?
+    back: >-
+      A multicentre pragmatic randomised equivalence trial in children admitted with community-acquired pneumonia:
+      oral amoxicillin vs IV benzyl penicillin. They were equivalent (median time for temperature to settle 1.3 days in
+      both groups).
+    src: { page: 26, quote: "Comparison of oral amoxicillin and intravenous benzyl penicillin for community acquired pneumonia in children" }
+    status: unverified
+  - id: res.L06.027
+    kind: cloze
+    topic: superiority
+    text: >-
+      A trial asking whether a new drug is better than the old one is a {{c1::superiority}} trial; one asking whether
+      it is no worse is a {{c2::non-inferiority}} trial; one asking whether they are the same is an
+      {{c3::equivalence}} trial.
+    src: { page: 18, quote: "Superiority trials Equivalence trials Non inferiority trials" }
+    status: unverified
+  # ---------------- allocation (slides 20-34) ----------------
+  - id: res.L06.028
+    kind: card
+    topic: allocation
+    front: Define the parallel-group design.
+    back: Each participant is randomly assigned to a group, and all participants in that group receive (or do not receive) the intervention for the whole trial.
+    src: { page: 20, quote: "Each participant is randomly assigned to a group, and all the participants in the group receives (or does not receive) an intervention" }
+    status: unverified
+  - id: res.L06.029
+    kind: card
+    topic: allocation
+    front: Define a planned crossover trial.
+    back: Subjects are randomised to therapy 1 or 2 and, after being observed for a period, they switch therapy. Subjects become their own controls.
+    src: { page: 22, quote: "subjects are randomised to therapy 1 or 2 and after being observed for a period they switch therapy." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L06.030
+    kind: mcq
+    topic: allocation
+    stem: Subjects serve as their own controls in which of the following research designs?
+    options:
+      - Factorial design
+      - Parallel design
+      - Cross-over design
+      - Randomized controlled trial
+      - Case-control study
+    answer: 2
+    why:
+      - Factorial tests two interventions at once in separate groups; nobody switches.
+      - In a parallel design each person stays in one arm.
+      - In crossover each subject gets both treatments in turn, so they are their own controls.
+      - An RCT is the broad family; crossover is one RCT design, so this is not the best answer.
+      - Cases and controls are different people.
+    src: { page: 22, quote: "Subject become their own controls" }
+    status: unverified
+    tags: [book-question]
+  - id: res.L06.031
+    kind: card
+    topic: allocation
+    front: Give the lecture's example of an unplanned crossover.
+    back: >-
+      A trial of bypass surgery: some patients randomised to surgery refuse surgery and end up on medical treatment,
+      and some randomised to medical treatment come to require surgery.
+    src: { page: 23, quote: "Unplanned crossover in study of bypass surgery" }
+    status: unverified
+  - id: res.L06.032
+    kind: table
+    topic: allocation
+    title: Parallel vs crossover design, step by step
+    columns: [Group, Parallel design, Crossover design]
+    rows:
+      - [Group 1, "Treatment A, then follow-up and outcome assessment", "Treatment A, washout, Treatment B, then follow-up"]
+      - [Group 2, "Treatment B, then follow-up and outcome assessment", "Treatment B, washout, Treatment A, then follow-up"]
+    blanks: [[0, 2], [1, 2]]
+    src: { page: 24, quote: "Follow-up and outcome assessment" }
+    status: unverified
+  - id: res.L06.033
+    kind: enumerate
+    topic: allocation
+    prompt: Enumerate the advantages of planned crossover trials.
+    points:
+      - Comparisons within individuals
+      - Subjective outcomes can be used (with blinding)
+      - Reduces the sample size needed
+    pass: 3
+    src: { page: 25, quote: "Comparisons within individuals Subjective outcomes can be used (with blinding) Reduces sample size needed" }
+    status: unverified
+  - id: res.L06.034
+    kind: enumerate
+    topic: allocation
+    prompt: Enumerate the disadvantages of planned crossover trials.
+    points:
+      - Carryover
+      - Washout period
+      - Effect of the order of interventions (psychological response)
+      - Dropouts from the 2nd treatment
+    pass: 3
+    src: { page: 25, quote: "Carryover Washout period Need to consider effect of the order of interventions (psychological response) Dropouts from 2nd treatment" }
+    status: unverified
+  - id: res.L06.035
+    kind: enumerate
+    topic: allocation
+    prompt: Enumerate the prerequisites for a crossover design.
+    points:
+      - The disease should be chronic (asthma, osteoarthritis) and stable
+      - The drug's effect should develop during the treatment period
+      - Washout period of five times the drug's half-life
+      - Generally cannot be used in vaccine trials (the immune system is affected)
+      - Can be used in phase I
+      - Requires a smaller sample size
+    pass: 4
+    src: { page: 27, quote: "The disease should be chronic ( Asthma , osteoarthritis ) and stable" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L06.036
+    kind: cloze
+    topic: allocation
+    text: In a crossover trial the washout period should be {{c1::five}} times the drug's {{c2::half-life}}.
+    src: { page: 27, quote: "Wash out period five times half life of the drug" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: res.L06.037
+    kind: mcq
+    topic: allocation
+    stem: For which of these questions is a crossover design most suitable?
+    options:
+      - A new inhaler in chronic stable asthma
+      - A new antibiotic for acute appendicitis
+      - A new hepatitis B vaccine
+      - A new drug that cures H. pylori infection
+    answer: 0
+    why:
+      - "Chronic, stable disease where the drug works during the period and wears off: the classic crossover setting."
+      - Acute disease resolves, so there is nothing to compare in the second period.
+      - Vaccines generally cannot be crossed over because the immune system is changed for good.
+      - A cure leaves no disease for the second period, so carryover is total.
+    src: { page: 27, quote: "The disease should be chronic ( Asthma , osteoarthritis ) and stable" }
+    status: unverified
+  - id: res.L06.038
+    kind: card
+    topic: allocation
+    front: Why can a crossover design generally not be used in vaccine trials?
+    back: Because the immune system is affected; the effect of the first period does not wash out.
+    src: { page: 27, quote: "Generally can not be used in vaccine trials because the immune system is affected" }
+    status: unverified
+  - id: res.L06.039
+    kind: card
+    topic: allocation
+    front: Define the factorial design.
+    back: Two or more interventions are tested in a single experiment (both given, either one given, none given), each compared with control.
+    src: { page: 28, quote: "In which the two or more modalities are tested (both given, either one given, none given)." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L06.040
+    kind: card
+    topic: allocation
+    front: The lecture's example of a factorial design?
+    back: Aspirin for primary prevention of cardiovascular disease and beta-carotene for primary prevention of cancer, tested together in a 2×2 design.
+    src: { page: 28, quote: "Study the efficacy of aspirin for primary prevention of cardiovascular disease and beta - carotene for primary prevention of cancer." }
+    status: unverified
+  - id: res.L06.041
+    kind: cloze
+    topic: allocation
+    text: >-
+      A two-by-two factorial trial randomises {{c1::twice}} (aspirin or placebo, then beta-carotene or placebo), giving
+      {{c2::four}} groups.
+    src: { page: 29, quote: "Two-by-two factorial study design" }
+    status: unverified
+  - id: res.L06.042
+    kind: enumerate
+    topic: allocation
+    prompt: Enumerate the disadvantages of the factorial design.
+    points:
+      - Possible interaction between the interventions, and its impact on sample size
+      - Added complexity
+      - Impact on compliance or recruitment
+      - Potential adverse effects of polypharmacy
+    pass: 3
+    src: { page: 30, quote: "Possibility of the existence of interaction and its impact on the sample size" }
+    status: unverified
+  - id: res.L06.043
+    kind: mcq
+    topic: allocation
+    stem: The factorial study design increases which of the following?
+    options:
+      - Power of the study
+      - Generalizability
+      - Internal validity
+      - Study efficiency
+    answer: 3
+    why:
+      - Interaction can actually raise the sample size needed; power is not what the design buys.
+      - Generalizability depends on who is enrolled, not on the factorial layout.
+      - Internal validity comes from randomisation and blinding, which any RCT can have.
+      - Two questions are answered in one experiment, so it is efficient and less expensive.
+    src: { page: 30, quote: "Can be very informative, efficient and less expensive." }
+    status: unverified
+    tags: [book-question]
+  - id: res.L06.044
+    kind: card
+    topic: allocation
+    front: Define the split-body design.
+    back: Separate parts of each participant's body (e.g. left and right sides of the face) are randomized to receive or not receive the intervention.
+    src: { page: 32, quote: "separate parts of the body of each participant (e.g., the left and right sides of the face) are randomized" }
+    status: unverified
+  - id: res.L06.045
+    kind: card
+    topic: allocation
+    front: Define the cluster design.
+    back: Pre-existing groups of participants (e.g. villages, schools) are randomly selected to receive or not receive the intervention.
+    src: { page: 32, quote: "pre-existing groups of participants (e.g., villages, schools) are randomly selected to receive (or not receive) an intervention" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L06.046
+    kind: mcq
+    topic: allocation
+    stem: >-
+      Forty villages in Sohag are randomly chosen: twenty get a community health programme on safe water, twenty do
+      not, and diarrhoea rates are compared. What is the design?
+    options:
+      - Parallel-group individual RCT
+      - Cluster randomised trial
+      - Crossover trial
+      - Split-body trial
+    answer: 1
+    why:
+      - Individuals were not randomised one by one; whole villages were.
+      - Pre-existing groups (villages) were randomised, so it is a cluster trial.
+      - No village switched from programme to no programme.
+      - Split-body randomises parts of one person's body.
+    src: { page: 32, quote: "pre-existing groups of participants (e.g., villages, schools) are randomly selected to receive (or not receive) an intervention" }
+    status: unverified
+  - id: res.L06.047
+    kind: mcq
+    topic: allocation
+    stem: >-
+      A dermatologist applies a new acne cream to one randomly chosen side of each patient's face and the old cream
+      to the other side. What is the design?
+    options:
+      - Crossover
+      - Factorial
+      - Split-body
+      - Cluster
+    answer: 2
+    why:
+      - In crossover the whole person switches treatment over time; here both creams run at the same time.
+      - Factorial tests two interventions in combination groups, not two body sides.
+      - "Parts of the same body are randomised: split-body."
+      - Cluster randomises pre-existing groups such as schools.
+    src: { page: 32, quote: "the left and right sides of the face" }
+    status: unverified
+  - id: res.L06.048
+    kind: cloze
+    topic: allocation
+    text: >-
+      Of 616 RCTs indexed in PubMed in December 2006, {{c1::78%}} were parallel-group, {{c2::16%}} crossover, and
+      {{c3::2%}} each split-body and cluster.
+    src: { page: 33, quote: "78% were parallel-group trials, 16% were crossover, 2% were split-body, 2% were cluster." }
+    status: unverified
+    tags: [numbers]
+  # ---------------- drug-phases (slides 5, 36-41) ----------------
+  - id: res.L06.049
+    kind: order
+    topic: drug-phases
+    prompt: Order the stages of new drug development.
+    steps:
+      - Discovery
+      - Preclinical testing (laboratory and animal)
+      - 20-80 healthy volunteers to find safety and dosage
+      - 100-300 patient volunteers to look for efficacy and side effects
+      - 1,000-5,000 patients to monitor adverse reactions to long-term use
+      - FDA review and approval
+      - Additional post-marketing testing
+    src: { page: 5, quote: "New Product Development – A Risky and Expensive Proposition" }
+    status: unverified
+  - id: res.L06.050
+    kind: cloze
+    topic: drug-phases
+    text: >-
+      Of 5,000–10,000 compounds screened, about {{c1::250}} enter preclinical testing, {{c2::5}} enter clinical testing
+      and {{c3::1}} is approved by the FDA.
+    src: { page: 5, quote: "5,000–10,000 Screened 250 Enter Preclinical Testing 5 Enter Clinical Testing 1 Approved by the FDA" }
+    status: unverified
+    tags: [numbers]
+  - id: res.L06.051
+    kind: table
+    topic: drug-phases
+    title: New drug clinical trials, phase by phase
+    columns: [Phase, Checks for, Subjects]
+    rows:
+      - [Phase 1, "Safety (first testing in humans)", 20-100 volunteers]
+      - [Phase 2, "Efficacy (how well does the drug work?)", 100-500 patients]
+      - [Phase 3, "Confirm results; compare with the current gold standard", "1,000-5,000 patients"]
+      - [Phase 4, Safety surveillance, Real-life patients]
+    blanks: [[0, 1], [1, 1], [2, 2], [3, 1]]
+    src: { page: 36, quote: "20-100 volunteers 100-500 patients 1,000-5,000 patients" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: res.L06.052
+    kind: card
+    topic: drug-phases
+    front: Aim and subjects of a phase I trial?
+    back: >-
+      To find the safe range of dose, testing pharmacokinetics and dose-response, on healthy volunteers (except in
+      cancer and HIV), up to 100 of them.
+    src: { page: 37, quote: "To find safe range of dose" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L06.053
+    kind: enumerate
+    topic: drug-phases
+    prompt: Enumerate the design features of a phase I trial.
+    points: [Open label, Non randomized, Uncontrolled, Up to 100 healthy volunteers (except cancer and HIV)]
+    pass: 3
+    src: { page: 37, quote: "Open label Non randomized Uncontrolled Enroll up to 100 healthy volunteers" }
+    status: unverified
+  - id: res.L06.054
+    kind: mcq
+    topic: drug-phases
+    stem: A new anticancer drug enters its first trial in humans. Who are the subjects?
+    options:
+      - Healthy volunteers, as in every phase I trial
+      - Patients with the cancer, because cancer is an exception to healthy volunteers
+      - 1,000-3,000 patients in many centres
+      - Real-life patients after marketing
+    answer: 1
+    why:
+      - Phase I uses healthy volunteers, except in cancer and HIV.
+      - Cancer and HIV are the exceptions; giving a toxic drug to healthy people is not acceptable.
+      - That is the phase III sample.
+      - That is phase IV.
+    src: { page: 37, quote: "On healthy volunteers ( Except cancer and HIV)" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L06.055
+    kind: card
+    topic: drug-phases
+    front: What is phase II, and what may its objectives focus on?
+    back: >-
+      The therapeutic exploratory phase: trials that evaluate efficacy (and safety) in selected patients. Objectives may
+      focus on dose-response, type of patient and frequency of dosing.
+    src: { page: 38, quote: "clinical trials to evaluate efficacy ( and safety) in selected patients" }
+    status: unverified
+  - id: res.L06.056
+    kind: enumerate
+    topic: drug-phases
+    prompt: Enumerate the features of a phase III trial.
+    points:
+      - Large sample (1000-3000)
+      - Randomized
+      - Active-controlled
+      - Double blind
+      - Parallel
+      - Multicentre
+    pass: 4
+    src: { page: 38, quote: "Large sample ( 1000-3000) Randomized Active- controlled Double blind Parallel Multicentre" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L06.057
+    kind: card
+    topic: drug-phases
+    front: What is phase IV, and what can it lead to?
+    back: >-
+      Post-marketing surveillance: long-term safety surveillance to detect rare side effects (an uncontrolled,
+      observational phase). It may be mandated by the FDA for interactions or special populations, and its findings
+      can lead to withdrawal or restriction of a drug (e.g. Vioxx).
+    src: { page: 39, quote: "Involve long term safety surveillance to detect rare side effects" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L06.058
+    kind: mcq
+    topic: drug-phases
+    stem: Which of the following characterizes phase III drug testing?
+    options:
+      - It usually requires small patient numbers.
+      - It can be done without approval.
+      - It usually involves a comparison between different treatments.
+      - It always demonstrates superiority of the new approach.
+    answer: 2
+    why:
+      - Phase III is large (1,000-5,000 patients).
+      - Every phase needs approval.
+      - Phase III is active-controlled and compares the new drug with the current gold standard.
+      - Many phase III trials show non-inferiority or fail; superiority is never guaranteed.
+    src: { page: 40, quote: "It usually involves a comparison between different treatments." }
+    status: unverified
+    tags: [book-question]
+  - id: res.L06.059
+    kind: mcq
+    topic: drug-phases
+    stem: >-
+      A painkiller approved after phase III is withdrawn from the market three years later because a rare
+      cardiovascular adverse effect appears in thousands of users. Which phase detected it?
+    options:
+      - Phase I
+      - Phase II
+      - Phase III
+      - Phase IV
+    answer: 3
+    why:
+      - Phase I tests dose safety in up to 100 volunteers; rare effects can't appear.
+      - Phase II looks for efficacy in a few hundred patients.
+      - Phase III ended before approval; rare effects often hide in a few thousand patients.
+      - Long-term post-marketing surveillance catches rare side effects and can lead to withdrawal (e.g. Vioxx).
+    src: { page: 39, quote: "Adverse effects detected by Phase IV trials may result in withdrawal or restriction of a drug -recent examples include Vioxx." }
+    status: unverified
+  - id: res.L06.060
+    kind: mcq
+    topic: drug-phases
+    stem: >-
+      Eighty-two patients with recurrent duodenal ulcers received triple therapy to eradicate H. pylori, and the
+      ulcer healed in 78 of those available for endoscopy. The authors conclude that triple therapy is the therapy of
+      choice. Their inference is:
+    options:
+      - Correct
+      - Incorrect because it is not based on rates
+      - Incorrect because there is no comparison group
+      - None of the above
+    answer: 2
+    why:
+      - Without a control we can't tell triple therapy from natural healing or another treatment.
+      - 78 of 82 is effectively a rate; rates are not the problem.
+      - With no comparison group there is nothing to be "of choice" over; this is the lecture's answer.
+      - Option c names the flaw.
+    src: { page: 41, quote: "Incorrect because there is no comparison group" }
+    status: unverified
+    tags: [book-question]
+  # ---------------- blinding (slides 42-45) ----------------
+  - id: res.L06.061
+    kind: card
+    topic: blinding
+    front: Why is blinding important in an RCT?
+    back: It preserves the benefits of randomization by preventing biased assessment of outcomes (measurement bias).
+    src: { page: 42, quote: "Blinding is important because it preserves the benefits of randomization by preventing the biased assessment of outcomes." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L06.062
+    kind: table
+    topic: blinding
+    title: Which RCT feature prevents which bias?
+    columns: [Feature, Bias it prevents]
+    rows:
+      - [Randomization, Confounding bias]
+      - [Allocation concealment, Selection bias]
+      - [Blinding, Measurement bias]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 42, quote: "Blinding therefore prevents measurement bias (as opposed to randomization and concealment which prevent confounding bias and selection bias, respectively)." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L06.063
+    kind: enumerate
+    topic: blinding
+    prompt: Ideally, blinding should occur at which levels?
+    points:
+      - Patients
+      - Caregivers
+      - Collectors of outcome data (research assistants, study physicians)
+      - The data analyst
+    pass: 4
+    src: { page: 43, quote: "Ideally, blinding should occur at all of the following levels: Patients Caregivers" }
+    status: unverified
+  - id: res.L06.064
+    kind: cloze
+    topic: blinding
+    text: Blinding overcomes {{c1::ascertainment}} bias.
+    src: { page: 43, quote: "Blinding overcomes ascertainment bias" }
+    status: unverified
+  - id: res.L06.065
+    kind: table
+    topic: blinding
+    title: Who is blinded in each type of blinding?
+    columns: [Type, Subject, Observer, Data analyst]
+    rows:
+      - [Single, "Yes", "No", "No"]
+      - [Double, "Yes", "Yes", "No"]
+      - [Triple, "Yes", "Yes", "Yes"]
+    blanks: [[1, 2], [2, 3]]
+    src: { page: 45, quote: "Type of blinding Single Double Triple Subject" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L06.066
+    kind: card
+    topic: blinding
+    front: What is an unblinded (open label) study?
+    back: A study with no attempt at blinding.
+    src: { page: 44, quote: "Unblinded or open label studies – no attempt at blinding" }
+    status: unverified
+  - id: res.L06.067
+    kind: mcq
+    topic: blinding
+    stem: >-
+      In a trial of a new antiemetic, the patients, the nurses recording vomiting episodes and the statistician all
+      receive coded packs labelled only "X" and "Y". What type of blinding is this?
+    options:
+      - Single blind
+      - Double blind
+      - Triple blind
+      - Open label
+    answer: 2
+    why:
+      - Single blinds only the subject.
+      - Double blinds the subject and the observer, not the analyst.
+      - Subject, observer and the person analysing the data are all blinded.
+      - Open label means no attempt at blinding.
+    src: { page: 44, quote: "Triple blinding –neither subject, observer or person analysing the data have any information about allocation" }
+    status: unverified
+  # ---------------- planning (slides 46-56) ----------------
+  - id: res.L06.068
+    kind: order
+    topic: planning
+    prompt: Order the first seven steps in planning and conducting an RCT.
+    steps:
+      - Decide whether a trial is really required, should and can be done
+      - Clearly state the research hypothesis
+      - Enumerate the inclusion and exclusion criteria
+      - Define the populations
+      - Calculate the sample size
+      - Describe the measurement protocols in detail
+      - Enrol the participants
+    src: { page: 46, quote: "Steps in Planning, Designing and Conduct of a Randomized Controlled Clinical trial" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L06.069
+    kind: order
+    topic: planning
+    prompt: Order the last five steps in conducting an RCT (steps 8-12).
+    steps:
+      - Randomization
+      - Introduce the intervention and placebo control modalities
+      - Ensure blinding
+      - Follow up and assessment
+      - Statistical analysis
+    src: { page: 47, quote: "Step 8 – Randomization Step 9 - Introduce the Intervention and Placebo Control Modalities" }
+    status: unverified
+  - id: res.L06.070
+    kind: card
+    topic: planning
+    front: Step 1 of an RCT asks "Is a trial really required?" How is it answered?
+    back: By a detailed review of the literature first; a meta-analysis of published and even unpublished papers is also advisable because it may answer the question.
+    src: { page: 48, quote: "Firstly, a detailed review of literature should be undertaken" }
+    status: unverified
+  - id: res.L06.071
+    kind: card
+    topic: planning
+    front: Give the lecture's example of a clearly stated RCT hypothesis.
+    back: We hypothesize that the 2-year mortality risk in patients receiving treatment A is 30% lower than among those receiving standard treatment.
+    src: { page: 49, quote: "We hypothesize that the 2-year mortality risk in patients receiving treatment A is 30% lower" }
+    status: unverified
+  - id: res.L06.072
+    kind: enumerate
+    topic: planning
+    prompt: Along with the hypothesis, which study variables must step 2 state?
+    points: [The exposure variable, Co-interventions, The outcome variable, Confounding variables]
+    pass: 3
+    src: { page: 49, quote: "The exposure variable Co - Interventions . The outcome variable Confounding variable" }
+    status: unverified
+  - id: res.L06.073
+    kind: card
+    topic: planning
+    front: "Clinical question: in people who take long-haul flights, does wearing graduated compression stockings prevent DVT? Name its parts."
+    back: "Population: people on long-haul flights. Intervention: graduated compression stockings. Comparison: no stockings. Outcome: DVT."
+    src: { page: 50, quote: "In people who take long-haul flights does wearing graduated compression stockings prevent DVT?" }
+    status: unverified
+  - id: res.L06.074
+    kind: table
+    topic: planning
+    title: Types of trial outcomes
+    columns: [Aspect, Examples]
+    rows:
+      - [Disease aspect, "Mortality or survival rate, lab tests, complications, major events, side effects"]
+      - [Patient aspect, "Health-related quality of life, symptoms, activities of daily life"]
+      - [Economic aspect, "Service utilization (length of hospital stay)"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 51, quote: "Disease aspect: Mortality or survival rate, lab tests, complications, major events, side effects" }
+    status: unverified
+  - id: res.L06.075
+    kind: enumerate
+    topic: planning
+    prompt: Enumerate the features of the best outcome measures in a trial.
+    points:
+      - Objective
+      - Clinically relevant end points (disease rates, death, recovery, complications)
+      - Hospital or ER use
+      - Measured with accuracy and precision
+      - Measured in the same manner in both groups or arms
+    pass: 4
+    src: { page: 52, quote: "The best outcome measures are: 1. Objective 2. Clinically relevant end points" }
+    status: unverified
+  - id: res.L06.076
+    kind: card
+    topic: planning
+    front: What is the goal of the inclusion criteria, and what balance do they strike?
+    back: >-
+      To identify the sub-population in whom the intervention is feasible and will produce the desired effect, balancing
+      picking those most likely to benefit against keeping the study generalizable.
+    src: { page: 53, quote: "balance between picking the people who are most likely to benefit without sacrificing the generalizability of the study." }
+    status: unverified
+  - id: res.L06.077
+    kind: enumerate
+    topic: planning
+    prompt: Specific inclusion criteria are used to optimize what?
+    points:
+      - The rate of the primary outcome
+      - The expected efficacy of treatment
+      - The generalizability of the results
+      - The recruitment, follow-up and compliance of patients
+    pass: 3
+    src: { page: 53, quote: "The rate of the primary outcome The expected efficacy of treatment The generalizability of the results" }
+    status: unverified
+  - id: res.L06.078
+    kind: enumerate
+    topic: planning
+    prompt: Enumerate the reasons to exclude a patient from a trial.
+    points:
+      - Treatment unlikely to work (disease too severe or too mild, or already failed the treatment)
+      - Co-morbidities that interfere with the intervention, outcome measurement or expected follow-up (e.g. terminal cancer)
+      - Unlikely to complete follow-up or adhere to the protocol
+      - Other practical reasons (language or cognitive barriers, no phone at home)
+    pass: 3
+    src: { page: 54, quote: "When the patient is unlikely to complete follow-up or adhere to the protocol." }
+    status: unverified
+  - id: res.L06.079
+    kind: mcq
+    topic: planning
+    stem: >-
+      A 5-year trial of a new statin excludes a patient with terminal pancreatic cancer. Which exclusion reason
+      applies?
+    options:
+      - The disease is too mild for the treatment to work
+      - A co-morbidity would interfere with the expected length of follow-up
+      - The patient already failed the treatment
+      - A language barrier
+    answer: 1
+    why:
+      - Mildness is about the disease studied (hyperlipidaemia), not the cancer.
+      - Terminal cancer is the lecture's own example of a co-morbidity that cuts the expected follow-up short.
+      - Nothing says the patient took the statin before.
+      - Nothing suggests a communication problem.
+    src: { page: 54, quote: "interfere with the intervention, or the measurement of the outcome, or the expected length of follow-up e.g., terminal cancer." }
+    status: unverified
+  - id: res.L06.080
+    kind: enumerate
+    topic: planning
+    prompt: Enumerate the patient groups commonly under-represented in trials.
+    points:
+      - Pregnant women
+      - Children
+      - Individuals with co-morbidities
+      - The elderly
+      - Individuals with mental illness, including dementia
+    pass: 4
+    src: { page: 55, quote: "Pregnant women Children Individuals with co-morbidities The elderly Individuals with mental illness, including dementia" }
+    status: unverified
+  - id: res.L06.081
+    kind: card
+    topic: planning
+    front: What is the reference (target) population of a trial?
+    back: "Also called the universe: the group of people to whom the study results may be applied or generalized."
+    src: { page: 56, quote: "The group of people to whom the study results may be applied or generalized" }
+    status: unverified
+  # ---------------- cases ----------------
+  - id: res.L06.082
+    kind: case
+    topic: allocation
+    stem: >-
+      A chest physician at Abbassia wants to compare a new long-acting inhaler with the current one in 30 patients
+      with chronic stable asthma. The new drug's half-life is 12 hours.
+    steps:
+      - question: Which design lets each patient act as their own control and needs the smallest sample?
+        options: [Parallel, Crossover, Cluster, Factorial]
+        answer: 1
+        why: Chronic stable disease and a drug whose effect develops during the period fit a planned crossover; subjects are their own controls and the sample is smaller.
+      - question: How long should the washout between the two periods be?
+        options: [12 hours, 24 hours, 60 hours, 2 weeks is never needed]
+        answer: 2
+        why: Washout = five half-lives, 5 × 12 h = 60 h, so the first inhaler does not carry over into the second period.
+      - question: "Ten patients feel better on whichever inhaler they get first, just from being in the study. Which crossover disadvantage is this?"
+        options: [Carryover, Effect of the order of interventions (psychological response), Dropouts from the 2nd treatment, Cluster effect]
+        answer: 1
+        why: The order of treatments can change the response psychologically; carryover is a drug effect leaking into the next period.
+    src: { page: 27, quote: "Wash out period five times half life of the drug" }
+    status: unverified
+  - id: res.L06.083
+    kind: case
+    topic: superiority
+    stem: >-
+      A pharmaceutical company in 6th of October City has a cheaper oral anticoagulant with fewer drug interactions.
+      They want to show it is not worse than the current standard drug at preventing stroke in atrial fibrillation.
+    steps:
+      - question: What kind of trial by hypothesis?
+        options: [Superiority, Non-inferiority, Phase I, Split-body]
+        answer: 1
+        why: Its selling point is cost and fewer interactions; it only needs to be not worse than the standard.
+      - question: What should the control group receive?
+        options: [Placebo, No treatment, The current standard drug (active control), Half the new drug]
+        answer: 2
+        why: Withholding anticoagulation in AF is unsafe; the comparison is with usual care, an active control.
+      - question: In which phase does this large, randomised, double-blind, multicentre comparison usually take place?
+        options: [Phase I, Phase II, Phase III, Phase IV]
+        answer: 2
+        why: Phase III is large, randomised, active-controlled, double blind, parallel and multicentre.
+    src: { page: 19, quote: "Fewer side effects, Greater convenience, Lower cost, Higher quality of life . Fewer drug interaction" }
+    status: unverified

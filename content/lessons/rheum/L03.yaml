@@ -1,0 +1,633 @@
+schema: batna.lesson/v1
+lecture: rheum.L03
+lessons:
+  # ------------------------------------------------------------------
+  - id: rheum.L03.lesson1
+    title: "المناعة لما تزوّدها: أربع أنواع hypersensitivity"
+    hook: "المناعة زي البوّاب: من غيرها البيت يتسرق، بس لو اتعصّب زيادة ممكن يكسّر باب الشقة نفسها."
+    minutes: 6
+    pages: [52, 55]
+    topics: [definition, classification]
+    goals:
+      - "تعرّف الـ hypersensitivity وتعرف تلات أنواع triggers"
+      - "تحفظ تقسيم Coombs and Gell والـ mechanism بتاع كل نوع"
+      - "تفرّق بين antibody-mediated و cell-mediated"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 52
+        quote: "Hypersensitivity is an exaggerated or inappropriate immune response that causes tissue damage."
+        title: "يعني إيه hypersensitivity؟"
+        text: |
+          الـ adaptive immunity بتحمينا من الميكروبات، بس نفس الـ immune response ممكن تعمل tissue injury.
+
+          ==Hypersensitivity== = immune response **مبالغ فيها أو في غير محلها** وبتعمل tissue damage. والأمراض اللي بتعملها اسمها **hypersensitivity diseases**.
+      - kind: match
+        page: 52
+        quote: "An infection that cannot be cleared (TB). A normally harmless exogenous substance (pollen). An autoantigen (eg DNA in SLE)."
+        prompt: "وصّل كل trigger بمثال الكتاب:"
+        pairs:
+          - ["An infection that cannot be cleared", "TB"]
+          - ["A normally harmless exogenous substance", "Pollen"]
+          - ["An autoantigen", "DNA in SLE"]
+        why: "دي التلات triggers في صفحة 52. لاحظ إن الـ SLE هيرجع معانا في type III."
+      - kind: explain
+        page: 52
+        quote: "Hypersensitivity reactions are based on the classification of Coombs and Gell into 4 types I, II, III and IV."
+        title: "تقسيم Coombs and Gell"
+        text: |
+          التقسيم على حسب **نوع الـ immune response** و **الـ effector mechanism** اللي بيأذي الخلايا.
+
+          - ==Types I, II, III== = **antibody mediated**.
+          - ==Type IV== = **cell mediated** (T cells).
+      - kind: figure
+        page: 53
+        quote: "Type I - Immediate hypersensitivity caused by IgE antibodies and mast cells"
+        title: "الأربع أنواع في صورة واحدة"
+        alt: "Four columns. Type I: an allergen bridges two IgE on a mast cell, which degranulates. Type II: IgG bound to a target cell surface antigen, with complement and an NK cell attacking it. Type III: small antigen-antibody complexes stuck to a vessel wall, with neutrophils arriving. Type IV: a T cell meets antigen and releases cytokines that activate a macrophage."
+        caption: "I: IgE على الـ mast cell. II: antibody على سطح خلية. III: complexes بتترسب في الأوعية. IV: T cell بتشغّل macrophage."
+        svg: |
+          <svg viewBox="0 0 330 230" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="6" width="76" height="216" rx="8" class="fg-box"/>
+            <rect x="86" y="6" width="76" height="216" rx="8" class="fg-box"/>
+            <rect x="168" y="6" width="76" height="216" rx="8" class="fg-box"/>
+            <rect x="250" y="6" width="76" height="216" rx="8" class="fg-box"/>
+            <text x="42" y="24" text-anchor="middle" class="t-b">I</text>
+            <text x="124" y="24" text-anchor="middle" class="t-b">II</text>
+            <text x="206" y="24" text-anchor="middle" class="t-b">III</text>
+            <text x="288" y="24" text-anchor="middle" class="t-b">IV</text>
+            <circle cx="42" cy="110" r="26" class="fg-acc"/>
+            <path d="M30 84l-6-14M30 84l6-14M54 84l-6-14M54 84l6-14" class="fg-ink" stroke-width="2"/>
+            <circle cx="42" cy="62" r="6" class="fg-bad"/>
+            <circle cx="30" cy="148" r="3" class="fg-bad"/>
+            <circle cx="44" cy="154" r="3" class="fg-bad"/>
+            <circle cx="56" cy="146" r="3" class="fg-bad"/>
+            <text x="42" y="176" text-anchor="middle" class="t-sm">IgE</text>
+            <text x="42" y="192" text-anchor="middle" class="t-sm t-mut">mast cell</text>
+            <circle cx="124" cy="100" r="26" class="fg-good"/>
+            <path d="M150 100h10M150 92l8-6M150 108l8 6" class="fg-ink" stroke-width="2"/>
+            <text x="124" y="104" text-anchor="middle" class="t-sm">cell</text>
+            <circle cx="124" cy="150" r="10" class="fg-bad"/>
+            <text x="124" y="154" text-anchor="middle" class="t-sm">C</text>
+            <text x="124" y="176" text-anchor="middle" class="t-sm">IgG/IgM</text>
+            <text x="124" y="192" text-anchor="middle" class="t-sm t-mut">on cell</text>
+            <rect x="230" y="40" width="10" height="112" class="fg-thin"/>
+            <circle cx="206" cy="70" r="5" class="fg-bad"/>
+            <circle cx="214" cy="80" r="5" class="fg-bad"/>
+            <circle cx="222" cy="100" r="5" class="fg-bad"/>
+            <circle cx="222" cy="120" r="5" class="fg-bad"/>
+            <circle cx="194" cy="140" r="12" class="fg-acc"/>
+            <text x="206" y="176" text-anchor="middle" class="t-sm">complex</text>
+            <text x="206" y="192" text-anchor="middle" class="t-sm t-mut">in vessel</text>
+            <circle cx="288" cy="70" r="16" class="fg-good"/>
+            <text x="288" y="74" text-anchor="middle" class="t-sm">T</text>
+            <path d="M288 88v20" class="fg-arrow"/>
+            <circle cx="288" cy="134" r="22" class="fg-acc"/>
+            <text x="288" y="138" text-anchor="middle" class="t-sm">Mφ</text>
+            <text x="288" y="176" text-anchor="middle" class="t-sm">T cell</text>
+            <text x="288" y="192" text-anchor="middle" class="t-sm t-mut">no antibody</text>
+          </svg>
+      - kind: mnemonic
+        page: 53
+        quote: "Immune complex diseases are called type III hypersensitivity."
+        word: "ACID"
+        hook: "الأربع أنواع بالترتيب «ACID»: الحساسية زي الحمض، بتحرق الأنسجة."
+        parts:
+          - { key: "A", text: "Anaphylactic / Allergic (type I, IgE)" }
+          - { key: "C", text: "Cytotoxic (type II, antibody on cells)" }
+          - { key: "I", text: "Immune complex (type III)" }
+          - { key: "D", text: "Delayed (type IV, T cells)" }
+      - kind: table
+        page: 53
+        quote: "Classification of Immunologic Diseases"
+        title: "Classification of immunologic diseases"
+        columns: ["Type", "Via", "Injury by"]
+        rows:
+          - ["I", "IgE", "Mast cell mediators"]
+          - ["II", "IgG, IgM on cells/ECM", "Opsonization, complement, Fc receptors"]
+          - ["III", "Immune complexes", "Complement, neutrophils"]
+          - ["IV", "CD4 / CD8 T cells", "Macrophages, cytokines, cell killing"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1]]
+      - kind: check
+        page: 53
+        quote: "Tissue injury may be due to T lymphocytes that activate the effector mechanisms of delayed-type hypersensitivity or directly kill target cells"
+        question: "Which type is caused by T lymphocytes rather than antibodies?"
+        options: ["Type IV", "Type I", "Type II", "Type III"]
+        answer: 0
+        why:
+          - "صح: type IV هو الوحيد الـ cell mediated."
+          - "Type I = IgE والـ mast cells."
+          - "Type II = IgG/IgM على سطح الخلية."
+          - "Type III = immune complexes."
+      - kind: aside
+        tone: joke
+        page: 52
+        quote: "Disorders caused by immune responses are called hypersensitivity diseases."
+        text: "الجهاز المناعي في الـ hypersensitivity زي الأم المصرية: نيتها خير ١٠٠٪، بس لما تخاف عليك زيادة، اللي بيتأذي هو إنت."
+      - kind: try
+        items: [rheum.L03.002, rheum.L03.003, rheum.L03.007, rheum.L03.012, rheum.L03.014]
+    recap:
+      - "Hypersensitivity = immune response زيادة أو غلط بتعمل tissue damage."
+      - "Triggers: infection مش بتتشال (TB)، حاجة بريئة (pollen)، autoantigen (DNA في SLE)."
+      - "ACID: I anaphylactic، II cytotoxic، III immune complex، IV delayed."
+      - "I-III antibody mediated، IV cell mediated."
+    practice: [rheum.L03.001, rheum.L03.002, rheum.L03.003, rheum.L03.004, rheum.L03.005, rheum.L03.006, rheum.L03.007, rheum.L03.008, rheum.L03.009, rheum.L03.010, rheum.L03.011, rheum.L03.012, rheum.L03.013, rheum.L03.014, rheum.L03.096]
+  # ------------------------------------------------------------------
+  - id: rheum.L03.lesson2
+    title: "Type I: الـ mast cell المتسلّح"
+    hook: "أول مرة الجسم بيشوف الـ pollen بيسلّح الـ mast cells بس. التانية بيضغط على الزناد."
+    minutes: 7
+    pages: [54, 57]
+    topics: [type1, mediators]
+    goals:
+      - "ترتّب مراحل الـ sensitization والـ effector stage"
+      - "تعرف الـ mediators اللي في الحبيبات واللي بتتصنع جديد بتوقيتهم"
+      - "تفرّق بين الـ immediate والـ late-phase reaction"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 54
+        quote: "The most prevalent type of hypersensitivity disease."
+        title: "أشهر نوع"
+        text: |
+          ==Type I== هو **أشهر** نوع hypersensitivity.
+
+          - الـ allergen بيعمل **humoral IgE response**.
+          - أول تعرّض: الجسم يعمل **specific IgE**.
+          - الـ IgE يقعد على **high-affinity FcεRI** على الـ ==mast cells والـ basophils==.
+          - التعرّض اللي بعده: الـ allergen يعمل **cross-linking** للـ IgE ← الحبيبات تتفرّغ.
+          - التأثير ممكن **localized** أو **systemic**.
+      - kind: order
+        page: 55
+        quote: "Sensitization stage: initiated when an allergen penetrates a skin or mucosal barrier"
+        prompt: "رتّب مراحل الـ sensitization والـ effector:"
+        steps:
+          - "Allergen crosses skin or mucosa"
+          - "Immature DC collects it and carries it to the lymph node"
+          - "Mature DC presents it to a naive Th cell"
+          - "Allergen-specific B cells activated, IgE made"
+          - "IgE arms mast cells"
+          - "Second exposure triggers the effector stage"
+        why: "ده صفحة 55: sensitization الأول (DC ← lymph node ← Th و B)، والـ effector stage بس لو الـ allergen رجع والـ mast cells لسه متسلّحة."
+      - kind: explain
+        page: 55
+        quote: "Mouified TH2 response"
+        title: "الـ Th2 response"
+        text: |
+          في رسمة صفحة 55:
+
+          - الـ Th2 بيفرز ==IL-4== ← الـ B cell تعمل switch لـ **IgE**.
+          - الـ **IL-10** بيوجّه ناحية **IgG4** وبيقفل الـ IgE.
+          - الـ mast cell بتطلّع **leukotrienes** و **histamine** و IL-4 و IL-5 و TNF-α اللي بيجيبوا **eosinophils**.
+      - kind: figure
+        page: 56
+        quote: "cross linking of these receptors by Ag causing influx of calcium ions and degranulation of mast cells."
+        title: "الـ mast cell بتنفجر إمتى؟"
+        alt: "A mast cell with IgE sitting on FcεRI receptors. An allergen bridges two IgE molecules. A calcium arrow enters the cell. Three outputs leave on a timeline: pre-formed granules at 5 minutes (histamine, heparin, tryptase), arachidonic acid products at 5 to 30 minutes (leukotriene D4, prostaglandin D2), and cytokines at hours (TNF-α, IL-4). A side arrow shows direct triggers without IgE: opiates, contrast, vancomycin."
+        caption: "Cross-linking ← Ca²⁺ يدخل ← degranulation. الحبيبات الجاهزة في 5 دقايق، الـ arachidonic acid في 5-30، والـ cytokines بالساعات."
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="R03a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-acc"/></marker>
+            </defs>
+            <circle cx="90" cy="110" r="48" class="fg-acc"/>
+            <text x="90" y="114" text-anchor="middle" class="t-sm t-b">Mast cell</text>
+            <path d="M74 62l-8-18M74 62l8-18M106 62l-8-18M106 62l8-18" class="fg-ink" stroke-width="2"/>
+            <circle cx="90" cy="38" r="7" class="fg-bad"/>
+            <text x="104" y="32" class="t-sm">allergen</text>
+            <text x="38" y="52" class="t-sm t-mut">IgE</text>
+            <path d="M140 80l-22 14" class="fg-arrow-acc" marker-end="url(#R03a)"/>
+            <text x="142" y="78" class="t-sm">Ca²⁺</text>
+            <text x="6" y="190" class="t-sm t-mut">direct triggers (no IgE):</text>
+            <text x="6" y="206" class="t-sm t-mut">opiates, contrast, vancomycin</text>
+            <path d="M140 116h30" class="fg-arrow-acc" marker-end="url(#R03a)"/>
+            <rect x="168" y="40" width="158" height="44" rx="8" class="fg-box"/>
+            <text x="175" y="58" class="t-sm t-b">5 min: pre-formed</text>
+            <text x="175" y="74" class="t-sm">histamine, heparin, tryptase</text>
+            <rect x="168" y="94" width="158" height="44" rx="8" class="fg-box"/>
+            <text x="175" y="112" class="t-sm t-b">5-30 min: new lipids</text>
+            <text x="175" y="128" class="t-sm">LTD4, PGD2</text>
+            <rect x="168" y="148" width="158" height="44" rx="8" class="fg-box"/>
+            <text x="175" y="166" class="t-sm t-b">hours: cytokines</text>
+            <text x="175" y="182" class="t-sm">TNF-α, IL-4</text>
+            <text x="176" y="214" class="t-sm t-good">immediate</text>
+            <text x="260" y="214" class="t-sm t-bad">late phase</text>
+          </svg>
+      - kind: table
+        page: 56
+        quote: "Anticoagulation, modulates tryptase"
+        title: "جوّه الحبيبات"
+        columns: ["Mediator", "Action"]
+        rows:
+          - ["Histamine", "Permeability, vasodilation, smooth muscle contraction"]
+          - ["Heparin", "Anticoagulation, modulates tryptase"]
+          - ["Tryptase", "Activates complement (C3)"]
+          - ["Chymase", "Increased mucus secretion"]
+          - ["Acid hydrolases", "Degrade extracellular matrix"]
+          - ["Bradykinin", "Also stimulates pain nerve endings"]
+        hide: [[2, 1], [3, 1], [5, 1]]
+      - kind: check
+        page: 56
+        quote: "Tryptase Activates complement (C3)"
+        question: "Which mast cell protease activates complement C3?"
+        options: ["Tryptase", "Chymase", "Heparin", "Histamine"]
+        answer: 0
+        why:
+          - "صح: tryptase ← C3."
+          - "Chymase بتزوّد الـ mucus."
+          - "Heparin anticoagulant وبيعدّل الـ tryptase."
+          - "Histamine بيعمل permeability و vasodilation."
+      - kind: explain
+        page: 57
+        quote: "Vascular/smooth muscle response: immediate reaction"
+        title: "موجتين"
+        text: |
+          رسمة صفحة 57: الـ mast cell المتنشّطة بتطلّع حاجتين:
+
+          - ==Histamine + lipid mediators== ← **vascular / smooth muscle response** = **immediate reaction**.
+          - ==Cytokines== ← **inflammation** = **late-phase reaction**.
+
+          وفي الـ electron micrograph: الخلية الساكنة مليانة حبيبات، والمتنشّطة فضيت.
+      - kind: aside
+        tone: analogy
+        page: 57
+        quote: "Inflammation: late-phase reaction"
+        text: "الـ immediate reaction زي الشرارة، والـ late phase زي النار اللي بتمسك في الهدوم بعد ساعات. عشان كده مريض الـ asthma ممكن يتعب تاني بعد 6 ساعات."
+      - kind: try
+        items: [rheum.L03.017, rheum.L03.018, rheum.L03.027, rheum.L03.031, rheum.L03.036]
+    recap:
+      - "Type I أشهر نوع: IgE على FcεRI في الـ mast cells والـ basophils."
+      - "Sensitization: DC ← lymph node ← Th2 (IL-4) ← IgE. Effector: تعرّض تاني."
+      - "Cross-linking ← Ca²⁺ ← degranulation."
+      - "5 دقايق جاهز، 5-30 lipids، ساعات cytokines (late phase)."
+      - "Tryptase ← C3، chymase ← mucus، bradykinin ← ألم."
+    practice: [rheum.L03.015, rheum.L03.016, rheum.L03.017, rheum.L03.018, rheum.L03.019, rheum.L03.020, rheum.L03.021, rheum.L03.022, rheum.L03.023, rheum.L03.024, rheum.L03.025, rheum.L03.026, rheum.L03.027, rheum.L03.028, rheum.L03.029, rheum.L03.030, rheum.L03.031, rheum.L03.032, rheum.L03.033, rheum.L03.034, rheum.L03.035, rheum.L03.036]
+  # ------------------------------------------------------------------
+  - id: rheum.L03.lesson3
+    title: "من العطسة للـ shock: أمثلة type I وعلاجه"
+    hook: "نفس الـ mast cell اللي بتعمل حكة في المناخير ممكن تقفل النفس وتوقّع الضغط في دقايق."
+    minutes: 7
+    pages: [58, 60]
+    topics: [mediators, anaphylaxis, type1-tx]
+    goals:
+      - "تعدّ أمثلة الـ localized atopy وتعرف الـ anaphylaxis"
+      - "تتصرف صح في الـ anaphylaxis"
+      - "تفرّق بين RIST و RAST وتعرف طرق العلاج"
+    status: unverified
+    steps:
+      - kind: table
+        page: 58
+        quote: "Killing of parasites and host cells"
+        title: "مين بيعمل إيه؟"
+        columns: ["Product", "Effect"]
+        rows:
+          - ["Histamine, PAF, PGD2, LTC4", "Vascular leak, bronchoconstriction, gut hypermotility"]
+          - ["Cytokines (TNF)", "Inflammation"]
+          - ["Tryptase", "Tissue damage"]
+          - ["Eosinophil MBP, ECP", "Killing of parasites and host cells"]
+        hide: [[0, 1], [3, 1]]
+      - kind: explain
+        page: 58
+        quote: "Localized Atopy: specific target tissue such as the skin or bronchial passages"
+        title: "Localized ولا systemic؟"
+        text: |
+          ==Localized atopy== (نسيج معيّن زي الجلد أو الشُّعب):
+
+          - Hay fever (allergic rhinitis)
+          - Asthma
+          - Urticaria
+          - Atopic dermatitis (eczema)
+          - Food allergies
+
+          ==Systemic atopy== = **anaphylaxis**.
+      - kind: explain
+        page: 59
+        quote: "Inflammatory response in asthmatic bronchi"
+        title: "شُعب الـ asthma"
+        text: |
+          رسمة صفحة 59:
+
+          - **Spasmogens** (histamine، leukotrienes، prostaglandins) ← ==bronchoconstriction==.
+          - **Chemotactic factors** (IL-5، TNF-α) ← خلايا بتطلّع MBP و ECP و lysosomal enzymes ← inflammation و **bronchial hyperreactivity**.
+          - في الآخر: cell infiltrate، mucus زيادة، عضلات أتخن، و chronic bronchospasm.
+      - kind: mnemonic
+        page: 59
+        quote: "Anaphylactic shock is most frequently observed in individuals sensitized to insect stings, peanuts, seafood or penicillin."
+        word: "PIPS"
+        hook: "أشهر أسباب الـ anaphylactic shock «PIPS»: زي صفارة الإسعاف."
+        parts:
+          - { key: "P", text: "Penicillin" }
+          - { key: "I", text: "Insect stings" }
+          - { key: "P", text: "Peanuts" }
+          - { key: "S", text: "Seafood" }
+      - kind: case
+        page: 59
+        quote: "Constriction of the bronchioles- lethal--Give adrenaline immediately."
+        stem: "A 22-year-old is stung by a bee at a picnic. Within 5 minutes: hoarse voice, wheeze, BP 70/40, cold sweaty skin."
+        steps:
+          - question: "What is happening?"
+            options: ["Anaphylactic shock (systemic type I)", "Serum sickness", "Vasovagal faint"]
+            answer: 0
+            why: "Insect sting + دقايق + bronchospasm + هبوط ضغط = anaphylaxis. الـ serum sickness بتاخد أيام."
+          - question: "Why is the BP so low?"
+            options: ["Mediators dilate blood vessels throughout the body", "Blood loss", "Heart block from IgE"]
+            answer: 0
+            why: "الـ mast cells والـ basophils بيرموا mediators و vasodilators في الدم كله."
+          - question: "First drug?"
+            options: ["Adrenaline immediately", "Oral antihistamine", "Skin prick test"]
+            answer: 0
+            why: "الكتاب: constriction of the bronchioles lethal، give adrenaline immediately."
+      - kind: aside
+        tone: exam
+        page: 59
+        quote: "Clinically anaphylaxis is a form of extreme shock (anaphylactic shock) that can kill within minutes of exposure to the antigen."
+        text: "أي سؤال فيه anaphylaxis: الإجابة الأولى **adrenaline**. الـ antihistamine والـ steroid بييجوا بعدين، مش بدل منه."
+      - kind: explain
+        page: 60
+        quote: "The RAST(radioallergosorbent test) uses these purified allergens in a panel to screen serum samples"
+        title: "التشخيص: RIST ولا RAST؟"
+        text: |
+          - ==RIST== (radioimmunosorbent): **total** IgE في الدم. لو عالي من غير حساسية: فكّر في **helminths** و **Hodgkin's**.
+          - ==RAST== (radioallergosorbent): panel من allergens متنقّية ← **يحدد الـ allergen نفسه**.
+          - **Skin prick test**.
+
+          الـ allergens بتتنقّى، واللي صعب يتنقّى بيتصنع بـ recombinant DNA.
+      - kind: aside
+        tone: tip
+        page: 59
+        quote: "Blood sample for RIST (radioimmunosorbent test)."
+        text: "افتكرها كده: في RAST حرف A = Allergen، يعني بيقولك الـ allergen مين. الـ RIST بيقولك الـ IgE كام بس."
+      - kind: sort
+        page: 60
+        quote: "Basic approaches: Minimizing contact with allergen."
+        prompt: "حط كل علاج في مكانه:"
+        bins: ["Block mediators / symptoms", "Change the immune response"]
+        cards:
+          - { text: "Antihistamines", bin: 0 }
+          - { text: "Zileuton, montelukast", bin: 0 }
+          - { text: "Bronchodilators, steroids, cromones", bin: 0 }
+          - { text: "Hyposensitization", bin: 1 }
+          - { text: "Omalizumab (anti-IgE)", bin: 1 }
+          - { text: "Th2 to Th1 deviation (IL-12)", bin: 1 }
+          - { text: "Anti-allergy vaccines, gene therapy", bin: 1 }
+        why: "أساس العلاج: ابعد عن الـ allergen (و emollients للجلد). الـ hyposensitization = SC حقن allergen بجرعات بتزيد كل أسبوع أو شهر لسنين، والـ omalizumab بيمسك الـ IgE اللي في الدم."
+      - kind: update
+        page: 60
+        quote: "Lipoxygenase inhibitors (leukotriene inhibitors) = zileuton, montelukast."
+        text: "الكتاب حاطط الاتنين lipoxygenase inhibitors. بالظبط: zileuton هو الـ 5-lipoxygenase inhibitor، والـ montelukast بيقفل الـ leukotriene receptor (LTRA). في الامتحان: إجابة الكتاب."
+        ref: "GINA asthma report, 2024"
+      - kind: try
+        items: [rheum.L03.040, rheum.L03.046, rheum.L03.051, rheum.L03.057, rheum.L03.059]
+    recap:
+      - "Localized: hay fever، asthma، urticaria، eczema، food allergy. Systemic: anaphylaxis."
+      - "PIPS: penicillin، insect stings، peanuts، seafood."
+      - "Anaphylaxis: vasodilation وهبوط ضغط و bronchospasm ← adrenaline فورًا."
+      - "RIST = total IgE (DD: helminths، Hodgkin's)، RAST = allergen محدد."
+      - "Omalizumab بيمسك الـ IgE، hyposensitization حقن بتزيد لسنين."
+    practice: [rheum.L03.037, rheum.L03.038, rheum.L03.039, rheum.L03.040, rheum.L03.041, rheum.L03.042, rheum.L03.043, rheum.L03.044, rheum.L03.045, rheum.L03.046, rheum.L03.047, rheum.L03.048, rheum.L03.049, rheum.L03.050, rheum.L03.051, rheum.L03.052, rheum.L03.053, rheum.L03.054, rheum.L03.055, rheum.L03.056, rheum.L03.057, rheum.L03.058, rheum.L03.059, rheum.L03.060, rheum.L03.061, rheum.L03.062, rheum.L03.097, rheum.L03.099]
+  # ------------------------------------------------------------------
+  - id: rheum.L03.lesson4
+    title: "Type II: الـ antibody على باب الخلية"
+    hook: "في type II الـ antibody مش بيلف في الدم: بيقف على باب الخلية نفسها، يا يكسره يا يقفله يا يفتحه غصب."
+    minutes: 6
+    pages: [61, 63]
+    topics: [type2]
+    goals:
+      - "تعرف تلات طرق بتموت بيها الخلية في type II"
+      - "تعدّ أمثلة الـ complement lysis"
+      - "تفرّق Graves عن myasthenia gravis"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 61
+        quote: "the direct binding of antibody (IgG or IgM) to cell surface antigens."
+        title: "Direct antibody-mediated cytotoxicity"
+        text: |
+          ==Type II== = antibody (**IgG أو IgM**) بيمسك في **antigen على سطح الخلية** ← cell lysis.
+
+          الخلية بتموت بـ:
+          1. **Phagocytosis**
+          2. **Complement activation**
+          3. ==ADCC== (antibody-dependent cell-mediated cytotoxicity) بالـ **NK cells**
+      - kind: figure
+        page: 62
+        quote: "activation of complement via the classical pathway"
+        title: "تلات طرق للقتل"
+        alt: "A target cell covered in antibodies in the centre. Left: complement activated by the classical pathway, arrow down to lysis. Bottom: antibody acts as opsonin, a phagocyte with Fc and C3b receptors engulfs the cell. Right: an NK cell binds the antibody and kills the cell, labelled ADCC."
+        caption: "1) complement (classical pathway) ← lysis. 2) opsonin ← phagocytosis. 3) NK cell ← ADCC."
+        svg: |
+          <svg viewBox="0 0 330 230" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="R03b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-bad"/></marker>
+            </defs>
+            <circle cx="165" cy="95" r="44" class="fg-good"/>
+            <text x="165" y="92" text-anchor="middle" class="t-sm t-b">target</text>
+            <text x="165" y="108" text-anchor="middle" class="t-sm t-b">cell</text>
+            <path d="M165 51v-12M195 64l8-8M209 95h12M135 64l-8-8M121 95h-12M165 139v12" class="fg-ink" stroke-width="2"/>
+            <text x="165" y="22" text-anchor="middle" class="t-sm t-mut">IgG / IgM on surface</text>
+            <text x="8" y="72" class="t-sm t-b">1 complement</text>
+            <text x="8" y="88" class="t-sm t-mut">classical pathway</text>
+            <path d="M50 96v30" class="fg-arrow-bad" marker-end="url(#R03b)"/>
+            <text x="34" y="146" class="t-sm t-bad">lysis</text>
+            <circle cx="290" cy="95" r="22" class="fg-acc"/>
+            <text x="290" y="99" text-anchor="middle" class="t-sm">NK</text>
+            <path d="M266 95h-38" class="fg-arrow-bad" marker-end="url(#R03b)"/>
+            <text x="248" y="134" class="t-sm t-b">3 ADCC</text>
+            <circle cx="165" cy="196" r="20" class="fg-acc"/>
+            <text x="165" y="200" text-anchor="middle" class="t-sm">Mφ</text>
+            <path d="M165 174v-14" class="fg-arrow-bad" marker-end="url(#R03b)"/>
+            <text x="194" y="190" class="t-sm t-b">2 opsonin</text>
+            <text x="194" y="206" class="t-sm t-mut">Fc + C3b receptors</text>
+          </svg>
+      - kind: explain
+        page: 62
+        quote: "Effector mechanisms of anti-body mediated disease."
+        title: "Effector mechanisms: complement و Fc receptors"
+        text: |
+          رسمة صفحة 62 (A و B):
+
+          - **Opsonization**: الخلية متغطية بـ antibody و ==C3b== ← الـ phagocyte يمسكها بالـ **Fc** والـ **C3b receptors** ويبلعها.
+          - **Inflammation**: antibody على نسيج ← Fc receptors على الـ neutrophils + complement ← ==C5a و C3a== ← neutrophil activation ← inflammation و tissue injury.
+      - kind: explain
+        page: 63
+        quote: "Examples of type II reactions in which complement is activated and cells are destroyed"
+        title: "أمثلة بتكسّر الخلايا"
+        text: |
+          Complement بيتنشّط والخلايا بتتكسّر في:
+
+          - ==Incompatible blood transfusion==
+          - **Haemolytic disease of the newborn**
+          - **Autoimmune haemolytic anaemia**
+      - kind: table
+        page: 63
+        quote: "In Graves disease stimulating antibodies are directed against the receptor for TSH."
+        title: "يفتح ولا يقفل؟"
+        columns: ["Disease", "Target", "Antibody"]
+        rows:
+          - ["Graves", "TSH receptor", "Stimulates without ligand"]
+          - ["Myasthenia gravis", "ACh receptor", "Blocks ligand binding"]
+        hide: [[0, 2], [1, 2]]
+      - kind: aside
+        tone: analogy
+        page: 63
+        quote: "In myasthenia gravis blocking antibodies are directed against the Ach receptor."
+        text: "في Graves الـ antibody زي واحد ساند على جرس الباب: الغدة شغالة طول الوقت من غير TSH. في myasthenia زي واحد حاطط لزق على الجرس: الـ ACh بييجي ومش عارف يرن. والاتنين من غير ما الخلية تتكسر."
+      - kind: check
+        page: 63
+        quote: "Several disease are caused by antibody directed against cell surface receptors which can stimulate or block the receptor."
+        question: "A woman has fatigable ptosis and diplopia. Which antibody mechanism fits?"
+        options: ["Blocking antibody to the ACh receptor", "Stimulating antibody to the TSH receptor", "IgE on mast cells", "Immune complexes in glomeruli"]
+        answer: 0
+        why:
+          - "صح: myasthenia gravis = blocking antibodies ضد الـ ACh receptor."
+          - "ده Graves."
+          - "ده type I."
+          - "ده type III."
+      - kind: try
+        items: [rheum.L03.063, rheum.L03.064, rheum.L03.069, rheum.L03.070, rheum.L03.073]
+    recap:
+      - "Type II: IgG/IgM على antigen في سطح الخلية."
+      - "القتل: complement (classical) ← lysis، opsonin ← phagocytosis، NK ← ADCC."
+      - "Lysis: transfusion غلط، HDN، autoimmune haemolytic anaemia."
+      - "Graves يفتح الـ TSH receptor، myasthenia يقفل الـ ACh receptor."
+    practice: [rheum.L03.063, rheum.L03.064, rheum.L03.065, rheum.L03.066, rheum.L03.067, rheum.L03.068, rheum.L03.069, rheum.L03.070, rheum.L03.071, rheum.L03.072, rheum.L03.073, rheum.L03.074, rheum.L03.100]
+  # ------------------------------------------------------------------
+  - id: rheum.L03.lesson5
+    title: "Type III و IV: الزبالة في المواسير والجيش المتأخر"
+    hook: "Type III زي زبالة بتسد مواسير ضيقة. Type IV زي جيش بيوصل بعد 3 أيام، بس لما يوصل بيبني قلعة (granuloma)."
+    minutes: 7
+    pages: [63, 67]
+    topics: [type3, type4]
+    goals:
+      - "تشرح ليه الـ immune complexes بتترسب وفين"
+      - "تفرّق Arthus عن serum sickness"
+      - "تعرف توقيت ومثال الـ type IV وتحل أسئلة الكتاب"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 63
+        quote: "The damaging inflammatory reaction is triggered by a soluble antigen capable of forming large insoluble immune complexes"
+        title: "Immune complex-mediated injury"
+        text: |
+          - **Soluble antigen** + IgG أو IgM ← ==large insoluble immune complexes== في الدم.
+          - كبيرة على الـ phagocytosis ← بدل ما تتشال **بتترسب**، غالبًا في **جدار الأوعية**.
+          - Complement و Fc receptors ← neutrophils ← granule enzymes و reactive oxygen ← ==vasculitis== و tissue necrosis.
+      - kind: figure
+        page: 64
+        quote: "Neutrophil granule enzymes, reactive oxygen intermediates"
+        title: "من الدم لجدار الوعاء"
+        alt: "A blood vessel in cross-section on the left with small antigen-antibody complexes floating in it and some stuck to the wall. An arrow labelled complement and Fc receptor recruitment leads to the right, where the same vessel wall is inflamed, neutrophils sit on the deposits and release enzymes and oxygen radicals, labelled vasculitis."
+        caption: "Complexes بتلزق في الجدار ← complement و Fc ← neutrophils ← vasculitis."
+        svg: |
+          <svg viewBox="0 0 330 200" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="R03c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-acc"/></marker>
+            </defs>
+            <circle cx="62" cy="95" r="52" class="fg-thin"/>
+            <circle cx="62" cy="95" r="40" class="fg-box"/>
+            <circle cx="50" cy="80" r="5" class="fg-bad"/>
+            <circle cx="74" cy="96" r="5" class="fg-bad"/>
+            <circle cx="58" cy="126" r="5" class="fg-bad"/>
+            <circle cx="68" cy="128" r="5" class="fg-bad"/>
+            <text x="62" y="170" text-anchor="middle" class="t-sm">immune complexes</text>
+            <path d="M126 95h44" class="fg-arrow-acc" marker-end="url(#R03c)"/>
+            <text x="160" y="80" text-anchor="middle" class="t-sm t-mut">complement</text>
+            <text x="160" y="116" text-anchor="middle" class="t-sm t-mut">Fc receptors</text>
+            <circle cx="268" cy="95" r="52" class="fg-bad"/>
+            <circle cx="268" cy="95" r="40" class="fg-box"/>
+            <circle cx="256" cy="112" r="10" class="fg-acc"/>
+            <circle cx="280" cy="112" r="10" class="fg-acc"/>
+            <circle cx="262" cy="126" r="4" class="fg-bad"/>
+            <circle cx="274" cy="126" r="4" class="fg-bad"/>
+            <text x="268" y="88" text-anchor="middle" class="t-sm">enzymes, ROS</text>
+            <text x="268" y="170" text-anchor="middle" class="t-sm t-bad t-b">vasculitis</text>
+          </svg>
+      - kind: table
+        page: 65
+        quote: "local tissue damage characterized by pain, redness and swelling = Arthus reaction."
+        title: "Localized ضد systemic"
+        columns: ["", "Arthus", "Serum sickness"]
+        rows:
+          - ["Complexes", "Stay where Ag meets Ab", "Circulate, trapped in narrow vessels"]
+          - ["Damage", "Local pain, redness, swelling", "Fever, weakness, rash, arthritis, GN"]
+          - ["Cause", "Local antigen", "Anti-tetanus antitoxin, drugs"]
+        hide: [[1, 2], [2, 2]]
+      - kind: mnemonic
+        page: 65
+        quote: "Joints arteries and the renal glomeruli are susceptible to IC deposition."
+        word: "JAG"
+        hook: "الـ complexes بتتحشر في «JAG»: زي ما الشوكة بتتحشر في الزور."
+        parts:
+          - { key: "J", text: "Joints → arthritis" }
+          - { key: "A", text: "Arteries → vasculitis" }
+          - { key: "G", text: "Glomeruli → nephritis" }
+      - kind: explain
+        page: 65
+        quote: "accumulation of ICs involving auto-antibodies recognizing soluble self antigens =SLE."
+        title: "مش بس antigen غريب"
+        text: |
+          - المكان: **أوعية ضيقة** أو **turbulence** لما الدم يغيّر اتجاهه.
+          - ==Serum sickness== هو الـ **prototype** للـ systemic type III.
+          - ومن غير antigen غريب: autoantibodies ضد **soluble self antigens** ← ==SLE==.
+      - kind: explain
+        page: 65
+        quote: "Is immunopathological damage occurring 24-72 hours after exposure of a sensitized individual to an antigen."
+        title: "Type IV: الـ delayed type"
+        text: |
+          - Damage بعد ==24-72 ساعة== من التعرّض في واحد sensitized.
+          - مش antibody: **effector T cells و macrophages**.
+          - أول تعرّض: CD4 Th تتنشّط وتتكاثر في **1-2 أسبوع**.
+          - التعرّض التاني: تفرز cytokines ← تجيب macrophages، وهي ==95%== من الخلايا.
+          - Activated macrophages: phagocytosis أقوى.
+      - kind: order
+        page: 66
+        quote: "initiated because Ag is 1st presented to T cells which then activate macroph."
+        prompt: "رتّب الـ type IV زي رسمة صفحة 66:"
+        steps:
+          - "Antigen"
+          - "Antigen-presenting cell"
+          - "Sensitized T cell secretes cytokines"
+          - "Macrophages attracted and activated"
+          - "Granuloma formation"
+        why: "بياخد أيام لأن الـ antigen لازم يتعرض على الـ T cells الأول، وهي اللي تشغّل الـ macrophages. الأمثلة: M. TB و Leishmania."
+      - kind: sort
+        page: 66
+        quote: "Examples of antigens that induce type IV reaction intracellular pathogens such as M. TB and Leishmania."
+        prompt: "حط كل مثال في نوعه:"
+        bins: ["Type I", "Type II", "Type III", "Type IV"]
+        cards:
+          - { text: "Peanut anaphylaxis", bin: 0 }
+          - { text: "Hay fever", bin: 0 }
+          - { text: "ABO-incompatible transfusion", bin: 1 }
+          - { text: "Myasthenia gravis", bin: 1 }
+          - { text: "Serum sickness", bin: 2 }
+          - { text: "Arthus reaction", bin: 2 }
+          - { text: "Tuberculosis granuloma", bin: 3 }
+          - { text: "Leishmania", bin: 3 }
+        why: "I = IgE في دقايق، II = antibody على الخلية، III = complexes، IV = T cells بعد 24-72 ساعة."
+      - kind: case
+        page: 67
+        quote: "What type of hypersensitivity reaction is this patient experiencing?"
+        stem: "A 35-year-old woman has joint pain, swelling and rash two weeks after a new antibiotic for sinusitis. Fever, fatigue, dark urine, palpable purpura on the legs, low complement. (Book question 1)"
+        steps:
+          - question: "Which type of hypersensitivity?"
+            options: ["Type III", "Type I", "Type II", "Type IV"]
+            answer: 0
+            why: "Drug antigen + أسبوعين + vasculitis (purpura) + arthritis + GN (dark urine) + complement واطي = type III زي serum sickness. الكتاب مش طابع الإجابة؛ دي من صفحة 65."
+          - question: "Which does NOT belong to type III? (Book question 2)"
+            options: ["Drug allergy", "Acute hypersensitivity pneumonitis", "Drug-induced vasculitis", "Serum sickness"]
+            answer: 0
+            why: "الـ drug allergy المعتاد (زي penicillin anaphylaxis) هو type I. الباقي immune complex."
+      - kind: aside
+        tone: trap
+        page: 65
+        quote: "Drug antigen or environmental."
+        text: "نفس الـ drug antigen ممكن يعمل type I (anaphylaxis في دقايق) أو type III (serum sickness بعد أيام). السؤال بيفرّقهم بالـ **توقيت** و **الـ complement الواطي**."
+      - kind: try
+        items: [rheum.L03.078, rheum.L03.080, rheum.L03.082, rheum.L03.087, rheum.L03.089]
+    recap:
+      - "Type III: soluble Ag + IgG/IgM ← complexes كبيرة ← تترسب في الأوعية ← neutrophils ← vasculitis."
+      - "Arthus = local. Serum sickness = systemic prototype. SLE = self antigen."
+      - "JAG: joints، arteries، glomeruli."
+      - "Type IV: 24-72 ساعة، T cells و macrophages (95%)، TB و Leishmania، granuloma."
+    practice: [rheum.L03.075, rheum.L03.076, rheum.L03.077, rheum.L03.078, rheum.L03.079, rheum.L03.080, rheum.L03.081, rheum.L03.082, rheum.L03.083, rheum.L03.084, rheum.L03.085, rheum.L03.086, rheum.L03.087, rheum.L03.088, rheum.L03.089, rheum.L03.090, rheum.L03.091, rheum.L03.092, rheum.L03.093, rheum.L03.094, rheum.L03.095, rheum.L03.098, rheum.L03.101, rheum.L03.102, rheum.L03.103, rheum.L03.104]

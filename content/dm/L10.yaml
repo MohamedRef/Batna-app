@@ -1,0 +1,462 @@
+schema: batna.content/v1
+lecture: dm.L10
+title: "Injectable Therapy"
+author: "Prof. Dr. Mohammed Zietoun"
+book: { chapter: 6, pages: [125, 129] }
+topics:
+  - { id: indications, title: "Indications for insulin therapy" }
+  - { id: power, title: "A1C reduction by drug class and the power of insulin" }
+  - { id: types, title: "Mealtime and basal insulins" }
+  - { id: basal, title: "Basal-based regimens: basal only, titration, basal plus, basal-bolus" }
+  - { id: biphasic, title: "Biphasic twice-daily regimen" }
+items:
+  # ---------- p125: indications ----------
+  - id: dm.L10.001
+    kind: card
+    topic: indications
+    front: Why is insulin given in type 1 DM?
+    back: For survival.
+    src: { page: 125, quote: "Type 1 DM: for survival." }
+    status: unverified
+  - id: dm.L10.002
+    kind: enumerate
+    topic: indications
+    prompt: Indications for insulin in type 2 DM?
+    points:
+      - Failure of oral therapy
+      - Hyperglycemic crises (DKA or HHS)
+      - "Stress: ACS, ICU, major surgery, severe infection, corticosteroids"
+      - Pregnancy or planning pregnancy
+      - Significant liver or kidney disease
+    pass: 4
+    src: { page: 125, quote: "Patients in whom oral therapy has failed. 2. Hyperglycemic crises (DKA or HHS)." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L10.003
+    kind: card
+    topic: indications
+    front: Name the stressful situations that call for insulin in type 2 DM.
+    back: Acute coronary syndrome, ICU stay, major surgery, severe infection, corticosteroid therapy, and the like.
+    src: { page: 125, quote: "Stressful situations (ACS, ICU, major surgery, severe infection, corticosteroid therapy, etc)." }
+    status: unverified
+  - id: dm.L10.004
+    kind: mcq
+    topic: indications
+    stem: A 34-year-old woman with type 2 DM well controlled on metformin and gliclazide plans to become pregnant next year. What does the lecture advise?
+    options:
+      - Switch to insulin
+      - Add an SGLT2 inhibitor
+      - Continue the same oral drugs through pregnancy
+      - Add a DPP-4 inhibitor
+      - Stop all treatment and rely on diet
+    answer: 0
+    why:
+      - "Correct: pregnancy or planning pregnancy is an indication for insulin in type 2 DM (p125)."
+      - "SGLT2 inhibitors are contraindicated in pregnancy (dm.L09 p122)."
+      - "The lecture lists planning pregnancy as an insulin indication."
+      - "No oral agent is the lecture's answer here."
+      - "Diet alone does not replace a needed drug."
+    src: { page: 125, quote: "Pregnancy or planning to get pregnant." }
+    status: unverified
+  - id: dm.L10.005
+    kind: mcq
+    topic: indications
+    stem: A 61-year-old man with type 2 DM on metformin and sitagliptin is admitted to the ICU with severe pneumonia and septic shock. Glucose 320 mg/dl. What is the glucose-lowering treatment of choice?
+    options:
+      - Insulin
+      - Increase metformin to 3 g/d
+      - Add glibenclamide
+      - Add empagliflozin
+      - Add acarbose
+    answer: 0
+    why:
+      - "Correct: stressful situations such as ICU and severe infection are insulin indications (p125)."
+      - "Metformin's maximum is 2.5 g/d, and lactic acidosis risk rises in shock."
+      - "Oral secretagogues are not the answer in critical illness."
+      - "SGLT2 inhibitors should not be started in critically ill inpatients (dm.L09 p122)."
+      - "Acarbose is weak and unsuitable in the ICU."
+    src: { page: 125, quote: "Stressful situations (ACS, ICU, major surgery, severe infection, corticosteroid therapy, etc)." }
+    status: unverified
+  # ---------- p126: A1C reduction and power of insulin ----------
+  - id: dm.L10.006
+    kind: table
+    topic: power
+    title: A1C reduction with glucose-lowering medications (Injectable therapy lecture)
+    columns: [Agent, A1C reduction (%)]
+    rows:
+      - [Sulfonylureas, "1.5"]
+      - [Metformin, "1.5"]
+      - [Glinides, "1.0–1.5"]
+      - [Thiazolidinediones, "0.8–1.0"]
+      - [DPP-4 inhibitors, "0.5–0.9"]
+      - [Alpha-glucosidase inhibitors, "0.5–0.8"]
+      - [Insulin, "≥2.5"]
+      - [GLP analogues, "0.6"]
+      - [Amylin analogues, "0.6"]
+    blanks: [[0, 1], [3, 1], [4, 1], [6, 1]]
+    src: { page: 126, quote: "Insulin ≥ 2.5 GLP analogues 0.6 Amylin analogues 0.6" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L10.007
+    kind: cloze
+    topic: power
+    text: "Insulin lowers A1C by {{c1::2.5% or more}}, the most of any glucose-lowering drug in the table."
+    src: { page: 126, quote: "Insulin ≥ 2.5" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L10.008
+    kind: card
+    topic: power
+    front: What is the power of insulin, and what limits its use?
+    back: It has essentially unlimited power to lower plasma glucose; the primary limitation is hypoglycemia.
+    src: { page: 126, quote: "The primary limitation to insulin's usefulness as a diabetes drug is hypoglycemia." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p126-127: insulin types ----------
+  - id: dm.L10.009
+    kind: table
+    topic: types
+    title: Mealtime insulins
+    columns: [Insulin, Onset, Peak, Duration]
+    rows:
+      - [Lispro (Humalog), "10 min", "1 h", "4 h"]
+      - [Aspart (NovoRapid), "10 min", "1 h", "4 h"]
+      - [Glulisine (Apidra), "10 min", "1 h", "4 h"]
+      - [Regular (Actrapid), "30 min", "2–4 h", "6 h"]
+    blanks: [[0, 1], [0, 2], [0, 3], [3, 1], [3, 2], [3, 3]]
+    src: { page: 126, quote: "Regular 30 min 2-4 h 6h" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L10.010
+    kind: card
+    topic: types
+    front: Name the three rapid-acting mealtime insulin analogues with their brands.
+    back: Lispro (Humalog), aspart (NovoRapid), glulisine (Apidra).
+    src: { page: 126, quote: "Lispro (Humalog) 10 min 1h 4h" }
+    status: unverified
+  - id: dm.L10.011
+    kind: cloze
+    topic: types
+    text: "Rapid analogues start in {{c1::10 min}}, peak at {{c2::1 h}} and last {{c3::4 h}}."
+    src: { page: 126, quote: "Lispro (Humalog) 10 min 1h 4h Aspart 10 min 1h 4h" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L10.012
+    kind: cloze
+    topic: types
+    text: "Regular insulin (Actrapid) starts in {{c1::30 min}}, peaks at {{c2::2–4 h}} and lasts {{c3::6 h}}."
+    src: { page: 126, quote: "Regular 30 min 2-4 h 6h" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L10.013
+    kind: table
+    topic: types
+    title: Basal insulins
+    columns: [Insulin, Onset, Peak, Duration]
+    rows:
+      - [NPH (Insulatard), "2 h", "5–7 h", "12–16 h"]
+      - [Detemir (Levemir), "2–3 h", "6–8 h", "20–24 h"]
+      - [Glargine U100 (Lantus), "2–3 h", Minimal, "Up to 30 h"]
+      - [Glargine U300, "2–6 h", Minimal, "30–36 h"]
+      - [Degludec, "0.5–1.5 h", Minimal, ">42 h"]
+    blanks: [[0, 2], [0, 3], [1, 3], [2, 3], [3, 3], [4, 3]]
+    src: { page: 127, quote: "NPH 2h 5-7 h 12-16 h" }
+    status: unverified
+    tags: [numbers, high-yield, book-question]
+  - id: dm.L10.014
+    kind: card
+    topic: types
+    front: Which basal insulin has the longest action, and how long?
+    back: Degludec, more than 42 hours.
+    src: { page: 127, quote: "Degludec 0.5-1.5 h Minimal peak ˃ 42" }
+    status: unverified
+  - id: dm.L10.015
+    kind: card
+    topic: types
+    front: Which basal insulins have a peak, and when?
+    back: NPH (5–7 h) and detemir (6–8 h). Glargine U100, glargine U300 and degludec have only a minimal peak.
+    src: { page: 127, quote: "Detemir 2-3 h 6-8 h 20-24 h" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L10.016
+    kind: cloze
+    topic: types
+    text: "NPH (Insulatard): onset {{c1::2 h}}, peak {{c2::5–7 h}}, duration {{c3::12–16 h}}."
+    src: { page: 127, quote: "NPH 2h 5-7 h 12-16 h" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L10.017
+    kind: cloze
+    topic: types
+    text: "Glargine U100 (Lantus) lasts {{c1::up to 30 h}}; glargine U300 lasts {{c2::30–36 h}}."
+    src: { page: 127, quote: "Glargine 2-6 h Minimal peak 30-36 h" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L10.018
+    kind: mcq
+    topic: types
+    stem: A man on NPH at bedtime wakes at 3 am sweating with glucose 55 mg/dl. Which property of NPH best explains this?
+    options:
+      - Its peak at 5–7 hours after injection
+      - Its duration of more than 42 hours
+      - Its onset within 10 minutes
+      - Its lack of any peak
+      - Its 4-hour duration
+    answer: 0
+    why:
+      - "Correct: NPH peaks 5–7 h after a bedtime dose, in the early morning (p127)."
+      - "More than 42 h is degludec."
+      - "10-minute onset is the rapid analogues."
+      - "NPH does have a peak; glargine and degludec have minimal peaks."
+      - "4 hours is the rapid analogues' duration."
+    src: { page: 127, quote: "NPH 2h 5-7 h 12-16 h" }
+    status: unverified
+  # ---------- p127: basal regimens ----------
+  - id: dm.L10.019
+    kind: order
+    topic: basal
+    prompt: Steps of insulin intensification in the basal-based regimens.
+    steps:
+      - "Basal only: add basal insulin and titrate"
+      - "Basal plus: add prandial insulin at the main meal"
+      - "Basal-bolus: add prandial insulin as doses required"
+    src: { page: 127, quote: "Add prandial insulin at main meal" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L10.020
+    kind: card
+    topic: basal
+    front: When do you move from basal only to basal plus?
+    back: When HbA1c is still above target although fasting glucose has reached target.
+    src: { page: 127, quote: "HbA1c: Above target FBG: Target" }
+    status: unverified
+  - id: dm.L10.021
+    kind: enumerate
+    topic: basal
+    prompt: How do you start basal-only insulin?
+    points:
+      - Continue the maximal dose of oral drugs
+      - Add NPH, detemir, glargine or degludec at bedtime
+      - Start with 10 units (or 0.15 U/kg)
+    pass: 3
+    src: { page: 127, quote: "Continue the Maximal dose of OADs. 2. Add NPH, Detemir, Glargine, or Degludec at bedtime. 3. Start by 10 units (or: 0.15 U/Kg)." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L10.022
+    kind: cloze
+    topic: basal
+    text: "Start basal insulin with {{c1::10 units}} (or {{c2::0.15 U/kg}}) at {{c3::bedtime}}."
+    src: { page: 127, quote: "Start by 10 units (or: 0.15 U/Kg)." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L10.023
+    kind: table
+    topic: basal
+    title: "Titration of basal insulin: the 3–0–3 rule"
+    columns: [Fasting plasma glucose, Change]
+    rows:
+      - [">130 mg/dl", "Add 3 units"]
+      - ["70–130 mg/dl", "Add 0 units"]
+      - ["<70 mg/dl", "Minus 3 units"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 127, quote: "If FPG > 130 mg/dl → Add 3 units. 2. If FPG = 70 – 130 mg/dl → Add 0 units." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L10.024
+    kind: mcq
+    topic: basal
+    stem: A 57-year-old woman on maximal metformin and gliclazide started glargine 10 units at bedtime. Her fasting glucose over 3 days averages 168 mg/dl, with no hypoglycemia. What next?
+    options:
+      - Add 3 units
+      - Keep the same dose
+      - Reduce by 3 units
+      - Stop the oral drugs
+      - Switch to a biphasic twice-daily regimen
+    answer: 0
+    why:
+      - "Correct: FPG >130 mg/dl → add 3 units (the 3–0–3 rule, p127)."
+      - "No change is for FPG 70–130."
+      - "Minus 3 is for FPG <70."
+      - "Basal only means continuing the maximal oral doses."
+      - "Titrate the basal dose first."
+    src: { page: 127, quote: "If FPG > 130 mg/dl → Add 3 units." }
+    status: unverified
+  - id: dm.L10.025
+    kind: mcq
+    topic: basal
+    stem: A man on degludec 24 units has fasting glucose 62 and 66 mg/dl on two mornings. What does the 3–0–3 rule advise?
+    options:
+      - Reduce by 3 units
+      - Add 3 units
+      - No change
+      - Stop insulin
+      - Add prandial insulin
+    answer: 0
+    why:
+      - "Correct: FPG <70 mg/dl → minus 3 units (p127)."
+      - "Adding is for FPG >130."
+      - "No change is for 70–130."
+      - "Stopping is not part of the rule."
+      - "Prandial insulin is added when HbA1c stays high with FBG at target."
+    src: { page: 127, quote: "If FPG < 70 mg/dl → Minus 3 units." }
+    status: unverified
+  # ---------- p128: basal-bolus and biphasic ----------
+  - id: dm.L10.026
+    kind: enumerate
+    topic: basal
+    prompt: Advantages of the basal-bolus regimen?
+    points:
+      - Closest to natural insulin production
+      - More flexibility over type and timing of food
+      - Suits erratic mealtimes or variable shifts
+    pass: 3
+    src: { page: 128, quote: "Gives more flexibility over type of food and when it can be eaten." }
+    status: unverified
+    tags: [book-question, high-yield]
+  - id: dm.L10.027
+    kind: card
+    topic: biphasic
+    front: Indication of the biphasic twice-daily regimen?
+    back: Type 2 diabetics not controlled on a once-daily regimen.
+    src: { page: 128, quote: "Type 2 diabetics not controlled on a once-daily regimen." }
+    status: unverified
+  - id: dm.L10.028
+    kind: cloze
+    topic: biphasic
+    text: "Biphasic twice daily: start {{c1::0.3 U/kg}} a day; give {{c2::2/3}} before breakfast and {{c3::1/3}} before dinner."
+    src: { page: 128, quote: "Starting daily dose = 0.3 U/Kg body weight. 2. Give 2/3 of the total daily dose before breakfast and 1/3 before dinner." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L10.029
+    kind: card
+    topic: biphasic
+    front: How is the biphasic twice-daily dose titrated?
+    back: By fasting and postprandial blood glucose.
+    src: { page: 128, quote: "Titrate the dose according to FBG and PPG." }
+    status: unverified
+  - id: dm.L10.030
+    kind: enumerate
+    topic: biphasic
+    prompt: Disadvantages of the biphasic twice-daily regimen?
+    points:
+      - Not flexible
+      - Must have 3 meals a day
+      - Cannot skip a meal
+      - Hard to adjust with big changes in meal carbohydrate
+      - Hard to adjust with a sudden rise in physical activity
+    pass: 4
+    src: { page: 128, quote: "Must have 3 meals a day. 3. You cannot skip a meal." }
+    status: unverified
+  - id: dm.L10.031
+    kind: mcq
+    topic: biphasic
+    stem: A 70 kg man with type 2 DM, not controlled on once-daily insulin, is moved to premixed biphasic insulin twice daily. What is the starting plan?
+    options:
+      - 21 units a day; 14 before breakfast and 7 before dinner
+      - 21 units a day; 7 before breakfast and 14 before dinner
+      - 10 units at bedtime
+      - 35 units a day split equally
+      - 0.15 U/kg before each meal
+    answer: 0
+    why:
+      - "Correct: 0.3 U/kg × 70 = 21 U; two-thirds (14) before breakfast, one-third (7) before dinner (p128)."
+      - "The split is reversed."
+      - "10 units at bedtime is the basal-only start (p127)."
+      - "0.5 U/kg and an equal split are not the book's numbers."
+      - "That is not a regimen in this lecture."
+    src: { page: 128, quote: "Starting daily dose = 0.3 U/Kg body weight." }
+    status: unverified
+  - id: dm.L10.032
+    kind: mcq
+    topic: biphasic
+    stem: A nurse who works rotating night shifts and often misses meals needs insulin intensification. Which regimen does the lecture favour?
+    options:
+      - Basal-bolus
+      - Biphasic twice daily
+      - Regular insulin before breakfast only
+      - NPH twice daily with fixed meals
+      - Basal only with no titration
+    answer: 0
+    why:
+      - "Correct: basal-bolus may be needed for erratic mealtimes or variable shifts (p128)."
+      - "Biphasic needs 3 meals a day and you cannot skip one (p128)."
+      - "One breakfast dose does not cover variable meals."
+      - "Fixed meals are what she cannot keep."
+      - "Basal only without titration is not intensification."
+    src: { page: 128, quote: "May be needed for those who have erratic mealtimes or work variable shifts." }
+    status: unverified
+  - id: dm.L10.033
+    kind: case
+    topic: basal
+    stem: A 63-year-old man, 80 kg, type 2 DM for 12 years, on maximal metformin and glimepiride. HbA1c 9.4%, fasting glucose 190 mg/dl.
+    steps:
+      - question: Is insulin indicated?
+        options: ["Yes: oral therapy has failed", "No: add a third oral drug only", "No: insulin is only for type 1", "Only if he is pregnant"]
+        answer: 0
+        why: "Failure of oral therapy is the first type 2 indication (p125)."
+      - reveal: You choose basal only.
+        question: How do you start?
+        options: ["Keep the oral drugs, add 10 units (or 0.15 U/kg) of basal insulin at bedtime", "Stop the oral drugs and give 0.3 U/kg biphasic", "Give regular insulin before each meal", "Give 0.5 U/kg glargine in the morning"]
+        answer: 0
+        why: "Continue maximal OADs, add NPH, detemir, glargine or degludec at bedtime, start 10 units or 0.15 U/kg (p127)."
+      - reveal: After a week, fasting glucose averages 150 mg/dl.
+        question: Titration?
+        options: ["Add 3 units", "No change", "Minus 3 units", "Double the dose"]
+        answer: 0
+        why: "FPG >130 → add 3 units (p127)."
+      - reveal: Months later fasting glucose is 110 mg/dl but HbA1c is 8.2%.
+        question: Next step?
+        options: ["Basal plus: add prandial insulin at the main meal", "Add 3 more basal units", "Stop basal insulin", "Switch to an alpha-glucosidase inhibitor"]
+        answer: 0
+        why: "HbA1c above target with FBG at target → basal plus, then basal-bolus (p127). More basal would push fasting glucose too low."
+    src: { page: 127, quote: "Continue the Maximal dose of OADs. 2. Add NPH, Detemir, Glargine, or Degludec at bedtime." }
+    status: unverified
+  - id: dm.L10.034
+    kind: case
+    topic: types
+    stem: A 45-year-old woman starts a rapid-acting insulin analogue before meals.
+    steps:
+      - question: When should she inject aspart relative to the meal?
+        options: ["Just before eating: onset about 10 minutes", "30 minutes before, like regular insulin", "At bedtime", "Two hours after eating"]
+        answer: 0
+        why: "Rapid analogues act in 10 min and peak at 1 h (p126); regular insulin needs 30 min."
+      - reveal: She asks why her old regular insulin gave her a hypo 4 hours after lunch.
+        question: Best explanation?
+        options: ["Regular insulin peaks at 2–4 h and lasts 6 h", "Regular insulin lasts more than 42 h", "Regular insulin has no peak", "Regular insulin starts in 10 minutes"]
+        answer: 0
+        why: "Regular: onset 30 min, peak 2–4 h, duration 6 h (p126), so it still works when the meal is over."
+    src: { page: 126, quote: "Regular 30 min 2-4 h 6h" }
+    status: unverified
+  # ---------- p129: end-of-lecture questions ----------
+  - id: dm.L10.035
+    kind: essay
+    topic: indications
+    prompt: Mention the indications of insulin therapy.
+    outline:
+      - "Type 1 DM": ["For survival"]
+      - "Type 2 DM": ["Failure of oral therapy", "DKA or HHS", "Stress: ACS, ICU, major surgery, severe infection, steroids", "Pregnancy or planning it", "Significant liver or kidney disease"]
+    src: { page: 125, quote: "Type 1 DM: for survival." }
+    status: unverified
+    tags: [book-question]
+  - id: dm.L10.036
+    kind: essay
+    topic: types
+    prompt: Mention the different preparations of basal insulin.
+    outline:
+      - "Intermediate, with a peak": ["NPH (Insulatard): onset 2 h, peak 5–7 h, 12–16 h", "Detemir (Levemir): 2–3 h, peak 6–8 h, 20–24 h"]
+      - "Long, minimal peak": ["Glargine U100 (Lantus): 2–3 h, up to 30 h", "Glargine U300: 2–6 h, 30–36 h", "Degludec: 0.5–1.5 h, >42 h"]
+      - "Use": ["At bedtime with maximal OADs, start 10 U or 0.15 U/kg, titrate 3–0–3"]
+    src: { page: 127, quote: "Glargine 2-3 h Minimal peak Up to 30 h" }
+    status: unverified
+    tags: [book-question]
+  - id: dm.L10.037
+    kind: essay
+    topic: basal
+    prompt: Mention the advantages of the basal-bolus insulin regimen.
+    outline:
+      - "Physiology": ["Closest to natural insulin production"]
+      - "Flexibility": ["Choice over type of food and when it is eaten", "Suits erratic mealtimes and shift work"]
+      - "Contrast with biphasic": ["Biphasic needs 3 fixed meals, no skipping, hard to adjust"]
+    src: { page: 128, quote: "Closest to natural insulin production by the body." }
+    status: unverified
+    tags: [book-question]

@@ -25,7 +25,7 @@ pub fn Mistakes(data: Rc<StudyData>) -> Element {
     let find = |id: &str| data.lectures.iter().flat_map(|l| &l.items).find(|i| i.id == id);
     rsx! {
         section { class: "card",
-            h1 { {tx::MISTAKES_TITLE} }
+            h2 { {tx::MISTAKES_TITLE} }
             p { class: "muted small", {tx::MISTAKES_NOTE} }
             if groups.is_empty() {
                 p { {tx::MISTAKES_EMPTY} }

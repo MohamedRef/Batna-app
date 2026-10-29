@@ -1,0 +1,488 @@
+schema: batna.lesson/v1
+lecture: geri.L09
+lessons:
+  # ------------------------------------------------------------------
+  - id: geri.L09.lesson1
+    title: "المناعة لما تكبر: immunosenescence"
+    hook: "جدّك بيقاوم البرد اللي عاشره 70 سنة، بس أول فيروس جديد بيوقّعه. ليه؟"
+    minutes: 9
+    pages: [155, 158]
+    topics: [overview, replicative, innate]
+    goals:
+      - "تعرف إيه اللي بيتغير في الـ thymus والـ T والـ B cells مع السن"
+      - "تفهم الـ replicative senescence والـ immune risk phenotype"
+      - "تحفظ تغيّرات الـ innate immunity خلية خلية (سؤال امتحان)"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 155
+        title: "الفكرة كلها في سطر"
+        quote: "This situation implies increased susceptibility to infections and cancer due to decreased capacity in the immune system to respond to antigenic stimulation."
+        text: |
+          مع السن الـ ==immune function بتقل==، فالجهاز المناعي ما بيعرفش يرد كويس على الـ antigenic stimulation.
+
+          النتيجة: **infections** أكتر و **cancer** أكتر.
+      - kind: table
+        page: 155
+        quote: "Aging is associated with a decline in immune function."
+        title: "صورة الكتاب: الـ immune function، إيه اللي بيطلع وإيه اللي بينزل؟"
+        columns: [Part, Changes with age]
+        rows:
+          - ["Thymus", "↓ output، ↑ fat، ↓ IL-7"]
+          - ["T cells", "↓ naive، ↑ memory، ↓ CD4، ↑ CD8"]
+          - ["B cells", "↓ IgM و IgD، ↑ IgG و IgA"]
+          - ["Inflamm-aging", "↑ IL-6 و CRP"]
+        hide: [[1, 1], [2, 1]]
+      - kind: aside
+        tone: exam
+        page: 155
+        quote: "Aging is associated with a decline in immune function."
+        text: "ركّز على الـ antibodies: الـ **IgM و IgD بيقلوا**، والـ **IgG و IgA بيزيدوا**. والـ immune function عمومًا بتقل، مش كل حاجة بتقل."
+      - kind: figure
+        page: 156
+        quote: "The decrease in naive cells and the increase in memory cells"
+        title: "الخزنة اتملت بالـ memory"
+        alt: "Two bars of T cells. In youth most are naive cells ready for new antigens. In old age most are memory cells, so old pathogens are handled but new antigens meet few naive cells."
+        caption: "الـ ==naive== بيقلوا والـ **memory** بيزيدوا: الحماية من القديم سليمة، والرد على الجديد ضعيف."
+        svg: |
+          <svg viewBox="0 0 330 220" xmlns="http://www.w3.org/2000/svg">
+            <text x="20" y="24" class="t-sm t-b">Young</text>
+            <rect x="80" y="10" width="170" height="24" rx="6" class="fg-good"/>
+            <rect x="250" y="10" width="60" height="24" rx="6" class="fg-box"/>
+            <text x="90" y="27" class="t-sm">naive</text>
+            <text x="256" y="27" class="t-sm">memory</text>
+            <text x="20" y="74" class="t-sm t-b">Old</text>
+            <rect x="80" y="60" width="50" height="24" rx="6" class="fg-good"/>
+            <rect x="130" y="60" width="180" height="24" rx="6" class="fg-box"/>
+            <text x="86" y="77" class="t-sm">naive</text>
+            <text x="190" y="77" class="t-sm">memory</text>
+            <rect x="10" y="110" width="150" height="90" rx="10" class="fg-acc"/>
+            <text x="20" y="134" class="t-sm t-b">Old pathogen</text>
+            <text x="20" y="156" class="t-sm">memory cells ready</text>
+            <text x="20" y="178" class="t-sm">→ defence intact</text>
+            <rect x="170" y="110" width="150" height="90" rx="10" class="fg-bad"/>
+            <text x="180" y="134" class="t-sm t-b">Novel antigen</text>
+            <text x="180" y="156" class="t-sm">few naive cells</text>
+            <text x="180" y="178" class="t-sm">→ weak response</text>
+          </svg>
+      - kind: explain
+        page: 156
+        title: "Replicative senescence"
+        quote: "Replicative senescence is the age-related shortening of telomere length and impairment of cell division."
+        text: |
+          الـ ==telomeres بتقصر== والخلية ما بتعرفش تنقسم كويس.
+
+          فالـ **clonal expansion** بيقل: الـ T cell لما تمسك antigen ما بتتكاترش بنفس الحماس بتاع زمان.
+      - kind: mnemonic
+        page: 156
+        quote: "Immunosenescence"
+        word: "CMV 1"
+        parts:
+          - { key: "C", text: "CD8+ CD28− CD57+ cells pile up" }
+          - { key: "M", text: "Mitogen and T-cell proliferation is poor" }
+          - { key: "V", text: "Virus: CMV seropositivity" }
+          - { key: "1", text: "CD4:CD8 ratio below 1" }
+        hook: "الـ **immune risk phenotype** في صورة الـ immunosenescence في الكتاب اسمه تقريبًا ==CMV 1==: فيروس الـ CMV، والـ ratio تحت 1. وده الكبير اللي مناعته في خطر."
+      - kind: reveal
+        page: 156
+        quote: "Immunosenescence"
+        prompt: "الـ immunosenescence بتوصل لإيه في الآخر؟"
+        answer: |
+          حسب الـ figure في الكتاب:
+          - ==Infection== أكتر وأشد، و **response to vaccines** أضعف
+          - **Cancer** (immunosurveillance أقل)
+          - **Chronic inflammatory diseases** و **autoimmune disorders**
+          - **Frailty**
+
+          واللي بيسرّعها: **CMV**، **obesity**، و **stress**.
+      - kind: explain
+        page: 157
+        title: "الـ innate immunity: كل خلية وعيبها"
+        quote: "Monocyte or macrophage: reduced phagocytic capacity and enhanced oxidative stress."
+        text: |
+          - **Monocyte/macrophage:** phagocytosis أقل، و ==oxidative stress أكتر==.
+          - **Neutrophils:** phagocytosis أقل، و free radical production ضعيف.
+          - **Dendritic cells:** antigen presentation أقل، وما بتنضفش الـ apoptotic cells كويس.
+          - **NK cells:** ==العدد بيزيد== بس الـ **cytotoxicity بتقل**.
+      - kind: match
+        page: 157
+        quote: "Dendritic cells: reduced antigen presentation, impaired phagocytic capability to clean apoptotic cells."
+        prompt: "وصّل كل خلية بالتغيير بتاعها مع السن:"
+        pairs:
+          - ["NK cells", "More cells, less cytotoxicity"]
+          - ["Neutrophils", "Impaired free radical production"]
+          - ["Dendritic cells", "Reduced antigen presentation"]
+          - ["Macrophages", "Enhanced oxidative stress"]
+        why: "ده سؤال امتحان في آخر المحاضرة. الغريب في القايمة هو الـ **NK**: عددهم بيزيد بس شغلهم بيقل."
+      - kind: aside
+        tone: joke
+        page: 157
+        quote: "Natural killer cells (NK): increase number of NK, reduced cytotoxicity."
+        text: "الـ NK cells في الكبير زي موظفين حكومة زيادة: **العدد كتير والإنتاج قليل**. Natural killers، بس مش بيقتلوا قوي."
+      - kind: check
+        page: 158
+        quote: "INNATE IMMUNE RESPONSE : AGE-ASSOCIATED CHANGES NK CELLS AND DENDRITIC CELLS"
+        question: "Which NK cell function does NOT change with age, per the book figure?"
+        options:
+          - "Antibody-dependent cytotoxicity"
+          - "Cytotoxicity"
+          - "CD69 expression"
+          - "IL-2 dependent IFN-γ production"
+        answer: 0
+        why:
+          - "صح: الـ figure بتقول **no change in antibody-dependent cytotoxicity**."
+          - "الـ cytotoxicity بتقل."
+          - "الـ CD69 expression بيقل."
+          - "الـ IFN-γ production بيقل."
+      - kind: try
+        items: [geri.L09.002, geri.L09.008, geri.L09.009, geri.L09.012, geri.L09.018]
+    recap:
+      - "السن = immune function أقل = infections و cancer أكتر."
+      - "IgM و IgD ↓، IgG و IgA ↑؛ CD4 ↓ و CD8 ↑."
+      - "Replicative senescence: telomeres أقصر، clonal expansion أقل."
+      - "Naive ↓ و memory ↑: القديم ماشي والجديد صعب."
+      - "Immune risk phenotype: CD8+CD28−CD57+، ratio تحت 1، CMV، proliferation ضعيف."
+      - "NK: عدد ↑ و cytotoxicity ↓؛ macrophage: oxidative stress ↑."
+    practice: [geri.L09.001, geri.L09.002, geri.L09.003, geri.L09.004, geri.L09.005, geri.L09.006, geri.L09.007, geri.L09.008, geri.L09.009, geri.L09.010, geri.L09.011, geri.L09.012, geri.L09.013, geri.L09.014, geri.L09.015, geri.L09.016, geri.L09.017, geri.L09.018, geri.L09.057]
+  # ------------------------------------------------------------------
+  - id: geri.L09.lesson2
+    title: "الـ T والـ B، والالتهاب اللي ما بيطفيش"
+    hook: "الكبير مناعته ضعيفة وفي نفس الوقت ملتهب طول الوقت. إزاي الاتنين مع بعض؟"
+    minutes: 8
+    pages: [159, 160]
+    topics: [acquired, risks]
+    goals:
+      - "تعرف تغيّرات الـ T و B cells (سؤال امتحان)"
+      - "تفهم الـ inflamaging والـ IL-6"
+      - "تعدّ risk factors الـ infection في الكبير (سؤال امتحان)"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 159
+        title: "الـ acquired immunity"
+        quote: "T cells: reduction in T cell thymopoiesis, accumulated highly differentiated memory cells."
+        text: |
+          **T cells:**
+          - ==thymopoiesis أقل== و memory cells highly differentiated متراكمة
+          - بيضيع **CD28** و **CD69** (لازمين للـ activation والـ signal transduction)
+          - الـ CD8+ proliferation للـ antigen أقل
+
+          **B cells:** lymphopoiesis أقل، memory B أكتر، و ==antibody response للـ vaccination ضعيف==.
+      - kind: check
+        page: 159
+        quote: "B cells: reduction in B cell lymphoiesis, increase in memory B cells, impaired antibody response to vaccination."
+        question: "Which change is NOT part of ageing acquired immunity?"
+        options:
+          - "More naive T cells"
+          - "Loss of CD28 and CD69"
+          - "More memory B cells"
+          - "Impaired antibody response to vaccination"
+        answer: 0
+        why:
+          - "صح: الـ naive T cells **بيقلوا**، مش بيزيدوا."
+          - "الـ CD28 و CD69 بيضيعوا فعلًا."
+          - "الـ memory B cells بيزيدوا."
+          - "الـ antibody response ضعيف، وده سبب ضعف التطعيم."
+      - kind: explain
+        page: 159
+        title: "Inflamaging"
+        quote: "in particular an increase in pro-inflammatory cytokine IL-6, this phenomenon has been referred to as inflamaging."
+        text: |
+          مع السن الـ cytokine response بيبقى dysregulated، وأهم حاجة ==IL-6 بيعلى==. ده اسمه **inflamaging** (inflammation + aging).
+
+          والـ **IL-6 العالي المزمن** مرتبط بـ chronic disease و ==functional decline==.
+      - kind: aside
+        tone: analogy
+        page: 159
+        quote: "Chronic elevation of IL-6 has been correlated with chronic disease and functional decline in old."
+        text: "تخيّل إنذار حريق بيزمّر طول اليوم من غير حريق: الجيران زهقوا، ولما الحريق الحقيقي ييجي محدش بيتحرك. ده الـ **inflamaging**: IL-6 عالي على الفاضي، ورد ضعيف على الـ infection الحقيقي."
+      - kind: explain
+        page: 160
+        title: "ليه الكبير بيتعدي؟"
+        quote: "Living in a long term care facilities, chronic diseases, malnutrition, immune senescence, polypharmacy, increase use of prosthetic devices."
+        text: |
+          - **Long-term care facility**، chronic diseases، **malnutrition**، immune senescence
+          - ==Polypharmacy== (أدوية كتير بتكبت المناعة)، و **prosthetic devices**
+          - العلاج نفسه، والـ hospitalization الكتير ← **nosocomial infection**
+          - ==Atypical presentation==: الأعراض بتتعرف متأخر فتحصل complications
+      - kind: sort
+        page: 160
+        quote: "Diminished anatomic & physiologic protection as cough reflex and mucociliary clearance, increase the susceptibility to respiratory infection."
+        prompt: "الحماية دي لما تقل، بتفتح الباب لأنهي infection؟"
+        bins: ["Respiratory", "Gastrointestinal", "Nosocomial"]
+        cards:
+          - { text: "Weak cough reflex", bin: 0 }
+          - { text: "Poor mucociliary clearance", bin: 0 }
+          - { text: "Low gastric acid (ageing)", bin: 1 }
+          - { text: "Long-term PPI", bin: 1 }
+          - { text: "Frequent hospital admissions", bin: 2 }
+        why: "الـ **cough reflex** والـ **mucociliary clearance** بيحموا الصدر. الـ **gastric acidity** بتقل من السن ومن الأدوية زي الـ PPI، فتزيد الـ GI infection. والـ hospitalization الكتير = **nosocomial**."
+      - kind: table
+        page: 160
+        quote: "Polypharmacy is another important risk factor."
+        title: "صورة الكتاب: 3 مجموعات risk"
+        columns: [Group, Examples]
+        rows:
+          - ["Host", "Diabetes، lung، renal، frailty، dry mucosa، immune senescence"]
+          - ["Medication", "Polypharmacy، immunosuppressive drugs"]
+          - ["Social", "Poor nutrition، crowding، long-term care، poor prevention"]
+        hide: [[1, 1], [2, 1]]
+      - kind: case
+        page: 160
+        quote: "Delayed recognition of symptoms, related to atypical presentations of infection in elderly make them liable to serious complications."
+        stem: "86-year-old in a care home, diabetic, hip prosthesis, 9 medicines. Today drowsy and not eating. Temperature 37.2 °C."
+        steps:
+          - question: "No fever. Can this still be infection?"
+            options: ["Yes: atypical presentation is common", "No: infection needs fever", "Only if WBC > 20", "Only in under-65s"]
+            answer: 0
+            why: "الكبير بيجي **atypical**، والتأخير في الـ recognition هو اللي بيعمل الـ ==serious complications==."
+          - question: "How many listed risk factors does she have?"
+            options: ["Four: care home, chronic disease, prosthesis, polypharmacy", "One: age", "None", "Two: age and sex"]
+            answer: 0
+            why: "**Long-term care**، **diabetes**، **prosthetic device**، و **polypharmacy**: كلهم في قايمة الكتاب."
+      - kind: try
+        items: [geri.L09.019, geri.L09.022, geri.L09.025, geri.L09.028, geri.L09.056]
+    recap:
+      - "T: thymopoiesis ↓، memory متراكمة، CD28 و CD69 ضايعين، CD8 proliferation ↓."
+      - "B: lymphopoiesis ↓، memory ↑، antibody response للتطعيم ضعيف."
+      - "Inflamaging = IL-6 ↑؛ المزمن منه = chronic disease و functional decline."
+      - "Risks: care home، chronic disease، malnutrition، polypharmacy، prosthesis، hospital."
+      - "Cough و mucociliary ↓ = صدر؛ gastric acid ↓ = GI؛ atypical = تأخير."
+    practice: [geri.L09.019, geri.L09.020, geri.L09.021, geri.L09.022, geri.L09.023, geri.L09.024, geri.L09.025, geri.L09.026, geri.L09.027, geri.L09.028, geri.L09.056, geri.L09.058, geri.L09.059]
+  # ------------------------------------------------------------------
+  - id: geri.L09.lesson3
+    title: "التطعيم والكورونا في الكبير"
+    hook: "90% من وفيات الإنفلونزا كبار، والتطعيم بيشتغل أضعف عندهم. طب نعمل إيه؟"
+    minutes: 9
+    pages: [161, 164]
+    topics: [vaccination, covid]
+    goals:
+      - "تعرف أهمية التطعيم وتوصية الـ influenza فوق 65"
+      - "تحفظ استراتيجيات التطعيم الأقوى للكبير"
+      - "تفهم ليه الـ COVID-19 أشد في الكبير"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 161
+        title: "ليه التطعيم مهم كده؟"
+        quote: "Elderly people account for approximately 90% of all influenza-related deaths."
+        text: |
+          - التطعيم **cost-effective** وبيقلل الـ morbidity والـ mortality.
+          - الكبار ==حوالي 90%== من وفيات الـ influenza.
+          - الـ infection بيبوّظ الأمراض اللي موجودة، فالتطعيم = **healthy independent living**.
+          - بس الـ ==efficacy بتقل مع السن==.
+      - kind: explain
+        page: 161
+        title: "التوصية في الكتاب"
+        quote: "every one over 65 years, receive the seasonal trivalent inactivated influenza vaccine (TIV)"
+        text: "كل واحد ==فوق 65== ياخد الـ **seasonal trivalent inactivated influenza vaccine (TIV)**، وكمان الـ pandemic vaccine لو فيه، علشان الـ serum antibody level يفضل موجود."
+      - kind: update
+        page: 161
+        quote: "every one over 65 years, receive the seasonal trivalent inactivated influenza vaccine (TIV)"
+        text: "الـ **CDC ACIP** من 2022 بيفضّل للـ 65+ vaccine **high-dose** أو **adjuvanted** أو **recombinant** influenza. في الامتحان إجابة الكتاب: الـ seasonal TIV."
+        ref: "CDC ACIP influenza recommendations 2024–25"
+      - kind: table
+        page: 162
+        quote: "Quadrivalent instead of"
+        title: "نخلّي التطعيم أقوى إزاي؟"
+        columns: [Strategy, Why it helps]
+        rows:
+          - ["More antigen / higher dose", "More Ag available"]
+          - ["Quadrivalent not trivalent", "Avoids vaccine mismatch"]
+          - ["Repeated doses", "More immunogenic"]
+          - ["Intradermal microneedle", "Better delivery and Ag presentation"]
+          - ["Adjuvants (MF59، AS03)", "Enhanced immunogenicity"]
+        hide: [[1, 1], [3, 1], [4, 1]]
+      - kind: mnemonic
+        page: 161
+        quote: "Increasing vaccine dosage. Use of adjuvants: TIV MF59, TLR agonists. Introducing viral vector-based vaccine."
+        word: "DAV"
+        parts:
+          - { key: "D", text: "Dose: increasing vaccine dosage" }
+          - { key: "A", text: "Adjuvants: MF59, TLR agonists" }
+          - { key: "V", text: "Viral vector-based vaccine" }
+        hook: "الـ **novel approach to vaccination** تلاتة: ==DAV== (زي «داوي»): Dose، Adjuvant، Vector."
+      - kind: explain
+        page: 162
+        title: "الـ Shingles"
+        quote: "Major Ag with adjuvants (Subunit glycoprotein E vaccine with AS01)."
+        text: |
+          - **Live-attenuated VZV**: titers ==أعلى من 10 مرات== من تطعيم الجديري.
+          - **Subunit glycoprotein E + AS01**: antibody و CD4+ T-cell response قوي ومستمر.
+      - kind: explain
+        page: 162
+        title: "الكورونا: البداية"
+        quote: "SARS-CoV-2 is transmitted predominantly via respiratory droplets."
+        text: "بتتنقل بالـ **respiratory droplets**، وبتيجي بـ fever و cough و myalgia و fatigue. وفي ناس، ==أغلبهم كبار==، بتعمل **bilateral diffuse alveolar damage** ممكن تبقى **ARDS**."
+      - kind: order
+        page: 163
+        quote: "The uncontrolled systemic inflammation causes endothelial injury and activation of coagulation cascade."
+        prompt: "الكورونا الشديدة في الكبير: رتّب اللي بيحصل"
+        steps:
+          - "Diffuse alveolar damage"
+          - "ARDS"
+          - "Cytokine storm"
+          - "Endothelial injury + coagulation"
+          - "DIC"
+          - "Organ damage and death"
+        why: "بعد الـ pulmonary phase ييجي **cytokine storm**؛ الـ inflammation تأذي الـ endothelium وتشغّل الـ coagulation، فيحصل ==DIC== مع consumption of clotting factors، وبعدين organ damage و death."
+      - kind: explain
+        page: 163
+        title: "ليه الكبير بالذات؟"
+        quote: "Macrophages from elderly lungs may have a more pronounced production of IL-6 and other pro-inflammatory cytokines"
+        text: |
+          - الـ **spike (S)** بيمسك في **ACE2**، والدخول محتاج **TMPRSS2** (serine protease).
+          - الـ macrophages في رئة الكبير بتطلّع ==IL-6 أكتر==.
+          - الشديد عنده **IL-6/IFN-γ ratio أعلى** و CD4+ T cells اللي بتعمل IFN-γ أقل.
+          - الـ IL-6 العالي = relative **immunoparalysis**.
+      - kind: check
+        page: 163
+        quote: "Patients with severe COVID-19 have a higher IL-6/Interferon-γ ratio than those who present with a moderate disease"
+        question: "Severe vs moderate COVID-19: which pattern fits severe disease?"
+        options:
+          - "Higher IL-6/IFN-γ ratio, fewer IFN-γ CD4+ T cells"
+          - "Lower IL-6/IFN-γ ratio, more IFN-γ CD4+ T cells"
+          - "Normal IL-6, more NK cytotoxicity"
+          - "No change in cytokines"
+        answer: 0
+        why:
+          - "صح: **IL-6 عالي**، و IFN-γ producing CD4+ أقل."
+          - "ده العكس بالظبط."
+          - "الـ NK cytotoxicity بتقل مع السن."
+          - "الشديد فيه cytokine storm."
+      - kind: figure
+        page: 164
+        quote: "Physical activity &Immune System"
+        title: "السن والكورونا: الميزان بيميل"
+        alt: "Chronological age arrow. Rising with age: pro-inflammatory cytokines and terminally differentiated memory T and B cells. Falling: naive T cells. The result shifts from an adaptive immune response to cytokine storm and organ failure."
+        caption: "مع السن: cytokines و memory ↑، و naive ↓، فالكفة تميل من ==adaptive response== لـ **cytokine storm و organ failure**."
+        svg: |
+          <svg viewBox="0 0 330 245" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="G09a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker></defs>
+            <path d="M20 24 H310" class="fg-arrow" marker-end="url(#G09a)"/>
+            <text x="110" y="16" class="t-sm t-b">Chronological age</text>
+            <text x="20" y="46" class="t-sm">Pro-inflammatory cytokines ↑</text>
+            <path d="M20 72 L310 52 L310 72 Z" class="fg-bad"/>
+            <text x="20" y="94" class="t-sm">Terminal memory T and B ↑</text>
+            <path d="M20 120 L310 100 L310 120 Z" class="fg-box"/>
+            <text x="20" y="142" class="t-sm">Naive T cells ↓</text>
+            <path d="M20 148 L310 168 L20 168 Z" class="fg-good"/>
+            <rect x="10" y="184" width="140" height="50" rx="10" class="fg-acc"/>
+            <text x="20" y="206" class="t-sm t-b">Young</text>
+            <text x="20" y="224" class="t-sm">adaptive response</text>
+            <rect x="180" y="184" width="140" height="50" rx="10" class="fg-bad"/>
+            <text x="190" y="206" class="t-sm t-b">Old</text>
+            <text x="190" y="224" class="t-sm">storm, organ failure</text>
+          </svg>
+      - kind: try
+        items: [geri.L09.029, geri.L09.031, geri.L09.034, geri.L09.039, geri.L09.043]
+    recap:
+      - "الكبار ≈ 90% من وفيات الـ influenza؛ الـ efficacy بتقل مع السن."
+      - "فوق 65: seasonal TIV (+ pandemic لو فيه). الأحدث: high-dose أو adjuvanted."
+      - "Novel: Dose، Adjuvant، Vector (DAV)؛ quadrivalent يمنع mismatch."
+      - "Shingles: live >10× titers، أو subunit gE + AS01."
+      - "COVID: ACE2 + TMPRSS2؛ IL-6 ↑ → storm → endothelium → DIC → death."
+    practice: [geri.L09.029, geri.L09.030, geri.L09.031, geri.L09.032, geri.L09.033, geri.L09.034, geri.L09.035, geri.L09.036, geri.L09.037, geri.L09.038, geri.L09.039, geri.L09.040, geri.L09.041, geri.L09.042, geri.L09.043, geri.L09.044]
+  # ------------------------------------------------------------------
+  - id: geri.L09.lesson4
+    title: "نقوّي مناعة الكبير: حركة وأكل وفيتامينات"
+    hook: "الدوا هنا مش في الصيدلية: مشي، أكل متوسطي، وشوية zinc."
+    minutes: 8
+    pages: [164, 166]
+    topics: [boosting]
+    goals:
+      - "تعرف فوايد الـ physical activity على المناعة"
+      - "تعرف دور الـ diet والـ caloric restriction والـ micronutrients"
+      - "تجاوب سؤال الامتحان: إيه اللي بيحسّن الـ immune function؟"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 164
+        title: "الحركة: Physical activity"
+        quote: "Physical activity &Immune System"
+        text: |
+          مع السن الـ immune function والـ physical activity بينزلوا مع بعض. والـ **exercise** بيعمل:
+          - ==vaccine responses أحسن==
+          - systemic inflammation أقل و **anti-inflammatory profile**
+          - muscle mass أحسن، و cardiometabolic risk أقل
+          - chronic disease و all-cause mortality أقل
+      - kind: table
+        page: 164
+        quote: "Potential Impact of Isolation"
+        title: "العزل في الكورونا: من غير حركة ولا بحركة؟"
+        columns: [Isolation, Immune function, Result]
+        rows:
+          - ["Without activity", "Dysfunctional", "Pro-inflammatory، higher infection risk"]
+          - ["With activity", "Maintained", "Anti-inflammatory، lower infection risk"]
+        hide: [[0, 2], [1, 2]]
+      - kind: explain
+        page: 165
+        title: "الأكل"
+        quote: "The Mediterranean diet down-regulates the levels of inflammatory mediators"
+        text: |
+          - الـ ==Mediterranean diet== بيقلل الـ inflammatory mediators: ICAM-1، VCAM-1، **CRP**، **IL-6**.
+          - الـ **caloric restriction** ممكن تعكس الـ immunosenescence: بتطفي genes الـ IL-1β و IL-6 و TNF-α.
+      - kind: match
+        page: 165
+        quote: "Vitamin supplementation studies in older adults have demonstrated a role for vitamin E in the production of IL-2"
+        prompt: "وصّل الـ micronutrient بدوره في المناعة:"
+        pairs:
+          - ["Zinc", "Signal transduction, apoptosis, proliferation"]
+          - ["Vitamin E", "IL-2 and naive T-cell proliferation"]
+          - ["Vitamin C", "Counters oxidative stress, helps NK"]
+          - ["Probiotics", "More IL-10, less IL-6"]
+        why: "الـ **zinc** أهم micronutrient اتدرس. الـ **vitamin E** للـ IL-2 والـ naive T (مش الـ memory). الـ **vitamin C** ضد الـ oxidative stress والـ inflammaging. والـ **probiotics** بتقلل TNF-α و IL-1β و IL-6 وتزوّد IL-10."
+      - kind: aside
+        tone: exam
+        page: 165
+        quote: "Because vitamin C is water-soluble and humans have low storage capacity, its regular intake is up to 100-fold higher"
+        text: "ليه الـ **vitamin C** بناخد منه كتير؟ لأنه **water-soluble** والجسم ما بيخزّنش، فالـ intake لحد ==100 ضعف== فيتامينات تانية."
+      - kind: figure
+        page: 166
+        quote: "Vitamin D"
+        title: "الـ vitamin D: من الجلد للخلية المناعية"
+        alt: "Vitamin D activation: 7-dehydrocholesterol in skin becomes cholecalciferol with UV light, then calcidiol in the liver by CYP27A1, then calcitriol in the kidney or immune cells by CYP27B1."
+        caption: "جلد + شمس ← **liver** (calcidiol) ← **kidney أو الخلية المناعية نفسها** (==calcitriol==)."
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="G09b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker></defs>
+            <rect x="10" y="10" width="310" height="40" rx="10" class="fg-box"/>
+            <text x="20" y="35" class="t-sm">Skin: 7-dehydrocholesterol</text>
+            <path d="M165 52 V66" class="fg-arrow" marker-end="url(#G09b)"/>
+            <rect x="10" y="70" width="310" height="40" rx="10" class="fg-good"/>
+            <text x="20" y="95" class="t-sm">UV → cholecalciferol (D3)</text>
+            <path d="M165 112 V126" class="fg-arrow" marker-end="url(#G09b)"/>
+            <rect x="10" y="130" width="310" height="40" rx="10" class="fg-box"/>
+            <text x="20" y="155" class="t-sm">Liver, CYP27A1 → calcidiol (25-OH D3)</text>
+            <path d="M165 172 V186" class="fg-arrow" marker-end="url(#G09b)"/>
+            <rect x="10" y="190" width="310" height="50" rx="10" class="fg-acc"/>
+            <text x="20" y="212" class="t-sm t-b">Kidney or immune cell, CYP27B1</text>
+            <text x="20" y="230" class="t-sm">→ calcitriol (1,25-(OH)2 D3)</text>
+          </svg>
+      - kind: reveal
+        page: 166
+        quote: "Vitamin D"
+        prompt: "الـ vitamin D بيعمل إيه في الصدر حسب صورة الكتاب؟"
+        answer: |
+          - ==Antimicrobial peptides== (cathelicidin و alpha-defensin) أكتر، و **autophagy** في الـ macrophages
+          - Pro-inflammatory cytokines (TH1) أقل
+          - **Lung function** أحسن، و exacerbations الـ asthma/COPD أقل، و lung fibrosis أقل
+      - kind: explain
+        page: 166
+        title: "Probiotics و prebiotics"
+        quote: "However, the complexity of randomized controlled trials and lack of specific biomarkers in humans make difficult the reproducibility of the data"
+        text: "بتقلل الـ **TNF-α و IL-1β و IL-6** وتزوّد ==IL-10==، وبتحسّن الـ phagocytosis ونشاط الـ NK. بس النتايج صعب تتكرر: الـ RCTs معقدة ومفيش **biomarkers** واضحة."
+      - kind: aside
+        tone: joke
+        page: 165
+        quote: "A new interesting approach related to the possible reversion of immunosenescence is caloric restriction."
+        text: "يعني الكتاب بيقول: قلّل أكلك (**caloric restriction**)، كُل متوسطي، واتمشى. نفس نصيحة **تيتة**، بس بـ ==IL-6== و TNF-α."
+      - kind: try
+        items: [geri.L09.045, geri.L09.047, geri.L09.049, geri.L09.052, geri.L09.060]
+    recap:
+      - "Exercise: vaccine response أحسن، inflammation أقل، mortality أقل."
+      - "العزل من غير حركة = pro-inflammatory و infection أكتر."
+      - "Mediterranean diet ↓ CRP و IL-6؛ caloric restriction ممكن تعكس الـ immunosenescence."
+      - "Zinc أهم micronutrient؛ vit E = IL-2؛ vit C = antioxidant؛ vit D = antimicrobial peptides."
+      - "Probiotics: IL-10 ↑ و IL-6 ↓، بس الداتا صعب تتكرر."
+    practice: [geri.L09.045, geri.L09.046, geri.L09.047, geri.L09.048, geri.L09.049, geri.L09.050, geri.L09.051, geri.L09.052, geri.L09.053, geri.L09.054, geri.L09.055, geri.L09.060]

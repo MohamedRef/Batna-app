@@ -1,0 +1,1009 @@
+schema: batna.content/v1
+lecture: hem.L05
+title: "Hemostasis"
+author: "Professor Dr. Omar Ghallab"
+book: { chapter: 4, pages: [70, 83] }
+topics:
+  - { id: cascade, title: "Basic physiology and the coagulation cascade" }
+  - { id: factors, title: "The coagulation factors" }
+  - { id: inhibitors, title: "Natural coagulation inhibitors" }
+  - { id: fibrinolysis, title: "Fibrinolysis" }
+  - { id: screening, title: "Screening tests: TT, PT and APTT" }
+  - { id: deficiencies, title: "Congenital and acquired factor deficiencies" }
+  - { id: hemophilia, title: "Hemophilia A and B" }
+  - { id: vitamin-k, title: "Vitamin K deficiency and liver disease" }
+  - { id: dic, title: "Disseminated intravascular coagulation" }
+  - { id: other-acquired, title: "Coagulation inhibitors and miscellaneous causes" }
+  - { id: aps, title: "Antiphospholipid syndrome" }
+items:
+  # ---------- p70-71: physiology and cascade ----------
+  - id: hem.L05.001
+    kind: card
+    topic: cascade
+    front: How does normal coagulation work, in the lecture's words?
+    back: A series of amplification reactions in which procoagulant proteins (factors) circulate as inert precursors until converted to their active form.
+    src: { page: 70, quote: "Normal coagulation results from a series of amplification reactions in which procoagulant. Proteins (factors) circulate in plasma as inert precursors" }
+    status: unverified
+  - id: hem.L05.002
+    kind: card
+    topic: cascade
+    front: What does the cascade theory say?
+    back: Each coagulation factor is converted to its active form by the preceding factor, in a series of biochemical chain reactions.
+    src: { page: 70, quote: "According to the cascade theory, each coagulation factor in converted to its active form by the preceding factor" }
+    status: unverified
+  - id: hem.L05.003
+    kind: card
+    topic: cascade
+    front: Where do the intrinsic and extrinsic systems both end?
+    back: In the generation of thrombin, which converts fibrinogen to fibrin.
+    src: { page: 71, quote: "Eventually, both the extrinsic and internsic system lead to generation of the enzyme thrombin which converts fibrinogen to fibrin." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L05.004
+    kind: card
+    topic: cascade
+    front: Why is the extrinsic pathway called "extrinsic"?
+    back: It is initiated when factor III (tissue thromboplastin), a substance not found in the blood, enters the vascular system.
+    src: { page: 71, quote: "this pathway is intiated where factor III (tissue thromboplastin), a substance not found in the blood enters the vascular system." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L05.005
+    kind: order
+    topic: cascade
+    prompt: "Order the intrinsic pathway as drawn in the lecture's figure (Coagulation & Clot Stabilization, p71)."
+    steps:
+      - Collagen or other activators activate factor XII
+      - Active XII activates XI (with Ca²⁺)
+      - Active XI activates IX (with Ca²⁺)
+      - Active IX with VIII, Ca²⁺ and phospholipid activates X
+      - Active X with V, Ca²⁺ and phospholipid turns prothrombin into thrombin
+      - Thrombin turns fibrinogen into fibrin
+      - Active XIII cross-links the fibrin
+    src: { page: 71, quote: "Hemostasis: Coagulation & Clot Stabilization" }
+    status: unverified
+  - id: hem.L05.006
+    kind: card
+    topic: cascade
+    front: How does the extrinsic pathway reach factor X (p71 figure)?
+    back: Damage exposes tissue factor (III); tissue factor with active VII activates X (and also IX).
+    src: { page: 71, quote: "The term ―externsic is used because this pathway is intiated where factor III (tissue thromboplastin)" }
+    status: unverified
+  - id: hem.L05.007
+    kind: cloze
+    topic: cascade
+    text: "In the lecture's figure, {{c1::thrombin}} gives positive feedback to the intrinsic pathway and to factor VII, and activates factor {{c2::XIII}} to make cross-linked fibrin (clot stabilization)."
+    src: { page: 71, quote: "Hemostasis: Coagulation & Clot Stabilization" }
+    status: unverified
+  # ---------- p71: factors ----------
+  - id: hem.L05.008
+    kind: table
+    topic: factors
+    title: The coagulation factors (p71)
+    columns: [Factor, Descriptive name]
+    rows:
+      - [I, Fibrinogen]
+      - [II, Prothrombin]
+      - [III, Tissue factor]
+      - [V, Labile factor]
+      - [VII, Proconvertin]
+      - [VIII, Antihemophilic globulin (AHG)]
+      - [IX, Christmas factor]
+      - [X, Stuart-Prower factor]
+      - [XI, Plasma thromboplastin antecedent]
+      - [XII, Hageman factor]
+      - [XIII, Fibrin-stabilizing factor]
+    blanks: [[3, 1], [4, 1], [5, 1], [6, 1], [7, 1], [9, 1], [10, 1]]
+    src: { page: 71, quote: "The coagulation factors" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L05.009
+    kind: card
+    topic: factors
+    front: Which two contact proteins does the factor table list after XIII?
+    back: Prekallikrein and HMWK (high-molecular-weight kininogen).
+    src: { page: 71, quote: "Prekallikrein. HMWK." }
+    status: unverified
+  # ---------- p72: inhibitors ----------
+  - id: hem.L05.010
+    kind: enumerate
+    topic: inhibitors
+    prompt: Enumerate the natural coagulation factor inhibitors.
+    points:
+      - Tissue factor pathway inhibitor
+      - Antithrombin III
+      - Protein C and protein S
+      - Thrombin–thrombomodulin complex (activates protein C)
+    pass: 4
+    src: { page: 72, quote: "Coagulation factor inhibitors 1. Tissue factor pathway inhibitors which is present in the plasma and platelet" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L05.011
+    kind: card
+    topic: inhibitors
+    front: What does tissue factor pathway inhibitor (TFPI) inhibit, and where is it found?
+    back: Factors Xa and VIIa and tissue factor, limiting the main in vivo pathway; it is in plasma and platelets and accumulates at the injury site from local platelet activation.
+    src: { page: 72, quote: "It inhibits factors Xa and VIIa and tissue factor to limit the main in vivo pathway." }
+    status: unverified
+  - id: hem.L05.012
+    kind: card
+    topic: inhibitors
+    front: Which is the most potent natural anticoagulant, and what potentiates it?
+    back: Antithrombin III; it inactivates serine proteases by combining with them, and heparin markedly potentiates it.
+    src: { page: 72, quote: "Antithrombin III, most potent. It inactivate seriene proteases by combining with them. Heparin potentiates its action markedly." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L05.013
+    kind: order
+    topic: inhibitors
+    prompt: Order the protein C pathway.
+    steps:
+      - Thrombin binds thrombomodulin on the endothelium
+      - The complex activates vitamin K-dependent protein C
+      - Activated protein C, with protein S, inactivates factors V and VIII
+      - Thrombin generation stops
+    src: { page: 72, quote: "Thrombin binds to an endothelial surface receptor thrombomodulin. The resulting complex activate the vitamin K dependent serine protease C" }
+    status: unverified
+  - id: hem.L05.014
+    kind: cloze
+    topic: inhibitors
+    text: "Activated protein C with the help of {{c1::protein S}} inactivates factors {{c2::V and VIII}}."
+    src: { page: 72, quote: "with the help of PS they inactivate V and VIII preventing thrombin synthesis." }
+    status: unverified
+  # ---------- p72-73: fibrinolysis ----------
+  - id: hem.L05.015
+    kind: card
+    topic: fibrinolysis
+    front: What is plasminogen, and what converts it?
+    back: A globulin proenzyme in blood and tissue fluid, converted to plasmin by activators from the vessel wall or tissue.
+    src: { page: 72, quote: "Plasminogen is a globulin proenzyme in the blood and tissue fluid, is converted to the plasmin by activators." }
+    status: unverified
+  - id: hem.L05.016
+    kind: card
+    topic: fibrinolysis
+    front: What is the most important route of plasminogen activation?
+    back: Release of tissue plasminogen activator (tPA) from the endothelium; tPA is a serine protease that binds fibrin.
+    src: { page: 72, quote: "The most important route follows the release of tPA (Tissue plasminogen activator) from endothelium." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L05.017
+    kind: card
+    topic: fibrinolysis
+    front: How does activated protein C affect fibrinolysis?
+    back: It stimulates fibrinolysis by destroying tPA inhibitors.
+    src: { page: 72, quote: "Activated protein C stimulates fibrinolysis by destroying tPA inhibitors." }
+    status: unverified
+  - id: hem.L05.018
+    kind: enumerate
+    topic: fibrinolysis
+    prompt: What can plasmin digest?
+    points: [Fibrinogen, Fibrin, Factor V, Factor VIII]
+    pass: 4
+    src: { page: 72, quote: "Plasmin in Capable of digesting fibrinogen, fibrin, factor V and VIII." }
+    status: unverified
+  - id: hem.L05.019
+    kind: card
+    topic: fibrinolysis
+    front: Besides making fibrin, what else does thrombin do in the p73 figure?
+    back: It also activates the fibrinolytic side, so plasmin breaks the fibrin polymer into fibrin fragments.
+    src: { page: 73, quote: "Thrombin Fibrinogen Plasmin Fibrinolysis" }
+    status: unverified
+  # ---------- p73: screening tests ----------
+  - id: hem.L05.020
+    kind: table
+    topic: screening
+    title: Screening tests for coagulation disorders (p73)
+    columns: [Test, Prolonged by, Disorders]
+    rows:
+      - [Thrombin time, "Thrombin inhibition by heparin; fibrinogen deficiency or abnormality", "DIC or heparin therapy"]
+      - [PT, "Low VII, X, II, I", "Liver disease, warfarin, plus the conditions above"]
+      - [APTT, "Low XII, XI, IX, VIII, X, V, II or fibrinogen", "Hemophilia, Christmas disease, plus the conditions above"]
+    blanks: [[0, 2], [1, 1], [1, 2], [2, 2]]
+    src: { page: 73, quote: "Screening tests used in the diagnosis of coagulation disorders" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L05.021
+    kind: mcq
+    topic: screening
+    stem: A 9-year-old boy bleeds for hours after a tooth extraction. PT normal, APTT prolonged, thrombin time normal, platelets 260,000/mm³. Which disorder fits the lecture's screening table?
+    options:
+      - Hemophilia (A or B)
+      - Warfarin therapy
+      - DIC
+      - Heparin therapy
+      - Liver disease
+    answer: 0
+    why:
+      - "Correct: an isolated long APTT points to hemophilia or Christmas disease (p73)."
+      - "Warfarin prolongs the PT first."
+      - "DIC prolongs PT, APTT and TT with low platelets."
+      - "Heparin prolongs the thrombin time."
+      - "Liver disease prolongs the PT."
+    src: { page: 73, quote: "Screening tests used in the diagnosis of coagulation disorders" }
+    status: unverified
+  - id: hem.L05.022
+    kind: mcq
+    topic: screening
+    stem: An inpatient on an unfractionated heparin infusion has a prolonged APTT and a prolonged thrombin time. Fibrinogen is normal. What explains the long thrombin time?
+    options:
+      - Thrombin inhibited by heparin
+      - Factor VII deficiency
+      - Factor VIII deficiency
+      - Vitamin K deficiency
+      - Factor XIII deficiency
+    answer: 0
+    why:
+      - "Correct: the thrombin time is prolonged by inhibition of thrombin by heparin (p73)."
+      - "Factor VII deficiency prolongs the PT only."
+      - "Factor VIII deficiency prolongs the APTT, not the TT."
+      - "Vitamin K deficiency prolongs PT and APTT, not the TT."
+      - "None of the screening tests in the table detect XIII deficiency."
+    src: { page: 73, quote: "Screening tests used in the diagnosis of coagulation disorders" }
+    status: unverified
+  # ---------- p73-74: deficiencies ----------
+  - id: hem.L05.023
+    kind: enumerate
+    topic: deficiencies
+    prompt: Enumerate the most common congenital coagulation factor deficiencies.
+    points: [Hemophilia A, Von Willebrand disease, Christmas disease (hemophilia B), Fibrinogen abnormalities]
+    pass: 4
+    src: { page: 73, quote: "the most common of them are. 1. Haemophilia A. 2. Von Willbroad disease. 3. Christmas disease. 4. Fibrinogen abnormalities" }
+    status: unverified
+  - id: hem.L05.024
+    kind: enumerate
+    topic: deficiencies
+    prompt: Enumerate the acquired causes of coagulation factor deficiency.
+    points: [Vitamin K deficiency, Liver disease, Consumption coagulopathy (DIC), Circulating inhibitors]
+    pass: 4
+    src: { page: 74, quote: "Acquired – due to: 1. Vitamin K deficiency 2. Liver disease 3. Consumption coagulopathy 4. Circulating inhibitors." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p74-76: hemophilia ----------
+  - id: hem.L05.025
+    kind: card
+    topic: hemophilia
+    front: How is hemophilia A inherited?
+    back: X-linked recessive; it affects males and is transmitted by females.
+    src: { page: 74, quote: "Haemophilia A is inherited as X-linbed recessive disorder affecting males and transmitted by female." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L05.026
+    kind: card
+    topic: hemophilia
+    front: Where is the factor VIII gene?
+    back: At the tip of the long arm of the X chromosome (the book prints "xq2.6").
+    src: { page: 74, quote: "factor VIII gene which lies at the tip of the long arm of the x-chromosome (xq2.6 region)." }
+    status: unverified
+    update:
+      text: "The F8 gene is at Xq28."
+      ref: "NCBI Gene F8 (current human genome assembly)"
+  - id: hem.L05.027
+    kind: card
+    topic: hemophilia
+    front: Factor VIII activity and VWF in hemophilia A?
+    back: Factor VIII clotting activity (FVIII:C) is low or absent; VWF and VWF antigen are normal.
+    src: { page: 74, quote: "The plasma level of factor VIII clotting activity (F VIII C) is low or absent, VWF and VWF Ag normal." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L05.028
+    kind: table
+    topic: hemophilia
+    title: Hemophilia severity by factor VIII activity (p74)
+    columns: [Bleeding, VIII activity]
+    rows:
+      - ["Severe bleeds after trivial trauma", "<1%"]
+      - ["Moderate to severe post-traumatic bleeds", "1–5%"]
+      - ["Mild tendency; excessive loss after surgery", "5–25%"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 74, quote: "VIII activity < 1% - sever bleeds after trival trauma. VIII activity 1-5% - moderate to sever post-traumatic bleeds." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: hem.L05.029
+    kind: enumerate
+    topic: hemophilia
+    prompt: Enumerate the common bleeding sites in hemophilia A.
+    points: [Into synovial joints, Into muscle (especially severe cases), From gums and tooth sockets, Epistaxis]
+    pass: 4
+    src: { page: 74, quote: "Common bleeds: Into-synovial join. Into muscle (especially in sever cases) From gums and teeth sockets Epistaxis" }
+    status: unverified
+  - id: hem.L05.030
+    kind: enumerate
+    topic: hemophilia
+    prompt: Enumerate the complications of hemophilia A.
+    points:
+      - Arthritis from repeated hemorrhages
+      - Peripheral nerve compression and pseudotumor
+      - FVIII antibodies (inhibitors)
+      - Chronic liver disease (hepatitis B or C)
+      - AIDS from contaminated FVIII in the early 1980s
+    pass: 4
+    src: { page: 75, quote: "Arthritis, secondary to repeated haemorrhages 2. Peripheral nerve compression and pseudotumour. 3. FVIII antibodies/inhibitors in 5-10% of patients." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L05.031
+    kind: cloze
+    topic: hemophilia
+    text: "FVIII antibodies (inhibitors) develop in {{c1::5–10%}} of hemophilia A patients."
+    src: { page: 75, quote: "FVIII antibodies/inhibitors in 5-10% of patients." }
+    status: unverified
+    tags: [numbers]
+  - id: hem.L05.032
+    kind: card
+    topic: hemophilia
+    front: Why did many older hemophilia patients get chronic liver disease and AIDS?
+    back: Previous exposure to hepatitis B or C, and retroviral contamination of FVIII concentrates in the early 1980s.
+    src: { page: 75, quote: "Acquired immunodeficiency syndrome (AIDS) – due to retroviral contamination of FVIII in the early 1980s." }
+    status: unverified
+  - id: hem.L05.033
+    kind: card
+    topic: hemophilia
+    front: When should factor VIII be given in hemophilia A?
+    back: Prophylactically before any operation, and at the earliest sign of spontaneous or post-traumatic bleeding.
+    src: { page: 75, quote: "It should be given prophylodically before any type of operation. 2. It should be given at the earlist sign of spontaneous or post-traumtic bleeding." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L05.034
+    kind: cloze
+    topic: hemophilia
+    text: "Treatment is IV factor VIII concentrate to keep plasma VIII activity between {{c1::5 and 100%}}, according to the {{c2::severity of injury or extent of surgery}}."
+    src: { page: 76, quote: "Treatment consists of I.V injection of factor VIII in a concentrated form to maintain plasma factor VIII activity between 5 and 100%" }
+    status: unverified
+    tags: [numbers]
+  - id: hem.L05.035
+    kind: card
+    topic: hemophilia
+    front: How does desmopressin help in hemophilia A, and for whom?
+    back: It releases FVIII from endothelial cells, raising the plasma level; it is an alternative in mild hemophiliacs.
+    src: { page: 76, quote: "Desmopressin provides an alternative means of increasing the plasma factor VIII level in mild haemophilics." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L05.036
+    kind: card
+    topic: hemophilia
+    front: What is hemophilia B?
+    back: Christmas disease, a quantitative or qualitative defect of factor IX; similar in every aspect to hemophilia A, including X-linked inheritance, but much less common.
+    src: { page: 76, quote: "It results from a quantitative or qualitative defect in factor IX. 2. It is similar in every aspect to haemophilic A" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L05.037
+    kind: card
+    topic: hemophilia
+    front: How is bleeding treated in hemophilia B?
+    back: Fresh frozen plasma or factor IX concentrate.
+    src: { page: 76, quote: "Bleeding is treated by fresh frozen plasma or factor IX concentrate." }
+    status: unverified
+  - id: hem.L05.038
+    kind: mcq
+    topic: hemophilia
+    stem: A 22-year-old man with known hemophilia A has FVIII activity of 12%. He needs a dental extraction. Which treatment does the lecture offer as an alternative to factor VIII concentrate?
+    options:
+      - Desmopressin
+      - Vitamin K
+      - Cryoprecipitate only, never factor VIII
+      - Platelet transfusion
+      - Heparin
+    answer: 0
+    why:
+      - "Correct: in mild hemophilia (5–25%) desmopressin releases FVIII from endothelial cells (p76)."
+      - "Vitamin K corrects II, VII, IX and X, not VIII."
+      - "Cryoprecipitate is for urgent cases when concentrate is unavailable (lecture 6)."
+      - "Platelets are normal in hemophilia."
+      - "Heparin would worsen bleeding."
+    src: { page: 76, quote: "Desmopressin provides an alternative means of increasing the plasma factor VIII level in mild haemophilics." }
+    status: unverified
+  - id: hem.L05.039
+    kind: mcq
+    topic: hemophilia
+    stem: A 14-year-old boy has a hot swollen right knee after minor sport injury. His maternal uncle had the same problem. FVIII activity is 0.5%. Which statement about his disease is right?
+    options:
+      - It is severe; bleeds follow trivial trauma
+      - His VWF antigen will be low
+      - His father must be a carrier
+      - Bleeding is treated with vitamin K
+      - Joint bleeds are rare in hemophilia
+    answer: 0
+    why:
+      - "Correct: VIII activity below 1% means severe bleeds after trivial trauma (p74)."
+      - "VWF and VWF Ag are normal in hemophilia A (p74)."
+      - "It is X-linked: transmitted by females (his mother), not his father."
+      - "Treatment is factor VIII concentrate (p76)."
+      - "Bleeding into synovial joints is the first of the common bleeds (p74)."
+    src: { page: 74, quote: "VIII activity < 1% - sever bleeds after trival trauma." }
+    status: unverified
+  - id: hem.L05.040
+    kind: mcq
+    topic: hemophilia
+    stem: A 30-year-old man with severe hemophilia A no longer responds to his usual factor VIII doses during a joint bleed. What is the most likely reason?
+    options:
+      - FVIII antibodies (inhibitors)
+      - New vitamin K deficiency
+      - Development of hemophilia B
+      - Thrombocytopenia from desmopressin
+      - Factor VIII gene moved to the short arm
+    answer: 0
+    why:
+      - "Correct: FVIII inhibitors develop in 5–10% of patients (p75); lecture 6 lists rFVIIa for high inhibitor levels."
+      - "Vitamin K deficiency does not cause FVIII resistance."
+      - "Hemophilia B is a different inherited defect."
+      - "Desmopressin is for mild disease and is not the issue."
+      - "The gene does not move; this is nonsense."
+    src: { page: 75, quote: "FVIII antibodies/inhibitors in 5-10% of patients." }
+    status: unverified
+  # ---------- p76-77: vitamin K ----------
+  - id: hem.L05.041
+    kind: card
+    topic: vitamin-k
+    front: Which factors make up the prothrombin complex, and where are they made?
+    back: Factors II, VII, IX and X, made in the liver; vitamin K is needed for their synthesis.
+    src: { page: 76, quote: "The prothrombin complex or group which consist of factors II, VII, IX, X which are produced in the liver." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L05.042
+    kind: card
+    topic: vitamin-k
+    front: What does vitamin K actually do to factors II, VII, IX and X?
+    back: A vitamin K-dependent carboxylase adds carboxyl (-COOH) groups to the proteins in the final step of synthesis; these are needed for efficient function.
+    src: { page: 76, quote: "involve a vitamin K-dependent carboxylase, which adden carboxyl (-COOH) group to the proteins" }
+    status: unverified
+  - id: hem.L05.043
+    kind: enumerate
+    topic: vitamin-k
+    prompt: Enumerate the causes of vitamin K deficiency.
+    points:
+      - Impaired absorption (biliary obstruction, pancreatic disease, other steatorrhea)
+      - Oral anticoagulants
+      - Prolonged broad-spectrum antibiotics with low intake in severely ill patients
+      - Hemorrhagic disease of the newborn
+    pass: 4
+    src: { page: 77, quote: "Secondary to oral anticoagulants 3- Prolonged treatment with broad spectrum antibiotics in association with low dietary intake in severly ill patients." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L05.044
+    kind: card
+    topic: vitamin-k
+    front: Where do we get vitamin K from?
+    back: Green vegetables and bacterial synthesis in the gut.
+    src: { page: 77, quote: "N.B vit K is obtained form green vegetables and bacterial synthesis in the gut" }
+    status: unverified
+  - id: hem.L05.045
+    kind: card
+    topic: vitamin-k
+    front: Why do broad-spectrum antibiotics cause vitamin K deficiency in very ill patients?
+    back: They remove the gut bacteria that synthesize vitamin K, while the patient eats little green vegetables (low dietary intake).
+    src: { page: 77, quote: "Prolonged treatment with broad spectrum antibiotics in association with low dietary intake in severly ill patients." }
+    status: unverified
+  - id: hem.L05.046
+    kind: card
+    topic: vitamin-k
+    front: Clinical features and lab findings of vitamin K deficiency?
+    back: Bruises, ecchymoses and mucous membrane bleeding; PT and APTT both increased.
+    src: { page: 77, quote: "Bruises, echymoses and mucous membrane bleeding. Lab findings PT increased APTT increased" }
+    status: unverified
+  - id: hem.L05.047
+    kind: cloze
+    topic: vitamin-k
+    text: "Vitamin K deficiency is treated with vitamin K ({{c1::10–20 mg}} in adults) and {{c2::fresh frozen plasma}}."
+    src: { page: 77, quote: "Vitamin K (10-20 mg in adults/6h). Fresh frozen plasma." }
+    status: unverified
+    tags: [numbers]
+  # ---------- p77-78: liver disease ----------
+  - id: hem.L05.048
+    kind: enumerate
+    topic: vitamin-k
+    prompt: Enumerate the mechanisms of the bleeding tendency in liver disease.
+    points:
+      - Impaired synthesis of vitamin K-dependent factors (II, VII, IX, X)
+      - Impaired synthesis of factor V and fibrinogen
+      - Thrombocytopenia (folate depletion, alcohol, hypersplenism)
+      - Fibrinolysis
+    pass: 4
+    src: { page: 77, quote: "Impaired synthesis of factors V and fibrinogen. 3. Thrombocytopenia-due to folate depletion, alcoholism and/or hypersplenism. 4. Fibrinolysis." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L05.049
+    kind: card
+    topic: vitamin-k
+    front: Which factor deficiency separates liver disease from simple vitamin K deficiency?
+    back: "Factor V (and fibrinogen): the liver makes them, but they do not need vitamin K; liver disease has these additional clotting defects."
+    src: { page: 77, quote: "Diagnosis As for vitamin K deficiency but with additional clotting defects." }
+    status: unverified
+  - id: hem.L05.050
+    kind: card
+    topic: vitamin-k
+    front: "Bleeding in liver disease: how severe, and how is it treated?"
+    back: Usually mild, though severe bleeds may occur from varices; treat the primary cause, vitamin K (may be relatively ineffective alone) and fresh frozen plasma.
+    src: { page: 78, quote: "Vitamin K (which alone may be relatively ineffective) fresh frozen plasma." }
+    status: unverified
+  - id: hem.L05.051
+    kind: mcq
+    topic: vitamin-k
+    stem: A 45-year-old woman has painless jaundice from a pancreatic head mass and pale stools. INR 2.4. Which treatment best corrects her coagulopathy?
+    options:
+      - Parenteral vitamin K
+      - Desmopressin
+      - Platelet transfusion
+      - Factor VIII concentrate
+      - Heparin
+    answer: 0
+    why:
+      - "Correct: biliary obstruction impairs vitamin K absorption; vitamin K (and FFP if bleeding) treats it (p76–77)."
+      - "Desmopressin raises FVIII, which is not the problem."
+      - "There is no thrombocytopenia here."
+      - "FVIII is not vitamin K-dependent."
+      - "Heparin would worsen bleeding."
+    src: { page: 76, quote: "Impaired absorption due to: a. Biliary obstruction. b. Pancreatic disease. c. Steatorahea of other causes." }
+    status: unverified
+  - id: hem.L05.052
+    kind: mcq
+    topic: vitamin-k
+    stem: A man with decompensated cirrhosis has a prolonged PT that does not correct after 3 days of vitamin K. Factor V is low. Why?
+    options:
+      - The liver cannot make the factors, so vitamin K alone may be ineffective
+      - He has hemophilia B
+      - Vitamin K was given in too high a dose
+      - He has an isolated factor VIII inhibitor
+      - Factor V is vitamin K-dependent
+    answer: 0
+    why:
+      - "Correct: in liver disease synthesis itself fails; vitamin K alone may be relatively ineffective (p78), and V and fibrinogen are low too (p77)."
+      - "Hemophilia B is inherited and prolongs only the APTT."
+      - "A higher dose would not fix failed synthesis."
+      - "A FVIII inhibitor prolongs the APTT."
+      - "Factor V is not vitamin K-dependent; only II, VII, IX and X are."
+    src: { page: 78, quote: "Vitamin K (which alone may be relatively ineffective) fresh frozen plasma." }
+    status: unverified
+  # ---------- p78-80: DIC ----------
+  - id: hem.L05.053
+    kind: enumerate
+    topic: dic
+    prompt: Enumerate the causes of DIC.
+    points:
+      - Bacterial toxins (gram-negative and meningococcal septicemia)
+      - Other infections (falciparum malaria)
+      - Hypovolemic shock
+      - Obstetric complications (amniotic fluid embolism, abruptio placentae, intrauterine death)
+      - Tissue factor release (trauma, burns, malignancy)
+    pass: 4
+    src: { page: 78, quote: "Bacterial toxin e.g. gram negative septicemia, miningoccacal septicaemia. 3. Other infection e.g. falciparm maleria. 4. Hypovolaemic shock." }
+    status: unverified
+    tags: [high-yield, book-question]
+  - id: hem.L05.054
+    kind: enumerate
+    topic: dic
+    prompt: Which obstetric complications cause DIC?
+    points: [Amniotic fluid embolism, Abruptio placentae, Intrauterine death]
+    pass: 3
+    src: { page: 78, quote: "Obstetric complications. E.g. amniotic fluid embolism, abruptio placentae, and intrauterine death." }
+    status: unverified
+  - id: hem.L05.055
+    kind: order
+    topic: dic
+    prompt: Order the pathogenesis of DIC as in the p79 figure.
+    steps:
+      - Widespread activation of coagulation and generalized platelet aggregation
+      - Microthrombi in the circulation
+      - Consumption of clotting factors and platelets
+      - Secondary fibrinolysis raises FDPs
+      - Bleeding
+    src: { page: 79, quote: "Widespread activation of coagulation" }
+    status: unverified
+  - id: hem.L05.056
+    kind: enumerate
+    topic: dic
+    prompt: Enumerate the laboratory findings in DIC.
+    points:
+      - Thrombocytopenia
+      - Red cell fragments and schistocytes on the film
+      - Prolonged PT, APTT and thrombin time
+      - Low fibrinogen
+      - FDPs and D-dimers present
+    pass: 4
+    src: { page: 79, quote: "Fibrinogen level-decreased, fibrin degredation products (FDP) and D-dimers presents." }
+    status: unverified
+    tags: [high-yield, book-question]
+  - id: hem.L05.057
+    kind: card
+    topic: dic
+    front: Clinical features of DIC?
+    back: Some are asymptomatic; others have features of the cause and of DIC itself (bleeding of variable severity from consumption, microangiopathic hemolytic anemia, and occasionally thrombosis).
+    src: { page: 79, quote: "Some patients are asymptomatic. 2. Symptoms and sign related to associated diseases. 3. Symptom and signs related to DIC." }
+    status: unverified
+  - id: hem.L05.058
+    kind: card
+    topic: dic
+    front: Why does DIC cause both bleeding and microangiopathic hemolysis?
+    back: Bleeding comes from consumption of factors and platelets; red cells are fragmented passing through the microthrombi (schistocytes).
+    src: { page: 79, quote: "Haemorrhagic manifestation of variable severity (due to consumption coagulpathy). b. Microangiopathic haemolytic anaemia." }
+    status: unverified
+  - id: hem.L05.059
+    kind: enumerate
+    topic: dic
+    prompt: Enumerate the treatment of DIC.
+    points:
+      - Treat the underlying disease (antibiotics in septicemia)
+      - General support (treat hypoxia and shock)
+      - Fresh blood
+      - Fresh plasma, FFP and cryoprecipitate to replace factors
+      - Platelet concentrates
+      - Heparin (controversial)
+    pass: 5
+    src: { page: 80, quote: "Treatment of the underlying disease e.g. antibiotics in septicemia. 2. General supportive measure e.g. treatment of hypoxia and shock." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L05.060
+    kind: card
+    topic: dic
+    front: What does the lecture say about heparin in DIC?
+    back: Its use remains controversial.
+    src: { page: 80, quote: "Heparin; its use remains controversal" }
+    status: unverified
+  - id: hem.L05.061
+    kind: mcq
+    topic: dic
+    stem: A 28-year-old woman has a placental abruption. She oozes from IV sites. Platelets 40,000/mm³, PT and APTT prolonged, fibrinogen 80 mg/dL, D-dimer very high, schistocytes on film. What is the most important step?
+    options:
+      - Treat the underlying cause (deliver, resuscitate) and replace factors and platelets
+      - Start full-dose heparin first
+      - Give desmopressin
+      - Give vitamin K only
+      - Give tranexamic acid and nothing else
+    answer: 0
+    why:
+      - "Correct: DIC treatment is the underlying disease plus support and replacement (FFP, cryo, platelets) (p80)."
+      - "Heparin use is controversial (p80), not the first step in bleeding DIC."
+      - "Desmopressin raises FVIII and VWF; it does not treat consumption."
+      - "Vitamin K does not replace consumed fibrinogen or platelets."
+      - "The lecture does not list antifibrinolytics for DIC."
+    src: { page: 80, quote: "Treatment of the underlying disease e.g. antibiotics in septicemia." }
+    status: unverified
+  - id: hem.L05.062
+    kind: mcq
+    topic: dic
+    stem: Which lab pattern separates DIC from liver disease and vitamin K deficiency in the lecture?
+    options:
+      - Low platelets, schistocytes, low fibrinogen, raised FDPs and D-dimers
+      - Prolonged PT alone
+      - Prolonged APTT alone
+      - Normal thrombin time
+      - Raised factor VIII
+    answer: 0
+    why:
+      - "Correct: consumption gives thrombocytopenia, fragments, low fibrinogen and FDPs/D-dimers (p79)."
+      - "A long PT is shared with liver disease and warfarin."
+      - "An isolated long APTT suggests hemophilia."
+      - "DIC prolongs the thrombin time (p73, p79)."
+      - "The lecture does not use factor VIII to diagnose DIC."
+    src: { page: 79, quote: "Thrombocytopenia. 2. Blood: film-red cell fragments and schistocytes." }
+    status: unverified
+  - id: hem.L05.063
+    kind: cloze
+    topic: dic
+    text: "In DIC, {{c1::PT}}, {{c2::APTT}} and {{c3::thrombin time}} are all prolonged."
+    src: { page: 79, quote: "Bleeding, prothombin time, APTT, and thrombin T prolonged." }
+    status: unverified
+  # ---------- p80: inhibitors and miscellaneous ----------
+  - id: hem.L05.064
+    kind: enumerate
+    topic: other-acquired
+    prompt: Enumerate the circulating coagulation inhibitors in the lecture.
+    points: [Antibodies against FVIII components, Non-specific inhibitors in SLE and RA]
+    pass: 2
+    src: { page: 80, quote: "Inhibition of coagulation 1- Antibodies against F VIII components 2- Non specific inhibitors in SLE, RA" }
+    status: unverified
+  - id: hem.L05.065
+    kind: enumerate
+    topic: other-acquired
+    prompt: Enumerate the miscellaneous acquired causes of coagulation defects.
+    points: [Heparin and thrombolytic therapy, L-asparaginase, Massive transfusion syndrome]
+    pass: 3
+    src: { page: 80, quote: "Miscellaneous 1- Therapy with heparin & thrombolytics. 2- L- asparagines 3- Massive transfusion syndrome" }
+    status: unverified
+  # ---------- p80-83: antiphospholipid syndrome ----------
+  - id: hem.L05.066
+    kind: card
+    topic: aps
+    front: Why does the lecture call APS an important acquired thrombophilia?
+    back: It is highly prevalent and carries considerable morbidity and mortality.
+    src: { page: 80, quote: "An important acquired thrombophilic condition because it is of high prevalence and is associated with considerable morbidity and mortality." }
+    status: unverified
+  - id: hem.L05.067
+    kind: card
+    topic: aps
+    front: What are the essential features of APS?
+    back: Arterial or venous thrombosis, or recurrent pregnancy loss or placental dysfunction, in someone whose antiphospholipid antibody tests are persistently positive.
+    src: { page: 80, quote: "The essential features are arterial or venous thrombosis or recurrent pregnancy loss or placental dysfunction" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L05.068
+    kind: card
+    topic: aps
+    front: Principal thrombotic manifestations of APS, and its characteristic pattern?
+    back: DVT, pulmonary embolism and ischemic stroke (any vessel, even renal thrombotic microangiopathy); recurrences tend to be in the same vascular bed.
+    src: { page: 81, quote: "A characteristic of APS in an individual patient is the tendency to recurrent problems in the same vascular bed." }
+    status: unverified
+  - id: hem.L05.069
+    kind: enumerate
+    topic: aps
+    prompt: Laboratory criteria for APS?
+    points:
+      - IgG or IgM anticardiolipin antibodies at moderate or high level
+      - IgG or IgM anti-β2-glycoprotein I above the 99th percentile
+      - Lupus anticoagulant
+    pass: 3
+    src: { page: 81, quote: "IgG or IgM anticardiolipin antibodies at moderate or high concentration†; IgG or IgM anti-β2-GPI >99th percentile and/or - Lupus anticoagulant" }
+    status: unverified
+    tags: [high-yield, book-question]
+  - id: hem.L05.070
+    kind: enumerate
+    topic: aps
+    prompt: Pregnancy criteria for APS?
+    points:
+      - Unexplained death of a normal fetus at or beyond 10 weeks
+      - Three or more unexplained consecutive miscarriages before 10 weeks
+      - One or more premature births of a normal fetus before 34 weeks from pre-eclampsia, eclampsia or severe placental insufficiency
+    pass: 3
+    src: { page: 81, quote: "Three or more unexplained consecutive miscarriages before 10 weeks" }
+    status: unverified
+    tags: [high-yield, book-question]
+  - id: hem.L05.071
+    kind: cloze
+    topic: aps
+    text: "APS needs at least {{c1::one clinical}} and at least {{c2::one laboratory}} criterion; the lab test must be positive on two occasions {{c3::12 weeks}} apart."
+    src: { page: 81, quote: "There must be at least one clinical and at least one laboratory criterion present." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: hem.L05.072
+    kind: card
+    topic: aps
+    front: Why must antiphospholipid antibodies be positive twice, 12 weeks apart?
+    back: Transient antibodies occur, for example in infection, and these are not usually linked to clinical events.
+    src: { page: 81, quote: "as transient antibodies may occur, for example in infection. Such antibodies are not usually associated with clinical events." }
+    status: unverified
+  - id: hem.L05.073
+    kind: table
+    topic: aps
+    title: APS diagnostic criteria (p81)
+    columns: [Domain, Criterion]
+    rows:
+      - [Thrombosis, "Arterial, venous or microvascular thrombosis in any tissue or organ"]
+      - [Pregnancy, "Fetal death ≥10 weeks; ≥3 miscarriages <10 weeks; premature birth <34 weeks"]
+      - [Laboratory, "Anticardiolipin (moderate/high), anti-β2-GPI >99th percentile, or lupus anticoagulant"]
+      - [Rule, "≥1 clinical + ≥1 laboratory; lab positive twice 12 weeks apart"]
+    blanks: [[1, 1], [2, 1], [3, 1]]
+    src: { page: 81, quote: "Diagnostic criteria in APS Clinical criteria∗ - Thrombosis: arterial, venous or microvascular thrombosis in any tissue or organ" }
+    status: unverified
+    tags: [book-question]
+  - id: hem.L05.074
+    kind: card
+    topic: aps
+    front: Anticoagulation for thrombotic APS per the lecture?
+    back: Indefinite oral anticoagulation; INR 3–4 was used, but two randomized studies showed INR 2–3 prevents recurrence in most patients.
+    src: { page: 82, quote: "These patients should remain on indefinite oral anticoagulation, maintaining an International Normalized Ratio (INR) of 3–4." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L05.075
+    kind: card
+    topic: aps
+    front: Which APS patients may still need a target INR of 3–4?
+    back: Some with arterial or small-vessel thrombosis (lacunar infarcts on MRI), to prevent recurrent cerebral thrombosis.
+    src: { page: 82, quote: "some evident as lacunar infarcts on magnetic resonance imaging, who appear to require a target INR of 3–4 to prevent recurrent cerebral thrombosis." }
+    status: unverified
+  - id: hem.L05.076
+    kind: card
+    topic: aps
+    front: Is immunosuppression used in primary APS?
+    back: No, except the very rare case where thrombosis recurs despite intensive anticoagulation, and in catastrophic APS.
+    src: { page: 82, quote: "Immunosuppressive therapy is not indicated in primary APS other than in the very rare case where thrombosis recurs despite intensive anticoagulant therapy." }
+    status: unverified
+  - id: hem.L05.077
+    kind: card
+    topic: aps
+    front: Treatment of catastrophic APS?
+    back: Life-saving combination of antithrombotics, corticosteroids and other immunomodulatory therapy such as rituximab.
+    src: { page: 82, quote: "catastrophic APS when combination treatment with antithrombotics, corticosteroids and other immunomodulatory therapies such as rituximab is administered as a life saving." }
+    status: unverified
+  - id: hem.L05.078
+    kind: cloze
+    topic: aps
+    text: "In pregnancy with APS and a poor obstetric history, empirical {{c1::LMWH}} plus {{c2::low-dose aspirin}} raises live births from 30% to {{c3::70–80%}}."
+    src: { page: 83, quote: "approach increases the chance of a successful outcome of a healthy live birth from 30% to 70–80%." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: hem.L05.079
+    kind: card
+    topic: aps
+    front: What do some clinicians give first-line to women with APS and recurrent first-trimester loss only?
+    back: Supportive care, keeping aspirin or aspirin plus heparin for those with a further pregnancy failure; combination therapy first-line is kept for previous placental dysfunction.
+    src: { page: 83, quote: "those with recurrent first-trimester-loss miscarriage should be given supporting care as first line, with aspirin or aspirin/heparin reserved" }
+    status: unverified
+  - id: hem.L05.080
+    kind: mcq
+    topic: aps
+    stem: A 32-year-old woman has had three consecutive unexplained miscarriages at 7–8 weeks. Lupus anticoagulant was positive once, during a viral illness last month. What is needed to diagnose APS?
+    options:
+      - Repeat the test; it must be positive again at least 12 weeks apart
+      - Nothing; she already meets the criteria
+      - A fourth miscarriage
+      - A positive ANA
+      - A Doppler showing DVT
+    answer: 0
+    why:
+      - "Correct: lab tests must be positive on two occasions 12 weeks apart, since transient antibodies occur in infection (p81)."
+      - "One positive test during infection is not enough."
+      - "Three consecutive losses before 10 weeks already meet the clinical criterion."
+      - "ANA is not an APS criterion."
+      - "A pregnancy criterion is enough; thrombosis is not required."
+    src: { page: 81, quote: "The laboratory test must be consistently positive on at least two occasions 12 weeks apart as transient antibodies may occur, for example in infection." }
+    status: unverified
+  - id: hem.L05.081
+    kind: mcq
+    topic: aps
+    stem: Which of the following meets an APS pregnancy criterion?
+    options:
+      - Premature birth at 31 weeks from severe pre-eclampsia
+      - Two miscarriages at 6 weeks
+      - Premature birth at 36 weeks from pre-eclampsia
+      - One miscarriage at 8 weeks
+      - Gestational diabetes
+    answer: 0
+    why:
+      - "Correct: premature birth of a normal fetus before 34 weeks from pre-eclampsia counts (p81)."
+      - "It needs three or more consecutive miscarriages before 10 weeks."
+      - "36 weeks is beyond the 34-week limit."
+      - "One early miscarriage is not enough."
+      - "Gestational diabetes is not a criterion."
+    src: { page: 81, quote: "One or more premature births of a morphologically normal fetus before 34 weeks of gestation due to pre-eclampsia" }
+    status: unverified
+  - id: hem.L05.082
+    kind: mcq
+    topic: aps
+    stem: A 40-year-old man with primary APS had a femoral DVT. What long-term treatment does the lecture support for most such patients?
+    options:
+      - Indefinite warfarin with a target INR of 2–3
+      - Six months of warfarin then stop
+      - Prednisolone and azathioprine
+      - Aspirin alone
+      - Rituximab
+    answer: 0
+    why:
+      - "Correct: indefinite anticoagulation; two randomized studies showed INR 2–3 works for most (p82)."
+      - "The lecture says indefinite, not time-limited."
+      - "Immunosuppression is not indicated in primary APS (p82)."
+      - "Aspirin alone is not the lecture's treatment for venous thrombosis."
+      - "Rituximab is for catastrophic APS."
+    src: { page: 82, quote: "a lower target INR of 2–3 is effective in preventing recurrent thrombosis in the majority of patients." }
+    status: unverified
+    update:
+      text: "DOACs (especially rivaroxaban) should be avoided in triple-positive APS and in APS with arterial events; warfarin stays first choice."
+      ref: "EULAR recommendations for APS in adults 2019"
+  # ---------- cases ----------
+  - id: hem.L05.083
+    kind: case
+    topic: hemophilia
+    stem: A 6-year-old boy has a swollen painful knee after a fall at school. He bruises easily. His maternal uncle "bled a lot".
+    steps:
+      - reveal: "Platelets 280,000/mm³. PT normal. APTT prolonged. Thrombin time normal."
+        question: Which group does the screening pattern point to?
+        options: ["Hemophilia A or B", "Liver disease", "DIC", "Heparin therapy"]
+        answer: 0
+        why: "An isolated long APTT = hemophilia or Christmas disease (p73). Liver disease prolongs the PT. DIC prolongs everything with low platelets. Heparin prolongs the TT."
+      - reveal: "FVIII:C 3%. VWF antigen normal."
+        question: Diagnosis and severity?
+        options: ["Moderate hemophilia A", "Severe hemophilia A", "Mild hemophilia A", "Von Willebrand disease"]
+        answer: 0
+        why: "VIII 1–5% = moderate to severe post-traumatic bleeds (p74). Below 1% is severe; 5–25% is mild. Normal VWF Ag excludes VWD."
+      - question: How should his knee bleed be treated?
+        options: ["IV factor VIII concentrate at the earliest sign", "Desmopressin only", "Vitamin K", "Wait and see"]
+        answer: 0
+        why: "Give factor VIII at the earliest sign of bleeding (p75–76). Desmopressin is for mild hemophilia. Vitamin K does not affect VIII."
+      - reveal: "Years later his bleeds stop responding to usual doses."
+        question: What has probably happened?
+        options: ["FVIII inhibitors developed", "He outgrew the disease", "He developed vitamin K deficiency", "The gene mutated to factor IX"]
+        answer: 0
+        why: "FVIII antibodies/inhibitors appear in 5–10% (p75). Lecture 6 gives rFVIIa for high inhibitor levels."
+    src: { page: 74, quote: "VIII activity 1-5% - moderate to sever post-traumatic bleeds." }
+    status: unverified
+  - id: hem.L05.084
+    kind: case
+    topic: dic
+    stem: A 60-year-old man is admitted with fever, rigors and hypotension from a urinary source.
+    steps:
+      - reveal: "Day 2: oozing from cannula sites and petechiae. Platelets 35,000/mm³; PT, APTT and TT prolonged; fibrinogen low; D-dimer high; film shows schistocytes."
+        question: Diagnosis?
+        options: [DIC, Vitamin K deficiency, Liver disease, Hemophilia B]
+        answer: 0
+        why: "Thrombocytopenia, fragments, prolonged PT/APTT/TT, low fibrinogen and D-dimers = DIC (p79); gram-negative septicemia is a classic trigger (p78)."
+      - question: What is the first treatment priority?
+        options: ["Antibiotics and treatment of shock", "Heparin infusion", "Desmopressin", "Vitamin K alone"]
+        answer: 0
+        why: "Treat the underlying disease (antibiotics in septicemia) and support (hypoxia, shock) first (p80). Heparin is controversial."
+      - reveal: "He is still bleeding with fibrinogen 70 mg/dL and platelets 30,000/mm³."
+        question: Which replacement fits?
+        options: ["FFP, cryoprecipitate and platelet concentrates", "Factor IX concentrate", "Albumin", "Recombinant factor XIII"]
+        answer: 0
+        why: "Bleeding DIC is treated with fresh blood, plasma, FFP, cryoprecipitate and platelets (p80)."
+    src: { page: 79, quote: "Fibrinogen level-decreased, fibrin degredation products (FDP) and D-dimers presents." }
+    status: unverified
+  - id: hem.L05.085
+    kind: case
+    topic: aps
+    stem: A 29-year-old woman has had a left leg DVT with no provoking factor. She had a stillbirth at 22 weeks last year with a normal fetus.
+    steps:
+      - reveal: "Anticardiolipin IgG is high. Repeat 12 weeks later is still high."
+        question: Does she meet the lecture's APS criteria?
+        options: ["Yes: clinical and lab criteria, persistently positive", "No: she needs three miscarriages", "No: she needs lupus anticoagulant too", "No: anticardiolipin is not a criterion"]
+        answer: 0
+        why: "At least one clinical (thrombosis, fetal death ≥10 weeks) and one lab criterion positive twice 12 weeks apart (p81). One lab test is enough."
+      - question: Long-term treatment?
+        options: ["Indefinite oral anticoagulation", "Prednisolone", "Aspirin for 3 months", "No treatment until the next event"]
+        answer: 0
+        why: "Thrombotic APS: indefinite oral anticoagulation, INR 2–3 in most (p82). Immunosuppression is not indicated in primary APS."
+      - reveal: "Two years later she is pregnant."
+        question: What does the lecture recommend?
+        options: ["Empirical LMWH plus low-dose aspirin", "Warfarin throughout pregnancy", "No treatment", "Rituximab"]
+        answer: 0
+        why: "LMWH plus low-dose aspirin raises live births from 30% to 70–80% (p82–83). Rituximab is for catastrophic APS."
+    src: { page: 81, quote: "There must be at least one clinical and at least one laboratory criterion present." }
+    status: unverified
+  # ---------- end-of-lecture questions (p83) ----------
+  - id: hem.L05.086
+    kind: essay
+    topic: aps
+    prompt: Outline the diagnostic approach to antiphospholipid syndrome.
+    outline:
+      - "Suspect it": ["Arterial or venous thrombosis, recurrent pregnancy loss or placental dysfunction", "DVT, PE and ischemic stroke are principal; recurrences in the same vascular bed"]
+      - "Clinical criteria": ["Thrombosis in any tissue or organ", "Fetal death ≥10 weeks; ≥3 consecutive miscarriages <10 weeks; premature birth <34 weeks from pre-eclampsia or placental insufficiency"]
+      - "Laboratory criteria": ["Anticardiolipin IgG/IgM moderate or high", "Anti-β2-GPI IgG/IgM >99th percentile", "Lupus anticoagulant"]
+      - "Rule": ["≥1 clinical + ≥1 laboratory", "Positive twice, 12 weeks apart (transient antibodies occur in infection)"]
+    src: { page: 81, quote: "There must be at least one clinical and at least one laboratory criterion present." }
+    status: unverified
+    tags: [book-question]
+  - id: hem.L05.087
+    kind: essay
+    topic: hemophilia
+    prompt: Outline the management of hemophilia.
+    outline:
+      - "When": ["Prophylactically before any operation", "At the earliest sign of spontaneous or post-traumatic bleeding"]
+      - "Hemophilia A": ["IV factor VIII concentrate to keep VIII activity 5–100% by severity or surgery", "Desmopressin in mild cases (releases FVIII from endothelium)"]
+      - "Hemophilia B": ["Fresh frozen plasma or factor IX concentrate"]
+      - "Complications to manage": ["Arthritis, nerve compression, pseudotumor", "FVIII inhibitors in 5–10%", "Chronic hepatitis B/C, HIV from old concentrates"]
+    src: { page: 76, quote: "Treatment consists of I.V injection of factor VIII in a concentrated form to maintain plasma factor VIII activity between 5 and 100%" }
+    status: unverified
+    tags: [book-question]
+    update:
+      text: "Regular prophylaxis (not only on demand) is now standard for severe hemophilia; emicizumab, a bispecific antibody mimicking FVIIIa, is used weekly to monthly, with or without inhibitors."
+      ref: "WFH Guidelines for the Management of Hemophilia, 3rd ed. 2020"
+  - id: hem.L05.088
+    kind: essay
+    topic: dic
+    prompt: Give the causes and diagnosis of DIC.
+    outline:
+      - "Causes": ["Bacterial toxins: gram-negative, meningococcal septicemia", "Falciparum malaria; hypovolemic shock", "Obstetric: amniotic fluid embolism, abruptio placentae, intrauterine death", "Tissue factor release: trauma, burns, malignancy"]
+      - "Lab diagnosis": ["Thrombocytopenia; red cell fragments and schistocytes", "PT, APTT and thrombin time prolonged", "Fibrinogen low; FDPs and D-dimers present"]
+      - "Clinical": ["Asymptomatic, or features of the cause", "Bleeding, microangiopathic hemolytic anemia, sometimes thrombosis"]
+    src: { page: 79, quote: "Thrombocytopenia. 2. Blood: film-red cell fragments and schistocytes." }
+    status: unverified
+    tags: [book-question]
+    update:
+      text: "Scoring systems help: the ISTH overt DIC score (platelets, D-dimer/FDP, PT prolongation, fibrinogen; ≥5 = overt DIC)."
+      ref: "ISTH DIC scoring, reaffirmed in ISTH guidance 2013"
+  # ---------- extra review ----------
+  - id: hem.L05.089
+    kind: table
+    topic: screening
+    title: Bleeding disorders at a glance (lecture 5)
+    columns: [Disorder, PT, APTT]
+    rows:
+      - [Hemophilia A or B, Normal, Prolonged]
+      - [Vitamin K deficiency, Prolonged, Prolonged]
+      - [Warfarin therapy, Prolonged, "Prolonged (via II, IX, X)"]
+      - [DIC, Prolonged, Prolonged]
+    blanks: [[0, 1], [0, 2], [1, 1], [3, 2]]
+    src: { page: 77, quote: "Lab findings PT increased APTT increased" }
+    status: unverified
+  - id: hem.L05.090
+    kind: cloze
+    topic: vitamin-k
+    text: "The vitamin K-dependent factors are {{c1::II, VII, IX and X}}; the liver also makes {{c2::factor V and fibrinogen}}, which are low in liver disease but not in vitamin K deficiency."
+    src: { page: 77, quote: "Imparied synthesis of prothrombin and factors VII, IX and X (vitamin K- dependent). 2. Impaired synthesis of factors V and fibrinogen." }
+    status: unverified
+    tags: [high-yield]

@@ -1,6 +1,6 @@
 //! A book page's sheet. Every "ص N" chip in the app opens it (Mohamed,
-//! 2026-10-28: no dead chips or links): the page's short quote when there
-//! is one, the lecture the page is in, what Batna has made from that page,
+//! 2026-10-28: no dead chips or links): the short quote the chip itself
+//! carries, when it has one, the lecture the page is in, what Batna has made from that page,
 //! and two ways on: a session on just that page, or the lecture's page.
 //!
 //! It opens over whatever is on screen (a lesson, a running session, a
@@ -45,8 +45,6 @@ pub struct PageContent {
     pub playable: Vec<String>,
     pub mcqs: usize,
     pub cases: usize,
-    /// The first short quote an item on the page carries.
-    pub quote: Option<String>,
 }
 
 /// Collects the page's items from the library, leaving out hidden ones.
@@ -67,9 +65,6 @@ pub fn page_content(lib: &Library, page: u32, hidden: impl Fn(&str) -> bool) -> 
             "case" => out.cases += 1,
             _ => {}
         }
-        if out.quote.is_none() {
-            out.quote = item.src.quote.clone().filter(|q| !q.trim().is_empty());
-        }
     }
     out
 }
@@ -87,7 +82,10 @@ pub fn BookSheet() -> Element {
         let b = review.backend.borrow();
         page_content(lib, page, |id| b.is_hidden(id))
     };
-    let quote = chip_quote.or(content.quote.clone());
+    // Only the chip's own quote: another item's line from the same page
+    // reads as the source of this one and points at the wrong fact
+    // (Mohamed, 2026-10-29).
+    let quote = chip_quote;
     let entry = content.lecture.as_ref().and_then(|id| lib.index.lectures.iter().find(|e| &e.id == id));
     let playable = content.playable.clone();
     let n = playable.len();

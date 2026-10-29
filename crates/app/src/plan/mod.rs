@@ -206,7 +206,7 @@ fn Setup(today: Day, settings: PlanSettings, on_done: EventHandler<()>) -> Eleme
     };
     rsx! {
         section { class: "card plan-setup",
-            h1 { {tx::SETUP_TITLE} }
+            h2 { {tx::SETUP_TITLE} }
             p { class: "muted", {tx::SETUP_BODY} }
             label { class: "field",
                 span { {tx::EXAM_DAY} }
@@ -289,7 +289,7 @@ fn StatusCard(p: Plan, exam: Option<Day>) -> Element {
     rsx! {
         section { class: "card plan-status",
             if let Some(exam) = exam {
-                h1 { "{tx::EXAM_ON}: {long_date(exam)}" }
+                h2 { "{tx::EXAM_ON}: {long_date(exam)}" }
             }
             if p.status != PlanStatus::ExamDone {
                 p { class: "muted", "{p.study_days_left} {tx::DAYS_LEFT}" }

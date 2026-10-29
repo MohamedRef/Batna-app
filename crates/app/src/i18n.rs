@@ -119,21 +119,8 @@ pub mod nav {
 }
 
 pub mod today {
-    pub const TITLE: &str = "النهارده";
     pub const DUE: &str = "مستحق مراجعة";
     pub const NEW: &str = "جديد متاح";
-    pub const CHECKED: &str = "راجعت صحته";
-    /// "المستحق ياخد حوالي 12 دقيقة. …"
-    pub fn due_time(minutes: u32) -> String {
-        format!(
-            "المستحق ياخد حوالي {}. الجلسة بتبدأ بالأضعف.",
-            super::count::count(minutes, &super::count::MINUTE)
-        )
-    }
-    /// "ابدأ جلسة 10 دقايق", with the session length he picked.
-    pub fn start(minutes: u32) -> String {
-        format!("ابدأ جلسة {}", super::count::count(minutes, &super::count::MINUTE))
-    }
     /// "3 حالات مستنية مراجعة في شاشة الحالات".
     pub fn due_cases(n: usize) -> String {
         format!("{} مستنية مراجعة في شاشة الحالات", super::count::count(n, &super::count::CASE))
@@ -200,6 +187,52 @@ pub mod today {
         format!("لو علّيت حد المراجعات اليومي لـ {cap}، الخطة تلحق كلها. تقدر تعدّله من تقدّمي ← خطة الامتحان.")
     }
     pub const TIGHT_HIGH_YIELD: &str = "الوقت مش مكفّي كل الجديد قبل آخر الأيام. ركّز على high-yield الأول.";
+
+    // The 2026-10-29 redesign: a greeting, the session length, one start.
+    pub const EYEBROW: &str = "جلسة صغيرة، وفهم ثابت";
+    pub const READY_Q: &str = "جاهز لجلسة هادية؟";
+    pub const DONE_Q: &str = "خلّصت النهارده. عاش!";
+    pub const TIME_Q: &str = "معاك قد إيه؟";
+    pub const TIME_HINT: &str = "طول الجلسة. بيتحفظ كاختيارك العادي.";
+    /// "5 د" on a session-length chip.
+    pub fn minutes_short(m: u32) -> String {
+        format!("{m} د")
+    }
+    pub const HERO_KICKER: &str = "المراجعة المستحقة";
+    pub const HERO_KICKER_NEW: &str = "خطوة جديدة";
+    pub const HERO_KICKER_PLAN: &str = "خطة النهارده";
+    /// The hero's headline from the real counts.
+    pub fn headline(due: usize, new: usize) -> String {
+        use super::count::{NEW_THING, REVIEW, count};
+        match (due, new) {
+            (0, n) => format!("{}، على قد وقتك.", count(n, &NEW_THING)),
+            (d, 0) => format!("{}، وبس.", count(d, &REVIEW)),
+            (d, n) => format!("{}، و{}.", count(d, &REVIEW), count(n, &NEW_THING)),
+        }
+    }
+    pub fn hero_body(due: usize, new: usize) -> String {
+        match (due, new) {
+            (0, _) => "مفيش مستحق. نبدأ بالجديد على قد الوقت اللي اخترته.".to_string(),
+            (_, 0) => "نبدأ بالأضعف، والجلسة بتقف لما وقتك يخلص.".to_string(),
+            _ => "نبدأ باللي محتاج تثبيت، وبعده الجديد على قد وقتك.".to_string(),
+        }
+    }
+    /// "ابدأ الجلسة · 10 دقايق".
+    pub fn start_session(minutes: u32) -> String {
+        format!("ابدأ الجلسة · {}", super::count::count(minutes, &super::count::MINUTE))
+    }
+    pub const MINUTES_ALL: &str = "دقايق للكل تقريبًا";
+    pub const MINUTES_HINT: &str = "شوف الحمل في الأيام الجاية";
+    pub const OPEN_NEXT_LESSON: &str = "افتح الدرس الجاي";
+    pub const CONTINUE_HEAD: &str = "كمّل من مكانك";
+    pub const ALL_LESSONS: &str = "كل الدروس";
+    pub const MORE_HEAD: &str = "حاجات تانية تفيدك";
+    pub const QUICK_BANK: &str = "تدريب أسئلة سريع";
+    pub const QUICK_BANK_SUB: &str = "اختار موضوع، وجاوب على قد وقتك";
+    pub const CHECKED_ROW: &str = "مراجعة صحة المحتوى";
+    pub fn checked_sub(n: usize) -> String {
+        format!("راجعت صحة {} لحد دلوقتي", super::count::count(n, &super::count::ITEM))
+    }
 }
 
 pub mod study_settings {
@@ -474,6 +507,39 @@ pub mod stats {
     pub const MISTAKE_HINT: &str = "جرّب السؤال ده تاني";
     pub const MISTAKES_TOPIC_HINT: &str = "جرّب أخطاء الموضوع ده";
     pub const DEMO: &str = "أرقام تجريبية للعرض بس، مش مذاكرتك.";
+
+    // The 2026-10-29 redesign: a period switch with retention, activity and a next step.
+    pub const HEAD: &str = "تقدّم له معنى";
+    pub const HEAD_SUB: &str = "شوف اللي اتحسن، واعرف خطوتك الجاية.";
+    pub const PERIOD_LABEL: &str = "الفترة";
+    pub const WEEK: &str = "الأسبوع ده";
+    pub const MONTH: &str = "الشهر ده";
+    pub const RECALL: &str = "تذكّر المعلومات";
+    pub const RECALL_SUB: &str = "من الأسئلة اللي رجعتلك بعد يوم أو أكتر.";
+    pub const RECALL_NONE: &str = "لسه مفيش أسئلة رجعتلك تاني في الفترة دي.";
+    pub const RECALL_HINT: &str = "شوف اللي غلطت فيه";
+    pub fn better(week: bool, pts: u32) -> String {
+        format!("أحسن من {} بـ {pts}%", if week { "الأسبوع اللي فات" } else { "الشهر اللي فات" })
+    }
+    pub fn worse(week: bool, pts: u32) -> String {
+        format!("أقل من {} بـ {pts}%، عادي يحصل", if week { "الأسبوع اللي فات" } else { "الشهر اللي فات" })
+    }
+    pub fn same(week: bool) -> String {
+        format!("زي {} تقريبًا", if week { "الأسبوع اللي فات" } else { "الشهر اللي فات" })
+    }
+    pub const ACTIVITY: &str = "جلساتك على مدار الفترة";
+    pub const ACTIVITY_UNIT: &str = "دقيقة / يوم";
+    pub const ACTIVITY_HINT: &str = "افتح خطة الامتحان والأيام الجاية";
+    pub const ACTIVITY_EMPTY: &str = "مفيش مذاكرة متسجّلة في الفترة دي لسه.";
+    pub const DAYS_STUDIED: &str = "أيام ذاكرت فيهم";
+    pub const MINUTES: &str = "دقيقة تركيز";
+    pub const ANSWERS: &str = "سؤال وكارت جاوبتهم";
+    pub const MONTH_START: &str = "من 30 يوم";
+    pub const TODAY: &str = "النهارده";
+    pub fn day_bar(minutes: u32, answers: u32) -> String {
+        format!("{minutes} دقيقة، {answers} إجابة")
+    }
+    pub const NEXT_STEP: &str = "خطوة تفيدك دلوقتي";
 }
 
 pub mod plan {
@@ -1280,23 +1346,13 @@ pub mod remind {
 
 pub mod onboard {
     pub const TITLE: &str = "أهلاً في باطنة";
-    pub const STEP: &str = "خطوة";
-    pub const OF: &str = "من";
-    pub const NEXT: &str = "التالي";
     pub const BACK: &str = "رجوع";
-    pub const DONE: &str = "يلا نبدأ";
-    pub const SKIP_ALL: &str = "بعدين";
-    pub const EXAM_TITLE: &str = "امتحانك إمتى؟";
-    pub const EXAM_BODY: &str =
-        "عشان أوزّع المحاضرات والمراجعة على الأيام اللي فاضلة بهدوء. لو لسه مش متأكد، سيبها فاضية.";
-    pub const EXAM_DAY: &str = "يوم الامتحان";
     pub const PICK_FUTURE: &str = "اختار يوم بعد النهارده.";
     pub const PICK_FAR: &str = "اختار يوم في خلال 3 سنين من النهارده.";
     pub const DAYS_TITLE: &str = "بتذاكر أنهي أيام في الأسبوع؟";
     pub const DAYS_BODY: &str = "الخطة والتذكير هيمشوا على الأيام دي بس. أيام الراحة راحة.";
     pub const PICK_A_DAY: &str = "اختار يوم واحد على الأقل.";
     pub const MINUTES_TITLE: &str = "قد إيه في اليوم؟";
-    pub const MINUTES_BODY: &str = "طول الجلسة العادي. تقدر تغيّره قبل أي جلسة.";
     pub const STUDIED_TITLE: &str = "ذاكرت أنهي محاضرات قبل كده؟";
     pub const STUDIED_BODY: &str = "علّم اللي قريته قبل كده. لو مفيش، كمّل عادي.";
     pub const ALL: &str = "كلهم";
@@ -1312,6 +1368,48 @@ pub mod onboard {
     pub const REOPEN_TITLE: &str = "أسئلة البداية";
     pub const REOPEN_BODY: &str = "يوم الامتحان، أيام المذاكرة، طول الجلسة، التذكير والألوان، في مكان واحد.";
     pub const REOPEN: &str = "افتحها تاني";
+
+    // The 2026-10-29 redesign: three quick screens, details optional.
+    pub fn progress(n: usize, of: usize) -> String {
+        format!("البداية · {n} من {of}")
+    }
+    pub const LATER: &str = "بعد كده";
+    pub const CONTINUE: &str = "كمّل";
+    pub const WELCOME_TITLE: &str = "مذاكرة تناسب يومك.";
+    pub const WELCOME_BODY: &str = "درس قصير، محاولة تفتكر، ومراجعة تثبّت الفهم.";
+    pub const WELCOME_NOTE: &str =
+        "الفهم والتذكّر وتدريب الأسئلة، كل واحد له مكانه. والكتاب هو المرجع في الامتحان.";
+    pub const TIME_TITLE: &str = "خلّي البداية على قد وقتك.";
+    pub const TIME_BODY: &str = "كل جلسة صغيرة وتخلص. تقدر تغيّر ده بعدين.";
+    pub const EXAM_OPTIONAL: &str = "يوم الامتحان (لو تعرفه)";
+    pub const EXAM_HINT: &str = "بيوزّع المحاضرات والمراجعة على الأيام اللي فاضلة.";
+    pub const READY_TITLE: &str = "كده جاهز تبدأ.";
+    pub const READY_BODY: &str = "اختياراتك تتعدّل في أي وقت. ودي حاجات اختيارية لو حابب تظبطها دلوقتي:";
+    pub const START_LESSON: &str = "ابدأ أول درس";
+    pub const START_TODAY: &str = "افتح النهارده";
+    pub const DETAIL_DONE: &str = "تمام";
+    pub const DAYS_ROW: &str = "أيام المذاكرة";
+    pub fn days_sub(n: usize) -> String {
+        match n {
+            7 => "كل أيام الأسبوع".to_string(),
+            1 => "يوم واحد في الأسبوع".to_string(),
+            2 => "يومين في الأسبوع".to_string(),
+            n => format!("{n} أيام في الأسبوع"),
+        }
+    }
+    pub const STUDIED_ROW: &str = "اللي ذاكرته قبل كده";
+    pub fn studied_sub(n: usize) -> String {
+        match n {
+            0 => "ولا محاضرة لسه".to_string(),
+            1 => "محاضرة واحدة".to_string(),
+            2 => "محاضرتين".to_string(),
+            3..=10 => format!("{n} محاضرات"),
+            n => format!("{n} محاضرة"),
+        }
+    }
+    pub const REMIND_ROW: &str = "التذكير";
+    pub const REMIND_OFF: &str = "من غير تذكير";
+    pub const THEME_ROW: &str = "الألوان";
 }
 
 pub mod recap {
@@ -1360,11 +1458,8 @@ pub mod recap {
 }
 
 pub mod learn {
-    pub const TITLE: &str = "الدروس";
-    pub const INTRO: &str = "افهم الأول، وبعدين راجع. كل درس شرح بالمصري، رسومات، حاجات تحفظ بيها، وأسئلة صغيرة في النص علشان تتأكد إنك ماشي صح.";
     pub const NONE_YET: &str = "الدروس لسه بتتكتب. أول ما درس يجهز هتلاقيه هنا.";
     pub const OF: &str = "من";
-    pub const LESSONS_DONE: &str = "درس خلّصته";
     pub const START_FIRST: &str = "ابدأ أول درس";
     pub const CONTINUE: &str = "كمّل";
     pub const ALL_LESSONS_DONE: &str = "خلّصت كل الدروس المكتوبة. عاش!";
@@ -1373,8 +1468,6 @@ pub mod learn {
     pub const WRITING: &str = "بتتكتب";
     pub const PAGES: &str = "صفحات";
     pub const NEW: &str = "جديد";
-    pub const TODAY_KICKER: &str = "درس النهارده";
-    pub const OPEN_LESSON: &str = "افتح الدرس";
     pub const EXPLAIN: &str = "اشرحهولي";
     pub const EXPLAIN_HINT: &str = "افتح الدرس اللي بيشرح السؤال ده";
     pub const OPEN_LECTURE: &str = "افتح المحاضرة";
@@ -1505,6 +1598,44 @@ pub mod learn {
             "عادي جدًا من أول مرة، ده درس جديد. الكروت هتثبّته."
         }
     }
+
+    // The 2026-10-29 redesign of the list.
+    pub const HEAD: &str = "دروس قصيرة، وفهم أعمق";
+    pub const HEAD_SUB: &str = "افهم فكرة، وبعدها جرّب تسترجعها.";
+    pub const SEARCH: &str = "محاضرة، موضوع، أو كلمة…";
+    pub const SEARCH_LABEL: &str = "دوّر في الدروس";
+    pub const CLEAR_SEARCH: &str = "امسح البحث";
+    pub fn no_match(q: &str) -> String {
+        format!("مفيش درس فيه «{q}». جرّب كلمة تانية أو اسم المحاضرة بالإنجليزي.")
+    }
+    pub fn lecture_n(code: &str) -> String {
+        format!("المحاضرة {code}")
+    }
+    pub fn lessons_n(n: usize) -> String {
+        match n {
+            1 => "درس واحد".to_string(),
+            2 => "درسين".to_string(),
+            3..=10 => format!("{n} دروس"),
+            _ => format!("{n} درس"),
+        }
+    }
+    /// "2 من 5 خلّصتهم".
+    pub fn done_of(done: usize, total: usize) -> String {
+        format!("{done} من {total} خلّصتهم")
+    }
+    pub const LECTURE_PAGE: &str = "صفحة المحاضرة";
+    pub const OTHER_LECTURES: &str = "محاضرات تانية";
+    pub const SHOW_LECTURE: &str = "اعرض دروس المحاضرة دي";
+    pub const STATE_CURRENT: &str = "كمّل";
+    pub const STATE_NEXT: &str = "الجاي";
+    pub const STATE_NEW: &str = "جديد";
+    pub const STATE_DONE: &str = "خلّصته";
+    /// "خطوة 3 من 9".
+    pub fn step_of(at: usize, n: usize) -> String {
+        format!("خطوة {at} من {n}")
+    }
+    pub const NOW_KICKER: &str = "الدرس الحالي";
+    pub const NEXT_KICKER: &str = "الدرس الجاي";
 }
 
 pub mod refs {

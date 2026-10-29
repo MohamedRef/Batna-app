@@ -15,15 +15,29 @@ use crate::store::{now_ms, shared};
 
 const CSS: &str = r#"
 .onboard-backdrop { position: fixed; inset: 0; z-index: 50; background: var(--bg); overflow-y: auto; }
-.onboard { max-inline-size: 36rem; margin-inline: auto; padding: var(--sp-4); display: grid; gap: var(--sp-3); }
-.onboard-steps { display: flex; gap: var(--sp-1); }
-.onboard-steps span { flex: 1; block-size: 4px; border-radius: 2px; background: var(--line); }
-.onboard-steps span[data-done="true"] { background: var(--accent); }
+.onboard { max-inline-size: 36rem; min-block-size: 100%; margin-inline: auto; padding: var(--sp-4); display: flex; flex-direction: column; gap: var(--sp-3); }
+.onboard-top { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-2); min-block-size: var(--tap); }
+.onboard-body { display: flex; flex-direction: column; gap: var(--sp-3); }
+.onboard-body h1 { font-size: 1.55rem; font-weight: 600; line-height: 1.6; margin: 0; }
+.onboard-body p { margin: 0; }
+/* A quiet picture: the app's pulse in a soft panel with faint rings. */
+.onboard-art { position: relative; overflow: hidden; display: grid; place-items: center; block-size: 10rem;
+  border-radius: var(--radius-sheet, 22px); background: var(--accent-soft); color: var(--accent-ink); }
+.onboard-art::before, .onboard-art::after { content: ""; position: absolute; border-radius: 50%; border: 1px solid var(--line);
+  inline-size: 10rem; block-size: 10rem; inset-inline-end: -3rem; inset-block-start: -5.5rem; }
+.onboard-art::after { inline-size: 16rem; block-size: 16rem; inset-inline-end: -5rem; inset-block-start: -8.5rem; }
+.onboard-art svg { inline-size: 4.5rem; block-size: 4.5rem; stroke-width: 1.2; }
+.onboard-art-done { block-size: 6rem; background: var(--good-soft); color: var(--good); }
+.onboard-art-done svg { inline-size: 3rem; block-size: 3rem; }
+.onboard-body .segmented { align-self: stretch; }
+.onboard-body .segmented > button { flex: 1; }
 .onboard-chips { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
 .onboard-chips button { min-block-size: 44px; padding-inline: var(--sp-3); border-radius: var(--radius-pill); border: 1px solid var(--line); background: var(--surface); }
 .onboard-chips button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); font-weight: 700; }
-.onboard-actions { display: flex; gap: var(--sp-2); justify-content: space-between; flex-wrap: wrap;
-  position: sticky; inset-block-end: 0; padding-block: var(--sp-2); background: var(--bg); border-block-start: 1px solid var(--line); }
+/* The action stays at the foot; the last line of a long step scrolls clear of it. */
+.onboard-actions { display: flex; flex-direction: column; gap: var(--sp-1); margin-block-start: auto;
+  position: sticky; inset-block-end: 0; padding-block: var(--sp-2) calc(var(--sp-2) + env(safe-area-inset-bottom, 0px)); background: var(--bg); }
+.onboard-actions .btn { justify-content: center; gap: var(--sp-2); }
 .onboard-lectures { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-1); }
 .onboard-lectures li { display: flex; align-items: center; gap: var(--sp-2); }
 .onboard-lecture { flex: 1; display: flex; align-items: center; gap: var(--sp-2); min-block-size: 44px; padding-inline: var(--sp-3);
@@ -70,7 +84,21 @@ impl Answers {
 
 /// Default study session length: his first-run answer, else 10 minutes.
 pub fn session_minutes() -> u32 {
+    let _ = MINUTES_REV();
     Answers::load().minutes.filter(|m| MINUTE_CHOICES.contains(m)).unwrap_or(10)
+}
+
+/// Bumped when Today's chips change the session length, so readers re-read it.
+static MINUTES_REV: GlobalSignal<u64> = Signal::global(|| 0);
+
+/// Today's session-length chips: saves the new default length.
+pub fn set_session_minutes(m: u32) {
+    let mut a = Answers::load();
+    if a.minutes != Some(m) {
+        a.minutes = Some(m);
+        a.save();
+        *MINUTES_REV.write() += 1;
+    }
 }
 
 /// Shown on this device (device-only: each device asks once, or never
@@ -101,15 +129,19 @@ pub fn reopen() {
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 enum Step {
-    Exam,
+    Welcome,
+    /// Session length and, if he knows it, the exam day.
+    Time,
+    /// The end: start, or set any of the optional details.
+    Ready,
     Days,
-    Minutes,
     Studied,
     Reminders,
     Theme,
 }
 
-const STEPS: [Step; 6] = [Step::Exam, Step::Days, Step::Minutes, Step::Studied, Step::Reminders, Step::Theme];
+/// The quick path; the rest open from [`Step::Ready`].
+const STEPS: [Step; 3] = [Step::Welcome, Step::Time, Step::Ready];
 
 /// The first-run sheet; renders nothing once seen.
 #[component]
@@ -123,7 +155,13 @@ pub fn Onboarding() -> Element {
 #[component]
 fn Questions() -> Element {
     let mut ui = use_context::<Ui>();
-    let mut step = use_signal(|| 0usize);
+    // BATNA_ONBOARD=3 opens on that screen (previews and screenshots).
+    let mut step = use_signal(|| {
+        let n = std::env::var("BATNA_ONBOARD").ok().and_then(|v| v.parse::<usize>().ok()).unwrap_or(1);
+        n.clamp(1, STEPS.len()) - 1
+    });
+    // An optional detail opened from the last screen.
+    let mut detail = use_signal(|| None::<Step>);
     let plan = crate::plan::SETTINGS.peek().clone();
     let answers = Answers::load();
     let today = crate::store::zone().study_day(now_ms());
@@ -131,34 +169,42 @@ fn Questions() -> Element {
     let mut weekdays = use_signal(|| plan.weekdays);
     let mut minutes = use_signal(|| answers.minutes.unwrap_or(10));
     let mut studied = use_signal(|| answers.studied.clone());
-    let mut times = use_signal(|| crate::reminders::PREFS.peek().times.clone());
+    // Reminder times as they stand: none while reminders are off, so the
+    // last screen never shows a time that isn't set.
+    let remind_now = || {
+        let p = crate::reminders::PREFS.peek();
+        if p.on { p.times.clone() } else { Vec::new() }
+    };
+    let mut times = use_signal(remind_now);
     // What each step showed at first. A step he clicks through unchanged
     // saves nothing, so a new device that hasn't synced yet can't overwrite
     // the real settings with its defaults (#32).
-    let initial = use_hook(|| (plan.clone(), answers.clone(), crate::reminders::PREFS.peek().times.clone()));
+    let initial = use_hook(|| (plan.clone(), answers.clone(), remind_now()));
     let mut error = use_signal(|| None::<&'static str>);
 
-    let current = STEPS[step()];
-    let last = step() + 1 == STEPS.len();
-    // Saves this step's answer; false keeps him on it with a gentle note.
-    let mut commit = move || -> bool {
-        match current {
-            Step::Exam => {
+    let current = detail().unwrap_or(STEPS[step()]);
+    // Saves one step's answer; false keeps him on it with a gentle note.
+    let mut commit = move |s: Step| -> bool {
+        match s {
+            Step::Time => {
+                // The exam day first: a wrong date keeps him here.
                 let text = exam.read().clone();
-                if text.is_empty() || Some(text.as_str()) == initial.0.exam.map(Day::iso).as_deref() {
-                    return true;
+                if !text.is_empty() && Some(text.as_str()) != initial.0.exam.map(Day::iso).as_deref() {
+                    let Some(day) = Day::parse(&text).filter(|d| *d > today) else {
+                        error.set(Some(tx::PICK_FUTURE));
+                        return false;
+                    };
+                    if !batna_core::plan::exam_day_ok(today, day) {
+                        error.set(Some(tx::PICK_FAR));
+                        return false;
+                    }
+                    let mut s = crate::plan::SETTINGS.write();
+                    s.exam = Some(day);
+                    crate::plan::save(&s);
                 }
-                let Some(day) = Day::parse(&text).filter(|d| *d > today) else {
-                    error.set(Some(tx::PICK_FUTURE));
-                    return false;
-                };
-                if !batna_core::plan::exam_day_ok(today, day) {
-                    error.set(Some(tx::PICK_FAR));
-                    return false;
+                if Some(minutes()) != initial.1.minutes && (initial.1.minutes.is_some() || minutes() != 10) {
+                    set_session_minutes(minutes());
                 }
-                let mut s = crate::plan::SETTINGS.write();
-                s.exam = Some(day);
-                crate::plan::save(&s);
             }
             Step::Days => {
                 if !weekdays.read().contains(&true) {
@@ -171,19 +217,10 @@ fn Questions() -> Element {
                     crate::plan::save(&s);
                 }
             }
-            Step::Minutes | Step::Studied => {
-                // Only the answers he changed, on top of what's stored now.
-                let mut a = Answers::load();
-                let mut touched = false;
-                if Some(minutes()) != initial.1.minutes && (initial.1.minutes.is_some() || minutes() != 10) {
-                    a.minutes = Some(minutes());
-                    touched = true;
-                }
+            Step::Studied => {
                 if *studied.read() != initial.1.studied {
+                    let mut a = Answers::load();
                     a.studied = studied.read().clone();
-                    touched = true;
-                }
-                if touched {
                     a.save();
                 }
             }
@@ -198,18 +235,35 @@ fn Questions() -> Element {
                     crate::platform::reminders::request_permission();
                 }
             }
-            Step::Theme => {}
+            Step::Welcome | Step::Ready | Step::Theme => {}
         }
         error.set(None);
         true
     };
 
     let body = match current {
-        Step::Exam => rsx! {
-            h1 { {tx::EXAM_TITLE} }
-            p { class: "muted", {tx::EXAM_BODY} }
-            label { class: "field",
-                span { {tx::EXAM_DAY} }
+        Step::Welcome => rsx! {
+            div { class: "onboard-art", aria_hidden: "true", {crate::icons::pulse()} }
+            h1 { {tx::WELCOME_TITLE} }
+            p { class: "muted", {tx::WELCOME_BODY} }
+            p { class: "note", {tx::WELCOME_NOTE} }
+        },
+        Step::Time => rsx! {
+            h1 { {tx::TIME_TITLE} }
+            p { class: "muted", {tx::TIME_BODY} }
+            div { class: "segmented", role: "radiogroup", aria_label: tx::MINUTES_TITLE,
+                for m in MINUTE_CHOICES {
+                    button {
+                        key: "{m}",
+                        role: "radio",
+                        "aria-checked": minutes() == m,
+                        onclick: move |_| minutes.set(m),
+                        {crate::i18n::count::count(m, &crate::i18n::count::MINUTE)}
+                    }
+                }
+            }
+            label { class: "field", "data-invalid": error().is_some(),
+                span { {tx::EXAM_OPTIONAL} }
                 input {
                     r#type: "date",
                     min: "{today.plus(1).iso()}",
@@ -220,8 +274,42 @@ fn Questions() -> Element {
                         error.set(None);
                     },
                 }
+                span { class: "field-hint", {tx::EXAM_HINT} }
             }
         },
+        Step::Ready => {
+            let days = weekdays.read().iter().filter(|d| **d).count();
+            let theme = theme_name(ui.prefs.read().theme);
+            let reminders = if times.read().is_empty() {
+                tx::REMIND_OFF.to_string()
+            } else {
+                times.read().iter().map(|t| hhmm(*t)).collect::<Vec<_>>().join(" · ")
+            };
+            rsx! {
+                div { class: "onboard-art onboard-art-done", aria_hidden: "true", {crate::icons::check()} }
+                h1 { {tx::READY_TITLE} }
+                p { class: "muted", {tx::READY_BODY} }
+                ul { class: "tap-list",
+                    for (s , title , sub) in [
+                        (Step::Days, tx::DAYS_ROW, tx::days_sub(days)),
+                        (Step::Studied, tx::STUDIED_ROW, tx::studied_sub(studied.read().len())),
+                        (Step::Reminders, tx::REMIND_ROW, reminders),
+                        (Step::Theme, tx::THEME_ROW, theme.to_string()),
+                    ]
+                    {
+                        li { key: "{title}",
+                            button { class: "tap tap-row", onclick: move |_| detail.set(Some(s)),
+                                span { class: "tap-row-main",
+                                    strong { {title} }
+                                    span { class: "muted small", bdi { {sub} } }
+                                }
+                                span { class: "chev", aria_hidden: "true" }
+                            }
+                        }
+                    }
+                }
+            }
+        }
         Step::Days => rsx! {
             h1 { {tx::DAYS_TITLE} }
             p { class: "muted", {tx::DAYS_BODY} }
@@ -235,21 +323,6 @@ fn Questions() -> Element {
                             error.set(None);
                         },
                         {*name}
-                    }
-                }
-            }
-        },
-        Step::Minutes => rsx! {
-            h1 { {tx::MINUTES_TITLE} }
-            p { class: "muted", {tx::MINUTES_BODY} }
-            div { class: "segmented", role: "radiogroup", aria_label: tx::MINUTES_TITLE,
-                for m in MINUTE_CHOICES {
-                    button {
-                        key: "{m}",
-                        role: "radio",
-                        "aria-checked": minutes() == m,
-                        onclick: move |_| minutes.set(m),
-                        {crate::i18n::count::count(m, &crate::i18n::count::MINUTE)}
                     }
                 }
             }
@@ -354,35 +427,71 @@ fn Questions() -> Element {
         },
     };
 
+    let is_detail = detail().is_some();
+    let last = step() + 1 == STEPS.len();
     rsx! {
         style { {CSS} }
         div { class: "onboard-backdrop",
             div { class: "onboard", role: "dialog", aria_modal: "true", aria_label: tx::TITLE,
-                div { class: "onboard-steps", aria_hidden: "true",
-                    for i in 0..STEPS.len() {
-                        span { key: "{i}", "data-done": if i <= step() { "true" } else { "false" } }
+                div { class: "onboard-top",
+                    span { class: "chip", {tx::progress(step() + 1, STEPS.len())} }
+                    if !last {
+                        button { class: "btn btn-ghost", onclick: move |_| close(), {tx::LATER} }
                     }
                 }
-                p { class: "muted small", "{tx::STEP} {step() + 1} {tx::OF} {STEPS.len()}" }
-                section { class: "card", {body} }
+                section { class: "onboard-body", {body} }
                 if let Some(msg) = error() {
-                    p { class: "error", role: "alert", {msg} }
+                    p { class: "field-error", role: "alert", {msg} }
                 }
                 div { class: "onboard-actions",
-                    button { class: "btn btn-ghost", onclick: move |_| close(), {tx::SKIP_ALL} }
-                    div { class: "row",
-                        if step() > 0 {
-                            button { class: "btn btn-secondary", onclick: move |_| { error.set(None); step -= 1; }, {tx::BACK} }
-                        }
+                    if is_detail {
+                        // A detail returns to the last screen once saved.
                         button {
-                            class: "btn btn-primary",
+                            class: "btn btn-primary btn-lg btn-block",
                             onclick: move |_| {
-                                if commit() {
-                                    if last { close() } else { step += 1 }
+                                if commit(current) {
+                                    detail.set(None);
                                 }
                             },
-                            if last { {tx::DONE} } else { {tx::NEXT} }
+                            {tx::DETAIL_DONE}
                         }
+                    } else if last {
+                        button {
+                            class: "btn btn-primary btn-lg btn-block",
+                            onclick: move |_| {
+                                close();
+                                match crate::learn::next_lesson(&[]) {
+                                    Some(l) => crate::learn::open(ui, &l.id),
+                                    None => ui.screen.set(crate::Screen::Learn),
+                                }
+                            },
+                            {tx::START_LESSON}
+                            {crate::icons::arrow_go()}
+                        }
+                        button {
+                            class: "btn btn-ghost btn-block",
+                            onclick: move |_| {
+                                close();
+                                ui.screen.set(crate::Screen::Today);
+                            },
+                            {tx::START_TODAY}
+                        }
+                    } else {
+                        button {
+                            class: "btn btn-primary btn-lg btn-block",
+                            onclick: move |_| {
+                                if commit(current) {
+                                    step += 1;
+                                }
+                            },
+                            {tx::CONTINUE}
+                            {crate::icons::arrow_go()}
+                        }
+                    }
+                    if step() > 0 && !is_detail {
+                        button { class: "btn btn-ghost btn-block", onclick: move |_| { error.set(None); step -= 1; }, {tx::BACK} }
+                    } else if is_detail {
+                        button { class: "btn btn-ghost btn-block", onclick: move |_| { error.set(None); detail.set(None); }, {tx::BACK} }
                     }
                 }
             }

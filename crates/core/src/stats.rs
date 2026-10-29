@@ -329,6 +329,80 @@ pub fn first_seen_by_day(
     out
 }
 
+/// One study day in a [`Period`].
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct DayActivity {
+    pub day: Day,
+    pub answers: u32,
+    /// Time spent answering, rounded up to whole minutes.
+    pub minutes: u32,
+}
+
+/// What a stretch of days held, for the progress screen's period switch.
+#[derive(Debug, Clone, Default, PartialEq, Eq)]
+pub struct Period {
+    /// Every study day of the period, oldest first, quiet days included.
+    pub days: Vec<DayActivity>,
+    pub answers: u32,
+    pub minutes: u32,
+    /// Days with at least one answer.
+    pub study_days: u32,
+    /// The retention rule over just these days: answers to items first seen
+    /// on an earlier day, right unless "Again".
+    pub retention: Ratio,
+}
+
+/// The `days` study days that end `ago` periods back (`ago` 0 ends today,
+/// 1 is the stretch just before it). Rejected items count nowhere.
+pub fn period(
+    events: &[ReviewEvent],
+    marks: &BTreeMap<String, Status>,
+    clock: Clock,
+    days: u32,
+    ago: u32,
+) -> Period {
+    let days = days.max(1) as i32;
+    let last = clock.today().0 - days * ago as i32;
+    let first = last - days + 1;
+    let mut per_day: Vec<(u32, u32)> = vec![(0, 0); days as usize];
+    let mut first_day: HashMap<&str, Day> = HashMap::new();
+    let mut sorted: Vec<&ReviewEvent> = events.iter().collect();
+    sorted.sort_by_key(|e| e.at_ms);
+    let mut retention = Ratio::default();
+    for e in sorted {
+        if marks.get(&e.item_id) == Some(&Status::Rejected) {
+            continue;
+        }
+        let day = clock.day_of(e.at_ms);
+        let seen = *first_day.entry(e.item_id.as_str()).or_insert(day);
+        if !(first..=last).contains(&day.0) {
+            continue;
+        }
+        let slot = &mut per_day[(day.0 - first) as usize];
+        slot.0 += 1;
+        slot.1 += e.took_ms;
+        if day > seen {
+            retention.add(e.grade != Grade::Again);
+        }
+    }
+    let days: Vec<DayActivity> = per_day
+        .into_iter()
+        .enumerate()
+        .map(|(i, (answers, ms))| DayActivity {
+            day: Day(first + i as i32),
+            answers,
+            minutes: ms.div_ceil(60_000),
+        })
+        .collect();
+    Period {
+        answers: days.iter().map(|d| d.answers).sum(),
+        minutes: days.iter().map(|d| d.minutes).sum(),
+        study_days: days.iter().filter(|d| d.answers > 0).count() as u32,
+        retention,
+        days,
+    }
+}
+
 /// A topic that needs work, for the "study these" card.
 #[derive(Debug, Clone, PartialEq)]
 pub struct WeakTopic {
@@ -548,6 +622,28 @@ items:
             ("hb.L01.004".to_string(), Status::Rejected),
             ("hb.L01.001".to_string(), Status::Approved),
         ])
+    }
+
+    #[test]
+    fn a_period_counts_its_own_days_only() {
+        let events = [
+            ev("hb.L01.001", Grade::Good, 10),
+            ev("hb.L01.001", Grade::Again, 3),
+            ev("hb.L01.001", Grade::Good, 1),
+            ev("hb.L01.002", Grade::Good, 1),
+            ev("hb.L01.004", Grade::Good, 1),
+        ];
+        let week = period(&events, &marks(), clock(), 7, 0);
+        assert_eq!(week.days.len(), 7);
+        assert_eq!(week.days.last().unwrap().day, clock().today());
+        assert_eq!(week.answers, 3, "the rejected item and the old answer are out");
+        assert_eq!(week.study_days, 2);
+        assert_eq!(week.minutes, 2, "5 s answers round up per day");
+        // 001 was first seen 10 days ago; 002's first answer is a first sighting.
+        assert_eq!(week.retention, Ratio { right: 1, total: 2 });
+        let before = period(&events, &marks(), clock(), 7, 1);
+        assert_eq!(before.answers, 1);
+        assert_eq!(before.retention, Ratio::default(), "a first sighting isn't retention");
     }
 
     #[test]

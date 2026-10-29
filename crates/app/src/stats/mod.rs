@@ -5,6 +5,7 @@
 pub mod charts;
 mod demo;
 mod mistakes;
+mod period;
 
 use std::collections::BTreeMap;
 
@@ -124,6 +125,10 @@ pub fn Stats() -> Element {
         [(Tab::Progress, tx::TAB_PROGRESS), (Tab::Mistakes, tx::TAB_MISTAKES), (Tab::Plan, tx::TAB_PLAN)];
     rsx! {
         style { {STATS_CSS.text()} }
+        header { class: "page-head",
+            h1 { {tx::HEAD} }
+            p { class: "page-sub", {tx::HEAD_SUB} }
+        }
         div { class: "tabs", role: "tablist", aria_label: tx::TABS_LABEL,
             for (t, label) in tabs {
                 button {
@@ -162,11 +167,12 @@ fn Progress(data: std::rc::Rc<StudyData>) -> Element {
     let mut ui = use_context::<crate::Ui>();
     let settings = use_context::<crate::settings::SettingsNav>();
     rsx! {
+        period::PeriodHead { data: data.clone() }
         // Tablet landscape and the Mac: the totals and the weakest topics side by side.
         div { class: "tab-cols", "data-align": "stretch",
             div { class: "tab-main",
                 section { class: "card",
-                    h1 { {tx::SUMMARY} }
+                    h2 { {tx::SUMMARY} }
                     div { class: "summary",
                         // Seen and seen twice grow by studying; approved by the
                         // checks, whose export is in Settings › Data.
@@ -224,7 +230,8 @@ fn Big(
 fn WeakCard(weak: Vec<WeakTopic>, ids: Vec<String>, data: std::rc::Rc<StudyData>) -> Element {
     rsx! {
         section { class: "card",
-            h2 { {tx::WEAK_TITLE} }
+            h2 { {tx::NEXT_STEP} }
+            p { class: "muted small", {tx::WEAK_TITLE} }
             if weak.is_empty() {
                 p { class: "muted", {tx::WEAK_EMPTY} }
             } else {
@@ -312,7 +319,9 @@ pub fn SessionButton(label: &'static str, ids: Vec<String>) -> Element {
             button {
                 class: "btn btn-primary",
                 disabled: playable.is_empty(),
-                onclick: move |_| {
+                // Inside a card that opens on a tap (Today's hero), this button's own job wins.
+                onclick: move |e: MouseEvent| {
+                    e.stop_propagation();
                     *crate::study::START.write() =
                         Some(crate::study::Start { lectures: None, items: Some(playable.clone()), minutes: 10 });
                     ui.screen.set(crate::Screen::Study);

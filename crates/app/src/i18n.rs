@@ -96,9 +96,13 @@ pub mod cite {
 }
 
 /// A book page's sheet (pagesheet/mod.rs).
+pub mod sheet {
+    pub const RESIZE: &str = "اسحب لفوق أو لتحت عشان تكبّرها أو تصغّرها";
+    pub const CLOSE: &str = "اقفل";
+}
+
 pub mod book {
     pub const TITLE: &str = "صفحة الكتاب";
-    pub const CLOSE: &str = "اقفل";
     pub const NO_LECTURE: &str = "الصفحة دي برّه المحاضرات اللي في باطنة.";
     pub const QUOTE_NOTE: &str = "سطر قصير من الصفحة، عشان تتأكد من المصدر.";
     pub const MADE: &str = "اللي في باطنة من الصفحة دي:";

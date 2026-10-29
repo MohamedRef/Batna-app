@@ -35,6 +35,7 @@ mod prefs;
 mod recap;
 mod reminders;
 mod settings;
+mod sheet;
 mod shortcuts;
 mod sounds;
 mod stats;
@@ -181,6 +182,7 @@ fn App() -> Element {
         platform::system_bars::apply(day.bg, night.bg);
     });
     lecture::use_lecture_page(ui);
+    sheet::use_gestures();
     back::use_back(
         ui,
         current,
@@ -204,6 +206,7 @@ fn App() -> Element {
         style { {SHAPE_CSS.text()} }
         style { {PARTS_CSS.text()} }
         style { {APPEARANCE_CSS.text()} }
+        style { {sheet::CSS.text()} }
         style { {look} }
         desk::Chrome {}
         div {

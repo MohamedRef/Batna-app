@@ -69,7 +69,8 @@ impl Saved {
     /// the screen doesn't offer, so an old scope never hides every question.
     fn pruned(mut self, pool: &[exam::Mcq]) -> Self {
         let lectures: BTreeSet<&str> = pool.iter().map(|q| q.lecture).collect();
-        let topics: BTreeSet<(&str, &str)> = pool.iter().filter_map(|q| Some((q.lecture, q.topic?))).collect();
+        let topics: BTreeSet<(&str, &str)> =
+            pool.iter().filter_map(|q| Some((q.lecture, q.topic?))).collect();
         let tags: BTreeSet<&str> = pool.iter().flat_map(|q| q.tags.iter().map(String::as_str)).collect();
         self.filter.lectures.retain(|l| lectures.contains(l.as_str()));
         self.filter.topics.retain(|(l, t)| topics.contains(&(l.as_str(), t.as_str())));
@@ -138,7 +139,9 @@ fn why_empty(filter: &Filter, pool: &[exam::Mcq], last: &exam::LastResults) -> E
     let any = |f: &Filter| pool.iter().any(|q| f.matches(q, last));
     if filter.only != Only::All && any(&Filter { only: Only::All, ..filter.clone() }) {
         Empty::AllRight
-    } else if !filter.tags.is_empty() && any(&Filter { tags: BTreeSet::new(), only: Only::All, ..filter.clone() }) {
+    } else if !filter.tags.is_empty()
+        && any(&Filter { tags: BTreeSet::new(), only: Only::All, ..filter.clone() })
+    {
         Empty::Tags
     } else {
         Empty::Topics
@@ -261,6 +264,7 @@ pub fn Setup() -> Element {
     let shown = count.min(available);
     let pool_size = pool.len();
     let mock_shown = mock_count.min(pool_size);
+    let has_history = !HISTORY.read().papers.is_empty();
     let mode_hint = if mode == Mode::Tutor { tx::PRESET_TUTOR } else { tx::PRESET_TIMED };
 
     rsx! {
@@ -477,8 +481,10 @@ pub fn Setup() -> Element {
                     }
                 }
             }
-            div { class: "tab-aside tab-sticky",
-                History {}
+            if has_history {
+                div { class: "tab-aside tab-sticky",
+                    History {}
+                }
             }
         }
     }

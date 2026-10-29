@@ -30,8 +30,9 @@ pub mod count {
     pub const MONTH: Noun = Noun { one: "شهر", two: "شهرين", few: "شهور", many: "شهر" };
     pub const QUESTION: Noun =
         Noun { one: "سؤال واحد", two: "سؤالين", few: "أسئلة", many: "سؤال" };
-    pub const LECTURE: Noun =
-        Noun { one: "محاضرة واحدة", two: "محاضرتين", few: "محاضرات", many: "محاضرة" };
+    pub const LECTURE: Noun = Noun {
+        one: "محاضرة واحدة", two: "محاضرتين", few: "محاضرات", many: "محاضرة"
+    };
     pub const TOPIC: Noun =
         Noun { one: "موضوع واحد", two: "موضوعين", few: "مواضيع", many: "موضوع" };
     /// Questions and cards together.
@@ -352,7 +353,8 @@ pub mod bank {
     pub const SCOPE_ALL: &str = "كل الأسئلة";
     pub const SCOPE_CHOSEN: &str = "النطاق اللي اخترته";
     pub const MOCK_SCOPE_CHIP: &str = "زي الامتحان";
-    pub const MOCK_SCOPE_NOTE: &str = "الامتحان التجريبي بياخد من كل المحاضرات اللي خلصت، فاختيار المحاضرات والمواضيع مش بيأثر عليه.";
+    pub const MOCK_SCOPE_NOTE: &str =
+        "الامتحان التجريبي بياخد من كل المحاضرات اللي خلصت، فاختيار المحاضرات والمواضيع مش بيأثر عليه.";
     pub const ALL_LECTURES: &str = "كل المحاضرات";
     pub const CUSTOMISE: &str = "خصّص المحاضرات والمواضيع";
     pub const CUSTOMISE_CLOSE: &str = "اقفل التخصيص";
@@ -360,7 +362,8 @@ pub mod bank {
     pub const SCOPE_NOW: &str = "النطاق دلوقتي:";
     pub const POOL_OF: &str = "من";
     pub const ABOUT: &str = "حوالي";
-    pub const EMPTY_ALL_RIGHT: &str = "جاوبت كل أسئلة النطاق ده صح آخر مرة. شغل حلو! شيل «الغلط واللي ما اتشافش بس» لو عايز تعيدها.";
+    pub const EMPTY_ALL_RIGHT: &str =
+        "جاوبت كل أسئلة النطاق ده صح آخر مرة. شغل حلو! شيل «الغلط واللي ما اتشافش بس» لو عايز تعيدها.";
     pub const EMPTY_TAGS: &str = "مفيش أسئلة من النوع اللي اخترته في المحاضرات والمواضيع دي.";
     pub const EMPTY_TOPICS: &str = "المواضيع اللي اخترتها لسه مالهاش أسئلة اختيار من متعدد.";
     pub const WIDEN_ALL_RIGHT: &str = "هات كل أسئلة النطاق";

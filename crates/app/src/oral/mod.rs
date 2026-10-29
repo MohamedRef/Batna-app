@@ -481,7 +481,6 @@ fn Runner() -> Element {
                                         button {
                                             class: "btn btn-secondary",
                                             "aria-pressed": if paused() { "true" } else { "false" },
-                                            "aria-keyshortcuts": "P",
                                             onclick: move |_| { let p = *paused.peek(); paused.set(!p); },
                                             if paused() { "▶ {tx::RESUME_TIMER}" } else { "⏸ {tx::PAUSE_TIMER}" }
                                         }

@@ -509,7 +509,12 @@ fn option_key(pos: usize) -> &'static str {
     ["A", "B", "C", "D", "E", "F"].get(pos).copied().unwrap_or("")
 }
 
-fn option_class(i: usize, picked: Option<usize>, draft: Option<usize>, answer: Option<usize>) -> &'static str {
+fn option_class(
+    i: usize,
+    picked: Option<usize>,
+    draft: Option<usize>,
+    answer: Option<usize>,
+) -> &'static str {
     match picked {
         None if draft == Some(i) => "option selected",
         None => "option",
@@ -520,7 +525,12 @@ fn option_class(i: usize, picked: Option<usize>, draft: Option<usize>, answer: O
 }
 
 #[component]
-fn Summary(recap: Vec<Recap>, update: Option<String>, on_again: EventHandler, on_back: EventHandler) -> Element {
+fn Summary(
+    recap: Vec<Recap>,
+    update: Option<String>,
+    on_again: EventHandler,
+    on_back: EventHandler,
+) -> Element {
     let right = recap.iter().filter(|r| r.ok).count();
     let total = recap.len();
     let message = match grade_for(right as u32, total as u32) {

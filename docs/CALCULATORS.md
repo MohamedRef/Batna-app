@@ -195,6 +195,22 @@ Source: Wu 2008; book Lecture 15, p. 288
 | `age_years` | number, years | Age |
 | `pleural_effusion` | true / false (default false) | Pleural effusion |
 
+## `glasgow_blatchford`: Glasgow-Blatchford score
+
+Source: Blatchford 2000; book Gastroenterology Lecture 11, p. 309
+
+| input | kind | |
+|---|---|---|
+| `bun_mg_dl` | number, mg/dL | BUN |
+| `sex` | `male`, `female` | Sex |
+| `hb_g_dl` | number, g/dL | Haemoglobin |
+| `sbp_mmhg` | number, mmHg | Systolic blood pressure |
+| `hr_bpm` | number, beats/min | Heart rate |
+| `melena` | true / false (default false) | Melena |
+| `syncope` | true / false (default false) | Syncope |
+| `hepatic_disease` | true / false (default false) | Hepatic disease |
+| `cardiac_failure` | true / false (default false) | Cardiac failure |
+
 ## `incidence`: Incidence rate
 
 Source: Research L02: measures of disease frequency, slide 25

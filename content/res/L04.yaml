@@ -656,3 +656,28 @@ items:
     src: { page: 52, quote: "In establishing exposure-outcome ‘causal association’, what is the most essential criterion?" }
     status: unverified
     tags: [book-question, high-yield]
+  # --- Calculators (research calculators, PR #405) ---
+  - id: res.L04.057
+    kind: calc
+    topic: cross-sectional
+    calculator: prevalence
+    stem: "A survey of 400 children finds 80 with diarrhoea (60 exposed to unsafe water, 20 not)."
+    question: What is the prevalence of diarrhoea, as a percentage?
+    inputs: { existing_cases: 80, population: 400, per: "100" }
+    expect: "20%"
+    interpret: "Prevalence = (a + c)/(a + b + c + d) × 100: 20% of the children surveyed have diarrhoea now."
+    src: { page: 47, quote: "Prevalence of malnutrition= a+c / a+b+c+d x 100" }
+    status: unverified
+    tags: [numbers]
+  - id: res.L04.058
+    kind: calc
+    topic: cross-sectional
+    calculator: prevalence
+    stem: "Same survey: among the 200 exposed children, 60 have diarrhoea."
+    question: What is the prevalence of diarrhoea among the exposed, a/(a+b)?
+    inputs: { existing_cases: 60, population: 200, per: "100" }
+    expect: "30%"
+    interpret: "Compare it with the unexposed, c/(c+d) = 20/200 = 10%, and test the difference with chi-squared."
+    src: { page: 48, quote: "in persons with the exposure, [a/(a+b)], with the prevalence of disease in persons without the exposure" }
+    status: unverified
+    tags: [numbers]

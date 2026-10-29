@@ -1,5 +1,6 @@
-//! Anki decks from Batna content: one `.apkg` with a `Batna` deck and a
-//! subdeck per lecture (`Batna::L01 Liver Cirrhosis`). Shared by
+//! Anki decks from Batna content: one `.apkg` with a `Batna` deck, a level
+//! per course and a subdeck per lecture (`Batna::Hepatology::01 Liver
+//! Cirrhosis`). Shared by
 //! `batna-tools anki` and the app's «export to Anki» button.
 //!
 //! An `.apkg` is a zip of an Anki SQLite collection (`collection.anki2`, the
@@ -47,8 +48,9 @@ pub struct Options<'a> {
     pub edits: Option<&'a BTreeMap<String, Item>>,
     /// Lectures not merged yet: tagged `draft`.
     pub drafts: Option<&'a BTreeSet<String>>,
-    /// The MSc's courses: every course but Hepatology gets its own level,
-    /// `Batna::Basics of Research::L03 …`.
+    /// The MSc's courses: every course gets its own level,
+    /// `Batna::Basics of Research::03 …`. Without it, lectures sit straight
+    /// under `Batna` with their old names (`Batna::L01 …`).
     pub program: Option<&'a batna_core::program::Program>,
 }
 
@@ -115,23 +117,25 @@ impl Deck {
     }
 }
 
-/// `Batna::L01 Liver Cirrhosis`, as make_apkg.py names it (Anki matches
-/// decks by name on import, so Hepatology's names must not change). Every
-/// other course sits one level down: `Batna::Basics of Research::L03 …`.
+/// `Batna::Hepatology::03 Portal hypertension`: course, then the lecture's
+/// number in it and its real title (Mohamed, 2026-10-29), so decks nest the
+/// way the app lists them. Anki keeps cards it already has in their old
+/// deck on import (`Batna::L03 …` from before), so the import note says how
+/// to move them. Without a program: `Batna::L03 Portal hypertension`.
 pub fn deck_name(lec: &Lecture, program: Option<&batna_core::program::Program>) -> String {
     if lec.lecture == batna_core::own::LECTURE {
         return format!("Batna::{}", batna_core::own::TITLE);
     }
     let num = lec.lecture.split_once('.').map(|(_, n)| n).unwrap_or(&lec.lecture);
     match course_deck(lec, program) {
-        Some(course) => format!("{course}::{num} {}", lec.title),
+        Some(course) => format!("{course}::{:0>2} {}", num.trim_start_matches('L'), lec.title),
         None => format!("Batna::{num} {}", lec.title),
     }
 }
 
-/// `Batna::Basics of Research` for a lecture outside Hepatology.
+/// `Batna::Hepatology`: the lecture's course level.
 fn course_deck(lec: &Lecture, program: Option<&batna_core::program::Program>) -> Option<String> {
-    let course = program?.course_for(&lec.lecture).filter(|c| c.id != "hb")?;
+    let course = program?.course_for(&lec.lecture)?;
     Some(format!("Batna::{}", course.title))
 }
 
@@ -591,15 +595,16 @@ mod tests {
         assert_eq!(deck_name(&fixture(), None), "Batna::L01 Liver Cirrhosis");
         let program: batna_core::program::Program =
             serde_yaml_ng::from_str(include_str!("../../../content/program.yaml")).unwrap();
-        assert_eq!(deck_name(&fixture(), Some(&program)), "Batna::L01 Liver Cirrhosis");
+        assert_eq!(deck_name(&fixture(), Some(&program)), "Batna::Hepatology::01 Liver Cirrhosis");
         let mut res = fixture();
         res.lecture = "res.L03".into();
         res.title = "Research question".into();
-        assert_eq!(deck_name(&res, Some(&program)), "Batna::Basics of Research::L03 Research question");
+        assert_eq!(deck_name(&res, Some(&program)), "Batna::Basics of Research::03 Research question");
         let opts = Options { program: Some(&program), ..Default::default() };
         let deck = build(&[fixture(), res.clone(), res], &opts);
         let names: Vec<_> = deck.decks.iter().map(|(_, n, _)| n.as_str()).collect();
         assert_eq!(names.iter().filter(|n| **n == "Batna::Basics of Research").count(), 1, "{names:?}");
+        assert_eq!(names.iter().filter(|n| **n == "Batna::Hepatology").count(), 1, "{names:?}");
         assert_eq!(esc("a<b & \"c\"\nd'"), "a&lt;b &amp; &quot;c&quot;<br>d&#x27;");
     }
 

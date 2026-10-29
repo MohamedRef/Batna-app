@@ -28,6 +28,7 @@ mod bisap;
 mod child_pugh;
 mod clichy;
 mod fib4;
+mod gbs;
 mod glasgow;
 mod kings;
 mod maddrey;
@@ -278,6 +279,7 @@ pub enum Area {
     Tumour,
     AcuteFailure,
     Pancreas,
+    Gi,
     Research,
 }
 
@@ -312,7 +314,7 @@ pub fn compute(id: &str, inputs: &Inputs) -> Result<Outcome, CalcError> {
     (spec.compute)(inputs)
 }
 
-static REGISTRY: [CalcSpec; 31] = [
+static REGISTRY: [CalcSpec; 32] = [
     child_pugh::SPEC,
     meld::MELD,
     meld::MELD_NA,
@@ -329,6 +331,7 @@ static REGISTRY: [CalcSpec; 31] = [
     clichy::SPEC,
     ranson::SPEC,
     bisap::SPEC,
+    gbs::SPEC,
     research::INCIDENCE,
     research::PREVALENCE,
     research::PREVALENCE_ID,

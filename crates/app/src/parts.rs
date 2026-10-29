@@ -16,6 +16,24 @@ pub fn Count(done: usize, total: usize) -> Element {
     }
 }
 
+/// A course's heading over its share of a list (`Library::by_course`): its
+/// Arabic name, then its title. Lectures under it show only their number
+/// and real title, so every list reads course → lecture → lesson. Tapping it
+/// opens the course map.
+#[component]
+pub fn CourseHead(short: String, title: String) -> Element {
+    let ui = use_context::<Ui>();
+    rsx! {
+        h3 { class: "course-head",
+            button { class: "tap tap-plain course-head-btn", title: crate::i18n::courses::TITLE, onclick: move |_| crate::courses::open_map(ui),
+                span { class: "course-head-short", "{short}" }
+                bdi { class: "course-head-title", dir: "ltr", lang: "en", "{title}" }
+                span { class: "chev", aria_hidden: "true" }
+            }
+        }
+    }
+}
+
 /// Focused study: while the calling component is mounted (a running
 /// session, a lesson, a question set), the phone's bottom bar hides so the
 /// task gets the screen. The component must show its own way out (a close

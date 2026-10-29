@@ -436,7 +436,8 @@ fn Tile(
 fn Progress(lecture: LectureProgress) -> Element {
     let ui = use_context::<Ui>();
     let pct = lecture.seen * 100 / lecture.total.max(1);
-    let number = crate::content::lecture_code(&lecture.id);
+    let number = crate::content::lecture_no(&lecture.id);
+    let course = Library::get().course_short(&lecture.id).to_string();
     rsx! {
         li {
             button {
@@ -453,7 +454,7 @@ fn Progress(lecture: LectureProgress) -> Element {
                         aria_valuenow: "{lecture.seen}",
                         span { class: "progress-fill", style: "inline-size: {pct}%" }
                     }
-                    span { class: "muted small", "{lecture.seen} {tx::OF} {lecture.total} {tx::STARTED}" }
+                    span { class: "muted small", "{course} · {lecture.seen} {tx::OF} {lecture.total} {tx::STARTED}" }
                 }
                 if lecture.due > 0 {
                     span { class: "chip due", "{lecture.due} {tx::DUE_CHIP}" }
@@ -464,7 +465,7 @@ fn Progress(lecture: LectureProgress) -> Element {
     }
 }
 
-/// The chapter's lectures and how many items each has.
+/// Every lecture under its course, and how many items each has.
 #[component]
 fn LibraryList() -> Element {
     let ui = use_context::<Ui>();
@@ -472,15 +473,15 @@ fn LibraryList() -> Element {
     let lib = Library::get();
     let rows = lib.index.lectures.iter().map(|entry| {
         let items = lib.lectures.get(&entry.id).map(|l| l.items.len());
-        let number = crate::content::lecture_code(&entry.id);
+        let number = crate::content::lecture_no(&entry.id);
         let [first, last] = entry.pages;
         (entry.id.clone(), number, entry.title.clone(), items, format!("{first}–{last}"))
     });
+    let groups = lib.by_course(rows.collect(), |r| r.0.as_str());
     rsx! {
         // A heading, not a card: the lectures under it are what open.
         div { class: "library-head",
             div { class: "section-head", h2 { {tx::LIBRARY} } }
-            p { class: "muted small", bdi { dir: "ltr", {tx::CHAPTER} } }
             // The note says to mark items; the marks are sent from Settings › Data.
             button {
                 class: "note tap library-note",
@@ -489,23 +490,26 @@ fn LibraryList() -> Element {
                 {tx::UNVERIFIED_NOTE}
             }
         }
-        ol { class: "tap-list lectures-list",
-            for (id, number, title, items, pages) in rows {
-                li { key: "{id}",
-                    button {
-                        class: "tap tap-row lecture-row",
-                        "data-ready": if items.is_some() { "yes" } else { "no" },
-                        onclick: { let id = id.clone(); move |_| crate::lecture::open(ui, &id) },
-                        span { class: "num", "{number}" }
-                        span { class: "tap-row-main",
-                            bdi { class: "lecture-title", dir: "ltr", "{title}" }
-                            span { class: "muted small", "{tx::PAGES} " bdi { dir: "ltr", "{pages}" } }
+        for group in groups {
+            crate::parts::CourseHead { key: "{group.id}", short: group.short().to_string(), title: group.title().to_string() }
+            ol { class: "tap-list lectures-list",
+                for (id, number, title, items, pages) in group.rows {
+                    li { key: "{id}",
+                        button {
+                            class: "tap tap-row lecture-row",
+                            "data-ready": if items.is_some() { "yes" } else { "no" },
+                            onclick: { let id = id.clone(); move |_| crate::lecture::open(ui, &id) },
+                            span { class: "num", "{number}" }
+                            span { class: "tap-row-main",
+                                bdi { class: "lecture-title", dir: "ltr", "{title}" }
+                                span { class: "muted small", if lib.program.slides(&id) { "{crate::i18n::lecture::SLIDES} " } else { "{tx::PAGES} " } bdi { dir: "ltr", "{pages}" } }
+                            }
+                            match items {
+                                Some(n) => rsx! { span { class: "chip ready", "{tx::READY} · " {count(n, &ITEM)} } },
+                                None => rsx! { span { class: "chip", {tx::WRITING} } },
+                            }
+                            span { class: "chev", aria_hidden: "true" }
                         }
-                        match items {
-                            Some(n) => rsx! { span { class: "chip ready", "{tx::READY} · " {count(n, &ITEM)} } },
-                            None => rsx! { span { class: "chip", {tx::WRITING} } },
-                        }
-                        span { class: "chev", aria_hidden: "true" }
                     }
                 }
             }

@@ -174,6 +174,7 @@ pub const CALCULATORS: &[&str] = &[
     "clichy",
     "ranson",
     "bisap",
+    "glasgow_blatchford",
     "incidence",
     "prevalence",
     "prevalence_id",

@@ -530,26 +530,31 @@ fn Setup(
                             {if all_chosen { tx::CLEAR_ALL } else { tx::PICK_ALL }}
                         }
                     }
-                    div { class: "st-chips st-lectures",
-                        for (id , title) in ready {
-                            button {
-                                key: "{id}",
-                                class: "st-chip",
-                                "aria-pressed": if chosen.read().contains(&id) { "true" } else { "false" },
-                                onclick: {
-                                    let id = id.clone();
-                                    move |_| {
-                                        let mut c = chosen.write();
-                                        if !c.remove(&id) {
-                                            c.insert(id.clone());
+                    for group in Library::get().by_course(ready, |(id, _)| id.as_str()) {
+                        h3 { key: "{group.id}", class: "label course-label",
+                            if group.id == batna_core::program::course_of(batna_core::own::LECTURE) { {crate::i18n::own::TITLE} } else { "{group.short()}" }
+                        }
+                        div { class: "st-chips st-lectures",
+                            for (id , title) in group.rows {
+                                button {
+                                    key: "{id}",
+                                    class: "st-chip",
+                                    "aria-pressed": if chosen.read().contains(&id) { "true" } else { "false" },
+                                    onclick: {
+                                        let id = id.clone();
+                                        move |_| {
+                                            let mut c = chosen.write();
+                                            if !c.remove(&id) {
+                                                c.insert(id.clone());
+                                            }
+                                            topics.write().clear();
                                         }
-                                        topics.write().clear();
+                                    },
+                                    span { class: "st-chip-num",
+                                        if id == batna_core::own::LECTURE { "✎" } else { {crate::content::lecture_no(&id)} }
                                     }
-                                },
-                                span { class: "st-chip-num",
-                                    if id == batna_core::own::LECTURE { "✎" } else { {id.rsplit('.').next().unwrap_or(&id).to_string()} }
+                                    bdi { "{title}" }
                                 }
-                                bdi { "{title}" }
                             }
                         }
                     }

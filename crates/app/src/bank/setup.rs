@@ -12,7 +12,6 @@ use super::{
     study_lectures, submit_paused, topic_title,
 };
 use crate::content::Library;
-use crate::content::lecture_code;
 use crate::i18n::bank as tx;
 use crate::i18n::count::{LECTURE, MINUTE, QUESTION, TOPIC, count as counted};
 
@@ -390,25 +389,28 @@ pub fn Setup() -> Element {
                         section { class: "card bank-advanced", id: "bank-advanced",
                             if several_lectures {
                                 h2 { class: "label", {tx::LECTURES} }
-                                div { class: "chips",
-                                    for (id, n) in lectures {
-                                        Chip {
-                                            key: "{id}",
-                                            on: filter.lectures.contains(&id),
-                                            onclick: {
-                                                let id = id.clone();
-                                                move |_| {
-                                                    let mut f = FILTER.write();
-                                                    if !f.lectures.remove(&id) {
-                                                        f.lectures.insert(id.clone());
+                                for group in crate::content::Library::get().by_course(lectures, |(id, _)| id.as_str()) {
+                                    h3 { key: "{group.id}", class: "label course-label", "{group.short()}" }
+                                    div { class: "chips",
+                                        for (id, n) in group.rows {
+                                            Chip {
+                                                key: "{id}",
+                                                on: filter.lectures.contains(&id),
+                                                onclick: {
+                                                    let id = id.clone();
+                                                    move |_| {
+                                                        let mut f = FILTER.write();
+                                                        if !f.lectures.remove(&id) {
+                                                            f.lectures.insert(id.clone());
+                                                        }
+                                                        let keep = f.lectures.clone();
+                                                        f.topics.retain(|(l, _)| keep.is_empty() || keep.contains(l));
                                                     }
-                                                    let keep = f.lectures.clone();
-                                                    f.topics.retain(|(l, _)| keep.is_empty() || keep.contains(l));
-                                                }
-                                            },
-                                            title: lecture_title(&id),
-                                            bdi { class: "chip-label", "{lecture_code(&id)} · {short_lecture_title(&id)}" }
-                                            span { class: "count", {tx::questions(n)} }
+                                                },
+                                                title: lecture_title(&id),
+                                                bdi { class: "chip-label", "{short_lecture_title(&id)}" }
+                                                span { class: "count", {tx::questions(n)} }
+                                            }
                                         }
                                     }
                                 }
@@ -433,7 +435,7 @@ pub fn Setup() -> Element {
                                                 }
                                             },
                                             if topic_prefix {
-                                                bdi { "{lecture_code(&lecture)} · {topic_title(&lecture, &topic)}" }
+                                                bdi { "{short_lecture_title(&lecture)} › {topic_title(&lecture, &topic)}" }
                                             } else {
                                                 bdi { {topic_title(&lecture, &topic)} }
                                             }
@@ -539,7 +541,7 @@ fn History() -> Element {
                                             class: "tap tap-row",
                                             title: tx::OPEN_LECTURE,
                                             onclick: { let l = l.clone(); move |_| crate::lecture::open(ui, &l) },
-                                            bdi { class: "tap-row-main", "{lecture_code(l)} · {short_lecture_title(l)}" }
+                                            bdi { class: "tap-row-main", "{crate::content::Library::get().crumb(l)}" }
                                             bdi { class: "score", "{s.right}/{s.total}" }
                                             span { class: "chev", aria_hidden: "true" }
                                         }

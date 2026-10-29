@@ -1801,3 +1801,34 @@ items:
     src: { page: 144, quote: "PMF has the poorest prognosis of the MPNs." }
     status: unverified
     tags: [book-question]
+  # ---------- calculator (ipss_mf) ----------
+  - id: hem.L09.179
+    kind: calc
+    topic: pmf-prognosis
+    calculator: ipss_mf
+    stem: "A 70-year-old man is newly diagnosed with primary myelofibrosis. Hb 9.2 g/dL, WBC 12 × 10⁹/L, peripheral blasts 0%. He has night sweats and has lost 12% of his weight."
+    inputs: { age_years: 70, wbc_10e9_l: 12, hb_g_dl: 9.2, blasts_pct: 0, constitutional: true }
+    expect: "IPSS 3 points (age, Hb, symptoms): high risk"
+    interpret: "High risk, median survival about 27 months; he should be assessed for allogeneic SCT, the only cure."
+    src: { page: 151, quote: "Median survivals are 135, 95, 48 and 27 months, respectively" }
+    status: unverified
+  - id: hem.L09.180
+    kind: calc
+    topic: pmf-prognosis
+    calculator: ipss_mf
+    stem: "A 58-year-old woman has primary myelofibrosis found on a routine count. Hb 11.5 g/dL, WBC 30 × 10⁹/L, blasts 0%, no symptoms."
+    inputs: { age_years: 58, wbc_10e9_l: 30, hb_g_dl: 11.5, blasts_pct: 0, constitutional: false }
+    expect: "IPSS 1 point (WBC > 25): intermediate-1"
+    interpret: "Intermediate-1 risk, median survival about 95 months."
+    src: { page: 151, quote: "Median survivals are 135, 95, 48 and 27 months, respectively" }
+    status: unverified
+  - id: hem.L09.181
+    kind: calc
+    topic: pmf-prognosis
+    calculator: ipss_mf
+    stem: "A 66-year-old man with primary myelofibrosis: Hb 10.4 g/dL, WBC 8 × 10⁹/L, peripheral blasts 2%, no constitutional symptoms."
+    inputs: { age_years: 66, wbc_10e9_l: 8, hb_g_dl: 10.4, blasts_pct: 2, constitutional: false }
+    expect: "IPSS 2 points (age, blasts ≥ 1%): intermediate-2"
+    interpret: "Intermediate-2 risk, median survival about 48 months. The book prints the blast cut-off as < 1 / > 1; the original IPSS counts 1% or more."
+    src: { page: 151, quote: "Median survivals are 135, 95, 48 and 27 months, respectively" }
+    status: unverified

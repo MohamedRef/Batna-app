@@ -38,9 +38,9 @@ pub fn Calculators() -> Element {
         style { {CSS.text()} }
         div { class: "calcs", "data-open": if current.is_some() { "yes" } else { "no" },
             nav { class: "calc-list", aria_label: tx::PICK,
-                div { class: "calc-head",
+                header { class: "page-head calc-head",
                     h1 { {tx::TITLE} }
-                    p { class: "muted small", {tx::SUBTITLE} }
+                    p { class: "page-sub", {tx::SUBTITLE} }
                 }
                 for area in AREAS {
                     section { key: "{area:?}", class: "calc-group",
@@ -116,7 +116,10 @@ pub fn CalcForm(id: &'static str, initial: Inputs) -> Element {
                 h1 { bdi { {spec.name} } }
                 p { class: "muted small calc-intro", {tx::INTRO} }
                 for field in spec.fields {
-                    div { key: "{field.key}", class: "calc-field",
+                    div {
+                        key: "{field.key}",
+                        class: "field calc-field",
+                        "data-invalid": if bad == Some(field.key) { "true" } else { "false" },
                         // Name, unit and "optional" as separate pieces, so
                         // the English name and the Arabic tag never mix.
                         label { class: "calc-label", r#for: "f-{field.key}",
@@ -125,16 +128,16 @@ pub fn CalcForm(id: &'static str, initial: Inputs) -> Element {
                                 if !unit.is_empty() { bdi { class: "muted small", dir: "ltr", "({unit})" } }
                             }
                             if field.optional && !matches!(field.kind, FieldKind::Flag) {
-                                span { class: "chip small", {tx::OPTIONAL} }
+                                span { class: "chip", {tx::OPTIONAL} }
                             }
                         }
                         {field_input(field, values, bad == Some(field.key))}
                         if bad == Some(field.key) {
-                            p { id: "e-{field.key}", class: "calc-field-error", role: "alert", {tx::INVALID} }
+                            p { id: "e-{field.key}", class: "field-error", role: "alert", {tx::INVALID} }
                         }
                         match tx::hint(spec.id, field.key) {
-                            Some(h) => rsx! { p { class: "muted small calc-hint", {h} } },
-                            None if !field.hint.is_empty() => rsx! { bdi { class: "muted small", {field.hint} } },
+                            Some(h) => rsx! { p { class: "field-hint calc-hint", {h} } },
+                            None if !field.hint.is_empty() => rsx! { bdi { class: "field-hint", {field.hint} } },
                             None => rsx! {},
                         }
                     }
@@ -263,7 +266,7 @@ pub fn OutcomeCard(id: &'static str, outcome: Outcome) -> Element {
             p { class: "small muted", {tx::RESULT} }
             div { class: "calc-headline",
                 bdi { class: "calc-display", "{outcome.display}" }
-                bdi { class: "calc-band", {outcome.label} }
+                bdi { class: "chip calc-band", "data-tone": "accent", {outcome.label} }
             }
             bdi { class: "calc-meaning", "{outcome.meaning}" }
             details { class: "calc-parts",

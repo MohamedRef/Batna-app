@@ -91,9 +91,9 @@ pub fn References() -> Element {
                     onclick: move |_| super::close(),
                     span { aria_hidden: "true", "→" }
                 }
-                div { class: "refs-title",
+                header { class: "page-head refs-title",
                     h1 { {tx::TITLE} }
-                    p { class: "muted small", {tx::SUBTITLE} }
+                    p { class: "page-sub", {tx::SUBTITLE} }
                 }
                 button {
                     class: "icon-button refs-add",
@@ -103,8 +103,8 @@ pub fn References() -> Element {
                     span { aria_hidden: "true", "＋" }
                 }
             }
-            label { class: "refs-search",
-                span { class: "refs-search-icon", aria_hidden: "true", {crate::icons::search()} }
+            label { class: "search",
+                {crate::icons::search()}
                 input {
                     r#type: "search",
                     aria_label: tx::SEARCH,
@@ -130,7 +130,7 @@ pub fn References() -> Element {
                                     span { class: "tap-row-main",
                                         bdi { dir: "ltr", lang: "en", class: "lecture-title", "{r.title}" }
                                         span { class: "muted small",
-                                            "{crate::i18n::lecture::PAGES} " bdi { dir: "ltr", "{r.pages[0]}–{r.pages[1]}" }
+                                            "{crate::i18n::lecture::PAGES} " span { class: "num-ltr", "{r.pages[0]}–{r.pages[1]}" }
                                             if r.lessons > 0 {
                                                 " · {crate::i18n::count::count(r.lessons, &crate::i18n::count::LESSON)}"
                                             }
@@ -138,9 +138,10 @@ pub fn References() -> Element {
                                         match &r.counts {
                                             Some(c) if c.total > 0 => rsx! {
                                                 span {
-                                                    class: if c.approved >= c.total { "chip ready" } else { "chip" },
+                                                    class: "chip",
+                                                    "data-tone": if c.approved >= c.total { "good" } else { "" },
                                                     title: tx::CHECKED_HINT,
-                                                    "{tx::CHECKED} " bdi { dir: "ltr", "{c.approved}/{c.total}" }
+                                                    "{tx::CHECKED} " span { class: "num-ltr", "{c.approved}/{c.total}" }
                                                 }
                                             },
                                             _ => rsx! { span { class: "chip", {tx::WRITING} } },
@@ -159,7 +160,7 @@ pub fn References() -> Element {
                 div { class: "note refs-status",
                     p { {tx::STATUS_BODY} }
                     p { class: "small",
-                        "{tx::CHECKED_ALL} " bdi { dir: "ltr", "{approved}/{total}" }
+                        "{tx::CHECKED_ALL} " span { class: "num-ltr", "{approved}/{total}" }
                     }
                 }
             }

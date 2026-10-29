@@ -130,9 +130,9 @@ fn Sheet(draft: Draft) -> Element {
     let aria = |f: Field| if err(f).is_some() { "true" } else { "false" };
     rsx! {
         style { {CSS.text()} }
-        div { class: "own-backdrop", onclick: move |_| close() }
+        div { class: "sheet-backdrop own-backdrop", onclick: move |_| close() }
         div {
-            class: "own-sheet",
+            class: "sheet own-sheet",
             role: "dialog",
             aria_modal: "true",
             aria_label: title,
@@ -141,7 +141,17 @@ fn Sheet(draft: Draft) -> Element {
                     close();
                 }
             },
-            h2 { {title} }
+            div { class: "sheet-head",
+                h2 { {title} }
+                button {
+                    class: "icon-button",
+                    "data-back": "true",
+                    aria_label: tx::CANCEL,
+                    title: tx::CANCEL,
+                    onclick: move |_| close(),
+                    span { aria_hidden: "true", "✕" }
+                }
+            }
             if draft.kind == DraftKind::Shared {
                 p { class: "muted small", {tx::SHARED_HINT} }
             }
@@ -151,7 +161,7 @@ fn Sheet(draft: Draft) -> Element {
             if QUEUED.read().is_some() {
                 p { class: "small own-waiting", role: "status", {tx::SHARE_WAITING} }
             }
-            label { class: "own-field",
+            label { class: "field own-field", "data-invalid": aria(Field::Front),
                 span { class: "own-label", {tx::FRONT}
                     bdi { class: "own-count", dir: "ltr", "{c.front.chars().count()}/{core_own::MAX_FRONT}" }
                 }
@@ -166,10 +176,10 @@ fn Sheet(draft: Draft) -> Element {
                     oninput: move |e| card.write().front = e.value(),
                 }
                 if let Some(m) = err(Field::Front) {
-                    span { class: "own-error", role: "alert", {m} }
+                    span { class: "field-error", role: "alert", {m} }
                 }
             }
-            label { class: "own-field",
+            label { class: "field own-field", "data-invalid": aria(Field::Back),
                 span { class: "own-label", {tx::BACK}
                     bdi { class: "own-count", dir: "ltr", "{c.back.chars().count()}/{core_own::MAX_BACK}" }
                 }
@@ -183,11 +193,11 @@ fn Sheet(draft: Draft) -> Element {
                     oninput: move |e| card.write().back = e.value(),
                 }
                 if let Some(m) = err(Field::Back) {
-                    span { class: "own-error", role: "alert", {m} }
+                    span { class: "field-error", role: "alert", {m} }
                 }
             }
             div { class: "own-row",
-                label { class: "own-field",
+                label { class: "field own-field",
                     span { {tx::LECTURE} }
                     select {
                         onchange: move |e| {
@@ -205,7 +215,7 @@ fn Sheet(draft: Draft) -> Element {
                         }
                     }
                 }
-                label { class: "own-field own-page",
+                label { class: "field own-field own-page",
                     span { {tx::PAGE} }
                     input {
                         r#type: "number",
@@ -217,7 +227,7 @@ fn Sheet(draft: Draft) -> Element {
                     }
                 }
             }
-            label { class: "own-field",
+            label { class: "field own-field", "data-invalid": aria(Field::Source),
                 span { {tx::SOURCE} }
                 input {
                     dir: "auto",
@@ -227,7 +237,7 @@ fn Sheet(draft: Draft) -> Element {
                     oninput: move |e| card.write().source = Some(e.value()),
                 }
                 if let Some(m) = err(Field::Source) {
-                    span { class: "own-error", role: "alert", {m} }
+                    span { class: "field-error", role: "alert", {m} }
                 }
             }
             // How it will look in a session: the question, then the answer.
@@ -257,7 +267,7 @@ fn Sheet(draft: Draft) -> Element {
                 }
             }
             if let Some(p) = problem() {
-                p { class: "own-error", role: "alert", "{p}" }
+                p { class: "field-error", role: "alert", "{p}" }
             }
             div { class: "own-actions",
                 button { class: "btn btn-primary", onclick: save, {tx::SAVE} }

@@ -95,9 +95,9 @@ pub fn BookSheet() -> Element {
 
     rsx! {
         style { {CSS.text()} }
-        div { class: "bk-backdrop", onclick: move |_| close() }
-        div { class: "bk-sheet", role: "dialog", aria_modal: "true", aria_labelledby: "bk-title",
-            div { class: "bk-head",
+        div { class: "sheet-backdrop bk-backdrop", onclick: move |_| close() }
+        div { class: "sheet bk-sheet", role: "dialog", aria_modal: "true", aria_labelledby: "bk-title",
+            div { class: "sheet-head bk-head",
                 span { class: "bk-page", aria_hidden: "true", bdi { "{page}" } }
                 div {
                     h2 { id: "bk-title", "{tx::TITLE} " bdi { "{page}" } }

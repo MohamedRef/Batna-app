@@ -192,18 +192,21 @@ pub fn LecturePage(id: String) -> Element {
                 }
                 if lecture.is_some() {
                     div {
-                        class: "lec-bar",
+                        class: "progress",
+                        "data-tone": "good",
                         role: "progressbar",
                         aria_label: tx::PROGRESS,
                         aria_valuemin: "0",
                         aria_valuemax: "{total}",
                         aria_valuenow: "{seen}",
-                        div { class: "lec-bar-fill", style: "inline-size: {share}%" }
+                        div { class: "progress-fill", style: "inline-size: {share}%" }
                     }
                     if let Some(c) = stats.as_ref().map(|s| &s.counts) {
                         p { class: "small lec-check",
-                            span { class: if c.approved >= c.total && c.total > 0 { "chip ready" } else { "chip" },
-                                "{tx::CHECKED} " bdi { dir: "ltr", "{c.approved}/{c.total}" }
+                            span {
+                                class: "chip",
+                                "data-tone": if c.approved >= c.total && c.total > 0 { "good" } else { "" },
+                                "{tx::CHECKED} " span { class: "num-ltr", "{c.approved}/{c.total}" }
                             }
                             span { class: "muted", " {tx::CHECKED_NOTE}" }
                         }

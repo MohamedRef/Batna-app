@@ -15,6 +15,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::content::{Index, Lecture};
 use crate::lesson::LessonFile;
+use crate::program::Program;
 
 /// The first bytes of every pack. Bump the digit when the layout changes.
 pub const MAGIC: &[u8; 8] = b"BATNAPK1";
@@ -49,6 +50,10 @@ pub struct Pack {
     /// the pack built into the app has none.
     #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
     pub look: BTreeMap<String, String>,
+    /// `content/program.yaml`: the MSc's courses. Older packs have none
+    /// (`Program::fallback`); an older app ignores it and shows every lecture.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub program: Option<Program>,
 }
 
 #[derive(Debug, thiserror::Error)]
@@ -68,7 +73,7 @@ impl Pack {
     pub fn new(index: Index, mut lectures: Vec<Lecture>) -> Self {
         let pos = |id: &str| index.lectures.iter().position(|e| e.id == id).unwrap_or(usize::MAX);
         lectures.sort_by(|a, b| pos(&a.lecture).cmp(&pos(&b.lecture)).then(a.lecture.cmp(&b.lecture)));
-        Pack { schema: SCHEMA, index, lectures, lessons: Vec::new(), look: BTreeMap::new() }
+        Pack { schema: SCHEMA, index, lectures, lessons: Vec::new(), look: BTreeMap::new(), program: None }
     }
 
     /// Adds the lesson files, in the lectures' order.
@@ -80,6 +85,16 @@ impl Pack {
     }
 
     /// Adds the app's stylesheets (path under `crates/app` → CSS).
+    pub fn with_program(mut self, program: Program) -> Self {
+        self.program = Some(program);
+        self
+    }
+
+    /// The pack's program, or one course per lecture prefix for an older pack.
+    pub fn program_or_fallback(&self) -> Program {
+        self.program.clone().unwrap_or_else(|| Program::fallback(&self.index))
+    }
+
     pub fn with_look(mut self, look: BTreeMap<String, String>) -> Self {
         self.look = look;
         self
@@ -149,6 +164,18 @@ mod tests {
         let back = Pack::decode(&bytes).unwrap();
         assert_eq!(back, pack);
         assert_eq!(back.item_count(), 18);
+    }
+
+    #[test]
+    fn the_program_travels_and_old_packs_fall_back() {
+        let pack = Pack::new(index(), vec![sample()]);
+        assert_eq!(pack.program_or_fallback().courses[0].id, "hb");
+        let program: Program =
+            serde_yaml_ng::from_str(include_str!("../../../content/program.yaml")).unwrap();
+        let pack = pack.with_program(program.clone());
+        let back = Pack::decode(&pack.encode()).unwrap();
+        assert_eq!(back.program.as_ref(), Some(&program));
+        assert_eq!(back.program_or_fallback().courses.len(), 20);
     }
 
     #[test]

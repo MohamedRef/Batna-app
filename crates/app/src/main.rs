@@ -10,6 +10,7 @@ mod calc;
 mod case;
 mod cloud;
 mod content;
+mod courses;
 mod data_export;
 mod dead_ends;
 mod desk;

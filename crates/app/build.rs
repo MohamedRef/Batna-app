@@ -1,5 +1,5 @@
 //! Builds the offline content pack (`batna_core::pack`) from
-//! `content/index.yaml` and every `content/<chapter>/LNN.yaml`, and embeds it
+//! `content/index.yaml`, `content/program.yaml` and every `content/<chapter>/LNN.yaml`, and embeds it
 //! with `include_bytes!`, the same pattern as Kabar's build.rs (adapted from
 //! kabar-app main: crates/app/build.rs). A new lecture file needs no code
 //! change. A file that doesn't parse is left out with a warning; CI's
@@ -10,6 +10,7 @@ use std::path::PathBuf;
 use batna_core::content::{Index, Lecture};
 use batna_core::lesson::LessonFile;
 use batna_core::pack::Pack;
+use batna_core::program::Program;
 
 fn main() {
     let root = PathBuf::from(std::env::var("CARGO_MANIFEST_DIR").unwrap()).join("../..");
@@ -76,9 +77,16 @@ fn main() {
         println!("cargo:warning=lesson image: {p}");
     }
 
+    let program_path = content.join("program.yaml");
+    println!("cargo:rerun-if-changed={}", program_path.display());
+    let program: Program =
+        serde_yaml_ng::from_str(&std::fs::read_to_string(&program_path).expect("content/program.yaml"))
+            .expect("content/program.yaml parses");
+
     let out = PathBuf::from(std::env::var("OUT_DIR").unwrap());
     let pack = out.join("content.pack");
-    std::fs::write(&pack, Pack::new(index, lectures).with_lessons(lessons).encode()).unwrap();
+    std::fs::write(&pack, Pack::new(index, lectures).with_lessons(lessons).with_program(program).encode())
+        .unwrap();
     std::fs::write(
         out.join("embedded.rs"),
         format!("pub const PACK: &[u8] = include_bytes!({:?});\n", pack.display().to_string()),

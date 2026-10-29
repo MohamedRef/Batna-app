@@ -45,7 +45,8 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
     if !missing.is_empty() {
         return Err(missing);
     }
-    let pack = Pack::new(index, lectures).with_lessons(lessons).with_look(look(root)?);
+    let program = crate::read_yaml(&root.join("content/program.yaml")).map_err(|e| vec![e])?;
+    let pack = Pack::new(index, lectures).with_lessons(lessons).with_look(look(root)?).with_program(program);
     let bytes = pack.encode();
     match Pack::decode(&bytes) {
         Ok(back) if back == pack => {}

@@ -1,0 +1,675 @@
+schema: batna.content/v1
+lecture: dm.L19
+title: "Plasma lipoproteins"
+author: "Dr. Shimaa Elrahmany"
+# Lipidology lecture 1 of chapter 6 (part 2 of the chapter restarts lecture numbers; Batna ids continue at L19).
+book: { chapter: 6, pages: [246, 251] }
+topics:
+  - { id: burden, title: "CVD burden and the definition of dyslipidemia" }
+  - { id: structure, title: "Lipoprotein structure and functions" }
+  - { id: metabolism, title: "Lipoprotein metabolism (exogenous and endogenous)" }
+  - { id: rct, title: "Reverse cholesterol transport" }
+  - { id: classes, title: "Classification of plasma lipoproteins" }
+  - { id: ldl, title: "LDL cholesterol" }
+  - { id: hdl, title: "HDL cholesterol" }
+  - { id: lpa, title: "Lipoprotein(a)" }
+  - { id: athero, title: "Pathogenesis of atherosclerosis" }
+  - { id: lab, title: "Laboratory measurement of lipids" }
+items:
+  # ---------- p246: size of the problem, dyslipidemia ----------
+  - id: dm.L19.001
+    kind: cloze
+    topic: burden
+    text: "Cardiovascular diseases account for {{c1::46%}} of total deaths in Egypt."
+    src: { page: 246, quote: "Cardiovascular diseases account for 46% of total deaths in Egypt." }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L19.002
+    kind: cloze
+    topic: burden
+    text: "The prevalence of elevated blood cholesterol in the Egyptian population is {{c1::37%}}."
+    src: { page: 246, quote: "Prevalence of elevated blood cholesterol levels in the Egyptian population is 37%" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L19.003
+    kind: cloze
+    topic: burden
+    text: "Prevention can prevent at least {{c1::80%}} of cardiovascular disease."
+    src: { page: 246, quote: "It is possible to prevent at least 80% of CVD." }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L19.004
+    kind: enumerate
+    topic: burden
+    prompt: Mention the points that describe the size of the cardiovascular disease problem.
+    points:
+      - CVD remains a leading cause of morbidity and mortality despite better outcomes
+      - CVD accounts for 46% of total deaths in Egypt
+      - Risk factors, notably diabetes and obesity, are increasing
+      - Elevated cholesterol affects 37% of Egyptians
+      - Prevention is effective
+      - At least 80% of CVD is preventable
+    pass: 4
+    src: { page: 246, quote: "CVD remains a leading cause of morbidity and mortality, despite improvements in outcomes for CVD." }
+    status: unverified
+  - id: dm.L19.005
+    kind: card
+    topic: burden
+    front: Which two risk factors for CVD does the book name as increasing in prevalence?
+    back: Diabetes and obesity.
+    src: { page: 246, quote: "Prevalence of some risk factors, notably diabetes and obesity, is increasing." }
+    status: unverified
+  - id: dm.L19.006
+    kind: card
+    topic: burden
+    front: Define dyslipidemia.
+    back: A range of disorders with abnormally high or low lipoprotein levels, or abnormal composition of the lipoprotein particles.
+    src: { page: 246, quote: "A range of disorders that include both abnormally high and low lipoprotein levels, as well as disorders in the composition of these particles." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p246-247: structure and function ----------
+  - id: dm.L19.007
+    kind: card
+    topic: structure
+    front: What is the basic job of a lipoprotein?
+    back: It is a water-soluble way to transport hydrophobic lipids in the blood.
+    src: { page: 246, quote: "Water-soluble way to transport hydrophobic lipids." }
+    status: unverified
+  - id: dm.L19.008
+    kind: table
+    topic: structure
+    title: Lipoprotein structure
+    columns: [Layer, Made of, Nature]
+    rows:
+      - [Envelope (shell), "Phospholipids, free cholesterol and apolipoproteins", Hydrophilic]
+      - [Core, Triglycerides and cholesteryl esters, Hydrophobic]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2]]
+    src: { page: 246, quote: "Envelope of phospholipids, free cholesterol, and apolipoproteins hydrophilic" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L19.009
+    kind: cloze
+    topic: structure
+    text: "The lipoprotein core is rich in {{c1::triglyceride}} and {{c2::cholesteryl ester}} and is {{c3::hydrophobic}}."
+    src: { page: 247, quote: "Triglyceride and cholesteryl ester-rich hydrophobic core." }
+    status: unverified
+  - id: dm.L19.010
+    kind: card
+    topic: structure
+    front: Which two physical properties do lipoproteins vary in (the basis of their classification)?
+    back: Size and density.
+    src: { page: 247, quote: "Vary in size and density." }
+    status: unverified
+  - id: dm.L19.011
+    kind: enumerate
+    topic: structure
+    prompt: Mention the functions of plasma lipoproteins.
+    points:
+      - Transport lipids to tissues for energy use
+      - Steroid hormone production
+      - Bile acid formation
+    pass: 3
+    src: { page: 247, quote: "Transport lipids to tissues for energy utilization." }
+    status: unverified
+  - id: dm.L19.012
+    kind: card
+    topic: structure
+    front: What are the two roles of apolipoproteins?
+    back: Ligands for cellular receptor binding, and activators or inhibitors of enzymes.
+    src: { page: 247, quote: "Apolipoproteins: ligands for cellular receptor binding, and enzyme activators or inhibitors." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L19.013
+    kind: mcq
+    topic: structure
+    stem: "A student draws a lipoprotein particle. Which component belongs in the hydrophobic core?"
+    options: [Cholesteryl ester, Phospholipid, Free cholesterol, Apolipoprotein B-100]
+    answer: 0
+    why:
+      - "Correct: the core is triglyceride and cholesteryl ester, both hydrophobic."
+      - "Phospholipids form the hydrophilic envelope."
+      - "Free cholesterol sits in the envelope, not the core."
+      - "Apolipoproteins sit on the surface where they bind receptors."
+    src: { page: 247, quote: "Triglyceride and cholesteryl ester-rich hydrophobic core." }
+    status: unverified
+  # ---------- p247: metabolism figure ----------
+  - id: dm.L19.014
+    kind: order
+    topic: metabolism
+    prompt: Order the exogenous (dietary) lipid pathway shown in the book's figure.
+    steps:
+      - Dietary fat absorbed in the small intestine
+      - Chylomicron (ApoB-48) enters the circulation
+      - Lipoprotein lipase releases free fatty acids
+      - Free fatty acids go to adipose tissue and muscle
+      - Chylomicron remnant is taken up by the liver
+    src: { page: 247, quote: "Lipoprotein Metabolism" }
+    status: unverified
+  - id: dm.L19.015
+    kind: order
+    topic: metabolism
+    prompt: Order the endogenous pathway from the liver, as in the book's figure.
+    steps:
+      - Liver secretes VLDL
+      - Lipoprotein lipase removes triglyceride
+      - IDL forms (part returns to the liver)
+      - Further lipolysis gives LDL
+      - LDL is taken up by the liver
+    src: { page: 247, quote: "Lipoprotein Metabolism" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L19.016
+    kind: card
+    topic: metabolism
+    front: Which enzyme strips triglyceride from chylomicrons and VLDL, releasing free fatty acids?
+    back: Lipoprotein lipase (LPL).
+    src: { page: 247, quote: "Lipoprotein Metabolism" }
+    status: unverified
+  - id: dm.L19.017
+    kind: card
+    topic: metabolism
+    front: Where do the free fatty acids released from chylomicrons go?
+    back: To adipose tissue and muscle.
+    src: { page: 247, quote: "Free fatty acids Adipose tissue and muscle" }
+    status: unverified
+  - id: dm.L19.018
+    kind: cloze
+    topic: metabolism
+    text: "Chylomicrons carry {{c1::ApoB-48}}; VLDL, IDL and LDL carry {{c2::ApoB-100}}."
+    src: { page: 248, quote: "LDL contains apo B-100" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p247: reverse cholesterol transport ----------
+  - id: dm.L19.019
+    kind: order
+    topic: rct
+    prompt: Order reverse cholesterol transport as numbered in the book's figure.
+    steps:
+      - ABCA1 moves free cholesterol and phospholipid from the macrophage to ApoA-I
+      - Nascent HDL forms
+      - LCAT esterifies cholesterol, giving HDL3
+      - LCAT continues, giving the larger HDL2
+      - SCARB1 on the hepatocyte takes up cholesteryl ester
+    src: { page: 247, quote: "Reverse cholesterol transfer" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L19.020
+    kind: table
+    topic: rct
+    title: Players in reverse cholesterol transport
+    columns: [Job, Player]
+    rows:
+      - ["Hands macrophage free cholesterol and phospholipid to ApoA-I (nascent HDL)", ABCA1]
+      - [Hand macrophage cholesterol to mature HDL, "ABCG1, ABCG4"]
+      - ["Esterifies cholesterol: nascent HDL to HDL3 to HDL2", LCAT]
+      - [Hepatocyte receptor that takes up HDL cholesteryl ester, SCARB1]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 247, quote: "Reverse cholesterol transfer" }
+    status: unverified
+  - id: dm.L19.021
+    kind: mcq
+    topic: rct
+    stem: "In reverse cholesterol transport, which enzyme converts free cholesterol on nascent HDL into cholesteryl ester, so the particle matures into HDL3 and HDL2?"
+    options: [LCAT, Lipoprotein lipase, ABCA1, SCARB1]
+    answer: 0
+    why:
+      - "Correct: LCAT (steps 4 and 5 in the figure) esterifies cholesterol and matures HDL."
+      - "LPL hydrolyses triglyceride in chylomicrons and VLDL."
+      - "ABCA1 is a transporter that hands free cholesterol to ApoA-I; it is not an enzyme that esterifies."
+      - "SCARB1 is the hepatocyte receptor at the end of the pathway."
+    src: { page: 247, quote: "Reverse cholesterol transfer" }
+    status: unverified
+  # ---------- p248: classification table ----------
+  - id: dm.L19.022
+    kind: table
+    topic: classes
+    title: Classification of plasma lipoproteins (size, density, major apolipoprotein)
+    columns: [Class, "Density (g/mL)", "Diameter (nm)", Major apo]
+    rows:
+      - [Chylomicrons, "< 0.95", 80-100, ApoB-48]
+      - [VLDL, 0.95-1.006, 30-80, ApoB-100]
+      - [IDL, 1.006-1.019, 25-30, ApoB-100]
+      - [LDL, 1.019-1.063, 20-25, ApoB-100]
+      - [HDL, 1.063-1.210, 8-13, ApoA-I]
+      - ["Lp(a)", 1.006-1.125, 25-30, "Apo(a)"]
+    blanks: [[0, 3], [1, 2], [3, 1], [4, 2], [4, 3], [5, 3]]
+    src: { page: 248, quote: "Classification of Plasma Lipoproteins" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: dm.L19.023
+    kind: table
+    topic: classes
+    title: Composition of the lipoproteins (% of particle mass)
+    columns: [Class, "TG %", "Cholesteryl ester %", "Phospholipid %"]
+    rows:
+      - [Chylomicrons, 90-95, 2-4, 2-6]
+      - [VLDL, 50-65, 8-14, 12-16]
+      - [IDL, 25-40, 20-35, 16-24]
+      - [LDL, 4-6, 34-35, 22-26]
+      - [HDL, "7", 10-20, "55"]
+    blanks: [[0, 1], [1, 1], [3, 2], [4, 3]]
+    src: { page: 248, quote: "Classification of Plasma Lipoproteins" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L19.024
+    kind: table
+    topic: classes
+    title: Minor apolipoproteins of each class
+    columns: [Class, Other apolipoproteins]
+    rows:
+      - [Chylomicrons, "ApoA-I, A-II, A-IV, A-V"]
+      - [VLDL, "ApoA-I, C-II, C-III, E, A-V"]
+      - [IDL, "ApoC-II, C-III, E"]
+      - [HDL, "ApoA-II, C-III, E, M"]
+      - ["Lp(a)", ApoB-100]
+    blanks: [[2, 1], [4, 1]]
+    src: { page: 248, quote: "IDL 1.006–1.019 25–30 25–40 20–35 16–24 7–11 ApoB-100 ApoC-II, C-III, E" }
+    status: unverified
+  - id: dm.L19.025
+    kind: card
+    topic: classes
+    front: Which lipoprotein is the largest, least dense and richest in triglyceride?
+    back: The chylomicron (density under 0.95 g/mL, TG 90-95%).
+    src: { page: 248, quote: "Classification of Plasma Lipoproteins" }
+    status: unverified
+  - id: dm.L19.026
+    kind: card
+    topic: classes
+    front: Which lipoproteins does the book's figure group as "bad" (non-HDL)?
+    back: Chylomicrons and their remnants, VLDL, IDL and LDL. HDL is the "good" one.
+    src: { page: 248, quote: "Classification of Plasma Lipoproteins" }
+    status: unverified
+  - id: dm.L19.027
+    kind: mcq
+    topic: classes
+    stem: "A lipoprotein has density 0.95-1.006 g/mL, diameter 30-80 nm, 50-65% triglyceride and ApoB-100 as its major protein. Which is it?"
+    options: [VLDL, Chylomicron, IDL, LDL, HDL]
+    answer: 0
+    why:
+      - "Correct: VLDL is the hepatic TG-rich particle with ApoB-100."
+      - "Chylomicrons are less dense (< 0.95), 90-95% TG, and carry ApoB-48."
+      - "IDL is denser (1.006-1.019) with 25-40% TG."
+      - "LDL has only 4-6% TG and is 20-25 nm."
+      - "HDL carries ApoA-I and is the densest."
+    src: { page: 248, quote: "Classification of Plasma Lipoproteins" }
+    status: unverified
+  # ---------- p248: LDL ----------
+  - id: dm.L19.028
+    kind: enumerate
+    topic: ldl
+    prompt: Mention the features of LDL cholesterol.
+    points:
+      - Core rich in cholesteryl ester
+      - Most cholesterol-rich lipoprotein
+      - Synthesized from IDL
+      - Carries most of the circulating cholesterol
+      - Major role in atherosclerosis ("bad cholesterol")
+      - Contains ApoB-100
+    pass: 4
+    src: { page: 248, quote: "Most cholesterol rich lipoprotein." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L19.029
+    kind: card
+    topic: ldl
+    front: LDL is synthesized from which lipoprotein?
+    back: IDL.
+    src: { page: 248, quote: "Synthesized from IDL." }
+    status: unverified
+  - id: dm.L19.030
+    kind: card
+    topic: ldl
+    front: Which lipoprotein carries the majority of the cholesterol circulating in blood?
+    back: LDL.
+    src: { page: 248, quote: "Accounts for majority of cholesterol circulating in blood" }
+    status: unverified
+  - id: dm.L19.031
+    kind: card
+    topic: ldl
+    front: Why is LDL cholesterol called "bad cholesterol"?
+    back: Because LDL plays a major role in the development of atherosclerosis.
+    src: { page: 248, quote: "LDL plays a major role in development of atherosclerosis." }
+    status: unverified
+  # ---------- p248-249: HDL ----------
+  - id: dm.L19.032
+    kind: enumerate
+    topic: hdl
+    prompt: Mention the features of HDL cholesterol.
+    points:
+      - Smallest lipoprotein
+      - Major structural protein is ApoA-I
+      - Core predominantly cholesteryl ester
+      - Carries 20-35% of plasma cholesterol
+      - Removes excess cholesterol from cells to the liver for elimination
+      - '"Good cholesterol": linked to a lower risk of CAD'
+    pass: 4
+    src: { page: 248, quote: "The major structural protein is apo A-I." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L19.033
+    kind: cloze
+    topic: hdl
+    text: "HDL carries {{c1::20-35%}} of plasma cholesterol."
+    src: { page: 249, quote: "Carries 20-35% of plasma cholesterol." }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L19.034
+    kind: card
+    topic: hdl
+    front: What does HDL do with excess cholesterol?
+    back: It removes it from body cells and transports it to the liver for elimination.
+    src: { page: 249, quote: "Removes excess cholesterol from body cells and transports it to the liver for elimination." }
+    status: unverified
+  - id: dm.L19.035
+    kind: card
+    topic: hdl
+    front: Why is HDL called "good cholesterol"?
+    back: It prevents cholesterol building up in blood vessels and is associated with a reduced risk of CAD.
+    src: { page: 249, quote: "Known as \"good cholesterol\" as it prevents accumulation of cholesterol in blood vessels and is associated with a reduced risk of CAD." }
+    status: unverified
+  - id: dm.L19.036
+    kind: table
+    topic: hdl
+    title: LDL versus HDL
+    columns: [Feature, LDL, HDL]
+    rows:
+      - [Major apolipoprotein, ApoB-100, ApoA-I]
+      - [Size, 20-25 nm, Smallest (8-13 nm)]
+      - [Core, Cholesteryl ester, Cholesteryl ester]
+      - [Share of plasma cholesterol, Majority, 20-35%]
+      - [Effect on arteries, "Atherogenic (bad)", "Removes cholesterol to the liver (good)"]
+    blanks: [[0, 1], [0, 2], [3, 1], [3, 2], [4, 2]]
+    src: { page: 248, quote: "LDL contains apo B-100" }
+    status: unverified
+  # ---------- p249: Lp(a) ----------
+  - id: dm.L19.037
+    kind: card
+    topic: lpa
+    front: What is lipoprotein(a)?
+    back: An LDL particle with an Apo(a) moiety covalently bound to its ApoB component.
+    src: { page: 249, quote: "LDL particle with an Apo(a) moiety covalently bound to its ApoB component." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L19.038
+    kind: card
+    topic: lpa
+    front: How does Lp(a) cause atherosclerosis like LDL does?
+    back: It is under 70 nm, so it crosses the endothelium freely and can be retained in the arterial wall.
+    src: { page: 249, quote: "It is <70 nm in diameter and can freely flux across the endothelial barrier" }
+    status: unverified
+  - id: dm.L19.039
+    kind: card
+    topic: lpa
+    front: Why is Lp(a) pro-thrombotic?
+    back: Its Apo(a) resembles plasminogen and binds the plasminogen receptor, increasing thrombosis.
+    src: { page: 249, quote: "similar structure to plasminogen and binds to the plasminogen receptor, leading to increased thrombosis" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L19.040
+    kind: cloze
+    topic: lpa
+    text: "People with Lp(a) above {{c1::180 mg/dL}} have a lifetime ASCVD risk similar to {{c2::heterozygous familial hypercholesterolemia (HeFH)}}."
+    src: { page: 249, quote: "People with extremely high Lp(a) levels >180 mg/ dL have an increased lifetime risk of ASCVD similar to HeFH." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L19.041
+    kind: card
+    topic: lpa
+    front: Who should have Lp(a) measured, according to the book?
+    back: Everyone at least once in a lifetime if available, and selected patients with a family history of premature CVD.
+    src: { page: 249, quote: "Measurement of Lp(a) should be considered at least once in each person's lifetime, if available." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L19.042
+    kind: mcq
+    topic: lpa
+    stem: "A 38-year-old man's father had an MI at 44. His LDL-C is only mildly raised. Which lipoprotein, structurally an LDL with an extra protein resembling plasminogen, is worth measuring?"
+    options: ["Lipoprotein(a)", HDL subfractions, IDL, Chylomicron remnants]
+    answer: 0
+    why:
+      - "Correct: Lp(a) is atherogenic and pro-thrombotic; measure it with a family history of premature CVD."
+      - "HDL is anti-atherogenic and has no plasminogen-like protein."
+      - "IDL is a VLDL remnant without Apo(a)."
+      - "Chylomicron remnants carry ApoB-48, not Apo(a)."
+    src: { page: 249, quote: "Lp(a) should be considered in selected patients with a family history of premature CVD." }
+    status: unverified
+  - id: dm.L19.043
+    kind: mcq
+    topic: lpa
+    stem: "Which statement about lipoprotein(a) is FALSE?"
+    options:
+      - "It is a chylomicron particle carrying ApoB-48"
+      - "Apo(a) is covalently bound to its ApoB"
+      - "It can cross the endothelium and be retained in the arterial wall"
+      - "It binds the plasminogen receptor and promotes thrombosis"
+    answer: 0
+    why:
+      - "Correct (false): Lp(a) is an LDL particle with ApoB-100 plus Apo(a)."
+      - "True: that bond defines Lp(a)."
+      - "True: under 70 nm, it fluxes across like LDL."
+      - "True: Apo(a) resembles plasminogen, making it pro-thrombotic."
+    src: { page: 249, quote: "LDL particle with an Apo(a) moiety covalently bound to its ApoB component." }
+    status: unverified
+  # ---------- p250: atherosclerosis ----------
+  - id: dm.L19.044
+    kind: card
+    topic: athero
+    front: What is the key initiating event in atherogenesis?
+    back: Retention of LDL-C and other cholesterol-rich ApoB-containing lipoproteins within the arterial wall.
+    src: { page: 250, quote: "The key initiating event in atherogenesis is the retention of LDL-C and other cholesterol-rich Apo B-containing lipoproteins within the arterial wall" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L19.045
+    kind: order
+    topic: athero
+    prompt: Order the steps of atherogenesis in the book's figure.
+    steps:
+      - ApoB lipoprotein is retained on subendothelial proteoglycans
+      - It is modified and aggregates
+      - Monocyte differentiates into a macrophage, which takes it up
+      - Cholesteryl ester accumulates and a foam cell forms
+      - The foam cell undergoes apoptosis
+    src: { page: 250, quote: "retention of LDL-C and other cholesterol-rich Apo B-containing lipoproteins within the arterial wall" }
+    status: unverified
+  - id: dm.L19.046
+    kind: mcq
+    topic: athero
+    stem: "In the subendothelium, a macrophage fills with cholesteryl ester from modified ApoB lipoproteins. What does it become?"
+    options: [A foam cell, A smooth muscle cell, An endothelial cell, A platelet aggregate]
+    answer: 0
+    why:
+      - "Correct: CE accumulation turns the macrophage into a foam cell, which may then undergo apoptosis."
+      - "The book's figure shows no transformation into smooth muscle."
+      - "Endothelial cells line the lumen; macrophages do not become them."
+      - "Platelets are not part of this step of the figure."
+    src: { page: 250, quote: "retention of LDL-C and other cholesterol-rich Apo B-containing lipoproteins within the arterial wall" }
+    status: unverified
+  # ---------- p250-251: lab measurement ----------
+  - id: dm.L19.047
+    kind: enumerate
+    topic: lab
+    prompt: Mention the laboratory measurements of lipids and lipoproteins.
+    points:
+      - Total cholesterol (TC)
+      - LDL-C
+      - HDL-C
+      - Triglycerides
+      - Non-HDL-C (TC minus HDL-C)
+      - Apolipoprotein B
+      - "Lipoprotein(a)"
+    pass: 5
+    src: { page: 250, quote: "Laboratory measurement of lipids and lipoproteins" }
+    status: unverified
+  - id: dm.L19.048
+    kind: cloze
+    topic: lab
+    text: "Non-HDL-C = {{c1::total cholesterol}} minus {{c2::HDL-C}}."
+    src: { page: 250, quote: "Non-HDL-C= TC - HDL-C" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L19.049
+    kind: card
+    topic: lab
+    front: What does non-HDL-C represent?
+    back: The cholesterol carried by all atherogenic ApoB-containing lipoproteins, including TG-rich VLDL and their remnants.
+    src: { page: 250, quote: "TC carried by all atherogenic ApoB-containing lipoproteins, including TG-rich particles in VLDL and their remnants." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L19.050
+    kind: card
+    topic: lab
+    front: Which particles does non-HDL cholesterol include (book figure)?
+    back: LDL, Lp(a), IDL, VLDL and chylomicron remnants.
+    src: { page: 250, quote: "TC carried by all atherogenic ApoB-containing lipoproteins, including TG-rich particles in VLDL and their remnants." }
+    status: unverified
+  - id: dm.L19.051
+    kind: card
+    topic: lab
+    front: Should a routine lipid profile be fasting?
+    back: No. Lipid testing can be done non-fasting.
+    src: { page: 251, quote: "Lipid testing can be done NON-fasting" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L19.052
+    kind: cloze
+    topic: lab
+    text: "A fasting lipid profile is recommended when TG is above {{c1::400 mg/dL}} or with a history of {{c2::familial dyslipidemia}}."
+    src: { page: 251, quote: "Fasting lipid profile is recommended for individuals with TG > 400 mg/dL, or having a history of familial dyslipidemia" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L19.053
+    kind: mcq
+    topic: lab
+    stem: "A 50-year-old woman has TC 240 mg/dL, HDL-C 50 mg/dL and TG 150 mg/dL on a non-fasting sample. What is her non-HDL-C?"
+    options: [190 mg/dL, 290 mg/dL, 90 mg/dL, 160 mg/dL]
+    answer: 0
+    why:
+      - "Correct: non-HDL-C = TC - HDL-C = 240 - 50."
+      - "This adds HDL-C instead of subtracting it."
+      - "This subtracts TG and HDL-C; TG is not part of the formula."
+      - "This subtracts TG/5 and HDL-C; that is the Friedewald LDL estimate, not non-HDL-C."
+    src: { page: 250, quote: "Non-HDL-C= TC - HDL-C" }
+    status: unverified
+  - id: dm.L19.054
+    kind: mcq
+    topic: lab
+    stem: "Which patient most needs a FASTING lipid profile?"
+    options:
+      - "A man whose non-fasting TG was 520 mg/dL"
+      - "A healthy 40-year-old having a first screen"
+      - "A woman on a statin for follow-up"
+      - "A man with type 2 diabetes and TG 160 mg/dL"
+    answer: 0
+    why:
+      - "Correct: TG above 400 mg/dL calls for a fasting profile."
+      - "Routine screening can be done non-fasting."
+      - "Follow-up on therapy can be non-fasting."
+      - "TG 160 is under 400 and he has no familial dyslipidemia."
+    src: { page: 251, quote: "Fasting lipid profile is recommended for individuals with TG > 400 mg/dL, or having a history of familial dyslipidemia" }
+    status: unverified
+  # ---------- cases ----------
+  - id: dm.L19.055
+    kind: case
+    topic: lab
+    stem: "A 42-year-old man comes for a check-up after his brother had an MI at 46. He has eaten breakfast."
+    steps:
+      - question: "Must he come back fasting for his lipid profile?"
+        options: ["No, a non-fasting sample is fine", "Yes, always fast 12 hours", "Yes, because of the family history alone", "Only total cholesterol can be measured non-fasting"]
+        answer: 0
+        why: "Lipid testing can be done non-fasting (p251). Fasting is for TG > 400 or familial dyslipidemia."
+      - reveal: "TC 250 mg/dL, HDL-C 40 mg/dL, TG 180 mg/dL."
+        question: "What is his non-HDL-C?"
+        options: [210 mg/dL, 290 mg/dL, 70 mg/dL, 174 mg/dL]
+        answer: 0
+        why: "Non-HDL-C = TC - HDL-C = 250 - 40 = 210 (p250)."
+      - question: "Given the premature CVD in his brother, which extra test does the book suggest?"
+        options: ["Lipoprotein(a)", Serum uric acid, Apo A-IV, Lipoprotein lipase activity]
+        answer: 0
+        why: "Lp(a) should be considered in selected patients with a family history of premature CVD (p249, p251)."
+      - reveal: "Lp(a) is 200 mg/dL."
+        question: "How does the book describe his lifetime ASCVD risk?"
+        options: ["Similar to heterozygous FH", Average for his age, Lower than average, Only raised if LDL-C is high]
+        answer: 0
+        why: "Lp(a) > 180 mg/dL carries a lifetime ASCVD risk similar to HeFH (p249)."
+    src: { page: 249, quote: "People with extremely high Lp(a) levels >180 mg/ dL have an increased lifetime risk of ASCVD similar to HeFH." }
+    status: unverified
+  - id: dm.L19.056
+    kind: case
+    topic: metabolism
+    stem: "A 30-year-old woman eats a fatty meal. Follow the fat."
+    steps:
+      - question: "The intestine packages dietary fat into which particle?"
+        options: [Chylomicron, VLDL, LDL, HDL]
+        answer: 0
+        why: "Dietary fat leaves the small intestine as chylomicrons (p247 figure)."
+      - question: "Which apolipoprotein marks that particle?"
+        options: [ApoB-48, ApoB-100, ApoA-I, "Apo(a)"]
+        answer: 0
+        why: "Chylomicrons carry ApoB-48 (p248 table)."
+      - question: "Which enzyme releases its fatty acids to muscle and fat?"
+        options: [Lipoprotein lipase, LCAT, Hepatic SCARB1, ABCA1]
+        answer: 0
+        why: "LPL hydrolyses the triglyceride; free fatty acids go to adipose tissue and muscle (p247)."
+      - question: "What happens to what is left?"
+        options: ["The chylomicron remnant is taken up by the liver", It becomes LDL in the blood, It becomes HDL, It is excreted in bile unchanged]
+        answer: 0
+        why: "The remnant goes to the liver (p247 figure); LDL comes from the VLDL-IDL pathway."
+    src: { page: 247, quote: "Lipoprotein Metabolism" }
+    status: unverified
+  - id: dm.L19.057
+    kind: essay
+    topic: structure
+    prompt: Describe the structure and functions of plasma lipoproteins.
+    outline:
+      - "Structure": ["Water-soluble carriers of hydrophobic lipids", "Hydrophilic envelope: phospholipids, free cholesterol, apolipoproteins", "Hydrophobic core: triglyceride and cholesteryl ester", "Vary in size and density"]
+      - "Functions": ["Deliver lipids to tissues for energy", "Steroid hormone production", "Bile acid formation"]
+      - "Apolipoproteins": ["Ligands for receptor binding", "Enzyme activators or inhibitors"]
+    src: { page: 246, quote: "Water-soluble way to transport hydrophobic lipids." }
+    status: unverified
+  # ---------- book questions (p251) ----------
+  - id: dm.L19.058
+    kind: mcq
+    topic: hdl
+    stem: "Which of the following is known as the \"good\" cholesterol?"
+    options: [Very low-density lipoprotein, Intermediate density lipoprotein, Low-density lipoprotein, High-density lipoprotein]
+    answer: 3
+    why:
+      - "VLDL is an atherogenic ApoB-100 particle (non-HDL)."
+      - "IDL is an atherogenic VLDL remnant."
+      - "LDL is the \"bad\" cholesterol."
+      - "Correct: HDL removes cholesterol from cells to the liver."
+    src: { page: 249, quote: "Known as \"good cholesterol\" as it prevents accumulation of cholesterol in blood vessels" }
+    status: unverified
+    tags: [book-question]
+  - id: dm.L19.059
+    kind: mcq
+    topic: structure
+    stem: "Which of the following is true regarding lipoproteins?"
+    options:
+      - "They are carbohydrate-lipid complexes."
+      - "They serve as transport vehicles for proteins in the blood."
+      - "Chylomicrons contain exogenous triglycerides."
+      - "VLDL is the precursor of chylomicrons."
+    answer: 2
+    why:
+      - "They are protein-lipid complexes (apolipoproteins plus lipids)."
+      - "They transport hydrophobic lipids, not proteins."
+      - "Correct: chylomicrons carry dietary (exogenous) fat from the intestine."
+      - "VLDL is made by the liver and is the precursor of IDL and LDL."
+    src: { page: 247, quote: "Lipoprotein Metabolism" }
+    status: unverified
+    tags: [book-question]
+  - id: dm.L19.060
+    kind: mcq
+    topic: burden
+    stem: "The most common site of premature atherosclerosis in dyslipidemia is:"
+    options: [Cerebrovascular disease, Coronary artery disease, Peripheral arterial disease, Aortic aneurysm]
+    answer: 1
+    why:
+      - "Stroke occurs, but less often than CAD."
+      - "Correct: coronary disease is the commonest premature atherosclerotic presentation (the book gives no key; HDL's benefit is quoted as lower CAD risk)."
+      - "PAD is less common than CAD."
+      - "Aneurysm is not the typical premature lesion."
+    src: { page: 249, quote: "associated with a reduced risk of CAD" }
+    status: unverified
+    tags: [book-question]

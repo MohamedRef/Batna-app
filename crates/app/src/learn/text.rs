@@ -5,7 +5,7 @@
 use batna_core::lesson::{Block, Span, blocks, spans};
 use dioxus::prelude::*;
 
-/// Paragraphs and bullet lists.
+/// Paragraphs, bullet lists and numbered lists.
 #[component]
 pub fn Rich(text: String, #[props(default)] class: Option<&'static str>) -> Element {
     let blocks = blocks(&text);
@@ -16,6 +16,13 @@ pub fn Rich(text: String, #[props(default)] class: Option<&'static str>) -> Elem
                     Block::Para(s) => rsx! { p { key: "{i}", {runs(s)} } },
                     Block::Bullets(items) => rsx! {
                         ul { key: "{i}",
+                            for (j , s) in items.into_iter().enumerate() {
+                                li { key: "{j}", {runs(s)} }
+                            }
+                        }
+                    },
+                    Block::Numbered(items) => rsx! {
+                        ol { key: "{i}",
                             for (j , s) in items.into_iter().enumerate() {
                                 li { key: "{j}", {runs(s)} }
                             }

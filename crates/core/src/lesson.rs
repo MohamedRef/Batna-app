@@ -276,43 +276,62 @@ pub struct Span {
 pub enum Block {
     Para(Vec<Span>),
     Bullets(Vec<Vec<Span>>),
+    /// Lines written `1. `, `2. `…: drawn as a numbered list, counted from 1.
+    Numbered(Vec<Vec<Span>>),
 }
 
-/// Splits lesson text into paragraphs (blank lines) and bullet lists
-/// (lines starting `- `), with `**bold**`, `==key terms==` and Latin runs
-/// marked.
+/// A list line: whether it is numbered, and its text. `- item`, or a number
+/// then `. ` or `) ` (`1. item`, `2) item`).
+fn list_item(line: &str) -> Option<(bool, &str)> {
+    if let Some(rest) = line.strip_prefix("- ") {
+        return Some((false, rest));
+    }
+    let digits = line.bytes().take_while(u8::is_ascii_digit).count();
+    if digits == 0 || digits > 2 {
+        return None;
+    }
+    let rest = &line[digits..];
+    rest.strip_prefix(". ").or_else(|| rest.strip_prefix(") ")).map(|r| (true, r))
+}
+
+/// Splits lesson text into paragraphs (blank lines) and lists (lines
+/// starting `- `, or `1. ` for a numbered one), with `**bold**`,
+/// `==key terms==` and Latin runs marked.
 pub fn blocks(text: &str) -> Vec<Block> {
     let mut out = Vec::new();
+    let flush = |out: &mut Vec<Block>, list: &mut Option<(bool, Vec<Vec<Span>>)>| {
+        if let Some((numbered, items)) = list.take() {
+            out.push(if numbered { Block::Numbered(items) } else { Block::Bullets(items) });
+        }
+    };
     for chunk in text.split("\n\n").map(str::trim).filter(|c| !c.is_empty()) {
-        let lines: Vec<&str> = chunk.lines().map(str::trim).filter(|l| !l.is_empty()).collect();
-        if lines.iter().all(|l| l.starts_with("- ")) {
-            out.push(Block::Bullets(lines.iter().map(|l| spans(&l[2..])).collect()));
-        } else {
-            let mut para = Vec::new();
-            let mut list = Vec::new();
-            for l in lines {
-                if let Some(b) = l.strip_prefix("- ") {
-                    list.push(spans(b));
-                } else {
-                    if !list.is_empty() {
+        let mut para: Vec<Span> = Vec::new();
+        let mut list: Option<(bool, Vec<Vec<Span>>)> = None;
+        for l in chunk.lines().map(str::trim).filter(|l| !l.is_empty()) {
+            match list_item(l) {
+                Some((numbered, item)) => {
+                    if !para.is_empty() {
                         out.push(Block::Para(std::mem::take(&mut para)));
-                        out.push(Block::Bullets(std::mem::take(&mut list)));
                     }
+                    if list.as_ref().is_some_and(|(n, _)| *n != numbered) {
+                        flush(&mut out, &mut list);
+                    }
+                    list.get_or_insert_with(|| (numbered, Vec::new())).1.push(spans(item));
+                }
+                None => {
+                    flush(&mut out, &mut list);
                     if !para.is_empty() {
                         para.push(Span { text: " ".into(), bold: false, key: false, latin: false });
                     }
                     para.extend(spans(l));
                 }
             }
-            if !para.is_empty() {
-                out.push(Block::Para(para));
-            }
-            if !list.is_empty() {
-                out.push(Block::Bullets(list));
-            }
         }
+        if !para.is_empty() {
+            out.push(Block::Para(para));
+        }
+        flush(&mut out, &mut list);
     }
-    out.retain(|b| !matches!(b, Block::Para(p) if p.is_empty()));
     out
 }
 
@@ -1102,6 +1121,18 @@ mod tests {
         // A list right under a lead-in line, with no blank line between.
         let b = blocks("الأسباب:\n- Viral\n- Alcohol");
         assert!(matches!(&b[..], [Block::Para(_), Block::Bullets(l)] if l.len() == 2));
+        // Numbered lines make a numbered list, also under a lead-in line.
+        let b = blocks("الخطوات:\n1. Resuscitate\n2. Risk-stratify (GBS)\n3) Endoscopy");
+        assert!(matches!(&b[..], [Block::Para(_), Block::Numbered(l)] if l.len() == 3), "{b:?}");
+        // A text line after a list starts a new paragraph.
+        let b = blocks("- A\n- B\nبعدها\n1. C");
+        assert!(
+            matches!(&b[..], [Block::Bullets(a), Block::Para(_), Block::Numbered(c)] if a.len() == 2 && c.len() == 1),
+            "{b:?}"
+        );
+        // A year or a dose at the start of a line is not a list.
+        assert!(matches!(&blocks("2024 guidelines.")[..], [Block::Para(_)]));
+        assert!(matches!(&blocks("100. mg")[..], [Block::Para(_)]));
     }
 
     #[test]

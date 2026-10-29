@@ -210,6 +210,9 @@ pub fn ImportCard() -> Element {
         }
         Step::Done(plan) => rsx! {
             p { role: "status", "{tx::IMPORT_DONE_1} {plan.changes()} {tx::IMPORT_DONE_2}" }
+            if plan.failed() > 0 {
+                p { class: "verify-error", role: "alert", "{tx::IMPORT_PARTIAL_1} {plan.failed()} {tx::IMPORT_PARTIAL_2}" }
+            }
             button { class: "verify-btn plain", onclick: move |_| step.set(Step::Pick), {tx::IMPORT_AGAIN} }
         },
         Step::Failed(e) => rsx! {

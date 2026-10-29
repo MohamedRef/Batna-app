@@ -367,10 +367,10 @@ impl ReviewBackend {
 
 impl StudyStore for ReviewBackend {
     fn record(&mut self, event: ReviewEvent) {
-        self.record_logged(event);
+        let _ = self.record_logged(event);
     }
 
-    fn record_logged(&mut self, event: ReviewEvent) -> Option<String> {
+    fn record_logged(&mut self, event: ReviewEvent) -> Result<Option<String>, String> {
         let id = event.item_id.clone();
         match self.store.append_review(event) {
             Ok(logged) => {
@@ -378,12 +378,13 @@ impl StudyStore for ReviewBackend {
                 self.log.push(logged);
                 self.replay();
                 self.changed();
-                Some(logged_id)
+                Ok(Some(logged_id))
             }
-            // Today shows the note, so a lost answer is never silent (#244).
+            // Today shows the note too, so a lost answer is never silent
+            // (#244); the session keeps the item open.
             Err(e) => {
                 super::write_failed(&format!("the answer to {id}"), &e);
-                None
+                Err(e.to_string())
             }
         }
     }
@@ -535,6 +536,28 @@ mod tests {
         ReviewBackend::new(store, catalog)
     }
 
+    #[test]
+    fn an_answer_that_isnt_saved_says_so_and_changes_nothing() {
+        let mut b = backend();
+        answer(&mut b, "hb.L01.001", Grade::Good, T0);
+        let before = b.states.get("hb.L01.001").cloned();
+        b.store.conn.lock().unwrap().execute("DROP TABLE sync_outbox", []).unwrap();
+        let got = StudyStore::record_logged(
+            &mut b,
+            ReviewEvent {
+                item_id: "hb.L01.001".into(),
+                grade: Grade::Again,
+                origin: Origin::Study,
+                at_ms: T0 + 60_000,
+                took_ms: 4000,
+            },
+        );
+        assert!(got.is_err());
+        assert_eq!(b.reviews_logged(), 1);
+        assert_eq!(b.states.get("hb.L01.001").cloned(), before);
+        assert!(super::super::write_error().is_some_and(|e| e.contains("hb.L01.001")));
+    }
+
     fn answer(b: &mut ReviewBackend, id: &str, grade: Grade, at_ms: i64) {
         StudyStore::record(
             b,
@@ -632,6 +655,7 @@ mod tests {
                 took_ms: 4000,
             },
         )
+        .unwrap()
         .unwrap();
         assert_eq!(b.reviews_logged(), 2);
         assert_ne!(b.states.get("hb.L01.001").cloned(), before_state);
@@ -661,6 +685,7 @@ mod tests {
                 took_ms: 4000,
             },
         )
+        .unwrap()
         .unwrap();
         assert!(!b.is_new("hb.L01.002"));
         assert!(b.retract(&first));

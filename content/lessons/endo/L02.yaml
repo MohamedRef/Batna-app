@@ -1,0 +1,715 @@
+schema: batna.lesson/v1
+lecture: endo.L02
+lessons:
+  # ------------------------------------------------------------------
+  - id: endo.L02.lesson1
+    title: "الـ pituitary في الحمل، والـ prolactinoma قبل الحمل"
+    hook: "الغدة بتكبر لوحدها في الحمل لحد الضعف تقريبًا. تخيل لو جواها ورم أصلًا."
+    minutes: 8
+    pages: [13, 15]
+    topics: [pituitary-physiology, prolactinoma]
+    goals:
+      - "تفهم ليه الـ pituitary بتكبر والـ prolactin بيعلى في الحمل"
+      - "تعرف أرقام علاج الـ prolactinoma بالجراحة والأدوية"
+      - "تعرف تجهّز ست عندها prolactinoma للحمل"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 13
+        quote: "The pituitary enlarges throughout pregnancy and may become hyperintense on scan."
+        title: "الغدة بتكبر"
+        text: |
+          الـ ==pituitary enlarges throughout pregnancy==، وممكن تبان **hyperintense** في الأشعة.
+
+          في رسمة الكتاب الحجم بيزيد كل trimester عن اللي قبله، وأكبر حاجة في التالت.
+      - kind: figure
+        page: 13
+        quote: "PRL axis during pregnancy"
+        title: "ليه الـ prolactin بيعلى؟"
+        alt: "Flow diagram. The placenta makes estrogen, which drives lactotroph hyperplasia in the maternal pituitary, so pituitary prolactin rises. TRH stimulates and dopamine inhibits the pituitary. Separately the decidua makes prolactin that dopamine does not inhibit, and amniotic fluid prolactin rises."
+        caption: "الـ estrogen بتاع المشيمة بيكبّر الـ lactotrophs. وكمان الـ decidua بتعمل prolactin مش بيسمع كلام الـ dopamine."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="E02a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+              <marker id="E02b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-bad"/></marker>
+            </defs>
+            <rect x="105" y="10" width="120" height="30" rx="8" class="fg-box"/>
+            <text x="122" y="30" class="t-sm t-b">Hypothalamus</text>
+            <text x="40" y="70" class="t-sm t-good">TRH (+)</text>
+            <text x="240" y="70" class="t-sm t-bad">Dopamine (−)</text>
+            <path d="M140 40L150 85" class="fg-arrow" marker-end="url(#E02a)"/>
+            <path d="M190 40L180 85" class="fg-arrow-bad" stroke-dasharray="4 3" marker-end="url(#E02b)"/>
+            <rect x="95" y="88" width="140" height="44" rx="10" class="fg-acc"/>
+            <text x="110" y="106" class="t-sm t-b">Maternal pituitary</text>
+            <text x="110" y="124" class="t-sm">lactotroph hyperplasia</text>
+            <path d="M165 132V160" class="fg-arrow" marker-end="url(#E02a)"/>
+            <text x="140" y="178" class="t-b">PRL ↑</text>
+            <rect x="10" y="220" width="120" height="40" rx="10" class="fg-box"/>
+            <text x="22" y="238" class="t-sm t-b">Placenta</text>
+            <text x="22" y="254" class="t-sm">estrogen</text>
+            <path d="M70 220L105 135" class="fg-arrow-acc" marker-end="url(#E02a)"/>
+            <rect x="170" y="210" width="150" height="62" rx="10" class="fg-bad"/>
+            <text x="180" y="230" class="t-sm t-b">Decidual PRL</text>
+            <text x="180" y="246" class="t-sm">not inhibited by dopamine</text>
+            <text x="180" y="262" class="t-sm">amniotic fluid PRL ↑</text>
+          </svg>
+      - kind: explain
+        page: 14
+        quote: "Pituitary adenomas are quite common, being found at autopsy in about 11% and clinically in 0.1% of persons."
+        title: "الـ pituitary adenomas والحمل"
+        text: |
+          - موجودة في **11%** في الـ autopsy، و **0.1%** clinically.
+          - بتأثر على الخصوبة بطريقتين: ==over-secretion== للهرمون، أو **hypopituitarism**.
+          - الحمل نفسه بيغيّر الهرمونات، فالتقييم بيبقى صعب، والعلاج لازم نفكر في تأثيره على الجنين.
+          - الـ ==hyperprolactinemia== سبب **ثلث** الـ female infertility.
+      - kind: table
+        page: 14
+        quote: "Surgical therapy is initially curative in approximately 80-90% of patients with microadenomas and rarely causes hypopituitarism."
+        title: "الجراحة للي عايزة تحمل"
+        columns: ["Tumour", "Cure", "Hypopituitarism"]
+        rows:
+          - ["Microadenoma", "80-90%", "Rare"]
+          - ["Macroadenoma", "30%", "Rises dramatically"]
+          - ["Both", "Recurrence ~20%", "-"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: explain
+        page: 14
+        quote: "generally dopamine agonists are the initial choice of therapy, including those planning pregnancy"
+        title: "الأدوية أولًا"
+        text: |
+          الـ ==dopamine agonists== هي العلاج الأول، حتى للي بتخطط للحمل.
+          - الأشهر: **bromocriptine** و **cabergoline**.
+          - **50-75%** من الـ macroadenomas بتصغر **50%**.
+      - kind: check
+        page: 15
+        quote: "Cabergoline is dosed once to twice weekly and is more effective and better tolerated than bromocriptine"
+        question: "Compared with bromocriptine, cabergoline is:"
+        options: ["Weekly dosing, more effective, better tolerated", "Daily dosing, less effective", "Equal but worse tolerated", "Contraindicated before pregnancy"]
+        answer: 0
+        why:
+          - "صح: مرة أو مرتين في الأسبوع، أحسن وأريح، وبيرجّع الـ ovulation في أكتر من 90%."
+          - "العكس."
+          - "الكتاب بيقول أحسن في الاتنين."
+          - "بيتستخدم، بس خد بالك من الـ half-life."
+      - kind: explain
+        page: 15
+        quote: "contraception should be used for 2-3 cycles to establish the intermenstrual interval prior to pregnancy"
+        title: "قبل ما تحمل"
+        text: |
+          - ==Contraception لمدة 2-3 cycles== علشان نعرف الـ intermenstrual interval بتاعها، فنكتشف الحمل بدري لما الدورة تتأخر.
+          - الـ cabergoline ليه ==long half-life==: الجنين بيتعرض له **أسبوع أو أكتر** بعد ما نوقفه.
+      - kind: reveal
+        page: 15
+        quote: "contraception should be used for 2-3 cycles to establish the intermenstrual interval prior to pregnancy"
+        prompt: "ليه معرفة ميعاد الدورة مهمة هنا بالذات؟"
+        answer: "لأننا هنوقف الـ dopamine agonist أول ما نعرف إنها حامل. لو الدورة منتظمة ومعروفة، أي تأخير يبان على طول، فالجنين يتعرض للدوا أقل وقت ممكن."
+      - kind: aside
+        tone: analogy
+        page: 13
+        quote: "The pituitary enlarges throughout pregnancy and may become hyperintense on scan."
+        text: "الـ sella زي أوضة صغيرة. في الحمل الـ pituitary بتتخن، ولو في ورم جوا كمان، الأوضة تضيق والـ optic chiasm اللي فوقها هو أول واحد يتزنق."
+      - kind: try
+        items: [endo.L02.001, endo.L02.007, endo.L02.009, endo.L02.012, endo.L02.014]
+    recap:
+      - "الـ pituitary بتكبر طول الحمل؛ estrogen ← lactotroph hyperplasia ← PRL ↑."
+      - "الـ decidual PRL مش بيتقفل بالـ dopamine."
+      - "Hyperprolactinemia = ثلث الـ female infertility."
+      - "جراحة: micro 80-90%، macro 30%، recurrence 20%."
+      - "Dopamine agonists أولًا؛ cabergoline أحسن؛ contraception 2-3 cycles قبل الحمل."
+    practice: [endo.L02.001, endo.L02.002, endo.L02.003, endo.L02.004, endo.L02.005, endo.L02.006, endo.L02.007, endo.L02.008, endo.L02.009, endo.L02.010, endo.L02.011, endo.L02.012, endo.L02.013, endo.L02.014, endo.L02.101, endo.L02.102]
+  # ------------------------------------------------------------------
+  - id: endo.L02.lesson2
+    title: "الـ prolactinoma أثناء الحمل والرضاعة"
+    hook: "أول ما تحمل وقّف الدوا. بس امتى نرجّعه؟ وامتى نولّد؟ وامتى نفتح؟"
+    minutes: 8
+    pages: [15, 17]
+    topics: [prolactinoma]
+    goals:
+      - "تعرف امتى نوقف وامتى نكمّل الـ dopamine agonist"
+      - "تعرف تتابع حسب حجم الورم"
+      - "تعرف تتصرف لو الورم كبر، وفي الرضاعة"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 15
+        quote: "discontinue dopamine agonist therapy as soon as they discover that they are pregnant"
+        title: "القاعدة"
+        text: |
+          ==Stop the dopamine agonist== أول ما تعرف إنها حامل.
+
+          **الاستثناء:** macroadenoma حملت وهي على العلاج، ومعملتش surgery أو radiation قبل كده، وخصوصًا لو الورم **invasive** أو لازق في الـ **optic chiasm**: ممكن نكمّل طول الحمل.
+      - kind: explain
+        page: 15
+        quote: "The stimulatory effect of the hormonal milieu of pregnancy and the withdrawal of the dopamine agonist may result in significant prolactinoma enlargement."
+        title: "بنوازن بين حاجتين"
+        text: |
+          1. الـ ==tumor enlargement== المتوقع: هرمونات الحمل بتنبّه الورم، ووقف الدوا بيشيل الفرامل.
+          2. أمان تعرض الجنين للدوا في أول كام أسبوع.
+      - kind: sort
+        page: 16
+        quote: "Large tumors and those with extrasellar extension: formal visual field testing should be done each trimester."
+        prompt: "إيه المتابعة المناسبة؟"
+        bins: ["Clinical review each trimester", "Formal visual fields each trimester"]
+        cards:
+          - { text: "Microadenoma", bin: 0 }
+          - { text: "Intrasellar macroadenoma", bin: 0 }
+          - { text: "Large tumour", bin: 1 }
+          - { text: "Extrasellar extension", bin: 1 }
+        why: "الصغير والـ intrasellar مش محتاجين serial MRI ولا visual fields، بس clinical review كل trimester. الكبير أو اللي طالع برا الـ sella: visual fields كل trimester."
+      - kind: aside
+        tone: trap
+        page: 16
+        quote: "It is not necessary to measure serum prolactin throughout pregnancy."
+        text: "فخ: متقيسش الـ serum prolactin في الحمل. هو أصلًا بيعلى طبيعي (الـ lactotrophs والـ decidua)، فمش هيقولك حاجة عن الورم."
+      - kind: order
+        page: 16
+        quote: "Reinstitution of bromocriptine or cabergoline therapy generally is successful in reducing tumor size."
+        prompt: "الورم كبر في الحمل. رتّب الخطوات:"
+        steps:
+          - "Restart bromocriptine or cabergoline"
+          - "Deliver if pregnancy is advanced enough"
+          - "Surgical decompression if these fail"
+        why: "الدوا غالبًا بيصغّر الورم. لو الحمل متقدم كفاية، نولّد. الجراحة آخر حل (زي أي جراحة، بس خطر الـ hypopituitarism أعلى)."
+      - kind: table
+        page: 17
+        quote: "Cabergoline has been utilized in the first trimester in more than 600 human pregnancies."
+        title: "الدوا والجنين"
+        columns: ["Drug", "Pregnancy fact"]
+        rows:
+          - ["Bromocriptine", "Crosses placenta; not continuously through gestation; early weeks safe"]
+          - ["Cabergoline", ">600 first-trimester pregnancies, no rise in abortion or anomalies"]
+          - ["Cabergoline", "Long half-life: exposure 1+ week after stopping"]
+        hide: [[0, 1], [1, 1]]
+      - kind: explain
+        page: 17
+        quote: "Therapeutic options for tumors extending outside the sella include pre- pregnancy surgical debulking"
+        title: "ورم طالع برا الـ sella وعايزة تحمل؟"
+        text: |
+          3 اختيارات:
+          - **Pre-pregnancy surgical debulking**.
+          - متابعة أكتر من غير dopamine agonist.
+          - ==Continuous bromocriptine== طول الحمل لو في severe visual symptoms.
+      - kind: explain
+        page: 17
+        quote: "dopamine agonists must be withheld until the period of breastfeeding is over, as they will cause a reduction in PRL and cessation of milk production"
+        title: "الرضاعة"
+        text: |
+          - الرضاعة بتعلّي الـ prolactin طبيعي، بس ==مفيش دليل إن الـ suckling بيكبّر الورم==.
+          - الـ dopamine agonists **ممنوعة** طول الرضاعة، لأنها بتوقف اللبن.
+          - نعيد التقييم بعد **شهرين** من الولادة أو من وقف الرضاعة. الـ PRL ممكن يقل أو يرجع طبيعي.
+      - kind: case
+        page: 15
+        quote: "especially if the tumor is invasive or is abutting the optic chiasm"
+        stem: "A woman with a 2 cm invasive macroprolactinoma abutting the chiasm conceives on cabergoline. No prior surgery or radiotherapy."
+        steps:
+          - question: "What about cabergoline?"
+            options: ["Continuing it through pregnancy may be prudent", "Stop it at once like everyone", "Switch to octreotide", "Urgent surgery"]
+            answer: 0
+            why: "ده بالظبط الاستثناء: macroadenoma invasive أو لازق في الـ chiasm من غير surgery أو radiation قبل كده."
+          - question: "Monitoring?"
+            options: ["Formal visual fields each trimester", "Monthly prolactin", "No monitoring", "Weekly MRI"]
+            answer: 0
+            why: "الورم الكبير: visual fields كل trimester، والـ prolactin مش مفيد."
+      - kind: try
+        items: [endo.L02.015, endo.L02.016, endo.L02.019, endo.L02.021, endo.L02.027]
+    recap:
+      - "وقّف الـ dopamine agonist أول ما تحمل؛ إلا macroadenoma invasive/جنب الـ chiasm."
+      - "Micro/intrasellar: clinical كل trimester. Large/extrasellar: visual fields كل trimester. مفيش PRL."
+      - "الورم كبر: رجّع الدوا ← ولّد لو متقدمة ← جراحة لو فشلوا."
+      - "Bromocriptine بيعدّي المشيمة؛ cabergoline آمن في >600 حمل."
+      - "الرضاعة مسموحة؛ الدوا ممنوع لحد ما تخلص؛ تقييم بعد شهرين."
+    practice: [endo.L02.015, endo.L02.016, endo.L02.017, endo.L02.018, endo.L02.019, endo.L02.020, endo.L02.021, endo.L02.022, endo.L02.023, endo.L02.024, endo.L02.025, endo.L02.026, endo.L02.027, endo.L02.028, endo.L02.103, endo.L02.104, endo.L02.105, endo.L02.106, endo.L02.125, endo.L02.128]
+  # ------------------------------------------------------------------
+  - id: endo.L02.lesson3
+    title: "Cushing في الحمل: الحمل نفسه بيقلّد Cushing"
+    hook: "تخن، ضغط، سكر، و striae. ده Cushing ولا حمل عادي؟ الفرق في اللون."
+    minutes: 9
+    pages: [18, 20]
+    topics: [pituitary-physiology, cushing]
+    goals:
+      - "تفهم ليه الـ cortisol عالي في الحمل الطبيعي"
+      - "تعرف الـ clues والتحاليل اللي تنفع واللي متنفعش"
+      - "تعرف العلاج حسب الـ trimester"
+    status: unverified
+    steps:
+      - kind: figure
+        page: 18
+        quote: "Cortisol Cortisone"
+        title: "الـ HPA axis في الحمل"
+        alt: "Diagram. Placental CRH and placental ACTH drive the maternal adrenal, so cortisol rises. Estrogen raises CBG, so bound cortisol rises; free and urinary cortisol rise; progesterone causes cortisol resistance. Placental 11-beta HSD2 converts cortisol to cortisone and protects the fetus."
+        caption: "المشيمة بتعمل CRH و ACTH بنفسها، فالـ cortisol بيعلى طبيعي. الجنين محمي بالـ 11β-HSD2."
+        svg: |
+          <svg viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="E02c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="200" y="10" width="120" height="50" rx="10" class="fg-acc"/>
+            <text x="212" y="30" class="t-sm t-b">Placenta</text>
+            <text x="212" y="48" class="t-sm">CRH, ACTH</text>
+            <rect x="10" y="10" width="140" height="50" rx="10" class="fg-box"/>
+            <text x="22" y="30" class="t-sm t-b">Maternal pituitary</text>
+            <text x="22" y="48" class="t-sm">ACTH (set point altered)</text>
+            <path d="M80 60L120 100" class="fg-arrow" marker-end="url(#E02c)"/>
+            <path d="M250 60L190 100" class="fg-arrow-acc" marker-end="url(#E02c)"/>
+            <rect x="95" y="102" width="140" height="40" rx="10" class="fg-box"/>
+            <text x="108" y="127" class="t-sm t-b">Maternal adrenal</text>
+            <path d="M165 142V170" class="fg-arrow" marker-end="url(#E02c)"/>
+            <text x="130" y="188" class="t-b">Cortisol ↑</text>
+            <text x="10" y="222" class="t-sm">Estrogen → CBG ↑ → bound cortisol ↑</text>
+            <text x="10" y="242" class="t-sm">Free cortisol ↑ → urinary cortisol ↑</text>
+            <text x="10" y="262" class="t-sm">Progesterone → cortisol resistance</text>
+            <rect x="10" y="280" width="310" height="40" rx="10" class="fg-good"/>
+            <text x="20" y="298" class="t-sm t-b">11β-HSD2 (placenta): cortisol → cortisone</text>
+            <text x="20" y="313" class="t-sm">protects the fetus from maternal hypercortisolism</text>
+          </svg>
+      - kind: explain
+        page: 18
+        quote: "Half of the reported gestational CS cases have adrenal causes, and about 40% are Cushing’s disease (CD)"
+        title: "Cushing's والحمل"
+        text: |
+          - الحمل ==نادر== في Cushing's (الـ cortisol بيعطّل الخصوبة).
+          - الأسباب زي غير الحوامل، بس: **نص** الحالات ==adrenal==، و **40%** Cushing's disease.
+          - في كمان **cyclical CD** بـ ACTH متذبذب.
+          - المضاعفات: gestational diabetes، hypertension، pre-eclampsia، eclampsia، CHF، pulmonary edema.
+      - kind: reveal
+        page: 19
+        quote: "In normal pregnancy, the striae are usually white in contrast to large purple striae in CS."
+        prompt: "ست حامل عندها تخن وضغط وسكر و striae. إزاي تفرّق Cushing من الحمل العادي؟"
+        answer: |
+          الحمل العادي بيعمل weight gain، hypertension، glucose intolerance، و striae كمان. الـ clues اللي تقول Cushing:
+          - **Hypokalemia**.
+          - **Muscle weakness**.
+          - **Pathological fractures**.
+          - **Large purple** striae (الحمل العادي striae **بيضا**).
+          - Hirsutism و acne = androgen زيادة.
+      - kind: table
+        page: 19
+        quote: "UFC has been suggested as the best choice for screening of CS during pregnancy."
+        title: "التحاليل في الحمل"
+        columns: ["Test", "In pregnancy"]
+        rows:
+          - ["Dexamethasone suppression", "Avoid: false positive (blunted response)"]
+          - ["Circadian rhythm", "Preserved; loss is a clue, nadir higher"]
+          - ["24-h UFC", "Best screen; >3x upper limit in 2nd/3rd trimester"]
+          - ["Plasma ACTH", "ACTH-dependent or not; mind adrenal majority"]
+          - ["IPSS", "Not routine"]
+        hide: [[0, 1], [2, 1], [4, 1]]
+      - kind: check
+        page: 19
+        quote: "UFC levels are unchanged during the first trimester, but levels are increased up to threefold in the second and third trimesters."
+        question: "At 30 weeks, UFC is 2 times the upper limit. Interpretation?"
+        options: ["Not diagnostic; normal pregnancy raises UFC up to threefold", "Diagnostic of Cushing's", "Proves adrenal Cushing's", "Ignore UFC in pregnancy"]
+        answer: 0
+        why:
+          - "صح: في التاني والتالت الـ UFC بيعلى لـ 3 أضعاف طبيعي؛ اللي يتحسب أكتر من 3 أضعاف."
+          - "لسه جوه حدود الحمل الطبيعي."
+          - "الـ UFC مش بيفرّق السبب."
+          - "بالعكس، هو أحسن screening."
+      - kind: aside
+        tone: exam
+        page: 19
+        quote: "the use of a dexamethasone suppression test should not be used during pregnancy"
+        text: "Endocrine Society 2008: متعملش dexamethasone suppression test في الحمل. الـ low dose مش بيكبت الـ cortisol أصلًا في الحمل، فهتطلع false positive."
+      - kind: explain
+        page: 20
+        quote: "Adrenal computerized tomography (CT) scans should be avoided, and pituitary MRI should be reserved for patients for whom pituitary surgery is planned."
+        title: "الأشعة"
+        text: |
+          - ==Adrenal CT ممنوعة== (radiation).
+          - الـ **pituitary MRI** بس لو هنعمل جراحة.
+          - مشكلة: الـ CD غالبًا **microadenoma**، والغدة الكبيرة في الحمل ممكن تخبيه.
+      - kind: figure
+        page: 20
+        quote: "Surgery is the treatment of choice for pregnant women with CD during the second trimester."
+        title: "العلاج على خط الـ trimesters"
+        alt: "A horizontal timeline of three trimesters. First trimester: medical therapy by severity, then surgery in the second. Second trimester: surgery is the treatment of choice. Late third trimester: medical therapy and surgery after delivery. Below: metyrapone is the drug of choice; watch for adrenal insufficiency."
+        caption: "الـ trimester التاني هو شباك الجراحة. قبله وبعده metyrapone."
+        svg: |
+          <svg viewBox="0 0 330 220" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="20" width="100" height="40" class="fg-box"/>
+            <rect x="110" y="20" width="110" height="40" class="fg-good"/>
+            <rect x="220" y="20" width="100" height="40" class="fg-box"/>
+            <text x="38" y="45" class="t-sm t-b">1st</text>
+            <text x="148" y="45" class="t-sm t-b">2nd</text>
+            <text x="255" y="45" class="t-sm t-b">3rd</text>
+            <text x="14" y="82" class="t-sm">Medical by</text>
+            <text x="14" y="98" class="t-sm">severity, then</text>
+            <text x="14" y="114" class="t-sm">surgery in 2nd</text>
+            <text x="116" y="82" class="t-sm t-b t-good">SURGERY</text>
+            <text x="116" y="98" class="t-sm">treatment of</text>
+            <text x="116" y="114" class="t-sm">choice</text>
+            <text x="224" y="82" class="t-sm">Late: medical,</text>
+            <text x="224" y="98" class="t-sm">surgery</text>
+            <text x="224" y="114" class="t-sm">postpartum</text>
+            <rect x="10" y="140" width="310" height="66" rx="10" class="fg-acc"/>
+            <text x="22" y="164" class="t-sm t-b">Drug of choice: metyrapone</text>
+            <text x="22" y="186" class="t-sm">After surgery or drugs: watch for</text>
+            <text x="22" y="200" class="t-sm t-b">adrenal insufficiency</text>
+          </svg>
+      - kind: case
+        page: 20
+        quote: "For cases with delayed diagnosis late in the third trimester, medical treatment is preferred, and surgery is postponed to the postpartum period."
+        stem: "Cushing's disease is confirmed at 35 weeks."
+        steps:
+          - question: "Plan?"
+            options: ["Metyrapone now, pituitary surgery after delivery", "Pituitary surgery now", "Bilateral adrenalectomy", "No treatment"]
+            answer: 0
+            why: "متأخر في التالت: medical (metyrapone) والجراحة بعد الولادة."
+          - question: "After delivery and surgery, what is the key risk?"
+            options: ["Adrenal insufficiency", "Thyroid storm", "Hyperprolactinaemia", "DI only"]
+            answer: 0
+            why: "أي علاج للـ CD في الحمل: تابع وعالج الـ adrenal insufficiency."
+      - kind: try
+        items: [endo.L02.032, endo.L02.036, endo.L02.040, endo.L02.041, endo.L02.046]
+    recap:
+      - "الـ cortisol عالي طبيعي في الحمل (CRH/ACTH من المشيمة، CBG ↑)؛ 11β-HSD2 بيحمي الجنين."
+      - "Gestational CS: نص adrenal، 40% CD."
+      - "Clues: hypokalemia، weakness، fractures، purple striae."
+      - "مفيش DST؛ UFC أحسن screen (>3x في التاني والتالت)."
+      - "Adrenal CT ممنوعة؛ MRI لو هنعمل جراحة."
+      - "Trimester 2 = surgery؛ metyrapone قبله وبعده؛ خلي بالك من الـ adrenal insufficiency."
+    practice: [endo.L02.029, endo.L02.030, endo.L02.031, endo.L02.032, endo.L02.033, endo.L02.034, endo.L02.035, endo.L02.036, endo.L02.037, endo.L02.038, endo.L02.039, endo.L02.040, endo.L02.041, endo.L02.042, endo.L02.043, endo.L02.044, endo.L02.045, endo.L02.046, endo.L02.047, endo.L02.048, endo.L02.107, endo.L02.108, endo.L02.109, endo.L02.110, endo.L02.111, endo.L02.126]
+  # ------------------------------------------------------------------
+  - id: endo.L02.lesson4
+    title: "Acromegaly، Sheehan، hypophysitis و DI"
+    hook: "في الحمل في GH تاني جاي من المشيمة، وإنزيم بياكل الـ vasopressin. الحمل بيلخبط كل الحسابات."
+    minutes: 10
+    pages: [21, 24]
+    topics: [pituitary-physiology, acromegaly, hypophysitis-sheehan, di]
+    goals:
+      - "تعرف الـ placental GH وليه بيصعّب تشخيص الـ acromegaly"
+      - "تفرّق Sheehan's من lymphocytic hypophysitis"
+      - "تعرف علاج الـ DI في الحمل"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 21
+        quote: "Detected at Sth week, and peaks at 35—37th weeks -Affected neither by GHRH nor by ghrelin -Binds GHBP"
+        title: "الـ GH بتاع المشيمة (GH-V)"
+        text: |
+          المشيمة بتفرز ==GH-V== بشكل **continuous**:
+          - بيبان من **الأسبوع 5** ويوصل للـ peak في **35-37**.
+          - مش بيتأثر بالـ GHRH ولا الـ ghrelin، وبيرتبط بالـ GHBP.
+          - بيعلّي الـ **IGF-1** (growth-promoting للجنين والمشيمة)، والـ IGF-1 بيكبت الـ GH بتاع الـ pituitary.
+      - kind: explain
+        page: 21
+        quote: "Glucose intolerance occurs in 50% of patients with Acromegaly, with overt diabetes mellitus in 10-20%."
+        title: "Acromegaly والحمل"
+        text: |
+          - الـ **infertility** شائعة، وكتير محتاجين dopamine agonist علشان يحملوا.
+          - في دراسة على 24 حامل، **4 بس (17%)** الورم كبر وعمل visual field defect.
+          - تابع الـ macroadenoma بالأعراض والـ visual fields، وكمان glucose و BP والقلب.
+          - Glucose intolerance **50%**، DM صريح **10-20%**.
+          - ==GH does not cross the placenta==، والـ macrosomia سببها سكر الأم.
+      - kind: reveal
+        page: 22
+        quote: "a pulsatility of 13-19 pulses per 24 hours, vs. the tonic secretion seen with the placental variant"
+        prompt: "ليه تشخيص الـ acromegaly في الحمل صعب، وإيه اللي يفرّق؟"
+        answer: |
+          - التحاليل العادية مش بتفرّق بين GH الـ pituitary و GH المشيمة.
+          - الـ **IGF-1** عالي في النص التاني من أي حمل.
+          - **الفرق:** GH الـ acromegaly **pulsatile** (13-19 pulse في 24 ساعة)، والمشيمي **tonic**. وبعد الولادة المشيمي بيختفي خلال **24 ساعة**.
+      - kind: table
+        page: 23
+        quote: "somatostatin analogs should be discontinued if pregnancy is considered and that contraception be used"
+        title: "أدوية الـ acromegaly في الحمل"
+        columns: ["Drug", "Pregnancy"]
+        rows:
+          - ["Dopamine agonist", "Controls 10%; better if GH + PRL co-secretion"]
+          - ["Somatostatin analogue", "Crosses placenta; stop if pregnancy considered"]
+          - ["Pegvisomant", "Safety not established"]
+          - ["Stopping therapy", "9-12 months off: no real harm long-term"]
+        hide: [[0, 1], [1, 1], [3, 1]]
+      - kind: aside
+        tone: tip
+        page: 22
+        quote: "Octreotide binds to somatostatin receptors in the placenta and crosses the placenta"
+        text: "ليه الـ octreotide مقلق؟ بيعدّي المشيمة، والـ somatostatin receptors منتشرة في أنسجة الجنين وخصوصًا المخ. كمان الـ short-acting قلل الـ uterine artery flow، وجنين عمل IUGR اتحسن لما قلّلوا جرعة الـ LAR."
+      - kind: figure
+        page: 24
+        quote: "Compression of blood supply"
+        title: "ليه الـ pituitary بتموت بعد الولادة؟"
+        alt: "Flowchart. Placental estrogen causes lactotroph hyperplasia and pituitary enlargement, compressing its own blood supply; a small sella compresses the enlarged pituitary; severe postpartum haemorrhage causes hypotension or shock; DIC also contributes. All make the pituitary susceptible to ischaemia, leading to postpartum necrosis and hypopituitarism, which pituitary autoimmunity may worsen."
+        caption: "غدة كبيرة في أوضة ضيقة، وبعدين نزيف يقطع الدم. ده Sheehan."
+        svg: |
+          <svg viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="E02d" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="10" y="10" width="150" height="56" rx="8" class="fg-box"/>
+            <text x="18" y="28" class="t-sm">Estrogen → lactotroph</text>
+            <text x="18" y="44" class="t-sm">hyperplasia → big gland</text>
+            <text x="18" y="60" class="t-sm">squeezes its blood</text>
+            <rect x="170" y="10" width="150" height="40" rx="8" class="fg-box"/>
+            <text x="178" y="34" class="t-sm">Small sella size</text>
+            <rect x="10" y="80" width="150" height="40" rx="8" class="fg-bad"/>
+            <text x="18" y="98" class="t-sm t-b">Severe PPH</text>
+            <text x="18" y="113" class="t-sm">hypotension / shock</text>
+            <rect x="170" y="64" width="150" height="40" rx="8" class="fg-box"/>
+            <text x="178" y="88" class="t-sm">DIC</text>
+            <path d="M85 120L150 150" class="fg-arrow" marker-end="url(#E02d)"/>
+            <path d="M245 104L185 150" class="fg-arrow" marker-end="url(#E02d)"/>
+            <rect x="80" y="152" width="170" height="40" rx="20" class="fg-acc"/>
+            <text x="92" y="170" class="t-sm t-b">Pituitary susceptible</text>
+            <text x="92" y="185" class="t-sm">to ischaemia</text>
+            <path d="M165 192V218" class="fg-arrow" marker-end="url(#E02d)"/>
+            <text x="95" y="236" class="t-sm t-b">Postpartum pituitary necrosis</text>
+            <path d="M165 244V266" class="fg-arrow" marker-end="url(#E02d)"/>
+            <text x="120" y="284" class="t-sm t-b t-bad">Hypopituitarism</text>
+            <text x="20" y="315" class="t-sm t-mut">+ pituitary autoimmunity may worsen it</text>
+          </svg>
+      - kind: table
+        page: 23
+        quote: "The initial clinical feature in post partum necrosis is failure to lactate; failure to resume normal menstrual periods is the clue for the diagnosis."
+        title: "Sheehan's ولا hypophysitis؟"
+        columns: ["", "Sheehan's", "Lymphocytic hypophysitis"]
+        rows:
+          - ["Cause", "PPH, hypotension + artery spasm", "Autoimmune inflammation"]
+          - ["Timing", "After delivery; may show years later", "Late pregnancy or early puerperium"]
+          - ["Clue", "Failure to lactate, then no periods", "DD: large prolactinoma"]
+          - ["Treatment", "Replace hormones", "Corticosteroids"]
+        hide: [[0, 1], [1, 2], [2, 1], [3, 2]]
+      - kind: aside
+        tone: exam
+        page: 23
+        quote: "The degree of hypopitutirism does not correlate with the degree of Hge."
+        text: "Sheehan's: درجة الـ hypopituitarism **مالهاش علاقة** بكمية النزيف، والـ **posterior pituitary** غالبًا سليمة، وأحيانًا الخصوبة بترجع."
+      - kind: explain
+        page: 24
+        quote: "Gestational DI is a rare endocrinopathy due to excessive vasopressinase activity."
+        title: "الـ DI في الحمل"
+        text: |
+          - ==Gestational DI==: بسبب **vasopressinase** زيادة من المشيمة.
+          - الـ mild DI ممكن يسوء، والـ asymptomatic تبقى symptomatic.
+          - الـ pitressin tannate oil والـ lysine AVP spray بيتكسروا بالإنزيم، أما ==desmopressin لأ==.
+          - Desmopressin آمن، إلا خطر صغير لـ uterine contractility (شبه الـ oxytocin).
+          - الرضاعة تمام: كمية قليلة في اللبن، وامتصاصه من الـ GIT ضعيف.
+      - kind: check
+        page: 24
+        quote: "but not with desmopressin since it is not degraded by vasopressinase"
+        question: "Why does desmopressin still work in gestational DI?"
+        options: ["Vasopressinase does not degrade it", "It increases vasopressinase", "It acts on the placenta", "It is given IV only"]
+        answer: 0
+        why:
+          - "صح: الـ desmopressin مش بيتكسر بالـ vasopressinase."
+          - "بالعكس، الإنزيم هو المشكلة."
+          - "مش ده الميكانيزم."
+          - "مش السبب."
+      - kind: try
+        items: [endo.L02.049, endo.L02.057, endo.L02.063, endo.L02.068, endo.L02.073]
+    recap:
+      - "GH-V: من الأسبوع 5، peak 35-37، continuous، بيعلّي IGF-1."
+      - "Acromegaly: GH مش بيعدّي المشيمة؛ IGF-1 مش مفيد؛ pituitary GH pulsatile vs placental tonic."
+      - "Somatostatin analogues: وقّفها لو بتخطط للحمل؛ 9-12 شهر مفيش مشكلة."
+      - "Sheehan: failure to lactate أول حاجة، no periods = clue؛ posterior سليمة."
+      - "Hypophysitis: autoimmune آخر الحمل/أول النفاس؛ DD prolactinoma؛ steroids."
+      - "Gestational DI = vasopressinase؛ desmopressin هو الحل."
+    practice: [endo.L02.049, endo.L02.050, endo.L02.051, endo.L02.052, endo.L02.053, endo.L02.054, endo.L02.055, endo.L02.056, endo.L02.057, endo.L02.058, endo.L02.059, endo.L02.060, endo.L02.061, endo.L02.062, endo.L02.063, endo.L02.064, endo.L02.065, endo.L02.066, endo.L02.067, endo.L02.068, endo.L02.069, endo.L02.070, endo.L02.071, endo.L02.072, endo.L02.073, endo.L02.074, endo.L02.075, endo.L02.076, endo.L02.112, endo.L02.113, endo.L02.114, endo.L02.115, endo.L02.116, endo.L02.117, endo.L02.118, endo.L02.129, endo.L02.130, endo.L02.132, endo.L02.133]
+  # ------------------------------------------------------------------
+  - id: endo.L02.lesson5
+    title: "الغدة الدرقية في الحمل: hyper و hypo"
+    hook: "الـ total T4 عالي، والغدة كبيرة، والنبض سريع. وكل ده ممكن يبقى حمل طبيعي."
+    minutes: 9
+    pages: [25, 28]
+    topics: [thyroid-screening, hyperthyroid, hypothyroid]
+    goals:
+      - "تعرف مين نعمله thyroid screening في الحمل"
+      - "تشخّص الـ hyperthyroidism صح وتعرف خطر الـ TSHR antibodies"
+      - "تعرف مضاعفات الـ hypothyroidism وعلاجه"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 25
+        quote: "SCREENING FOR THYROID DYSFUNCTION DURING PREGNANCY"
+        title: "مين نعمله screening؟"
+        text: |
+          ==عشر فئات==:
+          1. تاريخ hyper أو hypo، أو PPT، أو lobectomy.
+          2. Family history.
+          3. Goiter.
+          4. Thyroid antibodies معروفة.
+          5. أعراض أو علامات، ومنها anemia، cholesterol عالي، hyponatremia.
+          6. Type 1 diabetes.
+          7. أمراض autoimmune تانية.
+          8. Infertility (TSH من ضمن الـ work-up).
+          9. Head or neck irradiation.
+          10. Miscarriage أو preterm delivery قبل كده.
+      - kind: mnemonic
+        page: 25
+        quote: "Immunological modifications. Relative iodine deficiency. Changes in thyroid hormone metabolism Direct effect of HCG on the thyroid gland."
+        word: "IIMH"
+        parts:
+          - { key: "I", text: "Immunological modifications" }
+          - { key: "I", text: "Iodine: relative deficiency" }
+          - { key: "M", text: "Metabolism of thyroid hormone changes" }
+          - { key: "H", text: "hCG acts directly on the thyroid" }
+        hook: "الحمل بيلعب في الغدة بـ 4 طرق: **I-I-M-H**. الـ hCG شبه الـ TSH، فبيقدر ينبّه الغدة نفسها."
+      - kind: explain
+        page: 26
+        quote: "the combination of elevated FT4 and suppressed TSH levels (0.1 mu/L)"
+        title: "تشخيص الـ hyperthyroidism"
+        text: |
+          الحمل والـ hyperthyroidism الاتنين فيهم: thyroid enlargement، hyperdynamic circulation، و ==total T3 و T4 عاليين==.
+
+          ==أدق تحليل==: **FT4 عالي + TSH suppressed (0.1 mU/L)**.
+
+          وأي ست عندها **severe hyperemesis gravidarum** نعملها thyroid function.
+      - kind: reveal
+        page: 26
+        quote: "In both conditions total T3 and T4 are elevated."
+        prompt: "ليه الـ total T4 مينفعش في الحمل؟"
+        answer: "الـ estrogen بيعلّي الـ thyroid-binding globulin، فالـ total (bound + free) بيعلى حتى لو الست euthyroid. علشان كده نعتمد على الـ free T4 مع الـ TSH. (الربط بالـ TBG فسيولوجيا مقبولة؛ الكتاب ذكر إن الـ total عالي في الاتنين.)"
+      - kind: sort
+        page: 26
+        quote: "the risk of fetal & neonatal hyperthyroidism depends on level of TSHR antibody in mother"
+        prompt: "خطر الـ fetal/neonatal hyperthyroidism:"
+        bins: ["Negligible", "Measure TSHR antibodies"]
+        cards:
+          - { text: "Euthyroid, had ATDs in the past, none now", bin: 0 }
+          - { text: "Euthyroid after radioiodine", bin: 1 }
+          - { text: "Euthyroid after thyroid surgery", bin: 1 }
+          - { text: "On ATDs for active Graves' (recheck 3rd trimester)", bin: 1 }
+        why: "اللي خدت أدوية بس، الـ antibodies اختفت غالبًا. اللي اتعالجت بـ RAI أو جراحة، الغدة راحت بس الـ antibodies ممكن تكون لسه موجودة وتعدّي للجنين. ولو الـ titres منزلتش في التاني، فكّر في fetal hyperthyroidism."
+      - kind: explain
+        page: 27
+        quote: "RAI is absolutely contraindicated."
+        title: "علاج Graves' في الحمل"
+        text: |
+          - ==Antithyroid drugs بأقل جرعة==.
+          - الـ **iodine** مينفعش كعلاج لأي مدة.
+          - ==RAI absolutely contraindicated==.
+          - الـ propranolol: محل جدل.
+          - بعد الولادة: ATDs، ونتابع TSH و thyroxine بتوع البيبي.
+
+          لو مش متحكم فيه: preeclampsia، fetal malformations، premature delivery، low birth weight.
+      - kind: table
+        page: 28
+        quote: "Premature birth. Fetal and perinatal death. Disorders of brain development. Low IQ Scores. Fetal respiratory distress. Low birth weight. Cretinism."
+        title: "مضاعفات الـ hypothyroidism"
+        columns: ["Mother", "Fetus"]
+        rows:
+          - ["Abortion", "Premature birth"]
+          - ["Gestational hypertension", "Fetal and perinatal death"]
+          - ["Increased CS, anemia", "Brain development disorders, low IQ"]
+          - ["Placental abruption", "Respiratory distress, low birth weight"]
+          - ["Preterm labour, PPH", "Cretinism"]
+        hide: [[2, 1], [4, 1]]
+      - kind: check
+        page: 28
+        quote: "Clinicians must recognize the need to increase thyroxin replacement therapy in pregnant women."
+        question: "A woman on L-T4 becomes pregnant. Her dose usually:"
+        options: ["Needs increasing, by an amount that depends on the cause", "Stays the same", "Should be stopped", "Is halved"]
+        answer: 0
+        why:
+          - "صح: لازم نزوّد، والزيادة تعتمد جزئيًا على السبب."
+          - "الاحتياج بيزيد في الحمل."
+          - "الـ hypothyroidism بيضر الأم والجنين."
+          - "عكس المطلوب."
+      - kind: aside
+        tone: trap
+        page: 27
+        quote: "Hypothyroidism has been wrongly considered to be relatively rare during pregnancy"
+        text: "الكتاب بيقول صراحة إن الـ hypothyroidism في الحمل كان متعتبر نادر **غلط**. ومضاعفاته على مخ الجنين (low IQ، cretinism) هي اللي بتخلّي الـ screening مهم."
+      - kind: try
+        items: [endo.L02.077, endo.L02.078, endo.L02.080, endo.L02.083, endo.L02.089]
+    recap:
+      - "Screening لـ 10 فئات (تاريخ، عيلة، goiter، antibodies، أعراض، T1DM، autoimmune، infertility، irradiation، miscarriage)."
+      - "ميكانيزم: immunology، iodine، metabolism، hCG."
+      - "Hyper: FT4 ↑ + TSH suppressed؛ الـ total مش بيفرّق."
+      - "TSHR antibodies: بعد RAI/surgery قيسها بدري؛ على ATDs أعدها في التالت."
+      - "ATDs أقل جرعة؛ مفيش iodine؛ RAI ممنوع."
+      - "Hypo: زوّد الـ L-T4؛ مضاعفات للأم والجنين."
+    practice: [endo.L02.077, endo.L02.078, endo.L02.079, endo.L02.080, endo.L02.081, endo.L02.082, endo.L02.083, endo.L02.084, endo.L02.085, endo.L02.086, endo.L02.087, endo.L02.088, endo.L02.089, endo.L02.090, endo.L02.119, endo.L02.120, endo.L02.121, endo.L02.127]
+  # ------------------------------------------------------------------
+  - id: endo.L02.lesson6
+    title: "العقد، الـ postpartum thyroiditis والـ pheo في الحمل"
+    hook: "عقدة في الغدة وهي حامل: نعمل عملية دلوقتي ولا نستنى؟ الإجابة في الـ FNAB."
+    minutes: 7
+    pages: [28, 29]
+    topics: [nodules-ppt, pheo]
+    goals:
+      - "تعرف امتى نعمل FNAB وامتى نعمل جراحة في الحمل"
+      - "تتعرف على الـ postpartum thyroiditis"
+      - "تعرف علاج الـ pheo في الحمل حسب الكتاب"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 28
+        quote: "Nodule >1cm. Enlarging during gestation. Associated with palpable cervical lymph nodes."
+        title: "العقدة في الحمل"
+        text: |
+          ممكن عقدة تتكشف لأول مرة في الحمل. التقييم: ==ultrasound و FNAB==.
+
+          **FNAB لكل حامل عندها:**
+          1. Nodule أكبر من **1 cm**.
+          2. بتكبر أثناء الحمل.
+          3. معاها palpable cervical lymph nodes.
+      - kind: table
+        page: 28
+        quote: "If FNAB result shows a possible follicular neoplasm / mildly suspicious – surgery is deferred until after pregnancy & breastfeeding periods."
+        title: "نتيجة الـ FNAB"
+        columns: ["FNAB", "Action"]
+        rows:
+          - ["Highly suggestive of malignancy", "Surgery even in pregnancy (2nd trimester if found early)"]
+          - ["Possible follicular / mildly suspicious", "Defer until after pregnancy and breastfeeding"]
+        hide: [[0, 1], [1, 1]]
+      - kind: reveal
+        page: 28
+        quote: "If FNAB is highly suggestive of malignancy, THYROID SURGERY should be performed even though the patient is pregnant."
+        prompt: "لو الحمل مش بيغيّر مسار سرطان الغدة، ليه نعمل جراحة أثناء الحمل أصلًا للـ highly suspicious؟"
+        answer: "الكتاب بيقول نعمل الجراحة لو الـ FNAB highly suggestive، وفي التاني لو اتكشف بدري. التاني أأمن trimester لأي جراحة. أما الـ mildly suspicious فمفيش داعي نعرّض الحمل للخطر، نستنى لحد ما الحمل والرضاعة يخلصوا."
+      - kind: explain
+        page: 29
+        quote: "Probably due to goitrogenic stimulus associated with pregnancy."
+        title: "الحمل بيعمل عقد"
+        text: "في الـ euthyroid اللي عندها diffuse أو nodular goiter، الحمل بيعمل ==nodules جديدة== والقديمة بتكبر وتزيد في العدد، غالبًا من الـ **goitrogenic stimulus** بتاع الحمل."
+      - kind: explain
+        page: 29
+        quote: "Develops in women between 3-9 months after delivery (5-10 %), it follows the stages seen in patients with sub acute thyroiditis."
+        title: "Postpartum thyroiditis"
+        text: |
+          - بيظهر بعد الولادة بـ ==3-9 شهور==، في **5-10%**.
+          - بيمشي في نفس مراحل الـ subacute thyroiditis.
+          - بس: ==no pain==، **ESR normal**، و **thyroid antibodies عالية**.
+          - **20%** بيفضلوا hypothyroid على طول.
+          - الـ TPO antibodies العالية = خطر أكبر. و **25%** من الـ type 1 DM بيعملوه.
+      - kind: check
+        page: 29
+        quote: "Clinically there is no pain ESR in normal, thyroid antibodies are elevated."
+        question: "What separates postpartum thyroiditis from subacute thyroiditis?"
+        options: ["Painless, normal ESR, raised antibodies", "Painful, high ESR", "Always permanent hypothyroidism", "Occurs during the first trimester"]
+        answer: 0
+        why:
+          - "صح: من غير ألم، ESR طبيعي، antibodies عالية."
+          - "ده الـ subacute."
+          - "20% بس بيفضلوا hypothyroid."
+          - "بيحصل بعد الولادة بـ 3-9 شهور."
+      - kind: explain
+        page: 29
+        quote: "Phenoxybenzamine and ACE inhibitors are not used to control hypertension."
+        title: "الـ pheo في الحمل (حسب الكتاب)"
+        text: |
+          - ==MRI== أحسن localizing image (مفيش radiation).
+          - **Phenoxybenzamine و ACE inhibitors** مش بيتستخدموا للضغط.
+          - **Beta blockers** بأقل جرعة للـ tachycardia.
+          - ==IV magnesium== للضغط لو عملنا الجراحة أثناء الحمل.
+      - kind: update
+        page: 29
+        quote: "Phenoxybenzamine and ACE inhibitors are not used to control hypertension."
+        text: "معظم الإرشادات الحالية لسه بتستخدم alpha blockade (phenoxybenzamine أو doxazosin) قبل جراحة الـ pheo في الحمل، والـ ACE inhibitors لسه ممنوعة. في الامتحان اكتب إجابة الكتاب."
+        ref: "Endocrine Society clinical practice guideline: pheochromocytoma and paraganglioma 2014"
+      - kind: aside
+        tone: joke
+        page: 29
+        quote: "IV magnesium is used to control hypertension if surgery is carried during pregnancy."
+        text: "الـ magnesium في التوليد زي البطل اللي بيظهر في كل فيلم: في الـ eclampsia، وهنا كمان في جراحة الـ pheo. اللي ماشي في النبطشية من غير ما يفتكر الـ MgSO4 ميبقاش نايب نسا."
+      - kind: try
+        items: [endo.L02.092, endo.L02.093, endo.L02.097, endo.L02.098, endo.L02.100]
+    recap:
+      - "FNAB: >1 cm، بتكبر، أو lymph nodes."
+      - "Highly suspicious: جراحة حتى في الحمل (التاني لو بدري). Mild/follicular: استنى بعد الرضاعة."
+      - "الحمل مش بيغيّر مسار السرطان، بس بيعمل nodules جديدة."
+      - "PPT: 3-9 شهور، 5-10%، painless، ESR طبيعي، antibodies ↑؛ 20% hypo دائم."
+      - "Pheo: MRI؛ مفيش phenoxybenzamine/ACEI (الكتاب)؛ beta blocker قليل؛ IV magnesium في الجراحة."
+    practice: [endo.L02.091, endo.L02.092, endo.L02.093, endo.L02.094, endo.L02.095, endo.L02.096, endo.L02.097, endo.L02.098, endo.L02.099, endo.L02.100, endo.L02.122, endo.L02.123, endo.L02.124, endo.L02.131]

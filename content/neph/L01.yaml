@@ -1,0 +1,1654 @@
+schema: batna.content/v1
+lecture: neph.L01
+title: "Acid–base disorders"
+author: Dr. Omneya Salah Hassan
+book: { chapter: 8, pages: [1, 22] }
+topics:
+  - { id: sampling, title: "ABG sampling, arterial vs venous blood" }
+  - { id: normals, title: "Normal values and the ROME mnemonic" }
+  - { id: henderson, title: "The Henderson equation" }
+  - { id: anion-gap, title: "Anion gap: definition, normal range, high, normal and low AG" }
+  - { id: delta, title: "ΔAG/ΔHCO3 (delta ratio)" }
+  - { id: compensation, title: "Secondary physiologic response and expected compensation" }
+  - { id: algorithm, title: "ABG analysis table, algorithm and steps" }
+  - { id: met-alkalosis, title: "Causes and work-up of metabolic alkalosis" }
+  - { id: resp-acidosis, title: "Causes of respiratory acidosis" }
+  - { id: resp-alkalosis, title: "Causes of respiratory alkalosis" }
+  - { id: toxins, title: "Toxic alcohols, osmolal gap and salicylate" }
+items:
+  # ---------- p1: introduction and sampling ----------
+  - id: neph.L01.001
+    kind: card
+    topic: sampling
+    front: Why is ABG analysis essential in high-risk and ICU patients?
+    back: It is essential for diagnosing and managing both the oxygenation status and the acid–base balance.
+    src: { page: 1, quote: "an essential part of diagnosing and managing the oxygenation status and acid– base balance of the high-risk patients" }
+    status: unverified
+  - id: neph.L01.002
+    kind: card
+    topic: sampling
+    front: Besides following the patient's progress, what does applying acid–base concepts help the clinician do?
+    back: Evaluate the effectiveness of the care being provided.
+    src: { page: 1, quote: "not only to follow the progress of a patient, but also to evaluate the effectiveness of care being provided" }
+    status: unverified
+  - id: neph.L01.003
+    kind: cloze
+    topic: sampling
+    text: ABG accuracy depends on collecting, handling and analyzing the specimen, but ABG measurements are particularly vulnerable to {{c1::preanalytic}} errors.
+    src: { page: 1, quote: "ABG measurements are particularly vulnerable to preanalytic errors." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L01.004
+    kind: enumerate
+    topic: sampling
+    prompt: Mention the most common problems encountered in ABG sampling.
+    points:
+      - Nonarterial (venous) samples
+      - Air bubbles in the sample
+      - Inadequate or excessive anticoagulant
+      - Delayed analysis of the sample
+    pass: 3
+    src: { page: 1, quote: "nonarterial samples, air bubbles in the sample, inadequate or excessive anticoagulant in the sample, and delayed analysis of sample." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L01.005
+    kind: card
+    topic: sampling
+    front: How should the arterial sample be mixed with the anticoagulant, and why?
+    back: Mixed in two dimensions, to prevent stacking of red blood cells.
+    src: { page: 1, quote: "Correct method of mixing of the arterial sample with the anticoagulant in two dimensions to prevent stacking of red blood cells." }
+    status: unverified
+  # ---------- p2: arterial vs venous ----------
+  - id: neph.L01.006
+    kind: card
+    topic: sampling
+    front: Can venous blood be used for ABG, and why?
+    back: Yes. In normal individuals the difference between arterial and venous ABG values is insignificant (though it becomes significant in pathological states).
+    src: { page: 2, quote: "venous blood samples can be used because there is insignificant difference in ABG values between these two samples." }
+    status: unverified
+  - id: neph.L01.007
+    kind: card
+    topic: sampling
+    front: In which patient is a large arteriovenous ABG difference found?
+    back: A patient with decreased cardiac output on mechanical ventilation.
+    src: { page: 2, quote: "large arteriovenous difference can be found in a patient with decreased cardiac output and on mechanical ventilation." }
+    status: unverified
+  - id: neph.L01.008
+    kind: cloze
+    topic: sampling
+    text: In low cardiac output on a ventilator, arterial pCO2 stays {{c1::normal}} while central venous pCO2 may be {{c2::extremely elevated}}, because more CO2 is added to the perfusing tissue.
+    src: { page: 2, quote: "the arterial pCO2 remains normal, but central venous pCO2 may be extremely elevated, as more CO2 is added to the perfusing tissue." }
+    status: unverified
+  - id: neph.L01.009
+    kind: cloze
+    topic: sampling
+    text: In low cardiac output states an arterial ABG assesses {{c1::pulmonary gas exchange}}, while a central venous ABG assesses {{c2::pH and tissue oxygenation}}.
+    src: { page: 2, quote: "an arterial ABG is useful in assessing pulmonary gas exchange, and central venous ABG is useful in assessing pH and tissue oxygenation." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L01.010
+    kind: table
+    topic: sampling
+    title: Differences between arterial and venous blood samples (book p2)
+    columns: [ABG value, Arterial blood, Venous blood]
+    rows:
+      - ["[H+] (nmol/L)", "40", "44"]
+      - ["pH", "7.40", "7.36"]
+      - ["pCO2 (mmHg)", "40", "48"]
+      - ["[HCO3-] (mEq/L)", "24", "26"]
+    blanks: [[0, 2], [1, 2], [2, 2], [3, 2]]
+    src: { page: 2, quote: "Differences between arterial and venous blood samples." }
+    status: unverified
+    tags: [numbers]
+  # ---------- p3: normal values, ROME ----------
+  - id: neph.L01.011
+    kind: table
+    topic: normals
+    title: Normal acid–base values (book p3)
+    columns: [Parameter, Normal value]
+    rows:
+      - ["pH", "7.35–7.45"]
+      - ["paCO2", "35–45 mmHg"]
+      - ["paO2", "80–100 mmHg"]
+      - ["HCO3", "22–26 mEq/L"]
+      - ["BE/BD", "−2 to +2"]
+      - ["SpO2", "> 95%"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1]]
+    src: { page: 3, quote: "Normal Acid Base values" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L01.012
+    kind: cloze
+    topic: normals
+    text: Normal arterial pH is {{c1::7.35–7.45}}, normal paCO2 is {{c2::35–45 mmHg}}, and normal HCO3 is {{c3::22–26 mEq/L}}.
+    src: { page: 3, quote: "7.35 —7.45 35— 45 mm Hg 80 — 100 mm Hg 22 — 26 mEq/L" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L01.013
+    kind: card
+    topic: normals
+    front: What does the ROME mnemonic stand for?
+    back: Respiratory Opposite, Metabolic Equal (direction of pH versus the primary variable).
+    src: { page: 3, quote: "Acid-Base Mnemonic—ROME" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L01.014
+    kind: cloze
+    topic: normals
+    text: "ROME, respiratory = opposite: pH ↑ with PaCO2 ↓ is {{c1::respiratory alkalosis}}; pH ↓ with PaCO2 ↑ is {{c2::respiratory acidosis}}."
+    src: { page: 3, quote: "Respiratory Opposite – pH ↑ PaCO2 ↓ Alkalosis – pH ↓ PaCO2 ↑ Acidosis" }
+    status: unverified
+  - id: neph.L01.015
+    kind: cloze
+    topic: normals
+    text: "ROME, metabolic = equal: pH ↑ with HCO3 ↑ is {{c1::metabolic alkalosis}}; pH ↓ with HCO3 ↓ is {{c2::metabolic acidosis}}."
+    src: { page: 3, quote: "Metabolic Equal – pH ↑ HCO3 ↑ Alkalosis – pH ↓ HCO3 ↓ Acidosis" }
+    status: unverified
+  - id: neph.L01.016
+    kind: enumerate
+    topic: normals
+    prompt: Mention the three concepts that help you evaluate acid–base disorders.
+    points:
+      - The Henderson equation
+      - The anion gap
+      - The secondary physiologic response (compensation)
+    pass: 3
+    src: { page: 3, quote: "Three concepts that help you evaluate the acid–base disorders are: Henderson equation The anion gap The secondary physiologic response (compensation)" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p4-5: Henderson ----------
+  - id: neph.L01.017
+    kind: card
+    topic: henderson
+    front: Why is the Henderson equation used instead of Henderson–Hasselbalch at the bedside?
+    back: Henderson–Hasselbalch is cumbersome (logarithms); the Henderson equation gives the same information by relating [H+] to pH.
+    src: { page: 4, quote: "the Henderson–Hasselbalch equation is a rather cumbersome way to calculate the pH using logarithms." }
+    status: unverified
+  - id: neph.L01.018
+    kind: cloze
+    topic: henderson
+    text: "Henderson equation: [H+] (nmol/L) = {{c1::24}} × {{c2::pCO2 / [HCO3-]}}."
+    src: { page: 4, quote: "This equation, which calculates [H+], is expressed as" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L01.019
+    kind: card
+    topic: henderson
+    front: What is the clinical use of the Henderson equation?
+    back: To check the validity of the pH reported by the laboratory.
+    src: { page: 4, quote: "The Henderson equation is thus used clinically to check the validity of pH obtained from the clinical laboratory." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L01.020
+    kind: table
+    topic: henderson
+    title: Approximate [H+] for clinically relevant pH values (book p4)
+    columns: [pH, "[H+] (nmol/L)"]
+    rows:
+      - ["7.50", "30"]
+      - ["7.40", "40"]
+      - ["7.30", "50"]
+      - ["7.20", "60"]
+      - ["7.10", "80"]
+      - ["7.00", "100"]
+    blanks: [[0, 1], [2, 1], [3, 1], [4, 1], [5, 1]]
+    src: { page: 4, quote: "pH 7.50 = 30 pH 7.40 = 40 pH 7.30 = 50 pH 7.20 = 60 pH 7.10 = 80 pH 7.00 = 100" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L01.021
+    kind: cloze
+    topic: henderson
+    text: "Quick rule from the lecture: the last two digits of the pH ≈ {{c1::80 − [H+]}}."
+    src: { page: 4, quote: "Last 2 digits of pH= 80 - H+" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L01.022
+    kind: cloze
+    topic: henderson
+    text: "Worked example: pH 7.40, pCO2 40 mmHg, HCO3- 24 mEq/L gives [H+] = 24 × 40/24 = {{c1::40}} nmol/L, which matches pH {{c2::7.40}}."
+    src: { page: 5, quote: "pCO2 = 40 mmHg HCO3− = 24 mEq/L" }
+    status: unverified
+    tags: [numbers]
+  # ---------- p5-7: anion gap ----------
+  - id: neph.L01.023
+    kind: card
+    topic: anion-gap
+    front: What principle underlies the anion gap?
+    back: Electroneutrality. Plasma cations must equal anions, but not all of them are measured routinely.
+    src: { page: 5, quote: "the number of cations must equal the number of anions to maintain electroneutrality." }
+    status: unverified
+  - id: neph.L01.024
+    kind: card
+    topic: anion-gap
+    front: Which electrolytes are usually measured, from which unmeasured anions are calculated?
+    back: Na+, K+, Cl− and HCO3−.
+    src: { page: 5, quote: "Among all electrolytes, Na+, K+, Cl−, and HCO3− are usually measured." }
+    status: unverified
+  - id: neph.L01.025
+    kind: cloze
+    topic: anion-gap
+    text: "The anion gap is the amount by which plasma {{c1::[Na+]}} exceeds the sum of {{c2::[Cl−] and [HCO3−]}}: AG = Na+ − (Cl− + HCO3−)."
+    src: { page: 5, quote: "plasma [Na+] exceeds the sum of plasma [Cl−] and [HCO3−], and the difference is called the anion gap (AG)." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L01.026
+    kind: card
+    topic: anion-gap
+    front: Why is K+ not routinely included in the anion gap calculation?
+    back: Because the change in serum [K+] in health or disease is minimal.
+    src: { page: 5, quote: "Since the change in serum [K+] in either health or disease is minimal, this cation is not routinely included in the calculation of AG." }
+    status: unverified
+  - id: neph.L01.027
+    kind: table
+    topic: anion-gap
+    title: Unmeasured cations and anions (mEq/L) (book p6)
+    columns: [Group, "Ions (mEq/L)", Total]
+    rows:
+      - ["Unmeasured cations", "K+ 4.5, Ca2+ 5.0, Mg2+ 1.5", "11"]
+      - ["Unmeasured anions", "Albumin 12, other proteins 3, PO4 2, SO4 1, organic acids 5", "23"]
+    blanks: [[0, 2], [1, 1], [1, 2]]
+    src: { page: 6, quote: "Unmeasured cations (mEq/L); Unmeasured anions (mEq/L)" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L01.028
+    kind: cloze
+    topic: anion-gap
+    text: "Unmeasured anions total about {{c1::23}} mEq/L and unmeasured cations about {{c2::11}} mEq/L, so AG = 23 − 11 = {{c3::12 ± 4}}."
+    src: { page: 6, quote: "Total: 11 Total: 23 AG = 23-11 = 12+4" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L01.029
+    kind: card
+    topic: anion-gap
+    front: Restate the anion gap in terms of unmeasured ions.
+    back: AG = unmeasured anions − unmeasured cations (= measured cations − measured anions), because measured + unmeasured anions equal measured + unmeasured cations.
+    src: { page: 6, quote: "Unmeasured anions Measured cations Unmeasured cations Measured anions" }
+    status: unverified
+  - id: neph.L01.030
+    kind: card
+    topic: anion-gap
+    front: How does lactic acid raise the anion gap?
+    back: Lactic acid dissociates into H+ and lactate (an unmeasured anion). The H+ is buffered by NaHCO3 (→ Na+ + CO2 + H2O), so HCO3- falls while lactate takes its place.
+    src: { page: 6, quote: "Lactic acid ->H* + Lactate’" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L01.031
+    kind: cloze
+    topic: anion-gap
+    text: "The classic normal AG of {{c1::12 ± 4}} came from colorimetry and flame photometry; with ion-selective electrodes the normal AG is lower, {{c2::3 to 11}}."
+    src: { page: 7, quote: "With the introduction of ion-selective electrode methodology, the normal AG levels are much lower, ranging from 3 to11." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L01.032
+    kind: card
+    topic: anion-gap
+    front: Why are AG values lower with ion-selective electrodes?
+    back: Because of higher Cl− determination by that method.
+    src: { page: 7, quote: "These low values are related to high Cl− determination." }
+    status: unverified
+  - id: neph.L01.033
+    kind: card
+    topic: anion-gap
+    front: Since normal AG varies between laboratories, what should the clinician do, and what value does the lecture take as normal for simplicity?
+    back: Follow his or her own laboratory's values; for simplicity an AG of 10 mEq/L is considered normal.
+    src: { page: 7, quote: "For simplicity, an AG of 10 mEq/L is considered normal." }
+    status: unverified
+    tags: [numbers]
+  # ---------- p7-8: hyperglycemia ----------
+  - id: neph.L01.034
+    kind: card
+    topic: anion-gap
+    front: In severe hyperglycemia, should AG be calculated with measured or corrected Na+?
+    back: Measured Na+ only, not corrected Na+.
+    src: { page: 8, quote: "It is, thus, emphasized that only measured Na+ should be used to calculate the serum AG." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L01.035
+    kind: card
+    topic: anion-gap
+    front: Why should only measured Na+ be used for AG in hyperglycemia?
+    back: Cl− and HCO3− are assumed to be diluted equally with Na+ by water leaving the cells. Using corrected Na+ without correcting Cl− and HCO3− overestimates AG and falsely suggests a high AG metabolic acidosis.
+    src: { page: 8, quote: "the AG is overestimated with the implication of underlying high AG metabolic acidosis." }
+    status: unverified
+  - id: neph.L01.036
+    kind: cloze
+    topic: anion-gap
+    text: Serum Na+ falls by {{c1::1.6}} for each {{c2::100 mg/dL}} rise in glucose above normal; no such number is given for Cl− or HCO3−.
+    src: { page: 8, quote: "Na+ decreases by 1.6 mEq/dL for each increase in 100 mg/dL glucose above normal glucose levels" }
+    status: unverified
+    tags: [numbers]
+  # ---------- p8: clinical use, high AG ----------
+  - id: neph.L01.037
+    kind: card
+    topic: anion-gap
+    front: What is the traditional clinical use of the anion gap?
+    back: To classify metabolic acidosis into high, normal or low AG metabolic acidosis.
+    src: { page: 8, quote: "the AG is useful in classifying metabolic acidosis into high, normal, or low AG metabolic acidosis." }
+    status: unverified
+  - id: neph.L01.038
+    kind: cloze
+    topic: anion-gap
+    text: High AG is due to accumulation of {{c1::unmeasured anions}}, whereas normal AG metabolic acidosis is usually related to a high {{c2::Cl−}} level.
+    src: { page: 8, quote: "High AG is due to accumulation of unmeasured anions, whereas normal AG is usually related to high Cl− level." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L01.039
+    kind: enumerate
+    topic: anion-gap
+    prompt: What does a low anion gap imply?
+    points:
+      - A substantial decrease in unmeasured anions
+      - An increase in unmeasured cations
+      - A spurious decrease in [Na+]
+      - A spurious increase in [Cl−] or [HCO3−]
+    pass: 3
+    src: { page: 8, quote: "Low AG implies a substantial decrease in unmeasured anions, an increase in unmeasured cations, and spurious decrease in [Na+]" }
+    status: unverified
+  - id: neph.L01.040
+    kind: table
+    topic: anion-gap
+    title: Most common causes of high AG metabolic acidosis (book p8, Table 4.4)
+    columns: [Cause, Unmeasured anions causing high AG]
+    rows:
+      - ["Uremic acidosis (renal failure)", "Sulfate, phosphate, urate"]
+      - ["Ketoacidosis (diabetes, starvation, alcohol)", "Acetoacetate, β-hydroxybutyrate"]
+      - ["Lactic acidosis", "L-lactate"]
+      - ["Small bowel resection", "D-lactate"]
+      - ["Methanol", "Formate"]
+      - ["Ethylene glycol", "Glycolate, oxalate"]
+      - ["Aspirin", "Salicylate, L-lactate, ketoacids"]
+      - ["Acetaminophen (Tylenol)", "Pyroglutamate"]
+      - ["Paraldehyde", "Acetaldehyde or acetic acid"]
+      - ["Toluene", "Hippurate, benzoate"]
+    blanks: [[0, 1], [1, 1], [3, 1], [4, 1], [5, 1], [7, 1], [9, 1]]
+    src: { page: 8, quote: "Most common causes of high AG metabolic acidosis" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L01.041
+    kind: cloze
+    topic: anion-gap
+    text: Small bowel resection causes high AG acidosis through {{c1::D-lactate}}, and acetaminophen through {{c2::pyroglutamate}}.
+    src: { page: 8, quote: "Small bowl resection D-lactate" }
+    status: unverified
+  - id: neph.L01.042
+    kind: card
+    topic: anion-gap
+    front: Which unmeasured anions accumulate in uremic acidosis?
+    back: Sulfate, phosphate and urate.
+    src: { page: 8, quote: "Uremic acidosis (renal failure) Sulfate, phosphate, urate" }
+    status: unverified
+  # ---------- p9: MUDPILES, normal AG, albumin ----------
+  - id: neph.L01.043
+    kind: enumerate
+    topic: anion-gap
+    prompt: "Expand MUDPILES: causes of elevated anion gap metabolic acidosis."
+    points:
+      - "M: Methanol"
+      - "U: Uraemia (renal failure)"
+      - "D: Diabetic, alcoholic or starvation ketoacidosis"
+      - "P: Paracetamol, propylene glycol, paregoric"
+      - "I: Inborn errors of metabolism, iron, ibuprofen, isoniazid"
+      - "L: Lactic acid"
+      - "E: Ethylene glycol"
+      - "S: Salicylates (aspirin)"
+    pass: 7
+    src: { page: 9, quote: "Mnemonic: MUDPILES Methanol Uraemia (renal failure) Diabetic, alcoholic, or starvation ketoacidosis" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L01.044
+    kind: table
+    topic: anion-gap
+    title: Most common causes of normal AG metabolic acidosis (book p9, Table 4.5)
+    columns: [Cause, Mechanism]
+    rows:
+      - ["Diarrhea", "Loss of HCO3- in stool"]
+      - ["Ureterosigmoidostomy, ileal conduit", "Loss of HCO3- in stool"]
+      - ["Carbonic anhydrase inhibitors", "Loss of HCO3- in urine"]
+      - ["Recovery phase of ketoacidosis", "Less HCO3- synthesis from decreased availability of ketones"]
+      - ["CKD stages 4–5", "Decrease in NH3 excretion"]
+      - ["Proximal RTA (type II)", "Loss of HCO3- in urine"]
+      - ["Distal RTA (type I)", "Decreased renal acid secretion"]
+      - ["Distal RTA (type IV)", "Decreased acid secretion and low NH3 production"]
+      - ["Dilutional acidosis", "Increased Cl- due to normal saline administration"]
+      - ["Cholestyramine", "Release of Cl- in exchange for HCO3-"]
+    blanks: [[2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1], [8, 1], [9, 1]]
+    src: { page: 9, quote: "Most common causes of normal AG metabolic acidosis" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L01.045
+    kind: cloze
+    topic: anion-gap
+    text: CKD stages {{c1::4–5}} cause a normal AG metabolic acidosis through a decrease in {{c2::NH3 excretion}}.
+    src: { page: 9, quote: "Chronic kidney diseases (stages 4-5) Decrease in NH; excretion" }
+    status: unverified
+  - id: neph.L01.046
+    kind: card
+    topic: anion-gap
+    front: How does cholestyramine cause a normal AG metabolic acidosis?
+    back: It releases Cl− in exchange for HCO3−.
+    src: { page: 9, quote: "Cholestyramine | Release of Cl- in exchange for HCO,-" }
+    status: unverified
+  - id: neph.L01.047
+    kind: card
+    topic: anion-gap
+    front: What is dilutional acidosis?
+    back: A normal AG metabolic acidosis from increased Cl− due to normal saline administration.
+    src: { page: 9, quote: "Dilutional acidosis Increased Cl- due to normal saline administration" }
+    status: unverified
+  - id: neph.L01.048
+    kind: card
+    topic: anion-gap
+    front: Apart from laboratory error, what is the most common cause of a low AG in hospitalized patients?
+    back: Hypoalbuminemia.
+    src: { page: 9, quote: "Other than laboratory error, the most common cause of low AG acidosis in hospitalized patients is hypoalbuminemia." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L01.049
+    kind: cloze
+    topic: anion-gap
+    text: Albumin is the major unmeasured anion; for each 1 g/dL fall in albumin from normal, the AG falls by {{c1::2.5}} (4.0 → 2.0 g/dL lowers AG by {{c2::5}}).
+    src: { page: 9, quote: "for each gram decrease in albumin from normal value, the AG decreases by 2.5" }
+    status: unverified
+    tags: [numbers, high-yield]
+  # ---------- p10: low AG causes ----------
+  - id: neph.L01.050
+    kind: table
+    topic: anion-gap
+    title: Most common causes of low AG (book p10)
+    columns: [Cause, Mechanism]
+    rows:
+      - ["Hypoalbuminemia", "Decreased number of anions"]
+      - ["IgG myeloma", "Increased number of cations"]
+      - ["Bromide intoxication", "Bromide measured as chloride"]
+      - ["Salicylate overdose", "Salicylate measured as chloride"]
+      - ["Hypercalcemia", "Increased number of cations"]
+      - ["Hypermagnesemia", "Increased number of cations"]
+      - ["Lithium toxicity", "Increased number of cations"]
+      - ["Hypertriglyceridemia", "Different laboratory analysis"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [7, 1]]
+    src: { page: 10, quote: "Most common causes of low AG metabolic acidosis" }
+    status: unverified
+  - id: neph.L01.051
+    kind: card
+    topic: anion-gap
+    front: How do bromide intoxication and salicylate overdose lower the AG?
+    back: Bromide and salicylate are measured as chloride (spuriously high Cl−).
+    src: { page: 10, quote: "Bromide intoxication* | Bromide measured as chloride Salicylate overdose Salicylate measured as chloride" }
+    status: unverified
+  - id: neph.L01.052
+    kind: enumerate
+    topic: anion-gap
+    prompt: Name the causes of a low anion gap that act by increasing unmeasured cations.
+    points: [IgG myeloma, Hypercalcemia, Hypermagnesemia, Lithium toxicity]
+    pass: 3
+    src: { page: 10, quote: "IgG myeloma Increased number of cations" }
+    status: unverified
+  # ---------- p10-11: delta ----------
+  - id: neph.L01.053
+    kind: card
+    topic: delta
+    front: Besides classifying metabolic acidosis, how else is the AG useful?
+    back: Indirectly, in analyzing mixed disorders such as high AG metabolic acidosis with metabolic alkalosis, or high AG plus normal AG metabolic acidosis (via ΔAG/ΔHCO3).
+    src: { page: 10, quote: "it is also indirectly helpful in analyzing mixed acid–base disorders" }
+    status: unverified
+  - id: neph.L01.054
+    kind: cloze
+    topic: delta
+    text: In a simple high AG metabolic acidosis, each {{c1::1}} mEq/L rise in AG is matched by a {{c1::1}} mEq/L fall in HCO3-, so ΔAG/ΔHCO3- = {{c2::1}}.
+    src: { page: 11, quote: "In a simple high AG metabolic acidosis, the ∆AG/∆HCO3− ratio is 1." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L01.055
+    kind: card
+    topic: delta
+    front: What does a significant deviation of ΔAG/ΔHCO3 from 1 indicate?
+    back: A mixed acid–base disorder.
+    src: { page: 11, quote: "Any significant deviation from 1 is indicative of a mixed acid–base disorder." }
+    status: unverified
+  - id: neph.L01.056
+    kind: cloze
+    topic: delta
+    text: When ΔHCO3- is greater than ΔAG, the ratio is {{c1::below 1 (above 0)}}, indicating mixed {{c2::high and normal AG}} metabolic acidosis.
+    src: { page: 11, quote: "the ∆AG/∆HCO3− ratio is <1 (above 0 but below 1), indicating a mixed high and normal AG metabolic acidosis." }
+    status: unverified
+  - id: neph.L01.057
+    kind: cloze
+    topic: delta
+    text: In mixed high AG metabolic acidosis and {{c1::metabolic alkalosis}}, HCO3- is inappropriately high for the rise in AG, so ΔAG/ΔHCO3- is {{c2::>2}}.
+    src: { page: 11, quote: "In a mixed high AG metabolic acidosis and metabolic alkalosis, the HCO3− level is inappropriately high relative to the increase in AG." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L01.058
+    kind: enumerate
+    topic: delta
+    prompt: Mention the pitfalls in interpreting the Δ/Δ ratio given in the lecture.
+    points:
+      - The average Δ/Δ of lactic acidosis is 1.6
+      - Up to half of the acid load is buffered intracellularly, not by serum HCO3
+      - Δ/Δ in DKA varies from 2 (early) to 0 (late)
+      - Many unmeasured acid anions are rapidly excreted by the kidney
+    pass: 3
+    src: { page: 11, quote: "Average A/A of lactic acidosis is 1.6 Up to half of acid load is buffered intracellularly" }
+    status: unverified
+  - id: neph.L01.059
+    kind: cloze
+    topic: delta
+    text: The average Δ/Δ ratio of lactic acidosis is {{c1::1.6}}, and in DKA it varies from {{c2::2}} early to {{c3::0}} late.
+    src: { page: 11, quote: "Average A/A of lactic acidosis is 1.6" }
+    status: unverified
+    tags: [numbers]
+  # ---------- p12: delta formula and bands ----------
+  - id: neph.L01.060
+    kind: cloze
+    topic: delta
+    text: "Delta ratio = (measured anion gap − {{c1::12}}) / ({{c2::24}} − measured [HCO3-])."
+    src: { page: 12, quote: "Delta ratio = Measured anion gap - 12 24 - Measured [HCO3]" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: neph.L01.061
+    kind: card
+    topic: delta
+    front: What is the delta ratio used for?
+    back: To assess an elevated anion gap metabolic acidosis and to evaluate whether a mixed acid–base disorder is present.
+    src: { page: 12, quote: "Used to assess elevated anion gap metabolic acidosis and to evaluate whether a mixed acid base disorder is present" }
+    status: unverified
+  - id: neph.L01.062
+    kind: table
+    topic: delta
+    title: Interpreting the delta ratio (book p12)
+    columns: [Delta ratio, Assessment]
+    rows:
+      - ["< 0.4", "Normal anion gap metabolic acidosis"]
+      - ["0.4–0.8", "Mixed normal AG + high AG metabolic acidosis"]
+      - ["0.8–2.0", "Pure high AG metabolic acidosis"]
+      - ["> 2.0", "Mixed high AG metabolic acidosis + metabolic alkalosis (or pre-existing compensated respiratory acidosis)"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 12, quote: "0.8 - 2.0 Pure high anion gap metabolic acidosis" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: neph.L01.063
+    kind: card
+    topic: delta
+    front: Besides metabolic alkalosis, what else can give a delta ratio above 2.0?
+    back: A pre-existing compensated respiratory acidosis (high baseline HCO3).
+    src: { page: 12, quote: "Mixed high anion gap metabolic acidosis + metabolic alkalosis" }
+    status: unverified
+  # ---------- p12-13: compensation ----------
+  - id: neph.L01.064
+    kind: card
+    topic: compensation
+    front: Define the secondary physiologic (compensatory) response.
+    back: A physiologic process that minimizes the change in [H+] brought about by a primary change.
+    src: { page: 12, quote: "It is a physiologic process that minimizes changes in [H+] brought about by a primary change." }
+    status: unverified
+  - id: neph.L01.065
+    kind: cloze
+    topic: compensation
+    text: A metabolic disorder is compensated by the {{c1::respiratory}} system; a respiratory disorder is compensated by the {{c2::kidney (renal)}}.
+    src: { page: 12, quote: "In a metabolic acid–base disorder, the compensatory response is respiratory." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L01.066
+    kind: card
+    topic: compensation
+    front: How is metabolic acidosis compensated?
+    back: Hyperventilation lowers pCO2, which limits the rise in [H+]; this hyperventilation is the normal physiologic response to increased [H+].
+    src: { page: 12, quote: "The compensatory response is a decrease in pCO2 due to hyperventilation." }
+    status: unverified
+  - id: neph.L01.067
+    kind: card
+    topic: compensation
+    front: What is the appropriate physiological response to metabolic alkalosis?
+    back: Hypoventilation (rise in pCO2).
+    src: { page: 13, quote: "Conversely, hypoventilation is an appropriate physiological response to metabolic alkalosis." }
+    status: unverified
+  - id: neph.L01.068
+    kind: card
+    topic: compensation
+    front: How does the kidney compensate respiratory acidosis?
+    back: It increases plasma [HCO3−], raising the pH toward normal.
+    src: { page: 13, quote: "The renal compensation increases the plasma [HCO3−] with a resultant increase in pH toward normal." }
+    status: unverified
+  - id: neph.L01.069
+    kind: card
+    topic: compensation
+    front: Do compensatory mechanisms bring the pH all the way to normal?
+    back: "The lecture says they do not increase the pH to normal but rather return it toward normal: compensation limits the change, it does not overshoot or fully correct."
+    src: { page: 13, quote: "these compensatory mechanisms do not increase the pH to normal but rather return the pH to normal." }
+    status: unverified
+  - id: neph.L01.070
+    kind: table
+    topic: compensation
+    title: Primary acid–base disturbances and their secondary response (book p13, Table 4.1)
+    columns: [Disorder, pH, Primary change, Secondary change, Mechanism]
+    rows:
+      - ["Metabolic acidosis", "< 7.40", "↓ HCO3-", "↓ pCO2", "Hyperventilation"]
+      - ["Metabolic alkalosis", "> 7.40", "↑ HCO3-", "↑ pCO2", "Hypoventilation"]
+      - ["Respiratory acidosis", "< 7.40", "↑ pCO2", "↑ HCO3-", "↑ HCO3- reabsorption"]
+      - ["Respiratory alkalosis", "> 7.40", "↓ pCO2", "↓ HCO3-", "↓ HCO3- reabsorption"]
+    blanks: [[0, 3], [1, 4], [2, 3], [2, 4], [3, 2], [3, 4]]
+    src: { page: 13, quote: "Primary acid—base disturbances and their secondary response" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L01.071
+    kind: table
+    topic: compensation
+    title: Expected compensation (book p13)
+    columns: [Condition, Expected compensation]
+    rows:
+      - ["Metabolic acidosis", "Acute: pCO2 = 1.5 × [HCO3] + 8; chronic: pCO2 = [HCO3] + 15; quick check: pCO2 ≈ last two digits of pH"]
+      - ["Metabolic alkalosis", "pCO2 ↑ 0.7 mmHg for each 1 mEq/L ↑ in [HCO3]"]
+      - ["Respiratory acidosis", "Acute: [HCO3] ↑ 1 mEq/L per 10 mmHg ↑ pCO2; chronic: ↑ 3.5 per 10"]
+      - ["Respiratory alkalosis", "Acute: [HCO3] ↓ 2 mEq/L per 10 mmHg ↓ pCO2; chronic: ↓ 4–5 per 10"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 13, quote: "Expected Compensation" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: neph.L01.072
+    kind: cloze
+    topic: compensation
+    text: "Metabolic acidosis (Winter): expected pCO2 = {{c1::1.5}} × [HCO3] + {{c2::8}} (± 2)."
+    src: { page: 14, quote: "Expected 1.5 X [HCO3]+8 (+/- 2)" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: neph.L01.073
+    kind: cloze
+    topic: compensation
+    text: "Quick check in metabolic acidosis: the pCO2 should approximate the {{c1::last two digits of the pH}}."
+    src: { page: 13, quote: "Quick check: Pco, = value should approximate last two digits of pH" }
+    status: unverified
+  - id: neph.L01.074
+    kind: cloze
+    topic: compensation
+    text: In metabolic acidosis, failure of pCO2 to fall to the expected value means a complicating {{c1::respiratory acidosis}}; an excessive fall means a complicating {{c2::respiratory alkalosis}}.
+    src: { page: 13, quote: "Failure of the Pco, to decrease to expected value = complicating respiratory acidosis" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L01.075
+    kind: cloze
+    topic: compensation
+    text: In metabolic alkalosis, pCO2 rises by {{c1::0.7}} mmHg for each 1 mEq/L rise in HCO3; the p14 formula is expected pCO2 = 0.7 × [HCO3] + {{c2::20}} (± 5).
+    src: { page: 13, quote: "Metabolic alkalosis For each T 1 meqy/L in [Hco,], Pco, f 0.7mm Hg" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L01.076
+    kind: cloze
+    topic: compensation
+    text: Respiratory acidosis raises HCO3 by {{c1::1}} mEq/L per 10 mmHg rise in pCO2 when acute, and by {{c2::3.5}} mEq/L per 10 mmHg when chronic.
+    src: { page: 13, quote: "Chronic: 3.5 meqit 7 [Hco,] for each 10 mm Hg T in Pco," }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L01.077
+    kind: cloze
+    topic: compensation
+    text: Respiratory alkalosis lowers HCO3 by {{c1::2}} mEq/L per 10 mmHg fall in pCO2 when acute, and by {{c2::4–5}} mEq/L per 10 mmHg when chronic.
+    src: { page: 13, quote: "Chronic: 4-5 meq/t 4 [Hco,] for each 10 mm Hg J In Pco," }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L01.078
+    kind: cloze
+    topic: compensation
+    text: In respiratory acidosis, HCO3 that fails to rise to the expected value means a complicating {{c1::metabolic acidosis}}; an excessive rise means a complicating {{c2::metabolic alkalosis}}.
+    src: { page: 13, quote: "Failure of the [Hco,] to Increase to the expected value = complicating metabolic acidosis" }
+    status: unverified
+  - id: neph.L01.079
+    kind: cloze
+    topic: compensation
+    text: In respiratory alkalosis, HCO3 that fails to fall to the expected value means a complicating {{c1::metabolic alkalosis}}; an excessive fall means a complicating {{c2::metabolic acidosis}}.
+    src: { page: 13, quote: "Failure of the [Hco,] to decrease to the expected value = complicating metabolic alkalosis" }
+    status: unverified
+  - id: neph.L01.080
+    kind: table
+    topic: compensation
+    title: Expected HCO3 in respiratory disorders (book p14)
+    columns: [Disorder, Acute, Chronic]
+    rows:
+      - ["Respiratory acidosis", "24 + (pCO2 − 40)/10 × 1", "24 + (pCO2 − 40)/10 × 4"]
+      - ["Respiratory alkalosis", "24 − (40 − pCO2)/10 × 2", "24 − (40 − pCO2)/10 × 5"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2]]
+    src: { page: 14, quote: "Respiratory acidosis Respiratory alkalosis Acute Chronic Acute Chronic" }
+    status: unverified
+    tags: [numbers]
+  # ---------- p14: ABG analysis table ----------
+  - id: neph.L01.081
+    kind: table
+    topic: algorithm
+    title: "ABG analysis: reference bands (book p14)"
+    columns: [Parameter, High, Normal, Low]
+    rows:
+      - ["pH", "> 7.45 alkalaemia", "7.36–7.44", "< 7.35 acidaemia"]
+      - ["pCO2 (mmHg)", "> 45", "35–45", "< 35"]
+      - ["HCO3 (mEq/L)", "> 26", "24 ± 2", "< 22"]
+      - ["Anion gap", "> 16", "12 ± 4", "< 8"]
+      - ["Lactate", "> 2.0", "< 1.9", "—"]
+      - ["pO2 (mmHg)", "—", "80–100", "< 80 hypoxia"]
+    blanks: [[2, 2], [3, 1], [3, 3], [4, 1]]
+    src: { page: 14, quote: "Arterial Blood Gas Analysis" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L01.082
+    kind: cloze
+    topic: algorithm
+    text: On the ABG table, an anion gap above {{c1::16}} is high and below {{c2::8}} is low; lactate above {{c3::2.0}} is high.
+    src: { page: 14, quote: ">16 High Anion Gap calculation 12+/-4 | Normal" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L01.083
+    kind: cloze
+    topic: algorithm
+    text: "Alveolar oxygen: PAO2 = ({{c1::713}} × FiO2) − (pCO2 × {{c2::1.25}})."
+    src: { page: 14, quote: "PAO2 = [713 x FiO2] — [pCO2 x 1.25]" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L01.084
+    kind: cloze
+    topic: algorithm
+    text: "A–a gradient = PAO2 − PaO2; its expected value is about {{c1::age/4 + 4}}."
+    src: { page: 14, quote: "A-a gradient = PAO2 — PaO2 = Age" }
+    status: unverified
+  - id: neph.L01.085
+    kind: cloze
+    topic: algorithm
+    text: "The ABG table's corrected Na+ for AG in hyperglycemia: corrected Na+ = Na + (glucose − {{c1::5}}) / {{c2::3}} (glucose in mmol/L)."
+    src: { page: 14, quote: "Corrected Na+ for AG in hyperglycemia" }
+    status: unverified
+  # ---------- p15: algorithm ----------
+  - id: neph.L01.086
+    kind: order
+    topic: algorithm
+    prompt: Put the ABG analysis steps of the lecture in order.
+    steps:
+      - Check for validity
+      - "What is the pH: acidemia or alkalemia?"
+      - "Primary disorder: respiratory or metabolic?"
+      - Is there appropriate compensation?
+      - Calculate the anion gap (if metabolic acidosis exists)
+      - If AG is increased, check the delta gap
+      - Differential for the clinical processes
+    src: { page: 20, quote: "Steps for ABG analysis: 1. Check for validity 2. What is the pH? Acidemia or Alkalemia?" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L01.087
+    kind: cloze
+    topic: algorithm
+    text: "In the ABG algorithm, acidosis with PaCO2 {{c1::> 45}} mmHg is respiratory acidosis; acidosis with PaCO2 ≤ 45 mmHg (or ↓ HCO3) is {{c2::metabolic acidosis}}."
+    src: { page: 15, quote: "Respiratory Metabolic Respiratory Metabolic acidosis acidosis alkalosis alkalosis" }
+    status: unverified
+  - id: neph.L01.088
+    kind: cloze
+    topic: algorithm
+    text: "In the ABG algorithm, alkalosis with PaCO2 {{c1::< 32}} mmHg is respiratory alkalosis; with PaCO2 ≥ 32 mmHg (or ↑ HCO3) it is {{c2::metabolic alkalosis}}."
+    src: { page: 15, quote: "Respiratory Metabolic Respiratory Metabolic acidosis acidosis alkalosis alkalosis" }
+    status: unverified
+  - id: neph.L01.089
+    kind: cloze
+    topic: algorithm
+    text: In the algorithm, AG {{c1::> 12}} mEq/L points to MUDPILES, and a normal AG of about {{c2::6–12}} mEq/L points to HARD-ASS.
+    src: { page: 15, quote: "Check anion gap Na*- (Cf + HCO,”" }
+    status: unverified
+  - id: neph.L01.090
+    kind: enumerate
+    topic: algorithm
+    prompt: "Expand HARD-ASS: causes of normal anion gap metabolic acidosis."
+    points:
+      - "H: Hyperalimentation"
+      - "A: Addison disease"
+      - "R: Renal tubular acidosis"
+      - "D: Diarrhea"
+      - "A: Acetazolamide"
+      - "S: Spironolactone"
+      - "S: Saline infusion"
+    pass: 6
+    src: { page: 15, quote: "HARD-ASS Hyperalimentation Addison disease Renal tubular acidosis Diarrhea Acetazolamide Spironolactone" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L01.091
+    kind: card
+    topic: algorithm
+    front: What is the main limitation of the simple ABG algorithm?
+    back: It does not account for mixed acid–base disorders (for example acidosis with ↑ pCO2 and ↓ HCO3).
+    src: { page: 15, quote: "This algorithm does not account for mixed acid-base disoders" }
+    status: unverified
+  - id: neph.L01.092
+    kind: card
+    topic: algorithm
+    front: In the algorithm's MUDPILES, which acid comes from methanol and which from ethylene glycol, and when do salicylates raise the AG?
+    back: Methanol gives formic acid, ethylene glycol oxalic acid, and salicylates raise the AG late.
+    src: { page: 15, quote: "Methanol (formid acid)" }
+    status: unverified
+  # ---------- p16: causes of metabolic alkalosis ----------
+  - id: neph.L01.093
+    kind: table
+    topic: met-alkalosis
+    title: Causes of metabolic alkalosis (book p16)
+    columns: [Group, Causes]
+    rows:
+      - ["Chloride-responsive: GI and renal", "Vomiting, nasogastric suction, congenital chloride diarrhea, villous adenoma, posthypercapnia, contraction alkalosis, cystic fibrosis, severe K+ deficiency, milk–alkali syndrome, gastrocystoplasty, Zollinger–Ellison syndrome"]
+      - ["Chloride-responsive: drugs", "Loop and thiazide diuretics, poorly reabsorbable anions (carbenicillin, penicillin, phosphate, sulfate), NaHCO3, sodium citrate/lactate/gluconate/acetate, antacids, transfusions"]
+      - ["Chloride-resistant: hypertension", "Primary aldosteronism, 11β-HSD2 deficiency, licorice/chewing tobacco/carbenoxolone, fludrocortisone, Cushing, glucocorticoid-remediable aldosteronism, hyperreninism, Liddle"]
+      - ["Chloride-resistant: normotension", "Bartter syndrome, Gitelman syndrome"]
+      - ["Chloride-resistant: others", "Hypercalcemia, hypoparathyroidism, post-feeding alkalosis"]
+    blanks: [[2, 1], [3, 1], [4, 1]]
+    src: { page: 16, quote: "Causes of metabolic alkalosis" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L01.094
+    kind: enumerate
+    topic: met-alkalosis
+    prompt: Mention the hypertension-associated (chloride-resistant) causes of metabolic alkalosis.
+    points:
+      - Primary aldosteronism
+      - 11β-hydroxysteroid dehydrogenase type 2 deficiency
+      - Licorice, chewing tobacco, carbenoxolone
+      - Fludrocortisone administration
+      - Cushing syndrome
+      - Glucocorticoid-remediable aldosteronism
+      - Hyperreninism (malignant and renovascular hypertension, renin-secreting tumors)
+      - Liddle syndrome
+    pass: 5
+    src: { page: 16, quote: "Primary aldosteronism" }
+    status: unverified
+  - id: neph.L01.095
+    kind: enumerate
+    topic: met-alkalosis
+    prompt: Mention the drug-associated causes of chloride-responsive metabolic alkalosis.
+    points:
+      - Loop diuretics
+      - Thiazide diuretics
+      - Poorly reabsorbable anions (carbenicillin, penicillin, phosphate, sulfate)
+      - NaHCO3 (baking soda)
+      - Sodium citrate, lactate, gluconate and acetate
+      - Antacids
+      - Transfusions
+    pass: 5
+    src: { page: 16, quote: "Loop diuretics" }
+    status: unverified
+  - id: neph.L01.096
+    kind: card
+    topic: met-alkalosis
+    front: Which normotension-associated syndromes cause chloride-resistant metabolic alkalosis?
+    back: Bartter syndrome and Gitelman syndrome.
+    src: { page: 16, quote: "Normotension-associated Bartter syndrome Gitelman syndrome" }
+    status: unverified
+  # ---------- p17: urine chloride algorithm ----------
+  - id: neph.L01.097
+    kind: cloze
+    topic: met-alkalosis
+    text: In metabolic alkalosis, the first test is {{c1::urine Cl−}}; below {{c2::10–20}} mEq points to vomiting, chloruretic diuretics (remote), villous adenoma, cystic fibrosis, exogenous alkali or posthypercapnia.
+    src: { page: 17, quote: "Vomiting (common) Chloruretic diuretics (common) Villous adenoma (rare)" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L01.098
+    kind: card
+    topic: met-alkalosis
+    front: In metabolic alkalosis with urine Cl− > 10–20 mEq, what does a urine K+ < 20 mEq suggest?
+    back: Laxative abuse or severe K depletion.
+    src: { page: 17, quote: "Laxative abuse Severe K depletion" }
+    status: unverified
+  - id: neph.L01.099
+    kind: card
+    topic: met-alkalosis
+    front: High urine Cl−, urine K+ > 20 mEq and low blood pressure. Which syndromes, and how does urine calcium separate them?
+    back: Bartter or Gitelman syndrome; low urine Ca = Gitelman, high urine Ca = Bartter.
+    src: { page: 17, quote: "Low (Gitleman syndrome) High (Bartter syndrome)" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L01.100
+    kind: table
+    topic: met-alkalosis
+    title: "Metabolic alkalosis with high urine Cl−, urine K+ > 20 mEq and high BP: plasma renin (book p17)"
+    columns: [Plasma renin, Causes]
+    rows:
+      - ["Low", "Primary aldosteronism, licorice ingestion, Liddle syndrome"]
+      - ["High", "Renovascular HTN, malignant HTN, Cushing syndrome"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 17, quote: "Low 1° aldosteronism Licorice ingestion Liddle syndrome" }
+    status: unverified
+  - id: neph.L01.101
+    kind: order
+    topic: met-alkalosis
+    prompt: Order the tests of the lecture's metabolic alkalosis work-up.
+    steps:
+      - Urine Cl−
+      - Urine K+
+      - Blood pressure
+      - Plasma renin (if BP high) or urine Ca (if BP low)
+    src: { page: 17, quote: "Urine CI-" }
+    status: unverified
+  # ---------- p18-19: respiratory acidosis ----------
+  - id: neph.L01.102
+    kind: table
+    topic: resp-acidosis
+    title: Causes of acute respiratory acidosis (book p18)
+    columns: [Group, Examples]
+    rows:
+      - ["Depression of medullary respiratory center", "Anesthetics, sedatives, opiates; cerebral trauma or infarct; central sleep apnea; cardiac arrest"]
+      - ["Failure of respiratory muscles and chest wall", "Succinylcholine, curare, aminoglycosides; high cervical cordotomy; myasthenia crisis; Guillain–Barré; status epilepticus; tetanus; botulism; familial hypokalemic periodic paralysis; severe hypophosphatemia"]
+      - ["Airway obstruction", "Aspiration, laryngospasm, severe bronchospasm, obstructive sleep apnea"]
+      - ["Ventilatory defects", "Flail chest, pneumothorax, hydrothorax, ARDS, acute PE, acute pulmonary edema, severe asthma, severe pneumonia"]
+      - ["Mechanical ventilation", "Increased CO2 production from high carbohydrate feeding with fixed minute ventilation"]
+    blanks: [[0, 1], [2, 1], [4, 1]]
+    src: { page: 18, quote: "Causes of acute respiratory acidosis" }
+    status: unverified
+  - id: neph.L01.103
+    kind: card
+    topic: resp-acidosis
+    front: How can mechanical ventilation cause acute respiratory acidosis?
+    back: Increased CO2 production from high carbohydrate feedings with a fixed minute ventilation.
+    src: { page: 18, quote: "Mechanical ventilation: increased production of CO, due to high carbohydrate feedings and fixed minute ventilation" }
+    status: unverified
+  - id: neph.L01.104
+    kind: enumerate
+    topic: resp-acidosis
+    prompt: Mention drugs that cause acute respiratory acidosis.
+    points:
+      - Anesthetics, sedatives, opiates (central depression)
+      - Succinylcholine, curare, aminoglycosides (respiratory muscle failure)
+    pass: 2
+    src: { page: 18, quote: "Drugs: anesthetics, sedatives, opiates" }
+    status: unverified
+  - id: neph.L01.105
+    kind: card
+    topic: resp-acidosis
+    front: What is the most common cause of chronic respiratory acidosis?
+    back: Chronic obstructive pulmonary disease (COPD).
+    src: { page: 19, quote: "Chronic obstructive pulmonary disease (COPD) (most common cause)" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L01.106
+    kind: table
+    topic: resp-acidosis
+    title: Causes of chronic respiratory acidosis (book p19)
+    columns: [Group, Examples]
+    rows:
+      - ["Depression of medullary respiratory center", "Chronic sedative and opiate addiction, brain tumors, primary alveolar hypoventilation, obesity-hypoventilation, bulbar poliomyelitis"]
+      - ["Failure of respiratory muscles and chest wall", "Spinal cord injury, multiple sclerosis, muscular dystrophy, ALS, myxedema, poliomyelitis, diaphragmatic paralysis"]
+      - ["Airway obstruction", "COPD (most common cause)"]
+      - ["Ventilatory defects", "Hydrothorax, fibrothorax, kyphoscoliosis, interstitial lung fibrosis, severe chronic pneumonia, extreme obesity"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 19, quote: "CHRONIC Depression of medullary respiratory center Chronic sedative and opiate addiction Brain tumors" }
+    status: unverified
+  # ---------- p19: respiratory alkalosis ----------
+  - id: neph.L01.107
+    kind: enumerate
+    topic: resp-alkalosis
+    prompt: Mention causes of respiratory alkalosis by direct stimulation of the medullary respiratory center.
+    points:
+      - Voluntary or psychogenic hyperventilation
+      - Stroke; CNS infection, tumor or trauma
+      - Gram-negative sepsis
+      - Liver failure
+      - Pregnancy
+      - Hypermetabolic state (fever, thyrotoxicosis)
+      - Drugs (salicylates, progesterone, nicotine, xanthines, catecholamines, antipsychotics)
+    pass: 5
+    src: { page: 19, quote: "Direct stimulation of medullary respiratory center Voluntary or psychogenic hyperventilation Stroke" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L01.108
+    kind: card
+    topic: resp-alkalosis
+    front: Which pulmonary conditions cause respiratory alkalosis?
+    back: Pneumonia, asthma, pulmonary edema, pulmonary embolus, interstitial lung disease, high altitude (also hypotension and severe anemia in the same group).
+    src: { page: 19, quote: "Pulmonary diseases (pneumonia, asthma, pulmonary edema, pulmonary embolus, interstitial lung disease, high altitude, hypotension, severe anemia)" }
+    status: unverified
+  - id: neph.L01.109
+    kind: card
+    topic: resp-alkalosis
+    front: How does mechanical ventilation cause respiratory alkalosis?
+    back: Through a high minute ventilation.
+    src: { page: 19, quote: "Mechanical ventilation High minute ventilation" }
+    status: unverified
+  # ---------- p20-22: toxins ----------
+  - id: neph.L01.110
+    kind: card
+    topic: toxins
+    front: Which alcohols cause both hyperosmolality and high AG metabolic acidosis, and what should you measure?
+    back: Ethanol, methanol, ethylene glycol and propylene glycol; measure and calculate serum osmolality to find an osmolal gap.
+    src: { page: 20, quote: "it is important to measure and calculate serum osmolality to identify osmolal gap." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L01.111
+    kind: cloze
+    topic: toxins
+    text: The osmolal gap is measured minus calculated serum osmolality; normally the measured value is about {{c1::10}} mOsm higher, and values {{c2::> 10}} mOsm mean an osmolal gap is present.
+    src: { page: 20, quote: "Generally, the measured osmolality is 10 mOsm higher than the calculated osmolality. Values >10 mOsm represent the presence of an osmolal gap." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L01.112
+    kind: card
+    topic: toxins
+    front: What does an elevated osmolal gap suggest?
+    back: Osmotically active substances that are measured but not included in the calculation of osmolality.
+    src: { page: 20, quote: "Elevated osmolal gap suggests the presence of osmotically active substances that are measured, but not included in the calculation of osmolality." }
+    status: unverified
+  - id: neph.L01.113
+    kind: cloze
+    topic: toxins
+    text: "Calculated serum osmolality (mg/dL) = 2 × [Na] + glucose / {{c1::18}} + BUN / {{c2::2.8}}; in SI units = 2 × [Na] + glucose + urea."
+    src: { page: 20, quote: "Calculated Serum Osmolality = (2 x [Na]) + [glucose, in mg/dL]/18 + [blood urea nitrogen in mg/dL]/2.8" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: neph.L01.114
+    kind: enumerate
+    topic: toxins
+    prompt: Mention causes of a significantly high osmolal gap.
+    points:
+      - Ethylene glycol ingestion
+      - Methanol ingestion
+      - Ethanol or isopropyl alcohol ingestion
+      - End-stage renal disease without regular dialysis
+      - Ketoacidosis (diabetic or alcoholic)
+      - Lactic acidosis
+      - Formaldehyde, paraldehyde or diethyl ether ingestion
+      - Infusion of nonconductive glycine, sorbitol or mannitol
+      - Severe hyperproteinemia or hyperlipidemia
+      - Lab error
+    pass: 6
+    src: { page: 21, quote: "Causes of significantly high osmolal gap Ethylene glycol ingestion Methanol ingestion" }
+    status: unverified
+  - id: neph.L01.115
+    kind: card
+    topic: toxins
+    front: Which infusions can produce a high osmolal gap?
+    back: Nonconductive glycine, sorbitol or mannitol solutions.
+    src: { page: 21, quote: "Infusion of nonconductive glycine, sorbitol, or mannitol solutions" }
+    status: unverified
+  - id: neph.L01.116
+    kind: table
+    topic: toxins
+    title: The toxic alcohols compared (book p22)
+    columns: [Feature, Ethanol, Methanol, Isopropanol, Ethylene glycol]
+    rows:
+      - ["Common sources", "Beer, wine, hand sanitizers", "Windshield washer fluid, cheap alcohols", "Hand sanitizers, rubbing alcohol", "Antifreeze"]
+      - ["Toxic metabolites", "Acetoacetic acid, β-hydroxybutyric acid", "Formic acid", "Acetone", "Glycolic acid, oxalic acid"]
+      - ["Osmolal gap", "Present (lactate)", "Present", "Present", "Present"]
+      - ["High AG metabolic acidosis", "Present", "Present", "Absent", "Present"]
+      - ["Clinical clues", "Confusion", "Visual disturbance, blindness", "GI irritation, fruity breath odour, coma", "AKI, heart failure, calcium oxalate crystals in urine"]
+      - ["Treatment", "Supportive, low mortality", "Fomepizole or ethanol ± dialysis", "Supportive", "Fomepizole or ethanol ± dialysis"]
+    blanks: [[0, 4], [1, 2], [1, 4], [3, 3], [4, 2], [4, 4], [5, 2]]
+    src: { page: 22, quote: "Common Beer, Wine, hand washer fluid, Rubbing Antifreeze" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L01.117
+    kind: card
+    topic: toxins
+    front: Which toxic alcohol gives an osmolal gap without a high AG metabolic acidosis?
+    back: Isopropanol (metabolized to acetone).
+    src: { page: 22, quote: "Osmolal gap Present (lactate) Present Present Present" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L01.118
+    kind: cloze
+    topic: toxins
+    text: Methanol is metabolized to {{c1::formic acid}} and causes {{c2::visual disturbance and blindness}}.
+    src: { page: 22, quote: "Methanol Formic acid Visual disturbance Blindness" }
+    status: unverified
+  - id: neph.L01.119
+    kind: cloze
+    topic: toxins
+    text: Ethylene glycol (antifreeze) is metabolized to {{c1::glycolic and oxalic acid}} and causes AKI, heart failure and {{c2::calcium oxalate crystals}} in urine.
+    src: { page: 22, quote: "Ethylene Glycol Antifreeze Glycolic acid Oxalic acid AKI, heart failure Calcium oxalate crystals in urine" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L01.120
+    kind: card
+    topic: toxins
+    front: How are methanol and ethylene glycol poisoning treated?
+    back: Fomepizole or ethanol, with or without dialysis.
+    src: { page: 22, quote: "Treatment Fomepizole Or ethanol ± Dialysis" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L01.121
+    kind: cloze
+    topic: toxins
+    text: Salicylate toxicity first causes {{c1::respiratory alkalosis}} by stimulating the medullary respiratory center, then {{c2::metabolic acidosis}} from lactic acid and ketoacid production.
+    src: { page: 22, quote: "Initially respiratory alkalosis due to stimulation of medullary respiratory center by salicylate and hyperventilation." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L01.122
+    kind: card
+    topic: toxins
+    front: Which systems do salicylate manifestations mainly affect, and how is it treated?
+    back: Mainly the GIT and CNS; treatment includes urinary alkalinization and hemodialysis.
+    src: { page: 22, quote: "Manifestations mainly affecting GIT and CNS Treatment includes urinary alkalinization and HD." }
+    status: unverified
+  # ---------- MCQs ----------
+  - id: neph.L01.123
+    kind: mcq
+    topic: sampling
+    stem: "An ICU resident sends an ABG. Which is the most common category of error that makes ABG results unreliable?"
+    options:
+      - Analytic errors in the blood gas machine
+      - Preanalytic errors in collecting and handling the specimen
+      - Post-analytic transcription errors
+      - Calibration drift of the electrodes
+    answer: 1
+    why:
+      - "Possible, but the lecture stresses that ABGs are particularly vulnerable to preanalytic errors."
+      - "Correct: nonarterial samples, air bubbles, wrong anticoagulant amount and delayed analysis."
+      - "Not the error type the lecture highlights."
+      - "An analytic problem, not the most vulnerable step."
+    src: { page: 1, quote: "ABG measurements are particularly vulnerable to preanalytic errors." }
+    status: unverified
+  - id: neph.L01.124
+    kind: mcq
+    topic: sampling
+    stem: "A 70-year-old ventilated man in cardiogenic shock has arterial pCO2 40 mmHg but a central venous pCO2 of 70 mmHg. Best explanation?"
+    options:
+      - Air bubble in the venous sample
+      - More CO2 is added to poorly perfused tissue in low cardiac output
+      - Excess heparin in the arterial syringe
+      - Venous blood normally has a pCO2 30 mmHg higher than arterial
+    answer: 1
+    why:
+      - "An air bubble lowers pCO2; it does not explain a large AV difference."
+      - "Correct: low cardiac output on ventilation gives a large arteriovenous difference."
+      - "Anticoagulant errors do not create this pattern."
+      - "Normally venous pCO2 is only about 8 mmHg higher (48 vs 40)."
+    src: { page: 2, quote: "the arterial pCO2 remains normal, but central venous pCO2 may be extremely elevated, as more CO2 is added to the perfusing tissue." }
+    status: unverified
+  - id: neph.L01.125
+    kind: mcq
+    topic: normals
+    stem: "ABG: pH 7.52, PaCO2 28 mmHg, HCO3 23 mEq/L. Using ROME, the primary disorder is:"
+    options:
+      - Metabolic alkalosis
+      - Respiratory alkalosis
+      - Respiratory acidosis
+      - Metabolic acidosis
+    answer: 1
+    why:
+      - "Metabolic = equal: pH and HCO3 would both rise; HCO3 is normal here."
+      - "Correct: respiratory = opposite, pH ↑ with PaCO2 ↓."
+      - "pH is high, not low."
+      - "pH is high, not low."
+    src: { page: 3, quote: "Respiratory Opposite – pH ↑ PaCO2 ↓ Alkalosis" }
+    status: unverified
+  - id: neph.L01.126
+    kind: mcq
+    topic: henderson
+    stem: "A lab reports pH 7.40 with pCO2 60 mmHg and HCO3 24 mEq/L. Using the Henderson equation, what do you conclude?"
+    options:
+      - The values are consistent
+      - "[H+] = 60 nmol/L, which fits pH about 7.20, so the report is not internally valid"
+      - "[H+] = 40 nmol/L, so the pH is correct"
+      - The Henderson equation cannot be used without logarithms
+    answer: 1
+    why:
+      - "24 × 60/24 = 60 nmol/L, which does not match pH 7.40 (40 nmol/L)."
+      - "Correct: the equation checks the validity of the lab pH; 60 nmol/L ≈ pH 7.20."
+      - "That would need pCO2 40 with HCO3 24."
+      - "The Henderson equation avoids logarithms; that is its point."
+    src: { page: 4, quote: "The Henderson equation is thus used clinically to check the validity of pH obtained from the clinical laboratory." }
+    status: unverified
+  - id: neph.L01.127
+    kind: mcq
+    topic: anion-gap
+    stem: "A diabetic has Na 135, Cl 100, HCO3 10 mEq/L and glucose 600 mg/dL. Which sodium should be used to calculate the anion gap?"
+    options:
+      - Glucose-corrected sodium
+      - Measured sodium
+      - Sodium corrected for albumin
+      - Sodium plus potassium
+    answer: 1
+    why:
+      - "Using corrected Na without correcting Cl and HCO3 overestimates the AG."
+      - "Correct: the lecture emphasizes only measured Na+."
+      - "Albumin corrects the AG itself, not sodium."
+      - "K+ is not routinely included because it changes little."
+    src: { page: 8, quote: "It is, thus, emphasized that only measured Na+ should be used to calculate the serum AG." }
+    status: unverified
+  - id: neph.L01.128
+    kind: mcq
+    topic: anion-gap
+    stem: "A 30-year-old with gastroenteritis has 3 days of watery diarrhea. Na 138, Cl 114, HCO3 14 mEq/L. Mechanism of his acidosis?"
+    options:
+      - Accumulation of unmeasured anions
+      - Loss of HCO3- in stool with a high Cl-
+      - Decreased NH3 excretion
+      - Release of Cl- in exchange for HCO3- by a resin
+    answer: 1
+    why:
+      - "AG = 138 − 128 = 10, normal; no unmeasured anion accumulates."
+      - "Correct: diarrhea is a normal AG (hyperchloremic) acidosis from stool HCO3 loss."
+      - "That is CKD stages 4–5."
+      - "That is cholestyramine."
+    src: { page: 9, quote: "Diarrhea | Loss of HCO; in stool" }
+    status: unverified
+  - id: neph.L01.129
+    kind: mcq
+    topic: anion-gap
+    stem: "A cirrhotic patient has albumin 2.0 g/dL and a measured AG of 8 mEq/L. Lactate is 6 mmol/L. What is happening?"
+    options:
+      - Low albumin cannot affect the AG
+      - The low albumin hides a high AG; corrected AG is about 13
+      - "AG 8 rules out lactic acidosis"
+      - The AG should be corrected using glucose
+    answer: 1
+    why:
+      - "Albumin is the major unmeasured anion."
+      - "Correct: AG falls 2.5 per g/dL albumin below 4.0, so add 5: 8 + 5 = 13."
+      - "Hypoalbuminemia can mask an elevated AG."
+      - "Glucose affects sodium, not this correction."
+    src: { page: 9, quote: "for each gram decrease in albumin from normal value, the AG decreases by 2.5" }
+    status: unverified
+  - id: neph.L01.130
+    kind: mcq
+    topic: anion-gap
+    stem: "A 62-year-old with bone pain and anemia has Na 138, Cl 108, HCO3 26 mEq/L. AG is 4. Which cause of low AG fits best?"
+    options:
+      - Diarrhea
+      - IgG myeloma
+      - Diabetic ketoacidosis
+      - Ethylene glycol
+    answer: 1
+    why:
+      - "Diarrhea gives a normal AG acidosis."
+      - "Correct: IgG myeloma lowers the AG by increasing unmeasured cations."
+      - "DKA raises the AG."
+      - "Ethylene glycol raises the AG."
+    src: { page: 10, quote: "IgG myeloma Increased number of cations" }
+    status: unverified
+  - id: neph.L01.131
+    kind: mcq
+    topic: delta
+    stem: "A septic patient: Na 140, Cl 96, HCO3 14 mEq/L. AG = 30. Delta ratio = (30 − 12)/(24 − 14) = 1.8. Interpretation?"
+    options:
+      - Normal AG metabolic acidosis
+      - Mixed normal AG and high AG metabolic acidosis
+      - Pure high AG metabolic acidosis
+      - High AG metabolic acidosis with metabolic alkalosis
+    answer: 2
+    why:
+      - "That is < 0.4."
+      - "That is 0.4–0.8."
+      - "Correct: 0.8–2.0 is pure high AG metabolic acidosis (lactic acidosis averages 1.6)."
+      - "That needs > 2.0."
+    src: { page: 12, quote: "0.8 - 2.0 Pure high anion gap metabolic acidosis" }
+    status: unverified
+  - id: neph.L01.132
+    kind: mcq
+    topic: delta
+    stem: "A diabetic with 3 days of vomiting: Na 140, Cl 85, HCO3 20 mEq/L. AG = 35. What does the delta ratio show?"
+    options:
+      - Pure high AG metabolic acidosis
+      - Mixed high AG and normal AG metabolic acidosis
+      - High AG metabolic acidosis with metabolic alkalosis
+      - Normal AG metabolic acidosis
+    answer: 2
+    why:
+      - "Ratio = 23/4 ≈ 5.8, far above 2."
+      - "That would give 0.4–0.8."
+      - "Correct: ratio > 2; HCO3 is too high for the AG rise because vomiting added alkali."
+      - "The AG is clearly high."
+    src: { page: 11, quote: "In a mixed high AG metabolic acidosis and metabolic alkalosis, the HCO3− level is inappropriately high relative to the increase in AG." }
+    status: unverified
+  - id: neph.L01.133
+    kind: mcq
+    topic: delta
+    stem: "A patient with DKA plus profuse diarrhea: AG 18, HCO3 8 mEq/L. Delta ratio?"
+    options:
+      - "About 0.4, mixed high and normal AG metabolic acidosis"
+      - "About 1, pure high AG metabolic acidosis"
+      - "About 2.5, with metabolic alkalosis"
+      - "Cannot be calculated"
+    answer: 0
+    why:
+      - "Correct: (18 − 12)/(24 − 8) = 6/16 ≈ 0.38–0.4; HCO3 fell more than the AG rose, so a normal AG acidosis is added."
+      - "The ratio is well below 0.8."
+      - "That needs HCO3 inappropriately high."
+      - "AG and HCO3 are both available."
+    src: { page: 11, quote: "the ∆AG/∆HCO3− ratio is <1 (above 0 but below 1), indicating a mixed high and normal AG metabolic acidosis." }
+    status: unverified
+  - id: neph.L01.134
+    kind: mcq
+    topic: compensation
+    stem: "Metabolic acidosis with HCO3 12 mEq/L and PaCO2 34 mmHg. Expected PaCO2 by Winter's formula is 26 ± 2. What is the PaCO2 telling you?"
+    options:
+      - Appropriate compensation
+      - Complicating respiratory acidosis
+      - Complicating respiratory alkalosis
+      - Complicating metabolic alkalosis
+    answer: 1
+    why:
+      - "34 is above 24–28."
+      - "Correct: pCO2 failed to fall to the expected value."
+      - "That would be a pCO2 below the expected value."
+      - "pCO2 judges the respiratory component here."
+    src: { page: 13, quote: "Failure of the Pco, to decrease to expected value = complicating respiratory acidosis" }
+    status: unverified
+  - id: neph.L01.135
+    kind: mcq
+    topic: compensation
+    stem: "A COPD patient has a stable PaCO2 of 60 mmHg. Per the p13 table, what HCO3 is expected if this is chronic?"
+    options:
+      - "26 mEq/L"
+      - "31 mEq/L"
+      - "20 mEq/L"
+      - "40 mEq/L"
+    answer: 1
+    why:
+      - "That is the acute response: +1 per 10 mmHg = 24 + 2."
+      - "Correct: chronic +3.5 per 10 mmHg × 2 = +7, so 24 + 7 = 31."
+      - "HCO3 rises, not falls, in respiratory acidosis."
+      - "Too high: exceeds the expected renal response."
+    src: { page: 13, quote: "Chronic: 3.5 meqit 7 [Hco,] for each 10 mm Hg T in Pco," }
+    status: unverified
+  - id: neph.L01.136
+    kind: mcq
+    topic: compensation
+    stem: "Acute hyperventilation from a panic attack lowers PaCO2 from 40 to 20 mmHg. Expected HCO3 (acute)?"
+    options:
+      - "24 mEq/L"
+      - "20 mEq/L"
+      - "14 mEq/L"
+      - "28 mEq/L"
+    answer: 1
+    why:
+      - "Some fall is expected even acutely."
+      - "Correct: acute fall of 2 per 10 mmHg × 2 = 4, so 24 − 4 = 20."
+      - "That is the chronic response (5 per 10)."
+      - "HCO3 falls, not rises, in respiratory alkalosis."
+    src: { page: 13, quote: "Respiratory alkalosis Acute: | 2 meq/L [Hco,] for each 10 mm Hg 4 in Pco," }
+    status: unverified
+  - id: neph.L01.137
+    kind: mcq
+    topic: compensation
+    stem: "Metabolic alkalosis with HCO3 40 mEq/L. Using 0.7 × HCO3 + 20, what PaCO2 do you expect?"
+    options:
+      - "About 40 mmHg"
+      - "About 48 mmHg (± 5)"
+      - "About 68 mmHg"
+      - "About 30 mmHg"
+    answer: 1
+    why:
+      - "pCO2 should rise in compensation."
+      - "Correct: 0.7 × 40 + 20 = 48."
+      - "Too high for the formula."
+      - "A low pCO2 would mean added respiratory alkalosis."
+    src: { page: 14, quote: "0.7 X [HCO3] + 20 (+/- 5)" }
+    status: unverified
+  - id: neph.L01.138
+    kind: mcq
+    topic: met-alkalosis
+    stem: "A young woman with metabolic alkalosis, hypokalemia and normal BP has urine Cl 8 mEq/L and dental erosions. Most likely cause?"
+    options:
+      - Gitelman syndrome
+      - Surreptitious vomiting
+      - Primary aldosteronism
+      - Liddle syndrome
+    answer: 1
+    why:
+      - "Gitelman gives urine Cl > 10–20."
+      - "Correct: urine Cl < 10–20 mEq is the chloride-responsive branch; vomiting is the common cause."
+      - "Hypertensive, with high urine Cl."
+      - "Hypertensive, with high urine Cl."
+    src: { page: 17, quote: "Vomiting (common) Chloruretic diuretics (common) Villous adenoma (rare)" }
+    status: unverified
+  - id: neph.L01.139
+    kind: mcq
+    topic: met-alkalosis
+    stem: "Hypokalemic metabolic alkalosis, BP normal-low, urine Cl and K both high, low urine calcium, hypomagnesemia. Diagnosis?"
+    options:
+      - Bartter syndrome
+      - Gitelman syndrome
+      - Primary aldosteronism
+      - Laxative abuse
+    answer: 1
+    why:
+      - "Bartter gives high urine calcium."
+      - "Correct: low urine Ca separates Gitelman from Bartter."
+      - "Hypertensive, with low renin."
+      - "Laxatives give urine K < 20 mEq."
+    src: { page: 17, quote: "Low (Gitleman syndrome) High (Bartter syndrome)" }
+    status: unverified
+  - id: neph.L01.140
+    kind: mcq
+    topic: met-alkalosis
+    stem: "A hypertensive man has hypokalemic metabolic alkalosis, urine Cl 60 and urine K 40 mEq, and a LOW plasma renin. Which is NOT on the low-renin list?"
+    options:
+      - Primary aldosteronism
+      - Licorice ingestion
+      - Liddle syndrome
+      - Renovascular hypertension
+    answer: 3
+    why:
+      - "Low renin."
+      - "Low renin."
+      - "Low renin."
+      - "Correct: renovascular HTN has a high renin, with malignant HTN and Cushing."
+    src: { page: 17, quote: "High Renovascular HTN Malignant HTN" }
+    status: unverified
+  - id: neph.L01.141
+    kind: mcq
+    topic: resp-acidosis
+    stem: "Which of these causes ACUTE respiratory acidosis by failure of the respiratory muscles?"
+    options:
+      - Obesity-hypoventilation syndrome
+      - Myasthenia crisis
+      - Kyphoscoliosis
+      - COPD
+    answer: 1
+    why:
+      - "Chronic, central (alveolar hypoventilation)."
+      - "Correct: myasthenia crisis is in the acute muscle-failure group, with Guillain–Barré and botulism."
+      - "Chronic ventilatory defect."
+      - "Chronic airway obstruction (most common chronic cause)."
+    src: { page: 18, quote: "Myasthenia crisis" }
+    status: unverified
+  - id: neph.L01.142
+    kind: mcq
+    topic: resp-alkalosis
+    stem: "Which condition causes respiratory alkalosis by direct stimulation of the medullary respiratory center?"
+    options:
+      - Myxedema
+      - Liver failure
+      - Morphine overdose
+      - Flail chest
+    answer: 1
+    why:
+      - "Myxedema causes chronic respiratory acidosis."
+      - "Correct: liver failure, with sepsis, pregnancy and salicylates."
+      - "Opiates depress the center: respiratory acidosis."
+      - "Flail chest causes acute respiratory acidosis."
+    src: { page: 19, quote: "Liver failure" }
+    status: unverified
+  - id: neph.L01.143
+    kind: mcq
+    topic: toxins
+    stem: "A man found confused after drinking rubbing alcohol has a fruity odour, a high osmolal gap and a NORMAL anion gap. Which alcohol?"
+    options:
+      - Methanol
+      - Ethylene glycol
+      - Isopropanol
+      - Ethanol
+    answer: 2
+    why:
+      - "Methanol causes high AG acidosis and blindness."
+      - "Ethylene glycol causes high AG acidosis and oxalate crystals."
+      - "Correct: isopropanol → acetone; osmolal gap present, high AG acidosis absent."
+      - "Ethanol ketoacids give a high AG acidosis in the table."
+    src: { page: 22, quote: "Isopropanol Rubbing alcohol Acetone Osmolal gap Present High anion gap metabolic acidosis Absent" }
+    status: unverified
+  - id: neph.L01.144
+    kind: mcq
+    topic: toxins
+    stem: "A mechanic drank antifreeze. He has high AG acidosis, an osmolal gap, AKI and envelope crystals in urine. Treatment?"
+    options:
+      - Supportive care only
+      - Fomepizole or ethanol, with or without dialysis
+      - Urinary alkalinization
+      - N-acetylcysteine
+    answer: 1
+    why:
+      - "Supportive care is for isopropanol and ethanol."
+      - "Correct: ethylene glycol → fomepizole or ethanol ± dialysis."
+      - "That is salicylate treatment."
+      - "That is for paracetamol, not in this table."
+    src: { page: 22, quote: "Treatment Fomepizole Or ethanol ± Dialysis" }
+    status: unverified
+  - id: neph.L01.145
+    kind: mcq
+    topic: toxins
+    stem: "Two hours after a large aspirin ingestion, a patient is tachypneic with tinnitus. ABG shows pH 7.50, PaCO2 25 mmHg. Explanation?"
+    options:
+      - Early lactic acidosis
+      - Salicylate stimulates the medullary respiratory center first
+      - Metabolic alkalosis from vomiting
+      - Compensated metabolic acidosis
+    answer: 1
+    why:
+      - "Lactic and ketoacids come later."
+      - "Correct: the initial disorder is respiratory alkalosis."
+      - "pCO2 is low, the pattern of a respiratory alkalosis."
+      - "Compensation never produces an alkalemic pH."
+    src: { page: 22, quote: "Initially respiratory alkalosis due to stimulation of medullary respiratory center by salicylate and hyperventilation." }
+    status: unverified
+  - id: neph.L01.146
+    kind: mcq
+    topic: toxins
+    stem: "Na 140 mEq/L, glucose 90 mg/dL, BUN 14 mg/dL, measured osmolality 320 mOsm/kg. What is the calculated osmolality and the gap?"
+    options:
+      - "About 290; gap about 30, present"
+      - "About 300; gap about 20, absent"
+      - "About 280; gap 40, absent"
+      - "About 320; no gap"
+    answer: 0
+    why:
+      - "Correct: 280 + 5 + 5 = 290; gap = 30 > 10, so an osmolal gap is present."
+      - "Calculation is off, and any gap > 10 counts as present."
+      - "Calculation is off, and a gap of 40 would be present."
+      - "The calculated value is not 320."
+    src: { page: 20, quote: "Calculated Serum Osmolality = (2 x [Na]) + [glucose, in mg/dL]/18 + [blood urea nitrogen in mg/dL]/2.8" }
+    status: unverified
+  - id: neph.L01.147
+    kind: mcq
+    topic: anion-gap
+    stem: "Which of these is a cause of HIGH anion gap metabolic acidosis?"
+    options:
+      - Acetazolamide
+      - Ureterosigmoidostomy
+      - Methanol
+      - Proximal RTA
+    answer: 2
+    why:
+      - "Normal AG: HCO3 loss in urine."
+      - "Normal AG: HCO3 loss in stool."
+      - "Correct: methanol → formate, M of MUDPILES."
+      - "Normal AG: HCO3 loss in urine."
+    src: { page: 8, quote: "Methanol Formate" }
+    status: unverified
+  - id: neph.L01.148
+    kind: mcq
+    topic: compensation
+    stem: "In which acid–base disorder is the secondary change a rise in HCO3- reabsorption?"
+    options:
+      - Metabolic acidosis
+      - Metabolic alkalosis
+      - Respiratory acidosis
+      - Respiratory alkalosis
+    answer: 2
+    why:
+      - "Compensated by hyperventilation."
+      - "Compensated by hypoventilation."
+      - "Correct: the kidney increases HCO3 reabsorption."
+      - "Here HCO3 reabsorption decreases."
+    src: { page: 13, quote: "Primary acid—base disturbances and their secondary response" }
+    status: unverified
+  # ---------- cases ----------
+  - id: neph.L01.149
+    kind: case
+    topic: algorithm
+    stem: "A 24-year-old with type 1 diabetes has vomiting and Kussmaul breathing. ABG: pH 7.20, PaCO2 22 mmHg, HCO3 8 mEq/L. Na 136, Cl 100 mEq/L."
+    steps:
+      - question: "Step 2: acidemia or alkalemia?"
+        options: ["Acidemia", "Alkalemia", "Normal pH", "Cannot tell"]
+        answer: 0
+        why: "pH < 7.35 = acidaemia."
+      - question: "Step 3: primary disorder?"
+        options: ["Metabolic acidosis", "Respiratory acidosis", "Respiratory alkalosis", "Metabolic alkalosis"]
+        answer: 0
+        why: "pH and HCO3 both low: metabolic = equal."
+      - question: "Step 4: expected PaCO2 by Winter (1.5 × HCO3 + 8 ± 2)?"
+        options: ["20 ± 2, so 22 is appropriate", "40, so respiratory acidosis", "12, so respiratory alkalosis", "Compensation does not apply"]
+        answer: 0
+        why: "1.5 × 8 + 8 = 20; 22 sits within ± 2."
+      - question: "Step 5: anion gap?"
+        options: ["28, high", "10, normal", "4, low", "36, high"]
+        answer: 0
+        why: "136 − (100 + 8) = 28 > 16."
+      - question: "Step 6: delta ratio (28 − 12)/(24 − 8)?"
+        options: ["1.0: pure high AG metabolic acidosis", "0.3: normal AG acidosis", "3: with metabolic alkalosis", "0.6: mixed"]
+        answer: 0
+        why: "16/16 = 1, within 0.8–2.0."
+    src: { page: 20, quote: "Steps for ABG analysis: 1. Check for validity 2. What is the pH? Acidemia or Alkalemia?" }
+    status: unverified
+  - id: neph.L01.150
+    kind: case
+    topic: toxins
+    stem: "A 45-year-old man is brought confused with blurred vision after drinking 'cheap alcohol'. pH 7.15, HCO3 8 mEq/L, AG 30."
+    steps:
+      - question: Which extra test is most important now?
+        options: ["Measured serum osmolality to calculate the osmolal gap", "Urine chloride", "Plasma renin", "Urine calcium"]
+        answer: 0
+        why: "Suspected toxic alcohol: measure and calculate osmolality for the osmolal gap."
+      - reveal: "Measured osmolality 330; calculated 295 mOsm/kg."
+        question: Interpretation?
+        options: ["Osmolal gap 35, present", "No gap", "Gap only significant above 50", "Lab error is the only explanation"]
+        answer: 0
+        why: "Gap > 10 mOsm means an osmolal gap."
+      - question: Most likely alcohol and toxic metabolite?
+        options: ["Methanol, formic acid", "Isopropanol, acetone", "Ethylene glycol, oxalic acid", "Ethanol, acetaldehyde"]
+        answer: 0
+        why: "Cheap alcohol plus visual disturbance = methanol → formic acid."
+      - question: Treatment?
+        options: ["Fomepizole or ethanol ± dialysis", "Supportive only", "Urinary alkalinization", "Bicarbonate only"]
+        answer: 0
+        why: "The book's treatment for methanol."
+    src: { page: 22, quote: "Methanol Formic acid Visual disturbance Blindness" }
+    status: unverified
+  - id: neph.L01.151
+    kind: case
+    topic: met-alkalosis
+    stem: "A 40-year-old woman has BP 170/100 and hypokalemia. ABG: pH 7.50, HCO3 34 mEq/L."
+    steps:
+      - question: First urine test in the work-up?
+        options: ["Urine chloride", "Urine calcium", "Urine osmolality", "Urine glucose"]
+        answer: 0
+        why: "The algorithm starts with urine Cl−."
+      - reveal: "Urine Cl 70 mEq, urine K 45 mEq."
+        question: Next step?
+        options: ["Check BP: it is high, so plasma renin", "Diagnose vomiting", "Diagnose laxative abuse", "Urine calcium"]
+        answer: 0
+        why: "High urine Cl and K > 20 → check BP; high BP → plasma renin."
+      - reveal: "Plasma renin is suppressed (low)."
+        question: Which list fits?
+        options: ["Primary aldosteronism, licorice, Liddle", "Renovascular and malignant HTN, Cushing", "Bartter, Gitelman", "Vomiting, villous adenoma"]
+        answer: 0
+        why: "Low renin with high BP."
+    src: { page: 17, quote: "Low 1° aldosteronism Licorice ingestion Liddle syndrome" }
+    status: unverified
+  - id: neph.L01.152
+    kind: case
+    topic: compensation
+    stem: "A 68-year-old with COPD is drowsy after an opiate dose. ABG: pH 7.25, PaCO2 70 mmHg, HCO3 30 mEq/L."
+    steps:
+      - question: Primary disorder?
+        options: ["Respiratory acidosis", "Metabolic acidosis", "Metabolic alkalosis", "Respiratory alkalosis"]
+        answer: 0
+        why: "pH ↓ with PaCO2 ↑: respiratory = opposite."
+      - question: "Expected HCO3 if ACUTE (1 per 10 mmHg)?"
+        options: ["27", "34.5", "24", "31"]
+        answer: 0
+        why: "24 + 3 × 1 = 27."
+      - question: "Expected HCO3 if CHRONIC (3.5 per 10 mmHg)?"
+        options: ["34.5", "27", "30", "38"]
+        answer: 0
+        why: "24 + 3 × 3.5 = 34.5."
+      - question: "HCO3 is 30, between the two. Best reading?"
+        options: ["Acute-on-chronic respiratory acidosis (opiate on top of COPD)", "Pure acute respiratory acidosis", "Added metabolic alkalosis", "Added metabolic acidosis only"]
+        answer: 0
+        why: "Between acute and chronic expectations fits an acute rise on a chronic background; opiates depress the center acutely."
+    src: { page: 13, quote: "Chronic: 3.5 meqit 7 [Hco,] for each 10 mm Hg T in Pco," }
+    status: unverified

@@ -1,0 +1,967 @@
+schema: batna.content/v1
+lecture: geri.L03
+title: "Principles of drug use: prescribing for the elderly"
+author: "Prof. Suzan Abou-Raya"
+book: { chapter: 7, pages: [40, 53] }
+topics:
+  - { id: challenges, title: "Geriatric therapeutic challenges and polypharmacy risk" }
+  - { id: pk, title: "Pharmacokinetics: absorption, distribution, clearance" }
+  - { id: renal, title: "Renal clearance and Cockcroft-Gault" }
+  - { id: hepatic, title: "Hepatic metabolism, extraction and dosing" }
+  - { id: pd, title: "Pharmacodynamics in the elderly" }
+  - { id: problems, title: "Medication therapy problems, ADEs and inappropriate drugs" }
+  - { id: principles, title: "Principles of drug use and rational prescribing" }
+  - { id: high-risk, title: "High-risk drugs and drug interactions" }
+  - { id: questions, title: "Book questions" }
+items:
+  # ---------- p40-41: challenges and polypharmacy ----------
+  - id: geri.L03.001
+    kind: card
+    topic: challenges
+    front: What is "homeostenosis"?
+    back: The impaired physiological reserve of older patients, the first geriatric therapeutic challenge.
+    src: { page: 40, quote: "Impaired physiological reserve in older patients- \"homeostenosis\"." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L03.002
+    kind: enumerate
+    topic: challenges
+    prompt: List the geriatric therapeutic challenges.
+    points:
+      - Impaired physiological reserve (homeostenosis)
+      - Multiple disease and multiple drug use
+      - Non-specific or cryptic presentation
+      - Rapid deterioration if untreated (age-associated loss of adaptability)
+      - High incidence of complications of disease and treatment
+    pass: 4
+    src: { page: 40, quote: "Multiple disease and multiple drug use. Non-specific or cryptic presentation. Rapid deterioration if untreated (age-associated loss of adaptability)." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L03.003
+    kind: cloze
+    topic: challenges
+    text: "Older patients deteriorate rapidly if untreated because of age-associated loss of {{c1::adaptability}}, and they have a high incidence of {{c2::complications}} of both disease and treatment."
+    src: { page: 40, quote: "Rapid deterioration if untreated (age-associated loss of adaptability). High incidence of complications (of disease and treatment)." }
+    status: unverified
+  - id: geri.L03.004
+    kind: mcq
+    topic: challenges
+    stem: "In the book's chart (May 1977), roughly what share of patients taking 16–20 drugs had side effects?"
+    options:
+      - "About 55%"
+      - "About 5%"
+      - "About 10%"
+      - "About 25%"
+    answer: 0
+    why:
+      - "Correct: the 16–20 bar reaches just over 50%; side effects climb steeply with the number of drugs."
+      - "About 5% is the 0–5 drugs bar."
+      - "About 10% is the 6–10 drugs bar."
+      - "About 25–28% is the 11–15 drugs bar."
+    src: { page: 40, quote: "Relationship between number of drugs and side effects" }
+    status: unverified
+    tags: [numbers]
+  - id: geri.L03.005
+    kind: card
+    topic: challenges
+    front: How does the percentage of patients with side effects change with the number of drugs taken?
+    back: "It rises steeply: about 5% with 0–5 drugs, 10% with 6–10, about 28% with 11–15 and over 50% with 16–20 (May et al. 1977)."
+    src: { page: 40, quote: "Relationship between number of drugs and side effects" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: geri.L03.006
+    kind: card
+    topic: challenges
+    front: How does the number of prescribing physicians relate to drug side effects, and which drug group shows it most?
+    back: "Drug side effects rise with the number of prescribing physicians, most of all for psychotropic drugs (about 17% with one prescriber to about 34% with five); NSAIDs and cardiovascular drugs rise less (Tamblyn 1996)."
+    src: { page: 41, quote: "Number of prescribing physicians and risk of side effects" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p41-43: pharmacokinetics ----------
+  - id: geri.L03.007
+    kind: enumerate
+    topic: pk
+    prompt: Name the four parts of pharmacokinetics in the lecture.
+    points:
+      - Absorption
+      - Distribution
+      - Metabolism
+      - Clearance
+    pass: 4
+    src: { page: 41, quote: "Pharmacokinetics Absorption Distribution Metabolism Clearance" }
+    status: unverified
+  - id: geri.L03.008
+    kind: card
+    topic: pk
+    front: Is drug absorption a practical problem in the elderly? What is the caveat?
+    back: Usually not. The caveat is continuous tube feeding, which may reduce absorption.
+    src: { page: 41, quote: "From a practical standpoint this is not usually a problem in the elderly Caveat: Tube feedings may reduce absorption if continuous" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L03.009
+    kind: card
+    topic: pk
+    front: How does low serum albumin change drug distribution in the elderly?
+    back: It changes the free versus bound proportion of drugs (more free drug for highly bound drugs).
+    src: { page: 41, quote: "Low serum albumin -- results in changing the free vs. bound proportion of drugs" }
+    status: unverified
+  - id: geri.L03.010
+    kind: cloze
+    topic: pk
+    text: "Increased body fat in the elderly increases the {{c1::half-life}} of {{c2::lipophilic}} drugs such as diazepam and anesthetics."
+    src: { page: 42, quote: "Increased fat -- increases the half life of lipophylic drugs (e.g. diazepam, anesthetics)" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L03.011
+    kind: mcq
+    topic: pk
+    stem: "Which age-related change in distribution does the lecture call the most important?"
+    options:
+      - "Decreased body water, lowering the Vd of polar drugs"
+      - "Increased body fat"
+      - "Decreased muscle mass"
+      - "Increased alpha-1 acid glycoprotein"
+    answer: 0
+    why:
+      - "Correct: less body water gives a lower Vd for polar (water-soluble) drugs, so levels run higher."
+      - "Body fat rises and prolongs lipophilic drug half-life, but the book calls body water the most important change."
+      - "Muscle mass falls, but it is not named the most important."
+      - "It rises with age (p44 table) but is not the change the book singles out."
+    src: { page: 42, quote: "Decreased body water -- the most important change, lower Vd. in polar drugs" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L03.012
+    kind: enumerate
+    topic: pk
+    prompt: List the age-related changes that alter drug distribution in the elderly.
+    points:
+      - Low serum albumin (free vs bound proportion changes)
+      - Increased fat (longer half-life of lipophilic drugs)
+      - Decreased body water (lower Vd of polar drugs; the most important)
+      - Decreased muscle mass
+    pass: 3
+    src: { page: 42, quote: "Decreased body water -- the most important change, lower Vd. in polar drugs Decreased muscle mass" }
+    status: unverified
+  - id: geri.L03.013
+    kind: table
+    topic: pk
+    title: "Volume of distribution in geriatric patients"
+    columns: [Drug type, Vd with age, Reason]
+    rows:
+      - ["Hydrophilic (Qo <0.3)", "Decreased", "Less body water"]
+      - ["Lipophilic (Qo >0.5)", "Increased", "More body fat"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 46, quote: "Volume of distribution (Vd) - Hydrophilic drugs (Qo<0.3) ↓ - Lipophilic drugs (Qo>0.5) ↑" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L03.014
+    kind: cloze
+    topic: pk
+    text: "Half-life (t1/2) is roughly proportional to {{c1::volume of distribution}} divided by {{c2::clearance}}."
+    src: { page: 43, quote: "Half-life(t1/2) ≈ vol. of distribution(Vd) over clearance(CI)" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L03.015
+    kind: card
+    topic: pk
+    front: Why does diazepam last much longer in an old person?
+    back: "More body fat raises its Vd, and lower clearance (reduced phase I metabolism) adds to it; since t1/2 ≈ Vd / clearance, both lengthen the half-life."
+    src: { page: 42, quote: "Increased fat -- increases the half life of lipophylic drugs (e.g. diazepam, anesthetics)" }
+    status: unverified
+  # ---------- p42-43: renal clearance ----------
+  - id: geri.L03.016
+    kind: cloze
+    topic: renal
+    text: "Renal function declines by about {{c1::one third}} with normal ageing; take care with {{c2::digoxin}} and gentamicin."
+    src: { page: 43, quote: "Renal function declines by about 1/3 with normal ageing- NB- digoxin, gentamicin." }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: geri.L03.017
+    kind: card
+    topic: renal
+    front: Do normal renal function tests mean normal renal function in an old person?
+    back: No. Serum creatinine is not a reliable measure; estimate clearance (Cockcroft-Gault).
+    src: { page: 43, quote: "NB normal renal function tests do not mean normal renal function in the elderly." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L03.018
+    kind: enumerate
+    topic: renal
+    prompt: Why is GFR lower in the elderly (renal clearance reduced)?
+    points:
+      - Decreased kidney size
+      - Decreased tubular secretion
+      - Decreased renal blood flow
+    pass: 3
+    src: { page: 42, quote: "Lower GFR (decreased: size, tubular secretion, renal blood flow)" }
+    status: unverified
+  - id: geri.L03.019
+    kind: cloze
+    topic: renal
+    text: "Cockcroft-Gault: CrCl = ({{c1::140 − age}}) × body weight (kg) ÷ ({{c2::72}} × serum creatinine), × {{c3::0.85}} for women."
+    src: { page: 42, quote: "(140-age) x body wt. (kg.) Cr cl. = 72 x Serum Cr. (x 0.85 for Women)" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L03.020
+    kind: calc
+    topic: renal
+    calculator: cockcroft_gault
+    stem: "An 85-year-old woman weighing 50 kg has a 'normal' serum creatinine of 1.0 mg/dl. Estimate her creatinine clearance."
+    inputs: { age_years: 85, weight_kg: 50, creatinine_mg_dl: 1.0, sex: female }
+    expect: "32.5 mL/min"
+    interpret: "About 32 ml/min: a normal creatinine hides a clearance under a third of a young adult's, so renally cleared drugs need dose review."
+    src: { page: 42, quote: "(140-age) x body wt. (kg.) Cr cl. = 72 x Serum Cr. (x 0.85 for Women)" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L03.021
+    kind: calc
+    topic: renal
+    calculator: cockcroft_gault
+    stem: "A 78-year-old man weighing 65 kg has a serum creatinine of 1.4 mg/dl. Estimate his creatinine clearance."
+    inputs: { age_years: 78, weight_kg: 65, creatinine_mg_dl: 1.4, sex: male }
+    expect: "40.0 mL/min"
+    interpret: "About 40 ml/min, so digoxin, aminoglycosides and other renally cleared drugs need lower doses."
+    src: { page: 42, quote: "Serum creatinine is not a reliable measure and Cockcroft-Gault is an estimate" }
+    status: unverified
+  - id: geri.L03.022
+    kind: enumerate
+    topic: renal
+    prompt: List the drug groups with predominant renal elimination given in the lecture.
+    points:
+      - Aminoglycosides
+      - "Antimycotics: fluconazole, flucytosine"
+      - "Antivirals: acyclovir, ganciclovir, ribavirin"
+      - "Beta-blockers: atenolol, sotalol"
+      - "Beta-lactam antibiotics: penicillins, cephalosporins"
+      - Digoxin
+      - H2-blockers
+      - Lithium
+    pass: 6
+    src: { page: 46, quote: "Betablockers: atenolol, sotalol Betalactam antibiotics: penicillins, cepha-losporins Digoxin H2-Blockers Lithium" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L03.023
+    kind: mcq
+    topic: renal
+    stem: "Which beta-blocker is listed by the lecture as mainly renally eliminated, so its dose needs review when CrCl is low?"
+    options:
+      - "Atenolol"
+      - "Propranolol"
+      - "Metoprolol"
+      - "Carvedilol"
+    answer: 0
+    why:
+      - "Correct: atenolol and sotalol are the renally cleared beta-blockers in the list."
+      - "Propranolol is a high-extraction hepatically metabolised drug (p45)."
+      - "Metoprolol is a high-extraction hepatically metabolised drug (p45)."
+      - "Carvedilol is hepatically metabolised and not in the renal list."
+    src: { page: 46, quote: "Betablockers: atenolol, sotalol" }
+    status: unverified
+  # ---------- p42, 44-45: hepatic metabolism ----------
+  - id: geri.L03.024
+    kind: card
+    topic: hepatic
+    front: Why is liver drug metabolism reduced in the elderly?
+    back: "Smaller liver, lower hepatic blood flow and disease such as CHF; biotransforming enzymes are generally reduced."
+    src: { page: 42, quote: "Reduced liver function due to decreased liver size, blood flow, and disease (e.g. CHF)" }
+    status: unverified
+  - id: geri.L03.025
+    kind: cloze
+    topic: hepatic
+    text: "With ageing, phase {{c1::I}} (oxidative) reactions in the liver are impaired even with normal ageing, while phase {{c2::II}} (conjugation) reactions are relatively spared."
+    src: { page: 42, quote: "phase I reactions (oxidative) in the liver impaired even with normal ageing, phase II (conjugation reactions) - relatively spared." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L03.026
+    kind: mcq
+    topic: hepatic
+    stem: "An 80-year-old needs a short course of a benzodiazepine. Which is preferred on metabolic grounds?"
+    options:
+      - "Oxazepam"
+      - "Diazepam"
+      - "Flurazepam"
+      - "Chlordiazepoxide"
+    answer: 0
+    why:
+      - "Correct: oxazepam (like lorazepam) needs only phase II conjugation, which is spared with age."
+      - "Diazepam needs phase I oxidation and is lipophilic, so its half-life is much longer in the elderly."
+      - "Flurazepam is a long-acting benzodiazepine with active phase I metabolites."
+      - "Chlordiazepoxide is oxidised (phase I) to long-acting active metabolites."
+    src: { page: 42, quote: "Phase II - drugs are preferred (oxazepam)" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L03.027
+    kind: card
+    topic: hepatic
+    front: Which first-pass example does the lecture give for reduced phase I activity with age?
+    back: Propranolol (first-pass oxidative/reduction activities are reduced).
+    src: { page: 42, quote: "Phase I - first pass oxidative/reduction activities are reduced (e.g. propranolol)" }
+    status: unverified
+  - id: geri.L03.028
+    kind: table
+    topic: hepatic
+    title: "Hepatic metabolism of lipophilic drugs"
+    columns: [Phase, Reactions, Metabolites]
+    rows:
+      - ["Phase I (functional groups)", "Oxidation, reduction, hydrolysis", "Mostly active, potentially hepatotoxic"]
+      - ["Phase II (conjugation)", "Glucuronidation, acetylation, methylation, sulfation", "Mostly inactive, not toxic"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2]]
+    src: { page: 44, quote: "Phase I (introduction of functional groups) Oxidation Reduction Hydrolysis Most metabolites active and potentially hepatotoxic" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L03.029
+    kind: enumerate
+    topic: hepatic
+    prompt: Name the phase II (conjugation) reactions in the lecture.
+    points:
+      - Glucuronidation
+      - Acetylation
+      - Methylation
+      - Sulfation
+    pass: 3
+    src: { page: 44, quote: "Phase II (conjugation) Glucuronidation Acetylation Methylation Sulfatation" }
+    status: unverified
+  - id: geri.L03.030
+    kind: table
+    topic: hepatic
+    title: "Dosing of hepatically metabolised drugs in geriatric patients"
+    columns: [Drug type, How to dose]
+    rows:
+      - ["High extraction", "Initial dose ~50% lower; uptitrate; maintenance 30–50% lower"]
+      - ["Low extraction, phase I and II", "Start with the maintenance dose; maintenance 30–50% lower"]
+      - ["Low extraction, phase II only", "No change"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 45, quote: "High extraction drugs - reduce initial dose by approximately 50% - find appropriate maintenance dose by uptitration" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L03.031
+    kind: cloze
+    topic: hepatic
+    text: "For high-extraction drugs in the elderly, reduce the initial dose by about {{c1::50%}}, find the maintenance dose by {{c2::uptitration}}; the maintenance dose is generally {{c3::30–50%}} lower."
+    src: { page: 45, quote: "reduce initial dose by approximately 50% - find appropriate maintenance dose by uptitration - maintenance dose is generally reduced by 30-50%" }
+    status: unverified
+    tags: [numbers]
+  - id: geri.L03.032
+    kind: mcq
+    topic: hepatic
+    stem: "How should the dose of lorazepam, a low-extraction drug with phase II metabolism only, be changed in an older patient, according to the lecture's hepatic rules?"
+    options:
+      - "No change for hepatic reasons"
+      - "Cut the initial dose by 50% and uptitrate"
+      - "Start with the maintenance dose, reduced by 30–50%"
+      - "Avoid it completely"
+    answer: 0
+    why:
+      - "Correct: low-extraction drugs with phase II metabolism need no hepatic dose change (p45). Start-low-go-slow still applies for sensitivity (p50)."
+      - "That is the rule for high-extraction drugs."
+      - "That is the rule for low-extraction drugs with phase I and II metabolism."
+      - "The table lists it as a phase II drug, the preferred kind."
+    src: { page: 45, quote: "Low extraction drugs with phase II metabolism - No change" }
+    status: unverified
+  - id: geri.L03.033
+    kind: card
+    topic: hepatic
+    front: Give examples of high-extraction (>0.5) drugs from the lecture.
+    back: "Bromocriptine, chlorpromazine, clomethiazole, dihydroergotamine, diltiazem, metoclopramide, metoprolol, midazolam, morphine, nifedipine, propranolol, verapamil."
+    src: { page: 45, quote: "Hepatic extraction of drugs" }
+    status: unverified
+  - id: geri.L03.034
+    kind: mcq
+    topic: hepatic
+    stem: "Which of these is a low-extraction (<0.5) drug in the lecture's table?"
+    options:
+      - "Warfarin"
+      - "Verapamil"
+      - "Morphine"
+      - "Propranolol"
+    answer: 0
+    why:
+      - "Correct: warfarin is low extraction with phase I and II metabolism, like theophylline, phenytoin and diazepam."
+      - "Verapamil is high extraction."
+      - "Morphine is high extraction."
+      - "Propranolol is high extraction."
+    src: { page: 45, quote: "Hepatic extraction of drugs" }
+    status: unverified
+  - id: geri.L03.035
+    kind: card
+    topic: hepatic
+    front: Which low-extraction drugs in the lecture's table rely on phase II metabolism only?
+    back: Lorazepam and oxazepam. The rest (antidepressants, codeine, diazepam, isoniazid, neuroleptics, phenobarbital, phenytoin, procainamide, quinidine, theophylline, warfarin) use phases I and II.
+    src: { page: 45, quote: "Hepatic extraction of drugs" }
+    status: unverified
+  # ---------- p44, 46: summary of PK changes ----------
+  - id: geri.L03.036
+    kind: table
+    topic: pk
+    title: "Alterations in pharmacokinetics in geriatric patients"
+    columns: [Parameter, Change]
+    rows:
+      - ["Absorption", "About unchanged"]
+      - ["Bioavailability", "First-pass effect down, so bioavailability up"]
+      - ["Vd, hydrophilic drugs", "Decreased"]
+      - ["Vd, lipophilic drugs", "Increased"]
+      - ["Kidney elimination", "Decreased (GFR down)"]
+      - ["Liver elimination", "Decreased (flow, clearance, mass down)"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1]]
+    src: { page: 46, quote: "Alterations in pharmacokinetics in geriatric patients Absorption ±unchanged Bioavailability - \"first-pass effect\"↓ ↑" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L03.037
+    kind: enumerate
+    topic: pk
+    prompt: List the age-related physiological changes that affect drug absorption (book table, p44).
+    points:
+      - Increased gastric pH
+      - Decreased absorptive surface
+      - Decreased splanchnic blood flow
+      - Decreased gastrointestinal motility
+    pass: 3
+    src: { page: 44, quote: "Absorption Increased gastric pH Decreased absorptive surface Decreased splanchnic blood flow Decreased gastrointestinal motility" }
+    status: unverified
+  - id: geri.L03.038
+    kind: card
+    topic: pk
+    front: Which plasma protein rises with age and changes drug distribution (book table, p44)?
+    back: Alpha-1 acid glycoprotein (while serum albumin falls).
+    src: { page: 44, quote: "Decreased serum albumin Increased α1-acid glycoprotein Increased body fat" }
+    status: unverified
+  - id: geri.L03.039
+    kind: table
+    topic: pk
+    title: "Factors affecting drug disposition: examples"
+    columns: [Stage, Age change, Disease or other factor]
+    rows:
+      - ["Absorption", "Higher gastric pH, slower motility", "Achlorhydria, antacids, cholestyramine"]
+      - ["Distribution", "Less body water, less albumin", "CHF, dehydration, ascites, malnutrition"]
+      - ["Metabolism", "Less hepatic mass and flow", "CHF, fever, smoking, thyroid disease"]
+      - ["Excretion", "Less renal flow, GFR, secretion", "Hypovolemia, renal insufficiency"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 44, quote: "Factors affecting drug disposition in elderly patients" }
+    status: unverified
+  - id: geri.L03.040
+    kind: card
+    topic: pk
+    front: What contributes greatly to the variability in drug response seen in older persons?
+    back: "Altered pharmacokinetics: slightly impaired absorption, impaired phase I metabolism, renal function down by about a third and altered distribution."
+    src: { page: 42, quote: "Altered Pharmacokinetics Contributes greatly to the variability in drug response seen in older persons" }
+    status: unverified
+  # ---------- p46-47: pharmacodynamics ----------
+  - id: geri.L03.041
+    kind: card
+    topic: pd
+    front: What is altered pharmacodynamics in the elderly? Give the lecture's examples.
+    back: "Age-related changes in drug sensitivity (ageing plus drug-receptor interactions): increased sensitivity to many drugs such as opiates, and decreased beta-adrenergic responses (propranolol, isoproterenol)."
+    src: { page: 46, quote: "Ageing is associated with an increased sensitivity for many compounds- opiates, decreased B-adrenergic responses in the elderly" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L03.042
+    kind: table
+    topic: pd
+    title: "Pharmacodynamic alterations in geriatric patients"
+    columns: [Organ, Drug, Effect]
+    rows:
+      - ["Bladder", "Anticholinergics", "Urine retention"]
+      - ["Eye", "Anticholinergics", "Disturbed accommodation, acute glaucoma"]
+      - ["CNS", "Benzodiazepines, opiates", "Sedation"]
+      - ["CNS", "Beta-blockers, digoxin", "Depression"]
+      - ["BP regulation", "ACE inhibitors, neuroleptics", "Hypotension"]
+      - ["Kidney", "NSAIDs", "Renal failure"]
+      - ["Heart and lungs", "Beta-blockers, sympathomimetics", "Reduced sensitivity"]
+    blanks: [[0, 2], [1, 2], [2, 2], [3, 2], [4, 2], [5, 2], [6, 2]]
+    src: { page: 46, quote: "Urinary bladder: Anticholinergics → urine retention Eye: Anticholinergics → disturbed accommodation, acute glaucoma" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L03.043
+    kind: mcq
+    topic: pd
+    stem: "An old man becomes low in mood after new drugs. Which pair does the lecture link with depression in the elderly?"
+    options:
+      - "Beta-blockers and digoxin"
+      - "ACE inhibitors and neuroleptics"
+      - "NSAIDs and antacids"
+      - "Anticholinergics and sympathomimetics"
+    answer: 0
+    why:
+      - "Correct: CNS effects: benzodiazepines and opiates cause sedation; beta-blockers and digoxin cause depression."
+      - "These cause hypotension."
+      - "NSAIDs cause renal failure; antacids are not in the list."
+      - "Anticholinergics cause retention and glaucoma; sympathomimetics have reduced effect."
+    src: { page: 46, quote: "CNS: Benzodiazepines, opiates → sedation, Betablockers, Digoxin → depression." }
+    status: unverified
+  - id: geri.L03.044
+    kind: card
+    topic: pd
+    front: What do anticholinergics do to the bladder and the eye in an older patient?
+    back: "Bladder: urine retention. Eye: disturbed accommodation and acute glaucoma."
+    src: { page: 46, quote: "Urinary bladder: Anticholinergics → urine retention Eye: Anticholinergics → disturbed accommodation, acute glaucoma" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L03.045
+    kind: cloze
+    topic: pd
+    text: "In the elderly, {{c1::ACE inhibitors}} and {{c2::neuroleptics}} disturb blood pressure regulation and cause hypotension, and NSAIDs can cause {{c3::renal failure}}."
+    src: { page: 47, quote: "Blood pressure regulation: ACE-inhibitors, neuroleptics → hypotonia Kidney: NSAIDs → renal failure" }
+    status: unverified
+  # ---------- p47-48: what is different, problems ----------
+  - id: geri.L03.046
+    kind: enumerate
+    topic: problems
+    prompt: What is different about geriatric prescription?
+    points:
+      - Underuse, overuse or misuse problem
+      - Altered pharmacokinetics and pharmacodynamics
+      - Risk/benefit ratio in a vulnerable, frail population
+      - Reduced ability to recognise side effects
+      - Multiple physicians with poor communication
+      - Compliance and adherence
+    pass: 4
+    src: { page: 47, quote: "Risk/Benefit Ratio in this vulnerable, frail population. Ability to recognize side effects in the elderly is reduced." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L03.047
+    kind: enumerate
+    topic: problems
+    prompt: List the medication therapy problems.
+    points:
+      - "Polypharmacy: drug use without indication"
+      - "Undertreatment: indication without drug use"
+      - Dose too low
+      - Dose too high
+      - Adverse drug reaction
+      - Drug interaction
+      - Inappropriate drug
+      - Lack of adherence or compliance
+      - Medication error
+    pass: 7
+    src: { page: 47, quote: "Polypharmacy: drug use without indication Undertreatment: indication without drug use Dose too low Dose too high" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L03.048
+    kind: cloze
+    topic: problems
+    text: "As medication therapy problems, polypharmacy is drug use without {{c1::indication}}, and undertreatment is indication without {{c2::drug use}}."
+    src: { page: 47, quote: "Polypharmacy: drug use without indication Undertreatment: indication without drug use" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L03.049
+    kind: enumerate
+    topic: problems
+    prompt: Give the lecture's examples of undertreatment in the elderly.
+    points:
+      - Pain management
+      - Pneumococcal and flu vaccine
+      - Depression
+      - Secondary heart attack prevention
+    pass: 3
+    src: { page: 47, quote: "Examples of Undertreatment Pain management Pneumococcal and flu vaccine Depression Secondary heart attack prevention" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L03.050
+    kind: cloze
+    topic: problems
+    text: "Compared with under-65s, people 65 and over have more than {{c1::twice}} the rate of adverse drug events needing an ER visit and nearly {{c2::seven}} times the rate needing hospitalisation."
+    src: { page: 48, quote: "Rate of ADEs requiring hospitalization is nearly seven times greater for persons age 65 or over versus persons under age 65." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: geri.L03.051
+    kind: card
+    topic: problems
+    front: Give the lecture's two examples of inappropriate drugs.
+    back: "An antibacterial to treat a viral infection, and the 'Beers medications'."
+    src: { page: 48, quote: "Antibacterial to treat a viral infection \"Beers medications\" - medications considered potentially inappropriate for older adults" }
+    status: unverified
+  - id: geri.L03.052
+    kind: card
+    topic: problems
+    front: What are the "Beers medications"?
+    back: Medications considered potentially inappropriate for older adults on risk versus benefit, by expert consensus.
+    src: { page: 48, quote: "\"Beers medications\" - medications considered potentially inappropriate for older adults based on risk versus benefit (expert consensus)" }
+    status: unverified
+    tags: [high-yield]
+    update:
+      text: "The book cites the 2003 Beers list. The current list is the American Geriatrics Society Beers Criteria 2023; Europe also uses STOPP/START version 3 (2023), which adds START prompts for undertreatment."
+      ref: "AGS Beers Criteria 2023; STOPP/START version 3, 2023"
+  # ---------- p48-50: principles ----------
+  - id: geri.L03.053
+    kind: enumerate
+    topic: principles
+    prompt: List the principles of drug use in the elderly.
+    points:
+      - Ask whether treatment is warranted
+      - Look for nonpharmacologic alternatives
+      - Weigh risk vs benefit of drug therapy
+      - "Set goals of therapy: quality of care, quality of life, functional status"
+      - Consider the whole person, not one disease or one drug
+      - Be aware of the assumptions behind clinical practice guidelines
+      - Disease management may not fit when multiple chronic diseases are present
+    pass: 5
+    src: { page: 48, quote: "Ask: Is treatment warranted? Are nonpharmacologic alternatives available? Consider risk vs. benefit of drug therapy Establish goals of therapy" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L03.054
+    kind: enumerate
+    topic: principles
+    prompt: What three goals of therapy does the lecture name?
+    points:
+      - Quality of care
+      - Quality of life
+      - Functional status
+    pass: 3
+    src: { page: 48, quote: "Establish goals of therapy - Quality of care - Quality of life - Functional status" }
+    status: unverified
+  - id: geri.L03.055
+    kind: card
+    topic: principles
+    front: Why may single-disease guidelines not suit an older patient?
+    back: "Disease management may not be adequate or appropriate when multiple chronic diseases are present; be aware of the assumptions behind the guidelines and treat the whole person."
+    src: { page: 48, quote: "Disease management may not be adequate or appropriate if multiple chronic diseases are present" }
+    status: unverified
+  - id: geri.L03.056
+    kind: enumerate
+    topic: principles
+    prompt: What is the purpose of rational drug prescribing in the elderly?
+    points:
+      - Decide whether underuse, overuse or misuse is the problem
+      - Prescribe the most effective drug
+      - Minimise side effects and iatrogenic harm
+      - Maximise compliance and adherence
+      - Conserve resources through intelligent prescribing
+    pass: 4
+    src: { page: 49, quote: "Prescribe the most effective drug Minimize side effects and the risk of iatrogenic harm Maximize compliance/adherence" }
+    status: unverified
+  - id: geri.L03.057
+    kind: mcq
+    topic: principles
+    stem: "Which statement matches the lecture's definition of appropriate prescribing?"
+    options:
+      - "The potential benefit outweighs the potential risk"
+      - "The patient takes fewer than five drugs"
+      - "Every guideline-indicated drug is prescribed"
+      - "Only drugs older than ten years are used"
+    answer: 0
+    why:
+      - "Correct: appropriateness is benefit over risk, which is different from polypharmacy (the concurrent use of many medications)."
+      - "Drug count defines polypharmacy, not appropriateness."
+      - "Guidelines may not suit patients with multiple chronic diseases (p48)."
+      - "The book says avoid new drugs (p50), but that is not the definition."
+    src: { page: 49, quote: "The potential benefit outweighs the potential risk. which is different from Polypharmacy -- the concurrent use of many medications." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L03.058
+    kind: order
+    topic: principles
+    prompt: Put the rational prescribing steps in the lecture's order.
+    steps:
+      - Decide if a drug is needed at all (review all drugs)
+      - Assess frailty and co-morbidities
+      - Review prior and current medication use
+      - Assess the patient's ability to comply
+      - Pick a drug and dose for this patient
+      - Check choices with explicit criteria (lists, software)
+      - Consult a pharmacist when uncertain
+    src: { page: 49, quote: "Determine if a drug is needed at all Indeed, review all drugs to see if they are still needed If a drug is needed" }
+    status: unverified
+  - id: geri.L03.059
+    kind: card
+    topic: principles
+    front: What should you use to evaluate drug choices and interactions, and who should you consult when uncertain?
+    back: "Explicit criteria (software, lists, other tools) for drug-drug and drug-disease interactions; consult a knowledgeable pharmacist when uncertain."
+    src: { page: 49, quote: "Use explicit criteria (software, lists, other tools) to evaluate choices, drug interactions, drug-disease interactions When uncertain, consult with a knowledgeable pharmacist" }
+    status: unverified
+  - id: geri.L03.060
+    kind: enumerate
+    topic: principles
+    prompt: List the recommendations for pharmacotherapy in geriatric patients.
+    points:
+      - "Is pharmacotherapy necessary? Clear diagnosis, non-drug options"
+      - "Well documented pharmacotherapy: avoid new drugs and long half-life drugs"
+      - Avoid polypharmacy
+      - Start low, go slow
+      - Consider unusual side effects
+      - "Ask: can a drug be stopped? Does the patient understand it? Can they follow it?"
+    pass: 5
+    src: { page: 50, quote: "Well documented pharmacotherapy - Avoid new drugs and drugs with long half-lifes Avoid polypharmacy Start low, go slow" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L03.061
+    kind: enumerate
+    topic: principles
+    prompt: Which three questions must always be answered when prescribing for an older patient?
+    points:
+      - Can a drug be stopped (unprescribing or pruning)?
+      - Does the patient understand the therapy?
+      - Is the patient able to follow the therapy?
+    pass: 3
+    src: { page: 50, quote: "Can a drug be stopped? unprescribing or „pruning\" of drug regimen - Does the patient understand the therapy?" }
+    status: unverified
+  - id: geri.L03.062
+    kind: cloze
+    topic: principles
+    text: "The golden rule of geriatric dosing: start {{c1::low}}, go {{c2::slow}}; and avoid new drugs and drugs with long {{c3::half-lives}}."
+    src: { page: 50, quote: "Avoid new drugs and drugs with long half-lifes Avoid polypharmacy Start low, go slow" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p50-51: high-risk drugs and interactions ----------
+  - id: geri.L03.063
+    kind: enumerate
+    topic: high-risk
+    prompt: List the high-risk drugs for the elderly given in the lecture.
+    points:
+      - Warfarin
+      - Digoxin >0.125 mg/day
+      - Meperidine
+      - Ticlopidine
+      - Antihistamines (especially diphenhydramine)
+      - Chlorpropamide
+      - NSAIDs (especially indomethacin)
+      - Propoxyphene
+    pass: 6
+    src: { page: 50, quote: "High Risk Drugs for Elderly Warfarin Digoxin > 0.125/day Meperidine Ticlodipine Antihistamines (esp Diphenhydramine-Benadryl!) Chlorpropamide" }
+    status: unverified
+    tags: [high-yield]
+    update:
+      text: "Propoxyphene was withdrawn from the US and EU markets in 2009–2010 because of cardiac toxicity, and ticlopidine has largely been replaced by clopidogrel. Beers 2023 still lists first-generation antihistamines, meperidine, chlorpropamide, indomethacin and digoxin >0.125 mg/day."
+      ref: "FDA propoxyphene withdrawal 2010; EMA 2009; AGS Beers Criteria 2023"
+  - id: geri.L03.064
+    kind: cloze
+    topic: high-risk
+    text: "Digoxin is a high-risk drug in the elderly at doses above {{c1::0.125}} mg/day; it is renally cleared and renal function falls by about a {{c2::third}} with age."
+    src: { page: 50, quote: "Warfarin Digoxin > 0.125/day Meperidine" }
+    status: unverified
+    tags: [numbers]
+  - id: geri.L03.065
+    kind: mcq
+    topic: high-risk
+    stem: "Which NSAID does the lecture single out as especially high-risk in the elderly?"
+    options:
+      - "Indomethacin"
+      - "Ibuprofen"
+      - "Naproxen"
+      - "Celecoxib"
+    answer: 0
+    why:
+      - "Correct: NSAIDs, especially indomethacin (also the most CNS-toxic NSAID)."
+      - "All NSAIDs carry risk, but the book names indomethacin."
+      - "All NSAIDs carry risk, but the book names indomethacin."
+      - "All NSAIDs carry risk, but the book names indomethacin."
+    src: { page: 50, quote: "NSAIDS (esp indomethacin)" }
+    status: unverified
+  - id: geri.L03.066
+    kind: card
+    topic: high-risk
+    front: Which antihistamine does the lecture flag as high-risk for the elderly?
+    back: Diphenhydramine (Benadryl), a sedating anticholinergic first-generation antihistamine.
+    src: { page: 50, quote: "Antihistamines (esp Diphenhydramine-Benadryl!)" }
+    status: unverified
+  - id: geri.L03.067
+    kind: table
+    topic: high-risk
+    title: "Common drug-drug interactions"
+    columns: [Combination, Risk]
+    rows:
+      - ["ACE inhibitor + potassium", "Hyperkalemia"]
+      - ["ACE inhibitor + K-sparing diuretic", "Hyperkalemia, hypotension"]
+      - ["Digoxin + antiarrhythmic", "Bradycardia, arrhythmia"]
+      - ["Digoxin or antiarrhythmic + diuretic", "Electrolyte imbalance; arrhythmia"]
+      - ["Diuretic + diuretic", "Electrolyte imbalance; dehydration"]
+      - ["Benzodiazepine + antidepressant or antipsychotic", "Sedation; confusion; falls"]
+      - ["CCB / nitrate / vasodilator / diuretic", "Hypotension"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1]]
+    src: { page: 51, quote: "Common drug-drug interactions" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L03.068
+    kind: table
+    topic: high-risk
+    title: "Common drug-disease interactions"
+    columns: [Combination, Risk]
+    rows:
+      - ["NSAIDs or thiazolidinediones + CHF", "Fluid retention; CHF exacerbation"]
+      - ["BPH + anticholinergics", "Urinary retention"]
+      - ["CCB, narcotics or anticholinergics + constipation", "Worse constipation"]
+      - ["Metformin + CHF", "Hypoxia; more lactic acidosis risk"]
+      - ["NSAIDs + gastropathy", "More ulcer and bleeding risk"]
+      - ["NSAIDs + HTN", "Fluid retention; diuretics work less"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1]]
+    src: { page: 51, quote: "Common drug-disease interactions" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L03.069
+    kind: mcq
+    topic: high-risk
+    stem: "An 83-year-old on sertraline is started on a benzodiazepine for sleep. What is the main risk of the combination?"
+    options:
+      - "Sedation, confusion and falls"
+      - "Hyperkalemia"
+      - "Bradycardia"
+      - "Fluid retention"
+    answer: 0
+    why:
+      - "Correct: benzodiazepine + antidepressant (or antipsychotic) gives sedation, confusion and falls."
+      - "Hyperkalemia is ACE inhibitor + potassium or K-sparing diuretic."
+      - "Bradycardia is digoxin + antiarrhythmic."
+      - "Fluid retention is NSAIDs with CHF or HTN."
+    src: { page: 51, quote: "Benzodiazepine + antidepressant Benzodiazepine + antipsychotic Sedation; confusion; falls" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L03.070
+    kind: card
+    topic: high-risk
+    front: What is the risk of an ACE inhibitor plus a potassium-sparing diuretic in the elderly?
+    back: Hyperkalemia and hypotension.
+    src: { page: 51, quote: "ACE inhibitor + K sparing diuretic Hyperkalemia, hypotension" }
+    status: unverified
+  - id: geri.L03.071
+    kind: card
+    topic: high-risk
+    front: What do NSAIDs do in a patient with hypertension?
+    back: Fluid retention and decreased effectiveness of diuretics.
+    src: { page: 51, quote: "NSAIDs + HTN Fluid retention; decreased effectiveness of diuretics" }
+    status: unverified
+  - id: geri.L03.072
+    kind: card
+    topic: high-risk
+    front: What drug-disease risk does the lecture give for metformin with CHF?
+    back: Hypoxia and an increased risk of lactic acidosis.
+    src: { page: 51, quote: "Metformin + CHF Hypoxia; increased risk of lactic acidosis" }
+    status: unverified
+    update:
+      text: "Heart failure was removed from the metformin contraindications in the US label in 2006. ADA advises metformin may be used in stable heart failure if eGFR is above 30, and avoided in unstable or hospitalised HF."
+      ref: "ADA Standards of Care in Diabetes 2024"
+  - id: geri.L03.073
+    kind: cloze
+    topic: high-risk
+    text: "Both {{c1::NSAIDs}} and {{c2::thiazolidinediones}} cause fluid retention and CHF exacerbation in a patient with heart failure."
+    src: { page: 51, quote: "NSAIDs + CHF Thiazolidinediones + CHF Fluid retention; CHF exacerbation" }
+    status: unverified
+  # ---------- p52: summary ----------
+  - id: geri.L03.074
+    kind: enumerate
+    topic: principles
+    prompt: Summarise the prescribing rules for elderly patients (book summary).
+    points:
+      - Obtain a complete medication history
+      - Review medications regularly and before adding a new one
+      - Know the drugs' actions, adverse events and toxicity
+      - Start long-term drugs low and titrate to tolerability and response
+      - Reach a therapeutic dose before switching or adding
+      - Educate the patient or caregiver about each drug
+      - Avoid treating one drug's adverse event with another drug
+      - Try to treat two or more conditions with one drug
+      - Avoid drugs of the same class or similar action
+      - Communicate with other prescribers
+    pass: 7
+    src: { page: 52, quote: "Obtain a complete medication history Review medications regularly and before prescribing a new medication" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L03.075
+    kind: card
+    topic: principles
+    front: What does the lecture say about using one medication to treat the adverse events caused by another?
+    back: Avoid it (the prescribing cascade). Instead review the first drug.
+    src: { page: 52, quote: "Avoid using one medication to treat the adverse events caused by another" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L03.076
+    kind: cloze
+    topic: principles
+    text: "Attempt to reach a {{c1::therapeutic dose}} before switching to or adding another medication, and try to use {{c2::one}} medication to treat two or more conditions."
+    src: { page: 52, quote: "Attempt to reach a therapeutic dose before switching to or adding another medication" }
+    status: unverified
+  # ---------- p52-53: book questions ----------
+  - id: geri.L03.077
+    kind: mcq
+    topic: questions
+    stem: "Mr Ahmed, 69, has malaise, vomiting, confusion and falls on 13 drugs (book Question 1). In order to reduce polypharmacy:"
+    options:
+      - "A systematic approach should decide which drugs are necessary for his co-morbidities"
+      - "Stop all drugs and restart them one by one"
+      - "Stop the newest drugs first"
+      - "If two drugs treat the same condition, stop the extra one"
+    answer: 0
+    why:
+      - "Correct (B in the book): review every drug against his conditions and goals with explicit criteria. The book prints no key."
+      - "Stopping everything at once is unsafe (rebound, AF rate control, anticoagulation)."
+      - "How new a drug is says nothing about whether it is needed."
+      - "Sometimes two drugs for one condition are right; it is not a rule."
+    src: { page: 53, quote: "A systematic approach should be considered to determine which medications are necessary for a patient given his/ co-morbidities" }
+    status: unverified
+    tags: [book-question]
+  - id: geri.L03.078
+    kind: mcq
+    topic: questions
+    stem: "A 78-year-old man with depression is prescribed an antidepressant. Which is most important to keep in mind (book Question 2)?"
+    options:
+      - "Drug hepatic metabolism"
+      - "Drug absorption"
+      - "Drug protein binding"
+      - "Drug renal excretion"
+    answer: 0
+    why:
+      - "Correct (C in the book): antidepressants are low-extraction drugs with phase I and II hepatic metabolism, and phase I is impaired with age (p42, p45). The book prints no key."
+      - "Absorption is not usually a problem in the elderly (p41)."
+      - "Protein binding changes, but metabolism dominates for antidepressants."
+      - "Antidepressants are not in the renal-elimination list (p45–46)."
+    src: { page: 53, quote: "In considering geriatric prescribing principles, which of the following is most important to keep in mind when reviewing his medications?" }
+    status: unverified
+    tags: [book-question]
+  - id: geri.L03.079
+    kind: case
+    topic: questions
+    stem: "Mr Ahmed, 69, has 4 days of malaise, vomiting, confusion and falls. He has AF, CAD, HTN, gout, insomnia, incontinence, constipation, leg edema, BPH and dizziness. Drugs: simvastatin 40, verapamil 240, quinine, perindopril/indapamide, digoxin 250 mcg, metoprolol 50, diclofenac 75 bd, furosemide 40, betahistine, paracetamol, warfarin, flurazepam 30, vitamin D."
+    steps:
+      - reveal: "Supine BP 122/70, erect 92/62, pulse 52. eGFR 38, K+ 2.8, Na+ 126, Hb 10.2."
+        question: "Which drugs best explain his pulse of 52?"
+        options:
+          - "Digoxin with verapamil and metoprolol"
+          - "Simvastatin and vitamin D"
+          - "Paracetamol"
+          - "Betahistine"
+        answer: 0
+        why: "Digoxin + antiarrhythmic gives bradycardia (p51), and verapamil plus a beta-blocker adds AV-node block. Digoxin 250 mcg is above the 0.125 mg/day high-risk line (p50), with eGFR 38 and K+ 2.8."
+      - question: "What is the most likely cause of his K+ 2.8 and Na+ 126?"
+        options:
+          - "Two diuretics: indapamide plus furosemide"
+          - "Perindopril alone"
+          - "Warfarin"
+          - "Paracetamol"
+        answer: 0
+        why: "Diuretic + diuretic causes electrolyte imbalance and dehydration (p51), and low K+ makes digoxin toxicity worse."
+      - question: "Which drug most clearly raises his fall risk and confusion, and should be tapered?"
+        options:
+          - "Flurazepam 30 mg, a long-acting benzodiazepine"
+          - "Vitamin D"
+          - "Simvastatin"
+          - "Paracetamol"
+        answer: 0
+        why: "Long half-life, lipophilic, phase I metabolism: it builds up in the old (p42, p50). Taper it; don't stop abruptly."
+      - question: "Which drug is the riskiest given his warfarin, eGFR 38, edema and hypertension?"
+        options:
+          - "Diclofenac"
+          - "Paracetamol"
+          - "Vitamin D"
+          - "Metoprolol"
+        answer: 0
+        why: "NSAIDs: fluid retention and weaker diuretics in HTN, renal failure, more ulcer and bleeding risk, worse with warfarin (p47, p51). Paracetamol is the safer analgesic."
+    src: { page: 52, quote: "Digoxin 250 mcg daily; Metoprolol 50 mg/day, Diclofenac 75 mg twice daily; Frusemide 40 mg daily" }
+    status: unverified
+    tags: [book-question]
+  - id: geri.L03.080
+    kind: essay
+    topic: questions
+    prompt: "Mr Ahmed (book Question 1): list the drug problems in his list and how you would rationalise it."
+    outline:
+      - "Bradycardia and digoxin toxicity: digoxin 250 mcg (>0.125 high risk) with eGFR 38 and K+ 2.8, plus verapamil and metoprolol; check level, reduce or stop"
+      - "Two diuretics (indapamide + furosemide): hypokalemia, hyponatremia, postural drop; review the need for each"
+      - "Diclofenac: renal failure, fluid retention, bleeding with warfarin, weaker diuretics; stop, use paracetamol"
+      - "Flurazepam: long-acting benzodiazepine, falls and confusion; taper"
+      - "Quinine and betahistine: weak indications, side effects; stop if not needed"
+      - "Simvastatin 40 with verapamil: myopathy risk; lower the dose or switch"
+      - "Warfarin with falls and Hb 10.2: reassess bleeding risk, INR and the AF indication"
+      - "Method: full medication history, systematic review against each condition, one change at a time, communicate with other prescribers"
+    src: { page: 52, quote: "Simvastatin 40 mg daily; Verapamil 240 mg daily; Quinine Sulphate 300 mg daily, Perindopril 5 mg/Indapamide 1.5 mg daily" }
+    status: unverified
+    tags: [book-question]
+    update:
+      text: "Simvastatin with verapamil: the FDA (2011) limits simvastatin to 10 mg/day with verapamil or diltiazem because of myopathy risk. Quinine for leg cramps: the FDA (2006, 2010) warns against it because of serious hematologic reactions."
+      ref: "FDA Drug Safety Communications: simvastatin 2011; quinine 2010"

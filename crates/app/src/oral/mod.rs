@@ -427,6 +427,7 @@ fn Runner() -> Element {
                 crate::hover::BookPage { page: p.page, quote: p.quote.clone() }
                 button {
                     class: "oral-end",
+                    "data-back": "true",
                     "aria-keyshortcuts": "Escape",
                     onclick: move |_| end_session(),
                     {tx::END}

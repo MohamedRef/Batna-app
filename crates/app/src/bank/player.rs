@@ -58,6 +58,8 @@ pub fn Player() -> Element {
                     div { class: "run-head",
                         button {
                             class: "icon-button run-leave",
+                            // Android Back takes it while the bar is hidden.
+                            "data-back": "true",
                             "aria-label": tx::LEAVE,
                             title: if timed { tx::LEAVE_TIMED_HINT } else { tx::LEAVE },
                             onclick: move |_| leave(),

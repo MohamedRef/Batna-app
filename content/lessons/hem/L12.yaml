@@ -1,0 +1,694 @@
+schema: batna.lesson/v1
+lecture: hem.L12
+lessons:
+  # ------------------------------------------------------------------
+  - id: hem.L12.lesson1
+    title: "الـ lymphoma: كتلة مش سايل"
+    hook: "الفرق بين lymphoma و leukaemia ساعات بيبقى بس: الخلية قاعدة في الغدة ولا نازلة تتمشى في الدم؟"
+    minutes: 7
+    pages: [190, 191]
+    topics: [overview, cytogenetics]
+    goals:
+      - "تعرّف الـ lymphoma وتعرف أرقامه"
+      - "تفهم ليه الـ WHO جمع CLL و ALL مع الـ lymphomas"
+      - "تحفظ الـ translocations الأربعة وتأثير كل واحد"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 190
+        quote: "Lymphomas are malignant disorders that derive from Lymphoid cells. They may arise from mature T-cells or B-cells."
+        title: "التعريف"
+        text: |
+          الـ ==lymphomas== أورام خبيثة من الـ **lymphoid cells**، من الـ mature **T-cells أو B-cells**.
+
+          - نوعين: **Hodgkin** و **non-Hodgkin**.
+          - الـ Hodgkin بيتشخص بوجود ==Reed-Sternberg cells== في الـ histology.
+      - kind: explain
+        page: 190
+        quote: "The overall incidence of Lymphomas is 5-10 cases per/100,000 population each year."
+        title: "الأرقام"
+        text: |
+          - Incidence: **5-10/100,000** في السنة.
+          - لكل حالة Hodgkin فيه حوالي **2 NHL**.
+          - الرجالة أكتر: **3:2**.
+      - kind: explain
+        page: 190
+        quote: "Lymphomas are generally thought of as being solid (lumps), whereas Leukaemias are liquid with malignant cells found into the peripheral blood."
+        title: "Lymphoma ولا leukaemia؟"
+        text: |
+          التفرقة **artificial** شوية:
+
+          - الـ lymphoma = ==solid== (كتل، lumps).
+          - الـ leukaemia = **liquid**: الخلايا الخبيثة في الدم.
+
+          علشان كده الـ WHO حط الـ **CLL** والـ **ALL** مع الـ lymphomas تحت اسم واحد: **lymphoid malignancies**.
+      - kind: aside
+        tone: analogy
+        page: 190
+        quote: "Lymphomas are generally thought of as being solid (lumps), whereas Leukaemias are liquid with malignant cells found into the peripheral blood."
+        text: "نفس العصابة: لو قاعدين في الشقة (الغدة) اسمهم lymphoma، لو نازلين الشارع (الدم) اسمهم leukaemia. الـ WHO قال خلاص دي عصابة واحدة."
+      - kind: table
+        page: 191
+        quote: "Follicular Lymphoma: t (14;18) → BCL-2 expression leading to failure of apoptosis."
+        title: "الـ translocations"
+        columns: ["Lymphoma", "Lesion", "Effect"]
+        rows:
+          - ["Burkitt", "t(8;14), 75%", "c-MYC: proliferation"]
+          - ["Follicular", "t(14;18)", "BCL-2: no apoptosis"]
+          - ["Mantle cell", "t(11;14)", "Cyclin D1: proliferation"]
+          - ["Large cell", "BCL-6", "-"]
+        hide: [[0, 1], [1, 1], [2, 1], [1, 2], [3, 1]]
+      - kind: reveal
+        page: 191
+        quote: "Follicular Lymphoma: t (14;18) → BCL-2 expression leading to failure of apoptosis."
+        prompt: "ليه كل الـ translocations دي فيها chromosome 14؟"
+        answer: "على 14q32 فيه الـ IgH gene، وده جين شغّال طول الوقت في الـ B cell. لما oncogene (MYC أو BCL-2 أو cyclin D1) يتلزق جنبه، بياخد نفس الـ promoter القوي ويشتغل على طول. نفس فكرة الـ 14q في الـ myeloma. (physiology معروفة، والكتاب ذكر الـ translocations.)"
+      - kind: mnemonic
+        page: 191
+        quote: "Mantle cell Lymphoma: t (11;14)→ BCL-1 (Cyclin D 1) expression→ cellular proliferation."
+        word: "BFM"
+        parts:
+          - { key: "B", text: "Burkitt = 8;14 = MYC (8 ← M, شكلها زي بعض)" }
+          - { key: "F", text: "Follicular = 14;18 = BCL-2 (18 ← سن الرشد: مش عايز يموت)" }
+          - { key: "M", text: "Mantle = 11;14 = cyclin D1 (BCL-1، والـ 1 في الـ 11)" }
+        hook: "BCL-1 مع 11، BCL-2 مع 18، و MYC مع 8."
+      - kind: match
+        page: 190
+        quote: "Burkitt‘s Lymphoma: In 75% of cases t (8;14) leading to up-regulation and expression of the C-MyC protein"
+        prompt: "وصّل الـ translocation بالـ lymphoma:"
+        pairs:
+          - ["t(8;14)", "Burkitt"]
+          - ["t(14;18)", "Follicular"]
+          - ["t(11;14)", "Mantle cell"]
+          - ["BCL-6", "Large cell"]
+        why: "Burkitt: c-MYC. Follicular: BCL-2 (فشل الـ apoptosis). Mantle: BCL-1/cyclin D1. Large cell: BCL-6."
+      - kind: check
+        page: 191
+        quote: "Follicular Lymphoma: t (14;18) → BCL-2 expression leading to failure of apoptosis."
+        question: "Which lymphoma grows mainly because its cells fail to die (apoptosis), not because they divide fast?"
+        options: ["Follicular (BCL-2)", "Burkitt (c-MYC)", "Mantle cell (cyclin D1)", "Large cell (BCL-6)"]
+        answer: 0
+        why:
+          - "صح: الـ BCL-2 بيمنع الـ apoptosis، علشان كده الـ follicular بطيء (indolent)."
+          - "الـ MYC بيزوّد الـ proliferation جامد، علشان كده Burkitt سريع جدًا."
+          - "الـ cyclin D1 بيدفع الـ cell cycle (proliferation)."
+          - "الكتاب ذكر بس إن الـ BCL-6 مميز للـ large cell."
+      - kind: try
+        items: [hem.L12.002, hem.L12.003, hem.L12.006, hem.L12.007, hem.L12.008]
+    recap:
+      - "Lymphoma = ورم من الـ lymphoid cells، Hodgkin (RS cells) و non-Hodgkin."
+      - "5-10/100,000؛ NHL ضعف Hodgkin؛ رجالة 3:2."
+      - "Solid = lymphoma، liquid = leukaemia؛ الـ WHO جمعهم."
+      - "Burkitt t(8;14) MYC؛ follicular t(14;18) BCL-2؛ mantle t(11;14) cyclin D1؛ large cell BCL-6."
+    practice: [hem.L12.001, hem.L12.002, hem.L12.003, hem.L12.004, hem.L12.005, hem.L12.006, hem.L12.007, hem.L12.008, hem.L12.009, hem.L12.010, hem.L12.079, hem.L12.080]
+  # ------------------------------------------------------------------
+  - id: hem.L12.lesson2
+    title: "شخّص وادّي stage"
+    hook: "الـ biopsy بيقولك إيه هو، والـ Ann Arbor بيقولك وصل لفين. والـ B؟ دي اللي بتقلب الخطة."
+    minutes: 8
+    pages: [192, 193]
+    topics: [workup, staging]
+    goals:
+      - "تعرف الـ B-cell markers"
+      - "تعرف الـ staging investigations"
+      - "تعمل Ann Arbor مع A/B، وتعرف الـ IPI"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 192
+        quote: "The CD 20 is one such molecule exclusively expressed on B-cells. Besides, CD 19, CD 22 and CD 79 are other examples"
+        title: "Immunophenotyping"
+        text: |
+          بنلزق **labelled antibodies** على الخلايا ونقراها بالـ **flow cytometry**. الأسامي بنظام الـ **CD (Cluster Differentiation)**.
+
+          - ==CD20==: على الـ B-cells **بس**.
+          - كمان **CD19, CD22, CD79**: B-cell markers.
+      - kind: explain
+        page: 192
+        quote: "The diagnosis is based on the histological appearance of an enlarged lymph node or other affected tissues"
+        title: "التشخيص"
+        text: |
+          الأساس ==histology== لغدة كبيرة أو نسيج متأثر، أو cytology من الدم أو النخاع أو الـ CSF.
+
+          وبعدين بندعمه بالـ immunophenotyping والـ cytogenetics والـ molecular techniques.
+      - kind: explain
+        page: 192
+        quote: "Bone marrow biopsy is important in non-Hodgkin‘s Lymphoma due to the high frequency of bone marrow involvement in this disorder."
+        title: "الـ staging work-up"
+        text: |
+          1. **CT، ultrasound، chest X-ray**.
+          2. ==Bone marrow biopsy==: مهم في الـ NHL لأن النخاع بيتصاب كتير.
+          3. **LDH**: عالي = poor prognosis.
+          4. **Immunoglobulins** و monoclonal proteins.
+      - kind: figure
+        page: 193
+        quote: "Stage IV: Involvement of extralymphatic sites e.g. bone marrow or liver."
+        title: "Ann Arbor على الجسم"
+        alt: "Four small body outlines with a dashed horizontal line for the diaphragm. Stage I: one node group in the neck. Stage II: neck and mediastinal nodes, both above the diaphragm. Stage III: nodes above and below the diaphragm. Stage IV: liver and bone marrow involved."
+        caption: "الحجاب الحاجز هو الخط الفاصل: جانب واحد = II، الجانبين = III، عضو برّه الغدد = IV."
+        svg: |
+          <svg viewBox="0 0 330 240" xmlns="http://www.w3.org/2000/svg">
+            <rect x="5" y="20" width="75" height="190" rx="30" class="fg-box"/>
+            <rect x="88" y="20" width="75" height="190" rx="30" class="fg-box"/>
+            <rect x="171" y="20" width="75" height="190" rx="30" class="fg-box"/>
+            <rect x="254" y="20" width="71" height="190" rx="30" class="fg-box"/>
+            <path d="M5 110H325" class="fg-thin"/>
+            <circle cx="42" cy="45" r="7" class="fg-dot-bad"/>
+            <circle cx="125" cy="45" r="7" class="fg-dot-bad"/>
+            <circle cx="125" cy="80" r="7" class="fg-dot-bad"/>
+            <circle cx="208" cy="45" r="7" class="fg-dot-bad"/>
+            <circle cx="208" cy="150" r="7" class="fg-dot-bad"/>
+            <circle cx="290" cy="45" r="7" class="fg-dot-bad"/>
+            <circle cx="290" cy="150" r="7" class="fg-dot-bad"/>
+            <rect x="265" y="118" width="30" height="16" rx="6" class="fg-bad"/>
+            <text x="263" y="185" class="t-sm t-bad">liver, BM</text>
+            <text x="30" y="232" class="t-b">I</text>
+            <text x="115" y="232" class="t-b">II</text>
+            <text x="195" y="232" class="t-b">III</text>
+            <text x="280" y="232" class="t-b">IV</text>
+          </svg>
+      - kind: explain
+        page: 193
+        quote: "stage (B) in the presence of any one of; night sweats, fever or weight loss (10% in past 6 months)."
+        title: "A ولا B؟"
+        text: |
+          - **A**: مفيش systemic symptoms.
+          - ==B==: واحدة بس تكفي من: **night sweats**، **fever**، أو **weight loss 10% في آخر 6 شهور**.
+      - kind: aside
+        tone: trap
+        page: 193
+        quote: "stage (B) in the presence of any one of; night sweats, fever or weight loss (10% in past 6 months)."
+        text: "الـ pruritus والـ fatigue أعراض موجودة في الـ Hodgkin، بس مش B symptoms. الـ B تلاتة بس: سخونية، عرق بالليل، ووزن 10% في 6 شهور."
+      - kind: check
+        page: 193
+        quote: "Stage III: Involvement of lymph node groups on both sides of the diaphragm."
+        question: "Axillary and inguinal nodes, no symptoms. Stage?"
+        options: ["IIIA", "IIA", "IIIB", "IA"]
+        answer: 0
+        why:
+          - "صح: الإبط فوق الحجاب والـ inguinal تحته = III، ومفيش أعراض = A."
+          - "الـ II لازم الاتنين على جانب واحد."
+          - "مفيش أعراض، يبقى A."
+          - "دول مجموعتين مش واحدة."
+      - kind: explain
+        page: 193
+        quote: "Extranodal disease: Disease outside lymphatic sites confers a poor prognosis."
+        title: "International Prognostic Index"
+        text: |
+          الكتاب بيعد أربع حاجات بتخلّي الـ prognosis أوحش:
+
+          - ==Extranodal disease==
+          - **Advanced stage**
+          - **Elevated LDH**
+          - **Increasing age**
+      - kind: update
+        page: 193
+        quote: "Extranodal disease: Disease outside lymphatic sites confers a poor prognosis."
+        text: "الـ IPI الأصلي خمس نقط: age > 60، ECOG performance status ≥ 2، stage III-IV، LDH عالي، و > 1 extranodal site. الكتاب ذكر أربعة من غير الـ performance status."
+        ref: "International Non-Hodgkin's Lymphoma Prognostic Factors Project, NEJM 1993"
+      - kind: try
+        items: [hem.L12.012, hem.L12.014, hem.L12.017, hem.L12.019, hem.L12.020]
+    recap:
+      - "CD20 على الـ B cells بس؛ CD19/22/79 كمان."
+      - "التشخيص histology + immunophenotyping + cytogenetics."
+      - "Staging: CT/US/CXR، marrow (مهم في NHL)، LDH، immunoglobulins."
+      - "Ann Arbor: I غدة، II جانب واحد، III الجانبين، IV extralymphatic."
+      - "B = fever، night sweats، weight loss 10%/6 شهور."
+    practice: [hem.L12.011, hem.L12.012, hem.L12.013, hem.L12.014, hem.L12.015, hem.L12.016, hem.L12.017, hem.L12.018, hem.L12.019, hem.L12.020, hem.L12.081, hem.L12.082, hem.L12.094]
+  # ------------------------------------------------------------------
+  - id: hem.L12.lesson3
+    title: "Hodgkin: عين البومة"
+    hook: "خلية واحدة خبيثة وسط جيش من الخلايا الطيبة. والخلية دي شكلها بيبصلك زي البومة."
+    minutes: 8
+    pages: [194, 195]
+    topics: [hl-basics, hl-subtypes]
+    goals:
+      - "تعرف أصل الـ RS cell والـ markers بتاعتها"
+      - "تحفظ الـ epidemiology والـ risk factors"
+      - "تفرّق الأربع classic subtypes"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 194
+        quote: "neoplastic cells in Hodgkin‘s Lymphoma are clonal B-cells originating in a lymph node germinal centre with a crippled immunoglobulin gene"
+        title: "الخلية الخبيثة"
+        text: |
+          بالـ PCR اكتشفوا إن الخلايا الخبيثة في الـ Hodgkin هي ==clonal B-cells== من الـ **germinal centre**، بس عندها **crippled immunoglobulin gene**: mutations بتمنع إنها تعمل immunoglobulin كامل.
+
+          - أول من وصفه **Thomas Hodgkin سنة 1832**.
+          - الـ **EBV genome** موجود في **50% أو أكتر** من الحالات.
+      - kind: explain
+        page: 194
+        quote: "These cells stain with CD 30 and CD 15 but are usually negative for B-cell antigen expression."
+        title: "الـ Reed-Sternberg"
+        text: |
+          التشخيص بـ histology لغدة **excised**. الـ ==RS cell== أساس تشخيص الأربع classic types، وهي جزء من الـ malignant clone.
+
+          - بتاخد صبغة **CD30** و **CD15**.
+          - وغالبًا **negative** للـ B-cell antigens (رغم إنها B cell أصلًا، لأن الـ Ig gene بايظ).
+          - حواليها: lymphocytes، neutrophils، eosinophils، plasma cells، و fibrosis.
+      - kind: figure
+        page: 195
+        quote: "Lymphocyte predominance 10% Younger patients Rare RS cells Many lymphocytes Usually stage 1 or 2"
+        title: "الـ RS cell وسط الزحمة"
+        alt: "A large binucleate Reed-Sternberg cell with two big nucleoli like owl eyes in the centre, labelled CD30 and CD15 positive. Around it many small lymphocytes, an eosinophil, a plasma cell and a histiocyte labelled host response."
+        caption: "خلية خبيثة واحدة كبيرة بنواتين (owl eye) والباقي كله host response."
+        svg: |
+          <svg viewBox="0 0 330 230" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="165" cy="110" rx="70" ry="55" class="fg-acc"/>
+            <ellipse cx="138" cy="110" rx="24" ry="32" class="fg-box"/>
+            <ellipse cx="192" cy="110" rx="24" ry="32" class="fg-box"/>
+            <circle cx="138" cy="108" r="9" class="fg-dot-acc"/>
+            <circle cx="192" cy="108" r="9" class="fg-dot-acc"/>
+            <circle cx="40" cy="40" r="10" class="fg-dot-good"/>
+            <circle cx="70" cy="190" r="10" class="fg-dot-good"/>
+            <circle cx="290" cy="50" r="10" class="fg-dot-good"/>
+            <circle cx="270" cy="190" r="10" class="fg-dot-good"/>
+            <circle cx="30" cy="120" r="10" class="fg-dot-good"/>
+            <circle cx="300" cy="125" r="13" class="fg-bad"/>
+            <text x="10" y="222" class="t-sm t-mut">small dots: lymphocytes, eosinophils, plasma cells</text>
+            <text x="105" y="30" class="t-sm t-b t-acc">RS cell: CD30+ CD15+</text>
+            <text x="130" y="188" class="t-sm">owl eyes</text>
+          </svg>
+      - kind: explain
+        page: 194
+        quote: "Bimodal age incidence- major peak between 20 and 29 years and minor peak 60 years."
+        title: "مين بيجيله؟"
+        text: |
+          - **1%** من الـ cancer registrations في السنة؛ أقل في اليابان.
+          - ==Bimodal==: peak كبير **20-29 سنة**، وصغير عند **60**.
+          - أكتر في الرجالة. أشهر subtype في الشباب: **nodular sclerosing**.
+          - Risk: **high socioeconomic status in childhood**، familial aggregation، و **EBV** خصوصًا بعد infectious mononucleosis.
+      - kind: aside
+        tone: joke
+        page: 194
+        quote: "Association with high socioeconomic status in childhood."
+        text: "الـ Hodgkin بيحب ولاد الذوات: high socioeconomic status في الطفولة. النظرية إن العدوى بتتأخر (زي الـ EBV) لما الطفولة تبقى نضيفة أوي."
+      - kind: table
+        page: 195
+        quote: "Nodular sclerosis +50% Young adults, only type more common in women, presence of Lacunar RS variants, fibrosis surrounding nodules."
+        title: "الأربع classic subtypes"
+        columns: ["Subtype", "%", "Clue"]
+        rows:
+          - ["LP", "10%", "Rare RS, many lymphocytes, stage 1-2"]
+          - ["NS", "50%+", "Women, lacunar RS, fibrosis"]
+          - ["MC", "30%+", "More RS, rich infiltrate"]
+          - ["LD", "Rare", "Many RS, few lymphocytes"]
+        hide: [[0, 1], [1, 1], [2, 1], [1, 2], [3, 2]]
+      - kind: reveal
+        page: 195
+        quote: "Lymphocyte depletion Uncommon Numerous RS-cells, decreased lymphocyte percentage, atypical cells"
+        prompt: "لاحظ النمط: كل ما الـ lymphocytes تقل، الـ RS تزيد. ليه ده منطقي؟"
+        answer: "الـ lymphocytes هي الـ host response اللي بتحارب. lymphocyte predominance = المناعة كسبانة، RS قليلة، stage بدري. lymphocyte depletion = المناعة خسرت، RS كتير. يعني المسطرة من LP لـ LD هي مسطرة شراسة."
+      - kind: check
+        page: 195
+        quote: "Young adults, only type more common in women, presence of Lacunar RS variants, fibrosis surrounding nodules."
+        question: "Which classic Hodgkin subtype is the only one more common in women?"
+        options: ["Nodular sclerosis", "Mixed cellularity", "Lymphocyte predominance", "Lymphocyte depletion"]
+        answer: 0
+        why:
+          - "صح: young adults، lacunar RS، fibrosis حوالين الـ nodules، وهو الوحيد الأكتر في الستات."
+          - "الـ MC فيه RS أكتر و infiltrate غني، ومش أكتر في الستات."
+          - "الـ LP: younger، RS نادرة، stage 1-2."
+          - "الـ LD نادر وفيه RS كتير."
+      - kind: try
+        items: [hem.L12.021, hem.L12.023, hem.L12.027, hem.L12.029, hem.L12.030]
+    recap:
+      - "Hodgkin = clonal germinal-centre B cells بـ crippled Ig gene؛ EBV في ≥ 50%."
+      - "RS cell: CD30+ CD15+، B-antigen negative، وسط host response."
+      - "Bimodal: 20-29 و 60؛ high socioeconomic status؛ EBV/IM."
+      - "NS 50%+ (ستات، lacunar، fibrosis)؛ MC 30%+؛ LP 10%؛ LD نادر."
+    practice: [hem.L12.021, hem.L12.022, hem.L12.023, hem.L12.024, hem.L12.025, hem.L12.026, hem.L12.027, hem.L12.028, hem.L12.029, hem.L12.030, hem.L12.031, hem.L12.032, hem.L12.083, hem.L12.084]
+  # ------------------------------------------------------------------
+  - id: hem.L12.lesson4
+    title: "Hodgkin في العيادة: من الرقبة لـ ABVD"
+    hook: "غدة في الرقبة مطاطية ومش بتوجع، وهرش، وعرق بالليل. ومعاها ESR عالي. يلا نكمّل."
+    minutes: 9
+    pages: [196, 198]
+    topics: [hl-clinical, hl-management]
+    goals:
+      - "توصف الغدة وتعرف أماكنها بالنسب"
+      - "تعرف الـ constitutional symptoms والـ organomegaly"
+      - "تعرف الـ investigations والعلاج حسب الـ stage"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 196
+        quote: "Painless, non-tender, asymmetrical, firm, discrete and rubbery. Lymph nodes may become matted."
+        title: "الغدة"
+        text: |
+          ==Painless, non-tender==، asymmetrical، firm، discrete و ==rubbery==. وممكن تلزق في بعض (**matted**).
+      - kind: figure
+        page: 196
+        quote: "Cervical nodes; are involved in 60 – 70 % Axillary nodes; in 10 – 15 % Inguinal nodes; in 6 – 12 %"
+        title: "فين الغدد؟"
+        alt: "A simple body outline with node sites and percentages: cervical 60 to 70 percent, mediastinal 6 to 11 percent, axillary 10 to 15 percent, retroperitoneal often (seen on CT), inguinal 6 to 12 percent."
+        caption: "الرقبة بعيد في الأول. الـ mediastinal علامة الـ nodular sclerosing."
+        svg: |
+          <svg viewBox="0 0 330 290" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="165" cy="35" r="25" class="fg-box"/>
+            <rect x="120" y="65" width="90" height="150" rx="25" class="fg-box"/>
+            <rect x="140" y="215" width="20" height="65" class="fg-box"/>
+            <rect x="170" y="215" width="20" height="65" class="fg-box"/>
+            <circle cx="150" cy="65" r="7" class="fg-dot-bad"/>
+            <text x="10" y="62" class="t-sm t-b">Cervical 60-70%</text>
+            <circle cx="165" cy="100" r="7" class="fg-dot-acc"/>
+            <text x="220" y="100" class="t-sm">Mediastinal 6-11%</text>
+            <circle cx="125" cy="90" r="6" class="fg-dot-bad"/>
+            <text x="10" y="112" class="t-sm">Axillary 10-15%</text>
+            <circle cx="165" cy="165" r="6" class="fg-dot-acc"/>
+            <text x="220" y="165" class="t-sm">Retroperitoneal</text>
+            <text x="220" y="181" class="t-sm t-mut">(on CT)</text>
+            <circle cx="148" cy="210" r="6" class="fg-dot-bad"/>
+            <text x="10" y="212" class="t-sm">Inguinal 6-12%</text>
+          </svg>
+      - kind: explain
+        page: 196
+        quote: "Mediastinal L.N. enlargement; in 6-11% of patients. This is a feature of the nodular sclerosing type."
+        title: "الـ mediastinum"
+        text: |
+          - ==Mediastinal== nodes في **6-11%**، وده feature للـ **nodular sclerosing**.
+          - ممكن يعمل **pleural effusion** أو ==superior vena cava obstruction==.
+          - الـ **retroperitoneal** بيتصاب كتير بس بيبان على الـ CT.
+      - kind: explain
+        page: 197
+        quote: "Splenomegaly occurs during course of disease in 50% of cases, but seldom massive."
+        title: "الأعضاء والأعراض"
+        text: |
+          - **Splenomegaly** في ==50%== أثناء المرض، بس **seldom massive**. والكبد ممكن.
+          - النخاع، الـ GIT، العضم، الرئة والـ spinal cord: **unusual**.
+
+          الـ **constitutional symptoms**:
+
+          - **Fever 30%**، continuous أو **cyclic**.
+          - Weight loss، و profuse sweating بالليل.
+          - ==Pruritus 25%==، وممكن يبقى severe.
+          - Fatigue، anorexia و cachexia.
+      - kind: aside
+        tone: exam
+        page: 197
+        quote: "Fever in 30% of patients, is continuous or cyclic."
+        text: "الـ fever الـ cyclic (أيام سخونية وأيام لأ) في الـ Hodgkin له اسم مشهور: Pel-Ebstein fever. الكتاب بيقول continuous or cyclic بس."
+      - kind: sort
+        page: 198
+        quote: "ESR/ plasma viscosity: high in active HD and could be good for follow up."
+        prompt: "التحليل ده بيقيس إيه في الـ Hodgkin؟"
+        bins: ["Activity / follow-up", "Advanced disease", "Complication"]
+        cards:
+          - { text: "ESR / plasma viscosity", bin: 0 }
+          - { text: "High LDH", bin: 1 }
+          - { text: "High uric acid (secondary gout)", bin: 2 }
+          - { text: "Abnormal kidney function", bin: 2 }
+          - { text: "Abnormal liver function", bin: 2 }
+        why: "الـ ESR عالي في الـ active HD وكويس للمتابعة. الـ LDH عالي في الـ advanced. الـ uric acid من الـ lympho-proliferative activity، والكلية من الإصابة أو الـ gout، والكبد لو اتصاب."
+      - kind: explain
+        page: 198
+        quote: "Confirm diagnosis by biopsy, best histology of lymph node by excision biopsy."
+        title: "الـ investigations"
+        text: |
+          1. ==Excision biopsy== للغدة: أحسن histology.
+          2. Blood: normocytic anaemia، reactive leucocytosis، **eosinophilia**، thrombocytosis خفيف.
+          3. **CXR**: غدد أو infection من الـ immune suppression.
+          4. **CT chest, abdomen, pelvis**: nodal و extranodal.
+          5. **Bone marrow trephine**: نستبعد إصابة النخاع.
+          6. **MRI أو PET** في الحالات الصعبة.
+      - kind: explain
+        page: 198
+        quote: "Can be treated with extended field radiotherapy or 3 courses of ABVD+ localized radiotherapy."
+        title: "العلاج"
+        text: |
+          - **Early (IA / IIA)**: extended field radiotherapy، أو ==3 courses ABVD + localized radiotherapy==.
+          - **Advanced (IIB-IV)**: ==6-8 courses ABVD==.
+      - kind: mnemonic
+        page: 198
+        quote: "ABVD = Adriamycin, Bleomycin, Vinblastine, and Decarbazine"
+        word: "ABVD"
+        parts:
+          - { key: "A", text: "Adriamycin (doxorubicin)" }
+          - { key: "B", text: "Bleomycin" }
+          - { key: "V", text: "Vinblastine" }
+          - { key: "D", text: "Dacarbazine" }
+        hook: "ABVD للـ Hodgkin. لاحظ إن الـ IIB بقت advanced: الـ B بتنقلها."
+      - kind: check
+        page: 198
+        quote: "Advanced disease (Stage IIB-IV) Treated with six to eight courses of combination chemotherapy (ABVD)"
+        question: "Hodgkin stage IIA vs IIB: which statement is right per the book?"
+        options: ["IIA is early (RT or 3 ABVD + RT); IIB is advanced (6-8 ABVD)", "Both are early disease", "Both get 6-8 ABVD", "IIB gets R-CHOP"]
+        answer: 0
+        why:
+          - "صح: الـ B symptoms بتنقل الـ II من early لـ advanced."
+          - "الـ IIB الكتاب حاططها في الـ advanced."
+          - "الـ IIA early، بياخد RT أو 3 ABVD + RT."
+          - "الـ R-CHOP للـ DLBCL."
+      - kind: try
+        items: [hem.L12.033, hem.L12.034, hem.L12.037, hem.L12.046, hem.L12.047]
+    recap:
+      - "غدة painless، rubbery، discrete؛ cervical 60-70%."
+      - "Mediastinal 6-11% = nodular sclerosing؛ SVC obstruction."
+      - "Spleen 50% (مش massive)؛ fever 30% cyclic؛ pruritus 25%."
+      - "Excision biopsy؛ ESR للمتابعة؛ LDH = advanced."
+      - "IA/IIA: RT أو 3 ABVD + RT؛ IIB-IV: 6-8 ABVD."
+    practice: [hem.L12.033, hem.L12.034, hem.L12.035, hem.L12.036, hem.L12.037, hem.L12.038, hem.L12.039, hem.L12.040, hem.L12.041, hem.L12.042, hem.L12.043, hem.L12.044, hem.L12.045, hem.L12.046, hem.L12.047, hem.L12.085, hem.L12.086, hem.L12.096, hem.L12.099]
+  # ------------------------------------------------------------------
+  - id: hem.L12.lesson5
+    title: "NHL: عيلة كبيرة ومتلخبطة"
+    hook: "الـ NHL مش مرض واحد، دي عيلة كاملة. نرتبها بالحجم وبالنواة وبالسرعة، ونفرقها عن الـ Hodgkin."
+    minutes: 10
+    pages: [199, 204]
+    topics: [nhl-basics, nhl-pathology, hl-vs-nhl]
+    goals:
+      - "تعرف الـ predisposing factors والميكروبات"
+      - "ترتب الـ NHL بالـ WHO: indolent، aggressive، highly aggressive"
+      - "تفرّق Hodgkin عن NHL"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 199
+        quote: "NHL constitutes about 4% of all cancers, and its rate per annum has increased since the 1970‘s."
+        title: "الـ NHL"
+        text: |
+          مجموعة ==heterogeneous clonal malignant diseases== من الـ lymphoid system.
+
+          - **4%** من كل السرطانات، وبيزيد من السبعينات.
+          - بيزيد مع السن؛ M:F **3:2**.
+          - الزيادة بس جزء منها من: كبر السن، تحسن التشخيص، الـ **HIV**، والـ **immunosuppressive therapy**.
+      - kind: match
+        page: 199
+        quote: "PLTD =post-transplantation lymphoproliferative disorder ATLL =Adult T-cell Leukaemia / Lymphoma PEL=Primary effusion Lymphoma"
+        prompt: "وصّل الميكروب بالـ lymphoma:"
+        pairs:
+          - ["EBV", "PTLD"]
+          - ["HTLV-1", "ATLL"]
+          - ["HHV-8", "Primary effusion lymphoma"]
+          - ["H. pylori", "MALT"]
+        why: "EBV بعد الـ transplant = PTLD. HTLV-1 = adult T-cell leukaemia/lymphoma. HHV-8 = PEL. H. pylori = MALT في المعدة."
+      - kind: explain
+        page: 199
+        quote: "Predisposing etiological factors in the development of Non-Hodgkin’s Lymphoma"
+        title: "باقي الـ predisposing factors"
+        text: |
+          - ==Primary immunodeficiency==: ataxia-telangiectasia، Wiskott-Aldrich، CVID، X-linked lymphoproliferative.
+          - **Secondary**: organ transplantation و immunosuppressive therapy.
+          - **Autoimmune**: rheumatoid، Sjögren، Hashimoto.
+          - **Environmental**: pesticides، herbicides، fertilizers، benzene، chemotherapy، radiation.
+      - kind: reveal
+        page: 199
+        quote: "Predisposing etiological factors in the development of Non-Hodgkin’s Lymphoma"
+        prompt: "إيه اللي بيجمع الـ immunodeficiency والـ autoimmune والـ H. pylori في قايمة واحدة؟"
+        answer: "كلهم بيخلّوا الـ lymphocytes تشتغل أو تتكاثر لفترة طويلة من غير رقابة: مناعة ضعيفة مش قادرة توقف clone (زي EBV)، أو stimulation مزمن (autoimmune، H. pylori). كل ما الخلايا تتقسم أكتر، فرصة الـ mutation تزيد."
+      - kind: table
+        page: 200
+        quote: "Cleaved Follicular lymphoma Convoluted Mycosis fungoides Sezary syndrome Adult T cell leukemic lymphoma"
+        title: "الـ pathology: pattern، size، nucleus"
+        columns: ["Feature", "Lymphomas"]
+        rows:
+          - ["Small", "SLL, follicular, marginal zone"]
+          - ["Intermediate", "Mantle, Burkitt, lymphoblastic"]
+          - ["Cleaved", "Follicular"]
+          - ["Convoluted", "MF, Sézary, ATLL"]
+          - ["Monocytoid", "Marginal zone"]
+        hide: [[1, 1], [2, 1], [3, 1], [4, 1]]
+      - kind: figure
+        page: 202
+        quote: "Indolent NHL Aggressive NHL Highly Aggressive NHL"
+        title: "الـ WHO: سلم السرعة"
+        alt: "A tree. NHL splits into B-cell 85 percent and T-cell 15 percent. B-cell splits into indolent (small lymphocytic, follicular, marginal zone: MALT, splenic, nodal), aggressive (diffuse large B-cell, mantle cell) and highly aggressive (lymphoblastic, Burkitt)."
+        caption: "الـ indolent بطيء وبيعيش سنين؛ الـ highly aggressive بيجري بس كتير منه بيستجيب للعلاج."
+        svg: |
+          <svg viewBox="0 0 330 320" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="H12a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="110" y="5" width="110" height="30" rx="8" class="fg-ink"/>
+            <text x="150" y="25" class="t-b">NHL</text>
+            <path d="M140 35L80 60" class="fg-arrow" marker-end="url(#H12a)"/>
+            <path d="M190 35L250 60" class="fg-arrow" marker-end="url(#H12a)"/>
+            <rect x="15" y="62" width="130" height="30" rx="8" class="fg-acc"/>
+            <text x="25" y="82" class="t-b">B-cell 85%</text>
+            <rect x="190" y="62" width="130" height="30" rx="8" class="fg-box"/>
+            <text x="200" y="82" class="t-b">T-cell 15%</text>
+            <rect x="5" y="110" width="320" height="65" rx="8" class="fg-good"/>
+            <text x="15" y="130" class="t-b t-good">Indolent</text>
+            <text x="15" y="150" class="t-sm">Small lymphocytic, follicular,</text>
+            <text x="15" y="167" class="t-sm">marginal zone (MALT, splenic, nodal)</text>
+            <rect x="5" y="185" width="320" height="55" rx="8" class="fg-acc"/>
+            <text x="15" y="205" class="t-b t-acc">Aggressive</text>
+            <text x="15" y="227" class="t-sm">Diffuse large B-cell, mantle cell</text>
+            <rect x="5" y="250" width="320" height="55" rx="8" class="fg-bad"/>
+            <text x="15" y="270" class="t-b t-bad">Highly aggressive</text>
+            <text x="15" y="292" class="t-sm">Lymphoblastic, Burkitt</text>
+          </svg>
+      - kind: aside
+        tone: trap
+        page: 202
+        quote: "Indolent NHL Aggressive NHL Highly Aggressive NHL"
+        text: "الـ mantle cell شكله small/intermediate، بس الـ WHO slide حاطه مع الـ aggressive جنب الـ DLBCL. ماتحطوش مع الـ indolent."
+      - kind: table
+        page: 203
+        quote: "Comparison of Non-Hodgkin’s Lymphoma and Hodgkin’s Lymphoma"
+        title: "Hodgkin ضد NHL"
+        columns: ["", "Hodgkin", "NHL"]
+        rows:
+          - ["B symptoms", "40%", "20%"]
+          - ["Spread", "Centripetal", "Centrifugal"]
+          - ["Extent", "Localized", "Rarely localized"]
+          - ["Blood, marrow", "Rare", "Frequent"]
+          - ["Mediastinum", "Common", "Uncommon"]
+          - ["GIT, skin", "Extremely rare", "Common"]
+        hide: [[0, 1], [1, 1], [3, 2], [5, 2]]
+      - kind: check
+        page: 204
+        quote: "Lymphoblastic and mediastinal Large B-cell Lymphoma"
+        question: "A mediastinal mass in NHL suggests which types?"
+        options: ["Lymphoblastic or mediastinal large B-cell", "Follicular or marginal zone", "Mantle cell or MALT", "Small lymphocytic"]
+        answer: 0
+        why:
+          - "صح: الـ mediastinum uncommon في الـ NHL إلا في دول."
+          - "الـ follicular والـ marginal zone مش من الاستثناءات."
+          - "مش مذكورين كاستثناء."
+          - "مش مذكور كاستثناء."
+      - kind: try
+        items: [hem.L12.051, hem.L12.052, hem.L12.058, hem.L12.059, hem.L12.063]
+    recap:
+      - "NHL 4% من السرطانات؛ HIV و immunosuppression زوّدوه."
+      - "EBV-PTLD، HTLV-1-ATLL، HHV-8-PEL، H. pylori-MALT."
+      - "Cleaved = follicular؛ convoluted = MF/Sézary/ATLL؛ monocytoid = marginal zone."
+      - "B 85%: indolent (SLL، follicular، MZL)، aggressive (DLBCL، mantle)، highly aggressive (lymphoblastic، Burkitt)."
+      - "Hodgkin nodal centripetal localized؛ NHL extranodal centrifugal، marrow و GIT و skin."
+    practice: [hem.L12.048, hem.L12.049, hem.L12.050, hem.L12.051, hem.L12.052, hem.L12.053, hem.L12.054, hem.L12.055, hem.L12.056, hem.L12.057, hem.L12.058, hem.L12.059, hem.L12.060, hem.L12.061, hem.L12.062, hem.L12.063, hem.L12.064, hem.L12.065, hem.L12.087, hem.L12.088, hem.L12.089, hem.L12.090, hem.L12.091, hem.L12.100, hem.L12.101]
+  # ------------------------------------------------------------------
+  - id: hem.L12.lesson6
+    title: "السلحفاة والأرنب: follicular و DLBCL"
+    hook: "واحد بيعيش 10 سنين في هدوء، والتاني بيجري في أسابيع بس ممكن يتعالج. ده الفرق بين الـ indolent والـ aggressive."
+    minutes: 8
+    pages: [204, 206]
+    topics: [follicular, dlbcl]
+    goals:
+      - "تعرف الـ follicular: الـ biology والـ course والعلاج"
+      - "تعرف الـ DLBCL: الـ histology والـ prognosis والـ R-CHOP"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 204
+        quote: "This is the most common form of indolent NHL and is associated with t (14;18) translocation and constitutive BCL-2 expression"
+        title: "Follicular: السلحفاة"
+        text: |
+          ==Follicular lymphoma== أشهر **indolent NHL** (low-grade).
+
+          - **t(14;18)** و **BCL-2** شغّال على طول في معظم الحالات.
+          - Middle-aged أو elderly.
+          - **Benign course لسنين (حوالي 10)** مع painless lymphadenopathy.
+          - Histology: follicular pattern من ==small cleaved B cells==.
+      - kind: explain
+        page: 204
+        quote: "The majority of patients will have stage III or IV disease. However, sudden transformation may occur to aggressive diffuse tumours"
+        title: "المفارقة"
+        text: |
+          معظمهم بييجوا ==stage III أو IV==، ومع ذلك بيعيشوا سنين.
+
+          الخطر الحقيقي: **sudden transformation** لـ **aggressive diffuse tumour**، وأحيانًا مع leukaemic phase.
+      - kind: aside
+        tone: analogy
+        page: 204
+        quote: "The disease is characterized by a benign course for many years (around 10 years) presenting with painless lymphadenopathy"
+        text: "الـ follicular زي السلحفاة (benign course، painless lymphadenopathy لسنين): منتشرة في كل حتة (stage IV) بس ماشية براحة. الـ BCL-2 بيخلّي الخلايا ماتموتش، مش إنها تجري. والـ transformation هو لما السلحفاة تقلب أرنب."
+      - kind: explain
+        page: 204
+        quote: "Treatment is usually with single oral agents i.e. Chlorambucil or Cyclophosphamide, Vincristine and Predisolone (CVP) combination."
+        title: "علاج الـ follicular في الكتاب"
+        text: |
+          - **Single oral agent**: chlorambucil.
+          - أو ==CVP==: cyclophosphamide، vincristine، prednisolone.
+          - **Fludarabine** لوحده أو مع cyclophosphamide أو mitoxantrone.
+          - ==Rituximab (anti-CD20)== لوحده أو مع الـ chemo.
+      - kind: update
+        page: 204
+        quote: "Rituximab (Anti CD20) is also effective alone or in combination with chemotherapy."
+        text: "دلوقتي الـ advanced symptomatic أو الـ high-burden بياخد غالبًا rituximab (anti-CD20) + chemo، زي bendamustine أو CHOP، والـ low-burden ممكن watch and wait. في الامتحان: إجابة الكتاب."
+        ref: "ESMO Clinical Practice Guidelines for follicular lymphoma 2021"
+      - kind: explain
+        page: 205
+        quote: "It is aggressive but potentially curable. Histologically, the disorder is characterized by the presence of Large cells of B-cell origin (centroblasts or immunoblasts)."
+        title: "DLBCL: الأرنب"
+        text: |
+          ==Diffuse large B-cell lymphoma==: rapidly progressive، **high-grade**.
+
+          - **Aggressive but potentially curable**.
+          - Large B cells: **centroblasts أو immunoblasts**.
+          - **3q27 translocation** مع **BCL-6** overexpression = prognosis أحسن نسبيًا.
+          - الـ **DNA microarray** بيدي prognostic information.
+      - kind: explain
+        page: 206
+        quote: "Patients may present with night sweats, fever, weight loss and lymphadenopathy or with extranodal involved sites such as GIT, testis, brain or bone."
+        title: "مين وإزاي؟"
+        text: |
+          - كل الأعمار، بس أكتر مع الكبر. ==One-third== من كل الـ lymphomas.
+          - B symptoms و lymphadenopathy، أو **extranodal**: GIT، testis، brain، bone.
+      - kind: mnemonic
+        page: 206
+        quote: "Cyclophosphamide, Doxorubicin (Hydroxydaunorubicin) Vincristine (Oncovin) and Predisolone (CHOP)."
+        word: "CHOP"
+        parts:
+          - { key: "C", text: "Cyclophosphamide" }
+          - { key: "H", text: "Hydroxydaunorubicin (doxorubicin)" }
+          - { key: "O", text: "Oncovin (vincristine)" }
+          - { key: "P", text: "Prednisolone" }
+        hook: "R-CHOP: الـ R (rituximab) جه يقطّع (chop) الـ CD20. كل 3 أسابيع، 6 أو 8 courses."
+      - kind: explain
+        page: 206
+        quote: "Recently, the addition of CD20 antibody (Rituximab) to CHOP has improved survival rates."
+        title: "العلاج"
+        text: |
+          - ==CHOP== الـ gold standard للـ large B-cell lymphoma.
+          - إضافة ==rituximab== حسّنت الـ survival.
+          - **كل 3 أسابيع، 6 أو 8 courses**.
+          - **Radiotherapy** للـ bulky أو residual masses بعد الـ chemo.
+      - kind: update
+        page: 206
+        quote: "This CHOP combination has been considered the gold standard regimen for Large B-cell Lymphoma."
+        text: "بعد تجربة POLARIX، Pola-R-CHP (polatuzumab بدل vincristine) option للـ intermediate-high risk DLBCL. في الامتحان: R-CHOP."
+        ref: "NCCN Guidelines B-cell lymphomas 2024"
+      - kind: sort
+        page: 204
+        quote: "Low-grade non-Hodgkin‘s Lymphoma (Indolent Lymphoma). This is the most common form of indolent NHL"
+        prompt: "Follicular ولا DLBCL؟"
+        bins: ["Follicular", "DLBCL"]
+        cards:
+          - { text: "t(14;18), BCL-2", bin: 0 }
+          - { text: "Small cleaved cells", bin: 0 }
+          - { text: "Benign course ~10 years", bin: 0 }
+          - { text: "CVP or chlorambucil", bin: 0 }
+          - { text: "Centroblasts, immunoblasts", bin: 1 }
+          - { text: "3q27, BCL-6", bin: 1 }
+          - { text: "One-third of lymphomas", bin: 1 }
+          - { text: "R-CHOP x 6-8", bin: 1 }
+        why: "Follicular: indolent، BCL-2، small cleaved، سنين، CVP/chlorambucil/rituximab. DLBCL: high-grade، large cells، BCL-6، تلت الـ lymphomas، R-CHOP."
+      - kind: try
+        items: [hem.L12.066, hem.L12.069, hem.L12.071, hem.L12.076, hem.L12.077]
+    recap:
+      - "Follicular: أشهر indolent، t(14;18) BCL-2، small cleaved، ~10 سنين، stage III-IV، خطر transformation."
+      - "علاجه: chlorambucil، CVP، fludarabine، rituximab."
+      - "DLBCL: high-grade، curable، centroblasts/immunoblasts، تلت الـ lymphomas."
+      - "3q27/BCL-6 = prognosis أحسن."
+      - "R-CHOP كل 3 أسابيع × 6-8، و RT للـ bulky/residual."
+    practice: [hem.L12.066, hem.L12.067, hem.L12.068, hem.L12.069, hem.L12.070, hem.L12.071, hem.L12.072, hem.L12.073, hem.L12.074, hem.L12.075, hem.L12.076, hem.L12.077, hem.L12.078, hem.L12.092, hem.L12.093, hem.L12.095, hem.L12.097, hem.L12.098]

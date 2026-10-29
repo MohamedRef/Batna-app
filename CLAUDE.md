@@ -23,7 +23,7 @@ The plan and the per-thread briefs are in `/mnt/project-files/medstudy/SPLIT.md`
 - Branch from `origin/main` and open PRs with base `main`. Before merging, merge the latest `origin/main`, run `just check`, wait for green CI, then squash-merge it yourself.
 - `just check` = check-tracked-files, `cargo fmt --all --check`, `cargo clippy --workspace --all-targets -- -D warnings`, `cargo test --workspace`, `batna-tools validate`.
 - Keep `docs/RUN.md` current.
-- The Mac workflow doesn't run on PRs. A PR that touches Mac-only code (`cfg(target_os = "macos")`, `objc2`, the .app bundle and update swap, the Mac menu, the Keychain session, or `.github/workflows/mac.yml`) must dispatch it on its branch before merging (Actions › Mac › Run workflow, pick the branch) and merge only when that run is green. Link the run in the PR.
+- The Mac workflow runs nightly and by hand only (Mohamed, 2026-10-29), never per PR or per merge. No PR waits for it; a nightly failure is fixed in its own PR.
 - Every PR adds `changes/<topic>.yaml` or appends to one (one line per change Mohamed can see: `kind` new/improved/fixed, `ar_eg`, optional `en`); the app's "What's new" is built from these (`docs/RELEASE.md` §5). Housekeeping PRs add a file holding `[]`. CI fails a PR without one.
 
 ## Code

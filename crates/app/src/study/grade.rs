@@ -35,11 +35,11 @@ pub fn GradeRow(item_id: String, suggested: Option<Grade>, on_grade: EventHandle
                     {if suggested.is_some() { tx::SUGGESTED } else { tx::GRADE_HINT }}
                 }
             }
-            div { class: "st-grade-row",
+            div { class: "rating-row",
                 for (i , grade) in GRADES.into_iter().enumerate() {
                     button {
                         key: "{i}",
-                        class: "st-grade",
+                        class: "rating",
                         "aria-keyshortcuts": "{i + 1}",
                         "data-grade": grade_name(grade),
                         "data-suggested": if suggested == Some(grade) { "yes" } else { "no" },
@@ -50,9 +50,9 @@ pub fn GradeRow(item_id: String, suggested: Option<Grade>, on_grade: EventHandle
                                 on_grade.call(grade);
                             }
                         },
-                        span { class: "st-grade-name", {grade_label(grade)} }
+                        span { {grade_label(grade)} }
                         if let Some(days) = intervals.map(|v| v[i]) {
-                            span { class: "st-grade-when small", {interval_label(days)} }
+                            span { class: "rating-when", {interval_label(days)} }
                         }
                     }
                 }

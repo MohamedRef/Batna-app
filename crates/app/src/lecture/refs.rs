@@ -82,7 +82,7 @@ pub fn References() -> Element {
         style { {CSS.text()} }
         style { {super::CSS.text()} }
         div { class: "lec-page refs",
-            div { class: "lec-top",
+            div { class: "refs-head",
                 button {
                     class: "icon-button lec-back",
                     "data-back": "true",
@@ -91,9 +91,7 @@ pub fn References() -> Element {
                     onclick: move |_| super::close(),
                     span { aria_hidden: "true", "→" }
                 }
-            }
-            div { class: "refs-head",
-                div {
+                div { class: "refs-title",
                     h1 { {tx::TITLE} }
                     p { class: "muted small", {tx::SUBTITLE} }
                 }
@@ -137,16 +135,16 @@ pub fn References() -> Element {
                                                 " · {crate::i18n::count::count(r.lessons, &crate::i18n::count::LESSON)}"
                                             }
                                         }
-                                    }
-                                    match &r.counts {
-                                        Some(c) if c.total > 0 => rsx! {
-                                            span {
-                                                class: if c.approved >= c.total { "chip ready" } else { "chip" },
-                                                title: tx::CHECKED_HINT,
-                                                "{tx::CHECKED} " bdi { dir: "ltr", "{c.approved}/{c.total}" }
-                                            }
-                                        },
-                                        _ => rsx! { span { class: "chip", {tx::WRITING} } },
+                                        match &r.counts {
+                                            Some(c) if c.total > 0 => rsx! {
+                                                span {
+                                                    class: if c.approved >= c.total { "chip ready" } else { "chip" },
+                                                    title: tx::CHECKED_HINT,
+                                                    "{tx::CHECKED} " bdi { dir: "ltr", "{c.approved}/{c.total}" }
+                                                }
+                                            },
+                                            _ => rsx! { span { class: "chip", {tx::WRITING} } },
+                                        }
                                     }
                                     span { class: "chev", aria_hidden: "true" }
                                 }

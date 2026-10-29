@@ -22,7 +22,9 @@ use crate::look::{Css, css};
 const CSS: Css = css!("src/case/case.css");
 
 /// The tab the screen opens on next, when Today sends him to due items.
-static START_TAB: GlobalSignal<Option<Tab>> = Signal::global(|| None);
+/// `BATNA_OPEN_CALC=child_pugh` opens the Calculators tab at launch (previews).
+static START_TAB: GlobalSignal<Option<Tab>> =
+    Signal::global(|| std::env::var_os("BATNA_OPEN_CALC").map(|_| Tab::Calculators));
 
 /// Open the Cases screen on its due items (#242): the cases tab, or the calc
 /// items tab when only calc items are due. Due items sit first in each list.

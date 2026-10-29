@@ -1,5 +1,6 @@
 /* References (lecture/refs.rs): head, search, the grouped lecture list. */
-.refs-head { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--sp-3); }
+.refs-head { display: flex; align-items: center; gap: var(--sp-3); }
+.refs-title { flex: 1; min-inline-size: 0; }
 .refs-head h1 { margin: 0; font-size: var(--fs-xl); font-weight: 600; }
 .refs-head p { margin: 0; }
 .refs-add { flex: none; inline-size: var(--tap-lg); block-size: var(--tap-lg); border-radius: 50%;
@@ -15,11 +16,6 @@
 .refs-row .num { flex: none; inline-size: 2.5rem; block-size: 2.5rem; display: grid; place-items: center;
   border-radius: var(--radius); background: var(--accent-soft); color: var(--accent);
   font-weight: 700; font-size: var(--fs-sm); font-variant-numeric: tabular-nums; }
-.refs-row .chip { flex: none; }
+.refs-row .tap-row-main > .chip { align-self: flex-start; margin-block-start: 2px; }
 .refs-status p { margin: 0; }
 .refs-status p + p { margin-block-start: var(--sp-1); font-weight: 600; }
-@media (max-width: 599.98px) {
-  /* Narrow rows: the check chip drops under the title instead of squeezing it. */
-  button.tap.refs-row { flex-wrap: wrap; }
-  .refs-row .tap-row-main { flex: 1 1 10rem; }
-}

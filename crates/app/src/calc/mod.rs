@@ -30,7 +30,9 @@ const AREAS: [Area; 5] = [Area::Liver, Area::Ascites, Area::Tumour, Area::AcuteF
 /// calculator take turns; from 840dp they sit side by side.
 #[component]
 pub fn Calculators() -> Element {
-    let mut open = use_signal(|| None::<&'static str>);
+    // BATNA_OPEN_CALC=child_pugh opens one at launch (previews, screenshots).
+    let mut open =
+        use_signal(|| std::env::var("BATNA_OPEN_CALC").ok().and_then(|id| calc::spec(&id)).map(|s| s.id));
     let current = open();
     rsx! {
         style { {CSS.text()} }

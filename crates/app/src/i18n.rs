@@ -1588,38 +1588,24 @@ pub mod learn {
 
     pub const CHECK: &str = "سؤال سريع";
     pub const ORDER: &str = "رتّب";
-    pub const ORDER_HINT: &str = "دوس على الخطوات بالترتيب. تقدر تشيل أي خطوة قبل التصحيح.";
     pub const UNDO: &str = "تراجع";
     pub const REMOVE: &str = "شيل";
-    pub const CHECK_HINT: &str = "اختار إجابة، وبعدين صحّح. تقدر تغيّر رأيك قبل التصحيح.";
-    pub const PICK_FIRST: &str = "اختار إجابة الأول.";
     pub const MARK_MINE_RIGHT: &str = "✓ اختيارك";
     pub const MARK_MINE_WRONG: &str = "✗ اختيارك";
     pub const MARK_RIGHT: &str = "✓ الصح";
-    pub const READY: &str = "جاهز؟ دوس صحّح.";
-    pub const REVEAL_FIRST: &str = "اكشف الإجابة الأول، أو عدّي.";
-    pub const MATCH_FIRST: &str = "وصّل كل الأزواج الأول.";
-    pub const SORT_FIRST: &str = "حط كل الكروت في خاناتها الأول.";
-    pub const CASE_FIRST: &str = "كمّل الحالة للآخر الأول.";
-    pub const TRY_FIRST: &str = "جاوب الكروت الأول، أو عدّي.";
-    pub const SKIPPED: &str = "عدّيت السؤال ده. تقدر تجاوبه دلوقتي ويتحسب.";
-    pub const BEFORE: &str = "جاوبت السؤال ده قبل كده";
-    pub const BEFORE_RIGHT: &str = "وكان صح من أول مرة ✓";
-    pub const BEFORE_WRONG: &str = "وماكانش صح من أول مرة.";
-    pub const BEFORE_HINT: &str =
-        "إجابتك نفسها ماكانتش بتتحفظ في النسخة القديمة، فدي الإجابة الصح علشان تراجعها.";
     pub const KEY: &str = "الإجابة الصح";
+    pub const RETRY: &str = "حاول تاني";
     pub const MATCH: &str = "وصّل";
     pub const MATCH_HINT: &str = "اختار من الشمال، وبعدين اللي يناسبه من اليمين.";
     pub const SORT: &str = "صنّف";
-    pub const SORT_HINT: &str = "دوس على كارت، وبعدين على الخانة بتاعته. (أو اسحبه بالماوس أو القلم.)";
+    pub const SORT_HINT: &str = "دوس على كارت، وبعدين على الخانة بتاعته.";
     pub const CASE: &str = "حالة صغيرة";
     pub const CASE_NEXT: &str = "اللي بعده";
     pub const CASE_SHOW: &str = "اكشف";
     pub const TABLE_HINT: &str = "فيه خانات مستخبية: فكّر فيها ودوس علشان تتأكد.";
     pub const CHECK_IT: &str = "صحّح";
     pub const RIGHT: &str = "صح كده! 👏";
-    pub const NOT_QUITE: &str = "قريب، بس مش دي. اقرا السبب تحت.";
+    pub const NOT_QUITE: &str = "قريب، بس مش دي.";
 
     pub const TRY: &str = "جرّب بنفسك";
     pub const TRY_HINT: &str = "دي كروت المحاضرة نفسها. إجابتك هنا بتتحسب مراجعة.";
@@ -1644,20 +1630,12 @@ pub mod learn {
         format!("الخطوة رقم {n}")
     }
 
-    pub fn left_to_place(n: usize) -> String {
-        if n == 1 {
-            "لسه خطوة واحدة قبل التصحيح.".into()
-        } else {
-            format!("لسه {n} خطوات قبل التصحيح.")
-        }
-    }
-
     pub fn should_be(n: usize) -> String {
         format!("مكانها رقم {n}")
     }
 
     pub fn in_place(right: usize, n: usize) -> String {
-        format!("{right} من {n} في مكانهم. شوف الصح تحت.")
+        format!("{right} من {n} في مكانهم.")
     }
 
     pub fn misses(n: usize) -> String {

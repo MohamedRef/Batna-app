@@ -1,0 +1,1084 @@
+schema: batna.content/v1
+lecture: dm.L13
+title: Diabetes and Pregnancy
+author: Prof. Dr. Noha Gaber Amin
+book: { chapter: 6, pages: [161, 178] }
+topics:
+  - { id: burden, title: "Hyperglycemia in pregnancy: burden and the three scenarios" }
+  - { id: diagnosis, title: "Diagnosis: DM criteria, GDM definition, HAPO, one-step and two-step" }
+  - { id: preconception, title: "Preconception counseling and care checklist" }
+  - { id: risks, title: "Risks: fetal and maternal, DKA, preeclampsia, retinopathy, hypertension" }
+  - { id: targets, title: "Glycemic targets, A1C and CGM in pregnancy" }
+  - { id: treatment, title: "Education, lifestyle and insulin in pregnancy" }
+  - { id: labor, title: "Insulin regimens, labor, cesarean and post delivery" }
+  - { id: oral, title: "Metformin and sulfonylureas in pregnancy" }
+  - { id: postpartum, title: "Postpartum screening after GDM" }
+items:
+  # ---------- p161-162: burden and scenarios ----------
+  - id: dm.L13.001
+    kind: cloze
+    topic: burden
+    text: About {{c1::16%}} of pregnancies worldwide are affected by some form of hyperglycemia, and GDM accounts for about {{c2::84%}} of these.
+    src: { page: 161, quote: "16% of total pregnancies globally were affected by some form of hyperglycemia" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L13.002
+    kind: cloze
+    topic: burden
+    text: About {{c1::21.4 million}} live births are at risk of intrauterine exposure to hyperglycemia (first global estimates for HIP).
+    src: { page: 161, quote: "21.4 million live births at risk of being exposed to hyperglycemia intrauterine" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L13.003
+    kind: card
+    topic: burden
+    front: Why are more pregnant women now found to have undiagnosed type 2 DM?
+    back: The ongoing epidemic of obesity and diabetes has raised T2DM in women of childbearing age.
+    src: { page: 161, quote: "The ongoing epidemic of obesity & DM has led to more T2DM in women of childbearing age" }
+    status: unverified
+  - id: dm.L13.004
+    kind: card
+    topic: burden
+    front: Which pregnant women should be tested for diabetes at the first prenatal visit, and with what criteria?
+    back: Women with risk factors for T2DM, using the standard (non-pregnant) diagnostic criteria.
+    src: { page: 161, quote: "it is reasonable to test women with risk factors for T2DM at their initial prenatal visit, using standard diagnostic criteria." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L13.005
+    kind: table
+    topic: burden
+    title: The three common scenarios of diabetes with pregnancy
+    columns: [Scenario, Example in the lecture, Key point]
+    rows:
+      - ["Type 1 DM with pregnancy", "Mrs. Halima, 23, primigravida, T1DM for 15 years", "Pre-existing DM known before pregnancy"]
+      - ["Previously undiagnosed type 2 DM", "Mrs. Karima, 37, G3P2, first-trimester FPG ≥126 and 2-h OGTT ≥200", "Overt DM found early: standard criteria"]
+      - ["Gestational DM (the majority)", "Mrs. Fatima, 28, G1P0, diagnosed in the 2nd trimester", "GDM criteria at 24-28 weeks"]
+    blanks: [[1, 2], [2, 2]]
+    src: { page: 162, quote: "Mrs. Fatima (The Majority, Gestational Diabetes (GDM))" }
+    status: unverified
+  # ---------- p162-165: diagnosis ----------
+  - id: dm.L13.006
+    kind: enumerate
+    topic: diagnosis
+    prompt: Enumerate the four criteria for the diagnosis of diabetes (any one is enough).
+    points:
+      - "FPG ≥126 mg/dL (no caloric intake for at least 8 h)"
+      - "2-h PG ≥200 mg/dL during a 75 g OGTT"
+      - "A1C ≥6.5% (NGSP-certified lab, DCCT-standardized)"
+      - "Random PG ≥200 mg/dL with classic symptoms or hyperglycemic crisis"
+    pass: 4
+    src: { page: 162, quote: "FPG ≥ 126 mg/dL (Fasting is defined as no caloric intake for at least 8 h)" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L13.007
+    kind: cloze
+    topic: diagnosis
+    text: The diagnostic OGTT uses a glucose load equivalent to {{c1::75 g}} anhydrous glucose dissolved in water; fasting means no caloric intake for at least {{c2::8 h}}.
+    src: { page: 162, quote: "using a glucose load containing the equivalent of 75 g anhydrous glucose dissolved in water" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L13.008
+    kind: card
+    topic: diagnosis
+    front: What is required of the lab for an A1C ≥6.5% to diagnose diabetes?
+    back: A method that is NGSP certified and standardized to the DCCT assay.
+    src: { page: 162, quote: "The test should be performed in a laboratory using a method that is NGSP certified and standardized to the DCCT assay." }
+    status: unverified
+  - id: dm.L13.009
+    kind: card
+    topic: diagnosis
+    front: Define gestational diabetes mellitus (GDM).
+    back: Any degree of glucose intolerance first recognized during pregnancy (2nd or 3rd trimester) that is not pre-existing type 1 or type 2 diabetes.
+    src: { page: 163, quote: "Any degree of glucose intolerance that was first recognized during pregnancy (2nd or 3rd trimester of pregnancy" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L13.010
+    kind: cloze
+    topic: diagnosis
+    text: Test for GDM at {{c1::24-28}} weeks of gestation in women not previously known to have diabetes.
+    src: { page: 163, quote: "Test for GDM at 24–28 weeks of gestation in pregnant women not previously known to have DM." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L13.011
+    kind: card
+    topic: diagnosis
+    front: What was the HAPO study?
+    back: A large multinational cohort of more than 23,000 pregnant women relating maternal glycemia at 24-28 weeks to pregnancy outcomes.
+    src: { page: 163, quote: "A large-scale multinational cohort study of> 23,000 pregnant women" }
+    status: unverified
+  - id: dm.L13.012
+    kind: card
+    topic: diagnosis
+    front: What did the HAPO study find about maternal glucose and adverse outcomes?
+    back: Risk of adverse maternal, fetal and neonatal outcomes rose continuously with maternal glycemia, even within ranges once thought normal, with no threshold for most complications. This led to new GDM criteria.
+    src: { page: 163, quote: "For most complications, there was no threshold for risk." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L13.013
+    kind: card
+    topic: diagnosis
+    front: How is the one-step 75 g OGTT for GDM performed?
+    back: In the morning after an overnight fast of at least 8 hours, with plasma glucose measured fasting, at 1 hour and at 2 hours.
+    src: { page: 164, quote: "OGTT should be performed in the morning after an overnight fast of at least 8 hours." }
+    status: unverified
+  - id: dm.L13.014
+    kind: cloze
+    topic: diagnosis
+    text: "One-step 75 g OGTT: GDM if any one value is met or exceeded: fasting {{c1::92}}, 1 hour {{c2::180}}, 2 hours {{c3::153}} mg/dL."
+    src: { page: 164, quote: "If any one of the following plasma glucose values are met or exceeded, GDM is diagnosed" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L13.015
+    kind: cloze
+    topic: diagnosis
+    text: "Two-step strategy, step 1: a {{c1::50 g}} glucose load test, {{c2::non-fasting}}, with plasma glucose at 1 hour; proceed if ≥{{c3::130}} mg/dL."
+    src: { page: 164, quote: "Perform a 50 g GLT (non-fasting), with plasma glucose measurement at 1 hour." }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L13.016
+    kind: card
+    topic: diagnosis
+    front: "Two-step strategy, step 2: which test, and how many abnormal values diagnose GDM?"
+    back: A fasting 100 g OGTT; GDM if at least two of the four readings are met or exceeded.
+    src: { page: 164, quote: "GDM is diagnosed if at least two of the following four readings are met or exceeded." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L13.017
+    kind: table
+    topic: diagnosis
+    title: 100 g OGTT thresholds (step 2), mg/dL
+    columns: [Time, Carpenter/Coustan, NDDG]
+    rows:
+      - [Fasting, "95", "105"]
+      - [1 hour, "180", "190"]
+      - [2 hours, "155", "165"]
+      - [3 hours, "140", "145"]
+    blanks: [[0, 1], [0, 2], [2, 1], [3, 1], [3, 2]]
+    src: { page: 164, quote: "Carpenter/Coustan NDDG" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L13.018
+    kind: table
+    topic: diagnosis
+    title: One-step vs two-step GDM diagnosis
+    columns: [Feature, One-step, Two-step]
+    rows:
+      - [Glucose load, "75 g OGTT", "50 g GLT, then 100 g OGTT"]
+      - ["Fasting?", "Yes, overnight ≥8 h", "Step 1 non-fasting; step 2 fasting"]
+      - [Samples, "Fasting, 1 h, 2 h", "Step 1 at 1 h; step 2 fasting, 1, 2, 3 h"]
+      - [Abnormal values needed, "One", "Two of four"]
+    blanks: [[0, 1], [0, 2], [3, 1], [3, 2]]
+    src: { page: 164, quote: "Perform a 75-g oral glucose tolerance test (OGTT), with plasma glucose measurement at fasting, 1 hour & 2 hours." }
+    status: unverified
+  - id: dm.L13.019
+    kind: cloze
+    topic: diagnosis
+    text: The one-step strategy was expected to raise GDM incidence from {{c1::5-6%}} to {{c2::15-20%}}, mainly because {{c3::one abnormal value (not two)}} is enough.
+    src: { page: 165, quote: "increase the incidence of GDM (5–6% to 15–20%), primarily because only one abnormal value (not two) became sufficient" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L13.020
+    kind: mcq
+    topic: diagnosis
+    stem: A 29-year-old G1P0 at 26 weeks, not known to have diabetes, has a morning 75 g OGTT after an overnight fast. Fasting 90, 1 hour 184, 2 hours 140 mg/dL. Interpretation?
+    options: ["GDM, because the 1-hour value is ≥180", "Normal, because two values are needed", Overt diabetes, Repeat with a 100 g OGTT, "Normal, because the fasting value is <92"]
+    answer: 0
+    why:
+      - In the one-step strategy one value at or above threshold (92, 180, 153) diagnoses GDM.
+      - Two abnormal values are the two-step (100 g) rule, not the one-step rule.
+      - Overt DM needs standard criteria such as FPG ≥126 or 2-h ≥200.
+      - The 100 g test is step 2 of the two-step strategy after an abnormal 50 g screen.
+      - Any single value suffices; a normal fasting value does not cancel an abnormal 1-hour value.
+    src: { page: 164, quote: "If any one of the following plasma glucose values are met or exceeded, GDM is diagnosed" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L13.021
+    kind: mcq
+    topic: diagnosis
+    stem: A 31-year-old at 25 weeks has a non-fasting 50 g glucose load test; the 1-hour value is 142 mg/dL. Her fasting 100 g OGTT then shows fasting 93, 1 h 185, 2 h 160, 3 h 130 mg/dL. Using Carpenter/Coustan, what is the result?
+    options: [GDM (two values abnormal), Not GDM (only one value abnormal), GDM (one value is enough), Not GDM (the screen was negative), Overt type 2 DM]
+    answer: 0
+    why:
+      - 1 h 185 ≥180 and 2 h 160 ≥155 are two abnormal values, which makes the diagnosis.
+      - Fasting 93 is below 95 and 3 h 130 is below 140, but two values are already abnormal.
+      - One value is enough only in the one-step 75 g test.
+      - A 50 g value of 142 is ≥130, so the screen was positive.
+      - Nothing here meets standard criteria for overt diabetes.
+    src: { page: 164, quote: "GDM is diagnosed if at least two of the following four readings are met or exceeded." }
+    status: unverified
+  # ---------- p162-163, 171-172: preconception ----------
+  - id: dm.L13.022
+    kind: enumerate
+    topic: preconception
+    prompt: Enumerate the four main points of preconception care in a woman with diabetes.
+    points:
+      - "Preconception counseling for glycemia as close to normal as safely possible, ideally A1C <6.5%"
+      - "Family planning and effective contraception"
+      - "Risks of potentially teratogenic drugs (ACE inhibitors, statins)"
+      - "Counseling on the risk of development or progression of retinopathy"
+    pass: 3
+    src: { page: 162, quote: "Provide preconception counseling to keep glycemic control as close to normal as is safely possible, ideally A1C < 6.5%." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L13.023
+    kind: cloze
+    topic: preconception
+    text: Preconception counseling aims for glycemia as close to normal as is safely possible, ideally A1C {{c1::<6.5%}}.
+    src: { page: 162, quote: "Provide preconception counseling to keep glycemic control as close to normal as is safely possible, ideally A1C < 6.5%." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L13.024
+    kind: card
+    topic: preconception
+    front: Which two potentially teratogenic drugs does the lecture name for preconception review?
+    back: ACE inhibitors and statins.
+    src: { page: 163, quote: "Risks related to certain medications. (Potentially teratogenic medications as ACE inhibitors & statins)." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L13.025
+    kind: cloze
+    topic: preconception
+    text: The routine preconception folic acid supplement is {{c1::400-800 µg/day}}.
+    src: { page: 171, quote: "Folic acid supplement (400-800 jug/day routine)" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L13.026
+    kind: enumerate
+    topic: preconception
+    prompt: "Preconception education (Table 15.1): list the lifestyle recommendations."
+    points:
+      - Regular moderate exercise
+      - Avoidance of hyperthermia (hot tubs)
+      - Adequate sleep
+    pass: 3
+    src: { page: 171, quote: "Avoidance of hyperthermia (hot tubs)" }
+    status: unverified
+  - id: dm.L13.027
+    kind: enumerate
+    topic: preconception
+    prompt: "Preconception education (Table 15.1): what does the comprehensive nutrition assessment cover?"
+    points:
+      - Overweight and obesity or underweight
+      - Meal planning
+      - Correction of dietary nutritional deficiencies
+      - Caffeine intake
+      - Safe food preparation technique
+    pass: 4
+    src: { page: 171, quote: "Comprehensive nutrition assessment and recommendations for" }
+    status: unverified
+  - id: dm.L13.028
+    kind: card
+    topic: preconception
+    front: Which pregnancy risks should preconception counseling explain to a woman with diabetes (Table 15.1)?
+    back: Miscarriage, stillbirth, congenital malformations, macrosomia, preterm labor and delivery, and hypertensive disorders of pregnancy.
+    src: { page: 171, quote: "risks to pregnancy including miscarriage, stillbirth, congenital malformations, macrosomia, preterm labor and delivery, hypertensive disorders in pregnancy" }
+    status: unverified
+  - id: dm.L13.029
+    kind: card
+    topic: preconception
+    front: Which comorbidities should the preconception health assessment look for (Table 15.1)?
+    back: Hyperlipidemia, hypertension, MASLD, PCOS and thyroid dysfunction, plus DKA history, severe hypoglycemia or unawareness, and barriers to care.
+    src: { page: 171, quote: "comorbidities such as hyperlipidemia, hypertension, MASLD, PCOS, and thyroid dysfunction" }
+    status: unverified
+  - id: dm.L13.030
+    kind: card
+    topic: preconception
+    front: Which obstetric history items belong in the preconception assessment (Table 15.1)?
+    back: Cesarean section, congenital malformations or fetal loss, contraception, hypertensive disorders, postpartum hemorrhage, preterm delivery, previous macrosomia, Rh incompatibility, and thrombotic events (DVT/PE).
+    src: { page: 171, quote: "previous macrosomia, Rh incompatibility, and thrombotic events (DVT/PE)" }
+    status: unverified
+  - id: dm.L13.031
+    kind: enumerate
+    topic: preconception
+    prompt: "Preconception screening for complications in pre-existing diabetes (Table 15.1): what is checked?"
+    points:
+      - Comprehensive foot exam
+      - Comprehensive ophthalmologic exam
+      - ECG from age 35 with cardiac signs, symptoms or risk factors
+      - Lipid panel
+      - Serum creatinine
+      - TSH
+      - Urine albumin-to-creatinine ratio
+    pass: 5
+    src: { page: 172, quote: "comprehensive foot exam; comprehensive ophthalmologic exam; ECG in individuals starting at age 35 years who have cardiac signs or symptoms" }
+    status: unverified
+  - id: dm.L13.032
+    kind: card
+    topic: preconception
+    front: Which genetic carrier states are screened before conception, based on history (Table 15.1)?
+    back: Cystic fibrosis, sickle cell anemia, Tay-Sachs disease, thalassemia, and others if indicated.
+    src: { page: 172, quote: "Genetic carrier status (based on history)" }
+    status: unverified
+  - id: dm.L13.033
+    kind: card
+    topic: preconception
+    front: What contraceptive plan does the preconception checklist require?
+    back: Contraception to prevent pregnancy until glycemic goals are achieved.
+    src: { page: 172, quote: "Contraceptive plan to prevent pregnancy until glycemic goals are achieved" }
+    status: unverified
+  - id: dm.L13.034
+    kind: mcq
+    topic: preconception
+    stem: A 30-year-old with type 2 DM on metformin, lisinopril and atorvastatin wants to conceive next year. A1C is 8.4%. What is the best preconception advice?
+    options: ["Effective contraception until glycemic goals are met, aim A1C <6.5% if safe, and review lisinopril and atorvastatin", Stop contraception now and tighten control once pregnant, Aim for A1C <8% before conception, Continue all drugs because they are safe in pregnancy, "Aim A1C <6% regardless of hypoglycemia"]
+    answer: 0
+    why:
+      - Contraception until goals, ideal A1C <6.5% if safe, and review of teratogenic ACE inhibitors and statins are the core points.
+      - Conception should wait for glycemic goals under a contraceptive plan.
+      - The preconception ideal is A1C <6.5%, not <8%.
+      - ACE inhibitors and statins are named as potentially teratogenic.
+      - The target is as close to normal as is safely possible, not at the cost of hypoglycemia.
+    src: { page: 162, quote: "Family planning should be discussed & effective contraception prescribed." }
+    status: unverified
+  # ---------- p165-166: risks ----------
+  - id: dm.L13.035
+    kind: enumerate
+    topic: risks
+    prompt: Enumerate the fetal and neonatal risks of uncontrolled diabetes in pregnancy.
+    points:
+      - Spontaneous abortion
+      - Fetal anomalies
+      - Preeclampsia
+      - Macrosomia
+      - Neonatal hypoglycemia
+      - Neonatal hyperbilirubinemia
+    pass: 5
+    src: { page: 165, quote: "Risks of uncontrolled DM in Pregnancy" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L13.036
+    kind: card
+    topic: risks
+    front: Which long-term risks follow diabetes in pregnancy, for the mother and the offspring?
+    back: "Mother: more T2DM and cardiovascular morbidity. Offspring: more obesity and T2DM later in life."
+    src: { page: 165, quote: "Increase the risk of obesity & T2DM in offspring later in life" }
+    status: unverified
+  - id: dm.L13.037
+    kind: card
+    topic: risks
+    front: Why is DKA a special danger in pregnancy?
+    back: Pregnancy is a ketogenic state, so DKA can occur at lower glucose levels than outside pregnancy (euglycemic DKA).
+    src: { page: 165, quote: "Pregnancy is a ketogenic state, ↑↑risk for DKA even at lower BG levels than in the non-pregnant state (Euglycemic DKA)." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L13.038
+    kind: card
+    topic: risks
+    front: What should pregnant women with pre-existing diabetes (especially T1DM) have at home to prevent DKA?
+    back: Ketone strips, plus education on DKA prevention (sick-day rules) and detection.
+    src: { page: 165, quote: "Women with preexisting diabetes, especially T1DM, need ketone strips at home & education on DKA prevention (sick day rules) & detection." }
+    status: unverified
+  - id: dm.L13.039
+    kind: cloze
+    topic: risks
+    text: Women with type 1 or type 2 DM should take low-dose aspirin {{c1::60-150 mg/day}} (usual dose {{c2::81 mg/day}}) from the end of the {{c3::1st trimester}} until delivery to lower preeclampsia risk.
+    src: { page: 165, quote: "low-dose aspirin 60–150 mg/day (usual dose 81 mg/day) from the end of the 1st trimester until the baby is born" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L13.040
+    kind: card
+    topic: risks
+    front: What is the "take care" warning about retinopathy in pregnancy?
+    back: Rapidly implementing tight glycemic control when retinopathy is present is associated with worsening of the retinopathy.
+    src: { page: 166, quote: "The rapid implementation of tight glycemic control in the setting of retinopathy is associated with a worsening of retinopathy." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L13.041
+    kind: cloze
+    topic: risks
+    text: "Diabetes with chronic hypertension in pregnancy (ADA 2025): start or titrate treatment at {{c1::140/90}} mmHg, de-intensify below {{c2::90/60}} mmHg, and aim for {{c3::110-135/85}} mmHg."
+    src: { page: 166, quote: "a blood pressure threshold of 140/90 mmHg for initiation or titration of therapy is associated with better pregnancy outcomes" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L13.042
+    kind: card
+    topic: risks
+    front: Does treating chronic hypertension from 140/90 mmHg in pregnant women with diabetes increase small-for-gestational-age births?
+    back: No. It gives better pregnancy outcomes than reserving treatment for severe hypertension, with no rise in SGA birth weight.
+    src: { page: 166, quote: "with no increase in the risk of small-for-gestational-age birth weight" }
+    status: unverified
+  - id: dm.L13.043
+    kind: mcq
+    topic: risks
+    stem: A 26-year-old with type 1 DM is 13 weeks pregnant. A1C 6.4%, BP 118/72. Which drug does the lecture recommend to start now until delivery?
+    options: [Low-dose aspirin 81 mg/day, Labetalol, Atorvastatin, Lisinopril, No additional drug]
+    answer: 0
+    why:
+      - Women with T1 or T2DM take low-dose aspirin 60-150 mg/day (usually 81) from the end of the 1st trimester to lower preeclampsia risk.
+      - Her BP is normal; treatment starts at 140/90 mmHg.
+      - Statins are potentially teratogenic.
+      - ACE inhibitors are potentially teratogenic.
+      - Aspirin is recommended for every woman with pre-existing T1 or T2DM.
+    src: { page: 165, quote: "Women with T1 or T2DM should be prescribed low-dose aspirin 60–150 mg/day (usual dose 81 mg/day)" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L13.044
+    kind: mcq
+    topic: risks
+    stem: A 25-year-old with type 1 DM at 20 weeks has had vomiting for a day. Glucose is 190 mg/dL, pH 7.18, bicarbonate 10 mEq/L and urine ketones 3+. Her husband says DKA is impossible with "such a low sugar." What explains it?
+    options: [Pregnancy is ketogenic; DKA occurs at lower glucose (euglycemic DKA), DKA needs glucose >350 mg/dL in pregnancy, The ketones are only starvation ketosis, Pregnancy lowers the risk of DKA, This is lactic acidosis from metformin]
+    answer: 0
+    why:
+      - Pregnancy is a ketogenic state with a higher risk of DKA even at lower glucose (euglycemic DKA).
+      - There is no such threshold; DKA happens at lower glucose in pregnancy.
+      - pH 7.18 and bicarbonate 10 are a true acidosis, not simple starvation ketosis.
+      - The risk is higher in pregnancy, not lower.
+      - She has type 1 DM on insulin, with ketones; nothing suggests metformin.
+    src: { page: 165, quote: "Pregnancy is a ketogenic state, ↑↑risk for DKA even at lower BG levels than in the non-pregnant state (Euglycemic DKA)." }
+    status: unverified
+  # ---------- p166-169: targets ----------
+  - id: dm.L13.045
+    kind: card
+    topic: targets
+    front: Why is fasting glucose lower in normal pregnancy than outside pregnancy?
+    back: The fetus and placenta take up glucose independently of insulin.
+    src: { page: 166, quote: "Fasting BG levels are lower than in the non-pregnant state due to insulin-independent glucose uptake by the fetus &placenta." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L13.046
+    kind: card
+    topic: targets
+    front: Why is postprandial glucose higher in normal pregnancy?
+    back: Diabetogenic placental hormones cause carbohydrate intolerance.
+    src: { page: 166, quote: "Postprandial BG is higher (hyperglycemia & carbohydrate intolerance) as a result of diabetogenic placental hormones." }
+    status: unverified
+  - id: dm.L13.047
+    kind: card
+    topic: targets
+    front: In pregnancy, which is the primary glycemic measure, SMBG or A1C?
+    back: SMBG; A1C is a secondary measure.
+    src: { page: 166, quote: "In pregnancy, SMBG is more important than HbA1C (2ry measure)." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L13.048
+    kind: card
+    topic: targets
+    front: How often is A1C checked in pregnancy, and why?
+    back: More often than usual (monthly), because of rapid red cell turnover and physiological changes in glycemic parameters.
+    src: { page: 166, quote: "A1C levels may need to be monitored more frequently than usual (monthly)." }
+    status: unverified
+  - id: dm.L13.049
+    kind: cloze
+    topic: targets
+    text: Observational studies show the lowest rates of adverse fetal outcomes with A1C {{c1::<6-6.5%}}.
+    src: { page: 167, quote: "Observational studies show the lowest rates of adverse fetal outcomes in association with A1C < 6–6.5%." }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L13.050
+    kind: cloze
+    topic: targets
+    text: "ACOG and ADA glucose targets in pregnancy (pre-gestational DM and GDM): fasting ≤{{c1::95}} mg/dL and either 1-hour postprandial ≤{{c2::140}} or 2-hour postprandial ≤{{c3::120}} mg/dL."
+    src: { page: 167, quote: "recommend the following targets for women with pre-gestational T1 or T2DM (the same for GDM)" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L13.051
+    kind: card
+    topic: targets
+    front: What is the benefit of postprandial (rather than only preprandial) monitoring in pregnancy?
+    back: Better glycemic control and a lower risk of preeclampsia.
+    src: { page: 167, quote: "Postprandial monitoring is associated with better glycemic control & lower risk of preeclampsia." }
+    status: unverified
+  - id: dm.L13.052
+    kind: table
+    topic: targets
+    title: Blood glucose goals in pregnancy (ADA Table 15.2), mg/dL
+    columns: [Measurement, "T1DM or T2DM", GDM on insulin, GDM not on insulin]
+    rows:
+      - [Fasting, "70-95", "70-95", "<95"]
+      - [1-h postprandial, "110-140", "110-140", "<140"]
+      - [2-h postprandial, "100-120", "100-120", "<120"]
+    blanks: [[0, 1], [1, 1], [2, 1], [0, 3]]
+    src: { page: 167, quote: "Blood glucose goals in pregnancies associated with diabetes" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L13.053
+    kind: card
+    topic: targets
+    front: Why do the pregnancy glucose goals for diabetes on insulin have a lower limit (70 mg/dL fasting), unlike GDM on diet alone?
+    back: The lower limits guard against hypoglycemia in insulin-treated women; they do not apply to type 2 DM treated with nutrition alone, and less stringent goals are used if targets cause significant hypoglycemia.
+    src: { page: 167, quote: "Blood glucose goals in pregnancies associated with diabetes" }
+    status: unverified
+  - id: dm.L13.054
+    kind: card
+    topic: targets
+    front: What does ADA recommendation 15.11 say about CGM in type 1 diabetes in pregnancy, and why?
+    back: Recommend CGM (grade A). With pre- and postprandial goals, real-time CGM reduces large-for-gestational-age infants and neonatal hypoglycemia.
+    src: { page: 167, quote: "real-time CGM can reduce the risk for large-for-gestational-age infants and neonatal hypoglycemia in pregnancy complicated by type 1 diabetes." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L13.055
+    kind: card
+    topic: targets
+    front: Can estimated A1C or the glucose management indicator (GMI) be used in pregnancy?
+    back: No. They should not be used in pregnancy as estimates of A1C (ADA 15.13, grade C).
+    src: { page: 167, quote: "Commonly used estimated A1C and glucose management indicator calculations should not be used in pregnancy as estimates of A1C." }
+    status: unverified
+  - id: dm.L13.056
+    kind: order
+    topic: targets
+    prompt: Put the three steps of the AGP (CGM report) action plan in order.
+    steps:
+      - "Metrics and targets (time in ranges): is action needed?"
+      - "AGP curve (14 days): where is action needed?"
+      - "Daily views: what actions are needed?"
+    src: { page: 168, quote: "3 Steps to an Action Plan" }
+    status: unverified
+  - id: dm.L13.057
+    kind: cloze
+    topic: targets
+    text: Each {{c1::5%}} increase in time in range ({{c2::70-180}} mg/dL or 3.9-10.0 mmol/L) is clinically significant.
+    src: { page: 169, quote: "Each 5% increase in TIR (70-180mg/dL or 3.9-10.0 mmol/L) is clinically significant." }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L13.058
+    kind: table
+    topic: targets
+    title: Standard CGM targets in the AGP report shown in the lecture
+    columns: [Range, Target share of readings]
+    rows:
+      - ["Target range 70-180 mg/dL", ">70% (16 h 48 min)"]
+      - ["Below 70 mg/dL", "<4% (58 min)"]
+      - ["Below 54 mg/dL", "<1% (14 min)"]
+      - ["Above 250 mg/dL", "<5% (1 h 12 min)"]
+      - ["Glucose variability (%CV)", "≤36%"]
+    blanks: [[0, 1], [1, 1], [2, 1], [4, 1]]
+    src: { page: 169, quote: "Each 5% increase in TIR (70-180mg/dL or 3.9-10.0 mmol/L) is clinically significant." }
+    status: unverified
+    tags: [numbers]
+    update:
+      text: "These are the general (non-pregnant) AGP targets shown in the book. For pregnancy with type 1 diabetes, the international TIR consensus uses a tighter range of 63-140 mg/dL, >70% of the time, with <4% below 63 and <1% below 54."
+      ref: "International Consensus on Time in Range 2019; ADA Standards of Care 2025, section 15"
+  - id: dm.L13.059
+    kind: mcq
+    topic: targets
+    stem: A 34-year-old with type 2 DM at 26 weeks asks for her home glucose targets. Which set does the ADA recommend?
+    options: ["Fasting ≤95; 1-h ≤140; 2-h ≤120 mg/dL", "Fasting ≤100; 1-h ≤160; 2-h ≤140 mg/dL", "Fasting ≤110; 2-h ≤120 only", A1C <7.5% without SMBG, "Fasting 80-130; peak postprandial <180 mg/dL"]
+    answer: 0
+    why:
+      - These are the ACOG/ADA pregnancy targets for pre-gestational DM and GDM.
+      - These limits are too loose for pregnancy.
+      - The fasting target is ≤95, and postprandial testing is part of the target.
+      - In pregnancy SMBG is primary and A1C secondary.
+      - These are non-pregnant adult targets.
+    src: { page: 167, quote: "recommend the following targets for women with pre-gestational T1 or T2DM (the same for GDM)" }
+    status: unverified
+    tags: [book-question, high-yield]
+  - id: dm.L13.060
+    kind: mcq
+    topic: targets
+    stem: A 30-year-old with type 1 DM at 18 weeks asks which test should guide her insulin changes week to week.
+    options: [Self-monitored blood glucose (with CGM), Monthly A1C alone, Glucose management indicator from her CGM, Fructosamine every 3 months, Urine glucose]
+    answer: 0
+    why:
+      - SMBG is the primary measure in pregnancy and CGM is recommended in type 1 DM.
+      - A1C is secondary in pregnancy, checked monthly.
+      - GMI should not be used in pregnancy as an estimate of A1C.
+      - The lecture does not use fructosamine.
+      - Urine glucose is not a monitoring tool in the lecture.
+    src: { page: 166, quote: "In pregnancy, SMBG is more important than HbA1C (2ry measure)." }
+    status: unverified
+  # ---------- p169-174: treatment ----------
+  - id: dm.L13.061
+    kind: enumerate
+    topic: treatment
+    prompt: Enumerate the education topics in the treatment of diabetes in pregnancy.
+    points:
+      - General information on DM
+      - Psychological adjustment
+      - Nutrition
+      - Medication
+      - Exercise
+      - Sick days
+      - Breastfeeding
+      - Hygiene
+      - Postpartum
+      - Acute complications (hypo and hyper)
+      - Monitoring blood glucose
+    pass: 8
+    src: { page: 170, quote: "Acute complication (Hypo &Hyper)" }
+    status: unverified
+  - id: dm.L13.062
+    kind: cloze
+    topic: treatment
+    text: Studies suggest that {{c1::70-85%}} of women with GDM can be controlled with {{c2::lifestyle modification}} alone.
+    src: { page: 170, quote: "studies suggest that 70–85% of women diagnosed with GDM can control GDM with lifestyle modification alone." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L13.063
+    kind: card
+    topic: treatment
+    front: With what three measures does management of GDM start?
+    back: Medical nutrition therapy, physical activity, and weight management according to pre-gestational weight.
+    src: { page: 170, quote: "Weight management depending on pre-gestational weight." }
+    status: unverified
+  - id: dm.L13.064
+    kind: card
+    topic: treatment
+    front: Which women with GDM may need early pharmacological therapy?
+    back: Those with greater initial degrees of hyperglycemia.
+    src: { page: 170, quote: "Women with greater initial degrees of hyperglycemia may require early initiation of pharmacological therapy." }
+    status: unverified
+  - id: dm.L13.065
+    kind: card
+    topic: treatment
+    front: Does treating GDM improve outcomes?
+    back: Yes. Two large randomized studies, summarized by a US Preventive Services Task Force review, showed better perinatal outcomes.
+    src: { page: 170, quote: "Treatment has been demonstrated to improve perinatal outcomes in 2 large randomized studies" }
+    status: unverified
+  - id: dm.L13.066
+    kind: card
+    topic: treatment
+    front: What is the preferred agent for diabetes in pregnancy not controlled by diet, exercise and metformin?
+    back: Insulin, for pre-gestational T1DM, T2DM and GDM.
+    src: { page: 172, quote: "Insulin is the preferred agent for management of pre-gestational T1DM, T2DM & GDM" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L13.067
+    kind: enumerate
+    topic: treatment
+    prompt: Why is insulin preferred over oral agents in pregnancy? Give its three advantages.
+    points:
+      - It does not cross the placenta
+      - It can be tailored to meal timing to minimize hypoglycemia
+      - It can usually reach an acceptable euglycemic profile within 2 weeks, even if control was poor
+    pass: 3
+    src: { page: 172, quote: "Insulin does not cross the placenta & its use offers two other advantages over oral agents during pregnancy" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L13.068
+    kind: table
+    topic: treatment
+    title: Short and rapid-acting insulins in pregnancy (book table)
+    columns: [Insulin, Onset, Peak, Duration, Pregnancy category]
+    rows:
+      - [Regular U-100, 30 min, 3 h, 8 h, B]
+      - [Regular U-500, 30 min, 3 h, Up to 24 h, B]
+      - [Aspart, 10-15 min, 40-50 min, 3-5 h, B]
+      - [Lispro U-100 and U-200, 10-15 min, 30-90 min, 3-5 h, B]
+      - [Glulisine, 10-15 min, 55 min, 3-5 h, C]
+    blanks: [[0, 1], [2, 1], [3, 4], [4, 4]]
+    src: { page: 173, quote: "Available Insulin & Associated Pregnancy Category (short & rapid acting)" }
+    status: unverified
+    update:
+      text: "The FDA replaced the A/B/C/D/X letter categories with narrative pregnancy and lactation labeling in 2015. The letters remain the book's answer."
+      ref: "FDA Pregnancy and Lactation Labeling Rule 2015"
+  - id: dm.L13.069
+    kind: table
+    topic: treatment
+    title: Intermediate and long-acting insulins in pregnancy (book table)
+    columns: [Insulin, Onset, Peak, Duration, Pregnancy category]
+    rows:
+      - [NPH, 1-2 h, 4-8 h, 10-20 h, B]
+      - [Detemir, 1-2 h, None, 24 h, B]
+      - [Glargine U-100, 1-2 h, None, 24 h, "No human pregnancy data (previously C)"]
+      - [Glargine U-300, ">6 h", None, 24 h, No human pregnancy data]
+      - [Degludec U-100, 1 h, None, "42 h at steady state", "May be used (EMA and Health Canada)"]
+      - [Inhaled human insulin, 12-15 min, 57 min, 2 h, C]
+    blanks: [[0, 2], [0, 4], [1, 4], [2, 4], [5, 4]]
+    src: { page: 173, quote: "B 10–20 hours 4–8 hours 1–2 hours NPH" }
+    status: unverified
+  - id: dm.L13.070
+    kind: card
+    topic: treatment
+    front: Which short/rapid-acting insulin in the book's table is pregnancy category C?
+    back: Glulisine (regular, aspart and lispro are category B).
+    src: { page: 173, quote: "C 3–5 hours 55 min 10–15 min Glulisine" }
+    status: unverified
+  - id: dm.L13.071
+    kind: card
+    topic: treatment
+    front: Which two basal insulins are category B in the book's table?
+    back: NPH and detemir.
+    src: { page: 173, quote: "B 24 hours None 1–2 hours Detemir" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L13.072
+    kind: card
+    topic: treatment
+    front: How do insulin requirements change across a pregnancy with type 1 DM?
+    back: "Fall in the 1st trimester (more hypoglycemia), rise until about the 37th week (weekly or biweekly increases), then usually fall in the final month. Overall they may double."
+    src: { page: 174, quote: "Increasing until the 37th week. Rapidly increasing IR requires weekly or biweekly ↑ in insulin dose." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L13.073
+    kind: cloze
+    topic: treatment
+    text: Over pregnancy the insulin dose shifts toward prandial insulin, so basal makes up {{c1::<50%}} and prandial {{c2::>50%}} of the total daily insulin.
+    src: { page: 174, quote: "(TDI given as basal insulin (<50%) & a greater proportion (>50%) as prandial insulin)." }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L13.074
+    kind: cloze
+    topic: treatment
+    text: Give the mealtime bolus {{c1::10-15 min}} before eating if the premeal glucose is >{{c2::70}} mg/dL and there are no hypoglycemic symptoms.
+    src: { page: 174, quote: "Give the mealtime bolus 10–15 min prior to eating if the premeal glucose level is >70 mg/dl" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L13.075
+    kind: cloze
+    topic: treatment
+    text: The CDAPP Sweet Success program adjusts short- and intermediate-acting insulin by {{c1::2-4 units (~10%)}} every {{c2::2-3 days}}.
+    src: { page: 174, quote: "suggesting changes by 2–4 units (~10%) in short- & intermediate-acting insulins every 2–3 days." }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L13.076
+    kind: mcq
+    topic: treatment
+    stem: A 24-year-old with type 1 DM is 9 weeks pregnant and reports three mild hypoglycemic episodes this week on her usual doses. What is the likely explanation?
+    options: [Insulin requirements fall in the 1st trimester, Insulin resistance peaks in the 1st trimester, Hypoglycemia unawareness from insulinoma, Her insulin crosses the placenta, Requirements fall only in the final month]
+    answer: 0
+    why:
+      - Total daily insulin needs fall in the 1st trimester, with more hypoglycemia.
+      - Insulin resistance rises progressively until about the 37th week.
+      - Nothing suggests an insulinoma.
+      - Insulin does not cross the placenta.
+      - Requirements also fall late, but at 9 weeks the 1st-trimester fall explains it.
+    src: { page: 174, quote: "Decrease in 1st trimester, ↓TDI requirements (may experience increased hypoglycemia)." }
+    status: unverified
+  # ---------- p175-176: labor and regimens ----------
+  - id: dm.L13.077
+    kind: table
+    topic: labor
+    title: Insulin regimens for GDM and pregnancy with T2DM
+    columns: [Regimen, Dose]
+    rows:
+      - [Weight-based, "0.7-1 units/kg daily in divided doses"]
+      - [Trimester + weight-based, "1st trimester 0.7, 2nd 0.8, 3rd 0.9-1 units/kg TDD"]
+      - [Split of TDD (trimester regimen), "2/3 morning (1/3 aspart or lispro with breakfast, 2/3 NPH); 1/3 evening (1/2 aspart or lispro with dinner, 1/2 NPH at bedtime)"]
+      - [One-dose-for-all, "NPH 20 units morning and 20 at bedtime; aspart or lispro 10 units at breakfast and 10 at dinner"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 175, quote: "Insulin Regimens for GDM & Pregnancy in Patients with T2DM" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L13.078
+    kind: cloze
+    topic: labor
+    text: "Trimester-based insulin: total daily dose {{c1::0.7}} units/kg in the 1st trimester, {{c2::0.8}} in the 2nd, and {{c3::0.9-1}} in the 3rd."
+    src: { page: 175, quote: "Insulin Regimens for GDM & Pregnancy in Patients with T2DM" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L13.079
+    kind: card
+    topic: labor
+    front: "Trimester regimen: how is the total daily dose split?"
+    back: "2/3 in the morning (1/3 aspart or lispro with breakfast, 2/3 NPH) and 1/3 in the evening (1/2 aspart or lispro with dinner, 1/2 NPH before bed)."
+    src: { page: 175, quote: "Insulin Regimens for GDM & Pregnancy in Patients with T2DM" }
+    status: unverified
+  - id: dm.L13.080
+    kind: enumerate
+    topic: labor
+    prompt: Enumerate the three principles of insulin management during labor.
+    points:
+      - Patients with T1DM need exogenous insulin (injection or infusion) at all times
+      - Active labor needs less insulin per hour than before labor
+      - Recent long-acting insulin doses may keep affecting maternal glucose
+    pass: 3
+    src: { page: 175, quote: "Patients with T1DM require exogenous insulin (injection or infusion) at all times" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L13.081
+    kind: card
+    topic: labor
+    front: Before a scheduled cesarean or induction, what happens to the evening insulins and to bedtime detemir?
+    back: Pre-supper and bedtime regular, aspart, lispro or NPH are taken as routine; bedtime detemir is halved the night before.
+    src: { page: 175, quote: "Bedtime detemir insulin doses should be halved the night before intervention." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L13.082
+    kind: cloze
+    topic: labor
+    text: On the morning of a scheduled delivery, the patient is admitted before breakfast and capillary glucose is checked {{c1::hourly}} until steady values of {{c2::80-100}} mg/dL; an insulin infusion of at least {{c3::0.5 units/h}} starts if glucose exceeds 100 mg/dL.
+    src: { page: 175, quote: "An insulin infusion of at least 0.5 units per hour should be initiated if blood glucose levels exceed 100 mg/dL" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L13.083
+    kind: order
+    topic: labor
+    prompt: Order the insulin steps for a scheduled cesarean in a woman on detemir and aspart.
+    steps:
+      - Take pre-supper and bedtime short-acting or NPH insulin as routine
+      - Halve the bedtime detemir dose the night before
+      - Admit before the usual breakfast time
+      - Monitor capillary glucose hourly until steady at 80-100 mg/dL
+      - Start an insulin infusion of at least 0.5 units/h if glucose exceeds 100 mg/dL, adjusting hourly
+    src: { page: 175, quote: "The patient should be admitted prior to the usual breakfast time." }
+    status: unverified
+  - id: dm.L13.084
+    kind: card
+    topic: labor
+    front: What happens to insulin needs right after delivery in GDM or T2DM, and why?
+    back: They fall at once because pregnancy insulin resistance immediately decreases; the infusion is stopped or reduced according to pre-pregnancy requirements.
+    src: { page: 176, quote: "Most patients with GDM or T2DM have significant insulin resistance during pregnancy, which immediately decreases following delivery." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L13.085
+    kind: card
+    topic: labor
+    front: Why may postpartum insulin needs be lower than before pregnancy?
+    back: The patient has recently been euglycemic, and lactation lowers requirements.
+    src: { page: 176, quote: "because the patient has recently been euglycemic & because of lactation effects." }
+    status: unverified
+  - id: dm.L13.086
+    kind: mcq
+    topic: labor
+    stem: A 32-year-old with type 1 DM on detemir at bedtime and lispro with meals is booked for elective cesarean at 9 am tomorrow. What should she do with tonight's detemir?
+    options: [Halve it, Take the full dose, Omit it, Double it, Switch it to regular insulin]
+    answer: 0
+    why:
+      - Bedtime detemir is halved the night before the intervention.
+      - Long-acting insulin keeps acting during labor and surgery, so the full dose risks hypoglycemia.
+      - She has T1DM and needs exogenous insulin at all times; omitting basal insulin risks DKA.
+      - Needs fall in labor, not rise.
+      - The lecture keeps the basal insulin at half dose; it does not switch it.
+    src: { page: 175, quote: "Bedtime detemir insulin doses should be halved the night before intervention." }
+    status: unverified
+  # ---------- p176-177: oral agents ----------
+  - id: dm.L13.087
+    kind: card
+    topic: oral
+    front: What are metformin's advantages and its main concerns in pregnancy?
+    back: "Advantages: less hypoglycemia and less weight gain. Concerns: it crosses the placenta (cord levels exceed maternal), slightly raises prematurity, and long-term data are lacking."
+    src: { page: 176, quote: "Metformin slightly increases the risk of prematurity & long-term studies are lacking." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L13.088
+    kind: card
+    topic: oral
+    front: How do umbilical cord metformin levels compare with maternal levels?
+    back: Cord blood levels are higher than maternal levels.
+    src: { page: 176, quote: "Umbilical cord blood levels of metformin are higher than maternal levels" }
+    status: unverified
+  - id: dm.L13.089
+    kind: card
+    topic: oral
+    front: When metformin is used for PCOS and ovulation induction, when is it stopped?
+    back: By the end of the first trimester.
+    src: { page: 176, quote: "Metformin should be discontinued by the end of the first trimester." }
+    status: unverified
+  - id: dm.L13.090
+    kind: card
+    topic: oral
+    front: Why are sulfonylureas (glyburide) considered inferior to insulin and metformin in pregnancy?
+    back: They increase neonatal hypoglycemia and macrosomia.
+    src: { page: 177, quote: "sulfonylureas (glyburide) are inferior to insulin & metformin due to increased risk of neonatal hypoglycemia & macrosomia" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L13.091
+    kind: cloze
+    topic: oral
+    text: Glyburide concentrations in umbilical cord plasma are about {{c1::70%}} of maternal levels.
+    src: { page: 177, quote: "Concentrations of glyburide in umbilical cord plasma are approximately 70% of maternal levels." }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L13.092
+    kind: table
+    topic: oral
+    title: Glucose-lowering agents in pregnancy
+    columns: [Agent, "Crosses placenta?", Main point]
+    rows:
+      - [Insulin, "No", "Preferred agent; tailored to meals; control within 2 weeks"]
+      - [Metformin, "Yes; cord levels higher than maternal", "Less hypoglycemia and weight gain; slightly more prematurity"]
+      - [Glyburide, "Yes; cord about 70% of maternal", "Inferior: more neonatal hypoglycemia and macrosomia"]
+    blanks: [[0, 1], [1, 1], [2, 2]]
+    src: { page: 176, quote: "Metformin (lower risk of hypoglycemia & lower weight gain) but……Metformin crosses the placenta" }
+    status: unverified
+  - id: dm.L13.093
+    kind: mcq
+    topic: oral
+    stem: A 28-year-old with GDM at 30 weeks is still above target despite diet and exercise. She refuses injections and asks about glyburide. What does the lecture say about glyburide?
+    options: [Inferior to insulin and metformin because of more neonatal hypoglycemia and macrosomia, Preferred over insulin because it does not cross the placenta, Equal to insulin in all outcomes, Safe because cord levels are negligible, Only contraindicated in the first trimester]
+    answer: 0
+    why:
+      - Meta-analyses show glyburide is inferior, with more neonatal hypoglycemia and macrosomia.
+      - Glyburide crosses the placenta; insulin is the one that does not.
+      - The lecture calls it inferior.
+      - Cord levels are about 70% of maternal.
+      - The concern applies to its use in GDM later in pregnancy.
+    src: { page: 177, quote: "sulfonylureas (glyburide) are inferior to insulin & metformin due to increased risk of neonatal hypoglycemia & macrosomia" }
+    status: unverified
+  # ---------- p177: postpartum ----------
+  - id: dm.L13.094
+    kind: cloze
+    topic: postpartum
+    text: Screen women with GDM for persistent diabetes at {{c1::4-12 weeks}} postpartum using an {{c2::OGTT}} and non-pregnancy criteria.
+    src: { page: 177, quote: "Screen women with GDM for persistent DM at 4–12 weeks postpartum, using the OGTT test" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L13.095
+    kind: cloze
+    topic: postpartum
+    text: Women with a history of GDM need {{c1::lifelong}} screening for diabetes or prediabetes at least every {{c2::3 years}}.
+    src: { page: 177, quote: "Women with a history of GDM should have lifelong screening for the development of DM or pre-diabetes at least every 3 years." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L13.096
+    kind: card
+    topic: postpartum
+    front: A woman with previous GDM is found to have prediabetes. What prevents diabetes?
+    back: Intensive lifestyle intervention or metformin.
+    src: { page: 177, quote: "Women with a history of GDM found to have pre-diabetes should receive intensive lifestyle interventions or metformin to prevent DM" }
+    status: unverified
+  - id: dm.L13.097
+    kind: mcq
+    topic: postpartum
+    stem: A 33-year-old had GDM controlled with diet and delivered 6 weeks ago. Glucose readings are now normal on no treatment. What follow-up is recommended?
+    options: ["75 g OGTT now (4-12 weeks postpartum), then lifelong screening at least every 3 years", No further testing because glucose has normalized, A1C at 1 year only, Repeat testing only in her next pregnancy, 100 g OGTT at 6 months]
+    answer: 0
+    why:
+      - Postpartum OGTT at 4-12 weeks, then lifelong screening at least every 3 years.
+      - Previous GDM carries a lifelong diabetes risk.
+      - The postpartum test is an OGTT at 4-12 weeks.
+      - Screening is lifelong, not tied to pregnancy.
+      - The 100 g OGTT is a pregnancy test (two-step strategy).
+    src: { page: 177, quote: "Screen women with GDM for persistent DM at 4–12 weeks postpartum, using the OGTT test" }
+    status: unverified
+  # ---------- p178: book questions ----------
+  - id: dm.L13.098
+    kind: mcq
+    topic: diagnosis
+    stem: A 36-year-old G2P1 with a BMI of 32 presents at 7 weeks. Fasting plasma glucose is 132 mg/dL; random glucose later that day is 216 mg/dL with polyuria. Which is the most appropriate diagnosis today?
+    options: [Pre-existing type 2 DM, Gestational diabetes mellitus, Impaired fasting glucose of pregnancy, Needs a 75 g OGTT at 24-28 weeks]
+    answer: 0
+    why:
+      - "FPG ≥126 and a random value ≥200 with symptoms at the first visit meet standard criteria: pre-existing (overt) diabetes found early."
+      - GDM is glucose intolerance first recognized in the 2nd or 3rd trimester that is not pre-existing diabetes; this one meets standard DM criteria at 7 weeks.
+      - Her values meet diabetes criteria, not an intermediate category.
+      - She already meets criteria; waiting for 24-28 weeks would delay care.
+    src: { page: 161, quote: "it is reasonable to test women with risk factors for T2DM at their initial prenatal visit, using standard diagnostic criteria." }
+    status: unverified
+    tags: [book-question, high-yield]
+  - id: dm.L13.099
+    kind: mcq
+    topic: preconception
+    stem: A 24-year-old with type 1 DM is planning pregnancy. Which A1C target best aligns with guideline-based preconception optimization?
+    options: [A1C <7.5%, A1C <7.0%, A1C <6.5% if safely achievable, A1C <6.0% regardless of hypoglycemia]
+    answer: 2
+    why:
+      - Too loose for preconception care.
+      - The general adult target, not the preconception ideal.
+      - Glycemia as close to normal as is safely possible, ideally A1C <6.5%.
+      - Safety (avoiding hypoglycemia) is part of the goal.
+    src: { page: 162, quote: "Provide preconception counseling to keep glycemic control as close to normal as is safely possible, ideally A1C < 6.5%." }
+    status: unverified
+    tags: [book-question, high-yield]
+  - id: dm.L13.100
+    kind: mcq
+    topic: risks
+    stem: A 27-year-old at 22 weeks with type 1 DM uses basal-bolus insulin. She asks why she was given urine ketone strips. Best explanation?
+    options: [DKA in pregnancy occurs only with glucose >350 mg/dL, Pregnancy is ketogenic; DKA can occur at lower glucose, Ketone testing is unnecessary with CGM, DKA risk is lower in pregnancy]
+    answer: 1
+    why:
+      - There is no such threshold; DKA occurs at lower glucose in pregnancy.
+      - Pregnancy is a ketogenic state, so DKA can be euglycemic; ketone strips at home are advised.
+      - CGM measures glucose, not ketones, and euglycemic DKA can be missed.
+      - The risk is higher in pregnancy.
+    src: { page: 165, quote: "Women with preexisting diabetes, especially T1DM, need ketone strips at home & education on DKA prevention (sick day rules) & detection." }
+    status: unverified
+    tags: [book-question]
+  # ---------- cases ----------
+  - id: dm.L13.101
+    kind: case
+    topic: diagnosis
+    stem: Mrs. Karima, 37, G3P2, BMI 33, has no known diabetes. At her first prenatal visit at 9 weeks you test her because of risk factors.
+    steps:
+      - reveal: "Fasting plasma glucose 131 mg/dL; 2-hour value on a 75 g OGTT 212 mg/dL."
+        question: What is the diagnosis?
+        options: [Pre-existing (overt) type 2 DM, GDM, Normal for early pregnancy, Repeat at 24-28 weeks]
+        answer: 0
+        why: Standard criteria (FPG ≥126, 2-h ≥200) met in the first trimester mean undiagnosed pre-existing diabetes, not GDM.
+      - question: Which home glucose targets do you give her?
+        options: ["Fasting ≤95, 1-h ≤140 or 2-h ≤120 mg/dL", "Fasting 80-130, postprandial <180 mg/dL", "Fasting ≤110, 2-h ≤160 mg/dL", A1C <7% only]
+        answer: 0
+        why: The ACOG/ADA pregnancy targets apply to pre-gestational DM and GDM alike.
+      - question: Which additional drug should she start at the end of the 1st trimester?
+        options: [Low-dose aspirin 60-150 mg/day, Atorvastatin, Enalapril, Glyburide]
+        answer: 0
+        why: Women with T1 or T2DM take low-dose aspirin until delivery to lower preeclampsia risk.
+      - reveal: Despite diet and metformin, her glucose stays above target at 24 weeks; she weighs 90 kg.
+        question: Using the trimester + weight-based regimen, what total daily insulin dose do you start?
+        options: [About 72 units (0.8 units/kg), About 45 units (0.5 units/kg), About 90 units (1 unit/kg), About 20 units fixed]
+        answer: 0
+        why: 2nd-trimester TDD is 0.8 units/kg; 0.8 × 90 = 72 units, split 2/3 morning and 1/3 evening.
+    src: { page: 175, quote: "Insulin Regimens for GDM & Pregnancy in Patients with T2DM" }
+    status: unverified
+  - id: dm.L13.102
+    kind: case
+    topic: treatment
+    stem: Mrs. Halima, 23, primigravida with type 1 DM for 15 years, is 6 weeks pregnant. Her retinal exam shows moderate non-proliferative retinopathy, and her A1C is 9.2%.
+    steps:
+      - question: What caution applies when you tighten her control?
+        options: [Rapid tight control can worsen retinopathy, Tight control always improves retinopathy at once, Retinopathy is irrelevant in pregnancy, Stop insulin until an ophthalmology review]
+        answer: 0
+        why: Rapid implementation of tight control with retinopathy is associated with worsening; she needs eye follow-up.
+      - question: Which monitoring does ADA recommend for her?
+        options: [CGM with SMBG for pre- and postprandial goals, A1C every 3 months only, Glucose management indicator as her A1C, Urine glucose]
+        answer: 0
+        why: CGM is recommended in T1DM pregnancy and reduces LGA infants and neonatal hypoglycemia.
+      - reveal: At 30 weeks she needs more insulin every week.
+        question: Why?
+        options: [Insulin resistance rises until about 37 weeks, Insulin crosses the placenta, The 1st-trimester fall is ending, Lactation]
+        answer: 0
+        why: Rapidly increasing insulin resistance needs weekly or biweekly dose increases until about the 37th week.
+      - question: How should her TDI be split by now?
+        options: [Basal <50% and prandial >50%, Basal 80% and prandial 20%, Basal only, Equal fixed doses]
+        answer: 0
+        why: There is a shift toward prandial insulin over pregnancy.
+      - question: In active labor, what happens to her insulin needs?
+        options: [Less insulin per hour, but never zero, Stop all insulin, Double the basal dose, Switch to metformin]
+        answer: 0
+        why: Active labor needs less insulin per hour, but T1DM requires exogenous insulin at all times.
+    src: { page: 174, quote: "Over the entire pregnancy, insulin requirements may double, & there is a shift toward more prandial insulin relative to basal insulin." }
+    status: unverified
+  - id: dm.L13.103
+    kind: case
+    topic: postpartum
+    stem: Mrs. Fatima, 28, G1P0, is diagnosed with GDM at 26 weeks.
+    steps:
+      - question: How does management start?
+        options: ["Medical nutrition therapy, physical activity and weight management", Insulin at once, Glyburide, Metformin and statin]
+        answer: 0
+        why: 70-85% of GDM is controlled with lifestyle alone; management starts with MNT, activity and weight management.
+      - reveal: Two weeks later her fasting values are 102-110 mg/dL.
+        question: Which drug is preferred?
+        options: [Insulin, Glyburide, Sitagliptin, Acarbose]
+        answer: 0
+        why: Insulin is the preferred agent when diet and exercise fail; glyburide is inferior.
+      - reveal: She delivers at 39 weeks.
+        question: What do you do with her insulin infusion after delivery?
+        options: [Stop it or reduce it according to pre-pregnancy needs, Keep the same rate for 48 h, Double it, Switch to glyburide]
+        answer: 0
+        why: Insulin resistance falls immediately after delivery.
+      - question: When and how is she screened for persistent diabetes?
+        options: ["75 g OGTT at 4-12 weeks, then at least every 3 years for life", A1C at 6 months only, No screening, 100 g OGTT at 1 year]
+        answer: 0
+        why: Postpartum OGTT at 4-12 weeks, then lifelong screening at least every 3 years.
+    src: { page: 177, quote: "Screen women with GDM for persistent DM at 4–12 weeks postpartum, using the OGTT test" }
+    status: unverified
+  # ---------- essays ----------
+  - id: dm.L13.104
+    kind: essay
+    topic: diagnosis
+    prompt: Discuss the diagnosis of gestational diabetes mellitus.
+    outline:
+      - "Definition: [Glucose intolerance first recognized in the 2nd or 3rd trimester, Not pre-existing type 1 or type 2 DM]"
+      - "Who and when: [Risk factors for T2DM: test at the first visit with standard criteria, Everyone else: 24-28 weeks]"
+      - "HAPO: [More than 23,000 women, Risk rises continuously with glycemia; no threshold]"
+      - "One-step: [75 g OGTT after 8 h fast, Fasting 92, 1 h 180, 2 h 153; any one value]"
+      - "Two-step: [50 g non-fasting GLT, 1 h ≥130, then 100 g OGTT; two of four values (Carpenter/Coustan 95/180/155/140)]"
+      - "Impact: [One-step raises GDM from 5-6% to 15-20%]"
+    src: { page: 164, quote: "If any one of the following plasma glucose values are met or exceeded, GDM is diagnosed" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L13.105
+    kind: essay
+    topic: labor
+    prompt: Outline insulin therapy in pregnancy, from initiation to the postpartum period.
+    outline:
+      - "Why insulin: [Preferred agent, Does not cross the placenta, Tailored to meals; control within 2 weeks]"
+      - "Choice: [Category B: regular, aspart, lispro, NPH, detemir, Glargine: no human pregnancy data; degludec: may be used (EMA, Health Canada)]"
+      - "Dosing: [0.7-1 units/kg, or 0.7/0.8/0.9-1 by trimester, 2/3 morning and 1/3 evening]"
+      - "Titration: [Needs fall in the 1st trimester, rise until 37 weeks, fall in the last month, Prandial >50%; bolus 10-15 min before meals, 2-4 units (~10%) every 2-3 days]"
+      - "Labor and cesarean: [T1DM always needs insulin, Halve bedtime detemir, Hourly glucose to 80-100; infusion ≥0.5 units/h if >100]"
+      - "Postpartum: [Insulin resistance falls at once, Lower needs from euglycemia and lactation]"
+    src: { page: 172, quote: "Insulin is the preferred agent for management of pre-gestational T1DM, T2DM & GDM" }
+    status: unverified

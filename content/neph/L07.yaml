@@ -1,0 +1,1998 @@
+schema: batna.content/v1
+lecture: neph.L07
+title: "Autosomal dominant polycystic kidney disease"
+author: "Dr. Mohamed Mamdouh Elsayed"
+# The lecture also covers ARPKD, nephronophthisis, ADTKD, medullary sponge kidney,
+# tuberous sclerosis, Alport and thin basement membrane disease, Fabry disease and nail-patella syndrome.
+book: { chapter: 8, pages: [145, 197] }
+topics:
+  - { id: adpkd-genetics, title: "ADPKD: definition and genetics" }
+  - { id: adpkd-path, title: "ADPKD: polycystins and the signal pathway" }
+  - { id: adpkd-renal, title: "ADPKD: renal manifestations and progression" }
+  - { id: adpkd-extrarenal, title: "ADPKD: liver, aneurysms, heart and other organs" }
+  - { id: adpkd-dx, title: "ADPKD: screening, ultrasound criteria and genetic testing" }
+  - { id: adpkd-tx, title: "ADPKD: treating pain, bleeding, infection, stones and BP" }
+  - { id: adpkd-ckd, title: "ADPKD: CKD, dialysis, liver cysts and aneurysm treatment" }
+  - { id: adpkd-novel, title: "ADPKD: tolvaptan, somatostatin analogues, mTOR and others" }
+  - { id: adpkd-tx-ttx, title: "ADPKD: transplantation" }
+  - { id: cystic-other, title: "ARPKD, nephronophthisis, ADTKD and medullary sponge kidney" }
+  - { id: tsc, title: "Tuberous sclerosis complex" }
+  - { id: alport, title: "Alport syndrome" }
+  - { id: tbm, title: "Thin basement membrane disease" }
+  - { id: fabry, title: "Fabry disease" }
+  - { id: nps, title: "Nail-patella syndrome" }
+items:
+  # ---------- p145-146: definition and genetics ----------
+  - id: neph.L07.001
+    kind: card
+    topic: adpkd-genetics
+    front: Define ADPKD.
+    back: A multisystem genetic disorder with multiple bilateral renal cysts and cysts in other organs (liver, pancreas, arachnoid membranes), inherited as autosomal dominant.
+    src: { page: 145, quote: "multisystem disorder characterized by multiple, bilateral renal cysts and associated with cysts in other organs, such as liver, pancreas, and arachnoid" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.002
+    kind: table
+    topic: adpkd-genetics
+    title: ADPKD genes
+    columns: [Gene, Chromosome, Protein]
+    rows:
+      - [PKD1, "16", Polycystin-1]
+      - [PKD2, "4", Polycystin-2]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2]]
+    src: { page: 145, quote: "Mutations in the genes pkd-1 (located on chromosome 16) and pkd-2 (chromosome 4)" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.003
+    kind: card
+    topic: adpkd-genetics
+    front: Where are polycystin-1 and -2 expressed?
+    back: Ubiquitously, by epithelial cells throughout the body.
+    src: { page: 145, quote: "Both polycystin-1 and -2 are ubiquitously expressed by epithelial cells throughout the" }
+    status: unverified
+  - id: neph.L07.004
+    kind: cloze
+    topic: adpkd-genetics
+    text: "PKD1 mutations are about {{c1::seven}} times more common than PKD2 and more aggressive: ESRD comes on average {{c2::15}} years earlier."
+    src: { page: 146, quote: "with more aggressive disease (onset of esrd, on average, 15 years earlier)" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L07.005
+    kind: card
+    topic: adpkd-genetics
+    front: What does a GANAB mutation cause?
+    back: Mild polycystic kidney disease with more variable polycystic liver disease.
+    src: { page: 146, quote: "Mutations in a third gene, ganab, have been identified in families with mild polycystic kidney and more variable polycystic liver disease." }
+    status: unverified
+  # ---------- p146: pathophysiology ----------
+  - id: neph.L07.006
+    kind: card
+    topic: adpkd-path
+    front: Where do polycystin-1 and polycystin-2 sit, and what is polycystin-2?
+    back: Together in the cilia of renal collecting duct epithelial cells. Polycystin-1 is a membrane receptor signalling protein; polycystin-2 is a calcium-permeable channel.
+    src: { page: 146, quote: "polycystin-2 (a calcium-permeable channel) within the cilia of renal collecting duct epithelial cells" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.007
+    kind: card
+    topic: adpkd-path
+    front: What does the polycystin complex normally do?
+    back: It is an extracellular mechanosensor (luminal flow bends the cilia) that regulates cell proliferation, adhesion, differentiation and maturation, keeping tubular integrity and calibre.
+    src: { page: 146, quote: "This polycystin complex acts as an extra-cellular mechanosensor (luminal flow disturbs the cilia and triggers the apparatus)" }
+    status: unverified
+  - id: neph.L07.008
+    kind: order
+    topic: adpkd-path
+    prompt: Order how a cyst forms in ADPKD.
+    steps:
+      - The polycystin complex fails to form
+      - Cell turnover is dysregulated with uncontrolled proliferation to growth factors
+      - Proliferating tubular cells form a cyst
+      - The cyst closes off its nephron and expands over time
+    src: { page: 146, quote: "Proliferating tubular cells form tubular cysts that close off the associated nephron and expand in size over time." }
+    status: unverified
+  - id: neph.L07.009
+    kind: cloze
+    topic: adpkd-path
+    text: "Fewer than {{c1::1%}} of nephrons undergo cystic transformation in ADPKD."
+    src: { page: 146, quote: "It is estimated that <1% of nephrons undergo such cystic transforma-" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L07.010
+    kind: card
+    topic: adpkd-path
+    front: In the ADPKD signal pathway figure, how does vasopressin drive cyst growth?
+    back: AVP on the V2 receptor activates adenylyl cyclase 6, raising cAMP. cAMP activates PKA, which drives CFTR chloride (fluid) secretion and, through Src, MAPK and mTOR, cell proliferation. Low intracellular Ca removes the brake on cAMP.
+    src: { page: 146, quote: "Signal Pathway" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.011
+    kind: card
+    topic: adpkd-path
+    front: In the signal pathway figure, how does somatostatin oppose cyst growth?
+    back: Somatostatin on its receptor (SSTR) acts through Gi to inhibit adenylyl cyclase 6, lowering cAMP.
+    src: { page: 146, quote: "Signal Pathway" }
+    status: unverified
+  # ---------- p147: epidemiology and clinical ----------
+  - id: neph.L07.012
+    kind: cloze
+    topic: adpkd-genetics
+    text: "The prevalence of genetically affected individuals at birth is about 1 in {{c1::400}} to 1 in {{c2::1000}}."
+    src: { page: 147, quote: "with a prevalence of geneti- cally affected individuals at birth estimated at 1 in 400 to 1 in 1000" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L07.013
+    kind: card
+    topic: adpkd-genetics
+    front: Why are only a fraction of people with an ADPKD mutation aware of it at any time?
+    back: The diagnosis is usually made decades after birth, and some patients are never diagnosed.
+    src: { page: 147, quote: "In most patients the diagnosis is made decades later, and some patients are never diagnosed." }
+    status: unverified
+  - id: neph.L07.014
+    kind: cloze
+    topic: adpkd-genetics
+    text: "In ADPKD, {{c1::50%}} of offspring should be affected, yet {{c2::25–40%}} of new patients have no family history."
+    src: { page: 147, quote: "Importantly, 25-40% of new patients will have no family history." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L07.015
+    kind: enumerate
+    topic: adpkd-genetics
+    prompt: Mention family-history clues that may identify ADPKD gene carriers.
+    points:
+      - Renal disease
+      - Raised BP
+      - Stroke (intracranial hemorrhage)
+      - Premature death
+    pass: 3
+    src: { page: 147, quote: "A careful history for renal disease, ↑ BP, stroke (intracranial haemorrhage), or premature death may pinpoint carriers" }
+    status: unverified
+  - id: neph.L07.016
+    kind: enumerate
+    topic: adpkd-renal
+    prompt: Mention the renal manifestations of ADPKD.
+    points:
+      - Flank or loin pain from large cysts (acute pain suggests cyst rupture or bleeding)
+      - Dipstick-positive hematuria, with or without episodic frank hematuria
+      - Raised BP
+      - Nocturia and polyuria (loss of concentrating ability)
+      - Low-grade proteinuria, usually under 1 g/day
+      - Uremic symptoms if presenting late
+    pass: 5
+    src: { page: 147, quote: "Flank or loin pain arising from large cysts. Acute pain may suggest cyst rupture or bleeding." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.017
+    kind: card
+    topic: adpkd-renal
+    front: Why do ADPKD patients have nocturia and polyuria?
+    back: Loss of urinary concentrating ability.
+    src: { page: 147, quote: "Nocturia and polyuria (loss of urinary concentrating ability)." }
+    status: unverified
+  - id: neph.L07.018
+    kind: cloze
+    topic: adpkd-renal
+    text: "Proteinuria in ADPKD is low grade, usually below {{c1::1 g/day}}."
+    src: { page: 147, quote: "Low-grade proteinuria may be present (usually <1g/day)." }
+    status: unverified
+    tags: [numbers]
+  # ---------- p148: kidney size, hypertension, ESRD ----------
+  - id: neph.L07.019
+    kind: card
+    topic: adpkd-renal
+    front: What correlates with the manifestations of ADPKD?
+    back: The severity of the structural abnormality (kidney enlargement) correlates with pain, hematuria, hypertension and renal impairment; enlargement eventually occurs in 100% of patients.
+    src: { page: 148, quote: "The severity of the structural abnormality correlates with the manifestations of ADPKD, such as pain, hematuria, hypertension, and renal impairment." }
+    status: unverified
+  - id: neph.L07.020
+    kind: card
+    topic: adpkd-renal
+    front: What can massive renal enlargement compress?
+    back: Local structures, such as the inferior vena cava, and the gut (digestive symptoms).
+    src: { page: 148, quote: "Massive renal enlargement can lead to compression of local structures, resulting in such complica-tions as inferior vena cava (IVC) compression" }
+    status: unverified
+  - id: neph.L07.021
+    kind: cloze
+    topic: adpkd-renal
+    text: "In the CRISP study, kidney and cyst volumes grew {{c1::exponentially}}, averaging {{c2::5.3%}} per year, and baseline {{c3::total kidney volume}} predicted later growth and GFR decline."
+    src: { page: 148, quote: "Rates of growth were relatively constant, averaging 5.3% per year, but highly variable from patient to patient." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L07.022
+    kind: card
+    topic: adpkd-renal
+    front: What is the most common manifestation of ADPKD?
+    back: Hypertension. It is a major contributor to renal progression and to cardiovascular morbidity and mortality.
+    src: { page: 148, quote: "Hypertension is the most common manifestation of ADPKD and a major contributor to renal disease progression" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.023
+    kind: card
+    topic: adpkd-renal
+    front: Which independent risk factors for renal decline are more common in hypertensive ADPKD patients?
+    back: Microalbuminuria, proteinuria and hematuria.
+    src: { page: 148, quote: "Microalbuminuria, proteinuria, and hematuria, which are independent risk factors for renal functional decline, are more common in hypertensive patients" }
+    status: unverified
+  - id: neph.L07.024
+    kind: card
+    topic: adpkd-renal
+    front: Which ADPKD complications does hypertension make worse besides the kidney?
+    back: Valvular heart disease and intracranial aneurysms.
+    src: { page: 148, quote: "Hypertension also may increase morbidity from valvular heart disease and intracranial aneurysms" }
+    status: unverified
+  - id: neph.L07.025
+    kind: cloze
+    topic: adpkd-renal
+    text: "Renal function usually stays normal until the {{c1::fourth to sixth}} decade; once it declines, GFR falls about {{c2::4.4–5.9}} mL/min per year."
+    src: { page: 148, quote: "At this stage, the average rate of GFR decline is 4.4 to 5.9 ml/min per year." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L07.026
+    kind: card
+    topic: adpkd-renal
+    front: Is ESRD inevitable in ADPKD?
+    back: No. Up to 77% have preserved renal function at age 50 and 52% at age 73.
+    src: { page: 149, quote: "Up to 77% of patients are alive with preserved renal function at age 50 years, and 52% at age 73." }
+    status: unverified
+    tags: [numbers]
+  # ---------- p149: risk factors, hematuria ----------
+  - id: neph.L07.027
+    kind: enumerate
+    topic: adpkd-renal
+    prompt: Mention risk factors for renal failure in ADPKD.
+    points:
+      - Male sex
+      - Black race
+      - Diagnosis before age 30
+      - First hematuria before age 30
+      - Hypertension before age 35
+      - Hyperlipidemia and low HDL
+      - Sickle cell trait
+      - PKD1 truncating mutations
+    pass: 5
+    src: { page: 149, quote: "Other risk factors for renal failure include Black race, diagnosis of ADPKD before age 30, first episode of hematuria before age 30" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.028
+    kind: card
+    topic: adpkd-renal
+    front: What did CRISP find to be the strongest predictors of renal decline in ADPKD?
+    back: Kidney and cyst volumes.
+    src: { page: 149, quote: "The CRISP study confirmed that kidney and cyst volumes are the strongest predic-tors of renal functional decline." }
+    status: unverified
+  - id: neph.L07.029
+    kind: card
+    topic: adpkd-renal
+    front: What did the HALT PKD post hoc analysis link to kidney growth?
+    back: Dietary sodium intake.
+    src: { page: 149, quote: "a post hoc analysis of the HALT PKD clinical trials showed an association of dietary sodium with the rate of kidney growth" }
+    status: unverified
+  - id: neph.L07.030
+    kind: cloze
+    topic: adpkd-renal
+    text: "Visible hematuria occurs in up to {{c1::40%}} of ADPKD patients over the disease course and may be the first symptom."
+    src: { page: 149, quote: "Visible hematuria may be the initial presenting symptom and occurs in up to 40% of patients with ADPKD" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L07.031
+    kind: enumerate
+    topic: adpkd-renal
+    prompt: Give the differential diagnosis of visible hematuria in ADPKD.
+    points:
+      - Cyst hemorrhage
+      - Stone
+      - Infection
+      - Tumor
+    pass: 4
+    src: { page: 149, quote: "Differential diagnosis includes cyst hem-orrhage, stone, infection, and tumor." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.032
+    kind: card
+    topic: adpkd-renal
+    front: Why can cyst hemorrhage cause flank pain without hematuria?
+    back: Gross hematuria needs the cyst to communicate with the collecting system; often it does not, so only flank pain occurs (sometimes with fever, mimicking infection).
+    src: { page: 149, quote: "Frequently, the cyst does not communicate with the collecting system, and flank pain without hematuria occurs." }
+    status: unverified
+  - id: neph.L07.033
+    kind: cloze
+    topic: adpkd-renal
+    text: "Cyst hemorrhage usually resolves in {{c1::2–7}} days. If hematuria or flank pain lasts over {{c2::1 week}}, or the first hematuria occurs after age {{c3::50}}, exclude neoplasm."
+    src: { page: 149, quote: "if the initial episode of hematuria occurs after age 50 years, neoplasm should be excluded" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L07.034
+    kind: mcq
+    topic: adpkd-renal
+    stem: A 56-year-old man with known ADPKD has his first ever episode of frank hematuria. It has lasted 10 days. What must you exclude?
+    options:
+      - Neoplasm
+      - Simple cyst hemorrhage only, so reassure
+      - Thin basement membrane disease
+      - Nephrotic syndrome
+      - Intracranial aneurysm rupture
+    answer: 0
+    why:
+      - "Correct: hematuria lasting over a week or first appearing after 50 needs neoplasm excluded (p149)."
+      - Cyst hemorrhage usually settles in 2–7 days; this is too long and too late in life.
+      - TBM causes persistent microscopic hematuria from youth, not a new episode at 56.
+      - Nephrotic syndrome is not a cause of frank hematuria here.
+      - Aneurysm rupture causes subarachnoid hemorrhage, not hematuria.
+    src: { page: 149, quote: "if the initial episode of hematuria occurs after age 50 years, neoplasm should be excluded" }
+    status: unverified
+  # ---------- p150: UTI and stones ----------
+  - id: neph.L07.035
+    kind: card
+    topic: adpkd-renal
+    front: Why may UTI incidence in ADPKD be overestimated?
+    back: Sterile pyuria is common in these patients.
+    src: { page: 150, quote: "may have been overestimated because sterile pyuria is common in these patients" }
+    status: unverified
+  - id: neph.L07.036
+    kind: card
+    topic: adpkd-renal
+    front: Which organisms cause most UTIs in ADPKD, and what is the usual route?
+    back: E. coli, Klebsiella, Proteus and other Enterobacteriaceae. The route is usually retrograde from the bladder, so cystitis must be treated promptly.
+    src: { page: 150, quote: "The route of infection in acute pyelonephritis and cyst infection is usually retrograde from the bladder" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.037
+    kind: cloze
+    topic: adpkd-renal
+    text: "Stones occur in about {{c1::20%}} of ADPKD patients, mostly {{c2::uric acid}}, calcium oxalate or both."
+    src: { page: 150, quote: "Renal stone disease occurs in about 20% of patients with ADPKD. Most stones are composed of uric acid, calcium oxalate, or both." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L07.038
+    kind: card
+    topic: adpkd-renal
+    front: Which imaging has replaced IV urography for stones in ADPKD, and why?
+    back: CT urography. It is more sensitive for small or radiolucent stones and separates stones from tumor, clot and cyst wall or parenchymal calcification. Dual-energy CT can tell calcium from uric acid stones.
+    src: { page: 150, quote: "CT urography has replaced IV urography in many centers; it is more sensitive in detect-ing small or radiolucent stones" }
+    status: unverified
+  # ---------- p151-153: extrarenal ----------
+  - id: neph.L07.039
+    kind: card
+    topic: adpkd-extrarenal
+    front: What is the most common extrarenal manifestation of ADPKD?
+    back: Polycystic liver disease (PLD), seen with both PKD1 and PKD2.
+    src: { page: 151, quote: "Polycystic Liver Disease PLD is the most common extrarenal manifestation of ADPKD." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.040
+    kind: card
+    topic: adpkd-extrarenal
+    front: Which women with ADPKD have worse polycystic liver disease?
+    back: Those with multiple pregnancies, or who used oral contraceptives or postmenopausal estrogen replacement.
+    src: { page: 151, quote: "Women who have multiple pregnancies or who have used oral contraceptives (OCs) or estrogen replacement therapy (ERT)" }
+    status: unverified
+  - id: neph.L07.041
+    kind: enumerate
+    topic: adpkd-extrarenal
+    prompt: Mention symptoms and mass-effect complications of polycystic liver disease.
+    points:
+      - Dyspnea and orthopnea
+      - Early satiety and gastroesophageal reflux
+      - Mechanical low back pain, uterine prolapse, rib fracture
+      - Hepatic venous outflow obstruction
+      - IVC or portal vein compression
+      - Bile duct compression with obstructive jaundice
+    pass: 4
+    src: { page: 151, quote: "Symptoms include dyspnea, orthopnea, early satiety, gastroesophageal reflux, mechanical low back pain, uterine prolapse, and even rib fracture." }
+    status: unverified
+  - id: neph.L07.042
+    kind: card
+    topic: adpkd-extrarenal
+    front: Are hepatic cysts common in children with ADPKD?
+    back: No, they are exceedingly rare in children; their frequency rises with age.
+    src: { page: 151, quote: "Hepatic cysts are exceedingly rare in children with ADPKD. Their frequency increases with age" }
+    status: unverified
+  - id: neph.L07.043
+    kind: cloze
+    topic: adpkd-extrarenal
+    text: "Intracranial aneurysms occur in about {{c1::8%}} of ADPKD patients: {{c2::6%}} with a negative and {{c3::16%}} with a positive family history."
+    src: { page: 151, quote: "intracranial aneurysms occur in 6% of patients with a negative family history and 16% of those with a positive family history" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L07.044
+    kind: cloze
+    topic: adpkd-extrarenal
+    text: "Yearly aneurysm rupture risk rises from under {{c1::0.5%}} for aneurysms below 5 mm to {{c2::4%}} above 10 mm; rupture carries {{c3::35–55%}} severe morbidity and mortality."
+    src: { page: 151, quote: "ranging from less than 0.5% for aneurysms smaller than 5 mm in diameter to 4% for aneurysms larger than 10 mm" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L07.045
+    kind: card
+    topic: adpkd-extrarenal
+    front: How can an unruptured intracranial aneurysm in ADPKD present?
+    back: Most are asymptomatic; an enlarging one may compress local structures and cause focal signs such as cranial nerve palsy or seizure.
+    src: { page: 151, quote: "Focal findings, such as cranial nerve palsy and seizure, may result from compression of local structures by an enlarging aneurysm" }
+    status: unverified
+  - id: neph.L07.046
+    kind: cloze
+    topic: adpkd-extrarenal
+    text: "Mean age at aneurysm rupture in ADPKD is {{c1::39}} years (vs {{c2::51}} in the general population); up to {{c3::29%}} have normal BP at rupture."
+    src: { page: 152, quote: "The mean age at rupture in ADPKD is 39 years (vs. 51 years in the general population)" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L07.047
+    kind: enumerate
+    topic: adpkd-extrarenal
+    prompt: Mention indications to screen ADPKD patients for intracranial aneurysm.
+    points:
+      - Family history of intracranial aneurysm or subarachnoid hemorrhage
+      - Previous aneurysmal rupture
+      - Elective surgery with possible hemodynamic instability
+      - High-risk occupation (airline pilots)
+      - Significant anxiety despite adequate information
+    pass: 4
+    src: { page: 152, quote: "Indications for screening in patients with a good life expectancy include family history of intracranial aneurysm or subarachnoid hemorrhage" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.048
+    kind: card
+    topic: adpkd-extrarenal
+    front: What is the imaging of choice to screen for intracranial aneurysm in ADPKD, and why?
+    back: "Magnetic resonance angiography: noninvasive and needs no IV contrast. CT angiography is an alternative if contrast is allowed."
+    src: { page: 152, quote: "Magnetic resonance angiography is the diagnostic imaging modality of choice for presymptomatic screening" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.049
+    kind: cloze
+    topic: adpkd-extrarenal
+    text: "Patients with a strong family history of aneurysm or rupture should be re-screened after {{c1::5–10}} years."
+    src: { page: 152, quote: "Repeated screening of patients with a strong family history of intra-cranial aneurysms or aneurysmal rupture after 5 to 10 years is recommended." }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L07.050
+    kind: mcq
+    topic: adpkd-extrarenal
+    stem: A 34-year-old woman with ADPKD has no symptoms and a normal neurological exam. Her mother died of a subarachnoid hemorrhage. What should you offer?
+    options:
+      - Screening magnetic resonance angiography
+      - Contrast CT of the brain every year
+      - Cerebral catheter angiography
+      - "No screening: it is never indicated"
+      - Lumbar puncture
+    answer: 0
+    why:
+      - "Correct: a family history of SAH is an indication, and MRA is the modality of choice (p152)."
+      - Contrast CT is not the screening test, and yearly scans are not advised.
+      - Catheter angiography is invasive and not used for screening.
+      - Screening is not for everyone, but a family history is an indication.
+      - LP is for suspected acute bleeding, not screening.
+    src: { page: 152, quote: "Magnetic resonance angiography is the diagnostic imaging modality of choice for presymptomatic screening" }
+    status: unverified
+  - id: neph.L07.051
+    kind: enumerate
+    topic: adpkd-extrarenal
+    prompt: Mention vascular abnormalities associated with ADPKD.
+    points:
+      - Thoracic aortic dissection
+      - Cervicocephalic arterial dissection
+      - Coronary artery aneurysms
+      - Retinal artery and vein occlusions
+    pass: 3
+    src: { page: 152, quote: "Vascular abnormalities, such as thoracic aortic and cervicocephalic arte- rial dissections, coronary artery aneurysms, and retinal artery and vein occlusions" }
+    status: unverified
+  - id: neph.L07.052
+    kind: card
+    topic: adpkd-extrarenal
+    front: What is the most common valvular abnormality in ADPKD, and how often?
+    back: Mitral valve prolapse, in up to 25% on echocardiography.
+    src: { page: 153, quote: "Mitral valve prolapse is the most common valvular abnormality and has been demonstrated in up to 25% of patients with ADPKD" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.053
+    kind: card
+    topic: adpkd-extrarenal
+    front: Should every ADPKD patient have a screening echocardiogram?
+    back: No, only if a murmur is heard on examination.
+    src: { page: 153, quote: "Screening echocardiography is not indicated unless a murmur is detected on physical examination." }
+    status: unverified
+  - id: neph.L07.054
+    kind: table
+    topic: adpkd-extrarenal
+    title: Other extrarenal cysts and findings in ADPKD
+    columns: [Finding, Frequency or note]
+    rows:
+      - [Seminal vesicle cysts, "40% (vs 2% of unaffected men), usually multiple and bilateral"]
+      - [Arachnoid membrane cysts, "8%"]
+      - [Pancreatic cysts, "5%, almost always asymptomatic"]
+      - [Small pericardial effusion on CT, "Up to 35%"]
+      - [Ovarian cysts, Not associated with ADPKD]
+      - [Sperm abnormalities, "Defective motility; rarely male infertility"]
+    blanks: [[0, 1], [1, 1], [2, 1], [4, 1]]
+    src: { page: 153, quote: "Seminal vesicle cysts, usually multiple and bilateral, are found in 40% of ADPKD compared with 2% of non affected males." }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L07.055
+    kind: card
+    topic: adpkd-extrarenal
+    front: How do spinal meningeal diverticula present in ADPKD?
+    back: "Rarely as intracranial hypotension from CSF leak: orthostatic headache, diplopia, hearing loss, ataxia."
+    src: { page: 153, quote: "rarely manifest with intracranial hypotension (orthostatic headache, diplopia, hearing loss, ataxia) caused by cerebrospinal fluid leak" }
+    status: unverified
+  - id: neph.L07.056
+    kind: mcq
+    topic: adpkd-extrarenal
+    stem: Which of these is NOT associated with ADPKD?
+    options:
+      - Ovarian cysts
+      - Seminal vesicle cysts
+      - Mitral valve prolapse
+      - Colonic diverticula
+      - Pancreatic cysts
+    answer: 0
+    why:
+      - "Correct: the book states ovarian cysts are not associated with ADPKD (p153)."
+      - Seminal vesicle cysts are found in 40%.
+      - MVP is the commonest valve lesion (up to 25%).
+      - Colonic and duodenal diverticula may be more prevalent.
+      - Pancreatic cysts occur in 5%.
+    src: { page: 153, quote: "Ovarian cysts are not associated with ADPKD." }
+    status: unverified
+  # ---------- p154-156: diagnosis ----------
+  - id: neph.L07.057
+    kind: enumerate
+    topic: adpkd-dx
+    prompt: Mention advantages and disadvantages of presymptomatic ADPKD screening.
+    points:
+      - "If positive: genetic counseling, early detection and treatment of hypertension"
+      - "If negative: reassurance"
+      - "Disadvantages: insurability and employability"
+    pass: 3
+    src: { page: 154, quote: "Disadvantages of presymptomatic screening relate to insur-ability and employability." }
+    status: unverified
+  - id: neph.L07.058
+    kind: card
+    topic: adpkd-dx
+    front: Should children at risk of ADPKD be screened?
+    back: Not recommended until more effective therapy becomes available.
+    src: { page: 154, quote: "Presymptomatic screening of children is not recommended until more effective therapy for the disease becomes available." }
+    status: unverified
+  - id: neph.L07.059
+    kind: card
+    topic: adpkd-dx
+    front: Why is ultrasound used for presymptomatic ADPKD testing?
+    back: Cost and safety.
+    src: { page: 154, quote: "Renal ultrasound is used for presymptomatic testing because of cost and safety." }
+    status: unverified
+  - id: neph.L07.060
+    kind: table
+    topic: adpkd-dx
+    title: Ultrasound diagnosis of ADPKD in at-risk people (revised unified criteria)
+    columns: [Age (years), Cysts needed, PPV]
+    rows:
+      - ["15–39", "≥3 cysts, unilateral or bilateral", "100%"]
+      - ["40–59", "≥2 cysts in each kidney", "100%"]
+      - ["≥60", "≥4 cysts in each kidney", "100%"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 154, quote: "At least three (uni-lateral or bilateral) renal cysts are sufficient for diagnosis of at-risk individuals 15 to 39 years of age" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: neph.L07.061
+    kind: table
+    topic: adpkd-dx
+    title: Ravine's original PKD1 criteria vs criteria to exclude ADPKD (Table 44.1)
+    columns: [Age (years), Ravine (diagnose), To exclude (NPV)]
+    rows:
+      - ["15–29", "≥2 cysts, unilateral or bilateral", "≥1 cyst (NPV 91%)"]
+      - ["30–39", "≥2 cysts in each kidney", "≥1 cyst (NPV 98%)"]
+      - ["40–59", "≥2 cysts in each kidney", "≥2 cysts (NPV 100%)"]
+      - ["≥60", "≥4 cysts in each kidney", "≥3 cysts in each kidney (NPV 100%)"]
+    blanks: [[0, 1], [3, 1], [0, 2], [2, 2]]
+    src: { page: 155, quote: "Different criteria have therefore been proposed to exclude a diagnosis of ADPKD in an indi-vidual at risk from a family with an unknown genotype." }
+    status: unverified
+  - id: neph.L07.062
+    kind: mcq
+    topic: adpkd-dx
+    stem: A 45-year-old whose father has ADPKD has an ultrasound showing 3 cysts in the right kidney and 1 in the left. By the revised unified criteria, does she have ADPKD?
+    options:
+      - Not yet diagnostic; at 40–59 she needs at least 2 cysts in each kidney
+      - Yes; 3 cysts anywhere are enough at any age
+      - Yes; 4 cysts in total are diagnostic after 40
+      - No; at her age she needs 4 cysts in each kidney
+      - Ultrasound cannot be used after 40
+    answer: 0
+    why:
+      - "Correct: ages 40–59 need ≥2 cysts in each kidney (p154)."
+      - The ≥3 cyst rule applies to ages 15–39.
+      - Totals do not count; each kidney needs 2.
+      - ≥4 in each kidney is the rule from age 60.
+      - Ultrasound is the standard presymptomatic test at all ages.
+    src: { page: 154, quote: "two cysts in each kidney sufficient for diagnosis for ages 40 to 59 years" }
+    status: unverified
+  - id: neph.L07.063
+    kind: card
+    topic: adpkd-dx
+    front: Where is ultrasound weak in ADPKD diagnosis, and why does it matter?
+    back: Sensitivity and NPV are low in PKD2 patients aged 15–59. This matters when evaluating potential kidney donors, where excluding the disease is important.
+    src: { page: 155, quote: "their sensitivity and negative predic-tive value (NPV) when applied to PKD2 patients age 15 to 59 are low" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.064
+    kind: cloze
+    topic: adpkd-dx
+    text: "Fewer than {{c1::five}} cysts on {{c2::MRI}} is sufficient to exclude ADPKD in potential living related kidney donors."
+    src: { page: 155, quote: "finding fewer than five cysts by magnetic resonance imaging (MRI) is sufficient to exclude the diagnosis of ADPKD in potential living related kidney donors" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L07.065
+    kind: card
+    topic: adpkd-dx
+    front: When is genetic testing used in ADPKD, and why is PKD1 hard to sequence?
+    back: When a precise diagnosis is needed and imaging is indeterminate. PKD1 is duplicated (pseudogenes), so whole-exome sequencing may miss it.
+    src: { page: 155, quote: "Genetic testing can be performed when a precise diagnosis is needed and the results of imaging are indeterminate." }
+    status: unverified
+  - id: neph.L07.066
+    kind: card
+    topic: adpkd-dx
+    front: How is ADPKD genetic testing done, and how often is it informative?
+    back: Direct Sanger or next-generation sequencing of PKD1 and PKD2 with multiplex probe amplification for large rearrangements (NGS panels increasingly). It is informative in about 90%.
+    src: { page: 156, quote: "Molecular testing by direct DNA sequencing is now informative in about 90% of patients." }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L07.067
+    kind: card
+    topic: adpkd-dx
+    front: What is preimplantation genetic diagnosis in ADPKD?
+    back: Genetic analysis of single blastomeres from IVF embryos, so that only unaffected embryos are transferred.
+    src: { page: 156, quote: "genetic analysis is per- formed on single blastomeres from preimplantation embryo biopsy specimens obtained after in vitro fertilization (IVF)" }
+    status: unverified
+  # ---------- p157-159: treatment ----------
+  - id: neph.L07.068
+    kind: order
+    topic: adpkd-tx
+    prompt: Order the stepwise approach to chronic flank pain in ADPKD.
+    steps:
+      - Exclude infection, stone and tumor
+      - Non-nephrotoxic analgesia, reassurance, lifestyle change, tricyclic antidepressants
+      - Splanchnic nerve block
+      - Cyst aspiration with sclerosing agent
+      - Laparoscopic or surgical cyst fenestration
+    src: { page: 157, quote: "Causes of flank pain that may require intervention, such as infection, stone, and tumor, should be excluded." }
+    status: unverified
+  - id: neph.L07.069
+    kind: card
+    topic: adpkd-tx
+    front: Which analgesics should be avoided long term in ADPKD flank pain?
+    back: Nephrotoxic agents such as combination analgesics and NSAIDs.
+    src: { page: 157, quote: "Care should be taken to avoid long-term administration of nephrotoxic agents, such as combination analgesics and nonsteroidal antiinflammatory drugs." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.070
+    kind: enumerate
+    topic: adpkd-tx
+    prompt: Mention sclerosing agents used after ADPKD cyst aspiration.
+    points:
+      - 95% ethanol
+      - Acidic minocycline solutions
+      - Sodium tetradecyl sulfate
+    pass: 2
+    src: { page: 157, quote: "sclerosing agents such as 95% ethanol, acidic solutions of minocycline, or sodium tetradecyl sulfate may be used" }
+    status: unverified
+  - id: neph.L07.071
+    kind: cloze
+    topic: adpkd-tx
+    text: "Surgical cyst decompression relieves pain in {{c1::80–90%}} at 1 year and {{c2::62–77%}} beyond 2 years; it neither accelerates nor preserves renal decline."
+    src: { page: 157, quote: "Surgical decompression is effective in 80% to 90% of patients at 1 year, and 62% to 77% have sustained pain relief" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L07.072
+    kind: card
+    topic: adpkd-tx
+    front: How is cyst hemorrhage in ADPKD managed?
+    back: "Usually self-limited: bed rest, analgesics and more fluid to prevent obstructing clots. Severe cases may need admission and transfusion; tranexamic acid has been used; persistent bleeding may need segmental arterial embolization, then surgery."
+    src: { page: 158, quote: "patients respond well to conservative management with bed rest, analgesics, and increased fluid intake to prevent obstructing clots" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.073
+    kind: card
+    topic: adpkd-tx
+    front: Why treat cystitis and asymptomatic bacteriuria promptly in ADPKD?
+    back: Most renal cyst infections begin as cystitis; prompt treatment prevents retrograde seeding of the kidney.
+    src: { page: 158, quote: "prompt treatment of symptomatic cystitis and asymptomatic bacteriuria is indicated to prevent retrograde seeding of the renal parenchyma" }
+    status: unverified
+  - id: neph.L07.074
+    kind: card
+    topic: adpkd-tx
+    front: Which antibiotics are agents of choice for cyst infection in ADPKD, and why?
+    back: Trimethoprim-sulfamethoxazole and fluoroquinolones. They are lipophilic and reach good intracystic concentrations in both gradient and non-gradient cysts.
+    src: { page: 158, quote: "Therapeutic agents of choice include trimethoprim-sulfamethoxazole and fluoroquinolones" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.075
+    kind: card
+    topic: adpkd-tx
+    front: What if fever persists after 1–2 weeks of appropriate antibiotics for an infected cyst?
+    back: Drain the infected cyst percutaneously or surgically; with end-stage polycystic kidneys, consider nephrectomy. If fever recurs after stopping, look for obstruction, perinephric abscess or stone.
+    src: { page: 158, quote: "If fever persists after 1 to 2 weeks of appropriate antimicrobial therapy, infected cysts should be drained percutaneously or surgically." }
+    status: unverified
+  - id: neph.L07.076
+    kind: mcq
+    topic: adpkd-tx
+    stem: A woman with ADPKD has fever and right flank pain. CT shows a complicated cyst. Which antibiotic best penetrates the cyst?
+    options:
+      - Ciprofloxacin
+      - Gentamicin
+      - Ampicillin
+      - Cefazolin
+      - Nitrofurantoin
+    answer: 0
+    why:
+      - "Correct: fluoroquinolones (and TMP-SMX) are lipophilic and reach therapeutic levels inside cysts (p158)."
+      - Aminoglycosides are not lipophilic and penetrate cysts poorly.
+      - Ampicillin is not one of the agents of choice.
+      - Cefazolin is not one of the agents of choice.
+      - Nitrofurantoin acts only in the bladder; it does not treat upper tract or cyst infection.
+    src: { page: 158, quote: "Therapeutic agents of choice include trimethoprim-sulfamethoxazole and fluoroquinolones" }
+    status: unverified
+  - id: neph.L07.077
+    kind: enumerate
+    topic: adpkd-tx
+    prompt: Name the three stone-forming conditions in ADPKD treated with potassium citrate.
+    points:
+      - Uric acid lithiasis
+      - Hypocitraturic calcium oxalate nephrolithiasis
+      - Distal acidification defects
+    pass: 3
+    src: { page: 159, quote: "Potassium citrate is the treatment of choice in the three stone-forming conditions associated with ADPKD" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.078
+    kind: cloze
+    topic: adpkd-tx
+    text: "In ADPKD, ESWL and percutaneous nephrostolithotomy succeed in {{c1::82%}} and {{c2::80%}}, without extra complications."
+    src: { page: 159, quote: "Extracorporeal shock wave lithotripsy and percutaneous nephrostolithotomy are reported to be 82% and 80% successful" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L07.079
+    kind: card
+    topic: adpkd-tx
+    front: Why are ACE inhibitors or ARBs preferred for hypertension in ADPKD?
+    back: They increase renal blood flow, are well tolerated and may be renoprotective beyond BP control; HALT PKD supports them as the antihypertensive of choice.
+    src: { page: 159, quote: "angiotensin receptor blockers (ARBs) increase renal blood flow in ADPKD, have a favorable side effect profile, and may have renoprotective properties" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.080
+    kind: cloze
+    topic: adpkd-tx
+    text: "HALT PKD supports a rigorous BP target of {{c1::95–110/60–75}} mm Hg in young ADPKD patients with normal renal function and no major comorbidity."
+    src: { page: 159, quote: "a rigorous BP target (95 to 110/60 to 75 mm Hg) in young patients with ADPKD with normal renal function" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L07.081
+    kind: card
+    topic: adpkd-tx
+    front: Why must hypertension be controlled in ADPKD?
+    back: Uncontrolled hypertension accelerates the decline in renal function and aggravates extrarenal complications.
+    src: { page: 159, quote: "uncontrolled hypertension accelerates the decline in renal function and aggravates extrarenal com- plications" }
+    status: unverified
+  # ---------- p160-161: CKD, dialysis, PLD, aneurysm ----------
+  - id: neph.L07.082
+    kind: cloze
+    topic: adpkd-ckd
+    text: "ADPKD patients with eGFR above {{c1::30}} mL/min are advised to drink enough water to keep urine osmolality below {{c2::250}} mOsm/kg (about {{c3::3}} L/day)."
+    src: { page: 160, quote: "supplemental water sufficient to achieve a urinary osmolality below 250 mOsm/kg H₂O (~3 liters in most patients)" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L07.083
+    kind: card
+    topic: adpkd-ckd
+    front: What is the rationale for high water intake in ADPKD, and how strong is the evidence?
+    back: Vasopressin effect and cAMP drive cyst progression; water suppresses vasopressin. There are no RCTs supporting it.
+    src: { page: 160, quote: "evidence suggesting increased vasopressin effect on the kidney and cAMP levels are involved in cyst progression" }
+    status: unverified
+  - id: neph.L07.084
+    kind: card
+    topic: adpkd-ckd
+    front: How do ADPKD patients do on dialysis compared with other ESRD patients, and why?
+    back: Better (lower morbidity and mortality; women better than men), perhaps from higher endogenous erythropoietin, better hemoglobin or less comorbidity.
+    src: { page: 160, quote: "The good outcome in ADPKD may result from higher endogenous erythropoietin production, better maintenance of hemoglobin, or lower comorbidity." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.085
+    kind: card
+    topic: adpkd-ckd
+    front: Can ADPKD patients have peritoneal dialysis despite big kidneys? What is the catch?
+    back: Usually yes, but there is a higher risk of inguinal and umbilical hernias needing repair.
+    src: { page: 160, quote: "peritoneal dialysis can usually be performed in ADPKD, although there is increased risk for inguinal and umbilical hernias" }
+    status: unverified
+  - id: neph.L07.086
+    kind: enumerate
+    topic: adpkd-ckd
+    prompt: Mention noninvasive measures for symptomatic polycystic liver disease.
+    points:
+      - Avoid excess alcohol and other hepatotoxins
+      - Possibly avoid cAMP agonists such as caffeine
+      - H2 blockers and somatostatin to reduce secretin and cyst secretion
+      - Avoid estrogens (OCs, ERT) only if the liver is significantly enlarged
+    pass: 3
+    src: { page: 160, quote: "Noninvasive measures include avoiding excessive use of ethanol, other hepatotoxins, and possibly cAMP agonists (e.g., caffeine)" }
+    status: unverified
+  - id: neph.L07.087
+    kind: card
+    topic: adpkd-ckd
+    front: What invasive options exist for symptomatic polycystic liver disease?
+    back: Percutaneous cyst aspiration and sclerosis, laparoscopic fenestration and open surgical fenestration.
+    src: { page: 161, quote: "Options include percutaneous cyst aspiration and sclerosis, laparoscopic fenestration, and open surgical fenestration." }
+    status: unverified
+  - id: neph.L07.088
+    kind: table
+    topic: adpkd-ckd
+    title: Managing intracranial aneurysms in ADPKD
+    columns: [Situation, Management]
+    rows:
+      - [Ruptured or symptomatic, Surgical clipping of the aneurysm neck]
+      - ["Asymptomatic, under 5 mm", "Observe: MRA at 6 months, then yearly, then less often if stable; surgery if it grows"]
+      - [6–9 mm, Controversial]
+      - [10 mm or larger, Surgery usually indicated]
+      - [High surgical risk or difficult lesion, Endovascular detachable platinum coils]
+    blanks: [[0, 1], [1, 1], [3, 1], [4, 1]]
+    src: { page: 161, quote: "Ruptured or symptomatic intracranial aneurysm requires surgical clip- ping of the neck of the aneurysm." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p161-163: novel therapies ----------
+  - id: neph.L07.089
+    kind: card
+    topic: adpkd-novel
+    front: What is the rationale for V2 receptor antagonists in ADPKD?
+    back: Vasopressin via V2 receptors raises cAMP in the collecting duct, the main site of cyst development, and cAMP drives cystogenesis.
+    src: { page: 161, quote: "The effect of vasopressin, through V2 receptors, on cAMP levels in the collecting duct, the major site of cyst development in ADPKD" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.090
+    kind: card
+    topic: adpkd-novel
+    front: What did the TEMPO trial of tolvaptan show?
+    back: In ADPKD with creatinine clearance above 60 mL/min, 3 years of split-dose tolvaptan slowed kidney volume growth and kidney function decline and reduced ADPKD events (pain, hematuria, UTI).
+    src: { page: 162, quote: "tolvaptan administered over 3 years slowed the increase in kidney volume and decline in kidney function" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.091
+    kind: cloze
+    topic: adpkd-novel
+    text: "In TEMPO, aquaresis side effects led {{c1::8.3%}} to stop tolvaptan, and liver enzymes rose above {{c2::2.5}} times ULN in {{c3::4.9%}}."
+    src: { page: 162, quote: "clinically significant increases in liver enzymes (>2.5 times the upper limit of normal) were seen in 4.9% of tolvaptan-treated" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L07.092
+    kind: enumerate
+    topic: adpkd-novel
+    prompt: Mention the adverse effects of tolvaptan.
+    points:
+      - Aquaresis (polyuria, thirst, frequency, nocturia)
+      - Raised liver enzymes
+      - Moderate rise in serum sodium
+      - Moderate rise in uric acid
+    pass: 3
+    src: { page: 162, quote: "tolvaptan was associated with a higher frequency of aquaresis-related adverse events (polyuria, thirst, urinary frequency, nocturia)" }
+    status: unverified
+  - id: neph.L07.093
+    kind: card
+    topic: adpkd-novel
+    front: What did the REPRISE trial show?
+    back: In later-stage ADPKD (eGFR 25–65), tolvaptan slowed eGFR decline compared with placebo over 1 year.
+    src: { page: 162, quote: "Tolvaptan resulted in a slower decline than placebo in the estimated GFR over a 1-year period in patients with later-stage ADPKD." }
+    status: unverified
+  - id: neph.L07.094
+    kind: card
+    topic: adpkd-novel
+    front: For which ADPKD patients is tolvaptan approved (per the book)?
+    back: Rapidly progressive ADPKD, in Japan, Canada, the EU, Switzerland and South Korea, but not the United States. A risk-factor algorithm selects those likely to benefit.
+    src: { page: 162, quote: "tolvaptan is approved for the treatment of rapidly progressive ADPKD in Japan, Canada, the European Union" }
+    status: unverified
+    update:
+      text: "The US FDA approved tolvaptan (Jynarque) for adults at risk of rapidly progressing ADPKD in April 2018, with liver-test monitoring under a REMS."
+      ref: "FDA approval of Jynarque (tolvaptan), 2018"
+  - id: neph.L07.095
+    kind: card
+    topic: adpkd-novel
+    front: How do somatostatin analogues act in polycystic disease, and why are analogues used?
+    back: Somatostatin inhibits cAMP build-up in kidney and liver. Native somatostatin lasts about 3 minutes, so stable analogues (octreotide, lanreotide, pasireotide) are used.
+    src: { page: 163, quote: "Somatostatin has a half-life of approximately 3 minutes, so more stable synthetic peptides (octreotide, lanreotide, pasireotide) have been developed" }
+    status: unverified
+  - id: neph.L07.096
+    kind: cloze
+    topic: adpkd-novel
+    text: "With octreotide or lanreotide, kidney growth halts in the {{c1::first year}} then resumes, and liver volume falls by {{c2::4–6%}}."
+    src: { page: 163, quote: "Kidney growth is halted during the first year of treatment and then resumes, possibly at a lower rate than without treatment." }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L07.097
+    kind: card
+    topic: adpkd-novel
+    front: Did mTOR inhibitors work in human ADPKD?
+    back: No. Sirolimus and everolimus protected rodents, but two large 18–24-month randomized trials showed no benefit.
+    src: { page: 163, quote: "two large randomized trials using everolimus and sirolimus for 18 to 24 months have shown no benefit" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.098
+    kind: table
+    topic: adpkd-novel
+    title: Other drugs tried in ADPKD
+    columns: [Drug, Result]
+    rows:
+      - [Pravastatin, Slowed kidney growth in a small RCT in children and young adults]
+      - [Bosutinib (Src inhibitor), Reduced kidney growth with a trend to worse renal function]
+      - ["KD019, metformin, pioglitazone, nicotinamide, triptolide", Trials ongoing]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 163, quote: "Pravastatin, an HMG-CoA reductase inhibitor, slowed the rate of kidney growth in a small RCT in children and young adults with ADPKD." }
+    status: unverified
+  - id: neph.L07.099
+    kind: mcq
+    topic: adpkd-novel
+    stem: A 32-year-old with rapidly progressive ADPKD (eGFR 75) starts tolvaptan. Which monitoring is most important?
+    options:
+      - Liver enzymes
+      - Serum potassium for hyperkalemia
+      - Platelet count
+      - Visual fields
+      - Bone density
+    answer: 0
+    why:
+      - "Correct: tolvaptan raised liver enzymes above 2.5× ULN in 4.9% in TEMPO (p162)."
+      - Hyperkalemia is not a listed effect; sodium and uric acid rise.
+      - Thrombocytopenia is not a listed effect.
+      - Visual field loss is not a listed effect.
+      - Bone loss is not a listed effect.
+    src: { page: 162, quote: "clinically significant increases in liver enzymes (>2.5 times the upper limit of normal) were seen in 4.9% of tolvaptan-treated" }
+    status: unverified
+  # ---------- p164: transplantation ----------
+  - id: neph.L07.100
+    kind: card
+    topic: adpkd-tx-ttx
+    front: What is the treatment of choice for ESRD in ADPKD, and how do outcomes compare?
+    back: Transplantation. Patient and graft survival are the same as in other ESRD populations, and ADPKD-specific complications are rare.
+    src: { page: 164, quote: "Transplantation is the treatment of choice for ESRD in patients with ADPKD." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.101
+    kind: cloze
+    topic: adpkd-tx-ttx
+    text: "After transplantation, native kidney volume falls by {{c1::37.7%}} at 1 year and {{c2::40.6%}} at 3 years, while liver volume rises by 8.6% and 21.4%."
+    src: { page: 164, quote: "kidney volumes decrease by 37.7% and 40.6% whereas liver volumes increase by 8.6% and 21.4%, respectively" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L07.102
+    kind: enumerate
+    topic: adpkd-tx-ttx
+    prompt: Mention indications for native nephrectomy in ADPKD transplant candidates.
+    points:
+      - History of infected cysts
+      - Frequent bleeding
+      - Severe hypertension
+      - Massive enlargement extending into the pelvis
+    pass: 3
+    src: { page: 164, quote: "Indications for nephrectomy include a history of infected cysts, frequent bleeding, severe hyperten-sion, and massive renal enlargement" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.103
+    kind: card
+    topic: adpkd-tx-ttx
+    front: Is routine pretransplant nephrectomy done in ADPKD? Does RCC risk rise in native kidneys after transplant?
+    back: Routine nephrectomy has fallen out of favor. There is no evidence of increased renal cell carcinoma in native ADPKD kidneys after transplantation.
+    src: { page: 164, quote: "There is no evidence of an increased risk for development of renal cell carcinoma in native ADPKD kidneys after transplantation." }
+    status: unverified
+  - id: neph.L07.104
+    kind: case
+    topic: adpkd-renal
+    stem: A 28-year-old man has loin pain and BP 158/98. His father started dialysis at 50. Dipstick shows blood; creatinine is normal.
+    steps:
+      - reveal: Ultrasound shows 4 cysts in the right kidney and 2 in the left.
+        question: Does this meet the ultrasound criteria for ADPKD?
+        options: ["Yes: ≥3 cysts at age 15–39", "No: he needs 2 in each kidney", "No: he needs 4 in each kidney", "Only genetic testing can tell"]
+        answer: 0
+        why: "Ages 15–39 need ≥3 cysts, unilateral or bilateral (p154)."
+      - question: First-line antihypertensive?
+        options: [ACE inhibitor or ARB, Thiazide, Beta-blocker, Calcium channel blocker]
+        answer: 0
+        why: "HALT PKD supports ACEI or ARB as the antihypertensive of choice (p159)."
+      - question: BP target for this young man with normal renal function?
+        options: [95–110/60–75 mm Hg, Below 140/90, Below 130/80, Below 150/90]
+        answer: 0
+        why: "HALT PKD rigorous target for young patients with normal function (p159)."
+      - question: Which drink advice fits the book?
+        options: [About 3 L of water a day to keep urine osm below 250, Restrict fluids to 1 L, Coffee is fine in large amounts, No advice needed]
+        answer: 0
+        why: "Water to keep urine osmolality below 250 mOsm/kg if eGFR above 30 (p160); caffeine is a cAMP agonist."
+    src: { page: 159, quote: "a rigorous BP target (95 to 110/60 to 75 mm Hg) in young patients with ADPKD with normal renal function" }
+    status: unverified
+  - id: neph.L07.105
+    kind: case
+    topic: adpkd-tx
+    stem: A 45-year-old woman with ADPKD has had fever 39 °C and right loin pain for 3 days. Urine shows pyuria; blood cultures grow E. coli.
+    steps:
+      - question: Best antibiotic choice?
+        options: [A fluoroquinolone or TMP-SMX, Gentamicin alone, Amoxicillin, Nitrofurantoin]
+        answer: 0
+        why: "Lipophilic agents reach cyst fluid; TMP-SMX and fluoroquinolones are the agents of choice (p158)."
+      - reveal: After 2 weeks of the right antibiotic she is still febrile.
+        question: Next step?
+        options: [Drain the infected cyst percutaneously or surgically, Switch to oral amoxicillin, Stop antibiotics and watch, Start steroids]
+        answer: 0
+        why: "Persistent fever after 1–2 weeks: drain the infected cyst (p158)."
+      - reveal: The fever later returns after stopping antibiotics.
+        question: What do you look for?
+        options: [Obstruction, perinephric abscess or stone, Drug fever only, Lupus nephritis, Aneurysm]
+        answer: 0
+        why: "Recurrence after stopping: exclude obstruction, perinephric abscess and stone (p158)."
+    src: { page: 158, quote: "If fever persists after 1 to 2 weeks of appropriate antimicrobial therapy, infected cysts should be drained percutaneously or surgically." }
+    status: unverified
+  # ---------- p165-168: ARPKD, nephronophthisis, ADTKD, medullary sponge kidney ----------
+  - id: neph.L07.106
+    kind: table
+    topic: cystic-other
+    title: ARPKD at a glance
+    columns: [Feature, ARPKD]
+    rows:
+      - [Gene and chromosome, PKHD1 on chromosome 6]
+      - [Protein, Polyductin]
+      - [Age, Infancy and childhood]
+      - [Features, "Polycystic kidneys, progressive CKD, congenital hepatic fibrosis, portal hypertension"]
+      - [Prevalence, "About 1:20,000 live births"]
+    blanks: [[0, 1], [1, 1], [3, 1], [4, 1]]
+    src: { page: 165, quote: "Caused by a rare mutation of the PKHD1 gene (located on chromosome 6) encoding polyductin." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.107
+    kind: card
+    topic: cystic-other
+    front: What does nephronophthisis mean, and what kind of disease is it?
+    back: Greek for progressive loss of nephrons. An autosomal recessive tubulointerstitial nephropathy, one of the commonest inherited causes of ESRD in children and adolescents.
+    src: { page: 165, quote: "NPHP is an autosomal recessive tubulointerstitial nephropathy and one of the most frequently inherited causes of ESRD in children and adolescents." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.108
+    kind: cloze
+    topic: cystic-other
+    text: "NPHP1 defects cause {{c1::21%}} of nephronophthisis; each other NPHP gene causes no more than {{c2::4%}}."
+    src: { page: 165, quote: "Defects in NPHP1 account for 21% of NPHP with large, homozygous deletions detected in 80% of affected family members" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L07.109
+    kind: card
+    topic: cystic-other
+    front: Describe the course and imaging of nephronophthisis.
+    back: Cystic change and tubulointerstitial fibrosis from early childhood (over 1 year) to ESRD in adolescence. Imaging shows echo-bright kidneys with a few corticomedullary cysts; polydipsia and polyuria, but it often presents as ESRD.
+    src: { page: 165, quote: "Imaging characteristically reveals echo-bright kidneys with a few corticomedullary cysts." }
+    status: unverified
+  - id: neph.L07.110
+    kind: enumerate
+    topic: cystic-other
+    prompt: Mention extrarenal manifestations of nephronophthisis.
+    points:
+      - Oculomotor apraxia
+      - Cerebellar vermis hypoplasia (Joubert syndrome)
+      - Developmental delay
+      - Cone-shaped epiphyses
+      - Situs inversus
+      - Hepatic and portal fibrosis
+      - Retinitis pigmentosa (Senior-Løken syndrome)
+    pass: 4
+    src: { page: 165, quote: "May also be associated with retinitis pigmentosa in the Senior-Løken syndrome." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.111
+    kind: mcq
+    topic: cystic-other
+    stem: A 13-year-old boy has polyuria, polydipsia, rising creatinine, retinitis pigmentosa and echo-bright normal-sized kidneys with a few corticomedullary cysts. Diagnosis?
+    options:
+      - Nephronophthisis (Senior-Løken syndrome)
+      - ADPKD
+      - Medullary sponge kidney
+      - Alport syndrome
+      - ARPKD
+    answer: 0
+    why:
+      - "Correct: NPHP plus retinitis pigmentosa is Senior-Løken syndrome (p165)."
+      - ADPKD gives large kidneys with many cortical cysts, ESRD much later.
+      - Medullary sponge kidney rarely impairs function and has no eye disease.
+      - Alport gives hematuria, deafness and lenticonus, not retinitis pigmentosa.
+      - ARPKD presents in infancy with big kidneys and hepatic fibrosis.
+    src: { page: 165, quote: "May also be associated with retinitis pigmentosa in the Senior-Løken syndrome." }
+    status: unverified
+  - id: neph.L07.112
+    kind: card
+    topic: cystic-other
+    front: Which genes cause most autosomal dominant tubulointerstitial kidney disease (ADTKD), and which is linked to hyperuricemia?
+    back: MUC1, UMOD, REN and HNF1B. Hyperuricemia is a key feature of UMOD-related disease.
+    src: { page: 166, quote: "Disease-causing mutations in four genes: MUC1, UMOD, REN, and HNF1B, are responsible for most cases." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.113
+    kind: enumerate
+    topic: cystic-other
+    prompt: Mention the features of ADTKD (medullary cystic kidney disease).
+    points:
+      - Autosomal dominant, early adulthood, positive family history
+      - Small cysts (1–10 mm) at the corticomedullary junction with interstitial scarring; glomeruli spared
+      - Nocturia, polydipsia, polyuria (concentrating defect)
+      - Bland dipstick, BP often normal (salt loss)
+      - Small to normal kidneys on ultrasound
+      - Hyperuricemia with or without gout
+      - ESRD by about age 60; no specific therapy
+    pass: 5
+    src: { page: 166, quote: "Small cysts (1-10mm) form at the corticomedullary junction, with associated tubulointerstitial inflammation and scarring (glomeruli are unaffected)." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.114
+    kind: cloze
+    topic: cystic-other
+    text: "Uremia usually occurs after age {{c1::60}} in ADTKD-MUC1, while ADTKD-UMOD reaches ESRD between the {{c2::fourth and seventh}} decades."
+    src: { page: 166, quote: "Uremia typically occurs after 60 years of age in ADTKD-MUC1" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L07.115
+    kind: card
+    topic: cystic-other
+    front: Is medullary sponge kidney genetic, and how is it usually found?
+    back: No, it is a developmental anomaly with no family history. It is found incidentally or while investigating UTI or stones.
+    src: { page: 167, quote: "It is a developmental, rather than a genetic, anomaly." }
+    status: unverified
+  - id: neph.L07.116
+    kind: card
+    topic: cystic-other
+    front: Why do medullary sponge kidneys form stones, and in whom should you suspect it?
+    back: Impaired calcium handling in the collecting ducts leads to calcium stones (often in cysts). Suspect it in young patients with calcium stones.
+    src: { page: 167, quote: "Impaired calcium handling in the collecting ducts predisposes to formation of calcium-containing stones (often in cysts)." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.117
+    kind: card
+    topic: cystic-other
+    front: How is medullary sponge kidney diagnosed, and what is the prognosis?
+    back: "By imaging: IVU showed the typical \"calyceal brush\" (paintbrush) appearance; now CT. Renal impairment is very rare; treat infection and prevent stones."
+    src: { page: 167, quote: "Diagnosis is made on imaging; traditionally IVU (typical 'calyceal brush'), now CT. Renal impairment is very rare" }
+    status: unverified
+  - id: neph.L07.118
+    kind: table
+    topic: cystic-other
+    title: Medullary sponge kidney vs medullary cystic kidney disease
+    columns: [Feature, Medullary sponge kidney, Medullary cystic kidney disease]
+    rows:
+      - [Age, Any, 20–30 years]
+      - [CKD and ESRD, "-", "++ (ESRD before 60)"]
+      - [Salt-losing state, "-", "++"]
+      - [Calcium stones, "++", "-"]
+      - [UTI, "+", "-"]
+      - [Family history, "-", "+"]
+    blanks: [[0, 2], [1, 2], [2, 2], [3, 1], [5, 1]]
+    src: { page: 168, quote: "Medullary sponge kidney Medullary cystic kidney disease" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.119
+    kind: table
+    topic: cystic-other
+    title: Classification of cystic kidney diseases (Table 7.6)
+    columns: [Disease, Age, Family history, CKD, BP, Site]
+    rows:
+      - [ADPKD, Any, "++", "±", "+", Cortex]
+      - [Juvenile PKD, "<10", "±", "+", "+", Cortex]
+      - [Simple cysts, ">65", "-", "-", "±", Cortex]
+      - [Medullary sponge kidney, Any, "-", "-", "-", Medulla]
+      - [Medullary cystic kidney, 20–30, "++", "++", "-", Medulla]
+      - [Nephronophthisis, "<15", "+", "++", "-", Medulla]
+    blanks: [[0, 5], [1, 1], [2, 1], [3, 5], [4, 1], [5, 1], [5, 5]]
+    src: { page: 168, quote: "Table 7.6 Classification of cystic kidney diseases" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.120
+    kind: mcq
+    topic: cystic-other
+    stem: A 24-year-old man has recurrent calcium kidney stones and UTIs, normal creatinine and no family history. CT shows medullary calcification in dilated collecting ducts. Diagnosis?
+    options:
+      - Medullary sponge kidney
+      - Medullary cystic kidney disease (ADTKD)
+      - ADPKD
+      - Nephronophthisis
+      - Simple renal cysts
+    answer: 0
+    why:
+      - "Correct: young, calcium stones, UTI, no family history, normal function (p167, p168)."
+      - ADTKD has a family history, salt loss and CKD, and no stones.
+      - ADPKD has a strong family history and enlarging cortical cysts.
+      - Nephronophthisis presents in childhood with CKD.
+      - Simple cysts appear after 65 and do not cause stones.
+    src: { page: 167, quote: "Consider the diagnosis in young patients presenting with calcium stones." }
+    status: unverified
+  # ---------- p169-176: tuberous sclerosis ----------
+  - id: neph.L07.121
+    kind: card
+    topic: tsc
+    front: Define tuberous sclerosis complex (TSC).
+    back: An autosomal dominant tumor-suppressor gene syndrome in which hamartomas develop in many organs, including kidneys, brain, heart, lungs and skin.
+    src: { page: 169, quote: "TSC is an autosomal dominant, tumor-suppressor gene syndrome in which benign focal malformations, called hamartomas, develop" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.122
+    kind: table
+    topic: tsc
+    title: TSC genes
+    columns: [Gene, Chromosome, Note]
+    rows:
+      - [TSC1, 9q32–q34, "Milder disease; 1:1 with TSC2 in familial cases"]
+      - [TSC2, 16p13 (next to PKD1), "About 5 times commoner in sporadic cases; more severe"]
+    blanks: [[0, 1], [1, 1], [1, 2]]
+    src: { page: 169, quote: "TSC1 on chromosome 9q32-q34 and TSC2 on chromosome 16p13, adjacent to the PKD1 gene" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.123
+    kind: card
+    topic: tsc
+    front: What is the PKD1/TSC2 contiguous gene deletion syndrome?
+    back: A large deletion of both PKD1 and TSC2 (adjacent on chromosome 16) causing infantile severe polycystic kidney disease with tuberous sclerosis (PKDTS).
+    src: { page: 169, quote: "Large deletions involving both PKD1 and TSC2 results in the PKD1/TSC2 (infantile severe polycystic kidney disease with tuber-ous sclerosis" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.124
+    kind: cloze
+    topic: tsc
+    text: "TSC affects 1 in {{c1::6800}} to 15,000 people; about {{c2::70%}} are sporadic new mutations."
+    src: { page: 170, quote: "About 70% of patients with TSC are sporadic cases with no family history" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L07.125
+    kind: card
+    topic: tsc
+    front: Why is TSC1 disease milder than TSC2?
+    back: Apparently because of a reduced rate of "second hits".
+    src: { page: 170, quote: "TSC1-related disease is milder, apparently because of a reduced rate of \"second hits.\"" }
+    status: unverified
+  - id: neph.L07.126
+    kind: enumerate
+    topic: tsc
+    prompt: Mention the most common clinical manifestations of TSC.
+    points:
+      - Seizures
+      - Intellectual disability and/or autism
+      - Skin lesions (facial angiofibromas, hypomelanotic macules, ungual fibromas)
+      - Interstitial lung disease
+      - Tumors of brain, retina, kidney and heart
+    pass: 4
+    src: { page: 170, quote: "The most common clinical manifestations include seizures, intellectual disability and/or autism, skin lesions, interstitial lung disease" }
+    status: unverified
+  - id: neph.L07.127
+    kind: cloze
+    topic: tsc
+    text: "Renal lesions in TSC: angiomyolipomas {{c1::85%}}, cysts {{c2::30–47%}} and renal cell carcinoma {{c3::2–3%}}."
+    src: { page: 171, quote: "angiomyolipomas (AMLs; 85%), cysts (30% to 47%), and renal cell carcinoma (RCC) (2% to 3%)" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L07.128
+    kind: card
+    topic: tsc
+    front: What is the most frequent cause of death in TSC?
+    back: Renal complications (retroperitoneal hemorrhage, renal impairment).
+    src: { page: 171, quote: "Renal complications are the most frequent cause of death in TSC." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.129
+    kind: card
+    topic: tsc
+    front: What is a renal angiomyolipoma made of?
+    back: Abnormal thick-walled vessels, smooth muscle-like cells and adipose tissue (a benign hamartoma).
+    src: { page: 172, quote: "AMLs are benign renal hamartomas composed of abnormal, thick-walled vessels and varying amounts of smooth muscle-like cells and adipose tissue" }
+    status: unverified
+  - id: neph.L07.130
+    kind: card
+    topic: tsc
+    front: How do TSC-associated AMLs differ from sporadic AMLs?
+    back: Sporadic AMLs are solitary, mostly in older women. TSC AMLs are multiple and bilateral, rare before age 5, growing in number and size with age (about 80% by age 10).
+    src: { page: 172, quote: "TSC-associated AMLs are multiple and bilateral, rarely occurring before 5 years of age, but increasing in frequency and size with age" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.131
+    kind: card
+    topic: tsc
+    front: How do renal AMLs present, and what raises the rupture risk?
+    back: Through hemorrhage (intratumoral or retroperitoneal) or mass effect (flank mass, tenderness, hypertension, renal impairment). Women have more and larger AMLs; pregnancy raises the risk of rupture.
+    src: { page: 172, quote: "Pregnancy appears to increase the risk for rupture and hemorrhage." }
+    status: unverified
+  - id: neph.L07.132
+    kind: card
+    topic: tsc
+    front: Which renal imaging finding strongly suggests TSC?
+    back: Renal cysts together with fat-containing angiomyolipomas (easily seen on CT).
+    src: { page: 172, quote: "The concurrence of cysts and AMLs, easily detected by CT, is strongly suggestive of TSC." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.133
+    kind: card
+    topic: tsc
+    front: What is unique about the cyst lining in TSC?
+    back: Large acidophilic epithelial cells with large hyperchromatic nuclei and occasional mitoses; papillary hyperplasia and adenomas are common.
+    src: { page: 172, quote: "with large and acidophilic epithelia con-taining large hyperchromatic nuclei with occasional mitotic figures" }
+    status: unverified
+  - id: neph.L07.134
+    kind: card
+    topic: tsc
+    front: Which TSC infants have massive cystic kidneys and early ESRD?
+    back: Mostly those with a contiguous germline deletion of TSC2 and PKD1 (PKDTS); ESRD in the second or third decade.
+    src: { page: 173, quote: "The majority of these patients have a contiguous germ-line deletion involving both the TSC2 and PKD1 genes" }
+    status: unverified
+  - id: neph.L07.135
+    kind: enumerate
+    topic: tsc
+    prompt: Mention the features of TSC-associated renal cell carcinoma.
+    points:
+      - Female predominance
+      - Younger age at diagnosis
+      - Association with AML
+      - Multiplicity
+      - Slow progression (indolent)
+      - Commonest type papillary RCC
+    pass: 4
+    src: { page: 173, quote: "including female predominance, younger age at diagnosis, association with AML, multiplicity, and slow progres-sion" }
+    status: unverified
+  - id: neph.L07.136
+    kind: table
+    topic: tsc
+    title: Clinical diagnostic criteria for TSC (Box 45.1)
+    columns: [Group, Features]
+    rows:
+      - [Major, "Facial angiofibromas or forehead plaque, ungual or periungual fibroma, hypomelanotic macules (>3), shagreen patch, retinal hamartomas, cortical tubers, subependymal nodule, subependymal giant cell astrocytoma, cardiac rhabdomyoma, lymphangioleiomyomatosis, renal angiomyolipoma"]
+      - [Minor, "Dental pits, hamartomatous GI or rectal polyps, bone cysts, white matter migration lines, gingival fibromas, nonrenal hamartoma, retinal achromic patch, confetti skin lesions, multiple renal cysts"]
+      - [Definite TSC, "2 major, or 1 major + 2 minor"]
+      - [Probable TSC, "1 major + 1 minor"]
+      - [Possible TSC, "1 major, or 2 minor"]
+    blanks: [[2, 1], [3, 1], [4, 1]]
+    src: { page: 174, quote: "Two major features or one major feature with two minor features indicate definite TSC" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.137
+    kind: mcq
+    topic: tsc
+    stem: A 19-year-old has facial angiofibromas and bilateral renal angiomyolipomas. How is the TSC diagnosis classed?
+    options:
+      - Definite TSC (two major features)
+      - Probable TSC
+      - Possible TSC
+      - Not TSC; AMLs are a minor feature
+      - Needs genetic testing before any label
+    answer: 0
+    why:
+      - "Correct: facial angiofibroma and renal AML are both major features; two majors = definite (p174)."
+      - Probable is one major plus one minor.
+      - Possible is one major or two minors.
+      - Renal AML is a major feature; multiple renal cysts are the minor one.
+      - The clinical criteria alone are enough here.
+    src: { page: 174, quote: "Two major features or one major feature with two minor features indicate definite TSC" }
+    status: unverified
+  - id: neph.L07.138
+    kind: card
+    topic: tsc
+    front: How are TSC renal lesions monitored, and why not ultrasound alone?
+    back: Abdominal CT or MRI every 1–3 years for life. Ultrasound finds fat-rich AMLs and cysts but misses fat-poor lesions.
+    src: { page: 174, quote: "Current recommendations are to perform abdominal CT (Fig. 45.9) or magnetic resonance imaging (MRI) every 1 to 3 years for life" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.139
+    kind: card
+    topic: tsc
+    front: When is a biopsy indicated for a TSC renal lesion?
+    back: When imaging cannot reliably separate an AML from RCC.
+    src: { page: 174, quote: "On occasion, the dis-tinction between an AML and RCC cannot be reliably established by imaging and biopsy is indicated." }
+    status: unverified
+  - id: neph.L07.140
+    kind: card
+    topic: tsc
+    front: Why do large AMLs need preemptive treatment, and with what?
+    back: They develop micro- and macroaneurysms; hemorrhage risk correlates with aneurysms over 5 cm. Treat with nephron-sparing surgery or embolization.
+    src: { page: 175, quote: "therefore these large AMLs require preemptive treatment with either nephron-sparing surgery or embolization" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.141
+    kind: card
+    topic: tsc
+    front: What is first-line therapy for asymptomatic growing AMLs in TSC?
+    back: "mTOR inhibitors (rapalogs: sirolimus, everolimus) for growing AMLs larger than 3 cm, since defective mTORC1 signaling is central to TSC."
+    src: { page: 175, quote: "recommend mTOR inhibitors (rapalogs) as the first-line therapy for the treatment of asymptomatic, growing AMLs larger than 3 cm in diameter" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: neph.L07.142
+    kind: enumerate
+    topic: tsc
+    prompt: Mention indications to intervene on a renal AML in TSC.
+    points:
+      - Large size (aneurysms over 5 cm)
+      - Pain
+      - Hemorrhage
+      - Inability to exclude RCC (then nephron-sparing surgery)
+    pass: 3
+    src: { page: 175, quote: "In addition to size and complications such as pain or hemorrhage, the inability to exclude an associated RCC should prompt intervention." }
+    status: unverified
+  - id: neph.L07.143
+    kind: card
+    topic: tsc
+    front: What advice is given to women with multiple AMLs?
+    back: Female sex hormones may accelerate AML growth, so caution them about pregnancy and estrogen.
+    src: { page: 175, quote: "Female sex hormones may accelerate AML growth." }
+    status: unverified
+  - id: neph.L07.144
+    kind: card
+    topic: tsc
+    front: What is the mainstay of treatment for TSC renal cysts?
+    back: Strict BP control. Surgical decompression has no proven benefit.
+    src: { page: 175, quote: "The mainstay of treatment of TSC-associated renal cystic disease is strict BP control." }
+    status: unverified
+  - id: neph.L07.145
+    kind: card
+    topic: tsc
+    front: When should RCC be suspected in TSC, and how is it treated?
+    back: In enlarging fat-poor lesions or lesions with intratumoral calcification; confirm by biopsy. Because it is often bilateral, use renal-sparing surgery whenever possible.
+    src: { page: 176, quote: "TSC-associated RCC should be suspected in enlarging, fat-poor lesions or when intratumoral calcifications are present" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.146
+    kind: card
+    topic: tsc
+    front: In TSC with ESRD, what is advised before renal replacement therapy?
+    back: Bilateral nephrectomy may be advisable, given AML hemorrhage risk and malignant transformation. Both dialysis and transplantation are suitable.
+    src: { page: 176, quote: "it may be advisable that patients with TSC and ESRD undergo bilateral nephrectomy before initiation of renal replacement therapy" }
+    status: unverified
+  - id: neph.L07.147
+    kind: cloze
+    topic: tsc
+    text: "ESRD occurs in about 1 in {{c1::100}} TSC patients, more often in females ({{c2::63%}}), at a mean age of {{c3::29}} years."
+    src: { page: 176, quote: "ESRD occurred in 1 per 100 patients with TSC and was more frequent in females (63%), with a mean age diagnosis of 29 years." }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L07.148
+    kind: case
+    topic: tsc
+    stem: A 24-year-old woman with epilepsy since childhood, facial angiofibromas and ash-leaf macules has sudden severe left flank pain and a falling hemoglobin.
+    steps:
+      - question: Most likely renal cause?
+        options: [Hemorrhage from a renal angiomyolipoma, Cyst hemorrhage in ADPKD, Renal stone, Renal vein thrombosis]
+        answer: 0
+        why: "AMLs (85% of TSC) bleed into the tumor or retroperitoneum (p171, p172)."
+      - reveal: CT shows bilateral fat-containing AMLs, the left 7 cm with aneurysms, and several cysts.
+        question: Treatment of the large bleeding AML?
+        options: [Embolization or nephron-sparing surgery, Observation only, Radical bilateral nephrectomy now, Oral steroids]
+        answer: 0
+        why: "Large AMLs with aneurysms need embolization or nephron-sparing surgery (p175)."
+      - reveal: A 4 cm AML on the right is asymptomatic but growing.
+        question: First-line therapy for it?
+        options: [mTOR inhibitor (everolimus or sirolimus), Tolvaptan, Somatostatin analogue, Nothing ever]
+        answer: 0
+        why: "Rapalogs are first-line for asymptomatic growing AMLs over 3 cm (p175)."
+      - question: What do you tell her about pregnancy?
+        options: [Pregnancy and estrogen may enlarge AMLs and raise rupture risk, Pregnancy protects against AML growth, There is no link, Pregnancy cures AML]
+        answer: 0
+        why: "Female hormones may accelerate AML growth; pregnancy raises rupture risk (p172, p175)."
+    src: { page: 175, quote: "therefore these large AMLs require preemptive treatment with either nephron-sparing surgery or embolization" }
+    status: unverified
+  # ---------- p177-185: Alport and thin basement membrane disease ----------
+  - id: neph.L07.149
+    kind: card
+    topic: alport
+    front: What do Alport syndrome and thin basement membrane disease share?
+    back: A basement membrane defect, and persistent hematuria as the main presentation.
+    src: { page: 177, quote: "Defect in basement membrane. Main presentation is persistent hematuria." }
+    status: unverified
+  - id: neph.L07.150
+    kind: enumerate
+    topic: alport
+    prompt: State the major features of Alport syndrome.
+    points:
+      - Hematuria
+      - Progressive nephritis with proteinuria and declining renal function
+      - Sensorineural deafness
+      - Ocular abnormalities
+    pass: 4
+    src: { page: 178, quote: "The major features of AS are hematuria, progressive nephritis with proteinuria and declining renal function, sensorineural deafness, and ocular abnormalities." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.151
+    kind: cloze
+    topic: alport
+    text: "Alport syndrome accounts for about {{c1::0.5%}} of adults and {{c2::1.7%}} of children with ESRD in the United States."
+    src: { page: 178, quote: "AS accounts for approximately 0.5% of adults and 1.7% of children with end-stage renal disease (ESRD)" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L07.152
+    kind: card
+    topic: alport
+    front: Where is type IV collagen found?
+    back: In basement membranes of the GBM, Bowman capsule, distal tubule, epidermis, eye, ear and testis. The family has six chains, α1(IV) to α6(IV).
+    src: { page: 178, quote: "Type IV collagen is a major constituent of basement membranes in GBM, bowman capsule, distal renal tubule, epidermis (skin), eye, ear, testis." }
+    status: unverified
+  - id: neph.L07.153
+    kind: table
+    topic: alport
+    title: Inheritance of Alport syndrome
+    columns: [Form, Gene, Share]
+    rows:
+      - [X-linked, "COL4A5 (α5 chain)", "80%"]
+      - [Autosomal recessive, "COL4A3/COL4A4 (chromosome 2)", "~15%"]
+      - [Autosomal dominant, "COL4A3/COL4A4 (chromosome 2)", "~5%"]
+    blanks: [[0, 1], [0, 2], [1, 2], [2, 2]]
+    src: { page: 179, quote: "an X-linked inherited mutation in the COL4A5 gene (>200 described) that encodes a5 type IV collagen accounts for 80% of cases" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.154
+    kind: cloze
+    topic: tbm
+    text: "Normal GBM is about {{c1::350}} nm thick; in thin membrane disease it is often under {{c2::200}} nm, and {{c3::40%}} of families carry COL4A3/COL4A4 mutations."
+    src: { page: 179, quote: "The normal GBM is ± 350nm thick-but, in TMD, it is often less than 200nm" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L07.155
+    kind: card
+    topic: tbm
+    front: What was thin membrane disease previously called, and how does it present?
+    back: Benign familial hematuria. A common autosomal dominant condition with microscopic hematuria and almost always normal renal function; found in about 5% of post-mortems and often in potential live donors.
+    src: { page: 178, quote: "TMD was previously known as ―benign familial haematuria'. It is present in ~5% of post-mortem studies" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.156
+    kind: card
+    topic: alport
+    front: What does the absence of hematuria by age 10 in a boy at risk of Alport mean?
+    back: It makes the diagnosis unlikely; hematuria appears earlier in Alport.
+    src: { page: 179, quote: "This occurs earlier in Alport's no haematuria by age 10" }
+    status: unverified
+  - id: neph.L07.157
+    kind: enumerate
+    topic: alport
+    prompt: Mention the clinical course of X-linked Alport syndrome in males.
+    points:
+      - Persistent microscopic hematuria from early childhood
+      - Proteinuria (often nephrotic) and raised BP by adolescence
+      - Progressive CKD to ESRD by the 3rd–4th decade
+      - High-tone sensorineural deafness (majority)
+      - Anterior lenticonus (~20%)
+    pass: 4
+    src: { page: 179, quote: "Progressive CKD → ESRD by the 3rd to 4th decade (~2% of an ESRD programme)." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.158
+    kind: card
+    topic: alport
+    front: What is anterior lenticonus, and how often does it occur in Alport?
+    back: A conical rather than spherical lens causing distorted vision, in about 20%.
+    src: { page: 179, quote: "anterior lentico-nus (conical, rather than spherical, lens, leading to distorted vision: ~20%)" }
+    status: unverified
+  - id: neph.L07.159
+    kind: card
+    topic: alport
+    front: How do female carriers of X-linked Alport behave?
+    back: Often only microscopic hematuria, but about 10–15% develop proteinuria and ESRD by the 5th decade.
+    src: { page: 180, quote: "However, proteinuria and progression to ESRD by 5th decade in ~10–15%." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.160
+    kind: card
+    topic: alport
+    front: What is Alport syndrome with leiomyomatosis?
+    back: Alport with leiomyomas of the esophagus and tracheobronchial tree (about 30 families); affected females also have genital leiomyomas with clitoral hypertrophy.
+    src: { page: 180, quote: "The association of AS with leiomyomatosis of the esophagus and tracheobronchial tree has been reported in about 30 families." }
+    status: unverified
+  - id: neph.L07.161
+    kind: enumerate
+    topic: alport
+    prompt: Mention the eye findings of Alport syndrome shown in the lecture.
+    points:
+      - Anterior lenticonus
+      - Maculopathy (flecks)
+    pass: 2
+    src: { page: 180, quote: "Anterior lenticonus Maculopathy (flecks)" }
+    status: unverified
+  - id: neph.L07.162
+    kind: card
+    topic: tbm
+    front: How common is thin membrane disease among renal clinic hematuria, and what is rare in it?
+    back: About 25% of microscopic hematuria in a renal clinic; macroscopic hematuria in about 20%. Proteinuria, raised BP and renal impairment are rare, and there are no extrarenal features.
+    src: { page: 181, quote: "Probably accounts for ~25% of all microscopic haematuria presenting to a renal clinic" }
+    status: unverified
+  - id: neph.L07.163
+    kind: table
+    topic: alport
+    title: Type IV collagen α5 staining in Alport (Table 46.2)
+    columns: [Group, GBM α5, Epidermal BM α5]
+    rows:
+      - [Normal, Present, Present]
+      - [X-linked male, Absent, Absent]
+      - [X-linked female, Mosaic, Mosaic]
+      - [Autosomal recessive, Absent, Present]
+    blanks: [[1, 1], [1, 2], [2, 1], [3, 1], [3, 2]]
+    src: { page: 181, quote: "TABLE 46.2 Immunostaining for Type IV Collagen in Alport Syndrome" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.164
+    kind: card
+    topic: alport
+    front: Why can a skin biopsy diagnose X-linked Alport but not autosomal recessive Alport?
+    back: The epidermal basement membrane contains α5(IV) but not α3 or α4. X-linked disease removes α5 (absent in men, mosaic in women); in AR disease α5 is still present in skin.
+    src: { page: 181, quote: "TABLE 46.2 Immunostaining for Type IV Collagen in Alport Syndrome" }
+    status: unverified
+  - id: neph.L07.165
+    kind: order
+    topic: alport
+    prompt: Order the evaluation of hematuria with a positive family history (book algorithm).
+    steps:
+      - Audiogram (if deafness suspected or family ESRD)
+      - Ophthalmic examination
+      - Skin biopsy with immunostaining for α5(IV)
+      - Kidney biopsy with EM and α3, α4, α5 staining
+      - Molecular genetics if tissue studies are not conclusive
+    src: { page: 181, quote: "Evaluation of Patient with Hematuria and a Positive Family History" }
+    status: unverified
+  - id: neph.L07.166
+    kind: card
+    topic: alport
+    front: What does light microscopy show in Alport syndrome by age?
+    back: No pathognomonic lesion. Before age 5 usually normal; then mesangial hypercellularity and matrix expansion; later FSGS, and interstitial fibrosis with tubular atrophy in boys over 10.
+    src: { page: 182, quote: "There are no pathognomonic lesions by light microscopy or immuno- fluorescence in AS." }
+    status: unverified
+  - id: neph.L07.167
+    kind: card
+    topic: alport
+    front: What is the characteristic EM finding in Alport syndrome?
+    back: Variable thickening (up to 1200 nm), thinning, basket weaving and lamellation of the GBM, with the lamina densa split into strands around lucent areas that may hold 20–90 nm granules.
+    src: { page: 183, quote: "there is variable thickening, thinning, basket weaving, and lamellation of the GBM" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.168
+    kind: cloze
+    topic: tbm
+    text: "A GBM width of {{c1::250}} nm separates normal adults from thin basement membrane nephropathy; in children the cut-off is {{c2::200–250}} nm."
+    src: { page: 184, quote: "Typically, a value of 250 nm will accurately separate adults with normal GBM from those with TBMN." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L07.169
+    kind: enumerate
+    topic: alport
+    prompt: Mention the management of Alport syndrome.
+    points:
+      - No specific treatment
+      - Early BP control, ACEI or ARB, and proteinuria reduction (including female carriers)
+      - Screen family members for hematuria and raised BP
+      - Genetic counselling
+    pass: 3
+    src: { page: 185, quote: "No specific treatment for Alport syndrome. As with all progressive nephropathies, good control of BP, use of ACE-I/ARB" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.170
+    kind: card
+    topic: alport
+    front: What special risk follows kidney transplantation in Alport syndrome? Does it forbid transplant?
+    back: In under 5%, de novo anti-GBM antibodies against the donor α5(IV) chain cause RPGN. It is not a contraindication to transplantation.
+    src: { page: 185, quote: "In <5%, transplanted Alport patients may develop de novo anti-GBM anti-bodies that cause an RPGN" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.171
+    kind: card
+    topic: tbm
+    front: How are patients with thin basement membrane nephropathy followed?
+    back: "Reassure but don't lose them: the risk of chronic renal impairment is small (under 5%) but real. Urinalysis, BP and renal function every 1–2 years."
+    src: { page: 185, quote: "Urinalysis and measurement of blood pressure and renal function are recom-mended every 1 to 2 years." }
+    status: unverified
+  - id: neph.L07.172
+    kind: table
+    topic: tbm
+    title: Thin basement membrane nephropathy vs Alport syndrome
+    columns: [Feature, TBMN, Alport]
+    rows:
+      - [Extrarenal features, Rare (none), "Deafness, lenticonus"]
+      - ["Proteinuria, HTN, ESRD", "Unusual (<10%), very rare before 40", "Usual by adolescence, ESRD 3rd–4th decade in males"]
+      - [Sex difference, Not apparent, Males worse (X-linked)]
+      - [Inheritance, Autosomal dominant, "X-linked 80%, AR 15%, AD 5%"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 185, quote: "Proteinuria, hypertension, and progression to ESRD are unusual, seen in less than 10% of affected individuals, and extremely unusual before age 40." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.173
+    kind: mcq
+    topic: alport
+    stem: A 17-year-old boy has microscopic hematuria since early childhood, proteinuria 2.8 g/day, BP 145/95 and high-tone hearing loss. His maternal uncle is on dialysis. Most likely diagnosis?
+    options:
+      - X-linked Alport syndrome
+      - Thin basement membrane nephropathy
+      - IgA nephropathy
+      - ADPKD
+      - Fabry disease
+    answer: 0
+    why:
+      - "Correct: hematuria, proteinuria and hypertension by adolescence, deafness, and an affected maternal uncle (X-linked) (p179)."
+      - TBMN rarely causes proteinuria, hypertension or deafness.
+      - IgA nephropathy does not cause deafness or this family pattern.
+      - ADPKD causes cysts and is autosomal dominant, without deafness.
+      - Fabry causes pain crises, angiokeratomas and corneal opacities, not deafness from childhood with hematuria.
+    src: { page: 179, quote: "Alport's: proteinuria (often nephrotic range) and ↑ BP usually present by adolescence." }
+    status: unverified
+  - id: neph.L07.174
+    kind: mcq
+    topic: alport
+    stem: A man with X-linked Alport syndrome gets a deceased-donor kidney. Months later he develops rapidly progressive GN with linear IgG on the graft. What happened?
+    options:
+      - De novo anti-GBM disease against donor α5(IV) collagen
+      - Recurrence of Alport syndrome in the graft
+      - BK virus nephropathy
+      - Calcineurin inhibitor toxicity
+      - IgA nephropathy recurrence
+    answer: 0
+    why:
+      - "Correct: under 5% develop anti-GBM antibodies to the donor α5 chain seen as non-self (p185)."
+      - Alport is a genetic defect of his own kidneys; it does not recur in a normal graft.
+      - BK nephropathy does not cause linear IgG and RPGN.
+      - CNI toxicity does not cause crescentic GN with linear IgG.
+      - IgA recurrence gives mesangial IgA, not linear IgG.
+    src: { page: 185, quote: "donor a5 type IV collagen is recognized as non-self. It is not a contraindication to transplantation." }
+    status: unverified
+  # ---------- p186-193: Fabry disease ----------
+  - id: neph.L07.175
+    kind: card
+    topic: fabry
+    front: What is the enzyme defect in Fabry disease, and what accumulates?
+    back: Deficiency of α-galactosidase A, with intracellular accumulation of neutral glycosphingolipids (Gb3) with terminal α-linked galactosyl groups.
+    src: { page: 186, quote: "Fabry disease is caused by hereditary deficiency of the enzyme a- galactosidase A (a-Gal A)" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.176
+    kind: enumerate
+    topic: fabry
+    prompt: Mention the clinical features of Fabry disease.
+    points:
+      - Progressive CKD
+      - Pain crises and acral paresthesias
+      - Sweating abnormalities (hypohidrosis)
+      - Vascular skin lesions (angiokeratomas)
+      - Cardiac abnormalities
+      - Eye abnormalities (corneal verticillata)
+    pass: 5
+    src: { page: 186, quote: "Clinically, this leads to progressive CKD, pain crises, sweat-ing abnormalities, vascular cutaneous lesions, and cardiac and eye abnormalities." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.177
+    kind: card
+    topic: fabry
+    front: Which gene causes Fabry disease, where is it, and who is worst affected?
+    back: GLA on the X chromosome (over 500 mutations). Hemizygous males have severe disease; heterozygous females a variable, usually milder course.
+    src: { page: 187, quote: "More than 500 mutations causing Fabry disease have been identified in GLA, the gene for a-Gal A, which is located on the X chromosome." }
+    status: unverified
+  - id: neph.L07.178
+    kind: card
+    topic: fabry
+    front: How does Fabry disease start in boys, and how does it usually end?
+    back: Paresthesias and pain in the hands and feet with episodic pain crises in childhood and early adolescence. ESRD in the 3rd–6th decade; myocardial or cerebral infarction are typical terminal events.
+    src: { page: 187, quote: "Myocardial or cerebral infarctions are typical terminal events." }
+    status: unverified
+  - id: neph.L07.179
+    kind: card
+    topic: fabry
+    front: How does Fabry nephropathy present?
+    back: Mild to moderate proteinuria, sometimes microhematuria, from the third decade; nephrotic syndrome is unusual. Gradual decline with hypertension and ESRD by the 4th–5th decade; up to 10% of heterozygous women reach ESRD.
+    src: { page: 188, quote: "the nephropathy of Fabry disease typically manifests as mild to moderate proteinuria, sometimes with microhematuria" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.180
+    kind: card
+    topic: fabry
+    front: What urine finding is seen in Fabry disease?
+    back: Oval fat bodies with a Maltese cross under polarized light, from large amounts of glycosphingolipid in the urine.
+    src: { page: 188, quote: "Urinary oval fat bodies, with a Maltese cross configuration when viewed with a polarizing microscope" }
+    status: unverified
+  - id: neph.L07.181
+    kind: card
+    topic: fabry
+    front: What does light microscopy show in Fabry nephropathy?
+    back: Enlarged glomerular visceral epithelial cells (podocytes) packed with small clear vacuoles of glycosphingolipid; vacuoles also in parietal and distal tubular cells and vessel walls; progressive glomerulosclerosis.
+    src: { page: 188, quote: "Glomerular visceral epithelial cells are enlarged and packed with small, clear vacuoles that represent glycosphingolipid material" }
+    status: unverified
+  - id: neph.L07.182
+    kind: card
+    topic: fabry
+    front: What is the EM hallmark of Fabry disease?
+    back: "Lysosomal inclusions (myelin figures) in visceral epithelial cells: round concentric dense layers, sometimes parallel (\"zebra bodies\")."
+    src: { page: 189, quote: "The layers may be arranged in parallel (zebra bodies)." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.183
+    kind: enumerate
+    topic: fabry
+    prompt: Mention cardiac involvement in Fabry disease.
+    points:
+      - Coronary narrowing with angina, MI or heart failure
+      - Left ventricular hypertrophy (may be early; may be isolated)
+      - Arrhythmias from conduction system infiltration
+      - Valvular lesions
+    pass: 3
+    src: { page: 190, quote: "Left ventricular hypertrophy (LVH) may be an early finding." }
+    status: unverified
+  - id: neph.L07.184
+    kind: card
+    topic: fabry
+    front: Which cerebral circulation is preferentially involved in Fabry disease, and when do symptoms start?
+    back: The vertebrobasilar circulation, usually from the fourth decade (vertigo, diplopia, dysarthria, ataxia, hemiparesis).
+    src: { page: 190, quote: "The vertebrobasilar circulation is preferentially involved." }
+    status: unverified
+  - id: neph.L07.185
+    kind: card
+    topic: fabry
+    front: How does autonomic dysfunction show in Fabry disease?
+    back: Hypohidrosis, acral paresthesias and pain, and altered intestinal motility.
+    src: { page: 190, quote: "typi-cally manifested by hypohidrosis, acral paresthesias and pain, and altered intestinal motility" }
+    status: unverified
+  - id: neph.L07.186
+    kind: card
+    topic: fabry
+    front: Describe the angiokeratomas of Fabry disease.
+    back: Dark-red macules or papules appearing in the second decade (may be the earliest sign), on the lower trunk, buttocks, hips, genitalia and upper thighs (angiokeratoma corporis diffusum).
+    src: { page: 191, quote: "Typical locations include the lower trunk, buttocks, hips, genitalia, and upper thighs." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.187
+    kind: cloze
+    topic: fabry
+    text: "Corneal opacities ({{c1::verticillata}}) are seen on slit lamp in about {{c2::75%}} of affected men and women; cataracts in 23% of males and 10% of females."
+    src: { page: 191, quote: "present in approximately 75% of affected men and women. These lesions, termed verticillata" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L07.188
+    kind: card
+    topic: fabry
+    front: How is Fabry disease confirmed?
+    back: "Decreased (below 15%) or absent α-Gal A activity in serum, leukocytes, fibroblasts or tissue. If equivocal: slit-lamp exam, urinary ceramide digalactoside and trihexoside, and genetic testing."
+    src: { page: 192, quote: "The diagnosis should be confirmed by demonstrating decreased (<15%) or absent a-Gal A activity in serum, leukocytes, cultured skin fibroblasts, or tissue." }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: neph.L07.189
+    kind: enumerate
+    topic: fabry
+    prompt: Mention the benefits of agalsidase (enzyme replacement) in trials.
+    points:
+      - Lower plasma and urine Gb3
+      - Less neuropathic pain
+      - Better quality of life
+      - Clearing of Gb3 from kidney, heart and skin
+      - Better cerebral blood flow
+      - Stable renal function in mild to moderate impairment over 1–2 years
+    pass: 4
+    src: { page: 192, quote: "agalsidase administra-tion for 5 to 6 months resulted in reduced plasma and urine Gb3; amelioration of neuropathic pain" }
+    status: unverified
+  - id: neph.L07.190
+    kind: card
+    topic: fabry
+    front: In Fabry patients on hemodialysis, when can agalsidase be given, and who should get it?
+    back: During hemodialysis, because dialysis barely clears the enzyme. Recommended for all affected males and symptomatic carrier females (very expensive); add RAS blockade for proteinuria.
+    src: { page: 192, quote: "agalsidase may be infused during hemodialysis because there is little clearance of the enzyme by hemo-dialysis" }
+    status: unverified
+  - id: neph.L07.191
+    kind: card
+    topic: fabry
+    front: What are the limits of kidney transplantation in Fabry disease?
+    back: It treats advanced nephropathy but not extrarenal disease; coronary and cerebrovascular disease remain the main causes of death. Recipients can receive agalsidase.
+    src: { page: 193, quote: "Renal transplantation is an effective treatment for advanced Fabry nephropathy but does not ameliorate the extrarenal manifestations." }
+    status: unverified
+  - id: neph.L07.192
+    kind: card
+    topic: fabry
+    front: Can a Fabry heterozygote donate a kidney?
+    back: No. Fabry heterozygotes should not become kidney donors.
+    src: { page: 193, quote: "Fabry heterozygotes should not become kidney donors." }
+    status: unverified
+  - id: neph.L07.193
+    kind: case
+    topic: fabry
+    stem: A 32-year-old man has had burning pain in his hands and feet since age 10, poor sweating, and dark-red papules over his buttocks and thighs. Urine has 1.2 g/day protein; eGFR 58.
+    steps:
+      - question: Most likely diagnosis?
+        options: [Fabry disease, Alport syndrome, Diabetic nephropathy, Nail-patella syndrome]
+        answer: 0
+        why: "Acral pain crises, hypohidrosis, angiokeratomas and proteinuria (p186, p190, p191)."
+      - question: Which eye finding helps the clinical diagnosis?
+        options: [Corneal verticillata on slit lamp, Anterior lenticonus, Retinitis pigmentosa, Lens dislocation]
+        answer: 0
+        why: "Whorled corneal opacities in about 75% (p191)."
+      - question: Confirmatory test?
+        options: [α-galactosidase A activity (below 15% or absent), Skin biopsy for α5(IV) collagen, Renal ultrasound for cysts, Serum uric acid]
+        answer: 0
+        why: "Low or absent α-Gal A activity confirms it (p192)."
+      - reveal: A kidney biopsy was done before the enzyme result.
+        question: What would EM show?
+        options: [Zebra bodies in podocyte lysosomes, Basket-weave GBM, Moth-eaten GBM with collagen fibrils, Thin GBM only]
+        answer: 0
+        why: "Myelin figures in parallel layers (zebra bodies) (p189)."
+      - question: Specific treatment?
+        options: [Agalsidase plus RAS blockade, Tolvaptan, mTOR inhibitor, No therapy exists]
+        answer: 0
+        why: "Enzyme replacement with agalsidase; RAS blockade reduces proteinuria (p192)."
+    src: { page: 192, quote: "The diagnosis should be confirmed by demonstrating decreased (<15%) or absent a-Gal A activity in serum, leukocytes, cultured skin fibroblasts, or tissue." }
+    status: unverified
+  # ---------- p194-197: nail-patella syndrome ----------
+  - id: neph.L07.194
+    kind: enumerate
+    topic: nps
+    prompt: Define nail-patella syndrome by its features.
+    points:
+      - Autosomal dominant
+      - Hypoplastic or absent patellae
+      - Dystrophic nails
+      - Elbow dysplasia
+      - Iliac horns
+      - Renal disease
+    pass: 5
+    src: { page: 194, quote: "characterized by hypoplasia or absence of the patellae, dys-trophic nails, dysplasia of the elbows and iliac horns, and renal disease" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.195
+    kind: card
+    topic: nps
+    front: Which gene causes nail-patella syndrome?
+    back: LMX1B, a LIM homeodomain transcription factor important for limb and kidney development.
+    src: { page: 194, quote: "NPS is caused by mutations in the LIM homeodomain transcription factor LMX1B" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.196
+    kind: card
+    topic: nps
+    front: Describe the kidney disease of nail-patella syndrome.
+    back: Clinically apparent in fewer than half; usually benign, with 3–5% risk of ESRD. Appears in adolescence or young adulthood as microhematuria and mild proteinuria (sometimes nephrotic syndrome and mild hypertension).
+    src: { page: 195, quote: "The nephropathy is usually benign, with an approximately 3% to 5% risk for progression to ESRD." }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L07.197
+    kind: card
+    topic: nps
+    front: What does EM show in nail-patella syndrome?
+    back: Multiple irregular lucencies of the GBM (moth-eaten), sometimes with cross-banded collagen fibrils best seen with phosphotungstic acid. EM is required for diagnosis; light microscopy is nonspecific.
+    src: { page: 195, quote: "EM shows multiple irregular lucencies of the GBM, giving it a moth-eaten appearance" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L07.198
+    kind: cloze
+    topic: nps
+    text: "In nail-patella syndrome, patellae are absent or hypoplastic in over {{c1::90%}}, iliac horns (pathognomonic) occur in about {{c2::80%}}, and nail changes in about {{c3::98%}}."
+    src: { page: 196, quote: "In about 80% of patients, osseous processes project posteriorly from the iliac wings (iliac horns), which is pathog-nomonic" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L07.199
+    kind: card
+    topic: nps
+    front: Describe the nail changes of nail-patella syndrome.
+    back: "Bilateral and symmetric, fingernails more than toenails: absent or dystrophic nails with discoloration, koilonychia, longitudinal ridges or triangular lunulae."
+    src: { page: 197, quote: "The nails may be absent or dystrophic with discoloration, koil-onychia, longitudinal ridges, or triangular lunulae." }
+    status: unverified
+  - id: neph.L07.200
+    kind: card
+    topic: nps
+    front: What are the treatment and transplant points in nail-patella syndrome?
+    back: No specific therapy. It does not recur in transplanted kidneys, but living related donors must be carefully checked for NPS (autosomal dominant).
+    src: { page: 197, quote: "careful evaluation of potential living related kidney donors for features of NPS is essential" }
+    status: unverified
+  - id: neph.L07.201
+    kind: mcq
+    topic: nps
+    stem: A 20-year-old woman has microhematuria and mild proteinuria, absent patellae, and triangular lunulae on her thumbnails. Pelvic X-ray shows posterior iliac horns. Diagnosis and gene?
+    options:
+      - Nail-patella syndrome, LMX1B
+      - Alport syndrome, COL4A5
+      - Fabry disease, GLA
+      - Tuberous sclerosis, TSC2
+      - ADPKD, PKD1
+    answer: 0
+    why:
+      - "Correct: absent patellae, nail changes and pathognomonic iliac horns with nephropathy; LMX1B (p194, p196, p197)."
+      - Alport does not cause skeletal or nail changes.
+      - Fabry causes pain crises and angiokeratomas.
+      - TSC causes hamartomas and periungual fibromas, not absent patellae.
+      - ADPKD causes cysts, not skeletal disease.
+    src: { page: 196, quote: "In about 80% of patients, osseous processes project posteriorly from the iliac wings (iliac horns), which is pathog-nomonic" }
+    status: unverified
+  - id: neph.L07.202
+    kind: table
+    topic: nps
+    title: EM clues to hereditary glomerular diseases
+    columns: [Disease, EM finding]
+    rows:
+      - [Alport syndrome, "Thick and thin GBM with basket weaving and lamellation"]
+      - [Thin basement membrane nephropathy, Diffusely thin GBM (under 250 nm in adults)]
+      - [Fabry disease, Zebra bodies (myelin figures) in podocytes]
+      - [Nail-patella syndrome, Moth-eaten GBM with cross-banded collagen fibrils]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 195, quote: "EM is required to make the diagnosis. EM shows multiple irregular lucencies of the GBM, giving it a moth-eaten appearance" }
+    status: unverified
+    tags: [high-yield]

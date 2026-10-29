@@ -1,0 +1,2332 @@
+schema: batna.content/v1
+lecture: neph.L08
+title: "Renal clinico-pathological correlation"
+author: "Dr. Ahmed ElKeraie"
+book: { chapter: 8, pages: [198, 291] }
+topics:
+  - { id: approach, title: "Biopsy approach and clinical presentations" }
+  - { id: classification, title: "Pathogenetic classification of GN and MPGN" }
+  - { id: histology, title: "Normal kidney histology and lesion terms" }
+  - { id: if-em, title: "Immunofluorescence and electron microscopy patterns" }
+  - { id: mcd, title: "Case 1: nephrotic syndrome, proteinuria and minimal change disease" }
+  - { id: lupus, title: "Case 2: lupus nephritis and the ISN/RPS classes" }
+  - { id: membranous, title: "Case 3: membranous GN and anti-PLA2R" }
+  - { id: fsgs, title: "Case 4: FSGS variants, causes and management" }
+  - { id: tma, title: "Case 5: thrombotic microangiopathy" }
+  - { id: diabetic, title: "Case 6: advanced diabetic nephropathy" }
+  - { id: c3g, title: "Case 7: mesangioproliferative GN and C3 glomerulopathy" }
+  - { id: amyloid, title: "Case 8: AL amyloidosis and organized deposits" }
+  - { id: integration, title: "Test yourself: integrating IF and EM" }
+  - { id: cast, title: "Case 9: cast nephropathy" }
+  - { id: lcat, title: "Case 10: LCAT deficiency" }
+  - { id: fabry, title: "Case 11: Fabry disease" }
+  - { id: transplant, title: "Cases 12–13: transplant rejection and Banff" }
+  - { id: anca-mpgn, title: "Case 14: ANCA GN on MPGN and the IF/EM algorithm" }
+items:
+  # ---------- p199: approach ----------
+  - id: neph.L08.001
+    kind: order
+    topic: approach
+    prompt: Put the algorithmic approach to renal biopsy interpretation of glomerular disease in order.
+    steps:
+      - Preliminary review of available clinical data
+      - Light microscopic examination
+      - Immunohistologic and electron microscopic examination
+      - Integration of all pathological and clinical data
+    src: { page: 199, quote: "An algorithmic approach to renal biopsy interpretation of glomerular diseases." }
+    status: unverified
+  - id: neph.L08.002
+    kind: card
+    topic: approach
+    front: What is the book's warning to the pathologist who knows the clinical picture before reading the biopsy?
+    back: Don't let what you expect from the clinical findings make you see what is not present in the specimen. It does happen.
+    src: { page: 199, quote: "Don‘t let what is expected based on clinical findings to cause you to see what is not present in the specimen." }
+    status: unverified
+  - id: neph.L08.003
+    kind: enumerate
+    topic: approach
+    prompt: Mention the clinical presentations of glomerular diseases.
+    points:
+      - Asymptomatic
+      - Macroscopic hematuria
+      - Nephritic syndrome
+      - Nephrotic syndrome
+      - RPGN
+      - Chronic GN
+    pass: 5
+    src: { page: 199, quote: "Clinical presentations of different glomerular diseases Asymptomatic. Macroscopic hematuria. Nephritic syndrome. Nephrotic syndrome. RPGN. Chronic GN." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p200: nephrotic vs nephritic diseases ----------
+  - id: neph.L08.004
+    kind: enumerate
+    topic: approach
+    prompt: Enumerate diseases that typically cause nephrotic syndrome.
+    points:
+      - FSGS (all variants)
+      - Idiopathic membranous glomerulopathy
+      - Minimal change glomerulopathy
+      - Diabetic glomerulosclerosis
+      - Type I MPGN
+      - Idiopathic mesangioproliferative GN
+      - Amyloidosis
+      - C1q nephropathy
+      - Fibrillary GN
+      - Monoclonal immunoglobulin deposition disease
+      - Dense deposit disease (type II MPGN)
+      - Preeclampsia/eclampsia
+      - Immunotactoid and collagenofibrotic glomerulopathy
+    pass: 8
+    src: { page: 200, quote: "Diseases typically causing nephrotic syndrome Focal segmental glomerulosclerosis (all variants). Idiopathic membranous glomerulopathy. Minimal change glomerulopathy." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.005
+    kind: enumerate
+    topic: approach
+    prompt: Enumerate diseases that typically cause hematuria and nephritis.
+    points:
+      - Lupus nephritis (all classes)
+      - IgA nephropathy
+      - Idiopathic immune complex proliferative GN
+      - Pauci-immune (ANCA) GN
+      - Postinfectious acute diffuse proliferative GN
+      - Thin basement membrane lesion
+      - Anti-GBM antibody GN
+      - Alport syndrome
+    pass: 6
+    src: { page: 200, quote: "Diseases typically causing hematuria and nephritis Lupus nephritis (all classes). IgA nephropathy." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.006
+    kind: mcq
+    topic: approach
+    stem: Which glomerular disease is listed by the book with diseases that typically cause hematuria and nephritis rather than nephrotic syndrome?
+    options:
+      - Thin basement membrane lesion
+      - C1q nephropathy
+      - Fibrillary glomerulonephritis
+      - Preeclampsia/eclampsia
+      - Collagenofibrotic glomerulopathy
+    answer: 0
+    why:
+      - Correct. Thin basement membrane lesion sits in the hematuria and nephritis list, with Alport syndrome.
+      - C1q nephropathy is in the nephrotic list.
+      - Fibrillary GN is in the nephrotic list.
+      - Preeclampsia/eclampsia is in the nephrotic list.
+      - Collagenofibrotic glomerulopathy is the last entry of the nephrotic list.
+    src: { page: 200, quote: "Thin basement membrane lesion." }
+    status: unverified
+  - id: neph.L08.007
+    kind: card
+    topic: approach
+    front: Dense deposit disease is another name for which type of MPGN?
+    back: Type II membranoproliferative GN.
+    src: { page: 200, quote: "Dense deposit disease (Type II membranoproliferative GN)." }
+    status: unverified
+  # ---------- p201: non-GN ARF/CRF and pathogenetic classification ----------
+  - id: neph.L08.008
+    kind: enumerate
+    topic: approach
+    prompt: Mention diseases other than GN that typically cause acute renal failure.
+    points:
+      - Thrombotic microangiopathy (all types)
+      - Acute tubulointerstitial nephritis
+      - Acute tubular necrosis
+      - Atheroembolization
+      - Light chain cast nephropathy
+      - Cortical necrosis
+    pass: 5
+    src: { page: 201, quote: "Diseases other than GN that typically cause ARF Thrombotic microangiopathy (all types). Acute tubulointerstitial nephritis. Acute tubular necrosis." }
+    status: unverified
+  - id: neph.L08.009
+    kind: enumerate
+    topic: approach
+    prompt: Mention diseases other than GN that typically cause chronic renal failure.
+    points:
+      - Arterionephrosclerosis
+      - Chronic sclerosing GN
+      - End-stage renal disease not otherwise specified
+      - Chronic tubulointerstitial nephritis
+    pass: 3
+    src: { page: 201, quote: "Diseases other than GN that typically cause CRF Arterionephrosclerosis. Chronic sclerosing GN." }
+    status: unverified
+  - id: neph.L08.010
+    kind: essay
+    topic: classification
+    prompt: What is the pathogenetic classification of GN?
+    outline:
+      - "Immune-complex GN": ["IgA nephropathy, IgA vasculitis, lupus nephritis, infection-related GN, fibrillary GN with polyclonal Ig", "Scored by Oxford/MEST (IgA) or ISN/RPS class (lupus)"]
+      - "Pauci-immune GN": ["MPO-ANCA, PR3-ANCA and ANCA-negative GN", "Berden/EUVAS class: focal, crescentic, mixed or sclerosing"]
+      - "Anti-GBM GN": ["Anti-glomerular basement membrane antibody GN"]
+      - "Monoclonal Ig GN": ["MIDD, proliferative GN with monoclonal Ig deposits, immunotactoid glomerulopathy, fibrillary GN with monoclonal Ig"]
+      - "C3 glomerulopathy": ["Patterns: mesangial, endocapillary, exudative, membranoproliferative, necrotizing, crescentic or sclerosing"]
+    src: { page: 201, quote: "Pathogenetic classification of GN 1. Immune- complex GN. 2. Pauci-immune GN. 3. Anti-GBM GN. 4. Monoclonal Ig GN. 5. C3 glomerulo-pathy." }
+    status: unverified
+    tags: [book-question, high-yield]
+  - id: neph.L08.011
+    kind: enumerate
+    topic: classification
+    prompt: Enumerate the five pathogenetic types of GN.
+    points:
+      - Immune-complex GN
+      - Pauci-immune GN
+      - Anti-GBM GN
+      - Monoclonal Ig GN
+      - C3 glomerulopathy
+    pass: 5
+    src: { page: 201, quote: "Pathogenetic classification of GN 1. Immune- complex GN. 2. Pauci-immune GN. 3. Anti-GBM GN. 4. Monoclonal Ig GN. 5. C3 glomerulo-pathy." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p202: pathogenetic table ----------
+  - id: neph.L08.012
+    kind: table
+    topic: classification
+    title: Pathogenetic types of GN with their disease entities and scores
+    columns: [Pathogenetic type, Specific disease entities, Score or class]
+    rows:
+      - ["Immune-complex GN", "IgA nephropathy, IgA vasculitis, lupus nephritis, infection-related GN, fibrillary GN with polyclonal Ig", "Oxford/MEST (IgA); ISN/RPS class (lupus)"]
+      - ["Pauci-immune GN", "MPO-ANCA GN, PR3-ANCA GN, ANCA-negative GN", "Focal, crescentic, mixed or sclerosing (Berden/EUVAS)"]
+      - ["Monoclonal Ig GN", "MIDD, proliferative GN with monoclonal Ig, immunotactoid, fibrillary GN with monoclonal Ig", "–"]
+      - ["C3 glomerulopathy", "C3 glomerulopathy", "–"]
+    blanks: [[0, 2], [1, 1], [1, 2], [2, 1]]
+    src: { page: 202, quote: "Oxford/MEST scores for IgA nephropathy & ISN/RPS class for lupus nephritis" }
+    status: unverified
+  - id: neph.L08.013
+    kind: cloze
+    topic: classification
+    text: "IgA nephropathy is scored by the {{c1::Oxford/MEST}} score, lupus nephritis by the {{c2::ISN/RPS}} class, and pauci-immune GN by the {{c3::Berden/EUVAS}} class (focal, crescentic, mixed or sclerosing)."
+    src: { page: 202, quote: "Oxford/MEST scores for IgA nephropathy & ISN/RPS class for lupus nephritis" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.014
+    kind: card
+    topic: classification
+    front: Fibrillary GN can fall into which two pathogenetic types of GN?
+    back: Immune-complex GN (with polyclonal Ig deposits) or monoclonal Ig GN (with monoclonal Ig deposits).
+    src: { page: 202, quote: "fibrillary GN with monoclonal Ig deposits" }
+    status: unverified
+  # ---------- p203: new MPGN classification and compartments ----------
+  - id: neph.L08.015
+    kind: card
+    topic: classification
+    front: On what does the new classification of MPGN split it in two?
+    back: "Immunofluorescence: IgG + C3 positive = Ig-mediated MPGN; IgG negative with C3 = complement-mediated MPGN."
+    src: { page: 203, quote: "New classification of membranoproliferative GN MPGN Positive lIgGs+C3 Negative IgGs+ C," }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.016
+    kind: table
+    topic: classification
+    title: New classification of MPGN
+    columns: [Immunofluorescence, Mechanism, Causes]
+    rows:
+      - ["IgG + C3 positive", "Immunoglobulin-mediated", "Monoclonal gammopathies, autoimmune diseases, infections"]
+      - ["IgG negative, C3 positive", "Complement-mediated", "C3 glomerulopathies (dense deposit disease and C3GN)"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2]]
+    src: { page: 203, quote: "Monoclonal G3 gammopathies glomerulopathies Autoimmune diseases Infections C,GN" }
+    status: unverified
+  - id: neph.L08.017
+    kind: enumerate
+    topic: histology
+    prompt: Which tissue compartments are evaluated in a renal biopsy?
+    points:
+      - Glomeruli
+      - Tubules
+      - Interstitium
+      - Arteries and arterioles
+    pass: 4
+    src: { page: 203, quote: "Glomeruli Evaluated ussue compartments iN Interstitium Q Arteries & arterioles" }
+    status: unverified
+  # ---------- p204-211: normal histology ----------
+  - id: neph.L08.018
+    kind: enumerate
+    topic: histology
+    prompt: Name the layers of the glomerular filtration barrier shown in the book's scheme of a glomerular capillary.
+    points:
+      - Fenestrated endothelial cell
+      - Glomerular basement membrane
+      - Podocyte (visceral epithelium) foot processes
+    pass: 3
+    src: { page: 205, quote: "Schematic approximation of a glomerular capillary" }
+    status: unverified
+  - id: neph.L08.019
+    kind: card
+    topic: histology
+    front: Which tubule has a brush border in the normal glomerulus scheme?
+    back: The proximal convoluted tubule.
+    src: { page: 204, quote: "Proximal convoluted tubule (brush border)" }
+    status: unverified
+  - id: neph.L08.020
+    kind: enumerate
+    topic: histology
+    prompt: Mention the stains the book uses to show normal kidney histology.
+    points:
+      - H&E
+      - PAS
+      - Methenamine-silver
+      - Masson's (or Gomori's) trichrome
+      - Direct immunofluorescence (IgG)
+    pass: 4
+    src: { page: 206, quote: "(Masson‘s trichrome, X400). Methenamine-silver, X.400" }
+    status: unverified
+  - id: neph.L08.021
+    kind: card
+    topic: histology
+    front: Which stain outlines the glomerular basement membrane black, and is used to see spikes and double contours?
+    back: Methenamine-silver.
+    src: { page: 237, quote: "spikes‖, demonstrated here with silver stain (arrows). (Silver, X1000)." }
+    status: unverified
+  # ---------- p212-217: lesion terms ----------
+  - id: neph.L08.022
+    kind: cloze
+    topic: histology
+    text: "A focal glomerular lesion involves {{c1::less than 50%}} of glomeruli; a diffuse lesion involves {{c2::50% or more}}."
+    src: { page: 212, quote: "Focal Involving <50% of glomeruli. Diffuse Involving 50% or more of glomeruli." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L08.023
+    kind: cloze
+    topic: histology
+    text: "A {{c1::segmental}} lesion involves part of a glomerular tuft; a {{c2::global}} lesion involves all of it."
+    src: { page: 213, quote: "Segmental Involving part of a glomerular tuft. Global Involving all of a glomerular tuft." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.024
+    kind: cloze
+    topic: histology
+    text: "Mesangial hypercellularity = {{c1::4 or more}} nuclei in a peripheral mesangial segment."
+    src: { page: 213, quote: "Mesangial hypercellularity 4 or more nuclei in a peripheral mesangial segment." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L08.025
+    kind: card
+    topic: histology
+    front: Define endocapillary hypercellularity.
+    back: Increased cellularity internal to the GBM, made of leukocytes, endothelial cells and/or mesangial cells.
+    src: { page: 215, quote: "Increased cellularity internal to the GBM composed of leukocytes, endothelial cells and/or mesangial cells." }
+    status: unverified
+  - id: neph.L08.026
+    kind: card
+    topic: histology
+    front: Define extracapillary hypercellularity.
+    back: Increased cellularity in Bowman's space, i.e. more than one layer of parietal or visceral epithelial cells, or monocytes/macrophages.
+    src: { page: 215, quote: "Increased cellularity in Bowman‘s space, i.e. > one layer of parietal or visceral epithelial cells, or monocytes/macrophages." }
+    status: unverified
+  - id: neph.L08.027
+    kind: card
+    topic: histology
+    front: Define a crescent.
+    back: Extracapillary hypercellularity other than the epithelial hyperplasia of the collapsing variant of FSGS.
+    src: { page: 215, quote: "Extracapillary hypercellularity other than the epithelial hyperplasia of collapsing variant of FSGS." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.028
+    kind: card
+    topic: histology
+    front: Define fibrinoid necrosis.
+    back: Lytic destruction of cells and matrix with deposition of acidophilic fibrin-rich material.
+    src: { page: 215, quote: "Lytic destruction of cells and matrix with deposition of acidophilic fibrin- rich material." }
+    status: unverified
+  - id: neph.L08.029
+    kind: card
+    topic: histology
+    front: What does the book's crescent picture show (H&E)?
+    back: A collapsed tuft in the center, a clear space between tuft and crescent, and a proliferation of epithelial cells and mononuclear inflammatory cells inside Bowman's capsule.
+    src: { page: 216, quote: "Notice the collapsed tuft in the center of the microphotography. There is a clear space between tuft and the crescent." }
+    status: unverified
+  - id: neph.L08.030
+    kind: card
+    topic: histology
+    front: Define glomerular sclerosis.
+    back: Increased collagenous extracellular matrix expanding the mesangium, obliterating capillary lumens, or forming adhesions to Bowman's capsule.
+    src: { page: 217, quote: "Increased collagenous extracellular matrix that is expanding the mesangium, obliterating capillary lumens or forming adhesions to Bowman‘s capsule." }
+    status: unverified
+  - id: neph.L08.031
+    kind: card
+    topic: histology
+    front: Define hyaline.
+    back: Glassy acidophilic extracellular material.
+    src: { page: 217, quote: "Hyaline: ‑ Glassy acidophilic extracellular material." }
+    status: unverified
+  - id: neph.L08.032
+    kind: card
+    topic: histology
+    front: Define a membranoproliferative pattern.
+    back: Combined capillary wall thickening and mesangial or endocapillary hypercellularity.
+    src: { page: 217, quote: "Combined capillary wall thickening and mesangial or endocapillary hypercellularity." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.033
+    kind: card
+    topic: histology
+    front: Define a lobular (hypersegmented) glomerulus.
+    back: Consolidated expansion of segments that are demarcated by intervening urinary space.
+    src: { page: 217, quote: "Consolidated expansion of segments that are demarcated by intervening urinary space." }
+    status: unverified
+  - id: neph.L08.034
+    kind: card
+    topic: histology
+    front: Define mesangiolysis.
+    back: Detachment of the paramesangial GBM from the mesangial matrix, or lysis of the mesangial matrix.
+    src: { page: 217, quote: "Detachment of the paramesangial GBM from the mesangial matrix or lysis of mesangial matrix." }
+    status: unverified
+  - id: neph.L08.035
+    kind: mcq
+    topic: histology
+    stem: A biopsy report reads "cellular crescents in 6 of 21 glomeruli, each involving part of the tuft". How should this distribution be described?
+    options:
+      - Focal and segmental
+      - Diffuse and global
+      - Focal and global
+      - Diffuse and segmental
+      - Lobular
+    answer: 0
+    why:
+      - Correct. 6/21 is under 50% of glomeruli (focal) and part of each tuft is involved (segmental).
+      - Diffuse needs 50% or more of glomeruli; global needs the whole tuft.
+      - Focal is right, but the lesions involve only part of each tuft, so not global.
+      - Fewer than half of the glomeruli are involved, so it is not diffuse.
+      - Lobular means consolidated segments separated by urinary space, a different pattern.
+    src: { page: 212, quote: "Focal Involving <50% of glomeruli. Diffuse Involving 50% or more of glomeruli." }
+    status: unverified
+  - id: neph.L08.036
+    kind: mcq
+    topic: histology
+    stem: In a glomerulus, Bowman's space is filled by several layers of parietal epithelial cells and macrophages compressing the tuft. Which term describes this?
+    options:
+      - Crescent (extracapillary hypercellularity)
+      - Endocapillary hypercellularity
+      - Mesangial hypercellularity
+      - Mesangiolysis
+      - Hyalinosis
+    answer: 0
+    why:
+      - Correct. More than one layer of epithelial cells or macrophages in Bowman's space is extracapillary hypercellularity, a crescent.
+      - Endocapillary cells sit inside the GBM, within the capillary loops.
+      - Mesangial hypercellularity is 4 or more nuclei in a mesangial segment.
+      - Mesangiolysis is detachment or lysis of mesangial matrix.
+      - Hyaline is glassy acidophilic extracellular material, not cells.
+    src: { page: 215, quote: "Increased cellularity in Bowman‘s space, i.e. > one layer of parietal or visceral epithelial cells, or monocytes/macrophages." }
+    status: unverified
+  # ---------- p218-220: IF and EM patterns ----------
+  - id: neph.L08.037
+    kind: table
+    topic: if-em
+    title: Major immunofluorescence patterns
+    columns: [Disease (stain), Pattern]
+    rows:
+      - ["Mesangioproliferative GN (IgA)", "Mesangial"]
+      - ["Proliferative GN (IgG)", "Mesangial and capillary wall"]
+      - ["Type I MPGN (C3)", "Peripheral capillary wall granular"]
+      - ["Type II MPGN (C3)", "Band-like capillary wall and coarsely granular mesangial"]
+      - ["Post-infectious GN (C3)", "Coarsely granular capillary wall"]
+      - ["Membranous glomerulopathy (IgG)", "Finely granular capillary wall"]
+      - ["Anti-GBM GN (IgG)", "Linear GBM staining"]
+      - ["Fibrillary GN (IgG)", "Coarsely granular to chunky"]
+    blanks: [[0, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1]]
+    src: { page: 218, quote: "Major immunofluorescence pathological patterns Mesangial Mesangial and capillary wall band-like capillary wall and coarsely granular mesangial" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.038
+    kind: card
+    topic: if-em
+    front: Linear GBM staining for IgG on immunofluorescence means what?
+    back: Anti-GBM GN.
+    src: { page: 218, quote: "Anti-GBM GN(IgG)" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.039
+    kind: mcq
+    topic: if-em
+    stem: Immunofluorescence of a renal biopsy shows fine granular IgG along all capillary walls with no mesangial staining. Which disease fits best?
+    options:
+      - Membranous glomerulopathy
+      - Anti-GBM GN
+      - IgA nephropathy
+      - Post-infectious GN
+      - Type II MPGN
+    answer: 0
+    why:
+      - Correct. Finely granular capillary wall IgG is the membranous pattern.
+      - Anti-GBM GN gives linear, not granular, GBM staining.
+      - IgA nephropathy is mesangial IgA.
+      - Post-infectious GN is coarsely granular capillary wall C3.
+      - Type II MPGN is band-like capillary wall C3 with coarse mesangial granules.
+    src: { page: 218, quote: "Major immunofluorescence pathological patterns" }
+    status: unverified
+  - id: neph.L08.040
+    kind: enumerate
+    topic: if-em
+    prompt: Mention the sites of electron-dense deposits the book shows on EM, with an example of each.
+    points:
+      - Mesangial deposits
+      - Subendothelial deposits
+      - Subepithelial hump-like deposits (postinfectious GN)
+      - Subendothelial deposits with mesangial interposition (type I MPGN)
+    pass: 3
+    src: { page: 220, quote: "Subepithelial hump-like electron dense deposits (postinfectious GN)" }
+    status: unverified
+  - id: neph.L08.041
+    kind: cloze
+    topic: if-em
+    text: "On EM, postinfectious GN shows {{c1::subepithelial hump-like}} deposits, and type I MPGN shows {{c2::subendothelial}} deposits with {{c3::mesangial interposition}}."
+    src: { page: 220, quote: "Subendothelial dense deposits with mesangial interposition (type I MPGN)" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p221-226: case 1, nephrotic syndrome and MCD ----------
+  - id: neph.L08.042
+    kind: card
+    topic: mcd
+    front: "Case 1: a 28-year-old woman has bilateral leg edema (3+) and severe abdominal distension 40 days after delivering twins; uPCR 13.4, albumin 2.4, cholesterol 389, creatinine 0.6. Clinical diagnosis?"
+    back: Nephrotic syndrome.
+    src: { page: 221, quote: "Presenting with bilateral L.L edema (3+), with severe abdominal distension (Hard edema) 40 days after giving birth to her baby twins." }
+    status: unverified
+  - id: neph.L08.043
+    kind: table
+    topic: mcd
+    title: Differential diagnosis of nephrotic syndrome
+    columns: [Diagnosis, Renal function, Serum albumin, C3, UPr/Cr, Other]
+    rows:
+      - ["MCNS", "Normal", "Low", "Normal", ">3.0", "Hyperlipidemia"]
+      - ["FSGS", "Normal or low", "Low", "Normal", "1.0 to 3.0", "Hyperlipidemia, hematuria?"]
+      - ["Congenital NS", "Normal or low", "Very low", "Normal", ">3.0", "Anasarca, hyperlipidemia"]
+      - ["Membranous", "Normal or low", "Very low", "Normal", ">3.0", "Hematuria?"]
+      - ["MPGN", "Normal or low", "Low", "Low", ">3.0", "Hematuria, hypertension"]
+      - ["PSGN", "Low", "Normal", "Low", "<1.0", "Hematuria, hypertension"]
+      - ["HSP", "Low", "Normal or low", "Normal", "1.0 to 3.0", "Purpuric rash, arthritis, hematuria"]
+      - ["Lupus nephritis", "Low", "Normal or low", "Low", "1.0 to 3.0", "Butterfly rash, arthritis, hematuria, hypertension"]
+      - ["IgA nephropathy", "Normal or low", "Normal or low", "Normal", "1.0 to 3.0", "Hematuria"]
+    blanks: [[0, 4], [3, 2], [4, 3], [5, 3], [5, 4], [7, 3]]
+    src: { page: 222, quote: "Differential diagnosis of nephrotic syndrome" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.044
+    kind: enumerate
+    topic: mcd
+    prompt: In the book's differential of nephrotic syndrome, which diseases have a low C3?
+    points:
+      - MPGN
+      - Post-streptococcal GN
+      - Lupus nephritis
+    pass: 3
+    src: { page: 222, quote: "Differential diagnosis of nephrotic syndrome" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.045
+    kind: mcq
+    topic: mcd
+    stem: "A child has edema, hypertension, cola-coloured urine, low creatinine clearance, normal serum albumin, low C3 and a urine protein/creatinine ratio of 0.6. Using the book's differential table, which diagnosis fits?"
+    options:
+      - Post-streptococcal GN
+      - Minimal change nephrotic syndrome
+      - Membranous nephropathy
+      - IgA nephropathy
+      - FSGS
+    answer: 0
+    why:
+      - Correct. PSGN = low renal function, normal albumin, low C3, UPr/Cr below 1.0, hematuria and hypertension.
+      - MCNS has normal renal function, low albumin, normal C3 and UPr/Cr above 3.0.
+      - Membranous has very low albumin, normal C3 and UPr/Cr above 3.0.
+      - IgA nephropathy has a normal C3 and UPr/Cr 1.0 to 3.0.
+      - FSGS has low albumin and a normal C3.
+    src: { page: 222, quote: "Differential diagnosis of nephrotic syndrome" }
+    status: unverified
+  - id: neph.L08.046
+    kind: enumerate
+    topic: mcd
+    prompt: A patient with nephrotic syndrome develops AKI. What is the differential diagnosis?
+    points:
+      - Acute allergic interstitial nephritis from drugs, including diuretics
+      - Acute tubular necrosis from volume depletion or sepsis
+      - Adverse effects of drug therapy
+      - Intrarenal edema
+      - Prerenal failure from volume depletion
+      - Renal venous thrombosis
+      - Transformation of the underlying glomerular disease (e.g. crescentic GN on membranous)
+    pass: 5
+    src: { page: 222, quote: "Acute allergic interstitial nephritis secondary to use of various drugs, including diuretics Acute tubular necrosis caused by volume depletion or sepsis." }
+    status: unverified
+    tags: [book-question, high-yield]
+  - id: neph.L08.047
+    kind: card
+    topic: mcd
+    front: Example the book gives of transformation of an underlying glomerular disease causing AKI in nephrotic syndrome?
+    back: Crescentic nephritis superimposed on membranous nephropathy.
+    src: { page: 222, quote: "Transformation of underlying glomerular disease (e.g., crescentic nephritis superimposed on membranous nephropathy)." }
+    status: unverified
+  - id: neph.L08.048
+    kind: table
+    topic: mcd
+    title: Classification of proteinuria according to its source
+    columns: [Type, Pathophysiology, Cause]
+    rows:
+      - ["Glomerular", "Increased glomerular capillary permeability to protein", "Primary or secondary glomerulopathy"]
+      - ["Tubular", "Decreased tubular reabsorption of proteins in the glomerular filtrate", "Tubular or interstitial disease"]
+      - ["Overflow", "Increased production of low-molecular-weight proteins", "Monoclonal gammopathy, leukaemia"]
+    blanks: [[0, 1], [1, 1], [1, 2], [2, 1], [2, 2]]
+    src: { page: 222, quote: "Overflow Increased production of low- molecular-weight proteins. Monoclonal gammopathy, leukaemia." }
+    status: unverified
+    tags: [book-question, high-yield]
+  - id: neph.L08.049
+    kind: card
+    topic: mcd
+    front: Mechanism of overflow proteinuria, and two causes?
+    back: Increased production of low-molecular-weight proteins; monoclonal gammopathy and leukaemia.
+    src: { page: 222, quote: "Overflow Increased production of low- molecular-weight proteins. Monoclonal gammopathy, leukaemia." }
+    status: unverified
+  - id: neph.L08.050
+    kind: table
+    topic: mcd
+    title: Can the amount of proteinuria guide us to its source?
+    columns: [Daily protein excretion, Cause]
+    rows:
+      - ["0.15 to 2.0 g", "Mild glomerulopathies, tubular or overflow proteinuria"]
+      - ["2.0 to 4.0 g", "Usually glomerular"]
+      - ["> 4.0 g", "Always glomerular"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 223, quote: "2.0 to 4.0 g Usually glomerular > 4.0 g Always glomerular" }
+    status: unverified
+    tags: [book-question, numbers, high-yield]
+  - id: neph.L08.051
+    kind: cloze
+    topic: mcd
+    text: "Daily proteinuria above {{c1::4.0 g}} is always glomerular; 2.0–4.0 g is {{c2::usually glomerular}}; 0.15–2.0 g may be a mild glomerulopathy, {{c3::tubular or overflow}} proteinuria."
+    src: { page: 223, quote: "2.0 to 4.0 g Usually glomerular > 4.0 g Always glomerular" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L08.052
+    kind: mcq
+    topic: mcd
+    stem: A 60-year-old man has 1.2 g/day of proteinuria. Urine immunofixation later shows free light chains. Based on the amount alone, which statement is right?
+    options:
+      - The amount cannot tell glomerular from tubular or overflow proteinuria.
+      - It must be glomerular.
+      - It is usually glomerular.
+      - It excludes overflow proteinuria.
+      - It is nephrotic-range.
+    answer: 0
+    why:
+      - Correct. 0.15–2.0 g/day fits mild glomerulopathy, tubular or overflow proteinuria, so other tests decide.
+      - Only above 4.0 g/day is proteinuria always glomerular.
+      - The 2.0–4.0 g band is "usually glomerular".
+      - Overflow proteinuria is one of the causes of the 0.15–2.0 g band.
+      - 1.2 g/day is far below nephrotic range.
+    src: { page: 223, quote: "0.15 to 2.0 g Mild glomerulopathies Tubular proteinuria Overflow proteinuria" }
+    status: unverified
+  - id: neph.L08.053
+    kind: card
+    topic: mcd
+    front: "Case 1 biopsy: LM shows 9 normal glomeruli, mild tubular injury and foamy interstitial histiocytes; IHC IgA, IgG, IgM and C4d negative. What does EM show and what is the diagnosis?"
+    back: Diffuse effacement of podocyte foot processes with microvillous transformation and no immune-type deposits; minimal change disease.
+    src: { page: 224, quote: "podocytes showed injury with cytoplasmic microvillous transformation as well as diffuse effacement of their foot processes." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.054
+    kind: card
+    topic: mcd
+    front: In minimal change disease, what does light microscopy usually show?
+    back: Glomeruli within normal limits.
+    src: { page: 223, quote: "Nine glomeruli were seen, in all serial sections examined, out of which none was obsolescent. They were within normal limits." }
+    status: unverified
+  - id: neph.L08.055
+    kind: cloze
+    topic: mcd
+    text: "Biopsy abbreviations in the book: LM = {{c1::light microscopy}}, IH = {{c2::immunohistochemistry}}, EM = {{c3::electron microscopy}}."
+    src: { page: 223, quote: "LM = Light microscopy - IH= Immunohistochemistry." }
+    status: unverified
+  - id: neph.L08.056
+    kind: card
+    topic: mcd
+    front: Two types of minimal change disease?
+    back: Primary (idiopathic) and secondary.
+    src: { page: 225, quote: "Types of minimal change disease Primary (Idiopathic) Secondary" }
+    status: unverified
+  - id: neph.L08.057
+    kind: enumerate
+    topic: mcd
+    prompt: Categorize the causes of secondary minimal change disease.
+    points:
+      - Neoplasia (19)
+      - Drugs (24)
+      - Infections (7)
+      - Atopy (6)
+      - Superimposed on another renal disease (5)
+      - Miscellaneous (15)
+    pass: 5
+    src: { page: 226, quote: "Categorization of secondary MCD Neoplasia (19) Drugs (24) Infections (7) Atopy (6)" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.058
+    kind: card
+    topic: mcd
+    front: Which category has the largest number of reported associations with secondary MCD?
+    back: Drugs (24 reported entities), then neoplasia (19).
+    src: { page: 226, quote: "Neoplasia (19) Drugs (24) Infections (7) Atopy (6)" }
+    status: unverified
+  - id: neph.L08.059
+    kind: mcq
+    topic: mcd
+    stem: A 28-year-old woman has heavy nephrotic syndrome after childbirth with normal creatinine, normal C3, negative ANA and virology. The biopsy has normal glomeruli on LM, negative immunostains and diffuse foot-process effacement on EM. Diagnosis?
+    options:
+      - Minimal change disease
+      - Membranous nephropathy
+      - FSGS
+      - Lupus nephritis class V
+      - Preeclampsia
+    answer: 0
+    why:
+      - Correct. Normal LM, negative IF and diffuse effacement without deposits is minimal change disease (book case 1).
+      - Membranous shows GBM thickening and subepithelial deposits with IgG.
+      - FSGS needs segmental sclerosis on LM.
+      - Class V lupus has subepithelial immune deposits and positive serology.
+      - Preeclampsia was not supported; LM and EM point to a podocytopathy without endotheliosis.
+    src: { page: 225, quote: "What is your diagnosis? Minimal change disease" }
+    status: unverified
+  # ---------- p226-230: case 2, lupus nephritis ----------
+  - id: neph.L08.060
+    kind: card
+    topic: lupus
+    front: "Case 2: a 14-year-old girl on NSAIDs for knee pain has fatigue, vomiting, Hb 5.8, WBC 2.6 and creatinine 7.3. Anti-dsDNA comes back 321, uPCR 6.7, active sediment. Diagnosis made, and treatment started?"
+    back: SLE; mycophenolate (CellCept) and hydroxychloroquine, after IV dexamethasone given while results were pending.
+    src: { page: 227, quote: "S.L.E was diagnosed, and cellcept and hydroquine were started." }
+    status: unverified
+  - id: neph.L08.061
+    kind: card
+    topic: lupus
+    front: "Case 2 biopsy: segmental subendothelial deposits and intracapillary leucocytes in 6 of 21 glomeruli, 2 with fibrinoid necrosis, small crescents in 6. ISN/RPS class?"
+    back: Lupus GN class III (focal), with moderate activity and early chronicity, plus toxic acute tubular injury.
+    src: { page: 230, quote: "Lupus Glomerulonephritis Class III, with Moderate Activity (10% Fibrinoid Necrosis, 30% Crescents) and Early Chronicity (5% Global Sclerosis)." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.062
+    kind: card
+    topic: lupus
+    front: In case 2, what was the tubular lesion and its likely cause?
+    back: Acute tubular injury, toxic in nature (she had taken NSAIDs).
+    src: { page: 230, quote: "Acute Tubular Injury; Toxic in Nature." }
+    status: unverified
+  - id: neph.L08.063
+    kind: table
+    topic: lupus
+    title: Abbreviated ISN/RPS classification of lupus nephritis (2003)
+    columns: [Class, Name, Key feature]
+    rows:
+      - ["I", "Minimal mesangial LN", "Normal glomeruli on LM, mesangial deposits on IF"]
+      - ["II", "Mesangial proliferative LN", "Purely mesangial hypercellularity or matrix expansion on LM, with mesangial deposits"]
+      - ["III", "Focal LN", "Endo- or extracapillary GN in <50% of glomeruli, focal subendothelial deposits"]
+      - ["IV", "Diffuse LN", "Endo- or extracapillary GN in ≥50% of glomeruli, diffuse subendothelial deposits (IV-S or IV-G)"]
+      - ["V", "Membranous LN", "Global or segmental subepithelial deposits"]
+      - ["VI", "Advanced sclerosing LN", "≥90% of glomeruli globally sclerosed, no residual activity"]
+    blanks: [[0, 2], [1, 1], [2, 2], [3, 2], [4, 2], [5, 2]]
+    src: { page: 228, quote: "Abbreviated International Society of Nephrology/Renal Pathology Society (ISN/RPS) classification of lupus nephritis (2003)" }
+    status: unverified
+    tags: [high-yield]
+    update:
+      text: "The 2018 ISN/RPS revision drops the A, C and A/C labels and the IV-S/IV-G split, and replaces them with modified NIH activity and chronicity indices."
+      ref: "Bajema et al., revised ISN/RPS lupus nephritis classification, Kidney Int 2018"
+  - id: neph.L08.064
+    kind: cloze
+    topic: lupus
+    text: "Lupus nephritis class III involves {{c1::<50%}} of glomeruli, class IV involves {{c2::≥50%}}, and class VI has {{c3::≥90%}} of glomeruli globally sclerosed without residual activity."
+    src: { page: 228, quote: "290% of glomeruli globally sclerosed without residual activity." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L08.065
+    kind: card
+    topic: lupus
+    front: How is class IV lupus nephritis split into IV-S and IV-G?
+    back: IV-S when ≥50% of involved glomeruli have segmental lesions (less than half the tuft); IV-G when ≥50% have global lesions.
+    src: { page: 228, quote: "Segmental is defined as a glomerular lesion that involves less than half of the glomerular tuft." }
+    status: unverified
+  - id: neph.L08.066
+    kind: card
+    topic: lupus
+    front: Which class do diffuse wire-loop deposits with little or no proliferation belong to?
+    back: Class IV lupus nephritis.
+    src: { page: 228, quote: "This class includes cases with diffuse wire loop deposits but with little or no glomerular proliferation" }
+    status: unverified
+  - id: neph.L08.067
+    kind: card
+    topic: lupus
+    front: Can class V lupus nephritis coexist with another class?
+    back: Yes, with class III or IV; then both are diagnosed.
+    src: { page: 228, quote: "Class V lupus nephritis may occur in combination with class Ill or IV in which case both will be diagnosed." }
+    status: unverified
+  - id: neph.L08.068
+    kind: cloze
+    topic: lupus
+    text: "In class III and IV lupus nephritis, (A) = {{c1::active}} lesions, (C) = {{c2::chronic inactive}} lesions with scars, and (A/C) = {{c3::active and chronic}} lesions."
+    src: { page: 228, quote: "Class III(C) | Chronic inactive lesions with glomerular scars:focal sclerosing lupus nephritis" }
+    status: unverified
+  - id: neph.L08.069
+    kind: mcq
+    topic: lupus
+    stem: A lupus nephritis biopsy shows normal glomeruli on light microscopy, but immunofluorescence shows mesangial immune deposits. ISN/RPS class?
+    options:
+      - Class I
+      - Class II
+      - Class III
+      - Class V
+      - Class VI
+    answer: 0
+    why:
+      - Correct. Class I = minimal mesangial LN, normal on LM with mesangial deposits on IF.
+      - Class II has mesangial hypercellularity or matrix expansion visible on LM.
+      - Class III has endo- or extracapillary GN in <50% of glomeruli.
+      - Class V has subepithelial deposits.
+      - Class VI has ≥90% global sclerosis.
+    src: { page: 228, quote: "Normal glomeruli by light microscopy, but mesangial immune deposits by" }
+    status: unverified
+  - id: neph.L08.070
+    kind: mcq
+    topic: lupus
+    stem: A lupus biopsy shows endocapillary proliferation with subendothelial deposits in 14 of 20 glomeruli; in most of the involved glomeruli the lesion is segmental. ISN/RPS class?
+    options:
+      - Class IV-S
+      - Class IV-G
+      - Class III
+      - Class V
+      - Class II
+    answer: 0
+    why:
+      - Correct. 70% of glomeruli = diffuse (class IV); most involved glomeruli segmental = IV-S.
+      - IV-G needs ≥50% of involved glomeruli with global lesions.
+      - Class III involves fewer than 50% of glomeruli.
+      - Class V is subepithelial (membranous) deposits.
+      - Class II is purely mesangial.
+    src: { page: 228, quote: "This class is divided into diffuse segmental(IV-S) lupus nephritis when 250% of the involved glomeruli have segmental lesions," }
+    status: unverified
+  - id: neph.L08.071
+    kind: card
+    topic: lupus
+    front: Besides the glomerular class, what else should the lupus nephritis report indicate and grade?
+    back: Tubular atrophy, interstitial inflammation and fibrosis, and arteriosclerosis or other vascular lesions (mild, moderate or severe).
+    src: { page: 227, quote: "Indicate and grade (mild, moderate, severe) tubular atrophy, interstitial inflammation and fibrosis," }
+    status: unverified
+  # ---------- p230-238: case 3, membranous ----------
+  - id: neph.L08.072
+    kind: card
+    topic: membranous
+    front: "Case 3: a 22-year-old woman with nephrotic syndrome, C3 slightly low, ANA and virology negative, serum anti-PLA2R negative, Doppler ? RVT. Biopsy: GBM thickening, IgG and PLA2R along the GBM, subepithelial deposits. Diagnosis?"
+    back: Primary membranous GN, anti-PLA2R associated, with secondary FSGS, 25% global sclerosis, 30% IFTA and mild arteriolar hyalinosis.
+    src: { page: 234, quote: "Primary Membranous Glomerulonephritis; Antiphospholipase Type 2 Receptor (aPLA2R) Associated." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.073
+    kind: card
+    topic: membranous
+    front: In case 3 the serum anti-PLA2R was negative but the biopsy stained PLA2R along the GBM. How is this read?
+    back: PLA2R-mediated primary membranous nephropathy, in its inactive phase (antibody negative, tissue antigen positive).
+    src: { page: 236, quote: "Anti-PLA2R (−) PLA2R (+) PLA2R-mediated PMN (inactive)" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.074
+    kind: card
+    topic: membranous
+    front: Which stain is used to look for amyloid in a renal biopsy, and how is it read?
+    back: Congo red, viewed under polarized light.
+    src: { page: 231, quote: "Examination of congo red stained sections viewed under polarized light revealed no amyloid deposits." }
+    status: unverified
+  - id: neph.L08.075
+    kind: enumerate
+    topic: membranous
+    prompt: Mention the causes of secondary membranous GN.
+    points:
+      - Infections
+      - Malignancy
+      - Autoimmune diseases
+      - Alloimmune diseases
+      - Drugs/toxins
+    pass: 4
+    src: { page: 235, quote: "Causes of membranous GN Infections. Malignancy (20% in patients >57, 4%<57). Autoimmune diseases. Alloimmune diseases. Drugs/toxins." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.076
+    kind: cloze
+    topic: membranous
+    text: "Malignancy causes membranous GN in {{c1::20%}} of patients older than {{c2::57}}, and in {{c3::4%}} of younger patients."
+    src: { page: 235, quote: "Malignancy (20% in patients >57, 4%<57)." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L08.077
+    kind: essay
+    topic: membranous
+    prompt: What is the significance of anti-PLA2R?
+    outline:
+      - "Diagnosis": ["70–80% of primary MN have anti-PLA2R/THSD7A", "About 80% sensitive and 100% specific for primary MN", "May appear months before proteinuria; negative patients can turn positive"]
+      - "Prognosis": ["Low or falling levels in non-nephrotic patients predict spontaneous remission; high levels predict nephrotic syndrome", "Epitope spreading = worse prognosis; IgG4 to the cysteine-rich epitope only = more spontaneous remission"]
+      - "Monitoring": ["Levels fall in remission and return with relapse", "High levels after treatment predict relapse; at transplantation predict recurrence", "Immunologic remission precedes proteinuria remission by weeks to months"]
+      - "Treatment": ["Higher levels need longer immunosuppression"]
+    src: { page: 235, quote: "Anti-PLA2R antibody is about 80% sensitive and 100% specific for PMN" }
+    status: unverified
+    tags: [book-question, high-yield]
+  - id: neph.L08.078
+    kind: cloze
+    topic: membranous
+    text: "{{c1::70–80%}} of primary membranous nephropathy patients have anti-PLA2R/THSD7A antibodies; anti-PLA2R is about {{c2::80%}} sensitive and {{c3::100%}} specific for primary MN."
+    src: { page: 235, quote: "Anti-PLA2R antibody is about 80% sensitive and 100% specific for PMN" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L08.079
+    kind: card
+    topic: membranous
+    front: Rare non-primary conditions reported with anti-PLA2R positivity?
+    back: Sarcoid, HBV, HCV, HIV and cancer.
+    src: { page: 235, quote: "although rare patients with sarcoid, HBV, HCY, HIV, and cancer have been reported" }
+    status: unverified
+  - id: neph.L08.080
+    kind: card
+    topic: membranous
+    front: Can anti-PLA2R be positive before proteinuria?
+    back: Yes, for many months before proteinuria appears.
+    src: { page: 235, quote: "Anti-PLA2R antibody can be present for many months before proteinuria appears." }
+    status: unverified
+  - id: neph.L08.081
+    kind: card
+    topic: membranous
+    front: In a non-nephrotic patient with primary MN, what do anti-PLA2R levels predict?
+    back: Low or declining levels predict spontaneous remission; high levels predict progression to nephrotic syndrome.
+    src: { page: 235, quote: "low, or declining, anti-PLA2R levels predict spontaneous remission and high levels predict progression to nephrotic syndrome." }
+    status: unverified
+  - id: neph.L08.082
+    kind: card
+    topic: membranous
+    front: What do higher anti-PLA2R levels mean for treatment?
+    back: More prolonged immunosuppression is needed to reach the same remission rates as lower levels.
+    src: { page: 235, quote: "Patients with higher antibody levels require more prolonged immunosuppression to achieve remission rates comparable to those with lower levels." }
+    status: unverified
+  - id: neph.L08.083
+    kind: card
+    topic: membranous
+    front: What is epitope spreading of anti-PLA2R, and what does it mean?
+    back: Expansion of the antibody's specificity to additional PLA2R epitopes; it correlates with a worse prognosis.
+    src: { page: 236, quote: "Expansion of the specificity of anti-PLA2R antibody to include additional epitopes (epitope spreading) correlates with a worse prognosis." }
+    status: unverified
+  - id: neph.L08.084
+    kind: card
+    topic: membranous
+    front: Which anti-PLA2R pattern has a higher rate of spontaneous remission?
+    back: IgG4 antibody directed only at the cysteine-rich epitope of PLA2R.
+    src: { page: 236, quote: "Patients with lgG4 antibody directed only at the cysteine-rich epitope of PLA2R have a higher rate of spontaneous remission." }
+    status: unverified
+  - id: neph.L08.085
+    kind: cloze
+    topic: membranous
+    text: "Elevated anti-PLA2R after treatment predicts {{c1::relapse}}; elevated levels at transplantation predict {{c2::recurrence}}, especially if {{c3::DQA1*05:01/05}} positive."
+    src: { page: 236, quote: "Elevated anti-PLA2R levels at the time of transplantation predict recurrence (especially if DQAI1205:01/05 positive)." }
+    status: unverified
+  - id: neph.L08.086
+    kind: card
+    topic: membranous
+    front: Which comes first in primary MN, immunologic remission or renal remission?
+    back: Immunologic remission (antibodies disappear) precedes renal remission (proteinuria disappears) by weeks to months.
+    src: { page: 236, quote: "Disappearance of anti-PLA2R antibodies (immunologic remission) precedes renal remission (disappearance of proteinuria) by weeks to months." }
+    status: unverified
+  - id: neph.L08.087
+    kind: card
+    topic: membranous
+    front: A patient previously anti-PLA2R positive becomes seronegative. What does the biopsy show for a while?
+    back: Positive glomerular PLA2R staining for weeks to months.
+    src: { page: 236, quote: "Patients previously positive for anti-PLA2R/THSD7A who become negative will exhibit positive glomerular staining for weeks to months." }
+    status: unverified
+  - id: neph.L08.088
+    kind: cloze
+    topic: membranous
+    text: "More than {{c1::50%}} of pediatric primary membranous nephropathy is {{c2::PLA2R}}-positive."
+    src: { page: 236, quote: ">50% of cases of pediatric PMN are PLA2R-positive." }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L08.089
+    kind: table
+    topic: membranous
+    title: Serum anti-podocyte antibody and glomerular antigen staining in primary MN
+    columns: [Serum antibody, Glomerular antigen, Diagnosis]
+    rows:
+      - ["Anti-PLA2R (+)", "PLA2R (+)", "PLA2R-mediated PMN (active)"]
+      - ["Anti-PLA2R (−)", "PLA2R (+)", "PLA2R-mediated PMN (inactive)"]
+      - ["Anti-THSD7A (+)", "THSD7A (+)", "THSD7A-mediated PMN (active)"]
+      - ["Anti-THSD7A (−)", "THSD7A (+)", "THSD7A-mediated PMN (inactive)"]
+      - ["Anti-PLA2R/THSD7A (−)", "PLA2R/THSD7A (−)", "Non-PLA2R/THSD7A-mediated (pathogenesis unknown)"]
+    blanks: [[0, 2], [1, 2], [3, 2], [4, 2]]
+    src: { page: 236, quote: "Interpretation of serum anti-podocyte antibody and glomerular antigen staining in primary membranous nephropathy" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.090
+    kind: card
+    topic: membranous
+    front: Nephrotic primary MN with no PLA2R/THSD7A antibody and no glomerular staining is presumed to be what?
+    back: Autoimmune PMN mediated by a different, still unidentified anti-podocyte antibody.
+    src: { page: 236, quote: "are presumed to have autoimmune PMN mediated by a different, still unidentified, anti-podocyte antibody." }
+    status: unverified
+  - id: neph.L08.091
+    kind: mcq
+    topic: membranous
+    stem: A 45-year-old man with nephrotic syndrome from biopsy-proven membranous nephropathy has negative serum anti-PLA2R, but the biopsy stains strongly for PLA2R in the glomeruli. Best interpretation?
+    options:
+      - PLA2R-mediated primary MN, inactive phase
+      - Secondary MN; search for cancer only
+      - Non-PLA2R primary MN of unknown pathogenesis
+      - Active PLA2R-mediated primary MN
+      - A false-positive tissue stain; repeat the biopsy
+    answer: 0
+    why:
+      - Correct. Antibody negative with antigen positive in tissue = PLA2R-mediated PMN, inactive.
+      - Glomerular PLA2R staining points to primary disease, not secondary.
+      - That label needs both serum antibody and tissue antigen negative.
+      - Active disease needs a positive serum antibody.
+      - Tissue staining stays positive for weeks to months after the antibody clears, so no repeat biopsy is needed.
+    src: { page: 236, quote: "Anti-PLA2R (−) PLA2R (+) PLA2R-mediated PMN (inactive)" }
+    status: unverified
+  - id: neph.L08.092
+    kind: card
+    topic: membranous
+    front: What are "spikes" on silver stain and which disease shows them?
+    back: Perpendicular projections of the outer GBM, its reaction to subepithelial deposits; membranous GN.
+    src: { page: 237, quote: "GBM reaction to the subepithelial deposits is seen as perpendicular projections to the GBM in its external part: ―spikes‖, demonstrated here with silver stain" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.093
+    kind: card
+    topic: membranous
+    front: Other names for the double contour of the GBM?
+    back: Tram-tracking, splitting, or duplication of the GBM.
+    src: { page: 237, quote: "Cellular proliferation and images in double contour (sometimes termed: tram-tracking, splitting, or duplication of the GBM)" }
+    status: unverified
+  - id: neph.L08.094
+    kind: card
+    topic: membranous
+    front: How does the GBM double contour form?
+    back: Basement-membrane-like material is synthesized between the endothelial cells and the subendothelial deposits.
+    src: { page: 238, quote: "The double contour forms due to synthesis of basement-membrane-like material between the endothelial cells and the deposits." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.095
+    kind: enumerate
+    topic: membranous
+    prompt: Where are GBM double contours found?
+    points:
+      - Type I and III MPGN (classically)
+      - Lupus nephritis
+      - Cryoglobulinemia
+      - Thrombotic microangiopathy (no subendothelial immune deposits)
+      - Chronic transplant glomerulopathy (no subendothelial immune deposits)
+    pass: 4
+    src: { page: 239, quote: "They can be also seen in lupus nephritis, cryoglobulinemia and some diseases in which subendothelial immune deposits are not demonstrated like TMA" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.096
+    kind: mcq
+    topic: membranous
+    stem: A silver stain shows double contours of the GBM, but immunofluorescence and EM show no subendothelial immune deposits. Which diagnosis fits?
+    options:
+      - Thrombotic microangiopathy
+      - Type I MPGN
+      - Lupus nephritis class IV
+      - Cryoglobulinemic GN
+      - Membranous GN
+    answer: 0
+    why:
+      - Correct. TMA and chronic transplant glomerulopathy give double contours without subendothelial immune deposits.
+      - Type I MPGN has subendothelial immune deposits.
+      - Class IV lupus has subendothelial immune deposits.
+      - Cryoglobulinemia has immune deposits.
+      - Membranous GN gives spikes from subepithelial deposits, not double contours.
+    src: { page: 239, quote: "some diseases in which subendothelial immune deposits are not demonstrated like TMA and chronic transplant glomerulopathy" }
+    status: unverified
+  - id: neph.L08.097
+    kind: table
+    topic: membranous
+    title: GBM patterns on EM
+    columns: [GBM change, Disease]
+    rows:
+      - ["Diffuse thinning", "Thin basement membrane disease"]
+      - ["Irregularity and multilayering or splitting", "Alport syndrome"]
+      - ["Diffuse thickening", "Diabetes mellitus, hypertension"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 239, quote: "Diffuse thinning of the GBM: Type IV collagen Irregularity and multilayering nephropathy or splitting of the GBM" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.098
+    kind: card
+    topic: membranous
+    front: Thin basement membrane disease and Alport syndrome are both what kind of nephropathy?
+    back: Type IV collagen nephropathy.
+    src: { page: 239, quote: "Diffuse thinning of the GBM: Type IV collagen Irregularity and multilayering nephropathy or splitting of the GBM" }
+    status: unverified
+  # ---------- p239-243: case 4, FSGS ----------
+  - id: neph.L08.099
+    kind: card
+    topic: fsgs
+    front: "Case 4: a 52-year-old woman, uPCR 1.13, albumin 3.6, creatinine 0.56. Biopsy: 2 of 16 glomeruli with segmental tuft sclerosis and capsular adhesions placed randomly in the tuft; negative IF; no amyloid. Diagnosis?"
+    back: FSGS, not otherwise specified (NOS, classic variant).
+    src: { page: 241, quote: "FSGS; Not Otherwise Specified (NOS; Classic Variant)" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.100
+    kind: table
+    topic: fsgs
+    title: Histologic variants of FSGS
+    columns: [Variant, Defining feature, Clinical feature]
+    rows:
+      - ["NOS", "Generic form, meets no other variant's criteria; variable effacement", "Nephrotic or subnephrotic proteinuria; the most common subtype"]
+      - ["Perihilar", "Perihilar hyalinosis and sclerosis at the vascular pole in most segmental lesions; glomerulomegaly in adaptive FSGS", "Adaptive FSGS: subnephrotic proteinuria, normal albumin"]
+      - ["Cellular", "Expansile segmental endocapillary hypercellularity with foam cells and leukocytes", "Usually nephrotic; least common variant"]
+      - ["Tip", "Segmental lesion at the tubular pole with adhesion or confluence of podocytes and tubular cells", "Abrupt nephrotic syndrome; best prognosis, most steroid-responsive"]
+      - ["Collapsing", "Implosive tuft collapse with hypertrophy and hyperplasia of overlying podocytes", "Black predominance, severe NS; worst prognosis, rapid renal failure"]
+    blanks: [[1, 1], [2, 2], [3, 1], [3, 2], [4, 1], [4, 2]]
+    src: { page: 242, quote: "Focal segmental glomerulosclerosis (Types)" }
+    status: unverified
+    tags: [book-question, high-yield]
+  - id: neph.L08.101
+    kind: card
+    topic: fsgs
+    front: What is the most common histologic type of FSGS?
+    back: FSGS NOS (classic variant), the most common subtype in cross-sectional studies; other variants can evolve into it over time.
+    src: { page: 242, quote: "Cross-sectional studies suggest this is the most common subtype." }
+    status: unverified
+    tags: [book-question, high-yield]
+  - id: neph.L08.102
+    kind: card
+    topic: fsgs
+    front: Which FSGS variant has the best prognosis, and which the worst?
+    back: Tip lesion is best (most steroid-responsive, least progression); collapsing is worst (poor steroid response, rapid renal failure).
+    src: { page: 242, quote: "Best prognosis, with high- est rate of responsivity to glucocorticoids and lowest risk of progres- sion." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.103
+    kind: card
+    topic: fsgs
+    front: Which FSGS variant is the least common, and what is it thought to represent?
+    back: Cellular variant; probably an early stage in the evolution of sclerotic lesions.
+    src: { page: 242, quote: "This is the least common variant." }
+    status: unverified
+  - id: neph.L08.104
+    kind: card
+    topic: fsgs
+    front: Why does adaptive FSGS favour the vascular (perihilar) pole?
+    back: Filtration pressure is normally highest at the proximal afferent end of the capillary bed, and rises further with compensatory demand and afferent vasodilatation.
+    src: { page: 242, quote: "Predisposition for vascular pole is probably due to normally increased filtration pressures at the proximal afferent end" }
+    status: unverified
+  - id: neph.L08.105
+    kind: card
+    topic: fsgs
+    front: Why does the tip lesion sit at the tubular pole?
+    back: Physical shear stress on the paratubular segment, where protein-rich filtrate converges on the tubular outlet, with possible prolapse.
+    src: { page: 242, quote: "Probably mediated by physical stresses on the paratubular segment owing to the conver- gence of protein-rich filtrate on the tubular pole" }
+    status: unverified
+  - id: neph.L08.106
+    kind: enumerate
+    topic: fsgs
+    prompt: Mention the secondary causes of collapsing FSGS.
+    points:
+      - "Viruses: HIV-1, parvovirus B19, SV40, CMV, EBV, hemophagocytic syndrome"
+      - "Drugs: pamidronate, interferon"
+      - "Vaso-occlusive: atheroemboli, calcineurin inhibitor toxicity, chronic allograft nephropathy"
+    pass: 3
+    src: { page: 242, quote: "Primary or secondary to Viruses: HIV-1, parvovirus B19, SV40, EBV, CMV, hemophagocytic syndrome Drugs: pamidronate and interferon" }
+    status: unverified
+  - id: neph.L08.107
+    kind: mcq
+    topic: fsgs
+    stem: A 35-year-old man with HIV has heavy proteinuria and rapidly rising creatinine. Biopsy shows implosive collapse of glomerular tufts with hypertrophic, hyperplastic overlying podocytes that resemble crescents, and tubular microcysts. Which FSGS variant?
+    options:
+      - Collapsing
+      - Tip
+      - Perihilar
+      - Cellular
+      - NOS
+    answer: 0
+    why:
+      - Correct. Tuft collapse with podocyte hyperplasia and microcysts, linked to HIV-1, is collapsing FSGS; the worst prognosis.
+      - Tip lesions sit at the tubular pole and have the best prognosis.
+      - Perihilar lesions are hyalinosis at the vascular pole, typical of adaptive FSGS.
+      - Cellular FSGS is expansile endocapillary hypercellularity with foam cells.
+      - NOS is the generic form that fits no other variant.
+    src: { page: 242, quote: "Most aggressive variant of primary FSGS with black racial predomi- nance and severe nephrotic syndrome." }
+    status: unverified
+  - id: neph.L08.108
+    kind: mcq
+    topic: fsgs
+    stem: A 40-year-old bodybuilder with BMI 34 has 2 g/day of proteinuria and normal serum albumin. Biopsy shows perihilar hyalinosis and sclerosis with glomerulomegaly and mild focal foot-process effacement. What is the most likely form?
+    options:
+      - Adaptive (secondary) FSGS, perihilar variant
+      - Primary FSGS, collapsing variant
+      - Minimal change disease
+      - Primary FSGS, tip variant
+      - Genetic FSGS
+    answer: 0
+    why:
+      - Correct. High lean body mass or obesity, subnephrotic proteinuria with normal albumin, perihilar lesions and glomerulomegaly = adaptive FSGS.
+      - Collapsing FSGS causes severe nephrotic syndrome with tuft collapse.
+      - MCD has normal glomeruli on LM and diffuse effacement.
+      - Tip lesions sit at the tubular pole and present with abrupt nephrotic syndrome.
+      - Genetic FSGS is possible but the adaptive picture explains everything here.
+    src: { page: 242, quote: "In adaptive FSGS, patients are more likely to pre- sent with subnephrotic proteinuria and normal serum albumin levels." }
+    status: unverified
+  - id: neph.L08.109
+    kind: essay
+    topic: fsgs
+    prompt: What are the causes of FSGS?
+    outline:
+      - "Primary (idiopathic)": ["Cause unknown; circulating permeability factors"]
+      - "Familial or genetic": ["Mutations in specific podocyte genes"]
+      - "Virus-associated": ["HIV-1, parvovirus B19, SV40, CMV, EBV"]
+      - "Drug-induced": ["Heroin, interferons, lithium, pamidronate, sirolimus, calcineurin-inhibitor toxicity, anabolic steroids"]
+      - "Adaptive": ["Reduced renal mass: oligomeganephronia, low birth weight, unilateral agenesis, reflux nephropathy, allograft, aging kidney, advanced CKD", "Initially normal mass: hypertension, atheroemboli, TMA, renal artery stenosis, obesity, high lean body mass, cyanotic heart disease, sickle cell anemia"]
+    src: { page: 243, quote: "Primary (idiopathic) form Specific cause unknown; mediated by circulating permeability factors" }
+    status: unverified
+    tags: [book-question, high-yield]
+  - id: neph.L08.110
+    kind: enumerate
+    topic: fsgs
+    prompt: Mention drugs that cause secondary FSGS.
+    points:
+      - Heroin
+      - Interferons alfa, beta and gamma
+      - Lithium
+      - Pamidronate
+      - Sirolimus
+      - Calcineurin-inhibitor nephrotoxicity
+      - Anabolic steroids
+    pass: 5
+    src: { page: 243, quote: "Drug-induced Heroin; interferons alfa, beta, and gamma; lithium; pamidronate; sirolimus; calcineurin-inhibitor nephrotoxicity;" }
+    status: unverified
+  - id: neph.L08.111
+    kind: card
+    topic: fsgs
+    front: What mediates adaptive FSGS?
+    back: Adaptive structural-functional responses to glomerular hypertension from elevated glomerular capillary pressures and flows.
+    src: { page: 243, quote: "The adaptive form is mediated by adaptive structural-functional responses to glomerular hypertension caused by elevated glomerular capil- lary pressures and flows." }
+    status: unverified
+  - id: neph.L08.112
+    kind: enumerate
+    topic: fsgs
+    prompt: Mention conditions with reduced renal mass that cause adaptive FSGS.
+    points:
+      - Oligomeganephronia
+      - Very low birth weight
+      - Unilateral renal agenesis or renal dysplasia
+      - Reflux nephropathy
+      - Sequela of cortical necrosis or surgical renal ablation
+      - Renal allograft
+      - Aging kidney or any advanced renal disease
+    pass: 5
+    src: { page: 243, quote: "Conditions with reduced renal mass: oligomeganephronia, very low birth weight, unilateral renal agenesis, renal" }
+    status: unverified
+  - id: neph.L08.113
+    kind: card
+    topic: fsgs
+    front: First step for every patient with an FSGS lesion?
+    back: RAS blockade, with or without diuretics and statin.
+    src: { page: 243, quote: "FSGS lesion All patients get RAS blockade +/- diuretics +/- statin" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.114
+    kind: cloze
+    topic: fsgs
+    text: "Primary FSGS: prednisone {{c1::1 mg/kg/day}} for {{c2::4–8 weeks}} (up to 16 weeks if proteinuria is falling), then taper over {{c3::3 months}}."
+    src: { page: 243, quote: "Prednisone Img/kg/day for 4- 8 (If proteinuria decreasing, up tol6 weeks) Taper progressively over 3 months" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L08.115
+    kind: card
+    topic: fsgs
+    front: In primary FSGS, what is given for steroid resistance, toxicity or dependence?
+    back: A calcineurin inhibitor (start low, with an upper limit), tapering steroids to the minimum.
+    src: { page: 243, quote: "Consider adding CNI and taper corticosteroids to minimum" }
+    status: unverified
+  - id: neph.L08.116
+    kind: card
+    topic: fsgs
+    front: How long are CNI responders in FSGS kept on treatment?
+    back: 1–2 years, then taper to the minimum dose with dipstick monitoring; partial remission is accepted.
+    src: { page: 243, quote: "Response group keep on CNI for 1-2 years and taper to minimum dose with dipstick monitoring of proteinuria" }
+    status: unverified
+  - id: neph.L08.117
+    kind: card
+    topic: fsgs
+    front: After sustained remission of primary FSGS, what follow-up does the algorithm advise?
+    back: Stop corticosteroids and do monthly dipstick surveillance to detect relapse.
+    src: { page: 243, quote: "Stop corticosteroids Monthly dipstick surveillance to detect possible relapse" }
+    status: unverified
+  - id: neph.L08.118
+    kind: order
+    topic: fsgs
+    prompt: Order the management of secondary FSGS.
+    steps:
+      - RAS blockade ± diuretics ± statin, and treat the underlying cause
+      - Consider the overlap category if not responding to RAS blockade
+      - Persistent nephrotic syndrome → consider testing for permeability factors and genetic mutations
+      - Consider corticosteroids or a CNI
+    src: { page: 243, quote: "Secondary FSGS (evaluate for underlying cause and treat it)" }
+    status: unverified
+  - id: neph.L08.119
+    kind: essay
+    topic: fsgs
+    prompt: What will be your management plan for FSGS?
+    outline:
+      - "All patients": ["RAS blockade ± diuretics ± statin"]
+      - "Primary FSGS": ["Prednisone 1 mg/kg/day for 4–8 weeks (up to 16), taper over 3 months", "Sustained remission: stop steroids, monthly dipstick", "Steroid-dependent or resistant: add CNI, taper steroids; keep CNI 1–2 years; accept partial remission"]
+      - "Secondary FSGS": ["Treat the cause", "No response to RAS blockade: overlap category; persistent NS: test permeability factors and genes; consider steroids or CNI"]
+    src: { page: 243, quote: "FSGS lesion All patients get RAS blockade +/- diuretics +/- statin" }
+    status: unverified
+    tags: [book-question]
+  - id: neph.L08.120
+    kind: mcq
+    topic: fsgs
+    stem: A 30-year-old woman with primary FSGS (NOS) remains nephrotic after 16 weeks of prednisone 1 mg/kg/day. What does the book's algorithm suggest next?
+    options:
+      - Start a calcineurin inhibitor and stop steroids
+      - Continue prednisone 1 mg/kg/day for another year
+      - Stop all treatment and give RAS blockade only
+      - Plasma exchange
+      - Re-biopsy before any change
+    answer: 0
+    why:
+      - Correct. Steroid resistance or toxicity leads to a CNI (start low, with an upper limit).
+      - Full-dose steroids beyond 16 weeks are not in the algorithm and add toxicity.
+      - RAS blockade continues, but primary FSGS with steroid resistance gets a CNI.
+      - Plasma exchange is not in the book's algorithm.
+      - The algorithm moves to a CNI; testing for permeability factors and genes is considered, not a repeat biopsy.
+    src: { page: 243, quote: "Steroid resistance/toxicity" }
+    status: unverified
+  # ---------- p244-246: case 5, TMA ----------
+  - id: neph.L08.121
+    kind: card
+    topic: tma
+    front: "Case 5: a 42-year-old with gross hematuria, BP 200/100, creatinine 4, anaemia, thrombocytopenia and mild indirect hyperbilirubinemia; immunology negative, C3/C4 normal. Biopsy: hilar thrombi, arteriolar red cell fragmentation, fibrin thrombi, onion-skinning. Diagnosis?"
+    back: Acute flare of thrombotic microangiopathy with arterial involvement, on top of 50% focal global glomerulosclerosis and 25% IFTA.
+    src: { page: 245, quote: "An Acute Flare of Thrombotic Microangiopathy with Arterial Involvement, on Top of Focal Global Glomerulosclerosis (50%) and Mild Interstitial Fibrosis and" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.122
+    kind: enumerate
+    topic: tma
+    prompt: Mention the arteriolar and arterial findings of TMA in case 5.
+    points:
+      - Red cell fragmentation
+      - Fibrin thrombi
+      - Fibrous thrombi
+      - Onion-skin appearance
+      - Mucoid intimal degeneration of interlobular arteries
+    pass: 4
+    src: { page: 245, quote: "Arterioles showed focal red cell fragmentation, fibrin thrombi, fibrous thrombi as well as onion- skin appearance." }
+    status: unverified
+  - id: neph.L08.123
+    kind: essay
+    topic: tma
+    prompt: What are the types of TMA?
+    outline:
+      - "Primary TMA": ["Hereditary and idiopathic TTP", "Hereditary (atypical) HUS", "Sporadic Shiga toxin-associated HUS"]
+      - "Secondary immune-mediated": ["Pregnancy, autoimmune disorders, infections", "Drugs: clopidogrel, ticlopidine"]
+      - "Secondary non-immune": ["Malignant hypertension, solid organ transplantation, HCT, metastatic tumours", "Drugs: cyclosporine, tacrolimus, IFN-α, mitomycin C"]
+    src: { page: 246, quote: "Types of TMA Primary TMA Secondary TMA Hereditary TTP. Immune-mediated Idiopathic TTP." }
+    status: unverified
+    tags: [book-question, high-yield]
+  - id: neph.L08.124
+    kind: table
+    topic: tma
+    title: Types of TMA
+    columns: [Group, Causes]
+    rows:
+      - ["Primary: TTP", "Hereditary TTP, idiopathic TTP"]
+      - ["Primary: HUS", "Hereditary (atypical) HUS, sporadic Shiga toxin-associated HUS"]
+      - ["Secondary, immune-mediated", "Pregnancy, autoimmune disorders, infections, clopidogrel, ticlopidine"]
+      - ["Secondary, non-immune", "Malignant hypertension, solid organ transplantation, HCT, metastatic tumours, cyclosporine, tacrolimus, IFN-α, mitomycin C"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 246, quote: "Medications (Clopidogrel, Ticlopidine). Hereditary (atypical) HUS. Non-immune mediated Sporadic (Shigatoxin-associated)." }
+    status: unverified
+  - id: neph.L08.125
+    kind: mcq
+    topic: tma
+    stem: Which drug causes TMA through an immune-mediated mechanism, according to the book's classification?
+    options:
+      - Ticlopidine
+      - Cyclosporine
+      - Tacrolimus
+      - Mitomycin C
+      - Interferon-α
+    answer: 0
+    why:
+      - Correct. Clopidogrel and ticlopidine are the immune-mediated drug causes.
+      - Cyclosporine is listed under non-immune mediated TMA.
+      - Tacrolimus is listed under non-immune mediated TMA.
+      - Mitomycin C is listed under non-immune mediated TMA.
+      - IFN-α is listed under non-immune mediated TMA.
+    src: { page: 246, quote: "Medications (Clopidogrel, Ticlopidine)." }
+    status: unverified
+  - id: neph.L08.126
+    kind: cloze
+    topic: tma
+    text: "TTP = thrombocytopenia, MAHA, fever, neurologic and renal abnormalities with ADAMTS-13 {{c1::<10%}}; HUS = thrombocytopenia, MAHA and renal abnormalities with ADAMTS-13 {{c2::>10%}}; diarrhea-positive HUS with Shiga toxin (e.g. E. coli) is {{c3::typical}} HUS."
+    src: { page: 246, quote: "Thrombocytopenia, MAHA, fever, neurologic and renal abnormalities; low ADAMTS-13 (<10% actionable)" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L08.127
+    kind: enumerate
+    topic: tma
+    prompt: Mention causes of atypical (diarrhea-negative) HUS in the book's algorithm.
+    points:
+      - Complement dysregulation
+      - Pregnancy-associated
+      - Systemic sclerosis
+      - Antiphospholipid syndrome
+      - Strep pneumonia HUS
+      - Drug abuse and prescription drugs
+      - Radiation-induced
+      - Malignant hypertension
+    pass: 5
+    src: { page: 246, quote: "Complement | Pregnancy dysregulation associated Systemic sclerosis APL Strep syndrome pneumonia HUS" }
+    status: unverified
+  - id: neph.L08.128
+    kind: mcq
+    topic: tma
+    stem: A 25-year-old woman has fever, confusion, thrombocytopenia, schistocytes and mild AKI. ADAMTS-13 activity is 4%. Diagnosis?
+    options:
+      - Thrombotic thrombocytopenic purpura
+      - Typical (Shiga toxin) HUS
+      - Atypical HUS from complement dysregulation
+      - Malignant hypertension
+      - Antiphospholipid syndrome
+    answer: 0
+    why:
+      - Correct. MAHA, thrombocytopenia, fever, neurologic and renal signs with ADAMTS-13 <10% = TTP.
+      - Typical HUS follows diarrhea with Shiga toxin and ADAMTS-13 above 10%.
+      - Atypical HUS has ADAMTS-13 above 10%.
+      - Malignant hypertension TMA does not lower ADAMTS-13 below 10%.
+      - APL syndrome sits with atypical HUS causes and ADAMTS-13 above 10%.
+    src: { page: 246, quote: "Thrombocytopenia, MAHA, fever, neurologic and renal abnormalities; low ADAMTS-13 (<10% actionable)" }
+    status: unverified
+  # ---------- p247-249: case 6, diabetic ----------
+  - id: neph.L08.129
+    kind: card
+    topic: diabetic
+    front: "Case 6: a 42-year-old with 7 years of uncontrolled DM and HTN and severe proliferative retinopathy develops nephrotic syndrome, creatinine 8, uACR 12 000, ESR 140. Biopsy: 18 of 20 glomeruli sclerosed, hypocellular mesangial nodules, segmental IgG and C3 on the GBM. Diagnosis?"
+    back: Advanced diabetic nodular glomerulosclerosis with a possible underlying membranous GN, 90% global sclerosis, 90% IFTA, moderate arteriosclerosis and marked arteriolar hyalinosis.
+    src: { page: 249, quote: "Advanced Diabetic Nodular Glomerulosclerosis with a Possible Underlying Membranous Glomerulonephritis." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.130
+    kind: card
+    topic: diabetic
+    front: In case 6, why could an underlying membranous GN not be confirmed?
+    back: The glomerulosclerosis was too advanced (90% global sclerosis).
+    src: { page: 249, quote: "Confirmation of an underlying MGN is difficult due to the advanced glomerulosclerosis." }
+    status: unverified
+  - id: neph.L08.131
+    kind: card
+    topic: diabetic
+    front: Which glomerular lesion of advanced diabetic nephropathy did case 6 show on LM?
+    back: Marked mesangial matrix increase with frequent hypocellular nodule formation, and diffuse GBM thickening.
+    src: { page: 247, quote: "marked mesangial matrix increase with frequent hypocellular nodules formation." }
+    status: unverified
+  - id: neph.L08.132
+    kind: card
+    topic: diabetic
+    front: In case 6, which tests were done before the biopsy to exclude other causes of heavy proteinuria and anaemia?
+    back: SPEP (low albumin, mild alpha-2 rise) and tumour markers, which were negative.
+    src: { page: 247, quote: "Tumour markers were done and were negative." }
+    status: unverified
+  - id: neph.L08.133
+    kind: card
+    topic: diabetic
+    front: In case 6, what was done for fluid overload before the biopsy, and with what result?
+    back: Three ultrafiltration sessions; creatinine fell to 5 mg/dL.
+    src: { page: 247, quote: "3 sessions of ultrafiltration were done after which sCr decreased to 5 mg/dL." }
+    status: unverified
+  - id: neph.L08.134
+    kind: mcq
+    topic: diabetic
+    stem: A diabetic with long-standing retinopathy has a renal biopsy for unexplained heavy proteinuria. LM shows diffuse GBM thickening, hypocellular mesangial nodules and marked arteriolar hyalinosis; Congo red is negative. Diagnosis?
+    options:
+      - Diabetic nodular glomerulosclerosis
+      - AL amyloidosis
+      - Minimal change disease
+      - Fibrillary GN
+      - Type I MPGN
+    answer: 0
+    why:
+      - Correct. Hypocellular mesangial nodules with GBM thickening and arteriolar hyalinosis are diabetic nodular glomerulosclerosis.
+      - Amyloid is Congo red positive.
+      - MCD has normal glomeruli on LM.
+      - Fibrillary GN needs EM fibrils of 15–30 nm and IgG deposits.
+      - Type I MPGN is hypercellular with double contours and subendothelial deposits.
+    src: { page: 249, quote: "Advanced Diabetic Nodular Glomerulosclerosis" }
+    status: unverified
+  # ---------- p249-254: case 7, C3G ----------
+  - id: neph.L08.135
+    kind: card
+    topic: c3g
+    front: "Case 7: a 23-year-old man had edema, HTN and low C3; a biopsy read by LM only said mesangioproliferative GN and he got prednisolone 60 mg, then stopped it. Now creatinine 1.9, C3 37 (low), C4 normal, ANA and ANCA negative. Repeat biopsy IF: C3 3+ and C4 1+ along the GBM. Diagnosis?"
+    back: C3 glomerulopathy, dense deposit disease.
+    src: { page: 253, quote: "C3 glomerulopathy (Dense Deposit Disease)" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.136
+    kind: enumerate
+    topic: c3g
+    prompt: What is the differential diagnosis of mesangioproliferative GN?
+    points:
+      - IgA nephropathy
+      - Resolving post-infectious GN
+      - C3 glomerulopathy
+      - Alport syndrome
+      - Lupus nephritis class II
+      - Podocytopathies (MCD or unsampled FSGS)
+    pass: 5
+    src: { page: 250, quote: "IgA nephropathy. Resolving PIGN. C3 Glomerulopathy. Alport’s syndrome, Podocytopathies (MCD/ LN Class I. unsampled FSGS)" }
+    status: unverified
+    tags: [book-question, high-yield]
+  - id: neph.L08.137
+    kind: card
+    topic: c3g
+    front: What does the book say about "mesangioproliferative GN" as a diagnosis?
+    back: There is no disease entity called mesangioproliferative GN; the pattern needs further meticulous study (IF, EM) until a definite diagnosis is reached.
+    src: { page: 254, quote: "There is no disease entity called Mesangioproliferative GN." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.138
+    kind: card
+    topic: c3g
+    front: What went wrong in case 7's first biopsy?
+    back: It was examined by LM only (no IHC or EM), so it was labelled mesangioproliferative GN and the C3 glomerulopathy was missed; creatinine is now 8.4.
+    src: { page: 250, quote: "Biopsy was examined only by L.M (no IHC or EM) with a diagnosis of Mesangioproliferative GN" }
+    status: unverified
+  - id: neph.L08.139
+    kind: card
+    topic: c3g
+    front: How do the capillary walls look in dense deposit disease on LM and IF?
+    back: Rigid and thickened, with strong ribbon-like C3 staining on the capillary walls.
+    src: { page: 264, quote: "In dense deposit disease the capillary walls appear rigid & thickened" }
+    status: unverified
+  - id: neph.L08.140
+    kind: mcq
+    topic: c3g
+    stem: A 23-year-old man has hematuria, hypertension and a persistently low C3 with a normal C4. Biopsy IF shows bright C3 along capillary walls with no IgG, IgA or IgM. Which diagnosis is most likely?
+    options:
+      - C3 glomerulopathy
+      - Lupus nephritis
+      - IgA nephropathy
+      - Membranous GN
+      - Anti-GBM GN
+    answer: 0
+    why:
+      - Correct. Isolated C3 deposits with low C3 and normal C4 = complement-mediated C3 glomerulopathy.
+      - Lupus gives full-house Ig and complement with low C3 and C4, and positive ANA.
+      - IgA nephropathy is mesangial IgA with normal C3.
+      - Membranous is granular IgG along the GBM.
+      - Anti-GBM is linear IgG.
+    src: { page: 251, quote: "IgA: Negative, IgG: Negative, IgM: Negative, C3: deposits along GBM (3+) and C4: deposits along GBM (1+)" }
+    status: unverified
+  # ---------- p254-260: case 8, amyloid ----------
+  - id: neph.L08.141
+    kind: card
+    topic: amyloid
+    front: "Case 8: a 75-year-old ex-smoker has nephrotic syndrome (albumin 1.8, uACR 5517), normal creatinine, HbA1c 5.3, pleural effusions, LDH 459 and grade II LV diastolic dysfunction. What should be the next step?"
+    back: Serum protein electrophoresis; it showed an M-band, then bone marrow aspirate and renal biopsy.
+    src: { page: 256, quote: "Serum protein electrophoresis was done showing M-band." }
+    status: unverified
+  - id: neph.L08.142
+    kind: card
+    topic: amyloid
+    front: "Case 8 biopsy: tufts replaced by homogeneous pink mesangial deposits with weak PAS reactivity; Congo red positive under polarized light; AA negative, lambda 4+. Diagnosis?"
+    back: AL amyloidosis, lambda type, with mild arteriosclerosis.
+    src: { page: 258, quote: "Light Chain Renal / Amyloidosis; AL- Lambda Type." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.143
+    kind: card
+    topic: amyloid
+    front: How does amyloid look on PAS stain compared with diabetic nodules?
+    back: Homogeneous pink deposits with weak PAS reactivity (diabetic matrix nodules are strongly PAS positive).
+    src: { page: 256, quote: "almost complete tuft replacement by mesangial homogenous pink deposits with weak PAS reactivity." }
+    status: unverified
+  - id: neph.L08.144
+    kind: table
+    topic: amyloid
+    title: Main types of systemic amyloidosis
+    columns: [Type, Clinical syndrome, Amyloidogenic protein]
+    rows:
+      - ["AL", "Monoclonal gammopathy", "Immunoglobulin light chains"]
+      - ["AA", "Sustained chronic inflammation", "Serum amyloid A protein"]
+      - ["AF", "Familial polyneuropathy, cardiomyopathy or nephropathy", "Mutant transthyretin, apolipoprotein A1, gelsolin, fibrinogen, lysozyme"]
+      - ["ATTRwt", "Senile restrictive cardiomyopathy", "Wild-type transthyretin"]
+      - ["AH", "Dialysis-related", "β2-microglobulin"]
+    blanks: [[0, 2], [1, 1], [1, 2], [3, 2], [4, 1], [4, 2]]
+    src: { page: 258, quote: "Classification of the main types of systemic amyloidosis" }
+    status: unverified
+    tags: [high-yield]
+    update:
+      text: "Current nomenclature calls immunoglobulin heavy-chain amyloid AH and dialysis-related β2-microglobulin amyloid Aβ2M; the book's p259 algorithm also uses AH for heavy chain."
+      ref: "International Society of Amyloidosis nomenclature 2022"
+  - id: neph.L08.145
+    kind: cloze
+    topic: amyloid
+    text: "Dialysis-related amyloid is made of {{c1::β2-microglobulin}}; senile restrictive cardiomyopathy amyloid is {{c2::wild-type transthyretin}}; AA amyloid comes from {{c3::serum amyloid A}} in chronic inflammation."
+    src: { page: 258, quote: "Senile restrictive Wild-type transthyretin cardiomyopathy AH Dialysis-related ß2-microglobulin" }
+    status: unverified
+  - id: neph.L08.146
+    kind: card
+    topic: amyloid
+    front: Case 8's bone marrow aspirate showed what, and what is the final clinico-pathological diagnosis?
+    back: B-cell non-Hodgkin lymphoma; monoclonal gammopathy in B-NHL (a well-known association), causing AL lambda amyloidosis.
+    src: { page: 259, quote: "The association of monoclonal gammopathy (MG) with B-cell non- Hodgkin's lymphomas (NHL) is a well known phenomenon." }
+    status: unverified
+  - id: neph.L08.147
+    kind: order
+    topic: amyloid
+    prompt: Order the algorithm for organized glomerular electron-dense deposits that turn out to be amyloid.
+    steps:
+      - Organized glomerular electron-dense deposits on EM
+      - Congo red stain positive = amyloid
+      - Immunofluorescence for light chains, heavy chains and AA protein
+      - "Type it: LC+ = AL, HC+ = AH, AA+ = AA (all 8–12 nm fibrils)"
+    src: { page: 259, quote: "Algorithm for evaluating patterned (organized) deposits in glomeruli." }
+    status: unverified
+  - id: neph.L08.148
+    kind: table
+    topic: amyloid
+    title: Organized glomerular electron-dense deposits on EM
+    columns: [Disease, Ig on IF, EM structure]
+    rows:
+      - ["Amyloid (AL, AH, AA)", "Congo red positive", "8–12 nm fibrils"]
+      - ["Fibrillary GN", "Positive", "15–30 nm fibrils"]
+      - ["Immunotactoid glomerulopathy", "Positive", "20–50 nm microtubules"]
+      - ["Cryoglobulinemia", "Positive", "25–35 nm microtubules"]
+      - ["Light and/or heavy chain deposition disease", "Positive", "Dense granules"]
+      - ["Fibronectin glomerulopathy", "Negative", "12–16 nm fibrils"]
+      - ["Collagenofibrotic glomerulopathy", "Negative", "Banded collagen fibers"]
+      - ["Chronic sclerosis", "Negative", "5–15 nm fibrils"]
+    blanks: [[0, 2], [1, 2], [2, 2], [3, 2], [4, 2], [6, 2]]
+    src: { page: 259, quote: "Algorithm for evaluating patterned (organized) deposits in glomeruli." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L08.149
+    kind: cloze
+    topic: amyloid
+    text: "Amyloid fibrils are {{c1::8–12 nm}}, randomly arranged and only slightly wider than actin; fibrillary GN fibrils are {{c2::15–30 nm}}; immunotactoid microtubules are {{c3::20–50 nm}} and partially parallel."
+    src: { page: 260, quote: "More organized, much larger, partially parallel microtubules of immunotactoid glomerulopathy" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L08.150
+    kind: card
+    topic: amyloid
+    front: How do amyloid fibrils look on EM compared with actin filaments?
+    back: Randomly arranged and only slightly wider than actin filaments.
+    src: { page: 259, quote: "Randomly arranged amyloid fibrils and only slightly wider than actin filaments" }
+    status: unverified
+  - id: neph.L08.151
+    kind: mcq
+    topic: amyloid
+    stem: EM of a nephrotic patient's biopsy shows randomly arranged fibrils of about 20 nm in the mesangium and GBM. Congo red is negative and IF shows IgG. Diagnosis?
+    options:
+      - Fibrillary GN
+      - AL amyloidosis
+      - Immunotactoid glomerulopathy
+      - Fibronectin glomerulopathy
+      - Light chain deposition disease
+    answer: 0
+    why:
+      - Correct. Congo red negative, Ig positive, 15–30 nm random fibrils = fibrillary GN.
+      - Amyloid is Congo red positive with 8–12 nm fibrils.
+      - Immunotactoid shows larger (20–50 nm) organized, partly parallel microtubules.
+      - Fibronectin glomerulopathy is Ig negative with 12–16 nm fibrils.
+      - Light chain deposition disease gives dense granules, not fibrils.
+    src: { page: 260, quote: "Randomly arranged fibrillary GN fibrils (much larger than actin filaments)" }
+    status: unverified
+  - id: neph.L08.152
+    kind: mcq
+    topic: amyloid
+    stem: A 70-year-old man with nephrotic syndrome has a renal biopsy whose Congo red stain is positive under polarized light. Which test types the amyloid next?
+    options:
+      - Immunofluorescence for light chains, heavy chains and AA protein
+      - Electron microscopy for fibril width
+      - Anti-PLA2R serology
+      - Repeat Congo red on another core
+      - Serum C3 and C4
+    answer: 0
+    why:
+      - Correct. After Congo red positivity, IF for LC, HC and AA protein separates AL, AH and AA.
+      - All three amyloid types are 8–12 nm fibrils, so EM cannot type them.
+      - Anti-PLA2R is for membranous nephropathy.
+      - The stain is already positive; typing is the next question.
+      - Complement levels do not type amyloid.
+    src: { page: 259, quote: "Immunofluorescence foe Light $ Immunofluorescence for Heavy Chains. & AA Protein" }
+    status: unverified
+  # ---------- p260-264: test yourself, integration ----------
+  - id: neph.L08.153
+    kind: card
+    topic: integration
+    front: How many cells per mesangial area define mesangial proliferation in the book's test-yourself section?
+    back: At least 4–5 cells per mesangial area.
+    src: { page: 261, quote: "Mesangial proliferation: At least 4 -5 cells per mesangial area" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L08.154
+    kind: mcq
+    topic: integration
+    stem: "A biopsy shows mesangial IgA deposits on IF and mesangial electron-dense deposits on EM, with no systemic vasculitis. Diagnosis?"
+    options:
+      - IgA nephropathy
+      - Henoch-Schönlein purpura nephritis
+      - Lupus nephritis class II
+      - C3 glomerulopathy
+      - Minimal change disease
+    answer: 0
+    why:
+      - Correct. IgA-dominant mesangial staining with mesangial dense deposits and no systemic vasculitis = IgA nephropathy.
+      - HSP nephritis has the same IF but with systemic vasculitis.
+      - Lupus shows variable IgG/IgM/IgA with C3 and C1q, and tubuloreticular inclusions.
+      - C3 glomerulopathy is C3 without immunoglobulin.
+      - MCD has no immune deposits.
+    src: { page: 260, quote: "A- Mesangial deposits of IgA." }
+    status: unverified
+  - id: neph.L08.155
+    kind: card
+    topic: integration
+    front: Mesangial C1q deposits on IF and "fingerprints" on EM point to which disease?
+    back: Lupus nephritis.
+    src: { page: 261, quote: "C- Finger prints. D- Subendothelial and subepithelial deposits." }
+    status: unverified
+  - id: neph.L08.156
+    kind: card
+    topic: integration
+    front: Segmental IgM deposits on IF with foot-process effacement on EM suggest what?
+    back: FSGS (IgM trapped in sclerotic segments, a podocytopathy).
+    src: { page: 260, quote: "B- Segmental deposits of IgM." }
+    status: unverified
+  - id: neph.L08.157
+    kind: card
+    topic: integration
+    front: What does the book's image of proliferative endocapillary GN show?
+    back: Diffuse endocapillary hypercellularity on H&E, with granular C3 on immunofluorescence.
+    src: { page: 261, quote: "Proliferative Endocapillary Glomerulonephritis H&E, X300" }
+    status: unverified
+  - id: neph.L08.158
+    kind: enumerate
+    topic: integration
+    prompt: Mention the stains the book uses to show membranoproliferative GN.
+    points:
+      - H&E
+      - Masson's trichrome
+      - PAS
+      - Methenamine-silver
+    pass: 3
+    src: { page: 262, quote: "Membranoproliferative Glomerulonephritis H&E, X400" }
+    status: unverified
+  # ---------- p264-266: case 9, cast nephropathy ----------
+  - id: neph.L08.159
+    kind: card
+    topic: cast
+    front: "Case 9: a 57-year-old woman with HTN, creatinine 3.5 then 12 mg/dL in 2 months with proteinuria 15.7 g/day; normal kidneys on U/S; immune markers negative. Biopsy: tubules with fractured, lamellated hyaline casts surrounded by a cellular reaction. Diagnosis?"
+    back: Acute tubular injury suggestive of cast nephropathy, plus FSGS NOS with 20% global sclerosis and 35% IFTA.
+    src: { page: 266, quote: "Acute Tubular Injury, Suggestive of a Cast Nephropathy. For Clinical and Serological Evaluation." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.160
+    kind: card
+    topic: cast
+    front: Which tubular cast features suggest a light chain cast nephropathy?
+    back: Hyaline casts that are fractured, lamellated and surrounded by a cellular reaction.
+    src: { page: 265, quote: "Tubules showed moderate injury with hyaline casts, some of them were fractured, lamellated and surrounded by a cellular reaction." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.161
+    kind: card
+    topic: cast
+    front: In case 9, what was given while the biopsy was delayed?
+    back: One HD session, then empirical pulse steroids for 5 days, then solupred and MMF; creatinine fell to 5.5 without further HD.
+    src: { page: 264, quote: "Biopsy was delayed due to difficultly accessed kidneys, and pulse steroids were started empirically for 5 d." }
+    status: unverified
+  - id: neph.L08.162
+    kind: mcq
+    topic: cast
+    stem: A renal biopsy for rapidly rising creatinine shows fractured, lamellated tubular casts with a giant-cell reaction; glomeruli have no immune deposits. The report says "for clinical and serological evaluation". Which test should come next?
+    options:
+      - Serum and urine protein electrophoresis with free light chains
+      - Anti-GBM antibodies
+      - Anti-PLA2R antibodies
+      - ADAMTS-13 activity
+      - Complement C3 and C4
+    answer: 0
+    why:
+      - Correct. Cast nephropathy is a light chain disease; look for the monoclonal protein.
+      - Anti-GBM disease is a crescentic GN with linear IgG, not a tubular cast lesion.
+      - Anti-PLA2R is for membranous nephropathy.
+      - ADAMTS-13 is for TTP.
+      - Complement studies help in immune-complex and C3 disease, not cast nephropathy.
+    src: { page: 266, quote: "Acute Tubular Injury, Suggestive of a Cast Nephropathy. For Clinical and Serological Evaluation." }
+    status: unverified
+  # ---------- p267-271: case 10, LCAT ----------
+  - id: neph.L08.163
+    kind: card
+    topic: lcat
+    front: "Case 10: a 29-year-old woman with nephrotic syndrome not responding to immunosuppression; TG 260, VLDL 52. Biopsy: subendothelial hyaline deposits, GBM duplication, mesangium expanded by large foamy histiocytes and intracapillary foam cells; IF non-specific. Spot diagnosis?"
+    back: Lecithin-cholesterol acyltransferase (LCAT) deficiency.
+    src: { page: 269, quote: "Picture is Compatible with Lecithin- Cholesterol Acyltransferase Deficiency." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.164
+    kind: card
+    topic: lcat
+    front: What does LCAT do?
+    back: It esterifies free cholesterol and helps transport cholesterol esters from peripheral tissues to the liver.
+    src: { page: 270, quote: "Lecithin-cholesterol acyltransferase (LCAT) is involved in the esterification of free cholesterol and in the cholesterol esters transport from peripheral tissues to the liver." }
+    status: unverified
+  - id: neph.L08.165
+    kind: table
+    topic: lcat
+    title: Genetic LCAT deficiency
+    columns: [Form, Enzyme loss, Lipid deposits]
+    rows:
+      - ["Fish eye disease", "Partial", "Corneal tissues only"]
+      - ["Familial LCAT deficiency", "Complete", "Multiple tissues (including kidney)"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2]]
+    src: { page: 270, quote: "Genetically dependent lack of enzyme activity leads to Fish Eye Disease (Partial) and to familial (Complete) LCAT deficiency." }
+    status: unverified
+  - id: neph.L08.166
+    kind: card
+    topic: lcat
+    front: What makes the definitive diagnosis of LCAT deficiency?
+    back: LCAT gene analysis for mutation and functional activity.
+    src: { page: 270, quote: "Definitive Dx requires LCAT gene analysis for mutation and functional activity." }
+    status: unverified
+  - id: neph.L08.167
+    kind: card
+    topic: lcat
+    front: Most frequent complication of familial LCAT deficiency, and when?
+    back: Proteinuria, in the fourth decade.
+    src: { page: 270, quote: "proteinuria The most frequent complication, occurring in the fourth decade." }
+    status: unverified
+  - id: neph.L08.168
+    kind: enumerate
+    topic: lcat
+    prompt: Mention investigations that help the diagnosis of LCAT deficiency.
+    points:
+      - "CBC: normochromic normocytic anemia"
+      - "Urinalysis: proteinuria in young adults"
+      - "Chemistry: high BUN and creatinine"
+      - "Lipids: low HDL, high VLDL and triglycerides"
+      - "High unesterified cholesterol, low cholesterol ester"
+    pass: 4
+    src: { page: 271, quote: "CBC: normochromic normocytic anemia. Urinalysis: proteinuria in young adults." }
+    status: unverified
+  - id: neph.L08.169
+    kind: enumerate
+    topic: lcat
+    prompt: What supported LCAT deficiency in case 10?
+    points:
+      - Fish-eye appearance (corneal opacity)
+      - Very low HDL (11 mg/dL) with high VLDL (52 mg/dL)
+      - Markedly low ApoA1 (52 mg/dL)
+    pass: 3
+    src: { page: 271, quote: "Patient had a fish eye appearance (corneal opacity). Her HDL level was very low 11 mg/dl, high VLDL 52 mg/dl." }
+    status: unverified
+  - id: neph.L08.170
+    kind: card
+    topic: lcat
+    front: Management decision in case 10 (LCAT deficiency)?
+    back: Withdraw immunosuppression and control BP with an ACE inhibitor; treatment is supportive, with kidney transplant if ESKD.
+    src: { page: 271, quote: "Withdraw immunosuppression and control BP using an ACEi." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.171
+    kind: card
+    topic: lcat
+    front: In whom should LCAT deficiency be in the differential of nephrotic syndrome?
+    back: In every person with nephrotic syndrome and a low HDL, although it is rare.
+    src: { page: 271, quote: "Although rare, LCAT deficiency should be included in the DD of NS for all persons with a low HDL." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.172
+    kind: mcq
+    topic: lcat
+    stem: A 29-year-old woman has nephrotic syndrome resistant to steroids and cyclosporine. She has corneal opacities, HDL 11 mg/dL and low ApoA1; the biopsy shows foam cells in the mesangium and capillaries. Best plan?
+    options:
+      - Stop immunosuppression, ACE inhibitor for BP, supportive care
+      - Add rituximab
+      - Pulse methylprednisolone
+      - Plasma exchange
+      - Switch to cyclophosphamide
+    answer: 0
+    why:
+      - Correct. LCAT deficiency is not immune; the book withdraws immunosuppression and controls BP with an ACEi; transplant if ESKD.
+      - Rituximab treats immune podocytopathies, not an enzyme deficiency.
+      - Steroids failed and do not fix a genetic enzyme loss.
+      - Plasma exchange is not part of the book's plan.
+      - Cyclophosphamide adds toxicity without benefit here.
+    src: { page: 271, quote: "Withdraw immunosuppression and control BP using an ACEi." }
+    status: unverified
+  # ---------- p272-277: case 11, Fabry ----------
+  - id: neph.L08.173
+    kind: card
+    topic: fabry
+    front: "Case 11: a 29-year-old man, creatinine 1.9, uPCR 2, immunology negative. Biopsy: 36 of 43 glomeruli sclerosed, podocytes with swollen pale lacy cytoplasm, distal tubules with vacuolated foamy cytoplasm; IF negative. Diagnosis?"
+    back: Advanced Fabry disease, with 80% global glomerulosclerosis and 35% IFTA.
+    src: { page: 274, quote: "Picture is Highly Suggestive of Advanced Fabry Disease, Global Glomerulosclerosis (80%), Moderate Interstitial Fibrosis and Tubular Atrophy (35%)." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.174
+    kind: card
+    topic: fabry
+    front: What is the key LM clue to Fabry disease in the podocytes?
+    back: Swollen, pale, lacy (vacuolated) podocyte cytoplasm, with foamy vacuolated distal tubular cells.
+    src: { page: 273, quote: "The overlying visceral podocytes showed a swollen pale lacy cytoplasm." }
+    status: unverified
+  - id: neph.L08.175
+    kind: card
+    topic: fabry
+    front: Define Fabry disease.
+    back: A rare X-linked lysosomal storage disorder with alpha-galactosidase A deficiency that lets globotriaosylceramide (Gb3) build up in the body.
+    src: { page: 275, quote: "Fabry disease is a rare genetic X-linked disease with a deficiency of the enzyme alpha-galactosidase A (a-Gal A)" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.176
+    kind: cloze
+    topic: fabry
+    text: "Fabry disease: deficient enzyme {{c1::alpha-galactosidase A}}; stored lipid {{c2::globotriaosylceramide (Gb3)}}; disease class {{c3::lysosomal storage disorder}}."
+    src: { page: 275, quote: "causes a buildup of a type of fat called globotriaosylceramide (Gb3, or GL-3) in the body." }
+    status: unverified
+  - id: neph.L08.177
+    kind: card
+    topic: fabry
+    front: How does Fabry disease pass from an affected father and from an affected mother?
+    back: An affected father passes it to all his daughters and none of his sons; an affected mother has a 50% chance of passing it to each child.
+    src: { page: 275, quote: "An affected father (XY) will pass the mutation to all of his daughters, but none of his sons." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.178
+    kind: card
+    topic: fabry
+    front: Two clinical forms of Fabry disease by onset?
+    back: Early onset (classic) and late onset.
+    src: { page: 275, quote: "Fabry disease L Early Late onset onset" }
+    status: unverified
+  - id: neph.L08.179
+    kind: enumerate
+    topic: fabry
+    prompt: Enumerate the characteristic features of Fabry disease.
+    points:
+      - Acroparesthesias
+      - Angiokeratomas
+      - Hypohidrosis
+      - Corneal opacity
+      - GIT problems
+      - Tinnitus and hearing loss
+      - Progressive kidney failure
+      - Heart attacks
+      - Stroke
+    pass: 6
+    src: { page: 277, quote: "Acroparesthesias Angiokeratomas Corneal opacity GIT problems" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.180
+    kind: enumerate
+    topic: fabry
+    prompt: Mention the renal manifestations of Fabry disease in the book's flow chart.
+    points:
+      - Mild proteinuria
+      - Hyperfiltration
+      - Isosthenuria
+      - End-stage renal disease
+    pass: 3
+    src: { page: 276, quote: "Mild proteinuria, Hypertrophic MRI white grey matter hyperfiltration, cardiomlopathy and and posterior circulation isosthenuria" }
+    status: unverified
+  - id: neph.L08.181
+    kind: card
+    topic: fabry
+    front: Cardiac and brain manifestations of Fabry disease?
+    back: "Heart: hypertrophic cardiomyopathy, systolic and diastolic dysfunction, arrhythmias. Brain: MRI white matter and posterior circulation lesions, TIA and strokes."
+    src: { page: 276, quote: "End-stage renal disease Systolic and diastolic dysfunction TIA and strokes Arrhythmias" }
+    status: unverified
+  - id: neph.L08.182
+    kind: cloze
+    topic: fabry
+    text: "Later-onset (type 2) Fabry is identified through the {{c1::IVS4}} mutation; only {{c2::2–3%}} show LVH at age ≤40, while after 40, {{c3::32% of females and 67% of males}} develop LVH."
+    src: { page: 277, quote: "Identify Type 2 later-onset FD through IVS4 mutation" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L08.183
+    kind: card
+    topic: fabry
+    front: How are adults with the IVS4 Fabry mutation monitored, and when is ERT started?
+    back: Strain echocardiography yearly and T1-mapping CMR every 2–3 years; cardiac biopsy if abnormal; start enzyme replacement if substantial Gb3 accumulation, before cardiac damage.
+    src: { page: 277, quote: "If substantial Gb3 accumulation found, start enzyme replacement therapy before significant cardiac manifestations occur" }
+    status: unverified
+  - id: neph.L08.184
+    kind: card
+    topic: fabry
+    front: Why screen newborns for Fabry disease?
+    back: For early detection of the future insidious and irreversible cardiac damage.
+    src: { page: 277, quote: "Newborn screening for Fabry Disease (FD) Provides early detection of the future insidious and irreversible cardiac damage" }
+    status: unverified
+  - id: neph.L08.185
+    kind: mcq
+    topic: fabry
+    stem: A 29-year-old man with burning pain in his hands since childhood, reduced sweating and proteinuria has a biopsy with foamy, lacy podocytes. His sister is well. Which statement about inheritance is right?
+    options:
+      - All his daughters will carry the mutation; none of his sons will
+      - Each of his children has a 50% risk
+      - Only his sons can be affected
+      - It is autosomal recessive, so his children are carriers only
+      - Women are never affected
+    answer: 0
+    why:
+      - Correct. It is X-linked, so an affected father passes his X to every daughter and his Y to every son.
+      - The 50% risk per child applies to an affected mother.
+      - Sons get his Y chromosome, not the mutant X.
+      - Fabry is X-linked, not autosomal recessive.
+      - Women are affected; after 40, 32% of females develop LVH.
+    src: { page: 275, quote: "An affected father (XY) will pass the mutation to all of his daughters, but none of his sons." }
+    status: unverified
+  # ---------- p277-287: cases 12-13, transplant ----------
+  - id: neph.L08.186
+    kind: enumerate
+    topic: transplant
+    prompt: What is the differential diagnosis of AKI in a kidney transplant patient?
+    points:
+      - Pre-renal
+      - ATN
+      - Acute interstitial nephritis
+      - CNI toxicity
+      - Infections
+      - Acute rejection
+      - Recurrence of native kidney disease
+      - Vascular thrombosis
+      - Urinary tract obstruction
+    pass: 7
+    src: { page: 278, quote: "D.D of AKI in Tx patients Pre-renal. ATN. Acute interstitial nephritis. CNI toxicity. Infections. Acute rejection." }
+    status: unverified
+    tags: [book-question, high-yield]
+  - id: neph.L08.187
+    kind: card
+    topic: transplant
+    front: "Case 12: a 36-year-old man, 3 years after a sister's kidney (5/6 match), on MMF, cyclosporine and prednisolone; creatinine rises from 1.4 to 2.4 after a sore throat. Trough cyclosporine 93, CMV PCR negative, Doppler normal. What was done?"
+    back: Pulse methylprednisolone 1 g/day for 3 days, urgent PRA and a graft biopsy.
+    src: { page: 279, quote: "Patient was admitted for Pulse Methyl Prednisolone 1 gm per day for 3 days" }
+    status: unverified
+  - id: neph.L08.188
+    kind: card
+    topic: transplant
+    front: "Case 12 biopsy: C4d 3 in peritubular capillaries, moderate tubulitis, interstitial plasmalymphocytic infiltrate, peritubular capillaritis. Diagnosis?"
+    back: Mixed rejection; active antibody-mediated rejection (C4d positive) and acute T-cell mediated rejection, Banff type IA.
+    src: { page: 281, quote: "Microvascular Inflammation Consistent with Active Antibody Mediated Rejection, C4d Positive and Acute T- Cell Mediated Rejection, Banff Type IA" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.189
+    kind: table
+    topic: transplant
+    title: Banff 2017 acute T cell-mediated rejection
+    columns: [Grade, Lesion]
+    rows:
+      - ["IA", "Interstitial inflammation >25% of nonsclerotic cortex (i2–i3) with moderate tubulitis (t2)"]
+      - ["IB", "Interstitial inflammation >25% (i2–i3) with severe tubulitis (t3)"]
+      - ["IIA", "Mild to moderate intimal arteritis (v1)"]
+      - ["IIB", "Severe intimal arteritis (v2)"]
+      - ["III", "Transmural arteritis and/or arterial fibrinoid necrosis (v3)"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 281, quote: "Interstitial inflammation involving >25% of nonsclerotic cortical parenchyma (i2 or i3) with moderate tubulitis (t2) involving | or more tubules," }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.190
+    kind: cloze
+    topic: transplant
+    text: "Acute TCMR grade I is defined by interstitial inflammation over {{c1::25%}} of nonsclerotic cortex with tubulitis: {{c2::moderate (t2)}} = IA, {{c3::severe (t3)}} = IB."
+    src: { page: 281, quote: "Interstitial inflammation involving >25% of nonsclerotic cortical parenchyma (i2 or i3) with severe tubulitis (t3) involving | or more tubules," }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L08.191
+    kind: card
+    topic: transplant
+    front: What defines chronic active TCMR grade II?
+    back: Chronic allograft arteriopathy; arterial intimal fibrosis with mononuclear inflammation in the fibrosis and neointima formation.
+    src: { page: 281, quote: "Chronic allograft arteriopathy (arterial intimal fibrosis with mononuclear cell inflammation in fibrosis and formation of neointima)." }
+    status: unverified
+  - id: neph.L08.192
+    kind: card
+    topic: transplant
+    front: What defines chronic active TCMR grade IA/IB?
+    back: Inflammation over 25% of total cortex (ti 2–3) and over 25% of sclerotic cortex (i-IFTA 2–3), with moderate (IA) or severe (IB) tubulitis, other causes of i-IFTA excluded.
+    src: { page: 281, quote: "Interstitial inflammation involving >25% of the total cortex (ti score 2 or 3) and >25% of the sclerotic cortical parenchyma (i-IFTA score 2 or 3)" }
+    status: unverified
+  - id: neph.L08.193
+    kind: essay
+    topic: transplant
+    prompt: State the Banff 2017 criteria for active antibody-mediated rejection.
+    outline:
+      - "1. Acute tissue injury (≥1)": ["Microvascular inflammation (g > 0 and/or ptc > 0) without GN", "Intimal or transmural arteritis (v > 0)", "Acute TMA or acute tubular injury without another cause"]
+      - "2. Antibody interaction with endothelium (≥1)": ["Linear C4d in peritubular capillaries", "At least moderate MVI (g + ptc ≥ 2)", "Validated ABMR gene transcripts"]
+      - "3. Donor-specific antibodies": ["DSA to HLA or other antigens; C4d or transcripts may substitute, but DSA testing is strongly advised"]
+    src: { page: 282, quote: "Active ABMR; all 3 criteria must be met for diagnosis" }
+    status: unverified
+    tags: [high-yield]
+    update:
+      text: "Banff 2022 adds 'probable ABMR' (DSA positive, C4d negative, minimal MVI) and 'MVI, DSA-negative and C4d-negative' as separate categories."
+      ref: "Banff 2022 Kidney Meeting Report, Am J Transplant 2024"
+  - id: neph.L08.194
+    kind: cloze
+    topic: transplant
+    text: "Active ABMR needs all {{c1::3}} criteria: acute tissue injury, evidence of antibody interaction with endothelium (e.g. linear {{c2::C4d}} in peritubular capillaries), and serologic {{c3::donor-specific antibodies}}."
+    src: { page: 282, quote: "Active ABMR; all 3 criteria must be met for diagnosis" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.195
+    kind: card
+    topic: transplant
+    front: For ABMR, which C4d result counts as positive by IF on frozen sections and by IHC on paraffin?
+    back: C4d2 or C4d3 by IF on frozen sections; C4d > 0 by IHC on paraffin sections.
+    src: { page: 282, quote: "Linear C4d staining in peritubular capillaries (C4d2 or C4d3 by IF on frozen sections, or C4d > 0 by IHC on paraffin sections)." }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L08.196
+    kind: card
+    topic: transplant
+    front: In the presence of acute TCMR, borderline infiltrate or infection, is peritubular capillaritis alone enough for ABMR microvascular inflammation?
+    back: No; ptc alone is not sufficient and glomerulitis (g) must be ≥ 1.
+    src: { page: 282, quote: "in the presence of acute TCMR, borderline infiltrate, or infection, ptc ≥ 1 alone is not sufficient and g must be ≥ 1." }
+    status: unverified
+  - id: neph.L08.197
+    kind: enumerate
+    topic: transplant
+    prompt: Mention the morphologic evidence of chronic tissue injury in chronic active ABMR.
+    points:
+      - Transplant glomerulopathy (cg > 0), including EM-only changes (cg1a)
+      - Severe peritubular capillary basement membrane multilayering (needs EM)
+      - New-onset arterial intimal fibrosis, other causes excluded
+    pass: 3
+    src: { page: 283, quote: "Transplant glomerulopathy (cg >0) if no evidence of chronic TMA or chronic recurrent/de novo glomerulonephritis;" }
+    status: unverified
+  - id: neph.L08.198
+    kind: enumerate
+    topic: transplant
+    prompt: Which four features must all be present for "C4d staining without evidence of rejection"?
+    points:
+      - Linear C4d in peritubular capillaries
+      - Criterion 1 (tissue injury) for active or chronic active ABMR not met
+      - No molecular evidence of ABMR
+      - No acute or chronic active TCMR or borderline changes
+    pass: 4
+    src: { page: 283, quote: "C4d Staining without Evidence of Rejection; all 4 features must be present for diagnosis" }
+    status: unverified
+  - id: neph.L08.199
+    kind: card
+    topic: transplant
+    front: "Case 13: a 16-year-old boy with ESRD from lupus nephritis, living related transplant from his father (4/6). Early CMV infection treated with ganciclovir then valganciclovir; later vomiting, diarrhea and creatinine 1.9 → 4.3. Which tests were done next?"
+    back: Post-transplant cross-match (negative), repeat CMV PCR (negative) and BK virus (negative); then pulse steroids and graft biopsy.
+    src: { page: 284, quote: "Post-Tx cross matching was done and was found to be negative. PCR for CMV was repeated and was found to be negative." }
+    status: unverified
+  - id: neph.L08.200
+    kind: card
+    topic: transplant
+    front: In case 13, which immunosuppression change was made with the pulse steroids?
+    back: Everolimus (Certican) was replaced with tacrolimus (Prograf) and MMF was re-introduced.
+    src: { page: 284, quote: "Certican was replaced with Prograf and MMF was re-introduced." }
+    status: unverified
+  - id: neph.L08.201
+    kind: card
+    topic: transplant
+    front: Was case 13's biopsy adequate for Banff scoring, and what were the scores?
+    back: Adequate (39 glomeruli, 2 arteries); acute score 5 (t2, i1, v0, g2, ptc2), chronic score 0.
+    src: { page: 287, quote: "Adequate sample for scoring ( 39 glomeruli, 2 arteries)." }
+    status: unverified
+  - id: neph.L08.202
+    kind: card
+    topic: transplant
+    front: "Case 13 final diagnosis (glomerulitis, fibrin thrombi, red cell fragmentation, peritubular capillaritis, C4d 0)?"
+    back: TMA with microvascular inflammation compatible with acute/active ABMR, C4d negative (check DSA), plus acute TCMR, Banff borderline.
+    src: { page: 287, quote: "Thrombotic Microangiopathy with Microvascular Inflammation Compatible with Acute/Active Antibody Mediated Rejection, C4d Negative For DSA Levels." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.203
+    kind: mcq
+    topic: transplant
+    stem: A kidney transplant biopsy shows glomerulitis (g2) and peritubular capillaritis (ptc2), C4d negative, with no glomerulonephritis. Which statement fits the Banff 2017 rules?
+    options:
+      - g + ptc ≥ 2 can satisfy criterion 2 without C4d; check donor-specific antibodies
+      - ABMR is excluded because C4d is negative
+      - This is TCMR grade IA
+      - This is C4d staining without evidence of rejection
+      - Chronic active ABMR is proven
+    answer: 0
+    why:
+      - Correct. At least moderate MVI (g + ptc ≥ 2) is an alternative to C4d for criterion 2; DSA is needed for criterion 3.
+      - C4d is only one of the options for criterion 2.
+      - TCMR IA is graded on interstitial inflammation and tubulitis, not capillaritis.
+      - That category needs positive C4d with no tissue injury.
+      - Chronic active ABMR needs chronic injury (e.g. transplant glomerulopathy).
+    src: { page: 282, quote: "At least moderate microvascular inflammation ([g + ptc] ≥2) in the absence of recurrent or de novo glomerulonephritis," }
+    status: unverified
+  # ---------- p287-291: case 14, ANCA on MPGN ----------
+  - id: neph.L08.204
+    kind: card
+    topic: anca-mpgn
+    front: "Case 14: a 78-year-old hypertensive man with years of proteinuria and microscopic hematuria now has creatinine 1.4 → 8.1 in 2 months, albumin 1.5, MPO-ANCA 536 EU, mild interstitial pneumonia. Biopsy: crescents in 6 of 9 glomeruli, thickened capillary walls, IgG, IgM and C3 granular deposits. Diagnosis?"
+    back: ANCA-associated crescentic GN superimposed on type 3 MPGN.
+    src: { page: 290, quote: "ANCA-associated CGN superimposed on type 3 membrano-proliferative glomerulonephritis (MPGN)." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.205
+    kind: card
+    topic: anca-mpgn
+    front: In case 14, how did EM separate the MPGN from dense deposit disease?
+    back: Large intra- and trans-membranous deposits with GBM reticulation, not concentrated in the lamina densa as in DDD.
+    src: { page: 289, quote: "The deposits were not concentrated in the lamina densa, as was observed in dense-deposit disease." }
+    status: unverified
+  - id: neph.L08.206
+    kind: card
+    topic: anca-mpgn
+    front: What does the GBM look like on silver stain and EM in type 3 MPGN (case 14)?
+    back: Numerous spikes and reticulation; a disrupted, reticulated and woven GBM.
+    src: { page: 291, quote: "Glomerular basement membrane shows a disrupted, reticulated and woven appearance (original magnification, ×1,500)." }
+    status: unverified
+  - id: neph.L08.207
+    kind: table
+    topic: anca-mpgn
+    title: Integrating immunohistology with EM in glomerular disease
+    columns: [Immunohistology, EM or clinical clue, Diagnosis]
+    rows:
+      - ["Linear GBM staining", "With lung hemorrhage", "Goodpasture syndrome"]
+      - ["Paucity of staining (ANCA)", "Granulomas, no asthma", "Wegener's granulomatosis"]
+      - ["Paucity of staining (ANCA)", "Eosinophilia, asthma, granulomas", "Churg-Strauss syndrome"]
+      - ["IgA-dominant mesangial", "Systemic vasculitis", "HSP nephritis"]
+      - ["Variable IgG/IgM/IgA and C3/C1q", "Tubuloreticular inclusions", "Lupus nephritis"]
+      - ["Coarsely granular capillary C3 ± Ig", "Subepithelial humps", "Acute post-infectious GN"]
+      - ["Peripheral granular C3 ± IgG/IgM", "Subendothelial deposits, mesangial interposition", "Type I MPGN"]
+      - ["Capillary band-like and mesangial spherical C3", "Intra-GBM dense deposits", "Type II MPGN"]
+      - ["Granular capillary wall IgG", "Numerous subepithelial deposits", "Membranous GN"]
+      - ["Band-like IgG and C3", "~20 nm fibrils", "Fibrillary GN"]
+      - ["Confluent capillary and mesangial IgG and C3", ">30 nm microtubules", "Immunotactoid GN"]
+    blanks: [[0, 2], [1, 2], [2, 2], [4, 1], [5, 1], [6, 1], [7, 1], [9, 1]]
+    src: { page: 291, quote: "Algorithm for integrating IM and EM findings when diagnosing some of the pathologic expressions of glomerular disease." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L08.208
+    kind: mcq
+    topic: anca-mpgn
+    stem: A crescentic GN biopsy shows paucity of immunohistology staining for immunoglobulins and complement, with few or no deposits on EM. The patient has vasculitis with granulomas but no asthma. Diagnosis by the book's algorithm?
+    options:
+      - Wegener's granulomatosis
+      - Microscopic polyangiitis
+      - Churg-Strauss syndrome
+      - Goodpasture syndrome
+      - Renal-limited pauci-immune GN
+    answer: 0
+    why:
+      - Correct. Pauci-immune with granulomas and no asthma = Wegener's granulomatosis (GPA).
+      - Microscopic polyangiitis has vasculitis with no asthma and no granulomas.
+      - Churg-Strauss has eosinophilia, asthma and granulomas.
+      - Goodpasture has linear GBM IgG with lung hemorrhage.
+      - Pauci-immune GN without systemic vasculitis is renal-limited.
+    src: { page: 291, quote: "Immunohistology for Immunoglobulins and Complement" }
+    status: unverified
+  # ---------- whole-lecture cases ----------
+  - id: neph.L08.209
+    kind: case
+    topic: mcd
+    stem: A 28-year-old woman develops hard leg edema and abdominal distension 40 days after delivering twins.
+    steps:
+      - reveal: "Creatinine 0.6, uPCR 13.4 mg/mg, albumin 2.4, cholesterol 389, C3 179, ANA and virology negative."
+        question: What is the clinical diagnosis?
+        options: [Nephrotic syndrome, Nephritic syndrome, RPGN, Isolated proteinuria]
+        answer: 0
+        why: "Heavy proteinuria (>4 g = always glomerular), low albumin, edema and hyperlipidemia with normal creatinine and no active features = nephrotic syndrome (p221–223)."
+      - reveal: "LM: 9 normal glomeruli. IHC: IgA, IgG, IgM and C4d negative."
+        question: Which test decides the diagnosis now?
+        options: [Electron microscopy, Repeat light microscopy, Congo red, Anti-PLA2R in tissue]
+        answer: 0
+        why: "With normal LM and negative immunostains, only EM can show podocyte foot-process effacement (p223–224)."
+      - reveal: "EM: diffuse foot-process effacement with microvillous transformation, no immune-type deposits."
+        question: Diagnosis?
+        options: [Minimal change disease, FSGS, Membranous nephropathy, Thin basement membrane disease]
+        answer: 0
+        why: "Normal LM + negative IF + diffuse effacement = minimal change disease (p225). The short segments of GBM thinning had no characteristic changes."
+      - question: Which category has the most reported associations with secondary MCD?
+        options: [Drugs, Infections, Atopy, Superimposed renal disease]
+        answer: 0
+        why: "Drugs 24, neoplasia 19, miscellaneous 15, infections 7, atopy 6, superimposed renal disease 5 (p226)."
+    src: { page: 225, quote: "What is your diagnosis? Minimal change disease" }
+    status: unverified
+  - id: neph.L08.210
+    kind: case
+    topic: lupus
+    stem: A 14-year-old girl who takes NSAIDs for knee pain presents with fatigue, vomiting and pallor. Hb 5.8, WBC 2.6, platelets 253, creatinine 7.3.
+    steps:
+      - reveal: "ANA 7.9, anti-dsDNA 321, urine protein 2+ with 80 RBCs, uPCR 6.7, ESR 140."
+        question: Most likely diagnosis?
+        options: [SLE with lupus nephritis, NSAID interstitial nephritis only, IgA nephropathy, Post-streptococcal GN]
+        answer: 0
+        why: "High anti-dsDNA, leucopenia, anaemia, active sediment and heavy proteinuria = SLE with nephritis (p227). NSAIDs may add tubular injury but don't explain the serology."
+      - question: Should she have a renal biopsy?
+        options: ["Yes; the class guides treatment and shows activity and chronicity", "No; serology is enough", "Only if creatinine keeps rising", "No; start dialysis instead"]
+        answer: 0
+        why: "The book asks the question, then the biopsy gives the ISN/RPS class with activity and chronicity and found an extra toxic tubular injury (p227–230)."
+      - reveal: "Biopsy: 6 of 21 glomeruli with segmental subendothelial deposits and intracapillary leucocytes; fibrinoid necrosis in 2; small crescents in 6."
+        question: ISN/RPS class?
+        options: [Class III, Class IV-S, Class II, Class V]
+        answer: 0
+        why: "Endocapillary lesions with subendothelial deposits in fewer than 50% of glomeruli = class III, focal (p228, p230)."
+    src: { page: 230, quote: "Lupus Glomerulonephritis Class III, with Moderate Activity (10% Fibrinoid Necrosis, 30% Crescents) and Early Chronicity (5% Global Sclerosis)." }
+    status: unverified
+  - id: neph.L08.211
+    kind: case
+    topic: fsgs
+    stem: A 52-year-old woman with no past history has proteinuria. uPCR 1.13 mg/mg, albumin 3.6, creatinine 0.56.
+    steps:
+      - reveal: "Biopsy: 2 of 16 glomeruli with segmental tuft sclerosis and capsular adhesions anywhere in the tuft; IgA, IgG, IgM and C3 negative; Congo red negative."
+        question: Diagnosis?
+        options: [FSGS NOS (classic), FSGS tip variant, Minimal change disease, Membranous GN]
+        answer: 0
+        why: "Segmental sclerosis placed randomly in the tuft, not at the vascular or tubular pole and not collapsing = FSGS NOS (p241–242)."
+      - question: What does every FSGS patient get first?
+        options: ["RAS blockade ± diuretics ± statin", Prednisone 1 mg/kg/day, Cyclosporine, Rituximab]
+        answer: 0
+        why: "All patients get RAS blockade; steroids are for primary FSGS (p243)."
+      - reveal: "Work-up for secondary causes is negative and she becomes nephrotic."
+        question: Primary FSGS treatment?
+        options: ["Prednisone 1 mg/kg/day for 4–8 (up to 16) weeks, taper over 3 months", "Prednisone 0.5 mg/kg for 2 weeks", "Cyclophosphamide 6 months", "No treatment"]
+        answer: 0
+        why: "Full-dose corticosteroids: 1 mg/kg/day for 4–8 weeks, up to 16 if proteinuria is falling, then taper over 3 months (p243)."
+    src: { page: 241, quote: "FSGS; Not Otherwise Specified (NOS; Classic Variant)" }
+    status: unverified
+  - id: neph.L08.212
+    kind: case
+    topic: amyloid
+    stem: A 75-year-old male ex-smoker has leg edema and moderate ascites. Creatinine 1.1, uACR 5517 mg/g, albumin 1.8, HbA1c 5.3.
+    steps:
+      - reveal: "ANA, viral markers, cryoglobulins and tumour markers negative. LDH 459. Echo: grade II LV diastolic dysfunction."
+        question: Next step?
+        options: [Serum protein electrophoresis, Anti-PLA2R, Start steroids, Colonoscopy]
+        answer: 0
+        why: "An old patient with nephrotic syndrome, no diabetes and a stiff heart raises monoclonal disease; SPEP showed an M-band (p256)."
+      - reveal: "Biopsy: mesangial homogeneous pink deposits with weak PAS reactivity; Congo red positive under polarized light."
+        question: Which test types it?
+        options: ["Immunophenotyping for AA and light chains", Electron microscopy fibril size, Repeat Congo red, Kidney ultrasound]
+        answer: 0
+        why: "AA negative and lambda 4+ = AL lambda amyloidosis (p256–258). All amyloid types share 8–12 nm fibrils on EM."
+      - question: What will the bone marrow most likely show?
+        options: [B-cell non-Hodgkin lymphoma, Normal marrow, Acute myeloid leukaemia, Iron deficiency]
+        answer: 0
+        why: "Monoclonal gammopathy with B-cell NHL is a well-known association (p259)."
+    src: { page: 258, quote: "Light Chain Renal / Amyloidosis; AL- Lambda Type." }
+    status: unverified
+  - id: neph.L08.213
+    kind: case
+    topic: transplant
+    stem: A 36-year-old man is 3 years past a kidney transplant from his sister (5/6 match) on MMF, cyclosporine and prednisolone 5 mg. Creatinine rises from 1.4 to 2.4 after a sore throat treated with azithromycin.
+    steps:
+      - question: Which item is NOT in the book's differential of AKI in a transplant patient?
+        options: [Minimal change disease of the native kidneys, CNI toxicity, Acute rejection, Urinary tract obstruction]
+        answer: 0
+        why: "The list: pre-renal, ATN, AIN, CNI toxicity, infections, acute rejection, recurrence, vascular thrombosis, obstruction (p278). Native kidney disease matters only if it recurs in the graft."
+      - reveal: "Cyclosporine trough 93, CMV PCR negative, Doppler normal (RI 0.64–0.69)."
+        question: Next step?
+        options: ["Pulse methylprednisolone, urgent PRA and graft biopsy", Stop cyclosporine, Ganciclovir, Observe]
+        answer: 0
+        why: "The team gave methylprednisolone 1 g/day for 3 days, ordered PRA and biopsied (p279)."
+      - reveal: "Biopsy: C4d 3 in peritubular capillaries, peritubular capillaritis, interstitial infiltrate with moderate tubulitis."
+        question: Diagnosis?
+        options: ["Mixed active ABMR (C4d+) and acute TCMR Banff IA", "Pure TCMR IIA", "CNI toxicity", "BK nephropathy"]
+        answer: 0
+        why: "Capillaritis + C4d = active ABMR; interstitial inflammation with moderate tubulitis = TCMR IA (p281)."
+    src: { page: 281, quote: "Mixed Acute/Active Cellular Rejection: Microvascular Inflammation Consistent with Active Antibody Mediated Rejection, C4d Positive" }
+    status: unverified

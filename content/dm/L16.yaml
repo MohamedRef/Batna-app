@@ -1,0 +1,589 @@
+schema: batna.content/v1
+lecture: dm.L16
+title: "Diabetic Emergencies: Case Reports"
+author: Prof. Yehia Ghanem
+book: { chapter: 6, pages: [196, 213] }
+topics:
+  - { id: eudka, title: "Case 1: euglycemic DKA and its causes" }
+  - { id: excipients, title: "Case 2: DKA from sugar in syrup excipients" }
+  - { id: child-hhs, title: "Case 3: HHS in a child" }
+  - { id: hypokalemia, title: "Case 4: DKA with severe hypokalemic paralysis" }
+  - { id: pregnancy, title: "Cases 5-7: new T1DM, early GDM and starvation ketoacidosis in pregnancy" }
+items:
+  # ---------- Case 1, p196-200: euglycemic DKA ----------
+  - id: dm.L16.001
+    kind: case
+    topic: eudka
+    stem: A 34-year-old man with T1DM for 19 years has 4 days of nausea, vomiting and flu-like symptoms. He takes lispro 8 units with meals and raised his bedtime NPH from 12 to 15 units, without checking glucose.
+    steps:
+      - reveal: "HR 106, RR 30, dry mucosa, BMI 19. Glucose 105 mg/dL, pH 7.3, HCO3 10 mEq/L, anion gap 29, Na 134, K 5.7, Cl 101; urine ketones 4+, no glucosuria. Lactate 1.1; salicylate, alcohol and methanol undetectable."
+        question: Diagnosis?
+        options: [Euglycemic DKA, Lactic acidosis, Starvation ketosis without acidosis, Salicylate poisoning]
+        answer: 0
+        why: High-anion-gap ketoacidosis with near-normal glucose in T1DM; lactate and toxins are normal.
+      - question: Which treatment did he receive?
+        options: ["0.9% saline, 10% dextrose and IV insulin", Insulin withheld because glucose is normal, Bicarbonate alone, Oral fluids only]
+        answer: 0
+        why: Dextrose lets insulin continue to clear the ketones without hypoglycemia.
+      - reveal: His HbA1c was 11.5%. He showed anhedonia, no interest in food or his diabetes, and had barely eaten for 2-3 weeks.
+        question: What was the underlying cause?
+        options: [Severe depression with prolonged poor intake, Insulin overdose, SGLT2 inhibitor use, Pancreatitis]
+        answer: 0
+        why: Psychiatrists diagnosed severe depression; prolonged fasting caused the euglycemic picture.
+    src: { page: 198, quote: "He was treated with 0.9% saline rehydration, 10% dextrose, & intravenous insulin" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L16.002
+    kind: card
+    topic: eudka
+    front: Why can a patient who keeps taking insulin but stops eating develop DKA with normal glucose?
+    back: Insulin keeps glucose near normal but cannot stop ketone formation; fasting depletes glycogen, speeds lipolysis and FFA production, and insulin suppresses lipolysis and ketogenesis less well during a fast.
+    src: { page: 198, quote: "patients with DM who continue taking sufficient amounts of insulin may maintain euglycemia, but are unable to stop the ketone body formation" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L16.003
+    kind: card
+    topic: eudka
+    front: How does prolonged fasting keep glucose normal while acidosis develops?
+    back: Near-total glycogen depletion.
+    src: { page: 198, quote: "In cases of prolonged fasting, near-total glycogen depletion contributes to the normoglycemia as metabolic acidosis continues to develop." }
+    status: unverified
+  - id: dm.L16.004
+    kind: card
+    topic: eudka
+    front: Why is reduced caloric intake so often linked to DKA?
+    back: Nausea or vomiting from the precipitating illness, or from worsening ketoacidosis itself, cuts intake.
+    src: { page: 198, quote: "A decrease in caloric intake is frequently associated with the development of DKA, usually due to nausea or vomiting" }
+    status: unverified
+  - id: dm.L16.005
+    kind: table
+    topic: eudka
+    title: Causes of euglycemic ketoacidosis (Case 1 discussion)
+    columns: [Mechanism, Causes]
+    rows:
+      - ["Decreased circulating glucose", "Starvation; vomiting (ketoacidosis, gastroparesis); intentional dieting; depression and anhedonia; pregnancy; glycogen storage disorders; cirrhosis"]
+      - ["H+ excess, endogenous", "Lactic acidosis; pancreatitis; sepsis; renal tubular acidosis"]
+      - ["H+ excess, exogenous", "Salicylate overdose; methanol ingestion"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 199, quote: "Causes of Euglycemic Ketoacidosis" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L16.006
+    kind: enumerate
+    topic: eudka
+    prompt: Enumerate the causes of euglycemic ketoacidosis due to decreased circulating glucose.
+    points:
+      - Starvation
+      - Vomiting (ketoacidosis, gastroparesis)
+      - Intentional dieting
+      - Depression and anhedonia
+      - Pregnancy
+      - Glycogen storage disorders
+      - Cirrhosis
+    pass: 5
+    src: { page: 199, quote: "As a result of decreased circulating glucose concentration" }
+    status: unverified
+  - id: dm.L16.007
+    kind: enumerate
+    topic: eudka
+    prompt: Give the differential diagnosis of acidosis in a patient with diabetes, other than DKA.
+    points:
+      - Prolonged starvation
+      - Excess alcohol
+      - Salicylate overdose
+      - Lactic acidosis
+      - Tricyclic antidepressant overdose
+      - Renal tubular acidosis
+    pass: 5
+    src: { page: 199, quote: "Differential diagnoses include: prolonged starvation, excess alcohol consumption, salicylate overdose, lactic acidosis, tricyclic antidepressant overdose, & renal tubular acidosis." }
+    status: unverified
+  - id: dm.L16.008
+    kind: card
+    topic: eudka
+    front: A patient with T1DM has nausea and vomiting but a normal glucose. What must still be done?
+    back: Assess acid-base status; life-threatening ketoacidosis may still be present.
+    src: { page: 200, quote: "Patients with T1DM presenting with nausea & vomiting & found to have a normal glucose may still have life-threatening ketoacidosis" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L16.009
+    kind: mcq
+    topic: eudka
+    stem: "In Case 1 (T1DM, vomiting, glucose 105, pH 7.3, HCO3 10, Na 134, K 5.7, Cl 101), the anion gap is reported as 29. How is that figure obtained?"
+    options: ["Na + K − (Cl + HCO3) = 134 + 5.7 − 111 ≈ 29", "Na − (Cl + HCO3) = 134 − 111 = 23", "Na − Cl = 33", "Cl − HCO3 = 91", "2 × Na + glucose/18 = 274"]
+    answer: 0
+    why:
+      - Including potassium gives 28.7, about 29, as the book reports.
+      - Without potassium the gap is 23; still high, but not the book's figure.
+      - That ignores bicarbonate.
+      - That is not an anion gap.
+      - That is the effective osmolality.
+    src: { page: 197, quote: "Anion gap = 29 mEq/l" }
+    status: unverified
+  - id: dm.L16.010
+    kind: mcq
+    topic: eudka
+    stem: A 25-year-old with T1DM has had gastroenteritis for 3 days and kept taking full basal insulin while barely eating. Glucose is 140 mg/dL, urine ketones 3+. What is the best next step?
+    options: [Blood gas and ketones to assess acid-base status, Reassure; glucose is normal, Stop insulin, Give glucagon, Repeat glucose in 24 h]
+    answer: 0
+    why:
+      - A normal glucose does not exclude life-threatening ketoacidosis; acid-base status is still indicated.
+      - Euglycemic DKA is exactly this picture.
+      - Stopping insulin worsens ketogenesis.
+      - Glucagon raises glucose and does not address ketoacidosis.
+      - Delay risks missing a dangerous acidosis.
+    src: { page: 200, quote: "an assessment of their acid/base status is still indicated." }
+    status: unverified
+  # ---------- Case 2, p200-202: excipients ----------
+  - id: dm.L16.011
+    kind: case
+    topic: excipients
+    stem: A 6-year-old boy with T1DM gets a cold with mild fever. A GP diagnoses acute sinusitis and prescribes paracetamol, chlorpheniramine and amoxicillin/clavulanate syrups at usual doses.
+    steps:
+      - reveal: "Day 3: nausea, vomiting, weak rapid pulse, deep sighing breaths, drowsiness, unsteady gait. Glucose 440 mg/dL, pH 7.12, HCO3 12.6, urine ketones positive, WBC 15,200."
+        question: Diagnosis?
+        options: [DKA, HHS, Hypoglycemia, Meningitis]
+        answer: 0
+        why: Hyperglycemia, ketonuria and acidosis with Kussmaul breathing.
+      - question: What does the lecture blame for his DKA?
+        options: ["About 90 g/day of sucrose in the syrup bases of all three drugs", Chlorpheniramine toxicity, Amoxicillin allergy, Paracetamol hepatotoxicity]
+        answer: 0
+        why: The high sugar base in all three syrups went unnoticed by the prescriber and pharmacist.
+      - question: Which other precipitant cannot be ruled out?
+        options: [The acute infective sinusitis itself, Insulin overdose, Dehydration from diuretics, SGLT2 inhibitors]
+        answer: 0
+        why: Infection is itself a DKA precipitant.
+    src: { page: 201, quote: "High sugar base in all 3 formulations went unnoticed by the practitioner & the dispensing pharmacist." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L16.012
+    kind: cloze
+    topic: excipients
+    text: In Case 2 the three syrups together gave about {{c1::90 g/day}} of sucrose, which raised the child's glucose into {{c2::DKA}}.
+    src: { page: 201, quote: "Total sucrose content (including relative sugars) of ~90 g/day in the form of syrup base." }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L16.013
+    kind: card
+    topic: excipients
+    front: What are excipients?
+    back: The therapeutically inactive ingredients of a medicine, which turn an active compound into a usable pharmaceutical product.
+    src: { page: 201, quote: "Therapeutically inactive ingredients of a medicine are known as excipients." }
+    status: unverified
+  - id: dm.L16.014
+    kind: card
+    topic: excipients
+    front: Name functional classes of excipients.
+    back: Binders, diluents, disintegrants, lubricants, wetting agents, solvents, fillers, emulsifiers, absorption enhancers, sustained-release matrices, preservatives, sweeteners, and stabilizing, coloring or flavoring agents.
+    src: { page: 201, quote: "such as binders, diluents, disintegrants, lubricants, wetting agents, solvents, fillers, emulsifiers, absorption enhancers, sustained release matrices, preservatives, sweeteners" }
+    status: unverified
+  - id: dm.L16.015
+    kind: card
+    topic: excipients
+    front: What lesson does Case 2 teach about prescribing for patients with diabetes?
+    back: Excipients are assumed inactive and safe, but that is not always correct; take a proper history and check the formulation's active and inactive ingredients (such as sugar in syrups).
+    src: { page: 202, quote: "It becomes crucial while dealing with a patient/guardian to collect a proper patient history for choosing the appropriate drug" }
+    status: unverified
+  # ---------- Case 3, p202-205: HHS in a child ----------
+  - id: dm.L16.016
+    kind: case
+    topic: child-hhs
+    stem: A 7-year-old boy has a week of polyuria, polydipsia, weight loss, nocturnal enuresis and reduced activity, 4 weeks after a viral infection. No family history of diabetes.
+    steps:
+      - reveal: "GCS 13/15, HR 150, RR 30, BP 105/85, severely dehydrated, BMI 10, no acanthosis nigricans. Glucose 954 mg/dL, corrected Na 152, K 4.2, BUN 62, creatinine 2.3, osmolality 412 mOsm/kg, pH 7.21, HCO3 19.8; urine glucose 3+, no ketones."
+        question: Diagnosis?
+        options: [Hyperglycemic hyperosmolar syndrome, Severe DKA, Diabetes insipidus, Acute kidney injury only]
+        answer: 0
+        why: Glucose >600, osmolality 412 and no ketones with only mild acidosis.
+      - question: Which insulin infusion rate does the lecture recommend in pediatric HHS?
+        options: [0.1 units/kg/h, 0.05 units/kg/h, 1 unit/kg/h, No insulin]
+        answer: 0
+        why: Management of pediatric HHS is the same as DKA, with 0.1 units/kg/h.
+      - question: Which fluids?
+        options: ["0.9% saline first, then 0.45-0.75% saline", 5% dextrose first, Hypertonic saline, Oral fluids only]
+        answer: 0
+        why: Isotonic saline (hypotonic for these patients) first, then 0.45-0.75% saline.
+      - question: When is dextrose added?
+        options: [When glucose drops to 300 mg/dL, From the start, When glucose is 100 mg/dL, Never]
+        answer: 0
+        why: At 300 mg/dL, to avoid an overly precipitous fall in glucose.
+    src: { page: 205, quote: "Management of HHS in pediatrics is the same for DKA; exogenous insulin infusion at a rate of 0.1 U/kg/h is recommended." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L16.017
+    kind: cloze
+    topic: child-hhs
+    text: "Case 3 discussion: HHS is characterized by glucose >{{c1::600}} mg/dL, osmolality >{{c2::330}} mOsm/L and a mild metabolic acidosis (pH >{{c3::7.2}})."
+    src: { page: 203, quote: "HHS is characterized by hyperglycemia more than 600 mg/dL, hyperosmolality more than 330 mOsm/L, & a mild metabolic acidosis (pH>7.2)." }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L16.018
+    kind: cloze
+    topic: child-hhs
+    text: In children, DKA mortality is below {{c1::1%}}, but reported HHS mortality is about {{c2::10-35%}}.
+    src: { page: 204, quote: "Recent reports suggest high mortality rates in children with HHS (~10-35%)." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L16.019
+    kind: card
+    topic: child-hhs
+    front: What are the most serious complications of both HHS and DKA?
+    back: Cerebral edema and ARDS.
+    src: { page: 204, quote: "The most serious complications of both HHS & DKA are cerebral edema & ARDS." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L16.020
+    kind: card
+    topic: child-hhs
+    front: What features do most children with HHS share?
+    back: Obese African-American boys with a family history of T2DM and acanthosis nigricans; most are later diagnosed with T2DM.
+    src: { page: 204, quote: "Children with HHS share common features; the majority of children are obese males of African-American ethnicity." }
+    status: unverified
+  - id: dm.L16.021
+    kind: card
+    topic: child-hhs
+    front: Why are pediatric HHS reports increasing?
+    back: The rising prevalence of obesity and T2DM in children. HHS can still occur in T1DM, with the same pathophysiology.
+    src: { page: 204, quote: "may be due to the rising prevalence of obesity & T2DM in children." }
+    status: unverified
+  - id: dm.L16.022
+    kind: enumerate
+    topic: child-hhs
+    prompt: Enumerate the precipitating factors for HHS listed in Case 3.
+    points:
+      - "Infections: gram-negative pneumonia, UTI, sepsis"
+      - Medications
+      - Poor compliance
+      - Undiagnosed diabetes
+      - Substance abuse
+      - Coexisting diseases
+    pass: 4
+    src: { page: 204, quote: "Infections (pneumonia caused by gram-negative bacteria, UTI & sepsis), medications, poor compliance, undiagnosed DM, substance abuse" }
+    status: unverified
+  - id: dm.L16.023
+    kind: card
+    topic: child-hhs
+    front: Why is there no ketoacidosis in HHS?
+    back: Insulin action is too little for glucose use by insulin-sensitive tissues but enough to prevent lipolysis and ketogenesis.
+    src: { page: 204, quote: "insulin action may be inadequate to facilitate glucose utilization by insulin-sensitive tissues but sufficient for the prevention of lipolysis & ketogenesis" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L16.024
+    kind: card
+    topic: child-hhs
+    front: Why do patients with HHS have profound dehydration and electrolyte loss?
+    back: Prolonged, gradually increasing polyuria and polydipsia with a long osmotic diuresis.
+    src: { page: 204, quote: "Severe electrolyte loss occurs due to prolonged duration of osmotic diuresis." }
+    status: unverified
+  - id: dm.L16.025
+    kind: enumerate
+    topic: child-hhs
+    prompt: What must be watched for during treatment of HHS (Case 3)?
+    points:
+      - Shock and vascular collapse (lactic acidosis, rhabdomyolysis, renal failure, thrombosis) from massive early osmotic diuresis
+      - Persistent hypernatremia
+      - Hypokalemia
+      - Hypophosphatemia
+      - Rhabdomyolysis
+      - Pancreatitis
+      - Thrombosis
+    pass: 5
+    src: { page: 204, quote: "Persistent hypernatremia, hypokalemia, hypophosphatemia, rhabdomyolysis, pancreatitis, & thrombosis must be watched for." }
+    status: unverified
+  - id: dm.L16.026
+    kind: cloze
+    topic: child-hhs
+    text: "Pediatric HHS: insulin {{c1::0.1 U/kg/h}}; fluids start with {{c2::0.9% saline}} then 0.45-0.75% saline; dextrose is added when glucose drops to {{c3::300}} mg/dL."
+    src: { page: 205, quote: "Dextrose is added to intravenous fluids when serum glucose drops to 300 mg/dl to avoid overly precipitous drops in glucose levels." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L16.027
+    kind: card
+    topic: child-hhs
+    front: Why is 0.9% saline described as hypotonic in HHS?
+    back: Because these patients' serum is markedly hyperosmolar, isotonic saline is relatively hypotonic for them.
+    src: { page: 205, quote: "Fluid resuscitation is best accomplished initially with isotonic fluid (0.9% saline), which will be hypotonic for these patients" }
+    status: unverified
+  # ---------- Case 4, p205-208: hypokalemic paralysis ----------
+  - id: dm.L16.028
+    kind: case
+    topic: hypokalemia
+    stem: A 45-year-old woman has 2 days of fever and cough, then 8 hours of rapidly progressive weakness of all four limbs and 1 hour of breathlessness. No sensory, visual or bulbar symptoms.
+    steps:
+      - reveal: "Alert; RR 28; pulse 118 irregular; left basal rales; flaccid 0/5 quadriparesis with absent reflexes; diaphragm involved; sensation normal."
+        question: Which electrolyte disorder best explains a flaccid areflexic paralysis with normal sensation?
+        options: [Severe hypokalemia, Hypercalcemia, Hypernatremia, Hypermagnesemia]
+        answer: 0
+        why: Severe hypokalemia causes marked skeletal weakness, even total paralysis with respiratory involvement.
+      - reveal: "Glucose 474 mg/dL, K 1.3 mEq/L, phosphate 2.1 mg/dL, high anion gap, ketonuria, osmolality 320, HbA1c 9%. ECG: atrial fibrillation, ST depression, flat T waves, prominent U waves."
+        question: What is the unifying diagnosis?
+        options: [DKA with severe hypokalemic paralysis in undiagnosed T2DM, Guillain-Barré syndrome, Thyrotoxic periodic paralysis, Myasthenic crisis]
+        answer: 0
+        why: Ketoacidosis with K 1.3 and the classic ECG; thyroid, CPK and imaging were normal.
+      - question: What about insulin?
+        options: [Withhold it until potassium is corrected, Start 0.1 units/kg/h at once, Give an insulin bolus, Use s.c. insulin only]
+        answer: 0
+        why: Insulin shifts K into cells; it was withheld until K was corrected (the discussion says >3.3 mEq/L).
+      - question: What else was needed urgently?
+        options: [ICU, intubation and ventilation, plus IV KCl and antibiotics, Plasmapheresis, IV immunoglobulin, Pyridostigmine]
+        answer: 0
+        why: Pending respiratory failure needed ventilation; slow IV KCl and a broad-spectrum antibiotic were started at once.
+    src: { page: 207, quote: "Due to severe hypokalemia, treatment with insulin had to be withheld temporarily till her serum potassium levels were corrected." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L16.029
+    kind: card
+    topic: hypokalemia
+    front: What is the most common manifestation of hypokalemia, and what can severe hypokalemia cause?
+    back: "Most common: mild lower-limb weakness and easy fatigability. Severe: marked weakness up to total paralysis with respiratory, cranial and bulbar involvement, and fatal arrhythmias."
+    src: { page: 207, quote: "the most common manifestation being mild weakness of lower extremities & easy fatigability." }
+    status: unverified
+  - id: dm.L16.030
+    kind: enumerate
+    topic: hypokalemia
+    prompt: In which conditions do hypokalemia and metabolic acidosis coexist?
+    points:
+      - Proximal renal tubular acidosis
+      - Distal renal tubular acidosis
+      - DKA
+      - Amphotericin toxicity
+      - Acetazolamide overdose
+    pass: 4
+    src: { page: 207, quote: "The coexistence of hypokalemia with metabolic acidosis is encountered in very few conditions" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L16.031
+    kind: card
+    topic: hypokalemia
+    front: What is the most characteristic electrolyte abnormality of DKA, and how does it arise?
+    back: Loss of total body potassium. K shifts out of cells in exchange for H+ in acidosis and is lost in urine by osmotic diuresis.
+    src: { page: 208, quote: "The most characteristic abnormality associated with DKA is loss of total body potassium." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L16.032
+    kind: cloze
+    topic: hypokalemia
+    text: Total body potassium in DKA may fall by {{c1::300-600 mEq}}, yet serum K stays near normal or high because of the {{c2::extracellular shift}} from acidemia.
+    src: { page: 208, quote: "Despite depletion of total body K+ stores to the range of 300-600 mEq, serum levels are maintained in the near normal or higher range" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L16.033
+    kind: card
+    topic: hypokalemia
+    front: When does serum potassium fall precipitously in DKA?
+    back: When insulin and volume replacement start, so K must be monitored and replaced carefully.
+    src: { page: 208, quote: "Serum K+ levels can fall precipitously upon the initiation of insulin treatment & volume replacement" }
+    status: unverified
+  - id: dm.L16.034
+    kind: cloze
+    topic: hypokalemia
+    text: In DKA presenting with significant hypokalemia, potassium starts with the fluids and insulin is delayed until K is above {{c1::3.3 mEq/L}}.
+    src: { page: 208, quote: "insulin treatment should be delayed until K+ concentration is restored to >3.3 mEq/L." }
+    status: unverified
+    tags: [numbers, high-yield]
+    update:
+      text: "The 2024 consensus algorithm (reproduced in dm.L15 p190) holds insulin while K is below 3.5 mmol/L."
+      ref: "ADA/EASD/JBDS/AACE/DTS hyperglycemic crises consensus 2024"
+  - id: dm.L16.035
+    kind: cloze
+    topic: hypokalemia
+    text: In the study by Arora et al., hypokalemia was present in only {{c1::5.6%}} of patients with DKA at presentation.
+    src: { page: 208, quote: "In the study by Arora et al., hypokalemia was observed in just 5.6% of patients with DKA" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L16.036
+    kind: mcq
+    topic: hypokalemia
+    stem: A 50-year-old in DKA has glucose 520 mg/dL, pH 7.10 and K 2.9 mEq/L. Urine output is adequate. What is the correct order?
+    options: [Fluids with potassium first; insulin once K is restored, Insulin first; potassium later, Bicarbonate first, Insulin and no potassium, Wait for K to rise on its own]
+    answer: 0
+    why:
+      - Potassium replacement starts with the fluids, and insulin is delayed until K is restored.
+      - Insulin would push K lower and risk arrhythmia or paralysis.
+      - Bicarbonate also lowers K.
+      - Total-body K is depleted; it must be replaced.
+      - Treatment lowers K further.
+    src: { page: 208, quote: "potassium replacement should begin with fluid therapy, & insulin treatment should be delayed" }
+    status: unverified
+  - id: dm.L16.037
+    kind: card
+    topic: hypokalemia
+    front: Which ECG features of hypokalemia did Case 4 show?
+    back: ST-segment depression, T-wave flattening and prominent U waves (with atrial fibrillation).
+    src: { page: 206, quote: "features of hypokalemia manifesting as ST segment depression, T-wave flattening & prominent U-waves." }
+    status: unverified
+  # ---------- Cases 5-7, p209-213: pregnancy ----------
+  - id: dm.L16.038
+    kind: case
+    topic: pregnancy
+    stem: A 20-year-old at 32 weeks is admitted in preterm labor with 24 hours of reduced fetal movements. She has Crohn's disease, no diabetes or GDM risk factors, and a normal 50 g challenge test at 28 weeks.
+    steps:
+      - reveal: "Hyperventilating and ketotic; pulse 100, BP 100/60; heavy glycosuria and ketonuria; random glucose 618 mg/dL. She admits weeks of thirst and polyuria. Fetus LGA (AC >90th centile)."
+        question: What is happening?
+        options: [Diabetic ketoacidosis in pregnancy, Starvation ketosis, HHS, Preeclampsia]
+        answer: 0
+        why: Severe hyperglycemia, ketosis and hyperventilation in pregnancy.
+      - reveal: Despite IV insulin, glucose stays 494-569 mg/dL; at 24 h the NST shows null variability and the fetus has subcutaneous edema and no breathing movements.
+        question: Next?
+        options: [Cesarean section, Continue insulin and wait, Induce labor slowly, Give bicarbonate and reassess in 48 h]
+        answer: 0
+        why: The mother's severity plus non-reassuring fetal status and an unfavorable cervix led to cesarean section; a healthy 2,410 g baby was born.
+      - reveal: "Serum insulin zero; ICA, anti-GAD and IA2 antibodies positive; HbA1c 8%; fructosamine 380."
+        question: Final diagnosis?
+        options: [New-onset type 1 DM, Gestational DM, MODY, Type 2 DM]
+        answer: 0
+        why: Absent insulin with positive islet autoantibodies means new-onset T1DM.
+    src: { page: 210, quote: "Islet cells antibodies (ICA), antibodies to glutamate decarboxylase (anti- GAD) & IA2 antibodies: Positive." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L16.039
+    kind: card
+    topic: pregnancy
+    front: Which tests confirmed new-onset T1DM in Case 5?
+    back: Serum insulin zero and positive ICA, anti-GAD and IA2 antibodies (HbA1c 8%, fructosamine 380).
+    src: { page: 210, quote: "Serum insulin: Zero" }
+    status: unverified
+  - id: dm.L16.040
+    kind: case
+    topic: pregnancy
+    stem: A 29-year-old nurse, BMI 23, comes at 6 weeks of her first pregnancy. Both parents have T2DM and a sister had GDM then T2DM.
+    steps:
+      - reveal: "75 g OGTT at 6 weeks: fasting 113, 2 h 146 mg/dL. The pregnancy ends in miscarriage at 10 weeks; an OGTT 8 weeks later is normal."
+        question: What is advised for the next pregnancy?
+        options: [A 75 g OGTT as soon as pregnancy is detected, Wait for the 24-28 week test, No testing because the OGTT normalized, Start metformin now]
+        answer: 0
+        why: Given her history, an early OGTT as soon as the next pregnancy is detected.
+      - reveal: "Next pregnancy, OGTT at 6 weeks: fasting 102, 2 h 180 mg/dL; HbA1c 6.6%."
+        question: What treatment did she get?
+        options: [Basal-bolus insulin, Glyburide, Diet only, Metformin and glyburide]
+        answer: 0
+        why: Basal-bolus insulin, reviewed every 2-4 weeks, with averages of fasting 77 and 2-h 122 and HbA1c <6.5%.
+      - reveal: Insulin needs rose to 30 units/day; she delivered by cesarean at 37 weeks. Glucose was normal the next morning and insulin was stopped.
+        question: Follow-up?
+        options: [75 g OGTT at 6 weeks postpartum and counseling on T2DM risk, No follow-up, HbA1c at 1 year only, Continue insulin for 6 months]
+        answer: 0
+        why: Her postpartum OGTT at 6 weeks was normal; she was told of her high future T2DM risk and advised on prevention.
+    src: { page: 212, quote: "She underwent a 75 g OGTT at 6 weeks postpartum, which was normal." }
+    status: unverified
+  - id: dm.L16.041
+    kind: card
+    topic: pregnancy
+    front: What diagnosis did the book give Case 6 (abnormal OGTT at 6 weeks, normal after delivery)?
+    back: Early-onset gestational diabetes.
+    src: { page: 212, quote: "Early-onset gestational diabetes" }
+    status: unverified
+  - id: dm.L16.042
+    kind: case
+    topic: pregnancy
+    stem: A 40-year-old at 35 weeks, with GDM on diet and insulin, has 3 days of sore throat and 24 hours of vomiting, epigastric pain and no oral intake.
+    steps:
+      - reveal: "Normal vital signs, tonsillitis, mild RUQ tenderness. Urine 4+ ketones. ALT 59, AST 105, WCC 16.7, CRP 154. Abdominal ultrasound normal."
+        question: After IV antibiotics and IM betamethasone she keeps vomiting and becomes tachycardic and cool. Glucose 53-85 mg/dL; pH 7.29, HCO3 13.7, AG 18.9, normal lactate. What is this?
+        options: [Starvation ketoacidosis in pregnancy, Euglycemic DKA from SGLT2 inhibitors, Lactic acidosis, HELLP syndrome]
+        answer: 0
+        why: Ketoacidosis with low-normal glucose after prolonged no intake in late pregnancy; the book's diagnosis is starvation ketoacidosis.
+      - question: How was it managed when fluids failed to correct it?
+        options: [Emergency cesarean section, then ICU, Bicarbonate infusion only, Continued observation, Induction of labor over 48 h]
+        answer: 0
+        why: Little change after compound sodium lactate led to emergency cesarean; the derangement resolved rapidly after delivery.
+      - question: Which differential did the book consider?
+        options: [Euglycemic DKA, Hyperosmolar state, Thyroid storm, Addisonian crisis]
+        answer: 0
+        why: Euglycemic DKA was in the differential.
+    src: { page: 213, quote: "Starvation ketoacidosis in pregnancy" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L16.043
+    kind: cloze
+    topic: pregnancy
+    text: "Case 7 discussion: euglycemic DKA is defined as glucose less than {{c1::180}} mg/dL with bicarbonate less than {{c2::10}} mmol/L."
+    src: { page: 213, quote: "The definition of euglycaemic DKA is a glucose concentration of less than 180 mg/dl in association with a bicarbonate concentration less than 10 mmol/L." }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L16.044
+    kind: mcq
+    topic: pregnancy
+    stem: "Case 7 was a woman at 35 weeks who had vomited for 24 h with no intake. Glucose 53-85 mg/dL, pH 7.29, HCO3 13.7, AG 18.9, normal lactate, 4+ ketones. Why does the book call this starvation ketoacidosis rather than euglycemic DKA?"
+    options: [Glucose was low-normal after prolonged no intake with GDM well controlled, The anion gap was normal, Ketones were absent, Lactate was high, She had type 1 DM]
+    answer: 0
+    why:
+      - Prolonged fasting in the ketogenic state of late pregnancy produced ketoacidosis with low glucose; euglycemic DKA was the differential.
+      - The anion gap was raised (18.9).
+      - Urine had 4+ ketones.
+      - Lactate was normal.
+      - She had GDM, not T1DM.
+    src: { page: 213, quote: "The differential diagnosis for our case included euglycaemic DKA." }
+    status: unverified
+  - id: dm.L16.045
+    kind: table
+    topic: pregnancy
+    title: The three pregnancy cases
+    columns: [Case, Presentation, Diagnosis]
+    rows:
+      - ["5: 20 y, 32 weeks", "Preterm labor, glucose 618, ketosis, zero insulin, positive ICA/GAD/IA2", "New-onset type 1 DM"]
+      - ["6: 29 y, 6 weeks", "Strong family history, abnormal early OGTT, normal postpartum", "Early-onset gestational diabetes"]
+      - ["7: 40 y, 35 weeks", "Vomiting, no intake, glucose 53-85, ketoacidosis", "Starvation ketoacidosis in pregnancy"]
+    blanks: [[0, 2], [1, 2], [2, 2]]
+    src: { page: 213, quote: "Starvation ketoacidosis in pregnancy" }
+    status: unverified
+  # ---------- cross-case comparisons ----------
+  - id: dm.L16.046
+    kind: table
+    topic: eudka
+    title: The four non-pregnant cases at a glance
+    columns: [Case, Key clue, Diagnosis]
+    rows:
+      - ["1: 34 y, T1DM", "Glucose 105, AG 29, ketones 4+, weeks of no eating", "Euglycemic DKA (depression)"]
+      - ["2: 6 y, T1DM", "Three sugary syrups for sinusitis", "DKA from syrup excipients"]
+      - ["3: 7 y", "Glucose 954, osmolality 412, no ketones", "HHS in a child"]
+      - ["4: 45 y", "Flaccid quadriparesis, K 1.3, ketonuria", "DKA with severe hypokalemia (new T2DM)"]
+    blanks: [[0, 2], [1, 2], [2, 2], [3, 2]]
+    src: { page: 198, quote: "Euglycemic ketoacidosis" }
+    status: unverified
+  - id: dm.L16.047
+    kind: mcq
+    topic: child-hhs
+    stem: "The book gives two HHS definitions: L15 (glucose ≥600, effective osmolality >300, pH ≥7.3, HCO3 ≥15) and the Case 3 discussion. Which values does the Case 3 discussion use?"
+    options: ["Glucose >600, osmolality >330, mild acidosis pH >7.2", "Glucose >600, osmolality >300, pH ≥7.3", "Glucose >250, osmolality >320, pH <7.3", "Glucose >800, osmolality >350, no acidosis", "Glucose >600, osmolality >320, pH >7.4"]
+    answer: 0
+    why:
+      - The Case 3 discussion uses >330 mOsm/L and pH >7.2 (the pediatric definition).
+      - These are the L15 (adult consensus) criteria.
+      - Glucose >250 is not HHS.
+      - These are not the book's numbers.
+      - pH >7.4 is not used.
+    src: { page: 203, quote: "HHS is characterized by hyperglycemia more than 600 mg/dL, hyperosmolality more than 330 mOsm/L, & a mild metabolic acidosis (pH>7.2)." }
+    status: unverified
+  - id: dm.L16.048
+    kind: essay
+    topic: eudka
+    prompt: Discuss euglycemic ketoacidosis in light of the lecture's cases.
+    outline:
+      - "Mechanism: [Insulin keeps glucose normal but cannot stop ketogenesis, Fasting: glycogen depletion, more lipolysis and FFA, less insulin effect]"
+      - "Causes, low glucose: [Starvation, vomiting, dieting, depression, pregnancy, glycogen storage disease, cirrhosis]"
+      - "Causes, H+ excess: [Endogenous: lactic acidosis, pancreatitis, sepsis, RTA, Exogenous: salicylate, methanol]"
+      - "Differential: [Starvation, alcohol, salicylate, lactic acidosis, TCA overdose, RTA]"
+      - "Cases: [Case 1 depression and weeks of fasting in T1DM, Case 7 starvation ketoacidosis at 35 weeks]"
+      - "Practice point: [T1DM with vomiting and normal glucose still needs acid-base assessment, Treat with saline, dextrose and IV insulin]"
+    src: { page: 199, quote: "Causes of Euglycemic Ketoacidosis" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L16.049
+    kind: calc
+    topic: eudka
+    calculator: anion_gap
+    stem: "Case 1: T1DM with vomiting; Na 134, Cl 101, HCO3 10 mEq/L, glucose 105 mg/dL, urine ketones 4+."
+    inputs: { na_meq_l: 134, cl_meq_l: 101, hco3_meq_l: 10 }
+    expect: "23 mEq/L (high)"
+    interpret: "Na − (Cl + HCO3) = 23, a high anion gap; the book reports 29 because it adds potassium (5.7). Either way it is a high-gap ketoacidosis with near-normal glucose: euglycemic DKA."
+    src: { page: 197, quote: "Anion gap = 29 mEq/l" }
+    status: unverified
+  - id: dm.L16.050
+    kind: calc
+    topic: child-hhs
+    calculator: effective_osmolality
+    stem: "Case 3: a 7-year-old with glucose 954 mg/dL and corrected Na 152 mmol/L; no ketones; pH 7.21."
+    inputs: { na_meq_l: 152, glucose_mg_dl: 954 }
+    expect: "357 mOsm/kg (meets the HHS criterion)"
+    interpret: "2 × 152 + 954/18 = 357, far above 300 (the measured osmolality was 412). With glucose >600 and no ketones this is HHS."
+    src: { page: 203, quote: "Serum osmolality 412 mOsm/kg (N: 282-295)" }
+    status: unverified

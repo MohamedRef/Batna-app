@@ -5,6 +5,7 @@
 //! the map. Each course is its own synced setting, `course.<id>`, so two
 //! devices changing two courses never overwrite each other.
 
+pub mod focus;
 mod map;
 
 use std::collections::BTreeMap;
@@ -12,9 +13,13 @@ use std::collections::BTreeMap;
 use batna_core::program::{Course, CourseStatus};
 use dioxus::prelude::*;
 
+pub use focus::{CourseChip, Picker};
 pub use map::Map;
 
 use crate::content::Library;
+use crate::look::{Css, css};
+
+pub(crate) const CSS: Css = css!("src/courses/courses.css");
 
 const KEY: &str = "course.";
 
@@ -39,6 +44,7 @@ fn load() -> BTreeMap<String, CourseStatus> {
 
 /// Re-reads the statuses (a sync or restore changed the store).
 pub fn reload() {
+    focus::reload();
     let fresh = load();
     if *STATUSES.peek() != fresh {
         *STATUSES.write() = fresh;

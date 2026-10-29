@@ -20,6 +20,7 @@ use serde::{Deserialize, Serialize};
 
 pub use crate::content::CalcValue;
 
+mod aki;
 mod albi;
 mod apri;
 mod ascitic;
@@ -32,6 +33,7 @@ mod diabetes;
 mod fib4;
 mod gbs;
 mod glasgow;
+mod ipss_mf;
 mod kings;
 mod maddrey;
 mod meld;
@@ -288,6 +290,7 @@ pub enum Area {
     Elderly,
     Rheum,
     Diabetes,
+    Blood,
     Research,
 }
 
@@ -322,7 +325,7 @@ pub fn compute(id: &str, inputs: &Inputs) -> Result<Outcome, CalcError> {
     (spec.compute)(inputs)
 }
 
-static REGISTRY: [CalcSpec; 40] = [
+static REGISTRY: [CalcSpec; 44] = [
     child_pugh::SPEC,
     meld::MELD,
     meld::MELD_NA,
@@ -344,10 +347,14 @@ static REGISTRY: [CalcSpec; 40] = [
     renal::DELTA_RATIO,
     renal::COMPENSATION,
     renal::OSMOLAL_GAP,
+    aki::KDIGO,
+    aki::FENA,
+    aki::FEUREA,
     cockcroft::SPEC,
     ra2010::SPEC,
     diabetes::CORRECTED_NA,
     diabetes::OSMOLALITY,
+    ipss_mf::SPEC,
     research::INCIDENCE,
     research::PREVALENCE,
     research::PREVALENCE_ID,
@@ -468,6 +475,18 @@ const BAND_WORDS: &[(&str, &[&str])] = &[
     ("acr_eular_2010_ra.definite", &["definite"]),
     ("acr_eular_2010_ra.not_met", &["not met"]),
     ("effective_osmolality.hhs", &["hhs", "meets"]),
+    ("ipss_mf.low", &["low"]),
+    ("ipss_mf.int1", &["intermediate-1", "intermediate 1", "int-1"]),
+    ("ipss_mf.int2", &["intermediate-2", "intermediate 2", "int-2"]),
+    ("ipss_mf.high", &["high"]),
+    ("kdigo_aki.none", &["no aki"]),
+    ("kdigo_aki.1", &["stage 1"]),
+    ("kdigo_aki.2", &["stage 2"]),
+    ("kdigo_aki.3", &["stage 3"]),
+    ("fena.prerenal", &["prerenal", "pre-renal"]),
+    ("fena.atn", &["atn", "tubular necrosis"]),
+    ("feurea.prerenal", &["prerenal", "pre-renal"]),
+    ("feurea.atn", &["atn", "tubular necrosis"]),
 ];
 
 /// The bands of `band`'s calculator that `text` names, longest phrase first.

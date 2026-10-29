@@ -184,10 +184,15 @@ fn App() -> Element {
     });
     lecture::use_lecture_page(ui);
     sheet::use_gestures();
+    courses::focus::use_close_on_screen_change(ui);
     back::use_back(
         ui,
         current,
-        *settings.open.read() || lecture::is_open() || pagesheet::is_open() || shortcuts::is_open(),
+        *settings.open.read()
+            || lecture::is_open()
+            || pagesheet::is_open()
+            || shortcuts::is_open()
+            || courses::focus::is_open(),
     );
     update::view::use_android_install(ui);
     update::view::use_content_switch(ui);
@@ -279,6 +284,7 @@ fn App() -> Element {
             shortcuts::KeysSheet {}
             update::sheet::UpdateSheet {}
             pagesheet::BookSheet {}
+            courses::Picker {}
             own::ShareInbox {}
             onboarding::Onboarding {}
         }

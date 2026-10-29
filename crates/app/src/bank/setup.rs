@@ -112,6 +112,25 @@ pub fn focus(lecture: &str, topic: Option<String>) {
     }
 }
 
+/// Keeps only the lecture and topic picks of the course in view.
+pub fn course_changed() {
+    let shows = crate::courses::focus::shows;
+    let mut f = FILTER.peek().clone();
+    f.lectures.retain(|l| shows(l));
+    f.topics.retain(|(l, _)| shows(l));
+    if f != *FILTER.peek() {
+        *FILTER.write() = f;
+    }
+}
+
+/// "All lectures", or "all of <course>" with one course in view.
+fn all_lectures() -> String {
+    let lib = Library::get();
+    crate::courses::focus::current()
+        .and_then(|id| lib.program.courses.iter().find(|c| c.id == id))
+        .map_or_else(|| tx::ALL_LECTURES.to_string(), |c| tx::all_of(&c.short))
+}
+
 const COUNTS: [usize; 4] = [10, 20, 40, usize::MAX];
 const MOCK_COUNTS: [usize; 4] = [20, 40, 60, 100];
 const TAGS: [(&str, &str); 3] =
@@ -171,7 +190,7 @@ fn scope_title(filter: &Filter, lectures: &[(String, usize)]) -> (String, bool) 
         (_, n) if n > 1 => (counted(n, &TOPIC), false),
         (1, _) => (short_lecture_title(filter.lectures.iter().next().expect("one lecture")), true),
         (0, _) if lectures.len() == 1 => (short_lecture_title(&lectures[0].0), true),
-        (0, _) => (tx::ALL_LECTURES.to_string(), false),
+        (0, _) => (all_lectures(), false),
         (n, _) => (counted(n, &LECTURE), false),
     }
 }
@@ -273,6 +292,7 @@ pub fn Setup() -> Element {
             div { class: "tab-main bank-setup",
                 Paused {}
                 header { class: "page-head",
+                    crate::courses::CourseChip {}
                     h1 { {tx::TITLE} }
                     p { class: "page-sub", {tx::LEAD} }
                 }
@@ -292,7 +312,7 @@ pub fn Setup() -> Element {
                 if mode == Mode::Mock {
                     section { class: "card bank-preset",
                         span { class: "chip", "data-tone": "accent", {tx::MOCK_SCOPE_CHIP} }
-                        h2 { class: "bank-scope", {tx::ALL_LECTURES} }
+                        h2 { class: "bank-scope", {all_lectures()} }
                         p { class: "muted small", {tx::MOCK_LEAD} }
                         div { class: "bank-count",
                             span { class: "muted small", {tx::COUNT} }

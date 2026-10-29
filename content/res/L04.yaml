@@ -1,0 +1,658 @@
+schema: batna.content/v1
+lecture: res.L04
+title: "Study types in epidemiological research I: descriptive studies"
+author: Prof. Aida Mohey
+book: { chapter: 1, pages: [1, 53] }
+topics:
+  - { id: designs, title: "Choosing a study design" }
+  - { id: hierarchy, title: "Hierarchy of evidence and the design tree" }
+  - { id: descriptive, title: "What makes a study descriptive" }
+  - { id: ecological, title: "Correlational (ecological) studies" }
+  - { id: correlation, title: "Correlation coefficient" }
+  - { id: case-reports, title: "Case reports and case series" }
+  - { id: exploratory, title: "Exploratory studies" }
+  - { id: cross-sectional, title: "Cross-sectional studies" }
+items:
+  # --- Definitions and choosing a design (slides 3-11) ---
+  - id: res.L04.001
+    kind: card
+    topic: designs
+    front: Define "outcome" and "exposed" in an epidemiological study.
+    back: >-
+      Outcome: the disease or other health-related event under study. Exposed: having, or being exposed to,
+      a potential cause or risk factor for the disease or outcome.
+    src: { page: 5, quote: "OUTCOME: Disease or other health-related event under study" }
+    status: unverified
+  - id: res.L04.002
+    kind: table
+    topic: designs
+    title: Prevalence versus incidence
+    columns: [Measure, "Numerator", "Denominator", "Expressed as"]
+    rows:
+      - [Prevalence, "All individuals with the disease", "Total defined population at a given time", "A proportion"]
+      - [Incidence, "New cases", "Population at risk over time", "A rate per unit time (e.g. annual rate)"]
+    blanks: [[0, 3], [1, 1], [1, 3]]
+    src: { page: 5, quote: "Prevalence is expressed as a proportion" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L04.003
+    kind: cloze
+    topic: designs
+    text: >-
+      Prevalence measures the {{c1::burden}} of disease at a given time; incidence measures the {{c2::rate}}
+      at which {{c3::new}} cases develop in the population at risk.
+    src: { page: 5, quote: "PREVALENCE: A measure of the burden of disease in a population" }
+    status: unverified
+  - id: res.L04.004
+    kind: card
+    topic: designs
+    front: What largely determines the scientific value and quality of the information a medical study provides?
+    back: The study design.
+    src: { page: 7, quote: "The scientific value and quality of information provided by a medical research are determined to a major extent by the study design." }
+    status: unverified
+  - id: res.L04.005
+    kind: enumerate
+    topic: designs
+    prompt: Enumerate the factors that decide which study design is appropriate.
+    points:
+      - Knowledge already available about the problem (gaps to fill)
+      - Purpose of the research (questions, objectives, hypotheses)
+      - Nature of the problem (features of exposure and disease)
+      - Time and resources available
+      - Skills and creativity of the researcher
+      - Ethical considerations
+    pass: 5
+    src: { page: 8, quote: "The selection of an appropriate study design depends on" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L04.006
+    kind: table
+    topic: designs
+    title: State of knowledge decides the design
+    columns: [State of knowledge, Type of study]
+    rows:
+      - ["A problem exists, little known about its characteristics or causes", "Exploratory or descriptive (case studies, cross-sectional surveys)"]
+      - ["Certain factors are suspected to contribute", "Analytical: cross-sectional comparative, case-control, cohort"]
+      - ["Factors are associated; how far does one cause the problem?", "Cohort studies"]
+      - ["Enough known about causes to design and assess an intervention", "Experimental or quasi-experimental"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 10, quote: "Knowing that a problem exists but knowing little about its characteristics or possible causes." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L04.007
+    kind: mcq
+    topic: designs
+    stem: >-
+      A health directorate knows that stunting is common in a rural district but knows almost nothing
+      about who is affected or why. Which type of study fits this state of knowledge?
+    options: [A randomised controlled trial, A case-control study, A descriptive (exploratory) study or cross-sectional survey, A cohort study]
+    answer: 2
+    why:
+      - A trial needs enough knowledge of the causes to design an intervention.
+      - Case-control tests factors already suspected; here nothing is suspected yet.
+      - When a problem is known to exist but little is known about it, the lecture's table points to exploratory or descriptive studies.
+      - A cohort measures how far a suspected factor causes the problem, a later stage.
+    src: { page: 10, quote: "Exploratory studies, or Descriptive studies" }
+    status: unverified
+  - id: res.L04.008
+    kind: table
+    topic: designs
+    title: Ideal study design by purpose
+    columns: [Purpose, Observational, Intervention]
+    rows:
+      - [To estimate prevalence, Cross sectional, "-"]
+      - [To determine natural history, Cohort, "-"]
+      - ["To identify causes, risk factors or people at high risk", "Cohort, case-control or cross sectional", Randomised trial]
+      - [To prevent disease, "-", Randomised trial]
+      - [To alter the course of disease, "-", Randomised trial]
+    blanks: [[0, 1], [1, 1], [3, 2]]
+    src: { page: 11, quote: "Ideal study designs according to purpose of study" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L04.009
+    kind: mcq
+    topic: designs
+    stem: To assist with health resource allocation decisions, a research group wants to determine the burden of a particular disease in the population. Which study should be undertaken?
+    options: [Randomized controlled trial, Ecological study, Cohort study, Cross-sectional study, Case-control study]
+    answer: 3
+    why:
+      - A trial tests an intervention; it does not measure burden.
+      - An ecological study compares groups' rates to suggest causes; it is not the design for prevalence.
+      - A cohort gives incidence and natural history, not the current burden.
+      - Burden = prevalence, and the ideal design to estimate prevalence is cross-sectional.
+      - Case-control starts from cases and cannot estimate how common the disease is.
+    src: { page: 11, quote: "Ideal study designs according to purpose of study" }
+    status: unverified
+    tags: [book-question]
+  # --- Hierarchy and the design tree (slides 12-15) ---
+  - id: res.L04.010
+    kind: order
+    topic: hierarchy
+    prompt: Order these from the strongest to the weakest evidence (the lecture's hierarchy).
+    steps:
+      - Clinical practice guidelines
+      - Systematic reviews
+      - Randomized controlled trials
+      - Cohort studies
+      - Case-control studies
+      - Case reports or case series
+      - Narrative reviews, expert opinions, editorials
+    src: { page: 12, quote: "Hierarchy of Scientific Evidence" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L04.011
+    kind: card
+    topic: hierarchy
+    front: In the evidence hierarchy, which studies are "secondary" (pre-appraised, filtered) and which are "primary"?
+    back: >-
+      Secondary: clinical practice guidelines and systematic reviews. Primary: RCTs (experimental), and the
+      observational cohort and case-control studies, with case reports/series below them.
+    src: { page: 12, quote: "Secondary, pre-appraised or filtered studies" }
+    status: unverified
+  - id: res.L04.012
+    kind: card
+    topic: hierarchy
+    front: What separates an experimental study from an observational one?
+    back: >-
+      In an experimental study the investigator assigns the treatment or exposure (random allocation of
+      subjects). In an observational study the investigator studies people and exposures "in nature".
+    src: { page: 13, quote: "Investigators study people and exposures “in nature”" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L04.013
+    kind: card
+    topic: hierarchy
+    front: Among observational studies, which single question sorts a design into descriptive or analytic?
+    back: Is there a comparison group? No = descriptive; yes = analytic.
+    src: { page: 13, quote: "Comparison Group?" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L04.014
+    kind: table
+    topic: hierarchy
+    title: The design tree
+    columns: [Branch, Designs]
+    rows:
+      - [Experimental, "Randomized controlled trials, community trials, laboratory trials"]
+      - ["Observational, descriptive", "Correlational, case reports, case series, cross-sectional"]
+      - ["Observational, analytic", "Case-control, cohort"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 13, quote: "Randomized Control Trials" }
+    status: unverified
+  - id: res.L04.015
+    kind: cloze
+    topic: hierarchy
+    text: "Epidemiologic studies ask the five Ws: {{c1::what}}, {{c2::who}}, where, {{c3::when}} and why."
+    src: { page: 15, quote: "Epidemiologic studies ask five questions (5 Ws): what, who, where, when, and why." }
+    status: unverified
+  # --- Descriptive studies (slides 16-17) ---
+  - id: res.L04.016
+    kind: card
+    topic: descriptive
+    front: Three features of a descriptive study?
+    back: No testing of a causal hypothesis, no comparison group, and it can generate a hypothesis.
+    src: { page: 16, quote: "Can generate a hypothesis" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L04.017
+    kind: enumerate
+    topic: descriptive
+    prompt: Enumerate the four types of descriptive study in the lecture.
+    points:
+      - Correlational (ecological) studies
+      - Case reports and case series
+      - Exploratory studies (small-scale)
+      - Cross-sectional studies (large-scale)
+    pass: 4
+    src: { page: 17, quote: "Correlational (Ecological) studies" }
+    status: unverified
+  # --- Ecological studies (slides 18-27, 33) ---
+  - id: res.L04.018
+    kind: card
+    topic: ecological
+    front: What is the unit of observation in a correlational (ecological) study?
+    back: Population groups, not individuals; the study is done at population level.
+    src: { page: 18, quote: "The units of observation are population groups rather than individuals." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L04.019
+    kind: card
+    topic: ecological
+    front: Name the two kinds of ecological study and what each compares.
+    back: >-
+      Geographical studies compare disease rates by place; time-trend studies compare rates in the same
+      region at different times. Both look for patterns that suggest a hypothesis about cause.
+    src: { page: 18, quote: "PLACE (geographical studies) or by TIME (time trends studies) in the same region at different times" }
+    status: unverified
+  - id: res.L04.020
+    kind: mcq
+    topic: ecological
+    stem: >-
+      A study plots fat calorie intake against breast cancer incidence for 30 countries and finds that
+      countries with higher fat intake have higher incidence. What type of study is this?
+    options: [Time-trend ecological study, Geographical ecological study, Cross-sectional survey, Case series]
+    answer: 1
+    why:
+      - A time-trend study follows one region over time; here different countries are compared at once.
+      - Comparing rates across places with country-level data is a geographical correlational study (positive correlation).
+      - A cross-sectional survey measures exposure and outcome in individuals.
+      - A case series describes individual patients with a disease.
+    src: { page: 20, quote: "Countries with high fat calories intake are associated with higher incidence of breast cancer" }
+    status: unverified
+  - id: res.L04.021
+    kind: card
+    topic: ecological
+    front: In the lecture's time-trend example, how did NSAID use relate to colorectal cancer?
+    back: NSAID use was associated with a lower incidence of colorectal cancer, a negative correlation.
+    src: { page: 19, quote: "NSAID use was associated with lower incidence of colorectal cancer" }
+    status: unverified
+  - id: res.L04.022
+    kind: enumerate
+    topic: ecological
+    prompt: Enumerate the uses of an ecological study design.
+    points:
+      - Correlate changes in risk factor profiles with disease rates over time
+      - Monitor the effectiveness of health interventions
+      - Surveillance of communicable and non-communicable diseases
+      - Explore inequalities in care
+      - Explore the quality of care (e.g. mortality between hospitals or regions)
+      - Inform resource allocation or health promotion programs
+      - Generate hypotheses about causal or preventive factors
+      - Study the physical characteristics of a place (air pollution, temperature, climate)
+    pass: 5
+    src: { page: 22, quote: "What research questions are best answered with an ecological study design?" }
+    status: unverified
+  - id: res.L04.023
+    kind: card
+    topic: ecological
+    front: What rule applies to the exposure and outcome data in an ecological study?
+    back: They must be at the same level of aggregation (the same time period, city, region, country or continent).
+    src: { page: 23, quote: "should be at the same level of aggregation" }
+    status: unverified
+  - id: res.L04.024
+    kind: card
+    topic: ecological
+    front: Where do ecological studies usually get their data, and what is the trade-off?
+    back: >-
+      From data collected earlier for another purpose (secondary data: primary/secondary care records,
+      mortality, census, notifications, national surveys). It is quicker and cheaper, but less accurate
+      and may be of poor quality.
+    src: { page: 23, quote: "The studies often use data previously collected for alternative purpose (secondary data source)." }
+    status: unverified
+  - id: res.L04.025
+    kind: card
+    topic: ecological
+    front: Define the ecological fallacy.
+    back: >-
+      A logic error in interpreting data: drawing conclusions about specific individuals from aggregate
+      data on the larger group. It is the major source of error in ecological studies.
+    src: { page: 25, quote: "Drawing conclusions about specific individuals based on the analysis of aggregate data on the larger group." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L04.026
+    kind: mcq
+    topic: ecological
+    stem: >-
+      Governorates with more mobile phone towers have higher brain tumour rates. A journalist concludes that
+      each person living near a tower has a higher personal risk. What error is this?
+    options: [Recall bias, Ecological fallacy, Selection bias from refusal, Publication bias]
+    answer: 1
+    why:
+      - Recall bias comes from people remembering exposures differently; no one was asked anything here.
+      - Group-level data were used to judge individuals, the ecological fallacy.
+      - Refusal (survival) bias belongs to surveys of individuals.
+      - Publication bias is about which results get published.
+    src: { page: 25, quote: "Ecological fallacy (Definition) is a logic error in the interpretation of statistical data." }
+    status: unverified
+  - id: res.L04.027
+    kind: card
+    topic: ecological
+    front: Why does the ecological fallacy happen, per the lecture?
+    back: >-
+      The study assumes every member of a population shares the same exposure and risk, and it cannot
+      control for confounding variables, so the true exposure-disease relation is distorted.
+    src: { page: 25, quote: "There is assumption that all members of a given population share the same exposure and same risk of disease." }
+    status: unverified
+  - id: res.L04.028
+    kind: table
+    topic: ecological
+    title: Ecological studies, advantages and disadvantages
+    columns: [Advantage, Disadvantage]
+    rows:
+      - ["Can test whether differences in exposure between areas are bigger than at individual level", "Associations cannot be confirmed at the individual level"]
+      - ["Use routinely collected health data: cheap and quick", "Potential ecological fallacy when group results are applied to individuals"]
+      - ["Generate hypotheses to test at individual level", "Lack of data on confounding factors"]
+      - ["Study exposures measured over groups (diet, air pollution, temperature)", "Areas may differ systematically in how disease frequency is measured"]
+      - ["Search for associations in large populations", "Areas may differ systematically in how exposures are measured"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 33, quote: "Advantages and disadvantages of correlational (ecological) studies" }
+    status: unverified
+  # --- Correlation (slides 28-32) ---
+  - id: res.L04.029
+    kind: card
+    topic: correlation
+    front: Define correlation and the correlation coefficient (r).
+    back: >-
+      Correlation is the strength and direction of the association between two variables; it does not
+      mean causation. r is the statistic that measures that direction and strength (Pearson correlation).
+    src: { page: 28, quote: "Correlation: The strength and direction of the association between two variables. Correlation DOES NOT mean causation." }
+    status: unverified
+  - id: res.L04.030
+    kind: mcq
+    topic: correlation
+    stem: In what range does the correlation coefficient lie?
+    options: [0 to +1, -1 to 0, -1 to +1, Greater than 1]
+    answer: 2
+    why:
+      - That leaves out negative (inverse) correlations.
+      - That leaves out positive (direct) correlations.
+      - r runs from -1 (perfect negative) through 0 (none) to +1 (perfect positive).
+      - r can never exceed 1 in size.
+    src: { page: 29, quote: "The value of r ranges between +1 and -1." }
+    status: unverified
+    tags: [book-question, high-yield]
+  - id: res.L04.031
+    kind: mcq
+    topic: correlation
+    stem: Which correlation coefficient shows the strongest association between exposure and outcome?
+    options: ["+0.10", "-0.95", "+0.90", "-1.00"]
+    answer: 3
+    why:
+      - Close to 0, so a very weak association.
+      - Strong, but 0.95 is less than 1 in size.
+      - Strong, but weaker than 0.95 and 1.
+      - Strength is the size of r, ignoring the sign; -1.00 is a perfect (negative) correlation.
+    src: { page: 29, quote: "The correlation coefficient (r) measures the strength of the association between two variables" }
+    status: unverified
+    tags: [book-question]
+  - id: res.L04.032
+    kind: table
+    topic: correlation
+    title: Reading r (lecture examples)
+    columns: [r, Meaning, Example]
+    rows:
+      - ["+1", "Positive (direct) correlation", "Smoking and lung cancer"]
+      - ["-1", "Negative (inverse) correlation", "Exercise and the risk of heart disease"]
+      - ["0", "No relationship", "Colour of the skin and intelligence"]
+    blanks: [[0, 1], [1, 2], [2, 1]]
+    src: { page: 29, quote: "A negative or inverse correlation" }
+    status: unverified
+  - id: res.L04.033
+    kind: card
+    topic: correlation
+    front: Does a perfect correlation (r = +1 or -1) prove causation?
+    back: No. Even a perfect correlation does not necessarily mean a causal relationship between the two variables.
+    src: { page: 29, quote: "a causal relationship may not necessarily exist between the two variables" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L04.034
+    kind: card
+    topic: correlation
+    front: How is the relationship between two correlated variables shown graphically?
+    back: By a scatter diagram (scattergram).
+    src: { page: 30, quote: "variables is presented graphically by Scatter Diagram" }
+    status: unverified
+  - id: res.L04.035
+    kind: card
+    topic: correlation
+    front: When does the correlation coefficient become ineffective, and why?
+    back: >-
+      When the number of observations is small (n < 80): outliers then have a marked effect on r and often
+      produce misleading results.
+    src: { page: 31, quote: "it becomes very ineffective when the total number of observations in the study are small (n < 80)" }
+    status: unverified
+    tags: [numbers]
+  # --- Case reports and case series (slides 34-40) ---
+  - id: res.L04.036
+    kind: card
+    topic: case-reports
+    front: What is a case report, and where does it sit in the hierarchy of evidence?
+    back: >-
+      It describes a single unique case or unusual finding of interest. Case reports and case series sit
+      near the bottom of the hierarchy of reliable evidence.
+    src: { page: 34, quote: "A case report (or case study) usually describes a single unique case or finding of interest (unusual finding)." }
+    status: unverified
+  - id: res.L04.037
+    kind: table
+    topic: case-reports
+    title: Types of case report
+    columns: [Type, Feature]
+    rows:
+      - [Disease identification, "Previously unknown condition or variant of a known one; avoid generalising the rare condition"]
+      - [Adverse drug reaction reporting, "Most common source of information for drug removal; excellent for rare, serious ADRs"]
+      - [New treatment approach, "Generates a hypothesis to test with a stronger design; may lead to unapproved use"]
+      - [Educational, "A scenario to help clinicians improve practice skills"]
+      - [Quality assurance, "Practice errors that show others what to avoid"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 36, quote: "Most common source of information for drug removal" }
+    status: unverified
+  - id: res.L04.038
+    kind: mcq
+    topic: case-reports
+    stem: Case reports are most useful in which situation?
+    options:
+      - The sample size of your study is large
+      - Determining a cause-effect relationship between an intervention and outcome
+      - Developing new practice guidelines
+      - Unknown manifestations of a known disease are identified
+    answer: 3
+    why:
+      - A case report usually describes one case.
+      - Case reports cannot establish cause and effect.
+      - Guidelines sit at the top of the hierarchy and rest on stronger evidence.
+      - Detecting novelties, such as a new variant of a known condition, is the main merit of a case report.
+    src: { page: 40, quote: "Detecting novelties" }
+    status: unverified
+    tags: [book-question]
+  - id: res.L04.039
+    kind: card
+    topic: case-reports
+    front: Define a case series.
+    back: >-
+      A descriptive observational study reporting on a group of patients with a defined disease treated in a
+      similar way, without a control group.
+    src: { page: 38, quote: "commonly used to report on a group of patients with a defined disease who have been treated in a similar manner (without a control group)" }
+    status: unverified
+  - id: res.L04.040
+    kind: mcq
+    topic: case-reports
+    stem: >-
+      Which is/are consistent with a case series? (A) An observational study to identify similar or differing
+      characteristics between selected cases. (B) Can be prospective or retrospective and usually involves a
+      small number of individuals. (C) A descriptive study reporting on a group with a similar disease or condition.
+    options: [A only, B only, A and C only, "A, B and C"]
+    answer: 3
+    why:
+      - A is true, but B and C are true too.
+      - B is true, but A and C are true too.
+      - B is also true; a case series can be prospective or retrospective.
+      - All three describe a case series.
+    src: { page: 38, quote: "Can be prospective or retrospective and usually involves only a small number of individuals." }
+    status: unverified
+    tags: [book-question]
+  - id: res.L04.041
+    kind: card
+    topic: case-reports
+    front: Consecutive versus non-consecutive case series?
+    back: Consecutive includes all eligible cases with the condition; non-consecutive includes some, but not all, of them.
+    src: { page: 38, quote: "Can include either non-consecutive (includes some, but not all, of the eligible patients) or consecutive individuals (include all cases)" }
+    status: unverified
+  - id: res.L04.042
+    kind: card
+    topic: case-reports
+    front: What is the main research use of a case series?
+    back: To generate clinical hypotheses that are then tested by stronger designs such as a case-control study.
+    src: { page: 38, quote: "generate clinical hypotheses which can be tested by stronger study designs such as case control study" }
+    status: unverified
+  - id: res.L04.043
+    kind: table
+    topic: case-reports
+    title: Case reports, merits and limitations
+    columns: [Merits, Limitations]
+    rows:
+      - ["Detect novelties (emerging or new disease)", "Cannot be generalised"]
+      - [Generate hypotheses, "No cause-effect relationship"]
+      - [Unexplained outcome of treatment, Difficult to replicate]
+      - ["High applicability where other designs are unethical or impractical", Publication bias]
+      - [Very detailed information, Retrospective design]
+      - [Educational value, Distracts the reader toward the unusual]
+    blanks: [[0, 1], [1, 1], [3, 1]]
+    src: { page: 40, quote: "Merits and limitations of case report" }
+    status: unverified
+  - id: res.L04.044
+    kind: card
+    topic: case-reports
+    front: Define publication bias.
+    back: >-
+      The tendency of investigators to submit, or reviewers and editors to accept, manuscripts based on the
+      direction or strength of the study's findings.
+    src: { page: 40, quote: "on the direction or strengths of study findings" }
+    status: unverified
+  - id: res.L04.045
+    kind: mcq
+    topic: case-reports
+    stem: >-
+      A journal advertisement says 2000 people with sore throat were treated with a new medicine and 94% were
+      symptom-free within 4 days, so the medicine works. What is your view of the claim?
+    options:
+      - It is correct
+      - It may be incorrect because the conclusion is not based on a rate
+      - It may be incorrect because of a long-term cohort effect
+      - It is incorrect because there was no control or comparison group
+    answer: 3
+    why:
+      - Without a comparison group we can't tell whether the drug did anything.
+      - 94% is a rate (a proportion), so that is not the flaw.
+      - There is no cohort here; it is a treated case series.
+      - Most sore throats settle within days anyway; only a comparison group shows what the drug added.
+    src: { page: 38, quote: "who have been treated in a similar manner (without a control group)" }
+    status: unverified
+    tags: [book-question]
+  # --- Exploratory (slides 41-42) ---
+  - id: res.L04.046
+    kind: card
+    topic: exploratory
+    front: What is an exploratory study?
+    back: >-
+      A small-scale study of relatively short duration, done when little is known about a situation or
+      problem. It may include description as well as comparison.
+    src: { page: 41, quote: "small-scale study of relatively short duration, which is carried out when little is known about a situation or a problem" }
+    status: unverified
+  - id: res.L04.047
+    kind: card
+    topic: exploratory
+    front: In the AIDS counselling example, how were patients' needs explored, and what does going further require?
+    back: >-
+      In-depth interviews (qualitative research) with different categories of patients and with counsellors.
+      To explain differences between groups or find causes, groups must be compared.
+    src: { page: 41, quote: "a number of in-depth interviews (qualitative research) are held with various categories of patients" }
+    status: unverified
+  # --- Cross-sectional (slides 43-49) ---
+  - id: res.L04.048
+    kind: card
+    topic: cross-sectional
+    front: What does a cross-sectional study aim to do, and when are exposure and outcome measured?
+    back: >-
+      Describe and quantify the distribution of disease, risk factors or other characteristics in a defined
+      population at one particular time; exposure and outcome are measured at the same time.
+    src: { page: 43, quote: "the investigator measures the outcome and the exposures in the study participants at the same time" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L04.049
+    kind: card
+    topic: cross-sectional
+    front: Why are cross-sectional studies called a bridge?
+    back: >-
+      They sit between simple descriptive studies (case reports and series) and studies that test hypotheses
+      (analytic and intervention); they can suggest relationships.
+    src: { page: 44, quote: "Cross-sectional studies form a bridge between simple descriptive studies" }
+    status: unverified
+  - id: res.L04.050
+    kind: card
+    topic: cross-sectional
+    front: What does a cross-sectional comparative study add to a plain survey? (malnutrition example)
+    back: >-
+      Besides describing (percentage malnourished, food availability, feeding practices, beliefs), it compares
+      malnourished with well-nourished children to find which variables may have contributed.
+    src: { page: 46, quote: "Many cross-sectional surveys focus on describing as well as comparing groups." }
+    status: unverified
+  - id: res.L04.051
+    kind: cloze
+    topic: cross-sectional
+    text: "In the 2×2 table of a cross-sectional study, prevalence of the disease = {{c1::(a + c)}} / {{c2::(a + b + c + d)}} × 100."
+    extra: Rows are exposure (yes a, b; no c, d), columns are disease (yes a, c; no b, d).
+    src: { page: 47, quote: "Prevalence of malnutrition= a+c / a+b+c+d x 100" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: res.L04.052
+    kind: card
+    topic: cross-sectional
+    front: Two ways a cross-sectional study shows an association, and the test of significance?
+    back: >-
+      Compare prevalence of disease in exposed a/(a+b) with unexposed c/(c+d), or prevalence of exposure in
+      diseased a/(a+c) with non-diseased b/(b+d). Test: chi-squared.
+    src: { page: 48, quote: "Test of significance: Chi-squared test" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L04.053
+    kind: mcq
+    topic: cross-sectional
+    stem: >-
+      A survey of 400 children finds: exposed (no safe water) 60 with diarrhoea and 140 without; unexposed 20
+      with diarrhoea and 180 without. What is the prevalence of diarrhoea among the exposed, and overall?
+    options: ["30% and 20%", "75% and 20%", "30% and 10%", "60% and 40%"]
+    answer: 0
+    why:
+      - "Exposed a/(a+b) = 60/200 = 30%; overall (a+c)/(a+b+c+d) = 80/400 = 20%."
+      - "75% is a/(a+c) = 60/80, the prevalence of exposure among the sick."
+      - "10% is c/(c+d) = 20/200, the prevalence among the unexposed."
+      - These are raw counts read as percentages.
+    src: { page: 48, quote: "in persons with the exposure, [a/(a+b)], with the prevalence of disease in persons without the exposure" }
+    status: unverified
+    tags: [numbers]
+  - id: res.L04.054
+    kind: table
+    topic: cross-sectional
+    title: Cross-sectional studies, advantages and disadvantages
+    columns: [Advantages, Disadvantages]
+    rows:
+      - ["Often use routinely collected, readily available data", "Usually cannot test epidemiologic hypotheses"]
+      - ["Less expensive and time consuming than analytic studies", "Lack an external comparison group"]
+      - ["Assess prevalence of outcomes or exposures and disease patterns", "One-time measurement: hard to derive causal relationships"]
+      - ["Help formulate hypotheses about risk factors", "Not useful for rare events"]
+      - ["-", "Selection bias from refusal or death (survival bias)"]
+    blanks: [[2, 1], [3, 1], [4, 1]]
+    src: { page: 49, quote: "Advantages and disadvantages of cross-sectional studies" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L04.055
+    kind: mcq
+    topic: cross-sectional
+    stem: Why is it difficult to derive a causal relationship from a cross-sectional study?
+    options:
+      - It always uses group-level data
+      - Exposure and outcome are measured once, at the same time
+      - It needs a very small sample
+      - It measures incidence, not prevalence
+    answer: 1
+    why:
+      - That is the ecological study; cross-sectional data are on individuals.
+      - With one simultaneous measurement we can't tell which came first, exposure or disease.
+      - Cross-sectional surveys are usually large-scale.
+      - It is the reverse; cross-sectional studies measure prevalence.
+    src: { page: 49, quote: "Since this is a one time measurement" }
+    status: unverified
+  - id: res.L04.056
+    kind: mcq
+    topic: designs
+    stem: In establishing an exposure-outcome causal association, which criterion is the most essential?
+    options: [Consistency of relationship, Temporal relationship, Duration of relationship, Strength of relationship]
+    answer: 1
+    why:
+      - Consistency supports causation but is not essential.
+      - The cause must come before the effect; without that, nothing else proves causation.
+      - Duration is not one of the key criteria.
+      - A strong association supports causation but can still be confounded.
+    src: { page: 52, quote: "In establishing exposure-outcome ‘causal association’, what is the most essential criterion?" }
+    status: unverified
+    tags: [book-question, high-yield]

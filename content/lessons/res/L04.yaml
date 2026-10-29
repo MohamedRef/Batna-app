@@ -1,0 +1,774 @@
+schema: batna.lesson/v1
+lecture: res.L04
+lessons:
+  # ------------------------------------------------------------------
+  - id: res.L04.lesson1
+    title: "تختار الـ study design إزاي؟"
+    hook: "نفس السؤال ممكن تجاوبه بـ case report أو بـ RCT. الفرق بينهم هو الفرق بين «حكاية» و«دليل»."
+    minutes: 9
+    pages: [3, 15]
+    topics: [designs, hierarchy]
+    goals:
+      - "تفرّق بين prevalence و incidence من غير تفكير"
+      - "تعرف الـ 6 عوامل اللي بتحدد الـ design"
+      - "ترسم شجرة الـ designs: experimental ولا observational، وبعدين descriptive ولا analytic"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 7
+        quote: "The scientific value and quality of information provided by a medical research are determined to a major extent by the study design."
+        title: "الـ design هو العمود الفقري"
+        text: |
+          تخيّل إنك عايز تعرف: **الشيشة بتعمل lung cancer ولا لأ؟** ممكن تحكي عن عيان واحد شافه في العيادة، وممكن تمسك 5000 واحد وتتابعهم 20 سنة. الاتنين «بحث»، بس قيمتهم مختلفة خالص.
+
+          المحاضرة بتقول إن ==scientific value and quality== أي بحث بتتحدد إلى حد كبير بالـ ==study design==.
+
+          والباحثين بيستخدموا نوعين كبار: **observational** بنوعيه descriptive و analytic، و **experimental**. كل واحد طريقة مختلفة لجمع المعلومة.
+      - kind: explain
+        page: 5
+        quote: "OUTCOME: Disease or other health-related event under study"
+        title: "4 كلمات هتسمعهم في كل سطر"
+        text: |
+          - **Outcome**: المرض أو الحدث الصحي اللي بندرسه (الـ lung cancer).
+          - **Exposed**: اللي عنده أو اتعرض لـ potential cause أو ==risk factor== (اللي بيشرب شيشة).
+          - **Prevalence**: كل الحالات الموجودة ÷ كل الناس في وقت معين. بتقيس ==burden== المرض، وبتتكتب **proportion**.
+          - **Incidence**: الحالات ==الجديدة== ÷ الـ population at risk على مدة. بتتكتب **rate per unit time** (زي annual rate).
+      - kind: aside
+        tone: analogy
+        page: 5
+        quote: "Incidence is expressed as a rate per unit time (for example, annual rate)"
+        text: |
+          الـ **prevalence** زي صورة لعنبر الباطنة الساعة 8 الصبح: كام سرير مليان دلوقتي.
+
+          الـ **incidence** زي دفتر الدخول: كام عيان **جديد** دخل في الشهر.
+
+          عنبر فيه عيانين قاعدين كتير ممكن يكون الـ prevalence عالي والـ incidence واطي. افتكر الصورة دي في أي سؤال.
+      - kind: check
+        page: 5
+        quote: "Prevalence is expressed as a proportion"
+        question: "Which statement about prevalence is correct?"
+        options:
+          - "It counts only new cases over a period of time"
+          - "It is a proportion of all existing cases in a population at a given time"
+          - "It is expressed as a rate per unit time"
+          - "Its denominator is only the population at risk"
+        answer: 1
+        why:
+          - "ده **incidence**: new cases بس."
+          - "صح: كل الحالات الموجودة ÷ كل الناس في وقت معين = proportion."
+          - "الـ rate per unit time بتاعة **incidence**."
+          - "الـ population at risk هي مقام الـ **incidence**."
+      - kind: explain
+        page: 8
+        quote: "The selection of an appropriate study design depends on"
+        title: "أختار الـ design على أساس إيه؟"
+        text: |
+          المحاضرة بتدّي 6 عوامل:
+
+          - ==Knowledge already available==: إيه الـ gap اللي هنملاه.
+          - **Purpose**: الـ research question والـ objectives والـ hypotheses.
+          - **Nature of the problem**: خصائص الـ exposure والمرض.
+          - **Time and resources**.
+          - **Skills and creativity** بتاعة الباحث.
+          - **Ethical considerations**.
+      - kind: mnemonic
+        page: 8
+        quote: "Knowledge already available about the problem (gaps of knowledge to be filled)"
+        word: "KNOWTS"
+        parts:
+          - { key: "K", text: "Knowledge already available (the gap)" }
+          - { key: "N", text: "Nature of the problem (exposure and disease)" }
+          - { key: "O", text: "Objectives: purpose, questions, hypotheses" }
+          - { key: "W", text: "Wallet and watch: time and resources" }
+          - { key: "T", text: "Talent: skills and creativity of the researcher" }
+          - { key: "S", text: "Safety: ethical considerations" }
+        hook: "قبل ما تختار design اسأل نفسك: أنا **KNOWTS** إيه؟ (knows بلكنة صعيدي 😄)"
+      - kind: explain
+        page: 10
+        quote: "Exploratory studies, or Descriptive studies"
+        title: "حالة المعرفة بتختار الـ design"
+        text: |
+          ده أهم جدول في المحاضرة. كل ما معرفتك بالمشكلة تزيد، الـ design بيطلع درجة:
+
+          - ==عارف إن في مشكلة بس مش عارف عنها حاجة== ← **exploratory / descriptive** (case studies، cross-sectional surveys).
+          - **شاكك إن عوامل معينة ليها دور** ← **analytical**: cross-sectional comparative، case-control، cohort.
+          - **عارف إن في association وعايز تعرف قد إيه سبب** ← **cohort**.
+          - ==عارف السبب كفاية تعمل intervention== ← **experimental / quasi-experimental**.
+      - kind: figure
+        page: 10
+        quote: "Experimental or quasi- experimental studies"
+        title: "سلّم المعرفة"
+        alt: "A staircase of four steps. Step 1: problem known, little else, leads to exploratory or descriptive studies. Step 2: factors suspected, leads to analytical studies (cross-sectional comparative, case-control, cohort). Step 3: association known, how much does it cause, leads to cohort. Step 4: cause known, test an intervention, leads to experimental or quasi-experimental."
+        caption: "كل ما تطلع درجة في المعرفة، الـ design بيطلع درجة في القوة. أول درجة: **descriptive**. آخر درجة: **experimental**."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="228" width="314" height="62" rx="8" class="fg-thin"/>
+            <text x="18" y="250" class="t-b">1. Problem exists, little known</text>
+            <text x="18" y="272" class="t-sm t-acc">Exploratory / descriptive</text>
+            <rect x="38" y="158" width="284" height="62" rx="8" class="fg-box"/>
+            <text x="48" y="180" class="t-b">2. Factors suspected</text>
+            <text x="48" y="202" class="t-sm t-acc">Analytical: CS comparative, case-control, cohort</text>
+            <rect x="68" y="88" width="254" height="62" rx="8" class="fg-acc"/>
+            <text x="78" y="110" class="t-b">3. How much does it cause?</text>
+            <text x="78" y="132" class="t-sm t-acc">Cohort</text>
+            <rect x="98" y="18" width="224" height="62" rx="8" class="fg-good"/>
+            <text x="108" y="40" class="t-b">4. Cause known: intervene</text>
+            <text x="108" y="62" class="t-sm t-good">Experimental / quasi-exp.</text>
+          </svg>
+      - kind: table
+        page: 11
+        quote: "Ideal study designs according to purpose of study"
+        title: "Ideal design by purpose"
+        columns: ["Purpose", "Observational", "Intervention"]
+        rows:
+          - ["Estimate prevalence", "Cross sectional", "-"]
+          - ["Natural history", "Cohort", "-"]
+          - ["Causes / risk factors", "Cohort, case-control, cross sectional", "Randomised trial"]
+          - ["Prevent disease", "-", "Randomised trial"]
+          - ["Alter course of disease", "-", "Randomised trial"]
+        hide: [[0, 1], [1, 1], [3, 2]]
+      - kind: aside
+        tone: exam
+        page: 11
+        quote: "Ideal study designs according to purpose of study"
+        text: |
+          الدكتورة سألت: «عايزين نعرف **burden** المرض علشان resource allocation، نعمل إيه؟» الإجابة **cross-sectional**.
+
+          كلمة **burden** = **prevalence** = cross-sectional. اربطهم في دماغك سلسلة واحدة، دي أول سطر في جدول الـ **ideal study designs according to purpose**.
+      - kind: figure
+        page: 13
+        quote: "Investigators study people and exposures “in nature”"
+        title: "شجرة الـ designs"
+        alt: "A decision tree. Did the investigator assign the exposure? Yes: experimental (RCT, community trial, laboratory trial). No: observational. Then: comparison group? No: descriptive (correlational, case report, case series, cross-sectional). Yes: analytic (case-control, cohort)."
+        caption: "سؤالين بس: **مين اللي حدد الـ exposure؟** وبعدين **في comparison group؟** دول بيصنّفوا أي study في الامتحان."
+        svg: |
+          <svg viewBox="0 0 330 380" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="R04a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="55" y="8" width="220" height="44" rx="8" class="fg-ink"/>
+            <text x="165" y="27" text-anchor="middle" class="t-b">Investigator assigns</text>
+            <text x="165" y="44" text-anchor="middle" class="t-b">the exposure?</text>
+            <path d="M110 52L70 92" class="fg-arrow" marker-end="url(#R04a)"/>
+            <path d="M220 52L260 92" class="fg-arrow" marker-end="url(#R04a)"/>
+            <text x="78" y="72" class="t-sm t-mut">yes</text>
+            <text x="244" y="72" class="t-sm t-mut">no</text>
+            <rect x="6" y="96" width="140" height="84" rx="8" class="fg-good"/>
+            <text x="76" y="116" text-anchor="middle" class="t-b t-good">Experimental</text>
+            <text x="76" y="136" text-anchor="middle" class="t-sm">RCT</text>
+            <text x="76" y="152" text-anchor="middle" class="t-sm">Community trial</text>
+            <text x="76" y="168" text-anchor="middle" class="t-sm">Laboratory trial</text>
+            <rect x="184" y="96" width="140" height="44" rx="8" class="fg-acc"/>
+            <text x="254" y="116" text-anchor="middle" class="t-b">Observational</text>
+            <text x="254" y="132" text-anchor="middle" class="t-sm t-mut">"in nature"</text>
+            <rect x="184" y="160" width="140" height="44" rx="8" class="fg-ink"/>
+            <text x="254" y="180" text-anchor="middle" class="t-b">Comparison</text>
+            <text x="254" y="196" text-anchor="middle" class="t-b">group?</text>
+            <path d="M254 140L254 158" class="fg-arrow" marker-end="url(#R04a)"/>
+            <path d="M220 204L110 238" class="fg-arrow" marker-end="url(#R04a)"/>
+            <path d="M270 204L270 238" class="fg-arrow" marker-end="url(#R04a)"/>
+            <text x="150" y="222" class="t-sm t-mut">no</text>
+            <text x="278" y="226" class="t-sm t-mut">yes</text>
+            <rect x="6" y="242" width="190" height="110" rx="8" class="fg-thin"/>
+            <text x="101" y="262" text-anchor="middle" class="t-b">Descriptive</text>
+            <text x="101" y="284" text-anchor="middle" class="t-sm">Correlational (ecological)</text>
+            <text x="101" y="302" text-anchor="middle" class="t-sm">Case report / case series</text>
+            <text x="101" y="320" text-anchor="middle" class="t-sm">Cross-sectional</text>
+            <text x="101" y="342" text-anchor="middle" class="t-sm t-mut">suggest hypotheses</text>
+            <rect x="210" y="242" width="114" height="110" rx="8" class="fg-bad"/>
+            <text x="267" y="262" text-anchor="middle" class="t-b t-bad">Analytic</text>
+            <text x="267" y="284" text-anchor="middle" class="t-sm">Case-control</text>
+            <text x="267" y="302" text-anchor="middle" class="t-sm">Cohort</text>
+            <text x="267" y="342" text-anchor="middle" class="t-sm t-mut">test hypotheses</text>
+          </svg>
+      - kind: explain
+        page: 12
+        quote: "Hierarchy of Scientific Evidence"
+        title: "هرم الأدلة"
+        text: |
+          الـ **hierarchy of scientific evidence** من فوق لتحت، حسب المحاضرة:
+
+          - **Clinical practice guidelines** و **systematic reviews**: دول ==secondary== (pre-appraised, filtered).
+          - **RCT**: experimental، بيختبر علاج.
+          - **Cohort**: prospective، ناس اتعرضوا لـ risk وبنستنى الـ outcome.
+          - **Case-control**: retrospective، عندهم الـ outcome وبندوّر على الـ risk factor.
+          - **Case report / case series**: ==no design==.
+          - تحت خالص: narrative reviews و expert opinions و editorials.
+      - kind: order
+        page: 12
+        quote: "Hierarchy of Scientific Evidence"
+        prompt: "رتّب حسب الـ hierarchy of evidence، من أقوى دليل لأضعف دليل:"
+        steps:
+          - "Systematic reviews"
+          - "Randomized controlled trial"
+          - "Cohort study"
+          - "Case-control study"
+          - "Case report or case series"
+          - "Expert opinion"
+        why: "الـ secondary فوق، وبعدين الـ RCT (experimental)، وبعدين cohort قبل case-control، والـ case report بلا design، والرأي تحت الكل."
+      - kind: check
+        page: 13
+        quote: "Comparison Group?"
+        question: "A cross-sectional survey with no comparison group belongs to which branch?"
+        options: ["Experimental", "Observational, analytic", "Observational, descriptive", "Secondary research"]
+        answer: 2
+        why:
+          - "الباحث ما حددش الـ exposure لحد، فهو مش experimental."
+          - "الـ analytic محتاج **comparison group**."
+          - "صح: observational ومفيش comparison group = **descriptive**."
+          - "الـ secondary زي systematic review و meta-analysis، بتجمع دراسات تانية."
+      - kind: try
+        items: [res.L04.002, res.L04.005, res.L04.008, res.L04.013, res.L04.010]
+    recap:
+      - "**Prevalence** = كل الحالات ÷ الكل في وقت معين (proportion). **Incidence** = الجديد ÷ الـ at risk على مدة (rate)."
+      - "الـ design بيحدده: **KNOWTS** (knowledge، nature، objectives، time/resources، talent، safety/ethics)."
+      - "معرفة قليلة ← descriptive. عوامل مشكوك فيها ← analytic. سبب معروف ← experimental."
+      - "**Burden/prevalence ← cross-sectional**. Natural history ← cohort. Prevent / alter course ← randomised trial."
+      - "سؤالين بيصنفوا أي study: الباحث حدد الـ exposure؟ وفي comparison group؟"
+    practice: [res.L04.001, res.L04.002, res.L04.003, res.L04.004, res.L04.005, res.L04.006, res.L04.007, res.L04.008, res.L04.009, res.L04.010, res.L04.011, res.L04.012, res.L04.013, res.L04.014, res.L04.015]
+
+  # ------------------------------------------------------------------
+  - id: res.L04.lesson2
+    title: "الـ ecological study وفخ الـ fallacy"
+    hook: "البلاد اللي بتاكل دهون أكتر عندها breast cancer أكتر. يبقى جارتك اللي بتحب الفطير المشلتت في خطر؟ مش بالضرورة!"
+    minutes: 8
+    pages: [16, 33]
+    topics: [descriptive, ecological]
+    goals:
+      - "تعدّ الـ 4 أنواع descriptive"
+      - "تعرف إن وحدة الـ ecological study هي المجموعة مش الفرد"
+      - "تشرح الـ ecological fallacy بمثال"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 16
+        quote: "Can generate a hypothesis"
+        title: "الـ descriptive study في 3 كلمات"
+        text: |
+          الـ **descriptive study**:
+
+          - ==No testing of a causal hypothesis==: مش بيثبت سبب.
+          - **No comparison group**.
+          - بس ==can generate a hypothesis==: بيدّيك الفكرة اللي الـ analytic هيختبرها بعدين.
+
+          هو الكشاف اللي بيقولك «بص هنا»، مش القاضي اللي بيحكم.
+      - kind: explain
+        page: 17
+        quote: "Correlational (Ecological) studies"
+        title: "4 أنواع"
+        text: |
+          1. **Correlational (ecological)** studies
+          2. **Case reports and case series**
+          3. **Exploratory** studies (small-scale)
+          4. **Cross-sectional** studies (large-scale)
+      - kind: mnemonic
+        page: 17
+        quote: "Correlational (Ecological) studies"
+        word: "CREW"
+        parts:
+          - { key: "C", text: "Correlational (ecological)" }
+          - { key: "R", text: "Reports: case reports and case series" }
+          - { key: "E", text: "Exploratory (small-scale)" }
+          - { key: "W", text: "Wide cross-sectional survey (large-scale)" }
+        hook: "الـ descriptive **CREW**: طاقم بيوصف المشكلة قبل ما حد يحكم عليها."
+      - kind: explain
+        page: 18
+        quote: "The units of observation are population groups rather than individuals."
+        title: "Ecological: بنبص على البلاد مش الناس"
+        text: |
+          الـ **correlational (ecological)** study معمول على ==population level==. الوحدة اللي بنقيسها **مجموعة** (بلد، محافظة، سنة)، مش شخص.
+
+          وبيقارن معدلات المرض حسب:
+
+          - ==PLACE==: **geographical studies** (بلاد مختلفة في نفس الوقت).
+          - ==TIME==: **time-trend studies** (نفس المكان في أوقات مختلفة).
+
+          الهدف: نلاقي pattern يقترح hypothesis عن السبب.
+      - kind: sort
+        page: 19
+        quote: "Time trend study"
+        prompt: "كل مثال من المحاضرة نوعه إيه؟"
+        bins: ["Geographical study", "Time-trend study"]
+        cards:
+          - { text: "Fat calorie intake vs breast cancer across countries", bin: 0 }
+          - { text: "Cigarette manufacture vs lung cancer deaths (35-44 y) across countries", bin: 0 }
+          - { text: "NSAID use vs colorectal cancer over the years", bin: 1 }
+        why: "مقارنة **بلاد** في نفس الوقت = geographical. نفس المكان على مر **السنين** = time trend. وخلي بالك: الـ NSAIDs **negative** correlation، والاتنين التانيين **positive**."
+      - kind: explain
+        page: 23
+        quote: "The studies often use data previously collected for alternative purpose (secondary data source)."
+        title: "الداتا جاية منين؟"
+        text: |
+          - الـ exposure والـ outcome لازم يكونوا على ==same level of aggregation== (نفس المدة، المدينة، البلد...).
+          - غالبًا بيستخدم ==secondary data==: سجلات primary care، مستشفيات، الوفيات، التعداد، الـ notification، المسوح القومية.
+          - النتيجة: **أرخص وأسرع**، بس الداتا **less accurate** وممكن تكون poor quality.
+      - kind: explain
+        page: 22
+        quote: "To inform resource allocation or health"
+        title: "بنستخدمه في إيه؟"
+        text: |
+          - نشوف علاقة تغيّر الـ risk factors بمعدلات المرض على مر الوقت.
+          - **Monitor** فعالية برامج صحية، و **surveillance** للأمراض المعدية وغير المعدية.
+          - **Inequalities in care**: هل pneumonia admissions أعلى في المناطق الفقيرة؟
+          - **Quality of care**: مقارنة الـ mortality بين مستشفيات أو مناطق.
+          - ==Resource allocation== وبرامج الـ health promotion.
+          - ==Generate hypotheses== عن عوامل بيئية.
+          - خصائص المكان: تلوث الهوا، الحرارة، المناخ.
+      - kind: explain
+        page: 25
+        quote: "Drawing conclusions about specific individuals based on the analysis of aggregate data on the larger group."
+        title: "الـ ecological fallacy"
+        text: |
+          ده ==the major source of error== في الـ ecological studies.
+
+          **التعريف**: logic error إنك تحكم على ==specific individuals== من ==aggregate data== بتاعة المجموعة.
+
+          ليه بيحصل؟ لأننا بنفترض إن كل الناس في البلد عندهم نفس الـ exposure ونفس الـ risk، ولأننا مش قادرين نعمل control للـ **confounding variables**.
+      - kind: figure
+        page: 26
+        quote: "Countries Incimiduals"
+        title: "نقطة البلد بتخبي جواها ناس"
+        alt: "Two scatter plots. Left, Countries: four dots rising in a straight line. Right, Individuals: the same four positions as clouds of many people; inside each cloud the people are spread with no clear trend."
+        caption: "على مستوى **البلاد** الخط طالع ومقنع. بس جوه كل بلد الناس متفرقين، والفرد مش لازم يمشي زي متوسط بلده."
+        svg: |
+          <svg viewBox="0 0 330 350" xmlns="http://www.w3.org/2000/svg">
+            <text x="165" y="18" text-anchor="middle" class="t-b">Countries</text>
+            <rect x="40" y="28" width="250" height="130" class="fg-box"/>
+            <circle cx="80" cy="135" r="7" class="fg-dot-acc"/>
+            <circle cx="140" cy="108" r="7" class="fg-dot-acc"/>
+            <circle cx="200" cy="80" r="7" class="fg-dot-acc"/>
+            <circle cx="255" cy="52" r="7" class="fg-dot-acc"/>
+            <path d="M70 140L265 46" class="fg-arrow-acc"/>
+            <text x="165" y="190" text-anchor="middle" class="t-b">Individuals</text>
+            <rect x="40" y="200" width="250" height="130" class="fg-box"/>
+            <g class="fg-dot-bad">
+              <circle cx="68" cy="300" r="3"/><circle cx="82" cy="318" r="3"/><circle cx="95" cy="296" r="3"/><circle cx="74" cy="282" r="3"/><circle cx="90" cy="312" r="3"/>
+              <circle cx="128" cy="272" r="3"/><circle cx="148" cy="292" r="3"/><circle cx="135" cy="258" r="3"/><circle cx="155" cy="266" r="3"/><circle cx="125" cy="290" r="3"/>
+              <circle cx="190" cy="240" r="3"/><circle cx="210" cy="262" r="3"/><circle cx="198" cy="228" r="3"/><circle cx="215" cy="236" r="3"/><circle cx="186" cy="258" r="3"/>
+              <circle cx="246" cy="212" r="3"/><circle cx="262" cy="232" r="3"/><circle cx="252" cy="222" r="3"/><circle cx="270" cy="210" r="3"/><circle cx="240" cy="230" r="3"/>
+            </g>
+            <text x="165" y="346" text-anchor="middle" class="t-sm t-mut">x = exposure, y = disease rate</text>
+          </svg>
+      - kind: aside
+        tone: joke
+        page: 27
+        quote: "Ecological Fallacy falsely assumes that every individual's 1Q is high, since the class average IQ is high."
+        text: |
+          متوسط الـ IQ بتاع الدفعة عالي، يبقى كل واحد في الدفعة عبقري؟ 😅 اسأل أي حد كان قاعد في آخر الـ lecture hall.
+
+          ده بالظبط الـ **ecological fallacy**: متوسط المجموعة مش بيقول حاجة أكيدة عن فرد فيها.
+      - kind: check
+        page: 25
+        quote: "Ecological fallacy (Definition) is a logic error in the interpretation of statistical data."
+        question: "Governorates with more fast-food outlets have higher diabetes rates. Concluding that each fast-food eater has a higher personal diabetes risk is an example of:"
+        options: ["Recall bias", "Ecological fallacy", "Publication bias", "Survival bias"]
+        answer: 1
+        why:
+          - "مفيش حد اتسأل يفتكر حاجة، فمفيش recall bias."
+          - "صح: داتا على مستوى **المحافظة** اتطبقت على **الفرد**."
+          - "الـ publication bias عن النتايج اللي بتتنشر."
+          - "الـ survival bias بيحصل في الـ surveys لما الحالات تموت أو ترفض."
+      - kind: table
+        page: 33
+        quote: "Advantages and disadvantages of correlational (ecological) studies"
+        title: "Ecological studies"
+        columns: ["Advantage", "Disadvantage"]
+        rows:
+          - ["Routine data: cheap and quick", "Ecological fallacy at individual level"]
+          - ["Generate hypotheses", "No data on confounding factors"]
+          - ["Group exposures: diet, air pollution, temperature", "Areas differ in how disease is measured"]
+          - ["Large populations", "Areas differ in how exposure is measured"]
+          - ["Area differences bigger than individual", "Associations not confirmed at individual level"]
+        hide: [[0, 1], [1, 1], [4, 1]]
+      - kind: try
+        items: [res.L04.017, res.L04.018, res.L04.020, res.L04.025, res.L04.028]
+    recap:
+      - "Descriptive: **no causal hypothesis، no comparison group، can generate a hypothesis**. الـ **CREW**: correlational، reports، exploratory، wide cross-sectional."
+      - "Ecological = وحدته **المجموعة**. بالـ place (geographical) أو الـ time (time trend)."
+      - "Exposure و outcome على **same level of aggregation**، والداتا غالبًا **secondary**: أرخص وأسرع بس أقل دقة."
+      - "**Ecological fallacy**: حكم على الفرد من متوسط المجموعة؛ أكبر مصدر للخطأ هنا."
+    practice: [res.L04.016, res.L04.017, res.L04.018, res.L04.019, res.L04.020, res.L04.021, res.L04.022, res.L04.023, res.L04.024, res.L04.025, res.L04.026, res.L04.027, res.L04.028]
+
+  # ------------------------------------------------------------------
+  - id: res.L04.lesson3
+    title: "الـ r، والـ case report، والـ exploratory"
+    hook: "r = −1 أقوى ولا +0.9؟ وليه عم الحاج اللي بياكل 25 بيضة في اليوم يستاهل case report؟"
+    minutes: 9
+    pages: [28, 42]
+    topics: [correlation, case-reports, exploratory]
+    goals:
+      - "تقرا قيمة r وتعرف إنها مش causation"
+      - "تفرّق بين case report و case series"
+      - "تعرف الـ merits والـ limitations والـ publication bias"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 29
+        quote: "The value of r ranges between +1 and -1."
+        title: "الـ correlation coefficient"
+        text: |
+          الـ **correlation** هي قوة واتجاه العلاقة بين متغيرين. والـ ==r== (Pearson) هو الرقم اللي بيقيسها.
+
+          - **r بين −1 و +1**.
+          - **+1**: positive (direct)، زي smoking و lung cancer.
+          - **−1**: negative (inverse)، زي exercise وخطر أمراض القلب.
+          - **0**: مفيش علاقة، زي لون البشرة والذكاء.
+
+          والقوة = ==حجم الرقم== بغض النظر عن الإشارة.
+      - kind: figure
+        page: 30
+        quote: "variables is presented graphically by Scatter Diagram"
+        title: "شكل الـ r على الـ scatter diagram"
+        alt: "Three scatter panels stacked. r = +1: dots on a rising straight line. r = 0: dots scattered with no pattern. r = -1: dots on a falling straight line."
+        caption: "العلاقة بين متغيرين بتترسم بـ **scatter diagram**. خط طالع = +، خط نازل = −، سحابة = صفر."
+        svg: |
+          <svg viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="10" width="100" height="100" class="fg-box"/>
+            <g class="fg-dot-good"><circle cx="22" cy="98" r="4"/><circle cx="40" cy="80" r="4"/><circle cx="58" cy="62" r="4"/><circle cx="76" cy="44" r="4"/><circle cx="96" cy="24" r="4"/></g>
+            <text x="60" y="130" text-anchor="middle" class="t-b t-good">r = +1</text>
+            <rect x="115" y="10" width="100" height="100" class="fg-box"/>
+            <g class="fg-dot-acc"><circle cx="130" cy="40" r="4"/><circle cx="150" cy="90" r="4"/><circle cx="170" cy="30" r="4"/><circle cx="190" cy="70" r="4"/><circle cx="200" cy="96" r="4"/><circle cx="140" cy="66" r="4"/><circle cx="180" cy="52" r="4"/></g>
+            <text x="165" y="130" text-anchor="middle" class="t-b">r = 0</text>
+            <rect x="220" y="10" width="100" height="100" class="fg-box"/>
+            <g class="fg-dot-bad"><circle cx="232" cy="22" r="4"/><circle cx="250" cy="40" r="4"/><circle cx="268" cy="58" r="4"/><circle cx="286" cy="76" r="4"/><circle cx="306" cy="96" r="4"/></g>
+            <text x="270" y="130" text-anchor="middle" class="t-b t-bad">r = −1</text>
+            <rect x="10" y="160" width="310" height="160" rx="8" class="fg-thin"/>
+            <text x="165" y="186" text-anchor="middle" class="t-b">Strength = size of r, sign = direction</text>
+            <text x="30" y="216" class="t-sm">+0.10 → very weak</text>
+            <text x="30" y="240" class="t-sm">+0.90 → strong, positive</text>
+            <text x="30" y="264" class="t-sm">−0.95 → stronger, negative</text>
+            <text x="30" y="288" class="t-sm t-b">−1.00 → perfect (strongest)</text>
+            <text x="30" y="310" class="t-sm t-mut">even r = ±1 does not prove cause</text>
+          </svg>
+      - kind: check
+        page: 29
+        quote: "The correlation coefficient (r) measures the strength of the association between two variables"
+        question: "Which correlation coefficient shows the strongest association?"
+        options: ["+0.10", "−0.95", "+0.90", "−1.00"]
+        answer: 3
+        why:
+          - "قريب من الصفر، يعني ضعيف جدًا."
+          - "قوي، بس 0.95 أقل من 1."
+          - "قوي، بس أضعف من 0.95 ومن 1."
+          - "صح: القوة بالحجم، و **1.00** = perfect correlation. الإشارة السالبة اتجاه بس."
+      - kind: aside
+        tone: trap
+        page: 29
+        quote: "a causal relationship may not necessarily exist between the two variables"
+        text: |
+          **Correlation does NOT mean causation.** حتى لو r = +1 أو −1، ده مش معناه إن في **causal relationship** بين الـ two variables.
+
+          مبيعات الآيس كريم والغرق في الصيف بيطلعوا مع بعض. الآيس كريم مش بيغرّق حد، الصيف هو اللي بيعمل الاتنين.
+      - kind: reveal
+        page: 31
+        quote: "it becomes very ineffective when the total number of observations in the study are small (n < 80)"
+        prompt: "إمتى الـ r يضحك عليك؟"
+        answer: |
+          لما الـ observations تكون قليلة: المحاضرة بتقول ==n < 80==.
+
+          في العينة الصغيرة نقطة شاذة واحدة (**outlier**) بتشد الخط كله وتطلع r مضلّل.
+      - kind: explain
+        page: 34
+        quote: "A case report (or case study) usually describes a single unique case or finding of interest (unusual finding)."
+        title: "Case report: عيان واحد غريب"
+        text: |
+          الـ ==case report== بيوصف **حالة واحدة** فريدة أو finding غير معتاد. وهو مع الـ case series ==near the bottom== في هرم الأدلة.
+
+          مثال المحاضرة: راجل كبير عنده Alzheimer بياكل **20–30 بيضة يوميًا** لمدة 15 سنة تقريبًا، والـ LDL بتاعه 142 mg/dL بس ومن غير atherosclerosis مهمة. جسمه اتأقلم: قلّل امتصاص الكوليسترول، قلّل تصنيعه، وزوّد تحويله لـ bile acid.
+      - kind: aside
+        tone: joke
+        page: 35
+        quote: "A case of an old man with Alzheimer’s disease who has been eating 20-30 eggs every day for almost 15 years."
+        text: |
+          **20–30 eggs** في اليوم لمدة 15 سنة والكوليسترول تمام 😳 ده case report، مش نصيحة غذائية. ماتروحش تقول لعيان الـ dyslipidemia «في دراسة قالت البيض مالوش دعوة».
+
+          وده بالظبط عيب الـ case report: **lack of ability to generalize**.
+      - kind: table
+        page: 36
+        quote: "Most common source of information for drug removal"
+        title: "Types of case report"
+        columns: ["Type", "Feature"]
+        rows:
+          - ["Disease identification", "New condition or variant of a known one"]
+          - ["Adverse drug reaction", "Most common source for drug removal"]
+          - ["New treatment approach", "Generates a hypothesis to test"]
+          - ["Educational", "Scenario to improve practice skills"]
+          - ["Quality assurance", "Practice errors to avoid"]
+        hide: [[1, 1], [2, 1]]
+      - kind: figure
+        page: 37
+        quote: "The stages of a Case Study / Case Report / Case Series"
+        title: "واحد ولا مجموعة؟"
+        alt: "Left panel: a doctor arrow to one patient, labelled case report. Right panel: a doctor arrow to five patients with the same disease, labelled case series, no control group."
+        caption: "**Case report** = حالة واحدة. **Case series** = مجموعة عندهم نفس المرض واتعالجوا بنفس الطريقة، ==من غير control group==."
+        svg: |
+          <svg viewBox="0 0 330 280" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="R04b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-acc"/></marker>
+            </defs>
+            <rect x="8" y="8" width="314" height="110" rx="8" class="fg-thin"/>
+            <circle cx="50" cy="48" r="14" class="fg-acc"/>
+            <rect x="38" y="66" width="24" height="34" rx="6" class="fg-acc"/>
+            <path d="M80 70L140 70" class="fg-arrow-acc" marker-end="url(#R04b)"/>
+            <circle cx="180" cy="48" r="14" class="fg-ink"/>
+            <rect x="168" y="66" width="24" height="34" rx="6" class="fg-ink"/>
+            <text x="240" y="62" class="t-b">Case report</text>
+            <text x="240" y="82" class="t-sm t-mut">one case</text>
+            <rect x="8" y="132" width="314" height="140" rx="8" class="fg-thin"/>
+            <circle cx="50" cy="172" r="14" class="fg-acc"/>
+            <rect x="38" y="190" width="24" height="34" rx="6" class="fg-acc"/>
+            <path d="M80 194L118 194" class="fg-arrow-acc" marker-end="url(#R04b)"/>
+            <g class="fg-ink">
+              <circle cx="140" cy="176" r="9"/><rect x="132" y="188" width="16" height="22" rx="4"/>
+              <circle cx="170" cy="176" r="9"/><rect x="162" y="188" width="16" height="22" rx="4"/>
+              <circle cx="200" cy="176" r="9"/><rect x="192" y="188" width="16" height="22" rx="4"/>
+              <circle cx="230" cy="176" r="9"/><rect x="222" y="188" width="16" height="22" rx="4"/>
+              <circle cx="260" cy="176" r="9"/><rect x="252" y="188" width="16" height="22" rx="4"/>
+            </g>
+            <text x="200" y="238" text-anchor="middle" class="t-b">Case series</text>
+            <text x="200" y="258" text-anchor="middle" class="t-sm t-bad">same disease, no control group</text>
+          </svg>
+      - kind: explain
+        page: 38
+        quote: "Can be prospective or retrospective and usually involves only a small number of individuals."
+        title: "Case series بالتفصيل"
+        text: |
+          - **Descriptive observational** study، بتطلع الصفات المتشابهة أو المختلفة بين حالات مختارة.
+          - ممكن تكون ==prospective or retrospective== وعادة عدد صغير.
+          - **Consecutive** = كل الحالات المؤهلة، **non-consecutive** = بعضها بس.
+          - فايدتها: ==generate clinical hypotheses== تتختبر بعدين بـ design أقوى زي **case-control**.
+
+          مثال: كل حالات **bone marrow depression** في مستشفى، والأدوية والـ risk factors عندهم. ده وصف مجموعة، مفيش مقارنة.
+      - kind: sort
+        page: 40
+        quote: "Merits and limitations of case report"
+        prompt: "Merit ولا limitation للـ case report؟"
+        bins: ["Merit", "Limitation"]
+        cards:
+          - { text: "Detecting novelties (new disease)", bin: 0 }
+          - { text: "Generating hypotheses", bin: 0 }
+          - { text: "Very detailed information", bin: 0 }
+          - { text: "Educational value", bin: 0 }
+          - { text: "Cannot establish cause-effect", bin: 1 }
+          - { text: "Difficult to replicate", bin: 1 }
+          - { text: "Publication bias", bin: 1 }
+          - { text: "Cannot generalize", bin: 1 }
+        why: "الـ case report بيكتشف الجديد ويدي تفاصيل ويعلّم، بس مايقدرش يعمم ولا يثبت سبب، وصعب يتكرر، وبيتأثر بالـ **publication bias** (اللي بيتبعت ويتقبل حسب اتجاه وقوة النتيجة)."
+      - kind: check
+        page: 40
+        quote: "Detecting novelties"
+        question: "Case reports are most useful when:"
+        options:
+          - "The sample size is large"
+          - "Determining cause and effect between an intervention and outcome"
+          - "Developing new practice guidelines"
+          - "Unknown manifestations of a known disease are identified"
+        answer: 3
+        why:
+          - "الـ case report حالة واحدة عادة."
+          - "مايقدرش يثبت **cause-effect**."
+          - "الـ guidelines فوق الهرم ومحتاجة أدلة أقوى."
+          - "صح: **detecting novelties** هو أكبر ميزة."
+      - kind: explain
+        page: 41
+        quote: "small-scale study of relatively short duration, which is carried out when little is known about a situation or a problem"
+        title: "الـ exploratory study"
+        text: |
+          ==Small-scale== ومدته قصيرة، بنعمله لما نعرف ==قليل جدًا== عن المشكلة. ممكن فيه وصف ومقارنة كمان.
+
+          مثال المحاضرة: برنامج الإيدز عايز يعمل counselling لمرضى HIV/AIDS ومش عارف احتياجاتهم. فبيعمل **in-depth interviews** (qualitative research) مع فئات مختلفة (رجالة، ستات، متجوزين، سناجل) ومع counsellors.
+
+          ولو عايز تفسر الفروق (ليه احتياجات الستات غير الرجالة؟) أو تلاقي أسباب، لازم ==تقارن مجموعات==.
+      - kind: try
+        items: [res.L04.030, res.L04.033, res.L04.039, res.L04.043, res.L04.046]
+    recap:
+      - "**r** من −1 لـ +1. القوة = حجم الرقم، والإشارة = الاتجاه. −1.00 أقوى من +0.90."
+      - "**Correlation ≠ causation** حتى لو r = ±1. والـ r بيضلل لو n < 80 (outliers)."
+      - "**Case report** = حالة واحدة غريبة. **Case series** = مجموعة بنفس المرض، من غير control، بتولّد hypotheses."
+      - "Case report: يكتشف الجديد، بس مايعممش ولا يثبت سبب، وفيه **publication bias**."
+      - "**Exploratory** = small-scale، قصير، لما المعرفة قليلة؛ غالبًا in-depth interviews."
+    practice: [res.L04.029, res.L04.030, res.L04.031, res.L04.032, res.L04.033, res.L04.034, res.L04.035, res.L04.036, res.L04.037, res.L04.038, res.L04.039, res.L04.040, res.L04.041, res.L04.042, res.L04.043, res.L04.044, res.L04.045, res.L04.046, res.L04.047]
+
+  # ------------------------------------------------------------------
+  - id: res.L04.lesson4
+    title: "الـ cross-sectional: صورة في لحظة"
+    hook: "مسح لأطفال قرية في يوم واحد: كام واحد عنده سوء تغذية، وإيه الفرق بينه وبين اللي كويس؟"
+    minutes: 9
+    pages: [43, 52]
+    topics: [cross-sectional, designs]
+    goals:
+      - "تعرف إن الـ exposure والـ outcome بيتقاسوا في نفس الوقت"
+      - "تحسب الـ prevalence من الـ 2×2 table"
+      - "تعرف ليه الـ cross-sectional صعب يثبت سبب"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 43
+        quote: "the investigator measures the outcome and the exposures in the study participants at the same time"
+        title: "صورة فوتوغرافية"
+        text: |
+          الـ **cross-sectional** بيوصف ويقيس توزيع المرض أو الـ risk factors في population محددة ==at one particular time==.
+
+          الباحث بيقيس الـ ==exposure والـ outcome في نفس الوقت==.
+
+          بيستخدموه في الـ **population-based surveys**، وعلشان نعرف **prevalence** الأمراض في عينات العيادات.
+      - kind: explain
+        page: 44
+        quote: "Cross-sectional studies form a bridge between simple descriptive studies"
+        title: "الكوبري"
+        text: |
+          الـ cross-sectional ==bridge== بين الـ descriptive البسيط (case reports و series) والدراسات اللي بتختبر hypotheses (analytic و intervention).
+
+          هو مش بيثبت، بس **can suggest the presence of relationships**.
+      - kind: figure
+        page: 45
+        quote: "Cross-sectional Design"
+        title: "الـ design في لحظة واحدة"
+        alt: "A study population splits into disease and no disease, each split into factor present and factor absent, all measured on one vertical line labelled one point in time."
+        caption: "كل حاجة بتتقاس **في نفس اللحظة**: عنده المرض ولا لأ، وعنده الـ factor ولا لأ. ومفيش سهم زمن."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="R04c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="8" y="118" width="96" height="54" rx="8" class="fg-ink"/>
+            <text x="56" y="141" text-anchor="middle" class="t-b">Study</text>
+            <text x="56" y="159" text-anchor="middle" class="t-b">population</text>
+            <path d="M104 132L134 82" class="fg-arrow" marker-end="url(#R04c)"/>
+            <path d="M104 158L134 208" class="fg-arrow" marker-end="url(#R04c)"/>
+            <rect x="136" y="56" width="80" height="44" rx="8" class="fg-bad"/>
+            <text x="176" y="83" text-anchor="middle" class="t-b">Disease</text>
+            <rect x="136" y="190" width="80" height="44" rx="8" class="fg-good"/>
+            <text x="176" y="217" text-anchor="middle" class="t-b">No disease</text>
+            <rect x="232" y="30" width="90" height="34" rx="6" class="fg-box"/>
+            <text x="277" y="52" text-anchor="middle" class="t-sm">factor present</text>
+            <rect x="232" y="92" width="90" height="34" rx="6" class="fg-box"/>
+            <text x="277" y="114" text-anchor="middle" class="t-sm">factor absent</text>
+            <rect x="232" y="164" width="90" height="34" rx="6" class="fg-box"/>
+            <text x="277" y="186" text-anchor="middle" class="t-sm">factor present</text>
+            <rect x="232" y="226" width="90" height="34" rx="6" class="fg-box"/>
+            <text x="277" y="248" text-anchor="middle" class="t-sm">factor absent</text>
+            <path d="M216 72L230 50" class="fg-arrow"/><path d="M216 84L230 106" class="fg-arrow"/>
+            <path d="M216 206L230 182" class="fg-arrow"/><path d="M216 218L230 242" class="fg-arrow"/>
+            <path d="M120 276L322 276" class="fg-thin"/>
+            <text x="221" y="294" text-anchor="middle" class="t-sm t-mut">all measured at one point in time</text>
+          </svg>
+      - kind: explain
+        page: 46
+        quote: "Many cross-sectional surveys focus on describing as well as comparing groups."
+        title: "Cross-sectional comparative"
+        text: |
+          كتير من المسوح بتوصف **وبتقارن**. مثال المحاضرة: مسح عن ==malnutrition==:
+
+          - نسبة الأطفال اللي عندهم سوء تغذية.
+          - العوامل اللي بتأثر على توافر الأكل (اقتصادية، بيئية، سياسية).
+          - عادات التغذية، والمعرفة والمعتقدات اللي وراها.
+
+          وبعدين يقارن ==malnourished vs well-nourished== علشان يعرف أنهي variables ممكن تكون ساهمت.
+      - kind: table
+        page: 47
+        quote: "Prevalence of malnutrition= a+c / a+b+c+d x 100"
+        title: "The 2×2 table: prevalence of malnutrition"
+        columns: ["Exposure", "Disease: yes", "Disease: no", "Total"]
+        rows:
+          - ["Exposed", "a", "b", "a+b"]
+          - ["Non-exposed", "c", "d", "c+d"]
+          - ["Total", "a+c", "b+d", "a+b+c+d"]
+        hide: [[2, 1], [2, 3]]
+      - kind: explain
+        page: 48
+        quote: "in persons with the exposure, [a/(a+b)], with the prevalence of disease in persons without the exposure"
+        title: "إزاي نطلع association؟"
+        text: |
+          الـ **prevalence** الكلية = ==(a + c) / (a + b + c + d) × 100==.
+
+          وعلشان نشوف association، عندنا طريقتين:
+
+          - **Prevalence of disease**: في الـ exposed **a/(a+b)** مقابل الـ unexposed **c/(c+d)**.
+          - **Prevalence of exposure**: في العيانين **a/(a+c)** مقابل السليمين **b/(b+d)**.
+
+          والـ test of significance هنا ==chi-squared test==.
+      - kind: aside
+        tone: tip
+        page: 48
+        quote: "Disease No Disease Exposed Not Exposed"
+        text: |
+          علشان ماتتلخبطش: **الصف = exposure**، **العمود = disease**.
+
+          - «بين الـ exposed» = امشي **بالعرض** على الصف الأول: a/(a+b).
+          - «بين العيانين» = انزل **بالطول** في العمود الأول: a/(a+c).
+      - kind: case
+        page: 48
+        quote: "in persons with the exposure, [a/(a+b)], with the prevalence of disease in persons without the exposure"
+        stem: "Survey of 400 children. No safe water (exposed): 60 with diarrhoea, 140 without. Safe water: 20 with diarrhoea, 180 without."
+        steps:
+          - question: "What is the overall prevalence of diarrhoea?"
+            options: ["15%", "20%", "30%", "40%"]
+            answer: 1
+            why: "(a + c)/total = (60 + 20)/400 = 80/400 = **20%**."
+          - question: "What is the prevalence of diarrhoea among the exposed?"
+            options: ["10%", "30%", "75%", "60%"]
+            answer: 1
+            why: "a/(a+b) = 60/200 = **30%**. الـ 75% هي a/(a+c)، يعني نسبة الـ exposure بين العيانين."
+          - question: "Which test of significance compares the two prevalences?"
+            options: ["t-test", "Chi-squared test", "Correlation coefficient", "Odds ratio"]
+            answer: 1
+            why: "المحاضرة: test of significance = **chi-squared test**."
+      - kind: sort
+        page: 49
+        quote: "Advantages and disadvantages of cross-sectional studies"
+        prompt: "ميزة ولا عيب للـ cross-sectional؟"
+        bins: ["Advantage", "Disadvantage"]
+        cards:
+          - { text: "Routinely collected, readily available data", bin: 0 }
+          - { text: "Cheaper and quicker than analytic studies", bin: 0 }
+          - { text: "Assesses prevalence and disease patterns", bin: 0 }
+          - { text: "Helps formulate hypotheses on risk factors", bin: 0 }
+          - { text: "Usually cannot test hypotheses", bin: 1 }
+          - { text: "Hard to derive causal relationships", bin: 1 }
+          - { text: "Not useful for rare events", bin: 1 }
+          - { text: "Selection bias from refusal or death", bin: 1 }
+        why: "رخيص وسريع وبيدّي prevalence ويقترح hypotheses، بس مقاسة **مرة واحدة** فصعب يثبت سبب، ومش نافع للنادر، وفيه **survival bias** من الوفاة والرفض."
+      - kind: reveal
+        page: 49
+        quote: "Since this is a one time measurement"
+        prompt: "ليه الـ cross-sectional صعب يثبت إن الـ exposure سبب المرض؟"
+        answer: |
+          لأنه ==one time measurement==: الاتنين اتقاسوا في نفس اللحظة، فمش عارف مين جه الأول.
+
+          ولاحظ إن ده بالظبط أهم criterion في الـ causation: الـ ==temporal relationship==. السبب لازم ييجي **قبل** النتيجة.
+      - kind: check
+        page: 52
+        quote: "In establishing exposure-outcome ‘causal association’, what is the most essential criterion?"
+        question: "In establishing a causal association, the most essential criterion is:"
+        options: ["Consistency of relationship", "Temporal relationship", "Duration of relationship", "Strength of relationship"]
+        answer: 1
+        why:
+          - "الـ consistency بتدعم بس مش أساسية."
+          - "صح: السبب لازم ييجي **قبل** النتيجة، ومن غيرها مفيش causation."
+          - "الـ duration مش من الـ criteria الأساسية."
+          - "علاقة قوية ممكن تكون confounded."
+      - kind: check
+        page: 51
+        quote: "Incorrect because as no control or comparison group was involved"
+        question: "An advert says 2000 sore-throat patients took a new drug and 94% were well within 4 days, so it works. Your view?"
+        options:
+          - "Correct"
+          - "May be wrong: not based on a rate"
+          - "May be wrong: long-term cohort effect"
+          - "Wrong: there is no control or comparison group"
+        answer: 3
+        why:
+          - "معظم التهابات الزور بتخف لوحدها في أيام."
+          - "94% ده rate فعلًا."
+          - "مفيش cohort هنا أصلًا."
+          - "صح: من غير **comparison group** مانعرفش الدوا زوّد إيه على الطبيعي."
+      - kind: try
+        items: [res.L04.048, res.L04.051, res.L04.052, res.L04.054, res.L04.056]
+    recap:
+      - "Cross-sectional: exposure و outcome **في نفس الوقت**، في population محددة؛ بيقيس **prevalence**."
+      - "**Bridge** بين الـ descriptive البسيط والـ analytic؛ بيقترح علاقات مش بيثبتها."
+      - "Prevalence = (a+c)/(a+b+c+d) × 100. بين الـ exposed a/(a+b)، بين العيانين a/(a+c). الـ test: **chi-squared**."
+      - "عيوبه: one-time measurement، مش للنادر، **survival/refusal bias**."
+      - "أهم criterion للسببية: **temporal relationship**."
+    practice: [res.L04.048, res.L04.049, res.L04.050, res.L04.051, res.L04.052, res.L04.053, res.L04.054, res.L04.055, res.L04.056, res.L04.009, res.L04.045]

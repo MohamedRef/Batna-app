@@ -1,0 +1,803 @@
+schema: batna.lesson/v1
+lecture: res.L05
+lessons:
+  # ------------------------------------------------------------------
+  - id: res.L05.lesson1
+    title: "الـ case-control: نبدأ من العيان ونرجع لورا"
+    hook: "عندك 100 عيان cancer larynx في المعهد. إزاي تعرف إن الكحول ليه دعوة من غير ما تستنى 20 سنة؟"
+    minutes: 8
+    pages: [4, 18]
+    topics: [analytic, case-control]
+    goals:
+      - "تعرف إن الـ analytic مفتاحه الـ comparison group"
+      - "تعرّف الـ case-control وتعرف اتجاهه backwards"
+      - "ترتب خطواته وتعرف ليه الـ case definition مهم"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 9
+        quote: "The key feature of analytic epidemiology is a comparison group."
+        title: "من الوصف للاختبار"
+        text: |
+          في المحاضرة اللي فاتت الـ descriptive كان بيوصف و**يقترح** hypotheses. دلوقتي الـ ==analytic== بيعمل حاجتين:
+
+          - **Quantify** العلاقة بين الـ exposure والـ outcome.
+          - **Test hypotheses** عن الـ causal relationships.
+
+          والمفتاح اللي بيفرقه عن الـ descriptive: ==comparison group==.
+
+          والنوعين الأشهر: **case-control** و **cohort**.
+      - kind: table
+        page: 6
+        quote: "Test hypotheses"
+        title: "Observational: مين بيعمل إيه؟"
+        columns: ["Descriptive", "Analytic"]
+        rows:
+          - ["Natural history", "Test hypotheses"]
+          - ["Allocation of resources", "Assess causation"]
+          - ["Suggest hypotheses", "-"]
+        hide: [[0, 1], [1, 1]]
+      - kind: check
+        page: 4
+        quote: "Comparison Group?"
+        question: "A comparison (control) group is lacking in:"
+        options: ["Cross-sectional studies", "Case-control studies", "Cohort studies", "Randomized controlled trial"]
+        answer: 0
+        why:
+          - "صح: المحاضرة حاطاه تحت **descriptive**، ومفيش comparison group."
+          - "الـ **controls** هم الـ comparison group."
+          - "الـ unexposed cohort هو الـ comparison group."
+          - "الـ RCT ليه control arm دايمًا."
+      - kind: explain
+        page: 8
+        quote: "Disease or other health-related event under study (Dependent variable)"
+        title: "متغيرين بس"
+        text: |
+          - **Exposure** = ==independent variable== (السبب المحتمل).
+          - **Outcome** = ==dependent variable== (المرض).
+
+          الـ outcome «dependent» لأنه بيعتمد على الـ exposure. سهلة.
+      - kind: explain
+        page: 12
+        quote: "The selection of individuals on the basis of whether they do (cases) or they do not (control) have a particular disease"
+        title: "تعريف الـ case-control"
+        text: |
+          بنختار الناس على أساس ==المرض==:
+
+          - **Cases**: عندهم المرض.
+          - **Controls**: ماعندهمش المرض.
+
+          وبعدين نقارن: كام في المية من كل مجموعة ==كان عنده exposure== في الماضي؟
+      - kind: figure
+        page: 13
+        quote: "Backwards Directionality"
+        title: "Backwards directionality"
+        alt: "A time arrow runs left to right from exposure to outcome. Two boxes on the right, disease yes and disease no, each with an arrow pointing backwards to a question mark on the exposure side. Study begins in the present."
+        caption: "الزمن ماشي من الـ exposure للمرض، بس الـ case-control **بيمشي عكسه**: يبدأ من المرض النهارده ويدوّر على الـ exposure في الماضي. من **effect to cause**."
+        svg: |
+          <svg viewBox="0 0 330 240" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="R05a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-acc"/></marker>
+              <marker id="R05b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-bad"/></marker>
+            </defs>
+            <text x="50" y="22" text-anchor="middle" class="t-b">Exposure</text>
+            <text x="270" y="22" text-anchor="middle" class="t-b">Outcome</text>
+            <path d="M20 40L310 40" class="fg-arrow-acc" marker-end="url(#R05a)"/>
+            <text x="165" y="58" text-anchor="middle" class="t-sm t-mut">time →</text>
+            <text x="50" y="112" text-anchor="middle" class="t-lg t-b">?</text>
+            <rect x="222" y="88" width="96" height="40" rx="8" class="fg-bad"/>
+            <text x="270" y="113" text-anchor="middle" class="t-b">Cases (yes)</text>
+            <path d="M220 108L72 108" class="fg-arrow-bad" marker-end="url(#R05b)"/>
+            <text x="50" y="172" text-anchor="middle" class="t-lg t-b">?</text>
+            <rect x="222" y="148" width="96" height="40" rx="8" class="fg-good"/>
+            <text x="270" y="173" text-anchor="middle" class="t-b">Controls (no)</text>
+            <path d="M220 168L72 168" class="fg-arrow-bad" marker-end="url(#R05b)"/>
+            <text x="50" y="222" text-anchor="middle" class="t-sm t-mut">past</text>
+            <text x="270" y="222" text-anchor="middle" class="t-sm t-b">study begins here</text>
+          </svg>
+      - kind: aside
+        tone: analogy
+        page: 13
+        quote: "Backwards Directionality"
+        text: |
+          الـ case-control (**backwards directionality**) زي المحقق في فيلم عربي قديم: الجريمة حصلت خلاص (المرض)، وهو بيرجع **لورا** يسأل «كنت فين ليلة الحادثة؟» (الـ exposure).
+
+          والـ cohort (هنشوفه بعدين) زي الكاميرا اللي بتسجّل من الأول وتستنى تشوف هيحصل إيه.
+      - kind: order
+        page: 14
+        quote: "Case Control Study Steps"
+        prompt: "رتّب خطوات الـ case-control study:"
+        steps:
+          - "Definition of cases"
+          - "Selection of cases"
+          - "Selection of controls"
+          - "Ascertainment of exposure status"
+          - "Analysis"
+          - "Conclusion and interpretation"
+        why: "تعرّف الـ case، تختارهم، تختار الـ controls، تعرف مين اتعرض، تحلل، وبعدين تفسّر."
+      - kind: explain
+        page: 16
+        quote: "Ensures that all persons who are counted as cases actually have the same disease"
+        title: "الـ case definition"
+        text: |
+          ==Case definition== = مجموعة **standard diagnostic criteria** لازم تتحقق علشان تعتبر حد case.
+
+          ليه؟ علشان ==كل الـ cases عندهم نفس المرض فعلًا==.
+
+          بتشمل clinical criteria (lab، symptoms، signs)، وأحيانًا قيود على **time, place, person**.
+
+          مثال المحاضرة: hypertension in pregnancy حسب ACOG: diastolic ≥ 90 أو systolic ≥ 140 بعد 20 أسبوع، في ست كان ضغطها طبيعي، متسجل مرتين بينهم 4 ساعات.
+      - kind: reveal
+        page: 18
+        quote: "Preferably new cases or incident cases"
+        prompt: "تاخد cases جديدة (incident) ولا قديمة (prevalent)؟ وليه؟"
+        answer: |
+          المحاضرة: ==preferably new (incident) cases==، والـ prevalent ممكن تتاخد.
+
+          السبب المنطقي (مش من نص المحاضرة): العيان القديم ممكن يكون غيّر عاداته بسبب المرض، أو ذاكرته عن الـ exposure بقت أضعف، والعيانين اللي ماتوا بدري مش هيبقوا موجودين أصلًا.
+      - kind: check
+        page: 15
+        quote: "source of cases - hospital, general population"
+        question: "Which statement about cases in a case-control study is correct?"
+        options:
+          - "Cases are chosen because they were exposed"
+          - "Cases need a clear case definition and can come from hospitals or the general population"
+          - "Only prevalent cases may be used"
+          - "Cases are followed into the future to see who gets the disease"
+        answer: 1
+        why:
+          - "الاختيار على أساس **المرض** مش الـ exposure. ده cohort."
+          - "صح: case definition واضح، والمصدر hospital أو general population."
+          - "الأفضل **incident** cases."
+          - "ده cohort. الـ case-control بيرجع لورا."
+      - kind: try
+        items: [res.L05.004, res.L05.006, res.L05.007, res.L05.008, res.L05.009]
+    recap:
+      - "Analytic = **quantify + test hypotheses**، والمفتاح **comparison group**."
+      - "Exposure = independent، outcome = dependent."
+      - "Case-control: نختار على أساس **المرض** (cases vs controls) ونقارن الـ exposure في الماضي. **Backwards** (effect → cause)."
+      - "الخطوات: define cases ← select cases ← select controls ← exposure ← analysis ← conclusion."
+      - "Case definition موحّد، والأفضل **incident cases**."
+    practice: [res.L05.001, res.L05.002, res.L05.003, res.L05.004, res.L05.005, res.L05.006, res.L05.007, res.L05.008, res.L05.009, res.L05.010, res.L05.011]
+
+  # ------------------------------------------------------------------
+  - id: res.L05.lesson2
+    title: "الـ controls والـ confounding"
+    hook: "القهوة بتعمل cancer pancreas؟ ولا السيجارة اللي في الإيد التانية هي اللي بتعملها؟"
+    minutes: 8
+    pages: [19, 28]
+    topics: [controls]
+    goals:
+      - "تعرف الـ control المثالي"
+      - "تشرح الـ confounding بمثالين ودور الـ matching"
+      - "تقارن مصادر الـ controls وعدد الـ controls لكل case"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 19
+        quote: "Control must be Ideally matching with the cases by age, sex and other characteristics"
+        title: "الـ control المثالي"
+        text: |
+          الـ control لازم يكون ==شبه الـ case في كل حاجة== (السن، النوع، وصفات تانية)، ==ما عدا المرض==.
+
+          الفكرة: لو المجموعتين شبه بعض في كل حاجة، أي فرق في الـ exposure يبقى له معنى.
+      - kind: explain
+        page: 22
+        quote: "factors other than the studied exposure that disturb the relation between the studied exposure and the disease"
+        title: "الـ confounder: الطرف التالت"
+        text: |
+          ==Confounding factor== = عامل **غير** الـ exposure اللي بندرسه، بيلخبط العلاقة بين الـ exposure والمرض.
+
+          علشان يبقى confounder لازم يكون:
+
+          - مرتبط بالـ **exposure**،
+          - وبيأثر لوحده على **المرض**.
+      - kind: figure
+        page: 25
+        quote: "(Confounder}"
+        title: "القهوة، السجاير، والـ pancreas"
+        alt: "Triangle. Coffee (exposure) with a dashed arrow to pancreatic cancer (disease). Smoking (confounder) at the bottom, linked both ways to coffee and with a solid arrow to pancreatic cancer."
+        caption: "شاربين القهوة بيدخنوا أكتر، والتدخين بيعمل pancreatic cancer. فالقهوة **شكلها** متهمة، والـ confounder هو اللي عمل كده."
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="R05c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+              <marker id="R05d" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-bad"/></marker>
+            </defs>
+            <rect x="8" y="14" width="110" height="48" rx="8" class="fg-acc"/>
+            <text x="63" y="36" text-anchor="middle" class="t-b">Coffee</text>
+            <text x="63" y="54" text-anchor="middle" class="t-sm t-mut">exposure</text>
+            <rect x="200" y="14" width="122" height="48" rx="8" class="fg-ink"/>
+            <text x="261" y="36" text-anchor="middle" class="t-b">Pancreatic ca</text>
+            <text x="261" y="54" text-anchor="middle" class="t-sm t-mut">disease</text>
+            <path d="M120 38L196 38" class="fg-thin" marker-end="url(#R05c)"/>
+            <text x="158" y="30" text-anchor="middle" class="t-sm t-mut">?</text>
+            <rect x="105" y="176" width="120" height="48" rx="8" class="fg-bad"/>
+            <text x="165" y="198" text-anchor="middle" class="t-b t-bad">Smoking</text>
+            <text x="165" y="216" text-anchor="middle" class="t-sm t-mut">confounder</text>
+            <path d="M120 174L72 66" class="fg-arrow" marker-end="url(#R05c)"/>
+            <path d="M72 66L120 174" class="fg-arrow" marker-end="url(#R05c)"/>
+            <path d="M212 174L258 66" class="fg-arrow-bad" stroke-width="3" marker-end="url(#R05d)"/>
+            <text x="60" y="130" class="t-sm">linked</text>
+            <text x="250" y="130" class="t-sm t-bad">causes</text>
+          </svg>
+      - kind: explain
+        page: 24
+        quote: "If the average ages of the smoking and non-smoking groups are very different"
+        title: "مثال تاني: السن"
+        text: |
+          في دراسة **smoking و lung cancer**: الـ lung cancer بيزيد مع السن.
+
+          لو متوسط سن المدخنين أكبر بكتير من غير المدخنين، جزء من الفرق ممكن يكون من ==السن== مش من التدخين بس. هنا ==age is a confounder==.
+      - kind: explain
+        page: 21
+        quote: "match upon a potential confounding variable in order to remove the confounding effect"
+        title: "الحل: matching"
+        text: |
+          في الـ ==matched case-control== بنختار الـ controls على أساس صفات الـ case.
+
+          ونعمل match على الـ ==potential confounding variable== علشان نشيل تأثيره. لو كل case عنده 60 سنة جاله control عنده 60 سنة، السن مايقدرش يعمل الفرق.
+      - kind: check
+        page: 21
+        quote: "match upon a potential confounding variable in order to remove the confounding effect"
+        question: "Why do we match controls to cases on age in a smoking-lung cancer study?"
+        options:
+          - "To increase the number of cases"
+          - "To remove the confounding effect of age"
+          - "To make the study prospective"
+          - "To measure incidence directly"
+        answer: 1
+        why:
+          - "الـ matching مش بيزود الـ cases."
+          - "صح: السن مرتبط بالتدخين وبالمرض، فبنعمل match عليه علشان نشيل الـ confounding."
+          - "الاتجاه لسه backwards؛ matching مش بيغيره."
+          - "الـ case-control مايقدرش يحسب incidence مباشرة."
+      - kind: table
+        page: 26
+        quote: "Selection of controls: Sources"
+        title: "Sources of controls"
+        columns: ["Source", "Plus", "Minus"]
+        rows:
+          - ["Hospital", "Easy, cooperative, accurate (less recall bias)", "Not typical; more risk factors"]
+          - ["Population (registry)", "Most representative; healthy", "Time, money, energy"]
+          - ["Neighbourhood / phone", "Similar residence", "Non-cooperation, security"]
+          - ["Best friend / sibling", "Accessible, similar", "Overmatching"]
+        hide: [[1, 1], [3, 2], [0, 2]]
+      - kind: aside
+        tone: joke
+        page: 26
+        quote: "Overmatching"
+        text: |
+          تجيب صاحبك الأنتيم control؟ هو بيقعد معاك على نفس القهوة، بيشرب نفس الشيشة، وبياكل من نفس عربية الفول 😅
+
+          شبهك **أوي** لدرجة إنه بيشيل الفرق اللي إنت بتدوّر عليه. ده اسمه **overmatching**.
+      - kind: check
+        page: 26
+        quote: "Most representative of the general population"
+        question: "Which source gives the most representative controls?"
+        options: ["Hospital controls", "Population-based (registry) controls", "Best-friend controls", "Sibling controls"]
+        answer: 1
+        why:
+          - "عيانين المستشفى not typical وعندهم risk factors أكتر."
+          - "صح: الـ population-based أكتر representative، بس مكلفين في الوقت والفلوس."
+          - "الأصحاب = خطر **overmatching**."
+          - "الإخوات = overmatching برضه."
+      - kind: explain
+        page: 27
+        quote: "But if cases < 50 therefore 2,3 or 4 times the number of cases"
+        title: "كام control؟ ونعرف الـ exposure إزاي؟"
+        text: |
+          - عادة عدد الـ controls ==equal== لعدد الـ cases.
+          - بس لو الـ cases ==أقل من 50==، خد **2 أو 3 أو 4** controls لكل case.
+
+          والـ **exposure** بنعرفه بـ: observation، interviews، questionnaire، أو examination of records.
+      - kind: try
+        items: [res.L05.012, res.L05.013, res.L05.014, res.L05.017, res.L05.019]
+    recap:
+      - "الـ control المثالي شبه الـ case في كل حاجة **ما عدا المرض**."
+      - "**Confounder** = عامل مرتبط بالـ exposure وبيأثر على المرض لوحده (smoking في coffee/pancreas، age في smoking/lung cancer)."
+      - "**Matching** على الـ confounder بيشيل تأثيره."
+      - "Hospital controls سهلة بس not typical؛ population الأكتر representative؛ friends/siblings = **overmatching**."
+      - "Controls = cases عادة، ولو cases < 50 خد **2–4** لكل case."
+    practice: [res.L05.012, res.L05.013, res.L05.014, res.L05.015, res.L05.016, res.L05.017, res.L05.018, res.L05.019, res.L05.020]
+
+  # ------------------------------------------------------------------
+  - id: res.L05.lesson3
+    title: "الـ odds ratio: ad على bc"
+    hook: "رقم واحد بيقولك الكحول ليه علاقة بـ cancer larynx قد إيه. وهتحسبه في 10 ثواني."
+    minutes: 9
+    pages: [29, 37]
+    topics: [odds-ratio, cc-merits]
+    goals:
+      - "تحسب الـ OR من أي 2×2 table"
+      - "تفسّر OR = 1 و > 1 و < 1"
+      - "تعرف مزايا وعيوب الـ case-control"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 32
+        quote: "ODDS: the probability of an event (exposure) occurring to the probability of the event not occurring"
+        title: "يعني إيه odds؟"
+        text: |
+          ==Odds== = احتمال إن الحدث يحصل ÷ احتمال إنه **مايحصلش**.
+
+          في الـ case-control الحدث هو ==الـ exposure==:
+
+          - Odds في الـ **cases** = a/c
+          - Odds في الـ **controls** = b/d
+      - kind: table
+        page: 31
+        quote: "Tabulation and Analysis"
+        title: "Tabulation and analysis: the case-control 2×2"
+        columns: ["Exposure", "Disease: yes (cases)", "Disease: no (controls)"]
+        rows:
+          - ["Yes", "a", "b"]
+          - ["No", "c", "d"]
+          - ["Total", "a+c", "b+d"]
+        hide: [[1, 1], [0, 2]]
+      - kind: explain
+        page: 32
+        quote: "ODDS RATIO: ratio of the odds of exposure among the cases to the odds of exposure among the controls = ad/bc"
+        title: "الـ odds ratio"
+        text: |
+          ==OR== = odds of exposure في الـ cases ÷ odds of exposure في الـ controls
+
+          = (a/c) ÷ (b/d) = ==ad/bc==
+
+          يعني اضرب **القطر** (a × d) وقسّم على **القطر التاني** (b × c).
+      - kind: mnemonic
+        page: 32
+        quote: "ODDS RATIO: ratio of the odds of exposure among the cases to the odds of exposure among the controls = ad/bc"
+        word: "CROSS"
+        parts:
+          - { key: "C", text: "Cases column first: a over c" }
+          - { key: "R", text: "Ratio of the two odds" }
+          - { key: "O", text: "One diagonal on top: a × d" }
+          - { key: "S", text: "Second diagonal below: b × c" }
+          - { key: "S", text: "So OR = ad/bc (cross-product ratio)" }
+        hook: "الـ OR اسمه كمان **cross-product ratio**: اعمل **X** على الجدول."
+      - kind: case
+        page: 34
+        quote: "Odds ratio = 160 x 110 = 4.89 90 x 40"
+        stem: "Alcohol and laryngeal cancer. Cases: 160 drank, 40 did not. Controls: 90 drank, 110 did not."
+        steps:
+          - question: "What is the odds of alcohol among the cases?"
+            options: ["160/200 = 0.8", "160/40 = 4", "160/90 = 1.78", "40/160 = 0.25"]
+            answer: 1
+            why: "Odds = a/c = 160/40 = **4**. الـ 0.8 دي proportion مش odds."
+          - question: "What is the odds ratio?"
+            options: ["1.78", "4.00", "4.89", "0.20"]
+            answer: 2
+            why: "OR = ad/bc = (160 × 110)/(90 × 40) = 17 600/3 600 = **4.89**."
+          - question: "How do you read it?"
+            options:
+              - "The odds of alcohol consumption are 4.89 times greater among those with laryngeal cancer than among those without"
+              - "The risk of laryngeal cancer is 4.89 times higher in drinkers"
+            answer: 0
+            why: "الـ case-control بيقارن **odds of exposure** بين العيانين والسليمين، ده تفسير المحاضرة. الـ «risk» بتاعة الـ cohort."
+      - kind: table
+        page: 33
+        quote: "Interpretation of Odds Ratio"
+        title: "Interpretation of the odds ratio"
+        columns: ["OR", "Meaning"]
+        rows:
+          - ["= 1", "No association"]
+          - ["> 1 (e.g. 3)", "Exposure 3× more likely in cases: risk factor"]
+          - ["< 1", "Exposure less in cases: protective"]
+        hide: [[0, 1], [2, 1]]
+      - kind: check
+        page: 35
+        quote: "The table below summarizes the findings of a case-control study."
+        question: "In a case-control study, risk factor present: 30 diseased, 20 non-diseased. Absent: 20 diseased, 30 non-diseased. OR = ?"
+        options: ["0.44", "0.80", "1.50", "2.25"]
+        answer: 3
+        why:
+          - "دي bc/ad، مقلوبة."
+          - "مش نسبة من الجدول ده."
+          - "دي 30/20، odds في الـ cases بس."
+          - "صح: (30 × 30)/(20 × 20) = 900/400 = **2.25**."
+      - kind: sort
+        page: 36
+        quote: "Advantages and disadvantages of case- control studies"
+        prompt: "ميزة ولا عيب للـ case-control؟"
+        bins: ["Advantage", "Disadvantage"]
+        cards:
+          - { text: "Cheap, easy and quick", bin: 0 }
+          - { text: "Multiple exposures can be examined", bin: 0 }
+          - { text: "Rare diseases, long latency", bin: 0 }
+          - { text: "Suitable when randomization is unethical", bin: 0 }
+          - { text: "Bias: selection, recall, misclassification", bin: 1 }
+          - { text: "No direct incidence", bin: 1 }
+          - { text: "Temporal relationship not clear", bin: 1 }
+          - { text: "Multiple outcomes cannot be studied", bin: 1 }
+          - { text: "RR and AR cannot be estimated", bin: 1 }
+        why: "الـ case-control سريع ورخيص وممتاز للنادر وطويل الـ latency، وبيدرس exposures كتير. بس مايدّيش incidence ولا RR/AR، والتسلسل الزمني مش واضح، ومرض واحد بس، وفيه bias."
+      - kind: aside
+        tone: trap
+        page: 36
+        quote: "Multiple outcomes cannot be studied"
+        text: |
+          الفخ الكلاسيكي: **multiple exposures ✓** لكن **multiple outcomes ✗**.
+
+          منطقي: إنت اخترت الـ cases على أساس **مرض واحد**، فمش هتقدر تدرس أمراض تانية. بس تقدر تسألهم عن كل الـ exposures اللي تخطر على بالك.
+      - kind: check
+        page: 36
+        quote: "Multiple outcomes cannot be studied"
+        question: "Which is INCORRECT about a case-control study?"
+        options:
+          - "Many risk factors can be studied at the same time"
+          - "It proceeds from outcome to exposure"
+          - "The temporal relationship is not known"
+          - "Several possible outcomes can be studied"
+        answer: 3
+        why:
+          - "صحيحة: multiple exposures."
+          - "صحيحة: backwards."
+          - "صحيحة: temporal relationship not clear."
+          - "دي الغلط: **multiple outcomes cannot be studied**."
+      - kind: aside
+        tone: exam
+        page: 36
+        quote: "unethical (e.g., alcohol and"
+        text: |
+          مثال المحاضرة لـ «suitable when randomization is unethical»: **alcohol and pregnancy outcome**. محدش هيعمل RCT يقول فيه لست حامل «اشربي».
+      - kind: try
+        items: [res.L05.021, res.L05.022, res.L05.023, res.L05.026, res.L05.028]
+    recap:
+      - "Odds = يحصل ÷ مايحصلش. Cases a/c، controls b/d."
+      - "**OR = ad/bc** (cross-product). Alcohol/larynx: 160×110 ÷ 90×40 = **4.89**."
+      - "OR = 1 لا علاقة، > 1 risk factor، < 1 protective."
+      - "Case-control: رخيص، سريع، للنادر والـ long latency، exposures كتير، ولما الـ randomization unethical."
+      - "مايدّيش incidence ولا RR/AR، والـ temporal مش واضح، و**outcome واحد**، وفيه selection/recall bias."
+    practice: [res.L05.021, res.L05.022, res.L05.023, res.L05.024, res.L05.025, res.L05.026, res.L05.027, res.L05.028, res.L05.029, res.L05.030]
+
+  # ------------------------------------------------------------------
+  - id: res.L05.lesson4
+    title: "الـ cohort والـ RR والـ AR"
+    hook: "تابع 200 مدخن و200 مش مدخن. كام واحد هيجيله cancer؟ ومن كل اللي جالهم، كام في المية بسبب السيجارة؟"
+    minutes: 10
+    pages: [38, 61]
+    topics: [cohort, risk]
+    goals:
+      - "تعرّف الـ cohort وترتب خطواته"
+      - "تحسب Ie و Io و RR و AR و ARP"
+      - "تفسّر كل رقم بجملة المحاضرة"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 38
+        quote: "a group of individuals that is exposed to a risk factor (study group) is compared to a group of individuals not exposed"
+        title: "الـ cohort: نبدأ من الـ exposure"
+        text: |
+          في الـ ==cohort== بنبدأ بمجموعتين:
+
+          - **Exposed** (study group).
+          - **Not exposed** (control group).
+
+          ونتابعهم ==over time== ونقارن مين بيجيله المرض أكتر. يعني **forward**: من الـ cause للـ effect.
+      - kind: figure
+        page: 40
+        quote: "Diagram of a cohort study"
+        title: "الكاميرا اللي بتسجّل لقدّام"
+        alt: "Diagram of a cohort study. Two rows. Top: group of interest, smokers, five people, arrow follow over time, then five people with two now diseased. Bottom: comparison group, non-smokers, arrow follow over time, then five people with one diseased. A bracket says compare outcomes."
+        caption: "نبدأ **من غير مرض** في الاتنين، نختار على أساس الـ **exposure**، ونتابع لقدّام ونقارن الـ outcomes."
+        svg: |
+          <svg viewBox="0 0 330 260" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="R05e" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-acc"/></marker>
+            </defs>
+            <text x="10" y="18" class="t-b">Exposed (smokers)</text>
+            <rect x="8" y="26" width="100" height="56" rx="8" class="fg-acc"/>
+            <g class="fg-dot-good"><circle cx="26" cy="54" r="7"/><circle cx="44" cy="54" r="7"/><circle cx="62" cy="54" r="7"/><circle cx="80" cy="54" r="7"/><circle cx="98" cy="54" r="5"/></g>
+            <path d="M112 54L196 54" class="fg-arrow-acc" marker-end="url(#R05e)"/>
+            <text x="154" y="46" text-anchor="middle" class="t-sm">follow</text>
+            <rect x="200" y="26" width="100" height="56" rx="8" class="fg-box"/>
+            <g><circle cx="218" cy="54" r="7" class="fg-dot-bad"/><circle cx="236" cy="54" r="7" class="fg-dot-bad"/><circle cx="254" cy="54" r="7" class="fg-dot-good"/><circle cx="272" cy="54" r="7" class="fg-dot-good"/><circle cx="290" cy="54" r="5" class="fg-dot-good"/></g>
+            <text x="10" y="122" class="t-b">Not exposed</text>
+            <rect x="8" y="130" width="100" height="56" rx="8" class="fg-thin"/>
+            <g class="fg-dot-good"><circle cx="26" cy="158" r="7"/><circle cx="44" cy="158" r="7"/><circle cx="62" cy="158" r="7"/><circle cx="80" cy="158" r="7"/><circle cx="98" cy="158" r="5"/></g>
+            <path d="M112 158L196 158" class="fg-arrow-acc" marker-end="url(#R05e)"/>
+            <text x="154" y="150" text-anchor="middle" class="t-sm">follow</text>
+            <rect x="200" y="130" width="100" height="56" rx="8" class="fg-box"/>
+            <g><circle cx="218" cy="158" r="7" class="fg-dot-bad"/><circle cx="236" cy="158" r="7" class="fg-dot-good"/><circle cx="254" cy="158" r="7" class="fg-dot-good"/><circle cx="272" cy="158" r="7" class="fg-dot-good"/><circle cx="290" cy="158" r="5" class="fg-dot-good"/></g>
+            <path d="M306 54L318 54L318 158L306 158" class="fg-arrow"/>
+            <text x="250" y="214" text-anchor="middle" class="t-b">compare outcomes</text>
+            <text x="20" y="240" class="t-sm t-mut">start: nobody diseased</text>
+            <text x="200" y="240" class="t-sm t-bad">red = new cases</text>
+          </svg>
+      - kind: order
+        page: 41
+        quote: "Steps of a cohort study"
+        prompt: "رتّب خطوات الـ cohort study:"
+        steps:
+          - "Selection of study subjects"
+          - "Obtaining data on exposure"
+          - "Selection of a comparison group"
+          - "Follow up"
+          - "Analysis"
+        why: "تختار الناس، تعرف مين exposed وبدرجة قد إيه، تختار مجموعة المقارنة، تتابع، وبعدين تحلل."
+      - kind: explain
+        page: 42
+        quote: "-Heterogeneous (internal comparison) e.g smoking"
+        title: "Heterogeneous ولا homogeneous؟"
+        text: |
+          - ==Heterogeneous== cohort: نفس المجموعة فيها exposed و unexposed، فالمقارنة **internal** (مثال: smoking).
+          - ==Homogeneous== cohort: الكل exposed (زي عمال الـ X-ray)، فلازم مقارنة **external** بمجموعة برة.
+
+          الـ **exposure data** بتيجي من: الناس نفسهم، records، medical exam أو special tests، environmental surveys.
+          والـ **follow-up**: periodic medical exam، records، death records، mailed questionnaires، تليفونات، زيارات بيت.
+      - kind: check
+        page: 46
+        quote: "obtaining smoking histories from women at the time of the prenatal visit"
+        question: "Smoking histories are taken at the prenatal visit, and birth weight is later correlated with smoking. This study is:"
+        options: ["Clinical trial", "Cross-sectional", "Prospective cohort", "Case-control"]
+        answer: 2
+        why:
+          - "محدش قال للستات يدخنوا."
+          - "الـ outcome (الولادة) بييجي **بعدين**، مش في نفس اللحظة."
+          - "صح: الـ exposure اتسجل الأول، وبعدين تابعنا لقدّام لحد الوزن."
+          - "الـ case-control كان هيبدأ من الأطفال اللي وزنهم قليل ويرجع لورا."
+      - kind: explain
+        page: 50
+        quote: "Incidence among exposed = Ie a a+b"
+        title: "Ie و Io"
+        text: |
+          في جدول الـ cohort: الصفوف = exposed / not exposed، والأعمدة = disease yes / no.
+
+          - ==Ie== (incidence في الـ exposed) = **a/(a+b)**
+          - ==Io== (incidence في الـ non-exposed) = **c/(c+d)**
+
+          ولاحظ: هنا بنمشي **بالعرض** على الصفوف، لأن المجموعات اتعملت على أساس الـ exposure.
+      - kind: explain
+        page: 51
+        quote: "Relative risk"
+        title: "3 أرقام بيطلعوا من Ie و Io"
+        text: |
+          - ==RR== (relative risk / risk ratio) = Ie ÷ Io: احتمال المرض في الـ exposed **نسبةً** للـ unexposed.
+          - ==AR== (attributable risk) = Ie − Io: الـ **excess risk** اللي جاي من الـ exposure.
+          - ==ARP== (attributable risk percent) = (Ie − Io)/Ie × 100: كام في المية من مرض الـ exposed **هيختفي لو شلنا الـ exposure**.
+      - kind: table
+        page: 53
+        quote: "Relative risk > 1 Risk factor"
+        title: "Interpreting RR"
+        columns: ["RR", "Meaning"]
+        rows:
+          - ["> 1", "Risk factor"]
+          - ["= 1", "No association"]
+          - ["< 1", "Protective factor"]
+        hide: [[0, 1], [2, 1]]
+      - kind: case
+        page: 54
+        quote: "Smoking Lung cancer Total"
+        stem: "Smoking and lung cancer cohort. Smokers: 20 of 200 got lung cancer. Non-smokers: 2 of 200."
+        steps:
+          - question: "What are Ie and Io?"
+            options: ["0.10 and 0.01", "20 and 2", "0.11 and 0.01", "0.10 and 0.10"]
+            answer: 0
+            why: "Ie = 20/200 = **0.10**. Io = 2/200 = **0.01**."
+          - question: "What is the relative risk?"
+            options: ["0.1", "9", "10", "18"]
+            answer: 2
+            why: "RR = 0.10/0.01 = **10**: المدخن خطره 10 أضعاف."
+          - question: "What is the attributable risk?"
+            options: ["0.09 (90 per 1000)", "0.9", "10", "0.11"]
+            answer: 0
+            why: "AR = 0.10 − 0.01 = **0.09**، يعني 90 حالة زيادة لكل 1000 مدخن."
+          - question: "And the attributable risk percent?"
+            options: ["9%", "50%", "90%", "100%"]
+            answer: 2
+            why: "ARP = 0.09/0.10 × 100 = **90%** من حالات المدخنين سببها التدخين."
+      - kind: explain
+        page: 56
+        quote: "The risk of developing hip fractures was 1.59 times higher in those with low bone mineral density"
+        title: "إزاي تكتب التفسير زي المحاضرة"
+        text: |
+          - **RR**: «The risk of developing hip fractures was ==1.59 times higher== in those with low BMD... during this 5-year follow-up.» (230/630 ÷ 110/479)
+          - **AR**: «The risk of stroke is ==increased by 0.20== for smokers compared to non-smokers.» (0.30 − 0.10)
+          - **ARP**: Apgar 0–3 vs 4–6: (34.4 − 12.5)/34.4 = ==63.7%==، يعني تقريبًا تلتين الوفيات في المجموعة دي بسبب الـ Apgar الواطي. الـ asphyxia **major contributor** بس مش السبب الوحيد.
+      - kind: aside
+        tone: exam
+        page: 61
+        quote: "The attributable risk percent typically is used as an indicator of the public health impact of exposure."
+        text: |
+          الـ **ARP** هو اللي بيقيس **public health impact**: لو منعنا الـ exposure، قد إيه من المرض هيختفي؟
+
+          وخلي بالك من الفرق: **RR** نسبة (قسمة)، **AR** فرق (طرح)، **ARP** الفرق ÷ Ie × 100.
+      - kind: mnemonic
+        page: 51
+        quote: "Relative risk"
+        word: "RAD"
+        parts:
+          - { key: "R", text: "Ratio: RR = Ie ÷ Io" }
+          - { key: "A", text: "Attributable: AR = Ie − Io (excess risk)" }
+          - { key: "D", text: "Divide the excess by Ie × 100 = ARP" }
+        hook: "**RAD**: قسمة، طرح، وبعدين الطرح ÷ Ie. ترتيب الأسئلة في الامتحان نفسه."
+      - kind: check
+        page: 61
+        quote: "ARP= (0.344-0.125)X1OO= 63.7%"
+        question: "Death rate 34.4% with Apgar 0–3 vs 12.5% with Apgar 4–6. The attributable risk percent is:"
+        options: ["21.9%", "36.3%", "63.7%", "275%"]
+        answer: 2
+        why:
+          - "21.9 ده **AR** (34.4 − 12.5)، مش الـ ARP."
+          - "36.3% = Io/Ie، الجزء اللي **مش** من الـ exposure."
+          - "صح: (0.344 − 0.125)/0.344 × 100 = **63.7%**."
+          - "ده الـ RR (2.75) مكتوب كنسبة."
+      - kind: try
+        items: [res.L05.031, res.L05.039, res.L05.041, res.L05.046, res.L05.048]
+    recap:
+      - "Cohort: exposed vs not exposed، نتابعهم **forward** ونقارن المرض (cause → effect)."
+      - "الخطوات: subjects ← exposure data ← comparison group ← follow up ← analysis."
+      - "**Ie = a/(a+b)، Io = c/(c+d)**."
+      - "**RR = Ie/Io** (>1 risk، =1 none، <1 protective). **AR = Ie − Io** (excess risk). **ARP = (Ie − Io)/Ie × 100** (public health impact)."
+      - "مدخنين 20/200 ومش مدخنين 2/200: RR 10، AR 0.09، ARP 90%."
+    practice: [res.L05.031, res.L05.032, res.L05.033, res.L05.034, res.L05.035, res.L05.036, res.L05.037, res.L05.038, res.L05.039, res.L05.040, res.L05.041, res.L05.042, res.L05.043, res.L05.044, res.L05.045, res.L05.046, res.L05.047, res.L05.048, res.L05.049, res.L05.050]
+
+  # ------------------------------------------------------------------
+  - id: res.L05.lesson5
+    title: "Case-control ولا cohort؟ والـ cohort اللي بيرجع لورا"
+    hook: "مرض نادر؟ exposure نادر؟ عايز نتيجة بسرعة؟ كل سؤال ليه design. ونختم بأسئلة الدكتورة نفسها."
+    minutes: 10
+    pages: [62, 73]
+    topics: [cohort-merits, compare, retrospective, risk]
+    goals:
+      - "تعرف نقاط قوة وضعف الـ cohort"
+      - "تختار بين case-control و cohort في أي سيناريو"
+      - "تعرف الـ retrospective (historical) cohort"
+    status: unverified
+    steps:
+      - kind: sort
+        page: 62
+        quote: "Dose response ratio"
+        prompt: "Strength ولا weakness للـ cohort؟"
+        bins: ["Strength", "Weakness"]
+        cards:
+          - { text: "Incidence rate and risks", bin: 0 }
+          - { text: "Multiple outcomes", bin: 0 }
+          - { text: "Dose-response ratio", bin: 0 }
+          - { text: "Temporal relationship", bin: 0 }
+          - { text: "Rare exposure", bin: 0 }
+          - { text: "Attrition", bin: 1 }
+          - { text: "Large sample, long time, expensive", bin: 1 }
+          - { text: "Not for rare diseases", bin: 1 }
+          - { text: "Ethical problem", bin: 1 }
+        why: "الـ cohort بيدّي incidence و RR و AR، وبيدرس أمراض كتير، وبيعرف مين جه الأول، وممتاز للـ exposure النادر. بس طويل وغالي وعينة كبيرة، والناس بتقع من المتابعة (**attrition**)، ومش نافع للمرض النادر."
+      - kind: explain
+        page: 63
+        quote: "Proceeds from effect to cause"
+        title: "الاتنين جنب بعض"
+        text: |
+          - **الاتجاه**: case-control من ==effect to cause==، الـ cohort من ==cause to effect==.
+          - **بيبدأ بـ**: المرض ↔ الناس اللي اتعرضوا.
+          - **العدد**: أقل ↔ أكبر.
+          - **النتيجة**: سريعة ↔ follow-up طويل.
+          - **المقياس**: OR (تقدير لـ RR) ↔ incidence و RR و AR.
+          - **الأمراض**: المرض اللي بندرسه بس ↔ أكتر من مرض.
+          - **التكلفة**: رخيص ↔ غالي.
+      - kind: table
+        page: 64
+        quote: "Rare exposure"
+        title: "أنهي design أحسن؟"
+        columns: ["Situation", "Case-control", "Cohort"]
+        rows:
+          - ["Rare disease", "Best", "-"]
+          - ["Long latent period", "Best", "-"]
+          - ["Rare exposure", "-", "Best"]
+          - ["Multiple outcomes", "-", "Best"]
+          - ["Several risk factors", "Best", "-"]
+        hide: [[0, 1], [2, 2], [3, 2], [4, 1]]
+      - kind: mnemonic
+        page: 64
+        quote: "Rare disease best"
+        word: "DOC"
+        parts:
+          - { key: "D", text: "rare Disease → case-control (start from the Disease)" }
+          - { key: "O", text: "many Outcomes → cohort" }
+          - { key: "C", text: "rare Cause (exposure) → Cohort (start from the Cause)" }
+        hook: "اسأل الـ **DOC**: الحاجة النادرة اللي عندك، ابدأ **منها**. مرض نادر ← ابدأ من العيانين. exposure نادر ← ابدأ من المتعرضين."
+      - kind: table
+        page: 65
+        quote: "Selection bias always present"
+        title: "Problems and measurements"
+        columns: ["", "Case-control", "Cohort"]
+        rows:
+          - ["Selection bias", "Always present", "-"]
+          - ["Recall bias", "Present", "-"]
+          - ["Temporal relationship", "Not certain", "Certain"]
+          - ["Attrition", "Little", "Problematic"]
+          - ["Incidence / AR", "Cannot be calculated", "Yes"]
+          - ["Relative risk", "Approximation (OR)", "Yes"]
+          - ["Dose-response", "No", "Best"]
+        hide: [[0, 1], [2, 2], [3, 2], [5, 1]]
+      - kind: check
+        page: 64
+        quote: "Rare exposure"
+        question: "Which situation is best studied by a cohort rather than a case-control design?"
+        options: ["A rare disease", "A disease with a long latent period", "A rare exposure", "Several risk factors for one disease"]
+        answer: 2
+        why:
+          - "المرض النادر أحسن بـ **case-control**."
+          - "الـ long latency أحسن بـ **case-control**."
+          - "صح: الـ exposure النادر (زي كيماوي في مصنع) نبدأ منه، فـ **cohort**."
+          - "عوامل كتير لمرض واحد = **case-control**."
+      - kind: explain
+        page: 66
+        quote: "Known with the name of Historical Cohort and noncurrent cohort"
+        title: "الـ retrospective cohort"
+        text: |
+          ده cohort بس ==كل الـ outcomes حصلت قبل ما الدراسة تبدأ==.
+
+          الباحث بيرجع للماضي ويختار المجموعة من ==records قديمة== (شغل، طبية...)، ويتتبعهم **لقدّام** من التاريخ ده لحد النهارده.
+
+          اسمه كمان ==historical cohort== أو **non-concurrent cohort**.
+      - kind: aside
+        tone: trap
+        page: 67
+        quote: "Outcome has already occurred"
+        text: |
+          متخلطش الـ **retrospective cohort** بالـ **case-control**!
+
+          في الاتنين الـ **outcome has already occurred**، وبيبصوا للماضي، بس الفرق في **بتختار الناس على أساس إيه**:
+
+          - على أساس الـ **exposure** (من الـ records) وتمشي لقدّام = **retrospective cohort**.
+          - على أساس **المرض** وترجع لورا = **case-control**.
+      - kind: table
+        page: 67
+        quote: "Prospective versus Retrospective Cohort Studies"
+        title: "Prospective vs retrospective cohort"
+        columns: ["", "Prospective", "Retrospective"]
+        rows:
+          - ["Exposure", "Assessed at the start (present)", "Assessed at some point in the past"]
+          - ["Outcome", "Followed into the future", "Already occurred"]
+        hide: [[0, 2], [1, 2]]
+      - kind: explain
+        page: 68
+        quote: "Requires good records of past exposure for a group of people who can then be traced to determine their current health."
+        title: "بنستخدمه إمتى؟"
+        text: |
+          محتاج ==good records of past exposure== لمجموعة نقدر نوصلهم ونعرف صحتهم دلوقتي.
+
+          ممتاز لـ ==unusual or occupational exposures==: industrial hazards والكيماويات، مع outcomes زي الـ mortality والـ cancer.
+      - kind: check
+        page: 66
+        quote: "group from existing records of the past"
+        question: "In 2026, researchers use 1995 factory records to find workers exposed and not exposed to benzene, then trace both to today to compare leukaemia. Design?"
+        options: ["Case-control", "Retrospective (historical) cohort", "Prospective cohort", "Cross-sectional"]
+        answer: 1
+        why:
+          - "الـ case-control كان هيبدأ من عيانين الـ leukaemia."
+          - "صح: اخترنا على أساس الـ **exposure** من records قديمة وتتبعناهم لحد النهارده."
+          - "في الـ prospective الـ exposure بيتقاس دلوقتي والـ outcome في المستقبل."
+          - "مش مقاسين في لحظة واحدة."
+      - kind: case
+        page: 72
+        quote: "the incidence rate of lung cancer was 120/100,000 for smokers and 10/100,000 for nonsmokers"
+        stem: "Lung cancer incidence: 120/100,000 in smokers, 10/100,000 in non-smokers (the lecturer's own questions)."
+        steps:
+          - question: "Relative risk?"
+            options: ["5", "12", "50", "120"]
+            answer: 1
+            why: "120 ÷ 10 = **12**."
+          - question: "Interpretation?"
+            options:
+              - "The risk of lung cancer is 12 times higher in smokers than non-smokers"
+              - "The probability of being a smoker is 12 times greater among those with lung cancer"
+            answer: 0
+            why: "الـ RR بيتكلم عن **risk of disease**. الجملة التانية لغة الـ OR في الـ case-control."
+          - question: "Attributable risk?"
+            options: ["11/100,000", "50/100,000", "110/100,000", "120/100,000"]
+            answer: 2
+            why: "120 − 10 = **110 per 100,000**."
+          - question: "Attributable risk percent?"
+            options: ["78%", "80%", "92%", "99%"]
+            answer: 2
+            why: "110 ÷ 120 × 100 = 91.7% ≈ **92%**."
+      - kind: try
+        items: [res.L05.052, res.L05.054, res.L05.055, res.L05.057, res.L05.051]
+    recap:
+      - "Cohort: incidence/RR/AR، outcomes كتير، dose-response، temporal أكيد، rare exposure. بس attrition، عينة كبيرة، وقت وفلوس، ومش للمرض النادر."
+      - "**DOC**: rare Disease ← case-control؛ many Outcomes ← cohort؛ rare Cause ← cohort."
+      - "Case-control: selection bias دايمًا و recall bias، والـ RR مجرد تقدير (OR)."
+      - "**Retrospective = historical = non-concurrent cohort**: نختار بالـ exposure من records قديمة ونتتبع لحد النهارده؛ للـ occupational exposures."
+      - "RR 120/10 = 12، AR = 110/100,000، ARP ≈ 92%."
+    practice: [res.L05.051, res.L05.052, res.L05.053, res.L05.054, res.L05.055, res.L05.056, res.L05.057, res.L05.058, res.L05.059, res.L05.060, res.L05.061]

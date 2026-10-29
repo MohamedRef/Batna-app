@@ -1,0 +1,738 @@
+schema: batna.content/v1
+lecture: res.L05
+title: "Study types in epidemiological research II: analytic studies (case-control and cohort)"
+author: Prof. Sahar Khashab
+book: { chapter: 1, pages: [1, 74] }
+topics:
+  - { id: analytic, title: "Analytic versus descriptive studies" }
+  - { id: case-control, title: "Case-control design and steps" }
+  - { id: controls, title: "Controls, matching and confounding" }
+  - { id: odds-ratio, title: "Odds ratio" }
+  - { id: cc-merits, title: "Case-control advantages and disadvantages" }
+  - { id: cohort, title: "Cohort design and steps" }
+  - { id: risk, title: "Incidence, relative risk and attributable risk" }
+  - { id: cohort-merits, title: "Cohort strengths and weaknesses" }
+  - { id: compare, title: "Case-control versus cohort" }
+  - { id: retrospective, title: "Retrospective (historical) cohort" }
+items:
+  # --- Analytic studies (slides 4-10) ---
+  - id: res.L05.001
+    kind: mcq
+    topic: analytic
+    stem: A comparison (control) group is lacking in which study?
+    options: [Cross-sectional studies, Case-control studies, Cohort studies, Randomized controlled clinical trial, Both cross-sectional studies and RCTs]
+    answer: 0
+    why:
+      - The lecture lists cross-sectional studies under descriptive designs, which have no comparison group.
+      - Controls are the comparison group of a case-control study.
+      - The unexposed cohort is the comparison group.
+      - An RCT always has a control arm.
+      - The RCT has a control group, so "both" is wrong.
+    src: { page: 4, quote: "Comparison Group?" }
+    status: unverified
+    tags: [book-question, high-yield]
+  - id: res.L05.002
+    kind: table
+    topic: analytic
+    title: What each branch of observational study is for
+    columns: [Branch, Use 1, Use 2, Use 3]
+    rows:
+      - [Descriptive, Natural history, Allocation of resources, Suggest hypotheses]
+      - [Analytic, Test hypotheses, Assess causation, "-"]
+    blanks: [[0, 3], [1, 1], [1, 2]]
+    src: { page: 6, quote: "Test hypotheses" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L05.003
+    kind: order
+    topic: analytic
+    prompt: Order these designs from the strongest to the weakest evidence for causality (the lecture's pyramid).
+    steps:
+      - Meta-analysis and systematic review
+      - Randomized controlled trial
+      - Prospective cohort
+      - Retrospective cohort
+      - Cross-sectional
+      - Case series and case report
+      - Opinionated review and expert opinion
+    src: { page: 7, quote: "Hierarchy of study designs in determining causality (Strength of evidence)" }
+    status: unverified
+  - id: res.L05.004
+    kind: card
+    topic: analytic
+    front: What are analytical studies for, and what is their key feature?
+    back: >-
+      To quantify the association between exposures and outcomes and to test hypotheses about causal
+      relationships. Their key feature is a comparison group.
+    src: { page: 9, quote: "The key feature of analytic epidemiology is a comparison group." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L05.005
+    kind: card
+    topic: analytic
+    front: In variable terms, what are the exposure and the outcome?
+    back: The exposure is the independent variable; the outcome is the dependent variable.
+    src: { page: 8, quote: "Disease or other health-related event under study (Dependent variable)" }
+    status: unverified
+  # --- Case-control design (slides 11-21) ---
+  - id: res.L05.006
+    kind: card
+    topic: case-control
+    front: Define a case-control study.
+    back: >-
+      Individuals are selected because they have (cases) or do not have (controls) a particular disease, then
+      compared for the proportion with a history of an exposure or characteristic.
+    src: { page: 12, quote: "The selection of individuals on the basis of whether they do (cases) or they do not (control) have a particular disease" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L05.007
+    kind: card
+    topic: case-control
+    front: What is the "directionality" of a case-control study?
+    back: >-
+      Backwards: it starts from the outcome (disease yes or no) in the present and looks back in time for
+      the exposure. It proceeds from effect to cause.
+    src: { page: 13, quote: "Backwards Directionality" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L05.008
+    kind: order
+    topic: case-control
+    prompt: Put the steps of a case-control study in order.
+    steps:
+      - Definition of cases
+      - Selection of cases
+      - Selection of controls
+      - Ascertainment of exposure status
+      - Analysis
+      - Conclusion and interpretation
+    src: { page: 14, quote: "Case Control Study Steps" }
+    status: unverified
+  - id: res.L05.009
+    kind: card
+    topic: case-control
+    front: What is a case definition, and what does it usually include?
+    back: >-
+      A set of standard diagnostic criteria a person must meet to count as a case, so all cases have the same
+      disease. It includes clinical criteria (lab results, symptoms, signs) and sometimes limits of time, place and person.
+    src: { page: 16, quote: "Ensures that all persons who are counted as cases actually have the same disease" }
+    status: unverified
+  - id: res.L05.010
+    kind: card
+    topic: case-control
+    front: Which cases are preferred in a case-control study, incident or prevalent?
+    back: New (incident) cases are preferred; prevalent cases (already present) may also be used.
+    src: { page: 18, quote: "Preferably new cases or incident cases" }
+    status: unverified
+  - id: res.L05.011
+    kind: card
+    topic: case-control
+    front: Where can cases come from?
+    back: From hospitals or from the general population, after defining diagnostic and eligibility criteria.
+    src: { page: 15, quote: "source of cases - hospital, general population" }
+    status: unverified
+  # --- Controls, matching, confounding (slides 19-28) ---
+  - id: res.L05.012
+    kind: card
+    topic: controls
+    front: What is the ideal control in a case-control study?
+    back: Someone matching the cases by age, sex and other characteristics, except that the control must not have the disease.
+    src: { page: 19, quote: "Control must be Ideally matching with the cases by age, sex and other characteristics" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L05.013
+    kind: card
+    topic: controls
+    front: In a matched case-control study, what do you match on and why?
+    back: >-
+      Controls are enrolled based on characteristics of the case; you match on a potential confounding
+      variable to remove its confounding effect.
+    src: { page: 21, quote: "match upon a potential confounding variable in order to remove the confounding effect" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L05.014
+    kind: card
+    topic: controls
+    front: Define a confounding factor.
+    back: A factor other than the studied exposure that disturbs the relation between the studied exposure and the disease.
+    src: { page: 22, quote: "factors other than the studied exposure that disturb the relation between the studied exposure and the disease" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L05.015
+    kind: mcq
+    topic: controls
+    stem: >-
+      A study finds coffee drinkers have more pancreatic cancer. Coffee drinkers also smoke more, and smoking
+      causes pancreatic cancer. What role does smoking play?
+    options: [Effect modifier, Confounder, Outcome, Intermediate step caused by coffee]
+    answer: 1
+    why:
+      - The lecture does not use this term; the question is about a third factor linked to both.
+      - Smoking is linked to the exposure (coffee) and independently causes the disease, so it distorts the coffee-cancer relation.
+      - The outcome is pancreatic cancer.
+      - Coffee does not cause smoking; the two simply go together.
+    src: { page: 25, quote: "(Confounder}" }
+    status: unverified
+  - id: res.L05.016
+    kind: card
+    topic: controls
+    front: Why can age confound a smoking and lung cancer study?
+    back: >-
+      Lung cancer risk rises with age, so if the smoking and non-smoking groups have very different average
+      ages, age, not smoking alone, may explain the difference.
+    src: { page: 24, quote: "If the average ages of the smoking and non-smoking groups are very different" }
+    status: unverified
+  - id: res.L05.017
+    kind: table
+    topic: controls
+    title: Sources of controls
+    columns: [Source, Advantage, Disadvantage]
+    rows:
+      - [Hospital based, "Easily identified, available, cooperative, accurate information (less recall bias)", "Not typical of the general population; more risk factors; some diseases share risk factors"]
+      - ["Population based (registry)", "Most representative of the general population; generally healthy", "Time, money, energy; exposure opportunity may differ from cases"]
+      - ["Neighbourhood / random telephone dialling", "Similar residence to cases; easier than population sampling", "Non-cooperation, security issues, not representative"]
+      - ["Best friend / sibling", "Accessible, cooperative, similar to cases in most respects", Overmatching]
+    blanks: [[0, 2], [1, 1], [3, 2]]
+    src: { page: 26, quote: "Selection of controls: Sources" }
+    status: unverified
+  - id: res.L05.018
+    kind: mcq
+    topic: controls
+    stem: Which control source is most representative of the general population?
+    options: [Hospital controls, Population-based (registry) controls, Best-friend controls, Sibling controls]
+    answer: 1
+    why:
+      - Hospital controls are not typical of the general population and carry more risk factors.
+      - Population-based controls are the most representative, though they cost time, money and energy.
+      - Friends are similar to cases, which risks overmatching.
+      - Siblings share genes and environment with cases, so overmatching again.
+    src: { page: 26, quote: "Most representative of the general population" }
+    status: unverified
+  - id: res.L05.019
+    kind: cloze
+    topic: controls
+    text: "Controls are usually {{c1::equal}} in number to cases, but if cases are fewer than {{c2::50}}, take {{c3::2, 3 or 4}} controls per case."
+    src: { page: 27, quote: "But if cases < 50 therefore 2,3 or 4 times the number of cases" }
+    status: unverified
+    tags: [numbers]
+  - id: res.L05.020
+    kind: enumerate
+    topic: controls
+    prompt: How is exposure status ascertained in a case-control study?
+    points: [Observation, Interviews, Questionnaire, Examination of records]
+    pass: 3
+    src: { page: 28, quote: "Ascertainment of Exposure" }
+    status: unverified
+  # --- Odds ratio (slides 29-35) ---
+  - id: res.L05.021
+    kind: card
+    topic: odds-ratio
+    front: Define odds, and the odds of exposure in cases and in controls.
+    back: >-
+      Odds: the probability of an event occurring over the probability of it not occurring. Cases: a/c.
+      Controls: b/d.
+    src: { page: 32, quote: "ODDS: the probability of an event (exposure) occurring to the probability of the event not occurring" }
+    status: unverified
+  - id: res.L05.022
+    kind: cloze
+    topic: odds-ratio
+    text: "Odds ratio = odds of exposure among {{c1::cases}} ÷ odds of exposure among {{c2::controls}} = {{c3::ad/bc}}."
+    src: { page: 32, quote: "ODDS RATIO: ratio of the odds of exposure among the cases to the odds of exposure among the controls = ad/bc" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: res.L05.023
+    kind: table
+    topic: odds-ratio
+    title: Reading an odds ratio
+    columns: [OR, Meaning]
+    rows:
+      - ["= 1", "No association between exposure and disease"]
+      - ["= 3", "Odds of exposure are 3 times greater in cases than in controls (risk factor)"]
+      - ["< 1", "Exposure is less common in cases: a protective factor"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 33, quote: "Interpretation of Odds Ratio" }
+    status: unverified
+  - id: res.L05.024
+    kind: mcq
+    topic: odds-ratio
+    stem: >-
+      A case-control study of laryngeal cancer: cases 160 drank alcohol, 40 did not; controls 90 drank, 110
+      did not. What is the odds ratio?
+    options: ["1.78", "4.00", "4.89", "0.20"]
+    answer: 2
+    why:
+      - "160/90 compares exposed cases with exposed controls, not odds."
+      - "160/40 = 4 is the odds of exposure in cases only; it still has to be divided by the controls' odds (90/110)."
+      - "OR = ad/bc = (160 × 110)/(90 × 40) = 17 600/3 600 = 4.89."
+      - "This inverts the ratio (bc/ad)."
+    src: { page: 34, quote: "Odds ratio = 160 x 110 = 4.89 90 x 40" }
+    status: unverified
+    tags: [numbers]
+  - id: res.L05.025
+    kind: card
+    topic: odds-ratio
+    front: How does the lecture interpret OR = 4.89 for alcohol and laryngeal cancer?
+    back: >-
+      The odds of alcohol consumption are 4.89 times greater among those with laryngeal cancer than among
+      those without it.
+    src: { page: 34, quote: "The odds of alcohol consumption are 4.89 times greater among those with laryngeal cancer" }
+    status: unverified
+  - id: res.L05.026
+    kind: mcq
+    topic: odds-ratio
+    stem: >-
+      A case-control study: risk factor present in 30 diseased and 20 non-diseased; absent in 20 diseased and
+      30 non-diseased. The odds ratio equals:
+    options: ["0.44", "0.80", "1.50", "2.25"]
+    answer: 3
+    why:
+      - "0.44 is bc/ad, the inverse."
+      - "0.80 is not any ratio of these cells."
+      - "1.50 is 30/20, the odds in cases only."
+      - "OR = ad/bc = (30 × 30)/(20 × 20) = 900/400 = 2.25."
+    src: { page: 35, quote: "The table below summarizes the findings of a case-control study." }
+    status: unverified
+    tags: [book-question, numbers]
+  # --- Case-control merits (slides 36-37) ---
+  - id: res.L05.027
+    kind: table
+    topic: cc-merits
+    title: Case-control studies, advantages and disadvantages
+    columns: [Advantages, Disadvantages]
+    rows:
+      - ["Cheap, easy and quick", "Subject to bias (selection, recall, misclassification)"]
+      - [Multiple exposures can be examined, Direct incidence estimation is not possible]
+      - [Rare diseases and diseases with long latency can be studied, Temporal relationship is not clear]
+      - [Suitable when randomization is unethical, Multiple outcomes cannot be studied]
+      - ["-", "If exposure is common, hard to show a difference between cases and controls"]
+      - ["-", Relative and attributable risk cannot be estimated]
+    blanks: [[1, 1], [3, 1], [5, 1]]
+    src: { page: 36, quote: "Advantages and disadvantages of case- control studies" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L05.028
+    kind: mcq
+    topic: cc-merits
+    stem: Which is INCORRECT about a case-control study?
+    options:
+      - Many etiological or risk factors can be studied at the same time
+      - It proceeds from outcome (disease) to exposure (cause)
+      - The temporal relationship between exposure and outcome is not known
+      - Several possible outcomes can be studied
+    answer: 3
+    why:
+      - "Correct statement: multiple exposures can be examined."
+      - "Correct statement: it starts from the disease and looks back."
+      - "Correct statement: the sequence is not clear."
+      - Incorrect, so this is the answer. Cases are chosen for one disease, so multiple outcomes cannot be studied.
+    src: { page: 36, quote: "Multiple outcomes cannot be studied" }
+    status: unverified
+    tags: [book-question, high-yield]
+  - id: res.L05.029
+    kind: mcq
+    topic: cc-merits
+    stem: All of the following are advantages of case-control studies EXCEPT
+    options:
+      - Cheap, easy and quick
+      - Multiple exposures can be examined
+      - Rare diseases and diseases with long latency can be studied
+      - Accurate relative risk (risk ratio) estimation
+      - Suitable when randomization is unethical
+    answer: 3
+    why:
+      - An advantage.
+      - An advantage.
+      - An advantage, and the classic reason to choose case-control.
+      - Case-control cannot estimate relative risk; the odds ratio is only an approximation of it.
+      - An advantage (e.g. alcohol and pregnancy outcome).
+    src: { page: 36, quote: "Relative and attributable risk cannot" }
+    status: unverified
+    tags: [book-question]
+  - id: res.L05.030
+    kind: card
+    topic: cc-merits
+    front: Give the lecture's example of when a case-control study suits because randomization is unethical.
+    back: Alcohol and pregnancy outcome.
+    src: { page: 36, quote: "unethical (e.g., alcohol and" }
+    status: unverified
+  # --- Cohort design (slides 38-47) ---
+  - id: res.L05.031
+    kind: card
+    topic: cohort
+    front: Define a cohort study.
+    back: >-
+      A group exposed to a risk factor (study group) and a group not exposed (control group) are followed over
+      time, and the occurrence of the problem is compared between them.
+    src: { page: 38, quote: "a group of individuals that is exposed to a risk factor (study group) is compared to a group of individuals not exposed" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L05.032
+    kind: card
+    topic: cohort
+    front: What does "prospective" mean in timing?
+    back: The study begins now and looks forward, following a condition or disease into the future.
+    src: { page: 39, quote: "Prospective Study - looks forward" }
+    status: unverified
+  - id: res.L05.033
+    kind: order
+    topic: cohort
+    prompt: Put the steps of a cohort study in order.
+    steps:
+      - Selection of study subjects
+      - Obtaining data on exposure
+      - Selection of a comparison group
+      - Follow up
+      - Analysis
+    src: { page: 41, quote: "Steps of a cohort study" }
+    status: unverified
+  - id: res.L05.034
+    kind: card
+    topic: cohort
+    front: Heterogeneous versus homogeneous cohort, with the lecture's examples?
+    back: >-
+      Heterogeneous cohort: one group holds both exposed and unexposed, so comparison is internal (e.g. smoking).
+      Homogeneous cohort: everyone is exposed, so comparison is with an external group (e.g. X-ray).
+    src: { page: 42, quote: "-Heterogeneous (internal comparison) e.g smoking" }
+    status: unverified
+  - id: res.L05.035
+    kind: enumerate
+    topic: cohort
+    prompt: How is exposure data obtained in a cohort study?
+    points: [Directly from cohort members, Review of records, Medical examination or special tests, Environmental surveys]
+    pass: 3
+    src: { page: 43, quote: "Medical examination or special tests" }
+    status: unverified
+  - id: res.L05.036
+    kind: enumerate
+    topic: cohort
+    prompt: Enumerate the methods of follow-up in a cohort study.
+    points: [Periodic medical examination, Review of records, Routine surveillance of death records, "Mailed questionnaires, telephone calls, home visits"]
+    pass: 3
+    src: { page: 44, quote: "Periodic medical examination" }
+    status: unverified
+  - id: res.L05.037
+    kind: mcq
+    topic: cohort
+    stem: >-
+      Smoking histories are taken from women at their prenatal visit, and birth weight is later correlated
+      with smoking. What type of study is this?
+    options: [Clinical trial, Cross-sectional, Prospective cohort, Case-control, Correlation]
+    answer: 2
+    why:
+      - The investigator did not assign smoking.
+      - Exposure and outcome are not measured at the same time; birth comes later.
+      - Exposure is recorded first and the outcome (birth weight) is followed into the future.
+      - A case-control study would start from low-birth-weight babies and look back.
+      - A correlational study uses group data, not individual women.
+    src: { page: 46, quote: "obtaining smoking histories from women at the time of the prenatal visit" }
+    status: unverified
+    tags: [book-question]
+  - id: res.L05.038
+    kind: card
+    topic: cohort
+    front: What two questions does the analysis of a cohort study answer?
+    back: Whether any association exists between the suspected factor and the disease, and if so, how strong it is.
+    src: { page: 47, quote: "Whether any association exists between the suspected factor and the disease under study" }
+    status: unverified
+  # --- Risk measures (slides 48-61) ---
+  - id: res.L05.039
+    kind: cloze
+    topic: risk
+    text: "In a cohort 2×2 table, incidence in the exposed Ie = {{c1::a/(a+b)}} and in the non-exposed Io = {{c2::c/(c+d)}}."
+    src: { page: 50, quote: "Incidence among exposed = Ie a a+b" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: res.L05.040
+    kind: card
+    topic: risk
+    front: Define the incidence rate as in the lecture.
+    back: The number of persons developing the disease (new cases) in a specific time and locality ÷ total population at risk × 1000.
+    src: { page: 49, quote: "The no. of persons developing a disease (new cases) in a specific time &locality" }
+    status: unverified
+  - id: res.L05.041
+    kind: card
+    topic: risk
+    front: Define relative risk (risk ratio) and what it indicates.
+    back: >-
+      RR = incidence among exposed ÷ incidence among unexposed (Ie/Io). It shows the likelihood of developing
+      the disease in the exposed relative to the unexposed.
+    src: { page: 52, quote: "Ratio of the incidence among exposed to the incidence among unexposed" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L05.042
+    kind: table
+    topic: risk
+    title: Interpreting the relative risk
+    columns: [RR, Meaning]
+    rows:
+      - ["> 1", Risk factor]
+      - ["= 1", No association]
+      - ["< 1", Protective factor]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 53, quote: "Relative risk > 1 Risk factor" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L05.043
+    kind: mcq
+    topic: risk
+    stem: In a cohort study the relative risk is greater than 1.0. This means
+    options:
+      - The incidence is lower among those with the suspected risk factor
+      - The incidence is higher among those with the suspected risk factor
+      - The disease has no relationship with the risk factor
+      - None of the above
+    answer: 1
+    why:
+      - That would be RR < 1, a protective factor.
+      - RR > 1 means Ie is bigger than Io, so the factor is a risk factor.
+      - That is RR = 1.
+      - B is correct.
+    src: { page: 53, quote: "Relative risk > 1 Risk factor" }
+    status: unverified
+    tags: [book-question]
+  - id: res.L05.044
+    kind: mcq
+    topic: risk
+    stem: >-
+      Smokers: 20 of 200 develop lung cancer. Non-smokers: 2 of 200. What are the relative risk and the
+      attributable risk?
+    options: ["RR 10; AR 0.09 (90 per 1000)", "RR 10; AR 0.9", "RR 0.1; AR 0.09", "RR 11; AR 18 cases"]
+    answer: 0
+    why:
+      - "Ie = 20/200 = 0.10, Io = 2/200 = 0.01. RR = 0.10/0.01 = 10. AR = 0.10 − 0.01 = 0.09."
+      - "AR is a difference of incidences (0.09), not 0.9, which would be the attributable risk percent as a fraction."
+      - "0.1 is Io/Ie, the inverse."
+      - "These use raw counts, not incidences."
+    src: { page: 54, quote: "Smoking Lung cancer Total" }
+    status: unverified
+    tags: [book-question, numbers]
+  - id: res.L05.045
+    kind: card
+    topic: risk
+    front: How does the lecture interpret RR = 1.59 for low bone mineral density and hip fracture?
+    back: Over 5 years of follow-up, the risk of hip fracture was 1.59 times higher with low BMD than with normal BMD.
+    src: { page: 56, quote: "Risk Ratio (Relative Risk) = CI, / CI, = (230/630) / (110/479) = 1.59" }
+    status: unverified
+  - id: res.L05.046
+    kind: card
+    topic: risk
+    front: Define attributable risk (AR) and what it quantifies.
+    back: >-
+      AR = incidence in exposed − incidence in unexposed. It quantifies the "excess risk" in the exposed group
+      that is attributable to the exposure.
+    src: { page: 57, quote: "AR is used to quantify “excess risk” in the exposed group that is attributable to the exposure." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L05.047
+    kind: card
+    topic: risk
+    front: Smoking and stroke cohort, incidence 0.30 in smokers and 0.10 in non-smokers. AR and its interpretation?
+    back: AR = 0.30 − 0.10 = 0.20; the risk of stroke is increased by 0.20 in smokers compared with non-smokers.
+    src: { page: 58, quote: "The risk of stroke is increased by 0.20 for smokers compared to non-smokers." }
+    status: unverified
+    tags: [numbers]
+  - id: res.L05.048
+    kind: card
+    topic: risk
+    front: Define the attributable risk percent (ARP) and its formula.
+    back: >-
+      The percent of the incidence in the exposed that is due to the exposure, i.e. would be eliminated if the
+      exposure were eliminated. ARP = (Ie − Io)/Ie × 100.
+    src: { page: 59, quote: "It is the % of the incidence of a disease in the exposed that would be eliminated if exposure were eliminated." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L05.049
+    kind: mcq
+    topic: risk
+    stem: >-
+      Infants ≥2500 g: first-year death rate 34.4% with 10-minute Apgar 0–3 and 12.5% with Apgar 4–6. What is
+      the attributable risk percent?
+    options: ["21.9%", "36.3%", "63.7%", "275%"]
+    answer: 2
+    why:
+      - "21.9 is the AR (34.4 − 12.5) in percentage points, not the ARP."
+      - "36.3% is Io/Ie, the share NOT due to the exposure."
+      - "ARP = (0.344 − 0.125)/0.344 × 100 = 63.7%."
+      - "That is the RR (2.75) shown as a percent."
+    src: { page: 61, quote: "ARP= (0.344-0.125)X1OO= 63.7%" }
+    status: unverified
+    tags: [numbers]
+  - id: res.L05.050
+    kind: card
+    topic: risk
+    front: What is the attributable risk percent typically used for?
+    back: As an indicator of the public health impact of an exposure.
+    src: { page: 61, quote: "The attributable risk percent typically is used as an indicator of the public health impact of exposure." }
+    status: unverified
+  - id: res.L05.051
+    kind: case
+    topic: risk
+    stem: In a community study, lung cancer incidence was 120/100,000 in smokers and 10/100,000 in non-smokers.
+    steps:
+      - question: What is the relative risk for smokers?
+        options: ["5", "12", "50", "100", "120"]
+        answer: 1
+        why: "RR = Ie/Io = 120/10 = 12."
+      - question: How is that RR interpreted?
+        options:
+          - "The risk of lung cancer is 12 times higher in smokers than in non-smokers"
+          - "The odds of being a smoker are 12 times greater among those with lung cancer"
+        answer: 0
+        why: RR compares the risk of disease in exposed versus unexposed. The second sentence is how an odds ratio from a case-control study reads.
+      - question: What is the attributable risk?
+        options: ["11/100,000", "22/100,000", "50/100,000", "60/100,000", "110/100,000"]
+        answer: 4
+        why: "AR = Ie − Io = 120 − 10 = 110 per 100,000."
+      - question: What is the attributable risk percent (lung cancer in smokers that quitting would remove)?
+        options: ["52%", "78%", "80%", "92%", "99%"]
+        answer: 3
+        why: "ARP = (120 − 10)/120 × 100 = 91.7%, about 92%."
+    src: { page: 72, quote: "the incidence rate of lung cancer was 120/100,000 for smokers and 10/100,000 for nonsmokers" }
+    status: unverified
+    tags: [book-question, numbers, high-yield]
+  # --- Cohort merits (slide 62) ---
+  - id: res.L05.052
+    kind: table
+    topic: cohort-merits
+    title: Cohort studies, strengths and weaknesses
+    columns: [Feature, Strength or weakness]
+    rows:
+      - [Incidence rate and risks, Strength]
+      - [Multiple outcomes, Strength]
+      - [Dose-response ratio, Strength]
+      - [Temporal relationship, Strength]
+      - [Rare exposure, Strength]
+      - [Minimal selection and information bias, Strength]
+      - [Attrition, Weakness]
+      - [Large sample, Weakness]
+      - [Not for rare diseases, Weakness]
+      - [Long time and expensive, Weakness]
+      - [Ethical problem, Weakness]
+    blanks: [[1, 1], [3, 1], [5, 1], [6, 1], [8, 1]]
+    src: { page: 62, quote: "Dose response ratio" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L05.053
+    kind: card
+    topic: cohort-merits
+    front: What is attrition in a cohort study?
+    back: >-
+      Loss of participants during follow-up. It is a key weakness of cohort studies and is listed as
+      problematic for cohorts but little for case-control.
+    src: { page: 62, quote: "Attrition" }
+    status: unverified
+  # --- Comparison (slides 63-65) ---
+  - id: res.L05.054
+    kind: table
+    topic: compare
+    title: Case-control versus cohort
+    columns: [Feature, Case-control, Cohort]
+    rows:
+      - [Direction, Effect to cause, Cause to effect]
+      - [Starts with, The disease, People exposed to the suspected cause]
+      - [Subjects, Fewer, Larger number]
+      - [Results, Relatively quick, "Long follow-up, delayed"]
+      - [Rare disease, Suitable (best), Inappropriate]
+      - [Measure, "Odds ratio (estimate of RR)", "Incidence, RR, AR"]
+      - [Outcomes, Only the disease under study, More than one disease]
+      - [Cost, Relatively inexpensive, Expensive]
+    blanks: [[0, 1], [0, 2], [4, 2], [5, 1], [6, 2]]
+    src: { page: 63, quote: "Proceeds from effect to cause" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L05.055
+    kind: mcq
+    topic: compare
+    stem: Which situation is best studied with a cohort rather than a case-control design?
+    options: [A rare disease, A disease with a long latent period, A rare exposure, Several risk factors for one disease]
+    answer: 2
+    why:
+      - Rare disease is best by case-control.
+      - Long latency is best by case-control.
+      - A rare exposure (e.g. an industrial chemical) is best by cohort, since you start from the exposed.
+      - Several risk factors is best by case-control.
+    src: { page: 64, quote: "Rare exposure" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L05.056
+    kind: table
+    topic: compare
+    title: Problems and measurements, case-control versus cohort
+    columns: [Feature, Case-control, Cohort]
+    rows:
+      - [Selection bias, Always present, "-"]
+      - [Recall bias, Present, "-"]
+      - [Temporal relationship, Not certain, Certain]
+      - [Attrition, Little, Problematic]
+      - [Changes in environment or behaviour, Not a problem, Problematic]
+      - [Incidence rate, Cannot be calculated, "Yes"]
+      - [Relative risk, Approximation (OR), "Yes"]
+      - [Attributable risk, Cannot be calculated, "Yes"]
+      - [Dose-response ratio, "No", Best]
+    blanks: [[0, 1], [2, 2], [3, 2], [6, 1]]
+    src: { page: 65, quote: "Selection bias always present" }
+    status: unverified
+  # --- Retrospective cohort (slides 66-70) ---
+  - id: res.L05.057
+    kind: card
+    topic: retrospective
+    front: What is a retrospective cohort study, and its other names?
+    back: >-
+      One in which all outcomes have occurred before the investigation starts: the investigator selects the
+      group from past records and traces them forward to the present. Also called historical or non-concurrent cohort.
+    src: { page: 66, quote: "Known with the name of Historical Cohort and noncurrent cohort" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L05.058
+    kind: table
+    topic: retrospective
+    title: Prospective versus retrospective cohort
+    columns: [Type, Exposure, Outcome]
+    rows:
+      - [Prospective, Assessed at the beginning of the study (present), Followed into the future]
+      - [Retrospective, Assessed at some point in the past, Has already occurred]
+    blanks: [[0, 2], [1, 1], [1, 2]]
+    src: { page: 67, quote: "Outcome has already occurred" }
+    status: unverified
+  - id: res.L05.059
+    kind: card
+    topic: retrospective
+    front: What does a retrospective cohort need, and what is it particularly useful for?
+    back: >-
+      Good records of past exposure for a group that can be traced to their current health. Useful for unusual
+      or occupational exposures, e.g. industrial hazards or chemicals, with mortality or cancer outcomes.
+    src: { page: 68, quote: "Requires good records of past exposure for a group of people who can then be traced to determine their current health." }
+    status: unverified
+  - id: res.L05.060
+    kind: mcq
+    topic: retrospective
+    stem: In a cohort study, which statement is INCORRECT?
+    options:
+      - It proceeds from outcome (disease) to exposure (cause)
+      - It starts with people exposed to the risk factor or suspected cause
+      - Incidence rates and relative risk can be calculated
+      - It is time consuming and expensive
+    answer: 0
+    why:
+      - Incorrect, so this is the answer. A cohort proceeds from cause to effect; outcome-to-exposure is a case-control study.
+      - Correct statement.
+      - Correct statement.
+      - Correct statement.
+    src: { page: 63, quote: "Proceeds from cause to effect" }
+    status: unverified
+    tags: [book-question, high-yield]
+  - id: res.L05.061
+    kind: mcq
+    topic: retrospective
+    stem: >-
+      In 2026, researchers use 1995 factory records to identify workers exposed and not exposed to benzene,
+      then trace both groups to today to compare leukaemia rates. What design is this?
+    options: [Case-control study, Retrospective (historical) cohort, Prospective cohort, Cross-sectional study]
+    answer: 1
+    why:
+      - A case-control study would start from leukaemia cases, not from exposure.
+      - Groups chosen by past exposure from records and traced forward to the present = retrospective cohort.
+      - In a prospective cohort exposure is assessed now and outcomes lie in the future.
+      - Exposure and outcome are not measured at one time point.
+    src: { page: 66, quote: "group from existing records of the past" }
+    status: unverified

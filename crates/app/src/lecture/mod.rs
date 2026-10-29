@@ -49,8 +49,6 @@ pub fn open(ui: Ui, id: &str) {
 }
 
 /// Opens the references list (More › المراجع) over the current screen.
-// Wired by the More sheet (more.rs, redesign shell PR); unused until then.
-#[allow(dead_code)]
 pub fn open_references(ui: Ui) {
     *OPEN.write() = Some((vec![REFERENCES.to_string()], *ui.screen.peek()));
     to_top();

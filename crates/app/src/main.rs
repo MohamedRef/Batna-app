@@ -237,8 +237,10 @@ fn App() -> Element {
                         class: more::nav_class(screen),
                     }
                 }
-                // Phones: Cases and Oral sit under More (more.rs).
+                // Phones: Cases, Oral and Progress sit under More (more.rs).
                 more::More {}
+                // From 600px: References, a new card and the calculators.
+                more::ToolButtons {}
                 // From 600px the rail or sidebar carries Settings at its foot (nav.css).
                 button {
                     class: "nav-item nav-foot",

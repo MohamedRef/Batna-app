@@ -1,8 +1,9 @@
 //! Phones: the bottom bar keeps four screens (Today, Lessons, Review,
 //! Questions) and a "More" tab. More opens a bounded sheet above the bar,
-//! grouped as in the 2026-10 redesign: practice (Cases, Oral) and your
-//! references and tools (Progress, Settings). From 600dp the rail and
-//! sidebar show every screen, so the tab and the sheet hide (shape.css).
+//! grouped as in the 2026-10 redesign: practice (Cases, Oral, Calculators)
+//! and your references and tools (References, a new card, Progress,
+//! Settings). From 600dp the rail and sidebar show every screen and the
+//! tools ([`ToolButtons`]), so the tab and the sheet hide (shape.css).
 
 use dioxus::prelude::*;
 
@@ -11,19 +12,61 @@ use crate::{Screen, Ui, i18n, icons, settings};
 /// Screens that sit under More on phones, in the order they appear there.
 pub const SCREENS: [Screen; 3] = [Screen::Cases, Screen::Oral, Screen::Stats];
 
+/// Something that opens over the current screen rather than being a tab:
+/// label, icon, opener.
+#[derive(Clone, Copy)]
+pub struct Tool {
+    pub label: &'static str,
+    pub icon: fn() -> Element,
+    pub open: fn(Ui),
+}
+
+pub const CALCULATORS: Tool =
+    Tool { label: i18n::calc::TITLE, icon: icons::calculator, open: crate::case::open_calculators };
+pub const REFERENCES: Tool =
+    Tool { label: i18n::refs::TITLE, icon: icons::references, open: crate::lecture::open_references };
+pub const ADD_CARD: Tool =
+    Tool { label: i18n::refs::ADD_CARD, icon: icons::add_card, open: |_| crate::own::open_new() };
+
+/// The tools the rail and sidebar list under the screens from 600dp (More
+/// holds them on phones).
+pub const TOOLS: [Tool; 3] = [REFERENCES, ADD_CARD, CALCULATORS];
+
 /// One row in More.
-#[derive(Clone, Copy, PartialEq)]
+#[derive(Clone, Copy)]
 pub enum Row {
     /// A screen of the bar (its label and icon).
     Screen(Screen),
+    /// A tool that opens over the current screen.
+    Tool(Tool),
     /// The Settings sheet.
     Settings,
 }
 
+impl Row {
+    fn label(self) -> &'static str {
+        match self {
+            Row::Screen(screen) => screen.label(),
+            Row::Tool(t) => t.label,
+            Row::Settings => Screen::Settings.label(),
+        }
+    }
+
+    fn is(self, screen: Screen) -> bool {
+        matches!(self, Row::Screen(s) if s == screen)
+    }
+}
+
 /// More's groups: a heading and its rows, in order.
 const GROUPS: [(&str, &[Row]); 2] = [
-    (i18n::nav::MORE_PRACTICE, &[Row::Screen(Screen::Cases), Row::Screen(Screen::Oral)]),
-    (i18n::nav::MORE_TOOLS, &[Row::Screen(Screen::Stats), Row::Settings]),
+    (
+        i18n::nav::MORE_PRACTICE,
+        &[Row::Screen(Screen::Cases), Row::Screen(Screen::Oral), Row::Tool(CALCULATORS)],
+    ),
+    (
+        i18n::nav::MORE_TOOLS,
+        &[Row::Tool(REFERENCES), Row::Tool(ADD_CARD), Row::Screen(Screen::Stats), Row::Settings],
+    ),
 ];
 
 pub fn holds(screen: Screen) -> bool {
@@ -71,26 +114,23 @@ pub fn More() -> Element {
                             button {
                                 key: "{k}",
                                 class: "more-row",
-                                "aria-current": if row == Row::Screen(current) { "page" } else { "false" },
+                                "aria-current": if row.is(current) { "page" } else { "false" },
                                 onclick: move |_| {
                                     open.set(false);
                                     match row {
                                         Row::Screen(screen) => ui.screen.set(screen),
+                                        Row::Tool(t) => (t.open)(ui),
                                         Row::Settings => settings.show(None),
                                     }
                                 },
                                 span { class: "row-icon", aria_hidden: "true",
                                     match row {
                                         Row::Screen(screen) => icons::nav(screen),
+                                        Row::Tool(t) => (t.icon)(),
                                         Row::Settings => icons::nav(Screen::Settings),
                                     }
                                 }
-                                span { class: "label",
-                                    match row {
-                                        Row::Screen(screen) => screen.label(),
-                                        Row::Settings => Screen::Settings.label(),
-                                    }
-                                }
+                                span { class: "label", {row.label()} }
                                 span { class: "chev", aria_hidden: "true" }
                             }
                         }
@@ -123,7 +163,7 @@ mod tests {
         // Nothing is dropped: a screen off the bar is in one of More's groups.
         for screen in Screen::NAV.into_iter().filter(|s| holds(*s)) {
             assert!(
-                GROUPS.iter().any(|(_, rows)| rows.contains(&Row::Screen(screen))),
+                GROUPS.iter().any(|(_, rows)| rows.iter().any(|r| r.is(screen))),
                 "{screen:?} has no row in More"
             );
         }
@@ -133,6 +173,39 @@ mod tests {
             .filter_map(|r| if let Row::Screen(s) = r { Some(*s) } else { None })
             .collect();
         assert_eq!(grouped, SCREENS);
-        assert!(GROUPS.iter().any(|(_, rows)| rows.contains(&Row::Settings)), "Settings is in More");
+        assert!(
+            GROUPS.iter().any(|(_, rows)| rows.iter().any(|r| matches!(r, Row::Settings))),
+            "Settings is in More"
+        );
+        // Every tool the rail lists is in More too, so phones reach it.
+        for tool in TOOLS {
+            assert!(
+                GROUPS.iter().any(|(_, rows)| rows.iter().any(|r| r.label() == tool.label)),
+                "{} has no row in More",
+                tool.label
+            );
+        }
+    }
+}
+
+/// From 600dp: the tools under the screens in the rail and sidebar (phones
+/// reach them through More).
+#[component]
+pub fn ToolButtons() -> Element {
+    let ui = use_context::<Ui>();
+    rsx! {
+        div { class: "nav-tools", role: "group", aria_label: i18n::nav::MORE_TOOLS,
+            for tool in TOOLS {
+                button {
+                    key: "{tool.label}",
+                    class: "nav-item nav-tool",
+                    aria_label: tool.label,
+                    title: tool.label,
+                    onclick: move |_| (tool.open)(ui),
+                    span { class: "glyph", aria_hidden: "true", {(tool.icon)()} }
+                    span { class: "label", {tool.label} }
+                }
+            }
+        }
     }
 }

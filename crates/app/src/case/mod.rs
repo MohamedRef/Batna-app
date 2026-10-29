@@ -34,8 +34,6 @@ pub fn open_due(mut ui: crate::Ui, calc_only: bool) {
 }
 
 /// Open the Cases screen on its Calculators tab (More › الحاسبات).
-// Wired by the More sheet (more.rs, redesign shell PR); unused until then.
-#[allow(dead_code)]
 pub fn open_calculators(mut ui: crate::Ui) {
     *START_TAB.write() = Some(Tab::Calculators);
     ui.screen.set(crate::Screen::Cases);

@@ -62,9 +62,29 @@ fn stroke(d: &'static str) -> Element {
     }
 }
 
+/// An open book: the lesson view toggle (pages) and References.
+const OPEN_BOOK: &str = "M3 6c3-1 6-1 9 1 3-2 6-2 9-1v12c-3-1-6-1-9 1-3-2-6-2-9-1zM12 7v12";
+
 /// Lesson view toggle: an open book (pages).
 pub fn book() -> Element {
-    stroke(nav_path(Screen::Study))
+    stroke(OPEN_BOOK)
+}
+
+/// References (More, the rail): the same open book.
+pub fn references() -> Element {
+    stroke(OPEN_BOOK)
+}
+
+/// A new card: a card with a plus.
+pub fn add_card() -> Element {
+    stroke("M5 5h14a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zM12 9v6M9 12h6")
+}
+
+/// The calculators: a calculator.
+pub fn calculator() -> Element {
+    stroke(
+        "M7 3h10a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zM9 7h6M9 12h.01M12 12h.01M15 12h.01M9 16h.01M12 16h.01M15 16h.01",
+    )
 }
 
 /// Lesson view toggle: stacked cards (steps).

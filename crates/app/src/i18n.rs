@@ -859,6 +859,8 @@ pub mod calc {
     pub const AREA_ACUTE: &str = "الفشل الكبدي الحاد";
     pub const AREA_PANCREAS: &str = "البنكرياس";
     pub const AREA_GI: &str = "الجهاز الهضمي";
+    pub const AREA_RENAL: &str = "الكلى والأملاح";
+    pub const AREA_ELDERLY: &str = "المسنين";
     pub const AREA_RESEARCH: &str = "الريسيرش";
     // The `calc` item: compute it, then interpret it.
     pub const YOUR_RESULT: &str = "حسبتها كام؟";
@@ -882,6 +884,8 @@ pub mod calc {
             ("ascitic_pmn", "pmn_per_mm3") => "عدد كرات الدم البيضا الكلي × نسبة النيوتروفيل.",
             ("bisap", "bun_mg_dl") => "اليوريا ÷ 2.14.",
             ("glasgow_blatchford", "bun_mg_dl") => "اليوريا ÷ 2.14.",
+            ("osmolal_gap", "bun_mg_dl") => "اليوريا ÷ 2.14.",
+            ("anion_gap", "albumin_g_dl") => "بيصحح الـ gap لو الألبومين واطي.",
             ("ranson", "bun_rise_mg_dl") => "زيادة اليوريا ÷ 2.14.",
             ("relative_risk", "a") => "معرّض وعنده المرض (أو case)",
             ("relative_risk", "b") => "معرّض ومعندوش المرض (أو control)",

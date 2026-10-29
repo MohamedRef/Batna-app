@@ -16,6 +16,11 @@ use crate::i18n::study as tx;
 #[derive(Clone, Copy)]
 pub struct Revealed(pub Signal<bool>);
 
+/// The item came back through Undo: he has seen its answer already, so a
+/// recall card opens with it shown.
+#[derive(Clone, Copy)]
+pub struct Reopened(pub bool);
+
 /// Item kinds this player can show; the session composer picks only these.
 /// A chunk that adds a renderer adds its kind here and an arm below.
 pub const PLAYABLE: &[&str] = &["card", "cloze", "enumerate", "essay", "table", "order"];
@@ -27,9 +32,11 @@ pub fn ItemView(
     topic_title: Option<String>,
     fresh: bool,
     retry: bool,
+    #[props(default)] reopened: bool,
     on_grade: EventHandler<Grade>,
 ) -> Element {
     let revealed = use_context_provider(|| Revealed(Signal::new(false))).0;
+    use_context_provider(|| Reopened(reopened));
     let badge = if retry {
         tx::BADGE_RETRY
     } else if fresh {

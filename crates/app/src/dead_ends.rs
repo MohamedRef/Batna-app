@@ -38,6 +38,8 @@ const TAPPABLE: &[&str] = &[
     "bank-scope-tap",
     "case-stepper-step",
     "oral-point",
+    // Redesign stat tiles (assets/parts.css): each opens what it counts.
+    "stat-tile",
 ];
 
 /// Elements that can be pressed (or, for `div.plan-day`, the plain line of
@@ -497,4 +499,28 @@ fn the_css_check_reads_link_looks() {
     let mut want = want;
     want.push(("mark".into(), vec!["hit".into()]));
     assert_eq!(linkish_classes(css), want);
+}
+
+/// The redesign's `.hero` card (assets/parts.css) is the one recommended
+/// next step: it is a button, or a `card-action` with its own onclick.
+#[test]
+fn heroes_open_something() {
+    let mut files = Vec::new();
+    sources(&Path::new(env!("CARGO_MANIFEST_DIR")).join("src"), &mut files);
+    let mut dead = Vec::new();
+    for (path, src) in &files {
+        if path.ends_with("dead_ends.rs") {
+            continue;
+        }
+        let lines: Vec<&str> = src.lines().collect();
+        for f in elements(src) {
+            if f.classes.iter().any(|c| c == "hero")
+                && !PRESSABLE.contains(&f.element.as_str())
+                && !(f.classes.iter().any(|c| c == "card-action") && has_onclick(&lines, f.line))
+            {
+                dead.push(format!("{path}:{}: a `.hero` must open its next step", f.line));
+            }
+        }
+    }
+    assert!(dead.is_empty(), "heroes that open nothing:\n{}", dead.join("\n"));
 }

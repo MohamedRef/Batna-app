@@ -202,6 +202,19 @@ pub fn enumerate_grade(recalled: usize, total: usize, pass: usize) -> Grade {
 /// review store. The app provides one [`StudyStoreHandle`] through context.
 pub trait StudyStore {
     fn record(&mut self, event: ReviewEvent);
+    /// [`Self::record`], returning the id the event was logged under (so it
+    /// can be taken back), or `None` when it wasn't saved or can't be.
+    fn record_logged(&mut self, event: ReviewEvent) -> Option<String> {
+        self.record(event);
+        None
+    }
+    /// Takes a logged answer back (Undo): the event gets its tombstone, the
+    /// one correction the append-only log allows, and the schedule is
+    /// replayed without it. True when it is gone afterwards; an event that
+    /// is already gone writes nothing. False when it couldn't be saved.
+    fn retract(&mut self, _event_id: &str) -> bool {
+        false
+    }
     /// Item ids due now, most overdue (most forgotten) first. No new items,
     /// nothing Mohamed marked ✗.
     fn due(&self, now_ms: i64) -> Vec<String>;

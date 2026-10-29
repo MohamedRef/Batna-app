@@ -367,15 +367,42 @@ impl ReviewBackend {
 
 impl StudyStore for ReviewBackend {
     fn record(&mut self, event: ReviewEvent) {
+        self.record_logged(event);
+    }
+
+    fn record_logged(&mut self, event: ReviewEvent) -> Option<String> {
         let id = event.item_id.clone();
         match self.store.append_review(event) {
             Ok(logged) => {
+                let logged_id = logged.id.clone();
                 self.log.push(logged);
                 self.replay();
                 self.changed();
+                Some(logged_id)
             }
             // Today shows the note, so a lost answer is never silent (#244).
-            Err(e) => super::write_failed(&format!("the answer to {id}"), &e),
+            Err(e) => {
+                super::write_failed(&format!("the answer to {id}"), &e);
+                None
+            }
+        }
+    }
+
+    fn retract(&mut self, event_id: &str) -> bool {
+        match self.store.retract_review(event_id) {
+            Ok(_) => {
+                let before = self.log.len();
+                self.log.retain(|l| l.id != event_id);
+                if self.log.len() != before {
+                    self.replay();
+                    self.changed();
+                }
+                true
+            }
+            Err(e) => {
+                super::write_failed(&format!("taking back the answer {event_id}"), &e);
+                false
+            }
         }
     }
 
@@ -587,6 +614,57 @@ mod tests {
         assert!(b.set_settings(ReviewSettings { new_per_day: 45, ..stale }));
         assert_eq!(b.store.review_settings().fsrs.map(|p| p.reviews), Some(400));
         assert_eq!(b.store.review_settings().new_per_day, 45);
+    }
+
+    #[test]
+    fn undo_retracts_the_answer_and_restores_the_schedule() {
+        let mut b = backend();
+        answer(&mut b, "hb.L01.001", Grade::Good, T0);
+        let before_state = b.states.get("hb.L01.001").cloned();
+        let before_intervals = b.intervals("hb.L01.001", T0 + 60_000);
+        let id = StudyStore::record_logged(
+            &mut b,
+            ReviewEvent {
+                item_id: "hb.L01.001".into(),
+                grade: Grade::Again,
+                origin: Origin::Study,
+                at_ms: T0 + 60_000,
+                took_ms: 4000,
+            },
+        )
+        .unwrap();
+        assert_eq!(b.reviews_logged(), 2);
+        assert_ne!(b.states.get("hb.L01.001").cloned(), before_state);
+
+        assert!(b.retract(&id));
+        assert_eq!(b.reviews_logged(), 1);
+        assert_eq!(b.states.get("hb.L01.001").cloned(), before_state);
+        assert_eq!(b.intervals("hb.L01.001", T0 + 60_000), before_intervals);
+        // A second Undo (a double tap, a resumed screen) writes nothing.
+        let queued = b.store.outbox_len();
+        assert!(b.retract(&id));
+        assert_eq!(b.reviews_logged(), 1);
+        assert_eq!(b.store.outbox_len(), queued);
+        // And it stays gone after the store is read again (a restart).
+        b.reload();
+        assert_eq!(b.reviews_logged(), 1);
+        assert_eq!(b.states.get("hb.L01.001").cloned(), before_state);
+
+        // Undoing a first answer makes the item new again.
+        let first = StudyStore::record_logged(
+            &mut b,
+            ReviewEvent {
+                item_id: "hb.L01.002".into(),
+                grade: Grade::Good,
+                origin: Origin::Study,
+                at_ms: T0,
+                took_ms: 4000,
+            },
+        )
+        .unwrap();
+        assert!(!b.is_new("hb.L01.002"));
+        assert!(b.retract(&first));
+        assert!(b.is_new("hb.L01.002"));
     }
 
     #[test]

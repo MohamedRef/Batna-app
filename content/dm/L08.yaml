@@ -1,0 +1,720 @@
+schema: batna.content/v1
+lecture: dm.L08
+title: "Medical Nutrition Therapy"
+author: "Prof. Dr. Samir Elsheikh"
+book: { chapter: 6, pages: [89, 102] }
+topics:
+  - { id: calories, title: "Guiding principles and calorie needs" }
+  - { id: pyramid, title: "The food pyramid and its groups" }
+  - { id: fats, title: "Fats, trans fats and added sugar" }
+  - { id: plate, title: "Key messages and the divided plate" }
+  - { id: carbs, title: "Carbohydrate counting" }
+  - { id: gi, title: "Glycemic index and glycemic load" }
+items:
+  # ---------- p89-90: principles, calories ----------
+  - id: dm.L08.001
+    kind: enumerate
+    topic: calories
+    prompt: Guiding principles of the USDA food guidance (unchanged over time)?
+    points: [Evolutionary, Flexible, Practical, Useful, Realistic, Overall health, Up-to-date research, Total diet]
+    pass: 6
+    src: { page: 89, quote: "Evolutionary, flexible, practical, useful, realistic, overall Health, Up-to- Date Research, total diet." }
+    status: unverified
+  - id: dm.L08.002
+    kind: table
+    topic: calories
+    title: Calorie categories (National Academy of Sciences)
+    columns: [Calories/day, Who]
+    rows:
+      - ["1,600", "Many sedentary women and some older adults"]
+      - ["2,200", "Children, teenage girls, active women, many sedentary men"]
+      - ["2,800", "Teenage boys, active men, very active women"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 90, quote: "1,600 calories - Many sedentary women and some older adults." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L08.003
+    kind: cloze
+    topic: calories
+    text: "Pregnant women may need about {{c1::500}} extra calories a day, plus an additional {{c2::300}} calories for breastfeeding."
+    src: { page: 90, quote: "Women who are pregnant may need around 500 calories more per day and an additional 300 calories for breastfeeding." }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L08.004
+    kind: card
+    topic: calories
+    front: Which calorie category fits many sedentary men?
+    back: 2,200 calories a day.
+    src: { page: 90, quote: "2,200 calories - Children, teenage girls, active women, and many sedentary men." }
+    status: unverified
+  - id: dm.L08.005
+    kind: card
+    topic: calories
+    front: Which calorie category fits teenage boys and active men?
+    back: 2,800 calories a day (also very active women).
+    src: { page: 90, quote: "2,800 calories - Teenage boys, active men, and very active women." }
+    status: unverified
+  - id: dm.L08.006
+    kind: mcq
+    topic: calories
+    stem: A 62-year-old retired woman with type 2 diabetes is sedentary and has a stable weight. Which calorie category from the lecture fits her best?
+    options: ["1,600 calories", "2,200 calories", "2,800 calories", "3,200 calories", "1,000 calories"]
+    answer: 0
+    why:
+      - "Correct: 1,600 calories fits many sedentary women and some older adults (p90)."
+      - 2,200 fits active women and many sedentary men.
+      - 2,800 fits teenage boys, active men and very active women.
+      - 3,200 is not one of the lecture's categories.
+      - 1,000 is below the lecture's categories.
+    src: { page: 90, quote: "1,600 calories - Many sedentary women and some older adults." }
+    status: unverified
+  # ---------- p90-91: pyramid ----------
+  - id: dm.L08.007
+    kind: card
+    topic: pyramid
+    front: What does the food pyramid show?
+    back: Recommended servings for food products across the 6 food groups, by level, with serving suggestions and examples.
+    src: { page: 90, quote: "It shows recommended servings for food products." }
+    status: unverified
+    update:
+      text: "USDA replaced the food pyramid (MyPyramid) with MyPlate in 2011, and ADA nutrition therapy uses individualized eating patterns and the plate method rather than a pyramid. The book's pyramid is the exam answer."
+      ref: "USDA MyPlate 2011; ADA nutrition therapy consensus report 2019"
+  - id: dm.L08.008
+    kind: cloze
+    topic: pyramid
+    text: "According to the lecture, the food pyramid was adopted in {{c1::1974}} and lists {{c2::6}} food groups."
+    src: { page: 90, quote: "It was adopted in 1974." }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L08.009
+    kind: card
+    topic: pyramid
+    front: Why is the food pyramid important?
+    back: Healthful eating helps children grow and develop, helps people feel and do their best, and guides food selection for balanced, nutritious meals.
+    src: { page: 91, quote: "The food pyramid helps us with proper food selection for the most balanced, nutritious meals." }
+    status: unverified
+  - id: dm.L08.010
+    kind: enumerate
+    topic: pyramid
+    prompt: The six food groups of the pyramid?
+    points: ["Cereal and grains", Vegetables, Fruit, "Milk, yogurt, cheese", "Meat, fish, poultry", "Fats, oils, sweets"]
+    pass: 6
+    src: { page: 91, quote: "Cereal and grains" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L08.011
+    kind: table
+    topic: pyramid
+    title: Food pyramid servings per day
+    columns: [Group, Place in pyramid, Servings/day]
+    rows:
+      - ["Cereal and grains", Base, "6–11"]
+      - [Vegetables, Above grains, "3–5"]
+      - [Fruit, Above grains, "2–4"]
+      - ["Milk, yogurt, cheese", Above fruit and vegetables, "2–3"]
+      - ["Meat, fish, poultry", Above fruit and vegetables, "2–3"]
+      - ["Fats, oils, sweets", Top, Sparingly]
+    blanks: [[0, 2], [1, 2], [2, 2], [3, 2], [4, 2], [5, 2]]
+    src: { page: 92, quote: "6 – 11 servings per day." }
+    status: unverified
+    tags: [numbers, high-yield]
+  # ---------- p92: grains, vegetables ----------
+  - id: dm.L08.012
+    kind: cloze
+    topic: pyramid
+    text: "Cereals and grains form the {{c1::base}} of the pyramid at {{c2::6–11}} servings a day."
+    src: { page: 92, quote: "The base of the food pyramid." }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L08.013
+    kind: card
+    topic: pyramid
+    front: Why are whole-grain foods better than white-flour foods?
+    back: They are less processed and keep more vitamins, minerals and fiber.
+    src: { page: 92, quote: "are less processed and retain more valuable vitamins, minerals, and fiber than foods made with white flour." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L08.014
+    kind: cloze
+    topic: pyramid
+    text: "Vegetables: {{c1::3–5}} servings a day; fruit: {{c2::2–4}} servings a day."
+    src: { page: 92, quote: "3 -5 servings per day." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L08.015
+    kind: card
+    topic: pyramid
+    front: Why should you eat a wide variety of vegetables?
+    back: Different vegetables contain different vitamins and minerals.
+    src: { page: 92, quote: "different vegetables contain different nutrients, so it is essential to eat a wide variety of types." }
+    status: unverified
+  - id: dm.L08.016
+    kind: card
+    topic: pyramid
+    front: Vegetables are low in fat and calories. What can change that?
+    back: Cooking, which often adds fat and calories.
+    src: { page: 92, quote: "Vegetables are very low in fats and calories, but cooking can often add these." }
+    status: unverified
+  - id: dm.L08.017
+    kind: table
+    topic: pyramid
+    title: Vegetables and their nutrients (as the lecture states)
+    columns: [Vegetables, Nutrient]
+    rows:
+      - [Green vegetables, Vitamin A]
+      - [Dark orange and dark green vegetables, Vitamin C]
+      - [Broccoli and related plants, Iron and calcium]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 92, quote: "Vegetables like broccoli and related plants contain iron and calcium." }
+    status: unverified
+  # ---------- p93: fruit, milk ----------
+  - id: dm.L08.018
+    kind: card
+    topic: pyramid
+    front: What do fruits provide, and how can processing change them?
+    back: Low calories and fat, natural sugars, fiber and vitamins; canning or juicing may add sugar and remove nutrients.
+    src: { page: 93, quote: "Processing fruits when canning or making them into juices may add sugars and remove nutrients." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L08.019
+    kind: card
+    topic: pyramid
+    front: In which forms may the 2–4 daily fruit servings be eaten?
+    back: Fresh, frozen, canned, dried, pureed or juiced.
+    src: { page: 93, quote: "They may be fresh, frozen, canned, dried, pureed, or juiced." }
+    status: unverified
+  - id: dm.L08.020
+    kind: card
+    topic: pyramid
+    front: Which nutrients do milk and dairy products provide?
+    back: Calcium mainly, plus protein, phosphorus, vitamin A and vitamin D.
+    src: { page: 93, quote: "Milk and its derivative products are a rich source of dietary calcium, but also provide protein, phosphorus, vitamin A, and vitamin D." }
+    status: unverified
+  - id: dm.L08.021
+    kind: card
+    topic: pyramid
+    front: What is the downside of many dairy products, and the alternative?
+    back: They are high in saturated fat and cholesterol; skimmed products are the alternative.
+    src: { page: 93, quote: "many dairy products are high in saturated fat and cholesterol" }
+    status: unverified
+  - id: dm.L08.022
+    kind: cloze
+    topic: pyramid
+    text: "Dairy: {{c1::2–3}} servings a day; for adults, {{c2::three cups}} of dairy products a day are recommended."
+    src: { page: 93, quote: "For adults, three cups of dairy products are recommended per day." }
+    status: unverified
+    tags: [numbers]
+  # ---------- p94: meat ----------
+  - id: dm.L08.023
+    kind: card
+    topic: pyramid
+    front: Which nutrients does meat provide?
+    back: Protein, iron, zinc and vitamin B12.
+    src: { page: 94, quote: "Meat is a major source of protein, as well as iron, zinc, and vitamin B12." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L08.024
+    kind: enumerate
+    topic: pyramid
+    prompt: Meat alternatives in the meat group?
+    points: [Eggs, Dry beans and lentils, Nuts, Tofu and soy products, Cheeses, Chick peas and other high-protein vegetables]
+    pass: 4
+    src: { page: 94, quote: "eggs, dry beans, and nuts, such foods are typically placed in the same category as meats, as meat alternatives." }
+    status: unverified
+  - id: dm.L08.025
+    kind: card
+    topic: pyramid
+    front: What are the drawbacks of meat, and a simple fix?
+    back: Often high in fat, cholesterol and sodium; trimming off fatty tissue reduces this.
+    src: { page: 94, quote: "Simply trimming off fatty tissue can go a long way towards reducing this negative effect." }
+    status: unverified
+  - id: dm.L08.026
+    kind: cloze
+    topic: pyramid
+    text: "Adults should eat {{c1::2–3}} servings of meat a day; one serving of meat is {{c2::4 oz (110 g)}}."
+    src: { page: 94, quote: "The food guide pyramid suggests that adults eat 2–3 servings per day. One serving of meat is 4 oz (110 g)." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L08.027
+    kind: card
+    topic: pyramid
+    front: Where are fats, oils and sweets in the pyramid, and how much?
+    back: At the top; use sparingly.
+    src: { page: 94, quote: "To be used sparingly." }
+    status: unverified
+  - id: dm.L08.028
+    kind: mcq
+    topic: pyramid
+    stem: A 50-year-old man with type 2 diabetes eats about 450 g of grilled meat a day. Using the lecture's serving size, how many meat servings is this and how does it compare with the advice?
+    options:
+      - "About 4 servings: above the 2–3 a day advised"
+      - "About 2 servings: within the advice"
+      - "About 9 servings: far above the advice"
+      - "About 1 serving: below the advice"
+      - "Servings do not apply to meat"
+    answer: 0
+    why:
+      - "Correct: one serving is 4 oz (110 g); 450/110 ≈ 4, above the 2–3 servings advised (p94)."
+      - That would need servings of about 225 g.
+      - That would need servings of 50 g.
+      - That would need servings of 450 g.
+      - The pyramid gives meat servings like the other groups.
+    src: { page: 94, quote: "The food guide pyramid suggests that adults eat 2–3 servings per day. One serving of meat is 4 oz (110 g)." }
+    status: unverified
+    tags: [numbers]
+  # ---------- p95: fats, trans, sugar ----------
+  - id: dm.L08.029
+    kind: card
+    topic: fats
+    front: Healthy sources of fat in the lecture?
+    back: Fish, nuts, and certain fruits and vegetables such as avocados.
+    src: { page: 95, quote: "Healthy sources of fat can be found in fish, nuts, and certain fruits and vegetables, such as avocados." }
+    status: unverified
+  - id: dm.L08.030
+    kind: card
+    topic: fats
+    front: How are trans fatty acids made, and what is their other name?
+    back: By adding hydrogen to liquid vegetable oils to make them more solid; partially hydrogenated oils.
+    src: { page: 95, quote: "Trans fatty acids are created in an industrial process that adds hydrogen to liquid vegetable oils to make them more solid." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L08.031
+    kind: card
+    topic: fats
+    front: Where do small amounts of natural trans fats occur?
+    back: Beef, lamb and full-fat dairy products.
+    src: { page: 95, quote: "Small amounts of trans fats occur naturally in beef, lamb, and full-fat dairy products." }
+    status: unverified
+  - id: dm.L08.032
+    kind: card
+    topic: fats
+    front: How do trans fats differ from saturated fats in their effect on cholesterol?
+    back: Both raise LDL, but trans fats also lower HDL, so they may do more damage.
+    src: { page: 95, quote: "But unlike saturated fats, trans fats lower HDL cholesterol and may do more damage," }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L08.033
+    kind: cloze
+    topic: fats
+    text: "The AHA advises limiting saturated fat to less than {{c1::7%}} of daily calories and trans fat to less than {{c2::1%}}."
+    src: { page: 95, quote: "advises limiting saturated fat consumption to less than 7% of daily calories and transfat consumption to less than 1%." }
+    status: unverified
+    tags: [numbers, high-yield]
+    update:
+      text: "AHA 2021 dietary guidance and ADA 2025 advise keeping saturated fat low (under about 6–10% of calories) and avoiding trans fat altogether. The book's 7% and 1% are the exam answer."
+      ref: "AHA Dietary Guidance 2021; ADA Standards of Care 2025, section 5"
+  - id: dm.L08.034
+    kind: table
+    topic: fats
+    title: Added sugar limits by calorie level
+    columns: [Calories/day, Teaspoons, Grams]
+    rows:
+      - ["1,600", "6", "22 g"]
+      - ["2,200", "12", "44 g"]
+      - ["2,800", "18", "66 g"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 1], [2, 2]]
+    src: { page: 95, quote: "1,600 calories - Limit sugar to 6 teaspoons per day or 22 grams per day" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L08.035
+    kind: mcq
+    topic: fats
+    stem: A patient on a 2,000-calorie diet asks what the AHA limit for saturated fat means for him. Using the lecture's figure, what is the most saturated fat (in calories) he should eat a day?
+    options: ["Less than 140 kcal", "Less than 20 kcal", "Less than 700 kcal", "Less than 400 kcal", "No limit"]
+    answer: 0
+    why:
+      - "Correct: under 7% of 2,000 kcal = under 140 kcal (about 15 g) of saturated fat (p95)."
+      - 20 kcal is the 1% limit for trans fat.
+      - 700 kcal would be 35%.
+      - 400 kcal would be 20%.
+      - The AHA gives a limit.
+    src: { page: 95, quote: "advises limiting saturated fat consumption to less than 7% of daily calories and transfat consumption to less than 1%." }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L08.036
+    kind: mcq
+    topic: fats
+    stem: A diabetic patient with low HDL asks which fat in processed foods he should cut first. Which answer fits the lecture best?
+    options:
+      - "Partially hydrogenated oils (trans fats), because they raise LDL and lower HDL"
+      - "Olive oil, because all oils raise LDL"
+      - "Fish oil, because it lowers HDL"
+      - "Avocado, because it is a saturated fat"
+      - "Nuts, because they contain trans fats"
+    answer: 0
+    why:
+      - "Correct: trans fats raise LDL and, unlike saturated fats, lower HDL (p95)."
+      - Healthy fats are not the problem the lecture names.
+      - Fish is listed as a healthy fat source.
+      - Avocado is listed as a healthy fat source.
+      - Nuts are a healthy fat source; trans fats come from industrial hydrogenation.
+    src: { page: 95, quote: "But unlike saturated fats, trans fats lower HDL cholesterol and may do more damage," }
+    status: unverified
+  # ---------- p96: messages, plate, carb counting ----------
+  - id: dm.L08.037
+    kind: enumerate
+    topic: plate
+    prompt: Key food group messages from the Dietary Guidelines and MyPyramid?
+    points: [Focus on fruits, Vary your veggies, Get your calcium-rich foods, Make half your grains whole, Go lean with protein, "Know the limits on fats, salt and sugars"]
+    pass: 5
+    src: { page: 96, quote: "Make half your grains whole." }
+    status: unverified
+  - id: dm.L08.038
+    kind: card
+    topic: plate
+    front: What is the big message of the divided plate?
+    back: Fruits and vegetables take up half the plate, with the vegetable portion a little bigger than the fruit.
+    src: { page: 96, quote: "fruits and vegetables take up half the plate, with the vegetable portion being a little bigger than the fruit section." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L08.039
+    kind: card
+    topic: plate
+    front: What do nutrition experts recommend about the proportions on the plate?
+    back: More vegetables than fruit, and more grains than protein foods.
+    src: { page: 96, quote: "Nutrition experts recommend you eat more vegetables than fruit and more grains than protein foods." }
+    status: unverified
+  - id: dm.L08.040
+    kind: card
+    topic: plate
+    front: Besides balance, what does the divided plate aim to discourage?
+    back: Super-big portions, which can cause weight gain.
+    src: { page: 96, quote: "The divided plate also aims to discourage super-big portions, which can cause weight gain." }
+    status: unverified
+  - id: dm.L08.041
+    kind: card
+    topic: carbs
+    front: What is carbohydrate counting?
+    back: A meal-planning technique for managing blood glucose by keeping track of carbohydrate eaten and setting a maximum per meal, balanced with activity and medication.
+    src: { page: 96, quote: "It is a meal planning technique for managing blood glucose levels." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p97-99: carb servings, examples, limits ----------
+  - id: dm.L08.042
+    kind: enumerate
+    topic: carbs
+    prompt: Groups of foods that contain starches (carb-counting chart)?
+    points: ["Starchy vegetables (potatoes, sweet potatoes, corn, fresh peas, lima beans)", "Legumes (dried beans and peas)", "Grains (wheat, oats, barley, rice)", "Grain products (pasta, bread, rolls, bagels, crackers, cereals, baked goods)"]
+    pass: 3
+    src: { page: 97, quote: "All of these foods contain starches:" }
+    status: unverified
+  - id: dm.L08.043
+    kind: cloze
+    topic: carbs
+    text: "One carbohydrate serving is {{c1::15 g}} of carbohydrate, about one {{c2::slice of bread}}, a small piece of fruit or an ear of corn."
+    src: { page: 97, quote: "One serving of carbohydrate is measured as 15 grams." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L08.044
+    kind: table
+    topic: carbs
+    title: Carbohydrate in specific foods
+    columns: [Food, Carbohydrate]
+    rows:
+      - ["1 cup cooked pasta or rice", "45 g"]
+      - ["Whole English muffin", "30 g"]
+      - ["Medium potato", "30 g"]
+      - ["1 cup corn or peas", "30 g"]
+      - ["Small fruit (apple, orange)", "15 g"]
+      - ["1 cup milk", "12 g"]
+      - ["1½ cups cooked veggies", "15 g"]
+      - ["2 small cookies", "15 g"]
+    blanks: [[0, 1], [2, 1], [4, 1], [5, 1]]
+    src: { page: 98, quote: "1 cup cooked pasta or 1 cup cooked rice 45g carbohydrate" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L08.045
+    kind: cloze
+    topic: carbs
+    text: "A cup of cooked rice or pasta holds about {{c1::45 g}} of carbohydrate (3 carb servings); a cup of milk about {{c2::12 g}}."
+    src: { page: 98, quote: "1 cup cooked pasta or 1 cup cooked rice 45g carbohydrate" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L08.046
+    kind: card
+    topic: carbs
+    front: How does the lecture build a 45 g carbohydrate breakfast (breakfast 1)?
+    back: 2 slices of whole wheat toast (30 g) + 1 tablespoon jam (15 g) + egg whites (0) + black coffee with sweetener (0) = 45 g.
+    src: { page: 98, quote: "Total grams of carbohydrate: 45 grams" }
+    status: unverified
+  - id: dm.L08.047
+    kind: table
+    topic: carbs
+    title: Carbohydrate limits per meal and snack
+    columns: [Who, Per meal, Per snack]
+    rows:
+      - [Women, "30–60 g", "15–30 g"]
+      - [Men, "45–75 g", "15–30 g"]
+    blanks: [[0, 1], [1, 1], [0, 2]]
+    src: { page: 99, quote: "30 to 60 grams" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L08.048
+    kind: card
+    topic: carbs
+    front: Which end of the carb ranges should a patient trying to lose weight use?
+    back: The lower numbers.
+    src: { page: 99, quote: "If you are trying to lose weight, use the lower numbers in these ranges for your carb counts by meal." }
+    status: unverified
+  - id: dm.L08.049
+    kind: card
+    topic: carbs
+    front: Where on a Nutrition Facts label do you find what you need for carb counting?
+    back: The serving size, and the total carbohydrates per serving.
+    src: { page: 99, quote: "Total carbohydrates per serving are here" }
+    status: unverified
+  - id: dm.L08.050
+    kind: mcq
+    topic: carbs
+    stem: A woman with type 2 diabetes plans lunch of 1 cup cooked rice, a small orange and 1 cup milk. Is this within her carbohydrate limit per meal?
+    options:
+      - "No: about 72 g, above the 30–60 g range for women"
+      - "Yes: about 72 g, within 30–60 g"
+      - "Yes: about 60 g, at the top of the range"
+      - "No: about 45 g, below the range"
+      - "Yes: about 30 g"
+    answer: 0
+    why:
+      - "Correct: rice 45 + orange 15 + milk 12 = 72 g, above 30–60 g for women (p98–99)."
+      - "The women's range is 30–60 g; 72 g is above it."
+      - "The milk adds 12 g, making 72 g, not 60 g."
+      - Only the rice is 45 g; the orange and milk add 27 g.
+      - That counts only two small items.
+    src: { page: 99, quote: "30 to 60 grams" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L08.051
+    kind: mcq
+    topic: carbs
+    stem: A man with type 2 diabetes who wants to lose weight asks how many grams of carbohydrate to aim for at each meal. Best answer from the lecture?
+    options: ["About 45 g (lower end of 45–75 g)", "About 75 g (upper end of 45–75 g)", "About 30 g (lower end of the women's range)", "15 g", "No carbohydrate at all"]
+    answer: 0
+    why:
+      - "Correct: men 45–75 g per meal; to lose weight use the lower numbers (p99)."
+      - The upper end does not help weight loss.
+      - 30 g is the lower end for women.
+      - 15–30 g is the snack range.
+      - The lecture counts carbohydrate; it does not ban it.
+    src: { page: 99, quote: "If you are trying to lose weight, use the lower numbers in these ranges for your carb counts by meal." }
+    status: unverified
+  # ---------- p100-102: GI, GL ----------
+  - id: dm.L08.052
+    kind: card
+    topic: gi
+    front: Define the glycemic index (GI).
+    back: A number associated with a food that shows its effect on blood glucose, compared with pure glucose, which is 100.
+    src: { page: 100, quote: "The glycemic index (GI) is a number associated with a particular type of food that indicates the food‘s effect on a person‘s blood glucose level." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L08.053
+    kind: cloze
+    topic: gi
+    text: "The GI reference value is {{c1::100}}, an equivalent amount of pure {{c2::glucose}}."
+    src: { page: 100, quote: "A value of 100 represents the standard, an equivalent amount of pure glucose." }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L08.054
+    kind: card
+    topic: gi
+    front: Which foods have a high GI and which a low GI?
+    back: "High GI: carbohydrates that break down quickly and release glucose rapidly. Low GI: carbohydrates that break down slowly and release glucose gradually."
+    src: { page: 100, quote: "Foods with carbohydrates that break down quickly during digestion and release glucose rapidly into the bloodstream tend to have a high GI" }
+    status: unverified
+  - id: dm.L08.055
+    kind: table
+    topic: gi
+    title: Glycemic index classification
+    columns: [Class, GI, Examples]
+    rows:
+      - [High, "≥70", "Glucose 100, baked potato 85, cornflakes 84, white bread 70"]
+      - [Medium, "56–69", "Brown bread 69, white rice 65, orange juice 57, mango 55"]
+      - [Low, "≤55", "Banana 52, brown rice 50, apple 36, red lentils 26"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 101, quote: "Glycemic Index classification" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L08.056
+    kind: cloze
+    topic: gi
+    text: "Glycemic index classification: high GI is {{c1::70}} or more, medium {{c2::56–69}}, and low {{c3::55}} or less."
+    src: { page: 101, quote: "Glycemic Index classification" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L08.057
+    kind: card
+    topic: gi
+    front: Define glycemic load (GL).
+    back: A measure of both the quality (GI) and the quantity (grams per serving) of carbohydrate in a meal.
+    src: { page: 101, quote: "Glycemic Load (GL) is a measure of both the quality (the GI value) and quantity (grams per serve) of a carbohydrate in a meal." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L08.058
+    kind: cloze
+    topic: gi
+    text: "GL = GI ÷ 100 × {{c1::net carbs}}, where net carbs = total carbohydrate minus {{c2::dietary fiber}}."
+    src: { page: 101, quote: "Net Carbs are equal to the Total Carbohydrates minus Dietary Fiber" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L08.059
+    kind: table
+    topic: gi
+    title: Glycemic load classes
+    columns: [Class, GL]
+    rows:
+      - [Low, "10 or less"]
+      - [Medium, "11–19"]
+      - [High, "20 or more"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 101, quote: "Similar to the glycemic index, the glycemic load of a food can be classified as low, medium, or high:" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L08.060
+    kind: card
+    topic: gi
+    front: What does the ADA say is the strongest indicator of a food's effect on glucose?
+    back: The total amount of carbohydrate (it supports the GI, but each person should find the method that works best).
+    src: { page: 101, quote: "it warns that the total amount of carbohydrate in the food is still the strongest and most important indicator" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L08.061
+    kind: cloze
+    topic: gi
+    text: "Watermelon has a GI of {{c1::72}} but 100 g holds only 5 g of carbohydrate, so its GL is {{c2::3.6}} (low)."
+    src: { page: 102, quote: "calculation 5 × 72 / 100 = 3.6, so the GL is 3.6." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L08.062
+    kind: mcq
+    topic: gi
+    stem: A food has a GI of 60, 30 g total carbohydrate and 5 g dietary fiber per serving. What is its glycemic load and class?
+    options: ["15: medium", "18: medium", "3: low", "25: high", "50: high"]
+    answer: 0
+    why:
+      - "Correct: net carbs 30 − 5 = 25; GL = 60/100 × 25 = 15, medium (11–19) (p101)."
+      - "18 forgets to subtract the fiber (60/100 × 30)."
+      - That divides the wrong way.
+      - 25 is the net carbs, not the GL.
+      - That confuses GL with GI.
+    src: { page: 101, quote: "Net Carbs are equal to the Total Carbohydrates minus Dietary Fiber" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L08.063
+    kind: mcq
+    topic: gi
+    stem: Watermelon (GI 72) and a cup of cooked pasta are compared. A patient avoids watermelon because "its GI is high." What is the best reply?
+    options:
+      - "Watermelon has a high GI but a low GL (3.6 per 100 g), because it holds little carbohydrate"
+      - "Correct, avoid all foods with a GI above 70"
+      - "GI already includes portion size, so watermelon is worse than pasta"
+      - "GL ignores the GI"
+      - "Fruit has no effect on glucose"
+    answer: 0
+    why:
+      - "Correct: GL accounts for quantity; 5 × 72 / 100 = 3.6, low (p102)."
+      - The total carbohydrate amount matters most, not GI alone (p101).
+      - GI does not include portion size; GL does.
+      - GL uses both GI and grams of carbohydrate.
+      - Fruit contains natural sugars.
+    src: { page: 102, quote: "calculation 5 × 72 / 100 = 3.6, so the GL is 3.6." }
+    status: unverified
+  - id: dm.L08.064
+    kind: mcq
+    topic: gi
+    stem: Which food from the lecture's GI chart has a low glycemic index?
+    options: [Red lentils, Baked potato, Cornflakes, White bread, Jelly beans]
+    answer: 0
+    why:
+      - "Correct: red lentils GI 26, low (≤55) (p101)."
+      - Baked potato 85, high.
+      - Cornflakes 84, high.
+      - White bread 70, high.
+      - Jelly beans 80, high.
+    src: { page: 101, quote: "Glycemic Index classification" }
+    status: unverified
+  # ---------- cases ----------
+  - id: dm.L08.065
+    kind: case
+    topic: carbs
+    stem: A 45-year-old woman with newly diagnosed type 2 diabetes is sedentary and overweight. She wants a simple eating plan.
+    steps:
+      - reveal: She asks how many calories she needs.
+        question: Which calorie category fits?
+        options: ["1,600 calories", "2,200 calories", "2,800 calories", "500 calories"]
+        answer: 0
+        why: "1,600 calories fits many sedentary women and some older adults (p90)."
+      - reveal: She wants a quick visual guide for each meal.
+        question: How should her plate look?
+        options: ["Half fruits and vegetables, vegetables a bit more than fruit", "Half protein", "Half grains, no vegetables", "Fruit only"]
+        answer: 0
+        why: "Fruits and vegetables take half the plate, vegetables a little bigger; more grains than protein (p96)."
+      - reveal: She will count carbohydrates.
+        question: What is one carb serving and her per-meal target to lose weight?
+        options: ["15 g; aim near 30 g (lower end of 30–60)", "30 g; aim near 60 g", "5 g; aim near 75 g", "15 g; aim near 75 g"]
+        answer: 0
+        why: "One carb serving = 15 g (p97); women 30–60 g per meal, use the lower numbers to lose weight (p99)."
+      - reveal: She likes white bread and cornflakes.
+        question: Better swaps by GI?
+        options: ["Brown rice or porridge (low GI)", "Baked potato", "Jelly beans", "Sports drinks"]
+        answer: 0
+        why: "Brown rice 50 and porridge 49 are low GI (≤55); baked potato 85, jelly beans 80 and sports drinks 95 are high (p101)."
+    src: { page: 99, quote: "If you are trying to lose weight, use the lower numbers in these ranges for your carb counts by meal." }
+    status: unverified
+  - id: dm.L08.066
+    kind: case
+    topic: fats
+    stem: A 55-year-old man with type 2 diabetes, LDL 160 mg/dL and HDL 32 mg/dL eats fried fast food daily.
+    steps:
+      - reveal: His snacks list "partially hydrogenated vegetable oil".
+        question: What is it and why does it matter?
+        options: ["Trans fat: raises LDL and lowers HDL", "A healthy unsaturated oil", "A fiber supplement", "Saturated fat that raises HDL"]
+        answer: 0
+        why: "Partially hydrogenated oils are trans fats; they raise LDL and, unlike saturated fats, lower HDL (p95)."
+      - reveal: You give fat targets.
+        question: AHA limits in the lecture?
+        options: ["Saturated fat <7%, trans fat <1% of calories", "Saturated fat <30%, trans <10%", "No limit on saturated fat", "Trans fat <7%"]
+        answer: 0
+        why: "AHA: saturated fat under 7% and trans fat under 1% of daily calories (p95)."
+      - reveal: He asks which fats are healthy.
+        question: Best example?
+        options: ["Fish, nuts, avocado", "Butter", "Doughnuts", "Mayonnaise"]
+        answer: 0
+        why: "Healthy fat sources: fish, nuts, certain fruits and vegetables such as avocados (p95)."
+    src: { page: 95, quote: "But unlike saturated fats, trans fats lower HDL cholesterol and may do more damage," }
+    status: unverified
+  # ---------- book questions ----------
+  - id: dm.L08.067
+    kind: essay
+    topic: carbs
+    prompt: What is carbohydrate counting?
+    outline:
+      - "Definition": ["Meal-planning technique to manage blood glucose", "Track carbohydrate eaten, set a maximum per meal, balance with activity and medication"]
+      - "The unit": ["One carb serving = 15 g (a slice of bread, small fruit, ear of corn)", "Read serving size and total carbohydrate on the label"]
+      - "Targets": ["Women 30–60 g per meal, men 45–75 g; snacks 15–30 g", "Lower end to lose weight"]
+      - "Example": ["1 cup cooked rice or pasta = 45 g", "Breakfast of 2 toast + jam = 45 g"]
+    src: { page: 96, quote: "It is a meal planning technique for managing blood glucose levels." }
+    status: unverified
+    tags: [book-question]
+  - id: dm.L08.068
+    kind: essay
+    topic: gi
+    prompt: What is the glycemic index?
+    outline:
+      - "Definition": ["Number showing a food's effect on blood glucose", "Pure glucose = 100"]
+      - "Mechanism": ["Fast-digested carbohydrate, rapid glucose release = high GI", "Slow-digested, gradual release = low GI"]
+      - "Classes": ["High ≥70 (glucose, baked potato, cornflakes, white bread)", "Medium 56–69 (brown bread, white rice)", "Low ≤55 (banana, brown rice, apple, lentils)"]
+      - "ADA view": ["Supports GI, but total carbohydrate is the strongest indicator"]
+    src: { page: 100, quote: "A value of 100 represents the standard, an equivalent amount of pure glucose." }
+    status: unverified
+    tags: [book-question]
+  - id: dm.L08.069
+    kind: essay
+    topic: gi
+    prompt: What is the glycemic load?
+    outline:
+      - "Definition": ["Measures quality (GI) and quantity (grams per serving) of carbohydrate"]
+      - "Formula": ["GL = GI / 100 × net carbs", "Net carbs = total carbohydrate − dietary fiber"]
+      - "Classes": ["Low ≤10, medium 11–19, high ≥20"]
+      - "Example": ["Watermelon GI 72, 5 g carbs per 100 g: GL = 3.6"]
+    src: { page: 101, quote: "Glycemic Load (GL) is a measure of both the quality (the GI value) and quantity (grams per serve) of a carbohydrate in a meal." }
+    status: unverified
+    tags: [book-question]

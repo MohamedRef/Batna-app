@@ -38,6 +38,12 @@ const TAPPABLE: &[&str] = &[
     "calc-chip",
     // Redesign stat tiles (assets/parts.css): each opens what it counts.
     "stat-tile",
+    // The 2026-10-29 redesign: Today's session-length chips and plan pill,
+    // its lesson card, and the lessons list's other-lecture cards.
+    "td-chip",
+    "td-pill",
+    "ls-now",
+    "ls-other",
 ];
 
 /// Elements that can be pressed (or, for `div.plan-day`, the plain line of

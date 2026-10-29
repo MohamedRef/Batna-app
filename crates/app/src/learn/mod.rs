@@ -185,6 +185,55 @@ pub fn Learn() -> Element {
     }
 }
 
+/// The lecture the list shows: the one picked under "other lectures", else
+/// the one with the next lesson. Kept while the app runs.
+static SHOWN: GlobalSignal<Option<String>> = Signal::global(|| None);
+/// What the search box holds, kept when a lesson opens and closes.
+static QUERY: GlobalSignal<String> = Signal::global(String::new);
+
+/// Where an unfinished lesson stands on this device: the step it reopens at
+/// (0-based), read from the player's saved position (`player.rs`).
+pub fn resume_step(id: &str) -> Option<usize> {
+    #[derive(Deserialize)]
+    struct At {
+        at: usize,
+    }
+    if mark(id).is_some() {
+        return None;
+    }
+    crate::store::shared().local_setting::<At>(&format!("lessonpos.{id}")).map(|p| p.at).filter(|at| *at > 0)
+}
+
+/// A lesson's state in words: finished, part-way, the next one, or new.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum State {
+    Done(Mark),
+    Current { at: usize },
+    Next,
+    New,
+}
+
+pub fn state(lesson: &Lesson, next: Option<&str>) -> State {
+    if let Some(m) = mark(&lesson.id) {
+        State::Done(m)
+    } else if let Some(at) = resume_step(&lesson.id) {
+        State::Current { at }
+    } else if next == Some(lesson.id.as_str()) {
+        State::Next
+    } else {
+        State::New
+    }
+}
+
+/// Does a lesson match the search? Its title, hook, topics and lecture.
+fn matches(q: &str, lecture: &str, lecture_title: &str, l: &Lesson) -> bool {
+    let code = crate::content::lecture_code(lecture).to_lowercase();
+    [l.title.as_str(), l.hook.as_str(), lecture_title, code.as_str()]
+        .into_iter()
+        .chain(l.topics.iter().map(String::as_str))
+        .any(|t| t.to_lowercase().contains(q))
+}
+
 #[component]
 fn LessonList() -> Element {
     let ui = use_context::<Ui>();
@@ -193,72 +242,276 @@ fn LessonList() -> Element {
     let done = lib.all_lessons().filter(|(_, l)| mark(&l.id).is_some()).count();
     let next = next_lesson(&[]);
     let next_id = next.map(|l| l.id.clone());
+    let next_lecture = next.and_then(|l| l.id.rsplit_once('.')).map(|(lec, _)| lec.to_string());
+    let shown = SHOWN().filter(|id| lib.lessons.contains_key(id)).or(next_lecture).or_else(|| {
+        lib.index.lectures.iter().find(|e| lib.lessons.contains_key(&e.id)).map(|e| e.id.clone())
+    });
+    let query = QUERY();
+    let q = query.trim().to_lowercase();
     rsx! {
-        // With a lesson to go to, the whole card opens it (the button's click bubbles up).
-        section {
-            class: if next_id.is_some() { "card card-action ls-hero" } else { "card ls-hero" },
-            onclick: move |_| if let Some(id) = &next_id { open(ui, id) },
-            h1 { {tx::TITLE} }
-            p { class: "muted", {tx::INTRO} }
-            if total == 0 {
-                p { class: "note", {tx::NONE_YET} }
-            } else {
-                div { class: "ls-hero-row",
-                    span { class: "chip", "{done} {tx::OF} {total} {tx::LESSONS_DONE}" }
-                    if let Some(l) = next {
-                        button {
-                            class: "btn btn-primary",
-                            // One inline label: flex would split each run into a column.
-                            span { class: "ls-btn-label",
-                                {if done == 0 { tx::START_FIRST } else { tx::CONTINUE }}
-                                " · "
-                                text::Line { text: l.title.clone() }
-                            }
-                        }
-                    } else {
-                        span { class: "ls-verdict good", {tx::ALL_LESSONS_DONE} }
-                    }
-                }
-                p { class: "note small", {tx::UNVERIFIED_NOTE} }
+        header { class: "page-head",
+            h1 { {tx::HEAD} }
+            p { class: "page-sub",
+                {tx::HEAD_SUB}
+                if total > 0 { " · " span { class: "ls-nowrap", {tx::done_of(done, total)} } }
             }
         }
-        for entry in lib.index.lectures.iter() {
-            {
-                let number = entry.id.rsplit('.').next().unwrap_or(&entry.id).trim_start_matches('L').to_string();
-                match lib.lessons.get(&entry.id) {
-                    Some(file) => rsx! {
-                        section { key: "{entry.id}", class: "ls-lecture",
-                            // The heading opens the lecture's page (its cards, questions, topics).
-                            h2 {
-                                button {
-                                    class: "ls-lecture-head tap tap-plain",
-                                    title: tx::OPEN_LECTURE,
-                                    onclick: { let id = entry.id.clone(); move |_| crate::lecture::open(ui, &id) },
-                                    span { class: "num", "{number}" }
-                                    bdi { "{entry.title}" }
-                                    span { class: "chev", aria_hidden: "true" }
-                                }
-                            }
-                            ol { class: "ls-cards",
-                                for (i , l) in file.lessons.iter().enumerate() {
-                                    LessonCard { key: "{l.id}", n: i + 1, lesson: l.clone() }
-                                }
-                            }
-                        }
-                    },
-                    None => rsx! {
-                        button {
-                            key: "{entry.id}",
-                            class: "ls-lecture ls-soon tap",
-                            title: tx::OPEN_LECTURE,
-                            onclick: { let id = entry.id.clone(); move |_| crate::lecture::open(ui, &id) },
-                            span { class: "num", "{number}" }
-                            bdi { "{entry.title}" }
-                            span { class: "chip", {tx::WRITING} }
-                            span { class: "chev", aria_hidden: "true" }
-                        }
-                    },
+        if total == 0 {
+            p { class: "note", {tx::NONE_YET} }
+        } else {
+            label { class: "search ls-search",
+                {crate::icons::search()}
+                input {
+                    r#type: "search",
+                    placeholder: tx::SEARCH,
+                    aria_label: tx::SEARCH_LABEL,
+                    value: "{query}",
+                    oninput: move |e| *QUERY.write() = e.value(),
                 }
+                if !query.is_empty() {
+                    button {
+                        class: "ls-search-clear",
+                        aria_label: tx::CLEAR_SEARCH,
+                        title: tx::CLEAR_SEARCH,
+                        onclick: move |_| QUERY.write().clear(),
+                        "×"
+                    }
+                }
+            }
+        }
+        if !q.is_empty() {
+            Results { q: q.clone(), next_id: next_id.clone() }
+        } else if let Some(shown) = shown {
+            Shown { id: shown.clone(), next_id: next_id.clone() }
+            p { class: "note small", {tx::UNVERIFIED_NOTE} }
+            if done == total && total > 0 {
+                p { class: "ls-verdict good", {tx::ALL_LESSONS_DONE} }
+            }
+            div { class: "section-head", h2 { {tx::OTHER_LECTURES} } }
+            div { class: "ls-others",
+                for entry in lib.index.lectures.iter().filter(|e| e.id != shown) {
+                    {
+                        let id = entry.id.clone();
+                        let code = crate::content::lecture_code(&entry.id);
+                        match lib.lessons.get(&entry.id) {
+                            // Picks this lecture: its lessons move to the top.
+                            Some(file) => {
+                                let n = file.lessons.len();
+                                let d = file.lessons.iter().filter(|l| mark(&l.id).is_some()).count();
+                                rsx! {
+                                    button {
+                                        key: "{entry.id}",
+                                        class: "ls-other tap",
+                                        title: tx::SHOW_LECTURE,
+                                        onclick: move |_| {
+                                            *SHOWN.write() = Some(id.clone());
+                                            document::eval(r#"document.querySelector("main.content")?.scrollTo(0, 0);"#);
+                                        },
+                                        span { class: "ls-other-top",
+                                            span { class: "num", "{code}" }
+                                            span { class: "chev", aria_hidden: "true" }
+                                        }
+                                        bdi { class: "ls-other-title", dir: "ltr", "{entry.title}" }
+                                        span { class: "muted small", {tx::lessons_n(n)} " · " {tx::done_of(d, n)} }
+                                        Meter { done: d, total: n }
+                                    }
+                                }
+                            }
+                            // Not written yet: its page still has the book's pages and cards.
+                            None => rsx! {
+                                button {
+                                    key: "{entry.id}",
+                                    class: "ls-other ls-soon tap",
+                                    title: tx::OPEN_LECTURE,
+                                    onclick: move |_| crate::lecture::open(ui, &id),
+                                    span { class: "ls-other-top",
+                                        span { class: "num", "{code}" }
+                                        span { class: "chip", {tx::WRITING} }
+                                    }
+                                    bdi { class: "ls-other-title", dir: "ltr", "{entry.title}" }
+                                    span { class: "muted small", {tx::OPEN_LECTURE} }
+                                }
+                            },
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/// A thin progress line, `done` of `total`.
+#[component]
+fn Meter(done: usize, total: usize) -> Element {
+    let pct = (done * 100).checked_div(total).unwrap_or(0);
+    rsx! {
+        span {
+            class: "progress ls-meter",
+            role: "progressbar",
+            aria_valuemin: "0",
+            aria_valuemax: "{total}",
+            aria_valuenow: "{done}",
+            span { class: "progress-fill", style: "inline-size: {pct}%" }
+        }
+    }
+}
+
+/// The picked lecture: a header with its progress and the way into its
+/// next lesson, then every lesson as a row.
+#[component]
+fn Shown(id: String, next_id: Option<String>) -> Element {
+    let ui = use_context::<Ui>();
+    let lib = Library::get();
+    let Some(file) = lib.lessons.get(&id) else { return rsx! {} };
+    let title = lib.title(&id).to_string();
+    let code = crate::content::lecture_code(&id);
+    let n = file.lessons.len();
+    let d = file.lessons.iter().filter(|l| mark(&l.id).is_some()).count();
+    let pct = (d * 100).checked_div(n).unwrap_or(0);
+    // This lecture's way in: the lesson part-way through, else the first unfinished.
+    let go = file
+        .lessons
+        .iter()
+        .find(|l| resume_step(&l.id).is_some())
+        .or_else(|| file.lessons.iter().find(|l| mark(&l.id).is_none()));
+    let go_id = go.map(|l| l.id.clone());
+    let next = next_id.as_deref();
+    rsx! {
+        // The whole header opens the lecture's next lesson (its button's
+        // click bubbles up); the lecture page has its own link.
+        section {
+            class: if go_id.is_some() { "card card-flat card-action ls-lec" } else { "card card-flat ls-lec" },
+            onclick: move |_| if let Some(g) = &go_id { open(ui, g) },
+            div { class: "ls-lec-meta",
+                span { {tx::lecture_n(&code)} }
+                button {
+                    class: "btn-link ls-lec-page",
+                    onclick: { let id = id.clone(); move |e: MouseEvent| { e.stop_propagation(); crate::lecture::open(ui, &id) } },
+                    {tx::LECTURE_PAGE}
+                    span { class: "chev", aria_hidden: "true" }
+                }
+            }
+            h2 { bdi { dir: "ltr", "{title}" } }
+            p { class: "small ls-lec-sub", {tx::lessons_n(n)} }
+            Meter { done: d, total: n }
+            div { class: "ls-lec-caption small",
+                span { {tx::done_of(d, n)} }
+                bdi { dir: "ltr", "{pct}%" }
+            }
+            if let Some(l) = go {
+                button { class: "btn btn-primary ls-lec-go",
+                    span { class: "ls-btn-label",
+                        {if resume_step(&l.id).is_some() || d > 0 { tx::CONTINUE } else { tx::START_FIRST }}
+                        " · "
+                        text::Line { text: l.title.clone() }
+                    }
+                    {crate::icons::arrow_go()}
+                }
+            }
+        }
+        ol { class: "tap-list ls-rows",
+            for (i , l) in file.lessons.iter().enumerate() {
+                LessonRow { key: "{l.id}", n: i + 1, lesson: l.clone(), next: next.map(str::to_string) }
+            }
+        }
+    }
+}
+
+/// One lecture's search hits: its id, title, and (number, lesson) pairs.
+type Hits = (String, String, Vec<(usize, Lesson)>);
+
+/// Search results, by lecture.
+#[component]
+fn Results(q: String, next_id: Option<String>) -> Element {
+    let ui = use_context::<Ui>();
+    let lib = Library::get();
+    let groups: Vec<Hits> = lib
+        .index
+        .lectures
+        .iter()
+        .filter_map(|e| {
+            let file = lib.lessons.get(&e.id)?;
+            let hits: Vec<(usize, Lesson)> = file
+                .lessons
+                .iter()
+                .enumerate()
+                .filter(|(_, l)| matches(&q, &e.id, &e.title, l))
+                .map(|(i, l)| (i + 1, l.clone()))
+                .collect();
+            (!hits.is_empty()).then(|| (e.id.clone(), e.title.clone(), hits))
+        })
+        .collect();
+    rsx! {
+        if groups.is_empty() {
+            p { class: "note", role: "status", {tx::no_match(&q)} }
+        }
+        for (id , title , hits) in groups {
+            section { key: "{id}", class: "ls-group",
+                h2 { class: "ls-sec",
+                    button {
+                        class: "tap tap-plain ls-group-head",
+                        title: tx::OPEN_LECTURE,
+                        onclick: { let id = id.clone(); move |_| crate::lecture::open(ui, &id) },
+                        span { class: "num", "{crate::content::lecture_code(&id)}" }
+                        bdi { dir: "ltr", "{title}" }
+                        span { class: "chev", aria_hidden: "true" }
+                    }
+                }
+                ol { class: "tap-list ls-rows",
+                    for (n , l) in hits {
+                        LessonRow { key: "{l.id}", n, lesson: l, next: next_id.clone() }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/// One lesson as a row: number (or a tick), title and hook, and its state
+/// in words with the time it takes.
+#[component]
+fn LessonRow(n: usize, lesson: Lesson, next: Option<String>) -> Element {
+    let ui = use_context::<Ui>();
+    let st = state(&lesson, next.as_deref());
+    let steps = lesson.steps.len();
+    let id = lesson.id.clone();
+    let key = match st {
+        State::Done(_) => "done",
+        State::Current { .. } => "current",
+        State::Next => "next",
+        State::New => "new",
+    };
+    rsx! {
+        li { class: "ls-item", "data-state": key,
+            button { class: "tap tap-row", onclick: move |_| open(ui, &id),
+                span { class: "ls-row-n", aria_hidden: "true",
+                    if matches!(st, State::Done(_)) { {crate::icons::check()} } else { "{n}" }
+                }
+                span { class: "tap-row-main",
+                    strong { class: "ls-row-title", text::Line { text: lesson.title.clone() } }
+                    span { class: "muted small ls-row-hook", text::Line { text: lesson.hook.clone() } }
+                }
+                span { class: "ls-row-end small",
+                    match st {
+                        State::Done(m) => rsx! {
+                            span { class: "ls-state", {tx::STATE_DONE} }
+                            bdi { class: "num-ltr", "{m.right}/{m.asked}" }
+                        },
+                        State::Current { at } => rsx! {
+                            span { class: "ls-state", {tx::STATE_CURRENT} }
+                            span { {tx::step_of(at + 1, steps)} }
+                        },
+                        State::Next => rsx! {
+                            span { class: "ls-state", {tx::STATE_NEXT} }
+                            span { {count(lesson.minutes, &MINUTE)} }
+                        },
+                        State::New => rsx! {
+                            span { class: "ls-state", {tx::STATE_NEW} }
+                            span { {count(lesson.minutes, &MINUTE)} }
+                        },
+                    }
+                }
+                span { class: "chev", aria_hidden: "true" }
             }
         }
     }
@@ -298,25 +551,39 @@ pub fn LessonCard(n: usize, lesson: Lesson) -> Element {
     }
 }
 
-/// Today's card: the next lesson, one tap away.
+/// Today's card: the lesson to go on with (part-way through first, else
+/// the next one), one tap away, with how far along it is.
 #[component]
 pub fn TodayLesson(prefer: Vec<String>) -> Element {
     let ui = use_context::<Ui>();
-    let Some(l) = next_lesson(&prefer) else {
+    let lib = Library::get();
+    let part_way = lib.all_lessons().map(|(_, l)| l).find(|l| resume_step(&l.id).is_some());
+    let Some(l) = part_way.or_else(|| next_lesson(&prefer)) else {
         return rsx! {};
     };
     let lecture = l.id.rsplit_once('.').map(|(l, _)| l).unwrap_or(&l.id);
-    let title = Library::get().title(lecture).to_string();
+    let title = lib.title(lecture).to_string();
+    let steps = l.steps.len();
+    let at = resume_step(&l.id);
+    let done_steps = at.unwrap_or(0);
     rsx! {
         style { {CSS.text()} }
-        // The whole card opens the lesson (the button's click bubbles up).
-        section { class: "card card-action ls-today",
+        button { class: "card tap ls-now",
             onclick: { let id = l.id.clone(); move |_| open(ui, &id) },
-            p { class: "ls-kicker", {tx::TODAY_KICKER} }
-            h2 { text::Line { text: l.title.clone() } }
-            p { class: "muted small", bdi { "{title}" } " · " {count(l.minutes, &MINUTE)} }
-            p { text::Line { text: l.hook.clone() } }
-            button { class: "btn btn-primary", {tx::OPEN_LESSON} }
+            span { class: "ls-now-top",
+                span { class: "chip", "data-tone": "accent", {if at.is_some() { tx::NOW_KICKER } else { tx::NEXT_KICKER }} }
+                span { class: "muted small ls-now-where",
+                    match at {
+                        Some(at) => rsx! { {tx::step_of(at + 1, steps)} },
+                        None => rsx! { {count(l.minutes, &MINUTE)} },
+                    }
+                    span { class: "chev", aria_hidden: "true" }
+                }
+            }
+            strong { class: "ls-now-title", text::Line { text: l.title.clone() } }
+            span { class: "muted small", bdi { dir: "ltr", "{crate::content::lecture_code(lecture)} · {title}" } }
+            span { class: "small ls-now-hook", text::Line { text: l.hook.clone() } }
+            Meter { done: done_steps, total: steps }
         }
     }
 }
@@ -334,5 +601,32 @@ pub fn ExplainLink(item_id: String) -> Element {
             "📖 {tx::EXPLAIN} · "
             text::Line { text: l.title.clone() }
         }
+    }
+}
+
+#[cfg(test)]
+mod list_tests {
+    use super::*;
+
+    #[test]
+    fn search_finds_lessons_by_title_topic_and_lecture() {
+        let lib = Library::get();
+        let (lec, l) = lib.all_lessons().next().expect("a lesson is written");
+        let title = lib.title(lec).to_string();
+        let code = crate::content::lecture_code(lec).to_lowercase();
+        assert!(matches(&code, lec, &title, l));
+        assert!(matches(&title.to_lowercase(), lec, &title, l));
+        if let Some(t) = l.topics.first() {
+            assert!(matches(&t.to_lowercase(), lec, &title, l));
+        }
+        assert!(!matches("zzz-no-such-word", lec, &title, l));
+    }
+
+    #[test]
+    fn lesson_counts_read_naturally() {
+        assert_eq!(tx::lessons_n(1), "درس واحد");
+        assert_eq!(tx::lessons_n(2), "درسين");
+        assert_eq!(tx::lessons_n(7), "7 دروس");
+        assert_eq!(tx::lessons_n(12), "12 درس");
     }
 }

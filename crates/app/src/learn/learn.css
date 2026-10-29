@@ -65,38 +65,110 @@ mark {
 /* A short English term stays on one line ("vitamin A and"). */
 .ls-nw { white-space: nowrap; }
 
-/* ---------- the list ---------- */
-.ls-hero { gap: var(--sp-3); }
-.ls-hero-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-3); }
-.ls-lecture { display: flex; flex-direction: column; gap: var(--sp-2); }
-.ls-lecture-head {
-  display: flex;
-  align-items: center;
-  gap: var(--sp-3);
-  margin: var(--sp-3) 0 0;
-  font-size: var(--fs-lg);
+/* ---------- the list (2026-10-29 redesign) ----------
+   A page head, search, the picked lecture (header + lesson rows), then the
+   other lectures as cards that pick one. */
+/* The search box is the shared .search (parts.css); this adds the clear button. */
+.ls-search input::-webkit-search-cancel-button { display: none; }
+.search.ls-search input[type="search"] { padding-inline-start: 2.5rem; padding-inline-end: 2.75rem; }
+.ls-search-clear {
+  position: absolute;
+  inset-inline-end: var(--sp-1);
+  inline-size: var(--tap);
+  block-size: var(--tap);
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--muted);
+  font-size: 1.3rem;
+  cursor: pointer;
 }
-.ls-lecture .num, .ls-soon .num {
+.ls-search-clear:focus-visible { outline: 2px solid var(--accent); }
+
+/* The picked lecture's header: a soft card, its whole face opens the next lesson. */
+.ls-lec { gap: var(--sp-1); background: var(--accent-soft); }
+.ls-lec h2 { margin: 0; font-family: var(--font-latin); font-size: var(--fs-xl); font-weight: 700; line-height: 1.4; }
+.ls-lec-meta { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-2); font-size: var(--fs-sm); color: var(--muted); }
+.ls-lec-page { display: inline-flex; align-items: center; gap: var(--sp-2); font-size: var(--fs-sm); font-weight: 600; min-block-size: var(--tap); }
+.ls-lec-sub { color: var(--muted); }
+.ls-lec-caption { display: flex; justify-content: space-between; color: var(--muted); }
+.ls-lec-go { margin-block-start: var(--sp-2); gap: var(--sp-2); justify-content: center; }
+.ls-lec-go .icon { flex: none; inline-size: 1.1rem; block-size: 1.1rem; }
+@media (max-width: 599px) { .ls-lec-go { inline-size: 100%; } }
+@media (min-width: 600px) { .ls-lec-go { align-self: start; } }
+
+/* The shared .progress line, spaced and on a tinted card. */
+.ls-meter { display: block; margin-block: var(--sp-1); }
+.ls-meter > .progress-fill { display: block; }
+.ls-lec .ls-meter { background: color-mix(in srgb, var(--muted) 18%, transparent); }
+
+/* Lesson rows: number (a tick when done), title and hook, state in words. */
+/* Natural height: the screen is a flex column, and a clipped list would
+   otherwise shrink to nothing. */
+.ls-rows, .ls-lec, .ls-others, .ls-group, .ls-search { flex-shrink: 0; margin: 0; }
+.ls-search { flex: none; }
+.ls-item .tap-row { align-items: center; }
+.ls-row-n {
   flex: none;
-  inline-size: 2.25rem;
-  block-size: 2.25rem;
+  inline-size: 2.4rem;
+  block-size: 2.4rem;
   display: grid;
   place-items: center;
-  border-radius: 50%;
+  border-radius: 12px;
+  background: var(--surface-2, var(--bg));
+  font-family: var(--font-latin);
+  font-weight: 700;
+}
+.ls-row-n .icon { inline-size: 1.2rem; block-size: 1.2rem; }
+.ls-item[data-state="done"] .ls-row-n { background: var(--good-soft); color: var(--good); }
+.ls-item[data-state="current"] .ls-row-n, .ls-item[data-state="next"] .ls-row-n { background: var(--accent); color: var(--on-accent); }
+.ls-row-title { font-weight: 600; line-height: 1.5; }
+.ls-row-hook { line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.ls-row-end { flex: none; display: flex; flex-direction: column; align-items: flex-end; gap: 2px; color: var(--muted); text-align: end; }
+.ls-state { font-weight: 700; }
+.ls-item[data-state="done"] .ls-state { color: var(--good); }
+.ls-item[data-state="current"] .ls-state, .ls-item[data-state="next"] .ls-state { color: var(--accent); }
+
+/* Other lectures: cards that pick one; two across, more when there is room. */
+.ls-sec { margin: var(--sp-2) 0 0; font-size: var(--fs-md); font-weight: 600; }
+.ls-others { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sp-2); }
+@media (min-width: 840px) { .ls-others { grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); } }
+button.ls-other {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+  padding: var(--sp-3);
+  border-radius: var(--radius-lg, 18px);
+  border: 1px solid var(--line-soft, var(--line));
+  background: var(--surface);
+  min-width: 0;
+}
+.ls-other-top { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-2); }
+.ls-other .num {
+  inline-size: auto;
+  min-inline-size: 2.4rem;
+  block-size: 1.8rem;
+  padding-inline: var(--sp-2);
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
   background: var(--accent-soft);
   color: var(--accent);
+  font-family: var(--font-latin);
+  font-size: var(--fs-sm);
   font-weight: 700;
-  font-size: var(--fs-md);
 }
-.ls-soon {
-  flex-direction: row;
-  align-items: center;
-  gap: var(--sp-3);
-  padding: var(--sp-2) var(--sp-3);
-  color: var(--muted);
-}
-.ls-soon .num { background: var(--bg); color: var(--muted); border: 1px solid var(--line); }
-.ls-soon bdi { flex: 1; min-width: 0; }
+.ls-other-title { display: block; font-family: var(--font-latin); font-weight: 600; line-height: 1.4; text-align: start; overflow-wrap: anywhere; }
+.ls-other.ls-soon { color: var(--muted); }
+.ls-other.ls-soon .num { background: var(--surface-2, var(--bg)); color: var(--muted); }
+
+/* Search results: a lecture heading that opens its page, then its rows. */
+.ls-group { display: flex; flex-direction: column; gap: var(--sp-2); }
+.ls-group-head { display: flex; align-items: center; gap: var(--sp-3); font-size: var(--fs-md); }
+.ls-group-head .num { flex: none; padding-inline: var(--sp-2); border-radius: 10px; background: var(--accent-soft); color: var(--accent); font-family: var(--font-latin); font-size: var(--fs-sm); }
+.ls-group-head bdi { flex: 1; min-width: 0; }
+
+/* The lecture page's lesson cards (lecture/mod.rs). */
 .ls-cards { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-2); }
 @media (min-width: 600px) { .ls-cards { grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr)); } }
 .ls-card-btn {
@@ -131,10 +203,12 @@ mark {
 .ls-card-meta { color: var(--muted); }
 .chip.ls-done { background: var(--good-soft); color: var(--good); border-color: transparent; font-weight: 700; }
 
-/* Today's card */
-.ls-today { border-inline-start: 4px solid var(--accent); gap: var(--sp-2); }
-.ls-today h2 { margin: 0; }
-.ls-today p { margin: 0; }
+/* Today's card: the lesson to go on with. */
+button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap: var(--sp-1); text-align: start; }
+.ls-now-top { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-2); }
+.ls-now-where { display: inline-flex; align-items: center; gap: var(--sp-2); }
+.ls-now-title { font-size: var(--fs-lg); line-height: 1.5; margin-block-start: var(--sp-1); }
+.ls-now-hook { line-height: 1.7; }
 
 /* "Explain it to me" under a study item */
 .ls-explain { font-size: var(--fs-sm); }
@@ -668,10 +742,13 @@ button.ls-slot:hover { border-color: var(--accent); }
 .ls-summary-actions { display: flex; flex-direction: column; gap: var(--sp-2); inline-size: 100%; align-items: stretch; margin-block-start: var(--sp-2); }
 .ls-summary-actions button.primary { align-self: stretch; }
 @media (prefers-reduced-motion: reduce) { .ls-confetti, .ls-mn-key { animation: none; transition: none; } }
-.ls-today .btn { align-self: start; }
-/* Lecture headings and unwritten lectures open the lecture's page. */
-button.ls-lecture-head { font-weight: 700; }
+/* Unwritten lectures open the lecture's page. */
 button.ls-soon { background: none; border: 1px dashed var(--line); border-radius: var(--radius); font: inherit; color: var(--muted); }
+
+/* Glossy · Material You on the list: appearance.css draws the shared
+   parts (cards, rows, search); these are the list's own. */
+.app[data-appearance="glossy"] .ls-lec-go { border-radius: var(--radius-pill); }
+.app[data-appearance="glossy"] button.ls-other { border-radius: var(--glass-radius, 22px); box-shadow: inset 0 1px 0 color-mix(in srgb, var(--surface) 60%, transparent); }
 
 /* ---------- Glossy · Material You (lesson player) ----------
    Tonal, rounded tiles and slots; solid fills keep every state readable. */

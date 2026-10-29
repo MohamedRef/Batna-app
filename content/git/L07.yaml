@@ -1,0 +1,839 @@
+schema: batna.content/v1
+lecture: git.L07
+title: "Lower GI Bleeding (and obscure GI bleeding)"
+author: "Prof. Abeer Ibrahim"
+book: { chapter: 2, pages: [225, 233] }
+topics:
+  - { id: definition, title: "Definition, presentation and incidence" }
+  - { id: upper-source, title: "When hematochezia is an upper GI bleed" }
+  - { id: causes, title: "Causes by etiology and by pain" }
+  - { id: clinical, title: "Clinical clues to the site" }
+  - { id: risk, title: "Shock index, Oakland score and transfusion" }
+  - { id: management, title: "Colonoscopy, CT angiography and endoscopic therapy" }
+  - { id: ddx, title: "Differential diagnosis and treatment (Table 2)" }
+  - { id: obscure, title: "Obscure and small bowel bleeding" }
+items:
+  # ---------- p225: definition and incidence ----------
+  - id: git.L07.001
+    kind: card
+    topic: definition
+    front: Define lower GI bleeding.
+    back: Bleeding from below the ligament of Treitz.
+    src: { page: 225, quote: "It is bleeding below the ligament of Treitz." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L07.002
+    kind: cloze
+    topic: definition
+    text: "Normal fecal blood loss is {{c1::1.2 ml/day}}; it is significant if the loss is more than {{c2::10 ml/day}}."
+    src: { page: 225, quote: "Normal fecal blood loss 1.2 ml/day. It is significant if the loss >10 ml/day." }
+    status: unverified
+    tags: [numbers]
+  - id: git.L07.003
+    kind: card
+    topic: definition
+    front: How can lower GI bleeding present?
+    back: As hematochezia (bright red blood to old clots), or as melena if the source is proximal and the bleeding slow.
+    src: { page: 225, quote: "Hematochezia ranges from bright red blood to old clots or Melena if the bleeding from proximal source with slow rate of bleeding." }
+    status: unverified
+  - id: git.L07.004
+    kind: cloze
+    topic: definition
+    text: "Lower GI bleeding is {{c1::22–30%}} of GI bleeding, about {{c2::one-third}} as common as upper GI hemorrhage, with a more benign course."
+    src: { page: 225, quote: "It accounts for 22-30% of GIT bleeding. Lower tract bleeding is one-third as common as upper gastrointestinal hemorrhage" }
+    status: unverified
+    tags: [numbers]
+  - id: git.L07.005
+    kind: cloze
+    topic: definition
+    text: "{{c1::80–85%}} of lower GI bleeds come from distal to the ileocecal valve; only {{c2::0.7–9%}} come from the small intestine."
+    src: { page: 225, quote: "80% to 85% of lower GI bleeds originate distal to the ileocaecal valve, with only 0.7% to 9% originating from the small intestine." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: git.L07.006
+    kind: cloze
+    topic: definition
+    text: "{{c1::80%}} of lower GI bleeds resolve spontaneously and {{c2::25%}} recur; incidence rises steeply with {{c3::age}}."
+    src: { page: 225, quote: "80% resolve spontaneously and 25% will recur. The incidence rises steeply with increasing the age." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: git.L07.007
+    kind: card
+    topic: definition
+    front: Three grades of lower GI bleeding by amount?
+    back: Massive, moderate, or occult.
+    src: { page: 225, quote: "It can be categorized into massive, moderate or occult bleeding." }
+    status: unverified
+  # ---------- p225-226, 229: upper source ----------
+  - id: git.L07.008
+    kind: card
+    topic: upper-source
+    front: Hematochezia with hemodynamic instability should make you think of what?
+    back: A brisk upper GI bleed.
+    src: { page: 225, quote: "Hematochezia associated with hemodynamic instability should lead to consideration of a brisk UGIB source" }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L07.009
+    kind: enumerate
+    topic: upper-source
+    prompt: Which patients with hematochezia are at risk of a brisk upper GI source?
+    points:
+      - History of peptic ulcer disease
+      - Liver disease with portal hypertension
+      - Antiplatelet or anticoagulant use
+    pass: 3
+    src: { page: 225, quote: "history of peptic ulcer disease or liver disease with portal hypertension and those using antiplatelet or anticoagulant medications" }
+    status: unverified
+  - id: git.L07.010
+    kind: cloze
+    topic: upper-source
+    text: "A blood urea nitrogen to creatinine ratio above {{c1::30}} suggests an {{c2::upper GI}} source."
+    src: { page: 225, quote: "An elevated blood urea nitrogen to creatinine ratio (> 30) also suggests an UGIB" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: git.L07.011
+    kind: card
+    topic: upper-source
+    front: Red blood and clots per rectum point away from which source?
+    back: An upper GI source; they are unlikely to come from the upper tract.
+    src: { page: 226, quote: "red blood and clots are unlikely to be from an upper gastrointestinal source" }
+    status: unverified
+  - id: git.L07.012
+    kind: card
+    topic: upper-source
+    front: When should upper endoscopy be done in a patient with hematochezia?
+    back: When hematochezia comes with hemodynamic instability and suspicion of an upper source is high, to exclude a proximal bleed.
+    src: { page: 229, quote: "an upper endoscopy should be performed if the suspicion is high to exclude a proximal source of bleeding" }
+    status: unverified
+  - id: git.L07.013
+    kind: mcq
+    topic: upper-source
+    stem: A 64-year-old man with cirrhosis and portal hypertension passes large maroon clots per rectum. BP 85/50, pulse 122. BUN/creatinine ratio 42. What should come first after resuscitation?
+    options:
+      - Upper endoscopy
+      - Colonoscopy after bowel preparation
+      - Tagged red cell scan
+      - Capsule endoscopy
+      - Discharge with outpatient colonoscopy
+    answer: 0
+    why:
+      - "Correct: hematochezia with instability, portal hypertension and BUN/Cr >30 point to a brisk upper source (p225, p229)."
+      - Colonoscopy comes after an upper source is excluded.
+      - A tagged red cell scan is for slower bleeding and does not exclude an upper source.
+      - Capsule endoscopy is for small bowel bleeding after upper and lower tests.
+      - He is unstable; discharge is unsafe.
+    src: { page: 225, quote: "An elevated blood urea nitrogen to creatinine ratio (> 30) also suggests an UGIB" }
+    status: unverified
+  # ---------- p226-227: causes ----------
+  - id: git.L07.014
+    kind: card
+    topic: causes
+    front: Three ways the lecture classifies lower GI bleeding?
+    back: By etiology, by site of bleeding, and by relation to pain.
+    src: { page: 226, quote: "Types: we can classifiy the lower GI bleeding according to: Etiology. Site of bleeding Relation to the pain." }
+    status: unverified
+  - id: git.L07.015
+    kind: card
+    topic: causes
+    front: Most common cause of lower GI bleeding?
+    back: Diverticulosis.
+    src: { page: 226, quote: "Diverticulosis is the most common cause of lower GI bleeding." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L07.016
+    kind: table
+    topic: causes
+    title: Causes of lower GI bleeding by etiology
+    columns: [Group, Causes]
+    rows:
+      - [Congenital, "Polyps; Meckel diverticulum; hereditary hemorrhagic telangiectasia"]
+      - [Inflammatory, "Ulcerative colitis; infective; amoebic; Crohn disease"]
+      - [Neoplastic, "Adenomas; carcinomas; polyps"]
+      - [Diverticular, "Diverticulosis (the most common cause)"]
+      - [Vascular, "Angiodysplasia; ischemic colitis; vasculitis; hemangioma"]
+      - [Clotting disorders, "Hemophilia; leukemia; warfarin therapy; DIC"]
+      - [Miscellaneous, "Piles; anal fissure; injury to the rectum"]
+    blanks: [[0, 1], [1, 1], [4, 1], [5, 1], [6, 1]]
+    src: { page: 226, quote: "Vascular – Angiodysplasia / Ischaemic colitis / Vasculitis / Hamangioma. Clotting disorders - Haemophilia / Leukaemia / Warfarin therapy / DIC." }
+    status: unverified
+    tags: [high-yield, book-question]
+  - id: git.L07.017
+    kind: enumerate
+    topic: causes
+    prompt: Enumerate the vascular causes of lower GI bleeding.
+    points: [Angiodysplasia, Ischemic colitis, Vasculitis, Hemangioma]
+    pass: 3
+    src: { page: 226, quote: "Vascular – Angiodysplasia / Ischaemic colitis / Vasculitis / Hamangioma." }
+    status: unverified
+  - id: git.L07.018
+    kind: enumerate
+    topic: causes
+    prompt: Enumerate the painful causes of lower GI bleeding.
+    points:
+      - Fissure in ano and fistula in ano
+      - Carcinoma of the anal canal
+      - Ruptured perianal hematoma
+      - Ruptured anorectal abscess
+      - Endometriosis
+      - Injury
+    pass: 5
+    src: { page: 226, quote: "With pain Fissure in Anus, Fistula in Anus. Ca. Anal Canal. Rup. perianal haematoma. Rup. AnoRectal abscess. Endometriosis. Injury." }
+    status: unverified
+  - id: git.L07.019
+    kind: table
+    topic: causes
+    title: Painless lower GI bleeding by how the blood appears
+    columns: [Pattern, Causes]
+    rows:
+      - [Blood alone, "Polyp; villous adenoma; diverticular disease"]
+      - [Blood after defecation, Hemorrhoids]
+      - [Blood with mucus, "Ulcerative colitis; intussusception; ischemic colitis"]
+      - [Blood streaked on the stool, Carcinoma of the rectum]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 226, quote: "Without pain Blood Alone: Polyp, Villous Adenoma, Diverticular diseases Blood After Defecation Hemorrhoids Blood with mucus" }
+    status: unverified
+    tags: [high-yield, book-question]
+  - id: git.L07.020
+    kind: card
+    topic: causes
+    front: In the book's painless group, blood streaked on the stool suggests what?
+    back: Carcinoma of the rectum.
+    src: { page: 227, quote: "Blood Streaked on stool Ca. Rectum." }
+    status: unverified
+  - id: git.L07.021
+    kind: mcq
+    topic: causes
+    stem: A 30-year-old man notices fresh blood on the toilet paper and dripping into the pan after he passes stool. There is no pain. Most likely cause by the book's classification?
+    options:
+      - Hemorrhoids
+      - Anal fissure
+      - Ruptured anorectal abscess
+      - Ulcerative colitis
+      - Diverticular disease
+    answer: 0
+    why:
+      - "Correct: painless blood after defecation is hemorrhoids (p226)."
+      - A fissure bleeds with pain.
+      - A ruptured abscess is in the painful group.
+      - UC gives blood with mucus.
+      - Diverticular bleeding is blood alone, usually large volume in older patients.
+    src: { page: 226, quote: "Blood After Defecation Hemorrhoids" }
+    status: unverified
+  # ---------- p227: clinical clues ----------
+  - id: git.L07.022
+    kind: card
+    topic: clinical
+    front: Painless large-volume rectal bleeding usually suggests what?
+    back: Diverticular bleeding.
+    src: { page: 227, quote: "Painless large-volume bleeding usually suggests diverticular bleeding." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L07.023
+    kind: card
+    topic: clinical
+    front: Bloody diarrhea with cramping pain, urgency or tenesmus suggests which conditions?
+    back: Inflammatory bowel disease, infectious colitis, or ischemic colitis.
+    src: { page: 227, quote: "Bloody diarrhea associated with cramping abdominal pain, urgency, or tenesmus is characteristic of inflammatory bowel disease, infectious colitis, or ischemic colitis." }
+    status: unverified
+  - id: git.L07.024
+    kind: table
+    topic: clinical
+    title: Stool colour and the likely bleeding site
+    columns: [Stool, Likely source]
+    rows:
+      - [Brown stool mixed or streaked with blood, Rectosigmoid or anus]
+      - [Large volumes of bright red blood, Colon]
+      - [Maroon stool, Right colon or small intestine]
+      - [Black stool (melena), Proximal to the ligament of Treitz]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 227, quote: "Maroon stools imply a lesion in the right colon or small intestine. Black stools (melena) predict a source proximal to the ligament of Treitz." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L07.025
+    kind: card
+    topic: clinical
+    front: What does the lecture stress on examining a patient with lower GI bleeding?
+    back: Proper history and clinical examination, especially of the perianal area if hemorrhoids are suspected.
+    src: { page: 227, quote: "Patient evaluation should consider proper history taking, clinical examination especially the perianal area if hemorrhoids is suspected." }
+    status: unverified
+  # ---------- p227-229: risk, tests, management ----------
+  - id: git.L07.026
+    kind: card
+    topic: management
+    front: Gold standard investigation for lower GI bleeding?
+    back: Colonoscopy.
+    src: { page: 227, quote: "Colonoscopy is the gold standard." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L07.027
+    kind: cloze
+    topic: management
+    text: "CT angiography detects bleeding at {{c1::0.5 ml/min}}; radionuclide scanning (Tc sulfur colloid or tagged RBC) detects {{c2::0.1 ml/min}}."
+    src: { page: 227, quote: "CT angiography: Identifies bleeding rate of 0.5ml/mt" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: git.L07.028
+    kind: cloze
+    topic: risk
+    text: "Shock index = {{c1::heart rate / systolic BP}}; lower GI bleeding is unstable if it is above {{c2::1}}."
+    src: { page: 227, quote: "unstable defined as a shock index >1. Shock index=heart rate/SBP" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: git.L07.029
+    kind: card
+    topic: risk
+    front: How are stable lower GI bleeds sorted into major and minor?
+    back: With a risk assessment tool such as the Oakland score.
+    src: { page: 227, quote: "Stable bleeds should then be categorized as major or minor, using a risk assessment tool such as the Oakland score." }
+    status: unverified
+  - id: git.L07.030
+    kind: order
+    topic: risk
+    prompt: Order the risk steps for a patient with lower GI bleeding, per the lecture.
+    steps:
+      - Calculate the shock index (heart rate / systolic BP)
+      - "Shock index >1: unstable"
+      - "Stable: grade major or minor with the Oakland score"
+      - "Oakland low score: candidate for safe discharge"
+    src: { page: 227, quote: "The patients presenting with lower GI bleeding are stratified as unstable or stable (unstable defined as a shock index >1." }
+    status: unverified
+  - id: git.L07.031
+    kind: card
+    topic: risk
+    front: What is special about the Oakland score?
+    back: It is the first score designed specifically for lower GI bleeding and externally validated; it is best at identifying low-risk patients.
+    src: { page: 228, quote: "Oakland score. is the first score that has been specifically designed for LGIB and externally validated." }
+    status: unverified
+  - id: git.L07.032
+    kind: cloze
+    topic: risk
+    text: "An Oakland score below {{c1::8}} carries a {{c2::95%}} probability of safe discharge (the book's table says ≤8)."
+    src: { page: 228, quote: "OS <8 carries 95% probability of safe discharge." }
+    status: unverified
+    tags: [numbers, high-yield]
+    update:
+      text: "The Oakland study and the BSG guideline use a score of 8 or less for safe discharge, as the book's own Table 1 footnote says."
+      ref: "Oakland et al., Lancet Gastroenterol Hepatol 2017; BSG acute LGIB guideline 2019"
+  - id: git.L07.033
+    kind: card
+    topic: risk
+    front: What else does the Oakland score predict, and where is it weak?
+    back: It predicts rebleeding and the need for red cell transfusion, but is inferior at predicting mortality.
+    src: { page: 228, quote: "It can also predict rebleeding and the need for RBC transfusion but is inferior at predicting mortality." }
+    status: unverified
+  - id: git.L07.034
+    kind: table
+    topic: risk
+    title: "Oakland score variables (book Table 1)"
+    columns: [Predictor, Points]
+    rows:
+      - ["Age <40 / 40–69 / ≥70", "0 / 1 / 2"]
+      - ["Sex female / male", "0 / 1"]
+      - ["Previous LGIB admission no / yes", "0 / 1"]
+      - ["DRE no blood / blood", "0 / 1"]
+      - ["Heart rate <70 / 70–89 / 90–109 / ≥110", "0 / 1 / 2 / 3"]
+      - ["SBP <90 / 90–119 / 120–129 / 130–159 / ≥160", "5 / 4 / 3 / 2 / 0"]
+      - ["Hb g/L <70 / 70–89 / 90–109 / 110–129 / 130–159 / ≥160", "22 / 17 / 13 / 8 / 4 / 0"]
+    blanks: [[0, 1], [4, 1], [5, 1], [6, 1]]
+    src: { page: 229, quote: "Table 1 Variables comprising the Oakland score" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: git.L07.035
+    kind: card
+    topic: risk
+    front: Which Oakland variable carries the most points?
+    back: Haemoglobin, up to 22 points for Hb below 70 g/L.
+    src: { page: 229, quote: "Table 1 Variables comprising the Oakland score" }
+    status: unverified
+  - id: git.L07.036
+    kind: mcq
+    topic: risk
+    stem: "A 35-year-old woman has one episode of bright red rectal bleeding. First admission. DRE shows blood. Pulse 64, BP 165/90, Hb 165 g/L. What is her Oakland score and plan?"
+    options:
+      - "1: suitable for discharge and outpatient investigation"
+      - "8: needs urgent CT angiography"
+      - "5: needs admission for colonoscopy within 24 hours"
+      - "0: no investigation at all"
+      - "12: transfuse to Hb 9 g/dL"
+    answer: 0
+    why:
+      - "Correct: age <40 = 0, female = 0, no previous admission = 0, DRE blood = 1, HR <70 = 0, SBP ≥160 = 0, Hb ≥160 = 0. Total 1, low risk (p228–229)."
+      - Her score is 1, and CTA is for ongoing hemodynamically significant bleeding.
+      - The score is 1, and urgent colonoscopy within 24 h has not improved outcomes.
+      - Blood on DRE scores 1, and discharge is with outpatient investigation.
+      - Her score is low and the book advises restrictive transfusion at Hb 7.
+    src: { page: 228, quote: "OS <8 carries 95% probability of safe discharge." }
+    status: unverified
+  - id: git.L07.037
+    kind: mcq
+    topic: risk
+    stem: "A 74-year-old man with a previous admission for LGIB passes blood. DRE shows blood. Pulse 112, BP 96/60, Hb 85 g/L. What is his Oakland score?"
+    options:
+      - "29"
+      - "17"
+      - "24"
+      - "8"
+      - "33"
+    answer: 0
+    why:
+      - "Correct: age ≥70 = 2, male = 1, previous admission = 1, DRE blood = 1, HR ≥110 = 3, SBP 90–119 = 4, Hb 70–89 = 17. Total 29."
+      - That is the haemoglobin points alone.
+      - This misses the age, sex, previous admission, DRE and heart rate points.
+      - "8 is the discharge cut-off, not his score."
+      - Too high; Hb 85 scores 17, not 22.
+    src: { page: 229, quote: "Table 1 Variables comprising the Oakland score" }
+    status: unverified
+  - id: git.L07.038
+    kind: card
+    topic: risk
+    front: What does the Glasgow-Blatchford score identify, per this lecture?
+    back: Patients at risk of adverse outcomes (rebleeding, need for red cell transfusion, in-hospital death).
+    src: { page: 228, quote: "The Glasgow-Blatchford score identifies patients at risk of adverse outcomes (rebleeding, need for RBC transfusion, in-hospital death)." }
+    status: unverified
+  - id: git.L07.039
+    kind: cloze
+    topic: risk
+    text: "In hemodynamically stable LGIB, a {{c1::restrictive}} transfusion strategy is recommended, with a threshold of Hb {{c2::7 g/dL}}."
+    src: { page: 228, quote: "A restrictive strategy of red blood cell transfusion (threshold for transfusion at a hemoglobin level of 7 g/dL)" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: git.L07.040
+    kind: card
+    topic: management
+    front: Should most patients hospitalized with LGIB have a colonoscopy?
+    back: Yes, because of its value in detecting the source of bleeding.
+    src: { page: 228, quote: "Performance of colonoscopy is recommended for most patients who are hospitalized with LGIB because of its value in detecting a source of bleeding." }
+    status: unverified
+  - id: git.L07.041
+    kind: card
+    topic: management
+    front: When may colonoscopy be skipped in a patient admitted with LGIB?
+    back: If bleeding has subsided and a high-quality colonoscopy with adequate preparation within 12 months showed diverticulosis and no colorectal neoplasia.
+    src: { page: 228, quote: "the patient has had a high-quality colonoscopy within 12 mo with an adequate bowel preparation showing diverticulosis with no colorectal neoplasia" }
+    status: unverified
+  - id: git.L07.042
+    kind: card
+    topic: management
+    front: Preferred first test in ongoing hemodynamically significant hematochezia?
+    back: CT angiography. It is of low yield in minor LGIB or when bleeding has subsided.
+    src: { page: 228, quote: "CT angiography is preferred as the initial diagnostic test in patients with ongoing hemodynamically significant hematochezia." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L07.043
+    kind: card
+    topic: management
+    front: Next step when CT angiography detects the bleeding source?
+    back: Refer for arteriography and embolization.
+    src: { page: 228, quote: "If the source of bleeding has been detected, the patient should be referred for Arteriography and embolization." }
+    status: unverified
+  - id: git.L07.044
+    kind: card
+    topic: management
+    front: Urgent or nonemergent colonoscopy for inpatients with LGIB, and why?
+    back: Nonemergent inpatient colonoscopy, because urgent colonoscopy within 24 hours has not improved rebleeding or mortality.
+    src: { page: 228, quote: "performing an urgent colonoscopy within 24 hours has not been shown to improve clinical outcomes such as rebleeding and mortality" }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L07.045
+    kind: enumerate
+    topic: management
+    prompt: Mention the endoscopic treatments recommended for diverticular stigmata of hemorrhage.
+    points: [Through-the-scope clips, Endoscopic band ligation, Coagulation]
+    pass: 3
+    src: { page: 229, quote: "Treatment of diverticular stigmata of hemorrhage with through-the-scope clips, endoscopic band ligation, or coagulation is recommended." }
+    status: unverified
+  - id: git.L07.046
+    kind: order
+    topic: management
+    prompt: "Order the book's Figure 1 path for severe hematochezia with ongoing significant bleeding."
+    steps:
+      - "IV fluids, transfuse to Hb >7 g/dL, exclude an upper source if appropriate"
+      - CT angiography
+      - Extravasation seen
+      - Prompt transcatheter angiography with embolization
+    src: { page: 229, quote: "Prompt transcatheter angiography with embolization if extravasation seen" }
+    status: unverified
+  - id: git.L07.047
+    kind: card
+    topic: management
+    front: In the book's Figure 1, what follows when bleeding has subsided or CT angiography shows no extravasation?
+    back: Nonurgent colonoscopy (split-dose PEG), or observation if bleeding subsides and the patient had a recent colonoscopy.
+    src: { page: 229, quote: "Nonurgent colonoscopy (with split-dose PEG) vs. observation if bleeding subsides and patient has had recent colonoscopy" }
+    status: unverified
+  - id: git.L07.048
+    kind: mcq
+    topic: management
+    stem: A 78-year-old woman has ongoing large-volume painless hematochezia. Pulse 118, BP 88/56 despite fluids. Upper endoscopy is normal. Best next test?
+    options:
+      - CT angiography
+      - Urgent colonoscopy within 6 hours without preparation
+      - Tagged red cell scan tomorrow
+      - Capsule endoscopy
+      - Barium enema
+    answer: 0
+    why:
+      - "Correct: CTA is the preferred initial test in ongoing hemodynamically significant hematochezia (p228)."
+      - Urgent colonoscopy within 24 h has not improved outcomes and needs preparation.
+      - A tagged red cell scan is for slower rates (0.1–0.2 ml/min) and delays care.
+      - Capsule is for small bowel bleeding after upper and lower sources are excluded.
+      - Barium has no role in acute bleeding.
+    src: { page: 228, quote: "CT angiography is preferred as the initial diagnostic test in patients with ongoing hemodynamically significant hematochezia." }
+    status: unverified
+  - id: git.L07.049
+    kind: mcq
+    topic: management
+    stem: A 70-year-old man admitted with LGIB stopped bleeding on day 1. He had a good-quality colonoscopy 8 months ago showing sigmoid diverticulosis and no neoplasia. What does the lecture allow?
+    options:
+      - Colonoscopy may not be needed
+      - Urgent colonoscopy within 24 hours
+      - CT angiography now
+      - Arteriography and embolization
+      - Repeat colonoscopy every admission regardless
+    answer: 0
+    why:
+      - "Correct: subsided bleeding plus a high-quality colonoscopy within 12 months showing diverticulosis without neoplasia (p228)."
+      - Urgent colonoscopy has not improved outcomes, and this one is not needed.
+      - CTA is of low yield once bleeding has subsided.
+      - Embolization needs a bleeding source on CTA.
+      - The book names this exception to routine colonoscopy.
+    src: { page: 228, quote: "Colonoscopy may not be needed in patients where bleeding has subsided" }
+    status: unverified
+  # ---------- p230: Table 2 differential ----------
+  - id: git.L07.050
+    kind: table
+    topic: ddx
+    title: "Differential diagnosis of acute LGIB (book Table 2)"
+    columns: [Diagnosis, Distinguishing feature]
+    rows:
+      - [Angiodysplasia, "Recurrent painless bleeding; patient >60 years"]
+      - [Colon cancer, "Slow chronic blood loss with occasional change in bowel habit"]
+      - [Diverticular bleeding, "Acute, severe, painless; known or suspected diverticular disease"]
+      - [Hemorrhoids, "Bleeding with bowel movements; external painful and itchy, internal painless"]
+      - [Infectious colitis, "Bloody diarrhea with fever; new or concerning food exposure"]
+      - [IBD, "Bloody diarrhea with recurrent abdominal pain and weight loss"]
+      - [Ischemic colitis, "Bloody diarrhea after acute lower abdominal pain; cardiac risk factors"]
+      - [Postpolypectomy bleeding, Within 30 days of polypectomy or biopsy]
+    blanks: [[0, 1], [2, 1], [4, 1], [6, 1], [7, 1]]
+    src: { page: 230, quote: "Recurrent painless bleeding episodes; patient > 60 years" }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L07.051
+    kind: card
+    topic: ddx
+    front: Treatment of angiodysplasia in Table 2?
+    back: Colonoscopy with argon plasma coagulation; consider long-term lanreotide 120 mg subcutaneously every 4 weeks.
+    src: { page: 230, quote: "Colonoscopy with endoscopic argon plasma coagulation" }
+    status: unverified
+  - id: git.L07.052
+    kind: card
+    topic: ddx
+    front: Treatment of bleeding hemorrhoids in Table 2?
+    back: Fiber (reduces bleeding by 50%); banding or infrared photocoagulation for grades I–III; surgery likely for symptomatic grades III and IV.
+    src: { page: 230, quote: "Fiber supplementation (decreases bleeding by 50%)" }
+    status: unverified
+  - id: git.L07.053
+    kind: card
+    topic: ddx
+    front: Which infectious colitides are treated with supportive care alone, not antibiotics?
+    back: Shiga toxin–producing Escherichia coli and Salmonella.
+    src: { page: 230, quote: "except for Shiga toxin-producing Escherichia coli and Salmonella, which are treated with supportive care alone" }
+    status: unverified
+  - id: git.L07.054
+    kind: cloze
+    topic: ddx
+    text: "In Table 2, IBD is confirmed by colonoscopy with biopsies; fecal calprotectin is ≥{{c1::250}} mcg/g, and rectal {{c2::5-aminosalicylic acid}} derivatives are used."
+    src: { page: 230, quote: "Fecal calprotectin ≥ 250 mcg per g" }
+    status: unverified
+    tags: [numbers]
+  - id: git.L07.055
+    kind: mcq
+    topic: ddx
+    stem: A 76-year-old woman with atrial fibrillation and heart failure has sudden left lower abdominal pain followed hours later by bloody diarrhea. Most likely diagnosis?
+    options:
+      - Ischemic colitis
+      - Angiodysplasia
+      - Diverticular bleeding
+      - Hemorrhoids
+      - Colon cancer
+    answer: 0
+    why:
+      - "Correct: bloody diarrhea after acute lower abdominal pain in a patient with cardiac risk factors is ischemic colitis (p230)."
+      - Angiodysplasia is recurrent and painless.
+      - Diverticular bleeding is acute, severe and painless.
+      - Hemorrhoids bleed with bowel movements.
+      - Cancer causes slow chronic loss with bowel habit change.
+    src: { page: 230, quote: "Bloody diarrhea followed by acute lower abdominal pain, especially in patients with cardiac risk factors" }
+    status: unverified
+  # ---------- p230-232: obscure GI bleeding ----------
+  - id: git.L07.056
+    kind: card
+    topic: obscure
+    front: Define obscure gastrointestinal bleeding (OGIB).
+    back: Recurrent or persistent GI bleeding from a source not identified by upper or lower endoscopy.
+    src: { page: 230, quote: "Obscure gastrointestinal bleeding (OGIB) is defined as recurrent or persistent gastrointestinal bleeding from a source that cannot be identified using upper or lower endoscopy" }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L07.057
+    kind: cloze
+    topic: obscure
+    text: "OGIB occurs in about {{c1::5%}} of all patients with GI bleeding."
+    src: { page: 230, quote: "OGIB occurs in approximately 5% of all patients with gastrointestinal bleeding." }
+    status: unverified
+    tags: [numbers]
+  - id: git.L07.058
+    kind: card
+    topic: obscure
+    front: In the lecture's OGIB section, which test is done initially to evaluate small bowel disease, and when is it avoided?
+    back: Contrast-enhanced helical CT, unless contraindicated by renal failure or contrast allergy.
+    src: { page: 230, quote: "Contrast-enhanced helical computed tomography (CT), should initially be performed to evaluate small-bowel disease in the absence of any contraindications" }
+    status: unverified
+  - id: git.L07.059
+    kind: card
+    topic: obscure
+    front: If abdominal CT shows a small bowel abnormality, what follows?
+    back: Deep enteroscopy (double-balloon, single-balloon or spiral), by the oral or anal route depending on the suspected site.
+    src: { page: 230, quote: "deep enteroscopy such as DBE, SBE, and spiral enteroscopy should be performed via the oral or anal approach depending on the suspected lesion site" }
+    status: unverified
+  - id: git.L07.060
+    kind: table
+    topic: obscure
+    title: Second-look examinations in OGIB
+    columns: [Test, When]
+    rows:
+      - [Second-look upper endoscopy, "Recurrent hematemesis, melena, or a previously incomplete exam"]
+      - [Second-look colonoscopy, "Recurrent hematochezia, or a lower source suspected"]
+      - [Push enteroscopy, Can serve as the second-look examination for suspected small bowel bleeding]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 231, quote: "Second-look colonoscopy should be considered in the setting of recurrent hematochezia or if a lower source is suspected." }
+    status: unverified
+  - id: git.L07.061
+    kind: card
+    topic: obscure
+    front: Next step if second-look examinations are normal?
+    back: Small bowel evaluation.
+    src: { page: 231, quote: "If the second-look examinations are normal, the next step should be a small bowel evaluation." }
+    status: unverified
+  - id: git.L07.062
+    kind: card
+    topic: obscure
+    front: First-line test for the small bowel once upper and lower sources are excluded?
+    back: Video capsule endoscopy (VCE).
+    src: { page: 231, quote: "Video capsule endoscopy (VCE) should be considered as a first-line procedure for SB evaluation after upper and lower GI sources have been excluded" }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L07.063
+    kind: card
+    topic: obscure
+    front: Why use push enteroscopy when a proximal small bowel lesion is suspected?
+    back: Capsule endoscopy detects fewer lesions in the duodenum and proximal jejunum.
+    src: { page: 231, quote: "push enteroscopy should be performed if proximal lesions are suspected" }
+    status: unverified
+  - id: git.L07.064
+    kind: card
+    topic: obscure
+    front: When should capsule come before deep enteroscopy, and when can deep enteroscopy go first?
+    back: VCE first to raise diagnostic yield; initial deep enteroscopy in massive hemorrhage or when VCE is contraindicated.
+    src: { page: 231, quote: "VCE should be performed before deep enteroscopy to increase diagnostic yield. Initial deep enteroscopy can be considered in cases of massive hemorrhage" }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L07.065
+    kind: card
+    topic: obscure
+    front: Role of intraoperative enteroscopy?
+    back: Highly sensitive but invasive, diagnostic and therapeutic; limited to cases where enteroscopy cannot be done, such as prior surgery with adhesions.
+    src: { page: 231, quote: "Intraoperative enteroscopy is a highly sensitive but invasive diagnostic and effective therapeutic procedure." }
+    status: unverified
+  - id: git.L07.066
+    kind: card
+    topic: obscure
+    front: Is barium study used for small bowel bleeding?
+    back: No. Barium study should not be used in small bowel bleeding.
+    src: { page: 231, quote: "Barium study shouldn‘t be used in Small Bowel Bleeding." }
+    status: unverified
+  - id: git.L07.067
+    kind: enumerate
+    topic: obscure
+    prompt: Why is CT enterography done after a negative capsule in suspected small bowel bleeding?
+    points:
+      - Higher sensitivity for mural-based small bowel masses
+      - Better at locating small bowel masses
+      - Guides subsequent deep enteroscopy
+    pass: 3
+    src: { page: 231, quote: "higher sensitivity for the detection of mural-based small bowel masses, superior capability to locate small bowel masses, and ability to guide subsequent deep enteroscopy" }
+    status: unverified
+  - id: git.L07.068
+    kind: table
+    topic: obscure
+    title: Imaging in acute overt small bowel bleeding
+    columns: [Situation, Test]
+    rows:
+      - [Massive bleeding and hemodynamically unstable, Emergent conventional angiography]
+      - [Stable with evidence of active bleeding, Multiphasic CT angiography]
+      - ["Slower rate (0.1–0.2 ml/min) or unsure if bleeding", Tagged red blood cell scintigraphy]
+      - [Brisk active overt bleeding, CT angiography preferred over CTE]
+      - ["Young patient, ongoing bleeding, normal capsule and enterography", Meckel scan]
+    blanks: [[0, 1], [1, 1], [2, 1], [4, 1]]
+    src: { page: 232, quote: "In younger patients with ongoing overt bleeding and normal testing with capsule endoscopy and enterography examinations, a Meckel‘s scan should be performed." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L07.069
+    kind: cloze
+    topic: obscure
+    text: "Tagged red blood cell scintigraphy suits slower bleeding of {{c1::0.1–0.2 ml/min}} and helps guide the timing of {{c2::angiography}}."
+    src: { page: 232, quote: "In acute overt GI bleeding and slower rates of bleeding (0.1–0.2 ml/min), or uncertainty if actively bleeding, tagged red blood cell scintigraphy" }
+    status: unverified
+    tags: [numbers]
+  - id: git.L07.070
+    kind: card
+    topic: obscure
+    front: Treatment of small bowel bleeding when a diagnosis is, or is not, made?
+    back: Endoscopic treatment if a diagnosis is confirmed; oral or IV iron if not. If bleeding persists or recurs, consider somatostatin, iron or antiangiogenic therapy.
+    src: { page: 232, quote: "Endoscopic treatmentis recommended if diagnosis is confirmed. If no diagnosis treatment with oral or IV iron." }
+    status: unverified
+  - id: git.L07.071
+    kind: card
+    topic: obscure
+    front: In the book's Figure 2, which small bowel test is chosen when obstruction is possible, and which when it is not?
+    back: "Possible obstruction: CT or MR enterography. No obstruction: video capsule endoscopy."
+    src: { page: 232, quote: "Proceed with small bowel evaluation Possible obstruction No obstruction" }
+    status: unverified
+  - id: git.L07.072
+    kind: mcq
+    topic: obscure
+    stem: A 19-year-old has recurrent maroon stools. Upper endoscopy, colonoscopy, second looks, capsule endoscopy and CT enterography are all normal. Bleeding continues. Next test?
+    options:
+      - Meckel scan
+      - Barium follow-through
+      - Repeat capsule endoscopy every week
+      - Intraoperative enteroscopy as the first choice
+      - Discharge on iron only
+    answer: 0
+    why:
+      - "Correct: in younger patients with ongoing overt bleeding and normal capsule and enterography, a Meckel scan should be done (p232)."
+      - Barium should not be used in small bowel bleeding.
+      - Repeating the same normal test does not add a new diagnosis.
+      - Intraoperative enteroscopy is reserved for when enteroscopy cannot be performed.
+      - Iron alone is for when no diagnosis is found and bleeding is not ongoing.
+    src: { page: 232, quote: "In younger patients with ongoing overt bleeding and normal testing with capsule endoscopy and enterography examinations, a Meckel‘s scan should be performed." }
+    status: unverified
+  - id: git.L07.073
+    kind: mcq
+    topic: obscure
+    stem: A 66-year-old has iron deficiency anemia with positive occult blood. Upper endoscopy and colonoscopy, with second looks, are normal. No obstructive symptoms. Best first small bowel test?
+    options:
+      - Video capsule endoscopy
+      - Barium follow-through
+      - Intraoperative enteroscopy
+      - Tagged red cell scan
+      - Emergency angiography
+    answer: 0
+    why:
+      - "Correct: VCE is first-line for the small bowel after upper and lower sources are excluded (p231)."
+      - Barium should not be used.
+      - Intraoperative enteroscopy is invasive and reserved.
+      - Scintigraphy is for acute overt slower bleeding.
+      - Emergency angiography is for unstable massive bleeding.
+    src: { page: 231, quote: "Video capsule endoscopy (VCE) should be considered as a first-line procedure for SB evaluation" }
+    status: unverified
+  # ---------- cases ----------
+  - id: git.L07.074
+    kind: case
+    topic: management
+    stem: A 72-year-old man passes a large amount of bright red blood with clots per rectum. No pain. He takes no anticoagulants and has no liver disease.
+    steps:
+      - reveal: "Pulse 115, BP 100/60."
+        question: Is he stable by the lecture's definition?
+        options: ["No: shock index 1.15", "Yes: BP is above 90", "Yes: shock index 0.87", "Cannot tell without Hb"]
+        answer: 0
+        why: "Shock index = HR/SBP = 115/100 = 1.15, above 1, so unstable (p227). A BP above 90 does not make him stable. 0.87 is the inverse. Hb is not part of the shock index."
+      - reveal: "After fluids he keeps bleeding. Hb 7.8 g/dL. BUN/Cr ratio 18."
+        question: Best first diagnostic test?
+        options: [CT angiography, Urgent colonoscopy without preparation, Capsule endoscopy, Tagged red cell scan tomorrow]
+        answer: 0
+        why: "CTA is preferred initially for ongoing hemodynamically significant hematochezia (p228). Urgent colonoscopy within 24 h has not improved outcomes. Capsule is for small bowel bleeding. Scintigraphy suits slower bleeding."
+      - reveal: CT angiography shows contrast extravasation in the sigmoid colon.
+        question: Next step?
+        options: [Arteriography and embolization, Repeat CTA in 24 hours, Discharge with outpatient colonoscopy, Barium enema]
+        answer: 0
+        why: "When the source is detected, refer for arteriography and embolization (p228)."
+      - reveal: Later, colonoscopy shows a sigmoid diverticulum with a visible vessel.
+        question: Endoscopic options?
+        options: ["Through-the-scope clips, band ligation or coagulation", Argon plasma coagulation alone, Rectal mesalamine, Fiber supplements]
+        answer: 0
+        why: "Diverticular stigmata are treated with TTS clips, band ligation or coagulation (p229). APC is for angiodysplasia. Mesalamine is for IBD. Fiber is for hemorrhoids."
+    src: { page: 227, quote: "Painless large-volume bleeding usually suggests diverticular bleeding." }
+    status: unverified
+  - id: git.L07.075
+    kind: case
+    topic: obscure
+    stem: A 68-year-old woman has 2 years of iron deficiency anemia and intermittent melena. Upper endoscopy and colonoscopy were normal.
+    steps:
+      - reveal: The first endoscopies were incomplete because of food in the stomach.
+        question: What next?
+        options: [Second-look upper endoscopy, Barium follow-through, Intraoperative enteroscopy, Meckel scan]
+        answer: 0
+        why: "Second-look upper endoscopy for recurrent melena or a previously incomplete exam (p230). Barium is not used. Intraoperative enteroscopy is reserved. Meckel scan is for younger patients."
+      - reveal: Second-look upper endoscopy and colonoscopy are normal. She has no obstructive symptoms.
+        question: First small bowel test?
+        options: [Video capsule endoscopy, CT enterography first, Push enteroscopy only, Angiography]
+        answer: 0
+        why: "VCE is first-line for the small bowel after upper and lower sources are excluded (p231). With possible obstruction, CTE or MRE would come first."
+      - reveal: Capsule shows several jejunal angioectasias.
+        question: How should they be treated?
+        options: [Deep enteroscopy with endoscopic therapy, Surgery straight away, Iron only and no endoscopy, Barium study to confirm]
+        answer: 0
+        why: "Endoscopic treatment is recommended if the diagnosis is confirmed; deep enteroscopy reaches the lesion (p230–232). If bleeding persists or recurs, consider somatostatin analogues, iron or antiangiogenic drugs."
+    src: { page: 231, quote: "If the second-look examinations are normal, the next step should be a small bowel evaluation." }
+    status: unverified
+  # ---------- end-of-lecture questions ----------
+  - id: git.L07.076
+    kind: essay
+    topic: obscure
+    prompt: What is the approach to obscure gastrointestinal bleeding?
+    outline:
+      - "Definition": ["Recurrent or persistent bleeding, source not found on upper or lower endoscopy", "About 5% of GI bleeding"]
+      - "Second look": ["Upper endoscopy for recurrent hematemesis, melena or incomplete exam", "Colonoscopy for recurrent hematochezia", "Push enteroscopy as a second look"]
+      - "Small bowel evaluation": ["Capsule first-line (CT or MR enterography if obstruction is possible)", "CTE after a negative capsule", "Deep enteroscopy (DBE, SBE, spiral) if strong suspicion; intraoperative if enteroscopy impossible", "No barium"]
+      - "Acute overt bleeding": ["Unstable: emergent angiography", "Stable active: CTA", "Slow 0.1–0.2 ml/min: tagged RBC scan", "Young, all negative: Meckel scan"]
+      - "Treatment": ["Endoscopic therapy if diagnosed; oral or IV iron if not", "Persistent: somatostatin, iron, antiangiogenesis"]
+    src: { page: 231, quote: "Video capsule endoscopy (VCE) should be considered as a first-line procedure for SB evaluation after upper and lower GI sources have been excluded" }
+    status: unverified
+    tags: [book-question]
+  - id: git.L07.077
+    kind: essay
+    topic: causes
+    prompt: What are the causes of lower GI bleeding?
+    outline:
+      - "Congenital": ["Polyps, Meckel diverticulum, hereditary hemorrhagic telangiectasia"]
+      - "Inflammatory": ["UC, infective, amoebic, Crohn disease"]
+      - "Neoplastic and diverticular": ["Adenomas, carcinomas, polyps", "Diverticulosis: the most common cause"]
+      - "Vascular": ["Angiodysplasia, ischemic colitis, vasculitis, hemangioma"]
+      - "Clotting disorders and miscellaneous": ["Hemophilia, leukemia, warfarin, DIC", "Piles, anal fissure, rectal injury"]
+    src: { page: 226, quote: "Diverticulosis is the most common cause of lower GI bleeding." }
+    status: unverified
+    tags: [book-question]
+  - id: git.L07.078
+    kind: essay
+    topic: management
+    prompt: Outline the guidelines for management of lower GI bleeding.
+    outline:
+      - "Assess": ["History and exam including perianal area", "Shock index >1 = unstable", "Stable: Oakland score; <8 (≤8 in Table 1) = 95% safe discharge"]
+      - "Resuscitate": ["Restrictive transfusion, Hb threshold 7 g/dL", "Exclude upper source if unstable or BUN/Cr >30: upper endoscopy"]
+      - "Locate": ["Ongoing significant bleeding: CT angiography, then arteriography and embolization", "Most inpatients: nonemergent colonoscopy (urgent <24 h does not improve outcomes)", "May skip colonoscopy if subsided and good colonoscopy within 12 months"]
+      - "Treat": ["Diverticular stigmata: TTS clips, band ligation or coagulation"]
+    src: { page: 228, quote: "A restrictive strategy of red blood cell transfusion (threshold for transfusion at a hemoglobin level of 7 g/dL)" }
+    status: unverified
+    tags: [book-question]
+  - id: git.L07.079
+    kind: essay
+    topic: causes
+    prompt: What are the causes of painless lower GI bleeding?
+    outline:
+      - "Blood alone": ["Polyp, villous adenoma, diverticular disease"]
+      - "Blood after defecation": ["Hemorrhoids"]
+      - "Blood with mucus": ["Ulcerative colitis, intussusception, ischemic colitis"]
+      - "Blood streaked on stool": ["Carcinoma of the rectum"]
+      - "Clinical clue": ["Painless large-volume bleeding suggests diverticular bleeding", "Angiodysplasia: recurrent painless bleeding over 60"]
+    src: { page: 226, quote: "Without pain Blood Alone: Polyp, Villous Adenoma, Diverticular diseases Blood After Defecation Hemorrhoids" }
+    status: unverified
+    tags: [book-question]

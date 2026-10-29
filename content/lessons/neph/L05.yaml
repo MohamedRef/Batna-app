@@ -1,0 +1,654 @@
+schema: batna.lesson/v1
+lecture: neph.L05
+lessons:
+  # ------------------------------------------------------------------
+  - id: neph.L05.lesson1
+    title: "الكرياتينين علي: يبقى AKI ولا لأ؟"
+    hook: "زمان كان فيه أكتر من 30 تعريف للـ AKI. النهارده تعريف واحد بتلات أرقام، وتلات مراحل. خلّيهم في جيبك."
+    minutes: 9
+    pages: [98, 103]
+    topics: [definition, epidemiology]
+    goals:
+      - "تشخّص الـ AKI بمعايير KDIGO التلاتة"
+      - "تحدد الـ stage من الكرياتينين والـ urine output"
+      - "تفرّق AKI عن AKD عن CKD، و azotemia عن uremia"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 98
+        title: "يعني إيه AKI؟"
+        quote: "Acute kidney injury (AKI) is abrupt reduction in kidney functions as evidenced by changed in laboratory values"
+        text: |
+          الـ **AKI** = نزول ==مفاجئ== في وظيفة الكلى، باين في الـ lab: **serum creatinine** و **BUN** و **urine output**.
+
+          سنة 1900 كان التشخيص **إكلينيكي** بس: oliguria، تعب، ترجيع، و GI bleeding. وأول وصف حقيقي كان من **Bywaters** في عيانين الـ **crush injuries** في قصف لندن.
+      - kind: explain
+        page: 99
+        title: "من 30 تعريف لتعريف واحد"
+        quote: "Over 30 definitions of AKI/ ARF existed in the literature"
+        text: |
+          كان فيه **أكتر من 30 definition** للـ AKI/ARF. بعدين:
+          1. **RIFLE** من الـ ADQI (مايو 2004)
+          2. كلمة **AKI** بدل ARF (سبتمبر 2004)
+          3. **AKIN** وحّد المعايير
+          4. ==KDIGO== جمع RIFLE و AKIN في تعريف واحد
+      - kind: explain
+        page: 100
+        title: "التلات معايير (أي واحد يكفي)"
+        quote: "Increase in serum creatinine (SCr) of at least 0.3 mg/dL within 48 hours"
+        text: |
+          - **serum creatinine** يعلى ==≥0.3 mg/dL في 48 ساعة==
+          - أو يعلى **50%** عن الـ baseline في **7 أيام**
+          - أو **urine output <0.5 mL/kg/h** لمدة ==6 ساعات== على الأقل
+      - kind: figure
+        page: 100
+        quote: "TABLE 28-1: RIFLE, AKIN, and KDIGO Classification Schemes for Acute Kidney Injurya"
+        title: "مراحل KDIGO"
+        alt: "Three stacked bars for KDIGO stages. Stage 1: creatinine up 0.3 or 1.5 to 1.9 times, urine under 0.5 for 6 to 12 hours. Stage 2: 2 to 2.9 times, under 0.5 for 12 hours or more. Stage 3: 3 times, or at least 4 mg/dL, or RRT; anuria for 12 hours or more."
+        caption: "خد ==أسوأ معيار==: لو الكرياتينين stage 1 والبول stage 3، يبقى stage 3."
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <text x="100" y="20" text-anchor="middle" class="t-sm t-mut">SCr</text>
+            <text x="255" y="20" text-anchor="middle" class="t-sm t-mut">Urine output</text>
+            <rect x="10" y="30" width="310" height="60" rx="8" class="fg-acc"/>
+            <text x="20" y="54" class="t-sm t-b">Stage 1</text>
+            <text x="20" y="76" class="t-sm">↑≥0.3 or ×1.5–1.9</text>
+            <text x="310" y="76" text-anchor="end" class="t-sm">&lt;0.5 × 6–12 h</text>
+            <rect x="10" y="100" width="310" height="60" rx="8" class="fg-bad"/>
+            <text x="20" y="124" class="t-sm t-b">Stage 2</text>
+            <text x="20" y="146" class="t-sm">×2–2.9</text>
+            <text x="310" y="146" text-anchor="end" class="t-sm">&lt;0.5 × ≥12 h</text>
+            <rect x="10" y="170" width="310" height="72" rx="8" class="fg-bad"/>
+            <text x="20" y="194" class="t-sm t-b t-bad">Stage 3</text>
+            <text x="20" y="214" class="t-sm">×3, or ≥4 mg/dL, or RRT</text>
+            <text x="20" y="232" class="t-sm t-mut">(eGFR &lt;35 if &lt;18 y)</text>
+            <text x="310" y="214" text-anchor="end" class="t-sm">Anuria ≥12 h</text>
+          </svg>
+      - kind: table
+        page: 100
+        quote: "TABLE 28-1: RIFLE, AKIN, and KDIGO Classification Schemes for Acute Kidney Injurya"
+        title: "RIFLE في سطر لكل حرف"
+        columns: [Category, SCr or GFR, Urine output]
+        rows:
+          - ["Risk", "×1.5 or GFR ↓>25%", "<0.5 × ≥6 h"]
+          - ["Injury", "×2 or GFR ↓>50%", "<0.5 × ≥12 h"]
+          - ["Failure", "×3, GFR ↓>75%, or ≥4 mg/dL", "Anuria ≥12 h"]
+          - ["Loss", "RRT >4 weeks", "-"]
+          - ["ESKD", "RRT >3 months", "-"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+      - kind: check
+        page: 100
+        quote: "TABLE 28-1: RIFLE, AKIN, and KDIGO Classification Schemes for Acute Kidney Injurya"
+        question: "Creatinine 0.8 → 1.3 mg/dL in 36 hours; urine output 0.4 mL/kg/h for 14 hours. KDIGO stage?"
+        options:
+          - "Stage 1"
+          - "Stage 2"
+          - "Stage 3"
+        answer: 1
+        why:
+          - "الكرياتينين لوحده stage 1 (↑0.5)، بس الـ urine output أسوأ."
+          - "صح: <0.5 mL/kg/h لمدة ≥12 ساعة = stage 2، وبناخد الأسوأ."
+          - "Stage 3 محتاج anuria ≥12 h أو ×3 أو ≥4 mg/dL أو RRT."
+      - kind: explain
+        page: 101
+        title: "عيوب التعريف ده"
+        quote: "Use of urine output as a sole criterium of AKI"
+        text: |
+          - ما بيفرّقش بين ==الأسباب== الكتير للـ AKI.
+          - الاعتماد على الـ **urine output** لوحده.
+          - الـ **SCr kinetics** متأخرة عن الـ GFR.
+          - الـ **baseline** نفسه: أول قراءة في المستشفى ولا القديمة؟
+          - التغييرات الصغيرة في الـ SCr ممكن تدي ==misdiagnosis== كتير.
+      - kind: sort
+        page: 101
+        quote: "Acute elevations of serum creatinine: Implications are context-dependent"
+        prompt: "الكرياتينين علي. صنّفه:"
+        bins: ["Induced AKI (outcome better)", "Spontaneous AKI (outcome worse)"]
+        cards:
+          - { text: "Decongestion in heart failure", bin: 0 }
+          - { text: "Starting an SGLT2 inhibitor", bin: 0 }
+          - { text: "Intensive BP control", bin: 0 }
+          - { text: "Hepatorenal syndrome", bin: 1 }
+          - { text: "Sepsis", bin: 1 }
+          - { text: "Nephrotoxin", bin: 1 }
+        why: "الـ **serum creatinine** اللي بيعلى من علاج مقصود (diuresis، RAAS inhibition، BP control، SGLT2i) نتيجته أحسن. اللي بيعلى لوحده من CRS أو HRS مش متعالجين، أو sepsis، أو nephrotoxin، نتيجته أوحش."
+      - kind: figure
+        page: 102
+        quote: "The conceptual overlap among AKI, AKD and CKD (KDIGO AKI guideline 2012)"
+        title: "من AKI لـ AKD لـ CKD"
+        alt: "A timeline in days after injury: AKI from day 0 to 7 with a mark at 48 hours, AKD from day 7 to 90, CKD after day 90."
+        caption: "الـ **AKI** أول 7 أيام، والـ **AKD** من 7 لـ 90 يوم، وبعد ==90 يوم== تبقى CKD."
+        svg: |
+          <svg viewBox="0 0 330 120" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L05a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker></defs>
+            <rect x="15" y="30" width="70" height="36" rx="6" class="fg-bad"/>
+            <text x="50" y="53" text-anchor="middle" class="t-sm t-b">AKI</text>
+            <rect x="85" y="30" width="110" height="36" rx="6" class="fg-acc"/>
+            <text x="140" y="53" text-anchor="middle" class="t-sm t-b">AKD</text>
+            <rect x="195" y="30" width="115" height="36" rx="6" class="fg-box"/>
+            <text x="252" y="53" text-anchor="middle" class="t-sm t-b">CKD</text>
+            <line x1="15" y1="85" x2="318" y2="85" class="fg-arrow" marker-end="url(#L05a)"/>
+            <text x="15" y="102" text-anchor="middle" class="t-sm">0</text>
+            <text x="36" y="102" text-anchor="middle" class="t-sm t-mut">48h</text>
+            <text x="85" y="102" text-anchor="middle" class="t-sm">7</text>
+            <text x="195" y="102" text-anchor="middle" class="t-sm">90</text>
+            <text x="165" y="20" text-anchor="middle" class="t-sm t-mut">Days after injury (ADQI)</text>
+          </svg>
+      - kind: table
+        page: 102
+        quote: "Between 5% and 7% of all hospitalized patients develop AKI"
+        title: "الأرقام"
+        columns: [Group, Figure]
+        rows:
+          - ["Hospitalized patients with AKI", "5–7%"]
+          - ["ICU patients with AKI", "20–60%"]
+          - ["Non-ICU AKI mortality", "Up to 10%"]
+          - ["ICU AKI mortality", "Over 50%"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1]]
+      - kind: aside
+        tone: tip
+        page: 102
+        quote: "Non-oliguric has better prognosis than oliguric one"
+        text: |
+          الـ **non-oliguric** AKI أحسن في الـ prognosis، وغالبًا في المستشفى بيكون من ==nephrotoxic agents==. ولما العيان الـ AKI يبقى في الـ ICU مع sepsis و multi-organ failure، الـ mortality بتعدّي 50%.
+      - kind: explain
+        page: 103
+        title: "Azotemia ولا uremia؟"
+        quote: "Symptomatic AKI (eg MS changes, loss of appetite, tremors)"
+        text: |
+          - **Azotemia** = ==تراكم nitrogenous waste== بس.
+          - **Uremia** = AKI ==بأعراض==: تغيّر في الوعي، فقدان شهية، و **tremors**.
+      - kind: try
+        items: [neph.L05.007, neph.L05.013, neph.L05.014, neph.L05.021, neph.L05.029]
+    recap:
+      - "AKI = SCr ↑≥0.3 في 48 ساعة، أو ↑50% في 7 أيام، أو UO <0.5 mL/kg/h لـ 6 ساعات."
+      - "KDIGO: stage 1 ×1.5–1.9، stage 2 ×2–2.9، stage 3 ×3 أو ≥4 أو RRT؛ خد الأسوأ."
+      - "Induced AKI (decongestion، RAASi، SGLT2i) أحسن من spontaneous AKI."
+      - "AKI لحد يوم 7، AKD لحد يوم 90، وبعدها CKD."
+      - "5–7% من عيانين المستشفى، 20–60% في الـ ICU؛ uremia = azotemia بأعراض."
+    practice: [neph.L05.001, neph.L05.002, neph.L05.003, neph.L05.004, neph.L05.005, neph.L05.006, neph.L05.007, neph.L05.008, neph.L05.009, neph.L05.010, neph.L05.011, neph.L05.012, neph.L05.013, neph.L05.014, neph.L05.015, neph.L05.016, neph.L05.017, neph.L05.018, neph.L05.019, neph.L05.020, neph.L05.021, neph.L05.022, neph.L05.023, neph.L05.024, neph.L05.025, neph.L05.026, neph.L05.027, neph.L05.028, neph.L05.029, neph.L05.133, neph.L05.134]
+  # ------------------------------------------------------------------
+  - id: neph.L05.lesson2
+    title: "قبل، جوّه، ولا بعد الكلية؟"
+    hook: "كل AKI ليه عنوان: قبل الكلية، جوّاها، أو بعدها. البول والـ indices هيقولولك العنوان."
+    minutes: 10
+    pages: [103, 110]
+    topics: [etiology, complications, workup, indices]
+    goals:
+      - "تصنّف سبب الـ AKI لـ prerenal أو intrinsic أو postrenal"
+      - "تفرّق prerenal عن ATN بالـ urine indices"
+      - "تقرا الـ urinary sediment وتعرف الـ imaging المناسب"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 103
+        title: "تلات عناوين"
+        quote: "Hypoperfusion in which the integrity of renal parenchyma is preserved"
+        text: |
+          - **Prerenal:** ==hypoperfusion== والنسيج سليم.
+          - **Intrinsic:** الضرر في ==renal parenchyma== نفسه.
+          - **Postrenal:** ==acute obstruction== لسريان البول.
+      - kind: explain
+        page: 105
+        title: "Prerenal"
+        quote: "Prerenal AKI: is characterized by reduced blood delivery to the kidney"
+        text: |
+          الدم اللي واصل للكلية **قليل**:
+          - **Volume depletion:** نزيف، جفاف، GI losses.
+          - **Effective volume ↓:** CHF، MI، hypotension، liver failure، sepsis.
+          - **Functional:** ACEIs، **NSAIDs**، ARBs، cyclosporine و tacrolimus.
+
+          صلّح الـ volume بسرعة ترجع الكلية ==طبيعية==، لأن مفيش structural damage. لو اتأخرت، ممكن تتحول لـ intrinsic.
+      - kind: explain
+        page: 105
+        title: "Intrinsic"
+        quote: "Acute tubular necrosis (ATN) (it accounts for 40% of all cases of AKI)"
+        text: |
+          - **Vascular:** renal thrombosis.
+          - **Glomerular:** RPGN.
+          - ==ATN== (40% من كل الـ AKI): ischemia (hypotension، sepsis)، endogenous toxins (uric acid، hemoglobin، myoglobin)، exogenous toxins (aminoglycosides، **contrast**، amphotericin B).
+          - **Acute interstitial nephritis:** NSAIDs، infections.
+      - kind: explain
+        page: 106
+        title: "Postrenal"
+        quote: "Postrenal AKI accounts for less than 10% of cases of AKI"
+        text: |
+          ==أقل من 10%== من الـ AKI:
+          - **Bladder outlet:** BPH، prostate cancer، **anticholinergic drug**.
+          - **Ureteral:** malignancy.
+          - **Pelvic / renal** obstruction.
+
+          فكّها بسرعة ترجع الوظيفة.
+      - kind: sort
+        page: 104
+        quote: "Classification of AKI (ARF)"
+        prompt: "حط كل سبب AKI في عنوانه (classification):"
+        bins: ["Prerenal", "Intrinsic", "Postrenal"]
+        cards:
+          - { text: "Cyclosporine", bin: 0 }
+          - { text: "Liver failure", bin: 0 }
+          - { text: "Rhabdomyolysis", bin: 1 }
+          - { text: "Malignant hypertension", bin: 1 }
+          - { text: "Amphotericin B", bin: 1 }
+          - { text: "Benign prostatic hypertrophy", bin: 2 }
+          - { text: "Obstruction of a solitary kidney", bin: 2 }
+        why: "الـ cyclosporine بيبوّظ الـ autoregulation والـ liver failure بيقلل الـ effective volume، يبقوا prerenal. الـ rhabdo والـ amphotericin بيضربوا الـ tubules، والـ malignant HT بيضرب الأوعية، فالتلاتة intrinsic. والـ BPH والـ solitary kidney المسدودة postrenal."
+      - kind: table
+        page: 106
+        quote: "Uremia Hypervolemia and Hypovolemia Hyponatremia Hyperkalemia"
+        title: "المضاعفات: uremia والـ fluid والـ electrolytes"
+        columns: [Group, Complications]
+        rows:
+          - ["Toxins", "Uremia"]
+          - ["Fluid", "Hypervolemia and hypovolemia"]
+          - ["Electrolytes", "Hyponatremia, hyperkalemia, hyperphosphatemia and hypocalcemia"]
+          - ["Others", "Bleeding, infections, cardiac complications, malnutrition"]
+        hide: [[1, 1], [2, 1], [3, 1]]
+      - kind: explain
+        page: 107
+        title: "الحكاية والكشف"
+        quote: "Colicky flank pain radiating to the groin suggests acute ureteric obstruction"
+        text: |
+          - **Prerenal:** ترجيع، إسهال، **glycosuria** بـ polyuria، diuretics/NSAIDs/ACEi/ARBs. الكشف: orthostatic hypotension، tachycardia، JVP واطي، skin turgor قليل، بُق ناشف.
+          - **Postrenal:** ==colicky flank pain للـ groin== = ureteric. nocturia و hesitancy = البروستاتا. suprapubic fullness = مثانة كبيرة.
+          - راجع ==كل الأدوية==: سبب؟ ومحتاجة dose adjustment؟
+      - kind: match
+        page: 108
+        quote: "Livedo reticularis and other signs of emboli to the legs"
+        prompt: "وصّل العلامة بالسبب:"
+        pairs:
+          - ["Palpable purpura + pulmonary hemorrhage", "Systemic vasculitis with GN"]
+          - ["Livedo reticularis", "Atheroembolic disease"]
+          - ["Limb ischemia", "Rhabdomyolysis"]
+          - ["Diarrhea, then AKI", "HUS D+"]
+          - ["TMA + fever + neurological signs", "TTP"]
+        why: "الـ purpura مع lung hemorrhage و sinusitis = vasculitis. الـ livedo = atheroemboli. الـ limb ischemia = rhabdo. والـ TMA بعد إسهال = HUS، ولو معاها حرارة وأعراض عصبية = TTP."
+      - kind: table
+        page: 109
+        quote: "Distinguishing Prerenal azotemia and ATN"
+        title: "Prerenal ولا ATN؟"
+        columns: [Index, Prerenal, ATN]
+        rows:
+          - ["Sediment", "Normal / hyaline", "Epithelial casts"]
+          - ["Specific gravity", ">1.020", "<1.020"]
+          - ["Urine Na (mmol/L)", "<20", ">40"]
+          - ["FENa", "<1%", ">2%"]
+          - ["FEurea", "<35%", ">50%"]
+          - ["Urine osm", ">500", "<350"]
+          - ["U/P creatinine", ">40", "<10"]
+          - ["BUN/Cr", ">20", "<15"]
+        hide: [[2, 1], [3, 1], [3, 2], [4, 1], [5, 1], [7, 1]]
+      - kind: aside
+        tone: analogy
+        page: 109
+        quote: "Distinguishing Prerenal azotemia and ATN"
+        text: |
+          الكلية الـ **prerenal** زي واحد عطشان بيحوّش: بيمسك ==sodium== (UNa <20، FENa <1%) ويركّز البول (osm >500). الـ **ATN** tubules مضروبة ومش عارفة تحوّش، فالـ sodium بيهرب (FENa >2%) والبول بيطلع ==مخفف==.
+      - kind: check
+        page: 109
+        quote: "Distinguishing Prerenal azotemia and ATN"
+        question: "UNa 15 mmol/L, FEurea 28%, urine osm 540, BUN/Cr 24. Diagnosis?"
+        options:
+          - "Prerenal azotemia"
+          - "ATN"
+          - "Can't tell without FENa"
+        answer: 0
+        why:
+          - "صح: كل الـ indices في عمود الـ prerenal (UNa <20، FEurea <35%، osm >500، BUN/Cr >20)."
+          - "الـ ATN: UNa >40، FEurea >50%، osm <350، BUN/Cr <15."
+          - "الـ FEurea بيقوم بالمهمة، وخصوصًا لو العيان واخد diuretic."
+      - kind: aside
+        tone: tip
+        page: 109
+        quote: "Distinguishing Prerenal azotemia and ATN"
+        text: |
+          ليه الـ **FEurea**؟ الـ diuretics بتعلّي الـ FENa حتى في الـ prerenal، لكن الـ ==urea== بتفضل تتمسك. (الشرح فسيولوجي؛ الأرقام من جدول الكتاب.)
+      - kind: table
+        page: 109
+        quote: "Urinary sediment in AKI"
+        title: "الـ sediment بيقول إيه"
+        columns: [Finding, Think of]
+        rows:
+          - ["Bland (few cells, hyaline)", "Prerenal, postrenal, arterial thrombosis or embolism, HUS/TTP"]
+          - ["RBC casts", "GN, vasculitis"]
+          - ["RTE cells, granular casts", "ATN, interstitial nephritis, allograft rejection"]
+          - ["Pigmented casts", "Myoglobinuria, hemoglobinuria"]
+          - ["Eosinophiluria", "Allergic interstitial nephritis, atheroemboli"]
+          - ["Crystalluria", "Uric acid, ethylene glycol, acyclovir, indinavir"]
+        hide: [[1, 1], [2, 1], [3, 1], [4, 1], [5, 1]]
+      - kind: explain
+        page: 110
+        title: "الـ imaging"
+        quote: "DTPA and MAG3: renal function, urinary excretion and upper tract outflow"
+        text: |
+          - **Ultrasound:** للـ ==obstruction==.
+          - **Doppler:** الـ renal blood flow.
+          - **CT**.
+          - **DMSA:** anatomy. **DTPA و MAG3:** function و excretion و upper-tract outflow.
+      - kind: try
+        items: [neph.L05.053, neph.L05.059, neph.L05.063, neph.L05.126, neph.L05.135]
+    recap:
+      - "Prerenal = perfusion قليل والنسيج سليم؛ صلّحه بدري قبل ما يبقى intrinsic."
+      - "ATN = 40% من الـ AKI؛ postrenal أقل من 10%."
+      - "Prerenal: UNa <20، FENa <1%، FEurea <35%، osm >500، BUN/Cr >20."
+      - "ATN: UNa >40، FENa >2%، FEurea >50%، osm <350، epithelial casts."
+      - "RBC casts = GN، pigmented = myoglobin، eosinophils = AIN، crystals = أدوية وسموم."
+    practice: [neph.L05.030, neph.L05.031, neph.L05.032, neph.L05.033, neph.L05.034, neph.L05.035, neph.L05.036, neph.L05.037, neph.L05.038, neph.L05.039, neph.L05.040, neph.L05.041, neph.L05.042, neph.L05.043, neph.L05.044, neph.L05.045, neph.L05.046, neph.L05.047, neph.L05.048, neph.L05.049, neph.L05.050, neph.L05.051, neph.L05.052, neph.L05.053, neph.L05.054, neph.L05.055, neph.L05.056, neph.L05.057, neph.L05.058, neph.L05.059, neph.L05.060, neph.L05.061, neph.L05.062, neph.L05.063, neph.L05.064, neph.L05.065, neph.L05.126, neph.L05.135, neph.L05.136, neph.L05.137]
+  # ------------------------------------------------------------------
+  - id: neph.L05.lesson3
+    title: "امنع الأول، وبعدين عالج صح"
+    hook: "An ounce of prevention is worth a pound of cure. نص علاج الـ AKI هو إنك ما تعملش حاجات غلط."
+    minutes: 10
+    pages: [110, 115]
+    topics: [prevention, treatment, dialysis]
+    goals:
+      - "تحفظ regimens منع الـ contrast nephropathy وقواعد الـ aminoglycosides"
+      - "تعالج الـ AKI: fluids، pressors، ومن غير dopamine ولا diuretics على الفاضي"
+      - "تعرف الـ furosemide stress test ودواعي الـ dialysis (AEIOU)"
+    status: unverified
+    steps:
+      - kind: table
+        page: 110
+        quote: "Normal saline regimen: 1ml/kg/h for 12hours before and after procedure"
+        title: "منع الـ contrast-induced nephropathy"
+        columns: [Regimen, How]
+        rows:
+          - ["Normal saline", "1 ml/kg/h, 12 h before and 12 h after"]
+          - ["Sodium bicarbonate", "3 ml/kg/h × 1 h before, then 1 ml/kg/h × 6 h after"]
+          - ["N-acetylcysteine", "600–1200 mg PO q12h × 2–3 days, 2 doses before"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: update
+        page: 110
+        quote: "N-acetylcysteine (600-1200mg orally every 12 hours for 2-3 days, the first two doses precontrast)"
+        text: "الـ **PRESERVE trial (2018)**: الـ bicarbonate مش أحسن من الـ saline، والـ **N-acetylcysteine** مش أحسن من الـ placebo. الـ ACR-NKF 2020 بيوصّي بـ isotonic volume expansion للـ high risk ومش بيوصّي بالـ NAC. في الامتحان جاوب بالـ regimens اللي في الكتاب."
+        ref: "PRESERVE trial 2018; ACR-NKF consensus 2020"
+      - kind: explain
+        page: 111
+        title: "الـ ICU والـ aminoglycosides"
+        quote: "KDIGO suggests using single dose daily rather than multiple-dose daily treatment regimens"
+        text: |
+          - في الـ ICU: **glucose 110–149 mg/dl** بالـ insulin.
+          - الـ **aminoglycosides**: ما تستخدمهاش لو فيه بديل أقل nephrotoxic، وابعد عنها فوق ==65 سنة==، والـ DM، والـ septic shock.
+          - لو لازم: ==single daily dose==، و topical أو local (aerosol، beads) لو ينفع.
+      - kind: explain
+        page: 111
+        title: "تلات قواعد عامة"
+        quote: "Elimination of nephrotoxic agents (e.g., ACE inhibitors, ARBS, NSAIDs, aminoglycosides) if possible"
+        text: |
+          1. ظبّط الـ **hemodynamics**: fluids و vasopressors بعقل.
+          2. ==وقّف الـ nephrotoxic agents==: ACE inhibitors، ARBs، NSAIDs، aminoglycosides.
+          3. ابدأ **RRT** لما يكون فيه indication.
+      - kind: explain
+        page: 111
+        title: "Fluids و pressors"
+        quote: "KDIGO suggest using isotonic crystalloids rather than colloids (albumin or starches)"
+        text: |
+          - ==Isotonic crystalloids== قبل الـ colloids. الـ colloids لو محتاج volume كبير، أو cirrhosis مع SBP، أو burns.
+          - الـ **albumin** renoprotective، والـ hyperoncotic **starch** nephrotoxic.
+          - لو shock بعد الـ resuscitation: **MAP 65–70**، والـ ==norepinephrine== أحسن من الـ dopamine (adverse events أقل).
+      - kind: aside
+        tone: trap
+        page: 112
+        quote: "KDIGO recommends not using low-dose dopamine to prevent or treat AKI. (1A)"
+        text: |
+          "**Renal-dose dopamine**" إجابة غلط دايمًا: KDIGO ==بيوصّي ضدها== للـ prevention والـ treatment، **grade 1A**.
+      - kind: explain
+        page: 112
+        title: "HRS و CRS"
+        quote: "all in combination with intravenous albumin (maximum 100 g/d)"
+        text: |
+          - **SBP:** الـ albumin مع الـ antibiotics ممكن يمنع الـ AKI.
+          - **HRS bridge:** ==terlipressin==، أو octreotide + midodrine، أو norepinephrine، وكلهم مع **IV albumin** (max 100 g/d).
+          - **Cardiorenal:** ظبّط القلب: inotropes، preload و afterload reduction، antiarrhythmics، و **IABP**.
+      - kind: table
+        page: 113
+        quote: "KDIGO recommend not using diuretics to prevent AKI. (1B)"
+        title: "الـ diuretics في الـ AKI"
+        columns: [Use, KDIGO, Grade]
+        rows:
+          - ["Prevent AKI", "Not recommended", "1B"]
+          - ["Treat AKI", "Not suggested, except volume overload", "2C"]
+        hide: [[0, 2], [1, 1], [1, 2]]
+      - kind: figure
+        page: 113
+        quote: "Use of furosemide stress test to guide resuscitation"
+        title: "Furosemide stress test"
+        alt: "Flowchart. Adequately resuscitated oliguric patient gets furosemide 1 mg per kg if naive or 1.5 mg per kg if not. More than 200 ml urine in 2 hours means passed, pre-renal oliguria. Less than 200 ml means failed, intrinsic renal failure."
+        caption: "لو ==فشل== والبول أقل من **200 ml** في ساعتين، زيادة الـ fluids أو الـ pressors مش هتعلّي البول، والـ urine output مش مقياس perfusion."
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L05b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker></defs>
+            <rect x="40" y="10" width="250" height="44" rx="8" class="fg-box"/>
+            <text x="165" y="28" text-anchor="middle" class="t-sm">Resuscitated, still oliguric</text>
+            <text x="165" y="46" text-anchor="middle" class="t-sm t-mut">fluid challenge unlikely to help</text>
+            <line x1="165" y1="54" x2="165" y2="74" class="fg-arrow" marker-end="url(#L05b)"/>
+            <rect x="40" y="78" width="250" height="44" rx="8" class="fg-acc"/>
+            <text x="165" y="96" text-anchor="middle" class="t-sm t-b">Furosemide IV bolus</text>
+            <text x="165" y="114" text-anchor="middle" class="t-sm">naive 1 mg/kg · not naive 1.5 mg/kg</text>
+            <line x1="120" y1="122" x2="85" y2="152" class="fg-arrow" marker-end="url(#L05b)"/>
+            <line x1="210" y1="122" x2="245" y2="152" class="fg-arrow" marker-end="url(#L05b)"/>
+            <rect x="10" y="156" width="150" height="84" rx="8" class="fg-good"/>
+            <text x="85" y="178" text-anchor="middle" class="t-sm t-b">&gt;200 ml / 2 h</text>
+            <text x="85" y="198" text-anchor="middle" class="t-sm">Passed</text>
+            <text x="85" y="218" text-anchor="middle" class="t-sm">Pre-renal oliguria</text>
+            <rect x="170" y="156" width="150" height="84" rx="8" class="fg-bad"/>
+            <text x="245" y="178" text-anchor="middle" class="t-sm t-b">&lt;200 ml / 2 h</text>
+            <text x="245" y="198" text-anchor="middle" class="t-sm">Failed</text>
+            <text x="245" y="218" text-anchor="middle" class="t-sm">Intrinsic renal failure</text>
+          </svg>
+      - kind: explain
+        page: 114
+        title: "Fenoldopam و rhabdo"
+        quote: "Aggressive volume repletion (may require 10 L of fluid per day)"
+        text: |
+          - **Fenoldopam:** pure **D1 agonist** من غير adrenergic stimulation. الدراسات مش حاسمة، وفي الـ critically ill الـ infusion أحسن من الـ low-dose dopamine.
+          - **Rhabdomyolysis:** ==fluids كتير (لحد 10 L/day)==، والـ alkaline fluids مفيدة. diuretics بس لو الـ fluids كفاية ومفيش بول، و dialysis، وراقب الـ **calcium و phosphate**.
+      - kind: update
+        page: 114
+        quote: "Fenoldopam mesylate is a pure dopamine type-1 receptor agonist"
+        text: "الكتاب كاتب الجرعة **0.1 mg/kg/min**، والجرعة المعروفة **0.1 µg/kg/min** (micrograms). والـ **KDIGO 2012** بيقترح ما تستخدمش الـ fenoldopam للـ prevention أو الـ treatment (2C)."
+        ref: "KDIGO AKI guideline 2012"
+      - kind: explain
+        page: 114
+        title: "أسباب ليها علاج خاص"
+        quote: "AKI due to scleroderma (scleroderma renal crisis) should be treated with ACE inhibitors"
+        text: |
+          - **GN / vasculitis:** immunosuppression و/أو plasmapheresis.
+          - **Allergic AIN:** وقّف الدوا.
+          - **Scleroderma renal crisis:** ==ACE inhibitors==، الاستثناء اللي بنديه فيه رغم الـ AKI.
+          - **Postrenal:** فكّ الانسداد بسرعة، وجهّز fluids و electrolytes للـ diuresis اللي بعدها.
+      - kind: mnemonic
+        page: 115
+        quote: "Intoxications (lithium, ethylene glycol, etc)"
+        word: "AEIOU"
+        parts:
+          - { key: "A", text: "Acidosis" }
+          - { key: "E", text: "Electrolytes, usually hyperkalemia" }
+          - { key: "I", text: "Intoxications (lithium, ethylene glycol)" }
+          - { key: "O", text: "Overload (volume)" }
+          - { key: "U", text: "Uremia (symptoms, signs)" }
+        hook: "الحروف المتحركة الخمسة بالإنجليزي. لو العيان قال أيّ واحد فيهم ومش بيتصلّح بالعلاج، يبقى محتاج dialysis."
+      - kind: check
+        page: 115
+        quote: "Hemodynamically stable- IHD"
+        question: "AKI with K 7.0 refractory to treatment, BP 80/50 on norepinephrine. Mode?"
+        options:
+          - "Intermittent hemodialysis"
+          - "CRRT, PD or SLED"
+          - "No dialysis while on pressors"
+        answer: 1
+        why:
+          - "الـ IHD للـ hemodynamically stable."
+          - "صح: الـ unstable ياخد CRRT أو PD أو SLED."
+          - "الـ hyperkalemia الـ refractory دي indication، والـ mode بس هو اللي بيتغير."
+      - kind: explain
+        page: 115
+        title: "الـ prognosis"
+        quote: "10% of cases requiring dialysis develop ckd"
+        text: |
+          - الـ **prerenal** والـ **postrenal** أحسن.
+          - الكلى ممكن ترجع حتى بعد AKI محتاج dialysis.
+          - ==10%== من اللي احتاجوا dialysis بيبقى عندهم CKD.
+          - ممكن يحصل death بدري حتى بعد ما الوظيفة ترجع كاملة.
+      - kind: try
+        items: [neph.L05.072, neph.L05.080, neph.L05.088, neph.L05.093, neph.L05.127]
+    recap:
+      - "CIN: saline 1 ml/kg/h 12 h قبل وبعد، أو bicarbonate 3 ثم 1 ml/kg/h؛ NAC 600–1200 q12h."
+      - "Aminoglycosides: لو فيه بديل ابعد، ولو لازم single daily dose."
+      - "Crystalloids قبل colloids، MAP 65–70، norepinephrine مش dopamine."
+      - "No low-dose dopamine (1A)، no diuretics للـ prevention (1B) أو العلاج (2C) إلا للـ overload."
+      - "FST فشل = أقل من 200 ml في ساعتين = intrinsic. Dialysis = AEIOU؛ unstable ياخد CRRT/PD/SLED."
+    practice: [neph.L05.066, neph.L05.067, neph.L05.068, neph.L05.069, neph.L05.070, neph.L05.071, neph.L05.072, neph.L05.073, neph.L05.074, neph.L05.075, neph.L05.076, neph.L05.077, neph.L05.078, neph.L05.079, neph.L05.080, neph.L05.081, neph.L05.082, neph.L05.083, neph.L05.084, neph.L05.085, neph.L05.086, neph.L05.087, neph.L05.088, neph.L05.089, neph.L05.090, neph.L05.091, neph.L05.092, neph.L05.093, neph.L05.094, neph.L05.095, neph.L05.096, neph.L05.097, neph.L05.098, neph.L05.099, neph.L05.127, neph.L05.128, neph.L05.132]
+  # ------------------------------------------------------------------
+  - id: neph.L05.lesson4
+    title: "الكرياتينين بيوصل متأخر"
+    hook: "ساعة الكرياتينين دايمًا متأخرة. الـ biomarkers والـ renal reserve بيقولولك اللي حصل قبلها."
+    minutes: 8
+    pages: [116, 126]
+    topics: [biomarkers, reserve]
+    goals:
+      - "تشرح ليه الكرياتينين marker متأخر"
+      - "تعرف الـ cystatin C و NGAL و KIM-1 و TIMP-2×IGFBP7"
+      - "تقيس الـ renal functional reserve وتصنّف الـ recovery"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 116
+        title: "أدوات جديدة من 2012"
+        quote: "RISK ASSESSMENT TOOLS SINCE 2012"
+        text: |
+          الحالات زادت (156 ← 925 بين السبعينات والتمانينات) والـ mortality فضلت **فوق 50%**. علشان كده ظهرت أدوات جديدة:
+          - **Renal angina index**
+          - ==Renal functional reserve== assessment
+          - **New biomarkers:** [TIMP-2]×[IGFBP7]
+      - kind: order
+        page: 118
+        quote: "Multiple Timezones of AKI and Organ Damage Clock"
+        prompt: "رتّب ساعة الضرر بعد الـ insult، من الأبدر للأخر:"
+        steps:
+          - "Damage"
+          - "GFR falls"
+          - "Oliguria"
+          - "Creatinine rises"
+        why: "الضرر بيبدأ الساعة 10 الصبح، وبعدين الـ GFR بينزل، وبعدين الـ oliguria، والـ ==creatinine== آخر واحد بيعلى (1 بالليل). الكرياتينين ساعته دايمًا متأخرة."
+      - kind: explain
+        page: 117
+        title: "Function ولا damage؟"
+        quote: "Biomarkers are Foot Prints of Actual Organ Damage"
+        text: |
+          - الـ **creatinine** = functional marker، بيتأثر متأخر وممكن ما يتأثرش خالص بسبب الـ ==renal reserve==.
+          - الـ **biomarkers** = ==footprints== للضرر نفسه.
+          - وفيه ارتفاع **creatinine** من غير ضرر: prerenal، HRS، CRS، RAAS inhibition.
+      - kind: table
+        page: 121
+        quote: "Considered equivalent to troponin in acute coronary syndrome"
+        title: "الـ biomarkers المهمين"
+        columns: [Marker, Key fact]
+        rows:
+          - ["Cystatin C", "Detects AKI 24–48 h before creatinine, even while creatinine is normal"]
+          - ["NGAL", "In plasma and urine within 2 h of bypass AKI; the kidney's troponin"]
+          - ["KIM-1", "Type 1 transmembrane glycoprotein; marks severity, predicts outcomes"]
+          - ["[TIMP-2]×[IGFBP7]", ">0.3 = risk of moderate to severe AKI within 12 h"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1]]
+      - kind: aside
+        tone: joke
+        page: 121
+        quote: "Considered equivalent to troponin in acute coronary syndrome"
+        text: |
+          الـ **NGAL** هو ==troponin== الكلية: بيطلع بعد ساعتين من الـ bypass، والكرياتينين لسه بيشرب شاي في الكافيتيريا.
+      - kind: check
+        page: 120
+        quote: "Allows detection of AKI, 24-48 hours earlier than serum creatinine"
+        question: "Which marker is a better functional surrogate than creatinine for early, subtle GFR change?"
+        options:
+          - "Cystatin C"
+          - "KIM-1"
+          - "Urine sodium"
+        answer: 0
+        why:
+          - "صح: الـ cystatin C بيكشف الـ AKI قبل الكرياتينين بـ 24–48 ساعة، حتى والكرياتينين normal."
+          - "الـ KIM-1 marker للـ severity والـ outcomes."
+          - "الـ urine sodium بيفرّق prerenal عن ATN."
+      - kind: explain
+        page: 122
+        title: "الـ biomarker بيغيّر العلاج"
+        quote: "Preventive strategy performed in high risk on pump cardiac surgery patients-single center trial"
+        text: |
+          في عيانين cardiac surgery الـ **[TIMP-2]×[IGFBP7] ≥0.3** اتعملهم ==KDIGO care bundle==:
+          - وقف ACEi/ARBs لـ 48 ساعة
+          - optimize volume و perfusion لـ 12 ساعة، و PiCCO لو لزم
+          - راقب SCr و UO، وامنع hyperglycemia لـ 72 ساعة، وبدائل للـ contrast
+
+          الـ AKI نزل من **71% لـ 55.1%**، والـ moderate–severe من **44.9% لـ 29.7%**.
+      - kind: figure
+        page: 123
+        quote: "Renal function reserve"
+        title: "الـ renal functional reserve"
+        alt: "Two bars. Baseline GFR is the lower bar; after an oral protein load of 1.2 g per kg, stimulated GFR is the taller bar. The difference between them is the renal functional reserve."
+        caption: "**RFR = stimulated GFR − baseline GFR** بعد protein load ==1.2 g/kg==. الكلية ممكن تبان طبيعية والـ reserve خلصان."
+        svg: |
+          <svg viewBox="0 0 330 230" xmlns="http://www.w3.org/2000/svg">
+            <line x1="40" y1="200" x2="310" y2="200" class="fg-ink"/>
+            <rect x="70" y="100" width="70" height="100" rx="4" class="fg-box"/>
+            <text x="105" y="218" text-anchor="middle" class="t-sm">Baseline</text>
+            <text x="105" y="155" text-anchor="middle" class="t-sm t-b">GFR</text>
+            <rect x="200" y="100" width="70" height="100" rx="4" class="fg-box"/>
+            <rect x="200" y="40" width="70" height="60" rx="4" class="fg-good"/>
+            <text x="235" y="75" text-anchor="middle" class="t-sm t-b">RFR</text>
+            <text x="235" y="155" text-anchor="middle" class="t-sm">baseline</text>
+            <text x="235" y="218" text-anchor="middle" class="t-sm">Stimulated</text>
+            <text x="165" y="28" text-anchor="middle" class="t-sm t-mut">oral protein 1.2 g/kg</text>
+          </svg>
+      - kind: table
+        page: 124
+        quote: "Full Recovery (Baseline GFR >90 ml/min & RFR >30 ml/min)"
+        title: "رجعت إزاي بعد الـ AKI؟"
+        columns: [Category, Baseline GFR, RFR]
+        rows:
+          - ["Full recovery", ">90", ">30"]
+          - ["Apparent full recovery", ">90", "<30"]
+          - ["Kidney recovery", ">60", "-"]
+          - ["Non-recovery", "<60", "<30"]
+        hide: [[0, 2], [1, 2], [3, 1]]
+      - kind: check
+        page: 124
+        quote: "Full Recovery (Baseline GFR >90 ml/min & RFR >30 ml/min)"
+        question: "GFR 98 ml/min; after a protein load it rises to 140. Recovery class?"
+        options:
+          - "Full recovery"
+          - "Apparent full recovery"
+          - "Non-recovery"
+        answer: 0
+        why:
+          - "صح: GFR >90 و RFR = 42، يعني أكتر من 30، يبقى full recovery."
+          - "الـ apparent full recovery لما الـ RFR <30."
+          - "الـ non-recovery لما الـ GFR <60."
+      - kind: explain
+        page: 125
+        title: "الـ stress test مفيد فين؟"
+        quote: "To evaluate living kidney donors to make sure no problem will occur to the donor and the recipient after transplantation"
+        text: |
+          - **Silent disease** في الـ high risk: HTN، DM، PKD، solitary kidney، CKD.
+          - ==Living kidney donors==.
+          - قبل **high-risk surgery** أو **contrast**: RFR <15 = خطر AKI ==11.8 مرة== بعد cardiac surgery.
+          - تقييم الـ recovery بعد الـ AKI.
+      - kind: explain
+        page: 126
+        title: "خد معاك"
+        quote: "No role of low dose dopamine, diuretics in prevention and treatment"
+        text: |
+          1. شخّص بدري: الـ **biomarkers** ليها مستقبل.
+          2. دوّر على السبب.
+          3. ==Prevent rather than treat==.
+          4. تابع كويس اللي رجع جزئيًا.
+          5. مفيش دور للـ **low-dose dopamine** ولا الـ **diuretics**.
+          6. ابدأ **RRT** لما يكون فيه indication.
+      - kind: try
+        items: [neph.L05.103, neph.L05.108, neph.L05.112, neph.L05.122, neph.L05.129]
+    recap:
+      - "الترتيب: damage ← GFR ← oliguria ← creatinine؛ ساعة الكرياتينين دايمًا متأخرة."
+      - "Cystatin C بيسبق الكرياتينين بـ 24–48 h؛ NGAL بعد ساعتين = troponin الكلية."
+      - "KIM-1 للـ severity؛ TIMP-2×IGFBP7 >0.3 = AKI في 12 h."
+      - "RFR = stimulated − baseline GFR بعد protein 1.2 g/kg."
+      - "Full recovery: GFR >90 و RFR >30؛ لو RFR <30 تبقى apparent."
+    practice: [neph.L05.100, neph.L05.101, neph.L05.102, neph.L05.103, neph.L05.104, neph.L05.105, neph.L05.106, neph.L05.107, neph.L05.108, neph.L05.109, neph.L05.110, neph.L05.111, neph.L05.112, neph.L05.113, neph.L05.114, neph.L05.115, neph.L05.116, neph.L05.117, neph.L05.118, neph.L05.119, neph.L05.120, neph.L05.121, neph.L05.122, neph.L05.123, neph.L05.124, neph.L05.125, neph.L05.129, neph.L05.130, neph.L05.131]

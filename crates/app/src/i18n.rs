@@ -322,7 +322,13 @@ pub mod study {
     pub const TICK_HEADINGS: &str = "علّم على العناوين اللي جت في بالك.";
     pub const HEADINGS_GOT: &str = "العناوين اللي جبتها:";
 
-    pub const GRADE_LABEL: &str = "قيّم نفسك";
+    pub const GRADE_LABEL: &str = "افتكرتها قد إيه؟";
+    pub const GRADE_HINT: &str = "قيّم اللي افتكرته، مش صعوبة السؤال. ده اللي بيحدد إمتى يرجعلك.";
+    pub const UNDO: &str = "↶ تراجع";
+    pub const UNDO_HINT: &str = "رجّع آخر تقييم";
+    pub const UNDONE: &str = "رجّعت تقييمك، وكأنك ما قيّمتش. جاوب وقيّم من جديد.";
+    pub const UNDO_FAILED: &str = "ما عرفتش أرجّع التقييم. جرّب تاني بعد شوية.";
+    pub const UNDO_LAST: &str = "↶ رجّع آخر تقييم";
     pub const SUGGESTED: &str = "اقتراحي متعلّم عليه، والقرار ليك.";
     pub const AGAIN: &str = "تاني";
     pub const HARD: &str = "صعب";
@@ -816,7 +822,8 @@ pub mod keys {
 }
 
 pub mod verify {
-    pub const GROUP: &str = "مراجعة المحتوى";
+    pub const GROUP: &str = "مراجعة صحة المحتوى";
+    pub const HINT: &str = "دي عن صحة المعلومة قدام الكتاب، مش عن تذكّرك، ومش بتغيّر تقييمك.";
     pub const QUESTION: &str = "المحتوى ده مظبوط؟";
     pub const RIGHT: &str = "✓ صح";
     pub const EDIT: &str = "✎ عدّل";

@@ -11,7 +11,7 @@
 //! update changes --gate BASE               fails unless HEAD adds a line (CI, #320)
 //! update channels [--version V]             the channels a version is published on
 //! update sign DIR [--public-key FILE]       secret from BATNA_UPDATE_SECRET
-//! update verify DIR [--public-key FILE]
+//! update verify DIR [--public-key FILE] [--carried PLATFORM …]
 //! ```
 //!
 //! - `keygen` makes the Ed25519 key pair. The public half goes into the app
@@ -21,7 +21,9 @@
 //!   them, ready to upload. PLATFORM is `android-arm64`, `macos-arm64`,
 //!   `macos-x86_64` or `content` (the pack from `batna-tools packs build`).
 //! - `sign` signs `update.json` and checks the result against the public key.
-//! - `verify` runs the app's checks on a feed folder.
+//! - `verify` runs the app's checks on a feed folder. `--carried PLATFORM`
+//!   names a row `--carry` kept: its file is on the release already, not in
+//!   the folder, so only its build is checked (older than the feed's).
 //! - `channels` prints one channel per line (an alpha → alpha; a beta → alpha
 //!   and beta; a release → all three), for `scripts/update-publish.sh`.
 //! - `--previous` keeps the channel's current history (a missing file is
@@ -189,7 +191,10 @@ fn run_inner(root: &Path, args: &[String]) -> Res<String> {
         }
         Some("verify") => {
             let dir = args.get(1).filter(|a| !a.starts_with("--")).ok_or(USAGE)?;
-            let m = verify(Path::new(dir), &public_key(args)?)?;
+            let carried = values(args, "--carried")
+                .map(|p| UpdatePlatform::parse(p).ok_or_else(|| format!("unknown platform {p:?}")))
+                .collect::<Res<Vec<_>>>()?;
+            let m = verify(Path::new(dir), &public_key(args)?, &carried)?;
             Ok(format!(
                 "ok: {} {} build {}, {} file(s) match",
                 m.channel.as_str(),
@@ -368,12 +373,21 @@ pub fn sign(dir: &Path, secret_b64: &str, public: &str) -> Res<()> {
     io(&out, fs::write(&out, format!("{sig}\n")))
 }
 
-pub fn verify(dir: &Path, public: &str) -> Res<UpdateManifest> {
+/// Checks a feed folder as the app would. A `carried` platform's file stays
+/// on the release (`--carry`), so it is not in `dir`; its row must still be
+/// from an older build, or it was not carried at all.
+pub fn verify(dir: &Path, public: &str, carried: &[UpdatePlatform]) -> Res<UpdateManifest> {
     let key = parse_public_key(public).map_err(|e| e.to_string())?;
     let json = io(&dir.join(MANIFEST_FILE), fs::read(dir.join(MANIFEST_FILE)))?;
     let sig = read_text(&dir.join(SIGNATURE_FILE))?;
     let m = verify_manifest(&json, &sig, &key).map_err(|e| e.to_string())?;
-    for a in &m.assets {
+    for p in carried {
+        let a = m.asset(*p).ok_or_else(|| format!("--carried: no {} in the feed", p.as_str()))?;
+        if m.build_of(a) >= m.build {
+            return Err(format!("--carried: {} is from this build, not carried", a.file));
+        }
+    }
+    for a in m.assets.iter().filter(|a| !carried.contains(&a.platform)) {
         let path = dir.join(&a.file);
         let bytes = io(&path, fs::read(&path))?;
         check_download(a, bytes.len() as u64, &sha256_hex(&bytes)).map_err(|e| format!("{}: {e}", a.file))?;
@@ -447,11 +461,11 @@ mod tests {
         assert!(!feed.join(SIGNATURE_FILE).exists());
 
         sign(&feed, &secret, &public).unwrap();
-        assert_eq!(verify(&feed, &public).unwrap(), m);
+        assert_eq!(verify(&feed, &public, &[]).unwrap(), m);
 
         // A swapped file fails verification.
         fs::write(feed.join(&m.assets[1].file), b"something else").unwrap();
-        assert!(verify(&feed, &public).is_err());
+        assert!(verify(&feed, &public, &[]).is_err());
     }
 
     #[test]
@@ -549,6 +563,19 @@ mod tests {
             "batna-content-0.1.1-alpha.0-b45-content.pack"
         );
         assert_eq!((m.build, m.ui_build), (45, Some(40)), "the look fits the app it carries");
+
+        // The preview workflow verifies the feed it uploads: the carried APK
+        // is on the release, not in the folder (Kabar preview run 355).
+        let (pub_file, second) = (dir.path().join("k.pub"), Path::new(&second));
+        let (_, secret) = keygen(&pub_file, false).unwrap();
+        let public = fs::read_to_string(&pub_file).unwrap();
+        sign(second, &secret, &public).unwrap();
+        assert!(verify(second, &public, &[]).is_err(), "unnamed, the missing APK still fails");
+        assert_eq!(verify(second, &public, &[UpdatePlatform::AndroidArm64]).unwrap(), m);
+        assert!(
+            verify(second, &public, &[UpdatePlatform::Content]).is_err(),
+            "a row this build wrote is not carried"
+        );
     }
 
     #[test]

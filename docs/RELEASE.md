@@ -134,7 +134,9 @@ preview feed is under `content/index.yaml`, `content/hb/`, `content/lessons/`,
 `changes/`, `docs/`, a top-level `.md` or a `crates/app/**/*.css` file, CI
 builds no APK: `batna-tools update manifest --carry android-arm64` keeps the
 feed's APK entry as it is (same file, its own `build`), and only the pack is
-new; `batna-tools validate` runs before the pack is built. Apps compare an asset's own `build`, so nothing is offered for install;
+new; `batna-tools validate` runs before the pack is built, and
+`update verify --carried android-arm64` checks the feed without the APK file,
+which stays on the release. Apps compare an asset's own `build`, so nothing is offered for install;
 the pack is downloaded in the background and switched to live once Mohamed
 is between sessions (the calm moments a quiet install waits for). The sheet
 doesn't open by itself for it: a quiet card on Today names the first change

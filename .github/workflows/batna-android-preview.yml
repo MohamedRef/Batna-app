@@ -275,8 +275,11 @@ jobs:
           cargo run -q -p batna-tools -- packs build --out dist/packs
           if [ "${CONTENT_ONLY:-}" = true ]; then
             app=(--carry android-arm64)
+            # The carried APK stays on the release, so it isn't in dist/update.
+            carried=(--carried android-arm64)
           else
             app=(--asset android-arm64=dist/android/batna-preview.apk)
+            carried=()
           fi
           cargo run -q -p batna-tools -- update manifest --channel preview --version "$VERSION" \
             --build "$BATNA_BUILD" --commit "$BATNA_COMMIT" \
@@ -284,7 +287,7 @@ jobs:
             --asset content=dist/packs/batna-content.pack --out dist/update
           BATNA_UPDATE_SECRET="$(cat ~/.batna-preview-update/secret)" \
             cargo run -q -p batna-tools -- update sign dist/update --public-key ~/.batna-preview-update/key.pub
-          cargo run -q -p batna-tools -- update verify dist/update --public-key ~/.batna-preview-update/key.pub
+          cargo run -q -p batna-tools -- update verify dist/update --public-key ~/.batna-preview-update/key.pub "${carried[@]}"
           # Always there, so the artifact keeps its dist/ layout without an APK.
           echo "${CONTENT_ONLY:-false}" > dist/content-only
           ls -l dist/update

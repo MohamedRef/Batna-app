@@ -43,19 +43,13 @@ if (!window.__batnaSheetInit) {
   const shown = (el) => el.offsetHeight / vh();
   const reduced = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  // Room under the page so its last lines can scroll above the sheet.
+  // The sheet floats over the page (Mohamed, 2026-10-29: it overlays the
+  // content, it never pushes it up), so it adds no room under the page and
+  // scrolls nothing. `data-sheet` only says one is open.
   const room = () => {
-    const open = sheets().find((el) => !el.classList.contains("closing"));
-    const root = document.documentElement;
-    if (open) {
-      root.dataset.sheet = "open";
-      root.style.setProperty("--sheet-room", open.offsetHeight + "px");
-    } else {
-      delete root.dataset.sheet;
-      root.style.removeProperty("--sheet-room");
-      restore();
-      document.querySelectorAll("[data-sheet-room]").forEach((b) => delete b.dataset.sheetRoom);
-    }
+    const open = sheets().some((el) => !el.classList.contains("closing"));
+    if (open) document.documentElement.dataset.sheet = "open";
+    else delete document.documentElement.dataset.sheet;
   };
 
   const setF = (el, f, settle) => {
@@ -225,58 +219,14 @@ if (!window.__batnaSheetInit) {
   }, true);
 
   // ---- a sheet opens ----
-  // One sheet at a time; it opens at the size last left, and the chip that
-  // opened it is scrolled above it when the sheet would cover it.
-  let opener = null;
-  document.addEventListener("click", (e) => {
-    const el = e.target instanceof Element && e.target.closest("[aria-haspopup=dialog]");
-    if (el && !el.closest(".bsheet")) opener = el;
-  }, true);
-  // The chip's scrolling box (a lesson's body, the page): it gets room at
-  // its end (sheet.css) so even its last line can scroll above the sheet.
-  const scroller = (el) => {
-    for (let p = el.parentElement; p; p = p.parentElement) {
-      const o = getComputedStyle(p).overflowY;
-      if (o === "auto" || o === "scroll") return p;
-    }
-    return document.scrollingElement;
-  };
-  // Where the page was before a sheet scrolled the chip above it: closing
-  // the sheet puts it back, unless he scrolled in the meantime.
-  let back = null;
-  const reveal = (el) => {
-    const chip = opener;
-    if (!chip || !chip.isConnected) return;
-    const box = scroller(chip);
-    box.dataset.sheetRoom = "true";
-    const top = vh() - el.offsetHeight;
-    const r = chip.getBoundingClientRect();
-    if (r.bottom <= top - 12 && r.top >= 0) return; // it already shows
-    const before = box.scrollTop;
-    // Put the chip a little above the middle of what the sheet leaves.
-    box.scrollBy({ top: r.top + r.height / 2 - top * 0.45, behavior: reduced() ? "auto" : "smooth" });
-    back = { box, before, after: null };
-    const mine = back;
-    setTimeout(() => {
-      if (back === mine) mine.after = box.scrollTop;
-    }, 450);
-  };
-  const restore = () => {
-    const b = back;
-    back = null;
-    if (!b || b.after === null || Math.abs(b.box.scrollTop - b.after) > 4) return;
-    b.box.scrollTo({ top: b.before, behavior: reduced() ? "auto" : "smooth" });
-  };
+  // One sheet at a time; it opens at the size last left, over the page.
   const opened = (el) => {
     for (const other of sheets()) {
       if (other !== el) other.querySelector("[data-sheet-close]")?.click();
     }
     el.classList.toggle("sized", chosen);
     setF(el, last, false);
-    requestAnimationFrame(() => requestAnimationFrame(() => {
-      room();
-      reveal(el);
-    }));
+    requestAnimationFrame(() => room());
   };
   new MutationObserver((records) => {
     let changed = false;

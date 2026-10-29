@@ -18,13 +18,14 @@ use crate::{Screen, Ui};
 
 const CSS: Css = css!("src/pagesheet/pagesheet.css");
 
-/// The open page and the quote its chip carried.
-static OPEN: GlobalSignal<Option<(u32, Option<String>)>> = Signal::global(|| None);
+/// The open page, the quote its chip carried, and whether a quote is held
+/// back until he answers (it would give the answer away).
+static OPEN: GlobalSignal<Option<(u32, Option<String>, bool)>> = Signal::global(|| None);
 
 /// Opens the sheet for book page `page`.
-pub fn open(page: u32, quote: Option<String>) {
+pub fn open(page: u32, quote: Option<String>, held: bool) {
     document::eval("window.__batnaHover && window.__batnaHover.hide();");
-    *OPEN.write() = Some((page, quote.filter(|q| !q.trim().is_empty())));
+    *OPEN.write() = Some((page, quote.filter(|q| !q.trim().is_empty()), held));
 }
 
 pub fn close() {
@@ -74,7 +75,7 @@ pub fn page_content(lib: &Library, page: u32, hidden: impl Fn(&str) -> bool) -> 
 pub fn BookSheet() -> Element {
     let ui = use_context::<Ui>();
     let review = use_review();
-    let Some((page, chip_quote)) = OPEN.read().clone() else {
+    let Some((page, chip_quote, held)) = OPEN.read().clone() else {
         return rsx! {};
     };
     let lib = Library::get();
@@ -119,6 +120,8 @@ pub fn BookSheet() -> Element {
                         blockquote { lang: "en", dir: "ltr", "“{q}”" }
                         figcaption { class: "muted small", {tx::QUOTE_NOTE} }
                     }
+                } else if held {
+                    p { class: "bk-quote muted", {tx::QUOTE_HELD} }
                 }
                 if n + content.mcqs + content.cases > 0 {
                     p { class: "bk-made",

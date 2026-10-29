@@ -8,7 +8,6 @@ use batna_core::review::StudyStore;
 use batna_core::stats;
 use dioxus::prelude::*;
 
-use crate::content::lecture_code;
 use crate::i18n::count::{REVIEW, count};
 use crate::i18n::plan as tx;
 use crate::stats::{StudyData, charts};
@@ -554,9 +553,11 @@ pub(crate) fn DayDetail(d: DayPlan) -> Element {
     }
 }
 
-/// `["hb.L01", "hb.L02"]` → `L01, L02`.
+/// `["hb.L01", "hb.L02"]` → `Liver Cirrhosis, Non-invasive assessment…`:
+/// the lectures' real titles (their course shows where the plan is).
 pub(crate) fn lecture_list(ids: &[String]) -> String {
-    ids.iter().map(|id| lecture_code(id)).collect::<Vec<_>>().join(", ")
+    let lib = crate::content::Library::get();
+    ids.iter().map(|id| lib.title(id)).collect::<Vec<_>>().join(", ")
 }
 
 pub(crate) fn focus_label(f: Focus) -> &'static str {
@@ -590,7 +591,11 @@ mod tests {
         let d = Day::from_ymd(2027, 1, 20).unwrap();
         assert_eq!(long_date(d), "الأربع 20 يناير 2027");
         assert_eq!(short_date(d), "أربع 20 يناير");
-        assert_eq!(lecture_list(&["hb.L01".into(), "hb.L12".into()]), "L01, L12");
+        let lib = crate::content::Library::get();
+        assert_eq!(
+            lecture_list(&["hb.L01".into(), "hb.L12".into()]),
+            format!("{}, {}", lib.title("hb.L01"), lib.title("hb.L12"))
+        );
     }
 
     #[test]

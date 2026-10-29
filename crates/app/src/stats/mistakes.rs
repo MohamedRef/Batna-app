@@ -8,7 +8,6 @@ use batna_core::stats;
 use dioxus::prelude::*;
 
 use super::{SessionButton, StudyData};
-use crate::content::lecture_code;
 use crate::i18n::stats as tx;
 
 #[component]
@@ -43,9 +42,7 @@ pub fn Mistakes(data: Rc<StudyData>) -> Element {
                             let ids: Vec<String> = g.items.iter().map(|m| m.item_id.clone()).collect();
                             move |_| session(ids.clone())
                         },
-                        span { class: "num small", "{lecture_code(&g.lecture)}" }
-                        " "
-                        bdi { dir: "ltr", {crate::content::Library::get().title(&g.lecture)} }
+                        bdi { {crate::content::Library::get().crumb(&g.lecture)} }
                         span { class: "chev", aria_hidden: "true" }
                     }
                 }

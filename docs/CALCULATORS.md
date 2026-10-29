@@ -211,6 +211,58 @@ Source: Blatchford 2000; book Gastroenterology Lecture 11, p. 309
 | `hepatic_disease` | true / false (default false) | Hepatic disease |
 | `cardiac_failure` | true / false (default false) | Cardiac failure |
 
+## `anion_gap`: Anion gap
+
+Source: Book Nephrology Lecture 1, pp. 5, 9, 14
+
+| input | kind | |
+|---|---|---|
+| `na_meq_l` | number, mEq/L | Sodium |
+| `cl_meq_l` | number, mEq/L | Chloride |
+| `hco3_meq_l` | number, mEq/L | Bicarbonate (HCO3) |
+| `albumin_g_dl` | number, g/dL | Albumin; optional |
+
+## `delta_ratio`: Delta ratio (gap : gap)
+
+Source: Book Nephrology Lecture 1, pp. 12, 14
+
+| input | kind | |
+|---|---|---|
+| `anion_gap_meq_l` | number, mEq/L | Anion gap |
+| `hco3_meq_l` | number, mEq/L | Bicarbonate (HCO3) |
+
+## `expected_compensation`: Expected compensation
+
+Source: Book Nephrology Lecture 1, pp. 13–14
+
+| input | kind | |
+|---|---|---|
+| `disorder` | `metabolic_acidosis`, `metabolic_alkalosis`, `respiratory_acidosis_acute`, `respiratory_acidosis_chronic`, `respiratory_alkalosis_acute`, `respiratory_alkalosis_chronic` | Primary disorder |
+| `hco3_meq_l` | number, mEq/L | Bicarbonate (HCO3) |
+| `pco2_mm_hg` | number, mmHg | pCO2 |
+
+## `osmolal_gap`: Osmolal gap
+
+Source: Book Nephrology Lecture 1, p. 20
+
+| input | kind | |
+|---|---|---|
+| `measured_osm` | number, mOsm/kg | Measured osmolality |
+| `na_meq_l` | number, mEq/L | Sodium |
+| `glucose_mg_dl` | number, mg/dL | Glucose |
+| `bun_mg_dl` | number, mg/dL | BUN |
+
+## `cockcroft_gault`: Cockcroft-Gault creatinine clearance
+
+Source: Book Geriatrics Lecture 2, p. 30; Lecture 3, p. 42
+
+| input | kind | |
+|---|---|---|
+| `age_years` | number, years | Age |
+| `weight_kg` | number, kg | Weight |
+| `creatinine_mg_dl` | number, mg/dL | Serum creatinine |
+| `sex` | `male`, `female` | Sex |
+
 ## `incidence`: Incidence rate
 
 Source: Research L02: measures of disease frequency, slide 25

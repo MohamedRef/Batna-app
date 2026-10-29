@@ -1,0 +1,609 @@
+schema: batna.lesson/v1
+lecture: git.L08
+lessons:
+  # ------------------------------------------------------------------
+  - id: git.L08.lesson1
+    title: "الـ Celiac: العيش اللي بيعادي الأمعاء"
+    hook: "بروتين صغير في القمح بيخلّي المناعة تهاجم الـ villi. وأغلب العيانين مش بيجوا بإسهال أصلًا."
+    minutes: 8
+    pages: [234, 244]
+    topics: [celiac-epi, celiac-path, celiac-clinical]
+    goals:
+      - "تعرّف الـ celiac وتعرف مين عنده risk"
+      - "تفهم دور الـ gluten والـ HLA-DQ2/DQ8 والـ tTG"
+      - "تميّز الـ classic من الـ atypical من الـ silent"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 234
+        title: "يعني إيه celiac؟"
+        quote: "permanent dietary disorder caused by an immunologic response to gluten, a storage protein found in certain grains, that results in diffuse damage"
+        text: |
+          الـ ==celiac disease== (أو **sprue**، **celiac sprue**، **gluten enteropathy**) هو **permanent dietary disorder**: المناعة بترد على الـ **gluten** (storage protein في حبوب معينة)، فيحصل **diffuse damage** في الـ **proximal small intestine** و **malabsorption**.
+
+          وهو **أشهر genetically related food intolerance** في العالم.
+      - kind: table
+        page: 234
+        quote: "Bimodal age distribution; First 8-12 months and the Second 3rd – 4th Decade with a mean age 8.4 years."
+        title: "أرقام الـ celiac"
+        columns: [Fact, Number]
+        rows:
+          - ["Age peaks (bimodal)", "8–12 months and 3rd–4th decade"]
+          - ["Mean age", "8.4 years"]
+          - ["Sex", "Slightly more in females"]
+          - ["Prevalence in Egypt", "0.53%"]
+          - ["Children with type 1 diabetes", "5–10%"]
+          - ["First-degree relatives", "7.5% risk"]
+        hide: [[0, 1], [3, 1], [4, 1], [5, 1]]
+      - kind: aside
+        tone: tip
+        page: 234
+        quote: "Down and Turner‘s syndrome patients are also high-risk group."
+        text: |
+          الـ **high-risk groups** اللي لازم تفكّر تعملهم screening: **type 1 diabetes**، **first-degree relatives**، **Down**، و **Turner**.
+
+          افتكرها «**DDTT**»: **D**iabetes، **D**own، **T**urner، و **T**he family.
+      - kind: explain
+        page: 235
+        title: "الـ pathophysiology في 3 كلمات"
+        quote: "the enzyme tissue transglutaminase (TTG) has been discovered to be the autoantigen against which the abnormal immune response is directed"
+        text: |
+          - **Gluten**: الـ trigger الوحيد الكبير من البيئة.
+          - **HLA-DQ2** (وأقل منه **DQ8**): الأرض الجينية. الـ celiac بيحصل في **subset صغير** من الناس دول.
+          - ==tissue transglutaminase (tTG)==: الـ **autoantigen** اللي المناعة بتهاجمه. يعني ده **autoimmune disease** فعلًا.
+      - kind: figure
+        page: 235
+        quote: "Gluten is the single major environmental factor that triggers celiac disease"
+        title: "العجلة الشريرة"
+        alt: "Flow: gluten from wheat, barley and rye enters the small bowel; in an HLA-DQ2 or DQ8 person, tissue transglutaminase becomes the autoantigen; the immune attack causes intraepithelial lymphocytes, crypt hyperplasia and villous atrophy; the flat mucosa absorbs less, causing malabsorption."
+        caption: "الـ gluten بيدخل، والجسم اللي عنده **DQ2/DQ8** يهاجم الـ **tTG**، فالـ villi تتمسح والـ ==malabsorption== يبدأ. شيل الـ gluten والعجلة تقف."
+        svg: |
+          <svg viewBox="0 0 330 360" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L08a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="40" y="10" width="250" height="44" rx="8" class="fg-acc"/>
+            <text x="165" y="30" text-anchor="middle" class="t-b">Gluten</text>
+            <text x="165" y="46" text-anchor="middle" class="t-sm t-mut">wheat, barley, rye</text>
+            <path d="M165 54v22" class="fg-arrow" marker-end="url(#L08a)"/>
+            <rect x="40" y="80" width="250" height="44" rx="8" class="fg-box"/>
+            <text x="165" y="100" text-anchor="middle" class="t-b">HLA-DQ2 / DQ8 person</text>
+            <text x="165" y="116" text-anchor="middle" class="t-sm t-mut">a small, genetically susceptible subset</text>
+            <path d="M165 124v22" class="fg-arrow" marker-end="url(#L08a)"/>
+            <rect x="40" y="150" width="250" height="44" rx="8" class="fg-bad"/>
+            <text x="165" y="170" text-anchor="middle" class="t-b">Immune attack on tTG</text>
+            <text x="165" y="186" text-anchor="middle" class="t-sm">tissue transglutaminase = autoantigen</text>
+            <path d="M165 194v22" class="fg-arrow" marker-end="url(#L08a)"/>
+            <path d="M50 250 l12 -26 l12 26 l12 -26 l12 26 l12 -26 l12 26" class="fg-ink" fill="none"/>
+            <text x="50" y="268" class="t-sm t-mut">normal villi</text>
+            <path d="M180 250 h110" class="fg-ink" stroke-width="3"/>
+            <text x="180" y="268" class="t-sm t-bad t-b">flat: villous atrophy</text>
+            <text x="165" y="238" text-anchor="middle" class="t-sm">→</text>
+            <path d="M165 280v22" class="fg-arrow" marker-end="url(#L08a)"/>
+            <rect x="40" y="306" width="250" height="44" rx="8" class="fg-bad"/>
+            <text x="165" y="326" text-anchor="middle" class="t-b">Malabsorption</text>
+            <text x="165" y="342" text-anchor="middle" class="t-sm">worst proximally, where gluten is highest</text>
+          </svg>
+      - kind: explain
+        page: 235
+        title: "مش مرض أمعاء بس"
+        quote: "Celiac disease is not only dis of S.B but it‘s a multi-organ autoimmune disease."
+        text: |
+          الكتاب بيأكّد: ده **multi-organ autoimmune disease**، و ==grossly underdiagnosed==، وليه مضاعفات كبيرة.
+
+          **التقسيم:**
+          - **Symptomatic:** classical أو atypical
+          - **Asymptomatic:** **silent** (مفيش أعراض، بس antibodies positive و biopsy abnormal) أو **latent** (potential، أو celiac في remission)
+      - kind: sort
+        page: 235
+        quote: "including diarrhea, steatorrhea, weight loss, abdominal distention, weakness, muscle wasting, or growth retardation, more commonly present in infants"
+        prompt: "Classic ولا atypical؟"
+        bins: ["Classic (malabsorption)", "Atypical (extraintestinal)"]
+        cards:
+          - { text: "Steatorrhea", bin: 0 }
+          - { text: "Growth retardation in an infant", bin: 0 }
+          - { text: "Abdominal distention", bin: 0 }
+          - { text: "Iron deficiency anemia", bin: 1 }
+          - { text: "Osteoporosis", bin: 1 }
+          - { text: "Reduced fertility", bin: 1 }
+          - { text: "Depression and fatigue", bin: 1 }
+        why: "الـ **classic** = malabsorption صريح، وأشهر في الأطفال تحت سنتين. الـ **atypical** = حاجات برّه الأمعاء، وأشهر في الكبار اللي ممكن ما يبقاش عندهم أي أعراض هضمية."
+      - kind: aside
+        tone: trap
+        page: 235
+        quote: "Manyadults have minimal or no gastrointestinal symptoms but present with extraintestinal ―atypical‖manifestations"
+        text: |
+          فخ الامتحان: ست عندها **iron deficiency anemia** مش بتتحسن على الحديد، ومفيش إسهال. ما تقولش «مش celiac علشان مفيش إسهال».
+
+          كتير من الكبار **minimal or no GI symptoms**، وبيجوا بـ anemia أو osteoporosis أو infertility. والـ presentation بيتحرك ناحية الـ **atypical والـ asymptomatic**.
+      - kind: figure
+        page: 244
+        quote: "Figure 1: Dermatitis herpetiformis."
+        title: "Dermatitis herpetiformis"
+        image: { file: git/L08-dermatitis-herpetiformis.webp, book: true }
+        alt: "Two skin photos: excoriated red papules and crusts over both buttocks, and a close-up of grouped vesicles and erosions."
+        caption: "Figure 1 من الكتاب: ==dermatitis herpetiformis== على الـ buttocks، و vesicles متجمّعة. ده **pathognomonic** للـ celiac."
+      - kind: explain
+        page: 235
+        title: "الجلد والأعصاب"
+        quote: "Skin manifestations in the form of dermatitis herpetiformis which is pathognomonic to celiac disease."
+        text: |
+          **Dermatitis herpetiformis**: ==pathognomonic==. **Symmetric**، **intensely pruritic** vesicles و crusts و erosions، **متجمّعة**، على الـ **extensor** surfaces: elbows، knees، buttocks، shoulders، scalp.
+
+          **الأعصاب:** ataxia، fits، peripheral neuropathy.
+      - kind: check
+        page: 236
+        quote: "villous atrophy; symptoms of malabsorption and resolution of the mucosal lesions and symptoms upon withdrawal of gluten-containing foods"
+        question: "Which is NOT one of the three features of the classic definition of celiac disease?"
+        options:
+          - "Positive HLA-DQ2"
+          - "Villous atrophy"
+          - "Symptoms of malabsorption"
+          - "Resolution on gluten withdrawal"
+        answer: 0
+        why:
+          - "صح: الـ HLA مش جزء من التعريف الكلاسيكي؛ هو negative test بيستبعد."
+          - "دي أول feature."
+          - "دي التانية."
+          - "دي التالتة، وبتحصل خلال أسابيع لشهور."
+      - kind: try
+        items: [git.L08.001, git.L08.006, git.L08.009, git.L08.016, git.L08.021]
+    recap:
+      - "Celiac = permanent immune response للـ gluten، damage في الـ proximal small bowel."
+      - "Bimodal: 8–12 شهر و 3–4 عقد؛ مصر 0.53%؛ T1DM 5–10%؛ الأقارب 7.5%؛ Down و Turner."
+      - "Gluten + HLA-DQ2/DQ8 + autoantigen tTG."
+      - "Classic في الأطفال، atypical في الكبار (anemia، osteoporosis، infertility)."
+      - "Dermatitis herpetiformis pathognomonic."
+    practice: [git.L08.001, git.L08.002, git.L08.003, git.L08.004, git.L08.005, git.L08.006, git.L08.007, git.L08.008, git.L08.009, git.L08.010, git.L08.011, git.L08.012, git.L08.013, git.L08.014, git.L08.015, git.L08.016, git.L08.017, git.L08.018, git.L08.019, git.L08.020, git.L08.021, git.L08.022]
+  # ------------------------------------------------------------------
+  - id: git.L08.lesson2
+    title: "تشخيص الـ celiac: الدم، الجينات، والـ biopsy"
+    hook: "tTG، IgA، DGP، DQ2، Marsh... كلها حروف، بس ورا كل واحدة سؤال امتحان."
+    minutes: 10
+    pages: [236, 245]
+    topics: [celiac-serology, celiac-biopsy]
+    goals:
+      - "تختار الـ serology الصح، وخصوصًا في الـ IgA deficiency"
+      - "تعرف فايدة الـ HLA typing"
+      - "تكتب Marsh classification كاملة (سؤال كتاب)"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 236
+        title: "القاعدة الذهبية"
+        quote: "All testing should be performed while patients are on a gluten-rich diet."
+        text: |
+          كل التحاليل لازم تتعمل والعيان ==on a gluten-rich diet==. لو بطّل gluten قبلها، الـ antibodies تنزل والـ villi تتصلح، والنتيجة تطلع negative كدب.
+
+          ومفيش test واحد بيشخّص لوحده. التشخيص بيعتمد على:
+          - clinical picture
+          - **serology**
+          - **small bowel biopsy**
+          - **response to gluten-free diet**
+
+          والـ CBC: أي نوع anemia، وأشهرها **iron deficiency**.
+      - kind: explain
+        page: 237
+        title: "الـ serology"
+        quote: "Tissue transglutaminase tTG IgA, Endomysial antibody EMA Ig A are useful and have reported sensitivities of 90–98% and specificities of 90–98%"
+        text: |
+          - ==tTG IgA== و **EMA IgA**: sensitivity و specificity **90–98%**، وهما الـ **initial screening**.
+          - بيطلعوا **false negative** لو عنده **IgA deficiency** ← اعمل **serum IgA**.
+          - لو IgA deficient ← **tTG IgG** و **EMA IgG**، والأحسن **IgG anti-DGP** (anti-deamidated gliadin peptide): **test of choice** في الـ IgA deficiency.
+      - kind: figure
+        page: 237
+        quote: "They give false negative results if the patient has Ig A deficiency that can be confirmed by serum IgA assay."
+        title: "شجرة الـ serology"
+        alt: "Flowchart. Suspected celiac on a gluten-rich diet: tTG IgA (or EMA IgA) plus total serum IgA. If IgA is normal, a positive tTG IgA goes to at least 6 duodenal biopsies. If IgA is deficient, order IgG anti-DGP (test of choice) or tTG IgG / EMA IgG, then biopsies if positive."
+        caption: "اطلب دايمًا **total IgA** مع الـ tTG IgA. لو الـ IgA واطي، الـ tTG IgA مالوش قيمة واطلب ==IgG anti-DGP==."
+        svg: |
+          <svg viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L08b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="35" y="5" width="260" height="44" rx="8" class="fg-acc"/>
+            <text x="165" y="24" text-anchor="middle" class="t-b">Suspected celiac, on gluten</text>
+            <text x="165" y="41" text-anchor="middle" class="t-sm">tTG IgA (or EMA IgA) + total serum IgA</text>
+            <path d="M110 49 L75 90" class="fg-arrow" marker-end="url(#L08b)"/>
+            <path d="M220 49 L255 90" class="fg-arrow" marker-end="url(#L08b)"/>
+            <text x="88" y="70" text-anchor="end" class="t-sm t-mut">IgA normal</text>
+            <text x="242" y="70" class="t-sm t-mut">IgA deficient</text>
+            <rect x="5" y="93" width="150" height="70" rx="8" class="fg-box"/>
+            <text x="80" y="115" text-anchor="middle" class="t-sm t-b">Read tTG IgA</text>
+            <text x="80" y="133" text-anchor="middle" class="t-sm">sens and spec</text>
+            <text x="80" y="150" text-anchor="middle" class="t-sm">90–98%</text>
+            <rect x="175" y="93" width="150" height="70" rx="8" class="fg-bad"/>
+            <text x="250" y="115" text-anchor="middle" class="t-sm t-b">IgG anti-DGP</text>
+            <text x="250" y="133" text-anchor="middle" class="t-sm">test of choice</text>
+            <text x="250" y="150" text-anchor="middle" class="t-sm t-mut">(or tTG IgG, EMA IgG)</text>
+            <path d="M80 163 L150 210" class="fg-arrow" marker-end="url(#L08b)"/>
+            <path d="M250 163 L180 210" class="fg-arrow" marker-end="url(#L08b)"/>
+            <text x="165" y="196" text-anchor="middle" class="t-sm t-mut">positive</text>
+            <rect x="35" y="214" width="260" height="56" rx="8" class="fg-good"/>
+            <text x="165" y="236" text-anchor="middle" class="t-b">Upper endoscopy</text>
+            <text x="165" y="256" text-anchor="middle" class="t-sm">at least 6 duodenal biopsies</text>
+            <text x="165" y="300" text-anchor="middle" class="t-sm t-mut">HLA-DQ2/DQ8 negative = celiac excluded</text>
+          </svg>
+      - kind: check
+        page: 237
+        quote: "IgG anti- DGP has higher sensitivity and specificity than IgG antiTGA and is the serological test of choice in IgA-deficient individuals"
+        question: "Suspected celiac, tTG IgA negative, total IgA undetectable. Next test?"
+        options:
+          - "IgG anti-DGP"
+          - "EMA IgA"
+          - "Repeat tTG IgA"
+          - "Stool fat"
+        answer: 0
+        why:
+          - "صح: test of choice في الـ IgA deficiency."
+          - "دي كمان IgA، فهتطلع negative."
+          - "نفس المشكلة: IgA test في عيان IgA deficient."
+          - "الـ stool fat بيقيس malabsorption عمومًا، مش celiac."
+      - kind: explain
+        page: 237
+        title: "الجينات: test بيستبعد"
+        quote: "The HLA-DQ2 test picks up 95%, and the HLA-DQ8 another 5% of patients. The negative predictive value for both tests is higher than 99%."
+        text: |
+          - **HLA-DQ2** موجود في **95%**، و **DQ8** في الـ **5%** الباقيين.
+          - الـ **negative predictive value** أكتر من ==99%==.
+          - يعني لو الاتنين **negative** ← الـ celiac **effectively excluded**.
+          - بس مش routine لكل عيان، لأن ناس كتير عندها DQ2 ومش celiac.
+      - kind: reveal
+        page: 237
+        quote: "It is good negative test not used as a routine for every patient has or suspected to have celiac disease."
+        prompt: "ليه الـ HLA-DQ2 positive ما يشخّصش celiac، بس الـ negative يستبعده؟"
+        answer: |
+          لأن الـ DQ2/DQ8 **شرط** للمرض، بس مش **كفاية**: الكتاب بيقول الـ celiac بيحصل في **small subset** بس من الناس اللي عندهم الجينات دي.
+
+          فلو الجين مش موجود، المرض مستحيل تقريبًا (NPV >99%). ولو موجود، ده مجرد إن الأرض مستعدة.
+      - kind: explain
+        page: 237
+        title: "المنظار والـ biopsy"
+        quote: "Upper endoscopy with at least 6 duodenal biopsies is considered the criterion standard"
+        text: |
+          في المنظار بتشوف تغييرات في حوالي **30%** بس: decreased folds، **mosaic pattern**، **scalloping** of duodenal folds، أو total villous atrophy.
+
+          ==Upper endoscopy with at least 6 duodenal biopsies== = **criterion standard**.
+
+          الـ villous atrophy مش specific: بتحصل في أمراض تانية كتير (SIBO، Crohn، giardiasis، lymphoma، tropical sprue، olmesartan، Whipple، CVID...).
+      - kind: figure
+        page: 244
+        quote: "A: Duodenal bulb, mucosal nodularity/mosaic pattern."
+        title: "شكل الـ duodenum في المنظار"
+        image: { file: git/L08-celiac-duodenum-endoscopy.webp, book: true }
+        alt: "Four endoscopy views of the duodenum: A, nodular mosaic bulb mucosa; B, flat mucosa with total villous atrophy under water immersion; C, scalloped folds with fissures; D, patchy atrophy."
+        caption: "Figure 2: (A) **mosaic pattern**، (B) **total villous atrophy**، (C) ==scalloping== of folds، (D) patchy atrophy."
+      - kind: explain
+        page: 238
+        title: "الـ histology: 4 علامات"
+        quote: "Increased numbers of intraepithelial lymphocytes (IELs). 2. Decreased enterocyte height, 3. Villous atrophy. 4. Crypt hyperplasia."
+        text: |
+          الـ celiac lesion الكامل فيه:
+          - ==increased IELs== (intraepithelial lymphocytes)
+          - **decreased enterocyte height**
+          - **villous atrophy**
+          - **crypt hyperplasia**
+
+          الـ villi بتقصر والـ crypts بتطول علشان تعوّض، فالـ mucosa كلها تبان flat بس سُمكها مش قليل.
+      - kind: figure
+        page: 245
+        quote: "biopsies in active celiac disease with villous atrophy, interaepithelial lymphocytes and crypt hyperplasia"
+        title: "طبيعي ضد celiac"
+        image: { file: git/L08-celiac-histology.webp, book: true }
+        alt: "Small bowel histology: left, active celiac disease with flattened villi, long crypts and dense lymphocytes; right top, normal tall finger-like villi; right bottom, flat mucosa with crypt hyperplasia."
+        caption: "Figure 3: الـ villi الطبيعية زي الصوابع، وفي الـ celiac اتمسحت (**villous atrophy**) والـ crypts طولت (**crypt hyperplasia**) مع ==intraepithelial lymphocytes==."
+      - kind: table
+        page: 238
+        quote: "Stage 1 - Increased percentage of intraepithelial lymphocytes (>30%)"
+        title: "Marsh classification"
+        columns: [Stage, Biopsy]
+        rows:
+          - ["0", "Normal"]
+          - ["1", "IELs >30%"]
+          - ["2", "Inflammation + crypt proliferation, villi preserved"]
+          - ["3", "Villous atrophy: A mild, B moderate, C subtotal–total"]
+          - ["4", "Total mucosal hypoplasia"]
+        hide: [[1, 1], [2, 1], [3, 1], [4, 1]]
+      - kind: mnemonic
+        page: 238
+        quote: "Duodenal biopsies can be graded into the following 5 stages"
+        word: "NICAH"
+        parts:
+          - { key: "N", text: "0: Normal" }
+          - { key: "I", text: "1: IELs above 30%" }
+          - { key: "C", text: "2: Crypt proliferation, villi preserved" }
+          - { key: "A", text: "3: Atrophy of villi (A mild, B moderate, C subtotal to total)" }
+          - { key: "H", text: "4: Hypoplasia, total mucosal" }
+        hook: "**نيكاه**: N → I → C → A → H. مراحل الـ duodenal biopsies الخمسة، كل مرحلة بتضيف خطوة: lymphocytes الأول، بعدين crypts، بعدين الـ villi تقع، وفي الآخر الـ mucosa كلها hypoplastic."
+      - kind: aside
+        tone: exam
+        page: 238
+        quote: "The severity of histologic changes in the small bowel does not necessarily correlate with the severity of clinical manifestations."
+        text: |
+          نقطتين بيحبّوهم:
+          - شدة الـ histology **مش لازم** تماشي شدة الأعراض.
+          - الـ damage أشد **proximally**، لأن الـ gluten أكتر هناك.
+
+          وللمتابعة: **quantitative histology** (villous height، crypt depth، IELs/100 enterocytes) هي الأدق.
+      - kind: try
+        items: [git.L08.026, git.L08.028, git.L08.029, git.L08.034, git.L08.037]
+    recap:
+      - "كل التحاليل on gluten."
+      - "tTG IgA و EMA IgA (90–98%) للـ screening، مع total IgA. IgA deficient ← IgG anti-DGP."
+      - "DQ2 95%، DQ8 5%، NPV >99%: الـ negative بيستبعد."
+      - "≥6 duodenal biopsies = criterion standard. الـ villous atrophy مش specific."
+      - "Marsh **NICAH**: 0 normal، 1 IELs >30%، 2 crypts، 3 atrophy A/B/C، 4 hypoplasia."
+    practice: [git.L08.023, git.L08.024, git.L08.025, git.L08.026, git.L08.027, git.L08.028, git.L08.029, git.L08.030, git.L08.031, git.L08.032, git.L08.033, git.L08.034, git.L08.035, git.L08.036, git.L08.037, git.L08.038, git.L08.039, git.L08.040, git.L08.041, git.L08.042, git.L08.043, git.L08.085, git.L08.087]
+  # ------------------------------------------------------------------
+  - id: git.L08.lesson3
+    title: "العلاج: من غير عيش، ولو ما اتحسنش؟"
+    hook: "الـ gluten-free diet سهلة على الورق وصعبة في السوبر ماركت. وعيان مش بيتحسن له 9 أسباب."
+    minutes: 8
+    pages: [238, 239]
+    topics: [celiac-treatment]
+    goals:
+      - "تعرف إيه الممنوع وإيه المسموح"
+      - "ترتّب أسباب الـ nonresponse"
+      - "تعرف المضاعفات وعلاج الـ refractory"
+    status: unverified
+    steps:
+      - kind: sort
+        page: 239
+        quote: "Avoid all wheat, barley, rye, and oat gluten Rice, corn, millet, potato, buckwheat, and soybeans are safe."
+        prompt: "ممنوع ولا مسموح؟"
+        bins: ["Avoid", "Safe"]
+        cards:
+          - { text: "Wheat", bin: 0 }
+          - { text: "Barley", bin: 0 }
+          - { text: "Rye", bin: 0 }
+          - { text: "Oats", bin: 0 }
+          - { text: "Rice", bin: 1 }
+          - { text: "Corn", bin: 1 }
+          - { text: "Potato", bin: 1 }
+          - { text: "Buckwheat", bin: 1 }
+        why: "الكتاب: **avoid wheat, barley, rye and oat gluten**. المسموح: rice، corn، millet، potato، **buckwheat** (رغم اسمه wheat هو مش قمح)، و soybeans."
+      - kind: mnemonic
+        page: 239
+        quote: "Avoid all wheat, barley, rye, and oat gluten"
+        word: "BROW"
+        parts:
+          - { key: "B", text: "Barley" }
+          - { key: "R", text: "Rye" }
+          - { key: "O", text: "Oats" }
+          - { key: "W", text: "Wheat" }
+        hook: "عيان الـ celiac لو أكل **BROW** هيكشّر حواجبه (brow). شعير، rye، شوفان، قمح."
+      - kind: update
+        page: 239
+        quote: "Avoid all wheat, barley, rye, and oat gluten"
+        text: "ACG 2023 بتسمح بالـ **pure, uncontaminated oats** بكميات معتدلة لأغلب عيانين الـ celiac. الكتاب بيمنع الـ wheat والـ barley والـ rye والـ oats، وده جواب الامتحان."
+        ref: "ACG celiac disease guideline 2023"
+      - kind: explain
+        page: 239
+        title: "باقي الـ initial treatment"
+        quote: "Read all labels of processed foods; be suspicious of all additives. such as hydrolyzed vegetable protein."
+        text: |
+          - **اقرا كل labels** في الأكل المصنّع، وشك في الـ additives زي ==hydrolyzed vegetable protein==.
+          - **قلّل الألبان** لحد ما الإسهال يروح.
+          - **عوّض النواقص**: calcium، iron، folate، vitamins.
+          - **Pneumococcal vaccine** لو فيه **hyposplenism**.
+      - kind: reveal
+        page: 239
+        quote: "Limit intake of dairy products until diarrhea disappears."
+        prompt: "ليه نقلّل اللبن في الأول بس، مش طول العمر؟"
+        answer: "الـ lactase موجود على قمة الـ villi. لما الـ villi تتمسح، بيحصل **secondary lactase deficiency** مؤقت. أول ما الـ mucosa تتصلح على الـ GFD، الـ lactase يرجع. (التفسير فسيولوجي؛ الكتاب بيقول limit الـ dairy products لحد ما الـ diarrhea يروح.)"
+      - kind: explain
+        page: 238
+        title: "مش بيتحسن على الـ GFD؟"
+        quote: "Considerations in patients unresponsive to a gluten-free diet: Poor dietary compliance"
+        text: |
+          الكتاب بيدّي 9 احتمالات، وأولهم أهمهم:
+          - ==poor dietary compliance==
+          - coexistent **IBS**
+          - **microscopic colitis**
+          - **primary lactase deficiency**
+          - **SIBO**
+          - **olmesartan** enteropathy
+          - **autoimmune enteropathy**
+          - **lymphoma**
+          - **refractory celiac disease**
+      - kind: aside
+        tone: joke
+        page: 238
+        quote: "Poor dietary compliance"
+        text: |
+          العيان: «والله يا دكتور ما بكلش عيش خالص.»
+
+          انت: «طب والكشري؟ 🍝 والمكرونة؟ والبسكوت مع الشاي؟»
+
+          العيان: «...دي مش عيش.»
+
+          علشان كده **poor compliance** أول سبب، والـ **dietitian** صاحبك.
+      - kind: check
+        page: 239
+        quote: "The treatment can be started by budesonide, oral steroid, and then immune suppressant as azathioprine for maintenance."
+        question: "Refractory celiac disease is confirmed after excluding other causes. Treatment?"
+        options:
+          - "Budesonide or oral steroids, then azathioprine for maintenance"
+          - "Antibiotics for 7–10 days"
+          - "Stop the gluten-free diet"
+          - "Ceftriaxone then TMP-SMX"
+        answer: 0
+        why:
+          - "صح: ده كلام الكتاب بالظبط."
+          - "ده علاج الـ SIBO، وهو سبب لازم تستبعده قبل ما تقول refractory."
+          - "الـ GFD مستمر طول العمر."
+          - "ده علاج الـ Whipple."
+      - kind: explain
+        page: 239
+        title: "الـ latent والمضاعفات"
+        quote: "Patients with latent CD are currently not advised to be on a GFD but should continue to be monitored"
+        text: |
+          **Latent celiac:** مش بنحطه على GFD دلوقتي، بس **نتابعه** ونعمل **rebiopsy** لو ظهرت أعراض، و **multiple biopsies** لأن التغييرات ممكن تبقى patchy.
+
+          **المضاعفات (malignancy):**
+          - ==adenocarcinoma==: oropharynx، esophagus، pancreas، small and large bowel، hepatobiliary
+          - **T-cell lymphoma**
+          - **non-Hodgkin lymphoma**
+      - kind: try
+        items: [git.L08.044, git.L08.048, git.L08.049, git.L08.053]
+    recap:
+      - "Avoid **BROW**: barley، rye، oats، wheat. Safe: rice، corn، millet، potato، buckwheat، soy."
+      - "اقرا الـ labels، قلّل الألبان مؤقتًا، عوّض النواقص، pneumococcal لو hyposplenism."
+      - "Nonresponse: أولًا compliance، وبعدين IBS، microscopic colitis، lactase، SIBO، olmesartan، autoimmune، lymphoma، refractory."
+      - "Refractory: budesonide/steroid ثم azathioprine."
+      - "Latent: متابعة من غير GFD. المضاعفات: adenocarcinomas و T-cell / NHL lymphoma."
+    practice: [git.L08.044, git.L08.045, git.L08.046, git.L08.047, git.L08.048, git.L08.049, git.L08.050, git.L08.051, git.L08.052, git.L08.053, git.L08.054, git.L08.055]
+  # ------------------------------------------------------------------
+  - id: git.L08.lesson4
+    title: "Whipple، البكتيريا الزيادة، والأمعاء القصيرة"
+    hook: "مفاصل بتوجع سنين قبل الإسهال، بكتيريا ساكنة في المكان الغلط، وأمعاء اتشال نصها: باقي أسباب الـ malabsorption."
+    minutes: 10
+    pages: [240, 244]
+    topics: [whipple, sibo, sprue-sbs]
+    goals:
+      - "تشخّص وتعالج الـ Whipple"
+      - "تعرف أسباب وتشخيص وعلاج الـ SIBO"
+      - "تفهم ليه الـ ileum أهم من الـ jejunum"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 240
+        title: "Whipple: المفاصل الأول"
+        quote: "Arthralgias or a migratory, nondeforming arthritis occurs in 80% and is typically the first symptom experienced."
+        text: |
+          ==Whipple disease==: multisystem infection بالـ **Tropheryma whipplei**، أكتر في **White men** في العقد **4–6**. مفيش عدوى من إنسان لإنسان.
+
+          - **Arthralgia / migratory nondeforming arthritis**: **80%**، وغالبًا **أول عَرَض**.
+          - **GI symptoms**: حوالي **75%** (ألم، إسهال، malabsorption، steatorrhea).
+          - **Weight loss**: أشهر presenting symptom، تقريبًا كلهم.
+          - **Protein-losing enteropathy** ← hypoalbuminemia و edema.
+          - **Neuro** في حوالي **10%**: fits، dementia، nystagmus، ophthalmoplegia.
+          - الكشف: low-grade fever، **lymphadenopathy 50%**، murmurs، hypotension متأخر.
+      - kind: explain
+        page: 240
+        title: "التشخيص والعلاج"
+        quote: "infiltration of the lamina propria with PAS-positive macrophages that contain gram-positive bacilli (which are not acid-fast) and dilation of the lacteals"
+        text: |
+          **Duodenal biopsy** بيشخّص **90%**: الـ lamina propria مليانة ==PAS-positive macrophages== فيها **gram-positive bacilli** (**not acid-fast**)، و **dilated lacteals**.
+
+          الباقي: **PCR** أو **immunohistochemistry** على biopsy أو CSF أو synovial fluid أو lymph node أو endocardium. و **CSF** يتعمل routine.
+
+          **العلاج:** **ceftriaxone 1 g IV twice daily** أو **meropenem 1 g IV TDS** لمدة **أسبوعين**، وبعدين **TMP-SMX 160/800 twice daily لمدة 12 شهر** (سنة على الأقل لأن الـ recurrence عالي). وتابع بـ biopsy و CSF PCR كل **6 شهور** لمدة سنة على الأقل.
+      - kind: aside
+        tone: tip
+        page: 240
+        quote: "Whipple disease is a rare multisystem illness, caused by infection with the bacillus Tropheryma whipplei."
+        text: |
+          افتكر **Whipple** بـ «**W**hite **W**eight-losing man **W**ith **W**obbly joints»: راجل أبيض في الأربعينات أو الخمسينات، مفاصله بتوجع من سنين، وبعدين خس وجاله إسهال.
+      - kind: check
+        page: 241
+        quote: "Prolonged treatment for at least 1 year is required due to high rate of recurrence."
+        question: "Why is Whipple disease treated for a full year after IV induction?"
+        options:
+          - "High rate of recurrence"
+          - "The bacteria are acid-fast"
+          - "TMP-SMX works only after a year"
+          - "To prevent human-to-human spread"
+        answer: 0
+        why:
+          - "صح: الكتاب بيقول كده صريح."
+          - "الـ bacilli **not acid-fast**."
+          - "مش ده السبب؛ التحسن بيحصل dramatically في أسابيع."
+          - "مفيش human-to-human spread متسجل أصلًا."
+      - kind: explain
+        page: 241
+        title: "SIBO: البكتيريا في المكان الغلط"
+        quote: "Deconjugation of bile salt by bacteria. Bacteria produce toxic products, leading to mucosal damage."
+        text: |
+          الـ small bowel طبيعي فيه بكتيريا قليلة. لما تكتر، بتعمل ==malabsorption== بـ:
+          - **deconjugation of bile salts**
+          - **toxic products** تبوّظ الـ mucosa
+          - الـ CHO والـ bile acids يوصلوا القولون ← **diarrhea**
+          - البكتيريا **تاكل** المغذيات زي **vitamin B12**
+          - gram-negative aerobes تبوّظ الـ CHO metabolism
+      - kind: figure
+        page: 242
+        quote: "Small intestine motility disorders (vagotomy, systemic sclerosis, diabetic enteropathy, chronic intestinal pseudo- obstruction)"
+        title: "أسباب الـ SIBO: 4 بوابات"
+        alt: "A small bowel tube with four labelled problems: low stomach acid from achlorhydria or PPIs at the entrance; stagnant loops such as a Billroth II afferent limb, diverticula, obstruction or blind loop; slow motility from vagotomy, systemic sclerosis, diabetes or pseudo-obstruction; and a fistula letting colonic bacteria in, from Crohn, cancer or surgery."
+        caption: "البكتيريا بتكتر لو: **الحمض قل** (PPI)، أو **الأمعاء ركدت** (loop أو diverticula)، أو **الحركة بطّأت** (diabetes، scleroderma)، أو **فيه fistula** من القولون. وكمان أشهر في ==older patients==."
+        svg: |
+          <svg viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg">
+            <rect x="120" y="10" width="90" height="40" rx="12" class="fg-box"/>
+            <text x="165" y="35" text-anchor="middle" class="t-sm t-b">Stomach</text>
+            <path d="M165 50 C 60 70, 60 120, 165 130 C 270 140, 270 190, 165 200 C 60 210, 60 260, 165 270" class="fg-ink" fill="none" stroke-width="12"/>
+            <rect x="5" y="20" width="105" height="58" rx="6" class="fg-acc"/>
+            <text x="12" y="38" class="t-sm t-b">1 Achlorhydria</text>
+            <text x="12" y="54" class="t-sm">incl. PPI therapy</text>
+            <rect x="220" y="80" width="105" height="74" rx="6" class="fg-bad"/>
+            <text x="227" y="98" class="t-sm t-b">2 Stagnation</text>
+            <text x="227" y="114" class="t-sm">Billroth II loop,</text>
+            <text x="227" y="130" class="t-sm">diverticula, blind</text>
+            <text x="227" y="146" class="t-sm">loop, obstruction</text>
+            <rect x="5" y="150" width="105" height="74" rx="6" class="fg-bad"/>
+            <text x="12" y="168" class="t-sm t-b">3 Dysmotility</text>
+            <text x="12" y="184" class="t-sm">vagotomy, SSc,</text>
+            <text x="12" y="200" class="t-sm">diabetes,</text>
+            <text x="12" y="216" class="t-sm">pseudo-obstr.</text>
+            <rect x="220" y="230" width="105" height="90" rx="6" class="fg-bad"/>
+            <text x="227" y="248" class="t-sm t-b">4 Fistula</text>
+            <text x="227" y="264" class="t-sm">gastrocolic or</text>
+            <text x="227" y="280" class="t-sm">coloenteric:</text>
+            <text x="227" y="296" class="t-sm">Crohn, cancer,</text>
+            <text x="227" y="312" class="t-sm">surgery</text>
+            <rect x="120" y="285" width="90" height="34" rx="10" class="fg-box"/>
+            <text x="165" y="307" text-anchor="middle" class="t-sm t-b">Colon</text>
+          </svg>
+      - kind: explain
+        page: 242
+        title: "تشخيص وعلاج الـ SIBO"
+        quote: "Following ingestion of glucose 75 g or lactulose 10 g, a rise in exhaled breath hydrogen or methane within 90 minutes"
+        text: |
+          **الأعراض** nonspecific: bloating، flatulence، pain، diarrhea، وأحيانًا steatorrhea. فكّر فيه لو فيه سبب زي **GI surgery قديمة**.
+
+          - **Firm diagnosis:** aspirate و culture من الـ distal duodenum: **>10³ organisms/mL**، بس invasive.
+          - **Breath test** (hydrogen أو methane): **glucose 75 g** أو **lactulose 10 g**، وارتفاع خلال ==90 minutes==. agreement مع الـ culture **65%**.
+          - **Small bowel study** (CTE، MRE، barium) يدوّر على mechanical cause.
+          - عمليًا الأفضل: **empiric antibiotic trial** (تشخيص وعلاج).
+
+          **العلاج:** **7–10 days** broad-spectrum antibiotic (ciprofloxacin، norfloxacin، **rifaximin**، metronidazole) بيحسّن **لحد 90%** لأسابيع أو شهور، وعالج السبب.
+      - kind: match
+        page: 243
+        quote: "Treatment: 2 months antibiotics with folic acid and vitamin B12 supplement."
+        prompt: "وصّل كل مرض بعلاجه:"
+        pairs:
+          - ["SIBO", "Broad-spectrum antibiotic for 7–10 days"]
+          - ["Tropical sprue", "2 months of antibiotics with folic acid and B12"]
+          - ["Whipple disease", "IV ceftriaxone 2 weeks, then TMP-SMX 12 months"]
+          - ["Celiac disease", "Lifelong gluten-free diet"]
+          - ["Refractory celiac", "Budesonide or steroids, then azathioprine"]
+        why: "المدة بتزيد مع عناد المرض: الـ SIBO أسبوع، الـ tropical sprue شهرين، والـ Whipple سنة لأن الـ recurrence عالي."
+      - kind: explain
+        page: 243
+        title: "Tropical sprue و short bowel"
+        quote: "The jejunum function can all be performed by ileum if intact but the reverse is not true."
+        text: |
+          **Tropical sprue:** **coliforms** بتكتر في الـ jejunum وتطلّع **enterotoxin** ← villous atrophy و malabsorption. العلاج: **antibiotics شهرين + folic acid + B12**.
+
+          **Short bowel syndrome:** absolute أو relative، وبيعتمد على **الطول اللي راح**، و **المكان**، وحالة الباقي.
+          - ==الـ ileum يقدر يعمل شغل الـ jejunum==، بس العكس **لأ**.
+          - ضياع الـ **TI** ← **B12 deficiency** و **bile salt malabsorption** ← steatorrhea، و **calcium oxalate stones** لو الـ colon سليم.
+          - **Congenital:** midgut volvulus، omphalocele، jejunoileal atresia، congenital short bowel.
+          - **Acquired:** surgical resection، ischemia، radiation enteritis، Crohn enteritis.
+      - kind: reveal
+        page: 243
+        quote: "Calcium oxalate stones occur if the colon is intact (How?)."
+        prompt: "الكتاب سأل «How?»: ليه الـ oxalate stones بتحصل بس لو الـ colon سليم؟"
+        answer: |
+          الدهون اللي ما اتمصتش بتمسك الـ **calcium** في الـ lumen، فالـ **oxalate** يفضل حر. والـ oxalate الحر ده بيتمص من **الـ colon**.
+
+          لو الـ colon مش موجود، مفيش مكان يتمص منه، فمفيش زيادة oxalate في البول. (نفس الآلية في L06 الـ Crohn.)
+      - kind: try
+        items: [git.L08.063, git.L08.065, git.L08.069, git.L08.076, git.L08.081]
+    recap:
+      - "Whipple: T. whipplei، رجالة بيض 40–60، arthralgia أول عَرَض (80%)، weight loss أشهر؛ PAS-positive macrophages."
+      - "Whipple Rx: ceftriaxone أو meropenem أسبوعين ثم TMP-SMX 12 شهر؛ متابعة كل 6 شهور."
+      - "SIBO: achlorhydria، stagnation، dysmotility، fistula. Breath test 90 min؛ aspirate >10³."
+      - "SIBO Rx: 7–10 days (rifaximin...) يحسّن لحد 90%. Tropical sprue: شهرين + folate + B12."
+      - "الـ ileum يعوّض الـ jejunum مش العكس. TI ← B12، steatorrhea، oxalate stones لو الـ colon سليم."
+    practice: [git.L08.056, git.L08.057, git.L08.058, git.L08.059, git.L08.060, git.L08.061, git.L08.062, git.L08.063, git.L08.064, git.L08.065, git.L08.066, git.L08.067, git.L08.068, git.L08.069, git.L08.070, git.L08.071, git.L08.072, git.L08.073, git.L08.074, git.L08.075, git.L08.076, git.L08.077, git.L08.078, git.L08.079, git.L08.080, git.L08.081, git.L08.082, git.L08.083, git.L08.084, git.L08.086, git.L08.088]

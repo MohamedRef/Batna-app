@@ -137,6 +137,8 @@ impl SettingsNav {
 #[component]
 pub fn SettingsSheet() -> Element {
     let nav = use_context::<SettingsNav>();
+    // The Updates row says where things stand, not only what it holds.
+    let updates = crate::update::view::use_update_status();
     // Escape steps back out of a section on the phone, else closes. Listened
     // for on the document: WebKit doesn't focus buttons on click.
     use_future(move || async move {
@@ -219,7 +221,12 @@ pub fn SettingsSheet() -> Element {
                             span { class: "row-icon", aria_hidden: "true", {crate::icons::section(s.id())} }
                             span { class: "ss-text",
                                 span { class: "ss-title", {s.title()} }
-                                span { class: "ss-sub", {s.summary()} }
+                                span { class: "ss-sub",
+                                    match updates.read().as_ref().filter(|_| s == Section::Updates).and_then(crate::update::view::summary) {
+                                        Some(live) => rsx! { "{live}" },
+                                        None => rsx! { {s.summary()} },
+                                    }
+                                }
                             }
                         }
                     }

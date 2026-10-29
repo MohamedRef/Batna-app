@@ -337,6 +337,27 @@ pub fn UpdatesSection() -> Element {
     }
 }
 
+/// The Settings list's line for Updates: what is going on, or when it last
+/// looked. `None` keeps the section's own summary (updates off, never looked).
+pub fn summary(s: &Status) -> Option<String> {
+    if s.off.is_some() {
+        return None;
+    }
+    let line = match &s.phase {
+        Phase::Checking => tx::CHECKING,
+        Phase::Available(_) | Phase::Downloading { .. } => tx::AVAILABLE,
+        Phase::Ready(_) | Phase::NeedsPermission(_) => tx::READY,
+        _ if s.content_waiting => tx::SUMMARY_CONTENT_WAITING,
+        _ if s.content_news() => tx::CONTENT_NOTE,
+        Phase::Failed { .. } => tx::SUMMARY_FAILED,
+        _ => {
+            let t = s.prefs.last_check_ms?;
+            return Some(format!("{} {}", tx::LAST_CHECK, crate::cloud::ago(t, super::now_ms())));
+        }
+    };
+    Some(line.to_owned())
+}
+
 /// What the last check found for the lessons and questions. A waiting
 /// pack says so whatever came after; nothing shows before the first check.
 #[component]

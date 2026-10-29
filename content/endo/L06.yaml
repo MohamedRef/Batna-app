@@ -1,0 +1,778 @@
+schema: batna.content/v1
+lecture: endo.L06
+title: Pitfalls in the measurement and interpretation of thyroid function tests
+author: Prof. Dr. Aliaa Aly El-Aghoury
+book: { chapter: 5, pages: [99, 110] }
+topics:
+  - { id: intro, title: "When TFTs confuse: confounding factors" }
+  - { id: physiology, title: "HPT axis physiology and thyroid hormone action" }
+  - { id: screening, title: "TSH and FT4 as screening tests" }
+  - { id: patterns, title: "The seven TFT patterns and their causes" }
+  - { id: nti, title: "Non-thyroidal illness (sick euthyroid)" }
+  - { id: pregnancy, title: "Pregnancy" }
+  - { id: levothyroxine, title: "Anomalous TFTs on levothyroxine" }
+  - { id: drugs, title: "Drugs affecting TSH and thyroid hormone secretion" }
+  - { id: binding, title: "TBG changes and displacement from binding proteins" }
+  - { id: rth, title: "Assay interference, RTH versus TSHoma, and the discordant-TFT algorithm" }
+items:
+  # ---------- p99: intro ----------
+  - id: endo.L06.001
+    kind: card
+    topic: intro
+    front: In which two ways can TFT results seem confusing?
+    back: They can be discordant with the clinical picture, or appear incongruent with each other.
+    src: { page: 99, quote: "Being discordant with the clinical picture." }
+    status: unverified
+  - id: endo.L06.002
+    kind: enumerate
+    topic: intro
+    prompt: Which confounding factors should be considered when TFTs seem confusing?
+    points: [Pregnancy, Non-thyroidal illness, Medication usage, Laboratory artifact, "Rare genetic disorder, e.g. resistance to thyroid hormone"]
+    pass: 5
+    src: { page: 99, quote: "Rare genetic disorder e.g: resistance to thyroid hormone." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p100-101: physiology ----------
+  - id: endo.L06.003
+    kind: card
+    topic: physiology
+    front: What do an individual's T4 and T3 levels reflect over a lifetime?
+    back: They stay relatively constant and reflect that person's own set-point of the HPT axis (tightly regulated by TRH and TSH).
+    src: { page: 100, quote: "In any given individual T4 and T3 concentrations remain relatively constant throughout life" }
+    status: unverified
+  - id: endo.L06.004
+    kind: cloze
+    topic: physiology
+    text: "The euthyroid gland secretes {{c1::85-90%}} T4 and {{c2::10-15%}} T3, both more than {{c3::99.5%}} protein bound."
+    src: { page: 100, quote: "85–90% T4 and 10–15% T3." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: endo.L06.005
+    kind: enumerate
+    topic: physiology
+    prompt: Which proteins bind thyroid hormones in serum?
+    points: [TBG, Albumin, "Transthyretin (prealbumin)"]
+    pass: 3
+    src: { page: 100, quote: "Transthyretin (prealbumin)." }
+    status: unverified
+  - id: endo.L06.006
+    kind: card
+    topic: physiology
+    front: Which transporter carries thyroid hormone into cells such as the brain?
+    back: Monocarboxylate transporter 8 (MCT8); it also governs TH efflux from the thyroid gland.
+    src: { page: 100, quote: "specific membrane proteins monocarboxylate transporter 8 (MCT8)" }
+    status: unverified
+  - id: endo.L06.007
+    kind: table
+    topic: physiology
+    title: The deiodinases (pre-receptor regulation)
+    columns: [Enzyme, Action]
+    rows:
+      - [Hepatic type 1 DIO, Peripheral T4 to T3 conversion]
+      - [DIO2, T4 to T3 in the hypothalamus and pituitary]
+      - [DIO3, "T4 to reverse T3 and T3 to T2 (limits TH action)"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 100, quote: "family of intracellular deiodinases (DIOs)" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L06.008
+    kind: card
+    topic: physiology
+    front: Which is the principal bioactive thyroid hormone, and how does it act?
+    back: T3; it binds a nuclear thyroid hormone receptor (TR) in target cells.
+    src: { page: 101, quote: "T3 is the principal bioactive hormone and its major actions are mediated by binding to a receptor (TR) in the nucleus of target cells." }
+    status: unverified
+  - id: endo.L06.009
+    kind: cloze
+    topic: physiology
+    text: "The thyroid hormone receptor genes are {{c1::THRA}} on chromosome {{c2::17}} and {{c3::THRB}} on chromosome 3; splicing gives TRα1, TRα2, TRβ1 and TRβ2."
+    src: { page: 101, quote: "2 thyroid hormone receptor genes (THRA, THRB) exist on chromosomes 17 and 3 respectively." }
+    status: unverified
+  # ---------- p102: screening ----------
+  - id: endo.L06.010
+    kind: card
+    topic: screening
+    front: Why was TSH recommended as the frontline thyroid screening test?
+    back: Modest changes in thyroid hormone concentrations produce marked excursions in TSH.
+    src: { page: 102, quote: "as a modest changes in TH concentrations are associated with marked excursions in TSH." }
+    status: unverified
+  - id: endo.L06.011
+    kind: card
+    topic: screening
+    front: What does the lecture now advise for routine thyroid screening, and why?
+    back: Both FT4 and TSH, because screening with TSH alone misdiagnoses some cases.
+    src: { page: 102, quote: "Accordingly, it is now routinely thyroid screening should be done with both FT4 and TSH." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L06.012
+    kind: enumerate
+    topic: screening
+    prompt: Conditions in which measuring TSH alone may be misleading.
+    points: ["Recent treatment for thyrotoxicosis (TSH stays suppressed)", Non-thyroidal illness, TSH assay interference, Central hypothyroidism, TSH-secreting pituitary adenoma, Resistance to thyroid hormone, Disorders of TH transport or metabolism]
+    pass: 5
+    src: { page: 102, quote: "Conditions in which measurement of TSH alone may be misleading" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L06.013
+    kind: card
+    topic: screening
+    front: Why may TSH mislead after recent treatment of thyrotoxicosis?
+    back: TSH may remain suppressed even when thyroid hormone concentrations have normalised.
+    src: { page: 102, quote: "TSH may remain suppressed even when TH concentrations have normalised" }
+    status: unverified
+  - id: endo.L06.014
+    kind: card
+    topic: screening
+    front: A patient on levothyroxine has optimal TFTs but ongoing symptoms. What does the lecture say?
+    back: Restoring euthyroidism in the HPT axis does not equal resolution of hypothyroidism in other tissues; tissue markers of TH action are needed.
+    src: { page: 102, quote: "for these patients tissue markers of TH action are required." }
+    status: unverified
+  # ---------- p103: patterns ----------
+  - id: endo.L06.015
+    kind: table
+    topic: patterns
+    title: The seven TFT patterns (book figure, p103)
+    columns: [Pattern, Main causes]
+    rows:
+      - ["FT4/FT3 ↑, TSH ↓", "Graves', toxic MNG, toxic adenoma, thyroiditis, amiodarone/iodine, excess thyroxine, hyperemesis/mole, congenital"]
+      - ["FT4/FT3 normal, TSH ↓", "Subclinical hyperthyroidism, recent treatment, steroids/dopamine, assay interference, NTI"]
+      - ["FT4/FT3 ↓, TSH normal or ↓", "NTI, central hypothyroidism, isolated TSH deficiency, assay interference"]
+      - ["FT4/FT3 normal, TSH ↑", "Subclinical hypothyroidism, poor compliance, malabsorption, amiodarone, assay interference, NTI recovery, TSH resistance"]
+      - ["FT4/FT3 ↓, TSH ↑", "Hashimoto's/atrophic, post-RAI or surgery, hypothyroid phase of thyroiditis, drugs, iodine, neck irradiation, Riedel's, infiltration, congenital"]
+      - ["FT4/FT3 ↑, TSH normal or ↑", "Assay interference/FDH, thyroxine therapy, amiodarone/heparin, NTI, neonatal, TSHoma, RTH, transport disorders"]
+    blanks: [[2, 1], [3, 1], [5, 1]]
+    src: { page: 103, quote: "When interpreting TFTs seven major patterns should be considered:" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L06.016
+    kind: card
+    topic: patterns
+    front: "Raised FT4/FT3 with a normal or raised TSH: which causes does the lecture list?"
+    back: "Assay interference or FDH, thyroxine replacement (including poor compliance), drugs (amiodarone, heparin), NTI including acute psychiatric disorders, the neonatal period, TSH-secreting pituitary adenoma, resistance to thyroid hormone, and TH transport or metabolism disorders."
+    src: { page: 103, quote: "TSH-secreting pituitary adenoma Resistance to thyroid hormone" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L06.017
+    kind: card
+    topic: patterns
+    front: "Low FT4/FT3 with a normal or low TSH: causes?"
+    back: NTI, central hypothyroidism, isolated TSH deficiency and assay interference.
+    src: { page: 103, quote: "central hypothyroidism isolated TSH deficiency" }
+    status: unverified
+  - id: endo.L06.018
+    kind: card
+    topic: patterns
+    front: When should thyroid function tests be requested?
+    back: Only when there are clinical features of a thyroid problem.
+    src: { page: 103, quote: "Thyroid function tests should only be requested when there are clinical features of thyroid problem." }
+    status: unverified
+  # ---------- p103-105: NTI ----------
+  - id: endo.L06.019
+    kind: card
+    topic: nti
+    front: Define non-thyroidal illness (sick euthyroid syndrome).
+    back: A common finding after any acute or chronic illness, defined by the absence of an intrinsic abnormality of HPT function; a secondary, beneficial adaptive change that reduces metabolic rate.
+    src: { page: 103, quote: "NTI is a common finding following any acute or chronic illness defined by the absence of an intrinsic abnormality of HPT function." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L06.020
+    kind: card
+    topic: nti
+    front: How soon can thyroid hormone changes appear in NTI?
+    back: Within 24 hours of the onset of the illness.
+    src: { page: 104, quote: "Changes in TH may occur 24 h after the onset of nonthyroidal illness" }
+    status: unverified
+  - id: endo.L06.021
+    kind: enumerate
+    topic: nti
+    prompt: In which conditions does NTI occur?
+    points: [Poor nutrition, Starvation, Sepsis, Burns, Malignancy, Myocardial infarction, Post-surgery, Chronic liver and renal disease]
+    pass: 6
+    src: { page: 104, quote: "Myocardial infarction." }
+    status: unverified
+  - id: endo.L06.022
+    kind: table
+    topic: nti
+    title: TFT pattern in non-thyroidal illness
+    columns: [Test, Change]
+    rows:
+      - [Total T4, "↓"]
+      - [Total T3, "↓"]
+      - [Reverse T3, "↑"]
+      - [TSH, "↓ or normal"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 104, quote: "↓TT4 ↓TT3 ↑ reverse T3 ↓ or N TSH" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L06.023
+    kind: card
+    topic: nti
+    front: Why do total hormones fall in NTI?
+    back: Reduced TH binding capacity, secondary to a fall in TH binding-protein concentrations.
+    src: { page: 104, quote: "The reduction in total hormone is due to reduced TH binding capacity secondary to a fall in TH binding protein concentrations." }
+    status: unverified
+  - id: endo.L06.024
+    kind: enumerate
+    topic: nti
+    prompt: Enumerate the proposed mechanisms of NTI.
+    points: [Reduced hypothalamic TRH from the paraventricular nuclei, Impaired pituitary TSH secretion, Decreased serum TH binding capacity, Reduced cellular uptake of T4 and T3, Altered deiodinase activity, Low leptin in malnutrition, "Pro-inflammatory cytokines (IL-1, IL-6, TNF-α)", Excess endogenous glucocorticoids]
+    pass: 6
+    src: { page: 104, quote: "Pro-inflammatory cytokines (IL-1, IL-6, TNF-a) in infectious, inflammatory and neoplastic states." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L06.025
+    kind: card
+    topic: nti
+    front: What can happen to TSH during recovery from an intercurrent illness, and why does it matter?
+    back: TSH may become overtly elevated for a short time; knowing this transient phenomenon avoids a wrong diagnosis of hypothyroidism and needless treatment.
+    src: { page: 105, quote: "in some patients TSH may become overtly elevated for a short period of time" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L06.026
+    kind: mcq
+    topic: nti
+    stem: A 64-year-old man in ICU with septic shock has low total T4, low total T3, high reverse T3 and a low-normal TSH. He had no thyroid history. What is the best interpretation?
+    options: [Non-thyroidal illness, Central hypothyroidism needing levothyroxine, Primary hypothyroidism, Subclinical hyperthyroidism]
+    answer: 0
+    why:
+      - "Correct: ↓TT4, ↓TT3, ↑rT3 and normal or low TSH is the NTI pattern, an adaptive change."
+      - "Central hypothyroidism needs pituitary disease; here the illness explains it, and rT3 is high."
+      - "Primary hypothyroidism has a high TSH."
+      - "Subclinical hyperthyroidism has normal hormones with low TSH."
+    src: { page: 104, quote: "↓TT4 ↓TT3 ↑ reverse T3 ↓ or N TSH" }
+    status: unverified
+  - id: endo.L06.027
+    kind: mcq
+    topic: nti
+    stem: Two weeks after recovering from pneumonia, a woman's TSH is 9 mU/L with a normal FT4. She feels well. What is the best next step per the lecture?
+    options: [Repeat TFTs later; TSH can rise transiently in NTI recovery, Start levothyroxine now, Request a pituitary MRI, Diagnose Hashimoto's thyroiditis]
+    answer: 0
+    why:
+      - "Correct: a short TSH rise during recovery is a known transient phenomenon."
+      - "Treating now risks inappropriate treatment."
+      - "A high TSH with normal FT4 does not suggest a pituitary tumour here."
+      - "Hashimoto's needs more than one transient TSH value."
+    src: { page: 105, quote: "it is important to be aware of this transient phenomenon in order to avoid inappropriate diagnosis and treatment." }
+    status: unverified
+  # ---------- p105: pregnancy ----------
+  - id: endo.L06.028
+    kind: card
+    topic: pregnancy
+    front: Why does TBG rise in pregnancy?
+    back: Oestrogen increases its hepatic synthesis, and its degradation is reduced.
+    src: { page: 105, quote: "Tbg ↑as a consequence of oestrogen-induced increased hepatic synthesis, together with reduced degradation." }
+    status: unverified
+  - id: endo.L06.029
+    kind: cloze
+    topic: pregnancy
+    text: "In pregnancy total T4 and T3 rise to {{c1::150%}} of non-pregnant values during the {{c2::first half}} of pregnancy and stay there until parturition."
+    src: { page: 105, quote: "Total t4 and t3 ↑ to 150% of non-pregnant values during the first half of pregnancy and maintained until parturition." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: endo.L06.030
+    kind: card
+    topic: pregnancy
+    front: Why does FT4 rise transiently in the first trimester?
+    back: High hCG stimulates the TSH receptor.
+    src: { page: 105, quote: "Transient ↑ in ft4 in first trimester is due to the stimulatory effects of ↑ hcg acting on the tsh receptor." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L06.031
+    kind: card
+    topic: pregnancy
+    front: A woman with hyperemesis gravidarum is overtly thyrotoxic with a suppressed TSH. Which test helps separate gestational hyperthyroidism from Graves' disease?
+    back: TSH receptor antibodies (TRAb).
+    src: { page: 105, quote: "it is important to distinguish gestational hyperthyroidism from other causes of thyrotoxicosis (e.g. Graves‘ disease) & (trab) measurement is helpful." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L06.032
+    kind: enumerate
+    topic: pregnancy
+    prompt: Other mechanisms that change thyroid status in pregnancy.
+    points: [Increased plasma volume, "Enhanced placental DIO3 activity (more T4 and T3 degradation)", "Increased urinary iodine clearance (goitre in iodine-deficient regions)"]
+    pass: 3
+    src: { page: 105, quote: "Enhanced DIO3 activity (placental origin: increased T4 & T3 degradation)." }
+    status: unverified
+  - id: endo.L06.033
+    kind: mcq
+    topic: pregnancy
+    stem: At 10 weeks a woman has a TSH of 0.08 mU/L, a mildly raised FT4, no goitre and no eye signs. TRAb is negative. What is the most likely explanation?
+    options: [hCG stimulating the TSH receptor (gestational), Graves' disease, Toxic adenoma, Assay interference from TBG]
+    answer: 0
+    why:
+      - "Correct: a transient first-trimester FT4 rise from hCG acting on the TSH receptor."
+      - "Negative TRAb and no eye signs argue against Graves'."
+      - "Nothing suggests a nodule."
+      - "TBG rises total, not free, hormones."
+    src: { page: 105, quote: "Transient ↑ in ft4 in first trimester is due to the stimulatory effects of ↑ hcg acting on the tsh receptor." }
+    status: unverified
+  # ---------- p106: levothyroxine ----------
+  - id: endo.L06.034
+    kind: table
+    topic: levothyroxine
+    title: Anomalous TFTs on levothyroxine (book table, p106)
+    columns: [Pattern, Cause]
+    rows:
+      - ["A. Normal TSH, mildly ↑FT4", Normal physiological variant]
+      - ["B. ↑TSH, low-normal or ↓FT4 (needs high L-T4)", "Maladministration, malabsorption, ↑TH metabolism or excretion, ↑TH binding capacity"]
+      - ["C. Unexpected change in dose needs", Change in L-T4 preparation]
+      - ["D. ↑TSH, normal FT4", TSH assay interference]
+      - ["E. Persistent ↑TSH with ↓, ↑ or normal FT4 on high doses", Poor compliance]
+      - ["F. Supraphysiologic L-T4 needed; ↑FT4 and ↑FT3", Resistance to thyroid hormone]
+    blanks: [[0, 1], [2, 1], [3, 1], [4, 1], [5, 1]]
+    src: { page: 106, quote: "Causes of anomalous TFTs in patients receiving levothyroxine therapy" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L06.035
+    kind: card
+    topic: levothyroxine
+    front: Why do some well-replaced patients on L-T4 have a normal TSH but mildly high FT4?
+    back: A normal physiological variant, possibly less efficient deiodination of T4 to T3; FT3 is typically normal.
+    src: { page: 106, quote: "possibly reflecting less efficient deiodination of T4 to T3); FT3 is typically normal" }
+    status: unverified
+  - id: endo.L06.036
+    kind: card
+    topic: levothyroxine
+    front: How should L-T4 be taken, and which foods and drugs impair its absorption?
+    back: "On an empty stomach. Fibre and espresso coffee; iron, calcium, PPIs, sucralfate, aluminium hydroxide, cholestyramine, colestipol."
+    src: { page: 106, quote: "Patients should be advised to take L-T4 on an empty stomach; certain foodstuffs (e.g. fibre, espresso coffee)" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L06.037
+    kind: enumerate
+    topic: levothyroxine
+    prompt: Malabsorption syndromes that impair L-T4 absorption.
+    points: [Coeliac disease, Achlorhydria, Lactose intolerance (lactose is in some L-T4 tablets)]
+    pass: 3
+    src: { page: 106, quote: "L-T4 malabsorption occurs with coeliac disease, achlorhydria, lactose intolerance" }
+    status: unverified
+  - id: endo.L06.038
+    kind: card
+    topic: levothyroxine
+    front: Which drugs raise L-T4 needs by increasing thyroid hormone metabolism, and which renal condition raises losses?
+    back: Phenytoin, carbamazepine, phenobarbitone, rifampicin and some TKIs (e.g. imatinib) enhance hepatic TH metabolism; nephrotic syndrome can increase urinary TH loss.
+    src: { page: 106, quote: "Phenytoin, carbamazepine, phenobarbitone, rifampicin and some tyrosine kinase inhibitors (e.g. Imatinib) increase L-T4 requirements" }
+    status: unverified
+  - id: endo.L06.039
+    kind: card
+    topic: levothyroxine
+    front: Why does oral oestrogen or IVF treatment raise L-T4 requirements?
+    back: The oestrogen rise markedly increases TBG and hence TH binding capacity; SERMs and mitotane do the same.
+    src: { page: 106, quote: "results in a marked increase in TBG and hence TH binding capacity, necessitating an increase in L-T4 therapy" }
+    status: unverified
+  - id: endo.L06.040
+    kind: card
+    topic: levothyroxine
+    front: Why can intermittent thyroxine intake give normal or high FT4 with a persistently high TSH?
+    back: Because of their different half-lives, a recent dose raises TH, but the TSH, reflecting weeks of poor compliance, stays high.
+    src: { page: 106, quote: "Owing to their differing half-lives, intermittent thyroxine ingestion may result in normal or even elevated TH concentrations, but fails to normalize TSH" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L06.041
+    kind: card
+    topic: levothyroxine
+    front: "On L-T4: raised TSH with normal FT4 and normal FT3. Which cause does the table give?"
+    back: Heterophilic antibody interference in the TSH assay, giving a falsely high TSH.
+    src: { page: 106, quote: "Heterophilic antibody interference in the TSH assay may yield falsely elevated results; FT3 is normal" }
+    status: unverified
+  - id: endo.L06.042
+    kind: card
+    topic: levothyroxine
+    front: When is resistance to thyroid hormone typically unmasked on L-T4?
+    back: After inappropriate thyroid ablation, or with concomitant primary hypothyroidism, in a patient with a THRB mutation; supraphysiologic L-T4 is needed to normalise TSH, with raised FT4 and FT3.
+    src: { page: 106, quote: "Typically seen following inappropriate thyroid ablation or concomitant primary hypothyroidism" }
+    status: unverified
+  - id: endo.L06.043
+    kind: cloze
+    topic: levothyroxine
+    text: "In athyreotic people, full daily levothyroxine is about {{c1::1.6-2.0 mcg/kg}}; the elderly need {{c2::lower}} doses."
+    src: { page: 106, quote: "usually fall in the range 1.6–2.0 mcg/kg" }
+    status: unverified
+    tags: [numbers]
+  - id: endo.L06.044
+    kind: card
+    topic: levothyroxine
+    front: What should follow a change of L-T4 preparation?
+    back: Preparations differ in potency and bioavailability; changes are best avoided, and if needed, TFTs should be monitored more often.
+    src: { page: 106, quote: "Not all L-T4 preparations are of comparable potency/ bioavailability" }
+    status: unverified
+  - id: endo.L06.045
+    kind: mcq
+    topic: levothyroxine
+    stem: A woman on levothyroxine 150 µg daily has a TSH of 18 mU/L. She takes the tablet with breakfast, coffee and her calcium and iron tablets. What is the most likely cause?
+    options: [Maladministration impairing absorption, Resistance to thyroid hormone, TSH assay interference, Change in L-T4 preparation]
+    answer: 0
+    why:
+      - "Correct: L-T4 must be taken on an empty stomach; coffee, calcium and iron all impair absorption."
+      - "RTH gives high FT4 and FT3 with a normal TSH on large doses."
+      - "Interference gives a high TSH with normal FT4 and FT3, but here there is an obvious cause."
+      - "Nothing in the story suggests a new brand."
+    src: { page: 106, quote: "Patients should be advised to take L-T4 on an empty stomach" }
+    status: unverified
+  - id: endo.L06.046
+    kind: mcq
+    topic: levothyroxine
+    stem: A man on levothyroxine 200 µg has a TSH of 25 mU/L and a high-normal FT4. He admits he takes the tablets "most days" and took several this morning before clinic. Most likely cause?
+    options: [Poor compliance, Resistance to thyroid hormone, Malabsorption from coeliac disease, Physiological variant]
+    answer: 0
+    why:
+      - "Correct: intermittent intake raises FT4 on the day but fails to normalise TSH."
+      - "RTH gives high FT4 and FT3 with a normal TSH."
+      - "Malabsorption gives a low or low-normal FT4."
+      - "The variant has a normal TSH."
+    src: { page: 106, quote: "intermittent thyroxine ingestion may result in normal or even elevated TH concentrations, but fails to normalize TSH" }
+    status: unverified
+  - id: endo.L06.047
+    kind: mcq
+    topic: levothyroxine
+    stem: A hypothyroid woman stable on levothyroxine starts IVF. Six weeks later her TSH has risen. Why?
+    options: [Oestrogen rise increases TBG and binding capacity, hCG blocks the TSH receptor, IVF drugs block L-T4 absorption, Ovarian hyperstimulation causes NTI]
+    answer: 0
+    why:
+      - "Correct: gonadotrophin-induced oestrogen raises TBG, so she needs more L-T4."
+      - "hCG stimulates, not blocks, the TSH receptor."
+      - "The table explains it by binding capacity, not absorption."
+      - "The table links IVF to TBG."
+    src: { page: 106, quote: "gonadotrophin-induced rise in oestrogen concentrations (e.g. IVF treatment) results in a marked increase in TBG" }
+    status: unverified
+  # ---------- p107-108: drugs ----------
+  - id: endo.L06.048
+    kind: card
+    topic: drugs
+    front: In which two ways do drugs alter thyroid function?
+    back: By modulating the HPT axis itself, or through downstream effects on thyroid hormone transport or metabolism.
+    src: { page: 107, quote: "either by – modulating the HPT axis itself, – or through downstream effects on thyroid hormone transport or metabolism." }
+    status: unverified
+  - id: endo.L06.049
+    kind: table
+    topic: drugs
+    title: Iodide and the thyroid
+    columns: [Pattern, Mechanism]
+    rows:
+      - ["↑TSH, ↓FT4", "Transient disturbance; persistent hypothyroidism if thyroid reserve is low (e.g. chronic autoimmune thyroiditis)"]
+      - ["↓TSH, ↑FT4", "Jod-Basedow: overt hyperthyroidism in latent autonomy (e.g. MNG), may last months"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 107, quote: "may develop overt hyperthyroidism following exposure to iodine-containing compounds (Jod- Basedow effect), which may persist for months" }
+    status: unverified
+  - id: endo.L06.050
+    kind: table
+    topic: drugs
+    title: Amiodarone and TFTs
+    columns: [Pattern, Explanation]
+    rows:
+      - ["Transient ↑TSH; ↑FT4, normal FT3", "Early months; type 1 DIO inhibition keeps FT4 high, FT3 normal"]
+      - ["↓TSH, ↑FT4", "Thyrotoxicosis: type 1 (iodine load on latent autonomy), type 2 (destructive thyroiditis); T4 rises more than T3"]
+      - ["↑TSH, ↓FT4", "Hypothyroidism in up to 15% (women, antibody positive); failure to escape Wolff-Chaikoff"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 107, quote: "Two main types of thyrotoxicosis are recognised: type 1 (large iodine load precipitating latent thyroid autonomy); type 2 (destructive thyroiditis)" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L06.051
+    kind: card
+    topic: drugs
+    front: What is the Wolff-Chaikoff effect?
+    back: Impairment of T4 and T3 synthesis by high intrathyroidal iodine concentrations; failure to escape it may underlie amiodarone hypothyroidism.
+    src: { page: 108, quote: "Wolff-Chaikoff effect = impairment of T4 and T3 synthesis by high intrathyroidal concentrations of iodine." }
+    status: unverified
+  - id: endo.L06.052
+    kind: cloze
+    topic: drugs
+    text: "Amiodarone hypothyroidism occurs in up to {{c1::15%}} of patients, especially {{c2::women}} and those with positive antithyroid antibodies."
+    src: { page: 107, quote: "Hypothyroidism occurs in up to 15% of patients (particularly women and those with positive antithyroid antibodies)" }
+    status: unverified
+    tags: [numbers]
+  - id: endo.L06.053
+    kind: table
+    topic: drugs
+    title: Lithium, TKIs and immune modulators
+    columns: [Drug, Effects]
+    rows:
+      - [Lithium, "Overt or subclinical hypothyroidism; self-limiting thyroiditis in a few"]
+      - ["TKIs (sunitinib, sorafenib)", "Primary hypothyroidism (direct toxicity); prodromal thyrotoxic phase with sunitinib"]
+      - [Immune modulators, "Graves' with alemtuzumab, HAART, IFNα; Hashimoto's with IFNα"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 107, quote: "Primary hypothyroidism (possibly due to a direct toxic effect on the thyroid gland) has been observed with some TKIs, e.g. Sunitinib, Sorafenib" }
+    status: unverified
+  - id: endo.L06.054
+    kind: enumerate
+    topic: drugs
+    prompt: Drugs that suppress TSH secretion (usually transiently, without significant central hypothyroidism).
+    points: [Dopamine agonists, Glucocorticoids, Somatostatin analogues, "Rexinoids (bexarotene: real hypothyroidism)", Metformin (apparent TSH lowering)]
+    pass: 4
+    src: { page: 108, quote: "Both octreotide and lanreotide suppress pituitary TSH secretion through a direct inhibitory action on pituitary thyrotrophs" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L06.055
+    kind: card
+    topic: drugs
+    front: How do dopamine and glucocorticoids lower TSH?
+    back: Dopamine acts on D2 receptors on pituitary thyrotrophs; glucocorticoids inhibit hypothalamic TRH via receptors in the paraventricular nucleus. Neither usually causes clinically relevant central hypothyroidism.
+    src: { page: 108, quote: "Glucocorticoid-mediated inhibition of hypothalamic TRH synthesis/release" }
+    status: unverified
+  - id: endo.L06.056
+    kind: card
+    topic: drugs
+    front: Which TSH-suppressing drug does cause clinical hypothyroidism, and how?
+    back: Bexarotene (a rexinoid, for cutaneous T-cell lymphoma) inhibits TSHβ transcription; ↓TSH and ↓FT4.
+    src: { page: 108, quote: "Bexarotene (Targretin®) has been linked to the development of biochemical and, in a significant proportion of patients, clinical hypothyroidism" }
+    status: unverified
+  - id: endo.L06.057
+    kind: card
+    topic: drugs
+    front: What is known about metformin and TSH?
+    back: Observational studies show an apparent TSH-lowering effect with normal FT4; whether it is limited to those with pre-existing HPT disorders (high TSH) is unclear.
+    src: { page: 108, quote: "Several observational studies have reported an apparent TSH lowering effect of metformin therapy in patients with diabetes" }
+    status: unverified
+  - id: endo.L06.058
+    kind: mcq
+    topic: drugs
+    stem: A man on amiodarone for 2 months has TSH 6.1 mU/L, a raised FT4 and normal FT3. He feels well. Best interpretation?
+    options: [Expected early amiodarone effect from type 1 DIO inhibition, Type 2 amiodarone thyrotoxicosis, Amiodarone hypothyroidism needing levothyroxine, TSHoma]
+    answer: 0
+    why:
+      - "Correct: transient TSH rise with raised FT4 and normal FT3 is common in the first months."
+      - "Thyrotoxicosis gives a suppressed TSH."
+      - "Hypothyroidism gives a low FT4."
+      - "The drug explains it; no need to suspect a TSHoma."
+    src: { page: 107, quote: "inhibition of type 1 DIO leads to persistent elevation of FT4, but normal FT3" }
+    status: unverified
+  - id: endo.L06.059
+    kind: mcq
+    topic: drugs
+    stem: An elderly woman with a long-standing multinodular goitre becomes thyrotoxic a week after a contrast CT. What is this?
+    options: [Jod-Basedow effect, Wolff-Chaikoff effect, Non-thyroidal illness, Hashimoto's thyroiditis]
+    answer: 0
+    why:
+      - "Correct: iodine exposure triggers hyperthyroidism in latent autonomy (MNG)."
+      - "Wolff-Chaikoff is iodine-induced suppression of hormone synthesis."
+      - "NTI does not make the patient thyrotoxic."
+      - "Hashimoto's leads to hypothyroidism."
+    src: { page: 107, quote: "Individuals with latent/low-grade thyroid autonomy (e.g. in a pre-existing MNG) may develop overt hyperthyroidism" }
+    status: unverified
+  - id: endo.L06.060
+    kind: mcq
+    topic: drugs
+    stem: A woman treated with interferon alpha for chronic hepatitis C develops ↑TSH and ↓FT4 after a brief thyrotoxic phase. Which complication does the table describe?
+    options: [Hashimoto's thyroiditis, Graves' disease, Jod-Basedow effect, Central hypothyroidism]
+    answer: 0
+    why:
+      - "Correct: Hashimoto's may complicate IFNα, sometimes after a prodromal thyrotoxic phase."
+      - "Graves' gives ↓TSH and ↑FT4 and stays thyrotoxic."
+      - "Jod-Basedow is iodine-induced."
+      - "Central hypothyroidism has a low or normal TSH."
+    src: { page: 107, quote: "Hashimoto's thyroiditis may complicate INFα therapy (± prodromal thyrotoxic phase)" }
+    status: unverified
+  # ---------- p108-109: TBG, displacement ----------
+  - id: endo.L06.061
+    kind: table
+    topic: binding
+    title: Drugs that change TBG
+    columns: [Effect, Drugs]
+    rows:
+      - ["↑TBG", "Oral (not transdermal) oestrogen, raloxifene, tamoxifen, mitotane, fluorouracil, methadone, heroin"]
+      - ["↓TBG synthesis", "Androgens, chronic glucocorticoids, nicotinic acid"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 108, quote: "Drugs that inhibit TBG synthesis: androgens, chronic glucocorticoid therapy, nicotinic acid." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L06.062
+    kind: card
+    topic: binding
+    front: Does transdermal oestrogen raise TBG?
+    back: No; only oral oestrogen does (first-pass hepatic effect).
+    src: { page: 108, quote: "oral (but not transdermal) oestrogen" }
+    status: unverified
+  - id: endo.L06.063
+    kind: card
+    topic: binding
+    front: Why do drugs that displace T4 and T3 from binding proteins matter?
+    back: They alter hormone delivery and clearance and distort FT4 and FT3 assays.
+    src: { page: 109, quote: "can alter hormone delivery and clearance and distort diagnostic tests for FT4 and FT3." }
+    status: unverified
+  - id: endo.L06.064
+    kind: enumerate
+    topic: binding
+    prompt: Drugs that compete for TH binding sites on TBG, albumin and transthyretin.
+    points: ["Furosemide (>80 mg/day, IV)", Aspirin, NSAIDs, Phenytoin, Heparin]
+    pass: 5
+    src: { page: 109, quote: "Furosemide (especially with doses >80 mg/day and when given intravenously)." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L06.065
+    kind: card
+    topic: binding
+    front: How do you limit artifactual hyperthyroxinaemia in a patient on heparin?
+    back: Avoid FT4/FT3 if possible; if needed, take the sample at least 10 hours after the last heparin injection and analyse it without delay.
+    src: { page: 109, quote: "taking a blood sample ≥ 10 h after the last injection of heparin, and analysing it without delay" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: endo.L06.066
+    kind: mcq
+    topic: binding
+    stem: A patient on IV heparin has a high FT4 with a normal TSH and no thyrotoxic features. What should you do?
+    options: [Repeat FT4 on a sample at least 10 h after the last heparin dose and analyse it at once, Start carbimazole, Order a radioiodine uptake scan, Stop heparin permanently]
+    answer: 0
+    why:
+      - "Correct: heparin causes artifactual hyperthyroxinaemia; time the sample and analyse it without delay."
+      - "She is not thyrotoxic; this is an artifact."
+      - "Imaging is not needed for an artifact."
+      - "The lecture changes the sampling, not the heparin."
+    src: { page: 109, quote: "Measurement of FT4 and FT3 is best avoided in patients receiving heparin therapy" }
+    status: unverified
+  # ---------- p109-110: RTH vs TSHoma, algorithm ----------
+  - id: endo.L06.067
+    kind: table
+    topic: rth
+    title: RTH versus TSHoma
+    columns: [Feature, TSHoma, RTH (TRβ)]
+    rows:
+      - [Somatostatin receptor ligand, Most respond, No significant change in FT4 and FT3]
+      - [First-degree relatives, Normal, Similar abnormal TFTs]
+      - [Genetics, -, THRB gene mutation]
+    blanks: [[0, 1], [0, 2], [1, 2], [2, 2]]
+    src: { page: 109, quote: "Somatostatin receptor ligand therapy →Most TSHomas respond." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L06.068
+    kind: mcq
+    topic: rth
+    stem: A 30-year-old has raised FT4 and FT3 with a non-suppressed TSH. Her mother has the same TFTs. Octreotide does not change her FT4. Most likely diagnosis?
+    options: [Resistance to thyroid hormone (THRB), TSH-secreting pituitary adenoma, Graves' disease, Non-thyroidal illness]
+    answer: 0
+    why:
+      - "Correct: same TFTs in a first-degree relative and no response to SRL point to RTH."
+      - "Most TSHomas respond to somatostatin receptor ligands."
+      - "Graves' suppresses TSH."
+      - "NTI lowers hormones."
+    src: { page: 109, quote: "Similar abnormal TFTs in first-degree relatives." }
+    status: unverified
+  - id: endo.L06.069
+    kind: order
+    topic: rth
+    prompt: Order the algorithm for discordant TFTs.
+    steps: [Re-evaluate clinical history, Re-assess thyroid status, Decide which TFT is most likely discordant, Exclude TH and/or TSH assay interference, Investigate for rare genetic/acquired HPT disorders]
+    src: { page: 110, quote: "Step 1: Re-evaluate clinical history" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L06.070
+    kind: table
+    topic: rth
+    title: "Step 1 of the discordant-TFT algorithm: history"
+    columns: [Factor, Consider]
+    rows:
+      - [Age, "Neonatal period, elderly"]
+      - [Pregnancy, "↓TSH (1st trimester, hCG); ↑TT4 and TT3 (TBG); FT4/FT3 changes; pregnancy RR"]
+      - [Thyroxine therapy, "Diet or drugs, malabsorption, altered TH metabolism, non-compliance"]
+      - [Confounding drugs, "Amiodarone, furosemide, heparin, corticosteroids, dopamine"]
+      - [Non-thyroidal illness, NTI]
+    blanks: [[0, 1], [1, 1], [3, 1]]
+    src: { page: 110, quote: "Step 1: Re-evaluate clinical history" }
+    status: unverified
+  - id: endo.L06.071
+    kind: card
+    topic: rth
+    front: In the discordant-TFT algorithm, what is step 4 and who helps?
+    back: Exclude TH and/or TSH assay interference, with specialist laboratory input. Step 5 (rare genetic or acquired HPT disorders) needs a specialist centre.
+    src: { page: 110, quote: "Step 4: Exclude TH &/or TSH assay interference (consider specialist laboratory input)" }
+    status: unverified
+  - id: endo.L06.072
+    kind: card
+    topic: rth
+    front: Which three assay interferences does the lecture's question name?
+    back: Biotin, heterophile antibodies and macro-TSH.
+    src: { page: 110, quote: "including the role of biotin, heterophile antibodies, and macro-TSH." }
+    status: unverified
+    update:
+      text: "High-dose biotin (common in hair/nail supplements) interferes with streptavidin-biotin immunoassays: falsely low TSH and falsely high FT4/FT3 can mimic Graves'. Stop biotin at least 2 days before testing."
+      ref: ATA/ETA assay interference statements; FDA safety communication 2019
+  # ---------- cases ----------
+  - id: endo.L06.073
+    kind: case
+    topic: levothyroxine
+    stem: A 45-year-old woman with post-thyroidectomy hypothyroidism needs 250 µg of levothyroxine but her TSH stays at 12 mU/L.
+    steps:
+      - question: What do you check first?
+        options: [How and when she takes it, Pituitary MRI, Thyroglobulin, TRAb]
+        answer: 0
+        why: "Maladministration (food, coffee, calcium, iron, PPIs) is the first cause in pattern B."
+      - reveal: "She takes it on an empty stomach with water. She has iron-deficiency anaemia and bloating."
+        question: Which condition should you test for?
+        options: [Coeliac disease, Graves' disease, Nephrotic syndrome, RTH]
+        answer: 0
+        why: "Coeliac disease causes L-T4 malabsorption, and fits iron deficiency and bloating."
+      - reveal: "Coeliac serology is negative. She was started on carbamazepine 3 months ago."
+        question: Why would that raise her dose?
+        options: [It enhances hepatic TH metabolism, It blocks TSH receptors, It increases TBG, It is an assay interferent]
+        answer: 0
+        why: "Phenytoin, carbamazepine, phenobarbitone and rifampicin increase hepatic TH metabolism."
+    src: { page: 106, quote: "L-T4 malabsorption occurs with coeliac disease, achlorhydria, lactose intolerance" }
+    status: unverified
+  - id: endo.L06.074
+    kind: case
+    topic: rth
+    stem: A 28-year-old man has palpitations. FT4 and FT3 are high, and TSH is normal (not suppressed).
+    steps:
+      - question: Which pattern is this?
+        options: ["FT4/FT3 ↑ with TSH normal or ↑", "FT4/FT3 ↑ with TSH ↓", "FT4/FT3 normal with TSH ↓", NTI]
+        answer: 0
+        why: "High hormones with an unsuppressed TSH: think interference, TSHoma, RTH."
+      - question: Before any rare diagnosis, what should you exclude?
+        options: [Assay interference, Graves' disease, Thyroiditis, Iodine excess]
+        answer: 0
+        why: "Step 4 of the algorithm: exclude TH or TSH assay interference first."
+      - reveal: "Assays are confirmed in another lab. Pituitary MRI shows a 9 mm adenoma. Octreotide lowers his FT4."
+        question: Most likely diagnosis?
+        options: [TSHoma, RTH, Graves', Euthyroid hyperthyroxinaemia]
+        answer: 0
+        why: "Most TSHomas respond to somatostatin receptor ligands; RTH shows no significant change."
+    src: { page: 109, quote: "Somatostatin receptor ligand therapy →Most TSHomas respond." }
+    status: unverified
+  # ---------- book questions (p110) ----------
+  - id: endo.L06.075
+    kind: essay
+    topic: intro
+    prompt: "Discuss the common pitfalls in interpreting thyroid function tests (TFTs). Include pre-analytical, analytical, and post-analytical factors."
+    outline:
+      - "Pre-analytical": ["Testing without clinical features", "Pregnancy (TBG, hCG)", "NTI (and recovery TSH rise)", "L-T4 timing, compliance, absorption", "Drugs: amiodarone, lithium, iodide, TKIs, immune modulators, dopamine, steroids, SSAs, bexarotene", "Heparin: sample ≥10 h after dose"]
+      - "Analytical": ["Assay interference (heterophile antibodies, biotin, macro-TSH)", "Binding-protein changes and displacement (furosemide, aspirin, NSAIDs, phenytoin, heparin)"]
+      - "Post-analytical": ["TSH alone misleads (recent treatment, central disease, TSHoma, RTH)", "Seven patterns", "Use the 5-step discordant-TFT algorithm"]
+    src: { page: 99, quote: "In such cases, certain confounding factors are considered:" }
+    status: unverified
+    tags: [book-question]
+  - id: endo.L06.076
+    kind: essay
+    topic: rth
+    prompt: Describe the causes and clinical approach to discordant thyroid function test results, where TSH and thyroid hormones do not match the clinical picture.
+    outline:
+      - "Causes": ["Pregnancy", "NTI", "Medications", "Laboratory artifact", "Rare genetic disorders (RTH)"]
+      - "Approach": ["Step 1: history (age, pregnancy, thyroxine, drugs, NTI)", "Step 2: re-assess thyroid status", "Step 3: which TFT is discordant", "Step 4: exclude assay interference", "Step 5: rare genetic or acquired HPT disorders"]
+      - "RTH vs TSHoma": ["SRL response in TSHoma", "Relatives and THRB in RTH"]
+    src: { page: 110, quote: "Step 3: Decide which TFT is most likely to be discordant" }
+    status: unverified
+    tags: [book-question]
+  - id: endo.L06.077
+    kind: essay
+    topic: rth
+    prompt: Explain the mechanisms and clinical implications of assay interference in thyroid function testing, including the role of biotin, heterophile antibodies, and macro-TSH.
+    outline:
+      - "Heterophile antibodies": ["Falsely high TSH with normal FT4 and FT3 (on L-T4)", "Can mimic poor control"]
+      - "Binding-protein artefacts": ["Heparin hyperthyroxinaemia: sample ≥10 h after dose", "Displacement by furosemide, aspirin, NSAIDs, phenytoin"]
+      - "Implications": ["TSH-only screening misleads", "Exclude interference before rare diagnoses (step 4)", "Specialist lab input"]
+    src: { page: 109, quote: "Assay interference in TSH & FT3, FT4 measurement." }
+    status: unverified
+    tags: [book-question]
+    update:
+      text: "The book lists biotin and macro-TSH only in the question. Biotin gives falsely low TSH and falsely high FT4/FT3 in streptavidin-biotin assays; macro-TSH (TSH bound to IgG) gives a falsely high TSH and is shown by PEG precipitation."
+      ref: ATA/ETA assay interference statements; FDA safety communication 2019
+  - id: endo.L06.078
+    kind: essay
+    topic: drugs
+    prompt: Evaluate the impact of drugs, acute illness, and pregnancy on thyroid function tests and explain how to avoid misinterpretation.
+    outline:
+      - "Drugs": ["Iodide and amiodarone (three patterns)", "Lithium, TKIs, immune modulators", "TSH suppressors: dopamine, steroids, SSAs, bexarotene, metformin", "TBG changers and displacers"]
+      - "Acute illness": ["↓TT4, ↓TT3, ↑rT3, ↓/N TSH", "Mechanisms", "Transient TSH rise in recovery"]
+      - "Pregnancy": ["↑TBG, total T4/T3 150%", "First-trimester ↑FT4 from hCG", "Hyperemesis: TRAb to separate from Graves'", "Plasma volume, DIO3, iodine clearance"]
+      - "Avoid errors": ["Test only with clinical features", "FT4 + TSH", "Discordant-TFT algorithm"]
+    src: { page: 107, quote: "A lot of commonly prescribed drugs may result in altered thyroid function/status" }
+    status: unverified
+    tags: [book-question]

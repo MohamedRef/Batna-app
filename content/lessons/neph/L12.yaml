@@ -1,0 +1,634 @@
+schema: batna.lesson/v1
+lecture: neph.L12
+lessons:
+  # ------------------------------------------------------------------
+  - id: neph.L12.lesson1
+    title: "الكلى والسرطان: نقيس الـ GFR صح الأول"
+    hook: "قبل أي chemo لازم تعرف الكلية شغالة قد إيه، والـ creatinine لوحده ممكن يضحك عليك."
+    minutes: 8
+    pages: [410, 413]
+    topics: [spectrum, gfr, aki]
+    goals:
+      - "تعدّ الـ onconephrology spectrum"
+      - "تعرف ليه الـ creatinine لوحده بيغلط، وإيه دور الـ cystatin C والـ CKD-EPI"
+      - "تعرف أسباب الـ prerenal AKI في السرطان وبعد الـ stem cell transplant"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 410
+        title: "يعني إيه onconephrology؟"
+        quote: "The field of onconephrology encompasses the intersection of nephrology with oncology"
+        text: |
+          الـ ==onconephrology== هو المنطقة اللي الـ nephrology بيقابل فيها الـ oncology: عيان عنده سرطان وكمان عنده مشكلة في الكلى بأي شكل.
+
+          علشان كده الكتاب بيقول محتاجين **multidisciplinary, coordinated team**: الـ oncologist يكتب الـ chemo، وأنت تحمي الكلية وتظبط الجرعة.
+      - kind: mnemonic
+        page: 410
+        quote: "The myriad kidney manifestations of multiple myeloma (MM). Various electrolyte and acid-base disorders, Treatment related nephrotoxicity. Urinary tract obstruction."
+        word: "ACGK MEDOH"
+        parts:
+          - { key: "A", text: "AKI" }
+          - { key: "C", text: "CKD" }
+          - { key: "G", text: "Glomerular diseases" }
+          - { key: "K", text: "Kidney cancer" }
+          - { key: "M", text: "Multiple myeloma kidney manifestations" }
+          - { key: "E", text: "Electrolyte and acid-base disorders" }
+          - { key: "D", text: "Drug (treatment-related) nephrotoxicity" }
+          - { key: "O", text: "Obstruction of the urinary tract" }
+          - { key: "H", text: "HSCT-associated kidney disorders" }
+        hook: "تسعة حاجات. اقسمهم نصين: **ACGK** (الأمراض نفسها) و **MEDOH** (المضاعفات والعلاج)."
+      - kind: explain
+        page: 411
+        title: "ليه الاتنين بيتقابلوا كتير؟"
+        quote: "This is likely because of comorbid conditions, such as diabetes mellitus and hypertension, that are highly prevalent in the population."
+        text: |
+          - **CKD قبل السرطان:** علشان الـ ==diabetes mellitus== والـ hypertension منتشرين في الناس أصلًا.
+          - **CKD بتزوّد خطر سرطان:** خصوصًا سرطانات الـ **urinary tract**.
+          - **AKI كتير:** من الـ **sepsis** والـ **drugs** والـ **dehydration**.
+      - kind: reveal
+        page: 411
+        quote: "Serum creatinine levels only roughly track with the GFR because of factors such as age, muscle mass, meat intake, race and intake of creatine supplements"
+        prompt: "عيانة عندها cachexia من السرطان والـ creatinine بتاعها 0.6. ينفع تقول الكلية سليمة؟"
+        answer: |
+          لأ. الـ **creatinine** جاي من العضلات، والعضلات قليلة، فالرقم واطي حتى لو الـ GFR واقع. ده بيعمل **overestimation of the GFR**.
+
+          العوامل اللي الكتاب ذكرها: **age، muscle mass، meat intake، race، creatine supplements**. الحل: **GFR estimation equation** أو **measured creatinine clearance**.
+      - kind: figure
+        page: 411
+        quote: "It is freely filtered at the glomerulus and then undergoes catabolism within the kidney tubules, resulting in insignificant urinary excretion."
+        title: "الـ cystatin C بيمشي إزاي في الكلية"
+        alt: "Diagram: all nucleated cells make cystatin C at a constant rate; it is freely filtered at the glomerulus, then broken down in the tubules, so almost none appears in urine and the serum level depends on GFR. A warning box notes that the tumor and chemotherapy change cystatin C on their own."
+        caption: "إنتاج ثابت + ==freely filtered== + بيتكسر في الـ tubules = مستواه في الدم بيعكس الـ GFR. بس في السرطان، الورم والـ chemo بيغيروه لوحدهم."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L12a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker></defs>
+            <rect x="20" y="12" width="290" height="44" rx="10" class="fg-box"/>
+            <text x="165" y="31" text-anchor="middle" class="t-sm t-b">All nucleated cells</text>
+            <text x="165" y="47" text-anchor="middle" class="t-sm">cystatin C at a constant rate (13 kDa)</text>
+            <path d="M165 56 V80" class="fg-arrow" marker-end="url(#L12a)"/>
+            <rect x="20" y="84" width="290" height="44" rx="10" class="fg-acc"/>
+            <text x="165" y="103" text-anchor="middle" class="t-sm t-b">Glomerulus</text>
+            <text x="165" y="119" text-anchor="middle" class="t-sm">freely filtered</text>
+            <path d="M165 128 V152" class="fg-arrow" marker-end="url(#L12a)"/>
+            <rect x="20" y="156" width="290" height="44" rx="10" class="fg-box"/>
+            <text x="165" y="175" text-anchor="middle" class="t-sm t-b">Tubules</text>
+            <text x="165" y="191" text-anchor="middle" class="t-sm">catabolized, almost none in urine</text>
+            <text x="165" y="222" text-anchor="middle" class="t-sm t-good t-b">Serum level depends on GFR</text>
+            <rect x="20" y="236" width="290" height="52" rx="10" class="fg-bad"/>
+            <text x="165" y="257" text-anchor="middle" class="t-sm t-bad t-b">In cancer: caution</text>
+            <text x="165" y="274" text-anchor="middle" class="t-sm">tumor and chemo change it independently</text>
+          </svg>
+      - kind: explain
+        page: 412
+        title: "المعادلة اللي بنثق فيها"
+        quote: "The Chronic Kidney Disease Epidemiology Collaboration (CKD-EPI) equation is currently recommended by the KDOQI."
+        text: |
+          الـ ==CKD-EPI== هي اللي الـ **KDOQI** بيوصي بيها. بتستخدم **race، age، sex، serum creatinine**.
+
+          واتعملها validation في عيانين سرطان، وأداؤها فيهم أحسن من الطرق التانية.
+      - kind: update
+        page: 412
+        quote: "This equation uses the variable of race (Black or other), age, sex, and serum creatinine."
+        ref: "CKD-EPI 2021; KDIGO 2024 CKD guideline"
+        text: "معادلة الـ CKD-EPI 2021 شالت الـ race، والـ KDIGO 2024 بيوصي بيها. في الامتحان اكتب اللي في الكتاب (race, age, sex, creatinine)."
+      - kind: check
+        page: 412
+        quote: "there appear to be independent effects of both the malignancy and chemotherapy on cystatin C levels that confound its utility."
+        question: "Why is an isolated cystatin C level questioned for GFR in cancer patients?"
+        options:
+          - "The tumor and chemotherapy change cystatin C independently of GFR"
+          - "Cystatin C is excreted unchanged in urine"
+          - "It depends on muscle mass like creatinine"
+          - "Only some cells make it, at a variable rate"
+        answer: 0
+        why:
+          - "صح: ده بالظبط سبب الكتاب (ص 412)."
+          - "غلط: بيتكسر في الـ tubules ومفيش urinary excretion تُذكر."
+          - "غلط: ده عيب الـ creatinine، والـ cystatin C بيطلع من كل الخلايا."
+          - "غلط: كل الـ nucleated cells بتعمله بمعدل ثابت."
+      - kind: explain
+        page: 412
+        title: "الـ AKI: نفس الـ schema"
+        quote: "Prerenal etiologies are especially common and if early detected could be reversed."
+        text: |
+          الـ AKI في عيان السرطان بتتشخص زي أي حد: **prerenal** ولا **intrarenal** (vascular, glomerular, tubular, interstitial) ولا **postrenal** (obstruction).
+
+          الـ ==prerenal== هو الأشهر، ولو مسكته بدري **بيرجع**. علشان كده اسأل عن الأكل والترجيع والإسهال قبل أي حاجة.
+      - kind: sort
+        page: 413
+        quote: "Medications (ACE inhibitors, angiotensin-receptor blockers, NSAIDs, diuretics, calcineurin inhibitors) Cytokine release syndrome Early veno-occlusive disease"
+        prompt: "أسباب الـ prerenal AKI في الـ Figure (ص 413). صنّف: موجودة في العمودين، ولا بعد الـ stem cell transplant بس؟"
+        bins: ["Both columns", "Stem cell transplant only"]
+        cards:
+          - { text: "Poor intake: chemo anorexia, emesis, diarrhea", bin: 0 }
+          - { text: "Sepsis with renal hypoperfusion", bin: 0 }
+          - { text: "ACEi, ARB, NSAIDs, diuretics", bin: 0 }
+          - { text: "Calcineurin inhibitors", bin: 1 }
+          - { text: "Cytokine release syndrome", bin: 1 }
+          - { text: "Early veno-occlusive disease", bin: 1 }
+        why: "العمود الأصفر (cancers) فيه كمان cirrhosis و heart failure و hypercalcemia. العمود الأزرق (stem cell transplant) زوّد الـ calcineurin inhibitors والـ cytokine release syndrome والـ veno-occlusive disease، لأنها كلها مرتبطة بالـ transplant نفسه."
+      - kind: aside
+        tone: joke
+        text: "الـ creatinine عامل زي الموظف اللي بيقول «كله تمام يا فندم» علشان المدير (العضلات) مش موجود. اسأل الـ CKD-EPI."
+      - kind: try
+        items: [neph.L12.003, neph.L12.008, neph.L12.012, neph.L12.014, neph.L12.020]
+    recap:
+      - "الـ onconephrology = سرطان + كلى، ومحتاج team متعاون. الـ spectrum: **ACGK MEDOH**."
+      - "الـ creatinine لوحده بيعمل overestimation للـ GFR (age، muscle، meat، race، creatine)."
+      - "الـ cystatin C: 13 kDa، constant production، freely filtered، بس السرطان والـ chemo بيغيروه."
+      - "الـ CKD-EPI (KDOQI) اتعملها validation في السرطان."
+      - "الـ prerenal AKI هو الأشهر وبيرجع لو اتمسك بدري."
+    practice: [neph.L12.001, neph.L12.002, neph.L12.003, neph.L12.004, neph.L12.005, neph.L12.006, neph.L12.007, neph.L12.008, neph.L12.009, neph.L12.010, neph.L12.011, neph.L12.012, neph.L12.013, neph.L12.014, neph.L12.015, neph.L12.016, neph.L12.017, neph.L12.018, neph.L12.019, neph.L12.020, neph.L12.021]
+  # ------------------------------------------------------------------
+  - id: neph.L12.lesson2
+    title: "Tumor lysis syndrome: الورم لما يفرقع"
+    hook: "الـ chemo شغال كويس أوي لدرجة إن الخلايا بتنفجر وتغرق الكلية."
+    minutes: 10
+    pages: [413, 416]
+    topics: [tls]
+    goals:
+      - "تعرف الـ TLS ونتايجه الست"
+      - "تحفظ الـ Cairo-Bishop (lab و clinical) بالأرقام"
+      - "تفهم الـ pathophysiology وتعمل prevention وعلاج صح"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 413
+        title: "إيه اللي بيحصل؟"
+        quote: "It is an emergency condition in which breakdown of tumor cells, either spontaneously or in response to treatment, releases intracellular contents into the circulation"
+        text: |
+          الـ ==tumor lysis syndrome== **emergency**: خلايا الورم بتتكسر (لوحدها أو مع العلاج) وتطلّع اللي جواها في الدم:
+
+          - **hyperuricemia**
+          - **hyperkalemia**
+          - **hyperphosphatemia**
+          - **secondary hypocalcemia**
+          - **metabolic acidosis**
+          - **AKI**
+
+          وممكن كمان **cardiac arrhythmias** و **seizures**.
+      - kind: figure
+        page: 415
+        quote: "The release of large amounts of phosphate increases the calcium-phosphate concentration product, leading to calcium-phosphate precipitation with nephrocalcinosis and hypocalcemia."
+        title: "من الخلية للكلية"
+        alt: "Pathway: a lysed tumor cell releases potassium, phosphate and DNA. DNA becomes purines, then uric acid via xanthine oxidase, causing uric acid nephropathy. Phosphate binds calcium, causing nephrocalcinosis and hypocalcemia. Potassium causes arrhythmia. Cytokine release is a third AKI mechanism."
+        caption: "تلات طرق للـ AKI: ==uric acid nephropathy== و **nephrocalcinosis** و **cytokine release**. والـ allopurinol بيقفل سهم الـ xanthine oxidase."
+        svg: |
+          <svg viewBox="0 0 330 366" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L12b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker></defs>
+            <rect x="85" y="10" width="160" height="40" rx="20" class="fg-bad"/>
+            <text x="165" y="35" text-anchor="middle" class="t-sm t-b">Tumor cell lysis</text>
+            <path d="M120 50 L55 80" class="fg-arrow" marker-end="url(#L12b)"/>
+            <path d="M165 50 V80" class="fg-arrow" marker-end="url(#L12b)"/>
+            <path d="M210 50 L275 80" class="fg-arrow" marker-end="url(#L12b)"/>
+            <rect x="10" y="84" width="90" height="34" rx="8" class="fg-box"/>
+            <text x="55" y="106" text-anchor="middle" class="t-sm t-b">DNA</text>
+            <rect x="120" y="84" width="90" height="34" rx="8" class="fg-box"/>
+            <text x="165" y="106" text-anchor="middle" class="t-sm t-b">Phosphate</text>
+            <rect x="230" y="84" width="90" height="34" rx="8" class="fg-box"/>
+            <text x="275" y="106" text-anchor="middle" class="t-sm t-b">Potassium</text>
+            <path d="M55 118 V140" class="fg-arrow" marker-end="url(#L12b)"/>
+            <text x="55" y="156" text-anchor="middle" class="t-sm">Purines</text>
+            <path d="M55 162 V190" class="fg-arrow-acc" marker-end="url(#L12b)"/>
+            <text x="66" y="181" class="t-sm t-acc">xanthine oxidase</text>
+            <rect x="10" y="194" width="90" height="34" rx="8" class="fg-acc"/>
+            <text x="55" y="216" text-anchor="middle" class="t-sm t-b">Uric acid</text>
+            <path d="M165 118 V190" class="fg-arrow" marker-end="url(#L12b)"/>
+            <text x="172" y="150" class="t-sm t-mut">+ calcium</text>
+            <rect x="120" y="194" width="90" height="34" rx="8" class="fg-acc"/>
+            <text x="165" y="210" text-anchor="middle" class="t-sm t-b">Ca-P deposit</text>
+            <text x="165" y="223" text-anchor="middle" class="t-sm">low serum Ca</text>
+            <path d="M275 118 V190" class="fg-arrow" marker-end="url(#L12b)"/>
+            <rect x="230" y="194" width="90" height="34" rx="8" class="fg-bad"/>
+            <text x="275" y="216" text-anchor="middle" class="t-sm t-b">Arrhythmia</text>
+            <path d="M55 228 L120 280" class="fg-arrow-bad" marker-end="url(#L12b)"/>
+            <path d="M165 228 V276" class="fg-arrow-bad" marker-end="url(#L12b)"/>
+            <rect x="60" y="280" width="210" height="78" rx="10" class="fg-bad"/>
+            <text x="165" y="300" text-anchor="middle" class="t-sm t-bad t-b">AKI mechanisms</text>
+            <text x="165" y="317" text-anchor="middle" class="t-sm">uric acid nephropathy</text>
+            <text x="165" y="332" text-anchor="middle" class="t-sm">nephrocalcinosis</text>
+            <text x="165" y="348" text-anchor="middle" class="t-sm">cytokine release</text>
+          </svg>
+      - kind: explain
+        page: 413
+        title: "مين اللي بيعمله؟"
+        quote: "such as non-Hodgkin lymphoma, acute myeloid leukemia, acute lymphocytic leukemia, Burkitt lymphoma, and solid organ cancers with large masses."
+        text: |
+          الأورام اللي ==large tumor burden== و **rapid cell growth**:
+          - **non-Hodgkin lymphoma** و **Burkitt lymphoma**
+          - **AML** و **ALL**
+          - **solid cancers** بكتلة كبيرة
+
+          والـ in-hospital mortality ممكن توصل **20%**، و **70%** بيحصلهم complications خطيرة (sepsis، dialysis، respiratory failure، ventilation، cardiac arrest، seizures).
+      - kind: table
+        page: 414
+        quote: "Calcium 25% decrease from baseline or ≤7.0 mg/dL"
+        title: "Cairo-Bishop: الـ laboratory TLS"
+        columns: [Lab, Value, Or]
+        rows:
+          - ["Uric acid", "≥8.0 mg/dL", "↑25%"]
+          - ["Potassium", "≥6.0 mEq/L", "↑25%"]
+          - ["Phosphorus", "≥4.5 mg/dL (child ≥6.5)", "↑25%"]
+          - ["Calcium", "≤7.0 mg/dL", "↓25%"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1]]
+      - kind: aside
+        tone: tip
+        page: 414
+        quote: "presence of 2 or more of the following criteria within the same 24-hour period from 3 days before to 7 days after chemotherapy initiation"
+        text: |
+          افتكر **8 - 6 - 4.5 - 7**: uric acid **8**، potassium **6**، phosphate **4.5**، calcium **7** (ده الوحيد اللي بينزل).
+
+          والقاعدة: **2 أو أكتر** في نفس الـ **24 ساعة**، من **3 أيام قبل** لـ **7 أيام بعد** بداية الـ chemo.
+      - kind: explain
+        page: 415
+        title: "امتى يبقى clinical؟"
+        quote: "Clinical tumor lysis syndrome is defined by the presence of laboratory tumor lysis syndrome plus one or more of the following"
+        text: |
+          ==Clinical TLS== = laboratory TLS + واحدة على الأقل من:
+          - **seizure**
+          - **creatinine > 1.5 × ULN** (age-adjusted)
+          - **cardiac arrhythmia** أو **sudden death**
+
+          الـ Cairo-Bishop كمان بيعمل grading من **0** (asymptomatic) لـ **5** (death).
+      - kind: check
+        page: 415
+        quote: "Creatinine greater than 1.5 times the upper limit of normal of an age-adjusted reference range"
+        question: "Day 2 of chemo: uric acid 10, K 6.5, Ca 7.6, creatinine 2.0 mg/dL (ULN 1.1). No seizure or arrhythmia. Diagnosis?"
+        options:
+          - "Clinical TLS"
+          - "Laboratory TLS only"
+          - "No TLS: calcium is above 7"
+          - "No TLS: creatinine is not a lab criterion"
+        answer: 0
+        why:
+          - "صح: uric acid و K = اتنين lab criteria، والـ creatinine 2.0 أكبر من 1.5 × 1.1 = 1.65، فبقى clinical."
+          - "ناقص: الـ creatinine عدّى 1.5 × ULN."
+          - "الكالسيوم مش لازم؛ كفاية أي اتنين."
+          - "صح إنه مش lab criterion، بس هو clinical criterion."
+      - kind: explain
+        page: 416
+        title: "الوقاية حسب الـ risk"
+        quote: "a balanced isotonic crystalloid solution (1-2 mL/kg/hour) should be administered to maintain adequate hydration status and GFR."
+        text: |
+          - **Low risk:** **oral hydration** وابعد عن الـ nephrotoxins.
+          - **Higher risk:** IV **0.9% saline** أو الأحسن ==balanced isotonic crystalloid== بمعدل **1-2 mL/kg/hour**، تبدأ **24-48 ساعة قبل** العلاج.
+          - **High risk:** زوّد **xanthine oxidase inhibitor** (allopurinol أو febuxostat) علشان يمنع تكوين uric acid جديد.
+
+          الـ hydration بيحافظ على الـ **tubular flow** فيغسل الـ uric acid والـ K والـ phosphate.
+      - kind: reveal
+        page: 416
+        quote: "Urinary alkalinization, which increases the solubility of uric acid in the renal tubules, is not recommended"
+        prompt: "الـ uric acid بيذوب أكتر في البول القلوي. ليه الكتاب بيقول لأ للـ urinary alkalinization؟"
+        answer: |
+          لأن الـ **calcium phosphate** بالعكس، بيترسب أكتر في الوسط القلوي. فأنت بتحل مشكلة الـ urate وبتعمل **nephrocalcinosis** و **symptomatic hypocalcemia**.
+
+          والـ phosphate عالي أصلًا في الـ TLS، فالمكسب مش يستاهل.
+      - kind: update
+        page: 416
+        quote: "patients at high risk for TLS should receive a xanthine oxidase inhibitor (allopurinol or febuxostat) to blunt de novo formation of uric acid."
+        ref: "Cairo et al. TLS recommendations 2010; NCCN supportive care 2024"
+        text: "عمليًا الـ rasburicase (urate oxidase) بيتدّي في الـ high risk أو لو الـ uric acid عالي فعلًا، وممنوع في الـ G6PD deficiency. الكتاب ذكر الـ xanthine oxidase inhibitors بس، وده اللي يتكتب في الامتحان."
+      - kind: explain
+        page: 416
+        title: "لما الكلية تقف"
+        quote: "serum uric acid levels fall by approximately 50% with each 6-hour treatment."
+        text: |
+          لو فيه **established AKI** خصوصًا **oliguric أو anuric**: ==emergent hemodialysis== بيصلح الـ electrolytes بسرعة وأمان.
+
+          - الـ uric acid بينزل حوالي **50%** في كل جلسة **6 ساعات**.
+          - الـ **CRRT** مفيد لأنه بيمنع الـ **rebound** metabolic disturbances.
+      - kind: order
+        page: 416
+        quote: "Electrolyte disorders should be identified and corrected rapidly according to standard protocols)."
+        prompt: "رتّب السلم من الأخف للأتقل:"
+        steps:
+          - "Oral hydration, avoid nephrotoxins"
+          - "IV balanced crystalloid 1-2 mL/kg/h"
+          - "Add allopurinol or febuxostat"
+          - "Correct electrolytes rapidly"
+          - "Emergent hemodialysis or CRRT"
+        why: "بتطلع درجة كل ما الـ risk يزيد، والـ dialysis للـ established oliguric AKI."
+      - kind: try
+        items: [neph.L12.023, neph.L12.031, neph.L12.035, neph.L12.039, neph.L12.046]
+    recap:
+      - "الـ TLS: uric acid ↑، K ↑، phosphate ↑، Ca ↓، acidosis، AKI (+ arrhythmia، seizures)."
+      - "Cairo-Bishop lab: ≥2 من (urate 8، K 6، P 4.5، Ca 7 أو تغيير 25%) من 3 أيام قبل لـ 7 بعد الـ chemo."
+      - "Clinical = lab + seizure أو creatinine >1.5 × ULN أو arrhythmia."
+      - "AKI = uric acid nephropathy + nephrocalcinosis + cytokines."
+      - "Hydration 1-2 mL/kg/h قبلها بـ 24-48 ساعة + xanthine oxidase inhibitor. لا للـ alkalinization."
+      - "Oliguric AKI = hemodialysis (urate ↓50% كل 6 ساعات) أو CRRT."
+    practice: [neph.L12.022, neph.L12.023, neph.L12.024, neph.L12.025, neph.L12.026, neph.L12.027, neph.L12.028, neph.L12.029, neph.L12.030, neph.L12.031, neph.L12.032, neph.L12.033, neph.L12.034, neph.L12.035, neph.L12.036, neph.L12.037, neph.L12.038, neph.L12.039, neph.L12.040, neph.L12.041, neph.L12.042, neph.L12.043, neph.L12.044, neph.L12.045, neph.L12.046, neph.L12.047, neph.L12.048, neph.L12.049, neph.L12.050, neph.L12.051, neph.L12.052, neph.L12.053, neph.L12.054, neph.L12.055]
+  # ------------------------------------------------------------------
+  - id: neph.L12.lesson3
+    title: "الورم والعلاج بيضربوا الكلية من كل ناحية"
+    hook: "Infiltration، انسداد، TMA، أدوية، و glomeruli: خمس طرق، ولكل واحدة علامة."
+    minutes: 10
+    pages: [416, 420]
+    topics: [infiltration, tma, drugs, glomerular]
+    goals:
+      - "تفرّق بين الـ infiltration والـ obstruction والـ TMA"
+      - "تعرف الأدوية وطريقة أذيتها (cisplatin، ifosfamide، interferon، IL-2)"
+      - "تربط كل glomerular lesion بسرطاناته (Figure 9)"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 417
+        title: "Tumor infiltration"
+        quote: "Renal imaging with ultrasonography or computed tomography shows bilaterally enlarged kidney with a heterogeneous texture"
+        text: |
+          الـ **leukemia** والـ **lymphoma** بيحبوا يدخلوا الكلية. في حوالي **1%** الدخول بيبقى massive ويعمل **AKI** عن طريق الضغط على الـ parenchyma وتكسير الـ microvasculature والـ tubules.
+
+          - **US أو CT:** ==bilaterally enlarged kidneys== بـ **heterogeneous texture**.
+          - **Kidney biopsy** هو اللي بيشخّص.
+      - kind: explain
+        page: 417
+        title: "Urinary tract obstruction"
+        quote: "More commonly, urinary tract obstruction is extrarenal and is caused by compression of the ureters by tumor mass (such as with cervical carcinoma)"
+        text: |
+          - **Intratubular:** uric acid (زي الـ TLS)، **high-dose methotrexate**، **high-dose IV acyclovir**.
+          - ==Extrarenal== (الأشهر): ورم بيضغط على الـ ureters (زي **cervical carcinoma**)، أو البروستاتا بتضغط على الـ urethra.
+      - kind: explain
+        page: 417
+        title: "Thrombotic microangiopathy"
+        quote: "Thrombotic microangiopathy (TMA) is characterized by microangiopathic hemolytic anemia from red blood cell fragmentation"
+        text: |
+          الـ ==TMA== = تلاتة:
+          1. **MAHA:** schistocytes، LDH عالي، haptoglobin واطي
+          2. **Thrombocytopenia**
+          3. **End-organ damage** زي الـ AKI (غالبًا severe وممكن يحتاج dialysis)
+
+          السرطانات اللي بتعمله أكتر (خصوصًا metastatic): **mucinous gastric**، **ovarian**، **lymphomas**، **AML**.
+      - kind: aside
+        tone: analogy
+        page: 417
+        quote: "Certain cancers, especially when metastatic, more frequently cause TMA compared with others-these include mucinous gastric cancers, ovarian cancers, lymphomas, and acute myeloid leukemias."
+        text: "الـ TMA زي مصفاة سلك اتسدّت بجلطات صغيرة: كرات الدم الحمرا بتعدي تتقطّع (schistocytes)، والصفائح بتخلص في الجلطات، والكلية (أكتر عضو فيه capillaries) هي أول واحدة تتضرّ."
+      - kind: check
+        page: 417
+        quote: "(schistocytes, increased lactate dehydrogenase, depressed haptoglobin)"
+        question: "Which lab set fits TMA?"
+        options:
+          - "Schistocytes, high LDH, low haptoglobin, low platelets"
+          - "High uric acid, high K, high phosphate, low Ca"
+          - "Heavy proteinuria with negative anti-PLA2R"
+          - "Bilaterally enlarged heterogeneous kidneys"
+        answer: 0
+        why:
+          - "صح: MAHA + thrombocytopenia."
+          - "دي الـ TLS."
+          - "دي الـ cancer-associated membranous nephropathy."
+          - "دي الـ tumor infiltration."
+      - kind: explain
+        page: 418
+        title: "الأدوية"
+        quote: "is caused primarily by acute tubular toxicity, acute tubulointerstitial nephritis (ATIN), and various glomerular injuries"
+        text: |
+          الـ conventional chemo بيعمل AKI بـ **acute tubular toxicity** و **ATIN** و **glomerular injury**، وغالبًا ==dose and duration related==.
+
+          - **Cisplatin:** الـ nephrotoxicity بتاعته **dose-limiting**.
+          - **Ifosfamide:** **direct tubular epithelial damage**.
+          - **Interferon:** AKI + proteinuria عالية من **FSGS** أو **MCD** بعد **أسابيع لشهور**.
+          - **High-dose IL-2** (RCC، melanoma): **cytokine release syndrome** و **capillary leak** ← **prerenal AKI** خلال **24-48 ساعة**.
+
+          والـ immunotherapies الجديدة (ICPIs، CAR-T) زوّدت الـ drug-induced AKI.
+      - kind: match
+        page: 418
+        quote: "causing a prerenal form of AKI that develops within 24 to 48 hours after starting treatment."
+        prompt: "وصّل كل دوا بطريقة أذيته للكلية:"
+        pairs:
+          - ["Ifosfamide", "Direct tubular epithelial damage"]
+          - ["Interferon", "FSGS or MCD after weeks to months"]
+          - ["High-dose IL-2", "Capillary leak, prerenal AKI in 24-48 h"]
+          - ["High-dose methotrexate", "Intratubular obstruction"]
+        why: "الـ IL-2 بيعمل AKI بسرعة (أيام) لأنه hemodynamic، والـ interferon ببطء (أسابيع) لأنه glomerular. والـ methotrexate بيترسب جوه الـ tubules."
+      - kind: explain
+        page: 418
+        title: "قبل الـ nephrectomy"
+        quote: "Preoperative screening using KDIGO CKD criteria (eGFR and albuminuria) is recommended for patients at risk for AKI"
+        text: |
+          قبل الـ **nephrectomy for RCC**: اعمل screening بالـ ==KDIGO CKD criteria== (**eGFR** و **albuminuria**) للي عندهم risk.
+
+          وعلشان تقلّل الـ post-nephrectomy AKI: وقّف الأدوية الـ nephrotoxic، واضمن **intraoperative kidney perfusion** كويس.
+      - kind: explain
+        page: 419
+        title: "Paraneoplastic glomerular disease"
+        quote: "Membranous nephropathy MN is the most common glomerular pathology described in patients with solid tumors"
+        text: |
+          العلاج الأساسي = ==treat the underlying malignancy==.
+
+          - الأشهر مع الـ **solid tumors**: **membranous nephropathy**.
+          - أشهر أورام: **lung** و **gastric**، بعدهم RCC و prostate و thymoma. (ومعاهم colorectal، pancreatic، esophageal، hepatic.)
+          - الـ **anti-PLA2R** بيبقى positive في **80%** من الـ primary MN، بس **مش موجود** في الـ MN بتاعة السرطان.
+      - kind: reveal
+        page: 419
+        quote: "(a marker for primary MN in up to 80% or more of cases) were not found in patients with cancer who had secondary MN."
+        prompt: "راجل مدخن 65 سنة، nephrotic، الـ biopsy فيها MN، والـ anti-PLA2R negative. بتفكر في إيه؟"
+        answer: "الـ anti-PLA2R negative بيبعدك عن الـ **primary MN**. في سنه وتدخينه دوّر على **lung cancer** الأول (وبعده gastric). وعلاج الـ MN هنا = علاج الورم."
+      - kind: figure
+        page: 420
+        quote: "Glomerular Diseases Associated With Solid Tumors and Hematologic Malignancies."
+        title: "Figure 9 مرسومة"
+        alt: "Map from 'Glomerular pathology in cancer' to six lesions with their cancers: IgA nephropathy with respiratory, buccal and nasopharynx tumors; membranous with lung, gastric, RCC, thymoma, prostate and CLL; minimal change with Hodgkin and non-Hodgkin lymphoma, leukemias, thymoma, lung, colorectal, RCC; FSGS with RCC, breast, thymoma, Hodgkin; MPGN with paraproteinemias, CLL, lung, RCC; crescentic GN with lung and gastric cancer."
+        caption: "قاعدة سريعة: ==MN== = solid tumors (lung، gastric)، **MCD** = lymphoma (Hodgkin)، **MPGN** = CLL والـ paraproteins. وفي الـ CLL: MPGN **36%** و MN **19%**."
+        svg: |
+          <svg viewBox="0 0 330 400" xmlns="http://www.w3.org/2000/svg">
+            <rect x="60" y="8" width="210" height="32" rx="16" class="fg-ink"/>
+            <text x="165" y="29" text-anchor="middle" class="t-sm t-b">Glomerular pathology in cancer</text>
+            <rect x="10" y="52" width="310" height="52" rx="8" class="fg-acc"/>
+            <text x="20" y="72" class="t-sm t-b t-acc">Membranous (most common, solid)</text>
+            <text x="20" y="90" class="t-sm">lung, gastric, RCC, thymoma, prostate, CLL</text>
+            <rect x="10" y="112" width="310" height="52" rx="8" class="fg-box"/>
+            <text x="20" y="132" class="t-sm t-b">Minimal change disease</text>
+            <text x="20" y="150" class="t-sm">Hodgkin, NHL, leukemias, thymoma, lung, CRC, RCC</text>
+            <rect x="10" y="172" width="310" height="52" rx="8" class="fg-box"/>
+            <text x="20" y="192" class="t-sm t-b">FSGS</text>
+            <text x="20" y="210" class="t-sm">RCC, breast, thymoma, Hodgkin</text>
+            <rect x="10" y="232" width="310" height="52" rx="8" class="fg-box"/>
+            <text x="20" y="252" class="t-sm t-b">MPGN</text>
+            <text x="20" y="270" class="t-sm">paraproteinemias, CLL, lung, RCC</text>
+            <rect x="10" y="292" width="310" height="52" rx="8" class="fg-box"/>
+            <text x="20" y="312" class="t-sm t-b">IgA nephropathy</text>
+            <text x="20" y="330" class="t-sm">respiratory tract, buccal mucosa, nasopharynx</text>
+            <rect x="10" y="352" width="310" height="40" rx="8" class="fg-bad"/>
+            <text x="20" y="377" class="t-sm"><tspan class="t-b">Crescentic GN:</tspan> lung, gastric</text>
+          </svg>
+      - kind: match
+        page: 420
+        quote: "membranoproliferative glomerulonephritis (36%) and MN (19%)."
+        prompt: "وصّل الـ lesion بالسرطان اللي بيتذكر معاها (Figure 9):"
+        pairs:
+          - ["IgA nephropathy", "Nasopharynx tumors"]
+          - ["Minimal change disease", "Hodgkin lymphoma"]
+          - ["MPGN", "Paraproteinemias and CLL (36%)"]
+          - ["Crescentic GN", "Lung and gastric cancer"]
+        why: "الـ IgA مع أورام الـ mucosa اللي فيها IgA (تنفسي، فم، nasopharynx). الـ MCD مع الـ lymphoma (cytokines من الـ T-cells). الـ MPGN مع الـ paraproteins والـ CLL."
+      - kind: try
+        items: [neph.L12.062, neph.L12.073, neph.L12.075, neph.L12.083, neph.L12.084]
+    recap:
+      - "Infiltration (leukemia/lymphoma): كليتين كبار heterogeneous، والـ biopsy بتشخّص."
+      - "Obstruction: intratubular (urate، methotrexate، acyclovir) أو الأشهر extrarenal (cervical cancer، prostate)."
+      - "TMA = MAHA + low platelets + AKI؛ mucinous gastric، ovarian، lymphoma، AML."
+      - "Ifosfamide = tubular damage؛ interferon = FSGS/MCD بعد أسابيع؛ IL-2 = capillary leak و prerenal AKI في 24-48 ساعة."
+      - "Solid tumors = MN (lung، gastric)، والـ anti-PLA2R negative. العلاج = علاج الورم."
+    practice: [neph.L12.056, neph.L12.057, neph.L12.058, neph.L12.059, neph.L12.060, neph.L12.061, neph.L12.062, neph.L12.063, neph.L12.064, neph.L12.065, neph.L12.066, neph.L12.067, neph.L12.068, neph.L12.069, neph.L12.070, neph.L12.071, neph.L12.072, neph.L12.073, neph.L12.074, neph.L12.075, neph.L12.076, neph.L12.077, neph.L12.078, neph.L12.079, neph.L12.080, neph.L12.081, neph.L12.082, neph.L12.083, neph.L12.084, neph.L12.085, neph.L12.086, neph.L12.087, neph.L12.126]
+  # ------------------------------------------------------------------
+  - id: neph.L12.lesson4
+    title: "الأملاح في السرطان والكالسيوم العالي"
+    hook: "صوديوم واطي، بوتاسيوم ضايع، وكالسيوم عالي بيلخبط الوعي: كل واحد ليه قصة."
+    minutes: 10
+    pages: [420, 424]
+    topics: [electrolytes, hypercalcemia, lactic]
+    goals:
+      - "تشخّص الـ SIAD بالـ Table 8"
+      - "تعدّ أسباب الـ hypokalemia في السرطان"
+      - "تعالج الـ hypercalcemia of malignancy وتعرف كل دوا امتى يشتغل"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 420
+        title: "Hyponatremia"
+        quote: "SIADH is the most common etiology in patients with cancer, accounting for one-third of all cases of hyponatremia."
+        text: |
+          - موجودة في لحد **47%** من عيانين السرطان في المستشفى (أغلب الدراسات **24-44%**)، وأغلبها **mild**.
+          - ممكن تبقى **marker** لسرطان مستخبي.
+          - أشهر سبب: ==SIADH==، حوالي **ثلث** الحالات.
+      - kind: table
+        page: 421
+        quote: "Plasma serum osmolality <275 mOsmol/kg H2O"
+        title: "Table 8: تشخيص الـ SIAD"
+        columns: [Criterion, Value]
+        rows:
+          - ["Plasma osmolality", "<275 mOsm/kg"]
+          - ["Volume", "Euvolemic"]
+          - ["Urine sodium", ">20-30 mEq/L"]
+          - ["Urine osmolality", ">100 mOsm/kg"]
+          - ["Exclude", "Diuretics, hypothyroidism, adrenal insufficiency"]
+        hide: [[0, 1], [2, 1], [3, 1], [4, 1]]
+      - kind: reveal
+        page: 421
+        quote: "Inappropriate urinary concentration (Uosm >100 mOsmol/kg H2O)"
+        prompt: "ليه الـ urine osmolality أكتر من 100 بتقول «inappropriate»؟"
+        answer: "الدم مخفف (osmolality <275)، فالمفروض الـ ADH يقف والكلية تطلّع بول مخفف جدًا (<100). لو البول مركّز رغم كده، يبقى فيه **ADH شغال من غير داعي** = **inappropriate antidiuresis**. (تفسير فسيولوجي، والأرقام من Table 8.)"
+      - kind: explain
+        page: 421
+        title: "Hypernatremia و hypokalemia"
+        quote: "Increased renal losses (diuretic use, Fanconi syndrome from chemotherapy use [cisplatin, ifosfamide], hypomagnesemia [cetuximab use or platinum compounds]"
+        text: |
+          **Hypernatremia:** من **free water loss** أو قلة تعويض المية. بدري: confusion، lethargy، irritability، polyuria، weakness. متأخر: hyperthermia، seizure، delirium، coma، death.
+
+          **Hypokalemia** في السرطان، تلات أبواب:
+          1. **قلة الأكل:** anorexia، nausea، mucositis، surgery
+          2. **extrarenal loss:** vomiting، diarrhea
+          3. ==renal loss==: diuretics، **Fanconi** (cisplatin، ifosfamide)، **hypomagnesemia** (cetuximab، platinum)، **ectopic ACTH** (squamous، medullary thyroid، neuroendocrine)
+      - kind: sort
+        page: 421
+        quote: "or from excess ACTH production by tumor cells [squamous cell cancers, thyroid medullary cancer, neuroendocrine tumors),"
+        prompt: "صنّف سبب الـ hypokalemia:"
+        bins: ["Low intake", "Extrarenal loss", "Renal loss"]
+        cards:
+          - { text: "Mucositis", bin: 0 }
+          - { text: "Anorexia after surgery", bin: 0 }
+          - { text: "Diarrhea", bin: 1 }
+          - { text: "Vomiting", bin: 1 }
+          - { text: "Cisplatin Fanconi syndrome", bin: 2 }
+          - { text: "Cetuximab hypomagnesemia", bin: 2 }
+          - { text: "Ectopic ACTH from neuroendocrine tumor", bin: 2 }
+        why: "الـ Mg الواطي بيخلي الكلية تفقد K، والـ ACTH بيعمل mineralocorticoid effect، والـ Fanconi بيفقد كل حاجة من الـ proximal tubule. كلهم renal."
+      - kind: explain
+        page: 422
+        title: "Mg و phosphate"
+        quote: "Hypomagnesemia is commonly seen in patients with cancer and may be caused by diminished dietary intake or renal magnesium wasting."
+        text: |
+          - ==Hypomagnesemia==: قلة أكل أو **renal magnesium wasting**.
+          - **Hypophosphatemia:** في الـ **high cell-turnover** (leukemia، lymphoma)، بتزيد مع قلة الأكل، وبتسوّء الـ outcome.
+      - kind: table
+        page: 422
+        quote: "categorized either as mild when levels are between 10 to 12 mg/dL, moderate when levels are between 12 to 14 mg/dL"
+        title: "درجات الـ hypercalcemia"
+        columns: [Grade, Calcium]
+        rows:
+          - ["Mild", "10-12 mg/dL"]
+          - ["Moderate", "12-14 mg/dL"]
+          - ["Severe", ">14 mg/dL"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: explain
+        page: 422
+        title: "ليه الكالسيوم بيعلى؟"
+        quote: "Excessive secretion of parathyroid hormone-related protein (PTHrP). (most common) Bony metastases with the release of osteoclast activating factors."
+        text: |
+          بيحصل في حوالي **20%** من عيانين السرطان، والأعلى prevalence: **multiple myeloma**.
+
+          تلات mechanisms:
+          1. ==PTHrP== (الأشهر، **80%**، اسمها **humoral hypercalcemia of malignancy**): solid tumors زي **squamous** (head، neck، lung)، breast، ovarian، renal، وشوية NHL.
+          2. **Bone metastases** بتطلّع osteoclast activating factors.
+          3. **1,25-dihydroxy vitamin D** (calcitriol)، زي الـ lymphoma.
+      - kind: figure
+        page: 423
+        quote: "The calcitonin acts within 4 to 6 hours and lasts for about two days, whereas the bisphosphonates exhibit their action in 2 to 3 days"
+        title: "مين بيشتغل امتى"
+        alt: "Timeline bars from hour 0 to 4 weeks: normal saline acts immediately and lasts while infused; calcitonin starts at 4-6 hours and lasts about 2 days; bisphosphonates start at 2-3 days and last 2-4 weeks."
+        caption: "التلاتة مع بعض علشان يغطوا بعض: ==saline== فورًا، **calcitonin** بعد ساعات لحد يومين، **bisphosphonate** يستلم من اليوم 2-3 لأسابيع."
+        svg: |
+          <svg viewBox="0 0 330 240" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 210 H320" class="fg-arrow"/>
+            <text x="20" y="228" class="t-sm t-mut">0 h</text>
+            <text x="95" y="228" text-anchor="middle" class="t-sm t-mut">6 h</text>
+            <text x="165" y="228" text-anchor="middle" class="t-sm t-mut">2 d</text>
+            <text x="230" y="228" text-anchor="middle" class="t-sm t-mut">3 d</text>
+            <text x="310" y="228" text-anchor="end" class="t-sm t-mut">4 wk</text>
+            <rect x="20" y="20" width="140" height="34" rx="8" class="fg-acc"/>
+            <text x="28" y="42" class="t-sm t-b">Saline: immediate</text>
+            <text x="165" y="42" class="t-sm t-mut">while infused</text>
+            <rect x="80" y="74" width="100" height="34" rx="8" class="fg-good"/>
+            <text x="88" y="96" class="t-sm t-b">Calcitonin</text>
+            <text x="185" y="96" class="t-sm t-mut">4-6 h, ~2 days</text>
+            <rect x="200" y="128" width="120" height="34" rx="8" class="fg-box"/>
+            <text x="208" y="150" class="t-sm t-b">Bisphosphonate</text>
+            <text x="320" y="182" text-anchor="end" class="t-sm t-mut">starts 2-3 d, lasts 2-4 wk</text>
+          </svg>
+      - kind: explain
+        page: 423
+        title: "الجرعات"
+        quote: "IV hydration with NS at the rate of 200 to 300 mL/hr is given to maintain an adequate urine output of more than 100 mL/hr"
+        text: |
+          - **NS:** **200-300 mL/hr** علشان الـ urine output يبقى **>100 mL/hr**؛ بيرجّع الـ volume ويزوّد إخراج الكالسيوم.
+          - **Calcitonin:** **4 IU/kg** مع الـ NS؛ سريع جدًا بس تأثيره **limited**.
+          - ==Zoledronic acid==: المفضّل في السرطان (أقوى وأقصر)، للي كليتهم سليمة. عيوبه: **osteonecrosis of the jaw** و **nephrotoxicity**.
+      - kind: match
+        page: 424
+        quote: "Denosumab acts by inhibiting RANKL and should be considered when there is no response to zoledronic acid or in patients with kidney impairment"
+        prompt: "وصّل الموقف بالدوا:"
+        pairs:
+          - ["Kidney impairment or zoledronic acid failed", "Denosumab"]
+          - ["Lymphoma with high calcitriol", "Glucocorticoids"]
+          - ["Hemodialysis or parathyroid cancer", "Cinacalcet"]
+          - ["Malignancy with normal kidneys", "Zoledronic acid"]
+        why: "الـ denosumab (anti-RANKL) مش بيتخرج من الكلية. الـ steroids بتقلل إنتاج الـ vitamin D وامتصاص الكالسيوم. الـ cinacalcet calcimimetic بيكلم الـ parathyroid نفسها."
+      - kind: case
+        page: 423
+        quote: "Symptomatic patients with severe hypercalcemia need emergent treatment.."
+        stem: "Woman with squamous cell lung cancer, drowsy. Calcium 14.6 mg/dL, creatinine 0.9 mg/dL."
+        steps:
+          - question: "Mechanism most likely?"
+            options: ["PTHrP (humoral)", "Calcitriol", "Primary hyperparathyroidism", "Immobilization only"]
+            answer: 0
+            why: "الـ PTHrP هو الأشهر (80%) وsquamous lung كلاسيكي معاه."
+          - question: "First orders?"
+            options: ["NS 200-300 mL/hr + calcitonin 4 IU/kg + zoledronic acid", "Zoledronic acid alone", "Cinacalcet", "Oral fluids"]
+            answer: 0
+            why: "Severe و symptomatic = emergent: التلاتة مع بعض. الـ bisphosphonate لوحده بطيء (2-3 أيام)."
+      - kind: aside
+        tone: exam
+        page: 424
+        quote: "It is associated with a poor prognosis regardless of the treatment and may be invariably fatal."
+        text: "وآخر حاجة في المحاضرة: ==type B lactic acidosis== نادرة، أكتر مع الـ **lymphoma** والـ **leukemia**، سببها مش معروف، والـ prognosis وحش جدًا ممكن تبقى **invariably fatal**."
+      - kind: try
+        items: [neph.L12.091, neph.L12.095, neph.L12.105, neph.L12.110, neph.L12.118]
+    recap:
+      - "Hyponatremia حتى 47%، أشهر سبب SIADH (الثلث). SIAD: Posm <275، euvolemic، UNa >20-30، Uosm >100."
+      - "Hypokalemia: intake، GI loss، renal (Fanconi من cisplatin/ifosfamide، low Mg من cetuximab/platinum، ectopic ACTH)."
+      - "Hypercalcemia: mild 10-12، moderate 12-14، severe >14؛ 20% من السرطانات؛ myeloma الأعلى."
+      - "PTHrP 80%، bone mets، calcitriol."
+      - "NS فورًا (200-300 mL/hr)، calcitonin 4-6 h لـ يومين، bisphosphonate 2-3 أيام لـ 2-4 أسابيع."
+      - "Denosumab للكلى التعبانة، steroids للـ calcitriol، cinacalcet للـ dialysis و parathyroid cancer."
+    practice: [neph.L12.088, neph.L12.089, neph.L12.090, neph.L12.091, neph.L12.092, neph.L12.093, neph.L12.094, neph.L12.095, neph.L12.096, neph.L12.097, neph.L12.098, neph.L12.099, neph.L12.100, neph.L12.101, neph.L12.102, neph.L12.103, neph.L12.104, neph.L12.105, neph.L12.106, neph.L12.107, neph.L12.108, neph.L12.109, neph.L12.110, neph.L12.111, neph.L12.112, neph.L12.113, neph.L12.114, neph.L12.115, neph.L12.116, neph.L12.117, neph.L12.118, neph.L12.119, neph.L12.120, neph.L12.121, neph.L12.122, neph.L12.123, neph.L12.124, neph.L12.125]

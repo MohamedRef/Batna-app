@@ -1,0 +1,1069 @@
+schema: batna.content/v1
+lecture: neph.L03
+title: "Cardiorenal syndrome"
+author: "Prof. Dr. Montasser Zeid"
+book: { chapter: 8, pages: [68, 79] }
+topics:
+  - { id: definition, title: "Definition and the five types" }
+  - { id: pathogenesis, title: "Mechanisms of damage in CRS 1–5" }
+  - { id: biomarkers, title: "Cardiac and kidney biomarkers (Table 2)" }
+  - { id: diuretics-uf, title: "Diuretic shortcomings and slow ultrafiltration" }
+  - { id: dialysis-hf, title: "Dialysis strategies in heart failure (Table 6)" }
+  - { id: gdmt, title: "Guideline-directed medical therapy and devices" }
+  - { id: volume, title: "Furosemide stress test and stepped volume management" }
+  - { id: resistance, title: "Diuretic resistance, hypertonic saline, dopamine and inotropes" }
+items:
+  # ---------- p68: definition and Table 1 ----------
+  - id: neph.L03.001
+    kind: card
+    topic: definition
+    front: Define cardiorenal syndrome (2008 consensus conference).
+    back: Disorders of the heart and kidneys in which acute or chronic dysfunction of one organ may induce acute or chronic dysfunction of the other.
+    src: { page: 68, quote: "disorders of the heart and kidneys whereby acute or chronic dysfunction in one organ may induce acute or chronic dysfunction of the other" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L03.002
+    kind: cloze
+    topic: definition
+    text: "The definition of cardiorenal syndrome comes from a {{c1::2008}} consensus conference, which split it into {{c2::five}} types."
+    src: { page: 68, quote: "A 2008 consensus conference defined" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L03.003
+    kind: table
+    topic: definition
+    title: "Classification of cardiorenal syndrome (Table 1)"
+    columns: [Type, Characteristics, Causes of morbidity]
+    rows:
+      - ["Type 1 (acute cardiorenal)", "Acute cardiac impairment leading to AKI", "Cardiogenic shock and ADHF resulting in AKI"]
+      - ["Type 2 (chronic cardiorenal)", "Chronic cardiac impairment leading to renal impairment", "Chronic heart failure"]
+      - ["Type 3 (acute renocardiac)", "AKI leading to cardiac impairment", "HF from AKI volume overload, inflammatory surge and metabolic disturbances"]
+      - ["Type 4 (chronic renocardiac)", "CKD leading to cardiac impairment", "Myocardial remodeling and HF from CKD-associated cardiomyopathy"]
+      - ["Type 5 (secondary cardiorenal)", "Systemic condition leading to both cardiac and renal impairment", "Diabetes, amyloidosis and sepsis"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 2]]
+    src: { page: 68, quote: "Type 5 (secondary cardiorenal) Systemic condition leading to both cardiac and renal impairment Diabetes, amyloidosis and sepsis" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L03.004
+    kind: card
+    topic: definition
+    front: "CRS type 1: what is it and what causes the morbidity?"
+    back: Acute cardiorenal. Acute cardiac impairment leading to AKI, as in cardiogenic shock or acute decompensated heart failure resulting in AKI.
+    src: { page: 68, quote: "Acute cardiac impairment leading to acute kidney injury (AKI) Cardiogenic shock and AKI, acute decompensated heart failure (ADHF) resulting in AKI" }
+    status: unverified
+  - id: neph.L03.005
+    kind: card
+    topic: definition
+    front: "CRS type 2: what is it?"
+    back: Chronic cardiorenal. Chronic cardiac impairment (chronic heart failure) leading to renal impairment.
+    src: { page: 68, quote: "Type 2 (chronic cardiorenal) Chronic cardiac impairment leading to renal impairment Chronic heart failure" }
+    status: unverified
+  - id: neph.L03.006
+    kind: card
+    topic: definition
+    front: "CRS type 3: what is it and why does the heart fail?"
+    back: Acute renocardiac. AKI leads to cardiac impairment through volume overload, an inflammatory surge and the accompanying metabolic disturbances.
+    src: { page: 68, quote: "AKI leading to cardiac impairment Heart failure in the setting of AKI from volume overload, inflammatory surge and accompanying metabolic disturbances" }
+    status: unverified
+  - id: neph.L03.007
+    kind: card
+    topic: definition
+    front: "CRS type 4: what is it?"
+    back: Chronic renocardiac. CKD leads to cardiac impairment through myocardial remodeling and CKD-associated cardiomyopathy.
+    src: { page: 68, quote: "Chronic kidney disease (CKD) leading to cardiac impairment Myocardial remodeling and heart failure from CKD-associated cardiomyopathy" }
+    status: unverified
+  - id: neph.L03.008
+    kind: enumerate
+    topic: definition
+    prompt: Name the systemic conditions the book gives as causes of CRS type 5 (secondary cardiorenal).
+    points:
+      - Diabetes
+      - Amyloidosis
+      - Sepsis
+    pass: 3
+    src: { page: 68, quote: "Systemic condition leading to both cardiac and renal impairment Diabetes, amyloidosis and sepsis" }
+    status: unverified
+  - id: neph.L03.009
+    kind: mcq
+    topic: definition
+    stem: A 55-year-old man on maintenance hemodialysis for 6 years develops progressive breathlessness. Echo shows left ventricular hypertrophy with an ejection fraction of 35%. No acute illness preceded it. Which cardiorenal type fits best?
+    options:
+      - Type 1
+      - Type 2
+      - Type 3
+      - Type 4
+      - Type 5
+    answer: 3
+    why:
+      - Type 1 is acute heart failure causing AKI; here the kidney disease came first.
+      - Type 2 is chronic heart failure causing renal impairment; the order is reversed.
+      - Type 3 is AKI causing acute cardiac dysfunction; his kidney disease is chronic.
+      - "Correct: CKD causing myocardial remodeling and CKD-associated cardiomyopathy is type 4, chronic renocardiac (p68)."
+      - Type 5 needs a systemic disease such as sepsis, diabetes or amyloidosis hitting both organs.
+    src: { page: 68, quote: "Type 4 (chronic renocardiac) Chronic kidney disease (CKD) leading to cardiac impairment" }
+    status: unverified
+  - id: neph.L03.010
+    kind: mcq
+    topic: definition
+    stem: A 30-year-old woman with septic shock from pneumonia develops oliguric AKI and, on the same day, a new reduction of left ventricular function on echo. Which cardiorenal type is this?
+    options:
+      - Type 1
+      - Type 3
+      - Type 4
+      - Type 5
+    answer: 3
+    why:
+      - Type 1 starts with the heart; here sepsis hit both organs together.
+      - Type 3 starts with AKI and then the heart fails; here neither organ is primary.
+      - Type 4 needs chronic kidney disease.
+      - "Correct: a systemic condition (sepsis) damaging both heart and kidney is type 5, secondary cardiorenal (p68)."
+    src: { page: 68, quote: "Systemic condition leading to both cardiac and renal impairment Diabetes, amyloidosis and sepsis" }
+    status: unverified
+  - id: neph.L03.011
+    kind: mcq
+    topic: definition
+    stem: A 62-year-old man is admitted with an anterior MI and cardiogenic shock. Over 48 hours his creatinine rises from 1.0 to 2.4 mg/dL. Which cardiorenal type is this?
+    options:
+      - Type 1 (acute cardiorenal)
+      - Type 2 (chronic cardiorenal)
+      - Type 3 (acute renocardiac)
+      - Type 5 (secondary)
+    answer: 0
+    why:
+      - "Correct: acute cardiac impairment (cardiogenic shock) leading to AKI is type 1 (p68)."
+      - Type 2 needs chronic heart failure and chronic renal impairment.
+      - In type 3 the AKI comes first and the heart follows.
+      - Type 5 needs a systemic disease that hits both organs; MI is a primary cardiac event.
+    src: { page: 68, quote: "Cardiogenic shock and AKI, acute decompensated heart failure (ADHF) resulting in AKI" }
+    status: unverified
+  # ---------- p69: Figure 1 and CRS-1 mechanism ----------
+  - id: neph.L03.012
+    kind: card
+    topic: pathogenesis
+    front: Main trigger of kidney damage in CRS type 1 (Figure 1)?
+    back: Altered renal perfusion, particularly when congestive heart failure is present.
+    src: { page: 69, quote: "Alteration of renal perfusion is the main trigger (in particular when congestive heart failure is present)" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L03.013
+    kind: card
+    topic: pathogenesis
+    front: Which process is particularly important in CRS type 2 (Figure 1), and what else should be considered?
+    back: Renal fibrosis. Drug-induced renal toxicity and VAD-induced renal effects should also be considered.
+    src: { page: 69, quote: "Renal fibrosis is particularly important in type 2. Also to be considered drug induced renal toxicity and VAD induced renal effects" }
+    status: unverified
+  - id: neph.L03.014
+    kind: card
+    topic: pathogenesis
+    front: Most important aspects driving heart damage in CRS type 3 (Figure 1)?
+    back: Salt and water, neurohormonal and uremia-induced dysregulations.
+    src: { page: 69, quote: "Salt and water, neuro-hormonal and uremia induced dysregulations are the most important aspects" }
+    status: unverified
+  - id: neph.L03.015
+    kind: enumerate
+    topic: pathogenesis
+    prompt: What may cause the heart damage in CRS type 4 (Figure 1)?
+    points:
+      - Hypertension
+      - CKD-induced myopathy
+      - Chronic hemodialysis
+      - Fluid shifts
+    pass: 3
+    src: { page: 69, quote: "Hypertension, CKD induced myopathy, chronic hemodialysis and fluids shifts may be in cause" }
+    status: unverified
+  - id: neph.L03.016
+    kind: enumerate
+    topic: pathogenesis
+    prompt: Common pathogenetic patterns in CRS type 5 (Figure 1)?
+    points:
+      - Autoimmunity
+      - Microcirculatory dysfunction
+      - Cytokine release
+    pass: 3
+    src: { page: 69, quote: "Common pathogenetic patterns (i.e. auto-immunity, micro-circulatory dysfunction, cytokine release)" }
+    status: unverified
+  - id: neph.L03.017
+    kind: enumerate
+    topic: pathogenesis
+    prompt: List the four pathways from acute heart failure to acute kidney disease in CRS-1 (Figure 2).
+    points:
+      - "Humoral signaling → endothelial activation → cytokine secretion"
+      - "Diuretic and ACE inhibitor → toxicity, vasoconstriction"
+      - "Hemodynamically mediated damage → decreased perfusion, increased venous pressure"
+      - "Sympathetic activation and RAA activation with vasoconstriction (feeding back on the heart)"
+    pass: 3
+    src: { page: 69, quote: "Mechanism of damage in CRS-1. ACE, angiotensin-converting enzyme; CKD, chronic kidney disease; CRS, cardiorenal syndrome; RAA" }
+    status: unverified
+  - id: neph.L03.018
+    kind: order
+    topic: pathogenesis
+    prompt: Order the humoral pathway from acute heart failure to acute kidney disease in CRS-1 (Figure 2).
+    steps:
+      - Humoral signaling
+      - Endothelial activation
+      - Cytokine secretion
+      - Acute renal disease
+    src: { page: 69, quote: "Mechanism of damage in CRS-1. ACE, angiotensin-converting enzyme; CKD, chronic kidney disease" }
+    status: unverified
+  - id: neph.L03.019
+    kind: card
+    topic: pathogenesis
+    front: In CRS-1 (Figure 2), how do the drugs given for heart failure harm the kidney?
+    back: Diuretics and ACE inhibitors cause toxicity and vasoconstriction that feed into acute renal disease.
+    src: { page: 69, quote: "Diuretic and ACE inhibitor Toxicity, Vasoconstriction" }
+    status: unverified
+  - id: neph.L03.020
+    kind: card
+    topic: pathogenesis
+    front: In CRS-1 (Figure 2), what does hemodynamically mediated damage do to the kidney?
+    back: It decreases renal perfusion and increases renal venous pressure.
+    src: { page: 69, quote: "Hemodynamically mediated damage Decreased perfusion, increased venous pressure" }
+    status: unverified
+  # ---------- p70: CRS-2 and CRS-3 ----------
+  - id: neph.L03.021
+    kind: order
+    topic: pathogenesis
+    prompt: Order the kidney's course in CRS-2 (Figure 2, chronic heart disease).
+    steps:
+      - Normal kidney function
+      - "Initiation of kidney damage (chronic hypoperfusion, apoptosis)"
+      - "Progression to CKD (sclerosis-fibrosis)"
+    src: { page: 70, quote: "Normal Kidney Function Initiation of Kidney Damage Progression to CKD Chronic hypofusion, Apoptosis Sclerosis-Fibrosis" }
+    status: unverified
+  - id: neph.L03.022
+    kind: enumerate
+    topic: pathogenesis
+    prompt: Chronic heart disease harms the kidney in CRS-2 through which hemodynamic factors (Figure 2)?
+    points:
+      - Low cardiac output
+      - Chronic hypoperfusion
+      - Increased venous pressure
+      - Increased venous resistance
+      - Inflammation, arterial and endothelial calcification
+    pass: 4
+    src: { page: 70, quote: "Low Cardiac Output, Inflammation, Arterial calcification, Endothelial calcification Chronic hypoperfusion, Increased venous pressure, Increased venous resistance" }
+    status: unverified
+  - id: neph.L03.023
+    kind: card
+    topic: pathogenesis
+    front: In CRS-2 (Figure 2), which three factors close the loop from the damaged kidney back to the heart?
+    back: Anemia, hypertension and electrolyte imbalance.
+    src: { page: 70, quote: "Anemia, Hypertension, Electrolyte imbalance" }
+    status: unverified
+  - id: neph.L03.024
+    kind: enumerate
+    topic: pathogenesis
+    prompt: List the pathways by which AKI causes acute heart dysfunction in CRS-3 (Figure 3).
+    points:
+      - Electrolyte and coagulation imbalances
+      - "Hypertension: decreased GFR, Na and water retention, increased preload"
+      - Sympathetic activation
+      - RAAS activation, vasoconstriction
+      - "Humoral signaling → endothelial activation → cytokine secretion"
+    pass: 4
+    src: { page: 70, quote: "Mechanism of damage in CRS-3. CRS, cardiorenal syndrome; GFR, glomerular filtration rate; RAAS, renin-angiotensin-aldosterone system." }
+    status: unverified
+  - id: neph.L03.025
+    kind: card
+    topic: pathogenesis
+    front: In CRS-3 (Figure 3), how does AKI cause hypertension that loads the heart?
+    back: Decreased GFR causes sodium and water retention, which increases the preload.
+    src: { page: 70, quote: "Mechanism of damage in CRS-3. CRS, cardiorenal syndrome; GFR, glomerular filtration rate" }
+    status: unverified
+  # ---------- p71: CRS-4 and CRS-5 ----------
+  - id: neph.L03.026
+    kind: card
+    topic: pathogenesis
+    front: Which CKD-stage factors drive chronic heart dysfunction in CRS-4, stages 3–4 (Figure 4)?
+    back: Anemia, uremic toxins, chronic inflammation and electrolyte imbalance.
+    src: { page: 71, quote: "Mechanism of damage in CRS-4. CKD, chronic kidney disease; CRS, cardiorenal syndrome; EPO, erythropoietin" }
+    status: unverified
+  - id: neph.L03.027
+    kind: card
+    topic: pathogenesis
+    front: In CRS-4 (Figure 4), what does the kidney add at CKD stage 5 beyond anemia and uremic toxins?
+    back: Tissue calcification and EPO resistance, plus cytokine production (endothelial dysfunction, LDL oxidation, oxidative stress, atherosclerosis, bone remodeling, adipocyte production).
+    src: { page: 71, quote: "cardiorenal syndrome; EPO, erythropoietin; LDL, low-density lipoprotein." }
+    status: unverified
+  - id: neph.L03.028
+    kind: card
+    topic: pathogenesis
+    front: In CRS-4 (Figure 4), what are the early risk factors at CKD stage 1–2?
+    back: Genetic risk factors, diabetes mellitus, primary nephropathy, hypertension and chronic inflammation.
+    src: { page: 71, quote: "Mechanism of damage in CRS-4. CKD, chronic kidney disease" }
+    status: unverified
+  - id: neph.L03.029
+    kind: enumerate
+    topic: pathogenesis
+    prompt: Name the systemic diseases shown in Figure 5 as causes of CRS-5.
+    points:
+      - Sepsis
+      - Diabetes
+      - Amyloidosis
+      - Vasculitis
+    pass: 4
+    src: { page: 71, quote: "Mechanism of damage in CRS-5. CRS, cardiorenal syndrome." }
+    status: unverified
+  - id: neph.L03.030
+    kind: enumerate
+    topic: pathogenesis
+    prompt: How does a systemic disease damage both organs in CRS-5 (Figure 5)?
+    points:
+      - Monocyte activation, cytokines
+      - Hypoxia, oxidative stress, toxemia
+      - Hemodynamic dysfunction, hypoperfusion, ischemia
+      - Sympathetic activation, neurohormonal stress, inflammation
+    pass: 3
+    src: { page: 71, quote: "Mechanism of damage in CRS-5. CRS, cardiorenal syndrome." }
+    status: unverified
+  # ---------- p72: Table 2 biomarkers ----------
+  - id: neph.L03.031
+    kind: table
+    topic: biomarkers
+    title: "Molecular cardiac biomarkers (Table 2)"
+    columns: [Biomarker, What it reflects]
+    rows:
+      - ["Cardiac troponin I (cTnI)", "Myocardial injury"]
+      - ["BNP", "Myocardial stretching"]
+      - ["sST2", "Member of the IL-1 family of receptors"]
+      - ["Indoxyl sulfate", "ERK, p38 MAPK and NF-κB"]
+      - ["PIIINP", "Connective tissue injury"]
+    blanks: [[0, 1], [1, 1], [2, 1], [4, 1]]
+    src: { page: 72, quote: "B-type natriuretic peptide (BNP) Myocardial stretching sST2 Member of interleukin" }
+    status: unverified
+  - id: neph.L03.032
+    kind: table
+    topic: biomarkers
+    title: "Kidney biomarkers (Table 2)"
+    columns: [Biomarker, What it reflects]
+    rows:
+      - ["Serum creatinine", "Skeletal muscle"]
+      - ["Albuminuria", "Glomerular integrity / PCT disruption"]
+      - ["KIM-1", "Type 1 membrane glycoprotein in regenerating PCT epithelium"]
+      - ["Liver-type fatty acid binding protein", "Tubular injury"]
+      - ["IL-18", "Cytokine mediating inflammation and AKI via NF-κB"]
+      - ["Advanced glycation end products (AGE)", "Improper renal clearance"]
+    blanks: [[1, 1], [2, 1], [3, 1], [4, 1], [5, 1]]
+    src: { page: 72, quote: "Kidney injury molecule (KIM-1) Type 1 cell membrane glycoprotein expressed in regenerating PCT epithelium" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L03.033
+    kind: card
+    topic: biomarkers
+    front: BNP reflects what in Table 2?
+    back: Myocardial stretching.
+    src: { page: 72, quote: "B-type natriuretic peptide (BNP) Myocardial stretching" }
+    status: unverified
+  - id: neph.L03.034
+    kind: card
+    topic: biomarkers
+    front: Where is KIM-1 expressed?
+    back: In regenerating proximal tubule (PCT) epithelium; it is a type 1 cell membrane glycoprotein.
+    src: { page: 72, quote: "Kidney injury molecule (KIM-1) Type 1 cell membrane glycoprotein expressed in regenerating PCT epithelium" }
+    status: unverified
+  - id: neph.L03.035
+    kind: cloze
+    topic: biomarkers
+    text: "IL-18 is a cytokine that mediates inflammation and AKI through the {{c1::NF-κB}} pathway."
+    src: { page: 72, quote: "IL-18 Cytokine mediating inflammation and AKI through the NF-kB pathway" }
+    status: unverified
+  - id: neph.L03.036
+    kind: card
+    topic: biomarkers
+    front: What does serum creatinine reflect besides kidney function, per Table 2?
+    back: Its site of origin, skeletal muscle.
+    src: { page: 72, quote: "Serum creatinine Skeletal muscle" }
+    status: unverified
+  - id: neph.L03.037
+    kind: enumerate
+    topic: biomarkers
+    prompt: What chest radiograph findings does Table 2 list as physiological cardiac biomarkers?
+    points:
+      - Cardiomegaly
+      - Interstitial edema
+      - Enlarged pulmonary artery
+      - Pleural effusion
+      - Prominent superior vena cava
+      - Kerley lines
+    pass: 4
+    src: { page: 72, quote: "Chest radiograph Cardiomegaly Interstitial edema Enlarged pulmonary artery Pleural effusion Prominent superior vena cava Kerley line" }
+    status: unverified
+  - id: neph.L03.038
+    kind: enumerate
+    topic: biomarkers
+    prompt: What echocardiographic findings does Table 2 list as cardiac biomarkers?
+    points:
+      - Abnormal left ventricular hypertrophy
+      - Central venous pressure
+      - Pericardial effusion
+      - Valvular stenosis
+      - Myocardial injury
+      - Fluid overfill
+      - Valvular calcification
+    pass: 5
+    src: { page: 72, quote: "Echocardiogram Abnormal left ventricular hypertrophy Central venous pressure Pericardial effusion Valvular stenosis" }
+    status: unverified
+  - id: neph.L03.039
+    kind: enumerate
+    topic: biomarkers
+    prompt: Kidney ultrasound findings listed as physiological kidney biomarkers in Table 2?
+    points:
+      - Kidney enlargement
+      - Thin and hyperechogenic cortex
+      - Small dilation of the urinary tract
+      - Parapelvic and subcortical cysts
+    pass: 3
+    src: { page: 72, quote: "Ultrasound Kidney enlargement Thin and hyperechogenic cortex Small dilation of the urinary tract Parapelvic and subcortical cysts" }
+    status: unverified
+  - id: neph.L03.040
+    kind: mcq
+    topic: biomarkers
+    stem: In a patient with acute decompensated heart failure and rising creatinine, the team wants a marker of proximal tubular injury rather than of filtration. Which one from Table 2 fits best?
+    options:
+      - Serum creatinine
+      - BNP
+      - KIM-1
+      - Cardiac troponin I
+      - sST2
+    answer: 2
+    why:
+      - Creatinine reflects filtration and comes from skeletal muscle; it is not a tubular injury marker.
+      - BNP reflects myocardial stretching.
+      - "Correct: KIM-1 is a membrane glycoprotein expressed in regenerating PCT epithelium (p72)."
+      - Troponin I reflects myocardial injury.
+      - sST2 is a member of the IL-1 receptor family, a cardiac marker.
+    src: { page: 72, quote: "Kidney injury molecule (KIM-1) Type 1 cell membrane glycoprotein expressed in regenerating PCT epithelium" }
+    status: unverified
+  # ---------- p73: Tables 3 and 4 ----------
+  - id: neph.L03.041
+    kind: enumerate
+    topic: diuretics-uf
+    prompt: Potential shortcomings of diuretic use in heart failure (Table 3)?
+    points:
+      - Direct activation of the RAAS
+      - Deterioration in renal function
+      - Electrolyte abnormalities (hypokalemia, hypomagnesemia)
+      - Suboptimal natriuresis (hypotonic urine)
+      - Development of diuretic resistance
+      - Unpredictable therapeutic response
+      - Unclear practical aspects (optimal dosing)
+      - Nonrenal adverse effects (ototoxicity, hypersensitivity)
+    pass: 6
+    src: { page: 73, quote: "Direct activation of the renin-angiotensin-aldosterone system Deterioration in renal function Electrolyte abnormalities (e.g., hypokalemia and hypomagnesemia)" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L03.042
+    kind: card
+    topic: diuretics-uf
+    front: Why does the book call natriuresis with loop diuretics suboptimal?
+    back: They produce hypotonic urine, so less sodium leaves per litre of water removed.
+    src: { page: 73, quote: "Suboptimal natriuresis (production of hypotonic urine)" }
+    status: unverified
+  - id: neph.L03.043
+    kind: card
+    topic: diuretics-uf
+    front: Nonrenal adverse effects of diuretics listed in Table 3?
+    back: Ototoxicity and hypersensitivity.
+    src: { page: 73, quote: "Nonrenal adverse effects (e.g., ototoxicity and hypersensitivity)" }
+    status: unverified
+  - id: neph.L03.044
+    kind: card
+    topic: diuretics-uf
+    front: Why did ultrafiltration gain attention in heart failure with fluid overload?
+    back: Pharmacological therapy gave suboptimal results, and newer portable, user-friendly devices dedicated to fluid overload reached the market.
+    src: { page: 73, quote: "UF gained much attention after marketing of the newer portable and user-friendly devices that were dedicated to management of fluid overload" }
+    status: unverified
+  - id: neph.L03.045
+    kind: enumerate
+    topic: diuretics-uf
+    prompt: Proposed advantages of slow ultrafiltration compared with diuretics (Table 4)?
+    points:
+      - More rapid fluid removal and symptom improvement
+      - Higher mass clearance of sodium
+      - Less risk of electrolyte abnormality (hypokalemia)
+      - No RAAS activation
+      - No neurohormonal (SNS) activation
+      - Removal of pro-inflammatory cytokines (may restore diuretic response)
+      - Shorter length of stay
+      - Fewer readmissions for HF
+      - Less risk of worsening renal function
+    pass: 6
+    src: { page: 73, quote: "More rapid removal of fluid and improvement in symptoms Higher mass clearance of sodium Decreased risk of electrolyte abnormality" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L03.046
+    kind: card
+    topic: diuretics-uf
+    front: How might ultrafiltration restore responsiveness to diuretics?
+    back: By removing pro-inflammatory cytokines.
+    src: { page: 73, quote: "Removal of pro-inflammatory cytokines (with potential restoration of responsiveness to diuretics)" }
+    status: unverified
+  - id: neph.L03.047
+    kind: card
+    topic: diuretics-uf
+    front: Diuretics activate the RAAS and the SNS; does slow ultrafiltration?
+    back: No. Lack of RAAS activation and lack of neurohormonal (SNS) activation are proposed advantages of slow ultrafiltration.
+    src: { page: 73, quote: "Lack of RAAS activation Lack of neurohormonal (SNS) activation" }
+    status: unverified
+  - id: neph.L03.048
+    kind: mcq
+    topic: diuretics-uf
+    stem: Compared with loop diuretics, which is a proposed advantage of slow ultrafiltration in congested heart failure?
+    options:
+      - It produces hypotonic fluid with little sodium
+      - It removes sodium with a higher mass clearance and does not activate the RAAS
+      - It needs no vascular access
+      - It carries no bleeding risk
+    answer: 1
+    why:
+      - Hypotonic urine is the diuretic problem (Table 3); ultrafiltrate is isotonic.
+      - "Correct: higher mass clearance of sodium and lack of RAAS activation are in Table 4 (p73)."
+      - UF needs an extracorporeal circuit and catheter (Table 5 lists catheter complications).
+      - Table 5 lists hemorrhage from disconnection, fiber leak and anticoagulation.
+    src: { page: 73, quote: "Higher mass clearance of sodium Decreased risk of electrolyte abnormality (eg, hypokalemia) Lack of RAAS activation" }
+    status: unverified
+  # ---------- p74: Tables 5 and 6 ----------
+  - id: neph.L03.049
+    kind: enumerate
+    topic: diuretics-uf
+    prompt: Potential complications of extracorporeal pumped ultrafiltration machines (Table 5)?
+    points:
+      - Air embolus
+      - Hemorrhage (venous return disconnection, hollow fiber leak, systemic anticoagulation)
+      - Membrane bioincompatibility
+      - Hemolysis and hyperkalemia
+      - Catheter-related complications (infection, stenosis, thrombosis)
+      - Excess ultrafiltration (hypotension, prerenal azotemia, acute renal failure)
+      - Allergic reactions to the circuit
+    pass: 5
+    src: { page: 74, quote: "Air embolus Hemorrhage from venous return disconnection Hemorrhage from hollow fiber blood leak Hemorrhage complicating systemic anticoagulation" }
+    status: unverified
+  - id: neph.L03.050
+    kind: cloze
+    topic: diuretics-uf
+    text: "Ultrafiltration can cause three kinds of hemorrhage: from {{c1::venous return disconnection}}, from a {{c2::hollow fiber blood leak}}, and from {{c3::systemic anticoagulation}}."
+    src: { page: 74, quote: "Hemorrhage from venous return disconnection Hemorrhage from hollow fiber blood leak Hemorrhage complicating systemic anticoagulation" }
+    status: unverified
+  - id: neph.L03.051
+    kind: card
+    topic: diuretics-uf
+    front: What does excess ultrafiltration lead to (Table 5)?
+    back: Hypotension, prerenal azotemia, or acute renal failure.
+    src: { page: 74, quote: "Excess ultrafiltration resulting in hypotension, prerenal azotemia, or acute renal failure" }
+    status: unverified
+  - id: neph.L03.052
+    kind: table
+    topic: dialysis-hf
+    title: "Dialysis strategies in heart failure (Table 6)"
+    columns: [Strategy, Benefit, Limitation]
+    rows:
+      - ["Longer or more frequent dialysis", "Lower interdialytic weight gain: slower UF, smaller volume per session", "Patient preference, cost"]
+      - ["Dialysate cooling", "Less myocardial stunning, intradialytic hypotension and cardiac remodeling", "Optimal temperature undefined; occasional discomfort"]
+      - ["Dialysate calcium ≥2.5 mEq/L", "Less stunning and hypotension, fewer HF hospitalizations", "Possible vascular calcification"]
+      - ["Higher dialysate sodium", "Less intradialytic hypotension, better session tolerance", "More interdialytic weight gain, worse HF"]
+      - ["Dietary sodium restriction", "Less fluid retention and congestion", "Possibly more hospitalizations and neurohormonal activation"]
+      - ["Midodrine", "Less intradialytic hypotension, may ease dyspnea", "May be associated with increased mortality"]
+    blanks: [[1, 2], [2, 1], [2, 2], [3, 2], [5, 2]]
+    src: { page: 74, quote: "Dialysate cooling May lead to less myocardial stunning, less intradialytic hypotension, and less cardiac remodeling" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L03.053
+    kind: cloze
+    topic: dialysis-hf
+    text: "To reduce myocardial stunning in heart failure on dialysis, keep dialysate calcium at {{c1::≥2.5 mEq/L}}; the price is possible {{c2::vascular calcification}}."
+    src: { page: 74, quote: "Maintain dialysate calcium ≥2.5 mEq/L May lead to less myocardial stunning Possible promotion of vascular calcification" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L03.054
+    kind: card
+    topic: dialysis-hf
+    front: "Higher dialysate sodium in heart failure patients: benefit and limitation?"
+    back: Less intradialytic hypotension and better single-session tolerance, but more interdialytic weight gain, which worsens heart failure.
+    src: { page: 74, quote: "Higher dialysate sodium Less intradialytic hypotension, resulting in better single session tolerance Increased interdialytic weight gain, thereby worsening heart failure" }
+    status: unverified
+  - id: neph.L03.055
+    kind: card
+    topic: dialysis-hf
+    front: "Midodrine in dialysis patients with heart failure: benefit and limitation?"
+    back: Less intradialytic hypotension and perhaps less dyspnea through better volume removal, but it may be associated with increased mortality.
+    src: { page: 74, quote: "Midodrine Less intradialytic hypotension. May decrease dyspnea presumably through better volume removal during dialysis May be associated with increased mortality" }
+    status: unverified
+  - id: neph.L03.056
+    kind: card
+    topic: dialysis-hf
+    front: "Dialysate cooling in heart failure: benefit and limitation?"
+    back: May reduce myocardial stunning, intradialytic hypotension and cardiac remodeling; the optimal temperature is not defined and some patients are uncomfortable.
+    src: { page: 74, quote: "Dialysate cooling May lead to less myocardial stunning, less intradialytic hypotension, and less cardiac remodeling Optimal temperature has not been defined" }
+    status: unverified
+  - id: neph.L03.057
+    kind: mcq
+    topic: dialysis-hf
+    stem: A 68-year-old hemodialysis patient with HFrEF has repeated intradialytic hypotension. The nephrologist raises dialysate sodium. Which problem should the team now watch for, per Table 6?
+    options:
+      - Vascular calcification
+      - Higher interdialytic weight gain worsening heart failure
+      - Patient discomfort from cold
+      - Increased mortality
+      - Increased cost
+    answer: 1
+    why:
+      - Vascular calcification is the limitation of a dialysate calcium ≥2.5 mEq/L.
+      - "Correct: higher dialysate sodium raises interdialytic weight gain and worsens heart failure (p74)."
+      - Discomfort is the limitation of dialysate cooling.
+      - Possible increased mortality is the limitation of midodrine.
+      - Cost limits longer or more frequent dialysis.
+    src: { page: 74, quote: "Higher dialysate sodium Less intradialytic hypotension Increased interdialytic weight gain, thereby worsening heart failure" }
+    status: unverified
+  # ---------- p75: GDMT and Table 7 ----------
+  - id: neph.L03.058
+    kind: enumerate
+    topic: gdmt
+    prompt: Which drug classes reduce mortality in HFrEF (guideline-directed medical therapy)?
+    points:
+      - Beta-blockers
+      - ARNIs
+      - RAAS inhibitors
+      - MRAs
+      - SGLT2 inhibitors
+    pass: 5
+    src: { page: 75, quote: "Beta-blockers, angiotensin receptor neprilysin inhibitors (ARNIs), renin angiotensin-aldosterone system (RAAS) inhibitors, mineralocorticoid receptor antagonists (MRAs)" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L03.059
+    kind: card
+    topic: gdmt
+    front: Why is GDMT often withheld or not uptitrated in HFrEF patients on dialysis?
+    back: Safety and tolerability concerns, and a lack of clinical trial data, because patients with HF and ESKD were excluded from the landmark trials.
+    src: { page: 75, quote: "often withheld or not uptitrated to recommended target doses due to safety and tolerability concerns and lack of available clinical trial data" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L03.060
+    kind: table
+    topic: gdmt
+    title: "Pharmacologic treatment of HFrEF (Table 7)"
+    columns: [Drug, "Not on dialysis", "On dialysis"]
+    rows:
+      - ["Beta blockers (carvedilol, metoprolol, bisoprolol)", "Increase survival, improve symptoms, fewer HF admissions", "Uncertain; possible symptom improvement"]
+      - ["ACEI/ARB", "Increase survival, improve symptoms, fewer HF admissions", "Trials: CONSENSUS, SOLVD-Treatment, Val-HeFT, CHARM"]
+      - ["MRAs", "Increase survival, improve symptoms, fewer HF admissions", "Trials: RALES, EMPHASIS-HF, EPHESUS"]
+      - ["Loop diuretics", "Reduce symptom burden", "Minimize interdialytic weight gain if residual kidney function"]
+      - ["Digoxin", "May improve symptoms in mild to moderate HF; no mortality benefit", "Risks likely outweigh benefits"]
+      - ["SGLT2 inhibitors", "Increase survival, fewer HF admissions", "Trials: DAPA-HF, EMPEROR-Reduced, DELIVER, EMPEROR-Preserved"]
+      - ["ARNI", "Increase survival, fewer HF admissions", "Trial: PARADIGM-HF"]
+    blanks: [[0, 2], [3, 2], [4, 1], [4, 2]]
+    src: { page: 75, quote: "Digoxin May Improve symptoms, quality of life, and exercise tolerance in mild to moderate heart failure; no mortallty benefit Risks likely outweigh any potential benefits" }
+    status: unverified
+  - id: neph.L03.061
+    kind: card
+    topic: gdmt
+    front: "Digoxin in HFrEF: benefit off dialysis and verdict on dialysis (Table 7)?"
+    back: Off dialysis it may improve symptoms, quality of life and exercise tolerance in mild to moderate HF, with no mortality benefit. On dialysis its risks likely outweigh any benefit.
+    src: { page: 75, quote: "Digoxin May Improve symptoms, quality of life, and exercise tolerance in mild to moderate heart failure; no mortallty benefit Risks likely outweigh any potential benefits" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L03.062
+    kind: card
+    topic: gdmt
+    front: What do loop diuretics offer an HFrEF patient on dialysis (Table 7)?
+    back: They minimize weight gain between treatments if residual kidney function is present.
+    src: { page: 75, quote: "Loop diuretics Reduces symptom burden Minimizes weight gains between treatments if residual kidney function is present" }
+    status: unverified
+  - id: neph.L03.063
+    kind: card
+    topic: gdmt
+    front: Beta blockers in HFrEF on dialysis (Table 7)?
+    back: Benefit is uncertain, with possible improvement in symptoms. Off dialysis, carvedilol, metoprolol and bisoprolol increase survival.
+    src: { page: 75, quote: "Beta blockers Carvedilol, metoprolol, and bisoprolol Increase survival Uncertain. Possible improvement in symptoms" }
+    status: unverified
+  - id: neph.L03.064
+    kind: table
+    topic: gdmt
+    title: "Trials behind each HFrEF drug class (Table 7)"
+    columns: [Drug class, Trials]
+    rows:
+      - ["ACEI/ARB", "CONSENSUS, SOLVD-Treatment, Val-HeFT, CHARM"]
+      - ["MRA", "RALES, EMPHASIS-HF, EPHESUS"]
+      - ["SGLT2 inhibitor", "DAPA-HF, EMPEROR-Reduced, DELIVER, EMPEROR-Preserved"]
+      - ["ARNI", "PARADIGM-HF"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 75, quote: "RALES Trial,EMPHASIS-HF Trial,EPHESUS Trial DAPA-HF,EMPEROR-Reduced,DELIVER,EMPEROR-Preserved PARADIGM-HF Trial" }
+    status: unverified
+  - id: neph.L03.065
+    kind: mcq
+    topic: gdmt
+    stem: A 70-year-old woman on hemodialysis has HFrEF (EF 30%) and is on bisoprolol and sacubitril–valsartan. A resident suggests adding digoxin for symptoms. What does the lecture's Table 7 say?
+    options:
+      - Digoxin increases survival on dialysis
+      - On dialysis, digoxin's risks likely outweigh any potential benefit
+      - Digoxin is the first-line drug for HFrEF on dialysis
+      - Digoxin reduces interdialytic weight gain
+    answer: 1
+    why:
+      - Even off dialysis digoxin has no mortality benefit.
+      - "Correct: on dialysis the risks likely outweigh any potential benefits (p75)."
+      - No line of Table 7 makes digoxin first-line.
+      - Minimizing interdialytic weight gain is the loop diuretic row.
+    src: { page: 75, quote: "Risks likely outweigh any potential benefits" }
+    status: unverified
+  # ---------- p76: devices and furosemide stress test ----------
+  - id: neph.L03.066
+    kind: table
+    topic: gdmt
+    title: "Primary prevention ICD and CRT (Table 8)"
+    columns: [Criterion, ICD, CRT]
+    rows:
+      - ["LVEF", "≤35%", "≤35%"]
+      - ["Timing / ECG", "≥40 d post-MI if no revascularization, 3 mo if revascularized", "Sinus rhythm with LBBB and QRS ≥130 ms"]
+      - ["Survival / ECG", "Expected survival >1 y", "Sinus rhythm with non-LBBB and QRS ≥150 ms"]
+      - ["Symptoms", "≥NYHA class 2 on appropriate therapy", "≥NYHA class 2 on appropriate therapy"]
+    blanks: [[0, 1], [1, 1], [1, 2], [2, 1], [2, 2]]
+    src: { page: 76, quote: "LVEF ≤ 35% Sinus rhythm with left bundle branch block and QRS ≥ 130 ms" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L03.067
+    kind: cloze
+    topic: gdmt
+    text: "CRT needs LVEF ≤35% with sinus rhythm and LBBB with QRS ≥{{c1::130}} ms, or non-LBBB with QRS ≥{{c2::150}} ms."
+    src: { page: 76, quote: "Sinus rhythm with left bundle branch block and QRS ≥ 130 ms Sinus rhythm with non-LBBB and QRS ≥ 150 ms" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L03.068
+    kind: cloze
+    topic: gdmt
+    text: "A primary-prevention ICD needs LVEF ≤35%, at least {{c1::40 days}} after MI without revascularization or {{c2::3 months}} after revascularization, and expected survival over {{c3::1 year}}."
+    src: { page: 76, quote: "≥40 d post MI if no revascularization, 3 mo if revascularized post-MI Expected survival > 1 y" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L03.069
+    kind: cloze
+    topic: volume
+    text: "The furosemide stress test gives {{c1::1.0–1.5 mg/kg}} of IV furosemide to a patient with AKI and measures the urine output."
+    src: { page: 76, quote: "measuring the urine output after a dose of 1.0 to 1.5 mg/kg of intravenous furosemide" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L03.070
+    kind: cloze
+    topic: volume
+    text: "After a furosemide stress test, urine output under {{c1::200 ml}} in the first {{c2::2 h}} means a higher risk of progressive AKI; a 6-h output under {{c3::600 ml}} predicts the need for RRT in stage III AKI."
+    src: { page: 76, quote: "Patients who have a urine output <200 ml over the first 2 h are at increased risk of progressive AKI" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L03.071
+    kind: mcq
+    topic: volume
+    stem: A 74-kg man with ADHF and stage III AKI receives 100 mg IV furosemide as a stress test. He passes 150 ml in the first 2 hours and 420 ml over 6 hours. What does this predict?
+    options:
+      - Normal tubular function; continue the same dose
+      - Increased risk of progressive AKI and a predicted need for RRT
+      - Prerenal azotemia that will settle with fluids
+      - Diuretic overdose
+    answer: 1
+    why:
+      - An adequate response needs ≥200 ml in 2 h.
+      - "Correct: <200 ml in 2 h means risk of progressive AKI, and a 6-h output <600 ml predicts RRT in stage III AKI (p76)."
+      - The test is about tubular response, not volume status; he is congested, not dry.
+      - 1.0–1.5 mg/kg is the test dose; 100 mg for 74 kg is within it.
+    src: { page: 76, quote: "a 6-h urine output <600 ml is predictive of the need for RRT in patients with stage III AKI" }
+    status: unverified
+  # ---------- p77-78: Figure 6, Table 9 ----------
+  - id: neph.L03.072
+    kind: order
+    topic: volume
+    prompt: Order the escalation of volume management in acute heart failure with CRS (Figure 6) when each step is ineffective.
+    steps:
+      - IV loop diuretic based on prior dose (bolus; infusion if unstable)
+      - Increase the loop dose or use a stepped infusion protocol
+      - "Add a second diuretic: thiazide first-line, spironolactone or tolvaptan second-line"
+      - Hemodynamic assessment; vasoactive therapy if cardiac output is inadequate
+      - "Consider hypertonic saline; RRT if poor response (SCUF if no or mild AKI, CRRT if severe AKI)"
+    src: { page: 77, quote: "Escalating doses of loop diuretics are the first-line of therapy for volume removal, with combination diuretic therapy" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L03.073
+    kind: card
+    topic: volume
+    front: First-line therapy for volume removal in acute heart failure with CRS?
+    back: Escalating doses of loop diuretics; combination diuretic therapy for those who respond poorly.
+    src: { page: 77, quote: "Escalating doses of loop diuretics are the first-line of therapy for volume removal" }
+    status: unverified
+  - id: neph.L03.074
+    kind: card
+    topic: volume
+    front: In Figure 6, which second diuretic is first-line and which are second-line?
+    back: A thiazide is first-line; spironolactone or tolvaptan is second-line.
+    src: { page: 77, quote: "Add second diuretic Thiazide diuretic first-line Spironolactone or tolvaptan second-line" }
+    status: unverified
+  - id: neph.L03.075
+    kind: card
+    topic: volume
+    front: When is a continuous loop infusion chosen over bolus dosing at the start (Figure 6)?
+    back: When the patient is hemodynamically unstable; bolus dosing suits most patients.
+    src: { page: 77, quote: "Bolus dosing (most patients) Continuous infusion (if hemodynamic instability)" }
+    status: unverified
+  - id: neph.L03.076
+    kind: card
+    topic: volume
+    front: If diuretics and vasoactive therapy fail in CRS, which RRT does Figure 6 choose?
+    back: SCUF if there is no or mild AKI; CRRT if AKI is severe.
+    src: { page: 77, quote: "Initiate RRT if poor response SCUF if no/mild AKI CRRT if severe AKI" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L03.077
+    kind: cloze
+    topic: volume
+    text: "Stepped-diuretic studies targeted a urine output of {{c1::3–5 l/day}}; the patient moves up a step if output is below {{c2::3 l/day}}."
+    src: { page: 77, quote: "A target urine output of 3 to 5 l/day has been used in studies of stepped-diuretic therapy." }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L03.078
+    kind: table
+    topic: volume
+    title: "Stepped diuretic algorithm, CARRESS-HF and AVOID-HF (Table 9)"
+    columns: [Step, Current furosemide dose, Suggested IV furosemide, Metolazone]
+    rows:
+      - ["1", "≤80 mg/day", "40 mg + 5 mg/h", "0"]
+      - ["2", "81–160 mg/day", "80 mg + 10 mg/h", "5 mg QD"]
+      - ["3", "161–240 mg/day", "80 mg + 20 mg/h", "5 mg BID"]
+      - ["4", ">240 mg/day", "80 mg + 30 mg/h", "5 mg BID"]
+    blanks: [[0, 2], [1, 2], [1, 3], [2, 2], [3, 2]]
+    src: { page: 78, quote: "Stepped Diuretic Algorithm Used in the CARRESS-HF and AVOID-HF Trials" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L03.079
+    kind: card
+    topic: volume
+    front: What is added if urine output stays under 3 l/day despite step 4 of the stepped diuretic algorithm?
+    back: A vasodilator or an inotrope.
+    src: { page: 78, quote: "A vasodilator or inotrope can be added for patients who have urine output <3 l/day despite Step 4 diuretic dosing." }
+    status: unverified
+  - id: neph.L03.080
+    kind: card
+    topic: volume
+    front: In the stepped algorithm, what sets the starting dose and in what units are doses given?
+    back: The outpatient or current inpatient diuretic dose sets it; all loop doses are in furosemide equivalents.
+    src: { page: 78, quote: "The starting diuretic dose is determined by the outpatient or current inpatient diuretic dose" }
+    status: unverified
+  - id: neph.L03.081
+    kind: mcq
+    topic: volume
+    stem: A man with ADHF took furosemide 120 mg/day at home. Using the CARRESS-HF stepped algorithm, what is his starting regimen?
+    options:
+      - 40 mg IV bolus + 5 mg/h, no metolazone
+      - 80 mg IV bolus + 10 mg/h + metolazone 5 mg daily
+      - 80 mg IV bolus + 20 mg/h + metolazone 5 mg twice daily
+      - 80 mg IV bolus + 30 mg/h + metolazone 5 mg twice daily
+    answer: 1
+    why:
+      - That is step 1, for ≤80 mg/day.
+      - "Correct: 81–160 mg/day is step 2: 80 mg + 10 mg/h with metolazone 5 mg QD (p78)."
+      - That is step 3, for 161–240 mg/day.
+      - That is step 4, for >240 mg/day.
+    src: { page: 78, quote: "The starting diuretic dose is determined by the outpatient or current inpatient diuretic dose" }
+    status: unverified
+  - id: neph.L03.082
+    kind: card
+    topic: volume
+    front: When is extracorporeal volume removal used in acute heart failure with CRS?
+    back: For patients in whom medical therapy fails; hemodynamic assessment and vasoactive therapy help selected poor diuretic responders first.
+    src: { page: 78, quote: "Hemodynamic assessment and vasoactive therapy can be helpful in selected patients with poor response to diuretics, with extracorporeal volume removal" }
+    status: unverified
+  # ---------- p78-79: diuretic resistance ----------
+  - id: neph.L03.083
+    kind: enumerate
+    topic: resistance
+    prompt: Proposed causes of diuretic resistance in CRS?
+    points:
+      - Rebound sodium reabsorption as the diuretic wears off
+      - Excess sodium intake
+      - Remodelling of thiazide and mineralocorticoid receptors (more distal Na reabsorption)
+      - Reduced tubular secretion (organic acids compete for the transporter)
+      - Reduced protein binding (hypoalbuminemia, metabolic acidosis)
+    pass: 4
+    src: { page: 78, quote: "rebound sodium reabsorption as the diuretic effects wears off, excess sodium intake." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L03.084
+    kind: card
+    topic: resistance
+    front: Why is tubular secretion of loop diuretics reduced in renal impairment?
+    back: Elevated endogenous organic acids competitively inhibit the transporter that secretes them.
+    src: { page: 79, quote: "Reduced tubular secretion of loop diuretics due to competitive inhibition of the transporter by elevated levels of endogenous organic acids" }
+    status: unverified
+  - id: neph.L03.085
+    kind: card
+    topic: resistance
+    front: Two causes of reduced protein binding of loop diuretics?
+    back: Hypoalbuminemia and metabolic acidosis.
+    src: { page: 79, quote: "Reduced protein binding of loop diuretics due to hypoalbuminemia and metabolic acidosis." }
+    status: unverified
+  - id: neph.L03.086
+    kind: card
+    topic: resistance
+    front: How may small-volume hypertonic saline help in CRS?
+    back: It may improve diuretic responsiveness and renal function, possibly by damping neurohormonal activation.
+    src: { page: 79, quote: "Small-volume hypertonic saline may also improve diuretic responsiveness and renal function in patients with CRS" }
+    status: unverified
+  - id: neph.L03.087
+    kind: card
+    topic: resistance
+    front: "Dopamine in AKI: what does it do and what is the evidence?"
+    back: It has cardiac inotropic and direct kidney effects that can enhance diuresis in some patients, but it has not improved clinical or renal outcomes in AKI.
+    src: { page: 79, quote: "dopamine has not improved clinical or renal outcomes in patients with AKI." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L03.088
+    kind: card
+    topic: resistance
+    front: Which CRS patients benefit from inotropes, and why avoid them empirically?
+    back: Those with hypotension or objective evidence of reduced cardiac output. Empirical use is avoided because of potential toxicity.
+    src: { page: 79, quote: "Inotropic therapy is most likely to be effective in patients with CRS with hypotension or objective evidence of reduced cardiac output" }
+    status: unverified
+  - id: neph.L03.089
+    kind: mcq
+    topic: resistance
+    stem: A 66-year-old man with ADHF, albumin 2.2 g/dL, bicarbonate 16 mmol/L and creatinine 3.1 mg/dL responds poorly to high-dose IV furosemide. Which pair of mechanisms best explains his resistance?
+    options:
+      - Reduced protein binding from hypoalbuminemia and acidosis, and reduced secretion from organic acids
+      - Ototoxicity and hypersensitivity
+      - Excess potassium intake and hypermagnesemia
+      - Dopamine deficiency
+    answer: 0
+    why:
+      - "Correct: hypoalbuminemia and metabolic acidosis cut protein binding, and organic acids of renal impairment block tubular secretion (p79)."
+      - These are nonrenal adverse effects of diuretics, not resistance mechanisms.
+      - Excess sodium, not potassium, intake causes resistance; hypomagnesemia is a diuretic side effect.
+      - Dopamine is a possible treatment, not a cause, and has not improved outcomes in AKI.
+    src: { page: 79, quote: "Reduced protein binding of loop diuretics due to hypoalbuminemia and metabolic acidosis." }
+    status: unverified
+  - id: neph.L03.090
+    kind: card
+    topic: resistance
+    front: Main parts of a pumped ultrafiltration circuit (figure, p79)?
+    back: Blood leaves the patient through a rotary blood pump to the filter and returns to the patient; a second rotary pump draws the ultrafiltrate into a collection bag.
+    src: { page: 79, quote: "Clinical trials of ultrafiltration therapy" }
+    status: unverified
+  # ---------- cases ----------
+  - id: neph.L03.091
+    kind: case
+    topic: volume
+    stem: A 71-year-old man with ischemic cardiomyopathy (EF 25%) is admitted with acute decompensated heart failure. He takes furosemide 200 mg/day at home. Creatinine has risen from 1.4 to 2.3 mg/dL.
+    steps:
+      - question: Which cardiorenal type is this?
+        options:
+          - Type 1
+          - Type 3
+          - Type 4
+          - Type 5
+        answer: 0
+        why: "Acute cardiac impairment (ADHF) leading to AKI is type 1 (p68). Type 3 starts with AKI; type 4 with CKD; type 5 with a systemic disease."
+      - question: What does the stepped diuretic algorithm start him on?
+        options:
+          - 40 mg + 5 mg/h, no metolazone
+          - 80 mg + 10 mg/h + metolazone 5 mg QD
+          - 80 mg + 20 mg/h + metolazone 5 mg BID
+          - 80 mg + 30 mg/h + metolazone 5 mg BID
+        answer: 2
+        why: "161–240 mg/day is step 3: 80 mg + 20 mg/h with metolazone 5 mg BID (Table 9, p78)."
+      - reveal: "After 24 hours on step 4, urine output is 1.8 l/day. BP 84/52, cool peripheries."
+        question: What is the next step in Figure 6?
+        options:
+          - Hemodynamic assessment and vasoactive therapy for inadequate cardiac output
+          - Start dopamine to protect the kidneys
+          - Stop all diuretics
+          - Add digoxin
+        answer: 0
+        why: "Below 3 l/day despite step 4 → add a vasodilator or inotrope; with hypotension and low output an inotrope fits (pp77–79). Dopamine has not improved outcomes in AKI."
+      - reveal: "Despite inotropes, creatinine reaches 4.5 mg/dL with oliguria."
+        question: Which extracorporeal therapy does Figure 6 choose?
+        options:
+          - SCUF
+          - CRRT
+          - Peritoneal dialysis
+          - Plasma exchange
+        answer: 1
+        why: "Poor response → RRT: SCUF if no or mild AKI, CRRT if severe AKI (p77)."
+    src: { page: 77, quote: "Initiate RRT if poor response SCUF if no/mild AKI CRRT if severe AKI" }
+    status: unverified
+  - id: neph.L03.092
+    kind: case
+    topic: dialysis-hf
+    stem: A 64-year-old woman on thrice-weekly hemodialysis has HFrEF (EF 30%). She gains 4 kg between sessions and her BP drops to 80/50 during most runs.
+    steps:
+      - question: Which strategy lowers her interdialytic weight gain and allows slower ultrafiltration?
+        options:
+          - Longer or more frequent dialysis
+          - Higher dialysate sodium
+          - Midodrine
+          - Lower dialysate calcium
+        answer: 0
+        why: "Longer or more frequent dialysis lowers interdialytic weight gain so each session removes less, more slowly (Table 6, p74). Higher sodium increases weight gain."
+      - question: Which strategy may reduce myocardial stunning, but has no defined optimal temperature?
+        options:
+          - Dialysate cooling
+          - Dietary sodium restriction
+          - Midodrine
+          - Higher dialysate sodium
+        answer: 0
+        why: "Dialysate cooling may mean less myocardial stunning, hypotension and remodeling; the optimal temperature is not defined (p74)."
+      - question: The team considers midodrine. Which caution does Table 6 give?
+        options:
+          - It may be associated with increased mortality
+          - It promotes vascular calcification
+          - It increases interdialytic weight gain
+          - It costs more than dialysis
+        answer: 0
+        why: "Midodrine may be associated with increased mortality (p74). Calcification goes with dialysate calcium ≥2.5; weight gain with higher sodium."
+    src: { page: 74, quote: "Longer or more frequent dialysis Lower interdialytic weight gain allows for slower ultrafiltration with smaller amounts of volume removal at each session" }
+    status: unverified
+  - id: neph.L03.093
+    kind: case
+    topic: volume
+    stem: A 59-year-old man with ADHF has stage III AKI after 3 days. The team is unsure whether he will need RRT.
+    steps:
+      - question: Which bedside test can help?
+        options:
+          - Furosemide stress test, 1.0–1.5 mg/kg IV
+          - Dopamine infusion trial
+          - Tagged red cell scan
+          - Saline challenge of 2 litres
+        answer: 0
+        why: "A loop diuretic challenge (furosemide stress test) with 1.0–1.5 mg/kg IV, then measure urine output (p76)."
+      - reveal: "He passes 140 ml in 2 hours and 380 ml in 6 hours."
+        question: How do you read this?
+        options:
+          - Higher risk of progressive AKI; 6-h output <600 ml predicts need for RRT
+          - Normal response
+          - Diuretic toxicity
+          - Prerenal state that will respond to fluids
+        answer: 0
+        why: "<200 ml in 2 h means increased risk of progressive AKI; a 6-h output <600 ml predicts RRT in stage III AKI (p76)."
+    src: { page: 76, quote: "a 6-h urine output <600 ml is predictive of the need for RRT in patients with stage III AKI" }
+    status: unverified
+  # ---------- essays ----------
+  - id: neph.L03.094
+    kind: essay
+    topic: definition
+    prompt: Define cardiorenal syndrome and discuss its classification and pathogenesis.
+    outline:
+      - "Definition: 2008 consensus, dysfunction of one organ inducing dysfunction of the other"
+      - "Type 1 acute cardiorenal: altered renal perfusion (congestion); humoral, drug, hemodynamic pathways"
+      - "Type 2 chronic cardiorenal: renal fibrosis, drugs, VAD; hypoperfusion and venous pressure"
+      - "Type 3 acute renocardiac: salt and water, neurohormonal, uremic dysregulation"
+      - "Type 4 chronic renocardiac: hypertension, CKD myopathy, dialysis, fluid shifts; anemia, toxins, calcification"
+      - "Type 5 secondary: sepsis, diabetes, amyloidosis, vasculitis; cytokines, hypoxia, hypoperfusion, SNS"
+    src: { page: 68, quote: "A 2008 consensus conference defined" }
+    status: unverified
+  - id: neph.L03.095
+    kind: essay
+    topic: volume
+    prompt: Outline volume management in acute heart failure with cardiorenal syndrome.
+    outline:
+      - "IV loop diuretic from prior dose: bolus, infusion if unstable"
+      - "Furosemide stress test to predict progression and RRT"
+      - "Escalate loop (stepped protocol, Table 9), target 3–5 l/day"
+      - "Second diuretic: thiazide, then spironolactone or tolvaptan"
+      - "Hemodynamic assessment, vasoactive therapy, inotropes only with low output"
+      - "Hypertonic saline; RRT: SCUF or CRRT"
+      - "Diuretic resistance mechanisms; slow UF advantages and complications"
+    src: { page: 77, quote: "Escalating doses of loop diuretics are the first-line of therapy for volume removal" }
+    status: unverified

@@ -164,4 +164,6 @@ use authored indexes, never screen positions, and carry a fingerprint of the
 step; editing a step drops its saved response. A step's state (open, draft,
 checked, answered before, skipped) is derived from the restored attempt before
 Check or Continue is decided. Records from before version 2 have results but
-no responses: those steps show "answered before" with the answer key.
+no responses: those steps show the answer key. Any answered question has a
+↻ button that starts it over as practice; the first result stays the one
+that counts. No explanatory notes on the page (Mohamed, 2026-10-29).

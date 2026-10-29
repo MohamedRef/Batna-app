@@ -34,6 +34,7 @@ a hex value in a feature stylesheet.
 | `--good`, `--good-soft` | right, done | `#277654` / `#e8f4ec` | `#a0d7b3` / `#1c3c31` |
 | `--bad`, `--bad-soft` | wrong, needs work | `#ad493c` / `#fbece7` | `#f1b2a3` / `#4a2e30` |
 | `--gold`, `--gold-soft` | supporting notes (guideline update, mnemonic), never a grade | `#8a641d` / `#fbf1d9` | `#e3c581` / `#3d3624` |
+| `--sheet` | the info sheet: its own raised tint, never a card colour | `#fcf4e0` | `#2c4f64` |
 
 Aliases in `parts.css` for code ported from the design reference:
 `--primary` = `--accent`, `--on-primary` = `--on-accent`, `--good-bg`,
@@ -96,16 +97,29 @@ Radii: `--radius-control` 13px, `--radius-card` 18px (22px Glossy),
 | Counter | `span.num-ltr` | Any "3 / 12", %, count in Arabic text. |
 | Progress | `div.progress[role=progressbar] > div.progress-fill` | `data-tone="good"` for done. |
 | Rating row | `div.rating-row > button.rating[data-grade=again\|hard\|good\|easy] > span + span.rating-when` | Real intervals only. Content checks never sit here. |
-| Sheet | `div.sheet-backdrop` + `div.sheet[role=dialog] > div.sheet-head` | Bottom sheet on phones, ≤430px box from 600px; scrolls inside. |
+| Sheet | `div.sheet-backdrop` + `div.sheet[role=dialog] > div.sheet-head` | Bottom sheet on phones, ≤430px box from 600px; scrolls inside. For forms, confirms and lists. |
+| Info sheet | `crate::sheet::Sheet { label_id, on_close, head, children }` | What a tap opens to tell more (the book page). No scrim; `--sheet` colour; he drags it to any height (stops at 32/56/90%), flings or drags down to close, Esc/Back close; the size is remembered (`assets/sheet.js`). |
 | Field | `label.field > span + input + span.field-hint? + span.field-error[role=alert]?`, `[data-invalid=true]` | Keep the typed text on errors. |
 | Search | `label.search > svg + input[type=search]` | |
 | Segmented | `div.segmented[role=radiogroup] > button[role=radio]` | |
 | Switch | `label > … + input[type=checkbox][role=switch]` | |
 | Choice list | `div.choice-list[role=radiogroup] > button.choice[role=radio]` | Settings-style pickers. |
+| View switcher | `parts::ViewBar { of: Collection }` → `div.view-bar > div.view-sort? + div.view-seg[role=radiogroup]` | Cards / list / compact plus the screen's orders (and "by lecture" groups where offered). Saved per screen on this device (local setting `view.<key>`). `BATNA_VIEW=cards\|list\|compact` forces a layout for screenshots. |
+| Collection | `ul.coll[data-layout] > li > button.coll-btn > span.coll-lead(.coll-badge) + span.coll-main(.coll-title + .coll-sub + .coll-extra) + span.coll-end + span.chev`, `h3.coll-group` | One markup, three looks. Compact hides `.coll-sub`/`.coll-extra`/`.coll-when-roomy` and shows `.coll-when-compact`. Test: `every_view_of_a_list_opens_its_items`. |
 
 No dead UI: anything that looks tappable opens what it shows.
 `crates/app/src/dead_ends.rs` lists the tappable-looking classes; add a new
 one there when you make it.
+
+### List screens
+
+Every screen that lists things (lessons, other lectures, a lecture's
+lessons, References, cases and calc items) has a view switcher, like a
+Files app: cards, a list, or a compact list, and an order (book order,
+what's left first, by name, due first: each screen offers the ones that
+mean something). A new list screen declares a `parts::Collection`, puts a
+`ViewBar` above its `ul.coll`, and builds its items from the collection
+markup so all three layouts work without per-layout code.
 
 ## Shell and navigation
 

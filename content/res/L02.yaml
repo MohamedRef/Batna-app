@@ -264,18 +264,17 @@ items:
     src: { page: 28, quote: "Restricted to a special age group ➢Limited by “place” variables ➢Time period is usually brief : limited period of risk" }
     status: unverified
   - id: res.L02.026
-    kind: mcq
+    kind: calc
     topic: incidence
-    stem: Of 75 people who attended a wedding dinner, 46 developed gastroenteritis within the incubation period. What is the attack rate?
-    options: ["61%", "46%", "39%", "163%"]
-    answer: 0
-    why:
-      - Correct. 46/75 × 100 = 61%. Among those at the dinner, the risk of GI illness was 61%.
-      - 46 is the number of cases, not the rate.
-      - "29/75 = 39% is the share who stayed well."
-      - "75/46: numerator and denominator flipped."
+    calculator: attack_rate
+    stem: Of 75 people who attended a wedding dinner, 46 developed gastroenteritis within the incubation period.
+    question: What is the attack rate?
+    inputs: { cases: 46, at_risk: 75 }
+    expect: "61%"
+    interpret: "46/75 × 100 = 61%. Among those at the dinner, the risk of GI illness was 61%. The 29 who stayed well (39%) are not the rate."
     src: { page: 29, quote: "Then, the attack rate for GI illness is 46/75 x 100 = 61%" }
     status: unverified
+    tags: [numbers]
   # ---------- slides 30-43: prevalence ----------
   - id: res.L02.027
     kind: table
@@ -535,18 +534,17 @@ items:
     src: { page: 59, quote: "The proportionate mortality rate for leukemia is: (1200/6000) x 100 = 20%" }
     status: unverified
   - id: res.L02.047
-    kind: mcq
+    kind: calc
     topic: mortality
-    stem: In a county, 500 people are HIV-positive and 5 die within a year of diagnosis. What is the case fatality rate?
-    options: ["1%", "10%", "0.1%", "5%"]
-    answer: 0
-    why:
-      - "Correct. 5/500 × 100 = 1%."
-      - Off by a factor of 10.
-      - Off by a factor of 10.
-      - 5 is the number of deaths, not the rate.
+    calculator: cfr
+    stem: In a county, 500 people are HIV-positive and 5 die within a year of diagnosis.
+    question: What is the case fatality rate?
+    inputs: { deaths: 5, cases: 500 }
+    expect: "1%"
+    interpret: "5/500 × 100 = 1%. The denominator is the people with the disease, not the whole county."
     src: { page: 60, quote: "five died within a year after their initial diagnosis. The case fatal- ity rate is 5/500 x 100 =1%" }
     status: unverified
+    tags: [numbers]
   - id: res.L02.048
     kind: mcq
     topic: mortality
@@ -591,31 +589,29 @@ items:
     status: unverified
     tags: [high-yield]
   - id: res.L02.051
-    kind: mcq
+    kind: calc
     topic: mortality
-    stem: A city reports 270 infant deaths and 30,000 live births in a year. What is the infant mortality rate?
-    options: ["9 per 1000 live births", "0.9 per 1000 live births", "90 per 1000 live births", "Cannot be calculated without the population"]
-    answer: 0
-    why:
-      - "Correct. 270/30,000 × 1000 = 9."
-      - Off by a factor of 10.
-      - Off by a factor of 10.
-      - The denominator is live births, not the population.
+    calculator: imr
+    stem: A city reports 270 infant deaths and 30,000 live births in a year.
+    question: What is the infant mortality rate?
+    inputs: { infant_deaths: 270, live_births: 30000 }
+    expect: "9 per 1,000"
+    interpret: "270/30,000 × 1000 = 9 infant deaths per 1000 live births. The denominator is live births, not the population."
     src: { page: 63, quote: "or 9 infant deaths per 1000 live births per year." }
     status: unverified
+    tags: [numbers]
   - id: res.L02.052
-    kind: mcq
+    kind: calc
     topic: mortality
-    stem: A city reports 150 neonatal deaths and 30,000 live births in a year. What is the neonatal mortality rate?
-    options: ["5 per 1000 live births", "0.5 per 1000 live births", "50 per 1000 live births", "5%"]
-    answer: 0
-    why:
-      - "Correct. 150/30,000 × 1000 = 5."
-      - Off by a factor of 10.
-      - Off by a factor of 10.
-      - It is per 1000 live births, not a percentage.
+    calculator: nmr
+    stem: A city reports 150 neonatal deaths and 30,000 live births in a year.
+    question: What is the neonatal mortality rate?
+    inputs: { neonatal_deaths: 150, live_births: 30000 }
+    expect: "5 per 1,000"
+    interpret: "150/30,000 × 1000 = 5 neonatal deaths per 1000 live births. It is per 1000 live births, not a percentage."
     src: { page: 64, quote: "or 5 neonatal deaths per 1000 live births per year." }
     status: unverified
+    tags: [numbers]
   - id: res.L02.053
     kind: cloze
     topic: mortality
@@ -720,3 +716,64 @@ items:
       - Only cases within the range of the incubation period count.
     src: { page: 44, quote: "The primary case is excluded from both the numerator and denominator." }
     status: unverified
+  # ---------- calculations (research calculators) ----------
+  - id: res.L02.061
+    kind: calc
+    topic: prevalence
+    calculator: prevalence
+    stem: A cohort of 30 people is followed for 3 years. In year 1, 5 develop the disease; in year 2, 7 more. Nobody recovers or dies.
+    question: What is the prevalence of disease in year 2?
+    inputs: { existing_cases: 12, population: 30, per: "100" }
+    expect: "40%"
+    interpret: "Existing cases at year 2 = 5 + 7 = 12, over the whole sample of 30: 12/30 = 40%."
+    src: { page: 36, quote: "25 people at risk (5 people already developed the disease in Year 1 and are thus not at risk)" }
+    status: unverified
+    tags: [numbers]
+  - id: res.L02.062
+    kind: calc
+    topic: incidence
+    calculator: incidence
+    stem: A cohort of 30 people is followed for 3 years. In year 1, 5 develop the disease; in year 2, 7 more. Nobody recovers or dies.
+    question: What is the incidence (risk) of disease in year 2?
+    inputs: { new_cases: 7, population_at_risk: 25, per: "100" }
+    expect: "28%"
+    interpret: "7 new cases over 30 − 5 = 25 still at risk: 28%. Dividing by 30 (23%) forgets that the 5 cases are no longer at risk."
+    src: { page: 36, quote: "25 people at risk (5 people already developed the disease in Year 1 and are thus not at risk)" }
+    status: unverified
+    tags: [numbers]
+  - id: res.L02.063
+    kind: calc
+    topic: secondary
+    calculator: sar
+    stem: "A shigellosis outbreak: 18 people in 18 different households fall ill. One incubation period later, 17 more people in the same households fall ill. The 18 households hold 86 people."
+    question: What is the secondary attack rate?
+    inputs: { secondary_cases: 17, contacts: 86, primary_cases: 18 }
+    expect: "25%"
+    interpret: "Susceptibles = 86 − 18 primary cases = 68. 17/68 × 100 = 25%. Using 86 (19.8%) forgets to exclude the primary cases."
+    src: { page: 48, quote: "17 ----------------------------------- x100 68" }
+    status: unverified
+    tags: [numbers]
+  - id: res.L02.064
+    kind: calc
+    topic: secondary
+    calculator: sar
+    stem: Seven cases of hepatitis A occur among children at a nursery, each from a different family. The 7 families hold 32 people. One incubation period later, 5 family members fall ill.
+    question: What is the secondary attack rate among family contacts?
+    inputs: { secondary_cases: 5, contacts: 32, primary_cases: 7 }
+    expect: "20%"
+    interpret: "At risk = 32 − 7 infected children = 25. 5/25 × 100 = 20%. 5/32 = 15.6% forgets to remove the primary cases."
+    src: { page: 49, quote: "Seven cases of hepatitis A occurred among 70 children attending a" }
+    status: unverified
+    tags: [numbers]
+  - id: res.L02.065
+    kind: calc
+    topic: mortality
+    calculator: pmr
+    stem: "A county of 2.5 million has 6000 deaths in a year: 1200 leukemia, 1750 stroke, 250 pneumonia, 250 Hodgkin's disease and 2500 acute MI."
+    question: What is the proportionate mortality rate for leukemia?
+    inputs: { cause_deaths: 1200, all_deaths: 6000 }
+    expect: "20%"
+    interpret: "Deaths from leukemia over all deaths: 1200/6000 × 100 = 20%. It needs no population count, and it is not the case fatality rate."
+    src: { page: 59, quote: "The proportionate mortality rate for leukemia is: (1200/6000) x 100 = 20%" }
+    status: unverified
+    tags: [numbers]

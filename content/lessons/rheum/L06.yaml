@@ -1,0 +1,664 @@
+schema: batna.lesson/v1
+lecture: rheum.L06
+lessons:
+  # ------------------------------------------------------------------
+  - id: rheum.L06.lesson1
+    title: "جيشين: innate و adaptive"
+    hook: "جيش واقف على الحدود من يوم ما اتولدت، وجيش متخصص بياخد 3–5 أيام يجهّز. الاتنين لازم يتكلموا مع بعض."
+    minutes: 9
+    pages: [83, 86]
+    topics: [organs, innate, iis, cytokines]
+    goals:
+      - "تفرّق بين الـ innate والـ adaptive immunity (سؤال كتاب)"
+      - "تعرف الـ PAMPs والـ Toll-like receptors"
+      - "تعرّف الـ cytokines وطرق عملها"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 84
+        title: "منين بييجي الجيش؟"
+        quote: "Granulocyte/monocyte (myeloid) lineage"
+        text: |
+          كله بيبدأ من **pluripotent stem cell** في الـ bone marrow، وبيتفرّع لخطين:
+
+          - ==myeloid lineage==: neutrophils و eosinophils و basophils و mast cells و **monocytes**، والـ monocyte بيبقى **macrophage** في الأنسجة.
+          - **lymphoid lineage**: **B cells** وبتبقى **plasma cells**، و **T cells** وبتعدّي على الـ **thymus**، و **NK cells**.
+
+          والـ **lymphoid tissue** متوزّع في الـ lymph nodes والـ **MALT**، زي الـ tonsils والـ bronchial nodes والـ **Peyer's patches** في الـ GALT.
+      - kind: table
+        page: 85
+        quote: "Circulating factors Complement, CRP Antibody"
+        title: "الجيشين جنب بعض"
+        columns: [Component, Innate, Adaptive]
+        rows:
+          - ["Barriers", "Skin, mucous membranes", "Mucosal immune system"]
+          - ["Circulating", "Complement, CRP", "Antibody"]
+          - ["Cells", "Macrophages, neutrophils, NK", "Lymphocytes"]
+          - ["Mediators", "Monokines: IL-1, TNF, IL-12, IFN", "Lymphokines"]
+        hide: [[1, 1], [1, 2], [2, 1], [2, 2]]
+      - kind: sort
+        page: 85
+        quote: "Does not change in intensity with infection."
+        prompt: "innate ولا adaptive؟"
+        bins: ["Innate", "Adaptive"]
+        cards:
+          - { text: "Present at birth", bin: 0 }
+          - { text: "Non-specific", bin: 0 }
+          - { text: "Same intensity with every infection", bin: 0 }
+          - { text: "Protects from fungi and worms", bin: 0 }
+          - { text: "Acquired from exposure", bin: 1 }
+          - { text: "Increases in intensity with exposure", bin: 1 }
+          - { text: "Protects from viruses and protozoa", bin: 1 }
+          - { text: "Lymphokines", bin: 1 }
+        why: "الـ innate موجود من الولادة، مش specific، ومش بيقوى مع التكرار. الـ adaptive بيتعلّم: specific وبيقوى مع كل exposure. والبكتيريا الاتنين بيحموا منها."
+      - kind: aside
+        tone: analogy
+        page: 85
+        quote: "acquired immune system that takes 3-5 days can deal with it."
+        text: |
+          الـ ==innate== زي **الأمن المركزي** على باب القسم: موجود دايمًا، بيضرب أي حد غريب فورًا، بس مش بيعرف الأسامي.
+
+          الـ **adaptive** زي **المباحث**: بتاخد **3–5 أيام** تعمل التحريات (clonal expansion)، بس لما تمسك المتهم بتمسكه هو بالظبط، وبتفتكره المرة الجاية.
+      - kind: explain
+        page: 86
+        title: "الـ innate بيشوف إيه؟"
+        quote: "Binding occurs through Toll-like receptors; mannose receptors (pattern"
+        text: |
+          الـ macrophage بيتعرّف على ==PAMPs==، يعني pathogen-associated molecular patterns: **lipopolysaccharides** و **peptidoglycans** و **mannans** و **bacterial DNA/RNA**.
+
+          وبيمسكهم بـ **pattern recognition receptors**: **Toll-like receptors** و **mannose receptors**. وبعدها يطلّع cytokines:
+          - **IL-1، TNF-α، IL-8** ← تنشّط الـ **neutrophils**
+          - **IFN-α** ← ينشّط الـ phagocytes
+          - **IL-15** ← ينشّط الـ **NK cells**
+          - **IL-12، IL-18** ← ينشّطوا الـ **TH1**
+      - kind: match
+        page: 86
+        quote: "IL-15 stimulate natural killer cells."
+        prompt: "وصّل الـ cytokine بالهدف:"
+        pairs:
+          - ["IL-8", "Neutrophils"]
+          - ["IL-15", "NK cells"]
+          - ["IL-12", "TH1 cells"]
+          - ["IFN-α", "Phagocytes"]
+        why: "**IL-8** هو الـ neutrophil chemokine المشهور، و **IL-15** للـ NK، و **IL-12** هو مفتاح الـ Th1."
+      - kind: reveal
+        page: 86
+        quote: "Binding of antigens to Toll receptors upregulates the expression of co-"
+        prompt: "الـ innate بيكلّم الـ adaptive إزاي؟"
+        answer: |
+          بطريقتين:
+          1. الخلايا الـ innate بتبلع الـ pathogen وتقدّمه للـ T cells، يعني بتشتغل ==APC==.
+          2. لما الـ antigen يمسك في الـ **Toll receptor**، الـ APC تزوّد الـ **costimulatory molecules**، وده **ضروري** لتنشيط الـ T cell.
+
+          افتكر الـ **anergy** من محاضرة الـ autoimmunity: من غير costimulation الـ T cell بتتقفل. فالـ innate هو اللي بيقول للـ adaptive "ده عدو بجد".
+      - kind: explain
+        page: 86
+        title: "الـ cytokines"
+        quote: "Cytokines can have an autocrine function, paracrine or endocrine function."
+        text: |
+          الـ ==cytokines== = **small molecular weight soluble factors** بتطلّعها الخلايا (cyto) علشان تكلّم خلايا تانية وتأثر عليها (kines) عن طريق **specific surface receptors**.
+
+          - بتشتغل **autocrine** على نفسها، أو **paracrine** على اللي جنبها، أو **endocrine** بعيد في الدم.
+          - اللي بتطلع من الـ WBCs وتشتغل على WBCs اسمها **interleukins**.
+          - وظيفتها: **lymphocyte activation** و **local and systemic inflammation**.
+      - kind: check
+        page: 85
+        quote: "Present at birth."
+        question: "Which belongs to innate immunity?"
+        options: ["Present at birth, unchanged by repeated infection", "Increases in intensity with exposure", "Mediated by antibodies and lymphokines", "Needs 3–5 days of clonal expansion"]
+        answer: 0
+        why:
+          - "صح: الـ innate من الولادة ومش بيتغيّر مع العدوى."
+          - "ده الـ adaptive: بيقوى مع التكرار."
+          - "الـ antibodies والـ lymphokines adaptive."
+          - "الـ clonal expansion في 3–5 أيام دي بتاعة الـ adaptive."
+      - kind: try
+        items: [rheum.L06.004, rheum.L06.005, rheum.L06.006, rheum.L06.012, rheum.L06.087]
+    recap:
+      - "Innate: من الولادة، non-specific، complement و CRP، macrophages و neutrophils و NK، monokines."
+      - "Adaptive: specific، بيقوى مع الـ exposure، antibodies و lymphocytes، 3–5 أيام."
+      - "PAMPs ← Toll-like و mannose receptors ← cytokines. IL-8 neutrophils، IL-15 NK، IL-12/18 TH1."
+      - "الـ innate بيقدّم الـ antigen وبيزوّد الـ costimulators."
+    practice: [rheum.L06.001, rheum.L06.002, rheum.L06.003, rheum.L06.004, rheum.L06.005, rheum.L06.006, rheum.L06.007, rheum.L06.008, rheum.L06.009, rheum.L06.010, rheum.L06.011, rheum.L06.012, rheum.L06.013, rheum.L06.014, rheum.L06.015, rheum.L06.016, rheum.L06.087]
+  # ------------------------------------------------------------------
+  - id: rheum.L06.lesson2
+    title: "الـ HLA: بطاقة الرقم القومي للخلية"
+    hook: "ليه زرع الكلية صعب؟ لأن كل واحد فينا شايل HLA مختلف، و DRB1 لوحده فيه 60 شكل."
+    minutes: 9
+    pages: [87, 91]
+    topics: [hla]
+    goals:
+      - "تفرّق بين class I و class II في المكان والتركيب والوظيفة"
+      - "تقرا اسم allele زي DRB1*0101"
+      - "تعرّف الـ codominance والـ linkage disequilibrium"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 87
+        title: "يعني إيه HLA؟"
+        quote: "The human MHC is known as HLA and the genes are found on"
+        text: |
+          الـ **MHC** مجموعة جينات أغلبها ليه وظيفة مناعية، وفي الإنسان اسمها ==HLA==، وجيناتها على **chromosome 6**.
+
+          جزيئات **class I و II** دي **glycoproteins** على سطح الخلية، بتمسك **short processed peptides** وتعرضها على الـ **T cell receptor**. وفي ناس الـ HLA بتاعها بيخليها أكثر عرضة لأمراض معيّنة.
+      - kind: figure
+        page: 88
+        quote: "Schematic illustration of the structure of class I and class II molecules."
+        title: "Class I و class II"
+        alt: "Side-by-side drawing. Class I: a long alpha chain with three domains, alpha 1, alpha 2, alpha 3, crossing the membrane, with a small separate beta-2 microglobulin beside alpha 3; found on all nucleated cells, presents to CD8 cytotoxic T cells. Class II: two transmembrane chains, alpha with domains alpha 1 and 2 and beta with domains beta 1 and 2; found on macrophages, dendritic cells and B cells, presents to CD4 helper T cells."
+        caption: "Class I = ==α chain + β2-microglobulin==، وجين الـ β2m على chromosome 15. أما class II فسلسلتين α و β، الاتنين transmembrane."
+        svg: |
+          <svg viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg">
+            <text x="80" y="20" text-anchor="middle" class="t-b">Class I</text>
+            <text x="245" y="20" text-anchor="middle" class="t-b">Class II</text>
+            <rect x="50" y="35" width="50" height="36" rx="16" class="fg-acc"/>
+            <text x="75" y="58" text-anchor="middle" class="t-sm">α1</text>
+            <rect x="50" y="78" width="50" height="36" rx="16" class="fg-acc"/>
+            <text x="75" y="101" text-anchor="middle" class="t-sm">α2</text>
+            <rect x="50" y="121" width="50" height="36" rx="16" class="fg-acc"/>
+            <text x="75" y="144" text-anchor="middle" class="t-sm">α3</text>
+            <circle cx="122" cy="139" r="17" class="fg-good"/>
+            <text x="122" y="143" text-anchor="middle" class="t-sm">β2m</text>
+            <path d="M75 157 V215" class="fg-ink" stroke-width="3"/>
+            <rect x="190" y="78" width="45" height="36" rx="16" class="fg-acc"/>
+            <text x="212" y="101" text-anchor="middle" class="t-sm">α1</text>
+            <rect x="190" y="121" width="45" height="36" rx="16" class="fg-acc"/>
+            <text x="212" y="144" text-anchor="middle" class="t-sm">α2</text>
+            <rect x="255" y="78" width="45" height="36" rx="16" class="fg-good"/>
+            <text x="277" y="101" text-anchor="middle" class="t-sm">β1</text>
+            <rect x="255" y="121" width="45" height="36" rx="16" class="fg-good"/>
+            <text x="277" y="144" text-anchor="middle" class="t-sm">β2</text>
+            <path d="M212 157 V215 M277 157 V215" class="fg-ink" stroke-width="3"/>
+            <rect x="10" y="175" width="310" height="22" class="fg-thin"/>
+            <text x="165" y="191" text-anchor="middle" class="t-sm t-mut">membrane</text>
+            <text x="10" y="240" class="t-sm t-b">All nucleated cells</text>
+            <text x="10" y="258" class="t-sm">→ CD8 cytotoxic T</text>
+            <text x="10" y="276" class="t-sm t-mut">β2m gene: chr 15</text>
+            <text x="180" y="240" class="t-sm t-b">Professional APCs</text>
+            <text x="180" y="258" class="t-sm">macrophage, DC, B cell</text>
+            <text x="180" y="276" class="t-sm">→ CD4 helper T</text>
+            <text x="180" y="294" class="t-sm t-mut">more diverse</text>
+          </svg>
+      - kind: aside
+        tone: tip
+        page: 87
+        quote: "Class I to cytotocic and class II to helper T cells"
+        text: |
+          قاعدة الضرب: حاصل الضرب دايمًا ==8==.
+
+          - **CD8** مع **class I**، لأن 8 × 1 = 8
+          - **CD4** مع **class II**، لأن 4 × 2 = 8
+
+          ومنطقها: أي خلية ممكن يدخلها virus، فكل الخلايا المنوّاة عندها **class I** علشان الـ CTL يقدر يقتلها. أما **class II** فبس عند اللي شغلتهم يقدّموا antigen للـ helper.
+      - kind: check
+        page: 87
+        quote: "Class I are expressed on all nucleated cells"
+        question: "A hepatocyte is infected by a virus. What presents the viral peptide, and to whom?"
+        options: ["Class I, to CD8 cytotoxic T cells", "Class II, to CD4 helper T cells", "Class II, to CD8 T cells", "Class III, to NK cells"]
+        answer: 0
+        why:
+          - "صح: الـ hepatocyte nucleated، فعنده class I يعرض بيه على الـ CD8."
+          - "الـ class II بس على الـ professional APCs."
+          - "الـ class II بيروح للـ CD4 مش الـ CD8."
+          - "الـ class III region فيه C4 و C2 و TNF، مش جزيئات بتعرض peptides."
+      - kind: explain
+        page: 89
+        title: "الـ polymorphism"
+        quote: "There exist nine DRB genes DRB1-9 (4 are functional)"
+        text: |
+          - الـ **DR** فيه **α chain gene واحد** اسمه DRA، فكل الـ HLA-DR نفس الـ α chain.
+          - فيه **9 DRB genes**، منهم **4 functional**، وكل واحد ليه alleles كتير.
+          - لما عدد الـ alleles يبقى كبير ده اسمه ==gene polymorphism==: **DRB1 لوحده 60 allele**.
+          - النتيجة: كل واحد فينا HLA مختلف ← **diverse susceptibility to disease** و **prompt rejection of organ transplant**.
+          - **DQ**: الـ α والـ β الاتنين polymorphic. **DP**: الـ β highly polymorphic.
+      - kind: match
+        page: 90
+        quote: "Letter designing locus DR."
+        prompt: "فكّك الاسم DRB1*0101: كل حتة معناها إيه؟"
+        pairs:
+          - ["DR", "The locus"]
+          - ["B", "The β chain"]
+          - ["1", "Which DRB gene"]
+          - ["*01", "Type, same as serology"]
+          - ["*0101", "Variant"]
+        why: "الـ locus، وبعدين السلسلة، B يعني β، ورقم الجين، والنجمة، والـ **type** برقمين زي الـ serology، وأخيرًا الـ **variant**. زمان كانت بالـ serology، ودلوقتي بالـ genotyping لأن جزيئين شبه بعض serologically ممكن يختلفوا جينيًا."
+      - kind: explain
+        page: 90
+        title: "الوراثة"
+        quote: "Both maternal and paternal derived allelic forms are expressed: codominance."
+        text: |
+          - بتورث **haplotype** من الأم وواحد من الأب. الـ haplotype هو string of genes linked on one chromosome.
+          - الاتنين بيتعبّروا: ده ==codominance==.
+          - **Linkage disequilibrium**: alleles معيّنة بتيجي مع بعض على نفس الـ haplotype **أكتر من الصدفة** في الـ meiosis، زي **HLA-B8 و DR3**. يعني حتت كبيرة من الـ MHC بتتورث سليمة كـ **extended haplotypes** من جيل لجيل.
+      - kind: reveal
+        page: 91
+        quote: "HLA A1, B8, DR3 vigorous response to infection?"
+        prompt: "الكتاب بيسأل عن الـ A1, B8, DR3: «too much of a good thing?». يقصد إيه؟"
+        answer: |
+          الـ haplotype ده ممكن يدّي **رد فعل قوي ضد العدوى** (ميزة زمان لما العدوى كانت بتقتل).
+
+          بس نفس القوة دي ممكن تبقى ==aggressive hyper-responsiveness== وأمراض **inflammatory** و autoimmune. الحاجة الحلوة لو زادت بقت مشكلة.
+      - kind: try
+        items: [rheum.L06.019, rheum.L06.022, rheum.L06.026, rheum.L06.029, rheum.L06.032]
+    recap:
+      - "HLA = human MHC على chromosome 6. Class I على كل الخلايا المنوّاة ← CD8. Class II على الـ APCs ← CD4."
+      - "Class I = α + β2-microglobulin (chr 15). Class II = α و β transmembrane، وأكتر diversity."
+      - "9 DRB genes، 4 functional، DRB1 فيه 60 allele = polymorphism."
+      - "Codominance: الاتنين بيتعبّروا. Linkage disequilibrium: B8 و DR3 مع بعض."
+    practice: [rheum.L06.017, rheum.L06.018, rheum.L06.019, rheum.L06.020, rheum.L06.021, rheum.L06.022, rheum.L06.023, rheum.L06.024, rheum.L06.025, rheum.L06.026, rheum.L06.027, rheum.L06.028, rheum.L06.029, rheum.L06.030, rheum.L06.031, rheum.L06.032, rheum.L06.033, rheum.L06.034]
+  # ------------------------------------------------------------------
+  - id: rheum.L06.lesson3
+    title: "HLA والأمراض، والـ macrophage، والـ lymphocytes"
+    hook: "ليه DR3 بيتكرر في SLE و Sjögren و Graves؟ وليه عيان الـ hypogammaglobulinemia بيجيله pneumococcus بالذات؟"
+    minutes: 9
+    pages: [91, 94]
+    topics: [hla-disease, macrophages, lymphocytes]
+    goals:
+      - "تشرح 4 mechanisms للـ HLA disease association"
+      - "تحفظ قائمة الـ HLA associations"
+      - "تفرّق بين humoral و cellular immunity"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 91
+        title: "الـ HLA بيعمل المرض إزاي؟"
+        quote: "By what mechanism do MHC genes confer disease susceptibility:"
+        text: |
+          الـ HLA مش بيعمل المرض لوحده، بس بيهيّئ له. الـ mechanisms:
+
+          1. **T cell maturation**: الـ MHC هو اللي بيقرر أنهي naïve T cell تعيش في الـ thymus.
+          2. **بيتحكم في اللي الـ T cell بتشوفه**: الـ amino acids في الـ MHC بتحدد أنهي peptide يمسك فيه.
+          3. ==Molecular mimicry==.
+          4. **Linkage disequilibrium**: الـ HLA نفسه بريء، بس بيتورث مع الجين الحقيقي.
+      - kind: reveal
+        page: 91
+        quote: "HLA molecule may bear similarity to a certain antigen (pathogen)."
+        prompt: "الـ molecular mimicry ليها نتيجتين عكس بعض. إيه هما؟"
+        answer: |
+          الـ HLA شبه antigen بتاع pathogen، فـ:
+          - يا المناعة تعتبر الـ pathogen **self** وما تهاجموش ← **severe unabated disease**.
+          - يا تهاجم الـ pathogen وتهاجم معاه الـ **self HLA** ← ==autoimmune disease==.
+      - kind: table
+        page: 92
+        quote: "HLA-DR3: SLE, Sjogren's syndromes Grave's disease, type 1 DM."
+        title: "أشهر الـ HLA associations"
+        columns: [HLA, Diseases]
+        rows:
+          - ["A29", "Birdshot choroidoretinitis"]
+          - ["B5", "Behçet, UC, polycystic kidney"]
+          - ["B27", "Seronegative spondyloarthritis"]
+          - ["DR1", "RA"]
+          - ["DR2", "MS, Goodpasture"]
+          - ["DR3", "SLE, Sjögren, Graves, type 1 DM"]
+          - ["DR4", "RA, type 1 DM"]
+          - ["DR5", "Pauciarticular JRA, Hashimoto"]
+          - ["DQ", "SLE, type 1 DM"]
+        hide: [[1, 1], [2, 1], [4, 1], [5, 1], [7, 1]]
+      - kind: aside
+        tone: joke
+        page: 92
+        quote: "HLA-DR2: Multiple sclerosis, Good pasture's syndrome."
+        text: |
+          **DR2** = **2** أمراض بتاكل الـ myelin والـ basement membrane: **multiple sclerosis** و **Goodpasture syndrome**.
+
+          **DR3** = **3** حروف S: **S**LE و **S**jögren و **S**ugar، يعني type 1 DM. وزوّد عليهم Graves علشان ما يزعلش.
+      - kind: check
+        page: 92
+        quote: "HLA-DR2: Multiple sclerosis, Good pasture's syndrome."
+        question: "Goodpasture syndrome is associated with which HLA, per the lecture?"
+        options: ["DR2", "DR3", "B27", "DR5"]
+        answer: 0
+        why:
+          - "صح: DR2 = MS و Goodpasture."
+          - "DR3 = SLE و Sjögren و Graves و T1DM."
+          - "B27 = seronegative spondyloarthritis."
+          - "DR5 = pauciarticular JRA و Hashimoto."
+      - kind: explain
+        page: 93
+        title: "الـ monocyte–macrophage"
+        quote: "Macrophage function as phagocytes (slower than neutrophils)"
+        text: |
+          الـ **monocyte** بيتعمل في الـ bone marrow، يلف في الدم **يوم واحد**، وبعدين يستقر في الأنسجة كـ **macrophage (histiocyte)**.
+
+          **بيتنشّط** بـ: contact مع الميكروب، endotoxins، breakdown products، complement، coagulation products، و ==IFN-γ من الـ TH1==.
+
+          **وظايفه:**
+          1. **Phagocytosis**، أبطأ من الـ neutrophils.
+          2. **Secretions**: IL-1 و TNF و IL-6 و IFN و prostaglandins و leukotrienes و enzymes و superoxides.
+          3. **يأثر على الـ lymphocytes** بالـ mediators زي IL-1 و TNF، وبإنه **APC**.
+      - kind: explain
+        page: 93
+        title: "T و B"
+        quote: "monoclonal antibodies that recognize CD3, a component of T cell receptor."
+        text: |
+          - **T cells**: من الـ **thymus**، عليها **TCR**، وبنعرفها بالـ ==CD3==. هي **أغلب** الـ lymphocytes في الدم.
+          - **B cells**: من الـ **bone marrow**، بتفرز antibodies، وعليها **surface Ig**. ما بتعدّيش على الـ thymus، بتستقر في الـ spleen والـ lymph nodes.
+      - kind: table
+        page: 93
+        quote: "Humoral immunity is most important against bacteria, especially those"
+        title: "Humoral ولا cellular؟"
+        columns: [Feature, Humoral, Cellular]
+        rows:
+          - ["By", "B cells, antibody", "T cells, cytokines"]
+          - ["Against", "Bacteria, encapsulated", "Virus, parasites, fungi, TB"]
+          - ["Deficiency", "Hypogammaglobulinemia", "AIDS"]
+        hide: [[1, 1], [1, 2], [2, 1], [2, 2]]
+      - kind: case
+        page: 93
+        quote: "encapsulated organism (e.g pneumococcus, Haemophilus influenza)."
+        stem: "24-year-old man: pneumococcal pneumonia twice, recurrent Haemophilus sinusitis. IgG, IgA and IgM very low."
+        steps:
+          - question: "Which arm is defective?"
+            options: ["Humoral", "Cellular", "NK cells"]
+            answer: 0
+            why: "الـ antibody هو اللي بيعمل **opsonization** للبكتيريا اللي عليها capsule. من غيره ← **recurrent sinopulmonary infection** بالـ encapsulated organisms."
+          - question: "Which infections would point to a T-cell defect instead?"
+            options: ["Viruses, fungi, parasites, mycobacteria", "Encapsulated bacteria only", "Worms only"]
+            answer: 0
+            why: "الـ **cellular immunity** هي اللي بتحارب الـ intracellular pathogens، زي عيانين الـ **AIDS**."
+      - kind: explain
+        page: 94
+        title: "حياة الـ B cell"
+        quote: "When a B cell is exposed to an antigen it differentiates to antibody secreting"
+        text: |
+          - الـ mature B cell عليها **sIgM و sIgD** كـ receptors، وكل خلية ==specific for one antigen only==.
+          - لما تقابل الـ antigen ← تبقى **plasma cell** (تفرز antibody) أو **memory cell**.
+          - الـ **full activation** محتاجة **مساعدة الـ T cell**.
+          - الـ plasma cells تعمل **clone** يفرز نفس الـ antibody اللي كان على سطح الخلية الأم.
+          - الـ **memory cells** مسؤولة عن الـ **secondary immune response**.
+      - kind: try
+        items: [rheum.L06.035, rheum.L06.038, rheum.L06.044, rheum.L06.047, rheum.L06.051]
+    recap:
+      - "HLA susceptibility: T maturation، بيحدد اللي الـ T تشوفه، molecular mimicry، linkage disequilibrium."
+      - "B27 spondyloarthritis، DR2 MS و Goodpasture، DR3 SLE و Sjögren و Graves و T1DM، DR4 RA و T1DM، DR5 JRA و Hashimoto."
+      - "Macrophage: phagocyte أبطأ من الـ neutrophil، secretions، و APC. بيتنشّط بالـ IFN-γ."
+      - "Humoral ← encapsulated bacteria. Cellular ← virus و fungi و parasites و TB."
+    practice: [rheum.L06.035, rheum.L06.036, rheum.L06.037, rheum.L06.038, rheum.L06.039, rheum.L06.040, rheum.L06.041, rheum.L06.042, rheum.L06.043, rheum.L06.044, rheum.L06.045, rheum.L06.046, rheum.L06.047, rheum.L06.048, rheum.L06.049, rheum.L06.050, rheum.L06.051]
+  # ------------------------------------------------------------------
+  - id: rheum.L06.lesson4
+    title: "الـ antibodies والـ helper T cells"
+    hook: "خمس antibodies بخمس شخصيات، وأربع أنواع helper كل واحد ليه master switch."
+    minutes: 10
+    pages: [95, 98]
+    topics: [immunoglobulins, t-cells]
+    goals:
+      - "تحفظ الـ Ig classes بالـ heavy chain والوظيفة"
+      - "تفرّق بين طرق تنشيط الـ B cell"
+      - "تعدّ أنواع الـ T helper (سؤال كتاب)"
+    status: unverified
+    steps:
+      - kind: figure
+        page: 95
+        quote: "Structure of Immunoglobulin Molecule"
+        title: "شكل الـ antibody"
+        alt: "A Y-shaped immunoglobulin. Two heavy chains and two light chains. The tips of both arms, formed by the variable domains VH and VL, are the antigen-binding sites. Below the hinge, the stem formed by CH2 and CH3 carries the Fc receptor and complement-binding sites."
+        caption: "الطرفين فوق (==VH و VL==) بيمسكوا الـ antigen، والرجل تحت (CH2، CH3) بتكلّم الـ Fc receptors والـ complement."
+        svg: |
+          <svg viewBox="0 0 330 320" xmlns="http://www.w3.org/2000/svg">
+            <path d="M150 170 L70 60" class="fg-ink" stroke-width="10"/>
+            <path d="M180 170 L260 60" class="fg-ink" stroke-width="10"/>
+            <path d="M120 140 L45 75" class="fg-thin" stroke-width="8"/>
+            <path d="M210 140 L285 75" class="fg-thin" stroke-width="8"/>
+            <path d="M150 170 V290 M180 170 V290" class="fg-ink" stroke-width="10"/>
+            <circle cx="60" cy="62" r="24" class="fg-acc"/>
+            <circle cx="270" cy="62" r="24" class="fg-acc"/>
+            <text x="60" y="30" text-anchor="middle" class="t-sm t-b t-acc">Antigen site</text>
+            <text x="270" y="30" text-anchor="middle" class="t-sm t-b t-acc">Antigen site</text>
+            <text x="14" y="120" class="t-sm">Light chain</text>
+            <text x="230" y="140" class="t-sm">Heavy chain</text>
+            <text x="200" y="182" class="t-sm t-mut">hinge</text>
+            <rect x="135" y="200" width="60" height="85" rx="10" class="fg-good"/>
+            <text x="205" y="230" class="t-sm">CH2, CH3</text>
+            <text x="205" y="250" class="t-sm t-good t-b">Fc receptor +</text>
+            <text x="205" y="268" class="t-sm t-good t-b">complement sites</text>
+          </svg>
+      - kind: table
+        page: 95
+        quote: "First Ig synthesized in an antibody response potent activator complement,"
+        title: "الخمس classes"
+        columns: [Ig, Chain, Key point]
+        rows:
+          - ["IgM", "μ", "First made; potent complement activator"]
+          - ["IgG", "γ", "Most abundant; secondary response"]
+          - ["IgA", "α", "Next most abundant; mucosal protection"]
+          - ["IgE", "ε", "Very low; parasites and atopy"]
+          - ["IgD", "δ", "Very low, unknown; B-cell maturation"]
+        hide: [[0, 2], [1, 2], [2, 2], [3, 2], [4, 2]]
+      - kind: mnemonic
+        page: 95
+        quote: "Most abundant – 2ry immune response complement activation."
+        word: "MGAED"
+        parts:
+          - { key: "M", text: "IgM: Make it first, complement activator" }
+          - { key: "G", text: "IgG: Greatest amount, secondary response" }
+          - { key: "A", text: "IgA: At the mucosa, next most abundant" }
+          - { key: "E", text: "IgE: Eosinophils, parasites and atopy" }
+          - { key: "D", text: "IgD: Developing B cells, function unknown in serum" }
+        hook: "**MGAED** بالترتيب ده: أول واحد يتعمل، أكتر واحد، اللي بعده في الكمية، والاتنين الواطيين في الآخر."
+      - kind: explain
+        page: 96
+        title: "الـ B cell بتتنشّط إزاي؟"
+        quote: "Thymus independent pathway 2 is antigen specific- IgM response-little memory."
+        text: |
+          - **Thymus independent 1**: **مش antigen specific**، بتنشّط كل الـ B cells: **polyclonal activation**.
+          - **Thymus independent 2**: antigen specific، **IgM response**، **little memory**.
+          - ==Thymus dependent==: **الأهم**: **high-affinity IgG**، **memory**، و**protection against autoimmunity**.
+      - kind: check
+        page: 96
+        quote: "Thymus dependent: most important- high affinity IgG-Memory-protection"
+        question: "Which B-cell pathway gives high-affinity IgG and memory?"
+        options: ["Thymus dependent", "Thymus independent 1", "Thymus independent 2", "Polyclonal activation"]
+        answer: 0
+        why:
+          - "صح: الـ T help بيدّي IgG عالي الـ affinity و memory."
+          - "الـ TI-1 مش specific وبيعمل polyclonal activation."
+          - "الـ TI-2 بيدّي IgM و memory قليلة."
+          - "الـ polyclonal activation هو الـ TI-1 نفسه."
+      - kind: table
+        page: 97
+        quote: "T cell population Marker Typical percentages in blood"
+        title: "الـ T cells في الدم"
+        columns: [Cells, Marker, Share]
+        rows:
+          - ["All T cells", "TCR, CD3", "70% of lymphocytes"]
+          - ["Helper", "CD4", "66% of T cells"]
+          - ["Cytotoxic", "CD8", "33% of T cells"]
+          - ["Activated", "IL-2R, transferrin R, class II", "2–10%"]
+        hide: [[1, 1], [1, 2], [2, 1], [2, 2]]
+      - kind: explain
+        page: 98
+        title: "الأربع helpers"
+        quote: "Th1: These participate in cell-mediated immunity."
+        text: |
+          الـ helper = **CD4+**، وفيه 4 أنواع:
+          - ==Th1==: **cell-mediated immunity** ضد الـ intracellular: viruses، **Listeria**، **TB**.
+          - **Th2**: يساعد الـ **B cells** ← antibodies ضد الـ **extracellular** pathogens (اللي الـ antibody يوصلها في الدم والسوائل).
+          - **Th17**: يحمي **الأسطح** (الجلد، بطانة الأمعاء) من الـ **extracellular bacteria**.
+          - **Treg**: **بيهدّي** المناعة بدل ما يشغّلها.
+      - kind: table
+        page: 98
+        quote: "Th1 IL-12 T-bet IFN-"
+        title: "كل helper: مين بيشغّله، المفتاح، والسلاح"
+        columns: [Type, Switch, Weapon]
+        rows:
+          - ["Th1", "IL-12 → T-bet", "IFN-γ"]
+          - ["Th2", "IL-4 → GATA-3", "IL-4"]
+          - ["Th17", "TGF-β + IL-6/IL-21 → RORγ", "IL-17, IL-22"]
+          - ["Treg", "IL-2, TGF-β without IL-6 → Foxp3", "IL-10"]
+        hide: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 1], [3, 1], [3, 2]]
+      - kind: reveal
+        page: 98
+        quote: "Th17 TGF-β plus IL-21 or IL-6, inhibited by retinoic acid"
+        prompt: "الـ TGF-β بيعمل Th17 وبيعمل Treg. إيه اللي بيفرّق؟"
+        answer: |
+          الـ ==IL-6==: الـ TGF-β **مع IL-6** (أو IL-21) ← **Th17** (التهاب). الـ TGF-β **من غير IL-6** ← **Treg** (تهدئة).
+
+          والـ **retinoic acid** بيرجّح الكفة: بيمنع الـ Th17 وبيشجّع الـ Treg. يعني الـ IL-6 هو اللي بيقلب السلام لحرب.
+      - kind: match
+        page: 98
+        quote: "Th2 IL-4 GATA-3 IL-4 Extracellular Asthma and"
+        prompt: "وصّل كل subset بالمرض اللي بيعمله:"
+        pairs:
+          - ["Th1", "Autoimmunity, cell-mediated allergy"]
+          - ["Th2", "Asthma, IgE allergy"]
+          - ["Th17", "Autoimmune diseases"]
+          - ["Treg", "None known"]
+        why: "الـ Th2 هو بتاع الـ IgE والربو، والـ Th1 والـ Th17 الاتنين في الـ autoimmunity، والـ Treg الكتاب كاتب قدامه «None?»."
+      - kind: try
+        items: [rheum.L06.053, rheum.L06.056, rheum.L06.059, rheum.L06.065, rheum.L06.086]
+    recap:
+      - "IgM أول واحد و complement، IgG الأكتر و secondary، IgA mucosa، IgE parasites و atopy، IgD maturation."
+      - "TI-1 polyclonal، TI-2 IgM و memory قليلة، TD أهمهم: IgG و memory."
+      - "CD4 = 66% من الـ T، CD8 = 33%."
+      - "Th1 IL-12/T-bet/IFN-γ، Th2 IL-4/GATA-3/IL-4، Th17 TGF-β+IL-6/RORγ/IL-17، Treg/Foxp3/IL-10."
+    practice: [rheum.L06.052, rheum.L06.053, rheum.L06.054, rheum.L06.055, rheum.L06.056, rheum.L06.057, rheum.L06.058, rheum.L06.059, rheum.L06.060, rheum.L06.061, rheum.L06.062, rheum.L06.063, rheum.L06.064, rheum.L06.065, rheum.L06.066, rheum.L06.067, rheum.L06.068, rheum.L06.069, rheum.L06.086]
+  # ------------------------------------------------------------------
+  - id: rheum.L06.lesson5
+    title: "مين بيقتل مين: T cells والـ NK"
+    hook: "الـ virus يخبّي الـ class I علشان الـ CTL ما تشوفهوش، فالـ NK تقتله لأنه خبّاه."
+    minutes: 9
+    pages: [99, 104]
+    topics: [t-cells, ctl, nk]
+    goals:
+      - "تشرح اختيار الـ CD4 والـ CD8 في الـ thymus"
+      - "تشرح الـ B7–CD28 والـ CTLA-4"
+      - "تعرف إزاي الـ CTL والـ NK بيقتلوا"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 99
+        title: "الـ thymus بيختار"
+        quote: "Moderate affinity for MHC class I"
+        text: |
+          الـ T cell بتيجي من الـ bone marrow للـ thymus، وتبقى **double positive (CD4+CD8+)**، وبعدين تتختبر على الـ MHC:
+          - **No affinity** ← تموت، لأنها مش هتعرف تشوف حاجة.
+          - **High affinity** ← تموت، لأنها خطر autoimmunity.
+          - ==Moderate affinity== لـ **class I** ← **CD8**، ولـ **class II** ← **CD4**.
+
+          وعلى السطح: الـ **CD4** بيمسك في الـ class II، والـ **CD8** في الـ class I، والاتنين بيبعتوا إشارة عن طريق **p56lck**.
+      - kind: figure
+        page: 100
+        quote: "During activation, CTLA-4 is induced and its binding to B7-1 on the APC is"
+        title: "On ثم off"
+        alt: "Two panels. Top: an APC and a T cell joined by the TCR–peptide–MHC contact and by B7-2 on the APC binding CD28 on the T cell, labelled activation. Arrow: activation of the T cell results in CTLA-4 expression. Bottom: the same pair, now B7-1 on the APC binds CTLA-4 on the T cell, labelled off signal."
+        caption: "==B7-2 + CD28== = on. التنشيط نفسه بيطلّع **CTLA-4**، و **B7-1 + CTLA-4** = off. فرامل بتطلع أوتوماتيك."
+        svg: |
+          <svg viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L06a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10z" class="fg-head"/></marker></defs>
+            <circle cx="60" cy="75" r="45" class="fg-box"/>
+            <text x="60" y="80" text-anchor="middle" class="t-b">APC</text>
+            <circle cx="270" cy="75" r="45" class="fg-acc"/>
+            <text x="270" y="80" text-anchor="middle" class="t-b">T cell</text>
+            <path d="M105 60 H225" class="fg-ink" stroke-width="3"/>
+            <text x="165" y="52" text-anchor="middle" class="t-sm">MHC–peptide : TCR</text>
+            <path d="M105 95 H225" class="fg-arrow-acc" stroke-width="3"/>
+            <text x="165" y="115" text-anchor="middle" class="t-sm t-good t-b">B7-2 : CD28 = ON</text>
+            <path d="M165 125 V170" class="fg-arrow" marker-end="url(#L06a)"/>
+            <text x="175" y="152" class="t-sm t-mut">CTLA-4 induced</text>
+            <circle cx="60" cy="245" r="45" class="fg-box"/>
+            <text x="60" y="250" text-anchor="middle" class="t-b">APC</text>
+            <circle cx="270" cy="245" r="45" class="fg-acc"/>
+            <text x="270" y="250" text-anchor="middle" class="t-b">T cell</text>
+            <path d="M105 230 H225" class="fg-ink" stroke-width="3"/>
+            <path d="M105 265 H225" class="fg-arrow-bad" stroke-width="3"/>
+            <text x="165" y="290" text-anchor="middle" class="t-sm t-bad t-b">B7-1 : CTLA-4 = OFF</text>
+            <text x="165" y="315" text-anchor="middle" class="t-sm t-mut">B7 = CD80/86</text>
+          </svg>
+      - kind: check
+        page: 100
+        quote: "presented antigen and the co-stimulation of the B7-2-CD28 interaction."
+        question: "Which interaction delivers the 'off' signal to an activated T cell?"
+        options: ["B7-1 with CTLA-4", "B7-2 with CD28", "CD4 with class II MHC", "TCR with peptide–MHC"]
+        answer: 0
+        why:
+          - "صح: الـ CTLA-4 بيطلع بعد التنشيط، ولما يمسك B7-1 ← off."
+          - "B7-2 مع CD28 ده الـ on (costimulation)."
+          - "CD4 مع class II بيثبّت التعرّف، مش off."
+          - "TCR مع الـ peptide هو signal 1."
+      - kind: explain
+        page: 101
+        title: "الـ CTL بيقتل الـ virus"
+        quote: "Virus particles excereted from a virally infected cell are endocytosed"
+        text: |
+          1. جزيئات الـ virus بتتبلع بالـ **APC** وتتعرض على **class II** للـ **TH1**.
+          2. الـ TH1 يبعت للـ **CTL** إشارات تنشيط: **IFN-γ** و **IL-2**.
+          3. الـ CTL يشوف الـ viral peptide على **class I** في الخلية المصابة.
+          4. يقتلها بطريقتين: ==apoptosis== بالـ **lymphotoxin**، أو **ثقوب** بالـ **perforin**.
+      - kind: order
+        page: 101
+        quote: "CTLs can kill target cells by (i) inducing suicide (apoptosis) through"
+        prompt: "رتّب خطوات قتل الخلية المصابة بالـ virus:"
+        steps:
+          - "APC endocytoses virus particles"
+          - "Viral peptide on class II to TH1"
+          - "TH1 sends IFN-γ and IL-2 to the CTL"
+          - "CTL sees viral peptide on class I"
+          - "Lymphotoxin or perforin kills the target"
+        why: "الـ helper الأول، وبعدين الـ killer. الـ CTL محتاج إذن الـ TH1، وبعدين يدوّر على الخلية اللي شايلة الـ peptide على class I."
+      - kind: explain
+        page: 102
+        title: "الـ NK cells"
+        quote: "NK cells kill tumour cells and virally infected cells without the need for prior sensitisation."
+        text: |
+          - شبه الـ lymphocytes بس ==separate lineage== عن الـ T و B.
+          - بتقتل **tumour cells** و **virally infected cells** من غير **prior sensitisation**.
+          - بتفرز **IFN-γ** يشغّل الـ phagocytes ويجيب الـ T cells.
+          - بتتنشّط بـ **IFN-γ و IL-2 و IL-12**.
+          - بتقتل بطريقتين: **ADCC**، والهدف متغطي IgG والـ NK بتمسكه بالـ **FcγRIII**؛ أو **cell–cell contact** بـ receptor للـ class I و receptor للـ carbohydrates.
+      - kind: figure
+        page: 104
+        quote: "A tumour cell not expressing class I molecules, or expressing abnormal forms of them, is lysed by the NK cell."
+        title: "الـ NK بتقرر إزاي؟"
+        alt: "Two rows. Top: normal cell with class I MHC. NK cell receives a positive signal from NKR-P1 binding carbohydrate and a negative signal from p58 binding class I; the negative wins, no lysis. Bottom: tumour or virus-infected cell without class I. Only the positive NKR-P1 signal arrives, so the cell is lysed."
+        caption: "الـ ==class I== هو «كلمة السر». موجود ← الـ NK تسيب الخلية. مختفي ← تقتلها."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="70" r="42" class="fg-box"/>
+            <text x="60" y="66" text-anchor="middle" class="t-sm t-b">Normal</text>
+            <text x="60" y="84" text-anchor="middle" class="t-sm">class I +</text>
+            <circle cx="270" cy="70" r="42" class="fg-acc"/>
+            <text x="270" y="75" text-anchor="middle" class="t-b">NK</text>
+            <path d="M102 55 H228" class="fg-arrow-acc" stroke-width="3"/>
+            <text x="165" y="47" text-anchor="middle" class="t-sm t-good">NKR-P1 + sugar: kill?</text>
+            <path d="M102 88 H228" class="fg-arrow-bad" stroke-width="3"/>
+            <text x="165" y="106" text-anchor="middle" class="t-sm t-bad">p58 + class I: STOP</text>
+            <text x="165" y="135" text-anchor="middle" class="t-b t-good">No lysis</text>
+            <circle cx="60" cy="215" r="42" class="fg-bad"/>
+            <text x="60" y="211" text-anchor="middle" class="t-sm t-b">Tumour / virus</text>
+            <text x="60" y="229" text-anchor="middle" class="t-sm">no class I</text>
+            <circle cx="270" cy="215" r="42" class="fg-acc"/>
+            <text x="270" y="220" text-anchor="middle" class="t-b">NK</text>
+            <path d="M102 205 H228" class="fg-arrow-acc" stroke-width="3"/>
+            <text x="165" y="197" text-anchor="middle" class="t-sm t-good">NKR-P1 + sugar: kill</text>
+            <text x="165" y="240" text-anchor="middle" class="t-sm t-mut">no stop signal</text>
+            <text x="165" y="285" text-anchor="middle" class="t-b t-bad">Lysis</text>
+          </svg>
+      - kind: aside
+        tone: analogy
+        page: 104
+        quote: "Certain viruses down-regulate MHC class I molecule expression: this may"
+        text: |
+          الـ virus زي حرامي قلع **البطاقة**، اللي هي الـ class I، علشان الـ CTL ما تعرفش تقرا اسمه.
+
+          بس الـ ==NK== كمين: أي حد **من غير بطاقة** يتمسك على طول. ده الـ **fail-safe mechanism**.
+      - kind: case
+        page: 104
+        quote: "avoid killing by CTLs, but NK cells can then kill the target cell, providing a"
+        stem: "A virus down-regulates class I MHC on the cells it infects."
+        steps:
+          - question: "Which cell now kills the infected cells best?"
+            options: ["NK cells", "CD8 CTLs", "CD4 helper T cells", "B cells"]
+            answer: 0
+            why: "من غير class I، مفيش إشارة الـ p58 اللي بتوقف الـ NK، فالـ NKR-P1 positive signal يكسب ← lysis. والـ CTL محتاج class I علشان يشوف."
+          - question: "If the cells are also coated with IgG, which NK receptor joins in?"
+            options: ["FcγRIII (ADCC)", "CD28", "CTLA-4", "TCR"]
+            answer: 0
+            why: "الـ **ADCC**: الـ NK بتمسك الـ Fc بتاع الـ IgG بالـ **FcγRIII** وتقتل الهدف."
+      - kind: try
+        items: [rheum.L06.072, rheum.L06.073, rheum.L06.076, rheum.L06.080, rheum.L06.082]
+    recap:
+      - "Thymus: no أو high affinity ← تموت. Moderate لـ class I ← CD8، لـ class II ← CD4."
+      - "B7-2 + CD28 = on. التنشيط يطلّع CTLA-4، و B7-1 + CTLA-4 = off. B7 = CD80/86."
+      - "CTL: محتاج TH1، يشوف class I، يقتل بالـ lymphotoxin (apoptosis) أو الـ perforin."
+      - "NK: من غير sensitisation، IFN-γ، ADCC بالـ FcγRIII، و class I = stop signal."
+    practice: [rheum.L06.070, rheum.L06.071, rheum.L06.072, rheum.L06.073, rheum.L06.074, rheum.L06.075, rheum.L06.076, rheum.L06.077, rheum.L06.078, rheum.L06.079, rheum.L06.080, rheum.L06.081, rheum.L06.082, rheum.L06.083, rheum.L06.084, rheum.L06.085]

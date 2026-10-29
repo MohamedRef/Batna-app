@@ -1,0 +1,644 @@
+schema: batna.content/v1
+lecture: dm.L20
+title: "HDL-C therapy"
+author: "Prof. Dr. Magdy Helmy"
+book: { chapter: 6, pages: [252, 259] }
+topics:
+  - { id: metabolism, title: "Reverse cholesterol transport and HDL metabolism" }
+  - { id: anti, title: "Anti-atherogenic effects of HDL" }
+  - { id: primary, title: "Primary causes of low HDL-C" }
+  - { id: secondary, title: "Secondary causes of low HDL-C" }
+  - { id: lifestyle, title: "Non-pharmacologic treatment" }
+  - { id: drugs, title: "Lipid drugs and HDL-C" }
+  - { id: apoa1, title: "Therapies promoting ApoA-I production" }
+  - { id: efflux, title: "Therapies promoting cholesterol efflux: LXR, PPAR, glitazars" }
+  - { id: cetp, title: "Slowing HDL removal: CETP inhibitors and vaccine" }
+items:
+  # ---------- p252-253: RCT and HDL metabolism ----------
+  - id: dm.L20.001
+    kind: order
+    topic: metabolism
+    prompt: "Order reverse cholesterol transport as drawn on p252."
+    steps:
+      - Excess cholesterol leaves peripheral tissues
+      - It travels in the blood (on HDL)
+      - The liver takes it up
+      - The liver excretes it in bile
+    src: { page: 252, quote: "Reverse Cholesterol Transport (RCT)" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L20.002
+    kind: order
+    topic: metabolism
+    prompt: Order the HDL metabolism figure (p253).
+    steps:
+      - Lipid-poor ApoA-I takes free cholesterol from the cell through ABCA1
+      - Nascent HDL forms
+      - LCAT esterifies cholesterol, giving mature HDL
+      - Mature HDL delivers cholesteryl ester to the liver through SR-B1
+      - The liver excretes cholesterol in bile
+    src: { page: 253, quote: "HDL Metabolism" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L20.003
+    kind: card
+    topic: metabolism
+    front: "In the HDL metabolism figure, what does CETP do?"
+    back: It moves cholesteryl ester from HDL to VLDL and LDL in exchange for triglyceride.
+    src: { page: 253, quote: "HDL Metabolism" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L20.004
+    kind: card
+    topic: metabolism
+    front: "Name the two routes by which HDL cholesterol reaches the liver (p253 figure)."
+    back: "Directly through SR-B1 on the hepatocyte, and indirectly via CETP transfer to LDL, which the liver takes up through the LDL receptor."
+    src: { page: 253, quote: "HDL Metabolism" }
+    status: unverified
+  - id: dm.L20.005
+    kind: table
+    topic: metabolism
+    title: Proteins of HDL metabolism
+    columns: [Job, Protein]
+    rows:
+      - [Effluxes free cholesterol from the cell to lipid-poor ApoA-I, ABCA1]
+      - ["Esterifies cholesterol: nascent to mature HDL", LCAT]
+      - [Swaps HDL cholesteryl ester for VLDL triglyceride, CETP]
+      - [Hepatocyte receptor for HDL cholesteryl ester, SR-B1]
+      - [Hepatocyte receptor for LDL, LDL receptor]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 253, quote: "HDL Metabolism" }
+    status: unverified
+  # ---------- p253-254: anti-atherogenic effects ----------
+  - id: dm.L20.006
+    kind: enumerate
+    topic: anti
+    prompt: Mention the anti-atherogenic effects of HDL.
+    points:
+      - Reverse cholesterol transport
+      - "Anti-oxidant: prevents LDL oxidation"
+      - "Anti-inflammatory: inhibits endothelial adhesion molecules"
+      - "Vasodilator: more NO and prostacyclin, less ET-1"
+      - "Anti-thrombotic: less PAF, vWF and tissue factor"
+      - "Endothelial protection: EC proliferation, less EC apoptosis"
+    pass: 5
+    src: { page: 254, quote: "Anti-Oxidant Properties: Prevents oxidation of LDL." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L20.007
+    kind: card
+    topic: anti
+    front: How is HDL anti-inflammatory?
+    back: It inhibits the expression of adhesion molecules on endothelial cells.
+    src: { page: 254, quote: "Anti-Inflammatory Properties: Inhibits the expression of adhesion molecules on endothelial cells." }
+    status: unverified
+  - id: dm.L20.008
+    kind: cloze
+    topic: anti
+    text: "HDL is a vasodilator: it increases {{c1::NO}} and {{c2::prostacyclin (PGI2)}} and decreases {{c3::ET-1}}."
+    src: { page: 254, quote: "Vasodilator: Increases NO, increases Prostacyclin (PG I2), and Decreases ET-1." }
+    status: unverified
+  - id: dm.L20.009
+    kind: cloze
+    topic: anti
+    text: "HDL is anti-thrombotic: it decreases {{c1::PAF}}, {{c2::vWF}} and {{c3::tissue factor}}."
+    src: { page: 254, quote: "Anti-Thrombotic: Decrease PAF, Decrease vWF, and Decrease TF." }
+    status: unverified
+  - id: dm.L20.010
+    kind: card
+    topic: anti
+    front: How does HDL protect the endothelium?
+    back: It stimulates endothelial cell proliferation and inhibits endothelial cell apoptosis.
+    src: { page: 254, quote: "Endothelial Protection: Stimulate EC Proliferation and Inhibit EC Apoptosis." }
+    status: unverified
+  - id: dm.L20.011
+    kind: table
+    topic: anti
+    title: Where HDL blocks atherogenesis (p253 figure)
+    columns: [Atherogenic step, HDL action]
+    rows:
+      - [Monocyte adhesion to endothelium, Inhibits adhesion molecule expression]
+      - [LDL oxidation in the intima, Inhibits LDL oxidation]
+      - [Macrophage loaded with cholesterol (foam cell), Promotes cholesterol efflux]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 253, quote: "Anti-atherogenic Effects of HDL" }
+    status: unverified
+  - id: dm.L20.012
+    kind: mcq
+    topic: anti
+    stem: "Which effect is NOT among the anti-atherogenic properties of HDL listed in the book?"
+    options: [Increasing endothelin-1, Preventing LDL oxidation, Increasing prostacyclin, Decreasing von Willebrand factor, Inhibiting endothelial cell apoptosis]
+    answer: 0
+    why:
+      - "Correct: HDL DEcreases ET-1, a vasoconstrictor."
+      - "Listed: anti-oxidant property."
+      - "Listed: vasodilator effect."
+      - "Listed: anti-thrombotic effect."
+      - "Listed: endothelial protection."
+    src: { page: 254, quote: "Vasodilator: Increases NO, increases Prostacyclin (PG I2), and Decreases ET-1." }
+    status: unverified
+  # ---------- p254-255: primary causes ----------
+  - id: dm.L20.013
+    kind: enumerate
+    topic: primary
+    prompt: Mention the primary (genetic) causes of low HDL-C.
+    points:
+      - Tangier disease (ABCA1 defect)
+      - Familial hypoalphalipoproteinemia (ApoA-I defect)
+      - Increased CETP activity (CETP polymorphism)
+      - Decreased LCAT activity (LCAT mutation)
+    pass: 4
+    src: { page: 254, quote: "Primary Causes of LOW HDL-c" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L20.014
+    kind: card
+    topic: primary
+    front: Which gene is defective in Tangier disease, and what is the result?
+    back: The ABCA1 transporter gene; cholesterol efflux falls and HDL-C is markedly reduced.
+    src: { page: 254, quote: "ABC A1 Transporter gene defect." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L20.015
+    kind: card
+    topic: primary
+    front: What is the inheritance of Tangier disease according to the book?
+    back: Autosomal dominant.
+    src: { page: 254, quote: "Autosomal dominant disorder." }
+    status: unverified
+    update:
+      text: "Standard genetics references describe Tangier disease as autosomal recessive (both ABCA1 alleles); heterozygotes have about half-normal HDL-C. In the exam write the book's answer."
+      ref: "OMIM #205400, Tangier disease"
+  - id: dm.L20.016
+    kind: enumerate
+    topic: primary
+    prompt: Mention the clinical features of Tangier disease.
+    points:
+      - Marked reduction in HDL-C
+      - Enlarged orange tonsils
+      - Hepatosplenomegaly
+      - Peripheral neuropathy
+      - Premature atherosclerotic vascular disease
+      - Death from premature CAD
+    pass: 4
+    src: { page: 254, quote: "Cholesterol accumulation: Enlarged orange tonsils, hepatosplenomegaly, Peripheral neuropathy." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L20.017
+    kind: card
+    topic: primary
+    front: Why are the tonsils orange and the liver and spleen enlarged in Tangier disease?
+    back: Cholesterol accumulates in tissues because ABCA1-mediated efflux is defective.
+    src: { page: 254, quote: "Cholesterol accumulation: Enlarged orange tonsils, hepatosplenomegaly, Peripheral neuropathy." }
+    status: unverified
+  - id: dm.L20.018
+    kind: card
+    topic: primary
+    front: What is the cause of death in Tangier disease, according to the book?
+    back: Premature coronary artery disease.
+    src: { page: 254, quote: "Cause of Death: Premature CAD." }
+    status: unverified
+  - id: dm.L20.019
+    kind: table
+    topic: primary
+    title: Primary causes of low HDL-C
+    columns: [Disorder, Defect, Inheritance or note]
+    rows:
+      - [Tangier disease, ABCA1 transporter gene, "Autosomal dominant (book); orange tonsils, HSM, neuropathy"]
+      - [Familial hypoalphalipoproteinemia, ApoA-I gene, "Autosomal dominant; premature CAD and strokes"]
+      - [Increased CETP activity, CETP gene polymorphism, Premature CAD]
+      - [Decreased LCAT activity, LCAT gene mutation, Premature CAD]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [1, 2]]
+    src: { page: 254, quote: "Familial Hypoalphalipoproteinemia" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L20.020
+    kind: card
+    topic: primary
+    front: What is the defect and inheritance of familial hypoalphalipoproteinemia?
+    back: An ApoA-I gene defect, autosomal dominant; it causes premature CAD and strokes.
+    src: { page: 254, quote: "Due to Apo AI Gene defect." }
+    status: unverified
+  - id: dm.L20.021
+    kind: card
+    topic: primary
+    front: Why does increased CETP activity lower HDL-C?
+    back: CETP moves cholesteryl ester out of HDL into ApoB lipoproteins; more activity strips HDL. It is due to CETP gene polymorphism and causes premature CAD.
+    src: { page: 254, quote: "Due to Polymorphism of CETP Gene." }
+    status: unverified
+  - id: dm.L20.022
+    kind: card
+    topic: primary
+    front: Which LCAT abnormality lowers HDL-C and what does it cause?
+    back: Decreased LCAT activity from LCAT gene mutation; it causes premature CAD.
+    src: { page: 255, quote: "Due to Mutation of LCAT Gene." }
+    status: unverified
+  - id: dm.L20.023
+    kind: mcq
+    topic: primary
+    stem: "A 25-year-old man has enlarged orange tonsils, hepatosplenomegaly and a peripheral neuropathy. His HDL-C is almost undetectable. Which gene is defective?"
+    options: [ABCA1, ApoA-I, LCAT, CETP, LDL receptor]
+    answer: 0
+    why:
+      - "Correct: Tangier disease, ABCA1 defect, so cholesterol cannot leave cells and accumulates."
+      - "ApoA-I defect (familial hypoalphalipoproteinemia) gives premature CAD and stroke without orange tonsils."
+      - "LCAT defect lowers HDL but the book lists only premature CAD."
+      - "CETP polymorphism with increased activity lowers HDL; no tissue accumulation."
+      - "LDL receptor defects cause familial hypercholesterolemia with high LDL."
+    src: { page: 254, quote: "Cholesterol accumulation: Enlarged orange tonsils, hepatosplenomegaly, Peripheral neuropathy." }
+    status: unverified
+  # ---------- p255: secondary causes ----------
+  - id: dm.L20.024
+    kind: enumerate
+    topic: secondary
+    prompt: Mention the secondary causes of low HDL-C.
+    points:
+      - Smoking
+      - Obesity (visceral fat)
+      - Very-low-fat diet
+      - Beta-blockers
+      - Androgenic steroids
+    pass: 4
+    src: { page: 255, quote: "Secondary Causes of Low HDL-C" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L20.025
+    kind: card
+    topic: secondary
+    front: Which two drugs does the book list as secondary causes of low HDL-C?
+    back: Beta-blockers and androgenic steroids.
+    src: { page: 255, quote: "Androgenic steroids" }
+    status: unverified
+  - id: dm.L20.026
+    kind: mcq
+    topic: secondary
+    stem: "A 28-year-old bodybuilder has HDL-C 22 mg/dL. Which secondary cause in the book fits best?"
+    options: [Androgenic steroids, Aerobic exercise, Statin therapy, High-fat diet]
+    answer: 0
+    why:
+      - "Correct: androgenic steroids lower HDL-C."
+      - "Aerobic exercise raises HDL-C in a dose-dependent way."
+      - "Statins raise HDL-C 5-10%."
+      - "It is a VERY-low-fat diet that lowers HDL-C."
+    src: { page: 255, quote: "Androgenic steroids" }
+    status: unverified
+  # ---------- p255-256: lifestyle ----------
+  - id: dm.L20.027
+    kind: enumerate
+    topic: lifestyle
+    prompt: Mention the non-pharmacologic methods to raise HDL-C.
+    points:
+      - Exercise (intense and frequent)
+      - Smoking cessation
+      - Weight reduction
+    pass: 3
+    src: { page: 255, quote: "Non-pharmacologic Methods" }
+    status: unverified
+  - id: dm.L20.028
+    kind: card
+    topic: lifestyle
+    front: What kind of exercise raises HDL-C, according to the book?
+    back: Only intense, frequent exercise; aerobic exercise such as running raises HDL-C in a dose-dependent way.
+    src: { page: 255, quote: "HDL only with intense, frequent exercise." }
+    status: unverified
+  - id: dm.L20.029
+    kind: cloze
+    topic: lifestyle
+    text: "For every {{c1::3 kg}} of weight loss, HDL-C rises by {{c2::1 mg/dL}}."
+    src: { page: 255, quote: "For every 3 kg of weight loss, HDL-C levels increase 1 mg/dl." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L20.030
+    kind: cloze
+    topic: lifestyle
+    text: "HDL-C in smokers is {{c1::7-20%}} lower than in non-smokers, and returns to normal within {{c2::30-60 days}} of stopping."
+    src: { page: 256, quote: "HDL-C levels in smokers are 7–20% lower than those in non-smokers." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L20.031
+    kind: card
+    topic: lifestyle
+    front: How does aerobic exercise affect HDL-C?
+    back: It raises HDL-C in a dose-dependent manner.
+    src: { page: 256, quote: "Aerobic exercise (e.g., running) increases HDL-C in a dose-dependent manner." }
+    status: unverified
+  - id: dm.L20.032
+    kind: mcq
+    topic: lifestyle
+    stem: "An obese smoker with HDL-C 32 mg/dL asks what will help. He plans to lose 9 kg. By how much should HDL-C rise from the weight loss alone, according to the book?"
+    options: [3 mg/dL, 1 mg/dL, 9 mg/dL, 27 mg/dL]
+    answer: 0
+    why:
+      - "Correct: 1 mg/dL per 3 kg, so 9 kg gives 3 mg/dL."
+      - "That is the gain for only 3 kg."
+      - "That assumes 1 mg/dL per kg."
+      - "That multiplies instead of divides."
+    src: { page: 255, quote: "For every 3 kg of weight loss, HDL-C levels increase 1 mg/dl." }
+    status: unverified
+  # ---------- p256: drugs ----------
+  - id: dm.L20.033
+    kind: table
+    topic: drugs
+    title: Effect of lipid-modifying drugs on HDL-C
+    columns: [Drug, HDL-C rise]
+    rows:
+      - [Niacin, 15-35%]
+      - [Fibrates, 10-15%]
+      - [Statins, 5-10%]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 256, quote: "Effects of Lipid-Modifying Drugs on HDL-C Levels" }
+    status: unverified
+    tags: [numbers, high-yield]
+    update:
+      text: "Raising HDL-C with drugs has not cut cardiovascular events: niacin added to statins (AIM-HIGH 2011, HPS2-THRIVE 2014) gave no benefit. ESC/EAS 2019 sets no HDL-C treatment target."
+      ref: "ESC/EAS dyslipidaemia guidelines 2019"
+  - id: dm.L20.034
+    kind: mcq
+    topic: drugs
+    stem: "Which lipid-modifying drug raises HDL-C the most, according to the book?"
+    options: [Niacin, Fibrates, Statins, Ezetimibe]
+    answer: 0
+    why:
+      - "Correct: niacin raises HDL-C 15-35%."
+      - "Fibrates raise it 10-15%."
+      - "Statins raise it 5-10%."
+      - "Ezetimibe is not in the book's table."
+    src: { page: 256, quote: "Effects of Lipid-Modifying Drugs on HDL-C Levels" }
+    status: unverified
+  - id: dm.L20.035
+    kind: enumerate
+    topic: drugs
+    prompt: Mention the specific approaches to increase HDL.
+    points:
+      - Promoting ApoA-I production
+      - Promoting cholesterol efflux and RCT
+      - Slowing removal of HDL from blood
+    pass: 3
+    src: { page: 256, quote: "Specific Approaches to Increase HDL" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p256-257: ApoA-I therapies ----------
+  - id: dm.L20.036
+    kind: card
+    topic: apoa1
+    front: What did 5 weekly IV infusions of ApoA-I Milano show?
+    back: A significant reduction in coronary atheroma volume measured by IVUS.
+    src: { page: 256, quote: "Significant reduction of coronary atheroma volume as measured by IVUS." }
+    status: unverified
+  - id: dm.L20.037
+    kind: order
+    topic: apoa1
+    prompt: Order autologous ApoA-I therapy.
+    steps:
+      - Take the patient's own plasma
+      - Selectively de-lipidate HDL ex vivo
+      - Lipid-poor ApoA-I is generated
+      - Re-infuse the autologous plasma containing ApoA-I
+    src: { page: 257, quote: "Selectively de-lipidate HDL ex vivo, generating lipid-poor apoA-I." }
+    status: unverified
+  - id: dm.L20.038
+    kind: card
+    topic: apoa1
+    front: Why is autologous therapy built on lipid-poor ApoA-I rather than mature HDL?
+    back: ApoA-I is more effective in promoting cholesterol efflux than mature HDL particles.
+    src: { page: 257, quote: "ApoA-I is more effective in promoting cholesterol efflux than mature HDL particles." }
+    status: unverified
+  - id: dm.L20.039
+    kind: card
+    topic: apoa1
+    front: What limits IV ApoA-I mimetic peptides?
+    back: Parenteral administration is a logistical barrier to long-term use (even though they reduced atherosclerosis progression in trials).
+    src: { page: 257, quote: "Parenteral administration presents a logistical barrier to long-term administration." }
+    status: unverified
+  - id: dm.L20.040
+    kind: card
+    topic: apoa1
+    front: What is D-4F and why can it be given by mouth?
+    back: An oral ApoA-I mimetic peptide; gut peptidases do not recognise it, so it is not degraded in the gut.
+    src: { page: 257, quote: "Not recognized by gut peptidases, therefore not degraded in the gut." }
+    status: unverified
+  - id: dm.L20.041
+    kind: table
+    topic: apoa1
+    title: Therapies promoting ApoA-I
+    columns: [Therapy, Route, Key point]
+    rows:
+      - [ApoA-I Milano, IV, "5 weekly infusions cut coronary atheroma volume (IVUS)"]
+      - [Autologous ApoA-I, IV, "Patient's HDL de-lipidated ex vivo, re-infused"]
+      - [ApoA-I mimetic peptides, IV, "Slow atherosclerosis; parenteral route limits long-term use"]
+      - [D-4F, Oral, "Not degraded by gut peptidases; dramatic reduction in mice"]
+    blanks: [[0, 2], [1, 2], [3, 1], [3, 2]]
+    src: { page: 257, quote: "D-4F: an oral apoA-I mimetic peptide." }
+    status: unverified
+  - id: dm.L20.042
+    kind: mcq
+    topic: apoa1
+    stem: "Which ApoA-I therapy is given orally?"
+    options: [D-4F, ApoA-I Milano, Autologous de-lipidated ApoA-I, Synthetic ApoA-I mimetic peptide infusion]
+    answer: 0
+    why:
+      - "Correct: D-4F resists gut peptidases."
+      - "ApoA-I Milano is an IV infusion."
+      - "Autologous ApoA-I is re-infused IV."
+      - "Those peptides are parenteral, a barrier to long-term use."
+    src: { page: 257, quote: "D-4F: an oral apoA-I mimetic peptide." }
+    status: unverified
+  # ---------- p257-258: efflux, PPAR ----------
+  - id: dm.L20.043
+    kind: card
+    topic: efflux
+    front: Which nuclear receptors are the major regulators of ABCA1 gene expression?
+    back: Liver X receptor (LXR) and retinoid X receptor (RXR).
+    src: { page: 257, quote: "The major regulator of ABCA1 gene expression is the Nuclear Receptors Liver X receptor (LXR) and Retinoid X receptor (RXR)." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L20.044
+    kind: card
+    topic: efflux
+    front: What happens to HDL-C when ABCA1 is over-expressed in mice?
+    back: HDL-C rises significantly.
+    src: { page: 257, quote: "Over-expression of ABCA1 in mice leads to significant increases in HDL-C levels." }
+    status: unverified
+  - id: dm.L20.045
+    kind: table
+    topic: efflux
+    title: PPAR agonists
+    columns: [Class, Example, Main use]
+    rows:
+      - [PPAR-gamma agonist, Pioglitazone, Improves insulin sensitivity]
+      - [PPAR-alpha agonist, Fibrates, "Dyslipidemia, especially high TG and low HDL"]
+      - [Dual PPAR-alpha/gamma agonist, Glitazars, Combined effect on lipids and glucose]
+    blanks: [[0, 1], [1, 1], [1, 2], [2, 1]]
+    src: { page: 257, quote: "PPPAR-α agonists (Fibrates): for dyslipidemia, particularly high TGs & low HDL." }
+    status: unverified
+  - id: dm.L20.046
+    kind: table
+    topic: efflux
+    title: Why the glitazars failed
+    columns: [Glitazar, Problem]
+    rows:
+      - [Muraglitazar, "First developed; increased adverse CV events"]
+      - [Naveglitazar, Bladder cancer]
+      - [Tesaglitazar, Renal dysfunction]
+      - [Aleglitazar, Heart failure and GI bleeding]
+    blanks: [[1, 1], [2, 1], [3, 1]]
+    src: { page: 258, quote: "Naveglitazar: Increased risk of bladder cancer." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L20.047
+    kind: mcq
+    topic: efflux
+    stem: "Which dual PPAR agonist was linked to heart failure and GI bleeding?"
+    options: [Aleglitazar, Muraglitazar, Naveglitazar, Tesaglitazar]
+    answer: 0
+    why:
+      - "Correct: aleglitazar, heart failure and GIT bleeding."
+      - "Muraglitazar was the first; trials showed more adverse CV events."
+      - "Naveglitazar: bladder cancer."
+      - "Tesaglitazar: renal dysfunction."
+    src: { page: 258, quote: "Aleglitazar: Risk of heart failure & GIT bleeding!." }
+    status: unverified
+  # ---------- p258-259: CETP ----------
+  - id: dm.L20.048
+    kind: card
+    topic: cetp
+    front: What was the rationale for CETP inhibitors?
+    back: Many Japanese people with extremely high HDL-C are genetically CETP deficient, so blocking CETP might raise HDL-C.
+    src: { page: 258, quote: "Rationale: Pharmacological inhibition of CETP might be a novel approach to raise HDL-C levels." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L20.049
+    kind: cloze
+    topic: cetp
+    text: "Torcetrapib raised HDL-C by {{c1::46%}} at 120 mg/day and {{c2::106%}} at 240 mg/day."
+    src: { page: 258, quote: "Torcetrapib 120 mg/day: Increase HDL-C by 46%." }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L20.050
+    kind: card
+    topic: cetp
+    front: Why was the ILLUMINATE trial of torcetrapib stopped?
+    back: Increased mortality and CV events; deaths rose by 60% on torcetrapib.
+    src: { page: 258, quote: "Pfizer terminated ILLUMINATE trial because of increased mortality and CV events!" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L20.051
+    kind: enumerate
+    topic: cetp
+    prompt: Name the three newer CETP inhibitors developed after torcetrapib.
+    points: [Dalcetrapib, Evacetrapib, Anacetrapib]
+    pass: 3
+    src: { page: 258, quote: "Then, 3 newer CETP inhibitors have been developed" }
+    status: unverified
+    update:
+      text: "Outcome trials: dalcetrapib (dal-OUTCOMES 2012) and evacetrapib (ACCELERATE 2017) gave no benefit; anacetrapib (REVEAL 2017) cut events slightly, explained by its non-HDL-C lowering. None is in clinical use."
+      ref: "ESC/EAS dyslipidaemia guidelines 2019"
+  - id: dm.L20.052
+    kind: card
+    topic: cetp
+    front: How would a CETP vaccine work?
+    back: Immunisation with a CETP-based peptide makes the body produce inhibiting anti-CETP autoantibodies.
+    src: { page: 259, quote: "This will generate inhibiting auto- antibodies against CETP!" }
+    status: unverified
+  - id: dm.L20.053
+    kind: table
+    topic: cetp
+    title: "Three ways to raise HDL: examples"
+    columns: [Approach, Examples]
+    rows:
+      - [Promote ApoA-I production, "ApoA-I Milano, autologous ApoA-I, ApoA-I mimetic peptides (IV, oral D-4F)"]
+      - [Promote cholesterol efflux and RCT, "ABCA1 via LXR/RXR, PPAR agonists (pioglitazone, fibrates, glitazars)"]
+      - [Slow HDL removal from blood, "CETP inhibitors, CETP vaccine"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 256, quote: "Specific Approaches to Increase HDL" }
+    status: unverified
+  - id: dm.L20.054
+    kind: mcq
+    topic: cetp
+    stem: "Which approach to raising HDL-C did the ILLUMINATE trial test?"
+    options: [Slowing HDL removal by CETP inhibition, Promoting ApoA-I production, Promoting ABCA1 efflux through LXR, Dual PPAR agonism]
+    answer: 0
+    why:
+      - "Correct: torcetrapib is a CETP inhibitor, and deaths rose 60%."
+      - "ApoA-I Milano and mimetics belong here, not torcetrapib."
+      - "LXR/RXR regulate ABCA1; not ILLUMINATE."
+      - "That is the glitazars."
+    src: { page: 258, quote: "Pfizer terminated ILLUMINATE trial because of increased mortality and CV events!" }
+    status: unverified
+  # ---------- cases ----------
+  - id: dm.L20.055
+    kind: case
+    topic: secondary
+    stem: "A 45-year-old man has HDL-C 30 mg/dL. He smokes 20 cigarettes a day, has a large waist, and takes atenolol for hypertension."
+    steps:
+      - question: "Which of his features is NOT a secondary cause of low HDL-C in the book?"
+        options: [Hypertension itself, Smoking, Visceral obesity, Beta-blocker]
+        answer: 0
+        why: "Smoking, visceral obesity and beta-blockers are all listed (p255); hypertension is not."
+      - question: "He stops smoking. When should HDL-C recover?"
+        options: [Within 30-60 days, Within 1 week, After 1 year, Never fully]
+        answer: 0
+        why: "HDL-C returns to normal within 30-60 days of smoking cessation (p256)."
+      - question: "What exercise advice raises HDL-C?"
+        options: ["Intense, frequent aerobic exercise", "Light walking once a week", "Stretching only", "Any exercise, the amount does not matter"]
+        answer: 0
+        why: "HDL rises only with intense, frequent exercise, dose-dependently (p255-256)."
+      - question: "If a drug is added to raise HDL-C, which raises it most?"
+        options: [Niacin, Statin, Fibrate, Beta-blocker]
+        answer: 0
+        why: "Niacin 15-35%, fibrates 10-15%, statins 5-10% (p256). Beta-blockers lower HDL."
+    src: { page: 255, quote: "Secondary Causes of Low HDL-C" }
+    status: unverified
+  - id: dm.L20.056
+    kind: case
+    topic: primary
+    stem: "A 19-year-old has recurrent sore throat; the ENT surgeon notes large orange-yellow tonsils. The spleen is palpable."
+    steps:
+      - reveal: "HDL-C is markedly low. He has numbness in both feet."
+        question: "Diagnosis?"
+        options: [Tangier disease, Familial hypoalphalipoproteinemia, Familial hypercholesterolemia, LCAT deficiency]
+        answer: 0
+        why: "Orange tonsils, hepatosplenomegaly and neuropathy with very low HDL-C = Tangier disease (p254)."
+      - question: "Which step of RCT is broken?"
+        options: ["Cholesterol efflux from cells through ABCA1", "Esterification by LCAT", "Hepatic uptake through SR-B1", "CE transfer by CETP"]
+        answer: 0
+        why: "ABCA1 defect, so cholesterol efflux falls and cholesterol accumulates in tissues (p254)."
+      - question: "What is the usual cause of death, according to the book?"
+        options: [Premature CAD, Liver failure, Splenic rupture, Neuropathy]
+        answer: 0
+        why: "Cause of death: premature CAD (p254)."
+    src: { page: 254, quote: "ABC A1 Transporter gene defect." }
+    status: unverified
+  # ---------- book questions (p259) ----------
+  - id: dm.L20.057
+    kind: essay
+    topic: anti
+    prompt: How to explain the antiatherogenic effects of HDL?
+    outline:
+      - "Reverse cholesterol transport": ["ABCA1 efflux to ApoA-I, LCAT matures HDL", "Delivery to the liver (SR-B1) and bile"]
+      - "Anti-oxidant and anti-inflammatory": ["Prevents LDL oxidation", "Inhibits endothelial adhesion molecules"]
+      - "Vascular": ["Vasodilator: more NO and PGI2, less ET-1", "Anti-thrombotic: less PAF, vWF, TF", "Endothelial protection: EC proliferation, less apoptosis"]
+    src: { page: 254, quote: "Anti-atherogenic Effects of HDL" }
+    status: unverified
+    tags: [book-question]
+  - id: dm.L20.058
+    kind: essay
+    topic: primary
+    prompt: What are the primary causes of low HDL?
+    outline:
+      - "Tangier disease": ["ABCA1 defect, autosomal dominant (book)", "Orange tonsils, HSM, neuropathy, premature CAD"]
+      - "Familial hypoalphalipoproteinemia": ["ApoA-I defect, autosomal dominant", "Premature CAD and strokes"]
+      - "Enzyme causes": ["Increased CETP activity (gene polymorphism)", "Decreased LCAT activity (gene mutation)", "Both cause premature CAD"]
+    src: { page: 254, quote: "Primary Causes of LOW HDL-c" }
+    status: unverified
+    tags: [book-question]
+  - id: dm.L20.059
+    kind: essay
+    topic: secondary
+    prompt: What are the secondary causes of low HDL?
+    outline:
+      - "Lifestyle": ["Smoking", "Obesity (visceral fat)", "Very-low-fat diet"]
+      - "Drugs": ["Beta-blockers", "Androgenic steroids"]
+    src: { page: 255, quote: "Secondary Causes of Low HDL-C" }
+    status: unverified
+    tags: [book-question]

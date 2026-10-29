@@ -1,0 +1,847 @@
+schema: batna.lesson/v1
+lecture: dm.L01
+lessons:
+  # ------------------------------------------------------------------
+  - id: dm.L01.lesson1
+    title: "السكر: وقود الجسم وإزاي بيبوظ"
+    hook: "السكر مش عدو: ده البنزين الوحيد. المشكلة لما يتصرف غلط ويتعمل زيادة في نفس الوقت."
+    minutes: 8
+    pages: [1, 3]
+    topics: [definition, epidemiology, classification]
+    goals:
+      - "تعرّف الـ DM تعريف الكتاب"
+      - "تحفظ أرقام مصر ونسبة type 1 لـ type 2"
+      - "تقسّم الـ DM لـ primary و secondary بالأمثلة"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 1
+        title: "الجلوكوز: البنزين الوحيد"
+        quote: "The only source of energy for every organism in the body Essential to fuel both aerobic and anaerobic cellular respiration."
+        text: |
+          الكتاب بيبدأ من الأساس: ==glucose== هو **the only source of energy** لكل عضو، وبيشغّل الـ **aerobic** والـ **anaerobic respiration**.
+
+          - بيدخل الجسم كـ **galactose / fructose** (mono)، أو **lactose / sucrose** (di)، أو **starch** (poly).
+          - الزيادة بتتخزن **glycogen**، وتطلع وقت الصيام.
+          - ولو مفيش، الكبد يعمله من الدهون والبروتين بالـ **gluconeogenesis**.
+          - المايسترو: **insulin** و **glucagon**.
+      - kind: explain
+        page: 1
+        title: "تعريف الـ DM: مش مستخدم وبيتعمل زيادة"
+        quote: "glucose is both underutilized as an energy source and overproduced due to inappropriate gluconeogenesis and glycogenolysis, resulting in hyperglycemia."
+        text: |
+          الـ **Diabetes mellitus** = group of chronic metabolic disorders of carbohydrate metabolism فيها الجلوكوز:
+          - ==underutilized== كمصدر طاقة،
+          - و ==overproduced== بسبب **inappropriate gluconeogenesis and glycogenolysis**،
+          - والنتيجة **hyperglycemia**.
+
+          السبب: defects of **insulin secretion**، **insulin action**، أو الاتنين.
+      - kind: aside
+        tone: analogy
+        page: 1
+        quote: "It results from defects of insulin secretion, insulin action or both."
+        text: "تخيّل محطة بنزين: العربيات (الخلايا) مش عارفة تفوّل لأن المفتاح (**insulin**) ضايع أو الخزان مقفول (**resistance**)، وفي نفس الوقت المصنع (الكبد) فاكر إن في أزمة فبيضخ بنزين زيادة. الشارع (الدم) يغرق بنزين والعربيات واقفة."
+      - kind: figure
+        page: 1
+        quote: "specific microvascular (retina, renal, peripheral nerves), and non-specific macrovascular (coronary, cerebral, peripheral blood vessels) complications."
+        title: "المضاعفات: صغيرة ومخصوصة، وكبيرة ومش مخصوصة"
+        alt: "Two columns. Left: microvascular, specific: retina, kidney, peripheral nerves. Right: macrovascular, non-specific: coronary, cerebral, peripheral vessels."
+        caption: "الـ ==microvascular== **specific** للسكر (مش هتلاقي diabetic retinopathy من غير سكر)، والـ **macrovascular** **non-specific** لأن الـ atherosclerosis بيحصل من غير سكر كمان."
+        svg: |
+          <svg viewBox="0 0 330 200" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="10" width="150" height="180" rx="12" class="fg-acc"/>
+            <text x="85" y="34" text-anchor="middle" class="t-b t-acc">Microvascular</text>
+            <text x="85" y="52" text-anchor="middle" class="t-sm t-mut">specific</text>
+            <text x="85" y="88" text-anchor="middle">Retina</text>
+            <text x="85" y="118" text-anchor="middle">Kidney</text>
+            <text x="85" y="148" text-anchor="middle">Peripheral nerves</text>
+            <rect x="170" y="10" width="150" height="180" rx="12" class="fg-bad"/>
+            <text x="245" y="34" text-anchor="middle" class="t-b t-bad">Macrovascular</text>
+            <text x="245" y="52" text-anchor="middle" class="t-sm t-mut">non-specific</text>
+            <text x="245" y="88" text-anchor="middle">Coronary</text>
+            <text x="245" y="118" text-anchor="middle">Cerebral</text>
+            <text x="245" y="148" text-anchor="middle">Peripheral vessels</text>
+          </svg>
+      - kind: table
+        page: 2
+        quote: "Prevalence rate in Egypt: 9.5% in the age group 20-79years."
+        title: "أرقام الوبائيات"
+        columns: [Fact, Number]
+        rows:
+          - ["Prevalence in Egypt", "9.5% (age 20–79)"]
+          - ["Type 1 : type 2", "1 : 9"]
+          - ["Incidence", "Type 1 very low, type 2 very high"]
+          - ["Sex (type 2)", "Females > males"]
+        hide: [[0, 1], [1, 1], [3, 1]]
+      - kind: check
+        page: 2
+        quote: "The ratio between type 1 to type 2 diabetes is 1:9."
+        question: "Out of 100 diabetics, about how many have type 1 by the lecture's ratio?"
+        options: ["10", "50", "30", "1"]
+        answer: 0
+        why:
+          - "صح: النسبة **1:9**، يعني 1 من كل 10."
+          - "لا، type 2 هو الغالب بفرق كبير."
+          - "أكتر من الحقيقة بكتير."
+          - "ده قليل أوي؛ النسبة 1 لـ 9 مش 1 لـ 99."
+      - kind: explain
+        page: 2
+        title: "الـ Classification"
+        quote: "leading to absolute insulin deficiency, including LAD A"
+        text: |
+          **1. Primary DM**
+          - **Type 1:** autoimmune β-cell destruction ← ==absolute insulin deficiency==، ومعاه **LADA**.
+          - **Type 2:** non-autoimmune progressive loss of β-cell secretion، وهو نوعين:
+          - **Insulin resistance:** 80%، obese.
+          - **Secretory defect:** 20%، non-obese.
+          - **GDM.**
+
+          **2. Secondary DM**
+          - **Pancreatic:** pancreatitis، pancreatectomy، neoplasia، hemochromatosis.
+          - **Endocrinopathies:** acromegaly، Cushing's، pheochromocytoma، hyperthyroidism.
+          - **Drugs:** corticosteroids، thiazides، thyroid hormone، β-agonists.
+      - kind: mnemonic
+        page: 2
+        quote: "Endocrinopathies: acromegaly, Cushing's syndrome, pheochromocytoma, and hyperthyroidism."
+        word: "ACPH"
+        parts:
+          - { key: "A", text: "Acromegaly: growth hormone ضد الـ insulin" }
+          - { key: "C", text: "Cushing's: cortisol يعلّي الـ gluconeogenesis" }
+          - { key: "P", text: "Pheochromocytoma: catecholamines تقفل الـ insulin" }
+          - { key: "H", text: "Hyperthyroidism: thyroid hormone يسرّع امتصاص السكر وتكسيره" }
+        hook: "كل الأربعة **counter-regulatory hormones** زيادة: هرمونات بتعمل عكس الـ insulin. ونفس المنطق في الأدوية: **steroids**، **thyroid hormone**، **β-agonists**، ومعاهم **thiazides**."
+      - kind: sort
+        page: 3
+        quote: "Drugs or chemicals induced: corticosteroid, thiazide diuretics, thyroid hormone, β-adrenergic agonists."
+        prompt: "صنّف أسباب الـ secondary DM:"
+        bins: ["Pancreatic", "Endocrine", "Drugs"]
+        cards:
+          - { text: "Hemochromatosis", bin: 0 }
+          - { text: "Pancreatectomy", bin: 0 }
+          - { text: "Pheochromocytoma", bin: 1 }
+          - { text: "Acromegaly", bin: 1 }
+          - { text: "Hyperthyroidism", bin: 1 }
+          - { text: "Thiazide diuretics", bin: 2 }
+          - { text: "β-adrenergic agonists", bin: 2 }
+          - { text: "Corticosteroids", bin: 2 }
+        why: "الـ **hemochromatosis** حديد بيترسب في البنكرياس فبيبقى pancreatic. الـ hyperthyroidism مرض endocrine، أما **thyroid hormone** كدوا فهو في الـ drugs."
+      - kind: try
+        items: [dm.L01.005, dm.L01.010, dm.L01.015, dm.L01.018, dm.L01.020]
+    recap:
+      - "DM = glucose underutilized + overproduced ← hyperglycemia؛ defect في الـ secretion أو الـ action أو الاتنين."
+      - "Microvascular specific (عين، كلية، أعصاب)؛ macrovascular non-specific."
+      - "مصر 9.5% (20–79 سنة). Type 1 : type 2 = 1 : 9. الستات أكتر في type 2."
+      - "Type 2: 80% obese resistant، 20% non-obese secretory."
+      - "Secondary: pancreatic، endocrine (**ACPH**)، drugs (steroids، thiazides، thyroid، β-agonists)."
+    practice: [dm.L01.001, dm.L01.002, dm.L01.003, dm.L01.004, dm.L01.005, dm.L01.006, dm.L01.007, dm.L01.008, dm.L01.009, dm.L01.010, dm.L01.011, dm.L01.012, dm.L01.013, dm.L01.014, dm.L01.015, dm.L01.016, dm.L01.017, dm.L01.018, dm.L01.019, dm.L01.020, dm.L01.119]
+  # ------------------------------------------------------------------
+  - id: dm.L01.lesson2
+    title: "Type 1 في 6 محطات، و Type 2 في معركتين"
+    hook: "Type 1 حرب أهلية جوه البنكرياس. Type 2 مصنع شغال overtime لحد ما يقع."
+    minutes: 9
+    pages: [3, 5]
+    topics: [t1-pathogenesis, t2-pathogenesis]
+    goals:
+      - "ترتّب الـ 6 stages بتاعة type 1"
+      - "تشرح الـ two defects بتاعة type 2 ومين بيعمل fasting hyperglycemia"
+      - "تفرّق glucotoxicity من lipotoxicity"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 3
+        title: "Type 1: مين بيضرب مين؟"
+        quote: "Type 1 diabetes is caused by destruction of the insulin producing cells."
+        text: |
+          الـ **type 1** = ==destruction of the insulin producing cells==.
+
+          فيه **strong genetic component**، بس لوحده مش كفاية: لازم **extragenetic factors** (immunologic و environmental زي الفيروسات).
+      - kind: figure
+        page: 3
+        quote: "Natural history of type 1 diabetes comprised 6 stages"
+        title: "الـ 6 stages: β-cells بتقل"
+        alt: "A falling line of beta-cell mass across six stages: genetic susceptibility, environmental trigger, immune activation, loss of glucose-stimulated insulin secretion, overt diabetes when more than 90 percent are lost, and endless beta-cell failure."
+        caption: "الكتلة بتنزل بهدوء لحد ما يفضل أقل من **10%**، ساعتها بس السكر يبان (==overt diabetes==). يعني لما العيان يجيلك، المعركة خلصت من زمان."
+        svg: |
+          <svg viewBox="0 0 330 260" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L01a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker></defs>
+            <path d="M30 20 V200 H320" class="fg-arrow" marker-end="url(#L01a)"/>
+            <text x="12" y="30" class="t-sm t-mut">β</text>
+            <path d="M40 40 H90 L130 60 L170 110 L210 170 L250 182 L300 196" class="fg-arrow-acc" stroke-width="3" fill="none"/>
+            <path d="M30 172 H320" class="fg-thin"/>
+            <text x="318" y="166" text-anchor="end" class="t-sm t-bad">10% left: overt</text>
+            <text x="55" y="218" text-anchor="middle" class="t-sm t-b">I</text>
+            <text x="105" y="218" text-anchor="middle" class="t-sm t-b">II</text>
+            <text x="150" y="218" text-anchor="middle" class="t-sm t-b">III</text>
+            <text x="190" y="218" text-anchor="middle" class="t-sm t-b">IV</text>
+            <text x="235" y="218" text-anchor="middle" class="t-sm t-b">V</text>
+            <text x="285" y="218" text-anchor="middle" class="t-sm t-b">VI</text>
+            <text x="55" y="234" text-anchor="middle" class="t-sm">Genes</text>
+            <text x="105" y="234" text-anchor="middle" class="t-sm">Trigger</text>
+            <text x="150" y="234" text-anchor="middle" class="t-sm">Immune</text>
+            <text x="190" y="250" text-anchor="middle" class="t-sm">↓ GSIS</text>
+            <text x="235" y="234" text-anchor="middle" class="t-sm">Overt</text>
+            <text x="285" y="250" text-anchor="middle" class="t-sm">Failure</text>
+          </svg>
+      - kind: explain
+        page: 3
+        title: "المحطات بالتفصيل"
+        quote: "One diabetogenic gene within the HLA is necessary."
+        text: |
+          1. **Genetic susceptibility:** لازم **one diabetogenic gene within the HLA**؛ و **95%** من العيانين **HLA-DR3 و/أو DR4**.
+          2. **Environmental trigger:** ==congenital rubella== هو الوحيد اللي **proved**. الباقي مقترح: mumps، coxsackie-B، reovirus، herpes، و chemicals/toxins.
+          3. **Immune activation:** autoimmune **insulitis**، و autoantibodies: islet cell (الكتاب كاتبها ICS)، **GAD**، insulin antibodies.
+          4. **Progressive loss of glucose-stimulated insulin secretion.**
+          5. **Overt diabetes:** لما أكتر من **90%** من الـ β-cells تموت.
+          6. **Endless β-cell failure:** insulin و **C-peptide** absent أو very low.
+      - kind: order
+        page: 3
+        quote: "Natural history of type 1 diabetes comprised 6 stages"
+        prompt: "رتّب الـ stages:"
+        steps:
+          - "Genetic susceptibility"
+          - "Environmental trigger"
+          - "Immune activation"
+          - "Loss of glucose-stimulated insulin secretion"
+          - "Overt diabetes"
+          - "Endless beta cell failure"
+        why: "منطقها: **أرض** (genes) ← **شرارة** (trigger) ← **حريقة** (immune) ← الخلايا بتقل لحد ما السكر يبان ← وبعدين مفيش خلايا خالص."
+      - kind: check
+        page: 3
+        quote: "Congenital rubella is the only proved environmental factor."
+        question: "Which environmental trigger of type 1 diabetes is proven?"
+        options: ["Congenital rubella", "Coxsackie B", "Mumps", "Reovirus"]
+        answer: 0
+        why:
+          - "صح: الوحيد الـ **proved**."
+          - "مقترح بس (suggested)، مش مثبت."
+          - "مقترح بس."
+          - "مقترح بس."
+      - kind: explain
+        page: 4
+        title: "Type 2: عيبين مع بعض"
+        quote: "Type 2 diabetes is caused by a combination of decreased insulin action and inadequate insulin secretion."
+        text: |
+          الـ **type 2** = ==decreased insulin action== + **inadequate insulin secretion**.
+
+          - **Genetic:** غالبًا **multigenic**.
+          - **Environmental:** obesity، sedentary life، physical inactivity، hypertension، dyslipidemia، increased age، smoking، stress.
+
+          ومين بيبدأ الأول؟ الكتاب صريح: **still controversial**.
+      - kind: figure
+        page: 4
+        quote: "hepatic glucose production (HGP): the major contributor to fasting hyperglycemia."
+        title: "تلات أعضاء ضد الـ insulin"
+        alt: "Three boxes. Liver: increased hepatic glucose production, the major cause of fasting hyperglycemia. Adipose tissue: increased lipolysis and free fatty acids. Muscle: decreased glucose uptake. All feed into high blood glucose."
+        caption: "الكبد هو بطل الـ ==fasting hyperglycemia==: بالليل وانت نايم بيضخ سكر مع إن مفيش داعي. الدهون بتطلّع **FFAs**، والعضلات مش بتسحب سكر."
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L01b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-bad"/></marker></defs>
+            <rect x="10" y="10" width="100" height="90" rx="10" class="fg-bad"/>
+            <text x="60" y="34" text-anchor="middle" class="t-b">Liver</text>
+            <text x="60" y="56" text-anchor="middle" class="t-sm">↑ glucose</text>
+            <text x="60" y="72" text-anchor="middle" class="t-sm">production</text>
+            <text x="60" y="90" text-anchor="middle" class="t-sm t-bad t-b">fasting BG</text>
+            <rect x="115" y="10" width="100" height="90" rx="10" class="fg-box"/>
+            <text x="165" y="34" text-anchor="middle" class="t-b">Adipose</text>
+            <text x="165" y="56" text-anchor="middle" class="t-sm">↑ lipolysis</text>
+            <text x="165" y="72" text-anchor="middle" class="t-sm">↑ FFAs</text>
+            <rect x="220" y="10" width="100" height="90" rx="10" class="fg-box"/>
+            <text x="270" y="34" text-anchor="middle" class="t-b">Muscle</text>
+            <text x="270" y="56" text-anchor="middle" class="t-sm">↓ glucose</text>
+            <text x="270" y="72" text-anchor="middle" class="t-sm">uptake</text>
+            <path d="M60 100 L150 160" class="fg-arrow-bad" marker-end="url(#L01b)"/>
+            <path d="M270 100 L180 160" class="fg-arrow-bad" marker-end="url(#L01b)"/>
+            <path d="M165 100 V150" class="fg-arrow" marker-end="url(#L01b)"/>
+            <rect x="95" y="165" width="140" height="34" rx="10" class="fg-ink"/>
+            <text x="165" y="187" text-anchor="middle" class="t-b">Hyperglycemia</text>
+            <text x="165" y="228" text-anchor="middle" class="t-sm t-mut">FFAs → lipotoxicity; high BG → glucotoxicity</text>
+          </svg>
+      - kind: explain
+        page: 5
+        title: "الحلقة المفرغة"
+        quote: "Glucotoxicity: high BG levels further impair"
+        text: |
+          - ==Glucotoxicity==: السكر العالي نفسه بيبوّظ الـ β-cell أكتر.
+          - ==Lipotoxicity==: الـ **FFAs** العالية بتبوّظ الـ β-cell **و** الـ insulin action.
+
+          ولو الـ **insulin resistance** هي البداية: الـ β-cells تعوّض بـ **hyperinsulinemia**، لحد ما تتعب ومتقدرش تزوّد، فالـ secretion يقع والسكر يعلى.
+      - kind: aside
+        tone: joke
+        page: 5
+        quote: "the pancreatic beta cells secrete more insulin to compensate for the peripheral defects of insulin action (hyperinsulinemia)."
+        text: "الـ β-cell في type 2 زي الموظف الوحيد اللي بيشتغل في القسم: كل ما الباقيين (الـ tissues) يطنّشوا، يشتغل overtime (**hyperinsulinemia**)... لحد ما ياخد إجازة مرضي ومحدش يغطّي. وساعتها بس المدير يلاحظ إن في مشكلة (**hyperglycemia**)."
+      - kind: reveal
+        page: 4
+        quote: "hepatic glucose production (HGP): the major contributor to fasting hyperglycemia."
+        prompt: "ليه الكبد بالذات هو اللي بيعمل الـ fasting hyperglycemia، مش العضلات؟"
+        answer: |
+          وانت صايم مفيش أكل داخل، فالسكر اللي في الدم كله جاي من **hepatic glucose production**. الـ **insulin** طبيعيًا بيقفل الحنفية دي. لو الكبد **resistant**، الحنفية تفضل مفتوحة طول الليل.
+
+          العضلات بتسحب السكر أساسًا **بعد الأكل**، فعيبها بيبان أكتر في سكر ما بعد الأكل. (تفسير فسيولوجي؛ المعلومة إن الـ HGP هو **the major contributor** من الكتاب.)
+      - kind: try
+        items: [dm.L01.022, dm.L01.023, dm.L01.024, dm.L01.033, dm.L01.034]
+    recap:
+      - "Type 1: genes (HLA؛ 95% DR3/DR4) ← trigger (rubella الوحيد المثبت) ← insulitis (ICA، GAD) ← ↓ GSIS ← overt (>90% ماتوا) ← failure."
+      - "Type 2: ↓ action + ↓ secretion؛ مين الأول controversial."
+      - "الكبد (↑ HGP) = أهم سبب للـ fasting hyperglycemia؛ adipose ← FFAs؛ muscle ← ↓ uptake."
+      - "Glucotoxicity و lipotoxicity بيكمّلوا على الـ β-cell."
+    practice: [dm.L01.021, dm.L01.022, dm.L01.023, dm.L01.024, dm.L01.025, dm.L01.026, dm.L01.027, dm.L01.028, dm.L01.029, dm.L01.030, dm.L01.031, dm.L01.032, dm.L01.033, dm.L01.034, dm.L01.035, dm.L01.036, dm.L01.037, dm.L01.116, dm.L01.117, dm.L01.118, dm.L01.132]
+  # ------------------------------------------------------------------
+  - id: dm.L01.lesson3
+    title: "العيان جالك بإيه؟ بأعراض ولا من غير"
+    hook: "رقم 180 هو الحد: فوقه الكلية تستسلم والسكر ينزل في البول وياخد معاه الميه."
+    minutes: 8
+    pages: [6, 8]
+    topics: [hyperglycemia]
+    goals:
+      - "تفهم ليه الـ renal threshold بيعمل الأعراض"
+      - "تشرح الـ 4 Ps (polyuria، polydipsia، polyphagia، weight loss) بالـ mechanism"
+      - "تعرف علامات الـ type 2 اللي جاي من غير أعراض"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 6
+        title: "Hyperglycemia: نوعين"
+        quote: "When the blood glucose level reaches above the renal threshold of the individual, which is on average 180mg/dl"
+        text: |
+          الـ **hyperglycemia** = سكر الدم فوق الطبيعي. وهي يا إما **symptomatic** يا إما **asymptomatic**.
+
+          بتبقى **symptomatic** لما السكر يعدّي ==renal threshold== (في المتوسط **180 mg/dl**)، فيبدأ **polyuria** و **polydipsia**.
+
+          أشهر سبب: **DM، خصوصًا type 1**.
+      - kind: figure
+        page: 7
+        quote: "Polyuria: urine output >2.5 liters/day due to osmotic diuresis."
+        title: "من السكر للعطش"
+        alt: "Flow: blood glucose above 180 spills into urine, drags water by osmotic diuresis causing polyuria over 2.5 L a day, cells dehydrate causing polydipsia; cells starve of glucose causing polyphagia; fluid loss plus catabolism cause weight loss."
+        caption: "سلسلة واحدة بتفسّر الأربع أعراض. الـ ==osmotic diuresis== هو أول حجر."
+        svg: |
+          <svg viewBox="0 0 330 290" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L01c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker></defs>
+            <rect x="80" y="8" width="170" height="34" rx="10" class="fg-acc"/>
+            <text x="165" y="30" text-anchor="middle" class="t-b">BG &gt; 180 mg/dl</text>
+            <path d="M165 42 V62" class="fg-arrow" marker-end="url(#L01c)"/>
+            <rect x="60" y="64" width="210" height="34" rx="10" class="fg-box"/>
+            <text x="165" y="86" text-anchor="middle">Glucose drags water</text>
+            <path d="M165 98 V118" class="fg-arrow" marker-end="url(#L01c)"/>
+            <rect x="40" y="120" width="250" height="34" rx="10" class="fg-bad"/>
+            <text x="165" y="142" text-anchor="middle" class="t-b">Polyuria &gt;2.5 L/day</text>
+            <path d="M120 154 L80 182" class="fg-arrow" marker-end="url(#L01c)"/>
+            <rect x="10" y="184" width="140" height="44" rx="10" class="fg-box"/>
+            <text x="80" y="203" text-anchor="middle" class="t-b">Polydipsia</text>
+            <text x="80" y="220" text-anchor="middle" class="t-sm t-mut">cell dehydration</text>
+            <rect x="180" y="184" width="140" height="44" rx="10" class="fg-box"/>
+            <text x="250" y="203" text-anchor="middle" class="t-b">Polyphagia</text>
+            <text x="250" y="220" text-anchor="middle" class="t-sm t-mut">cell starvation</text>
+            <rect x="70" y="240" width="190" height="44" rx="10" class="fg-ink"/>
+            <text x="165" y="259" text-anchor="middle" class="t-b">Weight loss</text>
+            <text x="165" y="276" text-anchor="middle" class="t-sm t-mut">fluids + catabolism</text>
+          </svg>
+      - kind: table
+        page: 7
+        quote: "Polydipsia: due to cellular dehydration. - Polyphagia: due to cellular starvation."
+        title: "العَرَض وسببه"
+        columns: [Symptom, Mechanism]
+        rows:
+          - ["Polyuria", "Osmotic diuresis"]
+          - ["Polydipsia", "Cellular dehydration"]
+          - ["Polyphagia", "Cellular starvation"]
+          - ["Weight loss", "Fluids + catabolism"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1]]
+      - kind: aside
+        tone: joke
+        page: 7
+        quote: "Polyphagia: due to cellular starvation."
+        text: "العيان بياكل كتير وبيخس. ده مش ريجيم سحري: الخلايا **جعانة** والسكر واقف برا الباب في الدم، والبول بياخد الباقي. أغلى ريجيم في الدنيا، تمنه الكلى والعين."
+      - kind: explain
+        page: 7
+        title: "Acute ولا subacute؟"
+        quote: "Subacute: older, several months - Thirst, weight loss, and polyuria. - Lack of energy. - Blurring of vision."
+        text: |
+          - **Acute, classic, severe (type 1):** polyuria، polydipsia، polyphagia، weight loss. ومفيش **signs**، إلا في الحالات الـ ==fulminant==: dehydration و acidosis (**DKA**).
+          - **Subacute (type 2، أكبر سنًا، على شهور):** thirst، weight loss، polyuria، **lack of energy**، **blurred vision**، و **balanitis أو pruritus vulvae**.
+      - kind: check
+        page: 6
+        quote: "When the blood glucose level reaches above the renal threshold of the individual, which is on average 180mg/dl"
+        question: "A patient's glucose runs at 160 mg/dl. Why might he have no polyuria?"
+        options:
+          - "It is below the average renal threshold of 180 mg/dl"
+          - "Polyuria needs ketones"
+          - "Polyuria only occurs in type 1"
+          - "160 is a normal glucose"
+        answer: 0
+        why:
+          - "صح: تحت الـ threshold الكلية بترجّع السكر كله، فمفيش osmotic diuresis."
+          - "الـ polyuria من الجلوكوز نفسه، مش من الـ ketones."
+          - "Type 2 كمان بيعمل polyuria في الـ subacute presentation."
+          - "160 مش طبيعي؛ ده hyperglycemia بس asymptomatic."
+      - kind: explain
+        page: 8
+        title: "الـ Asymptomatic: الأغلبية الصامتة"
+        quote: "Presented by chronic complications (10-20% of cases): Macrosomic baby, PN. and premature atherosclerosis."
+        text: |
+          ناس كتير بـ **type 2** و **IGT** و **GDM** مالهمش أعراض. الأسباب: **primary DM (غالبًا type 2)**، **prediabetes**، **GDM**.
+
+          بيتكشف إزاي؟
+          - **بالصدفة:** glycosuria أو تحليل روتيني.
+          - **بالمضاعفات (==10–20%==):** macrosomic baby، peripheral neuropathy، premature atherosclerosis.
+      - kind: explain
+        page: 8
+        title: "علامات تدوّر عليها في الكشف"
+        quote: "Signs of insulin resistance e.g. Acanthosis Nigricans or Polycystic ovary syndrome."
+        text: |
+          في الـ **type 2** اللي من غير أعراض:
+          1. **Pruritus vulvae** أو **balanitis** (السكر في البول بيأكّل الفطريات).
+          2. **Loss of ankle reflexes**.
+          3. **Loss of peripheral sensation**.
+          4. **Hypertension** وعلامات atherosclerosis: dorsalis pedis ضعيف، **carotid bruit**.
+          5. علامات ==insulin resistance==: **acanthosis nigricans**، **PCOS**.
+      - kind: case
+        page: 8
+        quote: "Signs of Asymptomatic Hyperglycemia In type 2 DM, this depends on the mode of presentation"
+        stem: "55-year-old obese woman, recurrent vulval itching. Dark velvety neck skin. Absent ankle jerks."
+        steps:
+          - question: "Most likely underlying problem?"
+            options: ["Type 2 diabetes, found through its signs", "Type 1 diabetes", "Renal glycosuria", "Diabetes insipidus"]
+            answer: 0
+            why: "**Pruritus vulvae** + **acanthosis nigricans** + **loss of ankle reflexes** = type 2 جاي asymptomatic. الـ type 1 صغير ونحيف و acute، والـ renal glycosuria سكره طبيعي ومفيش neuropathy."
+          - question: "The neck sign tells you about what?"
+            options: ["Insulin resistance", "Iron overload", "Hypothyroidism", "Vitamin B12 deficiency"]
+            answer: 0
+            why: "الكتاب حاطط **acanthosis nigricans** و **PCOS** تحت signs of insulin resistance."
+      - kind: try
+        items: [dm.L01.039, dm.L01.043, dm.L01.046, dm.L01.050, dm.L01.051]
+    recap:
+      - "Renal threshold في المتوسط 180 mg/dl: فوقه = symptomatic."
+      - "Polyuria (>2.5 L) osmotic diuresis؛ polydipsia dehydration؛ polyphagia starvation؛ weight loss fluids + catabolism."
+      - "Type 1 acute من غير signs (إلا DKA)؛ type 2 subacute: lack of energy، blurred vision، balanitis/pruritus vulvae."
+      - "Asymptomatic: بالصدفة أو بالمضاعفات (10–20%)؛ دوّر على ankle reflexes و acanthosis nigricans."
+    practice: [dm.L01.038, dm.L01.039, dm.L01.040, dm.L01.041, dm.L01.042, dm.L01.043, dm.L01.044, dm.L01.045, dm.L01.046, dm.L01.047, dm.L01.048, dm.L01.049, dm.L01.050, dm.L01.051, dm.L01.052, dm.L01.115, dm.L01.123]
+  # ------------------------------------------------------------------
+  - id: dm.L01.lesson4
+    title: "سلّم الأرقام: تشخّص السكر إزاي"
+    hook: "100، 126، 140، 200، 5.7، 6.5: ستة أرقام بتفرق بين واحد سليم وواحد diabetic."
+    minutes: 10
+    pages: [8, 11]
+    topics: [lab]
+    goals:
+      - "تحفظ الـ cut-offs للـ FPG والـ 2h-PPPG والـ A1C"
+      - "تعرف امتى test واحد يكفي وامتى لازم اتنين"
+      - "تعرف عيوب الـ A1C وإمتى ما تستخدمهوش"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 8
+        title: "ليه نهتم بالتشخيص؟"
+        quote: "One third of cases are undiagnosed 10-20% of cases of type 2 diabetes have serious vascular disease at presentation."
+        text: |
+          - ==تلت== الحالات **undiagnosed**.
+          - **10–20%** من type 2 عندهم **serious vascular disease** وقت التشخيص.
+
+          التشخيص بيبقى بـ **glucose in venous plasma** أو **A1C**. أما الـ **glycosuria**؟ لازم **urgent blood glucose**، بس ==not a diagnostic tool==: الـ renal threshold (حوالي **180**) بيختلف من حد للتاني.
+      - kind: explain
+        page: 9
+        title: "سكر البلازما: رخيص بس متقلّب"
+        quote: "The high diurnal variation in glucose and fasting requirement."
+        text: |
+          **مميزاته:** رخيص، ومتاح في كل حتة.
+
+          **عيوبه:**
+          - **diurnal variation** عالية، ومحتاج صيام.
+          - العيان ممكن ما يقدرش يصوم **8 ساعات** أو يكدب في الصيام.
+          - بيتأثر بـ **المجهود، المرض، الـ stress**.
+          - ==Glycolysis==: لو العينة اتأخرت، السكر يطلع **falsely low**.
+      - kind: reveal
+        page: 9
+        quote: "Glucose concentrations will be falsely low if samples are not processed promptly or appropriately stored prior to analysis."
+        prompt: "العينة قعدت 4 ساعات على الرف. السكر هيطلع أعلى ولا أقل؟ وليه؟"
+        answer: |
+          **أقل.** كرات الدم في الأنبوبة لسه عايشة وبتاكل جلوكوز (**glycolysis**)، فكل ساعة السكر بينقص.
+
+          علشان كده الكتاب بيقول falsely low لو العينة **not processed promptly**. (الـ mechanism فسيولوجي، والنتيجة من الكتاب.)
+      - kind: explain
+        page: 10
+        title: "التلات tests"
+        quote: "blood sample taken 2 hours after a person has consumed a 75 g oral glucose powder dissolved in 250 ml water"
+        text: |
+          1. **Random plasma glucose:** أي وقت.
+          2. **Fasting plasma glucose:** صيام **8 لحد 12 ساعة** (overnight).
+          3. **2h-PPPG:** بعد ساعتين من ==75 g glucose== في **250 ml** ميه.
+      - kind: figure
+        page: 10
+        quote: "Prediabetes: include individuals who have: 1- FPG: 100-125mg/dl (called impaired fasting glucose)"
+        title: "سلّم الأرقام"
+        alt: "Three ladders side by side. Fasting glucose: normal under 100, IFG 100 to 125, diabetes 126 and above. Two-hour glucose: normal under 140, IGT 140 to 199, diabetes 200 and above. A1C: prediabetes 5.7 percent, diabetes 6.5 percent."
+        caption: "كل سلّم ليه دورين بس. الـ ==FPG== 100/126، الـ **2-h** 140/200، والـ **A1C** 5.7/6.5. والـ random مع أعراض: 200."
+        svg: |
+          <svg viewBox="0 0 330 270" xmlns="http://www.w3.org/2000/svg">
+            <text x="60" y="18" text-anchor="middle" class="t-b">FPG</text>
+            <text x="165" y="18" text-anchor="middle" class="t-b">2-h PG</text>
+            <text x="270" y="18" text-anchor="middle" class="t-b">A1C</text>
+            <rect x="15" y="28" width="90" height="70" rx="8" class="fg-bad"/>
+            <text x="60" y="60" text-anchor="middle" class="t-b">≥126</text>
+            <text x="60" y="80" text-anchor="middle" class="t-sm">Diabetes</text>
+            <rect x="15" y="104" width="90" height="70" rx="8" class="fg-acc"/>
+            <text x="60" y="136" text-anchor="middle" class="t-b">100–125</text>
+            <text x="60" y="156" text-anchor="middle" class="t-sm">IFG</text>
+            <rect x="15" y="180" width="90" height="70" rx="8" class="fg-good"/>
+            <text x="60" y="212" text-anchor="middle" class="t-b">&lt;100</text>
+            <text x="60" y="232" text-anchor="middle" class="t-sm">Normal</text>
+            <rect x="120" y="28" width="90" height="70" rx="8" class="fg-bad"/>
+            <text x="165" y="60" text-anchor="middle" class="t-b">≥200</text>
+            <text x="165" y="80" text-anchor="middle" class="t-sm">Diabetes</text>
+            <rect x="120" y="104" width="90" height="70" rx="8" class="fg-acc"/>
+            <text x="165" y="136" text-anchor="middle" class="t-b">140–199</text>
+            <text x="165" y="156" text-anchor="middle" class="t-sm">IGT</text>
+            <rect x="120" y="180" width="90" height="70" rx="8" class="fg-good"/>
+            <text x="165" y="212" text-anchor="middle" class="t-b">&lt;140</text>
+            <text x="165" y="232" text-anchor="middle" class="t-sm">Normal</text>
+            <rect x="225" y="28" width="90" height="70" rx="8" class="fg-bad"/>
+            <text x="270" y="60" text-anchor="middle" class="t-b">≥6.5%</text>
+            <text x="270" y="80" text-anchor="middle" class="t-sm">Diabetes</text>
+            <rect x="225" y="104" width="90" height="70" rx="8" class="fg-acc"/>
+            <text x="270" y="136" text-anchor="middle" class="t-b">≥5.7%</text>
+            <text x="270" y="156" text-anchor="middle" class="t-sm">Prediabetes</text>
+            <rect x="225" y="180" width="90" height="70" rx="8" class="fg-thin"/>
+            <text x="270" y="220" text-anchor="middle" class="t-sm t-mut">below</text>
+            <text x="165" y="266" text-anchor="middle" class="t-sm t-mut">mg/dl; book prints "&gt;" for the diabetes cut-offs</text>
+          </svg>
+      - kind: mnemonic
+        page: 10
+        quote: "Random plasma glucose: > 200 mg/dl. Or 2- Fasting plasma glucose: > 126 mg/dl. Or 3- 2h-PPPG: > 200 mg/dl"
+        word: "126"
+        parts:
+          - { key: "1", text: "100 أول الـ IFG (صايم)" }
+          - { key: "2", text: "200 للـ random وللـ 2-h (diabetes)" }
+          - { key: "6", text: "6.5% للـ A1C (diabetes)، و 126 للـ fasting" }
+        hook: "رقم **126** نفسه فيه كل حاجة: **1**00 بداية الخطر، **2**00 للـ random والـ 2-h، **6**.5 للـ A1C. والـ 140 = نص الطريق بين 100 و 200 تقريبًا، سهل تفتكره."
+      - kind: explain
+        page: 10
+        title: "test واحد ولا اتنين؟"
+        quote: "In the absence of unequivocal hyperglycemia, diagnosis requires two abnormal test results obtained at the same time or at two different time points."
+        text: |
+          - **Classical symptoms + test واحد positive** = diabetes.
+          - **من غير unequivocal hyperglycemia:** لازم ==two abnormal results==، من نفس العينة أو في وقتين مختلفين، بنفس الـ test أو test تاني، ويتعمل **promptly**.
+      - kind: check
+        page: 10
+        quote: "In the absence of unequivocal hyperglycemia, diagnosis requires two abnormal test results obtained at the same time or at two different time points."
+        question: "Asymptomatic man, FPG 131 mg/dl once. Next?"
+        options:
+          - "Repeat FPG or another test promptly"
+          - "Diagnose diabetes now"
+          - "Label as IFG"
+          - "Check urine glucose"
+        answer: 0
+        why:
+          - "صح: من غير أعراض لازم **two abnormal results**."
+          - "test واحد يكفي بس مع classic symptoms."
+          - "131 أعلى من الـ IFG range (100–125)."
+          - "الـ glycosuria **not a diagnostic tool**."
+      - kind: explain
+        page: 11
+        title: "الـ A1C: مريح بس مش مثالي"
+        quote: "A1C may not be a suitable diagnostic test in people with anemia, people treated with erythropoietin, or people undergoing hemodialysis or HIV treatment"
+        text: |
+          الـ **A1C** = جلوكوز لازق في الـ hemoglobin على عمر كرة الدم (**120 يوم**).
+
+          **مميزاته:** مفيش صيام، وتغيير يومي أقل مع الـ stress والأكل والمرض.
+
+          **عيوبه:** لازم method **standardized**، **sensitivity** أقل، أغلى، محدود في **GDM** و type 1 المفاجئ، و ==not suitable== في **anemia، erythropoietin، hemodialysis، HIV treatment**، و **Hb variants** (sickle cell trait).
+      - kind: reveal
+        page: 11
+        quote: "A1C may not be a suitable diagnostic test in people with anemia, people treated with erythropoietin, or people undergoing hemodialysis or HIV treatment"
+        prompt: "إيه اللي بيجمع الـ anemia والـ erythropoietin والـ hemodialysis؟"
+        answer: |
+          كلهم بيغيّروا **عمر كرات الدم الحمرا**. الـ A1C بيفترض إن الكرة عاشت حوالي **120 يوم** وهي بتشرب سكر.
+
+          لو الكرات **جديدة** (EPO، نزيف، hemolysis) ← وقت أقل ← A1C **falsely low**. ولو الـ Hb نفسه شكله مختلف (sickle trait) ← الجهاز يقرأ غلط. (تفسير فسيولوجي؛ القائمة من الكتاب.)
+      - kind: explain
+        page: 11
+        title: "قواعد الـ A1C"
+        quote: "In cases of discrepancies between A1C and glycemia, plasma glucose criteria should be used to diagnose diabetes"
+        text: |
+          - **≥6.5%** = diabetes، **≥5.7%** = prediabetes.
+          - الـ A1C ==لوحده== مش دقيق للتشخيص.
+          - لو الـ A1C والسكر **مختلفين** ← ==plasma glucose criteria== هي اللي بتحكم.
+          - استخدامه الأشهر: يعرّفك الـ hyperglycemia **من إمتى** (chronicity)، و **متابعة** الـ control على المدى الطويل.
+      - kind: update
+        page: 11
+        quote: "A1C > 6.5%: Diabetes diagnosis, A1C > 5.7%: prediabetes diagnosis."
+        text: "الـ ADA بيكتب الحدود **≥6.5%** و prediabetes **5.7–6.4%**. الكتاب كاتب «>»، والرقمين نفسهم. في الامتحان اكتب الأرقام زي الكتاب."
+        ref: "ADA Standards of Care in Diabetes 2025, section 2"
+      - kind: try
+        items: [dm.L01.063, dm.L01.064, dm.L01.067, dm.L01.071, dm.L01.073]
+    recap:
+      - "Glycosuria مش بتشخّص، بس محتاجة سكر فورًا."
+      - "FPG: <100 / 100–125 IFG / ≥126. 2-h (75 g): <140 / 140–199 IGT / ≥200. A1C: ≥5.7 / ≥6.5."
+      - "أعراض + test واحد؛ من غير أعراض: اتنين."
+      - "A1C مش مناسب في anemia، EPO، dialysis، HIV، Hb variants. لو اختلف مع السكر، السكر يكسب."
+      - "عينة متأخرة = falsely low (glycolysis)."
+    practice: [dm.L01.053, dm.L01.054, dm.L01.055, dm.L01.056, dm.L01.057, dm.L01.058, dm.L01.059, dm.L01.060, dm.L01.061, dm.L01.062, dm.L01.063, dm.L01.064, dm.L01.065, dm.L01.066, dm.L01.067, dm.L01.068, dm.L01.069, dm.L01.070, dm.L01.071, dm.L01.072, dm.L01.073, dm.L01.074, dm.L01.109, dm.L01.110, dm.L01.111, dm.L01.112, dm.L01.121, dm.L01.127, dm.L01.133]
+  # ------------------------------------------------------------------
+  - id: dm.L01.lesson5
+    title: "Type 1 ولا 2؟ وبول فيه سكر وبول كتير"
+    hook: "جدول من عشر سطور بيفرق بين النوعين، وقايمتين بتحلّ لغز السكر في البول والبول الكتير."
+    minutes: 9
+    pages: [11, 14]
+    topics: [types, glycosuria]
+    goals:
+      - "تفرّق type 1 من type 2 بالجدول"
+      - "تعرّف الـ prediabetes وأهميته"
+      - "تعدّ أسباب الـ renal glycosuria والـ polyuria"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 12
+        title: "Type 1 أنواع"
+        quote: "Rapidly progressive young. Slowly progressive LAD A (Late onset Autoimmune Diabetes in the Adulthood). 2- Idiopathic non-immune mediated."
+        text: |
+          **Type 1:**
+          - **Autoimmune:** rapidly progressive (صغيرين)، أو slowly progressive = ==LADA== (Late-onset Autoimmune Diabetes in Adulthood).
+          - **Idiopathic** non-immune mediated.
+
+          **Type 2:** الـ obese **80%** (resistant)، والـ non-obese **20%** (secretory)، والـ **MODY** = Maturity Onset Diabetes of the Young.
+      - kind: explain
+        page: 12
+        title: "علامات الـ type 1 السريع"
+        quote: "Ketosis-prone (up to 30% of cases presented by DKA)."
+        text: |
+          **Clinical:** أقل من **30 سنة**، presentation classic حاد، **never obese**، ==ketosis-prone== (لحد **30%** بييجوا بـ **DKA**)، والـ insulin **required for survival**.
+
+          **Lab:** insulin و **C-peptide** absent أو very low، **GAD-Abs، ICA، insulin autoantibodies**، و **HLA-DR3/DR4**.
+      - kind: table
+        page: 13
+        quote: "Comparative clinical features of type 1 and type 2 diabetes"
+        title: "Type 1 vs type 2"
+        columns: [Feature, T1, T2]
+        rows:
+          - ["Age", "<30", ">30"]
+          - ["Symptoms", "Days–weeks", "Months–years"]
+          - ["Weight", "Never obese", "Obese"]
+          - ["Ketonuria", "Yes", "No"]
+          - ["Family history", "No", "Yes"]
+          - ["C-peptide", "Absent/low", "Normal/high"]
+          - ["HLA, antibodies", "Yes", "No"]
+          - ["Complications", "No", "10–20%"]
+        hide: [[0, 1], [3, 1], [4, 2], [5, 1], [5, 2], [7, 2]]
+      - kind: aside
+        tone: trap
+        page: 13
+        quote: "Comparative clinical features of type 1 and type 2 diabetes"
+        text: "فخ: الـ **family history** في جدول الكتاب **Yes لـ type 2** و **No لـ type 1**. منطقها إن type 2 **multigenic** وبيجري في العيلة بقوة، أما type 1 فأغلبه بييجي في عيلة مفيهاش حد."
+      - kind: check
+        page: 12
+        quote: "Slowly progressive LAD A (Late onset Autoimmune Diabetes in the Adulthood)."
+        question: "42-year-old non-obese man on tablets for a year now needs insulin; GAD antibodies positive. Diagnosis?"
+        options: ["LADA", "Rapidly progressive type 1", "Obese type 2", "MODY"]
+        answer: 0
+        why:
+          - "صح: autoimmune، **slowly progressive**، و adult."
+          - "الـ rapid صغير (<30) وحاد."
+          - "مش obese وعنده antibodies."
+          - "الـ MODY مفيهوش autoantibodies، والكتاب حاطه تحت type 2."
+      - kind: explain
+        page: 13
+        title: "الـ Prediabetes: مش مرض، بس جرس إنذار"
+        quote: "IFG and IGT are not clinical entities but are risk factors for: 1- Cardiovascular /cerebrovascular diseases"
+        text: |
+          **Prediabetes** = metabolic stage ==بين الطبيعي والـ diabetes==: **IFG (100–125)** و/أو **IGT (140–199)**. اسمه كمان borderline، subclinical، early diabetes.
+
+          الـ IFG والـ IGT **not clinical entities**، لكنهم risk factors لـ:
+          1. **Cardiovascular / cerebrovascular disease**
+          2. **diabetes** بعد كده (predictor)
+          3. سكر في رينج الـ diabetes بيبان مع الـ **stress**
+      - kind: explain
+        page: 14
+        title: "سكر في البول: الدم بيقول إيه؟"
+        quote: "Pregnancy: The commonest cause. It is due to a lower renal threshold for glucose excretion."
+        text: |
+          - **Glycosuria + سكر دم عالي** = **diabetes**.
+          - **Glycosuria + سكر دم طبيعي أو واطي** = ==renal glycosuria==.
+
+          أسباب الـ renal glycosuria:
+          1. **Pregnancy:** **the commonest cause** (renal threshold أوطى).
+          2. **Tubular dysfunction**.
+          3. **Benign renal glycosuria:** rare، inherited، asymptomatic، كلى طبيعية.
+          4. **False positive:** lactosuria، fructosuria، ascorbic aciduria.
+      - kind: figure
+        page: 14
+        quote: "Pituitary: impaired production of ADH: Cranial diabetes insipidus."
+        title: "الـ Polyuria: من الدماغ للكلية"
+        alt: "A vertical map. Pituitary: low ADH, cranial diabetes insipidus. Kidney, no response to ADH: nephrogenic DI, Fanconi. Kidney, solute load: diabetes mellitus. Kidney, low concentrating capacity: early CRF, hydronephrosis, hypercalcemia, hypokalemia. Drugs: diuretics. Others: psychogenic drinking."
+        caption: "اسأل: الـ **ADH** مش موجود؟ موجود والكلية مش سامعاه؟ الكلية سامعاه بس فيه **solute** بيسحب ميه؟ ولا الكلية مش قادرة **تركّز**؟"
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="8" width="310" height="40" rx="10" class="fg-acc"/>
+            <text x="20" y="25" class="t-sm t-b">Pituitary: ↓ ADH</text>
+            <text x="20" y="41" class="t-sm">Cranial diabetes insipidus</text>
+            <rect x="10" y="56" width="310" height="40" rx="10" class="fg-box"/>
+            <text x="20" y="73" class="t-sm t-b">Kidney: no response to ADH</text>
+            <text x="20" y="89" class="t-sm">Nephrogenic DI, Fanconi syndrome</text>
+            <rect x="10" y="104" width="310" height="40" rx="10" class="fg-bad"/>
+            <text x="20" y="121" class="t-sm t-b">Kidney: solute (osmotic) diuresis</text>
+            <text x="20" y="137" class="t-sm">Diabetes mellitus</text>
+            <rect x="10" y="152" width="310" height="56" rx="10" class="fg-box"/>
+            <text x="20" y="169" class="t-sm t-b">Kidney: ↓ concentrating capacity</text>
+            <text x="20" y="185" class="t-sm">Early CRF, hydronephrosis,</text>
+            <text x="20" y="200" class="t-sm">hypercalcemia, hypokalemia</text>
+            <rect x="10" y="216" width="310" height="34" rx="10" class="fg-thin"/>
+            <text x="20" y="238" class="t-sm"><tspan class="t-b">Drugs:</tspan> diuretics</text>
+            <rect x="10" y="258" width="310" height="34" rx="10" class="fg-thin"/>
+            <text x="20" y="280" class="t-sm"><tspan class="t-b">Others:</tspan> compulsive water drinking</text>
+          </svg>
+      - kind: sort
+        page: 14
+        quote: "CRF (early stage). - Hydronephrosis. - Hypercalcemia (nephrocalcinosis). - Hypokalemia."
+        prompt: "الكتاب قسّم الأسباب الكلوية. حط كل سبب في مكانه:"
+        bins: ["No response to ADH", "Osmotic diuresis", "↓ Concentrating capacity"]
+        cards:
+          - { text: "Nephrogenic DI", bin: 0 }
+          - { text: "Fanconi syndrome", bin: 0 }
+          - { text: "Diabetes mellitus", bin: 1 }
+          - { text: "Hypercalcemia", bin: 2 }
+          - { text: "Hypokalemia", bin: 2 }
+          - { text: "Hydronephrosis", bin: 2 }
+          - { text: "Early CRF", bin: 2 }
+        why: "الـ **hypercalcemia** و **hypokalemia** بيبوّظوا قدرة الكلية على التركيز (nephrocalcinosis في الكالسيوم). الـ DM الوحيد اللي بيعمل **solute** diuresis هنا."
+      - kind: try
+        items: [dm.L01.083, dm.L01.086, dm.L01.089, dm.L01.092, dm.L01.122]
+    recap:
+      - "Type 1: autoimmune (rapid صغير، LADA بطيء) أو idiopathic. Type 2: obese 80%، non-obese 20%، MODY."
+      - "Type 1: <30، never obese، ketosis-prone (30% DKA)، C-peptide واطي، antibodies، HLA. Type 2: family history، 10–20% مضاعفات وقت التشخيص."
+      - "Prediabetes مش clinical entity: risk factor للقلب والمخ والسكر."
+      - "Renal glycosuria: pregnancy أشهرها، tubular، benign، false positive."
+      - "Polyuria >2.5 L: cranial DI، nephrogenic DI/Fanconi، DM، ↓ concentrating، diuretics، psychogenic."
+    practice: [dm.L01.075, dm.L01.076, dm.L01.077, dm.L01.078, dm.L01.079, dm.L01.080, dm.L01.081, dm.L01.082, dm.L01.083, dm.L01.084, dm.L01.085, dm.L01.086, dm.L01.087, dm.L01.088, dm.L01.089, dm.L01.090, dm.L01.091, dm.L01.092, dm.L01.093, dm.L01.094, dm.L01.108, dm.L01.114, dm.L01.122, dm.L01.124, dm.L01.126, dm.L01.128, dm.L01.129, dm.L01.131]
+  # ------------------------------------------------------------------
+  - id: dm.L01.lesson6
+    title: "سكر الحمل: الـ placenta بتلعب ضد الـ insulin"
+    hook: "92، 180، 153: تلات أرقام، وواحد منهم بس يكفي."
+    minutes: 8
+    pages: [15, 17]
+    topics: [gdm]
+    goals:
+      - "تعرّف الـ GDM وتشرح ليه الحمل diabetogenic"
+      - "تحفظ أرقام الـ one-step OGTT"
+      - "تعرف مين ما يحتاجش screening ومين يتعمله بدري"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 15
+        title: "يعني إيه GDM؟"
+        quote: "It is a type of Diabetes with onset or first recognition during the second and third trimesters of pregnancy."
+        text: |
+          الـ **GDM** = diabetes بيبدأ أو ==first recognized== في الـ **second و third trimesters**.
+
+          - ممكن يختفي بعد الولادة أو لا.
+          - **liable to recur** في الحمل اللي بعده.
+          - بيحصل في حوالي **2–5%** من الحمل.
+      - kind: explain
+        page: 15
+        title: "ليه الحمل diabetogenic؟"
+        quote: "Human placental lactogen has anti-insulin and lipolytic effects. It increases blood glucose levels, thereby making more glucose available to the fetus."
+        text: |
+          1. ==Human placental lactogen==: **anti-insulin** و **lipolytic**، بيعلّي سكر الأم علشان الجنين ياخد أكتر.
+          2. **Steroid hormones** (corticosteroids و progesterone): anti-insulin.
+          3. الـ **placenta** بتكسّر شوية insulin.
+      - kind: aside
+        tone: analogy
+        page: 15
+        quote: "Human placental lactogen has anti-insulin and lipolytic effects."
+        text: "الـ **placenta** زي ابن بيحوّل من حساب أمه من غير ما يستأذن: بتخلّي الـ insulin بتاع الأم يشتغل أقل علشان السكر يفضل في الدم ويعدّي للجنين. لو بنكرياس الأم قدّر يزوّد الـ insulin، تمام. لو ما قدرش: **GDM**."
+      - kind: explain
+        page: 15
+        title: "مين في خطر؟"
+        quote: "Having previously delivered a baby weighing more than 4 kilograms."
+        text: |
+          - **Overweight/obese**، و **physically inactive**
+          - **Prediabetes**
+          - ==GDM in a previous pregnancy==
+          - **PCOS**
+          - قريب درجة أولى عنده **diabetes**
+          - بيبي قبل كده أكتر من **4 kg**
+      - kind: figure
+        page: 16
+        quote: "The diagnosis of GDM is made when any of the following plasma glucose values are met or exceeded"
+        title: "الـ one-step OGTT"
+        alt: "A curve of maternal glucose after a 75 gram load at 24 to 28 weeks, with three thresholds: fasting 92, one hour 180, two hours 153 milligrams per decilitre. Any one value met or exceeded diagnoses GDM."
+        caption: "**75 g** في أسبوع **24–28**. فيه تلات نقط، و ==any one== value تكفي."
+        svg: |
+          <svg viewBox="0 0 330 230" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L01d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker></defs>
+            <path d="M40 190 V15" class="fg-arrow" marker-end="url(#L01d)"/>
+            <path d="M40 190 H315" class="fg-arrow" marker-end="url(#L01d)"/>
+            <path d="M60 150 Q150 30 180 60 T300 100" class="fg-thin" fill="none"/>
+            <circle cx="60" cy="150" r="7" class="fg-dot-acc"/>
+            <circle cx="180" cy="60" r="7" class="fg-dot-bad"/>
+            <circle cx="300" cy="100" r="7" class="fg-dot-acc"/>
+            <text x="60" y="138" text-anchor="middle" class="t-b">92</text>
+            <text x="180" y="45" text-anchor="middle" class="t-b">180</text>
+            <text x="300" y="86" text-anchor="middle" class="t-b">153</text>
+            <text x="60" y="208" text-anchor="middle" class="t-sm">Fasting</text>
+            <text x="180" y="208" text-anchor="middle" class="t-sm">1 h</text>
+            <text x="300" y="208" text-anchor="middle" class="t-sm">2 h</text>
+            <text x="175" y="226" text-anchor="middle" class="t-sm t-mut">75 g, 24–28 weeks; any one value = GDM</text>
+          </svg>
+      - kind: mnemonic
+        page: 16
+        quote: "Fasting: 92 mg/dL 1 h: 180 mg/dL 2h: 153 mg/dL"
+        word: "92"
+        parts:
+          - { key: "9", text: "Fasting 92 (أقل من الـ 100 بتاع غير الحامل)" }
+          - { key: "2", text: "1 h 180 وبعدين 2 h 153 (السكر بينزل تاني)" }
+        hook: "الـ 1-h = **180**، نفس الـ renal threshold بالظبط. الـ fasting **92** أوطى من الـ 100 بتاع غير الحامل، لأن سكر الحامل الصايم أوطى أصلًا. والـ 2-h **153** بين الاتنين. والأهم: **قيمة واحدة** تكفي."
+      - kind: check
+        page: 16
+        quote: "The diagnosis of GDM is made when any of the following plasma glucose values are met or exceeded"
+        question: "At 26 weeks: fasting 94, 1 h 172, 2 h 140 mg/dL. Interpretation?"
+        options: ["GDM", "Normal: two values are normal", "Repeat at 32 weeks", "Prediabetes"]
+        answer: 0
+        why:
+          - "صح: الـ fasting **94 ≥ 92**، وقيمة واحدة تكفي."
+          - "مش محتاج اتنين؛ **any one** value."
+          - "التشخيص اتعمل خلاص."
+          - "مفيش prediabetes في الـ one-step test."
+      - kind: explain
+        page: 16
+        title: "مين ما يحتاجش screening؟"
+        quote: "No screening is needed for any woman fulfilling all the following criteria"
+        text: |
+          لازم تحقق ==all== الشروط دي:
+          1. **Normal body weight**
+          2. مفيش **diabetes** في قرايب الدرجة الأولى
+          3. مفيش تاريخ **abnormal glucose tolerance**
+          4. السن **أقل من 25**
+          5. مفيش **poor obstetric outcome** قبل كده
+
+          شرط واحد ناقص = تعمل screening.
+      - kind: explain
+        page: 17
+        title: "الـ high risk: بدري وبالمعايير العادية"
+        quote: "Before 15 weeks of gestation, screen for diabetes using the standard diagnostic criteria."
+        text: |
+          - اللي **planning pregnancy** وعندها risk factors: screen للـ prediabetes والـ diabetes.
+          - في الحمل: سكر **venous plasma** بدري في الـ **first trimester**، ==before 15 weeks==، بنفس معايير غير الحامل: أعراض + random **200**، أو fasting **126**، أو 2-h **200**؛ ومن غير unequivocal hyperglycemia: اتنين abnormal.
+      - kind: case
+        page: 16
+        quote: "In individuals who are planning pregnancy, screen those with risk factors for diagnosis of prediabetes or diabetes."
+        stem: "32-year-old, BMI 33, PCOS, mother diabetic. Planning her first pregnancy."
+        steps:
+          - question: "What now, before pregnancy?"
+            options: ["Screen for prediabetes or diabetes", "Nothing until 24 weeks", "Start insulin", "Urine glucose only"]
+            answer: 0
+            why: "عندها risk factors وبتخطط للحمل، فبنعمل **screen** للـ prediabetes والـ diabetes."
+          - reveal: "She conceives; early tests are normal. At 26 weeks: fasting 88, 1 h 185, 2 h 150."
+            question: "Interpretation?"
+            options: ["GDM", "Normal", "Overt diabetes", "Repeat test"]
+            answer: 0
+            why: "الـ 1-h **185 ≥ 180**، وقيمة واحدة تكفي."
+      - kind: try
+        items: [dm.L01.095, dm.L01.097, dm.L01.102, dm.L01.104, dm.L01.106]
+    recap:
+      - "GDM: يبدأ أو يتعرف في الـ trimester التاني والتالت؛ 2–5%؛ ممكن يرجع."
+      - "Diabetogenic: HPL (anti-insulin + lipolytic)، steroids، placenta بتكسّر insulin."
+      - "One-step: 75 g في 24–28 أسبوع؛ 92 / 180 / 153؛ قيمة واحدة تكفي."
+      - "مفيش screening بس لو الخمس شروط كلهم (منهم السن <25)."
+      - "High risk: first trimester قبل 15 أسبوع بالمعايير العادية."
+    practice: [dm.L01.095, dm.L01.096, dm.L01.097, dm.L01.098, dm.L01.099, dm.L01.100, dm.L01.101, dm.L01.102, dm.L01.103, dm.L01.104, dm.L01.105, dm.L01.106, dm.L01.107, dm.L01.113, dm.L01.120, dm.L01.125, dm.L01.130]

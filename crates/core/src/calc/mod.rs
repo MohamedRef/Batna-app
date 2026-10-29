@@ -27,6 +27,8 @@ mod bclc;
 mod bisap;
 mod child_pugh;
 mod clichy;
+mod cockcroft;
+mod diabetes;
 mod fib4;
 mod gbs;
 mod glasgow;
@@ -34,7 +36,9 @@ mod kings;
 mod maddrey;
 mod meld;
 mod r_ratio;
+mod ra2010;
 mod ranson;
+mod renal;
 mod research;
 mod saag;
 
@@ -280,6 +284,10 @@ pub enum Area {
     AcuteFailure,
     Pancreas,
     Gi,
+    Renal,
+    Elderly,
+    Rheum,
+    Diabetes,
     Research,
 }
 
@@ -314,7 +322,7 @@ pub fn compute(id: &str, inputs: &Inputs) -> Result<Outcome, CalcError> {
     (spec.compute)(inputs)
 }
 
-static REGISTRY: [CalcSpec; 32] = [
+static REGISTRY: [CalcSpec; 40] = [
     child_pugh::SPEC,
     meld::MELD,
     meld::MELD_NA,
@@ -332,6 +340,14 @@ static REGISTRY: [CalcSpec; 32] = [
     ranson::SPEC,
     bisap::SPEC,
     gbs::SPEC,
+    renal::ANION_GAP,
+    renal::DELTA_RATIO,
+    renal::COMPENSATION,
+    renal::OSMOLAL_GAP,
+    cockcroft::SPEC,
+    ra2010::SPEC,
+    diabetes::CORRECTED_NA,
+    diabetes::OSMOLALITY,
     research::INCIDENCE,
     research::PREVALENCE,
     research::PREVALENCE_ID,
@@ -351,7 +367,7 @@ static REGISTRY: [CalcSpec; 32] = [
 
 const UNIT_SUFFIXES: &[&str] = &[
     "_10e9_l", "_per_mm3", "_mm_hg", "_meq_l", "_mmol_l", "_mg_dl", "_g_dl", "_iu_l", "_u_l", "_years",
-    "_points", "_days", "_pct", "_cm", "_s", "_l",
+    "_points", "_days", "_pct", "_cm", "_kg", "_s", "_l",
 ];
 
 /// A field key without its unit suffix: `alt_uln_u_l` → `alt_uln`.
@@ -443,6 +459,15 @@ const BAND_WORDS: &[(&str, &[&str])] = &[
     ("clichy.not_met", &["not met"]),
     ("bisap.severe", &["severe", "2 or more"]),
     ("bisap.mild", &["mild", "not severe"]),
+    ("anion_gap.high", &["high"]),
+    ("anion_gap.normal", &["normal"]),
+    ("anion_gap.low", &["low"]),
+    ("expected_compensation.appropriate", &["appropriate"]),
+    ("osmolal_gap.present", &["gap present"]),
+    ("osmolal_gap.normal", &["no gap"]),
+    ("acr_eular_2010_ra.definite", &["definite"]),
+    ("acr_eular_2010_ra.not_met", &["not met"]),
+    ("effective_osmolality.hhs", &["hhs", "meets"]),
 ];
 
 /// The bands of `band`'s calculator that `text` names, longest phrase first.

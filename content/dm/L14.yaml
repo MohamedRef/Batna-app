@@ -1,0 +1,489 @@
+schema: batna.content/v1
+lecture: dm.L14
+title: Hypoglycemia
+author: Prof. Dr. Yehia M. Ghanem
+book: { chapter: 6, pages: [179, 184] }
+topics:
+  - { id: basics, title: "Counter-regulation, definition, clinical picture and grades" }
+  - { id: causes, title: "Causes of fasting and postprandial hypoglycemia" }
+  - { id: reactive, title: "Reactive, alcohol-induced and factitious hypoglycemia" }
+  - { id: insulinoma, title: "Insulinoma: picture, diagnosis, localization and treatment" }
+  - { id: other-tumors, title: "Extra-pancreatic tumor hypoglycemia" }
+  - { id: autoimmune, title: "Immunopathogenic (autoimmune) hypoglycemia" }
+items:
+  # ---------- p179: basics ----------
+  - id: dm.L14.001
+    kind: enumerate
+    topic: basics
+    prompt: Enumerate the counter-regulatory hormones listed in the lecture.
+    points:
+      - Growth hormone
+      - Thyroid hormones
+      - Epinephrine and norepinephrine
+      - Cortisol
+      - Glucagon
+    pass: 4
+    src: { page: 179, quote: "Counter-regulatory hormones" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L14.002
+    kind: card
+    topic: basics
+    front: How does the lecture define hypoglycemia?
+    back: Blood glucose below 70 mg/dL accompanied by adrenergic or gastrointestinal manifestations.
+    src: { page: 179, quote: "Blood glucose levels below 70 mg/dL are accompanied by adrenergic or gastrointestinal manifestations." }
+    status: unverified
+    tags: [high-yield]
+    update:
+      text: "ADA classifies hypoglycemia by level: level 1 <70 mg/dL, level 2 <54 mg/dL (clinically significant), level 3 a severe event with altered mental or physical state needing assistance, whatever the glucose."
+      ref: "ADA Standards of Care 2025, section 6"
+  - id: dm.L14.003
+    kind: table
+    topic: basics
+    title: Clinical picture of hypoglycemia (book)
+    columns: [Group, Manifestations]
+    rows:
+      - [Gastrointestinal, "Epigastric pain, nausea and vomiting"]
+      - [Adrenergic, "Palpitation, sweating, tremors, numbness and coma"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 179, quote: "G.I.T.: Epigastric pain – nausea and vomiting" }
+    status: unverified
+  - id: dm.L14.004
+    kind: table
+    topic: basics
+    title: Grades of hypoglycemia (book)
+    columns: [Grade, Severity, Meaning]
+    rows:
+      - [Grade I, Mild, The patient can help himself]
+      - [Grade II, Moderate, Needs help to reach glucose]
+      - [Grade III, Severe, Hospital for glucose infusion and glucagon]
+    blanks: [[0, 2], [1, 2], [2, 2]]
+    src: { page: 179, quote: "Grade III: Severe, go to the hospital to receive glucose infusion and glucagon." }
+    status: unverified
+    tags: [high-yield]
+    update:
+      text: "ADA uses glucose levels instead: level 1 <70 mg/dL, level 2 <54 mg/dL, level 3 severe (needs assistance)."
+      ref: "ADA Standards of Care 2025, section 6"
+  - id: dm.L14.005
+    kind: mcq
+    topic: basics
+    stem: A 58-year-old with type 2 DM on gliclazide feels sweaty and tremulous before lunch; glucose 58 mg/dL. He drinks juice himself and recovers. Which grade does the lecture assign?
+    options: [Grade I (mild), Grade II (moderate), Grade III (severe), Not hypoglycemia because he recovered, Grade III because glucose is below 60]
+    answer: 0
+    why:
+      - Mild hypoglycemia is when the patient can help himself.
+      - Moderate means he needs someone's help to reach glucose.
+      - Severe means hospital glucose infusion and glucagon.
+      - Glucose below 70 with adrenergic features is hypoglycemia by definition.
+      - The book grades by who can treat it, not by a glucose number.
+    src: { page: 179, quote: "Grade I: Mild when one can help himself." }
+    status: unverified
+  # ---------- p180: causes ----------
+  - id: dm.L14.006
+    kind: card
+    topic: causes
+    front: What are the primary causes of fasting hypoglycemia?
+    back: "Hyperinsulinism (pancreatic B-cell tumor; surreptitious insulin or hypoglycemic agents) and non-insulin-secreting tumors."
+    src: { page: 180, quote: "Pancreatic B-cell tumor" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L14.007
+    kind: enumerate
+    topic: causes
+    prompt: Enumerate the secondary causes of fasting hypoglycemia.
+    points:
+      - "Endocrine: hypopituitarism"
+      - "Endocrine: Addison's disease"
+      - "Endocrine: myxedema"
+      - "Liver: acute alcoholism"
+      - "Liver: liver failure"
+      - Renal failure
+    pass: 5
+    src: { page: 180, quote: "Endocrine (hypopituitrism – Addison – Myxedema)" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L14.008
+    kind: card
+    topic: causes
+    front: What are the causes of early postprandial hypoglycemia?
+    back: After gastric surgery (alimentary) and functional vagal (parasympathetic) overactivity.
+    src: { page: 180, quote: "Functional vagal tone" }
+    status: unverified
+  - id: dm.L14.009
+    kind: enumerate
+    topic: causes
+    prompt: Enumerate the causes of late postprandial hypoglycemia.
+    points:
+      - Occult diabetes
+      - Counter-regulatory hormone deficiency
+      - Idiopathic
+      - Alcohol related
+      - Immunopathogenic hypoglycemia
+    pass: 4
+    src: { page: 180, quote: "Late hypoglycemia occult DM" }
+    status: unverified
+  - id: dm.L14.010
+    kind: table
+    topic: causes
+    title: Common causes of hypoglycemia in adults
+    columns: [Type, Group, Causes]
+    rows:
+      - [Fasting, Primary, "Hyperinsulinism (B-cell tumor; surreptitious insulin or OHA); non-insulin-secreting tumor"]
+      - [Fasting, Secondary, "Endocrine (hypopituitarism, Addison, myxedema); liver (acute alcoholism, liver failure); renal failure"]
+      - [Postprandial, Early, "Post gastrectomy; functional vagal tone"]
+      - [Postprandial, Late, "Occult DM; counter-regulatory deficiency; idiopathic; alcohol; immunopathogenic"]
+    blanks: [[0, 2], [1, 2], [2, 2], [3, 2]]
+    src: { page: 180, quote: "Common Causes of Hypoglycemia in Adults" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L14.011
+    kind: mcq
+    topic: causes
+    stem: A 45-year-old woman with fatigue, weight loss, hyperpigmentation and postural hypotension has a fasting glucose of 52 mg/dL. How does the lecture classify her hypoglycemia?
+    options: ["Fasting, secondary (endocrine)", "Fasting, primary (hyperinsulinism)", Early postprandial, Late postprandial (occult DM), Factitious]
+    answer: 0
+    why:
+      - Addison's disease is an endocrine, secondary cause of fasting hypoglycemia.
+      - Primary causes are hyperinsulinism or non-insulin-secreting tumors.
+      - Early postprandial causes are post-gastrectomy and vagal tone.
+      - Occult DM causes late postprandial hypoglycemia.
+      - Nothing suggests surreptitious insulin or OHA.
+    src: { page: 180, quote: "Endocrine (hypopituitrism – Addison – Myxedema)" }
+    status: unverified
+  # ---------- p181, p183: reactive, alcohol, factitious ----------
+  - id: dm.L14.012
+    kind: card
+    topic: reactive
+    front: What is the mechanism of early (alimentary) postprandial hypoglycemia?
+    back: Rapid discharge of ingested carbohydrate into the small bowel, rapid glucose absorption and hyperinsulinism, as after gastric surgery (dumping).
+    src: { page: 181, quote: "Rapid discharge of ingested CHO into the small bowel followed by rapid glucose absorption and hyperinsulinism" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L14.013
+    kind: card
+    topic: reactive
+    front: What functional mechanism can cause early reactive hypoglycemia without surgery?
+    back: Overactivity of the parasympathetic nervous system.
+    src: { page: 181, quote: "It might be functional: as it may represent over activity of parasympathetic nervous system" }
+    status: unverified
+  - id: dm.L14.014
+    kind: card
+    topic: reactive
+    front: Which counter-regulatory defect does the lecture list under reactive hypoglycemia?
+    back: Defective response of GH, cortisol and glucagon.
+    src: { page: 181, quote: "Defective counter-regulatory response: GH, cortisol, glucagon." }
+    status: unverified
+  - id: dm.L14.015
+    kind: card
+    topic: reactive
+    front: How is alimentary (post-gastrectomy) hypoglycemia treated?
+    back: Frequent feeding with small meals.
+    src: { page: 183, quote: "Treatment: frequent feeding - small diet" }
+    status: unverified
+  - id: dm.L14.016
+    kind: card
+    topic: reactive
+    front: What is the mechanism of alcohol-induced hypoglycemia, and what follows it?
+    back: Hepatic glycogen depletion plus alcohol-mediated inhibition of gluconeogenesis; it is followed by gastritis and vomiting.
+    src: { page: 181, quote: "Due to hepatic glycogen depletion combined with alcohol mediated inhibition of gluconeogenesis" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L14.017
+    kind: card
+    topic: reactive
+    front: What is factitious hypoglycemia?
+    back: Self-induced hypoglycemia from surreptitious use of insulin or oral hypoglycemic agents.
+    src: { page: 181, quote: "It is self-induced hypoglycemia due to surreptitious administration of insulin or OHA" }
+    status: unverified
+  - id: dm.L14.018
+    kind: card
+    topic: reactive
+    front: What labs diagnose factitious hypoglycemia from injected insulin?
+    back: High immunoreactive insulin, suppressed C-peptide, and high insulin antibodies.
+    src: { page: 183, quote: "Suppressed C-peptide" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L14.019
+    kind: mcq
+    topic: reactive
+    stem: A 32-year-old nurse has recurrent hypoglycemia. During an episode glucose is 38 mg/dL, insulin is very high and C-peptide is suppressed; insulin antibodies are raised. Diagnosis?
+    options: [Factitious hypoglycemia from injected insulin, Insulinoma, Alcohol-induced hypoglycemia, Addison's disease, Alimentary hypoglycemia]
+    answer: 0
+    why:
+      - High insulin with suppressed C-peptide and insulin antibodies points to exogenous insulin.
+      - An insulinoma secretes insulin with C-peptide, so C-peptide would be high.
+      - Alcohol causes hypoglycemia through glycogen depletion and blocked gluconeogenesis, with low insulin.
+      - Addison's causes hypoglycemia with low, not high, insulin.
+      - Alimentary hypoglycemia follows meals after gastric surgery.
+    src: { page: 183, quote: "High immuno-reactive insulin" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p181-183: insulinoma ----------
+  - id: dm.L14.020
+    kind: cloze
+    topic: insulinoma
+    text: About {{c1::90%}} of insulinomas are {{c2::benign single}} adenomas of the islets of Langerhans; multiple tumors suggest {{c3::malignancy}}.
+    src: { page: 181, quote: "90% benign adenoma of the islet of Langerhans (single)" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L14.021
+    kind: card
+    topic: insulinoma
+    front: With which syndrome is insulinoma associated?
+    back: Multiple endocrine neoplasia (MEN).
+    src: { page: 181, quote: "It is associated with MEN‘s." }
+    status: unverified
+  - id: dm.L14.022
+    kind: card
+    topic: insulinoma
+    front: What kind of symptoms does insulinoma cause?
+    back: Subacute or chronic neuroglycopenia.
+    src: { page: 181, quote: "Symptoms: subacute or chronic neuroglycopenia" }
+    status: unverified
+  - id: dm.L14.023
+    kind: enumerate
+    topic: insulinoma
+    prompt: Give the three parts of Whipple's triad as the lecture states them.
+    points:
+      - History of hypoglycemic symptoms
+      - Fasting blood glucose below 40 mg/dL
+      - Immediate relief after ingesting glucose
+    pass: 3
+    src: { page: 182, quote: "FBG: less than 40 mg/dl" }
+    status: unverified
+    tags: [high-yield]
+    update:
+      text: "The Endocrine Society defines Whipple's triad as symptoms of hypoglycemia, a low plasma glucose measured at the time, and relief when glucose is raised; it uses <55 mg/dL as the threshold for evaluation."
+      ref: "Endocrine Society Clinical Practice Guideline on adult hypoglycemic disorders 2009"
+  - id: dm.L14.024
+    kind: card
+    topic: insulinoma
+    front: When do insulinoma symptoms typically appear?
+    back: Early in the morning, after a missed meal, or after exercise.
+    src: { page: 182, quote: "Symptoms develop early in the morning or after a missed meal, after exercise" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L14.025
+    kind: enumerate
+    topic: insulinoma
+    prompt: Enumerate the neuroglycopenic symptoms of insulinoma.
+    points:
+      - Blurred vision, diplopia and headache
+      - Slurred speech and weakness
+      - Personality and mental changes
+      - Coma
+    pass: 3
+    src: { page: 182, quote: "Blurred vision & diplopia, headache" }
+    status: unverified
+  - id: dm.L14.026
+    kind: card
+    topic: insulinoma
+    front: Why may sweating and palpitation be absent in insulinoma?
+    back: Hypoglycemic unawareness is common; the patient adapts to repeated hypoglycemia.
+    src: { page: 182, quote: "Sweating & palpation may not occur" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L14.027
+    kind: card
+    topic: insulinoma
+    front: What is the key laboratory finding in insulinoma?
+    back: An elevated insulin level at the time of hypoglycemia.
+    src: { page: 182, quote: "Elevated insulin level at time of hypoglycemia" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L14.028
+    kind: enumerate
+    topic: insulinoma
+    prompt: Enumerate the diagnostic tests for insulinoma in the lecture.
+    points:
+      - Prolonged fasting under hospital supervision
+      - Proinsulin determination
+      - Stimulation test (glucagon better than tolbutamide)
+      - Endoscopic ultrasound
+    pass: 3
+    src: { page: 182, quote: "Prolonged fasting under hospital supervision" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L14.029
+    kind: card
+    topic: insulinoma
+    front: Which stimulation test is preferred for insulinoma?
+    back: Glucagon; it is better than tolbutamide.
+    src: { page: 182, quote: "Stimulation test: Glucagon is better than tolbutamide" }
+    status: unverified
+  - id: dm.L14.030
+    kind: card
+    topic: insulinoma
+    front: Which imaging does the lecture prefer for preoperative localization of an insulinoma, and why?
+    back: MRI; it also shows hepatic metastases and is better than arteriography.
+    src: { page: 182, quote: "MRI (hepatic metastasis)" }
+    status: unverified
+  - id: dm.L14.031
+    kind: enumerate
+    topic: insulinoma
+    prompt: Enumerate the treatment options for insulinoma.
+    points:
+      - Surgery
+      - Diet
+      - Diazoxide 300-600 mg with a diuretic
+      - Octreotide
+      - Streptozotocin
+    pass: 4
+    src: { page: 183, quote: "Diazoxide 300-600 + diuretic therapy" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L14.032
+    kind: cloze
+    topic: insulinoma
+    text: Medical treatment of insulinoma includes diazoxide {{c1::300-600}} mg given with a {{c2::diuretic}}.
+    src: { page: 183, quote: "Diazoxide 300-600 + diuretic therapy" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L14.033
+    kind: mcq
+    topic: insulinoma
+    stem: A 40-year-old has early-morning confusion, diplopia and slurred speech that resolve after breakfast. She denies sweating or palpitations. During a supervised fast glucose falls to 36 mg/dL with inappropriately high insulin. Why are adrenergic symptoms absent?
+    options: [Hypoglycemic unawareness from adaptation, She has autonomic neuropathy from diabetes, Insulin blocks adrenaline release, Neuroglycopenia never causes symptoms, The fall is too slow to detect]
+    answer: 0
+    why:
+      - Unawareness is common in insulinoma because the patient adapts to hypoglycemia.
+      - She has no diabetes; the lecture ties unawareness to insulinoma itself.
+      - The lecture gives no such mechanism.
+      - Her diplopia and confusion are neuroglycopenic symptoms.
+      - The lecture explains it by adaptation, not speed.
+    src: { page: 182, quote: "Patient adapts to hypoglycemia" }
+    status: unverified
+  - id: dm.L14.034
+    kind: mcq
+    topic: insulinoma
+    stem: Insulinoma is suspected biochemically. Which test does the lecture name to confirm hypoglycemia under controlled conditions?
+    options: [Prolonged fasting under hospital supervision, Oral glucose tolerance test, Tolbutamide test in preference to glucagon, HbA1C, Random insulin level at a normal glucose]
+    answer: 0
+    why:
+      - A supervised prolonged fast provokes hypoglycemia so insulin can be measured at that time.
+      - The OGTT tests for diabetes, not fasting hyperinsulinism.
+      - Glucagon is the better stimulation test.
+      - A1C does not diagnose insulinoma.
+      - Insulin must be measured at the time of hypoglycemia.
+    src: { page: 182, quote: "Prolonged fasting under hospital supervision" }
+    status: unverified
+  # ---------- p183: extra-pancreatic ----------
+  - id: dm.L14.035
+    kind: card
+    topic: other-tumors
+    front: Which extra-pancreatic tumors cause hypoglycemia, and what is the prognosis?
+    back: Rarely retroperitoneal sarcoma, hepatocellular carcinoma and adrenocortical carcinoma; the prognosis is poor.
+    src: { page: 183, quote: "Hypoglycemia due to an extra-pancreatic tumor" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p180: autoimmune ----------
+  - id: dm.L14.036
+    kind: enumerate
+    topic: autoimmune
+    prompt: Enumerate the forms of immunopathogenic hypoglycemia.
+    points:
+      - Idiopathic anti-insulin antibodies (release bound insulin)
+      - Antibodies to insulin receptors (agonist)
+      - Pentamidine-induced hypoglycemia
+    pass: 3
+    src: { page: 180, quote: "Idiopathic anti-insulin antibodies (release bound insulin)" }
+    status: unverified
+  - id: dm.L14.037
+    kind: card
+    topic: autoimmune
+    front: How do insulin-receptor antibodies cause hypoglycemia?
+    back: They act as agonists at the insulin receptor.
+    src: { page: 180, quote: "Antibodies to insulin receptors (agonist)" }
+    status: unverified
+  - id: dm.L14.038
+    kind: card
+    topic: autoimmune
+    front: How do idiopathic anti-insulin antibodies cause hypoglycemia?
+    back: They bind insulin and later release the bound insulin.
+    src: { page: 180, quote: "Idiopathic anti-insulin antibodies (release bound insulin)" }
+    status: unverified
+  # ---------- cases ----------
+  - id: dm.L14.039
+    kind: case
+    topic: insulinoma
+    stem: A 38-year-old man is brought by his wife for odd behavior and slurred speech on waking, twice after skipping dinner. He improves after sweet tea.
+    steps:
+      - question: Which triad do these features suggest?
+        options: [Whipple's triad, Charcot's triad, Virchow's triad, Beck's triad]
+        answer: 0
+        why: Hypoglycemic symptoms, low fasting glucose, and relief with glucose make Whipple's triad.
+      - question: Which test first, under hospital supervision?
+        options: [Prolonged fast, OGTT, Tolbutamide test, CT abdomen]
+        answer: 0
+        why: A supervised prolonged fast provokes the hypoglycemia so insulin can be measured.
+      - reveal: "At 22 hours: glucose 34 mg/dL, insulin high, C-peptide high, no insulin antibodies."
+        question: Diagnosis?
+        options: [Insulinoma, Factitious insulin, Anti-insulin antibodies, Adrenal insufficiency]
+        answer: 0
+        why: Elevated insulin at the time of hypoglycemia with high C-peptide means endogenous hyperinsulinism.
+      - question: Which imaging localizes it and shows liver metastases?
+        options: [MRI, Arteriography, Plain abdominal X-ray, Barium meal]
+        answer: 0
+        why: MRI localizes the B-cell tumor and hepatic metastases and is better than arteriography; EUS also helps.
+      - question: What is the definitive treatment?
+        options: [Surgery, Diazoxide for life, Octreotide alone, Frequent small meals]
+        answer: 0
+        why: Surgery comes first; diet, diazoxide with a diuretic, octreotide and streptozotocin are the other options.
+    src: { page: 182, quote: "Elevated insulin level at time of hypoglycemia" }
+    status: unverified
+  - id: dm.L14.040
+    kind: case
+    topic: reactive
+    stem: A 50-year-old had a partial gastrectomy for a bleeding ulcer. Now, 1-2 hours after meals, he gets sweating, palpitations and tremor.
+    steps:
+      - question: What type of hypoglycemia is this?
+        options: [Early (alimentary) postprandial, Late postprandial from occult DM, Fasting from insulinoma, Factitious]
+        answer: 0
+        why: After gastric surgery, rapid gastric emptying gives early (alimentary) reactive hypoglycemia.
+      - question: What is the mechanism?
+        options: [Rapid carbohydrate delivery and absorption with hyperinsulinism, Glycogen depletion, Insulin-receptor antibodies, Low cortisol]
+        answer: 0
+        why: Rapid discharge into the small bowel gives rapid absorption, then excess insulin.
+      - question: Treatment?
+        options: [Frequent small meals, Diazoxide 600 mg, Surgery, Glucagon at bedtime]
+        answer: 0
+        why: Frequent feeding with small meals.
+    src: { page: 183, quote: "Treatment: frequent feeding - small diet" }
+    status: unverified
+  # ---------- p184: book questions ----------
+  - id: dm.L14.041
+    kind: essay
+    topic: insulinoma
+    prompt: Discuss fasting hypoglycemic tumors.
+    outline:
+      - "Insulinoma: [90% benign single islet adenoma; multiple = malignant, Associated with MEN]"
+      - "Picture: [Subacute or chronic neuroglycopenia: blurred vision, diplopia, headache, slurred speech, weakness, personality change, coma, Early morning, missed meal or exercise; sweating and palpitation may be absent (unawareness)]"
+      - "Whipple's triad: [Hypoglycemic symptoms, FBG <40 mg/dL, Immediate relief with glucose]"
+      - "Diagnosis: [Elevated insulin at the time of hypoglycemia, Supervised prolonged fast; proinsulin; glucagon stimulation (better than tolbutamide); EUS, Localization: MRI (liver metastases), better than arteriography]"
+      - "Treatment: [Surgery, Diet, Diazoxide 300-600 + diuretic, Octreotide, Streptozotocin]"
+      - "Extra-pancreatic tumors: [Rare: retroperitoneal sarcoma, HCC, adrenocortical carcinoma, Poor prognosis]"
+    src: { page: 181, quote: "Hypoglycemia due to pancreatic B-cell tumor (Insulinoma)" }
+    status: unverified
+    tags: [book-question, high-yield]
+  - id: dm.L14.042
+    kind: essay
+    topic: insulinoma
+    prompt: Give a short account on octreotide.
+    outline:
+      - "What it is: [A long-acting somatostatin analogue, Suppresses secretion of insulin and other gut hormones]"
+      - "In this lecture: [One of the medical treatments of insulinoma (book spells it Octuritide), With surgery, diet, diazoxide 300-600 + diuretic therapy and streptozotocin]"
+      - "Elsewhere in the course: [Vasoactive drug in acute variceal bleeding (git.L11), Other uses: acromegaly and neuroendocrine tumors]"
+    src: { page: 183, quote: "Diazoxide 300-600 + diuretic therapy" }
+    status: unverified
+    tags: [book-question]
+  - id: dm.L14.043
+    kind: essay
+    topic: autoimmune
+    prompt: Give a short account on autoimmune hypoglycemia.
+    outline:
+      - "Place: [A cause of late postprandial hypoglycemia (immunopathogenic)]"
+      - "Forms: [Idiopathic anti-insulin antibodies: bind insulin and release it later, Insulin-receptor antibodies acting as agonists, Pentamidine-induced hypoglycemia]"
+      - "Contrast: [Factitious insulin use also gives insulin antibodies, but with suppressed C-peptide]"
+    src: { page: 180, quote: "Antibodies to insulin receptors (agonist)" }
+    status: unverified
+    tags: [book-question]

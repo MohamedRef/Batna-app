@@ -1,0 +1,1103 @@
+schema: batna.lesson/v1
+lecture: neph.L08
+lessons:
+  # ------------------------------------------------------------------
+  - id: neph.L08.lesson1
+    title: "إزاي تقرا renal biopsy"
+    hook: "الـ biopsy مش صورة واحدة: دي 4 compartments و3 ميكروسكوبات وكلمات ليها معنى بالمليمتر."
+    minutes: 10
+    pages: [198, 217]
+    topics: [approach, classification, histology]
+    goals:
+      - "تعرف خطوات قراءة الـ biopsy وتربطها بالـ presentation"
+      - "تحفظ التقسيم الـ pathogenetic الخماسي للـ GN والتقسيم الجديد للـ MPGN"
+      - "تفهم الكلمات: focal/diffuse، segmental/global، endo/extracapillary، crescent"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 199
+        title: "المحاضرة دي شكلها مختلف"
+        quote: "An algorithmic approach to renal biopsy interpretation of glomerular diseases."
+        text: |
+          المحاضرة دي كلها **cases** حقيقية من قسم الكلى في إسكندرية: عيان، labs، وبعدين **biopsy** بالـ LM والـ IH والـ EM، وسؤال «What is your diagnosis?».
+
+          علشان تحلها لازم الأول تعرف ==algorithmic approach== للـ biopsy: تبدأ بالـ **clinical data**، بعدين **light microscopy**، بعدين **immunohistology** و **electron microscopy**، وفي الآخر **integration** لكل حاجة مع بعض.
+
+          وتحذير الكتاب: ما تخليش اللي **expected based on clinical findings** يخليك تشوف حاجة مش موجودة في العينة. «It does happen!» زي ما تكون مستني صاحبك، فكل واحد لابس قميص أزرق تفتكره هو.
+      - kind: order
+        page: 199
+        quote: "An algorithmic approach to renal biopsy interpretation of glomerular diseases."
+        prompt: "رتّب خطوات قراءة الـ biopsy"
+        steps:
+          - "Preliminary review of clinical data"
+          - "Light microscopy"
+          - "Immunohistology and electron microscopy"
+          - "Integration of all pathological and clinical data"
+        why: "الكلينيك بيوجّه، الـ LM بيشوف الشكل، الـ IF والـ EM بيقولوا الـ deposits فين ونوعها إيه، والـ integration بيقفل التشخيص."
+      - kind: explain
+        page: 199
+        title: "6 presentations"
+        quote: "Clinical presentations of different glomerular diseases Asymptomatic. Macroscopic hematuria. Nephritic syndrome. Nephrotic syndrome. RPGN. Chronic GN."
+        text: |
+          الـ glomerular disease بييجي بواحدة من ستة: **asymptomatic**، **macroscopic hematuria**، **nephritic**، **nephrotic**، **RPGN**، و **chronic GN**.
+
+          الـ ==nephrotic== = protein بيهرب من **podocyte** متعوّر (غالبًا من غير التهاب). الـ ==nephritic== = التهاب و cells بتكسّر الـ capillary، فـ **RBCs** بتنزل.
+      - kind: sort
+        page: 200
+        quote: "Diseases typically causing nephrotic syndrome Focal segmental glomerulosclerosis (all variants). Idiopathic membranous glomerulopathy. Minimal change glomerulopathy."
+        prompt: "Nephrotic ولا nephritic؟ (حسب لستة الكتاب)"
+        bins: ["Nephrotic syndrome", "Hematuria and nephritis"]
+        cards:
+          - { text: "Minimal change glomerulopathy", bin: 0 }
+          - { text: "Idiopathic membranous", bin: 0 }
+          - { text: "Amyloidosis", bin: 0 }
+          - { text: "Diabetic glomerulosclerosis", bin: 0 }
+          - { text: "IgA nephropathy", bin: 1 }
+          - { text: "Postinfectious GN", bin: 1 }
+          - { text: "Alport syndrome", bin: 1 }
+          - { text: "Thin basement membrane lesion", bin: 1 }
+        why: "الأمراض اللي بتضرب الـ **podocyte** أو تملا الـ membrane بـ deposits (MCD، membranous، amyloid، diabetes) = nephrotic. الأمراض اللي فيها التهاب أو GBM ضعيف (IgA، PIGN، Alport، thin BM) = hematuria و nephritis."
+      - kind: explain
+        page: 201
+        title: "أمراض مش GN بس بتعمل failure"
+        quote: "Diseases other than GN that typically cause ARF Thrombotic microangiopathy (all types). Acute tubulointerstitial nephritis. Acute tubular necrosis."
+        text: |
+          **ARF** من غير GN: **TMA** بكل أنواعه، **acute TIN**، **ATN**، **atheroembolization**، ==light chain cast nephropathy==، و **cortical necrosis**.
+
+          **CRF** من غير GN: **arterionephrosclerosis**، **chronic sclerosing GN**، **ESRD NOS**، و **chronic TIN**.
+      - kind: mnemonic
+        page: 201
+        quote: "Pathogenetic classification of GN 1. Immune- complex GN. 2. Pauci-immune GN. 3. Anti-GBM GN. 4. Monoclonal Ig GN. 5. C3 glomerulo-pathy."
+        word: "IPAMC"
+        parts:
+          - { key: "I", text: "Immune-complex GN: IgA, lupus, infection-related" }
+          - { key: "P", text: "Pauci-immune GN: MPO-ANCA, PR3-ANCA, ANCA-negative" }
+          - { key: "A", text: "Anti-GBM GN" }
+          - { key: "M", text: "Monoclonal Ig GN: MIDD, immunotactoid" }
+          - { key: "C", text: "C3 glomerulopathy" }
+        hook: "«I Pay A Monthly Check»: خمس أنواع للـ GN حسب السبب، مش حسب الشكل."
+      - kind: explain
+        page: 202
+        title: "كل نوع وليه score"
+        quote: "Oxford/MEST scores for IgA nephropathy & ISN/RPS class for lupus nephritis"
+        text: |
+          - **IgA nephropathy** ← ==Oxford/MEST== score
+          - **Lupus nephritis** ← ==ISN/RPS== class
+          - **Pauci-immune GN** ← **Berden/EUVAS** class: focal، crescentic، mixed، أو sclerosing
+
+          ولاحظ إن الـ **fibrillary GN** ممكن يبقى immune-complex (polyclonal Ig) أو monoclonal Ig GN.
+      - kind: figure
+        page: 203
+        quote: "New classification of membranoproliferative GN MPGN Positive lIgGs+C3 Negative IgGs+ C,"
+        title: "التقسيم الجديد للـ MPGN"
+        alt: "Tree: MPGN splits by immunofluorescence. IgG plus C3 positive means immunoglobulin-mediated MPGN, from monoclonal gammopathies, autoimmune diseases or infections. IgG negative with C3 means complement-mediated MPGN, the C3 glomerulopathies: dense deposit disease and C3 GN."
+        caption: "الـ IF هو اللي بيقسم: ==IgG + C3== = Ig-mediated، و **C3 لوحده** = complement-mediated (C3 glomerulopathy)."
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="N8a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker></defs>
+            <rect x="115" y="8" width="100" height="34" rx="8" class="fg-ink"/>
+            <text x="165" y="30" text-anchor="middle" class="t-b">MPGN</text>
+            <path d="M140 42 L80 72" class="fg-arrow" marker-end="url(#N8a)"/>
+            <path d="M190 42 L250 72" class="fg-arrow" marker-end="url(#N8a)"/>
+            <rect x="10" y="76" width="145" height="50" rx="8" class="fg-acc"/>
+            <text x="82" y="96" text-anchor="middle" class="t-b">IgG + C3</text>
+            <text x="82" y="114" text-anchor="middle" class="t-sm">Ig-mediated</text>
+            <rect x="175" y="76" width="145" height="50" rx="8" class="fg-bad"/>
+            <text x="247" y="96" text-anchor="middle" class="t-b">C3 only</text>
+            <text x="247" y="114" text-anchor="middle" class="t-sm">complement-mediated</text>
+            <path d="M82 126v20" class="fg-arrow" marker-end="url(#N8a)"/>
+            <path d="M247 126v20" class="fg-arrow" marker-end="url(#N8a)"/>
+            <rect x="10" y="150" width="145" height="90" rx="8" class="fg-box"/>
+            <text x="82" y="174" text-anchor="middle" class="t-sm">Monoclonal gammopathy</text>
+            <text x="82" y="196" text-anchor="middle" class="t-sm">Autoimmune disease</text>
+            <text x="82" y="218" text-anchor="middle" class="t-sm">Infection</text>
+            <rect x="175" y="150" width="145" height="90" rx="8" class="fg-box"/>
+            <text x="247" y="174" text-anchor="middle" class="t-sm t-b">C3 glomerulopathy</text>
+            <text x="247" y="196" text-anchor="middle" class="t-sm">Dense deposit disease</text>
+            <text x="247" y="218" text-anchor="middle" class="t-sm">C3 GN</text>
+          </svg>
+      - kind: explain
+        page: 203
+        title: "4 compartments"
+        quote: "Glomeruli Evaluated ussue compartments iN Interstitium Q Arteries & arterioles"
+        text: |
+          أي biopsy بيتقرا على أربع حاجات: ==glomeruli==، **tubules**، **interstitium**، و **arteries & arterioles**.
+
+          علشان كده التقرير دايمًا بيقول «Tubules showed… Interstitium showed… Arteries…». والـ **filtration barrier** نفسه 3 طبقات: **fenestrated endothelium**، **GBM**، و **podocyte foot processes**.
+      - kind: table
+        page: 212
+        quote: "Focal Involving <50% of glomeruli. Diffuse Involving 50% or more of glomeruli."
+        title: "قاموس الـ biopsy"
+        columns: [Term, Meaning]
+        rows:
+          - ["Focal", "< 50% of glomeruli"]
+          - ["Diffuse", "≥ 50% of glomeruli"]
+          - ["Segmental", "Part of one tuft"]
+          - ["Global", "All of the tuft"]
+          - ["Mesangial hypercellularity", "≥ 4 nuclei in a peripheral mesangial segment"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+      - kind: figure
+        page: 213
+        quote: "Segmental Involving part of a glomerular tuft. Global Involving all of a glomerular tuft."
+        title: "Focal/diffuse = عدد الـ glomeruli، segmental/global = جوّه الـ glomerulus"
+        alt: "Two rows of four glomerulus circles. Top row: one of four glomeruli is shaded, labelled focal. Bottom row: three of four are shaded, labelled diffuse. Beside them, one glomerulus half shaded labelled segmental and one fully shaded labelled global."
+        caption: "**Focal/diffuse** بتعد الـ glomeruli، و **segmental/global** بتبص جوّه الواحد. الاتنين مع بعض: «==focal segmental==»."
+        svg: |
+          <svg viewBox="0 0 330 230" xmlns="http://www.w3.org/2000/svg">
+            <text x="10" y="20" class="t-b t-sm">Focal (&lt;50%)</text>
+            <circle cx="30" cy="50" r="18" class="fg-bad"/><circle cx="75" cy="50" r="18" class="fg-box"/><circle cx="120" cy="50" r="18" class="fg-box"/><circle cx="165" cy="50" r="18" class="fg-box"/>
+            <text x="10" y="100" class="t-b t-sm">Diffuse (≥50%)</text>
+            <circle cx="30" cy="130" r="18" class="fg-bad"/><circle cx="75" cy="130" r="18" class="fg-bad"/><circle cx="120" cy="130" r="18" class="fg-bad"/><circle cx="165" cy="130" r="18" class="fg-box"/>
+            <line x1="205" y1="10" x2="205" y2="220" class="fg-thin"/>
+            <circle cx="265" cy="55" r="26" class="fg-box"/>
+            <path d="M265 29 A26 26 0 0 1 291 55 L265 55 Z" class="fg-dot-bad"/>
+            <text x="265" y="100" text-anchor="middle" class="t-sm t-b">Segmental</text>
+            <circle cx="265" cy="150" r="26" class="fg-dot-bad"/>
+            <text x="265" y="195" text-anchor="middle" class="t-sm t-b">Global</text>
+            <text x="100" y="185" text-anchor="middle" class="t-sm t-mut">count glomeruli</text>
+            <text x="265" y="215" text-anchor="middle" class="t-sm t-mut">look inside one</text>
+          </svg>
+      - kind: explain
+        page: 215
+        title: "جوّه ولا برّه الـ GBM؟"
+        quote: "Increased cellularity internal to the GBM composed of leukocytes, endothelial cells and/or mesangial cells."
+        text: |
+          - ==Endocapillary hypercellularity==: cells زيادة **جوّه** الـ GBM (leukocytes، endothelial، mesangial).
+          - **Extracapillary hypercellularity**: أكتر من طبقة cells في **Bowman's space** (parietal أو visceral epithelium، أو macrophages).
+          - ==Crescent==: extracapillary hypercellularity، **ما عدا** الـ epithelial hyperplasia بتاعة الـ collapsing FSGS.
+          - **Fibrinoid necrosis**: تدمير cells و matrix مع fibrin-rich acidophilic material.
+      - kind: figure
+        page: 216
+        title: "شكل الـ crescent"
+        image: { file: neph/L08-crescent.webp, book: true }
+        alt: "H&E photomicrograph: a crescent of epithelial and inflammatory cells (outlined in yellow) fills Bowman's space around a collapsed glomerular tuft; arrows mark Bowman's capsule and the internal edge of the crescent."
+        caption: "من الكتاب: tuft **collapsed** في النص، و ==crescent== من epithelial و mononuclear cells جوّه Bowman's capsule، وبينهم مسافة فاضية."
+      - kind: explain
+        page: 217
+        title: "باقي القاموس"
+        quote: "Combined capillary wall thickening and mesangial or endocapillary hypercellularity."
+        text: |
+          - **Sclerosis**: collagen matrix زيادة بيوسّع الـ mesangium أو يسد الـ capillaries أو يعمل adhesions لـ Bowman's capsule.
+          - **Hyaline**: مادة **glassy acidophilic** برّه الخلايا.
+          - ==Membranoproliferative==: **capillary wall thickening** + mesangial أو endocapillary hypercellularity.
+          - **Lobular**: segments منتفخة ومفصولة بـ urinary space.
+          - **Mesangiolysis**: الـ GBM ينفصل عن الـ mesangial matrix أو الـ matrix يتحلل.
+      - kind: check
+        page: 212
+        quote: "Focal Involving <50% of glomeruli. Diffuse Involving 50% or more of glomeruli."
+        question: "Crescents in 6 of 21 glomeruli, each involving part of the tuft. Describe it."
+        options:
+          - "Focal and segmental"
+          - "Diffuse and global"
+          - "Focal and global"
+          - "Diffuse and segmental"
+        answer: 0
+        why:
+          - "صح: 6 من 21 أقل من 50% (focal)، وجزء من الـ tuft (segmental)."
+          - "Diffuse محتاج ≥50%، و global محتاج الـ tuft كله."
+          - "Focal صح، بس الـ lesion في جزء من الـ tuft مش كله."
+          - "أقل من نص الـ glomeruli، فمش diffuse."
+      - kind: try
+        items: [neph.L08.001, neph.L08.011, neph.L08.016, neph.L08.022, neph.L08.027]
+    recap:
+      - "اقرا الكلينيك، بعدين LM، بعدين IH و EM، وبعدين integrate."
+      - "خمس أنواع GN: immune-complex، pauci-immune، anti-GBM، monoclonal Ig، C3."
+      - "Focal/diffuse = عدد الـ glomeruli (50%)، segmental/global = جوّه الـ tuft."
+      - "الـ crescent = extracapillary hypercellularity في Bowman's space."
+    practice: [neph.L08.001, neph.L08.002, neph.L08.003, neph.L08.004, neph.L08.005, neph.L08.006, neph.L08.007, neph.L08.008, neph.L08.009, neph.L08.010, neph.L08.011, neph.L08.012, neph.L08.013, neph.L08.014, neph.L08.015, neph.L08.016, neph.L08.017, neph.L08.018, neph.L08.019, neph.L08.020, neph.L08.022, neph.L08.023, neph.L08.024, neph.L08.025, neph.L08.026, neph.L08.027, neph.L08.028, neph.L08.029, neph.L08.030, neph.L08.031, neph.L08.032, neph.L08.033, neph.L08.034, neph.L08.035, neph.L08.036]
+  # ------------------------------------------------------------------
+  - id: neph.L08.lesson2
+    title: "النور الأخضر و case 1: الـ minimal change"
+    hook: "أم لتوأم، edema لحد البطن، والـ LM طبيعي تمامًا. الـ EM بس هو اللي هيتكلم."
+    minutes: 10
+    pages: [218, 226]
+    topics: [if-em, mcd]
+    goals:
+      - "تقرا أشكال الـ IF الأساسية"
+      - "تعرف أماكن الـ deposits في الـ EM"
+      - "تحل case 1 وتعرف الـ DD والـ proteinuria"
+    status: unverified
+    steps:
+      - kind: figure
+        page: 218
+        title: "أشكال الـ immunofluorescence"
+        image: { file: neph/L08-if-patterns.webp, book: true }
+        alt: "Eight immunofluorescence panels: mesangial IgA, mesangial and capillary wall IgG, peripheral granular C3 in type I MPGN, band-like C3 in type II MPGN, coarse granular C3 in post-infectious GN, fine granular IgG in membranous, linear IgG in anti-GBM and chunky IgG in fibrillary GN."
+        caption: "من الكتاب: 8 أشكال للـ IF. أهمها: ==linear== = anti-GBM، **fine granular** على الـ capillary wall = membranous، **mesangial IgA** = IgA nephropathy."
+      - kind: match
+        page: 220
+        quote: "Subepithelial hump-like electron dense deposits (postinfectious GN)"
+        prompt: "وصّل الـ pattern بالمرض"
+        pairs:
+          - ["Linear GBM IgG", "Anti-GBM GN"]
+          - ["Finely granular capillary wall IgG", "Membranous"]
+          - ["Mesangial IgA", "IgA nephropathy"]
+          - ["Subepithelial humps on EM", "Postinfectious GN"]
+          - ["Subendothelial deposits + mesangial interposition", "Type I MPGN"]
+        why: "الـ IF بيقولك **إيه** الـ antibody وشكلها، والـ EM بيقولك **فين** بالظبط: mesangial، subendothelial، ولا subepithelial."
+      - kind: aside
+        tone: analogy
+        page: 220
+        quote: "Subendothelial dense deposits with mesangial interposition (type I MPGN)"
+        text: |
+          تخيّل الـ GBM حيطة بين أوضتين: الـ **endothelium** من جوّه (ناحية الدم) والـ **podocyte** من برّه (ناحية البول).
+
+          - **Subendothelial** = تحت الدهان من جوّه، قريب من الدم، فبيجيب ==inflammation== (nephritic): lupus III/IV، MPGN.
+          - **Subepithelial** = على الحيطة من برّه، بعيد عن الدم، فبيضرب الـ podocyte ويعمل ==proteinuria==: membranous، والـ humps بتاعة PIGN.
+      - kind: explain
+        page: 221
+        title: "Case 1"
+        quote: "Presenting with bilateral L.L edema (3+), with severe abdominal distension (Hard edema) 40 days after giving birth to her baby twins."
+        text: |
+          ست عندها **28 سنة**، ولدت **توأم** من 40 يوم، وجاية بـ **bilateral LL edema 3+** وبطن منفوخة جامد.
+
+          - **Creatinine 0.6**، ==uPCR 13.4== mg/mg، **albumin 2.4**
+          - Cholesterol 389، TGs 457
+          - **C3 179** (طبيعي)، **ANA** و virology سلبي
+      - kind: check
+        page: 223
+        quote: "2.0 to 4.0 g Usually glomerular > 4.0 g Always glomerular"
+        question: "Her proteinuria is about 13 g/day. What does the amount alone tell you?"
+        options:
+          - "It is always glomerular"
+          - "It may be tubular"
+          - "It may be overflow"
+          - "It is usually glomerular, not always"
+        answer: 0
+        why:
+          - "صح: أكتر من 4 g/day = ==always glomerular==."
+          - "الـ tubular proteinuria في مدى 0.15–2 g بس."
+          - "الـ overflow برضه في مدى 0.15–2 g."
+          - "«Usually glomerular» ده مدى 2–4 g."
+      - kind: table
+        page: 222
+        quote: "Overflow Increased production of low- molecular-weight proteins. Monoclonal gammopathy, leukaemia."
+        title: "الـ proteinuria جاية منين؟"
+        columns: [Type, Mechanism, Cause]
+        rows:
+          - ["Glomerular", "↑ capillary permeability", "Primary or secondary glomerulopathy"]
+          - ["Tubular", "↓ tubular reabsorption", "Tubular or interstitial disease"]
+          - ["Overflow", "↑ low-MW proteins made", "Monoclonal gammopathy, leukaemia"]
+        hide: [[0, 1], [1, 1], [2, 2]]
+      - kind: explain
+        page: 222
+        title: "الـ DD في جدول واحد: بُص على الـ C3"
+        quote: "Differential diagnosis of nephrotic syndrome"
+        text: |
+          في جدول الـ **differential diagnosis of nephrotic syndrome**، الـ ==C3 الواطي== بيطلع في 3 بس: **MPGN**، **PSGN**، و **lupus nephritis**. الباقي (MCNS، FSGS، membranous، HSP، IgA) C3 طبيعي.
+
+          وعيانتنا الـ C3 بتاعها 179، يعني نشيل التلاتة دول.
+      - kind: explain
+        page: 222
+        title: "ولو جالها AKI كمان؟"
+        quote: "Acute allergic interstitial nephritis secondary to use of various drugs, including diuretics Acute tubular necrosis caused by volume depletion or sepsis."
+        text: |
+          الـ DD لـ **AKI فوق nephrotic syndrome**:
+          - **Acute allergic interstitial nephritis** من أدوية، حتى الـ ==diuretics==
+          - **ATN** من volume depletion أو sepsis
+          - Adverse drug effects، و **intrarenal edema**
+          - **Prerenal** من volume depletion
+          - ==Renal vein thrombosis==
+          - **Transformation** للمرض نفسه (crescentic GN فوق membranous)
+      - kind: explain
+        page: 224
+        title: "الـ biopsy"
+        quote: "podocytes showed injury with cytoplasmic microvillous transformation as well as diffuse effacement of their foot processes."
+        text: |
+          - **LM**: 9 glomeruli ==within normal limits==، tubules فيها mild injury، و foamy histiocytes في الـ interstitium.
+          - **IH**: IgA و IgG و IgM و C4d كلهم negative.
+          - **EM**: ==diffuse effacement== للـ foot processes مع microvillous transformation، و **مفيش deposits**.
+      - kind: reveal
+        page: 225
+        quote: "What is your diagnosis? Minimal change disease"
+        prompt: "LM طبيعي، IF سلبي، و EM فيه diffuse foot-process effacement. التشخيص؟"
+        answer: "**Minimal change disease**. الـ LM «minimal» لأنه شبه طبيعي، والمرض كله في الـ podocyte اللي ما بيبانش غير بالـ EM."
+      - kind: mnemonic
+        page: 226
+        quote: "Categorization of secondary MCD Neoplasia (19) Drugs (24) Infections (7) Atopy (6)"
+        word: "DNAIS"
+        parts:
+          - { key: "D", text: "Drugs (24): أكبر مجموعة" }
+          - { key: "N", text: "Neoplasia (19)" }
+          - { key: "A", text: "Atopy (6)" }
+          - { key: "I", text: "Infections (7)" }
+          - { key: "S", text: "Superimposed on another renal disease (5)" }
+        hook: "الـ secondary MCD «DNAIS»، زي الـ DNA بس فيه S زيادة. والـ miscellaneous (15) مستخبّي في الآخر."
+      - kind: try
+        items: [neph.L08.037, neph.L08.050, neph.L08.046, neph.L08.209]
+    recap:
+      - "Linear = anti-GBM، fine granular IgG = membranous، mesangial IgA = IgA nephropathy."
+      - "Subendothelial = inflammation، subepithelial = proteinuria."
+      - "> 4 g/day = always glomerular."
+      - "MCD = normal LM + negative IF + diffuse effacement على الـ EM."
+    practice: [neph.L08.021, neph.L08.037, neph.L08.038, neph.L08.039, neph.L08.040, neph.L08.041, neph.L08.042, neph.L08.043, neph.L08.044, neph.L08.045, neph.L08.046, neph.L08.047, neph.L08.048, neph.L08.049, neph.L08.050, neph.L08.051, neph.L08.052, neph.L08.053, neph.L08.054, neph.L08.055, neph.L08.056, neph.L08.057, neph.L08.058, neph.L08.059, neph.L08.209]
+  # ------------------------------------------------------------------
+  - id: neph.L08.lesson3
+    title: "Lupus و membranous: الـ deposits بتتكلم"
+    hook: "بنت 14 سنة بـ creatinine 7، وبنت 22 سنة الـ anti-PLA2R بتاعها سلبي بس الـ biopsy بيقول غير كده."
+    minutes: 10
+    pages: [226, 239]
+    topics: [lupus, membranous]
+    goals:
+      - "تحفظ classes الـ ISN/RPS"
+      - "تفهم أهمية الـ anti-PLA2R في التشخيص والمتابعة"
+      - "تفرّق الـ spikes من الـ double contour"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 227
+        title: "Case 2"
+        quote: "S.L.E was diagnosed, and cellcept and hydroquine were started."
+        text: |
+          بنت **14 سنة** بتاخد **NSAIDs** لركبتها، جاية بـ fatigue و vomiting، **Hb 5.8**، **WBC 2.6**، و ==creatinine 7.3==.
+
+          الـ labs: **anti-dsDNA 321**، ANA 7.9، urine فيها 80 RBC، **uPCR 6.7**، ESR 140. اتشخّصت ==SLE== وبدأت **CellCept** و **hydroxychloroquine**.
+      - kind: reveal
+        page: 227
+        quote: "In your opinion, should we proceed to a renal biopsy? Why?"
+        prompt: "التشخيص اتعمل. نعمل biopsy ليه؟"
+        answer: "علشان الـ **class** هو اللي بيحدد العلاج، والـ biopsy بيوري **activity** و **chronicity**، وممكن يكشف حاجة تانية؛ وفعلًا لقى **toxic acute tubular injury** (غالبًا من الـ NSAIDs)."
+      - kind: table
+        page: 228
+        quote: "Abbreviated International Society of Nephrology/Renal Pathology Society (ISN/RPS) classification of lupus nephritis (2003)"
+        title: "ISN/RPS 2003"
+        columns: [Class, Name, Key]
+        rows:
+          - ["I", "Minimal mesangial", "Normal LM, mesangial deposits on IF"]
+          - ["II", "Mesangial proliferative", "Mesangial hypercellularity on LM"]
+          - ["III", "Focal", "< 50% of glomeruli"]
+          - ["IV", "Diffuse", "≥ 50% of glomeruli (IV-S / IV-G)"]
+          - ["V", "Membranous", "Subepithelial deposits"]
+          - ["VI", "Advanced sclerosing", "≥ 90% globally sclerosed"]
+        hide: [[2, 2], [3, 2], [4, 2], [5, 2]]
+      - kind: update
+        page: 228
+        quote: "Abbreviated International Society of Nephrology/Renal Pathology Society (ISN/RPS) classification of lupus nephritis (2003)"
+        text: "الـ revision بتاع 2018 شال الـ A و C و A/C والتقسيم IV-S/IV-G، وحط بدالهم **modified NIH activity and chronicity indices**. في الامتحان: إجابة الكتاب (2003)."
+        ref: "Bajema et al., revised ISN/RPS lupus nephritis classification, Kidney Int 2018"
+      - kind: aside
+        tone: exam
+        page: 228
+        quote: "Class V lupus nephritis may occur in combination with class Ill or IV in which case both will be diagnosed."
+        text: |
+          نقط بيحبوها:
+          - **Wire loops** من غير proliferation = برضه ==class IV==.
+          - **Class V** ممكن تيجي مع III أو IV، وساعتها **الاتنين** يتكتبوا.
+          - **IV-S** لو ≥50% من الـ involved glomeruli segmental، و **IV-G** لو global.
+      - kind: check
+        page: 230
+        quote: "Lupus Glomerulonephritis Class III, with Moderate Activity (10% Fibrinoid Necrosis, 30% Crescents) and Early Chronicity (5% Global Sclerosis)."
+        question: "Case 2 biopsy: subendothelial deposits and intracapillary leucocytes in 6 of 21 glomeruli, small crescents in 6. Class?"
+        options:
+          - "Class III"
+          - "Class IV-S"
+          - "Class II"
+          - "Class V"
+        answer: 0
+        why:
+          - "صح: endocapillary lesions و subendothelial deposits في أقل من 50% = ==class III== مع moderate activity."
+          - "IV محتاج ≥50% من الـ glomeruli."
+          - "Class II mesangial بس، من غير endocapillary lesions."
+          - "Class V = subepithelial deposits."
+      - kind: explain
+        page: 234
+        title: "Case 3: membranous"
+        quote: "Primary Membranous Glomerulonephritis; Antiphospholipase Type 2 Receptor (aPLA2R) Associated."
+        text: |
+          بنت **22 سنة** بـ nephrotic syndrome، albumin 2.1، **serum anti-PLA2R سلبي**، و Doppler بيسأل عن **RVT**.
+
+          الـ biopsy: **GBM thickening**، و ==IgG 3+== على الـ GBM، و **PLA2R** في الـ tissue موجب، و subepithelial deposits على الـ EM.
+
+          التشخيص: ==primary membranous GN, anti-PLA2R associated==، ومعاه secondary FSGS و 30% IFTA.
+      - kind: reveal
+        page: 236
+        quote: "Anti-PLA2R (−) PLA2R (+) PLA2R-mediated PMN (inactive)"
+        prompt: "الـ serum anti-PLA2R سلبي والـ tissue PLA2R موجب. إزاي؟"
+        answer: "ده **PLA2R-mediated PMN, inactive**. الـ antibody بيختفي من الدم الأول، والـ glomerular staining يفضل موجب **أسابيع لشهور**."
+      - kind: explain
+        page: 235
+        title: "الـ anti-PLA2R: تشخيص ومتابعة"
+        quote: "Anti-PLA2R antibody is about 80% sensitive and 100% specific for PMN"
+        text: |
+          - **70–80%** من الـ primary MN عندهم anti-PLA2R/THSD7A.
+          - ==80% sensitive و 100% specific==.
+          - ممكن يطلع **قبل الـ proteinuria بشهور**.
+          - العالي = محتاج **immunosuppression أطول**، والعالي بعد العلاج = ==relapse==.
+          - العالي وقت الـ transplant = **recurrence**.
+          - **Immunologic remission** قبل **renal remission** بأسابيع لشهور.
+      - kind: aside
+        tone: analogy
+        page: 236
+        quote: "Disappearance of anti-PLA2R antibodies (immunologic remission) precedes renal remission (disappearance of proteinuria) by weeks to months."
+        text: |
+          الـ anti-PLA2R زي **الدخان**، والـ proteinuria زي **الحريقة**. الدخان بيطلع قبل ما تشوف النار، وبيروح قبل ما الرماد يبرد.
+
+          فلو الـ antibody راح، استنّى: الـ proteinuria هتنزل بعده بأسابيع لشهور.
+      - kind: explain
+        page: 235
+        title: "Secondary MN"
+        quote: "Causes of membranous GN Infections. Malignancy (20% in patients >57, 4%<57). Autoimmune diseases. Alloimmune diseases. Drugs/toxins."
+        text: |
+          الأسباب: **infections**، **malignancy**، **autoimmune**، **alloimmune**، و **drugs/toxins**.
+
+          والرقم المهم: الـ malignancy بتعمل ==20%== من الـ MN فوق **57 سنة**، و **4%** تحتها. علشان كده الكبير بـ MN لازم تدوّر على tumour.
+      - kind: figure
+        page: 237
+        title: "الـ spikes"
+        image: { file: neph/L08-membranous-spikes.webp, book: true }
+        alt: "Silver stain at high power: black glomerular basement membranes with small perpendicular projections on their outer side (arrows), labelled subepithelial deposits."
+        caption: "من الكتاب: الـ GBM بيطلع ==spikes== عموديين من برّه حوالين الـ subepithelial deposits. ده الـ membranous."
+      - kind: figure
+        page: 238
+        quote: "The double contour forms due to synthesis of basement-membrane-like material between the endothelial cells and the deposits."
+        title: "الـ double contour"
+        image: { file: neph/L08-mpgn-tram-track.webp, book: true }
+        alt: "Methenamine-silver stain: a hypercellular glomerulus with capillary walls showing two parallel black lines (arrows), labelled double contour, tram tracking."
+        caption: "من الكتاب: ==tram-tracking==. الـ endothelium بيبني GBM جديد **تحت** الـ subendothelial deposits، فيبان خطين. Classic في MPGN type I و III."
+      - kind: sort
+        page: 239
+        quote: "They can be also seen in lupus nephritis, cryoglobulinemia and some diseases in which subendothelial immune deposits are not demonstrated like TMA"
+        prompt: "الـ double contour هنا جاي مع immune deposits ولا من غيرها؟"
+        bins: ["With subendothelial immune deposits", "Without immune deposits"]
+        cards:
+          - { text: "Type I MPGN", bin: 0 }
+          - { text: "Lupus nephritis", bin: 0 }
+          - { text: "Cryoglobulinemia", bin: 0 }
+          - { text: "TMA", bin: 1 }
+          - { text: "Chronic transplant glomerulopathy", bin: 1 }
+        why: "في الـ **TMA** والـ **transplant glomerulopathy** الـ endothelium هو اللي اتعوّر، فبيبني GBM جديد من غير ما يكون فيه deposits."
+      - kind: try
+        items: [neph.L08.063, neph.L08.089, neph.L08.077, neph.L08.095, neph.L08.097]
+    recap:
+      - "III < 50%، IV ≥ 50%، VI ≥ 90% sclerosed؛ V ممكن تيجي مع III أو IV."
+      - "Anti-PLA2R: 80% sensitive، 100% specific؛ serum سلبي + tissue موجب = inactive."
+      - "Malignancy في MN: 20% فوق 57 سنة."
+      - "Spikes = subepithelial (membranous)، double contour = subendothelial أو endothelial injury."
+    practice: [neph.L08.060, neph.L08.061, neph.L08.062, neph.L08.063, neph.L08.064, neph.L08.065, neph.L08.066, neph.L08.067, neph.L08.068, neph.L08.069, neph.L08.070, neph.L08.071, neph.L08.072, neph.L08.073, neph.L08.074, neph.L08.075, neph.L08.076, neph.L08.077, neph.L08.078, neph.L08.079, neph.L08.080, neph.L08.081, neph.L08.082, neph.L08.083, neph.L08.084, neph.L08.085, neph.L08.086, neph.L08.087, neph.L08.088, neph.L08.089, neph.L08.090, neph.L08.091, neph.L08.092, neph.L08.093, neph.L08.094, neph.L08.095, neph.L08.096, neph.L08.097, neph.L08.098, neph.L08.210]
+  # ------------------------------------------------------------------
+  - id: neph.L08.lesson4
+    title: "FSGS و TMA والسكر"
+    hook: "خمس أشكال للـ FSGS، واحد منهم أحسن prognosis وواحد أسوأ. وحاجة اسمها onion-skin."
+    minutes: 10
+    pages: [239, 249]
+    topics: [fsgs, tma, diabetic]
+    goals:
+      - "تعرف الـ 5 variants للـ FSGS وأسبابه وعلاجه"
+      - "تقسّم الـ TMA primary و secondary وتفرّق TTP من HUS"
+      - "تتعرف على الـ advanced diabetic nodular sclerosis"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 239
+        title: "الـ GBM: رفيع ولا تخين؟"
+        quote: "Diffuse thinning of the GBM: Type IV collagen Irregularity and multilayering nephropathy or splitting of the GBM"
+        text: |
+          - **Diffuse thinning** = ==thin basement membrane disease==
+          - **Irregularity و multilayering (splitting)** = ==Alport syndrome==
+          - الاتنين **type IV collagen nephropathy**.
+          - **Diffuse thickening** = diabetes و hypertension.
+      - kind: explain
+        page: 241
+        title: "Case 4"
+        quote: "FSGS; Not Otherwise Specified (NOS; Classic Variant)"
+        text: |
+          ست **52 سنة**، uPCR **1.13**، albumin 3.6، creatinine 0.56. الـ biopsy: 2 من 16 glomeruli فيهم **segmental tuft sclerosis** و capsular adhesions **في أي حتة في الـ tuft**، والـ IF سلبي، والـ Congo red سلبي.
+
+          التشخيص: ==FSGS NOS (classic variant)==، وده **أشهر** نوع.
+      - kind: table
+        page: 242
+        quote: "Focal segmental glomerulosclerosis (Types)"
+        title: "Focal segmental glomerulosclerosis: 5 types"
+        columns: [Variant, Where / what, Clinical]
+        rows:
+          - ["NOS", "Anywhere; no other variant", "Most common"]
+          - ["Perihilar", "Vascular pole hyalinosis", "Adaptive; subnephrotic, normal albumin"]
+          - ["Cellular", "Endocapillary foam cells", "Least common; early stage"]
+          - ["Tip", "Tubular pole", "Best prognosis"]
+          - ["Collapsing", "Tuft collapse, podocyte hyperplasia", "Worst prognosis"]
+        hide: [[0, 2], [2, 2], [3, 2], [4, 2]]
+      - kind: mnemonic
+        page: 242
+        quote: "Best prognosis, with high- est rate of responsivity to glucocorticoids and lowest risk of progres- sion."
+        word: "TOP"
+        parts:
+          - { key: "T", text: "Tip = Top prognosis (أحسن واحد)" }
+          - { key: "O", text: "Opposite end (tubular pole)" }
+          - { key: "P", text: "Prednisolone-responsive" }
+        hook: "الـ **Tip** فوق الكل، والـ **Collapsing** بيـ«ينهار» زي اسمه: worst prognosis."
+      - kind: reveal
+        page: 242
+        quote: "Predisposition for vascular pole is probably due to normally increased filtration pressures at the proximal afferent end"
+        prompt: "ليه الـ adaptive FSGS بيختار الـ vascular pole؟"
+        answer: "لأن الضغط أعلى طبيعيًا عند **الـ afferent end** للـ capillary bed، وبيزيد أكتر مع الـ **compensatory hyperfiltration** و الـ afferent vasodilatation. والـ tip lesion عند الـ tubular pole علشان الـ protein-rich filtrate بيتجمّع هناك ويعمل **shear stress**."
+      - kind: explain
+        page: 243
+        title: "الأسباب"
+        quote: "Primary (idiopathic) form Specific cause unknown; mediated by circulating permeability factors"
+        text: |
+          - **Primary**: ==circulating permeability factors==
+          - **Genetic**: podocyte gene mutations
+          - **Viruses**: HIV-1، parvovirus B19، SV40، CMV، EBV
+          - **Drugs**: heroin، interferons، lithium، pamidronate، sirolimus، CNI، anabolic steroids
+          - **Adaptive**: reduced renal mass (agenesis، reflux، allograft، aging) أو normal mass (HTN، obesity، bodybuilding، sickle cell)
+      - kind: check
+        page: 242
+        quote: "In adaptive FSGS, patients are more likely to pre- sent with subnephrotic proteinuria and normal serum albumin levels."
+        question: "A bodybuilder has 2 g/day proteinuria with normal albumin; biopsy shows perihilar sclerosis and glomerulomegaly. Best label?"
+        options:
+          - "Adaptive FSGS, perihilar variant"
+          - "Primary collapsing FSGS"
+          - "Minimal change disease"
+          - "Tip lesion"
+        answer: 0
+        why:
+          - "صح: lean body mass عالي، subnephrotic proteinuria، albumin طبيعي، perihilar، و glomerulomegaly = ==adaptive==."
+          - "الـ collapsing بيعمل nephrotic شديد و tuft collapse."
+          - "الـ MCD الـ LM بتاعه طبيعي."
+          - "الـ tip عند الـ tubular pole، وبيبدأ بـ nephrotic فجأة."
+      - kind: order
+        page: 243
+        quote: "Prednisone Img/kg/day for 4- 8 (If proteinuria decreasing, up tol6 weeks) Taper progressively over 3 months"
+        prompt: "رتّب علاج الـ primary FSGS"
+        steps:
+          - "RAS blockade ± diuretics ± statin"
+          - "Prednisone 1 mg/kg/day for 4–8 weeks (up to 16)"
+          - "Taper over 3 months"
+          - "Steroid resistant/dependent: CNI, taper steroids"
+          - "Keep CNI 1–2 years, accept partial remission"
+        why: "كله بياخد RAS blockade الأول، والـ primary بس هو اللي بياخد full-dose steroids. الـ CNI للـ resistance أو الـ dependence."
+      - kind: explain
+        page: 245
+        title: "Case 5: TMA"
+        quote: "Arterioles showed focal red cell fragmentation, fibrin thrombi, fibrous thrombi as well as onion- skin appearance."
+        text: |
+          راجل **42 سنة**، gross hematuria، ==BP 200/100==، creatinine 4، anaemia و **thrombocytopenia** و indirect hyperbilirubinemia. الـ immunology و C3/C4 طبيعيين.
+
+          الـ biopsy: hilar thrombi، **red cell fragmentation**، fibrin thrombi، و ==onion-skin== arterioles. التشخيص: **acute flare of TMA with arterial involvement**.
+      - kind: figure
+        page: 246
+        quote: "Types of TMA Primary TMA Secondary TMA Hereditary TTP. Immune-mediated Idiopathic TTP."
+        title: "TTP ولا HUS؟"
+        alt: "Algorithm: TMA splits by ADAMTS-13. Below 10 percent with fever and neurologic signs is TTP. Above 10 percent is HUS; with diarrhea from Shiga toxin it is typical HUS, without diarrhea it is atypical HUS from complement dysregulation, pregnancy, systemic sclerosis, antiphospholipid syndrome, strep pneumonia, drugs, radiation or malignant hypertension."
+        caption: "الـ ==ADAMTS-13== هو المفتاح: < 10% = **TTP**، > 10% = **HUS**. والـ HUS بالإسهال (Shiga toxin) = typical."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="N8b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker></defs>
+            <rect x="105" y="6" width="120" height="32" rx="8" class="fg-ink"/>
+            <text x="165" y="27" text-anchor="middle" class="t-b">TMA</text>
+            <path d="M140 38 L80 66" class="fg-arrow" marker-end="url(#N8b)"/>
+            <path d="M190 38 L250 66" class="fg-arrow" marker-end="url(#N8b)"/>
+            <rect x="8" y="70" width="148" height="66" rx="8" class="fg-bad"/>
+            <text x="82" y="92" text-anchor="middle" class="t-b">TTP</text>
+            <text x="82" y="110" text-anchor="middle" class="t-sm">ADAMTS-13 &lt;10%</text>
+            <text x="82" y="126" text-anchor="middle" class="t-sm">fever + neuro + renal</text>
+            <rect x="174" y="70" width="148" height="66" rx="8" class="fg-acc"/>
+            <text x="248" y="92" text-anchor="middle" class="t-b">HUS</text>
+            <text x="248" y="110" text-anchor="middle" class="t-sm">ADAMTS-13 &gt;10%</text>
+            <text x="248" y="126" text-anchor="middle" class="t-sm">MAHA + low PLT + renal</text>
+            <path d="M220 136 L190 166" class="fg-arrow" marker-end="url(#N8b)"/>
+            <path d="M276 136 L290 166" class="fg-arrow" marker-end="url(#N8b)"/>
+            <rect x="120" y="170" width="120" height="50" rx="8" class="fg-box"/>
+            <text x="180" y="190" text-anchor="middle" class="t-sm t-b">No diarrhea</text>
+            <text x="180" y="208" text-anchor="middle" class="t-sm">Atypical HUS</text>
+            <rect x="250" y="170" width="74" height="50" rx="8" class="fg-good"/>
+            <text x="287" y="190" text-anchor="middle" class="t-sm t-b">Diarrhea</text>
+            <text x="287" y="208" text-anchor="middle" class="t-sm">Typical</text>
+            <rect x="8" y="232" width="316" height="60" rx="8" class="fg-thin"/>
+            <text x="166" y="252" text-anchor="middle" class="t-sm">Atypical: complement, pregnancy, SSc, APL,</text>
+            <text x="166" y="270" text-anchor="middle" class="t-sm">strep pneumonia, drugs, radiation, malignant HTN</text>
+          </svg>
+      - kind: check
+        page: 246
+        quote: "Medications (Clopidogrel, Ticlopidine)."
+        question: "Which drug causes immune-mediated secondary TMA in the book's table?"
+        options:
+          - "Clopidogrel"
+          - "Cyclosporine"
+          - "Mitomycin C"
+          - "Tacrolimus"
+        answer: 0
+        why:
+          - "صح: ==clopidogrel و ticlopidine== = immune-mediated."
+          - "Cyclosporine تحت non-immune mediated."
+          - "Mitomycin C تحت non-immune mediated."
+          - "Tacrolimus تحت non-immune mediated."
+      - kind: explain
+        page: 249
+        title: "Case 6: السكر لما يوصل للآخر"
+        quote: "Advanced Diabetic Nodular Glomerulosclerosis with a Possible Underlying Membranous Glomerulonephritis."
+        text: |
+          راجل **42 سنة**، DM و HTN مش متظبطين 7 سنين، و **severe proliferative retinopathy**. جه بـ nephrotic، creatinine وصل 8، و uACR 12000.
+
+          قبل الـ biopsy: **SPEP** و **tumour markers** سلبيين، و 3 sessions ultrafiltration.
+
+          الـ biopsy: 18 من 20 glomeruli sclerosed، ==hypocellular mesangial nodules==، و IgG و C3 segmental على الـ GBM. التشخيص: **advanced diabetic nodular glomerulosclerosis** مع **possible membranous** تحتيه، صعب يتأكد علشان الـ sclerosis 90%.
+      - kind: try
+        items: [neph.L08.100, neph.L08.109, neph.L08.119, neph.L08.124, neph.L08.211]
+    recap:
+      - "FSGS: NOS الأشهر، cellular الأقل، tip الأحسن، collapsing الأسوأ."
+      - "كل FSGS ياخد RAS blockade؛ الـ primary ياخد prednisone 1 mg/kg 4–8 (لحد 16) أسبوع."
+      - "TTP: ADAMTS-13 < 10%؛ HUS > 10%؛ clopidogrel/ticlopidine = immune-mediated."
+      - "Diabetic: hypocellular nodules و GBM thickening و arteriolar hyalinosis."
+    practice: [neph.L08.099, neph.L08.100, neph.L08.101, neph.L08.102, neph.L08.103, neph.L08.104, neph.L08.105, neph.L08.106, neph.L08.107, neph.L08.108, neph.L08.109, neph.L08.110, neph.L08.111, neph.L08.112, neph.L08.113, neph.L08.114, neph.L08.115, neph.L08.116, neph.L08.117, neph.L08.118, neph.L08.119, neph.L08.120, neph.L08.121, neph.L08.122, neph.L08.123, neph.L08.124, neph.L08.125, neph.L08.126, neph.L08.127, neph.L08.128, neph.L08.129, neph.L08.130, neph.L08.131, neph.L08.132, neph.L08.133, neph.L08.134, neph.L08.211]
+  # ------------------------------------------------------------------
+  - id: neph.L08.lesson5
+    title: "C3 و amyloid والـ fibrils"
+    hook: "مفيش مرض اسمه mesangioproliferative GN. وكل fibril ليه مقاس بالنانومتر."
+    minutes: 10
+    pages: [249, 264]
+    topics: [c3g, amyloid, integration]
+    goals:
+      - "تعرف ليه الـ LM لوحده بيضيّع التشخيص (case 7)"
+      - "تقسّم الـ amyloid وتعرف خطوات الـ typing"
+      - "تفرّق الـ organized deposits بالحجم"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 250
+        title: "Case 7: biopsy من غير IF"
+        quote: "Biopsy was examined only by L.M (no IHC or EM) with a diagnosis of Mesangioproliferative GN"
+        text: |
+          شاب **23 سنة**: edema و HTN و **C3 واطي** من سنتين. اتعمله biopsy اتقرا ==LM بس==، واتكتب «mesangioproliferative GN»، وخد prednisolone 60 mg وبطّله لوحده.
+
+          دلوقتي: creatinine 1.9، **C3 37** (consumed)، **C4 طبيعي**، ANA و ANCA سلبي.
+      - kind: check
+        page: 251
+        quote: "IgA: Negative, IgG: Negative, IgM: Negative, C3: deposits along GBM (3+) and C4: deposits along GBM (1+)"
+        question: "Repeat biopsy IF: C3 3+ along the GBM, no IgG, IgA or IgM. Diagnosis?"
+        options:
+          - "C3 glomerulopathy"
+          - "Lupus nephritis"
+          - "IgA nephropathy"
+          - "Membranous GN"
+        answer: 0
+        why:
+          - "صح: ==C3 لوحده== من غير Ig مع C3 واطي و C4 طبيعي = complement-mediated. وطلع **dense deposit disease**."
+          - "الـ lupus بيبقى full-house و C3 و C4 واطيين و ANA موجب."
+          - "الـ IgA nephropathy = mesangial IgA."
+          - "الـ membranous = granular IgG."
+      - kind: aside
+        tone: exam
+        page: 254
+        quote: "There is no disease entity called Mesangioproliferative GN."
+        text: |
+          الكتاب كاتبها بالخط العريض: ==There is no disease entity called mesangioproliferative GN==. ده **pattern** لازم يتكمّل بـ IF و EM.
+
+          الـ DD بتاعه: **IgA**، **resolving PIGN**، **C3 glomerulopathy**، **Alport**، **lupus class II**، و **podocytopathy** (MCD أو FSGS مش ظاهر في العينة).
+
+          والنتيجة في case 7: الـ creatinine دلوقتي **8.4**.
+      - kind: figure
+        page: 264
+        quote: "In dense deposit disease the capillary walls appear rigid & thickened"
+        title: "Dense deposit disease"
+        image: { file: neph/L08-ddd-panel.webp, book: true }
+        alt: "Four panels of dense deposit disease: PAS with thick rigid capillary walls, immunofluorescence with ribbon-like C3 along capillary walls, Masson's trichrome, and electron microscopy with dense deposits inside the basement membrane."
+        caption: "من الكتاب: capillary walls ==rigid & thickened==، و C3 زي **الشرايط (ribbons)** على الـ IF، و dense deposits جوّه الـ GBM على الـ EM."
+      - kind: explain
+        page: 256
+        title: "Case 8: راجل 75 سنة بـ nephrotic"
+        quote: "Serum protein electrophoresis was done showing M-band."
+        text: |
+          ex-smoker، **albumin 1.8**، uACR 5517، **مفيش سكر** (HbA1c 5.3)، pleural effusion، و ==grade II LV diastolic dysfunction==.
+
+          كبير + nephrotic + قلب stiff ومفيش سكر = فكّر في **monoclonal disease**. الـ **SPEP** طلّع ==M-band==.
+      - kind: explain
+        page: 258
+        title: "الـ biopsy والـ typing"
+        quote: "Light Chain Renal / Amyloidosis; AL- Lambda Type."
+        text: |
+          - **LM**: mesangial deposits **homogeneous pink** و ==weak PAS==.
+          - **Congo red** موجب تحت الـ **polarized light**.
+          - **Immunophenotyping**: AA سلبي، **lambda 4+**.
+
+          التشخيص: ==AL amyloidosis, lambda==. والـ bone marrow طلع **B-cell NHL**، والـ MG مع الـ B-NHL association معروف.
+      - kind: table
+        page: 258
+        quote: "Classification of the main types of systemic amyloidosis"
+        title: "أنواع الـ amyloid"
+        columns: [Type, Protein, Setting]
+        rows:
+          - ["AL", "Light chains", "Monoclonal gammopathy"]
+          - ["AA", "Serum amyloid A", "Chronic inflammation"]
+          - ["AF", "Mutant transthyretin and others", "Familial"]
+          - ["ATTRwt", "Wild-type transthyretin", "Senile cardiomyopathy"]
+          - ["AH", "β2-microglobulin", "Dialysis-related"]
+        hide: [[0, 1], [1, 1], [3, 1], [4, 1]]
+      - kind: figure
+        page: 259
+        quote: "Algorithm for evaluating patterned (organized) deposits in glomeruli."
+        title: "مسطرة النانومتر"
+        alt: "Ruler from 0 to 50 nanometres with bars: chronic sclerosis 5 to 15, amyloid 8 to 12, fibronectin 12 to 16, fibrillary GN 15 to 30, immunotactoid 20 to 50, cryoglobulin 25 to 35 microtubules."
+        caption: "مقاسات الـ organized deposits: الـ ==amyloid 8–12 nm== (Congo red موجب)، **fibrillary 15–30**، **immunotactoid 20–50** microtubules، و cryoglobulin 25–35."
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <line x1="20" y1="225" x2="320" y2="225" class="fg-ink"/>
+            <text x="20" y="242" text-anchor="middle" class="t-sm t-mut">0</text>
+            <text x="80" y="242" text-anchor="middle" class="t-sm t-mut">10</text>
+            <text x="140" y="242" text-anchor="middle" class="t-sm t-mut">20</text>
+            <text x="200" y="242" text-anchor="middle" class="t-sm t-mut">30</text>
+            <text x="260" y="242" text-anchor="middle" class="t-sm t-mut">40</text>
+            <text x="320" y="242" text-anchor="end" class="t-sm t-mut">50 nm</text>
+            <rect x="50" y="12" width="60" height="22" rx="4" class="fg-box"/>
+            <text x="115" y="28" class="t-sm">Chronic sclerosis 5–15</text>
+            <rect x="68" y="44" width="24" height="22" rx="4" class="fg-dot-bad"/>
+            <text x="98" y="60" class="t-sm t-b">Amyloid 8–12 (Congo red +)</text>
+            <rect x="92" y="76" width="24" height="22" rx="4" class="fg-box"/>
+            <text x="122" y="92" class="t-sm">Fibronectin 12–16</text>
+            <rect x="110" y="108" width="90" height="22" rx="4" class="fg-acc"/>
+            <text x="206" y="124" class="t-sm t-b">Fibrillary 15–30</text>
+            <rect x="140" y="140" width="180" height="22" rx="4" class="fg-acc"/>
+            <text x="146" y="156" class="t-sm t-b">Immunotactoid 20–50</text>
+            <rect x="170" y="172" width="60" height="22" rx="4" class="fg-box"/>
+            <text x="236" y="188" class="t-sm">Cryo 25–35</text>
+          </svg>
+      - kind: order
+        page: 259
+        quote: "Algorithm for evaluating patterned (organized) deposits in glomeruli."
+        prompt: "رتّب خطوات الـ organized deposits لحد ما تعرف نوع الـ amyloid"
+        steps:
+          - "Organized deposits on EM"
+          - "Congo red stain"
+          - "Positive → amyloid"
+          - "IF for light chains, heavy chains and AA"
+        why: "كل أنواع الـ amyloid **8–12 nm**، فالـ EM ما يفرقش بينهم. الـ IF هو اللي بيقول AL ولا AH ولا AA."
+      - kind: check
+        page: 260
+        quote: "Randomly arranged fibrillary GN fibrils (much larger than actin filaments)"
+        question: "Congo red negative, IgG positive, random fibrils about 20 nm. Diagnosis?"
+        options:
+          - "Fibrillary GN"
+          - "AL amyloidosis"
+          - "Immunotactoid glomerulopathy"
+          - "Fibronectin glomerulopathy"
+        answer: 0
+        why:
+          - "صح: ==15–30 nm== random fibrils مع Ig = fibrillary GN."
+          - "الـ amyloid Congo red موجب و 8–12 nm."
+          - "الـ immunotactoid microtubules أكبر ومنظّمة parallel."
+          - "الـ fibronectin Ig سلبي و 12–16 nm."
+      - kind: explain
+        page: 261
+        title: "Test yourself"
+        quote: "Mesangial proliferation: At least 4 -5 cells per mesangial area"
+        text: |
+          الكتاب بيديك نتايج IF و EM وانت تجمّع:
+          - **Mesangial IgA** + mesangial dense deposits = ==IgA nephropathy==
+          - **C1q** + **fingerprints** + subendothelial و subepithelial deposits = ==lupus==
+          - **Segmental IgM** + **foot-process effacement** = FSGS
+
+          والـ mesangial proliferation = **4–5 cells** على الأقل في الـ mesangial area.
+      - kind: try
+        items: [neph.L08.136, neph.L08.144, neph.L08.148, neph.L08.147, neph.L08.212]
+    recap:
+      - "Mesangioproliferative GN مش تشخيص؛ كمّل بـ IF و EM."
+      - "C3 لوحده + C3 واطي + C4 طبيعي = C3 glomerulopathy."
+      - "كبير + nephrotic + مفيش سكر = SPEP؛ Congo red ثم IF للـ typing."
+      - "Amyloid 8–12، fibrillary 15–30، immunotactoid 20–50 nm."
+    practice: [neph.L08.135, neph.L08.136, neph.L08.137, neph.L08.138, neph.L08.139, neph.L08.140, neph.L08.141, neph.L08.142, neph.L08.143, neph.L08.144, neph.L08.145, neph.L08.146, neph.L08.147, neph.L08.148, neph.L08.149, neph.L08.150, neph.L08.151, neph.L08.152, neph.L08.153, neph.L08.154, neph.L08.155, neph.L08.156, neph.L08.157, neph.L08.158, neph.L08.212]
+  # ------------------------------------------------------------------
+  - id: neph.L08.lesson6
+    title: "Spot diagnoses: casts و LCAT و Fabry"
+    hook: "Casts متكسّرة، foam cells، ونيفروسيت شكلها دانتيل. تلات تشخيصات من نظرة."
+    minutes: 9
+    pages: [264, 277]
+    topics: [cast, lcat, fabry]
+    goals:
+      - "تتعرف على الـ cast nephropathy من شكل الـ casts"
+      - "تفكّر في LCAT deficiency عند nephrotic مع HDL واطي"
+      - "تعرف Fabry وطريقة وراثته ومتابعته"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 264
+        title: "Case 9"
+        quote: "2 months later, the patient presented to us with a sCr of 12 mg/dL and proteinuria 15.7 g/day."
+        text: |
+          ست **57 سنة** عندها HTN. الـ creatinine **3.5** بالصدفة، وبعد شهرين ==12 mg/dL== مع **proteinuria 15.7 g/day**. الكلى طبيعية على الـ U/S، والـ immune markers سلبية.
+
+          جلسة HD واحدة، والـ biopsy اتأخر، فـ **pulse steroids** 5 أيام، والـ creatinine نزل لـ 5.5.
+      - kind: reveal
+        page: 265
+        quote: "Tubules showed moderate injury with hyaline casts, some of them were fractured, lamellated and surrounded by a cellular reaction."
+        prompt: "Casts في الـ tubules: fractured، lamellated، وحواليها cellular reaction. بتفكّرك بإيه؟"
+        answer: "**Light chain cast nephropathy** (myeloma kidney). التقرير كتب «suggestive of a cast nephropathy, for clinical and serological evaluation»؛ يعني دوّر على الـ **monoclonal protein**."
+      - kind: aside
+        tone: tip
+        page: 266
+        quote: "Acute Tubular Injury, Suggestive of a Cast Nephropathy. For Clinical and Serological Evaluation."
+        text: |
+          التقرير مش بيقفل التشخيص لوحده: «==for clinical and serological evaluation==». يعني الـ pathologist بيقولك: الـ casts دي شكلها **light chains**، روح أكّد بالـ serology.
+
+          وفاكر الـ list بتاعة أول المحاضرة؟ **Light chain cast nephropathy** من الأمراض اللي بتعمل ARF من غير GN.
+      - kind: explain
+        page: 269
+        title: "Case 10: nephrotic مش بيرد على أي حاجة"
+        quote: "Picture is Compatible with Lecithin- Cholesterol Acyltransferase Deficiency."
+        text: |
+          ست **29 سنة** بـ nephrotic (uPCR 8.9)، أخدت immunosuppression من غير فايدة. TG 260، **VLDL 52**.
+
+          الـ biopsy: subendothelial hyaline deposits، GBM duplication، و ==foamy histiocytes== مالية الـ mesangium والـ capillaries.
+
+          التشخيص: ==LCAT deficiency==.
+      - kind: explain
+        page: 270
+        title: "LCAT بيعمل إيه؟"
+        quote: "Lecithin-cholesterol acyltransferase (LCAT) is involved in the esterification of free cholesterol and in the cholesterol esters transport from peripheral tissues to the liver."
+        text: |
+          الـ **LCAT** بيعمل **esterification** للـ free cholesterol، وبيساعد ينقل الـ cholesterol esters من الأنسجة للكبد (جوّه الـ **HDL**).
+
+          - **Partial** = ==fish eye disease== (القرنية بس)
+          - **Complete** = **familial LCAT deficiency** (أنسجة كتير منها الكلى)
+
+          أشهر complication: **proteinuria** في العقد الرابع. والتشخيص النهائي: **gene analysis** و functional activity.
+      - kind: mnemonic
+        page: 271
+        quote: "Patient had a fish eye appearance (corneal opacity). Her HDL level was very low 11 mg/dl, high VLDL 52 mg/dl."
+        word: "FISH"
+        parts:
+          - { key: "F", text: "Foam cells in the glomeruli" }
+          - { key: "I", text: "Immunosuppression fails" }
+          - { key: "S", text: "Sight: corneal opacity (fish eye)" }
+          - { key: "H", text: "HDL very low (11), ApoA1 low" }
+        hook: "عيانة nephrotic عينها شكل عين السمكة وHDL واطي = LCAT. «الكلى بتغرق في الكوليسترول.»"
+      - kind: check
+        page: 271
+        quote: "Withdraw immunosuppression and control BP using an ACEi."
+        question: "Case 10 is confirmed LCAT deficiency. What does the book do?"
+        options:
+          - "Withdraw immunosuppression, ACEi for BP"
+          - "Add rituximab"
+          - "Pulse steroids again"
+          - "Plasma exchange"
+        answer: 0
+        why:
+          - "صح: المرض مش immune؛ ==supportive== بـ ACEi، و transplant لو وصل ESKD."
+          - "Rituximab للأمراض الـ immune، مش enzyme deficiency."
+          - "الـ steroids فشلت قبل كده ومش هتصلّح enzyme."
+          - "Plasma exchange مش في خطة الكتاب."
+      - kind: explain
+        page: 273
+        title: "Case 11: podocytes شكلها دانتيل"
+        quote: "The overlying visceral podocytes showed a swollen pale lacy cytoplasm."
+        text: |
+          شاب **29 سنة**، creatinine 1.9، uPCR 2. الـ biopsy: 36 من 43 glomeruli sclerosed، و ==swollen pale lacy podocytes==، و distal tubules فيها **vacuolated foamy cytoplasm**، والـ IF سلبي.
+
+          التشخيص: ==advanced Fabry disease==.
+      - kind: explain
+        page: 275
+        title: "Fabry في سطرين"
+        quote: "Fabry disease is a rare genetic X-linked disease with a deficiency of the enzyme alpha-galactosidase A (a-Gal A)"
+        text: |
+          **X-linked lysosomal storage disorder**: نقص ==alpha-galactosidase A==، فالـ **Gb3** (globotriaosylceramide) يتراكم في الخلايا. وفيه **early onset** و **late onset**.
+      - kind: figure
+        page: 275
+        quote: "An affected father (XY) will pass the mutation to all of his daughters, but none of his sons."
+        title: "الوراثة"
+        alt: "Two family trees. An affected father passes the X with the mutation to every daughter and none of his sons. An affected mother passes it to half of her children on average."
+        caption: "الأب المصاب: ==كل البنات== وولا ولد. الأم المصابة: **50%** لكل طفل."
+        svg: |
+          <svg viewBox="0 0 330 200" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="10" width="150" height="32" rx="8" class="fg-bad"/>
+            <text x="85" y="31" text-anchor="middle" class="t-b t-sm">Affected father XʹY</text>
+            <line x1="85" y1="42" x2="85" y2="62" class="fg-ink"/>
+            <line x1="40" y1="62" x2="130" y2="62" class="fg-ink"/>
+            <circle cx="40" cy="92" r="18" class="fg-dot-bad"/>
+            <text x="40" y="128" text-anchor="middle" class="t-sm">daughter</text>
+            <text x="40" y="144" text-anchor="middle" class="t-sm t-bad t-b">100%</text>
+            <rect x="112" y="74" width="36" height="36" class="fg-good"/>
+            <text x="130" y="128" text-anchor="middle" class="t-sm">son</text>
+            <text x="130" y="144" text-anchor="middle" class="t-sm t-good t-b">0%</text>
+            <line x1="40" y1="62" x2="40" y2="74" class="fg-ink"/><line x1="130" y1="62" x2="130" y2="74" class="fg-ink"/>
+            <rect x="175" y="10" width="150" height="32" rx="8" class="fg-bad"/>
+            <text x="250" y="31" text-anchor="middle" class="t-b t-sm">Affected mother XʹX</text>
+            <line x1="250" y1="42" x2="250" y2="62" class="fg-ink"/>
+            <line x1="205" y1="62" x2="295" y2="62" class="fg-ink"/>
+            <line x1="205" y1="62" x2="205" y2="74" class="fg-ink"/><line x1="295" y1="62" x2="295" y2="74" class="fg-ink"/>
+            <circle cx="205" cy="92" r="18" class="fg-acc"/>
+            <rect x="277" y="74" width="36" height="36" class="fg-acc"/>
+            <text x="250" y="140" text-anchor="middle" class="t-sm t-b">50% each child</text>
+            <text x="165" y="185" text-anchor="middle" class="t-sm t-mut">Xʹ = X with the GLA mutation</text>
+          </svg>
+      - kind: mnemonic
+        page: 277
+        quote: "Acroparesthesias Angiokeratomas Corneal opacity GIT problems"
+        word: "FABRY"
+        parts:
+          - { key: "F", text: "Fire in the hands: acroparesthesias" }
+          - { key: "A", text: "Angiokeratomas" }
+          - { key: "B", text: "Blurred cornea: corneal opacity; and no sweat (hypohidrosis)" }
+          - { key: "R", text: "Renal failure, progressive" }
+          - { key: "Y", text: "Yikes heart and brain: LVH, arrhythmia, stroke; plus GIT and hearing loss" }
+        hook: "اسم المرض نفسه بيعدّ أعراضه."
+      - kind: explain
+        page: 277
+        title: "المتابعة و ERT"
+        quote: "If substantial Gb3 accumulation found, start enzyme replacement therapy before significant cardiac manifestations occur"
+        text: |
+          - **Newborn screening**: علشان تمسك الـ cardiac damage بدري.
+          - **IVS4 mutation** = type 2 **later-onset**: ≤ 40 سنة 2–3% بس عندهم LVH، وبعد 40: ==32% ستات و 67% رجالة==.
+          - المتابعة: **strain echo** كل سنة و **T1-mapping CMR** كل 2–3 سنين، و cardiac biopsy لو abnormal.
+          - لو Gb3 كتير: ابدأ ==enzyme replacement therapy== قبل الـ cardiac manifestations.
+      - kind: try
+        items: [neph.L08.160, neph.L08.165, neph.L08.171, neph.L08.177, neph.L08.179]
+    recap:
+      - "Casts fractured و lamellated مع cellular reaction = cast nephropathy؛ دوّر على light chains."
+      - "Nephrotic + HDL واطي + foam cells + corneal opacity = LCAT؛ وقّف الـ IS و ACEi."
+      - "Fabry: X-linked، alpha-gal A، Gb3؛ الأب لكل البنات، الأم 50%."
+      - "ERT قبل ما القلب يتأثر."
+    practice: [neph.L08.159, neph.L08.160, neph.L08.161, neph.L08.162, neph.L08.163, neph.L08.164, neph.L08.165, neph.L08.166, neph.L08.167, neph.L08.168, neph.L08.169, neph.L08.170, neph.L08.171, neph.L08.172, neph.L08.173, neph.L08.174, neph.L08.175, neph.L08.176, neph.L08.177, neph.L08.178, neph.L08.179, neph.L08.180, neph.L08.181, neph.L08.182, neph.L08.183, neph.L08.184, neph.L08.185]
+  # ------------------------------------------------------------------
+  - id: neph.L08.lesson7
+    title: "الـ graft بيترفض: Banff و case 14"
+    hook: "Creatinine طلع بعد sore throat. Infection؟ CNI؟ ولا rejection؟ الـ C4d هيقول."
+    minutes: 10
+    pages: [277, 291]
+    topics: [transplant, anca-mpgn]
+    goals:
+      - "تحفظ الـ DD للـ AKI في الـ transplant"
+      - "تعرف درجات الـ TCMR ومعايير الـ ABMR في Banff 2017"
+      - "تفهم إزاي الـ IF و EM بيتجمعوا في تشخيص واحد"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 278
+        title: "Case 12"
+        quote: "D.D of AKI in Tx patients Pre-renal. ATN. Acute interstitial nephritis. CNI toxicity. Infections. Acute rejection."
+        text: |
+          راجل **36 سنة**، كلية من أخته (match 5/6) من 3 سنين، على **MMF + cyclosporine + prednisolone 5 mg**. الـ creatinine baseline 1.4، وفجأة ==2.4== بعد sore throat خد عليه azithromycin.
+
+          الـ DD للـ AKI في الـ transplant: **pre-renal**، **ATN**، **AIN**، ==CNI toxicity==، **infections**، **acute rejection**، **recurrence**، **vascular thrombosis**، و **obstruction**.
+      - kind: mnemonic
+        page: 278
+        quote: "D.D of AKI in Tx patients Pre-renal. ATN. Acute interstitial nephritis. CNI toxicity. Infections. Acute rejection."
+        word: "PAACIRROV"
+        parts:
+          - { key: "P", text: "Pre-renal" }
+          - { key: "A", text: "ATN" }
+          - { key: "A", text: "Acute interstitial nephritis" }
+          - { key: "C", text: "CNI toxicity" }
+          - { key: "I", text: "Infections" }
+          - { key: "R", text: "Rejection (acute)" }
+          - { key: "R", text: "Recurrence of native disease" }
+          - { key: "O", text: "Obstruction of the urinary tract" }
+          - { key: "V", text: "Vascular thrombosis" }
+        hook: "اقسمها جغرافيًا: قبل الكلية (P)، جوّه الكلية (A A C I R R)، بعدها (O)، والأوعية (V)."
+      - kind: explain
+        page: 279
+        title: "عملوا إيه؟"
+        quote: "Patient was admitted for Pulse Methyl Prednisolone 1 gm per day for 3 days"
+        text: |
+          الـ cyclosporine trough 93، CMV PCR سلبي، و Doppler طبيعي (RI 0.64–0.69).
+
+          اتعمل ==pulse methylprednisolone 1 g × 3 أيام==، و **PRA** urgent، و **biopsy**. الـ PRA طلع سلبي.
+
+          الـ biopsy: ==C4d 3== في الـ peritubular capillaries، **moderate tubulitis**، interstitial infiltrate، و **peritubular capillaritis**.
+      - kind: check
+        page: 281
+        quote: "Mixed Acute/Active Cellular Rejection: Microvascular Inflammation Consistent with Active Antibody Mediated Rejection, C4d Positive"
+        question: "C4d 3 + peritubular capillaritis + interstitial inflammation with moderate tubulitis. Diagnosis?"
+        options:
+          - "Mixed active ABMR (C4d+) and acute TCMR IA"
+          - "Pure acute TCMR IIA"
+          - "CNI toxicity"
+          - "C4d staining without rejection"
+        answer: 0
+        why:
+          - "صح: الـ capillaritis + C4d = ==ABMR==، و الـ tubulitis المتوسطة = **TCMR IA**."
+          - "IIA محتاج intimal arteritis (v1)."
+          - "الـ CNI toxicity مش بيعمل C4d ولا capillaritis."
+          - "الـ category دي محتاجة مفيش tissue injury خالص."
+      - kind: table
+        page: 281
+        quote: "Interstitial inflammation involving >25% of nonsclerotic cortical parenchyma (i2 or i3) with moderate tubulitis (t2) involving | or more tubules,"
+        title: "Acute TCMR (Banff 2017)"
+        columns: [Grade, Lesion]
+        rows:
+          - ["IA", "i > 25% + moderate tubulitis (t2)"]
+          - ["IB", "i > 25% + severe tubulitis (t3)"]
+          - ["IIA", "Mild–moderate intimal arteritis (v1)"]
+          - ["IIB", "Severe intimal arteritis (v2)"]
+          - ["III", "Transmural arteritis / fibrinoid necrosis (v3)"]
+        hide: [[0, 1], [1, 1], [2, 1], [4, 1]]
+      - kind: aside
+        tone: tip
+        page: 281
+        quote: "Interstitial inflammation involving >25% of nonsclerotic cortical parenchyma (i2 or i3) with severe tubulitis (t3) involving | or more tubules,"
+        text: |
+          الـ TCMR ليها سلّم: **I** = tubules (t2 أو t3)، **II** = **intima** للشريان (v1 أو v2)، **III** = **transmural** (v3).
+
+          كل ما تدخل أعمق في الشريان، الـ grade يعلى. والـ **chronic active grade II** = ==chronic allograft arteriopathy==.
+      - kind: figure
+        page: 282
+        quote: "Active ABMR; all 3 criteria must be met for diagnosis"
+        title: "Active ABMR: لازم التلاتة"
+        alt: "Three boxes joined by plus signs. One: acute tissue injury such as microvascular inflammation, arteritis, TMA or acute tubular injury. Two: antibody contact with endothelium such as linear C4d in peritubular capillaries or g plus ptc at least 2. Three: donor-specific antibodies. All three equal active antibody-mediated rejection."
+        caption: "**Injury** + **antibody touching endothelium** (C4d أو MVI ≥ 2) + ==DSA==. الـ C4d أو الـ transcripts ممكن يعوّضوا الـ DSA، بس الـ DSA testing لازم."
+        svg: |
+          <svg viewBox="0 0 330 280" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="8" width="310" height="62" rx="8" class="fg-bad"/>
+            <text x="165" y="28" text-anchor="middle" class="t-b">1. Acute tissue injury</text>
+            <text x="165" y="46" text-anchor="middle" class="t-sm">MVI (g &gt; 0 / ptc &gt; 0), arteritis (v &gt; 0),</text>
+            <text x="165" y="62" text-anchor="middle" class="t-sm">acute TMA or acute tubular injury</text>
+            <text x="165" y="88" text-anchor="middle" class="t-lg t-b">+</text>
+            <rect x="10" y="96" width="310" height="62" rx="8" class="fg-acc"/>
+            <text x="165" y="116" text-anchor="middle" class="t-b">2. Antibody on endothelium</text>
+            <text x="165" y="134" text-anchor="middle" class="t-sm">linear C4d in PTC, or g + ptc ≥ 2,</text>
+            <text x="165" y="150" text-anchor="middle" class="t-sm">or validated ABMR transcripts</text>
+            <text x="165" y="176" text-anchor="middle" class="t-lg t-b">+</text>
+            <rect x="10" y="184" width="310" height="44" rx="8" class="fg-acc"/>
+            <text x="165" y="204" text-anchor="middle" class="t-b">3. Donor-specific antibodies</text>
+            <text x="165" y="220" text-anchor="middle" class="t-sm">HLA or non-HLA</text>
+            <rect x="70" y="240" width="190" height="34" rx="8" class="fg-ink"/>
+            <text x="165" y="262" text-anchor="middle" class="t-b">= Active ABMR</text>
+          </svg>
+      - kind: update
+        page: 282
+        quote: "Active ABMR; all 3 criteria must be met for diagnosis"
+        text: "Banff 2022 زوّد category اسمها **probable ABMR**: DSA موجب و C4d سلبي و MVI قليل. وزوّد كمان **MVI, DSA-negative and C4d-negative**. في الامتحان: Banff 2017 بتاع الكتاب."
+        ref: "Banff 2022 Kidney Meeting Report, Am J Transplant 2024"
+      - kind: explain
+        page: 287
+        title: "Case 13: C4d سلبي بس ABMR"
+        quote: "Thrombotic Microangiopathy with Microvascular Inflammation Compatible with Acute/Active Antibody Mediated Rejection, C4d Negative For DSA Levels."
+        text: |
+          ولد **16 سنة**، ESRD من **lupus nephritis**، كلية من أبوه. خد CMV واتعالج، وبعدين vomiting و diarrhea و creatinine من 1.9 لـ ==4.3==. الـ cross-match و CMV و BK سلبيين.
+
+          الـ biopsy كفاية (**39 glomeruli، 2 arteries**): glomerulitis، fibrin thrombi، capillaritis، و **C4d 0**. Acute score 5، chronic 0.
+
+          التشخيص: ==TMA with MVI compatible with active ABMR, C4d negative== (اعمل DSA)، و TCMR **borderline**.
+      - kind: explain
+        page: 290
+        title: "Case 14: راجل 78 سنة بـ RPGN"
+        quote: "ANCA-associated CGN superimposed on type 3 membrano-proliferative glomerulonephritis (MPGN)."
+        text: |
+          عنده HTN، و proteinuria و hematuria من سنين، وفجأة creatinine من 1.4 لـ ==8.1== في شهرين. **MPO-ANCA 536**، C3 و C4 طبيعيين، و mild interstitial pneumonia.
+
+          الـ biopsy: **crescents** في 6 من 9، capillary walls تخينة، IgG و IgM و C3 granular، و EM فيه **intra- و trans-membranous** deposits، مش في الـ lamina densa زي الـ DDD.
+
+          التشخيص: ==ANCA-associated crescentic GN on top of type 3 MPGN==.
+      - kind: case
+        page: 291
+        quote: "Algorithm for integrating IM and EM findings when diagnosing some of the pathologic expressions of glomerular disease."
+        stem: "Use the book's IF/EM algorithm."
+        steps:
+          - question: "Linear GBM IgG with lung hemorrhage?"
+            options: ["Goodpasture syndrome", "Anti-GBM GN without lung", "Lupus nephritis", "Membranous GN"]
+            answer: 0
+            why: "Linear staining = anti-GBM؛ مع **lung hemorrhage** = Goodpasture."
+          - question: "Paucity of staining, ANCA, eosinophilia, asthma and granulomas?"
+            options: ["Churg-Strauss syndrome", "Wegener's granulomatosis", "Microscopic polyangiitis", "Pauci-immune GN"]
+            answer: 0
+            why: "Eosinophilia + asthma + granulomas = **Churg-Strauss** (EGPA). Granulomas من غير asthma = Wegener's."
+          - question: "Granular IgG with numerous subepithelial dense deposits?"
+            options: ["Membranous GN", "Type I MPGN", "Acute post-infectious GN", "IgA nephropathy"]
+            answer: 0
+            why: "Granular capillary wall IgG + كتير subepithelial deposits = **membranous**. الـ PIGN فيه humps و C3 coarse."
+      - kind: try
+        items: [neph.L08.186, neph.L08.189, neph.L08.193, neph.L08.207, neph.L08.213]
+    recap:
+      - "AKI في الـ transplant: pre-renal، ATN، AIN، CNI، infection، rejection، recurrence، obstruction، thrombosis."
+      - "TCMR: I tubulitis، II intimal arteritis، III transmural."
+      - "Active ABMR = injury + antibody على الـ endothelium + DSA؛ C4d مش شرط."
+      - "IF يقول النوع، EM يقول المكان، والكلينيك يقفل التشخيص."
+    practice: [neph.L08.186, neph.L08.187, neph.L08.188, neph.L08.189, neph.L08.190, neph.L08.191, neph.L08.192, neph.L08.193, neph.L08.194, neph.L08.195, neph.L08.196, neph.L08.197, neph.L08.198, neph.L08.199, neph.L08.200, neph.L08.201, neph.L08.202, neph.L08.203, neph.L08.204, neph.L08.205, neph.L08.206, neph.L08.207, neph.L08.208, neph.L08.213]

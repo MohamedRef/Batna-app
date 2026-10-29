@@ -1,0 +1,1408 @@
+schema: batna.content/v1
+lecture: rheum.L01
+title: Cytokines
+author: Dr. Abeer Aly Abd Elaaty
+book: { chapter: 3, pages: [1, 22] }
+topics:
+  - { id: intro, title: "Definition, producers and action modes" }
+  - { id: naming, title: "Denomination of cytokines" }
+  - { id: attributes, title: "Functional attributes" }
+  - { id: functions, title: "Biological functions and functional groups" }
+  - { id: families, title: "The six cytokine families" }
+  - { id: th-subsets, title: "Cytokines and T-helper subsets" }
+  - { id: receptors, title: "Cytokine receptors and signalling" }
+  - { id: storm, title: "Hypercytokinemia (cytokine storm)" }
+  - { id: diseases, title: "Cytokine-related diseases and antagonists" }
+  - { id: therapy, title: "Cytokine-based therapies" }
+  - { id: ra, title: "Cytokines in rheumatoid arthritis" }
+  - { id: classification, title: "Classifications of cytokines" }
+items:
+  # ---------- p1-3: introduction ----------
+  - id: rheum.L01.001
+    kind: card
+    topic: intro
+    front: Why does the immune system need cytokines?
+    back: To mount and coordinate an effective immune response, lymphocytes, inflammatory cells and haematopoietic cells need a way to communicate with each other; cytokines perform this function.
+    src: { page: 1, quote: "a mechanism by which lymphocytes, inflammatory cells and haematopoietic cells can communicate with each other is required." }
+    status: unverified
+  - id: rheum.L01.002
+    kind: card
+    topic: intro
+    front: Define cytokines.
+    back: A large, diverse family of low molecular weight proteins or glycoproteins (usually under 30 kDa), secreted by various cell types, that act by binding cell-surface receptors.
+    src: { page: 1, quote: "Cytokines are a large, diverse family of low molecular weight proteins or glycoproteins (usually smaller than 30 kDa)" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L01.003
+    kind: cloze
+    topic: intro
+    text: "Cytokines are usually smaller than {{c1::30 kDa}}."
+    src: { page: 1, quote: "glycoproteins (usually smaller than 30 kDa) secreted by varies types of cells" }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L01.004
+    kind: card
+    topic: intro
+    front: Besides immunomodulation, which other roles of cytokines are documented?
+    back: Roles in developmental processes, such as cell differentiation and directed migration.
+    src: { page: 1, quote: "additional roles separate from the immune system in developmental processes are also documented, such as cell differentiation and directed migration." }
+    status: unverified
+  - id: rheum.L01.005
+    kind: cloze
+    topic: intro
+    text: "The two principal producers of cytokines are {{c1::T helper cells}} and {{c2::macrophages}}, although all {{c3::nucleated cells}} can transiently secrete them."
+    src: { page: 1, quote: "the two principal producers of cytokines are T helper cells (Th cells) and macrophages" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L01.006
+    kind: card
+    topic: intro
+    front: How does a cytokine produce its downstream effect?
+    back: Through high-affinity binding to its receptor expressed on the surface of a target cell.
+    src: { page: 2, quote: "The downstream effects of a particular cytokine occurs through its high- affinity binding of its receptor expressed on the surface of a target cell." }
+    status: unverified
+  - id: rheum.L01.007
+    kind: table
+    topic: intro
+    title: Action modes of cytokines
+    columns: [The cytokine binds receptors on, Mode]
+    rows:
+      - [The same cell that secreted it, Autocrine]
+      - [A target cell in close proximity to the producer cell, Paracrine]
+      - ["Target cells in distant parts of the body (not the normal manner for cytokines)", Endocrine]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 2, quote: "Autocrine (acts on same cell) manner. Paracrine (acts on nearby cell) manner." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L01.008
+    kind: mcq
+    topic: intro
+    stem: "Activated T cells secrete IL-2, which binds IL-2 receptors on the same T cells and drives their own proliferation. Which action mode is this?"
+    options: [Autocrine, Paracrine, Endocrine, Juxtacrine]
+    answer: 0
+    why:
+      - "Correct: the cytokine binds receptors on the membrane of the same cell that secreted it."
+      - "Paracrine acts on a nearby, different target cell."
+      - "Endocrine acts on distant cells, and is not the normal manner for cytokines."
+      - "Juxtacrine (contact signalling) is not one of the three modes in the lecture."
+    src: { page: 2, quote: "When cytokine binds to receptors on the membrane of the same cells that secreted it." }
+    status: unverified
+  - id: rheum.L01.009
+    kind: card
+    topic: intro
+    front: Which cytokine action mode is NOT the normal manner for cytokine responses?
+    back: Endocrine (acting on distant cells).
+    src: { page: 2, quote: "Endocrine (acts on distant cell; not the normal manner for cytokine responses) manner." }
+    status: unverified
+    tags: [exam-trap]
+  - id: rheum.L01.010
+    kind: card
+    topic: intro
+    front: Two roles of cytokines in immune responses (p2)?
+    back: They aid cell-to-cell communication, and they stimulate the movement of cells towards sites of inflammation, infection and trauma.
+    src: { page: 2, quote: "Cytokines aid cell to cell communication in immune responses and stimulate the movement of cells towards sites of inflammation, infection and trauma." }
+    status: unverified
+  - id: rheum.L01.011
+    kind: card
+    topic: intro
+    front: What happens after a cytokine binds its specific receptor on a target cell?
+    back: Signal transduction pathways are triggered that ultimately alter enzyme activity and gene expression.
+    src: { page: 3, quote: "triggering signal transduction pathways that ultimately alter enzyme activity and gene expression." }
+    status: unverified
+  - id: rheum.L01.012
+    kind: card
+    topic: intro
+    front: What determines whether a target cell responds to a particular cytokine?
+    back: The presence of its specific membrane receptors, which bind the cytokine with very high affinity.
+    src: { page: 3, quote: "The susceptibility of a target cell to a particular cytokine is determined by the presence of specific membrane receptors" }
+    status: unverified
+  - id: rheum.L01.013
+    kind: order
+    topic: intro
+    prompt: Order the steps of cytokine action (book figure, p3).
+    steps:
+      - Inducing stimulus
+      - Stimulated cell produces cytokine
+      - Cytokine secreted
+      - Specific cytokine receptor on target cell bound and activated
+      - Cell activation
+      - Biological effect
+    src: { page: 3, quote: "Stimulated ceil produces cytokine Cytokine secreted Specific cytokine receptor on target cell bound and activated" }
+    status: unverified
+  # ---------- p4: naming ----------
+  - id: rheum.L01.014
+    kind: enumerate
+    topic: naming
+    prompt: Enumerate the denominations (names) of cytokines.
+    points: [Monokine, Lymphokine, Colony stimulating factor (CSF), Interleukin (IL), Interferon (IFN), Tumor necrosis factor (TNF), Growth factor (GF), Chemokine]
+    pass: 6
+    src: { page: 4, quote: "Denomination of Cytokines 1. Monokine. 2. Lymphokine. 3. Colony stimulating factor (CSF). 4. Interleukin (IL)." }
+    status: unverified
+  - id: rheum.L01.015
+    kind: card
+    topic: naming
+    front: What is a lymphokine? Give examples.
+    back: A cytokine produced by lymphocytes, such as IL-2 and IFN-γ.
+    src: { page: 4, quote: "Lymphokines – Cytokines such as interleukin-2 (IL-2) and interferon-γ (IFN- γ), produced by lymphocytes." }
+    status: unverified
+  - id: rheum.L01.016
+    kind: card
+    topic: naming
+    front: What is a monokine? Give an example.
+    back: A cytokine produced by monocytes, such as TNF-α.
+    src: { page: 4, quote: "Monokines – Cytokines such as tumor necrosis factor-α (TNF-α) produced by monocytes." }
+    status: unverified
+  - id: rheum.L01.017
+    kind: card
+    topic: naming
+    front: How did tumor necrosis factor get its name?
+    back: It was first discovered by its cytotoxic effects on some cancer cell lines.
+    src: { page: 4, quote: "Tumor necrosis factor (TNF) – Cytokines exhibited cytotoxic effects on some cancer cell lines." }
+    status: unverified
+  - id: rheum.L01.018
+    kind: card
+    topic: naming
+    front: How did colony stimulating factors get their name?
+    back: They promoted the in-vitro growth of various leukocytes in clumps or colonies.
+    src: { page: 4, quote: "Colony stimulating factors (CSFs) – Cytokines promoted the growth in vitro of various leukocytes in clumps or colonies." }
+    status: unverified
+  - id: rheum.L01.019
+    kind: table
+    topic: naming
+    title: Main action of cytokine groups (book box, p4)
+    columns: [Cytokines, Action]
+    rows:
+      - [Interferon family, Antiviral proteins]
+      - [Chemokine family, "Direct cell migration, adhesion and activation"]
+      - [Tumour necrosis factor family, Regulate inflammatory and immune responses]
+      - [Interleukin family, Variety of actions depending on the interleukin and cell type]
+      - [Haematopoietins, Promote cell proliferation and differentiation]
+      - [Transforming growth factor beta family, Regulation of immune cells]
+    blanks: [[0, 1], [1, 1], [2, 1], [4, 1], [5, 1]]
+    src: { page: 4, quote: "Interferon family Antiviral proteins" }
+    status: unverified
+  # ---------- p5: attributes ----------
+  - id: rheum.L01.020
+    kind: table
+    topic: attributes
+    title: Functional attributes of cytokines
+    columns: [Meaning, Attribute]
+    rows:
+      - [One cytokine has different biological effects on different target cells, Pleiotropy]
+      - [Two or more cytokines mediate similar functions, Redundancy]
+      - [Combined effect of two cytokines is greater than the sum of their individual effects, Synergism]
+      - [The effects of one cytokine inhibit or offset the effects of another, Antagonism]
+      - ["A cytokine makes its target cell produce other cytokines, which make other cells produce more", Cascade induction]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 5, quote: "Pleiotropic action: A given cytokine that has different biological effects on different target cells." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L01.021
+    kind: card
+    topic: attributes
+    front: Define pleiotropy of cytokines.
+    back: A given cytokine has different biological effects on different target cells.
+    src: { page: 5, quote: "Pleiotropic action: A given cytokine that has different biological effects on different target cells." }
+    status: unverified
+  - id: rheum.L01.022
+    kind: card
+    topic: attributes
+    front: Define cytokine redundancy, and why does it matter?
+    back: Two or more cytokines mediate similar functions; it makes it difficult to ascribe a particular activity to a single cytokine.
+    src: { page: 5, quote: "Redundancy makes it difficult to ascribe a particular activity to a single cytokine." }
+    status: unverified
+  - id: rheum.L01.023
+    kind: card
+    topic: attributes
+    front: Define cytokine synergism.
+    back: The combined effect of two cytokines on cellular activity is greater than the additive effects of the individual cytokines.
+    src: { page: 5, quote: "Synergism: when the combined effects of two cytokines on cellular activity is greater than the additive effects of the individual cytokines." }
+    status: unverified
+  - id: rheum.L01.024
+    kind: card
+    topic: attributes
+    front: Define cascade induction.
+    back: The action of one cytokine on a target cell induces that cell to produce one or more other cytokines, which in turn may induce other target cells to produce other cytokines.
+    src: { page: 5, quote: "Cascade induction: Occurs when the action of one cytokine on target cell induces that cell to produce one or more other cytokines" }
+    status: unverified
+  - id: rheum.L01.025
+    kind: mcq
+    topic: attributes
+    stem: "IL-4 from activated Th cells activates B cells, makes thymocytes proliferate and makes mast cells proliferate. Which cytokine attribute does this show?"
+    options: [Pleiotropy, Redundancy, Synergy, Cascade induction]
+    answer: 0
+    why:
+      - "Correct: one cytokine, different effects on different target cells."
+      - "Redundancy is several cytokines (IL-2, IL-4, IL-5) doing the same job, such as B-cell proliferation."
+      - "Synergy needs two cytokines together, such as IL-4 plus IL-5 inducing the switch to IgE."
+      - "Cascade induction is a chain: one cytokine makes its target cell release other cytokines."
+    src: { page: 5, quote: "PLEIOTROPY Activated TH cells IL-4 B cell Thymocyte Mast cell" }
+    status: unverified
+  - id: rheum.L01.026
+    kind: mcq
+    topic: attributes
+    stem: "IFN-γ blocks the class switch to IgE that IL-4 induces in B cells. Which attribute is this?"
+    options: [Antagonism, Synergy, Redundancy, Pleiotropy]
+    answer: 0
+    why:
+      - "Correct: one cytokine (IFN-γ) offsets the effect of another (IL-4)."
+      - "Synergy is IL-4 plus IL-5 together inducing the IgE switch."
+      - "Redundancy is several cytokines with the same effect."
+      - "Pleiotropy is one cytokine with many effects on different cells."
+    src: { page: 5, quote: "Antagonism: the effects of one cytokine inhibit or offset the effects of another cytokine." }
+    status: unverified
+  - id: rheum.L01.027
+    kind: order
+    topic: attributes
+    prompt: Order the cascade induction example in the book figure (p5).
+    steps:
+      - Activated TH cells release IFN-γ
+      - IFN-γ acts on the macrophage
+      - The macrophage releases IL-12
+      - IL-12 acts on activated TH cells
+      - TH cells release IFN-γ, TNF, IL-2 and other cytokines
+    src: { page: 5, quote: "CASCADE INDUCTION Activated TH cells IFN-γ Macrophage IL-12" }
+    status: unverified
+  - id: rheum.L01.028
+    kind: card
+    topic: attributes
+    front: How does IFN-γ show all forms of cytokine network interaction (p5)?
+    back: It makes certain T cells secrete more IFN-γ and IL-2 (cascade), synergizes with TNF-α to activate macrophages, and antagonizes IL-4 by preventing it from influencing T lymphocytes.
+    src: { page: 5, quote: "IFN-γ synergizes with tumor necrosis factor-α (TNF-α) to activate macrophages and antagonizes interleukin-4 (IL-4)" }
+    status: unverified
+  - id: rheum.L01.029
+    kind: card
+    topic: attributes
+    front: Why do cytokines have pleiotropy, redundancy, synergy, antagonism and cascade induction (p4 box)?
+    back: These attributes let them regulate cellular activity in a coordinated, interactive way.
+    src: { page: 4, quote: "which permit them to regulate cellular activity in a coordinated interactive way." }
+    status: unverified
+  # ---------- p6: biological functions ----------
+  - id: rheum.L01.030
+    kind: table
+    topic: functions
+    title: Biological functions of cytokines with the book's example
+    columns: [Function, Example cytokine]
+    rows:
+      - [Development of cellular and humoral immune responses, IL-2 and IL-4]
+      - [Induction of inflammatory response, "IL-1, IL-6 and TNF-α"]
+      - [Regulation of hematopoiesis, GM-CSF]
+      - [Regulation of cellular proliferation and differentiation, IL-2]
+      - [Wound repair, TGF-β]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 6, quote: "Induction of inflammatory response (IL-1, IL-6 and TNF-a). 3. Regulation of hematopoiesis (GM-CSF)." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L01.031
+    kind: cloze
+    topic: functions
+    text: "The three classic inflammatory cytokines are {{c1::IL-1}}, {{c2::IL-6}} and {{c3::TNF-α}}."
+    src: { page: 6, quote: "Induction of inflammatory response (IL-1, IL-6 and TNF-a)." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L01.032
+    kind: cloze
+    topic: functions
+    text: "Wound repair is the function of {{c1::TGF-β}}; regulation of hematopoiesis is the example of {{c2::GM-CSF}}."
+    src: { page: 6, quote: "Regulation of hematopoiesis (GM-CSF). 4. Regulation of cellular proliferation and differentiation (IL-2). 5. Wound repair (TGF-b)." }
+    status: unverified
+  - id: rheum.L01.033
+    kind: card
+    topic: functions
+    front: How does the cytokine network start, according to p6?
+    back: Antigen interacts with a macrophage, which then activates resting TH cells; cytokines from these cells activate an entire network of interacting cells.
+    src: { page: 6, quote: "Interaction of antigen with macrophage ----subsequent activation of resting TH cells." }
+    status: unverified
+  - id: rheum.L01.034
+    kind: table
+    topic: functions
+    title: "Table 12-1: cytokines of innate immunity"
+    columns: [Cytokine, Secreted by, Targets and effects]
+    rows:
+      - [IL-1, "Monocytes, macrophages, endothelial and epithelial cells", "Vasculature (inflammation); hypothalamus (fever); liver (acute phase proteins)"]
+      - [TNF-α, Macrophages, "Vasculature (inflammation); liver (acute phase proteins); cachexia; death of many cell types; neutrophil activation"]
+      - [IL-12, "Macrophages, dendritic cells", "NK cells; promotes the TH1 subset"]
+      - [IL-6, "Macrophages, endothelial cells", "Liver (acute phase proteins); proliferation and antibody secretion of B-cell lineage"]
+      - [IFN-α, Macrophages, "Antiviral state; increases MHC class I; activates NK cells"]
+      - [IFN-β, Fibroblasts, "Antiviral state; increases MHC class I; activates NK cells"]
+    blanks: [[0, 2], [1, 2], [2, 2], [3, 2], [5, 1]]
+    src: { page: 6, quote: "Interleukin 1 (IL-1) Monocytes, macrophages, endothelial cells, epithelial cells" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L01.035
+    kind: table
+    topic: functions
+    title: "Table 12-1: cytokines of adaptive immunity"
+    columns: [Cytokine, Secreted by, Targets and effects]
+    rows:
+      - [IL-2, T cells, "T-cell proliferation; can promote AICD; NK-cell activation and proliferation; B-cell proliferation"]
+      - [IL-4, "TH2 cells, mast cells", "Promotes TH2 differentiation; isotype switch to IgE"]
+      - [IL-5, TH2 cells, Eosinophil activation and generation]
+      - [TGF-β, "T cells, macrophages, other cells", "Inhibits T-cell proliferation and effector functions; inhibits B-cell proliferation; switch to IgA; inhibits macrophages"]
+      - [IFN-γ, "TH1 cells, CD8+ cells, NK cells", "Activates macrophages; increases MHC class I and II; increases antigen presentation"]
+    blanks: [[0, 2], [1, 2], [2, 2], [3, 2], [4, 2]]
+    src: { page: 6, quote: "Interleukin 4 (IL-4) TH2 cells, mast cells Promotes TH2 differentiation; isotype switch to IgE" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L01.036
+    kind: mcq
+    topic: functions
+    stem: "Which cytokine in Table 12-1 promotes the isotype switch to IgA?"
+    options: [TGF-β, IL-4, IL-5, IFN-γ]
+    answer: 0
+    why:
+      - "Correct: TGF-β promotes the switch to IgA while inhibiting T- and B-cell proliferation and macrophages."
+      - "IL-4 drives the switch to IgE."
+      - "IL-5 activates and generates eosinophils."
+      - "IFN-γ activates macrophages and raises MHC expression."
+    src: { page: 6, quote: "Transforming growth factor β (TGF-β) T cells, macrophages, other cell types Inhibits T-cell proliferation" }
+    status: unverified
+  - id: rheum.L01.037
+    kind: mcq
+    topic: functions
+    stem: "A cytokine secreted by TH2 cells mainly activates and generates eosinophils. Which is it?"
+    options: [IL-5, IL-4, IL-2, IL-12]
+    answer: 0
+    why:
+      - "Correct: IL-5 from TH2 cells = eosinophil activation and generation."
+      - "IL-4 promotes TH2 differentiation and the IgE switch."
+      - "IL-2 is the T-cell growth cytokine."
+      - "IL-12 comes from macrophages and dendritic cells and promotes TH1."
+    src: { page: 6, quote: "Interleukin 5 (IL-5) TH2 cells Eosinophil activation and generation" }
+    status: unverified
+  - id: rheum.L01.038
+    kind: card
+    topic: functions
+    front: Which cytokine of innate immunity is secreted by fibroblasts (Table 12-1)?
+    back: IFN-β, which induces an antiviral state, increases MHC class I expression and activates NK cells.
+    src: { page: 6, quote: "Interferon β (IFN-β) Fibroblasts Induces an antiviral state in most nucleated cells" }
+    status: unverified
+  - id: rheum.L01.039
+    kind: card
+    topic: functions
+    front: Which cytokine causes cachexia (loss of muscle and body fat) in Table 12-1?
+    back: TNF-α.
+    src: { page: 6, quote: "loss of muscle, body fat (cachexia); induction of death in many cell types; neutrophil activation" }
+    status: unverified
+  # ---------- p7-10: families ----------
+  - id: rheum.L01.040
+    kind: enumerate
+    topic: families
+    prompt: Enumerate the six families of cytokines.
+    points: ["Interleukin 1 (IL-1) family", "Hematopoietin family (class I)", "Interferon family (class II)", Chemokine family, Tumor necrosis factor family, "Interleukin 17 (IL-17) family"]
+    pass: 5
+    src: { page: 7, quote: "Cytokines belong to 6 families o Interleukin 1 (IL-1). o Hematopoietin family (Class I). o Interferon family (Class II)." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L01.041
+    kind: table
+    topic: families
+    title: Six major cytokine families and their members (p7)
+    columns: [Family, Members]
+    rows:
+      - [Interleukin 1 family, "IL-1α, IL-1β, IL-1Ra, IL-18, IL-33"]
+      - [Hematopoietin (class I), "IL-2, IL-3, IL-4, IL-5, IL-6, IL-7, IL-12, IL-13, IL-15, IL-21, GM-CSF, G-CSF"]
+      - [Interferon (class II), "IFN-α, IFN-β, IFN-γ, IL-10, IL-19, IL-20, IL-22, IL-24"]
+      - [Tumor necrosis family, "TNF-α, TNF-β, CD40L, Fas, BAFF"]
+      - [Interleukin 17 family, "IL-17 A, B, C, D, E, F"]
+      - [Chemokines, "IL-8, CCL19, CCL21, CCL2, CCL3"]
+    blanks: [[0, 1], [2, 1], [3, 1], [5, 1]]
+    src: { page: 7, quote: "Six major cytokine families Interleukin 1 family" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L01.042
+    kind: mcq
+    topic: families
+    stem: "In the book's table of the six cytokine families, IL-10 belongs to which family?"
+    options: [Interferon (class II) family, Hematopoietin (class I) family, IL-1 family, Chemokines]
+    answer: 0
+    why:
+      - "Correct: IFN-α, -β, -γ plus IL-10, IL-19, IL-20, IL-22 and IL-24."
+      - "Class I holds IL-2 to IL-7, IL-12, IL-13, IL-15, IL-21, GM-CSF and G-CSF."
+      - "The IL-1 family is IL-1α, IL-1β, IL-1Ra, IL-18 and IL-33."
+      - "Chemokines are IL-8, CCL19, CCL21, CCL2 and CCL3."
+    src: { page: 7, quote: "Interferon family (Class II)." }
+    status: unverified
+  - id: rheum.L01.043
+    kind: mcq
+    topic: families
+    stem: "IL-8 belongs to which cytokine family?"
+    options: [Chemokines, IL-1 family, IL-17 family, Hematopoietin family]
+    answer: 0
+    why:
+      - "Correct: IL-8 (CXCL8) is listed with CCL19, CCL21, CCL2 and CCL3; all are chemoattractants."
+      - "The IL-1 family is IL-1α, IL-1β, IL-1Ra, IL-18, IL-33."
+      - "The IL-17 family is IL-17A to F."
+      - "The class I family does not include IL-8."
+    src: { page: 7, quote: "Chemokines IL-8, CCL19, CCL21, CCL2, CCL3" }
+    status: unverified
+  - id: rheum.L01.044
+    kind: card
+    topic: families
+    front: Three structural facts about all cytokine families (p7)?
+    back: All have a molecular mass under 30 kDa, all have similarities, and few rarely act alone.
+    src: { page: 7, quote: "All have molecular mass less than 30kDa. All have similarities and few rarely act alone." }
+    status: unverified
+  - id: rheum.L01.045
+    kind: card
+    topic: families
+    front: Which cytokine was the first non-interferon cytokine to be identified?
+    back: IL-1.
+    src: { page: 7, quote: "IL-1 was the first noninterferon cytokine to be identified." }
+    status: unverified
+  - id: rheum.L01.046
+    kind: card
+    topic: families
+    front: When and by whom are IL-1 family cytokines secreted?
+    back: Very early in the immune response, by dendritic cells, monocytes and macrophages, after innate receptors recognise viral, parasitic or bacterial antigens.
+    src: { page: 8, quote: "Cytokines of the interleukin 1 (IL-1) family are typically secreted very early in the immune response by dendritic cells, monocytes, and macrophages" }
+    status: unverified
+  - id: rheum.L01.047
+    kind: card
+    topic: families
+    front: Which cytokines does IL-1 signal the liver to produce, and what do they do?
+    back: Type I interferons (IFN-α, IFN-β), IL-6 and CXCL8; they destroy viral RNA and generate a systemic fever response.
+    src: { page: 8, quote: "signals the liver to produce other cytokines, such as the type I interferons (IFN-α and IFN-β), IL-6, and the chemokine CXCL8." }
+    status: unverified
+  - id: rheum.L01.048
+    kind: card
+    topic: families
+    front: Why is the fever induced by IL-1 protective?
+    back: It helps eliminate many temperature-sensitive bacterial strains.
+    src: { page: 8, quote: "generating a systemic fever response (which helps to eliminate many temperature-sensitive bacterial strains)." }
+    status: unverified
+  - id: rheum.L01.049
+    kind: card
+    topic: families
+    front: How does IL-1 link innate and adaptive immunity?
+    back: It helps to activate both T and B cells.
+    src: { page: 8, quote: "IL-1 serves as an intermediary between the innate and adaptive immune systems by helping to activate both T and B cells." }
+    status: unverified
+  - id: rheum.L01.050
+    kind: cloze
+    topic: families
+    text: "The IL-1 family includes IL-1α, IL-1β, {{c1::IL-18}} and {{c2::IL-33}}."
+    src: { page: 8, quote: "Members of the IL-1 cytokine family include IL-1α and IL-1β IL-1 family also includes IL-18 and IL-33." }
+    status: unverified
+  - id: rheum.L01.051
+    kind: table
+    topic: families
+    title: Examples of class 1 (hematopoietin) cytokine actions
+    columns: [Action, Example]
+    rows:
+      - [Signal the onset of T- and B-cell proliferation, IL-2]
+      - [Regulate helper T-cell functions, IL-4]
+      - [B-cell differentiation to plasma cells and antibody secretion, IL-6]
+      - [Initiate differentiation of particular leukocyte lineages, "GM-CSF, G-CSF"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 8, quote: "Class 1 cytokines signal the onset of T- and B-cell proliferation (e.g., IL-2)." }
+    status: unverified
+  - id: rheum.L01.052
+    kind: card
+    topic: families
+    front: Which is the largest cytokine family?
+    back: The class 1 (hematopoietin) family; its members mediate proliferation, differentiation and antibody secretion.
+    src: { page: 9, quote: "The class 1 cytokine family is the largest family of cytokines" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L01.053
+    kind: table
+    topic: families
+    title: The three types of interferons (class 2 family)
+    columns: [Type, Members, Role]
+    rows:
+      - [Type I, "IFN-α, IFN-β", Early antiviral response]
+      - [Type II, IFN-γ, "Activates macrophages, interacts with adaptive immune cells, supports TH1 generation"]
+      - [Type III, IFN-λ, "From plasmacytoid dendritic cells; regulates viral replication and host cell proliferation"]
+    blanks: [[0, 1], [1, 1], [2, 1], [0, 2], [1, 2]]
+    src: { page: 9, quote: "Type I interferons (IFN-α and IFN-β), which mediate early antiviral response." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L01.054
+    kind: mcq
+    topic: families
+    stem: "Which interferon is secreted by plasmacytoid dendritic cells and regulates viral replication and host cell proliferation?"
+    options: [IFN-λ (type III), IFN-γ (type II), IFN-β (type I), IFN-α (type I)]
+    answer: 0
+    why:
+      - "Correct: type III interferon, from pDCs."
+      - "IFN-γ activates macrophages and supports TH1 cells."
+      - "IFN-β mediates the early antiviral response; in Table 12-1 it is made by fibroblasts."
+      - "IFN-α mediates the early antiviral response; in Table 12-1 it is made by macrophages."
+    src: { page: 9, quote: "Type III interferons (IFN-λ), which are secreted by plasmacytoid dendritic cells (pDC) and regulate viral replication and host cell proliferation." }
+    status: unverified
+  - id: rheum.L01.055
+    kind: card
+    topic: families
+    front: Which systems does the TNF family regulate?
+    back: Development, effector function and homeostasis of cells of the skeletal and neuronal systems, as well as the immune system.
+    src: { page: 9, quote: "regulate the development, effector function, and homeostasis of cells of the skeletal and neuronal systems, as well as the immune system." }
+    status: unverified
+  - id: rheum.L01.056
+    kind: card
+    topic: families
+    front: In what forms do TNF family cytokines exist?
+    back: Soluble or membrane-bound (transmembrane); in some cases the same cytokine exists in both forms.
+    src: { page: 9, quote: "In some cases, the same cytokine exists in both soluble and membrane- bound forms." }
+    status: unverified
+  - id: rheum.L01.057
+    kind: card
+    topic: families
+    front: Which cells produce TNF-α, and in response to what?
+    back: Mainly activated macrophages, also lymphocytes, fibroblasts and keratinocytes; in response to infection, inflammation and environmental stressors.
+    src: { page: 9, quote: "TNF-α: is a proinflammatory cytokine, produced in response to infection, inflammation, and environmental stressors by activated macrophages" }
+    status: unverified
+  - id: rheum.L01.058
+    kind: card
+    topic: families
+    front: Which cells produce TNF-β, and what does it do on neutrophils and endothelial cells?
+    back: Activated lymphocytes; it increases expression of MHC and adhesion molecules.
+    src: { page: 10, quote: "TNF-β is produced by activated lymphocytes and can deliver a variety of signals." }
+    status: unverified
+  - id: rheum.L01.059
+    kind: card
+    topic: families
+    front: Why is the TNF pathway important therapeutically?
+    back: TNF cytokine pathways are the targets of some of the most effective drugs.
+    src: { page: 10, quote: "TNF cytokine pathways are the targets of some of the most effective drugs." }
+    status: unverified
+  - id: rheum.L01.060
+    kind: card
+    topic: families
+    front: Which is the most recently identified cytokine family?
+    back: The IL-17 family.
+    src: { page: 10, quote: "The IL-17 Family of Cytokines Is the Most Recently Identified." }
+    status: unverified
+    tags: [exam-trap]
+  - id: rheum.L01.061
+    kind: card
+    topic: families
+    front: Which cells release IL-17A, and where are its receptors?
+    back: Activated T cells (the TH17 subset); receptors are on neutrophils, keratinocytes and other non-lymphoid cells.
+    src: { page: 10, quote: "IL-17A, the first member of the IL-17 family to be detected, is released by activated T cells" }
+    status: unverified
+  - id: rheum.L01.062
+    kind: card
+    topic: families
+    front: Where does the TH17 subset sit in the immune system?
+    back: At the interface of innate and adaptive immunity.
+    src: { page: 10, quote: "the TH 17 cell subset, which appears to occupy a locus at the interface of innate and adaptive immunity." }
+    status: unverified
+  - id: rheum.L01.063
+    kind: card
+    topic: families
+    front: What does signalling through most IL-17 family members lead to?
+    back: Inflammation (a proinflammatory state); the family also promotes neutrophil accumulation and activation.
+    src: { page: 10, quote: "Signaling through most members of this family culminates in the generation of inflammation." }
+    status: unverified
+  - id: rheum.L01.064
+    kind: card
+    topic: families
+    front: What do chemokines do?
+    back: They bind cell-surface receptors and move leukocytes up a chemokine concentration gradient toward its source (chemotaxis).
+    src: { page: 10, quote: "induce the movement of leukocytes up a chemokine concentration gradient and toward the chemokine source." }
+    status: unverified
+  - id: rheum.L01.065
+    kind: cloze
+    topic: families
+    text: "Soluble factor-directed cell movement is {{c1::chemotaxis}}; molecules that elicit it are {{c2::chemoattractants}}."
+    src: { page: 10, quote: "This soluble factor–directed cell movement is known as chemotaxis, and molecules that elicit such movement are referred to as chemoattractants." }
+    status: unverified
+  - id: rheum.L01.066
+    kind: card
+    topic: families
+    front: What do leukocytes change during the course of an immune response, regarding chemokines?
+    back: Their pattern of expression of chemokine receptors.
+    src: { page: 10, quote: "Leukocytes change their pattern of expression of chemokine receptors during the course of an immune response." }
+    status: unverified
+  # ---------- p11, p14: Th subsets ----------
+  - id: rheum.L01.067
+    kind: table
+    topic: th-subsets
+    title: Cytokines that steer naive CD4+ T cells and B cells (p11)
+    columns: [Cytokine, Effect]
+    rows:
+      - [IL-12, Naive CD4+ → Th1]
+      - [IL-1 and IL-6, Naive CD4+ → Th17]
+      - [IL-33, Naive CD4+ → Th2]
+      - [IL-6, Antibody production by activated B cells]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 11, quote: "IL-12 stimulates the differentiation of naive CD4+ T cells to the Th1 subset of effector cells." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L01.068
+    kind: mcq
+    topic: th-subsets
+    stem: "Which cytokine stimulates naive CD4+ T cells to differentiate into Th2 cells, according to the lecture?"
+    options: [IL-33, IL-12, IL-6, IL-1]
+    answer: 0
+    why:
+      - "Correct: IL-33 drives the Th2 subset."
+      - "IL-12 drives Th1."
+      - "IL-6 (with IL-1) drives Th17 and promotes antibody production."
+      - "IL-1 (with IL-6) drives Th17."
+    src: { page: 11, quote: "IL-33 stimulates the differentiation of naive CD4+ T cells to the Th2 subset of effector cells." }
+    status: unverified
+  - id: rheum.L01.069
+    kind: cloze
+    topic: th-subsets
+    text: "{{c1::IL-1}} and {{c2::IL-6}} stimulate naive CD4+ T cells to become Th17 cells."
+    src: { page: 11, quote: "IL-1 and IL-6, stimulate the differentiation of naive CD4+ T cells to the Th17 subset of effector cells." }
+    status: unverified
+  - id: rheum.L01.070
+    kind: card
+    topic: th-subsets
+    front: What determines the type of immune response to a particular antigen, according to p14?
+    back: Differences in the cytokine secretion patterns among Th-cell subsets.
+    src: { page: 14, quote: "Differences in the cytokine secretion patterns among Th-cell subsets determines the type of immune response made to a particular antigenic challenge." }
+    status: unverified
+  - id: rheum.L01.071
+    kind: card
+    topic: th-subsets
+    front: How do CD4 Th cells exert most of their helper functions?
+    back: Through secreted cytokines; Th1 and Th2 subpopulations can be told apart by the cytokines they secrete.
+    src: { page: 14, quote: "CD4 Th cells exert most of their helper functions through secreted cytokines." }
+    status: unverified
+  - id: rheum.L01.072
+    kind: card
+    topic: th-subsets
+    front: How do CD8 CTL cytokines differ from those of CD4 Th cells?
+    back: CD8 CTLs also secrete cytokines, but their array is more restricted.
+    src: { page: 14, quote: "CD8 CTLs also secrete cytokines but their array is more restricted (cytotoxic T lymphocytes)." }
+    status: unverified
+  - id: rheum.L01.073
+    kind: table
+    topic: th-subsets
+    title: Cytokine secretion by TH1 and TH2 (p14 table)
+    columns: [Cytokine, TH1, TH2]
+    rows:
+      - [IL-2, "+", "-"]
+      - [IFN-γ, "++", "-"]
+      - [TNF-β, "++", "-"]
+      - [GM-CSF, "++", "+"]
+      - [IL-3, "++", "++"]
+      - [IL-4, "-", "++"]
+      - [IL-5, "-", "++"]
+      - [IL-10, "-", "++"]
+      - [IL-13, "-", "++"]
+    blanks: [[1, 1], [2, 1], [4, 2], [5, 2], [7, 2]]
+    src: { page: 14, quote: "CYTOKINE SECRETION IL-2 IFN-γ TNF-β GM-CSF IL-3 IL-4 IL-5 IL-10 IL-13" }
+    status: unverified
+  - id: rheum.L01.074
+    kind: table
+    topic: th-subsets
+    title: Functions of TH1 versus TH2 (p14 table)
+    columns: [Function, TH1, TH2]
+    rows:
+      - [Help for total antibody production, "+", "++"]
+      - [Help for IgE production, "-", "++"]
+      - [Eosinophil and mast cell production, "-", "++"]
+      - [Macrophage activation, "++", "-"]
+      - [Delayed-type hypersensitivity, "++", "-"]
+      - [Tc-cell activation, "++", "-"]
+    blanks: [[1, 2], [2, 2], [3, 1], [4, 1], [5, 1]]
+    src: { page: 14, quote: "Help for IgE production Eosinophil and mast cell production Macrophage activation Delayed-type hypersensitivity" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L01.075
+    kind: mcq
+    topic: th-subsets
+    stem: "Which cytokine is secreted by both TH1 and TH2 cells (++ in both columns of the p14 table)?"
+    options: [IL-3, IL-2, IFN-γ, IL-10]
+    answer: 0
+    why:
+      - "Correct: IL-3 is ++ in both; GM-CSF is the other shared one (++ TH1, + TH2)."
+      - "IL-2 is TH1 only (+)."
+      - "IFN-γ is TH1 only (++)."
+      - "IL-10 is TH2 only (++)."
+    src: { page: 14, quote: "IL-3" }
+    status: unverified
+  - id: rheum.L01.076
+    kind: table
+    topic: th-subsets
+    title: What TH1 and TH2 cytokines do (p14 figure)
+    columns: [Cytokine, Source, Actions]
+    rows:
+      - [IL-2, Th1, "Activates T cells, B cells, NK cells and macrophages"]
+      - [IFN-γ, Th1, "Inhibits Th2, stimulates Th1, activates NK cells and macrophages"]
+      - [IL-4, Th2, "Stimulates B-cell growth and differentiation; activates mast cells"]
+      - [IL-13, Th2, "Stimulates B-cell growth; suppresses macrophage functions"]
+      - [IL-5, Th2, "Stimulates B-cell growth; mobilizes and activates eosinophils"]
+      - [IL-9, Th2, T-cell growth factor]
+      - [IL-10, Th2, "Inhibits Th1 function; suppresses macrophage function"]
+    blanks: [[1, 2], [2, 2], [4, 2], [5, 2], [6, 2]]
+    src: { page: 14, quote: "Interleukin-10 Inhibits Th1 cell function Suppresses macrophage function" }
+    status: unverified
+  - id: rheum.L01.077
+    kind: mcq
+    topic: th-subsets
+    stem: "A Th2 cytokine inhibits Th1 cell function and suppresses macrophage function. Which is it?"
+    options: [IL-10, IL-9, IFN-γ, IL-2]
+    answer: 0
+    why:
+      - "Correct: IL-10 is the Th2 brake on Th1 and macrophages."
+      - "IL-9 is a T-cell growth factor."
+      - "IFN-γ is a Th1 cytokine that does the opposite: inhibits Th2 and activates macrophages."
+      - "IL-2 is a Th1 cytokine that activates T, B, NK cells and macrophages."
+    src: { page: 14, quote: "Interleukin-10 Inhibits Th1 cell function Suppresses macrophage function" }
+    status: unverified
+  # ---------- p11-13: receptors and signalling ----------
+  - id: rheum.L01.078
+    kind: card
+    topic: receptors
+    front: How are cytokine receptor complexes built?
+    back: Often heterodimers or heterotrimers combining a unique cytokine-specific recognition receptor with common receptor chains shared across a cytokine superfamily.
+    src: { page: 11, quote: "heterodimeric or heterotrimeric structures that use unique, cytokine-specific recognition receptors together with common receptor chains shared across a cytokine superfamily." }
+    status: unverified
+  - id: rheum.L01.079
+    kind: cloze
+    topic: receptors
+    text: "The common γ chain receptor is used by IL-2, IL-4, IL-7, IL-9, IL-15 and IL-21; {{c1::glycoprotein 130 (gp130)}} is shared by the {{c2::IL-6}} family."
+    src: { page: 11, quote: "the common γ chain receptor by IL-2, IL-4, IL-7, IL-9, IL-15, IL-21, and glycoprotein 130 (gp130) by members of the IL-6 family." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L01.080
+    kind: enumerate
+    topic: receptors
+    prompt: Which cytokines use the common γ chain receptor?
+    points: [IL-2, IL-4, IL-7, IL-9, IL-15, IL-21]
+    pass: 5
+    src: { page: 11, quote: "the common γ chain receptor by IL-2, IL-4, IL-7, IL-9, IL-15, IL-21" }
+    status: unverified
+  - id: rheum.L01.081
+    kind: card
+    topic: receptors
+    front: Which receptors share the IL-1 signalling domain?
+    back: IL-1R and other IL-1R superfamily members, including IL-18R, IL-33R and the Toll-like receptors.
+    src: { page: 11, quote: "the IL-1 signaling domain is common to not only IL-1R but also other IL-1R superfamily members including IL-18R, IL-33R, and the Toll-like receptors." }
+    status: unverified
+  - id: rheum.L01.082
+    kind: card
+    topic: receptors
+    front: Which shared signalling domain is found in many TNF-receptor family members?
+    back: Homologous death domains.
+    src: { page: 11, quote: "Homologous death domains are found in many TNF- receptor family members." }
+    status: unverified
+  - id: rheum.L01.083
+    kind: card
+    topic: receptors
+    front: What is receptor cross-communication on the cell membrane, and where was it best shown?
+    back: Unrelated cytokine receptor systems talk to each other so the cell can integrate many stimuli in real time; best shown in the epidermal growth factor receptor system, also in the common γ chain family.
+    src: { page: 11, quote: "Although best elucidated in the epidermal growth factor receptor system, this also has been identified for members of the common γ chain signaling family." }
+    status: unverified
+  - id: rheum.L01.084
+    kind: card
+    topic: receptors
+    front: TNF binds TNF-RI and TNF-RII with similar affinity. What is "ligand passing"?
+    back: TNF dissociates more slowly from TNF-RI, so soluble TNF may come off TNF-RII quickly and bind TNF-RI, giving preferential TNF-RI signalling.
+    src: { page: 12, quote: "Soluble TNF may dissociate rapidly from TNF-RII to bind TNF-RI, promoting preferential signaling by the latter (ligand passing)." }
+    status: unverified
+  - id: rheum.L01.085
+    kind: card
+    topic: receptors
+    front: What happens to TNF receptor signalling during cell-cell contact?
+    back: Stable TNF/TNF-RI and TNF/TNF-RII complexes form, so both receptors contribute differentially to signalling.
+    src: { page: 12, quote: "during cell- cell contact, stable TNF/TNF-RI and TNF/TNF-RII complexes form, allowing for differential signaling contribution by TNF-RI and TNF-RII." }
+    status: unverified
+  - id: rheum.L01.086
+    kind: enumerate
+    topic: receptors
+    prompt: Enumerate the five families of cytokine receptors.
+    points: [Immunoglobulin superfamily receptors, "Class I cytokine receptor family (hematopoietin receptor family)", "Class II cytokine receptor family (interferon receptor family)", TNF receptor family, Chemokine receptor family]
+    pass: 4
+    src: { page: 12, quote: "Receptors for various cytokines belong to five families 1. Immunoglobulin superfamily receptors." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L01.087
+    kind: mcq
+    topic: receptors
+    stem: "Which of the following is NOT one of the five cytokine receptor families in the lecture?"
+    options: [G-protein-coupled IL-17 receptor family, Immunoglobulin superfamily receptors, Class II (interferon) receptor family, TNF receptor family]
+    answer: 0
+    why:
+      - "Correct: the five are immunoglobulin superfamily, class I (hematopoietin), class II (interferon), TNF receptor and chemokine receptor families."
+      - "Immunoglobulin superfamily receptors are family 1."
+      - "Class II (interferon receptor) family is family 3."
+      - "TNF receptor family is family 4."
+    src: { page: 12, quote: "2. Class I cytokine receptor family (hematopoietin receptor family) 3. Class II cytokine receptor family (Interferon receptor family). 4. TNF receptor family." }
+    status: unverified
+  - id: rheum.L01.088
+    kind: order
+    topic: receptors
+    prompt: Order the steps of cytokine signalling (p13).
+    steps:
+      - Cytokine binds its receptor
+      - JAK or SYK kinases are activated
+      - They phosphorylate cytoplasmic molecules (STAT, MAPK)
+      - These migrate to the nucleus and activate gene transcription
+      - mRNA may be regulated by microRNAs
+      - Proteins are released into the microenvironment or presented on the membrane
+    src: { page: 13, quote: "Janus kinases (JAK) or spleen tyrosine kinase (SYK) are activated, which in turn phosphorylate additional cytoplasmic molecules" }
+    status: unverified
+  - id: rheum.L01.089
+    kind: cloze
+    topic: receptors
+    text: "After ligand binding, cytokine receptors activate {{c1::Janus kinases (JAK)}} or {{c2::spleen tyrosine kinase (SYK)}}, which phosphorylate {{c3::STAT}} and MAPK."
+    src: { page: 13, quote: "Janus kinases (JAK) or spleen tyrosine kinase (SYK) are activated" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L01.090
+    kind: card
+    topic: receptors
+    front: At which level can microRNAs regulate cytokine signalling?
+    back: After transcription, by regulating mRNA levels.
+    src: { page: 13, quote: "mRNA levels can also be regulated after transcription by microRNAs." }
+    status: unverified
+  - id: rheum.L01.091
+    kind: table
+    topic: receptors
+    title: Major cytokines secreted by macrophages (p13 figure)
+    columns: [Cytokine, Actions]
+    rows:
+      - [IL-1, "Costimulator of Th2 cells; stimulates acute-phase response"]
+      - [TNF-α, "Cytotoxic; stimulates T-cell growth; acute-phase response; triggers inflammation"]
+      - [IL-6, "Promotes B-cell differentiation; stimulates acute-phase response"]
+      - [IL-12, Costimulator of Th1 cells]
+      - [IL-18, Promotes IFN-γ production by Th1 cells]
+    blanks: [[0, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 13, quote: "Major cytokines secreted by macrophages" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L01.092
+    kind: mcq
+    topic: receptors
+    stem: "Which macrophage cytokine promotes IFN-γ production by Th1 cells?"
+    options: [IL-18, IL-6, IL-1, TNF-α]
+    answer: 0
+    why:
+      - "Correct: IL-18 promotes IFN-γ production by Th1 cells."
+      - "IL-6 promotes B-cell differentiation and the acute-phase response."
+      - "IL-1 costimulates Th2 cells and the acute-phase response."
+      - "TNF-α is cytotoxic, stimulates T-cell growth and triggers inflammation."
+    src: { page: 13, quote: "Interleukin-18 Promotes IFN-γ production by Th1 cells" }
+    status: unverified
+  # ---------- p15-16: cytokine storm ----------
+  - id: rheum.L01.093
+    kind: card
+    topic: storm
+    front: Define cytokine storm (hypercytokinemia).
+    back: A severe immune reaction in which the body releases too many cytokines into the blood too quickly; immune dysregulation with constitutional symptoms, systemic inflammation and multiorgan dysfunction.
+    src: { page: 15, quote: "A severe immune reaction in which the body releases too many cytokines into the blood too quickly." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L01.094
+    kind: card
+    topic: storm
+    front: What can a cytokine storm lead to instead of an effective immune response?
+    back: Shock, multiorgan failure, or even death.
+    src: { page: 15, quote: "cytokine storms may lead to shock, multiorgan failure, or even death." }
+    status: unverified
+  - id: rheum.L01.095
+    kind: card
+    topic: storm
+    front: Which pathogens induce cytokine storms (book examples)?
+    back: Pathogenic viruses such as influenza A and COVID, and some types of bacteria.
+    src: { page: 15, quote: "pathogenic viruses (e.g., influenza A, COVID) and some types of bacteria bacteria." }
+    status: unverified
+  - id: rheum.L01.096
+    kind: enumerate
+    topic: storm
+    prompt: Enumerate the causes of cytokine storm in the lecture.
+    points: [Infection (influenza A, COVID, some bacteria), Autoimmune condition, "Some drugs (CAR T-cell therapy)", "Some immunotherapy (high-dose IL-2 for cancer)"]
+    pass: 3
+    src: { page: 15, quote: "A cytokine storm can occur as a result of an infection, autoimmune condition, or some drugs (CAR T-cell therapy–induced cytokine storm) ." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L01.097
+    kind: card
+    topic: storm
+    front: Which immunotherapy is given in the book as a cause of cytokine storm in cancer patients?
+    back: High-dose interleukin-2.
+    src: { page: 15, quote: "patients with cancer who are treated with high-dose interleukin-2" }
+    status: unverified
+  - id: rheum.L01.098
+    kind: card
+    topic: storm
+    front: What is the near-universal clinical sign of cytokine storm?
+    back: Fever; nearly all patients are febrile, and it may be high grade in severe cases.
+    src: { page: 15, quote: "Nearly all patients with cytokine storm are febrile, and the fever may be high grade in severe cases." }
+    status: unverified
+  - id: rheum.L01.099
+    kind: card
+    topic: storm
+    front: Besides fever, which symptoms may patients with cytokine storm have?
+    back: Fatigue, anorexia, headache, rash, diarrhea, arthralgia, myalgia and neuropsychiatric findings.
+    src: { page: 16, quote: "patients may have fatigue, anorexia, headache, rash, diarrhea, arthralgia, myalgia, and neuropsychiatric findings." }
+    status: unverified
+  - id: rheum.L01.100
+    kind: card
+    topic: storm
+    front: Why are patients with cytokine storm at high risk of spontaneous hemorrhage?
+    back: The combination of hyperinflammation, coagulopathy and low platelet counts.
+    src: { page: 16, quote: "The combination of hyperinflammation, coagulopathy, and low platelet counts places patients with cytokine storm at high risk for spontaneous hemorrhage." }
+    status: unverified
+  - id: rheum.L01.101
+    kind: card
+    topic: storm
+    front: What leads to capillary leak syndrome and anasarca in cytokine storm?
+    back: Renal dysfunction, endothelial-cell death and acute-phase hypoalbuminemia together.
+    src: { page: 16, quote: "The combination of renal dysfunction, endothelial-cell death, and acute-phase hypoalbuminemia can lead to capillary leak syndrome and anasarca." }
+    status: unverified
+  - id: rheum.L01.102
+    kind: enumerate
+    topic: storm
+    prompt: Enumerate the organ complications of cytokine storm.
+    points: ["DIC (vascular occlusion or catastrophic hemorrhage)", "ARDS needing ventilation", Vasodilatory shock, Renal failure, Acute liver injury or cholestasis, Stress-related cardiomyopathy, Capillary leak syndrome and anasarca]
+    pass: 5
+    src: { page: 16, quote: "Renal failure, acute liver injury or cholestasis, and a stress-related cardiomyopathy can also develop." }
+    status: unverified
+  - id: rheum.L01.103
+    kind: card
+    topic: storm
+    front: Which inflammatory marker is universally raised in cytokine storm and tracks severity?
+    back: CRP (nonspecific markers of inflammation are universally elevated and correlate with severity).
+    src: { page: 16, quote: "Nonspecific markers of inflammation such as CRP are universally elevated and correlate with severity." }
+    status: unverified
+  - id: rheum.L01.104
+    kind: enumerate
+    topic: storm
+    prompt: Enumerate the laboratory findings in cytokine storm.
+    points: [Raised CRP, Hypertriglyceridemia, "Leukocytosis or leukopenia", Anemia, Thrombocytopenia, Raised ferritin, Raised D-dimer, "Raised IFN-γ, IL-6, IL-10 and soluble IL-2 receptor α"]
+    pass: 6
+    src: { page: 16, quote: "Many patients have hypertriglyceridemia and various blood-count abnormalities, such as leukocytosis, leukopenia, anemia, thrombocytopenia, and elevated ferritin and d-dimer levels." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L01.105
+    kind: cloze
+    topic: storm
+    text: "Serum cytokines raised in cytokine storm: IFN-γ, {{c1::IL-6}}, {{c2::IL-10}} and {{c3::soluble IL-2 receptor α}}."
+    src: { page: 16, quote: "Elevations in serum inflammatory cytokine levels, such as IFN-γ, IL-6, IL-10, and soluble IL-2 receptor α" }
+    status: unverified
+  - id: rheum.L01.106
+    kind: card
+    topic: storm
+    front: How are cytokine profiles most useful in cytokine storm?
+    back: For determining the trend from baseline values.
+    src: { page: 16, quote: "Cytokine profiles may be helpful in determining the trend from baseline values." }
+    status: unverified
+  - id: rheum.L01.107
+    kind: mcq
+    topic: storm
+    stem: "A 24-year-old man with lymphoma develops fever of 40 °C, hypotension and hypoxemia 3 days after CAR T-cell infusion. CRP and ferritin are very high, platelets 60 × 10^9/L, triglycerides raised. What is the most likely diagnosis?"
+    options: [Cytokine storm, Bacterial toxic shock syndrome, Tumour lysis syndrome, Transfusion reaction]
+    answer: 0
+    why:
+      - "Correct: CAR T-cell therapy is a named cause; fever, shock, hypoxemia, high CRP and ferritin, low platelets and high triglycerides fit."
+      - "Toxic shock comes from superantigen toxins such as Staph. aureus, not CAR T cells."
+      - "Tumour lysis is a metabolic syndrome (urate, potassium, phosphate), not in this lecture's picture."
+      - "Nothing here points to a transfusion; the trigger is the CAR T-cell infusion."
+    src: { page: 15, quote: "A cytokine storm can occur as a result of an infection, autoimmune condition, or some drugs (CAR T-cell therapy–induced cytokine storm) ." }
+    status: unverified
+  # ---------- p17: diseases ----------
+  - id: rheum.L01.108
+    kind: card
+    topic: diseases
+    front: Which bacteria does the book give as causes of bacterial septic shock?
+    back: Staphylococcus aureus, E. coli, Klebsiella pneumoniae and others.
+    src: { page: 17, quote: "Certain bacteria: Staphyloccocus aureus, E. coli, Klebsiella pneumoniae" }
+    status: unverified
+  - id: rheum.L01.109
+    kind: card
+    topic: diseases
+    front: What is the mechanism of bacterial septic shock?
+    back: Endotoxins (cell wall) bind TLRs on dendritic cells and macrophages, which over-produce IL-1β and TNF-α; the cytokine imbalance causes abnormal temperature and respiration, capillary leakage, tissue injury and organ failure.
+    src: { page: 17, quote: "Endotoxins (cell wall) bind TLRs on dendritic cells and macrophages leading them to produce." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L01.110
+    kind: cloze
+    topic: diseases
+    text: "In septic shock, macrophages over-produce {{c1::IL-1β}} and {{c2::TNF-α}}; neutralisation by {{c3::monoclonal antibodies}} may help."
+    src: { page: 17, quote: "Over-produce IL-1β and TNF-α." }
+    status: unverified
+  - id: rheum.L01.111
+    kind: card
+    topic: diseases
+    front: Symptoms of bacterial septic shock (p17)?
+    back: Drop in blood pressure, fever, diarrhea and blood clotting.
+    src: { page: 17, quote: "Symptoms: drop in blood pressure, fever, diarrhea, blood clotting." }
+    status: unverified
+  - id: rheum.L01.112
+    kind: card
+    topic: diseases
+    front: How do superantigens cause bacterial toxic shock?
+    back: Toxins (e.g. Staph. aureus) bind class II MHC and the T-cell receptor at the same time, activating T cells regardless of antigen specificity and inducing very high TNF-α and IL-1β.
+    src: { page: 17, quote: "Bind simultaneously to Class II MHC and T cell receptor, activating T cell despite antigenic specificity" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L01.113
+    kind: mcq
+    topic: diseases
+    stem: "What is the key difference between bacterial septic shock and bacterial toxic shock in the lecture?"
+    options:
+      - "Septic shock: endotoxin on TLRs of macrophages and DCs; toxic shock: superantigen bridging MHC II and the TCR"
+      - "Septic shock is caused only by Gram-positive bacteria"
+      - "Toxic shock is mediated by IL-10 and TGF-β"
+      - "Toxic shock needs antigen-specific T-cell recognition"
+    answer: 0
+    why:
+      - "Correct: both end in huge TNF-α and IL-1β, but the trigger and the responding cell differ."
+      - "The book lists Staph. aureus, E. coli and Klebsiella for septic shock, and the mechanism is endotoxin."
+      - "Both are driven by TNF-α and IL-1β, not IL-10 or TGF-β."
+      - "Superantigens activate T cells despite antigenic specificity."
+    src: { page: 17, quote: "Microorganisms produce toxins that act as Superantigens (Staph. aureus)" }
+    status: unverified
+  - id: rheum.L01.114
+    kind: card
+    topic: diseases
+    front: Two ways that natural cytokine antagonists block cytokine activity?
+    back: They bind the receptor without activating the cell (blocking the active cytokine), or they bind the cytokine and stop it from binding its receptor.
+    src: { page: 17, quote: "Can bind to receptor but fail to activate the cell, thus blocking the active cytokine from binding" }
+    status: unverified
+  # ---------- p18-19: therapy ----------
+  - id: rheum.L01.115
+    kind: card
+    topic: therapy
+    front: With which agents did cytokine-based biological therapy first succeed, and in which diseases?
+    back: A soluble TNF receptor and anti-TNF antibodies that bind and neutralise TNF; they benefit many patients with RA, Crohn's disease and psoriasis.
+    src: { page: 18, quote: "This class of biological agents first succeeded with a soluble form of the TNF receptor and anti-TNF antibodies" }
+    status: unverified
+  - id: rheum.L01.116
+    kind: card
+    topic: therapy
+    front: For which diseases have antibodies to the IL-6 receptor been used successfully?
+    back: Juvenile and adult arthritis.
+    src: { page: 18, quote: "Antibodies to the IL-6 receptor have been successfully used for juvenile and adult arthritis." }
+    status: unverified
+  - id: rheum.L01.117
+    kind: card
+    topic: therapy
+    front: Which cytokine chain is shared by IL-12 and IL-23, and why does it matter?
+    back: The p40 chain; antagonists of it are approved for various inflammatory diseases (with IL-1 and IL-17 antagonists).
+    src: { page: 18, quote: "the p40 chain that is present in both IL-12 and IL-23, and IL-17, are now approved for various inflammatory diseases" }
+    status: unverified
+  - id: rheum.L01.118
+    kind: card
+    topic: therapy
+    front: Why is IFN-γ used in leprosy and toxoplasmosis?
+    back: It biases the adaptive immune system toward a cytotoxic response, which works better than antibodies in these diseases.
+    src: { page: 18, quote: "IFN-γ is used clinically to bias the adaptive immune system toward a cytotoxic response in diseases such as leprosy and toxoplasmosis" }
+    status: unverified
+  - id: rheum.L01.119
+    kind: card
+    topic: therapy
+    front: Type I interferons are most notably used to treat what?
+    back: Hepatitis infections.
+    src: { page: 18, quote: "Type I interferons are used in the treatment of a variety of human diseases, most notably hepatitis infections" }
+    status: unverified
+  - id: rheum.L01.120
+    kind: enumerate
+    topic: therapy
+    prompt: Enumerate the anti-TNF therapies used for rheumatological diseases.
+    points: [Adalimumab, Certolizumab pegol, Etanercept, Golimumab, Infliximab]
+    pass: 4
+    src: { page: 18, quote: "Anti-TNF therapies used to treat rheumatological diseases. These include: 1. Adalimumab. 2. Certolizumab pegol. 3. Etanercept." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L01.121
+    kind: table
+    topic: therapy
+    title: Cytokines used as drugs (p18-19)
+    columns: [Cytokine, Used to treat]
+    rows:
+      - [Bone morphogenetic protein (BMP), Bone-related conditions]
+      - [Erythropoietin (EPO), Anemia]
+      - [G-CSF, Neutropenia in cancer patients]
+      - [GM-CSF, Neutropenia and fungal infections in cancer patients]
+      - [Interferon α, Hepatitis C and multiple sclerosis]
+      - [Interferon β, Multiple sclerosis]
+      - [IL-2, Cancer]
+      - [IL-11, Thrombocytopenia in cancer patients]
+      - [Interferon γ, Chronic granulomatous disease and osteopetrosis]
+    blanks: [[2, 1], [3, 1], [4, 1], [6, 1], [7, 1], [8, 1]]
+    src: { page: 19, quote: "Interleukin 11 (IL-11), used to treat thrombocytopenia in cancer patients." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L01.122
+    kind: cloze
+    topic: therapy
+    text: "Interferon gamma is used to treat {{c1::chronic granulomatous disease}} and {{c2::osteopetrosis}}."
+    src: { page: 19, quote: "Interferon gamma is used to treat chronic granulomatous disease and osteopetrosis." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L01.123
+    kind: mcq
+    topic: therapy
+    stem: "A patient with chemotherapy-induced thrombocytopenia is given a recombinant interleukin to raise the platelet count. Which one?"
+    options: [IL-11, IL-2, G-CSF, Interferon β]
+    answer: 0
+    why:
+      - "Correct: IL-11 treats thrombocytopenia in cancer patients."
+      - "IL-2 is used to treat cancer itself."
+      - "G-CSF treats neutropenia, not thrombocytopenia."
+      - "Interferon β treats multiple sclerosis."
+    src: { page: 19, quote: "Interleukin 11 (IL-11), used to treat thrombocytopenia in cancer patients." }
+    status: unverified
+  - id: rheum.L01.124
+    kind: mcq
+    topic: therapy
+    stem: "Which cytokine is used for both hepatitis C and multiple sclerosis, according to the lecture?"
+    options: [Interferon α, Interferon β, Interferon γ, GM-CSF]
+    answer: 0
+    why:
+      - "Correct: interferon α, used to treat hepatitis C and multiple sclerosis."
+      - "Interferon β is listed for multiple sclerosis only."
+      - "Interferon γ is for chronic granulomatous disease and osteopetrosis."
+      - "GM-CSF is for neutropenia and fungal infections in cancer patients."
+    src: { page: 19, quote: "Interferon α, used to treat hepatitis C and multiple sclerosis." }
+    status: unverified
+    update:
+      text: "Interferon α is no longer used for hepatitis C: direct-acting antivirals replaced it (AASLD/IDSA HCV guidance). Keep the book's answer for the exam."
+      ref: AASLD/IDSA HCV Guidance, 2023
+  # ---------- p19-21: RA ----------
+  - id: rheum.L01.125
+    kind: card
+    topic: ra
+    front: In RA, which cytokine mainly mediates the inflammatory response, and which directs cartilage and bone destruction?
+    back: Inflammation is mainly mediated by TNF-α; cartilage and bone destruction is mostly directed by IL-1.
+    src: { page: 20, quote: "In RA, the inflammatory response is mainly mediated by TNFα, whereas cartilage and bone destruction is mostly directed by IL-1." }
+    status: unverified
+    tags: [high-yield, exam-trap]
+  - id: rheum.L01.126
+    kind: card
+    topic: ra
+    front: Which T-helper cytokine profile predominates in RA synovial fluid?
+    back: Th1 cytokines; RA patients also have a significantly increased proportion of Th17 cells.
+    src: { page: 20, quote: "Many studies have provided evidence for predominance of Th1 cytokine production in the synovial fluid from RA patients." }
+    status: unverified
+  - id: rheum.L01.127
+    kind: card
+    topic: ra
+    front: Define Th1 cytokines (p20).
+    back: Cytokines that favour T-cell-mediated cellular immunity, cytotoxicity and monocyte activation, leading to amplified production of pro-inflammatory cytokines.
+    src: { page: 20, quote: "Th1 cytokines are defined as the cytokines that favor T-cell mediated cellular immunity, cytotoxicity and monocyte activation" }
+    status: unverified
+  - id: rheum.L01.128
+    kind: card
+    topic: ra
+    front: How do pro-inflammatory cytokines induce the inflammation cascade?
+    back: By stimulating expression of genes coding for the synthesis of small inflammatory mediator molecules.
+    src: { page: 20, quote: "Pro-inflammatory cytokines function primarily to induce inflammation cascade by stimulating expression of genes coding for the synthesis of small inflammatory mediator molecules" }
+    status: unverified
+  - id: rheum.L01.129
+    kind: table
+    topic: ra
+    title: Th1, Th2 and Th17 cytokines in RA (p20)
+    columns: [Subset, Cytokines, Role]
+    rows:
+      - [Th1, "Mainly IL-2 and IFN-γ", Promote cellular immune response]
+      - [Th2, "IL-4, IL-5, IL-6, IL-10, IL-13", Stimulate antibody-mediated immune responses]
+      - [Th17, "IL-17 family", Elimination of fungal and extracellular pathogens]
+    blanks: [[0, 1], [1, 1], [0, 2], [1, 2], [2, 2]]
+    src: { page: 20, quote: "Th2 cytokines – IL-4, IL-5, IL-6, IL-10, and IL-13 – stimulate antibody- mediated immune responses." }
+    status: unverified
+  - id: rheum.L01.130
+    kind: card
+    topic: ra
+    front: What plays a crucial role in RA pathogenesis, according to p20?
+    back: The imbalance of cytokine production by Th1/Th2/Th17 lymphocytes.
+    src: { page: 20, quote: "The imbalance of cytokine production by Th1/Th2/Th17 lymphocytes plays a crucial role in RA pathogenesis." }
+    status: unverified
+  - id: rheum.L01.131
+    kind: card
+    topic: ra
+    front: How may synovial T cells be activated in RA?
+    back: By the T-cell receptor and co-stimulation pathways, and by cytokine- or Toll-like-receptor-driven stimuli.
+    src: { page: 20, quote: "Synovial T cells may be activated by T-cell receptor (TCR) and co- stimulation pathways and by cytokine- or Toll-like receptor-driven stimuli." }
+    status: unverified
+  - id: rheum.L01.132
+    kind: cloze
+    topic: ra
+    text: "The RA synovial milieu contains IL-12, {{c1::IL-23}}, IL-6 and {{c2::TGF-β}}, and so promotes differentiation of {{c3::TH1 and TH17}} cells."
+    src: { page: 21, quote: "The synovial milieu contains IL-12, IL-23, IL-6 and TGFβ, and as such promotes the differentiation of TH1 and TH17 cells." }
+    status: unverified
+  - id: rheum.L01.133
+    kind: card
+    topic: ra
+    front: What is the state of regulatory T cells in the RA synovium?
+    back: They are present but may not exhibit optimal regulatory activity.
+    src: { page: 21, quote: "Regulatory T cells, although present, may not exhibit optimal regulatory activity." }
+    status: unverified
+  - id: rheum.L01.134
+    kind: enumerate
+    topic: ra
+    prompt: How do activated T cells mediate effector function in RA?
+    points: [Release of cytokines that activate leukocytes and mesenchymal cells, Help to B cells, Cytotoxic activity (CD8+ effector T cells), "Direct cell-contact activation of macrophages, fibroblasts and endothelial cells"]
+    pass: 3
+    src: { page: 21, quote: "Activated T cells mediate effector function in RA through the release of cytokines, to promote downstream leukocyte and mesenchymal-cell activation" }
+    status: unverified
+  - id: rheum.L01.135
+    kind: table
+    topic: ra
+    title: Cytokines and osteoclast formation in RA (book figure, p19)
+    columns: [Signal, Source, Effect on osteoclastogenesis]
+    rows:
+      - ["IL-17, IL-1, TNF", TH17 cells, "Raise RANKL and M-CSF: promote"]
+      - [IL-7, "TNF and synovial fibroblasts", "Raises RANKL and M-CSF: promotes"]
+      - ["RANKL, M-CSF", "Synovial fibroblasts, TH1", "Drive the precursor to an osteoclast"]
+      - ["IL-4, IL-10", TH2 cells, Inhibit]
+      - ["IFN-γ, GM-CSF", TH1 cells, Inhibit]
+      - [IL-18, "", "Inhibits (and induces IFN-γ, GM-CSF)"]
+    blanks: [[0, 2], [1, 2], [3, 2], [4, 2]]
+    src: { page: 19, quote: "RANKL M-CSF" }
+    status: unverified
+  # ---------- p21: classification ----------
+  - id: rheum.L01.136
+    kind: table
+    topic: classification
+    title: Cytokines by division of labor (p21)
+    columns: [Type, Examples]
+    rows:
+      - [T-helper 1 cytokines, "IL-2, IL-12, TNF-α, IFN-γ"]
+      - [T-helper 2 cytokines, "IL-3, IL-4, IL-5, IL-13"]
+      - [T-helper 3 cytokines, "IL-10, TGF-β"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 21, quote: "CLASSIFICATIONS OF CYTOKINES" }
+    status: unverified
+  - id: rheum.L01.137
+    kind: card
+    topic: classification
+    front: Which are the "T-helper 3" type cytokines in the book's classification?
+    back: IL-10 and TGF-β.
+    src: { page: 21, quote: "T- helper 3 type of cytokines" }
+    status: unverified
+  - id: rheum.L01.138
+    kind: card
+    topic: classification
+    front: Structural classification of cytokines (p21)?
+    back: "IL-2/IL-4 family (IL-2, IL-4, IL-5, GM-CSF); TNF family (TNF-α, lymphotoxin-α, LT-β, FasL, CD40L, TRAIL, LIGHT); IL-1 family (IL-1α, IL-1β, IL-1Ra, IL-18)."
+    src: { page: 21, quote: "STRUCTURAL CLASSIFICATION OF CYTOKINES" }
+    status: unverified
+  - id: rheum.L01.139
+    kind: card
+    topic: classification
+    front: Which structural classification of receptors is based on the position of cysteine residues near the N-terminus, and what are its groups?
+    back: The chemokine classification; CC, CXC, C and CX3C.
+    src: { page: 21, quote: "RECEPTOR CLASSIFICATION BASED ON POSITION OF CYSTEINE RESIDUES NEAR THE N-TERMINUS" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L01.140
+    kind: card
+    topic: classification
+    front: Functional classification of chemokines (p21)?
+    back: Inflammatory chemokines, produced after inflammatory stimuli, and homing chemokines, produced constitutively in tissues.
+    src: { page: 21, quote: "FUNCTIONAL CLASSIFICATION" }
+    status: unverified
+  - id: rheum.L01.141
+    kind: card
+    topic: classification
+    front: Structural classification based on receptors (p21)?
+    back: "Hematopoietin family (class I) receptors: growth hormone, prolactin, erythropoietin, many interleukins, GM-CSF, G-CSF. Interferon/IL-10 family (class II) receptors: type I interferons, IFN-γ, IL-10, 19, 20, 22, 24."
+    src: { page: 21, quote: "Interferon/ IL-10family receptors (class II receptors)" }
+    status: unverified
+  # ---------- p22: book questions ----------
+  - id: rheum.L01.142
+    kind: mcq
+    topic: therapy
+    stem: "Which of the following cytokines is used for the treatment of chronic granulomatous disease?"
+    options: [Interferon gamma, Interferon alpha, Interferon beta, Interleukin-11]
+    answer: 0
+    why:
+      - "Correct: interferon gamma treats chronic granulomatous disease and osteopetrosis."
+      - "Interferon alpha is for hepatitis C and multiple sclerosis."
+      - "Interferon beta is for multiple sclerosis."
+      - "IL-11 is for thrombocytopenia in cancer patients."
+    src: { page: 19, quote: "Interferon gamma is used to treat chronic granulomatous disease and osteopetrosis." }
+    status: unverified
+    tags: [book-question]
+  - id: rheum.L01.143
+    kind: mcq
+    topic: therapy
+    stem: "Which of the following cytokines is used for the treatment of cancer?"
+    options: [Interleukin 2 (IL-2), G-CSF, Interferon gamma, Interleukin 11 (IL-11)]
+    answer: 0
+    why:
+      - "Correct: IL-2 is used to treat cancer."
+      - "G-CSF treats neutropenia in cancer patients, not the cancer."
+      - "Interferon gamma treats chronic granulomatous disease and osteopetrosis."
+      - "IL-11 treats thrombocytopenia in cancer patients."
+    src: { page: 19, quote: "Interleukin 2 (IL-2), used to treat cancer." }
+    status: unverified
+    tags: [book-question]
+  - id: rheum.L01.144
+    kind: essay
+    topic: storm
+    prompt: Discuss cytokine storm (hypercytokinemia).
+    outline:
+      - "Definition": ["Too many cytokines released into the blood too quickly", "Immune dysregulation with constitutional symptoms, systemic inflammation, multiorgan dysfunction"]
+      - "Causes": ["Infection: influenza A, COVID, some bacteria", "Autoimmune conditions", "Drugs: CAR T-cell therapy, high-dose IL-2"]
+      - "Clinical": ["Fever in nearly all", "Fatigue, rash, diarrhea, arthralgia, myalgia, neuropsychiatric", "DIC, ARDS, shock, renal and liver injury, cardiomyopathy, capillary leak"]
+      - "Laboratory": ["CRP universally raised, tracks severity", "High triglycerides, ferritin, D-dimer; cytopenias or leukocytosis", "Raised IFN-γ, IL-6, IL-10, soluble IL-2Rα"]
+    src: { page: 15, quote: "A severe immune reaction in which the body releases too many cytokines into the blood too quickly." }
+    status: unverified
+  - id: rheum.L01.145
+    kind: essay
+    topic: ra
+    prompt: Discuss the role of cytokines in the pathogenesis of rheumatoid arthritis.
+    outline:
+      - "Key cytokines": ["TNF-α mainly drives inflammation", "IL-1 mostly directs cartilage and bone destruction"]
+      - "T-cell subsets": ["Th1 predominance in synovial fluid; Th17 increased", "Th1/Th2/Th17 imbalance is crucial", "Milieu of IL-12, IL-23, IL-6, TGF-β favours Th1 and Th17; Tregs suboptimal"]
+      - "Effector functions": ["Cytokine release activates leukocytes and mesenchymal cells", "B-cell help; CD8+ cytotoxicity", "Direct contact activation of macrophages, fibroblasts, endothelium"]
+      - "Bone": ["IL-17, IL-1, TNF, IL-7 raise RANKL and M-CSF for osteoclasts", "IL-4, IL-10, IFN-γ, GM-CSF, IL-18 restrain them"]
+    src: { page: 20, quote: "In RA, the inflammatory response is mainly mediated by TNFα, whereas cartilage and bone destruction is mostly directed by IL-1." }
+    status: unverified
+  # ---------- cases ----------
+  - id: rheum.L01.146
+    kind: case
+    topic: diseases
+    stem: "A 30-year-old woman is admitted with fever, hypotension, diffuse rash and diarrhea two days after nasal packing for epistaxis. Cultures grow Staphylococcus aureus."
+    steps:
+      - question: What is the most likely mechanism?
+        options: ["Superantigen toxin bridging class II MHC and the TCR", "Endotoxin binding TLRs on macrophages", "Immune complex deposition", "IgE-mediated mast cell degranulation"]
+        answer: 0
+        why: "Staph. aureus toxins act as superantigens: they bind MHC II and the TCR together and activate T cells regardless of specificity."
+      - question: Which two cytokines reach extremely high levels?
+        options: ["TNF-α and IL-1β", "IL-4 and IL-5", "IL-10 and TGF-β", "IL-2 and IL-9"]
+        answer: 0
+        why: "Superantigen activation induces extremely high TNF-α and IL-1β, so the symptoms resemble sepsis."
+    src: { page: 17, quote: "Bind simultaneously to Class II MHC and T cell receptor, activating T cell despite antigenic specificity, induce extremely high levels of TNF-α and IL-1β" }
+    status: unverified
+  - id: rheum.L01.147
+    kind: case
+    topic: ra
+    stem: "A 45-year-old woman has active seropositive RA with synovitis and new erosions despite methotrexate. Her rheumatologist explains the cytokine biology before choosing a biologic."
+    steps:
+      - question: Which cytokine mainly drives her joint inflammation, per the lecture?
+        options: ["TNF-α", "IL-1", "IL-4", "IL-10"]
+        answer: 0
+        why: "In RA, inflammation is mainly mediated by TNF-α; IL-1 mostly directs cartilage and bone destruction."
+      - question: Which of these is an anti-TNF agent from the book's list?
+        options: ["Certolizumab pegol", "Tocilizumab", "Anakinra", "Ustekinumab"]
+        answer: 0
+        why: "The book lists adalimumab, certolizumab pegol, etanercept, golimumab and infliximab. The others block IL-6R, IL-1 and p40 (IL-12/23)."
+      - question: Which other cytokine-targeted class has been used successfully in juvenile and adult arthritis?
+        options: ["Antibodies to the IL-6 receptor", "Recombinant IL-2", "Interferon β", "G-CSF"]
+        answer: 0
+        why: "The book: antibodies to the IL-6 receptor have been successfully used for juvenile and adult arthritis."
+    src: { page: 18, quote: "Antibodies to the IL-6 receptor have been successfully used for juvenile and adult arthritis." }
+    status: unverified
+  - id: rheum.L01.148
+    kind: case
+    topic: storm
+    stem: "A 58-year-old man with severe COVID pneumonia deteriorates on day 9 with fever 39.5 °C, rising oxygen need and confusion."
+    steps:
+      - reveal: "CRP 260 mg/L, ferritin 3500 ng/mL, D-dimer high, platelets 70 × 10^9/L, triglycerides raised."
+        question: What is the unifying diagnosis?
+        options: ["Cytokine storm", "Bacterial toxic shock", "Simple viral pneumonia", "Pulmonary embolism alone"]
+        answer: 0
+        why: "COVID is a named trigger; fever, ARDS, neuropsychiatric findings, high CRP, ferritin and D-dimer, low platelets and high triglycerides fit hypercytokinemia."
+      - question: Which laboratory marker is universally raised and correlates with severity?
+        options: ["CRP", "IL-4", "IgE", "Eosinophil count"]
+        answer: 0
+        why: "Nonspecific inflammatory markers such as CRP are universally elevated and correlate with severity."
+      - question: Why is he at high risk of spontaneous bleeding?
+        options: ["Hyperinflammation, coagulopathy and low platelets together", "Vitamin K deficiency", "Uraemic platelets", "Heparin overdose"]
+        answer: 0
+        why: "The book names the combination of hyperinflammation, coagulopathy and low platelet counts."
+    src: { page: 16, quote: "Nonspecific markers of inflammation such as CRP are universally elevated and correlate with severity." }
+    status: unverified

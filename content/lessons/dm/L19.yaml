@@ -1,0 +1,518 @@
+schema: batna.lesson/v1
+lecture: dm.L19
+lessons:
+  # ------------------------------------------------------------------
+  - id: dm.L19.lesson1
+    title: "الدهون بتتنقل في الدم إزاي؟"
+    hook: "الزيت والمية مابيختلطوش. طب الكوليسترول بيمشي في الدم إزاي؟ الإجابة: أتوبيسات اسمها lipoproteins."
+    minutes: 8
+    pages: [246, 247]
+    topics: [burden, structure, metabolism, rct]
+    goals:
+      - "تعرف حجم مشكلة الـ CVD في مصر والأرقام اللي بتتسأل"
+      - "ترسم الـ lipoprotein: قشرة hydrophilic وقلب hydrophobic"
+      - "تمشي مع الدهون من الأكل للكبد، وترجّع الكوليسترول بالـ HDL"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 246
+        title: "ليه نذاكر الدهون أصلًا؟"
+        quote: "Cardiovascular diseases account for 46% of total deaths in Egypt."
+        text: |
+          الـ ==CVD== لسه من أول أسباب المرض والوفاة، رغم إن العلاج اتحسّن.
+
+          - **46%** من الوفيات في مصر سببها cardiovascular diseases.
+          - **37%** من المصريين عندهم cholesterol عالي.
+          - الـ diabetes والـ obesity بيزيدوا.
+          - الخبر الحلو: الوقاية شغالة، وممكن نمنع ==80%== على الأقل من الـ CVD.
+      - kind: aside
+        tone: tip
+        page: 246
+        quote: "It is possible to prevent at least 80% of CVD."
+        text: "احفظ الأرقام كده: **46** بيموتوا، **37** عندهم كوليسترول عالي، و **80** نقدر ننقذهم. من 46 لـ 80: الوقاية بتكسب."
+      - kind: explain
+        page: 246
+        title: "Dyslipidemia مش بس \"كوليسترول عالي\""
+        quote: "A range of disorders that include both abnormally high and low lipoprotein levels, as well as disorders in the composition of these particles."
+        text: |
+          الـ ==dyslipidemia== مجموعة أمراض فيها:
+          - lipoproteins **عالية** (زي LDL)،
+          - أو **واطية** (زي HDL)،
+          - أو تركيب الـ particle نفسه **بايظ**.
+
+          يعني HDL واطي لوحده اسمه dyslipidemia برضه.
+      - kind: figure
+        page: 246
+        quote: "Envelope of phospholipids, free cholesterol, and apolipoproteins hydrophilic"
+        title: "الـ lipoprotein من جوّه"
+        alt: "A circle drawn as a lipoprotein particle: an outer ring labelled envelope (hydrophilic) holding phospholipids, free cholesterol and apolipoproteins, and an inner core labelled hydrophobic holding triglycerides and cholesteryl esters. Water surrounds the particle."
+        caption: "زي **بلحة بالسمنة**: القشرة بتحب المية (phospholipids و free cholesterol و apolipoproteins)، والقلب بيكره المية (triglycerides و cholesteryl esters)."
+        svg: |
+          <svg viewBox="0 0 330 260" xmlns="http://www.w3.org/2000/svg">
+            <text x="165" y="20" text-anchor="middle" class="t-sm t-mut">Plasma (water)</text>
+            <circle cx="120" cy="140" r="100" class="fg-acc"/>
+            <circle cx="120" cy="140" r="62" class="fg-bad"/>
+            <text x="120" y="132" text-anchor="middle" class="t-b">Core</text>
+            <text x="120" y="150" text-anchor="middle" class="t-sm">TG + CE</text>
+            <text x="120" y="168" text-anchor="middle" class="t-sm t-bad">hydrophobic</text>
+            <circle cx="120" cy="40" r="8" class="fg-dot-acc"/>
+            <circle cx="210" cy="100" r="8" class="fg-dot-good"/>
+            <circle cx="40" cy="200" r="8" class="fg-dot-good"/>
+            <text x="235" y="70" class="t-sm t-b">Envelope</text>
+            <text x="235" y="88" class="t-sm t-acc">hydrophilic</text>
+            <text x="235" y="112" class="t-sm">phospholipids</text>
+            <text x="235" y="128" class="t-sm">free cholesterol</text>
+            <text x="235" y="144" class="t-sm">apolipoproteins</text>
+            <path d="M232 104 L218 102" class="fg-thin"/>
+          </svg>
+      - kind: explain
+        page: 247
+        title: "بيعمل إيه؟"
+        quote: "Apolipoproteins: ligands for cellular receptor binding, and enzyme activators or inhibitors."
+        text: |
+          الـ lipoproteins **بتختلف في الحجم والـ density**، وده أساس تقسيمها.
+
+          شغلها:
+          1. توصّل الدهون للأنسجة عشان **الطاقة**.
+          2. **Steroid hormones**.
+          3. **Bile acids**.
+
+          والـ ==apolipoproteins== هي "الكارت" بتاع الأتوبيس: **ligand** للـ receptor، و **activator أو inhibitor** للإنزيمات.
+      - kind: check
+        page: 247
+        quote: "Triglyceride and cholesteryl ester-rich hydrophobic core."
+        question: "Which lipid sits in the hydrophobic core of a lipoprotein?"
+        options:
+          - "Cholesteryl ester"
+          - "Phospholipid"
+          - "Free cholesterol"
+          - "Apolipoprotein"
+        answer: 0
+        why:
+          - "صح: الـ core = triglyceride و cholesteryl ester، الاتنين hydrophobic."
+          - "الـ phospholipid في الـ envelope، وشه للمية."
+          - "الـ free cholesterol في الـ envelope مش الـ core."
+          - "الـ apolipoproteins على السطح عشان تمسك الـ receptors."
+      - kind: figure
+        page: 247
+        quote: "Lipoprotein Metabolism"
+        title: "طريقين: من الأكل ومن الكبد"
+        alt: "Two columns. Left, exogenous pathway: dietary fat to small intestine to chylomicron with ApoB-48; lipoprotein lipase releases free fatty acids to adipose tissue and muscle; the chylomicron remnant goes to the liver. Right, endogenous pathway: liver makes VLDL with ApoB-100; lipoprotein lipase gives IDL, which partly returns to the liver; more lipolysis gives LDL, taken up by the liver."
+        caption: "**الشمال**: دهون الأكل (exogenous) في الـ chylomicron. **اليمين**: دهون الكبد (endogenous) في الـ VLDL ← IDL ← LDL. في الاتنين الـ ==LPL== بيفضّي الـ TG للعضلات والدهن."
+        svg: |
+          <svg viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L19a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <text x="80" y="18" text-anchor="middle" class="t-b">Exogenous</text>
+            <text x="245" y="18" text-anchor="middle" class="t-b">Endogenous</text>
+            <rect x="10" y="30" width="140" height="34" rx="8" class="fg-box"/>
+            <text x="80" y="52" text-anchor="middle" class="t-sm">Dietary fat → gut</text>
+            <path d="M80 64 L80 82" class="fg-arrow" marker-end="url(#L19a)"/>
+            <rect x="10" y="84" width="140" height="40" rx="8" class="fg-acc"/>
+            <text x="80" y="102" text-anchor="middle" class="t-sm t-b">Chylomicron</text>
+            <text x="80" y="117" text-anchor="middle" class="t-sm">ApoB-48</text>
+            <path d="M80 124 L80 142" class="fg-arrow" marker-end="url(#L19a)"/>
+            <rect x="10" y="144" width="140" height="40" rx="8" class="fg-good"/>
+            <text x="80" y="162" text-anchor="middle" class="t-sm t-b">LPL</text>
+            <text x="80" y="177" text-anchor="middle" class="t-sm">FFA → muscle, fat</text>
+            <path d="M80 184 L80 202" class="fg-arrow" marker-end="url(#L19a)"/>
+            <rect x="10" y="204" width="140" height="40" rx="8" class="fg-box"/>
+            <text x="80" y="222" text-anchor="middle" class="t-sm t-b">Remnant</text>
+            <text x="80" y="237" text-anchor="middle" class="t-sm">→ liver</text>
+            <rect x="175" y="30" width="140" height="40" rx="8" class="fg-box"/>
+            <text x="245" y="48" text-anchor="middle" class="t-sm t-b">Liver → VLDL</text>
+            <text x="245" y="63" text-anchor="middle" class="t-sm">ApoB-100</text>
+            <path d="M245 70 L245 88" class="fg-arrow" marker-end="url(#L19a)"/>
+            <rect x="175" y="90" width="140" height="34" rx="8" class="fg-good"/>
+            <text x="245" y="112" text-anchor="middle" class="t-sm t-b">LPL: TG out</text>
+            <path d="M245 124 L245 142" class="fg-arrow" marker-end="url(#L19a)"/>
+            <rect x="175" y="144" width="140" height="40" rx="8" class="fg-acc"/>
+            <text x="245" y="162" text-anchor="middle" class="t-sm t-b">IDL</text>
+            <text x="245" y="177" text-anchor="middle" class="t-sm">part → liver</text>
+            <path d="M245 184 L245 202" class="fg-arrow" marker-end="url(#L19a)"/>
+            <rect x="175" y="204" width="140" height="40" rx="8" class="fg-bad"/>
+            <text x="245" y="222" text-anchor="middle" class="t-sm t-b">LDL</text>
+            <text x="245" y="237" text-anchor="middle" class="t-sm">→ liver</text>
+            <rect x="10" y="268" width="305" height="50" rx="8" class="fg-thin"/>
+            <text x="162" y="290" text-anchor="middle" class="t-sm">Each step loses TG and gets smaller,</text>
+            <text x="162" y="307" text-anchor="middle" class="t-sm">so the particle ends cholesterol-rich (LDL)</text>
+          </svg>
+      - kind: aside
+        tone: analogy
+        page: 247
+        quote: "VLDL LPL IDL LPL LDL"
+        text: "الـ VLDL زي **عربية توزيع عيش**: كل محطة (LPL) بتنزّل TG، فتخف وتصغر، لحد ما يفضل في الآخر **LDL** فيه كوليسترول بس. علشان كده الـ LDL هو \"آخر العربية\" وأغناهم كوليسترول."
+      - kind: order
+        page: 247
+        quote: "VLDL LPL IDL LPL LDL"
+        prompt: "رتّب الطريق اللي بيطلع من الكبد:"
+        steps:
+          - "Liver secretes VLDL"
+          - "LPL removes triglyceride"
+          - "IDL forms"
+          - "LDL forms"
+          - "Liver takes up LDL"
+        why: "VLDL ← (LPL) ← IDL ← LDL ← الكبد. الـ LDL جاي من الـ IDL، مش من الـ chylomicron."
+      - kind: figure
+        page: 247
+        quote: "Reverse cholesterol transfer"
+        title: "Reverse cholesterol transport: الـ HDL الزبّال"
+        alt: "Vertical flow: macrophage at the top; ABCA1 hands free cholesterol and phospholipid to ApoA-I forming nascent HDL; ABCG1 and ABCG4 hand more cholesterol to HDL; LCAT esterifies cholesterol turning nascent HDL into HDL3 then the larger HDL2; at the bottom SCARB1 on the hepatocyte takes up the cholesteryl ester."
+        caption: "الـ ==HDL== بيلم الكوليسترول الزيادة من الـ macrophage ويرجّعه للكبد. **ABCA1** يسلّم، **LCAT** يحوّله لـ ester ويكبّر الـ HDL، و **SCARB1** في الكبد يستلم."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L19b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="10" y="10" width="310" height="36" rx="8" class="fg-bad"/>
+            <text x="165" y="33" text-anchor="middle" class="t-b">Macrophage (excess cholesterol)</text>
+            <path d="M90 46 L90 70" class="fg-arrow" marker-end="url(#L19b)"/>
+            <text x="98" y="62" class="t-sm">1 ABCA1</text>
+            <path d="M240 46 L240 130" class="fg-arrow" marker-end="url(#L19b)"/>
+            <text x="248" y="80" class="t-sm">2 ABCG1, G4</text>
+            <rect x="20" y="72" width="140" height="36" rx="8" class="fg-box"/>
+            <text x="90" y="95" text-anchor="middle" class="t-sm">ApoA-I → nascent HDL</text>
+            <path d="M90 108 L90 130" class="fg-arrow" marker-end="url(#L19b)"/>
+            <text x="98" y="124" class="t-sm t-acc">4 LCAT</text>
+            <rect x="20" y="132" width="290" height="36" rx="8" class="fg-acc"/>
+            <text x="165" y="155" text-anchor="middle" class="t-sm t-b">HDL3</text>
+            <path d="M165 168 L165 190" class="fg-arrow" marker-end="url(#L19b)"/>
+            <text x="173" y="184" class="t-sm t-acc">5 LCAT (more CE)</text>
+            <rect x="60" y="192" width="210" height="36" rx="8" class="fg-acc"/>
+            <text x="165" y="215" text-anchor="middle" class="t-sm t-b">HDL2 (bigger)</text>
+            <path d="M165 228 L165 250" class="fg-arrow" marker-end="url(#L19b)"/>
+            <text x="173" y="244" class="t-sm">6 SCARB1</text>
+            <rect x="10" y="252" width="310" height="36" rx="8" class="fg-good"/>
+            <text x="165" y="275" text-anchor="middle" class="t-b">Hepatocyte (cholesterol out)</text>
+          </svg>
+      - kind: check
+        page: 247
+        quote: "Reverse cholesterol transfer"
+        question: "Which hepatocyte receptor takes up HDL cholesteryl ester at the end of reverse cholesterol transport?"
+        options:
+          - "SCARB1"
+          - "ABCA1"
+          - "LCAT"
+          - "Lipoprotein lipase"
+        answer: 0
+        why:
+          - "صح: الـ SCARB1 (SR-B1) هو باب الكبد في الخطوة 6."
+          - "الـ ABCA1 على الـ macrophage، بيطلّع الكوليسترول، مش بيستلمه."
+          - "الـ LCAT إنزيم بيعمل esterification، مش receptor."
+          - "الـ LPL بيشتغل على الـ TG في الـ chylomicrons والـ VLDL."
+      - kind: try
+        items: [dm.L19.008, dm.L19.011, dm.L19.015, dm.L19.019, dm.L19.003]
+    recap:
+      - "CVD = 46% من وفيات مصر، 37% كوليسترول عالي، و 80% ممكن نمنعه."
+      - "Dyslipidemia = عالي أو واطي أو تركيب بايظ."
+      - "القشرة hydrophilic (PL، free cholesterol، apo)؛ القلب hydrophobic (TG + CE)."
+      - "Apolipoproteins: ligands للـ receptors، و activators أو inhibitors للإنزيمات."
+      - "Exogenous: chylomicron (ApoB-48) ← LPL ← remnant للكبد. Endogenous: VLDL ← IDL ← LDL."
+      - "Reverse transport: ABCA1 ← nascent HDL ← LCAT ← HDL3 ← HDL2 ← SCARB1 في الكبد."
+    practice: [dm.L19.001, dm.L19.002, dm.L19.003, dm.L19.004, dm.L19.005, dm.L19.006, dm.L19.007, dm.L19.008, dm.L19.009, dm.L19.010, dm.L19.011, dm.L19.012, dm.L19.013, dm.L19.014, dm.L19.015, dm.L19.016, dm.L19.017, dm.L19.019, dm.L19.020, dm.L19.021, dm.L19.056, dm.L19.057, dm.L19.059]
+  # ------------------------------------------------------------------
+  - id: dm.L19.lesson2
+    title: "عيلة الـ lipoproteins: الكبير والصغير والطيب والشرير"
+    hook: "خمس أتوبيسات، كل واحد ليه حجم وكارت (apo) ودور. والـ Lp(a) هو الأخ الخبيث اللي محدش بيقيسه."
+    minutes: 8
+    pages: [248, 249]
+    topics: [classes, ldl, hdl, lpa]
+    goals:
+      - "ترتّب الـ lipoproteins بالحجم والـ density وتعرف الـ apo بتاع كل واحد"
+      - "تفرّق الـ LDL من الـ HDL"
+      - "تعرف الـ Lp(a): تركيبه، خطره، ومين يقيسه"
+    status: unverified
+    steps:
+      - kind: figure
+        page: 248
+        quote: "LDL Low Density Lipoprotein 20 nm HDL High Density Lipoprotein 10 nm"
+        title: "سلّم الأحجام"
+        alt: "Five circles shrinking from left to right with labels: chylomicron 80-100 nm, density under 0.95, ApoB-48; VLDL 30-80 nm, ApoB-100; IDL 25-30 nm, ApoB-100; LDL 20-25 nm, ApoB-100; HDL 8-13 nm, density up to 1.210, ApoA-I. An arrow under them reads: smaller and denser, less triglyceride. The first four are bracketed as bad (non-HDL), HDL as good."
+        caption: "كل ما الـ particle **يصغر** بيبقى **أتقل** (density أعلى) لأن الـ TG الخفيف بيخرج. أكبر واحد chylomicron، وأصغر واحد ==HDL==."
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L19c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <text x="120" y="16" text-anchor="middle" class="t-sm t-bad t-b">"Bad" (non-HDL)</text>
+            <text x="295" y="16" text-anchor="middle" class="t-sm t-good t-b">"Good"</text>
+            <path d="M10 24 L250 24" class="fg-thin"/>
+            <circle cx="42" cy="80" r="34" class="fg-acc"/>
+            <circle cx="115" cy="80" r="24" class="fg-acc"/>
+            <circle cx="178" cy="80" r="18" class="fg-acc"/>
+            <circle cx="232" cy="80" r="14" class="fg-bad"/>
+            <circle cx="295" cy="80" r="8" class="fg-good"/>
+            <text x="42" y="135" text-anchor="middle" class="t-sm t-b">Chylo</text>
+            <text x="115" y="135" text-anchor="middle" class="t-sm t-b">VLDL</text>
+            <text x="178" y="135" text-anchor="middle" class="t-sm t-b">IDL</text>
+            <text x="232" y="135" text-anchor="middle" class="t-sm t-b">LDL</text>
+            <text x="295" y="135" text-anchor="middle" class="t-sm t-b">HDL</text>
+            <text x="42" y="153" text-anchor="middle" class="t-sm">80-100</text>
+            <text x="115" y="153" text-anchor="middle" class="t-sm">30-80</text>
+            <text x="178" y="153" text-anchor="middle" class="t-sm">25-30</text>
+            <text x="232" y="153" text-anchor="middle" class="t-sm">20-25</text>
+            <text x="295" y="153" text-anchor="middle" class="t-sm">8-13</text>
+            <text x="42" y="171" text-anchor="middle" class="t-sm t-acc">B-48</text>
+            <text x="115" y="171" text-anchor="middle" class="t-sm t-acc">B-100</text>
+            <text x="178" y="171" text-anchor="middle" class="t-sm t-acc">B-100</text>
+            <text x="232" y="171" text-anchor="middle" class="t-sm t-acc">B-100</text>
+            <text x="295" y="171" text-anchor="middle" class="t-sm t-acc">A-I</text>
+            <path d="M20 200 L310 200" class="fg-arrow" marker-end="url(#L19c)"/>
+            <text x="165" y="222" text-anchor="middle" class="t-sm">smaller, denser, less TG</text>
+            <text x="165" y="240" text-anchor="middle" class="t-sm t-mut">diameter in nm</text>
+          </svg>
+      - kind: table
+        page: 248
+        quote: "VLDL 0.95–1.006 30–80 50–65 8–14 12–16 4–7 ApoB-100"
+        title: "جدول الكتاب (الأعمدة المهمة)"
+        columns: [Class, "TG %", Major apo]
+        rows:
+          - ["Chylomicron", "90-95", "ApoB-48"]
+          - ["VLDL", "50-65", "ApoB-100"]
+          - ["IDL", "25-40", "ApoB-100"]
+          - ["LDL", "4-6", "ApoB-100"]
+          - ["HDL", "7", "ApoA-I"]
+          - ["Lp(a)", "4-8", "Apo(a)"]
+        hide: [[0, 2], [0, 1], [3, 1], [4, 2], [5, 2]]
+      - kind: mnemonic
+        page: 249
+        quote: "Removes excess cholesterol from body cells and transports it to the liver for elimination."
+        word: "HDL"
+        parts:
+          - { key: "H", text: "Heads Home: takes excess cholesterol back to the liver" }
+          - { key: "D", text: "Densest and smallest particle" }
+          - { key: "L", text: "LCAT matures it; ApoA-I is its protein" }
+        hook: "والـ apo؟ **48 للأكل، 100 للكبد**: الـ chylomicron بتاع الأمعاء عليه ApoB-48، وكل اللي الكبد بيعمله (VLDL و IDL و LDL) عليه ApoB-100."
+      - kind: explain
+        page: 248
+        title: "الـ LDL: الشرير الرسمي"
+        quote: "Accounts for majority of cholesterol circulating in blood"
+        text: |
+          - قلبه ==cholesteryl ester==، وهو **أغنى** lipoprotein في الكوليسترول.
+          - بيتعمل من الـ **IDL**.
+          - شايل **أغلب** الكوليسترول اللي في الدم.
+          - عليه **ApoB-100**.
+          - له الدور الأكبر في الـ **atherosclerosis**، علشان كده اسمه "bad cholesterol".
+      - kind: explain
+        page: 249
+        title: "الـ HDL: الطيب"
+        quote: "Removes excess cholesterol from body cells and transports it to the liver for elimination."
+        text: |
+          - **أصغر** lipoprotein، والـ structural protein بتاعه ==ApoA-I==.
+          - قلبه برضه cholesteryl ester.
+          - شايل **20-35%** من كوليسترول البلازما.
+          - بيشيل الكوليسترول الزيادة من الخلايا ويوديه **الكبد** يتخلص منه.
+          - "good cholesterol": بيمنع تراكم الكوليسترول في الشرايين ومرتبط بـ **CAD أقل**.
+      - kind: sort
+        page: 248
+        quote: "LDL contains apo B-100"
+        prompt: "LDL ولا HDL؟"
+        bins: ["LDL", "HDL"]
+        cards:
+          - { text: "ApoB-100", bin: 0 }
+          - { text: "ApoA-I", bin: 1 }
+          - { text: "Smallest lipoprotein", bin: 1 }
+          - { text: "Carries most circulating cholesterol", bin: 0 }
+          - { text: "Carries 20-35% of plasma cholesterol", bin: 1 }
+          - { text: "Made from IDL", bin: 0 }
+          - { text: "Takes cholesterol back to the liver", bin: 1 }
+        why: "الـ LDL = B-100، من الـ IDL، شايل الأغلبية. الـ HDL = A-I، الأصغر، 20-35%، بيرجّع للكبد."
+      - kind: explain
+        page: 249
+        title: "الـ Lp(a): LDL لابس شنطة"
+        quote: "LDL particle with an Apo(a) moiety covalently bound to its ApoB component."
+        text: |
+          الـ ==Lp(a)== هو **LDL particle** متربط فيه **Apo(a)** بـ covalent bond على الـ ApoB.
+
+          خطره من ناحيتين:
+          1. **Atherogenic**: حجمه أقل من **70 nm**، فبيعدّي الـ endothelium ويتحبس في جدار الشريان زي الـ LDL.
+          2. **Pro-thrombotic**: الـ Apo(a) شبه الـ **plasminogen** وبيمسك الـ plasminogen receptor، فالـ thrombosis بتزيد.
+      - kind: aside
+        tone: joke
+        page: 249
+        quote: "similar structure to plasminogen and binds to the plasminogen receptor, leading to increased thrombosis"
+        text: "الـ Apo(a) لابس **يونيفورم plasminogen** وقاعد على كرسيه. الـ plasminogen الحقيقي جه يدوّب الجلطة لقى الكرسي محجوز. النتيجة: الجلطة قاعدة مرتاحة."
+      - kind: explain
+        page: 249
+        title: "مين يقيس Lp(a)؟"
+        quote: "People with extremely high Lp(a) levels >180 mg/ dL have an increased lifetime risk of ASCVD similar to HeFH."
+        text: |
+          - Lp(a) أكتر من ==180 mg/dL== = lifetime ASCVD risk زي الـ **HeFH** (heterozygous FH).
+          - يتقاس **مرة واحدة على الأقل** في عمر كل إنسان، لو متاح.
+          - وفي اللي عندهم **family history of premature CVD**.
+      - kind: check
+        page: 249
+        quote: "Lp(a) should be considered in selected patients with a family history of premature CVD."
+        question: "A 35-year-old whose father had an MI at 42 has a normal LDL-C. Which test does the book advise considering?"
+        options:
+          - "Lipoprotein(a)"
+          - "Serum HDL subfractions"
+          - "Repeat fasting LDL-C only"
+          - "No further lipid testing"
+        answer: 0
+        why:
+          - "صح: family history of premature CVD = قيس Lp(a)، حتى لو الـ LDL كويس."
+          - "الكتاب ما ذكرش HDL subfractions."
+          - "الـ LDL الطبيعي مش بيستبعد Lp(a) عالي."
+          - "الـ family history سبب واضح للقياس."
+      - kind: try
+        items: [dm.L19.022, dm.L19.028, dm.L19.032, dm.L19.040, dm.L19.041]
+    recap:
+      - "من الأكبر للأصغر: chylomicron ← VLDL ← IDL ← LDL ← HDL؛ الأصغر أتقل وأقل TG."
+      - "ApoB-48 = chylomicron؛ ApoB-100 = VLDL و IDL و LDL؛ ApoA-I = HDL؛ Apo(a) = Lp(a)."
+      - "LDL: أغنى كوليسترول، من الـ IDL، شايل الأغلبية، bad."
+      - "HDL: الأصغر، A-I، 20-35%، بيرجّع الكوليسترول للكبد، good."
+      - "Lp(a) = LDL + Apo(a): بيدخل الجدار وشبه plasminogen (thrombosis)."
+      - "Lp(a) > 180 mg/dL = risk زي HeFH. قيسه مرة في العمر وفي الـ premature CVD family history."
+    practice: [dm.L19.018, dm.L19.022, dm.L19.023, dm.L19.024, dm.L19.025, dm.L19.026, dm.L19.027, dm.L19.028, dm.L19.029, dm.L19.030, dm.L19.031, dm.L19.032, dm.L19.033, dm.L19.034, dm.L19.035, dm.L19.036, dm.L19.037, dm.L19.038, dm.L19.039, dm.L19.040, dm.L19.041, dm.L19.042, dm.L19.043, dm.L19.058]
+  # ------------------------------------------------------------------
+  - id: dm.L19.lesson3
+    title: "من الـ LDL للـ plaque، وإزاي نقيس"
+    hook: "الـ atherosclerosis بتبدأ بحاجة واحدة: LDL اتحبس في الجدار. وبعدين: أي تحليل نطلب، وصايم ولا فاطر؟"
+    minutes: 7
+    pages: [250, 251]
+    topics: [athero, lab]
+    goals:
+      - "تحكي الـ atherogenesis من الـ retention للـ foam cell"
+      - "تعرف التحاليل السبعة وتحسب الـ non-HDL-C"
+      - "تعرف إمتى الصيام لازم"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 250
+        title: "الشرارة الأولى"
+        quote: "The key initiating event in atherogenesis is the retention of LDL-C and other cholesterol-rich Apo B-containing lipoproteins within the arterial wall"
+        text: |
+          الحدث اللي بيبدأ الـ ==atherogenesis== هو **retention** (احتباس) الـ LDL-C وباقي الـ **ApoB-containing lipoproteins** الغنية بالكوليسترول **جوّه جدار الشريان**.
+
+          يعني مش مجرد إن الكوليسترول عالي في الدم: المشكلة إنه **دخل واتحبس**.
+      - kind: figure
+        page: 250
+        quote: "retention of LDL-C and other cholesterol-rich Apo B-containing lipoproteins within the arterial wall"
+        title: "من particle لـ foam cell"
+        alt: "Vertical steps: ApoB-containing lipoprotein crosses the endothelium; retention on proteoglycans in the subendothelium; modification and aggregation; a monocyte crosses and differentiates into a macrophage, which takes up the modified particles; cholesteryl ester accumulates and the macrophage becomes a foam cell; the foam cell undergoes apoptosis."
+        caption: "**Retention ← modification ← uptake ← foam cell ← apoptosis**. الـ monocyte بيدخل يتحول ==macrophage== ويبلع لحد ما يبقى foam cell."
+        svg: |
+          <svg viewBox="0 0 330 320" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L19d" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <text x="10" y="18" class="t-sm t-mut">Vascular lumen</text>
+            <path d="M5 28 L325 28" class="fg-ink"/>
+            <text x="10" y="44" class="t-sm t-mut">Endothelium / subendothelium</text>
+            <rect x="20" y="54" width="290" height="34" rx="8" class="fg-acc"/>
+            <text x="165" y="76" text-anchor="middle" class="t-sm t-b">1 Retention (ApoB on proteoglycans)</text>
+            <path d="M165 88 L165 104" class="fg-arrow" marker-end="url(#L19d)"/>
+            <rect x="20" y="106" width="290" height="34" rx="8" class="fg-box"/>
+            <text x="165" y="128" text-anchor="middle" class="t-sm t-b">2 Modification + aggregation</text>
+            <path d="M165 140 L165 156" class="fg-arrow" marker-end="url(#L19d)"/>
+            <rect x="20" y="158" width="290" height="34" rx="8" class="fg-box"/>
+            <text x="165" y="180" text-anchor="middle" class="t-sm t-b">3 Monocyte → macrophage: uptake</text>
+            <path d="M165 192 L165 208" class="fg-arrow" marker-end="url(#L19d)"/>
+            <rect x="20" y="210" width="290" height="34" rx="8" class="fg-bad"/>
+            <text x="165" y="232" text-anchor="middle" class="t-sm t-b">4 CE accumulates: foam cell</text>
+            <path d="M165 244 L165 260" class="fg-arrow" marker-end="url(#L19d)"/>
+            <rect x="20" y="262" width="290" height="34" rx="8" class="fg-bad"/>
+            <text x="165" y="284" text-anchor="middle" class="t-sm t-b">5 Apoptosis</text>
+            <text x="165" y="314" text-anchor="middle" class="t-sm t-mut">internal elastic lamina</text>
+          </svg>
+      - kind: order
+        page: 250
+        quote: "retention of LDL-C and other cholesterol-rich Apo B-containing lipoproteins within the arterial wall"
+        prompt: "رتّب الـ atherogenesis:"
+        steps:
+          - "Retention in the arterial wall"
+          - "Modification and aggregation"
+          - "Macrophage uptake"
+          - "Foam cell"
+          - "Apoptosis"
+        why: "لازم الأول يتحبس، بعدين يتعدّل، الـ macrophage يبلعه، يبقى foam cell، وفي الآخر يموت (apoptosis)."
+      - kind: explain
+        page: 250
+        title: "التحاليل"
+        quote: "Non-HDL-C= TC - HDL-C"
+        text: |
+          الكتاب بيعد 7:
+          1. **Total cholesterol** (TC)
+          2. **LDL-C**
+          3. **HDL-C**
+          4. **TG**
+          5. ==Non-HDL-C== = TC − HDL-C
+          6. **ApoB**
+          7. **Lp(a)**
+      - kind: figure
+        page: 250
+        quote: "TC carried by all atherogenic ApoB-containing lipoproteins, including TG-rich particles in VLDL and their remnants."
+        title: "الـ non-HDL: كل اللي عليه ApoB"
+        alt: "A bar of total cholesterol split into two parts: HDL-C on one side, and non-HDL-C on the other, which is bracketed over LDL, Lp(a), IDL, VLDL and chylomicron remnants, all labelled ApoB."
+        caption: "اطرح الطيب (HDL) من الكل، يفضل ==non-HDL== = كل الـ **ApoB** particles: LDL و Lp(a) و IDL و VLDL والـ chylomicron remnants."
+        svg: |
+          <svg viewBox="0 0 330 170" xmlns="http://www.w3.org/2000/svg">
+            <text x="165" y="18" text-anchor="middle" class="t-b">Total cholesterol</text>
+            <rect x="10" y="30" width="250" height="40" rx="6" class="fg-bad"/>
+            <rect x="260" y="30" width="60" height="40" rx="6" class="fg-good"/>
+            <text x="135" y="55" text-anchor="middle" class="t-sm t-b">non-HDL-C (ApoB)</text>
+            <text x="290" y="55" text-anchor="middle" class="t-sm t-b">HDL-C</text>
+            <text x="10" y="95" class="t-sm">LDL · Lp(a) · IDL · VLDL ·</text>
+            <text x="10" y="112" class="t-sm">chylomicron remnant</text>
+            <rect x="10" y="125" width="310" height="36" rx="8" class="fg-acc"/>
+            <text x="165" y="148" text-anchor="middle" class="t-b">non-HDL-C = TC − HDL-C</text>
+          </svg>
+      - kind: check
+        page: 250
+        quote: "Non-HDL-C= TC - HDL-C"
+        question: "TC 230 mg/dL, HDL-C 45 mg/dL, TG 200 mg/dL. Non-HDL-C?"
+        options:
+          - "185 mg/dL"
+          - "275 mg/dL"
+          - "145 mg/dL"
+          - "-15 mg/dL"
+        answer: 0
+        why:
+          - "صح: 230 − 45 = 185. الـ TG مش داخل في المعادلة."
+          - "ده جمع الـ HDL بدل ما تطرحه."
+          - "ده طرح الـ TG/5 كمان، وده الـ Friedewald LDL مش الـ non-HDL."
+          - "ده طرح الـ TG من HDL؛ ملوش معنى."
+      - kind: explain
+        page: 251
+        title: "صايم ولا فاطر؟"
+        quote: "Lipid testing can be done NON-fasting"
+        text: |
+          الـ lipid profile ممكن يتعمل ==non-fasting==.
+
+          الصيام مطلوب بس لو:
+          - **TG أكتر من 400 mg/dL**،
+          - أو فيه **familial dyslipidemia**.
+      - kind: aside
+        tone: exam
+        page: 251
+        quote: "Fasting lipid profile is recommended for individuals with TG > 400 mg/dL, or having a history of familial dyslipidemia"
+        text: "فخ: العيان مش لازم ييجي على لحم بطنه الصبح. **400** هو الرقم: فوقه، الـ TG بيلخبط الحساب، فخليه يصوم ويعيد."
+      - kind: case
+        stem: "رجل 42 سنة، أخوه جاله MI في سن 46، فطر قبل ما ييجي المعمل."
+        page: 251
+        quote: "Lipid testing can be done NON-fasting"
+        steps:
+          - question: "Send him home to fast?"
+            options: ["No, test non-fasting", "Yes, 12-hour fast", "Yes, because of his brother"]
+            answer: 0
+            why: "الـ non-fasting مقبول. الصيام لـ TG > 400 أو familial dyslipidemia."
+          - reveal: "TC 250, HDL-C 40, TG 180 mg/dL."
+            question: "Non-HDL-C?"
+            options: ["210 mg/dL", "290 mg/dL", "174 mg/dL"]
+            answer: 0
+            why: "250 − 40 = 210."
+          - question: "Extra test for the premature family history?"
+            options: ["Lp(a)", "Uric acid", "Lipase"]
+            answer: 0
+            why: "Lp(a) في الـ family history of premature CVD (p249)."
+      - kind: try
+        items: [dm.L19.044, dm.L19.045, dm.L19.047, dm.L19.048, dm.L19.052]
+    recap:
+      - "البداية: retention للـ LDL والـ ApoB lipoproteins في جدار الشريان."
+      - "Retention ← modification ← macrophage uptake ← foam cell ← apoptosis."
+      - "7 تحاليل: TC، LDL-C، HDL-C، TG، non-HDL-C، ApoB، Lp(a)."
+      - "Non-HDL-C = TC − HDL-C = كل الـ ApoB particles."
+      - "Non-fasting عادي؛ صيام لو TG > 400 أو familial dyslipidemia."
+    practice: [dm.L19.044, dm.L19.045, dm.L19.046, dm.L19.047, dm.L19.048, dm.L19.049, dm.L19.050, dm.L19.051, dm.L19.052, dm.L19.053, dm.L19.054, dm.L19.055, dm.L19.060]

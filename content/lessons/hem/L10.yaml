@@ -1,0 +1,704 @@
+schema: batna.lesson/v1
+lecture: hem.L10
+lessons:
+  # ------------------------------------------------------------------
+  - id: hem.L10.lesson1
+    title: "دم تقيل: حقيقي ولا وهمي؟ وإيه اللي بيحصل في الـ PV"
+    hook: "مش كل Hb عالي polycythemia حقيقية، والـ PV بتصنع كرات حمرا من غير ما حد يطلب."
+    minutes: 8
+    pages: [156, 157]
+    topics: [definitions, pv-biology]
+    goals:
+      - "تفرّق بين true و secondary و relative polycythemia"
+      - "تشرح الـ pathophysiology بتاعة الـ PV"
+      - "تحفظ نسب JAK2 V617F و exon 12"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 156
+        title: "التلات أنواع"
+        quote: "True Polycythemia refers to an absolute increase in total blood cell volume or mass manifested as raised HB concentration or packed cell volume (PCV)."
+        text: |
+          - ==True polycythemia==: زيادة **absolute** في الـ **red cell mass**، بتبان كـ Hb أو **PCV** عالي. ودي نوعين:
+          - **Primary**: الـ **polycythemia vera** (clonal).
+          - **Secondary**: **erythropoietin** عالي، مع **hypoxia** أو من غيرها.
+          - **Relative polycythemia**: Hb عالي بس علشان الـ **plasma volume** قلّ. الكرات الحمرا نفسها مش زايدة.
+      - kind: figure
+        page: 156
+        quote: "Relative polycythemia a raised Hb concentration secondary to reduction in plasma volume."
+        title: "كوبايتين: كرات أكتر ولا مية أقل؟"
+        alt: "Three tubes of blood. Normal: red cells fill the lower part, plasma above. True polycythemia: a taller red cell column with normal plasma. Relative polycythemia: the same red cell column as normal but less plasma, so the tube is shorter and the red fraction looks higher."
+        caption: "في الـ ==relative== الكرات زي ما هي، بس البلازما قلّت، فالنسبة (Hct) تعلى. علشان كده الـ **red cell mass** هو اللي بيفصل."
+        svg: |
+          <svg viewBox="0 0 330 260" xmlns="http://www.w3.org/2000/svg">
+            <rect x="35" y="30" width="60" height="180" rx="8" class="fg-ink"/>
+            <rect x="37" y="130" width="56" height="78" class="fg-dot-bad"/>
+            <rect x="37" y="32" width="56" height="98" class="fg-acc"/>
+            <text x="65" y="232" text-anchor="middle" class="t-sm t-b">Normal</text>
+            <rect x="135" y="30" width="60" height="180" rx="8" class="fg-ink"/>
+            <rect x="137" y="90" width="56" height="118" class="fg-dot-bad"/>
+            <rect x="137" y="32" width="56" height="58" class="fg-acc"/>
+            <text x="165" y="232" text-anchor="middle" class="t-sm t-b">True</text>
+            <text x="165" y="248" text-anchor="middle" class="t-sm t-mut">more red cells</text>
+            <rect x="235" y="90" width="60" height="120" rx="8" class="fg-ink"/>
+            <rect x="237" y="130" width="56" height="78" class="fg-dot-bad"/>
+            <rect x="237" y="92" width="56" height="38" class="fg-acc"/>
+            <text x="265" y="232" text-anchor="middle" class="t-sm t-b">Relative</text>
+            <text x="265" y="248" text-anchor="middle" class="t-sm t-mut">less plasma</text>
+            <text x="65" y="20" text-anchor="middle" class="t-sm t-mut">plasma</text>
+            <text x="165" y="20" text-anchor="middle" class="t-sm t-mut">plasma</text>
+          </svg>
+      - kind: check
+        page: 156
+        quote: "Relative polycythemia a raised Hb concentration secondary to reduction in plasma volume."
+        question: "Hb is high but the red cell mass is normal and plasma volume is low. Which type?"
+        options: ["Relative polycythemia", "Polycythemia vera", "Secondary polycythemia", "Primary familial polycythemia"]
+        answer: 0
+        why:
+          - "صح: الكرات زي ما هي والبلازما قلّت."
+          - "الـ PV فيها red cell mass عالي."
+          - "الـ secondary كمان red cell mass عالي."
+          - "الـ primary familial true polycythemia."
+      - kind: explain
+        page: 156
+        title: "الـ PV: مصنع شغال لوحده"
+        quote: "Erythropoiesis is autonomous independent on erythropoietin. Serum erytrpoietin level is normal or reduced."
+        text: |
+          الـ **PRV** = **neoplastic clonal disorder** في الـ stem cell، بتكتّر **التلات lineages** (erythroid، myeloid، megakaryocytic)، ومعاها خطر **thrombosis**.
+
+          ==Erythropoiesis is autonomous==: مش مستنية **EPO**. وعلشان الجسم شايف كرات كتير، الكلى بتقفل الـ EPO، فيبقى **normal أو reduced**.
+      - kind: aside
+        tone: analogy
+        page: 156
+        quote: "Erythropoiesis is autonomous independent on erythropoietin."
+        text: "الـ EPO (erythropoietin) زي مدير المصنع. في الـ secondary المدير بيزعّق «اشتغلوا أكتر» (EPO عالي). في الـ PV العمال شغالين لوحدهم والمدير قاعد ساكت (EPO واطي). علشان كده الـ **EPO** أهم تحليل يفرّق بينهم."
+      - kind: explain
+        page: 157
+        title: "الـ molecular زيادة"
+        quote: "Hypersensetivity of erythroid pogenitors to growth factors as insulin like growth factor, thrombopoietin, IL-3 and GM-CSF."
+        text: |
+          - **Hypersensitivity** للـ growth factors: **IGF، TPO، IL-3، GM-CSF**.
+          - **Chromosomal abnormalities** في **20–30%**، non-specific؛ أشهرها ==del 20q==، وكمان trisomy 20 و 8 و 9، و 1q dup و 13q del.
+          - **PRV1** overexpression في الـ granulocytes (بيفرّق primary من secondary).
+          - **Bcl-xL** زيادة (anti-apoptotic)، و **c-mpl** (TPO receptor) أقل.
+      - kind: explain
+        page: 157
+        title: "JAK2: تقريبًا كلهم"
+        quote: "approximately 96% and 3% displaying somatic activating mutations in exon 14 (JAK2V617F) and exon 12 of JAK2, respectively."
+        text: |
+          - **96%**: ==JAK2 V617F== (exon **14**).
+          - **3%**: **JAK2 exon 12**: أصغر سنًا، erythroid بس، و EPO **subnormal**، والـ prognosis زي الـ V617F.
+          - الطفرة بتشغّل **JAK2–STAT5، PI3K، ERK، Akt** على طول، فالخلايا تكبر من غير cytokines أو مع EPO قليل جدًا.
+          - وجود الطفرة أو الـ **allele burden** ما بيغيّرش الـ survival ولا الـ leukemic transformation، بس الـ burden العالي مرتبط بـ **pruritus** و **fibrotic transformation**.
+      - kind: mnemonic
+        page: 157
+        quote: "approximately 96% and 3% displaying somatic activating mutations in exon 14 (JAK2V617F) and exon 12 of JAK2, respectively."
+        word: "FT"
+        parts:
+          - { key: "F", text: "Fourteen: exon 14 = V617F, 96%" }
+          - { key: "T", text: "Twelve: exon 12, 3%, younger, pure erythroid, low EPO" }
+        hook: "**F** قبل **T** في الأبجدية بس **14** أكبر من **12**: الـ 14 هو الكبير (96%)، والـ 12 هو الصغير (3%) وصاحبه أصغر سنًا."
+      - kind: check
+        page: 157
+        quote: "JAK2 exon 12 mutation-positive patients usually present with predominantly erythroid myelopoiesis, subnormal serum erythropoietin level and younger age at diagnosis"
+        question: "34-year-old, isolated high Hb, low EPO, JAK2 V617F negative. Next test?"
+        options: ["JAK2 exon 12", "BCR-ABL1", "CALR", "Serum B12"]
+        answer: 0
+        why:
+          - "صح: الصورة دي بالظبط exon 12."
+          - "الـ BCR-ABL1 للـ CML."
+          - "الـ CALR في ET و PMF."
+          - "الـ B12 بيعلى في الـ PV بس مش بيأكدها."
+      - kind: try
+        items: [hem.L10.001, hem.L10.003, hem.L10.005, hem.L10.011, hem.L10.015]
+    recap:
+      - "True = red cell mass عالي (primary PV أو secondary بـ EPO). Relative = البلازما قلّت."
+      - "الـ PV clonal، التلات lineages، erythropoiesis مستقلة عن EPO، فالـ EPO normal أو واطي."
+      - "Chromosomes 20–30% (del 20q الأشهر)، PRV1، Bcl-xL، c-mpl أقل."
+      - "JAK2 V617F (exon 14) 96%، exon 12 3% (صغير، erythroid، EPO واطي)."
+    practice: [hem.L10.001, hem.L10.002, hem.L10.003, hem.L10.004, hem.L10.005, hem.L10.006, hem.L10.007, hem.L10.008, hem.L10.009, hem.L10.010, hem.L10.011, hem.L10.012, hem.L10.013, hem.L10.014, hem.L10.015, hem.L10.016]
+  # ------------------------------------------------------------------
+  - id: hem.L10.lesson2
+    title: "عيان الـ PV: دماغ تقيلة، هرش في الدُش، ووش أحمر"
+    hook: "عشر علامات بتحكي قصة دم تقيل، وتلات مراحل بتحكي عمر المرض."
+    minutes: 9
+    pages: [158, 160]
+    topics: [pv-clinical, pv-course]
+    goals:
+      - "تعدّ أعراض الـ hyperviscosity والتجلط"
+      - "تشرح الـ pruritus والـ plethora والـ Gaisbock"
+      - "ترتب الـ natural history وتعرف نسب الـ AML"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 158
+        title: "مين وإزاي؟"
+        quote: "Incidence 2-3 per 100,000 Male to female ratio 0.81.2 Median age at onset 55-60y Symptoms are often insidious in onset."
+        text: |
+          - Incidence **2–3 لكل 100,000**، و median age **55–60**.
+          - الأعراض ==insidious==: بتيجي بالراحة.
+      - kind: figure
+        page: 158
+        quote: "which impairs microcirculation, sludgging of blood flow, and thrombosis, poor oxygen delivery"
+        title: "Hyperviscosity: الدم عامل زي العسل"
+        alt: "Two capillaries side by side. Normal: red cells flowing in single file with plasma around them. PV: red cells packed and sludging, a thrombus forming, and an arrow showing reduced oxygen delivery to tissue. Labels list headache, dizziness, vertigo, tinnitus, visual disturbance, angina and claudication."
+        caption: "كرات أكتر = لزوجة أكتر = **sludging** في الـ microcirculation و ==poor oxygen delivery==. علشان كده الأعراض في المخ والودن والعين والقلب والرجل."
+        svg: |
+          <svg viewBox="0 0 330 260" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="20" width="310" height="40" rx="20" class="fg-box"/>
+            <circle cx="60" cy="40" r="9" class="fg-dot-bad"/>
+            <circle cx="130" cy="40" r="9" class="fg-dot-bad"/>
+            <circle cx="200" cy="40" r="9" class="fg-dot-bad"/>
+            <circle cx="270" cy="40" r="9" class="fg-dot-bad"/>
+            <text x="165" y="78" text-anchor="middle" class="t-sm t-mut">Normal: cells flow freely</text>
+            <rect x="10" y="95" width="310" height="40" rx="20" class="fg-box"/>
+            <circle cx="35" cy="115" r="9" class="fg-dot-bad"/>
+            <circle cx="55" cy="112" r="9" class="fg-dot-bad"/>
+            <circle cx="75" cy="118" r="9" class="fg-dot-bad"/>
+            <circle cx="95" cy="112" r="9" class="fg-dot-bad"/>
+            <circle cx="115" cy="118" r="9" class="fg-dot-bad"/>
+            <circle cx="135" cy="112" r="9" class="fg-dot-bad"/>
+            <circle cx="155" cy="118" r="9" class="fg-dot-bad"/>
+            <circle cx="175" cy="112" r="9" class="fg-dot-bad"/>
+            <rect x="195" y="99" width="40" height="32" rx="10" class="fg-ink"/>
+            <text x="215" y="119" text-anchor="middle" class="t-sm t-b">clot</text>
+            <text x="165" y="153" text-anchor="middle" class="t-sm t-mut">PV: sludging, thrombosis, less O2</text>
+            <text x="20" y="185" class="t-sm">Headache · Dizziness · Vertigo</text>
+            <text x="20" y="205" class="t-sm">Tinnitus · Visual disturbance</text>
+            <text x="20" y="225" class="t-sm">Angina · Intermittent claudication</text>
+          </svg>
+      - kind: explain
+        page: 158
+        title: "تجلط أكتر من نزيف"
+        quote: "Microvascular occlusions affecting extremities (erythromelalgia) burning sensation of fingers and toes."
+        text: |
+          - **Bleeding** نادر (**1%**): epistaxis، gum bleeding، ecchymosis، GI.
+          - **Thrombosis** خطير، خصوصًا من غير علاج:
+          - **Arterial**: MI، stroke، TIA، scotomata، mesenteric، limb ischemia.
+          - **Venous**: splanchnic (mesenteric، splenic، hepatoportal)، thrombophlebitis، DVT، PE.
+          - **Microvascular**: ==erythromelalgia== = حرقان في صوابع الإيد والرجل.
+      - kind: mnemonic
+        page: 159
+        quote: "Abnormal platelet-endothelial contact 3. Thrombocytosis 4. Pro-coagulant changes of the platelet 5. Pre-existing vascular disease"
+        word: "VEPTP"
+        parts:
+          - { key: "V", text: "Viscosity: raised PCV and abnormal RBC rheology" }
+          - { key: "E", text: "Endothelium: abnormal platelet–endothelial contact" }
+          - { key: "P", text: "Platelets too many: thrombocytosis" }
+          - { key: "T", text: "Turned pro-coagulant platelets" }
+          - { key: "P", text: "Pre-existing vascular disease" }
+        hook: "خمس أسباب للتجلط في الـ PV: الدم **تقيل**، الصفائح **كتير** و**شرسة**، والوعاء **أصلًا تعبان**."
+      - kind: explain
+        page: 159
+        title: "باقي العلامات"
+        quote: "Pruritus is due to increased histamine levels released from increased basophils and mast cells and usually is exacerbated by a warm bath or shower"
+        text: |
+          - **Abdominal pain**: peptic ulcer من الـ histamine والـ acid العاليين، أو **Budd–Chiari**، أو portal/mesenteric thrombosis.
+          - **Splenomegaly** (**75%**): early satiety، ونادرًا infarction. **Hepatomegaly** حوالي **30%**.
+          - **Weight loss**: early satiety أو الـ clone الشغال.
+          - ==Pruritus== (لحد **40%**): histamine من basophils و mast cells، بيزيد بعد **دُش دافي** ومع iron deficiency.
+          - **Plethora**: وش و palms و nail beds و conjunctiva حمرا.
+          - **Hypertension** شائع.
+      - kind: reveal
+        page: 159
+        quote: "The red cell mass should differentiate PV from Gaisbock syndrome, which is hypertension and pseudo-polycythemia"
+        prompt: "راجل عنده hypertension و Hb عالي. إزاي تفرق بين PV و Gaisbock syndrome؟"
+        answer: |
+          الـ ==Gaisbock syndrome== = **hypertension + pseudo-polycythemia**: الـ Hb عالي علشان **البلازما قليلة**.
+
+          الفيصل: **red cell mass**. في الـ PV عالي، وفي الـ Gaisbock طبيعي.
+      - kind: aside
+        tone: joke
+        page: 159
+        quote: "usually is exacerbated by a warm bath or shower"
+        text: "عيان الـ PV هو الوحيد اللي بيطلع من الدُش أوحش ما دخل: سخن، أحمر، وبيهرش. لو حد قالك «بهرش بعد الحمّام» ووشه طماطم، اطلب **CBC**."
+      - kind: check
+        page: 159
+        quote: "Pruritus is due to increased histamine levels released from increased basophils and mast cells"
+        question: "Plethoric man with splenomegaly and itching after hot showers. Cause of the itch?"
+        options: ["Histamine from basophils and mast cells", "Cholestasis", "Uremia", "Iron overload"]
+        answer: 0
+        why:
+          - "صح: الـ basophils والـ mast cells الزيادة بتطلع histamine."
+          - "مفيش jaundice أو Budd–Chiari."
+          - "مفيش kidney failure."
+          - "بالعكس، الـ iron deficiency هي اللي بتزوّد الهرش."
+      - kind: figure
+        page: 160
+        quote: "Followed by an advanced or spent phase (extensive myelofibrosis, progressive hepato-slenomegaly and pancytopenia)"
+        title: "عمر الـ PV في تلات مراحل"
+        alt: "A timeline with three blocks. Proliferative phase: control erythrocytosis and prevent thrombosis. Stable phase: normal counts without treatment, early fibrosis. Spent phase: extensive myelofibrosis, hepatosplenomegaly, pancytopenia, in 10-15% at 10 years and over 30% at 20 years, median survival under 18 months."
+        caption: "الـ ==spent phase== = post-PV myelofibrosis: **10–15%** بعد 10 سنين و **>30%** بعد 20، والـ survival بعدها **<18 شهر**."
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L10a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="fg-head"/></marker></defs>
+            <rect x="10" y="10" width="310" height="56" rx="10" class="fg-bad"/>
+            <text x="165" y="32" text-anchor="middle" class="t-b">1. Proliferative</text>
+            <text x="165" y="52" text-anchor="middle" class="t-sm">control red cells, prevent thrombosis</text>
+            <path d="M165 66 V84" class="fg-arrow" marker-end="url(#L10a)"/>
+            <rect x="10" y="88" width="310" height="56" rx="10" class="fg-good"/>
+            <text x="165" y="110" text-anchor="middle" class="t-b">2. Stable</text>
+            <text x="165" y="130" text-anchor="middle" class="t-sm">normal counts without treatment</text>
+            <path d="M165 144 V162" class="fg-arrow" marker-end="url(#L10a)"/>
+            <rect x="10" y="166" width="310" height="76" rx="10" class="fg-acc"/>
+            <text x="165" y="188" text-anchor="middle" class="t-b">3. Spent (myelofibrosis)</text>
+            <text x="165" y="208" text-anchor="middle" class="t-sm">big liver and spleen, pancytopenia</text>
+            <text x="165" y="228" text-anchor="middle" class="t-sm">10–15% at 10 y · &gt;30% at 20 y</text>
+          </svg>
+      - kind: explain
+        page: 160
+        title: "والـ AML؟ العلاج هو اللي بيفرق"
+        quote: "Is estimated 1-3% in patients treated with venesection. Increased to more than 10 folds when radioactive phosphorus (32P), chlorambucil or irradiation are used"
+        text: |
+          - مع **venesection** بس: **1–3%**.
+          - مع ==32P أو chlorambucil أو irradiation==: أكتر من **10 أضعاف**، بعد **5–8 سنين** في المتوسط.
+
+          الدرس: العلاج نفسه ممكن يبقى leukemogenic، وده هيحكم اختيار الدوا بعدين.
+      - kind: try
+        items: [hem.L10.019, hem.L10.023, hem.L10.026, hem.L10.034, hem.L10.035]
+    recap:
+      - "Hyperviscosity: صداع، دوخة، vertigo، tinnitus، زغللة، angina، claudication."
+      - "Thrombosis (arterial، venous، erythromelalgia) أخطر من الـ bleeding (1%). أسبابه: VEPTP."
+      - "Pruritus بعد الدُش (histamine) 40%، splenomegaly 75%، hepatomegaly 30%، plethora، HTN."
+      - "Gaisbock = HTN + pseudo-polycythemia؛ الـ red cell mass بيفرّق."
+      - "Proliferative ← stable ← spent (10–15%/10 سنين). AML 1–3% مع venesection، ×10 مع 32P/chlorambucil/irradiation."
+    practice: [hem.L10.017, hem.L10.018, hem.L10.019, hem.L10.020, hem.L10.021, hem.L10.022, hem.L10.023, hem.L10.024, hem.L10.025, hem.L10.026, hem.L10.027, hem.L10.028, hem.L10.029, hem.L10.030, hem.L10.031, hem.L10.032, hem.L10.033, hem.L10.034, hem.L10.035, hem.L10.036]
+  # ------------------------------------------------------------------
+  - id: hem.L10.lesson3
+    title: "تشخيص الـ PV: الـ EPO والـ JAK2 والنخاع"
+    hook: "سؤالين بيحلّوا أغلب الحالات: الـ JAK2 إيه؟ والـ EPO قد إيه؟"
+    minutes: 10
+    pages: [160, 164]
+    topics: [pv-tests, pv-criteria]
+    goals:
+      - "تقرأ الـ CBC والـ red cell mass والـ SaO2"
+      - "تكتب الـ A/B criteria و 2016 WHO criteria"
+      - "تمشي على algorithm الـ erythrocytosis"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 160
+        title: "الـ CBC والـ red cell mass"
+        quote: "Red cell mass (measured using patient RBC labelled with 51Cr) and plasma volume (using 131 I labelled albumin) ."
+        text: |
+          - **CBC**: RBC و Hb عاليين، و **MCV واطي أو normal** (من الـ iron deficiency).
+          - **Neutrophils و platelets** عاليين في الـ PV، ونادر ده في الـ secondary.
+          - **NAP score** عالي.
+          - **Red cell mass** بـ ⁵¹Cr، و **plasma volume** بـ ¹³¹I-albumin. لو ==RCM >25%== فوق المتوقع = diagnostic.
+          - **SaO2 <92%** = فكّر في **secondary**.
+      - kind: table
+        page: 160
+        quote: "Red cell mass ↑ ↑ ↑ Within NR or N Plasma volume N or ↑ N Reduced"
+        title: "مين عالي ومين واطي؟"
+        columns: [Measure, PV, Secondary, Relative]
+        rows:
+          - ["Red cell mass", "↑", "↑", "Normal range"]
+          - ["Plasma volume", "N or ↑", "N", "Reduced"]
+        hide: [[0, 3], [1, 1], [1, 3]]
+      - kind: explain
+        page: 161
+        title: "باقي الـ work-up"
+        quote: "Serum erythropoietin is low/subnormal in PRV , while normal/high in 2ry erythrocytosis."
+        text: |
+          - **Ferritin** واطي أو normal، **B12** غالبًا عالي (transcobalamin من الـ granulocytes)، وممكن folate deficiency.
+          - Renal function، **uric acid** (غالبًا عالي)، LFTs.
+          - **U/S بطن**، CT بطن، MRI مخ، chest X-ray، PFTs، echo حسب الحالة.
+          - ==Serum EPO==: **low/subnormal** في الـ PV، **normal/high** في الـ secondary.
+          - **JAK2 V617F**: sensitivity **97%**، specificity تقريبًا **100%**.
+          - **Cytogenetics**: 30% (20q−، +8، +9، 13q−). **BFU-E**: endogenous erythroid colonies من غير EPO.
+      - kind: explain
+        page: 161
+        title: "النخاع"
+        quote: "Abnormal megakaryocytes (clustering with giant forms and increased ploidy)"
+        text: |
+          الـ **trephine** في الـ PV:
+          1. Hypercellularity
+          2. **Trilineage hyperplasia**
+          3. ==Abnormal megakaryocytes==: clusters، giant، و ploidy أعلى
+          4. Fibrosis ممكن
+          5. نخاع طبيعي **ما يستبعدش** PV
+
+          وهو **mandatory**: بيفرّق **early PV مع thrombocytosis** من الـ **ET**، وبيساعد لو الـ Hb عالي بس تحت الـ WHO threshold. ويتعاد لو شاكك في post-PV MF أو leukemia.
+      - kind: check
+        page: 161
+        quote: "Serum erythropoietin is low/subnormal in PRV , while normal/high in 2ry erythrocytosis."
+        question: "Hb 19 g/dL. Which result best separates PV from secondary erythrocytosis?"
+        options: ["Low serum EPO", "Raised red cell mass", "Raised hematocrit", "Normal MCV"]
+        answer: 0
+        why:
+          - "صح: الـ EPO واطي في الـ PV وعالي أو normal في الـ secondary."
+          - "الـ red cell mass عالي في الاتنين."
+          - "الـ Hct عالي في الاتنين."
+          - "الـ MCV ما بيفرقش."
+      - kind: table
+        page: 162
+        quote: "A1 + A2 + either another A or another two B establishes polycythaemia vera."
+        title: "الـ A/B criteria"
+        columns: [Code, Criterion]
+        rows:
+          - ["A1", "Red cell mass >25% above predicted, or PCV ≥0.60 men / 0.56 women"]
+          - ["A2", "SaO2 >92% and EPO not raised"]
+          - ["A3", "Palpable splenomegaly"]
+          - ["A4", "Clonal abnormality (not BCR-ABL)"]
+          - ["B1–B2", "Platelets >400; neutrophils >10 (12.5 in smokers)"]
+          - ["B3–B4", "Radiological splenomegaly; EEC or low EPO"]
+          - ["Diagnosis", "A1 + A2 + another A or two B"]
+        hide: [[0, 1], [1, 1], [6, 1]]
+      - kind: explain
+        page: 163
+        title: "2008 ضد 2016"
+        quote: "Diagnosis of PV requires meeting either all 3 major criteria, or the first 2 major criteria and the minor criterion"
+        text: |
+          **WHO 2008**: Hb **>18.5** (رجالة) و **>16.5** (ستات)، ومعاهم JAK2، ومينور (marrow، EPO واطي، EEC).
+
+          **Revised 2016 WHO** (المهم):
+          1. Hb ==>16.5 g/dL رجالة / >16.0 ستات==، أو Hct **>49% / >48%**، أو RCM عالي
+          2. نخاع **hypercellular** مع **panmyelosis** و megakaryocytes **pleomorphic** mature
+          3. **JAK2 V617F أو exon 12**
+
+          **Minor**: EPO **subnormal**. التشخيص = **التلاتة**، أو **أول اتنين + الـ minor**.
+      - kind: reveal
+        page: 164
+        quote: "masked PV for JAK2-mutated patients who display PV-characteristic BM morphology, despite lower Hb levels"
+        prompt: "ليه الـ WHO نزّل الـ Hb threshold في 2016؟"
+        answer: |
+          علشان الـ ==masked PV==: ناس عندهم **JAK2** ونخاع شكله PV بالظبط، بس الـ Hb بين **16 و 18.5** (رجالة) أو **15 و 16.5** (ستات)، فكانوا بيفلتوا من criteria 2008.
+      - kind: figure
+        page: 164
+        quote: "OPTION 1: JAK2 V617F Pos, sEPO level SN"
+        title: "Algorithm: JAK2 V617F و sEPO"
+        alt: "Flowchart from erythrocytosis to JAK2 V617F and serum EPO with three options. Option 1: JAK2 positive, EPO subnormal, PV. Option 2: JAK2 negative, EPO subnormal, test JAK2 exon 12 and marrow; positive or consistent is PV, negative suggests testing for EPOR mutations. Option 3: JAK2 negative, EPO normal or increased, secondary erythrocytosis; a normal EPO also loops back to option 2."
+        caption: "==JAK2+ و EPO واطي== = PV على طول. JAK2− و EPO واطي = دوّر على **exon 12** واعمل نخاع. EPO عالي = **secondary**."
+        svg: |
+          <svg viewBox="0 0 330 380" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L10b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="fg-head"/></marker></defs>
+            <rect x="70" y="5" width="190" height="30" rx="8" class="fg-box"/>
+            <text x="165" y="25" text-anchor="middle" class="t-sm t-b">Erythrocytosis</text>
+            <path d="M165 35 V50" class="fg-arrow" marker-end="url(#L10b)"/>
+            <rect x="85" y="53" width="160" height="30" rx="8" class="fg-acc"/>
+            <text x="165" y="73" text-anchor="middle" class="t-sm t-b">JAK2 V617F + sEPO</text>
+            <path d="M120 83 L50 112" class="fg-arrow" marker-end="url(#L10b)"/>
+            <path d="M165 83 V112" class="fg-arrow" marker-end="url(#L10b)"/>
+            <path d="M210 83 L280 112" class="fg-arrow" marker-end="url(#L10b)"/>
+            <rect x="5" y="115" width="100" height="48" rx="8" class="fg-box"/>
+            <text x="55" y="135" text-anchor="middle" class="t-sm">JAK2 +</text>
+            <text x="55" y="152" text-anchor="middle" class="t-sm">EPO low</text>
+            <rect x="115" y="115" width="100" height="48" rx="8" class="fg-box"/>
+            <text x="165" y="135" text-anchor="middle" class="t-sm">JAK2 −</text>
+            <text x="165" y="152" text-anchor="middle" class="t-sm">EPO low</text>
+            <rect x="225" y="115" width="100" height="48" rx="8" class="fg-box"/>
+            <text x="275" y="135" text-anchor="middle" class="t-sm">JAK2 −</text>
+            <text x="275" y="152" text-anchor="middle" class="t-sm">EPO N or high</text>
+            <path d="M55 163 V190" class="fg-arrow" marker-end="url(#L10b)"/>
+            <path d="M165 163 V190" class="fg-arrow" marker-end="url(#L10b)"/>
+            <path d="M275 163 V190" class="fg-arrow" marker-end="url(#L10b)"/>
+            <rect x="15" y="193" width="80" height="34" rx="8" class="fg-bad"/>
+            <text x="55" y="215" text-anchor="middle" class="t-b">PV</text>
+            <rect x="115" y="193" width="100" height="44" rx="8" class="fg-acc"/>
+            <text x="165" y="211" text-anchor="middle" class="t-sm t-b">JAK2 exon 12</text>
+            <text x="165" y="228" text-anchor="middle" class="t-sm t-b">+ marrow</text>
+            <rect x="225" y="193" width="100" height="44" rx="8" class="fg-good"/>
+            <text x="275" y="211" text-anchor="middle" class="t-sm t-b">Secondary</text>
+            <text x="275" y="228" text-anchor="middle" class="t-sm t-b">erythrocytosis</text>
+            <path d="M140 237 L95 272" class="fg-arrow" marker-end="url(#L10b)"/>
+            <path d="M190 237 L235 272" class="fg-arrow" marker-end="url(#L10b)"/>
+            <text x="98" y="258" text-anchor="end" class="t-sm t-mut">pos / consistent</text>
+            <text x="232" y="258" class="t-sm t-mut">neg</text>
+            <rect x="35" y="275" width="80" height="34" rx="8" class="fg-bad"/>
+            <text x="75" y="297" text-anchor="middle" class="t-b">PV</text>
+            <rect x="185" y="275" width="140" height="44" rx="8" class="fg-thin"/>
+            <text x="255" y="293" text-anchor="middle" class="t-sm">Consider testing</text>
+            <text x="255" y="310" text-anchor="middle" class="t-sm">for EPOR mutations</text>
+          </svg>
+      - kind: check
+        page: 163
+        quote: "Hemoglobin >16.5 g/dL in men Hemoglobin >16.0 g/dL in women"
+        question: "Woman, Hb 16.4 g/dL, JAK2 V617F+, marrow panmyelosis. PV by WHO 2016?"
+        options: ["Yes: all 3 major criteria", "No: Hb must be >16.5", "No: red cell mass needed", "No: splenomegaly needed"]
+        answer: 0
+        why:
+          - "صح: الستات threshold 16.0 في 2016."
+          - "ده رقم الرجالة (أو ستات 2008)."
+          - "الـ Hb أو الـ Hct بيغنوا عن الـ RCM."
+          - "الـ splenomegaly مش criterion في 2016."
+      - kind: try
+        items: [hem.L10.040, hem.L10.045, hem.L10.046, hem.L10.057, hem.L10.063]
+    recap:
+      - "PV: RBC و Hb عاليين، MCV واطي/normal، neutrophils و platelets عاليين، NAP عالي."
+      - "RCM >25% diagnostic. SaO2 <92% = secondary. EPO واطي في PV، عالي/normal في secondary."
+      - "JAK2 V617F: 97% sensitive، ~100% specific. النخاع mandatory (PV ضد ET)."
+      - "WHO 2016: Hb >16.5/16.0 أو Hct >49/48%، panmyelosis، JAK2؛ minor EPO واطي. 3 أو 2 + minor."
+      - "Masked PV هو سبب تنزيل الـ threshold."
+    practice: [hem.L10.037, hem.L10.038, hem.L10.039, hem.L10.040, hem.L10.041, hem.L10.042, hem.L10.043, hem.L10.044, hem.L10.045, hem.L10.046, hem.L10.047, hem.L10.048, hem.L10.049, hem.L10.050, hem.L10.051, hem.L10.052, hem.L10.053, hem.L10.054, hem.L10.055, hem.L10.056, hem.L10.057, hem.L10.058, hem.L10.059, hem.L10.060, hem.L10.061, hem.L10.062, hem.L10.063, hem.L10.064, hem.L10.065, hem.L10.128]
+  # ------------------------------------------------------------------
+  - id: hem.L10.lesson4
+    title: "علاج الـ PV: فصد، أسبرين، وحبة لو كبير"
+    hook: "الهدف واحد: تمنع الجلطة من غير ما تعمل نزيف. والسن بيقرر الدوا."
+    minutes: 10
+    pages: [164, 168]
+    topics: [pv-treatment]
+    goals:
+      - "تعرف هدف العلاج والـ risk groups"
+      - "تكتب الـ venesection protocol"
+      - "تختار الـ cytoreductive agent الصح"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 164
+        title: "الهدف"
+        quote: "Primarily to reduce the risk of thrombosis without increasing the bleeding tendency"
+        text: |
+          1. أولًا: ==reduce the risk of thrombosis without increasing the bleeding tendency==.
+          2. تانيًا: تخفيف الأعراض، خصوصًا **vasomotor**.
+      - kind: table
+        page: 168
+        quote: "Phlebotomy and correction of CV risk factors, and aspirin"
+        title: "الـ risk groups في الـ PV"
+        columns: [Risk, Who, Therapy]
+        rows:
+          - [Low, "<60 and no thrombosis", "Phlebotomy + CV risk control + aspirin"]
+          - [High, "≥60 and/or thrombosis", "Cytoreduction + CV risk control + aspirin ± phlebotomy"]
+        hide: [[0, 1], [0, 2], [1, 1], [1, 2]]
+      - kind: explain
+        page: 165
+        title: "Venesection"
+        quote: "450 ml of blood removed ( isovolaemic replacement with normal saline) in adult every 2-3 days, twice weekly in old patients. Target Hct <0.45."
+        text: |
+          - ==أسرع طريقة== تنزّل الـ red cell mass.
+          - **450 mL** كل **2–3 أيام** في البالغين (مع normal saline isovolemic)، و**مرتين في الأسبوع** في الكبار.
+          - **Target Hct <0.45**.
+          - الـ maintenance بتختلف: من مرتين في السنة لمرة كل شهر.
+          - أول **3 سنين** خطر التجلط أعلى: زوّد **aspirin** و **cytoreduction**.
+      - kind: aside
+        tone: analogy
+        page: 165
+        quote: "Is the quickest way of reducing RCM."
+        text: "الـ venesection زي ما تفتح حنفية الخزان لما يطفح: أسرع حل يقلل الـ RCM، بس المصنع (النخاع) لسه شغال، فهتحتاج تفتحها تاني. علشان كده الـ high risk محتاج **cytoreduction** يهدّي المصنع نفسه."
+      - kind: check
+        page: 168
+        quote: "1. Venesection to maintain hematocrit < 0.45 2. Low-dose aspirin (unless contraindicated)"
+        question: "45-year-old, JAK2+ PV, Hct 0.58, no thrombosis or risk factors. Plan?"
+        options: ["Venesection to Hct <0.45 + aspirin", "Hydroxyurea + aspirin", "32P", "Observation"]
+        answer: 0
+        why:
+          - "صح: low risk = phlebotomy + aspirin + CV risk control."
+          - "الـ cytoreduction للـ high risk أو الـ indications."
+          - "الـ 32P leukemogenic ومش تحت 65."
+          - "لازم تنزّل الـ Hct علشان التجلط."
+      - kind: explain
+        page: 166
+        title: "الأدوية"
+        quote: "Antimetabolite, ribonucleotide reductase inhibitor. Onset of myelosuppression is rapid"
+        text: |
+          - ==Hydroxyurea==: antimetabolite، **ribonucleotide reductase inhibitor**، مفعوله سريع. **30 mg/kg** وبعدين **10–20 mg/kg**. الكتاب: **not increased risk of malignancy**. أعراضه: myelosuppression، photosensitivity، leg ulcers، GI.
+          - **IFN-α**: بيظبط الصفائح والـ PCV؛ للصغيرين، والحمل، والـ intractable pruritus، واللي ما استحملوش غيره. **3–5 mU** تلات مرات/أسبوع؛ غالي و flu-like و depression.
+          - **32P**: بينزّل الـ RCM بعد **12 أسبوع**، **2.3 mCi/m²** IV. تجلط أقل بس **AML** أكتر بكتير، فـ **مش تحت 65**.
+          - **Anagrelide**: imidazoquinazoline (anti-cAMP phosphodiesterase)، بيوقف نضج الـ megakaryocytes بس. صداع، arrhythmia، fluid retention، دوخة؛ **ممنوع في القلب والحمل**.
+      - kind: match
+        page: 167
+        quote: "Side effect, headache, arrythmia, fluid retention, dizziness. Contraindicated in cardiac patient and in pregnancy."
+        prompt: "وصّل الدوا بأهم معلومة عنه في الـ PV:"
+        pairs:
+          - ["Hydroxyurea", "Ribonucleotide reductase inhibitor, 30 then 10–20 mg/kg"]
+          - ["Interferon-alpha", "Young, pregnancy, intractable pruritus"]
+          - ["Radioactive phosphorus", "Not under 65: leukemogenic"]
+          - ["Anagrelide", "Contraindicated in cardiac patients and pregnancy"]
+          - ["Aspirin", "75 mg/day; avoid with past GI bleeding"]
+        why: "كل دوا له مكان: الـ hydroxyurea للكبار، الـ IFN للصغيرين والحوامل، الـ 32P للمسنين بس، الـ anagrelide بعيد عن القلب والحمل، والـ aspirin بجرعة صغيرة."
+      - kind: explain
+        page: 167
+        title: "Aspirin والـ supportive"
+        quote: "Low dose 75 mg/day In patient with risk of thrombosis (obesity, hypertension, DM, history of MI)."
+        text: |
+          - **Aspirin 75 mg/day** للي عندهم خطر تجلط (obesity، HTN، DM، MI قبل كده). ابعد عنه لو فيه **نزيف قديم**، خصوصًا GI.
+          - **Supportive**: سوايل كفاية، **allopurinol**، و antihistamine أو **H2 blocker** أو IFN للـ pruritus.
+          - ==BMT is not advocated== في الـ stable PV (سن المرضى والـ natural history الهادية نسبيًا).
+      - kind: explain
+        page: 168
+        title: "التوصيات بالترتيب"
+        quote: "< 40 years – interferon- b (ii) > 40 years – hydroxyurea ,c a. Avoid aspirin while platelet count > 1500 x 109/L."
+        text: |
+          1. Venesection لـ **Hct <0.45**
+          2. **Low-dose aspirin** (ابعد عنه لو الصفائح ==>1500 × 10⁹/L==)
+          3. تحكّم جامد في الـ risk factors (تدخين، HTN، كوليسترول، سمنة)
+          4. **Cytoreduction** لو: مش مستحمل الفصد، أو **thrombocytosis**، أو طحال **symptomatic أو بيكبر**
+          5. الاختيار: **IFN تحت 40**، **hydroxyurea فوق 40**
+          - **Anagrelide + venesection** لو فشل أو ما استحملش الـ hydroxyurea والـ IFN.
+          - **32P أو busulfan** متقطع للكبير اللي مش قادر ييجي العيادة.
+      - kind: update
+        page: 168
+        quote: "< 40 years – interferon- b (ii) > 40 years – hydroxyurea ,c"
+        text: "الـ **ropeginterferon alfa-2b** بقى approved للـ PV (FDA 2021)، والـ **ruxolitinib** second line للي فشل أو ما استحملش الـ hydroxyurea. في الامتحان اكتب اختيار الكتاب: interferon تحت 40 و hydroxyurea فوق 40."
+        ref: "NCCN Myeloproliferative Neoplasms guideline 2024"
+      - kind: check
+        page: 168
+        quote: "Avoid aspirin while platelet count > 1500 x 109/L."
+        question: "PV patient on aspirin; platelets now 1,700 × 10⁹/L. What about aspirin?"
+        options: ["Hold it while platelets >1500", "Double it", "Continue unchanged", "Add clopidogrel"]
+        answer: 0
+        why:
+          - "صح: الكتاب بيقول ابعد عن الـ aspirin فوق 1500."
+          - "هيزوّد النزيف."
+          - "الكتاب صريح إنك توقفه."
+          - "dual antiplatelet أخطر."
+      - kind: try
+        items: [hem.L10.067, hem.L10.069, hem.L10.077, hem.L10.085, hem.L10.086]
+    recap:
+      - "الهدف: امنع الجلطة من غير نزيف، وبعدين الأعراض."
+      - "Low (<60، مفيش جلطة): phlebotomy + aspirin + CV risk. High (≥60 أو جلطة): cytoreduction + aspirin ± phlebotomy."
+      - "Venesection 450 mL كل 2–3 أيام لـ Hct <0.45."
+      - "IFN تحت 40 (وفي الحمل والهرش)، hydroxyurea فوق 40، 32P بس فوق 65، anagrelide مش للقلب والحمل."
+      - "Aspirin 75 mg؛ ابعد عنه فوق 1500 صفيحة أو مع نزيف GI قديم."
+    practice: [hem.L10.066, hem.L10.067, hem.L10.068, hem.L10.069, hem.L10.070, hem.L10.071, hem.L10.072, hem.L10.073, hem.L10.074, hem.L10.075, hem.L10.076, hem.L10.077, hem.L10.078, hem.L10.079, hem.L10.080, hem.L10.081, hem.L10.082, hem.L10.083, hem.L10.084, hem.L10.085, hem.L10.086, hem.L10.087, hem.L10.088, hem.L10.089, hem.L10.090, hem.L10.091, hem.L10.092, hem.L10.131]
+  # ------------------------------------------------------------------
+  - id: hem.L10.lesson5
+    title: "Hb عالي بس مش PV: دوّر على السبب"
+    hook: "رئة تعبانة، جبل عالي، سيجارة، كلية، ورم، أو مجرد بلازما قليلة."
+    minutes: 10
+    pages: [169, 175]
+    topics: [secondary]
+    goals:
+      - "تصنّف أسباب الـ polycythemia غير الـ PV"
+      - "تفهم الـ high-affinity Hb والـ met-Hb والـ Chuvash"
+      - "تتعامل مع الـ apparent polycythemia"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 169
+        title: "الخريطة"
+        quote: "Causes of polycythemia other than polycythemia vera"
+        text: |
+          - **Primary**: ==primary familial and congenital polycythemia== (عيب في الـ progenitors نفسها).
+          - **Secondary مع systemic hypoxia**:
+          - **Chronic hypoxia**: lung disease، hypopnea، **high altitude**، cyanotic heart disease.
+          - **Defective O2 transport**: **high-affinity Hb**، **low 2,3-BPG**، **met-Hb**، **heavy smoking** (CO-Hb).
+          - **Secondary من غير hypoxia**: **Chuvash**، **abnormal EPO secretion** (كلى، cerebellar hemangioma، HCC)، **endocrine** (androgens، Cushing، Conn، pheo، Bartter).
+      - kind: sort
+        page: 169
+        quote: "Causes of polycythemia other than polycythemia vera"
+        prompt: "فيه hypoxia ولا لأ؟"
+        bins: ["With systemic hypoxia", "Without systemic hypoxia"]
+        cards:
+          - { text: "COPD", bin: 0 }
+          - { text: "High altitude", bin: 0 }
+          - { text: "High-affinity hemoglobin", bin: 0 }
+          - { text: "Heavy smoking", bin: 0 }
+          - { text: "Chuvash polycythemia", bin: 1 }
+          - { text: "Renal transplantation", bin: 1 }
+          - { text: "Cerebellar hemangioma", bin: 1 }
+          - { text: "Cushing syndrome", bin: 1 }
+        why: "الـ hypoxia يا إما الأكسجين ما بيدخلش (رئة، جبل، قلب cyanotic) يا إما الـ Hb ماسك فيه وما بيسيبوش للأنسجة (high-affinity، met-Hb، CO). من غير hypoxia: الـ EPO بيعلى من غير سبب (Chuvash، كلى، أورام) أو androgens."
+      - kind: explain
+        page: 170
+        title: "Primary familial و الـ hypoxic"
+        quote: "Isolated erythrocytosis, normal WBC and platelet count, no splenomegaly. No evolution to leukemia."
+        text: |
+          **Primary familial**: نادر، **autosomal dominant**، ==isolated erythrocytosis== (WBC و platelets طبيعيين، مفيش طحال)، ومفيش leukemia. الـ EPO **واطي أو normal**، والـ Hb–O2 curve طبيعي. السبب: **EPO receptor** mutation أو truncation.
+
+          **Hypoxic**: COPD، sleep apnea، hypoventilation. الـ polycythemia بتزوّد شيل الأكسجين بس كمان اللزوجة؛ **venesection لو Hct >0.55**.
+      - kind: explain
+        page: 171
+        title: "فوق الجبل وفي القلب"
+        quote: "Excessive altitude polycythemia (PCV>0.65) in some cases with hyperuricemia and proteinuria."
+        text: |
+          - فوق **4000 م**: mild polycythemia + perfusion و diffusion أحسن + enzymes و myoglobin.
+          - **Excessive altitude polycythemia**: PCV ==>0.65== (ممكن hyperuricemia و proteinuria).
+          - **Chronic mountain sickness**: PCV **>0.75** مع بطء تفكير، صداع، lethargy، dyspnea، كحة ناشفة، و **right HF**. العلاج **ACE inhibitor**.
+          - **Cyanotic CHD** (R→L shunt): PCV ممكن **>0.8**. صلّح الـ defect لو ينفع؛ venesection عند **PCV >0.60** أو للأعراض.
+      - kind: explain
+        page: 171
+        title: "Hb ماسك في الأكسجين"
+        quote: "Pathognomonic anomaly is left shift of oxygen dissociation curve."
+        text: |
+          ==High-affinity Hb==: بيسيب O2 أقل للأنسجة، فالكلى تحس بـ hypoxia وتطلع **EPO**.
+          - **Pathognomonic**: **left shift** في الـ O2 dissociation curve (P50 واطي).
+          - الطفرات في المنطقة اللي بتتحكم في التحول بين **T (tense)** و **R (relaxed)**.
+          - أكتر من **40 variant**، أغلبها β-globin، كلها **dominant**.
+          - أغلبهم أصحاء، plethoric، ومفيش CV risk زيادة.
+
+          **Red cell metabolic defects**: 2,3-BPG قليل، **autosomal recessive**، P50 واطي.
+      - kind: figure
+        page: 171
+        quote: "Pathognomonic anomaly is left shift of oxygen dissociation curve."
+        title: "الـ left shift"
+        alt: "Two oxygen dissociation curves on pO2 versus saturation axes. The normal curve has P50 marked at 50% saturation. A second curve sits to the left, labelled high-affinity Hb, met-Hb, CO-Hb and low 2,3-BPG, with a lower P50: hemoglobin holds oxygen more tightly and releases less to tissue."
+        caption: "منحنى على الشمال = الـ Hb **ماسك** في الـ O2. الأنسجة بتجوع، الكلى تطلع EPO، والكرات تزيد. وده يحصل في ==high-affinity Hb== و met-Hb و CO-Hb وقلة الـ 2,3-BPG."
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <path d="M40 15 V205 H320" class="fg-ink"/>
+            <text x="180" y="235" text-anchor="middle" class="t-sm">pO2</text>
+            <text x="12" y="110" class="t-sm">Sat</text>
+            <path d="M40 200 C110 195 130 80 180 50 C220 30 270 25 315 22" class="fg-arrow" stroke-width="3"/>
+            <path d="M40 200 C70 190 90 70 130 45 C170 28 240 22 315 20" class="fg-arrow-bad" stroke-width="3"/>
+            <path d="M40 110 H160" class="fg-thin"/>
+            <path d="M108 110 V205" class="fg-thin"/>
+            <path d="M152 110 V205" class="fg-thin"/>
+            <text x="108" y="220" text-anchor="middle" class="t-sm t-bad">P50 low</text>
+            <text x="165" y="220" class="t-sm">P50 normal</text>
+            <text x="200" y="80" class="t-sm t-b">Normal</text>
+            <text x="135" y="95" text-anchor="end" class="t-sm t-bad t-b">Left shift</text>
+            <text x="200" y="130" class="t-sm t-mut">high-affinity Hb</text>
+            <text x="200" y="146" class="t-sm t-mut">met-Hb, CO-Hb</text>
+            <text x="200" y="162" class="t-sm t-mut">low 2,3-BPG</text>
+          </svg>
+      - kind: explain
+        page: 172
+        title: "Met-Hb و السجاير"
+        quote: "Acquired methemoglobinemia due to exposure to strong oxidant (dapsone, inorganic nitrate, benzocaine, sulpha), life threatening when severe."
+        text: |
+          - **Met-Hb**: الحديد اتأكسد من **Fe²⁺ لـ Fe³⁺**، والرجوع محتاج **NADH** من الـ glycolysis. affinity أعلى و left shift.
+          - **Acquired**: oxidants: ==dapsone، inorganic nitrate، benzocaine، sulpha==؛ خطير لو شديد.
+          - **Hereditary**: **Hb M** (حوالين الـ heme pocket) أو عيوب **NADH reductase / cytochrome b5 reductase**.
+          - **Heavy smoking**: **CO-Hb 3–20%**: الـ CO بيزق الـ O2 وبيعمل left shift، فـ mild polycythemia حتى من غير مرض رئة.
+      - kind: explain
+        page: 173
+        title: "من غير hypoxia: Chuvash والكلى والأورام"
+        quote: "VHL mutant leads to reduced rate of degradation of HIF-1 and up regulation of down stream target Epo."
+        text: |
+          - ==Chuvash polycythemia==: **autosomal recessive**، endemic في Chuvashia (Volga)، EPO **عالي** ومفيش EPOR mutation. السبب **VHL** mutation، فالـ **HIF-1** ما بيتكسرش، والـ EPO يعلى.
+          - **Renal**: tumours، polycystic، cysts (local hypoxia)، transplant. بعضهم يستجيب لـ **ACE inhibitors و theophylline**، وبعضهم venesection، وبعضهم يخف لوحده.
+          - **Non-renal tumours**: **HCC**، **cerebellar hemangioma**، **large uterine fibroma**. شيل الورم = الـ polycythemia تخف.
+          - **Endocrine**: **androgens** زيادة (EPO أعلى + تأثير مباشر على النخاع).
+      - kind: aside
+        tone: exam
+        page: 174
+        quote: "Hepatocellular carcinoma Cerebellar tumor, hemangioma Large uterine fibroma."
+        text: "سؤال جاهز: «non-renal EPO-secreting tumours» = **HCC، cerebellar hemangioma، uterine fibroma**. ولو لقيت Hb عالي في مريض cirrhosis، فكّر في **HCC**."
+      - kind: explain
+        page: 174
+        title: "Idiopathic و Apparent"
+        quote: "Raised PCV (>0.51 in male and >0.48 in female) with normal red cell volume."
+        text: |
+          - **Idiopathic**: مش PV ومفيش سبب. بعضهم بيطلع **PV** بعدين.
+          - ==Apparent polycythemia==: PCV **>0.51 رجالة / >0.48 ستات** مع **red cell volume طبيعي**، علشان البلازما قليلة: **smoking، HTN، obesity، alcohol، diuretics**.
+          - مش واضح إنه بيزوّد التجلط. شيل الأسباب، و **venesection لو PCV >0.55** والعيان عنده خطر vascular.
+      - kind: table
+        page: 175
+        quote: "Secondary polycythemia algorithm"
+        title: "Algorithm الـ congenital: EPO وبعدين P50"
+        columns: [Finding, Think of]
+        rows:
+          - ["EPO decreased", "EPOR mutation"]
+          - ["EPO N/high, P50 low", "High-affinity Hb; 2,3-BPG deficiency"]
+          - ["EPO N/high, P50 normal", "VHL (EPO high); PHD2/HIF2α"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: check
+        page: 175
+        quote: "Secondary polycythemia algorithm"
+        question: "Healthy 25-year-old, father affected, normal SaO2, EPO high, P50 low. Cause?"
+        options: ["High-affinity hemoglobin", "EPOR mutation", "Polycythemia vera", "Chuvash polycythemia"]
+        answer: 0
+        why:
+          - "صح: dominant + EPO عالي + P50 واطي."
+          - "الـ EPOR mutation الـ EPO فيه واطي."
+          - "الـ PV الـ EPO واطي."
+          - "الـ Chuvash recessive والـ P50 طبيعي."
+      - kind: try
+        items: [hem.L10.093, hem.L10.102, hem.L10.112, hem.L10.115, hem.L10.118]
+    recap:
+      - "Primary familial: EPOR، dominant، isolated، EPO واطي/normal."
+      - "Hypoxic: رئة، sleep apnea، جبل (>0.65؛ mountain sickness >0.75 → ACE-I)، cyanotic CHD."
+      - "Left shift (P50 واطي): high-affinity Hb، low 2,3-BPG، met-Hb (dapsone، nitrate، benzocaine، sulpha)، CO-Hb."
+      - "Non-hypoxic: Chuvash (VHL/HIF-1)، كلى، HCC، cerebellar hemangioma، fibroma، androgens."
+      - "Apparent: PCV >0.51/0.48 و RCV طبيعي؛ شيل الأسباب، venesect >0.55 لو في خطر."
+    practice: [hem.L10.093, hem.L10.094, hem.L10.095, hem.L10.096, hem.L10.097, hem.L10.098, hem.L10.099, hem.L10.100, hem.L10.101, hem.L10.102, hem.L10.103, hem.L10.104, hem.L10.105, hem.L10.106, hem.L10.107, hem.L10.108, hem.L10.109, hem.L10.110, hem.L10.111, hem.L10.112, hem.L10.113, hem.L10.114, hem.L10.115, hem.L10.116, hem.L10.117, hem.L10.118, hem.L10.119, hem.L10.120, hem.L10.121, hem.L10.122, hem.L10.123, hem.L10.124, hem.L10.125, hem.L10.126, hem.L10.127, hem.L10.129, hem.L10.130, hem.L10.132]

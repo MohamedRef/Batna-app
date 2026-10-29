@@ -137,6 +137,8 @@ fn plan_items(store: &StudyStoreHandle, ids: &[String]) -> Vec<Planned> {
 static SESSION: GlobalSignal<Session> = Signal::global(Session::default);
 static PHASE: GlobalSignal<Phase> = Signal::global(|| Phase::Setup);
 static STARTED: GlobalSignal<Instant> = Signal::global(Instant::now);
+/// What the last Undo said: taken back (the item is reopened) or not saved.
+static UNDO_NOTE: GlobalSignal<Option<&'static str>> = Signal::global(|| None);
 
 #[derive(Clone, Copy, PartialEq)]
 enum Phase {
@@ -158,6 +160,7 @@ pub fn Study() -> Element {
     let mut session = SESSION.signal();
     let mut phase = PHASE.signal();
     let mut started = STARTED.signal();
+    let mut undo_note = UNDO_NOTE.signal();
     // Coming back to a running session: don't count the time away.
     let mut quiet = use_hook(|| {
         if *phase.peek() == Phase::Running {
@@ -183,6 +186,7 @@ pub fn Study() -> Element {
         move |lectures: Vec<&'static Lecture>, topics: HashSet<String>, mins: u32| {
             let planned = plan(&store, &lectures, &topics, mins);
             let empty = planned.is_empty();
+            undo_note.set(None);
             session.set(Session::new(planned));
             started.set(Instant::now());
             phase.set(if empty { Phase::Summary } else { Phase::Running });
@@ -197,6 +201,7 @@ pub fn Study() -> Element {
             if let Some(ids) = &req.items {
                 let planned = plan_items(&store, ids);
                 let empty = planned.is_empty();
+                undo_note.set(None);
                 session.set(Session::new(planned));
                 started.set(Instant::now());
                 phase.set(if empty { Phase::Summary } else { Phase::Running });
@@ -241,6 +246,27 @@ pub fn Study() -> Element {
         }
     });
 
+    // Takes the newest grade back: its review event gets a tombstone (the
+    // schedule replays without it) and the session steps back to that item.
+    // The session only moves once the store has let the answer go, so the
+    // two never disagree.
+    let undo = {
+        let store = store.clone();
+        move || {
+            let mut back = session.peek().clone();
+            let Some(undone) = back.undo() else { return };
+            let gone = undone.event.as_deref().is_none_or(|id| store.0.borrow_mut().retract(id));
+            if !gone {
+                undo_note.set(Some(tx::UNDO_FAILED));
+                return;
+            }
+            session.set(back);
+            undo_note.set(Some(tx::UNDONE));
+            started.set(Instant::now());
+            phase.set(Phase::Running);
+        }
+    };
+
     let body = match phase() {
         Phase::Setup if ready.is_empty() => rsx! {
             section { class: "card",
@@ -275,7 +301,9 @@ pub fn Study() -> Element {
             let (pos, len) = s.progress();
             let current = s.current().cloned();
             let retry = s.is_retry();
+            let can_undo = s.can_undo();
             drop(s);
+            let reopened = undo_note() == Some(tx::UNDONE);
             match current.and_then(|p| find(&p.item_id).map(|(l, i)| (p, l, i))) {
                 // Only when content changed under a running session; "end" still works.
                 None => rsx! {
@@ -293,7 +321,7 @@ pub fn Study() -> Element {
                     let item_id = p.item_id.clone();
                     let on_grade = move |grade: Grade| {
                         let took = started().elapsed().as_millis().min(u32::MAX as u128) as u32;
-                        store.0.borrow_mut().record(ReviewEvent {
+                        let event = store.0.borrow_mut().record_logged(ReviewEvent {
                             item_id: item_id.clone(),
                             grade,
                             origin: Origin::Study,
@@ -301,7 +329,8 @@ pub fn Study() -> Element {
                             took_ms: took,
                         });
                         let hidden = |id: &str| store.0.borrow().is_hidden(id);
-                        session.write().grade_unless(grade, hidden);
+                        session.write().grade_logged(grade, event, hidden);
+                        undo_note.set(None);
                         started.set(Instant::now());
                         if session.read().is_done() {
                             phase.set(Phase::Summary);
@@ -319,12 +348,32 @@ pub fn Study() -> Element {
                                 aria_valuemin: "0", aria_valuemax: "{len}", aria_valuenow: "{pos}",
                                 div { class: "st-bar-fill", style: "inline-size: {pos * 100 / len.max(1)}%" }
                             }
-                            span { class: "muted small", "{pos + 1} {tx::OF} {len}" }
+                            span { class: "muted small st-count", "{pos + 1} {tx::OF} {len}" }
+                            if can_undo {
+                                button {
+                                    class: "btn-link st-undo",
+                                    title: tx::UNDO_HINT,
+                                    aria_label: tx::UNDO_HINT,
+                                    onclick: {
+                                        let mut undo = undo.clone();
+                                        move |_| undo()
+                                    },
+                                    {tx::UNDO}
+                                }
+                            }
                             button {
                                 class: "btn-link",
                                 "aria-keyshortcuts": "Escape",
                                 onclick: move |_| phase.set(Phase::Summary),
                                 {tx::END}
+                            }
+                        }
+                        if let Some(note) = undo_note() {
+                            p {
+                                class: "note st-undo-note",
+                                role: "status",
+                                "data-failed": if note == tx::UNDO_FAILED { "yes" } else { "no" },
+                                {note}
                             }
                         }
                         if let Some(req) = pending() {
@@ -356,6 +405,7 @@ pub fn Study() -> Element {
                                 topic_title,
                                 fresh: p.fresh,
                                 retry,
+                                reopened,
                                 on_grade,
                             }
                         }
@@ -378,6 +428,12 @@ pub fn Study() -> Element {
                     fresh: summary.fresh,
                     shaky,
                     next: next.map(|t| when_label(now_ms(), t, &crate::store::zone())),
+                    can_undo: session.read().can_undo(),
+                    on_undo: {
+                        let mut undo = undo.clone();
+                        move |_| undo()
+                    },
+                    undo_failed: undo_note() == Some(tx::UNDO_FAILED),
                     on_again: move |_| phase.set(Phase::Setup),
                 }
             }
@@ -522,6 +578,9 @@ fn SummaryView(
     fresh: usize,
     shaky: Vec<(String, String)>,
     next: Option<String>,
+    can_undo: bool,
+    on_undo: EventHandler<()>,
+    undo_failed: bool,
     on_again: EventHandler<()>,
 ) -> Element {
     rsx! {
@@ -551,8 +610,15 @@ fn SummaryView(
                     None => rsx! { {tx::NEXT_TOMORROW} },
                 }
             }
+            if undo_failed {
+                p { class: "note st-undo-note", role: "status", "data-failed": "yes", {tx::UNDO_FAILED} }
+            }
             div { class: "st-actions",
                 button { class: "btn btn-primary btn-lg", onclick: move |_| on_again.call(()), {tx::ANOTHER} }
+                // He tapped one grade too many: bring the last item back.
+                if can_undo {
+                    button { class: "btn btn-secondary btn-lg", onclick: move |_| on_undo.call(()), {tx::UNDO_LAST} }
+                }
             }
         }
     }

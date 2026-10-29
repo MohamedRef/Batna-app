@@ -366,6 +366,26 @@ mod tests {
     }
 
     #[test]
+    fn an_undone_answer_is_taken_back_on_the_other_device_once() {
+        let phone = Store::open_in_memory().unwrap();
+        let tablet = Store::open_in_memory().unwrap();
+        let kept = phone.append_review(ev("hb.L01.001", 10)).unwrap();
+        let undone = phone.append_review(ev("hb.L01.002", 20)).unwrap();
+        tablet.apply_remote(&relay(&phone, 1), 2).unwrap();
+        assert_eq!(tablet.reviews().unwrap().len(), 2);
+        // Undo on the phone: one tombstone op, never a second one.
+        assert!(phone.retract_review(&undone.id).unwrap());
+        assert!(!phone.retract_review(&undone.id).unwrap());
+        let ops = relay(&phone, 3);
+        assert_eq!(ops.len(), 1);
+        assert_eq!(ops[0].op.kind, OpKind::Delete);
+        tablet.apply_remote(&ops, 3).unwrap();
+        let left: Vec<String> = tablet.reviews().unwrap().into_iter().map(|l| l.id).collect();
+        assert_eq!(left, std::slice::from_ref(&kept.id));
+        assert_eq!(phone.reviews().unwrap().into_iter().map(|l| l.id).collect::<Vec<_>>(), [kept.id]);
+    }
+
+    #[test]
     fn the_newest_verdict_wins_on_both_devices() {
         let phone = Store::open_in_memory().unwrap();
         let tablet = Store::open_in_memory().unwrap();

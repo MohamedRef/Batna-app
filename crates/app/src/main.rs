@@ -50,6 +50,8 @@ use dioxus::prelude::*;
 
 const MAIN_CSS: Css = css!("assets/main.css");
 const SHAPE_CSS: Css = css!("assets/shape.css");
+const PARTS_CSS: Css = css!("assets/parts.css");
+const APPEARANCE_CSS: Css = css!("assets/appearance.css");
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Screen {
@@ -190,9 +192,17 @@ fn App() -> Element {
         style { {fonts::css()} }
         style { {MAIN_CSS.text()} }
         style { {SHAPE_CSS.text()} }
+        style { {PARTS_CSS.text()} }
+        style { {APPEARANCE_CSS.text()} }
         style { {look} }
         desk::Chrome {}
-        div { class: "app", lang: "ar", dir: "rtl",
+        div {
+            class: "app",
+            lang: "ar",
+            dir: "rtl",
+            // Calm or Glossy (Settings › Look): only CSS keys on it, so a
+            // switch keeps every screen's state (assets/appearance.css).
+            "data-appearance": ui.prefs.read().appearance.as_str(),
             header { class: "topbar",
                 div { class: "brand",
                     span { class: "brand-name", {i18n::app::NAME} }

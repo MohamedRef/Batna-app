@@ -1,6 +1,7 @@
 //! The Again / Hard / Good / Easy row every item shows once its answer is
-//! out. Shared by all renderers, so the verify prompt and the intervals look
-//! the same for every kind.
+//! out ("افتكرتها قد إيه؟"), with the real FSRS interval under each grade.
+//! Shared by all renderers, so the content check above it and the intervals
+//! look the same for every kind.
 
 use batna_core::review::Grade;
 use dioxus::prelude::*;
@@ -23,10 +24,16 @@ pub fn GradeRow(item_id: String, suggested: Option<Grade>, on_grade: EventHandle
         }
     });
     rsx! {
+        // Two separate judgements: whether the content is right (its own
+        // box, only while the item is unchecked), then how well he
+        // remembered it (the rating row, always in the same place).
         crate::verify::VerifyBar { item_id: item_id.clone() }
-        div { class: "st-grades", role: "group", aria_label: tx::GRADE_LABEL,
-            if suggested.is_some() {
-                p { class: "st-suggest muted small", {tx::SUGGESTED} }
+        div { class: "st-grades", role: "group", aria_labelledby: "st-grade-label",
+            p { class: "st-grade-head",
+                strong { id: "st-grade-label", {tx::GRADE_LABEL} }
+                span { class: "st-suggest muted small",
+                    {if suggested.is_some() { tx::SUGGESTED } else { tx::GRADE_HINT }}
+                }
             }
             div { class: "st-grade-row",
                 for (i , grade) in GRADES.into_iter().enumerate() {

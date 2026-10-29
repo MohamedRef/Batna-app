@@ -295,7 +295,13 @@ pub mod study {
     pub const TICK_HEADINGS: &str = "علّم على العناوين اللي جت في بالك.";
     pub const HEADINGS_GOT: &str = "العناوين اللي جبتها:";
 
-    pub const GRADE_LABEL: &str = "قيّم نفسك";
+    pub const GRADE_LABEL: &str = "افتكرتها قد إيه؟";
+    pub const GRADE_HINT: &str = "قيّم اللي افتكرته، مش صعوبة السؤال. ده اللي بيحدد إمتى يرجعلك.";
+    pub const UNDO: &str = "↶ تراجع";
+    pub const UNDO_HINT: &str = "رجّع آخر تقييم";
+    pub const UNDONE: &str = "رجّعت تقييمك، وكأنك ما قيّمتش. جاوب وقيّم من جديد.";
+    pub const UNDO_FAILED: &str = "ما عرفتش أرجّع التقييم. جرّب تاني بعد شوية.";
+    pub const UNDO_LAST: &str = "↶ رجّع آخر تقييم";
     pub const SUGGESTED: &str = "اقتراحي متعلّم عليه، والقرار ليك.";
     pub const AGAIN: &str = "تاني";
     pub const HARD: &str = "صعب";
@@ -796,7 +802,8 @@ pub mod keys {
 }
 
 pub mod verify {
-    pub const GROUP: &str = "مراجعة المحتوى";
+    pub const GROUP: &str = "مراجعة صحة المحتوى";
+    pub const HINT: &str = "دي عن صحة المعلومة قدام الكتاب، مش عن تذكّرك، ومش بتغيّر تقييمك.";
     pub const QUESTION: &str = "المحتوى ده مظبوط؟";
     pub const RIGHT: &str = "✓ صح";
     pub const EDIT: &str = "✎ عدّل";
@@ -983,7 +990,7 @@ pub mod settings {
     pub const THIS_DEVICE: &str = "للجهاز ده بس";
 
     pub const LOOK: &str = "الشكل";
-    pub const LOOK_SUB: &str = "الألوان وحجم الواجهة";
+    pub const LOOK_SUB: &str = "الألوان، نمط الواجهة وحجمها";
     pub const DATA: &str = "بياناتك";
     pub const DATA_SUB: &str = "فين بتتحفظ، والتصدير";
     pub const ABOUT: &str = "عن باطنة";
@@ -1002,6 +1009,13 @@ pub mod settings {
     pub const THEME_BLACK_SUB: &str = "أسود خالص، فبكسلات شاشة الأموليد بتطفي: أريح للعين بالليل وبتوفّر بطارية";
     pub const THEME_SHIFT: &str = "نبطشية";
     pub const THEME_SHIFT_SUB: &str = "غامق ودافي من غير ضوء أزرق، للمذاكرة متأخر قبل النوم";
+
+    pub const APPEARANCE: &str = "نمط الواجهة";
+    pub const APPEARANCE_CALM: &str = "هادئ";
+    pub const APPEARANCE_CALM_SUB: &str = "أسطح سادة وهادية، من غير لمعة";
+    pub const APPEARANCE_GLOSSY: &str = "Glossy · Material You";
+    pub const APPEARANCE_GLOSSY_SUB: &str =
+        "أسطح ملونة فيها لمعة خفيفة وأزرار مدوّرة. ألوانها من ألوان باطنة، مش من خلفية الموبايل";
 
     pub const TEXT_SIZE: &str = "حجم الواجهة";
     pub const TEXT_SMALLER: &str = "أصغر";

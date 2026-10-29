@@ -225,6 +225,21 @@ impl Store {
         Ok(logged)
     }
 
+    /// Takes one answer back (Undo): its row gets the tombstone, queued for
+    /// sync, so every device replays the schedule without it. False when it
+    /// was already gone (or never existed): nothing is written twice.
+    pub fn retract_review(&self, id: &str) -> Result<bool> {
+        let mut conn = self.conn.lock().unwrap();
+        let tx = conn.transaction()?;
+        let n = tx.execute("UPDATE review_events SET deleted = 1 WHERE id = ?1 AND deleted = 0", [id])?;
+        if n > 0 {
+            let device = self.clock.lock().unwrap().device().to_string();
+            sync::enqueue(&tx, "review_events", "id", id, &device)?;
+        }
+        tx.commit()?;
+        Ok(n > 0)
+    }
+
     /// The whole review log, in HLC order. Rows this build can't read are skipped.
     pub fn reviews(&self) -> Result<Vec<LoggedReview>> {
         let conn = self.conn.lock().unwrap();

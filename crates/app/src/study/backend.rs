@@ -3,7 +3,6 @@
 //! kept in memory for the run.
 
 use std::cell::RefCell;
-use std::collections::HashSet;
 use std::rc::Rc;
 
 use batna_core::review::{MemorySink, ReviewEvent, ReviewSink};
@@ -14,19 +13,33 @@ use dioxus::prelude::*;
 #[derive(Default)]
 pub(super) struct MemoryStore {
     sink: MemorySink,
-    seen: HashSet<String>,
+    /// The id each event in `sink` was logged under.
+    ids: Vec<String>,
+    next: u64,
 }
 
 impl StudyStore for MemoryStore {
     fn record(&mut self, event: ReviewEvent) {
-        self.seen.insert(event.item_id.clone());
+        self.record_logged(event);
+    }
+    fn record_logged(&mut self, event: ReviewEvent) -> Option<String> {
+        self.next += 1;
+        let id = format!("mem-{}", self.next);
+        self.ids.push(id.clone());
         self.sink.record(event);
+        Some(id)
+    }
+    fn retract(&mut self, event_id: &str) -> bool {
+        let Some(i) = self.ids.iter().position(|x| x == event_id) else { return true };
+        self.ids.remove(i);
+        self.sink.events.remove(i);
+        true
     }
     fn due(&self, _now_ms: i64) -> Vec<String> {
         Vec::new()
     }
     fn is_new(&self, item_id: &str) -> bool {
-        !self.seen.contains(item_id)
+        !self.sink.events.iter().any(|e| e.item_id == item_id)
     }
     fn is_hidden(&self, _item_id: &str) -> bool {
         false

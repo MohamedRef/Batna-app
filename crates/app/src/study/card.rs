@@ -10,7 +10,8 @@ use crate::i18n::study as tx;
 #[component]
 pub fn CardItem(item: Item, on_grade: EventHandler<Grade>) -> Element {
     let Body::Card { front, back } = &item.body else { return rsx! {} };
-    let mut shown = use_signal(|| false);
+    let reopened = try_use_context::<super::item::Reopened>().is_some_and(|r| r.0);
+    let mut shown = use_signal(|| reopened);
     // Tablet and Mac: the question on one side, the answer in the wide column;
     // grading sits under both.
     rsx! {

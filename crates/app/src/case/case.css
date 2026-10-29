@@ -104,65 +104,6 @@
 .case-steps-done .ok .case-done-q span { color: var(--good); }
 .case-steps-done .miss .case-done-q span { color: var(--bad); }
 
-/* ---------- calculators ---------- */
-.calcs { display: grid; gap: var(--sp-4); align-items: start; }
-.calc-group { display: flex; flex-direction: column; gap: var(--sp-1); margin-block-end: var(--sp-3); }
-.calc-chips { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
-.calc-chip {
-  border: 1px solid var(--line);
-  background: var(--surface);
-  border-radius: var(--radius-pill);
-  padding: var(--sp-1) var(--sp-3);
-  min-height: var(--tap);
-  cursor: pointer;
-}
-.calc-chip[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); font-weight: 600; }
-/* Compact and medium: the list and the open calculator take turns. */
-.calcs[data-open="yes"] .calc-list { display: none; }
-.calcs[data-open="no"] .calc-pane { display: none; }
-@media (min-width: 840px) {
-  .calcs { grid-template-columns: 16rem minmax(0, 1fr); }
-  .calcs[data-open="yes"] .calc-list, .calcs[data-open="no"] .calc-pane { display: block; }
-  .calc-back { display: none; }
-}
-.calc-form { display: grid; gap: var(--sp-3); align-items: start; }
-/* The live result comes first until there is room beside the fields. */
-.calc-form > .calc-result, .calc-form > .calc-wait { order: -1; }
-@media (min-width: 1100px) { .calc-form > .calc-result, .calc-form > .calc-wait { order: 0; position: sticky; inset-block-start: var(--sp-4); } }
-@media (min-width: 1100px) { .calc-form { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
-.calc-field { display: flex; flex-direction: column; gap: var(--sp-1); }
-.calc-label { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--sp-1) var(--sp-2); }
-.calc-hint { margin: 0; }
-.calc-field input, .calc-field select, .calc-item input {
-  font: inherit;
-  color: var(--text);
-  background: var(--bg);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: var(--sp-2) var(--sp-3);
-  min-height: var(--tap);
-  font-family: var(--font-latin);
-}
-.calc-toggle { display: flex; gap: var(--sp-2); }
-.calc-toggle button {
-  flex: 1;
-  border: 1px solid var(--line);
-  background: var(--surface);
-  border-radius: var(--radius);
-  min-height: var(--tap);
-  cursor: pointer;
-}
-.calc-toggle button[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); font-weight: 600; }
-.calc-result { border-color: var(--accent); }
-.calc-headline { display: flex; align-items: baseline; gap: var(--sp-3); flex-wrap: wrap; }
-.calc-display { font-size: 2rem; font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
-.calc-band { font-weight: 700; }
-.calc-meaning { display: block; }
-.calc-parts ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
-.calc-parts li { display: flex; justify-content: space-between; gap: var(--sp-3); border-block-end: 1px dashed var(--line); }
-.calc-points { font-family: var(--font-latin); font-variant-numeric: tabular-nums; }
-.calc-note { display: block; color: var(--muted); }
-
 /* Chips (book page, unverified) keep their own width inside column boxes. */
 .player :not(.player-meta) > .chip { align-self: flex-start; inline-size: fit-content; }
 /* The recap's English lines read left to right in the Latin face. */

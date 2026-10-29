@@ -4,7 +4,10 @@
 //! is never a dead end.
 //!
 //! It opens over whichever screen it came from and closes with Back, the
-//! page's own back button, or any move to another screen.
+//! page's own back button, or any move to another screen. Pages stack: a
+//! lecture opened from the references list ([`refs`]) goes back to it.
+
+pub mod refs;
 
 use batna_core::review::StudyStore;
 use batna_core::stats::WeakTopic;
@@ -19,24 +22,66 @@ use crate::{Screen, Ui};
 
 const CSS: Css = css!("src/lecture/lecture.css");
 
-/// The open lecture and the screen it opened over. `BATNA_OPEN_LECTURE=hb.L01`
-/// opens one at launch over the first screen (previews, screenshots).
-static OPEN: GlobalSignal<Option<(String, Screen)>> = Signal::global(|| None);
+/// The open pages (last on top) and the screen they opened over. A page is a
+/// lecture id or [`REFERENCES`]. `BATNA_OPEN_LECTURE=hb.L01` (or
+/// `references`) opens one at launch over the first screen (previews,
+/// screenshots).
+static OPEN: GlobalSignal<Option<(Vec<String>, Screen)>> = Signal::global(|| None);
 
-/// Opens a lecture's page over the current screen.
+/// The page id of the references list.
+pub const REFERENCES: &str = "references";
+
+/// Opens a lecture's page over the current screen, on top of any page
+/// already open there.
 pub fn open(ui: Ui, id: &str) {
-    *OPEN.write() = Some((id.to_string(), *ui.screen.peek()));
-    document::eval(r#"document.querySelector("main.content")?.scrollTo(0, 0);"#);
+    let screen = *ui.screen.peek();
+    let mut open = OPEN.write();
+    match open.as_mut() {
+        Some((stack, on)) if *on == screen => {
+            if stack.last().map(String::as_str) != Some(id) {
+                stack.push(id.to_string());
+            }
+        }
+        _ => *open = Some((vec![id.to_string()], screen)),
+    }
+    drop(open);
+    to_top();
 }
 
+/// Opens the references list (More › المراجع) over the current screen.
+// Wired by the More sheet (more.rs, redesign shell PR); unused until then.
+#[allow(dead_code)]
+pub fn open_references(ui: Ui) {
+    *OPEN.write() = Some((vec![REFERENCES.to_string()], *ui.screen.peek()));
+    to_top();
+}
+
+/// Closes the top page: back to the page under it, or to the screen.
 pub fn close() {
+    let mut open = OPEN.write();
+    if let Some((stack, _)) = open.as_mut() {
+        stack.pop();
+        if stack.is_empty() {
+            *open = None;
+        }
+    }
+    drop(open);
+    to_top();
+}
+
+/// Closes every page (a session is starting).
+pub fn close_all() {
     *OPEN.write() = None;
+    to_top();
+}
+
+fn to_top() {
     document::eval(r#"document.querySelector("main.content")?.scrollTo(0, 0);"#);
 }
 
-/// The lecture to show over `screen`, if one is open there.
+/// The page to show over `screen`, if one is open there.
 pub fn shown(screen: Screen) -> Option<String> {
-    OPEN.read().as_ref().filter(|(_, on)| *on == screen).map(|(id, _)| id.clone())
+    OPEN.read().as_ref().filter(|(_, on)| *on == screen).and_then(|(stack, _)| stack.last().cloned())
 }
 
 /// Whether a lecture page is open (Back closes it before leaving the screen).
@@ -49,7 +94,7 @@ pub fn is_open() -> bool {
 pub fn use_lecture_page(ui: Ui) {
     use_hook(move || {
         if let Ok(id) = std::env::var("BATNA_OPEN_LECTURE") {
-            *OPEN.write() = Some((id, *ui.screen.peek()));
+            *OPEN.write() = Some((vec![id], *ui.screen.peek()));
         }
     });
     use_effect(move || {
@@ -78,8 +123,8 @@ pub fn topic_session(data: &StudyData, lecture: &str, topic: Option<String>) -> 
 /// Starts a study session: on exactly `items` when given, else on the
 /// lecture with the usual time budget.
 fn start(mut ui: Ui, lecture: &str, items: Option<Vec<String>>) {
-    // Over Study itself the screen doesn't change, so close the page here.
-    close();
+    // Over Study itself the screen doesn't change, so close the pages here.
+    close_all();
     *crate::study::START.write() = Some(crate::study::Start {
         lectures: Some(vec![lecture.to_string()]),
         items,
@@ -90,6 +135,9 @@ fn start(mut ui: Ui, lecture: &str, items: Option<Vec<String>>) {
 
 #[component]
 pub fn LecturePage(id: String) -> Element {
+    if id == REFERENCES {
+        return rsx! { refs::References {} };
+    }
     let ui = use_context::<Ui>();
     let lib = Library::get();
     let review = use_review();
@@ -144,13 +192,24 @@ pub fn LecturePage(id: String) -> Element {
                 }
                 if lecture.is_some() {
                     div {
-                        class: "lec-bar",
+                        class: "progress",
+                        "data-tone": "good",
                         role: "progressbar",
                         aria_label: tx::PROGRESS,
                         aria_valuemin: "0",
                         aria_valuemax: "{total}",
                         aria_valuenow: "{seen}",
-                        div { class: "lec-bar-fill", style: "inline-size: {share}%" }
+                        div { class: "progress-fill", style: "inline-size: {share}%" }
+                    }
+                    if let Some(c) = stats.as_ref().map(|s| &s.counts) {
+                        p { class: "small lec-check",
+                            span {
+                                class: "chip",
+                                "data-tone": if c.approved >= c.total && c.total > 0 { "good" } else { "" },
+                                "{tx::CHECKED} " span { class: "num-ltr", "{c.approved}/{c.total}" }
+                            }
+                            span { class: "muted", " {tx::CHECKED_NOTE}" }
+                        }
                     }
                     p { class: "muted small",
                         "{seen} {tx::OF} {total} {tx::STARTED}"

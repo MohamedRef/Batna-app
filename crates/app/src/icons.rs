@@ -70,6 +70,11 @@ pub fn steps() -> Element {
     stroke("M5 8h14v11H5zM7 5h10M9 2.5h6")
 }
 
+/// A magnifier, for search fields.
+pub fn search() -> Element {
+    stroke("M10.5 4a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM15.5 15.5 20 20")
+}
+
 /// A page-turn arrow. The app is right to left, so "next" points left.
 pub fn chevron(next: bool) -> Element {
     stroke(if next { "M15 5l-7 7 7 7" } else { "M9 5l7 7-7 7" })

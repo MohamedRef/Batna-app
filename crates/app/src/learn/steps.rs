@@ -302,6 +302,25 @@ fn Aside(tone: Tone, text: String) -> Element {
     }
 }
 
+/// An answer choice's look (parts.css `button.answer`) and its mark in
+/// words: picked before Check, then his pick right or wrong and the right
+/// one he missed. Other options stay plain (and dimmed once checked).
+fn answer_state(
+    checked: bool,
+    picked: Option<usize>,
+    i: usize,
+    answer: usize,
+) -> (Option<&'static str>, Option<&'static str>) {
+    match (checked, picked) {
+        (false, Some(p)) if p == i => (Some("selected"), None),
+        (false, _) => (None, None),
+        (true, Some(p)) if p == i && i == answer => (Some("correct"), Some(tx::MARK_MINE_RIGHT)),
+        (true, Some(p)) if p == i => (Some("wrong"), Some(tx::MARK_MINE_WRONG)),
+        (true, _) if i == answer => (Some("missed"), Some(tx::MARK_RIGHT)),
+        (true, _) => (None, None),
+    }
+}
+
 fn cue(right: bool) {
     crate::sounds::play(if right { crate::sounds::Cue::Right } else { crate::sounds::Cue::Wrong });
 }
@@ -345,17 +364,11 @@ fn Check(
             div { class: "ls-options", dir: if ltr { "ltr" } else { "rtl" }, role: if checked() { "list" } else { "radiogroup" },
                 for (pos , &i) in order.iter().enumerate() {
                     {
-                        let state = match (checked(), picked()) {
-                            (false, Some(p)) if p == i => "picked",
-                            (false, _) => "open",
-                            (true, _) if i == answer => "right",
-                            (true, Some(p)) if p == i => "wrong",
-                            (true, _) => "other",
-                        };
+                        let (state, mark) = answer_state(checked(), picked(), i, answer);
                         rsx! {
                             div { key: "{i}", class: "ls-option-wrap",
                                 button {
-                                    class: "ls-option",
+                                    class: "answer",
                                     role: if !checked() { "radio" } else { "listitem" },
                                     "aria-checked": if !checked() { if picked() == Some(i) { "true" } else { "false" } } else { "" },
                                     "data-state": state,
@@ -367,10 +380,10 @@ fn Check(
                                             put.call(Draft::Check { pick: Some(i), checked: false });
                                         }
                                     },
-                                    span { class: "ls-letter", "{LETTERS.get(pos).copied().unwrap_or(\"\")}" }
-                                    span { Line { text: options[i].clone() } }
-                                    if checked() && picked() == Some(i) {
-                                        span { class: "ls-mine small", {tx::PICKED} }
+                                    span { class: "answer-key", "{LETTERS.get(pos).copied().unwrap_or(\"\")}" }
+                                    span { class: "answer-text", Line { text: options[i].clone() } }
+                                    if let Some(m) = mark {
+                                        span { class: "answer-mark", dir: "rtl", lang: "ar", {m} }
                                     }
                                 }
                                 if checked() && (i == answer || picked() == Some(i)) {
@@ -818,26 +831,31 @@ fn MiniCase(stem: String, steps: Vec<CaseStep>, seed: String, on_answer: EventHa
                             } else {
                                 div { class: "ls-options", dir: "ltr", lang: "en",
                                     for (pos , &oi) in orders[si].iter().enumerate() {
-                                        button {
-                                            key: "{oi}",
-                                            class: "ls-option",
-                                            "aria-keyshortcuts": if last && done.is_none() { LETTERS.get(pos).copied().unwrap_or("") } else { "" },
-                                            "data-state": match done {
-                                                None if last && pick() == Some(oi) => "picked",
-                                                None => "open",
-                                                Some(_) if Some(oi) == s.answer => "right",
-                                                Some(p) if p == oi => "wrong",
-                                                Some(_) => "other",
-                                            },
-                                            disabled: done.is_some(),
-                                            onclick: move |_| {
-                                                if picks.peek()[si].is_none() {
-                                                    pick.set(Some(oi));
-                                                    save.call(());
+                                        {
+                                            let (state, mark) = match done {
+                                                None => (if last && pick() == Some(oi) { Some("selected") } else { None }, None),
+                                                Some(p) => answer_state(true, Some(p), oi, s.answer.unwrap_or(usize::MAX)),
+                                            };
+                                            rsx! {
+                                                button {
+                                                    key: "{oi}",
+                                                    class: "answer",
+                                                    "aria-keyshortcuts": if last && done.is_none() { LETTERS.get(pos).copied().unwrap_or("") } else { "" },
+                                                    "data-state": state,
+                                                    disabled: done.is_some(),
+                                                    onclick: move |_| {
+                                                        if picks.peek()[si].is_none() {
+                                                            pick.set(Some(oi));
+                                                            save.call(());
+                                                        }
+                                                    },
+                                                    span { class: "answer-key", "{LETTERS.get(pos).copied().unwrap_or(\"\")}" }
+                                                    span { class: "answer-text", Line { text: s.options[oi].clone() } }
+                                                    if let Some(m) = mark {
+                                                        span { class: "answer-mark", dir: "rtl", lang: "ar", {m} }
+                                                    }
                                                 }
-                                            },
-                                            span { class: "ls-letter", "{LETTERS.get(pos).copied().unwrap_or(\"\")}" }
-                                            Line { text: s.options[oi].clone() }
+                                            }
                                         }
                                     }
                                 }

@@ -1695,6 +1695,22 @@ pub mod learn {
     pub const NEXT_KICKER: &str = "الدرس الجاي";
 }
 
+/// The view switcher on list screens (parts::ViewBar).
+pub mod views {
+    pub const LAYOUT_TITLE: &str = "طريقة العرض";
+    pub const CARDS: &str = "كروت";
+    pub const LIST: &str = "قايمة";
+    pub const COMPACT: &str = "قايمة مضغوطة";
+    pub const SORT_TITLE: &str = "رتّب حسب";
+    pub const SORT_BOOK: &str = "ترتيب الكتاب";
+    pub const SORT_LEFT: &str = "اللي فاضل الأول";
+    pub const SORT_NAME: &str = "بالاسم";
+    pub const SORT_DUE: &str = "المستحق الأول";
+    pub const GROUPED: &str = "قسّمها حسب المحاضرة";
+    pub const GROUPED_SHORT: &str = "مقسّمة";
+    pub const CLOSE_MENU: &str = "اقفل القايمة";
+}
+
 pub mod refs {
     pub const TITLE: &str = "مراجعك";
     pub const SUBTITLE: &str = "المحاضرات وصفحات الكتاب وكروتك، في مكان واحد.";

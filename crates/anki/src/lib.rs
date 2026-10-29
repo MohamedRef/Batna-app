@@ -47,6 +47,9 @@ pub struct Options<'a> {
     pub edits: Option<&'a BTreeMap<String, Item>>,
     /// Lectures not merged yet: tagged `draft`.
     pub drafts: Option<&'a BTreeSet<String>>,
+    /// The MSc's courses: every course but Hepatology gets its own level,
+    /// `Batna::Basics of Research::L03 …`.
+    pub program: Option<&'a batna_core::program::Program>,
 }
 
 fn has(set: Option<&BTreeSet<String>>, id: &str) -> bool {
@@ -113,13 +116,23 @@ impl Deck {
 }
 
 /// `Batna::L01 Liver Cirrhosis`, as make_apkg.py names it (Anki matches
-/// decks by name on import, so this must not change).
-pub fn deck_name(lec: &Lecture) -> String {
+/// decks by name on import, so Hepatology's names must not change). Every
+/// other course sits one level down: `Batna::Basics of Research::L03 …`.
+pub fn deck_name(lec: &Lecture, program: Option<&batna_core::program::Program>) -> String {
     if lec.lecture == batna_core::own::LECTURE {
         return format!("Batna::{}", batna_core::own::TITLE);
     }
     let num = lec.lecture.split_once('.').map(|(_, n)| n).unwrap_or(&lec.lecture);
-    format!("Batna::{num} {}", lec.title)
+    match course_deck(lec, program) {
+        Some(course) => format!("{course}::{num} {}", lec.title),
+        None => format!("Batna::{num} {}", lec.title),
+    }
+}
+
+/// `Batna::Basics of Research` for a lecture outside Hepatology.
+fn course_deck(lec: &Lecture, program: Option<&batna_core::program::Program>) -> Option<String> {
+    let course = program?.course_for(&lec.lecture).filter(|c| c.id != "hb")?;
+    Some(format!("Batna::{}", course.title))
 }
 
 pub fn build(lectures: &[Lecture], opts: &Options<'_>) -> Deck {
@@ -134,15 +147,24 @@ pub fn build(lectures: &[Lecture], opts: &Options<'_>) -> Deck {
         let desc = if lec.lecture == batna_core::own::LECTURE {
             "Cards Mohamed wrote himself in Batna.".to_string()
         } else {
+            let what =
+                if opts.program.is_some_and(|p| p.slides(&lec.lecture)) { "Slides" } else { "Book pp." };
             format!(
-                "{} · Book pp. {}–{}{}",
+                "{} · {what} {}–{}{}",
                 esc(&lec.title),
                 lec.book.pages[0],
                 lec.book.pages[1],
                 lec.author.as_deref().map(|a| format!(" · {}", esc(a))).unwrap_or_default()
             )
         };
-        deck.decks.push((did, deck_name(lec), desc));
+        if let Some(name) = course_deck(lec, opts.program)
+            && !deck.decks.iter().any(|(_, n, _)| *n == name)
+        {
+            let id =
+                stable_id(&format!("batna-deck-course-{}", batna_core::program::course_of(&lec.lecture)));
+            deck.decks.push((id, name, String::new()));
+        }
+        deck.decks.push((did, deck_name(lec, opts.program), desc));
         let before = deck.notes.len();
         let draft = has(opts.drafts, &lec.lecture);
         for item in &lec.items {
@@ -566,7 +588,18 @@ mod tests {
         assert_eq!(Model::Basic.id(), 89_591_256);
         assert_eq!(Model::Cloze.id(), 4_060_380_611);
         assert_eq!(stable_id("batna-deck-hb.L01"), 755_872_679);
-        assert_eq!(deck_name(&fixture()), "Batna::L01 Liver Cirrhosis");
+        assert_eq!(deck_name(&fixture(), None), "Batna::L01 Liver Cirrhosis");
+        let program: batna_core::program::Program =
+            serde_yaml_ng::from_str(include_str!("../../../content/program.yaml")).unwrap();
+        assert_eq!(deck_name(&fixture(), Some(&program)), "Batna::L01 Liver Cirrhosis");
+        let mut res = fixture();
+        res.lecture = "res.L03".into();
+        res.title = "Research question".into();
+        assert_eq!(deck_name(&res, Some(&program)), "Batna::Basics of Research::L03 Research question");
+        let opts = Options { program: Some(&program), ..Default::default() };
+        let deck = build(&[fixture(), res.clone(), res], &opts);
+        let names: Vec<_> = deck.decks.iter().map(|(_, n, _)| n.as_str()).collect();
+        assert_eq!(names.iter().filter(|n| **n == "Batna::Basics of Research").count(), 1, "{names:?}");
         assert_eq!(esc("a<b & \"c\"\nd'"), "a&lt;b &amp; &quot;c&quot;<br>d&#x27;");
     }
 
@@ -657,6 +690,7 @@ mod tests {
             wrong: Some(&wrong),
             edits: Some(&edits),
             drafts: Some(&drafts),
+            program: None,
         };
         let deck = build(&[lec], &opts);
         assert_eq!(deck.skipped, 1);

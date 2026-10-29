@@ -1,0 +1,899 @@
+schema: batna.lesson/v1
+lecture: dm.L17
+lessons:
+  # ------------------------------------------------------------------
+  - id: dm.L17.lesson1
+    title: "العضم بيتسرق بالراحة"
+    hook: "الـ osteoporosis مرض صامت لحد ما حاجة تنكسر. نفهم ليه بتنكسر، ومين بيتكسر إيه."
+    minutes: 8
+    pages: [214, 216]
+    topics: [definition, types, peak-mass]
+    goals:
+      - "تعرّف الـ osteoporosis بالـ imbalance"
+      - "تفرّق type 1 من type 2: مين، أي عضم، أي كسر"
+      - "تعد العوامل اللي بتحدد الـ peak bone mass"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 214
+        title: "حساب بنك فيه سحب أكتر من الإيداع"
+        quote: "The bone disease osteoporosis is caused by more bone cells being resorbed than being deposited."
+        text: |
+          العضم مش حجر، ده حساب بنك شغال طول الوقت: الـ **osteoclasts** بتسحب (resorption) والـ **osteoblasts** بتودع (deposition).
+
+          الـ ==osteoporosis== = السحب أكتر من الإيداع. النتيجة: **progressive loss of bone density** و **thinning of bone tissue**.
+
+          العضم بيبقى **more porous**، فبيبقى ==more vulnerable to fracture==.
+      - kind: figure
+        page: 214
+        title: "عضم طبيعي وعضم مخرّم"
+        image: { file: dm/L17-trabecular-bone.webp, book: true }
+        alt: "Two proximal femurs side by side with magnified trabecular bone: normal bone has thick, dense struts; osteoporotic bone has thin struts with large holes."
+        caption: "شوف الـ trabeculae: في الطبيعي سميكة ومتشابكة، وفي الـ **osteoporosis** رفيعة وبينها فراغات كبيرة. نفس الشكل من بره، بس من جوه **porous**."
+      - kind: explain
+        page: 215
+        title: "بيتكسر فين؟"
+        quote: "Bones liable to fracture in osteoporosis Vertebral bodies, distal radius, proximal femur."
+        text: |
+          الكتاب بيرسم الهيكل ويعلّم على تلات أماكن:
+          - **Vertebral bodies**
+          - **Distal radius** (الـ Colles' fracture)
+          - **Proximal femur** (كسر الحوض/الـ hip)
+
+          كلهم أماكن غنية بالـ **trabecular bone**، وده العضم الإسفنجي اللي بيتسرق الأول.
+      - kind: table
+        page: 215
+        quote: "Affects six times as many women as men, and is mainly responsible for the increased risk of osteoporotic fractures."
+        title: "Type 1 ضد type 2"
+        columns: [Feature, Type 1, Type 2]
+        rows:
+          - ["Women : men", "6 : 1", "2 : 1"]
+          - ["Bone", "Trabecular", "Trabecular + cortical"]
+          - ["Fractures", "Vertebral crush, Colles'", "Femoral + vertebral"]
+          - ["Age", "Postmenopausal", "Mainly > 70 y"]
+          - ["Cause", "Postmenopausal endocrine", "Age-related vitamin D"]
+        hide: [[0, 1], [0, 2], [2, 1], [2, 2]]
+      - kind: mnemonic
+        page: 215
+        quote: "Also known as involutional or senile osteoporosis, it occurs mainly in persons > 70 years and affects twice as many women as men."
+        word: "6T 2C"
+        parts:
+          - { key: "6", text: "Type 1: six women for every man" }
+          - { key: "T", text: "Type 1: Trabecular bone, so vertebral crush and Colles'" }
+          - { key: "2", text: "Type 2 (senile, mainly over 70): two women for every man" }
+          - { key: "C", text: "Type 2: Cortical bone too, so femoral fractures join in" }
+        hook: "**6T** للست اللي لسه داخلة سن اليأس، و **2C** للجدّة اللي فوق السبعين."
+      - kind: reveal
+        page: 216
+        quote: "Because density decreases in both trabecular and cortical bone, type 2 osteoporosis results in femoral and vertebral fractures."
+        prompt: "ليه type 2 بس اللي بيكسر الـ femur بسهولة؟"
+        answer: |
+          لأن عنق الـ femur محتاج **cortical bone** قوي يشيله. في type 1 الخسارة في الـ **trabecular** أساسًا.
+
+          في type 2 الكثافة بتقل في ==trabecular and cortical bone== مع بعض، فالكسور تبقى **femoral and vertebral**.
+      - kind: explain
+        page: 216
+        title: "السبب والـ biphasic pattern"
+        quote: "age-related changes in vitamin D synthesis are thought to lead to type 2 osteoporosis."
+        text: |
+          - **Type 1**: غالبًا من ==postmenopausal endocrinologic changes== (الـ estrogen وقع).
+          - **Type 2**: من **age-related changes in vitamin D synthesis**.
+
+          والست ممكن تاخد الاتنين مع بعض، فيبقى عندها **biphasic pattern of bone loss**.
+      - kind: check
+        page: 215
+        quote: "Because it primarily affects trabecular bone, type 1 osteoporosis is mainly responsible for vertebral crush fractures and Colles' fractures."
+        question: "A 55-year-old woman, 4 years after menopause, falls on her hand. Most likely fracture?"
+        options:
+          - "Colles' fracture"
+          - "Femoral neck fracture"
+          - "Skull fracture"
+          - "Clavicle fracture"
+        answer: 0
+        why:
+          - "صح: type 1 = trabecular = vertebral crush و Colles'."
+          - "الـ femoral أكتر في type 2 فوق السبعين."
+          - "مش من أماكن الـ osteoporosis في الكتاب."
+          - "مش من الأماكن التلاتة في الشكل."
+      - kind: explain
+        page: 216
+        title: "الـ peak bone mass: رصيدك قبل ما السحب يبدأ"
+        quote: "Factors that may affect peak bone mass: 1. Gender 2. Race 3. Genetic factors 4. Gonadal steroids 5. Growth hormone"
+        text: |
+          كل ما رصيدك في الشباب أعلى، كل ما الـ osteoporosis تتأخر. العوامل اللي بتحدد ==peak bone mass==:
+          1. Gender
+          2. Race
+          3. Genetic factors
+          4. Gonadal steroids
+          5. Growth hormone
+          6. Timing of puberty
+          7. Calcium intake
+          8. Exercise
+      - kind: aside
+        tone: joke
+        page: 216
+        quote: "Factors that may affect peak bone mass: 1. Gender 2. Race 3. Genetic factors 4. Gonadal steroids 5. Growth hormone"
+        text: "الـ **peak bone mass** زي تحويشة العمر: اللي حوّش لبن وكالسيوم ورياضة وهو صغير، يصرف براحته وهو كبير. واللي صرف على الشيبسي... ربنا يستر 😅"
+      - kind: try
+        items: [dm.L17.001, dm.L17.003, dm.L17.004, dm.L17.009, dm.L17.013]
+    recap:
+      - "Osteoporosis = resorption أكتر من deposition ← عضم porous بيتكسر."
+      - "أماكن الكسر: vertebral bodies، distal radius، proximal femur."
+      - "Type 1: 6:1، trabecular، crush + Colles'. Type 2: فوق 70، 2:1، cortical كمان ← femur."
+      - "الـ peak bone mass: 8 عوامل، من الـ gender لحد الـ exercise."
+    practice: [dm.L17.001, dm.L17.002, dm.L17.003, dm.L17.004, dm.L17.005, dm.L17.006, dm.L17.007, dm.L17.008, dm.L17.009, dm.L17.010, dm.L17.011, dm.L17.012, dm.L17.013]
+  # ------------------------------------------------------------------
+  - id: dm.L17.lesson2
+    title: "مين في خطر؟ الأسباب التانوية والـ risk factors"
+    hook: "الست الرفيعة المدخّنة اللي بتاخد cortisone: كل حاجة فيها بتقول osteoporosis. نعرف ليه."
+    minutes: 9
+    pages: [216, 218]
+    topics: [secondary, risk]
+    goals:
+      - "تعدّ أسباب الـ secondary osteoporosis بالمجموعات"
+      - "تشرح إزاي الـ steroids بتاكل العضم"
+      - "تحفظ الـ risk factors وتعرف الـ FRAX"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 216
+        title: "مش كل osteoporosis سببها السن"
+        quote: "These secondary causes account for < 5% of all cases of osteoporosis in postmenopausal women."
+        text: |
+          الـ **secondary causes** أقل من ==5%== في الستات بعد سن اليأس.
+
+          بس في **young women and men of all ages** النسبة أعلى بكتير. وفي كبار السن لازم تفكر في **multiple causes** مع بعض.
+
+          يعني: راجل عنده osteoporosis أو بنت شابة؟ دوّر على سبب.
+      - kind: explain
+        page: 217
+        title: "الـ glucocorticoids: الحرامي رقم واحد"
+        quote: "Endogenous or exogenous glucocorticoid excess is a leading cause of premature osteoporosis."
+        text: |
+          ==Glucocorticoid excess== (من بره أو من جوه) هو **leading cause of premature osteoporosis**، وبيهاجم من خمس جهات:
+          - **Inhibit osteoblastic function**: الإيداع وقف
+          - **Stimulate bone resorption**: السحب زاد
+          - **Increase PTH secretion**
+          - **Inhibit intestinal calcium absorption**
+          - **Decreased end-organ response to vitamin D**
+      - kind: check
+        page: 217
+        quote: "Corticosteroids inhibit osteoblastic function, stimulate bone resorption, increase parathyroid hormone secretion, inhibit intestinal calcium absorption"
+        question: "Which is NOT an effect of corticosteroids on bone in the lecture?"
+        options:
+          - "Increased intestinal calcium absorption"
+          - "Inhibited osteoblast function"
+          - "More PTH secretion"
+          - "Stimulated bone resorption"
+        answer: 0
+        why:
+          - "صح: الـ steroids بتقلل امتصاص الكالسيوم، مش بتزوده."
+          - "مذكورة في p217."
+          - "مذكورة في p217."
+          - "مذكورة في p217."
+      - kind: figure
+        page: 217
+        quote: "SECONDARY CAUSES OF OSTEOPOROSIS"
+        title: "Table 258-2 في صورة واحدة"
+        alt: "Six boxes grouping secondary causes of osteoporosis: endocrine, gastrointestinal, bone marrow, connective tissue, drugs and miscellaneous, with key examples in each."
+        caption: "ست مجموعات. الـ **Endocrine** أكبرهم، والـ **Drugs** أكتر واحدة بتيجي في الامتحان."
+        svg: |
+          <svg viewBox="0 0 330 360" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="8" width="314" height="96" rx="10" class="fg-acc"/>
+            <text x="165" y="28" text-anchor="middle" class="t-b t-acc">Endocrine</text>
+            <text x="165" y="48" text-anchor="middle" class="t-sm">Hypogonadism (F and M), hyperthyroidism</text>
+            <text x="165" y="66" text-anchor="middle" class="t-sm">Hyperparathyroidism, hypercortisolism</text>
+            <text x="165" y="84" text-anchor="middle" class="t-sm">GH and vitamin D deficiency, DM, hypercalciuria</text>
+            <rect x="8" y="112" width="152" height="78" rx="10" class="fg-box"/>
+            <text x="84" y="130" text-anchor="middle" class="t-b">GI</text>
+            <text x="84" y="148" text-anchor="middle" class="t-sm">Gastrectomy</text>
+            <text x="84" y="164" text-anchor="middle" class="t-sm">Malabsorption, alactasia</text>
+            <text x="84" y="180" text-anchor="middle" class="t-sm">Cholestasis, PBC</text>
+            <rect x="170" y="112" width="152" height="78" rx="10" class="fg-box"/>
+            <text x="246" y="130" text-anchor="middle" class="t-b">Bone marrow</text>
+            <text x="246" y="148" text-anchor="middle" class="t-sm">Myeloma, lymphoma</text>
+            <text x="246" y="164" text-anchor="middle" class="t-sm">Leukemia, hemolysis</text>
+            <text x="246" y="180" text-anchor="middle" class="t-sm">Mastocytosis, carcinoma</text>
+            <rect x="8" y="196" width="152" height="72" rx="10" class="fg-box"/>
+            <text x="84" y="216" text-anchor="middle" class="t-b">Connective tissue</text>
+            <text x="84" y="234" text-anchor="middle" class="t-sm">Osteogenesis imperfecta</text>
+            <text x="84" y="252" text-anchor="middle" class="t-sm">Ehlers-Danlos, Marfan, HCU</text>
+            <rect x="170" y="196" width="152" height="72" rx="10" class="fg-bad"/>
+            <text x="246" y="216" text-anchor="middle" class="t-b t-bad">Drugs</text>
+            <text x="246" y="234" text-anchor="middle" class="t-sm">Steroids, heparin, alcohol</text>
+            <text x="246" y="252" text-anchor="middle" class="t-sm">Thyroxine, anticonvulsants</text>
+            <rect x="8" y="278" width="314" height="74" rx="10" class="fg-thin"/>
+            <text x="165" y="298" text-anchor="middle" class="t-b">More drugs + miscellaneous</text>
+            <text x="165" y="318" text-anchor="middle" class="t-sm">GnRH agonists, cyclosporine, tacrolimus, chemo</text>
+            <text x="165" y="338" text-anchor="middle" class="t-sm">Immobilization, RA, renal tubular acidosis</text>
+          </svg>
+      - kind: sort
+        page: 217
+        quote: "Bone marrow disorders Multiple myeloma Lymphoma Leukemia Hemolytic anemias Systemic mastocytosis"
+        prompt: "حط كل سبب في مجموعته في Table 258-2:"
+        bins: ["Endocrine", "Bone marrow", "Drugs", "Connective tissue"]
+        cards:
+          - { text: "Hyperprolactinemia", bin: 0 }
+          - { text: "Klinefelter syndrome", bin: 0 }
+          - { text: "Systemic mastocytosis", bin: 1 }
+          - { text: "Multiple myeloma", bin: 1 }
+          - { text: "Heparin", bin: 2 }
+          - { text: "Tacrolimus", bin: 2 }
+          - { text: "Homocystinuria", bin: 3 }
+          - { text: "Marfan syndrome", bin: 3 }
+        why: "الـ hyperprolactinemia والـ Klinefelter كلهم **hypogonadism** (endocrine). الـ mastocytosis والـ myeloma أمراض **bone marrow**. الـ heparin والـ tacrolimus **drugs**. الـ homocystinuria والـ Marfan **connective tissue**."
+      - kind: explain
+        page: 217
+        title: "الـ major risk factors"
+        quote: "The major risk factors for osteoporosis are age, female sex, white or Oriental race, family history of osteoporosis, thin habitus, early menopause"
+        text: |
+          الكتاب بيعدهم كده:
+          - **Age**، **female sex**، **white or Oriental race**
+          - **Family history**، ==thin habitus==
+          - **Early menopause (before 45)**، oophorectomy، secondary amenorrhea
+          - **Lifelong low calcium intake** (حتى الـ lactose intolerance)
+          - **Sedentary lifestyle** و **immobilization**
+      - kind: explain
+        page: 218
+        title: "وعوامل تانية"
+        quote: "Other risk factors include nulliparity, protein-calorie malnutrition, gastrectomy, alcohol abuse, cigarette smoking"
+        text: |
+          **Other risk factors**: nulliparity، protein-calorie malnutrition، gastrectomy، alcohol، **smoking**، وأي دوا أو مرض بيزوّد الـ bone loss (corticosteroids، thyrotoxicosis).
+
+          و ==Age== هو **the chief single predictor**.
+      - kind: reveal
+        page: 218
+        quote: "Obesity may protect because higher estrogen levels in obese men and women and increased skeletal weight bearing may stimulate bone formation."
+        prompt: "ليه الست الرفيعة في خطر والتخينة محمية؟"
+        answer: |
+          - الرفيعة: **less biologically active estrogen** بعد سن اليأس، و **lower peak bone mass** وهي صغيرة.
+          - التخينة: ==higher estrogen levels== (الدهون بتعمل estrogen)، و **weight bearing** أكتر بيحفّز الـ bone formation.
+
+          وبالمرة: الـ blacks عندهم **greater peak bone mass**، علشان كده أقل.
+      - kind: explain
+        page: 218
+        title: "الـ FRAX"
+        quote: "Fracture risk assessment tool [FRAX] developed by WHO to predict your 10-year likelihood of having a minimal trauma fracture"
+        text: |
+          ==FRAX== أداة من الـ **WHO** بتحسب احتمال **minimal trauma fracture** في **10 سنين**.
+
+          **Minimal trauma** = كسر من وقعة من طولك أو أقل. والنتيجة بتبقى أدق لو حطيت **DEXA results**.
+      - kind: check
+        page: 218
+        quote: "(before age 45), oophorectomy, secondary amenorrhea, lifelong low calcium intake (including lactose intolerance), sedentary lifestyle, and immobilization."
+        question: "Woman at high risk of osteoporosis is the following except:"
+        options:
+          - "Active"
+          - "Caucasian"
+          - "Smoker"
+          - "Thin habitus"
+        answer: 0
+        why:
+          - "صح (سؤال الكتاب): الـ risk factor هو **sedentary lifestyle**، النشاط بيحمي."
+          - "White race = major risk factor."
+          - "Smoking = risk factor."
+          - "Thin habitus = major risk factor."
+      - kind: try
+        items: [dm.L17.017, dm.L17.018, dm.L17.019, dm.L17.026, dm.L17.035]
+    recap:
+      - "Secondary causes <5% بعد سن اليأس، بس أكتر في الشباب والرجالة."
+      - "Steroids: osteoblasts ↓، resorption ↑، PTH ↑، امتصاص الكالسيوم ↓، استجابة الـ vitamin D ↓."
+      - "Table 258-2: endocrine، GI، bone marrow، connective tissue، drugs، misc."
+      - "Age = أقوى predictor. Thin + white + early menopause + smoker = خطر. Obesity ممكن تحمي."
+      - "FRAX (WHO) = احتمال كسر في 10 سنين، أدق مع DEXA."
+    practice: [dm.L17.014, dm.L17.015, dm.L17.016, dm.L17.017, dm.L17.018, dm.L17.019, dm.L17.020, dm.L17.021, dm.L17.022, dm.L17.023, dm.L17.024, dm.L17.025, dm.L17.026, dm.L17.027, dm.L17.028, dm.L17.029, dm.L17.030, dm.L17.031, dm.L17.032, dm.L17.033, dm.L17.034, dm.L17.035, dm.L17.036, dm.L17.037, dm.L17.136]
+  # ------------------------------------------------------------------
+  - id: dm.L17.lesson3
+    title: "التشخيص بالاستبعاد: المعمل والأشعة"
+    hook: "الـ primary osteoporosis ملهاش علامة مميزة. التشخيص إنك تشيل كل حاجة تانية."
+    minutes: 9
+    pages: [219, 221]
+    topics: [clinical, labs, radiology]
+    goals:
+      - "تفرّق الـ osteoporosis عن الـ osteomalacia إكلينيكيًا"
+      - "تعرف التحاليل اللي بتستبعد الأسباب التانوية"
+      - "تقرا X-ray العمود الفقري: wedge، crush، codfish، Schmorl"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 219
+        title: "صامت لحد الكسر"
+        quote: "Individuals with osteoporosis often remain asymptomatic until a fracture occurs."
+        text: |
+          المريض ==asymptomatic until a fracture occurs==. والسبب ممكن يبقى تافه زي إنه **اتقلب في السرير**، وإن كان الـ falling والـ lifting أشهر.
+
+          على العكس، الـ **osteomalacia** بتعمل **diffuse bony tenderness and pain** حتى من غير كسر في الأشعة.
+      - kind: aside
+        tone: exam
+        page: 219
+        quote: "osteomalacia often causes diffuse bony tenderness and pain, even in the absence of radiographically evident fractures."
+        text: "سؤال المقارنة المحبوب: **عضم بيوجع من غير كسر = osteomalacia**. **ساكت لحد ما يتكسر = osteoporosis**."
+      - kind: explain
+        page: 219
+        title: "الـ history والكشف"
+        quote: "hallmarks of metabolic bone disease (eg, fractures, loss of height, bone pain, and muscle weakness)"
+        text: |
+          التشخيص ==requires excluding== الـ osteomalacia والـ malignancy والـ secondary osteoporosis.
+
+          اسأل عن الـ hallmarks: **fractures، loss of height، bone pain، muscle weakness**، وعن أدوية وأمراض الـ **vitamin D deficiency**.
+
+          ودوّر على: alcohol، malabsorption، **hypercortisolism**، endocrinopathy، malignancy.
+      - kind: explain
+        page: 220
+        title: "التحاليل الأساسية"
+        quote: "A CBC count with differential, routine serum chemistry studies, thyroid function tests, serum protein electrophoresis"
+        text: |
+          لو الـ history مفيهوش سبب تانوي، التحاليل دي عادةً بتستبعد الباقي:
+          - **CBC with differential**
+          - **Routine chemistry**
+          - **Thyroid function tests**
+          - ==Serum protein electrophoresis==
+          - **Serum 25-hydroxycholecalciferol**
+          - **24-h urine calcium**
+      - kind: reveal
+        page: 220
+        quote: "any abnormality in blood count or protein electrophoresis raises the possibility of a malignancy involving the bone marrow."
+        prompt: "ليه الـ protein electrophoresis بالذات في مريض osteopenia؟"
+        answer: |
+          علشان الـ **multiple myeloma** بيعمل osteopenia ويقلّد الـ osteoporosis. أي abnormality في الـ CBC أو الـ electrophoresis = فكّر في ==malignancy involving the bone marrow==.
+      - kind: table
+        page: 220
+        quote: "In primary osteoporosis, serum phosphate and alkaline phosphatase values are also normal."
+        title: "المعمل في الـ primary osteoporosis"
+        columns: [Test, Result]
+        rows:
+          - ["Electrolytes, BUN, creatinine", "Normal"]
+          - ["Serum and urine calcium", "Usually normal"]
+          - ["Phosphate, ALP", "Normal"]
+          - ["Vitamin D levels", "Normal; may be low with age"]
+        hide: [[1, 1], [2, 1], [3, 1]]
+      - kind: aside
+        tone: tip
+        page: 220
+        quote: "The use of metabolic markers, such as serum osteocalcin, urinary excretion of pyridinium and deoxypyridinium, and urinary hydroxyproline"
+        text: "الـ **bone turnover markers** (osteocalcin، pyridinium، deoxypyridinium، hydroxyproline) الكتاب بيقول إنها **under investigation** هنا، بس هترجع في المتابعة (CTX و P1NP) في آخر المحاضرة."
+      - kind: figure
+        page: 221
+        quote: "A predominantly anterior compression of the vertebrae results in a wedge fracture; a collapse of the entire vertebral body results in a crush fracture."
+        title: "الفقرات في الأشعة"
+        alt: "Four vertebrae drawn side by side: normal rectangle; wedge fracture with a short front; crush fracture with the whole body flattened; codfish vertebra with concave end-plates and a Schmorl's node pushing into the bone."
+        caption: "**Wedge** = الجزء الأمامي اتضغط. **Crush** = الفقرة كلها نزلت. **Codfish** = الـ end-plates بقت concave. **Schmorl's node** = الـ nucleus pulposus دخل في الفقرة."
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <rect x="15" y="40" width="60" height="70" rx="4" class="fg-box"/>
+            <text x="45" y="130" text-anchor="middle" class="t-sm t-b">Normal</text>
+            <path d="M95 40 L155 40 L155 110 L95 110 Z" class="fg-thin"/>
+            <path d="M95 62 L155 40 L155 110 L95 110 Z" class="fg-bad"/>
+            <text x="125" y="130" text-anchor="middle" class="t-sm t-b t-bad">Wedge</text>
+            <text x="125" y="146" text-anchor="middle" class="t-sm t-mut">anterior side</text>
+            <rect x="175" y="40" width="60" height="70" class="fg-thin"/>
+            <rect x="175" y="80" width="60" height="30" rx="3" class="fg-bad"/>
+            <text x="205" y="130" text-anchor="middle" class="t-sm t-b t-bad">Crush</text>
+            <text x="205" y="146" text-anchor="middle" class="t-sm t-mut">whole body</text>
+            <path d="M255 40 Q285 62 315 40 L315 110 Q285 88 255 110 Z" class="fg-acc"/>
+            <text x="285" y="130" text-anchor="middle" class="t-sm t-b t-acc">Codfish</text>
+            <text x="285" y="146" text-anchor="middle" class="t-sm t-mut">concave plates</text>
+            <rect x="15" y="170" width="300" height="70" rx="8" class="fg-box"/>
+            <rect x="40" y="182" width="90" height="46" rx="4" class="fg-ink"/>
+            <circle cx="85" cy="194" r="9" class="fg-dot-acc"/>
+            <path d="M85 172 L85 184" class="fg-arrow-acc"/>
+            <text x="225" y="196" text-anchor="middle" class="t-sm t-b">Schmorl's node</text>
+            <text x="225" y="214" text-anchor="middle" class="t-sm">common in osteoporosis</text>
+            <text x="225" y="230" text-anchor="middle" class="t-sm t-mut">rare in osteomalacia</text>
+            <text x="165" y="22" text-anchor="middle" class="t-sm t-mut">Lower thoracic, upper lumbar</text>
+          </svg>
+      - kind: explain
+        page: 220
+        title: "الـ X-ray: متأخر بس ليه علامات"
+        quote: "it cannot be reliably detected until at least 30% of the bone mass is lost."
+        text: |
+          - الـ **radiolucency** مش بتبان غير بعد ما ==30%== من الـ bone mass يروح.
+          - أشهر clue في ست ملهاش أعراض: **incidental osteopenia on chest X-ray**.
+          - الـ **vertical trabeculae** بتبان أوضح لأن الـ horizontal راحت.
+          - في الـ long bones: **cortical thinning** و **expansion of the medullary space**.
+      - kind: match
+        page: 221
+        quote: "the lytic lesions of multiple myeloma, the arthropathy of rheumatoid arthritis, and the pseudofractures of osteomalacia."
+        prompt: "علامة في الأشعة بتقول إنه مرض تاني. وصّل:"
+        pairs:
+          - ["Lytic lesions", "Multiple myeloma"]
+          - ["Arthropathy", "Rheumatoid arthritis"]
+          - ["Pseudofractures", "Osteomalacia"]
+          - ["Schmorl's nodes", "Primary osteoporosis"]
+        why: "الـ pseudofractures علامة الـ osteomalacia، والـ Schmorl's nodes أكتر في الـ primary osteoporosis ونادرة في الـ osteomalacia."
+      - kind: check
+        page: 221
+        quote: "Schmorl's nodes are more common in primary osteoporosis and rarely appear in osteomalacia."
+        question: "Diffuse bone pain and tenderness, no fracture, pseudofractures on X-ray. Diagnosis?"
+        options:
+          - "Osteomalacia"
+          - "Primary osteoporosis"
+          - "Multiple myeloma"
+          - "Type 2 osteoporosis"
+        answer: 0
+        why:
+          - "صح: ألم منتشر من غير كسر + pseudofractures = osteomalacia."
+          - "الـ osteoporosis ساكتة لحد الكسر."
+          - "الـ myeloma بتعمل lytic lesions."
+          - "الـ senile osteoporosis برضه ساكتة لحد الكسر."
+      - kind: try
+        items: [dm.L17.039, dm.L17.044, dm.L17.046, dm.L17.051, dm.L17.059]
+    recap:
+      - "Osteoporosis ساكتة لحد الكسر؛ الـ osteomalacia بتوجع من غير كسر."
+      - "التشخيص بالاستبعاد: CBC، chemistry، TFT، electrophoresis، 25-OH D، 24-h urine Ca."
+      - "في الـ primary: Ca و phosphate و ALP normal."
+      - "X-ray بيبان بعد 30% loss. Wedge/crush/codfish، Schmorl's nodes للـ osteoporosis."
+    practice: [dm.L17.038, dm.L17.039, dm.L17.040, dm.L17.041, dm.L17.042, dm.L17.043, dm.L17.044, dm.L17.045, dm.L17.046, dm.L17.047, dm.L17.048, dm.L17.049, dm.L17.050, dm.L17.051, dm.L17.052, dm.L17.053, dm.L17.054, dm.L17.055, dm.L17.056, dm.L17.057, dm.L17.058, dm.L17.059, dm.L17.060]
+  # ------------------------------------------------------------------
+  - id: dm.L17.lesson4
+    title: "نقيس العضم، وبعدين لبن ومشي وبطّل سجاير"
+    hook: "أربع أجهزة لقياس الكثافة، واحد بس هو الـ method of choice. وتلات حاجات من غير دوا."
+    minutes: 9
+    pages: [221, 224]
+    topics: [bmd, nondrug]
+    goals:
+      - "تفهم الـ T-score والـ Z-score زي ما الكتاب كاتبهم"
+      - "تقارن SPA و DPA و QCT و DEXA"
+      - "تحفظ جرعات الكالسيوم والـ vitamin D والرياضة"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 221
+        title: "الـ cut-off في الكتاب"
+        quote: "a bone density measurement of 1 SD below the mean for age [Z score=-1, which equals T score=-2.5"
+        text: |
+          الـ bone density بتتنبأ بالـ fracture risk وبتحدد مين محتاج علاج.
+
+          الكتاب بيقول: **1 SD below the mean for age** (Z score = -1)، و"بيساويها" بـ ==T score = -2.5== (مقارنة بالشباب من نفس الـ sex)، وده بيدل على **increased fracture risk** وحاجة للعلاج. وبيقول إنه **arbitrary cutoff**.
+      - kind: update
+        page: 221
+        quote: "T score=-2.5 below the mean of young adults with the same sex"
+        text: "التعريف المعتمد: **T-score ≤ -2.5 = osteoporosis**، وبين -1 و -2.5 = **osteopenia**. الـ Z-score (مقارنة بنفس السن) غير الـ T-score، والـ Z = -1 مش بيساوي T = -2.5."
+        ref: "WHO criteria 1994; BHOF Clinician's Guide 2022"
+      - kind: figure
+        page: 221
+        quote: "T score=-2.5 below the mean of young adults with the same sex"
+        title: "سلّم الـ T-score"
+        alt: "A vertical number ladder of T-scores from 0 down to -3: 0 to -1 normal, -1 to -2.5 osteopenia, -2.5 and below osteoporosis; side marks show the lecture's NOF treatment thresholds at -1.5 with risk factors and -2.0 without, and the European threshold at -2.5."
+        caption: "الألوان = تعريف الـ WHO. العلامات على اليمين = عتبات العلاج اللي في الكتاب (p225): **NOF** تحت -2.0، أو تحت -1.5 مع risk factors، و **Europe** عند -2.5."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L17t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" class="fg-head-acc"/></marker></defs>
+            <rect x="40" y="20" width="90" height="70" class="fg-good"/>
+            <rect x="40" y="90" width="90" height="105" class="fg-acc"/>
+            <rect x="40" y="195" width="90" height="85" class="fg-bad"/>
+            <text x="30" y="24" text-anchor="end" class="t-sm">0</text>
+            <text x="30" y="94" text-anchor="end" class="t-sm">-1</text>
+            <text x="30" y="129" text-anchor="end" class="t-sm">-1.5</text>
+            <text x="30" y="164" text-anchor="end" class="t-sm">-2.0</text>
+            <text x="30" y="199" text-anchor="end" class="t-sm">-2.5</text>
+            <text x="30" y="284" text-anchor="end" class="t-sm">-3.5</text>
+            <text x="85" y="60" text-anchor="middle" class="t-sm t-b t-good">Normal</text>
+            <text x="85" y="146" text-anchor="middle" class="t-sm t-b t-acc">Osteopenia</text>
+            <text x="85" y="240" text-anchor="middle" class="t-sm t-b t-bad">Osteoporosis</text>
+            <path d="M140 125 H175" class="fg-arrow-acc" marker-end="url(#L17t)"/>
+            <text x="180" y="122" class="t-sm t-b">NOF + risk factors</text>
+            <text x="180" y="136" class="t-sm t-mut">treat below -1.5</text>
+            <path d="M140 160 H175" class="fg-arrow-acc" marker-end="url(#L17t)"/>
+            <text x="180" y="157" class="t-sm t-b">NOF (the lecture)</text>
+            <text x="180" y="171" class="t-sm t-mut">treat below -2.0</text>
+            <path d="M140 195 H175" class="fg-arrow-acc" marker-end="url(#L17t)"/>
+            <text x="180" y="192" class="t-sm t-b">Europe</text>
+            <text x="180" y="206" class="t-sm t-mut">-2.5 or less</text>
+          </svg>
+      - kind: explain
+        page: 222
+        title: "Screening ومتابعة الكثافة"
+        quote: "Therefore, widespread screening for osteoporosis in asymptomatic women cannot be recommended."
+        text: |
+          - الكتاب: ==widespread screening== للستات اللي ملهمش أعراض **cannot be recommended**.
+          - الـ **serial measurements** لمتابعة العلاج **controversial**.
+          - لو الكثافة بين الـ mean و **1 SD** تحتها: قياس تاني بعد **2 to 5 years**.
+      - kind: update
+        page: 222
+        quote: "Therefore, widespread screening for osteoporosis in asymptomatic women cannot be recommended."
+        text: "الـ USPSTF بتوصي بـ BMD screening لكل ست عندها **65 سنة أو أكتر**، وللأصغر بعد سن اليأس لو الخطر عالي."
+        ref: "USPSTF osteoporosis screening 2018"
+      - kind: table
+        page: 223
+        quote: "Together with its low cost, these characteristics make DEXA the method of choice."
+        title: "أربع طرق لقياس الكثافة"
+        columns: [Method, Good, Bad]
+        rows:
+          - ["SPA", "Cheap, low radiation", "No spine or femur"]
+          - ["DPA", "Spine + femur directly", "Costly, slow; false high"]
+          - ["QCT", "Lumbar spine", "Very high radiation"]
+          - ["DEXA", "Precise, low dose, cheap, fast", "Fracture data less studied"]
+        hide: [[0, 2], [2, 2], [3, 1]]
+      - kind: reveal
+        page: 222
+        quote: "Falsely elevated values may occur with degenerative joint disease, compression fractures, or closely situated calcified vessels."
+        prompt: "ست كبيرة عندها osteoarthritis في العمود الفقري و aortic calcification. الـ DPA طلع طبيعي. تصدّقه؟"
+        answer: |
+          لأ بسهولة. الـ **DPA** بيدي ==falsely elevated values== مع الـ **degenerative joint disease**، والـ **compression fractures**، والـ **calcified vessels** القريبة. الكالسيوم الزيادة بيتحسب كأنه عضم.
+      - kind: check
+        page: 223
+        quote: "Because of the extremely high radiation exposure with quantitative CT, it should not be used in women of childbearing age or for serial measurements."
+        question: "Which bone density method should NOT be used in a 28-year-old woman or for serial scans?"
+        options:
+          - "Quantitative CT"
+          - "DEXA"
+          - "Single-photon absorptiometry"
+          - "Dual-photon absorptiometry"
+        answer: 0
+        why:
+          - "صح: الـ QCT فيه extremely high radiation."
+          - "الـ DEXA هو الأنسب للـ serial measurements."
+          - "قليل الإشعاع، بس مش بيقيس الـ spine."
+          - "مش ممنوع، بس أغلى وأبطأ."
+      - kind: explain
+        page: 223
+        title: "من غير دوا: تلات حاجات"
+        quote: "There are three components to the nondrug therapy of osteoporosis: diet, exercise, and cessation of smoking."
+        text: |
+          ==diet, exercise, and cessation of smoking==، وكمان **avoid drugs that increase bone loss** زي الـ glucocorticoids لو ينفع.
+
+          - **Calcium**: supplement **500–1000 mg/day** elemental، **divided doses at mealtime**، والإجمالي مع الأكل حوالي **1500 mg/day**.
+          - **Vitamin D**: **800 IU/day**، أكتر مع الـ malabsorption أو الـ anticonvulsants.
+      - kind: update
+        page: 223
+        quote: "such that their total calcium intake, including food calcium, approximates 1500 mg/day."
+        text: "التوصية الحالية: إجمالي الكالسيوم **1200 mg/day** للستات من 51 سنة، من الأكل الأول والـ supplement يكمّل الناقص بس."
+        ref: "BHOF Clinician's Guide 2022"
+      - kind: explain
+        page: 224
+        title: "الرياضة والسجاير"
+        quote: "Smoking one pack per day throughout adult life was associated with a 5 to 10 percent reduction in bone density."
+        text: |
+          - **Exercise**: على الأقل **30 minutes three times per week**، أي **weight-bearing** حتى المشي. في الكبار، الفايدة الأساسية من **muscular strength** (وقعات أقل) مش الكثافة.
+          - **Smoking**: علبة في اليوم طول العمر = ==5 to 10%== أقل في الكثافة، وبيبوّظ فايدة الـ estrogen لأنه بيسرّع الـ **estrogen metabolism**.
+      - kind: mnemonic
+        page: 224
+        quote: "should exercise (prudently) for at least 30 minutes three times per week"
+        word: "8 15 30 3"
+        parts:
+          - { key: "8", text: "800 IU vitamin D a day" }
+          - { key: "15", text: "1500 mg total calcium a day (500-1000 mg of it as a supplement)" }
+          - { key: "30", text: "30 minutes of weight-bearing exercise" }
+          - { key: "3", text: "three times a week, and zero cigarettes" }
+        hook: "رقم تليفون العضم: **call 8 15 30 3** (vitamin D، calcium، دقايق، مرات في الأسبوع)."
+      - kind: try
+        items: [dm.L17.062, dm.L17.067, dm.L17.068, dm.L17.076, dm.L17.077]
+    recap:
+      - "الكتاب: Z = -1 ≈ T = -2.5 cutoff للعلاج (الـ WHO: T ≤ -2.5 = osteoporosis)."
+      - "Screening واسع مش recommended في الكتاب؛ قياس تاني بعد 2–5 سنين لو بين الـ mean و -1 SD."
+      - "DEXA = method of choice. QCT إشعاع عالي. DPA false high مع DJD والـ calcified vessels."
+      - "Calcium 500–1000 supplement (total 1500)، vitamin D 800 IU، رياضة 30 دقيقة ×3، بطّل سجاير."
+    practice: [dm.L17.061, dm.L17.062, dm.L17.063, dm.L17.064, dm.L17.065, dm.L17.066, dm.L17.067, dm.L17.068, dm.L17.069, dm.L17.070, dm.L17.071, dm.L17.072, dm.L17.073, dm.L17.074, dm.L17.075, dm.L17.076, dm.L17.077, dm.L17.078, dm.L17.079, dm.L17.080, dm.L17.081, dm.L17.082]
+  # ------------------------------------------------------------------
+  - id: dm.L17.lesson5
+    title: "الأدوية: نوقف الحرامي ولا نزوّد الإيداع؟"
+    hook: "Antiresorptive بيوقف السحب، و anabolic بيزوّد الإيداع. كل دوا ليه جرعة وفخ."
+    minutes: 10
+    pages: [224, 228]
+    topics: [drugs]
+    goals:
+      - "تحفظ جرعات الـ bisphosphonates"
+      - "تعرف مزايا وعيوب الـ raloxifene والـ denosumab والـ PTH"
+      - "تعرف مين بيمنع hip fracture ومين لأ"
+    status: unverified
+    steps:
+      - kind: figure
+        page: 225
+        quote: "Several antiresorptive agents, including the bisphosphonates alendronate and risedronate, as well as estrogen therapy"
+        title: "فين بيشتغل كل دوا؟"
+        alt: "A bone remodelling sketch: on the left an osteoclast resorbing bone, blocked by bisphosphonates, estrogen, raloxifene, calcitonin and denosumab (anti-RANKL); on the right an osteoblast forming bone, stimulated by intermittent PTH (teriparatide)."
+        caption: "الشمال: **antiresorptives** بتوقف الـ osteoclast. اليمين: الـ **PTH** المتقطع بيشغّل الـ osteoblast أكتر من الـ resorption."
+        svg: |
+          <svg viewBox="0 0 330 280" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L17d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" class="fg-head-bad"/></marker>
+            <marker id="L17g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" class="fg-head-acc"/></marker></defs>
+            <rect x="10" y="200" width="310" height="60" rx="6" class="fg-ink"/>
+            <text x="165" y="236" text-anchor="middle" class="t-b">Bone</text>
+            <ellipse cx="85" cy="180" rx="60" ry="22" class="fg-bad"/>
+            <text x="85" y="185" text-anchor="middle" class="t-sm t-b">Osteoclast</text>
+            <text x="85" y="275" text-anchor="middle" class="t-sm t-mut">resorption</text>
+            <ellipse cx="245" cy="180" rx="60" ry="22" class="fg-good"/>
+            <text x="245" y="185" text-anchor="middle" class="t-sm t-b">Osteoblast</text>
+            <text x="245" y="275" text-anchor="middle" class="t-sm t-mut">formation</text>
+            <rect x="10" y="10" width="150" height="120" rx="8" class="fg-box"/>
+            <text x="85" y="30" text-anchor="middle" class="t-sm t-b t-bad">Antiresorptive</text>
+            <text x="85" y="50" text-anchor="middle" class="t-sm">Bisphosphonates</text>
+            <text x="85" y="68" text-anchor="middle" class="t-sm">Estrogen, raloxifene</text>
+            <text x="85" y="86" text-anchor="middle" class="t-sm">Denosumab (anti-RANKL)</text>
+            <text x="85" y="104" text-anchor="middle" class="t-sm">Calcitonin</text>
+            <text x="85" y="122" text-anchor="middle" class="t-sm t-mut">block</text>
+            <path d="M85 132 L85 152" class="fg-arrow-bad" marker-end="url(#L17d)"/>
+            <rect x="170" y="10" width="150" height="120" rx="8" class="fg-box"/>
+            <text x="245" y="30" text-anchor="middle" class="t-sm t-b t-acc">Anabolic</text>
+            <text x="245" y="50" text-anchor="middle" class="t-sm">Intermittent PTH</text>
+            <text x="245" y="68" text-anchor="middle" class="t-sm">Teriparatide (1-34)</text>
+            <text x="245" y="86" text-anchor="middle" class="t-sm">Abaloparatide</text>
+            <text x="245" y="122" text-anchor="middle" class="t-sm t-mut">stimulate</text>
+            <path d="M245 132 L245 152" class="fg-arrow-acc" marker-end="url(#L17g)"/>
+          </svg>
+      - kind: explain
+        page: 225
+        title: "مين بيمنع الـ hip fracture؟"
+        quote: "Although both reduce vertebral fractures, neither has yet been shown to reduce hip fractures in randomized trials."
+        text: |
+          - **Alendronate، risedronate، estrogen**: بيمنعوا ==vertebral, non-vertebral, and hip fractures==.
+          - **Raloxifene** و **ibandronate**: بيقللوا الـ vertebral، بس **لسه ما اتثبتش** إنهم بيمنعوا الـ hip.
+      - kind: table
+        page: 225
+        quote: "Alendronate (10 mg/day or 70 mg once weekly [orally]) or risedronate (5 mg/day or 35 mg once weekly [orally]), and ibandronate (150 mg once-"
+        title: "جرعات الـ bisphosphonates"
+        columns: [Drug, Daily, Intermittent]
+        rows:
+          - ["Alendronate", "10 mg", "70 mg weekly"]
+          - ["Risedronate", "5 mg", "35 mg weekly"]
+          - ["Ibandronate", "–", "150 mg monthly oral, 3 mg IV q3 months"]
+          - ["Zoledronic acid", "–", "5 mg IV yearly"]
+        hide: [[0, 2], [1, 1], [2, 2], [3, 2]]
+      - kind: aside
+        tone: tip
+        page: 225
+        quote: "Alendronate (10 mg/day or 70 mg once weekly [orally]) or risedronate (5 mg/day or 35 mg once weekly [orally])"
+        text: "الأسبوعي = اليومي **× 7**: alendronate **10 × 7 = 70**، و risedronate **5 × 7 = 35**. مش محتاج تحفظ أربع أرقام، اتنين بس."
+      - kind: explain
+        page: 226
+        title: "عيوب الـ bisphosphonates"
+        quote: "the majority of cases have been observed in cancer patients treated with high-dose intravenous bisphosphonates."
+        text: |
+          - الـ oral: خلي بالك من ==esophagitis==.
+          - **Osteonecrosis of the jaw (ONJ)**: نادر، وأغلبه في **cancer patients على high-dose IV**.
+      - kind: explain
+        page: 226
+        title: "الـ raloxifene: SERM بوشّين"
+        quote: "Raloxifene also appears to lower the risk of breast cancer, does not stimulate endometrial hyperplasia or vaginal bleeding"
+        text: |
+          ==Raloxifene== بيتصرف زي الـ estrogen على العضم، وعكسه على الثدي والرحم:
+          - BMD ↑، **vertebral fractures** ↓
+          - **Breast cancer risk** ↓
+          - مفيش **endometrial hyperplasia** ولا vaginal bleeding
+          - **VTE risk ↑** (ده الفخ)
+          - Total و LDL ↓، بس من غير تأثير على الـ CHD
+
+          الكتاب بيعتبره **first-line for prevention**، بس أضعف من الـ estrogen والـ bisphosphonates.
+      - kind: check
+        page: 226
+        quote: "and increases the risk of venous thromboembolism."
+        question: "Which is a risk of raloxifene?"
+        options:
+          - "Venous thromboembolism"
+          - "Endometrial hyperplasia"
+          - "Breast cancer"
+          - "Raised LDL"
+        answer: 0
+        why:
+          - "صح: الـ raloxifene بيزوّد الـ VTE."
+          - "مش بيحفّز الـ endometrium."
+          - "بالعكس، بيقلل الـ breast cancer risk."
+          - "بيقلل الـ LDL."
+      - kind: reveal
+        page: 227
+        quote: "intermittent administration of recombinant human parathyroid hormone (both full-length 1-84 or fragment 1-34) stimulates bone formation more than resorption"
+        prompt: "الـ hyperparathyroidism بياكل العضم. إزاي الـ PTH نفسه بيعالج الـ osteoporosis؟"
+        answer: |
+          السر في كلمة ==intermittent==. الـ PTH المستمر (زي الـ adenoma) بيشغّل الـ resorption. لكن حقنة مرة في اليوم بتعمل نبضة بتشغّل الـ **bone formation more than resorption**.
+
+          الـ **teriparatide (PTH 1-34)** في الكتاب **20–40 microgram/d**، للـ **high risk** رجالة وستات.
+      - kind: update
+        page: 227
+        quote: "PTH 1-34 (teriparatide) 20- 40 microgram/d has been approved by the FDA for use in women and men at high risk for fracture."
+        text: "الجرعة المرخّصة للـ teriparatide هي **20 microgram subcutaneous مرة في اليوم**."
+        ref: "Endocrine Society postmenopausal osteoporosis guideline 2019"
+      - kind: explain
+        page: 227
+        title: "الـ denosumab"
+        quote: "Denosumab (Prolia) is an antibody directed against a factor (RANKL) involved in the formation of cells that break down bone."
+        text: |
+          ==Anti-RANKL antibody==: بيمنع تكوين الـ osteoclasts. حقنة **subcutaneous كل 6 شهور**.
+          - Side effects: **skin infections (cellulitis)**، eczema، **mild transient hypocalcemia**.
+          - **لا تديه** لمريض عنده **low calcium** قبل ما تصححه.
+          - الكتاب بيحجزه للي **intolerant or unresponsive to bisphosphonates** لأن مفيش long-term safety data.
+      - kind: case
+        page: 227
+        quote: "Denosumab should not be administered to patients with low blood calcium levels until these levels are corrected."
+        stem: "A 71-year-old woman cannot tolerate oral or IV bisphosphonates. You plan denosumab."
+        steps:
+          - reveal: "Corrected calcium 7.8 mg/dl."
+            question: "Give the injection today?"
+            options: ["No; correct the calcium first", "Yes; calcium does not matter", "Yes, with a double dose", "No; denosumab is never used after bisphosphonates"]
+            answer: 0
+            why: "Denosumab should not be given until low calcium is corrected (p227); it can lower calcium itself."
+          - reveal: "Calcium normal after vitamin D and calcium. You give it."
+            question: "When is the next dose?"
+            options: ["In six months", "In one week", "In one year", "In one month"]
+            answer: 0
+            why: "Subcutaneous injection once every six months (p227)."
+      - kind: explain
+        page: 228
+        title: "Calcitonin، calcitriol، والـ combinations"
+        quote: "calcitriol has been reported to be effective in preventing glucocorticoid-induced and posttransplant-related bone loss."
+        text: |
+          - **Nasal calcitonin 200 IU/day**: less popular، تأثير متواضع على الـ BMD.
+          - ==Calcitriol==: نتايجه mixed في الـ postmenopausal، بس مفيد في **glucocorticoid-induced** و **post-transplant** bone loss. لازم **low-calcium diet** ومتابعة hypercalcemia و hypercalciuria و renal function.
+          - **Estrogen 0.625 + alendronate 10**: نفس التأثير، والاتنين مع بعض **slightly more effective**. Combinations تانية بتزوّد الكثافة بس **مفيش fracture data**.
+      - kind: try
+        items: [dm.L17.084, dm.L17.085, dm.L17.089, dm.L17.093, dm.L17.099]
+    recap:
+      - "Alendronate/risedronate/estrogen بيمنعوا الـ hip؛ raloxifene و ibandronate لسه vertebral بس."
+      - "Alendronate 10/70، risedronate 5/35، ibandronate 150 شهري أو 3 IV كل 3 شهور، ZA 5 IV سنويًا."
+      - "Raloxifene: breast ↓، endometrium سليم، VTE ↑."
+      - "PTH متقطع = anabolic. Denosumab = anti-RANKL كل 6 شهور، صحّح الكالسيوم الأول."
+      - "Calcitriol: steroid و transplant bone loss، مع low-calcium diet."
+    practice: [dm.L17.083, dm.L17.084, dm.L17.085, dm.L17.086, dm.L17.087, dm.L17.088, dm.L17.089, dm.L17.090, dm.L17.091, dm.L17.092, dm.L17.093, dm.L17.094, dm.L17.095, dm.L17.096, dm.L17.097, dm.L17.098, dm.L17.099, dm.L17.100, dm.L17.101, dm.L17.102, dm.L17.103, dm.L17.104]
+  # ------------------------------------------------------------------
+  - id: dm.L17.lesson6
+    title: "مين يتعالج، بإيه، لحد امتى، وإزاي نتابع"
+    hook: "الـ drug holiday مش لكل الناس، والـ denosumab بالذات ممنوع يوقف فجأة."
+    minutes: 10
+    pages: [225, 232]
+    topics: [choice, duration, monitoring]
+    goals:
+      - "تعرف عتبات الـ NOF للعلاج"
+      - "ترتب اختيار الدوا: bisphosphonate ← raloxifene ← PTH"
+      - "تحفظ مواعيد الـ reassessment والـ holiday، والـ markers في المتابعة"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 225
+        title: "مين ياخد دوا؟"
+        quote: "postmenopausal women with T-scores less than -2.0, as measured by central DXA, regardless of risk factors for fracture"
+        text: |
+          الكتاب ماشي بالـ ==NOF approach==:
+          - **T-score < -2.0** على الـ central DXA: عالج، أيًا كانت الـ risk factors.
+          - **T-score < -1.5** مع risk factors: عالج.
+          - أوروبا: **-2.5 or less**.
+      - kind: update
+        page: 225
+        quote: "This strategy differs somewhat from guidelines in Europe, which recommend intervention for individuals with a T- score of -2.5 or less"
+        text: "الـ BHOF (الـ NOF سابقًا) دلوقتي: عالج لو فيه **hip أو vertebral fracture**، أو **T ≤ -2.5**، أو T بين -1 و -2.5 مع **FRAX ≥ 20%** major أو **≥ 3%** hip."
+        ref: "BHOF Clinician's Guide 2022"
+      - kind: order
+        page: 228
+        quote: "We recommend bisphosphonates as first-line therapy for postmenopausal osteoporosis."
+        prompt: "رتّب اختيار الدوا زي الكتاب:"
+        steps:
+          - "Oral alendronate or risedronate"
+          - "IV ibandronate if GI intolerance"
+          - "Raloxifene if no bisphosphonate is tolerated"
+          - "PTH (not first line)"
+        why: "Bisphosphonates first line، والمفضل alendronate أو risedronate لأن الـ ibandronate مفيش data إنه بيمنع الـ hip. الـ IV ibandronate للـ GI intolerance. الـ raloxifene أضعف فبيتحجز. الـ PTH غالي وحقن وفيه قلق osteosarcoma."
+      - kind: aside
+        tone: trap
+        page: 229
+        quote: "Given its cost, subcutaneous route of administration, long-term safety concerns (including osteosarcoma), and the availability of other agents"
+        text: "الـ PTH أقوى دوا بيبني عضم، بس **مش first line**: ==cost==، حقن subcutaneous، و **osteosarcoma** concern. بيتحجز للـ very high risk."
+      - kind: figure
+        page: 229
+        quote: "Fracture risk should be reassessed after 3 years of treatment with parenteral and 5 years of oral"
+        title: "خط الزمن لكل دوا"
+        alt: "Horizontal timelines in years 0 to 10: PTH bar to 2 years then an antiresorptive; IV bisphosphonate reassess at 3; zoledronic acid reassess at 3 and continue to 6 if stable; oral bisphosphonate reassess at 5 then holiday up to 5 years if low or moderate risk; denosumab reassess at 5 to 10 with no holiday."
+        caption: "الـ **oral** بيتقيّم عند **5**، الـ **parenteral** عند **3**. الـ **ZA** يكمل لحد **6** لو الـ BMD stable. الـ **denosumab** مفيش holiday. الـ **PTH** سنتين بس."
+        svg: |
+          <svg viewBox="0 0 330 270" xmlns="http://www.w3.org/2000/svg">
+            <text x="10" y="18" class="t-sm t-mut">years</text>
+            <text x="110" y="18" text-anchor="middle" class="t-sm">0</text>
+            <text x="152" y="18" text-anchor="middle" class="t-sm">2</text>
+            <text x="173" y="18" text-anchor="middle" class="t-sm">3</text>
+            <text x="215" y="18" text-anchor="middle" class="t-sm">5</text>
+            <text x="236" y="18" text-anchor="middle" class="t-sm">6</text>
+            <text x="320" y="18" text-anchor="middle" class="t-sm">10</text>
+            <path d="M110 24 V258" class="fg-thin"/>
+            <text x="10" y="52" class="t-sm t-b">PTH</text>
+            <rect x="110" y="40" width="42" height="18" rx="4" class="fg-dot-acc"/>
+            <rect x="152" y="40" width="168" height="18" rx="4" class="fg-acc"/>
+            <text x="236" y="53" text-anchor="middle" class="t-sm">then antiresorptive</text>
+            <text x="10" y="94" class="t-sm t-b">IV bisphos.</text>
+            <rect x="110" y="82" width="63" height="18" rx="4" class="fg-box"/>
+            <circle cx="173" cy="91" r="7" class="fg-dot-bad"/>
+            <text x="250" y="95" text-anchor="middle" class="t-sm">reassess at 3</text>
+            <text x="10" y="136" class="t-sm t-b">Zoledronic</text>
+            <rect x="110" y="124" width="126" height="18" rx="4" class="fg-box"/>
+            <circle cx="173" cy="133" r="7" class="fg-dot-bad"/>
+            <text x="282" y="137" text-anchor="middle" class="t-sm">stable: to 6</text>
+            <text x="10" y="178" class="t-sm t-b">Oral bisphos.</text>
+            <rect x="110" y="166" width="105" height="18" rx="4" class="fg-box"/>
+            <circle cx="215" cy="175" r="7" class="fg-dot-bad"/>
+            <rect x="222" y="166" width="98" height="18" rx="4" class="fg-thin"/>
+            <text x="271" y="179" text-anchor="middle" class="t-sm">holiday ≤ 5</text>
+            <text x="10" y="220" class="t-sm t-b">Denosumab</text>
+            <rect x="110" y="208" width="210" height="18" rx="4" class="fg-good"/>
+            <text x="215" y="221" text-anchor="middle" class="t-sm t-b">no holiday</text>
+            <text x="215" y="248" text-anchor="middle" class="t-sm t-mut">reassess at 5 to 10 years</text>
+          </svg>
+      - kind: explain
+        page: 229
+        title: "الـ bisphosphonate holiday"
+        quote: "Women with low or moderate risk should be considered for a bisphosphonate holiday (temporary discontinuation for up to 5years)"
+        text: |
+          - بعد **5 سنين oral** أو **3 سنين parenteral**: قيّم الـ fracture risk تاني.
+          - **High risk**: كمّل بدوا تاني.
+          - ==Low or moderate risk==: **bisphosphonate holiday** لحد **5 سنين**.
+
+          ليه؟ لأن الاستخدام أكتر من 5 سنين مربوط بـ **atypical femoral fractures** و **ONJ**. والـ bisphosphonate بيفضل في العضم سنين بعد ما توقفه.
+      - kind: reveal
+        page: 229
+        quote: "A drug holiday is not recommended if stopped vertebral fractures increased (BTM) and BMD decreased to the pre-treatment level within 24 months."
+        prompt: "ليه الـ denosumab مفيهوش holiday زي الـ bisphosphonate؟"
+        answer: |
+          الـ bisphosphonate بيتخزن في العضم ويفضل شغال. الـ denosumab **antibody** بيخلص من الجسم، فلما توقفه الـ osteoclasts ترجع بقوة (rebound):
+          - الـ **BTM** يعلى
+          - الـ BMD يرجع لـ ==pre-treatment level within 24 months==
+          - والـ **vertebral fractures** تزيد
+
+          علشان كده **no drug holiday**، والـ reassessment بعد **5 to 10 years**.
+      - kind: check
+        page: 231
+        quote: "In postmenopausal women with low or moderate fracture risk, oral bisphosphonate holiday is after:"
+        question: "In postmenopausal women with low or moderate fracture risk, oral bisphosphonate holiday is after:"
+        options:
+          - "5 years of treatment"
+          - "3 years of treatment"
+          - "2 years of treatment"
+          - "None of the above"
+        answer: 0
+        why:
+          - "صح (سؤال الكتاب): الـ oral بيتقيّم بعد 5 سنين."
+          - "3 سنين ده للـ parenteral."
+          - "سنتين ده حد الـ PTH."
+          - "الإجابة موجودة: 5 سنين."
+      - kind: explain
+        page: 230
+        title: "الـ PTH: سنتين وبعدين antiresorptive"
+        quote: "Treatment with teriparatide or abaloparatide is for up to 2 years to women at very high risk for fracture"
+        text: |
+          **Teriparatide** أو **abaloparatide** لحد ==2 years== للـ **very high risk** (زي severe أو multiple vertebral fractures)، وبعدها **antiresorptive** علشان تحافظ على المكسب.
+      - kind: explain
+        page: 230
+        title: "المتابعة: الـ BMD وقع، أعمل إيه؟"
+        quote: "BMD that is stable or improving is evidence for a treatment response."
+        text: |
+          **Stable or improving BMD** = استجابة. لو وقع بشكل واضح، دوّر على:
+          - ==poor adherence==
+          - **inadequate GI absorption**
+          - **inadequate calcium and vitamin D**
+          - **مرض جديد** بيأذي العضم
+
+          لو المريض منتظم والفحص سليم والنزول **أقل من 5%**: كمّل نفس العلاج وكرر الـ BMD بعد **سنة** (ممكن يبقى measurement error).
+      - kind: explain
+        page: 231
+        title: "الـ markers لو مفيش DXA"
+        quote: "If the marker has not decreased by 50 percent, noncompliance or poor absorption"
+        text: |
+          الخطة العادية: **DXA hip and spine بعد سنة**، ولو stable، متابعة أقل.
+
+          لو الـ DXA مش متاح: **urinary NTX أو serum CTX** قبل العلاج وبعد **3–6 شهور**، وبعدين DXA بعد سنتين.
+          - لو الـ marker ما نزلش ==50%==: فكّر في **noncompliance** أو **poor absorption** (غالبًا أكل بدري بعد الحباية).
+          - ده للـ **antiresorptives** بس. مع الـ PTH، الـ **P1NP** هو اللي بيعلى.
+      - kind: check
+        page: 231
+        quote: "In case of good response to denosumab therapy, the bone turnover marker of resorption (CTX) is:"
+        question: "In case of good response to denosumab therapy, the bone turnover marker of resorption (CTX) is:"
+        options:
+          - "Decreased"
+          - "Increased"
+          - "Stable"
+          - "None of the above"
+        answer: 0
+        why:
+          - "صح (سؤال الكتاب): الـ denosumab antiresorptive، فالـ CTX بينزل (الهدف 50%)."
+          - "الـ CTX بيعلى لما الـ denosumab يقف، مش لما يشتغل."
+          - "ثابت = مفيش تأثير antiresorptive."
+          - "الإجابة Decreased."
+      - kind: aside
+        tone: joke
+        page: 231
+        quote: "often related to an insufficient time interval between drug intake and food ingestion"
+        text: "الـ alendronate عايز معدة فاضية وكوباية مية ونص ساعة صبر. أي فول بدري (food ingestion بعد الـ drug intake بشوية) = الحباية راحت هدر والـ CTX مش هينزل. «الفطار بعد الحباية، مش مع الحباية» ☕"
+      - kind: try
+        items: [dm.L17.106, dm.L17.107, dm.L17.115, dm.L17.117, dm.L17.127]
+    recap:
+      - "NOF في الكتاب: عالج لو T < -2.0، أو < -1.5 مع risk factors؛ أوروبا -2.5."
+      - "Bisphosphonates أول اختيار (alendronate/risedronate)؛ raloxifene لو مفيش تحمّل؛ PTH مش first line."
+      - "Reassess: oral 5 سنين، parenteral 3؛ low/moderate risk ← holiday لحد 5 سنين؛ ZA لحد 6."
+      - "Denosumab: no holiday (rebound خلال 24 شهر)؛ reassess بعد 5–10 سنين."
+      - "متابعة: DXA بعد سنة، أو CTX/NTX بعد 3–6 شهور لازم ينزل 50%؛ P1NP بيعلى مع الـ PTH."
+    practice: [dm.L17.105, dm.L17.106, dm.L17.107, dm.L17.108, dm.L17.109, dm.L17.110, dm.L17.111, dm.L17.112, dm.L17.113, dm.L17.114, dm.L17.115, dm.L17.116, dm.L17.117, dm.L17.118, dm.L17.119, dm.L17.120, dm.L17.121, dm.L17.122, dm.L17.123, dm.L17.124, dm.L17.125, dm.L17.126, dm.L17.127, dm.L17.128, dm.L17.129, dm.L17.130, dm.L17.131, dm.L17.132, dm.L17.133, dm.L17.134, dm.L17.135, dm.L17.137]

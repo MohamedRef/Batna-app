@@ -181,7 +181,11 @@ fn App() -> Element {
         platform::system_bars::apply(day.bg, night.bg);
     });
     lecture::use_lecture_page(ui);
-    back::use_back(ui, current, *settings.open.read() || lecture::is_open() || pagesheet::is_open());
+    back::use_back(
+        ui,
+        current,
+        *settings.open.read() || lecture::is_open() || pagesheet::is_open() || shortcuts::is_open(),
+    );
     update::view::use_android_install(ui);
     update::view::use_content_switch(ui);
     update::view::use_update_notice_taps(settings);
@@ -267,6 +271,8 @@ fn App() -> Element {
                 }
             }
             settings::SettingsSheet {}
+            // After Settings, which opens it, so it draws and takes Back on top.
+            shortcuts::KeysSheet {}
             update::sheet::UpdateSheet {}
             pagesheet::BookSheet {}
             own::ShareInbox {}

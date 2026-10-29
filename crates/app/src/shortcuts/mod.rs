@@ -21,6 +21,11 @@ pub fn open_sheet(open: bool) {
     *SHEET_OPEN.write() = open;
 }
 
+/// The shortcut list is showing (Android Back closes it first).
+pub fn is_open() -> bool {
+    *SHEET_OPEN.read()
+}
+
 const KEYS_JS: &str = r#"
 if (window.__batnaKeys) document.removeEventListener("keydown", window.__batnaKeys, true);
 window.__batnaKeys = (e) => {
@@ -126,33 +131,34 @@ pub fn KeysSheet() -> Element {
         (&["⌘"], tx::NOTE.into()),
     ];
     rsx! {
-        div { class: "keys-scrim", onclick: move |_| open_sheet(false),
-            div {
-                class: "keys-sheet card",
-                role: "dialog",
-                "aria-modal": "true",
-                "aria-labelledby": "keys-title",
-                onclick: move |e| e.stop_propagation(),
-                div { class: "keys-head",
-                    h2 { id: "keys-title", {tx::TITLE} }
-                    button {
-                        class: "icon-button",
-                        "aria-keyshortcuts": "Escape",
-                        "aria-label": tx::CLOSE,
-                        onclick: move |_| open_sheet(false),
-                        "✕"
-                    }
+        // The shared bounded sheet (parts.css): tap outside, ✕, Esc or
+        // Android Back closes it.
+        div { class: "sheet-backdrop keys-backdrop", onclick: move |_| open_sheet(false) }
+        div {
+            class: "sheet keys-sheet",
+            role: "dialog",
+            "aria-modal": "true",
+            "aria-labelledby": "keys-title",
+            div { class: "sheet-head",
+                h2 { id: "keys-title", {tx::TITLE} }
+                button {
+                    class: "icon-button",
+                    "aria-keyshortcuts": "Escape",
+                    "aria-label": tx::CLOSE,
+                    "data-back": "true",
+                    onclick: move |_| open_sheet(false),
+                    "✕"
                 }
-                table { class: "keys-table",
-                    tbody {
-                        for (keys, what) in rows {
-                            tr { key: "{what}",
-                                td { {what} }
-                                td { class: "keys-cell",
-                                    span { dir: "ltr",
-                                        for k in keys.iter() {
-                                            kbd { key: "{k}", "{k}" }
-                                        }
+            }
+            table { class: "keys-table",
+                tbody {
+                    for (keys, what) in rows {
+                        tr { key: "{what}",
+                            td { {what} }
+                            td { class: "keys-cell",
+                                span { dir: "ltr",
+                                    for k in keys.iter() {
+                                        kbd { key: "{k}", "{k}" }
                                     }
                                 }
                             }

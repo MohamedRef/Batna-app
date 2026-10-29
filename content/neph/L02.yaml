@@ -1,0 +1,2346 @@
+schema: batna.content/v1
+lecture: neph.L02
+title: "Chronic kidney disease (CKD)"
+author: Prof. Dr. Yasmine Salah Naga
+book: { chapter: 8, pages: [23, 67] }
+topics:
+  - { id: epidemiology, title: "Epidemiology and burden of CKD" }
+  - { id: definition, title: "KDIGO definition and criteria of CKD" }
+  - { id: hyperfiltration, title: "Hyperfiltration and pathogenesis" }
+  - { id: screening, title: "Screening and prevention of CKD" }
+  - { id: egfr, title: "GFR estimation, eGFRcr-cys and non-GFR determinants" }
+  - { id: albuminuria, title: "Albuminuria and its biological variation" }
+  - { id: staging, title: "Staging (heat map) and monitoring frequency" }
+  - { id: chronicity, title: "Chronicity, AKI vs CKD and evaluation of cause" }
+  - { id: causes, title: "Causes and pathology of CKD" }
+  - { id: risk, title: "Risk prediction (KFRE) and risk-based care" }
+  - { id: manifestations, title: "Clinical manifestations of CKD" }
+  - { id: progression, title: "Predictors of progression and the care model" }
+  - { id: lifestyle, title: "Lifestyle, diet, protein, calories and water" }
+  - { id: ramadan, title: "Fasting in Ramadan" }
+  - { id: bp, title: "Blood pressure targets" }
+  - { id: raasi, title: "RAS inhibitors" }
+  - { id: sglt2i, title: "SGLT2 inhibitors and glucose-lowering therapy" }
+  - { id: acidosis, title: "Metabolic acidosis in CKD" }
+  - { id: potassium, title: "Hyperkalemia and potassium absorption" }
+  - { id: uric-acid, title: "Hyperuricemia and gout in CKD" }
+  - { id: cvd, title: "Cardiovascular disease and lipids" }
+  - { id: drugs, title: "Medication stewardship, sick-day rules and imaging" }
+  - { id: referral, title: "Nephrology referral" }
+  - { id: advanced, title: "CKD G4–G5 care and timing of dialysis" }
+  - { id: anemia, title: "Anemia of CKD" }
+  - { id: mbd, title: "CKD-mineral and bone disorder (CKD-MBD)" }
+items:
+  # ---------- p23: epidemiology ----------
+  - id: neph.L02.001
+    kind: card
+    topic: epidemiology
+    front: Roughly how many people had CKD worldwide in 2017, and what fraction of the population is that?
+    back: "About 843.6 million people, roughly 1 in 10: extremely common."
+    src: { page: 23, quote: "Extremely common Increasing death rate" }
+    status: unverified
+  - id: neph.L02.002
+    kind: cloze
+    topic: epidemiology
+    text: CKD deaths rose by about {{c1::41.5%}} (1990–2017), and CKD is projected to be the {{c2::5th}} leading cause of death.
+    src: { page: 23, quote: "843,6m: +41.5%" }
+    status: unverified
+  - id: neph.L02.003
+    kind: card
+    topic: epidemiology
+    front: What is the main cause of death in CKD patients?
+    back: Cardiovascular disease (CVD).
+    src: { page: 23, quote: "Main cause of death in CKD" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p24: definition and hyperfiltration ----------
+  - id: neph.L02.004
+    kind: card
+    topic: definition
+    front: How does KDIGO 2012 define CKD?
+    back: Abnormalities of kidney structure or function, present for more than 3 months, with implications for health.
+    src: { page: 24, quote: "CKD is defined as abnormalities of kidney structure or function, present for > 3 months, with implications for health" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.005
+    kind: cloze
+    topic: definition
+    text: CKD is classified by {{c1::Cause}}, {{c2::GFR}} category and {{c3::Albuminuria}} category (CGA).
+    src: { page: 24, quote: "CKD is classified based on cause, GFR category, and albuminuria category (CGA)." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.006
+    kind: enumerate
+    topic: definition
+    prompt: List the markers of kidney damage that define CKD (one or more for > 3 months).
+    points:
+      - "Albuminuria (AER ≥ 30 mg/24 h; ACR ≥ 30 mg/g [≥ 3 mg/mmol])"
+      - Urine sediment abnormalities
+      - Electrolyte and other abnormalities due to tubular disorders
+      - Abnormalities detected by histology
+      - Structural abnormalities detected by imaging
+      - History of kidney transplantation
+    pass: 4
+    src: { page: 24, quote: "Criteria for CKD (either of the following present for > 3 months)" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.007
+    kind: cloze
+    topic: definition
+    text: The albuminuria criterion for CKD is AER ≥ {{c1::30}} mg/24 hours or ACR ≥ {{c1::30}} mg/g (≥ {{c2::3}} mg/mmol).
+    src: { page: 24, quote: "Albuminuria (AER > 30mg/24 hours; ACR > 30 mg/g" }
+    status: unverified
+  - id: neph.L02.008
+    kind: cloze
+    topic: definition
+    text: "Decreased GFR alone defines CKD when GFR is < {{c1::60}} mL/min/1.73 m² (GFR categories {{c2::G3a–G5}})."
+    src: { page: 24, quote: "Decreased GFR GFR <60 ml min/1.73" }
+    status: unverified
+  - id: neph.L02.009
+    kind: card
+    topic: hyperfiltration
+    front: What is hyperfiltration in CKD?
+    back: Single-nephron hyperfiltration due to adaptive responses to the progressive decrease in the number of functional units.
+    src: { page: 24, quote: "Single-nephron hyperfiltration due to adaptive responses to the progressive decrease in the number of functional units." }
+    status: unverified
+  - id: neph.L02.010
+    kind: enumerate
+    topic: hyperfiltration
+    prompt: List the causes of renal hyperfiltration.
+    points:
+      - Increased sympathetic activity
+      - Increased renin–angiotensin–aldosterone activity
+      - Hyperglycaemia and insulin resistance
+      - Obesity
+      - Increased autoimmune activation
+      - Impaired glomerular haemodynamics
+      - Inhibition of tubuloglomerular feedback (macula densa signals)
+    pass: 5
+    src: { page: 24, quote: "Causes of Renal Hyperfiltration" }
+    status: unverified
+  - id: neph.L02.011
+    kind: card
+    topic: hyperfiltration
+    front: What happens to afferent and efferent arteriolar resistance in glomerular hyperfiltration?
+    back: Afferent arteriolar resistance falls and efferent arteriolar resistance rises.
+    src: { page: 24, quote: "Reduced arterial resistance Increased arterial resistance" }
+    status: unverified
+  - id: neph.L02.012
+    kind: enumerate
+    topic: hyperfiltration
+    prompt: How does glomerular hyperfiltration lead to cardiovascular disease and death (book p24 chain)?
+    points:
+      - Increased oxidative stress and inflammation
+      - Endothelial dysfunction
+      - Increased arterial stiffness
+      - Increased blood pressure and impaired BP variation
+      - Increased cardiovascular disease and mortality
+    pass: 3
+    src: { page: 24, quote: "Increased cardiovascular disease and mortality" }
+    status: unverified
+  # ---------- p25: pathogenesis and screening ----------
+  - id: neph.L02.013
+    kind: card
+    topic: hyperfiltration
+    front: After how many nephrons are lost does CKD progress similarly whatever the cause?
+    back: Once about half of the total nephrons are lost.
+    src: { page: 25, quote: "lost, CKD progresses similarly" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.014
+    kind: order
+    topic: hyperfiltration
+    prompt: Put the pathogenesis of CKD progression in order.
+    steps:
+      - Loss of nephron number
+      - Adaptive hyperfiltration at the glomerulus (↑ single-nephron GFR)
+      - RAAS activation and proteinuria
+      - Angiotensin II and tubular protein uptake cause inflammation
+      - Glomerular and tubulointerstitial fibrosis (2° FSGS)
+      - Progressive GFR decline and systemic complications
+    src: { page: 25, quote: "hyperfiltration activates RAAS and" }
+    status: unverified
+  - id: neph.L02.015
+    kind: card
+    topic: screening
+    front: In whom is CKD screening cost-effective?
+    back: In populations at risk for CKD.
+    src: { page: 25, quote: "Screening → cost-effective in populations at risk for CKD" }
+    status: unverified
+  - id: neph.L02.016
+    kind: table
+    topic: screening
+    title: Prevalence of CKD in at-risk groups (book p25)
+    columns: [Group, CKD prevalence]
+    rows:
+      - ["General population", "12–14%"]
+      - ["Diabetes", "40%"]
+      - ["Cardiovascular disease", "40%"]
+      - ["Age ≥ 65 years", "33%"]
+      - ["Hypertension", "22%"]
+    blanks: [[1, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 25, quote: "40% Cardio- vascular diseases" }
+    status: unverified
+  # ---------- p26: screening ----------
+  - id: neph.L02.017
+    kind: enumerate
+    topic: screening
+    prompt: List the risk-factor conditions that call for CKD screening.
+    points:
+      - Hypertension
+      - Diabetes
+      - Cardiovascular disease
+      - AKI or hospitalization history
+      - Family history of kidney disease
+      - Obesity
+      - "Other high-risk comorbidities (SLE, environmental exposures, nephrotoxic drugs, genetic factors, preeclampsia, low birth weight)"
+    pass: 5
+    src: { page: 26, quote: "Hypertension; diabetes; Cardiovascular disease; AKI/hospitalization history; FH kidney disease; obesity" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.018
+    kind: order
+    topic: screening
+    prompt: Put the CKD screening algorithm in order (Figure 2).
+    steps:
+      - Test GFR and ACR in a person with a risk factor
+      - "GFR < 60 or ACR ≥ 30 mg/g found: exclude AKI"
+      - Confirm after 3 months (or earlier if evidence of chronicity)
+      - Measure eGFRcr-cys if not done and available
+      - Stage by GFR and ACR
+      - Establish the cause, estimate risk of progression, start treatment
+    src: { page: 26, quote: "Figure 2: Screening algorithm for diagnosis and staging of chronic kidney disease (CKD)." }
+    status: unverified
+  - id: neph.L02.019
+    kind: card
+    topic: screening
+    front: A first screen shows GFR 50 or ACR 40 mg/g. What must be done before calling it CKD?
+    back: Exclude AKI and confirm that GFR < 60 and/or ACR ≥ 30 mg/g persists after 3 months (or earlier if there is evidence of chronicity).
+    src: { page: 26, quote: "Figure 2: Screening algorithm for diagnosis and staging of chronic kidney disease (CKD)." }
+    status: unverified
+  # ---------- p27: prevention, eGFR ----------
+  - id: neph.L02.020
+    kind: enumerate
+    topic: screening
+    prompt: List the World Kidney Day "golden rules" for healthy kidneys shown in the lecture.
+    points:
+      - Test your kidney function regularly
+      - Keep regular control of blood sugar
+      - Eat healthy and keep your weight in check
+      - Maintain a healthy fluid intake
+    pass: 3
+    src: { page: 27, quote: "Golden Rules for healthy kidneys" }
+    status: unverified
+  - id: neph.L02.021
+    kind: card
+    topic: egfr
+    front: Which eGFR equation showed more linear associations with long-term outcomes?
+    back: eGFRcr-cys (creatinine plus cystatin C).
+    src: { page: 27, quote: "eGFRcr-cys demonstrated much more linear associations with log term outcome measures." }
+    status: unverified
+  - id: neph.L02.022
+    kind: card
+    topic: egfr
+    front: In the approach to GFR evaluation (Figure 8), what do you do if the creatinine-based eGFR is not thought to be accurate?
+    back: Consider sources of error and measure cystatin C (eGFRcr-cys); if a more accurate assessment is still needed, measure GFR.
+    src: { page: 27, quote: "Consider sources of error and need for more accurate assessment." }
+    status: unverified
+  # ---------- p28: non-GFR determinants ----------
+  - id: neph.L02.023
+    kind: table
+    topic: egfr
+    title: Non-GFR determinants of creatinine (book p28)
+    columns: [Group, Examples]
+    rows:
+      - ["Body habitus / muscle mass", "Anorexia nervosa, body builders, amputation, paraplegia, class III obesity"]
+      - ["Lifestyle (diet)", "Low-protein, keto, vegetarian, high-protein diet and creatine supplements"]
+      - ["Illness other than CKD", "Cancer, heart failure, cirrhosis, catabolic and muscle-wasting diseases"]
+      - ["Medication effects", "Steroids, drugs decreasing tubular secretion, broad-spectrum antibiotics"]
+    blanks: [[1, 1], [2, 1], [3, 1]]
+    src: { page: 28, quote: "Anorexia nervosa" }
+    status: unverified
+  - id: neph.L02.024
+    kind: mcq
+    topic: egfr
+    stem: Which of these lowers serum creatinine independently of GFR, so the creatinine-based eGFR overestimates GFR?
+    options:
+    - High-protein diet
+    - Drugs that decrease tubular creatinine secretion
+    - Creatine supplements
+    - Body building
+    - Above-knee amputation
+    answer: 4
+    why:
+    - High protein intake raises creatinine.
+    - Reduced tubular secretion raises creatinine.
+    - Creatine supplements raise creatinine, so eGFR reads falsely low.
+    - Large muscle mass raises creatinine.
+    - Low muscle mass (amputation) lowers creatinine generation, so eGFR reads falsely high.
+    src:
+      page: 28
+      quote: Above knee amputation
+    status: unverified
+  # ---------- p29: thresholds, eGFR examples, albuminuria ----------
+  - id: neph.L02.025
+    kind: table
+    topic: egfr
+    title: Age-adapted GFR threshold for diagnosing CKD (book p29)
+    columns: [Age, GFR threshold]
+    rows:
+      - ["< 40 years", "< 75 mL/min"]
+      - ["40–65 years", "< 60 mL/min"]
+      - ["> 65 years", "< 45 mL/min"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 29, quote: "GFR threshold for diagnosis of CKD" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.026
+    kind: table
+    topic: egfr
+    title: CKD-EPI 2021 eGFR examples (mL/min/1.73 m², book p29)
+    columns: [Patient, Creatinine 1.3 mg/dL, Creatinine 4.5 mg/dL]
+    rows:
+      - ["Male, 24 years", "78.7", "17.7"]
+      - ["Male, 60 years", "62.9", "14.2"]
+      - ["Female, 24 years", "58.9", "13.3"]
+      - ["Female, 60 years", "47.1", "10.6"]
+    blanks: [[0, 1], [3, 1], [3, 2]]
+    src: { page: 29, quote: "Examples of eGFR calculation CKD-Epi 2021 updated formula" }
+    status: unverified
+  - id: neph.L02.027
+    kind: card
+    topic: egfr
+    front: What does the CKD-EPI 2021 example table teach about a "normal-looking" creatinine of 1.3 mg/dL?
+    back: The same creatinine means very different GFRs. It is 78.7 in a 24-year-old man but 47.1 in a 60-year-old woman (CKD G3a).
+    src: { page: 29, quote: "Female 60 yrs old 47.1 ml/min/1.73m2" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.028
+    kind: cloze
+    topic: albuminuria
+    text: Assess {{c1::albuminuria}} in adults and {{c2::proteinuria}} in children.
+    src: { page: 29, quote: "Albuminuria in adults" }
+    status: unverified
+  # ---------- p30: variation in ACR ----------
+  - id: neph.L02.029
+    kind: enumerate
+    topic: albuminuria
+    prompt: List causes of a false-positive (high) urine albumin or protein.
+    points:
+      - Hematuria
+      - Menstruation
+      - Exercise (albumin more than other proteins)
+      - Symptomatic urinary infection (protein from the organism)
+    pass: 3
+    src: { page: 30, quote: "Factors causing biological variation in urine albumin or urine protein." }
+    status: unverified
+  - id: neph.L02.030
+    kind: card
+    topic: albuminuria
+    front: Why can the albumin reagent strip be falsely negative?
+    back: Non-albumin proteins (other proteins) may be missed by albumin reagent strips.
+    src: { page: 30, quote: "Factors causing biological variation in urine albumin or urine protein." }
+    status: unverified
+  - id: neph.L02.031
+    kind: table
+    topic: albuminuria
+    title: Urinary creatinine factors that change the ACR (book p30, Table 17)
+    columns: [Factor, Effect on ACR]
+    rows:
+      - ["Female sex (lower creatinine excretion)", "Higher ACR"]
+      - ["Male sex (higher creatinine excretion)", "Lower ACR"]
+      - ["High weight (high creatinine excretion)", "Low ACR or PCR"]
+      - ["Low weight (low creatinine excretion)", "High ACR or PCR"]
+      - ["AKI (lower urinary creatinine)", "Higher ACR"]
+      - ["Meat intake or exercise (higher urinary creatinine)", "Lower ACR"]
+    blanks: [[0, 1], [1, 1], [3, 1], [4, 1]]
+    src: { page: 30, quote: "Factors causing biological variation in urine albumin or urine protein." }
+    status: unverified
+  # ---------- p31–32: staging, monitoring ----------
+  - id: neph.L02.032
+    kind: table
+    topic: staging
+    title: Albuminuria categories (book p31–32)
+    columns: [Category, Description, ACR]
+    rows:
+      - ["A1", "Normal to mildly increased", "< 30 mg/g (< 3 mg/mmol)"]
+      - ["A2", "Moderately increased", "30–300 mg/g (3–30 mg/mmol)"]
+      - ["A3", "Severely increased", "> 300 mg/g (> 30 mg/mmol)"]
+    blanks: [[0, 2], [1, 1], [1, 2], [2, 2]]
+    src: { page: 31, quote: "Normal to mildly" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.033
+    kind: table
+    topic: staging
+    title: GFR categories (mL/min/1.73 m²)
+    columns: [Category, Description, GFR]
+    rows:
+      - ["G1", "Normal or high", "≥ 90"]
+      - ["G2", "Mildly decreased", "60–89"]
+      - ["G3a", "Mildly to moderately decreased", "45–59"]
+      - ["G3b", "Moderately to severely decreased", "30–44"]
+      - ["G4", "Severely decreased", "15–29"]
+      - ["G5", "Kidney failure", "< 15"]
+    blanks: [[0, 2], [1, 2], [2, 2], [3, 2], [4, 2], [5, 2]]
+    src: { page: 31, quote: "Mildly decreased" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.034
+    kind: card
+    topic: staging
+    front: Which heat-map cells are the most common in the general population (ERA 2023 figure)?
+    back: G1A1 (about 55.6%) and G2A1 (about 32.9%).
+    src: { page: 31, quote: "Numbers within cells represent prevalence in the general population." }
+    status: unverified
+  - id: neph.L02.035
+    kind: card
+    topic: staging
+    front: A patient has GFR 95 and ACR 12 mg/g with no other marker of kidney damage. Do they have CKD?
+    back: No. G1A1 without other markers of kidney damage is low risk and is not CKD.
+    src: { page: 32, quote: "Low risk (if no other markers of kidney disease, no CKD)" }
+    status: unverified
+  - id: neph.L02.036
+    kind: table
+    topic: staging
+    title: Monitoring frequency (times per year) by GFR and albuminuria category (book p32)
+    columns: [GFR, A1, A2, A3]
+    rows:
+      - ["G1", "1 (if CKD)", "1", "3"]
+      - ["G2", "1 (if CKD)", "1", "3"]
+      - ["G3a", "1", "2", "3"]
+      - ["G3b", "2", "3", "3"]
+      - ["G4", "3", "3", "4+"]
+      - ["G5", "4+", "4+", "4+"]
+    blanks: [[2, 2], [3, 1], [4, 3], [5, 1]]
+    src: { page: 32, quote: "2.1. Monitoring/yr for progression of CKD" }
+    status: unverified
+  - id: neph.L02.037
+    kind: enumerate
+    topic: staging
+    prompt: Which changes exceed the expected variability and warrant evaluation?
+    points:
+      - Change in eGFR of > 20% on a subsequent test
+      - GFR reduction of > 30% after starting hemodynamically active therapies
+      - Doubling of the ACR
+    pass: 3
+    src: { page: 32, quote: "Levels exceeding the expected variability and warrant evaluation" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.038
+    kind: cloze
+    topic: staging
+    text: After starting a hemodynamically active therapy (e.g. RAASi), a GFR fall of more than {{c1::30%}} warrants evaluation; otherwise an eGFR change of more than {{c2::20%}} does.
+    src: { page: 32, quote: "GFR reductions of >30% in CKD patients after initiating hemodynamically active therapies." }
+    status: unverified
+  # ---------- p32–33: chronicity, AKI vs CKD ----------
+  - id: neph.L02.039
+    kind: enumerate
+    topic: chronicity
+    prompt: How can chronicity (> 3 months) of kidney disease be proven?
+    points:
+      - Review of past GFR measurements or estimates
+      - Review of past albuminuria/proteinuria and urine microscopy
+      - Imaging (reduced kidney size, reduced cortical thickness)
+      - Kidney pathology (fibrosis and atrophy)
+      - Medical history of conditions causing CKD
+      - Repeat measurements within and beyond the 3-month point
+    pass: 4
+    src: { page: 32, quote: "Proof of chronicity (duration of >3 months) can be established by:" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.040
+    kind: enumerate
+    topic: chronicity
+    prompt: Which symptoms in the history point to CKD rather than AKI?
+    points:
+      - Easy fatigue
+      - Anorexia, nausea, vomiting
+      - Itching
+      - Bone pain
+      - Secondary amenorrhea, infertility
+      - Polyuria
+    pass: 4
+    src: { page: 33, quote: "anorexia, nausea, vomiting, itching, bone pain, 2ry amenorrhea, infertility, polyuria" }
+    status: unverified
+  - id: neph.L02.041
+    kind: card
+    topic: chronicity
+    front: Which examination findings favour CKD over AKI?
+    back: Uremic facies, scratch marks, bone tenderness and neuropathy.
+    src: { page: 33, quote: "Examination: Uremic facies, scratch marks, bone tenderness, neuropathy." }
+    status: unverified
+  - id: neph.L02.042
+    kind: card
+    topic: chronicity
+    front: Which investigations favour CKD over AKI?
+    back: Anemia of CKD, CKD-MBD, small kidneys on ultrasound, and biopsy.
+    src: { page: 33, quote: "Investigations: anemia of CKD, CKD-MBD, small kidneys by U/S, Biopsy." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.043
+    kind: enumerate
+    topic: chronicity
+    prompt: Which laboratory, imaging and tissue tests are used to evaluate the cause of CKD?
+    points:
+      - Urinalysis
+      - Ultrasound
+      - Urine albumin-to-creatinine ratio
+      - Kidney biopsy
+    pass: 3
+    src: { page: 33, quote: "Laboratory tests, imaging, and tissue sample:" }
+    status: unverified
+  # ---------- p34: causes, pathology ----------
+  - id: neph.L02.044
+    kind: table
+    topic: causes
+    title: Non-diabetic CKD by compartment (book p34)
+    columns: [Compartment, Clue, Examples]
+    rows:
+      - ["Vascular", "With or without haematuria or proteinuria", "Renal artery stenosis; hypertension, vasculitis, microangiopathy"]
+      - ["Glomerular", "Haematuria or albuminuria", "IgA nephropathy, connective tissue disease, infection, malignancy, drugs"]
+      - ["Tubulointerstitial", "With or without mild proteinuria or pyuria", "Analgesics, metals, chronic infection, obstruction"]
+      - ["Cystic", "Evident on renal imaging", "ADPKD"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 34, quote: "Non-diabetic chronic kidney disease" }
+    status: unverified
+  - id: neph.L02.045
+    kind: table
+    topic: causes
+    title: Systemic vs primary kidney diseases (book p34)
+    columns: [Group, Systemic diseases, Primary kidney diseases]
+    rows:
+      - ["Glomerular", "Diabetes, autoimmune, infections, drugs, neoplasia (amyloidosis)", "Proliferative GN, FSGS, membranous, minimal change"]
+      - ["Tubulointerstitial", "Infections, autoimmune, sarcoidosis, urate, lead, aristolochic acid, myeloma", "UTIs, stones, obstruction, interstitial nephritis"]
+      - ["Vascular", "Atherosclerosis, hypertension, cholesterol emboli, vasculitis, TMA, systemic sclerosis", "Renal-limited ANCA vasculitis, fibromuscular dysplasia"]
+      - ["Cystic and congenital", "Polycystic kidney disease, Alport, Fabry", "Renal dysplasia, medullary cystic disease, podocytopathies"]
+    blanks: [[1, 1], [2, 2], [3, 1]]
+    src: { page: 34, quote: "Examples of systemic diseases affecting the kidney" }
+    status: unverified
+  - id: neph.L02.046
+    kind: enumerate
+    topic: causes
+    prompt: List the pathological features of CKD.
+    points:
+      - Glomerulosclerosis
+      - Tubular atrophy
+      - Interstitial fibrosis
+      - Vascular sclerosis
+    pass: 4
+    src: { page: 34, quote: "Pathology of CKD" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.047
+    kind: mcq
+    topic: causes
+    stem: Which toxin is a tubulointerstitial cause of CKD in the book's table?
+    options:
+    - Minimal change disease
+    - Cholesterol emboli
+    - Fabry disease
+    - Aristolochic acid
+    answer: 3
+    why:
+    - Minimal change disease is a primary glomerular disease.
+    - Cholesterol emboli are vascular.
+    - Fabry disease is cystic/congenital.
+    - Environmental toxins (lead, aristolochic acid) are tubulointerstitial causes.
+    src:
+      page: 34
+      quote: environmental toxins (lead, aristolochic acid)
+    status: unverified
+  # ---------- p35–36: KFRE and risk-based care ----------
+  - id: neph.L02.048
+    kind: card
+    topic: risk
+    front: What is the KFRE used for, and in which stages?
+    back: To estimate the risk of kidney failure and guide referral in CKD G3–G5. It may not be valid in G1–G2.
+    src: { page: 35, quote: "Use of kidney failure risk equation (KFRE) to estimate risk of kidney failure and to guide referral in CKD G3-5" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.049
+    kind: card
+    topic: risk
+    front: Which four variables does the KFRE use, and what does it give?
+    back: Urine (ACR), sex, age and GFR. It gives the 2- and 5-year probability of treated kidney failure in CKD stage 3–5.
+    src: { page: 35, quote: "Using the patient's Urine, Sex, Age and GFR, the kidney failure risk equation provides the 2 and 5 year probability" }
+    status: unverified
+  - id: neph.L02.050
+    kind: card
+    topic: risk
+    front: For which diseases are disease-specific prediction equations used?
+    back: IgA nephropathy and ADPKD.
+    src: { page: 35, quote: "Disease-specific prediction equations in patients with IgAN and ADPKD." }
+    status: unverified
+  - id: neph.L02.051
+    kind: table
+    topic: risk
+    title: eGFR-based vs risk-based transitions of CKD care (book p36, Figure 12)
+    columns: [Transition, eGFR, KF risk]
+    rows:
+      - ["Primary care → nephrology", "30–60", "≥ 3–5% at 5 years"]
+      - ["Nephrology → interprofessional care", "< 30", "≥ 10% at 2 years"]
+      - ["Access and transplant planning", "< 20", "≥ 40% at 2 years"]
+    blanks: [[0, 2], [1, 1], [1, 2], [2, 1], [2, 2]]
+    src: { page: 36, quote: "Transition from an estimated glomerular filtration rate (eGFR)-based to a risk- based approach" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p36: manifestations ----------
+  - id: neph.L02.052
+    kind: table
+    topic: manifestations
+    title: Clinical manifestations of CKD by system (book p36)
+    columns: [System, Manifestations]
+    rows:
+      - ["Integumentary", "Bruises, pruritus, dry skin, ashen-gray to yellow skin, brittle hair and nails"]
+      - ["Respiratory", "Increased respiratory rate, Kussmaul respiration, crackles"]
+      - ["Renal", "Decreased urine output, azotemia, proteinuria, hematuria, hyperuricemia"]
+      - ["Gastrointestinal", "Anorexia, nausea, vomiting, metallic taste, GI bleeding"]
+      - ["Cardiovascular", "Hypertension, tachycardia, dysrhythmias, fluid retention with peripheral and/or pulmonary edema"]
+      - ["Musculoskeletal", "Renal osteodystrophy, hyperparathyroidism, pathological fractures"]
+      - ["Hematological", "Anemia, weakness"]
+      - ["Neurological", "Peripheral neuropathy, restless legs, lethargy, confusion, encephalopathy"]
+    blanks: [[1, 1], [3, 1], [5, 1], [7, 1]]
+    src: { page: 36, quote: "Renal Decreased urine output, azotemia, proteinuria, hematuria, hyperuricemia" }
+    status: unverified
+  - id: neph.L02.053
+    kind: card
+    topic: manifestations
+    front: Why does a CKD patient have Kussmaul respiration?
+    back: It is the respiratory compensation for the metabolic acidosis of CKD (deep, rapid breathing).
+    src: { page: 36, quote: "Increased respiratory rate, Kussmaut respirations" }
+    status: unverified
+  - id: neph.L02.054
+    kind: card
+    topic: manifestations
+    front: Which immune complication does the lecture list in CKD?
+    back: Impaired immune function with an increased risk of infection.
+    src: { page: 36, quote: "Increased risk of infecthon" }
+    status: unverified
+  # ---------- p37–38: treatment aims, progression ----------
+  - id: neph.L02.055
+    kind: card
+    topic: progression
+    front: What is the aim of the comprehensive treatment strategy in CKD?
+    back: To reduce the risks of progression of CKD and of its associated complications.
+    src: { page: 37, quote: "Reduce risks of progression of CKD and its associated complications" }
+    status: unverified
+  - id: neph.L02.056
+    kind: enumerate
+    topic: progression
+    prompt: List the predictors of CKD progression.
+    points:
+      - Cause of CKD
+      - Level of GFR
+      - Level of albuminuria
+      - Age, sex, race/ethnicity, low birth weight
+      - Elevated BP
+      - Hyperglycemia
+      - Dyslipidemia
+      - Acidosis
+      - Smoking and obesity
+      - History of cardiovascular disease
+      - Ongoing exposure to nephrotoxic agents
+      - Anemia
+    pass: 8
+    src: { page: 37, quote: "PREDICTORS OF PROGRESSION" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.057
+    kind: card
+    topic: progression
+    front: Besides the classic predictors, which practice does the lecture add to the list of predictors of progression?
+    back: Fasting (prolonged fasting, e.g. in Ramadan, in at-risk CKD).
+    src: { page: 37, quote: "Anemia FASTING" }
+    status: unverified
+  - id: neph.L02.058
+    kind: order
+    topic: progression
+    prompt: Put the optimal care model by CKD severity in order (Figure 46), from widest base to top.
+    steps:
+      - "All CKD: lifestyle, diet, exercise, smoking cessation"
+      - "First-line drugs for most: RAASi, SGLT2i, statin"
+      - "Additional risk-based therapy: BP drugs, ns-MRA, GLP-1 RA, aspirin"
+      - "Targeted treatment of complications (anemia, acidosis, K, MBD)"
+      - "Advanced CKD: KRT planning or conservative care"
+    src: { page: 37, quote: "Figure 46. Optimal care model by severity of chronic kidney disease (CKD)." }
+    status: unverified
+  # ---------- p38–39: lifestyle ----------
+  - id: neph.L02.059
+    kind: cloze
+    topic: lifestyle
+    text: Adults with CKD should do moderate-intensity physical activity for a cumulative duration of at least {{c1::150}} minutes per week, or to a level compatible with their tolerance and frailty.
+    src: { page: 39, quote: "moderate-intensity physical activity for a cumulative duration of at least 150 minutes per week" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.060
+    kind: enumerate
+    topic: lifestyle
+    prompt: List the lifestyle measures recommended in CKD.
+    points:
+      - At least 150 min/week moderate physical activity; avoid sedentary behavior
+      - Achieve an optimal BMI
+      - Do not use tobacco products
+      - Adequate sleep and treat sleep apnea
+    pass: 3
+    src: { page: 39, quote: "Do not use tobacco products. Adequate sleep and treat sleep apnea" }
+    status: unverified
+  - id: neph.L02.061
+    kind: enumerate
+    topic: lifestyle
+    prompt: What are the dietary principles in CKD/DKD?
+    points:
+      - Healthy and diverse diet
+      - More plant-based than animal-based foods
+      - Less ultra-processed food
+      - "Sodium < 2 g/day (except sodium-wasting nephropathy)"
+      - Diet tailored by a registered dietitian
+    pass: 4
+    src: { page: 39, quote: "Higher consumption of plant-based foods compared to animal-based foods" }
+    status: unverified
+  - id: neph.L02.062
+    kind: cloze
+    topic: lifestyle
+    text: Restrict sodium to < {{c1::2 g}} of sodium per day in CKD, except in {{c2::sodium-wasting nephropathy}}.
+    src: { page: 39, quote: "Sodium restriction to <2 g of sodium per day except in sodium-wasting nephropathy." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.063
+    kind: card
+    topic: lifestyle
+    front: According to the lecture's salt tips, which packaged foods should a CKD patient avoid?
+    back: Foods with more than 400 mg sodium per serving. Read labels and choose lower-salt brands.
+    src: { page: 40, quote: "than 400 mg sodium" }
+    status: unverified
+  # ---------- p41–43: protein, calories ----------
+  - id: neph.L02.064
+    kind: cloze
+    topic: lifestyle
+    text: KDIGO suggests a protein intake of {{c1::0.8 g/kg/day}} in adults with CKD {{c2::G3–G5}} (2C).
+    src: { page: 41, quote: "We suggest maintaining a protein intake of 0.8 g/kg/day in adults with CKD G3–G5 (2C)." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.065
+    kind: card
+    topic: lifestyle
+    front: In which CKD patients should protein intake NOT be restricted?
+    back: Adults with sarcopenia, cachexia, or conditions that result in undernutrition.
+    src: { page: 41, quote: "Do not restrict protein intake in adults with sarcopenia, cachexia, or conditions that result in undernutrition." }
+    status: unverified
+  - id: neph.L02.066
+    kind: cloze
+    topic: lifestyle
+    text: Avoid high protein intake (> {{c1::1.3}} g/kg/day) in adults with CKD at risk of progression.
+    src: { page: 41, quote: "Avoid high protein intake (>1.3 g/kg/day) in adults with CKD at risk of progression." }
+    status: unverified
+  - id: neph.L02.067
+    kind: table
+    topic: lifestyle
+    title: KDOQI 2020 protein restriction in metabolically stable CKD 3–5 without diabetes (book p41)
+    columns: [Diet, Protein (g/kg/day)]
+    rows:
+      - ["Low-protein diet", "0.55–0.60"]
+      - ["Very low-protein diet + keto acid / amino acid analogs", "0.28–0.43"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 41, quote: "KDOQI CLINICAL PRACTICE GUIDELINE FOR NUTRITION IN CKD: 2020 UPDATE" }
+    status: unverified
+  - id: neph.L02.068
+    kind: enumerate
+    topic: lifestyle
+    prompt: What does the lecture say about ketoanalogues / keto amino acids?
+    points:
+      - Should only be part of a very low-protein diet
+      - Poor compliance
+      - Controversial value
+    pass: 2
+    src: { page: 41, quote: "Should only be part of very low protein diet Poor compliance Controversial value" }
+    status: unverified
+  - id: neph.L02.069
+    kind: enumerate
+    topic: lifestyle
+    prompt: When are low- or very low-protein diets contraindicated (metabolically unstable states)?
+    points:
+      - "Risk of malnutrition: sarcopenia, cachexia, active inflammatory or infectious disease"
+      - Hospitalization or the early postoperative period
+      - Poorly controlled diabetes
+      - "Consumptive diseases (cancer), antibiotic or immunosuppressive treatment, significant short-term weight loss"
+    pass: 3
+    src: { page: 42, quote: "Metabolically unstable or during periods of metabolic instability including:" }
+    status: unverified
+  - id: neph.L02.070
+    kind: card
+    topic: lifestyle
+    front: What did the older-adult cohort (8543 adults ≥ 60, 4789 with CKD 1–3) find about protein intake?
+    back: Higher total protein intake was associated with lower mortality in CKD (HR 0.79 for 1.2 vs 0.8 g/kg/d; 0.73 for 1.4 vs 0.8). Plant and animal protein were comparable.
+    src: { page: 42, quote: "Higher total protein intake was associated with lower mortality among participants with CKD" }
+    status: unverified
+  - id: neph.L02.071
+    kind: cloze
+    topic: lifestyle
+    text: Adequate caloric intake in CKD is {{c1::30–35}} kcal/kg/day.
+    src: { page: 43, quote: "Adequate caloric intake (30-35 kcal/kg/day)" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p44–45: water ----------
+  - id: neph.L02.072
+    kind: enumerate
+    topic: lifestyle
+    prompt: What are the water-intake advice points in CKD?
+    points:
+      - Drink enough water based on thirst (maintain euvolemia)
+      - Drink more water in recurrent stones (± ADPKD)
+      - No clear benefit of more water on CKD progression or mortality
+      - "> 1.5 L/day is questionable (may speed progression)"
+      - Water restriction may be needed in advanced CKD
+    pass: 4
+    src: { page: 44, quote: "Drink enough water based on thirst (maintain euvolemia)." }
+    status: unverified
+  - id: neph.L02.073
+    kind: card
+    topic: lifestyle
+    front: Why is a water intake above 1.5 L/day questionable in CKD?
+    back: It may be associated with more rapid progression of CKD.
+    src: { page: 45, quote: "Water intake > 1.5L/day questionable (may be associated with more rapid progression of CKD)." }
+    status: unverified
+  # ---------- p45: Ramadan ----------
+  - id: neph.L02.074
+    kind: table
+    topic: ramadan
+    title: Ramadan fasting risk in CKD (book p45)
+    columns: [Risk, Patients, Advice]
+    rows:
+      - ["Very high", "G4–5 (eGFR < 30), dialysis, transplant on immunosuppression, pregnancy, G3–5 with CVD", "Should NOT fast"]
+      - ["High", "G3 (eGFR 30–60), electrolyte disturbance, risk of dehydration", "Should not fast; if insists, close follow-up"]
+      - ["Low / moderate", "G1–2 with stable function; stone or UTI prone", "May fast; measure creatinine after 5 days if insists"]
+    blanks: [[0, 1], [1, 1], [2, 2]]
+    src: { page: 45, quote: "Fasting in Ramadan Risk Table and Recommendations Summary" }
+    status: unverified
+  - id: neph.L02.075
+    kind: card
+    topic: ramadan
+    front: A CKD patient in a lower-risk group insists on fasting Ramadan. Which test does the book ask for, and when?
+    back: Measure serum creatinine after 5 days of fasting.
+    src: { page: 45, quote: "if insists measure creatinine after 5 days of fasting" }
+    status: unverified
+  - id: neph.L02.076
+    kind: mcq
+    topic: ramadan
+    stem: Which patient is at very high risk if fasting Ramadan and should not fast?
+    options:
+    - eGFR 80 with recurrent stones
+    - eGFR 25 mL/min (CKD G4)
+    - eGFR 75 with stable function
+    - eGFR 95 with ACR 40 mg/g
+    answer: 1
+    why:
+    - Stone formers are in the lower-risk group with advice.
+    - 'CKD G4–G5 (eGFR < 30) is very high risk: should not fast.'
+    - Stable G1–2 is lower risk.
+    - G1A2 with stable function is lower risk.
+    src:
+      page: 45
+      quote: Fasting in Ramadan Risk Table and Recommendations Summary
+    status: unverified
+  # ---------- p45–47: blood pressure ----------
+  - id: neph.L02.077
+    kind: cloze
+    topic: bp
+    text: Target systolic BP in CKD is < {{c1::120}} mmHg when tolerated, using {{c2::standardized office BP measurement}}.
+    src: { page: 45, quote: "Target systolic blood pressure (SBP) of <120 mm Hg, when tolerated, using standardized office BP measurement." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.078
+    kind: card
+    topic: bp
+    front: In which CKD patients is less intensive BP lowering advised?
+    back: Frailty, high risk of falls, very limited life expectancy, or symptomatic postural hypotension.
+    src: { page: 46, quote: "Less intensive BP -lowering therapy in people with frailty, high risk of falls, very limited life expectancy, or symptomatic postural hypotension." }
+    status: unverified
+  - id: neph.L02.079
+    kind: table
+    topic: bp
+    title: ESH 2023 office BP targets in the general hypertensive population (book p46)
+    columns: [Age, Target]
+    rows:
+      - ["18–64 years", "< 130/80 mmHg"]
+      - ["65–79 years", "< 140/80 mmHg (< 130/80 if tolerated)"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 46, quote: "Office BP targets in the general adult hypertensive population" }
+    status: unverified
+  - id: neph.L02.080
+    kind: card
+    topic: bp
+    front: What target BP range for most patients does the ESH 2023 figure in the lecture show?
+    back: Systolic 120–129 mmHg and diastolic 70–79 mmHg.
+    src: { page: 47, quote: "Systolic BP target Diastolic BP target" }
+    status: unverified
+  # ---------- p47–48: RAASi ----------
+  - id: neph.L02.081
+    kind: table
+    topic: raasi
+    title: Indication for RAASi in CKD G1–G4 (book p47)
+    columns: [Albuminuria, With diabetes, Without diabetes]
+    rows:
+      - ["A1 (< 30 mg/g)", "Consider", "Consider"]
+      - ["A2 (30–300 mg/g)", "Recommend (1B)", "Suggest (2C)"]
+      - ["A3 (> 300 mg/g)", "Recommend (1B)", "Recommend (1B)"]
+    blanks: [[1, 1], [1, 2], [2, 2]]
+    src: { page: 47, quote: "Indication RAASi in CKD CKD (G1–G4)" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.082
+    kind: card
+    topic: raasi
+    front: Which RAS-blocking combination should be avoided in CKD?
+    back: Any combination of ACEi, ARB and direct renin inhibitor (DRI) (1B).
+    src: { page: 48, quote: "Avoiding any combination of ACEi, ARB, and direct renin inhibitor (DRI) (1B)." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.083
+    kind: card
+    topic: raasi
+    front: What dose of ACEi/ARB should be used, and should it be stopped when eGFR falls below 30?
+    back: The highest approved dose tolerated, and continue it even when eGFR falls below 30.
+    src: { page: 48, quote: "Highest approved dose tolerated to achieve the benefits Continue even when the eGFR falls below 30 ml/min per 1.73 m2." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.084
+    kind: enumerate
+    topic: raasi
+    prompt: When should the RAASi dose be reduced or the drug stopped?
+    points:
+      - Symptomatic hypotension
+      - Uncontrolled hyperkalemia despite medical treatment
+      - "To reduce uremic symptoms while treating kidney failure (eGFR < 15)"
+    pass: 3
+    src: { page: 48, quote: "Reduce the dose or discontinue in:" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.085
+    kind: table
+    topic: raasi
+    title: After starting ACEi or ARB (CJASN 2022 algorithm, book p48)
+    columns: [Finding, Action]
+    rows:
+      - ["Normokalemia and < 30% creatinine rise", "Increase dose or continue the maximally tolerated dose"]
+      - ["Hyperkalemia", "Review drugs, moderate K intake, diuretics, sodium bicarbonate, GI cation exchangers"]
+      - ["> 30% creatinine rise", "Look for AKI causes, correct volume depletion, review NSAIDs/diuretics, consider renal artery stenosis"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 48, quote: "Correct volume depletion" }
+    status: unverified
+  - id: neph.L02.086
+    kind: card
+    topic: raasi
+    front: In the RAASi algorithm, when do you reduce the dose or stop the ACEi/ARB?
+    back: Only as a last resort, after correcting the hyperkalemia or the cause of the creatinine rise.
+    src: { page: 48, quote: "Reduce dose or stop ACEI or ARB as last resort" }
+    status: unverified
+  # ---------- p49–52: SGLT2i ----------
+  - id: neph.L02.087
+    kind: table
+    topic: sglt2i
+    title: Indication for SGLT2i in CKD G1–G4 (book p49)
+    columns: [Group, Strength]
+    rows:
+      - ["Type 2 diabetes, any albuminuria (A1–A3), eGFR ≥ 20", "Recommend (1A)"]
+      - ["No diabetes, eGFR 20–45, ACR < 200 mg/g", "Suggest (2B)"]
+      - ["No diabetes, ACR ≥ 200 mg/g", "Recommend (1A)"]
+      - ["Heart failure, regardless of albuminuria", "Recommend (1A)"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 49, quote: "Indication SGLT2i in CKD" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.088
+    kind: card
+    topic: sglt2i
+    front: Should an SGLT2i be stopped when eGFR falls below 20?
+    back: No. Continue it even below 20, unless it is not tolerated or KRT is started.
+    src: { page: 49, quote: "Continue SGLT2i even if the eGFR falls below 20 ml/min per 1.73 m2, unless it is not tolerated or KRT is initiated." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.089
+    kind: card
+    topic: sglt2i
+    front: When is it reasonable to withhold an SGLT2i, and why?
+    back: During prolonged fasting, surgery or critical medical illness, because of the greater risk of ketosis.
+    src: { page: 49, quote: "Reasonable to withhold SGLT2i during times of prolonged fasting, surgery, or critical medical illness" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.090
+    kind: card
+    topic: sglt2i
+    front: Which add-on does the KDIGO figure on p49 suggest for resistant hypertension in CKD?
+    back: A steroidal MRA if eGFR ≥ 45.
+    src: { page: 49, quote: "Indication SGLT2i in CKD" }
+    status: unverified
+  - id: neph.L02.091
+    kind: card
+    topic: sglt2i
+    front: eGFR dips after starting an SGLT2i. Should you stop it or monitor more often?
+    back: Neither. The reversible eGFR dip on starting is generally not an indication to stop, and monitoring frequency need not change.
+    src: { page: 50, quote: "the reversible decrease in eGFR on initiation is generally not an indication to discontinue therapy." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.092
+    kind: table
+    topic: sglt2i
+    title: SGLT2i vs RAAS blockade on glomerular arterioles (book p50–51)
+    columns: [Therapy, Arteriole effect, Result]
+    rows:
+      - ["RAAS blockade", "Efferent dilation", "↓ Intraglomerular pressure, ↓ hyperfiltration"]
+      - ["SGLT2 inhibition", "Afferent constriction", "↓ Intraglomerular pressure, ↓ hyperfiltration"]
+      - ["Both", "Efferent dilation + afferent constriction", "Additive pressure reduction, long-term protection"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 50, quote: "SGLT2 vs RAAS Inhibition or Combined Therapy" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.093
+    kind: card
+    topic: sglt2i
+    front: By how many years can RAASi plus SGLT2i delay ESKD compared with RAASi alone (Meraz-Munoz 2021)?
+    back: About 15 years (eGFR decline about 1.85 vs 4.6 mL/min per year).
+    src: { page: 51, quote: "Delays ESKD by 15 years" }
+    status: unverified
+  - id: neph.L02.094
+    kind: enumerate
+    topic: sglt2i
+    prompt: List the nephroprotective (and systemic) effects of SGLT2 inhibitors.
+    points:
+      - Reduce albuminuria
+      - Reduce direct toxic effects on renal tubules
+      - Improve cardiac function and maintain renal perfusion
+      - Reduce arterial stiffness
+      - Reduce hyperkalemia
+      - Improve anemia
+      - Decrease uric acid
+    pass: 4
+    src: { page: 52, quote: "Nephroprotective effects of SGLT2is" }
+    status: unverified
+  - id: neph.L02.095
+    kind: table
+    topic: sglt2i
+    title: SGLT2 inhibitor doses with proven kidney benefit (book p52)
+    columns: [Drug, Dose]
+    rows:
+      - ["Canagliflozin", "100 mg daily"]
+      - ["Dapagliflozin", "10 mg daily"]
+      - ["Empagliflozin", "10 mg daily"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 52, quote: "Practical provider guide to initiating SGLT2 inhibitors in patients with type 2 diabetes and CKD" }
+    status: unverified
+  - id: neph.L02.096
+    kind: card
+    topic: sglt2i
+    front: What should you anticipate and review at follow-up after starting an SGLT2 inhibitor?
+    back: An acute drop in eGFR, adverse effects, volume status and the patient's knowledge of sick-day rules.
+    src: { page: 52, quote: "Anticipate an acute" }
+    status: unverified
+  # ---------- p53: glucose lowering, acidosis ----------
+  - id: neph.L02.097
+    kind: table
+    topic: sglt2i
+    title: Glucose-lowering drugs by eGFR in T2D with CKD (book p53)
+    columns: [Drug, eGFR < 45 / < 30 / dialysis]
+    rows:
+      - ["Metformin", "Reduce dose < 45; stop < 30 and on dialysis"]
+      - ["SGLT2i", "Do not start < 20; stop on dialysis"]
+      - ["Additional drug if needed", "GLP-1 RA preferred"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 53, quote: "Glucose-lowering therapies in patients with T2D and CKD" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.098
+    kind: card
+    topic: acidosis
+    front: Below which bicarbonate level should severe acidosis be prevented in CKD?
+    back: Bicarbonate < 16 mmol/L, with dietary and/or pharmacological treatment.
+    src: { page: 53, quote: "Use dietary and/or pharmacological treatment to prevent severe acidosis (e.g., bicarbonate <16 mmol/l)." }
+    status: unverified
+  - id: neph.L02.099
+    kind: card
+    topic: acidosis
+    front: What must be monitored when correcting acidosis in CKD?
+    back: That bicarbonate does not exceed the upper limit of normal and that BP, serum potassium and fluid status are not adversely affected.
+    src: { page: 53, quote: "does not adversely affect BP control, serum potassium, or fluid status." }
+    status: unverified
+  - id: neph.L02.100
+    kind: cloze
+    topic: acidosis
+    text: To prevent CKD progression with sodium bicarbonate, aim for serum bicarbonate > {{c1::22}} mmol/L; it decreases progression and improves {{c2::nitrogen balance}}.
+    src: { page: 53, quote: "Aim for serum bicarbonate > 22 mmol/L. Decreases progression and improves nitrogen balance." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.101
+    kind: card
+    topic: acidosis
+    front: How does acidosis damage the kidney in CKD (Figure 4)?
+    back: Acid retention raises renal ammonium (NH4+), endothelin and RAS activity, which drive tubulointerstitial fibrosis; acidemia also causes muscle catabolism.
+    src: { page: 54, quote: "Mechanisms of acid-mediated tubulointerstitial fibrosis in chronic kidney disease (CKD)." }
+    status: unverified
+  # ---------- p54–55: potassium ----------
+  - id: neph.L02.102
+    kind: table
+    topic: potassium
+    title: Actions to manage hyperkalemia (K > 5.5 mmol/L) in CKD (book p54)
+    columns: [Line, Actions]
+    rows:
+      - ["1st line: correctable factors", "Optimize bicarbonate and glycemic control; loop diuretics and SGLT2i as adjuncts"]
+      - ["2nd line: dietary", "Assess dietary K intake and consider lowering (dietetic referral)"]
+      - ["3rd line: medications", "Dose adjust or stop K-raising drugs if necessary; licensed exchange resins"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 54, quote: "Actions to manage hyperkalemia (potassium >5.5 mmol/l) in chronic kidney disease" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.103
+    kind: card
+    topic: potassium
+    front: If a RAASi or MRA is stopped for hyperkalemia, what does the algorithm remind you to do?
+    back: Signpost to restart the disease-modifying therapy (RAASi/MRA) at a potassium-safe later date if possible.
+    src: { page: 54, quote: "3.10. Hyperkalemia in CKD" }
+    status: unverified
+  - id: neph.L02.104
+    kind: table
+    topic: potassium
+    title: Potassium absorption by food type (book p55)
+    columns: [Food, Absorption rate]
+    rows:
+      - ["Plant-based foods", "50–60%"]
+      - ["Animal-based foods", "70–90%"]
+      - ["Processed foods (potassium salts)", "90%"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 55, quote: "Potassium absorption rates of plant-based, animal-based, and processed foods." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.105
+    kind: card
+    topic: potassium
+    front: Why do plant-based foods raise serum potassium less than their K content suggests?
+    back: Low absorption, a net alkalizing effect, and carbohydrate that shifts K into cells.
+    src: { page: 55, quote: "Potassium absorption" }
+    status: unverified
+  # ---------- p55–57: uric acid ----------
+  - id: neph.L02.106
+    kind: card
+    topic: uric-acid
+    front: Who with CKD and hyperuricemia should be offered uric acid-lowering therapy, and which class is preferred?
+    back: Those with symptomatic hyperuricemia (1C). Xanthine oxidase inhibitors are preferred over uricosurics.
+    src: { page: 55, quote: "Recommend people with CKD and symptomatic hyperuricemia should be offered uric acid-lowering intervention (1C)." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.107
+    kind: card
+    topic: uric-acid
+    front: When should urate-lowering therapy be considered after a first gout attack in CKD?
+    back: After the first episode, particularly if there is no avoidable precipitant or serum uric acid is > 9 mg/dL.
+    src: { page: 55, quote: "Consider initiating uric acid-lowering therapy for people with CKD after their first episode of gout" }
+    status: unverified
+  - id: neph.L02.108
+    kind: card
+    topic: uric-acid
+    front: Should asymptomatic hyperuricemia be treated to delay CKD progression?
+    back: No (2D). KDIGO suggests not using urate-lowering agents for that purpose.
+    src: { page: 55, quote: "Suggest not using agents to lower serum uric acid in people with CKD and asymptomatic hyperuricemia to delay CKD progression (2D)." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.109
+    kind: card
+    topic: uric-acid
+    front: What is preferred over NSAIDs for acute gout in CKD?
+    back: Low-dose colchicine or intra-articular/oral glucocorticoids.
+    src: { page: 55, quote: "low-dose colchicine or intra-articular/oral glucocorticoids are preferable to NSAIDs." }
+    status: unverified
+  - id: neph.L02.110
+    kind: table
+    topic: uric-acid
+    title: Acute gout flare in CKD (book p56)
+    columns: [Option, Dose]
+    rows:
+      - ["Colchicine", "1.2 mg orally, then 0.6 mg 1 hour later (adjust later doses to kidney function)"]
+      - ["Prednisone", "30 mg with taper over 10–14 days"]
+      - ["Intra-articular steroids", "Only if few joints involved"]
+      - ["If above fails", "Anakinra or canakinumab"]
+    blanks: [[0, 1], [1, 1], [3, 1]]
+    src: { page: 56, quote: "Acute gout flare in a patient with CKD" }
+    status: unverified
+  - id: neph.L02.111
+    kind: card
+    topic: uric-acid
+    front: In the CKD gout work-up, what does a low urine pH (< 6) with urate crystalluria call for?
+    back: Urine alkalinization (to prevent uric acid stones and crystal nephropathy).
+    src: { page: 56, quote: "Low urine pH (<6)" }
+    status: unverified
+  - id: neph.L02.112
+    kind: table
+    topic: uric-acid
+    title: Urate-lowering drugs in CKD (book p57)
+    columns: [Drug, Start, Maximum]
+    rows:
+      - ["Allopurinol (test HLA-B*5801 in Asians and African Americans)", "50 mg/day", "800 mg/day"]
+      - ["Febuxostat", "20–40 mg/day", "120 mg/day"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2]]
+    src: { page: 57, quote: "Allopurinol Febuxostat" }
+    status: unverified
+  - id: neph.L02.113
+    kind: cloze
+    topic: uric-acid
+    text: The goal of urate-lowering therapy is serum urate < {{c1::6}} mg/dL; if it fails, use pegloticase + {{c2::methotrexate}} (eGFR > 40) or + {{c3::mycophenolate}} (eGFR < 40).
+    src: { page: 57, quote: "Goal to reduce SU to <6 mgd!" }
+    status: unverified
+  - id: neph.L02.114
+    kind: card
+    topic: uric-acid
+    front: Which dietary measures may help prevent gout?
+    back: Limiting alcohol, meats and high-fructose corn syrup.
+    src: { page: 57, quote: "Nonpharmacological interventions which may help prevent gout include limiting alcohol, meats, and high-fructose corn syrup intake." }
+    status: unverified
+  - id: neph.L02.115
+    kind: table
+    topic: uric-acid
+    title: Gout diet guidelines (book p57)
+    columns: [Avoid, Limit, Encourage]
+    rows:
+      - ["Organ meats (liver, kidney)", "Red meat, purine-rich fish", "Plant proteins, nuts, whole grains"]
+      - ["High-fructose drinks", "Fruit juice, alcohol (beer, spirits)", "Low-fat dairy, water"]
+      - ["All alcohol during a flare", "Table sugar, sweets, salt", "Whole fruit, unsweetened tea and coffee"]
+    blanks: [[0, 1], [1, 2]]
+    src: { page: 57, quote: "GOUT DIETARY AND LIFESTYLE GUIDELINES" }
+    status: unverified
+  - id: neph.L02.116
+    kind: card
+    topic: uric-acid
+    front: Why does the gout diet sheet warn against a very-low-sodium intake?
+    back: Some evidence links very low sodium intake (≤ 1,500 mg/day) with higher uric acid levels.
+    src: { page: 57, quote: "very-low-sodium intake (1,500 milligrams per day or less) is associated with increased uric acid levels." }
+    status: unverified
+  # ---------- p58–59: CVD ----------
+  - id: neph.L02.117
+    kind: enumerate
+    topic: cvd
+    prompt: What are the CVD and lipid recommendations in CKD?
+    points:
+      - Estimate 10-year cardiovascular risk with a validated tool
+      - Plant-based Mediterranean-style diet with lipid-modifying therapy
+      - Low-dose aspirin for secondary prevention (1C)
+      - "LDL-C < 1.8 mmol/L (70 mg/dL) high risk; < 1.4 mmol/L (55 mg/dL) very high risk"
+    pass: 3
+    src: { page: 58, quote: "Estimate 10-year cardiovascular risk using a validated risk tool." }
+    status: unverified
+  - id: neph.L02.118
+    kind: card
+    topic: cvd
+    front: Is aspirin recommended for primary or secondary prevention in CKD?
+    back: Secondary prevention only. Low-dose aspirin is recommended in CKD with established ischemic CVD (1C).
+    src: { page: 58, quote: "Recommend oral low-dose aspirin for prevention of recurrent ischemic cardiovascular disease events (i.e., secondary prevention)" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.119
+    kind: cloze
+    topic: cvd
+    text: LDL-C target is < {{c1::1.8}} mmol/L ({{c2::70}} mg/dL) in high-risk patients and < {{c3::1.4}} mmol/L (55 mg/dL) in very-high-risk patients.
+    src: { page: 59, quote: "LDL-C < 1.8 mmol/L (70 mg/dL) in high-risk patients and < 1.4 mmol/L (55 mg/dL) in very-high-risk patients" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.120
+    kind: table
+    topic: cvd
+    title: KDIGO lipid guideline in CKD not on dialysis (book p58)
+    columns: [Patient, Treatment]
+    rows:
+      - ["CKD with diabetes, age ≥ 18", "Statin-based therapy"]
+      - ["CKD without diabetes, age ≥ 50", "Statin-based therapy"]
+      - ["CKD without diabetes, 18–49, with CAD, prior stroke or 10-y risk > 10%", "Statin"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 58, quote: "The KDIGO CKD lipid guidelines for management of hyperlipidemia" }
+    status: unverified
+  # ---------- p59–61: drugs, sick day, imaging ----------
+  - id: neph.L02.121
+    kind: card
+    topic: drugs
+    front: Why must every medication be weighed carefully in CKD, and what should be monitored?
+    back: People with CKD are more susceptible to nephrotoxicity. Monitor eGFR, electrolytes and drug levels with narrow-window, risky or nephrotoxic drugs.
+    src: { page: 59, quote: "Monitor eGFR, electrolytes, and therapeutic medication levels" }
+    status: unverified
+  - id: neph.L02.122
+    kind: table
+    topic: drugs
+    title: Nephrotoxic drugs and safer alternatives (book p59, Table 32)
+    columns: [Nephrotoxic drug, Mechanism, Alternative]
+    rows:
+      - ["NSAIDs", "↓ Prostaglandin-dependent blood flow, AIN, nephrotic syndrome", "Acetaminophen"]
+      - ["Aminoglycosides", "Proximal tubular accumulation → ATN", "Cephalosporins, carbapenems"]
+      - ["Vancomycin", "Likely ATN, possible AIN", "Linezolid, daptomycin"]
+      - ["Sulfamethoxazole-trimethoprim", "AIN, ATN, crystalluria, blocks creatinine secretion", "Clindamycin + primaquine, atovaquone, pentamidine"]
+      - ["Proton pump inhibitors", "Tubulointerstitial nephritis, AIN", "H2-receptor antagonists"]
+      - ["Warfarin", "Glomerular hemorrhage, tubular damage, vascular calcification", "NOACs"]
+      - ["Lithium", "NDI, chronic tubulointerstitial nephropathy", "Aripiprazole, lamotrigine, quetiapine, valproate"]
+    blanks: [[0, 2], [1, 2], [4, 2], [5, 2], [6, 1]]
+    src: { page: 59, quote: "Key examples of common medications with documented nephrotoxicity" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.123
+    kind: mcq
+    topic: drugs
+    stem: A CKD G3b patient needs long-term acid suppression. Which choice does the book give as the less nephrotoxic alternative to a PPI?
+    options:
+    - Sucralfate with aluminium
+    - Bismuth
+    - Higher-dose PPI
+    - H2-receptor antagonist
+    - Misoprostol
+    answer: 3
+    why:
+    - Aluminium accumulates in CKD (aluminium bone disease).
+    - Not the book's alternative.
+    - PPIs can cause AIN and tubulointerstitial nephritis, leading to AKI and CKD.
+    - Table 32 lists H2-receptor antagonists as the alternative to PPIs.
+    - Not the book's alternative.
+    src:
+      page: 59
+      quote: 'Proton pump inhibitors: may result in AKI and CKD due to tubulointerstitial nephritis'
+    status: unverified
+  - id: neph.L02.124
+    kind: card
+    topic: drugs
+    front: Which remedies on Figure 40 are reported worldwide as nephrotoxic?
+    back: Licorice (Glycyrrhiza glabra), mushrooms (Amanita phalloides, Cortinarius) and Chinese herbs (Aristolochia).
+    src: { page: 60, quote: "Selected herbal remedies and dietary supplements with evidence of potential nephrotoxicity" }
+    status: unverified
+  - id: neph.L02.125
+    kind: order
+    topic: drugs
+    prompt: Put the steps of sick-day rule implementation in order (Figure 42).
+    steps:
+      - Patient identifies a dehydrating illness
+      - Recalls or retrieves the list of pills to stop
+      - Identifies and stops those pills
+      - Recovers and resumes the pills
+    src: { page: 61, quote: "Essential steps for appropriate sick day rule implementation." }
+    status: unverified
+  - id: neph.L02.126
+    kind: card
+    topic: drugs
+    front: Which medications should be stopped before elective surgery in CKD, and how long before?
+    back: Metformin, ACEi, ARBs, diuretics and SGLT2i, in the 48–72 hours before surgery.
+    src: { page: 61, quote: "Consider planned discontinuation of medications (such as metformin, ACEi, ARBs, diuretics and SGLT2i) in the 48–72 hours prior to elective surgery" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.127
+    kind: card
+    topic: drugs
+    front: If medications are stopped for an acute illness or a procedure, what must accompany that?
+    back: A clear plan of when to restart them.
+    src: { page: 61, quote: "If medications are discontinued during an acute illness or before a procedure → clear plan of when to restart." }
+    status: unverified
+  - id: neph.L02.128
+    kind: table
+    topic: drugs
+    title: Drugs to stop before elective surgery and their perioperative risks (book p61, Table 33)
+    columns: [Drug, Perioperative risk]
+    rows:
+      - ["ACEi/ARB", "Hypotension, AKI"]
+      - ["Diuretics", "Volume depletion, AKI"]
+      - ["SGLT2i", "Ketoacidosis (starvation or diabetic)"]
+      - ["Aminoglycosides", "Acute tubular necrosis / AKI"]
+      - ["NSAIDs", "AKI, acute interstitial nephritis"]
+    blanks: [[0, 1], [1, 1], [2, 1], [4, 1]]
+    src: { page: 61, quote: "Medications that should be temporarily discontinued before elective surgeries" }
+    status: unverified
+  - id: neph.L02.129
+    kind: card
+    topic: drugs
+    front: Which gadolinium agents are used for MRI if GFR < 30 (CKD G4–G5)?
+    back: American College of Radiology group II and III gadolinium-based contrast agents.
+    src: { page: 61, quote: "American Colleague of Radiology group II and III Gadolinium- Based Contrast agents if GFR <30 ml/min per 1.73 m2" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.130
+    kind: card
+    topic: drugs
+    front: Who is at high risk of contrast-associated AKI (book p62)?
+    back: eGFR < 30, or eGFR 30–44 with other risk factors (age, diabetes, hypertension, volume depletion, concomitant nephrotoxins).
+    src: { page: 62, quote: "High risk of contrast-associated" }
+    status: unverified
+  - id: neph.L02.131
+    kind: enumerate
+    topic: drugs
+    prompt: What do you do before iodinated contrast in a patient at high risk of contrast-associated AKI?
+    points:
+      - Discuss whether an equivalent alternative study is available
+      - Hold diuretics and nephrotoxic agents
+      - Give prophylactic isotonic saline (not in hypervolemia or decompensated HF)
+      - Use the lowest necessary dose of contrast
+    pass: 3
+    src: { page: 62, quote: "High risk of contrast-associated" }
+    status: unverified
+  # ---------- p62: referral ----------
+  - id: neph.L02.132
+    kind: enumerate
+    topic: referral
+    prompt: List the indications for nephrology referral in CKD (Figure 44).
+    points:
+      - Uncertain cause of CKD, hereditary kidney disease, recurrent extensive nephrolithiasis
+      - GFR < 30
+      - "Sustained GFR fall > 20% (or > 30% after hemodynamically active therapy)"
+      - 5-year KRT risk ≥ 3–5% (validated equation)
+      - "ACR ≥ 300 mg/g (PCR ≥ 500) with hematuria"
+      - ≥ 2-fold rise in albuminuria in significant albuminuria
+      - ACR > 700 mg/g consistently
+      - "Urinary RBC casts or RBC > 20/HPF, unexplained"
+      - CKD with hypertension refractory to ≥ 4 antihypertensives
+      - Persistent abnormal serum potassium
+    pass: 7
+    src: { page: 62, quote: "Nephrology Referral" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.133
+    kind: mcq
+    topic: referral
+    stem: Which finding alone is an indication for nephrology referral?
+    options:
+    - BP controlled on 2 drugs
+    - A consistent ACR of 800 mg/g
+    - A single eGFR fall of 10%
+    - eGFR 52 stable for 2 years
+    - ACR 45 mg/g in a diabetic
+    answer: 1
+    why:
+    - Referral is for hypertension refractory to ≥ 4 agents.
+    - A consistent ACR > 700 mg/g is a referral criterion.
+    - A sustained fall > 20% is needed.
+    - Stable G3a without other features is managed in primary care.
+    - A2 alone is not a referral criterion.
+    src:
+      page: 62
+      quote: Nephrology Referral
+    status: unverified
+  # ---------- p63–64: advanced CKD, dialysis ----------
+  - id: neph.L02.134
+    kind: enumerate
+    topic: advanced
+    prompt: What extra care do people with CKD G4–G5 need?
+    points:
+      - Ask about uremic symptoms at each visit with a standardized tool
+      - Screen twice a year for malnutrition with a validated tool
+      - Plan transplant/dialysis access when GFR < 20 or 2-year KRT risk > 40%
+    pass: 2
+    src: { page: 63, quote: "Screen twice annually for malnutrition using a validated assessment tool." }
+    status: unverified
+  - id: neph.L02.135
+    kind: card
+    topic: advanced
+    front: What is the most common symptom in people with advanced CKD (Figure 45), and how common is it?
+    back: Fatigue, in about 70%.
+    src: { page: 63, quote: "Common symptoms, prevalence, and severity in people with CKD." }
+    status: unverified
+  - id: neph.L02.136
+    kind: card
+    topic: advanced
+    front: On what is the decision to start dialysis based?
+    back: A composite of symptoms, quality of life, patient preferences, level of GFR and laboratory abnormalities, not GFR alone.
+    src: { page: 63, quote: "Based on a composite assessment of person‘s symptoms, quality of life, patient preferences, level of GFR, and laboratory abnormalities." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.137
+    kind: cloze
+    topic: advanced
+    text: Dialysis indications usually arise at a GFR of {{c1::5–10}} mL/min/1.73 m².
+    src: { page: 63, quote: "If one or more of the following situations present (often in GFR 5 -10 ml/min per 1.73 m2):" }
+    status: unverified
+  - id: neph.L02.138
+    kind: enumerate
+    topic: advanced
+    prompt: List the indications for starting dialysis (Table 42).
+    points:
+      - "Symptoms or signs of kidney failure: uremic neurological signs, pericarditis or serositis, anorexia, intractable pruritus"
+      - Medically resistant acid-base or electrolyte abnormalities
+      - Inability to control volume status or blood pressure
+      - Progressive deterioration in nutritional status despite diet, or cognitive impairment
+    pass: 3
+    src: { page: 64, quote: "Table 42. Indications for the initiation of dialysis." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.139
+    kind: cloze
+    topic: advanced
+    text: Plan pre-emptive kidney transplantation and/or dialysis access when GFR < {{c1::20}} or risk of KRT > {{c2::40%}} over 2 years.
+    src: { page: 64, quote: "access in adults when the GFR is <20 ml/min per 1.73 m2 or risk of KRT is >40% over 2 years." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p64: anemia ----------
+  - id: neph.L02.140
+    kind: cloze
+    topic: anemia
+    text: Screen for anemia of CKD {{c1::annually}} if GFR 30–60 and {{c2::twice annually}} if GFR < 30.
+    src: { page: 64, quote: "Screen annually if GFR 30-60, twice annually if GFR < 30" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.141
+    kind: cloze
+    topic: anemia
+    text: Diagnose anemia in CKD if Hb < {{c1::13}} g/dL in males and < {{c2::12}} g/dL in females.
+    src: { page: 64, quote: "Diagnose if Hb < 13 g/dl in males, < 12 g/dl in females" }
+    status: unverified
+  - id: neph.L02.142
+    kind: card
+    topic: anemia
+    front: What Hb should be maintained on treatment for anemia of CKD?
+    back: Below 11.5 or below 12 g/dL; 10–11 g/dL if high risk.
+    src: { page: 64, quote: "Maintain Hemoglobin <11.5 or < 12 g/dL, 10-11 g/dL if high risk" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.143
+    kind: card
+    topic: anemia
+    front: Which two drug classes treat anemia of CKD (besides iron)?
+    back: Erythropoiesis-stimulating agents (ESAs) and HIF stabilizers (HIF-PH inhibitors, oral).
+    src: { page: 64, quote: "Erythropoiesis stimulating agents (ESAs) HIF stabilizers" }
+    status: unverified
+  - id: neph.L02.144
+    kind: enumerate
+    topic: anemia
+    prompt: Which other causes of anemia should be looked for before blaming CKD?
+    points:
+      - "Inflammation (CRP, IL-6)"
+      - "Blood loss (endoscopy/colonoscopy)"
+      - "Haemolysis (Coombs, bilirubin, LDH, haptoglobin)"
+      - "Haematological disorder (bone marrow)"
+      - "Other: folate, B12, PTH, Hb electrophoresis"
+      - "Iron status (ferritin, TSAT, % hypochromic RBCs, reticulocyte Hb)"
+    pass: 4
+    src: { page: 64, quote: "Treatment of complicationsAnemia of CKD" }
+    status: unverified
+  - id: neph.L02.145
+    kind: table
+    topic: anemia
+    title: ESA dosing in anemia of CKD (book p64)
+    columns: [ESA, Dose (IV or SC)]
+    rows:
+      - ["Epoetin", "2000–3000 units, 2–3 times per week"]
+      - ["Darbepoetin alfa", "30 µg weekly or 60 µg every 2 weeks"]
+      - ["Pegylated epoetin beta", "60 µg every 2 weeks or 120 µg every 4 weeks"]
+      - ["HIF-PH inhibitors", "Oral, dose depends on the drug"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 64, quote: "Pegylated epoetin beta: IV or SC, 60 pg every 2 weeks" }
+    status: unverified
+  # ---------- p65–67: CKD-MBD ----------
+  - id: neph.L02.146
+    kind: card
+    topic: mbd
+    front: What does CKD-MBD lead to (p65)?
+    back: Cardiovascular disease, fractures and mortality.
+    src: { page: 65, quote: "CVD FRACTURES" }
+    status: unverified
+  - id: neph.L02.147
+    kind: table
+    topic: mbd
+    title: Low- vs high-turnover renal bone disease (book p65)
+    columns: [Feature, Low turnover (adynamic), High turnover (osteitis fibrosa)]
+    rows:
+      - ["PTH", "Low", "High"]
+      - ["Alkaline phosphatase", "Low", "High"]
+      - ["Calcium", "High", "Low"]
+      - ["Causes", "Calcium, calcitriol, aluminium, high dialysate calcium", "Hyperparathyroidism, high phosphate, low dialysate calcium"]
+    blanks: [[0, 1], [0, 2], [1, 1], [2, 2]]
+    src: { page: 65, quote: "High PTH" }
+    status: unverified
+  - id: neph.L02.148
+    kind: card
+    topic: mbd
+    front: What criticism of the CKD-MBD guideline does the lecturer make?
+    back: It gives only general rules, is often confusing to apply in practice, and different physicians prescribe different medications.
+    src: { page: 65, quote: "Put only general rules Often confusing to apply in real practice" }
+    status: unverified
+  - id: neph.L02.149
+    kind: enumerate
+    topic: mbd
+    prompt: Which underlying causes are corrected first in CKD-MBD?
+    points:
+      - Hyperphosphatemia
+      - Hypocalcemia
+      - Vitamin D deficiency
+    pass: 3
+    src: { page: 66, quote: "Correction of underlying causes:" }
+    status: unverified
+  - id: neph.L02.150
+    kind: card
+    topic: mbd
+    front: When should CKD-MBD monitoring start?
+    back: From CKD G3a in adults (G2 in children).
+    src: { page: 67, quote: "Start early in CKD G3a" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.151
+    kind: card
+    topic: mbd
+    front: In pre-dialysis CKD, when are calcitriol and VDRAs used?
+    back: Avoided routinely; reserved for CKD G4–G5 with severe and progressive hyperparathyroidism.
+    src: { page: 66, quote: "In pre-dialysis CKD" }
+    status: unverified
+  - id: neph.L02.152
+    kind: enumerate
+    topic: mbd
+    prompt: What are the general rules of CKD-MBD management (p67)?
+    points:
+      - Start early in CKD G3a
+      - Treat trends rather than individual values
+      - Consider calcium, phosphate, PTH, alkaline phosphatase (and vitamin D) together
+      - Avoid hypercalcemia, hyperphosphatemia, and too high or too low PTH
+      - Monitor closely after treatment
+    pass: 4
+    src: { page: 67, quote: "Treat trends rather than individual values" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L02.153
+    kind: card
+    topic: mbd
+    front: Which PTH level is the goal in CKD-MBD?
+    back: Neither too high nor too low. Both extremes are to be avoided (high and low turnover bone disease).
+    src: { page: 67, quote: "Too high and too low PTH" }
+    status: unverified
+  # ---------- MCQs ----------
+  - id: neph.L02.154
+    kind: mcq
+    topic: definition
+    stem: A 50-year-old has eGFR 70 and ACR 45 mg/g on two tests 4 months apart. Best description?
+    options:
+    - CKD G2A3
+    - CKD G3aA1
+    - AKI
+    - No CKD (eGFR > 60)
+    - CKD G2A2
+    answer: 4
+    why:
+    - A3 is > 300 mg/g.
+    - G3a is 45–59.
+    - Persistence over > 3 months means chronic.
+    - CKD can be present with eGFR > 60 when a damage marker persists.
+    - Albuminuria ≥ 30 mg/g for > 3 months is a marker of kidney damage; eGFR 60–89 = G2, ACR 30–300 = A2.
+    src:
+      page: 24
+      quote: CKD is defined as abnormalities of kidney structure or function, present for > 3 months, with implications for health
+    status: unverified
+  - id: neph.L02.155
+    kind: mcq
+    topic: egfr
+    stem: A 70-year-old has a stable eGFR of 50 with ACR 10 mg/g. Using the book's age-adapted threshold, what is it?
+    options:
+    - Not CKD by the age-adapted threshold (< 45 over 65)
+    - AKI
+    - CKD G3b
+    - CKD G3a
+    answer: 0
+    why:
+    - Over 65, the book's age-adapted threshold for diagnosing CKD is < 45 mL/min.
+    - Stable values are not AKI.
+    - G3b is 30–44.
+    - Under the fixed < 60 rule it would be G3aA1, but the age-adapted table says otherwise.
+    src:
+      page: 29
+      quote: GFR threshold for diagnosis of CKD
+    status: unverified
+  - id: neph.L02.156
+    kind: mcq
+    topic: albuminuria
+    stem: Which factor gives a falsely HIGH ACR because of lower urinary creatinine?
+    options:
+    - AKI
+    - High body weight
+    - Exercise
+    - Meat intake
+    - Male sex
+    answer: 0
+    why:
+    - AKI lowers urinary creatinine concentration, so the ratio rises.
+    - 'High weight means high creatinine excretion: low ACR.'
+    - Exercise raises urinary creatinine (and albumin), the creatinine effect lowers the ratio.
+    - 'Meat raises urinary creatinine: lower ACR.'
+    - 'Males excrete more creatinine: lower ACR.'
+    src:
+      page: 30
+      quote: Lower urinary creatinine concentration with AKI
+    status: unverified
+  - id: neph.L02.157
+    kind: mcq
+    topic: staging
+    stem: How many times a year should a patient with CKD G3bA2 be monitored?
+    options:
+    - 4 or more
+    - '3'
+    - '1'
+    - '2'
+    answer: 1
+    why:
+    - 4+ fits G4A3 and G5.
+    - 'G3b with A2 is high risk: 3 times a year.'
+    - Once a year fits G1–G2 A1/A2 or G3aA1.
+    - Twice fits G3aA2 or G3bA1.
+    src:
+      page: 32
+      quote: 2.1. Monitoring/yr for progression of CKD
+    status: unverified
+  - id: neph.L02.158
+    kind: mcq
+    topic: staging
+    stem: Two weeks after starting an ACEi, eGFR falls from 50 to 40 (20%). Next step?
+    options:
+    - Continue the ACEi; a fall under 30% after a hemodynamic drug is expected
+    - Refer for urgent biopsy
+    - Add an ARB
+    - Start dialysis planning
+    - Stop the ACEi permanently
+    answer: 0
+    why:
+    - Only a fall > 30% after a hemodynamically active therapy warrants evaluation.
+    - No indication.
+    - ACEi + ARB is to be avoided (1B).
+    - Unrelated to GFR 40.
+    - Stopping is a last resort.
+    src:
+      page: 32
+      quote: GFR reductions of >30% in CKD patients after initiating hemodynamically active therapies.
+    status: unverified
+  - id: neph.L02.159
+    kind: mcq
+    topic: chronicity
+    stem: Which finding best distinguishes CKD from AKI?
+    options:
+    - Metabolic acidosis
+    - Hyperkalemia
+    - Small kidneys on ultrasound
+    - Raised serum creatinine
+    - Oliguria
+    answer: 2
+    why:
+    - Occurs in both.
+    - Occurs in both.
+    - Small kidneys (reduced size and cortical thickness) point to chronicity.
+    - Creatinine rises in both.
+    - Occurs in both; CKD may even be polyuric.
+    src:
+      page: 33
+      quote: 'Investigations: anemia of CKD, CKD-MBD, small kidneys by U/S, Biopsy.'
+    status: unverified
+  - id: neph.L02.160
+    kind: mcq
+    topic: risk
+    stem: In which patient is the KFRE NOT validated?
+    options:
+    - CKD G4A2
+    - CKD G5 not on dialysis
+    - CKD G3aA3
+    - CKD G3bA3
+    - CKD G2A2
+    answer: 4
+    why:
+    - 'Valid: G3–5.'
+    - 'Valid: G3–5.'
+    - 'Valid: G3–5.'
+    - 'Valid: G3–5.'
+    - The KFRE may not be valid in G1–G2.
+    src:
+      page: 35
+      quote: May not be valid for use in those with CKD G1–G2
+    status: unverified
+  - id: neph.L02.161
+    kind: mcq
+    topic: risk
+    stem: A patient with eGFR 35 has a KFRE 2-year risk of 12%. Which care level fits the risk-based approach?
+    options:
+    - Interprofessional (multidisciplinary) nephrology care
+    - Primary care only
+    - Immediate dialysis
+    - Access and transplant planning
+    answer: 0
+    why:
+    - KF risk ≥ 10% at 2 years = interprofessional care, even before eGFR < 30.
+    - Already above the 3–5% 5-year referral threshold.
+    - Dialysis depends on symptoms, not risk alone.
+    - That threshold is ≥ 40% at 2 years.
+    src:
+      page: 36
+      quote: Transition from an estimated glomerular filtration rate (eGFR)-based to a risk- based approach
+    status: unverified
+  - id: neph.L02.162
+    kind: mcq
+    topic: lifestyle
+    stem: A non-diabetic 60-year-old with CKD G4 and normal nutrition asks about protein. What does KDIGO suggest?
+    options:
+    - 0.3 g/kg/day without supplements
+    - 2 g/kg/day
+    - 0.8 g/kg/day
+    - No protein restriction or target
+    - 1.5 g/kg/day
+    answer: 2
+    why:
+    - Very low-protein diets need keto acid supplements and close supervision.
+    - Too high.
+    - KDIGO suggests 0.8 g/kg/day in G3–G5 (2C).
+    - There is a target in G3–G5.
+    - Avoid > 1.3 g/kg/day if at risk of progression.
+    src:
+      page: 41
+      quote: We suggest maintaining a protein intake of 0.8 g/kg/day in adults with CKD G3–G5 (2C).
+    status: unverified
+  - id: neph.L02.163
+    kind: mcq
+    topic: lifestyle
+    stem: In which CKD patient is a very low-protein diet with keto acids acceptable?
+    options:
+    - Two days after surgery
+    - With cancer cachexia
+    - Metabolically stable, motivated, at risk of kidney failure
+    - Admitted with pneumonia
+    - With poorly controlled diabetes
+    answer: 2
+    why:
+    - 'Early postoperative: unstable.'
+    - 'Consumptive disease / cachexia: do not restrict.'
+    - VLPD under close supervision is for willing, metabolically stable patients at risk of kidney failure.
+    - 'Active infection: metabolically unstable.'
+    - 'Poorly controlled diabetes: unstable.'
+    src:
+      page: 42
+      quote: 'Metabolically unstable or during periods of metabolic instability including:'
+    status: unverified
+  - id: neph.L02.164
+    kind: mcq
+    topic: bp
+    stem: What SBP target does the book give for a non-frail adult with CKD?
+    options:
+    - < 140 mmHg
+    - < 150 mmHg
+    - < 120 mmHg when tolerated
+    - < 130 mmHg in everyone
+    - < 110 mmHg
+    answer: 2
+    why:
+    - Older general-population target.
+    - Too lenient.
+    - 'KDIGO: SBP < 120 mmHg when tolerated, with standardized office measurement.'
+    - ESH general target for 18–64, not the KDIGO CKD target.
+    - Not recommended.
+    src:
+      page: 45
+      quote: Target systolic blood pressure (SBP) of <120 mm Hg, when tolerated, using standardized office BP measurement.
+    status: unverified
+    update:
+      text: ESH 2023 (shown on p46) advises < 130/80 for most adults with CKD, and KDIGO 2024 keeps < 120 systolic when tolerated. In the exam, use the book's KDIGO target of < 120.
+      ref: KDIGO CKD guideline 2024; ESH hypertension guideline 2023
+  - id: neph.L02.165
+    kind: mcq
+    topic: raasi
+    stem: A non-diabetic with CKD G3a and ACR 150 mg/g. Strength of RAASi advice?
+    options:
+    - Suggested (2C)
+    - Not indicated
+    - Recommended (1A)
+    - Recommended (1B)
+    answer: 0
+    why:
+    - Without diabetes, A2 = suggest (2C).
+    - It is indicated.
+    - No RAASi grade in the table is 1A.
+    - 1B applies to A2 with diabetes and to A3.
+    src:
+      page: 47
+      quote: Indication RAASi in CKD CKD (G1–G4)
+    status: unverified
+  - id: neph.L02.166
+    kind: mcq
+    topic: raasi
+    stem: Creatinine rises 40% after starting an ARB. What first?
+    options:
+    - 'Ignore: expected dip'
+    - 'Look for AKI causes: volume depletion, NSAIDs, diuretics, renal artery stenosis'
+    - Add an ACE inhibitor
+    - Double the ARB dose
+    - Stop the ARB permanently
+    answer: 1
+    why:
+    - Only < 30% is accepted.
+    - '> 30% rise: review for causes of AKI, correct volume, reassess drugs, consider renal artery stenosis.'
+    - ACEi + ARB is avoided.
+    - Not with a > 30% rise.
+    - Stopping is a last resort.
+    src:
+      page: 48
+      quote: Optimizing Renin-Angiotensin System Inhibitor Use in CKD
+    status: unverified
+  - id: neph.L02.167
+    kind: mcq
+    topic: sglt2i
+    stem: A non-diabetic with eGFR 35 and ACR 120 mg/g. SGLT2i?
+    options:
+    - Contraindicated below 45
+    - Suggested (2B)
+    - Recommended (1A)
+    - Only with heart failure
+    answer: 1
+    why:
+    - SGLT2i are started down to eGFR 20.
+    - 'No diabetes, eGFR 20–45 and ACR < 200: suggest (2B).'
+    - 1A needs ACR ≥ 200, diabetes or heart failure.
+    - Heart failure is another indication, not the only one.
+    src:
+      page: 49
+      quote: Indication SGLT2i in CKD
+    status: unverified
+  - id: neph.L02.168
+    kind: mcq
+    topic: sglt2i
+    stem: A diabetic on dapagliflozin is booked for elective cholecystectomy. Best advice?
+    options:
+    - Continue through surgery
+    - Withhold it 48–72 hours before surgery, with a restart plan
+    - Switch to metformin
+    - Double the dose
+    - Stop it permanently
+    answer: 1
+    why:
+    - Risk of ketoacidosis.
+    - SGLT2i are withheld for surgery (ketoacidosis risk) 48–72 h before, with a clear restart plan.
+    - Metformin is also stopped before surgery.
+    - No.
+    - It is restarted after recovery.
+    src:
+      page: 61
+      quote: Consider planned discontinuation of medications (such as metformin, ACEi, ARBs, diuretics and SGLT2i) in the 48–72 hours prior to elective surgery
+    status: unverified
+  - id: neph.L02.169
+    kind: mcq
+    topic: sglt2i
+    stem: A type 2 diabetic has eGFR 28. Metformin?
+    options:
+    - Reduce the dose only
+    - Continue full dose
+    - Start it now
+    - Discontinue
+    answer: 3
+    why:
+    - Dose reduction is for eGFR 30–44.
+    - Full dose only above 45.
+    - Do not start below 30.
+    - Metformin is stopped below eGFR 30 and on dialysis.
+    src:
+      page: 53
+      quote: "Reduce dose Discontinue"
+    status: unverified
+  - id: neph.L02.170
+    kind: mcq
+    topic: acidosis
+    stem: A CKD G4 patient has bicarbonate 18 mmol/L. Target with sodium bicarbonate to slow progression?
+    options:
+    - '> 30 mmol/L'
+    - No target
+    - '> 16 mmol/L'
+    - '> 22 mmol/L'
+    answer: 3
+    why:
+    - Above normal; correction should not exceed the upper limit.
+    - There is a target.
+    - < 16 is the severe level to prevent, not the target.
+    - Aim for serum bicarbonate > 22 mmol/L.
+    src:
+      page: 53
+      quote: Aim for serum bicarbonate > 22 mmol/L.
+    status: unverified
+  - id: neph.L02.171
+    kind: mcq
+    topic: potassium
+    stem: K 5.8 mmol/L in CKD G3b on an ACEi, bicarbonate 17. First-line action?
+    options:
+    - Start a potassium binder only
+    - Fruit-free diet
+    - Stop the ACEi at once
+    - Correct acidosis and glycemia; add a loop diuretic or SGLT2i
+    - Emergency dialysis
+    answer: 3
+    why:
+    - Binders are 3rd line.
+    - Diet is 2nd line, tailored by a dietitian.
+    - Stopping RAASi is 3rd line, with a plan to restart.
+    - '1st line: correctable factors (bicarbonate, glycemia, loop diuretic, SGLT2i).'
+    - Not for K 5.8.
+    src:
+      page: 54
+      quote: Actions to manage hyperkalemia (potassium >5.5 mmol/l) in chronic kidney disease
+    status: unverified
+  - id: neph.L02.172
+    kind: mcq
+    topic: potassium
+    stem: Which food source of potassium has the highest absorption rate?
+    options:
+    - Fruits
+    - Red meat
+    - Whole grains
+    - Processed foods with potassium salts
+    - Vegetables
+    answer: 3
+    why:
+    - Plant foods 50–60%.
+    - Animal foods 70–90%.
+    - Plant foods 50–60%.
+    - About 90% absorbed.
+    - Plant foods 50–60%.
+    src:
+      page: 55
+      quote: Potassium absorption rates of plant-based, animal-based, and processed foods.
+    status: unverified
+  - id: neph.L02.173
+    kind: mcq
+    topic: uric-acid
+    stem: A CKD G3a patient has uric acid 8.5 mg/dL and has never had gout. Best advice?
+    options:
+    - Probenecid
+    - Allopurinol 300 mg
+    - Do not treat to delay progression (2D)
+    - Febuxostat 80 mg
+    - Pegloticase
+    answer: 2
+    why:
+    - Uricosurics are not preferred.
+    - No indication.
+    - Asymptomatic hyperuricemia is not treated to slow CKD (2D).
+    - No indication.
+    - Only for refractory gout.
+    src:
+      page: 55
+      quote: Suggest not using agents to lower serum uric acid in people with CKD and asymptomatic hyperuricemia to delay CKD progression (2D).
+    status: unverified
+  - id: neph.L02.174
+    kind: mcq
+    topic: uric-acid
+    stem: Acute gout in a CKD G4 patient. Which is least appropriate?
+    options:
+    - Naproxen
+    - Prednisone 30 mg with taper
+    - Low-dose colchicine
+    - Intra-articular steroid in one joint
+    answer: 0
+    why:
+    - NSAIDs are avoided in CKD.
+    - Preferred.
+    - Preferred, with doses adjusted to kidney function.
+    - Fine if few joints are involved.
+    src:
+      page: 55
+      quote: low-dose colchicine or intra-articular/oral glucocorticoids are preferable to NSAIDs.
+    status: unverified
+  - id: neph.L02.175
+    kind: mcq
+    topic: uric-acid
+    stem: What is the starting dose of allopurinol in CKD in the book's algorithm?
+    options:
+    - 800 mg daily
+    - 50 mg daily
+    - 300 mg daily
+    - 100 mg weekly
+    answer: 1
+    why:
+    - That is the maximum.
+    - Start at 50 mg/day and escalate slowly, up to 800 mg/day if needed.
+    - Too high to start in CKD.
+    - Not the regimen.
+    src:
+      page: 57
+      quote: Allopurinol Febuxostat
+    status: unverified
+  - id: neph.L02.176
+    kind: mcq
+    topic: drugs
+    stem: A CKD G4 patient with bipolar disorder is on lithium. Which alternative does Table 32 list?
+    options:
+    - Valproate
+    - Haloperidol
+    - Higher-dose lithium
+    - Amitriptyline
+    answer: 0
+    why:
+    - Aripiprazole, lamotrigine, quetiapine and valproate are the listed alternatives.
+    - Not listed.
+    - Lithium causes NDI and chronic tubulointerstitial nephropathy.
+    - Not listed.
+    src:
+      page: 59
+      quote: Key examples of common medications with documented nephrotoxicity
+    status: unverified
+  - id: neph.L02.177
+    kind: mcq
+    topic: drugs
+    stem: A patient with eGFR 22 needs a contrast MRI. Which gadolinium agent?
+    options:
+    - ACR group II (or III) agent
+    - Group I agent
+    - Avoid all MRI
+    - Any linear agent
+    answer: 0
+    why:
+    - With GFR < 30, use ACR group II and III agents.
+    - Group I is the high-risk group.
+    - MRI is fine with the right agent.
+    - Linear (group I) agents carry the highest NSF risk.
+    src:
+      page: 61
+      quote: American Colleague of Radiology group II and III Gadolinium- Based Contrast agents if GFR <30 ml/min per 1.73 m2
+    status: unverified
+  - id: neph.L02.178
+    kind: mcq
+    topic: advanced
+    stem: eGFR 9 in a well, euvolemic patient with normal K and bicarbonate and good appetite. Dialysis?
+    options:
+    - Start when GFR < 15
+    - Start now because GFR < 10
+    - 'Not yet: start on symptoms, volume, labs or nutrition, not GFR alone'
+    - Never needed
+    answer: 2
+    why:
+    - Not a start criterion.
+    - GFR alone is not the trigger.
+    - Dialysis start is a composite decision; indications usually appear at GFR 5–10.
+    - Indications are likely to come.
+    src:
+      page: 63
+      quote: Based on a composite assessment of person‘s symptoms, quality of life, patient preferences, level of GFR, and laboratory abnormalities.
+    status: unverified
+  - id: neph.L02.179
+    kind: mcq
+    topic: anemia
+    stem: A woman with CKD G3b (eGFR 35). How often should Hb be checked for anemia?
+    options:
+    - Only with symptoms
+    - Twice a year
+    - Every month
+    - Annually
+    answer: 3
+    why:
+    - Screening is routine.
+    - Twice a year is for GFR < 30.
+    - Too often for screening.
+    - 'GFR 30–60: annually.'
+    src:
+      page: 64
+      quote: Screen annually if GFR 30-60, twice annually if GFR < 30
+    status: unverified
+  - id: neph.L02.180
+    kind: mcq
+    topic: mbd
+    stem: Which pattern suggests adynamic (low-turnover) bone disease in CKD?
+    options:
+    - Low dialysate calcium
+    - High PTH, high ALP, low calcium
+    - Low PTH, low alkaline phosphatase, high calcium
+    - High phosphate with high PTH
+    answer: 2
+    why:
+    - Low dialysate calcium drives high turnover.
+    - That is high turnover (osteitis fibrosa).
+    - 'Low turnover: low PTH and ALP, often high calcium (calcium, calcitriol, aluminium).'
+    - High turnover.
+    src:
+      page: 65
+      quote: "Low PTH"
+    status: unverified
+  # ---------- essay ----------
+  - id: neph.L02.181
+    kind: essay
+    topic: sglt2i
+    prompt: Discuss the role of SGLT2 inhibitors in CKD.
+    outline:
+      - "Indications": ["T2D with CKD and eGFR ≥ 20 (1A)", "No diabetes: ACR ≥ 200 (1A), eGFR 20–45 with ACR < 200 (2B), heart failure"]
+      - "Mechanism": ["Afferent constriction lowers intraglomerular pressure and hyperfiltration", "Additive with RAASi efferent dilation; together delay ESKD by about 15 years"]
+      - "Other benefits": ["Lower albuminuria, K and uric acid; improve anemia and cardiac function"]
+      - "Practical use": ["Expect a reversible eGFR dip; do not stop or change monitoring", "Continue below eGFR 20 until KRT", "Withhold in fasting, surgery and acute illness (ketosis)", "Doses: canagliflozin 100, dapagliflozin 10, empagliflozin 10 mg"]
+    src: { page: 49, quote: "Continue SGLT2i even if the eGFR falls below 20 ml/min per 1.73 m2, unless it is not tolerated or KRT is initiated." }
+    status: unverified
+  - id: neph.L02.182
+    kind: essay
+    topic: anemia
+    prompt: Outline the diagnosis and treatment of anemia of CKD.
+    outline:
+      - "Screening and diagnosis": ["Annually at GFR 30–60, twice yearly at < 30", "Hb < 13 g/dL men, < 12 women", "Exclude inflammation, blood loss, haemolysis, marrow disease, folate/B12, PTH"]
+      - "Iron": ["Ferritin, TSAT, % hypochromic RBCs, reticulocyte Hb; replace iron"]
+      - "ESA / HIF-PHI": ["Epoetin 2000–3000 U 2–3×/week", "Darbepoetin 30 µg weekly or 60 µg every 2 weeks", "Pegylated epoetin beta 60 µg every 2 weeks or 120 µg every 4 weeks", "HIF stabilizers orally"]
+      - "Target": ["Hb < 11.5 or < 12 g/dL; 10–11 g/dL if high risk"]
+    src: { page: 64, quote: "Diagnose if Hb < 13 g/dl in males, < 12 g/dl in females" }
+    status: unverified
+  # ---------- cases ----------
+  - id: neph.L02.183
+    kind: case
+    topic: staging
+    stem: 'A 58-year-old woman with type 2 diabetes and hypertension: eGFR 40 and ACR 420 mg/g, confirmed after 3 months. BP 142/86 on amlodipine. HbA1c 7.8% on metformin 2 g/day.'
+    steps:
+    - question: Stage?
+      options:
+      - G4A3
+      - G3bA3
+      - G3aA2
+      - G3bA2
+      answer: 1
+      why: eGFR 30–44 = G3b; ACR > 300 = A3.
+    - question: Monitoring frequency?
+      options:
+      - Once a year
+      - Twice a year
+      - 4+ times a year
+      - 3 times a year
+      answer: 3
+      why: G3bA3 = 3 times a year.
+    - question: Kidney-protective drug to add first?
+      options:
+      - ACEi + ARB together
+      - Beta-blocker
+      - ACEi or ARB at the highest tolerated dose
+      - Spironolactone
+      answer: 2
+      why: 'Diabetes with A3: RAASi recommended (1B); avoid dual blockade.'
+    - question: And the second pillar?
+      options:
+      - Nothing more
+      - An SGLT2i (eGFR ≥ 20)
+      - Insulin only
+      - Sulfonylurea
+      answer: 1
+      why: 'T2D with CKD and eGFR ≥ 20: SGLT2i recommended (1A).'
+    - question: Metformin at eGFR 40?
+      options:
+      - Continue 2 g
+      - Stop it
+      - Double it
+      - Reduce the dose
+      answer: 3
+      why: Reduce below 45, stop below 30.
+    - question: BP target?
+      options:
+      - < 150/90
+      - SBP < 120 when tolerated
+      - No target
+      - < 140/90
+      answer: 1
+      why: KDIGO SBP < 120 mmHg when tolerated.
+    src:
+      page: 47
+      quote: Indication RAASi in CKD CKD (G1–G4)
+    status: unverified
+  - id: neph.L02.184
+    kind: case
+    topic: potassium
+    stem: A 65-year-old with CKD G3b on ramipril 10 mg has K 5.9 mmol/L and bicarbonate 17 mmol/L. Diet is high in processed foods.
+    steps:
+    - question: First-line step?
+      options:
+      - Start a binder
+      - Stop ramipril
+      - Correct acidosis (sodium bicarbonate), add loop diuretic or SGLT2i
+      - Dialysis
+      answer: 2
+      why: '1st line: correctable factors.'
+    - question: Which dietary advice helps most?
+      options:
+      - Stop all vegetables
+      - Stop all fruit
+      - Cut processed foods (potassium salts ~90% absorbed)
+      - Drink more juice
+      answer: 2
+      why: Processed foods absorb ~90%; plant foods only 50–60% and alkalinize.
+    - question: Bicarbonate target to slow CKD?
+      options:
+      - '> 22 mmol/L'
+      - None
+      - '> 16'
+      - '> 30'
+      answer: 0
+      why: Aim > 22 mmol/L.
+    - question: If K stays high despite all this?
+      options:
+      - Licensed exchange resins, and lower the RAASi only as a last resort with a restart plan
+      - Ignore
+      - Add an ARB
+      - Stop ramipril forever
+      answer: 0
+      why: '3rd line: binders and dose adjustment; signpost to restart RAASi later.'
+    src:
+      page: 54
+      quote: Actions to manage hyperkalemia (potassium >5.5 mmol/l) in chronic kidney disease
+    status: unverified
+  - id: neph.L02.185
+    kind: case
+    topic: uric-acid
+    stem: A 52-year-old man with CKD G3b (eGFR 38) has a hot swollen first MTP joint; serum urate 9.6 mg/dL. Second attack this year.
+    steps:
+    - question: Acute treatment?
+      options:
+      - Diclofenac
+      - Colchicine 1.2 mg then 0.6 mg after 1 h (or prednisone 30 mg with taper)
+      - Allopurinol alone today
+      - High-dose aspirin
+      answer: 1
+      why: Low-dose colchicine or glucocorticoids, not NSAIDs.
+    - question: Long-term urate-lowering?
+      options:
+      - 'Yes: symptomatic hyperuricemia, recurrent gout and urate > 9'
+      - Only on dialysis
+      - No, never in CKD
+      - Only if stones
+      answer: 0
+      why: 'Symptomatic hyperuricemia: offer urate-lowering (1C).'
+    - question: Preferred class?
+      options:
+      - NSAID
+      - Uricosuric
+      - Xanthine oxidase inhibitor
+      - Pegloticase first
+      answer: 2
+      why: XOIs are preferred over uricosurics.
+    - question: Allopurinol start and target?
+      options:
+      - 100 mg weekly
+      - 300 mg/day to urate < 8
+      - 800 mg/day at once
+      - 50 mg/day, titrate to urate < 6 mg/dL
+      answer: 3
+      why: Start 50 mg, slowly up to 800 mg; goal SU < 6.
+    src:
+      page: 57
+      quote: Goal to reduce SU to <6 mgd!
+    status: unverified
+  - id: neph.L02.186
+    kind: case
+    topic: advanced
+    stem: A 45-year-old with CKD G4 (eGFR 18), KFRE 2-year risk 45%, Hb 9.4 g/dL, ferritin 60 ng/mL, phosphate high, PTH rising.
+    steps:
+    - question: Planning step now?
+      options:
+      - Wait until GFR < 5
+      - Nothing; primary care follow-up
+      - Plan pre-emptive transplant and/or dialysis access
+      - Start dialysis today
+      answer: 2
+      why: 'GFR < 20 or 2-year KRT risk > 40%: plan transplant/access.'
+    - question: First for the anemia?
+      options:
+      - Ignore
+      - ESA to Hb 14
+      - Replace iron, exclude other causes, then ESA if needed
+      - Transfuse to Hb 13
+      answer: 2
+      why: Check iron and other causes first; keep Hb < 11.5–12 on ESA.
+    - question: CKD-MBD first step?
+      options:
+      - Start calcitriol at once
+      - Parathyroidectomy
+      - Correct hyperphosphatemia, hypocalcemia and vitamin D deficiency
+      - High-calcium diet
+      answer: 2
+      why: Correct the underlying causes first; avoid hypercalcemia.
+    - question: How often to screen nutrition?
+      options:
+      - Weekly
+      - Every 5 years
+      - Twice a year
+      - Never
+      answer: 2
+      why: 'G4–G5: screen twice annually for malnutrition.'
+    src:
+      page: 64
+      quote: access in adults when the GFR is <20 ml/min per 1.73 m2 or risk of KRT is >40% over 2 years.
+    status: unverified

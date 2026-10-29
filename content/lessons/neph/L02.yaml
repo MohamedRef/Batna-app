@@ -1,0 +1,978 @@
+schema: batna.lesson/v1
+lecture: neph.L02
+lessons:
+  # ------------------------------------------------------------------
+  - id: neph.L02.lesson1
+    title: "يعني إيه CKD؟ التعريف والـ eGFR والـ ACR"
+    hook: "واحد من كل عشرة عنده CKD ومعظمهم مايعرفوش. رقمين بس (eGFR و ACR) بيكشفوه."
+    minutes: 9
+    pages: [23, 30]
+    topics: [epidemiology, definition, hyperfiltration, screening, egfr, albuminuria]
+    goals:
+      - "تعرف تعريف KDIGO للـ CKD وعلامات الـ kidney damage"
+      - "تفهم الـ hyperfiltration وليه المرض بيكمّل لوحده بعد ما نص النفرونات يروح"
+      - "تعرف مين تعمله screening، وإيه اللي بيبوّظ الـ eGFR والـ ACR"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 23
+        quote: "Main cause of death in CKD"
+        title: "مرض شائع وبيقتل بالقلب"
+        text: |
+          في 2017 كان فيه حوالي **843.6 مليون** إنسان عندهم CKD، يعني تقريبًا **1 من كل 10**. الوفيات زادت **41.5%** من 1990، ومتوقع يبقى **السبب الخامس** للوفاة.
+
+          والمهم للامتحان: مريض الـ CKD غالبًا **مش بيموت من الكلى**. ==CVD== هو السبب الأول للوفاة.
+      - kind: explain
+        page: 24
+        quote: "CKD is defined as abnormalities of kidney structure or function, present for > 3 months, with implications for health"
+        title: "تعريف KDIGO 2012"
+        text: |
+          الـ ==CKD== = abnormality في **structure** أو **function** الكلى، موجودة **أكتر من 3 شهور**، ولها تأثير على الصحة.
+
+          ويتصنّف بالـ ==CGA==: **C**ause، **G**FR category، **A**lbuminuria category.
+
+          المعيار: واحد من دول لمدة > 3 شهور:
+
+          - **GFR < 60** (G3a–G5)، **أو**
+          - **marker of kidney damage**: albuminuria (ACR ≥ 30 mg/g)، urine sediment، tubular disorder، histology، imaging، أو تاريخ زرع كلى
+      - kind: check
+        page: 24
+        quote: "Criteria for CKD (either of the following present for > 3 months)"
+        question: "eGFR 85 and ACR 50 mg/g, persisting for 6 months. CKD?"
+        options:
+          - "Yes: albuminuria is a marker of damage, so this is CKD G2A2"
+          - "No: eGFR is above 60"
+          - "No: ACR must be above 300"
+          - "Only if the kidneys are small on ultrasound"
+        answer: 0
+        why:
+          - "صح: أي marker of damage لمدة > 3 شهور يكفي حتى لو الـ GFR فوق 60."
+          - "الـ GFR < 60 معيار، بس مش المعيار الوحيد."
+          - "الحد 30 mg/g، و > 300 ده A3."
+          - "الـ imaging marker تاني، مش شرط."
+      - kind: figure
+        page: 24
+        quote: "Reduced arterial resistance Increased arterial resistance"
+        title: "الـ hyperfiltration: النفرونات الباقية بتشتغل زيادة"
+        alt: "A glomerulus drawn as a circle with a wide afferent arteriole entering on the left labelled reduced resistance, and a narrow efferent arteriole leaving on the right labelled increased resistance. Inside, high pressure. Below, the chain: high single-nephron GFR, proteinuria and RAAS, fibrosis, fewer nephrons, which loops back."
+        caption: "الـ **afferent** بيتوسّع والـ **efferent** بيضيق ← الضغط جوه الـ glomerulus يعلى ← proteinuria وfibrosis ← نفرونات أقل ← hyperfiltration أكتر. دايرة مقفولة."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="N2a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-acc"/></marker>
+              <marker id="N2b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-bad"/></marker>
+            </defs>
+            <rect x="10" y="62" width="110" height="26" rx="6" class="fg-good"/>
+            <text x="65" y="80" text-anchor="middle" class="t-sm">Afferent wide</text>
+            <circle cx="165" cy="75" r="40" class="fg-bad"/>
+            <text x="165" y="72" text-anchor="middle" class="t-sm t-b">High</text>
+            <text x="165" y="88" text-anchor="middle" class="t-sm t-b">pressure</text>
+            <rect x="215" y="68" width="105" height="14" rx="5" class="fg-acc"/>
+            <text x="267" y="104" text-anchor="middle" class="t-sm">Efferent narrow</text>
+            <text x="65" y="108" text-anchor="middle" class="t-sm t-mut">↓ resistance</text>
+            <text x="267" y="62" text-anchor="middle" class="t-sm t-mut">↑ resistance</text>
+            <rect x="40" y="140" width="250" height="28" rx="8" class="fg-box"/>
+            <text x="165" y="159" text-anchor="middle" class="t-sm">↑ single-nephron GFR</text>
+            <line x1="165" y1="168" x2="165" y2="186" class="fg-arrow-bad" marker-end="url(#N2b)"/>
+            <rect x="40" y="188" width="250" height="28" rx="8" class="fg-box"/>
+            <text x="165" y="207" text-anchor="middle" class="t-sm">Proteinuria + RAAS + angiotensin II</text>
+            <line x1="165" y1="216" x2="165" y2="234" class="fg-arrow-bad" marker-end="url(#N2b)"/>
+            <rect x="40" y="236" width="250" height="28" rx="8" class="fg-bad"/>
+            <text x="165" y="255" text-anchor="middle" class="t-sm">Fibrosis → fewer nephrons</text>
+            <path d="M290 250 Q320 200 290 154" class="fg-arrow-acc" fill="none" marker-end="url(#N2a)"/>
+            <text x="165" y="290" text-anchor="middle" class="t-sm t-mut">once half are lost, CKD progresses whatever the cause</text>
+          </svg>
+      - kind: aside
+        page: 25
+        quote: "lost, CKD progresses similarly"
+        tone: exam
+        text: "جملة امتحان: لما **نص النفرونات** يروح، الـ CKD بيكمّل **بنفس الطريقة أيًا كان السبب**. علشان كده علاج الـ hyperfiltration (RAASi و SGLT2i) بينفع مع معظم الأسباب."
+      - kind: table
+        page: 25
+        quote: "40% Cardio- vascular diseases"
+        title: "الـ CKD منتشر قد إيه؟"
+        columns: [Group, CKD]
+        rows:
+          - ["General population", "12–14%"]
+          - ["Diabetes", "40%"]
+          - ["CVD", "40%"]
+          - ["Age ≥ 65", "33%"]
+          - ["Hypertension", "22%"]
+        hide: [[1, 1], [2, 1], [3, 1]]
+      - kind: explain
+        page: 26
+        quote: "Hypertension; diabetes; Cardiovascular disease; AKI/hospitalization history; FH kidney disease; obesity"
+        title: "مين نعمله screening؟"
+        text: |
+          الـ screening بيبقى ==cost-effective== في الناس اللي عندهم risk factor بس:
+
+          - **Hypertension**، **diabetes**، **CVD**
+          - تاريخ **AKI** أو دخول مستشفى، **family history** لمرض كلى، **obesity**
+          - SLE، nephrotoxic drugs، genetic، **preeclampsia**، **low birth weight**
+
+          اعمل **eGFR + ACR**. لو غير طبيعي: استبعد AKI، و**أكّد بعد 3 شهور**، وبعدين stage، cause، risk، treatment.
+      - kind: order
+        page: 26
+        quote: "Figure 2: Screening algorithm for diagnosis and staging of chronic kidney disease (CKD)."
+        prompt: "رتّب خطوات الـ screening:"
+        steps:
+          - "eGFR + ACR in a person at risk"
+          - "Abnormal: exclude AKI"
+          - "Repeat after 3 months"
+          - "Add cystatin C (eGFRcr-cys) if available"
+          - "Stage by G and A"
+          - "Cause, risk, treatment"
+      - kind: table
+        page: 29
+        quote: "GFR threshold for diagnosis of CKD"
+        title: "حد الـ GFR بيتغير مع السن"
+        columns: [Age, GFR threshold]
+        rows:
+          - ["< 40 years", "< 75"]
+          - ["40–65 years", "< 60"]
+          - ["> 65 years", "< 45"]
+        hide: [[0, 1], [2, 1]]
+      - kind: reveal
+        page: 29
+        quote: "Female 60 yrs old 47.1 ml/min/1.73m2"
+        prompt: "شاب عنده 24 سنة وست عندها 60 سنة، الاتنين creatinine 1.3. نفس الكلى؟"
+        answer: "لأ خالص. بالـ CKD-EPI 2021: الشاب **78.7** والست **47.1** (يعني G3a). الـ creatinine لوحده بيخدع: لازم السن والنوع. وعند creatinine 4.5 الأرقام 17.7 مقابل 10.6."
+      - kind: sort
+        page: 28
+        quote: "Anorexia nervosa"
+        prompt: "الـ creatinine هيتغير إزاي بعيد عن الـ GFR؟"
+        bins: ["Creatinine falsely LOW (eGFR too high)", "Creatinine falsely HIGH (eGFR too low)"]
+        cards:
+          - { text: "Above-knee amputation", bin: 0 }
+          - { text: "Anorexia nervosa", bin: 0 }
+          - { text: "Cirrhosis", bin: 0 }
+          - { text: "Vegetarian diet", bin: 0 }
+          - { text: "Body builder", bin: 1 }
+          - { text: "Creatine supplements", bin: 1 }
+          - { text: "Drug that blocks tubular secretion", bin: 1 }
+      - kind: explain
+        page: 30
+        quote: "Factors causing biological variation in urine albumin or urine protein."
+        title: "الـ ACR ممكن يكدب"
+        text: |
+          في البالغين بنقيس ==albuminuria== (ACR)، وفي الأطفال proteinuria.
+
+          **Albumin عالي غلط**: hematuria، menstruation، exercise، UTI.
+
+          **الـ creatinine في البول** هو المقام، فأي حاجة بتغيره بتغير الـ ratio:
+
+          - **ستات** و**وزن قليل** و**AKI** ← creatinine أقل ← ==ACR أعلى==
+          - **رجالة** و**وزن كبير** و**لحمة/رياضة** ← creatinine أكتر ← ACR أقل
+      - kind: aside
+        page: 30
+        quote: "Females have lower creatinine excretion, therefore higher ACR."
+        tone: analogy
+        text: "الـ ACR زي سعر الكيلو: لو الميزان (الـ creatinine) بيقيس أقل من الحقيقة، السعر يطلع أغلى من غير ما البضاعة تتغير. 🧮"
+      - kind: try
+        items: [neph.L02.004, neph.L02.006, neph.L02.013, neph.L02.025, neph.L02.031]
+    recap:
+      - "CKD = abnormality > 3 شهور؛ GFR < 60 أو marker of damage (ACR ≥ 30 mg/g)."
+      - "تصنيف CGA: Cause، GFR، Albuminuria."
+      - "CVD هو السبب الأول لوفاة مريض الـ CKD."
+      - "بعد نص النفرونات: hyperfiltration ← proteinuria ← fibrosis، أيًا كان السبب."
+      - "Screening لمرضى الـ risk؛ أكّد بعد 3 شهور."
+      - "حد الـ GFR بالسن: < 75 تحت 40، < 60 من 40–65، < 45 فوق 65."
+    practice: [neph.L02.001, neph.L02.002, neph.L02.003, neph.L02.004, neph.L02.005, neph.L02.006, neph.L02.007, neph.L02.008, neph.L02.009, neph.L02.010, neph.L02.011, neph.L02.012, neph.L02.013, neph.L02.014, neph.L02.015, neph.L02.016, neph.L02.017, neph.L02.018, neph.L02.019, neph.L02.020, neph.L02.021, neph.L02.022, neph.L02.023, neph.L02.024, neph.L02.025, neph.L02.026, neph.L02.027, neph.L02.028, neph.L02.029, neph.L02.030, neph.L02.031, neph.L02.154, neph.L02.155, neph.L02.156]
+  # ------------------------------------------------------------------
+  - id: neph.L02.lesson2
+    title: "الـ heat map: Stage، متابعة، وسبب"
+    hook: "خانة واحدة في جدول 6 × 3 بتقولك المريض خطره قد إيه، وتشوفه كام مرة في السنة."
+    minutes: 9
+    pages: [31, 36]
+    topics: [staging, chronicity, causes, risk]
+    goals:
+      - "تحط أي مريض في خانته على الـ heat map"
+      - "تعرف كام مرة تتابعه في السنة وإمتى التغيير يقلق"
+      - "تفرق CKD عن AKI وتستخدم الـ KFRE"
+    status: unverified
+    steps:
+      - kind: figure
+        page: 31
+        quote: "CKD heat map"
+        title: "الـ heat map"
+        alt: "A six by three grid. Rows G1 (90 or more), G2 (60 to 89), G3a (45 to 59), G3b (30 to 44), G4 (15 to 29), G5 (under 15). Columns A1 (under 30 mg/g), A2 (30 to 300), A3 (over 300). Cells are coloured green, yellow, orange or red by risk, and each shows how many times a year to monitor."
+        caption: "كل خانة فيها **عدد مرات المتابعة في السنة**. أخضر = low risk (ولو مفيش marker تاني يبقى **مش CKD**)، وكل ما تنزل أو تروح يمين الخطر يزيد."
+        svg: |
+          <svg viewBox="0 0 330 290" xmlns="http://www.w3.org/2000/svg">
+            <text x="135" y="18" text-anchor="middle" class="t-sm t-b">A1</text>
+            <text x="205" y="18" text-anchor="middle" class="t-sm t-b">A2</text>
+            <text x="275" y="18" text-anchor="middle" class="t-sm t-b">A3</text>
+            <text x="135" y="32" text-anchor="middle" class="t-sm t-mut">&lt;30</text>
+            <text x="205" y="32" text-anchor="middle" class="t-sm t-mut">30–300</text>
+            <text x="275" y="32" text-anchor="middle" class="t-sm t-mut">&gt;300</text>
+            <text x="10" y="62" class="t-sm t-b">G1 ≥90</text>
+            <text x="10" y="102" class="t-sm t-b">G2 60–89</text>
+            <text x="10" y="142" class="t-sm t-b">G3a 45–59</text>
+            <text x="10" y="182" class="t-sm t-b">G3b 30–44</text>
+            <text x="10" y="222" class="t-sm t-b">G4 15–29</text>
+            <text x="10" y="262" class="t-sm t-b">G5 &lt;15</text>
+            <rect x="102" y="40" width="66" height="36" rx="5" class="fg-good"/><text x="135" y="63" text-anchor="middle" class="t-sm">1</text>
+            <rect x="172" y="40" width="66" height="36" rx="5" class="fg-acc"/><text x="205" y="63" text-anchor="middle" class="t-sm">1</text>
+            <rect x="242" y="40" width="66" height="36" rx="5" class="fg-bad"/><text x="275" y="63" text-anchor="middle" class="t-sm">3</text>
+            <rect x="102" y="80" width="66" height="36" rx="5" class="fg-good"/><text x="135" y="103" text-anchor="middle" class="t-sm">1</text>
+            <rect x="172" y="80" width="66" height="36" rx="5" class="fg-acc"/><text x="205" y="103" text-anchor="middle" class="t-sm">1</text>
+            <rect x="242" y="80" width="66" height="36" rx="5" class="fg-bad"/><text x="275" y="103" text-anchor="middle" class="t-sm">3</text>
+            <rect x="102" y="120" width="66" height="36" rx="5" class="fg-acc"/><text x="135" y="143" text-anchor="middle" class="t-sm">1</text>
+            <rect x="172" y="120" width="66" height="36" rx="5" class="fg-bad"/><text x="205" y="143" text-anchor="middle" class="t-sm">2</text>
+            <rect x="242" y="120" width="66" height="36" rx="5" class="fg-dot-bad"/><text x="275" y="143" text-anchor="middle" class="t-sm t-b">3</text>
+            <rect x="102" y="160" width="66" height="36" rx="5" class="fg-bad"/><text x="135" y="183" text-anchor="middle" class="t-sm">2</text>
+            <rect x="172" y="160" width="66" height="36" rx="5" class="fg-dot-bad"/><text x="205" y="183" text-anchor="middle" class="t-sm t-b">3</text>
+            <rect x="242" y="160" width="66" height="36" rx="5" class="fg-dot-bad"/><text x="275" y="183" text-anchor="middle" class="t-sm t-b">3</text>
+            <rect x="102" y="200" width="66" height="36" rx="5" class="fg-dot-bad"/><text x="135" y="223" text-anchor="middle" class="t-sm t-b">3</text>
+            <rect x="172" y="200" width="66" height="36" rx="5" class="fg-dot-bad"/><text x="205" y="223" text-anchor="middle" class="t-sm t-b">3</text>
+            <rect x="242" y="200" width="66" height="36" rx="5" class="fg-dot-bad"/><text x="275" y="223" text-anchor="middle" class="t-sm t-b">4+</text>
+            <rect x="102" y="240" width="66" height="36" rx="5" class="fg-dot-bad"/><text x="135" y="263" text-anchor="middle" class="t-sm t-b">4+</text>
+            <rect x="172" y="240" width="66" height="36" rx="5" class="fg-dot-bad"/><text x="205" y="263" text-anchor="middle" class="t-sm t-b">4+</text>
+            <rect x="242" y="240" width="66" height="36" rx="5" class="fg-dot-bad"/><text x="275" y="263" text-anchor="middle" class="t-sm t-b">4+</text>
+          </svg>
+      - kind: aside
+        page: 32
+        quote: "Low risk (if no other markers of kidney disease, no CKD)"
+        tone: trap
+        text: "**G1A1 و G2A1** من غير أي marker تاني = **مش CKD**. ماتكتبش \"CKD stage 2\" لمجرد إن الـ eGFR 75."
+      - kind: table
+        page: 32
+        quote: "2.1. Monitoring/yr for progression of CKD"
+        title: "كام مرة في السنة؟ (Monitoring/yr)"
+        columns: [GFR, A1, A2, A3]
+        rows:
+          - ["G3a", "1", "2", "3"]
+          - ["G3b", "2", "3", "3"]
+          - ["G4", "3", "3", "4+"]
+        hide: [[0, 2], [1, 1], [2, 3]]
+      - kind: explain
+        page: 32
+        quote: "Change in eGFR of >20% on a subsequent test."
+        title: "إمتى التغيير يقلق؟"
+        text: |
+          الأرقام بتتهز طبيعي. اللي يستاهل تقييم:
+
+          - تغيير في الـ eGFR ==> 20%== في التحليل اللي بعده
+          - نزول ==> 30%== بعد ما تبدأ دوا hemodynamically active (زي ACEi/ARB أو SGLT2i)
+          - الـ ACR ==يتضاعف==
+      - kind: check
+        page: 32
+        quote: "GFR reductions of >30% in CKD patients after initiating hemodynamically active therapies."
+        question: "eGFR drops from 50 to 42 (16%) two weeks after starting losartan. Best step?"
+        options:
+          - "Continue losartan and recheck as planned"
+          - "Stop losartan"
+          - "Add an ACE inhibitor"
+          - "Urgent kidney biopsy"
+        answer: 0
+        why:
+          - "صح: أقل من 30% بعد RAASi متوقع (hemodynamic dip)."
+          - "بنوقف كآخر حل، ومش هنا."
+          - "الـ ACEi + ARB ممنوع (1B)."
+          - "مفيش داعي."
+      - kind: explain
+        page: 33
+        quote: "Examination: Uremic facies, scratch marks, bone tenderness, neuropathy."
+        title: "CKD ولا AKI؟"
+        text: |
+          **History**: تحاليل قديمة، أعراض طويلة (fatigue، anorexia، itching، bone pain، 2ry amenorrhea، infertility، polyuria)، risk factors.
+
+          **Exam**: uremic facies، scratch marks، bone tenderness، neuropathy.
+
+          **Investigations**: ==anemia of CKD==، CKD-MBD، و ==small kidneys== بالـ U/S، أو biopsy.
+
+          والـ **chronicity** بتتأكد بتحاليل قديمة، imaging (كلى صغيرة وcortex رفيع)، pathology (fibrosis وatrophy)، أو تكرار التحليل بعد 3 شهور.
+      - kind: sort
+        page: 34
+        quote: "Non-diabetic chronic kidney disease"
+        prompt: "حط كل سبب في الـ compartment بتاعه:"
+        bins: ["Glomerular", "Tubulointerstitial", "Vascular", "Cystic"]
+        cards:
+          - { text: "IgA nephropathy", bin: 0 }
+          - { text: "Membranous nephropathy", bin: 0 }
+          - { text: "Analgesic nephropathy", bin: 1 }
+          - { text: "Chronic obstruction", bin: 1 }
+          - { text: "Lead / aristolochic acid", bin: 1 }
+          - { text: "Renal artery stenosis", bin: 2 }
+          - { text: "Cholesterol emboli", bin: 2 }
+          - { text: "ADPKD", bin: 3 }
+      - kind: mnemonic
+        page: 34
+        quote: "Glomerulosclerosis Tubular atrophy Interstitial fibrosis Vascular sclerosis"
+        word: "GTIV"
+        parts:
+          - { key: "G", text: "Glomerulosclerosis" }
+          - { key: "T", text: "Tubular atrophy" }
+          - { key: "I", text: "Interstitial fibrosis" }
+          - { key: "V", text: "Vascular sclerosis" }
+        hook: "**جي تي آي في**: الكلى المتليّفة اتقفلت زي **TV** قديم. 📺"
+      - kind: explain
+        page: 35
+        quote: "Using the patient's Urine, Sex, Age and GFR, the kidney failure risk equation provides the 2 and 5 year probability"
+        title: "الـ KFRE: احتمال الفشل الكلوي"
+        text: |
+          ==KFRE== بياخد **Urine ACR، Sex، Age، GFR** ويديك احتمال kidney failure بعد **سنتين و5 سنين**.
+
+          - بيتستخدم في **G3–G5**
+          - **ممكن ميبقاش valid في G1–G2**
+          - في IgAN و ADPKD فيه equations خاصة
+      - kind: table
+        page: 36
+        quote: "Transition from an estimated glomerular filtration rate (eGFR)-based to a risk- based approach"
+        title: "من الـ eGFR للـ risk"
+        columns: [Step, eGFR, KF risk]
+        rows:
+          - ["Refer to nephrology", "30–60", "≥ 3–5% / 5 y"]
+          - ["Interprofessional care", "< 30", "≥ 10% / 2 y"]
+          - ["Access + transplant planning", "< 20", "≥ 40% / 2 y"]
+        hide: [[1, 2], [2, 1], [2, 2]]
+      - kind: case
+        page: 36
+        quote: "Transition from an estimated glomerular filtration rate (eGFR)-based to a risk- based approach"
+        stem: "A 55-year-old with diabetes: eGFR 38 and ACR 650 mg/g for 6 months. KFRE: 2-year risk 14%."
+        steps:
+          - question: "Stage?"
+            options: ["G3bA3", "G3aA3", "G4A2", "G3bA2"]
+            answer: 0
+            why: "30–44 = **G3b**، > 300 = **A3**."
+          - question: "Monitoring?"
+            options: ["3 times a year", "Once a year", "Twice a year", "Every 2 years"]
+            answer: 0
+            why: "G3bA3 = **3** مرات."
+          - question: "Care level by risk?"
+            options: ["Interprofessional nephrology care (≥ 10% at 2 y)", "Primary care only", "Start dialysis", "Transplant listing now"]
+            answer: 0
+            why: "الـ risk ≥ 10% في سنتين = interprofessional care حتى لو eGFR فوق 30."
+      - kind: try
+        items: [neph.L02.033, neph.L02.036, neph.L02.037, neph.L02.042, neph.L02.051]
+    recap:
+      - "A1 < 30، A2 30–300، A3 > 300 mg/g؛ G3a 45–59، G3b 30–44، G4 15–29، G5 < 15."
+      - "G1–G2 A1 من غير marker = مش CKD."
+      - "يقلق: eGFR > 20%، > 30% بعد RAASi/SGLT2i، أو ACR يتضاعف."
+      - "Small kidneys، anemia و MBD = chronic."
+      - "Pathology: glomerulosclerosis، tubular atrophy، interstitial fibrosis، vascular sclerosis."
+      - "KFRE (Urine، Sex، Age، GFR) في G3–G5: 3–5%/5y ← nephrology؛ 10%/2y ← team؛ 40%/2y ← access."
+    practice: [neph.L02.032, neph.L02.033, neph.L02.034, neph.L02.035, neph.L02.036, neph.L02.037, neph.L02.038, neph.L02.039, neph.L02.040, neph.L02.041, neph.L02.042, neph.L02.043, neph.L02.044, neph.L02.045, neph.L02.046, neph.L02.047, neph.L02.048, neph.L02.049, neph.L02.050, neph.L02.051, neph.L02.157, neph.L02.158, neph.L02.159, neph.L02.160, neph.L02.161]
+  # ------------------------------------------------------------------
+  - id: neph.L02.lesson3
+    title: "الأعراض، الـ progression، والأكل والصيام"
+    hook: "قبل أي دوا: الملح، البروتين، المية، والصيام. هنا المريض بيسألك وانت لازم تعرف الرقم."
+    minutes: 10
+    pages: [36, 45]
+    topics: [manifestations, progression, lifestyle, ramadan]
+    goals:
+      - "تربط كل جهاز بعلامات الـ CKD بتاعته"
+      - "تعرف الـ predictors of progression"
+      - "تدّي أرقام الملح والبروتين والسعرات والمية، وتقيّم خطر صيام رمضان"
+    status: unverified
+    steps:
+      - kind: match
+        page: 36
+        quote: "Renal Decreased urine output, azotemia, proteinuria, hematuria, hyperuricemia"
+        prompt: "طابق الجهاز بالعلامة:"
+        pairs:
+          - ["Respiratory", "Kussmaul respiration"]
+          - ["Integumentary", "Pruritus, ashen-yellow skin"]
+          - ["Gastrointestinal", "Metallic taste, nausea"]
+          - ["Musculoskeletal", "Renal osteodystrophy, fractures"]
+          - ["Neurological", "Restless legs, neuropathy"]
+      - kind: explain
+        page: 37
+        quote: "Level of albuminuria Acidosis"
+        title: "إيه اللي بيسرّع الـ CKD؟"
+        text: |
+          **مش بإيدك**: السبب، مستوى الـ GFR، مستوى الـ ==albuminuria==، السن، النوع، العرق، low birth weight.
+
+          **بإيدك**: الضغط العالي، السكر، الدهون، الـ ==acidosis==، التدخين، السمنة، الـ nephrotoxic agents، الأنيميا.
+
+          والمحاضرة حاطة كلمة كبيرة في آخر القايمة: ==FASTING==.
+      - kind: aside
+        page: 37
+        quote: "Anemia FASTING"
+        tone: exam
+        text: "لما تكتب predictors of progression في مصر، **الصيام** (fasting) في القايمة. افتكره، وهنرجعله كمان شوية مع جدول رمضان."
+      - kind: explain
+        page: 39
+        quote: "moderate-intensity physical activity for a cumulative duration of at least 150 minutes per week"
+        title: "Lifestyle"
+        text: |
+          - رياضة متوسطة ==150 دقيقة في الأسبوع== (أو على قد ما قلبه وجسمه يستحمل)، وبلاش قعدة طول اليوم
+          - **BMI** مظبوط، **بلاش تدخين**، نوم كفاية وعلاج الـ sleep apnea
+          - أكل **plant-based** أكتر، و**ultra-processed** أقل
+          - صوديوم أقل من ==2 g/day==، إلا في الـ sodium-wasting nephropathy
+      - kind: aside
+        page: 40
+        quote: "than 400 mg sodium"
+        tone: tip
+        text: "قول للمريض: اقرا الـ label، وأي حاجة فيها **أكتر من 400 mg sodium** في الحصة سيبها. واستخدم **الليمون والخل والشطة** بدل الملح. 🍋"
+      - kind: table
+        page: 41
+        quote: "We suggest maintaining a protein intake of 0.8 g/kg/day in adults with CKD G3–G5 (2C)."
+        title: "البروتين بالأرقام"
+        columns: [Situation, Protein]
+        rows:
+          - ["CKD G3–G5 (KDIGO, 2C)", "0.8 g/kg/day"]
+          - ["Avoid if at risk of progression", "> 1.3 g/kg/day"]
+          - ["Low-protein diet (KDOQI 2020)", "0.55–0.60 g/kg/day"]
+          - ["Very low-protein + keto acids", "0.28–0.43 g/kg/day"]
+          - ["Sarcopenia, cachexia, undernutrition", "Do not restrict"]
+        hide: [[0, 1], [1, 1], [4, 1]]
+      - kind: check
+        page: 42
+        quote: "Metabolically unstable or during periods of metabolic instability including:"
+        question: "In which patient is a low-protein diet acceptable?"
+        options:
+          - "Stable CKD G4 outpatient, motivated, under dietitian follow-up"
+          - "Admitted with pneumonia"
+          - "Three days after a hip operation"
+          - "HbA1c 11% with weight loss"
+        answer: 0
+        why:
+          - "صح: metabolically stable وتحت متابعة."
+          - "Active infection = unstable."
+          - "Early postoperative = unstable."
+          - "Poorly controlled diabetes = unstable."
+      - kind: aside
+        page: 41
+        quote: "Should only be part of very low protein diet Poor compliance Controversial value"
+        tone: trap
+        text: "الـ **keto-analogues** لوحدها مش علاج: بتتدّي **بس مع very low-protein diet**، والـ compliance وحش، وقيمتها **controversial**."
+      - kind: reveal
+        page: 42
+        quote: "Higher total protein intake was associated with lower mortality among participants with CKD"
+        prompt: "دراسة على 4789 مريض CKD (stage 1–3) فوق 60 سنة: البروتين الأعلى عمل إيه في الوفيات؟"
+        answer: "الوفيات **أقل** مع بروتين أعلى: HR **0.79** لـ 1.2 مقابل 0.8 g/kg، و**0.73** لـ 1.4. والـ plant زي الـ animal. يعني في الكبار مع CKD خفيف، فايدة البروتين ممكن تغلب ضرره."
+      - kind: explain
+        page: 44
+        quote: "Drink enough water based on thirst (maintain euvolemia)."
+        title: "السعرات والمية"
+        text: |
+          **سعرات**: ==30–35 kcal/kg/day==.
+
+          **المية**:
+
+          - اشرب على قد **العطش** (euvolemia)
+          - أكتر في الـ **stones** المتكررة، وممكن في الـ ADPKD
+          - مفيش فايدة واضحة لزيادة المية في وقف الـ progression
+          - أكتر من ==1.5 L/day== questionable، وممكن تسرّع الـ progression
+          - في الـ advanced CKD ممكن نحتاج نقلّل
+      - kind: table
+        page: 45
+        quote: "Fasting in Ramadan Risk Table and Recommendations Summary"
+        title: "صيام رمضان"
+        columns: [Risk, Who, Advice]
+        rows:
+          - ["Very high", "G4–5, dialysis, transplant, pregnancy, G3–5 + CVD", "Do not fast"]
+          - ["High", "G3 (30–60), electrolyte problem, dehydration risk", "Should not fast"]
+          - ["Lower", "G1–2 stable; stone or UTI prone", "Creatinine after 5 days if insists"]
+        hide: [[0, 2], [1, 1], [2, 2]]
+      - kind: case
+        page: 45
+        quote: "if insists measure creatinine after 5 days of fasting"
+        stem: "Before Ramadan: a 40-year-old with CKD G2 (eGFR 70), stable for years, on no RAASi, asks if he can fast."
+        steps:
+          - question: "Risk group?"
+            options: ["Lower risk", "Very high", "High", "Absolute contraindication"]
+            answer: 0
+            why: "G1–2 مستقر = **lower** risk."
+          - question: "If he insists on fasting?"
+            options: ["Check creatinine after 5 days of fasting", "Forbid fasting", "Stop all drugs", "Dialysis plan"]
+            answer: 0
+            why: "**creatinine بعد 5 أيام** صيام."
+          - question: "Same question from a G4 patient (eGFR 22)?"
+            options: ["Very high risk: should not fast", "Lower risk", "Fast with water allowed", "No difference"]
+            answer: 0
+            why: "G4–5 = **very high** risk."
+      - kind: try
+        items: [neph.L02.052, neph.L02.056, neph.L02.064, neph.L02.071, neph.L02.074]
+    recap:
+      - "Kussmaul = acidosis؛ pruritus، metallic taste، osteodystrophy، neuropathy."
+      - "Progression: GFR، albuminuria، BP، السكر، acidosis، تدخين، سمنة، nephrotoxins، أنيميا، وصيام."
+      - "رياضة 150 دقيقة/أسبوع؛ صوديوم < 2 g/day."
+      - "بروتين 0.8 g/kg في G3–G5، مش > 1.3، ومفيش تقليل في الـ sarcopenia."
+      - "سعرات 30–35 kcal/kg؛ مية على العطش، > 1.5 L مش مفيد."
+      - "رمضان: G4–5 لأ؛ G3 لأ؛ G1–2 مستقر: creatinine بعد 5 أيام."
+    practice: [neph.L02.052, neph.L02.053, neph.L02.054, neph.L02.055, neph.L02.056, neph.L02.057, neph.L02.058, neph.L02.059, neph.L02.060, neph.L02.061, neph.L02.062, neph.L02.063, neph.L02.064, neph.L02.065, neph.L02.066, neph.L02.067, neph.L02.068, neph.L02.069, neph.L02.070, neph.L02.071, neph.L02.072, neph.L02.073, neph.L02.074, neph.L02.075, neph.L02.076, neph.L02.162, neph.L02.163]
+  # ------------------------------------------------------------------
+  - id: neph.L02.lesson4
+    title: "الضغط، الـ RAASi، والـ SGLT2i"
+    hook: "دوايين بيقفلوا حنفية الضغط من الناحيتين، ومع بعض بيأخروا الغسيل حوالي 15 سنة."
+    minutes: 10
+    pages: [45, 53]
+    topics: [bp, raasi, sglt2i]
+    goals:
+      - "تعرف هدف الضغط في الـ CKD"
+      - "تعرف مين ياخد RAASi وإمتى توقفه"
+      - "تعرف مؤشرات الـ SGLT2i وإزاي تتعامل مع الـ eGFR dip"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 45
+        quote: "Target systolic blood pressure (SBP) of <120 mm Hg, when tolerated, using standardized office BP measurement."
+        title: "هدف الضغط"
+        text: |
+          KDIGO: ==SBP < 120 mmHg== لو المريض مستحمل، بقياس **standardized office BP**.
+
+          وخفف الهدف في: **frailty**، خطر **وقوع**، **life expectancy** قصير، أو **postural hypotension** بأعراض.
+
+          الـ ESH 2023 (الـ general population): < 130/80 من 18–64 سنة، و< 140/80 من 65–79.
+      - kind: update
+        page: 46
+        quote: "Office BP targets in the general adult hypertensive population"
+        text: "الـ **ESH 2023** بيقترح < 130/80 لمعظم مرضى الـ CKD، والـ **KDIGO 2024** لسه < 120 systolic لو مستحمل. في الامتحان اكتب رقم الكتاب: **< 120**."
+        ref: "KDIGO CKD guideline 2024; ESH hypertension guideline 2023"
+      - kind: table
+        page: 47
+        quote: "Indication RAASi in CKD CKD (G1–G4)"
+        title: "مين ياخد RAASi؟ (G1–G4)"
+        columns: [ACR, Diabetes, No diabetes]
+        rows:
+          - ["A1", "Consider", "Consider"]
+          - ["A2", "1B recommend", "2C suggest"]
+          - ["A3", "1B recommend", "1B recommend"]
+        hide: [[1, 1], [1, 2], [2, 2]]
+      - kind: explain
+        page: 48
+        quote: "Highest approved dose tolerated to achieve the benefits Continue even when the eGFR falls below 30 ml/min per 1.73 m2."
+        title: "قواعد الـ RAASi"
+        text: |
+          - ==ممنوع== أي combination من ACEi + ARB + DRI (1B)
+          - **أعلى dose** المريض يستحمله، و**كمّل** حتى لو الـ eGFR نزل تحت 30
+          - قلّل أو وقّف بس في: **hypotension** بأعراض، **hyperkalemia** مش متحكم فيها، أو لتقليل الـ **uremic symptoms** وهو eGFR < 15
+      - kind: figure
+        page: 48
+        quote: "Correct volume depletion"
+        title: "بعد ما تبدأ ACEi/ARB"
+        alt: "Flowchart. Start ACEi or ARB. Three branches: normokalemia with creatinine rise under 30 percent leads to increase or continue the dose; hyperkalemia leads to review drugs, moderate potassium intake, diuretics, bicarbonate and cation exchangers; creatinine rise over 30 percent leads to look for AKI causes, volume, NSAIDs and renal artery stenosis. Bottom: reduce or stop only as a last resort."
+        caption: "الـ creatinine يعلى **أقل من 30%** = عادي، كمّل. **أكتر من 30%** = دوّر على سبب AKI. والإيقاف **آخر حل**."
+        svg: |
+          <svg viewBox="0 0 330 270" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="N2c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="105" y="8" width="120" height="28" rx="8" class="fg-ink"/>
+            <text x="165" y="27" text-anchor="middle" class="t-b">ACEi / ARB</text>
+            <line x1="130" y1="36" x2="55" y2="70" class="fg-arrow" marker-end="url(#N2c)"/>
+            <line x1="165" y1="36" x2="165" y2="70" class="fg-arrow" marker-end="url(#N2c)"/>
+            <line x1="200" y1="36" x2="275" y2="70" class="fg-arrow" marker-end="url(#N2c)"/>
+            <rect x="5" y="72" width="100" height="40" rx="6" class="fg-good"/>
+            <text x="55" y="89" text-anchor="middle" class="t-sm">Normal K</text>
+            <text x="55" y="105" text-anchor="middle" class="t-sm">Cr ↑ &lt; 30%</text>
+            <rect x="115" y="72" width="100" height="40" rx="6" class="fg-acc"/>
+            <text x="165" y="96" text-anchor="middle" class="t-sm">High K</text>
+            <rect x="225" y="72" width="100" height="40" rx="6" class="fg-bad"/>
+            <text x="275" y="96" text-anchor="middle" class="t-sm">Cr ↑ &gt; 30%</text>
+            <text x="55" y="135" text-anchor="middle" class="t-sm">↑ dose or</text>
+            <text x="55" y="151" text-anchor="middle" class="t-sm">keep max</text>
+            <text x="165" y="135" text-anchor="middle" class="t-sm">Review drugs</text>
+            <text x="165" y="151" text-anchor="middle" class="t-sm">Less dietary K</text>
+            <text x="165" y="167" text-anchor="middle" class="t-sm">Diuretic, HCO3</text>
+            <text x="165" y="183" text-anchor="middle" class="t-sm">K binder</text>
+            <text x="275" y="135" text-anchor="middle" class="t-sm">AKI causes?</text>
+            <text x="275" y="151" text-anchor="middle" class="t-sm">Volume, NSAIDs</text>
+            <text x="275" y="167" text-anchor="middle" class="t-sm">Renal artery</text>
+            <text x="275" y="183" text-anchor="middle" class="t-sm">stenosis?</text>
+            <rect x="45" y="215" width="240" height="32" rx="8" class="fg-thin"/>
+            <text x="165" y="236" text-anchor="middle" class="t-sm t-b">Reduce / stop = last resort</text>
+          </svg>
+      - kind: table
+        page: 49
+        quote: "Indication SGLT2i in CKD"
+        title: "مين ياخد SGLT2i؟"
+        columns: [Patient, Strength]
+        rows:
+          - ["T2D + CKD, eGFR ≥ 20", "1A recommend"]
+          - ["No diabetes, ACR ≥ 200", "1A recommend"]
+          - ["No diabetes, eGFR 20–45, ACR < 200", "2B suggest"]
+          - ["Heart failure", "1A recommend"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: figure
+        page: 51
+        quote: "Afferent constriction"
+        title: "الحنفية من الناحيتين"
+        alt: "A glomerulus with an afferent arteriole on the left and an efferent arteriole on the right. An SGLT2i label points to the afferent side: constriction. A RAASi label points to the efferent side: dilation. Both lower the pressure inside the glomerulus."
+        caption: "الـ **SGLT2i** بيضيّق الـ **afferent** (الداخل)، والـ **RAASi** بيوسّع الـ **efferent** (الخارج). الاتنين بيقللوا الضغط جوه الـ glomerulus، ومع بعض بيأخروا الـ ESKD حوالي **15 سنة**."
+        svg: |
+          <svg viewBox="0 0 330 200" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="88" width="100" height="10" rx="4" class="fg-good"/>
+            <text x="60" y="80" text-anchor="middle" class="t-sm t-b">Afferent</text>
+            <text x="60" y="122" text-anchor="middle" class="t-sm t-good">SGLT2i: constrict</text>
+            <circle cx="165" cy="93" r="40" class="fg-acc"/>
+            <text x="165" y="89" text-anchor="middle" class="t-sm">↓ glomerular</text>
+            <text x="165" y="104" text-anchor="middle" class="t-sm">pressure</text>
+            <rect x="215" y="80" width="105" height="26" rx="6" class="fg-good"/>
+            <text x="267" y="72" text-anchor="middle" class="t-sm t-b">Efferent</text>
+            <text x="267" y="128" text-anchor="middle" class="t-sm t-good">RAASi: dilate</text>
+            <rect x="40" y="152" width="250" height="34" rx="8" class="fg-thin"/>
+            <text x="165" y="174" text-anchor="middle" class="t-sm t-b">Together: ESKD delayed ≈ 15 years</text>
+          </svg>
+      - kind: aside
+        page: 50
+        quote: "the reversible decrease in eGFR on initiation is generally not an indication to discontinue therapy."
+        tone: trap
+        text: "الـ eGFR بينزل شوية أول ما تبدأ SGLT2i (dip). ده **مش** سبب توقفه، ومش محتاج تغيّر مواعيد المتابعة. ده دليل إن الضغط جوه الـ glomerulus نزل. ✅"
+      - kind: check
+        page: 49
+        quote: "Continue SGLT2i even if the eGFR falls below 20 ml/min per 1.73 m2, unless it is not tolerated or KRT is initiated."
+        question: "A patient on empagliflozin now has eGFR 17, tolerating it, not on dialysis. What now?"
+        options:
+          - "Continue it until KRT is started"
+          - "Stop it: eGFR below 20"
+          - "Switch to metformin"
+          - "Halve the dose"
+        answer: 0
+        why:
+          - "صح: كمّل تحت 20 لحد ما يبدأ KRT أو ميستحملش."
+          - "الـ 20 حد **البدء** بس، مش الإيقاف."
+          - "الـ metformin يتوقف تحت 30."
+          - "الـ dose ثابتة (10 mg)."
+      - kind: mnemonic
+        page: 49
+        quote: "Reasonable to withhold SGLT2i during times of prolonged fasting, surgery, or critical medical illness"
+        word: "FSC"
+        parts:
+          - { key: "F", text: "Fasting (prolonged)" }
+          - { key: "S", text: "Surgery" }
+          - { key: "C", text: "Critical illness" }
+        hook: "**F-S-C**: صيام، عملية، أو مرض شديد؟ الـ SGLT2i يقعد على الدكة لحد ما الأزمة تعدي، علشان خطر الـ ketosis. ⚽"
+      - kind: table
+        page: 53
+        quote: "Reduce dose Discontinue"
+        title: "أدوية السكر مع الـ eGFR"
+        columns: [Drug, Rule]
+        rows:
+          - ["Metformin", "Reduce < 45; stop < 30 and on dialysis"]
+          - ["SGLT2i", "Do not start < 20; stop on dialysis"]
+          - ["Add-on", "GLP-1 RA preferred"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: case
+        page: 47
+        quote: "Indication RAASi in CKD CKD (G1–G4)"
+        stem: "A 62-year-old with type 2 diabetes: eGFR 41, ACR 520 mg/g, BP 146/88, on metformin 2 g and amlodipine."
+        steps:
+          - question: "First kidney-protective drug?"
+            options: ["ACEi or ARB at max tolerated dose", "ACEi + ARB", "Aliskiren + ARB", "Beta-blocker"]
+            answer: 0
+            why: "Diabetes + A3 = RAASi 1B، وممنوع الـ dual blockade."
+          - question: "Add?"
+            options: ["SGLT2i (eGFR ≥ 20)", "Sulfonylurea", "Nothing", "NSAID"]
+            answer: 0
+            why: "T2D + CKD + eGFR ≥ 20 = SGLT2i (1A)."
+          - question: "Metformin?"
+            options: ["Reduce the dose (eGFR 30–44)", "Stop now", "Keep 2 g", "Increase"]
+            answer: 0
+            why: "تحت 45 قلّل، تحت 30 وقّف."
+          - question: "Creatinine rises 18% at 2 weeks?"
+            options: ["Continue both and recheck", "Stop both", "Stop the SGLT2i", "Refer for biopsy"]
+            answer: 0
+            why: "أقل من 30% = hemodynamic dip متوقع."
+      - kind: try
+        items: [neph.L02.077, neph.L02.082, neph.L02.084, neph.L02.088, neph.L02.092]
+    recap:
+      - "SBP < 120 لو مستحمل؛ أقل تشدد في الـ frailty والوقوع."
+      - "RAASi: A3 أو A2 + diabetes = 1B؛ A2 من غير diabetes = 2C."
+      - "ممنوع ACEi + ARB + DRI؛ كمّل تحت eGFR 30؛ Cr ↑ > 30% = دوّر على AKI."
+      - "SGLT2i: T2D، ACR ≥ 200، HF (1A)؛ 20–45 + ACR < 200 (2B)؛ ابدأ ≥ 20 وكمّل لحد KRT."
+      - "وقّف SGLT2i في الصيام والعمليات والمرض الشديد."
+      - "Metformin: قلّل < 45، وقّف < 30."
+    practice: [neph.L02.077, neph.L02.078, neph.L02.079, neph.L02.080, neph.L02.081, neph.L02.082, neph.L02.083, neph.L02.084, neph.L02.085, neph.L02.086, neph.L02.087, neph.L02.088, neph.L02.089, neph.L02.090, neph.L02.091, neph.L02.092, neph.L02.093, neph.L02.094, neph.L02.095, neph.L02.096, neph.L02.097, neph.L02.164, neph.L02.165, neph.L02.166, neph.L02.167, neph.L02.169, neph.L02.181, neph.L02.183]
+  # ------------------------------------------------------------------
+  - id: neph.L02.lesson5
+    title: "الحموضة، البوتاسيوم، اليوريك، والأدوية"
+    hook: "مريض الـ CKD بيتأذي من حاجات صغيرة: بيكربونات واطية، بوتاسيوم في أكل جاهز، أو مسكّن من الصيدلية."
+    minutes: 10
+    pages: [53, 62]
+    topics: [acidosis, potassium, uric-acid, cvd, drugs]
+    goals:
+      - "تعرف هدف البيكربونات وخطوات علاج الـ hyperkalemia"
+      - "تعرف مين يتعالج من الـ hyperuricemia وبإيه"
+      - "تختار البديل الآمن للأدوية الـ nephrotoxic وتطبق الـ sick-day rules"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 53
+        quote: "Aim for serum bicarbonate > 22 mmol/L. Decreases progression and improves nitrogen balance."
+        title: "الـ metabolic acidosis"
+        text: |
+          الحموضة نفسها بتليّف الكلى (ammonium و endothelin و RAS ← ==tubulointerstitial fibrosis==) وبتكسّر العضلات.
+
+          - امنع الـ severe acidosis: ==bicarbonate < 16==
+          - علشان تبطّأ الـ progression: **sodium bicarbonate** وهدف ==> 22 mmol/L==
+          - راقب إن العلاج مايعليش الـ HCO3 فوق الطبيعي، ومايبوّظش الضغط أو الـ K أو الـ fluid status
+      - kind: order
+        page: 54
+        quote: "Consider loop diuretics and"
+        prompt: "K 5.9 في CKD: رتّب الخطوات زي الكتاب:"
+        steps:
+          - "Optimize bicarbonate and glucose control"
+          - "Loop diuretic and SGLT2i as adjuncts"
+          - "Assess dietary K (dietitian)"
+          - "Adjust or stop K-raising drugs, licensed binder"
+          - "Plan to restart RAASi/MRA later"
+      - kind: table
+        page: 55
+        quote: "Potassium absorption rates of plant-based, animal-based, and processed foods."
+        title: "البوتاسيوم اللي بيتمص فعلًا"
+        columns: [Food, Absorbed]
+        rows:
+          - ["Plant-based", "50–60%"]
+          - ["Animal-based", "70–90%"]
+          - ["Processed (K salts)", "90%"]
+        hide: [[0, 1], [2, 1]]
+      - kind: aside
+        page: 55
+        quote: "Potassium absorption"
+        tone: tip
+        text: "متمنعش الخضار والفاكهة على طول: الـ K فيها **بيتمص أقل** وهي **alkalizing**. الأولى تشيل **الأكل المصنّع** و**بدائل الملح** (potassium salts) اللي بتتمص **90%**. 🥦"
+      - kind: sort
+        page: 55
+        quote: "Recommend people with CKD and symptomatic hyperuricemia should be offered uric acid-lowering intervention (1C)."
+        prompt: "علاج خافض لليوريك ولا لأ؟"
+        bins: ["Offer urate-lowering", "Do not treat to slow CKD"]
+        cards:
+          - { text: "Recurrent gout attacks", bin: 0 }
+          - { text: "First gout attack, urate 9.5 mg/dL", bin: 0 }
+          - { text: "Tophaceous gout", bin: 0 }
+          - { text: "Asymptomatic urate 8.5, no gout", bin: 1 }
+          - { text: "Asymptomatic urate 10, wish to slow CKD", bin: 1 }
+      - kind: explain
+        page: 56
+        quote: "Acute gout flare in a patient with CKD"
+        title: "النقرس في الـ CKD"
+        text: |
+          **الحاد**: ==colchicine== 1.2 mg وبعده 0.6 mg بعد ساعة، أو **prednisone 30 mg** مع taper على 10–14 يوم، أو intra-articular لو مفاصل قليلة. لو فشل: anakinra أو canakinumab. **مش NSAIDs**.
+
+          **المزمن**: ==XOI== أحسن من الـ uricosurics.
+
+          - **Allopurinol**: ابدأ **50 mg** وزوّد بالراحة لحد 800 mg
+          - قبله اعمل **HLA-B*5801 testing** للآسيويين والأفارقة
+          - **Febuxostat**: 20–40 لحد 120
+          - الهدف: ==SU < 6 mg/dL==
+          - فشل؟ **pegloticase + methotrexate** لو الـ eGFR فوق 40
+          - أو **pegloticase + mycophenolate** لو الـ eGFR تحت 40
+      - kind: aside
+        page: 57
+        quote: "GOUT DIETARY AND LIFESTYLE GUIDELINES"
+        tone: joke
+        text: "الكبدة والكلاوي والممبار والبيرة والعصير المحلّى… قايمة عزومة العيد هي نفسها قايمة **ممنوعات النقرس**. 😅 والمسموح: خضار، بقوليات، ألبان قليلة الدسم، مية كتير."
+      - kind: explain
+        page: 58
+        quote: "Recommend oral low-dose aspirin for prevention of recurrent ischemic cardiovascular disease events (i.e., secondary prevention)"
+        title: "القلب والدهون"
+        text: |
+          - احسب **10-year CV risk** بأداة validated
+          - **Mediterranean-style** diet مع العلاج
+          - ==Aspirin== low-dose للـ **secondary prevention** بس (1C)
+          - **LDL**: ==< 1.8 mmol/L (70 mg/dL)== في الـ high risk، وأقل من **1.4 mmol/L (55 mg/dL)** في الـ very high risk
+          - Statin: كل CKD + diabetes من 18 سنة، وكل CKD فوق 50
+      - kind: table
+        page: 59
+        quote: "Key examples of common medications with documented nephrotoxicity"
+        title: "الدوا الضار وبديله"
+        columns: [Nephrotoxic, Alternative]
+        rows:
+          - ["NSAIDs", "Acetaminophen"]
+          - ["Aminoglycosides", "Cephalosporins, carbapenems"]
+          - ["Vancomycin", "Linezolid, daptomycin"]
+          - ["PPIs", "H2-receptor antagonists"]
+          - ["Warfarin", "NOACs"]
+          - ["Lithium", "Aripiprazole, lamotrigine, quetiapine, valproate"]
+        hide: [[0, 1], [3, 1], [4, 1]]
+      - kind: explain
+        page: 61
+        quote: "Consider planned discontinuation of medications (such as metformin, ACEi, ARBs, diuretics and SGLT2i) in the 48–72 hours prior to elective surgery"
+        title: "الـ sick-day rules والعمليات"
+        text: |
+          المريض **يعرف** إنه عنده dehydrating illness ← **يفتكر** قايمة الأدوية ← **يوقفها** ← لما يخف **يرجّعها**.
+
+          قبل عملية elective بـ ==48–72 ساعة==: وقّف **metformin، ACEi، ARB، diuretics، SGLT2i**. ودايمًا اكتب ==إمتى يرجّعها==.
+
+
+          - ACEi/ARB ← hypotension، AKI
+          - Diuretics ← volume depletion، AKI
+          - SGLT2i ← ketoacidosis
+          - NSAIDs ← AKI، AIN
+      - kind: reveal
+        page: 61
+        quote: "American Colleague of Radiology group II and III Gadolinium- Based Contrast agents if GFR <30 ml/min per 1.73 m2"
+        prompt: "مريض eGFR 24 محتاج MRI بصبغة، ومريض تاني eGFR 40 + diabetes محتاج CT بصبغة. تعمل إيه؟"
+        answer: "الـ **MRI**: استخدم gadolinium من **ACR group II أو III** (GFR < 30). الـ **CT**: eGFR 30–44 + risk factor = **high risk** للـ contrast AKI: شوف بديل، وقّف الـ diuretics والـ nephrotoxins، **isotonic saline** (لو مفيش overload)، و**أقل dose** صبغة."
+      - kind: check
+        page: 59
+        quote: "Proton pump inhibitors: may result in AKI and CKD due to tubulointerstitial nephritis"
+        question: "A CKD G3 patient on omeprazole for years has slowly rising creatinine and sterile pyuria. Best change?"
+        options:
+          - "Switch to an H2-receptor antagonist"
+          - "Double the omeprazole"
+          - "Add ibuprofen for the pain"
+          - "Start lithium"
+        answer: 0
+        why:
+          - "صح: الـ PPI ممكن يعمل AIN/TIN، وبديله في الجدول H2RA."
+          - "هيزوّد المشكلة."
+          - "NSAID = nephrotoxic."
+          - "Lithium = nephrotoxic."
+      - kind: try
+        items: [neph.L02.100, neph.L02.102, neph.L02.106, neph.L02.122, neph.L02.126]
+    recap:
+      - "HCO3: امنع < 16؛ اهدف > 22 علشان الـ progression."
+      - "Hyperkalemia: correctable factors ← diet ← drugs/binders، ورجّع الـ RAASi بعدين."
+      - "K بيتمص: plant 50–60%، animal 70–90%، processed 90%."
+      - "Urate-lowering للـ symptomatic بس (XOI)؛ مش للـ asymptomatic (2D)؛ هدف < 6."
+      - "Acute gout: colchicine أو steroids، مش NSAIDs."
+      - "Aspirin secondary prevention؛ LDL < 1.8 / < 1.4."
+      - "وقّف metformin و ACEi/ARB و diuretics و SGLT2i قبل العملية بـ 48–72 ساعة؛ gadolinium group II/III لو GFR < 30."
+    practice: [neph.L02.098, neph.L02.099, neph.L02.100, neph.L02.101, neph.L02.102, neph.L02.103, neph.L02.104, neph.L02.105, neph.L02.106, neph.L02.107, neph.L02.108, neph.L02.109, neph.L02.110, neph.L02.111, neph.L02.112, neph.L02.113, neph.L02.114, neph.L02.115, neph.L02.116, neph.L02.117, neph.L02.118, neph.L02.119, neph.L02.120, neph.L02.121, neph.L02.122, neph.L02.123, neph.L02.124, neph.L02.125, neph.L02.126, neph.L02.127, neph.L02.128, neph.L02.129, neph.L02.130, neph.L02.131, neph.L02.168, neph.L02.170, neph.L02.171, neph.L02.172, neph.L02.173, neph.L02.174, neph.L02.175, neph.L02.176, neph.L02.177, neph.L02.184, neph.L02.185]
+  # ------------------------------------------------------------------
+  - id: neph.L02.lesson6
+    title: "التحويل، الغسيل، الأنيميا، والعظم"
+    hook: "إمتى تحوّل للنفرولوجي، وإمتى تجهّز fistula، وليه الهيموجلوبين 'الطبيعي' مش هدف."
+    minutes: 9
+    pages: [62, 67]
+    topics: [referral, advanced, anemia, mbd]
+    goals:
+      - "تعرف دواعي التحويل للنفرولوجي"
+      - "تعرف دواعي بدء الغسيل وإمتى تخطط للزرع والـ access"
+      - "تشخّص وتعالج أنيميا الـ CKD وتعرف قواعد الـ CKD-MBD"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 62
+        quote: "Nephrology Referral"
+        title: "Nephrology referral: حوّل لو…"
+        text: |
+          - السبب **مش واضح**، **hereditary**، أو **stones** متكررة كتير
+          - ==GFR < 30==
+          - نزول مستمر أكتر من 20%، أو أكتر من 30% بعد دوا hemodynamic
+          - **KFRE** 5 سنين ≥ 3–5%
+          - ACR ≥ 300 مع **hematuria**، أو ==ACR > 700== ثابت، أو الـ albuminuria اتضاعفت
+          - RBC casts أو **RBC > 20/HPF** من غير تفسير
+          - ضغط مش بيتظبط على ==≥ 4 أدوية==
+          - مشكلة **K** مستمرة
+      - kind: check
+        page: 62
+        quote: "Nephrology Referral"
+        question: "Which patient needs nephrology referral now?"
+        options:
+          - "eGFR 52, ACR 320 mg/g with RBC 25/HPF"
+          - "eGFR 70, ACR 40 mg/g, stable"
+          - "eGFR 55, stable for 3 years, ACR 15"
+          - "BP controlled on two drugs, eGFR 65"
+        answer: 0
+        why:
+          - "صح: ACR ≥ 300 مع hematuria."
+          - "G2A2 مستقر: primary care."
+          - "G3aA1 مستقر: primary care."
+          - "مفيش criterion."
+      - kind: explain
+        page: 63
+        quote: "Based on a composite assessment of person‘s symptoms, quality of life, patient preferences, level of GFR, and laboratory abnormalities."
+        title: "G4–G5 والغسيل"
+        text: |
+          في G4–G5: اسأل عن الـ **uremic symptoms** كل زيارة، واعمل **malnutrition screen مرتين في السنة**. أشهر عَرَض: **fatigue (70%)**.
+
+          قرار الغسيل ==composite==: أعراض، quality of life، رأي المريض، الـ GFR، والتحاليل. غالبًا الـ indications بتظهر عند ==GFR 5–10==.
+
+          وخطط للـ **pre-emptive transplant** أو الـ **access** لما ==GFR < 20== أو KRT risk > 40% في سنتين.
+      - kind: mnemonic
+        page: 64
+        quote: "Inability to control volume status or blood pressure."
+        word: "SVN"
+        parts:
+          - { key: "S", text: "Symptoms or signs of uremia: neuro, pericarditis/serositis, anorexia, intractable pruritus, resistant acid-base or electrolyte problems" }
+          - { key: "V", text: "Volume or blood pressure that cannot be controlled" }
+          - { key: "N", text: "Nutrition deteriorating despite diet, or cognitive impairment" }
+        hook: "دواعي الغسيل **S-V-N** = **Seven**: الساعة 7 تبدأ الجلسة. ⏰"
+      - kind: table
+        page: 64
+        quote: "Screen annually if GFR 30-60, twice annually if GFR < 30"
+        title: "أنيميا الـ CKD بالأرقام"
+        columns: [Point, Number]
+        rows:
+          - ["Screen if GFR 30–60", "Once a year"]
+          - ["Screen if GFR < 30", "Twice a year"]
+          - ["Diagnose: men", "Hb < 13 g/dL"]
+          - ["Diagnose: women", "Hb < 12 g/dL"]
+          - ["Maintain on treatment", "< 11.5 or < 12; 10–11 if high risk"]
+        hide: [[1, 1], [2, 1], [4, 1]]
+      - kind: aside
+        page: 64
+        quote: "Maintain Hemoglobin <11.5 or < 12 g/dL, 10-11 g/dL if high risk"
+        tone: trap
+        text: "الهدف **مش** تطلّع الـ Hb للطبيعي. مع الـ ESA خليه **تحت 11.5–12**، والـ high risk **10–11**. الـ Hb العالي بالـ ESA مش أحسن للمريض."
+      - kind: explain
+        page: 64
+        quote: "Erythropoiesis stimulating agents (ESAs) HIF stabilizers"
+        title: "قبل الـ ESA"
+        text: |
+          استبعد الأول: **inflammation** (CRP، IL-6)، **blood loss** (منظار)، **haemolysis**، مرض **دم**، **folate/B12**، الـ PTH.
+
+          وشوف الـ **iron**: ferritin، TSAT، % hypochromic RBCs، reticulocyte Hb، وعوّض.
+
+          بعدين ==ESA== أو ==HIF stabilizer== (oral):
+
+          - **Epoetin**: 2000–3000 U، من 2 لـ 3 مرات في الأسبوع
+          - **Darbepoetin**: 30 µg كل أسبوع، أو 60 µg كل أسبوعين
+          - **Pegylated epoetin beta**: 60 µg كل أسبوعين أو 120 µg كل 4 أسابيع
+      - kind: table
+        page: 65
+        quote: "High PTH"
+        title: "عظم الـ CKD: turnover واطي ولا عالي؟"
+        columns: [Feature, Low turnover, High turnover]
+        rows:
+          - ["PTH", "Low", "High"]
+          - ["ALP", "Low", "High"]
+          - ["Calcium", "High", "Low"]
+        hide: [[0, 1], [0, 2], [2, 1]]
+      - kind: reveal
+        page: 65
+        quote: "High dialysate calcium"
+        prompt: "إيه اللي بيعمل adynamic (low-turnover) bone، وإيه اللي بيعمل osteitis fibrosa؟"
+        answer: "**Low turnover**: calcium كتير، calcitriol، aluminium، dialysate calcium عالي. **High turnover**: hyperparathyroidism، phosphate عالي، dialysate calcium واطي أو negative Ca balance."
+      - kind: explain
+        page: 67
+        quote: "Treat trends rather than individual values"
+        title: "قواعد الـ CKD-MBD"
+        text: |
+          - ابدأ المتابعة بدري: ==CKD G3a==
+          - عالج ==trends== مش رقم واحد
+          - خد calcium و phosphate و PTH و ALP (و vitamin D) مع بعض
+          - صحّح الأول: hyperphosphatemia، hypocalcemia، vitamin D deficiency
+          - تجنّب: **hypercalcemia**، **hyperphosphatemia**، و PTH ==عالي قوي أو واطي قوي==
+          - الـ calcitriol/VDRAs: مش روتين قبل الغسيل، إلا G4–G5 مع PTH بيعلى بشدة
+          - راقب كويس بعد أي علاج
+      - kind: aside
+        page: 65
+        quote: "Put only general rules Often confusing to apply in real practice"
+        tone: exam
+        text: "الدكتورة بتقول بصراحة إن الـ guideline بتاع الـ MBD **general rules**، **confusing**، وكل دكتور بيكتب حاجة. في الامتحان: اكتب **القواعد العامة** دي بالترتيب ومتغرقش في أرقام."
+      - kind: case
+        page: 64
+        quote: "access in adults when the GFR is <20 ml/min per 1.73 m2 or risk of KRT is >40% over 2 years."
+        stem: "A 48-year-old with CKD G4 (eGFR 18): fatigue, Hb 9.2 g/dL, ferritin 45, phosphate 6.1, PTH rising, no uremic signs, BP controlled."
+        steps:
+          - question: "Planning step now?"
+            options: ["Plan pre-emptive transplant and/or access", "Start dialysis today", "Wait until GFR < 5", "Primary care follow-up only"]
+            answer: 0
+            why: "GFR < 20 = خطط للزرع أو الـ access."
+          - question: "Start dialysis now?"
+            options: ["No: no indication yet", "Yes: GFR < 20", "Yes: Hb < 10", "Yes: fatigue"]
+            answer: 0
+            why: "القرار composite، ومفيش uremia أو volume أو nutrition problem."
+          - question: "Anemia first step?"
+            options: ["Iron (low ferritin) and exclude other causes", "ESA to Hb 13", "Transfuse", "Nothing"]
+            answer: 0
+            why: "عوّض الـ iron واستبعد الأسباب التانية قبل الـ ESA."
+          - question: "MBD first step?"
+            options: ["Lower phosphate (diet, binders), correct vitamin D", "Calcitriol right away", "Parathyroidectomy", "Calcium-rich diet"]
+            answer: 0
+            why: "صحّح الأسباب الأول، وتجنب الـ hypercalcemia."
+      - kind: try
+        items: [neph.L02.132, neph.L02.138, neph.L02.140, neph.L02.142, neph.L02.152]
+    recap:
+      - "Refer: GFR < 30، نزول > 20%، KFRE ≥ 3–5%، ACR > 700 أو ≥ 300 + hematuria، ≥ 4 أدوية ضغط."
+      - "Dialysis: composite؛ indications غالبًا عند GFR 5–10 (uremia، volume، nutrition)."
+      - "خطط للزرع/access عند GFR < 20 أو risk > 40% في سنتين."
+      - "Anemia: screen سنويًا (30–60) ومرتين (< 30)؛ Hb < 13/12؛ maintain < 11.5–12."
+      - "MBD: من G3a، trends، تجنّب Ca و PO4 العالي و PTH المتطرف."
+    practice: [neph.L02.132, neph.L02.133, neph.L02.134, neph.L02.135, neph.L02.136, neph.L02.137, neph.L02.138, neph.L02.139, neph.L02.140, neph.L02.141, neph.L02.142, neph.L02.143, neph.L02.144, neph.L02.145, neph.L02.146, neph.L02.147, neph.L02.148, neph.L02.149, neph.L02.150, neph.L02.151, neph.L02.152, neph.L02.153, neph.L02.178, neph.L02.179, neph.L02.180, neph.L02.182, neph.L02.186]

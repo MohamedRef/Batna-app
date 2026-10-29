@@ -33,6 +33,9 @@ const TAPPABLE: &[&str] = &[
     // A book page's "ص N" chip (pagesheet/mod.rs).
     "page",
     "tap-chip",
+    // References rows and calculator chips (redesign 2026-10-29).
+    "refs-row",
+    "calc-chip",
     // Redesign stat tiles (assets/parts.css): each opens what it counts.
     "stat-tile",
 ];

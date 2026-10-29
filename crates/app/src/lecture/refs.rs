@@ -157,7 +157,8 @@ pub fn References() -> Element {
                                     span { class: "coll-main",
                                         bdi { dir: "ltr", lang: "en", class: "coll-title lecture-title", "{r.title}" }
                                         span { class: "coll-sub",
-                                            "{crate::i18n::lecture::PAGES} " span { class: "num-ltr", "{r.pages[0]}–{r.pages[1]}" }
+                                            if lib.program.slides(&r.id) { "{crate::i18n::lecture::SLIDES} " } else { "{crate::i18n::lecture::PAGES} " }
+                                            span { class: "num-ltr", "{r.pages[0]}–{r.pages[1]}" }
                                             if r.lessons > 0 {
                                                 " · {crate::i18n::count::count(r.lessons, &crate::i18n::count::LESSON)}"
                                             }

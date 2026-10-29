@@ -24,8 +24,9 @@ pub const MAGIC: &[u8; 8] = b"BATNAPK1";
 /// step or picture gains a field or a variant that an older app would drop
 /// or misread: an older app then refuses the newer pack (and keeps its
 /// built-in content) instead of showing it with pieces silently missing.
-/// Packs from before the field read as 0.
-pub const SCHEMA: u32 = 1;
+/// Packs from before the field read as 0. 2: courses can cite slides
+/// (`program::Source`).
+pub const SCHEMA: u32 = 2;
 
 /// Highest miniz level: slower to pack (only when content changes), not to unpack.
 const LEVEL: u8 = 10;
@@ -146,8 +147,9 @@ mod tests {
         pack.schema = SCHEMA + 1;
         assert!(matches!(Pack::decode(&pack.encode()), Err(PackError::TooNew(n)) if n == SCHEMA + 1));
         // A pack from before the field still opens.
-        let json =
-            serde_json::to_string(&Pack::new(index(), vec![sample()])).unwrap().replace("\"schema\":1,", "");
+        let json = serde_json::to_string(&Pack::new(index(), vec![sample()]))
+            .unwrap()
+            .replace(&format!("\"schema\":{SCHEMA},"), "");
         let mut old = MAGIC.to_vec();
         old.extend(compress_to_vec(json.as_bytes(), LEVEL));
         assert_eq!(Pack::decode(&old).unwrap().schema, 0);

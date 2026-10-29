@@ -48,21 +48,30 @@ pub fn BookPage(
     /// The item has a quote, kept back until he answers.
     #[props(default)]
     held: bool,
+    /// The item, lesson step or lecture citing it; a course that cites
+    /// slides shows "سلايد N" and opens that lecture's slide. Empty: the
+    /// hepatology book.
+    #[props(default)]
+    of: String,
 ) -> Element {
     let peek = quote.clone().unwrap_or_default();
+    let slides = crate::content::Library::get().program.slides(&of);
+    let label = if slides { crate::i18n::cite::slide(page) } else { crate::i18n::cite::page(page) };
+    let note = if slides { crate::i18n::hover::FROM_SLIDE } else { crate::i18n::hover::FROM_BOOK };
+    let hint = if slides { crate::i18n::book::SLIDE_HINT } else { crate::i18n::book::CHIP_HINT };
     rsx! {
         button {
             class: "chip page tap-chip",
             "data-peek": peek,
-            "data-peek-note": crate::i18n::hover::FROM_BOOK,
-            aria_label: "{crate::i18n::book::CHIP_HINT} {page}",
+            "data-peek-note": note,
+            aria_label: "{hint} {page}",
             aria_haspopup: "dialog",
             onclick: move |e| {
                 // Inside a card or row that has its own action, the chip only opens the page.
                 e.stop_propagation();
-                crate::pagesheet::open(page, quote.clone(), held);
+                crate::pagesheet::open(page, &of, quote.clone(), held);
             },
-            bdi { {crate::i18n::cite::page(page)} }
+            bdi { {label} }
         }
     }
 }

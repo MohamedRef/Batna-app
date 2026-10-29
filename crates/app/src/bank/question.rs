@@ -107,7 +107,7 @@ pub fn QuestionView(
                 }
             }
             div { class: "q-foot",
-                crate::hover::BookPage { page: item.src.page, quote }
+                crate::hover::BookPage { page: item.src.page, quote, of: item.id.clone() }
             }
             Report { item_id: q.id.clone() }
             if let Some(u) = &item.update {

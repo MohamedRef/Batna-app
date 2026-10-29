@@ -78,6 +78,9 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
             lectures.push(batna_core::own::lecture(&cards));
         }
     }
+    // Older checkouts have no program: then every deck sits under Batna.
+    let program: Option<batna_core::program::Program> =
+        crate::read_yaml(&root.join("content/program.yaml")).ok();
     let mut approved = crate::read_approved(&root.join("content/approved.txt"));
     let mut wrong = BTreeSet::new();
     let mut edits = BTreeMap::new();
@@ -114,6 +117,7 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
         wrong: Some(&wrong),
         edits: Some(&edits),
         drafts: Some(&drafts),
+        program: program.as_ref(),
     };
     let deck = build(&lectures, &opts);
 
@@ -159,12 +163,13 @@ const MEDSTUDY: &str = "/mnt/project-files/medstudy";
 
 /// The newest unmerged version of a lecture, if there is one.
 fn draft_for(medstudy: &Path, id: &str) -> Option<Result<Lecture, String>> {
-    let num = id.split_once('.').map(|(_, n)| n).unwrap_or(id);
-    let candidates = [
-        medstudy.join("content-wip/hb").join(format!("{num}.yaml")),
-        medstudy.join("drafts").join(format!("{num}.yaml")),
-        medstudy.join("drafts").join(format!("{num}.draft.yaml")),
-    ];
+    let (course, num) = id.split_once('.').unwrap_or(("hb", id));
+    let mut candidates = vec![medstudy.join("content-wip").join(course).join(format!("{num}.yaml"))];
+    // The old drafts folder only ever held Hepatology.
+    if course == "hb" {
+        candidates.push(medstudy.join("drafts").join(format!("{num}.yaml")));
+        candidates.push(medstudy.join("drafts").join(format!("{num}.draft.yaml")));
+    }
     let path = candidates.into_iter().find(|p| p.exists())?;
     Some(crate::read_yaml::<Lecture>(&path).and_then(|lec| {
         if lec.lecture == id {

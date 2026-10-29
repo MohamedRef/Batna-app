@@ -483,7 +483,7 @@ pub fn CasePlayer(item_id: String, on_back: EventHandler) -> Element {
                                 }
                                 div { class: "case-why",
                                     bdi { lang: "en", "{steps[k].why}" }
-                                    BookPage { page, quote: item.src.quote.clone() }
+                                    BookPage { page, quote: item.src.quote.clone(), of: item.id.clone() }
                                 }
                                 if run.shown && !answered {
                                     div { class: "row",

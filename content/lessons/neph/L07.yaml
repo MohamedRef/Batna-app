@@ -1,0 +1,983 @@
+schema: batna.lesson/v1
+lecture: neph.L07
+lessons:
+  # ------------------------------------------------------------------
+  - id: neph.L07.lesson1
+    title: "ADPKD: الكلية اللي بتطلّع عنب"
+    hook: "جين واحد بايظ في الـ cilia، والنتيجة كلية وزنها كيلو مليانة أكياس. تعالى نفهم إزاي."
+    minutes: 9
+    pages: [145, 150]
+    topics: [adpkd-genetics, adpkd-path, adpkd-renal]
+    goals:
+      - "تحفظ الـ genes والـ chromosomes والفرق بين PKD1 و PKD2"
+      - "تفهم إزاي الـ polycystins لما تبوظ بتعمل cyst"
+      - "تعرف أعراض الكلية وإمتى تقلق من الـ hematuria"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 145
+        title: "مرض في الجسم كله"
+        quote: "multisystem disorder characterized by multiple, bilateral renal cysts and associated with cysts in other organs, such as liver, pancreas, and arachnoid"
+        text: |
+          الـ ==ADPKD== مش مرض كلى بس: ده **multisystem disorder** فيه أكياس كتير في **الكليتين**، ومعاها أكياس في **الكبد** والـ **pancreas** والـ **arachnoid**.
+
+          الوراثة **autosomal dominant**: يعني **50%** من الأولاد هيورثوه. بس خلي بالك، **25–40%** من العيانين الجداد **مفيش عندهم family history**.
+      - kind: table
+        page: 145
+        quote: "Mutations in the genes pkd-1 (located on chromosome 16) and pkd-2 (chromosome 4)"
+        title: "الجينين"
+        columns: [Gene, Chromosome, Protein]
+        rows:
+          - ["PKD1", "16", "Polycystin-1"]
+          - ["PKD2", "4", "Polycystin-2"]
+        hide: [[0, 1], [1, 1]]
+      - kind: mnemonic
+        page: 146
+        quote: "with more aggressive disease (onset of esrd, on average, 15 years earlier)"
+        word: "PKD1"
+        parts:
+          - { key: "P", text: "Polycystin-1, a receptor" }
+          - { key: "K", text: "Kidney failure ~15 years earlier" }
+          - { key: "D", text: "Dominant: 7 times commoner than PKD2" }
+          - { key: "1", text: "chromosome 16: 1 + 6, and PKD2 on 4" }
+        hook: "**PKD1** = النمرة **1** في كل حاجة: أشهر (7 أضعاف)، أوحش، والـ ESRD بدري بـ **15 سنة**."
+      - kind: explain
+        page: 146
+        title: "الـ cilia: حساس السرعة"
+        quote: "This polycystin complex acts as an extra-cellular mechanosensor (luminal flow disturbs the cilia and triggers the apparatus)"
+        text: |
+          الـ **polycystin-1** (receptor) والـ **polycystin-2** (==calcium channel==) قاعدين مع بعض في الـ **cilia** بتاعة خلايا الـ collecting duct.
+
+          البول وهو ماشي بيهز الـ cilia، فالـ complex يشتغل كـ ==mechanosensor== ويقول للخلية: "اثبتي، ما تكبريش". لو الـ complex باظ، الخلايا **تتكاثر من غير ضابط**، تعمل cyst **يقفل** على الـ nephron بتاعه ويكبر. وده بيحصل في **أقل من 1%** من الـ nephrons بس.
+      - kind: figure
+        page: 146
+        quote: "Signal Pathway"
+        title: "الـ signal pathway في كلمتين"
+        alt: "Simplified ADPKD cell signalling: vasopressin on the V2 receptor stimulates adenylyl cyclase, raising cAMP; somatostatin on its receptor inhibits it. cAMP activates PKA, which drives CFTR chloride and fluid secretion into the cyst and, through Src, MAPK and mTOR, cell proliferation. Low calcium from failed polycystin-2 removes a brake on cAMP."
+        caption: "الـ ==cAMP== هو البنزين: الـ **vasopressin** (V2) بيزوّده والـ **somatostatin** بيقلّله. علشان كده الأدوية الجديدة: **tolvaptan** و **octreotide**."
+        svg: |
+          <svg viewBox="0 0 330 310" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L07a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+              <marker id="L07b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-bad"/></marker>
+            </defs>
+            <rect x="5" y="5" width="150" height="44" rx="8" class="fg-bad"/>
+            <text x="80" y="24" text-anchor="middle" class="t-sm t-b">Vasopressin → V2R</text>
+            <text x="80" y="40" text-anchor="middle" class="t-sm">(tolvaptan blocks)</text>
+            <rect x="175" y="5" width="150" height="44" rx="8" class="fg-good"/>
+            <text x="250" y="24" text-anchor="middle" class="t-sm t-b">Somatostatin → SSTR</text>
+            <text x="250" y="40" text-anchor="middle" class="t-sm">(octreotide mimics)</text>
+            <path d="M80 50 L150 82" class="fg-arrow-bad" marker-end="url(#L07b)"/>
+            <path d="M250 50 L180 82" class="fg-arrow" marker-end="url(#L07a)"/>
+            <text x="225" y="74" class="t-sm t-good">inhibits</text>
+            <rect x="85" y="84" width="160" height="36" rx="8" class="fg-ink"/>
+            <text x="165" y="107" text-anchor="middle" class="t-b">cAMP ↑ (Ca²⁺ low)</text>
+            <path d="M165 120 L165 140" class="fg-arrow" marker-end="url(#L07a)"/>
+            <rect x="115" y="142" width="100" height="32" rx="16" class="fg-acc"/>
+            <text x="165" y="163" text-anchor="middle" class="t-b">PKA</text>
+            <path d="M140 174 L80 204" class="fg-arrow" marker-end="url(#L07a)"/>
+            <path d="M190 174 L250 204" class="fg-arrow" marker-end="url(#L07a)"/>
+            <rect x="5" y="206" width="150" height="58" rx="8" class="fg-box"/>
+            <text x="80" y="228" text-anchor="middle" class="t-sm t-b">CFTR Cl⁻ secretion</text>
+            <text x="80" y="248" text-anchor="middle" class="t-sm">cyst fills with fluid</text>
+            <rect x="175" y="206" width="150" height="58" rx="8" class="fg-box"/>
+            <text x="250" y="228" text-anchor="middle" class="t-sm t-b">Src → MAPK → mTOR</text>
+            <text x="250" y="248" text-anchor="middle" class="t-sm">cell proliferation</text>
+            <rect x="60" y="274" width="210" height="30" rx="8" class="fg-bad"/>
+            <text x="165" y="294" text-anchor="middle" class="t-b">Cyst grows</text>
+          </svg>
+      - kind: check
+        page: 146
+        quote: "Pkd-1 mutations are seven times more com-mon than pkd-2"
+        question: "Compared with PKD2 mutations, PKD1 mutations are:"
+        options:
+          - "Commoner and reaches ESRD about 15 years earlier"
+          - "Rarer and milder"
+          - "Commoner but milder"
+          - "Linked to chromosome 4"
+        answer: 0
+        why:
+          - "صح: 7 أضعاف و ESRD بدري بـ 15 سنة."
+          - "العكس بالظبط."
+          - "أشهر، بس أوحش مش أخف."
+          - "الـ PKD2 هو اللي على chromosome 4."
+      - kind: explain
+        page: 147
+        title: "الكلية بتشتكي إزاي؟"
+        quote: "Flank or loin pain arising from large cysts. Acute pain may suggest cyst rupture or bleeding."
+        text: |
+          - **Flank/loin pain** من الأكياس الكبيرة؛ الألم المفاجئ = **rupture أو bleeding**.
+          - **Hematuria** (dipstick ± frank).
+          - ==Hypertension==: **أشهر manifestation** وأهم سبب للـ progression.
+          - **Nocturia و polyuria**: الكلية فقدت قدرة التركيز.
+          - **Proteinuria خفيفة** (أقل من 1 g/day).
+
+          حجم الكلية بيكبر مع السن في **100%**، و CRISP لقى إنه بيكبر **5.3% في السنة**، والـ **total kidney volume** أقوى predictor للتدهور.
+      - kind: explain
+        page: 148
+        title: "الـ ESRD: مش قدر"
+        quote: "At this stage, the average rate of GFR decline is 4.4 to 5.9 ml/min per year. Nevertheless, ESRD is not inevitable in ADPKD."
+        text: |
+          الكلية بتفضل شغالة لحد **العقد الرابع–السادس**، وبعدين الـ GFR ينزل **4.4–5.9 mL/min في السنة**. بس ==ESRD مش حتمي==: **77%** كويسين عند 50 سنة و **52%** عند 73.
+
+          **Risk factors** للـ renal failure: **ذكر**، Black race، تشخيص أو أول hematuria **قبل 30**، hypertension **قبل 35**، hyperlipidemia و HDL واطي، sickle cell trait، و **PKD1 truncating**.
+      - kind: explain
+        page: 149
+        title: "الـ hematuria والـ cyst hemorrhage"
+        quote: "if the initial episode of hematuria occurs after age 50 years, neoplasm should be excluded"
+        text: |
+          الـ **visible hematuria** بتحصل في لحد **40%**. الـ DD: ==cyst hemorrhage، stone، infection، tumor==.
+
+          الـ cyst hemorrhage يعمل hematuria **بس لو الكيس متصل بالـ collecting system**؛ غير كده يبقى **flank pain بس** (وأحيانًا حرارة، فتلتبس بالـ infection). أغلبه بيخلص في **2–7 أيام**.
+
+          ⚠ لو استمر **أكتر من أسبوع** أو أول hematuria **بعد 50**: استبعد **neoplasm**.
+      - kind: explain
+        page: 150
+        title: "الـ UTI والـ stones"
+        quote: "Renal stone disease occurs in about 20% of patients with ADPKD. Most stones are composed of uric acid, calcium oxalate, or both."
+        text: |
+          **UTI**: شائعة بس ممكن تتقدّر بزيادة لأن الـ **sterile pyuria** شائع. الميكروبات: **E. coli، Klebsiella، Proteus**. الطريق **retrograde من المثانة**، علشان كده عالج الـ cystitis بسرعة.
+
+          **Stones** في حوالي ==20%==: أغلبها **uric acid** أو calcium oxalate. الأحسن **CT urography** (أحسن للـ radiolucent)، والـ **dual-energy CT** يفرّق الـ calcium من الـ uric acid.
+      - kind: check
+        page: 149
+        quote: "Differential diagnosis includes cyst hem-orrhage, stone, infection, and tumor."
+        question: "ADPKD patient, 35 years, flank pain with fever and no hematuria. Which is NOT on the list to consider?"
+        options:
+          - "Medullary sponge kidney"
+          - "Cyst hemorrhage"
+          - "Cyst infection"
+          - "Stone"
+        answer: 0
+        why:
+          - "صح: ده مرض تاني خالص، مش مضاعفة من مضاعفات الـ ADPKD."
+          - "الكيس اللي مش متصل بالـ collecting system بيعمل ألم من غير hematuria، وممكن حرارة."
+          - "الحرارة تخليك تفكر في الـ infection."
+          - "الـ stones في 20%."
+      - kind: try
+        items: [neph.L07.002, neph.L07.004, neph.L07.016, neph.L07.027, neph.L07.033]
+    recap:
+      - "ADPKD = multisystem، autosomal dominant؛ 25–40% من غير family history."
+      - "PKD1 (chr 16، polycystin-1) أشهر 7 مرات و ESRD بدري 15 سنة؛ PKD2 على chr 4."
+      - "الـ polycystins في الـ cilia = mechanosensor؛ لو باظت: proliferation ← cyst."
+      - "cAMP هو البنزين: vasopressin يزوّده، somatostatin يقلّله."
+      - "Hypertension أشهر manifestation؛ GFR ينزل 4.4–5.9/سنة، و ESRD مش حتمي."
+      - "Hematuria أكتر من أسبوع أو بعد 50 = استبعد tumor. Stones 20% (uric acid)."
+    practice: [neph.L07.001, neph.L07.002, neph.L07.003, neph.L07.004, neph.L07.005, neph.L07.006, neph.L07.007, neph.L07.008, neph.L07.009, neph.L07.010, neph.L07.011, neph.L07.012, neph.L07.013, neph.L07.014, neph.L07.015, neph.L07.016, neph.L07.017, neph.L07.018, neph.L07.019, neph.L07.020, neph.L07.021, neph.L07.022, neph.L07.023, neph.L07.024, neph.L07.025, neph.L07.026, neph.L07.027, neph.L07.028, neph.L07.029, neph.L07.030, neph.L07.031, neph.L07.032, neph.L07.033, neph.L07.034, neph.L07.035, neph.L07.036, neph.L07.037, neph.L07.038]
+  # ------------------------------------------------------------------
+  - id: neph.L07.lesson2
+    title: "برّه الكلية: كبد وأنيوريزم وتشخيص بالسونار"
+    hook: "عيان ADPKD بيموت أحيانًا من المخ مش من الكلية. ومين نعمله MRA؟ ومين نقوله عندك المرض من السونار؟"
+    minutes: 9
+    pages: [151, 156]
+    topics: [adpkd-extrarenal, adpkd-dx]
+    goals:
+      - "تعرف الـ PLD والـ aneurysms والقلب والأكياس التانية بالأرقام"
+      - "تعرف مين يتعمله screening للـ aneurysm وبإيه"
+      - "تطبّق الـ ultrasound criteria حسب السن"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 151
+        title: "الكبد: أشهر حاجة برّه الكلية"
+        quote: "Polycystic Liver Disease PLD is the most common extrarenal manifestation of ADPKD."
+        text: |
+          الـ ==polycystic liver disease== هو **أشهر extrarenal manifestation**، مع PKD1 و PKD2.
+
+          نادر جدًا في الأطفال ويزيد مع السن. أوحش في الستات اللي حملوا كتير أو خدوا **OCs أو ERT** (الـ estrogen بيكبّر الأكياس).
+
+          غالبًا asymptomatic، ولما يكبر: **dyspnea، early satiety، GERD، ألم ضهر**، وكمان ضغط على الـ hepatic veins والـ IVC والـ portal vein والـ bile duct (**obstructive jaundice**).
+      - kind: explain
+        page: 151
+        title: "الـ intracranial aneurysm بالأرقام"
+        quote: "intracranial aneurysms occur in 6% of patients with a negative family history and 16% of those with a positive family history"
+        text: |
+          - موجودة في حوالي ==8%==: **6%** من غير family history و **16%** لو فيه.
+          - أغلبها asymptomatic؛ اللي بتكبر ممكن تعمل **cranial nerve palsy أو seizure**.
+          - الـ rupture السنوي: أقل من **0.5%** لو أقل من 5 mm، و **4%** لو أكبر من 10 mm. والـ rupture = **35–55%** morbidity و mortality.
+          - متوسط السن عند الـ rupture ==39 سنة== (مقابل 51 في الناس العادية)، و **29%** ضغطهم طبيعي!
+      - kind: mnemonic
+        page: 152
+        quote: "Indications for screening in patients with a good life expectancy include family history of intracranial aneurysm or subarachnoid hemorrhage"
+        word: "FRESH"
+        parts:
+          - { key: "F", text: "Family history of aneurysm or SAH" }
+          - { key: "R", text: "Rupture before (previous aneurysmal rupture)" }
+          - { key: "E", text: "Elective surgery with possible hemodynamic instability" }
+          - { key: "S", text: "Scary job: high-risk occupation (airline pilot)" }
+          - { key: "H", text: "Huge anxiety despite good information" }
+        hook: "**FRESH**: مين يتعمله ==screening==؟ ومش للكل. والفحص **MRA** (من غير contrast)، والـ CTA بديل."
+      - kind: check
+        page: 152
+        quote: "Magnetic resonance angiography is the diagnostic imaging modality of choice for presymptomatic screening"
+        question: "Why is MRA the screening test of choice for aneurysms in ADPKD?"
+        options:
+          - "Noninvasive and needs no IV contrast"
+          - "It is cheaper than ultrasound"
+          - "It also treats the aneurysm"
+          - "It is the only test that sees aneurysms"
+        answer: 0
+        why:
+          - "صح: noninvasive ومن غير contrast، ودي ميزة كبيرة لعيان كلى."
+          - "مش هو السبب."
+          - "التشخيص بس."
+          - "الـ CT angiography بديل مرضي."
+      - kind: sort
+        page: 153
+        quote: "Ovarian cysts are not associated with ADPKD."
+        prompt: "ADPKD: إيه اللي ليه علاقة وإيه لأ؟"
+        bins: ["Associated", "Not associated"]
+        cards:
+          - { text: "Mitral valve prolapse (25%)", bin: 0 }
+          - { text: "Seminal vesicle cysts (40%)", bin: 0 }
+          - { text: "Arachnoid cysts (8%)", bin: 0 }
+          - { text: "Pancreatic cysts (5%)", bin: 0 }
+          - { text: "Thoracic aortic dissection", bin: 0 }
+          - { text: "Ovarian cysts", bin: 1 }
+        why: "الكتاب صريح: ==ovarian cysts مش مرتبطة== بالـ ADPKD. والـ echo بيتعمل **بس لو فيه murmur**."
+      - kind: explain
+        page: 153
+        title: "حاجات تانية"
+        quote: "Spinal meningeal diverticula may occur with increased frequency and rarely manifest with intracranial hypotension"
+        text: |
+          - **Pericardial effusion** صغير في لحد **35%** على الـ CT.
+          - **Sperm** حركته ضعيفة، ونادرًا infertility.
+          - **Spinal meningeal diverticula**: نادرًا CSF leak و ==intracranial hypotension== (صداع وهو واقف، diplopia، ataxia).
+          - **Colonic و duodenal diverticula** ممكن تزيد.
+      - kind: explain
+        page: 154
+        title: "نعمل screening؟"
+        quote: "Presymptomatic screening of children is not recommended until more effective therapy for the disease becomes available."
+        text: |
+          الـ screening بس للي **فاهم مميزاته وعيوبه**:
+          - لو موجود: **genetic counseling**، ونعالج الضغط بدري.
+          - لو مش موجود: نطمّنه.
+          - العيوب: ==insurability و employability==.
+
+          **الأطفال**: مش بنعملهم screening لحد ما يبقى فيه علاج أحسن. والأداة **ultrasound** علشان رخيص وآمن.
+      - kind: table
+        page: 155
+        quote: "Different criteria have therefore been proposed to exclude a diagnosis of ADPKD in an indi-vidual at risk from a family with an unknown genotype."
+        title: "Revised unified criteria (للتشخيص)"
+        columns: [Age, Cysts on ultrasound]
+        rows:
+          - ["15–39", "≥3, one or both kidneys"]
+          - ["40–59", "≥2 in each kidney"]
+          - ["≥60", "≥4 in each kidney"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: mnemonic
+        page: 154
+        quote: "At least three (uni-lateral or bilateral) renal cysts are sufficient for diagnosis of at-risk individuals 15 to 39 years of age"
+        word: "324"
+        parts:
+          - { key: "3", text: "Age 15–39: 3 cysts anywhere" }
+          - { key: "2", text: "Age 40–59: 2 in each kidney" }
+          - { key: "4", text: "Age 60+: 4 in each kidney" }
+        hook: "الرقم **3 2 4**: الشاب عايز **3** في أي حتة، الكبير عايز **2 في كل كلية**، والعجوز **4 في كل كلية** (لأن الـ simple cysts بتزيد مع السن)."
+      - kind: explain
+        page: 155
+        title: "المتبرع: محتاجين نستبعد"
+        quote: "finding fewer than five cysts by magnetic resonance imaging (MRI) is sufficient to exclude the diagnosis of ADPKD in potential living related kidney donors"
+        text: |
+          الـ ultrasound **specificity و PPV عالية**، بس الـ ==sensitivity والـ NPV واطيين في PKD2== من 15 لـ 59 سنة. ده مشكلة في **المتبرع القريب**: عايزين نستبعد المرض.
+
+          الحل: **MRI**. لو فيه ==أقل من 5 cysts== على الـ MRI، المرض مستبعد في المتبرع.
+
+          **Genetic testing** لما الـ imaging مش حاسم. الـ PKD1 **duplicated** فصعب على الـ exome؛ الـ sequencing المباشر بيجيب نتيجة في حوالي **90%**. وفيه **PGD** مع الـ IVF لاختيار embryo سليم.
+      - kind: try
+        items: [neph.L07.043, neph.L07.047, neph.L07.054, neph.L07.060, neph.L07.064]
+    recap:
+      - "PLD أشهر extrarenal؛ أوحش مع الحمل المتكرر والـ estrogen."
+      - "Aneurysm 8% (6% أو 16% حسب الـ family history)؛ الـ rupture عند 39 سنة."
+      - "Screening = FRESH، والأداة MRA؛ إعادة بعد 5–10 سنين لو family history قوي."
+      - "MVP 25%، seminal vesicle cysts 40%، ovarian cysts مش مرتبطة."
+      - "Ultrasound 3-2-4 حسب السن؛ ما نعملش screening للأطفال."
+      - "المتبرع: MRI أقل من 5 cysts يستبعد؛ genetic testing لما الصورة مش حاسمة."
+    practice: [neph.L07.039, neph.L07.040, neph.L07.041, neph.L07.042, neph.L07.043, neph.L07.044, neph.L07.045, neph.L07.046, neph.L07.047, neph.L07.048, neph.L07.049, neph.L07.050, neph.L07.051, neph.L07.052, neph.L07.053, neph.L07.054, neph.L07.055, neph.L07.056, neph.L07.057, neph.L07.058, neph.L07.059, neph.L07.060, neph.L07.061, neph.L07.062, neph.L07.063, neph.L07.064, neph.L07.065, neph.L07.066, neph.L07.067]
+  # ------------------------------------------------------------------
+  - id: neph.L07.lesson3
+    title: "علاج الـ ADPKD: من الـ cipro لحد الـ tolvaptan"
+    hook: "تلات لترات ميه في اليوم، ACE inhibitor، وأحيانًا دوا بيخليك تجري على الحمام. ده علاج ADPKD."
+    minutes: 10
+    pages: [157, 164]
+    topics: [adpkd-tx, adpkd-ckd, adpkd-novel, adpkd-tx-ttx]
+    goals:
+      - "تعالج الألم والنزيف والـ cyst infection والـ stones صح"
+      - "تعرف الـ BP target والميه والـ dialysis والـ PLD والـ aneurysm"
+      - "تعرف الـ tolvaptan والـ somatostatin analogues والـ mTOR والـ transplant"
+    status: unverified
+    steps:
+      - kind: order
+        page: 157
+        quote: "Causes of flank pain that may require intervention, such as infection, stone, and tumor, should be excluded."
+        prompt: "رتّب علاج الـ flank pain المزمن:"
+        steps:
+          - "Exclude infection, stone, tumor"
+          - "Simple analgesia, reassurance, tricyclics"
+          - "Splanchnic nerve block"
+          - "Cyst aspiration + sclerosant"
+          - "Laparoscopic or surgical fenestration"
+        why: "استبعد الأسباب اللي محتاجة تدخّل الأول، وبعدين اطلع درجة درجة. وابعد عن الـ **NSAIDs** والـ combination analgesics على المدى الطويل (nephrotoxic)."
+      - kind: explain
+        page: 158
+        title: "النزيف والـ infection"
+        quote: "Therapeutic agents of choice include trimethoprim-sulfamethoxazole and fluoroquinolones"
+        text: |
+          **Cyst hemorrhage**: بيخلص لوحده: **bed rest، analgesics، ميه كتير** علشان الـ clots ما تسدّش. الشديد: transfusion، tranexamic acid، **segmental embolization**، وآخر حل جراحة.
+
+          **Cyst infection**: عالج الـ cystitis والـ asymptomatic bacteriuria بسرعة. المضاد لازم يدخل الكيس: ==TMP-SMX أو fluoroquinolones== (lipophilic).
+
+          لسه سخن بعد **1–2 أسبوع**؟ **Drainage**. ولو رجعت الحرارة بعد ما وقفت: دوّر على obstruction أو perinephric abscess أو stone.
+      - kind: aside
+        tone: analogy
+        page: 158
+        quote: "Lipophilic agents have been shown to penetrate cysts reliably"
+        text: "الكيس زي أوضة مقفولة بشباك دهني. الـ **gentamicin** (مش lipophilic) بيخبط على الشباك ومش بيدخل، والـ **cipro و TMP-SMX** (lipophilic) بيعدّوا من الشباك ويوصلوا للميكروب."
+      - kind: explain
+        page: 159
+        title: "الـ stones والضغط"
+        quote: "a rigorous BP target (95 to 110/60 to 75 mm Hg) in young patients with ADPKD with normal renal function"
+        text: |
+          **Stones**: نفس العلاج العادي. الـ ==potassium citrate== هو الأساس في التلات: **uric acid**، **hypocitraturic Ca oxalate**، و **distal acidification defects**. الـ ESWL و PCNL نجاحهم **82% و 80%**.
+
+          **Hypertension**: لازم يتظبط. الـ **ACEI أو ARB** الأول (بيزوّدوا renal blood flow و renoprotective). والـ **HALT PKD** بيقول target ==95–110/60–75== للشباب اللي كليتهم كويسة.
+      - kind: explain
+        page: 160
+        title: "ميه، dialysis، وكبد"
+        quote: "supplemental water sufficient to achieve a urinary osmolality below 250 mOsm/kg H₂O (~3 liters in most patients)"
+        text: |
+          - **ميه**: لو eGFR فوق 30، اشرب لحد ما الـ urine osm تبقى ==أقل من 250== (حوالي **3 لتر**)؛ الميه بتطفي الـ vasopressin. مفيش RCT.
+          - **Dialysis**: عيانين ADPKD **أحسن** من غيرهم (EPO أعلى، Hb أحسن). الـ **PD** ينفع بس خد بالك من الـ **hernias**.
+          - **PLD**: غالبًا مش محتاج علاج. قلل الكحول والـ hepatotoxins و **الكافيين** (cAMP agonist). H2 blockers و somatostatin. الـ estrogen ممنوع **بس** لو الكبد كبير جدًا. Invasive: aspiration و sclerosis أو fenestration.
+      - kind: table
+        page: 161
+        quote: "Ruptured or symptomatic intracranial aneurysm requires surgical clip- ping of the neck of the aneurysm."
+        title: "الـ aneurysm: نعمل إيه؟"
+        columns: [Aneurysm, Plan]
+        rows:
+          - ["Ruptured or symptomatic", "Surgical clipping"]
+          - ["<5 mm, asymptomatic", "MRA at 6 months, then yearly"]
+          - ["6–9 mm", "Controversial"]
+          - ["≥10 mm", "Surgery usually"]
+          - ["High surgical risk", "Endovascular coils"]
+        hide: [[0, 1], [1, 1], [3, 1]]
+      - kind: explain
+        page: 162
+        title: "الـ tolvaptan: اقفل الـ V2"
+        quote: "tolvaptan administered over 3 years slowed the increase in kidney volume and decline in kidney function"
+        text: |
+          الـ vasopressin على **V2** بيرفع الـ cAMP في الـ collecting duct (مكان الأكياس). الـ ==tolvaptan== بيقفل الـ V2.
+
+          - **TEMPO** (CrCl فوق 60، 3 سنين): بطّأ نمو الكلية والتدهور، وقلل الألم والـ hematuria والـ UTI.
+          - **REPRISE** (eGFR 25–65): eGFR نزل أبطأ في سنة.
+          - العيوب: **aquaresis** (polyuria، عطش، nocturia) خلّت **8.3%** يوقفوا، و ==liver enzymes فوق 2.5× في 4.9%==، والـ Na والـ uric acid يعلوا شوية.
+      - kind: update
+        page: 162
+        quote: "tolvaptan is approved for the treatment of rapidly progressive ADPKD in Japan, Canada, the European Union"
+        text: "الكتاب بيقول الـ tolvaptan **مش معتمد في أمريكا**. الـ FDA وافقت عليه (Jynarque) في **أبريل 2018** للكبار اللي عندهم ADPKD سريع، مع متابعة الكبد. في امتحان القسم اكتب كلام الكتاب."
+        ref: "FDA approval of Jynarque (tolvaptan), 2018"
+      - kind: explain
+        page: 163
+        title: "باقي الأدوية"
+        quote: "two large randomized trials using everolimus and sirolimus for 18 to 24 months have shown no benefit"
+        text: |
+          - **Somatostatin analogues** (octreotide، lanreotide، pasireotide): الـ somatostatin نفسه عمره **3 دقايق**. نمو الكلية يقف **أول سنة** وبعدين يرجع، والكبد يصغر **4–6%**.
+          - ==mTOR inhibitors== (everolimus، sirolimus): نفعت في الفيران، و **فشلت** في تجربتين كبار على البني آدمين.
+          - **Pravastatin**: بطّأ النمو في الأطفال والشباب. **Bosutinib**: قلل النمو بس الوظيفة اتجهت للأسوأ.
+      - kind: explain
+        page: 164
+        title: "الزرع"
+        quote: "Transplantation is the treatment of choice for ESRD in patients with ADPKD."
+        text: |
+          الـ ==transplantation== هو العلاج المفضل للـ ESRD، ونتايجه زي غيره. المضاعفات مش أكتر.
+
+          الـ **pretransplant nephrectomy** الروتيني خلاص. نشيلها لو: **infected cysts، نزيف متكرر، ضغط شديد، أو كلية ضخمة نازلة للـ pelvis**. بعد الزرع الكلى القديمة **تصغر 38–41%** والكبد **يكبر** 9–21%، ومفيش زيادة في الـ RCC.
+      - kind: case
+        page: 158
+        quote: "If fever persists after 1 to 2 weeks of appropriate antimicrobial therapy, infected cysts should be drained percutaneously or surgically."
+        stem: "ADPKD, 45-year-old woman: fever 39 °C and right loin pain; CT shows a complicated cyst."
+        steps:
+          - question: "Antibiotic?"
+            options: ["Ciprofloxacin or TMP-SMX", "Gentamicin", "Nitrofurantoin", "Amoxicillin"]
+            answer: 0
+            why: "**Lipophilic** بيدخل الكيس."
+          - reveal: "Still febrile after 2 weeks of the right drug."
+            question: "Next?"
+            options: ["Drain the infected cyst", "Add steroids", "Stop antibiotics", "Tolvaptan"]
+            answer: 0
+            why: "حرارة مستمرة بعد 1–2 أسبوع: **drainage** (ولو كلية end-stage فكر في nephrectomy)."
+      - kind: check
+        page: 162
+        quote: "clinically significant increases in liver enzymes (>2.5 times the upper limit of normal) were seen in 4.9% of tolvaptan-treated"
+        question: "Your patient on tolvaptan complains of thirst and nocturia. Which test must you also follow?"
+        options:
+          - "Liver enzymes"
+          - "Serum potassium"
+          - "Thyroid function"
+          - "Creatine kinase"
+        answer: 0
+        why:
+          - "صح: 4.9% liver enzymes عليت فوق 2.5×. والعطش ده aquaresis متوقع."
+          - "الـ Na والـ uric acid هما اللي بيعلوا مش الـ K."
+          - "مش من آثاره الجانبية في الكتاب."
+          - "مش من آثاره الجانبية في الكتاب."
+      - kind: try
+        items: [neph.L07.068, neph.L07.077, neph.L07.082, neph.L07.088, neph.L07.091]
+    recap:
+      - "الألم: استبعد infection/stone/tumor، ابعد عن NSAIDs، وبعدين block ← aspiration ← fenestration."
+      - "Cyst infection: TMP-SMX أو fluoroquinolone؛ drainage لو الحرارة 1–2 أسبوع."
+      - "Stones: potassium citrate. Hypertension: ACEI/ARB، target 95–110/60–75 للشباب."
+      - "ميه ~3 لتر (urine osm أقل من 250) لو eGFR فوق 30. PD ينفع بس hernias."
+      - "Aneurysm: clipping لو rupture؛ أقل من 5 mm متابعة MRA؛ 10 mm فأكتر جراحة."
+      - "Tolvaptan (TEMPO، REPRISE): aquaresis و liver enzymes. mTOR فشل. Transplant هو الأحسن."
+    practice: [neph.L07.068, neph.L07.069, neph.L07.070, neph.L07.071, neph.L07.072, neph.L07.073, neph.L07.074, neph.L07.075, neph.L07.076, neph.L07.077, neph.L07.078, neph.L07.079, neph.L07.080, neph.L07.081, neph.L07.082, neph.L07.083, neph.L07.084, neph.L07.085, neph.L07.086, neph.L07.087, neph.L07.088, neph.L07.089, neph.L07.090, neph.L07.091, neph.L07.092, neph.L07.093, neph.L07.094, neph.L07.095, neph.L07.096, neph.L07.097, neph.L07.098, neph.L07.099, neph.L07.100, neph.L07.101, neph.L07.102, neph.L07.103, neph.L07.104, neph.L07.105]
+  # ------------------------------------------------------------------
+  - id: neph.L07.lesson4
+    title: "أكياس تانية: ARPKD و NPHP و ADTKD و sponge"
+    hook: "مش كل كلية فيها أكياس ADPKD. السن والـ family history ومكان الأكياس بيفرّقوا بينهم."
+    minutes: 8
+    pages: [165, 168]
+    topics: [cystic-other]
+    goals:
+      - "تعرف ARPKD و nephronophthisis و ADTKD و medullary sponge kidney"
+      - "تقرا Table 7.6 وتفرّق cortex من medulla"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 165
+        title: "ARPKD: مرض الأطفال"
+        quote: "Caused by a rare mutation of the PKHD1 gene (located on chromosome 6) encoding polyductin."
+        text: |
+          الـ ==ARPKD==: جين **PKHD1** على **chromosome 6** بيعمل **polyductin**.
+
+          بيظهر في **الرضّع والأطفال**: polycystic kidneys، CKD بيتقدم، و ==congenital hepatic fibrosis== مع **portal hypertension**. أندر بكتير من الـ ADPKD (حوالي **1:20,000**).
+      - kind: explain
+        page: 165
+        title: "Nephronophthisis: الـ nephrons بتختفي"
+        quote: "Imaging characteristically reveals echo-bright kidneys with a few corticomedullary cysts."
+        text: |
+          الاسم يوناني معناه **"ضياع الـ nephrons تدريجيًا"**. ==autosomal recessive== tubulointerstitial nephropathy، ومن أشهر أسباب الـ ESRD الوراثية في **الأطفال والمراهقين**.
+
+          - **NPHP1** = 21% من الحالات (وبدري أكتر)؛ كل جين تاني أقل من 4%.
+          - يبدأ بعد سنة من العمر، و ESRD في المراهقة.
+          - Imaging: **echo-bright kidneys** مع **أكياس قليلة corticomedullary**.
+          - Polyuria و polydipsia، بس غالبًا يظهر وهو ESRD.
+      - kind: mnemonic
+        page: 165
+        quote: "May also be associated with retinitis pigmentosa in the Senior-Løken syndrome."
+        word: "JOBS"
+        parts:
+          - { key: "J", text: "Joubert: cerebellar vermis hypoplasia, oculomotor apraxia" }
+          - { key: "O", text: "Organ reversal: situs inversus" }
+          - { key: "B", text: "Bones: cone-shaped epiphyses; plus liver fibrosis" }
+          - { key: "S", text: "Senior-Løken: retinitis pigmentosa" }
+        hook: "الـ NPHP عنده **JOBS** برّه الكلية، عكس الـ medullary cystic disease اللي مالوش extrarenal."
+      - kind: explain
+        page: 166
+        title: "ADTKD (medullary cystic kidney disease)"
+        quote: "Disease-causing mutations in four genes: MUC1, UMOD, REN, and HNF1B, are responsible for most cases."
+        text: |
+          **Autosomal dominant**، يبان في **أول الشباب** مع family history.
+
+          - الجينات: **MUC1، UMOD، REN، HNF1B**؛ الـ ==UMOD = hyperuricemia== و gout.
+          - أكياس صغيرة **1–10 mm** في الـ corticomedullary junction، مع scarring، والـ **glomeruli سليمة**.
+          - Nocturia و polyuria، **dipstick نضيف**، والضغط غالبًا **طبيعي** (salt loss).
+          - الكلى **صغيرة لطبيعية** على السونار.
+          - ESRD حوالي **60 سنة** (MUC1 بعد 60، UMOD في العقد 4–7). مفيش علاج خاص؛ صلّح الملح والميه.
+      - kind: explain
+        page: 167
+        title: "Medullary sponge kidney: مش وراثي"
+        quote: "Impaired calcium handling in the collecting ducts predisposes to formation of calcium-containing stones (often in cysts)."
+        text: |
+          شائع و **benign**، و ==developmental مش genetic== (مفيش family history).
+
+          الـ collecting ducts مش بتتعامل مع الـ calcium كويس، فتعمل **calcium stones** جوّه الأكياس. فكّر فيه في **شاب عنده calcium stones**. وكمان hematuria و UTI متكرر.
+
+          التشخيص: **IVU** (الشكل الكلاسيكي ==calyceal brush== أو "paintbrush")، ودلوقتي **CT**. الـ renal impairment **نادر جدًا**.
+      - kind: table
+        page: 168
+        quote: "Medullary sponge kidney Medullary cystic kidney disease"
+        title: "Sponge ولا cystic؟"
+        columns: [Feature, Sponge, Cystic (ADTKD)]
+        rows:
+          - ["Age", "Any", "20–30"]
+          - ["CKD/ESRD", "No", "Yes, ESRD <60"]
+          - ["Salt loss", "No", "Yes"]
+          - ["Ca stones", "Yes", "No"]
+          - ["Family history", "No", "Yes"]
+        hide: [[1, 2], [3, 1], [4, 2]]
+      - kind: figure
+        page: 168
+        quote: "Table 7.6 Classification of cystic kidney diseases"
+        title: "الأكياس في الـ cortex ولا الـ medulla؟"
+        alt: "Two columns of cystic kidney diseases. Cortex: ADPKD (any age, strong family history), juvenile PKD (under 10), simple cysts (over 65, no family history). Medulla: medullary sponge kidney (any age, no family history, no CKD), medullary cystic kidney (20-30, family history, CKD), nephronophthisis (under 15, CKD)."
+        caption: "قسّم الأكياس **cortex** (ADPKD، juvenile، simple) و **medulla** (sponge، cystic، NPHP). والسن هو المفتاح التاني: **أقل من 10** و **أقل من 15** و **20–30** و **فوق 65**."
+        svg: |
+          <svg viewBox="0 0 330 290" xmlns="http://www.w3.org/2000/svg">
+            <rect x="5" y="5" width="157" height="280" rx="10" class="fg-acc"/>
+            <text x="83" y="28" text-anchor="middle" class="t-b">Cortex</text>
+            <rect x="15" y="40" width="137" height="70" rx="8" class="fg-box"/>
+            <text x="25" y="60" class="t-sm t-b">ADPKD</text>
+            <text x="25" y="78" class="t-sm">Any age · FH ++</text>
+            <text x="25" y="96" class="t-sm">BP + · CKD ±</text>
+            <rect x="15" y="120" width="137" height="70" rx="8" class="fg-box"/>
+            <text x="25" y="140" class="t-sm t-b">Juvenile PKD</text>
+            <text x="25" y="158" class="t-sm">Age &lt;10 · FH ±</text>
+            <text x="25" y="176" class="t-sm">CKD + · BP +</text>
+            <rect x="15" y="200" width="137" height="70" rx="8" class="fg-box"/>
+            <text x="25" y="220" class="t-sm t-b">Simple cysts</text>
+            <text x="25" y="238" class="t-sm">Age &gt;65 · no FH</text>
+            <text x="25" y="256" class="t-sm">no CKD</text>
+            <rect x="168" y="5" width="157" height="280" rx="10" class="fg-good"/>
+            <text x="246" y="28" text-anchor="middle" class="t-b">Medulla</text>
+            <rect x="178" y="40" width="137" height="70" rx="8" class="fg-box"/>
+            <text x="188" y="60" class="t-sm t-b">Sponge kidney</text>
+            <text x="188" y="78" class="t-sm">Any age · no FH</text>
+            <text x="188" y="96" class="t-sm">no CKD · Ca stones</text>
+            <rect x="178" y="120" width="137" height="70" rx="8" class="fg-box"/>
+            <text x="188" y="140" class="t-sm t-b">Medullary cystic</text>
+            <text x="188" y="158" class="t-sm">Age 20–30 · FH ++</text>
+            <text x="188" y="176" class="t-sm">CKD ++ · BP normal</text>
+            <rect x="178" y="200" width="137" height="70" rx="8" class="fg-box"/>
+            <text x="188" y="220" class="t-sm t-b">Nephronophthisis</text>
+            <text x="188" y="238" class="t-sm">Age &lt;15 · FH +</text>
+            <text x="188" y="256" class="t-sm">CKD ++</text>
+          </svg>
+      - kind: match
+        page: 168
+        quote: "Table 7.6 Classification of cystic kidney diseases"
+        prompt: "وصّل كل مرض بالسن بتاعه في Table 7.6:"
+        pairs:
+          - ["Juvenile PKD", "Under 10"]
+          - ["Nephronophthisis", "Under 15"]
+          - ["Medullary cystic kidney", "20–30"]
+          - ["Simple cysts", "Over 65"]
+          - ["Medullary sponge kidney", "Any age (no family history)"]
+        why: "الـ ADPKD والـ sponge الاتنين **any age**، بس الـ ADPKD عنده ==family history قوي== والـ sponge لأ."
+      - kind: check
+        page: 167
+        quote: "Consider the diagnosis in young patients presenting with calcium stones."
+        question: "Young man, recurrent calcium stones, UTI, normal creatinine, no family history. Most likely?"
+        options:
+          - "Medullary sponge kidney"
+          - "ADTKD"
+          - "Nephronophthisis"
+          - "ARPKD"
+        answer: 0
+        why:
+          - "صح: calcium stones في شاب، من غير family history و الكلى شغالة."
+          - "فيه family history و CKD ومفيش stones."
+          - "أطفال و CKD."
+          - "رضّع و hepatic fibrosis."
+      - kind: try
+        items: [neph.L07.106, neph.L07.110, neph.L07.113, neph.L07.118, neph.L07.119]
+    recap:
+      - "ARPKD: PKHD1 (chr 6)، polyductin، أطفال، hepatic fibrosis، 1:20,000."
+      - "NPHP: AR، echo-bright مع أكياس corticomedullary قليلة؛ JOBS برّه الكلية (Senior-Løken = retinitis pigmentosa)."
+      - "ADTKD: AD، MUC1/UMOD/REN/HNF1B، UMOD = hyperuricemia؛ dipstick نضيف و salt loss و ESRD حوالي 60."
+      - "Sponge kidney: developmental، Ca stones في شاب، calyceal brush، الكلى شغالة."
+      - "Table 7.6: cortex (ADPKD، juvenile، simple) ضد medulla (sponge، cystic، NPHP)."
+    practice: [neph.L07.106, neph.L07.107, neph.L07.108, neph.L07.109, neph.L07.110, neph.L07.111, neph.L07.112, neph.L07.113, neph.L07.114, neph.L07.115, neph.L07.116, neph.L07.117, neph.L07.118, neph.L07.119, neph.L07.120]
+  # ------------------------------------------------------------------
+  - id: neph.L07.lesson5
+    title: "Tuberous sclerosis: الـ hamartomas في كل حتة"
+    hook: "صرع، وش فيه angiofibromas، وكلية فيها دهون بتنزف. وأكتر حاجة بتموّت عيان TSC هي الكلية."
+    minutes: 9
+    pages: [169, 176]
+    topics: [tsc]
+    goals:
+      - "تعرف جينات الـ TSC وعلاقتها بالـ PKD1"
+      - "تعرف الـ AML والـ cysts والـ RCC وإمتى نتدخل"
+      - "تطبّق الـ major و minor criteria"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 169
+        title: "TSC: tumor suppressor وقع"
+        quote: "TSC1 on chromosome 9q32-q34 and TSC2 on chromosome 16p13, adjacent to the PKD1 gene"
+        text: |
+          الـ ==TSC== **autosomal dominant tumor-suppressor syndrome**: **hamartomas** في الكلى والمخ والقلب والرئة والجلد.
+
+          - **TSC1** على 9q32–q34، **TSC2** على 16p13 ==جنب الـ PKD1==.
+          - لو deletion كبيرة شالت الـ TSC2 والـ PKD1 مع بعض: **PKDTS** (polycystic kidney شديد في الرضّع + TSC).
+          - حوالي **70% sporadic**. في الـ sporadic الـ TSC2 أشهر **5 مرات**، والـ TSC1 أخف (second hits أقل).
+      - kind: explain
+        page: 170
+        title: "الصورة الإكلينيكية"
+        quote: "In affected individuals over 5 years of age, the most common skin lesions are facial angiofibromas"
+        text: |
+          الأشهر: **seizures**، intellectual disability أو autism، جلد، **interstitial lung disease**، و tumors في المخ والشبكية والكلية والقلب.
+
+          الجلد بعد 5 سنين: ==facial angiofibromas==، **hypomelanotic macules** (ash leaf)، **ungual fibromas**، و **shagreen patch**.
+      - kind: explain
+        page: 171
+        title: "الكلية: AML ثم cysts ثم RCC"
+        quote: "angiomyolipomas (AMLs; 85%), cysts (30% to 47%), and renal cell carcinoma (RCC) (2% to 3%)"
+        text: |
+          - ==AML 85%==، **cysts 30–47%**، **RCC 2–3%**.
+          - ==Renal complications أشهر سبب وفاة في الـ TSC==: retroperitoneal hemorrhage و renal impairment.
+          - الـ AML = **vessels سميكة + smooth muscle + دهون** (hamartoma). في الـ TSC: **multiple و bilateral**، نادرة قبل 5 سنين، و **80% عند 10 سنين**. الستات أكتر وأكبر، والـ **حمل** بيزوّد الـ rupture.
+          - **Cysts + AMLs مع بعض على الـ CT** = فكّر TSC.
+      - kind: mnemonic
+        page: 171
+        quote: "Renal complications are the most frequent cause of death in TSC."
+        word: "ACR"
+        parts:
+          - { key: "A", text: "AML 85% (bleeds)" }
+          - { key: "C", text: "Cysts 30–47%" }
+          - { key: "R", text: "RCC 2–3%" }
+        hook: "**ACR** بالترتيب من الأشهر للأندر. والـ RCC في الـ TSC: ستات، أصغر سنًا، مع AML، multiple، و **بطيء** (papillary أشهر)."
+      - kind: table
+        page: 174
+        quote: "Two major features or one major feature with two minor features indicate definite TSC"
+        title: "التشخيص بالـ criteria"
+        columns: [Diagnosis, Features needed]
+        rows:
+          - ["Definite TSC", "2 major, or 1 major + 2 minor"]
+          - ["Probable TSC", "1 major + 1 minor"]
+          - ["Possible TSC", "1 major, or 2 minor"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: sort
+        page: 174
+        quote: "Two major features or one major feature with two minor features indicate definite TSC"
+        prompt: "Major ولا minor في Box 45.1؟"
+        bins: ["Major", "Minor"]
+        cards:
+          - { text: "Facial angiofibromas", bin: 0 }
+          - { text: "Renal angiomyolipoma", bin: 0 }
+          - { text: "Cardiac rhabdomyoma", bin: 0 }
+          - { text: "Shagreen patch", bin: 0 }
+          - { text: "Multiple renal cysts", bin: 1 }
+          - { text: "Dental pits", bin: 1 }
+          - { text: "Confetti skin lesions", bin: 1 }
+          - { text: "Gingival fibromas", bin: 1 }
+        why: "فخ الامتحان: ==renal AML = major== بس ==multiple renal cysts = minor==."
+      - kind: explain
+        page: 174
+        title: "المتابعة"
+        quote: "Current recommendations are to perform abdominal CT (Fig. 45.9) or magnetic resonance imaging (MRI) every 1 to 3 years for life"
+        text: |
+          الـ ultrasound شاطر في الـ AML الدهني والـ cysts، بس ==بيفوّت الـ fat-poor lesions==.
+
+          علشان كده **CT أو MRI كل 1–3 سنين مدى الحياة**. ولو مش قادرين نفرّق AML من RCC بالـ imaging: **biopsy**.
+      - kind: figure
+        page: 175
+        quote: "therefore these large AMLs require preemptive treatment with either nephron-sparing surgery or embolization"
+        title: "الـ AML: نسيبه ولا نتدخل؟"
+        alt: "Decision ladder for renal angiomyolipoma in TSC. Small and stable: no treatment, image every 1-3 years. Asymptomatic, growing, over 3 cm: mTOR inhibitor (sirolimus or everolimus) first line. Large with aneurysms over 5 cm, pain or bleeding: embolization or nephron-sparing surgery. RCC cannot be excluded: nephron-sparing surgery such as enucleation or partial nephrectomy."
+        caption: "الرقمين المهمين: ==3 cm== (يبدأ الـ **mTOR inhibitor** لو بيكبر) و **5 cm** (aneurysms ونزيف، يبقى embolization أو جراحة)."
+        svg: |
+          <svg viewBox="0 0 330 290" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L07c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="5" y="5" width="320" height="52" rx="8" class="fg-good"/>
+            <text x="15" y="26" class="t-b">Small, stable AML</text>
+            <text x="15" y="45" class="t-sm">No treatment · CT/MRI every 1–3 years</text>
+            <path d="M165 57 L165 72" class="fg-arrow" marker-end="url(#L07c)"/>
+            <rect x="5" y="74" width="320" height="52" rx="8" class="fg-acc"/>
+            <text x="15" y="95" class="t-b">Asymptomatic, growing, &gt;3 cm</text>
+            <text x="15" y="114" class="t-sm">mTOR inhibitor first line (sirolimus, everolimus)</text>
+            <path d="M165 126 L165 141" class="fg-arrow" marker-end="url(#L07c)"/>
+            <rect x="5" y="143" width="320" height="66" rx="8" class="fg-bad"/>
+            <text x="15" y="164" class="t-b">Aneurysms &gt;5 cm, pain or bleeding</text>
+            <text x="15" y="183" class="t-sm">Embolization or nephron-sparing surgery</text>
+            <text x="15" y="200" class="t-sm t-mut">Women: warn about pregnancy and estrogen</text>
+            <path d="M165 209 L165 224" class="fg-arrow" marker-end="url(#L07c)"/>
+            <rect x="5" y="226" width="320" height="58" rx="8" class="fg-ink"/>
+            <text x="15" y="247" class="t-b">Can't exclude RCC</text>
+            <text x="15" y="266" class="t-sm">Nephron-sparing: enucleation, partial nephrectomy</text>
+          </svg>
+      - kind: explain
+        page: 176
+        title: "الـ cysts والـ RCC والـ ESRD"
+        quote: "TSC-associated RCC should be suspected in enlarging, fat-poor lesions or when intratumoral calcifications are present"
+        text: |
+          - **Cysts**: العلاج الأساسي ==strict BP control==؛ الـ decompression مش مفيد.
+          - **RCC**: شك فيه لو lesion **بتكبر وفيها دهون قليلة** أو فيها **calcification**؛ biopsy، وبما إنه غالبًا bilateral: **renal-sparing surgery**.
+          - **ESRD**: 1 من كل 100، ستات 63%، متوسط **29 سنة**. Dialysis أو زرع، ويُفضّل ==bilateral nephrectomy== قبل الـ RRT (نزيف و malignancy).
+      - kind: check
+        page: 175
+        quote: "recommend mTOR inhibitors (rapalogs) as the first-line therapy for the treatment of asymptomatic, growing AMLs larger than 3 cm in diameter"
+        question: "TSC patient with an asymptomatic 4 cm AML that grew on serial CT. First-line?"
+        options:
+          - "mTOR inhibitor (everolimus)"
+          - "Radical nephrectomy"
+          - "Tolvaptan"
+          - "Observation only, forever"
+        answer: 0
+        why:
+          - "صح: asymptomatic، بيكبر، وأكبر من 3 cm."
+          - "الـ nephrectomy الكاملة مش أول خطوة، والـ nephron-sparing هو المفضل لو احتجنا جراحة."
+          - "ده للـ ADPKD."
+          - "بيكبر وفوق 3 cm، يبقى محتاج علاج."
+      - kind: try
+        items: [neph.L07.122, neph.L07.127, neph.L07.136, neph.L07.138, neph.L07.141]
+    recap:
+      - "TSC = AD tumor suppressor؛ TSC2 جنب PKD1 على 16p13 (PKDTS لو الاتنين اتشالوا)."
+      - "70% sporadic؛ TSC2 أوحش وأشهر في الـ sporadic."
+      - "الكلية: AML 85%، cysts 30–47%، RCC 2–3%؛ والكلية أشهر سبب وفاة."
+      - "Definite = 2 major أو 1 major + 2 minor. AML major، cysts minor."
+      - "CT/MRI كل 1–3 سنين. mTOR inhibitor لـ AML فوق 3 cm بيكبر؛ embolization لو aneurysms فوق 5 cm."
+      - "RCC: fat-poor أو calcified، و renal-sparing surgery."
+    practice: [neph.L07.121, neph.L07.122, neph.L07.123, neph.L07.124, neph.L07.125, neph.L07.126, neph.L07.127, neph.L07.128, neph.L07.129, neph.L07.130, neph.L07.131, neph.L07.132, neph.L07.133, neph.L07.134, neph.L07.135, neph.L07.136, neph.L07.137, neph.L07.138, neph.L07.139, neph.L07.140, neph.L07.141, neph.L07.142, neph.L07.143, neph.L07.144, neph.L07.145, neph.L07.146, neph.L07.147, neph.L07.148]
+  # ------------------------------------------------------------------
+  - id: neph.L07.lesson6
+    title: "Alport و thin membrane: نفس الـ collagen، مصير مختلف"
+    hook: "الاتنين بيبدأوا بـ hematuria. واحد بيوصل dialysis وطرش، والتاني غالبًا بيعيش عادي. الفرق في الـ GBM."
+    minutes: 9
+    pages: [177, 185]
+    topics: [alport, tbm]
+    goals:
+      - "تعرف الـ type IV collagen ووراثة الـ Alport"
+      - "تفرّق Alport من TBMN إكلينيكيًا وبالـ EM"
+      - "تعرف مشكلة الـ anti-GBM بعد الزرع"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 178
+        title: "الـ type IV collagen"
+        quote: "The major features of AS are hematuria, progressive nephritis with proteinuria and declining renal function, sensorineural deafness, and ocular abnormalities."
+        text: |
+          الاتنين **basement membrane defect**، والعَرَض الرئيسي **persistent hematuria**.
+
+          الـ **type IV collagen** موجود في الـ GBM و Bowman capsule و distal tubule و الجلد و ==العين والودن== والـ testis، وفيه 6 chains (α1–α6).
+
+          الـ ==Alport== = **hematuria + progressive nephritis + sensorineural deafness + eye**. نادر (1 في 50,000)، و **1.7%** من الأطفال على ESRD.
+      - kind: table
+        page: 179
+        quote: "an X-linked inherited mutation in the COL4A5 gene (>200 described) that encodes a5 type IV collagen accounts for 80% of cases"
+        title: "وراثة الـ Alport"
+        columns: [Form, Gene, Share]
+        rows:
+          - ["X-linked", "COL4A5 (α5)", "80%"]
+          - ["AR", "COL4A3/4 (chr 2)", "~15%"]
+          - ["AD", "COL4A3/4 (chr 2)", "~5%"]
+        hide: [[0, 1], [0, 2], [1, 2]]
+      - kind: explain
+        page: 179
+        title: "الولد الـ Alport"
+        quote: "Alport's: proteinuria (often nephrotic range) and ↑ BP usually present by adolescence."
+        text: |
+          - **Hematuria بدري**: لو مفيش hematuria لحد ==10 سنين== في ولد معرّض، الـ Alport مستبعد غالبًا.
+          - **Proteinuria** (غالبًا nephrotic) و **ضغط** في المراهقة.
+          - **ESRD في العقد 3–4**، والشدة متقاربة جوّه العيلة.
+          - ==High-tone sensorineural deafness== (الأغلبية)، و **anterior lenticonus** (عدسة مخروطية، ~20%) و **flecks** في الـ macula.
+          - **البنات الـ carriers**: غالبًا hematuria بس، بس **10–15%** يوصلوا ESRD في العقد الخامس.
+          - نادرًا: **leiomyomatosis** في المريء والـ trachea.
+      - kind: explain
+        page: 179
+        title: "Thin basement membrane: الـ benign familial hematuria"
+        quote: "The normal GBM is ± 350nm thick-but, in TMD, it is often less than 200nm"
+        text: |
+          الـ ==TBMN== اسمه القديم **benign familial hematuria**: **AD** شائع، microscopic hematuria والكلى **شغالة تقريبًا دايمًا**. موجود في ~5% من الـ post-mortems وبنلاقيه في المتبرعين.
+
+          - الـ GBM الطبيعي حوالي **350 nm**؛ في الـ TBMN غالبًا **أقل من 200**. الـ cut-off ==250 nm في الكبار== (200–250 في الأطفال).
+          - **40%** من العائلات عندهم COL4A3/COL4A4.
+          - ~**25%** من الـ microscopic hematuria في عيادة الكلى. Macroscopic في 20%.
+          - Proteinuria وضغط و renal impairment **نادرين**، و **مفيش extrarenal**.
+      - kind: table
+        page: 181
+        quote: "TABLE 46.2 Immunostaining for Type IV Collagen in Alport Syndrome"
+        title: "Type IV collagen immunostaining: الـ α5 بيقول إيه؟"
+        columns: [Group, GBM α5, Skin α5]
+        rows:
+          - ["Normal", "Present", "Present"]
+          - ["X-linked male", "Absent", "Absent"]
+          - ["X-linked female", "Mosaic", "Mosaic"]
+          - ["AR (both sexes)", "Absent", "Present"]
+        hide: [[1, 2], [2, 2], [3, 2]]
+      - kind: reveal
+        page: 181
+        quote: "Evaluation of Patient with Hematuria and a Positive Family History"
+        prompt: "عيان عنده hematuria و family history: ليه الـ skin biopsy بيشخّص الـ X-linked Alport بس مش الـ AR؟"
+        answer: "جلد الإنسان فيه **α5(IV)** بس، مفيهوش α3 ولا α4. الـ X-linked بيبوّظ الـ **α5**، فيختفي من الجلد عند الرجالة ويبقى **mosaic** عند الستات. الـ AR بيبوّظ **α3/α4**، والـ α5 في الجلد بيفضل **موجود**، فالـ skin biopsy يطلع طبيعي. ساعتها محتاج ==kidney biopsy== بالـ EM وصبغة α3 و α4 و α5."
+      - kind: explain
+        page: 183
+        title: "تحت الميكروسكوب"
+        quote: "there is variable thickening, thinning, basket weaving, and lamellation of the GBM"
+        text: |
+          **Alport**:
+          - LM و IF **مفيهمش حاجة pathognomonic**. قبل 5 سنين طبيعي، بعدين mesangial expansion، وبعدين **FSGS** و interstitial fibrosis بعد 10 سنين.
+          - الـ ==EM هو المفتاح==: GBM **سميك (لحد 1200 nm) ورفيع**، ==basket weaving==، و lamellation.
+
+          **TBMN**: LM و IF طبيعيين، والـ EM يوري **GBM رفيع كله** (diffuse thinning).
+      - kind: figure
+        page: 183
+        quote: "there is variable thickening, thinning, basket weaving, and lamellation of the GBM"
+        title: "شكل الـ GBM"
+        alt: "Three horizontal strips representing the glomerular basement membrane. Normal: an even band about 350 nm. Thin basement membrane nephropathy: an even but thin band under 250 nm. Alport syndrome: an irregular band alternating thick and thin segments with split, basket-weave layers."
+        caption: "**Normal** منتظم، **TBMN** منتظم بس ==رفيع==، و **Alport** متقطع: سميك ورفيع ومنسوج زي السبت."
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <text x="10" y="22" class="t-b">Normal GBM (~350 nm)</text>
+            <rect x="10" y="32" width="310" height="24" rx="4" class="fg-acc"/>
+            <text x="10" y="96" class="t-b">Thin basement membrane</text>
+            <text x="320" y="96" text-anchor="end" class="t-sm t-mut">&lt;250 nm (adult)</text>
+            <rect x="10" y="106" width="310" height="8" rx="3" class="fg-good"/>
+            <text x="10" y="162" class="t-b">Alport syndrome</text>
+            <text x="320" y="162" text-anchor="end" class="t-sm t-mut">up to 1200 nm</text>
+            <path d="M10 186 C40 166, 60 166, 80 186 S120 196, 140 184 C160 160, 200 160, 220 186 S270 196, 320 180" class="fg-arrow-bad" fill="none" stroke-width="3"/>
+            <path d="M10 196 C40 210, 60 214, 80 196 S120 190, 140 198 C160 222, 200 222, 220 198 S270 190, 320 202" class="fg-arrow-bad" fill="none" stroke-width="3"/>
+            <path d="M30 180 L60 204 M90 186 L120 196 M170 172 L200 212 M240 186 L280 198" class="fg-thin"/>
+            <text x="165" y="240" text-anchor="middle" class="t-sm">thick + thin + basket weaving</text>
+          </svg>
+      - kind: explain
+        page: 185
+        title: "العلاج والزرع"
+        quote: "In <5%, transplanted Alport patients may develop de novo anti-GBM anti-bodies that cause an RPGN"
+        text: |
+          **Alport**: مفيش علاج خاص. **BP control و ACEI/ARB** وتقليل الـ proteinuria بدري (وكمان الـ carriers)، **screening للعيلة**، و genetic counselling.
+
+          **الزرع**: في ==أقل من 5%== الجسم يعتبر الـ **α5 بتاع المتبرع غريب** ويعمل **anti-GBM** فيحصل **RPGN**. بس ده **مش contraindication** للزرع.
+
+          **TBMN**: طمّنه بس ما تسيبوش: خطر الـ CKD **أقل من 5%** بس موجود. Urinalysis وضغط ووظائف كلى كل **1–2 سنة**.
+      - kind: check
+        page: 185
+        quote: "Proteinuria, hypertension, and progression to ESRD are unusual, seen in less than 10% of affected individuals, and extremely unusual before age 40."
+        question: "Which feature favors TBMN over Alport?"
+        options:
+          - "Autosomal dominant hematuria, normal hearing, no proteinuria at 35"
+          - "High-tone hearing loss"
+          - "Anterior lenticonus"
+          - "Nephrotic proteinuria by 16"
+        answer: 0
+        why:
+          - "صح: الـ TBMN AD، مفيش extrarenal، والـ proteinuria نادرة قبل 40."
+          - "الطرش ده Alport."
+          - "عين Alport."
+          - "Alport في المراهقة."
+      - kind: try
+        items: [neph.L07.150, neph.L07.153, neph.L07.157, neph.L07.163, neph.L07.172]
+    recap:
+      - "Alport: hematuria + nephritis + deafness + eye. X-linked COL4A5 80%، AR 15%، AD 5%."
+      - "مفيش hematuria لحد 10 سنين = Alport مستبعد غالبًا؛ ESRD عقد 3–4؛ الـ carriers 10–15% ESRD."
+      - "TBMN: AD، GBM أقل من 250 nm، 25% من hematuria العيادة، مفيش extrarenal."
+      - "Skin α5: غايب في X-linked male، mosaic في female، موجود في AR."
+      - "EM: Alport = thick/thin/basket weaving؛ TBMN = thin منتظم."
+      - "بعد الزرع: anti-GBM أقل من 5%، مش contraindication. TBMN متابعة كل 1–2 سنة."
+    practice: [neph.L07.149, neph.L07.150, neph.L07.151, neph.L07.152, neph.L07.153, neph.L07.154, neph.L07.155, neph.L07.156, neph.L07.157, neph.L07.158, neph.L07.159, neph.L07.160, neph.L07.161, neph.L07.162, neph.L07.163, neph.L07.164, neph.L07.165, neph.L07.166, neph.L07.167, neph.L07.168, neph.L07.169, neph.L07.170, neph.L07.171, neph.L07.172, neph.L07.173, neph.L07.174]
+  # ------------------------------------------------------------------
+  - id: neph.L07.lesson7
+    title: "Fabry و nail-patella: الـ zebra والرُكبة"
+    hook: "ولد إيده بتحرقه من صغره ومش بيعرق، وواحدة من غير صابونة رُكبة. الاتنين ممكن يوصلوا للكلى."
+    minutes: 9
+    pages: [186, 197]
+    topics: [fabry, nps]
+    goals:
+      - "تعرف الـ enzyme والجين والأعراض في كل جهاز في Fabry"
+      - "تشخّص وتعالج Fabry"
+      - "تعرف nail-patella syndrome وشكل الـ EM"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 186
+        title: "Fabry: إنزيم ناقص"
+        quote: "Fabry disease is caused by hereditary deficiency of the enzyme a- galactosidase A (a-Gal A)"
+        text: |
+          نقص ==α-galactosidase A== فيتجمع **glycosphingolipid (Gb3)** جوّه الخلايا.
+
+          الجين **GLA** على ==X chromosome== (أكتر من 500 mutation). الرجالة (hemizygous) حالتهم شديدة، والستات (heterozygous) متغيرة وغالبًا أخف.
+
+          النتيجة: **CKD، pain crises، مشاكل عرق، جلد، قلب، وعين**.
+      - kind: mnemonic
+        page: 186
+        quote: "Clinically, this leads to progressive CKD, pain crises, sweat-ing abnormalities, vascular cutaneous lesions, and cardiac and eye abnormalities."
+        word: "FABRY"
+        parts:
+          - { key: "F", text: "Feet and hands burn: acral pain crises from childhood" }
+          - { key: "A", text: "Angiokeratomas (bathing-trunk area) and Anhidrosis" }
+          - { key: "B", text: "Bad kidneys: proteinuria, ESRD 3rd–6th decade" }
+          - { key: "R", text: "Rhythm and LVH: heart, coronary disease" }
+          - { key: "Y", text: "Eye: corneal verticillata (75%)" }
+        hook: "**FABRY**: وده كل الأعراض. والموت غالبًا من ==MI أو stroke==."
+      - kind: explain
+        page: 188
+        title: "الكلية"
+        quote: "the nephropathy of Fabry disease typically manifests as mild to moderate proteinuria, sometimes with microhematuria"
+        text: |
+          - **Proteinuria خفيفة لمتوسطة** ± microhematuria من **العقد الثالث**؛ الـ nephrotic نادر.
+          - في البول: ==oval fat bodies مع Maltese cross== تحت الـ polarized light.
+          - ضغط و ESRD في العقد **4–5**؛ لحد **10%** من الستات يوصلوا ESRD.
+          - **LM**: الـ podocytes منفوخة ومليانة **vacuoles صافية**.
+          - **EM**: inclusions في الـ lysosomes (myelin figures) طبقات متوازية = ==zebra bodies==.
+      - kind: explain
+        page: 190
+        title: "القلب والأعصاب والجلد والعين"
+        quote: "The vertebrobasilar circulation is preferentially involved."
+        text: |
+          - **القلب**: coronary narrowing (angina، MI، HF)، ==LVH بدري== (وممكن isolated)، arrhythmias، و valves.
+          - **Autonomic**: **hypohidrosis**، acral paresthesias، و motility.
+          - **المخ**: من العقد الرابع، والـ ==vertebrobasilar== الأكتر: vertigo، diplopia، dysarthria، ataxia، ونزيف أو infarction.
+          - **الجلد**: **angiokeratomas** في العقد التاني (ممكن أول علامة)، أحمر غامق، في **lower trunk والأرداف والـ genitalia**.
+          - **العين**: **verticillata** (corneal whorls) في **75%** من الرجالة والستات، cataract 23% رجالة.
+      - kind: explain
+        page: 192
+        title: "التشخيص والعلاج"
+        quote: "The diagnosis should be confirmed by demonstrating decreased (<15%) or absent a-Gal A activity in serum, leukocytes, cultured skin fibroblasts, or tissue."
+        text: |
+          **التشخيص**: الراجل غالبًا إكلينيكي + **slit lamp**. التأكيد: ==α-Gal A activity أقل من 15% أو مش موجود==. لو مش واضح: slit lamp، urinary ceramide di/trihexoside، و genetic testing.
+
+          **العلاج**: ==agalsidase== (enzyme replacement): Gb3 يقل، الألم يتحسن، الـ deposits تتشال، والكلية تستقر 1–2 سنة. + **RAS blockade** للـ proteinuria. بيتدي **أثناء الـ hemodialysis** (الغسيل مش بيشيله). لكل الرجالة والستات اللي عندهم أعراض، بس **غالي جدًا**.
+
+          **الزرع**: بيعالج الكلية بس مش الباقي؛ الموت من القلب والمخ. و ==الـ heterozygotes ما يتبرعوش==.
+      - kind: check
+        page: 189
+        quote: "The layers may be arranged in parallel (zebra bodies)."
+        question: "Kidney EM shows lamellated lysosomal inclusions in podocytes ('zebra bodies'). Which enzyme is low?"
+        options:
+          - "α-galactosidase A"
+          - "Glucocerebrosidase"
+          - "Hexosaminidase A"
+          - "Arylsulfatase A"
+        answer: 0
+        why:
+          - "صح: Fabry، و Gb3 بيتجمع في الـ lysosomes."
+          - "ده Gaucher."
+          - "ده Tay-Sachs."
+          - "ده metachromatic leukodystrophy."
+      - kind: explain
+        page: 194
+        title: "Nail-patella syndrome"
+        quote: "characterized by hypoplasia or absence of the patellae, dys-trophic nails, dysplasia of the elbows and iliac horns, and renal disease"
+        text: |
+          **Autosomal dominant**، جين ==LMX1B== (transcription factor مهم للأطراف والكلية).
+
+          - **Patella** غايبة أو صغيرة في **أكتر من 90%**.
+          - ==Iliac horns== في **80%**: **pathognomonic**.
+          - **Nails** في **98%**: bilateral، الإيد أكتر، dystrophic، koilonychia، و **triangular lunulae**.
+          - **Elbows**: aplasia أو hypoplasia.
+          - **الكلية** في أقل من النص: microhematuria و proteinuria خفيفة في المراهقة، وخطر ESRD **3–5%** بس.
+      - kind: explain
+        page: 195
+        title: "الـ EM: الـ GBM متآكل"
+        quote: "EM shows multiple irregular lucencies of the GBM, giving it a moth-eaten appearance"
+        text: |
+          الـ LM مش بيقول حاجة (FSGS أو mesangial أو طبيعي)، فلازم ==EM==: GBM فيه فراغات كتير = **moth-eaten**، وجوّاها **cross-banded collagen fibrils** (تبان أحسن بالـ **phosphotungstic acid**).
+
+          **العلاج**: مفيش خاص. **مش بيرجع في الكلية المزروعة**، بس افحص المتبرع القريب كويس لأنه AD.
+      - kind: match
+        page: 195
+        quote: "EM is required to make the diagnosis. EM shows multiple irregular lucencies of the GBM, giving it a moth-eaten appearance"
+        prompt: "وصّل كل مرض بشكله في الـ EM:"
+        pairs:
+          - ["Alport syndrome", "Basket-weave GBM"]
+          - ["Thin basement membrane", "Diffusely thin GBM"]
+          - ["Fabry disease", "Zebra bodies in podocytes"]
+          - ["Nail-patella syndrome", "Moth-eaten GBM with collagen fibrils"]
+        why: "الأربعة وراثيين وكلهم بيتشخّصوا بالـ ==EM==. احفظهم كصورة: سبت، رفيع، zebra، متآكل."
+      - kind: aside
+        tone: joke
+        page: 196
+        quote: "In about 80% of patients, osseous processes project posteriorly from the iliac wings (iliac horns), which is pathog-nomonic"
+        text: "العيان الوحيد اللي عنده **قرون** ومن غير **صابونة رُكبة** في نفس الوقت. لو شفت **iliac horns** على الـ X-ray، خلاص قول ==nail-patella== وانت مطمّن."
+      - kind: try
+        items: [neph.L07.176, neph.L07.187, neph.L07.188, neph.L07.198, neph.L07.202]
+    recap:
+      - "Fabry: α-Gal A ناقص، GLA على X، Gb3 بيتجمع؛ الرجالة أشد."
+      - "FABRY: acral pain، angiokeratomas و anhidrosis، كلية، قلب (LVH)، عين (verticillata 75%)."
+      - "Urine: Maltese cross. EM: zebra bodies. التأكيد: α-Gal A أقل من 15%."
+      - "Agalsidase + RAS blockade، أثناء الـ HD؛ الـ heterozygotes ما يتبرعوش."
+      - "Nail-patella: LMX1B، patella >90%، iliac horns 80% (pathognomonic)، nails 98%؛ ESRD 3–5%."
+      - "EM: moth-eaten GBM مع collagen fibrils؛ مش بيرجع بعد الزرع."
+    practice: [neph.L07.175, neph.L07.176, neph.L07.177, neph.L07.178, neph.L07.179, neph.L07.180, neph.L07.181, neph.L07.182, neph.L07.183, neph.L07.184, neph.L07.185, neph.L07.186, neph.L07.187, neph.L07.188, neph.L07.189, neph.L07.190, neph.L07.191, neph.L07.192, neph.L07.193, neph.L07.194, neph.L07.195, neph.L07.196, neph.L07.197, neph.L07.198, neph.L07.199, neph.L07.200, neph.L07.201, neph.L07.202]

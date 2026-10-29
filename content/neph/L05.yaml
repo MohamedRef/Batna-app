@@ -1,0 +1,1633 @@
+schema: batna.content/v1
+lecture: neph.L05
+title: "Acute kidney injury"
+author: "Hesham Elghoneimy"
+book: { chapter: 8, pages: [98, 126] }
+topics:
+  - { id: definition, title: "Definition, history and AKI staging (RIFLE, AKIN, KDIGO)" }
+  - { id: epidemiology, title: "Epidemiology, AKD/CKD overlap and AKI types" }
+  - { id: etiology, title: "Prerenal, intrinsic and postrenal causes" }
+  - { id: complications, title: "Complications and oliguria" }
+  - { id: workup, title: "History, examination, blood and urine tests, imaging" }
+  - { id: indices, title: "Prerenal vs ATN indices and urinary sediment" }
+  - { id: prevention, title: "Prevention: contrast, ICU glucose, aminoglycosides" }
+  - { id: treatment, title: "Treatment: fluids, pressors, dopamine, diuretics, specific causes" }
+  - { id: dialysis, title: "Dialysis indications, modes and prognosis" }
+  - { id: biomarkers, title: "Novel biomarkers and risk tools" }
+  - { id: reserve, title: "Renal functional reserve, recovery and take-home messages" }
+items:
+  # ---------- p98-99: definition and history ----------
+  - id: neph.L05.001
+    kind: card
+    topic: definition
+    front: Define acute kidney injury.
+    back: An abrupt reduction in kidney function shown by changes in laboratory values (serum creatinine, BUN) and urine output.
+    src: { page: 98, quote: "Acute kidney injury (AKI) is abrupt reduction in kidney functions as evidenced by changed in laboratory values" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L05.002
+    kind: card
+    topic: definition
+    front: How was acute renal failure diagnosed in 1900?
+    back: Clinically, from signs and symptoms such as oliguria, fatigue, vomiting and GI bleeding.
+    src: { page: 98, quote: "ARF was diagnosed from signs and symptoms such as oliguria, fatigue, vomiting, Gl bleeding" }
+    status: unverified
+  - id: neph.L05.003
+    kind: cloze
+    topic: definition
+    text: "Before a unified definition, over {{c1::30}} definitions of AKI/ARF existed in the literature."
+    src: { page: 99, quote: "Over 30 definitions of AKI/ ARF existed in the literature" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L05.004
+    kind: order
+    topic: definition
+    prompt: Put the milestones in the evolving definition of AKI in order (p99 timeline).
+    steps:
+      - "Bywaters describes ARF in crush injuries from the London bombings"
+      - "ADQI devises the RIFLE staging system for ARF (May 2004)"
+      - "The term AKI is proposed for the whole spectrum of ARF (September 2004)"
+      - "AKIN develops uniform standards for defining and classifying AKI"
+      - "KDIGO unifies the definition using RIFLE and AKIN criteria"
+    src: { page: 99, quote: "Evolving Definition and Classification of AKI" }
+    status: unverified
+  - id: neph.L05.005
+    kind: card
+    topic: definition
+    front: Who first described ARF, and in which patients?
+    back: E.G. Bywaters, in patients after crush injuries from the London bombings in World War II.
+    src: { page: 99, quote: "E.G. Bywaters in his staging system for ARF Observations of patients after crush injuries from the London bombings" }
+    status: unverified
+  # ---------- p100: classification and diagnosis ----------
+  - id: neph.L05.006
+    kind: enumerate
+    topic: definition
+    prompt: Name the three criteria systems used to classify AKI, with what each acronym stands for.
+    points:
+      - "RIFLE: Risk, Injury, Failure, Loss of kidney function, End-stage renal disease"
+      - "AKIN: Acute Kidney Injury Network"
+      - "KDIGO: Kidney Disease Improving Global Outcome"
+    pass: 3
+    src: { page: 100, quote: "RIFLE: Risk, Injury, Failure, Loss of Kidney Function and End Stage Renal Disease" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L05.007
+    kind: enumerate
+    topic: definition
+    prompt: AKI is diagnosed if any one of which three KDIGO criteria is met?
+    points:
+      - "Rise in serum creatinine of at least 0.3 mg/dL within 48 hours"
+      - "50% rise over baseline serum creatinine within 7 days"
+      - "Urine output under 0.5 mL/kg/hour for at least 6 hours"
+    pass: 3
+    src: { page: 100, quote: "Increase in serum creatinine (SCr) of at least 0.3 mg/dL within 48 hours" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: neph.L05.008
+    kind: cloze
+    topic: definition
+    text: "KDIGO AKI: serum creatinine up by at least {{c1::0.3 mg/dL}} within {{c2::48 hours}}, or up {{c3::50%}} from baseline within 7 days."
+    src: { page: 100, quote: "Increase in serum creatinine (SCr) of at least 0.3 mg/dL within 48 hours" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L05.009
+    kind: cloze
+    topic: definition
+    text: "The urine-output criterion for AKI is less than {{c1::0.5 mL/kg/hour}} for at least {{c2::6 hours}}."
+    src: { page: 100, quote: "A urine output of less than 0.5 mL/kg/hour for at least 6 hours" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L05.010
+    kind: table
+    topic: definition
+    title: "KDIGO staging of AKI (Table 28-1)"
+    columns: [Stage, Serum creatinine, Urine output]
+    rows:
+      - ["Stage 1", "Rise ≥0.3 mg/dL (≥27 µmol/L) or 1.5–1.9 times baseline", "<0.5 mL/kg/h for 6–12 hours"]
+      - ["Stage 2", "2–2.9 times baseline", "<0.5 mL/kg/h for ≥12 hours"]
+      - ["Stage 3", "3 times baseline, or SCr ≥4 mg/dL (≥354 µmol/L), or need for RRT, or eGFR <35 in patients <18 years", "Anuria for ≥12 hours"]
+    blanks: [[0, 1], [1, 1], [1, 2], [2, 1], [2, 2]]
+    src: { page: 100, quote: "TABLE 28-1: RIFLE, AKIN, and KDIGO Classification Schemes for Acute Kidney Injurya" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: neph.L05.011
+    kind: table
+    topic: definition
+    title: "RIFLE categories (Table 28-1)"
+    columns: [Category, Creatinine or GFR, Urine output]
+    rows:
+      - ["Risk", "SCr ×1.5 or GFR fall >25%", "<0.5 mL/kg/h for ≥6 hours"]
+      - ["Injury", "SCr ×2 or GFR fall >50%", "<0.5 mL/kg/h for ≥12 hours"]
+      - ["Failure", "SCr ×3, or GFR fall >75%, or SCr ≥4 mg/dL with an acute rise of at least 0.5 mg/dL", "Anuria for ≥12 hours"]
+      - ["Loss", "Complete loss of function (RRT) for >4 weeks", "-"]
+      - ["ESKD", "RRT >3 months", "-"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 100, quote: "TABLE 28-1: RIFLE, AKIN, and KDIGO Classification Schemes for Acute Kidney Injurya" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L05.012
+    kind: table
+    topic: definition
+    title: "AKIN stages (Table 28-1)"
+    columns: [Stage, Serum creatinine, Urine output]
+    rows:
+      - ["Stage 1", "Rise ≥0.3 mg/dL or 1.5- to 2-fold from baseline", "<0.5 mL/kg/h for ≥6 hours"]
+      - ["Stage 2", "Rise >2- to 3-fold from baseline", "<0.5 mL/kg/h for ≥12 hours"]
+      - ["Stage 3", "Rise >3-fold, or SCr ≥4 mg/dL with an acute rise of at least 0.5 mg/dL, or need for RRT", "<0.3 mL/kg/h for ≥24 hours or anuria for ≥12 hours"]
+    blanks: [[0, 1], [1, 1], [2, 1], [2, 2]]
+    src: { page: 100, quote: "TABLE 28-1: RIFLE, AKIN, and KDIGO Classification Schemes for Acute Kidney Injurya" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L05.013
+    kind: mcq
+    topic: definition
+    stem: A 60-year-old man's creatinine rises from a baseline of 1.0 to 2.4 mg/dL over 4 days after surgery. Urine output stays above 0.5 mL/kg/h. What is his KDIGO AKI stage?
+    options:
+      - Stage 1
+      - Stage 2
+      - Stage 3
+      - Not AKI, because urine output is normal
+    answer: 1
+    why:
+      - "Stage 1 is 1.5–1.9 times baseline; 2.4 is 2.4 times baseline."
+      - "Correct: 2–2.9 times baseline is KDIGO stage 2 (Table 28-1, p100)."
+      - "Stage 3 needs 3 times baseline, creatinine ≥4 mg/dL or RRT."
+      - "Either criterion is enough; a normal urine output does not exclude AKI."
+    src: { page: 100, quote: "TABLE 28-1: RIFLE, AKIN, and KDIGO Classification Schemes for Acute Kidney Injurya" }
+    status: unverified
+  - id: neph.L05.014
+    kind: mcq
+    topic: definition
+    stem: A septic ICU patient with a normal baseline creatinine passes no urine for 14 hours. Creatinine has risen from 0.9 to 1.3 mg/dL. What is the KDIGO stage?
+    options:
+      - Stage 1
+      - Stage 2
+      - Stage 3
+      - Not AKI yet
+    answer: 2
+    why:
+      - "The creatinine rise alone (0.4 mg/dL) would be stage 1, but the worst criterion decides the stage."
+      - "Stage 2 urine output is <0.5 mL/kg/h for ≥12 hours, not anuria."
+      - "Correct: anuria for ≥12 hours is KDIGO stage 3 (Table 28-1, p100)."
+      - "A rise ≥0.3 mg/dL within 48 hours already meets the AKI definition."
+    src: { page: 100, quote: "TABLE 28-1: RIFLE, AKIN, and KDIGO Classification Schemes for Acute Kidney Injurya" }
+    status: unverified
+  - id: neph.L05.015
+    kind: card
+    topic: definition
+    front: Which KDIGO stage 3 criterion applies only to patients under 18 years?
+    back: eGFR below 35 mL/min/1.73 m².
+    src: { page: 100, quote: "TABLE 28-1: RIFLE, AKIN, and KDIGO Classification Schemes for Acute Kidney Injurya" }
+    status: unverified
+  - id: neph.L05.016
+    kind: card
+    topic: definition
+    front: In RIFLE, what separates "Loss" from "ESKD"?
+    back: Loss is complete loss of function needing RRT for more than 4 weeks; ESKD is RRT for more than 3 months.
+    src: { page: 100, quote: "TABLE 28-1: RIFLE, AKIN, and KDIGO Classification Schemes for Acute Kidney Injurya" }
+    status: unverified
+  # ---------- p100-101: limitations ----------
+  - id: neph.L05.017
+    kind: enumerate
+    topic: definition
+    prompt: List the limitations of the KDIGO definition and staging of AKI.
+    points:
+      - "Many etiologies cause AKI, and the criteria do not distinguish between them"
+      - "Should management be individualized by better phenotyping (etiology, severity, ability to recover)?"
+      - "Use of urine output as the sole criterion"
+      - "Serum creatinine kinetics do not reflect GFR well"
+      - "Determining the baseline creatinine (first hospital value or historical values?)"
+      - "Relying on small creatinine changes may cause a high rate of misdiagnosis"
+    pass: 5
+    src: { page: 101, quote: "Use of urine output as a sole criterium of AKI" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L05.018
+    kind: card
+    topic: definition
+    front: Why can relying on small changes in serum creatinine be a problem when diagnosing AKI?
+    back: It may be associated with a high rate of misdiagnosis.
+    src: { page: 101, quote: "Relying on small changes in șcr for the diagnosis of AKI may be associated with a high rate of misdiagnosis" }
+    status: unverified
+  - id: neph.L05.019
+    kind: card
+    topic: definition
+    front: What open question about the baseline creatinine does the book raise?
+    back: Whether the first documented creatinine at hospitalization should be used as the baseline rather than historical values.
+    src: { page: 101, quote: "Should the first documented SCr at hospitalization be used as the baseline, rather than using historical values?" }
+    status: unverified
+  - id: neph.L05.020
+    kind: table
+    topic: definition
+    title: "Acute creatinine rises: implications are context-dependent"
+    columns: ["", "Induced AKI (good)", "Spontaneous AKI (bad)"]
+    rows:
+      - ["Examples", "Diuresis/decongestion in HF, RAAS inhibition, intensive BP control, SGLT2i", "Untreated cardiorenal or hepatorenal syndrome, sepsis-induced, nephrotoxin-induced"]
+      - ["Outcome", "Outcomes better", "Outcomes worse"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2]]
+    src: { page: 101, quote: "Acute elevations of serum creatinine: Implications are context-dependent" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L05.021
+    kind: mcq
+    topic: definition
+    stem: A patient with heart failure starts an SGLT2 inhibitor and his creatinine rises by 0.3 mg/dL while he loses 3 kg of edema. How does the book frame this creatinine rise?
+    options:
+      - Spontaneous AKI with worse outcomes
+      - Induced AKI with better outcomes
+      - Hepatorenal physiology
+      - Nephrotoxin-induced AKI
+    answer: 1
+    why:
+      - "Spontaneous AKI is untreated CRS or HRS, sepsis or nephrotoxins."
+      - "Correct: decongestion, RAAS inhibition, intensive BP control and SGLT2i are 'induced AKI', with better outcomes (p101)."
+      - "There is no liver disease here."
+      - "An SGLT2 inhibitor is listed on the good side, not as a nephrotoxin."
+    src: { page: 101, quote: "Acute elevations of serum creatinine: Implications are context-dependent" }
+    status: unverified
+  # ---------- p102-103: AKD, epidemiology, types ----------
+  - id: neph.L05.022
+    kind: card
+    topic: epidemiology
+    front: In the ADQI model (KDIGO 2012), what time windows define AKI, AKD and CKD after an injury?
+    back: AKI runs from day 0 to day 7 (the first 48 hours being the earliest window). AKD runs from day 7 to day 90. After 90 days the condition is CKD.
+    src: { page: 102, quote: "The conceptual overlap among AKI, AKD and CKD (KDIGO AKI guideline 2012)" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: neph.L05.023
+    kind: card
+    topic: epidemiology
+    front: How do AKI, AKD and CKD relate in the KDIGO 2012 diagram?
+    back: AKI sits inside AKD, and both overlap CKD, so a patient can have AKI on top of CKD.
+    src: { page: 102, quote: "The conceptual overlap among AKI, AKD and CKD (KDIGO AKI guideline 2012)" }
+    status: unverified
+  - id: neph.L05.024
+    kind: table
+    topic: epidemiology
+    title: "AKI by the numbers"
+    columns: [Measure, Figure]
+    rows:
+      - ["Hospitalized patients who develop AKI", "5–7%"]
+      - ["Critically ill (ICU-acquired AKI)", "20–60%"]
+      - ["Overall mortality despite better care", "Generally exceeds 50%"]
+      - ["Non-ICU AKI mortality", "Up to 10%"]
+      - ["ICU AKI mortality", "Over 50%"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 102, quote: "Between 5% and 7% of all hospitalized patients develop AKI" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L05.025
+    kind: cloze
+    topic: epidemiology
+    text: "AKI develops in {{c1::5–7%}} of hospitalized patients and in {{c2::20–60%}} of critically ill patients."
+    src: { page: 102, quote: "A greater prevalence of AKI (20-60%) is found in critically ill patients" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L05.026
+    kind: card
+    topic: epidemiology
+    front: Which has the better prognosis, oliguric or non-oliguric AKI, and what usually causes non-oliguric AKI in hospital?
+    back: Non-oliguric AKI has the better prognosis. In hospital it is usually secondary to nephrotoxic agents.
+    src: { page: 102, quote: "Non-oliguric has better prognosis than oliguric one" }
+    status: unverified
+  - id: neph.L05.027
+    kind: table
+    topic: epidemiology
+    title: "ICU vs non-ICU AKI"
+    columns: ["", Non-ICU AKI, ICU AKI]
+    rows:
+      - ["Organs involved", "Kidney usually the only failed organ", "Often sepsis with non-renal multi-organ failure"]
+      - ["Mortality", "Up to 10%", "Over 50%"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2]]
+    src: { page: 103, quote: "ICU AKI is often associated with sepsis and with non-renal multi-organ system failure), with mortality rates of over 50%" }
+    status: unverified
+  - id: neph.L05.028
+    kind: card
+    topic: epidemiology
+    front: Azotemia vs uremia?
+    back: Azotemia is accumulation of nitrogenous waste. Uremia is symptomatic AKI, for example mental-status changes, loss of appetite and tremors.
+    src: { page: 103, quote: "Symptomatic AKI (eg MS changes, loss of appetite, tremors)" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L05.029
+    kind: mcq
+    topic: epidemiology
+    stem: A man with a creatinine of 4.5 mg/dL after diarrhea is alert, eating and has no tremor. Which term fits?
+    options:
+      - Uremia
+      - Azotemia
+      - Renal angina
+      - AKD
+    answer: 1
+    why:
+      - "Uremia needs symptoms such as confusion, anorexia or tremor."
+      - "Correct: azotemia is accumulation of nitrogenous waste without the uremic symptoms (p103)."
+      - "Renal angina is a risk-assessment index, not a state."
+      - "AKD describes kidney disease lasting 7–90 days."
+    src: { page: 103, quote: "Accumulation of nitrogenous waste" }
+    status: unverified
+  # ---------- p103-106: etiology ----------
+  - id: neph.L05.030
+    kind: table
+    topic: etiology
+    title: "The three groups of AKI causes (p103)"
+    columns: [Group, What happens]
+    rows:
+      - ["Prerenal", "Hypoperfusion, with the renal parenchyma intact"]
+      - ["Intrinsic", "Damage involving the renal parenchymal tissue"]
+      - ["Postrenal (obstructive)", "Acute obstruction of urinary flow"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 103, quote: "Hypoperfusion in which the integrity of renal parenchyma is preserved" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L05.031
+    kind: table
+    topic: etiology
+    title: "Classification of AKI causes (p104 figure)"
+    columns: [Group, Subgroup, Examples]
+    rows:
+      - ["Prerenal", "Decreased effective volume", "Hypovolemia, low cardiac output, CHF, liver failure"]
+      - ["Prerenal", "Impaired renal autoregulation", "NSAIDs, ACE-I/ARB, cyclosporine"]
+      - ["Intrinsic", "Glomerular", "Acute glomerulonephritis"]
+      - ["Intrinsic", "Vascular", "Vasculitis, malignant hypertension, TTP-HUS"]
+      - ["Intrinsic", "Tubules and interstitium", "Ischemia, sepsis, exogenous and endogenous nephrotoxins"]
+      - ["Postrenal", "Obstruction", "Bladder outlet, or bilateral pelviureteral (or a solitary kidney)"]
+    blanks: [[0, 2], [1, 2], [3, 2], [4, 2], [5, 2]]
+    src: { page: 104, quote: "Classification of AKI (ARF)" }
+    status: unverified
+  - id: neph.L05.032
+    kind: enumerate
+    topic: etiology
+    prompt: Name the exogenous and endogenous nephrotoxins in the p104 classification of intrinsic AKI.
+    points:
+      - "Exogenous: iodinated contrast, aminoglycosides, cisplatin, amphotericin B"
+      - "Endogenous: hemolysis, rhabdomyolysis, myeloma, intratubular crystals"
+    pass: 2
+    src: { page: 104, quote: "Classification of AKI (ARF)" }
+    status: unverified
+  - id: neph.L05.033
+    kind: card
+    topic: etiology
+    front: When does unilateral obstruction cause postrenal AKI?
+    back: When it obstructs a solitary functioning kidney. Otherwise postrenal AKI needs bladder outlet or bilateral pelviureteral obstruction.
+    src: { page: 104, quote: "Classification of AKI (ARF)" }
+    status: unverified
+  - id: neph.L05.034
+    kind: card
+    topic: etiology
+    front: What characterizes prerenal AKI?
+    back: Reduced blood delivery to the kidney.
+    src: { page: 105, quote: "Prerenal AKI: is characterized by reduced blood delivery to the kidney" }
+    status: unverified
+  - id: neph.L05.035
+    kind: enumerate
+    topic: etiology
+    prompt: List the common causes of prerenal AKI in the book's three groups.
+    points:
+      - "Volume depletion: hemorrhage, dehydration, GI fluid losses"
+      - "Decreased effective circulating volume: low cardiac output (CHF, MI, hypotension), liver failure, sepsis"
+      - "Functional: ACEIs, NSAIDs, ARBs, cyclosporine and tacrolimus"
+    pass: 3
+    src: { page: 105, quote: "Decrease cardiac output (CHF, MI, hypotension)" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L05.036
+    kind: card
+    topic: etiology
+    front: Why can prompt correction of volume depletion restore kidney function to normal in prerenal AKI?
+    back: Because no structural damage to the kidney has occurred.
+    src: { page: 105, quote: "Prompt correction of volume depletion can restore kidney function to normal because no structural damage to the kidney has occurred" }
+    status: unverified
+  - id: neph.L05.037
+    kind: enumerate
+    topic: etiology
+    prompt: List the causes of intrinsic AKI.
+    points:
+      - "Vascular damage (renal thrombosis)"
+      - "Glomerular damage (rapidly progressive GN)"
+      - "Acute tubular necrosis: ischemia, endogenous toxins, exogenous toxins"
+      - "Acute interstitial nephritis: NSAIDs, infections"
+    pass: 3
+    src: { page: 105, quote: "Glomerular damage (rapidly progressive glomerulonephritis)" }
+    status: unverified
+  - id: neph.L05.038
+    kind: cloze
+    topic: etiology
+    text: "Acute tubular necrosis accounts for {{c1::40%}} of all AKI cases; postrenal AKI accounts for less than {{c2::10%}}."
+    src: { page: 105, quote: "Acute tubular necrosis (ATN) (it accounts for 40% of all cases of AKI)" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L05.039
+    kind: enumerate
+    topic: etiology
+    prompt: Give the causes of ATN by type.
+    points:
+      - "Ischemia: hypotension, sepsis"
+      - "Endogenous toxins: uric acid, hemoglobin, myoglobin"
+      - "Exogenous toxins: aminoglycosides, contrast-induced nephropathy, amphotericin B"
+    pass: 3
+    src: { page: 105, quote: "Endogenous toxins(uric acid, hemoglobin, myoglobin)" }
+    status: unverified
+  - id: neph.L05.040
+    kind: card
+    topic: etiology
+    front: What happens to prerenal AKI if the underlying cause is not promptly corrected?
+    back: It can progress to intrinsic AKI.
+    src: { page: 106, quote: "Prerenal AKI can progress to intrinsic AKI if the underlying condition is not promptly corrected" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L05.041
+    kind: enumerate
+    topic: etiology
+    prompt: List the causes of postrenal AKI.
+    points:
+      - "Bladder outlet obstruction: BPH, prostate cancer, anticholinergic drugs"
+      - "Ureteral obstruction: malignancy"
+      - "Pelvic or renal obstruction"
+    pass: 3
+    src: { page: 106, quote: "Postrenal AKI is due to obstruction of urinary outflow" }
+    status: unverified
+  - id: neph.L05.042
+    kind: mcq
+    topic: etiology
+    stem: A 78-year-old man starts an anticholinergic drug for vertigo. Two days later he has suprapubic fullness and a creatinine of 3.1 mg/dL. Which AKI group is most likely?
+    options:
+      - Prerenal
+      - Intrinsic, ATN
+      - Intrinsic, interstitial nephritis
+      - Postrenal
+    answer: 3
+    why:
+      - "Nothing here suggests hypoperfusion."
+      - "There is no ischemic or toxic insult to the tubules."
+      - "Drug-induced AIN follows NSAIDs or antibiotics, not anticholinergics, and gives no bladder fullness."
+      - "Correct: anticholinergic drugs cause bladder outlet obstruction, a postrenal cause (p106)."
+    src: { page: 106, quote: "Anticholinergic drug" }
+    status: unverified
+  - id: neph.L05.043
+    kind: card
+    topic: etiology
+    front: Why does rapid relief of postrenal AKI restore kidney function?
+    back: Because, when relieved quickly, there is no structural damage.
+    src: { page: 106, quote: "Rapid resolution of Postrenal AKI without structural damage restore kidney function" }
+    status: unverified
+  - id: neph.L05.044
+    kind: mcq
+    topic: etiology
+    stem: Which of these causes AKI by impairing renal autoregulation rather than by reducing volume?
+    options:
+      - Hemorrhage
+      - Diarrhea
+      - NSAIDs
+      - Burns
+    answer: 2
+    why:
+      - "Hemorrhage is volume depletion."
+      - "GI loss is volume depletion."
+      - "Correct: NSAIDs, ACE-I/ARB and cyclosporine are functional prerenal causes that impair autoregulation (pp104–105)."
+      - "Burns cause volume loss."
+    src: { page: 104, quote: "Classification of AKI (ARF)" }
+    status: unverified
+  # ---------- p106-107: complications and oliguria ----------
+  - id: neph.L05.045
+    kind: enumerate
+    topic: complications
+    prompt: List the complications of AKI.
+    points:
+      - Uremia
+      - Hypervolemia and hypovolemia
+      - Hyponatremia
+      - Hyperkalemia
+      - Hyperphosphatemia and hypocalcemia
+      - Bleeding
+      - Infections
+      - Cardiac complications
+      - Malnutrition
+    pass: 7
+    src: { page: 106, quote: "Hyperphosphatemia and Hypocalcemia" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L05.046
+    kind: card
+    topic: complications
+    front: What does oliguria mean for an AKI patient, and why are diuretics used?
+    back: Oliguria is a well-recognized poor prognostic sign and complicates fluid management. Diuretics are an attempt to convert oliguric AKI to non-oliguric AKI.
+    src: { page: 107, quote: "Oliguria is a well-recognized and poor prognostic indicator in patients with AKI" }
+    status: unverified
+  # ---------- p107-108: history and exam ----------
+  - id: neph.L05.047
+    kind: card
+    topic: workup
+    front: What history points to prerenal AKI?
+    back: Vomiting, diarrhea, glycosuria causing polyuria, and drugs such as diuretics, NSAIDs, ACE inhibitors and ARBs.
+    src: { page: 107, quote: "History: vomiting, diarrhea, glycosuria causing polyuria, and several medications including diuretics, NSAIDs, ACE inhibitors, and ARBs" }
+    status: unverified
+  - id: neph.L05.048
+    kind: enumerate
+    topic: workup
+    prompt: Which examination signs are often present in prerenal azotemia?
+    points:
+      - Orthostatic hypotension
+      - Tachycardia
+      - Reduced jugular venous pressure
+      - Decreased skin turgor
+      - Dry mucous membranes
+    pass: 4
+    src: { page: 107, quote: "Physical signs of orthostatic hypotension, tachycardia, reduced jugular venous pressure, decreased skin turgor, and dry mucous membranes" }
+    status: unverified
+  - id: neph.L05.049
+    kind: table
+    topic: workup
+    title: "Clues to postrenal AKI (p107)"
+    columns: [Clue, Suggests]
+    rows:
+      - ["Colicky flank pain radiating to the groin", "Acute ureteric obstruction"]
+      - ["Nocturia, frequency or hesitancy", "Prostatic disease"]
+      - ["Abdominal fullness and suprapubic pain", "Massive bladder enlargement"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 107, quote: "Colicky flank pain radiating to the groin suggests acute ureteric obstruction" }
+    status: unverified
+  - id: neph.L05.050
+    kind: card
+    topic: workup
+    front: What is needed for a definitive diagnosis of obstruction?
+    back: Radiologic investigations.
+    src: { page: 107, quote: "Definitive diagnosis of obstruction requires radiologic investigations" }
+    status: unverified
+  - id: neph.L05.051
+    kind: card
+    topic: workup
+    front: Why review all medications in AKI?
+    back: To find a drug cause of the AKI and to adjust drug doses.
+    src: { page: 107, quote: "Review all medications" }
+    status: unverified
+  - id: neph.L05.052
+    kind: table
+    topic: workup
+    title: "Systemic clues on examination (pp107–108)"
+    columns: [Clue, Think of]
+    rows:
+      - ["Palpable purpura, pulmonary hemorrhage, sinusitis", "Systemic vasculitis with GN"]
+      - ["Livedo reticularis, signs of emboli to the legs", "Atheroembolic disease"]
+      - ["Signs of limb ischemia", "Rhabdomyolysis"]
+      - ["Diarrhea followed by AKI", "HUS D+ (TMA)"]
+      - ["TMA with fever and neurological signs", "TTP"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 108, quote: "Livedo reticularis and other signs of emboli to the legs" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L05.053
+    kind: mcq
+    topic: workup
+    stem: Three weeks after coronary angiography, a 70-year-old smoker has rising creatinine and a lacy purple rash on both legs. Which cause does the book link to this sign?
+    options:
+      - Contrast nephropathy
+      - Atheroembolic disease
+      - Systemic vasculitis
+      - Rhabdomyolysis
+    answer: 1
+    why:
+      - "Contrast nephropathy has no skin signs."
+      - "Correct: livedo reticularis and signs of emboli to the legs point to atheroemboli (p108)."
+      - "Vasculitis gives palpable purpura, lung hemorrhage and sinusitis."
+      - "Rhabdomyolysis gives signs of limb ischemia."
+    src: { page: 108, quote: "Livedo reticularis and other signs of emboli to the legs" }
+    status: unverified
+  - id: neph.L05.054
+    kind: enumerate
+    topic: workup
+    prompt: List the blood tests and the urine analysis items in the AKI work-up.
+    points:
+      - "Blood: CBC, BUN/creatinine, electrolytes, uric acid, PT/PTT"
+      - "Urine: volume, proteinuria, urinary indices (FENa, urinary sodium), sediment"
+    pass: 2
+    src: { page: 108, quote: "Urinary Indices: FENA and Urinary Sodium" }
+    status: unverified
+  # ---------- p109: indices and sediment ----------
+  - id: neph.L05.055
+    kind: table
+    topic: indices
+    title: "Distinguishing prerenal azotemia and ATN (p109)"
+    columns: [Parameter, Prerenal, ATN]
+    rows:
+      - ["Urinary sediment", "Normal / hyaline casts", "Epithelial cell casts"]
+      - ["Urine specific gravity", ">1.020", "<1.020"]
+      - ["Urine sodium (mmol/L)", "<20", ">40"]
+      - ["FENa", "<1%", ">2%"]
+      - ["FEurea", "<35%", ">50%"]
+      - ["Urine osmolality (mOsm/kg)", ">500", "<350"]
+      - ["Urine/plasma creatinine", ">40", "<10"]
+      - ["Plasma BUN/creatinine", ">20", "<15"]
+    blanks: [[0, 2], [1, 1], [2, 1], [3, 1], [3, 2], [4, 1], [5, 1], [6, 2], [7, 1]]
+    src: { page: 109, quote: "Distinguishing Prerenal azotemia and ATN" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: neph.L05.056
+    kind: cloze
+    topic: indices
+    text: "FENa below {{c1::1%}} suggests prerenal azotemia; above {{c2::2%}} suggests ATN."
+    src: { page: 109, quote: "Distinguishing Prerenal azotemia and ATN" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L05.057
+    kind: cloze
+    topic: indices
+    text: "FEurea below {{c1::35%}} suggests prerenal azotemia; above {{c2::50%}} suggests ATN."
+    src: { page: 109, quote: "Distinguishing Prerenal azotemia and ATN" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L05.058
+    kind: cloze
+    topic: indices
+    text: "Prerenal: urine sodium {{c1::<20}} mmol/L, urine osmolality {{c2::>500}} mOsm/kg and BUN/creatinine {{c3::>20}}."
+    src: { page: 109, quote: "Distinguishing Prerenal azotemia and ATN" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L05.059
+    kind: mcq
+    topic: indices
+    stem: "A 66-year-old woman has AKI after 3 days of hypotension from sepsis. Urine sodium is 55 mmol/L, FENa 3%, urine osmolality 300 mOsm/kg and muddy-brown epithelial casts are seen. What does this show?"
+    options:
+      - Prerenal azotemia
+      - Acute tubular necrosis
+      - Postrenal obstruction
+      - Acute glomerulonephritis
+    answer: 1
+    why:
+      - "Prerenal kidneys hold sodium: UNa <20, FENa <1%, osmolality >500."
+      - "Correct: UNa >40, FENa >2%, osmolality <350 and epithelial casts are the ATN column (p109)."
+      - "The indices are not used to diagnose obstruction; imaging is."
+      - "GN shows RBCs and RBC casts in the sediment."
+    src: { page: 109, quote: "Distinguishing Prerenal azotemia and ATN" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L05.060
+    kind: mcq
+    topic: indices
+    stem: Which index points to prerenal azotemia rather than ATN?
+    options:
+      - Urine specific gravity 1.010
+      - Urine/plasma creatinine ratio 50
+      - FEurea 60%
+      - Plasma BUN/creatinine ratio 10
+    answer: 1
+    why:
+      - "Specific gravity <1.020 is the ATN value."
+      - "Correct: a U/P creatinine ratio >40 means the tubules still concentrate, as in prerenal AKI (p109)."
+      - "FEurea >50% is ATN."
+      - "BUN/creatinine <15 is ATN."
+    src: { page: 109, quote: "Distinguishing Prerenal azotemia and ATN" }
+    status: unverified
+  - id: neph.L05.061
+    kind: card
+    topic: indices
+    front: What can a normal sediment (or a few RBCs, WBCs or hyaline casts) mean in AKI?
+    back: Prerenal or postrenal AKI, arterial thrombosis or embolism, preglomerular vasculitis, HUS or TTP, scleroderma crisis, or atheroembolic disease.
+    src: { page: 109, quote: "Urinary sediment in AKI" }
+    status: unverified
+  - id: neph.L05.062
+    kind: table
+    topic: indices
+    title: "Abnormal urinary sediment in AKI (p109 flowchart)"
+    columns: [Finding, Points to]
+    rows:
+      - ["RBCs", "GN, vasculitis, malignant hypertension, thrombotic microangiopathy"]
+      - ["RBC casts", "GN, vasculitis"]
+      - ["RTE cells, granular or RTE casts", "ATN, tubulointerstitial nephritis, acute cellular allograft rejection"]
+      - ["Pigmented casts", "Myoglobinuria, hemoglobinuria"]
+      - ["Eosinophiluria", "Allergic interstitial nephritis, atheroembolic disease"]
+      - ["Crystalluria", "Acute uric acid nephropathy, calcium oxalate (ethylene glycol), drugs (acyclovir, indinavir, sulfadiazine, amoxicillin)"]
+    blanks: [[1, 1], [2, 1], [3, 1], [4, 1], [5, 1]]
+    src: { page: 109, quote: "Urinary sediment in AKI" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L05.063
+    kind: mcq
+    topic: indices
+    stem: A patient on IV acyclovir for herpes encephalitis develops AKI. What would you expect on urine microscopy?
+    options:
+      - RBC casts
+      - Pigmented casts
+      - Crystalluria
+      - Eosinophiluria
+    answer: 2
+    why:
+      - "RBC casts mean GN or vasculitis."
+      - "Pigmented casts mean myoglobin or hemoglobin."
+      - "Correct: acyclovir is one of the drugs listed under crystalluria (p109)."
+      - "Eosinophiluria points to allergic interstitial nephritis or atheroemboli."
+    src: { page: 109, quote: "Urinary sediment in AKI" }
+    status: unverified
+  - id: neph.L05.064
+    kind: mcq
+    topic: indices
+    stem: A young man is found down after a seizure with dark urine. The dipstick is strongly positive for blood, but few RBCs are seen. Which sediment finding fits?
+    options:
+      - Pigmented casts
+      - RBC casts
+      - Eosinophiluria
+      - Hyaline casts only
+    answer: 0
+    why:
+      - "Correct: pigmented casts come from myoglobinuria or hemoglobinuria (p109); here it is likely rhabdomyolysis."
+      - "RBC casts would need glomerular bleeding."
+      - "Eosinophiluria points to allergic interstitial nephritis."
+      - "A bland sediment fits prerenal AKI, not pigment injury."
+    src: { page: 109, quote: "Urinary sediment in AKI" }
+    status: unverified
+  # ---------- p110: imaging ----------
+  - id: neph.L05.065
+    kind: table
+    topic: workup
+    title: "Radiologic studies in AKI (p110)"
+    columns: [Study, Use]
+    rows:
+      - ["Renal ultrasound", "Obstructive forms"]
+      - ["Doppler", "Renal blood flow"]
+      - ["DMSA scan", "Anatomy"]
+      - ["DTPA and MAG3 scans", "Renal function, urinary excretion and upper-tract outflow"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 110, quote: "DTPA and MAG3: renal function, urinary excretion and upper tract outflow" }
+    status: unverified
+  # ---------- p110-111: prevention ----------
+  - id: neph.L05.066
+    kind: card
+    topic: prevention
+    front: Which fluids does KDIGO recommend to prevent contrast-induced nephropathy?
+    back: Hydration with normal saline or sodium bicarbonate infusion.
+    src: { page: 110, quote: "KDIGO guideline recommends using normal saline or sodium bicarbonate infusion" }
+    status: unverified
+    update:
+      text: "The PRESERVE trial (2018) found no benefit of bicarbonate over saline, so isotonic saline is the usual choice; the ACR-NKF 2020 consensus keeps IV isotonic volume expansion for high-risk patients."
+      ref: "PRESERVE trial 2018; ACR-NKF consensus 2020"
+  - id: neph.L05.067
+    kind: table
+    topic: prevention
+    title: "CIN prevention regimens (p110)"
+    columns: [Regimen, Dose and timing]
+    rows:
+      - ["Normal saline", "1 ml/kg/h for 12 hours before and after the procedure"]
+      - ["Sodium bicarbonate", "3 ml/kg/h for 1 hour before, then 1 ml/kg/h for 6 hours after contrast"]
+      - ["N-acetylcysteine", "600–1200 mg orally every 12 hours for 2–3 days, first two doses before contrast"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 110, quote: "Normal saline regimen: 1ml/kg/h for 12hours before and after procedure" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: neph.L05.068
+    kind: cloze
+    topic: prevention
+    text: "Bicarbonate regimen for CIN: {{c1::3}} ml/kg/h for one hour before the procedure, then {{c2::1}} ml/kg/h for {{c3::6}} hours after contrast."
+    src: { page: 110, quote: "Sodium bicarbonate regimen: 3ml/kg/hours forone hour before procedure" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L05.069
+    kind: card
+    topic: prevention
+    front: What N-acetylcysteine dose does the book give for contrast nephropathy prevention?
+    back: 600–1200 mg orally every 12 hours for 2–3 days, with the first two doses before contrast.
+    src: { page: 110, quote: "N-acetylcysteine (600-1200mg orally every 12 hours for 2-3 days, the first two doses precontrast)" }
+    status: unverified
+    update:
+      text: "PRESERVE (2018) showed no benefit of oral N-acetylcysteine over placebo; the ACR-NKF 2020 consensus no longer recommends it."
+      ref: "PRESERVE trial 2018; ACR-NKF consensus 2020"
+  - id: neph.L05.070
+    kind: cloze
+    topic: prevention
+    text: "To prevent ICU-acquired AKI, KDIGO suggests moderate glucose control with insulin to {{c1::110–149}} mg/dl."
+    src: { page: 110, quote: "Current KDIGO guideline suggest moderate control of blood glucose to level of 110-149 mg/dl with insulin" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L05.071
+    kind: enumerate
+    topic: prevention
+    prompt: What does KDIGO suggest to prevent aminoglycoside-induced AKI?
+    points:
+      - "Avoid aminoglycosides unless no suitable, less nephrotoxic alternative exists"
+      - "Avoid them in high-risk patients: age over 65, diabetes, septic shock"
+      - "Use a single daily dose rather than multiple daily doses"
+      - "Use topical or local applications (aerosols, antibiotic beads) instead of IV when feasible"
+    pass: 3
+    src: { page: 111, quote: "KDIGO suggests using single dose daily rather than multiple-dose daily treatment regimens" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L05.072
+    kind: mcq
+    topic: prevention
+    stem: A 72-year-old diabetic in septic shock has a gram-negative infection sensitive to both gentamicin and a third-generation cephalosporin. What does KDIGO suggest?
+    options:
+      - Gentamicin three times daily
+      - Gentamicin once daily
+      - The cephalosporin
+      - Gentamicin by inhalation
+    answer: 2
+    why:
+      - "Multiple daily dosing is what KDIGO advises against."
+      - "Once-daily dosing is the rule only when an aminoglycoside must be used."
+      - "Correct: avoid aminoglycosides when a less nephrotoxic alternative exists, especially over 65, with DM or septic shock (p111)."
+      - "Local application is for when it is feasible, such as airway infection; this is systemic sepsis."
+    src: { page: 111, quote: "Avoid in high risk patients age more than 65 years, DM, cases of septic shock" }
+    status: unverified
+  # ---------- p111-112: general treatment, fluids, pressors ----------
+  - id: neph.L05.073
+    kind: enumerate
+    topic: treatment
+    prompt: What are the three general principles of AKI treatment?
+    points:
+      - "Optimize systemic and renal hemodynamics (volume resuscitation, judicious vasopressors)"
+      - "Stop nephrotoxic agents (ACE inhibitors, ARBs, NSAIDs, aminoglycosides) if possible"
+      - "Start renal replacement therapy when indicated"
+    pass: 3
+    src: { page: 111, quote: "Elimination of nephrotoxic agents (e.g., ACE inhibitors, ARBS, NSAIDs, aminoglycosides) if possible" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L05.074
+    kind: card
+    topic: treatment
+    front: How is severe acute blood loss treated in prerenal AKI?
+    back: With packed red blood cells.
+    src: { page: 111, quote: "Severe acute blood loss should be treated with packed red blood cells" }
+    status: unverified
+  - id: neph.L05.075
+    kind: card
+    topic: treatment
+    front: Crystalloids or colloids for volume expansion in AKI, per KDIGO?
+    back: Isotonic crystalloids rather than colloids (albumin or starches).
+    src: { page: 111, quote: "KDIGO suggest using isotonic crystalloids rather than colloids (albumin or starches)" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L05.076
+    kind: card
+    topic: treatment
+    front: When may colloids still be chosen in AKI?
+    back: To avoid excessive fluid in patients needing large-volume resuscitation, or in specific groups such as cirrhosis with spontaneous peritonitis, or burns.
+    src: { page: 111, quote: "a cirrhotic patient with spontaneous peritonitis, or in burns" }
+    status: unverified
+  - id: neph.L05.077
+    kind: card
+    topic: treatment
+    front: Albumin vs hyperoncotic starch for the kidney?
+    back: Albumin is renoprotective; hyperoncotic starch is nephrotoxic.
+    src: { page: 112, quote: "Colloids-Albumin is renoprotective and Hyperoncotic starch shows nephro- toxicity" }
+    status: unverified
+  - id: neph.L05.078
+    kind: cloze
+    topic: treatment
+    text: "In volume-resuscitated vasomotor shock, vasoactive agents aim for a mean arterial pressure of {{c1::65–70}} mmHg."
+    src: { page: 112, quote: "target mean arterial blood pressure 65-70 mmHg" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L05.079
+    kind: card
+    topic: treatment
+    front: Dopamine or norepinephrine as the pressor in AKI with shock?
+    back: Norepinephrine. Dopamine was associated with more adverse events.
+    src: { page: 112, quote: "The use of dopamine was associated with a greater number of adverse events than Nor-epinephrine" }
+    status: unverified
+  - id: neph.L05.080
+    kind: mcq
+    topic: treatment
+    stem: What does KDIGO say about low-dose ("renal-dose") dopamine in AKI?
+    options:
+      - Suggested to treat oliguric AKI (2C)
+      - Recommended against for prevention or treatment (1A)
+      - Recommended for prevention after cardiac surgery (1B)
+      - No recommendation
+    answer: 1
+    why:
+      - "Studies were negative, so it is not suggested for treatment."
+      - "Correct: KDIGO recommends not using low-dose dopamine to prevent or treat AKI, grade 1A (p112)."
+      - "There is no preventive indication."
+      - "There is a strong recommendation, against it."
+    src: { page: 112, quote: "KDIGO recommends not using low-dose dopamine to prevent or treat AKI. (1A)" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L05.081
+    kind: card
+    topic: treatment
+    front: How can AKI be prevented in cirrhotic patients treated for spontaneous bacterial peritonitis?
+    back: With albumin, given alongside the antibiotics.
+    src: { page: 112, quote: "Albumin may prevent AKI in those treated with antibiotics for spontaneous bacterial peritonitis" }
+    status: unverified
+  - id: neph.L05.082
+    kind: enumerate
+    topic: treatment
+    prompt: Name the bridge therapies for hepatorenal syndrome and what they are given with.
+    points:
+      - "Terlipressin (a vasopressin analog)"
+      - "Octreotide (somatostatin analog) plus midodrine (alpha-1 agonist)"
+      - "Norepinephrine"
+      - "All with IV albumin, maximum 100 g/day"
+    pass: 3
+    src: { page: 112, quote: "all in combination with intravenous albumin (maximum 100 g/d)" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L05.083
+    kind: card
+    topic: treatment
+    front: How is AKI from cardiorenal syndrome managed?
+    back: Optimize cardiac function, which may need inotropes, preload- and afterload-reducing agents, antiarrhythmics and mechanical aids such as an intra-aortic balloon pump.
+    src: { page: 112, quote: "mechanical aids such as an intraaortic balloon pump" }
+    status: unverified
+  # ---------- p113: diuretics and FST ----------
+  - id: neph.L05.084
+    kind: table
+    topic: treatment
+    title: "Diuretics in AKI: KDIGO (p113)"
+    columns: [Use, KDIGO position, Grade]
+    rows:
+      - ["To prevent AKI", "Recommend not using", "1B"]
+      - ["To treat AKI", "Suggest not using, except for volume overload", "2C"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2]]
+    src: { page: 113, quote: "KDIGO recommend not using diuretics to prevent AKI. (1B)" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L05.085
+    kind: card
+    topic: treatment
+    front: "Diuretics in intrinsic AKI: possible benefit, possible harm and real indications?"
+    back: They may lessen ischemic injury but can worsen established AKI, with no evidence of reducing incidence. They are indicated only for fluid balance, hyperkalemia and hypercalcemia.
+    src: { page: 113, quote: "Indicated only for management of fluid balance, hyperkalemia and hypercalcemia" }
+    status: unverified
+  - id: neph.L05.086
+    kind: enumerate
+    topic: treatment
+    prompt: Who is an appropriate candidate for the furosemide stress test?
+    points:
+      - "Felt to be adequately resuscitated"
+      - "Persistent oliguria"
+      - "Doubtful that a fluid, vasopressor or inotrope challenge would help"
+    pass: 3
+    src: { page: 113, quote: "Use of furosemide stress test to guide resuscitation" }
+    status: unverified
+  - id: neph.L05.087
+    kind: table
+    topic: treatment
+    title: "Furosemide stress test (p113)"
+    columns: [Step, Detail]
+    rows:
+      - ["Dose, furosemide-naive", "1 mg/kg IV bolus"]
+      - ["Dose, not furosemide-naive", "1.5 mg/kg IV bolus"]
+      - ["Passed", "Urine output >200 ml in 2 hours: pre-renal oliguria"]
+      - ["Failed", "Urine output <200 ml in 2 hours: intrinsic renal failure"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 113, quote: "Use of furosemide stress test to guide resuscitation" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: neph.L05.088
+    kind: mcq
+    topic: treatment
+    stem: An adequately resuscitated, oliguric ICU patient who already takes furosemide gets 1.5 mg/kg IV. He passes 120 ml over the next 2 hours. What does this mean?
+    options:
+      - Passed; give more fluid to improve urine output
+      - Failed; intrinsic renal failure, more fluid or pressors are unlikely to help
+      - The dose was wrong; repeat at 1 mg/kg
+      - Passed; urine output is a reliable perfusion marker
+    answer: 1
+    why:
+      - "Passing needs >200 ml in 2 hours."
+      - "Correct: <200 ml in 2 hours fails the test, pointing to intrinsic renal failure where extra fluid, pressors or inotropes are unlikely to help (p113)."
+      - "1.5 mg/kg is the right dose for a patient not furosemide-naive."
+      - "That interpretation belongs to a passed test."
+    src: { page: 113, quote: "Use of furosemide stress test to guide resuscitation" }
+    status: unverified
+  # ---------- p114: fenoldopam, rhabdo, GN, postrenal ----------
+  - id: neph.L05.089
+    kind: card
+    topic: treatment
+    front: What is fenoldopam, and what does the book say about it in AKI?
+    back: "A pure dopamine type-1 receptor agonist without systemic adrenergic stimulation. Studies are not conclusive, but in critically ill patients a continuous infusion (printed as 0.1 mg/kg/min) improved renal function compared with low-dose dopamine."
+    src: { page: 114, quote: "Fenoldopam mesylate is a pure dopamine type-1 receptor agonist" }
+    status: unverified
+    update:
+      text: "The usual fenoldopam dose is 0.1 µg/kg/min (micrograms); KDIGO 2012 suggests not using fenoldopam to prevent or treat AKI (2C)."
+      ref: "KDIGO AKI guideline 2012"
+  - id: neph.L05.090
+    kind: enumerate
+    topic: treatment
+    prompt: How is AKI from rhabdomyolysis managed?
+    points:
+      - "Aggressive volume repletion, up to 10 L of fluid a day"
+      - "Alkaline fluids are beneficial"
+      - "Diuretics if fluid repletion is adequate and there is no urine output"
+      - "Dialysis"
+      - "Watch calcium and phosphate, which precipitate in damaged tissue"
+    pass: 4
+    src: { page: 114, quote: "Aggressive volume repletion (may require 10 L of fluid per day)" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L05.091
+    kind: cloze
+    topic: treatment
+    text: "Rhabdomyolysis may need up to {{c1::10 L}} of fluid per day, and {{c2::alkaline}} fluids are beneficial."
+    src: { page: 114, quote: "Aggressive volume repletion (may require 10 L of fluid per day)" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L05.092
+    kind: table
+    topic: treatment
+    title: "Treating specific intrinsic causes (p114)"
+    columns: [Cause, Treatment]
+    rows:
+      - ["Glomerulonephritis or vasculitis", "Immunosuppressive agents and/or plasmapheresis"]
+      - ["Drug-induced allergic interstitial nephritis", "Stop the offending drug"]
+      - ["Scleroderma renal crisis", "ACE inhibitors"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 114, quote: "AKI due to scleroderma (scleroderma renal crisis) should be treated with ACE inhibitors" }
+    status: unverified
+  - id: neph.L05.093
+    kind: mcq
+    topic: treatment
+    stem: A woman with diffuse systemic sclerosis presents with a BP of 210/120 and a rapidly rising creatinine. What does the book recommend?
+    options:
+      - Avoid ACE inhibitors because of AKI
+      - ACE inhibitors
+      - High-dose steroids
+      - Plasmapheresis
+    answer: 1
+    why:
+      - "Scleroderma renal crisis is the exception where ACE inhibitors are given despite AKI."
+      - "Correct: AKI from scleroderma renal crisis should be treated with ACE inhibitors (p114)."
+      - "Steroids are not the treatment here."
+      - "Plasmapheresis is for GN or vasculitis."
+    src: { page: 114, quote: "AKI due to scleroderma (scleroderma renal crisis) should be treated with ACE inhibitors" }
+    status: unverified
+  - id: neph.L05.094
+    kind: card
+    topic: treatment
+    front: What happens after obstruction is relieved in postrenal AKI, and what does it need?
+    back: Usually an appropriate diuresis follows, which may need continued IV fluids and electrolytes for a while.
+    src: { page: 114, quote: "Relief of obstruction is usually followed by an appropriate diuresis" }
+    status: unverified
+  # ---------- p115: dialysis and prognosis ----------
+  - id: neph.L05.095
+    kind: enumerate
+    topic: dialysis
+    prompt: List the indications for dialysis in AKI (AEIOU).
+    points:
+      - "A: acidosis"
+      - "E: electrolyte disturbance, usually hyperkalemia"
+      - "I: intoxications (lithium, ethylene glycol, etc.)"
+      - "O: overload (volume)"
+      - "U: uremia (symptoms, signs)"
+    pass: 4
+    src: { page: 115, quote: "Intoxications (lithium, ethylene glycol, etc)" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L05.096
+    kind: table
+    topic: dialysis
+    title: "Modes of dialysis in AKI (p115)"
+    columns: [Patient, Mode]
+    rows:
+      - ["Hemodynamically stable", "Intermittent hemodialysis (IHD)"]
+      - ["Hemodynamically unstable", "CRRT, PD or SLED (slow low-efficiency dialysis)"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 115, quote: "Hemodynamically stable- IHD" }
+    status: unverified
+  - id: neph.L05.097
+    kind: mcq
+    topic: dialysis
+    stem: A patient on norepinephrine for septic shock has AKI with a potassium of 7.1 mmol/L despite medical treatment. Which dialysis mode does the book favor?
+    options:
+      - Intermittent hemodialysis
+      - CRRT
+      - No dialysis until the shock resolves
+      - Kidney transplant workup
+    answer: 1
+    why:
+      - "IHD is for hemodynamically stable patients."
+      - "Correct: hemodynamically unstable patients get CRRT, PD or SLED (p115)."
+      - "Refractory hyperkalemia is a dialysis indication now."
+      - "Not relevant in AKI."
+    src: { page: 115, quote: "Hemodynamically stable- IHD" }
+    status: unverified
+  - id: neph.L05.098
+    kind: enumerate
+    topic: dialysis
+    prompt: Summarize the prognosis of AKI.
+    points:
+      - "Prerenal and postrenal AKI have a better prognosis"
+      - "Kidneys may recover even after dialysis-requiring AKI"
+      - "10% of cases needing dialysis develop CKD"
+      - "Early death can occur even after full recovery of kidney function"
+    pass: 3
+    src: { page: 115, quote: "10% of cases requiring dialysis develop ckd" }
+    status: unverified
+  - id: neph.L05.099
+    kind: table
+    topic: dialysis
+    title: "AKI outcomes model (p115 figure)"
+    columns: [Box, Contents]
+    rows:
+      - ["Risk factors", "Age, race or ethnic group, genetic factors, hypertension, diabetes, metabolic syndrome"]
+      - ["Disease modifiers", "Severity of AKI, stage of CKD, number of episodes, duration of AKI, proteinuria"]
+      - ["Outcomes", "Cardiovascular events, kidney events, ESRD, disability, poorer quality of life, death"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 115, quote: "AKI Outcomes" }
+    status: unverified
+  # ---------- p116-119: changing pattern and the creatinine problem ----------
+  - id: neph.L05.100
+    kind: card
+    topic: biomarkers
+    front: How did the AKI pattern change between 1970–1980 and 1980–1990 in the p116 series?
+    back: Incident cases rose from 156 to 925, while mortality stayed high (58% then 54%).
+    src: { page: 116, quote: "AKI: Changing Pattern" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L05.101
+    kind: enumerate
+    topic: biomarkers
+    prompt: Name the AKI risk-assessment tools introduced since 2012.
+    points:
+      - Renal angina index
+      - Renal functional reserve assessment
+      - "New biomarkers ([TIMP-2]×[IGFBP7])"
+    pass: 3
+    src: { page: 116, quote: "RISK ASSESSMENT TOOLS SINCE 2012" }
+    status: unverified
+  - id: neph.L05.102
+    kind: card
+    topic: biomarkers
+    front: "Creatinine vs the new biomarkers: what does each measure?"
+    back: Creatinine is a functional marker that changes late; the new biomarkers are footprints of actual organ damage.
+    src: { page: 117, quote: "Biomarkers are Foot Prints of Actual Organ Damage" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L05.103
+    kind: order
+    topic: biomarkers
+    prompt: Order the "organ damage clock" after an ischemic or toxic insult, from earliest to latest (p118).
+    steps:
+      - Damage
+      - GFR falls
+      - Oliguria
+      - Creatinine rises
+    src: { page: 118, quote: "Multiple Timezones of AKI and Organ Damage Clock" }
+    status: unverified
+  - id: neph.L05.104
+    kind: cloze
+    topic: biomarkers
+    text: "The organ damage clock shows that the {{c1::serum creatinine}} clock is always late."
+    src: { page: 118, quote: "Multiple Timezones of AKI and Organ Damage Clock" }
+    status: unverified
+  - id: neph.L05.105
+    kind: table
+    topic: biomarkers
+    title: "Limitations of a creatinine-based AKI definition (p119)"
+    columns: [Situation, What creatinine misses]
+    rows:
+      - ["Structural injury, no creatinine rise", "Damage hidden by renal reserve, creatinine kinetics or decreased production"]
+      - ["Creatinine rise, no damage", "Functional changes: prerenal azotemia, hepatorenal or cardiorenal syndrome, RAAS inhibition"]
+      - ["Any creatinine-based AKI", "No information on phenotype: etiology, molecular pathways, therapy, prognosis"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 119, quote: "Limitations of SCr-based AKI definition" }
+    status: unverified
+  # ---------- p120-122: biomarkers ----------
+  - id: neph.L05.106
+    kind: enumerate
+    topic: biomarkers
+    prompt: List the important novel AKI biomarkers.
+    points:
+      - Cystatin C
+      - "NGAL (neutrophil gelatinase-associated lipocalin)"
+      - Interleukin-18
+      - Kidney injury molecule-1
+      - N-acetyl-D-glucosaminidase
+    pass: 4
+    src: { page: 120, quote: "Neutrophil gelatinase-associated lipocalin(NGAL)" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L05.107
+    kind: card
+    topic: biomarkers
+    front: What do novel biomarkers add early and later in AKI (p120)?
+    back: "Early: detect injury, show location and etiology, guide therapy. Later: show extent of injury, ongoing injury, start of recovery and risk of worsening, then prognosis (CKD, ESRD, mortality, renal reserve)."
+    src: { page: 120, quote: "Roles of novel biomarkers" }
+    status: unverified
+  - id: neph.L05.108
+    kind: card
+    topic: biomarkers
+    front: Why is cystatin C better than serum creatinine?
+    back: It is a better surrogate for early and subtle changes in kidney function. It identifies injury while creatinine is still normal and detects AKI 24–48 hours earlier.
+    src: { page: 120, quote: "Allows detection of AKI, 24-48 hours earlier than serum creatinine" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L05.109
+    kind: cloze
+    topic: biomarkers
+    text: "Cystatin C detects AKI {{c1::24–48 hours}} earlier than serum creatinine."
+    src: { page: 120, quote: "Allows detection of AKI, 24-48 hours earlier than serum creatinine" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L05.110
+    kind: card
+    topic: biomarkers
+    front: What is KIM-1 and what is it used for?
+    back: A type 1 transmembrane glycoprotein, used as a marker of AKI severity. It predicts adverse outcomes in hospitalized patients better than conventional severity markers.
+    src: { page: 121, quote: "KIM-1 is a type 1 trans-membrane glycoprotein" }
+    status: unverified
+  - id: neph.L05.111
+    kind: card
+    topic: biomarkers
+    front: How early does NGAL appear after cardiopulmonary bypass, and what is it compared to?
+    back: Within 2 hours in plasma and urine. It is considered the equivalent of troponin in acute coronary syndrome.
+    src: { page: 121, quote: "Considered equivalent to troponin in acute coronary syndrome" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L05.112
+    kind: mcq
+    topic: biomarkers
+    stem: Which biomarker does the book call the "troponin of the kidney", detectable within 2 hours of bypass-associated AKI?
+    options:
+      - Cystatin C
+      - KIM-1
+      - NGAL
+      - IL-18
+    answer: 2
+    why:
+      - "Cystatin C is a functional marker that beats creatinine by 24–48 hours."
+      - "KIM-1 marks severity and predicts outcomes."
+      - "Correct: NGAL rises within 2 hours of bypass and is considered equivalent to troponin (p121)."
+      - "IL-18 is in the list but not described this way."
+    src: { page: 121, quote: "Considered equivalent to troponin in acute coronary syndrome" }
+    status: unverified
+  - id: neph.L05.113
+    kind: card
+    topic: biomarkers
+    front: How is the [TIMP-2]×[IGFBP7] (AKIRisk) score read?
+    back: Above 0.3 is positive, meaning the patient could develop moderate to severe AKI within 12 hours of testing. At or below 0.3 is negative.
+    src: { page: 121, quote: "Cell cycle inhibitor marker (TIMP-2)x(IGFBP7)" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: neph.L05.114
+    kind: cloze
+    topic: biomarkers
+    text: "A [TIMP-2]×[IGFBP7] score above {{c1::0.3}} predicts moderate to severe AKI within {{c2::12 hours}}."
+    src: { page: 121, quote: "Cell cycle inhibitor marker (TIMP-2)x(IGFBP7)" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L05.115
+    kind: enumerate
+    topic: biomarkers
+    prompt: List the KDIGO care bundle used for high-risk cardiac surgery patients with [TIMP-2]×[IGFBP7] ≥0.3 (p122).
+    points:
+      - "Stop nephrotoxic agents (ACEi/ARBs for 48 hours)"
+      - "Optimize volume status and perfusion pressure (12-hour algorithm)"
+      - "Consider functional hemodynamic monitoring (e.g. PiCCO)"
+      - "Close monitoring of creatinine and urine output"
+      - "Avoid hyperglycemia for 72 hours"
+      - "Consider alternatives to contrast agents"
+    pass: 5
+    src: { page: 122, quote: "Preventive strategy performed in high risk on pump cardiac surgery patients-single center trial" }
+    status: unverified
+  - id: neph.L05.116
+    kind: card
+    topic: biomarkers
+    front: What did the biomarker-guided KDIGO care bundle achieve after cardiac surgery (p122)?
+    back: Overall AKI at 72 hours fell from 71% to 55.1%, and moderate to severe AKI from 44.9% to 29.7%.
+    src: { page: 122, quote: "Preventive strategy performed in high risk on pump cardiac surgery patients-single center trial" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L05.117
+    kind: card
+    topic: biomarkers
+    front: What do [TIMP-2]×[IGFBP7] levels tell you in ICU patients with AKI (p122)?
+    back: They are associated with adverse outcomes such as CRRT initiation and in-ICU mortality, and they can flag subclinical AKI before creatinine rises.
+    src: { page: 122, quote: "Cell cycle inhibitor marker (TIMP-2)x(IGFBP7) levels are associated with adverse outcomes in ICU with AKI" }
+    status: unverified
+  # ---------- p123-125: renal functional reserve ----------
+  - id: neph.L05.118
+    kind: enumerate
+    topic: reserve
+    prompt: Besides measuring baseline GFR, what tools give a deeper evaluation of kidney function (Ronco and Chawla)?
+    points:
+      - Measure baseline GFR
+      - Count glomeruli
+      - "Kidney stress test: glomerular (renal functional reserve) and tubular (furosemide stress test)"
+    pass: 3
+    src: { page: 123, quote: "Glomerular and Tubular Kidney Stress Test: New Tools for a Deeper Evaluation of Kidney Function" }
+    status: unverified
+  - id: neph.L05.119
+    kind: card
+    topic: reserve
+    front: How is renal functional reserve measured?
+    back: Give an acute oral protein load (1.2 g/kg). Measure the stimulated GFR. Renal functional reserve is the stimulated GFR minus the baseline GFR.
+    src: { page: 123, quote: "Renal function reserve" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L05.120
+    kind: card
+    topic: reserve
+    front: Which mechanisms raise GFR after a protein load (p123)?
+    back: Hormones (glucagon, growth hormone, vasopressin, RAS) and local mediators (prostaglandins, nitric oxide), plus changes in tubuloglomerular feedback. These cause arteriolar vasodilation, lower vascular resistance and higher renal blood flow.
+    src: { page: 123, quote: "Renal function reserve" }
+    status: unverified
+  - id: neph.L05.121
+    kind: table
+    topic: reserve
+    title: "Renal recovery after AKI (p124)"
+    columns: [Category, Baseline GFR, Renal functional reserve]
+    rows:
+      - ["Full recovery", ">90 ml/min", ">30 ml/min"]
+      - ["Apparent full recovery", ">90 ml/min", "<30 ml/min"]
+      - ["Kidney recovery", ">60 ml/min", "-"]
+      - ["Non-recovery", "<60 ml/min", "<30 ml/min"]
+      - ["CKD", "<60 ml/min", "-"]
+    blanks: [[0, 1], [0, 2], [1, 2], [3, 1]]
+    src: { page: 124, quote: "Renal Functional Reserve" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: neph.L05.122
+    kind: mcq
+    topic: reserve
+    stem: Six months after AKI, a patient's GFR is 95 ml/min and a protein-load test raises it to only 110 ml/min. How is his recovery classed?
+    options:
+      - Full recovery
+      - Apparent full recovery
+      - Non-recovery
+      - CKD
+    answer: 1
+    why:
+      - "Full recovery needs a reserve >30 ml/min; his is 15."
+      - "Correct: baseline GFR >90 with a reserve <30 ml/min is apparent full recovery (p124)."
+      - "Non-recovery means a GFR below 60."
+      - "His GFR is above 60."
+    src: { page: 124, quote: "Renal Functional Reserve" }
+    status: unverified
+  - id: neph.L05.123
+    kind: cloze
+    topic: reserve
+    text: "Patients with a preoperative renal functional reserve below {{c1::15}} ml/min/1.73 m² were {{c2::11.8}} times more likely to develop AKI after cardiac surgery."
+    src: { page: 125, quote: "Preoperative Renal Functional Reserve Predicts Risk of AKI Post Cardiac Surgery" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L05.124
+    kind: enumerate
+    topic: reserve
+    prompt: Where may a kidney stress test that assesses renal functional reserve be useful?
+    points:
+      - "Silent renal disease in high-risk groups: hypertension, DM, PKD, solitary kidney, CKD, or before aggressive interventions"
+      - "Evaluating living kidney donors"
+      - "Risk assessment before high-risk procedures: cardiac surgery, contrast imaging"
+      - "Evaluating recovery after AKI"
+    pass: 3
+    src: { page: 125, quote: "To evaluate living kidney donors to make sure no problem will occur to the donor and the recipient after transplantation" }
+    status: unverified
+  # ---------- p125-126: take-home ----------
+  - id: neph.L05.125
+    kind: enumerate
+    topic: reserve
+    prompt: Give the lecture's take-home messages on AKI.
+    points:
+      - "Diagnose early: biomarkers have great potential"
+      - "Look for the etiology"
+      - "Prevent rather than treat"
+      - "Follow up partially recovered AKI well"
+      - "No role for low-dose dopamine or diuretics in prevention and treatment"
+      - "Start RRT when indicated"
+    pass: 5
+    src: { page: 126, quote: "No role of low dose dopamine, diuretics in prevention and treatment" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- cases ----------
+  - id: neph.L05.126
+    kind: case
+    topic: indices
+    stem: A 74-year-old woman on ramipril and furosemide for heart failure has had 3 days of diarrhea. BP 92/58 lying, 76/50 standing, HR 112, dry tongue. Creatinine 2.6 mg/dL (baseline 1.1).
+    steps:
+      - question: What is her KDIGO stage?
+        options:
+          - Stage 1
+          - Stage 2
+          - Stage 3
+          - Cannot stage without urine output
+        answer: 1
+        why: "2.6/1.1 is about 2.4 times baseline, which is stage 2 (2–2.9 times, p100). One criterion is enough."
+      - question: Which AKI group fits best?
+        options:
+          - Prerenal
+          - Intrinsic, ATN
+          - Postrenal
+          - Intrinsic, GN
+        answer: 0
+        why: "GI losses with orthostatic hypotension, tachycardia and dry mucosa on an ACEi and diuretic are prerenal (pp105, 107)."
+      - reveal: "Urine: sodium 12 mmol/L, osmolality 620 mOsm/kg, hyaline casts only."
+        question: What do these indices support?
+        options:
+          - Prerenal azotemia
+          - ATN
+          - Allergic interstitial nephritis
+          - Obstruction
+        answer: 0
+        why: "UNa <20, osmolality >500 and a bland sediment are the prerenal column of the p109 table."
+      - question: What is the right first management?
+        options:
+          - Isotonic crystalloid, hold ramipril and furosemide
+          - Low-dose dopamine
+          - Albumin as the first fluid
+          - Urgent dialysis
+        answer: 0
+        why: "Restore perfusion with isotonic crystalloids and stop nephrotoxic drugs (p111). KDIGO recommends against low-dose dopamine (1A); there is no dialysis indication."
+    src: { page: 109, quote: "Distinguishing Prerenal azotemia and ATN" }
+    status: unverified
+  - id: neph.L05.127
+    kind: case
+    topic: dialysis
+    stem: A 58-year-old diabetic had a coronary angiogram 3 days ago. Creatinine went from 1.5 to 4.8 mg/dL, and he has passed 200 ml of urine in 24 hours. Today K is 6.9 mmol/L with ECG changes, HCO3 11 mmol/L, and he is breathless with crackles.
+    steps:
+      - question: Which cause in the book's list fits best?
+        options:
+          - Contrast-induced nephropathy (an exogenous toxin causing ATN)
+          - Prerenal azotemia from diuretics
+          - Postrenal obstruction
+          - Hepatorenal syndrome
+        answer: 0
+        why: "CIN is listed among the exogenous toxins causing ATN (p105) and fits the timing after contrast."
+      - question: Which dialysis indications does he have?
+        options:
+          - "Only uremia"
+          - "Acidosis, electrolytes (hyperkalemia) and overload"
+          - "Intoxication"
+          - "None yet; give diuretics"
+        answer: 1
+        why: "AEIOU: acidosis (HCO3 11), electrolyte disturbance (K 6.9 with ECG changes) and volume overload (p115)."
+      - reveal: "BP 128/76 without pressors."
+        question: Which mode suits him?
+        options:
+          - Intermittent hemodialysis
+          - CRRT only
+          - Peritoneal dialysis only
+          - SLED only
+        answer: 0
+        why: "He is hemodynamically stable, so IHD (p115). CRRT, PD and SLED are for unstable patients."
+      - question: What should have been done before the angiogram, per the book?
+        options:
+          - "Normal saline 1 ml/kg/h for 12 hours before and after"
+          - "Furosemide before contrast"
+          - "Low-dose dopamine infusion"
+          - "Nothing; CIN cannot be prevented"
+        answer: 0
+        why: "KDIGO hydration with saline (or bicarbonate) prevents CIN (p110); diuretics and dopamine are not recommended."
+    src: { page: 115, quote: "Intoxications (lithium, ethylene glycol, etc)" }
+    status: unverified
+  - id: neph.L05.128
+    kind: case
+    topic: treatment
+    stem: A 24-year-old man was trapped under rubble for 6 hours. His urine is dark, CK is 85,000 U/L, and creatinine is 2.1 mg/dL.
+    steps:
+      - question: What will urine microscopy most likely show?
+        options:
+          - Pigmented casts
+          - RBC casts
+          - Eosinophiluria
+          - Calcium oxalate crystals
+        answer: 0
+        why: "Myoglobinuria gives pigmented casts (p109)."
+      - question: What is the first-line treatment?
+        options:
+          - Aggressive fluids (up to 10 L/day), alkaline fluids helpful
+          - Fluid restriction to 1 L/day
+          - Immediate furosemide before any fluid
+          - Plasmapheresis
+        answer: 0
+        why: "Rhabdomyolysis needs aggressive volume repletion, up to 10 L/day, and alkaline fluids are beneficial. Diuretics come only once repletion is adequate and there is no urine (p114)."
+      - question: Which electrolytes need close watching?
+        options:
+          - Calcium and phosphate
+          - Magnesium only
+          - Sodium only
+          - None
+        answer: 0
+        why: "Calcium and phosphate precipitate in damaged tissue (p114)."
+    src: { page: 114, quote: "Aggressive volume repletion (may require 10 L of fluid per day)" }
+    status: unverified
+  - id: neph.L05.129
+    kind: case
+    topic: biomarkers
+    stem: A 67-year-old with CKD stage 3 has on-pump CABG. Four hours later his creatinine is unchanged from baseline, but urinary [TIMP-2]×[IGFBP7] is 1.2.
+    steps:
+      - question: What does the score mean?
+        options:
+          - Positive; he could develop moderate to severe AKI within 12 hours
+          - Negative; creatinine is normal so there is no injury
+          - It measures GFR directly
+          - It diagnoses postrenal AKI
+        answer: 0
+        why: "A score >0.3 is positive for moderate to severe AKI within 12 hours (p121). Creatinine is a late clock (p118)."
+      - question: What does the KDIGO care bundle in the p122 trial do?
+        options:
+          - Holds ACEi/ARB for 48 h, optimizes volume and perfusion, avoids hyperglycemia and contrast
+          - Starts low-dose dopamine and furosemide
+          - Starts prophylactic dialysis
+          - Waits for creatinine to rise
+        answer: 0
+        why: "The bundle reduced AKI at 72 h from 71% to 55.1% (p122)."
+    src: { page: 122, quote: "Preventive strategy performed in high risk on pump cardiac surgery patients-single center trial" }
+    status: unverified
+  # ---------- essays ----------
+  - id: neph.L05.130
+    kind: essay
+    topic: definition
+    prompt: Define acute kidney injury and discuss its classification and staging.
+    outline:
+      - "Definition: abrupt fall in function (creatinine, BUN, urine output)"
+      - "History: over 30 definitions; RIFLE (ADQI 2004), AKIN, KDIGO unifying"
+      - "KDIGO diagnosis: ≥0.3 mg/dL in 48 h, 50% in 7 days, UO <0.5 mL/kg/h for 6 h"
+      - "KDIGO stages 1–3 by creatinine and urine output; RIFLE and AKIN"
+      - "AKI, AKD, CKD (ADQI days 7 and 90)"
+      - "Types: oliguric vs non-oliguric; ICU vs non-ICU; prerenal, intrinsic, postrenal"
+      - "Limitations of creatinine-based staging"
+    src: { page: 100, quote: "Increase in serum creatinine (SCr) of at least 0.3 mg/dL within 48 hours" }
+    status: unverified
+  - id: neph.L05.131
+    kind: essay
+    topic: workup
+    prompt: Discuss the diagnostic approach to a patient with acute kidney injury.
+    outline:
+      - "History: losses, drugs (diuretics, NSAIDs, ACEi/ARB), urinary symptoms"
+      - "Exam: volume status; flank pain, bladder; purpura, livedo, limb ischemia, TMA"
+      - "Review all medications (cause, dose adjustment)"
+      - "Blood: CBC, BUN/creatinine, electrolytes, uric acid, PT/PTT"
+      - "Urine: volume, protein, FENa and UNa, sediment"
+      - "Prerenal vs ATN indices table"
+      - "Imaging: ultrasound, Doppler, CT, DMSA, DTPA/MAG3"
+      - "Novel biomarkers: cystatin C, NGAL, KIM-1, TIMP-2×IGFBP7"
+    src: { page: 107, quote: "Diagnostic approach and work up" }
+    status: unverified
+  - id: neph.L05.132
+    kind: essay
+    topic: treatment
+    prompt: Outline the prevention and management of acute kidney injury.
+    outline:
+      - "CIN: saline or bicarbonate regimens, N-acetylcysteine"
+      - "ICU glucose 110–149 mg/dl; aminoglycoside rules"
+      - "General: hemodynamics, stop nephrotoxins, RRT when indicated"
+      - "Fluids: crystalloids over colloids; pressors to MAP 65–70, norepinephrine over dopamine"
+      - "No low-dose dopamine (1A); diuretics not to prevent (1B) or treat (2C) except overload"
+      - "HRS: terlipressin, octreotide/midodrine, norepinephrine with albumin"
+      - "Rhabdomyolysis, GN/vasculitis, AIN, scleroderma crisis, postrenal relief"
+      - "Dialysis: AEIOU; IHD vs CRRT, PD, SLED"
+    src: { page: 111, quote: "Elimination of nephrotoxic agents (e.g., ACE inhibitors, ARBS, NSAIDs, aminoglycosides) if possible" }
+    status: unverified
+
+  # ---------- calculators ----------
+  - id: neph.L05.133
+    kind: calc
+    topic: definition
+    calculator: kdigo_aki
+    stem: "A 60-year-old man's creatinine rises from a baseline of 1.0 to 2.4 mg/dL four days after surgery. Urine output stays above 0.5 mL/kg/h and he is not on dialysis."
+    question: What is his KDIGO AKI stage?
+    inputs: { baseline_cr_mg_dl: 1.0, current_cr_mg_dl: 2.4, urine_output: normal, rrt: false }
+    expect: "Stage 2"
+    interpret: "2.4 ÷ 1.0 = 2.4 times baseline, inside the 2–2.9 band, so stage 2. A normal urine output does not lower the stage."
+    src: { page: 100, quote: "TABLE 28-1: RIFLE, AKIN, and KDIGO Classification Schemes for Acute Kidney Injurya" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L05.134
+    kind: calc
+    topic: definition
+    calculator: kdigo_aki
+    stem: "A septic ICU patient's creatinine goes from 0.9 to 1.3 mg/dL in 24 hours, and she has been anuric for 14 hours."
+    question: What is her KDIGO AKI stage?
+    inputs: { baseline_cr_mg_dl: 0.9, current_cr_mg_dl: 1.3, urine_output: lt03_24h_or_anuria, rrt: false }
+    expect: "Stage 3"
+    interpret: "The creatinine rise of 0.4 mg/dL is only stage 1, but anuria for at least 12 hours is stage 3. The worse criterion sets the stage."
+    src: { page: 100, quote: "TABLE 28-1: RIFLE, AKIN, and KDIGO Classification Schemes for Acute Kidney Injurya" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L05.135
+    kind: calc
+    topic: indices
+    calculator: fena
+    stem: "A 74-year-old woman with 3 days of diarrhea has AKI. Urine Na 10 mEq/L, plasma Na 140 mEq/L, urine creatinine 80 mg/dL, plasma creatinine 2.0 mg/dL."
+    question: What is her FENa and what does it suggest?
+    inputs: { urine_na_meq_l: 10, plasma_na_meq_l: 140, urine_cr_mg_dl: 80, plasma_cr_mg_dl: 2.0 }
+    expect: "0.18%"
+    interpret: "(10 × 2.0) ÷ (140 × 80) × 100 = 0.18%. Below 1%, so the tubules are holding sodium: prerenal azotemia (p109)."
+    src: { page: 109, quote: "Distinguishing Prerenal azotemia and ATN" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L05.136
+    kind: calc
+    topic: indices
+    calculator: fena
+    stem: "After 3 days of septic shock, a man has oliguric AKI. Urine Na 60 mEq/L, plasma Na 135 mEq/L, urine creatinine 30 mg/dL, plasma creatinine 4.0 mg/dL."
+    question: What is his FENa and what does it suggest?
+    inputs: { urine_na_meq_l: 60, plasma_na_meq_l: 135, urine_cr_mg_dl: 30, plasma_cr_mg_dl: 4.0 }
+    expect: "5.93%"
+    interpret: "(60 × 4.0) ÷ (135 × 30) × 100 = 5.93%. Above 2%, the damaged tubules lose sodium: ATN (p109)."
+    src: { page: 109, quote: "Distinguishing Prerenal azotemia and ATN" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L05.137
+    kind: calc
+    topic: indices
+    calculator: feurea
+    stem: "A heart-failure patient on IV furosemide has a rising creatinine and a FENa of 2.5%. Urine urea 450 mg/dL, plasma urea 80 mg/dL, urine creatinine 90 mg/dL, plasma creatinine 2.4 mg/dL."
+    question: What is the FEurea and what does it suggest?
+    inputs: { urine_urea_mg_dl: 450, plasma_urea_mg_dl: 80, urine_cr_mg_dl: 90, plasma_cr_mg_dl: 2.4 }
+    expect: "15%"
+    interpret: "(450 × 2.4) ÷ (80 × 90) × 100 = 15%. Below 35%, so prerenal (p109), even though the diuretic pushed the FENa up."
+    src: { page: 109, quote: "Distinguishing Prerenal azotemia and ATN" }
+    status: unverified
+    tags: [numbers]

@@ -174,6 +174,22 @@ pub const CALCULATORS: &[&str] = &[
     "clichy",
     "ranson",
     "bisap",
+    "glasgow_blatchford",
+    "incidence",
+    "prevalence",
+    "prevalence_id",
+    "attack_rate",
+    "sar",
+    "cfr",
+    "pmr",
+    "imr",
+    "nmr",
+    "relative_risk",
+    "odds_ratio",
+    "attributable_risk",
+    "nnt",
+    "diagnostic_accuracy",
+    "z_score",
 ];
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]

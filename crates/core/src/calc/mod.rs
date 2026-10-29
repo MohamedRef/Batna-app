@@ -1,4 +1,5 @@
-//! Clinical calculators for hepatology and the pancreas.
+//! Clinical calculators for hepatology and the pancreas, and the research
+//! measures of Basics of Research (rates, RR/OR, NNT, diagnostic accuracy).
 //!
 //! Every calculator is a pure function from named [`Inputs`] to an
 //! [`Outcome`]. The [`CalcSpec`] registry describes each calculator's fields so
@@ -27,12 +28,14 @@ mod bisap;
 mod child_pugh;
 mod clichy;
 mod fib4;
+mod gbs;
 mod glasgow;
 mod kings;
 mod maddrey;
 mod meld;
 mod r_ratio;
 mod ranson;
+mod research;
 mod saag;
 
 /// Named inputs for one calculation.
@@ -276,6 +279,8 @@ pub enum Area {
     Tumour,
     AcuteFailure,
     Pancreas,
+    Gi,
+    Research,
 }
 
 pub struct CalcSpec {
@@ -309,7 +314,7 @@ pub fn compute(id: &str, inputs: &Inputs) -> Result<Outcome, CalcError> {
     (spec.compute)(inputs)
 }
 
-static REGISTRY: [CalcSpec; 16] = [
+static REGISTRY: [CalcSpec; 32] = [
     child_pugh::SPEC,
     meld::MELD,
     meld::MELD_NA,
@@ -326,6 +331,22 @@ static REGISTRY: [CalcSpec; 16] = [
     clichy::SPEC,
     ranson::SPEC,
     bisap::SPEC,
+    gbs::SPEC,
+    research::INCIDENCE,
+    research::PREVALENCE,
+    research::PREVALENCE_ID,
+    research::ATTACK_RATE,
+    research::SAR,
+    research::CFR,
+    research::PMR,
+    research::IMR,
+    research::NMR,
+    research::RELATIVE_RISK,
+    research::ODDS_RATIO,
+    research::ATTRIBUTABLE_RISK,
+    research::NNT,
+    research::DIAGNOSTIC,
+    research::Z_SCORE,
 ];
 
 const UNIT_SUFFIXES: &[&str] = &[

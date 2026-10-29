@@ -194,3 +194,165 @@ Source: Wu 2008; book Lecture 15, p. 288
 | `sirs` | true / false (default false) | SIRS (2 or more criteria) |
 | `age_years` | number, years | Age |
 | `pleural_effusion` | true / false (default false) | Pleural effusion |
+
+## `glasgow_blatchford`: Glasgow-Blatchford score
+
+Source: Blatchford 2000; book Gastroenterology Lecture 11, p. 309
+
+| input | kind | |
+|---|---|---|
+| `bun_mg_dl` | number, mg/dL | BUN |
+| `sex` | `male`, `female` | Sex |
+| `hb_g_dl` | number, g/dL | Haemoglobin |
+| `sbp_mmhg` | number, mmHg | Systolic blood pressure |
+| `hr_bpm` | number, beats/min | Heart rate |
+| `melena` | true / false (default false) | Melena |
+| `syncope` | true / false (default false) | Syncope |
+| `hepatic_disease` | true / false (default false) | Hepatic disease |
+| `cardiac_failure` | true / false (default false) | Cardiac failure |
+
+## `incidence`: Incidence rate
+
+Source: Research L02: measures of disease frequency, slide 25
+
+| input | kind | |
+|---|---|---|
+| `new_cases` | number | New cases during the period |
+| `population_at_risk` | number | Population at risk (mid-period) |
+| `per` | `100`, `1000`, `10000`, `100000` | Expressed |
+
+## `prevalence`: Prevalence
+
+Source: Research L02: measures of disease frequency, slide 31
+
+| input | kind | |
+|---|---|---|
+| `existing_cases` | number | Existing (old + new) cases |
+| `population` | number | Total population (mid-point or mid-period) |
+| `per` | `100`, `1000`, `10000`, `100000` | Expressed |
+
+## `prevalence_id`: Prevalence = Incidence × Duration
+
+Source: Research L02: measures of disease frequency, slide 37
+
+| input | kind | |
+|---|---|---|
+| `incidence` | number, per 1,000 per year | Incidence |
+| `duration_years` | number, years | Mean duration of disease |
+
+## `attack_rate`: Attack rate
+
+Source: Research L02: measures of disease frequency, slides 26–29
+
+| input | kind | |
+|---|---|---|
+| `cases` | number | Cases during the outbreak |
+| `at_risk` | number | Population at risk |
+
+## `sar`: Secondary attack rate
+
+Source: Research L02: measures of disease frequency, slides 46–49
+
+| input | kind | |
+|---|---|---|
+| `secondary_cases` | number | Secondary cases (within one incubation period) |
+| `contacts` | number | Contacts (household members, all) |
+| `primary_cases` | number | Primary cases among them |
+
+## `cfr`: Case fatality rate
+
+Source: Research L02: measures of disease frequency, slide 60
+
+| input | kind | |
+|---|---|---|
+| `deaths` | number | Deaths from the disease |
+| `cases` | number | People with the disease |
+
+## `pmr`: Proportionate mortality ratio
+
+Source: Research L02: measures of disease frequency, slide 59
+
+| input | kind | |
+|---|---|---|
+| `cause_deaths` | number | Deaths from the cause |
+| `all_deaths` | number | Deaths from all causes |
+
+## `imr`: Infant mortality rate
+
+Source: Research L02: measures of disease frequency, slide 63
+
+| input | kind | |
+|---|---|---|
+| `infant_deaths` | number | Deaths under one year |
+| `live_births` | number | Live births, same year |
+
+## `nmr`: Neonatal mortality rate
+
+Source: Research L02: measures of disease frequency, slide 64
+
+| input | kind | |
+|---|---|---|
+| `neonatal_deaths` | number | Deaths in the first 28 days |
+| `live_births` | number | Live births, same year |
+
+## `relative_risk`: Relative risk (cohort)
+
+Source: Research L05: analytic studies, slides 50–53
+
+| input | kind | |
+|---|---|---|
+| `a` | number | a |
+| `b` | number | b |
+| `c` | number | c |
+| `d` | number | d |
+
+## `odds_ratio`: Odds ratio (case-control)
+
+Source: Research L05: analytic studies, slides 32–34
+
+| input | kind | |
+|---|---|---|
+| `a` | number | a |
+| `b` | number | b |
+| `c` | number | c |
+| `d` | number | d |
+
+## `attributable_risk`: Attributable risk
+
+Source: Research L05: analytic studies, slide 51
+
+| input | kind | |
+|---|---|---|
+| `incidence_exposed` | number, per 1,000 | Incidence among exposed (Ie) |
+| `incidence_unexposed` | number, per 1,000 | Incidence among non-exposed (Io) |
+
+## `nnt`: NNT / NNH
+
+Source: Research L06–L07: experimental studies (NNT = 1/ARR)
+
+| input | kind | |
+|---|---|---|
+| `control_event_rate` | number, % | Event rate, control group (CER) |
+| `experimental_event_rate` | number, % | Event rate, treated group (EER) |
+
+## `diagnostic_accuracy`: Diagnostic accuracy (2×2)
+
+Source: Research L14: measures of diagnostic accuracy
+
+| input | kind | |
+|---|---|---|
+| `tp` | number | True positives (a) |
+| `fp` | number | False positives (b) |
+| `fn` | number | False negatives (c) |
+| `tn` | number | True negatives (d) |
+| `measure` | `sensitivity`, `specificity`, `ppv`, `npv`, `accuracy`, `lr_positive`, `lr_negative` | Answer with |
+
+## `z_score`: Z-score
+
+Source: Research L16: normal distribution and Z-score
+
+| input | kind | |
+|---|---|---|
+| `value` | number | Observation (x) |
+| `mean` | number | Mean (μ) |
+| `sd` | number | Standard deviation (σ) |

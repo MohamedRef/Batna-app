@@ -1,0 +1,847 @@
+schema: batna.content/v1
+lecture: hem.L02
+title: "Anaemia"
+author: "Prof. Nahla Abdel Moneim"
+book: { chapter: 4, pages: [9, 17] }
+topics:
+  - { id: definition, title: "Definition and special populations" }
+  - { id: symptoms, title: "Symptoms" }
+  - { id: history, title: "History: onset, diet, drugs, past and family history" }
+  - { id: examination, title: "Physical examination and specific signs" }
+  - { id: cbc, title: "CBC and further tests" }
+  - { id: reticulocytes, title: "Reticulocyte count and the first distinction" }
+  - { id: mcv, title: "MCV categories" }
+  - { id: aplastic, title: "Aplastic anaemia" }
+  - { id: megaloblastic, title: "Megaloblastic anaemia: labs, folate and B12" }
+  - { id: transfusion, title: "Transfusion indications" }
+items:
+  # ---------- p9: definition, special populations, symptoms ----------
+  - id: hem.L02.001
+    kind: card
+    topic: definition
+    front: Define anaemia clinically.
+    back: An Hb or Ht value below the appropriate reference range for that patient, adjusted for age, sex and other factors such as altitude.
+    src: { page: 9, quote: "The reference range needs to be adjusted for the age and sex, other factors such as altitude." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L02.002
+    kind: cloze
+    topic: definition
+    text: "Anaemia can be defined as Hb < {{c1::14}} g/dL in adult men and < {{c2::12}} g/dL in adult women."
+    src: { page: 9, quote: "Anaemia can be defined as Hb values <14 g/dL in adult men and <12 g/dL in adult women." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: hem.L02.003
+    kind: card
+    topic: definition
+    front: Is anaemia a diagnosis?
+    back: No. It is a laboratory abnormality that requires explanation.
+    src: { page: 9, quote: "Anaemia is not a diagnosis. It is a laboratory abnormality that requires explanation." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L02.004
+    kind: cloze
+    topic: definition
+    text: "In African-Americans of both sexes and all ages, Hb runs {{c1::0.5–1.0}} g/dL lower than in comparable Caucasian populations."
+    src: { page: 9, quote: "Hb are 0.5 - 1.0 g/dL <its values in comparable Caucasian populations." }
+    status: unverified
+    tags: [numbers]
+  - id: hem.L02.005
+    kind: cloze
+    topic: definition
+    text: "Physiologic (dilutional) anaemia: in the {{c1::3rd}} trimester RBC mass rises by {{c2::25%}} and plasma volume by {{c3::50%}}, so Hb, Ht and RBC count fall, often to anaemic levels."
+    src: { page: 9, quote: "RBC mass and plasma volume are expanded by 25 and 50 %, respectively" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: hem.L02.006
+    kind: mcq
+    topic: definition
+    stem: A healthy woman at 34 weeks' gestation has Hb 10.6 g/dL with normal indices. Her Hb was 12.8 g/dL before pregnancy. What best explains the fall?
+    options:
+      - Plasma volume expands more (50%) than RBC mass (25%)
+      - RBC mass falls by 25% in the third trimester
+      - Iron is diverted to the fetus, so red cell production stops
+      - Haemolysis caused by placental hormones
+      - Bone marrow suppression by oestrogen
+    answer: 0
+    why:
+      - "Correct: in the 3rd trimester RBC mass rises 25% and plasma volume 50%, a physiologic dilutional anaemia (p9)."
+      - RBC mass rises, it does not fall.
+      - Red cell production goes up in pregnancy; the book's explanation is dilution.
+      - The book does not describe haemolysis in pregnancy.
+      - Marrow suppression is not the mechanism the book gives.
+    src: { page: 9, quote: "\"Physiologic\" or \"dilutional\" anaemia In the 3rd trimester of pregnancy" }
+    status: unverified
+  - id: hem.L02.007
+    kind: enumerate
+    topic: symptoms
+    prompt: Mention the non-specific symptoms of anaemia.
+    points:
+      - Fatigue
+      - Orthostatic light-headedness
+      - Faintness
+      - Dyspnoea on exertion
+      - Angina
+      - Intermittent claudication
+      - Palpitations
+    pass: 5
+    src: { page: 9, quote: "Non-specific Symptoms Fatigue Orthostatic light-headedness Faintness Dyspnea on exertion Angina Intermittent claudication" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p10: symptoms ----------
+  - id: hem.L02.008
+    kind: cloze
+    topic: symptoms
+    text: "Slowly developing or long-standing anaemia may be {{c1::asymptomatic}} even with Hb levels of {{c2::5 or 6}} g/dL."
+    src: { page: 10, quote: "Slowly developing or long-standing anemia may be asymptomatic with Hb levels of 5 or 6 g/dL." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: hem.L02.009
+    kind: card
+    topic: symptoms
+    front: How does anaemia show in a patient with prior myocardial dysfunction?
+    back: More pronounced oedema, dyspnoea, orthopnoea, tachycardia, fatigue and loss of energy.
+    src: { page: 10, quote: "Previous myocardial dysfunction more pronounced edema, dyspnea, orthopnea, tachycardia, fatigue and loss of energy." }
+    status: unverified
+  - id: hem.L02.010
+    kind: card
+    topic: symptoms
+    front: How does anaemia show in a patient with cerebrovascular disease?
+    back: Impaired cognition and more frequent or more severe TIAs or strokes.
+    src: { page: 10, quote: "Cognition & more frequent or severe TIA or strokes with cerebrovascular disease." }
+    status: unverified
+  - id: hem.L02.011
+    kind: table
+    topic: symptoms
+    title: Symptoms that point to the associated disease
+    columns: [Symptom, Points to]
+    rows:
+      - [Jaundice, Haemolysis]
+      - [Weight loss, Malignancy]
+      - ["Fevers, night sweats", Malignancy; chronic infection]
+      - [Abdominal fullness (splenomegaly), "Lymphoma, chronic liver disease, myeloproliferative disorders"]
+      - [Sore mouth or tongue, Megaloblastic anaemia; iron deficiency]
+      - ["Paraesthesias, clumsiness, weakness", B12 deficiency]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1]]
+    src: { page: 10, quote: "Paresthesias, clumsiness, weakness: B12 deficiency" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L02.012
+    kind: enumerate
+    topic: symptoms
+    prompt: Mention the prominent early symptoms of severe acute haemolysis or blood loss.
+    points:
+      - Resting or orthostatic hypotension (fall in total blood volume)
+      - Light-headedness or syncope
+      - Exertional or resting tachycardia and palpitations
+      - Diaphoresis
+      - Anxiety and agitation
+      - Generalised severe weakness and lethargy
+      - Possibly reduced mental function
+    pass: 5
+    src: { page: 10, quote: "In severe acute haemolysis or blood loss, prominent early symptoms include resting or orthostatic hypotension" }
+    status: unverified
+  - id: hem.L02.013
+    kind: mcq
+    topic: symptoms
+    stem: A 60-year-old woman with a slowly progressive anaemia from menorrhagia walks into clinic with Hb 5.5 g/dL and few complaints. A man who bled acutely from an ulcer arrives faint and tachycardic with Hb 9 g/dL. What explains the difference?
+    options:
+      - Slowly developing anaemia may be asymptomatic even at Hb 5–6 g/dL
+      - Women tolerate anaemia because their reference range is lower
+      - Acute bleeding lowers Hb faster than chronic bleeding
+      - The woman must have a lab error
+      - Tachycardia is a sign of iron deficiency only
+    answer: 0
+    why:
+      - "Correct: slowly developing or long-standing anaemia may be asymptomatic at Hb 5–6 g/dL (p10); acute loss brings hypotension and tachycardia from the drop in blood volume."
+      - A lower reference range does not explain tolerance of Hb 5.5 g/dL.
+      - The point is volume loss and adaptation, not the speed of the Hb fall.
+      - The book explicitly allows such low Hb without symptoms.
+      - Tachycardia comes from acute blood loss, haemolysis and severe anaemia of any cause.
+    src: { page: 10, quote: "Slowly developing or long-standing anemia may be asymptomatic with Hb levels of 5 or 6 g/dL." }
+    status: unverified
+  - id: hem.L02.014
+    kind: card
+    topic: history
+    front: What does the onset of anaemic symptoms suggest?
+    back: Abrupt onset suggests haemolysis; insidious onset suggests a nutritional cause.
+    src: { page: 10, quote: "Onset of symptoms abrupt (haemolysis) or insidious (nutritional)" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L02.015
+    kind: card
+    topic: history
+    front: What does a short duration of dyspnoea and fatigue suggest?
+    back: Recent bleeding or haemolysis.
+    src: { page: 10, quote: "short duration of dyspnoea and fatigue etc. suggests recent bleeding or haemolysis" }
+    status: unverified
+  # ---------- p11: history ----------
+  - id: hem.L02.016
+    kind: table
+    topic: history
+    title: Dietary sources to ask about
+    columns: [Nutrient, Source in the diet]
+    rows:
+      - [Iron, Meat]
+      - [Folic acid, Fresh fruits and vegetables]
+      - [B12, "Meat, dairy products"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 11, quote: "iron (meat), folic acid (fresh fruits and vegetables) and B12 (meat, dairy products)" }
+    status: unverified
+  - id: hem.L02.017
+    kind: card
+    topic: history
+    front: Why ask an anaemic patient about alcohol?
+    back: Alcohol interferes with folate metabolism, and it causes liver disease.
+    src: { page: 11, quote: "Alcohol consumption Alcohol interferes with folate metabolism; liver disease" }
+    status: unverified
+  - id: hem.L02.018
+    kind: card
+    topic: history
+    front: Which occupational exposures are toxic to the bone marrow?
+    back: Chemicals such as organic solvents and hydrocarbons.
+    src: { page: 11, quote: "Exposure to chemicals that are toxic to bone hobbies marrow (organic solvents, hydrocarbons)" }
+    status: unverified
+  - id: hem.L02.019
+    kind: card
+    topic: history
+    front: Which deficiencies may appear years after a gastrectomy?
+    back: Iron and/or B12 deficiency.
+    src: { page: 11, quote: "Past history: gastrectomy with later occurrence of Fe and/or B12 deficiency." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L02.020
+    kind: enumerate
+    topic: history
+    prompt: Mention the points of past history to ask an anaemic patient about.
+    points:
+      - Gastrectomy (later iron and/or B12 deficiency)
+      - Blood loss (GIT, gynaecological, blood donation)
+      - Previous medical (renal function, malignancy) and surgical history
+      - Previous diagnosis of anaemia
+      - Results of previous CBCs (when and in what circumstances)
+      - Previous iron, folate or B12 treatment
+    pass: 4
+    src: { page: 11, quote: "Blood loss: GIT and gynaecological sources, blood donation." }
+    status: unverified
+  - id: hem.L02.021
+    kind: enumerate
+    topic: history
+    prompt: Mention what to ask in the family history of an anaemic patient.
+    points:
+      - Hereditary spherocytosis
+      - Ethnic Hb disorders (thalassaemia, HbSS)
+      - Hereditary telangiectasia with chronic GIT bleeding
+    pass: 3
+    src: { page: 11, quote: "Hereditary problems such as HS or ethnic Hb disorders such as thalassaemia or HbSS." }
+    status: unverified
+  - id: hem.L02.022
+    kind: card
+    topic: history
+    front: Why take the menstrual and reproductive history in anaemia?
+    back: Iron is lost in menorrhagia and in pregnancy.
+    src: { page: 11, quote: "Menstrual history: Iron loss in menorrhagia" }
+    status: unverified
+  - id: hem.L02.023
+    kind: table
+    topic: history
+    title: Drug history in anaemia
+    columns: [Mechanism, Drugs]
+    rows:
+      - [Interfere with folate metabolism, "Sulfa drugs, trimethoprim, antiepileptics"]
+      - [Haemolysis in enzyme deficiency, Oxidant drugs]
+      - [Blood loss from gastritis or peptic ulcer, NSAIDs]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 11, quote: "Interference with folate metabolism (sulfa drugs, trimethoprim, antiepileptic medications)" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L02.024
+    kind: mcq
+    topic: history
+    stem: A woman on long-term phenytoin develops a macrocytic anaemia. Which mechanism from the drug history fits?
+    options:
+      - Interference with folate metabolism
+      - Oxidant haemolysis in enzyme deficiency
+      - Blood loss from gastritis
+      - Marrow toxicity like organic solvents
+      - Iron malabsorption
+    answer: 0
+    why:
+      - "Correct: antiepileptics, sulfa drugs and trimethoprim interfere with folate metabolism (p11)."
+      - Oxidant drugs cause haemolysis in enzyme deficiency, not macrocytosis from folate.
+      - NSAIDs cause blood loss, which gives iron deficiency.
+      - The book lists solvents and hydrocarbons as marrow toxins, not antiepileptics.
+      - Iron malabsorption gives microcytosis, not macrocytosis.
+    src: { page: 11, quote: "Interference with folate metabolism (sulfa drugs, trimethoprim, antiepileptic medications)" }
+    status: unverified
+  # ---------- p12-13: examination ----------
+  - id: hem.L02.025
+    kind: card
+    topic: examination
+    front: Where do you look for pallor, and at what Hb does palmar crease pallor appear?
+    back: Skin (especially under the nails), mucous membranes and conjunctivae. Pallor of the palmar creases appears at Hb < 75 g/L.
+    src: { page: 12, quote: "pallor in palmar skin creases (Hb<75 g/l)" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: hem.L02.026
+    kind: enumerate
+    topic: examination
+    prompt: Mention the general (cardiovascular) signs of anaemia on examination.
+    points:
+      - Pallor
+      - Orthostatic hypotension
+      - Resting or orthostatic tachycardia
+      - Prominent apical impulse, bounding pulses, wide pulse pressure
+      - Systolic ejection murmur
+      - Signs of CHF
+    pass: 4
+    src: { page: 12, quote: "Increased prominence of the cardiac apical impulse, bounding pulses and a wide pulse pressure." }
+    status: unverified
+  - id: hem.L02.027
+    kind: card
+    topic: examination
+    front: Which signs suggest Fanconi's anaemia?
+    back: Skin discoloration, short stature and skeletal problems such as misshapen or missing thumbs.
+    src: { page: 12, quote: "Fanconi‘s anemia: skin discoloration, short stature and skeletal problems such as misshapen or missing thumbs." }
+    status: unverified
+  - id: hem.L02.028
+    kind: table
+    topic: examination
+    title: Specific signs and the anaemia they point to
+    columns: [Sign, Points to]
+    rows:
+      - [Vitiligo, Cobalamin deficiency]
+      - [Telangiectasias in the mouth or around the ears, GIT bleeding from similar gut lesions]
+      - [Loss of the lateral eyebrows, Hypothyroidism (normochromic normocytic anaemia)]
+      - [Koilonychia (spoon nails), Iron deficiency anaemia]
+      - [Bone deformities, Thalassaemia major]
+      - [Leg ulcers, Sickle cell disease]
+      - [Rectal haemorrhoids, Iron deficiency anaemia]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1]]
+    src: { page: 12, quote: "Vitiligo in cobalamin deficiency." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L02.029
+    kind: card
+    topic: examination
+    front: What does jaundice in an anaemic patient suggest, according to the book?
+    back: Haemolytic anaemia, or anaemia secondary to chronic active hepatitis.
+    src: { page: 12, quote: "Jaundice: haemolytic anaemia, 2ry to chronic active hepatitis" }
+    status: unverified
+  - id: hem.L02.030
+    kind: table
+    topic: examination
+    title: Splenomegaly in anaemia, by consistency
+    columns: [Spleen, Causes]
+    rows:
+      - [Soft, "AIHA, pyruvate kinase deficiency"]
+      - [Firm, "Myelofibrosis, Gaucher's disease"]
+      - [Firm, "Chronic haemolytic states (hereditary spherocytosis, thalassaemia major)"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 12, quote: "Splenomegaly: AIHA or pyruvate kinase deficiency (soft spleen), myelofibrosis or Gaucher‘s disease (firm)" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L02.031
+    kind: mcq
+    topic: examination
+    stem: A 30-year-old woman has anaemia, jaundice and a soft, mildly enlarged spleen of recent onset. Which cause fits the book's description best?
+    options:
+      - Autoimmune haemolytic anaemia
+      - Myelofibrosis
+      - Gaucher's disease
+      - Thalassaemia major
+      - Cirrhosis with a shrunken liver
+    answer: 0
+    why:
+      - "Correct: AIHA (and PK deficiency) give a soft spleen (p12)."
+      - Myelofibrosis gives a firm spleen.
+      - Gaucher's disease gives a firm spleen.
+      - Chronic haemolytic states such as thalassaemia major give a firm spleen.
+      - Cirrhosis is about the liver; its anaemia comes from varices, hypersplenism or spur cells.
+    src: { page: 12, quote: "Splenomegaly: AIHA or pyruvate kinase deficiency (soft spleen)" }
+    status: unverified
+  - id: hem.L02.032
+    kind: card
+    topic: examination
+    front: How can a shrunken (cirrhotic) liver cause anaemia?
+    back: GIT bleeding from varices, hypersplenism, or haemolysis (spur cell defects of erythrocytes).
+    src: { page: 13, quote: "Shrunken livers: cirrhosis and end-stage liver disease (GIT bleeding from varices, hypersplenism or hemolysis (spur cell defects" }
+    status: unverified
+  - id: hem.L02.033
+    kind: enumerate
+    topic: examination
+    prompt: Mention the abdominal and lymph node findings that point to the cause of anaemia (p13).
+    points:
+      - Shrunken liver (cirrhosis, end-stage liver disease)
+      - Hepatosplenomegaly (lympho- or myeloproliferative disorders)
+      - Mass (intra-abdominal malignancy)
+      - Lymphadenopathy (lymphoreticular disease or viral infection)
+    pass: 3
+    src: { page: 13, quote: "Hepatosplenomegaly in lymphoproliferative or myeloproliferative disorders." }
+    status: unverified
+  - id: hem.L02.034
+    kind: card
+    topic: examination
+    front: What nervous system signs point to cobalamin deficiency?
+    back: Peripheral neuropathy and degeneration of the posterior and lateral tracts of the spinal cord.
+    src: { page: 13, quote: "Peripheral neuropathy, degeneration of the posterior and lateral tracts in the spinal column with (cobalamin deficiency)" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p13-14: labs, first distinction, reticulocytes ----------
+  - id: hem.L02.035
+    kind: enumerate
+    topic: cbc
+    prompt: Mention the main parameters measured in the complete blood count.
+    points:
+      - Hb concentration
+      - Red cell count
+      - MCV, MCH, MCHC
+      - Haematocrit (PCV)
+      - Red cell distribution width (RDW)
+      - White cell count and differential
+      - Platelet count
+    pass: 6
+    src: { page: 13, quote: "Main parameters measured 1. Hb concentration. 2. Red cell count. 3. MCV, MCH, MCHC." }
+    status: unverified
+  - id: hem.L02.036
+    kind: enumerate
+    topic: cbc
+    prompt: Mention additional tests after the CBC, chosen by the clinical situation.
+    points:
+      - Iron indices (ferritin, or serum iron, transferrin, saturation)
+      - Folic acid level
+      - Cobalamin (B12) level
+      - Hb electrophoresis
+      - Direct Coombs' test
+    pass: 4
+    src: { page: 14, quote: "iron indices (serum ferritin or serum iron/transferrin/saturation), folic acid and cobalamin (vitamin B12) levels" }
+    status: unverified
+  - id: hem.L02.037
+    kind: card
+    topic: reticulocytes
+    front: What is the first distinction to make in any anaemia?
+    back: Whether the primary cause is marrow failure to produce enough erythrocytes, or accelerated loss or destruction of erythrocytes.
+    src: { page: 14, quote: "The first distinction to be made is whether the primary cause of the anemia is failure of the BM to produce sufficient no. of erythrocytes" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L02.038
+    kind: cloze
+    topic: reticulocytes
+    text: "Absolute reticulocyte count = {{c1::reticulocytes (%)}} × {{c2::RBC count/mm³}}."
+    src: { page: 14, quote: "Absolute reticulocyte count: = reticulocytes (%) X RBC count/mm3" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L02.039
+    kind: enumerate
+    topic: reticulocytes
+    prompt: Name the two methods used to judge whether the marrow's response to anaemia is appropriate.
+    points:
+      - Absolute reticulocyte count (ARC)
+      - Reticulocyte production index (RPI)
+    pass: 2
+    src: { page: 14, quote: "Two methods are employed to determine whether BM‘s response to the anaemia is appropriate" }
+    status: unverified
+  - id: hem.L02.040
+    kind: cloze
+    topic: reticulocytes
+    text: "In the book's algorithm a reticulocyte index < {{c1::2%}} means {{c2::underproduction}}; > 2% means {{c3::increased destruction or loss}}."
+    src: { page: 14, quote: "INCREASED DESTRUCTION or LOSS" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: hem.L02.041
+    kind: order
+    topic: reticulocytes
+    prompt: Order the steps of the book's anaemia algorithm (p14) for an underproduction anaemia.
+    steps:
+      - Confirm anaemia
+      - Reticulocyte count or index < 2% (underproduction)
+      - Classify by MCV (low, normal, high)
+      - Microcytic, normocytic or macrocytic work-up
+    src: { page: 14, quote: "Absolute reticulocyte count (ARC)" }
+    status: unverified
+  - id: hem.L02.042
+    kind: table
+    topic: reticulocytes
+    title: The p14 algorithm, increased destruction or loss branch
+    columns: [Clue, Diagnosis]
+    rows:
+      - ["↑ LDH, ↑ bilirubin, ↓ haptoglobin", Haemolysis]
+      - [Signs of bleeding, Recent acute blood loss]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 14, quote: "INCREASED DESTRUCTION or LOSS" }
+    status: unverified
+  - id: hem.L02.043
+    kind: mcq
+    topic: reticulocytes
+    stem: An anaemic man has a reticulocyte index of 4%, raised LDH and bilirubin, and a low haptoglobin. Where does he sit in the book's algorithm?
+    options:
+      - Increased destruction (haemolysis)
+      - Underproduction, microcytic
+      - Underproduction, macrocytic
+      - Recent acute blood loss
+      - Underproduction, normocytic
+    answer: 0
+    why:
+      - "Correct: RI > 2% means destruction or loss, and ↑LDH, ↑bilirubin, ↓haptoglobin mean haemolysis (p14)."
+      - Underproduction needs RI < 2%.
+      - Underproduction needs RI < 2%.
+      - Blood loss would show signs of bleeding, not the haemolysis panel.
+      - Underproduction needs RI < 2%.
+    src: { page: 14, quote: "INCREASED DESTRUCTION or LOSS" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p15: MCV categories, aplastic anaemia ----------
+  - id: hem.L02.044
+    kind: table
+    topic: mcv
+    title: Categories of anaemia by mean corpuscular volume (MCV)
+    columns: [Category, Causes]
+    rows:
+      - [Microcytic (< 80 fL), "Iron deficiency, chronic blood loss, thalassaemia, lead poisoning, sideroblastic anaemia"]
+      - [Normocytic (80–100 fL), "Acute blood loss, anaemia of chronic disease, aplastic anaemia, uraemia, mixed nutritional deficiencies"]
+      - [Macrocytic (> 100 fL), "B12 deficiency, folate deficiency, drug-induced megaloblastic anaemia, liver disease, hypothyroidism"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 15, quote: "Categories of Anaemias Based on Mean Corpuscular Volume" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L02.045
+    kind: cloze
+    topic: mcv
+    text: "By MCV, anaemia is microcytic below {{c1::80}} fL, normocytic at {{c2::80–100}} fL and macrocytic above {{c3::100}} fL."
+    src: { page: 15, quote: "MICROCYTIC (<80) NORMOCYTIC (80-100) MACROCYTIC (>100)" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: hem.L02.046
+    kind: mcq
+    topic: mcv
+    stem: Which anaemia is normocytic in the book's MCV table?
+    options:
+      - Anaemia of chronic disease
+      - Lead poisoning
+      - Sideroblastic anaemia
+      - Hypothyroidism
+      - Liver disease
+    answer: 0
+    why:
+      - "Correct: anaemia of chronic disease is in the normocytic column (p15)."
+      - Lead poisoning is microcytic.
+      - Sideroblastic anaemia is microcytic.
+      - Hypothyroidism is in the macrocytic column of the table.
+      - Liver disease is macrocytic.
+    src: { page: 15, quote: "Categories of Anaemias Based on Mean Corpuscular Volume" }
+    status: unverified
+  - id: hem.L02.047
+    kind: card
+    topic: aplastic
+    front: What does the CBC show in aplastic anaemia?
+    back: A fall in at least two cell lines, often all three; mild macrocytosis; a low reticulocyte count; and no blasts, immature cells or other morphologic abnormalities.
+    src: { page: 15, quote: "in at least two cell lines and often all three. Mild macrocytosis of RBCs" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L02.048
+    kind: card
+    topic: aplastic
+    front: What must be absent from the blood film to call it aplastic anaemia?
+    back: Other morphologic abnormalities, blasts and other immature cells.
+    src: { page: 15, quote: "Other morphologic abnormalities, blasts and other immature cells must be absent." }
+    status: unverified
+  - id: hem.L02.049
+    kind: card
+    topic: aplastic
+    front: What does the bone marrow show in aplastic anaemia?
+    back: A hypocellular marrow with a predominance of lymphocytes and plasma cells and reduced normal precursors of all types; lymphoid aggregates are often present.
+    src: { page: 15, quote: "The marrow must be hypocellular. A predominance of lymphocytes and plasma cells" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L02.050
+    kind: enumerate
+    topic: aplastic
+    prompt: What must be absent from the marrow biopsy to diagnose aplastic anaemia?
+    points:
+      - Fibrosis
+      - Granulomas
+      - Metastatic neoplasm
+    pass: 3
+    src: { page: 15, quote: "Lymphoid aggregates are often present, but fibrosis, granulomas and metastatic neoplasm must be absent." }
+    status: unverified
+  - id: hem.L02.051
+    kind: mcq
+    topic: aplastic
+    stem: A 25-year-old has pancytopenia with MCV 103 fL and a low reticulocyte count. The trephine is hypocellular with lymphocytes and plasma cells, but shows extensive reticulin fibrosis. Why can this NOT be called aplastic anaemia?
+    options:
+      - Fibrosis must be absent in aplastic anaemia
+      - Macrocytosis excludes aplastic anaemia
+      - Aplastic anaemia never has a low reticulocyte count
+      - Plasma cells must be absent
+      - Only two cell lines may be low
+    answer: 0
+    why:
+      - "Correct: fibrosis, granulomas and metastatic neoplasm must be absent (p15)."
+      - Mild macrocytosis is part of aplastic anaemia.
+      - The reticulocyte count is low in aplastic anaemia.
+      - A predominance of lymphocytes and plasma cells is typical.
+      - At least two lines fall, often all three.
+    src: { page: 15, quote: "fibrosis, granulomas and metastatic neoplasm must be absent" }
+    status: unverified
+  # ---------- p16: megaloblastic ----------
+  - id: hem.L02.052
+    kind: enumerate
+    topic: megaloblastic
+    prompt: Mention the laboratory abnormalities of megaloblastic anaemia in the blood.
+    points:
+      - Decreased haemoglobin
+      - Increased MCV (often ≥ 120 fL)
+      - Oval macrocytes
+      - Leukopenia
+      - Hypersegmented neutrophils
+      - Thrombocytopenia
+      - Increased LDH
+      - Increased bilirubin
+      - Decreased haptoglobin
+    pass: 6
+    src: { page: 16, quote: "Laboratory Abnormalities in Megaloblastic Anemia" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L02.053
+    kind: cloze
+    topic: megaloblastic
+    text: "Hypersegmented neutrophils: {{c1::> 5}} nuclear lobes in any cell, or {{c2::≥ 5%}} of neutrophils with 5 lobes."
+    src: { page: 16, quote: "Hypersegmented neutrophils" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: hem.L02.054
+    kind: card
+    topic: megaloblastic
+    front: What does the bone marrow show in megaloblastic anaemia?
+    back: Megaloblasts (enlarged erythroid precursors with immature nuclear chromatin) and giant bands and metamyelocytes.
+    src: { page: 16, quote: "Giant bands and metamyelocytes" }
+    status: unverified
+  - id: hem.L02.055
+    kind: card
+    topic: megaloblastic
+    front: Why does megaloblastic anaemia raise lactic dehydrogenase (LDH) and bilirubin and lower haptoglobin?
+    back: The book lists these haemolysis-type markers among its lab abnormalities; they reflect destruction of the defective megaloblastic red cells.
+    src: { page: 16, quote: "Increased lactic dehydrogenase" }
+    status: unverified
+  - id: hem.L02.056
+    kind: table
+    topic: megaloblastic
+    title: Folate versus B12 deficiency
+    columns: [Test, Folate def., B12 def., Both]
+    rows:
+      - [Serum folate, ↓, N/↑, ↓]
+      - [RBC folate, ↓, ↓, ↓]
+      - [B12 level, N, ↓, ↓]
+      - [Methylmalonyl CoA, N, ↑, ↑]
+      - [Homocysteine, ↑, ↑, ↑]
+    blanks: [[0, 2], [2, 1], [3, 1], [3, 2], [4, 1], [4, 2]]
+    src: { page: 16, quote: "Serum folate level" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L02.057
+    kind: card
+    topic: megaloblastic
+    front: Why is RBC folate more reliable than serum folate?
+    back: Serum folate fluctuates easily with meals; RBC folate stays depressed for several days.
+    src: { page: 16, quote: "The serum folate level may easily fluctuate with meals." }
+    status: unverified
+  - id: hem.L02.058
+    kind: card
+    topic: megaloblastic
+    front: Which is more specific for cobalamin deficiency, MMA or homocysteine?
+    back: Both are very sensitive, but methylmalonic acid (MMA) is the more specific.
+    src: { page: 16, quote: "However, MMA is the more specific of the two." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L02.059
+    kind: mcq
+    topic: megaloblastic
+    stem: A man with macrocytic anaemia has low B12 and raised homocysteine. Which result best separates B12 from folate deficiency?
+    options:
+      - Raised methylmalonic acid
+      - Raised homocysteine
+      - Low RBC folate
+      - Hypersegmented neutrophils
+      - Raised LDH
+    answer: 0
+    why:
+      - "Correct: MMA rises in B12 deficiency but is normal in folate deficiency, and it is the more specific test (p16)."
+      - Homocysteine rises in both deficiencies.
+      - RBC folate is low in both.
+      - Hypersegmented neutrophils occur in both megaloblastic anaemias.
+      - LDH rises in both.
+    src: { page: 16, quote: "However, MMA is the more specific of the two." }
+    status: unverified
+  # ---------- p16-17: transfusion ----------
+  - id: hem.L02.060
+    kind: card
+    topic: transfusion
+    front: What is the book's general rule for packed red cell transfusion?
+    back: A restrictive indication, assessed individually for each patient and based on clinical symptoms.
+    src: { page: 16, quote: "Packed red blood cells: restrictive indication." }
+    status: unverified
+  - id: hem.L02.061
+    kind: table
+    topic: transfusion
+    title: Hb thresholds for transfusion
+    columns: [Situation, Consider transfusion at]
+    rows:
+      - [Acute blood loss, Hb < 8.0 g/dL]
+      - [Chronic anaemia, Lower Hb (6–8 g/dL) generally tolerated]
+      - [Coronary heart disease or risk of cerebral ischaemia, Hb < 10 g/dL]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 17, quote: "In acute blood loss, consider indication when Hb < 8.0 g/dl." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: hem.L02.062
+    kind: cloze
+    topic: transfusion
+    text: "Patients with coronary heart disease or risk of cerebral ischaemia: transfuse at Hb < {{c1::10}} g/dL. {{c2::Asymptomatic}} blood loss is not an indication for transfusion."
+    src: { page: 17, quote: "Patients with coronary heart disease or risk of cerebral ischemia: transfusion indication at Hb < 10 g/dl." }
+    status: unverified
+    tags: [numbers]
+    update:
+      text: "Current restrictive practice for stable coronary disease is often a lower trigger (about 8 g/dL); the 2023 AABB guideline gives 7 g/dL for most stable inpatients, 7.5 g/dL in cardiac surgery and 8 g/dL in orthopaedic surgery or pre-existing cardiovascular disease. The exam answer is the book's 10 g/dL."
+      ref: "AABB International Guidelines for RBC Transfusion 2023"
+  - id: hem.L02.063
+    kind: card
+    topic: transfusion
+    front: Which specific conditions may need RBC transfusion support regardless of the usual thresholds?
+    back: Perioperative settings, thalassaemia major and similar specific conditions.
+    src: { page: 17, quote: "Specific conditions (perioperative, thalassemia major, etc.) may require RBC transfusion support." }
+    status: unverified
+  - id: hem.L02.064
+    kind: mcq
+    topic: transfusion
+    stem: A 70-year-old with stable angina has a chronic anaemia, Hb 9.2 g/dL, and exertional chest pain. By the book's guideline, what is the transfusion threshold for him?
+    options:
+      - Hb < 10 g/dL
+      - Hb < 8 g/dL
+      - Hb < 6 g/dL
+      - Hb < 7 g/dL
+      - Never transfuse chronic anaemia
+    answer: 0
+    why:
+      - "Correct: with coronary heart disease the book sets the indication at Hb < 10 g/dL (p17)."
+      - 8 g/dL is the book's threshold for acute blood loss.
+      - 6–8 g/dL is generally tolerated in chronic anaemia without heart disease.
+      - 7 g/dL is a modern restrictive trigger, not the book's number for him.
+      - Chronic anaemia can be transfused when symptoms or risk demand it.
+    src: { page: 17, quote: "Patients with coronary heart disease or risk of cerebral ischemia: transfusion indication at Hb < 10 g/dl." }
+    status: unverified
+  # ---------- cases ----------
+  - id: hem.L02.065
+    kind: case
+    topic: reticulocytes
+    stem: A 45-year-old woman has fatigue for 6 months, heavy periods and spoon-shaped nails. Hb 8.5 g/dL.
+    steps:
+      - reveal: Reticulocyte index 0.8%.
+        question: Which branch of the algorithm?
+        options: [Underproduction, Increased destruction, Recent acute blood loss, Cannot tell without a marrow]
+        answer: 0
+        why: "A reticulocyte index < 2% means the marrow is not keeping up: underproduction (p14)."
+      - reveal: MCV 68 fL.
+        question: Which MCV category, and which cause leads the list?
+        options: [Microcytic; iron deficiency, Normocytic; chronic disease, Macrocytic; B12 deficiency, Microcytic; aplastic anaemia]
+        answer: 0
+        why: "MCV < 80 is microcytic, and iron deficiency (with chronic blood loss) heads that column (p15). Koilonychia and menorrhagia fit (p11–12)."
+      - question: Which history point explains it?
+        options: [Iron loss in menorrhagia, Alcohol and folate, Antiepileptic drugs, Family history of HS]
+        answer: 0
+        why: "The menstrual history asks about iron loss in menorrhagia (p11)."
+    src: { page: 14, quote: "Absolute reticulocyte count (ARC)" }
+    status: unverified
+  - id: hem.L02.066
+    kind: case
+    topic: megaloblastic
+    stem: A 62-year-old man had a total gastrectomy 8 years ago. He now has paraesthesias, unsteady gait and a sore tongue.
+    steps:
+      - reveal: Hb 8 g/dL, MCV 118 fL, WBC and platelets mildly low.
+        question: Which MCV group and which deficiency does the history suggest?
+        options: [Macrocytic; B12 deficiency, Microcytic; iron deficiency, Normocytic; aplastic anaemia, Macrocytic; hypothyroidism]
+        answer: 0
+        why: "MCV > 100 is macrocytic; gastrectomy leads later to B12 (and iron) deficiency (p11, p15)."
+      - reveal: The film shows oval macrocytes and neutrophils with 6 lobes. LDH and bilirubin are raised.
+        question: Is the raised LDH a sign of a second disease?
+        options: [No; it is part of megaloblastic anaemia, Yes; he must also have AIHA, Yes; it means liver metastases, No; it is a lab artefact]
+        answer: 0
+        why: "Increased LDH and bilirubin and decreased haptoglobin are listed lab abnormalities of megaloblastic anaemia (p16)."
+      - question: Which test is most specific to confirm cobalamin deficiency?
+        options: [Methylmalonic acid, Homocysteine, Serum folate, Reticulocyte count]
+        answer: 0
+        why: "MMA and homocysteine are both very sensitive, but MMA is the more specific (p16)."
+      - question: Where is the neurological lesion?
+        options: [Posterior and lateral spinal tracts plus peripheral nerves, Cerebellum only, Anterior horn cells, Neuromuscular junction]
+        answer: 0
+        why: "Cobalamin deficiency causes peripheral neuropathy and degeneration of the posterior and lateral tracts (p13)."
+    src: { page: 16, quote: "However, MMA is the more specific of the two." }
+    status: unverified
+  - id: hem.L02.067
+    kind: case
+    topic: aplastic
+    stem: A 22-year-old painter who works with organic solvents has bruising and recurrent infections.
+    steps:
+      - reveal: Hb 7 g/dL, WBC 1.8 × 10⁹/L, platelets 15 × 10⁹/L, MCV 102 fL, no blasts on the film, low reticulocytes.
+        question: Which diagnosis fits the CBC best?
+        options: [Aplastic anaemia, Acute leukaemia, Iron deficiency, Haemolysis]
+        answer: 0
+        why: "A fall in at least two lines, mild macrocytosis, low reticulocytes and no blasts or immature cells fit aplastic anaemia (p15)."
+      - question: What test is required?
+        options: [Bone marrow aspirate and biopsy, Hb electrophoresis, Direct Coombs' test, Serum ferritin]
+        answer: 0
+        why: "BM aspirate and biopsy are required; the marrow must be hypocellular (p15)."
+      - question: Which history point is relevant?
+        options: [Exposure to organic solvents, Diet low in meat, Gastrectomy, Menorrhagia]
+        answer: 0
+        why: "Occupational exposure to marrow-toxic chemicals (organic solvents, hydrocarbons) is in the book's history (p11)."
+    src: { page: 15, quote: "BM aspirate and biopsy are required. The marrow must be hypocellular." }
+    status: unverified
+  # ---------- p17: end-of-lecture questions ----------
+  - id: hem.L02.068
+    kind: essay
+    topic: mcv
+    prompt: Discuss the causes and differential diagnosis of microcytic hypochromic anaemia.
+    outline:
+      - "Causes (MCV < 80 fL)": ["Iron deficiency", "Chronic blood loss", "Thalassaemia", "Lead poisoning, sideroblastic anaemia"]
+      - "History clues": ["Menorrhagia, pregnancy, GIT loss, NSAIDs, gastrectomy, blood donation", "Diet low in meat", "Family history of thalassaemia or hereditary telangiectasia"]
+      - "Examination clues": ["Koilonychia and rectal haemorrhoids in iron deficiency", "Bone deformities and firm spleen in thalassaemia major", "Mouth and ear telangiectasias with GIT bleeding"]
+      - "Tests": ["CBC with MCV, MCH, RDW", "Reticulocyte index < 2% (underproduction)", "Iron indices (ferritin, iron, transferrin, saturation)", "Hb electrophoresis"]
+    src: { page: 15, quote: "Categories of Anaemias Based on Mean Corpuscular Volume" }
+    status: unverified
+    tags: [book-question]
+  - id: hem.L02.069
+    kind: mcq
+    topic: history
+    stem: "Book question: viral infection related to aplastic crisis in patients with underlying haemolytic anaemia is usually caused by:"
+    options:
+      - Parvovirus
+      - Epstein-Barr virus
+      - Cytomegalovirus
+      - HIV
+    answer: 0
+    why:
+      - "Correct: parvovirus (B19) causes the aplastic crisis of chronic haemolytic anaemia; hem.L03 teaches it (p17 question)."
+      - EBV is not the classic cause of aplastic crisis.
+      - CMV is not the classic cause of aplastic crisis.
+      - HIV is not the classic cause of aplastic crisis.
+    src: { page: 17, quote: "Viral infection related to aplastic crisis in patients with underlying hemolytic anaemia are usually caused by" }
+    status: unverified
+    tags: [book-question]
+  - id: hem.L02.070
+    kind: mcq
+    topic: examination
+    stem: "Book question: neurological manifestations are characteristic of which type of anaemia?"
+    options:
+      - Pernicious anaemia
+      - Aplastic anaemia
+      - Iron deficiency anaemia
+      - Sideroblastic anaemia
+    answer: 0
+    why:
+      - "Correct: cobalamin deficiency (as in pernicious anaemia) causes peripheral neuropathy and posterior and lateral tract degeneration (p13)."
+      - Aplastic anaemia causes cytopenias, not a neuropathy.
+      - Iron deficiency causes koilonychia and a sore tongue, not cord degeneration.
+      - Sideroblastic anaemia is a microcytic anaemia without characteristic neurology.
+    src: { page: 13, quote: "degeneration of the posterior and lateral tracts in the spinal column with (cobalamin deficiency)" }
+    status: unverified
+    tags: [book-question]

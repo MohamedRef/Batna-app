@@ -1,0 +1,1121 @@
+schema: batna.lesson/v1
+lecture: res.L03
+lessons:
+  # ------------------------------------------------------------------
+  - id: res.L03.lesson1
+    title: "كل بحث بيبدأ بسؤال"
+    hook: "قبل الـ sample size والـ SPSS والـ p-value: سؤال واحد واضح هو اللي بيحدد كل حاجة بعده."
+    minutes: 8
+    pages: [1, 11]
+    topics: [process]
+    goals:
+      - "تعرّف الـ research question وتعرف هو بيعمل إيه في البحث"
+      - "ترتّب خطوات الـ research proposal وتعرف السؤال والأهداف مكانهم فين"
+      - "تختار الـ study design المناسب من نوع السؤال"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 8
+        quote: "The first step in any research project is to clearly define the research question"
+        title: "أول خطوة، مش أي خطوة"
+        text: |
+          تخيّل إنك قاعد في عيادة الصدر، وكل يوم يجيلك مريض **COPD** بيشرب شيشة. في دماغك سؤال: "هي الشيشة دي بتعمل إيه في الرئة بالظبط؟"
+
+          الإحساس ده لسه مش بحث. البحث بيبدأ لما تحوّله لـ ==research question== واضح، وده بالنص **the first step in any research project**.
+
+          من غير سؤال واضح هتلم data كتير ومش هتعرف تعمل بيها إيه.
+      - kind: explain
+        page: 5
+        quote: "Curiosity-driven Needs-driven Profit-driven Opportunity-driven"
+        title: "الأفكار بتيجي منين؟"
+        text: |
+          المحاضرة بتقول إن الـ health research بيتحرك بأربع حاجات:
+
+          - **Curiosity-driven:** حاجة شدّت انتباهك وعايز تفهمها.
+          - **Needs-driven:** في مشكلة حقيقية محتاجة حل.
+          - **Profit-driven:** حد هيكسب من النتيجة، زي شركة دوا.
+          - **Opportunity-driven:** جات فرصة: جهاز جديد، grant، أو داتا جاهزة.
+      - kind: sort
+        page: 5
+        quote: "Curiosity-driven Needs-driven Profit-driven Opportunity-driven"
+        prompt: "كل فكرة بحث دي جاية منين؟"
+        bins: ["Curiosity", "Needs", "Profit", "Opportunity"]
+        cards:
+          - { text: "You notice odd fatigue after HCV treatment and want to know why", bin: 0 }
+          - { text: "The health directorate needs anaemia rates in Alexandria schools to plan", bin: 1 }
+          - { text: "A drug company wants to show its PPI beats the rival brand", bin: 2 }
+          - { text: "Your department just got a FibroScan, so you build a thesis on it", bin: 3 }
+        why: "الفضول = سؤال شدّك. الاحتياج = مشكلة لازم تتحل. الربح = حد هيستفيد ماديًا. الفرصة = الإمكانية ظهرت فجأة. ونفس البحث ممكن يكون وراه أكتر من دافع."
+      - kind: explain
+        page: 9
+        quote: "A research question is a clear and concise question which expresses: what the research project aims to address/answer"
+        title: "التعريف اللي هيتسأل فيه"
+        text: |
+          الـ ==research question== هو **a clear and concise question** بيقول البحث عايز يجاوب على إيه بالظبط.
+
+          - هو اللي بيحدد **the area of interest**.
+          - ومنه بيطلع الـ **study justification/rationale**، يعني ليه البحث ده يستاهل يتعمل.
+      - kind: figure
+        page: 3
+        quote: "Selection, analysis and statement of the research problem"
+        title: "خريطة الـ research proposal"
+        alt: "A vertical flowchart of eight proposal steps: research problem, literature review, formulation of research objectives (highlighted), research methodology, work plan, budget, plan for administration and utilisation of results, proposal summary. A bracket marks the first step as the research question."
+        caption: "الـ research question في أول الخريطة، والـ objectives والـ hypotheses في الخطوة التالتة (اللي متعلّمة). كل اللي تحتهم مبني عليهم."
+        svg: |
+          <svg viewBox="0 0 330 470" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L03r1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="10" y="10" width="230" height="40" rx="6" class="fg-acc"/>
+            <text x="20" y="27" class="t-sm t-b">1. Selection, analysis and</text>
+            <text x="20" y="42" class="t-sm t-b">statement of the research problem</text>
+            <path d="M248 10h8v40h-8" class="fg-ink"/>
+            <text x="262" y="27" class="t-sm t-acc t-b">Research</text>
+            <text x="262" y="42" class="t-sm t-acc t-b">question</text>
+            <path d="M125 50v14" class="fg-arrow" marker-end="url(#L03r1)"/>
+            <rect x="10" y="68" width="230" height="30" rx="6" class="fg-box"/>
+            <text x="20" y="88" class="t-sm">2. Literature review</text>
+            <path d="M125 98v14" class="fg-arrow" marker-end="url(#L03r1)"/>
+            <rect x="10" y="116" width="230" height="44" rx="6" class="fg-good"/>
+            <text x="20" y="134" class="t-sm t-b">3. Formulation of research objectives</text>
+            <text x="20" y="151" class="t-sm t-mut">general, specific, hypotheses</text>
+            <path d="M125 160v14" class="fg-arrow" marker-end="url(#L03r1)"/>
+            <rect x="10" y="178" width="230" height="44" rx="6" class="fg-box"/>
+            <text x="20" y="196" class="t-sm">4. Research methodology</text>
+            <text x="20" y="213" class="t-sm t-mut">variables, design, sampling, ethics</text>
+            <path d="M125 222v14" class="fg-arrow" marker-end="url(#L03r1)"/>
+            <rect x="10" y="240" width="230" height="30" rx="6" class="fg-box"/>
+            <text x="20" y="260" class="t-sm">5. Work plan</text>
+            <path d="M125 270v14" class="fg-arrow" marker-end="url(#L03r1)"/>
+            <rect x="10" y="288" width="230" height="30" rx="6" class="fg-box"/>
+            <text x="20" y="308" class="t-sm">6. Budget</text>
+            <path d="M125 318v14" class="fg-arrow" marker-end="url(#L03r1)"/>
+            <rect x="10" y="336" width="230" height="44" rx="6" class="fg-box"/>
+            <text x="20" y="354" class="t-sm">7. Plan for administration and</text>
+            <text x="20" y="371" class="t-sm">utilisation of results</text>
+            <path d="M125 380v14" class="fg-arrow" marker-end="url(#L03r1)"/>
+            <rect x="10" y="398" width="230" height="30" rx="6" class="fg-box"/>
+            <text x="20" y="418" class="t-sm">8. Proposal summary</text>
+            <text x="10" y="455" class="t-sm t-mut">Each step answers one question you must ask.</text>
+          </svg>
+      - kind: order
+        page: 3
+        quote: "Selection, analysis and statement of the research problem"
+        prompt: "رتّب خطوات الـ research proposal:"
+        steps:
+          - "Statement of the research problem"
+          - "Literature review"
+          - "Formulation of research objectives"
+          - "Research methodology"
+          - "Work plan"
+          - "Budget"
+        why: "المشكلة الأول، وبعدين تقرا اللي اتعمل قبلك، وبعدين تكتب أهدافك، وبعدها بس تقرر الـ methodology. الـ work plan والـ budget بييجوا لما تعرف هتعمل إيه."
+      - kind: explain
+        page: 10
+        quote: "It focuses the study, determines the methodology and guides all stages of inquiry, data analysis, and reporting."
+        title: "السؤال بيعمل إيه للبحث؟"
+        text: |
+          تلات حاجات، احفظهم بالترتيب:
+
+          - ==Focuses the study==: بيقفل الباب على أي حاجة برّه السؤال.
+          - **Determines the methodology**: الـ variables، نوع الدراسة، الـ sampling، الـ data collection.
+          - **Guides all stages** of inquiry، data analysis و reporting.
+      - kind: aside
+        tone: analogy
+        page: 10
+        quote: "It focuses the study, determines the methodology and guides all stages of inquiry, data analysis, and reporting."
+        text: |
+          الـ research question زي العنوان اللي بتقوله لسوّاق الأوبر. لو قلتله "ودّيني إسكندرية" هيلف بيك ساعتين. لو قلتله "مستشفى الميري، باب الطوارئ" هيروح على طول.
+
+          السؤال الواضح هو اللي بيحدد الطريق (**methodology**)، والطريق مش بيحدد السؤال.
+      - kind: table
+        page: 11
+        quote: "Prognosis Cohort > Case Control > Case Series/Reports"
+        title: "نوع السؤال بيختار الـ design"
+        columns: ["Type of question", "Study design (best first)"]
+        rows:
+          - ["Therapy", "RCT > Cohort > Case control > Case series"]
+          - ["Diagnosis", "Prospective, blind comparison to a gold standard, or cross-sectional"]
+          - ["Harm/Etiology", "RCT > Cohort > Case control > Case series"]
+          - ["Prognosis", "Cohort > Case control > Case series"]
+          - ["Prevention", "RCT > Cohort > Case control > Case series"]
+          - ["Clinical exam", "Prospective, blind comparison to a gold standard"]
+          - ["Cost analysis", "Economic analysis"]
+        hide: [[1, 1], [3, 1], [6, 1]]
+      - kind: check
+        page: 11
+        quote: "Prognosis Cohort > Case Control > Case Series/Reports"
+        question: "You want to know how many patients with compensated cirrhosis decompensate within 5 years. Which design tops the list?"
+        options:
+          - "Cohort study"
+          - "Randomised controlled trial"
+          - "Economic analysis"
+          - "Blind comparison to a gold standard"
+        answer: 0
+        why:
+          - "صح: ده سؤال **prognosis**، والـ prognosis بيبدأ بـ Cohort > Case control > Case series."
+          - "مفيش RCT في صف الـ prognosis: مش هتعمل randomization لمرض."
+          - "دي لأسئلة الـ cost analysis."
+          - "دي لأسئلة الـ diagnosis والـ clinical exam."
+      - kind: aside
+        tone: exam
+        page: 11
+        quote: "Questions on therapy, etiology and prevention that can best be answered by an RCT, can also be answered by a systematic review or meta-analysis."
+        text: |
+          نقطتين تحت الجدول بيحبوا يتسألوا:
+
+          - أسئلة **therapy, etiology and prevention** اللي أحسن إجابة ليها RCT، ينفع كمان يجاوب عليها **systematic review or meta-analysis**.
+          - أسئلة **harm/etiology** ينفع تتجاوب بـ RCT **if ethical issues allow it**. يعني مش هتدّي ناس سجاير عشوائيًا علشان تشوف هيجيلهم cancer ولا لأ.
+      - kind: try
+        items: [res.L03.002, res.L03.003, res.L03.005, res.L03.009]
+    recap:
+      - "أول خطوة في أي بحث: **define the research question** بوضوح."
+      - "الـ research question: clear and concise، بيقول البحث عايز يجاوب على إيه، ومنه بييجي الـ justification."
+      - "بيعمل 3 حاجات: focuses the study، determines the methodology، guides all stages."
+      - "الـ proposal: problem ← literature ← objectives ← methodology ← work plan ← budget ← administration ← summary."
+      - "Prognosis = Cohort أولًا. Therapy/Harm/Prevention = RCT أولًا. Diagnosis = blind comparison to a gold standard."
+    practice: [res.L03.001, res.L03.002, res.L03.003, res.L03.004, res.L03.005, res.L03.006, res.L03.007, res.L03.008, res.L03.009, res.L03.010, res.L03.011, res.L03.012, res.L03.013]
+  # ------------------------------------------------------------------
+  - id: res.L03.lesson2
+    title: "كام؟ فيه فرق؟ ولا فيه علاقة؟"
+    hook: "تلات أنواع أسئلة، وكل نوع بيكشف نفسه من أول كلمتين."
+    minutes: 8
+    pages: [12, 76]
+    topics: [types]
+    goals:
+      - "تفرّق بين descriptive و comparative و causal من صياغة السؤال"
+      - "تعرف إمتى السؤال qualitative وإمتى quantitative"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 13
+        quote: "Seek to describe a phenomena and often study “how much”, “how often”, or “what is the change/clinical picture/consequences”."
+        title: "1. Descriptive: بيوصف"
+        text: |
+          السؤال الـ ==descriptive== بيوصف ظاهرة: **how much**، **how often**، أو إيه الـ clinical picture والـ consequences.
+
+          أمثلة المحاضرة:
+          - What is the prevalence of depression among medical students
+          - How often do medical students use computer-assisted learning
+          - What is the pattern of disease X in terms of person, place and time
+
+          جماعة واحدة، وبتعدّ أو بتوصف.
+      - kind: explain
+        page: 14
+        quote: "Aim to examine the difference between two or more groups in relation to one or more variables."
+        title: "2. Comparative: بيقارن"
+        text: |
+          السؤال الـ ==comparative== بيشوف **the difference between two or more groups** في variable أو أكتر، وغالبًا بيبدأ بـ **"What is the difference…"**.
+
+          - What is the difference in growth pattern of breast-fed and bottle-fed infants
+          - What is the difference in maternal mortality in an urban compared to a rural community
+      - kind: explain
+        page: 15
+        quote: "Compares two or more phenomena and determines if a relationship exists. Often called relationship research questions."
+        title: "3. Causal: بيدوّر على علاقة"
+        text: |
+          السؤال الـ ==causal== بيقارن ظاهرتين أو أكتر وبيشوف **if a relationship exists**، واسمه التاني **relationship research question**.
+
+          - Does the number of cigarettes smoked per day affect the severity of COPD
+          - Does the time of moderate daily exercise affect the improvement in blood pressure
+
+          علامته: **"Does X affect Y"**
+      - kind: figure
+        page: 12
+        quote: "Descriptive Questions 2- Comparative Questions 3- Causal Questions"
+        title: "التلاتة في صورة واحدة"
+        alt: "Three stacked panels. Descriptive: one group with a single bar labelled how much or how often. Comparative: two groups with two bars and a question about the difference. Causal: X with an arrow to Y labelled does X affect Y."
+        caption: "Descriptive = جماعة واحدة وبتعدّ. Comparative = جماعتين وبتقارن. Causal = سهم من X لـ Y."
+        svg: |
+          <svg viewBox="0 0 330 420" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L03t1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-acc"/></marker>
+            </defs>
+            <text x="10" y="20" class="t-b">1. Descriptive</text>
+            <rect x="10" y="30" width="310" height="100" rx="8" class="fg-box"/>
+            <rect x="40" y="70" width="50" height="50" class="fg-acc"/>
+            <text x="65" y="62" text-anchor="middle" class="t-sm">One group</text>
+            <text x="110" y="85" class="t-sm t-b">How much? How often?</text>
+            <text x="110" y="105" class="t-sm t-mut">prevalence, pattern, picture</text>
+            <text x="10" y="160" class="t-b">2. Comparative</text>
+            <rect x="10" y="170" width="310" height="100" rx="8" class="fg-box"/>
+            <rect x="40" y="215" width="40" height="45" class="fg-acc"/>
+            <rect x="95" y="195" width="40" height="65" class="fg-good"/>
+            <text x="60" y="210" text-anchor="middle" class="t-sm">A</text>
+            <text x="115" y="190" text-anchor="middle" class="t-sm">B</text>
+            <text x="150" y="225" class="t-sm t-b">What is the difference</text>
+            <text x="150" y="243" class="t-sm t-b">between A and B?</text>
+            <text x="10" y="300" class="t-b">3. Causal (relationship)</text>
+            <rect x="10" y="310" width="310" height="100" rx="8" class="fg-box"/>
+            <circle cx="60" cy="355" r="24" class="fg-acc"/>
+            <text x="60" y="360" text-anchor="middle" class="t-b">X</text>
+            <circle cx="190" cy="355" r="24" class="fg-bad"/>
+            <text x="190" y="360" text-anchor="middle" class="t-b">Y</text>
+            <path d="M88 355h70" class="fg-arrow-acc" marker-end="url(#L03t1)"/>
+            <text x="225" y="350" class="t-sm t-b">Does X</text>
+            <text x="225" y="368" class="t-sm t-b">affect Y?</text>
+            <text x="20" y="400" class="t-sm t-mut">cigarettes/day → COPD severity</text>
+          </svg>
+      - kind: aside
+        tone: tip
+        page: 12
+        quote: "Descriptive Questions 2- Comparative Questions 3- Causal Questions"
+        text: |
+          اسأل نفسك تلات أسئلة مصري:
+
+          - "**كام؟**" ← descriptive
+          - "**فيه فرق؟**" ← comparative
+          - "**ده بيأثر على ده؟**" ← causal
+      - kind: sort
+        page: 14
+        quote: "What is the difference between prevalence of depression among medical students and tourism students?"
+        prompt: "كل سؤال من دول نوعه إيه؟"
+        bins: ["Descriptive", "Comparative", "Causal"]
+        cards:
+          - { text: "How much tobacco smoking is prevalent among different segments of population?", bin: 0 }
+          - { text: "What do smokers know about the risks of smoking?", bin: 0 }
+          - { text: "What is the difference in depression between medical and tourism students?", bin: 1 }
+          - { text: "What is the difference in growth of breast-fed and bottle-fed infants?", bin: 1 }
+          - { text: "Does the number of cigarettes per day affect COPD severity?", bin: 2 }
+          - { text: "Does daily shisha smoking affect FEV1 in Alexandria café workers?", bin: 2 }
+        why: "اللي بيعدّ أو بيوصف جماعة واحدة descriptive. اللي فيه \"What is the difference\" بين جماعتين comparative. اللي فيه \"Does X affect Y\" causal."
+      - kind: check
+        page: 74
+        quote: "What type of research question is the following: How often do college students change majors?"
+        question: "(Lecture quiz) What type of research question is: \"How often do college students change majors?\""
+        options:
+          - "Descriptive"
+          - "Causal"
+          - "Comparative"
+          - "None of these"
+        answer: 0
+        why:
+          - "صح: **how often** = descriptive. ودي إجابة الـ quiz."
+          - "مفيش X بيأثر على Y هنا."
+          - "مفيش جماعتين بنقارنهم."
+          - "هو descriptive صريح."
+      - kind: check
+        page: 76
+        quote: "Causal research questions are used when wanting to compare a variable between two or more groups."
+        question: "The quiz says: \"___ research questions are used when wanting to compare a variable between two or more groups.\" Which type fills the blank correctly?"
+        options:
+          - "Comparative"
+          - "Causal"
+          - "Descriptive"
+        answer: 0
+        why:
+          - "صح: مقارنة variable بين جماعتين = comparative. الـ quiz كاتبها Causal وإجابتها **False**، وده الفخ."
+          - "ده الفخ: الـ causal بيدوّر على علاقة، مش مقارنة جماعات."
+          - "الـ descriptive بيوصف جماعة واحدة."
+      - kind: explain
+        page: 18
+        quote: "Qualitative research questions tend to be open and descriptive, unlike Quantitative research questions which should remain fixed."
+        title: "Qualitative ولا Quantitative؟"
+        text: |
+          - **Qualitative** questions بتبقى ==open and descriptive==، وممكن سؤال عام مفتوح يتبعه كذا **sub-question**.
+          - **Quantitative** questions لازم ==remain fixed==: بتحددها من الأول وماتغيّرهاش.
+
+          كلمات زي **seek to understand**، **describe**، **explore** بتقولك إن الـ methodology qualitative.
+
+          وليه نحتاج qualitative أصلًا؟ لأنها بتقفل الفجوة بين الاكتشاف والتطبيق، وبتعرّفنا **why research results are often not translated into practice**.
+      - kind: figure
+        page: 16
+        quote: "Knowledge Belief Attitude Value Behavior"
+        title: "السلم اللي جنب الـ qualitative"
+        alt: "A vertical ladder of five steps from top to bottom: Knowledge, Belief, Attitude, Value, Behavior, with arrows between them, beside a box labelled Qualitative explores why."
+        caption: "السلايد بيحط السلم ده جنب الـ qualitative: من المعرفة لحد السلوك. الـ qualitative بيدخل جوه السلم ده ويسأل \"ليه؟\"، والـ quantitative بيعدّ."
+        svg: |
+          <svg viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L03t2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="20" y="10" width="140" height="40" rx="6" class="fg-good"/>
+            <text x="90" y="35" text-anchor="middle" class="t-b">Knowledge</text>
+            <path d="M90 50v16" class="fg-arrow" marker-end="url(#L03t2)"/>
+            <rect x="20" y="70" width="140" height="40" rx="6" class="fg-good"/>
+            <text x="90" y="95" text-anchor="middle" class="t-b">Belief</text>
+            <path d="M90 110v16" class="fg-arrow" marker-end="url(#L03t2)"/>
+            <rect x="20" y="130" width="140" height="40" rx="6" class="fg-good"/>
+            <text x="90" y="155" text-anchor="middle" class="t-b">Attitude</text>
+            <path d="M90 170v16" class="fg-arrow" marker-end="url(#L03t2)"/>
+            <rect x="20" y="190" width="140" height="40" rx="6" class="fg-good"/>
+            <text x="90" y="215" text-anchor="middle" class="t-b">Value</text>
+            <path d="M90 230v16" class="fg-arrow" marker-end="url(#L03t2)"/>
+            <rect x="20" y="250" width="140" height="40" rx="6" class="fg-acc"/>
+            <text x="90" y="275" text-anchor="middle" class="t-b">Behavior</text>
+            <rect x="180" y="60" width="140" height="80" rx="8" class="fg-box"/>
+            <text x="250" y="88" text-anchor="middle" class="t-b">Qualitative</text>
+            <text x="250" y="108" text-anchor="middle" class="t-sm">explores why</text>
+            <text x="250" y="125" text-anchor="middle" class="t-sm t-mut">open, sub-questions</text>
+            <rect x="180" y="170" width="140" height="80" rx="8" class="fg-box"/>
+            <text x="250" y="198" text-anchor="middle" class="t-b">Quantitative</text>
+            <text x="250" y="218" text-anchor="middle" class="t-sm">counts and measures</text>
+            <text x="250" y="235" text-anchor="middle" class="t-sm t-mut">fixed question</text>
+            <text x="20" y="318" class="t-sm t-mut">Ql = qualitative, Qt = quantitative</text>
+          </svg>
+      - kind: reveal
+        page: 19
+        quote: "job stress and what their consequences are for mental and physical health"
+        prompt: "مثال المحاضرة: \"To explore how psychosocial aspects of working with VDUs are related to job stress and their consequences for mental and physical health.\" ليه بعده كذا sub-question؟"
+        answer: |
+          لأنه سؤال **qualitative** عام ومفتوح (لاحظ كلمة **explore**)، وكل كلمة فيه محتاجة تتعرّف:
+
+          - What are **psychosocial aspects** of work, and how are they detected
+          - What is **job stress**, and how is it detected
+          - What is meant by **physical and mental health**?
+
+          السؤال العام بيفتح الباب، والـ sub-questions بتقسّم الأوضة.
+      - kind: try
+        items: [res.L03.014, res.L03.015, res.L03.016, res.L03.025]
+    recap:
+      - "Descriptive: how much / how often، جماعة واحدة."
+      - "Comparative: What is the difference بين جماعتين أو أكتر."
+      - "Causal (relationship): Does X affect Y."
+      - "فخ الـ quiz: مقارنة variable بين جماعات = comparative مش causal."
+      - "Qualitative: open, descriptive، كلمات explore/describe/seek to understand، وفيه sub-questions. Quantitative: fixed."
+    practice: [res.L03.014, res.L03.015, res.L03.016, res.L03.017, res.L03.018, res.L03.019, res.L03.020, res.L03.021, res.L03.022, res.L03.023, res.L03.024, res.L03.025, res.L03.026, res.L03.027, res.L03.028]
+  # ------------------------------------------------------------------
+  - id: res.L03.lesson3
+    title: "من فكرة واسعة لسؤال FINER"
+    hook: "\"صحة الستات\" مش سؤال بحث. هنضيّقها خطوة خطوة، وبعدين نعدّيها على خمس فلاتر."
+    minutes: 9
+    pages: [21, 44]
+    topics: [narrowing, finer]
+    goals:
+      - "تضيّق topic of interest لحد ما يبقى focused research question"
+      - "تحفظ FINER وتعرف كل حرف بيسأل عن إيه"
+      - "تعرف الشروط الأخلاقية قبل أي تجربة على بني آدمين"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 23
+        quote: "Topic of interest: Women’s health • Narrowed topic: Women and cancer • Focused topic"
+        title: "القمع"
+        text: |
+          المحاضرة بتمشي في كل مثال بنفس السلم:
+
+          - **Topic of interest:** Women's health
+          - **Narrowed topic:** Women and cancer
+          - **Focused topic:** post-menopausal HRT and endometrial carcinoma
+          - **Focused research question:** Does post-menopausal HRT predispose women to develop endometrial cancer
+
+          وبعدها على طول: ==How variables will be measured==
+      - kind: figure
+        page: 23
+        quote: "Topic of interest: Women’s health • Narrowed topic: Women and cancer • Focused topic"
+        title: "من الواسع للضيق"
+        alt: "A funnel of four bands narrowing downward: topic of interest (women's health), narrowed topic (women and cancer), focused topic (HRT and endometrial carcinoma), focused research question. Below it a box: how will the variables be measured?"
+        caption: "كل ما تنزل في القمع السؤال يضيق، لحد ما يبقى حاجة تقدر تقيسها."
+        svg: |
+          <svg viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L03f1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-acc"/></marker>
+            </defs>
+            <path d="M5 10h320l-20 55H25z" class="fg-box"/>
+            <text x="165" y="32" text-anchor="middle" class="t-sm t-mut">Topic of interest</text>
+            <text x="165" y="52" text-anchor="middle" class="t-b">Women's health</text>
+            <path d="M28 70h274l-20 55H48z" class="fg-box"/>
+            <text x="165" y="92" text-anchor="middle" class="t-sm t-mut">Narrowed topic</text>
+            <text x="165" y="112" text-anchor="middle" class="t-b">Women and cancer</text>
+            <path d="M51 130h228l-20 55H71z" class="fg-good"/>
+            <text x="165" y="152" text-anchor="middle" class="t-sm t-mut">Focused topic</text>
+            <text x="165" y="172" text-anchor="middle" class="t-sm t-b">HRT and endometrial carcinoma</text>
+            <path d="M74 190h182l-20 62H94z" class="fg-acc"/>
+            <text x="165" y="210" text-anchor="middle" class="t-sm t-mut">Focused question</text>
+            <text x="165" y="228" text-anchor="middle" class="t-sm t-b">Does HRT predispose to</text>
+            <text x="165" y="244" text-anchor="middle" class="t-sm t-b">endometrial cancer?</text>
+            <path d="M165 254v20" class="fg-arrow-acc" marker-end="url(#L03f1)"/>
+            <rect x="60" y="280" width="210" height="40" rx="6" class="fg-ink"/>
+            <text x="165" y="305" text-anchor="middle" class="t-sm t-b">How will variables be measured?</text>
+          </svg>
+      - kind: reveal
+        page: 22
+        quote: "Focused researchable question: Will 30 minutes of moderate activity daily reduce hypertension in office workers?"
+        prompt: "جرّب إنت: الموضوع \"Physical activity and cardiovascular disease\". ضيّقه لـ narrowed topic وبعدين focused question."
+        answer: |
+          - **Narrowed topic:** Is there a link between lack of physical activity and hypertension
+          - **Focused researchable question:** ==Will 30 minutes of moderate activity daily reduce hypertension in office workers==
+
+          لاحظ إنه حدد المدة (30 minutes)، الشدة (moderate)، التكرار (daily)، الـ outcome (hypertension) والناس (office workers).
+      - kind: mnemonic
+        page: 35
+        quote: "N — Novel E — Ethical R - Relevant"
+        word: "FINER"
+        parts:
+          - { key: "F", text: "Feasible: subjects, time, equipment, expertise, resources" }
+          - { key: "I", text: "Interesting: to you and to the scientific community" }
+          - { key: "N", text: "Novel: confirms, refutes or extends previous findings" }
+          - { key: "E", text: "Ethical: an ethics board would approve it" }
+          - { key: "R", text: "Relevant: to knowledge, clinical management, policy, future research" }
+        hook: |
+          السؤال الكويس **أفْيَن** (FINER = أحسن): كل حرف فلتر، ولو وقع في واحد بس ارجع صلّحه.
+      - kind: explain
+        page: 26
+        quote: "recruit the number of subjects • timeframe • equipment, supplies and other • required expertise. • resources"
+        title: "F: Feasible (عملي)"
+        text: |
+          قبل ما تتحمس، اسأل: هقدر أعمله؟
+
+          - هقدر **recruit the number of subjects**؟
+          - الـ **timeframe** يكفي؟
+          - الـ **equipment, supplies** موجودة؟
+          - عندي الـ **required expertise**؟ والـ **resources**؟
+
+          وفي البوكس بتاع FINER: ==Manageable== يعني **not too many or too ambitious**.
+      - kind: explain
+        page: 28
+        quote: "Novel does not necessarily mean that the research has not been done before."
+        title: "I و N: Interesting و Novel"
+        text: |
+          - **Interesting:** لازم يهم ==the investigators & the scientific community==، مش بس إنت.
+          - **Novel:** مش شرط حد ماعملوش قبل كده! البادئة **"re"** في research معناها **searching again**. البحث الجديد ممكن **confirms, refutes or extends previous findings**.
+      - kind: aside
+        tone: joke
+        page: 28
+        quote: "The prefix “re” in the word research implies searching again."
+        text: |
+          Research = بندوّر تاني. زي أمك وهي بتدوّر على الريموت في نفس الكنبة للمرة العاشرة، وفي العاشرة بتلاقيه. التكرار مش عيب، المهم تضيف حاجة.
+      - kind: explain
+        page: 30
+        quote: "The ethically acceptable practice is to step up clinical trials in successive phases, starting first with a small number of subjects"
+        title: "E: Ethical"
+        text: |
+          أحيانًا المشكلة الأخلاقية معناها إن البحث **should not be considered from the beginning**.
+
+          لو هتجرّب علاج أو procedure جديد على بني آدمين:
+          - لازم يكون فيه evidence إنه ممكن يبقى **superior to currently available alternatives**.
+          - لازم داتا كفاية من **animal studies** ومن عدد صغير من البشر تأكد الـ **safety** وتلمّح للـ effectiveness.
+          - التجارب بتطلع ==in successive phases==: عدد صغير الأول، ومفيش phase جديدة غير لما اللي قبلها تخلص بنجاح.
+      - kind: explain
+        page: 31
+        quote: "It is unjustifiable to do clinical trials on therapies that are unlikely to become available to people in the country or community."
+        title: "E: باقي القواعد"
+        text: |
+          - **Unjustifiable** تعمل trial على علاج **unlikely to become available** للناس في البلد.
+          - البحث مايتعارضش مع قيم المجتمع **cultural, moral, religious and legal**.
+          - لو متطوعين مالهمش فايدة مباشرة: البحث يتعمل بس لو المعلومة هتقدّم العلم والممارسة و==cannot be obtained otherwise== (مثلًا من حيوانات).
+          - والتجارب على الحيوانات نفسها لازم **justified**.
+      - kind: check
+        page: 44
+        quote: "Limited by ethical and legal issues"
+        question: "\"Will voluntary induced abortion after the 3rd month increase maternal mortality?\" What limits this question?"
+        options:
+          - "Ethical and legal issues"
+          - "It is too vague"
+          - "It is not novel"
+          - "It has no outcome"
+        answer: 0
+        why:
+          - "صح: المحاضرة كاتبة **limited by ethical and legal issues**. الـ E في FINER."
+          - "بالعكس، هو محدد: exposure وتوقيت و outcome."
+          - "مش دي المشكلة."
+          - "الـ outcome موجود: maternal mortality."
+      - kind: explain
+        page: 33
+        quote: "have the potential to advance scientific knowledge influence clinical management influence health policy guide further research"
+        title: "R: Relevant"
+        text: |
+          السؤال الـ relevant لازم يكون عنده **potential** يعمل واحدة من دول:
+
+          - ==advance scientific knowledge==
+          - **influence clinical management**
+          - **influence health policy**
+          - **guide further research**
+      - kind: case
+        page: 26
+        quote: "recruit the number of subjects • timeframe • equipment, supplies and other • required expertise."
+        stem: "نائب سنة أولى عايز يعمل recruit لـ 3,000 subjects عندهم hepatic encephalopathy لوحده، والـ timeframe شهرين، والـ equipment (بروتوكول MRI) مش موجودة في المستشفى."
+        steps:
+          - question: "Which FINER letter fails first?"
+            options: ["Feasible", "Interesting", "Novel", "Relevant"]
+            answer: 0
+            why: "عدد المرضى، الوقت، الجهاز والخبرة: كلها بنود **Feasible**."
+          - question: "What should he do?"
+            options:
+              - "Narrow it: fewer patients, a test he has, a realistic time"
+              - "Keep it and hope for the best"
+              - "Drop the topic forever"
+            answer: 0
+            why: "الحل إنك تضيّق السؤال لحد ما يبقى **manageable**، مش إنك ترمي الفكرة."
+      - kind: try
+        items: [res.L03.030, res.L03.034, res.L03.038, res.L03.044]
+    recap:
+      - "Topic of interest ← narrowed topic ← focused topic ← focused question ← how variables will be measured."
+      - "FINER: Feasible، Interesting، Novel، Ethical، Relevant."
+      - "Novel مش معناه أول مرة: re-search = searching again (confirm, refute, extend)."
+      - "Ethical: evidence + animal/small human data الأول، trials in successive phases، مفيش trial على علاج مش هيوصل للناس."
+      - "Relevant: knowledge، clinical management، health policy، further research."
+    practice: [res.L03.030, res.L03.031, res.L03.032, res.L03.034, res.L03.035, res.L03.036, res.L03.037, res.L03.038, res.L03.039, res.L03.040, res.L03.041, res.L03.042, res.L03.043, res.L03.044, res.L03.050, res.L03.051]
+  # ------------------------------------------------------------------
+  - id: res.L03.lesson4
+    title: "PICOT: السؤال في خمس حروف"
+    hook: "مين، عملت فيهم إيه، قارنت بإيه، قست إيه، وفي قد إيه؟ لو جاوبت دول، سؤالك جاهز."
+    minutes: 9
+    pages: [21, 44]
+    topics: [pico, finer, narrowing]
+    goals:
+      - "تفكّ أي سؤال لـ P و I و C و O و T"
+      - "تعرف إن الـ C هو العنصر الوحيد الاختياري"
+      - "تعرف السؤال الوحش من أول قراية"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 36
+        quote: "A well-built research question should include four elements; referred to as PICO"
+        title: "FINER للسؤال كله، و PICO لجسمه"
+        text: |
+          الـ FINER بتحكم على **the question in general**. أما الـ ==PICO== فهي الـ **elements** اللي لازم تكون جوه أي **well-built** clinical question.
+
+          ولما تضيف الوقت تبقى **PICOT**.
+      - kind: mnemonic
+        page: 39
+        quote: "What is the appropriate follow-up time to assess outcome"
+        word: "PICOT"
+        parts:
+          - { key: "P", text: "Population/patients: what specific patient population? (age, gender, disease status)" }
+          - { key: "I", text: "Intervention/exposure: test, treatment, adjunctive therapy, medication" }
+          - { key: "C", text: "Comparison: standard of care or placebo (the only optional one)" }
+          - { key: "O", text: "Outcome: what you intend to accomplish, measure, improve or affect" }
+          - { key: "T", text: "Time: the follow-up time to assess the outcome" }
+        hook: |
+          اقرأها "**بيكوت**": زي البسكوت اللي بتاكله في النبطشية. خمس حروف، وكل حرف سؤال.
+      - kind: explain
+        page: 37
+        quote: "such as age, gender, disease status, or any other patient-"
+        title: "P و I"
+        text: |
+          - **P** هي أول خطوة: مين المرضى؟ تقدر توصفهم بالـ **age** والـ **gender** والـ **disease status**، أو أي صفة تانية.
+          - **I** تاني خطوة: الـ ==exposure== اللي هتدرسه: **diagnostic test, treatment, adjunctive therapy, medication**.
+
+          ملاحظة: في الدراسات اللي مش تجريبية الـ I بتبقى exposure (زي التدخين)، مش علاج إنت بتديه.
+      - kind: aside
+        tone: exam
+        page: 38
+        quote: "The comparison component is the only optional one in the PICO question"
+        text: |
+          ==C is the only optional element==. الباحث ممكن يدرس الـ intervention لوحده لسببين: **no interest in comparison** أو **lack of a comparable group**.
+
+          الـ C لما يكون موجود بيبقى **standard of care** أو **placebo**.
+      - kind: explain
+        page: 38
+        quote: "Outcome to be measured as a result of the intervention"
+        title: "O و T"
+        text: |
+          - **O** هو ==the evaluation of the intervention's effect==: cure، level of control of a disease، efficacy of a medication or a diagnostic test.
+          - **T** هو الـ **appropriate follow-up time** اللي تقيس فيه الـ outcome.
+      - kind: figure
+        page: 40
+        quote: "Single-modal treatment {e.g. epidural alone)"
+        title: "مثال المحاضرة مفكوك"
+        alt: "Five stacked rows labelled P, I, C, O, T with the lecture's analgesia example: adult patients after elective surgery; multimodal analgesia (epidural plus acetaminophen and NSAIDs); single-modal (epidural alone); pain score, nausea or vomiting; over 24 hours after surgery."
+        caption: "السؤال الكامل: In adult patients undergoing elective surgery, does multimodal analgesia compared with epidural alone lead to better pain scores and fewer side effects over 24 hours"
+        svg: |
+          <svg viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg">
+            <rect x="5" y="5" width="44" height="56" rx="6" class="fg-acc"/>
+            <text x="27" y="40" text-anchor="middle" class="t-lg t-b">P</text>
+            <rect x="55" y="5" width="270" height="56" rx="6" class="fg-box"/>
+            <text x="65" y="28" class="t-sm t-b">Adult patients</text>
+            <text x="65" y="47" class="t-sm t-mut">undergoing elective surgery</text>
+            <rect x="5" y="69" width="44" height="56" rx="6" class="fg-acc"/>
+            <text x="27" y="104" text-anchor="middle" class="t-lg t-b">I</text>
+            <rect x="55" y="69" width="270" height="56" rx="6" class="fg-box"/>
+            <text x="65" y="92" class="t-sm t-b">Multimodal analgesia</text>
+            <text x="65" y="111" class="t-sm t-mut">epidural + acetaminophen + NSAIDs</text>
+            <rect x="5" y="133" width="44" height="56" rx="6" class="fg-thin"/>
+            <text x="27" y="168" text-anchor="middle" class="t-lg t-b">C</text>
+            <rect x="55" y="133" width="270" height="56" rx="6" class="fg-box"/>
+            <text x="65" y="156" class="t-sm t-b">Single-modal: epidural alone</text>
+            <text x="65" y="175" class="t-sm t-mut">optional element</text>
+            <rect x="5" y="197" width="44" height="56" rx="6" class="fg-acc"/>
+            <text x="27" y="232" text-anchor="middle" class="t-lg t-b">O</text>
+            <rect x="55" y="197" width="270" height="56" rx="6" class="fg-box"/>
+            <text x="65" y="220" class="t-sm t-b">Pain score</text>
+            <text x="65" y="239" class="t-sm t-mut">and nausea or vomiting</text>
+            <rect x="5" y="261" width="44" height="56" rx="6" class="fg-acc"/>
+            <text x="27" y="296" text-anchor="middle" class="t-lg t-b">T</text>
+            <rect x="55" y="261" width="270" height="56" rx="6" class="fg-box"/>
+            <text x="65" y="284" class="t-sm t-b">Over 24 hours</text>
+            <text x="65" y="303" class="t-sm t-mut">following surgery</text>
+          </svg>
+      - kind: match
+        page: 21
+        quote: "I = Cigarette smoking C = No smoking"
+        prompt: "مثال تاني من المحاضرة عن التدخين وسرطان الثدي. وصّل كل حرف بقيمته."
+        pairs:
+          - ["P", "Women older than 35"]
+          - ["I", "Cigarette smoking"]
+          - ["C", "No smoking"]
+          - ["O", "Breast cancer"]
+        why: "والسؤال: Does smoking among women older than 35 years affect breast cancer risk compared to non-smokers?"
+      - kind: case
+        page: 39
+        quote: "What is the appropriate follow-up time to assess outcome"
+        stem: "في عيادة الكبد في المنصورة: \"In adults with compensated HCV cirrhosis, does daily coffee compared with no coffee lower the rate of decompensation over 3 years?\""
+        steps:
+          - question: "What is the I?"
+            options: ["Daily coffee", "No coffee", "Decompensation", "Adults with compensated HCV cirrhosis"]
+            answer: 0
+            why: "الـ I هو الـ exposure اللي بتدرسه: القهوة اليومية."
+          - question: "What is the C?"
+            options: ["No coffee", "Daily coffee", "3 years", "Decompensation"]
+            answer: 0
+            why: "الـ C هو البديل اللي بتقارن بيه."
+          - question: "And the T?"
+            options: ["Over 3 years", "Compensated", "Daily", "Adults"]
+            answer: 0
+            why: "الـ T هو الـ follow-up time: 3 سنين."
+      - kind: explain
+        page: 41
+        quote: "Vagueness of the research question."
+        title: "السؤال الوحش شكله إيه؟"
+        text: |
+          المحاضرة بتعدّ criteria للـ **bad research question**:
+
+          - ==Vagueness==.
+          - **Too broad** to reach conclusive results.
+          - **Fails to reveal the relevance** of the topic.
+          - **Logistic** problems: الوقت، **high cost with limited funding**، نقص الـ expertise أو الأجهزة أو المعلومات.
+          - محدود بـ **ethical considerations** أو محتاج **authorities' approval**.
+
+          والخلاصة: السؤال لازم يبقى **specific, concrete, measurable**.
+      - kind: check
+        page: 43
+        quote: "will 30 minutes of moderate activity daily reduce hypertension in office workers"
+        question: "(1) \"Will 30 minutes of activity improve blood pressure?\" (2) \"Will 30 minutes of moderate activity daily reduce hypertension in office workers?\" Which one specifies the population?"
+        options:
+          - "Question 2"
+          - "Question 1"
+          - "Both"
+          - "Neither"
+        answer: 0
+        why:
+          - "صح: **office workers**. والمحاضرة بتقول كمان إن 2 هو الـ specific."
+          - "سؤال 1 vague و broad ومفيهوش ناس خالص."
+          - "سؤال 1 مالوش population."
+          - "سؤال 2 فيه population واضحة."
+      - kind: check
+        page: 44
+        quote: "It is too broad to reach conclusive results"
+        question: "\"Will good environment improve health?\" What is its main problem?"
+        options:
+          - "Too broad to reach conclusive results, and no population"
+          - "It is unethical"
+          - "It is not interesting"
+          - "It needs a placebo"
+        answer: 0
+        why:
+          - "صح: لا specific ولا measurable، **too broad**، ومفيش population."
+          - "مفيش فيه حاجة غير أخلاقية."
+          - "الموضوع مهم، بس السؤال مش قابل للقياس."
+          - "الـ C اختياري أصلًا، ومش هي المشكلة."
+      - kind: try
+        items: [res.L03.052, res.L03.056, res.L03.058, res.L03.046]
+    recap:
+      - "FINER للسؤال عمومًا، PICO(T) لعناصره."
+      - "P = population، I = intervention/exposure، C = comparison (اختياري)، O = outcome، T = follow-up time."
+      - "الـ C هو العنصر الوحيد الـ optional: no interest in comparison أو no comparable group."
+      - "السؤال الوحش: vague، too broad، مش relevant، logistic limits، ethical limits."
+      - "السؤال الكويس: specific، concrete، measurable."
+    practice: [res.L03.033, res.L03.045, res.L03.046, res.L03.047, res.L03.048, res.L03.049, res.L03.052, res.L03.053, res.L03.054, res.L03.055, res.L03.056, res.L03.057, res.L03.058, res.L03.059, res.L03.060]
+  # ------------------------------------------------------------------
+  - id: res.L03.lesson5
+    title: "الأهداف: SMART ومن غير فلسفة"
+    hook: "\"To understand\" هي أسهل طريقة تخلّي المشرف يرجّعلك الـ protocol."
+    minutes: 8
+    pages: [46, 56]
+    topics: [objectives]
+    goals:
+      - "تعرّف الـ research objective وتعرف ليه ومتى بنكتبه"
+      - "تحفظ SMART وصفات الـ objective الكويس"
+      - "تفرّق بين الـ action verbs والأفعال المايعة"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 48
+        quote: "A research objective is a statement that clearly describes the goal(s) to be achieved by a research project."
+        title: "من السؤال للهدف"
+        text: |
+          علشان تجاوب على الـ research question لازم تحوّله لـ **testable objectives and/or hypotheses** تكون **specific** و **measurable**.
+
+          والـ ==research objective== هو **a statement that clearly describes the goal(s)** اللي البحث عايز يوصلها.
+      - kind: explain
+        page: 49
+        quote: "Focus the study (narrowing it down to essentials)"
+        title: "ليه نكتب أهداف أصلًا؟"
+        text: |
+          الأهداف بتساعدك:
+
+          - ==Focus the study==: تضيّقها للأساسيات.
+          - **Avoid** إنك تجمع data مش محتاجها فعلًا (وده بيحدد حدود الدراسة).
+          - **Organize** الدراسة في أجزاء أو phases واضحة.
+
+          والأهداف المكتوبة كويس بتسهّل الـ methodology وبتوجّه الـ collection والـ analysis والـ interpretation.
+      - kind: figure
+        page: 50
+        quote: "after the statement of the problem is developed, before the methodology for the study is planned"
+        title: "الأهداف بتتكتب إمتى؟"
+        alt: "A horizontal-then-down timeline of three boxes: statement of the problem, then objectives (highlighted, with the labels after and before), then methodology."
+        caption: "بعد الـ statement of the problem، وقبل ما تخطط الـ methodology. الهدف هو الكوبري بين الاتنين."
+        svg: |
+          <svg viewBox="0 0 330 260" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L03o1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="40" y="10" width="250" height="50" rx="8" class="fg-box"/>
+            <text x="165" y="40" text-anchor="middle" class="t-b">Statement of the problem</text>
+            <path d="M165 60v26" class="fg-arrow" marker-end="url(#L03o1)"/>
+            <text x="175" y="78" class="t-sm t-mut">after</text>
+            <rect x="40" y="92" width="250" height="60" rx="8" class="fg-acc"/>
+            <text x="165" y="118" text-anchor="middle" class="t-lg t-b">Objectives</text>
+            <text x="165" y="140" text-anchor="middle" class="t-sm">general and specific</text>
+            <path d="M165 152v26" class="fg-arrow" marker-end="url(#L03o1)"/>
+            <text x="175" y="170" class="t-sm t-mut">before</text>
+            <rect x="40" y="184" width="250" height="50" rx="8" class="fg-box"/>
+            <text x="165" y="214" text-anchor="middle" class="t-b">Methodology</text>
+          </svg>
+      - kind: explain
+        page: 52
+        quote: "Defined in operational terms that can be measured (e.g. action verbs)"
+        title: "صفات الهدف الكويس"
+        text: |
+          - **Feasible** (عملي)
+          - **Realistic** considering local conditions (واقعي في ظروفنا)
+          - ==Defined in operational terms that can be measured==، يعني **action verbs**
+          - **Phrased to clearly meet the purpose of the study**
+      - kind: mnemonic
+        page: 53
+        quote: "Attainable/Achievable—Can we get it done in the proposed time frame with the resources and support we have available?"
+        word: "SMART"
+        parts:
+          - { key: "S", text: "Specific: what exactly are we going to do, for whom?" }
+          - { key: "M", text: "Measurable: is it quantifiable, can we measure it?" }
+          - { key: "A", text: "Attainable/Achievable: can we do it in the time, with the resources we have?" }
+          - { key: "R", text: "Relevant: will it affect the desired goal or strategy?" }
+          - { key: "T", text: "Time bound: when will it be accomplished?" }
+        hook: |
+          الهدف الـ **SMART** زي الموبايل الـ smart: لو ناقصه حرف واحد بيبقى "تليفون أرضي" ومحدش عايزه.
+      - kind: check
+        page: 50
+        quote: "after the statement of the problem is developed, before the methodology for the study is planned"
+        question: "When should the objectives of a research project be written?"
+        options:
+          - "After the statement of the problem, before planning the methodology"
+          - "After data collection"
+          - "Before identifying the problem"
+          - "After the budget"
+        answer: 0
+        why:
+          - "صح: بعد المشكلة وقبل الـ methodology."
+          - "متأخر جدًا: الأهداف هي اللي بتقولك تجمع إيه."
+          - "مينفعش تكتب هدف لمشكلة لسه ماعرفتهاش."
+          - "الـ budget بييجي بعد الـ methodology والـ work plan."
+      - kind: explain
+        page: 54
+        quote: "Usually in our case we use the positive sentence way to formulate objectives"
+        title: "تكتب الهدف إزاي؟"
+        text: |
+          تلات أشكال:
+
+          - **Question:** "The objectives of this study are to answer the following questions…"
+          - **Positive sentence:** "The objectives of this study are to determine…"
+          - **Hypothesis:** "The objective of this study is to verify the following hypothesis…"
+
+          الشكل بيعتمد على نوع الدراسة: الـ descriptive/exploratory بأسئلة أو جمل، ولو تقدر تتنبأ تكتب hypotheses. وعندنا ==usually we use the positive sentence==.
+      - kind: sort
+        page: 56
+        quote: "Do not use vague non-action verbs such as: To appreciate ... To understand... To believe"
+        prompt: "الفعل ده ينفع يبدأ بيه objective؟"
+        bins: ["Action verb", "Vague: avoid"]
+        cards:
+          - { text: "To determine", bin: 0 }
+          - { text: "To compare", bin: 0 }
+          - { text: "To verify", bin: 0 }
+          - { text: "To calculate", bin: 0 }
+          - { text: "To describe", bin: 0 }
+          - { text: "To appreciate", bin: 1 }
+          - { text: "To understand", bin: 1 }
+          - { text: "To believe", bin: 1 }
+        why: "الـ objective لازم يتكتب بـ **action verbs** specific enough to be measured. To appreciate و to understand و to believe مايتقاسوش."
+      - kind: aside
+        tone: joke
+        page: 56
+        quote: "Do not use vague non-action verbs such as: To appreciate ... To understand... To believe"
+        text: |
+          كتبت "To understand depression among diabetics"؟ المشرف هيبصلك ويقول: "هتقيس الـ understanding بإيه يا دكتور؟ بالترمومتر؟" 🌡️
+
+          غيّرها لـ "To **determine** the prevalence of depression among…" وخلاص.
+      - kind: try
+        items: [res.L03.061, res.L03.064, res.L03.066, res.L03.070]
+    recap:
+      - "Objective = statement بيوصف الأهداف بوضوح؛ هو اللي بيخلي السؤال testable."
+      - "ليه؟ focus، avoid unnecessary data، organize in phases."
+      - "إمتى؟ بعد الـ statement of the problem، قبل الـ methodology."
+      - "SMART: Specific، Measurable، Attainable، Relevant، Time bound."
+      - "Action verbs: determine, compare, verify, calculate, describe. ممنوع: appreciate, understand, believe."
+    practice: [res.L03.061, res.L03.062, res.L03.063, res.L03.064, res.L03.065, res.L03.066, res.L03.067, res.L03.068, res.L03.069, res.L03.070, res.L03.071]
+  # ------------------------------------------------------------------
+  - id: res.L03.lesson6
+    title: "هدف عام وأهداف خاصة… وتصليح الغلط"
+    hook: "هدف واحد كبير بيتقسم لحتت صغيرة، وأي حتة ناقصها مكان أو وقت هتتمسك عليك."
+    minutes: 8
+    pages: [57, 64]
+    topics: [objectives]
+    goals:
+      - "تفرّق بين الـ general والـ specific objectives"
+      - "تكتشف الناقص في أي objective: verb، population، place، time"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 57
+        quote: "the specific objectives are commonly considered as smaller portions of the general objectives."
+        title: "General و Specific"
+        text: |
+          - الـ ==general objective== بيقول **in general terms** البحث هيحقق إيه وليه، ولازم يكون **closely related to the statement of the problem**.
+          - الـ ==specific objectives== هي **smaller portions** منه: بتقول **in greater detail** هتعمل إيه، فين، وعلشان إيه، وبتغطي جوانب المشكلة **systematically**.
+      - kind: figure
+        page: 62
+        quote: "To estimate prevalence of depression among diabetes mellitus patients attending Smouha Health Center in Alexandria."
+        title: "مثال سموحة"
+        alt: "A tree: the general objective box at the top (estimate prevalence of depression among diabetic patients at Smouha Health Center, Alexandria) branches into three specific objectives: socio-demographic characteristics, prevalence of depression, risk factors for depression."
+        caption: "هدف عام واحد فوق، وتحته 3 أهداف خاصة. لاحظ إن كل specific objective بيبدأ بـ action verb وفيه نفس المكان."
+        svg: |
+          <svg viewBox="0 0 330 360" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="10" width="310" height="76" rx="8" class="fg-acc"/>
+            <text x="165" y="32" text-anchor="middle" class="t-sm t-mut">General objective</text>
+            <text x="165" y="52" text-anchor="middle" class="t-sm t-b">Estimate prevalence of depression</text>
+            <text x="165" y="70" text-anchor="middle" class="t-sm t-b">among DM patients, Smouha HC</text>
+            <path d="M165 86v24M40 110h250M40 110v18M165 110v18M290 110v18" class="fg-ink"/>
+            <rect x="10" y="130" width="310" height="60" rx="8" class="fg-good"/>
+            <text x="20" y="153" class="t-sm t-b">1. Identify</text>
+            <text x="20" y="173" class="t-sm">socio-demographic characteristics</text>
+            <rect x="10" y="200" width="310" height="60" rx="8" class="fg-good"/>
+            <text x="20" y="223" class="t-sm t-b">2. Determine</text>
+            <text x="20" y="243" class="t-sm">prevalence of depression</text>
+            <rect x="10" y="270" width="310" height="60" rx="8" class="fg-good"/>
+            <text x="20" y="293" class="t-sm t-b">3. Identify</text>
+            <text x="20" y="313" class="t-sm">risk factors for depression</text>
+            <text x="10" y="350" class="t-sm t-mut">Specific = smaller portions of the general</text>
+          </svg>
+      - kind: check
+        page: 61
+        quote: "To determine coverage with ANC and TT vaccination among mothers."
+        question: "In a study of factors influencing use of maternal health services in District X, \"To determine coverage with ANC and TT vaccination among mothers\" is:"
+        options:
+          - "A specific objective"
+          - "The general objective"
+          - "A hypothesis"
+          - "The research question"
+        answer: 0
+        why:
+          - "صح: حتة صغيرة ومفصّلة من الهدف العام."
+          - "الهدف العام كان \"To assess factors influencing utilization of maternal healthcare services in District X\"."
+          - "مفيهاش أي تنبؤ."
+          - "دي جملة بـ action verb، مش سؤال."
+      - kind: aside
+        tone: exam
+        page: 63
+        quote: "No action verb (vague), No time, no population, no place"
+        text: |
+          الممتحن بيحب يديك objective ويقولك "What is missing". افحصه بالترتيب ده:
+
+          - **Action verb**؟
+          - **Population**؟
+          - **Place**؟
+          - **Time**؟
+          - وبعدين: **feasible**؟ **realistic**؟
+      - kind: case
+        page: 63
+        quote: "No action verb (vague), No time, no population, no place"
+        stem: "المشرف رجّعلك تلات objectives مكتوب جنبهم علامة حمرا. اعرف الغلط في كل واحد."
+        steps:
+          - question: "\"To understand the prevalence of depression.\""
+            options:
+              - "No action verb (vague), no time, no population, no place"
+              - "Not realistic"
+              - "Not feasible"
+            answer: 0
+            why: "المحاضرة: **No action verb (vague), No time, no population, no place**."
+          - question: "\"To estimate prevalence of depression among all school pupils in Egypt.\""
+            options: ["Not feasible, and no time", "No action verb", "No population"]
+            answer: 0
+            why: "كل تلاميذ مصر؟ **Not feasible**، ومفيش وقت."
+          - question: "\"To eradicate hepatitis C in Egypt by the year 2022.\""
+            options: ["Not realistic", "No time", "No action verb"]
+            answer: 0
+            why: "فيه verb وفيه وقت، بس **not realistic** كهدف لبحث."
+      - kind: table
+        page: 64
+        quote: "To identify the socio-demographic characteristics of patients with diabetes"
+        title: "What is missing?"
+        columns: ["Objective", "Missing"]
+        rows:
+          - ["To identify the socio-demographic characteristics of patients with diabetes", "Place, time"]
+          - ["To estimate prevalence of depression in Smouha Health Center in Alexandria", "Population, time"]
+        hide: [[0, 1], [1, 1]]
+      - kind: reveal
+        page: 59
+        quote: "Specific objectives should systematically address the various aspects of the research problem."
+        prompt: "ليه مش كفاية هدف عام واحد؟"
+        answer: |
+          لأن الهدف العام **general terms**: بيقول "هعمل إيه وليه" من بعيد.
+
+          الـ specific objectives بتقول **in greater detail** هتعمل إيه، فين، وعلشان إيه، و**systematically address the various aspects** of the problem. ومنها بتطلع الـ variables والـ questionnaire والـ analysis plan.
+      - kind: try
+        items: [res.L03.072, res.L03.075, res.L03.078, res.L03.080]
+    recap:
+      - "General objective: in general terms، إيه وليه، مرتبط بالـ statement of the problem."
+      - "Specific objectives: smaller portions، تفاصيل: إيه، فين، علشان إيه."
+      - "افحص أي objective: action verb، population، place، time، feasible، realistic."
+      - "To understand… = vague. كل تلاميذ مصر = not feasible. نقضي على HCV في 2022 = not realistic."
+    practice: [res.L03.072, res.L03.073, res.L03.074, res.L03.075, res.L03.076, res.L03.077, res.L03.078, res.L03.079, res.L03.080, res.L03.081, res.L03.082]
+  # ------------------------------------------------------------------
+  - id: res.L03.lesson7
+    title: "الفرضية والعنوان"
+    hook: "الفرضية تنبؤ بتراهن عليه، والعنوان هو أول حاجة المراجع هيقراها. الاتنين لازم يبقوا محددين."
+    minutes: 9
+    pages: [66, 84]
+    topics: [hypotheses, title]
+    goals:
+      - "تعرّف الـ hypothesis وتعرف إمتى بنحتاجها"
+      - "تفرّق بين null و directional و non-directional"
+      - "تكتب عنوان 10–12 كلمة من غير كلام زيادة ولا اختصارات"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 66
+        quote: "a prediction or explanation of the relationship between two or more variables"
+        title: "يعني إيه hypothesis؟"
+        text: |
+          الـ ==hypothesis== هي **a prediction or explanation of the relationship between two or more variables**.
+
+          بتترجم الـ problem statement لتنبؤ **precise, unambiguous** بالنتيجة المتوقعة.
+
+          وبتتكتب **from the research question before the start of the study**، وبتوجّه: الـ study design، الـ population، الـ data اللي هتتجمع، والـ analysis. ومعاييرها هي نفس **PICOT**.
+      - kind: reveal
+        page: 66
+        quote: "Hypothesis statements are most applicable for analytic and intervention or evaluative studies."
+        prompt: "ليه الـ descriptive study عادةً مش محتاجة hypothesis؟"
+        answer: |
+          لأن الـ hypothesis بتتنبأ بـ **relationship between variables**، والـ descriptive أو exploratory studies **generally do not test relationships between variables**.
+
+          علشان كده الـ hypotheses ==most applicable for analytic and intervention (evaluative) studies==.
+      - kind: explain
+        page: 69
+        quote: "Post-menopausal women who received hormone replacement therapy, (of a specified type and duration), are more likely to develop endometrial cancer"
+        title: "من سؤال لفرضية"
+        text: |
+          - **Question:** Does post-menopausal HRT predispose women to develop endometrial cancer
+          - **Hypothesis:** Post-menopausal women who received HRT (of a specified type and duration) are ==more likely to develop endometrial cancer== than those who did not.
+
+          السؤال بيسأل، والفرضية بتراهن على إجابة.
+      - kind: figure
+        page: 72
+        quote: "Null: There will be no difference in scores on Hudson’s self-esteem scale between men and women."
+        title: "التلات أنواع"
+        alt: "Three stacked panels comparing men and women on a self-esteem score. Null: two equal bars with an equals sign. Non-directional: two bars with a not-equal sign and a question mark over which is higher. Directional: women's bar higher with a greater-than sign."
+        caption: "Null = مفيش فرق. Non-directional = فيه فرق بس مش قايل مين أعلى. Directional = فيه فرق وقايل اتجاهه."
+        svg: |
+          <svg viewBox="0 0 330 390" xmlns="http://www.w3.org/2000/svg">
+            <text x="10" y="20" class="t-b">Null</text>
+            <rect x="10" y="28" width="310" height="100" rx="8" class="fg-box"/>
+            <rect x="60" y="58" width="50" height="60" class="fg-acc"/>
+            <rect x="200" y="58" width="50" height="60" class="fg-good"/>
+            <text x="155" y="95" text-anchor="middle" class="t-lg t-b">=</text>
+            <text x="85" y="52" text-anchor="middle" class="t-sm">Men</text>
+            <text x="225" y="52" text-anchor="middle" class="t-sm">Women</text>
+            <text x="10" y="150" class="t-b">Non-directional</text>
+            <rect x="10" y="158" width="310" height="100" rx="8" class="fg-box"/>
+            <rect x="60" y="188" width="50" height="60" class="fg-acc"/>
+            <rect x="200" y="188" width="50" height="60" class="fg-good"/>
+            <text x="155" y="225" text-anchor="middle" class="t-lg t-b">≠</text>
+            <text x="225" y="182" text-anchor="middle" class="t-sm">which is higher? not said</text>
+            <text x="10" y="280" class="t-b">Directional</text>
+            <rect x="10" y="288" width="310" height="100" rx="8" class="fg-box"/>
+            <rect x="60" y="338" width="50" height="40" class="fg-acc"/>
+            <rect x="200" y="308" width="50" height="70" class="fg-good"/>
+            <text x="155" y="360" text-anchor="middle" class="t-lg t-b">&lt;</text>
+            <text x="85" y="332" text-anchor="middle" class="t-sm">Men</text>
+            <text x="270" y="330" class="t-sm t-b">Women</text>
+            <text x="270" y="346" class="t-sm t-b">higher</text>
+          </svg>
+      - kind: sort
+        page: 72
+        quote: "Nondirectional: There will be a difference by gender in Hudson’s self-esteem scale scores."
+        prompt: "صنّف كل فرضية:"
+        bins: ["Null", "Non-directional", "Directional"]
+        cards:
+          - { text: "There will be no difference in self-esteem scores between men and women", bin: 0 }
+          - { text: "Shisha smokers and non-smokers will not differ in FEV1", bin: 0 }
+          - { text: "There will be a difference by gender in self-esteem scores", bin: 1 }
+          - { text: "Residents' and consultants' burnout scores will differ", bin: 1 }
+          - { text: "Women will have higher self-esteem scores than men", bin: 2 }
+          - { text: "Children of fathers who smoke >20 cigarettes/day have lower birth weight", bin: 2 }
+        why: "مفيش فرق = **null**. فيه فرق من غير اتجاه = **non-directional**. فيه فرق واتجاهه مكتوب (higher/lower) = **directional**."
+      - kind: check
+        page: 74
+        quote: "Motorcycle riders who wear helmets sustain fewer injuries."
+        question: "(Lecture quiz) \"Motorcycle riders who wear helmets sustain fewer injuries.\" Research question or research hypothesis?"
+        options:
+          - "Research hypothesis"
+          - "Research question"
+          - "Neither of these"
+          - "Both of these"
+        answer: 0
+        why:
+          - "صح: جملة بتتنبأ بعلاقة (helmet ← fewer injuries). إجابة الـ quiz."
+          - "مفيهاش علامة استفهام ولا بتسأل."
+          - "هي تنبؤ واضح وقابل للاختبار."
+          - "الجملة يا سؤال يا عبارة."
+      - kind: aside
+        tone: trap
+        page: 74
+        quote: "A hypothesis is commonly used in quantitative studies, but is not appropriate for qualitative studies."
+        text: |
+          الـ quiz بيقول: "A hypothesis is commonly used in quantitative studies, but is not appropriate for qualitative studies." والإجابة: ==False==.
+
+          وسؤال تاني: لو بتعمل **predictive statement**، تستخدم إيه؟ ==Hypothesis==.
+      - kind: table
+        page: 73
+        quote: "To investigate the clinical efficacy of LIPUS in the management of patellar tendinopathy symptoms."
+        title: "سؤال، فرضية، هدف: دراسة واحدة منشورة (LIPUS)"
+        columns: ["Part", "In the study"]
+        rows:
+          - ["Research question", "How does LIPUS compare with a placebo device in managing the symptoms of patellar tendinopathy?"]
+          - ["Hypothesis", "Pain is reduced with daily active LIPUS for 12 weeks compared with inactive LIPUS (placebo)"]
+          - ["Objective", "To investigate the clinical efficacy of LIPUS in the management of patellar tendinopathy symptoms"]
+        hide: [[1, 1], [2, 1]]
+      - kind: explain
+        page: 80
+        quote: "A good title should be short, accurate, and concise"
+        title: "وأخيرًا: العنوان"
+        text: |
+          دلوقتي تقدر تكتب العنوان. لازم يكون **in line with your general objective** ويقول للقارئ الدراسة عن إيه وهتتعمل فين.
+
+          - ==short, accurate, and concise==، وعمومًا ==10–12 words==.
+          - يوضّح الـ **central objectives and variables** والـ **population**.
+          - من غير كلام زيادة زي **"Observations on"** أو **"A study of"**.
+          - ==No abbreviations==.
+      - kind: check
+        page: 82
+        quote: "Unnecessary words, not clear or specific, no population or place"
+        question: "Which title would the lecture accept?"
+        options:
+          - "Prevalence and risk factors of iron deficiency anaemia among school children in Alexandria"
+          - "A study on iron deficiency anaemia"
+          - "Assessment of quality of medical care provided to IHD patients"
+          - "Observations on attendants of dermatology outpatient clinic regarding age, sex, marital status, residence and socioeconomic status"
+        answer: 0
+        why:
+          - "صح: clear، specific، مفيش كلام زيادة، وفيه population و place."
+          - "كلام زيادة (A study on)، مش specific، ومفيش population ولا place."
+          - "فيه abbreviation (IHD)، وناقصه المكان."
+          - "Specific بس مش concise: طويل وفيه unnecessary words."
+      - kind: try
+        items: [res.L03.083, res.L03.089, res.L03.094, res.L03.099]
+    recap:
+      - "Hypothesis = prediction of the relationship between two or more variables، بتتكتب من السؤال قبل الدراسة."
+      - "مناسبة للـ analytic و intervention studies؛ الـ descriptive عادةً من غيرها."
+      - "Null = no difference. Non-directional = difference من غير اتجاه. Directional = difference واتجاهه."
+      - "Predictive statement = hypothesis. Quiz: hypothesis \"not appropriate for qualitative\" = False."
+      - "العنوان: in line with the general objective، 10–12 كلمة، population و place، من غير A study of ولا اختصارات."
+    practice: [res.L03.083, res.L03.084, res.L03.085, res.L03.086, res.L03.087, res.L03.088, res.L03.089, res.L03.090, res.L03.091, res.L03.092, res.L03.093, res.L03.094, res.L03.095, res.L03.096, res.L03.097, res.L03.098, res.L03.099, res.L03.100, res.L03.101, res.L03.102, res.L03.103, res.L03.104, res.L03.029]

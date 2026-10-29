@@ -1,0 +1,632 @@
+schema: batna.lesson/v1
+lecture: neph.L10
+lessons:
+  # ------------------------------------------------------------------
+  - id: neph.L10.lesson1
+    title: "الدوا بيضرب الكلية فين؟"
+    hook: "نفس الدوا ممكن يضرب الأوعية، أو الـ glomerulus، أو الـ tubule. لو عرفت الخريطة، الأسئلة هتبقى سهلة."
+    minutes: 8
+    pages: [337, 339]
+    topics: [defs, drug-vessels, drug-tubules]
+    goals:
+      - "تعرف يعني إيه interstitium وليه إصابته بتوقّع وظيفة الكلية"
+      - "توزّع الأدوية على أماكن الضرر: أوعية، glomerulus، proximal، loop، distal"
+      - "تربط كل مكان بالـ syndrome بتاعه (Fanconi، nephrogenic DI، dRTA)"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 337
+        title: "الـ interstitium يعني إيه؟"
+        quote: "Interstitium comprises of everything of renal component except glomeruli"
+        text: |
+          الكتاب بيقولها ببساطة: الـ ==interstitium== هو **كل حاجة في الكلية ما عدا الـ glomeruli**.
+
+          علشان كده الالتهاب المستمر فيه بيدمّر **حتة كبيرة من نسيج الكلية**، والنتيجة نزول واضح في وظيفتها.
+      - kind: figure
+        page: 337
+        quote: "Sites of Renal Damage by Drugs"
+        title: "خريطة الضرر بالأدوية"
+        alt: "Six stacked boxes from top to bottom: renal vessels (ACEI, ARB, NSAIDs, contrast, ciclosporin; vasculitis with allopurinol and penicillins; TMA with mithramycin), glomerulus (membranous with gold, penicillamine, captopril; minimal change with NSAIDs and lithium), proximal tubule (aminoglycosides, amphotericin, cisplatin, heavy metals; Fanconi), loop and papilla (NSAIDs, lithium, fluoride; concentrating defect), distal tubule (lithium, amphotericin, NSAIDs; nephrogenic DI and distal RTA), interstitium (NSAIDs, methicillin, rifampicin, allopurinol, diuretics; acute and chronic TIN)."
+        caption: "امشي مع الدم: الأوعية الأول، بعدين الـ glomerulus، بعدين الـ tubule من أوله لآخره. كل محطة ليها أدويتها والـ ==syndrome== بتاعها."
+        svg: |
+          <svg viewBox="0 0 330 430" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="N10a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="5" y="5" width="320" height="60" rx="8" class="fg-acc"/>
+            <text x="15" y="25" class="t-b">Renal vessels</text>
+            <text x="15" y="43" class="t-sm">Low RBF: ACEI, ARB, NSAIDs, contrast, CysA</text>
+            <text x="15" y="58" class="t-sm t-mut">Vasculitis: allopurinol, penicillins · TMA: mithramycin</text>
+            <path d="M165 65 L165 75" class="fg-arrow" marker-end="url(#N10a)"/>
+            <rect x="5" y="77" width="320" height="60" rx="8" class="fg-box"/>
+            <text x="15" y="97" class="t-b">Glomerulus</text>
+            <text x="15" y="115" class="t-sm">Membranous: gold, penicillamine, captopril</text>
+            <text x="15" y="130" class="t-sm t-mut">Minimal change: NSAIDs, lithium, antibiotics</text>
+            <path d="M165 137 L165 147" class="fg-arrow" marker-end="url(#N10a)"/>
+            <rect x="5" y="149" width="320" height="60" rx="8" class="fg-bad"/>
+            <text x="15" y="169" class="t-b">Proximal tubule</text>
+            <text x="15" y="187" class="t-sm">Aminoglycosides, amphotericin B, cisplatin, Hg, Cd</text>
+            <text x="15" y="202" class="t-sm t-mut">Fanconi syndrome, tubular necrosis</text>
+            <path d="M165 209 L165 219" class="fg-arrow" marker-end="url(#N10a)"/>
+            <rect x="5" y="221" width="320" height="60" rx="8" class="fg-box"/>
+            <text x="15" y="241" class="t-b">Loop of Henle and papilla</text>
+            <text x="15" y="259" class="t-sm">NSAIDs, lithium, tetracycline, fluoride</text>
+            <text x="15" y="274" class="t-sm t-mut">Low Na reabsorption, cannot concentrate urine</text>
+            <path d="M165 281 L165 291" class="fg-arrow" marker-end="url(#N10a)"/>
+            <rect x="5" y="293" width="320" height="60" rx="8" class="fg-acc"/>
+            <text x="15" y="313" class="t-b">Distal tubule</text>
+            <text x="15" y="331" class="t-sm">Lithium, amphotericin B, NSAIDs, K-sparing</text>
+            <text x="15" y="346" class="t-sm t-mut">Nephrogenic DI, distal RTA (I, IV)</text>
+            <rect x="5" y="365" width="320" height="60" rx="8" class="fg-good"/>
+            <text x="15" y="385" class="t-b">Whole tubulointerstitium</text>
+            <text x="15" y="403" class="t-sm">NSAIDs, methicillin, rifampicin, allopurinol</text>
+            <text x="15" y="418" class="t-sm t-mut">AKI (acute TIN) or CKD (chronic TIN)</text>
+          </svg>
+      - kind: explain
+        page: 337
+        title: "المحطة الأولى: الأوعية"
+        quote: "Reduced RBF:(diminish resistance or constriction); ACEI, ARA, CysA, radiocontrast, NSAIDS"
+        text: |
+          الدوا ممكن يأذي الكلية **قبل ما الدم يوصلها أصلًا** (prerenal):
+          - **Antianabolic**: الـ tetracyclines.
+          - ==Reduced RBF==: ACEI، ARA، CysA (ciclosporin)، radiocontrast، NSAIDs. بيغيّروا مقاومة الأوعية أو يقفلوها.
+
+          وممكن يعمل **vasculitis**، أو **thrombotic microangiopathy** (mithramycin و CysA).
+      - kind: mnemonic
+        page: 337
+        quote: "Allopurinol, procainamide, Penicillins, sulphonamides"
+        word: "PAPS"
+        parts:
+          - { key: "P", text: "Procainamide" }
+          - { key: "A", text: "Allopurinol" }
+          - { key: "P", text: "Penicillins" }
+          - { key: "S", text: "Sulphonamides" }
+        hook: |
+          الـ vasculitis من الأدوية = **PAPS**. أربع أدوية، وكلهم بيعملوا التهاب في الأوعية.
+      - kind: check
+        page: 338
+        quote: "Gold, Penicillamine, Captopril"
+        question: "A patient on penicillamine develops nephrotic syndrome. Which lesion does the book link to this drug?"
+        options:
+          - "Membranous glomerulonephritis"
+          - "Minimal change disease"
+          - "Thrombotic microangiopathy"
+          - "Fanconi syndrome"
+        answer: 0
+        why:
+          - "صح: gold و penicillamine و captopril = membranous."
+          - "الـ minimal change مع NSAIDs و lithium والمضادات الحيوية."
+          - "الـ TMA مع mithramycin و CysA."
+          - "الـ Fanconi ده proximal tubule، مش glomerulus."
+      - kind: explain
+        page: 338
+        title: "الـ proximal tubule: الشغّيل الأكبر"
+        quote: "Deceased reabsorption of Sodium, Glucosuria, Aminoaciduria"
+        text: |
+          الـ ==proximal tubule== بيرجّع معظم اللي الـ glomerulus فلتره. لو اتضرب، كل حاجة تهرب في البول: **Na، glucose، amino acids، β2-microglobulin، phosphate، K، uric acid، bicarbonate**. ده الـ ==Fanconi syndrome==.
+
+          الأدوية: **aminoglycosides**، cephalosporins، acetaminophen، **amphotericin B**، mercuric chloride، cadmium، **outdated tetracyclines**، **cisplatin**.
+      - kind: aside
+        tone: trap
+        page: 338
+        quote: "Mercuric chloride, Cadmium, Outdated tetracyclins, Cisplatinum"
+        text: |
+          الـ **tetracycline** طالع في **3 أماكن**: prerenal (antianabolic)، الـ **outdated** منها في الـ proximal tubule، والـ loop والـ papilla. السؤال ممكن يلعب على كلمة "outdated".
+      - kind: sort
+        page: 339
+        quote: "Drugs: Cyclophosphamide, Chlorpropamide, NSAIDS, Lithium"
+        prompt: "كل دوا بيضرب فين أساسًا في الكتاب؟"
+        bins: ["Proximal tubule", "Loop and papilla", "Distal: ADH resistance"]
+        cards:
+          - { text: "Aminoglycosides", bin: 0 }
+          - { text: "Cisplatin", bin: 0 }
+          - { text: "Cadmium", bin: 0 }
+          - { text: "Fluoride", bin: 1 }
+          - { text: "Chlorpropamide", bin: 2 }
+          - { text: "Cyclophosphamide", bin: 2 }
+        why: "الـ proximal: aminoglycosides و cisplatin والمعادن التقيلة. الـ loop: NSAIDs و lithium و tetracycline و fluoride. الـ ADH resistance: cyclophosphamide و chlorpropamide و NSAIDs و lithium."
+      - kind: explain
+        page: 339
+        title: "الـ distal tubule"
+        quote: "Clinical presentation: Nephrogenic diabetes insipidus, DRTA (Type I, IV)"
+        text: |
+          3 أنواع ضرر:
+          - **Tubular necrosis**: gentamicin، amphotericin B، phenacetin، toluene، lithium.
+          - **K و H مش بيطلعوا**: amphotericin B، NSAIDs، K-sparing diuretics. النتيجة hyperkalaemia و acidosis.
+          - ==ADH resistance==: cyclophosphamide، chlorpropamide، NSAIDs، lithium.
+
+          الصورة: ==nephrogenic diabetes insipidus== و **distal RTA** (type I و IV).
+      - kind: aside
+        tone: joke
+        page: 339
+        quote: "Drugs: Gentamycin, Amphotericin B, Phenacetin, Toleune, Lithium"
+        text: |
+          الـ **lithium** زي الضيف اللي بيدخل كل أوضة في الشقة: الـ glomerulus (minimal change)، الـ loop، والـ distal (necrosis و ADH resistance). لو مش فاكر الدوا في سؤال، lithium غالبًا موجود 😄
+      - kind: check
+        page: 339
+        quote: "Clinical presentation: Nephrogenic diabetes insipidus, DRTA (Type I, IV)"
+        question: "On lithium, a man passes litres of dilute urine that desmopressin does not correct. Mechanism?"
+        options:
+          - "Distal ADH resistance"
+          - "Proximal Fanconi syndrome"
+          - "Reduced renal blood flow"
+          - "Membranous GN"
+        answer: 0
+        why:
+          - "صح: lithium بيعمل ADH resistance = nephrogenic DI، فالـ desmopressin مش بيفرق."
+          - "الـ Fanconi بيعمل glucosuria و aminoaciduria، مش بول مخفف مقاوم للـ ADH."
+          - "دي prerenal (ACEI، NSAIDs)، بتقلل البول مش بتكتّره."
+          - "الـ membranous بيعمل protein، ومش من أدوية الـ lithium."
+      - kind: explain
+        page: 339
+        title: "الـ interstitium كله، والأورام"
+        quote: "Drugs: Gentamycin, Phenacetin, NSAIDS, Cisplatinum, Methicellin,"
+        text: |
+          أدوية بتضرب الـ **tubulointerstitium** كله: gentamicin، phenacetin، **NSAIDs**، cisplatin، **methicillin**، rifampicin، allopurinol، diuretics.
+
+          النتيجة: ==AKI== (acute TIN) أو **CKD** (chronic TIN)، مع نقص امتصاص الـ Na وعدم تركيز البول.
+
+          والكتاب بيحط كمان **malignancy**: transitional cell carcinoma، hypernephroma، sarcoma، chorionepithelioma.
+      - kind: try
+        items: [neph.L10.003, neph.L10.006, neph.L10.009, neph.L10.015, neph.L10.018]
+    recap:
+      - "Interstitium = كل الكلية ما عدا الـ glomeruli."
+      - "الأوعية: low RBF (ACEI، ARA، CysA، contrast، NSAIDs)، vasculitis (PAPS)، TMA (mithramycin، CysA)."
+      - "Membranous: gold، penicillamine، captopril. Minimal change: NSAIDs، lithium، antibiotics."
+      - "Proximal = Fanconi: aminoglycosides، amphotericin، cisplatin، Hg، Cd، outdated tetracyclines."
+      - "Distal: ADH resistance (lithium) = nephrogenic DI، و dRTA I و IV."
+    practice: [neph.L10.001, neph.L10.002, neph.L10.003, neph.L10.004, neph.L10.005, neph.L10.006, neph.L10.007, neph.L10.008, neph.L10.009, neph.L10.010, neph.L10.011, neph.L10.012, neph.L10.013, neph.L10.014, neph.L10.015, neph.L10.016, neph.L10.017, neph.L10.018, neph.L10.019, neph.L10.020, neph.L10.102]
+  # ------------------------------------------------------------------
+  - id: neph.L10.lesson2
+    title: "Acute TIN: حساسية وصلت للكلية"
+    hook: "مضاد حيوي، وبعد أسبوع سخونية وطفح والكرياتينين بيطلع. تعرف تشخّص ده وتعالجه في دقيقة."
+    minutes: 8
+    pages: [339, 341]
+    topics: [atin-causes, atin-picture, atin-labs, atin-mx]
+    goals:
+      - "تحفظ أسباب الـ acute TIN بـ RAISIN"
+      - "تعرف الصورة الإكلينيكية وتحاليل البول حسب الجزء اللي اتضرب"
+      - "تعرف العلاج وجرعة الـ steroids"
+    status: unverified
+    steps:
+      - kind: mnemonic
+        page: 339
+        quote: "Allergic TIN (antibiotics, NSAIDs, thiazide, cimetidine)"
+        word: "RAISIN"
+        parts:
+          - { key: "R", text: "Rejection: acute cellular rejection" }
+          - { key: "A", text: "Allergic: antibiotics, NSAIDs, thiazide, cimetidine" }
+          - { key: "I", text: "Infection: viral, bacterial, fungal" }
+          - { key: "S", text: "Systemic inflammatory: Sjögren, SLE, Wegener's" }
+          - { key: "I", text: "Infiltration: lymphoma, leukaemia, sarcoidosis" }
+          - { key: "N", text: "No cause: idiopathic 8%" }
+        hook: |
+          الكلية في الـ acute TIN بتورم، بس افتكرها **زبيبة (RAISIN)** علشان الأسباب الستة. والـ idiopathic بس ==8%==.
+      - kind: explain
+        page: 340
+        title: "شكلها تحت الميكروسكوب"
+        quote: "LM showed there is edema associated with an interstitial lymphoplasmocytic, oesinophils and macrophages infiltration"
+        text: |
+          **بالعين**: الكلية عادية أو ==كبيرة==، والقطاع فيه medullary congestion و necrosis وخرّاجات كتير.
+
+          **بالميكروسكوب**: **edema** في الـ interstitium، مع خلايا lymphocytes و plasma cells و ==eosinophils== و macrophages. الـ eosinophils دي توقيع الحساسية.
+      - kind: figure
+        page: 340
+        quote: "Symptoms can appear after two to fourteen days."
+        title: "الحكاية بالترتيب"
+        alt: "A timeline: drug started on day 0, then a box at 2 to 14 days, then two boxes below it: the kidney (haematuria, pyuria, polyuria, nocturia, rising creatinine) and the body (fever, chills, flank pain, arthralgia, itchy maculopapular rash, raised liver enzymes, eosinophilia)."
+        caption: "الدوا النهارده، والأعراض بعد ==2 لـ 14 يوم==. علامات في الكلية وعلامات في الجسم كله."
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="N10b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="5" y="10" width="130" height="40" rx="8" class="fg-acc"/>
+            <text x="70" y="35" text-anchor="middle" class="t-b">Drug, day 0</text>
+            <path d="M137 30 L188 30" class="fg-arrow" marker-end="url(#N10b)"/>
+            <rect x="190" y="10" width="135" height="40" rx="8" class="fg-bad"/>
+            <text x="257" y="35" text-anchor="middle" class="t-b">Day 2 to 14</text>
+            <path d="M257 52 L257 70" class="fg-arrow" marker-end="url(#N10b)"/>
+            <rect x="5" y="72" width="155" height="170" rx="8" class="fg-box"/>
+            <text x="15" y="94" class="t-b">Kidney</text>
+            <text x="15" y="116" class="t-sm">Haematuria, pyuria</text>
+            <text x="15" y="136" class="t-sm">Polyuria, nocturia</text>
+            <text x="15" y="156" class="t-sm">Rising urea, creatinine</text>
+            <text x="15" y="176" class="t-sm">Protein under 1 g/day</text>
+            <text x="15" y="196" class="t-sm">FENa above 1</text>
+            <rect x="170" y="72" width="155" height="170" rx="8" class="fg-acc"/>
+            <text x="180" y="94" class="t-b">Whole body</text>
+            <text x="180" y="116" class="t-sm">Fever, chills</text>
+            <text x="180" y="136" class="t-sm">Flank pain</text>
+            <text x="180" y="156" class="t-sm">Arthralgia</text>
+            <text x="180" y="176" class="t-sm">Itchy maculopapular rash</text>
+            <text x="180" y="196" class="t-sm">Raised liver enzymes</text>
+            <text x="180" y="216" class="t-sm t-b">Eosinophilia</text>
+          </svg>
+      - kind: check
+        page: 340
+        quote: "Systemic manifestations: Fever, chills, flank pain, arthralgia, erythematous,"
+        question: "Ten days into amoxicillin: fever, itchy rash, arthralgia, rising creatinine, eosinophils in urine and blood. Diagnosis?"
+        options:
+          - "Allergic acute TIN"
+          - "Acute pyelonephritis"
+          - "Minimal change disease"
+          - "Analgesic nephropathy"
+        answer: 0
+        why:
+          - "صح: دوا من 2–14 يوم + سخونية وطفح ومفاصل + eosinophilia = allergic acute TIN."
+          - "الـ pyelonephritis فيها loin pain و bacteriuria، مش طفح و eosinophils."
+          - "الـ minimal change بيجي nephrotic بـ protein كتير، مش سخونية وطفح."
+          - "الـ analgesic nephropathy مزمنة، بعد سنين مسكنات."
+      - kind: explain
+        page: 340
+        title: "البول بيقول إيه؟"
+        quote: "Proteinuria is usually modest (<1g/day) of low molecular weight protein"
+        text: |
+          - ممكن **عادي**، بس غالبًا فيه **pyuria** و RBCs و **eosinophils**.
+          - **Protein قليل**: أقل من ==1 g/day==، و **low molecular weight** (tubular): lysozyme و β2-microglobulin.
+          - **FENa أكتر من 1**.
+          - وظايف الكلية: urea و creatinine بيطلعوا **فجأة**.
+      - kind: reveal
+        page: 340
+        quote: "FE of sodium usually more than 1"
+        prompt: "ليه الـ FENa في الـ acute TIN أكتر من 1، مع إن الـ prerenal بيبقى أقل؟"
+        answer: "في الـ prerenal الـ tubules **سليمة** وماسكة في الـ Na علشان تحافظ على الحجم. في الـ TIN الـ ==tubules نفسها مضروبة==، مش قادرة ترجّع الـ Na، فيهرب في البول."
+      - kind: table
+        page: 340
+        quote: "Glycouria, bicabituria, phosphaturia, aminoaciduria, hypokalemia"
+        title: "مين اتضرب؟ البول يقولك"
+        columns: [Segment, Urine finding]
+        rows:
+          - ["Proximal", "Glycosuria, bicarbonaturia, phosphaturia, aminoaciduria, low K"]
+          - ["Distal", "High K, sodium wasting, distal RTA"]
+          - ["Medulla", "Cannot concentrate urine"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: aside
+        tone: exam
+        page: 340
+        quote: "Hyperkalemia, Sodium wasting, DRTA. (DT defects)."
+        text: |
+          فخ الـ **potassium**: proximal = ==hypokalaemia== (الـ K بيهرب)، و distal = ==hyperkalaemia== (الـ K مش بيطلع). نفس المرض، والـ K عكس بعض حسب المكان.
+      - kind: explain
+        page: 341
+        title: "الأشعة والعلاج"
+        quote: "Identification of the responsible drug and Discontinue."
+        text: |
+          **Ultrasound**: الكلية عادية أو كبيرة. **Isotope scan**: يفرّق الـ ATIN عن باقي أسباب الـ ARF.
+
+          **العلاج**:
+          1. تشخيص بدري.
+          2. ==اعرف الدوا ووقّفه== (identify the responsible drug and discontinue).
+          3. Acute renal impairment: **prednisone 60 mg/day لمدة 10–14 يوم**، أو **methylprednisolone 1 g/day لـ 3 أيام**.
+          4. AKI: علاج supportive.
+          5. Dialysis.
+          6. Renal biopsy.
+      - kind: case
+        page: 341
+        quote: "prednisone 60 mg/day for 10-14days, or 1g"
+        stem: "A 45-year-old man on a penicillin for cellulitis has fever, rash and a creatinine rising from 1.0 to 3.2 mg/dL on day 10."
+        steps:
+          - question: "First step?"
+            options: ["Stop the penicillin", "Add a second antibiotic", "Dialysis now", "Restrict fluids"]
+            answer: 0
+            why: "اعرف الدوا المسؤول ووقّفه. ده أهم خطوة بعد التشخيص."
+          - reveal: "Creatinine keeps rising after stopping it."
+            question: "Steroid regimen in the book?"
+            options: ["Prednisone 60 mg/day for 10–14 days", "Prednisone 10 mg/day for 6 months", "Hydrocortisone 100 mg once", "No steroids ever"]
+            answer: 0
+            why: "Prednisone 60 mg/day لمدة 10–14 يوم، أو methylprednisolone 1 g/day لـ 3 أيام."
+      - kind: try
+        items: [neph.L10.021, neph.L10.031, neph.L10.033, neph.L10.038, neph.L10.039]
+    recap:
+      - "أسباب الـ acute TIN = RAISIN: rejection، allergic، infection، systemic، infiltration، no cause (8%)."
+      - "الأعراض بعد 2–14 يوم: hematuria، pyuria، polyuria، سخونية، طفح، مفاصل، eosinophilia."
+      - "Protein أقل من 1 g/day و low molecular weight؛ FENa أكتر من 1."
+      - "Proximal = low K؛ distal = high K و dRTA؛ medulla = مفيش تركيز."
+      - "وقّف الدوا؛ prednisone 60 mg/day لـ 10–14 يوم أو methylprednisolone 1 g/day لـ 3 أيام."
+    practice: [neph.L10.021, neph.L10.022, neph.L10.023, neph.L10.024, neph.L10.025, neph.L10.026, neph.L10.027, neph.L10.028, neph.L10.029, neph.L10.030, neph.L10.031, neph.L10.032, neph.L10.033, neph.L10.034, neph.L10.035, neph.L10.036, neph.L10.037, neph.L10.038, neph.L10.039, neph.L10.040, neph.L10.098, neph.L10.103, neph.L10.104]
+  # ------------------------------------------------------------------
+  - id: neph.L10.lesson3
+    title: "Chronic TIN والمسكنات اللي بتاكل الـ papilla"
+    hook: "ست بتاخد مسكنات للصداع كل يوم من سنين. الكلية بتصغر في صمت لحد ما الـ papilla تقع."
+    minutes: 8
+    pages: [341, 344]
+    topics: [ctin, nephrotox, analgesic]
+    goals:
+      - "تعرف أسباب الـ chronic TIN وعوامل خطر الـ nephrotoxicity"
+      - "تفهم ليه المسكنات بتضرب الـ papilla بالذات"
+      - "تعرف علاج الـ analgesic nephropathy والوقاية من الـ nephrotoxicity"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 341
+        title: "أسباب الـ chronic TIN"
+        quote: "Sickle cell disease or trait"
+        text: |
+          **الشائعة**:
+          - ==Reflux nephropathy==
+          - NSAIDs
+          - Diabetes mellitus
+          - Sickle cell disease أو trait
+          - Cadmium أو lead
+
+          **النادرة**: Alport's، irradiation، Sjögren's، hyperuricaemic nephropathy.
+      - kind: explain
+        page: 342
+        title: "مين أكتر واحد هيتأذي من الدوا؟"
+        quote: "Hepatorenal syndrome"
+        text: |
+          **من ناحية المريض**: ==old age==، مرض كلى قديم، الستات، نقص Mg أو K أو Ca، نقص الـ volume، hypotension، hepatorenal syndrome، السكر، multiple myeloma.
+
+          **من ناحية الدوا**: كورسات قريبة ومتكررة، جرعة كبيرة، مدة طويلة، نظام الجرعات، ودوا nephrotoxic تاني معاه.
+      - kind: sort
+        page: 342
+        quote: "Recent recurrent therapy"
+        prompt: "عامل الخطر ده من المريض ولا من الدوا؟"
+        bins: ["Patient related", "Drug related"]
+        cards:
+          - { text: "Old age", bin: 0 }
+          - { text: "Multiple myeloma", bin: 0 }
+          - { text: "Volume depletion", bin: 0 }
+          - { text: "Large dose", bin: 1 }
+          - { text: "Long therapy", bin: 1 }
+          - { text: "Another nephrotoxic drug", bin: 1 }
+        why: "المريض: السن، الـ myeloma، الجفاف، الستات، مرض كلى قديم. الدوا: الجرعة، المدة، التكرار، والخلط مع nephrotoxic تاني."
+      - kind: explain
+        page: 342
+        title: "الـ analgesic nephropathy: مين وليه؟"
+        quote: "More common in women 30-50 ys."
+        text: |
+          **Aspirin و acetaminophen**. أكتر في ==الستات 30–50 سنة== اللي عندهم صداع متكرر وآلام عضلات ومفاصل.
+
+          الـ chronic TIN عمومًا ممكن يكون **من غير أعراض**، أو يظهر بأعراض السبب، أو بأعراض الـ **CKD**.
+      - kind: figure
+        page: 343
+        quote: "Concentrated in the medulla and papilla."
+        title: "ليه الـ papilla بالذات؟"
+        alt: "Four stacked boxes joined by arrows: analgesic is concentrated in the medulla and papilla; aspirin reduces the cells' reducing substances; patchy papillary necrosis then calcification; larger foci and slough of the whole papilla (acute papillary necrosis)."
+        caption: "الدوا ==بيتركّز== في الـ papilla زي ما البول بيتركّز هناك، والـ aspirin بيشيل حماية الخلية. النتيجة necrosis وبعدين الـ papilla كلها تقع."
+        svg: |
+          <svg viewBox="0 0 330 280" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="N10c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-bad"/></marker>
+            </defs>
+            <rect x="5" y="5" width="320" height="52" rx="8" class="fg-acc"/>
+            <text x="15" y="26" class="t-b">Concentrated in medulla and papilla</text>
+            <text x="15" y="45" class="t-sm t-mut">Cumulative dose matters (book: 10 kg)</text>
+            <path d="M165 57 L165 72" class="fg-arrow-bad" marker-end="url(#N10c)"/>
+            <rect x="5" y="74" width="320" height="52" rx="8" class="fg-box"/>
+            <text x="15" y="95" class="t-b">Aspirin lowers reducing substances</text>
+            <text x="15" y="114" class="t-sm t-mut">Epithelial cells lose their protection</text>
+            <path d="M165 126 L165 141" class="fg-arrow-bad" marker-end="url(#N10c)"/>
+            <rect x="5" y="143" width="320" height="52" rx="8" class="fg-box"/>
+            <text x="15" y="164" class="t-b">Patchy necrosis, then calcification</text>
+            <text x="15" y="183" class="t-sm t-mut">Sterile pyuria, poor concentration, dRTA</text>
+            <path d="M165 195 L165 210" class="fg-arrow-bad" marker-end="url(#N10c)"/>
+            <rect x="5" y="212" width="320" height="60" rx="8" class="fg-bad"/>
+            <text x="15" y="234" class="t-b">Whole papilla sloughs</text>
+            <text x="15" y="254" class="t-sm">Acute papillary necrosis</text>
+          </svg>
+      - kind: explain
+        page: 343
+        title: "الصورة المتأخرة والباثولوجي"
+        quote: "Anemia and peptic ulcer symptoms."
+        text: |
+          **بدري**: مفيش أعراض. **متأخر**:
+          - ==Sterile pyuria==، ضعف تركيز البول، و distal acidification defects.
+          - الـ proximal defects بتيجي متأخر مع الـ renal failure، ومعاها ضعف الحفاظ على الـ Na.
+          - **Anaemia** وأعراض **peptic ulcer** (الأسبرين بيضرب المعدة كمان).
+          - كلية **صغيرة**، nodular، فيها calcification، والحتت اللي جنبها بتكبر.
+
+          **الباثولوجي**: كلية صغيرة منكمشة، سطحها مش منتظم و ==asymmetric==؛ infiltrate و fibrosis و tubular atrophy متقطعة. الـ glomeruli عادية في الأول، وبعدين sclerosis و periglomerular fibrosis.
+      - kind: check
+        page: 343
+        quote: "slough of the whole papilla (acute papillary necrosis)"
+        question: "A woman on daily analgesic combinations for years has sudden loin pain and passes tissue in her urine. What happened?"
+        options:
+          - "Acute papillary necrosis"
+          - "Uric acid stone"
+          - "Acute allergic TIN"
+          - "Bladder tumour"
+        answer: 0
+        why:
+          - "صح: الـ necrotic foci كبرت والـ papilla كلها وقعت."
+          - "الكتاب مش بيربط المسكنات بحصوات uric acid."
+          - "الـ allergic TIN حاد بعد 2–14 يوم من دوا جديد، مش بعد سنين."
+          - "الحتة اللي نزلت papilla، والصورة دي analgesic nephropathy."
+      - kind: explain
+        page: 344
+        title: "العلاج والوقاية"
+        quote: "Psychological support to stop analgesics."
+        text: |
+          **علاج الـ analgesic nephropathy** (stop the drug, psychological support to stop analgesics): وقّف الدوا، اشرب ميّه كتير، ابعد عن الجفاف من diuretics أو laxatives، ==دعم نفسي== علشان يبطّل المسكنات، وابعد عن **خلطات** المسكنات.
+
+          **الوقاية من الـ nephrotoxicity**: اعرف عوامل الخطر، **single daily dose**، كورس أقصر، ما تجمعش nephrotoxics، سيب فترة بين الكورسات، hydration كويس، احسب الـ ==GFR== من الـ S.Cr، **non-ionic contrast**، وقيس مستوى الدوا في الدم.
+      - kind: aside
+        tone: exam
+        page: 344
+        quote: "aspirin alone does not impair renal function in normal kidney"
+        text: |
+          الكتاب واضح: ==الأسبرين لوحده== مش بيبوّظ وظيفة الكلية **السليمة**. المشكلة في الـ **combinations**.
+      - kind: check
+        page: 344
+        quote: "Single daily dose"
+        question: "An elderly diabetic needs gentamicin. Which plan prevents nephrotoxicity best?"
+        options:
+          - "Single daily dose, short course, hydration, drug levels"
+          - "Divided doses for a long course"
+          - "Give with IV contrast the same day"
+          - "Keep her a little dry"
+        answer: 0
+        why:
+          - "صح: كل ده من قايمة الوقاية في الكتاب."
+          - "الكورس الطويل عامل خطر؛ الكتاب بيقول قصّر الكورس."
+          - "ما تجمعش nephrotoxics مع بعض."
+          - "الجفاف عامل خطر؛ الـ hydration الكويس بيحمي."
+      - kind: try
+        items: [neph.L10.041, neph.L10.043, neph.L10.051, neph.L10.056, neph.L10.058]
+    recap:
+      - "Chronic TIN: reflux، NSAIDs، DM، sickle cell، cadmium أو lead؛ ونادرًا Alport، irradiation، Sjögren، urate."
+      - "عوامل خطر من المريض (سن، كلى، ستات، جفاف، myeloma) ومن الدوا (جرعة، مدة، تكرار، خلط)."
+      - "Analgesic nephropathy: ستات 30–50، الدوا بيتركّز في الـ papilla، و papillary necrosis."
+      - "Sterile pyuria، anaemia، peptic ulcer، كلية صغيرة asymmetric فيها calcification."
+      - "وقّف المسكن، ميّه، دعم نفسي؛ والوقاية: single dose، كورس قصير، hydration، levels، GFR."
+    practice: [neph.L10.041, neph.L10.042, neph.L10.043, neph.L10.044, neph.L10.045, neph.L10.046, neph.L10.047, neph.L10.048, neph.L10.049, neph.L10.050, neph.L10.051, neph.L10.052, neph.L10.053, neph.L10.054, neph.L10.055, neph.L10.056, neph.L10.057, neph.L10.058, neph.L10.059, neph.L10.099, neph.L10.105]
+  # ------------------------------------------------------------------
+  - id: neph.L10.lesson4
+    title: "الـ UTI من الأول للآخر"
+    hook: "أرقام الـ culture، الميكروبات بالنسبة، العلاج بالجرعة، والحامل والقسطرة. كله في درس واحد."
+    minutes: 10
+    pages: [344, 351]
+    topics: [uti-basics, uti-organisms, uti-tx, uti-special]
+    goals:
+      - "تعرف أرقام تشخيص الـ UTI حسب نوع العينة"
+      - "تحفظ الميكروبات بالنسب وتفهم طريق العدوى والدفاعات"
+      - "تعالج الـ UTI البسيطة والـ pyelonephritis والـ recurrent والقسطرة والحمل"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 344
+        title: "يعني إيه UTI؟"
+        quote: "colony counts of 102 to 104/mL generally indicate infection"
+        text: |
+          ميكروبات في البول أو الـ urethra أو المثانة أو الكلية أو البروستاتا.
+
+          - **Clean-catch midstream**: أكتر من ==10^5== organisms/mL = infection.
+          - **Suprapubic aspiration** أو **in-and-out catheter**: ==10^2 لـ 10^4==/mL كفاية.
+
+          ولو فيه dysuria و urgency و frequency **من غير** bacteriuria مهمة، اسمها ==acute urethral syndrome==.
+      - kind: reveal
+        page: 344
+        quote: "In urine specimens obtained by suprapubic aspiration or"
+        prompt: "ليه رقم الـ suprapubic أقل بكتير من الـ midstream؟"
+        answer: "عينة الـ midstream بتعدّي على الـ urethra والجلد فممكن تتلوث، فلازم رقم عالي يثبت إنها عدوى حقيقية. الـ suprapubic جاية من المثانة على طول، فأي نمو حقيقي = infection."
+      - kind: explain
+        page: 345
+        title: "مين بيجيله وإزاي؟"
+        quote: "it is uncommon in men and children, and the urinary tract is often abnormal and requires investigation"
+        text: |
+          - **في الستات شائع**، وغالبًا الـ tract **طبيعي**. البكتيريا بتستعمر حوالين الـ urethra وتطلع. بعد الـ menopause الـ mucosa الضامرة وتغيّر الـ flora بيزوّدوا الخطر.
+          - **في الرجالة والأطفال نادر**، والـ tract غالبًا ==فيه مشكلة== ولازم يتعمله investigation.
+          - في المثانة، **البول المتبقي** (residual urine) بيسهّل العدوى.
+
+          المصدر: ==bowel flora== بتاعة المريض نفسه، والطريق غالبًا **ascending transurethral** (وممكن دم، lymphatics، أو vesicocolic fistula).
+      - kind: explain
+        page: 345
+        title: "دفاعات المسالك"
+        quote: "Regular complete bladder emptying"
+        text: |
+          - **High urine flow**: البول بيغسل.
+          - **Regular complete bladder emptying**: تفريغ المثانة كامل وبانتظام.
+          - ==Tamm–Horsfall mucoprotein== والـ glycosaminoglycans: بيمسكوا الـ E. coli فما تلزقش في الـ urothelium.
+          - **Mucosal defence**: طبقة glycosaminoglycans، IgA و IgG، و phagocytosis.
+      - kind: table
+        page: 346
+        quote: "Proteus mirabilis 12"
+        title: "الميكروبات بالنسبة"
+        columns: [Organism, "%"]
+        rows:
+          - ["E. coli and coliforms", "68"]
+          - ["Proteus mirabilis", "12"]
+          - ["Staph saprophyticus or epidermidis", "10"]
+          - ["Enterococcus faecalis", "6"]
+          - ["Klebsiella aerogenes", "4"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+      - kind: aside
+        tone: tip
+        page: 346
+        quote: "Escherichia coli and other 68"
+        text: |
+          الأرقام تنازلي ومجموعها 100: **68 – 12 – 10 – 6 – 4**. افتكر **E-P-S-E-K** (E. coli، Proteus، Staph، Enterococcus، Klebsiella).
+      - kind: explain
+        page: 346
+        title: "العدوى اللي بتعمل acute TIN"
+        quote: "Acute pyelonephritis leads to inflammation of the tubules, producing a neutrophilic cellular infiltrate."
+        text: |
+          - ==Acute pyelonephritis==: التهاب في الـ tubules بـ **neutrophils** (مش eosinophils زي الحساسية).
+          - **Systemic infections**: فيروسات (EBV، HIV، measles، adenovirus)، بكتيريا (Legionella، Leptospira، streptococci، Mycoplasma، Brucella، Chlamydia)، Leishmania، Toxoplasma.
+          - **في الكلية المزروعة**: ==CMV و HSV==.
+
+          العلاج: اقضي على العدوى بالمضاد الحيوي أو الـ antiviral المناسب.
+      - kind: figure
+        page: 347
+        title: "الـ vesicoureteric reflux ودرجاته"
+        image: { file: neph/L10-vur-grades.webp, book: true }
+        caption: "شمال: الصبغة بترجع من المثانة لفوق في الحالبين والكليتين. يمين: الدرجات من **I** (الحالب بس) لحد **V** (توسع والتواء شديد في الحالب والـ pelvis والـ calyces). والـ ==reflux nephropathy== أول اسم في قايمة أسباب الـ chronic TIN."
+        alt: "Book figure: on the left a cystogram with contrast refluxing from the bladder up both ureters into both kidneys; on the right a drawing of vesicoureteric reflux grades I to V, from reflux into the ureter only to a grossly dilated, tortuous ureter and calyces."
+      - kind: explain
+        page: 347
+        title: "الأعراض والتشخيص والعلاج"
+        quote: "Treatment is over 3-5 days with:"
+        text: |
+          **الأعراض**: frequency بالليل والنهار، dysuria، ألم suprapubic، hematuria، بول ريحته وحشة.
+
+          **التشخيص**: quantitative culture لعينة midstream (==10^5/mL== على الأقل) ووجود أو غياب الـ pyuria.
+
+          **Single isolated attack**: الـ culture مستحب مش لازم؛ في الـ primary care الـ dipstick (nitrite و leucocyte esterase) كفاية. العلاج ==3–5 أيام==:
+          - Amoxicillin 250 mg × 3
+          - Nitrofurantoin 50 mg × 3
+          - Trimethoprim 200 mg × 2
+          - أو oral cephalosporin. والـ resistant: co-amoxiclav أو ciprofloxacin.
+      - kind: check
+        page: 348
+        quote: "High fever, loin pain and tenderness (acute pyelonephritis)"
+        question: "High fever, rigors, loin pain and vomiting in a young woman. Best start?"
+        options:
+          - "IV cefuroxime, then oral for 7 more days"
+          - "Oral nitrofurantoin for 3 days"
+          - "Wait for the culture"
+          - "Oral amoxicillin 250 mg for 5 days"
+        answer: 0
+        why:
+          - "صح: acute pyelonephritis = IV broad-spectrum (cefuroxime، cipro، أو gentamicin 2–5 mg/kg/day)، وبعدين oral 7 أيام."
+          - "الكورس القصير للـ cystitis البسيطة بس."
+          - "عيانة جدًا؛ ما تستناش."
+          - "نفس الكلام: مش للـ pyelonephritis."
+      - kind: explain
+        page: 348
+        title: "الـ recurrent والقسطرة"
+        quote: "So long as the bladder catheter is in situ, antibiotic treatment is likely to be"
+        text: |
+          **Recurrent**: culture **قبل وبعد** العلاج ==إجباري== علشان تفرّق **relapse** من **reinfection**. لو relapse، دوّر على السبب (حصوة، كلية فيها scars) وشيله.
+
+          **القسطرة**: بعد كام يوم المثانة بتتستعمر عادي (biofilm). طول ما الـ **catheter in situ**، المضاد الحيوي غالبًا مش هيشتغل. عالج **بس** لو فيه أعراض أو دليل عدوى، و==غيّر القسطرة== معاه.
+      - kind: aside
+        tone: analogy
+        page: 348
+        quote: "partly due to organisms forming biofilms"
+        text: |
+          الـ **organisms forming biofilms** زي الطحلب جوّه خرطوم الجنينة: تغسله بالكلور من برّه وهو لسه جوّه، يرجع تاني. الحل إنك ==تغيّر الخرطوم==.
+      - kind: explain
+        page: 349
+        title: "الـ sterile pyuria والحمل"
+        quote: "The urine of pregnant women must always be cultured as 2-6% have asymptomatic bacteriuria."
+        text: |
+          **Abacteriuric frequency/dysuria**: postcoital bladder trauma، vaginitis، atrophic vaginitis أو urethritis في الكبار، interstitial cystitis. ست صغيرة عندها **sterile pyuria**؟ استبعد ==Chlamydia و TB==.
+
+          **الحمل**: لازم culture لكل حامل، لأن ==2–6%== عندهم asymptomatic bacteriuria. لو ما اتعالجتش: pyelonephritis شديدة بعدين و premature labour؛ ومع مرض كلى قديم: pre-eclampsia، anaemia، وأطفال صغيرين أو premature. لازم تتعالج ونتأكد إنها راحت.
+      - kind: sort
+        page: 349
+        quote: "Drugs that must be avoided in pregnancy"
+        prompt: "UTI in pregnancy: must be avoided, or can be used?"
+        bins: ["Avoid", "Can be used"]
+        cards:
+          - { text: "Tetracycline", bin: 0 }
+          - { text: "Trimethoprim", bin: 0 }
+          - { text: "Sulphonamides", bin: 0 }
+          - { text: "4-quinolones", bin: 0 }
+          - { text: "Amoxicillin", bin: 1 }
+          - { text: "Ampicillin", bin: 1 }
+          - { text: "Nitrofurantoin", bin: 1 }
+          - { text: "Oral cephalosporins", bin: 1 }
+        why: "ابعد عن tetracycline و trimethoprim و sulphonamides و quinolones. ينفع amoxicillin و ampicillin و nitrofurantoin و oral cephalosporins."
+      - kind: try
+        items: [neph.L10.060, neph.L10.069, neph.L10.081, neph.L10.093, neph.L10.106]
+    recap:
+      - "Midstream أكتر من 10^5/mL؛ suprapubic أو catheter من 10^2 لـ 10^4/mL."
+      - "ستات = tract طبيعي غالبًا؛ رجالة وأطفال = اعمل investigation."
+      - "E. coli 68، Proteus 12، Staph 10، Enterococcus 6، Klebsiella 4."
+      - "بسيطة 3–5 أيام oral؛ pyelonephritis = IV ثم oral 7 أيام."
+      - "Recurrent: culture قبل وبعد. قسطرة: عالج الأعراض بس وغيّر القسطرة."
+      - "حامل: culture دايمًا (2–6%)، عالج وأكّد؛ ابعد عن tetracycline و trimethoprim و sulpha و quinolones."
+    practice: [neph.L10.060, neph.L10.061, neph.L10.062, neph.L10.063, neph.L10.064, neph.L10.065, neph.L10.066, neph.L10.067, neph.L10.068, neph.L10.069, neph.L10.070, neph.L10.071, neph.L10.072, neph.L10.073, neph.L10.074, neph.L10.075, neph.L10.076, neph.L10.077, neph.L10.078, neph.L10.079, neph.L10.080, neph.L10.081, neph.L10.082, neph.L10.083, neph.L10.084, neph.L10.085, neph.L10.086, neph.L10.087, neph.L10.088, neph.L10.089, neph.L10.090, neph.L10.091, neph.L10.092, neph.L10.093, neph.L10.094, neph.L10.095, neph.L10.096, neph.L10.097, neph.L10.100, neph.L10.101, neph.L10.106]

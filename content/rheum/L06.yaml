@@ -1,0 +1,891 @@
+schema: batna.content/v1
+lecture: rheum.L06
+title: "Basic Immunology"
+author: "Prof. Dr. Ragaa Abd El Kader"
+book: { chapter: 3, pages: [83, 104] }
+topics:
+  - { id: organs, title: "Lymphoid organs and immune cell lineages" }
+  - { id: innate, title: "Innate versus adaptive immunity" }
+  - { id: iis, title: "How the innate immune system works" }
+  - { id: cytokines, title: "Cytokines" }
+  - { id: hla, title: "HLA: structure, nomenclature and inheritance" }
+  - { id: hla-disease, title: "HLA disease associations" }
+  - { id: macrophages, title: "The monocyte–macrophage system" }
+  - { id: lymphocytes, title: "T and B lymphocytes, humoral and cellular immunity" }
+  - { id: immunoglobulins, title: "Immunoglobulins and B cell activation" }
+  - { id: t-cells, title: "T cell subsets, helper types and costimulation" }
+  - { id: ctl, title: "Cytotoxic T cells" }
+  - { id: nk, title: "Natural killer cells and ADCC" }
+items:
+  # ---------- p83-84: organs and cells ----------
+  - id: rheum.L06.001
+    kind: enumerate
+    topic: organs
+    prompt: Name the mucosa-associated lymphoid tissues shown in the lecture's opening figure.
+    points: [Naso-pharyngeal and tonsillar lymph nodes, Bronchial lymph nodes, "Gut-associated lymphoid tissue (Peyer's patches, GALT)"]
+    pass: 2
+    src: { page: 83, quote: "Gut-associated Peyer's patches lymphoid tissue (GALT)" }
+    status: unverified
+  - id: rheum.L06.002
+    kind: card
+    topic: organs
+    front: From which two lineages of the pluripotent stem cell do immune cells arise (p84 figure)?
+    back: The granulocyte/monocyte (myeloid) lineage, giving neutrophils, eosinophils, basophils, monocytes/macrophages and mast cells; and the lymphocyte (lymphoid) lineage, giving B cells, T cells (via the thymus) and NK cells.
+    src: { page: 84, quote: "Granulocyte/monocyte (myeloid) lineage" }
+    status: unverified
+  - id: rheum.L06.003
+    kind: card
+    topic: organs
+    front: What do B lymphocytes and monocytes mature into in the tissues (p84 figure)?
+    back: B lymphocytes become plasma cells; monocytes become macrophages (alveolar macrophage, mesangial cell, Kupffer cell, osteoclast).
+    src: { page: 84, quote: "Macrophage Alveolar macrophage Mesangial cell Kupffer cell Osteoclast" }
+    status: unverified
+  # ---------- p85: innate vs adaptive ----------
+  - id: rheum.L06.004
+    kind: table
+    topic: innate
+    title: "Two categories of immunity in host defense"
+    columns: [Component, Natural (innate), Acquired (adaptive)]
+    rows:
+      - [Physical barriers, "Skin, mucous membranes", Mucosal immune system]
+      - [Circulating factors, "Complement, CRP", Antibody]
+      - [Cells, "Macrophages, neutrophils, natural killer cells", Lymphocytes]
+      - [Cell-derived mediators, "Monokines (IL-1, TNF, IL-12, interferons)", Lymphokines]
+    blanks: [[0, 2], [1, 1], [1, 2], [2, 1], [2, 2], [3, 1], [3, 2]]
+    src: { page: 85, quote: "Circulating factors Complement, CRP Antibody" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L06.005
+    kind: table
+    topic: innate
+    title: "Innate versus adaptive: properties"
+    columns: [Feature, Innate, Adaptive]
+    rows:
+      - [Specificity, Non-specific, Specific]
+      - [Origin, Present at birth, Acquired from exposure]
+      - [Intensity with exposure, Does not change, Increases]
+      - [Main protection, "Bacteria, fungi, worms", "Bacteria, viruses, protozoa"]
+    blanks: [[0, 1], [1, 1], [2, 1], [2, 2], [3, 1], [3, 2]]
+    src: { page: 85, quote: "Does not change in intensity with infection." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L06.006
+    kind: cloze
+    topic: innate
+    text: "The innate immune system is activated {{c1::immediately}} and controls replication of the organism until clonal expansion of adaptive lymphocytes, which takes {{c2::3–5 days}}."
+    src: { page: 85, quote: "acquired immune system that takes 3-5 days can deal with it." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: rheum.L06.007
+    kind: card
+    topic: innate
+    front: Besides holding off infection early, what else does the innate immune system do?
+    back: It interacts with and controls the adaptive immune system.
+    src: { page: 85, quote: "Also IIS interacts with and controls the adaptive immune system." }
+    status: unverified
+  - id: rheum.L06.008
+    kind: mcq
+    topic: innate
+    stem: Which feature belongs to innate rather than adaptive immunity, according to the lecture?
+    options:
+      - Increases in intensity with each exposure
+      - Mediated by lymphocytes and antibodies
+      - Present at birth and does not change in intensity with infection
+      - Acquired from exposure
+      - Main circulating factor is antibody
+    answer: 2
+    why:
+      - That is adaptive immunity.
+      - Lymphocytes and antibodies are adaptive.
+      - "Correct: innate immunity is non-specific, present at birth and constant in intensity (p85)."
+      - Acquired from exposure = adaptive.
+      - Innate circulating factors are complement and CRP.
+    src: { page: 85, quote: "Present at birth." }
+    status: unverified
+  # ---------- p86: IIS mechanism ----------
+  - id: rheum.L06.009
+    kind: card
+    topic: iis
+    front: What are pathogen-associated molecular patterns (PAMPs)? Give examples.
+    back: Microbial molecules macrophages recognise, e.g. bacterial lipopolysaccharides, peptidoglycans, mannans and bacterial DNA/RNA.
+    src: { page: 86, quote: "pathogen-associated molecular patterns" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L06.010
+    kind: card
+    topic: iis
+    front: Through which receptors do macrophages bind PAMPs?
+    back: Pattern recognition receptors, such as Toll-like receptors and mannose receptors.
+    src: { page: 86, quote: "Binding occurs through Toll-like receptors; mannose receptors (pattern" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L06.011
+    kind: table
+    topic: iis
+    title: "Macrophage cytokines after PAMP binding and their targets"
+    columns: [Cytokine, Acts on]
+    rows:
+      - ["IL-1, TNF-α, IL-8", Activate neutrophils]
+      - [IFN-α, Stimulates phagocytes]
+      - [IL-15, Stimulates natural killer cells]
+      - ["IL-12, IL-18", Stimulate TH1 cells]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 86, quote: "IL-15 stimulate natural killer cells." }
+    status: unverified
+  - id: rheum.L06.012
+    kind: enumerate
+    topic: iis
+    prompt: How does the innate immune system interact with the acquired immune system?
+    points:
+      - Innate cells bind pathogens, endocytose them and present them to T cells (act as APCs)
+      - Antigen binding to Toll receptors upregulates costimulatory molecules on APCs, needed for T-cell activation
+    pass: 2
+    src: { page: 86, quote: "Binding of antigens to Toll receptors upregulates the expression of co-" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L06.013
+    kind: mcq
+    topic: iis
+    stem: Which macrophage cytokines stimulate TH1 cells after Toll-like receptor binding, according to the lecture?
+    options: ["IL-12 and IL-18", IL-15, "IL-1 and IL-8", IL-4, IL-10]
+    answer: 0
+    why:
+      - "Correct: IL-12 and IL-18 stimulate TH1 cells (p86)."
+      - IL-15 stimulates NK cells.
+      - IL-1 and IL-8 (with TNF) activate neutrophils.
+      - IL-4 drives Th2, not Th1.
+      - IL-10 is the Treg effector cytokine.
+    src: { page: 86, quote: "IL-12 , IL-18 stimulate TH1 cells." }
+    status: unverified
+  # ---------- p86: cytokines ----------
+  - id: rheum.L06.014
+    kind: card
+    topic: cytokines
+    front: Define cytokines.
+    back: Small molecular weight soluble factors released by cells to communicate with and influence the function of other cells through specific surface receptors.
+    src: { page: 86, quote: "Are small molecular weight soluble factors released by cells (cyto) to" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L06.015
+    kind: cloze
+    topic: cytokines
+    text: "Cytokines can act in an {{c1::autocrine}}, {{c1::paracrine}} or {{c1::endocrine}} way; those released by and acting on white blood cells are called {{c2::interleukins}}."
+    src: { page: 86, quote: "Cytokines can have an autocrine function, paracrine or endocrine function." }
+    status: unverified
+  - id: rheum.L06.016
+    kind: card
+    topic: cytokines
+    front: What immune functions do cytokines have?
+    back: Lymphocyte activation, and local and systemic inflammation.
+    src: { page: 86, quote: "Cytokines have important immune functions in lymphocyte activation, local" }
+    status: unverified
+  # ---------- p87-91: HLA ----------
+  - id: rheum.L06.017
+    kind: card
+    topic: hla
+    front: What is the HLA, and on which chromosome are its genes?
+    back: The human major histocompatibility complex, a collection of genes many of which have immune functions; on chromosome 6.
+    src: { page: 87, quote: "The human MHC is known as HLA and the genes are found on" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L06.018
+    kind: card
+    topic: hla
+    front: What do class I and class II HLA molecules do?
+    back: They are cell-surface glycoproteins that bind short processed peptides and present them to the T cell receptor.
+    src: { page: 87, quote: "and bind short processed peptides and present them to T cell receptor." }
+    status: unverified
+  - id: rheum.L06.019
+    kind: table
+    topic: hla
+    title: "HLA class I versus class II"
+    columns: [Feature, Class I, Class II]
+    rows:
+      - [Presents to, Cytotoxic (CD8) T cells, Helper (CD4) T cells]
+      - [Expressed on, All nucleated cells, "Professional APCs: macrophages, dendritic cells, B cells"]
+      - [Chains, "α heavy chain (class I genes) + β2-microglobulin", "α and β chains, both transmembrane"]
+      - [Diversity, Less, More]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 1], [3, 2]]
+    src: { page: 87, quote: "Class I to cytotocic and class II to helper T cells" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L06.020
+    kind: mcq
+    topic: hla
+    stem: A virus infects renal tubular cells. Which HLA molecules on the infected cells present viral peptides, and to which T cells?
+    options:
+      - Class II, to helper T cells
+      - Class I, to cytotoxic T cells
+      - Class III, to NK cells
+      - Class II, to cytotoxic T cells
+    answer: 1
+    why:
+      - Class II is only on professional APCs (macrophages, dendritic cells, B cells).
+      - "Correct: class I is on all nucleated cells and presents to cytotoxic T cells (p87, p101)."
+      - Class III genes code complement and TNF, not peptide presenters.
+      - Class II presents to helper T cells.
+    src: { page: 87, quote: "Class I are expressed on all nucleated cells" }
+    status: unverified
+  - id: rheum.L06.021
+    kind: enumerate
+    topic: hla
+    prompt: Which genes lie in the class III region of the MHC on chromosome 6 (p87 map)?
+    points: [C4B and C4A, Factor B (Bf), C2, HSP, TNF]
+    pass: 3
+    src: { page: 87, quote: "C4B C4A B1 C2 HSP TNF" }
+    status: unverified
+  - id: rheum.L06.022
+    kind: cloze
+    topic: hla
+    text: "In HLA class I, the heavy α chain is non-covalently bound to {{c1::β2-microglobulin}}, whose gene is on chromosome {{c2::15}}."
+    src: { page: 88, quote: "microglobulin, the gene for which is on chromosome 15." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: rheum.L06.023
+    kind: card
+    topic: hla
+    front: Which HLA class shows more diversity?
+    back: Class II proteins show more diversity than class I.
+    src: { page: 88, quote: "MHC class II proteins show more diversity than MHC class I proteins." }
+    status: unverified
+  - id: rheum.L06.024
+    kind: card
+    topic: hla
+    front: Why do all HLA-DR molecules share the same α chain?
+    back: The DR subregion contains a single α chain gene (DRA); the diversity comes from the DRB genes.
+    src: { page: 89, quote: "DR subregion contains a single chain gene (DRA), all HLA-DR" }
+    status: unverified
+  - id: rheum.L06.025
+    kind: cloze
+    topic: hla
+    text: "There are {{c1::nine}} DRB genes (DRB1–9), of which {{c2::4}} are functional; DRB1 alone has about {{c3::60}} alleles."
+    src: { page: 89, quote: "There exist nine DRB genes DRB1-9 (4 are functional)" }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L06.026
+    kind: card
+    topic: hla
+    front: Define gene polymorphism and give its two consequences for HLA.
+    back: A considerable number of different alleles at one locus (e.g. DRB1 with 60). Individuals differ enormously in HLA genes, giving diverse susceptibility to disease and prompt rejection of organ transplants.
+    src: { page: 89, quote: "termed gene polymorphismb e.g DRB1 has 60 different alleles." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L06.027
+    kind: card
+    topic: hla
+    front: Which chains are polymorphic in the HLA-DQ and HLA-DP regions?
+    back: In DQ both α and β chains are polymorphic; in DP the β chain is highly polymorphic.
+    src: { page: 89, quote: "DQ region: DQ and chains are polymorphic." }
+    status: unverified
+  - id: rheum.L06.028
+    kind: card
+    topic: hla
+    front: Why did HLA nomenclature change?
+    back: Types used to be defined serologically by the antisera a cell reacts with; genotyping and amino-acid sequencing showed that molecules identical by serology can differ.
+    src: { page: 89, quote: "by serology may differ at genotyping." }
+    status: unverified
+  - id: rheum.L06.029
+    kind: order
+    topic: hla
+    prompt: Build the class II allele name DRB1*0101 in the order the lecture gives.
+    steps:
+      - Letter for the locus (DR)
+      - A or B for the α or β chain (DRB)
+      - Number defining the locus (DRB1)
+      - Asterisk (DRB1*)
+      - Two-digit type (DRB1*01)
+      - Two-digit variant (DRB1*0101)
+    src: { page: 90, quote: "Letter designing locus DR." }
+    status: unverified
+  - id: rheum.L06.030
+    kind: cloze
+    topic: hla
+    text: "In HLA-A*0101, the first two digits ({{c1::01}}) give the {{c2::type}}, the same as the serology number, and the next two give the {{c3::variant}}."
+    src: { page: 90, quote: "2 digit number design type HLA-A*01." }
+    status: unverified
+  - id: rheum.L06.031
+    kind: card
+    topic: hla
+    front: What is an MHC haplotype, and what is codominance?
+    back: A haplotype is the string of linked MHC genes on one chromosome, one maternal and one paternal. Codominance means both the maternal and paternal alleles are expressed.
+    src: { page: 90, quote: "Both maternal and paternal derived allelic forms are expressed: codominance." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L06.032
+    kind: card
+    topic: hla
+    front: Define linkage disequilibrium and give the lecture's example.
+    back: Certain alleles occur together on one haplotype more often than random recombination at meiosis would allow (e.g. HLA-B8, DR3); large intact MHC portions are inherited as extended haplotypes.
+    src: { page: 90, quote: "frequency than should occur if recombination during meiosis was random (eg." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L06.033
+    kind: card
+    topic: hla
+    front: Which extended haplotype does the lecture ask "too much of a good thing?" about, and why?
+    back: HLA A1, B8, DR3. It may give a vigorous response to infection, but also aggressive hyper-responsiveness and inflammatory diseases.
+    src: { page: 91, quote: "HLA A1, B8, DR3 vigorous response to infection?" }
+    status: unverified
+  - id: rheum.L06.034
+    kind: mcq
+    topic: hla
+    stem: >-
+      HLA-B8 and HLA-DR3 are found together on the same haplotype far more often than chance recombination
+      would predict. What is this called?
+    options: [Codominance, Linkage disequilibrium, Gene polymorphism, Molecular mimicry, Negative selection]
+    answer: 1
+    why:
+      - Codominance is expression of both parental alleles.
+      - "Correct: alleles found together more often than random meiotic recombination allows = linkage disequilibrium (p90)."
+      - Polymorphism is the number of alleles at a locus.
+      - Mimicry is HLA resembling a pathogen antigen.
+      - Negative selection is thymic deletion.
+    src: { page: 90, quote: "Linkage disequilibrium." }
+    status: unverified
+  - id: rheum.L06.035
+    kind: enumerate
+    topic: hla-disease
+    prompt: By what mechanisms do MHC genes confer disease susceptibility?
+    points:
+      - T cell maturation (MHC decides which naïve T cells survive in the thymus)
+      - MHC controls what T cells can see (peptide binding depends on its amino-acid sequence)
+      - Molecular mimicry
+      - Linkage disequilibrium
+    pass: 4
+    src: { page: 91, quote: "By what mechanism do MHC genes confer disease susceptibility:" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L06.036
+    kind: card
+    topic: hla-disease
+    front: Explain the molecular mimicry theory of HLA–disease association.
+    back: An HLA molecule may resemble a pathogen antigen. Either the pathogen is taken as self, giving severe unabated disease, or the response against the pathogen also hits self HLA, giving autoimmune disease.
+    src: { page: 91, quote: "HLA molecule may bear similarity to a certain antigen (pathogen)." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L06.037
+    kind: card
+    topic: hla-disease
+    front: How can linkage disequilibrium explain an HLA–disease association?
+    back: The HLA allele itself may not confer susceptibility but is commonly inherited with another gene that does.
+    src: { page: 92, quote: "they are associated but they are commonly inherited in association with" }
+    status: unverified
+  - id: rheum.L06.038
+    kind: table
+    topic: hla-disease
+    title: "Common HLA disease associations (lecture list)"
+    columns: [HLA, Diseases]
+    rows:
+      - [A29, Birdshot choroidoretinitis]
+      - [B5, "Behçet disease, ulcerative colitis, polycystic kidney disease"]
+      - [B27, Seronegative spondyloarthritis]
+      - [DR1, Rheumatoid arthritis]
+      - [DR2, "Multiple sclerosis, Goodpasture syndrome"]
+      - [DR3, "SLE, Sjögren syndrome, Graves disease, type 1 DM"]
+      - [DR4, "RA, type 1 DM"]
+      - [DR5, "Pauciarticular juvenile RA, Hashimoto thyroiditis"]
+      - [DQ, "SLE, type 1 DM"]
+    blanks: [[0, 1], [1, 1], [2, 1], [4, 1], [5, 1], [6, 1], [7, 1]]
+    src: { page: 92, quote: "HLA-DR2: Multiple sclerosis, Good pasture's syndrome." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L06.039
+    kind: cloze
+    topic: hla-disease
+    text: "HLA-{{c1::A29}} is linked to birdshot choroidoretinitis; HLA-{{c2::B5}} to Behçet disease."
+    src: { page: 92, quote: "HLA-A29: Bird shot choroid retinitis." }
+    status: unverified
+  - id: rheum.L06.040
+    kind: mcq
+    topic: hla-disease
+    stem: A woman with Goodpasture syndrome is typed for HLA. Which allele does the lecture associate with her disease?
+    options: [HLA-DR2, HLA-DR3, HLA-B27, HLA-DR5, HLA-A29]
+    answer: 0
+    why:
+      - "Correct: DR2 = multiple sclerosis and Goodpasture syndrome (p92)."
+      - DR3 = SLE, Sjögren, Graves, type 1 DM.
+      - B27 = seronegative spondyloarthritis.
+      - DR5 = pauciarticular JRA and Hashimoto thyroiditis.
+      - A29 = birdshot choroidoretinitis.
+    src: { page: 92, quote: "HLA-DR2: Multiple sclerosis, Good pasture's syndrome." }
+    status: unverified
+  - id: rheum.L06.041
+    kind: mcq
+    topic: hla-disease
+    stem: Which HLA allele does the lecture link to both SLE and Sjögren syndrome, as well as Graves disease and type 1 DM?
+    options: [HLA-DR3, HLA-DR4, HLA-DR1, HLA-B5]
+    answer: 0
+    why:
+      - "Correct: DR3 = SLE, Sjögren, Graves, type 1 DM (p92)."
+      - DR4 = RA and type 1 DM.
+      - DR1 = rheumatoid arthritis.
+      - B5 = Behçet, UC, polycystic kidney disease.
+    src: { page: 92, quote: "HLA-DR3: SLE, Sjogren's syndromes Grave's disease, type 1 DM." }
+    status: unverified
+  # ---------- p92-93: macrophages ----------
+  - id: rheum.L06.042
+    kind: card
+    topic: macrophages
+    front: Describe the life of a monocyte.
+    back: Produced in the bone marrow, it circulates in blood for one day, then settles in tissues as a tissue macrophage (histiocyte).
+    src: { page: 92, quote: "one day then settle in tissues as tissue macrophage or histocytes." }
+    status: unverified
+  - id: rheum.L06.043
+    kind: enumerate
+    topic: macrophages
+    prompt: What activates macrophages?
+    points:
+      - Direct contact with organisms
+      - Endotoxins
+      - Breakdown products
+      - Complement
+      - Coagulation products
+      - IFN-γ from TH1 cells
+    pass: 4
+    src: { page: 92, quote: "Macrophages are activated by direct contact with organisms, by endotoxins," }
+    status: unverified
+  - id: rheum.L06.044
+    kind: enumerate
+    topic: macrophages
+    prompt: Enumerate the functions of macrophages.
+    points:
+      - Phagocytosis (slower than neutrophils)
+      - "Secretory products: IL-1, TNF, IL-6, IFN, prostaglandins, leukotrienes, enzymes, superoxides"
+      - "Affect lymphocyte responses through mediators (IL-1, TNF)"
+      - Act as antigen-presenting cells
+    pass: 3
+    src: { page: 93, quote: "Macrophage function as phagocytes (slower than neutrophils)" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p93-94: lymphocytes ----------
+  - id: rheum.L06.045
+    kind: card
+    topic: lymphocytes
+    front: How are T cells identified, and what share of circulating lymphocytes are they?
+    back: They express the T cell receptor and are picked out with monoclonal antibodies to CD3, a TCR component. Most circulating lymphocytes are T cells (about 70%).
+    src: { page: 93, quote: "monoclonal antibodies that recognize CD3, a component of T cell receptor." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L06.046
+    kind: card
+    topic: lymphocytes
+    front: What are B cells, and what do they carry on their surface?
+    back: Bone marrow-derived, antibody-secreting cells expressing surface immunoglobulin.
+    src: { page: 93, quote: "B lymphocytes or B cells are bone manow-derived-antibody secreting cells." }
+    status: unverified
+  - id: rheum.L06.047
+    kind: table
+    topic: lymphocytes
+    title: "Humoral versus cellular immunity"
+    columns: [Feature, Humoral, Cellular]
+    rows:
+      - [Mediated by, Antibody from B cells, T cells secreting cytokines that direct effector cells]
+      - [Most important against, "Bacteria, especially encapsulated", "Viruses, parasites, fungi, mycobacteria"]
+      - [Deficiency example, "Hypogammaglobulinemia: recurrent sinopulmonary infections (pneumococcus, H. influenzae)", "AIDS (T-cell dysfunction)"]
+    blanks: [[1, 1], [1, 2], [2, 1], [2, 2]]
+    src: { page: 93, quote: "Humoral immunity is most important against bacteria, especially those" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L06.048
+    kind: mcq
+    topic: lymphocytes
+    stem: >-
+      A 24-year-old man has had pneumococcal pneumonia twice and recurrent Haemophilus sinusitis. Serum IgG,
+      IgA and IgM are very low. Which arm of immunity is defective?
+    options: [Humoral (antibody) immunity, Cellular (T cell) immunity, Complement only, NK cell function, Neutrophil phagocytosis]
+    answer: 0
+    why:
+      - "Correct: severe antibody deficiency gives recurrent sinopulmonary infection with encapsulated organisms (p93)."
+      - T-cell defects (AIDS) give viral, parasitic, fungal and mycobacterial infections.
+      - His immunoglobulins are low, pointing to B cells, not complement.
+      - NK defects are linked to viruses and tumours, not low immunoglobulins.
+      - Neutrophil defects do not lower immunoglobulins.
+    src: { page: 93, quote: "encapsulated organism (e.g pneumococcus, Haemophilus influenza)." }
+    status: unverified
+  - id: rheum.L06.049
+    kind: card
+    topic: lymphocytes
+    front: Against which organisms is cellular immunity most important?
+    back: Viruses, parasites, fungi and mycobacteria; AIDS patients (T-cell dysfunction) suffer these infections.
+    src: { page: 94, quote: "Cellular immunity is most important against virus, parasites, fungi," }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L06.050
+    kind: card
+    topic: lymphocytes
+    front: Which surface antibodies do mature B cells carry, and how specific are they?
+    back: Surface IgM and IgD, which act as antigen receptors; each B cell is specific for one antigen only.
+    src: { page: 94, quote: "Mature B cells vary in their surface antibody molecules (sIgM, SIgD) which" }
+    status: unverified
+  - id: rheum.L06.051
+    kind: card
+    topic: lymphocytes
+    front: What happens when a B cell meets its antigen?
+    back: It differentiates into an antibody-secreting plasma cell or a memory cell; full activation needs T-cell help. Plasma cells form a clone secreting the parent's antibody, and memory cells give the secondary response.
+    src: { page: 94, quote: "When a B cell is exposed to an antigen it differentiates to antibody secreting" }
+    status: unverified
+  # ---------- p95-96: immunoglobulins ----------
+  - id: rheum.L06.052
+    kind: card
+    topic: immunoglobulins
+    front: Which parts of the immunoglobulin molecule bind antigen and which bind Fc receptors and complement (p95 figure)?
+    back: The variable domains (VH, VL) at the N-terminal tips form the antigen-binding site; CH2 and CH3 below the hinge carry the Fc receptor and complement-binding sites.
+    src: { page: 95, quote: "Structure of Immunoglobulin Molecule" }
+    status: unverified
+  - id: rheum.L06.053
+    kind: table
+    topic: immunoglobulins
+    title: "Immunoglobulin classes"
+    columns: [Class, Heavy chain, Key points]
+    rows:
+      - [IgM, μ, "First Ig in an antibody response; potent complement activator"]
+      - [IgG, γ, "Most abundant; secondary response; complement activation"]
+      - [IgE, ε, "Very low serum level; rises with parasites and atopy"]
+      - [IgA, α, "Next most abundant; protects mucosa against bacteria, viruses, protozoa"]
+      - [IgD, δ, "Very low serum level, unknown function; surface IgD matters in B-cell maturation"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 2], [3, 2], [4, 2]]
+    src: { page: 95, quote: "First Ig synthesized in an antibody response potent activator complement," }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L06.054
+    kind: mcq
+    topic: immunoglobulins
+    stem: Which immunoglobulin is the first made in an antibody response and is a potent complement activator?
+    options: [IgG, IgM, IgA, IgE, IgD]
+    answer: 1
+    why:
+      - IgG is the most abundant and dominates the secondary response.
+      - "Correct: IgM (μ chain) is first and a potent complement activator (p95)."
+      - IgA protects mucosal surfaces.
+      - IgE rises with parasites and atopy.
+      - IgD's serum function is unknown.
+    src: { page: 95, quote: "First Ig synthesized in an antibody response potent activator complement," }
+    status: unverified
+  - id: rheum.L06.055
+    kind: cloze
+    topic: immunoglobulins
+    text: "{{c1::IgA}} is the next most abundant immunoglobulin and protects mucosa; {{c2::IgE}} is very low in serum and rises with parasitic infection and atopy."
+    src: { page: 96, quote: "Protect against bacterial, viral, protozoal infections of mucosa." }
+    status: unverified
+  - id: rheum.L06.056
+    kind: table
+    topic: immunoglobulins
+    title: "B cell activation pathways"
+    columns: [Pathway, Features]
+    rows:
+      - [Thymus independent 1, "Not antigen specific; polyclonal activation of all B cells"]
+      - [Thymus independent 2, "Antigen specific; IgM response; little memory"]
+      - [Thymus dependent, "Most important; high-affinity IgG; memory; protection against autoimmunity"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 96, quote: "Thymus independent pathway 2 is antigen specific- IgM response-little memory." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L06.057
+    kind: mcq
+    topic: immunoglobulins
+    stem: Which B cell activation pathway produces high-affinity IgG with memory, according to the lecture?
+    options: [Thymus independent pathway 1, Thymus independent pathway 2, Thymus dependent pathway, Polyclonal activation]
+    answer: 2
+    why:
+      - TI-1 is not antigen specific and activates all B cells.
+      - TI-2 gives an IgM response with little memory.
+      - "Correct: thymus-dependent activation is the most important, with high-affinity IgG and memory (p96)."
+      - Polyclonal activation is TI-1.
+    src: { page: 96, quote: "Thymus dependent: most important- high affinity IgG-Memory-protection" }
+    status: unverified
+  - id: rheum.L06.058
+    kind: enumerate
+    topic: immunoglobulins
+    prompt: Enumerate the effector functions of antibody shown in the p97 figure.
+    points:
+      - Direct neutralization
+      - Immune complex formation
+      - Opsonization for phagocytosis
+      - Complement activation and cell lysis
+      - Sensitization of mast cells/basophils (control of inflammatory response)
+      - Antibody-dependent cell-mediated cytotoxicity
+    pass: 4
+    src: { page: 97, quote: "direct neutralization immune complex formation opsonization" }
+    status: unverified
+  # ---------- p97-100: T cells ----------
+  - id: rheum.L06.059
+    kind: table
+    topic: t-cells
+    title: "T cell populations in blood"
+    columns: [Population, Marker, Share]
+    rows:
+      - [T cells, "TCR, CD3", "100% of T cells (70% of lymphocytes)"]
+      - [Helper T cells, CD4, 66% of T cells]
+      - [Cytotoxic/suppressor T cells, CD8, 33% of T cells]
+      - [Activated T cells, "IL-2 receptor, transferrin receptor, HLA class II", 2–10% of T cells]
+    blanks: [[0, 2], [1, 1], [1, 2], [2, 1], [2, 2], [3, 1]]
+    src: { page: 97, quote: "T cell population Marker Typical percentages in blood" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: rheum.L06.060
+    kind: card
+    topic: t-cells
+    front: Which surface markers identify activated T cells?
+    back: IL-2 receptor, transferrin receptor and HLA class II molecules (2–10% of T cells).
+    src: { page: 97, quote: "Activated T cells IL-2 receptor Transferrin receptor HLA class II molecules" }
+    status: unverified
+  - id: rheum.L06.061
+    kind: enumerate
+    topic: t-cells
+    prompt: Enumerate the four kinds of helper T cells.
+    points: [Th1, Th2, Th17, Treg]
+    pass: 4
+    src: { page: 98, quote: "There are four kinds:" }
+    status: unverified
+  - id: rheum.L06.062
+    kind: card
+    topic: t-cells
+    front: What do Th1 cells do?
+    back: They take part in cell-mediated immunity and are essential for controlling intracellular pathogens such as viruses, Listeria and Mycobacterium tuberculosis.
+    src: { page: 98, quote: "Th1: These participate in cell-mediated immunity." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L06.063
+    kind: card
+    topic: t-cells
+    front: What do Th2 cells do, and why are antibodies needed against extracellular pathogens?
+    back: They help B cells and are essential for antibody-mediated immunity. Extracellular pathogens, unlike intracellular ones, are exposed to antibodies in blood and body fluids.
+    src: { page: 98, quote: "Th2: These provide help for B cells and, in so doing, are essential for" }
+    status: unverified
+  - id: rheum.L06.064
+    kind: card
+    topic: t-cells
+    front: What do Th17 cells and Tregs do?
+    back: Th17 cells protect surfaces such as skin and gut lining against extracellular bacteria; Tregs dampen rather than promote immune responses.
+    src: { page: 98, quote: "Th17: These protect surfaces (e.g., skin, lining of the intestine) against" }
+    status: unverified
+  - id: rheum.L06.065
+    kind: table
+    topic: t-cells
+    title: "Helper T cell subsets"
+    columns: [Type, Stimulus, Master factor, Effector cytokine, Function, Pathology]
+    rows:
+      - [Th1, IL-12, T-bet, IFN-γ, Intracellular pathogens, "Autoimmunity; cell-mediated allergies"]
+      - [Th2, IL-4, GATA-3, IL-4, Extracellular pathogens, "Asthma and IgE-mediated allergies"]
+      - [Th17, "TGF-β plus IL-21 or IL-6 (inhibited by retinoic acid)", RORγ, "IL-17 and IL-22", "Extracellular bacteria; mediates inflammation", Autoimmune diseases]
+      - [Treg, "IL-2, TGF-β minus IL-6 (stimulated by retinoic acid)", Foxp3, IL-10, "Immunosuppression; anti-inflammatory", "None?"]
+    blanks: [[0, 1], [0, 2], [0, 3], [1, 2], [1, 3], [2, 2], [2, 3], [3, 2], [3, 3]]
+    src: { page: 98, quote: "Th1 IL-12 T-bet IFN-" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L06.066
+    kind: cloze
+    topic: t-cells
+    text: "Master transcription factors: Th1 {{c1::T-bet}}, Th2 {{c1::GATA-3}}, Th17 {{c2::RORγ}}, Treg {{c2::Foxp3}}."
+    src: { page: 98, quote: "Th1 IL-12 T-bet IFN-" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L06.067
+    kind: card
+    topic: t-cells
+    front: How does retinoic acid affect Th17 and Treg differentiation?
+    back: It inhibits Th17 and stimulates Treg.
+    src: { page: 98, quote: "Th17 TGF-β plus IL-21 or IL-6, inhibited by retinoic acid" }
+    status: unverified
+  - id: rheum.L06.068
+    kind: mcq
+    topic: t-cells
+    stem: >-
+      A naïve CD4 T cell is exposed to TGF-β and IL-6. Which subset does it become, and what is its effector cytokine?
+    options: ["Th17, IL-17 and IL-22", "Treg, IL-10", "Th1, IFN-γ", "Th2, IL-4"]
+    answer: 0
+    why:
+      - "Correct: TGF-β plus IL-6 (or IL-21) drives Th17 (RORγ), which makes IL-17 and IL-22 (p98)."
+      - Tregs need TGF-β without IL-6.
+      - Th1 is driven by IL-12.
+      - Th2 is driven by IL-4.
+    src: { page: 98, quote: "Th17 TGF- plus ROR IL-17 & IL-" }
+    status: unverified
+  - id: rheum.L06.069
+    kind: mcq
+    topic: t-cells
+    stem: Which helper T subset, through IL-4 and GATA-3, underlies asthma and IgE-mediated allergy?
+    options: [Th1, Th2, Th17, Treg]
+    answer: 1
+    why:
+      - Th1 (IFN-γ) is linked to autoimmunity and cell-mediated allergy.
+      - "Correct: Th2 = IL-4, GATA-3, extracellular pathogens, asthma and IgE allergy (p98)."
+      - Th17 is linked to autoimmune diseases.
+      - Tregs suppress; the lecture gives no pathology for them.
+    src: { page: 98, quote: "Th2 IL-4 GATA-3 IL-4 Extracellular Asthma and" }
+    status: unverified
+  - id: rheum.L06.070
+    kind: card
+    topic: t-cells
+    front: In the thymus, what happens to double-positive (CD4+CD8+) T cells according to their affinity for MHC (p99 figure)?
+    back: No affinity or high affinity for MHC → death. Moderate affinity for class I → CD8 T cell; moderate affinity for class II → CD4 T cell.
+    src: { page: 99, quote: "Moderate affinity for MHC class I" }
+    status: unverified
+  - id: rheum.L06.071
+    kind: card
+    topic: t-cells
+    front: Which coreceptor pairs with which MHC class at the T cell–target interface (p99 figure)?
+    back: CD4 binds class II MHC on the antigen-presenting cell; CD8 binds class I MHC on the target cell. Both signal through the tyrosine kinase p56lck.
+    src: { page: 99, quote: "Tyrosine kinase p56lck" }
+    status: unverified
+  - id: rheum.L06.072
+    kind: card
+    topic: t-cells
+    front: How is a T cell activated, and how is the signal switched off (B7 family)?
+    back: TCR binding to presented antigen plus costimulation through B7-2–CD28 activates it. Activation induces CTLA-4, whose binding to B7-1 on the APC is an "off" signal.
+    src: { page: 100, quote: "During activation, CTLA-4 is induced and its binding to B7-1 on the APC is" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L06.073
+    kind: cloze
+    topic: t-cells
+    text: "B7-1 and B7-2 are also called {{c1::CD80/CD86}}; B7-2 binding {{c2::CD28}} activates the T cell, while B7-1 binding {{c3::CTLA-4}} switches it off."
+    src: { page: 100, quote: "an off signal B7 (CD80/86)." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L06.074
+    kind: mcq
+    topic: t-cells
+    stem: A drug fuses CTLA-4 to an immunoglobulin Fc (abatacept). Using the lecture's B7 model, why does it suppress T cells?
+    options:
+      - It occupies B7 on APCs, so B7–CD28 costimulation cannot occur
+      - It blocks the TCR directly
+      - It kills APCs by ADCC
+      - It binds MHC class II
+    answer: 0
+    why:
+      - "Correct: CTLA-4 binds B7 and delivers the 'off' side; a soluble CTLA-4 takes B7 away from CD28 (p100)."
+      - CTLA-4 binds B7, not the TCR.
+      - Its action is blocking costimulation, not killing cells.
+      - It does not bind MHC.
+    src: { page: 100, quote: "an off signal B7 (CD80/86)." }
+    status: unverified
+  # ---------- p101: CTL ----------
+  - id: rheum.L06.075
+    kind: order
+    topic: ctl
+    prompt: Order the steps that let a cytotoxic T cell kill a virally infected cell.
+    steps:
+      - Virus particles from the infected cell are endocytosed by APCs
+      - APCs present viral peptide on class II MHC to TH1 cells
+      - TH1 cells send activation signals (IFN-γ, IL-2) to CTLs
+      - CTLs recognise the viral peptide on class I MHC of the target
+      - CTLs kill the target
+    src: { page: 101, quote: "Virus particles excereted from a virally infected cell are endocytosed" }
+    status: unverified
+  - id: rheum.L06.076
+    kind: card
+    topic: ctl
+    front: Two ways cytotoxic T cells kill target cells?
+    back: Inducing suicide (apoptosis) through lymphotoxin release, or forming pores in the target cell through perforin.
+    src: { page: 101, quote: "lymphotoxin release or (ii) forming pores in the target cell through perforin action." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p102-104: NK cells ----------
+  - id: rheum.L06.077
+    kind: card
+    topic: nk
+    front: What are natural killer cells, and what do they kill?
+    back: A small population resembling lymphocytes but a separate lineage from T and B cells; they kill tumour cells and virally infected cells without prior sensitisation.
+    src: { page: 102, quote: "NK cells kill tumour cells and virally infected cells without the need for prior sensitisation." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L06.078
+    kind: card
+    topic: nk
+    front: Which cytokine do NK cells mainly secrete, and what does it do?
+    back: IFN-γ, which promotes a cellular immune response by activating phagocytic cells and recruiting T cells.
+    src: { page: 102, quote: "NK cells secrete cytokines (mainly IFN-y), which promote a cellular immune respone" }
+    status: unverified
+  - id: rheum.L06.079
+    kind: cloze
+    topic: nk
+    text: "NK cells are activated by {{c1::IFN-γ}}, {{c2::IL-2}} and {{c3::IL-12}}."
+    src: { page: 102, quote: "NK cells are activated by the cytokines IFN-y, IL-2 and IL-12" }
+    status: unverified
+  - id: rheum.L06.080
+    kind: card
+    topic: nk
+    front: Two mechanisms by which NK cells kill targets?
+    back: (1) Targets coated with IgG are bound through the NK cell's Fc receptor (FcγRIII), i.e. ADCC. (2) Direct cell–cell contact using a receptor for class I MHC and one for carbohydrates.
+    src: { page: 102, quote: "In one, target cells are bound by IgG antibody, for which the NK cell has a receptor." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L06.081
+    kind: card
+    topic: nk
+    front: Two stages of NK cell activation (p103)?
+    back: First, cytokines (IL-12, IL-2, IFN-γ from TH1 cells); second, NK–target contact, where the lectin NKR-P1 binds surface carbohydrate.
+    src: { page: 103, quote: "The second stage is NK-target cell contact. NKR-P1, a lectin that with" }
+    status: unverified
+  - id: rheum.L06.082
+    kind: card
+    topic: nk
+    front: How does an NK cell decide whether to kill?
+    back: NKR-P1 binding a carbohydrate gives a positive signal; the p58–class I MHC interaction gives a negative signal that overrides it, so no lysis. A cell lacking class I, or expressing abnormal class I, is lysed.
+    src: { page: 104, quote: "The negative signal from the p58-class I MHC. Molecule interaction over-" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L06.083
+    kind: card
+    topic: nk
+    front: Why are NK cells called a "fail-safe" against viruses?
+    back: Some viruses down-regulate class I MHC to avoid CTLs, but the missing class I lets NK cells kill the infected cell.
+    src: { page: 104, quote: "Certain viruses down-regulate MHC class I molecule expression: this may" }
+    status: unverified
+  - id: rheum.L06.084
+    kind: mcq
+    topic: nk
+    stem: >-
+      A virus shuts down class I MHC expression on the cells it infects. Which cell is now best placed to kill them, and why?
+    options:
+      - CD8 cytotoxic T cells, because viral peptides are abundant
+      - NK cells, because the inhibitory p58–class I signal is lost
+      - CD4 helper T cells, because they see class I
+      - B cells, by secreting perforin
+    answer: 1
+    why:
+      - CTLs need class I MHC to see viral peptide.
+      - "Correct: without class I, nothing overrides the NKR-P1 positive signal, so NK cells lyse the cell: the fail-safe (p104)."
+      - Helper T cells see class II, not class I.
+      - B cells do not kill with perforin.
+    src: { page: 104, quote: "avoid killing by CTLs, but NK cells can then kill the target cell, providing a" }
+    status: unverified
+  - id: rheum.L06.085
+    kind: case
+    topic: nk
+    stem: A tumour cell has lost class I MHC and is coated with IgG from a therapeutic monoclonal antibody.
+    steps:
+      - question: Which receptor lets an NK cell attach to the IgG-coated tumour cell?
+        options: [FcγRIII, CD28, TCR, CTLA-4]
+        answer: 0
+        why: "ADCC: the NK cell binds the IgG Fc through FcγRIII and lyses the target (p103)."
+      - question: Without any antibody, would NK cells still kill this cell?
+        options: ["Yes, because the inhibitory class I signal is missing", "No, NK cells need prior sensitisation", "Only if CD8 T cells help first"]
+        answer: 0
+        why: "A cell not expressing class I is lysed; NK cells need no prior sensitisation (p102, p104)."
+    src: { page: 104, quote: "A tumour cell not expressing class I molecules, or expressing abnormal forms of them, is lysed by the NK cell." }
+    status: unverified
+  - id: rheum.L06.086
+    kind: essay
+    topic: t-cells
+    prompt: What are the types of T helper lymphocytes?
+    outline:
+      - "Th1": ["IL-12, T-bet, IFN-γ", "Cell-mediated immunity against intracellular pathogens (viruses, Listeria, TB)", "Autoimmunity and cell-mediated allergies"]
+      - "Th2": ["IL-4, GATA-3, IL-4", "Help B cells; antibodies against extracellular pathogens", "Asthma and IgE allergy"]
+      - "Th17": ["TGF-β plus IL-6 or IL-21, inhibited by retinoic acid; RORγ; IL-17 and IL-22", "Protect skin and gut against extracellular bacteria", "Autoimmune diseases"]
+      - "Treg": ["IL-2 and TGF-β without IL-6, stimulated by retinoic acid; Foxp3; IL-10", "Dampen immune responses; anti-inflammatory"]
+    src: { page: 98, quote: "Th1: These participate in cell-mediated immunity." }
+    status: unverified
+    tags: [book-question]
+  - id: rheum.L06.087
+    kind: essay
+    topic: innate
+    prompt: What are the main differences between innate and adaptive immunity?
+    outline:
+      - "Innate": ["Non-specific, present at birth, no change with exposure", "Skin and mucosa; complement and CRP; macrophages, neutrophils, NK cells; monokines", "Bacteria, fungi, worms", "Acts immediately; PAMPs via Toll-like receptors"]
+      - "Adaptive": ["Specific, acquired, increases with exposure", "Mucosal immune system; antibodies; lymphocytes; lymphokines", "Bacteria, viruses, protozoa", "Clonal expansion takes 3–5 days"]
+      - "Links": ["Innate cells act as APCs", "Toll receptors upregulate costimulators needed for T-cell activation"]
+    src: { page: 85, quote: "Does not change in intensity with infection." }
+    status: unverified
+    tags: [book-question]

@@ -18,6 +18,7 @@ use crate::content::Library;
 use crate::hover::BookPage;
 use crate::i18n::case as tx;
 use crate::look::{Css, css};
+use crate::parts::{Collection, Layout, Sort, ViewBar, sort_by};
 
 const CSS: Css = css!("src/case/case.css");
 
@@ -130,35 +131,77 @@ pub fn find_item(id: &str) -> Option<(&'static str, &'static Item)> {
     lec.items.iter().find(|i| i.id == id).map(|i| (lib.title(&lec.lecture), i))
 }
 
+/// The cases and calc-items lists: due first by default, cards by default
+/// (each shows a few lines of its stem), and optionally grouped by lecture.
+const CASES_VIEW: Collection =
+    Collection { key: "cases", layout: Layout::Cards, sorts: &[Sort::Due, Sort::Book], groups: true };
+const CALC_VIEW: Collection =
+    Collection { key: "calc_items", layout: Layout::Cards, sorts: &[Sort::Due, Sort::Book], groups: true };
+
 #[component]
 fn ItemList(kind: &'static str, on_open: EventHandler<String>) -> Element {
     let store = use_case_store();
+    let view = if kind == "case" { CASES_VIEW } else { CALC_VIEW };
+    let pick = view.pick();
     let mut items = items_of(kind, store.as_ref());
-    // Due ones first (#242); the sort is stable, so each part keeps book order.
+    // Due ones first (#242) unless he picked book order; the sort is
+    // stable, so each part keeps book order.
     let due: std::collections::HashSet<String> =
         store.as_ref().map(|s| s.0.borrow().due(now_ms()).into_iter().collect()).unwrap_or_default();
-    items.sort_by_key(|(_, i)| !due.contains(&i.id));
+    sort_by(&mut items, pick.sort, |_| false, |(_, i)| due.contains(&i.id), |(_, i)| first_line(i));
+    // Grouped: one list per lecture, lectures in book order (each keeps the
+    // picked order inside).
+    let mut groups: Vec<(&'static str, Vec<Item>)> = Vec::new();
+    if pick.grouped {
+        let order: Vec<&'static str> = items_in_library(kind).into_iter().map(|(l, _)| l).collect();
+        for (lecture, item) in items {
+            match groups.iter_mut().find(|(l, _)| *l == lecture) {
+                Some((_, v)) => v.push(item),
+                None => groups.push((lecture, vec![item])),
+            }
+        }
+        groups.sort_by_key(|(l, _)| order.iter().position(|o| o == l));
+    } else {
+        groups.push(("", items.into_iter().map(|(_, i)| i).collect()));
+    }
     let empty = if kind == "case" { tx::EMPTY } else { tx::EMPTY_CALC };
+    let lectures: std::collections::HashMap<String, &'static str> =
+        items_in_library(kind).into_iter().map(|(l, i)| (i.id.clone(), l)).collect();
     rsx! {
         if kind == "case" { p { class: "muted", {tx::INTRO} } }
-        if items.is_empty() {
+        if groups.iter().all(|(_, v)| v.is_empty()) {
             p { class: "card muted", {empty} }
+        } else {
+            ViewBar { of: view }
         }
-        ul { class: "case-list",
-            for (lecture, item) in items {
-                li { key: "{item.id}",
-                    button { class: "case-row", dir: "auto", onclick: { let id = item.id.clone(); move |_| on_open.call(id.clone()) },
-                        if due.contains(&item.id) {
-                            span { class: "chip due case-due", {tx::DUE} }
-                        }
-                        bdi { class: "case-row-stem", {first_line(&item)} }
-                        span { class: "muted small", dir: "rtl",
-                            match &item.body {
-                                Body::Case { steps, .. } => rsx! { "{steps.len()} {tx::STEPS} · " },
-                                Body::Calc { calculator, .. } => rsx! { bdi { {batna_core::calc::spec(calculator).map_or("", |s| s.name)} } " · " },
-                                _ => rsx! {},
+        for (lecture , list) in groups {
+            div { key: "{lecture}", class: "case-group",
+                if !lecture.is_empty() {
+                    h3 { class: "coll-group", bdi { "{lecture}" } }
+                }
+                ul { class: "coll case-list", "data-layout": pick.layout.as_str(),
+                    for item in list {
+                        li { key: "{item.id}",
+                            button { class: "coll-btn case-row", onclick: { let id = item.id.clone(); move |_| on_open.call(id.clone()) },
+                                span { class: "coll-main",
+                                    bdi { class: "coll-title case-row-stem", dir: "auto", {first_line(&item)} }
+                                    span { class: "coll-sub", dir: "rtl",
+                                        match &item.body {
+                                            Body::Case { steps, .. } => rsx! { "{steps.len()} {tx::STEPS}" },
+                                            Body::Calc { calculator, .. } => rsx! { bdi { {batna_core::calc::spec(calculator).map_or("", |s| s.name)} } },
+                                            _ => rsx! {},
+                                        }
+                                        if !pick.grouped {
+                                            " · "
+                                            bdi { {lectures.get(&item.id).copied().unwrap_or_default()} }
+                                        }
+                                    }
+                                }
+                                if due.contains(&item.id) {
+                                    span { class: "coll-end", span { class: "chip due case-due", {tx::DUE} } }
+                                }
+                                span { class: "chev", aria_hidden: "true" }
                             }
-                            bdi { "{lecture}" }
                         }
                     }
                 }

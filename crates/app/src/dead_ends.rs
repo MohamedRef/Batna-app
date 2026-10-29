@@ -49,6 +49,10 @@ const TAPPABLE: &[&str] = &[
     "td-pill",
     "ls-now",
     "ls-other",
+    // List screens' items in every layout (parts.css .coll): cards, rows
+    // and compact lines are the same button.
+    "coll-btn",
+    "view-menu-item",
 ];
 
 /// Elements that can be pressed (or, for `div.plan-day`, the plain line of
@@ -532,4 +536,55 @@ fn heroes_open_something() {
         }
     }
     assert!(dead.is_empty(), "heroes that open nothing:\n{}", dead.join("\n"));
+}
+
+/// List screens with a view switcher (parts::ViewBar, 2026-10-29): in every
+/// layout an item is the same `button.coll-btn`, so a card, a row and a
+/// compact line all open what they show. Each `.coll` list takes the
+/// screen's layout, every item in it is a `coll-btn`, every file with
+/// a switcher reads its choice, and parts.css draws all three layouts.
+#[test]
+fn every_view_of_a_list_opens_its_items() {
+    let mut files = Vec::new();
+    sources(&Path::new(env!("CARGO_MANIFEST_DIR")).join("src"), &mut files);
+    let mut bad = Vec::new();
+    let mut lists = 0;
+    for (path, src) in &files {
+        if path.ends_with("dead_ends.rs") {
+            continue;
+        }
+        let lines: Vec<&str> = src.lines().collect();
+        for f in elements(src) {
+            if !f.classes.iter().any(|c| c == "coll") {
+                continue;
+            }
+            lists += 1;
+            let block = lines[f.line - 1..f.end].join("\n");
+            if !lines[f.line - 1].contains("\"data-layout\"") {
+                bad.push(format!("{path}:{}: a .coll list without the screen's data-layout", f.line));
+            }
+            // Items come from a component (LessonRow) or are written inline.
+            let item_component = block.contains("Row {") || block.contains("Card {");
+            if !item_component && !block.contains("coll-btn") {
+                bad.push(format!("{path}:{}: a .coll list whose items aren't coll-btn buttons", f.line));
+            }
+        }
+        for (i, line) in lines.iter().enumerate() {
+            if let Some(at) = line.find("ViewBar { of: ") {
+                let name = line[at + 14..].split([' ', '}']).next().unwrap_or_default();
+                if !src.contains(".pick()") {
+                    bad.push(format!("{path}:{}: ViewBar `{name}` whose choice the list never reads", i + 1));
+                }
+            }
+        }
+    }
+    let parts =
+        std::fs::read_to_string(Path::new(env!("CARGO_MANIFEST_DIR")).join("assets/parts.css")).unwrap();
+    for layout in crate::parts::Layout::ALL {
+        if !parts.contains(&format!("[data-layout=\"{}\"]", layout.as_str())) {
+            bad.push(format!("parts.css draws no `{}` layout", layout.as_str()));
+        }
+    }
+    assert!(lists >= 6, "the scanner should see the list screens' .coll lists, saw {lists}");
+    assert!(bad.is_empty(), "list views that can't open their items:\n{}", bad.join("\n"));
 }

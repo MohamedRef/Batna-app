@@ -17,15 +17,13 @@ const LETTERS: [&str; 5] = ["A", "B", "C", "D", "E"];
 /// The player's footer gate, one slot per step (visited steps stay
 /// mounted). A step whose response is complete but not checked yet puts its
 /// check here; the footer's primary then reads "صحّح" and runs it: one
-/// primary, always in the same place. `hint` says what the step still needs
-/// while Continue is off.
+/// primary, always in the same place.
 #[derive(Clone, Copy)]
 pub struct CheckBar(pub Signal<Vec<Gate>>);
 
 #[derive(Clone, Default, PartialEq)]
 pub struct Gate {
     pub check: Option<Callback<()>>,
-    pub hint: Option<String>,
 }
 
 /// The index of the step a component belongs to.
@@ -58,17 +56,13 @@ fn use_draft() -> (Draft, Callback<Draft>) {
 }
 
 /// Wires a step to the footer: while `can_check` holds, the footer's
-/// primary runs `check`; `hint` explains a disabled Continue.
-pub(super) fn use_check_bar(
-    can_check: impl Fn() -> bool + 'static,
-    hint: impl Fn() -> Option<String> + 'static,
-    check: impl FnMut(()) + 'static,
-) {
+/// primary runs `check`.
+pub(super) fn use_check_bar(can_check: impl Fn() -> bool + 'static, check: impl FnMut(()) + 'static) {
     let Some(CheckBar(mut slots)) = try_use_context::<CheckBar>() else { return };
     let k = try_use_context::<StepAt>().map_or(0, |s| s.0);
     let check = use_callback(check);
     use_effect(move || {
-        let v = Gate { check: can_check().then_some(check), hint: hint() };
+        let v = Gate { check: can_check().then_some(check) };
         if slots.peek().get(k).is_some_and(|g| *g != v) {
             slots.write()[k] = v;
         }
@@ -207,7 +201,6 @@ fn Figure(
 fn Reveal(prompt: String, answer: String, on_answer: EventHandler<bool>) -> Element {
     let (saved, put) = use_draft();
     let mut open = use_signal(|| matches!(saved, Draft::Reveal { open: true }));
-    use_check_bar(|| false, move || (!open()).then(|| tx::REVEAL_FIRST.to_string()), |_| {});
     rsx! {
         div { class: "ls-reveal",
             p { class: "ls-kicker", {tx::THINK} }
@@ -346,7 +339,6 @@ fn Check(
     let mut checked = use_signal(|| checked0);
     use_check_bar(
         move || picked().is_some() && !checked(),
-        move || (picked().is_none() && !checked()).then(|| tx::PICK_FIRST.to_string()),
         move |_| {
             let Some(p) = *picked.peek() else { return };
             checked.set(true);
@@ -360,7 +352,6 @@ fn Check(
         div { class: "ls-check",
             p { class: "ls-kicker", {tx::CHECK} }
             div { class: "ls-q", dir: if is_latin(&question) { "ltr" } else { "rtl" }, Rich { text: question.clone() } }
-            if !checked() { p { class: "muted small", {tx::CHECK_HINT} } }
             div { class: "ls-options", dir: if ltr { "ltr" } else { "rtl" }, role: if checked() { "list" } else { "radiogroup" },
                 for (pos , &i) in order.iter().enumerate() {
                     {
@@ -432,10 +423,6 @@ fn Order(
     };
     use_check_bar(
         move || placed.read().len() == n && !checked(),
-        move || {
-            let left = n - placed.read().len();
-            (left > 0 && !checked()).then(|| tx::left_to_place(left))
-        },
         move |_| {
             let v = placed.peek().clone();
             checked.set(true);
@@ -452,7 +439,6 @@ fn Order(
             p { class: "ls-kicker", {tx::ORDER} }
             div { class: "ls-q", Rich { text: prompt } }
             if !checked() {
-                p { class: "muted small", {tx::ORDER_HINT} }
                 div { class: "ls-order-bar",
                     span { class: "ls-order-count small", role: "status", {tx::placed_of(k, n)} }
                     button {
@@ -568,7 +554,6 @@ fn Match(
     let mut flash = use_signal(|| None::<usize>);
     let mut misses = use_signal(|| misses0);
     let finished = done.read().len() == n;
-    use_check_bar(|| false, move || (done.read().len() < n).then(|| tx::MATCH_FIRST.to_string()), |_| {});
     let mut tap_right = move |r: usize| {
         let Some(l) = left() else { return };
         if l == r {
@@ -664,7 +649,6 @@ fn Sort(
     };
     use_check_bar(
         move || put.read().iter().all(Option::is_some) && !checked(),
-        move || (!put.read().iter().all(Option::is_some) && !checked()).then(|| tx::SORT_FIRST.to_string()),
         move |_| {
             checked.set(true);
             let v = put.peek().clone();
@@ -799,10 +783,6 @@ fn MiniCase(stem: String, steps: Vec<CaseStep>, seed: String, on_answer: EventHa
     });
     use_check_bar(
         move || pick().is_some(),
-        move || {
-            let done = picks.read().iter().all(Option::is_some);
-            (!done && pick().is_none()).then(|| tx::CASE_FIRST.to_string())
-        },
         move |_| {
             let si = *at.peek();
             let Some(p) = *pick.peek() else { return };
@@ -948,10 +928,11 @@ fn Table(title: String, columns: Vec<String>, rows: Vec<Vec<String>>, hide: Vec<
 }
 
 /// A question answered before its response was saved (an older version of
-/// the app), or whose content changed since: the result he got and the
-/// answer key, read-only. Never an empty task with Continue already on.
+/// the app), or whose content changed since: the answer key, read-only,
+/// with "حاول تاني" under it (player.rs). Never an empty task with Continue
+/// already on, and no explanatory notes (Mohamed, 2026-10-29).
 #[component]
-pub fn AnsweredBefore(body: StepBody, right: bool) -> Element {
+pub fn AnsweredBefore(body: StepBody) -> Element {
     let (kicker, prompt) = match &body {
         StepBody::Check { question, .. } => (tx::CHECK, question.clone()),
         StepBody::Order { prompt, .. } => (tx::ORDER, prompt.clone()),
@@ -1010,12 +991,6 @@ pub fn AnsweredBefore(body: StepBody, right: bool) -> Element {
         div { class: "ls-before",
             p { class: "ls-kicker", {kicker} }
             div { class: "ls-q", Rich { text: prompt } }
-            p { class: if right { "ls-verdict good" } else { "ls-verdict" }, role: "status",
-                {tx::BEFORE}
-                " "
-                {if right { tx::BEFORE_RIGHT } else { tx::BEFORE_WRONG }}
-            }
-            p { class: "muted small", {tx::BEFORE_HINT} }
             p { class: "ls-kicker", {tx::KEY} }
             {key}
         }

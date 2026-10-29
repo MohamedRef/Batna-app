@@ -75,6 +75,26 @@ pub fn search() -> Element {
     stroke("M10.5 4a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM15.5 15.5 20 20")
 }
 
+/// A Settings section's icon, by its id (`settings::Section::id`).
+pub fn section(id: &str) -> Element {
+    stroke(match id {
+        // A card stack: review.
+        "study" => "M5 8h14v11H5zM7 5h10M9 2.5h6",
+        "reminders" => "M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15zM10 20.5a2 2 0 0 0 4 0",
+        "sync" => "M7 18a4.5 4.5 0 0 1-.5-8.97A6 6 0 0 1 18 9.5a4 4 0 0 1-1 8.5z",
+        "look" => {
+            "M12 3a9 9 0 1 0 0 18c1.2 0 1.8-.9 1.4-2l-.4-1a1.6 1.6 0 0 1 1.5-2.2H17a4 4 0 0 0 4-4C21 6.5 17 3 12 3zM7.5 11.5h.01M10 7.5h.01M15 7.5h.01"
+        }
+        "tablet" => "M6 3h12a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zM11 18h2",
+        "mac" => "M3 6h18v11H3zM6 9.5h1M9.5 9.5h1M13 9.5h1M16.5 9.5h1M7.5 13.5h9",
+        "data" => {
+            "M3 6.5a1.5 1.5 0 0 1 1.5-1.5H9l2 2h8.5A1.5 1.5 0 0 1 21 8.5v9a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"
+        }
+        "updates" => "M12 4v11M7.5 10.5 12 15l4.5-4.5M5 19.5h14",
+        _ => "M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 11v5M12 8h.01",
+    })
+}
+
 /// A page-turn arrow. The app is right to left, so "next" points left.
 pub fn chevron(next: bool) -> Element {
     stroke(if next { "M15 5l-7 7 7 7" } else { "M9 5l7 7-7 7" })

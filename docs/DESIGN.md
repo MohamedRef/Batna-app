@@ -102,10 +102,22 @@ Radii: `--radius-control` 13px, `--radius-card` 18px (22px Glossy),
 | Segmented | `div.segmented[role=radiogroup] > button[role=radio]` | |
 | Switch | `label > … + input[type=checkbox][role=switch]` | |
 | Choice list | `div.choice-list[role=radiogroup] > button.choice[role=radio]` | Settings-style pickers. |
+| View switcher | `parts::ViewBar { of: Collection }` → `div.view-bar > div.view-sort? + div.view-seg[role=radiogroup]` | Cards / list / compact plus the screen's orders (and "by lecture" groups where offered). Saved per screen on this device (local setting `view.<key>`). `BATNA_VIEW=cards\|list\|compact` forces a layout for screenshots. |
+| Collection | `ul.coll[data-layout] > li > button.coll-btn > span.coll-lead(.coll-badge) + span.coll-main(.coll-title + .coll-sub + .coll-extra) + span.coll-end + span.chev`, `h3.coll-group` | One markup, three looks. Compact hides `.coll-sub`/`.coll-extra`/`.coll-when-roomy` and shows `.coll-when-compact`. Test: `every_view_of_a_list_opens_its_items`. |
 
 No dead UI: anything that looks tappable opens what it shows.
 `crates/app/src/dead_ends.rs` lists the tappable-looking classes; add a new
 one there when you make it.
+
+### List screens
+
+Every screen that lists things (lessons, other lectures, a lecture's
+lessons, References, cases and calc items) has a view switcher, like a
+Files app: cards, a list, or a compact list, and an order (book order,
+what's left first, by name, due first: each screen offers the ones that
+mean something). A new list screen declares a `parts::Collection`, puts a
+`ViewBar` above its `ul.coll`, and builds its items from the collection
+markup so all three layouts work without per-layout code.
 
 ## Shell and navigation
 

@@ -144,6 +144,8 @@ pub fn LecturePage(id: String) -> Element {
     };
     let lecture = lib.lectures.get(&id);
     let lessons = lib.lessons.get(&id);
+    let crate::parts::ViewPick { layout: lesson_layout, sort: lesson_sort, .. } =
+        crate::learn::LECTURE_PAGE_VIEW.pick();
     let data = StudyData::load(&*review.backend.borrow());
     let stats = data.stats().into_iter().find(|l| l.id == id);
     let (due, playable, mcqs, cases) = {
@@ -240,9 +242,10 @@ pub fn LecturePage(id: String) -> Element {
                         {tx::LESSONS}
                         span { class: "muted small", " · {done_lessons} {tx::OF} {file.lessons.len()}" }
                     }
-                    ol { class: "ls-cards",
-                        for (i , l) in file.lessons.iter().enumerate() {
-                            crate::learn::LessonCard { key: "{l.id}", n: i + 1, lesson: l.clone() }
+                    crate::parts::ViewBar { of: crate::learn::LECTURE_PAGE_VIEW }
+                    ol { class: "coll ls-cards", "data-layout": lesson_layout.as_str(),
+                        for (n , l) in crate::learn::numbered(&file.lessons, lesson_sort) {
+                            crate::learn::LessonCard { key: "{l.id}", n, lesson: l.clone() }
                         }
                     }
                 }

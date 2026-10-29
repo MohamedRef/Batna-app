@@ -15,24 +15,16 @@
 .update { border-inline-start: 3px solid var(--accent); padding-inline-start: var(--sp-2); }
 
 /* ---------- lists ---------- */
-.case-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-2); }
-@media (min-width: 600px) { .case-list { grid-template-columns: 1fr 1fr; } }
-@media (min-width: 1100px) { .case-list { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-.case-row {
-  inline-size: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: var(--sp-1);
-  text-align: start;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: var(--sp-3);
-  cursor: pointer;
-}
-.case-row-stem { overflow-wrap: anywhere; }
-.case-due { align-self: flex-start; }
+/* A lecture's group (grouped view): its head, then its list. */
+.case-group { display: flex; flex-direction: column; gap: var(--sp-2); flex-shrink: 0; }
+/* The shared .coll layouts (parts.css); a case's stem reads as text, not a title. */
+.case-row .coll-title { font-weight: 500; }
+.coll[data-layout="cards"] .case-row .coll-title { display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+.coll[data-layout="list"] .case-row .coll-title { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.coll[data-layout="cards"] .case-row .coll-main { padding-inline-end: var(--sp-4); }
+.coll[data-layout="cards"].case-list { grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 600px) { .coll[data-layout="cards"].case-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1100px) { .coll[data-layout="cards"].case-list { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 
 /* ---------- players ---------- */
 .player { display: flex; flex-direction: column; gap: var(--sp-3); }

@@ -1,0 +1,1803 @@
+schema: batna.content/v1
+lecture: hem.L09
+title: "Myeloproliferative Neoplasms"
+author: "Prof. Nadia Zaki"
+book: { chapter: 4, pages: [133, 155] }
+topics:
+  - { id: mpn, title: "MPNs: definition, the classical three and driver mutations" }
+  - { id: et-diagnosis, title: "ET: epidemiology and WHO criteria" }
+  - { id: et-complications, title: "ET: thrombosis, bleeding, spleen and transformation" }
+  - { id: thrombocytosis, title: "Reactive thrombocytosis and the approach to a high platelet count" }
+  - { id: et-treatment, title: "ET: risk groups and drugs" }
+  - { id: et-pregnancy, title: "ET and pregnancy" }
+  - { id: pmf-biology, title: "PMF: prognosis among MPNs and pathophysiology" }
+  - { id: pmf-criteria, title: "PMF: WHO criteria and differential of marrow fibrosis" }
+  - { id: pmf-clinical, title: "PMF: clinical picture" }
+  - { id: pmf-tests, title: "PMF: blood film and bone marrow" }
+  - { id: pmf-prognosis, title: "PMF: survival, IPSS and mutations" }
+  - { id: pmf-treatment, title: "PMF: transplant, ruxolitinib, anemia and spleen" }
+items:
+  # ---------- p133-134: MPNs and driver mutations ----------
+  - id: hem.L09.001
+    kind: card
+    topic: mpn
+    front: Define the myeloproliferative neoplasms (MPNs).
+    back: Clonal disorders of hemopoietic stem cells that increase the numbers of one or more mature blood cell progeny.
+    src: { page: 133, quote: "clonal disorders of hemopoietic stem cells that lead to an increase in the numbers of one or more mature blood cell progeny." }
+    status: unverified
+    tags: [high-yield, book-question]
+  - id: hem.L09.002
+    kind: enumerate
+    topic: mpn
+    prompt: Enumerate the classical BCR/ABL-negative myeloproliferative neoplasms.
+    points: [Polycythemia vera (PV), Essential thrombocythemia (ET), Primary myelofibrosis (PMF)]
+    pass: 3
+    src: { page: 133, quote: "Polycythemia vera (PV) Essential thrombocythemia (ET) Primary myelofibrosis (PMF)" }
+    status: unverified
+    tags: [high-yield, book-question]
+  - id: hem.L09.003
+    kind: cloze
+    topic: mpn
+    text: "PV, ET and PMF were first grouped together by {{c1::William Dameshek}} in {{c2::1951}}."
+    src: { page: 133, quote: "Three related disorders originally grouped together by William Dameshek in 1951." }
+    status: unverified
+  - id: hem.L09.004
+    kind: card
+    topic: mpn
+    front: What do PV, ET and PMF share, and how can they change over time?
+    back: They share clinical, morphological and molecular features. They can transform into one another and, to varying degrees, into acute myeloid leukemia (AML).
+    src: { page: 133, quote: "can transform, in their course, into one another. They also have, to varying degrees, the potential to transform into acute myeloid leukemia (AML)." }
+    status: unverified
+    tags: [high-yield, book-question]
+  - id: hem.L09.005
+    kind: cloze
+    topic: mpn
+    text: "The JAK2 V617F mutation is found in about {{c1::half (55%)}} of ET, about {{c2::half}} of PMF and {{c3::nearly all}} cases of PV."
+    src: { page: 133, quote: "Approximately half the cases of ET carry the JAK2 V617F mutation (55%), as do half the cases of PMF and nearly all cases of PV." }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: hem.L09.006
+    kind: cloze
+    topic: mpn
+    text: "Many JAK2-unmutated ET or PMF patients carry mutations in {{c1::calreticulin (CALR)}} (about {{c2::30%}}); a small proportion (about {{c3::5%}}) carry MPL mutations."
+    src: { page: 133, quote: "Many JAK2-unmutated patients with ET or PMF harbor mutations in calreticulin (CALR) (30%) and a small proportion (5%) carry mutations of the thrombopoietin receptor (MPL)." }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: hem.L09.007
+    kind: card
+    topic: mpn
+    front: Which protein does the MPL gene encode?
+    back: The thrombopoietin (TPO) receptor.
+    src: { page: 133, quote: "a small proportion (5%) carry mutations of the thrombopoietin receptor (MPL)." }
+    status: unverified
+  - id: hem.L09.008
+    kind: cloze
+    topic: mpn
+    text: "The JAK2 gene lies on the {{c1::short (p) arm of chromosome 9}} at position 24 ({{c2::9p24}})."
+    src: { page: 134, quote: "It is located on the short (p) arm of chromosome 9 at position 24. (9p24)" }
+    status: unverified
+  - id: hem.L09.009
+    kind: table
+    topic: mpn
+    title: Driver mutations in the classical MPNs
+    columns: [MPN, JAK2 V617F, CALR, MPL]
+    rows:
+      - [PV, Nearly all, "–", "–"]
+      - [ET, "About half (55%)", "About 30% (JAK2-unmutated cases)", "About 5%"]
+      - [PMF, About half, "Many of the JAK2-unmutated", "A smaller number"]
+    blanks: [[0, 1], [1, 1], [1, 2], [1, 3], [2, 1]]
+    src: { page: 133, quote: "Approximately half the cases of ET carry the JAK2 V617F mutation (55%), as do half the cases of PMF and nearly all cases of PV." }
+    status: unverified
+    tags: [high-yield, book-question]
+  - id: hem.L09.010
+    kind: mcq
+    topic: mpn
+    stem: A 58-year-old man has a raised hematocrit, and a driver mutation is found. Which mutation is present in nearly all cases of this MPN?
+    options:
+      - JAK2 V617F
+      - CALR
+      - MPL
+      - BCR-ABL1
+      - No driver mutation is usually found
+    answer: 0
+    why:
+      - "Correct: nearly all PV carries JAK2 V617F (p133)."
+      - CALR mutations occur in JAK2-unmutated ET or PMF, not PV.
+      - MPL (TPO receptor) mutations are in a small share of ET and PMF.
+      - BCR-ABL1 defines CML, which is excluded from the BCR/ABL-negative MPNs.
+      - Triple-negative disease is an ET or PMF problem, not PV.
+    src: { page: 133, quote: "as do half the cases of PMF and nearly all cases of PV." }
+    status: unverified
+  # ---------- p135-136: ET epidemiology and WHO criteria ----------
+  - id: hem.L09.011
+    kind: cloze
+    topic: et-diagnosis
+    text: "The annual incidence of ET is about {{c1::1.5–2.0 per 100,000}}, similar to that of {{c2::PV}}."
+    src: { page: 135, quote: "The annual incidence of ET is similar to that of PV at around 1.5–2.0 cases per 100,000 of the population." }
+    status: unverified
+    tags: [numbers]
+  - id: hem.L09.012
+    kind: cloze
+    topic: et-diagnosis
+    text: "Median age at onset of ET is {{c1::50–55 years}}, with a small second peak in {{c2::women of reproductive age}}; it is rare in {{c3::childhood}}."
+    src: { page: 135, quote: "The median age at onset is 50–55 years, with a small second peak in women of reproductive age" }
+    status: unverified
+    tags: [numbers]
+  - id: hem.L09.013
+    kind: enumerate
+    topic: et-diagnosis
+    prompt: Enumerate the WHO major criteria for essential thrombocythemia.
+    points:
+      - "Platelet count ≥450 × 10⁹/L"
+      - "Bone marrow: proliferation mainly of the megakaryocyte lineage, with enlarged mature hyperlobulated megakaryocytes"
+      - "Not meeting WHO criteria for BCR-ABL1+ CML, PV, PMF, MDS or other myeloid neoplasms"
+      - "Presence of a JAK2, CALR or MPL mutation"
+    pass: 4
+    src: { page: 135, quote: "Major criteria: 1. Platelet count equal to or greater than 450 x 10⁹/uL" }
+    status: unverified
+    tags: [high-yield, book-question]
+  - id: hem.L09.014
+    kind: cloze
+    topic: et-diagnosis
+    text: "The first WHO major criterion for ET is a platelet count of {{c1::≥450 × 10⁹/L}}."
+    src: { page: 135, quote: "Platelet count equal to or greater than 450 x 10⁹/uL" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: hem.L09.015
+    kind: card
+    topic: et-diagnosis
+    front: What does the bone marrow biopsy show in ET (WHO major criterion 2)?
+    back: Proliferation mainly of the megakaryocyte lineage, with increased numbers of enlarged mature megakaryocytes with hyperlobulated nuclei; no significant increase or left shift of granulopoiesis or erythropoiesis; very rarely a minor increase in reticulin fibres.
+    src: { page: 135, quote: "megakaryocyte lineage with increased numbers of enlarged, mature megakaryocytes with hyperlobulated nuclei." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L09.016
+    kind: card
+    topic: et-diagnosis
+    front: Which disorders must be excluded under WHO major criterion 3 for ET?
+    back: BCR-ABL1+ CML, PV, PMF, myelodysplastic syndromes and other myeloid neoplasms.
+    src: { page: 135, quote: "CML, PV, PMF, myelodysplastic syndromes, or other myeloid neoplasms" }
+    status: unverified
+  - id: hem.L09.017
+    kind: card
+    topic: et-diagnosis
+    front: What is the WHO minor criterion for ET?
+    back: Presence of a clonal marker, or absence of evidence for reactive thrombocytosis.
+    src: { page: 135, quote: "Presence of a clonal marker or absence of evidence for reactive thrombocytosis" }
+    status: unverified
+  - id: hem.L09.018
+    kind: cloze
+    topic: et-diagnosis
+    text: "ET is diagnosed with {{c1::all four major criteria}}, or {{c2::the first three major criteria plus the minor criterion}}."
+    src: { page: 135, quote: "Diagnosis of ET requires meeting all four major criteria or the first three major criteria and one of the minor criteria" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L09.019
+    kind: mcq
+    topic: et-diagnosis
+    stem: "A 52-year-old woman has platelets of 780 × 10⁹/L on three counts. Marrow shows clusters of enlarged hyperlobulated megakaryocytes with normal granulopoiesis. BCR-ABL1, JAK2, CALR and MPL are all negative. Ferritin, CRP and ESR are normal and there is no infection, bleeding or malignancy. What is the diagnosis?"
+    options:
+      - Essential thrombocythemia
+      - ET cannot be diagnosed without a driver mutation
+      - Reactive thrombocytosis
+      - Primary myelofibrosis
+      - Chronic myeloid leukemia
+    answer: 0
+    why:
+      - "Correct: the first three major criteria plus the minor criterion (no evidence of reactive thrombocytosis) are enough (p135)."
+      - The minor criterion replaces the mutation criterion; triple-negative ET is a diagnosis of exclusion.
+      - Iron, inflammation, infection, bleeding and malignancy have been excluded.
+      - PMF needs megakaryocyte atypia with grade 2–3 fibrosis; granulopoiesis is normal here.
+      - BCR-ABL1 is negative.
+    src: { page: 135, quote: "Diagnosis of ET requires meeting all four major criteria or the first three major criteria and one of the minor criteria" }
+    status: unverified
+  # ---------- p136-138: ET complications and transformation ----------
+  - id: hem.L09.020
+    kind: card
+    topic: et-complications
+    front: What is the main cause of morbidity and mortality in ET?
+    back: Thrombotic complications.
+    src: { page: 136, quote: "Thrombotic complications The main cause of morbidity and mortality in ET." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L09.021
+    kind: cloze
+    topic: et-complications
+    text: "Thromboses are present in about {{c1::15–20%}} of ET patients at presentation and may be {{c2::arterial or venous}}."
+    src: { page: 136, quote: "Thromboses are present in around 15–20% of patients at presentation and may be arterial or venous." }
+    status: unverified
+    tags: [numbers]
+  - id: hem.L09.022
+    kind: card
+    topic: et-complications
+    front: How do splanchnic thromboses in ET compare with PV, and what are they linked to?
+    back: They are probably less frequent than in PV and are strongly correlated with the JAK2 V617F mutation.
+    src: { page: 136, quote: "the frequency of splanchnic thromboses is probably lower and strongly correlated with presence of the JAK2 V617F mutation." }
+    status: unverified
+  - id: hem.L09.023
+    kind: enumerate
+    topic: et-complications
+    prompt: Enumerate the risk factors for thrombosis in ET.
+    points:
+      - Age over 60 years
+      - Prior history of thrombosis
+      - "Cardiovascular risk factors: diabetes, hyperlipidemia, hypertension, smoking"
+      - White cell count at diagnosis
+      - Reticulin levels at diagnosis
+    pass: 4
+    src: { page: 136, quote: "Age over 60 years Prior history of thrombosis." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L09.024
+    kind: cloze
+    topic: et-complications
+    text: "Bleeding in ET is more common with platelets above {{c1::1000 × 10⁹/L}}, partly because of an {{c2::acquired von Willebrand disease}}."
+    src: { page: 137, quote: "platelet counts above 1000 X10⁹/L and, in at least some cases, this is due to an acquired von Willebrand disease" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: hem.L09.025
+    kind: card
+    topic: et-complications
+    front: How do very high platelet counts cause acquired von Willebrand disease in ET?
+    back: High-molecular-weight von Willebrand multimers adsorb onto the surface of the excess platelets, so circulating levels fall.
+    src: { page: 137, quote: "a decrease in circulating high-molecular-weight multimers caused by adsorption to the surface of the excessive platelets." }
+    status: unverified
+  - id: hem.L09.026
+    kind: cloze
+    topic: et-complications
+    text: "Splenomegaly is present in about {{c1::10–20%}} of ET patients at diagnosis and is rarely more than {{c2::mild}}."
+    src: { page: 137, quote: "Splenomegaly is present in about 10-20% of ET patients at diagnosis and it is rarely more than mild." }
+    status: unverified
+    tags: [numbers]
+  - id: hem.L09.027
+    kind: card
+    topic: et-complications
+    front: What should progressive enlargement of the spleen during ET raise suspicion of?
+    back: Evolving myelofibrosis.
+    src: { page: 137, quote: "Progressive enlargement of the spleen during the course of ET should raise suspicion of evolving myelofibrosis." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L09.028
+    kind: card
+    topic: et-complications
+    front: Why can some ET patients develop splenic atrophy?
+    back: Silent microinfarcts in the splenic microcirculation. Frank hyposplenism and its complications are rare.
+    src: { page: 137, quote: "some patients with ET develop splenic atrophy secondary to silent microinfarcts in the splenic microcirculation." }
+    status: unverified
+  - id: hem.L09.029
+    kind: cloze
+    topic: et-complications
+    text: "Post-ET myelofibrosis occurs in {{c1::10%}} of ET patients; transformation to PV is much rarer, {{c2::1–2% over 10 years}}."
+    src: { page: 137, quote: "occurs in 10% of ET patients while transformation to PV is much less common with an incidence of 1-2% over 10 years" }
+    status: unverified
+    tags: [high-yield, numbers, book-question]
+  - id: hem.L09.030
+    kind: card
+    topic: et-complications
+    front: With which ET drug does reticulin fibrosis progress more?
+    back: Anagrelide.
+    src: { page: 137, quote: "can be influenced by choice of therapy, being more marked in patients treated with anagrelide." }
+    status: unverified
+  - id: hem.L09.031
+    kind: card
+    topic: et-complications
+    front: Can ET evolve into MDS or AML, and what increases the risk?
+    back: Yes, rarely, even when untreated. Cytogenetic abnormalities and treatment with alkylating agents increase the risk.
+    src: { page: 137, quote: "The presence of cytogenetic abnormalities and treatment with alkylating agents increase this risk." }
+    status: unverified
+    tags: [book-question]
+  - id: hem.L09.032
+    kind: cloze
+    topic: et-complications
+    text: "About {{c1::3%}} of ET patients treated with hydroxycarbamide alone develop MDS or AML over a median follow-up of {{c2::8 years}}."
+    src: { page: 138, quote: "(hydroxyurea) alone develop MDS or AML if followed for a median time of 8 years." }
+    status: unverified
+    tags: [numbers]
+  - id: hem.L09.033
+    kind: card
+    topic: et-complications
+    front: Does hydroxycarbamide as a single agent increase the leukemia risk in ET?
+    back: No data show a significant increase over the disease's own risk, but a small effect cannot be excluded.
+    src: { page: 138, quote: "there are no data that demonstrates that hydroxycarbamide as a single agent significantly increases the risk of leukemia" }
+    status: unverified
+  - id: hem.L09.034
+    kind: mcq
+    topic: et-complications
+    stem: "A 66-year-old man with ET for 12 years now has a spleen 8 cm below the costal margin (it was not palpable before), Hb 10.1 g/dL and teardrop cells on the film. What is the most likely explanation?"
+    options:
+      - Post-ET myelofibrosis
+      - Transformation to polycythemia vera
+      - Splenic atrophy from microinfarcts
+      - Acquired von Willebrand disease
+      - Expected course of stable ET
+    answer: 0
+    why:
+      - "Correct: progressive splenic enlargement in ET suggests evolving myelofibrosis, which occurs in 10% (p137)."
+      - PV would raise the red cell mass, not cause anemia with teardrops.
+      - Microinfarcts shrink the spleen; they do not enlarge it.
+      - Acquired vWD causes bleeding with very high platelets, not splenomegaly.
+      - Splenomegaly in ET is rarely more than mild; progressive enlargement is not expected.
+    src: { page: 137, quote: "Progressive enlargement of the spleen during the course of ET should raise suspicion of evolving myelofibrosis." }
+    status: unverified
+  - id: hem.L09.035
+    kind: mcq
+    topic: et-complications
+    stem: "A 45-year-old woman with ET has platelets of 1,650 × 10⁹/L and new gum bleeding and bruising. Which mechanism best explains the bleeding?"
+    options:
+      - Adsorption of large von Willebrand multimers onto the excess platelets
+      - Immune thrombocytopenia
+      - Splenic sequestration of platelets
+      - Vitamin K deficiency
+      - Hyposplenism
+    answer: 0
+    why:
+      - "Correct: above 1000 × 10⁹/L, bleeding is often an acquired von Willebrand disease from multimer adsorption (p137)."
+      - Her platelet count is very high, not low.
+      - Splenomegaly in ET is usually mild and would not cause bleeding with this count.
+      - Nothing suggests a coagulation factor deficiency.
+      - Hyposplenism raises infection risk; it does not cause bleeding.
+    src: { page: 137, quote: "a decrease in circulating high-molecular-weight multimers caused by adsorption to the surface of the excessive platelets." }
+    status: unverified
+  # ---------- p138-139: investigations and reactive thrombocytosis ----------
+  - id: hem.L09.036
+    kind: cloze
+    topic: thrombocytosis
+    text: "A JAK2 V617F, CALR or MPL mutation gives a positive diagnostic criterion in about {{c1::80–90%}} of ET patients."
+    src: { page: 138, quote: "provides a very useful positive diagnostic criterion for approximately 80–90% of ET patients." }
+    status: unverified
+    tags: [numbers]
+  - id: hem.L09.037
+    kind: card
+    topic: thrombocytosis
+    front: How is ET diagnosed in triple-negative patients?
+    back: As a diagnosis of exclusion, after other clonal blood disorders and reactive thrombocytosis have been ruled out.
+    src: { page: 138, quote: "for so-called triple-negative patients, ET remains a diagnosis of exclusion" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L09.038
+    kind: card
+    topic: thrombocytosis
+    front: What is the most common cause of thrombocytosis, and its mechanism?
+    back: Reactive thrombocytosis, from raised circulating cytokines that stimulate thrombopoiesis.
+    src: { page: 138, quote: "Thrombocytosis is most commonly reactive and secondary to increased levels of circulating cytokines that stimulate thrombopoiesis." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L09.039
+    kind: card
+    topic: thrombocytosis
+    front: Can reactive thrombocytosis exceed 1000 × 10⁹/L, and does it always come with a raised ESR or CRP?
+    back: Yes, occasionally it exceeds 1000 × 10⁹/L. ESR or CRP is usually raised, but not always.
+    src: { page: 138, quote: "occasionally, the platelet count can be greater than 1000 X10⁹/L. There is usually evidence of on-going inflammation in the form of ↑ESR or CRP" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L09.040
+    kind: table
+    topic: thrombocytosis
+    title: Causes of reactive thrombocytosis
+    columns: [Group, Examples]
+    rows:
+      - [Iron deficiency, "–"]
+      - [Blood loss, "Acute or chronic"]
+      - [Hyposplenism, "Including splenectomy"]
+      - [Surgery, "–"]
+      - [Acute bacterial infection, "Pneumonia, septicaemia, meningitis, diverticular abscess"]
+      - [Chronic inflammation, "Vasculitides, IBD, connective tissue disorders, rheumatoid arthritis, chronic infections"]
+      - [Malignancies, "–"]
+      - [Rebound thrombocytosis, "After treatment of ITP; recovery from chemotherapy"]
+      - [Drugs, Vincristine]
+    blanks: [[1, 1], [4, 1], [5, 1], [7, 1], [8, 1]]
+    src: { page: 139, quote: "Rebound thrombocytosis Following treatment of immune thrombocytopenic purpura Recovery from chemotherapy" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L09.041
+    kind: enumerate
+    topic: thrombocytosis
+    prompt: Enumerate the causes of reactive thrombocytosis.
+    points: [Iron deficiency, Blood loss (acute or chronic), Hyposplenism or splenectomy, Surgery, Acute bacterial infection, Chronic inflammation, Malignancies, Rebound thrombocytosis, Drugs (vincristine)]
+    pass: 6
+    src: { page: 139, quote: "Iron deficiency Blood loss (acute or chronic) Hyposplenism/splenectomy Surgery" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L09.042
+    kind: cloze
+    topic: thrombocytosis
+    text: "Rebound thrombocytosis follows {{c1::treatment of immune thrombocytopenic purpura}} and {{c2::recovery from chemotherapy}}; the drug listed as a cause is {{c3::vincristine}}."
+    src: { page: 139, quote: "Rebound thrombocytosis Following treatment of immune thrombocytopenic purpura Recovery from chemotherapy" }
+    status: unverified
+  - id: hem.L09.043
+    kind: order
+    topic: thrombocytosis
+    prompt: Order the approach to a platelet count above 450,000/µL (book algorithm).
+    steps:
+      - "Ask about a life-long or family history of thrombocytosis (yes: inherited, test THPO/MPL)"
+      - "History, examination, blood smear, ESR/CRP"
+      - "Is an underlying reactive disorder present? (yes: treat it; platelets should normalize)"
+      - "If not: BCR-ABL, JAK2, bone marrow and cytogenetics"
+      - "BCR-ABL+ = CML; JAK2+ = MPN; both negative = evaluate for MPN or MDS"
+    src: { page: 139, quote: "Is an underlying reactive disorder present?" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L09.044
+    kind: card
+    topic: thrombocytosis
+    front: "Thrombocytosis with a life-long or family history: likely diagnosis and test?"
+    back: Inherited thrombocytosis; consider testing for THPO or MPL mutations.
+    src: { page: 139, quote: "Inherited thrombocytosis likely Consider testing for THPO/MPL mutations" }
+    status: unverified
+  - id: hem.L09.045
+    kind: card
+    topic: thrombocytosis
+    front: In the clonal work-up of thrombocytosis, what do the BCR-ABL and JAK2 results mean?
+    back: "BCR-ABL positive: CML. JAK2 positive: an MPN (PV, ET or MF). Both negative: evaluate for MPN or MDS."
+    src: { page: 139, quote: "Evaluate for clonal thrombocytosis. BCR–ABL, JAK2 testing, bone marrow evaluation, cytogenetics." }
+    status: unverified
+  - id: hem.L09.046
+    kind: mcq
+    topic: thrombocytosis
+    stem: "A 38-year-old woman with heavy periods has platelets of 690 × 10⁹/L, Hb 9.8 g/dL, MCV 71 fL and ferritin 6 ng/mL. She has no splenomegaly. What is the best next step?"
+    options:
+      - Treat the iron deficiency and recheck the platelet count
+      - Start hydroxycarbamide
+      - Bone marrow biopsy now
+      - Start low-dose aspirin for ET
+      - Test THPO and MPL for inherited thrombocytosis
+    answer: 0
+    why:
+      - "Correct: a reactive cause (iron deficiency, blood loss) is present; the count should normalize once it is treated (p139)."
+      - Cytoreduction is for clonal disease, not reactive thrombocytosis.
+      - Marrow and clonal tests come only if no reactive cause is found or the count fails to normalize.
+      - ET has not been diagnosed.
+      - There is no life-long or family history.
+    src: { page: 139, quote: "Is an underlying reactive disorder present?" }
+    status: unverified
+  - id: hem.L09.047
+    kind: mcq
+    topic: thrombocytosis
+    stem: "A 70-year-old man recovering from lobar pneumonia has platelets of 1,080 × 10⁹/L and a CRP of 140 mg/L. Which statement is correct?"
+    options:
+      - Reactive thrombocytosis can occasionally exceed 1000 × 10⁹/L
+      - A count above 1000 × 10⁹/L proves an MPN
+      - Reactive thrombocytosis always has a normal CRP
+      - He needs urgent hydroxycarbamide
+      - Infection lowers, never raises, the platelet count
+    answer: 0
+    why:
+      - "Correct: reactive thrombocytosis can be marked and occasionally exceed 1000 × 10⁹/L (p138)."
+      - Very high counts also occur in reactive states.
+      - ESR or CRP is usually raised in reactive thrombocytosis.
+      - Treat the cause and recheck; cytoreduction is not indicated.
+      - Acute bacterial infection is a listed cause of reactive thrombocytosis.
+    src: { page: 138, quote: "Reactive thrombocytosis can sometimes be marked and, occasionally, the platelet count can be greater than 1000 X10⁹/L." }
+    status: unverified
+  # ---------- p140-143: ET treatment ----------
+  - id: hem.L09.048
+    kind: card
+    topic: et-treatment
+    front: On what basis are ET patients stratified, and into which groups?
+    back: Age and risk of vascular complications; low, intermediate and high risk.
+    src: { page: 140, quote: "Based on their age and risk of vascular complications, patients may be stratified into:" }
+    status: unverified
+  - id: hem.L09.049
+    kind: table
+    topic: et-treatment
+    title: ET risk groups and first treatment (book)
+    columns: [Risk, Who, Treatment]
+    rows:
+      - [High, "Over 60, or one high-risk feature (platelets ≥1500 × 10⁹/L, prior thrombosis, diabetes or hypertension)", Hydroxyurea plus aspirin]
+      - [Intermediate, "40–60 years, no high-risk feature", Aspirin alone or hydroxycarbamide plus aspirin]
+      - [Low, "Under 40, no high-risk feature", "Low-dose aspirin alone (unless contraindicated or platelets >1000 × 10⁹/L)"]
+    blanks: [[0, 1], [0, 2], [1, 1], [2, 1], [2, 2]]
+    src: { page: 140, quote: "High-risk patients are those; Over 60 years old With one or more high-risk features:" }
+    status: unverified
+    tags: [high-yield, book-question]
+    update:
+      text: "The European LeukemiaNet uses the revised IPSET-thrombosis score instead (age over 60, prior thrombosis, JAK2 V617F): very low, low, intermediate and high risk. Answer with the book's three groups in the exam."
+      ref: "European LeukemiaNet MPN recommendations 2018 (revised IPSET-thrombosis)"
+  - id: hem.L09.050
+    kind: enumerate
+    topic: et-treatment
+    prompt: Enumerate what makes an ET patient high risk.
+    points:
+      - Age over 60
+      - "Platelet count ≥1500 × 10⁹/L"
+      - Prior history of thrombosis
+      - "Significant thrombotic risk factors (diabetes, hypertension)"
+    pass: 4
+    src: { page: 140, quote: "A platelet count ≥1500 × 10⁹/L A prior history of thrombosis" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L09.051
+    kind: cloze
+    topic: et-treatment
+    text: "High-risk ET means age over {{c1::60}} or a high-risk feature such as a platelet count of {{c2::≥1500 × 10⁹/L}}."
+    src: { page: 140, quote: "Over 60 years old With one or more high-risk features: A platelet count ≥1500 × 10⁹/L" }
+    status: unverified
+    tags: [numbers]
+  - id: hem.L09.052
+    kind: card
+    topic: et-treatment
+    front: What does controlling the platelet count with hydroxyurea achieve in high-risk ET?
+    back: Fewer thrombotic events compared with no cytoreductive therapy.
+    src: { page: 140, quote: "In high-risk patients, control of the platelet count with hydroxyurea reduces thrombotic events compared to no cytoreductive therapy." }
+    status: unverified
+  - id: hem.L09.053
+    kind: card
+    topic: et-treatment
+    front: "Hydroxycarbamide (hydroxyurea): route, tolerance and effect on the counts?"
+    back: Oral and generally very well tolerated; it lowers the hematocrit, leukocyte count and platelet count.
+    src: { page: 140, quote: "Orally bioavailable and generally very well tolerated, and it will reduce the hematocrit, leukocyte count and platelet count." }
+    status: unverified
+  - id: hem.L09.054
+    kind: card
+    topic: et-treatment
+    front: What are the commonest complications of hydroxycarbamide and how are they avoided?
+    back: Dose-dependent leukopenia or thrombocytopenia, avoided by close monitoring of the blood count when the drug is started.
+    src: { page: 140, quote: "The commonest complications are leukopenia or thrombocytopenia, which are dose dependent" }
+    status: unverified
+  - id: hem.L09.055
+    kind: enumerate
+    topic: et-treatment
+    prompt: Enumerate the other side effects of hydroxycarbamide.
+    points: [Photosensitivity, Painful leg ulcers, Gastrointestinal side effects, "Sun-induced squamous skin lesions (cancerous and precancerous)", Pigmentation]
+    pass: 4
+    src: { page: 140, quote: "In susceptible patients it can cause photosensitivity, painful leg ulcers and gastrointestinal side-effects." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L09.056
+    kind: cloze
+    topic: et-treatment
+    text: "The usual hydroxycarbamide dose is {{c1::0.5–2 g daily}}; patients are counselled about {{c2::sun exposure}}."
+    src: { page: 141, quote: "Patients should be warned about these effects and counselled about sun exposure. The usual dose is 0.5–2 g daily." }
+    status: unverified
+    tags: [numbers]
+  - id: hem.L09.057
+    kind: card
+    topic: et-treatment
+    front: Why can't the reassuring long-term hydroxycarbamide data in sickle cell disease be applied directly to MPNs?
+    back: Sickle cell disease is not an acquired clonal disease with an inherent tendency to leukemic transformation.
+    src: { page: 141, quote: "sickle cell disease is not an acquired clonal disease with an inherent tendency to leukemic transformation" }
+    status: unverified
+  - id: hem.L09.058
+    kind: card
+    topic: et-treatment
+    front: What is the advantage of combining anagrelide with hydroxycarbamide?
+    back: It allows lower doses of both agents.
+    src: { page: 141, quote: "can be combined with hydroxycarbamide allowing lower doses of both agents." }
+    status: unverified
+  - id: hem.L09.059
+    kind: cloze
+    topic: et-treatment
+    text: "The usual anagrelide dose is {{c1::1–2 mg daily}}, occasionally up to {{c2::8 mg daily}}."
+    src: { page: 141, quote: "The usual dose is 1–2 mg daily, but occasional patients may require doses of up to 8 mg daily." }
+    status: unverified
+    tags: [numbers]
+  - id: hem.L09.060
+    kind: card
+    topic: et-treatment
+    front: Anagrelide side effects and their cause?
+    back: "Mainly from its inotropic and vasodilatory properties: headaches, palpitations and fluid retention. Marked anemia may also occur."
+    src: { page: 141, quote: "Its side-effects are mainly secondary to its inotropic and vasodilatory properties (e.g. headaches, palpitations and fluid retention)" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L09.061
+    kind: card
+    topic: et-treatment
+    front: For which patients is anagrelide approved?
+    back: Only for ET, as second-line therapy.
+    src: { page: 141, quote: "Anagrelide is currently only approved for patients with ET and as second- line therapy." }
+    status: unverified
+  - id: hem.L09.062
+    kind: card
+    topic: et-treatment
+    front: First-line therapy for high-risk ET?
+    back: Hydroxyurea plus aspirin.
+    src: { page: 142, quote: "hydroxyurea plus aspirin should remain first-line therapy for high-risk patients." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L09.063
+    kind: card
+    topic: et-treatment
+    front: In a patient on anagrelide, what decides whether to add aspirin?
+    back: The relative risks of arterial thrombosis and hemorrhage in that patient.
+    src: { page: 142, quote: "the decision to use concurrent aspirin should depend on the relative risks of arterial thrombosis and hemorrhage in the individual patient." }
+    status: unverified
+  - id: hem.L09.064
+    kind: card
+    topic: et-treatment
+    front: Why is interferon-alpha not widely used in ET?
+    back: Its significant side effects, subcutaneous administration and cost.
+    src: { page: 142, quote: "its significant side-effect profile, subcutaneous administration and cost prevent its widespread use." }
+    status: unverified
+  - id: hem.L09.065
+    kind: card
+    topic: et-treatment
+    front: Where does interferon-alpha have a clearer role in ET?
+    back: ET in pregnancy; some also favour it in young patients.
+    src: { page: 142, quote: "It has a clearer role in the management of ET in pregnancy and some favor it in young patients." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L09.066
+    kind: enumerate
+    topic: et-treatment
+    prompt: Enumerate the side effects of interferon-alpha.
+    points: [Fatigue, Flu-like symptoms, Depression, Autoimmune phenomena]
+    pass: 3
+    src: { page: 142, quote: "Side-effects include fatigue, flu-like symptoms, depression, autoimmune phenomena." }
+    status: unverified
+  - id: hem.L09.067
+    kind: cloze
+    topic: et-treatment
+    text: "The usual IFN-α dose is {{c1::3–5 mU three times per week}}; {{c2::pegylated}} formulations may be better tolerated."
+    src: { page: 142, quote: "The usual dose range is 3–5 mU three times per week. There is increasing interest in pegylated formulations of interferon" }
+    status: unverified
+    tags: [numbers]
+  - id: hem.L09.068
+    kind: card
+    topic: et-treatment
+    front: Why is busulfan rarely used in ET even though it controls the platelet count well?
+    back: Concern about its long-term leukemogenic potential.
+    src: { page: 142, quote: "is only rarely used because of concerns over its long-term leukemogenic potential." }
+    status: unverified
+  - id: hem.L09.069
+    kind: card
+    topic: et-treatment
+    front: Define low-risk ET and its usual treatment.
+    back: Younger than 40 with no high-risk feature; low-dose aspirin alone, unless contraindicated.
+    src: { page: 142, quote: "Low-risk patients are those younger than 40 years old who lack any high-risk features." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L09.070
+    kind: enumerate
+    topic: et-treatment
+    prompt: When is aspirin not given to a low-risk ET patient?
+    points: [Previous peptic ulceration, Allergy to salicylates, "Platelet count >1000 × 10⁹/L"]
+    pass: 3
+    src: { page: 142, quote: "such as previous peptic ulceration or allergy to salicylates or with PLT count > 1000× 10⁹/L." }
+    status: unverified
+  - id: hem.L09.071
+    kind: card
+    topic: et-treatment
+    front: "Low-risk ET with a contraindication to aspirin: which antiplatelet agents may be considered?"
+    back: Dipyridamole or clopidogrel.
+    src: { page: 143, quote: "Antiplatelet agents such as dipyridamole or clopidogrel may be considered in these cases." }
+    status: unverified
+  - id: hem.L09.072
+    kind: card
+    topic: et-treatment
+    front: "ET with hemorrhage: what about antiplatelet agents?"
+    back: Probably best avoided.
+    src: { page: 143, quote: "In the setting of ET-associated hemorrhage, it is probably best to avoid antiplatelet agents." }
+    status: unverified
+  - id: hem.L09.073
+    kind: card
+    topic: et-treatment
+    front: Define intermediate-risk ET and how it is treated.
+    back: 40–60 years with no high-risk feature. It is unclear whether lowering platelets helps; most get aspirin alone or hydroxycarbamide plus aspirin.
+    src: { page: 143, quote: "Intermediate-risk patients are those between 40 and 60 years old who lack any of the high-risk features." }
+    status: unverified
+  - id: hem.L09.074
+    kind: mcq
+    topic: et-treatment
+    stem: "A 67-year-old man with JAK2-positive ET has platelets of 720 × 10⁹/L. He has never had a thrombosis and has no diabetes or hypertension. Best treatment?"
+    options:
+      - Hydroxycarbamide plus aspirin
+      - Low-dose aspirin alone
+      - Observation only
+      - Busulfan
+      - Anagrelide as first line
+    answer: 0
+    why:
+      - "Correct: age over 60 alone makes him high risk; hydroxyurea plus aspirin is first line (p140, p142)."
+      - Aspirin alone is for low-risk (under 40) patients.
+      - High-risk ET is treated; hydroxyurea reduces thrombotic events.
+      - Busulfan is rarely used because of its leukemogenic potential.
+      - Anagrelide is second line.
+    src: { page: 142, quote: "hydroxyurea plus aspirin should remain first-line therapy for high-risk patients." }
+    status: unverified
+  - id: hem.L09.075
+    kind: mcq
+    topic: et-treatment
+    stem: "A 31-year-old woman with CALR-positive ET has no thrombosis, diabetes or hypertension. Which finding would stop you giving her low-dose aspirin?"
+    options:
+      - "Platelet count 1,250 × 10⁹/L"
+      - "Platelet count 620 × 10⁹/L"
+      - A CALR rather than JAK2 mutation
+      - Age 31
+      - Mild splenomegaly
+    answer: 0
+    why:
+      - "Correct: platelets above 1000 × 10⁹/L are a reason not to give aspirin (bleeding risk from acquired vWD) (p142, p137)."
+      - This count is the usual low-risk setting for aspirin.
+      - The mutation type is not an aspirin contraindication in the book.
+      - Low risk by age is the group that gets aspirin.
+      - Mild splenomegaly is common in ET and does not bar aspirin.
+    src: { page: 142, quote: "or allergy to salicylates or with PLT count > 1000× 10⁹/L." }
+    status: unverified
+  - id: hem.L09.076
+    kind: mcq
+    topic: et-treatment
+    stem: "A 50-year-old woman with ET has platelets of 640 × 10⁹/L, no previous thrombosis and no cardiovascular risk factors. Which is a usual approach?"
+    options:
+      - Aspirin alone
+      - Busulfan
+      - Splenectomy
+      - Anagrelide as first line
+      - No treatment because ET never causes thrombosis
+    answer: 0
+    why:
+      - "Correct: intermediate risk (40–60, no high-risk feature); most get aspirin alone or hydroxycarbamide plus aspirin (p143)."
+      - Busulfan is rarely used (leukemogenic).
+      - Splenectomy is not an ET treatment in the lecture.
+      - Anagrelide is a second-line agent.
+      - Thrombosis is the main cause of morbidity and mortality in ET.
+    src: { page: 143, quote: "Most receive either aspirin alone, or hydroxycarbamide and aspirin." }
+    status: unverified
+  - id: hem.L09.077
+    kind: mcq
+    topic: et-treatment
+    stem: "A 62-year-old woman started a new ET drug 3 weeks ago. She now has headaches, palpitations and ankle swelling. Which drug is it most likely to be?"
+    options:
+      - Anagrelide
+      - Hydroxycarbamide
+      - Interferon-alpha
+      - Busulfan
+      - Aspirin
+    answer: 0
+    why:
+      - "Correct: anagrelide's inotropic and vasodilatory actions cause headache, palpitations and fluid retention (p141)."
+      - Hydroxycarbamide causes cytopenias, leg ulcers, photosensitivity and skin lesions.
+      - IFN-α causes fatigue, flu-like symptoms, depression and autoimmunity.
+      - Busulfan's concern is leukemogenicity.
+      - Aspirin causes bleeding or peptic ulceration.
+    src: { page: 141, quote: "Its side-effects are mainly secondary to its inotropic and vasodilatory properties (e.g. headaches, palpitations and fluid retention)" }
+    status: unverified
+  - id: hem.L09.078
+    kind: mcq
+    topic: et-treatment
+    stem: "A 70-year-old man has taken hydroxycarbamide for ET for 6 years. He has a painful ulcer above the lateral malleolus and several scaly lesions on sun-exposed skin. What is the best explanation?"
+    options:
+      - Hydroxycarbamide toxicity
+      - Anagrelide toxicity
+      - Venous thrombosis from ET
+      - Interferon-induced autoimmunity
+      - Post-ET myelofibrosis
+    answer: 0
+    why:
+      - "Correct: hydroxycarbamide causes painful leg ulcers and sun-induced squamous skin lesions (p140)."
+      - He is not on anagrelide, which causes headache, palpitations and fluid retention.
+      - Thrombosis does not explain the sun-exposed skin lesions.
+      - He is not on IFN.
+      - Myelofibrosis causes splenomegaly and anemia, not leg ulcers.
+    src: { page: 140, quote: "In susceptible patients it can cause photosensitivity, painful leg ulcers and gastrointestinal side-effects." }
+    status: unverified
+  # ---------- p143-144: ET and pregnancy ----------
+  - id: hem.L09.079
+    kind: card
+    topic: et-pregnancy
+    front: Which MPN is met most often in women of childbearing age?
+    back: Essential thrombocythemia.
+    src: { page: 143, quote: "ET is the MPN encountered most frequently in women of childbearing age" }
+    status: unverified
+  - id: hem.L09.080
+    kind: cloze
+    topic: et-pregnancy
+    text: "The commonest complication of ET in pregnancy is {{c1::first-trimester miscarriage}} (up to {{c2::30%}}), thought to reflect {{c3::placental microinfarcts and insufficiency}}."
+    src: { page: 143, quote: "the commonest complication of ET is first-trimester miscarriage, which occurs in up to 30% of pregnancies" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: hem.L09.081
+    kind: enumerate
+    topic: et-pregnancy
+    prompt: Enumerate the less frequent fetal and obstetric complications of ET in pregnancy.
+    points: [Intrauterine fetal death, Growth retardation, Premature delivery, Pre-eclampsia]
+    pass: 3
+    src: { page: 143, quote: "Other less frequent complications include intrauterine fetal death, growth retardation, premature delivery and pre-eclampsia." }
+    status: unverified
+  - id: hem.L09.082
+    kind: cloze
+    topic: et-pregnancy
+    text: "Pregnancy in ET ends in a live birth in about {{c1::60%}}; a recent review of {{c2::220}} pregnancies had no maternal deaths."
+    src: { page: 143, quote: "a successful outcome (live birth) is achieved in around 60% of cases and no maternal deaths were seen in a recent review of 220 pregnancies." }
+    status: unverified
+    tags: [numbers]
+  - id: hem.L09.083
+    kind: card
+    topic: et-pregnancy
+    front: Should a pregnant ET patient take aspirin, and why?
+    back: Probably yes, for most patients who are pregnant or planning pregnancy. Evidence of benefit conflicts, but its safety is well documented in a large pre-eclampsia study.
+    src: { page: 143, quote: "it should probably be given to most patients who are pregnant or planning." }
+    status: unverified
+  - id: hem.L09.084
+    kind: card
+    topic: et-pregnancy
+    front: Why are hydroxyurea and anagrelide avoided in pregnancy and breast-feeding?
+    back: Both are potentially teratogenic, and both are excreted in breast milk, so breast-feeding is contraindicated on them.
+    src: { page: 144, quote: "Hydroxyurea and anagrelide should not be used on account of their teratogenic potential." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L09.085
+    kind: card
+    topic: et-pregnancy
+    front: Can a mother on interferon-alpha breast-feed?
+    back: IFN-α is excreted in milk but is unlikely to be absorbed intact by the baby; successful breast-feeding on IFN has been reported.
+    src: { page: 144, quote: "it is unlikely to be absorbed intact by the baby and there are reports of successful breast-feeding while the mother was receiving IFN." }
+    status: unverified
+  - id: hem.L09.086
+    kind: mcq
+    topic: et-pregnancy
+    stem: "A 29-year-old woman with high-risk ET (previous DVT) takes hydroxycarbamide and aspirin. She wants to become pregnant. Best plan?"
+    options:
+      - Stop hydroxycarbamide; continue aspirin and use interferon-alpha if cytoreduction is needed
+      - Continue hydroxycarbamide through pregnancy
+      - Switch to anagrelide
+      - Switch to busulfan
+      - Stop all treatment, including aspirin
+    answer: 0
+    why:
+      - "Correct: hydroxyurea is teratogenic; IFN-α has a clear role in pregnancy, and aspirin should probably be given (p142–144)."
+      - Hydroxyurea should not be used in pregnancy.
+      - Anagrelide is also teratogenic.
+      - Busulfan is leukemogenic and not a pregnancy option.
+      - Aspirin should probably be given to most patients who are pregnant or planning.
+    src: { page: 144, quote: "Hydroxyurea and anagrelide should not be used on account of their teratogenic potential." }
+    status: unverified
+  # ---------- p144: PMF overview and pathophysiology ----------
+  - id: hem.L09.087
+    kind: card
+    topic: pmf-biology
+    front: Which MPN has the poorest prognosis?
+    back: Primary myelofibrosis.
+    src: { page: 144, quote: "PMF has the poorest prognosis of the MPNs." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L09.088
+    kind: card
+    topic: pmf-biology
+    front: Can PV and ET progress to a PMF-like picture?
+    back: Yes, usually after a latency of many years.
+    src: { page: 144, quote: "PV and ET can develop into a condition that resembles PMF, usually after a latency of many years." }
+    status: unverified
+    tags: [book-question]
+  - id: hem.L09.089
+    kind: card
+    topic: pmf-biology
+    front: How does PMF differ genetically from PV and ET?
+    back: More mutations, more cytogenetic abnormalities and a higher risk of leukemic transformation.
+    src: { page: 144, quote: "Patients with PMF harbor more mutations, have more cytogenetic abnormalities and display an increased risk of leukemic transformation" }
+    status: unverified
+  - id: hem.L09.090
+    kind: card
+    topic: pmf-biology
+    front: What causes the progressive marrow fibrosis in PMF?
+    back: Pro-inflammatory cytokines released by abnormal clonal cells, mainly megakaryocytes, stimulate fibroblast proliferation and fibrosis.
+    src: { page: 144, quote: "release of pro-inflammatory cytokines from abnormal clonal cells (primarily megakaryocytes), which stimulate fibroblast proliferation and fibrosis." }
+    status: unverified
+    tags: [high-yield, book-question]
+  - id: hem.L09.091
+    kind: enumerate
+    topic: pmf-biology
+    prompt: Enumerate the marrow cytokines that drive myelofibrosis.
+    points: ["Transforming growth factor β-1 (TGFβ-1)", Platelet-derived growth factor (PDGF), Vascular endothelial growth factor (VEGF)]
+    pass: 3
+    src: { page: 144, quote: "transforming growth factor β-1 (TGFβ-1), platelet derived growth factor (PDGF) vascular endothelial growth factor (VEGF)" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L09.092
+    kind: card
+    topic: pmf-biology
+    front: What is the effect of higher thrombopoietin (TPO) levels in PMF?
+    back: More megakaryocytes and rapid progression to myelofibrosis.
+    src: { page: 144, quote: "Higher levels of TPO were associated with increased megakaryocyte numbers and rapid progression to myelofibrosis." }
+    status: unverified
+  # ---------- p145-146: PMF WHO criteria and differential of marrow fibrosis ----------
+  - id: hem.L09.093
+    kind: enumerate
+    topic: pmf-criteria
+    prompt: Enumerate the WHO major criteria for overt (advanced) PMF.
+    points:
+      - "Megakaryocytic proliferation and atypia, usually with reticulin and/or collagen fibrosis grade 2 or 3"
+      - "Not meeting WHO criteria for ET, PV, BCR-ABL1+ CML, MDS or other myeloid neoplasms"
+      - "JAK2, CALR or MPL mutation; if absent, another clonal marker or absence of reactive myelofibrosis"
+    pass: 3
+    src: { page: 145, quote: "Presence of megakaryocytic proliferation and atypia, usually accompanied by either reticulin and/or collagen fibrosis grades 2 or 3" }
+    status: unverified
+    tags: [high-yield, book-question]
+  - id: hem.L09.094
+    kind: cloze
+    topic: pmf-criteria
+    text: "In overt PMF, megakaryocytic proliferation and atypia usually come with reticulin and/or collagen fibrosis of grade {{c1::2 or 3}}."
+    src: { page: 145, quote: "usually accompanied by either reticulin and/or collagen fibrosis grades 2 or 3" }
+    status: unverified
+    tags: [numbers]
+  - id: hem.L09.095
+    kind: enumerate
+    topic: pmf-criteria
+    prompt: In triple-negative suspected PMF, which accompanying mutations help show clonality?
+    points: [ASXL1, EZH2, TET2, IDH1/IDH2, SRSF2, SF3B1]
+    pass: 4
+    src: { page: 145, quote: "the search for the most frequent accompanying mutations (ASXL1, EZH2, TET2, IDH1/IDH2, SRSF2, SF3B1)" }
+    status: unverified
+  - id: hem.L09.096
+    kind: enumerate
+    topic: pmf-criteria
+    prompt: Enumerate the causes of reactive marrow fibrosis that must be absent (WHO footnote).
+    points: [Infection, Autoimmune disorder or other chronic inflammatory condition, Hairy cell leukemia or other lymphoid neoplasm, Metastatic malignancy, Toxic (chronic) myelopathies]
+    pass: 4
+    src: { page: 145, quote: "bone marrow fibrosis secondary to infection, autoimmune disorder or other chronic inflammatory condition, hairy cell leukemia or other lymphoid neoplasm" }
+    status: unverified
+  - id: hem.L09.097
+    kind: enumerate
+    topic: pmf-criteria
+    prompt: Enumerate the WHO minor criteria for overt PMF.
+    points:
+      - Anemia not attributed to a comorbid condition
+      - "Leukocytosis >11 × 10⁹/L"
+      - Palpable splenomegaly
+      - LDH above the upper normal limit
+      - Leukoerythroblastosis
+    pass: 4
+    src: { page: 146, quote: "Anemia not attributed to a comorbid condition Leukocytosis >11K/uL" }
+    status: unverified
+    tags: [high-yield, book-question]
+  - id: hem.L09.098
+    kind: cloze
+    topic: pmf-criteria
+    text: "Overt PMF needs {{c1::all three major criteria}} plus at least {{c2::one}} minor criterion, confirmed in {{c3::two consecutive determinations}}."
+    src: { page: 146, quote: "Presence of at least one of the following, confirmed in two consecutive determinations:" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L09.099
+    kind: cloze
+    topic: pmf-criteria
+    text: "The PMF minor criterion for leukocytosis is a white count above {{c1::11 × 10⁹/L}}."
+    src: { page: 146, quote: "Leukocytosis >11K/uL" }
+    status: unverified
+    tags: [numbers]
+  - id: hem.L09.100
+    kind: table
+    topic: pmf-criteria
+    title: Differential diagnosis of marrow fibrosis
+    columns: [Group, Causes]
+    rows:
+      - [Hematological malignancies, "PMF, CML, acute myelofibrosis (AML M7), myelodysplasia, myeloma, hairy-cell leukemia, NHL, Hodgkin disease, systemic mastocytosis"]
+      - [Metastatic carcinoma, "–"]
+      - [Infections, "Tuberculosis, leishmaniasis"]
+      - [Drugs and toxins, "Benzene, thorotrast, irradiation"]
+      - [Bone disease, "Paget disease, osteopetrosis"]
+      - [Parathyroid disease, "Hyperparathyroidism, hypoparathyroidism"]
+      - [Inflammatory diseases, "Systemic sclerosis, systemic lupus"]
+      - [Other, Grey platelet syndrome]
+    blanks: [[0, 1], [2, 1], [3, 1], [4, 1], [6, 1], [7, 1]]
+    src: { page: 146, quote: "Differential diagnosis of marrow fibrosis" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L09.101
+    kind: card
+    topic: pmf-criteria
+    front: Which acute leukemia causes acute myelofibrosis?
+    back: AML M7 (acute megakaryoblastic leukemia).
+    src: { page: 146, quote: "Acute myelofibrosis (AML M7)" }
+    status: unverified
+  - id: hem.L09.102
+    kind: mcq
+    topic: pmf-criteria
+    stem: "In a patient with suspected PMF, which finding is a WHO minor criterion rather than a major one?"
+    options:
+      - LDH above the upper limit of the reference range
+      - Megakaryocytic atypia with grade 2–3 reticulin fibrosis
+      - A CALR mutation
+      - Not meeting the WHO criteria for CML or PV
+      - "Platelet count ≥450 × 10⁹/L"
+    answer: 0
+    why:
+      - "Correct: raised LDH is one of the five minor criteria (p146)."
+      - This is major criterion 1.
+      - A driver mutation is major criterion 3.
+      - Exclusion of other myeloid neoplasms is major criterion 2.
+      - This is the first major criterion for ET, not PMF.
+    src: { page: 146, quote: "LDH increased to above upper normal limit of institutional reference range" }
+    status: unverified
+  # ---------- p147-149: PMF clinical picture ----------
+  - id: hem.L09.103
+    kind: cloze
+    topic: pmf-clinical
+    text: "PMF has an annual incidence of about {{c1::0.5–1.5 per 100,000}}; most patients are diagnosed in the {{c2::sixth decade}}, with roughly equal sexes."
+    src: { page: 147, quote: "The estimated annual incidence of PMF is around 0.5–1.5 per 100,000 of the population, with most patients diagnosed in the sixth decade" }
+    status: unverified
+    tags: [numbers]
+  - id: hem.L09.104
+    kind: card
+    topic: pmf-clinical
+    front: What share of PMF patients are asymptomatic at diagnosis, and how are they found?
+    back: Up to a third; many are found when unrelated blood tests show modest abnormalities such as anemia and thrombocytopenia.
+    src: { page: 147, quote: "Up to a third of patients are asymptomatic at diagnosis and many of these are discovered after unrelated blood tests show modest abnormalities" }
+    status: unverified
+  - id: hem.L09.105
+    kind: card
+    topic: pmf-clinical
+    front: How common is splenomegaly in PMF at presentation?
+    back: It is found in almost all patients, and splenic pain or discomfort is a common presenting symptom.
+    src: { page: 147, quote: "Splenomegaly is found in almost all patients at presentation and splenic pain/discomfort is a common presenting symptom." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L09.106
+    kind: cloze
+    topic: pmf-clinical
+    text: "About {{c1::10%}} of PMF cases develop massive splenomegaly reaching the {{c2::right iliac fossa}}."
+    src: { page: 147, quote: "about 10% of cases develop massive splenomegaly, with the spleen extending to the right iliac fossa" }
+    status: unverified
+    tags: [numbers]
+  - id: hem.L09.107
+    kind: card
+    topic: pmf-clinical
+    front: How can massive splenomegaly in PMF cause portal hypertension?
+    back: The huge spleen greatly increases splenic blood flow, which in severe cases causes portal hypertension with esophageal varices and ascites.
+    src: { page: 147, quote: "can lead to a substantial increase in splenic blood flow which, in the most severe cases, can lead to portal hypertension" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L09.108
+    kind: card
+    topic: pmf-clinical
+    front: Are splenic infarcts common in PMF?
+    back: Yes; both painful and painless splenic infarcts are common.
+    src: { page: 147, quote: "Painful and painless splenic infarcts are common." }
+    status: unverified
+  - id: hem.L09.109
+    kind: card
+    topic: pmf-clinical
+    front: Describe the hypermetabolic state of PMF and its significance.
+    back: Fevers, anorexia, weight loss and night sweats, sometimes early in the disease. It carries a poor prognosis.
+    src: { page: 147, quote: "A hypermetabolic state presenting with fevers, anorexia, weight loss and night sweats develops in many cases of PMF" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L09.110
+    kind: card
+    topic: pmf-clinical
+    front: What is the commonest site of extramedullary hemopoiesis in PMF, and which organ is also usually involved?
+    back: The spleen; the liver is usually involved too, causing significant hepatomegaly.
+    src: { page: 147, quote: "Spleen is the commonest site of extramedullary hemopoiesis in PMF. The liver is also usually involved" }
+    status: unverified
+  - id: hem.L09.111
+    kind: enumerate
+    topic: pmf-clinical
+    prompt: Enumerate unusual sites of extramedullary hemopoiesis in PMF.
+    points: [Lymph nodes, CNS, Skin, Pericardium, Peritoneum, Pleura, Ovaries, Kidneys, Adrenals, GIT, Lungs]
+    pass: 6
+    src: { page: 148, quote: "CNS, skin, pericardium, peritoneum, pleura, ovaries, kidneys, adrenals, GIT and lungs." }
+    status: unverified
+  - id: hem.L09.112
+    kind: card
+    topic: pmf-clinical
+    front: "Extramedullary hemopoietic masses in PMF: when do they matter and how are they treated?"
+    back: Many are asymptomatic, but CNS involvement can cause serious morbidity. Radiotherapy or surgery, when needed, almost always resolves them.
+    src: { page: 148, quote: "Treatment with radiotherapy or surgery, when required, almost always leads to resolution of these masses." }
+    status: unverified
+  - id: hem.L09.113
+    kind: card
+    topic: pmf-clinical
+    front: What causes the anemia of PMF?
+    back: Mainly reduced erythropoiesis, compounded by hypersplenism, bleeding, and iron or folate deficiency. It worsens as fibrosis progresses.
+    src: { page: 148, quote: "The anemia is mainly due to reduced erythropoiesis, but may be compounded by hypersplenism, bleeding and iron or folate deficiency." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L09.114
+    kind: card
+    topic: pmf-clinical
+    front: How does the platelet count behave over the course of PMF?
+    back: Raised in up to half at presentation (with thrombotic risk), then progressive thrombocytopenia as the disease advances.
+    src: { page: 148, quote: "Platelet counts are raised in up to one-half of the cases at presentation and can be associated with thrombotic complications." }
+    status: unverified
+  - id: hem.L09.115
+    kind: card
+    topic: pmf-clinical
+    front: Why do PMF patients bleed?
+    back: Dysmegakaryopoiesis and abnormal platelet function add to the hemorrhagic risk.
+    src: { page: 148, quote: "Dysmegakaryopoiesis and abnormal platelet function further add to the risk of hemorrhagic complications." }
+    status: unverified
+  - id: hem.L09.116
+    kind: card
+    topic: pmf-clinical
+    front: What is the characteristic blood picture of PMF?
+    back: Leukoerythroblastic, with immature myeloid and erythroid precursors in the blood.
+    src: { page: 148, quote: "The presence of immature myeloid as well as erythroid progenitors is a characteristic feature of PMF (Leuko-erythroblastic blood picture)." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L09.117
+    kind: card
+    topic: pmf-clinical
+    front: White cell changes early in PMF?
+    back: Neutrophilia is common, with modest rises in basophils and eosinophils.
+    src: { page: 148, quote: "Neutrophilia is common, and modest elevations in basophil and eosinophil counts." }
+    status: unverified
+  - id: hem.L09.118
+    kind: enumerate
+    topic: pmf-clinical
+    prompt: Why does leukopenia appear as PMF progresses?
+    points: [Progressive hypersplenism, Dysmyelopoiesis, Progressive replacement of the marrow by fibrous tissue]
+    pass: 3
+    src: { page: 148, quote: "secondary to progressive hypersplenism, dysmyelopoiesis and progressive replacement of the bone marrow by fibrotic tissue." }
+    status: unverified
+  - id: hem.L09.119
+    kind: cloze
+    topic: pmf-clinical
+    text: "Transformation of PMF to AML (persistent {{c1::≥20% blasts}} in blood or marrow) occurs in {{c2::20–30%}} of cases and is usually {{c3::rapidly fatal}}."
+    src: { page: 149, quote: "Transformation to AML, as defined by the persistent presence of 20% blasts in blood or bone marrow occurs in 20–30% of cases of PMF" }
+    status: unverified
+    tags: [high-yield, numbers, book-question]
+  - id: hem.L09.120
+    kind: mcq
+    topic: pmf-clinical
+    stem: "A 63-year-old man with PMF has Hb 8.2 g/dL. Which is the main cause of his anemia according to the lecture?"
+    options:
+      - Reduced erythropoiesis
+      - Autoimmune hemolysis
+      - Vitamin B12 deficiency
+      - Anemia of chronic kidney disease
+      - Bleeding from varices
+    answer: 0
+    why:
+      - "Correct: PMF anemia is mainly from reduced erythropoiesis (p148)."
+      - Hemolysis is not the book's main mechanism; corticosteroids help only when red cell survival is reduced.
+      - The book lists iron or folate deficiency, not B12, as compounding factors.
+      - Nothing suggests kidney disease.
+      - Bleeding can add to it but is not the main cause.
+    src: { page: 148, quote: "The anemia is mainly due to reduced erythropoiesis" }
+    status: unverified
+  # ---------- p149-150: PMF blood film and marrow ----------
+  - id: hem.L09.121
+    kind: enumerate
+    topic: pmf-tests
+    prompt: Enumerate the peripheral blood findings in PMF.
+    points:
+      - Leukoerythroblastic picture (myeloid and erythroid precursors)
+      - Teardrop poikilocytes (dacryocytes)
+      - Macrocytosis (with or without folate deficiency)
+      - Giant platelets and megakaryocyte fragments
+    pass: 4
+    src: { page: 149, quote: "Teardrop poikilocytes (dacryocytes)" }
+    status: unverified
+    tags: [high-yield, book-question]
+  - id: hem.L09.122
+    kind: enumerate
+    topic: pmf-tests
+    prompt: Besides PMF, what causes a leukoerythroblastic blood film?
+    points: [Bone marrow infiltration, Severe sepsis, Severe hemolysis]
+    pass: 3
+    src: { page: 149, quote: "Other causes of a leukoerythroblastic blood film include BM infiltration, severe sepsis, severe hemolysis." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L09.123
+    kind: cloze
+    topic: pmf-tests
+    text: "Teardrop red cells are called {{c1::dacryocytes}}."
+    src: { page: 149, quote: "Teardrop poikilocytes (dacryocytes)" }
+    status: unverified
+  - id: hem.L09.124
+    kind: card
+    topic: pmf-tests
+    front: Which marrow test is essential to diagnose PMF, and why not aspiration?
+    back: A bone marrow trephine biopsy. Aspiration often gives a dry tap or a hemodiluted sample, so aspirate morphology is of limited value.
+    src: { page: 150, quote: "Bone marrow trephine biopsy is essential to make a diagnosis of PMF." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L09.125
+    kind: card
+    topic: pmf-tests
+    front: What does the karyotype help exclude in suspected PMF?
+    back: CML (BCR/ABL positivity). Enough material can often be obtained from marrow or peripheral blood.
+    src: { page: 150, quote: "which can help exclude diagnoses such as CML (excluding BCR/ABL positivity)." }
+    status: unverified
+  - id: hem.L09.126
+    kind: cloze
+    topic: pmf-tests
+    text: "Other chromosomal abnormalities occur in up to {{c1::60%}} of PMF; abnormalities of chromosomes {{c2::5 and 7}} follow genotoxic exposure and carry a {{c3::poor prognosis}}."
+    src: { page: 150, quote: "Abnormalities of chromosomes 5 and 7 are usually found in patients with prior exposure to genotoxic agents and are associated with a poor prognosis." }
+    status: unverified
+    tags: [numbers]
+  - id: hem.L09.127
+    kind: card
+    topic: pmf-tests
+    front: What does the marrow show in early PMF?
+    back: Increased cellularity, disorganized architecture and abnormal large megakaryocytes, often in clusters.
+    src: { page: 150, quote: "the disorganization of marrow architecture and the presence of abnormal large megakaryocytes often occurring in clusters." }
+    status: unverified
+  - id: hem.L09.128
+    kind: cloze
+    topic: pmf-tests
+    text: "Reticulin fibres are best shown by {{c1::silver impregnation}}; collagen fibres by a {{c2::trichrome stain}}."
+    src: { page: 150, quote: "best demonstrated using silver impregnation, which stains reticulin fibers. Collagen fibers are best demonstrated using a trichrome stain." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L09.129
+    kind: card
+    topic: pmf-tests
+    front: What is osteosclerosis in advanced PMF, and how is it seen?
+    back: Thickened trabeculae with extensive osteoid deposition in a minority of advanced cases; visible on plain radiographs and MRI.
+    src: { page: 150, quote: "In a minority of cases of advanced PMF, osteosclerosis ensues, with thickening of the trabeculae and extensive deposition of osteoid." }
+    status: unverified
+  - id: hem.L09.130
+    kind: mcq
+    topic: pmf-tests
+    stem: "A 61-year-old man has a spleen to the umbilicus, Hb 9 g/dL, nucleated red cells, myelocytes and teardrop cells on the film. Marrow aspiration gives a dry tap. Best next step to make the diagnosis?"
+    options:
+      - Bone marrow trephine biopsy
+      - Repeat the aspiration from another site
+      - Splenectomy for histology
+      - Diagnose PMF from the film alone
+      - Hemoglobin electrophoresis
+    answer: 0
+    why:
+      - "Correct: a trephine biopsy is essential for PMF; aspiration often yields a dry tap (p150)."
+      - A repeat aspirate is likely to be dry or hemodiluted again.
+      - Splenectomy is a treatment with about 10% mortality, not a diagnostic test.
+      - A leukoerythroblastic film also occurs with marrow infiltration, sepsis and hemolysis.
+      - Nothing points to a hemoglobinopathy.
+    src: { page: 150, quote: "Attempts at BM aspiration often yields a dry-tap or a hemodiluted sample" }
+    status: unverified
+  - id: hem.L09.131
+    kind: mcq
+    topic: pmf-tests
+    stem: "Which of these is NOT listed by the lecture as a cause of a leukoerythroblastic blood film?"
+    options:
+      - Iron deficiency
+      - Primary myelofibrosis
+      - Bone marrow infiltration
+      - Severe sepsis
+      - Severe hemolysis
+    answer: 0
+    why:
+      - "Correct: iron deficiency causes reactive thrombocytosis, not a leukoerythroblastic film (p139, p149)."
+      - PMF is the classic cause.
+      - Marrow infiltration is listed.
+      - Severe sepsis is listed.
+      - Severe hemolysis is listed.
+    src: { page: 149, quote: "Other causes of a leukoerythroblastic blood film include BM infiltration, severe sepsis, severe hemolysis." }
+    status: unverified
+  - id: hem.L09.132
+    kind: mcq
+    topic: pmf-tests
+    stem: "A hematopathologist wants to grade the collagen fibrosis in a PMF trephine. Which stain is best?"
+    options:
+      - Trichrome stain
+      - Silver impregnation
+      - Perls (Prussian blue)
+      - Periodic acid–Schiff
+      - Congo red
+    answer: 0
+    why:
+      - "Correct: collagen fibres are best shown with a trichrome stain (p150)."
+      - Silver impregnation shows reticulin fibres.
+      - Perls stains iron.
+      - PAS is not the fibrosis stain in the lecture.
+      - Congo red is for amyloid.
+    src: { page: 150, quote: "Collagen fibers are best demonstrated using a trichrome stain." }
+    status: unverified
+  # ---------- p150-151: PMF prognosis ----------
+  - id: hem.L09.133
+    kind: cloze
+    topic: pmf-prognosis
+    text: "Median survival in PMF is {{c1::3–5 years}} (very wide range); {{c2::ruxolitinib}} and better general care have improved it."
+    src: { page: 150, quote: "The median survival is 3–5 years, but the range is very wide. Ruxolitinib and improvements in general care have improved overall survival" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: hem.L09.134
+    kind: card
+    topic: pmf-prognosis
+    front: Which scoring systems are most widely used for prognosis in PMF?
+    back: IPSS, Dynamic IPSS (DIPSS) and DIPSS-plus.
+    src: { page: 151, quote: "International Prognostic Scoring System (IPSS) and Dynamic (D)IPSS or DIPSS-plus are the most widely used algorithms to determine prognosis." }
+    status: unverified
+  - id: hem.L09.135
+    kind: card
+    topic: pmf-prognosis
+    front: How do CALR mutations affect the course of MPNs?
+    back: Fewer thrombotic events but more myelofibrotic transformation.
+    src: { page: 151, quote: "patients with CALR mutations may have fewer thrombotic events, but more myelofibrotic transformation" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L09.136
+    kind: enumerate
+    topic: pmf-prognosis
+    prompt: Enumerate the mutations linked to a worse overall prognosis in PMF.
+    points: [ASXL1, EZH2, IDH1/2, SRSF2]
+    pass: 3
+    src: { page: 151, quote: "overall worse prognosis – ASXL-1, EZH2, IDH1/2, and SRSF2." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L09.137
+    kind: table
+    topic: pmf-prognosis
+    title: IPSS for PMF (1 point each)
+    columns: [Variable, 0 points, 1 point]
+    rows:
+      - [Age, "≤65 years", ">65 years"]
+      - [WBC, "≤25 × 10⁹/L", ">25 × 10⁹/L"]
+      - [Hemoglobin, "–", "<100 g/L"]
+      - [Peripheral blasts, "<1%", ">1%"]
+      - [Constitutional symptoms, "No", "Yes"]
+    blanks: [[0, 2], [1, 2], [2, 2], [3, 2], [4, 2]]
+    src: { page: 151, quote: "IPSS prognostic score" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: hem.L09.138
+    kind: table
+    topic: pmf-prognosis
+    title: IPSS risk groups and median survival
+    columns: [Points, Risk group, Median survival]
+    rows:
+      - ["0", Low, "135 months"]
+      - ["1", Intermediate-1, "95 months"]
+      - ["2", Intermediate-2, "48 months"]
+      - ["3 or more", High, "27 months"]
+    blanks: [[0, 2], [1, 2], [2, 2], [3, 2], [3, 1]]
+    src: { page: 151, quote: "Median survivals are 135, 95, 48 and 27 months, respectively" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: hem.L09.139
+    kind: cloze
+    topic: pmf-prognosis
+    text: "IPSS gives a point for age over {{c1::65}}, WBC over {{c2::25 × 10⁹/L}} and hemoglobin below {{c3::100 g/L}}."
+    src: { page: 151, quote: "IPSS prognostic score" }
+    status: unverified
+    tags: [numbers]
+  - id: hem.L09.140
+    kind: mcq
+    topic: pmf-prognosis
+    stem: "A 70-year-old woman with PMF has Hb 92 g/L, WBC 14 × 10⁹/L, no circulating blasts, and drenching night sweats with weight loss. What is her IPSS risk group?"
+    options:
+      - High (3 points), median survival 27 months
+      - Intermediate-2 (2 points), median survival 48 months
+      - Intermediate-1 (1 point), median survival 95 months
+      - Low (0 points), median survival 135 months
+      - IPSS cannot be used without the karyotype
+    answer: 0
+    why:
+      - "Correct: age >65 (1) + Hb <100 g/L (1) + constitutional symptoms (1) = 3, high risk, 27 months (p151)."
+      - That misses one of her three points.
+      - That counts only one point.
+      - She clearly scores points.
+      - The IPSS in the book uses age, WBC, Hb, blasts and symptoms; no karyotype.
+    src: { page: 151, quote: "Risk assignment: Low = 0; Intermediate 1 = 1; Intermediate 2 = 2; High = 3+" }
+    status: unverified
+  - id: hem.L09.141
+    kind: mcq
+    topic: pmf-prognosis
+    stem: "Compared with JAK2-mutated disease, what does current evidence suggest for MPN patients with a CALR mutation?"
+    options:
+      - Fewer thrombotic events but more myelofibrotic transformation
+      - More thrombotic events and less fibrosis
+      - A worse overall prognosis, like ASXL1
+      - No difference at all
+      - Certain progression to AML
+    answer: 0
+    why:
+      - "Correct: CALR means fewer thromboses but more myelofibrotic transformation (p151)."
+      - This is the reverse.
+      - ASXL1, EZH2, IDH1/2 and SRSF2 are the poor-prognosis mutations.
+      - The lecture describes a difference.
+      - The lecture does not say this.
+    src: { page: 151, quote: "patients with CALR mutations may have fewer thrombotic events, but more myelofibrotic transformation" }
+    status: unverified
+  # ---------- p151-154: PMF treatment ----------
+  - id: hem.L09.142
+    kind: card
+    topic: pmf-treatment
+    front: What is the only curative treatment for PMF?
+    back: Allogeneic stem cell transplantation (SCT).
+    src: { page: 151, quote: "The only curative treatment for PMF is allogeneic stem cell transplantation (SCT)." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L09.143
+    kind: card
+    topic: pmf-treatment
+    front: What is the treatment goal for PMF patients who cannot have a transplant?
+    back: Supportive therapy to relieve symptoms; it has little effect on their relatively poor survival.
+    src: { page: 151, quote: "for the remaining cases therapy remains supportive aiming at alleviating symptoms, but has little impact on the relatively poor survival of PMF patients." }
+    status: unverified
+  - id: hem.L09.144
+    kind: card
+    topic: pmf-treatment
+    front: Which drug class has radically changed PMF management?
+    back: JAK inhibitors, specifically ruxolitinib.
+    src: { page: 151, quote: "In recent years, JAK inhibitors, specifically Ruxolitinib, have radically altered the therapeutic algorithm for the management of PMF." }
+    status: unverified
+  - id: hem.L09.145
+    kind: card
+    topic: pmf-treatment
+    front: For whom is allogeneic SCT realistic in PMF?
+    back: Only young patients, perhaps 10% of all cases, after weighing age and general fitness.
+    src: { page: 152, quote: "It is only a realistic option in young patients who represent perhaps 10% of all cases." }
+    status: unverified
+  - id: hem.L09.146
+    kind: cloze
+    topic: pmf-treatment
+    text: "After allogeneic SCT for PMF, patients ≤45 years have about {{c1::50%}} long-term survival with {{c2::30%}} transplant-related mortality; those ≥45 have only {{c3::10–20%}}."
+    src: { page: 152, quote: "The long-term survival of patients ≤45 years is approx. 50%, with a 30% transplant-related mortality." }
+    status: unverified
+    tags: [numbers]
+  - id: hem.L09.147
+    kind: card
+    topic: pmf-treatment
+    front: What did the COMFORT trials show for ruxolitinib in PMF?
+    back: Better symptom control, smaller spleens and improved survival in intermediate-2 and high-risk PMF, regardless of JAK mutation status. This led to FDA approval.
+    src: { page: 152, quote: "ruxolitinib delivers benefit in control of symptoms and reduces splenomegaly, as well as improving survival for patients with intermediate-risk-2 and high-risk PMF" }
+    status: unverified
+    tags: [high-yield]
+    update:
+      text: "Three more JAK inhibitors are now approved for myelofibrosis: fedratinib, pacritinib (for platelets below 50 × 10⁹/L) and momelotinib (for anemia). The book names ruxolitinib."
+      ref: "NCCN Myeloproliferative Neoplasms guideline 2024"
+  - id: hem.L09.148
+    kind: cloze
+    topic: pmf-treatment
+    text: "Ruxolitinib lowers hemoglobin by about {{c1::10%}}, peaking at {{c2::12–16 weeks}}, and platelets by about {{c3::40%}}."
+    src: { page: 152, quote: "a predictable fall in hemoglobin levels by 10%, peaking at 12–16 weeks and gradually resolving thereafter) and thrombocytopenia (fall in platelet levels by 40%)." }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: hem.L09.149
+    kind: card
+    topic: pmf-treatment
+    front: How are ruxolitinib-induced anemia and thrombocytopenia managed?
+    back: Dose modification, and adding agents such as erythropoietin and androgens.
+    src: { page: 152, quote: "Both anemia and thrombocytopenia can be attenuated by dose-modification and may be moderated by addition of agents such as Erythropoietin and androgens." }
+    status: unverified
+  - id: hem.L09.150
+    kind: enumerate
+    topic: pmf-treatment
+    prompt: Enumerate the two other important adverse effects of ruxolitinib.
+    points: [Rebound of symptoms and splenomegaly after withdrawal, Herpes virus reactivation and opportunistic infections]
+    pass: 2
+    src: { page: 152, quote: "Rebound of symptoms and splenomegaly after withdrawal. Increased risk of Herpes virus re-activation and opportunistic infections." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L09.151
+    kind: card
+    topic: pmf-treatment
+    front: "Androgens for PMF anemia: response rate and best responders?"
+    back: Response in up to one third; best in patients without massive splenomegaly and with a normal karyotype.
+    src: { page: 152, quote: "Androgens: give response in up to one third of cases, with the best responses seen in patients without massive splenomegaly and with a normal karyotype." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L09.152
+    kind: cloze
+    topic: pmf-treatment
+    text: "Androgens used in PMF: oxymetholone {{c1::50–150 mg}} daily and danazol {{c2::400–600 mg}} daily; both can cause {{c3::virilization and abnormal liver function}}."
+    src: { page: 153, quote: "danazol (400–600 mg daily). Both can have virilizing effects and can lead to abnormal liver function." }
+    status: unverified
+    tags: [numbers]
+  - id: hem.L09.153
+    kind: card
+    topic: pmf-treatment
+    front: Which PMF patients may respond to corticosteroids?
+    back: Those with reduced red cell survival.
+    src: { page: 153, quote: "Corticosteroids: Patients with a reduced red cell survival may respond." }
+    status: unverified
+  - id: hem.L09.154
+    kind: card
+    topic: pmf-treatment
+    front: When has recombinant erythropoietin shown promise in PMF anemia?
+    back: In small studies, usually when endogenous EPO levels are low.
+    src: { page: 153, quote: "has shown promise in small clinical studies of anemia in PMF usually where endogenous EPO levels are low." }
+    status: unverified
+  - id: hem.L09.155
+    kind: card
+    topic: pmf-treatment
+    front: "Thalidomide in PMF: benefit and drawbacks?"
+    back: Improves anemia, thrombocytopenia or splenomegaly in 20–30%. Poorly tolerated at conventional doses, raises the risk of extreme thrombocytosis and probably venous thrombosis, and is extremely teratogenic.
+    src: { page: 153, quote: "Thalidomide: has been reported to improve anemia, thrombocytopenia or splenomegaly in 20-30% of the patients." }
+    status: unverified
+  - id: hem.L09.156
+    kind: enumerate
+    topic: pmf-treatment
+    prompt: Enumerate the lines of treatment of anemia in PMF.
+    points: [Androgens (oxymetholone, danazol), Corticosteroids, Recombinant erythropoietin, Transfusion (most become dependent), Thalidomide, Pomalidomide]
+    pass: 5
+    src: { page: 153, quote: "Despite these treatments, most patients become transfusion- dependent eventually." }
+    status: unverified
+    tags: [high-yield, book-question]
+  - id: hem.L09.157
+    kind: card
+    topic: pmf-treatment
+    front: What is cytoreductive therapy used for in PMF, and with which drugs?
+    back: Hepatosplenomegaly, constitutional symptoms and troublesome thrombocytosis. Hydroxycarbamide is most used; anagrelide for thrombocytosis.
+    src: { page: 153, quote: "It can be useful in the management of hepatosplenomegaly, constitutional symptoms and troublesome thrombocytosis." }
+    status: unverified
+  - id: hem.L09.158
+    kind: card
+    topic: pmf-treatment
+    front: What is the place of interferon in PMF?
+    back: Possibly useful in early disease; occasionally linked to reversal of fibrosis.
+    src: { page: 153, quote: "Interferon may be of utility in early stages of this disease and has occasionally been reported to be associated with fibrosis reversal." }
+    status: unverified
+  - id: hem.L09.159
+    kind: enumerate
+    topic: pmf-treatment
+    prompt: Enumerate the indications for splenectomy in PMF.
+    points: [Splenic pain, Constitutional symptoms, Portal hypertension, Transfusion-dependent anemia]
+    pass: 4
+    src: { page: 154, quote: "Constitutional symptoms Portal hypertension Transfusion-dependent anemia." }
+    status: unverified
+    tags: [high-yield, book-question]
+  - id: hem.L09.160
+    kind: card
+    topic: pmf-treatment
+    front: Does thrombocytopenia in PMF respond to splenectomy?
+    back: There is no good evidence that it does.
+    src: { page: 154, quote: "there is no good evidence that thrombocytopenia responds to splenectomy." }
+    status: unverified
+  - id: hem.L09.161
+    kind: cloze
+    topic: pmf-treatment
+    text: "Splenectomy in PMF has a mortality of about {{c1::10%}}, worse in the {{c2::elderly}}."
+    src: { page: 154, quote: "The procedure has significant mortality (around 10%) and morbidity, particularly in elderly patients." }
+    status: unverified
+    tags: [numbers]
+  - id: hem.L09.162
+    kind: enumerate
+    topic: pmf-treatment
+    prompt: Enumerate the problems after splenectomy in PMF.
+    points: [Perioperative bleeding, Infection, Thrombosis, Rebound thrombocytosis, Progressive hepatomegaly]
+    pass: 4
+    src: { page: 154, quote: "Problems include perioperative bleeding, infection and thrombosis, as well as rebound thrombocytosis and progressive hepatomegaly." }
+    status: unverified
+  - id: hem.L09.163
+    kind: card
+    topic: pmf-treatment
+    front: "Splenic irradiation in PMF: effect and danger?"
+    back: It shrinks the spleen significantly but only transiently, and can cause life-threatening cytopenias.
+    src: { page: 154, quote: "It can significantly reduce splenic size, but only transiently." }
+    status: unverified
+  - id: hem.L09.164
+    kind: card
+    topic: pmf-treatment
+    front: Besides the spleen, what else can radiotherapy treat in PMF?
+    back: Pockets of extramedullary hemopoiesis in vital organs or body cavities.
+    src: { page: 154, quote: "Radiotherapy can also be useful for treating pockets of extramedullary hemopoiesis involving vital organs or bodily cavities." }
+    status: unverified
+  - id: hem.L09.165
+    kind: card
+    topic: pmf-treatment
+    front: Is ruxolitinib effective for extramedullary hemopoiesis outside the spleen and liver?
+    back: Yes. With wider JAK inhibitor use, splenectomy and splenic irradiation will likely become last resorts.
+    src: { page: 154, quote: "Ruxolitinib has also been shown to be effective for treating extramedullary hemopoiesis outside the spleen and liver." }
+    status: unverified
+  - id: hem.L09.166
+    kind: mcq
+    topic: pmf-treatment
+    stem: "A 41-year-old man has high-risk PMF and a fit, HLA-matched sibling. What is the only treatment that can cure him?"
+    options:
+      - Allogeneic stem cell transplantation
+      - Ruxolitinib
+      - Splenectomy
+      - Hydroxycarbamide
+      - Interferon-alpha
+    answer: 0
+    why:
+      - "Correct: allogeneic SCT is the only curative treatment; at ≤45 years long-term survival is about 50% (p151–152)."
+      - Ruxolitinib controls symptoms and spleen size and improves survival, but does not cure.
+      - Splenectomy is palliative, with about 10% mortality.
+      - Cytoreduction only controls counts and organomegaly.
+      - Interferon may help early disease but is not curative.
+    src: { page: 151, quote: "The only curative treatment for PMF is allogeneic stem cell transplantation (SCT)." }
+    status: unverified
+  - id: hem.L09.167
+    kind: mcq
+    topic: pmf-treatment
+    stem: "A woman with intermediate-2 PMF started ruxolitinib 14 weeks ago. Her spleen and night sweats are much better, but Hb fell from 10.5 to 9.5 g/dL. Platelets are stable. Best action?"
+    options:
+      - Expect it; adjust the dose if needed and continue
+      - Stop ruxolitinib at once
+      - Arrange urgent splenectomy
+      - Investigate for AML transformation
+      - Start busulfan
+    answer: 0
+    why:
+      - "Correct: a ~10% Hb fall peaking at 12–16 weeks is predictable and resolves; dose modification, EPO or androgens help (p152)."
+      - Abrupt withdrawal causes rebound of symptoms and splenomegaly.
+      - Her spleen is responding to the drug.
+      - A predictable drop in Hb is not a sign of leukemia.
+      - Busulfan is not part of PMF treatment in the lecture.
+    src: { page: 152, quote: "a predictable fall in hemoglobin levels by 10%, peaking at 12–16 weeks and gradually resolving thereafter)" }
+    status: unverified
+  - id: hem.L09.168
+    kind: mcq
+    topic: pmf-treatment
+    stem: "A man on ruxolitinib for PMF stops it suddenly before a trip. Ten days later he has fever-like sweats and a rapidly enlarging, painful spleen. What is the most likely cause?"
+    options:
+      - Rebound of symptoms and splenomegaly after withdrawal
+      - Herpes zoster reactivation
+      - Splenic irradiation toxicity
+      - Post-splenectomy thrombocytosis
+      - Thalidomide toxicity
+    answer: 0
+    why:
+      - "Correct: rebound of symptoms and splenomegaly is a known effect after ruxolitinib withdrawal (p152)."
+      - Herpes reactivation is a risk while on the drug, and causes a dermatomal rash.
+      - He has not had irradiation.
+      - He has not had a splenectomy.
+      - He is not on thalidomide.
+    src: { page: 152, quote: "Rebound of symptoms and splenomegaly after withdrawal." }
+    status: unverified
+  - id: hem.L09.169
+    kind: mcq
+    topic: pmf-treatment
+    stem: "Which PMF patient is most likely to respond to androgens for anemia?"
+    options:
+      - A patient with a normal karyotype and no massive splenomegaly
+      - A patient with a spleen in the right iliac fossa
+      - A patient with chromosome 5 and 7 abnormalities
+      - A patient who has transformed to AML
+      - A patient with extreme thrombocytosis on thalidomide
+    answer: 0
+    why:
+      - "Correct: the best androgen responses are without massive splenomegaly and with a normal karyotype (p152)."
+      - Massive splenomegaly predicts a poorer response.
+      - An abnormal karyotype predicts a poorer response.
+      - AML transformation is usually rapidly fatal; androgens do not treat it.
+      - That is a thalidomide complication, not an androgen predictor.
+    src: { page: 152, quote: "Androgens: give response in up to one third of cases, with the best responses seen in patients without massive splenomegaly and with a normal karyotype." }
+    status: unverified
+  - id: hem.L09.170
+    kind: mcq
+    topic: pmf-treatment
+    stem: "A PMF patient has platelets of 35 × 10⁹/L and a moderately enlarged, painless spleen. He asks for splenectomy to raise his platelets. What do you tell him?"
+    options:
+      - There is no good evidence that thrombocytopenia responds to splenectomy
+      - Splenectomy reliably normalizes platelets in PMF
+      - Splenectomy is low risk, with under 1% mortality
+      - Splenectomy is the first-line treatment of PMF
+      - Splenectomy cures PMF
+    answer: 0
+    why:
+      - "Correct: the book says there is no good evidence that thrombocytopenia responds (p154)."
+      - The lecture says the opposite.
+      - Mortality is around 10%.
+      - Indications are splenic pain, constitutional symptoms, portal hypertension and transfusion-dependent anemia.
+      - Only allogeneic SCT is curative.
+    src: { page: 154, quote: "In contrast, there is no good evidence that thrombocytopenia responds to splenectomy." }
+    status: unverified
+  - id: hem.L09.171
+    kind: mcq
+    topic: pmf-treatment
+    stem: "A PMF patient on thalidomide for anemia develops a swollen, painful calf and platelets of 1,100 × 10⁹/L. What is the best explanation?"
+    options:
+      - Thalidomide raises the risk of extreme thrombocytosis and venous thrombosis
+      - Androgen-induced liver injury
+      - Ruxolitinib withdrawal
+      - Herpes reactivation
+      - Erythropoietin-induced hemolysis
+    answer: 0
+    why:
+      - "Correct: thalidomide increases the risk of extreme thrombocytosis and probably venous thrombosis (p153)."
+      - Androgens cause virilization and abnormal LFTs, not DVT with thrombocytosis.
+      - He is not on ruxolitinib.
+      - Herpes reactivation is a ruxolitinib risk.
+      - The lecture does not describe this.
+    src: { page: 153, quote: "thalidomide increases the risk of extreme thrombocytosis and probably that of venous thrombosis" }
+    status: unverified
+  # ---------- cases ----------
+  - id: hem.L09.172
+    kind: case
+    topic: et-treatment
+    stem: "A 63-year-old woman is referred with platelets of 980 × 10⁹/L on two counts, found during a check-up for headaches. Hb and WBC are normal."
+    steps:
+      - reveal: "Ferritin and CRP are normal. No bleeding, surgery, infection or cancer. She has never had a high count before."
+        question: What next?
+        options: ["Clonal work-up: BCR-ABL, JAK2 (then CALR/MPL), marrow, cytogenetics", Treat as reactive and recheck in a year, Test THPO for inherited thrombocytosis, Start busulfan]
+        answer: 0
+        why: "No reactive cause and no life-long history, so evaluate for clonal thrombocytosis (p139). A reactive label needs a cause. THPO/MPL testing is for a life-long or family history. Busulfan is rarely used."
+      - reveal: "JAK2 V617F is positive. BCR-ABL1 is negative. Marrow shows enlarged hyperlobulated megakaryocytes without fibrosis."
+        question: Diagnosis and risk group?
+        options: ["ET, high risk (age over 60)", "ET, intermediate risk", "PMF, prefibrotic", "PV"]
+        answer: 0
+        why: "All four WHO major criteria for ET are met (p135); age over 60 alone makes her high risk (p140). Intermediate risk is 40–60. PMF needs atypia and grade 2–3 fibrosis. Her Hb is normal, so not PV."
+      - question: First-line treatment?
+        options: [Hydroxycarbamide plus aspirin, Aspirin alone, Anagrelide plus aspirin, Interferon-alpha]
+        answer: 0
+        why: "Hydroxyurea plus aspirin is first line for high-risk ET (p142). Aspirin alone is low risk. Anagrelide is second line. IFN suits pregnancy and some young patients."
+      - reveal: "Eight years later her spleen, previously impalpable, is 6 cm below the costal margin and Hb has fallen to 10 g/dL."
+        question: What should you suspect?
+        options: [Post-ET myelofibrosis, Transformation to PV, Hydroxycarbamide toxicity, Acquired von Willebrand disease]
+        answer: 0
+        why: "Progressive splenomegaly in ET raises suspicion of evolving myelofibrosis, which occurs in 10% (p137). PV would raise Hb. Hydroxycarbamide causes cytopenias but not a growing spleen. Acquired vWD causes bleeding."
+    src: { page: 140, quote: "High-risk patients are those; Over 60 years old" }
+    status: unverified
+  - id: hem.L09.173
+    kind: case
+    topic: pmf-prognosis
+    stem: "A 58-year-old man has 6 months of left upper quadrant dragging pain, night sweats and 7 kg weight loss. The spleen reaches the umbilicus."
+    steps:
+      - reveal: "Hb 95 g/L, WBC 18 × 10⁹/L with 2% blasts, platelets 160 × 10⁹/L. The film shows nucleated red cells, myelocytes and teardrop cells."
+        question: What does the film show and what is the leading diagnosis?
+        options: ["Leukoerythroblastic film; PMF most likely", "Reactive neutrophilia from infection", "Iron deficiency", "Essential thrombocythemia"]
+        answer: 0
+        why: "Myeloid and erythroid precursors with dacryocytes are the PMF film (p149), with near-universal splenomegaly (p147). Infection would not give teardrops and a huge spleen. Iron deficiency gives microcytosis and thrombocytosis. ET has high platelets and a small spleen."
+      - reveal: "Marrow aspiration is a dry tap."
+        question: Next step?
+        options: [Trephine biopsy with reticulin (silver) and trichrome stains, Repeat aspiration, Splenectomy for diagnosis, Treat empirically without histology]
+        answer: 0
+        why: "A trephine biopsy is essential; silver shows reticulin and trichrome shows collagen (p150). Repeat aspirates are usually dry. Splenectomy is not diagnostic."
+      - reveal: "Trephine: atypical megakaryocytes with grade 3 fibrosis. JAK2 V617F positive. BCR-ABL1 negative."
+        question: What is his IPSS?
+        options: ["3 points (Hb, blasts, symptoms): high risk, median 27 months", "2 points: intermediate-2", "1 point: intermediate-1", "4 points: high risk"]
+        answer: 0
+        why: "Age 58 (0), WBC 18 (0), Hb 95 g/L (1), blasts 2% (1), constitutional symptoms (1) = 3, high risk, median 27 months (p151)."
+      - question: He is fit but has no donor yet. Which drug improves symptoms, spleen size and survival in his risk group?
+        options: [Ruxolitinib, Thalidomide, Busulfan, Anagrelide]
+        answer: 0
+        why: "COMFORT trials: ruxolitinib improves symptoms, spleen and survival in intermediate-2 and high-risk PMF regardless of JAK status (p152). Thalidomide treats anemia. Busulfan and anagrelide are ET drugs."
+    src: { page: 151, quote: "Risk assignment: Low = 0; Intermediate 1 = 1; Intermediate 2 = 2; High = 3+" }
+    status: unverified
+  - id: hem.L09.174
+    kind: case
+    topic: et-pregnancy
+    stem: "A 30-year-old woman with JAK2-positive ET had a portal vein thrombosis 2 years ago. She takes hydroxycarbamide and aspirin and is planning a pregnancy."
+    steps:
+      - question: What is her ET risk group?
+        options: ["High risk (prior thrombosis)", "Low risk (under 40)", "Intermediate risk", "Cannot be classified"]
+        answer: 0
+        why: "A prior thrombosis is a high-risk feature at any age (p140). Low risk needs age under 40 and no high-risk feature."
+      - question: What should happen to hydroxycarbamide?
+        options: ["Stop it; use interferon-alpha if cytoreduction is needed", Continue it, Switch to anagrelide, Switch to busulfan]
+        answer: 0
+        why: "Hydroxyurea and anagrelide are teratogenic (p144); IFN-α has a clearer role in pregnancy (p142). Busulfan is leukemogenic."
+      - question: What is the commonest pregnancy complication you counsel her about?
+        options: ["First-trimester miscarriage (up to 30%)", Pre-eclampsia, Maternal death, Neonatal thrombocytosis]
+        answer: 0
+        why: "First-trimester miscarriage, up to 30%, from placental microinfarcts (p143). Pre-eclampsia is less frequent. No maternal deaths in 220 pregnancies."
+      - reveal: "She delivers a healthy baby and wants to breast-feed while on interferon-alpha."
+        question: What do you advise?
+        options: ["Breast-feeding has been reported to be successful on IFN", Breast-feeding is contraindicated on IFN, Switch to hydroxycarbamide while breast-feeding, Switch to anagrelide while breast-feeding]
+        answer: 0
+        why: "IFN is excreted in milk but unlikely to be absorbed intact; successful breast-feeding is reported (p144). Hydroxyurea and anagrelide are in milk, so breast-feeding is contraindicated on them."
+    src: { page: 143, quote: "the commonest complication of ET is first-trimester miscarriage, which occurs in up to 30% of pregnancies" }
+    status: unverified
+  # ---------- p155: book questions ----------
+  - id: hem.L09.175
+    kind: essay
+    topic: mpn
+    prompt: Define BCR/ABL-negative myeloproliferative neoplasms and identify the driver mutations (JAK2, MPL, CALR) and the proposed pathogenic mechanism.
+    outline:
+      - "Definition": ["Clonal stem cell disorders that increase one or more mature blood cell lines", "Classical three: PV, ET, PMF (Dameshek 1951)", "Shared features; can transform into one another and into AML"]
+      - "JAK2": ["Chromosome 9p24", "V617F in nearly all PV, about half of ET (55%) and PMF"]
+      - "CALR and MPL": ["CALR in about 30% (JAK2-unmutated ET/PMF)", "MPL (TPO receptor) in about 5%", "Driver mutation found in 80–90% of ET; the rest are triple-negative"]
+      - "Mechanism of fibrosis (PMF)": ["Clonal megakaryocytes release cytokines (TGFβ-1, PDGF, VEGF) that stimulate fibroblasts", "Higher TPO: more megakaryocytes, faster fibrosis"]
+    src: { page: 133, quote: "clonal disorders of hemopoietic stem cells that lead to an increase in the numbers of one or more mature blood cell progeny." }
+    status: unverified
+    tags: [book-question]
+  - id: hem.L09.176
+    kind: essay
+    topic: et-complications
+    prompt: Discuss disease progression, including transitions between ET, PV and PMF.
+    outline:
+      - "Shared biology": ["Related clonal disorders that can transform into one another and into AML"]
+      - "ET": ["Post-ET myelofibrosis 10%", "To PV 1–2% over 10 years", "Progressive splenomegaly suggests evolving MF", "Reticulin progression more on anagrelide"]
+      - "To a PMF-like picture": ["PV and ET can resemble PMF after a latency of many years", "CALR: more myelofibrotic transformation"]
+      - "Leukemic transformation": ["ET: rare; cytogenetic abnormalities and alkylators raise risk; ~3% on hydroxycarbamide alone at 8 years", "PMF: 20–30% (≥20% blasts), usually rapidly fatal"]
+    src: { page: 137, quote: "occurs in 10% of ET patients while transformation to PV is much less common with an incidence of 1-2% over 10 years" }
+    status: unverified
+    tags: [book-question]
+  - id: hem.L09.177
+    kind: essay
+    topic: et-treatment
+    prompt: Define ET, including clinical features, pathophysiology, laboratory findings, diagnostic criteria, complications and management.
+    outline:
+      - "Definition and epidemiology": ["BCR/ABL-negative MPN of the megakaryocyte line", "1.5–2.0/100,000; median age 50–55, second peak in young women"]
+      - "Laboratory and WHO criteria": ["Platelets ≥450 × 10⁹/L; marrow with enlarged hyperlobulated megakaryocytes", "Exclude CML, PV, PMF, MDS; JAK2/CALR/MPL", "All four major, or first three plus minor"]
+      - "Complications": ["Thrombosis (main cause of morbidity and mortality, 15–20% at presentation)", "Bleeding with platelets >1000 (acquired vWD)", "Mild splenomegaly 10–20%; MF 10%; PV 1–2%; rare MDS/AML"]
+      - "Management": ["High risk (>60 or high-risk feature): hydroxyurea plus aspirin", "Intermediate (40–60): aspirin ± hydroxycarbamide", "Low (<40): low-dose aspirin", "Second line: anagrelide; IFN-α in pregnancy"]
+    src: { page: 135, quote: "Diagnosis of ET requires meeting all four major criteria or the first three major criteria and one of the minor criteria" }
+    status: unverified
+    tags: [book-question]
+  - id: hem.L09.178
+    kind: essay
+    topic: pmf-treatment
+    prompt: Define PMF and describe its clinical features, laboratory findings, diagnostic criteria, complications, and lines of treatment of anemia and splenomegaly.
+    outline:
+      - "Definition": ["Clonal MPN with progressive marrow fibrosis from megakaryocyte cytokines", "Poorest prognosis of the MPNs; median survival 3–5 years"]
+      - "Clinical": ["Splenomegaly in almost all; massive in 10%", "Hypermetabolic symptoms; extramedullary hemopoiesis", "Anemia; platelets high then low; AML in 20–30%"]
+      - "Laboratory and WHO criteria": ["Leukoerythroblastic film, dacryocytes; dry tap, trephine essential", "3 major (fibrosis 2–3, exclusion, clonal marker) + ≥1 minor"]
+      - "Anemia": ["Androgens, steroids, EPO, thalidomide, pomalidomide", "Most become transfusion-dependent"]
+      - "Splenomegaly": ["Ruxolitinib", "Cytoreduction (hydroxycarbamide)", "Splenectomy (10% mortality) or splenic irradiation (transient)", "Allogeneic SCT is the only cure"]
+    src: { page: 144, quote: "PMF has the poorest prognosis of the MPNs." }
+    status: unverified
+    tags: [book-question]

@@ -122,21 +122,8 @@ pub mod nav {
 }
 
 pub mod today {
-    pub const TITLE: &str = "النهارده";
     pub const DUE: &str = "مستحق مراجعة";
     pub const NEW: &str = "جديد متاح";
-    pub const CHECKED: &str = "راجعت صحته";
-    /// "المستحق ياخد حوالي 12 دقيقة. …"
-    pub fn due_time(minutes: u32) -> String {
-        format!(
-            "المستحق ياخد حوالي {}. الجلسة بتبدأ بالأضعف.",
-            super::count::count(minutes, &super::count::MINUTE)
-        )
-    }
-    /// "ابدأ جلسة 10 دقايق", with the session length he picked.
-    pub fn start(minutes: u32) -> String {
-        format!("ابدأ جلسة {}", super::count::count(minutes, &super::count::MINUTE))
-    }
     /// "3 حالات مستنية مراجعة في شاشة الحالات".
     pub fn due_cases(n: usize) -> String {
         format!("{} مستنية مراجعة في شاشة الحالات", super::count::count(n, &super::count::CASE))
@@ -203,6 +190,52 @@ pub mod today {
         format!("لو علّيت حد المراجعات اليومي لـ {cap}، الخطة تلحق كلها. تقدر تعدّله من تقدّمي ← خطة الامتحان.")
     }
     pub const TIGHT_HIGH_YIELD: &str = "الوقت مش مكفّي كل الجديد قبل آخر الأيام. ركّز على high-yield الأول.";
+
+    // The 2026-10-29 redesign: a greeting, the session length, one start.
+    pub const EYEBROW: &str = "جلسة صغيرة، وفهم ثابت";
+    pub const READY_Q: &str = "جاهز لجلسة هادية؟";
+    pub const DONE_Q: &str = "خلّصت النهارده. عاش!";
+    pub const TIME_Q: &str = "معاك قد إيه؟";
+    pub const TIME_HINT: &str = "طول الجلسة. بيتحفظ كاختيارك العادي.";
+    /// "5 د" on a session-length chip.
+    pub fn minutes_short(m: u32) -> String {
+        format!("{m} د")
+    }
+    pub const HERO_KICKER: &str = "المراجعة المستحقة";
+    pub const HERO_KICKER_NEW: &str = "خطوة جديدة";
+    pub const HERO_KICKER_PLAN: &str = "خطة النهارده";
+    /// The hero's headline from the real counts.
+    pub fn headline(due: usize, new: usize) -> String {
+        use super::count::{NEW_THING, REVIEW, count};
+        match (due, new) {
+            (0, n) => format!("{}، على قد وقتك.", count(n, &NEW_THING)),
+            (d, 0) => format!("{}، وبس.", count(d, &REVIEW)),
+            (d, n) => format!("{}، و{}.", count(d, &REVIEW), count(n, &NEW_THING)),
+        }
+    }
+    pub fn hero_body(due: usize, new: usize) -> String {
+        match (due, new) {
+            (0, _) => "مفيش مستحق. نبدأ بالجديد على قد الوقت اللي اخترته.".to_string(),
+            (_, 0) => "نبدأ بالأضعف، والجلسة بتقف لما وقتك يخلص.".to_string(),
+            _ => "نبدأ باللي محتاج تثبيت، وبعده الجديد على قد وقتك.".to_string(),
+        }
+    }
+    /// "ابدأ الجلسة · 10 دقايق".
+    pub fn start_session(minutes: u32) -> String {
+        format!("ابدأ الجلسة · {}", super::count::count(minutes, &super::count::MINUTE))
+    }
+    pub const MINUTES_ALL: &str = "دقايق للكل تقريبًا";
+    pub const MINUTES_HINT: &str = "شوف الحمل في الأيام الجاية";
+    pub const OPEN_NEXT_LESSON: &str = "افتح الدرس الجاي";
+    pub const CONTINUE_HEAD: &str = "كمّل من مكانك";
+    pub const ALL_LESSONS: &str = "كل الدروس";
+    pub const MORE_HEAD: &str = "حاجات تانية تفيدك";
+    pub const QUICK_BANK: &str = "تدريب أسئلة سريع";
+    pub const QUICK_BANK_SUB: &str = "اختار موضوع، وجاوب على قد وقتك";
+    pub const CHECKED_ROW: &str = "مراجعة صحة المحتوى";
+    pub fn checked_sub(n: usize) -> String {
+        format!("راجعت صحة {} لحد دلوقتي", super::count::count(n, &super::count::ITEM))
+    }
 }
 
 pub mod study_settings {
@@ -1409,11 +1442,8 @@ pub mod recap {
 }
 
 pub mod learn {
-    pub const TITLE: &str = "الدروس";
-    pub const INTRO: &str = "افهم الأول، وبعدين راجع. كل درس شرح بالمصري، رسومات، حاجات تحفظ بيها، وأسئلة صغيرة في النص علشان تتأكد إنك ماشي صح.";
     pub const NONE_YET: &str = "الدروس لسه بتتكتب. أول ما درس يجهز هتلاقيه هنا.";
     pub const OF: &str = "من";
-    pub const LESSONS_DONE: &str = "درس خلّصته";
     pub const START_FIRST: &str = "ابدأ أول درس";
     pub const CONTINUE: &str = "كمّل";
     pub const ALL_LESSONS_DONE: &str = "خلّصت كل الدروس المكتوبة. عاش!";
@@ -1422,8 +1452,6 @@ pub mod learn {
     pub const WRITING: &str = "بتتكتب";
     pub const PAGES: &str = "صفحات";
     pub const NEW: &str = "جديد";
-    pub const TODAY_KICKER: &str = "درس النهارده";
-    pub const OPEN_LESSON: &str = "افتح الدرس";
     pub const EXPLAIN: &str = "اشرحهولي";
     pub const EXPLAIN_HINT: &str = "افتح الدرس اللي بيشرح السؤال ده";
     pub const OPEN_LECTURE: &str = "افتح المحاضرة";
@@ -1554,6 +1582,44 @@ pub mod learn {
             "عادي جدًا من أول مرة، ده درس جديد. الكروت هتثبّته."
         }
     }
+
+    // The 2026-10-29 redesign of the list.
+    pub const HEAD: &str = "دروس قصيرة، وفهم أعمق";
+    pub const HEAD_SUB: &str = "افهم فكرة، وبعدها جرّب تسترجعها.";
+    pub const SEARCH: &str = "محاضرة، موضوع، أو كلمة…";
+    pub const SEARCH_LABEL: &str = "دوّر في الدروس";
+    pub const CLEAR_SEARCH: &str = "امسح البحث";
+    pub fn no_match(q: &str) -> String {
+        format!("مفيش درس فيه «{q}». جرّب كلمة تانية أو اسم المحاضرة بالإنجليزي.")
+    }
+    pub fn lecture_n(code: &str) -> String {
+        format!("المحاضرة {code}")
+    }
+    pub fn lessons_n(n: usize) -> String {
+        match n {
+            1 => "درس واحد".to_string(),
+            2 => "درسين".to_string(),
+            3..=10 => format!("{n} دروس"),
+            _ => format!("{n} درس"),
+        }
+    }
+    /// "2 من 5 خلّصتهم".
+    pub fn done_of(done: usize, total: usize) -> String {
+        format!("{done} من {total} خلّصتهم")
+    }
+    pub const LECTURE_PAGE: &str = "صفحة المحاضرة";
+    pub const OTHER_LECTURES: &str = "محاضرات تانية";
+    pub const SHOW_LECTURE: &str = "اعرض دروس المحاضرة دي";
+    pub const STATE_CURRENT: &str = "كمّل";
+    pub const STATE_NEXT: &str = "الجاي";
+    pub const STATE_NEW: &str = "جديد";
+    pub const STATE_DONE: &str = "خلّصته";
+    /// "خطوة 3 من 9".
+    pub fn step_of(at: usize, n: usize) -> String {
+        format!("خطوة {at} من {n}")
+    }
+    pub const NOW_KICKER: &str = "الدرس الحالي";
+    pub const NEXT_KICKER: &str = "الدرس الجاي";
 }
 
 pub mod refs {

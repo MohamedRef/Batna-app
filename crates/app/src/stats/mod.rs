@@ -312,7 +312,9 @@ pub fn SessionButton(label: &'static str, ids: Vec<String>) -> Element {
             button {
                 class: "btn btn-primary",
                 disabled: playable.is_empty(),
-                onclick: move |_| {
+                // Inside a card that opens on a tap (Today's hero), this button's own job wins.
+                onclick: move |e: MouseEvent| {
+                    e.stop_propagation();
                     *crate::study::START.write() =
                         Some(crate::study::Start { lectures: None, items: Some(playable.clone()), minutes: 10 });
                     ui.screen.set(crate::Screen::Study);

@@ -1147,7 +1147,11 @@ pub mod settings {
 
     pub const DATA_FOLDER: &str = "فولدر البيانات";
     pub const DATA_NOWHERE: &str = "مش معروف على الجهاز ده";
-    pub const DATA_LOCAL: &str = "كل اللي بتذاكره متسجل على الجهاز ده. النسخة الاحتياطية والمزامنة جايين.";
+    pub const DATA_LOCAL: &str =
+        "كل اللي بتذاكره متسجل على الجهاز ده. خد منه نسخة احتياطية من فوق، أو زامنه مع أجهزتك من «المزامنة».";
+    pub const DATA_GROUP_BACKUP: &str = "احفظ ورجّع";
+    pub const DATA_GROUP_EXPORT: &str = "صدّر لبرّه";
+    pub const DATA_GROUP_DEVICE: &str = "على الجهاز ده";
 
     pub const VERSION: &str = "النسخة";
     pub const CONTENT: &str = "المحتوى";

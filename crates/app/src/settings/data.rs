@@ -9,6 +9,16 @@ use crate::i18n::settings as tx;
 pub fn DataSection() -> Element {
     let folder = crate::prefs::data_dir().map(|d| d.display().to_string());
     rsx! {
+        style { {crate::today::CSS.text()} }
+        style { {crate::verify::CSS.text()} }
+        // Three groups: keep a copy, send it elsewhere, and this device.
+        div { class: "section-head", h2 { {tx::DATA_GROUP_BACKUP} } }
+        crate::data_export::ExportCard {}
+        crate::import::ImportCard {}
+        div { class: "section-head", h2 { {tx::DATA_GROUP_EXPORT} } }
+        crate::anki::AnkiExport {}
+        crate::verify::ExportVerdicts {}
+        div { class: "section-head", h2 { {tx::DATA_GROUP_DEVICE} } }
         section { class: "card",
             h2 { {tx::DATA_FOLDER} }
             match folder {
@@ -21,12 +31,6 @@ pub fn DataSection() -> Element {
                 p { class: "small", role: "alert", {crate::i18n::study_settings::STORE_MEMORY} }
             }
         }
-        style { {crate::today::CSS.text()} }
-        style { {crate::verify::CSS.text()} }
-        crate::verify::ExportVerdicts {}
-        crate::data_export::ExportCard {}
-        crate::anki::AnkiExport {}
-        crate::import::ImportCard {}
         crate::diag::DiagnosticsCard {}
     }
 }

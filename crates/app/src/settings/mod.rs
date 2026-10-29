@@ -216,8 +216,11 @@ pub fn SettingsSheet() -> Element {
                             key: "{s.id()}",
                             aria_current: if current == s { "true" } else { "false" },
                             onclick: move |_| section_sig.set(Some(s)),
-                            span { class: "ss-title", {s.title()} }
-                            span { class: "ss-sub", {s.summary()} }
+                            span { class: "row-icon", aria_hidden: "true", {crate::icons::section(s.id())} }
+                            span { class: "ss-text",
+                                span { class: "ss-title", {s.title()} }
+                                span { class: "ss-sub", {s.summary()} }
+                            }
                         }
                     }
                 }

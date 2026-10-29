@@ -35,12 +35,12 @@ const SHEET_CSS: &str = r#"
 .us-backdrop { position: fixed; inset: 0; z-index: 60; background: rgb(0 0 0 / 0.45); }
 .us-sheet { position: fixed; z-index: 61; inset: 0; display: flex; flex-direction: column;
   background: var(--bg); color: var(--text);
-  /* Morphe's tones: blue for new, amber for fixes, green for improvements.
-     Filled at 60% over the page and inked at 30% over the text, so each
-     theme (paper, night, black) gets a strong pill with readable text. */
-  --us-new: #4a78e8; --us-fixed: #c08a00; --us-improved: #2f9a3a; --us-installed: #2f9a3a; }
+  /* Morphe's idea from the theme's own tokens: brand for new, gold for
+     fixes, green for improvements. Filled at 60% over the page and inked
+     at 22% over the text, so every theme gets a strong, readable pill. */
+  --us-new: var(--accent); --us-fixed: var(--gold); --us-improved: var(--good); --us-installed: var(--good); }
 @media (min-width: 600px) { .us-sheet { inset: 0; margin: auto; inline-size: min(34rem, 92vw);
-  block-size: min(46rem, 88dvh); border-radius: 1.5rem; border: 1px solid var(--line);
+  block-size: min(46rem, 88dvh); border-radius: var(--radius-sheet, 1.5rem); border: 1px solid var(--line);
   box-shadow: 0 12px 40px rgb(0 0 0 / 0.3); overflow: hidden; } }
 .us-sheet [data-kind="new"], .us-sheet .us-ver.to { --hue: var(--us-new); }
 .us-sheet [data-kind="improved"] { --hue: var(--us-improved); }
@@ -58,8 +58,8 @@ const SHEET_CSS: &str = r#"
 .us-body { flex: 1; overflow-y: auto; overscroll-behavior: contain; padding: 0.25rem 1rem 1rem; }
 .us-lead { margin: 0 0 0.75rem; font-size: 0.875rem; color: var(--muted); }
 .us-summary { display: grid; justify-items: center; gap: 0.75rem; text-align: center;
-  padding: 1.25rem 1rem; margin-block-end: 1.5rem; border-radius: 1.5rem;
-  background: color-mix(in srgb, var(--text) 3%, var(--bg)); border: 1px solid var(--line); }
+  padding: 1.25rem 1rem; margin-block-end: 1.5rem; border-radius: var(--radius-card, 1.5rem);
+  background: var(--soft); border: 1px solid var(--line-soft, var(--line)); }
 .us-jump { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; justify-content: center; }
 .us-ver { padding: 0.3rem 0.75rem; border-radius: 999px; font-size: 0.8125rem; font-weight: 600;
   background: color-mix(in srgb, var(--muted) 30%, var(--bg)); color: var(--text); }

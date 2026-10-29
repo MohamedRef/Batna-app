@@ -1,0 +1,654 @@
+schema: batna.lesson/v1
+lecture: rheum.L12
+lessons:
+  # ------------------------------------------------------------------
+  - id: rheum.L12.lesson1
+    title: "JIA: مفاصل صغيرة ومشكلة كبيرة"
+    hook: "طفل ركبته وارمة من شهرين ومش بيعيط. ده مش دلع، ده أشهر روماتيزم مزمن في الأطفال."
+    minutes: 8
+    pages: [197, 199]
+    topics: [definition, epidemiology, pathophysiology, classification]
+    goals:
+      - "تعرف تعريف الـ JIA والتلات شروط"
+      - "تحفظ نسب الأنواع والسن والجنس"
+      - "ترتب الـ ILAR categories السبعة"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 197
+        quote: "heterogeneous group of disorders characterized by childhood-onset chronic arthritis of unknown cause."
+        title: "التعريف"
+        text: |
+          الـ ==JIA== مش مرض واحد. هو **heterogeneous group of disorders**: chronic arthritis بيبدأ في الطفولة، وسببه unknown (عشان كده idiopathic).
+
+          - **أشهر chronic inflammatory rheumatic disease** في الأطفال.
+          - الـ prevalence: **50–200 لكل 100,000 طفل**.
+          - اتوصف من **1890** ولسه السبب مش واضح.
+      - kind: mnemonic
+        page: 197
+        quote: "All three conditions must be met Arthritis persisting for longer than 6 weeks. Arthritis beginning before 16 years of age."
+        word: "SIX"
+        parts:
+          - { key: "S", text: "Sixteen: arthritis begins before 16 years" }
+          - { key: "I", text: "In place for more than 6 weeks" }
+          - { key: "X", text: "eXclude other causes that mimic arthritis" }
+        hook: |
+          التلات شروط لازم **كلهم** يتحققوا. افتكر **SIX**: الـ 6 أسابيع هي قلب التعريف، و 16 سنة بتبدأ بـ six-teen.
+      - kind: check
+        page: 197
+        quote: "Arthritis persisting for longer than 6 weeks."
+        question: "A 5-year-old has had a swollen knee for 3 weeks; infection excluded. JIA?"
+        options: ["Not yet: needs more than 6 weeks", "Yes, if ANA is positive", "Yes, any arthritis under 16", "No, too young"]
+        answer: 0
+        why:
+          - "صح: لازم الـ arthritis يكمل أكتر من 6 أسابيع."
+          - "الـ ANA مش من الشروط، ومفيش diagnostic test."
+          - "ناقص شرط المدة."
+          - "الـ peak أصلًا من سنة لـ 3 سنين."
+      - kind: figure
+        page: 197
+        quote: "Systemic Onset: 10% to 15% of cases 2. Polyarticular: 15% to 20% of new cases. 3. Pauciarticular: 65% to 75% of new cases."
+        title: "مين أشهر نوع؟"
+        alt: "Three horizontal bars of JIA onset types. Pauciarticular is the longest bar, 65 to 75 percent. Polyarticular 15 to 20 percent. Systemic onset 10 to 15 percent."
+        caption: "الـ pauciarticular (oligo) لوحده تقريبًا تلت أرباع الحالات."
+        svg: |
+          <svg viewBox="0 0 330 170" xmlns="http://www.w3.org/2000/svg">
+            <text x="10" y="22" class="t-sm t-mut">share of new JIA cases</text>
+            <rect x="10" y="35" width="230" height="30" class="fg-acc"/>
+            <text x="18" y="55" class="t-sm t-b">Pauciarticular</text>
+            <text x="248" y="55" class="t-sm t-b">65-75%</text>
+            <rect x="10" y="80" width="60" height="30" class="fg-good"/>
+            <text x="78" y="100" class="t-sm">Polyarticular 15-20%</text>
+            <rect x="10" y="125" width="45" height="30" class="fg-bad"/>
+            <text x="63" y="145" class="t-sm">Systemic onset 10-15%</text>
+          </svg>
+      - kind: explain
+        page: 198
+        quote: "the peak incidence of JRA occurred at one to three years of age, with a preponderance of girls in this age group."
+        title: "السن والجنس"
+        text: |
+          - **Peak أول**: من **1 لـ 3 سنين**، أغلبهم **بنات**.
+          - **Peak تاني** أصغر: **8–10 سنين**، فيه ولاد أكتر بـ oligoarticular JIA.
+          - الـ ==female-to-male== عمومًا **2:1 لـ 3:1**.
+          - الـ oligo تحت 8 سنين ممكن يوصل **8:1**، خصوصًا لو فيه iridocyclitis.
+          - الـ **HLA-B27** late-onset: ولاد أكتر.
+          - الـ **Systemic JIA**: مفيش فرق بين الجنسين.
+      - kind: aside
+        tone: joke
+        page: 198
+        quote: "Systemic JIA shows little or no discrimination between sexes."
+        text: "الـ systemic JIA هو الوحيد اللي عنده مساواة كاملة بين الولاد والبنات. أعدل نوع في المحاضرة، بس للأسف أخطرهم."
+      - kind: explain
+        page: 198
+        quote: "recruitment to the joint by up-regulation of adhesion molecules on synovial endothelium, and retention in the joint of activated cells."
+        title: "إيه اللي بيحصل جوه المفصل؟"
+        text: |
+          الـ ==T-cells== هي البطل: الـ synovial endothelium بيرفع **adhesion molecules** فيشد الـ T cells للمفصل، وبعدين الخلايا المتنشطة بتفضل محبوسة جواه.
+
+          - **من الـ T-cells**: TNF، IFN، IL-2.
+          - **من الـ monocytes**: TNF، IL-1، IL-6، IL-8، IL-12.
+          - الفرامل ضعيفة: **Regulatory T-cells** و IL-4، IL-10، TGF-β **قليلين**.
+          - **HLA-A2** مرتبط بـ early-onset oligoarthritis في البنات.
+      - kind: reveal
+        page: 198
+        quote: "Regulatory T-cells and anti-inflammatory cytokines (IL4, IL10 and TGF β) appear reduced"
+        prompt: "ليه الالتهاب بيفضل مستمر (chronic) بدل ما يهدى لوحده؟"
+        answer: "عشان البنزين كتير (TNF و IL-1 و IL-6 عالية) والفرامل بايظة: الـ Regulatory T-cells والـ anti-inflammatory cytokines (IL-4 و IL-10 و TGF-β) قليلة. والخلايا المتنشطة محبوسة جوه المفصل، فالنار مش بتطفي."
+      - kind: table
+        page: 199
+        quote: "Oligoarticular JIA (PO or EO) < 4 joints in the first 6 months"
+        title: "الـ categories السبعة"
+        columns: ["Category", "Definition"]
+        rows:
+          - ["Systemic (SO)", "Arthritis + fever + 1 of rash, LN, liver/spleen, serositis"]
+          - ["Oligo (PO/EO)", "≤ 4 joints in first 6 months; persistent or extended"]
+          - ["RF-ve poly", "≥ 5 joints in first 6 months, RF-ve"]
+          - ["RF+ve poly", "≥ 5 joints in first 6 months, RF+ve"]
+          - ["ERA", "Arthritis + enthesitis"]
+          - ["Psoriatic", "Arthritis + psoriasis"]
+          - ["Undiff.", "No category, or > 1 category"]
+        hide: [[0, 1], [1, 1], [2, 1], [4, 1], [6, 1]]
+      - kind: match
+        page: 199
+        quote: "Enthesitis related JIA (ERA) Arthritis and enthesitis"
+        prompt: "وصّل كل category بالي بيعرّفها:"
+        pairs:
+          - ["Oligoarticular", "≤ 4 joints in the first 6 months"]
+          - ["Polyarthritis", "≥ 5 joints in the first 6 months"]
+          - ["ERA", "Arthritis and enthesitis"]
+          - ["Systemic onset", "Arthritis, fever and rash, nodes, organomegaly or serositis"]
+          - ["Undifferentiated", "Fits no category or more than one"]
+        why: "الرقم الفاصل بين oligo و poly هو 4 و 5 مفاصل في أول 6 شهور. الـ PO و EO يعني persistent و extended oligo."
+      - kind: try
+        items: [rheum.L12.003, rheum.L12.006, rheum.L12.009, rheum.L12.013, rheum.L12.015]
+    recap:
+      - "JIA = chronic arthritis قبل 16 سنة، أكتر من 6 أسابيع، بعد استبعاد غيره."
+      - "Pauci 65–75%، poly 15–20%، systemic 10–15%."
+      - "Peak 1–3 سنين بنات، وpeak تاني 8–10 ولاد."
+      - "T cells + TNF/IL-1/IL-6 عالية و Tregs قليلة."
+      - "Oligo ≤ 4 مفاصل، poly ≥ 5 في أول 6 شهور."
+    practice: [rheum.L12.001, rheum.L12.002, rheum.L12.003, rheum.L12.004, rheum.L12.005, rheum.L12.006, rheum.L12.007, rheum.L12.008, rheum.L12.009, rheum.L12.010, rheum.L12.011, rheum.L12.012, rheum.L12.013, rheum.L12.014, rheum.L12.015, rheum.L12.016, rheum.L12.017, rheum.L12.091, rheum.L12.092]
+  # ------------------------------------------------------------------
+  - id: rheum.L12.lesson2
+    title: "Oligo و Poly: ركبة بنت صغيرة ولا إيد بنت كبيرة؟"
+    hook: "الـ oligo ركبة وارمة مش بتوجع وعين ساكتة. الـ poly إيد بتتشوه بسرعة. الفرق بينهم بيقرر العلاج والمتابعة."
+    minutes: 8
+    pages: [199, 201]
+    topics: [oligo, poly]
+    goals:
+      - "تعرف صورة الـ oligo وخطر العين"
+      - "تعرف إمتى الـ oligo يبقى extended"
+      - "تعرف صورة الـ polyarticular وتشوهاته"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 199
+        quote: "More in girls than boys 4:1. - 1-3 years old age."
+        title: "الـ Oligoarticular"
+        text: |
+          - **بنات أكتر من ولاد 4:1**، سن **1–3 سنين**.
+          - **Large joints** ما عدا ==hips and shoulders==.
+          - الـ active synovitis: **3 شهور** في EULAR، و **6 أسابيع** في ACR.
+          - لو وصل **4–5 مفاصل بعد أول 6 شهور** = **extended oligoarticular**.
+          - البنات الصغيرين اللي فيهم small joints بدري: خطر يقلبوا poly، و prognosis وحش.
+      - kind: figure
+        page: 200
+        quote: "Ankles, knees, elbows, and 1 to2 small hand joints may be affected (sparing hips and shoulders)."
+        title: "خريطة الـ oligo"
+        alt: "A simple stick figure of a child. Elbows, small hand joints, knees and ankles are marked as affected. Both shoulders and both hips carry a red cross as spared. One eye is marked in red for uveitis."
+        caption: "الركب والكعوب والكوع، وواحد أو اتنين من الـ small hand joints. الحوض والكتف سليمين، والعين هي الخطر الحقيقي."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="165" cy="32" r="20" class="fg-box"/>
+            <circle cx="158" cy="29" r="4" class="fg-dot-bad"/>
+            <text x="195" y="30" class="t-sm t-bad">eye: uveitis</text>
+            <path d="M165 52V165M115 70H215M135 165H195" class="fg-ink"/>
+            <path d="M115 70L100 125L95 175M215 70L230 125L235 175" class="fg-ink"/>
+            <path d="M135 165L130 230L128 285M195 165L200 230L202 285" class="fg-ink"/>
+            <path d="M107 62l16 16M123 62l-16 16M207 62l16 16M223 62l-16 16" class="fg-arrow-bad"/>
+            <path d="M127 157l16 16M143 157l-16 16M187 157l16 16M203 157l-16 16" class="fg-arrow-bad"/>
+            <circle cx="100" cy="125" r="7" class="fg-dot-acc"/>
+            <circle cx="230" cy="125" r="7" class="fg-dot-acc"/>
+            <circle cx="95" cy="182" r="5" class="fg-dot-acc"/>
+            <circle cx="235" cy="182" r="5" class="fg-dot-acc"/>
+            <circle cx="130" cy="230" r="8" class="fg-dot-acc"/>
+            <circle cx="200" cy="230" r="8" class="fg-dot-acc"/>
+            <circle cx="128" cy="285" r="6" class="fg-dot-acc"/>
+            <circle cx="202" cy="285" r="6" class="fg-dot-acc"/>
+            <text x="232" y="74" class="t-sm t-bad">shoulder spared</text>
+            <text x="244" y="129" class="t-sm t-acc">elbow</text>
+            <text x="246" y="186" class="t-sm t-acc">hand joints</text>
+            <text x="212" y="162" class="t-sm t-bad">hip spared</text>
+            <text x="214" y="234" class="t-sm t-acc">knee</text>
+            <text x="214" y="289" class="t-sm t-acc">ankle</text>
+          </svg>
+      - kind: explain
+        page: 200
+        quote: "Joint swelling rather than pain, two thirds of patients present with single joint disease"
+        title: "الصورة الإكلينيكية"
+        text: |
+          - **Swelling أكتر من الألم**، وتلتين المرضى بيبدأوا بمفصل واحد، وممكن juxta-articular muscle atrophy.
+          - وجود ==constitutional manifestations== **يلغي** تشخيص الـ oligoarthritis.
+          - أحيانًا TMJ و cervical spine.
+          - **العين**: iridocyclitis، band keratopathy، glaucoma، cataract، وممكن blindness.
+          - لو فضل pauciarticular **5 سنين**، احتمال يقلب poly أقل.
+      - kind: aside
+        tone: trap
+        page: 199
+        quote: "Chronic anterior uveitis Presence of ANA with a greater risk of complicating eye disease (iridocyclitis)."
+        text: "الطفل مش بيشتكي من عينه. الـ chronic anterior uveitis ساكت، و الـ ANA الإيجابي بيرفع الخطر. عشان كده بنعمل slit lamp دوري حتى لو العين شكلها سليم."
+      - kind: check
+        page: 200
+        quote: "Constitutional manifestations if present excludes the diagnosis of oligoarthritis."
+        question: "A child with 2 swollen joints also has daily fever and weight loss. Oligoarticular JIA?"
+        options: ["No: constitutional features exclude it", "Yes: ≤ 4 joints", "Yes, if ANA positive", "Only if hips are spared"]
+        answer: 0
+        why:
+          - "صح: الـ constitutional manifestations بتلغي الـ oligo؛ فكّر في systemic."
+          - "العدد لوحده مش كفاية."
+          - "الـ ANA مش بيعمل التشخيص."
+          - "المفاصل مش هي المشكلة هنا، المشكلة الحمى."
+      - kind: explain
+        page: 200
+        quote: "Leg length discrepancy with flexion contracture of the affected knee."
+        title: "مضاعفات الـ oligo"
+        text: |
+          - **Leg length discrepancy** مع flexion contracture في الركبة المصابة (الالتهاب بيزود الدم لـ growth plate فالرجل بتطول).
+          - **ألم وتورم حاد** في الرجل من ==ruptured synovial cyst==.
+      - kind: explain
+        page: 200
+        quote: "Rapidly progressive joint disease domenates the clinical picture."
+        title: "الـ Polyarticular"
+        text: |
+          - **RF+ve**: بنات مراهقات، زي adult RA. الـ RF لازم يطلع موجب **مرتين بينهم 3 شهور**.
+          - **RF-ve**: **5 مفاصل على الأقل** في أول 6 شهور.
+          - Low-grade fever و rash عابر 1–2 يوم في الأول، بس **مفيش** LN ولا organomegaly ولا visceral involvement.
+          - ==Rapidly progressive joint disease== هي اللي مسيطرة.
+          - **Boutonniere و swan neck** في الإيد (carpal fusion و tendinopathy).
+      - kind: explain
+        page: 201
+        quote: "Shoulders are commonly involved and flexion contracture occur in elbow involvement."
+        title: "باقي مفاصل الـ poly"
+        text: |
+          - **Shoulders** شائعة (عكس الـ oligo)، و flexion contracture في الكوع.
+          - Tarsal fusion، tenosynovitis، bursitis، flexion deformities في الركبة والحوض.
+          - ==Aseptic necrosis of the hip== ممكن تحصل.
+          - Cervical spine و TMJ شائعين، زي الـ RA.
+      - kind: sort
+        page: 201
+        quote: "Cervical spine involvement and tempromandibular joint affection are common and resembles that of rheumatoid arthritis."
+        prompt: "الملامح دي أقرب لأنهي نوع؟"
+        bins: ["Oligoarticular", "Polyarticular"]
+        cards:
+          - { text: "Hips and shoulders spared", bin: 0 }
+          - { text: "Swelling more than pain, single joint", bin: 0 }
+          - { text: "ANA and silent iridocyclitis", bin: 0 }
+          - { text: "Swan neck and boutonniere", bin: 1 }
+          - { text: "Shoulders commonly involved", bin: 1 }
+          - { text: "Aseptic necrosis of the hip", bin: 1 }
+          - { text: "Adolescent girl, RF positive twice", bin: 1 }
+        why: "الـ oligo بيسيب الحوض والكتف وخطره العين؛ الـ poly بيمسك الكتف والحوض ويشوّه الإيد زي الـ RA."
+      - kind: try
+        items: [rheum.L12.019, rheum.L12.022, rheum.L12.024, rheum.L12.027, rheum.L12.033]
+    recap:
+      - "Oligo: بنات 4:1، 1–3 سنين، large joints ما عدا hip و shoulder."
+      - "Constitutional symptoms تلغي تشخيص الـ oligo."
+      - "ANA + oligo = خطر iridocyclitis الساكت."
+      - "Extended oligo = 4–5 مفاصل بعد أول 6 شهور."
+      - "Poly: progressive، swan neck/boutonniere، shoulder و hip، RF+ve مرتين بينهم 3 شهور."
+    practice: [rheum.L12.018, rheum.L12.019, rheum.L12.020, rheum.L12.021, rheum.L12.022, rheum.L12.023, rheum.L12.024, rheum.L12.025, rheum.L12.026, rheum.L12.027, rheum.L12.028, rheum.L12.029, rheum.L12.030, rheum.L12.031, rheum.L12.032, rheum.L12.033, rheum.L12.093, rheum.L12.094, rheum.L12.095, rheum.L12.112]
+  # ------------------------------------------------------------------
+  - id: rheum.L12.lesson3
+    title: "Systemic و Psoriatic و ERA: تلات وشوش تانية"
+    hook: "حمى كل يوم الساعة 6 وطفح يختفي قبل ما توريه للدكتور: ده الـ systemic JIA بيلعب استغماية."
+    minutes: 9
+    pages: [201, 203]
+    topics: [systemic, psoriatic, era]
+    goals:
+      - "تعرف ILAR criteria للـ systemic JIA وشكل الحمى والطفح"
+      - "تعرف الـ hallmark وسبب الوفاة"
+      - "تعرف معايير الـ psoriatic JIA وصورة الـ ERA"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 201
+        quote: "Equal sex Age of onset 2-3 years. Viral etiology HLA studies demonstrates genetic heterogenity."
+        title: "الـ Systemic onset JIA"
+        text: |
+          - **Equal sex**، سن **2–3 سنين**، و viral etiology متوقعة.
+          - Ankles، elbows، wrists؛ الـ ==hip== غالبًا bilateral ولو موجود يبقى معاه polyarticular disease.
+          - الإيد أكتر من الرجل، و tenosynovitis في الـ carpus و tarsus.
+      - kind: figure
+        page: 202
+        quote: "Fever =2 weeks, quotidien in pattern"
+        title: "الحمى الـ quotidian"
+        alt: "A temperature chart over three days. Each day the line spikes once above 39 degrees then falls back to 37 or below. A pink rash icon appears at each spike."
+        caption: "كل يوم الحرارة بتطلع 39 درجة أو أكتر مرة على الأقل، وبعدين ترجع 37 درجة أو أقل. والطفح بيظهر مع الحمى ويختفي."
+        svg: |
+          <svg viewBox="0 0 330 200" xmlns="http://www.w3.org/2000/svg">
+            <path d="M30 20V170H320" class="fg-ink"/>
+            <path d="M30 60H320" class="fg-thin"/>
+            <path d="M30 130H320" class="fg-thin"/>
+            <text x="2" y="64" class="t-sm">39°</text>
+            <text x="2" y="134" class="t-sm">37°</text>
+            <path d="M30 135L70 135L95 45L120 135L160 135L185 40L210 135L250 135L275 50L300 135L320 135" class="fg-arrow-bad"/>
+            <circle cx="95" cy="30" r="6" class="fg-dot-acc"/>
+            <circle cx="185" cy="25" r="6" class="fg-dot-acc"/>
+            <circle cx="275" cy="35" r="6" class="fg-dot-acc"/>
+            <text x="60" y="190" class="t-sm">day 1</text>
+            <text x="155" y="190" class="t-sm">day 2</text>
+            <text x="245" y="190" class="t-sm">day 3</text>
+            <text x="200" y="15" class="t-sm t-acc">rash with spikes</text>
+          </svg>
+      - kind: table
+        page: 202
+        quote: "Fever =2 weeks, quotidien in pattern"
+        title: "ILAR criteria للـ systemic JIA"
+        columns: ["Criterion", "Detail"]
+        rows:
+          - ["1. Fever", "≥ 2 weeks, quotidian, ≥ 39 °C daily, ≥ 3 days documented"]
+          - ["2. Arthritis", "≥ 1 joint for ≥ 6 weeks"]
+          - ["3. One of", "Evanescent rash, generalized LN, hepato/splenomegaly, serositis"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: explain
+        page: 201
+        quote: "The rash is pale pink, blanching, and is characterized by small macules or maculopapules, transient, non pruritic and mostly on the trunk."
+        title: "الطفح والـ serositis"
+        text: |
+          - الـ **rash**: pale pink، blanching، macules صغيرة، transient، **non-pruritic**، أغلبه على الـ trunk (evanescent).
+          - ACR: **2 weeks fever** + الـ rash المميز. EULAR: لازم feature تالتة غير الحمى والـ arthritis.
+          - ==Serositis== هي الـ **hallmark**: pericarditis، pleuritis، وممكن **tamponade**.
+          - الـ **uveitis نادر** هنا (عكس الـ oligo).
+          - Severe vasculitis مع consumption coagulopathy (بترد على steroids)، و CNS: irritability و lethargy.
+      - kind: aside
+        tone: exam
+        page: 202
+        quote: "Amyloidosis with secondary renal failure (The most common cause of death in systemic onset) followed by infection."
+        text: "سؤال كلاسيكي: أشهر سبب وفاة في الـ systemic onset JIA؟ **Amyloidosis with secondary renal failure**، وبعده infection."
+      - kind: check
+        page: 201
+        quote: "Pericarditis, pleuritis, but uveitis is rare. Involvement of serosal surface is the hallmark of systemic arthritis"
+        question: "Which is the hallmark of systemic onset JIA?"
+        options: ["Serosal involvement", "Chronic anterior uveitis", "Positive RF", "Enthesitis", "Nail pitting"]
+        answer: 0
+        why:
+          - "صح: pericarditis و pleuritis، وممكن tamponade."
+          - "الـ uveitis نادر في الـ systemic."
+          - "أغلبهم seronegative."
+          - "دي بتاعة الـ ERA."
+          - "دي بتاعة الـ psoriatic."
+      - kind: explain
+        page: 202
+        quote: "the presence of arthritis and the typical psoriatic rash, or any two of the following if the rash is absent"
+        title: "Juvenile psoriatic arthritis"
+        text: |
+          **Asymmetric arthritis** في large و small joints، بيبدأ في **mid childhood**.
+
+          التشخيص: arthritis + psoriatic rash، **أو** لو مفيش rash، **أي اتنين** من:
+
+          - Psoriasis في first-degree relative.
+          - ==Dactylitis==: تورم الصباع كله لبعد حدود المفصل (sausage finger).
+          - **Nail pitting**.
+
+          وممكن uveitis، و ANA+ و HLA-B27+ خصوصًا مع axial disease.
+      - kind: explain
+        page: 203
+        quote: "Children affected by enthesitis-related arthritis generally are boys >8 years of age of arthritis is characterized by the presence of enthesitis."
+        title: "Enthesitis-related arthritis (ERA)"
+        text: |
+          - **ولاد فوق 8 سنين**، و ==enthesitis== هو التعريف.
+          - أغلبهم **HLA-B27 positive**.
+          - ألم و stiffness و قلة حركة في الـ **lower back**، و arthritis في مفاصل الرجل.
+      - kind: match
+        page: 203
+        quote: "This type most patients affacted with this type of arthritis are HLA- B27–positive."
+        prompt: "وصّل الطفل بالنوع:"
+        pairs:
+          - ["2-year-old girl, swollen knee, ANA+", "Oligoarticular"]
+          - ["3-year-old, daily fever spikes, rash, pericarditis", "Systemic onset"]
+          - ["12-year-old boy, heel enthesitis, HLA-B27+", "ERA"]
+          - ["8-year-old, dactylitis and nail pitting", "Psoriatic"]
+          - ["15-year-old girl, symmetric hands, RF+ twice", "RF+ve polyarthritis"]
+        why: "كل نوع ليه سن وجنس وعلامة: ANA والعين للـ oligo، الحمى والـ serositis للـ systemic، الـ B27 والـ enthesis للـ ERA، الصباع والضافر للـ psoriatic، والـ RF للـ poly."
+      - kind: try
+        items: [rheum.L12.037, rheum.L12.040, rheum.L12.041, rheum.L12.044, rheum.L12.047]
+    recap:
+      - "Systemic: equal sex، 2–3 سنين، quotidian fever ≥ 2 أسابيع + rash evanescent."
+      - "Hallmark = serositis؛ uveitis نادر."
+      - "أشهر سبب وفاة: amyloidosis + renal failure، بعده infection."
+      - "Psoriatic: arthritis + rash، أو اتنين من family history و dactylitis و nail pitting."
+      - "ERA: ولاد فوق 8، enthesitis، HLA-B27، lower back."
+    practice: [rheum.L12.034, rheum.L12.035, rheum.L12.036, rheum.L12.037, rheum.L12.038, rheum.L12.039, rheum.L12.040, rheum.L12.041, rheum.L12.042, rheum.L12.043, rheum.L12.044, rheum.L12.045, rheum.L12.046, rheum.L12.047, rheum.L12.048, rheum.L12.096, rheum.L12.097, rheum.L12.098, rheum.L12.099, rheum.L12.100, rheum.L12.114]
+  # ------------------------------------------------------------------
+  - id: rheum.L12.lesson4
+    title: "التحاليل والـ prognosis والـ MAS"
+    hook: "طفل systemic JIA الـ ESR بتاعه نزل فجأة. أوعى تفرح: ده ممكن يكون أخطر خبر في المحاضرة."
+    minutes: 9
+    pages: [203, 205]
+    topics: [labs, prognosis, mas]
+    goals:
+      - "تعرف إن مفيش diagnostic test وتحفظ نسب الـ ANA و RF"
+      - "تعرف عوامل الـ prognosis الوحش ومواعيد فحص العين"
+      - "تلقط الـ MAS بدري من التحاليل"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 203
+        quote: "There are no diagnostic tests"
+        title: "التحاليل: مفيش test بيشخّص"
+        text: |
+          - ==No diagnostic test==. التشخيص history و exam.
+          - الـ acute phase reactants: **normal أو mildly raised**.
+          - ESR عالي لوحده من غير أي دليل التهاب تاني: فكّر في **hyperfibrinogenaemia** (نادر).
+          - **ANA في 40–75%**، ومستواه مش بيمشي مع النشاط.
+          - **RF في 5%** بس.
+          - Plain X-ray لتقييم الـ joint damage.
+      - kind: explain
+        page: 204
+        quote: "Anaemia, thrombocytosis, leucocytosis. 2- Raised acute phase reactants. 3- Most childrens are sero negative for RF and ANA."
+        title: "تحاليل الـ systemic onset"
+        text: |
+          - Anaemia، **thrombocytosis**، leucocytosis.
+          - Acute phase reactants عالية.
+          - أغلبهم **seronegative** للـ RF والـ ANA.
+          - Hypoalbuminaemia (multifactorial)، ولو معاها ==heavy proteinuria== فكّر في **amyloidosis**.
+      - kind: explain
+        page: 204
+        quote: "Prognosis is related more to the disease course than to the onset type persistant oligoarticular disease is associated with the best articular outcome"
+        title: "الـ Prognosis"
+        text: |
+          الـ prognosis بيمشي مع ==the course== أكتر من الـ onset type. **Persistent oligo** أحسن outcome، و extended بدري (أول سنة أو تانية) أوحش.
+
+          عوامل الخطر:
+
+          - Systemic onset مع infection أو amyloidosis أو MAS.
+          - Polyarticular disease.
+          - **RF و anti-CCP** إيجابي.
+          - محتاج systemic corticosteroids.
+          - سن أصغر عند البداية.
+          - Female gender.
+      - kind: table
+        page: 204
+        quote: "Those with iridocyclitis and ANA positive oligoarthritis require slit lamp evaluation every 4 months."
+        title: "متابعة العين"
+        columns: ["Group", "Slit lamp"]
+        rows:
+          - ["Iridocyclitis or ANA+ oligo", "Every 4 months"]
+          - ["ANA negative", "Every 6 months"]
+        hide: [[0, 1], [1, 1]]
+      - kind: explain
+        page: 205
+        quote: "About 5–8% of children with systemic juvenile idiopathic arthritis develop a life-threatening complication known as macrophage activation syndrome."
+        title: "الـ Macrophage activation syndrome"
+        text: |
+          **5–8%** من الـ systemic JIA بيجيلهم ==MAS==، وهو life-threatening.
+
+          - **Clinical**: حمى مستمرة فجأة، pancytopenia، hepatosplenomegaly، liver insufficiency، coagulopathy بنزيف، أعراض عصبية.
+          - **Labs**: triglycerides عالية، **sodium واطي**، و **ferritin عالي جدًا**.
+          - في الـ marrow: macrophages بتاكل الـ haemopoietic cells (haemophagocytosis).
+      - kind: figure
+        page: 205
+        quote: "Increasingly abnormal coagulation studies, rising ferritin, or a sudden drop in ESR or platelet count are harbingers of the onset of macrophage activation syndrome"
+        title: "علامات الإنذار"
+        alt: "Two panels. Top: active systemic JIA, with platelets, ESR and fibrinogen arrows pointing up. Bottom: evolving MAS, with platelets and ESR arrows pointing down, ferritin, triglycerides and D-dimer pointing up, sodium down."
+        caption: "الـ systemic JIA العادي: platelets و ESR عاليين. لو نزلوا فجأة والـ ferritin طلع، ده الـ MAS جاي."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="R12u" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-acc"/></marker>
+              <marker id="R12d" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-bad"/></marker>
+            </defs>
+            <rect x="5" y="5" width="320" height="110" rx="8" class="fg-box"/>
+            <text x="15" y="27" class="t-b">Active systemic JIA</text>
+            <path d="M30 95V60" class="fg-arrow-acc" marker-end="url(#R12u)"/>
+            <text x="42" y="80" class="t-sm">Platelets</text>
+            <path d="M130 95V60" class="fg-arrow-acc" marker-end="url(#R12u)"/>
+            <text x="142" y="80" class="t-sm">ESR</text>
+            <path d="M210 95V60" class="fg-arrow-acc" marker-end="url(#R12u)"/>
+            <text x="222" y="80" class="t-sm">WBC, CRP</text>
+            <rect x="5" y="130" width="320" height="165" rx="8" class="fg-bad"/>
+            <text x="15" y="152" class="t-b t-bad">Evolving MAS</text>
+            <path d="M30 170V205" class="fg-arrow-bad" marker-end="url(#R12d)"/>
+            <text x="42" y="190" class="t-sm">Platelets</text>
+            <path d="M130 170V205" class="fg-arrow-bad" marker-end="url(#R12d)"/>
+            <text x="142" y="190" class="t-sm">ESR</text>
+            <path d="M210 170V205" class="fg-arrow-bad" marker-end="url(#R12d)"/>
+            <text x="222" y="190" class="t-sm">Sodium</text>
+            <path d="M30 275V240" class="fg-arrow-acc" marker-end="url(#R12u)"/>
+            <text x="42" y="260" class="t-sm">Ferritin</text>
+            <path d="M130 275V240" class="fg-arrow-acc" marker-end="url(#R12u)"/>
+            <text x="142" y="260" class="t-sm">TG</text>
+            <path d="M210 275V240" class="fg-arrow-acc" marker-end="url(#R12u)"/>
+            <text x="222" y="260" class="t-sm">D-dimer, PT</text>
+          </svg>
+      - kind: reveal
+        page: 205
+        quote: "The presence of a low-grade ‗DIC-like‘ laboratory picture with increased D-dimer, abnormal PT and PTT and increased ferritin is frequently present without clinical hemorrhage."
+        prompt: "ليه الـ ESR بينزل في الـ MAS مع إن العيان أتعب؟"
+        answer: "الكتاب بيقول فيه DIC-like picture (D-dimer عالي، PT و PTT مش مظبوطين). الـ coagulopathy بتستهلك الـ fibrinogen، والـ fibrinogen هو اللي بيرفع الـ ESR، فالـ ESR يقع. عشان كده الـ ESR اللي بينزل فجأة في طفل systemic تعبان علامة خطر، مش تحسن."
+      - kind: explain
+        page: 205
+        quote: "Medications, especially NSAIDs, intramuscular gold, and sulfasalazine, and more recently, etanercept."
+        title: "الـ Triggers"
+        text: |
+          - **Viral illness** قبلها.
+          - أدوية: ==NSAIDs==، intramuscular gold، **sulfasalazine**، ومؤخرًا **etanercept**.
+
+          الاكتشاف والعلاج بدري قبل الـ multisystem involvement بيحسن الـ outcome.
+      - kind: aside
+        tone: joke
+        page: 205
+        quote: "rising ferritin, or a sudden drop in ESR or platelet count are harbingers of the onset of macrophage activation syndrome (MAS)."
+        text: "الـ ferritin في الـ MAS زي سعر الدولار في الأزمات: كل ما تبص تلاقيه أعلى. ولما الـ ESR يهدى فجأة، ده الهدوء اللي قبل العاصفة."
+      - kind: check
+        page: 205
+        quote: "Laboratory features include raised triglyceride concentrations, low sodium concentrations, and pronounced increased ferritin concentrations."
+        question: "Which lab set fits MAS?"
+        options: ["High ferritin, high triglycerides, low sodium", "Low ferritin, low triglycerides", "High platelets, high ESR", "High fibrinogen, high albumin", "Positive RF and anti-CCP"]
+        answer: 0
+        why:
+          - "صح: دي الـ labs اللي في الكتاب."
+          - "العكس تمامًا."
+          - "دي صورة الـ active systemic JIA، مش الـ MAS."
+          - "الـ fibrinogen بيتستهلك في الـ DIC-like picture."
+          - "دي poor prognostic markers في الـ poly."
+      - kind: try
+        items: [rheum.L12.051, rheum.L12.053, rheum.L12.056, rheum.L12.057, rheum.L12.063]
+    recap:
+      - "مفيش diagnostic test؛ ANA 40–75%، RF 5%."
+      - "Systemic: anaemia، thrombocytosis، leucocytosis، seronegative."
+      - "Prognosis مع الـ course؛ persistent oligo أحسن."
+      - "Slit lamp كل 4 شهور للـ ANA+ oligo، كل 6 للـ ANA−."
+      - "MAS 5–8%: ferritin و TG عاليين، Na واطي، platelets و ESR بينزلوا فجأة."
+    practice: [rheum.L12.049, rheum.L12.050, rheum.L12.051, rheum.L12.052, rheum.L12.053, rheum.L12.054, rheum.L12.055, rheum.L12.056, rheum.L12.057, rheum.L12.058, rheum.L12.059, rheum.L12.060, rheum.L12.061, rheum.L12.062, rheum.L12.063, rheum.L12.064, rheum.L12.101, rheum.L12.102, rheum.L12.103, rheum.L12.104, rheum.L12.105, rheum.L12.106, rheum.L12.113, rheum.L12.117]
+  # ------------------------------------------------------------------
+  - id: rheum.L12.lesson5
+    title: "علاج الـ JIA: من الـ NSAID للـ biologic"
+    hook: "الـ MTX بالمتر المربع مش بالكيلو، والـ sulfasalazine ممنوع في نوع واحد. تفاصيل صغيرة بتجيب درجات كبيرة."
+    minutes: 10
+    pages: [206, 210]
+    topics: [nsaids, steroids, dmards, biologics]
+    goals:
+      - "تعرف مكان الـ NSAIDs والـ steroids بجرعاتها"
+      - "تحفظ جرعات الـ DMARDs وممنوعاتها"
+      - "تعرف الـ biologics: مين لمين، وإيه لازم قبلها"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 206
+        quote: "General approach to JIA treatment only 25-33%, mainly oligoarticular respond well 4-6 weeks duration to assess its efficacy"
+        title: "البداية: الـ NSAIDs"
+        text: |
+          - بس **25–33%** بيردوا كويس، وأغلبهم **oligoarticular**.
+          - محتاج **4–6 أسابيع** عشان تحكم على الفايدة.
+          - هي ==disease-modifying== مش remission-inducing: بتقلل الألم والالتهاب وبتحافظ على القوة و range of motion والـ endurance.
+      - kind: aside
+        tone: trap
+        page: 206
+        quote: "Diagnostic criteria for MAS"
+        text: "الكتاب كاتب عنوان **Diagnostic criteria for MAS** في صفحة 206 من غير ما يكتب المعايير، والفقرة اللي بعدها (25–33%) مكتوبة من غير عنوان الدوا. فهمنا من السياق إنها الـ NSAIDs (الرقم 1 قبل 2- Corticosteroids)."
+      - kind: table
+        page: 206
+        quote: "Pulse methyl prednisolone 30 mg\\kg up to 1 gm for severe or life threatening disease."
+        title: "الـ Corticosteroids"
+        columns: ["Regimen", "For"]
+        rows:
+          - ["Intra-articular", "Remission ≥ 6 months in the joint"]
+          - ["Low dose", "Pain, mobilise severe resistant polyarthritis"]
+          - ["Moderate-high", "Systemic symptoms not controlled by NSAIDs"]
+          - ["Pulse MP 30 mg/kg, max 1 g", "Severe or life-threatening disease"]
+        hide: [[1, 1], [2, 1], [3, 1]]
+      - kind: explain
+        page: 206
+        quote: "Accepted initial dose is 10 mg \\m 2 \\week (0ral /parentral) if not effective"
+        title: "الـ Methotrexate: الأساس"
+        text: |
+          ==Methotrexate== هو **cornerstone** لأغلب الـ JIA مع polyarthritis.
+
+          - البداية **10 mg/m²/week** (oral أو parenteral).
+          - لو مش كفاية: لحد **15 mg/m²** أو 0.5–1 mg/kg parenteral. أكتر من كده مفيش فايدة.
+          - أحيانًا بيبدأ خلال **8–12 أسبوع** من الـ NSAIDs في الـ poly.
+          - **Folic acid 1 mg/day** + multivitamin، ومتابعة الكبد والدم.
+      - kind: mnemonic
+        page: 207
+        quote: "Contraindicated in sulfa-allergic or aspirin-sensitive patients. Useful in oligo or polyarticular subgroups. Not for use in systemic onset JIA."
+        word: "SAS"
+        parts:
+          - { key: "S", text: "Sulfa allergy: contraindicated" }
+          - { key: "A", text: "Aspirin sensitivity: contraindicated" }
+          - { key: "S", text: "Systemic onset JIA: not for use (and can trigger MAS)" }
+        hook: |
+          الـ sulfasalazine بيقولك **SAS**: ممنوع مع sulfa، aspirin، و systemic. الجرعة 15–25 mg/kg/d على مرتين، max 1500 mg، والـ enteric-coated أريح.
+      - kind: table
+        page: 207
+        quote: "If < 20 kg: 100mg loading dose + 10 mg/d PO."
+        title: "Leflunomide بالوزن"
+        columns: ["Weight", "Regimen"]
+        rows:
+          - ["< 20 kg", "100 mg once, then 10 mg/d"]
+          - ["20–40 kg", "100 mg/d × 2 days, then 10 mg/d"]
+          - ["> 40 kg", "100 mg/d × 3 days, then 20 mg/d"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: explain
+        page: 207
+        quote: "Accepted dose 6 mg \\kg daily up to 200mg\\day with ophthalmologic examination every 6 months to monitor for evidence of retinal toxicity."
+        title: "باقي الـ DMARDs"
+        text: |
+          - **Leflunomide**: بديل للـ MTX؛ headache، diarrhoea، abdominal pain.
+          - **Hydroxychloroquine**: 6 mg/kg/day لحد 200 mg، و eye exam كل **6 شهور** للـ retinal toxicity.
+          - **Azathioprine**: 2.5–5 mg/kg/day؛ abdominal pain، transaminases، cytopenias، rash في أول شهرين.
+          - ==Cyclosporin==: فعال في الـ **MAS**؛ لوحده مش بيعالج الـ arthritis فبيتجمع مع MTX؛ 3–5 mg/kg/day؛ مشكلته HTN و nephrotoxicity.
+      - kind: check
+        page: 207
+        quote: "Not for use in systemic onset JIA."
+        question: "Which drug should NOT be used in systemic onset JIA?"
+        options: ["Sulfasalazine", "Methotrexate", "Corticosteroids", "Cyclosporin"]
+        answer: 0
+        why:
+          - "صح: not for use in systemic onset، وكمان trigger للـ MAS."
+          - "الـ MTX مستخدم."
+          - "الـ steroids لأعراض الـ systemic الشديدة."
+          - "الـ cyclosporin بيعالج الـ MAS."
+      - kind: explain
+        page: 208
+        quote: "all children should have a documented negative TB skin test before starting any biologic therapy."
+        title: "الـ Biologics"
+        text: |
+          مشاكلها في الأطفال: infections (خصوصًا **varicella**)، التطعيمات، أثرها على مناعة لسه بتتكون، malignancy، و CNS demyelination.
+
+          - لازم ==negative TB skin test== موثق قبل أي biologic.
+          - **Live vaccines ممنوعة** وهو عليها.
+          - **Anti-TNF**: ممتاز في **ERA**، أضعف بكتير في **systemic**.
+          - **Infliximab > etanercept** للـ uveitis.
+          - Anti-TNF ممكن يبطّأ الـ radiologic damage ويزود الـ bone density.
+      - kind: sort
+        page: 209
+        quote: "Interleukin 6 is also an important cytokine in the pathogenesis of systemic arthritis."
+        prompt: "أنهي اختيار للحالة دي؟"
+        bins: ["Good choice", "Poor choice"]
+        cards:
+          - { text: "Tocilizumab for refractory systemic arthritis", bin: 0 }
+          - { text: "Anti-TNF for enthesitis-related arthritis", bin: 0 }
+          - { text: "Infliximab for JIA uveitis", bin: 0 }
+          - { text: "Cyclosporin for MAS", bin: 0 }
+          - { text: "Sulfasalazine for systemic onset JIA", bin: 1 }
+          - { text: "IVIg for the arthritis of polyarticular JIA", bin: 1 }
+          - { text: "Live vaccine during etanercept", bin: 1 }
+        why: "الـ IL-6 مهم في الـ systemic فالـ tocilizumab نفع بعد تاني جرعة. الـ IVIg ما نفعش للـ arthritis في دراستين controlled (يمكن ينفع الـ systemic features). والـ live vaccines ممنوعة مع الـ biologics."
+      - kind: explain
+        page: 209
+        quote: "there is a significant mortality rate associated with ASCT (15%), thus ASCT must still be regarded as an experimental procedure in JIA."
+        title: "آخر الخط"
+        text: |
+          - **Autologous stem-cell transplant**: للـ systemic أو poly المزمن المقاوم، بس الـ mortality **15%** فلسه ==experimental==.
+          - **Surgery**: تغيير مفصل بايظ وموجع، soft tissue release، synovectomy.
+          - **Physical و occupational therapy**: تمارين للقوة والحركة مع splints للـ alignment.
+      - kind: try
+        items: [rheum.L12.068, rheum.L12.071, rheum.L12.075, rheum.L12.076, rheum.L12.083]
+    recap:
+      - "NSAIDs: 25–33% بيردوا (oligo)، احكم بعد 4–6 أسابيع."
+      - "Pulse MP 30 mg/kg لحد 1 g للحالات الخطيرة."
+      - "MTX 10 mg/m²/week، max 15 mg/m²، مع folic acid."
+      - "Sulfasalazine: لا sulfa، لا aspirin، لا systemic."
+      - "Anti-TNF للـ ERA، infliximab للعين، tocilizumab للـ systemic، cyclosporin للـ MAS، و TB test قبل أي biologic."
+    practice: [rheum.L12.065, rheum.L12.066, rheum.L12.067, rheum.L12.068, rheum.L12.069, rheum.L12.070, rheum.L12.071, rheum.L12.072, rheum.L12.073, rheum.L12.074, rheum.L12.075, rheum.L12.076, rheum.L12.077, rheum.L12.078, rheum.L12.079, rheum.L12.080, rheum.L12.081, rheum.L12.082, rheum.L12.083, rheum.L12.084, rheum.L12.085, rheum.L12.086, rheum.L12.087, rheum.L12.088, rheum.L12.089, rheum.L12.090, rheum.L12.107, rheum.L12.108, rheum.L12.109, rheum.L12.110, rheum.L12.111, rheum.L12.115, rheum.L12.116]

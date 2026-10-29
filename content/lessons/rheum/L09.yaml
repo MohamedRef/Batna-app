@@ -1,0 +1,297 @@
+schema: batna.lesson/v1
+lecture: rheum.L09
+lessons:
+  # ------------------------------------------------------------------
+  - id: rheum.L09.lesson1
+    title: "العضلة الملتهبة: مين مين؟"
+    hook: "مش قادرة تقوم من على الكرسي ولا تسرّح شعرها: ده مش كسل، دي عضلة proximal بتشتكي."
+    minutes: 8
+    pages: [164, 166]
+    topics: [overview, pathogenesis, muscle]
+    goals:
+      - "تعدّ الخمس subtypes"
+      - "تربط كل subtype بالـ lesion بتاعه في الـ biopsy"
+      - "تعرف شكل الضعف"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 164
+        title: "IIM يعني إيه؟"
+        quote: "Idiopathic inflammatory myopathies (IIM) are a heterogeneous group of systemic autoimmune diseases primarily affecting skeletal muscle."
+        text: |
+          الـ **IIM** أمراض ==systemic autoimmune== بتضرب الـ **skeletal muscle** أساسًا: التهاب مزمن وضعف.
+
+          بس مش عضلة وبس: ممكن **lungs**، **joints**، **heart**، و **skin**.
+      - kind: explain
+        page: 164
+        title: "الخمس أنواع"
+        quote: "The spectrum of IIM includes polymyositis (PM), dermatomyositis (DM), inclusion body myositis (IBM), immune-mediated necrotizing myopathy (IMNM)"
+        text: |
+          1. ==Dermatomyositis== (DM): classic بالـ rash، و **CADM** (rash من غير ضعف)
+          2. **Polymyositis** (PM): بقى **نادر** وبيتعاد تصنيفه
+          3. **Inclusion body myositis** (IBM): ==asymmetric== و poor response
+          4. **IMNM**: anti-**SRP** و anti-**HMGCR**
+          5. **Overlap**: مع SLE، systemic sclerosis، MCTD
+
+          الـ incidence **1–10 per million**، الستات ضعف الرجالة تقريبًا (**2:1**)، والـ **juvenile DM** في الأطفال.
+      - kind: figure
+        page: 165
+        quote: "Dermatomyositis (DM): Involves complement-mediated damage to capillaries and perifascicular atrophy."
+        title: "كل نوع وجرحه في الـ biopsy"
+        alt: "Four cross-sections of a muscle fascicle. DM: capillaries attacked by complement and atrophic fibres at the fascicle edge. PM: CD8 T cells invading fibres. IBM: fibres with rimmed vacuoles and aggregates. IMNM: necrotic fibres with few inflammatory cells."
+        caption: "الـ ==DM== بيضرب الأوعية (فالأطراف تضمر)، الـ **PM** بيضرب الألياف بـ CD8، الـ **IBM** تآكل + التهاب، والـ **IMNM** necrosis من غير التهاب تقريبًا."
+        svg: |
+          <svg viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="80" cy="80" r="60" class="fg-box"/>
+            <circle cx="80" cy="80" r="40" class="fg-thin"/>
+            <circle cx="35" cy="45" r="8" class="fg-dot-bad"/><circle cx="125" cy="45" r="8" class="fg-dot-bad"/><circle cx="35" cy="115" r="8" class="fg-dot-bad"/><circle cx="125" cy="115" r="8" class="fg-dot-bad"/>
+            <text x="80" y="84" text-anchor="middle" class="t-sm t-b">DM</text>
+            <text x="80" y="158" text-anchor="middle" class="t-sm t-mut">complement on capillaries</text>
+            <circle cx="250" cy="80" r="60" class="fg-box"/>
+            <circle cx="235" cy="70" r="7" class="fg-dot-acc"/><circle cx="262" cy="92" r="7" class="fg-dot-acc"/><circle cx="250" cy="55" r="7" class="fg-dot-acc"/>
+            <text x="250" y="118" text-anchor="middle" class="t-sm t-b">PM</text>
+            <text x="250" y="158" text-anchor="middle" class="t-sm t-mut">CD8+ T cells in fibres</text>
+            <circle cx="80" cy="245" r="60" class="fg-box"/>
+            <circle cx="65" cy="235" r="9" class="fg-thin"/><circle cx="95" cy="255" r="9" class="fg-thin"/><circle cx="80" cy="220" r="6" class="fg-dot-good"/>
+            <text x="80" y="285" text-anchor="middle" class="t-sm t-b">IBM</text>
+            <text x="80" y="322" text-anchor="middle" class="t-sm t-mut">rimmed vacuoles, aggregates</text>
+            <circle cx="250" cy="245" r="60" class="fg-box"/>
+            <path d="M225 225 L275 265 M275 225 L225 265" class="fg-arrow-bad" stroke-width="3"/>
+            <text x="250" y="295" text-anchor="middle" class="t-sm t-b">IMNM</text>
+            <text x="250" y="322" text-anchor="middle" class="t-sm t-mut">necrosis, little inflammation</text>
+          </svg>
+      - kind: reveal
+        page: 165
+        quote: "Dermatomyositis (DM): Involves complement-mediated damage to capillaries and perifascicular atrophy."
+        prompt: "ليه الضمور في الـ DM بيبقى perifascicular (على حروف الحزمة)؟"
+        answer: |
+          لأن المشكلة في الـ **capillaries** (complement-mediated). أطراف الحزمة هي آخر حتة بيوصلها الدم، فلما الشعيرات تقل، الحروف هي اللي ==تجوع وتضمر الأول==. (تفسير فسيولوجي؛ الـ lesion نفسها من الكتاب.)
+      - kind: check
+        page: 165
+        quote: "Polymyositis (PM): Dominated by CD8+ T-cell mediated cytotoxicity directed at muscle fibers."
+        question: "Which subtype is dominated by CD8+ T-cell cytotoxicity against muscle fibres?"
+        options:
+          - "Polymyositis"
+          - "Dermatomyositis"
+          - "IMNM"
+          - "Inclusion body myositis"
+        answer: 0
+        why:
+          - "صح: الـ PM = CD8+ T cells بتهاجم الألياف نفسها."
+          - "الـ DM: complement على الـ capillaries."
+          - "الـ IMNM: necrosis مع التهاب قليل."
+          - "الـ IBM: rimmed vacuoles و protein aggregates."
+      - kind: explain
+        page: 166
+        title: "شكل الضعف"
+        quote: "The hallmark of IIM is symmetrical proximal muscle weakness"
+        text: |
+          الـ hallmark: ==symmetrical proximal weakness==: **deltoids**، **hip flexors**، **neck flexors**.
+
+          العيان يقولك: مش قادر **أقوم من الكرسي**، أشيل حاجة، أو **أسرّح شعري**.
+          - الـ **IBM** ممكن يمسك **distal** كمان
+          - الوجع **خفيف** ومتغير، وفي الآخر atrophy و contractures
+          - **Dysphagia** من الـ oropharynx والـ esophagus
+      - kind: aside
+        tone: joke
+        page: 166
+        quote: "Tasks such as rising from a chair, lifting objects, and combing hair become difficult."
+        text: |
+          عيان الـ myositis زي موظف يوم الأحد: **القومة من الكرسي** أصعب حاجة في اليوم 😄. الفرق إن عنده **hip flexors** ملتهبة بجد، فاسأله عن **combing hair** والسلم.
+      - kind: try
+        items: [rheum.L09.002, rheum.L09.006, rheum.L09.007, rheum.L09.011, rheum.L09.016]
+    recap:
+      - "IIM: autoimmune systemic، العضلة أساسًا. الأنواع: DM (و CADM)، PM، IBM، IMNM، overlap."
+      - "DM complement على الشعيرات، PM CD8+، IBM vacuoles، IMNM necrosis."
+      - "Symmetrical proximal weakness: deltoids، hip و neck flexors. IBM = asymmetric و distal."
+    practice: [rheum.L09.001, rheum.L09.002, rheum.L09.003, rheum.L09.004, rheum.L09.005, rheum.L09.006, rheum.L09.007, rheum.L09.008, rheum.L09.009, rheum.L09.010, rheum.L09.011, rheum.L09.012, rheum.L09.013, rheum.L09.014, rheum.L09.015, rheum.L09.016, rheum.L09.017, rheum.L09.018, rheum.L09.041, rheum.L09.042, rheum.L09.044, rheum.L09.049]
+  # ------------------------------------------------------------------
+  - id: rheum.L09.lesson2
+    title: "الجلد والرئة والـ antibodies"
+    hook: "جفون بنفسجي، صوابع خشنة، ونَفَس بيقصر: الـ antibody هيقولك هتخاف من إيه."
+    minutes: 8
+    pages: [166, 167]
+    topics: [extramuscular, antibodies]
+    goals:
+      - "تعرف علامات الجلد في الـ DM"
+      - "تربط الـ ILD بالـ antisynthetase والـ MDA5"
+      - "تحفظ جدول الـ MSAs"
+    status: unverified
+    steps:
+      - kind: table
+        page: 166
+        quote: "Heliotrope rash (purple discoloration of eyelids). Gottron's papules (scaly, erythematous plaques over joints)."
+        title: "جلد الـ DM"
+        columns: [Sign, Where]
+        rows:
+          - ["Heliotrope", "Purple eyelids"]
+          - ["Gottron's papules", "Scaly red plaques over joints"]
+          - ["Shawl and V-sign", "Photosensitive, shoulders and chest"]
+          - ["Mechanic's hands", "Fissured hyperkeratotic palms"]
+        hide: [[0, 1], [1, 1], [3, 1]]
+      - kind: explain
+        page: 166
+        title: "الرئة والمفاصل والقلب"
+        quote: "Interstitial lung disease (ILD) is common, particularly in antisynthetase syndrome."
+        text: |
+          - **ILD** شائعة، خصوصًا في ==antisynthetase syndrome==: cough، dyspnoea، **restrictive** defect
+          - **Rapidly progressive ILD** ← ==anti-MDA5==
+          - المفاصل: arthralgia و **non-erosive** arthritis شبه الـ RA
+          - القلب: arrhythmias، conduction defects، myocarditis، وغالبًا **subclinical** فاعمل **ECG و echo**
+      - kind: figure
+        page: 167
+        quote: "Anti-Mi-2: Associated with classic DM and good prognosis. Anti-MDA5: Linked to clinically amyopathic DM and rapidly progressive ILD."
+        title: "خريطة الـ antibodies"
+        alt: "A map of myositis-specific antibodies. Mi-2 points to classic DM with good prognosis; MDA5 to amyopathic DM and rapidly progressive ILD; TIF1-gamma to adult DM and cancer; NXP2 to juvenile DM; SAE to skin disease and dysphagia; SRP and HMGCR to necrotizing myopathy. A side box lists myositis-associated antibodies Ro, U1-RNP, PM/Scl and Ku for overlap."
+        caption: "كل antibody ليه شخصية: ==TIF1γ = cancer==، ==MDA5 = رئة بتجري==، و **Mi-2** هو الطيب."
+        svg: |
+          <svg viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="10" width="150" height="45" rx="8" class="fg-good"/><text x="85" y="30" text-anchor="middle" class="t-sm t-b">Anti-Mi-2</text><text x="85" y="47" text-anchor="middle" class="t-sm">classic DM, good</text>
+            <rect x="170" y="10" width="150" height="45" rx="8" class="fg-bad"/><text x="245" y="30" text-anchor="middle" class="t-sm t-b">Anti-MDA5</text><text x="245" y="47" text-anchor="middle" class="t-sm">CADM, RP-ILD</text>
+            <rect x="10" y="65" width="150" height="45" rx="8" class="fg-bad"/><text x="85" y="85" text-anchor="middle" class="t-sm t-b">Anti-TIF1γ</text><text x="85" y="102" text-anchor="middle" class="t-sm">adult DM, cancer</text>
+            <rect x="170" y="65" width="150" height="45" rx="8" class="fg-acc"/><text x="245" y="85" text-anchor="middle" class="t-sm t-b">Anti-NXP2</text><text x="245" y="102" text-anchor="middle" class="t-sm">juvenile DM</text>
+            <rect x="10" y="120" width="150" height="45" rx="8" class="fg-acc"/><text x="85" y="140" text-anchor="middle" class="t-sm t-b">Anti-SAE</text><text x="85" y="157" text-anchor="middle" class="t-sm">skin, dysphagia</text>
+            <rect x="170" y="120" width="150" height="45" rx="8" class="fg-acc"/><text x="245" y="140" text-anchor="middle" class="t-sm t-b">SRP, HMGCR</text><text x="245" y="157" text-anchor="middle" class="t-sm">IMNM</text>
+            <rect x="10" y="185" width="310" height="60" rx="10" class="fg-thin"/>
+            <text x="165" y="208" text-anchor="middle" class="t-sm t-b">Myositis-associated (overlap)</text>
+            <text x="165" y="230" text-anchor="middle" class="t-sm">Ro/SSA · U1-RNP · PM/Scl · Ku</text>
+            <text x="165" y="275" text-anchor="middle" class="t-sm t-mut">MSAs define subsets</text>
+            <text x="165" y="295" text-anchor="middle" class="t-sm t-mut">and predict prognosis</text>
+          </svg>
+      - kind: match
+        page: 167
+        quote: "Anti-TIF1γ: Seen in adult-onset DM and linked to malignancy. Anti-NXP2: More common in juvenile DM."
+        prompt: "وصّل الـ antibody باللي بيتوقعه:"
+        pairs:
+          - ["Anti-TIF1γ", "Malignancy"]
+          - ["Anti-MDA5", "Rapidly progressive ILD"]
+          - ["Anti-NXP2", "Juvenile DM"]
+          - ["Anti-HMGCR", "Necrotizing myopathy"]
+          - ["Anti-Mi-2", "Good prognosis"]
+        why: "TIF1γ = adult DM + cancer، MDA5 = CADM + RP-ILD، NXP2 = الأطفال، HMGCR و SRP = IMNM، و Mi-2 = classic DM بـ prognosis كويس."
+      - kind: aside
+        tone: tip
+        page: 167
+        quote: "Anti-MDA5: Linked to clinically amyopathic DM and rapidly progressive ILD."
+        text: |
+          فخ: عيان **من غير ضعف** (CADM) ممكن يكون ==الأخطر==، لو عنده **anti-MDA5**: الرئة بتتليف بسرعة. ما تطمنش علشان الـ CK طبيعي.
+      - kind: check
+        page: 167
+        quote: "Anti-Ro/SSA, Anti-U1-RNP, Anti-PM/Scl, Anti-Ku – Often seen in overlap syndromes."
+        question: "Anti-PM/Scl and anti-Ku are best described as:"
+        options:
+          - "Myositis-associated antibodies seen in overlap syndromes"
+          - "Myositis-specific antibodies of juvenile DM"
+          - "Markers of malignancy"
+          - "Markers of IMNM"
+        answer: 0
+        why:
+          - "صح: MAAs، غالبًا في الـ overlap."
+          - "الـ juvenile DM: anti-NXP2."
+          - "الـ malignancy: anti-TIF1γ."
+          - "الـ IMNM: SRP و HMGCR."
+      - kind: try
+        items: [rheum.L09.019, rheum.L09.020, rheum.L09.024, rheum.L09.025, rheum.L09.026]
+    recap:
+      - "جلد الـ DM: heliotrope، Gottron's، shawl/V، mechanic's hands."
+      - "ILD: antisynthetase، و RP-ILD = anti-MDA5. القلب subclinical فاعمل ECG و echo."
+      - "Mi-2 طيب، MDA5 رئة، TIF1γ cancer، NXP2 أطفال، SAE جلد وبلع، SRP/HMGCR = IMNM."
+    practice: [rheum.L09.019, rheum.L09.020, rheum.L09.021, rheum.L09.022, rheum.L09.023, rheum.L09.024, rheum.L09.025, rheum.L09.026, rheum.L09.027, rheum.L09.043, rheum.L09.045, rheum.L09.046, rheum.L09.051]
+  # ------------------------------------------------------------------
+  - id: rheum.L09.lesson3
+    title: "التشخيص والـ cancer والعلاج"
+    hook: "قبل ما تكتب prednisone: MRI يوريك فين تاخد العينة، ونظرة على عوامل الـ cancer."
+    minutes: 8
+    pages: [167, 172]
+    topics: [diagnosis, malignancy, treatment]
+    goals:
+      - "ترتب الـ workup: enzymes، EMG، MRI، biopsy"
+      - "تعرف مين محتاج cancer screening"
+      - "تحفظ سلّم العلاج"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 167
+        title: "الـ workup"
+        quote: "Elevated muscle enzymes (CK, aldolase, AST, ALT, LDH)."
+        text: |
+          - **Enzymes:** ==CK==، aldolase، AST، ALT، LDH (أيوه الـ AST و ALT من العضلة كمان، ما تتلخبطش وتفتكره كبد)
+          - **Antibody panels:** MSAs و MAAs
+          - **EMG:** myopathic: **short-duration, low-amplitude** MUPs + spontaneous activity (fibrillations، positive sharp waves)
+          - **Biopsy:** ==تأكيد وتفرقة== بين الأنواع
+          - **MRI:** oedema و inflammation و ==يحدد مكان الـ biopsy==
+      - kind: order
+        page: 167
+        quote: "Useful for detecting muscle edema, inflammation, and guiding biopsy sites."
+        prompt: "رتّب خطوات تأكيد الـ myositis في عيان ضعيف proximally:"
+        steps:
+          - "CK and muscle enzymes, antibody panel"
+          - "EMG for a myopathic pattern"
+          - "MRI to find oedematous, inflamed muscle"
+          - "Biopsy of that muscle to confirm and subtype"
+        why: "الدم الأول (سهل)، والـ EMG يأكد إنه myopathy، والـ MRI يختار العضلة الملتهبة، وبعدين الـ biopsy من المكان ده علشان ما تطلعش سليمة."
+      - kind: explain
+        page: 168
+        title: "الـ cancer"
+        quote: "High-risk features include Older age Male sex Anti-TIF1γ positivity Severe skin disease Rapid onset of muscle weakness"
+        text: |
+          الـ ==adult-onset DM== مرتبط بزيادة الـ malignancy.
+
+          **High risk:** older age، **male**، ==anti-TIF1γ==، **severe skin**، **rapid onset** weakness.
+
+          الـ screening حسب السن والنوع: **mammogram**، pelvic exam، **CT**، tumour markers.
+      - kind: check
+        page: 168
+        quote: "Certain IIMs, particularly adult-onset dermatomyositis, are associated with an increased risk of malignancy."
+        question: "Who most needs malignancy screening?"
+        options:
+          - "A 66-year-old man with rapid-onset DM, severe rash, anti-TIF1γ +"
+          - "A 9-year-old with juvenile DM, anti-NXP2 +"
+          - "A 40-year-old woman with overlap myositis and anti-U1-RNP"
+          - "A 35-year-old with classic DM and anti-Mi-2"
+        answer: 0
+        why:
+          - "صح: كل عوامل الخطر مجمعة: سن، ذكر، TIF1γ، جلد شديد، بداية سريعة."
+          - "الـ juvenile DM مش هو الـ adult-onset المرتبط بالـ cancer."
+          - "الـ overlap مش في قائمة الـ high risk."
+          - "الـ Mi-2 بـ prognosis كويس."
+      - kind: table
+        page: 168
+        quote: "Glucocorticoids: Prednisone is the initial treatment. Steroid-sparing agents: Methotrexate, azathioprine, or mycophenolate mofetil."
+        title: "سلّم العلاج"
+        columns: [Step, Drug]
+        rows:
+          - ["First line", "Prednisone"]
+          - ["Steroid-sparing", "MTX, AZA or MMF"]
+          - ["Refractory", "IVIG or rituximab"]
+          - ["RP-ILD", "Cyclophosphamide"]
+          - ["Always", "Physical therapy"]
+        hide: [[0, 1], [2, 1], [3, 1]]
+      - kind: aside
+        tone: exam
+        page: 168
+        quote: "Physical Therapy Critical to preserve muscle strength and prevent atrophy."
+        text: |
+          ما تنساش ==physical therapy== في إجابة الـ essay: الكتاب بيقول **critical** علشان تحافظ على القوة وتمنع الـ atrophy.
+
+          والـ prognosis بيتحدد بالـ **subtype** ووجود **ILD** أو **malignancy**، والتشخيص بدري يحسّنه.
+      - kind: case
+        page: 171
+        quote: "IBM is common in elderly men and is poorly responsive to immunosuppressive therapy."
+        stem: "A 72-year-old man: 3 years of asymmetric weakness of the right quadriceps and left finger flexors. CK mildly raised. No rash. No response to prednisone."
+        steps:
+          - question: "Most likely subtype?"
+            options: ["Inclusion body myositis", "Dermatomyositis", "Polymyositis", "IMNM"]
+            answer: 0
+            why: "راجل كبير + asymmetric + distal + مفيش استجابة = IBM. الـ DM فيه rash، الـ PM symmetric ونادر، والـ IMNM عنده antibodies و necrosis."
+          - question: "Biopsy finding?"
+            options: ["Rimmed vacuoles and protein aggregates", "Perifascicular atrophy", "Necrosis with minimal inflammation", "Normal muscle"]
+            answer: 0
+            why: "الـ IBM = degeneration (rimmed vacuoles) + inflammation. الـ perifascicular = DM. الـ necrosis من غير التهاب = IMNM."
+      - kind: try
+        items: [rheum.L09.029, rheum.L09.031, rheum.L09.033, rheum.L09.035, rheum.L09.052]
+    recap:
+      - "Workup: CK وأخواتها، antibodies، EMG myopathic، MRI يختار المكان، biopsy يأكد ويفرق."
+      - "Adult DM = cancer risk، خصوصًا كبير، ذكر، TIF1γ، جلد شديد، بداية سريعة."
+      - "Prednisone ← MTX/AZA/MMF ← IVIG/rituximab، و CYC للـ RP-ILD، و physiotherapy دايمًا."
+    practice: [rheum.L09.028, rheum.L09.029, rheum.L09.030, rheum.L09.031, rheum.L09.032, rheum.L09.033, rheum.L09.034, rheum.L09.035, rheum.L09.036, rheum.L09.037, rheum.L09.038, rheum.L09.039, rheum.L09.040, rheum.L09.047, rheum.L09.048, rheum.L09.050, rheum.L09.052]

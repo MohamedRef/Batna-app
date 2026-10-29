@@ -1,0 +1,494 @@
+schema: batna.lesson/v1
+lecture: dm.L03
+lessons:
+  # ------------------------------------------------------------------
+  - id: dm.L03.lesson1
+    title: "الكلية بتتكلم بالـ albumin"
+    hook: "قبل ما الـ creatinine يعلى بسنين، الكلية بتسرّب albumin. لو قسته صح، تمسك الـ DKD بدري."
+    minutes: 9
+    pages: [27, 29]
+    topics: [control, dkd, dkd-screening]
+    goals:
+      - "تحفظ أهداف الـ tight control"
+      - "تعرّف الـ DKD وتعرف مين بيموت منها إزاي"
+      - "تعمل screening صح وتعرف امتى تحوّل للـ nephrologist"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 27
+        title: "الـ tight control: تلات أرقام"
+        quote: "Tight glycemic control would prevent the development and/or ameliorate the progression of diabetes-associated microvascular complications"
+        text: |
+          الـ ==tight glycemic control== بيمنع أو يبطّأ الـ **microvascular complications** في type 1 و type 2.
+
+          - **A1C** حوالين أو أقل من **7%**
+          - **FPG (preprandial):** **80–130 mg/dl**
+          - **2-h PPG (peak):** حوالين أو أقل من **180 mg/dl**
+      - kind: explain
+        page: 27
+        title: "يعني إيه DKD؟"
+        quote: "Persistent albuminuria >30 mg/ g creatinine and/or decrease in GFR < 60 ml/min/1.73m2 in the absence of signs or symptoms of other primary causes"
+        text: |
+          الـ **diabetic kidney disease** = ==persistent albuminuria >30 mg/g== و/أو **GFR <60**، من غير علامات لسبب كلوي تاني.
+
+          - بتحصل في **20–40%** من مرضى السكر.
+          - **the leading cause of ESRD**.
+          - الـ risk في type 2 **زي** type 1 تقريبًا.
+      - kind: aside
+        tone: trap
+        page: 27
+        quote: "the majority of patients actually die from CVD before needing kidney replacement therapy."
+        text: "فخ: الـ ESRD هو أشهر نهاية للـ DKD، بس **أغلب العيانين بيموتوا بالـ CVD** قبل ما يوصلوا للـ dialysis. يعني علاج الـ DKD هو علاج القلب كمان."
+      - kind: explain
+        page: 28
+        title: "Risk factors"
+        quote: "The level of glycemia and glycosylated hemoglobin seems to be the strongest factor influencing the onset of albuminuria."
+        text: |
+          أقوى عامل لبداية الـ albuminuria: ==مستوى السكر والـ A1C==.
+
+          وبجانبه: **hypertension**، **smoking**، **hyperlipidemia**، **genetic susceptibility**.
+      - kind: explain
+        page: 28
+        title: "الـ Screening"
+        quote: "patients with type 1 diabetes who have had the condition for at least 5 years, and in all patients with type 2 diabetes,"
+        text: |
+          **مرة في السنة على الأقل:** spot **ACR** + **eGFR**.
+          - **Type 1:** بعد ==5 سنين== من السكر.
+          - **Type 2:** **كلهم** من التشخيص، أيًّا كان العلاج.
+
+          **الـ albuminuria بتتأكد** لما **2 من 3** عينات في **3–6 شهور** يطلعوا abnormal، لأن الـ UAE متقلّب.
+      - kind: sort
+        page: 28
+        quote: "Exercise within 24 h, infection, fever, congestive heart failure, marked hyperglycemia, and marked hypertension may elevate UAE over baseline values."
+        prompt: "الحاجات دي بتعلّي الـ albumin في البول مؤقتًا؟"
+        bins: ["Raises UAE", "Not listed"]
+        cards:
+          - { text: "Exercise within 24 h", bin: 0 }
+          - { text: "Fever", bin: 0 }
+          - { text: "Infection", bin: 0 }
+          - { text: "Congestive heart failure", bin: 0 }
+          - { text: "Marked hyperglycemia", bin: 0 }
+          - { text: "Marked hypertension", bin: 0 }
+          - { text: "Fasting overnight", bin: 1 }
+          - { text: "Taking metformin", bin: 1 }
+        why: "كلهم بيزوّدوا الضغط أو الـ permeability في الـ glomerulus مؤقتًا. علشان كده ما تشخّصش من عينة واحدة بعد ماتش كورة أو وهو سخن."
+      - kind: table
+        page: 29
+        quote: "Cockcroft-Gault formula: overestimate. - MDRD: underestimate. - CKD-EPI: more accurate."
+        title: "معادلات الـ GFR"
+        columns: [Equation, Result]
+        rows:
+          - ["Cockcroft-Gault", "Overestimates"]
+          - ["MDRD", "Underestimates"]
+          - ["CKD-EPI", "More accurate; preferred"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: figure
+        page: 29
+        title: "الـ heat map: GFR × albuminuria"
+        image: { file: dm/L03-ckd-heatmap.webp, book: true }
+        caption: "كل خانة فيها عدد الزيارات في السنة. الأخضر **monitor**، الأصفر **treat**، الأحمر **refer**. أي ==A3== أو **G4–G5** = refer."
+        alt: "Book figure: KDIGO-style heat map of CKD by GFR categories G1 to G5 (rows) and albuminuria A1 to A3 (columns), coloured green to deep red, with treat or refer and visits per year in each cell."
+      - kind: explain
+        page: 29
+        title: "امتى تحوّل للـ nephrologist؟"
+        quote: "An active urinary sediment (containing red or white blood cells or cellular casts)."
+        text: |
+          لما تشك إن السبب **مش السكر** (وممكن **biopsy**):
+          1. **Active urinary sediment:** RBCs، WBCs، أو cellular casts
+          2. **Rapidly increasing albuminuria** أو **nephrotic syndrome**
+          3. **Rapidly decreasing eGFR**
+          4. ==Absence of retinopathy== في **type 1**
+      - kind: reveal
+        page: 29
+        quote: "Absence of retinopathy (in type 1 diabetes)."
+        prompt: "ليه غياب الـ retinopathy في type 1 بيخليك تشك في الـ DKD؟"
+        answer: |
+          الـ retinopathy والـ nephropathy أولاد نفس المرض: **microangiopathy** بنفس الـ duration ونفس الـ control. في type 1 بالذات، الاتنين بيمشوا مع بعض تقريبًا.
+
+          لو الكلية بايظة والعين سليمة، يبقى غالبًا في **سبب تاني** للكلية (glomerulonephritis مثلًا)، ومحتاج nephrologist. (التفسير فسيولوجي؛ القاعدة من الكتاب.)
+      - kind: check
+        page: 28
+        quote: "two of three specimens collected within a 3- to 6- month period should be abnormal before considering a patient to have developed albuminuria."
+        question: "ACR 70 mg/g once, the morning after a long run. Next?"
+        options: ["Repeat: 2 of 3 abnormal in 3–6 months", "Diagnose DKD", "Start ACEi", "Refer for biopsy"]
+        answer: 0
+        why:
+          - "صح: عينة واحدة مش كفاية، وكمان الـ exercise بيعلّيها."
+          - "لازم تأكيد الأول."
+          - "مش قبل التأكيد."
+          - "مفيش أي referral criterion."
+      - kind: try
+        items: [dm.L03.002, dm.L03.003, dm.L03.009, dm.L03.011, dm.L03.014]
+    recap:
+      - "Tight control: A1C ~7، FPG 80–130، peak PPG ~180."
+      - "DKD: albuminuria >30 mg/g و/أو GFR <60؛ 20–40%؛ أول سبب للـ ESRD؛ أغلبهم بيموتوا CVD."
+      - "Screen سنويًا (ACR + eGFR): type 1 بعد 5 سنين، type 2 من التشخيص. Albuminuria = 2 من 3 في 3–6 شهور."
+      - "CKD-EPI أدق؛ Cockcroft-Gault بيزوّد؛ MDRD بيقلل."
+      - "Refer: active sediment، nephrotic/albuminuria بتزيد بسرعة، eGFR بيقع بسرعة، type 1 من غير retinopathy."
+    practice: [dm.L03.001, dm.L03.002, dm.L03.003, dm.L03.004, dm.L03.005, dm.L03.006, dm.L03.007, dm.L03.008, dm.L03.009, dm.L03.010, dm.L03.011, dm.L03.012, dm.L03.013, dm.L03.014, dm.L03.015, dm.L03.016, dm.L03.017, dm.L03.018, dm.L03.019, dm.L03.061, dm.L03.062, dm.L03.063, dm.L03.064, dm.L03.069, dm.L03.080, dm.L03.084]
+  # ------------------------------------------------------------------
+  - id: dm.L03.lesson2
+    title: "نحمي الكلية: أكل وسكر وضغط و ACEi"
+    hook: "ست خطوط علاج، واحد منهم بس (الـ ACEi) ليه قواعد امتى توقفه وامتى لأ."
+    minutes: 8
+    pages: [30, 31]
+    topics: [dkd-management]
+    goals:
+      - "تعدّ lines of management of DKD (سؤال كتاب)"
+      - "تعرف امتى الـ SGLT2i والـ ACEi/ARB"
+      - "ما توقفش الـ RAS blocker على الفاضي"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 30
+        title: "الأكل"
+        quote: "protein intake should be approximately 0.8 g/kg body weight per day (the recommended daily allowance)."
+        text: |
+          - **Protein:** حوالي ==0.8 g/kg/day== (الـ RDA) في الـ non-dialysis. على الـ **dialysis** أكتر، لأن الـ malnutrition مشكلة كبيرة هناك.
+          - **Sodium:** أقل من **2,300 mg/day** للضغط والـ CV risk.
+          - **Potassium:** ممكن تقلله لو البوتاسيوم عالي.
+      - kind: explain
+        page: 30
+        title: "السكر والأدوية"
+        quote: "consider use of an SGLT inhibitor in patients with an estimated glomerular filtration rate ≥20 mL/min/1.73 m2 and urinary albumin >300 mg/g creatinine."
+        text: |
+          - **Glycemic control:** نفس الأرقام (A1C ~7، FPG 80–130، PPG ~180) علشان تقلل الخطر وتبطّأ التدهور.
+          - **Direct renal effect:** في type 2 + DKD، فكّر في ==SGLT2i== لو **eGFR ≥20** و **albumin >300 mg/g**.
+          - **عدّل جرعات** أدوية السكر على حسب الكلية.
+          - **BP:** أقل من **130/80** حسب الفايدة والخطر لكل عيان.
+      - kind: explain
+        page: 30
+        title: "الـ Renoprotection: ACEi أو ARB"
+        quote: "is strongly recommended for those with ACR≥300 mg/g creatinine and/or estimated glomerular filtration rate <60 mL/min/1.73 m2."
+        text: |
+          - **ACR 30–299:** بيتستخدم.
+          - **ACR ≥300** و/أو **eGFR <60:** ==strongly recommended==.
+          - "لو الـ albumin **≥300**: الهدف تقلّله **30% أو أكتر**."
+          - ما توقفوش لو الـ creatinine زاد **أقل من 30%** من غير volume depletion.
+          - **مش** للـ primary prevention لو الضغط والـ ACR والـ eGFR طبيعيين.
+      - kind: figure
+        page: 31
+        quote: "Do not discontinue renin-angiotensin system blockade for minor increases in serum creatinine (<30%) in the absence of volume depletion."
+        title: "الـ creatinine علي بعد الـ ACEi"
+        alt: "A gauge of creatinine rise after starting an ACE inhibitor: under 30 percent with no volume depletion means continue; 30 percent or more, or volume depletion, means reassess."
+        caption: "زيادة بسيطة في الـ creatinine بعد الـ ACEi علامة إن الضغط جوه الـ glomerulus نزل، يعني الدوا شغال. ==<30%== = كمّل."
+        svg: |
+          <svg viewBox="0 0 330 170" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="40" width="150" height="44" rx="10" class="fg-good"/>
+            <rect x="175" y="40" width="145" height="44" rx="10" class="fg-bad"/>
+            <text x="85" y="67" text-anchor="middle" class="t-b t-good">&lt;30% rise</text>
+            <text x="247" y="67" text-anchor="middle" class="t-b t-bad">≥30%</text>
+            <text x="85" y="26" text-anchor="middle" class="t-sm t-mut">creatinine after ACEi / ARB</text>
+            <text x="85" y="110" text-anchor="middle" class="t-b">Continue</text>
+            <text x="85" y="128" text-anchor="middle" class="t-sm">if no volume depletion</text>
+            <text x="247" y="110" text-anchor="middle" class="t-b">Reassess</text>
+            <text x="247" y="128" text-anchor="middle" class="t-sm">volume, dose, cause</text>
+            <text x="165" y="160" text-anchor="middle" class="t-sm t-mut">goal with ACR ≥300: albumin down ≥30%</text>
+          </svg>
+      - kind: reveal
+        page: 31
+        quote: "Do not discontinue renin-angiotensin system blockade for minor increases in serum creatinine (<30%) in the absence of volume depletion."
+        prompt: "ليه الـ creatinine بيعلى شوية لما تبدأ ACEi، ومع ذلك ده كويس؟"
+        answer: |
+          الـ **ACEi/ARB** بيوسّع الـ **efferent arteriole**، فالضغط جوه الـ glomerulus ينزل والـ GFR يقل شوية، فالـ creatinine يعلى.
+
+          الضغط الواطي ده نفسه هو اللي بيحمي الكلية على المدى الطويل ويقلل الـ albuminuria. علشان كده الكتاب بيقول: أقل من **30%** من غير dehydration = **كمّل**. (التفسير فسيولوجي؛ الرقم من الكتاب.)
+      - kind: check
+        page: 31
+        quote: "An ACE inhibitor or an angiotensin receptor blocker is not recommended for the primary prevention of chronic kidney disease"
+        question: "Normotensive type 2 diabetic, ACR 10 mg/g, eGFR 98. Start an ACEi to protect the kidney?"
+        options: ["No, not for primary prevention", "Yes, always", "Yes, an ARB instead", "Only if A1C >8%"]
+        answer: 0
+        why:
+          - "صح: الـ ACEi/ARB **not recommended** للـ primary prevention مع ضغط و ACR و eGFR طبيعيين."
+          - "مفيش indication."
+          - "نفس الكلام على الـ ARB."
+          - "الـ A1C مش شرط هنا."
+      - kind: mnemonic
+        page: 30
+        quote: "Management of diabetic kidney disease: Nutrition"
+        word: "NGDMBR"
+        parts:
+          - { key: "N", text: "Nutrition: protein 0.8 g/kg, sodium <2,300 mg" }
+          - { key: "G", text: "Glycemic control: A1C ~7%" }
+          - { key: "D", text: "Direct renal effect: SGLT2i (eGFR ≥20, albumin >300)" }
+          - { key: "M", text: "Modify antidiabetic doses" }
+          - { key: "B", text: "BP <130/80" }
+          - { key: "R", text: "Renoprotection: ACEi or ARB" }
+        hook: "اقراها «**نجدم بَر**»: كأنك بتنجد الكلية وتوصّلها لبر الأمان. ست خطوط بترتيب الكتاب."
+      - kind: try
+        items: [dm.L03.020, dm.L03.022, dm.L03.025, dm.L03.027, dm.L03.085]
+    recap:
+      - "Protein 0.8 g/kg/day (أكتر على الـ dialysis)، sodium <2,300، potassium لو لازم."
+      - "SGLT2i في type 2 + DKD لو eGFR ≥20 و albumin >300."
+      - "BP <130/80. ACEi/ARB لـ ACR 30–299، و strongly لـ ≥300 أو eGFR <60؛ الهدف ↓ albumin ≥30%."
+      - "Creatinine ↑ <30% من غير dehydration = كمّل. مش للـ primary prevention."
+    practice: [dm.L03.020, dm.L03.021, dm.L03.022, dm.L03.023, dm.L03.024, dm.L03.025, dm.L03.026, dm.L03.027, dm.L03.028, dm.L03.065, dm.L03.066, dm.L03.067, dm.L03.068, dm.L03.081, dm.L03.085]
+  # ------------------------------------------------------------------
+  - id: dm.L03.lesson3
+    title: "الأعصاب: شراب وجوانتي من غير إحساس"
+    hook: "نص العيانين ما بيحسوش بحاجة، ودي المشكلة: الرجل اللي مش حاسة بتتعوّر من غير ما صاحبها يعرف."
+    minutes: 9
+    pages: [31, 33]
+    topics: [neuropathy, neuropathy-screening]
+    goals:
+      - "تعدّ diagnostic clinical criteria (سؤال كتاب)"
+      - "تعرف مضاعفات الـ neuropathy وشكل الـ Charcot والـ ulcer"
+      - "تختار الـ test المناسب لكل fiber وتعالج الألم"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 31
+        title: "أربع حقايق قبل أي حاجة"
+        quote: "Diabetic neuropathy is a diagnosis of exclusion. Nondiabetic neuropathies may be present in patients with diabetes and may be treatable."
+        text: |
+          1. ==Diagnosis of exclusion==: ممكن يكون عنده neuropathy تانية **treatable**.
+          2. لحد **50%** من الـ peripheral neuropathy **asymptomatic**، ومن غير foot care الرجل الـ insensate بتتعوّر.
+          3. علاج الـ **autonomic neuropathy** بيحسّن الأعراض وجودة الحياة.
+          4. أشهر syndrome: **distal symmetric sensorimotor polyneuropathy**، بتحب أطراف الرجلين والإيدين.
+      - kind: figure
+        page: 31
+        quote: "Diagnostic clinical criteria: Stocking-glove paresthesia of distal extremities. Loss of deep sensations"
+        title: "الـ stocking-glove"
+        alt: "A simple body outline with shaded feet and lower legs (stocking) and shaded hands (glove), labelled with the five clinical criteria: stocking-glove paresthesia, loss of joint and vibration sense, lost deep tendon reflexes, distal wasting, sensory ataxia."
+        caption: "أطول الأعصاب بتتعب الأول، فالرجلين قبل الإيدين. خمس criteria: ==stocking-glove==، deep sensation، reflexes، wasting، ataxia."
+        svg: |
+          <svg viewBox="0 0 330 280" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="80" cy="30" r="18" class="fg-box"/>
+            <rect x="60" y="50" width="40" height="90" rx="10" class="fg-box"/>
+            <path d="M60 60 L30 130" class="fg-ink" stroke-width="10" fill="none"/>
+            <path d="M100 60 L130 130" class="fg-ink" stroke-width="10" fill="none"/>
+            <circle cx="28" cy="138" r="11" class="fg-dot-bad"/>
+            <circle cx="132" cy="138" r="11" class="fg-dot-bad"/>
+            <path d="M70 140 L62 230" class="fg-ink" stroke-width="12" fill="none"/>
+            <path d="M90 140 L98 230" class="fg-ink" stroke-width="12" fill="none"/>
+            <rect x="50" y="195" width="24" height="50" rx="6" class="fg-dot-bad"/>
+            <rect x="86" y="195" width="24" height="50" rx="6" class="fg-dot-bad"/>
+            <text x="160" y="40" class="t-sm t-b">1. Stocking-glove paresthesia</text>
+            <text x="160" y="80" class="t-sm t-b">2. Loss of deep sensation</text>
+            <text x="172" y="96" class="t-sm">joint + vibration sense</text>
+            <text x="160" y="136" class="t-sm t-b">3. Lost deep tendon reflexes</text>
+            <text x="160" y="176" class="t-sm t-b">4. Distal muscle wasting</text>
+            <text x="160" y="216" class="t-sm t-b">5. Sensory ataxia</text>
+            <text x="165" y="270" text-anchor="middle" class="t-sm t-mut">longest nerves fail first: feet before hands</text>
+          </svg>
+      - kind: mnemonic
+        page: 32
+        quote: "Loss of deep tendon reflexes in upper & lower limbs. Distal muscle wasting. Loss of coordination (sensory ataxia)."
+        word: "SDRWA"
+        parts:
+          - { key: "S", text: "Stocking-glove paresthesia" }
+          - { key: "D", text: "Deep sensation lost (joint, vibration)" }
+          - { key: "R", text: "Reflexes lost (upper and lower limbs)" }
+          - { key: "W", text: "Wasting of distal muscles" }
+          - { key: "A", text: "Ataxia (sensory)" }
+        hook: "«**S**ugar **D**amages **R**eflexes, **W**alking **A**nd...»: السكر بيبوّظ الـ reflexes والمشي. خمسة بالترتيب من الجلد للحركة."
+      - kind: explain
+        page: 32
+        title: "المضاعفات"
+        quote: "Characterized by painless swelling of the joint with abnormal degree of mobility."
+        text: |
+          1. ==Charcot joint== (neuropathic arthropathy): متأخر مع sensory loss شديد، في الـ **knee** والـ **ankle**، **painless swelling** مع **abnormal mobility**.
+          2. **Foot ulcers:** في أي stage بس أكتر مع الـ anesthesia المتقدمة؛ عند **pressure sites** (تحت الكعب، وتحت رأس أول وآخر metatarsal)؛ **painless** وصعب يلم.
+          3. **Repeated minor injuries.**
+      - kind: aside
+        tone: analogy
+        page: 32
+        quote: "It is completely painless and very difficult to heal."
+        text: "الألم زي جرس إنذار الحريق. الـ neuropathy بتفصل الجرس: البيت بيولّع (ulcer، مفصل بيتكسّر) والعيان قاعد مرتاح. علشان كده **painless** هنا مش خبر حلو، ده أخطر علامة."
+      - kind: explain
+        page: 32
+        title: "الـ Screening"
+        quote: "starting at diagnosis of type 2 diabetes and 5 years after the diagnosis of type 1 diabetes and at least annually thereafter."
+        text: |
+          - **Type 2:** من ==التشخيص==. **Type 1:** بعد **5 سنين**. وبعدها **كل سنة**.
+          - **History** + **temperature أو pinprick** (small fiber) + **vibration بـ 128-Hz tuning fork** (large fiber).
+          - **10-g monofilament** كل سنة، علشان تمسك الرجل المعرّضة لـ ulcer و amputation.
+          - علامات الـ **autonomic neuropathy** في اللي عنده microvascular complications.
+      - kind: match
+        page: 33
+        quote: "Small-fiber function: pinprick and temperature sensation. Large-fiber function: vibration perception. Protective sensation: 10-g monofilament."
+        prompt: "وصّل الـ test بالوظيفة:"
+        pairs:
+          - ["Pinprick", "Small fiber"]
+          - ["128-Hz tuning fork", "Large fiber"]
+          - ["10-g monofilament", "Protective sensation"]
+        why: "الـ **small fibers** بتشيل الألم والحرارة، فبتسبب الـ burning بدري. الـ **large fibers** بتشيل الاهتزاز والـ position، وتلفها = numbness و **LOPS**."
+      - kind: explain
+        page: 33
+        title: "الأعراض والعلاج"
+        quote: "The most common early symptoms are induced by the involvement of small fibers and include pain and dysesthesia"
+        text: |
+          - **أول أعراض:** **pain** و **dysesthesia** (burning و tingling) من الـ ==small fibers==.
+          - **Large fibers:** numbness و **LOPS**، ودي معناها distal sensorimotor polyneuropathy و risk لـ ulcer.
+
+          **العلاج:**
+          - **Glucose control:** في type 1 يمنع أو يأخّر، وفي type 2 يبطّأ. **ما بيرجّعش** الأعصاب اللي ماتت.
+          - **Neuropathic pain:** ==pregabalin== أو **duloxetine** كبداية.
+      - kind: update
+        page: 33
+        quote: "Pregabalin, duloxetine, are recommended as initial pharmacologic treatments for neuropathic pain in diabetes."
+        text: "الـ ADA 2025 بيحط كمان الـ gabapentinoids والـ SNRIs والـ tricyclics والـ sodium-channel blockers كـ initial options. في الامتحان: **pregabalin و duloxetine** زي الكتاب."
+        ref: "ADA Standards of Care in Diabetes 2025, section 12"
+      - kind: check
+        page: 33
+        quote: "LOPS indicates the presence of distal sensorimotor polyneuropathy and is a risk factor for diabetic foot ulceration."
+        question: "She cannot feel the 10-g monofilament at several sites. Meaning?"
+        options: ["Loss of protective sensation: ulcer risk", "Small-fiber neuropathy only", "Normal ageing", "Autonomic neuropathy"]
+        answer: 0
+        why:
+          - "صح: **LOPS** = distal sensorimotor polyneuropathy و risk factor للـ ulcer."
+          - "الـ monofilament بيقيس protective sensation، مش small fibers."
+          - "مش طبيعي، وده لازم foot care."
+          - "الـ autonomic ليه أعراض تانية."
+      - kind: try
+        items: [dm.L03.033, dm.L03.037, dm.L03.038, dm.L03.039, dm.L03.086]
+    recap:
+      - "Diagnosis of exclusion؛ لحد 50% asymptomatic؛ أشهرها distal symmetric sensorimotor polyneuropathy."
+      - "Criteria: stocking-glove، deep sensation (joint + vibration)، reflexes، wasting، sensory ataxia."
+      - "Charcot: painless swelling + abnormal mobility (knee، ankle). Ulcer: pressure sites، painless، صعب يلم."
+      - "Screen: type 2 من التشخيص، type 1 بعد 5 سنين، وبعدها سنويًا؛ pinprick/temperature، 128-Hz، 10-g monofilament."
+      - "Control بيمنع (type 1) أو يبطّأ (type 2) ومش بيرجّع. الألم: pregabalin أو duloxetine."
+    practice: [dm.L03.029, dm.L03.030, dm.L03.031, dm.L03.032, dm.L03.033, dm.L03.034, dm.L03.035, dm.L03.036, dm.L03.037, dm.L03.038, dm.L03.039, dm.L03.040, dm.L03.041, dm.L03.042, dm.L03.043, dm.L03.044, dm.L03.045, dm.L03.070, dm.L03.071, dm.L03.072, dm.L03.073, dm.L03.074, dm.L03.082, dm.L03.086]
+  # ------------------------------------------------------------------
+  - id: dm.L03.lesson4
+    title: "العين: من microaneurysm لعمى"
+    hook: "15، 30، 60: كل درجة في الـ NPDR بتضاعف فرصة إن العين تعمل أوعية جديدة بتنزف."
+    minutes: 9
+    pages: [33, 36]
+    topics: [retinopathy, retinopathy-care]
+    goals:
+      - "ترتّب stages الـ retinopathy بالعلامات"
+      - "تحفظ مواعيد الـ fundus exam"
+      - "تختار بين الـ laser والـ anti-VEGF"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 33
+        title: "ليه نخاف؟"
+        quote: "most frequent cause of new cases of blinding in persons aged 20 to 74 years in the developed countries."
+        text: |
+          - الـ prevalence مرتبطة بـ ==duration== السكر و **level of control**.
+          - السكر **أول سبب** للعمى الجديد في سن **20–74** في الدول المتقدمة.
+      - kind: figure
+        page: 34
+        quote: "At 5 years; mild, moderate and severe NPDR are associated with 15%, 30% and 60% risk of progression to PDR."
+        title: "سلم الـ retinopathy"
+        alt: "Five stacked steps from mild NPDR to high-risk PDR with their signs and the 5-year risk of PDR: mild 15 percent, moderate 30 percent, severe 60 percent."
+        caption: "كل درجة في الـ NPDR بتضاعف خطر الـ PDR في 5 سنين: ==15 ← 30 ← 60%==."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="240" width="310" height="52" rx="10" class="fg-good"/>
+            <text x="20" y="260" class="t-b">Mild NPDR</text>
+            <text x="20" y="279" class="t-sm">microaneurysms, hemorrhages, exudates</text>
+            <text x="310" y="270" text-anchor="end" class="t-b t-good">15%</text>
+            <rect x="10" y="182" width="310" height="52" rx="10" class="fg-acc"/>
+            <text x="20" y="202" class="t-b">Moderate NPDR</text>
+            <text x="20" y="221" class="t-sm">venous beading, leaky capillaries</text>
+            <text x="310" y="212" text-anchor="end" class="t-b t-acc">30%</text>
+            <rect x="10" y="124" width="310" height="52" rx="10" class="fg-bad"/>
+            <text x="20" y="144" class="t-b">Severe NPDR</text>
+            <text x="20" y="163" class="t-sm">ischemia, extensive hemorrhages</text>
+            <text x="310" y="154" text-anchor="end" class="t-b t-bad">60%</text>
+            <rect x="10" y="66" width="310" height="52" rx="10" class="fg-ink"/>
+            <text x="20" y="86" class="t-b">Early PDR</text>
+            <text x="20" y="105" class="t-sm">new vessels in the retina</text>
+            <rect x="10" y="8" width="310" height="52" rx="10" class="fg-dot-bad"/>
+            <text x="20" y="28" class="t-b">High-risk PDR</text>
+            <text x="20" y="47" class="t-sm">vessels in vitreous: bleed, detach, blind</text>
+          </svg>
+      - kind: explain
+        page: 34
+        title: "الـ NPDR"
+        quote: "First signs are microaneurysms with subsequent retinal haemorrhages and hard exudates."
+        text: |
+          **Mild:** بيبدأ **3–5 سنين** بعد التشخيص في type 1. أول علامة ==microaneurysms==، بعدها hemorrhages و **hard exudates**، و **soft exudates** (= infarcts في الـ nerve fiber layer). النظر **سليم**.
+
+          **Moderate:** **venous beading** وتغير في عرض الأوردة، و capillary dilatation و permeability أكتر.
+
+          **Severe:** **progressive ischemia** و hemorrhages و exudates و microaneurysms منتشرة.
+      - kind: reveal
+        page: 34
+        quote: "Infarctions of nerve fiber layer, known as soft exudates."
+        prompt: "الـ hard exudate والـ soft exudate: إيه الفرق؟"
+        answer: |
+          - **Hard exudates:** **lipid** وبروتين اترشح من capillaries بتسرّب. صفرا وحدودها حادة.
+          - **Soft exudates (cotton wool):** ==infarcts== في الـ **nerve fiber layer**، يعني **ischemia**. بيضا وحدودها مش واضحة.
+
+          الـ soft هو اللي بيقولك إن الشبكية بدأت تجوع أكسجين، ودي الخطوة اللي قبل الأوعية الجديدة. (الوصف من الفسيولوجي؛ التعريف من الكتاب.)
+      - kind: explain
+        page: 34
+        title: "الـ PDR"
+        quote: "new vessels can invade the iris and the anterior chamber, leading to sight threatening closed-angle glaucoma."
+        text: |
+          الشبكية الجعانة بتطلب أوعية جديدة (**VEGF**)، بس الأوعية دي ضعيفة:
+          - **Early PDR:** neovascularization في الـ **retina**.
+          - "==High-risk PDR==: neovascularization في الـ **vitreous** ← **retinal detachment**، **hemorrhage**، **blindness**."
+          - أحيانًا تدخل الـ **iris** والـ anterior chamber ← **closed-angle glaucoma**.
+      - kind: check
+        page: 34
+        quote: "At 5 years; mild, moderate and severe NPDR are associated with 15%, 30% and 60% risk of progression to PDR."
+        question: "Moderate NPDR. 5-year risk of PDR?"
+        options: ["30%", "15%", "60%", "90%"]
+        answer: 0
+        why:
+          - "صح: **mild 15، moderate 30، severe 60**."
+          - "ده الـ mild."
+          - "ده الـ severe."
+          - "مش في الكتاب."
+      - kind: table
+        page: 35
+        quote: "fundus examination is recommended within 3 to 5 years of diagnosis of type 1 diabetes, and at the time of diagnosis in type 2 patients."
+        title: "امتى نعمل fundus؟"
+        columns: [Who, When]
+        rows:
+          - ["Type 1", "Within 3–5 years"]
+          - ["Type 2", "At diagnosis"]
+          - ["Both, after", "Every year"]
+          - ["Pregnancy", "Before or 1st trimester, each trimester, 1 y postpartum"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1]]
+      - kind: reveal
+        page: 35
+        quote: "fundus examination is recommended within 3 to 5 years of diagnosis of type 1 diabetes, and at the time of diagnosis in type 2 patients."
+        prompt: "ليه type 2 بنكشف عينه من يوم التشخيص، و type 1 نستنى 3–5 سنين؟"
+        answer: |
+          الـ **type 1** بيتشخّص بسرعة (acute)، فيوم التشخيص هو تقريبًا يوم بداية السكر، والـ retinopathy بتبدأ بعد **3–5 سنين**.
+
+          الـ **type 2** بيكون موجود سنين من غير ما حد يعرف، فممكن العين تكون اتأذت قبل التشخيص (افتكر: **10–20%** عندهم complications وقت التشخيص في L01).
+      - kind: explain
+        page: 35
+        title: "العلاج"
+        quote: "Intravitreous injections of anti–vascular endothelial growth factor are indicated as first-line treatment for most eyes with diabetic macular edema"
+        text: |
+          - ظبّط **السكر** و**الضغط** و**الدهون** علشان تقلل الخطر وتبطّأ التدهور.
+          - ==Panretinal laser== للـ **high-risk PDR** وأحيانًا الـ **severe NPDR**.
+          - "**Anti-VEGF** حقن في الـ vitreous: **بديل** معقول للـ laser في بعض الـ PDR، و ==first-line== لأغلب الـ **diabetic macular edema**."
+          - الـ retinopathy **مش** contraindication للـ **aspirin**؛ ما بيزوّدش الـ retinal hemorrhage.
+      - kind: aside
+        tone: trap
+        page: 35
+        quote: "The presence of retinopathy is not a contraindication to aspirin therapy for cardioprotection"
+        text: "فخ مشهور: عيان عنده PDR وعمل MI. هل نمنع الـ aspirin خوفًا على العين؟ **لأ**. الـ aspirin **does not increase** retinal hemorrhage."
+      - kind: case
+        page: 35
+        quote: "Panretinal laser photocoagulation therapy is indicated to reduce the risk of vision loss in patients with high-risk proliferative diabetic retinopathy"
+        stem: "28-year-old, type 1 for 9 years, planning pregnancy. Last eye exam 3 years ago."
+        steps:
+          - question: "Eye plan?"
+            options: ["Before pregnancy or 1st trimester, each trimester, 1 year postpartum", "Only after delivery", "Once at 28 weeks", "Not needed"]
+            answer: 0
+            why: "الكتاب: قبل الحمل أو في الـ first trimester، كل trimester، وسنة بعد الولادة. وكمان كان المفروض يتكشف كل سنة."
+          - reveal: "Fundus: new vessels growing into the vitreous."
+            question: "Treatment?"
+            options: ["Panretinal laser (anti-VEGF an alternative)", "Observe", "Stop aspirin", "Anti-VEGF only for macular edema"]
+            answer: 0
+            why: "أوعية في الـ vitreous = **high-risk PDR** ← **PRP**؛ والـ anti-VEGF بديل معقول."
+      - kind: try
+        items: [dm.L03.048, dm.L03.050, dm.L03.051, dm.L03.055, dm.L03.059]
+    recap:
+      - "الـ retinopathy مرتبطة بالـ duration والـ control؛ أول سبب للعمى الجديد في 20–74."
+      - "Mild: microaneurysms (أول علامة) ← hemorrhages، hard و soft exudates. Moderate: venous beading. Severe: ischemia."
+      - "PDR: أوعية في الـ retina (early) أو الـ vitreous (high-risk)؛ ممكن glaucoma. 5 سنين: 15/30/60%."
+      - "Fundus: type 1 خلال 3–5 سنين، type 2 من التشخيص، وبعدها سنويًا؛ الحمل: قبل/أول trimester، كل trimester، سنة بعد."
+      - "PRP للـ high-risk PDR؛ anti-VEGF بديل، و first-line للـ macular edema؛ الـ aspirin مسموح."
+    practice: [dm.L03.046, dm.L03.047, dm.L03.048, dm.L03.049, dm.L03.050, dm.L03.051, dm.L03.052, dm.L03.053, dm.L03.054, dm.L03.055, dm.L03.056, dm.L03.057, dm.L03.058, dm.L03.059, dm.L03.060, dm.L03.075, dm.L03.076, dm.L03.077, dm.L03.078, dm.L03.079, dm.L03.083]

@@ -1,0 +1,460 @@
+schema: batna.lesson/v1
+lecture: rheum.L21
+lessons:
+  # ------------------------------------------------------------------
+  - id: rheum.L21.lesson1
+    title: "الجلد اللي بيتحجّر: SSc بيبدأ إزاي وبيتشخّص إزاي؟"
+    hook: "جينات + بيئة، وبعدين fibroblasts بتشتغل overtime وتملا الجلد collagen. وفي الآخر عدّاد نقط لو وصل 9 خلاص."
+    minutes: 8
+    pages: [345, 346]
+    topics: [pathogenesis, criteria]
+    goals:
+      - "ترسم الـ pathogenesis من الـ HLA لحد الـ fibrosis والـ vascular damage"
+      - "تحسب نقط الـ 2013 ACR/EULAR criteria"
+      - "تحفظ الـ ARA major وminor features"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 345
+        title: "الجينات والبيئة"
+        quote: "HLAB8, HLADR3, HLADR5, HLADR52 + environmental factors leads to:"
+        text: |
+          الـ **systemic sclerosis** (scleroderma) بيبدأ بـ ==HLA-B8, DR3, DR5, DR52== + **environmental factors**.
+
+          النتيجة أربع حاجات بتحصل مع بعض:
+          1. **Cell stimulation**: T cells وB cells وmacrophages وmast cells و**fibroblasts**
+          2. **Apoptosis** مع free radical release
+          3. **Adhesion molecules** expression
+          4. **VEGF** و**anti-endothelial cell antibodies**: scarring وvascular dysfunction
+      - kind: figure
+        page: 345
+        quote: "Inflammatory cytokine secretion (IL-4, IL-6, TGF-β, PGF & CTGF) Increase collagen I, III, V, VII, proteoglycans & fibrinectin."
+        title: "من الـ cytokine للـ collagen"
+        alt: "Vertical flowchart of systemic sclerosis pathogenesis. HLA-B8, DR3, DR5 and DR52 plus environmental factors stimulate T cells, B cells, macrophages, mast cells and fibroblasts. These secrete IL-4, IL-6, TGF-beta, PGF and CTGF. Fibroblasts then make more collagen types I, III, V and VII, proteoglycans and fibronectin, giving fibrosis. A side branch shows VEGF and anti-endothelial cell antibodies causing scarring and vascular dysfunction."
+        caption: "الـ ==TGF-β== والـ **CTGF** هما اللي بيدّوا الأوامر للـ fibroblast. علشان كده في العلاج هتلاقي **anti TGF-β1** في قائمة الـ antifibrotics."
+        svg: |
+          <svg viewBox="0 0 330 420" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L21a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="fg-head"/></marker></defs>
+            <rect x="35" y="10" width="260" height="48" rx="10" class="fg-acc"/>
+            <text x="165" y="30" text-anchor="middle" class="t-sm t-b">HLA-B8, DR3, DR5, DR52</text>
+            <text x="165" y="47" text-anchor="middle" class="t-sm">+ environmental factors</text>
+            <path d="M165 58 V78" class="fg-arrow" marker-end="url(#L21a)"/>
+            <rect x="35" y="80" width="260" height="48" rx="10" class="fg-box"/>
+            <text x="165" y="100" text-anchor="middle" class="t-sm t-b">T, B, macrophage, mast cell</text>
+            <text x="165" y="117" text-anchor="middle" class="t-sm">+ fibroblast stimulation</text>
+            <path d="M165 128 V148" class="fg-arrow" marker-end="url(#L21a)"/>
+            <rect x="35" y="150" width="260" height="48" rx="10" class="fg-acc"/>
+            <text x="165" y="170" text-anchor="middle" class="t-sm t-b t-acc">Cytokines</text>
+            <text x="165" y="187" text-anchor="middle" class="t-sm">IL-4, IL-6, TGF-β, PGF, CTGF</text>
+            <path d="M165 198 V218" class="fg-arrow" marker-end="url(#L21a)"/>
+            <rect x="35" y="220" width="260" height="58" rx="10" class="fg-box"/>
+            <text x="165" y="240" text-anchor="middle" class="t-sm t-b">↑ Collagen I, III, V, VII</text>
+            <text x="165" y="257" text-anchor="middle" class="t-sm">↑ proteoglycans, fibronectin</text>
+            <text x="165" y="272" text-anchor="middle" class="t-sm t-mut">= fibrosis</text>
+            <path d="M165 278 V298" class="fg-arrow" marker-end="url(#L21a)"/>
+            <rect x="35" y="300" width="260" height="58" rx="10" class="fg-bad"/>
+            <text x="165" y="321" text-anchor="middle" class="t-sm t-b t-bad">VEGF + anti-endothelial Ab</text>
+            <text x="165" y="338" text-anchor="middle" class="t-sm">scarring and vascular</text>
+            <text x="165" y="352" text-anchor="middle" class="t-sm">dysfunction</text>
+            <text x="165" y="390" text-anchor="middle" class="t-sm t-mut">+ apoptosis, free radicals,</text>
+            <text x="165" y="406" text-anchor="middle" class="t-sm t-mut">adhesion molecules</text>
+          </svg>
+      - kind: order
+        page: 345
+        quote: "T cell + Bcell + macrophage + mast cell + fibroblasts stimulation"
+        prompt: "رتّب السلسلة من غير ما تبص فوق:"
+        steps:
+          - "HLA genes + environmental factors"
+          - "Immune cells and fibroblasts stimulated"
+          - "IL-4, IL-6, TGF-β, PGF, CTGF secreted"
+          - "More collagen, proteoglycans, fibronectin"
+        why: "الجينات والبيئة تشغّل الـ cells، الـ cells تطلّع cytokines، والـ cytokines تخلّي الـ fibroblast يطلّع collagen أكتر."
+      - kind: figure
+        page: 345
+        quote: "Skin thickening (count the higher of the three)"
+        title: "عدّاد الـ 2013 ACR/EULAR"
+        alt: "Point counter for the 2013 ACR/EULAR systemic sclerosis criteria. Skin thickening of the fingers of both hands proximal to the MCPs scores 9 and is enough alone. Otherwise count the higher skin item: sclerodactyly 4 or puffy fingers 2. Fingertip lesions, the higher of pitting scars 3 or digital tip ulcers 2. Telangiectasia 2, abnormal nailfold capillaries 2, lung involvement 2, Raynaud phenomenon 3, SSc antibodies 3. Total 9 or more classifies SSc."
+        caption: "الـ **skin** والـ **fingertips** بتاخد ==الأعلى بس==، مش بتجمع. والكتاب ما كتبش الـ threshold: هو **9 أو أكتر** (شوف الـ update تحت)."
+        svg: |
+          <svg viewBox="0 0 330 420" xmlns="http://www.w3.org/2000/svg">
+            <rect x="15" y="10" width="300" height="56" rx="12" class="fg-acc"/>
+            <text x="38" y="46" text-anchor="middle" class="t-lg t-b t-acc">9</text>
+            <text x="65" y="32" class="t-sm t-b">Fingers of both hands</text>
+            <text x="65" y="50" class="t-sm">thick proximal to MCPs (enough alone)</text>
+            <rect x="15" y="76" width="300" height="56" rx="12" class="fg-box"/>
+            <text x="38" y="100" text-anchor="middle" class="t-b">4/2</text>
+            <text x="65" y="98" class="t-sm">Sclerodactyly 4 or puffy fingers 2</text>
+            <text x="65" y="118" class="t-sm t-mut">count the higher</text>
+            <rect x="15" y="142" width="300" height="56" rx="12" class="fg-box"/>
+            <text x="38" y="166" text-anchor="middle" class="t-b">3/2</text>
+            <text x="65" y="164" class="t-sm">Pitting scars 3 or tip ulcers 2</text>
+            <text x="65" y="184" class="t-sm t-mut">count the higher</text>
+            <rect x="15" y="208" width="145" height="50" rx="10" class="fg-box"/>
+            <text x="87" y="230" text-anchor="middle" class="t-b">3</text>
+            <text x="87" y="248" text-anchor="middle" class="t-sm">Raynaud</text>
+            <rect x="170" y="208" width="145" height="50" rx="10" class="fg-box"/>
+            <text x="242" y="230" text-anchor="middle" class="t-b">3</text>
+            <text x="242" y="248" text-anchor="middle" class="t-sm">ACA, Scl-70, RNAP III</text>
+            <rect x="15" y="266" width="97" height="50" rx="10" class="fg-box"/>
+            <text x="63" y="288" text-anchor="middle" class="t-b">2</text>
+            <text x="63" y="306" text-anchor="middle" class="t-sm">Telangiect.</text>
+            <rect x="117" y="266" width="97" height="50" rx="10" class="fg-box"/>
+            <text x="165" y="288" text-anchor="middle" class="t-b">2</text>
+            <text x="165" y="306" text-anchor="middle" class="t-sm">Nailfold</text>
+            <rect x="219" y="266" width="96" height="50" rx="10" class="fg-box"/>
+            <text x="267" y="288" text-anchor="middle" class="t-b">2</text>
+            <text x="267" y="306" text-anchor="middle" class="t-sm">PAH / ILD</text>
+            <rect x="15" y="334" width="300" height="56" rx="12" class="fg-good"/>
+            <text x="165" y="358" text-anchor="middle" class="t-b t-good">Total ≥9 = systemic sclerosis</text>
+            <text x="165" y="377" text-anchor="middle" class="t-sm">(threshold from the 2013 paper)</text>
+          </svg>
+      - kind: table
+        page: 345
+        quote: "Skin thickening of the fingers of both hands extending proximal to the MCP joints"
+        title: "النقط: غطّي وافتكر"
+        columns: [Item, Points]
+        rows:
+          - ["Skin thickening proximal to MCPs", "9"]
+          - ["Sclerodactyly", "4"]
+          - ["Puffy fingers", "2"]
+          - ["Pitting scars", "3"]
+          - ["Digital tip ulcers", "2"]
+          - ["Raynaud phenomenon", "3"]
+          - ["SSc antibodies", "3"]
+        hide: [[0, 1], [1, 1], [3, 1], [5, 1], [6, 1]]
+      - kind: update
+        page: 345
+        quote: "Skin thickening (count the higher of the three)"
+        text: "جدول الكتاب ناقصه الـ **threshold**. في الـ 2013 ACR/EULAR: مجموع **9 أو أكتر** = systemic sclerosis، والـ skin thickening proximal to MCPs (9 نقط) لوحدها كفاية. الأرقام نفسها زي الكتاب."
+        ref: "ACR/EULAR classification criteria for systemic sclerosis, 2013"
+      - kind: check
+        page: 345
+        quote: "Any of ACA, ATA (anti-Scl 70), RNA polimerase"
+        question: "Raynaud phenomenon, puffy fingers and positive anticentromere antibody, nothing else. Score?"
+        options:
+          - "8, not enough"
+          - "9, classified as SSc"
+          - "5, not enough"
+          - "11, classified as SSc"
+        answer: 0
+        why:
+          - "صح: Raynaud 3 + puffy fingers 2 + ACA 3 = 8، أقل من 9 بنقطة. (ممكن تكون very early SSc، بس لسه مش classified.)"
+          - "الـ 9 محتاجة نقطة كمان، زي telangiectasia أو nailfold capillaries."
+          - "إنت نسيت الـ antibody (3 نقط)."
+          - "إنت حسبت sclerodactyly (4) بدل puffy fingers (2)."
+      - kind: explain
+        page: 346
+        title: "الـ ARA القديمة: major وminor"
+        quote: "Minor features include sclerodactyly, erosions, atrophia of the fingertips, and bilateral lung fibrosis."
+        text: |
+          الكتاب كمان بيدّيك criteria الـ **American Rheumatism Association (ARA)**:
+          - **Major:** ==centrally located skin sclerosis== في الـ arms أو الـ face أو الـ neck
+          - **Minor:** **sclerodactyly**، **erosions** و**atrophy of the fingertips**، **bilateral lung fibrosis**
+
+          التشخيص = ==1 major + 2 minor==.
+      - kind: aside
+        tone: tip
+        page: 346
+        quote: "Malignant scleroderma most often occurs in men, usually in elderly men."
+        text: "الـ SSc عموماً ستات (4 : 1)، بس الـ **malignant scleroderma** بيعكس الآية: **رجالة كبار في السن**، ومساره accelerated بيوصل للوفاة. سؤال «مين بيجيله الـ malignant؟» إجابته الراجل العجوز."
+      - kind: try
+        items: [rheum.L21.001, rheum.L21.003, rheum.L21.006, rheum.L21.010, rheum.L21.012]
+    recap:
+      - "HLA-B8, DR3, DR5, DR52 + environment ← cells + fibroblasts ← IL-4, IL-6, TGF-β, PGF, CTGF ← collagen."
+      - "VEGF + anti-endothelial Ab = scarring و vascular dysfunction."
+      - "2013: proximal skin 9 لوحدها كفاية؛ skin وfingertips خد الأعلى؛ Raynaud 3، antibodies 3، الباقي 2. المجموع ≥9."
+      - "ARA: 1 major (central skin sclerosis) + 2 minor."
+      - "Malignant scleroderma = رجالة كبار، accelerated، مميت."
+    practice: [rheum.L21.001, rheum.L21.002, rheum.L21.003, rheum.L21.004, rheum.L21.005, rheum.L21.006, rheum.L21.007, rheum.L21.008, rheum.L21.009, rheum.L21.010, rheum.L21.011, rheum.L21.012]
+  # ------------------------------------------------------------------
+  - id: rheum.L21.lesson2
+    title: "Limited ولا diffuse؟ والأعضاء من الرئة للكلى"
+    hook: "مكان الجلد السميك (قبل الكوع ولا بعده) بيقولك هتقابل CREST ولا renal crisis."
+    minutes: 9
+    pages: [346, 349]
+    topics: [forms, msk-lung, renal, gi-cardiac]
+    goals:
+      - "تفرّق limited من diffuse بالكوع والركبة"
+      - "تحفظ الـ CREST"
+      - "تعرّف scleroderma renal crisis وتعدّ الـ risk factors"
+      - "تمشي على الـ GI والقلب"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 346
+        title: "الصورة العامة"
+        quote: "It has insidious onset with world wide distribution. Mainly Female to Male (4 : 1). More common on 4th and 5th decades."
+        text: |
+          - **Onset:** insidious، وموجود في العالم كله
+          - **Female : male** = ==4 : 1==
+          - **السن:** الـ 4th و 5th decades
+          - **نادراً** الـ **visceral scleroderma** بييجي من غير skin changes
+      - kind: figure
+        page: 346
+        quote: "Skin thickening is distal to elbows and knees, not involving trunk."
+        title: "الخط عند الكوع والركبة"
+        alt: "Two body outlines side by side. Limited SSc: skin thickening shaded only below the elbows and knees and on the face, trunk spared; labels say CREST, less organ involvement, isolated pulmonary hypertension. Diffuse SSc: shading also above the elbows and knees and over the trunk; labels say more organ involvement, pulmonary fibrosis and renal crisis more common."
+        caption: "تحت ==الكوع والركبة== بس = **limited**. فوقهم والـ **trunk** = **diffuse**."
+        svg: |
+          <svg viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg">
+            <text x="82" y="20" text-anchor="middle" class="t-sm t-b">Limited</text>
+            <text x="248" y="20" text-anchor="middle" class="t-sm t-b">Diffuse</text>
+            <circle cx="82" cy="45" r="15" class="fg-acc"/>
+            <rect x="62" y="64" width="40" height="80" rx="8" class="fg-box"/>
+            <path d="M62 70 L40 105" class="fg-thin"/>
+            <path d="M40 105 L30 140" class="fg-bad"/>
+            <path d="M102 70 L124 105" class="fg-thin"/>
+            <path d="M124 105 L134 140" class="fg-bad"/>
+            <path d="M70 144 L66 190" class="fg-thin"/>
+            <path d="M66 190 L62 235" class="fg-bad"/>
+            <path d="M94 144 L98 190" class="fg-thin"/>
+            <path d="M98 190 L102 235" class="fg-bad"/>
+            <circle cx="40" cy="105" r="4" class="fg-dot-bad"/>
+            <circle cx="124" cy="105" r="4" class="fg-dot-bad"/>
+            <circle cx="248" cy="45" r="15" class="fg-acc"/>
+            <rect x="228" y="64" width="40" height="80" rx="8" class="fg-bad"/>
+            <path d="M228 70 L206 105" class="fg-bad"/>
+            <path d="M206 105 L196 140" class="fg-bad"/>
+            <path d="M268 70 L290 105" class="fg-bad"/>
+            <path d="M290 105 L300 140" class="fg-bad"/>
+            <path d="M236 144 L232 190" class="fg-bad"/>
+            <path d="M232 190 L228 235" class="fg-bad"/>
+            <path d="M260 144 L264 190" class="fg-bad"/>
+            <path d="M264 190 L268 235" class="fg-bad"/>
+            <text x="82" y="262" text-anchor="middle" class="t-sm">CREST, perioral</text>
+            <text x="82" y="280" text-anchor="middle" class="t-sm">less organ disease</text>
+            <text x="82" y="298" text-anchor="middle" class="t-sm t-mut">isolated PAH</text>
+            <text x="248" y="262" text-anchor="middle" class="t-sm">trunk involved</text>
+            <text x="248" y="280" text-anchor="middle" class="t-sm">more organ disease</text>
+            <text x="248" y="298" text-anchor="middle" class="t-sm t-bad">lung fibrosis, renal crisis</text>
+          </svg>
+      - kind: sort
+        page: 346
+        quote: "Pulmonary fibrosis and Renal Crisis are more common."
+        prompt: "limited ولا diffuse؟"
+        bins: ["Limited", "Diffuse"]
+        cards:
+          - { text: "Skin thick distal to elbows only", bin: 0 }
+          - { text: "Perioral pursing of lips", bin: 0 }
+          - { text: "CREST syndrome", bin: 0 }
+          - { text: "Isolated pulmonary hypertension", bin: 0 }
+          - { text: "Trunk involved", bin: 1 }
+          - { text: "Renal crisis more common", bin: 1 }
+          - { text: "Pulmonary fibrosis more common", bin: 1 }
+        why: "الـ limited جلده بعيد عن الجذع وأعضاؤه أقل، وبيعمل isolated pulmonary hypertension. الـ diffuse بيمسك الجذع، والـ lung fibrosis والـ renal crisis أكتر فيه."
+      - kind: mnemonic
+        page: 347
+        quote: "Calcinosis. ○ Raynaud‘s. ○ Esophageal Dysmotility. ○ Sclerodactyly. ○ Telangiectasisa."
+        word: "CREST"
+        parts:
+          - { key: "C", text: "Calcinosis" }
+          - { key: "R", text: "Raynaud phenomenon" }
+          - { key: "E", text: "Esophageal dysmotility" }
+          - { key: "S", text: "Sclerodactyly" }
+          - { key: "T", text: "Telangiectasia" }
+        hook: "الـ **crest** هو عُرف الديك: حاجة صغيرة فوق الراس. والـ CREST هو الـ limited: الجلد في الأطراف بس، مش الجسم كله. وسؤال الكتاب: **subcutaneous nodules** مش منه."
+      - kind: explain
+        page: 347
+        title: "المفاصل والرئة"
+        quote: "In > 50% with swelling, stiffness, and pain in the joints of the hands."
+        text: |
+          - **Constitutional:** mild fever
+          - **Arthritis** في ==أكتر من 50%==: swelling وstiffness وألم في مفاصل الإيد
+          - **Carpal tunnel syndrome**، **contractures** (من الجلد السميك)، و**polymyositis** (في MCTD أو overlap)
+          - **الرئة = leading cause of death** دلوقتي، علشان بقينا نسيطر على الكلى. العرض: **exertional dyspnea**. النوعين: **interstitial lung disease** و**isolated pulmonary hypertension**.
+      - kind: reveal
+        page: 347
+        quote: "Leading cause of death: Since we are better at control of renal disease."
+        prompt: "زمان الكلى كانت أول سبب وفاة في الـ SSc. إيه اللي غيّر الترتيب؟"
+        answer: |
+          الـ **ACE inhibitors**. لما بقوا العلاج الأساسي للـ **scleroderma renal crisis**، الوفيات من الكلى قلّت، فالـ **lung disease** طلعت أول سبب.
+      - kind: explain
+        page: 348
+        title: "Scleroderma renal crisis: التعريف"
+        quote: "Abruptly developing severe hypertension: – Rise in SBP by > 30 mmHg, DBP by > 20 mm Hg."
+        text: |
+          **Hypertension** مفاجئ وشديد:
+
+          ==**SBP rise > 30 mmHg**== و ==**DBP rise > 20 mmHg**==
+
+          **+ واحدة من دول:**
+          - **Creatinine** زاد 50% عن الـ baseline، أو أكتر من 120% من الـ upper limit
+          - **Proteinuria > 2+ on dipstick**
+          - **Hematuria > 2+ on dipstick** أو **RBC > 10/HPF**
+          - **Thrombocytopenia < 100**
+          - **Hemolysis**: schistocytes، low platelets، reticulocytes عالية
+      - kind: table
+        page: 348
+        quote: "90% with blood pressure > 150/90. • Can occur also with lower blood pressures < 140/90 and this confers worse prognosis."
+        title: "أرقام الـ renal crisis"
+        columns: [Fact, Book]
+        rows:
+          - ["Patients with BP > 150/90", "90%"]
+          - ["Crisis with BP < 140/90", "Worse prognosis"]
+          - ["Prednisone dose that raises risk", "> 15 mg"]
+          - ["Skin progression window", "First 2–3 years"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1]]
+      - kind: aside
+        tone: trap
+        page: 348
+        quote: "Can occur also with lower blood pressures < 140/90 and this confers worse prognosis."
+        text: "الـ **normotensive renal crisis** فخ: الضغط مش عالي قوي، فالدكتور يطمّن، والـ prognosis أوحش. لو عيان diffuse SSc الـ creatinine بتاعه بيطلع، فكّر في الـ crisis حتى لو الضغط 135/85."
+      - kind: mnemonic
+        page: 348
+        quote: "Rapidly progressive skin thickening within the first 2-3 years. • Steroid use (prednisone > 15 mg). • Anti-polymerase III Ab."
+        word: "SPAP"
+        parts:
+          - { key: "S", text: "Skin thickening, rapidly progressive, first 2–3 years" }
+          - { key: "P", text: "Prednisone > 15 mg" }
+          - { key: "A", text: "Anti-RNA polymerase III antibody" }
+          - { key: "P", text: "Pericardial effusion" }
+        hook: "**SPAP**: الكلى بتـ «تسبّ» لما يجيلها **S**kin سريع، **P**rednisone عالي، **A**nti-pol III، و**P**ericardial effusion. علشان كده الـ steroids في الـ SSc بجرعة قليلة."
+      - kind: case
+        page: 348
+        quote: "Steroid use (prednisone > 15 mg). • Anti-polymerase III Ab."
+        stem: "42-year-old woman, diffuse SSc for 18 months, anti-RNA polymerase III positive, on prednisone 30 mg for arthritis."
+        steps:
+          - question: "Which of her features raise the risk of renal crisis?"
+            options: ["All three: early diffuse skin, anti-pol III, prednisone > 15 mg", "Only the antibody", "Only the steroid dose", "None; renal crisis is limited-SSc disease"]
+            answer: 0
+            why: "التلاتة في قائمة الـ risk factors: skin سريع في أول 2–3 سنين، anti-polymerase III، و **prednisone > 15 mg**. والـ renal crisis أكتر في الـ diffuse."
+          - reveal: "She now has headache, BP 190/110 (was 120/80) and creatinine has doubled."
+            question: "Best first treatment?"
+            options: ["ACE inhibitor", "Pulse methylprednisolone", "Cyclophosphamide with plasma exchange", "Stop all antihypertensives"]
+            answer: 0
+            why: "الـ ACE inhibitors أول حاجة في علاج الـ renal crisis في الكتاب، وبعدها antihypertensives وdialysis وtransplant. الـ steroids عالية الجرعة بتزوّد المشكلة."
+      - kind: explain
+        page: 349
+        title: "الـ GI"
+        quote: "Disordered peristalsis of the lower two thirds of the esophagus presents as dysphagia."
+        text: |
+          - **Esophagus:** peristalsis بايظ في ==الـ lower two thirds== ← **dysphagia**، و**LES** ضعيف ← reflux
+          - **مضاعفات الـ reflux:** erosive esophagitis بنزيف، **Barrett's**، stricture
+          - **Stomach:** early satiety، أحياناً gastric outlet obstruction أو acute dilatation
+          - **Small bowel:** bloating وcramps وdiarrhea، **malabsorption**، و**bacterial overgrowth** في أماكن الـ stasis
+      - kind: match
+        page: 349
+        quote: "Patchy myocardial fibrosis; leads to diastolic > systolic dysfunction."
+        prompt: "وصّل شكل القلب بالآلية:"
+        pairs:
+          - ["Pericardial effusion", "Symptomatic pericarditis in 20%"]
+          - ["Microvascular CAD", "Recurrent coronary vasospasm"]
+          - ["Patchy myocardial fibrosis", "Diastolic > systolic dysfunction"]
+          - ["Myocarditis", "Inflammation then fibrosis"]
+          - ["Conduction disease", "Fibrosis of the conduction system"]
+        why: "كله في الآخر fibrosis أو vasospasm: نفس مرض الجلد بس جوه القلب."
+      - kind: try
+        items: [rheum.L21.015, rheum.L21.017, rheum.L21.023, rheum.L21.026, rheum.L21.028]
+    recap:
+      - "Limited: تحت الكوع والركبة، CREST، isolated PAH. Diffuse: الجذع، lung fibrosis وrenal crisis."
+      - "CREST = Calcinosis, Raynaud, Esophageal dysmotility, Sclerodactyly, Telangiectasia."
+      - "الرئة أول سبب وفاة (الكلى اتسيطر عليها بالـ ACEi)."
+      - "Renal crisis: SBP > +30 / DBP > +20 + creatinine أو protein أو blood أو platelets أو hemolysis."
+      - "Risk (SPAP): skin سريع، **prednisone > 15 mg**، anti-pol III، pericardial effusion."
+      - "Esophagus lower ⅔، bacterial overgrowth، والقلب diastolic > systolic."
+    practice: [rheum.L21.013, rheum.L21.014, rheum.L21.015, rheum.L21.016, rheum.L21.017, rheum.L21.018, rheum.L21.019, rheum.L21.020, rheum.L21.021, rheum.L21.022, rheum.L21.023, rheum.L21.024, rheum.L21.025, rheum.L21.026, rheum.L21.027, rheum.L21.028, rheum.L21.029, rheum.L21.030, rheum.L21.031, rheum.L21.032, rheum.L21.033, rheum.L21.034, rheum.L21.046, rheum.L21.047, rheum.L21.048]
+  # ------------------------------------------------------------------
+  - id: rheum.L21.lesson3
+    title: "علاج SSc: سلاح لكل عضو"
+    hook: "مفيش دوا واحد بيعالج الـ SSc كله، فالكتاب بيقسّم: immunosuppressants، antifibrotics، وبعدين كل عضو وعلاجه."
+    minutes: 7
+    pages: [350, 352]
+    topics: [treatment, organ-treatment]
+    goals:
+      - "تعدّ الـ immunosuppressants والـ antifibrotics"
+      - "تعرف إمتى الـ steroids مسموحة"
+      - "توصّل كل عضو بعلاجه"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 350
+        title: "Immunosuppressants"
+        quote: "Cyclosporine. • MTX. • MMF. • Rapamycin. • Autologous stem cell transplantation."
+        text: |
+          - **Cyclophosphamide** مع plasma exchange أو glucocorticoid
+          - **Glucocorticoids** (بشروط، تحت)
+          - **Cyclosporine**، ==MTX==، ==MMF==، **rapamycin**
+          - **Autologous stem cell transplantation**
+      - kind: explain
+        page: 350
+        title: "الـ steroids بس في دول"
+        quote: "Glucocorticoid (restricted to pts with myositis, active fibrosing alveolitis, symptomatic serositis, early edematouse phase of the skin, refractory arthritis, and tenosynovitis)."
+        text: |
+          الـ **glucocorticoid** في الـ SSc ==restricted== لـ:
+          1. Myositis
+          2. Active fibrosing alveolitis
+          3. Symptomatic serositis
+          4. Early **edematous** phase of the skin
+          5. Refractory arthritis
+          6. Tenosynovitis
+
+          وافتكر: **prednisone > 15 mg** risk factor للـ renal crisis.
+      - kind: explain
+        page: 350
+        title: "Antifibrotics وتحت الدراسة"
+        quote: "D-penicillamine. • Interferon alpha. • Relaxin. • Prostacyclin analouge (Aloprost). • Anticytokine therapy (CAT-192 = anti TGF-β1)."
+        text: |
+          **Antifibrotic:** **D-penicillamine**، interferon alpha، **relaxin**، prostacyclin analogue (**iloprost**؛ الكتاب كاتبها «Aloprost»)، و==anti TGF-β1== (CAT-192).
+
+          **Under investigation:** **imatinib**، rituximab، IVIG، epigenetic (deacetylase inhibitor)، و oral bovine type 1 collagen للـ tolerance.
+
+          **Biologics تانية:** **tocilizumab** (IL-6R) و**abatacept**.
+      - kind: table
+        page: 351
+        quote: "Calcium channel blockers, ARB blocker (lozartan), prostacycline analouges, phosphodiestrase inhibitors, nitroglycerine patch and chemical and digital sympathectomy."
+        title: "كل عضو وعلاجه"
+        columns: [Problem, Book treatment]
+        rows:
+          - ["Raynaud phenomenon", "CCB first; losartan, prostacyclin, PDE inhibitor, nitrate patch, sympathectomy"]
+          - ["Digital ulcers", "Endothelin receptor antagonist, atorvastatin"]
+          - ["Pruritus", "Antihistamines, lubricant creams, capsaicin"]
+          - ["Calcinosis cutis", "Minocycline, MTX, infliximab, rituximab, surgery"]
+          - ["Myositis", "Steroids, MTX, azathioprine"]
+          - ["GIT", "PPI, prokinetics"]
+        hide: [[0, 1], [1, 1], [5, 1]]
+      - kind: check
+        page: 351
+        quote: "Digital ulcers: endothelin receptor antagonist and atorstatin."
+        question: "Painful digital ulcers despite a calcium channel blocker. Which option does the book list?"
+        options:
+          - "Endothelin receptor antagonist"
+          - "High-dose prednisone"
+          - "D-penicillamine"
+          - "Proton pump inhibitor"
+        answer: 0
+        why:
+          - "صح: الكتاب بيقول digital ulcers ← endothelin receptor antagonist و atorvastatin."
+          - "الـ steroids العالية مش مكانها هنا، وبتزوّد خطر الـ renal crisis."
+          - "الـ D-penicillamine antifibrotic، مش علاج ulcers."
+          - "الـ PPI للـ GIT."
+      - kind: sort
+        page: 352
+        quote: "Immunosuppressives (steroids, cyclophosphamide, MMF, and azathioprine). • Imatinib. • Lung transplant."
+        prompt: "ده علاج pulmonary hypertension ولا ILD؟"
+        bins: ["Pulmonary hypertension", "Interstitial lung disease"]
+        cards:
+          - { text: "Endothelin receptor blockers", bin: 0 }
+          - { text: "Prostacyclin analogues", bin: 0 }
+          - { text: "Phosphodiesterase inhibitors", bin: 0 }
+          - { text: "Calcium channel blockers", bin: 0 }
+          - { text: "Cyclophosphamide", bin: 1 }
+          - { text: "MMF", bin: 1 }
+          - { text: "Azathioprine", bin: 1 }
+        why: "الـ PAH مشكلة أوعية: vasodilators. الـ ILD التهاب وfibrosis: immunosuppressives. الاتنين بيشتركوا في **imatinib** و**lung transplant**."
+      - kind: explain
+        page: 352
+        title: "الكلى والمرحلة المتأخرة والعضم"
+        quote: "Bone radiography reveals generalized osteopenia, which most commonly affects the hands. Intra-articular calcifications often are observed."
+        text: |
+          - **Renal crisis:** ==ACE inhibitors== ← antihypertensives ← dialysis ← renal transplant
+          - **Advanced multisystem:** ATG، ALG، MMF، و autologous stem cell transplant
+          - **Bone X-ray:** **generalized osteopenia** أكتر في الإيدين، و intra-articular calcifications
+      - kind: try
+        items: [rheum.L21.035, rheum.L21.036, rheum.L21.040, rheum.L21.041, rheum.L21.044]
+    recap:
+      - "Immunosuppressants: cyclophosphamide، cyclosporine، MTX، MMF، rapamycin، stem cells."
+      - "Steroids بس لـ myositis، alveolitis، serositis، early edematous skin، refractory arthritis، tenosynovitis."
+      - "Antifibrotic: D-penicillamine، IFN-α، relaxin، iloprost، anti TGF-β1."
+      - "Raynaud ← CCB أول. Digital ulcers ← endothelin antagonist + atorvastatin."
+      - "PAH ← vasodilators. ILD ← immunosuppressives. Renal crisis ← ACEi."
+    practice: [rheum.L21.035, rheum.L21.036, rheum.L21.037, rheum.L21.038, rheum.L21.039, rheum.L21.040, rheum.L21.041, rheum.L21.042, rheum.L21.043, rheum.L21.044, rheum.L21.045, rheum.L21.049]

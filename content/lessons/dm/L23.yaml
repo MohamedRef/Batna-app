@@ -1,0 +1,525 @@
+schema: batna.lesson/v1
+lecture: dm.L23
+lessons:
+  # ------------------------------------------------------------------
+  - id: dm.L23.lesson1
+    title: "ESC 2019: الخطر الأول، وبعدين الرقم"
+    hook: "قبل ما تكتب statin، اسأل سؤال واحد: العيان ده في أنهي درجة من السلم؟ الدرجة هي اللي بتحدد الـ LDL لازم ينزل لكام."
+    minutes: 8
+    pages: [283, 285]
+    topics: [risk, goals, diabetes]
+    goals:
+      - "تصنّف العيان في 4 درجات خطر حسب ESC/EAS 2019"
+      - "تحفظ الـ LDL-C goal لكل درجة ومعاها شرط الـ 50%"
+      - "تعرف توصيات الـ statin في السكر، ومين ما ياخدش"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 283
+        title: "Very high: خمس بوابات"
+        quote: "Documented ASCVD, either clinical or unequivocal on imaging."
+        text: |
+          الكتاب ماشي على ==ESC/EAS 2019==. العيان يبقى **very high** لو عنده واحدة من دول:
+          - **ASCVD** موثّق: MI، angina، revascularization، stroke أو TIA، PAD، أو plaque واضح على الـ imaging.
+          - **DM** مع target organ damage، أو **3 risk factors** أو أكتر، أو T1DM بدأ بدري وبقاله **أكتر من 20 سنة**.
+          - **Severe CKD**: eGFR أقل من 30.
+          - **SCORE ≥ 10%**.
+          - **FH** ومعاه ASCVD أو risk factor تاني.
+      - kind: explain
+        page: 284
+        title: "High، moderate، low"
+        quote: "Markedly elevated single risk factors, in particular TC >8 mmol/L (>310 mg/dL), LDL-C >4.9 mmol/L (>190 mg/dL)"
+        text: |
+          - ==High==: risk factor واحد عالي جدًا (TC أكتر من **310**، LDL-C أكتر من **190**، BP **180/110** أو أكتر)، أو **FH لوحده**، أو DM من غير organ damage بس بقاله **10 سنين** أو معاه risk factor، أو eGFR **30-59**، أو SCORE **5 لـ أقل من 10%**.
+          - **Moderate**: سكري صغير (T1DM أقل من 35، T2DM أقل من 50) بقاله أقل من 10 سنين ومن غير risk factors، أو SCORE **1 لـ أقل من 5%**.
+          - **Low**: SCORE أقل من **1%**.
+      - kind: sort
+        page: 284
+        quote: "Patients with FH without other major risk factors."
+        prompt: "Very high ولا high؟"
+        bins: ["Very high", "High"]
+        cards:
+          - { text: "Previous MI", bin: 0 }
+          - { text: "eGFR 25", bin: 0 }
+          - { text: "FH plus smoking", bin: 0 }
+          - { text: "FH alone", bin: 1 }
+          - { text: "eGFR 45", bin: 1 }
+          - { text: "LDL-C 200, nothing else", bin: 1 }
+          - { text: "DM with retinopathy", bin: 0 }
+          - { text: "DM 12 years, no organ damage", bin: 1 }
+        why: "ASCVD و eGFR أقل من 30 و FH + risk factor و DM + organ damage = very high. FH لوحده و eGFR 30-59 و LDL أكتر من 190 لوحده و DM طويل من غير damage = high."
+      - kind: figure
+        page: 285
+        quote: "Treatment goal for LDL-C"
+        title: "السلم: كل ما الخطر يعلى، الرقم ينزل"
+        alt: "A staircase going down from left to right. Low risk: LDL-C goal under 116 mg/dL (3.0 mmol/L). Moderate: under 100 (2.6). High: under 70 (1.8) and at least 50 percent reduction. Very high: under 55 (1.4) and at least 50 percent reduction. A side note: a second event within 2 years may aim under 40 (1.0)."
+        caption: "**116 ← 100 ← 70 ← 55**. في الـ high والـ very high لازم كمان ==≥ 50% reduction== من الـ baseline."
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="20" width="72" height="50" rx="8" class="fg-box"/>
+            <text x="46" y="40" text-anchor="middle" class="t-sm t-b">Low</text>
+            <text x="46" y="60" text-anchor="middle" class="t-b">&lt; 116</text>
+            <rect x="88" y="70" width="72" height="50" rx="8" class="fg-acc"/>
+            <text x="124" y="90" text-anchor="middle" class="t-sm t-b">Moderate</text>
+            <text x="124" y="110" text-anchor="middle" class="t-b">&lt; 100</text>
+            <rect x="166" y="120" width="72" height="50" rx="8" class="fg-bad"/>
+            <text x="202" y="140" text-anchor="middle" class="t-sm t-b">High</text>
+            <text x="202" y="160" text-anchor="middle" class="t-b">&lt; 70</text>
+            <rect x="244" y="170" width="76" height="50" rx="8" class="fg-bad"/>
+            <text x="282" y="190" text-anchor="middle" class="t-sm t-b">Very high</text>
+            <text x="282" y="210" text-anchor="middle" class="t-b">&lt; 55</text>
+            <rect x="166" y="20" width="154" height="44" rx="8" class="fg-good"/>
+            <text x="243" y="38" text-anchor="middle" class="t-sm">High + very high:</text>
+            <text x="243" y="56" text-anchor="middle" class="t-sm t-b">also ≥ 50% fall</text>
+            <text x="10" y="200" class="t-sm t-mut">LDL-C mg/dL</text>
+            <text x="10" y="240" class="t-sm t-mut">2nd event &lt; 2 y: &lt; 40 may be considered</text>
+          </svg>
+      - kind: mnemonic
+        page: 284
+        quote: "In individuals at moderate risk, an LDL-C goal of <2.6 mmol/L (<100 mg/dL) should be considered."
+        word: "LMHV"
+        parts:
+          - { key: "L", text: "Low: < 116 mg/dL (3.0 mmol/L)" }
+          - { key: "M", text: "Moderate: < 100 mg/dL (2.6)" }
+          - { key: "H", text: "High: < 70 mg/dL (1.8) + ≥ 50%" }
+          - { key: "V", text: "Very high: < 55 mg/dL (1.4) + ≥ 50%" }
+        hook: "اطلع السلم بالعكس: **116، 100، 70، 55**، وآخر درجة سرية: **40** لو جاله event تاني في سنتين."
+      - kind: check
+        page: 284
+        quote: "experience a second vascular event within 2 years"
+        question: "A patient with ASCVD has a second MI 18 months after the first, while on maximal statin. Which LDL-C goal may be considered?"
+        options:
+          - "< 40 mg/dL (1.0 mmol/L)"
+          - "< 55 mg/dL"
+          - "< 70 mg/dL"
+          - "< 100 mg/dL"
+        answer: 0
+        why:
+          - "صح: event تاني خلال سنتين على statin = أقل من 40 (IIb)."
+          - "ده الـ goal العادي للـ very high."
+          - "ده الـ high."
+          - "ده الـ moderate."
+      - kind: explain
+        page: 285
+        title: "السكر في ESC 2019"
+        quote: "Statin therapy is not recommended in premenopausal patients with diabetes who are considering pregnancy"
+        text: |
+          - **T2DM very high**: ≥ 50% و أقل من **55**. **T2DM high**: ≥ 50% و أقل من **70** (I A).
+          - **T1DM** في high أو very high risk: statin (I A).
+          - ==Intensify== الـ statin الأول، وبعدين لو الـ goal ماتحققش زوّد **ezetimibe**.
+          - **ممنوع** (III): ست سكرية قبل الـ menopause **بتخطط للحمل** أو مش بتستخدم وسيلة منع حمل كويسة.
+          - ممكن (IIb): سكري **30 سنة أو أصغر** عنده end-organ damage و/أو LDL-C أكتر من 2.5 mmol/L، طالما مفيش حمل.
+      - kind: case
+        page: 285
+        quote: "Intensification of statin therapy should be considered before the introduction of combination therapy."
+        stem: "ست عندها 34 سنة، T1DM من 22 سنة، مفيش مضاعفات، LDL-C 150 mg/dL، ومش بتخطط للحمل وبتستخدم IUD."
+        steps:
+          - question: "Her ESC/EAS 2019 risk category?"
+            options: ["Very high", "High", "Moderate", "Low"]
+            answer: 0
+            why: "T1DM بدأ بدري وبقاله أكتر من 20 سنة = very high."
+          - question: "Her LDL-C plan?"
+            options: ["≥ 50% fall and < 55 mg/dL", "< 70 only", "< 100", "No statin: she is premenopausal"]
+            answer: 0
+            why: "Very high: الاتنين مع بعض. الـ III بتاعة الـ premenopausal بس لو بتخطط للحمل أو من غير contraception."
+          - reveal: "على atorvastatin 20 mg الـ LDL بقى 95."
+            question: "Next step?"
+            options: ["Increase to high-intensity statin", "Add ezetimibe straight away", "Add fenofibrate", "Stop the statin"]
+            answer: 0
+            why: "زوّد الـ statin الأول (IIa)، وبعدين ezetimibe لو لسه فوق الـ goal."
+      - kind: update
+        page: 283
+        quote: "2019 ESC/EAS Guidelines for the management of dyslipidaemias: lipid modification to reduce cardiovascular risk"
+        text: "الـ **SCORE** القديم (fatal CVD بس) اتغيّر من 2021 لـ **SCORE2 / SCORE2-OP** (fatal و non-fatal)، وفيه **2025 focused update** للـ guideline. في الامتحان جاوب بأرقام الكتاب (2019)."
+        ref: "ESC CVD prevention guidelines 2021; ESC/EAS dyslipidaemia focused update 2025"
+      - kind: try
+        items: [dm.L23.002, dm.L23.007, dm.L23.009, dm.L23.013, dm.L23.015]
+    recap:
+      - "Very high: ASCVD، DM + organ damage أو 3 RF أو T1DM أكتر من 20 سنة، eGFR أقل من 30، SCORE ≥ 10%، FH + ASCVD/RF."
+      - "High: TC أكتر من 310 أو LDL أكتر من 190 أو BP ≥ 180/110، FH لوحده، DM ≥ 10 سنين، eGFR 30-59، SCORE 5-10%."
+      - "Goals: 116، 100، 70، 55 (والـ high/very high + ≥ 50%)، و 40 لو event تاني في سنتين."
+      - "السكر: زوّد الـ statin الأول ثم ezetimibe؛ لا statin لو بتخطط للحمل."
+    practice: [dm.L23.001, dm.L23.002, dm.L23.003, dm.L23.004, dm.L23.005, dm.L23.006, dm.L23.007, dm.L23.008, dm.L23.009, dm.L23.010, dm.L23.011, dm.L23.012, dm.L23.013, dm.L23.014, dm.L23.015, dm.L23.016, dm.L23.017, dm.L23.060]
+  # ------------------------------------------------------------------
+  - id: dm.L23.lesson2
+    title: "الـ statin: مين، قد إيه، وليه مش كفاية؟"
+    hook: "الـ statin هو العمود. بس 4 من كل 10 لسه بيجيلهم CVD حتى والـ LDL مظبوط. نبدأ بالعمود ونشوف فين بيقصّر."
+    minutes: 8
+    pages: [286, 290]
+    topics: [ada, intensity, lower, unmet]
+    goals:
+      - "تمشي في الـ ADA statin algorithm حسب السن والوقاية"
+      - "تفرق بين high و moderate و low intensity بالجرعات"
+      - "تعرف ليه lower is better، وإيه الـ unmet need والـ residual risk"
+    status: unverified
+    steps:
+      - kind: figure
+        page: 286
+        quote: "High risk High intensity"
+        title: "شجرة الـ ADA"
+        alt: "Decision tree. Statin splits into primary and secondary prevention. Primary: age 20 to 39, no risk means no statin, risk means initiate; age 40 to 75, high risk means high intensity aiming LDL under 70 and over 50 percent fall, otherwise add ezetimibe or PCSK9 inhibitor, no risk means moderate intensity; over 75, continue if on statin, otherwise initiate. Secondary: high intensity, LDL under 55 and over 50 percent fall, if not at target add ezetimibe or PCSK9 inhibitor."
+        caption: "**1ry**: السن بيقسم (20-39، 40-75، فوق 75). **2ry**: ==high intensity== على طول، والهدف أقل من **55**."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L23a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="115" y="8" width="100" height="30" rx="8" class="fg-acc"/>
+            <text x="165" y="28" text-anchor="middle" class="t-b">Statin</text>
+            <path d="M140 38 L95 58" class="fg-arrow" marker-end="url(#L23a)"/>
+            <path d="M190 38 L262 58" class="fg-arrow" marker-end="url(#L23a)"/>
+            <rect x="10" y="60" width="200" height="26" rx="8" class="fg-box"/>
+            <text x="110" y="78" text-anchor="middle" class="t-sm t-b">Primary prevention</text>
+            <rect x="218" y="60" width="102" height="26" rx="8" class="fg-bad"/>
+            <text x="269" y="78" text-anchor="middle" class="t-sm t-b">Secondary</text>
+            <rect x="10" y="96" width="62" height="78" rx="8" class="fg-box"/>
+            <text x="41" y="114" text-anchor="middle" class="t-sm t-b">20-39</text>
+            <text x="41" y="136" text-anchor="middle" class="t-sm">No RF: none</text>
+            <text x="41" y="156" text-anchor="middle" class="t-sm">RF: start</text>
+            <rect x="78" y="96" width="70" height="78" rx="8" class="fg-box"/>
+            <text x="113" y="114" text-anchor="middle" class="t-sm t-b">40-75</text>
+            <text x="113" y="136" text-anchor="middle" class="t-sm">High RF: high</text>
+            <text x="113" y="156" text-anchor="middle" class="t-sm">No RF: mod.</text>
+            <rect x="154" y="96" width="56" height="78" rx="8" class="fg-box"/>
+            <text x="182" y="114" text-anchor="middle" class="t-sm t-b">&gt; 75</text>
+            <text x="182" y="136" text-anchor="middle" class="t-sm">On it: keep</text>
+            <text x="182" y="156" text-anchor="middle" class="t-sm">Not: start</text>
+            <rect x="218" y="96" width="102" height="78" rx="8" class="fg-bad"/>
+            <text x="269" y="114" text-anchor="middle" class="t-sm t-b">High intensity</text>
+            <text x="269" y="136" text-anchor="middle" class="t-sm">LDL &lt; 55</text>
+            <text x="269" y="156" text-anchor="middle" class="t-sm">and &gt; 50% fall</text>
+            <rect x="78" y="186" width="70" height="44" rx="8" class="fg-acc"/>
+            <text x="113" y="204" text-anchor="middle" class="t-sm">LDL &lt; 70</text>
+            <text x="113" y="222" text-anchor="middle" class="t-sm">&gt; 50% fall</text>
+            <path d="M113 230 L113 250" class="fg-arrow" marker-end="url(#L23a)"/>
+            <path d="M269 174 L269 250" class="fg-arrow" marker-end="url(#L23a)"/>
+            <rect x="60" y="252" width="260" height="38" rx="8" class="fg-good"/>
+            <text x="190" y="276" text-anchor="middle" class="t-sm t-b">Not at target: add ezetimibe or PCSK9i</text>
+          </svg>
+      - kind: check
+        page: 286
+        quote: "LDL<55 >50% If not target Add Ezitimibe or PCSK9I"
+        question: "A 70-year-old diabetic with a previous stroke. According to the ADA algorithm, which statin intensity?"
+        options:
+          - "High intensity, LDL-C < 55 and > 50% fall"
+          - "Moderate intensity"
+          - "Only if already on a statin"
+          - "No statin over 65"
+        answer: 0
+        why:
+          - "صح: stroke = secondary prevention = high intensity على طول."
+          - "الـ moderate للـ 40-75 من غير risk factors."
+          - "قاعدة 'لو بياخده كمّل' دي للـ primary فوق 75."
+          - "مفيش حد سن بيمنع الـ statin في الـ secondary."
+      - kind: table
+        page: 287
+        quote: "Daily dose lowers LDL-C on average, by approximately ≥50%"
+        title: "الجرعات اللي لازم تحفظها"
+        columns: [Intensity, LDL-C fall, Doses]
+        rows:
+          - ["High", "≥ 50%", "Atorva 40-80, rosuva 20-40"]
+          - ["Moderate", "30-49%", "Atorva 10-20, rosuva 5-10, simva 20-40"]
+          - ["Low", "< 30%", "Simva 10, prava 10-20"]
+        hide: [[0, 2], [1, 1]]
+      - kind: mnemonic
+        page: 287
+        quote: "Rosuvastatin 20-40 mg"
+        word: "RA"
+        parts:
+          - { key: "R", text: "Rosuvastatin: 20-40 high, 5-10 moderate" }
+          - { key: "A", text: "Atorvastatin: 40-80 high, 10-20 moderate" }
+        hook: "**الـ high = ضعف الـ moderate**: rosuva **20** مقابل 10، atorva **40** مقابل 20. والـ ==simvastatin 80== ممنوع يتبدأ (myopathy و rhabdo)."
+      - kind: explain
+        page: 288
+        title: "Lower is better"
+        quote: "No level of LDL-C below which benefit ceases or harm occurs has been defined."
+        text: |
+          - **مفيش رقم** تحت منه الفايدة بتقف أو الضرر يبدأ.
+          - كل ما الـ LDL-C يوصل أوطى، الـ CV events تقل، ومن غير ==J-curve==.
+          - دراسات الأمان على الـ LDL الواطي جدًا مطمّنة، بس محتاجة متابعة أطول.
+          - وفوق كده للـ statin **pleiotropic effects**: ↓ platelet activation، ↓ coagulation، ↓ inflammation، ↓ oxidative stress، endothelium أحسن.
+      - kind: explain
+        page: 289
+        title: "فين الـ statin بيقصّر؟"
+        quote: "Statins side effects"
+        text: |
+          **Side effects** في صورة الكتاب: ==SAMS== (ألم وضعف عضلات)، صداع، أرق، دوخة ونعاس، مشاكل جلد وهضم، **سكر عالي**، وصفايح قليلة.
+
+          **Unmet need** في 3 مجموعات:
+          - **FH**: 1 من كل 200-250، LDL من غير علاج **200-400**، و 79% مش واصلين للـ goal.
+          - **High / very high risk**: 59% من الـ very high مش تحت 70.
+          - **Statin intolerant**: 10-15% على الـ high intensity.
+      - kind: reveal
+        page: 290
+        quote: "Despite well-controlled LDL-C levels through statin administration, up to 40% patients still experience CV disease. (residual risk)"
+        prompt: "الـ LDL مظبوط على الـ statin. يبقى العيان في أمان؟"
+        answer: "لأ: لحد **40%** لسه بيجيلهم CVD. ده اسمه ==residual risk==، وجزء كبير منه من الـ **TG-rich lipoproteins** (هنشوفه في آخر درس)."
+      - kind: table
+        page: 290
+        quote: "High-intensity statin is not enough; what comes next?"
+        title: "ADA: اتنين ممنوع يتجمعوا مع الـ statin"
+        columns: [Combination, Problem, Grade]
+        rows:
+          - ["Statin + fibrate", "No better ASCVD outcomes", "A"]
+          - ["Statin + niacin", "No benefit, may raise stroke", "A"]
+        hide: [[0, 1], [1, 1]]
+      - kind: try
+        items: [dm.L23.018, dm.L23.021, dm.L23.023, dm.L23.026, dm.L23.030]
+    recap:
+      - "ADA: 20-39 بالـ risk بس، 40-75 high لو فيه risk (أقل من 70) و moderate لو مفيش، فوق 75 كمّل أو ابدأ."
+      - "Secondary: high intensity، أقل من 55 و أكتر من 50%، وإلا ezetimibe أو PCSK9i."
+      - "High: atorva 40-80، rosuva 20-40 (≥ 50%). Moderate: 30-49%. Simva 80 ممنوع يتبدأ."
+      - "Lower is better، مفيش J-curve. Residual risk لحد 40%. Fibrate أو niacin مع الـ statin: لأ."
+    practice: [dm.L23.018, dm.L23.019, dm.L23.020, dm.L23.021, dm.L23.022, dm.L23.023, dm.L23.026, dm.L23.027, dm.L23.028, dm.L23.029, dm.L23.030, dm.L23.031]
+  # ------------------------------------------------------------------
+  - id: dm.L23.lesson3
+    title: "بعد الـ statin: ezetimibe و PCSK9 و inclisiran و bempedoic"
+    hook: "الـ statin وصل لآخره والـ LDL لسه فوق. عندك 4 أبواب: من الأمعاء، من الـ receptor، من الـ mRNA، ومن مصنع الكوليسترول نفسه."
+    minutes: 9
+    pages: [290, 295]
+    topics: [ezetimibe, pcsk9, bempedoic, intensity]
+    goals:
+      - "تفهم ezetimibe وليه بيكمّل الـ statin"
+      - "تشرح الـ PCSK9 وتعرف indications الـ inhibitors"
+      - "تفرق inclisiran عن الـ antibodies، وتعرف bempedoic acid"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 291
+        title: "Ezetimibe: نقفل الباب التاني"
+        quote: "NPC1L1 = Niemann-Pick C1-like 1; HMG-CoA = 3-hydroxy-3-methylglutaryl acetyl coenzyme A"
+        text: |
+          الكوليسترول له مصدرين: **الكبد بيصنعه** (الـ statin بيقفل ==HMG-CoA reductase==) و**الأمعاء بتمتصه** (الـ ezetimibe بيقفل ==NPC1L1==).
+
+          الاتنين مع بعض: كوليسترول أقل في الكبد ← **LDL receptors أكتر** ← الـ LDL-C بيتشال من الدم أكتر.
+          ومع الـ statin، الـ ezetimibe بيقلل الـ **hsCRP** والـ LDL-C لحد 3 أضعاف مقارنة بالـ statin لوحده.
+      - kind: figure
+        page: 292
+        quote: "PCSK9 binds to LDL receptor (LDLR) on hepatocytes"
+        title: "الـ PCSK9: الحرامي اللي بياخد الـ receptor"
+        alt: "Two panels. Left, without inhibition: PCSK9 binds the LDL receptor with its LDL particle, the whole complex is taken in and degraded in a lysosome, so fewer receptors return and blood LDL rises. Right, with an antibody: the antibody grabs PCSK9, the receptor releases LDL inside and recycles to the surface, so more receptors clear LDL."
+        caption: "من غير علاج: الـ PCSK9 بيسحب الـ receptor **للـ degradation**. مع الـ ==antibody==: الـ receptor بيرجع (recycles) ويشيل LDL أكتر."
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L23b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <text x="82" y="18" text-anchor="middle" class="t-sm t-b">Without inhibitor</text>
+            <text x="248" y="18" text-anchor="middle" class="t-sm t-b">With antibody</text>
+            <path d="M165 26 L165 240" class="fg-line"/>
+            <rect x="10" y="150" width="145" height="90" rx="10" class="fg-box"/>
+            <rect x="175" y="150" width="145" height="90" rx="10" class="fg-box"/>
+            <text x="82" y="232" text-anchor="middle" class="t-sm t-mut">Hepatocyte</text>
+            <text x="248" y="232" text-anchor="middle" class="t-sm t-mut">Hepatocyte</text>
+            <circle cx="60" cy="60" r="14" class="fg-bad"/>
+            <text x="60" y="64" text-anchor="middle" class="t-sm">LDL</text>
+            <circle cx="105" cy="70" r="10" class="fg-acc"/>
+            <text x="105" y="95" text-anchor="middle" class="t-sm">PCSK9</text>
+            <path d="M60 74 L60 150" class="fg-arrow" marker-end="url(#L23b)"/>
+            <rect x="30" y="170" width="90" height="34" rx="8" class="fg-bad"/>
+            <text x="75" y="192" text-anchor="middle" class="t-sm t-b">LDLR degraded</text>
+            <text x="68" y="125" class="t-sm">↑ blood LDL</text>
+            <circle cx="220" cy="60" r="14" class="fg-bad"/>
+            <text x="220" y="64" text-anchor="middle" class="t-sm">LDL</text>
+            <circle cx="285" cy="55" r="10" class="fg-acc"/>
+            <rect x="270" y="72" width="34" height="14" rx="4" class="fg-good"/>
+            <text x="287" y="100" text-anchor="middle" class="t-sm">mAb holds it</text>
+            <path d="M220 74 L220 150" class="fg-arrow" marker-end="url(#L23b)"/>
+            <rect x="195" y="170" width="110" height="34" rx="8" class="fg-good"/>
+            <text x="250" y="192" text-anchor="middle" class="t-sm t-b">LDLR recycles</text>
+            <path d="M290 170 L290 128" class="fg-arrow" marker-end="url(#L23b)"/>
+            <text x="228" y="125" class="t-sm">↓ blood LDL</text>
+          </svg>
+      - kind: explain
+        page: 291
+        title: "Evolocumab و alirocumab: لمين؟"
+        quote: "Individuals with high CV risk who have persistently elevated LDL-C despite optimum lipid-modifying therapy."
+        text: |
+          الاتنين **monoclonal antibodies** ضد الـ PCSK9 (FDA **2015**: alirocumab يوليو، evolocumab أغسطس). الـ indications:
+          1. **High CV risk** والـ LDL-C لسه عالي رغم أحسن علاج.
+          2. ==FH==: الـ heterozygous أساسًا، والـ homozygous أقل.
+          3. **Very high / high risk** عندهم **true statin intolerance** والـ LDL عالي.
+
+          مفيش **moderate risk** في القايمة.
+      - kind: check
+        page: 291
+        quote: "Very High Risk and High Risk patients with true statin intolerance and persistently high levels of LDL-C."
+        question: "Which patient is NOT an indication for a PCSK9 inhibitor?"
+        options:
+          - "Moderate CV risk, LDL-C 130 on a moderate statin"
+          - "Heterozygous FH, LDL-C 160 on maximal statin and ezetimibe"
+          - "Very high risk with true statin intolerance, LDL-C 140"
+          - "Post-MI, LDL-C 90 on maximal statin and ezetimibe"
+        answer: 0
+        why:
+          - "صح: الـ moderate risk مش indication (سؤال الكتاب)."
+          - "HeFH = indication 2."
+          - "Statin intolerance + very high = indication 3."
+          - "High risk رغم أحسن علاج = indication 1."
+      - kind: table
+        page: 292
+        quote: "Intensity of lipid lowering treatment"
+        title: "كل علاج بينزل قد إيه؟"
+        columns: [Treatment, LDL-C fall]
+        rows:
+          - ["Moderate statin", "≈ 30%"]
+          - ["High statin", "≈ 50%"]
+          - ["High statin + ezetimibe", "≈ 65%"]
+          - ["PCSK9i alone", "≈ 60%"]
+          - ["PCSK9i + high statin", "≈ 75%"]
+          - ["PCSK9i + high statin + ezetimibe", "≈ 85%"]
+        hide: [[2, 1], [4, 1], [5, 1]]
+      - kind: explain
+        page: 294
+        title: "Inclisiran: نوقف المصنع مش البضاعة"
+        quote: "SiRNAs have been developed to interfere with PCSK9 production in the liver by neutralizing the messenger RNA of PCSK9."
+        text: |
+          ==Inclisiran== **siRNA**: بيبطّل الـ **mRNA** بتاع الـ PCSK9 في الكبد، فالـ PCSK9 ما يتعملش أصلًا.
+          - الـ LDL-C نزل **40-50%** على سنة ونص، في الـ FH وغيره.
+          - المفعول بيفضل **180 يوم** على الأقل ← حقنة كل **3 أو 6 شهور**، مقابل كل **2 أو 4 أسابيع** للـ antibodies.
+          - التأثير على الـ LDL **متشابه**.
+      - kind: update
+        page: 294
+        quote: "which enables inclisiran to be administered every 3 or 6 months"
+        text: "الـ FDA label (2021): جرعة أولى، بعدها **3 شهور**، وبعدين **كل 6 شهور**. ومن 2023 ممكن يتدّي مع الـ statin بدري، مش بس بعد أقصى علاج. الـ outcome trials (ORION-4، VICTORION-2 PREVENT) كانت لسه شغالة في 2025."
+        ref: "Leqvio (inclisiran) FDA label 2021, updated 2023"
+      - kind: explain
+        page: 295
+        title: "Bempedoic acid"
+        quote: "An inhibitor of ATP citrate lyase, a key enzyme involved In the cholesterol biosynthesis pathway."
+        text: |
+          - بيمنع ==ATP citrate lyase==، إنزيم في طريق تصنيع الكوليسترول **قبل** الـ HMG-CoA reductase.
+          - **Oral**، مرة يوميًا، **non-statin** (Nexletol).
+          - الـ indication في الكتاب: مع الـ diet وأقصى statin، في **HeFH** أو **ASCVD** محتاجين LDL أوطى.
+          - بينزل الـ LDL-C حوالي **23%**، والـ TC والـ apo B والـ non-HDL-C والـ **CRP**.
+      - kind: update
+        page: 295
+        quote: "Bempedoic acid is indicated as an adjunct to diet and maximally tolerated statin therapy"
+        text: "**CLEAR Outcomes** (NEJM 2023): bempedoic acid قلل الـ major CV events **13%** في الناس اللي مش بتستحمل الـ statin. الـ FDA وسّع الـ label في 2024 للي مش بياخدوا statin، والـ **ESC/EAS 2025** بتوصي بيه في الـ statin intolerance."
+        ref: "CLEAR Outcomes, NEJM 2023; FDA label 2024; ESC/EAS focused update 2025"
+      - kind: match
+        page: 291
+        quote: "NPC1L1 = Niemann-Pick C1-like 1; HMG-CoA = 3-hydroxy-3-methylglutaryl acetyl coenzyme A"
+        prompt: "وصّل الدوا بهدفه:"
+        pairs:
+          - ["Ezetimibe", "NPC1L1 in the gut"]
+          - ["Evolocumab", "PCSK9 protein"]
+          - ["Inclisiran", "PCSK9 mRNA"]
+          - ["Bempedoic acid", "ATP citrate lyase"]
+        why: "Ezetimibe = امتصاص. Antibody = البروتين. siRNA = الـ mRNA. Bempedoic = إنزيم في التصنيع."
+      - kind: try
+        items: [dm.L23.032, dm.L23.035, dm.L23.039, dm.L23.041, dm.L23.043]
+    recap:
+      - "Ezetimibe: NPC1L1، يكمّل الـ statin؛ high statin + ezetimibe ≈ 65%."
+      - "PCSK9 بيكسّر الـ LDLR؛ evolocumab و alirocumab بيخلوه يرجع. لوحده ≈ 60%، مع high statin ≈ 75%، والتلاتة ≈ 85%."
+      - "Indications: high risk رغم العلاج، FH، statin intolerance. مش moderate risk."
+      - "Inclisiran: siRNA، كل 3-6 شهور، 40-50%. Bempedoic: ATP citrate lyase، oral، ≈ 23%."
+    practice: [dm.L23.024, dm.L23.025, dm.L23.032, dm.L23.033, dm.L23.034, dm.L23.035, dm.L23.036, dm.L23.037, dm.L23.038, dm.L23.039, dm.L23.040, dm.L23.041, dm.L23.042, dm.L23.043, dm.L23.044, dm.L23.045, dm.L23.056, dm.L23.059]
+  # ------------------------------------------------------------------
+  - id: dm.L23.lesson4
+    title: "HoFH والـ residual risk: lomitapide و mipomersen و apheresis و EPA"
+    hook: "عيان LDL بتاعه 500 على كل حاجة. وعيان تاني LDL بتاعه 50 والـ TG عالية. الاتنين لسه في خطر، والحل مختلف."
+    minutes: 7
+    pages: [296, 300]
+    topics: [hofh, omega3]
+    goals:
+      - "تعرف 3 أدوات للـ homozygous FH وأعراضها"
+      - "تقارن apheresis و mipomersen و lomitapide"
+      - "تعرف مين ياخد icosapent ethyl (REDUCE-IT)"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 296
+        title: "Lomitapide: نقفل خط تجميع الـ VLDL"
+        quote: "MTP transfers TG, phospholipids, and cholesteryl esters to the ApoB in the endoplasmic reticulum"
+        text: |
+          الـ ==MTP== في الكبد والأمعاء بيحمّل TG و phospholipids و cholesteryl esters على الـ **apo B** في الـ ER، فيتعمل **VLDL** و **chylomicrons**.
+
+          **Lomitapide** بيمنع الـ MTP ← VLDL أقل. الـ FDA وافق عليه لـ **homozygous FH**.
+          الأعراض: **aminotransferases عالية** (دهون في الكبد) و GI tolerability وحشة.
+      - kind: explain
+        page: 297
+        title: "Mipomersen: نوقف الـ apo B من الـ mRNA"
+        quote: "Mipomersen is a synthetic 20-nucleotide antisense oligonucleotide that can bind to ApoB mRNA"
+        text: |
+          - الـ **apo B** هو البروتين الأساسي في كل الـ atherogenic lipoproteins، وتركيزه بيعدّ عددهم (حتى الـ small dense LDL).
+          - ==Mipomersen== **antisense oligonucleotide** (20 nucleotide) بيلزق في الـ apo B mRNA ← apo B أقل.
+          - موافق عليه لـ **HoFH**.
+          - الأشهر: **injection-site reactions**. الأخطر: **liver toxicity** و steatosis.
+      - kind: check
+        page: 297
+        quote: "Mipomersen is a synthetic 20-nucleotide antisense oligonucleotide that can bind to ApoB mRNA"
+        question: "Which drug is an antisense oligonucleotide against apolipoprotein B?"
+        options:
+          - "Mipomersen"
+          - "Lomitapide"
+          - "Evolocumab"
+          - "LDL apheresis"
+        answer: 0
+        why:
+          - "صح: بيلزق في الـ apo B mRNA (سؤال الكتاب)."
+          - "Lomitapide = MTP inhibitor."
+          - "Evolocumab = PCSK9 antibody."
+          - "Apheresis = فلترة ميكانيكية."
+      - kind: update
+        page: 297
+        quote: "Approved for the treatment of homozygous familial hypercholesterolemia by the FDA."
+        text: "الـ **mipomersen (Kynamro)** اتوقف تسويقه (2018-2019). وللـ HoFH بقى فيه **evinacumab** (antibody ضد ANGPTL3)، FDA 2021. الامتحان: جاوب زي الكتاب."
+        ref: "Evkeeza (evinacumab) FDA approval 2021; ESC/EAS focused update 2025"
+      - kind: explain
+        page: 298
+        title: "LDL apheresis"
+        quote: "LDL-C apheresis is indicated in patients with homozygous FH who do not respond satisfactorily to maximum multiple drug therapy."
+        text: |
+          - **HoFH** ما استجابش لأقصى علاج بأكتر من دوا.
+          - وممكن في **severe HeFH** مع **CAD بتزيد** رغم high statin + ezetimibe/PCSK9.
+      - kind: table
+        page: 298
+        quote: "Apheresis Mipomersen Lomitapide"
+        title: "التلاتة جنب بعض"
+        columns: [Feature, Apheresis, Lomitapide]
+        rows:
+          - ["LDL-C fall", "~70-80%", "~40-50%"]
+          - ["Lp(a) fall", "~70-80%", "~1-19%"]
+          - ["Cardiac benefit", "Yes", "Unknown"]
+          - ["Safety record", "~40 years", "Unknown"]
+        hide: [[0, 1], [0, 2], [2, 1]]
+      - kind: aside
+        tone: analogy
+        page: 298
+        quote: "Apheresis Mipomersen Lomitapide"
+        text: "الـ **apheresis** زي **غسيل كلوي للدهون**: مكلف ومش متاح في كل حتة، بس الأقوى (70-80%) والوحيد اللي له **cardiac benefit** مثبت و 40 سنة أمان. الـ mipomersen وسطه 25-38%."
+      - kind: explain
+        page: 299
+        title: "Residual risk والـ EPA"
+        quote: "the addition of icosapent ethyl EPA 4gm can be considered to reduce cardiovascular risk."
+        text: |
+          الـ **non-HDL-C** = كل الـ atherogenic: remnants و VLDL و IDL و LDL و Lp(a). يعني الـ LDL مش كل الحكاية.
+
+          ==REDUCE-IT==: عيان **ASCVD** أو risk factors، على **statin** والـ **LDL مظبوط**، بس الـ **TG 135-499** mg/dL ← زوّد **icosapent ethyl (EPA) 4 g** يوميًا.
+      - kind: update
+        page: 299
+        quote: "The n-3 (or omega-3) fatty acids [eicosapentaenoic acid (EPA) and docosahexaenoic acid (DHA)]"
+        text: "الفايدة للـ **EPA النقي** بس. خليط EPA + DHA بجرعة 4 g ما قللش الـ events في **STRENGTH (JAMA 2020)**، فكبسولات الـ fish oil العادية مش بديل."
+        ref: "STRENGTH trial, JAMA 2020"
+      - kind: case
+        page: 299
+        quote: "the addition of icosapent ethyl EPA 4gm can be considered to reduce cardiovascular risk."
+        stem: "راجل 60 سنة، MI من سنتين، على atorvastatin 80 و ezetimibe. LDL-C 50، TG 280 mg/dL."
+        steps:
+          - question: "Is his LDL-C at goal?"
+            options: ["Yes: < 55 mg/dL", "No: must be < 40", "No: must be < 70", "There is no goal"]
+            answer: 0
+            why: "Very high: أقل من 55 (ومفيش event تاني في سنتين)."
+          - question: "What lowers his remaining risk?"
+            options: ["Icosapent ethyl 4 g/day", "Add fenofibrate", "Add niacin", "Over-the-counter fish oil"]
+            answer: 0
+            why: "REDUCE-IT: LDL مظبوط و TG 135-499. Fibrate و niacin مع الـ statin مش recommended، والـ fish oil العادي مش هو."
+      - kind: try
+        items: [dm.L23.047, dm.L23.049, dm.L23.051, dm.L23.052, dm.L23.055]
+    recap:
+      - "MTP بيحمّل الدهون على apo B؛ lomitapide بيمنعه (HoFH)، والثمن liver fat و GI."
+      - "Mipomersen: antisense على apo B mRNA؛ injection site + liver toxicity. (اتوقف تسويقه بعدين.)"
+      - "Apheresis: HoFH أو severe HeFH مع CAD بتزيد؛ 70-80% LDL و Lp(a)، cardiac benefit."
+      - "REDUCE-IT: على statin و LDL مظبوط و TG 135-499 ← icosapent ethyl 4 g."
+    practice: [dm.L23.046, dm.L23.047, dm.L23.048, dm.L23.049, dm.L23.050, dm.L23.051, dm.L23.052, dm.L23.053, dm.L23.054, dm.L23.055, dm.L23.057, dm.L23.058]

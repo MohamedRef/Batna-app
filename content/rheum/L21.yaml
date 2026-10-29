@@ -1,0 +1,619 @@
+schema: batna.content/v1
+lecture: rheum.L21
+title: "Systemic sclerosis"
+author: "Prof. Dr. Mona Helmy"
+book: { chapter: 3, pages: [345, 353] }
+topics:
+  - { id: pathogenesis, title: "HLA, cells, cytokines and collagen" }
+  - { id: criteria, title: "2013 ACR/EULAR and ARA criteria" }
+  - { id: forms, title: "Epidemiology, limited vs diffuse, CREST" }
+  - { id: msk-lung, title: "Musculoskeletal and pulmonary disease" }
+  - { id: renal, title: "Scleroderma renal crisis" }
+  - { id: gi-cardiac, title: "Gastrointestinal and cardiac disease" }
+  - { id: treatment, title: "Disease-modifying and antifibrotic treatment" }
+  - { id: organ-treatment, title: "Treatment by organ" }
+items:
+  # ---------- p345: pathogenesis ----------
+  - id: rheum.L21.001
+    kind: enumerate
+    topic: pathogenesis
+    prompt: Which HLA types, together with environmental factors, does the lecture link to systemic sclerosis?
+    points:
+      - HLA-B8
+      - HLA-DR3
+      - HLA-DR5
+      - HLA-DR52
+    pass: 3
+    src: { page: 345, quote: "HLAB8, HLADR3, HLADR5, HLADR52 + environmental factors leads to:" }
+    status: unverified
+  - id: rheum.L21.002
+    kind: card
+    topic: pathogenesis
+    front: Which cells are stimulated in the pathogenesis of systemic sclerosis?
+    back: T cells, B cells, macrophages, mast cells and fibroblasts.
+    src: { page: 345, quote: "T cell + Bcell + macrophage + mast cell + fibroblasts stimulation" }
+    status: unverified
+  - id: rheum.L21.003
+    kind: cloze
+    topic: pathogenesis
+    text: "In SSc, stimulated cells secrete IL-4, IL-6, {{c1::TGF-β}}, PGF and {{c2::CTGF}}, which increase collagen types {{c3::I, III, V, VII}}, proteoglycans and fibronectin."
+    src: { page: 345, quote: "Inflammatory cytokine secretion (IL-4, IL-6, TGF-β, PGF & CTGF)" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L21.004
+    kind: enumerate
+    topic: pathogenesis
+    prompt: List the four pathogenic processes of systemic sclerosis in the lecture.
+    points:
+      - Immune and fibroblast stimulation, cytokines, more collagen
+      - Apoptosis with free radical release
+      - Expression of adhesion molecules
+      - VEGF and anti-endothelial cell antibodies → scarring and vascular dysfunction
+    pass: 4
+    src: { page: 345, quote: "2. Apoptosis with free radical release. 3. Expression of adhesion molecules. 4. VEGF & anti endothelial cells Ab = scarring & vascular dysfunction." }
+    status: unverified
+  - id: rheum.L21.005
+    kind: order
+    topic: pathogenesis
+    prompt: Order the fibrosis pathway in systemic sclerosis.
+    steps:
+      - HLA susceptibility plus environmental factors
+      - T, B, macrophage, mast cell and fibroblast stimulation
+      - Cytokine secretion (IL-4, IL-6, TGF-β, PGF, CTGF)
+      - More collagen, proteoglycans and fibronectin
+    src: { page: 345, quote: "Inflammatory cytokine secretion (IL-4, IL-6, TGF-β, PGF & CTGF)" }
+    status: unverified
+  # ---------- p345-346: criteria ----------
+  - id: rheum.L21.006
+    kind: table
+    topic: criteria
+    title: 2013 ACR/EULAR classification criteria for SSc (book table, p345)
+    columns: [Item, Weight]
+    rows:
+      - ["Skin thickening of fingers of both hands proximal to MCPs", "9"]
+      - ["Whole finger distal to MCP (sclerodactyly)", "4"]
+      - [Puffy fingers, "2"]
+      - [Pitting scars, "3"]
+      - [Digital tip ulcers, "2"]
+      - [Telangiectasia, "2"]
+      - [Abnormal nailfold capillaries, "2"]
+      - [Lung involvement (PAH and/or ILD), "2"]
+      - [Raynaud phenomenon, "3"]
+      - ["SSc antibodies (ACA, anti-Scl-70, RNA polymerase III)", "3"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [8, 1], [9, 1]]
+    src: { page: 345, quote: "Skin thickening of the fingers of both hands extending proximal to the MCP joints" }
+    status: unverified
+    tags: [high-yield, numbers]
+    update:
+      text: "The book's table omits the threshold: a total score of 9 or more classifies definite SSc, and skin thickening proximal to the MCPs (9 points) is sufficient on its own."
+      ref: "ACR/EULAR classification criteria for systemic sclerosis, 2013"
+  - id: rheum.L21.007
+    kind: card
+    topic: criteria
+    front: In the 2013 SSc criteria, how are the skin and fingertip domains scored?
+    back: Count only the highest item in each domain; skin (puffy 2, sclerodactyly 4, proximal to MCPs 9) and fingertips (ulcers 2, pitting scars 3).
+    src: { page: 345, quote: "Skin thickening (count the higher of the three)" }
+    status: unverified
+  - id: rheum.L21.008
+    kind: card
+    topic: criteria
+    front: Which antibodies count as SSc-related in the 2013 criteria?
+    back: Anticentromere (ACA), anti-topoisomerase I (anti-Scl-70) and anti-RNA polymerase III; any one scores 3.
+    src: { page: 345, quote: "Any of ACA, ATA (anti-Scl 70), RNA polimerase" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L21.009
+    kind: card
+    topic: criteria
+    front: What are the ARA major and minor features of scleroderma?
+    back: Major, centrally located skin sclerosis of the arms, face and/or neck. Minor, sclerodactyly, fingertip erosions or atrophy, and bilateral lung fibrosis.
+    src: { page: 346, quote: "Minor features include sclerodactyly, erosions, atrophia of the fingertips, and bilateral lung fibrosis." }
+    status: unverified
+  - id: rheum.L21.010
+    kind: cloze
+    topic: criteria
+    text: "By the ARA criteria, SSc is diagnosed with {{c1::1 major}} and {{c2::2 minor}} criteria."
+    src: { page: 346, quote: "SSc is diagnosed when a patient has 1 major and 2 minor criteria." }
+    status: unverified
+  - id: rheum.L21.011
+    kind: card
+    topic: criteria
+    front: Who usually gets malignant scleroderma, and what is its course?
+    back: Most often men, usually elderly; an accelerated course that leads to death.
+    src: { page: 346, quote: "Malignant scleroderma most often occurs in men, usually in elderly men." }
+    status: unverified
+  - id: rheum.L21.012
+    kind: mcq
+    topic: criteria
+    stem: "A 45-year-old woman has Raynaud phenomenon, puffy fingers and positive anticentromere antibody (ACA), and nothing else. What is her 2013 ACR/EULAR score?"
+    options: ["8", "9", "6", "5", "11"]
+    answer: 0
+    why:
+      - "Correct: Raynaud 3 + puffy fingers 2 + SSc antibody 3 = 8 (p345), one short of the usual threshold of 9."
+      - Nine would need one more point, such as telangiectasia or abnormal capillaries.
+      - Each of Raynaud and antibodies scores 3, not 2.
+      - Raynaud and antibodies alone already make 6.
+      - Eleven would need sclerodactyly (4) instead of puffy fingers.
+    src: { page: 345, quote: "Any of ACA, ATA (anti-Scl 70), RNA polimerase" }
+    status: unverified
+  # ---------- p346-347: forms ----------
+  - id: rheum.L21.013
+    kind: cloze
+    topic: forms
+    text: "Systemic sclerosis has an insidious onset, a female:male ratio of {{c1::4:1}}, and is commonest in the {{c2::4th and 5th}} decades."
+    src: { page: 346, quote: "Mainly Female to Male (4 : 1).  More common on 4th and 5th decades." }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L21.014
+    kind: card
+    topic: forms
+    front: Can visceral scleroderma occur without skin changes?
+    back: Rarely.
+    src: { page: 346, quote: "Rarely visceral scleroderma occurs in absence of the skin changes." }
+    status: unverified
+  - id: rheum.L21.015
+    kind: table
+    topic: forms
+    title: Limited vs diffuse systemic sclerosis (p346)
+    columns: [Feature, Limited, Diffuse]
+    rows:
+      - [Skin, "Distal to elbows and knees; trunk spared", "Proximal to elbows and knees; trunk involved"]
+      - [Face, "Perioral thickening (lip pursing)", "–"]
+      - [Organs, "Less involvement; isolated pulmonary hypertension", "More involvement; pulmonary fibrosis and renal crisis more common"]
+      - [Syndrome, CREST, "–"]
+    blanks: [[0, 1], [0, 2], [2, 1], [2, 2]]
+    src: { page: 346, quote: "Skin thickening proximal to elbows and knees, involving the trunk." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L21.016
+    kind: enumerate
+    topic: forms
+    prompt: What does CREST stand for?
+    points:
+      - Calcinosis
+      - Raynaud phenomenon
+      - Esophageal dysmotility
+      - Sclerodactyly
+      - Telangiectasia
+    pass: 5
+    src: { page: 347, quote: "Calcinosis. ○ Raynaud‘s. ○ Esophageal Dysmotility. ○ Sclerodactyly. ○ Telangiectasisa." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L21.017
+    kind: mcq
+    topic: forms
+    stem: "CREST syndrome includes all of the following except:"
+    options: [Subcutaneous nodules, Esophageal dysmotility, Telangiectasia, Calcinosis, Raynaud phenomenon]
+    answer: 0
+    why:
+      - "Correct: subcutaneous nodules are not part of CREST (calcinosis is calcium deposits) (p347)."
+      - The E of CREST.
+      - The T of CREST.
+      - The C of CREST.
+      - The R of CREST.
+    src: { page: 347, quote: "Calcinosis. ○ Raynaud‘s. ○ Esophageal Dysmotility. ○ Sclerodactyly. ○ Telangiectasisa." }
+    status: unverified
+    tags: [book-question]
+  - id: rheum.L21.018
+    kind: mcq
+    topic: forms
+    stem: A 50-year-old woman has skin thickening of the fingers and forearms below the elbows, perioral tightening, telangiectasia and calcinosis. Her trunk is spared. Which lung problem is she more prone to?
+    options:
+      - Isolated pulmonary hypertension
+      - Rapid pulmonary fibrosis
+      - Bronchiectasis
+      - Lung abscess
+      - Pleural empyema
+    answer: 0
+    why:
+      - "Correct: limited (CREST) disease has less organ involvement but isolated pulmonary hypertension can occur (p346)."
+      - Pulmonary fibrosis and renal crisis are more common in diffuse disease.
+      - Not an SSc lung type in the lecture.
+      - Not an SSc lung type in the lecture.
+      - Not an SSc lung type in the lecture.
+    src: { page: 346, quote: "Isolated pulmonary hypertension can occur." }
+    status: unverified
+  # ---------- p347-348: MSK and lung ----------
+  - id: rheum.L21.019
+    kind: enumerate
+    topic: msk-lung
+    prompt: List the musculoskeletal features of systemic sclerosis.
+    points:
+      - Arthritis of the hands (>50%) with swelling, stiffness and pain
+      - Carpal tunnel syndrome
+      - Contractures from skin thickening
+      - Polymyositis (in MCTD or overlap)
+    pass: 3
+    src: { page: 347, quote: "In > 50% with swelling, stiffness, and pain in the joints of the hands." }
+    status: unverified
+  - id: rheum.L21.020
+    kind: card
+    topic: msk-lung
+    front: What is the leading cause of death in systemic sclerosis, and why?
+    back: Pulmonary involvement, because renal disease is now better controlled.
+    src: { page: 347, quote: "Leading cause of death:  Since we are better at control of renal disease." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L21.021
+    kind: card
+    topic: msk-lung
+    front: Main lung symptom and the two types of lung involvement in SSc?
+    back: Exertional dyspnea; interstitial lung disease and isolated pulmonary hypertension.
+    src: { page: 348, quote: "Exertional dyspnea. • Types of lung Involvement:  Interstitial lung disease.  Isolated pulmonary hypertension." }
+    status: unverified
+  # ---------- p348: renal crisis ----------
+  - id: rheum.L21.022
+    kind: card
+    topic: renal
+    front: Define the hypertension of scleroderma renal crisis.
+    back: Abruptly developing severe hypertension, with a rise in SBP by more than 30 mmHg or DBP by more than 20 mmHg.
+    src: { page: 348, quote: "Abruptly developing severe hypertension: – Rise in SBP by > 30 mmHg, DBP by > 20 mm Hg." }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: rheum.L21.023
+    kind: enumerate
+    topic: renal
+    prompt: Besides the hypertension, scleroderma renal crisis needs one of which findings?
+    points:
+      - Creatinine up 50% over baseline, or above 120% of the upper limit
+      - Proteinuria >2+ on dipstick
+      - Hematuria >2+ or >10 RBC/HPF
+      - Platelets <100
+      - Hemolysis (schistocytes, low platelets, high reticulocytes)
+    pass: 4
+    src: { page: 348, quote: "Increase in serum creatinine by 50% over baseline or creatinine > 120% of upper limit. – Proteinuria > 2+ by dipstick." }
+    status: unverified
+  - id: rheum.L21.024
+    kind: cloze
+    topic: renal
+    text: "In renal crisis {{c1::90%}} have BP above 150/90; crisis with BP below {{c2::140/90}} carries a {{c3::worse}} prognosis."
+    src: { page: 348, quote: "90% with blood pressure > 150/90. • Can occur also with lower blood pressures < 140/90 and this confers worse prognosis." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: rheum.L21.025
+    kind: card
+    topic: renal
+    front: What complications can scleroderma renal crisis cause?
+    back: Headache, encephalopathy, seizures and left ventricular failure.
+    src: { page: 348, quote: "Can cause headache, encephalopathy, seizures, LV failure." }
+    status: unverified
+  - id: rheum.L21.026
+    kind: enumerate
+    topic: renal
+    prompt: List the risk factors for scleroderma renal crisis.
+    points:
+      - Rapidly progressive skin thickening in the first 2–3 years
+      - Steroid use (prednisone >15 mg)
+      - Anti-RNA polymerase III antibody
+      - Pericardial effusion
+    pass: 4
+    src: { page: 348, quote: "Rapidly progressive skin thickening within the first 2-3 years. • Steroid use (prednisone > 15 mg). • Anti-polymerase III Ab." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L21.027
+    kind: mcq
+    topic: renal
+    stem: A 42-year-old woman with diffuse SSc diagnosed 18 months ago, anti-RNA polymerase III positive, was started on prednisone 30 mg for arthritis. She now has headache, BP 190/110 (was 120/80) and creatinine doubled. Best treatment?
+    options:
+      - ACE inhibitor
+      - Increase prednisone
+      - Pulse cyclophosphamide
+      - Beta blocker alone
+      - Plasma exchange
+    answer: 0
+    why:
+      - "Correct: scleroderma renal crisis is treated with ACE inhibitors (p352)."
+      - Steroids above 15 mg are a risk factor for renal crisis (p348).
+      - Not the renal crisis treatment.
+      - ACE inhibitors are the key drug; other antihypertensives are added.
+      - Not in the lecture's renal crisis treatment.
+    src: { page: 352, quote: "Scleroderma renal crisis • ACE inhibitors. • Antihypertensives. • Dialysis. • Renal transplant." }
+    status: unverified
+  - id: rheum.L21.028
+    kind: mcq
+    topic: renal
+    stem: "In systemic sclerosis all are true except:"
+    options:
+      - Dysphagia and GERD are recognized features
+      - Patients may develop pulmonary hypertension and/or pulmonary fibrosis
+      - Raynaud phenomenon is a common presenting feature
+      - Glomerulonephritis is the main renal complication
+    answer: 3
+    why:
+      - "True: lower esophageal dysmotility and reflux (p349)."
+      - "True: ILD and isolated pulmonary hypertension (p348)."
+      - "True: Raynaud scores 3 in the criteria and is part of CREST."
+      - "Correct (false statement): the main renal complication is scleroderma renal crisis, a hypertensive crisis, not glomerulonephritis (p348)."
+    src: { page: 348, quote: "Scleroderma Renal Crisis." }
+    status: unverified
+    tags: [book-question]
+  # ---------- p349: GI and cardiac ----------
+  - id: rheum.L21.029
+    kind: card
+    topic: gi-cardiac
+    front: Why do SSc patients get dysphagia and reflux?
+    back: Disordered peristalsis of the lower two-thirds of the esophagus and an impaired lower esophageal sphincter.
+    src: { page: 349, quote: "Disordered peristalsis of the lower two thirds of the esophagus presents as dysphagia." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L21.030
+    kind: enumerate
+    topic: gi-cardiac
+    prompt: Complications of chronic esophageal reflux in SSc?
+    points:
+      - Erosive esophagitis with bleeding
+      - Barrett esophagus
+      - Lower esophageal stricture
+    pass: 3
+    src: { page: 349, quote: "Chronic esophageal reflux include erosive esophagitis with bleeding, Barrett's esophagus, and lower esophageal stricture." }
+    status: unverified
+  - id: rheum.L21.031
+    kind: card
+    topic: gi-cardiac
+    front: How does gastric involvement in SSc present?
+    back: Early satiety, and occasionally functional gastric outlet obstruction or acute gastric dilatation.
+    src: { page: 349, quote: "presents clinically as ease of satiety and on occasion as either functional gastric outlet obstruction or acute gastric dilatation." }
+    status: unverified
+  - id: rheum.L21.032
+    kind: card
+    topic: gi-cardiac
+    front: Small bowel involvement in SSc?
+    back: Intermittent bloating and cramps, diarrhea, pseudo-obstruction, malabsorption, and frequent bacterial overgrowth in areas of stasis.
+    src: { page: 349, quote: "Bacterial overgrowth in areas of intestinal stasis occurs frequently." }
+    status: unverified
+  - id: rheum.L21.033
+    kind: table
+    topic: gi-cardiac
+    title: Cardiac involvement in SSc (p349)
+    columns: [Form, Features]
+    rows:
+      - [Pericardial effusion, "Symptomatic pericarditis in 20%"]
+      - [Microvascular CAD, "Coronary vasospasm, necrosis, patchy fibrosis → diastolic > systolic dysfunction"]
+      - [Myocarditis, Inflammation leading to fibrosis]
+      - [Conduction, "Fibrosis of the conduction system → AV block, arrhythmias"]
+    blanks: [[0, 1], [1, 1], [3, 1]]
+    src: { page: 349, quote: "Patchy myocardial fibrosis; leads to diastolic > systolic dysfunction." }
+    status: unverified
+  - id: rheum.L21.034
+    kind: mcq
+    topic: gi-cardiac
+    stem: A woman with SSc has chronic diarrhea, bloating and weight loss. Which mechanism does the lecture emphasise?
+    options:
+      - Bacterial overgrowth in areas of intestinal stasis
+      - Celiac disease
+      - Pancreatic carcinoma
+      - Lactose intolerance
+      - Crohn disease
+    answer: 0
+    why:
+      - "Correct: stasis from small bowel involvement leads to frequent bacterial overgrowth and malabsorption (p349)."
+      - Not discussed as an SSc mechanism.
+      - Not discussed as an SSc mechanism.
+      - Not discussed as an SSc mechanism.
+      - Not discussed as an SSc mechanism.
+    src: { page: 349, quote: "Bacterial overgrowth in areas of intestinal stasis occurs frequently." }
+    status: unverified
+  # ---------- p350-351: treatment ----------
+  - id: rheum.L21.035
+    kind: enumerate
+    topic: treatment
+    prompt: List the immunosuppressive options for SSc in the lecture.
+    points:
+      - Cyclophosphamide with plasma exchange or glucocorticoid
+      - Glucocorticoids (restricted indications)
+      - Cyclosporine
+      - Methotrexate
+      - Mycophenolate mofetil
+      - Rapamycin
+      - Autologous stem cell transplantation
+    pass: 5
+    src: { page: 350, quote: "Cyclophosphamaide with plasma exchange or glucocorticoid." }
+    status: unverified
+  - id: rheum.L21.036
+    kind: enumerate
+    topic: treatment
+    prompt: When are glucocorticoids used in SSc?
+    points:
+      - Myositis
+      - Active fibrosing alveolitis
+      - Symptomatic serositis
+      - Early edematous skin phase
+      - Refractory arthritis and tenosynovitis
+    pass: 4
+    src: { page: 350, quote: "Glucocorticoid (restricted to pts with myositis, active fibrosing alveolitis, symptomatic serositis, early edematouse phase of the skin, refractory arthritis" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L21.037
+    kind: enumerate
+    topic: treatment
+    prompt: List the antifibrotic drugs for SSc in the lecture.
+    points:
+      - D-penicillamine
+      - Interferon alpha
+      - Relaxin
+      - Prostacyclin analogue (iloprost)
+      - Anti-TGF-β1 (CAT-192)
+    pass: 4
+    src: { page: 350, quote: "D-penicillamine. • Interferon alpha. • Relaxin. • Prostacyclin analouge (Aloprost). • Anticytokine therapy (CAT-192 = anti TGF-β1)." }
+    status: unverified
+  - id: rheum.L21.038
+    kind: enumerate
+    topic: treatment
+    prompt: Which SSc drugs are under investigation or other targeted biologics?
+    points:
+      - Imatinib (tyrosine kinase inhibitor)
+      - Rituximab (B-cell depletion)
+      - IVIG
+      - Epigenetic (protein deacetylase inhibitor)
+      - Oral bovine type 1 collagen (tolerance)
+      - Tocilizumab and abatacept
+    pass: 4
+    src: { page: 350, quote: "Imatinib (protein tyrosine kinase inhibitor). • B cell depletion (rituximab). • IVIG." }
+    status: unverified
+  - id: rheum.L21.039
+    kind: table
+    topic: organ-treatment
+    title: Treating SSc by organ (p351–352)
+    columns: [Problem, Treatment]
+    rows:
+      - [Pruritus and dry skin, "Antihistamines, lanolin-based lubricants, capsaicin"]
+      - [Telangiectasia, "Green foundation, laser, light therapy"]
+      - [Calcinosis cutis, "Minocycline, MTX, infliximab, rituximab, surgery"]
+      - [Raynaud phenomenon, "CCBs, losartan, prostacyclin analogues, PDE inhibitors, nitroglycerin patch, sympathectomy"]
+      - [Digital ulcers, "Endothelin receptor antagonist, atorvastatin"]
+      - [Arthritis, "Acetaminophen, NSAIDs, low-dose CS, MTX, antimalarials, anti-TNF, IL-6R inhibitor"]
+      - [Myositis, "Steroids, MTX, azathioprine"]
+      - [GIT, "PPI, prokinetics"]
+    blanks: [[3, 1], [4, 1], [6, 1], [7, 1]]
+    src: { page: 351, quote: "Digital ulcers: endothelin receptor antagonist and atorstatin." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L21.040
+    kind: card
+    topic: organ-treatment
+    front: First drug class for Raynaud phenomenon in SSc, per the list?
+    back: Calcium channel blockers (then losartan, prostacyclin analogues, PDE inhibitors, nitroglycerin patch, chemical or digital sympathectomy).
+    src: { page: 351, quote: "Calcium channel blockers, ARB blocker (lozartan), prostacycline analouges, phosphodiestrase inhibitors, nitroglycerine patch" }
+    status: unverified
+  - id: rheum.L21.041
+    kind: enumerate
+    topic: organ-treatment
+    prompt: How is scleroderma renal crisis treated?
+    points:
+      - ACE inhibitors
+      - Other antihypertensives
+      - Dialysis
+      - Renal transplant
+    pass: 3
+    src: { page: 352, quote: "Scleroderma renal crisis • ACE inhibitors. • Antihypertensives. • Dialysis. • Renal transplant." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L21.042
+    kind: table
+    topic: organ-treatment
+    title: Lung and advanced disease in SSc (p352)
+    columns: [Problem, Treatment]
+    rows:
+      - [Pulmonary hypertension, "CCBs, prostacyclin analogues, endothelin receptor blockers, PDE inhibitors, combination, imatinib, lung transplant"]
+      - [Interstitial lung disease, "Steroids, cyclophosphamide, MMF, azathioprine; imatinib; lung transplant"]
+      - [Advanced multisystem disease, "ATG, ALG, MMF; autologous stem cell transplant"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 352, quote: "Immunosuppressives (steroids, cyclophosphamide, MMF, and azathioprine)." }
+    status: unverified
+  - id: rheum.L21.043
+    kind: card
+    topic: organ-treatment
+    front: What do bone X-rays show in SSc?
+    back: Generalized osteopenia, mostly in the hands, often with intra-articular calcifications.
+    src: { page: 352, quote: "Bone radiography reveals generalized osteopenia, which most commonly affects the hands. Intra-articular calcifications often are observed." }
+    status: unverified
+  - id: rheum.L21.044
+    kind: mcq
+    topic: organ-treatment
+    stem: A woman with SSc has painful digital ulcers despite a calcium channel blocker. Which option is listed specifically for digital ulcers?
+    options:
+      - Endothelin receptor antagonist
+      - Proton pump inhibitor
+      - Minocycline
+      - Green foundation
+      - Azathioprine
+    answer: 0
+    why:
+      - "Correct: digital ulcers: endothelin receptor antagonist and atorvastatin (p351)."
+      - PPIs are for the GIT.
+      - Minocycline is for calcinosis cutis.
+      - Green foundation covers telangiectasia.
+      - Azathioprine is for myositis.
+    src: { page: 351, quote: "Digital ulcers: endothelin receptor antagonist and atorstatin." }
+    status: unverified
+  - id: rheum.L21.045
+    kind: mcq
+    topic: organ-treatment
+    stem: A man with diffuse SSc has progressive interstitial lung disease on HRCT. Which group of drugs does the lecture list first for ILD?
+    options:
+      - Immunosuppressives (steroids, cyclophosphamide, MMF, azathioprine)
+      - Calcium channel blockers
+      - ACE inhibitors
+      - Prokinetics
+      - Capsaicin
+    answer: 0
+    why:
+      - "Correct: ILD is treated with immunosuppressives, imatinib and lung transplant (p352)."
+      - CCBs are for Raynaud and pulmonary hypertension.
+      - ACE inhibitors are for renal crisis.
+      - Prokinetics are for the gut.
+      - Capsaicin is a skin counter-irritant.
+    src: { page: 352, quote: "Immunosuppressives (steroids, cyclophosphamide, MMF, and azathioprine)." }
+    status: unverified
+  # ---------- cases and essays ----------
+  - id: rheum.L21.046
+    kind: case
+    topic: renal
+    stem: A 38-year-old woman has had Raynaud phenomenon for 1 year and rapidly spreading skin thickening of her hands, forearms, upper arms and chest over 8 months.
+    steps:
+      - question: Which form of SSc?
+        options: [Diffuse, Limited (CREST), Malignant, Morphoea]
+        answer: 0
+        why: "Skin proximal to the elbows and involving the trunk = diffuse (p346)."
+      - question: Which organ problems are more common in this form?
+        options: ["Pulmonary fibrosis and renal crisis", "Isolated pulmonary hypertension only", "Calcinosis only", "None"]
+        answer: 0
+        why: "Diffuse disease: more organ involvement, pulmonary fibrosis and renal crisis more common (p346)."
+      - reveal: "Anti-RNA polymerase III positive. Her doctor plans prednisone 40 mg for joint pain."
+        question: What is the concern?
+        options: ["Renal crisis risk", "Calcinosis", "Telangiectasia", "Carpal tunnel"]
+        answer: 0
+        why: "Rapid skin thickening in the first 2–3 years, prednisone >15 mg and anti-RNA polymerase III are all renal crisis risk factors (p348)."
+      - reveal: "Two weeks later: BP 180/105 (baseline 115/75), creatinine up 60%, schistocytes."
+        question: Treatment?
+        options: ["ACE inhibitor", "Pulse steroids", "Cyclophosphamide", "Beta blocker only"]
+        answer: 0
+        why: "Renal crisis → ACE inhibitors, antihypertensives, dialysis or transplant if needed (p352)."
+    src: { page: 348, quote: "Rapidly progressive skin thickening within the first 2-3 years. • Steroid use (prednisone > 15 mg). • Anti-polymerase III Ab." }
+    status: unverified
+  - id: rheum.L21.047
+    kind: case
+    topic: forms
+    stem: A 55-year-old woman has had Raynaud phenomenon for 15 years, tight skin of the fingers only, small red spots on her face, and hard white lumps at her fingertips. She has heartburn and food sticking.
+    steps:
+      - question: Syndrome?
+        options: [CREST, Diffuse SSc, SLE, Dermatomyositis]
+        answer: 0
+        why: "Calcinosis, Raynaud, esophageal dysmotility, sclerodactyly, telangiectasia (p347)."
+      - question: Why does food stick?
+        options: ["Disordered peristalsis of the lower two-thirds of the esophagus", "Upper esophageal web", "Achalasia from Chagas", "Cricopharyngeal bar"]
+        answer: 0
+        why: "SSc causes disordered peristalsis of the lower two-thirds and an impaired LES (p349)."
+      - reveal: She now has exertional dyspnea. Lung fields are clear on HRCT.
+        question: Most likely?
+        options: ["Isolated pulmonary hypertension", "Rapid ILD", "Bronchiectasis", "Asthma"]
+        answer: 0
+        why: "Limited disease can have isolated pulmonary hypertension (p346, p348)."
+      - question: Which treatment fits her calcinosis?
+        options: ["Minocycline, MTX, infliximab, rituximab or surgery", "Green foundation", "ACE inhibitor", "Endothelin antagonist"]
+        answer: 0
+        why: "Calcinosis cutis options per p351."
+    src: { page: 347, quote: "Calcinosis. ○ Raynaud‘s. ○ Esophageal Dysmotility. ○ Sclerodactyly. ○ Telangiectasisa." }
+    status: unverified
+  - id: rheum.L21.048
+    kind: essay
+    topic: renal
+    prompt: Discuss scleroderma renal crisis.
+    outline:
+      - "Definition": ["Abrupt severe hypertension: SBP up >30, DBP up >20 mmHg", "Plus one: creatinine up 50% or >120% ULN, proteinuria or hematuria >2+, platelets <100, hemolysis"]
+      - "Clinical": ["Headache, encephalopathy, seizures, LV failure", "90% BP >150/90; normotensive crisis (<140/90) has worse prognosis"]
+      - "Risk factors": ["Rapid skin thickening in first 2–3 years", "Prednisone >15 mg", "Anti-RNA polymerase III", "Pericardial effusion"]
+      - "Treatment": ["ACE inhibitors", "Other antihypertensives", "Dialysis, renal transplant"]
+    src: { page: 348, quote: "Abruptly developing severe hypertension: – Rise in SBP by > 30 mmHg, DBP by > 20 mm Hg." }
+    status: unverified
+  - id: rheum.L21.049
+    kind: essay
+    topic: organ-treatment
+    prompt: Outline the treatment of systemic sclerosis.
+    outline:
+      - "Immunosuppression": ["Cyclophosphamide (± plasma exchange or GC), cyclosporine, MTX, MMF, rapamycin, AHSCT", "GC only for myositis, alveolitis, serositis, edematous skin, refractory arthritis"]
+      - "Antifibrotic and new": ["D-penicillamine, IFN-α, relaxin, iloprost, anti-TGF-β1", "Imatinib, rituximab, IVIG, tocilizumab, abatacept"]
+      - "By organ": ["Raynaud: CCB, losartan, prostacyclin, PDE-i, nitrates, sympathectomy; ulcers: ERA, atorvastatin", "Skin, calcinosis, arthritis, myositis, GIT (PPI, prokinetic)"]
+      - "Kidney and lung": ["Renal crisis: ACE inhibitor", "PAH: CCB, prostacyclin, ERA, PDE-i, combination, transplant", "ILD: immunosuppressives, imatinib, transplant"]
+    src: { page: 350, quote: "Cyclophosphamaide with plasma exchange or glucocorticoid." }
+    status: unverified

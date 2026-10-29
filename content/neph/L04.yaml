@@ -1,0 +1,1379 @@
+schema: batna.content/v1
+lecture: neph.L04
+title: "Hypertension"
+author: "Prof. Dr. er Nienaa"
+book: { chapter: 8, pages: [80, 97] }
+topics:
+  - { id: measurement, title: "Measuring BP: technique, dipping, salt sensitivity, thresholds" }
+  - { id: classification, title: "BHS classification and secondary causes" }
+  - { id: refractory, title: "Refractory (resistant) hypertension" }
+  - { id: pathogenesis, title: "Pathogenesis of essential hypertension and vessel changes" }
+  - { id: complications, title: "End-organ damage, malignant hypertension and the fundus" }
+  - { id: renal-ht, title: "Renoparenchymal hypertension" }
+  - { id: treatment, title: "Treatment principles, lifestyle, targets and drug choice" }
+  - { id: drugs, title: "Antihypertensive drug classes" }
+  - { id: emergencies, title: "Hypertensive emergencies" }
+  - { id: renovascular, title: "Renovascular disease and renal artery stenosis" }
+items:
+  # ---------- p80: measurement ----------
+  - id: neph.L04.001
+    kind: enumerate
+    topic: measurement
+    prompt: Position for measuring blood pressure, per the lecture?
+    points:
+      - Sitting for 5 minutes
+      - Legs on the ground
+      - Arm at the level of the heart
+      - Cuff covering 80% of the arm
+    pass: 4
+    src: { page: 80, quote: "Sitting 5 minuts Legs on the ground Arm at level of the heart Cuff = 80% of The arm" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L04.002
+    kind: cloze
+    topic: measurement
+    text: "The BP cuff should cover {{c1::80%}} of the arm, and the patient should sit for {{c2::5 minutes}} with the arm at heart level."
+    src: { page: 80, quote: "Sitting 5 minuts Legs on the ground Arm at level of the heart Cuff = 80% of The arm" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L04.003
+    kind: card
+    topic: measurement
+    front: How many measurements are needed to diagnose hypertension, and how far apart?
+    back: Two measurements, one week apart.
+    src: { page: 80, quote: "Hypertension must be diagnosed on two measurements one week apart" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L04.004
+    kind: card
+    topic: measurement
+    front: Which measurement pitfall should you watch for while deflating the cuff?
+    back: The auscultatory gap, so palpate first and inflate high enough; also watch the rate of mercury fall and avoid painful inflation.
+    src: { page: 80, quote: "be careful for ascultatory gap" }
+    status: unverified
+  - id: neph.L04.005
+    kind: enumerate
+    topic: measurement
+    prompt: If BP is very high at the first visit, check the femoral pulse for delay. Which causes does a delay point to?
+    points:
+      - Coarctation of the aorta
+      - Leriche syndrome
+      - Aortitis (Takayasu syndrome)
+    pass: 3
+    src: { page: 80, quote: "Femoral pulse delay Coarctation Leriche syndrome Aortitis" }
+    status: unverified
+  - id: neph.L04.006
+    kind: mcq
+    topic: measurement
+    stem: A 24-year-old man has BP 172/100 in the right arm at his first visit. His femoral pulses are weak and delayed compared with the radial. What is the most likely cause?
+    options:
+      - Essential hypertension
+      - Coarctation of the aorta
+      - White-coat hypertension
+      - Primary hyperaldosteronism
+    answer: 1
+    why:
+      - Essential hypertension does not delay the femoral pulse.
+      - "Correct: a very high first-visit BP should prompt measuring another site; femoral pulse delay points to coarctation (p80)."
+      - White-coat hypertension does not change the pulses.
+      - Conn syndrome causes hypertension with hypokalemia but normal femoral pulses.
+    src: { page: 80, quote: "If <<first>> visit B.P is ↑↑ Other site Femoral pulse delay Coarctation" }
+    status: unverified
+  # ---------- p81: postural, dipping, salt sensitivity, thresholds ----------
+  - id: neph.L04.007
+    kind: card
+    topic: measurement
+    front: In whom is supine BP relevant (postural changes)?
+    back: In pregnancy and with an abdominal tumour, where lying supine changes BP.
+    src: { page: 81, quote: "Postural B.P changes Normal Orthstatic Supine →pregnancy, tumour" }
+    status: unverified
+  - id: neph.L04.008
+    kind: cloze
+    topic: measurement
+    text: "In a normal dipper, mean arterial BP falls by {{c1::10–20 mmHg}} from midnight until {{c2::6 am}}; a non-dipper loses this fall."
+    src: { page: 81, quote: "Dipper – non dipper : MAB ↓10-20 mmHg at Mid night till→ 6 am" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L04.009
+    kind: card
+    topic: measurement
+    front: Define salt-sensitive hypertension and say who has it most.
+    back: A rise in SBP of ≥10 mmHg in response to dietary salt loading; mostly old patients and African Americans.
+    src: { page: 81, quote: "Salt sensitive HT ↑ in SBP by ≥ l0 mmHg in response to dietary salt loading Mostly Old patients African americans" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L04.010
+    kind: card
+    topic: measurement
+    front: What is the hypertension paradox?
+    back: The number of uncontrolled hypertensive patients is increasing despite therapeutic advances.
+    src: { page: 81, quote: "An increase in the number of uncontrolled hypertensive patients, despite therapeutic advances." }
+    status: unverified
+  - id: neph.L04.011
+    kind: cloze
+    topic: measurement
+    text: "More than {{c1::two-thirds}} of hypertensive adults in the US miss the goal of <140/90, and over {{c2::80%}} in Canada and Europe have suboptimal control."
+    src: { page: 81, quote: "More than two thirds of hypertensive adults in the United States fail to reach the blood pressure (BP) goal of <140/90 mm Hg" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L04.012
+    kind: table
+    topic: measurement
+    title: "BP thresholds for hypertension by type of measurement (mmHg)"
+    columns: [Measurement, SBP, DBP]
+    rows:
+      - ["Office or clinic", "140", "90"]
+      - ["24-hour", "125–130", "80"]
+      - ["Day", "130–135", "85"]
+      - ["Night", "120", "70"]
+      - ["Home", "130–135", "85"]
+    blanks: [[0, 1], [1, 1], [2, 2], [3, 1], [3, 2], [4, 1]]
+    src: { page: 81, quote: "Office or Clinic 140 90 24-hour 125-130 80 Day 130-135 85 Night 120 70 Home 130-135 85" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L04.013
+    kind: mcq
+    topic: measurement
+    stem: A 50-year-old woman's clinic BP is 146/92. Her 24-hour ambulatory record shows a night-time average of 128/76. How do you read the night value?
+    options:
+      - Normal, because night threshold equals the clinic threshold
+      - Hypertensive, because the night threshold is 120/70
+      - Normal, because only the 24-hour average counts
+      - Hypertensive only if above 135/85
+    answer: 1
+    why:
+      - The clinic threshold is 140/90; night is lower.
+      - "Correct: the night threshold is 120/70 mmHg (p81); 128/76 is above it."
+      - The table gives separate thresholds for 24-hour, day, night and home.
+      - 135/85 is the upper day and home threshold.
+    src: { page: 81, quote: "Office or Clinic 140 90 24-hour 125-130 80 Day 130-135 85 Night 120 70" }
+    status: unverified
+  # ---------- p82: BHS classification and secondary causes ----------
+  - id: neph.L04.014
+    kind: table
+    topic: classification
+    title: "British Hypertension Society classification (mmHg)"
+    columns: [Category, SBP, DBP]
+    rows:
+      - ["Optimal", "<120 and", "<80"]
+      - ["Normal", "120–129 and/or", "80–84"]
+      - ["High normal", "130–139 and/or", "85–89"]
+      - ["Grade 1 (mild)", "140–159 and/or", "90–99"]
+      - ["Grade 2 (moderate)", "160–179 and/or", "100–109"]
+      - ["Grade 3 (severe)", "≥180 and/or", "≥110"]
+      - ["Isolated systolic grade 1", "140–149", "<90"]
+      - ["Isolated systolic grade 2", ">160", "<90"]
+    blanks: [[2, 1], [3, 1], [3, 2], [4, 1], [5, 1], [5, 2]]
+    src: { page: 82, quote: "Grade 1 (mild) 140-159 and/or 90-99 Grade 2 (moderate) 160-179 and/or 100-109 Grade 3 (severe) ≥180 ≥110" }
+    status: unverified
+    tags: [numbers, high-yield]
+    update:
+      text: "ESH 2023 keeps the same grades (grade 1 140–159/90–99, grade 2 160–179/100–109, grade 3 ≥180/≥110). ACC/AHA 2017 calls 130–139/80–89 stage 1."
+      ref: "ESH 2023; ACC/AHA 2017"
+  - id: neph.L04.015
+    kind: card
+    topic: classification
+    front: If SBP and DBP fall into different categories, which one classifies the patient?
+    back: The higher category.
+    src: { page: 82, quote: "If systolic blood pressure and diastolic blood pressure fall into different categories, the higher value should be taken for classification." }
+    status: unverified
+  - id: neph.L04.016
+    kind: cloze
+    topic: classification
+    text: "In the BHS table notes, the threshold for hypertension on home monitoring is >{{c1::135/85}} mmHg and on 24-hour ambulatory monitoring >{{c2::125/80}} mmHg."
+    src: { page: 82, quote: "Threshold blood pressure levels for the diagnosis of hypertension using self/home monitoring are >135/85 mmHg" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L04.017
+    kind: mcq
+    topic: classification
+    stem: A 45-year-old man has a clinic BP of 152/104 mmHg on two visits. How is he classified by the BHS table?
+    options:
+      - High normal
+      - Grade 1 (mild)
+      - Grade 2 (moderate)
+      - Grade 3 (severe)
+      - Isolated systolic hypertension
+    answer: 2
+    why:
+      - High normal is 130–139/85–89.
+      - SBP 152 alone is grade 1, but DBP 104 is grade 2.
+      - "Correct: when SBP and DBP fall into different categories, the higher one counts: DBP 100–109 = grade 2 (p82)."
+      - Grade 3 needs ≥180 or ≥110.
+      - Isolated systolic needs DBP <90.
+    src: { page: 82, quote: "If systolic blood pressure and diastolic blood pressure fall into different categories, the higher value should be taken for classification." }
+    status: unverified
+  - id: neph.L04.018
+    kind: enumerate
+    topic: classification
+    prompt: Renal causes of secondary hypertension in the lecture's table?
+    points:
+      - Diabetic nephropathy
+      - Chronic glomerulonephritis
+      - Adult polycystic disease
+      - Chronic tubulointerstitial nephritis
+      - Renovascular disease
+    pass: 4
+    src: { page: 82, quote: "Renal Diabetic nephropathy Chronic glomerulonephritis Adult polycystic disease Chronic tubulointerstitial nephritis Renovascular disease" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L04.019
+    kind: enumerate
+    topic: classification
+    prompt: Endocrine and adrenal causes of secondary hypertension in the lecture's table?
+    points:
+      - Cushing syndrome
+      - Acromegaly
+      - Thyroid disease
+      - Hyperparathyroid disease
+      - Conn syndrome
+      - Adrenal hyperplasia
+      - Phaeochromocytoma
+    pass: 5
+    src: { page: 82, quote: "Endocrine Cushing's syndrome Acromegaly Thyroid disease Hyperparathyroid disease Adrenal Conn's syndrome Adrenal hyperplasia Phaeochromocytoma" }
+    status: unverified
+  - id: neph.L04.020
+    kind: enumerate
+    topic: classification
+    prompt: Drugs that cause secondary hypertension in the lecture's table?
+    points:
+      - NSAIDs
+      - Oral contraceptives
+      - Steroids
+      - Carbenoxolone
+      - Liquorice
+      - Sympathomimetics
+      - Vasopressin
+      - MAO inhibitors (with tyramine)
+    pass: 6
+    src: { page: 82, quote: "Drugs NSAIDS Oral contraceptives Steroids Carbenoxalone Liquorice Sympathomimetics Vasopressin Monoamine oxidase inhibitors" }
+    status: unverified
+  - id: neph.L04.021
+    kind: card
+    topic: classification
+    front: Cardiovascular cause of secondary hypertension in the lecture's table?
+    back: Aortic coarctation.
+    src: { page: 82, quote: "Cardiovascular Aortic coarctation" }
+    status: unverified
+  # ---------- p83, p89: refractory hypertension ----------
+  - id: neph.L04.022
+    kind: card
+    topic: refractory
+    front: Define refractory (resistant) hypertension.
+    back: BP not reduced to target in a compliant patient on optimal triple therapy that includes a diuretic.
+    src: { page: 89, quote: "Refractory or Resistant HT is defined when B. P. is not reduced to target levels in compliant patients with optimal triple therapy including diuretic." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L04.023
+    kind: enumerate
+    topic: refractory
+    prompt: Main groups of causes of refractory hypertension (p83 table)?
+    points:
+      - Pseudoresistance
+      - Nonadherence to prescribed therapy
+      - Volume overload
+      - Drug-related causes
+      - Concomitant conditions
+      - Secondary causes of hypertension
+    pass: 5
+    src: { page: 83, quote: "Pseudoresistance Nonadherence to prescribed therapy Volume overload Drug-related causes Concomitant conditions Secondary causes of hypertension" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L04.024
+    kind: enumerate
+    topic: refractory
+    prompt: Causes of pseudoresistance?
+    points:
+      - White-coat hypertension
+      - Pseudohypertension in older patients
+      - Small cuff in obese patients
+    pass: 3
+    src: { page: 83, quote: "White-coat hypertension Pseudohypertension in older patients Use of small cuff in patients who are obese" }
+    status: unverified
+  - id: neph.L04.025
+    kind: enumerate
+    topic: refractory
+    prompt: Prescribing errors that make hypertension look refractory?
+    points:
+      - Doses too low
+      - Wrong type of diuretic
+      - Inappropriate combinations
+      - Drug actions and interactions
+    pass: 3
+    src: { page: 83, quote: "Doses too low Wrong type of diuretic Inappropriate combinations Drug actions and interactions" }
+    status: unverified
+  - id: neph.L04.026
+    kind: enumerate
+    topic: refractory
+    prompt: Drugs and substances that cause refractory hypertension (p83)?
+    points:
+      - Sympathomimetics, nasal decongestants, appetite suppressants, cocaine
+      - Caffeine (?)
+      - Oral contraceptives and adrenal steroids
+      - Licorice (as in chewing tobacco)
+      - Cyclosporine and tacrolimus
+      - Erythropoietin
+      - Antidepressants
+      - NSAIDs
+    pass: 6
+    src: { page: 83, quote: "Cyclosporine, tacrolimus Erythropoietin Antidepressants Nonsteroidal anti-inflammatory drugs" }
+    status: unverified
+  - id: neph.L04.027
+    kind: enumerate
+    topic: refractory
+    prompt: Concomitant conditions that cause refractory hypertension?
+    points:
+      - Obesity
+      - Sleep apnea
+      - Ethanol over 1 oz (30 ml) per day
+      - Anxiety and hyperventilation
+    pass: 4
+    src: { page: 83, quote: "Obesity Sleep apnea Ethanol intake of more than 1 oz (30 mL) per day Anxiety, hyperventilation" }
+    status: unverified
+  - id: neph.L04.028
+    kind: mcq
+    topic: refractory
+    stem: A 58-year-old kidney transplant recipient on tacrolimus, darbepoetin and ibuprofen for knee pain has BP 162/96 despite amlodipine, perindopril and indapamide at full doses, taken reliably. Which step comes first?
+    options:
+      - Add a fourth drug immediately
+      - Review drug-related causes such as the NSAID, tacrolimus and erythropoietin
+      - Diagnose white-coat hypertension
+      - Start dialysis
+    answer: 1
+    why:
+      - Before adding drugs, exclude causes of refractory hypertension.
+      - "Correct: NSAIDs, cyclosporine/tacrolimus and erythropoietin are drug-related causes of refractory HT (p83)."
+      - White-coat hypertension needs out-of-office readings; there is an obvious drug cause here.
+      - Hypertension alone is not an indication for dialysis.
+    src: { page: 83, quote: "Cyclosporine, tacrolimus Erythropoietin Antidepressants Nonsteroidal anti-inflammatory drugs" }
+    status: unverified
+  # ---------- p83-84: pathogenesis of essential hypertension ----------
+  - id: neph.L04.029
+    kind: cloze
+    topic: pathogenesis
+    text: "Essential (primary) hypertension makes up {{c1::80–90%}} of hypertensive patients; it links genetic and behavioral factors that raise {{c2::vascular resistance}}."
+    src: { page: 83, quote: "It represent 80-90%. of HT patients" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L04.030
+    kind: card
+    topic: pathogenesis
+    front: Why does hypertension run in families?
+    back: Shared genetic and environmental factors.
+    src: { page: 83, quote: "HT tends to run in families due Shared genetic and environmental factors" }
+    status: unverified
+  - id: neph.L04.031
+    kind: enumerate
+    topic: pathogenesis
+    prompt: Why is low birth weight associated with later high blood pressure?
+    points:
+      - Prolonged malnutrition
+      - Long-term changes in blood vessel structure
+      - Low nephron number
+    pass: 3
+    src: { page: 83, quote: "Low birth weight is associated with subsequent high blood pressure due to: Prolonged malnutrition Long term changes in B.V. Structure Low Nephron Number" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L04.032
+    kind: enumerate
+    topic: pathogenesis
+    prompt: Environmental factors in essential hypertension?
+    points:
+      - Obesity (overestimated BP, sleep disturbance)
+      - Alcohol (large consumers)
+      - Sodium intake (major determinant)
+      - Stress and pain
+    pass: 4
+    src: { page: 84, quote: "Sodium intake: it is a major determinant of blood pressure differences." }
+    status: unverified
+  - id: neph.L04.033
+    kind: card
+    topic: pathogenesis
+    front: What may protect against a high-sodium diet?
+    back: A high-potassium diet (there is some evidence).
+    src: { page: 84, quote: "There in some evidence that high potassium diet can protect against high soduim diet." }
+    status: unverified
+  - id: neph.L04.034
+    kind: card
+    topic: pathogenesis
+    front: Is chronic stress a proven cause of sustained hypertension?
+    back: No. Stress and pain can raise BP, but the relation of chronic stress to BP is not known.
+    src: { page: 84, quote: "Stress and pain can raise blood pressure, but Chronic stress relation to blood pressure is not known." }
+    status: unverified
+  - id: neph.L04.035
+    kind: card
+    topic: pathogenesis
+    front: Role of the humoral systems (ANS, RAAS, natriuretic peptide, kallikrein–kinin) in essential hypertension?
+    back: They regulate short-term BP and take part in the pathogenesis, but are not directly involved in maintaining hypertension.
+    src: { page: 84, quote: "play a role in pathophysiological regulation of short term blood pressure and pathogenesis of essential HT but are not directly involved in maintenance of HT." }
+    status: unverified
+  - id: neph.L04.036
+    kind: card
+    topic: pathogenesis
+    front: Which vasoactive imbalance is listed in essential hypertension?
+    back: Vasoconstrictors (endothelin) over vasodilators (NO).
+    src: { page: 84, quote: "Imbalance between vasoconstrictors (Endothelin) and vasodilator (NO)" }
+    status: unverified
+  - id: neph.L04.037
+    kind: enumerate
+    topic: pathogenesis
+    prompt: Features of insulin resistance that go with essential hypertension and are major CVD risk factors?
+    points:
+      - Hyperinsulinemia
+      - Glucose intolerance
+      - Low HDL and high triglycerides
+      - Central obesity
+    pass: 3
+    src: { page: 84, quote: "Insulin Resistance Hyper in sulinemia Glucose intolerance" }
+    status: unverified
+  - id: neph.L04.038
+    kind: card
+    topic: pathogenesis
+    front: What happens to the baroreceptors in essential hypertension?
+    back: Their sensitivity changes so they operate at a higher BP level (they reset).
+    src: { page: 85, quote: "Baroreceptor sensitivity change which would then operate at a higher BP level" }
+    status: unverified
+  - id: neph.L04.039
+    kind: card
+    topic: pathogenesis
+    front: What change in the resistance vessels maintains hypertension?
+    back: Small arteries and arterioles have thicker walls and a narrower lumen, which raises vascular resistance.
+    src: { page: 85, quote: "have increased wall thicknees and reduction of vessel lumen diameter which leads to increased vascular resistance which maintains HT" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L04.040
+    kind: card
+    topic: pathogenesis
+    front: Cardiac output in established essential hypertension?
+    back: Normal. The raised BP is carried by raised resistance.
+    src: { page: 85, quote: "Normal Cardiac output" }
+    status: unverified
+  - id: neph.L04.041
+    kind: enumerate
+    topic: pathogenesis
+    prompt: Changes in the large vessels in hypertension?
+    points:
+      - Thick media
+      - Increased collagen
+      - Secondary calcium deposition
+    pass: 3
+    src: { page: 85, quote: "Large vessels Thick media Collagen Secondary calcium deposition" }
+    status: unverified
+  - id: neph.L04.042
+    kind: card
+    topic: pathogenesis
+    front: What does pulse wave velocity measure?
+    back: Arterial stiffness; it is inversely related to distensibility.
+    src: { page: 85, quote: "Pulse wave velocity, it measures arterial stiffness and is inversely related to distensibility" }
+    status: unverified
+  - id: neph.L04.043
+    kind: card
+    topic: pathogenesis
+    front: Why does LVH matter in hypertension?
+    back: LVH from raised PVR and LV load is a significant prognostic indicator of cardiovascular events.
+    src: { page: 85, quote: "LVH resulting from↑ PVR and↑ L.V. Load is a significant prognostic indicator of C.V. events." }
+    status: unverified
+  - id: neph.L04.044
+    kind: card
+    topic: pathogenesis
+    front: What does loss of arterial compliance cause?
+    back: A pronounced arterial pressure wave. Small vessels also rarefy (lower density).
+    src: { page: 85, quote: "Loss of compliance → pronounced arterial presure wave." }
+    status: unverified
+  # ---------- p85-87: complications ----------
+  - id: neph.L04.045
+    kind: enumerate
+    topic: complications
+    prompt: End-organ damage of hypertension (p85 figure)?
+    points:
+      - "Brain: hemorrhage, stroke"
+      - "Heart: LVH, CHD, CHF"
+      - "Eye: retinopathy"
+      - Peripheral vascular disease
+      - "Kidney: renal failure, proteinuria"
+    pass: 5
+    src: { page: 85, quote: "Complications of Hypertension: End-Organ Damage" }
+    status: unverified
+  - id: neph.L04.046
+    kind: cloze
+    topic: complications
+    text: "Hypertensive patients have a {{c1::sixfold}} increase in strokes, a {{c2::threefold}} increase in cardiac death, and PVD is {{c3::twice}} as common."
+    src: { page: 86, quote: "HT patients have a sixfold increase in strokes There is a threefold increase in cardiac death." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L04.047
+    kind: card
+    topic: complications
+    front: Define malignant (accelerated) hypertension.
+    back: BP rises rapidly with diastolic BP >120 mmHg, with fibrinoid necrosis of the vessel wall.
+    src: { page: 86, quote: "It occurs when BP rises rapidly with diastolic BP > 120, with fibrinoid necrosis of vessel wall." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L04.048
+    kind: enumerate
+    topic: complications
+    prompt: What can untreated malignant hypertension lead to?
+    points:
+      - Progressive renal failure, proteinuria and hematuria
+      - Heart failure
+      - Aortic dissection
+      - Stroke
+      - Cerebral edema and hemorrhage
+      - Hypertensive encephalopathy
+    pass: 5
+    src: { page: 86, quote: "Unless treated it may lead to progressive renal failure, proteinuria and hematuria, heart failure, and aortic dissection, stroke" }
+    status: unverified
+  - id: neph.L04.049
+    kind: table
+    topic: complications
+    title: "Keith–Wagener grades of hypertensive retinopathy"
+    columns: [Grade, Findings]
+    rows:
+      - ["I", "Tortuous arteries with increased reflectiveness (silver wiring)"]
+      - ["II", "Grade I + arteriovenous nipping"]
+      - ["III", "Grade II + flame-shaped hemorrhages and soft (cotton wool) exudates from small infarcts"]
+      - ["IV", "Grade III + papilledema"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 86, quote: "GII: GI + arteriovenous nipping. GIII: GII + flame shaped hemorrhages, soft exudates" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L04.050
+    kind: card
+    topic: complications
+    front: Which Keith–Wagener grades are diagnostic of malignant hypertension?
+    back: Grades III and IV.
+    src: { page: 86, quote: "GIII and IV are diagnostic of malignant HT" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L04.051
+    kind: mcq
+    topic: complications
+    stem: A 38-year-old man presents with headache and blurred vision. BP 230/134. Fundoscopy shows flame-shaped hemorrhages and cotton wool spots without disc swelling. What is the Keith–Wagener grade and what does it mean?
+    options:
+      - Grade I; benign hypertension
+      - Grade II; benign hypertension
+      - Grade III; diagnostic of malignant hypertension
+      - Grade IV; papilledema
+    answer: 2
+    why:
+      - Grade I is silver wiring only.
+      - Grade II adds AV nipping, without hemorrhages.
+      - "Correct: flame hemorrhages and soft exudates are grade III, and grades III–IV are diagnostic of malignant HT (p86)."
+      - Grade IV needs papilledema, which he does not have.
+    src: { page: 86, quote: "GIII and IV are diagnostic of malignant HT" }
+    status: unverified
+  # ---------- p87-88: renoparenchymal hypertension ----------
+  - id: neph.L04.052
+    kind: cloze
+    topic: renal-ht
+    text: "{{c1::60%}} of CKD stage III patients are hypertensive and more than {{c2::80%}} in stages IV–V; {{c3::70%}} of hypertensive CKD patients are uncontrolled."
+    src: { page: 87, quote: "60% of CKD Stage III (GFR 30-59 mL / min) are hypertensive >80% CKD stage IV – V are hypertensive" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L04.053
+    kind: cloze
+    topic: renal-ht
+    text: "Of ESRD patients on hemodialysis, {{c1::86%}} are hypertensive and only {{c2::30%}} are controlled."
+    src: { page: 87, quote: "ESRD patients on HD : 86 %. are hypertensive and only 30% are Controlled" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L04.054
+    kind: card
+    topic: renal-ht
+    front: Strongest predictor of hypertension and poor BP control in CKD?
+    back: Proteinuria.
+    src: { page: 87, quote: "Proteinuria is strong predictor Factor of Hypertension and poor Control ." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L04.055
+    kind: enumerate
+    topic: renal-ht
+    prompt: Mechanisms of renoparenchymal hypertension?
+    points:
+      - Low nephron number from fetal life (poor Na and volume homeostasis)
+      - Salt and water retention (TIN ischemia needs high pressure for natriuresis)
+      - Sympathetic overactivity
+      - RAAS activation
+      - Oxidative stress (low NO)
+    pass: 4
+    src: { page: 87, quote: "Low- nephron number during fetal life. →↓ Na+ volumes homeostasis." }
+    status: unverified
+  - id: neph.L04.056
+    kind: card
+    topic: renal-ht
+    front: Why are CKD patients salt sensitive?
+    back: Renal tubulointerstitial ischemia means a higher pressure is needed to achieve natriuresis.
+    src: { page: 87, quote: "one reason to sodium sensitivity could result from renal TIN ischemia which needs a high pressure for natriuresis." }
+    status: unverified
+  - id: neph.L04.057
+    kind: card
+    topic: renal-ht
+    front: What does SNS stimulation do in the kidney, and with what result?
+    back: It raises renin, lowers Na excretion and renal blood flow, leading to renal damage and salt-sensitive hypertension.
+    src: { page: 87, quote: "SNS stimulation ( ↑renin - ↓ Na excretion - ↓ renal blood flow) which will lead to Renal damage (Salt Sensitive HT)" }
+    status: unverified
+  - id: neph.L04.058
+    kind: enumerate
+    topic: renal-ht
+    prompt: SNS is overactive in CKD. Which treatments target it?
+    points:
+      - Renal denervation
+      - Nephrectomy
+      - ACE inhibitors and ARBs
+    pass: 3
+    src: { page: 88, quote: "SNS is overactive in CKD: thus treatment includes ( renal denervation - Nephrecatomy - ACEi & ARBs)." }
+    status: unverified
+  - id: neph.L04.059
+    kind: card
+    topic: renal-ht
+    front: What is renalase?
+    back: A recently discovered enzyme, produced mostly by the kidney, that inactivates circulating catecholamines.
+    src: { page: 88, quote: "Recently enzyme renalase is discovered mostly produced by the Kidney, which inactivates circulating catecholamines." }
+    status: unverified
+  - id: neph.L04.060
+    kind: card
+    topic: renal-ht
+    front: Where is renin secreted?
+    back: By the juxtaglomerular cells in the afferent arteriole.
+    src: { page: 88, quote: "Renin is secreted by juxtraglomerular cells in AA." }
+    status: unverified
+  - id: neph.L04.061
+    kind: enumerate
+    topic: renal-ht
+    prompt: Effects of angiotensin II that raise BP?
+    points:
+      - Increased Na reabsorption
+      - Arteriolar vasoconstriction
+      - Aldosterone secretion
+    pass: 3
+    src: { page: 88, quote: "ATII will lead to ( ↑ Na reabsorption - Arteriolar vasoconstriction – aldosterone Secretion )" }
+    status: unverified
+  - id: neph.L04.062
+    kind: order
+    topic: renal-ht
+    prompt: Order the RAAS vicious cycle in renal damage.
+    steps:
+      - Renal damage
+      - Increased ACE expression
+      - Increased angiotensin II
+      - More renal damage and salt-sensitive HT
+    src: { page: 88, quote: "Renal damage → ↑ ACE expression → ↑ATII → renal damage + SSHT" }
+    status: unverified
+  - id: neph.L04.063
+    kind: card
+    topic: renal-ht
+    front: How does oxidative stress cause hypertension in CKD?
+    back: The enzymes that neutralize ROS are impaired, NO falls (nitrosative stress), and vasoconstriction rises.
+    src: { page: 88, quote: "In CKD these enzyme are impaired leading. to ↓ NO" }
+    status: unverified
+  - id: neph.L04.064
+    kind: card
+    topic: renal-ht
+    front: What is ADMA and why does it matter in CKD and salt-sensitive HT?
+    back: Asymmetric dimethylarginine; its level rises and it inhibits NO synthase.
+    src: { page: 88, quote: "Salt sensitve HT and CKD have ↑ level of asymmetric dimethyl argenine (ADMA) which inhibits NO synthetase" }
+    status: unverified
+  - id: neph.L04.065
+    kind: mcq
+    topic: renal-ht
+    stem: Which statement about renoparenchymal hypertension is correct, per the lecture?
+    options:
+      - Proteinuria predicts hypertension and poor control
+      - Renalase activates circulating catecholamines
+      - ADMA stimulates NO synthase
+      - Most hemodialysis patients have controlled BP
+    answer: 0
+    why:
+      - "Correct: proteinuria is a strong predictor of hypertension and poor control (p87)."
+      - Renalase inactivates catecholamines.
+      - ADMA inhibits NO synthase.
+      - Only 30% of hypertensive HD patients are controlled.
+    src: { page: 87, quote: "Proteinuria is strong predictor Factor of Hypertension and poor Control ." }
+    status: unverified
+  # ---------- p88-91: treatment ----------
+  - id: neph.L04.066
+    kind: order
+    topic: treatment
+    prompt: Order the first steps of hypertension treatment in the lecture.
+    steps:
+      - Assessment
+      - Repeated measurement
+      - Lifestyle modification
+      - Set the target blood pressure
+    src: { page: 88, quote: "Life style modification" }
+    status: unverified
+  - id: neph.L04.067
+    kind: card
+    topic: treatment
+    front: Which drugs cause first-dose profound hypotension?
+    back: ACE inhibitors and (postsynaptic) alpha blockers.
+    src: { page: 88, quote: "First dose profound hypotension occurs with ACEi Alpha blockers (Post Synaptic)" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L04.068
+    kind: card
+    topic: treatment
+    front: What must be monitored with ACE inhibitors and ARBs, and which adverse effect may occur?
+    back: Renal function; angioedema may occur.
+    src: { page: 89, quote: "Monitor RF with ACEi and ARBs and Angioedema may occur." }
+    status: unverified
+  - id: neph.L04.069
+    kind: card
+    topic: treatment
+    front: Do most hypertensive patients need one drug?
+    back: No. Most hypertensive patients require a combination of drugs.
+    src: { page: 88, quote: "Most hypertensive patients require a combination of drugs" }
+    status: unverified
+  - id: neph.L04.070
+    kind: table
+    topic: treatment
+    title: "Lifestyle modification in borderline and hypertensive patients"
+    columns: [Measure, Recommendation]
+    rows:
+      - ["Body weight", "BMI 20–25 kg/m²"]
+      - ["Aerobic exercise", "≥30 min brisk walk most days"]
+      - ["Salt", "<100 mmol/day (<6 g NaCl or <2.4 g Na)"]
+      - ["Alcohol", "≤3 units/day men, <2 units/day women"]
+      - ["Fruit and vegetables", "≥5 portions/day"]
+      - ["Fat", "Reduce fat and saturated fat"]
+      - ["CV risk", "Stop smoking, more oily fish"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 89, quote: "Reduce salt intake <100 mmol/day (<6 g NaCl or <2.4 g Na/day)" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L04.071
+    kind: cloze
+    topic: treatment
+    text: "Salt restriction in hypertension means <{{c1::100 mmol/day}}, which is <{{c2::6 g}} NaCl or <{{c3::2.4 g}} sodium a day."
+    src: { page: 89, quote: "Reduce salt intake <100 mmol/day (<6 g NaCl or <2.4 g Na/day)" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L04.072
+    kind: enumerate
+    topic: treatment
+    prompt: Objectives of combined antihypertensive therapy?
+    points:
+      - Reduced side effects
+      - Improved adherence
+      - Improved BP control
+      - Goal achieved in good time
+      - Improved outcomes
+    pass: 4
+    src: { page: 89, quote: "Reduced side effects Improved adherence Improved BP control Goal achieved timeously Improved outcomes" }
+    status: unverified
+  - id: neph.L04.073
+    kind: table
+    topic: treatment
+    title: "Target BP goals (ESH/ESC and JNC 7 summary)"
+    columns: [Type of hypertension, BP goal (mmHg)]
+    rows:
+      - ["Uncomplicated", "<140/90"]
+      - ["Diabetes mellitus", "<130/80"]
+      - ["Kidney disease", "<130/80 (lower if proteinuria >1 g/day)"]
+      - ["Other high risk (stroke, MI)", "<130/80"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 90, quote: "Uncomplicated <140/90 Complicated Diabetes mellitus <130/80 Kidney disease <130/80*" }
+    status: unverified
+    tags: [numbers, high-yield]
+    update:
+      text: "KDIGO 2021 suggests a systolic target <120 mmHg (standardized office BP) in CKD when tolerated; ESH 2023 aims for <130/80 in most treated patients."
+      ref: "KDIGO BP in CKD 2021; ESH 2023"
+  - id: neph.L04.074
+    kind: card
+    topic: treatment
+    front: When is the BP target in kidney disease set lower than 130/80?
+    back: When proteinuria is more than 1 g/day.
+    src: { page: 90, quote: "*Lower if proteinuria is >1 g/day" }
+    status: unverified
+  - id: neph.L04.075
+    kind: card
+    topic: treatment
+    front: How has the goal of treatment changed, per the lecture?
+    back: The past goal was only to reduce BP; now it is to reduce BP and protect target organs (TOD).
+    src: { page: 91, quote: "Then GOAL is ….to Achieve reduction of BP And protect TOD" }
+    status: unverified
+  - id: neph.L04.076
+    kind: enumerate
+    topic: treatment
+    prompt: Which drug pairs does the ESH–ESC diagram mark as available fixed-dose combinations (solid red lines)?
+    points:
+      - Diuretic + ARB
+      - Diuretic + ACE inhibitor
+      - Diuretic + CCB
+      - ARB + CCB
+      - ACE inhibitor + CCB
+      - Beta-blocker + CCB
+    pass: 4
+    src: { page: 90, quote: "ESH-ESC Recommendations for Combining BP-lowering Drugs and Availability as Fixed-dose Combinations" }
+    status: unverified
+  - id: neph.L04.077
+    kind: card
+    topic: treatment
+    front: In the ESH–ESC combination diagram, which pairing is shown as a two-way arrow between ARBs and CCBs, and which are dashed (less frequently used)?
+    back: ARB with CCB is a preferred combination. Dashed (as necessary) lines join alpha-blockers and beta-blockers with most others, and diuretic with beta-blocker is a dashed red line.
+    src: { page: 90, quote: "Available as a fixed-dose combination Less frequently used/combination used as necessary" }
+    status: unverified
+  - id: neph.L04.078
+    kind: order
+    topic: treatment
+    prompt: Order the steps for choosing drugs in newly diagnosed hypertension (p91 figure).
+    steps:
+      - "Step 1: A if younger than 55; C or D if 55 or older or black"
+      - "Step 2: A + C or A + D"
+      - "Step 3: A + C + D"
+      - "Step 4: add further diuretic, alpha-blocker or beta-blocker; consider specialist advice"
+    src: { page: 91, quote: "Figure: Choosing drugs for patients newly diagnosed with hypertension." }
+    status: unverified
+    tags: [high-yield]
+    update:
+      text: "NICE 2019 (updated 2022) keeps ACEi or ARB for under-55s, CCB for 55+ or Black African/Caribbean people, and prefers an ARB over an ACEi in Black people when combining; step 4 favours low-dose spironolactone if K ≤4.5."
+      ref: "NICE NG136, 2019 (2022 update)"
+  - id: neph.L04.079
+    kind: card
+    topic: treatment
+    front: In the p91 drug-choice figure, what do A, C and D mean?
+    back: A = ACE inhibitor (ARB if ACE-intolerant); C = calcium-channel blocker; D = thiazide-type diuretic.
+    src: { page: 91, quote: "A = ACE inhibitor (angiotensin-Il receptor antagonist if ACE intolerant) C= calcium-channel blocker D=thiazide-type diuretic" }
+    status: unverified
+  - id: neph.L04.080
+    kind: card
+    topic: treatment
+    front: Who counts as a black patient in the drug-choice figure?
+    back: Patients of African or Caribbean descent, not mixed-race, Asian or Chinese patients.
+    src: { page: 91, quote: "Black patients are those of African or Caribbean descent and not mixed-race, Asian or Chinese patients" }
+    status: unverified
+  - id: neph.L04.081
+    kind: mcq
+    topic: treatment
+    stem: A 62-year-old Caucasian man with newly diagnosed uncomplicated hypertension (158/94 on repeated readings) needs a first drug. What does the lecture's figure choose?
+    options:
+      - ACE inhibitor
+      - Calcium-channel blocker or thiazide-type diuretic
+      - Beta-blocker
+      - Alpha-blocker
+    answer: 1
+    why:
+      - A is first for patients younger than 55.
+      - "Correct: 55 or older (or black at any age) starts with C or D (p91)."
+      - Beta-blockers come at step 4 in the figure.
+      - Alpha-blockers come at step 4.
+    src: { page: 91, quote: "Figure: Choosing drugs for patients newly diagnosed with hypertension." }
+    status: unverified
+  - id: neph.L04.082
+    kind: mcq
+    topic: treatment
+    stem: A 40-year-old man on perindopril and amlodipine is still above target. Which step 3 regimen does the lecture's figure give?
+    options:
+      - Add a beta-blocker
+      - Add a thiazide-type diuretic (A + C + D)
+      - Swap to an alpha-blocker
+      - Add an ARB to the ACE inhibitor
+    answer: 1
+    why:
+      - Beta-blockers are step 4 options.
+      - "Correct: step 3 is A + C + D (p91)."
+      - Alpha-blockers are step 4 options.
+      - A is ACEi or an ARB if intolerant, not both.
+    src: { page: 91, quote: "Figure: Choosing drugs for patients newly diagnosed with hypertension." }
+    status: unverified
+  # ---------- p92-93: drug classes ----------
+  - id: neph.L04.083
+    kind: table
+    topic: drugs
+    title: "Antihypertensive drugs: when to use and when to avoid (pp92–93)"
+    columns: [Class, Favouring use, Cautions/contraindications]
+    rows:
+      - ["Alpha-blockers", "Benign prostatic hypertrophy, phaeochromocytoma crisis", "Postural hypotension, urinary incontinence, profound hypotension"]
+      - ["Aldosterone antagonists", "Primary hyperaldosteronism, heart failure", "Hyperkalaemia"]
+      - ["ACE inhibitors", "<55, HF/LV dysfunction, MI, diabetic nephropathy, CKD, stroke prevention", "Renal failure (monitor electrolytes), renovascular PVD, pregnancy"]
+      - ["ARBs", "ACEi intolerant, <55, LVH, HF, MI, diabetic nephropathy, CKD", "Renal failure, renovascular PVD, pregnancy"]
+      - ["Beta-blockers", "CHD, heart failure (bisoprolol, carvedilol), pregnancy", "Diabetes, PVD, asthma/COPD, heart block, unstable HF"]
+      - ["CCBs", ">55 years, black patients, angina", "Bradycardia, heart block, HF, with beta-blockers (verapamil)"]
+      - ["Methyldopa", "Pregnancy and breastfeeding", "Monitor blood counts and LFTs"]
+      - ["Moxonidine", "Resistant HT, insulin resistance", "Renal or heart failure, glaucoma, angioedema, bradycardia"]
+      - ["Thiazides", ">55, black patients, HF, stroke prevention", "Gout, diabetes, hypokalaemia"]
+      - ["Aliskiren", "Resistant hypertension", "Renal failure, pregnancy"]
+      - ["Hydralazine", "Black patients, HF (with nitrates)", "SLE"]
+      - ["Sodium nitroprusside", "Hypertensive crisis", "Intra-arterial BP monitoring; avoid prolonged use"]
+    blanks: [[0, 1], [1, 2], [2, 2], [4, 2], [5, 2], [6, 1], [8, 2], [10, 2]]
+    src: { page: 92, quote: "Spironolactone Eplerenone Primary hyperaldosteronism, heart failure Hyperkalaemia" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L04.084
+    kind: card
+    topic: drugs
+    front: Two conditions that favour alpha-blockers?
+    back: Benign prostatic hypertrophy and phaeochromocytoma crisis.
+    src: { page: 92, quote: "Benign prostatic hypertrophy Phaeochromocytoma crisis" }
+    status: unverified
+  - id: neph.L04.085
+    kind: card
+    topic: drugs
+    front: Why are ACE inhibitors and ARBs cautioned in peripheral vascular disease?
+    back: Because of possible renovascular disease; monitor renal function and electrolytes. They are also avoided in pregnancy.
+    src: { page: 92, quote: "Renal failure (monitor electrolytes), peripheral vascular disease (if renovascular disease), pregnancy" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L04.086
+    kind: enumerate
+    topic: drugs
+    prompt: Cautions or contraindications to beta-blockers in the lecture's table?
+    points:
+      - Diabetes
+      - Peripheral vascular disease
+      - Asthma/COPD
+      - Heart block
+      - Unstable heart failure
+    pass: 4
+    src: { page: 92, quote: "Diabetes, peripheral vascular disease, asthma/COPD, heart block, unstable heart failure" }
+    status: unverified
+  - id: neph.L04.087
+    kind: card
+    topic: drugs
+    front: Which beta-blockers are favoured in heart failure?
+    back: Bisoprolol and carvedilol.
+    src: { page: 92, quote: "heart failure (bisoprolol and carvedilol) Hypertension in pregnancy" }
+    status: unverified
+  - id: neph.L04.088
+    kind: card
+    topic: drugs
+    front: Which centrally acting drug suits pregnancy and breastfeeding, and what needs monitoring?
+    back: Methyldopa; monitor blood counts and liver function tests.
+    src: { page: 92, quote: "Methyldopa Hypertension in pregnancy and breastfeeding Monitor blood counts and liver function tests ." }
+    status: unverified
+  - id: neph.L04.089
+    kind: card
+    topic: drugs
+    front: "Moxonidine: use and cautions?"
+    back: Resistant hypertension and insulin resistance. Caution in renal or heart failure, glaucoma, angioedema and bradycardia.
+    src: { page: 92, quote: "Moxonidine (Resistant hypertension, insulin resistance) Renal or heart failure, glaucoma, angioedema. Bradycardia" }
+    status: unverified
+  - id: neph.L04.090
+    kind: card
+    topic: drugs
+    front: Which CCB must not be combined with beta-blockers?
+    back: Verapamil (risk of bradycardia and heart block).
+    src: { page: 92, quote: "Bradycardia, heart block, heart failure, beta-blockers (verapamil" }
+    status: unverified
+  - id: neph.L04.091
+    kind: card
+    topic: drugs
+    front: Thiazide cautions in the lecture's table?
+    back: Gout, diabetes and hypokalaemia.
+    src: { page: 93, quote: "Gout, diabetes, hypokalaemia" }
+    status: unverified
+  - id: neph.L04.092
+    kind: card
+    topic: drugs
+    front: "Aliskiren: class, use and contraindications?"
+    back: A renin inhibitor for resistant hypertension; avoid in renal failure and pregnancy.
+    src: { page: 93, quote: "Renin inhibitors Aliskiren Resistant hypertension Renal failure, pregnancy" }
+    status: unverified
+  - id: neph.L04.093
+    kind: card
+    topic: drugs
+    front: "Hydralazine: when favoured and what contraindicates it?"
+    back: Black patients and heart failure (with nitrates); contraindicated in SLE.
+    src: { page: 93, quote: "Hydralazine Black patients, heart failure (when combined with nitrates) SLE" }
+    status: unverified
+  - id: neph.L04.094
+    kind: card
+    topic: drugs
+    front: "Sodium nitroprusside: indication and precautions?"
+    back: Hypertensive crisis. It needs intra-arterial BP monitoring and prolonged use should be avoided.
+    src: { page: 93, quote: "Needs intra-arterial BP monitoring, avoid prolonged use" }
+    status: unverified
+  - id: neph.L04.095
+    kind: mcq
+    topic: drugs
+    stem: A 66-year-old man with hypertension, benign prostatic hypertrophy and well-controlled asthma needs an extra antihypertensive. Which class does the table favour?
+    options:
+      - Alpha-blocker
+      - Non-selective beta-blocker
+      - Verapamil with his atenolol
+      - Methyldopa
+    answer: 0
+    why:
+      - "Correct: alpha-blockers are favoured in benign prostatic hypertrophy (p92); warn about first-dose and postural hypotension."
+      - Beta-blockers are cautioned in asthma/COPD.
+      - Verapamil with a beta-blocker risks bradycardia and heart block.
+      - Methyldopa is the choice in pregnancy and breastfeeding.
+    src: { page: 92, quote: "Benign prostatic hypertrophy Phaeochromocytoma crisis Postural hypotension, urinary incontinence Profound hypotension" }
+    status: unverified
+  - id: neph.L04.096
+    kind: mcq
+    topic: drugs
+    stem: A 28-year-old woman at 20 weeks of pregnancy has BP 152/98. Which drug does the lecture's table favour?
+    options:
+      - Ramipril
+      - Losartan
+      - Methyldopa
+      - Aliskiren
+    answer: 2
+    why:
+      - ACE inhibitors are contraindicated in pregnancy.
+      - ARBs are contraindicated in pregnancy.
+      - "Correct: methyldopa is favoured in pregnancy and breastfeeding (p92); labetalol is another option."
+      - Aliskiren is contraindicated in pregnancy.
+    src: { page: 92, quote: "Methyldopa Hypertension in pregnancy and breastfeeding" }
+    status: unverified
+  # ---------- p94: hypertensive emergencies ----------
+  - id: neph.L04.097
+    kind: table
+    topic: emergencies
+    title: "Hypertensive emergencies: drug of choice and BP target"
+    columns: [Emergency, Drug of choice, Target]
+    rows:
+      - ["Aortic dissection", "Beta-blocker + nitroprusside", "SBP 120 in 20 min (if possible)"]
+      - ["Cardiac ischemia/infarction", "Nitroglycerin, nitroprusside, nicardipine or clevidipine", "Cessation of ischemia"]
+      - ["Heart failure, pulmonary edema", "Nitroprusside and/or nitroglycerin", "Improvement; often only 10–15% fall"]
+      - ["Epistaxis, gross hematuria, suture lines", "Any (with anxiolytic)", "10–15% over 1–2 h"]
+      - ["Eclampsia or pre-eclampsia", "MgSO4, hydralazine, methyldopa", "DBP <90, often lower"]
+      - ["Phaeochromocytoma", "Phentolamine", "Control paroxysms"]
+      - ["Drug withdrawal", "Drug restarted (the book: drug withdrawn)", "One dose usually"]
+      - ["Cocaine", "Phentolamine", "10–15% over 1–2 h"]
+      - ["Major hematuria or acute renal impairment", "Fenoldopam", "0–25% MAP fall over 1–12 h"]
+      - ["Hypertensive encephalopathy", "Nitroprusside", "25% over 2–3 h"]
+      - ["Acute head injury/trauma", "Nitroprusside", "0–25% over 2–3 h (controversial)"]
+    blanks: [[0, 1], [0, 2], [4, 1], [5, 1], [8, 1], [9, 2]]
+    src: { page: 94, quote: "Aortic dissection Beta blocker+ nitroprusside 120 mm Hg systolic in 20 minutes (if possible)" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L04.098
+    kind: cloze
+    topic: emergencies
+    text: "In aortic dissection, give a {{c1::beta blocker}} plus {{c2::nitroprusside}} and aim for SBP {{c3::120 mmHg}} within 20 minutes if possible."
+    src: { page: 94, quote: "Aortic dissection Beta blocker+ nitroprusside 120 mm Hg systolic in 20 minutes (if possible)" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L04.099
+    kind: cloze
+    topic: emergencies
+    text: "In hypertensive encephalopathy give {{c1::nitroprusside}} and lower BP by {{c2::25%}} over {{c3::2–3 hours}}."
+    src: { page: 94, quote: "Hypertensive encephalopathy Nitroprusside 25% reduction over 2-3 hours" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L04.100
+    kind: card
+    topic: emergencies
+    front: Drug of choice for a hypertensive emergency from cocaine or phaeochromocytoma?
+    back: Phentolamine.
+    src: { page: 94, quote: "Pheochromocytoma Phentolamine Cocaine (and similar drugs) Phentolamine" }
+    status: unverified
+  - id: neph.L04.101
+    kind: card
+    topic: emergencies
+    front: Drug of choice for a hypertensive emergency with major hematuria or acute renal impairment, and the target?
+    back: Fenoldopam; reduce mean arterial pressure by 0–25% over 1–12 hours.
+    src: { page: 94, quote: "Major hematuria or acute renal impairment Fenoldopam 0% to 25% reduction in mean arterial pressure over 1-12 hours" }
+    status: unverified
+  - id: neph.L04.102
+    kind: card
+    topic: emergencies
+    front: Drugs for eclampsia or pre-eclampsia with severe hypertension and the BP target?
+    back: MgSO4, hydralazine, methyldopa; typically DBP <90 mmHg, but often lower.
+    src: { page: 94, quote: "MgSO4, hydralazine, methyldopa Typically <90 mm Hg diastolic but often lower" }
+    status: unverified
+  - id: neph.L04.103
+    kind: mcq
+    topic: emergencies
+    stem: A 52-year-old man has tearing chest pain radiating to the back, BP 210/120, and a widened mediastinum. CT confirms type B aortic dissection. Which regimen and target fit the lecture's table?
+    options:
+      - Nitroprusside alone, reduce MAP by 25% over 2–3 hours
+      - Beta-blocker plus nitroprusside, SBP 120 mmHg in 20 minutes if possible
+      - Fenoldopam, 0–25% MAP over 1–12 hours
+      - Phentolamine, control paroxysms
+    answer: 1
+    why:
+      - That is the encephalopathy row; dissection needs faster lowering with a beta-blocker first.
+      - "Correct: beta-blocker + nitroprusside to SBP 120 in 20 minutes (p94)."
+      - Fenoldopam is for major hematuria or acute renal impairment.
+      - Phentolamine is for catecholamine excess.
+    src: { page: 94, quote: "Aortic dissection Beta blocker+ nitroprusside 120 mm Hg systolic in 20 minutes (if possible)" }
+    status: unverified
+  - id: neph.L04.104
+    kind: mcq
+    topic: emergencies
+    stem: A 34-year-old man arrives agitated after cocaine use with BP 220/124 and chest tightness. Which drug does the lecture's table recommend?
+    options:
+      - Phentolamine
+      - Labetalol alone
+      - Fenoldopam
+      - MgSO4
+    answer: 0
+    why:
+      - "Correct: cocaine and similar drugs: phentolamine, typically 10–15% over 1–2 hours (p94)."
+      - The table does not list a beta-blocker alone for cocaine; unopposed alpha effect is the worry.
+      - Fenoldopam is for renal emergencies.
+      - MgSO4 is for eclampsia.
+    src: { page: 94, quote: "Cocaine (and similar drugs) Phentolamine Typically only 10% to 15% reduction over 1-2 hours" }
+    status: unverified
+  # ---------- p95-97: renovascular disease ----------
+  - id: neph.L04.105
+    kind: enumerate
+    topic: renovascular
+    prompt: Clinical syndromes associated with renal artery stenosis?
+    points:
+      - Renovascular hypertension
+      - Progressive loss of renal function (ischemic nephropathy)
+      - Recurrent flash pulmonary edema
+      - Asymptomatic
+    pass: 4
+    src: { page: 95, quote: "Reno vascular HT (RVHT). Progressive loss of RF due to ischemic nephropathey Recurrent episodes of flash, pulmonary edema Asymptomatic" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L04.106
+    kind: order
+    topic: renovascular
+    prompt: Order the mechanism of renovascular hypertension.
+    steps:
+      - Hemodynamically significant unilateral or bilateral stenosis
+      - Decreased renal perfusion
+      - Activation of the RAAS
+      - Renovascular hypertension
+    src: { page: 95, quote: "RVHT occurs with hemodynamically. Significant unilateral or bilateral stenosis Decreased renal refusion Activation of RAAS." }
+    status: unverified
+  - id: neph.L04.107
+    kind: card
+    topic: renovascular
+    front: Two main causes of renal artery stenosis and who gets each?
+    back: Atherosclerosis (common, elderly) and fibromuscular dysplasia (typically younger women).
+    src: { page: 95, quote: "Atherosclerosis→ Common + elderly b- Fibromuscular dysplesia which is typically seen in younger female patient" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L04.108
+    kind: cloze
+    topic: renovascular
+    text: "Atherosclerotic renal artery stenosis leads to ESRD in {{c1::15%}}."
+    src: { page: 95, quote: "Atherosclerotic RAS leads to ESRD in 15%" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L04.109
+    kind: enumerate
+    topic: renovascular
+    prompt: When should you screen for renal artery stenosis?
+    points:
+      - Sudden-onset HT in a healthy person <30 or >50 years
+      - Rapid worsening of previously well-controlled HT
+      - Recurrent flash pulmonary edema
+      - Renal failure precipitated by RAAS antagonists
+      - Unilateral atrophic kidney
+      - Abdominal bruit
+      - Unexplained hypokalemia
+      - Atherosclerotic stenoses in other vascular beds
+    pass: 6
+    src: { page: 95, quote: "Sudden onset of HT in healthy youger < 30 or older age > 50 year" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L04.110
+    kind: table
+    topic: renovascular
+    title: "Diagnostic tests for renal artery stenosis"
+    columns: [Test, Performance or note]
+    rows:
+      - ["Duplex ultrasound", "First test listed"]
+      - ["CT angiography", "98% sensitive, 94% specific"]
+      - ["MR angiography", "100% sensitive, 97% specific; can induce NSF"]
+      - ["Conventional digital subtraction angiography", "Gold standard"]
+    blanks: [[1, 1], [2, 1], [3, 1]]
+    src: { page: 96, quote: "CTA 98% Sensitive and 94% Specific." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L04.111
+    kind: card
+    topic: renovascular
+    front: Gold standard test for renal artery stenosis?
+    back: Conventional digital subtraction angiography.
+    src: { page: 96, quote: "The gold standard is― Conventional Digital. Subtraction Angio" }
+    status: unverified
+  - id: neph.L04.112
+    kind: card
+    topic: renovascular
+    front: Which complication limits MR angiography for RAS?
+    back: It can induce nephrogenic systemic fibrosis (from gadolinium).
+    src: { page: 96, quote: "Induce Nephrogenic systemic fibrosis(NSF)" }
+    status: unverified
+  - id: neph.L04.113
+    kind: enumerate
+    topic: renovascular
+    prompt: Treatment options for renal artery stenosis?
+    points:
+      - Medical treatment
+      - Lifestyle modification
+      - Percutaneous angioplasty and stenting
+      - Surgery
+    pass: 4
+    src: { page: 96, quote: "Medical Treatment Life style Modification. P.C. Angioplasty and stenting Surgery" }
+    status: unverified
+    update:
+      text: "ASTRAL (2009) and CORAL (2014) showed no benefit of stenting over medical therapy for most atherosclerotic RAS; stenting is kept for flash pulmonary edema, rapidly falling GFR or refractory HT. Fibromuscular dysplasia is treated with angioplasty without a stent."
+      ref: "ASTRAL 2009; CORAL 2014; ESC 2024 peripheral arterial disease"
+  - id: neph.L04.114
+    kind: mcq
+    topic: renovascular
+    stem: A 70-year-old smoker with coronary disease starts ramipril for hypertension. Two weeks later his creatinine rises from 1.3 to 2.4 mg/dL. Ultrasound shows a small left kidney. What should you suspect and screen for?
+    options:
+      - Renal artery stenosis
+      - Acute interstitial nephritis
+      - Fibromuscular dysplasia
+      - IgA nephropathy
+    answer: 0
+    why:
+      - "Correct: renal failure precipitated by RAAS antagonists, a unilateral atrophic kidney and atherosclerosis elsewhere are screening triggers for RAS (p95)."
+      - AIN is an allergic drug reaction, not a hemodynamic fall after ACEi with an atrophic kidney.
+      - FMD typically affects younger women.
+      - IgA nephropathy presents with hematuria, not this pattern.
+    src: { page: 95, quote: "Renal failure precipitated, By RAAS antagonists." }
+    status: unverified
+  - id: neph.L04.115
+    kind: mcq
+    topic: renovascular
+    stem: A 26-year-old woman has new hypertension of 168/104 with an epigastric bruit. Renal function is normal. What is the most likely cause?
+    options:
+      - Atherosclerotic renal artery stenosis
+      - Fibromuscular dysplasia
+      - Essential hypertension
+      - Diabetic nephropathy
+    answer: 1
+    why:
+      - Atherosclerotic RAS is common in the elderly.
+      - "Correct: fibromuscular dysplasia is typically seen in younger women; sudden HT under 30 and a bruit are screening triggers (p95)."
+      - Sudden severe HT under 30 with a bruit should not be called essential before screening.
+      - Nothing suggests diabetes.
+    src: { page: 95, quote: "Fibromuscular dysplesia which is typically seen in younger female patient" }
+    status: unverified
+  # ---------- cases ----------
+  - id: neph.L04.116
+    kind: case
+    topic: refractory
+    stem: A 61-year-old obese man has BP 164/98 at three clinic visits despite amlodipine 10 mg, perindopril 8 mg and indapamide 2.5 mg. He snores loudly and drinks about 60 ml of whisky a night.
+    steps:
+      - question: Is this refractory hypertension by the lecture's definition?
+        options:
+          - Yes, if he takes the three drugs reliably, since triple therapy includes a diuretic
+          - No, refractory needs four drugs
+          - No, he needs a beta-blocker first
+          - Yes, regardless of adherence
+        answer: 0
+        why: "Refractory = BP not at target in a compliant patient on optimal triple therapy including a diuretic (p89). Adherence must be confirmed first."
+      - question: Which concomitant conditions on the p83 list could explain it?
+        options:
+          - Obesity, sleep apnea and ethanol over 30 ml a day
+          - Anxiety only
+          - Hypothyroidism
+          - Caffeine only
+        answer: 0
+        why: "Obesity, sleep apnea and ethanol >1 oz (30 ml)/day are listed concomitant conditions (p83)."
+      - question: Before calling him resistant, which pseudoresistance cause must you exclude in an obese arm?
+        options:
+          - A small cuff
+          - Auscultatory gap only
+          - Femoral delay
+          - Supine measurement
+        answer: 0
+        why: "Use of a small cuff in obese patients is a cause of pseudoresistance (p83); the cuff should cover 80% of the arm (p80)."
+    src: { page: 83, quote: "Obesity Sleep apnea Ethanol intake of more than 1 oz (30 mL) per day" }
+    status: unverified
+  - id: neph.L04.117
+    kind: case
+    topic: emergencies
+    stem: A 45-year-old woman with untreated hypertension presents confused with severe headache and vomiting. BP 240/140. Fundoscopy shows papilledema with flame hemorrhages.
+    steps:
+      - question: What is the Keith–Wagener grade?
+        options:
+          - Grade IV
+          - Grade III
+          - Grade II
+          - Grade I
+        answer: 0
+        why: "Papilledema on top of grade III changes is grade IV; III and IV are diagnostic of malignant HT (p86)."
+      - question: Which drug and target does the emergencies table give for hypertensive encephalopathy?
+        options:
+          - Nitroprusside, 25% reduction over 2–3 hours
+          - Beta-blocker + nitroprusside, SBP 120 in 20 minutes
+          - MgSO4, DBP <90
+          - Fenoldopam, 0–25% over 1–12 hours
+        answer: 0
+        why: "Hypertensive encephalopathy: nitroprusside, 25% over 2–3 hours (p94). Fast lowering to 120 is for dissection."
+      - question: Which monitoring does nitroprusside need?
+        options:
+          - Intra-arterial BP monitoring, and avoid prolonged use
+          - Blood counts and LFTs
+          - Serum potassium only
+          - None
+        answer: 0
+        why: "Nitroprusside needs intra-arterial BP monitoring and prolonged use should be avoided (p93). Blood counts and LFTs are for methyldopa."
+    src: { page: 94, quote: "Hypertensive encephalopathy Nitroprusside 25% reduction over 2-3 hours" }
+    status: unverified
+  - id: neph.L04.118
+    kind: case
+    topic: renovascular
+    stem: A 68-year-old diabetic smoker with previous femoral bypass has had two admissions for flash pulmonary edema with normal LV function. BP 178/96 on three drugs.
+    steps:
+      - question: What should you suspect?
+        options:
+          - Atherosclerotic renal artery stenosis
+          - Fibromuscular dysplasia
+          - Conn syndrome
+          - White-coat hypertension
+        answer: 0
+        why: "Recurrent flash pulmonary edema and atherosclerosis in other beds are screening triggers; atherosclerosis is the common cause in the elderly (p95)."
+      - question: His eGFR is 22. Which imaging test carries a risk of nephrogenic systemic fibrosis?
+        options:
+          - MR angiography
+          - Duplex ultrasound
+          - CT angiography
+          - Plain X-ray
+        answer: 0
+        why: "MRA is 100% sensitive and 97% specific but can induce NSF (p96)."
+      - question: Which test is the gold standard?
+        options:
+          - Conventional digital subtraction angiography
+          - CT angiography
+          - Duplex ultrasound
+          - Renogram
+        answer: 0
+        why: "Conventional DSA is the gold standard (p96)."
+    src: { page: 95, quote: "Recurrent onset of flash PE." }
+    status: unverified
+  # ---------- essays ----------
+  - id: neph.L04.119
+    kind: essay
+    topic: renal-ht
+    prompt: Discuss renoparenchymal hypertension (prevalence and pathophysiology).
+    outline:
+      - "Prevalence: 60% CKD III, >80% CKD IV–V, 70% uncontrolled, 86% on HD with 30% controlled; proteinuria predicts"
+      - "Low nephron number from fetal life"
+      - "Salt and water: TIN ischemia needs high pressure for natriuresis"
+      - "SNS: ↑renin, ↓Na excretion, ↓RBF; renal denervation, nephrectomy, ACEi/ARB; renalase"
+      - "RAAS: JG cells, AT II effects, ACE vicious cycle"
+      - "Oxidative stress: ↓NO, ADMA inhibits NO synthase"
+    src: { page: 87, quote: "60% of CKD Stage III (GFR 30-59 mL / min) are hypertensive" }
+    status: unverified
+  - id: neph.L04.120
+    kind: essay
+    topic: renovascular
+    prompt: Discuss renovascular hypertension and renal artery stenosis.
+    outline:
+      - "Syndromes: RVHT, ischemic nephropathy, flash pulmonary edema, asymptomatic"
+      - "Mechanism: stenosis → ↓perfusion → RAAS"
+      - "Causes: atherosclerosis (elderly, 15% ESRD), FMD (young women)"
+      - "Screening triggers (8)"
+      - "Tests: duplex, CTA 98/94, MRA 100/97 with NSF, DSA gold standard"
+      - "Treatment: medical, lifestyle, angioplasty and stenting, surgery"
+    src: { page: 95, quote: "Clinical Syndrome associated with renal artery stenosis." }
+    status: unverified
+  - id: neph.L04.121
+    kind: essay
+    topic: treatment
+    prompt: Outline the management of essential hypertension.
+    outline:
+      - "Assessment and repeated measurement (two readings a week apart, technique)"
+      - "Lifestyle: BMI 20–25, ≥30 min walk, salt <100 mmol, alcohol, ≥5 fruit and vegetables"
+      - "Targets: <140/90; <130/80 in DM, CKD (lower if proteinuria >1 g), high risk"
+      - "Drug choice: A vs C/D by age and ethnicity; A+C or A+D; A+C+D; step 4"
+      - "Combinations and their objectives"
+      - "Cautions: first-dose hypotension (ACEi, alpha), monitor RF with ACEi/ARB"
+      - "Refractory HT definition and causes"
+    src: { page: 88, quote: "Most hypertensive patients require a combination of drugs" }
+    status: unverified

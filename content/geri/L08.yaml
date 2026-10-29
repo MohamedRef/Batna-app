@@ -1,0 +1,1324 @@
+schema: batna.content/v1
+lecture: geri.L08
+title: "Musculoskeletal disorders in the elderly"
+author: "Prof. Noha Elsabbagh"
+book: { chapter: 7, pages: [131, 154] }
+topics:
+  - { id: intro, title: "Why musculoskeletal disease matters in old age" }
+  - { id: sarcopenia, title: "Sarcopenia: definition, diagnosis and SARC-F" }
+  - { id: sarc-mx, title: "Sarcopenia: mechanisms and management" }
+  - { id: tendinopathy, title: "Tendinopathy: pathology and risk factors" }
+  - { id: tendon-clinic, title: "Rotator cuff, frozen shoulder and gluteal tendinopathy" }
+  - { id: tendon-mx, title: "Tendinopathy management and PRP" }
+  - { id: oa, title: "Osteoarthritis: definition, pathophysiology and picture" }
+  - { id: oa-mx, title: "Osteoarthritis: diagnosis and treatment" }
+  - { id: gout, title: "Gout: risk factors and diagnosis" }
+  - { id: gout-mx, title: "Gout treatment" }
+  - { id: pseudogout, title: "Gout versus pseudogout" }
+  - { id: osteoporosis, title: "Osteoporosis" }
+  - { id: fibromyalgia, title: "Fibromyalgia" }
+  - { id: pmr, title: "Polymyalgia rheumatica and giant cell arteritis" }
+items:
+  # ---------- p131: intro ----------
+  - id: geri.L08.001
+    kind: enumerate
+    topic: intro
+    prompt: Why are musculoskeletal disorders so debilitating in elderly people?
+    points:
+      - Pain
+      - Mobility disorders
+      - Increased risk of falls and fractures
+      - Impaired ability to perform activities of daily living
+    pass: 3
+    src: { page: 131, quote: "they are associated with pain, mobility disorders, increased risk of falls and fractures, and impaired ability to perform activities of daily living." }
+    status: unverified
+  - id: geri.L08.002
+    kind: card
+    topic: intro
+    front: What is the pathological triad of inter-related musculoskeletal disorders in the elderly?
+    back: Sarcopenia, tendinopathies and arthritis.
+    src: { page: 131, quote: "main ―components‖: sarcopenia, tendinopathies, and arthritis." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p131-134: sarcopenia ----------
+  - id: geri.L08.003
+    kind: card
+    topic: sarcopenia
+    front: Define sarcopenia.
+    back: Loss of skeletal muscle mass and function, either with ageing (primary) or due to an underlying disease or medication (secondary).
+    src: { page: 131, quote: "Sarcopenia is the loss of skeletal muscle mass and function that occurs during the aging process (primary sarcopenia)" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L08.004
+    kind: table
+    topic: sarcopenia
+    title: Primary versus secondary sarcopenia
+    columns: [Type, Cause, Approach]
+    rows:
+      - [Primary, "The ageing process", "More challenging to characterize"]
+      - [Secondary, "Underlying disease or medication", "Diagnose and treat the underlying cause"]
+    blanks: [[0, 1], [1, 1], [1, 2]]
+    src: { page: 131, quote: "While secondary sarcopenia relies on the diagnosis and treatment for the underlying causation, primary sarcopenia has been more challenging to characterize." }
+    status: unverified
+  - id: geri.L08.005
+    kind: card
+    topic: sarcopenia
+    front: How does the European Working Group on Sarcopenia in Older People (EWGSOP) describe sarcopenia?
+    back: A syndrome of progressive and generalized loss of skeletal muscle mass and strength, with a risk of adverse outcomes such as physical disability, poor quality of life and death.
+    src: { page: 132, quote: "syndrome characterized by progressive and generalized loss of skeletal muscle mass and strength with a risk of adverse outcomes" }
+    status: unverified
+  - id: geri.L08.006
+    kind: cloze
+    topic: sarcopenia
+    text: "From the second to the eighth decade, whole body and appendicular lean mass fall by about {{c1::20%}} in men and {{c2::30%}} in women."
+    src: { page: 132, quote: "whole body and appendicular lean mass decline by about 20% in men and 30% in women." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: geri.L08.007
+    kind: card
+    topic: sarcopenia
+    front: Who is sarcopenia most prevalent in?
+    back: Older adults, especially women; it varies with age and geographic area.
+    src: { page: 132, quote: "Sarcopenia, therefore, is prevalent in older adults, especially women, and presents substantial variations depending on age and geographic area." }
+    status: unverified
+  - id: geri.L08.008
+    kind: table
+    topic: sarcopenia
+    title: Sarcopenia, what each finding means
+    columns: [Finding, Meaning]
+    rows:
+      - [Low muscle strength, "Key characteristic: probable sarcopenia"]
+      - [Low muscle quantity or quality, "Confirms the diagnosis"]
+      - [Low physical performance, "Predicts adverse outcomes: grades severity"]
+      - [All three present, "Severe sarcopenia"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 132, quote: "Low muscle strength is identified as a key characteristic and a primary indicator of probable sarcopenia." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L08.009
+    kind: cloze
+    topic: sarcopenia
+    text: "Sarcopenia is considered {{c1::severe}} when low muscle {{c2::strength}}, low muscle quantity or quality, and low {{c3::physical performance}} are all detected."
+    src: { page: 132, quote: "when low muscle strength, low muscle quantity/quality, and low physical performance are all detected, sarcopenia is considered to be severe." }
+    status: unverified
+  - id: geri.L08.010
+    kind: enumerate
+    topic: sarcopenia
+    prompt: What qualities should a sarcopenia screening tool have?
+    points: [High sensitivity, Widely available, User-friendly, Efficient, Non-invasive, Cheap]
+    pass: 4
+    src: { page: 132, quote: "Tools used for screening require high sensitivity and should be widely available, user-friendly, efficient, non-invasive and cheap." }
+    status: unverified
+  - id: geri.L08.011
+    kind: enumerate
+    topic: sarcopenia
+    prompt: Enumerate the screening tools for sarcopenia.
+    points:
+      - SARC-F questionnaire
+      - Mid-arm muscle circumference (MAMC)
+      - Calf circumference (CC)
+      - Hand grip strength
+      - Gait speed
+    pass: 4
+    src: { page: 132, quote: "specifically the SARC-F questionnaire, mid-arm muscle circumference (MAMC), calf circumference (CC), hand grip strength and gait speed." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L08.012
+    kind: card
+    topic: sarcopenia
+    front: Which combination of screening tools is recommended for sarcopenia?
+    back: SARC-F with calf circumference or MAMC, combined with hand-grip strength or gait speed (Ishii group and EWGSOP); combining tools raises sensitivity.
+    src: { page: 133, quote: "CC or MAMC and in combination with hand-grip strength or gait speed is recommended." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L08.013
+    kind: enumerate
+    topic: sarcopenia
+    prompt: List the five SARC-F domains.
+    points:
+      - "Strength: lifting and carrying 10 pounds"
+      - "Assistance in walking: walking across a room"
+      - "Rise from a chair: transferring from a chair or bed"
+      - "Climb stairs: a flight of 10 stairs"
+      - "Falls: number in the past year"
+    pass: 5
+    src: { page: 133, quote: "Strength: How much difficulty do you have in lifting and carrying 10 pounds?" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L08.014
+    kind: cloze
+    topic: sarcopenia
+    text: "SARC-F: each of 5 items scores 0 (none), 1 (some) or {{c1::2}} (a lot or unable); a score of {{c2::4}} or more best predicts the need for further, more comprehensive evaluation."
+    src: { page: 134, quote: "Data suggests that a SARC-F score of .4 best predicts the need for further, more comprehensive evaluation." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: geri.L08.015
+    kind: cloze
+    topic: sarcopenia
+    text: "SARC-F strength asks about lifting and carrying {{c1::10 pounds}}; the stairs item asks about climbing a flight of {{c2::10 stairs}}."
+    src: { page: 133, quote: "Climb stairs: How much difficulty do you have climbing a flight of 10 stairs?" }
+    status: unverified
+    tags: [numbers]
+  - id: geri.L08.016
+    kind: card
+    topic: sarcopenia
+    front: "SARC-F falls item: how many falls in the past year score 2?"
+    back: 4 or more falls score 2; fewer falls score 1 and none scores 0.
+    src: { page: 133, quote: "Falls: How many times have you fallen in the past year?" }
+    status: unverified
+  - id: geri.L08.017
+    kind: card
+    topic: sarcopenia
+    front: In which studies was SARC-F shown valid for detecting people at risk from sarcopenia?
+    back: AAH, BLSA and NHANES; it was internally consistent and valid.
+    src: { page: 134, quote: "The SARC-F proved internally consistent and valid for detecting persons at risk for adverse outcomes from sarcopenia" }
+    status: unverified
+  - id: geri.L08.018
+    kind: case
+    topic: sarcopenia
+    stem: A 79-year-old woman says she has some difficulty carrying a 10-pound shopping bag, some difficulty getting out of a chair, cannot climb a flight of 10 stairs, walks across a room without trouble, and fell 5 times last year.
+    steps:
+      - question: What is her SARC-F score?
+        options: ["6", "4", "5", "3"]
+        answer: 0
+        why: "Strength some = 1, walking none = 0, chair some = 1, stairs unable = 2, falls 4 or more = 2. Total 6 (p133)."
+      - question: What does this score mean?
+        options: [Needs further comprehensive evaluation, Sarcopenia is excluded, Severe sarcopenia is confirmed, Only repeat in 5 years]
+        answer: 0
+        why: "A SARC-F of 4 or more best predicts the need for further evaluation (p134). It is a screen; it does not confirm or grade sarcopenia."
+      - reveal: Her grip strength is low.
+        question: What does low muscle strength indicate?
+        options: [Probable sarcopenia, Confirmed severe sarcopenia, Normal ageing, Frozen shoulder]
+        answer: 0
+        why: "Low strength is the key characteristic and primary indicator of probable sarcopenia; low muscle quantity or quality confirms it (p132)."
+      - question: What is the primary treatment?
+        options: [Resistance exercise with or without nutrition, An approved anti-sarcopenia drug, Testosterone for every patient, Bed rest]
+        answer: 0
+        why: "Physical exercise, especially high-intensity resistance training, alone or with nutrition is the primary treatment. No drug is approved (p134-135)."
+    src: { page: 134, quote: "Data suggests that a SARC-F score of .4 best predicts the need for further, more comprehensive evaluation." }
+    status: unverified
+  - id: geri.L08.019
+    kind: enumerate
+    topic: sarc-mx
+    prompt: Enumerate the mechanisms of sarcopenia.
+    points:
+      - Malnutrition
+      - Physical inactivity
+      - Hormonal changes
+      - Inflammation
+      - Increased catabolism and anabolic resistance
+      - Myocyte loss
+      - Reduced satellite cell number and function
+      - Loss of α-motor neurons
+      - Mitochondrial dysfunction
+      - Insulin resistance
+    pass: 7
+    src: { page: 134, quote: "These include malnutrition, physical inactivity, hormonal changes, inflammation, increased catabolism, and anabolic resistance, myocyte's loss" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L08.020
+    kind: card
+    topic: sarc-mx
+    front: Which two mechanisms of sarcopenia have received particular attention recently?
+    back: Inflammation and mitochondrial dysfunction.
+    src: { page: 134, quote: "In recent years, inflammation and mitochondrial dysfunction received particular attention as a major determinant of sarcopenia." }
+    status: unverified
+  - id: geri.L08.021
+    kind: card
+    topic: sarc-mx
+    front: Primary treatment of sarcopenia?
+    back: Physical exercise, alone or with nutritional interventions; high-intensity resistance training most notably improves muscle strength and mass.
+    src: { page: 134, quote: "physical exercise, most notably high-intensity resistance training, improves the strength and mass of skeletal muscles" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L08.022
+    kind: card
+    topic: sarc-mx
+    front: Are any drugs approved for sarcopenia?
+    back: No drug has been approved yet.
+    src: { page: 135, quote: "no drugs have been approved yet for the treatment of sarcopenia." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L08.023
+    kind: cloze
+    topic: sarc-mx
+    text: "An umbrella review found only {{c1::vitamin D}} (especially in older women) and {{c2::testosterone}} (in older men with low testosterone and muscle weakness) justified for sarcopenia in daily practice."
+    src: { page: 135, quote: "only vitamin D, especially in older women, and testosterone in older men with low testosterone levels and muscle weakness can be justified" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L08.024
+    kind: mcq
+    topic: sarc-mx
+    stem: An 81-year-old man with confirmed sarcopenia asks what will help most. His testosterone level is normal. What do you recommend first?
+    options:
+      - High-intensity resistance training with nutritional support
+      - Testosterone replacement
+      - A licensed anti-sarcopenia drug
+      - Complete rest to save energy
+      - Calf circumference monitoring alone
+    answer: 0
+    why:
+      - "Correct: exercise, notably high-intensity resistance training, with or without nutrition is the primary treatment (p134)."
+      - Testosterone is justified only in older men with low testosterone and weakness (p135).
+      - No drug has been approved for sarcopenia (p135).
+      - Inactivity is one of the mechanisms of sarcopenia.
+      - Calf circumference is a screening tool, not a treatment.
+    src: { page: 134, quote: "Physical exercise, alone or in combination with nutritional interventions, is the non-pharmacological approach currently recommended as the primary treatment of sarcopenia." }
+    status: unverified
+  # ---------- p135-136: tendinopathy ----------
+  - id: geri.L08.025
+    kind: card
+    topic: tendinopathy
+    front: Define tendinopathy clinically.
+    back: Tendon pain during activity, tendon swelling, localized tenderness on palpation, and loss of function.
+    src: { page: 135, quote: "Tendinopathy is a musculoskeletal disorder characterized by tendon pain during an activity, tendon swelling and localized tenderness upon palpation, and loss of function." }
+    status: unverified
+  - id: geri.L08.026
+    kind: enumerate
+    topic: tendinopathy
+    prompt: Light microscopy findings in pathological tendons?
+    points:
+      - Collagen degeneration
+      - Increased mucoid ground substance
+      - Increased tenocytes with myofibroblastic differentiation (tendon repair cells)
+    pass: 3
+    src: { page: 135, quote: "showed collagen degeneration, increased mucoid ground substance, and increased tenocytes with myofibroblastic differentiation" }
+    status: unverified
+  - id: geri.L08.027
+    kind: card
+    topic: tendinopathy
+    front: What is the widely accepted concept for the origin of tendinopathy?
+    back: Excessive tensile loads within the tendon over time; a rapid rise in load magnitude, duration or frequency can exceed local tensile strength and cause micro-injury.
+    src: { page: 135, quote: "the generation of excessive tensile loads within the tendon over time." }
+    status: unverified
+  - id: geri.L08.028
+    kind: enumerate
+    topic: tendinopathy
+    prompt: Which kinds of stress can lead to tendon weakening and degeneration over time?
+    points:
+      - Excessive tensile stress
+      - Excessive compressive stress
+      - Stress-shielding (too little local stress, understimulating tendon cells)
+    pass: 3
+    src: { page: 135, quote: "not only excessive tensile stress, but also excessive compressive stress as well as ―stress-shielding‖" }
+    status: unverified
+  - id: geri.L08.029
+    kind: card
+    topic: tendinopathy
+    front: What is "stress-shielding" in tendons?
+    back: Lack of adequate local stress, which understimulates the tendon cells and can lead to weakening and degeneration.
+    src: { page: 135, quote: "the lack of adequate local stress producing understimulation of the tendon cells" }
+    status: unverified
+  - id: geri.L08.030
+    kind: card
+    topic: tendinopathy
+    front: In tendons under force, which layers deform more?
+    back: Deeper tissue layers deform more than superficial ones (non-uniform displacement).
+    src: { page: 135, quote: "with deeper tissue layers deforming more than superficial ones." }
+    status: unverified
+  - id: geri.L08.031
+    kind: order
+    topic: tendinopathy
+    prompt: Put the steps to calcific tendinopathy in order.
+    steps:
+      - High tendon compression
+      - Tissue hypoxia
+      - Fibrocartilaginous metaplasia of tenocytes into chondrocyte-like cells
+      - Calcium deposits (mainly hydroxyapatite)
+      - Calcific tendinopathy
+    src: { page: 136, quote: "High levels of tendon compression and the associated tissue hypoxia stimulate the fibrocartilaginous metaplasia of tenocytes" }
+    status: unverified
+  - id: geri.L08.032
+    kind: cloze
+    topic: tendinopathy
+    text: "In calcific tendinopathy, chondrocyte-like cells produce calcium deposits, predominantly {{c1::hydroxyapatite}}."
+    src: { page: 136, quote: "to produce calcium deposits (predominantly hydroxyapatite). The clinical sequela is a condition known as calcific tendinopathy." }
+    status: unverified
+  - id: geri.L08.033
+    kind: enumerate
+    topic: tendinopathy
+    prompt: Individual risk factors for tendinopathy?
+    points: [Genes, Age, Sex, Biomechanics, Body composition, Obesity and its illnesses, Systemic diseases]
+    pass: 5
+    src: { page: 136, quote: "The individual factors that should be considered are genes, age, sex, biomechanics, and body composition." }
+    status: unverified
+  - id: geri.L08.034
+    kind: card
+    topic: tendinopathy
+    front: Which extrinsic factor relates to lower limb versus upper limb tendinopathies?
+    back: Lower limb tendinopathies relate strongly to weight bearing; upper limb tendon injuries occur with overload movements.
+    src: { page: 136, quote: "while weight bearing is highly related to lower limbs tendinopathies, upper limbs tendons injuries can be observed in overload movements." }
+    status: unverified
+  # ---------- p136: clinical ----------
+  - id: geri.L08.035
+    kind: enumerate
+    topic: tendon-clinic
+    prompt: Core clinical characteristics of rotator cuff degenerative tendinopathy?
+    points: [Old age, Focal night pain, Weakness of shoulder muscles, Movement restriction]
+    pass: 4
+    src: { page: 136, quote: "Core clinical characteristics of rotator cuff degenerative tendinopathy include old age, focal night pain, weakness of shoulder muscles, and movement restriction." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L08.036
+    kind: card
+    topic: tendon-clinic
+    front: Where does rotator cuff shoulder pain radiate?
+    back: To the deltoid and the middle part of the upper arm.
+    src: { page: 136, quote: "Shoulder pain generally radiates to the deltoid and the middle part of the upper arm." }
+    status: unverified
+  - id: geri.L08.037
+    kind: cloze
+    topic: tendon-clinic
+    text: "Weakness or movement restriction, especially in active {{c1::external rotation}}, is found in {{c2::half}} of radiologically confirmed rotator cuff tears."
+    src: { page: 136, quote: "especially in active external rotation, are found in half of radiologically confirmed rotator cuff tears." }
+    status: unverified
+  - id: geri.L08.038
+    kind: table
+    topic: tendon-clinic
+    title: Rotator cuff tendinopathy versus frozen shoulder
+    columns: [Feature, Rotator cuff tendinopathy, Frozen shoulder]
+    rows:
+      - [Nature, "Degenerative tendon disease of old age", "Idiopathic, self-limiting (adhesive capsulitis)"]
+      - [Restricted movement, "Active, especially active external rotation", "Both active and passive external rotation"]
+      - [Clue, "Night pain, weakness", "Passive movement also lost"]
+    blanks: [[0, 2], [1, 1], [1, 2]]
+    src: { page: 136, quote: "Frozen shoulder is an idiopathic and self-limiting condition in which movement of the shoulder becomes restricted in both active and passive external rotation." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L08.039
+    kind: mcq
+    topic: tendon-clinic
+    stem: A 72-year-old woman has 4 months of shoulder pain. She cannot externally rotate her arm actively, and the examiner also cannot rotate it passively. Most likely diagnosis?
+    options:
+      - Frozen shoulder (adhesive capsulitis)
+      - Rotator cuff degenerative tendinopathy
+      - Gluteal tendinopathy
+      - Polymyalgia rheumatica
+      - Calcific tendinopathy of the Achilles
+    answer: 0
+    why:
+      - "Correct: frozen shoulder restricts both active and passive external rotation (p136)."
+      - Rotator cuff disease restricts active movement; passive range is kept.
+      - Gluteal tendinopathy causes lateral hip pain.
+      - PMR is bilateral girdle stiffness, not a single restricted shoulder.
+      - Achilles disease is in the leg.
+    src: { page: 136, quote: "Movement testing helps to distinguish rotator cuff degenerative tendinopathy from frozen shoulder (adhesive capsulitis)." }
+    status: unverified
+  - id: geri.L08.040
+    kind: card
+    topic: tendon-clinic
+    front: Describe the pain of gluteal tendinopathy.
+    back: Low-grade lateral hip pain, aggravated by walking and other weight-bearing activities and by lying on the affected side.
+    src: { page: 136, quote: "This pain presents in the lateral hip and is aggravated with activities (such as walking and other weight-bearing activities) and side-lying on the affected side." }
+    status: unverified
+  - id: geri.L08.041
+    kind: enumerate
+    topic: tendon-clinic
+    prompt: Core clinical characteristics of gluteal tendinopathy?
+    points:
+      - Old age
+      - Female gender
+      - Back or hip joint pain comorbidity
+      - Overweight or obesity
+      - Poor hip abductor function
+      - Altered gait
+      - Psychological distress
+    pass: 5
+    src: { page: 136, quote: "gluteal tendinopathy include old age, female gender, comorbidities such as pain generated from the back and hip joint, overweight/obesity" }
+    status: unverified
+  # ---------- p137-139: management, PRP ----------
+  - id: geri.L08.042
+    kind: enumerate
+    topic: tendon-mx
+    prompt: Which interventions have been studied for rotator cuff and gluteal tendinopathies?
+    points:
+      - Exercise
+      - Corticosteroid or platelet-rich plasma injections
+      - Radial pressure wave and focused shock wave therapy
+      - Topical glyceryl nitrate
+    pass: 3
+    src: { page: 137, quote: "Studied interventions include exercise, interventional approaches (i.e., corticosteroid or platelet-rich plasma injections)" }
+    status: unverified
+  - id: geri.L08.043
+    kind: card
+    topic: tendon-mx
+    front: First-line treatment of tendinopathy?
+    back: Conservative treatment through exercise and load management, aided by other conservative options such as ESWT (extracorporeal shockwave therapy).
+    src: { page: 137, quote: "conservative treatment through exercise and load management should be the first source of treatment" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L08.044
+    kind: cloze
+    topic: tendon-mx
+    text: "Surgery for tendinopathy is a last resort, once conservative treatment has failed after {{c1::six to twelve months}}."
+    src: { page: 137, quote: "Surgical approach should only be used as a last resource once the conservative options have failed after six to twelve months of treatment." }
+    status: unverified
+    tags: [numbers]
+  - id: geri.L08.045
+    kind: cloze
+    topic: tendon-mx
+    text: "Peritendinous corticosteroid injection gives {{c1::moderate}} pain relief in gluteal and rotator cuff tendinopathy, but only for less than {{c2::4 weeks}}."
+    src: { page: 137, quote: "peritendinous corticosteroid injection provides moderate pain relief, but only for a short time (less than 4 weeks)." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: geri.L08.046
+    kind: card
+    topic: tendon-mx
+    front: Which treatment shows preliminary benefit in gluteal tendinopathy?
+    back: Platelet-rich plasma (PRP) injections.
+    src: { page: 137, quote: "platelet-rich plasma injections may also clinically benefit patients with gluteal tendinopathy." }
+    status: unverified
+  - id: geri.L08.047
+    kind: order
+    topic: tendon-mx
+    prompt: Order the steps of a PRP injection.
+    steps:
+      - Take one to a few tubes of the patient's own blood
+      - Spin it down in a centrifuge
+      - Collect and concentrate the platelets 2 to 8 times
+      - Mix the platelets into a plasma liquid base
+      - Inject into the injured area, sometimes ultrasound-guided
+    src: { page: 138, quote: "The platelets are collected and concentrated from 2 to 8 times their normal number." }
+    status: unverified
+  - id: geri.L08.048
+    kind: card
+    topic: tendon-mx
+    front: How do PRP injections work?
+    back: Activated concentrated platelets release growth factors that stimulate and increase reparative cells, enhancing natural healing.
+    src: { page: 138, quote: "releases growth factors that stimulate and increase the number of reparative cells." }
+    status: unverified
+  - id: geri.L08.049
+    kind: enumerate
+    topic: tendon-mx
+    prompt: Which injuries are PRP injections used for?
+    points:
+      - Minor rotator cuff tears
+      - Achilles tendon tears
+      - Tendonitis or chronic tendinosis such as tennis elbow
+      - Golfer's elbow
+    pass: 3
+    src: { page: 138, quote: "PRPs injections are used primarily for soft tissue injuries" }
+    status: unverified
+  - id: geri.L08.050
+    kind: card
+    topic: tendon-mx
+    front: Risks of PRP injections?
+    back: A remote risk of infection, as with any injection; otherwise only the unpredictability of how well it works.
+    src: { page: 139, quote: "As with any injection, there is a remote risk of infection." }
+    status: unverified
+  # ---------- p139-142: OA ----------
+  - id: geri.L08.051
+    kind: card
+    topic: oa
+    front: Define arthritis as used in the lecture.
+    back: A disease of articular joints that alters them biochemically, structurally and physiologically; a heterogeneous degenerative disorder with many causes and presentations.
+    src: { page: 139, quote: "Arthritis is a disease of articular joints that alters the joints biochemically, structurally, and physiologically." }
+    status: unverified
+  - id: geri.L08.052
+    kind: table
+    topic: oa
+    title: Primary versus secondary arthritis
+    columns: [Type, Cause, Typical joints]
+    rows:
+      - [Primary (idiopathic), "No specific or known antecedent", "Hands, hips, knees, spine"]
+      - [Secondary, "Trauma, or rheumatologic, metabolic or infectious disease", "Depends on cause"]
+    blanks: [[0, 2], [1, 1]]
+    src: { page: 139, quote: "Primary or idiopathic arthritis is without a specific or known antecedent and primarily affects the hands, hips, knees, and spine." }
+    status: unverified
+  - id: geri.L08.053
+    kind: cloze
+    topic: oa
+    text: "WHO: {{c1::10%}} of men and {{c2::20%}} of women over 60 have symptomatic osteoarthritis; {{c3::130 million}} people are expected to have it by 2050."
+    src: { page: 139, quote: "the WHO states that 10% of men and 20% of women over the age of 60 have symptomatic osteoarthritis." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: geri.L08.054
+    kind: card
+    topic: oa
+    front: How is OA now defined, given new pathophysiology?
+    back: A complex multifactorial joint pathology caused by inflammatory and metabolic factors underlying joint damage, with low-grade chronic synovial inflammation central.
+    src: { page: 139, quote: "a complex multifactorial joint pathology caused by inflammatory and metabolic factors underlying joint damage." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L08.055
+    kind: card
+    topic: oa
+    front: Which immune mechanisms drive OA inflammation and tissue destruction?
+    back: Innate and adaptive immune mechanisms, acting on a low-grade chronic inflammation of the synovial lining.
+    src: { page: 139, quote: "central immunological mechanisms, innate but also adaptive, are now considered crucial in driving inflammation and tissue destruction." }
+    status: unverified
+  - id: geri.L08.056
+    kind: card
+    topic: oa
+    front: What explains chronic pain in OA beyond the joint?
+    back: Neuroinflammation and central sensitization.
+    src: { page: 139, quote: "the role of neuroinflammation and central sensitization mechanisms as underlying causes of pain chronicity has been characterized." }
+    status: unverified
+  - id: geri.L08.057
+    kind: enumerate
+    topic: oa
+    prompt: In the OA "vicious cycle", what do low-grade inflammation and mechanical stress do to cartilage?
+    points:
+      - Limit chondrocyte production of functional collagen
+      - Reduce space-occupying proteoglycans
+      - Increase inflammatory mediators
+    pass: 3
+    src: { page: 140, quote: "additional inflammatory mediators and mechanical stress create a ―vicious cycle‖ of cartilage degeneration." }
+    status: unverified
+  - id: geri.L08.058
+    kind: enumerate
+    topic: oa
+    prompt: Which age-associated chondrocyte changes make the elderly susceptible to OA?
+    points:
+      - Altered gene expression related to senescence
+      - DNA and telomere dysfunction
+      - Altered protein secretion
+      - Oxidative damage
+      - Decreased growth factor response
+      - Apoptosis
+    pass: 4
+    src: { page: 140, quote: "altered gene expression related to senescence, DNA and telomere dysfunction, altered protein secretion, oxidative damage, decreased growth factor response, and apoptosis" }
+    status: unverified
+  - id: geri.L08.059
+    kind: enumerate
+    topic: oa
+    prompt: Symptoms of osteoarthritis?
+    points: [Pain, Swelling, Stiffness, Trouble moving the joint]
+    pass: 4
+    src: { page: 140, quote: "Symptoms of osteoarthritis include pain, swelling, stiffness and trouble moving the affected joint." }
+    status: unverified
+  - id: geri.L08.060
+    kind: card
+    topic: oa
+    front: Most common joints for osteoarthritis?
+    back: Knees, hips, spine and the small joints of the hands.
+    src: { page: 141, quote: "Osteoarthritis can affect any joint but is most common in the knees, hips, spine and small joints in the hands." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L08.061
+    kind: card
+    topic: oa
+    front: Why do muscles weaken in OA?
+    back: Reduced movement of the painful joint makes the muscles lose strength, so physical activity becomes harder.
+    src: { page: 141, quote: "As a consequence of reduced movement, muscles often lose strength and people become less able to perform physical activities." }
+    status: unverified
+  - id: geri.L08.062
+    kind: card
+    topic: oa
+    front: Course of osteoarthritis?
+    back: Chronic and often progressive, changing gradually; symptoms may develop slowly or quickly after injury; severe cases make the joint unusable with rest pain.
+    src: { page: 141, quote: "Osteoarthritis is chronic and often progressive, so changes happen gradually over time." }
+    status: unverified
+  - id: geri.L08.063
+    kind: table
+    topic: oa-mx
+    title: Investigations in osteoarthritis
+    columns: [Test, Role]
+    rows:
+      - [Blood tests, "No test for OA; rule out other causes such as rheumatoid arthritis"]
+      - [Joint fluid analysis, "Inflammation; excludes gout or infection"]
+      - [X-ray, "Joint space narrowing (cartilage loss) and bone spurs"]
+      - [MRI, "Not commonly needed"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 141, quote: "Although there's no blood test for osteoarthritis, certain tests can help rule out other causes of joint pain, such as rheumatoid arthritis." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L08.064
+    kind: card
+    topic: oa-mx
+    front: Cartilage is invisible on X-ray. How does OA show?
+    back: Narrowing of the joint space (cartilage loss) and bone spurs around the joint.
+    src: { page: 142, quote: "cartilage loss is revealed by a narrowing of the space between the bones in the joint." }
+    status: unverified
+  - id: geri.L08.065
+    kind: enumerate
+    topic: oa-mx
+    prompt: Enumerate the treatment options for osteoarthritis.
+    points:
+      - Acetaminophen
+      - NSAIDs
+      - Physical therapy and regular gentle exercise
+      - Cortisone injections
+      - Lubrication injections
+      - Realigning bones
+      - Joint replacement
+    pass: 5
+    src: { page: 143, quote: "Cortisone injections. Lubrication injections. Realigning bones. Joint replacement." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L08.066
+    kind: card
+    topic: oa-mx
+    front: "Acetaminophen in osteoarthritis: who benefits, and what is the risk?"
+    back: Some people with mild to moderate pain; doses above the recommended dose can cause liver damage.
+    src: { page: 143, quote: "Taking more than the recommended dose of acetaminophen can cause liver damage." }
+    status: unverified
+    update:
+      text: "ACR/Arthritis Foundation 2019: topical NSAIDs are strongly recommended for knee OA and oral NSAIDs are the most effective oral drugs; acetaminophen is only conditionally recommended, for short-term or episodic use."
+      ref: "ACR/Arthritis Foundation OA guideline 2019"
+  - id: geri.L08.067
+    kind: card
+    topic: oa-mx
+    front: Goals of physical therapy in OA?
+    back: Strengthen the muscles around the joint, increase flexibility and reduce pain; regular gentle exercise such as swimming or walking can be equally effective.
+    src: { page: 143, quote: "A physical therapy is needed to strengthen the muscles around the joint, increase the flexibility and reduce pain." }
+    status: unverified
+  - id: geri.L08.068
+    kind: enumerate
+    topic: oa-mx
+    prompt: Which three exercise types are drawn for OA in the lecture?
+    points: [Strengthening, Aerobic conditioning, Range of motion]
+    pass: 3
+    src: { page: 143, quote: "Regular gentle exercise, such as swimming or walking, can be equally effective." }
+    status: unverified
+  - id: geri.L08.069
+    kind: mcq
+    topic: oa-mx
+    stem: A 74-year-old woman has 3 years of knee pain, worse with use, with brief stiffness. Her knee is cool. X-ray shows joint space narrowing and osteophytes. Which test is NOT usually needed?
+    options:
+      - MRI of the knee
+      - Rheumatoid factor to rule out RA if in doubt
+      - Joint fluid analysis if gout or infection is possible
+      - Plain X-ray
+      - Clinical examination of the joint
+    answer: 0
+    why:
+      - "Correct: MRI is not commonly needed to diagnose OA (p142)."
+      - Blood tests help rule out other causes like RA (p141).
+      - Joint fluid analysis excludes gout or infection (p141).
+      - X-ray shows narrowing and spurs (p142).
+      - Examination is always needed.
+    src: { page: 142, quote: "Magnetic resonance imaging (MRI) is not commonly needed to diagnose OA." }
+    status: unverified
+  # ---------- p143-147: gout ----------
+  - id: geri.L08.070
+    kind: card
+    topic: gout
+    front: What is gout?
+    back: An ancient disease associated with uric acid deposits, especially in the joints and kidneys.
+    src: { page: 143, quote: "Gout is an ancient disease associated with deposits of uric acid, especially in the joints and kidneys." }
+    status: unverified
+  - id: geri.L08.071
+    kind: card
+    topic: gout
+    front: Where does uric acid come from?
+    back: From purine metabolism; purines come from purine-containing substances such as dietary nucleic acids or the breakdown of the body's own cells.
+    src: { page: 144, quote: "Uric acid is produced as part of the body‘s metabolism of purines" }
+    status: unverified
+  - id: geri.L08.072
+    kind: table
+    topic: gout
+    title: Risk factors for gout
+    columns: [Group, Risk factors]
+    rows:
+      - [Age and sex, "Onset after 50; male > female"]
+      - [Race, "African American > White"]
+      - [Lifestyle, "Heavy alcohol (especially beer), red meat, seafood, purine-rich food, obesity"]
+      - [Medications, "Thiazide and loop diuretics, low-dose aspirin, ciclosporin, niacin, ethambutol"]
+      - [Comorbidities, "Metabolic syndrome, hypertension, CVD, thromboembolic disease, heart failure, CKD, hyperuricemia"]
+    blanks: [[0, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 144, quote: "Medications Diuretics (thiazides, loop diuretics) Low-dose aspirin Ciclosporin Niacin Ethambutol." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L08.073
+    kind: enumerate
+    topic: gout
+    prompt: Which medications are risk factors for gout?
+    points: [Thiazide diuretics, Loop diuretics, Low-dose aspirin, Ciclosporin, Niacin, Ethambutol]
+    pass: 5
+    src: { page: 144, quote: "Medications Diuretics (thiazides, loop diuretics) Low-dose aspirin Ciclosporin Niacin Ethambutol." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L08.074
+    kind: cloze
+    topic: gout
+    text: "Gout diagnosis (as listed) needs {{c1::six or more}} criteria, including more than one attack, maximum inflammation within {{c2::one day}}, and a painful or swollen {{c3::first metatarsophalangeal}} joint."
+    src: { page: 145, quote: "Six or more of these criteria are needed to make a diagnosis" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: geri.L08.075
+    kind: enumerate
+    topic: gout
+    prompt: Enumerate the diagnostic criteria for gout listed in the lecture.
+    points:
+      - More than one attack of acute arthritis
+      - Maximum inflammation within one day
+      - Monoarthritis attack
+      - Redness over joints
+      - Painful or swollen first MTP joint
+      - Unilateral first MTP attack
+      - Unilateral tarsal joint attack
+      - Tophus (proved or suspected)
+      - Hyperuricaemia
+      - Asymmetric swelling within a joint on radiograph
+      - Subcortical cysts without erosions on radiograph
+      - Joint fluid culture negative during attack
+    pass: 8
+    src: { page: 145, quote: "Unilateral attack on tarsal joint Tophus (proved or suspected) Hyperuricaemia" }
+    status: unverified
+  - id: geri.L08.076
+    kind: cloze
+    topic: gout
+    text: "The first toe is eventually affected in about {{c1::90%}} of people with gout."
+    src: { page: 145, quote: "First toe eventually affected in about 90% of people with gout" }
+    status: unverified
+    tags: [numbers]
+  - id: geri.L08.077
+    kind: card
+    topic: gout
+    front: Common tests to diagnose gout?
+    back: Blood test for serum uric acid, and joint aspiration (fluid from inside the joint).
+    src: { page: 146, quote: "Blood teststo measure the uric acid in blood." }
+    status: unverified
+  - id: geri.L08.078
+    kind: table
+    topic: gout-mx
+    title: Where gout drugs act (book figure)
+    columns: [Step, Drug, Action]
+    rows:
+      - ["Purines → uric acid", Allopurinol, "Blocks formation of uric acid"]
+      - ["Uric acid", Uricase, "Breaks down uric acid"]
+      - ["Uric acid", Probenecid, "Increases excretion of uric acid in urine"]
+      - ["Crystals → gouty arthritis", "NSAIDs, colchicine, corticosteroids", "Reduce inflammation"]
+    blanks: [[0, 1], [1, 2], [2, 1], [3, 1]]
+    src: { page: 145, quote: "How Gout Medications Work" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L08.079
+    kind: table
+    topic: gout-mx
+    title: Acute gout attack therapy (book Table I)
+    columns: [Drug, Clinical consideration]
+    rows:
+      - [NSAIDs, "3–5 day therapy usually effective"]
+      - [Colchicine, "CYP450 substrate: interacts with antineoplastics and calcium channel blockers"]
+      - [Corticosteroids, "30–40 mg/d for 5 days when NSAIDs failed or are contraindicated, then taper"]
+      - [Topical ice, "Symptomatic pain relief"]
+      - [Combination, "Steroid taper + colchicine vs steroid taper + acetaminophen"]
+      - [IL-1 inhibitors, "Canakinumab and rilonacept"]
+    blanks: [[0, 1], [2, 1], [5, 1]]
+    src: { page: 146, quote: "Therapeutic Options for Gout" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: geri.L08.080
+    kind: card
+    topic: gout-mx
+    front: Indications for urate-lowering therapy in the book's table?
+    back: Tophi, two or more attacks a year, a history of chronic kidney disease, or a history of urolithiasis.
+    src: { page: 146, quote: "Used in patients with tophi, two or more attacks yearly, history of chronic kidney disease, or history of urolithiasis" }
+    status: unverified
+    tags: [high-yield]
+    update:
+      text: "ACR 2020: urate-lowering therapy is strongly recommended with ≥1 tophus, radiographic damage or ≥2 flares a year; allopurinol is first line, treated to a serum urate target below 6 mg/dL."
+      ref: "ACR gout guideline 2020"
+  - id: geri.L08.081
+    kind: enumerate
+    topic: gout-mx
+    prompt: Long-term (urate-lowering) drug options in the book's table?
+    points:
+      - "Xanthine oxidase inhibitors: allopurinol, febuxostat"
+      - "Uricosuric: probenecid"
+      - "Uricase: rasburicase"
+    pass: 3
+    src: { page: 146, quote: "Allopurinol and febuxostat as therapy options" }
+    status: unverified
+  - id: geri.L08.082
+    kind: card
+    topic: gout-mx
+    front: How does probenecid lower urate?
+    back: It increases renal excretion of uric acid by inhibiting organic anion transporters in the kidney, blocking reabsorption of filtered uric acid.
+    src: { page: 146, quote: "Probenecid inhibits organic anion transporters in kidney and inhibits the reabsorption of filtered uric acid" }
+    status: unverified
+  - id: geri.L08.083
+    kind: table
+    topic: gout-mx
+    title: Gout treatment with comorbidities (book Table I)
+    columns: [Comorbidity, Consideration]
+    rows:
+      - [Coronary artery disease, "Beta-blockers, ACEi, non-losartan ARBs, thiazides and loop diuretics raise gout risk; prefer calcium channel blockers and losartan (uricosuric)"]
+      - [Heart failure, "Furosemide reduces the effect of allopurinol, raising serum urate"]
+      - [Renal disease, "Avoid colchicine and NSAIDs; use intra-articular or systemic steroids"]
+      - [Diabetes, "Steroids may worsen hyperglycemia; consider IL-1 blockers"]
+    blanks: [[0, 1], [2, 1], [3, 1]]
+    src: { page: 146, quote: "Therapeutic Options for Gout" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L08.084
+    kind: mcq
+    topic: gout-mx
+    stem: A 76-year-old man with CKD stage 4 has an acute gout attack of the left knee. Which treatment does the book's table favour?
+    options:
+      - Intra-articular or systemic corticosteroid
+      - Full-dose NSAID for 5 days
+      - Colchicine
+      - Start allopurinol during the attack as the only treatment
+      - Probenecid
+    answer: 0
+    why:
+      - "Correct: in renal failure, avoid colchicine and NSAIDs and use intra-articular or systemic steroids (p146)."
+      - NSAIDs should not be used in renal failure.
+      - Colchicine should not be used in renal failure.
+      - Urate-lowering drugs are long-term therapy, not the treatment of the attack.
+      - Probenecid is a long-term uricosuric and works poorly in advanced CKD.
+    src: { page: 146, quote: "Therapeutic Options for Gout" }
+    status: unverified
+  - id: geri.L08.085
+    kind: mcq
+    topic: gout-mx
+    stem: A 70-year-old hypertensive man has recurrent gout. Which antihypertensive does the book's table prefer?
+    options: [Losartan, Hydrochlorothiazide, Atenolol, Ramipril, Furosemide]
+    answer: 0
+    why:
+      - "Correct: losartan (and calcium channel blockers) are uricosuric and preferred in gout (p146)."
+      - Thiazides raise the risk of gout.
+      - Beta-blockers raise the risk of gout.
+      - ACE inhibitors raise the risk of gout.
+      - Loop diuretics raise the risk of gout.
+    src: { page: 146, quote: "Therapeutic Options for Gout" }
+    status: unverified
+  # ---------- p146-148: pseudogout ----------
+  - id: geri.L08.086
+    kind: table
+    topic: pseudogout
+    title: Gout versus pseudogout
+    columns: [Feature, Gout, Pseudogout]
+    rows:
+      - [Crystal, Sodium urate, Calcium pyrophosphate (CPP)]
+      - [Who, "Middle-aged men", "Older people, men and women evenly"]
+      - [First joint, "Big toe (podagra)", Knee]
+      - [Diet, "Red and organ meat, beer and spirits trigger; wine does not", Not related to diet]
+      - [Prevention, "Lower uric acid and purine intake", "No drug or diet prevents CPP crystals"]
+      - [Hand and wrist, Can be involved, Can be involved]
+    blanks: [[0, 1], [0, 2], [1, 2], [2, 1], [2, 2], [3, 2], [4, 2]]
+    src: { page: 146, quote: "Gout is caused by sodium urate crystals and pseudogout is caused by calcium pyrophosphate crystals." }
+    status: unverified
+    tags: [high-yield, book-question]
+  - id: geri.L08.087
+    kind: card
+    topic: pseudogout
+    front: Which alcoholic drinks may increase gout attacks, and which does not seem to?
+    back: Beer and distilled liquor may increase attacks; wine does not seem to cause gout.
+    src: { page: 146, quote: "Drinking certain types of alcohol, such as beer and distilled liquor may increase attacks. Wine does not seem to cause gout." }
+    status: unverified
+  - id: geri.L08.088
+    kind: card
+    topic: pseudogout
+    front: Treatments shared by gout and pseudogout attacks?
+    back: Steroid injections, anti-inflammatory medicines and colchicine. For gout add drugs that lower uric acid synthesis and a low-purine diet.
+    src: { page: 147, quote: "In both cases, steroid injections (cortisone shots), anti- inflammatory medications and colchicine may be useful." }
+    status: unverified
+  - id: geri.L08.089
+    kind: card
+    topic: pseudogout
+    front: Does asymptomatic chondrocalcinosis need treatment?
+    back: No. Chondrocalcinosis that produces no symptoms needs no treatment.
+    src: { page: 147, quote: "Chondrocalcinosis which produces no symptoms does not need any treatment." }
+    status: unverified
+  - id: geri.L08.090
+    kind: enumerate
+    topic: pseudogout
+    prompt: Treatment of a pseudogout attack?
+    points:
+      - Ice packs and rest
+      - Painkillers and anti-inflammatory medicines
+      - Draining joint fluid with a needle
+      - Intra-articular steroid injection
+      - Steroid tablets
+    pass: 4
+    src: { page: 147, quote: "Ice packs and rest may be helpful." }
+    status: unverified
+  - id: geri.L08.091
+    kind: card
+    topic: pseudogout
+    front: Can pseudogout be prevented?
+    back: No drug or diet prevents CPP crystal formation, but treating a trigger such as dehydration or low magnesium may prevent further attacks; normal weight and moderate exercise limit chronic damage.
+    src: { page: 147, quote: "Unlike gout, there is no treatment or diet that can prevent the formation of CPP crystals." }
+    status: unverified
+  - id: geri.L08.092
+    kind: mcq
+    topic: pseudogout
+    stem: An 82-year-old woman, admitted dehydrated, develops a hot swollen knee. She eats little meat and drinks no alcohol. Aspirate shows crystals. Which is most likely, and what may prevent further attacks?
+    options:
+      - Pseudogout; correct the dehydration
+      - Gout; a low-purine diet
+      - Gout; stop wine
+      - Pseudogout; a low-purine diet
+      - Septic arthritis; no prevention possible
+    answer: 0
+    why:
+      - "Correct: knee, older woman, no dietary link = pseudogout (CPP); treating a trigger like dehydration may prevent attacks (p146-147)."
+      - Gout usually starts in the big toe of middle-aged men.
+      - Wine does not seem to cause gout.
+      - Pseudogout is not related to diet.
+      - Crystals point to crystal arthritis; culture-negative fluid is expected.
+    src: { page: 147, quote: "If an underlying condition caused an episode of pseudogout (eg, lack of fluid (dehydration) or low magnesium levels), treating this may prevent further attacks." }
+    status: unverified
+  # ---------- p148-150: osteoporosis ----------
+  - id: geri.L08.093
+    kind: card
+    topic: osteoporosis
+    front: What causes osteoporosis?
+    back: Creation of new bone fails to keep up with loss of old bone (bone is constantly broken down and replaced).
+    src: { page: 148, quote: "Osteoporosis occurs when the creation of new bone doesn't keep up with the loss of old bone." }
+    status: unverified
+  - id: geri.L08.094
+    kind: enumerate
+    topic: osteoporosis
+    prompt: Clinical picture of osteoporosis?
+    points:
+      - Back pain from a broken or collapsed vertebra
+      - Loss of height over time
+      - Stooped posture
+      - A bone that breaks much more easily than expected
+    pass: 3
+    src: { page: 148, quote: "Back pain, caused by a broken or collapsed bone in the spine. Loss of height over time. A stooped posture." }
+    status: unverified
+  - id: geri.L08.095
+    kind: enumerate
+    topic: osteoporosis
+    prompt: Enumerate risk factors for osteoporosis.
+    points:
+      - Female sex
+      - Old age
+      - White or Asian descent
+      - Positive family history
+      - Low calcium intake
+      - Low sex hormones, hyperthyroidism, hyperparathyroidism, adrenal overactivity
+      - Corticosteroids, anticonvulsants, PPIs, cancer and transplant drugs
+      - IBD, multiple myeloma, chronic liver and kidney disease
+    pass: 6
+    src: { page: 148, quote: "Medications like corticosteroids, anticonvulsants, proton pump inhibitors, drugs used in the treatment of cancer and transplant rejection." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L08.096
+    kind: enumerate
+    topic: osteoporosis
+    prompt: Dietary sources of calcium listed in the lecture?
+    points:
+      - Low-fat dairy products
+      - Dark green leafy vegetables
+      - Canned salmon or sardines with bones
+      - Soy products such as tofu
+      - Calcium-fortified cereals and orange juice
+    pass: 4
+    src: { page: 149, quote: "Low-fat dairy products. Dark green leafy vegetables. Canned salmon or sardines with bones." }
+    status: unverified
+  - id: geri.L08.097
+    kind: cloze
+    topic: osteoporosis
+    text: "Most people need {{c1::600 IU}} of vitamin D a day, increased to {{c2::800 IU}} a day at {{c3::70}} years."
+    src: { page: 149, quote: "Most people need 600 IU/day, increased to 800IU/day at 70 years." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: geri.L08.098
+    kind: card
+    topic: osteoporosis
+    front: Which exercise does the lecture advise for bone health?
+    back: Strength training combined with weight-bearing and balance exercises; benefit at any age, most if started young and continued.
+    src: { page: 149, quote: "Combine strength training exercises with weight-bearing and balance exercises." }
+    status: unverified
+  - id: geri.L08.099
+    kind: card
+    topic: osteoporosis
+    front: What is the T-score?
+    back: The number of standard deviations by which the patient's BMD differs from the peak bone mass of a healthy young person of the same sex and race/ethnicity (measured by DXA).
+    src: { page: 149, quote: "The T-scorecorresponds to the number of standard deviations that the patient's bone mineral density differs from the peak bone mass" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L08.100
+    kind: table
+    topic: osteoporosis
+    title: WHO T-score categories (DXA)
+    columns: [T-score, Category]
+    rows:
+      - ["-1.0 or above", "Normal"]
+      - ["Between -1.0 and -2.5", "Osteopenia"]
+      - ["-2.5 or lower", "Osteoporosis"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 150, quote: "A T-score between -1.0 and -2.5 defines osteopenia." }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: geri.L08.101
+    kind: table
+    topic: osteoporosis
+    title: Osteoporosis drugs
+    columns: [Drug, Key point]
+    rows:
+      - [Bisphosphonates, "Antiresorptive: slow bone loss, reduce fracture risk"]
+      - [SERMs (raloxifene), "Reduce spine fracture risk after menopause"]
+      - [Calcitonin, "Prevents spinal fractures; helps pain after a fracture"]
+      - [Teriparatide (PTH), "Stimulates bone formation; for high fracture risk"]
+      - ["Denosumab, romosozumab", "Monoclonal antibodies after menopause; romosozumab has an FDA black box warning"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 150, quote: "Bisphosphonates: These are antiresorptive drugs that slow bone loss and reduce a person‘s fracture risk." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L08.102
+    kind: mcq
+    topic: osteoporosis
+    stem: A 74-year-old woman with a previous vertebral fracture has a T-score of -3.4 and fractures despite years of bisphosphonate. Which drug works by stimulating bone formation?
+    options: [Teriparatide, Alendronate, Raloxifene, Calcitonin, Denosumab]
+    answer: 0
+    why:
+      - "Correct: teriparatide (PTH) stimulates bone formation and is approved for high fracture risk (p150)."
+      - Alendronate is an antiresorptive bisphosphonate.
+      - Raloxifene is a SERM that reduces spine fractures, not a bone builder.
+      - Calcitonin prevents spinal fractures and helps pain; it does not build bone.
+      - Denosumab is a monoclonal antibody given after menopause; it is antiresorptive.
+    src: { page: 150, quote: "Parathyroid hormone, such as teriparatide (Forteo): The Food and Drug Administration (FDA) has approved this hormone for treating people with a high fracture risk" }
+    status: unverified
+  # ---------- p150-152: fibromyalgia ----------
+  - id: geri.L08.103
+    kind: card
+    topic: fibromyalgia
+    front: What is fibromyalgia?
+    back: A condition of widespread pain all over the body, with sleep problems, fatigue and emotional and mental distress; patients may be more sensitive to pain.
+    src: { page: 150, quote: "Fibromyalgia (fi·bro·my·al·gi·a) is a condition that causes pain all over the body, also called widespread pain." }
+    status: unverified
+  - id: geri.L08.104
+    kind: enumerate
+    topic: fibromyalgia
+    prompt: Physical symptoms of fibromyalgia?
+    points:
+      - Muscle pain or tenderness
+      - Fatigue
+      - Face and jaw pain (TMJ disorders)
+      - Headaches and migraines
+      - Diarrhea and constipation
+      - Bladder control issues
+    pass: 5
+    src: { page: 150, quote: "Muscle painor tenderness. Fatigue. Face and jaw pain (temporomandibular joint disorders)." }
+    status: unverified
+  - id: geri.L08.105
+    kind: enumerate
+    topic: fibromyalgia
+    prompt: Mental and emotional symptoms of fibromyalgia?
+    points: ["Memory problems (fibro fog)", Anxiety, Depression, Insomnia and other sleep disorders]
+    pass: 3
+    src: { page: 151, quote: "Memory problems (sometimes called ―fibro fog‖ or ―brain fog‖)." }
+    status: unverified
+  - id: geri.L08.106
+    kind: enumerate
+    topic: fibromyalgia
+    prompt: Risk factors for fibromyalgia?
+    points:
+      - Female sex (twice as likely)
+      - Stressful or traumatic events (adverse childhood experiences, accidents, PTSD)
+      - Repetitive injuries
+      - Illness such as viral infection
+      - Family history
+      - Obesity
+    pass: 4
+    src: { page: 151, quote: "Women are twice as likely to have fibromyalgia as men." }
+    status: unverified
+  - id: geri.L08.107
+    kind: enumerate
+    topic: fibromyalgia
+    prompt: What triggers a fibromyalgia flare-up?
+    points:
+      - Emotional stress (job, money, social life)
+      - Changes in daily routine
+      - Diet changes or poor nutrition
+      - Hormone changes
+      - Too little sleep or a change in sleep time
+      - Weather or temperature changes
+    pass: 4
+    src: { page: 151, quote: "Emotional stress caused by job, financial situation or social life. Changes in daily routine." }
+    status: unverified
+  - id: geri.L08.108
+    kind: card
+    topic: fibromyalgia
+    front: How is fibromyalgia diagnosed?
+    back: No test diagnoses it; it is part of a differential diagnosis, with blood tests to rule out other causes of fatigue such as anemia or thyroid disease.
+    src: { page: 151, quote: "There‘s no test that can diagnose fibromyalgia. Usually, diagnosing it is part of a differential diagnosis." }
+    status: unverified
+  - id: geri.L08.109
+    kind: enumerate
+    topic: fibromyalgia
+    prompt: Treatment of fibromyalgia?
+    points:
+      - Physical therapy to relax and strengthen muscles and joints
+      - Psychological treatment
+      - Medicines for symptoms
+      - Occupational therapy for daily functioning
+    pass: 4
+    src: { page: 152, quote: "Non-pharmacological treatments: physical therapy to relax and strengthen muscles and joints." }
+    status: unverified
+  # ---------- p152-154: PMR and GCA ----------
+  - id: geri.L08.110
+    kind: card
+    topic: pmr
+    front: What is polymyalgia rheumatica?
+    back: Pain, stiffness and inflammation in the muscles around the shoulders, neck and hips.
+    src: { page: 152, quote: "Polymyalgia rheumatica (PMR) is a condition that causes pain, stiffness and inflammation in the muscles around the shoulders, neck and hips." }
+    status: unverified
+  - id: geri.L08.111
+    kind: cloze
+    topic: pmr
+    text: "The main symptom of PMR is morning muscle stiffness lasting longer than {{c1::45 minutes}}."
+    src: { page: 152, quote: "The main symptom is musclestiffness in the morning that lasts longer than 45 minutes." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: geri.L08.112
+    kind: enumerate
+    topic: pmr
+    prompt: Other symptoms of PMR?
+    points: [Fever and sweating, Extreme tiredness, Loss of appetite, Weight loss, Depression]
+    pass: 4
+    src: { page: 152, quote: "High temperature (fever) and sweating. Extreme tiredness (fatigue). Loss of appetite. Weight loss. Depression." }
+    status: unverified
+  - id: geri.L08.113
+    kind: cloze
+    topic: pmr
+    text: "PMR is age-related: most patients are over {{c1::70}}, it is extremely rare under {{c2::50}}, and it is more common in {{c3::women}}."
+    src: { page: 152, quote: "Most people who are diagnosed with the condition are over 70. It‘s extremely rare in people younger than 50." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: geri.L08.114
+    kind: enumerate
+    topic: pmr
+    prompt: Investigations in suspected PMR?
+    points:
+      - ESR and CRP
+      - Rheumatoid factor and anti-CCP
+      - Thyroid function tests
+      - Kidney and liver function tests
+    pass: 3
+    src: { page: 153, quote: "There‘s no specific test for polymyalgia rheumatica." }
+    status: unverified
+  - id: geri.L08.115
+    kind: cloze
+    topic: pmr
+    text: "PMR treatment: prednisone {{c1::10–15 mg/day}}; if symptoms improve it may be taken for {{c2::one year}}."
+    src: { page: 153, quote: "Prednisone 10 to15 mg/day can relief pain and stiffness. If symptoms improve patient can take the drug for one year." }
+    status: unverified
+    tags: [numbers, high-yield]
+    update:
+      text: "EULAR/ACR 2015: start prednisone 12.5–25 mg/day, then taper; methotrexate may be added in patients at high risk of relapse or of steroid side effects."
+      ref: "EULAR/ACR PMR recommendations 2015"
+  - id: geri.L08.116
+    kind: cloze
+    topic: pmr
+    text: "About {{c1::15–20%}} of people with PMR develop GCA, while about {{c2::half}} of GCA patients have PMR symptoms."
+    src: { page: 153, quote: "Approximately 15 percent to 20 percent of people with PMR will develop GCA, while about half of patients with GCA also have symptoms of PMR." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: geri.L08.117
+    kind: card
+    topic: pmr
+    front: What is giant cell arteritis, and its feared complications?
+    back: A vasculitis of the arteries of the head (temples) and the aorta, causing headaches and vision problems; untreated it can cause blindness and stroke.
+    src: { page: 153, quote: "Left untreated, GCA can lead to blindness and stroke." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L08.118
+    kind: enumerate
+    topic: pmr
+    prompt: Symptoms of giant cell arteritis?
+    points:
+      - New headache, usually temporal
+      - Fatigue, anorexia, weight loss, flu-like feeling
+      - Jaw pain on chewing
+      - Visual disturbance, up to sudden permanent loss
+    pass: 3
+    src: { page: 153, quote: "The most common symptom of GCA is a new headache, usually around the temples, but headache can occur anywhere." }
+    status: unverified
+  - id: geri.L08.119
+    kind: card
+    topic: pmr
+    front: How is GCA confirmed?
+    back: Usually by temporal artery biopsy; temporal artery ultrasound in some cases. A high ESR alone is not proof.
+    src: { page: 154, quote: "It is common to do biopsy of the temporal artery to confirm." }
+    status: unverified
+  - id: geri.L08.120
+    kind: cloze
+    topic: pmr
+    text: "GCA: start prednisone {{c1::40–60 mg/day}} immediately to prevent vision loss; after about a {{c2::month}} taper to 5–10 mg/day over a few months, and stop after {{c3::one to two years}}."
+    src: { page: 154, quote: "First-line treatment usually is 40-60 mg per day of prednisone." }
+    status: unverified
+    tags: [numbers, high-yield]
+    update:
+      text: "ACR/VF 2021 conditionally recommends adding tocilizumab to oral glucocorticoids in newly diagnosed GCA, to spare steroids."
+      ref: "ACR/Vasculitis Foundation GCA guideline 2021"
+  - id: geri.L08.121
+    kind: case
+    topic: pmr
+    stem: A 74-year-old woman has 6 weeks of aching and stiffness of both shoulders and hips, worst in the morning for about 2 hours. She feels tired and has lost weight.
+    steps:
+      - question: Most likely diagnosis?
+        options: [Polymyalgia rheumatica, Fibromyalgia, Frozen shoulder, Osteoarthritis]
+        answer: 0
+        why: "Shoulder and hip girdle stiffness over 45 minutes in the morning, over 70, with systemic features = PMR (p152). Fibromyalgia has widespread pain with tender points and fog; frozen shoulder is one joint; OA stiffness is brief."
+      - question: Which tests support it?
+        options: ["ESR and CRP (with RF, anti-CCP, thyroid, renal and liver tests to exclude others)", "A specific PMR antibody", Muscle biopsy, Serum uric acid]
+        answer: 0
+        why: "There is no specific test; ESR and CRP with tests that exclude RA, thyroid and organ disease (p153)."
+      - question: Treatment per the book?
+        options: ["Prednisone 10–15 mg/day, continued about a year if she improves", "Prednisone 60 mg/day", Colchicine, Allopurinol]
+        answer: 0
+        why: "The book: prednisone 10–15 mg/day, for a year if improving (p153). 40–60 mg is the GCA dose."
+      - reveal: Three months later she has a new right temporal headache and pain in the jaw when chewing.
+        question: What next?
+        options: ["Start prednisone 40–60 mg at once and arrange temporal artery biopsy", Wait for the biopsy before any steroid, Reassure; it is tension headache, Increase paracetamol]
+        answer: 0
+        why: "GCA (15–20% of PMR) threatens sight; start treatment immediately after diagnosis and confirm with biopsy (p153-154)."
+    src: { page: 152, quote: "The main symptom is musclestiffness in the morning that lasts longer than 45 minutes." }
+    status: unverified
+  - id: geri.L08.122
+    kind: mcq
+    topic: pmr
+    stem: A 78-year-old man has a new temporal headache and ESR 95 mm/h. What is TRUE?
+    options:
+      - The high ESR alone does not prove GCA; temporal artery biopsy is commonly done to confirm
+      - A normal temporal artery biopsy is needed before any steroid
+      - GCA only affects the temporal artery, never the aorta
+      - Vision loss in GCA always recovers with treatment
+      - PMR is never seen together with GCA
+    answer: 0
+    why:
+      - "Correct: there is no simple confirmatory blood test; high ESR alone is not proof; biopsy confirms (p154)."
+      - Treatment starts immediately after diagnosis to prevent vision loss.
+      - GCA also inflames the aorta (p153).
+      - Permanent loss can occur suddenly; treatment prevents it, not reverses it.
+      - The two can occur at the same time (p153).
+    src: { page: 154, quote: "The high erythrocyte sedimentation rate alone is not proof for GCA." }
+    status: unverified
+  # ---------- p154: book questions ----------
+  - id: geri.L08.123
+    kind: essay
+    topic: sarcopenia
+    prompt: Describe the screening tools for sarcopenia and mention how to manage.
+    outline:
+      - "Definition": ["Loss of skeletal muscle mass and function; primary (ageing) or secondary (disease, drugs)"]
+      - "Screening tools": ["SARC-F, MAMC, calf circumference, hand grip strength, gait speed", "Combine SARC-F + CC or MAMC + grip or gait speed (Ishii, EWGSOP)"]
+      - "SARC-F": ["Strength, assistance walking, rise from chair, climb stairs, falls; 0–2 each", "Score ≥4 needs comprehensive evaluation"]
+      - "Diagnosis": ["Low strength = probable; low quantity/quality confirms; low performance = severe"]
+      - "Management": ["Exercise (high-intensity resistance) ± nutrition first", "No approved drug; vitamin D (older women), testosterone (low-T men)"]
+    src: { page: 132, quote: "Several tools meet these requirements, specifically the SARC-F questionnaire" }
+    status: unverified
+    tags: [book-question]
+  - id: geri.L08.124
+    kind: essay
+    topic: oa
+    prompt: Describe the pathophysiology, clinical picture and management of primary osteoarthritis.
+    outline:
+      - "Definition and epidemiology": ["No known antecedent; hands, hips, knees, spine", "WHO: 10% of men, 20% of women over 60 symptomatic"]
+      - "Pathophysiology": ["Low-grade synovial inflammation, innate and adaptive immunity", "Vicious cycle: less functional collagen and proteoglycans, more mediators", "Ageing chondrocytes: senescence, telomere, oxidative damage, apoptosis", "Neuroinflammation and central sensitization of pain"]
+      - "Clinical picture": ["Pain, swelling, stiffness, trouble moving", "Muscle weakness; chronic, progressive; rest pain when severe"]
+      - "Diagnosis": ["Blood tests exclude RA; fluid excludes gout or infection", "X-ray: narrowing and spurs; MRI rarely needed"]
+      - "Treatment": ["Acetaminophen, NSAIDs, physical therapy and exercise", "Cortisone and lubrication injections, realignment, joint replacement"]
+    src: { page: 140, quote: "additional inflammatory mediators and mechanical stress create a ―vicious cycle‖ of cartilage degeneration." }
+    status: unverified
+    tags: [book-question]
+  - id: geri.L08.125
+    kind: essay
+    topic: pseudogout
+    prompt: Gout versus pseudogout, how to differentiate.
+    outline:
+      - "Crystals": ["Gout: sodium urate", "Pseudogout: calcium pyrophosphate"]
+      - "Who and where": ["Gout: middle-aged men, big toe (podagra)", "Pseudogout: older people, both sexes, knee first", "Both: hand and wrist"]
+      - "Triggers": ["Gout: red and organ meat, beer and spirits (not wine)", "Pseudogout: not dietary; dehydration, low magnesium"]
+      - "Treatment": ["Both: steroid injection, anti-inflammatories, colchicine", "Gout: urate-lowering drugs, low-purine diet", "Pseudogout: ice, rest, drainage; asymptomatic chondrocalcinosis untreated; no prevention of CPP"]
+    src: { page: 146, quote: "Gout is caused by sodium urate crystals and pseudogout is caused by calcium pyrophosphate crystals." }
+    status: unverified
+    tags: [book-question]

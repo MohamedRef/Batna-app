@@ -1,0 +1,1311 @@
+schema: batna.content/v1
+lecture: neph.L06
+title: "Electrolyte disturbances"
+author: "Prof. Heba Elshair"
+book: { chapter: 8, pages: [127, 144] }
+topics:
+  - { id: water, title: "Water handling: osmoreceptors, thirst and ADH" }
+  - { id: sodium, title: "Sodium balance and renal handling" }
+  - { id: hypo-types, title: "Hyponatremia: symptoms, hypertonic and pseudohyponatremia" }
+  - { id: hypo-volume, title: "Hyponatremia by volume status" }
+  - { id: siadh, title: "SIADH: diagnostic criteria and causes" }
+  - { id: hypo-treat, title: "Treating hyponatremia and hypertonic saline" }
+  - { id: ods, title: "Osmotic demyelination syndrome" }
+  - { id: hyperna, title: "Hypernatremia: causes and features" }
+  - { id: hyperna-treat, title: "Treating hypernatremia" }
+  - { id: k-physiology, title: "Potassium physiology and circadian rhythm" }
+  - { id: hyperk, title: "Hyperkalemia: pseudohyperkalemia and causes" }
+  - { id: hyperk-treat, title: "Hyperkalemia treatment and K binders" }
+  - { id: hypok, title: "Hypokalemia: causes, features and treatment" }
+  - { id: mg, title: "Magnesium: hypo- and hypermagnesemia" }
+items:
+  # ---------- p127: water handling ----------
+  - id: neph.L06.001
+    kind: card
+    topic: water
+    front: What mainly regulates body water?
+    back: Cerebral and peripheral osmoreceptors that sense changes in ECF osmolality.
+    src: { page: 127, quote: "BW is mainly regulated by cerebral and peripheral osmoreceptors capable of sensing changes in ECF osmolality" }
+    status: unverified
+  - id: neph.L06.002
+    kind: card
+    topic: water
+    front: What two responses does a rise in plasma osmolality trigger?
+    back: Thirst and release of ADH (vasopressin) from the pituitary.
+    src: { page: 127, quote: "Increase osmolality triggers thirst and pituitary ADH (vasopressin) release." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L06.003
+    kind: order
+    topic: water
+    prompt: Put the steps of ADH-driven water reabsorption in order.
+    steps:
+      - ADH binds V2 receptors on the basolateral side of collecting duct principal cells
+      - Aquaporins move to the apical membrane
+      - Free water flows through them along the osmotic gradient
+      - Water enters the hypertonic interstitium
+    src: { page: 127, quote: "ADH binds V 2 (vasopressin) receptors on the Basolateral aspect of the principal cells in the collecting duct" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L06.004
+    kind: cloze
+    topic: water
+    text: "ADH acts on {{c1::V2}} receptors on the basolateral side of the {{c2::principal cells}} of the collecting duct, moving {{c3::aquaporins}} to the apical membrane."
+    src: { page: 127, quote: "leading to translocation of aquaporins to the apical membrane where these water channels allow free water absorption" }
+    status: unverified
+  - id: neph.L06.005
+    kind: cloze
+    topic: water
+    text: "After a water load, thirst and ADH are suppressed and dilute urine restores normal osmolality ({{c1::285}} mOsmol/kg) within about {{c2::6}} hours."
+    src: { page: 127, quote: "rapidly (6h) restoring normal osmolality (285mOsmol/kg)" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L06.006
+    kind: card
+    topic: water
+    front: What happens with water depletion, and what finally corrects the absolute deficit?
+    back: Osmoreceptors sense high osmolality, ADH is released, water is retained and urine is highly concentrated. Increased thirst eventually corrects the absolute water deficit.
+    src: { page: 127, quote: "Increased thirst eventually corrects the absolute water deficit." }
+    status: unverified
+  # ---------- p127-128: sodium ----------
+  - id: neph.L06.007
+    kind: cloze
+    topic: sodium
+    text: "Normal serum sodium is {{c1::135–145}} mEq/L; a change in serum Na reflects a change in {{c2::total body Na}}."
+    src: { page: 127, quote: "Normal SNa: 135-145mEq/L change in SNa reflects change in total body Na+." }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L06.008
+    kind: card
+    topic: sodium
+    front: What is sodium's main job as a solute?
+    back: It is the principal active solute that maintains intravascular and interstitial volume.
+    src: { page: 127, quote: "Principle active solute for the maintenance of intravascular & interstitial volume." }
+    status: unverified
+  - id: neph.L06.009
+    kind: table
+    topic: sodium
+    title: Renal sodium handling
+    columns: [Segment, Role]
+    rows:
+      - [Proximal convoluted tubule, Reabsorbs 2/3 of filtered Na]
+      - [Loop of Henle, Countercurrent system for Na and water balance]
+      - [Distal convoluted tubule and collecting duct, Aldosterone drives further Na reabsorption]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 128, quote: "Countercurrent system at the Loop of Henle is responsible for Na+ & water balance." }
+    status: unverified
+  - id: neph.L06.010
+    kind: card
+    topic: sodium
+    front: How is sodium absorbed from the gut, and which organ is the principal regulator of sodium balance?
+    back: It is absorbed throughout the GI tract by the active Na/K-ATPase system; the kidneys are the principal regulator.
+    src: { page: 128, quote: "Absorption: throughout the GI system via active Na, K-ATPase system. Kidneys are the principal regulator" }
+    status: unverified
+  # ---------- p128-129: hyponatremia ----------
+  - id: neph.L06.011
+    kind: cloze
+    topic: hypo-types
+    text: "Hyponatremia is serum Na below {{c1::135}}. In hospital, symptomatic hyponatremia carries a mortality of {{c2::10–50%}}."
+    src: { page: 128, quote: "In hospital, symptomatic hyponatraemia is associated with a mortality of 10-50%." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L06.012
+    kind: card
+    topic: hypo-types
+    front: Are most hyponatremic patients symptomatic? What gets worse as Na falls?
+    back: Most are thought to be asymptomatic, but perception and gait disturbances increase as Na falls.
+    src: { page: 128, quote: "Most hyponatraemic patients are thought to be asymptomatic but perception and gait disturbances increase as Na falls." }
+    status: unverified
+  - id: neph.L06.013
+    kind: card
+    topic: hypo-types
+    front: Define hypertonic (translocational) hyponatremia and give its commonest cause.
+    back: Hyponatremia with plasma tonicity above 295 mOsm/kg H2O. Most commonly seen in hyperglycemia.
+    src: { page: 128, quote: "Hyponatremia combined with plasma tonicity > 295 mOsm/kg H2O is indicative of hypertonic hyponatremia." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L06.014
+    kind: card
+    topic: hypo-types
+    front: Why does hyperglycemia lower serum sodium?
+    back: Extracellular hypertonicity draws water out of cells into the extracellular space, diluting the sodium.
+    src: { page: 128, quote: "Extracellular hypertonicity associated with hyperglycemia favors efflux of water into the extracellular space, in turn decreasing the [Na+]." }
+    status: unverified
+  - id: neph.L06.015
+    kind: cloze
+    topic: hypo-types
+    text: "Serum [Na+] falls by {{c1::1.6}} mEq/L for every {{c2::100}} mg/dL rise in serum glucose."
+    src: { page: 129, quote: "[Na+] decreases by 1.6 mEq/L for every 100 mg/dL increase in serum glucose level." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L06.016
+    kind: enumerate
+    topic: hypo-types
+    prompt: Mention causes of pseudohyponatremia.
+    points:
+      - Raised lipids
+      - Raised plasma proteins (myeloma)
+      - Hyperglycemia
+      - Absorbed glycine- or sorbitol-containing bladder irrigants
+    pass: 3
+    src: { page: 129, quote: "Glycine- or sorbitol-containing bladder irrigants may also be absorbed." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L06.017
+    kind: mcq
+    topic: hypo-types
+    stem: A 62-year-old man with back pain and anemia has serum Na 128 mmol/L, normal measured osmolality and total protein 11 g/dL. He feels well. What is the most likely explanation of the low sodium?
+    options:
+      - Pseudohyponatremia from high plasma proteins (myeloma)
+      - SIADH
+      - Translocational hyponatremia from hyperglycemia
+      - Hypovolemic hyponatremia from renal losses
+      - Acute water intoxication
+    answer: 0
+    why:
+      - "Correct: raised plasma proteins (myeloma) cause pseudohyponatremia (p129)."
+      - SIADH is a hypotonic hyponatremia; here the measured osmolality is normal.
+      - Translocational hyponatremia needs hypertonicity (above 295), usually from high glucose.
+      - Nothing suggests volume loss, and the osmolality is not low.
+      - Acute water intoxication gives true hypotonic hyponatremia with symptoms.
+    src: { page: 129, quote: "Increase plasma proteins (myeloma)." }
+    status: unverified
+  - id: neph.L06.018
+    kind: cloze
+    topic: hypo-types
+    text: "Hyponatremia symptoms are rare when it is chronic or Na is above {{c1::125}} mmol/L, and common when it is acute or Na is below {{c2::110}} mmol/L."
+    src: { page: 129, quote: "Rare in chronic hyponatremia or Na >125mmol/L. Common in acute hyponatremia or Na <110mmol/L" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L06.019
+    kind: card
+    topic: hypo-types
+    front: What causes the symptoms of hyponatremia, and what are they?
+    back: Cerebral swelling as osmolality falls (the encephalopathy). Headache, apathy, confusion (especially in the elderly), seizures and coma.
+    src: { page: 129, quote: "Symptoms due to cerebral swelling as osmolality falls: the encephalopathy." }
+    status: unverified
+  # ---------- p129 figure: by volume status ----------
+  - id: neph.L06.020
+    kind: table
+    topic: hypo-volume
+    title: Hyponatremia by volume status (book figure)
+    columns: [Volume status, Total body water, Total body Na, Urine Na, Causes]
+    rows:
+      - [Hypovolemia, Low, Very low, ">20 mmol/L", "Renal losses: diuretic excess, mineralocorticoid deficiency, salt-losing nephropathy, bicarbonaturia, ketonuria, osmotic diuresis, cerebral salt wasting"]
+      - [Hypovolemia, Low, Very low, "<20 mmol/L", "Extrarenal losses: vomiting, diarrhea, third spacing (burns, pancreatitis, trauma)"]
+      - [Euvolemia (no edema), High, Unchanged, ">20 mmol/L", "Glucocorticoid deficiency, hypothyroidism, stress, drugs, SIADH"]
+      - [Hypervolemia, Very high, High, ">20 mmol/L", Acute or chronic kidney injury]
+      - [Hypervolemia, Very high, High, "<20 mmol/L", "Nephrotic syndrome, cirrhosis, cardiac failure"]
+    blanks: [[0, 4], [1, 4], [2, 4], [3, 4], [4, 4], [2, 2]]
+    src: { page: 129, quote: "Assess volume status" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L06.021
+    kind: card
+    topic: hypo-volume
+    front: In hyponatremia, what is the first step of the book's algorithm?
+    back: Assess volume status (hypovolemia, euvolemia without edema, or hypervolemia), then measure urine Na where it helps.
+    src: { page: 129, quote: "Assess volume status" }
+    status: unverified
+  - id: neph.L06.022
+    kind: mcq
+    topic: hypo-volume
+    stem: A 30-year-old woman has had 3 days of vomiting. She is dry with postural hypotension. Serum Na 126 mmol/L, urine Na 8 mmol/L. Which group does this fit?
+    options:
+      - Hypovolemic hyponatremia from extrarenal losses
+      - Hypovolemic hyponatremia from renal losses
+      - Euvolemic hyponatremia (SIADH)
+      - Hypervolemic hyponatremia from heart failure
+      - Pseudohyponatremia
+    answer: 0
+    why:
+      - "Correct: hypovolemia with urine Na below 20 means the kidney is holding Na; the loss is extrarenal (vomiting) (p129)."
+      - Renal losses keep urine Na above 20 mmol/L.
+      - She is clinically dry, not euvolemic; SIADH urine Na is above 30.
+      - There is no edema or overload.
+      - Vomiting causes a true loss, not a laboratory artifact.
+    src: { page: 129, quote: "Extrarenal losses Vomiting Diarrhea" }
+    status: unverified
+  - id: neph.L06.023
+    kind: mcq
+    topic: hypo-volume
+    stem: A man with decompensated cirrhosis has ascites and leg edema. Serum Na 124 mmol/L, urine Na 6 mmol/L. How is his hyponatremia classified?
+    options:
+      - Hypervolemic, urine Na below 20 (cirrhosis, nephrotic syndrome, heart failure)
+      - Hypervolemic, urine Na above 20 (kidney injury)
+      - Euvolemic (SIADH)
+      - Hypovolemic from renal losses
+      - Hypovolemic from extrarenal losses
+    answer: 0
+    why:
+      - "Correct: total body water and Na are both up, and the kidney avidly keeps Na (urine Na below 20) (p129)."
+      - With urine Na above 20 the book points to acute or chronic kidney injury.
+      - He has edema, so he is not euvolemic.
+      - Renal losses cause hypovolemia, not edema.
+      - Extrarenal losses cause hypovolemia, not ascites and edema.
+    src: { page: 129, quote: "Nephrotic syndrome Cirrhosis Cardiac failure" }
+    status: unverified
+  - id: neph.L06.024
+    kind: enumerate
+    topic: hypo-volume
+    prompt: Mention causes of euvolemic hyponatremia (book figure).
+    points:
+      - Glucocorticoid deficiency
+      - Hypothyroidism
+      - Stress
+      - Drugs
+      - SIADH
+    pass: 4
+    src: { page: 129, quote: "Glucocorticoid deficiency Hypothyroidism Stress" }
+    status: unverified
+  # ---------- p130: SIADH ----------
+  - id: neph.L06.025
+    kind: enumerate
+    topic: siadh
+    prompt: State the Bartter and Schwartz criteria for SIADH.
+    points:
+      - Hypotonic hyponatremia (effective serum osmolality below 275 mOsm/kg)
+      - Euvolemia
+      - Less than maximally dilute urine (urine osmolality above 100 mOsm/kg)
+      - Urine Na above 30 mEq/L on normal salt and water intake
+      - No advanced kidney disease, cirrhosis or heart failure
+      - No other cause (hypothyroidism, glucocorticoid insufficiency, diuretics)
+    pass: 5
+    src: { page: 130, quote: "Bartter & Schwartz Criteria for SIADH" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L06.026
+    kind: cloze
+    topic: siadh
+    text: "SIADH: effective serum osmolality below {{c1::275}} mOsm/kg, urine osmolality above {{c2::100}} mOsm/kg, and urine Na above {{c3::30}} mEq/L."
+    src: { page: 130, quote: "Hypotonic hyponatremia (effective Sosm < 275 mOsm/kg" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L06.027
+    kind: enumerate
+    topic: siadh
+    prompt: Mention additional data that support a diagnosis of SIADH.
+    points:
+      - Serum uric acid below 4 mg/dL
+      - Fractional excretion of uric acid above 10%
+      - Hyponatremia worsens with IV normal saline
+      - Plasma vasopressin or copeptin inappropriately high for serum osmolality
+      - "Abnormal water load test: excretes less than 80% of a 20 mL/kg load in 4 h, urine not diluted below 100 mOsm/kg"
+    pass: 3
+    src: { page: 130, quote: "Additional Data Supporting Diagnosis of SIADH" }
+    status: unverified
+  - id: neph.L06.028
+    kind: cloze
+    topic: siadh
+    text: "Supporting SIADH: serum uric acid below {{c1::4}} mg/dL and fractional excretion of uric acid above {{c2::10%}}."
+    src: { page: 130, quote: "Serum uric acid < 4 mg/dL" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L06.029
+    kind: table
+    topic: siadh
+    title: Common causes of SIADH
+    columns: [Group, Examples]
+    rows:
+      - [CNS disease, "Brain abscess, encephalitis, head trauma, intracranial hemorrhage, meningitis, tumor"]
+      - [Drugs, "Amiodarone, carbamazepine, oxcarbazepine, MDMA, nicotine, phenothiazines, opioids, SSRIs, tricyclics, cyclophosphamide, chlorpropamide, vincristine"]
+      - [Malignancy, "Small cell lung carcinoma (commonest), then head and neck cancer and non-small cell lung cancer"]
+      - [Pulmonary disease, "Acute respiratory failure, COPD, pneumonia, tuberculosis"]
+      - [Other, "HIV, idiopathic, postoperative state, reset osmostat"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 130, quote: "Box 4, Common Causes of SIADH" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L06.030
+    kind: card
+    topic: siadh
+    front: Which malignancy most commonly causes SIADH?
+    back: Small cell carcinoma of the lung, followed by head and neck cancer and non-small cell lung cancer.
+    src: { page: 130, quote: "Most commonly small cell carcinoma of the lung followed by head and neck cancer" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L06.031
+    kind: mcq
+    topic: siadh
+    stem: A 58-year-old smoker on carbamazepine is euvolemic with Na 124 mmol/L, serum osmolality 258 mOsm/kg, urine osmolality 420 mOsm/kg, urine Na 48 mEq/L, normal TSH and cortisol. Which finding would further support SIADH?
+    options:
+      - Serum uric acid 2.8 mg/dL
+      - Serum uric acid 8 mg/dL
+      - Na rises after IV normal saline
+      - Urine osmolality 60 mOsm/kg
+      - Urine Na 8 mEq/L
+    answer: 0
+    why:
+      - "Correct: serum uric acid below 4 mg/dL supports SIADH (p130)."
+      - A high uric acid points away from SIADH.
+      - In SIADH, Na typically worsens with normal saline.
+      - Maximally dilute urine (below 100) excludes SIADH.
+      - Urine Na below 20 suggests extrarenal loss or avid Na retention, not SIADH.
+    src: { page: 130, quote: "Worsening of hyponatremia with IV normal saline solution" }
+    status: unverified
+  # ---------- p131-132: treatment, hypertonic saline ----------
+  - id: neph.L06.032
+    kind: table
+    topic: hypo-treat
+    title: Treating hyponatremia by symptoms and duration (book figure)
+    columns: [Group, Plan]
+    rows:
+      - [Symptomatic acute (under 48 h), "Emergency correction: 3% hypertonic saline 1–2 mL/kg/h plus furosemide"]
+      - [Symptomatic chronic (over 48 h or unknown), "Some immediate correction: 3% saline 1–2 mL/kg/h if seizures, otherwise isotonic saline; furosemide 20 mg IV; switch to water restriction after a 10% rise in Na or when symptoms resolve"]
+      - [Asymptomatic chronic, No immediate correction needed]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 131, quote: "Emergency correction needed" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L06.033
+    kind: cloze
+    topic: hypo-treat
+    text: "In chronic symptomatic hyponatremia, do not raise serum Na by more than {{c1::12}} mmol/L in 24 hours; the goal is {{c2::8}} mmol/L in 24 hours."
+    src: { page: 131, quote: "Do not correct serum [Na+] >12 mmol/24 hours" }
+    status: unverified
+    tags: [numbers, high-yield]
+    update:
+      text: "The 2014 European guideline (ESE/ESICM/ERBP) limits the rise to 10 mmol/L in the first 24 h and 8 mmol/L in each later 24 h."
+      ref: "European clinical practice guideline on hyponatraemia 2014"
+  - id: neph.L06.034
+    kind: enumerate
+    topic: hypo-treat
+    prompt: Mention the long-term management of chronic hyponatremia.
+    points:
+      - Identify and treat reversible causes
+      - Water restriction
+      - Demeclocycline 300–600 mg twice daily (2 weeks for full effect)
+      - Urea 15–60 g daily
+      - V2 receptor antagonist
+    pass: 4
+    src: { page: 131, quote: "Urea 15-60 g daily" }
+    status: unverified
+  - id: neph.L06.035
+    kind: card
+    topic: hypo-treat
+    front: How does hypertonic saline reduce brain edema?
+    back: It raises blood osmolarity, pulling fluid from the extravascular into the intravascular space. This lowers brain edema, improves cerebral blood flow and reduces CSF production.
+    src: { page: 131, quote: "which leads to decreases in brain edema, improved cerebral blood flow, and decreased CSF production" }
+    status: unverified
+  - id: neph.L06.036
+    kind: card
+    topic: hypo-treat
+    front: Which hypertonic saline strengths are FDA-approved, and for what?
+    back: 3% and 5%, for hyponatremia and raised intracranial pressure.
+    src: { page: 131, quote: "Both 3% and 5% hypertonic saline (HS) is currently FDA-approved for use in hyponatremia and increased intracranial pressure (ICP)." }
+    status: unverified
+  - id: neph.L06.037
+    kind: enumerate
+    topic: hypo-treat
+    prompt: Compare hypertonic saline with mannitol for raised ICP.
+    points:
+      - 3% saline lowers ICP about as well as 20% mannitol, with similar hemodynamic effects
+      - Saline raises serum Na and is less diuretic (the Na rise releases ADH)
+      - Saline needs less volume to reach similar plasma volumes than larger volumes of normal saline
+      - Saline stimulates pituitary vasopressin release, cutting renal water loss
+    pass: 3
+    src: { page: 131, quote: "Research shows that 3% hypertonic saline decreases ICP similarly to 20% mannitol." }
+    status: unverified
+  - id: neph.L06.038
+    kind: cloze
+    topic: hypo-treat
+    text: "In severe hyponatremia, correct Na by {{c1::4–6}} mEq/L per day, using {{c2::100}} mL boluses of 3% saline every {{c3::10}} minutes, up to three boluses."
+    src: { page: 132, quote: "correction by 4 to 6 mEq/L per day, which can be achieved with 100 mL boluses of 3% HS at 10-minute intervals" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L06.039
+    kind: cloze
+    topic: hypo-treat
+    text: "Each {{c1::1 mL/kg/h}} of 3% saline can be expected to raise [Na+] by about {{c2::1 mEq/L/h}}."
+    src: { page: 132, quote: "Each 1 ml/kg/h of 3% saline solution administered can be expected to increase [na+] by 1 meq/l/h." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L06.040
+    kind: card
+    topic: hypo-treat
+    front: Which venous route is preferred for hypertonic saline?
+    back: Central venous access. A peripheral cannula is acceptable if no other access is available.
+    src: { page: 132, quote: "Administration via a peripheral intravenous catheter is acceptable if no other access is available, but central venous access is the preferred route." }
+    status: unverified
+  - id: neph.L06.041
+    kind: enumerate
+    topic: hypo-treat
+    prompt: Mention the side effects of hypertonic saline.
+    points:
+      - Hyperchloremic metabolic acidosis (added NaCl)
+      - Hypernatremia with long-term use
+      - Osmotic demyelination if severe hyponatremia is corrected too fast
+      - "Route problems (commonest): IV site infection, thrombophlebitis, extravasation"
+      - Hypervolemia
+    pass: 4
+    src: { page: 132, quote: "One possible side effect is hyperchloremic metabolic acidosis due to the addition of nacl." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L06.042
+    kind: card
+    topic: hypo-treat
+    front: What are the most common adverse effects of hypertonic saline?
+    back: Those related to the route of administration, such as IV site infection, thrombophlebitis and extravasation (also hypervolemia).
+    src: { page: 132, quote: "The most common adverse effects are related to the route of administration and include infection at the iv site." }
+    status: unverified
+  - id: neph.L06.043
+    kind: card
+    topic: hypo-treat
+    front: In which patients is caution needed with hypertonic saline, and why?
+    back: Congestive heart failure or renal insufficiency, because they already carry increased fluid and sodium loads.
+    src: { page: 132, quote: "Caution is necessary with hypertonic saline in patients with congestive heart failure or renal insufficiency" }
+    status: unverified
+  # ---------- p132: ODS ----------
+  - id: neph.L06.044
+    kind: card
+    topic: ods
+    front: Why does a brain cell shrink when chronic hyponatremia is corrected too fast?
+    back: It has lost its organic osmolytes to resist swelling; if the surrounding tonicity rises faster than it can reaccumulate effective osmoles, it dehydrates and shrinks.
+    src: { page: 132, quote: "it may dehydrate and shrink if its surrounding tonicity increases faster than it can reaccumulate effective osmoles" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L06.045
+    kind: enumerate
+    topic: ods
+    prompt: Mention the sequelae of osmotic demyelination syndrome.
+    points:
+      - Dysphagia
+      - Dysarthria
+      - Spasticity
+      - Behavioral disturbance and cognitive impairment
+      - Delirium and seizures
+      - Quadriparesis
+      - Coma and locked-in syndrome
+    pass: 5
+    src: { page: 132, quote: "Sequelae of ODS are often irreversible and include dysphagia, dysarthria, spasticity, behavioral disturbance, cognitive impairment, delirium" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L06.046
+    kind: mcq
+    topic: ods
+    stem: An elderly woman on a thiazide is admitted drowsy with Na 108 mmol/L of unknown duration. She gets repeated 3% saline and her Na is 126 mmol/L 24 hours later. Three days later she develops dysarthria, dysphagia and quadriparesis. What happened?
+    options:
+      - Osmotic demyelination from over-rapid correction
+      - Recurrent hyponatremic encephalopathy
+      - Hypernatremia from hypertonic saline
+      - Hyperchloremic metabolic acidosis
+      - Stroke from hypertonic saline thrombophlebitis
+    answer: 0
+    why:
+      - "Correct: an 18 mmol/L rise in 24 h is far above the 12 mmol/L limit; ODS follows over-rapid correction (p132)."
+      - Her Na is now near normal, so the brain is not swelling from hypotonicity.
+      - Na 126 is still low, not high.
+      - Acidosis does not cause this delayed pontine picture.
+      - Thrombophlebitis is a local IV-site problem.
+    src: { page: 132, quote: "Osmotic demyelin- ation syndrome (ODS) can occur if correction of hypo-natremia is achieved too rapidly." }
+    status: unverified
+  # ---------- p133-134: hypernatremia ----------
+  - id: neph.L06.047
+    kind: card
+    topic: hyperna
+    front: What usually causes hypernatremia (Na above 146 mmol/L), and what is its prognosis?
+    back: A water deficit. It is associated with severe underlying disease and significant mortality.
+    src: { page: 133, quote: "Serum Na >146mmol/L is usually due to a water deficit and is associated with severe underlying disease and significant mortality." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L06.048
+    kind: card
+    topic: hyperna
+    front: How does hypernatremia damage the brain?
+    back: High ECF osmolality drags water out of cells. Brain cells shrink, and the loss of volume creates vascular shear stress that causes bleeding and thrombosis.
+    src: { page: 133, quote: "loss of volume creates vascular shear stress, resulting in bleeding and thrombosis" }
+    status: unverified
+  - id: neph.L06.049
+    kind: table
+    topic: hyperna
+    title: Causes of hypernatremia (Table 2)
+    columns: [Cause, Proximate cause, Key findings]
+    rows:
+      - [Inadequate water intake, Lack of access to water, "Altered sensorium, immobility, intubation, chronic care residence; urine osm above 600"]
+      - [Extrarenal hypotonic fluid loss, GI losses or perspiration, "Diarrhea, fever, gastric suction, enteric fistula; urine osm above 600"]
+      - [Renal concentrating defect, Diuretics, "Loop diuretic use; isosthenuric urine"]
+      - [Renal concentrating defect, Osmotic diuresis, "Hyperglycemia with glucosuria, urea diuresis; isosthenuric urine"]
+      - [Renal concentrating defect, Central diabetes insipidus, "Brain trauma, surgery, tumor, infiltration or infection; dilute urine; low copeptin; urine osm rises with desmopressin"]
+      - [Renal concentrating defect, Nephrogenic diabetes insipidus, "Lithium, demeclocycline, hypercalcemia, hypokalemia, tubulointerstitial disease; urine osm below 300; high copeptin; no response to desmopressin"]
+      - [Excessive salt intake, Hypertonic fluid administration, "Hypertonic bicarbonate or saline, formula dilution errors, TPN or concentrated tube feeds; urine osm above 600, urine Na above 100"]
+    blanks: [[0, 1], [1, 1], [4, 2], [5, 2], [6, 1]]
+    src: { page: 133, quote: "Table 2. Causes of Hypernatremia" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L06.050
+    kind: mcq
+    topic: hyperna
+    stem: A man on lithium for years has polyuria and Na 151 mmol/L. Urine osmolality is 180 mOsm/kg and does not rise after desmopressin. Copeptin is high. Diagnosis?
+    options:
+      - Nephrogenic diabetes insipidus
+      - Central diabetes insipidus
+      - Osmotic diuresis
+      - Inadequate water intake
+      - Hypertonic fluid administration
+    answer: 0
+    why:
+      - "Correct: lithium, dilute urine, high copeptin and no response to desmopressin mean nephrogenic DI (Table 2, p133)."
+      - Central DI has low copeptin and urine osmolality rises with desmopressin.
+      - Osmotic diuresis gives isosthenuric urine with glucosuria or urea load.
+      - Lack of water gives concentrated urine (above 600).
+      - Salt loading gives concentrated urine with urine Na above 100.
+    src: { page: 133, quote: "Nephrogenic diabetes insipidus" }
+    status: unverified
+  - id: neph.L06.051
+    kind: card
+    topic: hyperna
+    front: When do the CNS symptoms of hypernatremia appear?
+    back: When serum Na rises rapidly or exceeds 160 mEq/L. Most patients first show fluid loss and dehydration.
+    src: { page: 133, quote: "are seen when serum sodium rises rapidly or is greater than 160 meq/L" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L06.052
+    kind: enumerate
+    topic: hyperna
+    prompt: Mention the clinical features of hypernatremia.
+    points:
+      - Symptoms of fluid loss and signs of dehydration
+      - "Infants and children: irritability and agitation, then lethargy, somnolence, coma; high-pitched cry"
+      - Increased thirst in alert patients
+      - Polyuria and polydipsia in diabetes insipidus
+      - Orthostatic hypotension and tachycardia in hypovolemic hypernatremia
+      - Increased tone, brisk reflexes and myoclonus
+    pass: 4
+    src: { page: 134, quote: "The patient may have increased tone with brisk reflexes and myoclonus." }
+    status: unverified
+  # ---------- p134-135: hypernatremia treatment ----------
+  - id: neph.L06.053
+    kind: table
+    topic: hyperna-treat
+    title: Treating hypernatremia by volume status (book figure)
+    columns: [Volume status, First step, Then]
+    rows:
+      - [Hypovolemia, "Correct the volume deficit: isotonic saline until hypovolemia improves; treat the cause of losses", "Correct the water deficit with 0.45% saline, 5% dextrose or oral water"]
+      - [Euvolemia, "Correct the water deficit: 0.45% saline, 5% dextrose or oral water; aqueous vasopressin 5 U SC every 6 h in central DI with severe losses", "Long-term: central DI therapy; nephrogenic DI: stop offending drugs, low Na diet, thiazides, amiloride for lithium, correct K and Ca"]
+      - [Hypervolemia, "Remove Na: stop offending agents, furosemide", Hemodialysis if renal failure]
+    blanks: [[0, 1], [1, 1], [2, 1], [2, 2]]
+    src: { page: 134, quote: "Volume of replacement fluid needed to correct the water deficit is determined by using the concentration of sodium in the replacement fluid." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L06.054
+    kind: card
+    topic: hyperna-treat
+    front: In hypovolemic hypernatremia, what do you give first?
+    back: Isotonic saline until the hypovolemia improves (and treat the cause of losses), then correct the water deficit.
+    src: { page: 134, quote: "Administer isotonic saline until hypovolemia improves" }
+    status: unverified
+  - id: neph.L06.055
+    kind: card
+    topic: hyperna-treat
+    front: What determines the volume of fluid needed to replace a water deficit, and over how long is it given?
+    back: The sodium concentration of the replacement fluid (compared with 154 mEq/L in normal saline). Replace it slowly over 48–72 hours.
+    src: { page: 134, quote: "This volume has to be replaced slowly over 48-72 hours." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L06.056
+    kind: cloze
+    topic: hyperna-treat
+    text: "Acute hypernatremia (under {{c1::24}} hours) can be reversed quickly, at {{c2::1}} mmol/L/h, measuring Na every {{c3::2}} hours at first, then every 4 hours."
+    src: { page: 134, quote: "If increase Na is acute (<24 hours), can be reversed quickly." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L06.057
+    kind: cloze
+    topic: hyperna-treat
+    text: "Chronic hypernatremia: correct no faster than {{c1::0.5}} mmol/L/h and about {{c2::10}} mmol/L/day; replace {{c3::50%}} of the water deficit in the first 12–24 hours."
+    src: { page: 135, quote: "Correct at no greater than 0.5mmol/L/h or no less than 10mmol/L/day." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L06.058
+    kind: card
+    topic: hyperna-treat
+    front: Why must chronic hypernatremia be corrected slowly?
+    back: To prevent rehydration injury to the brain.
+    src: { page: 135, quote: "If chronic (>24 hours), correct more slowly to prevent rehydration injury to the brain" }
+    status: unverified
+  - id: neph.L06.059
+    kind: order
+    topic: hyperna-treat
+    prompt: Order the correction of chronic hypernatremia.
+    steps:
+      - Document neurological status
+      - Correct 50% of the water deficit in the first 12–24 hours
+      - Correct the remaining deficit over the next 24–48 hours
+    src: { page: 135, quote: "Correct 50% of the water deficit in first 12-24 hours." }
+    status: unverified
+  - id: neph.L06.060
+    kind: card
+    topic: hyperna-treat
+    front: Which fluids correct a water deficit, by route?
+    back: Water by mouth if oriented, or by NG tube. If the gut cannot be used, IV 5% glucose or 0.45% (half-normal) saline; insulin may be needed for hyperglycemia with 5% glucose.
+    src: { page: 135, quote: "5% glucose or 0.45% (half-normal) saline IVI if cannot use the gut." }
+    status: unverified
+  - id: neph.L06.061
+    kind: case
+    topic: hyperna-treat
+    stem: An 84-year-old nursing-home resident with dementia is brought in drowsy after a week of fever and poor intake. BP 92/58 lying, pulse 112. Na 162 mmol/L, urine osmolality 720 mOsm/kg.
+    steps:
+      - question: What is the main mechanism?
+        options: [Water deficit from inadequate intake plus insensible losses, Central diabetes insipidus, Nephrogenic diabetes insipidus, Excess salt intake]
+        answer: 0
+        why: "Lack of access to water with fever and concentrated urine (above 600) fits inadequate intake (Table 2, p133); DI gives dilute urine."
+      - reveal: She is clearly hypovolemic.
+        question: What do you give first?
+        options: [Isotonic saline until hypovolemia improves, 5% dextrose at a fast rate, Furosemide, Desmopressin]
+        answer: 0
+        why: "Hypovolemic hypernatremia: correct the volume deficit with isotonic saline first, then the water deficit (p134)."
+      - reveal: The Na has been high for days.
+        question: How fast may Na fall?
+        options: [No more than 0.5 mmol/L/h (about 10 mmol/L/day), 1 mmol/L/h, 2 mmol/L/h, As fast as possible to protect the brain]
+        answer: 0
+        why: "Chronic (over 24 h) hypernatremia is corrected slowly to prevent rehydration injury to the brain (p135)."
+      - question: How much of the water deficit in the first 12–24 h?
+        options: ["50%", "100%", "25%", "75%"]
+        answer: 0
+        why: "Half in the first 12–24 h, the rest over the next 24–48 h (p135)."
+    src: { page: 135, quote: "Correct at no greater than 0.5mmol/L/h or no less than 10mmol/L/day." }
+    status: unverified
+  # ---------- p135-136: potassium physiology ----------
+  - id: neph.L06.062
+    kind: card
+    topic: k-physiology
+    front: What pumps absorbed potassium into cells, and in what ratio?
+    back: Insulin and beta-adrenergic catecholamines stimulate membrane Na/K-ATPase, which pumps 3 Na out for 2 K in.
+    src: { page: 135, quote: "Insulin and B adrenergic catecholamines stimulate membrane Na /K ATPase to pump K into cells (in a 3:2 ratio)." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L06.063
+    kind: card
+    topic: k-physiology
+    front: Why do plasma K disorders show up in excitable tissues?
+    back: Almost all exchangeable K (98%) is intracellular. The gradient sets the resting cell voltage (interior negative), so changing plasma K changes excitability.
+    src: { page: 135, quote: "98% of exchangeable K+ is in the intracellular compartment. This difference determines cellular voltage at rest" }
+    status: unverified
+  - id: neph.L06.064
+    kind: cloze
+    topic: k-physiology
+    text: "Filtered K is reabsorbed {{c1::75%}} in the PCT and {{c2::15%}} in the loop of Henle; final control is by {{c3::aldosterone}} in the DCT and collecting duct."
+    src: { page: 135, quote: "reabsorbed by the PCT (75%), the loop of Henle (15%), and cells of the collecting duct and is tightly controlled by aldosterone" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L06.065
+    kind: card
+    topic: k-physiology
+    front: What is the daily filtered K load and the usual urinary K excretion (book figure)?
+    back: Filtered load about 600–700 mEq/day; urinary excretion about 90 mEq/day.
+    src: { page: 136, quote: "FILTERED LOAD 600-700 mEq/day" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L06.066
+    kind: card
+    topic: k-physiology
+    front: Describe the circadian rhythm of renal K excretion.
+    back: Lower at night and in the early morning, rising in the afternoon, partly matching when K-containing food is eaten.
+    src: { page: 136, quote: "characterized by lower excretion at night and in the early morning hours and then increasing in the afternoon" }
+    status: unverified
+  - id: neph.L06.067
+    kind: enumerate
+    topic: k-physiology
+    prompt: Mention what the circadian rhythm of renal K secretion coincides with.
+    points:
+      - Timing of K-containing meals
+      - A circadian rhythm in transcripts of kidney K-secretion proteins
+      - Circadian glucocorticoid secretion with the sleep/wake cycle and aldosterone changes
+    pass: 2
+    src: { page: 136, quote: "This excretory pattern coincides with a circadian rhythm in the transcripts coding for kidney proteins related to K+ secretion." }
+    status: unverified
+  # ---------- p137: pseudohyperkalemia ----------
+  - id: neph.L06.068
+    kind: card
+    topic: hyperk
+    front: Define pseudohyperkalemia.
+    back: A laboratory artifact with marked elevation of serum K (above 0.5 mEq/L) without clinical evidence of electrolyte imbalance.
+    src: { page: 137, quote: "Pseudohyperkalemia is a laboratory artifact in which there is marked elevation in serum K+ concentration (>0.5 mEq/L)" }
+    status: unverified
+  - id: neph.L06.069
+    kind: enumerate
+    topic: hyperk
+    prompt: Mention causes of pseudohyperkalemia.
+    points:
+      - Tourniquet application
+      - Fist clenching
+      - Small-bore needles
+      - Mechanical trauma in pneumatic tube transport
+      - Thrombocytosis (platelets above 500,000/µL)
+      - Marked leukocytosis (WBC 70,000/µL)
+    pass: 4
+    src: { page: 137, quote: "application of tourniquets, fist clenching, use of small bore needles, and mechanical trauma during pneumatic tube transport" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L06.070
+    kind: cloze
+    topic: hyperk
+    text: "Pathologic pseudohyperkalemia: thrombocytosis with platelets above {{c1::500,000}}/µL and marked leukocytosis with WBC around {{c2::70,000}}/µL."
+    src: { page: 137, quote: "Thrombocytosis (platelets > 500,000/μL) and marked leukocytosis (white blood cells, 70,000/µL) are pathologic causes" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L06.071
+    kind: card
+    topic: hyperk
+    front: What is reverse pseudohyperkalemia, and where is it seen?
+    back: A falsely high plasma K while serum K is normal. It occurs mostly in hematologic malignancy, from heparin-induced cell membrane damage.
+    src: { page: 137, quote: "This condition most commonly occurs in the setting of hematologic malignancy and is due to heparin-induced cell membrane damage." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L06.072
+    kind: enumerate
+    topic: hyperk
+    prompt: Mention the two theories that explain reverse pseudohyperkalemia.
+    points:
+      - Dysplastic leukemia and lymphoma cells are fragile and lyse easily
+      - Severe leukocytosis consumes metabolic fuel, impairing Na/K-ATPase so K leaks out of the many white cells
+    pass: 2
+    src: { page: 137, quote: "the dysplastic white blood cells of leukemia and lymphoma exhibit increased fragility that makes these cells prone to lysis" }
+    status: unverified
+  - id: neph.L06.073
+    kind: mcq
+    topic: hyperk
+    stem: A man with CLL (WBC 190,000/µL) has plasma K 7.1 mmol/L on a heparinized sample, while a clotted serum sample the same hour shows K 4.3 mmol/L. His ECG is normal. What explains it?
+    options:
+      - Reverse pseudohyperkalemia
+      - Pseudohyperkalemia from thrombocytosis
+      - True hyperkalemia from tumor lysis
+      - Hyperkalemia from acute kidney injury
+      - Hemolysis from a small-bore needle
+    answer: 0
+    why:
+      - "Correct: plasma K high with normal serum K in a hematologic malignancy, from heparin-induced membrane damage (p137)."
+      - Classic pseudohyperkalemia raises serum K (cells release K during clotting); here serum K is normal.
+      - Tumor lysis would raise both samples and could change the ECG.
+      - AKI would raise both samples.
+      - Needle hemolysis would raise both samples, not only the heparinized one.
+    src: { page: 137, quote: "Refers to a false elevation in plasma K+ concentration when serum K+ concentration is normal." }
+    status: unverified
+  # ---------- p138: causes of hyperkalemia ----------
+  - id: neph.L06.074
+    kind: table
+    topic: hyperk
+    title: Causes of hyperkalemia
+    columns: [Group, Causes]
+    rows:
+      - [Release from cells, "Metabolic acidosis, tissue catabolism, insulin deficiency/hyperglycemia/hyperosmolality, rhabdomyolysis, strenuous exercise, tumor lysis, hyperkalemic periodic paralysis, red cell transfusion"]
+      - [Drugs, "ACEI/ARB combinations, K-sparing diuretics, NSAIDs, heparin and LMWH, cyclosporin, high-dose trimethoprim, digoxin toxicity, beta-blockers"]
+      - [Reduced urinary excretion, "Low aldosterone, reduced distal Na and water delivery, ureterojejunostomy, acute and chronic kidney disease, Gordon syndrome"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 138, quote: "Causes of Hyperkalaemia Increased potassium release from cells" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L06.075
+    kind: card
+    topic: hyperk
+    front: How do heparin and LMW heparins cause hyperkalemia?
+    back: They inhibit aldosterone release.
+    src: { page: 138, quote: "Heparin and LMW heparins (inhibit aldosterone release)." }
+    status: unverified
+  - id: neph.L06.076
+    kind: card
+    topic: hyperk
+    front: Does digoxin cause hyperkalemia?
+    back: Only in toxicity; therapeutic digoxin levels do not.
+    src: { page: 138, quote: "Digoxin toxicity (but not therapeutic levels of digoxin)." }
+    status: unverified
+  - id: neph.L06.077
+    kind: mcq
+    topic: hyperk
+    stem: Which of these drugs is listed by the book as a cause of hyperkalemia?
+    options:
+      - High-dose trimethoprim
+      - Salbutamol (albuterol)
+      - Amphotericin B
+      - Thiazide diuretics
+      - Theophylline
+    answer: 0
+    why:
+      - "Correct: high-dose trimethoprim raises K (p138)."
+      - Beta-2 agonists shift K into cells and cause hypokalemia.
+      - Amphotericin B causes renal K loss (hypokalemia).
+      - Thiazides cause renal K loss.
+      - Theophylline intoxication causes hypokalemia.
+    src: { page: 138, quote: "High-dose trimethoprim." }
+    status: unverified
+  # ---------- p139: hyperkalemia treatment ----------
+  - id: neph.L06.078
+    kind: order
+    topic: hyperk-treat
+    prompt: Order emergent treatment of hyperkalemia (ECG changes or rapid rise).
+    steps:
+      - Stabilize the myocardial cell membrane (calcium gluconate)
+      - Shift K into cells (insulin with dextrose, nebulized albuterol)
+      - Remove K from the body (dialysis, diuretics or bicarbonate by setting)
+      - Consider K-binding drugs
+    src: { page: 139, quote: "Stabilize myocardial cell membrane" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L06.079
+    kind: table
+    topic: hyperk-treat
+    title: Emergent hyperkalemia drugs and doses (book figure)
+    columns: [Drug, Dose, Purpose]
+    rows:
+      - [Calcium gluconate, 10 mL of 10% IV, Stabilize myocardial membrane]
+      - [Regular insulin, 10 U IV with 1 amp (50 mL) D50, Shift K into cells]
+      - [Albuterol, 20 mg in 4 mL nebulized, Shift K into cells]
+    blanks: [[0, 1], [1, 1], [2, 1], [0, 2]]
+    src: { page: 139, quote: "Calcium gluconate (10 mL of 10% IV)" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L06.080
+    kind: table
+    topic: hyperk-treat
+    title: Removing K from the body by setting (book figure)
+    columns: [Setting, Treatment]
+    rows:
+      - [Oliguria or ESKD, Hemodialysis]
+      - [Hypervolemic (nonoliguric), Diuretics]
+      - [Metabolic acidosis, Sodium bicarbonate]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 139, quote: "Oliguria or ESKD Hemodialysis" }
+    status: unverified
+  - id: neph.L06.081
+    kind: order
+    topic: hyperk-treat
+    prompt: Order the steps for nonemergent hyperkalemia.
+    steps:
+      - Exclude pseudohyperkalemia
+      - Dietary K counseling, avoid salt substitutes
+      - Stop drugs that impair kidney K secretion; ask about OTC NSAIDs and herbs
+      - Effective diuretics (loop if eGFR below 30)
+      - Oral NaHCO3 for metabolic acidosis
+      - Consider K-binding drugs
+    src: { page: 139, quote: "Exclude pseudo-hyperkalemia" }
+    status: unverified
+  - id: neph.L06.082
+    kind: table
+    topic: hyperk-treat
+    title: Potassium binders (book figure)
+    columns: [Binder, Mechanism, Onset, Site, Adverse effects]
+    rows:
+      - [Sodium polystyrene sulfonate, "Na-K exchange resin (often with sorbitol); nonselectively binds K, Ca, Mg", Hours to days, Colon, "Diarrhea, metabolic alkalosis, hypernatremia, volume overload, rarely colonic necrosis; separate other oral drugs by 3 h"]
+      - [Patiromer, "Exchanges Ca for K; also binds Mg", 7 h, Colon, "Constipation, diarrhea, flatulence, hypomagnesemia; separate other oral drugs by 3 h"]
+      - [Sodium zirconium cyclosilicate, Binds K in exchange for H and Na, 1 h, Entire intestinal tract, "Constipation, diarrhea, edema; raises gastric pH (drugs with pH-dependent solubility)"]
+    blanks: [[0, 1], [1, 1], [2, 1], [1, 2], [2, 2], [2, 3]]
+    src: { page: 139, quote: "Sodium zirconium cyclosilicate" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L06.083
+    kind: mcq
+    topic: hyperk-treat
+    stem: A patient with heart failure on spironolactone has K 6.0 mmol/L and a normal ECG. You want a binder with the fastest onset that works along the whole intestine. Which one?
+    options:
+      - Sodium zirconium cyclosilicate
+      - Patiromer
+      - Sodium polystyrene sulfonate
+      - Calcium gluconate
+      - Nebulized albuterol
+    answer: 0
+    why:
+      - "Correct: SZC acts in about 1 h along the entire intestinal tract (p139)."
+      - Patiromer takes about 7 h and binds in the colon.
+      - SPS takes hours to days and binds in the colon.
+      - Calcium protects the heart but removes no K.
+      - Albuterol shifts K into cells; it is not a binder.
+    src: { page: 139, quote: "Binds K+ in exchange for H+ and Na+" }
+    status: unverified
+  - id: neph.L06.084
+    kind: case
+    topic: hyperk-treat
+    stem: A 70-year-old diabetic with CKD on lisinopril plus losartan and daily ibuprofen comes in weak. K 7.2 mmol/L; ECG shows peaked T waves and wide QRS. He is oliguric.
+    steps:
+      - question: First drug?
+        options: [Calcium gluconate 10 mL of 10% IV, Sodium polystyrene sulfonate, Furosemide, Patiromer]
+        answer: 0
+        why: "ECG changes: stabilize the myocardial membrane first with calcium gluconate (p139)."
+      - question: Next, to shift K into cells?
+        options: [10 U regular insulin IV with 50 mL D50, Sodium bicarbonate only, Oral K binder, Stop losartan only]
+        answer: 0
+        why: "Insulin with dextrose (and nebulized albuterol 20 mg) redistributes K into cells (p139)."
+      - question: How do you remove K from his body?
+        options: [Hemodialysis, Diuretics, Oral NaHCO3, Wait for the kidney]
+        answer: 0
+        why: "In oliguria or ESKD the book removes K by hemodialysis (p139)."
+      - question: Which drugs on his list raise K?
+        options: [ACEI plus ARB and the NSAID, Only lisinopril, Only ibuprofen, None of them]
+        answer: 0
+        why: "ACEI/ARB combinations and NSAIDs are listed causes (p138)."
+    src: { page: 139, quote: "Calcium gluconate (10 mL of 10% IV)" }
+    status: unverified
+  # ---------- p139-141: hypokalemia ----------
+  - id: neph.L06.085
+    kind: table
+    topic: hypok
+    title: Causes of hypokalemia
+    columns: [Group, Causes]
+    rows:
+      - [GI losses, "Chronic diarrhea (laxative abuse, bowel diversion), villous adenoma of the colon"]
+      - [Intracellular shift, "TPN or enteral feeding (insulin release), insulin, beta-2 agonists, thyrotoxicosis, familial periodic paralysis"]
+      - [Renal losses, "Cushing's, primary hyperaldosteronism, renin-secreting tumors, glucocorticoid-remediable CAH, Bartter, Gitelman, Liddle, RTA, Fanconi, hypomagnesemia"]
+      - [Drugs, "Thiazides, loop and osmotic diuretics, laxatives, amphotericin B, carbenicillin, high-dose penicillin, theophylline"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 140, quote: "Primary hyperaldosteronism." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L06.086
+    kind: card
+    topic: hypok
+    front: Which colonic tumor causes hypokalemia, and how?
+    back: Villous adenoma of the colon, by massive potassium secretion.
+    src: { page: 139, quote: "Villous adenoma of the colon, which causes massive potassium secretion." }
+    status: unverified
+  - id: neph.L06.087
+    kind: card
+    topic: hypok
+    front: How does thyrotoxicosis cause hypokalemia?
+    back: Occasionally, by excessive beta-sympathetic stimulation shifting K into cells (hypokalemic thyrotoxic periodic paralysis).
+    src: { page: 139, quote: "Thyrotoxicosis (occasionally) due to excessive beta-sympathetic stimulation (hypokalemic thyrotoxic periodic paralysis)." }
+    status: unverified
+  - id: neph.L06.088
+    kind: card
+    topic: hypok
+    front: Why can starting TPN or enteral feeding drop the potassium?
+    back: Feeding stimulates insulin release, which shifts K into cells.
+    src: { page: 139, quote: "During total parenteral nutrition or enteral hyperalimentation (stimulating insulin release)." }
+    status: unverified
+  - id: neph.L06.089
+    kind: mcq
+    topic: hypok
+    stem: A young man with asthma used his salbutamol inhaler very often during an attack. K is 2.9 mmol/L with no losses. Which mechanism?
+    options:
+      - Intracellular shift by beta-2 stimulation of Na/K-ATPase
+      - Renal loss from hyperaldosteronism
+      - GI loss
+      - Hypomagnesemia-driven renal loss
+      - Pseudohypokalemia
+    answer: 0
+    why:
+      - "Correct: beta-2 agonists (albuterol, terbutaline) shift K into cells (p139, p135)."
+      - Nothing suggests aldosterone excess.
+      - He has no diarrhea or vomiting.
+      - Magnesium is not mentioned and the cause is clear.
+      - This is a real shift, not an artifact.
+    src: { page: 139, quote: "Stimulation of the sympathetic nervous system. particularly with beta 2- agonists (albuterol, terbutaline)." }
+    status: unverified
+  - id: neph.L06.090
+    kind: enumerate
+    topic: hypok
+    prompt: Mention drugs that cause hypokalemia.
+    points:
+      - Thiazides
+      - Loop diuretics
+      - Osmotic diuretics
+      - Laxatives
+      - Amphotericin B
+      - Antipseudomonal penicillins (carbenicillin) and high-dose penicillin
+      - Theophylline (acute and chronic intoxication)
+    pass: 5
+    src: { page: 140, quote: "Antipseudomonal penicillins (carbenicillin)." }
+    status: unverified
+  - id: neph.L06.091
+    kind: card
+    topic: hypok
+    front: What are the commonest complaints in hypokalemia, and how can the muscle weakness show?
+    back: Weakness and fatigue. Weakness can show as dyspnea, constipation or abdominal distension, and exercise intolerance; rarely frank paralysis.
+    src: { page: 140, quote: "Weakness and fatigue are the most common complaints." }
+    status: unverified
+  - id: neph.L06.092
+    kind: card
+    topic: hypok
+    front: Why does hypokalemia cause polyuria and polydipsia?
+    back: It reduces the kidney's concentrating ability.
+    src: { page: 141, quote: "Hypokalemia can present with polyuria and polydipsia due to decreased concentrating ability of the kidney." }
+    status: unverified
+  - id: neph.L06.093
+    kind: card
+    topic: hypok
+    front: What is kaliopenic nephropathy?
+    back: Chronic tubulointerstitial nephritis from chronic hypokalemia, with small kidney cysts, tubular atrophy, interstitial macrophage infiltration and interstitial fibrosis.
+    src: { page: 141, quote: "Chronic hypokalemia can cause a chronic tubulointerstitial nephritis, referred to as kaliopenic nephropathy" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L06.094
+    kind: cloze
+    topic: hypok
+    text: "Hypokalemia causes glucose intolerance: glucose rises about {{c1::10}} mg/dL for every {{c2::1}} mEq/L fall in plasma K, because K partly regulates {{c3::insulin}} release."
+    src: { page: 141, quote: "there is an average 10-mg/dL increase in glucose concentration for every 1-mEq/L decrease in plasma K+ concentration" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L06.095
+    kind: enumerate
+    topic: hypok
+    prompt: Mention the clinical features of hypokalemia.
+    points:
+      - Weakness and fatigue (commonest)
+      - Dyspnea, constipation or distension, exercise intolerance; rarely paralysis
+      - Cramps, pain and rhabdomyolysis when severe
+      - Polyuria and polydipsia
+      - Psychosis, delirium, hallucinations, depression
+      - Kaliopenic nephropathy
+      - Glucose intolerance
+    pass: 5
+    src: { page: 141, quote: "With severe hypokalemia muscle cramps and pain can occur with rhabdomyolysis." }
+    status: unverified
+  - id: neph.L06.096
+    kind: card
+    topic: hypok
+    front: In an acidemic hypokalemic patient, which do you give first, K or bicarbonate? Why?
+    back: K first. Correcting the acidosis shifts K into cells and drops the extracellular K further.
+    src: { page: 141, quote: "K+ should be given before HCO3 therapy because correction of metabolic acidosis will cause an intracellular shift of K+" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L06.097
+    kind: cloze
+    topic: hypok
+    text: "IV K replacement: 0.9% saline 1 L with {{c1::20–40}} mmol KCl, at no more than {{c2::10–20}} mmol KCl/h through a peripheral cannula; avoid {{c3::glucose-containing}} solutions or bicarbonate."
+    src: { page: 141, quote: "IV 0.9% saline 1L with 20-40mmol KCl at no more than 10-20mmol KCl/h through peripheral cannula." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L06.098
+    kind: mcq
+    topic: hypok
+    stem: You are replacing IV potassium for K 2.8 mmol/L through a peripheral cannula. Which carrier fluid does the book choose?
+    options:
+      - 0.9% saline
+      - 5% dextrose
+      - 8.4% sodium bicarbonate
+      - 10% dextrose with insulin
+      - 3% saline
+    answer: 0
+    why:
+      - "Correct: 0.9% saline 1 L with 20–40 mmol KCl (p141)."
+      - Glucose releases insulin and shifts K into cells; the book says avoid it.
+      - Bicarbonate also shifts K into cells; avoid it.
+      - Glucose plus insulin drives K into cells, the opposite of the aim.
+      - Hypertonic saline is not a carrier for K.
+    src: { page: 141, quote: "(Avoid glucose-containing solutions or sodium bicarbonate)." }
+    status: unverified
+  - id: neph.L06.099
+    kind: case
+    topic: hypok
+    stem: A 25-year-old woman has weakness, constipation and polyuria. She admits taking laxatives for months. K 2.4 mmol/L, pH 7.28, HCO3 14 mmol/L.
+    steps:
+      - question: Which cause group does laxative abuse belong to?
+        options: [GI tract losses, Intracellular shift, Renal losses, Pseudohypokalemia]
+        answer: 0
+        why: "Chronic diarrhea including laxative abuse is a GI loss (p139)."
+      - question: Why is she polyuric?
+        options: [Hypokalemia reduces renal concentrating ability, Hyperglycemia, Central DI, Osmotic diuresis from laxatives]
+        answer: 0
+        why: "Hypokalemia causes polyuria and polydipsia by impairing urine concentration (p141)."
+      - question: She is acidemic. What do you give first?
+        options: [Potassium, Sodium bicarbonate, Both together from the start, Insulin]
+        answer: 0
+        why: "K before HCO3: correcting acidosis shifts K into cells and worsens the hypokalemia (p141)."
+      - question: How do you give IV K?
+        options: ["0.9% saline 1 L with 20–40 mmol KCl, max 10–20 mmol/h peripherally", "5% dextrose with 40 mmol KCl over 1 h", "KCl IV push", "Bicarbonate with KCl"]
+        answer: 0
+        why: "Book regimen on p141; avoid glucose and bicarbonate."
+    src: { page: 141, quote: "In acidemic patients. K+ should be given before HCO3 therapy" }
+    status: unverified
+  # ---------- p142-144: magnesium ----------
+  - id: neph.L06.100
+    kind: cloze
+    topic: mg
+    text: "Normal magnesium is {{c1::1.5–2.3}} mg/dL; {{c2::60%}} is stored in bone and {{c3::1%}} is extracellular."
+    src: { page: 142, quote: "Normal range: 1.5-2.3 mg/dl. 60% stored in bone. 1% in extracellular space." }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L06.101
+    kind: card
+    topic: mg
+    front: What is the primary regulator of magnesium balance?
+    back: Renal excretion.
+    src: { page: 142, quote: "Renal excretion is primary regulation." }
+    status: unverified
+  - id: neph.L06.102
+    kind: table
+    topic: mg
+    title: Causes of hypomagnesemia
+    columns: [Route, Causes]
+    rows:
+      - [Renal, "Loop or thiazide diuretics, prolonged natriuresis, recovery from obstruction or ATN, nephrotoxins (aminoglycosides, cisplatin, ciclosporin, amphotericin, foscarnet), hypercalciuria, phosphate depletion, Gitelman, Bartter, familial hypomagnesemia-hypercalciuria"]
+      - [Gut, "Diarrhea, prolonged NG suction, intestinal surgery, malabsorption, pancreatitis, alcohol abuse"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 142, quote: "Nephrotoxins (aminoglycosides cisplatin, ciclosporin, amphotericin, foscarnet)." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L06.103
+    kind: card
+    topic: mg
+    front: Which other abnormalities usually travel with low magnesium?
+    back: Low K (in 50% of cases), low Ca and metabolic alkalosis.
+    src: { page: 142, quote: "Low Mg occurs in conjunction with low K (50% of cases), low Ca and a metabolic alkalosis." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L06.104
+    kind: enumerate
+    topic: mg
+    prompt: Mention the clinical features of hypomagnesemia.
+    points:
+      - Weakness and cramps
+      - Carpopedal spasm, positive Chvostek and Trousseau signs, tetany
+      - Convulsions
+      - Delirium, movement disorders, vertigo, nystagmus
+      - Supraventricular or ventricular arrhythmias
+    pass: 4
+    src: { page: 142, quote: "Weakness, cramps, carpopedal spasm, positive Chvostek's and Trousseau's signs, tetany, and convulsions may occur." }
+    status: unverified
+  - id: neph.L06.105
+    kind: mcq
+    topic: mg
+    stem: A woman on cisplatin has carpopedal spasm and a positive Trousseau sign. Calcium and potassium are low and do not correct with replacement alone. What should you check and replace?
+    options:
+      - Magnesium
+      - Phosphate
+      - Bicarbonate
+      - Sodium
+      - Vitamin B12
+    answer: 0
+    why:
+      - "Correct: cisplatin is a renal Mg-wasting nephrotoxin, and low Mg travels with low K and low Ca (p142)."
+      - Phosphate does not explain refractory low K and Ca here.
+      - Bicarbonate does not cause tetany with refractory hypokalemia.
+      - Sodium is not linked to tetany.
+      - B12 deficiency gives neuropathy, not tetany.
+    src: { page: 142, quote: "Nephrotoxins (aminoglycosides cisplatin, ciclosporin, amphotericin, foscarnet)." }
+    status: unverified
+  - id: neph.L06.106
+    kind: cloze
+    topic: mg
+    text: "Asymptomatic modest hypomagnesemia (above {{c1::0.4}} mmol/L): oral slow-release Mg {{c2::6–18}} mmol/day in four divided doses."
+    src: { page: 143, quote: "Modest low (>0.4mmol/L): oral slow-release Mg 6-18mmol/day in four divided doses." }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L06.107
+    kind: cloze
+    topic: mg
+    text: "Symptomatic hypomagnesemia (or with low Ca or K): {{c1::10}} mmol MgSO4 IV over 5 min, then {{c2::20}} mmol MgSO4 in 100 mL 0.9% saline over {{c3::4}} hours."
+    src: { page: 143, quote: "10mmol MgSO 4 IVI bolus over 5min, then 20mmol MgSO 4 in 100mL 0.9% saline IV over 4 hours." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L06.108
+    kind: card
+    topic: mg
+    front: When do you switch from IV to oral magnesium, and what limits oral Mg?
+    back: Once Mg is above 0.5 mmol/L. Diarrhea may limit oral Mg.
+    src: { page: 143, quote: "Oral supplementation once Mg >0.5mmol/L Diarrhoea may limit use of oral Mg." }
+    status: unverified
+  - id: neph.L06.109
+    kind: card
+    topic: mg
+    front: Why is hypermagnesemia unusual, and when does it occur?
+    back: Urine Mg losses compensate for rising plasma Mg. It occurs with excess IV Mg (as in pre-eclampsia) or exogenous Mg in impaired renal function.
+    src: { page: 143, quote: "Occurs usually if excess Mg administered IV (as in treating pre-eclampsia) or in patients with impaired renal function given exogenous Mg." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L06.110
+    kind: card
+    topic: mg
+    front: Name Mg-containing preparations that can cause hypermagnesemia.
+    back: Antacids (Mg hydroxide or carbonate) and MgSO4 enemas.
+    src: { page: 143, quote: "Mg containing preparations include: antacids (Mg hydroxide or carbonate)." }
+    status: unverified
+  - id: neph.L06.111
+    kind: card
+    topic: mg
+    front: How does high magnesium depress neuromuscular function?
+    back: It raises resistance to acetylcholine-induced depolarization at the neuromuscular junction (and depresses the CNS).
+    src: { page: 143, quote: "increasing resistance to acetylcholine-induced depolarization at the neuromuscular junction" }
+    status: unverified
+  - id: neph.L06.112
+    kind: order
+    topic: mg
+    prompt: Order the progression of hypermagnesemia features.
+    steps:
+      - Paresthesia and hyporeflexia
+      - Weakness
+      - Swallowing difficulty
+      - Respiratory depression
+      - Bradycardia and low BP (above 3.5 mmol/L)
+    src: { page: 143, quote: "Paraesthesiae and hyporeflexia progress to weakness. swallowing difficulty, and respiratory depression." }
+    status: unverified
+  - id: neph.L06.113
+    kind: cloze
+    topic: mg
+    text: "Hypermagnesemia: bradycardia and low BP with severe toxicity (above {{c1::3.5}} mmol/L); give IV calcium gluconate if respiratory depression, arrhythmia or Mg above {{c2::5}} mmol/L."
+    src: { page: 144, quote: "If respiratory depression, cardiac arrhythmias or Mg >5 mmol/L, give IV calcium gluconate 10% 10mL as slow IVI bolus." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L06.114
+    kind: enumerate
+    topic: mg
+    prompt: Mention the treatment of hypermagnesemia.
+    points:
+      - "Stable, good urine output, normal kidneys: stop the Mg preparation and monitor"
+      - "Respiratory depression, arrhythmia or Mg above 5: calcium gluconate 10% 10 mL slow IV, repeat as needed"
+      - Forced diuresis with IV furosemide 40–80 mg, replacing urine output
+      - Hemodialysis in impaired renal function
+    pass: 3
+    src: { page: 144, quote: "Consider forced Mg diuresis with IV furosemide 40 -80mg. Replacing UO." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L06.115
+    kind: case
+    topic: mg
+    stem: A woman with severe pre-eclampsia and rising creatinine is on IV MgSO4. She becomes drowsy with absent knee jerks and slow breathing. Mg 5.4 mmol/L, pulse 48.
+    steps:
+      - question: Why did Mg rise?
+        options: [Excess IV Mg with impaired renal excretion, Antacid use, Hypothyroidism, Lab artifact]
+        answer: 0
+        why: "Excess IV Mg (pre-eclampsia) in impaired renal function is the usual setting (p143)."
+      - question: First drug?
+        options: [IV calcium gluconate 10% 10 mL slow bolus, IV furosemide 40 mg alone, Oral Mg binder, Normal saline only]
+        answer: 0
+        why: "Respiratory depression or Mg above 5: calcium gluconate (p144). Stop the infusion too."
+      - question: Her kidneys are failing. Fastest way to normalize Mg?
+        options: [Hemodialysis, Forced diuresis, Wait for renal excretion, Calcium only]
+        answer: 0
+        why: "In impaired renal function, hemodialysis normalizes Mg rapidly and effectively (p144)."
+    src: { page: 144, quote: "In patients with impaired renal function, haemodialysis provides rapid and effective normalization of Mg." }
+    status: unverified
+  - id: neph.L06.116
+    kind: mcq
+    topic: hypo-treat
+    stem: A 40-year-old has a seizure 12 hours after a marathon with heavy water drinking. Na 118 mmol/L. Which plan matches the book?
+    options:
+      - Emergency correction with 3% saline (100 mL boluses or 1–2 mL/kg/h) with furosemide
+      - Fluid restriction only
+      - Demeclocycline
+      - No immediate correction
+      - Isotonic saline at 150 mL/h
+    answer: 0
+    why:
+      - "Correct: acute (under 48 h) symptomatic hyponatremia needs emergency correction with hypertonic saline (p131, p132)."
+      - Restriction alone is too slow for a seizing patient.
+      - Demeclocycline is long-term therapy and takes 2 weeks.
+      - Only asymptomatic chronic cases need no immediate correction.
+      - Isotonic saline is too weak for acute symptomatic hyponatremia.
+    src: { page: 132, quote: "correction by 4 to 6 mEq/L per day, which can be achieved with 100 mL boluses of 3% HS at 10-minute intervals" }
+    status: unverified
+  - id: neph.L06.117
+    kind: case
+    topic: siadh
+    stem: A 66-year-old heavy smoker has 2 months of cough and weight loss, now mild confusion. He is euvolemic. Na 121 mmol/L, serum osmolality 252, urine osmolality 480, urine Na 55 mEq/L. TSH and cortisol are normal; no diuretics.
+    steps:
+      - question: Which diagnosis fits the Bartter and Schwartz criteria?
+        options: [SIADH, Hypovolemic hyponatremia, Pseudohyponatremia, Translocational hyponatremia]
+        answer: 0
+        why: "Hypotonic, euvolemic, urine osm above 100, urine Na above 30, other causes excluded (p130)."
+      - question: Commonest malignant cause to look for?
+        options: [Small cell lung carcinoma, Colon cancer, Renal cell carcinoma, Hepatocellular carcinoma]
+        answer: 0
+        why: "Small cell carcinoma of the lung is the commonest malignant cause (p130)."
+      - reveal: He is mildly symptomatic and the duration is unknown.
+        question: Maximum Na rise in 24 h?
+        options: [12 mmol/L (goal 8), 20 mmol/L, 4 mmol/L only, No limit]
+        answer: 0
+        why: "Chronic or unknown duration: do not exceed 12 mmol/L in 24 h; goal 8 (p131)."
+      - question: A long-term option the book lists?
+        options: [Urea 15–60 g daily, Hypertonic saline at home, Furosemide alone, Thiazide]
+        answer: 0
+        why: "Long-term: treat the cause, water restriction, demeclocycline, urea 15–60 g/day or a V2 antagonist (p131)."
+    src: { page: 130, quote: "Most commonly small cell carcinoma of the lung followed by head and neck cancer" }
+    status: unverified

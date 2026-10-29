@@ -1,6 +1,6 @@
 # Batna in Anki
 
-Batna's content is exported as **one Anki file, `batna.apkg`**. It holds a `Batna` deck with one subdeck per lecture (`Batna::L01 Liver Cirrhosis`, …), so you study it while the app is still being built, and you import only one file however many lectures exist.
+Batna's content is exported as **one Anki file, `batna.apkg`**. It holds a `Batna` deck, one level per course and one subdeck per lecture under it, named by its number in the course and its real title (`Batna::Hepatology::01 Liver Cirrhosis`, `Batna::Basics of Research::03 Research question, objectives and hypotheses`, …), so you study it while the app is still being built, and you import only one file however many lectures exist.
 
 ## From inside the app
 Settings › Your data › **صدّر لـ Anki**. The app builds `batna.apkg` from the lectures it carries and your ✓/✎/✗ (✗ items left out, ✎ items with your text) plus your own cards (`Batna::My own cards`), saves it (phone and tablet: `Download/Batna/`; Mac: `~/Downloads/`) and opens it in AnkiDroid or Anki, which shows its import screen. The app carries merged lectures only, so until every lecture is merged the file in the project folder has more cards; both use the same ids, so importing either one updates the same cards.
@@ -11,6 +11,9 @@ Settings › Your data › **صدّر لـ Anki**. The app builds `batna.apkg` f
 
 ## When new content lands
 Import the newer `batna.apkg` the same way. Every note has a fixed id that comes from the item id (`hb.L01.003`), so Anki **updates the existing cards in place**, adds the new ones, and keeps your reviews and due dates. Nothing is duplicated.
+
+### Decks moved under their course (2026-10-29)
+Hepatology's lectures used to sit straight under `Batna` (`Batna::L01 Liver Cirrhosis`). Anki keeps a card it already has in the deck it is in, so after this import the old cards stay in the old decks and only new cards land under `Batna::Hepatology`. To keep one tree, before importing rename each old deck to its new name in Anki (deck list › ⚙ › Rename, e.g. `Batna::L01 Liver Cirrhosis` → `Batna::Hepatology::01 Liver Cirrhosis`); reviews and due dates stay. Skipping this loses nothing, the cards just live in two places.
 
 ## What the cards look like
 | Item kind | In Anki |

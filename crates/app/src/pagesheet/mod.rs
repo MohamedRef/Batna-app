@@ -9,7 +9,7 @@
 use batna_core::review::StudyStore;
 use dioxus::prelude::*;
 
-use crate::content::{Library, lecture_code};
+use crate::content::Library;
 use crate::i18n::book as tx;
 use crate::i18n::count::{CASE, ITEM, QUESTION, count};
 use crate::look::{Css, css};
@@ -18,10 +18,21 @@ use crate::{Screen, Ui};
 
 const CSS: Css = css!("src/pagesheet/pagesheet.css");
 
-/// The open page, the slide lecture it belongs to (`None`: a book page),
-/// the quote its chip carried, and whether a quote is held back until he
-/// answers (it would give the answer away).
-type Open = (u32, Option<String>, Option<String>, bool);
+/// The open page, where its number counts ([`Scope`]), the quote its chip
+/// carried, and whether a quote is held back until he answers (it would give
+/// the answer away).
+type Open = (u32, Scope, Option<String>, bool);
+
+/// Where a cited page number counts. Each course's book numbers its own
+/// pages (Gastroenterology starts again at 1), and a course that cites
+/// slides numbers them per lecture.
+#[derive(Clone, Debug, PartialEq)]
+pub enum Scope {
+    /// A page of this course's book (`hb`).
+    Book(String),
+    /// A slide of this lecture (`res.L02`).
+    Slides(String),
+}
 static OPEN: GlobalSignal<Option<Open>> = Signal::global(|| None);
 
 /// Opens the sheet for page `page` cited by `of` (an item, lesson step or
@@ -29,13 +40,19 @@ static OPEN: GlobalSignal<Option<Open>> = Signal::global(|| None);
 /// numbers them per lecture, so the sheet stays in `of`'s lecture.
 pub fn open(page: u32, of: &str, quote: Option<String>, held: bool) {
     document::eval("window.__batnaHover && window.__batnaHover.hide();");
-    *OPEN.write() =
-        Some((page, slide_lecture(Library::get(), of), quote.filter(|q| !q.trim().is_empty()), held));
+    *OPEN.write() = Some((page, scope(Library::get(), of), quote.filter(|q| !q.trim().is_empty()), held));
 }
 
-/// The lecture whose slide `of` cites, or `None` for a book page.
-pub fn slide_lecture(lib: &Library, of: &str) -> Option<String> {
-    lib.program.slides(of).then(|| batna_core::program::lecture_of(of).to_string())
+/// Where `of`'s page numbers count; empty `of` is the hepatology book.
+pub fn scope(lib: &Library, of: &str) -> Scope {
+    use batna_core::program::{course_of, lecture_of};
+    if of.is_empty() {
+        Scope::Book("hb".into())
+    } else if lib.program.slides(of) {
+        Scope::Slides(lecture_of(of).to_string())
+    } else {
+        Scope::Book(course_of(of).to_string())
+    }
 }
 
 pub fn close() {
@@ -59,17 +76,11 @@ pub struct PageContent {
 }
 
 /// Collects the page's items from the library, leaving out hidden ones.
-/// `slides`: the slide lecture (see [`slide_lecture`]); `None` looks in the
-/// book's lectures.
-pub fn page_content(
-    lib: &Library,
-    page: u32,
-    slides: Option<&str>,
-    hidden: impl Fn(&str) -> bool,
-) -> PageContent {
-    let in_scope = |id: &str| match slides {
-        Some(l) => id == l,
-        None => !lib.program.slides(id),
+/// `scope` keeps it to one course's book or one lecture's slides.
+pub fn page_content(lib: &Library, page: u32, scope: &Scope, hidden: impl Fn(&str) -> bool) -> PageContent {
+    let in_scope = |id: &str| match scope {
+        Scope::Slides(l) => id == l,
+        Scope::Book(c) => batna_core::program::course_of(id) == c && !lib.program.slides(id),
     };
     let lecture = lib
         .index
@@ -100,15 +111,15 @@ pub fn page_content(
 pub fn BookSheet() -> Element {
     let ui = use_context::<Ui>();
     let review = use_review();
-    let Some((page, slides, chip_quote, held)) = OPEN.read().clone() else {
+    let Some((page, scope, chip_quote, held)) = OPEN.read().clone() else {
         return rsx! {};
     };
     let lib = Library::get();
     let content = {
         let b = review.backend.borrow();
-        page_content(lib, page, slides.as_deref(), |id| b.is_hidden(id))
+        page_content(lib, page, &scope, |id| b.is_hidden(id))
     };
-    let title = if slides.is_some() { tx::SLIDE_TITLE } else { tx::TITLE };
+    let title = if matches!(scope, Scope::Slides(_)) { tx::SLIDE_TITLE } else { tx::TITLE };
     // Only the chip's own quote: another item's line from the same page
     // reads as the source of this one and points at the wrong fact
     // (Mohamed, 2026-10-29).
@@ -130,9 +141,7 @@ pub fn BookSheet() -> Element {
                         h2 { id: "bk-title", "{title} " bdi { "{page}" } }
                         if let Some(e) = entry {
                             p { class: "muted small",
-                                bdi { "{lecture_code(&e.id)}" }
-                                " · "
-                                bdi { dir: "ltr", lang: "en", "{e.title}" }
+                                bdi { {lib.crumb(&e.id)} }
                             }
                         } else {
                             p { class: "muted small", {tx::NO_LECTURE} }
@@ -208,9 +217,22 @@ pub fn BookSheet() -> Element {
 mod tests {
     use super::*;
 
+    fn hb() -> Scope {
+        Scope::Book("hb".into())
+    }
+
+    #[test]
+    fn a_book_page_stays_in_its_own_course() {
+        // Another course's book starts again at page 1.
+        let lib = Library::get();
+        assert_eq!(scope(lib, "git.L01.004"), Scope::Book("git".into()));
+        let other = page_content(lib, 1, &Scope::Book("git".into()), |_| false);
+        assert!(other.playable.iter().all(|id| id.starts_with("git.")), "{other:?}");
+    }
+
     #[test]
     fn page_one_is_in_l01_and_has_items() {
-        let c = page_content(Library::get(), 1, None, |_| false);
+        let c = page_content(Library::get(), 1, &hb(), |_| false);
         assert_eq!(c.lecture.as_deref(), Some("hb.L01"));
         assert!(!c.playable.is_empty());
         assert!(c.playable.iter().all(|id| id.starts_with("hb.L01.")));
@@ -218,21 +240,22 @@ mod tests {
 
     #[test]
     fn hidden_items_are_left_out() {
-        let all = page_content(Library::get(), 1, None, |_| false);
+        let all = page_content(Library::get(), 1, &hb(), |_| false);
         let first = all.playable[0].clone();
-        let some = page_content(Library::get(), 1, None, |id| id == first);
+        let some = page_content(Library::get(), 1, &hb(), |id| id == first);
         assert_eq!(some.playable.len(), all.playable.len() - 1);
     }
 
     #[test]
     fn a_slide_stays_in_its_own_lecture() {
         let lib = Library::get();
-        assert_eq!(slide_lecture(lib, "res.L02.019").as_deref(), Some("res.L02"));
-        assert_eq!(slide_lecture(lib, "hb.L02.019"), None);
-        let c = page_content(lib, 1, Some("res.L02"), |_| false);
+        assert_eq!(scope(lib, "res.L02.019"), Scope::Slides("res.L02".into()));
+        assert_eq!(scope(lib, "hb.L02.019"), hb());
+        assert_eq!(scope(lib, ""), hb());
+        let c = page_content(lib, 1, &scope(lib, "res.L02.019"), |_| false);
         assert_eq!(c.lecture.as_deref(), Some("res.L02"));
         assert!(c.playable.iter().all(|id| id.starts_with("res.L02.")));
         // A book page never lands in a slide lecture.
-        assert_eq!(page_content(lib, 30, None, |_| false).lecture.as_deref(), Some("hb.L02"));
+        assert_eq!(page_content(lib, 30, &hb(), |_| false).lecture.as_deref(), Some("hb.L02"));
     }
 }

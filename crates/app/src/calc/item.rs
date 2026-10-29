@@ -66,6 +66,7 @@ pub fn CalcItem(item_id: String, on_back: EventHandler) -> Element {
     let state = computed();
 
     rsx! {
+        style { {super::CSS.text()} }
         article { class: "player calc-item",
             ItemMeta { lecture: lecture.to_owned(), item_id: item.id.clone(), on_back }
             section { class: "card",

@@ -46,6 +46,11 @@ pub mod count {
     pub const CASE: Noun =
         Noun { one: "حالة واحدة", two: "حالتين", few: "حالات", many: "حالة" };
 
+    pub const FIELD: Noun =
+        Noun { one: "خانة واحدة", two: "خانتين", few: "خانات", many: "خانة" };
+    pub const LESSON: Noun =
+        Noun { one: "درس واحد", two: "درسين", few: "دروس", many: "درس" };
+
     /// Any integer type; a negative number counts as 0.
     pub fn count<N: TryInto<u64>>(n: N, noun: &Noun) -> String {
         let n: u64 = n.try_into().unwrap_or(0);
@@ -693,6 +698,13 @@ pub mod case {
 }
 
 pub mod calc {
+    pub const TITLE: &str = "الحاسبات";
+    pub const SUBTITLE: &str = "مدخلات واضحة، ونتيجة ليها معنى ومصدر.";
+    pub const INTRO: &str = "اكتب القيم بوحداتها. لو قيمة مش مظبوطة هتتعلّم في مكانها.";
+    /// "فاضل 3 خانات"
+    pub fn left(n: usize) -> String {
+        format!("فاضل {}", super::count::count(n, &super::count::FIELD))
+    }
     pub const PICK: &str = "اختار حاسبة";
     pub const FILL: &str = "املا البيانات وهتطلع النتيجة هنا.";
     pub const MISSING: &str = "ناقص";
@@ -861,6 +873,10 @@ pub mod own {
     pub const E_BACK_LONG: &str = "الضهر طويل، قسّمه على كذا كارت (3000 حرف بالكتير).";
     pub const E_SOURCE_LONG: &str = "«منين» طويلة، خليها اسم قصير (200 حرف بالكتير).";
     pub const FROM: &str = "من";
+    pub const FRONT_HINT: &str = "سؤال واحد يختبر فكرة واحدة…";
+    pub const BACK_HINT: &str = "الإجابة الأساسية، وبعدها شرح قصير لو محتاج…";
+    pub const PREVIEW: &str = "عاين الكارت";
+    pub const PREVIEW_NOTE: &str = "كده هيظهر في المذاكرة: السؤال الأول، والإجابة لما تكشفها.";
 }
 
 pub mod data {
@@ -1441,6 +1457,22 @@ pub mod learn {
     }
 }
 
+pub mod refs {
+    pub const TITLE: &str = "مراجعك";
+    pub const SUBTITLE: &str = "المحاضرات وصفحات الكتاب وكروتك، في مكان واحد.";
+    pub const ADD_CARD: &str = "كارت جديد";
+    pub const SEARCH: &str = "دوّر في المحاضرات";
+    pub const SEARCH_HINT: &str = "دوّر على محاضرة أو موضوع…";
+    pub const LECTURES: &str = "المحاضرات";
+    pub const NO_MATCH: &str = "مفيش محاضرة أو موضوع بالاسم ده. جرّب كلمة إنجليزي من العنوان.";
+    pub const CHECKED: &str = "راجعت صحته";
+    pub const CHECKED_HINT: &str = "اللي علّمت عليه ✓ صح وإنت بتذاكر، من كل اللي في المحاضرة.";
+    pub const WRITING: &str = "لسه بتتكتب";
+    pub const STATUS: &str = "حالة المادة";
+    pub const STATUS_BODY: &str = "إنك تخلّص درس أو تجاوب صح مش معناه إن المحتوى اتراجع. صحة المحتوى بتتحسب بس من ✓ اللي إنت بتديها للكارت وإنت بتذاكر، والباقي فاضل unverified لحد ما تراجعه.";
+    pub const CHECKED_ALL: &str = "راجعت صحته في كل المحاضرات:";
+}
+
 pub mod lecture {
     pub const BACK: &str = "رجوع";
     pub const KICKER: &str = "المحاضرة";
@@ -1458,4 +1490,6 @@ pub mod lecture {
     pub const CASES: &str = "حالة";
     pub const TOPICS: &str = "المواضيع";
     pub const TOPICS_HINT: &str = "اضغط على موضوع تذاكره لوحده.";
+    pub const CHECKED: &str = "صحة المحتوى: راجعت";
+    pub const CHECKED_NOTE: &str = "منفصلة عن إنك خلّصت الدروس.";
 }

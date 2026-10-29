@@ -10,6 +10,9 @@ use batna_core::calc::{self, Area, CalcError, CalcSpec, CalcValue, FieldKind, In
 use dioxus::prelude::*;
 
 use crate::i18n::calc as tx;
+use crate::look::{Css, css};
+
+pub const CSS: Css = css!("src/calc/calc.css");
 
 fn area_label(area: Area) -> &'static str {
     match area {
@@ -30,8 +33,13 @@ pub fn Calculators() -> Element {
     let mut open = use_signal(|| None::<&'static str>);
     let current = open();
     rsx! {
+        style { {CSS.text()} }
         div { class: "calcs", "data-open": if current.is_some() { "yes" } else { "no" },
             nav { class: "calc-list", aria_label: tx::PICK,
+                div { class: "calc-head",
+                    h1 { {tx::TITLE} }
+                    p { class: "muted small", {tx::SUBTITLE} }
+                }
                 for area in AREAS {
                     section { key: "{area:?}", class: "calc-group",
                         h2 { class: "small muted", {area_label(area)} }
@@ -92,10 +100,19 @@ pub fn CalcForm(id: &'static str, initial: Inputs) -> Element {
         values.read().iter().filter(|(_, v)| !is_blank(v)).map(|(k, v)| (k.clone(), v.clone())).collect(),
     );
     let result = (spec.compute)(&inputs);
+    // The field the engine rejected, marked in place (a missing one is not
+    // an error yet: the waiting card counts what is left).
+    let bad = match &result {
+        Err(CalcError::Invalid { field, .. }) => Some(*field),
+        _ => None,
+    };
+    let left = missing(spec, &inputs);
     rsx! {
+        style { {CSS.text()} }
         div { class: "calc-form",
             section { class: "card calc-fields",
                 h1 { bdi { {spec.name} } }
+                p { class: "muted small calc-intro", {tx::INTRO} }
                 for field in spec.fields {
                     div { key: "{field.key}", class: "calc-field",
                         // Name, unit and "optional" as separate pieces, so
@@ -109,7 +126,10 @@ pub fn CalcForm(id: &'static str, initial: Inputs) -> Element {
                                 span { class: "chip small", {tx::OPTIONAL} }
                             }
                         }
-                        {field_input(field, values)}
+                        {field_input(field, values, bad == Some(field.key))}
+                        if bad == Some(field.key) {
+                            p { id: "e-{field.key}", class: "calc-field-error", role: "alert", {tx::INVALID} }
+                        }
                         match tx::hint(spec.id, field.key) {
                             Some(h) => rsx! { p { class: "muted small calc-hint", {h} } },
                             None if !field.hint.is_empty() => rsx! { bdi { class: "muted small", {field.hint} } },
@@ -117,15 +137,21 @@ pub fn CalcForm(id: &'static str, initial: Inputs) -> Element {
                         }
                     }
                 }
-                button { class: "btn-link", onclick: move |_| values.set(BTreeMap::new()), {tx::RESET} }
+                div { class: "calc-foot",
+                    button { class: "btn-link", onclick: move |_| values.set(BTreeMap::new()), {tx::RESET} }
+                }
             }
             match result {
                 Ok(o) => rsx! { OutcomeCard { id, outcome: o } },
                 Err(e) => {
                     let (what, label) = error_text(spec, &e);
                     rsx! {
-                        section { class: "card calc-wait",
-                            p { class: "muted", {tx::FILL} }
+                        section { class: "card calc-wait", "aria-live": "polite",
+                            p { class: "small muted", {tx::RESULT} }
+                            p { {tx::FILL} }
+                            if left > 0 {
+                                p { class: "small calc-left", {tx::left(left)} }
+                            }
                             p { class: "small", "{what}: " bdi { "{label}" } }
                         }
                     }
@@ -139,8 +165,21 @@ fn is_blank(v: &CalcValue) -> bool {
     matches!(v, CalcValue::Text(s) if s.trim().is_empty())
 }
 
-fn field_input(field: &'static calc::Field, mut values: Signal<BTreeMap<String, CalcValue>>) -> Element {
+/// How many required fields are still empty.
+fn missing(spec: &CalcSpec, inputs: &Inputs) -> usize {
+    spec.fields
+        .iter()
+        .filter(|f| !f.optional && !matches!(f.kind, FieldKind::Flag) && !inputs.0.contains_key(f.key))
+        .count()
+}
+
+fn field_input(
+    field: &'static calc::Field,
+    mut values: Signal<BTreeMap<String, CalcValue>>,
+    invalid: bool,
+) -> Element {
     let key = field.key;
+    let invalid = if invalid { "true" } else { "false" };
     let current = values.read().get(key).cloned();
     match field.kind {
         FieldKind::Number { min, max, step, .. } => rsx! {
@@ -152,6 +191,8 @@ fn field_input(field: &'static calc::Field, mut values: Signal<BTreeMap<String, 
                 min: "{min}",
                 max: "{max}",
                 step: "{step}",
+                "aria-invalid": invalid,
+                "aria-describedby": "e-{key}",
                 value: field_text(current.as_ref()),
                 oninput: move |e: FormEvent| {
                     values.write().insert(key.to_owned(), CalcValue::Text(e.value()));
@@ -183,6 +224,8 @@ fn field_input(field: &'static calc::Field, mut values: Signal<BTreeMap<String, 
                 select {
                     id: "f-{key}",
                     dir: "ltr",
+                    "aria-invalid": invalid,
+                    "aria-describedby": "e-{key}",
                     onchange: move |e: FormEvent| {
                         values.write().insert(key.to_owned(), CalcValue::Text(e.value()));
                     },
@@ -241,9 +284,12 @@ pub fn OutcomeCard(id: &'static str, outcome: Outcome) -> Element {
             for note in outcome.notes.iter() {
                 bdi { key: "{note}", class: "small calc-note", "{note}" }
             }
-            p { class: "small muted",
-                {tx::SOURCE} ": " bdi { "{source}" }
-                if let Some(page) = outcome.page { " · " {crate::i18n::cite::page(page)} }
+            // The book page opens its sheet, like every "ص N" chip.
+            p { class: "small muted calc-source",
+                span { {tx::SOURCE} ": " bdi { "{source}" } }
+                if let Some(page) = outcome.page {
+                    crate::hover::BookPage { page, quote: None }
+                }
             }
         }
     }
@@ -252,6 +298,18 @@ pub fn OutcomeCard(id: &'static str, outcome: Outcome) -> Element {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn missing_counts_required_fields_only() {
+        let spec = calc::spec("child_pugh").unwrap();
+        let required =
+            spec.fields.iter().filter(|f| !f.optional && !matches!(f.kind, FieldKind::Flag)).count();
+        assert_eq!(missing(spec, &Inputs::new()), required);
+        let first = spec.fields.iter().find(|f| !f.optional).unwrap();
+        let mut one = Inputs::new();
+        one.0.insert(first.key.to_owned(), CalcValue::Number(1.0));
+        assert_eq!(missing(spec, &one), required - 1);
+    }
 
     // Issue #110: hints show in Arabic; core keeps the English ones.
     #[test]

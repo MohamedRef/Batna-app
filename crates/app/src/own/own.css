@@ -54,3 +54,24 @@
     box-shadow: 0 12px 40px rgb(0 0 0 / 0.25);
   }
 }
+
+/* Field-level problems, counters and the preview (redesign 2026-10-29). */
+.own-label { display: flex; align-items: baseline; justify-content: space-between; gap: var(--sp-2); }
+.own-count { font-weight: 400; font-size: var(--fs-sm); color: var(--muted); font-variant-numeric: tabular-nums; }
+.own-field :is(textarea, input, select) { border-radius: var(--radius); }
+.own-field :is(textarea, input, select):focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+.own-field :is(textarea, input)[aria-invalid="true"] { border-color: var(--bad); background: var(--bad-soft); }
+.own-field > .own-error { font-weight: 600; }
+.own-preview { border: 1px solid var(--line-soft, var(--line)); border-radius: var(--radius); background: var(--surface); }
+.own-preview > summary { cursor: pointer; font-weight: 600; min-block-size: var(--tap); display: flex; align-items: center;
+  padding-inline: var(--sp-3); }
+.own-preview[open] > summary { border-block-end: 1px solid var(--line-soft, var(--line)); }
+.own-preview > p { margin: 0; padding: 0 var(--sp-3) var(--sp-3); }
+.own-preview-card { display: flex; flex-direction: column; gap: var(--sp-2); padding: var(--sp-3); }
+.own-preview-card hr { inline-size: 100%; border: 0; border-block-start: 1px dashed var(--line); margin: 0; }
+.own-preview-front { font-family: var(--font-latin); font-weight: 600; font-size: var(--fs-lg); overflow-wrap: anywhere; white-space: pre-wrap; }
+.own-preview-back { font-family: var(--font-latin); overflow-wrap: anywhere; white-space: pre-wrap; }
+/* The sheet's actions stay reachable above the keyboard and the safe area. */
+.own-sheet > .own-actions { position: sticky; inset-block-end: calc(-1 * var(--sp-4)); background: var(--bg);
+  padding-block: var(--sp-2); margin-block-end: calc(-1 * var(--sp-2)); }
+.own-sheet > .own-actions > .btn { flex: 1 1 8rem; }

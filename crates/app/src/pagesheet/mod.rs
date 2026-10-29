@@ -158,7 +158,7 @@ pub fn BookSheet() -> Element {
                                     minutes: crate::onboarding::session_minutes(),
                                 });
                                 close();
-                                crate::lecture::close();
+                                crate::lecture::close_all();
                                 crate::learn::forget();
                                 let mut screen = ui.screen;
                                 screen.set(Screen::Study);

@@ -1,0 +1,25 @@
+/* References (lecture/refs.rs): head, search, the grouped lecture list. */
+.refs-head { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--sp-3); }
+.refs-head h1 { margin: 0; font-size: var(--fs-xl); font-weight: 600; }
+.refs-head p { margin: 0; }
+.refs-add { flex: none; inline-size: var(--tap-lg); block-size: var(--tap-lg); border-radius: 50%;
+  font-size: var(--fs-lg); background: var(--accent-soft); color: var(--accent); }
+.refs-search { display: flex; align-items: center; gap: var(--sp-2); padding-inline: var(--sp-3);
+  min-block-size: var(--tap-lg); background: var(--surface); border: 1px solid var(--line-soft, var(--line));
+  border-radius: var(--radius-lg, var(--radius)); }
+.refs-search:focus-within { border-color: var(--accent); outline: 2px solid var(--accent); outline-offset: 1px; }
+.refs-search-icon { display: inline-flex; color: var(--muted); }
+.refs-search-icon svg { inline-size: 1.25rem; block-size: 1.25rem; }
+.refs-search input { flex: 1; min-inline-size: 0; font: inherit; color: var(--text); background: none; border: 0;
+  outline: none; min-block-size: var(--tap); }
+.refs-row .num { flex: none; inline-size: 2.5rem; block-size: 2.5rem; display: grid; place-items: center;
+  border-radius: var(--radius); background: var(--accent-soft); color: var(--accent);
+  font-weight: 700; font-size: var(--fs-sm); font-variant-numeric: tabular-nums; }
+.refs-row .chip { flex: none; }
+.refs-status p { margin: 0; }
+.refs-status p + p { margin-block-start: var(--sp-1); font-weight: 600; }
+@media (max-width: 599.98px) {
+  /* Narrow rows: the check chip drops under the title instead of squeezing it. */
+  button.tap.refs-row { flex-wrap: wrap; }
+  .refs-row .tap-row-main { flex: 1 1 10rem; }
+}

@@ -1,0 +1,116 @@
+/* Calculators (calc/mod.rs) and the `calc` study item (calc/item.rs).
+   Colours from tokens only; logical properties only. */
+
+/* ---------- the screen: list and open calculator ---------- */
+.calcs { display: grid; gap: var(--sp-4); align-items: start; }
+.calcs > * { min-inline-size: 0; }
+.calc-head { display: flex; flex-direction: column; gap: 2px; margin-block-end: var(--sp-3); }
+.calc-head h1 { margin: 0; font-size: var(--fs-xl, 1.375rem); font-weight: 600; }
+.calc-head p { margin: 0; }
+.calc-group { display: flex; flex-direction: column; gap: var(--sp-1); margin-block-end: var(--sp-3); }
+.calc-group h2 { margin: 0; font-weight: 600; }
+.calc-chips { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+.calc-chip {
+  font: inherit;
+  font-family: var(--font-latin);
+  color: var(--text);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: var(--radius-pill);
+  padding: var(--sp-1) var(--sp-3);
+  min-block-size: var(--tap);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.calc-chip:active { transform: var(--press, scale(0.97)); }
+.calc-chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (hover: hover) and (pointer: fine) { .calc-chip:hover { border-color: var(--accent); } }
+.calc-chip[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); font-weight: 600; }
+/* Compact and medium: the list and the open calculator take turns. */
+.calcs[data-open="yes"] .calc-list { display: none; }
+.calcs[data-open="no"] .calc-pane { display: none; }
+@media (min-width: 840px) {
+  .calcs { grid-template-columns: 17rem minmax(0, 1fr); }
+  .calcs[data-open="yes"] .calc-list, .calcs[data-open="no"] .calc-pane { display: block; }
+  .calc-back { display: none; }
+}
+
+/* ---------- the form ---------- */
+.calc-form { display: grid; gap: var(--sp-3); align-items: start; }
+/* The live result comes first until there is room beside the fields. */
+.calc-form > .calc-result, .calc-form > .calc-wait { order: -1; }
+@media (min-width: 1100px) {
+  .calc-form { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .calc-form > .calc-result, .calc-form > .calc-wait { order: 0; position: sticky; inset-block-start: var(--sp-4); }
+}
+.calc-fields { display: flex; flex-direction: column; gap: var(--sp-3); }
+.calc-fields h1 { margin: 0; font-family: var(--font-latin); font-size: var(--fs-xl, 1.375rem); font-weight: 700; }
+.calc-intro { margin: 0; }
+.calc-field { display: flex; flex-direction: column; gap: var(--sp-1); }
+.calc-label { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--sp-1) var(--sp-2); font-weight: 600; }
+.calc-label .muted { font-weight: 400; }
+.calc-hint { margin: 0; }
+.calc-field input, .calc-field select, .calc-item input {
+  font: inherit;
+  font-family: var(--font-latin);
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--sp-2) var(--sp-3);
+  min-block-size: var(--tap-lg);
+  box-sizing: border-box;
+  inline-size: 100%;
+}
+.calc-field :is(input, select):focus-visible, .calc-item input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+/* A value the engine rejected: marked in place, with the reason under it. */
+.calc-field :is(input, select)[aria-invalid="true"] { border-color: var(--bad); background: var(--bad-soft); }
+.calc-field-error { margin: 0; color: var(--bad); font-size: var(--fs-sm); font-weight: 600; }
+.calc-toggle { display: flex; gap: var(--sp-2); }
+.calc-toggle button {
+  font: inherit;
+  color: var(--text);
+  flex: 1;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: var(--radius);
+  min-block-size: var(--tap);
+  cursor: pointer;
+}
+.calc-toggle button[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); font-weight: 600; }
+.calc-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--sp-2); }
+
+/* ---------- waiting for input ---------- */
+.calc-wait { display: flex; flex-direction: column; gap: var(--sp-1); }
+.calc-wait p { margin: 0; }
+.calc-left { font-variant-numeric: tabular-nums; }
+
+/* ---------- the result ---------- */
+.calc-result { display: flex; flex-direction: column; gap: var(--sp-2); border-color: var(--accent); }
+.calc-result > p { margin: 0; }
+.calc-headline { display: flex; align-items: baseline; gap: var(--sp-2) var(--sp-3); flex-wrap: wrap; }
+.calc-display {
+  font-family: var(--font-latin);
+  font-size: 2rem;
+  line-height: 1.15;
+  font-weight: 700;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+.calc-band {
+  font-family: var(--font-latin);
+  font-weight: 700;
+  padding: 2px var(--sp-3);
+  border-radius: var(--radius-pill);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.calc-meaning { display: block; font-family: var(--font-latin); line-height: 1.6; }
+.calc-parts summary { cursor: pointer; font-weight: 600; min-block-size: var(--tap); display: flex; align-items: center; }
+.calc-parts ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.calc-parts li { display: flex; justify-content: space-between; gap: var(--sp-3); padding-block: 2px; border-block-end: 1px dashed var(--line); }
+.calc-points { font-family: var(--font-latin); font-variant-numeric: tabular-nums; }
+.calc-note { display: block; color: var(--muted); font-family: var(--font-latin); }
+.calc-source { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-1) var(--sp-2); margin: 0; }

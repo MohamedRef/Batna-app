@@ -1235,6 +1235,9 @@ pub mod update {
     pub const GROUP_CHECK: &str = "البحث عن تحديث";
     pub const CHECK_BOTH_SUB: &str = "بيدوّر على نسخة جديدة من التطبيق، وعلى دروس وأسئلة جديدة، مرة واحدة.";
     pub const LAST_CHECK: &str = "آخر مرة دوّرنا";
+    /// The Settings list's Updates line.
+    pub const SUMMARY_CONTENT_WAITING: &str = "دروس جديدة نزلت وهتفتح لوحدها";
+    pub const SUMMARY_FAILED: &str = "آخر بحث ما وصلش، هيجرّب تاني";
     pub const NEVER_CHECKED: &str = "لسه ما دوّرناش على الجهاز ده";
     /// The two halves of a check's result.
     pub const RESULT_APP: &str = "التطبيق";

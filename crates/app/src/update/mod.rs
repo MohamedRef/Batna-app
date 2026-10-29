@@ -1593,6 +1593,21 @@ mod tests {
         }
     }
 
+    #[test]
+    fn the_settings_list_says_where_updates_stand() {
+        use crate::i18n::update as tx;
+        let mut s = status(Phase::UpToDate, Mode::Auto);
+        assert_eq!(view::summary(&s), None, "never looked: the section's own line");
+        s.prefs.last_check_ms = Some(now_ms());
+        assert!(view::summary(&s).unwrap().starts_with(tx::LAST_CHECK));
+        s.content_waiting = true;
+        assert_eq!(view::summary(&s).as_deref(), Some(tx::SUMMARY_CONTENT_WAITING));
+        s.phase = Phase::Checking;
+        assert_eq!(view::summary(&s).as_deref(), Some(tx::CHECKING));
+        s.off = Some(Off::DevBuild);
+        assert_eq!(view::summary(&s), None);
+    }
+
     fn build(version: &str, build: u64, preview: bool) -> BuildInfo {
         let key = include_str!("../../../../fixtures/update/test-key.pub");
         BuildInfo {

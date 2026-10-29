@@ -1,0 +1,503 @@
+schema: batna.lesson/v1
+lecture: endo.L03
+lessons:
+  # ------------------------------------------------------------------
+  - id: endo.L03.lesson1
+    title: "الورم اللي بيعمل هرمونات: يعني إيه paraneoplastic؟"
+    hook: "خلية سرطان رجعت طفلة، فافتكرت كل حاجة كانت بتعرف تعملها. ومنها هرمونات مش بتاعتها."
+    minutes: 8
+    pages: [31, 34]
+    topics: [definition, pathophysiology, criteria, ectopic-nature]
+    goals:
+      - "تعرّف الـ PNS وتفرّقه عن الـ mass effect والـ metastasis"
+      - "تعدّ معايير الـ endocrine PNS"
+      - "تفهم ليه الـ ectopic hormone هو في الحقيقة eutopic"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 31
+        quote: "Unregulated cell growth producing undifferentiated cells"
+        title: "الـ neoplasm"
+        text: |
+          الكتاب بيعرّف الـ ==neoplasm== إنه **unregulated cell growth producing undifferentiated cells**.
+
+          النمو ده بيحصل طبيعي في الـ embryogenesis والـ wound repair، بس **لفترة محدودة**. الخلايا الـ primitive دي شايلة قدرات خلايا كتير متخصصة، زي خلية أمها. علشان كده ممكن تعمل هرمونات.
+      - kind: explain
+        page: 31
+        quote: "Clinical syndromes involving non metastatic systemic effects that accompany neoplastic diseases"
+        title: "الـ PNS"
+        text: |
+          ==Paraneoplastic syndromes== = **clinical syndromes involving non-metastatic systemic effects** بتصاحب الأورام، وغالبًا جاية من الـ secretory products بتاعة الورم.
+      - kind: sort
+        page: 31
+        quote: "1) Mass effect Obstruction, invasion or compression. 2) Remote effect Metastatic. Non-metastatic (Paraneoplastic synd.)."
+        prompt: "صنّف تأثير الورم:"
+        bins: ["Mass effect", "Remote effect", "Psychic effect"]
+        cards:
+          - { text: "Obstruction", bin: 0 }
+          - { text: "Compression", bin: 0 }
+          - { text: "Liver metastases", bin: 1 }
+          - { text: "Paraneoplastic hypercalcaemia", bin: 1 }
+          - { text: "Fear of pain", bin: 2 }
+          - { text: "Loneliness", bin: 2 }
+        why: "الـ mass: obstruction، invasion، compression. الـ remote: metastatic أو non-metastatic (ده الـ PNS). الـ psychic: الوحدة والخوف وفقدان السيطرة."
+      - kind: explain
+        page: 32
+        quote: "Production of antibodies against neoplastic tissue that cross react with normal body tissue like CNS."
+        title: "بيحصل إزاي؟"
+        text: |
+          1. ==Antibodies== ضد الورم بتعمل cross-react مع أنسجة طبيعية زي الـ CNS.
+          2. ==Physiologically active products==: hormones، precursors، enzymes، cytokines، fetal proteins.
+          3. Interference مع الـ steroid metabolism.
+          4. Unknown.
+
+          وبيمس أجهزة كتير: endocrine، CNS، hematologic، skin، renal، GIT، rheumatologic، neuromuscular، و non-specific.
+      - kind: mnemonic
+        page: 32
+        quote: "Demonstration of high hormone level in the circulation."
+        word: "AMHFSER"
+        parts:
+          - { key: "A", text: "Association: tumour + hormone-excess picture" }
+          - { key: "M", text: "mRNA of the hormone in tumour tissue" }
+          - { key: "H", text: "High circulating hormone" }
+          - { key: "F", text: "Fails normal suppression" }
+          - { key: "S", text: "Step-up AV gradient across the tumour (>10)" }
+          - { key: "E", text: "Exclude other causes" }
+          - { key: "R", text: "Response: improves after tumour treatment" }
+        hook: "السبع معايير بالترتيب بتاع الكتاب. أهم اتنين في الامتحان: الـ **step-up gradient** والـ **response بعد العلاج**."
+      - kind: reveal
+        page: 33
+        quote: "It represents increased expression of genes normally expressed in low amounts by non-neoplastic cells."
+        prompt: "الكتاب بيقول إن الـ ectopic hormone مش ectopic، هو eutopic. يعني إيه؟"
+        answer: "يعني الجين ده **موجود أصلًا وشغال بكمية قليلة** في الخلايا الطبيعية. الورم مش اخترع حاجة جديدة، هو بس علّى الـ expression بتاعه. يعني الهرمون في مكانه (eutopic)، بس بكمية مش طبيعية."
+      - kind: table
+        page: 33
+        quote: "1) Hormones - ACTH. 2) Hormone precursor - Proopiomelanocortin. 3) Enzymes - Alkaline phosphatase. 4) Fetal protein - Alpha-Fetoprotein."
+        title: "منتجات الورم"
+        columns: ["Class", "Example"]
+        rows:
+          - ["Hormone", "ACTH"]
+          - ["Precursor", "Pro-opiomelanocortin"]
+          - ["Enzyme", "Alkaline phosphatase"]
+          - ["Fetal protein", "Alpha-fetoprotein"]
+          - ["Cytokine", "Colony stimulating factor"]
+        hide: [[1, 1], [3, 1], [4, 1]]
+      - kind: explain
+        page: 33
+        quote: "1) It is used as a tumor marker. 2) It is important for follow up of patients. 3) It is important for detection of recurrence."
+        title: "ليه نهتم؟"
+        text: |
+          المنتجات دي:
+          - ==Tumor marker==.
+          - مهمة في الـ **follow up** وكشف الـ **recurrence**.
+          - ممكن تعمل مضاعفات خطيرة (زي الـ PTHrP والـ hypercalcemia).
+          - ممكن تكبّر الورم نفسه بـ **autocrine effect**.
+      - kind: explain
+        page: 34
+        quote: "The sequence of AA in poly-peptide ectopic hormone is identical to that of the native hormone."
+        title: "شكل الـ ectopic hormone"
+        text: |
+          الـ amino acid sequence ==identical== للهرمون الطبيعي. الفرق كله من الـ **processing** الغلط للـ precursor، فممكن الـ immunoassay يطلع عالي والـ bioassay واطي:
+          - **High MW**: الـ precursor ما اتقطعش (POMC).
+          - **Low MW**: fragment (GHRH fragment).
+          - **Altered glycosylation**: glycosylated ACTH، أو alpha subunit بتاع hCG.
+
+          والـ ectopic hormone ممكن يبقى polypeptide (ACTH)، monoamine (adrenaline)، أو steroid (1,25-dihydroxy vit D).
+      - kind: match
+        page: 34
+        quote: "1) Ectopic PTHRP Hypercalcemia. 2) Ectopic ACTH Cushing Syndrome. 3) Ectopic IGFII Hypoglycemia. 4) Ectopic ADH SIAD Syndrome."
+        prompt: "وصّل المنتج بالمتلازمة:"
+        pairs:
+          - ["PTHrP", "Hypercalcaemia"]
+          - ["ACTH", "Cushing's syndrome"]
+          - ["IGF-II", "Hypoglycaemia"]
+          - ["ADH", "SIADH"]
+          - ["hCG", "Gynaecomastia"]
+          - ["FGF-23", "Oncogenic osteomalacia"]
+        why: "والسابعة: GH و GHRH بيعملوا acromegaly."
+      - kind: try
+        items: [endo.L03.004, endo.L03.006, endo.L03.008, endo.L03.013, endo.L03.018]
+    recap:
+      - "Neoplasm = unregulated growth of undifferentiated cells."
+      - "PNS = non-metastatic systemic effects، غالبًا من secretory products."
+      - "Mechanisms: antibodies، active products، steroid pathway، unknown."
+      - "7 criteria؛ أهمهم step-up gradient >10 والتحسن بعد العلاج."
+      - "Ectopic = eutopic: جين طبيعي اتعلّى؛ الـ sequence زي الطبيعي والفرق في الـ processing."
+    practice: [endo.L03.001, endo.L03.002, endo.L03.003, endo.L03.004, endo.L03.005, endo.L03.006, endo.L03.007, endo.L03.008, endo.L03.009, endo.L03.010, endo.L03.011, endo.L03.012, endo.L03.013, endo.L03.014, endo.L03.015, endo.L03.016, endo.L03.017, endo.L03.018, endo.L03.055, endo.L03.056, endo.L03.057, endo.L03.072, endo.L03.073]
+  # ------------------------------------------------------------------
+  - id: endo.L03.lesson2
+    title: "الكالسيوم العالي في السرطان"
+    hook: "مريض سرطان رئة مش مركّز، إمساك، وبيشرب مية كتير. الكالسيوم 15. ومين السبب؟"
+    minutes: 8
+    pages: [35, 36]
+    topics: [pthrp]
+    goals:
+      - "تعرف التلات ميكانيزمات للـ hypercalcemia في الأورام"
+      - "تفرّقها عن الـ primary hyperparathyroidism بالتحاليل"
+      - "تعالج حسب مستوى الكالسيوم"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 35
+        quote: "1. T cell lymphoma 50%. 2. Multiple myeloma 40%. 3. Bronchogenic Ca.12%."
+        title: "الأسباب حسب الكتاب"
+        text: |
+          أول حالة اتسجلت سنة **1924**. الأسباب:
+          - ==T cell lymphoma 50%==.
+          - **Multiple myeloma 40%**.
+          - **Bronchogenic carcinoma 12%**.
+          - وغيرهم: bladder، GIT، ovary، head and neck.
+      - kind: figure
+        page: 35
+        quote: "1) Humoral hypercalcemia of Malignancy “HHM”"
+        title: "التلات طرق"
+        alt: "Three columns. HHM: the tumour secretes PTHrP (rarely PTH) into blood, acting on bone and kidney. LOH: lymphoma, leukaemia or myeloma cells in bone release cytokines (TNF, IL-1, lymphotoxin) that activate osteoclasts. Vitamin D: B-cell lymphoma makes 1,25-dihydroxyvitamin D, raising gut calcium absorption."
+        caption: "HHM بهرمون في الدم، LOH بـ cytokines جوه العضمة، و vitamin D من الـ B-cell lymphoma."
+        svg: |
+          <svg viewBox="0 0 330 270" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="E03a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-bad"/></marker>
+            </defs>
+            <rect x="10" y="10" width="310" height="70" rx="10" class="fg-acc"/>
+            <text x="22" y="32" class="t-b">1. HHM</text>
+            <text x="22" y="52" class="t-sm">Tumour → PTHrP (rarely PTH) in blood</text>
+            <text x="22" y="70" class="t-sm t-mut">humoral: works at a distance</text>
+            <rect x="10" y="95" width="310" height="80" rx="10" class="fg-bad"/>
+            <text x="22" y="117" class="t-b">2. LOH</text>
+            <text x="22" y="137" class="t-sm">Lymphoma, leukaemia, myeloma in bone</text>
+            <text x="22" y="155" class="t-sm">→ TNF, IL-1, lymphotoxin</text>
+            <text x="22" y="170" class="t-sm t-mut">(osteoclast activating factor)</text>
+            <rect x="10" y="190" width="310" height="70" rx="10" class="fg-good"/>
+            <text x="22" y="212" class="t-b">3. Hypervitaminosis D</text>
+            <text x="22" y="232" class="t-sm">↑ 1,25-dihydroxy vit D</text>
+            <text x="22" y="250" class="t-sm t-mut">especially B cell lymphoma</text>
+          </svg>
+      - kind: check
+        page: 35
+        quote: "1,25 Dihydroxy vit. D is increased especially in B cell lymphoma."
+        question: "Hypercalcaemia from raised 1,25-dihydroxyvitamin D is typical of:"
+        options: ["B-cell lymphoma", "Squamous lung cancer", "Breast cancer", "Seminoma"]
+        answer: 0
+        why:
+          - "صح: الكتاب بيربطها بالـ B cell lymphoma."
+          - "الرئة بتاخد HHM (PTHrP) أكتر."
+          - "مش في الكتاب بالميكانيزم ده."
+          - "مش في الكتاب."
+      - kind: explain
+        page: 35
+        quote: "Renal stone, polyuria, polydipsia, renal failure. Nausea, vomiting, constipation, peptic ulcer and pancreatitis."
+        title: "الصورة الإكلينيكية"
+        text: |
+          ممكن ==asymptomatic==، أو:
+          - **Renal**: stones، polyuria، polydipsia، renal failure.
+          - **GIT**: nausea، vomiting، constipation، peptic ulcer، pancreatitis.
+          - **Bone**: bone pain، proximal myopathy، و **keratitis**.
+          - **CNS**: lethargy، fatigue، confusion، stupor.
+      - kind: aside
+        tone: tip
+        page: 35
+        quote: "Asymptomatic. Renal stone, polyuria, polydipsia, renal failure."
+        text: "نفس الـ stones, bones, groans, moans بتاعة الـ hyperparathyroidism: renal stone و polyuria، bone pain، و GIT symptoms. بس هنا بسرعة أكبر وبكالسيوم أعلى."
+      - kind: table
+        page: 36
+        quote: "Hypercalcemia with low or normal PTH. High PTHrP plasma level. High urinary cyclic AMP. High renal calcium clearance."
+        title: "إزاي تفرّقها عن الـ primary HPT؟"
+        columns: ["Test", "PTHrP hypercalcaemia"]
+        rows:
+          - ["PTH", "Low or normal"]
+          - ["PTHrP", "High"]
+          - ["Urinary cAMP", "High"]
+          - ["Renal Ca clearance", "High"]
+          - ["1,25-dihydroxy vit D", "Low to normal"]
+        hide: [[0, 1], [2, 1], [4, 1]]
+      - kind: reveal
+        page: 36
+        quote: "Low to normal 1,25 Dihydroxy vit. D."
+        prompt: "الـ PTHrP بيعمل نفس شغل الـ PTH. ليه الـ 1,25-D مش عالي زي الـ primary HPT؟"
+        answer: "الـ PTHrP بيأثر على العضمة والـ tubules زي الـ PTH (فالـ urinary cAMP عالي)، بس تنشيطه لإنزيم الـ 1-alpha hydroxylase في الكلية أضعف. كمان الكالسيوم العالي جدًا بيكبت الإنزيم. علشان كده الكتاب بيقول low to normal. (التفسير ده فسيولوجيا مقبولة، الكتاب ذكر النتيجة بس.)"
+      - kind: order
+        page: 36
+        quote: "Mild hypercalcemia (12 mg/dl) Hydration with saline."
+        prompt: "رتّب العلاج مع زيادة الكالسيوم:"
+        steps:
+          - "12 mg/dl: saline hydration"
+          - "13-15 mg/dl: + bisphosphonate and diuretic"
+          - ">15 mg/dl: + calcitonin and mithramycin"
+          - "Special: phosphate, glucocorticoid or dialysis"
+        why: "كل مرحلة بتضيف على اللي قبلها. الـ special measures للحالات الخاصة."
+      - kind: case
+        page: 36
+        quote: "Severe hypercalcemia more than (15 mg/dl) above plus calcitonin and mithramycin."
+        stem: "A 62-year-old with lung cancer: Ca 15.6 mg/dL, PTH low."
+        steps:
+          - question: "Which mechanism?"
+            options: ["HHM (PTHrP)", "Primary hyperparathyroidism", "Vitamin D intoxication", "Milk-alkali"]
+            answer: 0
+            why: "PTH واطي مع ورم = HHM غالبًا؛ أكّد بالـ PTHrP."
+          - question: "Treatment at this level?"
+            options: ["Saline + bisphosphonate + diuretic + calcitonin + mithramycin", "Saline only", "Bisphosphonate only", "Dialysis first"]
+            answer: 0
+            why: "أكتر من 15: كل اللي فات + calcitonin و mithramycin."
+      - kind: try
+        items: [endo.L03.019, endo.L03.023, endo.L03.026, endo.L03.027, endo.L03.074]
+    recap:
+      - "الأسباب: T cell lymphoma 50%، myeloma 40%، bronchogenic 12%."
+      - "HHM (PTHrP)، LOH (TNF/IL-1/lymphotoxin)، vit D (B cell lymphoma)."
+      - "PTH low/normal، PTHrP ↑، urinary cAMP ↑، Ca clearance ↑، 1,25-D low/normal."
+      - "12: saline؛ 13-15: + bisphosphonate + diuretic؛ >15: + calcitonin + mithramycin."
+    practice: [endo.L03.019, endo.L03.020, endo.L03.021, endo.L03.022, endo.L03.023, endo.L03.024, endo.L03.025, endo.L03.026, endo.L03.027, endo.L03.058, endo.L03.059, endo.L03.060, endo.L03.069, endo.L03.074, endo.L03.075]
+  # ------------------------------------------------------------------
+  - id: endo.L03.lesson3
+    title: "Ectopic ACTH: Cushing على السريع"
+    hook: "مش هتلاقي moon face ولا buffalo hump. هتلاقي بوتاسيوم 2 ومريض بيدبل في شهرين."
+    minutes: 8
+    pages: [36, 38]
+    topics: [acth]
+    goals:
+      - "تعرف أسباب الـ ectopic ACTH ونسبها"
+      - "تفرّقها عن Cushing's disease"
+      - "تفهم ليه البوتاسيوم بيقع"
+    status: unverified
+    steps:
+      - kind: table
+        page: 36
+        quote: "1. Small cell or oat cell pulmonary carcinoma 50%. 2. Carcinoma of thymus 10%."
+        title: "الأسباب"
+        columns: ["Tumour", "%"]
+        rows:
+          - ["Small cell (oat cell) lung", "50%"]
+          - ["Thymus carcinoma", "10%"]
+          - ["Pancreas (carcinoid, islet)", "10%"]
+          - ["Pheochromocytoma", "5%"]
+          - ["Medullary Ca thyroid", "5%"]
+        hide: [[0, 1], [1, 1], [3, 1]]
+      - kind: explain
+        page: 36
+        quote: "Increased expression of proopiomelanocortin gene which encodes ACTH"
+        title: "الميكانيزم"
+        text: |
+          ==POMC gene expression== بيزيد. الـ POMC بيتقطع لـ ACTH و lipotropin و MSH و endorphin. نادرًا الورم بيعمل **CRH**.
+
+          وفي حالات نادرة الغدة نفسها عليها **ectopic receptors**:
+          - **GIP receptors**: الأكل يعلّي الـ cortisol.
+          - **LH receptors** مع macronodular hyperplasia: cushingoid في الحمل، وكامل بعد الـ menopause.
+
+          الورم نادرًا بيعمل steroids، لأن تركيبها معقد.
+      - kind: explain
+        page: 37
+        quote: "1) Presence of marked hypokalemia. 2) Marked increase of ACTH. 3) Marked increase of serum and urine cortisol."
+        title: "إزاي تفرّقها عن Cushing's disease"
+        text: |
+          كلمة السر: ==marked==.
+          1. **Marked hypokalemia**.
+          2. **Marked** ACTH ↑.
+          3. **Marked** cortisol ↑ في الدم والبول.
+          4. ==No suppression== بالـ high-dose dexamethasone.
+          5. Metabolic alkalosis.
+          6. Fluid retention و hypertension.
+          7. DM.
+          8. Steroid psychosis.
+      - kind: figure
+        page: 37
+        quote: "Marked elevation of cortisol overwhelm 11 B- hydroxysteroid dehydrogenase enzyme type2"
+        title: "ليه البوتاسيوم بيقع؟"
+        alt: "Kidney tubule cell. Normally 11-beta HSD2 converts cortisol to inactive cortisone, guarding the mineralocorticoid receptor. In ectopic ACTH, a flood of cortisol overwhelms the enzyme, so cortisol binds the mineralocorticoid receptor, causing sodium retention, potassium loss and alkalosis. ACTH also drives adrenal mineralocorticoids directly."
+        caption: "الـ 11β-HSD2 زي البواب: بيحوّل الـ cortisol لـ cortisone قبل ما يوصل للـ receptor. لما الـ cortisol يبقى سيل، البواب يغرق."
+        svg: |
+          <svg viewBox="0 0 330 260" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="E03b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+              <marker id="E03c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-bad"/></marker>
+            </defs>
+            <text x="10" y="20" class="t-sm t-b t-good">Normal</text>
+            <text x="10" y="45" class="t-sm">Cortisol</text>
+            <path d="M65 41H110" class="fg-arrow" marker-end="url(#E03b)"/>
+            <rect x="112" y="26" width="90" height="28" rx="6" class="fg-good"/>
+            <text x="120" y="45" class="t-sm t-b">11β-HSD2</text>
+            <path d="M202 41H240" class="fg-arrow" marker-end="url(#E03b)"/>
+            <text x="245" y="45" class="t-sm">Cortisone</text>
+            <text x="245" y="62" class="t-sm t-mut">(inactive)</text>
+            <text x="10" y="105" class="t-sm t-b t-bad">Ectopic ACTH</text>
+            <text x="10" y="132" class="t-b t-bad">CORTISOL ↑↑↑</text>
+            <path d="M115 128H150" class="fg-arrow-bad" marker-end="url(#E03c)"/>
+            <rect x="152" y="113" width="90" height="28" rx="6" class="fg-bad"/>
+            <text x="158" y="132" class="t-sm t-b">overwhelmed</text>
+            <path d="M197 141V170" class="fg-arrow-bad" marker-end="url(#E03c)"/>
+            <rect x="112" y="172" width="172" height="30" rx="6" class="fg-acc"/>
+            <text x="198" y="192" text-anchor="middle" class="t-sm t-b">Mineralocorticoid receptor</text>
+            <text x="10" y="228" class="t-sm">→ Na and water retention, hypertension</text>
+            <text x="10" y="248" class="t-sm t-b t-bad">→ K ↓↓, metabolic alkalosis</text>
+          </svg>
+      - kind: check
+        page: 37
+        quote: "No suppression of ACTH or cortisol by high Dexamethasone dose suppression test."
+        question: "Which result favours ectopic ACTH over Cushing's disease?"
+        options: ["No suppression with high-dose dexamethasone", "Mild hypokalaemia only", "ACTH 40 pg/mL", "Suppression of cortisol by 70%"]
+        answer: 0
+        why:
+          - "صح: الـ ectopic مش بيتكبت بالـ high dose."
+          - "الـ ectopic بيعمل hypokalemia شديدة."
+          - "الـ ectopic غالبًا أكتر من 100."
+          - "الكبت بأكتر من 50% بيميل لـ Cushing's disease."
+      - kind: table
+        page: 38
+        quote: "Urinary free cortisol is 2 to 4 times normal level. ACTH is usually more than 100 pg/ml."
+        title: "التشخيص والعلاج"
+        columns: ["Item", "Value"]
+        rows:
+          - ["UFC", "2-4 times normal"]
+          - ["ACTH", "Usually >100 pg/ml"]
+          - ["High-dose DST", "Negative (no 50% fall)"]
+          - ["Ketoconazole", "200-400 mg twice daily"]
+          - ["Metyrapone", "250-500 mg every 6 h"]
+          - ["Mitotane", "1 g every 6 h"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: explain
+        page: 38
+        quote: "Consider cortisol replacement therapy after medical or surgical adrenalectomy."
+        title: "العلاج"
+        text: |
+          - ==عالج الورم الأصلي==.
+          - قلّل الـ cortisol: **medical** (ketoconazole، metyrapone، mitotane) أو **surgical** (bilateral adrenalectomy).
+          - بعد الـ adrenalectomy الدوائية أو الجراحية: فكّر في **cortisol replacement**.
+      - kind: aside
+        tone: exam
+        page: 37
+        quote: "Ectopic ACTH Cushing can be differentiated from Cushing disease"
+        text: "سؤال \"diagnostic features of ectopic Cushing\" من أسئلة الكتاب. اكتب التمانية بالترتيب، وبعدها الميكانيزم (ACTH بيشغّل الـ gluco والـ mineralo، والـ cortisol بيغرّق الـ 11β-HSD2)، وبعدها أرقام التشخيص."
+      - kind: try
+        items: [endo.L03.028, endo.L03.033, endo.L03.034, endo.L03.035, endo.L03.076]
+    recap:
+      - "Small cell lung 50%، thymus 10%، pancreas 10%، pheo 5%، MTC 5%."
+      - "POMC ↑؛ نادرًا CRH؛ ectopic adrenal receptors (GIP، LH)."
+      - "Marked: hypokalemia، ACTH، cortisol؛ no high-dose suppression؛ alkalosis، HTN، DM، psychosis."
+      - "Cortisol بيغرّق 11β-HSD2 ← mineralocorticoid effect."
+      - "UFC 2-4x، ACTH >100؛ عالج الورم + ketoconazole/metyrapone/mitotane أو bilateral adrenalectomy."
+    practice: [endo.L03.028, endo.L03.029, endo.L03.030, endo.L03.031, endo.L03.032, endo.L03.033, endo.L03.034, endo.L03.035, endo.L03.036, endo.L03.037, endo.L03.061, endo.L03.062, endo.L03.063, endo.L03.070, endo.L03.076]
+  # ------------------------------------------------------------------
+  - id: endo.L03.lesson4
+    title: "SIADH، سكر واطي، hCG وعضم طري"
+    hook: "صوديوم واطي من غير وذمة، سكر واطي مع insulin واطي، راجل عنده ثدي، وعضم بيتكسر من ورم صغير في الأنف."
+    minutes: 9
+    pages: [38, 41]
+    topics: [siadh, igf2, hcg, osteomalacia, gh]
+    goals:
+      - "تشخّص وتعالج الـ SIADH حسب الشدة"
+      - "تفهم ميكانيزم الـ IGF-II hypoglycemia"
+      - "تعرف صورة الـ ectopic hCG والـ oncogenic osteomalacia"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 39
+        quote: "Inappropriate retention of water. Inappropriate urine concentration."
+        title: "SIADH"
+        text: |
+          **الأسباب:** small cell lung Ca، carcinoid، CNS lesions، GIT، genitourinary، ovarian tumors.
+
+          **الميكانيزم:** ADH ↑ و ANP ↑، والنتيجة ==inappropriate water retention== و **inappropriate urine concentration**.
+
+          **الصورة:** غالبًا hyponatremia بالصدفة؛ أو lethargy، weakness، nausea، confusion، seizure؛ ووزن بيزيد ==من غير oedema==.
+      - kind: reveal
+        page: 39
+        quote: "Increased body weight due to retention of water without oedema."
+        prompt: "ليه المية محبوسة بس مفيش oedema؟"
+        answer: "المية الحرة بتتوزع على كل الـ compartments، وتلتينها جوه الخلايا. والـ ANP العالي بيطلّع صوديوم، فالـ extracellular volume مش بيزيد بالقدر اللي يعمل oedema. (ده تفسير فسيولوجي؛ الكتاب ذكر الـ ANP والنتيجة.)"
+      - kind: explain
+        page: 39
+        quote: "Low blood urea nitrogen and uric acid. Exclude hypothyroidism and hypocortisolism."
+        title: "التشخيص"
+        text: |
+          - Hyponatremia و plasma osmolality واطية، مع urine osmolality ==normal أو عالية== (inappropriate).
+          - **BUN و uric acid واطيين**.
+          - ==استبعد hypothyroidism و hypocortisolism==.
+      - kind: table
+        page: 39
+        quote: "Severe cases (Na less than 110mEq/L) Hypertonic Saline with furesemide."
+        title: "العلاج"
+        columns: ["Severity", "Treatment"]
+        rows:
+          - ["Mild", "Fluid restriction < urine output"]
+          - ["Moderate", "Demeclocycline 150-300 mg tds (weeks)"]
+          - ["Severe (Na <110)", "Hypertonic saline + furosemide"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: update
+        page: 39
+        quote: "Severe cases (Na less than 110mEq/L) Hypertonic Saline with furesemide."
+        text: "الكتاب: severe cases (Na أقل من 110) تاخد hypertonic saline مع furosemide. الإرشادات الحالية بتضيف الـ vaptans (tolvaptan)، وبتحدد تصحيح الـ chronic hyponatremia بحوالي 8-10 mmol/L في 24 ساعة علشان الـ osmotic demyelination."
+        ref: "European clinical practice guideline on hyponatraemia 2014"
+      - kind: explain
+        page: 39
+        quote: "Increased ectopic IGFII (Big IGFII) that can react with insulin receptors."
+        title: "IGF-II hypoglycemia"
+        text: |
+          **الأسباب:** ==mesenchymal== و **hepatic** tumors.
+
+          **الميكانيزم:**
+          - الورم بياكل glucose.
+          - الكبد المليان metastases مش بيعمل gluconeogenesis.
+          - Counter-regulatory hormones (زي GH) قليلة.
+          - ==Big IGF-II== بيشتغل على الـ insulin receptors.
+          - الـ IGF binding protein 3 مبيتكونش، فالـ IGF-II يفضل active.
+
+          **الصورة:** fasting hypoglycemia متكررة. **العلاج:** small frequent meals، IV glucose بالليل، glucagon، GH، corticosteroids.
+      - kind: check
+        page: 39
+        quote: "Mesenchymal tumor. Hepatic tumor."
+        question: "Fasting hypoglycaemia with LOW insulin in a patient with a big retroperitoneal tumour suggests:"
+        options: ["IGF-II-secreting mesenchymal tumour", "Insulinoma", "Ectopic ACTH", "Ectopic PTHrP"]
+        answer: 0
+        why:
+          - "صح: الـ insulin واطي لأن الـ big IGF-II هو اللي شغال على الـ receptors."
+          - "الـ insulinoma الـ insulin عالي."
+          - "بيعمل hyperglycemia."
+          - "بيعمل hypercalcemia."
+      - kind: explain
+        page: 40
+        quote: "Alpha subunit is similar to that of LH, FSH, and TSH."
+        title: "Ectopic hCG"
+        text: |
+          - الـ hCG من subunitين. ==Alpha== زي LH و FSH و TSH، والـ **beta** مختلف (بيه بنفرّق ونتابع).
+          - **الأسباب:** hydatidiform mole، teratoma، seminoma، و non-gonadal (choriocarcinoma، lung، hepatoma، breast، colon).
+          - **الميكانيزم:** steroidogenesis و ==aromatase== ↑ ← E2 عالي.
+      - kind: table
+        page: 41
+        quote: "Young patient precocious puberty. Adult female uterine bleeding. Adult male gynecomastia."
+        title: "الصورة حسب السن والجنس"
+        columns: ["Patient", "Picture"]
+        rows:
+          - ["Young", "Precocious puberty"]
+          - ["Adult female", "Uterine bleeding"]
+          - ["Adult male", "Gynecomastia"]
+          - ["Any", "Hyperthyroid features possible"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: reveal
+        page: 41
+        quote: "There may be manifestations of hyperthyroidism."
+        prompt: "ليه الـ hCG ممكن يعمل hyperthyroidism؟"
+        answer: "الـ alpha subunit بتاع الـ hCG زي بتاع الـ TSH، والجزيء كله شبهه، فلو الكمية كبيرة جدًا بينبّه الـ TSH receptor. (زي ما شفنا في الحمل في المحاضرة 2: direct effect of hCG on the thyroid.)"
+      - kind: explain
+        page: 41
+        quote: "Increased fibroblast growth factor 23 secreted by tumor cells leads to decreased phosphate reabsorption by the kidney"
+        title: "Oncogenic osteomalacia"
+        text: |
+          - أورام ==mesenchymal غريبة، غالبًا benign==: "strange tumor in strange place"، زي hemangiopericytoma و angiosarcoma و chondrosarcoma في الجلد أو العضلات أو الـ paranasal sinuses.
+          - الورم بيفرز ==FGF-23== (phosphatonin): phosphate reabsorption ↓، و 1,25-vit D ↓.
+          - **Labs:** phosphate ↓، ALP ↑، **calcium normal**، vit D ↓.
+          - **الصورة:** bone pain، muscle weakness، fractures، waddling gait.
+
+          وآخر حاجة: **GH و GHRH** ectopic نادر جدًا (lung، stomach، breast، ovary)، وعلاجه **octreotide**.
+      - kind: aside
+        tone: joke
+        page: 41
+        quote: "Unusual mesenchymal tumors. Mostly benign. Strange tumor in strange place"
+        text: "الـ oncogenic osteomalacia: strange tumor in strange place. ورم mesenchymal صغير، غالبًا benign، ومؤدب ومستخبي في الجيوب الأنفية، وفي نفس الوقت مكسّر عضم المريض كله. أكتر ورم في الكتاب بيعمل مشاكل وهو قاعد في حاله."
+      - kind: try
+        items: [endo.L03.041, endo.L03.042, endo.L03.044, endo.L03.049, endo.L03.051]
+    recap:
+      - "SIADH: hyponatremia + urine مركّز؛ BUN/uric acid ↓؛ مفيش oedema؛ استبعد hypothyroid و hypocortisol."
+      - "Mild: fluid restriction؛ moderate: demeclocycline؛ severe (<110): hypertonic + furosemide."
+      - "IGF-II: mesenchymal/hepatic؛ big IGF-II على الـ insulin receptor؛ fasting hypoglycemia."
+      - "hCG: aromatase ↑ ← E2؛ صغير puberty، ست bleeding، راجل gynecomastia."
+      - "Oncogenic osteomalacia: FGF-23؛ phosphate ↓، ALP ↑، Ca طبيعي، vit D ↓."
+      - "GH/GHRH: نادر جدًا؛ octreotide."
+    practice: [endo.L03.038, endo.L03.039, endo.L03.040, endo.L03.041, endo.L03.042, endo.L03.043, endo.L03.044, endo.L03.045, endo.L03.046, endo.L03.047, endo.L03.048, endo.L03.049, endo.L03.050, endo.L03.051, endo.L03.052, endo.L03.053, endo.L03.054, endo.L03.064, endo.L03.065, endo.L03.066, endo.L03.067, endo.L03.068, endo.L03.071]

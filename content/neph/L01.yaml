@@ -466,7 +466,7 @@ items:
       - ["Lithium toxicity", "Increased number of cations"]
       - ["Hypertriglyceridemia", "Different laboratory analysis"]
     blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [7, 1]]
-    src: { page: 10, quote: "Most common causes of low AG metabolic acidosis" }
+    src: { page: 10, quote: "IgG myeloma Increased number of cations" }
     status: unverified
   - id: neph.L01.051
     kind: card
@@ -784,7 +784,7 @@ items:
     kind: cloze
     topic: algorithm
     text: In the algorithm, AG {{c1::> 12}} mEq/L points to MUDPILES, and a normal AG of about {{c2::6–12}} mEq/L points to HARD-ASS.
-    src: { page: 15, quote: "Check anion gap Na*- (Cf + HCO,”" }
+    src: { page: 15, quote: "MUDPILES Methanol (formid acid) Uremia" }
     status: unverified
   - id: neph.L01.090
     kind: enumerate
@@ -1651,4 +1651,95 @@ items:
         answer: 0
         why: "Between acute and chronic expectations fits an acute rise on a chronic background; opiates depress the center acutely."
     src: { page: 13, quote: "Chronic: 3.5 meqit 7 [Hco,] for each 10 mm Hg T in Pco," }
+    status: unverified
+  # ---------- calculators (anion_gap, delta_ratio, expected_compensation, osmolal_gap) ----------
+  - id: neph.L01.153
+    kind: calc
+    topic: anion-gap
+    calculator: anion_gap
+    stem: "A 22-year-old with type 1 diabetes is vomiting and breathing deeply. Na 135, Cl 98, HCO3 10 mEq/L, albumin 4.0 g/dL."
+    inputs: { na_meq_l: 135, cl_meq_l: 98, hco3_meq_l: 10, albumin_g_dl: 4.0 }
+    expect: "AG 27 mEq/L (high, > 16)"
+    interpret: "High anion gap metabolic acidosis (ketoacids, the K of MUDPILES); next check the delta ratio."
+    src: { page: 14, quote: ">16 High Anion Gap calculation 12+/-4 | Normal" }
+    status: unverified
+  - id: neph.L01.154
+    kind: calc
+    topic: anion-gap
+    calculator: anion_gap
+    stem: "A 70-year-old with nephrotic syndrome and sepsis. Na 140, Cl 108, HCO3 20 mEq/L, albumin 2.0 g/dL."
+    inputs: { na_meq_l: 140, cl_meq_l: 108, hco3_meq_l: 20, albumin_g_dl: 2.0 }
+    expect: "AG 17 mEq/L after albumin correction (high)"
+    interpret: "The measured AG of 12 looks normal, but adding 2.5 per g/dL of albumin below 4 unmasks a high anion gap (lactic) acidosis."
+    src: { page: 14, quote: ">16 High Anion Gap calculation 12+/-4 | Normal" }
+    status: unverified
+  - id: neph.L01.155
+    kind: calc
+    topic: delta
+    calculator: delta_ratio
+    stem: "The DKA patient above: AG 27 mEq/L, HCO3 10 mEq/L."
+    inputs: { anion_gap_meq_l: 27, hco3_meq_l: 10 }
+    expect: "Delta ratio 1.07 (0.8–2.0)"
+    interpret: "Pure high anion gap metabolic acidosis: the rise in AG matches the fall in HCO3."
+    src: { page: 12, quote: "0.8 - 2.0 Pure high anion gap metabolic acidosis" }
+    status: unverified
+  - id: neph.L01.156
+    kind: calc
+    topic: delta
+    calculator: delta_ratio
+    stem: "A patient with severe diarrhoea then develops lactic acidosis. AG 22 mEq/L, HCO3 6 mEq/L."
+    inputs: { anion_gap_meq_l: 22, hco3_meq_l: 6 }
+    expect: "Delta ratio 0.56 (0.4–0.8)"
+    interpret: "Mixed: a normal anion gap (diarrhoeal) acidosis plus a high anion gap acidosis; HCO3 fell more than the AG rose."
+    src: { page: 12, quote: "Delta ratio = Measured anion gap - 12 24 - Measured [HCO3]" }
+    status: unverified
+  - id: neph.L01.157
+    kind: calc
+    topic: delta
+    calculator: delta_ratio
+    stem: "A patient in DKA has been vomiting for 3 days. AG 30 mEq/L, HCO3 16 mEq/L."
+    inputs: { anion_gap_meq_l: 30, hco3_meq_l: 16 }
+    expect: "Delta ratio 2.25 (> 2.0)"
+    interpret: "High anion gap metabolic acidosis plus metabolic alkalosis (from the vomiting): HCO3 is higher than the AG rise predicts."
+    src: { page: 12, quote: "Mixed high anion gap metabolic acidosis + metabolic alkalosis" }
+    status: unverified
+  - id: neph.L01.158
+    kind: calc
+    topic: compensation
+    calculator: expected_compensation
+    stem: "Metabolic acidosis with HCO3 10 mEq/L and pCO2 24 mmHg. Is the breathing appropriate?"
+    inputs: { disorder: metabolic_acidosis, hco3_meq_l: 10, pco2_mm_hg: 24 }
+    expect: "Expected pCO2 23 (21–25 mmHg): appropriate"
+    interpret: "Winter's formula 1.5 × 10 + 8 = 23 ± 2; a pCO2 of 24 is appropriate respiratory compensation."
+    src: { page: 14, quote: "Expected 1.5 X [HCO3]+8 (+/- 2)" }
+    status: unverified
+  - id: neph.L01.159
+    kind: calc
+    topic: compensation
+    calculator: expected_compensation
+    stem: "A drowsy patient after a sedative overdose has metabolic acidosis: HCO3 12 mEq/L, pCO2 35 mmHg."
+    inputs: { disorder: metabolic_acidosis, hco3_meq_l: 12, pco2_mm_hg: 35 }
+    expect: "Expected pCO2 26 (24–28 mmHg): added respiratory acidosis"
+    interpret: "pCO2 failed to fall to the expected value, so a complicating respiratory acidosis is present."
+    src: { page: 13, quote: "Failure of the Pco, to decrease to expected value = complicating respiratory acidosis" }
+    status: unverified
+  - id: neph.L01.160
+    kind: calc
+    topic: compensation
+    calculator: expected_compensation
+    stem: "A stable patient with long-standing COPD: pCO2 60 mmHg, HCO3 32 mEq/L."
+    inputs: { disorder: respiratory_acidosis_chronic, hco3_meq_l: 32, pco2_mm_hg: 60 }
+    expect: "Expected HCO3 32 (30–34 mEq/L): appropriate"
+    interpret: "Chronic respiratory acidosis with appropriate renal compensation (24 + 2 × 4, the p. 14 summary factor)."
+    src: { page: 14, quote: "Respiratory acidosis Respiratory alkalosis Acute Chronic Acute Chronic" }
+    status: unverified
+  - id: neph.L01.161
+    kind: calc
+    topic: toxins
+    calculator: osmolal_gap
+    stem: "A man is confused with blurred vision after drinking homemade spirit. Measured osmolality 320 mOsm/kg, Na 135 mEq/L, glucose 90 mg/dL, BUN 28 mg/dL."
+    inputs: { measured_osm: 320, na_meq_l: 135, glucose_mg_dl: 90, bun_mg_dl: 28 }
+    expect: "Osmolal gap 35 mOsm/kg (gap present, > 10)"
+    interpret: "Calculated osmolality 285, so a gap of 35: an unmeasured osmole; with visual symptoms think methanol (fomepizole or ethanol ± dialysis)."
+    src: { page: 20, quote: "Generally, the measured osmolality is 10 mOsm higher than the calculated osmolality. Values >10 mOsm represent the presence of an osmolal gap." }
     status: unverified

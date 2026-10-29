@@ -1,0 +1,577 @@
+schema: batna.content/v1
+lecture: dm.L11
+title: "Starting and intensifying insulin in type 2 DM"
+author: "Prof. Dr. Khalifa Abdallah"
+book: { chapter: 6, pages: [130, 141] }
+topics:
+  - { id: indications, title: "Indications and the definition of insulin therapy" }
+  - { id: facts, title: "Two facts: progression and the need for insulin" }
+  - { id: barriers, title: "Fears and beliefs about starting insulin" }
+  - { id: targets, title: "Glycemic targets and the physiological insulin profile" }
+  - { id: basal-oral, title: "Basal-oral regimen: fix fasting first, the ideal basal insulin" }
+  - { id: titration, title: "Initiating and titrating basal insulin" }
+  - { id: prandial, title: "After basal: prandial insulin" }
+  - { id: premix, title: "Premixed insulin regimen" }
+  - { id: basal-bolus, title: "Basal-bolus regimen and choosing between regimens" }
+items:
+  # ---------- p130: indications ----------
+  - id: dm.L11.001
+    kind: enumerate
+    topic: indications
+    prompt: Current indications for insulin in type 2 DM (Starting and intensifying insulin lecture)?
+    points:
+      - Initial stabilization of severe hyperglycemia
+      - Hyperglycemic crises
+      - Pregnancy
+      - Significant liver or kidney disease
+      - "Stress: ACS, ICU, major surgery, severe infection, corticosteroids"
+      - Failure of oral glucose-lowering therapy
+    pass: 5
+    src: { page: 130, quote: "Initial stabilization of patients with severe hyperglycemia" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L11.002
+    kind: card
+    topic: indications
+    front: Which type 2 indication for insulin does this lecture add to the injectable therapy list?
+    back: Initial stabilization of patients with severe hyperglycemia.
+    src: { page: 130, quote: "Initial stabilization of patients with severe hyperglycemia" }
+    status: unverified
+  - id: dm.L11.003
+    kind: enumerate
+    topic: indications
+    prompt: What does "insulin therapy" include, per the lecture's definition?
+    points:
+      - Starting insulin
+      - Dose titration so the patient gets the maximum benefit
+      - Modifying the regimen (adding or changing) to keep control
+    pass: 3
+    src: { page: 130, quote: "Modification of an insulin regimen, e.g., adding or changing the therapy to maintain glycaemic control" }
+    status: unverified
+  # ---------- p131: facts ----------
+  - id: dm.L11.004
+    kind: card
+    topic: facts
+    front: "Fact 1 of insulin initiation?"
+    back: Type 2 diabetes is a progressive disease that often needs stepwise intensification to keep good control.
+    src: { page: 131, quote: "Type 2 diabetes is a progressive disease that often requires stepwise intensification of treatment to maintain good glycemic control." }
+    status: unverified
+  - id: dm.L11.005
+    kind: order
+    topic: facts
+    prompt: The conventional stepwise treatment approach in type 2 DM (book figure).
+    steps:
+      - Diet and exercise
+      - OAD monotherapy
+      - OAD up-titration
+      - OAD combination
+      - OAD + basal insulin
+      - OAD + multiple daily insulin injections
+    src: { page: 131, quote: "Diet and exercise OAD monotherapy OAD up-titration OAD combination OAD + basal insulin" }
+    status: unverified
+  - id: dm.L11.006
+    kind: card
+    topic: facts
+    front: What is wrong with the conventional stepwise approach shown in the figure?
+    back: HbA1c spends long periods above goal (around 8–9%+) before each step is added, so control is lost again and again.
+    src: { page: 131, quote: "Conventional stepwise treatment approach" }
+    status: unverified
+  - id: dm.L11.007
+    kind: card
+    topic: facts
+    front: "Fact 2 of insulin initiation?"
+    back: Most people with type 2 diabetes will, in time, need insulin.
+    src: { page: 131, quote: "Most people with type 2 diabetes will, in time, need insulin therapy." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L11.008
+    kind: cloze
+    topic: facts
+    text: "In the figure (Wright 2002), patients needing additional insulin rise from about {{c1::17%}} at year 1 to about {{c2::53%}} at year 6."
+    src: { page: 131, quote: "Patients requiring additional insulin (%)" }
+    status: unverified
+    tags: [numbers]
+  # ---------- p131-132: barriers ----------
+  - id: dm.L11.009
+    kind: enumerate
+    topic: barriers
+    prompt: Common fears about starting insulin?
+    points:
+      - Needles
+      - Hypoglycemia
+      - Weight gain
+    pass: 3
+    src: { page: 131, quote: "Common Fears: 1. Needles 2. Hypoglycemia 3. Weight gain" }
+    status: unverified
+  - id: dm.L11.010
+    kind: enumerate
+    topic: barriers
+    prompt: Common beliefs about insulin?
+    points:
+      - Insulin is the last option
+      - Insulin causes complications
+      - Insulin is a personal failure
+      - Adverse impact on relationships and lifestyle
+    pass: 3
+    src: { page: 132, quote: "Insulin causes complications 3. Insulin is a personal failure 4. Adverse impact on relationships/lifestyle" }
+    status: unverified
+  - id: dm.L11.011
+    kind: mcq
+    topic: barriers
+    stem: "A 55-year-old man on three oral drugs with HbA1c 9.6% refuses insulin: \"My father went blind after he started insulin, it means I have failed.\" Which beliefs from the lecture is he voicing?"
+    options:
+      - Insulin causes complications, and insulin is a personal failure
+      - Fear of needles and fear of weight gain
+      - Insulin is the last option only
+      - Fear of hypoglycemia only
+      - Adverse impact on relationships only
+    answer: 0
+    why:
+      - "Correct: blaming blindness on insulin = 'insulin causes complications'; 'I have failed' = 'personal failure' (p132)."
+      - "Needles and weight are fears he did not mention (p131)."
+      - "He says more than 'last option'."
+      - "He did not mention hypoglycemia."
+      - "He did not mention relationships."
+    src: { page: 132, quote: "Insulin causes complications 3. Insulin is a personal failure" }
+    status: unverified
+  # ---------- p132: targets and physiology ----------
+  - id: dm.L11.012
+    kind: table
+    topic: targets
+    title: "ADA Table 6.3: glycemic targets for many nonpregnant adults"
+    columns: [Measure, Target]
+    rows:
+      - [A1C, "<7.0% (53 mmol/mol)"]
+      - [Preprandial capillary plasma glucose, "80–130 mg/dl (4.4–7.2 mmol/L)"]
+      - [Peak postprandial capillary plasma glucose, "<180 mg/dl (10.0 mmol/L)"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 132, quote: "Preprandial capillary plasma glucose 80-130 mg/dL* (4.4-7.2 mmol/L}" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L11.013
+    kind: card
+    topic: targets
+    front: Describe the physiological insulin secretion profile.
+    back: A steady low basal level all day and night, with sharp prandial peaks after breakfast, lunch and dinner.
+    src: { page: 132, quote: "Physiological insulin secretion profile:" }
+    status: unverified
+  - id: dm.L11.014
+    kind: card
+    topic: basal-oral
+    front: Which insulins have a flat profile on the action-curve figure, and which peak?
+    back: Glargine is flat for 24 hours; aspart, lispro and glulisine peak first, then regular, NPH and detemir peak later and lower.
+    src: { page: 133, quote: "Aspart, lispro, glulisine" }
+    status: unverified
+  # ---------- p133-135: basal-oral ----------
+  - id: dm.L11.015
+    kind: card
+    topic: basal-oral
+    front: What is the motto of the basal-oral regimen?
+    back: Fix fasting first. Basal insulin brings fasting glucose to normal; postprandial peaks sit on top of it.
+    src: { page: 133, quote: "Basal-oral regimen: Fix Fasting First" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L11.016
+    kind: card
+    topic: basal-oral
+    front: Why fix fasting glucose first?
+    back: Postprandial peaks ride on top of the fasting level, so bringing fasting glucose to normal with basal insulin lowers the whole day's curve.
+    src: { page: 134, quote: "Hence need to fix fasting first" }
+    status: unverified
+  - id: dm.L11.017
+    kind: enumerate
+    topic: basal-oral
+    prompt: Advantages of starting with basal insulin in type 2 DM?
+    points:
+      - One injection, no mixing
+      - Insulin pens increase acceptance
+      - Slow, safe, simple titration
+      - Low dosage
+      - Effective improvement in control
+      - Limited weight gain
+    pass: 5
+    src: { page: 134, quote: "1 injection with no mixing 2. Insulin pens for increased acceptance 3. Slow, safe, simple titration" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L11.018
+    kind: enumerate
+    topic: basal-oral
+    prompt: Criteria of the ideal basal insulin?
+    points:
+      - Closely mimics normal basal secretion
+      - No distinct peak
+      - Effect continues over 24 hours
+      - Less nocturnal hypoglycemia
+      - Once daily for compliance
+      - Predictable absorption
+    pass: 5
+    src: { page: 134, quote: "Closely mimic normal pancreatic basal insulin secretion 2. No distinct peak effect 3. Continued effect over 24 hours" }
+    status: unverified
+    tags: [book-question, high-yield]
+  - id: dm.L11.019
+    kind: card
+    topic: basal-oral
+    front: What is a "qualified A1c"?
+    back: An A1c judged together with the hypoglycemia it cost. For the same hypoglycemia risk, a long-acting analogue reaches an A1c about 0.4–0.6% lower than NPH.
+    src: { page: 135, quote: "A ―qualified A1c‖ by hypoglycemia The impact of hypoglycemia on A1c" }
+    status: unverified
+  - id: dm.L11.020
+    kind: cloze
+    topic: basal-oral
+    text: "At the same hypoglycemia level, the figure shows long-acting analogues lower A1c by about {{c1::0.4–0.6%}} more than {{c2::NPH}}."
+    src: { page: 135, quote: "~ 0.4–0.6% ?" }
+    status: unverified
+    tags: [numbers]
+  # ---------- p135: initiate and titrate ----------
+  - id: dm.L11.021
+    kind: card
+    topic: titration
+    front: How is insulin initiated in the basal-oral regimen?
+    back: With a single injection of basal insulin (glargine), keeping the oral drugs.
+    src: { page: 135, quote: "Initiate insulin with a single injection of a basal insulin (Glargine)" }
+    status: unverified
+  - id: dm.L11.022
+    kind: cloze
+    topic: titration
+    text: "Initiate: bedtime or morning {{c1::long-acting}} insulin, or bedtime {{c2::intermediate-acting}} insulin; daily dose {{c3::10 units or 0.2 units/kg}}."
+    src: { page: 135, quote: "Daily dose: 10 units or 0.2 units/kg" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L11.023
+    kind: table
+    topic: titration
+    title: "Initiate, titrate, monitor basal insulin (Nathan 2009, in the lecture)"
+    columns: [Step, What to do]
+    rows:
+      - [Initiate, "10 units or 0.2 U/kg, bedtime or morning long-acting, or bedtime intermediate"]
+      - [Check, FPG daily]
+      - [Titrate, "+2 units every 3 days until FPG 80–130 mg/dl"]
+      - [If FPG >180, "+4 units every 3 days"]
+      - [Hypoglycemia or FPG <70, "Reduce bedtime dose by ≥4 units, or 10% if >60 units"]
+      - [Monitor, Continue and check HbA1c every 3 months]
+    blanks: [[0, 1], [2, 1], [3, 1], [4, 1], [5, 1]]
+    src: { page: 135, quote: "Increase dose by 2 units every 3 days until FPG (80–130 mg/dL)" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L11.024
+    kind: mcq
+    topic: titration
+    stem: A woman on glargine 14 units at bedtime has fasting glucose 196, 205 and 188 mg/dl over 3 days. Using the lecture's titration chart, what next?
+    options:
+      - Increase by 4 units, then reassess in 3 days
+      - Increase by 2 units
+      - No change
+      - Reduce by 4 units
+      - Add prandial insulin now
+    answer: 0
+    why:
+      - "Correct: FPG >180 mg/dl → +4 units every 3 days (p135)."
+      - "+2 units is for FPG above 130 but not above 180."
+      - "She is far above the 80–130 target."
+      - "Reduction is for hypoglycemia or FPG <70."
+      - "Fix fasting first; prandial comes after basal is titrated."
+    src: { page: 135, quote: "If FPG is >180 mg/dL, increase dose by 4 units every 3 days" }
+    status: unverified
+  - id: dm.L11.025
+    kind: mcq
+    topic: titration
+    stem: A man on NPH 70 units at bedtime has a night hypoglycemia and fasting glucose 64 mg/dl. How should the dose change?
+    options:
+      - Reduce by 10% (7 units)
+      - Reduce by 2 units
+      - Increase by 2 units
+      - Stop insulin
+      - No change
+    answer: 0
+    why:
+      - "Correct: with hypoglycemia or FPG <70, reduce by ≥4 units, or by 10% if the dose is >60 units (p135)."
+      - "2 units is less than the ≥4 unit minimum."
+      - "Increasing would worsen hypoglycemia."
+      - "Stopping is not the chart's advice."
+      - "A hypo must lead to a reduction."
+    src: { page: 135, quote: "Reduce bedtime insulin dose by ≥4 units, or by 10% if >60 units" }
+    status: unverified
+  # ---------- p136: after basal ----------
+  - id: dm.L11.026
+    kind: enumerate
+    topic: prandial
+    prompt: When to intensify beyond basal insulin (HbA1c above target and...)?
+    points:
+      - Despite adequately titrated basal insulin
+      - Or once basal dose exceeds 0.7–1.0 IU/kg
+      - Or with FPG already at target
+    pass: 2
+    src: { page: 136, quote: "Despite adequately titrated basal insulin OR once basal dose >0.7–1.0 IU/kg OR FPG at target" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L11.027
+    kind: cloze
+    topic: prandial
+    text: "Stop pushing basal insulin and intensify once the basal dose exceeds {{c1::0.7–1.0 IU/kg}}."
+    src: { page: 136, quote: "once basal dose >0.7–1.0 IU/kg" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L11.028
+    kind: card
+    topic: prandial
+    front: What are the two options after basal insulin?
+    back: Either add prandial insulin (usually one dose with the largest meal or the meal with the greatest PPG excursion), or consider twice- or three-times-daily premix (higher risk of hypoglycemia and/or weight gain).
+    src: { page: 136, quote: "Usually one dose with the largest meal or meal with greatest PPG excursion" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L11.029
+    kind: card
+    topic: prandial
+    front: Which option after basal carries a caution, and why?
+    back: Twice- or three-times-daily premix, because of a higher risk of hypoglycemia and/or weight gain.
+    src: { page: 136, quote: "Caution higher risk of hypoglycemia and/or weight gain" }
+    status: unverified
+  # ---------- p137: prandial ----------
+  - id: dm.L11.030
+    kind: cloze
+    topic: prandial
+    text: "Initiate prandial insulin with {{c1::4 IU a day or 10% of the basal dose}}."
+    src: { page: 137, quote: "4 IU a day or 10% of basal dose" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L11.031
+    kind: card
+    topic: prandial
+    front: When adding prandial insulin, when should the total dose be lowered?
+    back: If HbA1c is below 64 mmol/mol (8%), consider lowering the total dose by 4 IU a day or 10% of the basal dose.
+    src: { page: 137, quote: "If HbA1c <64 mmol/mol (8%) consider lowering the total dose by 4 IU a day or 10% of basal dose" }
+    status: unverified
+  - id: dm.L11.032
+    kind: cloze
+    topic: prandial
+    text: "Titrate prandial insulin by {{c1::1–2 IU or 10–15%}} {{c2::twice weekly}}; for unexplained hypoglycemia lower the matching dose by {{c3::10–20%}}."
+    src: { page: 137, quote: "Increase dose by 1-2 IU or 10-15% twice weekly" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L11.033
+    kind: mcq
+    topic: prandial
+    stem: A man on glargine 40 units has FPG at target but HbA1c 8.6%. His biggest glucose rise is after lunch. What is the best next step and starting dose?
+    options:
+      - Add a prandial insulin before lunch, 4 IU (or 10% of basal)
+      - Add 4 IU of prandial insulin before each of the three meals
+      - Increase glargine by 4 units
+      - Switch to premix 0.3 U/kg
+      - Add NPH at bedtime
+    answer: 0
+    why:
+      - "Correct: one prandial dose with the meal with the greatest PPG excursion, starting 4 IU or 10% of basal (p136, p137)."
+      - "Start with one prandial dose, not three."
+      - "FPG is at target; more basal risks hypoglycemia."
+      - "Premix is the other option but carries more hypoglycemia and weight gain."
+      - "Adding NPH does not cover lunch."
+    src: { page: 137, quote: "4 IU a day or 10% of basal dose" }
+    status: unverified
+  # ---------- p137-138: premix ----------
+  - id: dm.L11.034
+    kind: card
+    topic: premix
+    front: What is the premixed insulin regimen?
+    back: Twice-daily injections of a mixture of short- and intermediate-acting insulin, before breakfast and the evening meal.
+    src: { page: 137, quote: "Twice-daily injections, a mixture of short and intermediate, before breakfast and the evening meal" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L11.035
+    kind: cloze
+    topic: premix
+    text: "In the BIAsp 30 example, 30 U before breakfast gives {{c1::9}} U rapid and {{c2::21}} U intermediate; 10 U before dinner gives {{c3::3}} U and 7 U."
+    src: { page: 138, quote: "30 U 9 21 10 U 3 7" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L11.036
+    kind: card
+    topic: premix
+    front: How often and on what reading is premixed insulin titrated?
+    back: Once weekly, based on the lowest self-measured plasma glucose over the previous 3 days.
+    src: { page: 138, quote: "Titrate once weekly, based on the lowest SMPG value over the previous 3 days before titration." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L11.037
+    kind: table
+    topic: premix
+    title: BIAsp 30 dose adjustment by pre-meal glucose
+    columns: [Pre-meal glucose (mg/dl), Change (units)]
+    rows:
+      - ["<80", "−2"]
+      - ["80–120", "0"]
+      - ["121–140", "+2"]
+      - ["141–180", "+4"]
+      - [">180", "+6"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 138, quote: "Pre-meal blood glucose level mg/dl < 80 80-120 121-140 141-180 > 180" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L11.038
+    kind: mcq
+    topic: premix
+    stem: A woman on BIAsp 30 twice daily has pre-breakfast readings of 152, 147 and 163 mg/dl over 3 days. How should the evening dose change this week?
+    options:
+      - +4 units (lowest reading 147, in 141–180)
+      - +6 units (highest reading 163)
+      - +2 units
+      - No change
+      - −2 units
+    answer: 0
+    why:
+      - "Correct: use the lowest SMPG of the last 3 days (147), which falls in 141–180 → +4 (p138)."
+      - "Titration uses the lowest, not the highest, value; and 163 is not >180."
+      - "+2 is for 121–140."
+      - "No change is for 80–120."
+      - "−2 is for <80."
+    src: { page: 138, quote: "Titrate once weekly, based on the lowest SMPG value over the previous 3 days before titration." }
+    status: unverified
+  - id: dm.L11.039
+    kind: card
+    topic: premix
+    front: The book's premix curves show what typical problems?
+    back: Nocturnal hypoglycemia after the evening dose (helped by a bedtime snack), hypoglycemia before or after a late lunch, and afternoon hyperglycemia; adding a separate lunchtime dose fixes the gap. (The book draws these under the basal-bolus regimen heading.)
+    src: { page: 139, quote: "III. Basal-bolus regimen" }
+    status: unverified
+  # ---------- p139-141: basal-bolus ----------
+  - id: dm.L11.040
+    kind: cloze
+    topic: basal-bolus
+    text: "Starting basal-bolus: total daily dose = weight (kg) × {{c1::0.5 U/kg}}; {{c2::½}} TDD as basal, ½ as bolus split {{c3::1/6 TDD}} before each of the three meals."
+    src: { page: 140, quote: "TDD = Weight (kg) x 0.5 U/kg" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L11.041
+    kind: mcq
+    topic: basal-bolus
+    stem: A 110 kg man starts a basal-bolus regimen as in the lecture's example. What are his doses?
+    options:
+      - "TDD 55 U: basal about 27–28 U; about 9 U before each meal"
+      - "TDD 33 U: 22 U morning, 11 U evening"
+      - "TDD 110 U: 55 U basal, 18 U per meal"
+      - "TDD 55 U: all as basal"
+      - "TDD 22 U: 10 U basal, 4 U per meal"
+    answer: 0
+    why:
+      - "Correct: 110 × 0.5 = 55 U; half (27.5) basal and 1/6 (≈9 U) per meal (p140)."
+      - "0.3 U/kg split 2/3 and 1/3 is the biphasic regimen (dm.L10)."
+      - "1 U/kg is double the book's starting dose."
+      - "Half of TDD must be bolus."
+      - "0.2 U/kg is the basal-only start, not basal-bolus."
+    src: { page: 140, quote: "TDD = 110 (kg) x 0.5 U/kg" }
+    status: unverified
+  - id: dm.L11.042
+    kind: table
+    topic: basal-bolus
+    title: "Premix vs basal-bolus: it's all about lifestyle"
+    columns: [Factor, Premix, Basal-bolus]
+    rows:
+      - [Injection frequency, Prefers fewer injections, No problem with more]
+      - [SMBG, Unwilling to self-monitor, Willing to self-monitor]
+      - [Daily routine, Fixed, Variable]
+      - [Ability to follow regimen, Limited cognitive function, Motivated with good cognitive function]
+      - [Support (education and emotional), Essential, Extremely essential]
+    blanks: [[0, 1], [1, 2], [2, 1], [2, 2], [3, 1], [4, 2]]
+    src: { page: 141, quote: "Premix vs. Basal-Bolus: It’s all about lifestyle" }
+    status: unverified
+    tags: [book-question, high-yield]
+  - id: dm.L11.043
+    kind: mcq
+    topic: basal-bolus
+    stem: A 72-year-old widow with mild cognitive impairment, a fixed daily routine and no wish to check her glucose often needs insulin intensification. Which regimen suits her best?
+    options:
+      - Premix
+      - Basal-bolus
+      - Prandial insulin before every meal with carb counting
+      - Insulin pump
+      - Four injections a day
+    answer: 0
+    why:
+      - "Correct: fewer injections, unwilling to self-monitor, fixed routine, limited cognition = premix (p141)."
+      - "Basal-bolus needs a motivated patient with good cognition who self-monitors."
+      - "That is basal-bolus thinking and needs self-monitoring."
+      - "Not in the lecture and needs high engagement."
+      - "She prefers fewer injections."
+    src: { page: 141, quote: "Premix vs. Basal-Bolus: It’s all about lifestyle" }
+    status: unverified
+  - id: dm.L11.044
+    kind: case
+    topic: titration
+    stem: A 58-year-old man, 80 kg, type 2 DM for 10 years on maximal metformin and gliclazide. HbA1c 9.2%, FPG 200 mg/dl. He says insulin is the last option.
+    steps:
+      - question: How do you answer his belief?
+        options: ["Most people with type 2 DM need insulin in time; the disease progresses", "Insulin means he has failed", "Insulin will cause complications", "He can avoid insulin with more tablets forever"]
+        answer: 0
+        why: "Fact 1 and fact 2 (p131): progression is the disease, not his failure. The other options repeat the myths on p132."
+      - reveal: He agrees to a basal-oral regimen.
+        question: Starting plan?
+        options: ["Keep OADs, glargine 10 U (or 0.2 U/kg = 16 U) once daily", "Stop OADs, start premix 0.3 U/kg", "Basal-bolus 0.5 U/kg", "Prandial 4 IU before each meal"]
+        answer: 0
+        why: "Initiate with a single basal injection, 10 units or 0.2 U/kg (p135), fix fasting first (p133)."
+      - reveal: "FPG after 3 days: 195, 210, 188 mg/dl."
+        question: Titration?
+        options: ["+4 units every 3 days", "+2 units every 3 days", "No change", "−4 units"]
+        answer: 0
+        why: "FPG >180 → +4 units every 3 days (p135)."
+      - reveal: Three months later FPG is 110 mg/dl on glargine 60 U (0.75 U/kg); HbA1c 8.1%.
+        question: Next?
+        options: ["Add prandial insulin with the largest meal, 4 IU or 10% of basal", "Keep raising glargine", "Stop metformin", "Wait 6 more months"]
+        answer: 0
+        why: "HbA1c above target with FPG at target and basal >0.7 IU/kg → intensify; add one prandial dose (p136, p137)."
+    src: { page: 135, quote: "Initiate insulin with a single injection of a basal insulin (Glargine)" }
+    status: unverified
+  - id: dm.L11.045
+    kind: case
+    topic: premix
+    stem: A 64-year-old woman with type 2 DM on premix twice daily (BIAsp 30) eats three fixed meals.
+    steps:
+      - question: What is premix made of and when is it given?
+        options: ["Short plus intermediate insulin, before breakfast and the evening meal", "Basal insulin only at bedtime", "Rapid insulin before each meal", "Glargine plus degludec"]
+        answer: 0
+        why: "A mixture of short and intermediate, twice daily before breakfast and the evening meal (p137)."
+      - reveal: "She wakes at 3 am sweating with glucose 62 mg/dl."
+        question: "Which part of her premix is behind this?"
+        options: ["The intermediate part of the evening dose", "The morning rapid part", "Her basal glargine", "Her lunch dose"]
+        answer: 0
+        why: "The evening intermediate component peaks overnight; the book's curves show nocturnal hypoglycemia, eased by a bedtime snack (p139)."
+      - reveal: "Lowest pre-dinner glucose over 3 days is 75 mg/dl."
+        question: How should the morning dose change?
+        options: ["−2 units", "No change", "+2 units", "+4 units"]
+        answer: 0
+        why: "<80 mg/dl → −2 units (p138). The pre-dinner value reflects the morning dose."
+    src: { page: 137, quote: "Twice-daily injections, a mixture of short and intermediate, before breakfast and the evening meal" }
+    status: unverified
+  # ---------- p141: book questions ----------
+  - id: dm.L11.046
+    kind: essay
+    topic: basal-oral
+    prompt: Define the criteria of the ideal basal insulin.
+    outline:
+      - "Profile": ["Mimics normal basal secretion", "No distinct peak", "Effect over 24 hours"]
+      - "Safety and use": ["Less nocturnal hypoglycemia", "Once daily for compliance", "Predictable absorption"]
+      - "Why it matters": ["Qualified A1c: analogues reach ~0.4–0.6% lower A1c than NPH at equal hypoglycemia"]
+    src: { page: 134, quote: "Reduce nocturnal hypoglycemia 5. Once-daily administration for patient compliance 6. Predictable absorption pattern" }
+    status: unverified
+    tags: [book-question]
+  - id: dm.L11.047
+    kind: essay
+    topic: titration
+    prompt: What is meant by a basal-oral insulin regimen? Discuss how to initiate.
+    outline:
+      - "Meaning": ["Keep oral drugs and add one basal insulin injection", "Fix fasting first: PPG peaks sit on the fasting level"]
+      - "Advantages": ["One injection, no mixing, pens", "Slow, safe, simple titration; low dose; limited weight gain"]
+      - "Initiate": ["Bedtime or morning long-acting, or bedtime NPH", "10 U or 0.2 U/kg"]
+      - "Titrate and monitor": ["FPG daily; +2 U every 3 days to FPG 80–130; +4 if >180", "Hypo or FPG <70: −≥4 U or 10% if >60 U", "HbA1c every 3 months"]
+    src: { page: 135, quote: "Daily dose: 10 units or 0.2 units/kg" }
+    status: unverified
+    tags: [book-question]
+  - id: dm.L11.048
+    kind: essay
+    topic: basal-bolus
+    prompt: Discuss the differences between premixed and basal-bolus insulin regimens.
+    outline:
+      - "Premix": ["Short + intermediate mixture twice daily, before breakfast and the evening meal", "Titrate weekly on the lowest SMPG of 3 days (−2 to +6 U)", "More hypoglycemia and weight gain; fixed meals"]
+      - "Basal-bolus": ["TDD 0.5 U/kg: ½ basal, 1/6 before each meal", "Closest to physiology, flexible"]
+      - "Choose by lifestyle": ["Premix: fewer injections, no self-monitoring, fixed routine, limited cognition", "Basal-bolus: more injections OK, self-monitors, variable routine, motivated; support extremely essential"]
+    src: { page: 141, quote: "Premix vs. Basal-Bolus: It’s all about lifestyle" }
+    status: unverified
+    tags: [book-question]

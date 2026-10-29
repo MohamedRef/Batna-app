@@ -1,0 +1,486 @@
+schema: batna.lesson/v1
+lecture: dm.L04
+lessons:
+  # ------------------------------------------------------------------
+  - id: dm.L04.lesson1
+    title: "السكر مش لوحده: القلب والكلية"
+    hook: "عيان type 2 نادرًا ما بيجيلك بالسكر بس. غالبًا معاه ضغط ووزن وكوليسترول، وكلهم بيضربوا نفس الشرايين."
+    minutes: 8
+    pages: [37, 39]
+    topics: [risk-factors, cardiorenal]
+    goals:
+      - "تحفظ نسب الـ risk factors في type 2 والـ four areas of focus"
+      - "تعرف مين ASCVD ومين high risk"
+      - "تختار الدوا الصح لكل arm: ASCVD و HF و CKD"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 37
+        title: "العيان بييجي بباقة"
+        quote: "45% are obese (BMI ≥30 kg/m2)2 9) 80% have hypertension (blood pressure ≥130/80 mmHg)"
+        text: |
+          في **type 2**:
+          - **45%** عندهم obesity (BMI ≥30)
+          - ==80%== عندهم hypertension (≥130/80)
+          - **50%** عندهم hypercholesterolemia (TC ≥5.0 mmol/L)
+
+          والسكر والقلب والكلية **interrelated**: كل واحد بيزوّد التاني.
+      - kind: explain
+        page: 37
+        title: "الهدف: نمنع الـ complications"
+        quote: "Goals of treatment: Prevention of complications l Four areas of focus: Glycemic management Weight management CV risk factors management Cardio-renal protection"
+        text: |
+          أربع حاجات نشتغل عليها مع بعض:
+          1. **Glycemic** management
+          2. **Weight** management
+          3. **CV risk factors** management
+          4. ==Cardio-renal protection==
+
+          وتحت كل ده: **healthy lifestyle** و **self-management education**.
+      - kind: mnemonic
+        page: 37
+        quote: "Goals of treatment: Prevention of complications l Four areas of focus: Glycemic management Weight management CV risk factors management Cardio-renal protection"
+        word: "GWCC"
+        parts:
+          - { key: "G", text: "Glycemic management" }
+          - { key: "W", text: "Weight management" }
+          - { key: "C", text: "CV risk factors management" }
+          - { key: "C", text: "Cardio-renal protection" }
+      - kind: explain
+        page: 38
+        title: "مين ASCVD ومين high risk؟"
+        quote: "55 years of age with two or more additional risk factors, including: Obesity Hypertension Smoking Dyslipidemia, or albuminuria"
+        text: |
+          **ASCVD:** MI، stroke، أي revascularization، TIA، unstable angina، amputation، CAD (بأعراض أو من غيرها).
+
+          **Indicators of high risk:** سنّه ==≥55== ومعاه **2 أو أكتر** من: obesity، hypertension، smoking، dyslipidemia، albuminuria.
+      - kind: figure
+        page: 39
+        quote: "+CKD (on maximally tolerated dose of ACEi/ARB) PREFERABLY SGLT2i with primary evidence of reducing CKD progression"
+        title: "تلات arms وكل arm ليه دوا"
+        alt: "Three columns: ASCVD or high risk leads to a GLP-1 receptor agonist or an SGLT2 inhibitor with proven CVD benefit; heart failure leads to an SGLT2 inhibitor with proven HF benefit; CKD leads preferably to an SGLT2 inhibitor if eGFR is 20 or more, or a GLP-1 receptor agonist if SGLT2 inhibitors are not tolerated."
+        caption: "الـ ==SGLT2i== موجود في التلاتة. الـ GLP-1 RA بيقف جنبه في الـ ASCVD، وبديله في الـ CKD."
+        svg: |
+          <svg viewBox="0 0 330 200" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L04a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker></defs>
+            <rect x="6" y="10" width="100" height="40" rx="10" class="fg-acc"/>
+            <rect x="115" y="10" width="100" height="40" rx="10" class="fg-bad"/>
+            <rect x="224" y="10" width="100" height="40" rx="10" class="fg-box"/>
+            <text x="56" y="35" text-anchor="middle" class="t-b t-acc">+ASCVD</text>
+            <text x="165" y="35" text-anchor="middle" class="t-b t-bad">+HF</text>
+            <text x="274" y="35" text-anchor="middle" class="t-b">+CKD</text>
+            <path d="M56 52 V72" class="fg-arrow" marker-end="url(#L04a)"/>
+            <path d="M165 52 V72" class="fg-arrow" marker-end="url(#L04a)"/>
+            <path d="M274 52 V72" class="fg-arrow" marker-end="url(#L04a)"/>
+            <rect x="6" y="78" width="100" height="70" rx="8" class="fg-box"/>
+            <rect x="115" y="78" width="100" height="70" rx="8" class="fg-box"/>
+            <rect x="224" y="78" width="100" height="70" rx="8" class="fg-box"/>
+            <text x="56" y="100" text-anchor="middle" class="t-sm t-b">GLP-1 RA</text>
+            <text x="56" y="117" text-anchor="middle" class="t-sm t-mut">either / or</text>
+            <text x="56" y="134" text-anchor="middle" class="t-sm t-b t-good">SGLT2i</text>
+            <text x="165" y="108" text-anchor="middle" class="t-sm t-b t-good">SGLT2i</text>
+            <text x="165" y="126" text-anchor="middle" class="t-sm">HF benefit</text>
+            <text x="274" y="100" text-anchor="middle" class="t-sm t-b t-good">SGLT2i</text>
+            <text x="274" y="117" text-anchor="middle" class="t-sm">eGFR ≥20</text>
+            <text x="274" y="134" text-anchor="middle" class="t-sm t-mut">else GLP-1 RA</text>
+            <text x="165" y="175" text-anchor="middle" class="t-sm t-mut">CKD = eGFR &lt;60 or ACR ≥30 mg/g</text>
+            <text x="165" y="192" text-anchor="middle" class="t-sm t-mut">(on max ACEi/ARB, repeat to confirm)</text>
+          </svg>
+      - kind: explain
+        page: 39
+        title: "التفاصيل اللي بتتسأل"
+        quote: "Use SGLT2i in people with an eGFR ≥20 mL/min per 1.73 m2; once initiated should be continued until initiation of dialysis or transplantation"
+        text: |
+          - **ASCVD:** لو الـ A1C فوق الهدف، على GLP-1 RA زوّد **SGLT2i** والعكس، أو **TZD**.
+          - **HF:** أعراض حالية أو قديمة مع **HFrEF أو HFpEF** موثّق.
+          - **CKD:** الـ SGLT2i من ==eGFR ≥20==، وتكمّله لحد الـ **dialysis أو transplantation**.
+      - kind: match
+        page: 39
+        quote: "SGLT2i with proven HF benefit in this population"
+        prompt: "وصّل الـ arm بأول اختيار:"
+        pairs:
+          - ["+ASCVD", "GLP-1 RA or SGLT2i (CVD benefit)"]
+          - ["+HF", "SGLT2i (HF benefit)"]
+          - ["+CKD", "SGLT2i if eGFR ≥20"]
+          - ["CKD, SGLT2i not tolerated", "GLP-1 RA (CVD benefit)"]
+      - kind: aside
+        tone: exam
+        page: 39
+        quote: "GLP-1 RA with proven CVD benefit EITHER/ OR SGLT2i with proven CVD benefit"
+        text: "في الامتحان: الـ cardiorenal drug بيتختار علشان **الخطر**، مش علشان الـ A1C. عيان MI والـ A1C بتاعه 7.1%؟ برضه ياخد GLP-1 RA أو SGLT2i."
+      - kind: check
+        page: 39
+        quote: "Current or prior symptoms of HF with documented HFrEF or HFpEF"
+        question: "Type 2, HFpEF documented on echo, A1C 7.6% on metformin. Add?"
+        options: ["SGLT2i with proven HF benefit", "Pioglitazone", "Saxagliptin", "Sulfonylurea"]
+        answer: 0
+        why:
+          - "صح: الـ +HF arm (p39)."
+          - "الـ TZD بيحجز مية، ومش اختيار الـ HF."
+          - "DPP-4i ملوش HF benefit."
+          - "ملوش cardiorenal benefit."
+      - kind: try
+        items: [dm.L04.001, dm.L04.003, dm.L04.007, dm.L04.012, dm.L04.016]
+    recap:
+      - "Type 2: 45% obese، 80% hypertension، 50% high cholesterol؛ السكر والقلب والكلية مترابطين."
+      - "أربع أهداف: glycemic، weight، CV risk factors، cardio-renal protection."
+      - "High risk = سن ≥55 + اتنين risk factors أو أكتر."
+      - "ASCVD: GLP-1 RA أو SGLT2i. HF: SGLT2i. CKD: SGLT2i (eGFR ≥20، لحد الـ dialysis)، وإلا GLP-1 RA."
+    practice: [dm.L04.001, dm.L04.002, dm.L04.003, dm.L04.004, dm.L04.005, dm.L04.006, dm.L04.007, dm.L04.008, dm.L04.009, dm.L04.010, dm.L04.011, dm.L04.012, dm.L04.013, dm.L04.014, dm.L04.015, dm.L04.016, dm.L04.075]
+  # ------------------------------------------------------------------
+  - id: dm.L04.lesson2
+    title: "قوة الدوا: على السكر وعلى الوزن"
+    hook: "مش كل الأدوية قد بعض. فيه دوا بينزّل الـ A1C والوزن مع بعض، وفيه دوا مش بيحرّك الميزان خالص."
+    minutes: 7
+    pages: [40, 41]
+    topics: [efficacy]
+    goals:
+      - "ترتّب الأدوية حسب قوتها على السكر"
+      - "ترتّبها حسب قوتها على الوزن"
+      - "تعرف ليه الـ combination therapy"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 40
+        title: "البداية"
+        quote: "Metformin OR Agent(s) including COMBINATION therapy that provide adequate EFFICACY to achieve and maintain treatment goals"
+        text: |
+          **Metformin** أو أي دوا (أو ==combination==) قوته كفاية توصّل للهدف وتحافظ عليه.
+
+          وفي الـ high-risk: تجنّب الـ **hypoglycemia** أولوية.
+      - kind: figure
+        page: 40
+        quote: "Efficacy for weight loss Very High: Semaglutide, Tirzepatide High: Dulaglutide, Liraglutide"
+        title: "سلّمين: السكر والوزن"
+        alt: "Two ladders side by side. Glucose lowering: very high is high-dose dulaglutide, semaglutide, tirzepatide, insulin and combinations; high is other GLP-1 RAs, metformin, SGLT2i, sulfonylurea and TZD; intermediate is DPP-4i. Weight loss: very high is semaglutide and tirzepatide; high is dulaglutide and liraglutide; intermediate is other GLP-1 RAs and SGLT2i; neutral is DPP-4i and metformin."
+        caption: "==Semaglutide و tirzepatide== فوق في السلّمين. الـ DPP-4i تحت في الاتنين."
+        svg: |
+          <svg viewBox="0 0 330 240" xmlns="http://www.w3.org/2000/svg">
+            <text x="82" y="16" text-anchor="middle" class="t-b">Glucose</text>
+            <text x="248" y="16" text-anchor="middle" class="t-b">Weight</text>
+            <rect x="6" y="26" width="152" height="54" rx="8" class="fg-good"/>
+            <text x="14" y="44" class="t-sm t-b t-good">Very high</text>
+            <text x="14" y="60" class="t-sm">Sema, tirzepatide, dula hi</text>
+            <text x="14" y="74" class="t-sm">Insulin, combinations</text>
+            <rect x="6" y="86" width="152" height="54" rx="8" class="fg-acc"/>
+            <text x="14" y="104" class="t-sm t-b t-acc">High</text>
+            <text x="14" y="120" class="t-sm">Metformin, SGLT2i, SU</text>
+            <text x="14" y="134" class="t-sm">TZD, other GLP-1 RA</text>
+            <rect x="6" y="146" width="152" height="40" rx="8" class="fg-box"/>
+            <text x="14" y="164" class="t-sm t-b">Intermediate</text>
+            <text x="14" y="179" class="t-sm">DPP-4i</text>
+            <rect x="172" y="26" width="152" height="40" rx="8" class="fg-good"/>
+            <text x="180" y="44" class="t-sm t-b t-good">Very high</text>
+            <text x="180" y="59" class="t-sm">Semaglutide, tirzepatide</text>
+            <rect x="172" y="72" width="152" height="40" rx="8" class="fg-acc"/>
+            <text x="180" y="90" class="t-sm t-b t-acc">High</text>
+            <text x="180" y="105" class="t-sm">Dulaglutide, liraglutide</text>
+            <rect x="172" y="118" width="152" height="40" rx="8" class="fg-box"/>
+            <text x="180" y="136" class="t-sm t-b">Intermediate</text>
+            <text x="180" y="151" class="t-sm">Other GLP-1 RA, SGLT2i</text>
+            <rect x="172" y="164" width="152" height="40" rx="8" class="fg-box"/>
+            <text x="180" y="182" class="t-sm t-b t-mut">Neutral</text>
+            <text x="180" y="197" class="t-sm">DPP-4i, metformin</text>
+            <text x="165" y="230" text-anchor="middle" class="t-sm t-mut">dula hi = dulaglutide high dose</text>
+          </svg>
+      - kind: sort
+        page: 41
+        quote: "Efficacy for glucose lowering Very High: Dulaglutide (high dose), Semaglutide, Tirzepatide Insulin"
+        prompt: "قوة الدوا على السكر؟"
+        bins: ["Very high", "High", "Intermediate"]
+        cards:
+          - { text: "Tirzepatide", bin: 0 }
+          - { text: "Insulin", bin: 0 }
+          - { text: "Metformin", bin: 1 }
+          - { text: "Sulfonylurea", bin: 1 }
+          - { text: "Pioglitazone", bin: 1 }
+          - { text: "Sitagliptin", bin: 2 }
+      - kind: aside
+        tone: trap
+        page: 40
+        quote: "Neutral: DPP-4i, Metformin"
+        text: "فخ: الـ **metformin** قوي على السكر (high) بس **neutral على الوزن**. والـ SGLT2i **high** على السكر و **intermediate** على الوزن."
+      - kind: order
+        page: 40
+        quote: "Set individualized weight management goals"
+        prompt: "رتّب خطوات الـ weight management:"
+        steps:
+          - "Individualized weight goals"
+          - "Nutrition therapy and physical activity"
+          - "Intensive structured program"
+          - "Weight-loss medication"
+          - "Metabolic surgery"
+      - kind: explain
+        page: 41
+        title: "ليه combination؟"
+        quote: "Combination Therapy Increasing evidence and rationale: Increased durability of glycemic effect, potential to address therapeutic inertia"
+        text: |
+          - **Durability:** المفعول على السكر بيعيش أطول، وبيكسر الـ ==therapeutic inertia==.
+          - **Multiple targets:** بتضرب أكتر من pathophysiologic process مرة واحدة.
+          - **Adherence:** أقل medication burden، فالعيان بيكمّل.
+          - **Complementary benefits:** سكر ووزن و CV risk.
+      - kind: mnemonic
+        page: 41
+        quote: "Combination Therapy Increasing evidence and rationale: Increased durability of glycemic effect, potential to address therapeutic inertia"
+        word: "DMAC"
+        parts:
+          - { key: "D", text: "Durability (and less inertia)" }
+          - { key: "M", text: "Multiple pathophysiologic targets" }
+          - { key: "A", text: "Adherence and persistence" }
+          - { key: "C", text: "Complementary benefits" }
+      - kind: check
+        page: 40
+        quote: "Consider regimen with high-to-very-high dual glucose and weight efficacy"
+        question: "Type 2, BMI 37, A1C 8.9%, no ASCVD/HF/CKD. Best dual glucose + weight option?"
+        options: ["Semaglutide or tirzepatide", "Sitagliptin", "Glimepiride", "Pioglitazone"]
+        answer: 0
+        why:
+          - "صح: very high على السكر والوزن (p40)."
+          - "Intermediate على السكر و neutral على الوزن."
+          - "بيزوّد الوزن."
+          - "بيزوّد الوزن."
+      - kind: try
+        items: [dm.L04.018, dm.L04.019, dm.L04.020, dm.L04.021, dm.L04.024]
+    recap:
+      - "ابدأ بـ metformin أو أي دوا/combination قوته كفاية؛ تجنّب الـ hypoglycemia في الـ high risk."
+      - "سكر: very high = sema، tirzepatide، dula high dose، insulin، combinations؛ intermediate = DPP-4i."
+      - "وزن: very high = sema، tirzepatide؛ high = dula، lira؛ neutral = DPP-4i و metformin."
+      - "Combination: durability، multiple targets، adherence، complementary benefits."
+    practice: [dm.L04.017, dm.L04.018, dm.L04.019, dm.L04.020, dm.L04.021, dm.L04.022, dm.L04.023, dm.L04.024]
+  # ------------------------------------------------------------------
+  - id: dm.L04.lesson3
+    title: "الضغط: 130/80 والحبوب المجمّعة"
+    hook: "كل 2 mmHg بتنزّلهم من الـ systolic بيوفّروا 7–10% من الـ CV risk. يعني كل ملّي فارق."
+    minutes: 9
+    pages: [42, 44]
+    topics: [bp, bp-esc]
+    goals:
+      - "تحفظ الـ threshold والـ target"
+      - "تمشي في الـ ADA algorithm من أول دوا لحد الـ MRA"
+      - "تعرف خطوات الـ ESC/ESH وامتى الـ beta-blocker"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 42
+        title: "رقم واحد تحفظه"
+        quote: "The on-treatment target blood pressure goal is <130/80 mmHg, if it can be safely attained."
+        text: |
+          - كل ==2 mmHg== أقل في الـ SBP = **7–10%** أقل CV risk.
+          - ابدأ دوا لما الضغط **persistently ≥130/80**.
+          - الهدف **<130/80** لو ينفع بأمان.
+      - kind: explain
+        page: 42
+        title: "الـ ADA: أول خطوة"
+        quote: "Initial BP >140/90 and <160/100 mmHg Start one agent"
+        text: |
+          - **>140/90 و <160/100** ← **دوا واحد** + lifestyle
+          - **≥160/100** ← ==دوايين== + lifestyle
+
+          ولو فيه **albuminuria أو CAD** ← لازم **ACEi أو ARB** يبقى منهم.
+      - kind: update
+        page: 42
+        quote: "Initial BP >140/90 and <160/100 mmHg Start one agent"
+        text: "الـ ADA 2025 بقى يبدأ دوا واحد من **≥130/80 و <150/90**، ودوايين (يفضّل في حباية واحدة) من **≥150/90**. في الامتحان: أرقام الكتاب **140/90 و 160/100**."
+        ref: "ADA Standards of Care in Diabetes 2025, section 10"
+      - kind: check
+        page: 42
+        quote: "Albuminuria or CAD Yes Start: ACEi or ARB"
+        question: "BP 152/94 (repeated), ACR 90 mg/g. Start?"
+        options: ["ACEi or ARB", "Amlodipine", "Thiazide", "Two agents"]
+        answer: 0
+        why:
+          - "صح: دوا واحد، وفيه albuminuria فيبقى ACEi/ARB (p42)."
+          - "بس لو مفيش albuminuria أو CAD."
+          - "بس لو مفيش albuminuria أو CAD."
+          - "الدوايين من ≥160/100."
+      - kind: order
+        page: 43
+        quote: "Not meeting target or adverse effects using a drug from each of three classes"
+        prompt: "الضغط مش راضي ينزل. رتّب:"
+        steps:
+          - "Start one or two agents"
+          - "Assess control and side effects"
+          - "Add a complementary class"
+          - "Still uncontrolled on three classes"
+          - "Add an MRA and refer"
+      - kind: figure
+        page: 44
+        quote: "Triple combination + spironolactone or other drug"
+        title: "الـ ESC/ESH: حباية، حباية، حبايتين"
+        alt: "Three steps. Step 1, one pill: ACEi or ARB plus CCB or diuretic. Step 2, one pill: ACEi or ARB plus CCB plus diuretic. Step 3, two pills: add spironolactone 25 to 50 mg or another drug for resistant hypertension. Beta-blockers can be added at any step for a specific indication."
+        caption: "ابدأ بـ ==two-drug SPC==، بعدين triple، بعدين spironolactone. والـ beta-blocker في أي خطوة لو ليه سبب."
+        svg: |
+          <svg viewBox="0 0 330 230" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L04b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker></defs>
+            <ellipse cx="34" cy="30" rx="26" ry="14" class="fg-good"/>
+            <text x="34" y="35" text-anchor="middle" class="t-sm t-b t-good">1</text>
+            <rect x="70" y="10" width="254" height="40" rx="10" class="fg-box"/>
+            <text x="80" y="27" class="t-sm t-b">Step 1: dual</text>
+            <text x="80" y="43" class="t-sm">ACEi/ARB + CCB or diuretic</text>
+            <path d="M197 52 V68" class="fg-arrow" marker-end="url(#L04b)"/>
+            <ellipse cx="34" cy="92" rx="26" ry="14" class="fg-acc"/>
+            <text x="34" y="97" text-anchor="middle" class="t-sm t-b t-acc">1</text>
+            <rect x="70" y="72" width="254" height="40" rx="10" class="fg-box"/>
+            <text x="80" y="89" class="t-sm t-b">Step 2: triple</text>
+            <text x="80" y="105" class="t-sm">ACEi/ARB + CCB + diuretic</text>
+            <path d="M197 114 V130" class="fg-arrow" marker-end="url(#L04b)"/>
+            <ellipse cx="34" cy="154" rx="26" ry="14" class="fg-bad"/>
+            <text x="34" y="159" text-anchor="middle" class="t-sm t-b t-bad">2</text>
+            <rect x="70" y="134" width="254" height="40" rx="10" class="fg-bad"/>
+            <text x="80" y="151" class="t-sm t-b t-bad">Step 3: resistant</text>
+            <text x="80" y="167" class="t-sm">+ spironolactone 25–50 mg (or other)</text>
+            <text x="165" y="200" text-anchor="middle" class="t-sm t-mut">pills per day on the left</text>
+            <text x="165" y="218" text-anchor="middle" class="t-sm t-mut">β-blocker at any step if indicated</text>
+          </svg>
+      - kind: explain
+        page: 44
+        title: "استثناءات"
+        quote: "Consider monotherapy in low risk grade 1 hypertension (systolic BP <150mmHg), or in very old (≥80 years) or frailer patients"
+        text: |
+          **Monotherapy** بدل الـ dual: grade 1 low risk (**SBP <150**)، أو ==≥80 سنة==، أو frail.
+
+          **Beta-blockers** في أي خطوة لو فيه: HF، angina، post-MI، AF، أو ست صغيرة حامل أو بتخطط تحمل.
+      - kind: aside
+        tone: trap
+        page: 43
+        quote: "The combination of two RAS blockers is not recommended"
+        text: "فخ: **ACEi + ARB مع بعض = لأ** (class III). الـ RAS blocker واحد بس، والتاني يبقى CCB أو diuretic."
+      - kind: case
+        page: 42
+        quote: "Initial BP ≥160/100 mmHg Start two agents"
+        stem: "55-year-old woman, type 2. BP 164/102 on three visits. ACR 45 mg/g."
+        steps:
+          - question: "How many drugs?"
+            options: ["Two", "One", "Lifestyle only", "Three"]
+            answer: 0
+            why: "≥160/100 ← دوايين (p42)."
+          - question: "Which?"
+            options: ["ARB + CCB or diuretic", "ACEi + ARB", "Beta-blocker + alpha-blocker", "CCB + diuretic"]
+            answer: 0
+            why: "فيه albuminuria، فالـ ACEi/ARB لازم يبقى منهم. والـ RAS blockers الاتنين مع بعض ممنوع."
+          - reveal: "On ARB + amlodipine + thiazide at full doses: 142/88."
+            question: "Next?"
+            options: ["Add spironolactone (MRA) and refer", "Add an ACEi", "Accept it", "Stop the thiazide"]
+            answer: 0
+            why: "مش منضبط على تلات classes ← MRA وتحويل لمتخصص (p43–44)."
+      - kind: try
+        items: [dm.L04.025, dm.L04.026, dm.L04.030, dm.L04.035, dm.L04.040]
+    recap:
+      - "كل 2 mmHg = 7–10% أقل CV risk. ابدأ دوا عند ≥130/80؛ الهدف <130/80."
+      - "ADA: >140/90 و <160/100 دوا واحد؛ ≥160/100 دوايين؛ albuminuria أو CAD = ACEi/ARB."
+      - "مش منضبط: زوّد class مكمّل؛ تلات classes ومش منضبط: MRA وتحويل."
+      - "ESC/ESH: RAS blocker + CCB أو diuretic في حباية؛ بعدين triple؛ بعدين spironolactone 25–50."
+      - "ممنوع اتنين RAS blockers. Beta-blocker لو فيه سبب."
+    practice: [dm.L04.025, dm.L04.026, dm.L04.027, dm.L04.028, dm.L04.029, dm.L04.030, dm.L04.031, dm.L04.032, dm.L04.033, dm.L04.034, dm.L04.035, dm.L04.036, dm.L04.037, dm.L04.038, dm.L04.039, dm.L04.040, dm.L04.076, dm.L04.080, dm.L04.081, dm.L04.082]
+  # ------------------------------------------------------------------
+  - id: dm.L04.lesson4
+    title: "الدهون والـ aspirin: مين ياخد إيه"
+    hook: "نص الـ high risk بياخدوا statin ضعيف وبيفضل الـ LDL عالي. الدرس ده علشان ما تبقاش منهم."
+    minutes: 10
+    pages: [44, 49]
+    topics: [risk-categories, lipids, statin-choice, antiplatelet]
+    goals:
+      - "تصنّف عيان السكر: very high، high، moderate"
+      - "تختار الـ statin intensity والـ LDL goal"
+      - "تعرف امتى aspirin وامتى لأ"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 44
+        title: "الـ ESC: تلات درجات"
+        quote: "High CV risk is defined as DM duration ≥ 10 years without target organ damage plus any other additional risk factor."
+        text: |
+          - **Very high:** established CVD، أو ==target organ damage== (proteinuria، eGFR <30، LVH، retinopathy)، أو **≥3** risk factors، أو type 1 بدري ومدته **>20 سنة**.
+          - **High:** سكر **≥10 سنين** من غير organ damage + أي risk factor تاني.
+          - **Moderate:** صغيّر (type 1 <35، type 2 <50)، مدة **<10 سنين**، من غير risk factors.
+      - kind: update
+        page: 44
+        quote: "very high CV risk defined as DM with other target organ damage (proteinuria, eGFR < 30 mL/min/1.73 m2, left ventricular hypertrophy, or retinopathy)"
+        text: "الـ ESC 2023 بقى يحسب الخطر في type 2 من غير ASCVD أو organ damage شديد بالـ **SCORE2-Diabetes**. في الامتحان: تقسيمة الكتاب."
+        ref: "ESC Guidelines for CVD in patients with diabetes 2023"
+      - kind: table
+        page: 45
+        quote: "A calculated SCORE ≥10% for 10-year risk of fatal CVD."
+        title: "الـ SCORE (10-year fatal CVD)"
+        columns: [Risk, SCORE]
+        rows:
+          - ["Very high", "≥10%"]
+          - ["High", "≥5% and <10%"]
+          - ["Moderate", "≥1% and <5%"]
+          - ["Low", "<1%"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1]]
+      - kind: explain
+        page: 46
+        title: "الـ statin بالسن والخطر"
+        quote: "For people with diabetes aged 40–75 years without ASCVD, use moderate-intensity statin therapy in addition to lifestyle therapy."
+        text: |
+          - **40–75 من غير ASCVD:** moderate-intensity.
+          - **40–75 + risk factor واحد أو أكتر:** ==high-intensity==، LDL ↓ ≥50% و **<70 mg/dL**.
+          - **ASCVD (أي سن):** high-intensity، LDL ↓ ≥50% و **<55 mg/dL**.
+          - مش وصلت؟ **ezetimibe** أو **PCSK9i**.
+          - "**>75:** ممكن تبدأ moderate بعد نقاش؛ لو بياخده كمّل. **الحمل: ممنوع.**"
+      - kind: figure
+        page: 48
+        title: "تختار أنهي statin؟"
+        image: { file: dm/L04-statin-choice.webp, book: true }
+        caption: "الـ **myalgias** ← hydrophilic (rosuva، prava). الـ **adherence** ← long half-life (atorva، rosuva). ==CYP3A4== ← ابعد عن simva و lova و atorva."
+        alt: "Book figure: four rows of arrows. Indication for high-intensity statin leads to atorvastatin 40 to 80 mg or rosuvastatin 20 to 40 mg. Previous myalgias leads to a hydrophilic statin, rosuvastatin or pravastatin. Adherence issues lead to a long half-life statin, atorvastatin or rosuvastatin. CYP3A4 interactions: avoid simvastatin, lovastatin and atorvastatin; use pravastatin or rosuvastatin."
+      - kind: match
+        page: 48
+        quote: "High-Intensity Statin Therapy Daily dose lowers LDL on average by ≥50% Atorvastatin 40-80 mg Rosuvastatin 20-40 mg"
+        prompt: "وصّل:"
+        pairs:
+          - ["Rosuvastatin 20–40 mg", "High intensity (LDL ↓ ≥50%)"]
+          - ["Pravastatin 40–80 mg", "Moderate intensity (LDL ↓ 30–49%)"]
+          - ["Previous myalgias", "Hydrophilic statin"]
+          - ["CYP3A4 interactions", "Avoid simvastatin"]
+      - kind: check
+        page: 47
+        quote: "Addition of ezetimibe or a PCSK9 inhibitor is recommended if this goal is not achieved on maximum tolerated statin therapy."
+        question: "Diabetes + prior stroke, on atorvastatin 80. LDL 72 mg/dL. Next?"
+        options: ["Add ezetimibe or a PCSK9 inhibitor", "Nothing: LDL <100", "Lower the statin dose", "Add a fibrate"]
+        answer: 0
+        why:
+          - "صح: الـ ASCVD هدفه <55 mg/dL (p47)."
+          - "الهدف أقل من 55."
+          - "عكس المطلوب."
+          - "مش في المحاضرة."
+      - kind: explain
+        page: 49
+        title: "الـ aspirin"
+        quote: "Use aspirin therapy (75–162 mg/day) as a secondary prevention strategy in those with diabetes and a history of atherosclerotic cardiovascular disease."
+        text: |
+          - **Secondary prevention:** aspirin ==75–162 mg/day== لكل اللي عندهم ASCVD.
+          - **Stable CAD/PAD + bleeding risk قليل:** aspirin + **low-dose rivaroxaban**.
+          - **Primary prevention:** ممكن لو **≥50 سنة** + risk factor كبير ومفيش bleeding risk، بـ **shared decision**. فوق **70** الضرر أكتر من الفايدة.
+      - kind: aside
+        tone: analogy
+        page: 49
+        quote: "Aspirin therapy for primary prevention may be considered in the context of shared decision-making"
+        text: "الـ aspirin في الـ primary prevention زي الميزان: كفّة فيها **جلطة أقل** وكفّة فيها **نزيف أكتر**، وهما **تقريبًا متساويين**. علشان كده القرار بيتاخد **مع العيان**، مش ليه."
+      - kind: case
+        page: 48
+        quote: "Previous Myalgias with Statin Therapy Choose hydrophilic statin."
+        stem: "48-year-old smoker, type 2, LDL 150 mg/dL. Simvastatin gave him muscle aches."
+        steps:
+          - question: "Statin intensity?"
+            options: ["High: LDL ↓ ≥50% and <70", "Moderate", "None before 50", "PCSK9i first"]
+            answer: 0
+            why: "40–75 + risk factor (smoking) ← high-intensity (p46)."
+          - question: "Which statin?"
+            options: ["Rosuvastatin 20–40 mg", "Simvastatin 40 mg", "Pravastatin 40 mg", "Lovastatin 40 mg"]
+            answer: 0
+            why: "Myalgias ← hydrophilic (rosuva أو prava)، والـ rosuva بس فيهم high-intensity (p48)."
+          - reveal: "Three months later: LDL 88 on maximum tolerated dose."
+            question: "Next?"
+            options: ["Add ezetimibe", "Aspirin only", "Stop statin", "Switch to simvastatin"]
+            answer: 0
+            why: "مش وصل للهدف ← ezetimibe (p46)."
+      - kind: try
+        items: [dm.L04.042, dm.L04.055, dm.L04.059, dm.L04.066, dm.L04.073]
+    recap:
+      - "Very high: CVD، organ damage، ≥3 risk factors، type 1 >20 سنة. High: ≥10 سنين + risk factor. Moderate: صغيّر و <10 سنين."
+      - "40–75: moderate؛ مع risk factor: high (<70)؛ ASCVD: high (<55)؛ مش وصل: ezetimibe أو PCSK9i."
+      - "High-intensity = atorva 40–80 أو rosuva 20–40. Myalgias: rosuva/prava. CYP3A4: ابعد عن simva/lova/atorva."
+      - "Aspirin 75–162 للـ secondary. Primary: ≥50 + risk factor ومفيش نزيف، shared decision؛ فوق 70 لأ."
+    practice: [dm.L04.041, dm.L04.042, dm.L04.043, dm.L04.044, dm.L04.045, dm.L04.046, dm.L04.047, dm.L04.048, dm.L04.049, dm.L04.050, dm.L04.051, dm.L04.052, dm.L04.053, dm.L04.054, dm.L04.055, dm.L04.056, dm.L04.057, dm.L04.058, dm.L04.059, dm.L04.060, dm.L04.061, dm.L04.062, dm.L04.063, dm.L04.064, dm.L04.065, dm.L04.066, dm.L04.067, dm.L04.068, dm.L04.069, dm.L04.070, dm.L04.071, dm.L04.072, dm.L04.073, dm.L04.074, dm.L04.077, dm.L04.078, dm.L04.079]

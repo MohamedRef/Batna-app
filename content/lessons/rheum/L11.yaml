@@ -1,0 +1,408 @@
+schema: batna.lesson/v1
+lecture: rheum.L11
+lessons:
+  # ------------------------------------------------------------------
+  - id: rheum.L11.lesson1
+    title: "المناعة جيش: مين اللي وقع؟"
+    hook: "طفل كل شهر بالتهاب جديد: الميكروب نفسه هيقولك أنهي سلاح في الجيش مكسور."
+    minutes: 8
+    pages: [180, 184]
+    topics: [types, evaluation, clues]
+    goals:
+      - "تعدّ أنواع الـ primary immunodeficiency حسب الذراع"
+      - "تربط نوع الميكروب بالذراع الواقع"
+      - "تفرق بين immunodeficiency وسبب تشريحي"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 180
+        title: "ستة أبواب"
+        quote: "B cell deficiencies. T cell deficiencies. Combined T cell & B cell abnormalities. Complement Deficiencies. Phagocyte deficiencies. Various unknown."
+        text: |
+          الكتاب بيقسم الـ primary immunodeficiency على ==ستة أبواب==:
+          1. **B cell deficiencies**: XLA، selective Ig deficiency
+          2. **T cell deficiencies**: DiGeorge، chronic mucocutaneous candidiasis، hyper-IgM (الكتاب حاطه هنا)
+          3. **Combined T & B**: ==SCID==، Wiskott-Aldrich، ataxia-telangiectasia
+          4. **Complement deficiencies**
+          5. **Phagocyte deficiencies**: LAD، CGD، Chédiak-Higashi، Job's (hyper-IgE)، cyclic neutropenia
+          6. **Various unknown**
+      - kind: sort
+        page: 180
+        quote: "Severe Combined Immunodeficiency Disease (SCID). Wiskott-Aldrich syndrome. Ataxia-telangiectasia."
+        prompt: "حط كل مرض في الباب بتاعه زي ما الكتاب قسمه:"
+        bins: ["B cell", "T cell", "Combined", "Phagocyte"]
+        cards:
+          - { text: "X-linked agammaglobulinemia", bin: 0 }
+          - { text: "Selective IgA deficiency", bin: 0 }
+          - { text: "DiGeorge syndrome", bin: 1 }
+          - { text: "Chronic mucocutaneous candidiasis", bin: 1 }
+          - { text: "SCID", bin: 2 }
+          - { text: "Wiskott-Aldrich syndrome", bin: 2 }
+          - { text: "Ataxia-telangiectasia", bin: 2 }
+          - { text: "Chronic granulomatous disease", bin: 3 }
+          - { text: "Chédiak-Higashi syndrome", bin: 3 }
+        why: "الـ XLA والـ IgA = B. الـ DiGeorge (thymic aplasia) والـ candidiasis = T. الـ SCID و Wiskott-Aldrich و ataxia-telangiectasia = combined. الـ CGD و Chédiak-Higashi = phagocytes."
+      - kind: explain
+        page: 181
+        title: "التاريخ والكشف"
+        quote: "Types of infections - location, frequency, and response to therapy. Immunizations, especially live virus vaccines. Family history. Social and sexual history."
+        text: |
+          **History:** نوع الـ infections (مكانها، تكرارها، ==response to therapy==)، الـ **immunizations** خصوصًا ==live virus vaccines==، الـ **family history**، والـ **social and sexual history**.
+
+          **Examination:** الـ **lymphoid tissue** (لوز، غدد، thymus)، الـ **growth**، أي **congenital abnormalities** تانية، والـ infections نفسها.
+      - kind: figure
+        page: 182
+        quote: "Opportunistic infections (viruses, protozoa, fungi) suggest a defect in the T cell arm of the immune response"
+        title: "الميكروب بيشاور على الذراع"
+        alt: "Two columns. Left: opportunistic organisms (viruses, protozoa, fungi such as Candida and Pneumocystis) with an arrow to the T cell arm. Right: encapsulated pyogenic bacteria (pneumococci, meningococci, H. influenzae, group A streptococci) with arrows to B cells (antibody), phagocytes and complement."
+        caption: "==Opportunistic== (فيروس، protozoa، fungi) ← **T cell**. ==Encapsulated pyogenic== bacteria ← **B cell** أو phagocytes أو complement."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L11o" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" class="fg-head"/></marker></defs>
+            <rect x="10" y="10" width="145" height="90" rx="10" class="fg-acc"/>
+            <text x="82" y="34" text-anchor="middle" class="t-sm t-b">Opportunistic</text>
+            <text x="82" y="54" text-anchor="middle" class="t-sm">viruses, protozoa</text>
+            <text x="82" y="72" text-anchor="middle" class="t-sm">fungi (Candida,</text>
+            <text x="82" y="90" text-anchor="middle" class="t-sm">Pneumocystis)</text>
+            <rect x="175" y="10" width="145" height="90" rx="10" class="fg-bad"/>
+            <text x="247" y="34" text-anchor="middle" class="t-sm t-b">Encapsulated</text>
+            <text x="247" y="54" text-anchor="middle" class="t-sm">pneumococci</text>
+            <text x="247" y="72" text-anchor="middle" class="t-sm">meningococci, Hib</text>
+            <text x="247" y="90" text-anchor="middle" class="t-sm">group A strep</text>
+            <path d="M82 100 L82 165" class="fg-arrow" marker-end="url(#L11o)"/>
+            <path d="M190 100 L190 248" class="fg-thin"/>
+            <path d="M190 132 L202 132" class="fg-arrow" marker-end="url(#L11o)"/>
+            <path d="M190 182 L202 182" class="fg-arrow" marker-end="url(#L11o)"/>
+            <path d="M190 232 L202 232" class="fg-arrow" marker-end="url(#L11o)"/>
+            <rect x="22" y="172" width="120" height="40" rx="8" class="fg-box"/>
+            <text x="82" y="197" text-anchor="middle" class="t-sm t-b">T cell arm</text>
+            <rect x="207" y="114" width="115" height="36" rx="8" class="fg-box"/>
+            <text x="264" y="137" text-anchor="middle" class="t-sm t-b">B cell (antibody)</text>
+            <rect x="207" y="164" width="115" height="36" rx="8" class="fg-thin"/>
+            <text x="264" y="187" text-anchor="middle" class="t-sm">Phagocytes</text>
+            <rect x="207" y="214" width="115" height="36" rx="8" class="fg-thin"/>
+            <text x="264" y="237" text-anchor="middle" class="t-sm">Complement</text>
+            <text x="82" y="232" text-anchor="middle" class="t-sm t-mut">present at 3–6 months</text>
+            <text x="165" y="285" text-anchor="middle" class="t-sm t-mut">B defects present late in year 1 (maternal IgG)</text>
+          </svg>
+      - kind: reveal
+        page: 183
+        quote: "Since maternal IgG crosses the placenta, infants with B cell defects tend to present late in the first year of life."
+        prompt: "ليه طفل الـ B cell defect بيبان متأخر (آخر السنة الأولى) وطفل الـ T cell بيبان في أول 3–6 شهور؟"
+        answer: |
+          لأن ==maternal IgG== بيعدي الـ placenta ويحمي الطفل شهور لحد ما يخلص، فالـ **B cell defect** مستخبي. أما الـ **T cell** فمفيش حاجة من الأم بتعوضه، فالـ infections بتبدأ ==early in life==، غالبًا **first 3-6 months**.
+      - kind: check
+        page: 183
+        quote: "anatomical abnormalities should be suspected if the infections occur repeatedly in one specific anatomic site (e.g. pneumonia in the right middle lobe of the lung)."
+        question: "A child has had four pneumonias, all in the right middle lobe. What should you suspect first?"
+        options:
+          - "An anatomical abnormality in that site"
+          - "Severe combined immunodeficiency"
+          - "Complement deficiency"
+          - "DiGeorge syndrome"
+        answer: 0
+        why:
+          - "صح: نفس المكان كل مرة = anatomical abnormality. الـ immunodeficiency بتعمل infections generalized في organ systems كتير."
+          - "الـ SCID بيعمل opportunistic infections وفشل نمو، مش فص واحد."
+          - "الـ complement بيعمل encapsulated infections في أماكن مختلفة (زي Neisseria)."
+          - "الـ DiGeorge = T cell، يعني opportunistic infections بدري."
+      - kind: aside
+        tone: trap
+        page: 184
+        quote: "In children with recurrent pneumonia a sweat chloride test for cystic fibrosis is indicated prior to further laboratory evaluation"
+        text: |
+          قبل ما تطلب immunology panel لطفل عنده **recurrent pneumonia**: اعمل ==sweat chloride test== للـ **cystic fibrosis** الأول. الكتاب صريح: **prior to further laboratory evaluation**.
+      - kind: aside
+        tone: analogy
+        page: 184
+        quote: "Patients with T cell defects will often lack identifiable lymphoid tissue such as lymph nodes, tonsils, and adenoids even at sites draining active infections."
+        text: |
+          الـ **T cell defect** زي معسكر فاضي: حتى والحرب شغالة جنبه، مفيش ==lymph nodes ولا tonsils== تتنفخ. ومعاه **thymus shadow** غايب في الـ chest X-ray.
+
+          والعكس الغريب: بعض الـ **B cell** abnormalities (فشل التحول لـ plasma cells) بتعمل ==lymphoid hyperplasia== واضحة.
+      - kind: try
+        items: [rheum.L11.001, rheum.L11.010, rheum.L11.013, rheum.L11.014, rheum.L11.022]
+    recap:
+      - "ستة أبواب: B، T، combined، complement، phagocyte، unknown. الكتاب حاطط hyper-IgM تحت T."
+      - "Opportunistic = T. Encapsulated pyogenic = B أو phagocytes أو complement."
+      - "B يبان آخر السنة الأولى (IgG الأم)، T يبان في 3–6 شهور. نفس المكان كل مرة = anatomy، و recurrent pneumonia = sweat chloride الأول."
+    practice: [rheum.L11.001, rheum.L11.002, rheum.L11.003, rheum.L11.004, rheum.L11.005, rheum.L11.006, rheum.L11.009, rheum.L11.010, rheum.L11.011, rheum.L11.012, rheum.L11.013, rheum.L11.014, rheum.L11.015, rheum.L11.016, rheum.L11.017, rheum.L11.018, rheum.L11.022, rheum.L11.023, rheum.L11.086, rheum.L11.087, rheum.L11.088]
+  # ------------------------------------------------------------------
+  - id: rheum.L11.lesson2
+    title: "الفحوصات: من الرخيص للدقيق"
+    hook: "CBC و ESR وجلد بيتحقن: قبل الـ flow cytometry، فيه فحوصات بقروش بتقول كتير."
+    minutes: 7
+    pages: [182, 187]
+    topics: [evaluation, tests]
+    goals:
+      - "ترتب الـ screening لكل ذراع"
+      - "تعرف دلالة الـ ESR وعدد الـ lymphocytes"
+      - "تحفظ مين الخلايا الغايبة في كل SCID"
+    status: unverified
+    steps:
+      - kind: table
+        page: 182
+        quote: "Quantitative immunoglobulins - IgG, IgM, IgA. Specific antibodies - anti-tetanus, polio virus, rubella, isohemagglutinins (anti-A, anti-B)."
+        title: "الـ screening حسب الذراع"
+        columns: [Arm, First tests]
+        rows:
+          - ["B cell", "IgG, IgM, IgA; specific antibodies (tetanus, isohemagglutinins)"]
+          - ["T cell", "Lymphocyte count; delayed skin tests"]
+          - ["Complement", "CH50"]
+          - ["Phagocyte", "Neutrophil count and function"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: explain
+        page: 184
+        title: "أرقام تفتكرها"
+        quote: "Absolute lymphocyte counts below 1500/cu.mm. in adults and 4000/cu.mm. in children less than 1 year of age are abnormal."
+        text: |
+          - الـ **T cells** حوالي **75%** من الـ lymphocytes، فلو الـ ==absolute lymphocyte count== قل يبقى غالبًا T
+          - الحد: **<1500** في الكبار و **<4000** في الطفل تحت سنة = abnormal
+          - ==Normal ESR== تقريبًا بينفي **chronic bacterial infection**
+          - **Skin tests** للـ delayed hypersensitivity: طريقة **inexpensive** للـ T cell
+      - kind: check
+        page: 185
+        quote: "patients with AIDS and AIDS-related complex are often hypergammaglobulinemic, but form specific antibodies poorly."
+        question: "An AIDS patient has a high total IgG. What does it tell you about antibody function?"
+        options:
+          - "Little: specific antibody responses are often poor"
+          - "Antibody function is normal"
+          - "It rules out B cell dysfunction"
+          - "It means IVIG is harmful"
+        answer: 0
+        why:
+          - "صح: الـ AIDS غالبًا hypergammaglobulinemic بس الـ specific antibodies ضعيفة، فاعمل specific antibodies after immunization."
+          - "الرقم الكلي ما بيقيسش الوظيفة."
+          - "مش بينفي، بالعكس الـ specific response ضعيف."
+          - "ملوش علاقة بالـ IVIG."
+      - kind: table
+        page: 186
+        quote: "T cells are absent in XSCID. B cells and T cells are absent in autosomal recessive SCID."
+        title: "مين الغايب؟"
+        columns: [Disease, Missing]
+        rows:
+          - ["XLA", "B cells"]
+          - ["X-linked SCID", "T cells"]
+          - ["Autosomal recessive SCID", "B and T cells"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: explain
+        page: 186
+        title: "الصور والـ biopsy"
+        quote: "HRCT scans may be considered the criterion standard test to study lung abnormalities in these patients."
+        text: |
+          - **Chest X-ray:** ==غياب الـ thymic shadow== شائع في الـ **SCID**
+          - **HRCT** هو الـ ==criterion standard== للرئة: fibrosis، **bronchiectasis**، scarring، pleural thickening
+          - **ADA level** في كل عيان **SCID**
+          - **Lymph node biopsy** مش لازم، وممكن تلم وحش وتلتهب
+          - **Rectal biopsy** ممكن تفيد في CVID و IgA deficiency (plasma و lymphoid infiltrate)
+      - kind: mnemonic
+        page: 186
+        quote: "ADA levels should be measured in patients with SCID."
+        word: "ADA"
+        parts:
+          - { key: "A", text: "Always measure ADA in SCID" }
+          - { key: "D", text: "Don't do lymph node biopsy (poor healing, infection)" }
+          - { key: "A", text: "Absent thymic shadow on chest X-ray" }
+        hook: "**ADA** للـ SCID: اطلبه دايمًا، ما تعملش node biopsy، ودوّر على thymus غايب."
+      - kind: try
+        items: [rheum.L11.019, rheum.L11.020, rheum.L11.025, rheum.L11.030, rheum.L11.031]
+    recap:
+      - "B: IgG/IgM/IgA و specific antibodies. T: lymphocyte count و skin tests. Complement: CH50."
+      - "Lymphocytes <1500 كبار، <4000 تحت سنة. Normal ESR بينفي chronic bacterial infection."
+      - "SCID: thymic shadow غايب، ADA دايمًا. HRCT للرئة. ما تعملش lymph node biopsy."
+    practice: [rheum.L11.007, rheum.L11.008, rheum.L11.019, rheum.L11.020, rheum.L11.021, rheum.L11.024, rheum.L11.025, rheum.L11.026, rheum.L11.027, rheum.L11.028, rheum.L11.029, rheum.L11.030, rheum.L11.031, rheum.L11.032, rheum.L11.033, rheum.L11.034, rheum.L11.089]
+  # ------------------------------------------------------------------
+  - id: rheum.L11.lesson3
+    title: "Bruton والـ IgA والـ HAE والعلاج"
+    hook: "ولد عنده 7 شهور ولوزه شبه مش موجودة، وست شفايفها بتتنفخ من غير هرش: اتنين مختلفين خالص."
+    minutes: 9
+    pages: [187, 190]
+    topics: [bcell, tcell, hae, care]
+    goals:
+      - "تعرف XLA و selective IgA و hyper-IgM"
+      - "تشخص HAE بالـ C4 وتعالجه"
+      - "تعرف مين ياخد IVIG ومين ما ياخدش live vaccines"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 187
+        title: "Bruton (XLA)"
+        quote: "Absence or deficiency of a specific enzyme needed for B cell maturation (Bruton‘s tyrosine kinase) results in no mature B lymphocytes or plasma cells"
+        text: |
+          نقص ==Bruton's tyrosine kinase== ← مفيش **mature B cells** ولا plasma cells.
+          - IgM و IgA و IgD و IgE مش موجودين، و **IgG <10%**
+          - الـ infections بتبدأ ==5–9 شهور== (بعد ما IgG الأم يخلص): **H. influenzae** و **S. pneumoniae**
+          - مقاومة الفيروسات طبيعية تقريبًا **إلا ECHO viruses**
+          - **Tiny tonsils** لأن أكبر تجمع B cells في الرضيع هو اللوز
+          - التشخيص: ولد بـ Ig واطية ومفيش B cells بالـ immunophenotyping. العلاج: **IVIG** شهري
+      - kind: explain
+        page: 188
+        title: "Dysgammaglobulinaemia و DiGeorge"
+        quote: "The most common is selective IgA deficiency which occurs in about 1/500 people."
+        text: |
+          - **Dysgammaglobulinaemia:** نقص selective في class أو subclass
+          - الأشهر ==selective IgA deficiency==: حوالي **1/500**
+          - **X-linked hyper-IgM:** ==CD40 ligand== غايب على الـ T cells ← مفيش class switch من IgM
+          - **DiGeorge:** الـ thymus ما اتكونش ← T cell dysfunction، وخطر من الـ **live attenuated vaccines** (زي measles)
+      - kind: case
+        page: 189
+        quote: "One can screen for the disease by ordering a C4 level which will be low even between attacks."
+        stem: "A 24-year-old woman has recurrent swelling of the lips and hands for 2–5 days, no itch, no urticaria, no response to antihistamines. Her mother has the same."
+        steps:
+          - question: "Best screening test?"
+            options: ["C4 level", "Serum tryptase", "IgE level", "ANA"]
+            answer: 0
+            why: "ده HAE (autosomal dominant، C1INH ناقص أو بايظ). الـ C4 بيبقى واطي حتى بين النوبات. الـ tryptase للـ anaphylaxis والـ IgE للحساسية."
+          - question: "Severe laryngeal attack: treatment of choice in the book?"
+            options: ["C1INH plasma concentrate", "Antihistamine", "Danazol", "IVIG"]
+            answer: 0
+            why: "الكتاب: C1INH plasma concentrates للـ laryngeal oedema والـ abdominal attacks الشديدة. الـ danazol أو stanozolol للـ maintenance مش للنوبة."
+      - kind: update
+        page: 189
+        quote: "the pathogenesis results from continued production C3a and C5a which then induce mast cells and basophils to release histamine"
+        text: "الكتاب بيقول الـ HAE من C3a و C5a و histamine. الصح النهاردة إنه bradykinin-mediated، علشان كده الـ antihistamines والـ steroids ما بتنفعش. والعلاج الحديث للنوبة: C1-INH concentrate أو icatibant أو ecallantide، والوقاية: lanadelumab أو C1-INH أو berotralstat، والـ danazol بقى خط تاني."
+        ref: "WAO/EAACI hereditary angioedema guideline 2021"
+      - kind: explain
+        page: 189
+        title: "العلاج"
+        quote: "IVIG replacement therapy is the treatment of choice for all primary immunodeficiency syndromes (except IgA deficiency"
+        text: |
+          - ==IVIG== هو العلاج لكل الـ primary immunodeficiency **ما عدا IgA deficiency**
+          - IgA deficiency: لو فيه **chronic diarrhoea** جرّب **oral Ig**، ولو محتاج دم: **washed** أو low-IgA products
+          - **IgG subclass deficiency:** IVIG بس لو فشل يعمل antibodies للـ protein و polysaccharide
+          - الجرعة: **200–400 mg/kg** كل **3–4 أسابيع** لـ IgG **>400 mg/dL**
+          - **SCID:** ==bone marrow transplant==، ولو اتعمل في أول 3 شهور النجاة حوالي **93%**
+      - kind: check
+        page: 190
+        quote: "Live vaccines (eg, bacille Calmette-Guérin, polio, measles, rubella, mumps) should not be given to patients (or their family members) with T-cell disorders, XLA"
+        question: "Which statement about live vaccines in primary immunodeficiency is true?"
+        options:
+          - "They are avoided in the patient and their family members"
+          - "They are safe once IVIG has started"
+          - "Only BCG is a problem"
+          - "They are fine in XLA because T cells are normal"
+        answer: 0
+        why:
+          - "صح: الكتاب: ما تديش live vaccines للعيان ولا لأهله في T-cell disorders و XLA."
+          - "الـ IVIG ما بيخليهاش آمنة."
+          - "مش BCG بس: polio، measles، rubella، mumps كمان."
+          - "الكتاب ذكر XLA بالاسم في المنع."
+      - kind: aside
+        tone: exam
+        page: 190
+        quote: "autoimmune diseases and cancers become a serious threat because the incidence of these diseases is several-fold higher"
+        text: |
+          في الـ essay: لما الـ infections تتسيطر عليها، ==autoimmune diseases و cancers== بيبقوا الخطر الأكبر على المدى الطويل، لأن نسبتهم **several-fold higher**.
+      - kind: try
+        items: [rheum.L11.036, rheum.L11.043, rheum.L11.052, rheum.L11.055, rheum.L11.066]
+    recap:
+      - "XLA: BTK ناقص، مفيش B cells، infections 5–9 شهور، لوز صغيرة، IVIG شهري."
+      - "Selective IgA (1/500): لا IVIG، oral Ig للإسهال، washed blood. Hyper-IgM: CD40 ligand."
+      - "HAE: C1INH، autosomal dominant، C4 واطي حتى بين النوبات، C1INH concentrate للنوبة الشديدة. SCID: BMT بدري."
+    practice: [rheum.L11.035, rheum.L11.036, rheum.L11.037, rheum.L11.038, rheum.L11.039, rheum.L11.040, rheum.L11.041, rheum.L11.042, rheum.L11.043, rheum.L11.044, rheum.L11.045, rheum.L11.046, rheum.L11.047, rheum.L11.048, rheum.L11.049, rheum.L11.050, rheum.L11.051, rheum.L11.052, rheum.L11.053, rheum.L11.054, rheum.L11.055, rheum.L11.056, rheum.L11.057, rheum.L11.058, rheum.L11.059, rheum.L11.060, rheum.L11.061, rheum.L11.062, rheum.L11.063, rheum.L11.064, rheum.L11.065, rheum.L11.066, rheum.L11.084]
+  # ------------------------------------------------------------------
+  - id: rheum.L11.lesson4
+    title: "HIV: من الإبرة للـ AIDS"
+    hook: "ممرضة اتشكت بإبرة: الخطر 0.3%، والفحص الأول ممكن يطلع سلبي وهي مصابة. ليه؟"
+    minutes: 9
+    pages: [191, 195]
+    topics: [hiv]
+    goals:
+      - "تعرف طرق العدوى ونسبها"
+      - "تختار الـ marker المناسب حسب الوقت"
+      - "تحفظ مراحل المرض ودواعي العلاج في الكتاب"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 191
+        title: "العدوى بتيجي منين؟"
+        quote: "Health care workers have a risk of 0.3% following a single needle stick injury with known HIV infected blood."
+        text: |
+          - **Sexual:** أكفأ من ==men to women== وللـ passive partner في الـ anal intercourse
+          - **Blood:** الـ **health care workers** خطرهم ==0.3%== بعد needle stick واحدة
+          - **Mother to child:** أشهر طريق في الأطفال. بيزيد مع advanced disease، **prolonged/premature rupture of membranes**، و chorioamnionitis، والـ breastfeeding لحد 20%
+          - مفيش عدوى من **household contact** ولا الناموس
+      - kind: explain
+        page: 192
+        title: "ليه الاتنين: intracellular و capsulated؟"
+        quote: "Cell mediated immunodeficiency which is the major consequence leaves the host open to infections with intracellular pathogens"
+        text: |
+          الـ HIV بيدخل عن طريق ==CD4== molecule. النتيجة الأساسية **cell mediated immunodeficiency** ← intracellular pathogens.
+
+          ومعاها antibody abnormalities ← ==capsulated bacteria== كمان. والفيروس سريع: half-life في الدم حوالي **six hours**.
+      - kind: figure
+        page: 193
+        quote: "Viral p24 antigen (p24ag): it appears shortly after infection, but disappear by the 8-10 weeks after exposure."
+        title: "مين يبان إمتى؟"
+        alt: "A timeline from infection to 10 years. p24 antigen appears early and fades by 8 to 10 weeks. Anti-HIV antibody (anti-gp120 by ELISA, confirmed by western blot) appears after a window of up to 3 months and stays for life. Seroconversion illness at 6 to 8 weeks. Clinical latency with falling CD4 count, then AIDS at a median of 10 years."
+        caption: "==p24== بيبان بدري ويختفي بعد 8 لـ 10 أسابيع. الـ **anti-HIV** بعد ==window period== لحد 3 شهور ويفضل طول العمر. الـ AIDS في المتوسط بعد **10 سنين**."
+        svg: |
+          <svg viewBox="0 0 330 290" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L11h" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" class="fg-head"/></marker></defs>
+            <path d="M15 250 L318 250" class="fg-arrow" marker-end="url(#L11h)"/>
+            <text x="15" y="270" class="t-sm t-mut">0</text>
+            <text x="70" y="270" text-anchor="middle" class="t-sm t-mut">2 mo</text>
+            <text x="120" y="270" text-anchor="middle" class="t-sm t-mut">3 mo</text>
+            <text x="290" y="270" text-anchor="middle" class="t-sm t-mut">~10 yr</text>
+            <rect x="15" y="20" width="75" height="34" rx="8" class="fg-acc"/>
+            <text x="52" y="42" text-anchor="middle" class="t-sm t-b">p24 Ag</text>
+            <text x="52" y="72" text-anchor="middle" class="t-sm t-mut">gone 8–10 wk</text>
+            <rect x="15" y="90" width="105" height="34" rx="8" class="fg-thin"/>
+            <text x="67" y="112" text-anchor="middle" class="t-sm">window ≤3 mo</text>
+            <rect x="120" y="90" width="198" height="34" rx="8" class="fg-good"/>
+            <text x="219" y="112" text-anchor="middle" class="t-sm t-b">anti-HIV (ELISA + WB), for life</text>
+            <rect x="45" y="150" width="90" height="34" rx="8" class="fg-box"/>
+            <text x="90" y="172" text-anchor="middle" class="t-sm">seroconversion</text>
+            <text x="90" y="200" text-anchor="middle" class="t-sm t-mut">6–8 wk</text>
+            <rect x="140" y="150" width="120" height="34" rx="8" class="fg-box"/>
+            <text x="200" y="172" text-anchor="middle" class="t-sm">latency, CD4 falls</text>
+            <rect x="262" y="150" width="56" height="34" rx="8" class="fg-bad"/>
+            <text x="290" y="172" text-anchor="middle" class="t-sm t-b">AIDS</text>
+            <path d="M150 225 Q 220 225 300 240" class="fg-arrow-bad"/>
+            <text x="200" y="220" text-anchor="middle" class="t-sm t-mut">CD4 count</text>
+          </svg>
+      - kind: update
+        page: 192
+        quote: "The most common used marker for infection, detected by ELISA & confirmed by western blot assays. 3 months of latency (serological latency or window period)."
+        text: "الكتاب: ELISA وبعدين western blot، و window لحد 3 شهور. النهاردة بيبدأوا بـ 4th-generation HIV-1/2 antigen/antibody combination (p24 + antibody) بـ window حوالي 2–6 أسابيع، والتأكيد بـ differentiation immunoassay مش western blot، ولو مش متطابقين: HIV RNA."
+        ref: "CDC/APHL HIV laboratory testing algorithm 2014 (updated 2018)"
+      - kind: reveal
+        page: 193
+        quote: "They can cross the placenta, thus can be detected in babies born to infected mothers & are not markers of active infection"
+        prompt: "رضيع أمه HIV positive والـ anti-HIV عنده positive. هل هو مصاب؟"
+        answer: |
+          مش لازم. الـ ==anti-HIV IgG== بتاع الأم **cross the placenta**، فده مش marker للـ active infection، وفي الطفل السليم بيختفي خلال **18 شهر**. علشان كده بنعتمد على ==nucleic acid-based assays== للفيروس نفسه.
+      - kind: explain
+        page: 194
+        title: "المراحل"
+        quote: "Studies suggest a median time of 10 years from infection to development of AIDS."
+        text: |
+          - **Incubation** 2–4 أسابيع، صامت
+          - **Seroconversion illness** بعد ==6–8 weeks==: fever، sore throat، LN، rash، mucosal ulcers، أحيانًا neurology. Labs: lymphopenia، thrombocytopenia، liver enzymes، CD4:CD8 reversed
+          - **Clinical latency:** من غير أعراض بس معدي، و ==median 10 years== للـ AIDS. بعضهم persistent LN في موقعين extra-inguinal >3 شهور
+          - **HIV نفسه:** AIDS dementia complex و distal sensory polyneuropathy، والكتاب بيقول **zidovudine** بيفيد
+      - kind: update
+        page: 195
+        quote: "Symptoms of HIV disease. 2- CD4 count < 350. 3- Very rapidly falling CD4 count. 4- High viral load (> log 4)."
+        text: "الكتاب: ابدأ ART لو فيه أعراض، أو CD4 <350، أو CD4 بيقع بسرعة، أو viral load >log 4. النهاردة: ART لكل مصاب أيًا كان الـ CD4، وفي أسرع وقت (same-day لو ينفع)."
+        ref: "WHO consolidated HIV guidelines 2021; DHHS adult ART guidelines 2024"
+      - kind: case
+        page: 191
+        quote: "Health care workers have a risk of 0.3% following a single needle stick injury with known HIV infected blood."
+        stem: "A 28-year-old nurse has a needle-stick injury from a patient with known HIV. Her baseline anti-HIV ELISA is negative."
+        steps:
+          - question: "Her risk of infection after one needle-stick?"
+            options: ["About 0.3%", "About 3%", "About 30%", "Nearly zero"]
+            answer: 0
+            why: "الكتاب: 0.3% بعد needle stick واحدة بدم HIV معروف."
+          - question: "Why does a negative antibody test now not exclude infection later?"
+            options: ["Antibodies take up to 3 months (window period)", "ELISA cannot detect HIV-1", "Antibodies are protective and clear the virus", "She is immune"]
+            answer: 0
+            why: "الـ anti-HIV بيظهر بعد window period لحد 3 شهور، فالـ baseline السلبي بيوثّق إنها كانت سليمة قبل الحادثة بس. والـ antibodies دي مش protective."
+      - kind: try
+        items: [rheum.L11.068, rheum.L11.074, rheum.L11.076, rheum.L11.079, rheum.L11.090]
+    recap:
+      - "Needle stick 0.3%. Vertical أشهر في الأطفال. Sexual أكفأ من الرجل للست."
+      - "CD4 receptor. p24 بدري ويختفي 8–10 أسابيع، anti-HIV بعد window لحد 3 شهور، ويعدي الـ placenta."
+      - "Seroconversion 6–8 أسابيع، latency median 10 سنين. الكتاب: ART لو أعراض، CD4 <350، CD4 بيقع بسرعة، أو VL >log 4."
+    practice: [rheum.L11.067, rheum.L11.068, rheum.L11.069, rheum.L11.070, rheum.L11.071, rheum.L11.072, rheum.L11.073, rheum.L11.074, rheum.L11.075, rheum.L11.076, rheum.L11.077, rheum.L11.078, rheum.L11.079, rheum.L11.080, rheum.L11.081, rheum.L11.082, rheum.L11.083, rheum.L11.085, rheum.L11.090]

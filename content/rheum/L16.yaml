@@ -1,0 +1,2219 @@
+schema: batna.content/v1
+lecture: rheum.L16
+title: "Rheumatoid arthritis"
+author: "Prof. Ragaa A. Kader"
+book: { chapter: 3, pages: [241, 278] }
+topics:
+  - { id: intro, title: "Definition, epidemiology and aetiology" }
+  - { id: pathogenesis, title: "Pathogenesis: cells and cytokines" }
+  - { id: pathology, title: "Pathology of joints, nodules and other tissues" }
+  - { id: onset, title: "Onset and joint pattern" }
+  - { id: criteria, title: "ACR 1987 and ACR/EULAR 2010 criteria" }
+  - { id: hands, title: "Hands and wrist" }
+  - { id: feet-knee, title: "Feet and knee" }
+  - { id: extra-general, title: "Extra-articular: systemic, musculoskeletal, blood, nodules" }
+  - { id: vasculitis-eye, title: "Extra-articular: vasculitis and eye" }
+  - { id: heart-lung, title: "Extra-articular: heart and lung" }
+  - { id: neuro, title: "Extra-articular: nerves and the cervical spine" }
+  - { id: monitoring, title: "Investigations and monitoring" }
+  - { id: serology, title: "Rheumatoid factor and anti-CCP" }
+  - { id: xray-fluid, title: "X-ray and synovial fluid" }
+  - { id: strategy, title: "Treatment strategy, EULAR algorithm and physical therapy" }
+  - { id: nsaids, title: "NSAIDs" }
+  - { id: steroids, title: "Glucocorticoids and intra-articular injections" }
+  - { id: csdmards, title: "DMARD classes and conventional synthetic DMARDs" }
+  - { id: anti-tnf, title: "TNF antagonists" }
+  - { id: other-biologics, title: "Anakinra, abatacept, rituximab and tocilizumab" }
+  - { id: jak, title: "JAK inhibitors" }
+  - { id: biosimilars, title: "Biosimilars" }
+items:
+  # ---------- p241: definition, epidemiology, aetiology ----------
+  - id: rheum.L16.001
+    kind: card
+    topic: intro
+    front: Define rheumatoid arthritis (book definition).
+    back: A symmetrical, deforming polyarthritis of small and large joints, often with systemic disturbance and extra-articular features.
+    src: { page: 241, quote: "Symmetrical, deforming, small and large joint polyarthritis often associated with systemic disturbance and extra- articular disease features." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.002
+    kind: cloze
+    topic: intro
+    text: "RA prevalence is about {{c1::1%}} worldwide, with a female to male ratio of {{c2::2:1}}."
+    src: { page: 241, quote: "Prevalence 1% world wide. Female / Male 2:1." }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L16.003
+    kind: enumerate
+    topic: intro
+    prompt: Mention the HLA associations of RA given in the book.
+    points: [HLA-DR1, HLA-DR4, HLA-DRw14]
+    pass: 2
+    src: { page: 241, quote: "Association HLA DR1, DR4, DRW14." }
+    status: unverified
+  - id: rheum.L16.004
+    kind: card
+    topic: intro
+    front: What is the shared epitope in RA?
+    back: A specific amino-acid sequence on the beta chain of HLA-DR1 and DR4 that increases susceptibility to RA.
+    src: { page: 241, quote: "Shared epitope: Increased susceptibility with a specific aminoacid sequence on B chain of HLA DR1. DR4." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.005
+    kind: enumerate
+    topic: intro
+    prompt: Mention the possible environmental antigens (infections) suggested as triggers of RA.
+    points: [Viruses (parvovirus, Epstein-Barr), Retroviruses, Mycoplasma, Mycobacteria]
+    pass: 3
+    src: { page: 241, quote: "Possible environmental factor antigen Virus (parvovirus, Epstien barr). Retrovirus. Mycoplasma. Mycobacteria." }
+    status: unverified
+  - id: rheum.L16.006
+    kind: enumerate
+    topic: intro
+    prompt: Mention the three aetiological factors of RA.
+    points:
+      - Genetic background (HLA-DR1, DR4, DRw14; shared epitope; first-degree relatives)
+      - A possible environmental antigen (viruses, retroviruses, mycoplasma, mycobacteria)
+      - Self-perpetuation through autoimmunity
+    pass: 3
+    src: { page: 241, quote: "Self perpetuation through autoimmunity." }
+    status: unverified
+  - id: rheum.L16.007
+    kind: mcq
+    topic: intro
+    stem: A 35-year-old woman asks whether her sister's RA raises her own risk. Which statement from the book's aetiology section fits best?
+    options:
+      - Risk is increased in first-degree relatives, linked to HLA-DR1/DR4 and the shared epitope
+      - RA is purely environmental, so family history does not matter
+      - Risk is linked mainly to HLA-B27
+      - Only male relatives carry increased risk
+    answer: 0
+    why:
+      - "Correct: the genetic background includes HLA-DR1, DR4, DRw14, the shared epitope and increased risk in first-degree relatives (p241)."
+      - The book lists a genetic background as the first aetiological factor.
+      - HLA-B27 belongs to the seronegative spondyloarthritides, not RA.
+      - The book gives no sex limit for familial risk; RA itself is twice as common in women.
+    src: { page: 241, quote: "Increased In first degree relatives." }
+    status: unverified
+  # ---------- p242: pathogenesis ----------
+  - id: rheum.L16.008
+    kind: card
+    topic: pathogenesis
+    front: Which arm of immunity mainly drives RA, and through which cells?
+    back: Cell-mediated immunity, through macrophages and Th1 lymphocytes (macrophages present processed antigen to Th1 cells).
+    src: { page: 242, quote: "Cell mediated Immunity through macrophage and TH1 lymphocytes," }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.009
+    kind: card
+    topic: pathogenesis
+    front: What is the role of B cells in RA pathogenesis according to the book?
+    back: B cells become plasma cells that make antibodies and immune complexes, which may cause some of the extra-articular features.
+    src: { page: 242, quote: "immune complexes that may be responsible for some of extra- articular features." }
+    status: unverified
+  - id: rheum.L16.010
+    kind: table
+    topic: pathogenesis
+    title: Cytokines in RA pathogenesis
+    columns: [Cytokine or mediator, Made by, Effect]
+    rows:
+      - [IL-2, Th1 cells, Stimulates lymphocytes]
+      - [IFN-gamma, Th1 cells, Stimulates macrophages]
+      - [IL-6, Macrophages, Acute phase response (ESR and CRP)]
+      - [IL-8, Macrophages, Chemotactic to polymorphs (toxic oxygen radicals)]
+      - [IL-17, Th17 cells, Proinflammatory; important role in inflammation]
+    blanks: [[0, 2], [1, 2], [2, 2], [3, 2], [4, 1]]
+    src: { page: 242, quote: "IL6: stimulates acute phase response (ESR CRP)." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.011
+    kind: enumerate
+    topic: pathogenesis
+    prompt: Mention the effects of IL-1 and TNF in RA.
+    points:
+      - Activate synovial fibroblasts and chondrocytes (metalloproteinases destroy cartilage; PGE2 demineralizes and destroys bone)
+      - Upregulate adhesion molecules with cell recruitment
+      - Stimulate angiogenesis to supply the proliferating synovium
+    pass: 3
+    src: { page: 242, quote: "Stimulation of angiogenesis to supply the proliferating synovium." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.012
+    kind: cloze
+    topic: pathogenesis
+    text: "IL-1 and TNF activate synovial fibroblasts and chondrocytes: {{c1::metalloproteinases}} destroy cartilage and {{c2::PGE2}} demineralizes and destroys bone."
+    src: { page: 242, quote: "Metalloproteinases cartilage destruction. b) PGE2 demineralization and destruction of bone." }
+    status: unverified
+  - id: rheum.L16.013
+    kind: enumerate
+    topic: pathogenesis
+    prompt: Mention the products of the activated macrophage in RA.
+    points: [IL-6, IL-8, Prostaglandins, Leukotrienes]
+    pass: 3
+    src: { page: 242, quote: "Macrophage produce: IL6: stimulates acute phase response (ESR CRP)." }
+    status: unverified
+  - id: rheum.L16.014
+    kind: mcq
+    topic: pathogenesis
+    stem: In an RA joint, which mediator explains the raised ESR and CRP?
+    options: [IL-6 from macrophages, IL-2 from Th1 cells, IL-8 from macrophages, Leukotrienes]
+    answer: 0
+    why:
+      - "Correct: macrophage IL-6 stimulates the acute phase response (ESR, CRP) (p242)."
+      - IL-2 from Th1 cells stimulates lymphocytes.
+      - IL-8 is chemotactic to polymorphs.
+      - Leukotrienes are inflammatory mediators but the book ties the acute phase response to IL-6.
+    src: { page: 242, quote: "IL6: stimulates acute phase response (ESR CRP)." }
+    status: unverified
+  - id: rheum.L16.015
+    kind: mcq
+    topic: pathogenesis
+    stem: Which cytokine pair does the book hold responsible for cartilage and bone destruction in RA?
+    options: [IL-1 and TNF, IL-2 and IFN-gamma, IL-8 and leukotrienes, IL-17 and IL-2]
+    answer: 0
+    why:
+      - "Correct: IL-1 and TNF activate fibroblasts and chondrocytes to release metalloproteinases and PGE2 (p242)."
+      - IL-2 and IFN-gamma are Th1 products that stimulate lymphocytes and macrophages.
+      - IL-8 recruits polymorphs; leukotrienes are inflammatory mediators.
+      - IL-17 is proinflammatory, but the destruction pathway in the book belongs to IL-1 and TNF.
+    src: { page: 242, quote: "IL1—TNF I. Activate synovial fibroblasts and chondrocytes" }
+    status: unverified
+  # ---------- p243-244: pathology ----------
+  - id: rheum.L16.016
+    kind: order
+    topic: pathology
+    prompt: Put the joint pathology of RA in order.
+    steps:
+      - Injury to the synovial microvasculature
+      - Swelling and congestion of synovium with Th1 cells, macrophages and plasma cells; polymorph-rich effusion
+      - Synovial hypertrophy with villous formation and lymphoid follicles
+      - Pannus spreads over and under the articular cartilage, which is eroded
+      - Fibrous and bony ankylosis
+    src: { page: 243, quote: "Early change: injury to synovial microvasculature." }
+    status: unverified
+  - id: rheum.L16.017
+    kind: card
+    topic: pathology
+    front: What is pannus?
+    back: Inflammatory granulation tissue that spreads over and under the articular cartilage and erodes it.
+    src: { page: 243, quote: "Formation of inflammatory granulation tissue (pannus) spreading over and under the articular cartilage which becomes eroded." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.018
+    kind: card
+    topic: pathology
+    front: What is the earliest pathological change in the RA joint?
+    back: Injury to the synovial microvasculature.
+    src: { page: 243, quote: "Early change: injury to synovial microvasculature." }
+    status: unverified
+  - id: rheum.L16.019
+    kind: card
+    topic: pathology
+    front: How do RA joints become deformed?
+    back: Inflammatory destruction of soft tissues makes ligaments and tendons lax, which leads to deformities.
+    src: { page: 243, quote: "Inflammatory destruction of soft tissues laxity of ligaments and tendons – deformities." }
+    status: unverified
+  - id: rheum.L16.020
+    kind: cloze
+    topic: pathology
+    text: "The RA synovial effusion is rich in {{c1::polymorphs}}, while the synovial membrane is infiltrated with {{c2::Th1 lymphocytes}}, macrophages and some plasma cells."
+    src: { page: 243, quote: "infiltration with TH1 lymphocytes, macrophages and some plasma cells. Effusion of synovial fluid rich in polymorphs." }
+    status: unverified
+  - id: rheum.L16.021
+    kind: card
+    topic: pathology
+    front: Describe the histology of a rheumatoid subcutaneous nodule.
+    back: A central area of fibrinoid necrosis surrounded by a palisade of mononuclear cells.
+    src: { page: 244, quote: "Central area of fibrinoid necrosis. Palisade of mononuclear cells." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.022
+    kind: card
+    topic: pathology
+    front: What is the pathology in extra-articular tissues in RA?
+    back: A mononuclear cell infiltrate with varying degrees of fibrinoid necrosis and nodule formation.
+    src: { page: 244, quote: "Mononuclear cell infiltrate with varying degrees of fibrinoid necrosis and nodule formation." }
+    status: unverified
+  - id: rheum.L16.023
+    kind: card
+    topic: pathology
+    front: Why do muscles waste around an RA joint?
+    back: The book lists atrophy of muscles adjacent to inflamed joints as part of the joint pathology.
+    src: { page: 243, quote: "Atrophy of muscles adjacent to inflamed joints." }
+    status: unverified
+  # ---------- p244: onset and joint pattern ----------
+  - id: rheum.L16.024
+    kind: enumerate
+    topic: onset
+    prompt: Mention the types of onset of RA.
+    points: [Gradual (usual), Acute (a minority), Palindromic (occasionally), Systemic symptoms (fatigue, malaise, weakness, low-grade fever, weight loss)]
+    pass: 3
+    src: { page: 244, quote: "Gradual (usually). Acute in a minority. Occasionally palindromic" }
+    status: unverified
+  - id: rheum.L16.025
+    kind: cloze
+    topic: onset
+    text: "Palindromic onset: attacks of pain, swelling and erythema that resolve but recur; about {{c1::50%}} develop RA."
+    src: { page: 244, quote: "Occasionally palindromic (pain, swelling, erythema that resolve but recur 50% develop RA)." }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L16.026
+    kind: card
+    topic: onset
+    front: What causes morning stiffness in RA?
+    back: Oedema and accumulation of inflammatory mediators during sleep or inactivity.
+    src: { page: 244, quote: "Morning stiffness: due to edema and inflammatory mediator accumulation during sleep or inactivity." }
+    status: unverified
+  - id: rheum.L16.027
+    kind: card
+    topic: onset
+    front: Which joints are most commonly involved in RA?
+    back: Hand joints (MCP, PIP, wrist), foot joints and the knee.
+    src: { page: 244, quote: "Joints commonly involved: joints of hand (MCP-PIP-Wrist) foot joints-knee." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.028
+    kind: card
+    topic: onset
+    front: Name two less commonly involved joints in RA.
+    back: Temporomandibular and cricoarytenoid joints.
+    src: { page: 244, quote: "Less commonly: Tempromandibular and cricoarytenoid joint." }
+    status: unverified
+  - id: rheum.L16.029
+    kind: cloze
+    topic: onset
+    text: "In RA, spinal involvement is limited to the {{c1::upper cervical}} area, and the {{c2::sacroiliac}} joint is spared."
+    src: { page: 244, quote: "Spinal involvement is limited to upper cervical area, sacroiliac joint is spared." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.030
+    kind: card
+    topic: onset
+    front: What two features of the joint pattern are characteristic of RA?
+    back: Symmetry, and sparing of the DIP joints.
+    src: { page: 244, quote: "Symmetry and non involvement of DIP is characteristic." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.031
+    kind: mcq
+    topic: onset
+    stem: A 45-year-old woman has 3 months of symmetrical swelling of both wrists and MCP joints with 90 minutes of morning stiffness. Her DIP joints and sacroiliac joints are normal. Which feature most supports RA over a spondyloarthritis?
+    options:
+      - Symmetrical small-joint disease with DIP and sacroiliac sparing
+      - Involvement of the sacroiliac joints
+      - Predominant DIP involvement
+      - Asymmetrical large-joint oligoarthritis
+    answer: 0
+    why:
+      - "Correct: symmetry and DIP sparing are characteristic, and the sacroiliac joint is spared in RA (p244)."
+      - The sacroiliac joint is spared in RA.
+      - DIP sparing, not DIP involvement, is characteristic of RA.
+      - RA is a symmetrical polyarthritis of small and large joints.
+    src: { page: 244, quote: "Symmetry and non involvement of DIP is characteristic." }
+    status: unverified
+  - id: rheum.L16.032
+    kind: mcq
+    topic: onset
+    stem: A woman with RA complains of hoarseness and pain on swallowing. Which joint is likely involved?
+    options: [Cricoarytenoid, Temporomandibular, Sternoclavicular, Atlanto-occipital]
+    answer: 0
+    why:
+      - "Correct: cricoarytenoid arthritis causes laryngeal pain, dysphonia and pain on swallowing (p244, p253)."
+      - The temporomandibular joint causes jaw pain on chewing, not dysphonia.
+      - The sternoclavicular joint does not affect the voice.
+      - Atlantoaxial subluxation causes neck pain and cord signs, not dysphonia.
+    src: { page: 253, quote: "Cricoarytenoid joint inflammation - laryngeal pain – dysphonia - pain on swallowing." }
+    status: unverified
+  # ---------- p245: ACR 1987 ----------
+  - id: rheum.L16.033
+    kind: enumerate
+    topic: criteria
+    prompt: Mention the ACR 1987 criteria for diagnosis of RA.
+    points:
+      - Morning stiffness of at least 1 hour, present for at least 6 weeks
+      - Swelling of 3 or more joints for at least 6 weeks
+      - Swelling of wrist, MCP or PIP for 6 weeks or more
+      - Symmetric joint swelling
+      - Typical hand X-ray changes (erosions or unequivocal bony decalcification)
+      - Rheumatoid nodules
+      - Serum RF by a method positive in less than 5% of normal people
+    pass: 6
+    src: { page: 245, quote: "Morning stiffness at least one hour and present for at least 6 weeks." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.034
+    kind: cloze
+    topic: criteria
+    text: "ACR 1987: {{c1::4}} or more of the 7 criteria are needed for diagnosis; morning stiffness must last at least {{c2::1 hour}}."
+    src: { page: 245, quote: "4 or more criteria must be present for diagnosis." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: rheum.L16.035
+    kind: card
+    topic: criteria
+    front: Why is the 6-week duration in the ACR 1987 criteria important?
+    back: It prevents self-limiting or viral arthritis from being labelled as RA.
+    src: { page: 245, quote: "It prevents self limiting or vial arthritis to be labelled as RA." }
+    status: unverified
+  - id: rheum.L16.036
+    kind: card
+    topic: criteria
+    front: What is the main weakness of the ACR 1987 criteria?
+    back: They are not sensitive for diagnosing early RA.
+    src: { page: 245, quote: "Criteria are not sensitive for diagnosis of early RA." }
+    status: unverified
+  # ---------- p246: ACR/EULAR 2010 ----------
+  - id: rheum.L16.037
+    kind: table
+    topic: criteria
+    title: ACR/EULAR 2010 RA criteria (6 or more points = definite RA)
+    columns: [Domain, Category, Points]
+    rows:
+      - [Joints, 1 medium-large joint, "0"]
+      - [Joints, 2-10 medium-large joints, "1"]
+      - [Joints, 1-3 small joints, "2"]
+      - [Joints, 4-10 small joints, "3"]
+      - [Joints, More than 10 small joints, "5"]
+      - [Serology, RF and ACPA both negative, "0"]
+      - [Serology, Low positive (above ULN up to 3 x ULN), "2"]
+      - [Serology, High positive (more than 3 x ULN), "3"]
+      - [Duration of synovitis, Less than 6 weeks, "0"]
+      - [Duration of synovitis, 6 weeks or longer, "1"]
+      - [Acute phase reactants, Normal CRP and ESR, "0"]
+      - [Acute phase reactants, Abnormal CRP or ESR, "1"]
+    blanks: [[1, 2], [2, 2], [3, 2], [4, 2], [6, 2], [7, 2], [9, 2], [11, 2]]
+    src: { page: 246, quote: "Patients are definitively diagnosed with RA if they score 6 or more points according to the following criteria" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: rheum.L16.038
+    kind: cloze
+    topic: criteria
+    text: "ACR/EULAR 2010: definite RA needs a score of {{c1::6}} or more; more than 10 small joints scores {{c2::5}} points."
+    src: { page: 246, quote: "More than 10 small joints (5 points)." }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L16.039
+    kind: cloze
+    topic: criteria
+    text: "ACR/EULAR 2010 serology: low titre means above the upper limit of normal but not more than {{c1::3 times}} the ULN ({{c2::2}} points); high titre scores {{c3::3}} points."
+    src: { page: 246, quote: "At least one test is positive at high titer, defined as more than three times the upper limit of normal (3 points)." }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L16.040
+    kind: card
+    topic: criteria
+    front: In the 2010 criteria, how is a patient with 5 small and 4 large joints scored in the joint domain?
+    back: "3 points: the patient receives the highest level fulfilled within each domain (4-10 small joints), not a sum."
+    src: { page: 246, quote: "a patient with five small joints involved and four large joints involved scores 3 points." }
+    status: unverified
+  - id: rheum.L16.041
+    kind: enumerate
+    topic: criteria
+    prompt: Name the four domains of the ACR/EULAR 2010 RA criteria.
+    points: [Joint involvement, Serology (RF or ACPA), Duration of synovitis, Acute phase reactants (CRP or ESR)]
+    pass: 4
+    src: { page: 246, quote: "Domain: Duration of synovitis: Less than 6 weeks (0 points). 6 weeks or longer (1 point)." }
+    status: unverified
+  - id: rheum.L16.042
+    kind: mcq
+    topic: criteria
+    stem: A 40-year-old woman has 4 weeks of synovitis in 6 MCP/PIP joints. RF is twice the upper limit of normal and CRP is raised. What is her ACR/EULAR 2010 score?
+    options: ["6: definite RA", "5: not yet classified as RA", "7: definite RA", "4: not RA"]
+    answer: 0
+    why:
+      - "Correct: 4-10 small joints 3 + low-positive RF 2 + duration under 6 weeks 0 + abnormal CRP 1 = 6 (p246)."
+      - "5 would miss the CRP point; an abnormal CRP or ESR scores 1."
+      - "7 would need either high-titre serology (3) or 6 weeks of synovitis; she has neither."
+      - "4 ignores the serology points; RF at 2 x ULN is low positive (2 points)."
+    src: { page: 246, quote: "At least one of these two tests are positive at low titer" }
+    status: unverified
+  - id: rheum.L16.043
+    kind: mcq
+    topic: criteria
+    stem: Which feature counts in the ACR 1987 criteria but has no place in the ACR/EULAR 2010 criteria as listed in the book?
+    options: [Rheumatoid nodules, Rheumatoid factor, Number of involved joints, Duration of synovitis]
+    answer: 0
+    why:
+      - "Correct: nodules (and X-ray changes and morning stiffness) are 1987 criteria (p245) but not 2010 domains (p246)."
+      - RF appears in both (2010 serology domain).
+      - Joint count appears in both forms.
+      - Duration (6 weeks) appears in both.
+    src: { page: 245, quote: "Rheumatoid nodules." }
+    status: unverified
+  # ---------- p247-248: hands ----------
+  - id: rheum.L16.044
+    kind: card
+    topic: hands
+    front: What is the early sign of RA in the hand?
+    back: Fusiform (spindle-shaped) fingers due to swelling of the PIP joints.
+    src: { page: 247, quote: "Early sign: fusiform or spindle shaped appearance of fingers due to swelling of PIP joints." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.045
+    kind: table
+    topic: hands
+    title: Finger deformities in RA
+    columns: [Deformity, PIP, DIP]
+    rows:
+      - [Swan neck, Hyperextension, Flexion]
+      - [Boutonniere, Flexion, Extension]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2]]
+    src: { page: 247, quote: "Swan neck deformity: Hyperextension at PIP with flexion at DIP. Boutonniere deformity: Flexion at the PIP with extension at DIP." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.046
+    kind: card
+    topic: hands
+    front: What causes the zig-zag deformity of the RA hand?
+    back: Ulnar deviation of the fingers at the MCP joints combined with deviation at the radiocarpal joint.
+    src: { page: 247, quote: "Ulnar deviation of fingers at MCP joint associated with deviation at radiocarpal Joints Zig Zag deformity of the hand." }
+    status: unverified
+  - id: rheum.L16.047
+    kind: card
+    topic: hands
+    front: What is the piano-key (caput) ulna?
+    back: Dorsal subluxation of the ulnar styloid at the wrist.
+    src: { page: 247, quote: "Dorsal subluxation of ulnar styloid of the wrist.(caput ulna,piano key ulna)" }
+    status: unverified
+  - id: rheum.L16.048
+    kind: card
+    topic: hands
+    front: What causes trigger finger in RA?
+    back: An inflamed flexor tendon sheath with a nodule in the sheath that locks the finger and prevents extension from a flexed position.
+    src: { page: 247, quote: "Trigger finger: Inflamed flexor tendon sheath that prevents extension of finger from a flexed position." }
+    status: unverified
+  - id: rheum.L16.049
+    kind: enumerate
+    topic: hands
+    prompt: Mention the deformities of the hand in RA.
+    points:
+      - Ulnar deviation at MCPs (zig-zag deformity with radiocarpal deviation)
+      - Swan neck deformity
+      - Boutonniere deformity
+      - Z-shaped thumb
+      - MCP subluxation
+      - Dorsal subluxation of the ulnar styloid (piano-key ulna)
+      - Trigger finger
+    pass: 5
+    src: { page: 247, quote: "Z shaped deformity of thumb. MCP subluxation." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.050
+    kind: enumerate
+    topic: hands
+    prompt: Mention the soft-tissue and skin signs of the RA hand and wrist (other than deformities).
+    points:
+      - Muscle atrophy with weak grip
+      - Boggy synovium on the dorsum of the wrist
+      - Early limitation of wrist dorsiflexion
+      - Palmar erythema and prominent dorsal veins (increased blood flow)
+      - Thin atrophic skin over synovitis
+    pass: 3
+    src: { page: 247, quote: "Boggy synovium at the dorsum of the wrist. Early limitation of dorsiflexion of the wrist." }
+    status: unverified
+  - id: rheum.L16.051
+    kind: mcq
+    topic: hands
+    stem: An RA patient's finger is flexed at the PIP joint and hyperextended at the DIP joint. What is this deformity?
+    options: [Boutonniere deformity, Swan neck deformity, Z-shaped thumb, Trigger finger]
+    answer: 0
+    why:
+      - "Correct: boutonniere = flexion at PIP with extension at DIP (p247)."
+      - Swan neck is the reverse (PIP hyperextension, DIP flexion).
+      - The Z-shaped deformity affects the thumb.
+      - Trigger finger is locking in flexion from a tendon-sheath nodule.
+    src: { page: 247, quote: "Boutonniere deformity: Flexion at the PIP with extension at DIP." }
+    status: unverified
+  - id: rheum.L16.052
+    kind: mcq
+    topic: hands
+    stem: Which wrist movement is limited early in RA?
+    options: [Dorsiflexion, Palmar flexion only, Pronation only, Ulnar deviation]
+    answer: 0
+    why:
+      - "Correct: early limitation of wrist dorsiflexion (p247)."
+      - The book names dorsiflexion, not palmar flexion.
+      - Pronation is not the early sign given.
+      - Ulnar deviation is a deformity of the fingers at the MCPs, not a lost movement.
+    src: { page: 247, quote: "Early limitation of dorsiflexion of the wrist." }
+    status: unverified
+  # ---------- p249: feet and knee ----------
+  - id: rheum.L16.053
+    kind: enumerate
+    topic: feet-knee
+    prompt: Mention the foot deformities in RA.
+    points:
+      - Cock-up (hammer) toes from MTP subluxation and PIP flexion, with callosities
+      - Hallux valgus
+      - Fibular deviation of the toes
+      - Flattening of the longitudinal arch
+      - Valgus deformity of the ankle
+    pass: 4
+    src: { page: 249, quote: "Hallux valgus deformity of big toe. Fibular deviation of toes. Flattening of the longitudinal arch." }
+    status: unverified
+  - id: rheum.L16.054
+    kind: card
+    topic: feet-knee
+    front: How does the cock-up (hammer) toe form in RA?
+    back: MTP subluxation with flexion at the PIP joint; callosities form under the prominent metatarsal heads.
+    src: { page: 249, quote: "MTP subluxation and flexion at PIP cock-up deformity of toe (hammer toe)" }
+    status: unverified
+  - id: rheum.L16.055
+    kind: card
+    topic: feet-knee
+    front: What is a Baker's cyst and why does it matter?
+    back: An effusion in the semimembranosus bursa at the back of the knee; it may dissect into the calf and rupture, mimicking DVT.
+    src: { page: 249, quote: "effusion in semimembranous bursa at back of knee. This cyst may dissect in the calf and rupture mimics DVT." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.056
+    kind: card
+    topic: feet-knee
+    front: How is a Baker's cyst diagnosed?
+    back: Doppler ultrasound or arthrography; ultrasound or MRI (non-invasive) can now replace arthrography.
+    src: { page: 249, quote: "Ultrasound or MRI (non invasive) can now replace arthrography." }
+    status: unverified
+  - id: rheum.L16.057
+    kind: mcq
+    topic: feet-knee
+    stem: A woman with RA develops sudden calf pain and swelling after a period of knee swelling. Which diagnosis must be considered beside DVT, and which test helps?
+    options:
+      - Ruptured Baker's cyst; Doppler ultrasound
+      - Gout of the ankle; serum urate
+      - Achilles nodule; X-ray of the heel
+      - Tarsal tunnel syndrome; nerve conduction
+    answer: 0
+    why:
+      - "Correct: a Baker's cyst can dissect into the calf and rupture, mimicking DVT; Doppler US, US or MRI diagnose it (p249)."
+      - Gout is not the RA mimic of DVT described here.
+      - A nodule does not cause acute calf swelling.
+      - Tarsal tunnel syndrome causes sole paraesthesia, not calf swelling.
+    src: { page: 249, quote: "Doppler ultrasound or arthrography for diagnosis." }
+    status: unverified
+  - id: rheum.L16.058
+    kind: card
+    topic: feet-knee
+    front: What knee signs are seen in RA?
+    back: Swelling from synovial hypertrophy and effusion, quadriceps atrophy and Baker's cyst.
+    src: { page: 249, quote: "Swelling due to synovial hypertrophy and effusion. Quadriceps atrophy." }
+    status: unverified
+  # ---------- p250-251: extra-articular general ----------
+  - id: rheum.L16.059
+    kind: enumerate
+    topic: extra-general
+    prompt: Mention the systemic and musculoskeletal extra-articular features of RA.
+    points:
+      - "Systemic: fever, fatigue, weight loss, susceptibility to infection"
+      - Muscle wasting
+      - Tenosynovitis
+      - Bursitis
+      - Osteoporosis
+    pass: 4
+    src: { page: 250, quote: "Fever, fatigue, weight loss, susceptibility to infection." }
+    status: unverified
+  - id: rheum.L16.060
+    kind: enumerate
+    topic: extra-general
+    prompt: Mention the haematological and lymphatic features of RA.
+    points:
+      - Normochromic normocytic anaemia of chronic disease
+      - Iron-deficiency anaemia (GI erosions from NSAIDs and steroids)
+      - Eosinophilia
+      - Thrombocytosis (active disease)
+      - Splenomegaly
+      - Felty's syndrome
+    pass: 4
+    src: { page: 251, quote: "Normochromic normocytic anaemia, of chronic disease." }
+    status: unverified
+  - id: rheum.L16.061
+    kind: mcq
+    topic: extra-general
+    stem: A woman with RA on long-term NSAIDs has a microcytic hypochromic anaemia. What is the likely cause according to the book?
+    options:
+      - Iron deficiency from GI erosions caused by NSAIDs
+      - Anaemia of chronic disease
+      - Felty's syndrome
+      - Methotrexate marrow toxicity
+    answer: 0
+    why:
+      - "Correct: Fe-deficiency anaemia from GIT erosions caused by NSAIDs (and steroids) (p251)."
+      - Anaemia of chronic disease is normochromic normocytic.
+      - Felty's syndrome causes splenomegaly with cytopenias, not iron deficiency.
+      - Methotrexate marrow toxicity is not microcytic and she is on NSAIDs only.
+    src: { page: 251, quote: "Fe-deficiency anaemia: GIT erosions from NSAIDs" }
+    status: unverified
+  - id: rheum.L16.062
+    kind: cloze
+    topic: extra-general
+    text: "In RA, {{c1::thrombocytosis}} reflects active disease."
+    src: { page: 251, quote: "Thrombocytosis: Active disease." }
+    status: unverified
+  - id: rheum.L16.063
+    kind: card
+    topic: extra-general
+    front: Where are rheumatoid nodules found, and in which patients?
+    back: In seropositive patients, at pressure or friction sites such as the extensor forearm, sacrum, Achilles tendon and toes; they may be soft and mobile or firm and fixed.
+    src: { page: 251, quote: "found at sites of pressure or friction sites such as extensor surface of forearm, sacrum, Achilles tendon and toes." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p252-253: vasculitis and eye ----------
+  - id: rheum.L16.064
+    kind: enumerate
+    topic: vasculitis-eye
+    prompt: Mention the manifestations of rheumatoid vasculitis.
+    points:
+      - Nailfold infarcts (digital arteries)
+      - Palpable purpura
+      - Ulcers
+      - Pyoderma gangrenosum
+      - Mononeuritis multiplex
+      - Medium-sized artery occlusion (mesenteric, renal, coronary; uncommon)
+    pass: 4
+    src: { page: 252, quote: "Digital arteries: nailfold infarcts. Palpable purpura. Ulcers. Pyoderma gangrenosum. Mononeuritis multiplex." }
+    status: unverified
+  - id: rheum.L16.065
+    kind: table
+    topic: vasculitis-eye
+    title: Eye involvement in RA
+    columns: [Lesion, Features]
+    rows:
+      - [Episcleritis, "Red, painless, benign, no discharge"]
+      - [Scleritis, "Red, painful; may lead to uveitis, secondary glaucoma and visual impairment"]
+      - [Scleromalacia, "Painless bilateral thinning; blue colour of the underlying choroid"]
+      - [Corneal melting, "Pain, redness, blurred vision, thinning, perforation"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 253, quote: "Episcleritis: red- painless-begnin-no discharge." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.066
+    kind: mcq
+    topic: vasculitis-eye
+    stem: A woman with long-standing RA has a red, painful eye with reduced vision. Which lesion is most likely?
+    options: [Scleritis, Episcleritis, Scleromalacia, Keratoconjunctivitis sicca alone]
+    answer: 0
+    why:
+      - "Correct: scleritis is red and painful and may lead to uveitis, glaucoma and visual impairment (p253)."
+      - Episcleritis is red but painless and benign.
+      - Scleromalacia is painless thinning with a blue sclera.
+      - Sjogren dryness causes grittiness, not a red painful eye with visual loss.
+    src: { page: 253, quote: "Scleritis: red- painful may lead to uveitis-secondary glaucoma –visual impairment." }
+    status: unverified
+  - id: rheum.L16.067
+    kind: card
+    topic: vasculitis-eye
+    front: Why does the sclera look blue in scleromalacia?
+    back: Painless bilateral thinning of the sclera lets the underlying choroid show through.
+    src: { page: 253, quote: "Scleromalacia: painless bilateral thinning-blue colour of underling choroid." }
+    status: unverified
+  # ---------- p253: heart and lung ----------
+  - id: rheum.L16.068
+    kind: enumerate
+    topic: heart-lung
+    prompt: Mention the cardiac manifestations of RA.
+    points: [Pericarditis, Myocarditis and cardiomyopathy, Heart block, Endocarditis, Aortic and mitral regurgitation, Coronary vasculitis]
+    pass: 4
+    src: { page: 253, quote: "Myocarditis - cardiomyopathy. Heart block. Endocarditis Aortic, Mitral regurge. Coronary vasculitis." }
+    status: unverified
+  - id: rheum.L16.069
+    kind: cloze
+    topic: heart-lung
+    text: "RA pericarditis is usually {{c1::asymptomatic}}, found in about {{c2::30%}} by echocardiography."
+    src: { page: 253, quote: "Pericarditis: asymptomatic - 30% - detected by echocardiography." }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L16.070
+    kind: enumerate
+    topic: heart-lung
+    prompt: Mention the respiratory manifestations of RA.
+    points:
+      - Cricoarytenoid arthritis (laryngeal pain, dysphonia, painful swallowing)
+      - Pleurisy
+      - Pleural effusion (low glucose, high LDH)
+      - Interstitial fibrosis
+      - Nodules (Caplan syndrome with pneumoconiosis)
+      - Bronchiolitis obliterans
+    pass: 5
+    src: { page: 253, quote: "Pleural effusion with low glucose level - Elevated LDH." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.071
+    kind: card
+    topic: heart-lung
+    front: What is the most common pulmonary manifestation of RA?
+    back: Interstitial fibrosis, usually asymptomatic and in the lower lobes.
+    src: { page: 253, quote: "Interstitial fibrosis: Most common pulmonary manifestation, asymptomatic- lower lobes." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.072
+    kind: card
+    topic: heart-lung
+    front: What is Caplan's syndrome?
+    back: Rheumatoid lung nodules combined with pneumoconiosis.
+    src: { page: 253, quote: "Rheumatoid nodule + pneumoconiosis Caplan‘s syndrome." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.073
+    kind: card
+    topic: heart-lung
+    front: Describe the typical RA pleural effusion.
+    back: Low glucose and raised LDH; usually in seropositive men, small and unilateral; resolves spontaneously or needs steroids.
+    src: { page: 253, quote: "Males - seropositive - small and unilateral resolve spontaneously or require steroids." }
+    status: unverified
+  - id: rheum.L16.074
+    kind: mcq
+    topic: heart-lung
+    stem: A 60-year-old seropositive man with RA has a small unilateral pleural effusion. Which fluid finding fits rheumatoid effusion?
+    options: [Low glucose with raised LDH, High glucose with low LDH, Chylous fluid, Transudate with normal LDH]
+    answer: 0
+    why:
+      - "Correct: RA pleural effusion has a low glucose level and elevated LDH (p253)."
+      - Glucose is low, not high, in RA effusion.
+      - Chylous effusion is not the RA pattern described.
+      - A raised LDH places it among exudates.
+    src: { page: 253, quote: "Pleural effusion with low glucose level - Elevated LDH." }
+    status: unverified
+  - id: rheum.L16.075
+    kind: mcq
+    topic: heart-lung
+    stem: A coal miner with RA has multiple well-defined lung nodules, some cavitating. What is the syndrome?
+    options: [Caplan syndrome, Felty syndrome, Sjogren syndrome, Bronchiolitis obliterans]
+    answer: 0
+    why:
+      - "Correct: rheumatoid nodules plus pneumoconiosis = Caplan syndrome; nodules can cavitate (p253)."
+      - Felty syndrome is RA with splenomegaly (lymphatic feature).
+      - Sjogren syndrome affects eyes and glands.
+      - Bronchiolitis obliterans causes dyspnoea and hyperinflation, not nodules.
+    src: { page: 253, quote: "Nodules : solitary or multiple - can cavitate" }
+    status: unverified
+  - id: rheum.L16.076
+    kind: card
+    topic: heart-lung
+    front: Which RA lung manifestation causes dyspnoea and hyperinflation and may be fatal?
+    back: Bronchiolitis obliterans.
+    src: { page: 253, quote: "Bronchiolitis obliterans: dyspnea - hyperinflation may be fatal." }
+    status: unverified
+  # ---------- p254-256: neuro ----------
+  - id: rheum.L16.077
+    kind: table
+    topic: neuro
+    title: Entrapment neuropathies in RA
+    columns: [Nerve, Site or syndrome]
+    rows:
+      - [Median, Carpal tunnel syndrome]
+      - [Posterior tibial, Tarsal tunnel syndrome]
+      - [Ulnar, At the elbow]
+      - [Peroneal, At the head of the fibula]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 254, quote: "Median nerve: carpal tunnel syndrome (C.T.S). Posterior tibial: tarsal tunnel syndrome (T.T.S)." }
+    status: unverified
+  - id: rheum.L16.078
+    kind: enumerate
+    topic: neuro
+    prompt: Mention the neurological manifestations of RA.
+    points: [Entrapment neuropathy, Peripheral neuropathy, Mononeuritis multiplex, Cervical cord compression from atlantoaxial subluxation]
+    pass: 4
+    src: { page: 254, quote: "Peripheral neuropathy. 3- Mononeuritis multiplex." }
+    status: unverified
+  - id: rheum.L16.079
+    kind: card
+    topic: neuro
+    front: How does atlantoaxial subluxation compress the cord in RA?
+    back: Erosion of the transverse ligament behind the odontoid peg lets the peg move posteriorly on neck flexion and indent the cord.
+    src: { page: 255, quote: "erosion of transverse ligament around the posterior aspect of the odontoid peg. On neck flexion, peg moves posteriorly indenting the cord." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.080
+    kind: enumerate
+    topic: neuro
+    prompt: Mention the symptoms of cervical cord compression from atlantoaxial subluxation.
+    points: [Occipital headache, Paraesthesia, Electric-shock sensations in the arms, Motor weakness (quadriparesis)]
+    pass: 3
+    src: { page: 255, quote: "Symptoms occipital headache, parathesia, electric shock in the arm, motor weakness (Quadreparesis)." }
+    status: unverified
+  - id: rheum.L16.081
+    kind: cloze
+    topic: neuro
+    text: "Atlantoaxial subluxation: on a lateral X-ray in {{c1::flexion}}, a gap between odontoid peg and atlas of more than {{c2::3 mm}}."
+    src: { page: 255, quote: "if in flexion distance between odontoid peg and atlas > 3mm subluxation." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: rheum.L16.082
+    kind: card
+    topic: neuro
+    front: Which bedside manoeuvre is shown for carpal tunnel syndrome in the RA lecture?
+    back: "Phalen's manoeuvre: holding the wrists in full flexion reproduces median nerve symptoms."
+    src: { page: 256, quote: "Phalen's Maneuver" }
+    status: unverified
+  # ---------- p257: investigations ----------
+  - id: rheum.L16.083
+    kind: table
+    topic: monitoring
+    title: Investigations and monitoring of RA
+    columns: [Purpose, Tools]
+    rows:
+      - [Evaluate the diagnosis, "Clinical criteria, ESR/CRP, rheumatoid factor, joint X-ray, synovial fluid analysis"]
+      - [Monitor disease activity and drug efficacy, "Pain VAS, morning stiffness (minutes), tender joint count or articular index, acute phase response, DAS 44/28"]
+      - [Monitor disease damage, "X-rays, functional assessment (Health Assessment Questionnaire)"]
+      - [Monitor drug safety, "Urine analysis, biochemistry, haematology"]
+    blanks: [[1, 1], [2, 1], [3, 1]]
+    src: { page: 257, quote: "To monitor disease activity and drug efficacy." }
+    status: unverified
+  - id: rheum.L16.084
+    kind: card
+    topic: monitoring
+    front: Can the acute phase response be normal in active RA?
+    back: Yes. It is elevated in widespread disease but may be normal in isolated small-joint synovitis.
+    src: { page: 257, quote: "Elevated in widespread disease. But may be normal in isolated small joint synovitis." }
+    status: unverified
+  - id: rheum.L16.085
+    kind: card
+    topic: monitoring
+    front: Which tool assesses function to monitor damage in RA?
+    back: The Health Assessment Questionnaire (HAQ), alongside X-rays.
+    src: { page: 257, quote: "Functional assessment: health assessment questionnaire." }
+    status: unverified
+  # ---------- p257-259: serology ----------
+  - id: rheum.L16.086
+    kind: card
+    topic: serology
+    front: What is rheumatoid factor?
+    back: An antiglobulin antibody (IgM, IgG or IgA) directed against the Fc fragment of IgG.
+    src: { page: 257, quote: "Antiglobulin antibody of class 1gM, IgG, or IgA against Fc fragment of IgG." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.087
+    kind: table
+    topic: serology
+    title: Agglutination tests for IgM rheumatoid factor
+    columns: [Test, Particles, Performance]
+    rows:
+      - [Latex test, Polystyrene particles coated with human IgG, More sensitive]
+      - [Rose-Waaler, Sheep red cells coated with rabbit anti-erythrocyte antibody, Less sensitive but more specific]
+    blanks: [[0, 1], [1, 1], [1, 2]]
+    src: { page: 258, quote: "Rose waaler is less sensitive but more specific than latex test." }
+    status: unverified
+  - id: rheum.L16.088
+    kind: cloze
+    topic: serology
+    text: "RF is positive in {{c1::85%}} of RA patients but in only {{c2::70%}} early; its titre has {{c3::no prognostic}} significance."
+    src: { page: 258, quote: "RF is positive in 85% of patients but early in 70% only." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: rheum.L16.089
+    kind: enumerate
+    topic: serology
+    prompt: Mention conditions other than RA in which rheumatoid factor is positive.
+    points: [Sjogren syndrome, Other connective tissue diseases, Chronic liver diseases, Sarcoidosis, Multiple myeloma, "Chronic infections: TB, leprosy, syphilis"]
+    pass: 4
+    src: { page: 258, quote: "Chronic liver diseases. Sarcoidosis. Multiple myeloma. Chronic infections: TB, leprosy syphilis." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.090
+    kind: card
+    topic: serology
+    front: What is the primary target antigen of antikeratin antibodies, and what do they actually bind?
+    back: Filaggrin (filament aggregating protein); they bind filaggrin epitopes containing citrulline, made by post-translational deimination of arginine.
+    src: { page: 258, quote: "Their primary target antigen is the filament aggregating protein filaggrin." }
+    status: unverified
+  - id: rheum.L16.091
+    kind: card
+    topic: serology
+    front: How were antikeratin antibodies originally detected, and what replaced the method?
+    back: Indirect immunofluorescence on cryosections of rat oesophagus; now ELISA for antibodies to cyclic citrullinated peptides (anti-CCP).
+    src: { page: 258, quote: "Done on cryosection of rat oesaphagus by indirect immunofluorescence." }
+    status: unverified
+  - id: rheum.L16.092
+    kind: cloze
+    topic: serology
+    text: "Anti-CCP in RA: sensitivity {{c1::40% to 70%}}, specificity up to {{c2::98%}}."
+    src: { page: 259, quote: "Sensitivity in RA is 40% to 70%. Specificity may be 98%." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: rheum.L16.093
+    kind: enumerate
+    topic: serology
+    prompt: Mention the clinical value of anti-CCP antibodies.
+    points: [Found in early RA and in the preclinical phase, Found in some RF-negative RA, Predict RA severity, High specificity (up to 98%)]
+    pass: 3
+    src: { page: 259, quote: "Early RA as well as in preclinical phase. Some RF negative RA cases. Anti CCP are predictors of severity of RA." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.094
+    kind: mcq
+    topic: serology
+    stem: A 38-year-old woman with 8 weeks of symmetrical hand synovitis is RF negative. Which test best supports early RA and predicts severity?
+    options: [Anti-CCP antibody, Repeat Rose-Waaler test, ANA, HLA-B27]
+    answer: 0
+    why:
+      - "Correct: anti-CCP is found in early and RF-negative RA, predicts severity and is up to 98% specific (p259)."
+      - Repeating an RF test adds little; RF is positive in only 70% early.
+      - ANA is not the RA marker the book describes.
+      - HLA-B27 relates to spondyloarthritis.
+    src: { page: 259, quote: "Some RF negative RA cases." }
+    status: unverified
+  - id: rheum.L16.095
+    kind: mcq
+    topic: serology
+    stem: A man with chronic hepatitis C has joint aches and a positive rheumatoid factor. What is the right interpretation?
+    options:
+      - RF can be positive in chronic liver disease, so it does not prove RA
+      - A positive RF confirms RA
+      - A high RF titre predicts severe RA
+      - RF is only positive in RA and Sjogren syndrome
+    answer: 0
+    why:
+      - "Correct: RF is also positive in chronic liver diseases, chronic infections, sarcoidosis, myeloma and connective tissue diseases (p258)."
+      - RF is not specific for RA.
+      - RF titre has no prognostic significance (p258).
+      - The book lists several other conditions.
+    src: { page: 258, quote: "RF titer has no prognostic significance." }
+    status: unverified
+  - id: rheum.L16.096
+    kind: mcq
+    topic: serology
+    stem: Which statement about rheumatoid factor is true according to the book?
+    options:
+      - It is an antibody against the Fc fragment of IgG
+      - It is an antibody against citrullinated filaggrin
+      - The Rose-Waaler test is more sensitive than the latex test
+      - It is positive in 98% of RA patients
+    answer: 0
+    why:
+      - "Correct: RF is an antiglobulin (IgM, IgG or IgA) against the Fc fragment of IgG (p257)."
+      - Anti-citrullinated filaggrin describes antikeratin/anti-CCP antibodies.
+      - Rose-Waaler is less sensitive but more specific.
+      - RF is positive in 85%; 98% is the specificity of anti-CCP.
+    src: { page: 257, quote: "Antiglobulin antibody of class 1gM, IgG, or IgA against Fc fragment of IgG." }
+    status: unverified
+  # ---------- p259: X-ray and synovial fluid ----------
+  - id: rheum.L16.097
+    kind: table
+    topic: xray-fluid
+    title: X-ray changes in RA
+    columns: [Stage, Findings]
+    rows:
+      - [Early, "Soft tissue swelling, periarticular osteoporosis"]
+      - [More advanced, "Narrowing of joint spaces, marginal erosions, subluxations (malalignment), deformities"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 259, quote: "Early: soft tissue swelling. Periarticular osteoporosis." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.098
+    kind: enumerate
+    topic: xray-fluid
+    prompt: Mention the synovial fluid findings in inflammatory arthritis such as RA.
+    points:
+      - Turbid fluid
+      - "WBC 2,000-50,000, polymorphs 20-70%"
+      - Poor mucin clot (hyaluronic acid degraded)
+      - Synovial fluid to blood glucose difference about 30
+      - No crystals
+      - Decreased complement
+    pass: 4
+    src: { page: 259, quote: "Mucin. clot is poor: hyaluronic acid is degraded." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.099
+    kind: cloze
+    topic: xray-fluid
+    text: "Inflammatory synovial fluid: WBC {{c1::2,000-50,000}} with polymorphs {{c2::20-70%}}; the mucin clot is {{c3::poor}}."
+    src: { page: 259, quote: "WBC‘s 2000 - 50.000 % polymorph 20-70%." }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L16.100
+    kind: card
+    topic: xray-fluid
+    front: Why is the mucin clot poor in RA synovial fluid?
+    back: Hyaluronic acid is degraded.
+    src: { page: 259, quote: "Mucin. clot is poor: hyaluronic acid is degraded." }
+    status: unverified
+  - id: rheum.L16.101
+    kind: card
+    topic: xray-fluid
+    front: What is the purpose of synovial fluid analysis in suspected RA?
+    back: It differentiates inflammatory arthritis (such as RA) from degenerative (OA) or septic arthritis.
+    src: { page: 259, quote: "Differentiates inflammatory arthritis (as RA) from degenerative as (O.A) or septic arthritis." }
+    status: unverified
+  - id: rheum.L16.102
+    kind: mcq
+    topic: xray-fluid
+    stem: A knee aspirate is turbid with 15,000 WBC (50% polymorphs), a poor mucin clot, low complement and no crystals. Which diagnosis fits best?
+    options: [Inflammatory arthritis such as RA, Osteoarthritis, Gout, Normal fluid]
+    answer: 0
+    why:
+      - "Correct: turbid fluid, WBC 2,000-50,000, poor mucin clot, low complement and no crystals are the inflammatory pattern (p259)."
+      - OA fluid is degenerative, not turbid with this count.
+      - Gout would show crystals.
+      - Normal fluid is clear with few cells.
+    src: { page: 259, quote: "Turbid. WBC‘s 2000 - 50.000 % polymorph 20-70%." }
+    status: unverified
+  - id: rheum.L16.103
+    kind: mcq
+    topic: xray-fluid
+    stem: Which is an early X-ray sign of RA?
+    options: [Periarticular osteoporosis, Marginal erosions, Joint space narrowing, Subluxation]
+    answer: 0
+    why:
+      - "Correct: early changes are soft tissue swelling and periarticular osteoporosis (p259)."
+      - Marginal erosions are a more advanced change.
+      - Joint space narrowing is a more advanced change.
+      - Subluxation (malalignment) is a late change.
+    src: { page: 259, quote: "Early: soft tissue swelling. Periarticular osteoporosis." }
+    status: unverified
+  # ---------- p260-262: strategy ----------
+  - id: rheum.L16.104
+    kind: card
+    topic: strategy
+    front: Why are early diagnosis and early treatment needed in RA?
+    back: Joint destruction occurs in the first 2 years after onset.
+    src: { page: 260, quote: "Early diagnosis and early treatment are needed as joint destruction occurs in the first 2 years of onset." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.105
+    kind: enumerate
+    topic: strategy
+    prompt: Mention the poor prognostic features that call for aggressive treatment of RA.
+    points:
+      - Early onset of severe synovitis (high disease activity) with functional limitation
+      - Joint erosions
+      - Extra-articular manifestations
+      - Rheumatoid factor positivity
+      - Family history of severe RA
+    pass: 4
+    src: { page: 260, quote: "Joint erosions. Extra — articular manifestations. Rheumatoid factor positivity. Family history of severe RA." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.106
+    kind: card
+    topic: strategy
+    front: In the EULAR algorithm (phase I), what is started when there is no contraindication to methotrexate?
+    back: Methotrexate combined with short-term glucocorticoids, reduced and stopped as rapidly as possible.
+    src: { page: 261, quote: "Combine with short-term glucocorticoids (reduce and stop as rapidly as possible)" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.107
+    kind: card
+    topic: strategy
+    front: In phase I of the EULAR algorithm, what is started if methotrexate is contraindicated?
+    back: Leflunomide or sulfasalazine (with short-term glucocorticoids).
+    src: { page: 261, quote: "Start leflunomide or sulfasalazine" }
+    status: unverified
+  - id: rheum.L16.108
+    kind: cloze
+    topic: strategy
+    text: "Treat-to-target checkpoint: improved at {{c1::3 months}} and target achieved at {{c2::6 months}}? If yes, continue, and reduce the dose in sustained remission."
+    src: { page: 261, quote: "Improved at 3 months and achieved target at 6 months?" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: rheum.L16.109
+    kind: card
+    topic: strategy
+    front: What is the treatment target in the EULAR algorithm, and what counts as insufficient improvement?
+    back: Clinical remission by ACR-EULAR definitions (or at least low disease activity if remission is unlikely), reached by 6 months; therapy is changed if improvement is under 50% of disease activity at 3 months.
+    src: { page: 262, quote: "therapy should be adapted or changed if insufficient improvement (less than 50% of disease activity) is seen after 3 months" }
+    status: unverified
+  - id: rheum.L16.110
+    kind: table
+    topic: strategy
+    title: "EULAR algorithm, phase II (target not reached after phase I)"
+    columns: [Situation, Action]
+    rows:
+      - ["Poor prognostic factors present (RF/ACPA esp. high, high activity, early damage, failure of 2 or more csDMARDs)", "Add a bDMARD, or consider a JAK inhibitor only after risk assessment"]
+      - [Poor prognostic factors absent, "Change to or add a second csDMARD (leflunomide, sulfasalazine, alone or in combination, plus glucocorticoids)"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 261, quote: "Add a bDMARD; Consider use of a JAK-inhibitor only after risk assessment" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.111
+    kind: card
+    topic: strategy
+    front: What is done in phase III of the EULAR algorithm?
+    back: Change the bDMARD or JAK inhibitor (to one of a different or the same class) and recheck at 3 and 6 months.
+    src: { page: 262, quote: "Change the bDMARD or JAK-inhibitor" }
+    status: unverified
+  - id: rheum.L16.112
+    kind: enumerate
+    topic: strategy
+    prompt: Mention the risk factors that must be considered before prescribing a JAK inhibitor (EULAR algorithm footnote).
+    points:
+      - Age over 65 years
+      - Current or past smoking
+      - Other cardiovascular risk factors
+      - Other risk factors for malignancy
+      - Risk factors for thromboembolic events
+    pass: 4
+    src: { page: 262, quote: "Age over 65 years, history of current or past smoking, other cardiovascular risk factors" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.113
+    kind: card
+    topic: strategy
+    front: Which csDMARD combination is most frequently used?
+    back: Methotrexate, sulfasalazine and hydroxychloroquine (triple therapy).
+    src: { page: 262, quote: "The most frequently used combination comprises methotrexate, sulfasalazine and hydroxychloroquine." }
+    status: unverified
+  - id: rheum.L16.114
+    kind: card
+    topic: strategy
+    front: Can a biologic or targeted DMARD be tapered in sustained remission?
+    back: Dose reduction or interval increase is safe with little risk of flares, but stopping causes high flare rates; glucocorticoids must be stopped first.
+    src: { page: 262, quote: "Dose reduction or interval increase can be safely done with all bDMARDs and tsDMARDs with little risk of flares" }
+    status: unverified
+  - id: rheum.L16.115
+    kind: cloze
+    topic: strategy
+    text: "Sustained remission in the EULAR algorithm means remission for at least {{c1::6 months}} (ACR/EULAR index-based or Boolean)."
+    src: { page: 262, quote: "Sustained remission: ≥ 6 months ACR/EULAR index based or Boolean remission" }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L16.116
+    kind: card
+    topic: strategy
+    front: Summarize the book's "lines of treatment" for active RA.
+    back: NSAIDs plus at least one DMARD, with or without low-dose corticosteroids; in remission, steroids are discontinued and the DMARD continues at a maintenance dose.
+    src: { page: 262, quote: "Active RA NSAIDs + At least one DMARD's" }
+    status: unverified
+  - id: rheum.L16.117
+    kind: enumerate
+    topic: strategy
+    prompt: Mention the elements of physical therapy in RA.
+    points:
+      - Passive movement to keep full range of movement
+      - Graded exercise programme
+      - "Heat therapy: warm pools, paraffin bath"
+      - Rest splints for very painful joints
+      - Surgery and rehabilitation when needed
+    pass: 4
+    src: { page: 262, quote: "Passive movement to maintain full range of movement. Graded exercise program." }
+    status: unverified
+  - id: rheum.L16.118
+    kind: mcq
+    topic: strategy
+    stem: A 50-year-old woman with high-titre ACPA and early erosions has not reached target after 6 months of methotrexate. What does the EULAR algorithm advise next?
+    options:
+      - Add a bDMARD (or a JAK inhibitor after risk assessment)
+      - Switch to hydroxychloroquine alone
+      - Continue methotrexate unchanged for another year
+      - Stop all DMARDs and use long-term high-dose steroids
+    answer: 0
+    why:
+      - "Correct: with poor prognostic factors (high ACPA, early damage) phase II adds a bDMARD or considers a JAK inhibitor (p261)."
+      - Hydroxychloroquine alone is a weak drug for mild RA.
+      - Failure to reach target at 6 months means a change, not continuation.
+      - Long-term steroids carry unacceptable side effects.
+    src: { page: 261, quote: "Poor prognostic factors present" }
+    status: unverified
+  - id: rheum.L16.119
+    kind: mcq
+    topic: strategy
+    stem: A 52-year-old seronegative woman with moderate RA and no erosions fails methotrexate at 6 months. What is the next step per phase II?
+    options:
+      - Change to or add a second csDMARD such as leflunomide or sulfasalazine
+      - Add rituximab immediately
+      - Start a JAK inhibitor without risk assessment
+      - Give intra-articular steroids every month
+    answer: 0
+    why:
+      - "Correct: without poor prognostic factors, phase II changes to or adds a second csDMARD (p261)."
+      - Biologics are for poor prognostic factors in phase II.
+      - JAK inhibitors are used only after risk assessment.
+      - Intra-articular injections are for one or a few joints and no more than 4 a year in a large joint.
+    src: { page: 261, quote: "Change to or add a second conventional synthetic DMARD" }
+    status: unverified
+  - id: rheum.L16.120
+    kind: mcq
+    topic: strategy
+    stem: A 70-year-old ex-smoker with hypertension has RA not controlled by methotrexate and poor prognostic factors. Which choice best follows the EULAR footnote?
+    options:
+      - Prefer a bDMARD; consider a JAK inhibitor only after weighing his cardiovascular and malignancy risks
+      - Prefer tofacitinib because it is oral
+      - Avoid all biologics because of his age
+      - Add hydroxychloroquine and wait 12 months
+    answer: 0
+    why:
+      - "Correct: age over 65, smoking and CV risk factors must be considered before a JAK inhibitor (p262)."
+      - Oral convenience does not outweigh his MACE and VTE risk.
+      - Age is not a contraindication to bDMARDs.
+      - Waiting 12 months breaks the 3- and 6-month target checks.
+    src: { page: 262, quote: "Age over 65 years, history of current or past smoking, other cardiovascular risk factors" }
+    status: unverified
+  # ---------- p263: NSAIDs ----------
+  - id: rheum.L16.121
+    kind: card
+    topic: nsaids
+    front: What do NSAIDs do and not do in RA?
+    back: They control inflammation and pain but do not prevent structural damage; response and toxicity vary between individuals.
+    src: { page: 263, quote: "They control inflammation and pain (analgesic effect). They do not prevent the structural damage." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.122
+    kind: table
+    topic: nsaids
+    title: The two cyclo-oxygenase isoforms
+    columns: [Isoform, Expression, Prostaglandins needed for]
+    rows:
+      - [COX-1, Constitutive, "Gastric mucosal integrity, renal blood flow, platelet aggregation"]
+      - [COX-2, Induced at sites of inflammation, "Peripheral inflammation and pain"]
+    blanks: [[0, 1], [0, 2], [1, 1]]
+    src: { page: 263, quote: "COX -1 is constitutively expressed and produces PG necessary for integrity of gastric mucosa" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.123
+    kind: card
+    topic: nsaids
+    front: Which COX isoform's inhibition gives the analgesic, anti-inflammatory and antipyretic effects of NSAIDs?
+    back: COX-2.
+    src: { page: 263, quote: "COX-2 inhibition is largely responsible for analgesic, anti- inflammatory and antipyretic of NSAIDs." }
+    status: unverified
+  - id: rheum.L16.124
+    kind: card
+    topic: nsaids
+    front: Name the selective COX-2 inhibitors in the book and their advantage.
+    back: Celecoxib and rofecoxib; no increased risk of gastroduodenal ulceration, though they keep the other NSAID side effects.
+    src: { page: 263, quote: "Have no increased risk of gastroduodenal ulceration but produce other NSAID side effects." }
+    status: unverified
+    update:
+      text: "Rofecoxib was withdrawn worldwide in 2004 because of excess cardiovascular events; celecoxib remains available."
+      ref: "Merck voluntary worldwide withdrawal of Vioxx (rofecoxib), 2004"
+  - id: rheum.L16.125
+    kind: table
+    topic: nsaids
+    title: GI ulcer risk of NSAIDs
+    columns: [Risk, Drugs]
+    rows:
+      - [Low, "Ibuprofen, etodolac, meloxicam"]
+      - [Moderate, "Naproxen, diclofenac"]
+      - [High, "Piroxicam, indomethacin"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 263, quote: "Low - risk: Ibuprofen, Etodolac, Meloxicam. High risk: Piroxicam, Indomethacin. Moderate: Naproxen, Diclofenac." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.126
+    kind: enumerate
+    topic: nsaids
+    prompt: Mention the side effects of NSAIDs.
+    points:
+      - GI toxicity (bleeding and perforation of gastric and duodenal ulcers)
+      - Fluid retention and circulatory overload compromising the heart
+      - Renal impairment (loss of vasodilator PGE2) or interstitial nephritis
+      - "CNS: dizziness, headache, confusion"
+      - Asthma and anaphylaxis (rare)
+      - Prolonged use may hasten cartilage and bone damage
+    pass: 5
+    src: { page: 263, quote: "May affect renal function by suppressing vasodilator PGE2 or induce interstitial nephritis." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.127
+    kind: mcq
+    topic: nsaids
+    stem: An RA patient with a past bleeding duodenal ulcer needs an NSAID. Which conventional NSAID carries the highest ulcer risk and should be avoided?
+    options: [Piroxicam, Ibuprofen, Meloxicam, Etodolac]
+    answer: 0
+    why:
+      - "Correct: piroxicam and indomethacin are high risk (p263)."
+      - Ibuprofen is low risk.
+      - Meloxicam is low risk.
+      - Etodolac is low risk.
+    src: { page: 263, quote: "High risk: Piroxicam, Indomethacin." }
+    status: unverified
+  - id: rheum.L16.128
+    kind: mcq
+    topic: nsaids
+    stem: An elderly RA patient on diclofenac develops a rising creatinine. Which mechanism does the book give?
+    options:
+      - Suppression of vasodilator PGE2, or interstitial nephritis
+      - Direct glomerular immune complex deposition
+      - Urate nephropathy
+      - Renal vasculitis from RA only
+    answer: 0
+    why:
+      - "Correct: NSAIDs may affect renal function by suppressing vasodilator PGE2 or by inducing interstitial nephritis (p263)."
+      - Immune complex nephritis is not the NSAID mechanism given.
+      - Urate nephropathy is unrelated to NSAIDs.
+      - The timing with diclofenac points to the drug.
+    src: { page: 263, quote: "May affect renal function by suppressing vasodilator PGE2 or induce interstitial nephritis." }
+    status: unverified
+  # ---------- p264: steroids ----------
+  - id: rheum.L16.129
+    kind: enumerate
+    topic: steroids
+    prompt: Mention the indications for systemic glucocorticoids in RA.
+    points:
+      - "Bridge therapy: rapid, short-term (1-3 months) control of marked synovitis while awaiting DMARD effect, low dose (7.5 mg prednisolone)"
+      - Vasculitis, eye or lung involvement
+      - Pregnancy, when DMARDs are contraindicated
+    pass: 3
+    src: { page: 264, quote: "For vasculitis, eye or lung involvement. 3- During pregnancy when DMARDs are contraindicated." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.130
+    kind: cloze
+    topic: steroids
+    text: "Bridge therapy: low-dose prednisolone {{c1::7.5 mg}} for {{c2::1-3 months}} while awaiting DMARD efficacy."
+    src: { page: 264, quote: "Use low dose (7.5 mg) of prednisolone or equivalent." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: rheum.L16.131
+    kind: card
+    topic: steroids
+    front: Why are steroids not used long-term to control RA symptoms?
+    back: The doses needed bring unacceptable side effects (Cushingoid features, osteoporosis, hyperglycaemia, IHD, hypertension, peptic ulcer, glaucoma, cataract).
+    src: { page: 264, quote: "doses required to maintain adequate symptomatic relief are accompanied by unacceptable side effects" }
+    status: unverified
+  - id: rheum.L16.132
+    kind: cloze
+    topic: steroids
+    text: "Intra-articular steroids help for {{c1::2-8 weeks}}; give no more than {{c2::4}} injections a year in a large joint, with strict asepsis."
+    src: { page: 264, quote: "Frequent injections- joint damage (not more than 4/ year in a large joint)" }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L16.133
+    kind: mcq
+    topic: steroids
+    stem: A woman with newly diagnosed active RA starts methotrexate. How should steroids be used?
+    options:
+      - Low-dose prednisolone (7.5 mg) for 1-3 months as a bridge
+      - High-dose prednisolone indefinitely
+      - No steroids are ever allowed in RA
+      - Monthly intra-articular injections into every joint
+    answer: 0
+    why:
+      - "Correct: rapid short-term (1-3 months) low dose bridge therapy while DMARDs take effect (p264)."
+      - Long-term doses cause unacceptable side effects.
+      - Steroids have clear indications in RA.
+      - Intra-articular injections are for one or a few joints, at most 4 a year in a large joint.
+    src: { page: 264, quote: "Rapid, short term (1-3m) in control of marked synovitis while awaiting efficacy from DMARDs (Bridge therapy)" }
+    status: unverified
+  # ---------- p264-266: DMARDs ----------
+  - id: rheum.L16.134
+    kind: card
+    topic: csdmards
+    front: What do DMARDs do, and how soon should they start?
+    back: They reduce synovitis and prevent or retard joint erosion and destruction; start within 12 weeks of onset because damage occurs early.
+    src: { page: 264, quote: "Should be used within 12 w of onset, as joint damage occurs early in disease course." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.135
+    kind: order
+    topic: csdmards
+    prompt: "Build the DMARD family tree from top to bottom: start with the class, end with an example."
+    steps:
+      - DMARDs
+      - Synthetic DMARDs (sDMARDs)
+      - Targeted synthetic DMARDs (tsDMARDs)
+      - JAK inhibitors
+    src: { page: 265, quote: "Targeted sDMARDs (tsDMARDs) to include a new sDMARD janus kinases (JAKi)." }
+    status: unverified
+  - id: rheum.L16.136
+    kind: card
+    topic: csdmards
+    front: What are the two classes of DMARDs, and how are synthetic DMARDs divided?
+    back: Synthetic (sDMARDs) and biological (bDMARDs). sDMARDs are conventional (csDMARDs) or targeted (tsDMARDs, the JAK inhibitors).
+    src: { page: 265, quote: "Conventional sDMARDs (csDMARDs). Targeted sDMARDs (tsDMARDs)" }
+    status: unverified
+  - id: rheum.L16.137
+    kind: table
+    topic: csdmards
+    title: Conventional synthetic DMARDs (book table)
+    columns: [Drug, Dose, Main side effects, Monitoring]
+    rows:
+      - [Methotrexate, 5-25 mg/week, "GI upset, stomatitis, rash, alopecia, hepatotoxicity, acute pneumonitis, marrow toxicity", "CBC, LFT monthly"]
+      - [Sulfasalazine, 2-3 g/day, "Nausea, diarrhoea, rash, hepatitis, neutropenia, pancytopenia", "CBC, LFT monthly for 3 months, then every 3 months"]
+      - [Leflunomide, "20 mg/day (loading 100 mg/day for 3 days)", "Nausea, GI upset, rash, alopecia, hepatitis, hypertension", "CBC, LFT, blood pressure every 6-12 months"]
+      - [Hydroxychloroquine, 200-400 mg/day, "Rash, nausea, diarrhoea, headache, corneal deposits, retinopathy", "Visual acuity, Amsler chart, fundoscopy"]
+      - [Azathioprine, 50-150 mg/day, "GI upset, stomatitis, hepatitis, myelosuppression", "CBC, LFT weekly then monthly"]
+      - [Cyclosporine, 2.5-4 mg/kg/day, "Nausea, hepatotoxicity, renal impairment, hypertension", "CBC, LFT, creatinine, BP every 2-4 weeks"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 3], [5, 2]]
+    src: { page: 265, quote: "Folic acid (1mg/d) reduce side effects." }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: rheum.L16.138
+    kind: card
+    topic: csdmards
+    front: How does methotrexate act in RA?
+    back: It inhibits dihydrofolate reductase (purine synthesis) and AICAR transformylase; accumulated AICAR releases adenosine, a potent anti-inflammatory inhibitor of neutrophils.
+    src: { page: 265, quote: "Adenosine is a potent inhibitor of neutrophil function and has potent anti inflammatory properties." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.139
+    kind: cloze
+    topic: csdmards
+    text: "Methotrexate is the {{c1::first-choice}} DMARD, {{c2::5-25 mg per week}}; {{c3::folic acid 1 mg/day}} reduces its side effects."
+    src: { page: 265, quote: "Methotexate (MTX) 1st choice drug 5-25 mg- week" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: rheum.L16.140
+    kind: card
+    topic: csdmards
+    front: How does leflunomide act?
+    back: It inhibits dihydroorotate dehydrogenase, reducing de novo pyrimidine synthesis and arresting activated lymphocytes in G1.
+    src: { page: 265, quote: "leflunomide inhibits dihydroorotate dehydrogenase leading to decrease in de novo." }
+    status: unverified
+  - id: rheum.L16.141
+    kind: card
+    topic: csdmards
+    front: When is leflunomide used?
+    back: When methotrexate is not tolerated or contraindicated, or added to methotrexate; it is as effective as MTX and SSZ but expensive.
+    src: { page: 265, quote: "Used when methotrexate is not tolerated, contraindicated or in addition to MTX" }
+    status: unverified
+  - id: rheum.L16.142
+    kind: card
+    topic: csdmards
+    front: How does hydroxychloroquine act, and where does it fit?
+    back: A weak antirheumatic for mild RA or combination therapy, slow in onset; it inhibits antigen presentation by HLA and platelet aggregation and adhesion.
+    src: { page: 265, quote: "They inhibit antigen presentation by HLA They inhibit platelet aggre gation and adhesion" }
+    status: unverified
+    update:
+      text: "AAO 2016 advises a daily dose of no more than 5 mg/kg real body weight and annual retinal screening after 5 years (sooner with risk factors), using OCT and visual fields."
+      ref: "AAO recommendations on screening for chloroquine and hydroxychloroquine retinopathy, 2016"
+  - id: rheum.L16.143
+    kind: card
+    topic: csdmards
+    front: Why are D-penicillamine and gold no longer first choice in RA?
+    back: Toxicity (marrow suppression, nephritis, rash, mouth ulcers) and very slow onset of action.
+    src: { page: 266, quote: "Now not first choice for RA because of toxicity and very slow onset of action." }
+    status: unverified
+  - id: rheum.L16.144
+    kind: card
+    topic: csdmards
+    front: How does cyclosporine act in RA?
+    back: It blocks resting lymphocytes in G0 or G1 and inhibits lymphokine production and release.
+    src: { page: 266, quote: "blocks resting lymphocytes in Go or G1 phase of cell cycle, inhibiting lymphokine production and release." }
+    status: unverified
+  - id: rheum.L16.145
+    kind: mcq
+    topic: csdmards
+    stem: An RA patient on methotrexate develops dry cough, fever and breathlessness within weeks of starting. Which side effect is this?
+    options: [Acute pneumonitis, Interstitial fibrosis of RA, Caplan syndrome, Bronchiolitis obliterans]
+    answer: 0
+    why:
+      - "Correct: acute pneumonitis is a principal methotrexate side effect (p265)."
+      - RA interstitial fibrosis is usually asymptomatic and slow.
+      - Caplan syndrome is nodules with pneumoconiosis.
+      - Bronchiolitis obliterans is an RA feature with hyperinflation; the timing points to the drug.
+    src: { page: 265, quote: "hepatotoxicity, acute pneumonitis Bone marrow toxicity" }
+    status: unverified
+  - id: rheum.L16.146
+    kind: mcq
+    topic: csdmards
+    stem: Which DMARD needs visual acuity, Amsler chart and fundoscopy monitoring?
+    options: [Hydroxychloroquine, Sulfasalazine, Leflunomide, Azathioprine]
+    answer: 0
+    why:
+      - "Correct: hydroxychloroquine can cause corneal deposits and retinopathy (p265)."
+      - Sulfasalazine is monitored with CBC and LFT.
+      - Leflunomide is monitored with CBC, LFT and blood pressure.
+      - Azathioprine is monitored with CBC and LFT.
+    src: { page: 265, quote: "corneal deposits, and retinopathy Visual acuity Amsler chart Fundoscopy" }
+    status: unverified
+  - id: rheum.L16.147
+    kind: mcq
+    topic: csdmards
+    stem: A patient started on leflunomide 3 months ago has new hypertension. Which monitoring did the book add for this drug?
+    options: [Blood pressure with CBC and LFT, Amsler chart, Serum creatinine only, None; hypertension is unrelated]
+    answer: 0
+    why:
+      - "Correct: leflunomide causes hypertension and is monitored with CBC, LFT and blood pressure (p265)."
+      - The Amsler chart is for hydroxychloroquine.
+      - Creatinine is part of cyclosporine monitoring.
+      - Hypertension is a listed side effect of leflunomide.
+    src: { page: 265, quote: "rash, alopecia, hepatitis, hypertension" }
+    status: unverified
+  - id: rheum.L16.148
+    kind: mcq
+    topic: csdmards
+    stem: Which csDMARD acts by inhibiting dihydroorotate dehydrogenase?
+    options: [Leflunomide, Methotrexate, Azathioprine, Hydroxychloroquine]
+    answer: 0
+    why:
+      - "Correct: leflunomide blocks dihydroorotate dehydrogenase and de novo pyrimidine synthesis (p265)."
+      - Methotrexate inhibits dihydrofolate reductase and AICAR transformylase.
+      - Azathioprine inhibits purine metabolism.
+      - Hydroxychloroquine inhibits antigen presentation.
+    src: { page: 265, quote: "leflunomide inhibits dihydroorotate dehydrogenase" }
+    status: unverified
+  - id: rheum.L16.149
+    kind: mcq
+    topic: csdmards
+    stem: A patient on cyclosporine for RA needs monitoring. Which set does the book give?
+    options:
+      - CBC, LFT, creatinine and blood pressure every 2-4 weeks
+      - Visual acuity and fundoscopy
+      - CBC monthly only
+      - Chest X-ray yearly only
+    answer: 0
+    why:
+      - "Correct: cyclosporine causes renal impairment and hypertension; monitor CBC, LFT, creatinine and BP every 2-4 weeks (p266)."
+      - Eye checks are for hydroxychloroquine.
+      - CBC alone misses renal toxicity and hypertension.
+      - Chest X-ray is not its monitoring.
+    src: { page: 266, quote: "Renal impairment, Hypertension." }
+    status: unverified
+  # ---------- p266-270: anti-TNF ----------
+  - id: rheum.L16.150
+    kind: enumerate
+    topic: anti-tnf
+    prompt: Name the five anti-TNF agents.
+    points: [Infliximab, Etanercept, Adalimumab, Certolizumab, Golimumab]
+    pass: 5
+    src: { page: 266, quote: "Infliximab, etanercept, adalimumab, certolizumab, golimumab." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.151
+    kind: card
+    topic: anti-tnf
+    front: Which anti-TNF must be combined with methotrexate, and why?
+    back: Infliximab, to prevent antibodies against its mouse component.
+    src: { page: 266, quote: "Only infliximab needs to be combined with methotrexate to prevent development of antibodies to the mouse component of the drug." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.152
+    kind: table
+    topic: anti-tnf
+    title: Structure of the biologics (book figure)
+    columns: [Drug, Target, Structure]
+    rows:
+      - [Infliximab, TNF, "Chimeric antibody (murine Fv, human Fc)"]
+      - [Adalimumab, TNF, Human antibody]
+      - [Golimumab, TNF, Human antibody]
+      - [Certolizumab pegol, TNF, "Humanized Fab' fragment, pegylated"]
+      - [Etanercept, TNF, "Fusion protein (TNF receptor 2 + human Fc)"]
+      - [Abatacept, T cell, Fusion protein]
+      - [Tocilizumab, IL-6 receptor, Humanized antibody]
+    blanks: [[0, 2], [3, 2], [4, 2], [5, 1], [6, 1]]
+    src: { page: 267, quote: "Infliximab Adalimumab Golimumab Certolizumab Etanercept Abatacept Tocilizumab" }
+    status: unverified
+  - id: rheum.L16.153
+    kind: card
+    topic: anti-tnf
+    front: Describe the structure of infliximab.
+    back: A chimeric IgG1 anti-TNF antibody, with the mouse antigen-binding region (one quarter of the molecule) and the human constant region.
+    src: { page: 268, quote: "Chimeric IgG1 anti TNF antibody containing the antigen-binding region of the mouse antibody (one fourth of the molecule)" }
+    status: unverified
+  - id: rheum.L16.154
+    kind: card
+    topic: anti-tnf
+    front: How does infliximab act?
+    back: It binds TNF-alpha with high affinity, blocking its receptor binding, and kills TNF-expressing cells by antibody- and complement-dependent cytotoxicity.
+    src: { page: 268, quote: "It also kills cells that express TNF- through antibody dependent and complement dependent cytotoxicity." }
+    status: unverified
+  - id: rheum.L16.155
+    kind: cloze
+    topic: anti-tnf
+    text: "Infliximab: {{c1::3 mg/kg}} IV over 2 hours at weeks 0, 2 and 6, then every {{c2::8 weeks}} with methotrexate; it may be raised up to 10 mg/kg every 4 weeks."
+    src: { page: 268, quote: "3 loading dose of 3 mg/kg at week 0, 2 weeks later and at week 6 followed by maintenance doses every 8 weeks" }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L16.156
+    kind: card
+    topic: anti-tnf
+    front: Describe the structure and action of etanercept.
+    back: A soluble TNF receptor fusion protein (type II p75 receptor ligand-binding portion linked to human IgG1 Fc) that binds TNF-alpha and TNF-beta.
+    src: { page: 268, quote: "This fusion protein binds both TNF- and TNFB preventing interaction with receptors." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.157
+    kind: table
+    topic: anti-tnf
+    title: Anti-TNF doses
+    columns: [Drug, Dose]
+    rows:
+      - [Etanercept, "50 mg SC once weekly or 25 mg twice weekly"]
+      - [Adalimumab, "40 mg SC every other week"]
+      - [Golimumab, "50 mg SC monthly, or 2 mg/kg IV at weeks 0 and 4 then every 8 weeks"]
+      - [Certolizumab pegol, "400 mg SC at weeks 0, 2 and 4, then 200 mg every other week (or 400 mg every 4 weeks)"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 268, quote: "Subcut 40 mg every other week." }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L16.158
+    kind: card
+    topic: anti-tnf
+    front: What is certolizumab pegol?
+    back: A recombinant humanized anti-TNF-alpha Fab' fragment conjugated to about 40 kDa of polyethylene glycol.
+    src: { page: 269, quote: "CIMZIA is a recombinant, humanized antibody Fab' fragment, with specificity for human tumor necrosisfactor alpha" }
+    status: unverified
+  - id: rheum.L16.159
+    kind: enumerate
+    topic: anti-tnf
+    prompt: Mention the side effects of anti-TNF therapy.
+    points:
+      - Infections (serious bacterial, TB, fungal, atypical mycobacteria)
+      - Lymphoma (non-Hodgkin); overall cancer incidence not increased
+      - Autoantibodies (ANA, anti-dsDNA); drug-induced lupus rare
+      - Multiple sclerosis exacerbation or new demyelinating disease
+      - Injection site reactions
+      - Abnormal LFTs and cytopenia
+    pass: 5
+    src: { page: 269, quote: "Serious bacterial infections, TB, fungal, atypical mycobacteria." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.160
+    kind: card
+    topic: anti-tnf
+    front: How is latent TB handled before anti-TNF therapy?
+    back: Screen with PPD or QuantiFERON-Gold; if positive with a normal chest X-ray, give isoniazid 300 mg plus vitamin B6 50 mg for 9 months alongside the anti-TNF.
+    src: { page: 269, quote: "If positive and chest X-ray normal: isonazid (300 mg) and vit B6 (50mg) for 9 month with anti TNF." }
+    status: unverified
+    tags: [high-yield]
+    update:
+      text: "Shorter rifamycin regimens (3 months weekly isoniazid-rifapentine, 4 months rifampicin, or 3 months daily isoniazid-rifampicin) are now preferred options for latent TB."
+      ref: "NTCA/CDC latent TB treatment guidelines, 2020"
+  - id: rheum.L16.161
+    kind: card
+    topic: anti-tnf
+    front: How is anti-TNF handled around surgery and minor infection?
+    back: Withhold 1-2 weeks before surgery and restart 2 weeks later; withhold during upper respiratory or skin infections and ulcers, then restart.
+    src: { page: 269, quote: "Withheld 1 or 2 weeks before surgery restarted 2 weeks later." }
+    status: unverified
+  - id: rheum.L16.162
+    kind: card
+    topic: anti-tnf
+    front: In which neurological disease should anti-TNF be avoided?
+    back: Multiple sclerosis (demyelinating disease); exacerbations and new disease have been reported.
+    src: { page: 269, quote: "Exacerbation and development of new DS has been reported. Should be avoided in D.S." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.163
+    kind: mcq
+    topic: anti-tnf
+    stem: Before starting adalimumab, a woman has a positive QuantiFERON test and a normal chest X-ray. What does the book advise?
+    options:
+      - Isoniazid 300 mg with vitamin B6 for 9 months alongside anti-TNF
+      - Never use any anti-TNF
+      - Full four-drug anti-TB therapy for 6 months first
+      - Ignore the result because the X-ray is normal
+    answer: 0
+    why:
+      - "Correct: positive screen with normal CXR = isoniazid 300 mg + B6 50 mg for 9 months with anti-TNF (p269)."
+      - The book allows anti-TNF with prophylaxis.
+      - Full treatment is for active TB, not latent infection.
+      - A positive screen means latent infection that can reactivate.
+    src: { page: 269, quote: "PPD screening- quantiferon-gold assay." }
+    status: unverified
+  - id: rheum.L16.164
+    kind: mcq
+    topic: anti-tnf
+    stem: An RA patient with known multiple sclerosis needs a biologic. Which class should be avoided?
+    options: [TNF antagonists, Rituximab, Abatacept, Tocilizumab]
+    answer: 0
+    why:
+      - "Correct: anti-TNF can exacerbate or cause demyelinating disease and should be avoided (p269)."
+      - The book does not list demyelination for rituximab.
+      - The book does not list demyelination for abatacept.
+      - The book does not list demyelination for tocilizumab.
+    src: { page: 269, quote: "Should be avoided in D.S." }
+    status: unverified
+  - id: rheum.L16.165
+    kind: mcq
+    topic: anti-tnf
+    stem: Which anti-TNF is a fusion protein rather than a monoclonal antibody?
+    options: [Etanercept, Infliximab, Adalimumab, Golimumab]
+    answer: 0
+    why:
+      - "Correct: etanercept is a soluble TNF receptor fusion protein (p268)."
+      - Infliximab is a chimeric IgG1 antibody.
+      - Adalimumab is a recombinant human IgG1 antibody.
+      - Golimumab is a human monoclonal antibody.
+    src: { page: 268, quote: "Soluble TNF receptor fusion protein." }
+    status: unverified
+  - id: rheum.L16.166
+    kind: mcq
+    topic: anti-tnf
+    stem: A patient on etanercept develops a positive ANA and anti-dsDNA but no symptoms. What does the book say?
+    options:
+      - Autoantibodies are common with anti-TNF, but drug-induced lupus is rare
+      - This is drug-induced lupus and needs high-dose steroids
+      - Anti-TNF never causes autoantibodies
+      - It means latent TB has reactivated
+    answer: 0
+    why:
+      - "Correct: ANA and anti-dsDNA appear, but drug-induced lupus is rare (p269)."
+      - Autoantibodies alone are not lupus.
+      - The book lists autoantibodies as a side effect.
+      - Autoantibodies are unrelated to TB.
+    src: { page: 269, quote: "ANA and anti ds DNA but drug induced lupus is rare." }
+    status: unverified
+  # ---------- p270-272: other biologics ----------
+  - id: rheum.L16.167
+    kind: card
+    topic: other-biologics
+    front: What is anakinra and how does it compare with anti-TNF?
+    back: A recombinant IL-1 receptor antagonist that competes with IL-1 for its receptor; less effective than anti-TNF and needs daily injections.
+    src: { page: 270, quote: "Recombinant protein-Targets IL-1 receptor competing with IL-1. Less effective than anti TNF Daily injections are required." }
+    status: unverified
+  - id: rheum.L16.168
+    kind: enumerate
+    topic: other-biologics
+    prompt: Mention the adverse effects of anakinra.
+    points:
+      - Bacterial infections (no opportunistic infections)
+      - Injection site reactions
+      - Reversible neutropenia and thrombocytopenia
+      - Severe infection when combined with anti-TNF
+    pass: 3
+    src: { page: 270, quote: "Reversible neutropenia and thrombocytopenia. With anti TNF severe infection." }
+    status: unverified
+  - id: rheum.L16.169
+    kind: card
+    topic: other-biologics
+    front: How does abatacept (CTLA4-Ig) act?
+    back: It blocks T-cell activation by competing with CD28 on T cells for binding to CD80/CD86 on antigen-presenting cells (costimulation blockade).
+    src: { page: 270, quote: "Blocks activation of T lymphocytes by competing with binding of costimulatroy molecule CD28 on surface of T cells to CD80/CD86" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.170
+    kind: cloze
+    topic: other-biologics
+    text: "Abatacept: {{c1::10 mg/kg}} IV, 3 infusions every 2 weeks then monthly; avoid combining with {{c2::anti-TNF}} (high infection rate)."
+    src: { page: 270, quote: "Alone or with methotrexate-good safety profile but with anti TNF high level of infections." }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L16.171
+    kind: enumerate
+    topic: other-biologics
+    prompt: Mention the roles of B cells in RA pathogenesis (the rationale for rituximab).
+    points: [Antigen presentation, T-cell activation, Antibody production, "Cytokine production (TNF, lymphotoxin, IL-17) that activates macrophages"]
+    pass: 3
+    src: { page: 271, quote: "B cells have a critical role in pathogenesis of RA. Antigen presentation. T cell activation. Antibody production." }
+    status: unverified
+  - id: rheum.L16.172
+    kind: card
+    topic: other-biologics
+    front: What is rituximab and how does it deplete B cells?
+    back: A chimeric anti-CD20 monoclonal antibody; it depletes B cells for more than 6 months by ADCC, complement-dependent cytotoxicity and apoptosis.
+    src: { page: 271, quote: "Rituximab is a chimeric monoclonal antibody against CD20 molecules on B lymphocytes." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.173
+    kind: card
+    topic: other-biologics
+    front: Why do immunoglobulin levels stay within normal on rituximab?
+    back: Pro-B cells and plasma cells do not express CD20 and are spared; Ig (especially IgM) falls but stays within normal.
+    src: { page: 271, quote: "Pro B cells and plasma cells do not express CD20-They are spared, Immunoglobulin level (esp IgM) is lowered but remains within normal." }
+    status: unverified
+  - id: rheum.L16.174
+    kind: cloze
+    topic: other-biologics
+    text: "Rituximab course: {{c1::2}} IV infusions of {{c2::1 g}}, 2 weeks apart; repeat after {{c3::7 to 23 months}} according to activity."
+    src: { page: 271, quote: "Single course of 2 IV infusions. 1 g each- 2 weeks apart. Further courses after 7 to 23 months" }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L16.175
+    kind: card
+    topic: other-biologics
+    front: What are the side effects of rituximab in RA?
+    back: Infections within the usual RA range (no TB, no opportunistic infections), mild to moderate infusion reactions (premedicate with steroids), and low rates of HACA without effect on efficacy.
+    src: { page: 271, quote: "Infusion reactions (mild to moderate) premedication with steroids." }
+    status: unverified
+  - id: rheum.L16.176
+    kind: card
+    topic: other-biologics
+    front: What is tocilizumab?
+    back: A humanized IgG monoclonal antibody against the human IL-6 receptor.
+    src: { page: 272, quote: "It is a humanized IgG monoclonal antibody against human IL6 receptor." }
+    status: unverified
+  - id: rheum.L16.177
+    kind: enumerate
+    topic: other-biologics
+    prompt: Mention the IL-6 effects that tocilizumab prevents.
+    points:
+      - B-cell activation and antibody production
+      - T-cell activation
+      - Acute phase protein synthesis
+      - Neutrophil recruitment and pannus formation
+      - Neovascularization (VEGF induction)
+    pass: 4
+    src: { page: 272, quote: "Neutrophil recruitment and pannus formation. Neovascularisation (induction of VEGF)." }
+    status: unverified
+  - id: rheum.L16.178
+    kind: card
+    topic: other-biologics
+    front: How does tocilizumab improve the anaemia of RA?
+    back: It inhibits IL-6-induced hepcidin; hepcidin otherwise stops ferroportin releasing iron stores.
+    src: { page: 272, quote: "Improve anaemia through inhibition of IL6 induced hepcidin production." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.179
+    kind: enumerate
+    topic: other-biologics
+    prompt: Mention the side effects of tocilizumab.
+    points:
+      - Infections including TB
+      - Possible malignancy risk
+      - Hypersensitivity reactions
+      - Raised transaminases
+      - Neutropenia and thrombocytopenia
+      - Raised cholesterol and triglycerides
+      - Diverticulitis complications (perforation)
+    pass: 5
+    src: { page: 272, quote: "Lipids: elevation chol an TG. 7- Complication of diverticulitis: perforations." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.180
+    kind: cloze
+    topic: other-biologics
+    text: "Tocilizumab: {{c1::8 mg/kg}} IV once a month, with MTX or alone; clinical response is rapid, within {{c2::2 weeks}}."
+    src: { page: 272, quote: "Rapid clinical response : 2 weeks." }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L16.181
+    kind: mcq
+    topic: other-biologics
+    stem: An RA patient with recurrent diverticulitis needs a biologic. Which one carries a specific warning about diverticular perforation in the book?
+    options: [Tocilizumab, Rituximab, Abatacept, Etanercept]
+    answer: 0
+    why:
+      - "Correct: complication of diverticulitis with perforation is listed for tocilizumab (p272)."
+      - Rituximab's side effects are infections and infusion reactions.
+      - Abatacept has a good safety profile alone or with MTX.
+      - The book does not list perforation for etanercept.
+    src: { page: 272, quote: "Complication of diverticulitis: perforations." }
+    status: unverified
+  - id: rheum.L16.182
+    kind: mcq
+    topic: other-biologics
+    stem: Which biologic acts by blocking the CD28-CD80/86 costimulatory signal?
+    options: [Abatacept, Anakinra, Rituximab, Tocilizumab]
+    answer: 0
+    why:
+      - "Correct: abatacept (CTLA4-Ig) competes with CD28 for CD80/CD86 (p270)."
+      - Anakinra blocks the IL-1 receptor.
+      - Rituximab depletes CD20 B cells.
+      - Tocilizumab blocks the IL-6 receptor.
+    src: { page: 270, quote: "CTLA4 -Ig or Abatacept" }
+    status: unverified
+  - id: rheum.L16.183
+    kind: mcq
+    topic: other-biologics
+    stem: A patient on tocilizumab has a lipid profile check. What change is expected?
+    options: [Raised cholesterol and triglycerides, Lower cholesterol, No effect on lipids, Isolated low HDL only]
+    answer: 0
+    why:
+      - "Correct: tocilizumab raises cholesterol and TG (p272)."
+      - Lipids rise, not fall.
+      - The book lists a lipid effect.
+      - The book names cholesterol and triglycerides.
+    src: { page: 272, quote: "Lipids: elevation chol an TG." }
+    status: unverified
+  - id: rheum.L16.184
+    kind: mcq
+    topic: other-biologics
+    stem: Why does rituximab not wipe out serum immunoglobulins?
+    options:
+      - Plasma cells and pro-B cells lack CD20
+      - It only lasts 2 weeks
+      - It targets T cells
+      - It is given only subcutaneously
+    answer: 0
+    why:
+      - "Correct: pro-B cells and plasma cells do not express CD20, so Ig stays within normal (p271)."
+      - B-cell depletion lasts more than 6 months.
+      - It targets CD20 on B cells, not T cells.
+      - It is given as IV infusions.
+    src: { page: 271, quote: "Pro B cells and plasma cells do not express CD20-They are spared" }
+    status: unverified
+  # ---------- p273-276: JAK inhibitors ----------
+  - id: rheum.L16.185
+    kind: enumerate
+    topic: jak
+    prompt: Mention the advantages of JAK inhibitors as small molecules.
+    points:
+      - Inhibit several cytokines at once (intracellular target)
+      - Non-protein, so no neutralizing antibodies
+      - Oral, with no allergic (infusion) reactions
+    pass: 3
+    src: { page: 273, quote: "Being non protein molecule no neutralizing antibodies Oral therapy no allergic reactions." }
+    status: unverified
+  - id: rheum.L16.186
+    kind: order
+    topic: jak
+    prompt: Put JAK-STAT signalling in order.
+    steps:
+      - Cytokine binds its receptor
+      - JAK is activated and phosphorylated, and phosphorylates the receptor
+      - STAT is phosphorylated and dimerizes
+      - The STAT dimer migrates to the nucleus
+      - It binds DNA and regulates gene transcription
+    src: { page: 274, quote: "Phosphorylation and dimerization of STAT. Activated STAT dimer Migrates to the nucleus" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.187
+    kind: card
+    topic: jak
+    front: How do JAK inhibitors block signalling?
+    back: They bind JAKs and prevent ATP binding, stopping the phosphorylation cascade; the ATP sites of JAK isoforms differ slightly, so each drug's design decides which isoforms it hits.
+    src: { page: 274, quote: "JAK inhibitors are small molecules that bind to JAKs preventing ATP binding and subsequent intracellular signalling" }
+    status: unverified
+  - id: rheum.L16.188
+    kind: enumerate
+    topic: jak
+    prompt: Name the four Janus kinases.
+    points: [JAK1, JAK2, JAK3, TYK2]
+    pass: 4
+    src: { page: 274, quote: "There are four JAK: JAK1, JAK2, JAK3, andTYK2." }
+    status: unverified
+  - id: rheum.L16.189
+    kind: table
+    topic: jak
+    title: JAK inhibitors and their indications
+    columns: [Drug, JAK targets, Indications]
+    rows:
+      - [Tofacitinib (Xeljanz), "JAK1/JAK2/JAK3", "RA, PsA, AS, UC, JIA"]
+      - [Baricitinib (Olumiant), "JAK1/JAK2", "RA, atopic dermatitis, alopecia"]
+      - [Upadacitinib (Rinvoq), JAK1, "RA, PsA, AS, atopic dermatitis"]
+      - [Filgotinib (Jyseleca), JAK1, "RA, UC"]
+      - [Abrocitinib (Cibinqo), "-", Atopic dermatitis]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 2]]
+    src: { page: 275, quote: "Xeljanz (tofacitinib) JAK1/JAK2/JAK3 is indicated for the treatment of rheumatoid arthritis" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.190
+    kind: enumerate
+    topic: jak
+    prompt: Name the JAK inhibitors approved by the FDA for RA.
+    points: [Tofacitinib (Xeljanz), Baricitinib (Olumiant), Upadacitinib (Rinvoq)]
+    pass: 3
+    src: { page: 274, quote: "baricitinib (Olumiant), tofacitinib (Xeljanz), and upadacitinib (Rinvoq), are approved by the FDA to treat rheumatoid arthritis." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.191
+    kind: enumerate
+    topic: jak
+    prompt: What did the ORAL Surveillance study find with tofacitinib compared with TNF inhibitors?
+    points:
+      - More major adverse cardiovascular events (MACE)
+      - More malignancies
+      - More venous thromboembolism
+      - Higher all-cause mortality
+      - More serious infections
+    pass: 4
+    src: { page: 276, quote: "Major adverse cardiovascular events (MACE)." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.192
+    kind: card
+    topic: jak
+    front: What did the observational B023 study suggest about baricitinib?
+    back: Higher rates of MACE and VTE than TNF inhibitors in RA (preliminary data).
+    src: { page: 276, quote: "The preliminary results indicate an increased rate of MACE and VTE for baricitinib compared to TNF-alpha inhibitors" }
+    status: unverified
+  - id: rheum.L16.193
+    kind: enumerate
+    topic: jak
+    prompt: Mention other adverse effects and precautions of JAK inhibitors.
+    points:
+      - Upper respiratory infections, nasopharyngitis, headache, diarrhoea (most common)
+      - Avoid in active serious infection; GI perforation
+      - Changes in lymphocytes, neutrophils and haemoglobin
+      - Raised liver enzymes and lipids
+      - Avoid live vaccines
+      - More herpes zoster
+    pass: 4
+    src: { page: 276, quote: "Increased incidence of herpes Zooster is reported." }
+    status: unverified
+  - id: rheum.L16.194
+    kind: mcq
+    topic: jak
+    stem: A patient on tofacitinib asks for the live zoster vaccine. What does the book advise?
+    options:
+      - Avoid live vaccines with tofacitinib
+      - Live vaccines are fine on JAK inhibitors
+      - Stop tofacitinib permanently
+      - Double the dose first
+    answer: 0
+    why:
+      - "Correct: live vaccines should be avoided with Xeljanz (p276)."
+      - The book warns against them.
+      - The book does not advise permanent withdrawal.
+      - Higher doses increase risk.
+    src: { page: 276, quote: "Immunizations – Live vaccines: Avoid use with XELJANZ." }
+    status: unverified
+  - id: rheum.L16.195
+    kind: mcq
+    topic: jak
+    stem: Which JAK inhibitor is selective for JAK1 and approved for RA, PsA, AS and atopic dermatitis?
+    options: [Upadacitinib, Tofacitinib, Baricitinib, Abrocitinib]
+    answer: 0
+    why:
+      - "Correct: Rinvoq (upadacitinib) is JAK1 with those four indications (p275)."
+      - Tofacitinib inhibits JAK1/2/3.
+      - Baricitinib inhibits JAK1/2 and is used for RA, atopic dermatitis and alopecia.
+      - Abrocitinib is indicated only for atopic dermatitis.
+    src: { page: 275, quote: "Rinvoq (upadacitinib) JAK1 is indicated for the treatment rheumatoid arthritis, psoriatic arthritis, ankylosing spondylitis and atopic dermatitis." }
+    status: unverified
+  # ---------- p277: biosimilars ----------
+  - id: rheum.L16.196
+    kind: card
+    topic: biosimilars
+    front: Define a biosimilar (EMA).
+    back: A biological medicine containing a version of the active substance of an authorised bio-originator, with similarity shown in quality, biological activity, safety and efficacy.
+    src: { page: 277, quote: "a biological medicinal product that contains a version of the active substance of an already authorised" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L16.197
+    kind: card
+    topic: biosimilars
+    front: How is a biosimilar approved?
+    back: A stepwise approach of analytical studies, then clinical studies comparing PK/PD, immunogenicity, efficacy and safety with the bio-originator, to show no clinically meaningful differences (totality of the evidence).
+    src: { page: 277, quote: "both follow a ‗stepwise approach‘ and require extensive analytical studies followed by clinical studies comparing PK and PD parameters" }
+    status: unverified
+  - id: rheum.L16.198
+    kind: card
+    topic: biosimilars
+    front: Is a biosimilar a generic?
+    back: No. A biosimilar is not a biomimetic, a biocopy or a generic.
+    src: { page: 277, quote: "A Biosimilar is not a biomimetic a biocopy or a generic." }
+    status: unverified
+  - id: rheum.L16.199
+    kind: enumerate
+    topic: biosimilars
+    prompt: For which biologics does the book say biosimilars are on the market?
+    points: [Infliximab, Adalimumab, Etanercept, Rituximab]
+    pass: 4
+    src: { page: 277, quote: "Infliximab, Adalimumab, Etanercept and rituximab." }
+    status: unverified
+  - id: rheum.L16.200
+    kind: card
+    topic: biosimilars
+    front: Why can a biosimilar tested in one disease be used in the bio-originator's other indications?
+    back: It is equivalent in physicochemical, functional and pharmacokinetic properties, so efficacy and safety in one indication can be extrapolated.
+    src: { page: 277, quote: "confirmation of efficacy and safety in a single indication is sufficient for extrapolation to other diseases" }
+    status: unverified
+  - id: rheum.L16.201
+    kind: mcq
+    topic: biosimilars
+    stem: A hospital switches a patient from originator infliximab to an approved biosimilar. Which statement is true?
+    options:
+      - The biosimilar is neither better nor worse in efficacy and not inferior in safety
+      - It is a generic copy with an identical molecule
+      - It needs a full new trial in every indication
+      - It is approved only for the indication in which it was tested
+    answer: 0
+    why:
+      - "Correct: an approved biosimilar is neither better nor worse in efficacy and not inferior in safety (p277)."
+      - A biosimilar is not a generic.
+      - Extrapolation from one indication is enough.
+      - Approved biosimilars can be used like their originators.
+    src: { page: 277, quote: "will be neither better nor worse in efficacy and not inferior in safety to the various batches of the bio-originator." }
+    status: unverified
+  # ---------- cases ----------
+  - id: rheum.L16.202
+    kind: case
+    topic: criteria
+    stem: A 34-year-old woman has 10 weeks of painful swelling of both wrists and 6 MCP and PIP joints, with 2 hours of morning stiffness.
+    steps:
+      - reveal: RF is 5 times the upper limit of normal; CRP is raised.
+        question: What is her ACR/EULAR 2010 score?
+        options: ["8: definite RA", "6: definite RA", "5: not classified", "10: definite RA"]
+        answer: 0
+        why: "4-10 small joints 3 + high-titre RF 3 + 6 weeks or more 1 + abnormal CRP 1 = 8; 6 or more is definite RA (p246)."
+      - reveal: She has no liver disease and plans no pregnancy.
+        question: Which first treatment fits the EULAR algorithm?
+        options: [Methotrexate with short-term glucocorticoids, Anti-TNF first, Hydroxychloroquine alone, NSAIDs alone]
+        answer: 0
+        why: "With no contraindication, start methotrexate plus short-term glucocorticoids, tapered as fast as possible (p261)."
+      - reveal: Methotrexate is started at a weekly dose.
+        question: What supplement reduces its side effects?
+        options: [Folic acid 1 mg/day, Vitamin B6, Iron, Vitamin D only]
+        answer: 0
+        why: "Folic acid 1 mg/d reduces methotrexate side effects (p265)."
+      - reveal: At 3 months her disease activity has fallen by more than half.
+        question: When is the target judged?
+        options: [At 6 months, At 3 months only, After 2 years, Never; continue indefinitely]
+        answer: 0
+        why: "Improvement at 3 months and target at 6 months; therapy changes if improvement is under 50% at 3 months (p261-262)."
+    src: { page: 246, quote: "Patients are definitively diagnosed with RA if they score 6 or more points" }
+    status: unverified
+  - id: rheum.L16.203
+    kind: case
+    topic: neuro
+    stem: A 62-year-old woman with 20 years of seropositive erosive RA is listed for knee replacement. She reports occipital headache and electric shocks down her arms when she bends her neck.
+    steps:
+      - question: What complication do you suspect?
+        options: [Atlantoaxial subluxation with cord compression, Carpal tunnel syndrome, Cervical spondylosis, Mononeuritis multiplex]
+        answer: 0
+        why: "Erosion of the transverse ligament lets the odontoid peg move back on flexion and indent the cord (p255)."
+      - question: Which imaging confirms it?
+        options: [Lateral cervical X-ray in flexion and extension, AP chest X-ray, Nerve conduction studies, Hand X-ray]
+        answer: 0
+        why: "Lateral views in flexion and extension; a peg-atlas gap over 3 mm in flexion means subluxation (p255)."
+      - reveal: The flexion film shows a 6 mm gap.
+        question: Why does this matter for her surgery?
+        options: [Neck flexion during intubation can compress the cord, It does not matter, It contraindicates any anaesthesia forever, It means she has septic arthritis]
+        answer: 0
+        why: "On neck flexion the peg moves posteriorly and indents the cord (p255), so neck handling must be careful."
+    src: { page: 255, quote: "Lateral x ray in flexion and in extention if in flexion distance between odontoid peg and atlas > 3mm subluxation." }
+    status: unverified
+  - id: rheum.L16.204
+    kind: case
+    topic: anti-tnf
+    stem: A 45-year-old man with RA and high-titre ACPA has failed methotrexate and leflunomide. Infliximab is planned.
+    steps:
+      - question: Which screening is essential first?
+        options: [Latent TB (PPD or QuantiFERON) and chest X-ray, HLA-B27, Anti-dsDNA, Bone scan]
+        answer: 0
+        why: "Anti-TNF can reactivate latent TB; screen with PPD or QuantiFERON-Gold (p269)."
+      - reveal: QuantiFERON is positive; chest X-ray is normal.
+        question: What next?
+        options: [Isoniazid 300 mg + B6 50 mg for 9 months with the anti-TNF, Abandon all biologics, Four-drug TB treatment for 6 months, Start without prophylaxis]
+        answer: 0
+        why: "Positive screen with normal CXR: isoniazid and B6 for 9 months alongside anti-TNF (p269)."
+      - question: Why must infliximab be given with methotrexate?
+        options: [To prevent antibodies against its mouse component, To boost TNF production, Because it is a fusion protein, To prevent TB]
+        answer: 0
+        why: "Only infliximab needs MTX, to prevent antibodies to the mouse part (p266)."
+      - reveal: He is due for an elective hernia repair.
+        question: How is infliximab handled around surgery?
+        options: [Withhold 1-2 weeks before and restart 2 weeks after, Continue unchanged, Stop permanently, Double the dose before surgery]
+        answer: 0
+        why: "Anti-TNF is withheld 1 or 2 weeks before surgery and restarted 2 weeks later (p269)."
+    src: { page: 269, quote: "If positive and chest X-ray normal: isonazid (300 mg) and vit B6 (50mg) for 9 month with anti TNF." }
+    status: unverified
+  - id: rheum.L16.205
+    kind: case
+    topic: heart-lung
+    stem: A 58-year-old male smoker with seropositive nodular RA has breathlessness and a dry cough.
+    steps:
+      - reveal: Chest X-ray shows a small right pleural effusion.
+        question: Which pleural fluid result fits RA?
+        options: [Low glucose and high LDH, High glucose and low LDH, Transudate, Milky chyle]
+        answer: 0
+        why: "RA effusion has low glucose and raised LDH; typically male, seropositive, small and unilateral (p253)."
+      - reveal: CT also shows bibasal reticular changes.
+        question: What is the most common pulmonary manifestation of RA?
+        options: [Interstitial fibrosis, Caplan syndrome, Bronchiolitis obliterans, Lung nodules]
+        answer: 0
+        why: "Interstitial fibrosis is the most common pulmonary manifestation, often asymptomatic, in the lower lobes (p253)."
+      - reveal: He worked 20 years in a coal mine and has several nodules.
+        question: What is the name for nodules plus pneumoconiosis?
+        options: [Caplan syndrome, Felty syndrome, Sjogren syndrome, Pancoast syndrome]
+        answer: 0
+        why: "Rheumatoid nodule + pneumoconiosis = Caplan syndrome (p253)."
+    src: { page: 253, quote: "Interstitial fibrosis: Most common pulmonary manifestation, asymptomatic- lower lobes." }
+    status: unverified
+  # ---------- end-of-lecture questions (p278) ----------
+  - id: rheum.L16.206
+    kind: essay
+    topic: biosimilars
+    prompt: What is a biosimilar?
+    outline:
+      - "Definition (EMA)": ["Biological medicine containing a version of the active substance of an authorised bio-originator", "Similarity in quality, biological activity, safety and efficacy"]
+      - "Approval": ["Stepwise: analytical studies, then clinical PK/PD, immunogenicity, efficacy and safety", "No clinically meaningful differences; totality of the evidence"]
+      - "Properties": ["Neither better nor worse in efficacy, not inferior in safety", "Not a biomimetic, biocopy or generic"]
+      - "Use": ["Available for infliximab, adalimumab, etanercept, rituximab", "Used like the originator; extrapolation across indications; lower cost and wider access"]
+    src: { page: 277, quote: "The availability of biosimilars must significantly lower the cost of treating an individual patient" }
+    status: unverified
+    tags: [book-question]
+  - id: rheum.L16.207
+    kind: essay
+    topic: jak
+    prompt: Mention the main JAK inhibitors used in RA.
+    outline:
+      - "Mechanism": ["Small molecules that bind JAKs and block ATP binding, stopping JAK-STAT signalling", "Four JAKs: JAK1, JAK2, JAK3, TYK2"]
+      - "Drugs approved for RA": ["Tofacitinib (JAK1/2/3)", "Baricitinib (JAK1/2)", "Upadacitinib (JAK1)", "Filgotinib (JAK1, EMA)"]
+      - "Advantages": ["Oral, no neutralizing antibodies, no allergic reactions", "Block several cytokines at once"]
+      - "Safety": ["ORAL Surveillance: more MACE, malignancy, VTE, death and serious infection vs TNF inhibitors", "Zoster, lipids, liver enzymes, cytopenias; avoid live vaccines", "Use only after risk assessment (age over 65, smoking, CV, cancer, VTE risk)"]
+    src: { page: 274, quote: "baricitinib (Olumiant), tofacitinib (Xeljanz), and upadacitinib (Rinvoq), are approved by the FDA to treat rheumatoid arthritis." }
+    status: unverified
+    tags: [book-question]

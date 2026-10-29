@@ -1,0 +1,865 @@
+schema: batna.lesson/v1
+lecture: endo.L04
+lessons:
+  # ------------------------------------------------------------------
+  - id: endo.L04.lesson1
+    title: "القلب كغدة: هرمونات القلب والأوعية"
+    hook: "القلب مش بس طرمبة. ده بيفرز هرمونات بتتحكم في الضغط والكلية."
+    minutes: 7
+    pages: [43, 45]
+    topics: [cv-hormones, oestrogen, heart-failure]
+    goals:
+      - "تعدّ عائلات الـ cardiovascular hormones ومصدر كل واحد"
+      - "تعرف تأثير الـ oestrogen على الـ CVS، الكويس والوحش"
+      - "تعدّ الهرمونات اللي بتتنشط في الـ heart failure"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 43
+        quote: "three families of cardiovascular hormones have proven to be potent regulators of cardiovascular and renal function"
+        title: "القلب بيفرز هرمونات"
+        text: |
+          زمان كانوا فاكرين القلب مجرد ==muscular pump==. دلوقتي معروف إن فيه **three families of cardiovascular hormones** بتنظّم الـ cardiovascular و الـ renal function.
+
+          وبتشتغل يا إما **endocrine** حقيقي، يا إما **autocrine/paracrine**.
+      - kind: figure
+        page: 43
+        quote: "Natriuretic peptides Adrenomedullin Endothelins Nitric oxide(NO)"
+        title: "شجرة الهرمونات"
+        alt: "Tree diagram. Cardiovascular hormones branch into natriuretic peptides, endothelins with nitric oxide, and adrenomedullin. Natriuretic peptides split into ANP and BNP, secreted by the heart, and C-type natriuretic peptide, secreted by the endothelium. Endothelins split into ET-1, ET-2 and ET-3."
+        caption: "الـ ANP والـ BNP من القلب، والـ CNP والـ endothelins والـ NO من الـ endothelium."
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="E04a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="85" y="8" width="160" height="28" rx="8" class="fg-acc"/>
+            <text x="165" y="27" text-anchor="middle" class="t-sm t-b">Cardiovascular hormones</text>
+            <path d="M120 36L60 64" class="fg-arrow" marker-end="url(#E04a)"/>
+            <path d="M165 36V64" class="fg-arrow" marker-end="url(#E04a)"/>
+            <path d="M210 36L272 64" class="fg-arrow" marker-end="url(#E04a)"/>
+            <rect x="8" y="66" width="104" height="28" rx="6" class="fg-box"/>
+            <text x="60" y="84" text-anchor="middle" class="t-sm t-b">Natriuretic</text>
+            <rect x="120" y="66" width="90" height="28" rx="6" class="fg-bad"/>
+            <text x="165" y="84" text-anchor="middle" class="t-sm t-b">Endothelins</text>
+            <rect x="218" y="66" width="104" height="28" rx="6" class="fg-good"/>
+            <text x="270" y="84" text-anchor="middle" class="t-sm t-b">Adrenomedullin</text>
+            <path d="M40 94L28 120" class="fg-arrow" marker-end="url(#E04a)"/>
+            <path d="M60 94V120" class="fg-arrow" marker-end="url(#E04a)"/>
+            <path d="M82 94L96 120" class="fg-arrow" marker-end="url(#E04a)"/>
+            <text x="22" y="134" text-anchor="middle" class="t-sm t-b">ANP</text>
+            <text x="60" y="134" text-anchor="middle" class="t-sm t-b">BNP</text>
+            <text x="100" y="134" text-anchor="middle" class="t-sm t-b">CNP</text>
+            <rect x="6" y="144" width="76" height="22" rx="5" class="fg-thin"/>
+            <text x="44" y="159" text-anchor="middle" class="t-sm">heart</text>
+            <rect x="84" y="144" width="40" height="22" rx="5" class="fg-thin"/>
+            <text x="104" y="159" text-anchor="middle" class="t-sm">endo</text>
+            <text x="165" y="118" text-anchor="middle" class="t-sm">ET-1 · ET-2 · ET-3</text>
+            <text x="165" y="136" text-anchor="middle" class="t-sm t-bad">↑ BP on VSMCs</text>
+            <text x="168" y="160" text-anchor="middle" class="t-sm">+ NO</text>
+            <text x="270" y="118" text-anchor="middle" class="t-sm">adrenal medulla</text>
+            <text x="270" y="136" text-anchor="middle" class="t-sm">brain, kidney, VSMC</text>
+            <text x="270" y="160" text-anchor="middle" class="t-sm t-acc">↓ BP: sepsis</text>
+            <rect x="8" y="186" width="314" height="54" rx="8" class="fg-thin"/>
+            <text x="165" y="206" text-anchor="middle" class="t-sm t-b">Endothelium makes: endothelins, CNP, NO</text>
+            <text x="165" y="226" text-anchor="middle" class="t-sm t-mut">heart makes: ANP, BNP</text>
+          </svg>
+      - kind: check
+        page: 43
+        quote: "C-type natriuretic Secreted by endothelium"
+        question: "Which natriuretic peptide comes from the endothelium?"
+        options: ["C-type natriuretic peptide", "ANP", "BNP", "Endothelin-1"]
+        answer: 0
+        why:
+          - "صح: الـ CNP من الـ endothelium."
+          - "الـ ANP من القلب."
+          - "الـ BNP من القلب."
+          - "الـ ET مش natriuretic peptide."
+      - kind: explain
+        page: 44
+        quote: "The ETs are potent hypertensive agents that exert their effects directly on the VSMCs"
+        title: "Endothelins و Adrenomedullin"
+        text: |
+          - ==Endothelins== (ET-1، ET-2، ET-3): **potent hypertensive agents** بتشتغل مباشرة على الـ VSMCs.
+          - ==Adrenomedullin (AM)==: من الـ **chromaffin cells** في الـ adrenal، ومن المخ والكلية والـ endothelium والـ VSMCs. ممكن تكون سبب الـ **hypotension** في الـ inflammation والـ **septic shock** والـ atherosclerosis. وغالبًا شغلها autocrine أو paracrine.
+      - kind: aside
+        tone: analogy
+        page: 44
+        quote: "AM may be responsible for the hypotension of inflammation, septic shock, and atherosclerosis."
+        text: "الـ endothelin زي اللي بيقفل الحنفية (يرفع الضغط)، والـ adrenomedullin زي اللي بيفتحها على الآخر في الـ septic shock (يوقّع الضغط)."
+      - kind: sort
+        page: 44
+        quote: "Increases HDL cholesterol. Decreases LDL cholesterol."
+        prompt: "صنّف تأثير الـ oestrogen على الـ CVS:"
+        bins: ["Protective", "Opposite effect"]
+        cards:
+          - { text: "↑ HDL", bin: 0 }
+          - { text: "↓ LDL", bin: 0 }
+          - { text: "Vasodilation", bin: 0 }
+          - { text: "Calcium-channel blocking", bin: 0 }
+          - { text: "Antioxidant", bin: 0 }
+          - { text: "Promotes blood clotting", bin: 1 }
+          - { text: "↑ TG slightly", bin: 1 }
+        why: "الـ oestrogen بيحمي بالـ lipids والـ vasodilation والـ antioxidant، بس بيزوّد الـ coagulability وبيرفع الـ TG شوية (ص 72)."
+      - kind: aside
+        tone: trap
+        page: 44
+        quote: "Soaks up free radicals, naturally occurring particles in the blood that can damage the arteries and other tissues."
+        text: "الكتاب حاطط الـ «soaks up free radicals» تحت «opposite effect»، بس هو في الحقيقة antioxidant يعني protective، والكتاب نفسه بيكتب anti-oxidant تحت الـ cardioprotective. لو اتسألت، الـ opposite effect هو الـ **clot formation**."
+      - kind: explain
+        page: 45
+        quote: "Plasma noradrenaline levels, which are often taken as an index of \"global sympathetic outflow\" have been shown to predict prognosis."
+        title: "الهرمونات في الـ heart failure"
+        text: |
+          1. ==RAS activation==: renin عالي في الـ renal venous blood.
+          2. **Aldosterone**.
+          3. ==Sympathetic==: الـ venous **noradrenaline** مقياس للـ global sympathetic outflow. كل ما يعلى، الـ **prognosis أوحش**.
+          4. **Neuropeptide Y**: vasoconstrictor قوي في الـ coronaries، ومستواه ماشي مع الـ noradrenaline.
+      - kind: mnemonic
+        page: 45
+        quote: "1- Activation of the renin-angiotensin system"
+        word: "RASN"
+        parts:
+          - { key: "R", text: "Renin–angiotensin system" }
+          - { key: "A", text: "Aldosterone" }
+          - { key: "S", text: "Sympathetic (noradrenaline = prognosis)" }
+          - { key: "N", text: "Neuropeptide Y" }
+        hook: "الـ heart failure بيـ «RASN» الجسم كله: أربع هرمونات بالترتيب بتاع الكتاب."
+      - kind: try
+        items: [endo.L04.004, endo.L04.008, endo.L04.010, endo.L04.013, endo.L04.020]
+    recap:
+      - "3 عائلات: natriuretic peptides، endothelins (+ NO)، adrenomedullin."
+      - "ANP و BNP من القلب؛ CNP والـ ET والـ NO من الـ endothelium."
+      - "ET = hypertensive على الـ VSMCs؛ AM = hypotension الـ sepsis."
+      - "Oestrogen: ↑HDL ↓LDL، vasodilator، antioxidant، Ca blocker؛ بس بيزوّد الـ clotting."
+      - "HF: renin، aldosterone، sympathetic (noradrenaline تتنبأ بالـ prognosis)، NPY."
+    practice: [endo.L04.001, endo.L04.002, endo.L04.003, endo.L04.004, endo.L04.005, endo.L04.006, endo.L04.007, endo.L04.008, endo.L04.009, endo.L04.010, endo.L04.011, endo.L04.012, endo.L04.013, endo.L04.014, endo.L04.015, endo.L04.016, endo.L04.017, endo.L04.018, endo.L04.019, endo.L04.020, endo.L04.021, endo.L04.022, endo.L04.185, endo.L04.186, endo.L04.187, endo.L04.188, endo.L04.189, endo.L04.238, endo.L04.239, endo.L04.240]
+  # ------------------------------------------------------------------
+  - id: endo.L04.lesson2
+    title: "الغدة الدرقية والقلب"
+    hook: "مريض hypothyroid نبضه 55 وضغطه 100/95. ليه الـ diastolic بالذات هو اللي عالي؟"
+    minutes: 6
+    pages: [45, 47]
+    topics: [thyroid-heart]
+    goals:
+      - "تشرح الـ systolic والـ diastolic dysfunction في الـ hypothyroidism"
+      - "تعدّ تلات ميكانيزمات للـ diastolic hypertension"
+      - "تعرف أثر الـ thyroxine على الضغط والـ heart failure"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 45
+        quote: "disorders of the thyroid gland can worsen old cardiac symptoms or cause new ones, and can accelerate the underlying heart problem"
+        title: "الغدة بتلعب في القلب"
+        text: |
+          لأي حد عنده heart disease، أمراض الـ thyroid ممكن **تزوّد الأعراض القديمة**، **تعمل أعراض جديدة**، و **تسرّع** المرض نفسه.
+      - kind: explain
+        page: 46
+        quote: "In hypothyroidism the heart muscle is weakened in both its contraction phase, and also its relaxation phase."
+        title: "عضلة كسلانة في الاتجاهين"
+        text: |
+          في الـ ==hypothyroidism== عضلة القلب ضعيفة في:
+          - الـ **contraction**: بيضخ أقل مع كل نبضة = ==systolic dysfunction==.
+          - الـ **relaxation**: مش بترتاح كويس بين النبضات = ==diastolic dysfunction==.
+
+          والنبض بيقل **10-20 beat/min** عن الطبيعي. بس رغم كده، ممكن **PVCs** وحتى **AF** يزيدوا.
+      - kind: check
+        page: 46
+        quote: "hypothyroidism may worsen the tendency for premature beats (such as pvcs) and even tachycardias such as atrial fibrillation"
+        question: "Which arrhythmia can hypothyroidism make worse, despite bradycardia?"
+        options: ["Atrial fibrillation", "Complete heart block only", "WPW", "None"]
+        answer: 0
+        why:
+          - "صح: الكتاب بيقول premature beats (PVCs) وحتى AF."
+          - "مش مذكور."
+          - "مش مذكور."
+          - "الكتاب بيقول بيزوّد الـ PVCs والـ AF."
+      - kind: figure
+        page: 46
+        quote: "Because the arteries are stiffer in hypothyroidism, (dt reduction of the amount of nitric oxide in the lining of the blood vessels"
+        title: "ليه الـ diastolic بيعلى؟"
+        alt: "Three boxes feeding into diastolic hypertension. One: less nitric oxide in the vessel lining makes arteries stiff. Two: more sympathetic activity, fewer beta receptors so alpha responses dominate. Three: SIAD expands extracellular volume and raises systemic vascular resistance. Below: thyroxine brings diastolic pressure to 90 or less in 32 percent."
+        caption: "تلات أسباب، والعلاج بالـ thyroxine بيظبط الـ diastolic في 32%."
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="E04b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-bad"/></marker>
+            </defs>
+            <rect x="6" y="8" width="102" height="74" rx="8" class="fg-box"/>
+            <text x="57" y="28" text-anchor="middle" class="t-sm t-b">↓ NO</text>
+            <text x="57" y="48" text-anchor="middle" class="t-sm">stiff</text>
+            <text x="57" y="66" text-anchor="middle" class="t-sm">arteries</text>
+            <rect x="114" y="8" width="102" height="74" rx="8" class="fg-box"/>
+            <text x="165" y="28" text-anchor="middle" class="t-sm t-b">↑ sympathetic</text>
+            <text x="165" y="48" text-anchor="middle" class="t-sm">↓ β receptors</text>
+            <text x="165" y="66" text-anchor="middle" class="t-sm">α wins</text>
+            <rect x="222" y="8" width="102" height="74" rx="8" class="fg-box"/>
+            <text x="273" y="28" text-anchor="middle" class="t-sm t-b">SIAD</text>
+            <text x="273" y="48" text-anchor="middle" class="t-sm">↑ ECF volume</text>
+            <text x="273" y="66" text-anchor="middle" class="t-sm">↑ SVR</text>
+            <path d="M57 82L140 120" class="fg-arrow-bad" marker-end="url(#E04b)"/>
+            <path d="M165 82V118" class="fg-arrow-bad" marker-end="url(#E04b)"/>
+            <path d="M273 82L190 120" class="fg-arrow-bad" marker-end="url(#E04b)"/>
+            <rect x="75" y="122" width="180" height="36" rx="8" class="fg-bad"/>
+            <text x="165" y="145" text-anchor="middle" class="t-b">Diastolic hypertension</text>
+            <rect x="35" y="180" width="260" height="56" rx="8" class="fg-good"/>
+            <text x="165" y="202" text-anchor="middle" class="t-sm t-b">Thyroxine → DBP ≤ 90 mm Hg</text>
+            <text x="165" y="222" text-anchor="middle" class="t-sm">in 32% of hypertensive hypothyroid</text>
+          </svg>
+      - kind: reveal
+        page: 46
+        quote: "The number of ß-adrenergic receptors is decreased, leading to increased alpha-adrenergic responses"
+        prompt: "ليه قلة الـ β receptors بتعلّي الضغط؟"
+        answer: "الـ β2 في الأوعية بيعمل vasodilation. لما الـ β receptors تقل، الـ **α-adrenergic** (vasoconstriction) بيبقى هو الغالب، فالـ peripheral resistance تعلى، وده بيرفع الـ **diastolic** أكتر."
+      - kind: aside
+        tone: exam
+        page: 46
+        quote: "In 32% of hypertensive hypothyroid patients, replacement therapy with thyroxine leads to a fall in diastolic blood pressure to 90 mm Hg or less"
+        text: "رقمين بيتسألوا: النبض بيقل **10-20**، والـ thyroxine بيرجّع الـ DBP لـ 90 أو أقل في **32%**."
+      - kind: explain
+        page: 47
+        quote: "Hypothyroidism can make well- controlled heart failure worsen, and can produce heart failure for the first time"
+        title: "والـ heart failure؟"
+        text: |
+          الـ hypothyroidism ممكن **يبوّظ heart failure كانت متظبطة**، أو **يعمل heart failure لأول مرة** عند حد عنده heart disease بسيط.
+
+          (الكتاب كرر الكلام ده كله في ص 71-73.)
+      - kind: case
+        page: 46
+        quote: "Diastolic hypertension may result from extracellular volume expansion (SIAD) and increased systemic vascular resistance."
+        stem: "A 58-year-old woman with fatigue and weight gain: pulse 54, BP 135/98, TSH 40 mIU/L."
+        steps:
+          - question: "Her blood pressure pattern?"
+            options: ["Diastolic hypertension of hypothyroidism", "Isolated systolic hypertension", "Normal", "Hypertensive emergency"]
+            answer: 0
+            why: "الـ hypothyroidism بيرفع الـ diastolic: NO قليل، α غالب، و SIAD."
+          - question: "What may thyroxine do to her diastolic pressure?"
+            options: ["Bring it to 90 mm Hg or less (about 1 in 3)", "Raise it", "Nothing", "Drop it below 60"]
+            answer: 0
+            why: "32% من الـ hypertensive hypothyroid الـ DBP بيوصل 90 أو أقل."
+      - kind: try
+        items: [endo.L04.024, endo.L04.026, endo.L04.028, endo.L04.031, endo.L04.191]
+    recap:
+      - "Hypothyroid heart: systolic + diastolic dysfunction."
+      - "النبض -10 لـ -20، بس PVCs و AF ممكن يزيدوا."
+      - "Diastolic HTN: ↓NO (stiff)، ↓β/↑α، SIAD + ↑SVR."
+      - "Thyroxine: DBP ≤90 في 32%."
+      - "بيبوّظ الـ HF أو يعملها لأول مرة."
+    practice: [endo.L04.023, endo.L04.024, endo.L04.025, endo.L04.026, endo.L04.027, endo.L04.028, endo.L04.029, endo.L04.030, endo.L04.031, endo.L04.032, endo.L04.033, endo.L04.190, endo.L04.191, endo.L04.192, endo.L04.193, endo.L04.241]
+  # ------------------------------------------------------------------
+  - id: endo.L04.lesson3
+    title: "الكلية والخصوبة: الـ CRF والـ testosterone"
+    hook: "مريض غسيل كلوي، الـ LH عالي والـ testosterone واطي. يعني العيب في الخصية؟ ولا فوق؟ الإجابة: الاتنين."
+    minutes: 7
+    pages: [47, 50]
+    topics: [kidney, crf-reproductive]
+    goals:
+      - "تعدّ هرمونات الكلية التلاتة"
+      - "تشرح ليه الـ testosterone واطي في الـ CRF بسبع أسباب"
+      - "تعرف إيه اللي بيتحسن بالغسيل وإيه بالزرع"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 47
+        quote: "The human kidney secretes three hormones 1- Renin. 2- Erythropoietin. 3- Calcitrol"
+        title: "الكلية غدة كمان"
+        text: |
+          الكلية بتفرز **تلات هرمونات**:
+          1. ==Renin==.
+          2. ==Erythropoietin==.
+          3. ==Calcitriol== (1,25(OH)2 vitamin D3).
+
+          والـ CRF بيأثر على تلات أجهزة: الـ **reproductive**، الـ **CHO metabolism**، والـ **parathyroid**.
+      - kind: explain
+        page: 48
+        quote: "The plasmsa testosterone levels are decreased or low normal ( inspite of an increased LH and FSH)."
+        title: "الـ testosterone في الـ CRF"
+        text: |
+          التغيرات بتبدأ ==بدري== بعد ما الكلى تضعف، وغالبًا بسبب الـ **uremic toxins** والأدوية.
+
+          الـ testosterone ==واطي أو low normal== **رغم إن الـ LH والـ FSH عاليين**. يعني فيه **combined abnormality**: primary hypogonadism + عيب في الـ hypothalamic–pituitary axis.
+      - kind: figure
+        page: 48
+        quote: "Why testosterone levels are decreased or low normal? 1- Decrease of the pulsatility of hypothalamic GRH"
+        title: "سبع ضربات على المحور"
+        alt: "Vertical axis: hypothalamus, pituitary, testis, blood. Hits marked: 1 less pulsatile GnRH at the hypothalamus; 2 weak pituitary response; 3 broken feedback; 4 Leydig resistance from an LH-receptor inhibitor at the testis; 5 reduced clearance of GnRH, LH and FSH; 6 high prolactin suppressing LH and FSH; 7 rising SHBG lowering free testosterone in blood."
+        caption: "العيب في كل دور: فوق (1، 2، 3، 6)، في الخصية (4)، وفي الدم (5، 7)."
+        svg: |
+          <svg viewBox="0 0 330 270" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="E04c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="8" y="8" width="110" height="34" rx="8" class="fg-acc"/>
+            <text x="63" y="30" text-anchor="middle" class="t-sm t-b">Hypothalamus</text>
+            <rect x="8" y="78" width="110" height="34" rx="8" class="fg-acc"/>
+            <text x="63" y="100" text-anchor="middle" class="t-sm t-b">Pituitary</text>
+            <rect x="8" y="148" width="110" height="34" rx="8" class="fg-acc"/>
+            <text x="63" y="170" text-anchor="middle" class="t-sm t-b">Testis (Leydig)</text>
+            <rect x="8" y="218" width="110" height="34" rx="8" class="fg-acc"/>
+            <text x="63" y="240" text-anchor="middle" class="t-sm t-b">Blood</text>
+            <path d="M63 42V76" class="fg-arrow" marker-end="url(#E04c)"/>
+            <path d="M63 112V146" class="fg-arrow" marker-end="url(#E04c)"/>
+            <path d="M63 182V216" class="fg-arrow" marker-end="url(#E04c)"/>
+            <text x="74" y="64" class="t-sm t-mut">GnRH</text>
+            <text x="74" y="134" class="t-sm t-mut">LH, FSH</text>
+            <text x="74" y="204" class="t-sm t-mut">T</text>
+            <rect x="134" y="8" width="190" height="34" rx="6" class="fg-bad"/>
+            <text x="142" y="22" class="t-sm">1 ↓ GnRH pulses</text>
+            <text x="142" y="37" class="t-sm">3 weak feedback</text>
+            <rect x="134" y="78" width="190" height="34" rx="6" class="fg-bad"/>
+            <text x="142" y="92" class="t-sm">2 ↓ response to GnRH</text>
+            <text x="142" y="107" class="t-sm">6 ↑ prolactin ⊣ LH, FSH</text>
+            <rect x="134" y="148" width="190" height="34" rx="6" class="fg-bad"/>
+            <text x="142" y="170" class="t-sm">4 LH-receptor inhibitor</text>
+            <rect x="134" y="218" width="190" height="34" rx="6" class="fg-bad"/>
+            <text x="142" y="232" class="t-sm">5 ↓ clearance GnRH, LH, FSH</text>
+            <text x="142" y="247" class="t-sm">7 ↑ SHBG → ↓ free T</text>
+          </svg>
+      - kind: order
+        page: 48
+        quote: "1- Decrease of the pulsatility of hypothalamic GRH (gonadotrophin releasing hormone) release. 2- Diminished answer of the pituitary gland to GRH."
+        prompt: "رتّب أول أربع أسباب زي الكتاب:"
+        steps:
+          - "↓ GnRH pulsatility"
+          - "↓ Pituitary response to GnRH"
+          - "Impaired feedback (low T can't drive gonadotrophins)"
+          - "Leydig resistance (LH-receptor inhibitor)"
+        why: "الكتاب بيمشي من فوق لتحت: hypothalamus، pituitary، feedback، وبعدين الخصية. وبعدها clearance، prolactin، SHBG."
+      - kind: check
+        page: 49
+        quote: "The age-related increase in SHBG (sex hormone binding globulin) levels (+1.2%/year) further induces a more fall in free testosterone."
+        question: "How much does SHBG rise per year with age?"
+        options: ["+1.2%", "+12%", "+0.1%", "It falls"]
+        answer: 0
+        why:
+          - "صح: +1.2% في السنة، فالـ free T يقل أكتر."
+          - "كتير قوي."
+          - "قليل قوي."
+          - "الـ SHBG بيزيد."
+      - kind: explain
+        page: 49
+        quote: "The main male reproductive problems are Impotence Germinal Cell Dysplasia Oligospermia which leads to infertility."
+        title: "النتيجة"
+        text: |
+          نقص الـ androgen بيعمل:
+          - **Body composition**: الـ BMI يعلى بالدهون، والـ lean/muscle mass يقل.
+          - **Osteoporosis** وكسور أكتر.
+          - **Libido** وأداء جنسي أضعف، وممكن depression.
+
+          أهم المشاكل: ==impotence== و ==germinal cell dysplasia مع oligospermia== (infertility).
+
+          والـ ==hyperprolactinaemia==: clearance أقل + autonomous overproduction.
+      - kind: explain
+        page: 49
+        quote: "Amenorrhea (menstrual periods may start after successful dialysis). Failure of pregnancy (pregnancy aggravates CRF)."
+        title: "الستات والأطفال"
+        text: |
+          - **الستات**: amenorrhoea (الدورة ممكن ترجع بعد dialysis ناجح)، و failure of pregnancy (والحمل بيزوّد الـ CRF).
+          - **الأطفال**: sexual maturation متأخرة و **stunted growth**، وبيتحسنوا مع الـ **renal transplant**.
+      - kind: aside
+        tone: trap
+        page: 50
+        quote: "is not reversed by initiation of effective haemodialysis or peritoneal dialysis therapy"
+        text: "الـ dialysis **مش** بيرجّع الـ hypothalamic–pituitary–gonadal axis. اللي ممكن يرجّعه الـ **transplantation** (والنتايج متضاربة). بس الدورة عند الستات ممكن ترجع بعد dialysis ناجح. ما تخلطش بينهم."
+      - kind: try
+        items: [endo.L04.034, endo.L04.039, endo.L04.041, endo.L04.047, endo.L04.050]
+    recap:
+      - "الكلية: renin، EPO، calcitriol."
+      - "CRF: T واطي/low normal رغم ↑LH و FSH = combined defect."
+      - "7 أسباب: GnRH pulses، pituitary response، feedback، Leydig resistance، clearance، prolactin، SHBG +1.2%/سنة."
+      - "Impotence + oligospermia؛ prolactin من clearance + overproduction."
+      - "Dialysis ما بيرجّعش المحور؛ الزرع ممكن."
+    practice: [endo.L04.034, endo.L04.035, endo.L04.036, endo.L04.037, endo.L04.038, endo.L04.039, endo.L04.040, endo.L04.041, endo.L04.042, endo.L04.043, endo.L04.044, endo.L04.045, endo.L04.046, endo.L04.047, endo.L04.048, endo.L04.049, endo.L04.050, endo.L04.051, endo.L04.194, endo.L04.195, endo.L04.196, endo.L04.197, endo.L04.198, endo.L04.233, endo.L04.242]
+  # ------------------------------------------------------------------
+  - id: endo.L04.lesson4
+    title: "الكلية والإنسولين والـ parathyroid"
+    hook: "مريض سكر على إنسولين، كليته بتضعف، والـ hypo بقت بتجيله بالليل. الإنسولين ما اتغيرش… مين اللي اتغير؟"
+    minutes: 7
+    pages: [50, 52]
+    topics: [crf-glucose, crf-hpt]
+    goals:
+      - "تعرف أنماط الجلوكوز في الـ CRF"
+      - "تحفظ أرقام الـ insulin handling في الكبد والكلية"
+      - "تشرح الـ secondary hyperparathyroidism"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 50
+        quote: "No significant disturbances in carbohydrate metabolism were found in patients with mild (initial) CRF."
+        title: "الجلوكوز مع تقدم الـ CRF"
+        text: |
+          - **Mild CRF**: مفيش تغيير مهم.
+          - **Moderate/advanced**: الـ CHO metabolism بيبوظ، والـ basal insulin بيعلى.
+
+          الأنماط: normoglycaemia، **hypoglycaemia**، بطء نزول الجلوكوز بعد الـ load، fasting hyperglycaemia، و glucose intolerance.
+      - kind: reveal
+        page: 51
+        quote: "Normoglycaemia is maintained at the expense of hyperinsulinaemia."
+        prompt: "مريض CRF عنده insulin resistance والجلوكوز طبيعي. إزاي؟"
+        answer: "البنكرياس بيعوّض: ==hyperinsulinaemia== و C-peptide عالي. يعني الـ normoglycaemia **على حساب** الإنسولين العالي. ولو الـ secretion طبيعي أو قل شوية، يظهر impaired fasting glucose أو glucose intolerance."
+      - kind: figure
+        page: 51
+        quote: "Approximately 40–50% of the endogenous insulin produced by the pancreas is metabolized by the liver in its first pass."
+        title: "رحلة الإنسولين"
+        alt: "Flow from pancreas to liver, where 40 to 50 percent of endogenous insulin is removed on first pass, then to the kidney, where about 65 percent is filtered and broken down in proximal tubules and less than 1 percent reaches urine. A separate box: injected insulin is 30 to 80 percent metabolised, mainly by the kidney."
+        caption: "الكبد بياخد نص الإنسولين الطبيعي، بس الكلية هي اللي بتكسّر الإنسولين المحقون."
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="E04d" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="8" y="10" width="90" height="40" rx="8" class="fg-box"/>
+            <text x="53" y="35" text-anchor="middle" class="t-sm t-b">Pancreas</text>
+            <path d="M98 30H124" class="fg-arrow" marker-end="url(#E04d)"/>
+            <rect x="126" y="10" width="90" height="40" rx="8" class="fg-acc"/>
+            <text x="171" y="28" text-anchor="middle" class="t-sm t-b">Liver</text>
+            <text x="171" y="44" text-anchor="middle" class="t-sm">40–50% out</text>
+            <path d="M216 30H242" class="fg-arrow" marker-end="url(#E04d)"/>
+            <rect x="244" y="10" width="80" height="40" rx="8" class="fg-acc"/>
+            <text x="284" y="28" text-anchor="middle" class="t-sm t-b">Kidney</text>
+            <text x="284" y="44" text-anchor="middle" class="t-sm">65% filtered</text>
+            <path d="M284 50V78" class="fg-arrow" marker-end="url(#E04d)"/>
+            <rect x="200" y="80" width="124" height="40" rx="8" class="fg-box"/>
+            <text x="262" y="98" text-anchor="middle" class="t-sm">proximal tubule</text>
+            <text x="262" y="113" text-anchor="middle" class="t-sm">urine &lt; 1%</text>
+            <rect x="8" y="140" width="316" height="56" rx="10" class="fg-bad"/>
+            <text x="166" y="162" text-anchor="middle" class="t-sm t-b">Injected insulin: 30–80% broken down, mainly kidney</text>
+            <text x="166" y="182" text-anchor="middle" class="t-sm">CKD → insulin lasts longer → hypos</text>
+            <rect x="8" y="208" width="316" height="34" rx="8" class="fg-thin"/>
+            <text x="166" y="230" text-anchor="middle" class="t-sm">Insulin resistance starts at GFR &lt; 50 ml/min</text>
+          </svg>
+      - kind: table
+        page: 51
+        quote: "About 65% of insulin that reaches the kidney is filtered in the glomerulus"
+        title: "أرقام الإنسولين"
+        columns: ["Fact", "Figure"]
+        rows:
+          - ["Liver first pass (endogenous)", "40–50%"]
+          - ["Filtered at kidney", "~65%"]
+          - ["In urine", "<1%"]
+          - ["Exogenous metabolised (mainly kidney)", "30–80%"]
+          - ["IR begins (non-diabetic)", "GFR <50 ml/min"]
+        hide: [[0, 1], [1, 1], [3, 1], [4, 1]]
+      - kind: explain
+        page: 51
+        quote: "such as anaemia, metabolic acidosis and secondary hyperparathyroidism"
+        title: "ليه الـ insulin resistance؟"
+        text: |
+          - ==Uraemic toxins== بتلعب في الـ oxidative و non-oxidative pathways وفي عدد وـ affinity الـ insulin receptors.
+          - **Adipocytokines**: TNF-α، resistin، leptin، adiponectin.
+          - **Anaemia**، **metabolic acidosis**، و **secondary HPT**.
+      - kind: update
+        page: 52
+        quote: "Metformin & other oral hypoglycemic agents are contra - indicated when GFR declines to be 50% or less."
+        text: "الكتاب: metformin وباقي الـ oral agents ممنوعين لما الـ GFR يوصل 50% أو أقل (ودي إجابة الامتحان). الإرشادات الحالية بتسمح بالـ metformin لحد eGFR 30 (بجرعة أقل تحت 45، وبيتوقف تحت 30)، وفيه أدوية أحدث زي الـ SGLT2 inhibitors والـ DPP-4 بتتستخدم في الـ CKD."
+        ref: "KDIGO Diabetes in CKD guideline 2022"
+      - kind: explain
+        page: 52
+        quote: "HPT is the result of hypocalcaemia which develops due to the following causes"
+        title: "الـ secondary HPT"
+        text: |
+          السبب ==hypocalcaemia== من:
+          1. **↓ 1,25(OH)2 D3** (ده الـ **key role**، لأنه بيتعمل في الـ proximal tubules).
+          2. **Hyperphosphataemia**: بتكبت الـ 1α-hydroxylase.
+          3. **↓ calcitriol receptors** في الـ parathyroid.
+
+          وكمان الـ vitamin D ==antiproliferative== على خلايا الـ parathyroid. لما يقل، الـ PTH يعلى جدًا والغدة تكبر ==nodular==.
+      - kind: match
+        page: 52
+        quote: "Hyperphosphatemia (it has a suppressive effect on the renal 1 a – hydroxylase)."
+        prompt: "وصّل السبب بدوره في الـ HPT:"
+        pairs:
+          - ["↓ Calcitriol synthesis", "Key role in pathogenesis"]
+          - ["Hyperphosphataemia", "Suppresses 1α-hydroxylase"]
+          - ["↓ Calcitriol receptors", "Parathyroid ignores vitamin D"]
+          - ["Lost antiproliferative effect", "Nodular hyperplasia"]
+        why: "تلاتة بيعملوا hypocalcaemia، والرابع بيشرح ليه الغدة بتكبر nodular."
+      - kind: try
+        items: [endo.L04.058, endo.L04.059, endo.L04.061, endo.L04.063, endo.L04.069]
+    recap:
+      - "Mild CRF: سليم؛ advanced: IR، hyperinsulinaemia، intolerance، وممكن hypos."
+      - "Liver 40-50%؛ kidney 65% filtered؛ urine <1%؛ exogenous 30-80% في الكلية."
+      - "IR من GFR <50؛ الكتاب: oral agents ممنوعة عند GFR ≤50% (update: metformin لحد 30)."
+      - "2ry HPT: ↓calcitriol (key)، ↑phosphate، ↓receptors؛ وفقد الـ antiproliferative → nodular."
+    practice: [endo.L04.056, endo.L04.057, endo.L04.058, endo.L04.059, endo.L04.060, endo.L04.061, endo.L04.062, endo.L04.063, endo.L04.064, endo.L04.065, endo.L04.069, endo.L04.070, endo.L04.071, endo.L04.072, endo.L04.199, endo.L04.200, endo.L04.201, endo.L04.202, endo.L04.203, endo.L04.234, endo.L04.243, endo.L04.244]
+  # ------------------------------------------------------------------
+  - id: endo.L04.lesson5
+    title: "البطن والمخ والمفاصل: الغدد في أمراض تانية"
+    hook: "طفل قصير عنده Crohn's، الـ GH بتاعه عالي مش واطي. إزاي يبقى قصير والـ GH عالي؟"
+    minutes: 8
+    pages: [52, 58]
+    topics: [git, cns, rheumatic]
+    goals:
+      - "تعرف التغيرات الهرمونية في الـ malabsorption والـ coeliac"
+      - "توصّل أمراض الـ motility بالغدة المسؤولة"
+      - "تعدّ أمراض الـ CNS والروماتيزم اللي ليها علاقة بالغدد"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 53
+        quote: "Stimulate the production of proinflammatory cytokines (Tumor necrosis factor (TNF a) & Ils) which can block GH – mediated signal transduction."
+        title: "قصير والـ GH عالي"
+        text: |
+          الـ ==malabsorption== بيعمل 3 حاجات: **short stature**، **sex hormone disturbance**، و **hyperparathyroidism**.
+
+          الـ short stature سببه ==GH resistance==: الـ caloric deprivation والـ malnutrition والـ DM مش متظبط والـ CRF بيرفعوا الـ **TNF-α والـ ILs**، ودول بيقفلوا الـ GH signalling. النتيجة: **GH عالي و IGF-I واطي**. ونادرًا GH receptor antibodies.
+      - kind: check
+        page: 53
+        quote: "Celiec disease Androgen resistance Elevated Serum testosterone. Elevated LH levels."
+        question: "Coeliac disease in men gives which pattern?"
+        options: ["High testosterone, high LH", "Low testosterone, low LH", "Low testosterone, high LH", "Normal everything"]
+        answer: 0
+        why:
+          - "صح: androgen resistance، فالـ T والـ LH عاليين."
+          - "ده hypogonadotrophic."
+          - "ده primary hypogonadism."
+          - "الكتاب بيقول فيه تغيير."
+      - kind: explain
+        page: 54
+        quote: "increased prevelance of osteoporosis 2ry to vit D diffeciency, Ca malabsorption, malnutrions & corticosteroid use"
+        title: "العضم في أمراض الأمعاء"
+        text: |
+          - **HPT** في الـ GIT disease: mild hypocalcaemia، malabsorption للـ 25(OH)D، hypophosphataemia، ونقص تغذية.
+          - **IBD**: ==osteoporosis== أكتر بسبب نقص vit D، malabsorption الكالسيوم، سوء التغذية، و ==الـ corticosteroids==.
+      - kind: sort
+        page: 54
+        quote: "Esophageal dysfunction -DM- Hyperthroidism. b) Gastroparesis & billiary dyskinasia in DM."
+        prompt: "الغدة دي بتعمل إسهال ولا إمساك؟"
+        bins: ["Diarrhoea", "Constipation"]
+        cards:
+          - { text: "Diabetes (nocturnal)", bin: 0 }
+          - { text: "Hyperthyroidism", bin: 0 }
+          - { text: "Addison's disease", bin: 0 }
+          - { text: "Hypothyroidism", bin: 1 }
+          - { text: "Hypercalcaemia", bin: 1 }
+        why: "الإسهال: DM (بالليل)، hyperthyroid، Addison's. الإمساك: hypercalcaemia و hypothyroid. والـ DM كمان بيعمل gastroparesis و biliary dyskinesia، وهو والـ hyperthyroid بيعملوا oesophageal dysfunction."
+      - kind: explain
+        page: 54
+        quote: "PTH values are reported to be low normal or elevated, and both resistance to PTH & impaired PTH secrteion have been postulated"
+        title: "البنكرياس"
+        text: |
+          - **Acute pancreatitis**: ==hypocalcaemia== مستمرة، ودرجتها على قد شدة الـ pancreatitis. السبب مش واضح؛ الـ PTH low normal أو عالي، فممكن PTH resistance أو secretion ضعيف.
+          - **Pancreatic endocrine tumours**: insulinoma، glucagonoma، somatostatinoma، **delta cell tumour** (VIP، GIP، PGE، PP، gastrin/ZES)، و **carcinoid** (serotonin، prostaglandins).
+          - الـ cirrhosis «هيتذكر بعدين» (ص 67).
+      - kind: explain
+        page: 56
+        quote: "The endocrine and nervous system are linked together. The hypothalamus connects these two important systems."
+        title: "المخ والغدد"
+        text: |
+          الرابط هو ==الـ hypothalamus== في قاعدة الـ forebrain. بيتحكم في النوم والجوع والعطش والجنس والانفعالات والـ stress، وبيتحكم في الـ **pituitary** اللي بتتحكم في باقي الغدد.
+      - kind: match
+        page: 56
+        quote: "Myotonia Dystrophica Small testes with impairment of both spermatogenses & leydig cell function."
+        prompt: "وصّل المرض العصبي بالتغير الهرموني:"
+        pairs:
+          - ["Myotonic dystrophy", "Small testes, ↓ spermatogenesis and Leydig function"]
+          - ["Spinobulbar muscular atrophy", "Infertility, androgen resistance"]
+          - ["Spinal cord lesion", "Temporary ↓ testosterone, persistent ↓ sperm"]
+          - ["Adrenoleukodystrophy", "X-linked; childhood adrenal insufficiency"]
+        why: "الـ adrenoleukodystrophy كمان فيها spastic paraparesis في أول الشباب و PN خفيف."
+      - kind: explain
+        page: 57
+        quote: "Patients who have antiphospholipid-antibody syndrome may experience sudden adrenal infarction and pricepits acute onset of an addisonian crisis."
+        title: "الروماتيزم والغدد"
+        text: |
+          - **SLE**: ==hyperprolactinaemia== شائعة.
+          - **RA**: الـ HPA axis غالبًا dysfunctional، بس نادرًا محتاج replacement.
+          - RA و SLE و scleroderma بييجوا مع **autoimmune thyroid** (Graves'، Hashimoto's)، فخلي عينك على الغدة.
+          - ==Antiphospholipid syndrome==: **adrenal infarction** مفاجئ يعمل **addisonian crisis**.
+          - الـ secondary osteoporosis: oestrogen، **إلا** لو hypercoagulable (APS) أو خطر سرطان ثدي أو رحم.
+      - kind: update
+        page: 57
+        quote: "Most rheumatic diseases cause secondary osteoporosis, estrogen replacement therapy is generally indicated"
+        text: "الكتاب بيقول oestrogen replacement للـ secondary osteoporosis. دلوقتي الـ bisphosphonates هي الخط الأول، حتى في الـ glucocorticoid-induced osteoporosis، والهرمونات مش أول اختيار."
+        ref: "ACR glucocorticoid-induced osteoporosis guideline 2022"
+      - kind: table
+        page: 58
+        quote: "Common rheumatic syndromes that suggest endocrine Rheumatic syndrome Possible endocrine source"
+        title: "علامة روماتيزم تفكّرك بغدة"
+        columns: ["Rheumatic syndrome", "Endocrine source"]
+        rows:
+          - ["Carpal tunnel", "DM, hypothyroid, acromegaly (rare), amyloid (rare)"]
+          - ["Chondrocalcinosis", "DM, hypothyroid, HPT, haemochromatosis"]
+          - ["DISH", "DM"]
+          - ["Dupuytren's", "DM"]
+          - ["Charcot's joints", "DM"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: aside
+        tone: tip
+        page: 57
+        quote: "Dupuytren's contracture. b) Diabetic cheiropathy. c) Chondrocalcinosis & pseudogout."
+        text: "الـ DM لوحده عنده 9: Dupuytren's، cheiropathy، chondrocalcinosis/pseudogout، DISH، frozen shoulder، scleredema، Charcot، amyotrophy، و thigh infarction. والـ hypothyroid: myalgia/arthralgia و pretibial myxoedema."
+      - kind: try
+        items: [endo.L04.077, endo.L04.082, endo.L04.093, endo.L04.100, endo.L04.104]
+    recap:
+      - "Malabsorption: short stature (GH عالي، IGF-I واطي)، sex hormones، HPT."
+      - "Coeliac: T و LH عاليين = androgen resistance."
+      - "IBD osteoporosis: vit D، Ca، malnutrition، steroids."
+      - "إسهال: DM، hyperthyroid، Addison's؛ إمساك: hypercalcaemia، hypothyroid."
+      - "Hypothalamus = الرابط؛ adrenoleukodystrophy X-linked + adrenal insufficiency."
+      - "SLE prolactin؛ APS adrenal infarction؛ carpal tunnel: DM، hypothyroid، acromegaly."
+    practice: [endo.L04.073, endo.L04.074, endo.L04.075, endo.L04.076, endo.L04.077, endo.L04.078, endo.L04.079, endo.L04.080, endo.L04.081, endo.L04.082, endo.L04.083, endo.L04.084, endo.L04.085, endo.L04.086, endo.L04.087, endo.L04.088, endo.L04.089, endo.L04.090, endo.L04.091, endo.L04.092, endo.L04.093, endo.L04.094, endo.L04.095, endo.L04.096, endo.L04.097, endo.L04.098, endo.L04.099, endo.L04.100, endo.L04.101, endo.L04.102, endo.L04.103, endo.L04.104, endo.L04.105, endo.L04.204, endo.L04.205, endo.L04.206, endo.L04.207, endo.L04.208, endo.L04.209, endo.L04.210, endo.L04.211, endo.L04.212, endo.L04.245, endo.L04.246, endo.L04.247, endo.L04.248, endo.L04.249]
+  # ------------------------------------------------------------------
+  - id: endo.L04.lesson6
+    title: "العضلات والدم والـ granulomas"
+    hook: "عيل hypothyroid عضلاته ضخمة زي هرقل، بس ضعيف. والـ CK عالي. إمتى الـ CK بيعلى في أمراض الغدد؟"
+    minutes: 8
+    pages: [58, 65]
+    topics: [myopathy, haematology, granulomatous, genetic-immune]
+    goals:
+      - "تعرف إمتى الـ CK بيعلى في الـ endocrine myopathy"
+      - "تفرّق بين myopathy كل غدة"
+      - "تعرف علاقة الغدد بالأنيميا والـ sarcoid والـ leprosy"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 58
+        quote: "The serum CK is often normal (except in hypothyroidism & hypoparathyroidism & Conn s syndrome)"
+        title: "قواعد الـ endocrine myopathy"
+        text: |
+          - الـ **fatigue** أشيع من الـ true myopathy.
+          - الـ CK غالبًا ==طبيعي==، **إلا** في: hypothyroidism، hypoparathyroidism، و Conn's.
+          - الـ histology: ==atrophy== مش destruction.
+          - وكلهم تقريبًا ==بيتحسنوا بالعلاج==.
+      - kind: mnemonic
+        page: 58
+        quote: "The serum CK is often normal (except in hypothyroidism & hypoparathyroidism & Conn s syndrome)"
+        word: "HHC"
+        parts:
+          - { key: "H", text: "Hypothyroidism" }
+          - { key: "H", text: "Hypoparathyroidism (after tetany)" }
+          - { key: "C", text: "Conn's syndrome (K depletion)" }
+        hook: "«الـ CK بيقول HHC»: دول التلاتة اللي الـ CK فيهم بيعلى. أي endocrine myopathy تانية، الـ CK طبيعي."
+      - kind: explain
+        page: 59
+        quote: "Proximal muscular weakness in about 1/3 of patients. b) Muscular camps, pain & stiffness."
+        title: "الـ hypothyroid myopathy"
+        text: |
+          - Proximal weakness في **1/3**، cramps وألم و stiffness، و slow contraction في **25%**. والـ CK غالبًا عالي.
+          - ==Kocher–Debré–Semelaigne==: أطفال hypothyroid (خصوصًا الولاد)، ضعف وبطء وعضلات ضخمة = «**infant Hercules**».
+          - ==Hoffman's==: نفس الصورة في الـ **كبار**، مع stiffness.
+      - kind: check
+        page: 59
+        quote: "In adult hypothyroid results in prominant muscle enlargement & weakness with muscle stiffness."
+        question: "An adult hypothyroid man with big, stiff, weak muscles has:"
+        options: ["Hoffman's syndrome", "Kocher–Debré–Semelaigne syndrome", "Cushing's myopathy", "Acromegaly"]
+        answer: 0
+        why:
+          - "صح: Hoffman's للكبار."
+          - "ده في الأطفال."
+          - "الـ Cushing's فيه wasting، مش تضخم."
+          - "مش hypothyroid."
+      - kind: table
+        page: 60
+        quote: "It is the commonest diagnosed endocrine myopathy."
+        title: "Myopathy كل غدة"
+        columns: ["Disorder", "Key muscle feature"]
+        rows:
+          - ["Hyperthyroidism", "Proximal weakness + atrophy; periodic paralysis; MG; CK normal"]
+          - ["Hyperparathyroidism", "Proximal weakness, wasting, brisk reflexes"]
+          - ["Hypoparathyroidism", "Tetany cramps; CK may rise; overt myopathy rare"]
+          - ["Cushing's", "Commonest diagnosed; striking proximal wasting"]
+          - ["Adrenal insufficiency", "Fatigue; mild weakness less common"]
+          - ["Conn's", "Weakness and wasting from K depletion"]
+          - ["Acromegaly", "Big but weak muscles; duration, not GH, matters"]
+        hide: [[0, 1], [3, 1], [5, 1], [6, 1]]
+      - kind: aside
+        tone: exam
+        page: 60
+        quote: "The duration of acromegaly rather than the serum GH levels, correlates with the degree of myopathy."
+        text: "سؤال محبوب: في الـ acromegaly، درجة الـ myopathy ماشية مع **مدة المرض** مش مستوى الـ GH. وأشيع endocrine myopathy متشخصة = **Cushing's**."
+      - kind: explain
+        page: 61
+        quote: "It is known to be neuropathic, affecting the proximal major nerve trunks & lumbosacral plexus."
+        title: "الـ DM والعضلات"
+        text: |
+          - ==Diabetic amyotrophy==: اسمها خادع، هي **neuropathic** (lumbosacral radiculoplexopathy).
+          - ==Thigh muscle infarction==: في السكر المش متظبط. ألم مفاجئ وورم و tenderness في فخذ واحد مع mass. أكتر عضلات: **adductors** و **biceps femoris**. والـ MRI بيبيّنها.
+      - kind: explain
+        page: 62
+        quote: "anemia may be masked by hypovolemia. Once pts are given volume replacement, Hb level may drop rapidly"
+        title: "الغدد والدم"
+        text: |
+          الـ androgens بتزوّد الـ erythropoiesis، والـ oestrogen والإخصاء بيقللوه. علشان كده الراجل الـ Hb بتاعه أعلى.
+
+          - **Hypoproliferative anaemia**: hypothyroid، pituitary deficiency، **Addison's** (الأنيميا مستخبية ورا الـ hypovolaemia، وبعد المحاليل الـ Hb يقع بسرعة)، و HPT (أثر الكالسيوم على الكلية).
+          - **Haemolytic**: sickle (impotence، infertility)، thalassaemia (haemochromatosis).
+          - **Plasma cell dyscrasias** (Waldenström): الـ paraprotein بيمسك الـ thyroid hormones، وبيبوّظ الـ immunoassay.
+          - **POEMS**: Polyneuropathy، Organomegaly، Endocrinopathy، M-protein، Skin.
+      - kind: explain
+        page: 63
+        quote: "The hypothalamic pituitary axis is the part of endocrine system most commonly involved."
+        title: "الـ granulomas"
+        text: |
+          - ==Sarcoidosis==: أكتر حاجة بتتأثر الـ **hypothalamic–pituitary axis**: **DI**، نقص هرمون أو أكتر (complete hypopituitarism نادر)، Addison's، والـ infertility نادرة. بتتحسن في الحمل وممكن تـ flare بعد الولادة.
+          - ==Lepromatous leprosy==: testicular atrophy في **10-20%** بالـ invasion المباشر. الـ tubules الأول، بعدين الـ Leydig.
+          - Schistosomiasis، و **Wegener's** مع hyperthyroidism.
+      - kind: explain
+        page: 64
+        quote: "Werner syndrome : - Premature aging, cataract. - DM. - Papillary carcinoma of thyroid. - Gonadal atrophy."
+        title: "الوراثة والمناعة"
+        text: |
+          - **Monogenic**: MODY، DI، thyroid hormone resistance، male-limited precocious puberty، CAH، androgen insensitivity، ataxia telangiectasia.
+          - **Noonan**: قصر و thyroiditis. **Fanconi**: قصر و bone marrow hypoplasia. ==Werner==: شيخوخة مبكرة، cataract، DM، **papillary thyroid cancer**، gonadal atrophy.
+          - **Immune**: PGA I و II، insulin receptor antibodies، autoimmune insulin syndrome (hypoglycaemia)، antithyroid antibodies، و ataxia telangiectasia (DM، gonadoblastoma في البنات).
+      - kind: try
+        items: [endo.L04.107, endo.L04.112, endo.L04.119, endo.L04.132, endo.L04.137]
+    recap:
+      - "CK طبيعي إلا في HHC: hypothyroid، hypopara، Conn's. والعلاج بيحسّن تقريبًا الكل."
+      - "Hypothyroid: Kocher–Debré–Semelaigne (أطفال)، Hoffman's (كبار)."
+      - "Cushing's أشيع متشخصة؛ acromegaly: المدة مش الـ GH."
+      - "Diabetic amyotrophy = neuropathic؛ thigh infarction في adductors و biceps femoris."
+      - "Addison's: الأنيميا تبان بعد المحاليل؛ POEMS؛ Waldenström بيبوّظ تحاليل الغدة."
+      - "Sarcoid: HP axis و DI؛ leprosy: atrophy 10-20%."
+    practice: [endo.L04.106, endo.L04.107, endo.L04.108, endo.L04.109, endo.L04.110, endo.L04.111, endo.L04.112, endo.L04.113, endo.L04.114, endo.L04.115, endo.L04.116, endo.L04.117, endo.L04.118, endo.L04.119, endo.L04.120, endo.L04.121, endo.L04.122, endo.L04.123, endo.L04.124, endo.L04.125, endo.L04.126, endo.L04.127, endo.L04.128, endo.L04.129, endo.L04.130, endo.L04.131, endo.L04.132, endo.L04.133, endo.L04.134, endo.L04.135, endo.L04.136, endo.L04.137, endo.L04.138, endo.L04.139, endo.L04.140, endo.L04.141, endo.L04.142, endo.L04.143, endo.L04.144, endo.L04.145, endo.L04.146, endo.L04.213, endo.L04.214, endo.L04.215, endo.L04.216, endo.L04.217, endo.L04.218, endo.L04.219, endo.L04.220, endo.L04.221, endo.L04.222, endo.L04.235, endo.L04.250]
+  # ------------------------------------------------------------------
+  - id: endo.L04.lesson7
+    title: "الـ HIV والخصية وأمراض متفرقة"
+    hook: "مريض AIDS تعبان وضغطه بيقع لما يقف والصوديوم واطي. هل ده الـ HIV؟ ولا الـ adrenal؟ ولا الـ rifampin؟"
+    minutes: 8
+    pages: [65, 76]
+    topics: [cfs, hiv, testicular, misc, crf-reproductive, crf-glucose]
+    goals:
+      - "تعرف صورة الـ CFS الهرمونية"
+      - "تعرف أكتر غدة بتتأثر في الـ HIV وأكتر abnormality"
+      - "تعدّ أمراض الخصية في الأمراض العامة، والـ cirrhosis بالذات"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 65
+        quote: "1- Reduced production of CRH. 2- Lower serum cortisol. 3- Increases ACTH."
+        title: "الـ chronic fatigue syndrome"
+        text: |
+          فيه رأي إن الـ CFS أصلًا ==psychiatric== والتغيرات الهرمونية ثانوية. الكتاب بيقول:
+          - **↓ CRH**، **↓ cortisol**، و **↑ ACTH**.
+          - Depression خفيف لمتوسط في **1/2 لـ 2/3**.
+      - kind: aside
+        tone: trap
+        page: 65
+        quote: "1- Reduced production of CRH. 2- Lower serum cortisol. 3- Increases ACTH."
+        text: "فسيولوجيًا، الـ CRH الواطي المفروض يقلل الـ ACTH، فالمجموعة دي غريبة. بس دي إجابة الكتاب، احفظها زي ما هي."
+      - kind: explain
+        page: 66
+        quote: "Basal 8 A.M. plasma cortisol levels are usually higher in patients with advanced HIV disease"
+        title: "الـ HIV والـ adrenal"
+        text: |
+          أعراض كتير في الـ HIV شبه الـ adrenal insufficiency: fatigue، anorexia، vomiting، orthostatic hypotension، **hyponatraemia**.
+
+          الـ basal cortisol الصبح ==أعلى== من الطبيعي، بس الـ DOC و compound B و 18-OH-DOC **مش عاليين** وردّهم على الـ ACTH ضعيف. يعني الـ **adrenal reserve قليل**.
+      - kind: figure
+        page: 73
+        quote: "The adrenal gland is the endocrine gland most commonly affected in AIDS adrenal insufficiency is observed in <8% of AIDS patients."
+        title: "الـ adrenal في الـ AIDS"
+        alt: "The adrenal is the gland most often affected in AIDS, though adrenal insufficiency is under 8 percent. Three causes: infection, with CMV in up to 50 percent of adrenal pathology and MAC, Kaposi, Cryptococcus or Histoplasma in 5 to 12 percent; drugs, with ketoconazole blocking synthesis and rifampin increasing cortisol clearance; and central, with normal or low ACTH. Test: cortisol under 20 micrograms per decilitre 60 minutes after ACTH."
+        caption: "أكتر غدة بتتأثر، بس الـ insufficiency أقل من 8%. والاختبار: cortisol أقل من 20 بعد ساعة من الـ ACTH."
+        svg: |
+          <svg viewBox="0 0 330 260" xmlns="http://www.w3.org/2000/svg">
+            <rect x="65" y="8" width="200" height="46" rx="10" class="fg-acc"/>
+            <text x="165" y="28" text-anchor="middle" class="t-sm t-b">Adrenal: most affected gland</text>
+            <text x="165" y="46" text-anchor="middle" class="t-sm">insufficiency &lt; 8%</text>
+            <rect x="6" y="70" width="102" height="110" rx="8" class="fg-bad"/>
+            <text x="57" y="90" text-anchor="middle" class="t-sm t-b">Infection</text>
+            <text x="57" y="112" text-anchor="middle" class="t-sm">CMV ≤ 50%</text>
+            <text x="57" y="134" text-anchor="middle" class="t-sm">MAC, Kaposi,</text>
+            <text x="57" y="150" text-anchor="middle" class="t-sm">Crypto, Histo</text>
+            <text x="57" y="168" text-anchor="middle" class="t-sm">5–12%</text>
+            <rect x="114" y="70" width="102" height="110" rx="8" class="fg-bad"/>
+            <text x="165" y="90" text-anchor="middle" class="t-sm t-b">Drugs</text>
+            <text x="165" y="112" text-anchor="middle" class="t-sm">Ketoconazole</text>
+            <text x="165" y="128" text-anchor="middle" class="t-sm t-mut">blocks synthesis</text>
+            <text x="165" y="150" text-anchor="middle" class="t-sm">Rifampin</text>
+            <text x="165" y="166" text-anchor="middle" class="t-sm t-mut">↑ clearance</text>
+            <rect x="222" y="70" width="102" height="110" rx="8" class="fg-box"/>
+            <text x="273" y="90" text-anchor="middle" class="t-sm t-b">Central</text>
+            <text x="273" y="112" text-anchor="middle" class="t-sm">ACTH normal</text>
+            <text x="273" y="128" text-anchor="middle" class="t-sm">or low</text>
+            <text x="273" y="150" text-anchor="middle" class="t-sm">pituitary</text>
+            <text x="273" y="166" text-anchor="middle" class="t-sm">or CNS</text>
+            <rect x="6" y="196" width="318" height="54" rx="8" class="fg-good"/>
+            <text x="165" y="218" text-anchor="middle" class="t-sm t-b">ACTH test: cortisol &lt; 20 µg/dL at 60 min</text>
+            <text x="165" y="238" text-anchor="middle" class="t-sm">= adrenal insufficiency (treat as usual)</text>
+          </svg>
+      - kind: check
+        page: 73
+        quote: "rifampin (increased clearance of cortisol)"
+        question: "How does rifampin cause adrenal insufficiency in HIV?"
+        options: ["Increases cortisol clearance", "Blocks steroid synthesis", "Destroys the gland", "Suppresses CRH"]
+        answer: 0
+        why:
+          - "صح: بيزوّد الـ clearance."
+          - "ده الـ ketoconazole."
+          - "ده الـ CMV مثلًا."
+          - "مش مذكور."
+      - kind: explain
+        page: 74
+        quote: "B- Hypogonadism The most common abnormality of endocrine function."
+        title: "أكتر abnormality: الـ hypogonadism"
+        text: |
+          - ==Hypogonadism== = **أكتر abnormality** في الـ HIV (والـ adrenal = **أكتر غدة** بتتأثر؛ ما تخلطش).
+          - Libido قليل في **أكتر من النص**، و impotence مع T واطي لحد **30%**.
+          - الـ gonadotrophins واطية أو طبيعية = central، والـ pituitary بيرد طبيعي على الـ GnRH = **hypothalamic**. وفي دراسات LH و FSH عاليين = primary testicular.
+          - أدوية: ketoconazole، ganciclovir، megestrol، acyclovir.
+          - الستات: menstrual irregularities.
+      - kind: explain
+        page: 74
+        quote: "Thyroid function remains remarkably normal throughout the course of HIV disease."
+        title: "الغدة الدرقية والأملاح"
+        text: |
+          - الـ thyroid ==طبيعية بشكل ملفت==، مع **TBG عالي**. حتى لو اتغزت بـ CMV أو PCP أو Kaposi أو lymphoma، غالبًا euthyroid.
+          - بس الـ hypothyroidism سبب **قابل للعلاج** للتعب والـ failure to thrive، فاكشف عليه. والـ rifampin بيزوّد الـ T4 clearance.
+          - **Hyponatraemia** = أشيع electrolyte disturbance.
+          - Hypercalcaemia مع الـ lymphoma؛ hypocalcaemia من **amphotericin** (Mg wasting) و **foscarnet** (↓ ionised Ca).
+          - البنكرياس متأثر في **35%** في التشريح، بس الـ type 1 DM نادر.
+      - kind: explain
+        page: 67
+        quote: "Testicular atrophy & gynecomastia are present in about 50% of men with cirrhosis"
+        title: "الخصية والـ cirrhosis"
+        text: |
+          الأمراض اللي بتأثر على الخصية: CRF، cirrhosis، sickle، non-specific illness (عمليات، MI، حروق)، HIV (T واطي في 35-50%، والـ SHBG بيداري)، **febrile illness** (sperm يقل مؤقتًا والـ T سليم)، و coeliac.
+
+          في الـ ==cirrhosis==: عيب في الخصية والـ pituitary، مستقل عن الكحول. الـ LH عالي بس **أقل من المتوقع** لأن الـ ==oestrogen بيكبته==. الـ oestrogen عالي لأن الكبد مش بيسحب الـ androstenedione، فبيتحول برا لـ oestrone و oestradiol. Atrophy و gynaecomastia في **50%**، والـ **liver transplant** بيرجّع كل ده.
+      - kind: match
+        page: 69
+        quote: "Impaired sexual development & testicular atrophy are present in about 1/3 of pts."
+        prompt: "وصّل الرقم بالمرض:"
+        pairs:
+          - ["Sickle cell: testicular atrophy", "About 1/3"]
+          - ["Cirrhosis: atrophy and gynaecomastia", "About 50%"]
+          - ["HIV: low testosterone", "35–50%"]
+          - ["Lepromatous leprosy: atrophy", "10–20%"]
+          - ["Haemochromatosis: diabetes", "About 65%"]
+        why: "وفي الـ CRF: gynaecomastia حوالي 50%، و impotence حوالي 50% (ص 68)."
+      - kind: explain
+        page: 67
+        quote: "It occurs in about 65% of pts due to direct damage of the pancreatic islets by iorn deposition."
+        title: "متفرقات"
+        text: |
+          - ==Haemochromatosis==: DM في **65%** (الحديد في الـ islets)، **hypogonadism** في الجنسين وبيسبق باقي الأعراض، و Addison's.
+          - **Cystinosis**: hypothyroidism، IDDM، delayed puberty.
+          - **Amyloidosis**: بيتسلل للغدد بس **نادرًا** يعمل dysfunction. والـ islet amyloid في الـ type 2 DM من الـ **islet amyloid polypeptide**.
+      - kind: explain
+        page: 68
+        quote: "The elevated LH level is due to production & reduced clearance but does not restore normal testosterone production."
+        title: "ص 68-72: مراجعة الكتاب"
+        text: |
+          الكتاب بيعيد كلام قبل كده، بس فيه إضافات:
+          - **CRF** (ص 68): الـ LH عالي من production + clearance قليل؛ gynaecomastia و impotence في ~50%؛ الـ dialysis تحسينه ناقص والزرع ممكن يرجّع الخصية.
+          - **Uraemia** (ص 69): LH قليل في البول، و LH subtypes أقل حمضية و bioactive.
+          - **Glucose** (ص 70): أكتر من 50% من الـ azotaemic عندهم fasting hyperglycaemia، و spontaneous hypoglycaemia، والـ transplant بيعمل **post-transplant DM**.
+          - **Oestrogen** (ص 72): بيرفع الـ TG شوية وبيزوّد الـ coagulability.
+          - والـ thyroid والقلب (ص 71-73) نفس الدرس التاني بالظبط.
+      - kind: aside
+        tone: exam
+        page: 76
+        quote: "Patient with Celiec disease have elevated serum testosterone, LH levels as well as androgen resistance."
+        text: "الكتاب بيختم بالـ coeliac تاني (T و LH عاليين = androgen resistance)، وبعدين 13 سؤال. كل سؤال منهم موجود كـ essay في الـ practice، بالـ outline اللي هتكتبه في الامتحان."
+      - kind: try
+        items: [endo.L04.148, endo.L04.153, endo.L04.159, endo.L04.164, endo.L04.174]
+    recap:
+      - "CFS: ↓CRH، ↓cortisol، ↑ACTH؛ depression 1/2-2/3."
+      - "HIV: adrenal أكتر غدة (<8% insufficiency، CMV ≤50%)؛ hypogonadism أكتر abnormality."
+      - "ACTH test: cortisol <20 بعد 60 دقيقة؛ ketoconazole و rifampin."
+      - "Thyroid طبيعية مع TBG عالي؛ hyponatraemia أشيع electrolyte."
+      - "Cirrhosis: oestrogen بيكبت الـ LH؛ atrophy و gynaecomastia 50%؛ الزرع بيرجّعها."
+      - "Haemochromatosis: DM 65%، hypogonadism بدري، Addison's."
+    practice: [endo.L04.052, endo.L04.053, endo.L04.054, endo.L04.055, endo.L04.066, endo.L04.067, endo.L04.068, endo.L04.147, endo.L04.148, endo.L04.149, endo.L04.150, endo.L04.151, endo.L04.152, endo.L04.153, endo.L04.154, endo.L04.155, endo.L04.156, endo.L04.157, endo.L04.158, endo.L04.159, endo.L04.160, endo.L04.161, endo.L04.162, endo.L04.163, endo.L04.164, endo.L04.165, endo.L04.166, endo.L04.167, endo.L04.168, endo.L04.169, endo.L04.170, endo.L04.171, endo.L04.172, endo.L04.173, endo.L04.174, endo.L04.175, endo.L04.176, endo.L04.177, endo.L04.178, endo.L04.179, endo.L04.180, endo.L04.181, endo.L04.182, endo.L04.183, endo.L04.184, endo.L04.223, endo.L04.224, endo.L04.225, endo.L04.226, endo.L04.227, endo.L04.228, endo.L04.229, endo.L04.230, endo.L04.231, endo.L04.232, endo.L04.236, endo.L04.237]

@@ -1,0 +1,1496 @@
+schema: batna.content/v1
+lecture: dm.L17
+title: "Calcium metabolism and osteoporosis"
+author: "Prof. Dr. Magui Shalash"
+# The lecture covers osteoporosis only; it has no separate calcium-metabolism section.
+book: { chapter: 6, pages: [214, 232] }
+topics:
+  - { id: definition, title: "Definition and the bones that break" }
+  - { id: types, title: "Type 1 and type 2 osteoporosis" }
+  - { id: peak-mass, title: "Peak bone mass" }
+  - { id: secondary, title: "Secondary osteoporosis and glucocorticoids" }
+  - { id: risk, title: "Risk factors and FRAX" }
+  - { id: clinical, title: "Symptoms, history and examination" }
+  - { id: labs, title: "Laboratory evaluation" }
+  - { id: radiology, title: "Radiologic findings" }
+  - { id: bmd, title: "Bone density measurement and screening" }
+  - { id: nondrug, title: "Calcium, vitamin D, exercise and smoking" }
+  - { id: drugs, title: "Antiresorptive and anabolic drugs" }
+  - { id: choice, title: "Who to treat and which drug" }
+  - { id: duration, title: "Drug holidays and treatment duration" }
+  - { id: monitoring, title: "Monitoring the response" }
+items:
+  # ---------- p214-215: definition, bones liable to fracture ----------
+  - id: dm.L17.001
+    kind: card
+    topic: definition
+    front: What imbalance causes osteoporosis?
+    back: More bone is resorbed than deposited, so bone density is progressively lost and bone tissue thins.
+    src: { page: 214, quote: "The bone disease osteoporosis is caused by more bone cells being resorbed than being deposited." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L17.002
+    kind: card
+    topic: definition
+    front: Why do osteoporotic bones fracture easily?
+    back: They are more porous after progressive loss of density and thinning of bone tissue.
+    src: { page: 214, quote: "Osteoporotic bones are more porous and therefore more vulnerable to fracture." }
+    status: unverified
+  - id: dm.L17.003
+    kind: enumerate
+    topic: definition
+    prompt: Which bones are liable to fracture in osteoporosis (the lecture's figure)?
+    points:
+      - Vertebral bodies
+      - Distal radius
+      - Proximal femur
+    pass: 3
+    src: { page: 215, quote: "Bones liable to fracture in osteoporosis Vertebral bodies, distal radius, proximal femur." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p215-216: types ----------
+  - id: dm.L17.004
+    kind: table
+    topic: types
+    title: Type 1 vs type 2 osteoporosis
+    columns: [Feature, Type 1 (postmenopausal), Type 2 (senile)]
+    rows:
+      - [Women to men, "6 : 1", "2 : 1"]
+      - [Bone mainly affected, Trabecular, Trabecular and cortical]
+      - [Typical fractures, "Vertebral crush, Colles'", Femoral and vertebral]
+      - [Age, After menopause, Mainly over 70 years]
+      - [Probable cause, Postmenopausal endocrine changes, Age-related change in vitamin D synthesis]
+    blanks: [[0, 1], [0, 2], [1, 1], [2, 1], [2, 2], [4, 2]]
+    src: { page: 215, quote: "Affects six times as many women as men, and is mainly responsible for the increased risk of osteoporotic fractures." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L17.005
+    kind: cloze
+    topic: types
+    text: "Type 1 osteoporosis affects {{c1::six}} times as many women as men; type 2 affects {{c2::twice}} as many women as men."
+    src: { page: 215, quote: "Affects six times as many women as men" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L17.006
+    kind: card
+    topic: types
+    front: Why does type 1 osteoporosis cause vertebral crush and Colles' fractures?
+    back: It primarily affects trabecular bone.
+    src: { page: 215, quote: "Because it primarily affects trabecular bone, type 1 osteoporosis is mainly responsible for vertebral crush fractures and Colles' fractures." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L17.007
+    kind: card
+    topic: types
+    front: Describe a Colles' fracture.
+    back: A break across the end of both lower-arm bones, with the hand displaced backward and outward relative to the wrist.
+    src: { page: 215, quote: "a Colles' fracture results in a backward and outward position of the hand in relation to the wrist." }
+    status: unverified
+  - id: dm.L17.008
+    kind: cloze
+    topic: types
+    text: "Type 2 osteoporosis, also called {{c1::involutional or senile}} osteoporosis, is gradual age-related bone loss mainly in persons over {{c2::70}} years."
+    src: { page: 215, quote: "Also known as involutional or senile osteoporosis, it occurs mainly in persons > 70 years" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L17.009
+    kind: card
+    topic: types
+    front: Why does type 2 osteoporosis cause femoral fractures as well as vertebral ones?
+    back: Density falls in both trabecular and cortical bone.
+    src: { page: 216, quote: "Because density decreases in both trabecular and cortical bone, type 2 osteoporosis results in femoral and vertebral fractures." }
+    status: unverified
+  - id: dm.L17.010
+    kind: cloze
+    topic: types
+    text: "{{c1::Postmenopausal endocrinologic}} changes probably cause type 1 osteoporosis; age-related changes in {{c2::vitamin D synthesis}} are thought to cause type 2."
+    src: { page: 216, quote: "age-related changes in vitamin D synthesis are thought to lead to type 2 osteoporosis." }
+    status: unverified
+  - id: dm.L17.011
+    kind: card
+    topic: types
+    front: What is the biphasic pattern of bone loss in women?
+    back: Type 1 and type 2 osteoporosis appearing at the same time.
+    src: { page: 216, quote: "In women, type 1 and type 2 may appear simultaneously, resulting in a biphasic pattern of bone loss." }
+    status: unverified
+  - id: dm.L17.012
+    kind: mcq
+    topic: types
+    stem: A 58-year-old woman, 6 years after menopause, falls on an outstretched hand and breaks her distal radius. Which description fits her osteoporosis?
+    options:
+      - "Type 1: mainly trabecular bone, linked to postmenopausal endocrine change"
+      - "Type 2: cortical and trabecular loss from age-related vitamin D change"
+      - "Secondary osteoporosis, which is most cases in postmenopausal women"
+      - "Type 2, which affects six times as many women as men"
+      - "Osteomalacia, because a fracture is present"
+    answer: 0
+    why:
+      - "Correct: Colles' and vertebral crush fractures come from type 1, a trabecular disease of the postmenopausal years (p215-216)."
+      - Type 2 is mainly over 70 and causes femoral and vertebral fractures.
+      - Secondary causes are under 5% of cases in postmenopausal women (p216).
+      - Six to one is type 1; type 2 is two to one.
+      - Fractures occur in all metabolic bone diseases; nothing here points to osteomalacia.
+    src: { page: 215, quote: "Because it primarily affects trabecular bone, type 1 osteoporosis is mainly responsible for vertebral crush fractures and Colles' fractures." }
+    status: unverified
+  # ---------- p216: peak bone mass ----------
+  - id: dm.L17.013
+    kind: enumerate
+    topic: peak-mass
+    prompt: Mention factors that may affect peak bone mass.
+    points:
+      - Gender
+      - Race
+      - Genetic factors
+      - Gonadal steroids
+      - Growth hormone
+      - Timing of puberty
+      - Calcium intake
+      - Exercise
+    pass: 6
+    src: { page: 216, quote: "Factors that may affect peak bone mass: 1. Gender 2. Race 3. Genetic factors 4. Gonadal steroids 5. Growth hormone" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p216-217: secondary osteoporosis ----------
+  - id: dm.L17.014
+    kind: enumerate
+    topic: secondary
+    prompt: Mention causes of secondary osteoporosis listed in the lecture text.
+    points:
+      - Glucocorticoid excess
+      - Male hypogonadism
+      - Hyperparathyroidism
+      - Hyperthyroidism
+      - Malignancy
+      - Immobilization
+      - Hepatic insufficiency
+      - Gastrectomy
+      - Rheumatoid arthritis
+      - Acromegaly
+      - COPD
+      - Chronic renal failure
+      - Heparin therapy
+    pass: 8
+    src: { page: 216, quote: "Secondary osteoporosis may result from many causes, including glucocorticoid excess, male hypogonadism, hyperparathyroidism, hyperthyroidism, malignancy, immobilization" }
+    status: unverified
+  - id: dm.L17.015
+    kind: cloze
+    topic: secondary
+    text: "Secondary causes account for less than {{c1::5%}} of osteoporosis in postmenopausal women, but a much higher share in {{c2::young women and men of all ages}}."
+    src: { page: 216, quote: "These secondary causes account for < 5% of all cases of osteoporosis in postmenopausal women." }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L17.016
+    kind: card
+    topic: secondary
+    front: What must be considered when an elderly patient has osteoporosis?
+    back: Multiple causes.
+    src: { page: 217, quote: "Furthermore, in the elderly, multiple causes must be considered." }
+    status: unverified
+  - id: dm.L17.017
+    kind: card
+    topic: secondary
+    front: Leading cause of premature osteoporosis?
+    back: Endogenous or exogenous glucocorticoid excess.
+    src: { page: 217, quote: "Endogenous or exogenous glucocorticoid excess is a leading cause of premature osteoporosis." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L17.018
+    kind: enumerate
+    topic: secondary
+    prompt: How do corticosteroids cause osteoporosis?
+    points:
+      - Inhibit osteoblastic function
+      - Stimulate bone resorption
+      - Increase parathyroid hormone secretion
+      - Inhibit intestinal calcium absorption
+      - Decrease end-organ response to vitamin D
+    pass: 4
+    src: { page: 217, quote: "Corticosteroids inhibit osteoblastic function, stimulate bone resorption, increase parathyroid hormone secretion, inhibit intestinal calcium absorption" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L17.019
+    kind: table
+    topic: secondary
+    title: Table 258-2 Secondary causes of osteoporosis
+    columns: [Group, Examples]
+    rows:
+      - [Endocrine, "Female hypogonadism (hyperprolactinemia, hypothalamic amenorrhea, anorexia nervosa, premature ovarian failure), male hypogonadism (Klinefelter, hypogonadotropic, delayed puberty), hyperthyroidism, hyperparathyroidism, hypercortisolism, GH deficiency, vitamin D deficiency, idiopathic hypercalciuria, diabetes mellitus"]
+      - [Gastrointestinal, "Subtotal gastrectomy, malabsorption, chronic obstructive jaundice, primary biliary cirrhosis and other cirrhoses, alactasia"]
+      - [Bone marrow, "Multiple myeloma, lymphoma, leukemia, hemolytic anemias, systemic mastocytosis, disseminated carcinoma"]
+      - [Connective tissue, "Osteogenesis imperfecta, Ehlers-Danlos, Marfan, homocystinuria"]
+      - [Drugs, "Alcohol, heparin, glucocorticoids, thyroxine, anticonvulsants, GnRH agonists, cyclosporine, tacrolimus, chemotherapy"]
+      - [Miscellaneous, "Immobilization, rheumatoid arthritis, renal tubular acidosis"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1]]
+    src: { page: 217, quote: "SECONDARY CAUSES OF OSTEOPOROSIS" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L17.020
+    kind: enumerate
+    topic: secondary
+    prompt: Name drugs that cause secondary osteoporosis (Table 258-2).
+    points:
+      - Alcohol
+      - Heparin
+      - Glucocorticoids
+      - Thyroxine
+      - Anticonvulsants
+      - GnRH agonists
+      - Cyclosporine
+      - Tacrolimus
+      - Chemotherapy
+    pass: 6
+    src: { page: 217, quote: "Drugs Alcohol Heparin Glucocorticoids Thyroxine Anticonvulsants" }
+    status: unverified
+  - id: dm.L17.021
+    kind: enumerate
+    topic: secondary
+    prompt: Name bone marrow disorders that cause secondary osteoporosis (Table 258-2).
+    points:
+      - Multiple myeloma
+      - Lymphoma
+      - Leukemia
+      - Hemolytic anemias
+      - Systemic mastocytosis
+      - Disseminated carcinoma
+    pass: 4
+    src: { page: 217, quote: "Bone marrow disorders Multiple myeloma Lymphoma Leukemia Hemolytic anemias Systemic mastocytosis" }
+    status: unverified
+  - id: dm.L17.022
+    kind: enumerate
+    topic: secondary
+    prompt: Name gastrointestinal causes of secondary osteoporosis (Table 258-2).
+    points:
+      - Subtotal gastrectomy
+      - Malabsorption syndromes
+      - Chronic obstructive jaundice
+      - Primary biliary cirrhosis and other cirrhoses
+      - Alactasia
+    pass: 4
+    src: { page: 217, quote: "Gastrointestinal diseases Subtotal gastrectomy Malabsorption syndromes Chronic obstructive jaundice" }
+    status: unverified
+  - id: dm.L17.023
+    kind: enumerate
+    topic: secondary
+    prompt: Name connective tissue diseases that cause secondary osteoporosis (Table 258-2).
+    points:
+      - Osteogenesis imperfecta
+      - Ehlers-Danlos syndrome
+      - Marfan syndrome
+      - Homocystinuria
+    pass: 3
+    src: { page: 217, quote: "Connective tissue diseases Osteogenesis imperfecta Ehlers-Danlos syndrome Marfan's syndrome Homocystinuria" }
+    status: unverified
+  - id: dm.L17.024
+    kind: mcq
+    topic: secondary
+    stem: A 34-year-old man with severe asthma has taken oral prednisolone for 2 years. DEXA shows low bone density. Which mechanism is NOT one of the ways corticosteroids cause bone loss in the lecture?
+    options:
+      - Increased intestinal calcium absorption
+      - Inhibition of osteoblastic function
+      - Stimulation of bone resorption
+      - Increased parathyroid hormone secretion
+      - Decreased end-organ response to vitamin D
+    answer: 0
+    why:
+      - "Correct: steroids INHIBIT intestinal calcium absorption (p217)."
+      - Listed on p217.
+      - Listed on p217.
+      - Listed on p217.
+      - Listed on p217.
+    src: { page: 217, quote: "Corticosteroids inhibit osteoblastic function, stimulate bone resorption, increase parathyroid hormone secretion, inhibit intestinal calcium absorption" }
+    status: unverified
+  - id: dm.L17.025
+    kind: mcq
+    topic: secondary
+    stem: Which of these is listed as a bone marrow cause of secondary osteoporosis in Table 258-2?
+    options:
+      - Systemic mastocytosis
+      - Homocystinuria
+      - Renal tubular acidosis
+      - Alactasia
+      - Klinefelter syndrome
+    answer: 0
+    why:
+      - "Correct: systemic mastocytosis sits with myeloma, lymphoma and leukemia under bone marrow disorders."
+      - Homocystinuria is a connective tissue cause.
+      - Renal tubular acidosis is under miscellaneous causes.
+      - Alactasia is a gastrointestinal cause.
+      - Klinefelter syndrome is male hypogonadism, an endocrine cause.
+    src: { page: 217, quote: "Bone marrow disorders Multiple myeloma Lymphoma Leukemia Hemolytic anemias Systemic mastocytosis" }
+    status: unverified
+  # ---------- p217-218: risk factors ----------
+  - id: dm.L17.026
+    kind: enumerate
+    topic: risk
+    prompt: Mention the major risk factors for osteoporosis.
+    points:
+      - Age
+      - Female sex
+      - White or Oriental race
+      - Family history of osteoporosis
+      - Thin habitus
+      - Early menopause (before 45) or oophorectomy
+      - Secondary amenorrhea
+      - Lifelong low calcium intake (including lactose intolerance)
+      - Sedentary lifestyle
+      - Immobilization
+    pass: 7
+    src: { page: 217, quote: "The major risk factors for osteoporosis are age, female sex, white or Oriental race, family history of osteoporosis, thin habitus, early menopause" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L17.027
+    kind: cloze
+    topic: risk
+    text: "Early menopause, a major risk factor for osteoporosis, means menopause before age {{c1::45}}."
+    src: { page: 218, quote: "(before age 45), oophorectomy, secondary amenorrhea, lifelong low calcium intake (including lactose intolerance), sedentary lifestyle, and immobilization." }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L17.028
+    kind: enumerate
+    topic: risk
+    prompt: Mention the "other" (minor) risk factors for osteoporosis.
+    points:
+      - Nulliparity
+      - Protein-calorie malnutrition
+      - Gastrectomy
+      - Alcohol abuse
+      - Cigarette smoking
+      - Drugs or illness that increase bone loss (corticosteroids, thyrotoxicosis)
+    pass: 4
+    src: { page: 218, quote: "Other risk factors include nulliparity, protein-calorie malnutrition, gastrectomy, alcohol abuse, cigarette smoking" }
+    status: unverified
+  - id: dm.L17.029
+    kind: card
+    topic: risk
+    front: The chief single predictor of osteoporosis?
+    back: Age.
+    src: { page: 218, quote: "Age: The chief single predictor for osteoporosis is age." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L17.030
+    kind: card
+    topic: risk
+    front: Why are women at higher risk of osteoporosis than men?
+    back: Lower peak bone mass at skeletal maturity, plus greatly accelerated bone loss for several years after menopause; by the sixth decade their bone density is clearly lower than men's.
+    src: { page: 218, quote: "Women have a lower peak bone mass at skeletal maturity and a greatly accelerated phase of bone loss for several years after menopause." }
+    status: unverified
+  - id: dm.L17.031
+    kind: card
+    topic: risk
+    front: Why is osteoporosis less common in black people?
+    back: Greater peak bone mass at skeletal maturity, and possibly differences in nutrition, exercise and body weight.
+    src: { page: 218, quote: "probably because blacks have a greater peak bone mass at skeletal maturity" }
+    status: unverified
+  - id: dm.L17.032
+    kind: card
+    topic: risk
+    front: How is low body weight thought to raise osteoporosis risk?
+    back: Less biologically active estrogen in thin postmenopausal women, and lower peak bone mass in thin young women.
+    src: { page: 218, quote: "decreased availability of biologically active estrogen in thin postmenopausal women and lower peak bone mass in thin young women." }
+    status: unverified
+  - id: dm.L17.033
+    kind: card
+    topic: risk
+    front: Why may obesity protect against osteoporosis?
+    back: Higher estrogen levels and more skeletal weight bearing, which may stimulate bone formation.
+    src: { page: 218, quote: "Obesity may protect because higher estrogen levels in obese men and women and increased skeletal weight bearing may stimulate bone formation." }
+    status: unverified
+  - id: dm.L17.034
+    kind: card
+    topic: risk
+    front: A family history of what is a major risk factor for osteoporosis?
+    back: Osteoporotic fractures.
+    src: { page: 218, quote: "A family history of osteoporotic fractures is thought to be a major risk factor." }
+    status: unverified
+  - id: dm.L17.035
+    kind: cloze
+    topic: risk
+    text: "{{c1::FRAX}}, developed by the {{c2::WHO}}, predicts the {{c3::10-year}} likelihood of a minimal trauma fracture."
+    src: { page: 218, quote: "Fracture risk assessment tool [FRAX] developed by WHO to predict your 10-year likelihood of having a minimal trauma fracture" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: dm.L17.036
+    kind: card
+    topic: risk
+    front: What is a minimal trauma fracture, and what makes FRAX more accurate?
+    back: A bone broken by a fall from standing height or less; FRAX is more accurate when DEXA results are included.
+    src: { page: 218, quote: "breaking a bone after falling from standing height or less" }
+    status: unverified
+  - id: dm.L17.037
+    kind: mcq
+    topic: risk
+    stem: Which woman has the lowest risk of osteoporosis, according to the lecture's risk factors?
+    options:
+      - An obese black woman who walks daily
+      - A thin white woman whose menopause was at 42
+      - An Oriental woman with lactose intolerance and a low calcium intake
+      - A nulliparous smoker who drinks heavily
+      - A woman on long-term corticosteroids for asthma
+    answer: 0
+    why:
+      - "Correct: blacks have a greater peak bone mass, obesity may protect, and she is active (p218)."
+      - Thin habitus, white race and menopause before 45 are major risk factors.
+      - Oriental race and lifelong low calcium intake are major risk factors.
+      - Nulliparity, smoking and alcohol abuse are other risk factors.
+      - Corticosteroid use is a drug that predisposes to bone loss.
+    src: { page: 218, quote: "Obesity may protect because higher estrogen levels in obese men and women and increased skeletal weight bearing may stimulate bone formation." }
+    status: unverified
+  # ---------- p219: symptoms, history, examination ----------
+  - id: dm.L17.038
+    kind: card
+    topic: clinical
+    front: When do patients with osteoporosis usually get symptoms?
+    back: Often not until a fracture occurs; the trigger may be as trivial as turning over in bed, though falls and lifting are more common.
+    src: { page: 219, quote: "Individuals with osteoporosis often remain asymptomatic until a fracture occurs." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L17.039
+    kind: card
+    topic: clinical
+    front: Which bone disease causes diffuse bony tenderness and pain even without a fracture on X-ray?
+    back: Osteomalacia (osteoporosis is usually silent until a fracture).
+    src: { page: 219, quote: "osteomalacia often causes diffuse bony tenderness and pain, even in the absence of radiographically evident fractures." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L17.040
+    kind: card
+    topic: clinical
+    front: How is primary osteoporosis diagnosed, given it has no characteristic symptoms, signs or labs?
+    back: By excluding other metabolic bone diseases (osteomalacia, malignancy and secondary osteoporosis), usually with history, examination and a few lab tests.
+    src: { page: 219, quote: "diagnosis requires excluding other causes of metabolic bone disease, ie, osteomalacia, malignancy, and secondary osteoporosis." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L17.041
+    kind: enumerate
+    topic: clinical
+    prompt: What are the hallmarks of metabolic bone disease to ask about in a patient with a fracture or osteopenia?
+    points:
+      - Fractures
+      - Loss of height
+      - Bone pain
+      - Muscle weakness
+    pass: 3
+    src: { page: 219, quote: "hallmarks of metabolic bone disease (eg, fractures, loss of height, bone pain, and muscle weakness)" }
+    status: unverified
+  - id: dm.L17.042
+    kind: card
+    topic: clinical
+    front: Besides the hallmarks of bone disease, what drug history matters specifically in a patient with osteopenia?
+    back: Drugs and disorders associated with vitamin D deficiency and osteomalacia.
+    src: { page: 219, quote: "specifically about drugs and disorders associated with vitamin D deficiency and osteomalacia." }
+    status: unverified
+  - id: dm.L17.043
+    kind: enumerate
+    topic: clinical
+    prompt: Which diseases should you look for on examination, especially in premature osteoporosis?
+    points:
+      - Alcohol abuse
+      - Malabsorption
+      - Hypercortisolism
+      - Endocrinopathy
+      - Malignancy
+    pass: 4
+    src: { page: 219, quote: "look for symptoms and signs of alcohol abuse, malabsorption, hypercortisolism, endocrinopathy, malignancy" }
+    status: unverified
+  # ---------- p220: labs ----------
+  - id: dm.L17.044
+    kind: enumerate
+    topic: labs
+    prompt: If the history shows no cause of secondary osteoporosis, which tests usually exclude underlying disorders?
+    points:
+      - CBC with differential
+      - Routine serum chemistry
+      - Thyroid function tests
+      - Serum protein electrophoresis
+      - Serum 25-hydroxycholecalciferol
+      - 24-h urine calcium
+    pass: 5
+    src: { page: 220, quote: "A CBC count with differential, routine serum chemistry studies, thyroid function tests, serum protein electrophoresis" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L17.045
+    kind: card
+    topic: labs
+    front: In an osteopenic patient, an abnormal blood count or protein electrophoresis raises what possibility?
+    back: A malignancy involving the bone marrow.
+    src: { page: 220, quote: "any abnormality in blood count or protein electrophoresis raises the possibility of a malignancy involving the bone marrow." }
+    status: unverified
+  - id: dm.L17.046
+    kind: table
+    topic: labs
+    title: Labs in primary osteoporosis
+    columns: [Test, Result]
+    rows:
+      - ["Electrolytes, BUN, creatinine", Normal]
+      - [Serum and urine calcium, Usually normal]
+      - [Serum phosphate and alkaline phosphatase, Normal]
+      - ["Vitamin D, 25-OH and 1,25-(OH)2 cholecalciferol", Normal; may be low from age-related changes]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 220, quote: "In primary osteoporosis, serum phosphate and alkaline phosphatase values are also normal." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L17.047
+    kind: card
+    topic: labs
+    front: Why may vitamin D levels be low in primary osteoporosis even though they are "normal" for the disease?
+    back: Age-related changes in vitamin D metabolism.
+    src: { page: 220, quote: "are normal in primary osteoporosis but may be low because of age-related changes in vitamin D metabolism." }
+    status: unverified
+  - id: dm.L17.048
+    kind: enumerate
+    topic: labs
+    prompt: Which metabolic markers of bone turnover does the lecture say are under investigation?
+    points:
+      - Serum osteocalcin
+      - Urinary pyridinium and deoxypyridinium
+      - Urinary hydroxyproline
+    pass: 3
+    src: { page: 220, quote: "The use of metabolic markers, such as serum osteocalcin, urinary excretion of pyridinium and deoxypyridinium, and urinary hydroxyproline" }
+    status: unverified
+  - id: dm.L17.049
+    kind: mcq
+    topic: labs
+    stem: A 66-year-old woman has a vertebral fracture and osteopenia. CBC shows a normocytic anemia and serum protein electrophoresis shows a monoclonal band. What does this suggest?
+    options:
+      - A malignancy involving the bone marrow, such as multiple myeloma
+      - Primary postmenopausal osteoporosis
+      - Osteomalacia from vitamin D deficiency
+      - Type 2 senile osteoporosis
+      - A normal finding in primary osteoporosis
+    answer: 0
+    why:
+      - "Correct: abnormal counts or electrophoresis in osteopenia raise marrow malignancy (p220); myeloma is in Table 258-2."
+      - In primary osteoporosis the routine labs are normal.
+      - Osteomalacia does not explain a monoclonal band.
+      - Senile osteoporosis has normal blood counts.
+      - Primary osteoporosis has no characteristic laboratory abnormality.
+    src: { page: 220, quote: "any abnormality in blood count or protein electrophoresis raises the possibility of a malignancy involving the bone marrow." }
+    status: unverified
+  - id: dm.L17.050
+    kind: mcq
+    topic: labs
+    stem: Which result fits primary osteoporosis?
+    options:
+      - Normal calcium, phosphate and alkaline phosphatase
+      - Low calcium and high alkaline phosphatase
+      - High calcium and low phosphate
+      - High creatinine and high phosphate
+      - Monoclonal band on electrophoresis
+    answer: 0
+    why:
+      - "Correct: in primary osteoporosis calcium, phosphate and ALP are normal (p220)."
+      - Suggests osteomalacia.
+      - Suggests hyperparathyroidism.
+      - Suggests chronic renal failure.
+      - Suggests myeloma.
+    src: { page: 220, quote: "In primary osteoporosis, serum phosphate and alkaline phosphatase values are also normal." }
+    status: unverified
+  # ---------- p220-221: radiology ----------
+  - id: dm.L17.051
+    kind: cloze
+    topic: radiology
+    text: "Radiolucency, the hallmark of osteopenia on plain X-ray, cannot be reliably detected until at least {{c1::30%}} of bone mass is lost."
+    src: { page: 220, quote: "it cannot be reliably detected until at least 30% of the bone mass is lost." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L17.052
+    kind: card
+    topic: radiology
+    front: Most common clue to osteoporosis in an asymptomatic postmenopausal woman?
+    back: Incidental skeletal osteopenia on a chest X-ray.
+    src: { page: 220, quote: "incidental skeletal osteopenia on a chest x-ray is the most common clue to osteoporosis in asymptomatic postmenopausal women." }
+    status: unverified
+  - id: dm.L17.053
+    kind: card
+    topic: radiology
+    front: Why do the vertical trabeculae of osteoporotic vertebrae look more prominent?
+    back: The horizontal trabeculae are lost.
+    src: { page: 220, quote: "vertebral end-plates appear more prominent because of the loss of horizontal trabeculae." }
+    status: unverified
+  - id: dm.L17.054
+    kind: card
+    topic: radiology
+    front: What is "codfishing" of the vertebrae?
+    back: In advanced disease the end-plates become concave as the intervertebral disks balloon into them.
+    src: { page: 221, quote: "the end-plates become concave as the intervertebral disks balloon" }
+    status: unverified
+  - id: dm.L17.055
+    kind: card
+    topic: radiology
+    front: What are Schmorl's nodes, and in which bone disease are they more common?
+    back: Herniation of the nucleus pulposus through a weakened end-plate into the vertebral body; more common in primary osteoporosis and rare in osteomalacia.
+    src: { page: 221, quote: "Schmorl's nodes are more common in primary osteoporosis and rarely appear in osteomalacia." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L17.056
+    kind: table
+    topic: radiology
+    title: Vertebral compression fractures
+    columns: [Collapse, Fracture]
+    rows:
+      - [Mainly anterior compression, Wedge fracture]
+      - [Whole vertebral body, Crush fracture]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 221, quote: "A predominantly anterior compression of the vertebrae results in a wedge fracture; a collapse of the entire vertebral body results in a crush fracture." }
+    status: unverified
+  - id: dm.L17.057
+    kind: card
+    topic: radiology
+    front: Where do osteoporotic compression fractures typically occur?
+    back: The lower thoracic and upper lumbar vertebrae (any vertebra in severe disease).
+    src: { page: 221, quote: "These compression fractures typically occur in the lower thoracic and upper lumbar vertebrae" }
+    status: unverified
+  - id: dm.L17.058
+    kind: card
+    topic: radiology
+    front: X-ray changes of osteoporosis in long bones?
+    back: Cortical thinning and expansion of the medullary space.
+    src: { page: 221, quote: "In long bones, cortical thinning and expansion of the medullary space may occur." }
+    status: unverified
+  - id: dm.L17.059
+    kind: table
+    topic: radiology
+    title: X-ray findings that suggest another metabolic bone disease
+    columns: [Finding, Disease]
+    rows:
+      - [Lytic lesions, Multiple myeloma]
+      - [Arthropathy, Rheumatoid arthritis]
+      - [Pseudofractures, Osteomalacia]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 221, quote: "the lytic lesions of multiple myeloma, the arthropathy of rheumatoid arthritis, and the pseudofractures of osteomalacia." }
+    status: unverified
+  - id: dm.L17.060
+    kind: mcq
+    topic: radiology
+    stem: A lateral spine X-ray of a 70-year-old woman shows a Schmorl's node, biconcave end-plates and prominent vertical trabeculae. Which diagnosis do these favour?
+    options:
+      - Primary osteoporosis
+      - Osteomalacia
+      - Multiple myeloma
+      - Rheumatoid arthritis
+      - Normal ageing spine
+    answer: 0
+    why:
+      - "Correct: Schmorl's nodes are more common in primary osteoporosis; loss of horizontal trabeculae makes the vertical ones stand out (p220-221)."
+      - Schmorl's nodes rarely appear in osteomalacia; look for pseudofractures instead.
+      - Myeloma shows lytic lesions.
+      - RA shows arthropathy.
+      - These are signs of osteopenic disease, not normal ageing.
+    src: { page: 221, quote: "Schmorl's nodes are more common in primary osteoporosis and rarely appear in osteomalacia." }
+    status: unverified
+  # ---------- p221-223: bone density ----------
+  - id: dm.L17.061
+    kind: card
+    topic: bmd
+    front: What do bone density measurements do in prophylaxis?
+    back: They predict fracture risk and help decide the need for preventive therapy.
+    src: { page: 221, quote: "Bone density measurements predict fracture risk and help determine the need for preventive therapy." }
+    status: unverified
+  - id: dm.L17.062
+    kind: cloze
+    topic: bmd
+    text: "The lecture's treatment cut-off: bone density {{c1::1 SD}} below the mean for age (Z score {{c2::-1}}), which it equates with a T score of {{c3::-2.5}}."
+    src: { page: 221, quote: "a bone density measurement of 1 SD below the mean for age [Z score=-1, which equals T score=-2.5" }
+    status: unverified
+    tags: [numbers, high-yield]
+    update:
+      text: "The densitometric definition compares with young adults (T-score): T ≤ -2.5 is osteoporosis and T between -1 and -2.5 is osteopenia (low bone mass). A Z-score (age-matched) of -1 is not the same as a T-score of -2.5."
+      ref: "WHO criteria 1994; BHOF Clinician's Guide 2022"
+  - id: dm.L17.063
+    kind: card
+    topic: bmd
+    front: What does the T-score compare a patient with?
+    back: The mean of young adults of the same sex (the Z-score compares with the mean for age).
+    src: { page: 221, quote: "T score=-2.5 below the mean of young adults with the same sex" }
+    status: unverified
+  - id: dm.L17.064
+    kind: card
+    topic: bmd
+    front: Does the lecture recommend widespread osteoporosis screening of asymptomatic women?
+    back: No; cost-effective screening guidelines for asymptomatic perimenopausal women have not been established.
+    src: { page: 222, quote: "Therefore, widespread screening for osteoporosis in asymptomatic women cannot be recommended." }
+    status: unverified
+    update:
+      text: "USPSTF recommends BMD screening for all women aged 65 and over, and for younger postmenopausal women at increased risk (for example by FRAX)."
+      ref: "USPSTF osteoporosis screening 2018"
+  - id: dm.L17.065
+    kind: cloze
+    topic: bmd
+    text: "Women with bone density between the mean and {{c1::1 SD}} below it should get a second measurement in {{c2::2 to 5}} years."
+    src: { page: 222, quote: "women with a bone density between the mean and 1 SD below the mean should obtain a second measurement in 2 to 5 yr." }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L17.066
+    kind: card
+    topic: bmd
+    front: Are serial bone density measurements to follow bone loss or therapy routinely recommended (p222)?
+    back: No; they are controversial and cannot be routinely recommended.
+    src: { page: 222, quote: "Serial bone density measurements to assess the rate of bone loss or the therapeutic response are controversial and cannot be routinely recommended." }
+    status: unverified
+  - id: dm.L17.067
+    kind: enumerate
+    topic: bmd
+    prompt: Name the four methods of measuring bone density.
+    points:
+      - Single-photon absorptiometry (SPA)
+      - Dual-photon absorptiometry (DPA)
+      - Quantitative CT
+      - Dual-energy X-ray absorptiometry (DEXA)
+    pass: 4
+    src: { page: 222, quote: "four methods of measuring bone density are available: single- photon absorptiometry, dual-photon absorptiometry, quantitative computed tomography, and dual-energy x-ray absorptiometry." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L17.068
+    kind: table
+    topic: bmd
+    title: Bone density methods compared
+    columns: [Method, Strength, Weakness]
+    rows:
+      - ["SPA (radius, ulna, heel)", "Cheap, little radiation, widely available, reasonably accurate", Does not measure vertebrae or femur directly]
+      - [DPA, Measures vertebrae and femur directly; best in young and middle-aged, "Costly, less available, long scan; falsely high with DJD, compression fractures, calcified vessels"]
+      - [Quantitative CT, Mainly lumbar spine, "Very high radiation (not in childbearing age or serially), poor reproducibility, costly"]
+      - [DEXA, "Precise, little radiation, short scan, low cost; best for serial scans", Fracture prediction less studied (assumed equal to DPA)]
+    blanks: [[0, 2], [1, 2], [2, 2], [3, 1]]
+    src: { page: 223, quote: "Together with its low cost, these characteristics make DEXA the method of choice." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L17.069
+    kind: card
+    topic: bmd
+    front: Main drawback of single-photon absorptiometry?
+    back: It does not directly measure density in the vertebrae or femur, the commonest and most disabling fracture sites.
+    src: { page: 222, quote: "However, it does not directly measure bone density in vertebrae or femurs, the most common and disabling sites of osteoporotic fractures." }
+    status: unverified
+  - id: dm.L17.070
+    kind: enumerate
+    topic: bmd
+    prompt: What can falsely elevate dual-photon absorptiometry values?
+    points:
+      - Degenerative joint disease
+      - Compression fractures
+      - Closely situated calcified vessels
+    pass: 3
+    src: { page: 222, quote: "Falsely elevated values may occur with degenerative joint disease, compression fractures, or closely situated calcified vessels." }
+    status: unverified
+  - id: dm.L17.071
+    kind: card
+    topic: bmd
+    front: Why should quantitative CT not be used in women of childbearing age or for serial scans?
+    back: Its radiation exposure is extremely high (and reproducibility for serial measurements is poor).
+    src: { page: 223, quote: "Because of the extremely high radiation exposure with quantitative CT, it should not be used in women of childbearing age or for serial measurements." }
+    status: unverified
+  - id: dm.L17.072
+    kind: card
+    topic: bmd
+    front: Why is DEXA the method of choice for bone density?
+    back: Precise, little radiation, short scan time and low cost; it measures radius, ulna, spine, femur and total body, and suits serial measurements.
+    src: { page: 223, quote: "Together with its low cost, these characteristics make DEXA the method of choice." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L17.073
+    kind: mcq
+    topic: bmd
+    stem: A 30-year-old woman on long-term steroids needs a baseline bone density scan and a repeat in 2 years. Which method is best?
+    options:
+      - DEXA
+      - Quantitative CT
+      - Single-photon absorptiometry of the heel
+      - Dual-photon absorptiometry
+      - Plain X-ray of the spine
+    answer: 0
+    why:
+      - "Correct: DEXA is precise, low radiation and best suited to serial measurements (p223)."
+      - Extremely high radiation; not for childbearing age or serial scans (p223).
+      - Does not measure spine or femur, the main fracture sites.
+      - More expensive, less available and slower than DEXA.
+      - Radiolucency needs about 30% bone loss before it shows.
+    src: { page: 223, quote: "Because it is more precise than other methods, DEXA is better suited to serial measurements." }
+    status: unverified
+  # ---------- p223-224: non-drug therapy ----------
+  - id: dm.L17.074
+    kind: enumerate
+    topic: nondrug
+    prompt: What are the three components of non-drug therapy of osteoporosis?
+    points:
+      - Diet
+      - Exercise
+      - Cessation of smoking
+    pass: 3
+    src: { page: 223, quote: "There are three components to the nondrug therapy of osteoporosis: diet, exercise, and cessation of smoking." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L17.075
+    kind: card
+    topic: nondrug
+    front: Besides diet, exercise and stopping smoking, what else should patients with osteoporosis do?
+    back: Avoid, if possible, drugs that increase bone loss, such as glucocorticoids.
+    src: { page: 223, quote: "affected patients should avoid, if possible, drugs that increase bone loss, such as glucocorticoids." }
+    status: unverified
+  - id: dm.L17.076
+    kind: cloze
+    topic: nondrug
+    text: "Postmenopausal women take {{c1::500 to 1000 mg/day}} of supplemental elemental calcium, in divided doses at mealtime, for a total intake of about {{c2::1500 mg/day}}."
+    src: { page: 223, quote: "supplemental elemental calcium (generally 500 to 1000 mg/day), in divided doses, at mealtime, such that their total calcium intake, including food calcium, approximates 1500 mg/day." }
+    status: unverified
+    tags: [numbers, high-yield]
+    update:
+      text: "Current recommended total calcium intake is 1200 mg/day for women aged 51 and over (food first, supplements only to make up the gap)."
+      ref: "BHOF Clinician's Guide 2022"
+  - id: dm.L17.077
+    kind: cloze
+    topic: nondrug
+    text: "Women should take a total of {{c1::800 IU}} of vitamin D daily; higher doses are needed with {{c2::malabsorption}} or {{c3::anticonvulsant}} therapy."
+    src: { page: 224, quote: "Women should also ingest a total of 800 IU of vitamin D daily." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L17.078
+    kind: card
+    topic: nondrug
+    front: Extra benefits of calcium supplements mentioned in the lecture?
+    back: A possible favourable effect on serum lipids, and calcium intake is inversely associated with cardiovascular disease in postmenopausal women.
+    src: { page: 223, quote: "Calcium supplementation may also have a favorable effect on serum lipids." }
+    status: unverified
+  - id: dm.L17.079
+    kind: cloze
+    topic: nondrug
+    text: "Women with osteoporosis should exercise for at least {{c1::30 minutes}} {{c2::three times}} per week; any {{c3::weight-bearing}} exercise, including walking, is acceptable."
+    src: { page: 224, quote: "should exercise (prudently) for at least 30 minutes three times per week" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L17.080
+    kind: card
+    topic: nondrug
+    front: In older women, how does exercise reduce fractures?
+    back: Mostly through increased muscular strength; its effect on bone density is minimal except with truly vigorous regimens.
+    src: { page: 224, quote: "any decrease in fractures is likely due to increased muscular strength." }
+    status: unverified
+  - id: dm.L17.081
+    kind: cloze
+    topic: nondrug
+    text: "Smoking one pack a day throughout adult life is associated with a {{c1::5 to 10%}} reduction in bone density."
+    src: { page: 224, quote: "Smoking one pack per day throughout adult life was associated with a 5 to 10 percent reduction in bone density." }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L17.082
+    kind: card
+    topic: nondrug
+    front: How may smoking negate the benefit of estrogen therapy?
+    back: It accelerates estrogen metabolism and so lowers serum estrogen.
+    src: { page: 224, quote: "This may be mediated in part by the acceleration of estrogen metabolism, thereby lowering serum estrogen concentrations." }
+    status: unverified
+  # ---------- p224-228: drugs ----------
+  - id: dm.L17.083
+    kind: card
+    topic: drugs
+    front: Which postmenopausal women should be considered for drug or hormonal therapy?
+    back: Those with osteoporosis or at high risk of it (on top of the universal non-drug measures).
+    src: { page: 224, quote: "Postmenopausal women with osteoporosis or at high risk for the disease should be considered for drug (or hormonal) therapy." }
+    status: unverified
+  - id: dm.L17.084
+    kind: table
+    topic: drugs
+    title: Which antiresorptives prevent which fractures?
+    columns: [Drug, Vertebral, Hip]
+    rows:
+      - [Alendronate, Reduces, Reduces]
+      - [Risedronate, Reduces, Reduces]
+      - [Estrogen, Reduces, Reduces]
+      - [Raloxifene (SERM), Reduces, Not yet shown]
+      - [Ibandronate, Reduces, Not yet shown]
+    blanks: [[3, 2], [4, 2]]
+    src: { page: 225, quote: "Although both reduce vertebral fractures, neither has yet been shown to reduce hip fractures in randomized trials." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L17.085
+    kind: table
+    topic: drugs
+    title: Bisphosphonate doses
+    columns: [Drug, Dose]
+    rows:
+      - [Alendronate, "10 mg/day or 70 mg once weekly, oral"]
+      - [Risedronate, "5 mg/day or 35 mg once weekly, oral"]
+      - [Ibandronate, "150 mg once monthly oral, or 3 mg IV every 3 months"]
+      - [Zoledronic acid, "5 mg IV once yearly"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 225, quote: "Alendronate (10 mg/day or 70 mg once weekly [orally]) or risedronate (5 mg/day or 35 mg once weekly [orally]), and ibandronate (150 mg once-" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L17.086
+    kind: cloze
+    topic: drugs
+    text: "Zoledronic acid {{c1::5 mg}} IV once {{c2::yearly}} is effective for treating osteoporosis, though its approval for this is not universal."
+    src: { page: 226, quote: "Zoledronic acid (ZA), 5 mg administered intravenously (IV) once yearly, is also effective for the treatment of osteoporosis" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L17.087
+    kind: card
+    topic: drugs
+    front: What precaution is needed with oral bisphosphonates?
+    back: Precautions to avoid esophagitis.
+    src: { page: 226, quote: "When bisphosphonates are taken orally, precautions should be taken to avoid esophagitis." }
+    status: unverified
+  - id: dm.L17.088
+    kind: card
+    topic: drugs
+    front: Rare side effect of bisphosphonates, and in whom are most cases seen?
+    back: Osteonecrosis of the jaw; mostly in cancer patients on high-dose IV bisphosphonates.
+    src: { page: 226, quote: "the majority of cases have been observed in cancer patients treated with high-dose intravenous bisphosphonates." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L17.089
+    kind: table
+    topic: drugs
+    title: "Raloxifene (SERM): effects"
+    columns: [Target, Effect]
+    rows:
+      - [Bone mineral density, Increases]
+      - [Vertebral fractures, Reduced]
+      - [Breast cancer risk, Appears lower]
+      - [Endometrium, No hyperplasia or vaginal bleeding]
+      - [Venous thromboembolism, Increased risk]
+      - [Total and LDL cholesterol, Decreased]
+      - [Coronary heart disease risk, No apparent effect]
+    blanks: [[2, 1], [3, 1], [4, 1], [6, 1]]
+    src: { page: 226, quote: "Raloxifene also appears to lower the risk of breast cancer, does not stimulate endometrial hyperplasia or vaginal bleeding" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L17.090
+    kind: card
+    topic: drugs
+    front: Where does the lecture place raloxifene?
+    back: One of the first-line drugs for preventing osteoporosis, though somewhat less effective than estrogen and bisphosphonates.
+    src: { page: 226, quote: "We consider raloxifene one of the first-line drugs for the prevention of osteoporosis." }
+    status: unverified
+  - id: dm.L17.091
+    kind: card
+    topic: drugs
+    front: Why does PTH treat osteoporosis when PTH excess damages bone?
+    back: Intermittent recombinant PTH (1-84 or 1-34) stimulates bone formation more than resorption.
+    src: { page: 227, quote: "intermittent administration of recombinant human parathyroid hormone (both full-length 1-84 or fragment 1-34) stimulates bone formation more than resorption" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L17.092
+    kind: cloze
+    topic: drugs
+    text: "PTH 1-34 ({{c1::teriparatide}}) {{c2::20-40 microgram/d}} is FDA-approved for women and men at {{c3::high risk}} of fracture."
+    src: { page: 227, quote: "PTH 1-34 (teriparatide) 20- 40 microgram/d has been approved by the FDA for use in women and men at high risk for fracture." }
+    status: unverified
+    tags: [numbers]
+    update:
+      text: "The licensed teriparatide dose is 20 micrograms subcutaneously once daily."
+      ref: "Endocrine Society postmenopausal osteoporosis guideline 2019"
+  - id: dm.L17.093
+    kind: card
+    topic: drugs
+    front: How does denosumab work, and how is it given?
+    back: An antibody against RANKL, a factor in forming the cells that break down bone; given subcutaneously every 6 months.
+    src: { page: 227, quote: "Denosumab (Prolia) is an antibody directed against a factor (RANKL) involved in the formation of cells that break down bone." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L17.094
+    kind: enumerate
+    topic: drugs
+    prompt: Side effects of denosumab in the lecture?
+    points:
+      - Skin infections such as cellulitis
+      - Eczema
+      - Mild transient lowering of blood calcium
+    pass: 3
+    src: { page: 227, quote: "side effects can include skin infections (such as cellulitis) and eczema." }
+    status: unverified
+  - id: dm.L17.095
+    kind: card
+    topic: drugs
+    front: What must be corrected before giving denosumab?
+    back: Low blood calcium.
+    src: { page: 227, quote: "Denosumab should not be administered to patients with low blood calcium levels until these levels are corrected." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L17.096
+    kind: card
+    topic: drugs
+    front: For whom does the lecture usually reserve denosumab, and why?
+    back: Patients intolerant of or unresponsive to oral or IV bisphosphonates, because there are no long-term safety data.
+    src: { page: 227, quote: "denosumab is usually reserved for patients who are intolerant of or unresponsive to oral and/or intravenous bisphosphonates." }
+    status: unverified
+  - id: dm.L17.097
+    kind: cloze
+    topic: drugs
+    text: "Nasal {{c1::calcitonin}} {{c2::200 IU/day}} is less popular because of its modest effect on BMD and weak antifracture efficacy."
+    src: { page: 227, quote: "A less popular choice for treating osteoporosis is nasal calcitonin, administered at a dose of 200 IU/day." }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L17.098
+    kind: card
+    topic: drugs
+    front: Where has calcitriol been reported effective in bone loss?
+    back: Glucocorticoid-induced and post-transplant bone loss (trials in postmenopausal osteoporosis were mixed).
+    src: { page: 228, quote: "calcitriol has been reported to be effective in preventing glucocorticoid-induced and posttransplant-related bone loss." }
+    status: unverified
+  - id: dm.L17.099
+    kind: card
+    topic: drugs
+    front: How must patients on calcitriol be managed?
+    back: A low-calcium diet and monitoring for hypercalcemia, hypercalciuria and renal insufficiency.
+    src: { page: 228, quote: "Patients treated with calcitriol should be given a low-calcium diet and monitored for hypercalcemia, hypercalciuria, and renal insufficiency." }
+    status: unverified
+  - id: dm.L17.100
+    kind: cloze
+    topic: drugs
+    text: "Conjugated estrogens {{c1::0.625 mg/day}} and alendronate {{c2::10 mg/day}} are about equally effective on BMD; the combination is {{c3::slightly more}} effective than either."
+    src: { page: 228, quote: "conjugated estrogens (0.625 mg/day) and alendronate (10 mg/day) are equally effective in improving bone mineral density" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L17.101
+    kind: card
+    topic: drugs
+    front: Which other combinations act synergistically on bone density, and what is missing for them?
+    back: Estrogen plus calcitonin, estrogen and androgen, estrogen plus etidronate, alendronate and raloxifene; fracture data are unavailable.
+    src: { page: 228, quote: "However, fracture data are unavailable for these combinations." }
+    status: unverified
+  - id: dm.L17.102
+    kind: mcq
+    topic: drugs
+    stem: A 60-year-old woman with osteoporosis and a strong family history of breast cancer cannot tolerate any bisphosphonate. She has no history of thrombosis. Which drug fits best, per the lecture?
+    options:
+      - Raloxifene
+      - Calcitriol
+      - Nasal calcitonin
+      - Teriparatide as first line
+      - Estrogen plus etidronate
+    answer: 0
+    why:
+      - "Correct: raloxifene is reserved for bisphosphonate intolerance (p229), and appears to lower breast cancer risk (p226)."
+      - Mixed results in postmenopausal osteoporosis and needs close calcium monitoring.
+      - Modest BMD effect and weak antifracture efficacy.
+      - PTH is not first line because of cost, injections and safety concerns (p229).
+      - No fracture data for this combination, and estrogen is not ideal with breast cancer risk.
+    src: { page: 229, quote: "we reserve the use of this drug for patients who cannot tolerate any bisphosphonates." }
+    status: unverified
+  - id: dm.L17.103
+    kind: mcq
+    topic: drugs
+    stem: A woman on raloxifene asks about its risks. Which is a recognised risk of raloxifene in the lecture?
+    options:
+      - Venous thromboembolism
+      - Endometrial hyperplasia
+      - Vaginal bleeding
+      - Higher LDL cholesterol
+      - Osteonecrosis of the jaw
+    answer: 0
+    why:
+      - "Correct: raloxifene increases the risk of VTE (p226)."
+      - It does not stimulate endometrial hyperplasia.
+      - It does not cause vaginal bleeding.
+      - It lowers total and LDL cholesterol.
+      - ONJ is a bisphosphonate side effect.
+    src: { page: 226, quote: "Raloxifene also appears to lower the risk of breast cancer, does not stimulate endometrial hyperplasia or vaginal bleeding" }
+    status: unverified
+  - id: dm.L17.104
+    kind: mcq
+    topic: drugs
+    stem: A 72-year-old woman with osteoporosis is about to start denosumab. Serum corrected calcium is 7.6 mg/dl. What next?
+    options:
+      - Correct the hypocalcemia before the first injection
+      - Give denosumab now; the low calcium is irrelevant
+      - Give a double dose of denosumab
+      - Switch to calcitriol with a high-calcium diet
+      - Start teriparatide instead because it is first line
+    answer: 0
+    why:
+      - "Correct: denosumab should not be given with low blood calcium until it is corrected (p227)."
+      - Denosumab itself lowers calcium; giving it now is unsafe.
+      - No basis for a higher dose.
+      - Calcitriol needs a LOW-calcium diet, and its benefit is unproven in postmenopausal osteoporosis.
+      - PTH is not first line (p229).
+    src: { page: 227, quote: "Denosumab should not be administered to patients with low blood calcium levels until these levels are corrected." }
+    status: unverified
+  # ---------- p225, 228-229: who to treat, choice ----------
+  - id: dm.L17.105
+    kind: card
+    topic: choice
+    front: What do most treatment guidelines use to select candidates for osteoporosis drugs?
+    back: BMD T-score plus risk factors for fracture (they differ in populations, T-score cut-offs and risk factors).
+    src: { page: 225, quote: "Most current treatment guidelines rely on the use of BMD T-score plus risk factors for fracture" }
+    status: unverified
+  - id: dm.L17.106
+    kind: table
+    topic: choice
+    title: T-score thresholds for drug therapy (postmenopausal women)
+    columns: [Approach, Treat when]
+    rows:
+      - ["NOF, recommended by the lecture", "T-score below -2.0 on central DXA, regardless of risk factors"]
+      - ["NOF, with risk factors", "T-score below -1.5"]
+      - [Europe, "T-score -2.5 or less"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 225, quote: "postmenopausal women with T-scores less than -2.0, as measured by central DXA, regardless of risk factors for fracture" }
+    status: unverified
+    tags: [numbers, high-yield]
+    update:
+      text: "BHOF (formerly NOF) now advises treatment for a hip or vertebral fracture, a T-score ≤ -2.5, or a T-score between -1 and -2.5 with a FRAX 10-year risk ≥ 20% for major osteoporotic fracture or ≥ 3% for hip fracture."
+      ref: "BHOF Clinician's Guide 2022"
+  - id: dm.L17.107
+    kind: card
+    topic: choice
+    front: Recommended first-line therapy for postmenopausal osteoporosis, and the preferred agents?
+    back: Bisphosphonates; alendronate or risedronate, because ibandronate has no trial data on hip fracture.
+    src: { page: 228, quote: "We recommend bisphosphonates as first-line therapy for postmenopausal osteoporosis." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L17.108
+    kind: card
+    topic: choice
+    front: Which bisphosphonate is offered to patients with GI intolerance of oral bisphosphonates?
+    back: IV ibandronate.
+    src: { page: 229, quote: "IV ibandronate is available for individuals with gastrointestinal intolerance to oral bisphosphonates." }
+    status: unverified
+  - id: dm.L17.109
+    kind: enumerate
+    topic: choice
+    prompt: Why is PTH generally not first-line treatment or prevention for osteoporosis?
+    points:
+      - Cost
+      - Subcutaneous route
+      - Long-term safety concerns, including osteosarcoma
+      - Other agents are available
+    pass: 3
+    src: { page: 229, quote: "Given its cost, subcutaneous route of administration, long-term safety concerns (including osteosarcoma), and the availability of other agents" }
+    status: unverified
+  - id: dm.L17.110
+    kind: mcq
+    topic: choice
+    stem: A 62-year-old postmenopausal woman has a central DXA T-score of -2.2 and no other risk factors. What does the lecture recommend?
+    options:
+      - Start drug therapy, because the NOF approach treats T below -2.0 regardless of risk factors
+      - No drug; the European threshold of -2.5 is the one to use
+      - Treat only if she also has a risk factor
+      - Repeat DEXA in 2 to 5 years
+      - Calcium alone, because therapy needs a fracture first
+    answer: 0
+    why:
+      - "Correct: the lecture recommends the NOF approach, treating T below -2.0 on central DXA regardless of risk factors (p225)."
+      - The lecture names the European -2.5 threshold as different, not preferred.
+      - Risk factors lower the threshold to -1.5; at -2.2 they are not needed.
+      - The 2 to 5 year repeat is for density between the mean and 1 SD below it (p222).
+      - Drug therapy is for osteoporosis or high risk, not only after fracture.
+    src: { page: 225, quote: "we recommend using the NOF approach, which suggests pharmacologic therapy for postmenopausal women with T-scores less than -2.0" }
+    status: unverified
+  - id: dm.L17.111
+    kind: mcq
+    topic: choice
+    stem: A 65-year-old woman with osteoporosis needs a first drug. She tolerates tablets well. Which is the lecture's preferred choice?
+    options:
+      - Alendronate
+      - Ibandronate
+      - Raloxifene
+      - Teriparatide
+      - Nasal calcitonin
+    answer: 0
+    why:
+      - "Correct: bisphosphonates are first line, and alendronate or risedronate is preferred (p228)."
+      - No randomized data on hip fracture reduction, so not the preferred bisphosphonate.
+      - Reserved for patients who cannot tolerate any bisphosphonate.
+      - "Not first line: cost, injections, osteosarcoma concern."
+      - Weak antifracture efficacy.
+    src: { page: 228, quote: "we continue to recommend alendronate or risedronate as our preferred choice of bisphosphonate." }
+    status: unverified
+  # ---------- p229-230: duration and drug holidays ----------
+  - id: dm.L17.112
+    kind: cloze
+    topic: duration
+    text: "Fracture risk is reassessed after {{c1::3}} years of parenteral and {{c2::5}} years of oral bisphosphonate therapy."
+    src: { page: 229, quote: "Fracture risk should be reassessed after 3 years of treatment with parenteral and 5 years of oral" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L17.113
+    kind: card
+    topic: duration
+    front: What happens to a woman at HIGH risk at the bisphosphonate reassessment?
+    back: She continues therapy with another drug.
+    src: { page: 229, quote: "Women with high risk continue therapy with another drug." }
+    status: unverified
+  - id: dm.L17.114
+    kind: card
+    topic: duration
+    front: What does the lecture link to bisphosphonate therapy for more than 5 years?
+    back: Atypical femoral fractures and osteonecrosis of the jaw.
+    src: { page: 229, quote: "Bisphosphonate therapy for more than 5 years causes atypical femoral fractures and osteonecrosis of the jaw." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L17.115
+    kind: cloze
+    topic: duration
+    text: "Women at {{c1::low or moderate}} risk should be considered for a bisphosphonate holiday: temporary discontinuation for up to {{c2::5}} years."
+    src: { page: 229, quote: "Women with low or moderate risk should be considered for a bisphosphonate holiday (temporary discontinuation for up to 5years)" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L17.116
+    kind: cloze
+    topic: duration
+    text: "Zoledronic acid: fracture risk is reassessed after {{c1::3}} years; if BMD is stable, therapy continues for {{c2::6}} years."
+    src: { page: 229, quote: "Fracture risk reassessed after 3 years if BMD is stable, continue therapy for 6 years" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L17.117
+    kind: card
+    topic: duration
+    front: Why is a drug holiday not recommended with denosumab?
+    back: On stopping, vertebral fractures increase, bone turnover markers rise and BMD falls back to pre-treatment levels within 24 months.
+    src: { page: 229, quote: "A drug holiday is not recommended if stopped vertebral fractures increased (BTM) and BMD decreased to the pre-treatment level within 24 months." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L17.118
+    kind: cloze
+    topic: duration
+    text: "With denosumab, fracture risk reassessment is done after {{c1::5 to 10}} years."
+    src: { page: 229, quote: "Fracture risk reassessment is done after 5 to 10 years." }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L17.119
+    kind: card
+    topic: duration
+    front: Who gets teriparatide or abaloparatide, for how long, and what follows?
+    back: Women at very high fracture risk (such as severe or multiple vertebral fractures), for up to 2 years, then an antiresorptive to keep the BMD gains.
+    src: { page: 230, quote: "Treatment with teriparatide or abaloparatide is for up to 2 years to women at very high risk for fracture" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L17.120
+    kind: table
+    topic: duration
+    title: How long, and then what?
+    columns: [Drug, Reassess or limit, Then]
+    rows:
+      - [Oral bisphosphonate, Reassess at 5 years, "High risk: another drug; low or moderate: holiday up to 5 years"]
+      - [Parenteral bisphosphonate, Reassess at 3 years, Same as oral]
+      - [Zoledronic acid, Reassess at 3 years, "BMD stable: continue to 6 years"]
+      - [Denosumab, Reassess at 5 to 10 years, No drug holiday]
+      - [Teriparatide or abaloparatide, Up to 2 years, Antiresorptive to keep the gains]
+    blanks: [[0, 1], [2, 2], [3, 2], [4, 1], [4, 2]]
+    src: { page: 229, quote: "Fracture risk should be reassessed after 3 years of treatment with parenteral and 5 years of oral" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p230-231: monitoring ----------
+  - id: dm.L17.121
+    kind: card
+    topic: monitoring
+    front: What is evidence of response to osteoporosis therapy?
+    back: Stable or improving BMD.
+    src: { page: 230, quote: "BMD that is stable or improving is evidence for a treatment response." }
+    status: unverified
+  - id: dm.L17.122
+    kind: enumerate
+    topic: monitoring
+    prompt: A treated patient's BMD falls significantly. Which contributing factors do you look for?
+    points:
+      - Poor adherence to therapy
+      - Inadequate gastrointestinal absorption
+      - Inadequate calcium and vitamin D intake
+      - A new disease or disorder with adverse skeletal effects
+    pass: 3
+    src: { page: 230, quote: "poor adherence to therapy, inadequate gastrointestinal absorption, inadequate intake of calcium and vitamin D" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L17.123
+    kind: cloze
+    topic: monitoring
+    text: "When the BMD fall is small (less than {{c1::5%}}), the drug is taken correctly and the work-up is negative, continue the same therapy and repeat BMD in {{c2::one year}}."
+    src: { page: 230, quote: "When the change in BMD is small (less than 5 percent) and the patient is taking the drug correctly" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L17.124
+    kind: card
+    topic: monitoring
+    front: Why do some physicians repeat BMD after a year rather than change therapy when BMD falls in a compliant patient?
+    back: The fall may be measurement error, not treatment failure; they act only if a second scan confirms it.
+    src: { page: 230, quote: "could be attributed to measurement error, and would repeat the BMD measurement one year later" }
+    status: unverified
+  - id: dm.L17.125
+    kind: order
+    topic: monitoring
+    prompt: Order the lecture's monitoring plan for a patient starting treatment (DXA available).
+    steps:
+      - Start therapy
+      - Follow-up DXA of hip and spine at one year
+      - "BMD stable or improved: monitor less often"
+    src: { page: 231, quote: "we suggest a follow-up DXA of the hip and spine at one year, and if BMD is stable or improved, less frequent monitoring thereafter." }
+    status: unverified
+  - id: dm.L17.126
+    kind: card
+    topic: monitoring
+    front: If DXA cannot be done at one year, how is a patient on antiresorptive therapy monitored?
+    back: A bone resorption marker (fasting urinary NTX or serum CTX) before and 3 to 6 months after starting, then DXA after two years.
+    src: { page: 231, quote: "if DXA cannot be performed at one year, we suggest assessing a marker of bone resorption after three to six months" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L17.127
+    kind: cloze
+    topic: monitoring
+    text: "If urinary NTX or serum CTX has not fallen by {{c1::50%}} on antiresorptive therapy, think of {{c2::noncompliance or poor absorption}}."
+    src: { page: 231, quote: "If the marker has not decreased by 50 percent, noncompliance or poor absorption" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L17.128
+    kind: card
+    topic: monitoring
+    front: Commonest cause of poor bisphosphonate absorption hinted at in the lecture?
+    back: Too short a gap between taking the drug and eating.
+    src: { page: 231, quote: "often related to an insufficient time interval between drug intake and food ingestion" }
+    status: unverified
+  - id: dm.L17.129
+    kind: card
+    topic: monitoring
+    front: Which bone marker rises with recombinant PTH (anabolic) therapy?
+    back: P1NP (procollagen type 1 N-terminal propeptide); resorption markers are only useful with antiresorptives.
+    src: { page: 231, quote: "with recombinant PTH (anabolic therapy), markers of P1NP (Procollagen type 1 N-terminal propeptide would increase." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L17.130
+    kind: mcq
+    topic: monitoring
+    stem: A woman started weekly alendronate 4 months ago; DXA is not available for a year. Serum CTX has fallen by only 20%. What is the most likely explanation?
+    options:
+      - Noncompliance or poor absorption, often from eating too soon after the dose
+      - Expected response; CTX should rise on alendronate
+      - She needs a bone formation marker (P1NP) instead
+      - Treatment failure; switch immediately to teriparatide
+      - Measurement error; markers are not used on antiresorptives
+    answer: 0
+    why:
+      - "Correct: a fall of less than 50% points to noncompliance or poor absorption, often from food taken too soon (p231)."
+      - Resorption markers fall on antiresorptives.
+      - P1NP is for anabolic PTH therapy.
+      - Check adherence and absorption first.
+      - Resorption markers are useful precisely with antiresorptive therapy.
+    src: { page: 231, quote: "If the marker has not decreased by 50 percent, noncompliance or poor absorption" }
+    status: unverified
+  # ---------- cases ----------
+  - id: dm.L17.131
+    kind: case
+    topic: clinical
+    stem: A 67-year-old thin white woman, menopause at 44, smoker, turns over in bed and gets sudden mid-back pain. She has lost 3 cm of height.
+    steps:
+      - reveal: X-ray shows an anterior wedge fracture of T12 with prominent vertical trabeculae.
+        question: Before calling this primary osteoporosis, what must you do?
+        options: ["Exclude osteomalacia, malignancy and secondary osteoporosis", Start teriparatide at once, Order quantitative CT every 6 months, Nothing; the X-ray is diagnostic]
+        answer: 0
+        why: "Primary osteoporosis has no characteristic findings; it is a diagnosis of exclusion (p219)."
+      - reveal: CBC, chemistry, TFTs, electrophoresis, 25-OH vitamin D and 24-h urine calcium are normal. DEXA T-score -2.8.
+        question: First-line drug?
+        options: [Alendronate or risedronate, Raloxifene, Nasal calcitonin, Calcitriol]
+        answer: 0
+        why: "Bisphosphonates are first line; alendronate or risedronate preferred (p228)."
+      - reveal: She takes alendronate correctly for 5 years. Her fracture risk is now low.
+        question: Next step?
+        options: [Consider a bisphosphonate holiday for up to 5 years, Continue alendronate indefinitely, Switch to denosumab and stop after a year, Add estrogen plus etidronate]
+        answer: 0
+        why: "Low or moderate risk after 5 years of oral therapy: consider a holiday (p229); long use is linked to atypical femoral fractures and ONJ."
+    src: { page: 229, quote: "Women with low or moderate risk should be considered for a bisphosphonate holiday (temporary discontinuation for up to 5years)" }
+    status: unverified
+  - id: dm.L17.132
+    kind: case
+    topic: duration
+    stem: A 70-year-old woman has been on denosumab for 3 years with good BMD gains. She wants to stop "for a break" like her friend on alendronate.
+    steps:
+      - question: What does the lecture say about a denosumab drug holiday?
+        options: [Not recommended, Recommended after 3 years, Recommended after 5 years, Only if CTX is high]
+        answer: 0
+        why: "A drug holiday is not recommended with denosumab (p229)."
+      - question: Why?
+        options: ["On stopping, vertebral fractures rise and BMD returns to baseline within 24 months", Denosumab causes osteosarcoma after 3 years, Stopping causes hypercalcemia, There is no reason; it is a cost issue]
+        answer: 0
+        why: "BTM rise, BMD falls to pre-treatment level within 24 months and vertebral fractures increase (p229)."
+      - question: When is fracture risk reassessed on denosumab?
+        options: [After 5 to 10 years, After 1 year, After 2 years, Never]
+        answer: 0
+        why: "Reassessment after 5 to 10 years (p229)."
+    src: { page: 229, quote: "Fracture risk reassessment is done after 5 to 10 years." }
+    status: unverified
+  - id: dm.L17.133
+    kind: case
+    topic: drugs
+    stem: A 74-year-old woman has three vertebral fractures in two years despite good adherence to alendronate.
+    steps:
+      - question: Which drug fits a woman at very high fracture risk, per the lecture?
+        options: [Teriparatide or abaloparatide, Nasal calcitonin, Raloxifene, Calcitriol]
+        answer: 0
+        why: "PTH analogues are for women at very high risk, such as severe or multiple vertebral fractures (p230)."
+      - question: For how long?
+        options: [Up to 2 years, Up to 6 years, Lifelong, 3 months]
+        answer: 0
+        why: "Up to 2 years (p230)."
+      - question: After the course?
+        options: [Continue with an antiresorptive to keep the gains, Stop all treatment, Repeat PTH immediately, Calcium alone]
+        answer: 0
+        why: "An antiresorptive maintains the bone density gains (p230)."
+      - question: Which marker would you expect to rise on teriparatide?
+        options: [P1NP, Serum CTX falling by 50%, Urinary NTX falling, Serum osteocalcin disappearing]
+        answer: 0
+        why: "With anabolic PTH therapy, P1NP increases (p231)."
+    src: { page: 230, quote: "Treatment with teriparatide or abaloparatide is for up to 2 years to women at very high risk for fracture" }
+    status: unverified
+  # ---------- p231-232: end-of-lecture questions ----------
+  - id: dm.L17.134
+    kind: mcq
+    topic: duration
+    stem: In postmenopausal women with low or moderate fracture risk, oral bisphosphonate holiday is after
+    options:
+      - 5 years of treatment
+      - 3 years of treatment
+      - 2 years of treatment
+      - None of the above
+    answer: 0
+    why:
+      - "Correct: reassess after 5 years of oral therapy; low or moderate risk gets a holiday (p229)."
+      - Three years is the reassessment time for parenteral therapy.
+      - Two years is the limit for PTH analogues.
+      - The answer is 5 years.
+    src: { page: 231, quote: "In postmenopausal women with low or moderate fracture risk, oral bisphosphonate holiday is after:" }
+    status: unverified
+    tags: [book-question]
+  - id: dm.L17.135
+    kind: mcq
+    topic: monitoring
+    stem: In case of good response to denosumab therapy, the bone turnover marker of resorption (CTX) is
+    options:
+      - Increased
+      - Decreased
+      - Stable
+      - None of the above
+    answer: 1
+    why:
+      - CTX rises when denosumab is stopped, not when it works.
+      - "Correct: denosumab is antiresorptive, so a good response lowers resorption markers (p231 uses a 50% fall as the target)."
+      - A stable CTX suggests no antiresorptive effect.
+      - The answer is decreased.
+    src: { page: 231, quote: "In case of good response to denosumab therapy, the bone turnover marker of resorption (CTX) is:" }
+    status: unverified
+    tags: [book-question]
+  - id: dm.L17.136
+    kind: mcq
+    topic: risk
+    stem: Woman at high risk of osteoporosis is the following except
+    options:
+      - Caucasian
+      - Smoker
+      - Active
+      - Thin habitus
+    answer: 2
+    why:
+      - White race is a major risk factor (p217).
+      - Smoking is a risk factor (p218).
+      - "Correct: a sedentary lifestyle is the risk factor; being active protects (p218, p224)."
+      - Thin habitus is a major risk factor (p217).
+    src: { page: 232, quote: "Woman at high risk of osteoporosis is the following except:" }
+    status: unverified
+    tags: [book-question]
+  - id: dm.L17.137
+    kind: essay
+    topic: drugs
+    prompt: Discuss the treatment of postmenopausal osteoporosis.
+    outline:
+      - "Non-drug": ["Calcium 500-1000 mg/day supplement (total about 1500 mg) and vitamin D 800 IU", "Weight-bearing exercise 30 min three times a week", "Stop smoking; avoid drugs that cause bone loss"]
+      - "Who to treat": ["NOF: T below -2.0, or below -1.5 with risk factors (Europe: -2.5)"]
+      - "Drugs": ["Bisphosphonates first line (alendronate, risedronate); IV ibandronate or ZA", "Raloxifene if bisphosphonates not tolerated; denosumab if intolerant or unresponsive", "PTH analogues up to 2 years for very high risk, then an antiresorptive", "Calcitonin, calcitriol, combinations: limited roles"]
+      - "Duration and monitoring": ["Reassess at 5 years oral, 3 years parenteral; holiday if low or moderate risk; no denosumab holiday", "DXA at 1 year; or CTX/NTX at 3-6 months (expect 50% fall)"]
+    src: { page: 228, quote: "We recommend bisphosphonates as first-line therapy for postmenopausal osteoporosis." }
+    status: unverified

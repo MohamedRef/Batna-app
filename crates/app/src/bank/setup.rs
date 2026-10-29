@@ -5,6 +5,7 @@ use std::collections::BTreeSet;
 
 use batna_core::exam::{self, Filter, MOCK_SIZE, Mode, Only};
 use dioxus::prelude::*;
+use serde::{Deserialize, Serialize};
 
 use super::{
     HISTORY, PAUSED, date, lecture_title, minutes, now_ms, resume, short_lecture_title, start,
@@ -13,33 +14,177 @@ use super::{
 use crate::content::Library;
 use crate::content::lecture_code;
 use crate::i18n::bank as tx;
-use crate::i18n::count::{MINUTE, QUESTION, count as counted};
+use crate::i18n::count::{LECTURE, MINUTE, QUESTION, TOPIC, count as counted};
 
-/// The filters stay put between papers.
+/// The filters stay put between papers, and across launches (`SETUP_KEY`).
 static FILTER: GlobalSignal<Filter> = Signal::global(Filter::default);
 static COUNT: GlobalSignal<usize> = Signal::global(|| 20);
 static MOCK_COUNT: GlobalSignal<usize> = Signal::global(|| MOCK_SIZE);
+/// Practice with the explanation, practice against the clock, or a mock.
+static MODE: GlobalSignal<Mode> = Signal::global(|| Mode::Tutor);
+/// Whether the lecture, topic and tag filters are open.
+static ADVANCED: GlobalSignal<bool> = Signal::global(|| false);
+static RESTORED: GlobalSignal<bool> = Signal::global(|| false);
+
+/// The last scope, count and mode, kept on this device: the bank opens the
+/// way he left it.
+const SETUP_KEY: &str = "bank.setup";
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+struct Saved {
+    #[serde(default = "tutor")]
+    mode: Mode,
+    #[serde(default)]
+    filter: Filter,
+    #[serde(default = "twenty")]
+    count: usize,
+    #[serde(default = "mock_size")]
+    mock_count: usize,
+    #[serde(default)]
+    advanced: bool,
+}
+
+fn tutor() -> Mode {
+    Mode::Tutor
+}
+fn twenty() -> usize {
+    20
+}
+fn mock_size() -> usize {
+    MOCK_SIZE
+}
+
+impl Saved {
+    fn now() -> Self {
+        Saved {
+            mode: *MODE.peek(),
+            filter: FILTER.peek().clone(),
+            count: *COUNT.peek(),
+            mock_count: *MOCK_COUNT.peek(),
+            advanced: *ADVANCED.peek(),
+        }
+    }
+
+    /// Drop lectures, topics and tags the content no longer has, and counts
+    /// the screen doesn't offer, so an old scope never hides every question.
+    fn pruned(mut self, pool: &[exam::Mcq]) -> Self {
+        let lectures: BTreeSet<&str> = pool.iter().map(|q| q.lecture).collect();
+        let topics: BTreeSet<(&str, &str)> = pool.iter().filter_map(|q| Some((q.lecture, q.topic?))).collect();
+        let tags: BTreeSet<&str> = pool.iter().flat_map(|q| q.tags.iter().map(String::as_str)).collect();
+        self.filter.lectures.retain(|l| lectures.contains(l.as_str()));
+        self.filter.topics.retain(|(l, t)| topics.contains(&(l.as_str(), t.as_str())));
+        self.filter.tags.retain(|t| tags.contains(t.as_str()));
+        if !COUNTS.contains(&self.count) {
+            self.count = twenty();
+        }
+        if !MOCK_COUNTS.contains(&self.mock_count) {
+            self.mock_count = mock_size();
+        }
+        self
+    }
+}
+
+/// Once per launch: the scope and mode he used last.
+fn restore(pool: &[exam::Mcq]) {
+    if *RESTORED.peek() {
+        return;
+    }
+    *RESTORED.write() = true;
+    let Some(saved) = crate::store::shared().local_setting::<Saved>(SETUP_KEY) else { return };
+    let saved = saved.pruned(pool);
+    *MODE.write() = saved.mode;
+    *FILTER.write() = saved.filter;
+    *COUNT.write() = saved.count;
+    *MOCK_COUNT.write() = saved.mock_count;
+    *ADVANCED.write() = saved.advanced;
+}
 
 /// Narrows the filters to one lecture, or one of its topics (a lecture
-/// page's "questions", a weak topic after a paper).
+/// page's "questions", a weak topic after a paper), as practice.
 pub fn focus(lecture: &str, topic: Option<String>) {
     *FILTER.write() = Filter {
         lectures: BTreeSet::from([lecture.to_string()]),
         topics: topic.into_iter().map(|t| (lecture.to_string(), t)).collect(),
         ..Filter::default()
     };
+    if *MODE.peek() == Mode::Mock {
+        *MODE.write() = Mode::Tutor;
+    }
 }
 
 const COUNTS: [usize; 4] = [10, 20, 40, usize::MAX];
 const MOCK_COUNTS: [usize; 4] = [20, 40, 60, 100];
 const TAGS: [(&str, &str); 3] =
     [("high-yield", tx::TAG_HIGH_YIELD), ("book-question", tx::TAG_BOOK), ("numbers", tx::TAG_NUMBERS)];
+const MODES: [(Mode, &str, &str); 3] = [
+    (Mode::Tutor, tx::MODE_TUTOR_NAME, tx::MODE_TUTOR_HINT),
+    (Mode::Timed, tx::MODE_TIMED_NAME, tx::MODE_TIMED_HINT),
+    (Mode::Mock, tx::MODE_MOCK_NAME, tx::MODE_MOCK_HINT),
+];
+
+/// Why a scope has no questions, so the empty state can say it and offer
+/// the one change that brings questions back.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+enum Empty {
+    /// Every question in scope was right last time.
+    AllRight,
+    /// No question of the chosen kinds in scope.
+    Tags,
+    /// The chosen topics have no questions.
+    Topics,
+}
+
+fn why_empty(filter: &Filter, pool: &[exam::Mcq], last: &exam::LastResults) -> Empty {
+    let any = |f: &Filter| pool.iter().any(|q| f.matches(q, last));
+    if filter.only != Only::All && any(&Filter { only: Only::All, ..filter.clone() }) {
+        Empty::AllRight
+    } else if !filter.tags.is_empty() && any(&Filter { tags: BTreeSet::new(), only: Only::All, ..filter.clone() }) {
+        Empty::Tags
+    } else {
+        Empty::Topics
+    }
+}
+
+/// Undo just the restriction that emptied the scope.
+fn widen(reason: Empty) {
+    let mut f = FILTER.write();
+    match reason {
+        Empty::AllRight => f.only = Only::All,
+        Empty::Tags => {
+            f.tags.clear();
+            f.only = Only::All;
+        }
+        Empty::Topics => *f = Filter::default(),
+    }
+}
+
+/// The scope in a few words: its title (English titles flagged `latin`) and
+/// what else narrows it.
+fn scope_title(filter: &Filter, lectures: &[(String, usize)]) -> (String, bool) {
+    match (filter.lectures.len(), filter.topics.len()) {
+        (_, 1) => {
+            let (l, t) = filter.topics.iter().next().expect("one topic");
+            (topic_title(l, t), true)
+        }
+        (_, n) if n > 1 => (counted(n, &TOPIC), false),
+        (1, _) => (short_lecture_title(filter.lectures.iter().next().expect("one lecture")), true),
+        (0, _) if lectures.len() == 1 => (short_lecture_title(&lectures[0].0), true),
+        (0, _) => (tx::ALL_LECTURES.to_string(), false),
+        (n, _) => (counted(n, &LECTURE), false),
+    }
+}
 
 #[component]
 pub fn Setup() -> Element {
     let lib = Library::get();
     let owned = study_lectures();
     let pool = exam::mcqs(&owned);
+    use_hook(|| restore(&pool));
+    // Keep the scope and mode for the next launch whenever they change.
+    use_effect(|| {
+        let _ = (MODE.read(), FILTER.read(), COUNT.read(), MOCK_COUNT.read(), ADVANCED.read());
+        let _ = crate::store::shared().put_local_setting(SETUP_KEY, &Saved::now());
+    });
     if pool.is_empty() {
         return rsx! {
             section { class: "card",
@@ -51,9 +196,12 @@ pub fn Setup() -> Element {
         };
     }
 
+    let mode = *MODE.read();
+    let advanced = *ADVANCED.read() && mode != Mode::Mock;
     let filter = FILTER.read().clone();
     let history = HISTORY.read();
     let selected = filter.select(&pool, &history.last);
+    let empty_reason = selected.is_empty().then(|| why_empty(&filter, &pool, &history.last));
     drop(history);
     let available = selected.len();
     let count = *COUNT.read();
@@ -89,158 +237,247 @@ pub fn Setup() -> Element {
     let topic_prefix = several_lectures && filter.lectures.len() != 1;
     let tags_present: BTreeSet<&str> = pool.iter().flat_map(|q| q.tags.iter().map(String::as_str)).collect();
     let tags: Vec<(&str, &str)> = TAGS.into_iter().filter(|(t, _)| tags_present.contains(t)).collect();
+    // What else narrows the scope, said under its title.
+    let mut narrowing: Vec<&str> =
+        TAGS.iter().filter(|(t, _)| filter.tags.contains(*t)).map(|(_, label)| *label).collect();
+    if filter.only == Only::WrongOrUnseen {
+        narrowing.push(tx::ONLY_WRONG);
+    }
+    let (title, latin) = scope_title(&filter, &lectures);
+    let filtered = filter != Filter::default();
 
-    let start_with = move |mode: Mode| {
+    let start_practice = move |_| {
         let filter = FILTER.read().clone();
         let lectures = study_lectures();
         let pool = exam::mcqs(&lectures);
         let selected = filter.select(&pool, &HISTORY.read().last);
-        start(mode, exam::practice(&selected, *COUNT.read(), now_ms() as u64));
+        start(*MODE.read(), exam::practice(&selected, *COUNT.read(), now_ms() as u64));
     };
-    let start_tutor = start_with;
     let start_mock = move |_| {
         let lectures = study_lectures();
         let pool = exam::mcqs(&lectures);
         start(Mode::Mock, exam::mock(&pool, *MOCK_COUNT.read(), now_ms() as u64));
     };
     let shown = count.min(available);
-    let mock_shown = mock_count.min(lectures.iter().map(|l| l.1).sum());
+    let pool_size = pool.len();
+    let mock_shown = mock_count.min(pool_size);
+    let mode_hint = if mode == Mode::Tutor { tx::PRESET_TUTOR } else { tx::PRESET_TIMED };
 
     rsx! {
-        // Tablet landscape and the Mac: practice filters in the wide column,
-        // the mock exam and past papers beside them.
+        // Tablet landscape and the Mac: the setup in the wide column, past
+        // papers beside it.
         div { class: "tab-cols bank-cols", "data-wide": "main",
-            div { class: "tab-main",
+            div { class: "tab-main bank-setup",
                 Paused {}
-                section { class: "card",
+                header { class: "bank-head",
                     h1 { {tx::TITLE} }
-                    p { class: "muted", {tx::LEAD} }
+                    p { class: "muted small", {tx::LEAD} }
+                }
+                div { class: "segmented bank-modes", role: "radiogroup", "aria-label": tx::MODE_LABEL,
+                    for (m, name, hint) in MODES {
+                        button {
+                            key: "{m:?}",
+                            role: "radio",
+                            "aria-checked": if mode == m { "true" } else { "false" },
+                            onclick: move |_| *MODE.write() = m,
+                            span { {name} }
+                            span { class: "seg-hint", {hint} }
+                        }
+                    }
+                }
 
-                    if several_lectures {
-                        h2 { class: "label", {tx::LECTURES} }
-                        div { class: "chips",
-                            for (id, n) in lectures {
-                                Chip {
-                                    key: "{id}",
-                                    on: filter.lectures.contains(&id),
-                                    onclick: {
-                                        let id = id.clone();
-                                        move |_| {
-                                            let mut f = FILTER.write();
-                                            if !f.lectures.remove(&id) {
-                                                f.lectures.insert(id.clone());
-                                            }
-                                            let keep = f.lectures.clone();
-                                            f.topics.retain(|(l, _)| keep.is_empty() || keep.contains(l));
-                                        }
-                                    },
-                                    title: lecture_title(&id),
-                                    bdi { class: "chip-label", "{lecture_code(&id)} · {short_lecture_title(&id)}" }
-                                    span { class: "count", {tx::questions(n)} }
+                if mode == Mode::Mock {
+                    section { class: "card bank-preset",
+                        span { class: "chip", {tx::MOCK_SCOPE_CHIP} }
+                        h2 { class: "bank-scope", {tx::ALL_LECTURES} }
+                        p { class: "muted small", {tx::MOCK_LEAD} }
+                        div { class: "bank-count",
+                            span { class: "muted small", {tx::COUNT} }
+                            div { class: "chips",
+                                for c in MOCK_COUNTS {
+                                    Chip { key: "{c}", on: mock_count == c, onclick: move |_| *MOCK_COUNT.write() = c, bdi { "{c}" } }
                                 }
                             }
                         }
+                        p { class: "bank-sum",
+                            strong { {counted(mock_shown, &QUESTION)} }
+                            " · " {counted(minutes(exam::time_limit_ms(mock_shown)), &MINUTE)}
+                            span { class: "muted", " · {tx::POOL_OF} " {counted(pool_size, &QUESTION)} }
+                        }
+                        button { class: "btn btn-primary btn-lg bank-go", onclick: start_mock,
+                            {tx::START_MOCK}
+                        }
                     }
-
-                    h2 { class: "label", {tx::TOPICS} }
-                    if topics.is_empty() {
-                        p { class: "muted small", {tx::PICK_LECTURE_FOR_TOPICS} }
-                    } else {
-                        div { class: "chips",
-                            for (lecture, topic) in topics {
-                                Chip {
-                                    key: "{lecture}/{topic}",
-                                    on: filter.topics.contains(&(lecture.clone(), topic.clone())),
-                                    onclick: {
-                                        let key = (lecture.clone(), topic.clone());
-                                        move |_| {
-                                            let mut f = FILTER.write();
-                                            if !f.topics.remove(&key) {
-                                                f.topics.insert(key.clone());
-                                            }
-                                        }
-                                    },
-                                    if topic_prefix {
-                                        bdi { "{lecture_code(&lecture)} · {topic_title(&lecture, &topic)}" }
-                                    } else {
-                                        bdi { {topic_title(&lecture, &topic)} }
+                    p { class: "note bank-scope-note", {tx::MOCK_SCOPE_NOTE} }
+                } else {
+                    section { class: "card bank-preset",
+                        // The scope is what the card shows: tapping it opens
+                        // the lecture, topic and tag choices.
+                        button {
+                            class: "tap tap-plain bank-scope-tap",
+                            "aria-expanded": if advanced { "true" } else { "false" },
+                            "aria-controls": "bank-advanced",
+                            title: tx::CUSTOMISE,
+                            onclick: move |_| { let open = *ADVANCED.peek(); *ADVANCED.write() = !open; },
+                            span { class: "chip", if filtered { {tx::SCOPE_CHOSEN} } else { {tx::SCOPE_ALL} } }
+                            if latin {
+                                bdi { class: "bank-scope", lang: "en", "{title}" }
+                            } else {
+                                span { class: "bank-scope", "{title}" }
+                            }
+                            if !narrowing.is_empty() {
+                                span { class: "muted small", {narrowing.join(" · ")} }
+                            }
+                        }
+                        p { class: "muted small", {mode_hint} }
+                        div { class: "bank-count",
+                            span { class: "muted small", {tx::COUNT} }
+                            div { class: "chips",
+                                for c in COUNTS {
+                                    Chip {
+                                        key: "{c}",
+                                        on: count == c,
+                                        onclick: move |_| *COUNT.write() = c,
+                                        if c == usize::MAX { {tx::ALL} } else { bdi { "{c}" } }
                                     }
                                 }
                             }
                         }
-                    }
-
-                    h2 { class: "label", {tx::TAGS} }
-                    div { class: "chips",
-                        for (tag, label) in tags {
-                            Chip {
-                                key: "{tag}",
-                                on: filter.tags.contains(tag),
-                                onclick: move |_| {
-                                    let mut f = FILTER.write();
-                                    if !f.tags.remove(tag) {
-                                        f.tags.insert(tag.to_string());
+                        if let Some(reason) = empty_reason {
+                            div { class: "note bank-empty", role: "status",
+                                p { strong { {tx::NONE_MATCH} } }
+                                p { class: "small",
+                                    match reason {
+                                        Empty::AllRight => tx::EMPTY_ALL_RIGHT,
+                                        Empty::Tags => tx::EMPTY_TAGS,
+                                        Empty::Topics => tx::EMPTY_TOPICS,
                                     }
-                                },
-                                {label}
+                                }
+                                button { class: "btn btn-tonal", onclick: move |_| widen(reason),
+                                    match reason {
+                                        Empty::AllRight => tx::WIDEN_ALL_RIGHT,
+                                        Empty::Tags => tx::WIDEN_TAGS,
+                                        Empty::Topics => tx::WIDEN_ALL,
+                                    }
+                                }
                             }
-                        }
-                        Chip {
-                            on: filter.only == Only::WrongOrUnseen,
-                            onclick: move |_| {
-                                let mut f = FILTER.write();
-                                f.only = if f.only == Only::All { Only::WrongOrUnseen } else { Only::All };
-                            },
-                            {tx::ONLY_WRONG}
-                        }
-                    }
-
-                    h2 { class: "label", {tx::COUNT} }
-                    div { class: "chips",
-                        for c in COUNTS {
-                            Chip {
-                                key: "{c}",
-                                on: count == c,
-                                onclick: move |_| *COUNT.write() = c,
-                                if c == usize::MAX { {tx::ALL} } else { bdi { "{c}" } }
+                        } else {
+                            p { class: "bank-sum",
+                                strong { {counted(shown, &QUESTION)} }
+                                " · " {tx::ABOUT} " " {counted(minutes(exam::time_limit_ms(shown)), &MINUTE)}
+                                span { class: "muted", " · {tx::POOL_OF} " {counted(available, &QUESTION)} }
+                            }
+                            button { class: "btn btn-primary btn-lg bank-go", "aria-keyshortcuts": "Enter", onclick: start_practice,
+                                if mode == Mode::Tutor { {tx::START_TUTOR} } else { {tx::START_TIMED} }
                             }
                         }
                     }
 
-                    if available == 0 {
-                        p { class: "note", {tx::NONE_MATCH} }
-                    } else {
-                        p { class: "muted small", "{tx::AVAILABLE} " {counted(available, &QUESTION)} }
-                        div { class: "start-row",
-                            button { class: "btn btn-primary start", onclick: move |_| start_tutor(Mode::Tutor),
-                                span { {tx::START_TUTOR} " · " bdi { "{shown}" } }
-                                span { class: "hint", {tx::TUTOR_HINT} }
+                    button {
+                        class: "btn btn-secondary bank-customise",
+                        "aria-expanded": if advanced { "true" } else { "false" },
+                        "aria-controls": "bank-advanced",
+                        onclick: move |_| { let open = *ADVANCED.peek(); *ADVANCED.write() = !open; },
+                        span { aria_hidden: "true", "⚙" }
+                        if advanced { {tx::CUSTOMISE_CLOSE} } else { {tx::CUSTOMISE} }
+                    }
+
+                    if advanced {
+                        section { class: "card bank-advanced", id: "bank-advanced",
+                            if several_lectures {
+                                h2 { class: "label", {tx::LECTURES} }
+                                div { class: "chips",
+                                    for (id, n) in lectures {
+                                        Chip {
+                                            key: "{id}",
+                                            on: filter.lectures.contains(&id),
+                                            onclick: {
+                                                let id = id.clone();
+                                                move |_| {
+                                                    let mut f = FILTER.write();
+                                                    if !f.lectures.remove(&id) {
+                                                        f.lectures.insert(id.clone());
+                                                    }
+                                                    let keep = f.lectures.clone();
+                                                    f.topics.retain(|(l, _)| keep.is_empty() || keep.contains(l));
+                                                }
+                                            },
+                                            title: lecture_title(&id),
+                                            bdi { class: "chip-label", "{lecture_code(&id)} · {short_lecture_title(&id)}" }
+                                            span { class: "count", {tx::questions(n)} }
+                                        }
+                                    }
+                                }
                             }
-                            button { class: "btn btn-secondary start", onclick: move |_| start_with(Mode::Timed),
-                                span { {tx::START_TIMED} " · " {counted(minutes(exam::time_limit_ms(shown)), &MINUTE)} }
-                                span { class: "hint", {tx::TIMED_HINT} }
+
+                            h2 { class: "label", {tx::TOPICS} }
+                            if topics.is_empty() {
+                                p { class: "muted small", {tx::PICK_LECTURE_FOR_TOPICS} }
+                            } else {
+                                div { class: "chips",
+                                    for (lecture, topic) in topics {
+                                        Chip {
+                                            key: "{lecture}/{topic}",
+                                            on: filter.topics.contains(&(lecture.clone(), topic.clone())),
+                                            onclick: {
+                                                let key = (lecture.clone(), topic.clone());
+                                                move |_| {
+                                                    let mut f = FILTER.write();
+                                                    if !f.topics.remove(&key) {
+                                                        f.topics.insert(key.clone());
+                                                    }
+                                                }
+                                            },
+                                            if topic_prefix {
+                                                bdi { "{lecture_code(&lecture)} · {topic_title(&lecture, &topic)}" }
+                                            } else {
+                                                bdi { {topic_title(&lecture, &topic)} }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            h2 { class: "label", {tx::TAGS} }
+                            div { class: "chips",
+                                for (tag, label) in tags {
+                                    Chip {
+                                        key: "{tag}",
+                                        on: filter.tags.contains(tag),
+                                        onclick: move |_| {
+                                            let mut f = FILTER.write();
+                                            if !f.tags.remove(tag) {
+                                                f.tags.insert(tag.to_string());
+                                            }
+                                        },
+                                        {label}
+                                    }
+                                }
+                                Chip {
+                                    on: filter.only == Only::WrongOrUnseen,
+                                    onclick: move |_| {
+                                        let mut f = FILTER.write();
+                                        f.only = if f.only == Only::All { Only::WrongOrUnseen } else { Only::All };
+                                    },
+                                    {tx::ONLY_WRONG}
+                                }
+                            }
+                            if filtered {
+                                button { class: "btn btn-ghost bank-reset", onclick: move |_| *FILTER.write() = Filter::default(),
+                                    {tx::RESET_SCOPE}
+                                }
                             }
                         }
+                    }
+                    p { class: "note bank-scope-note",
+                        span { aria_hidden: "true", "ⓘ " }
+                        "{tx::SCOPE_NOW} "
+                        if latin { bdi { lang: "en", "{title}" } } else { "{title}" }
+                        " · " {counted(available, &QUESTION)}
                     }
                 }
             }
             div { class: "tab-aside tab-sticky",
-                section { class: "card",
-                    h1 { {tx::MOCK_TITLE} }
-                    p { class: "muted", {tx::MOCK_LEAD} }
-                    h2 { class: "label", {tx::COUNT} }
-                    div { class: "chips",
-                        for c in MOCK_COUNTS {
-                            Chip { key: "{c}", on: mock_count == c, onclick: move |_| *MOCK_COUNT.write() = c, bdi { "{c}" } }
-                        }
-                    }
-                    div { class: "start-row",
-                        button { class: "btn btn-primary start", onclick: start_mock,
-                            span { {tx::START_MOCK} " · " {counted(mock_shown, &QUESTION)} }
-                            span { class: "hint", {counted(minutes(exam::time_limit_ms(mock_shown)), &MINUTE)} }
-                        }
-                    }
-                }
                 History {}
             }
         }

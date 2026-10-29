@@ -26,9 +26,45 @@
 
 
 .start-row { display: flex; flex-wrap: wrap; gap: var(--sp-3); margin-block-start: var(--sp-2); }
-/* Start buttons are small cards: a title and a hint line. */
-.start-row .btn.start { flex-direction: column; align-items: flex-start; min-block-size: var(--tap-lg); padding-block: var(--sp-2); border-radius: var(--radius); flex: 1 1 14rem; text-align: start; }
-.start-row .btn.start .hint { font-weight: 400; font-size: var(--fs-sm); opacity: 0.85; }
+
+/* Counts such as 3 / 20 read left to right inside Arabic text. */
+.ltr-count { direction: ltr; unicode-bidi: isolate; font-variant-numeric: tabular-nums; font-family: var(--font-latin); }
+
+/* ---------- setup ---------- */
+/* Cards keep their natural height in the scrolling column. */
+.bank-setup { display: flex; flex-direction: column; gap: var(--sp-4); }
+.bank-setup > * { flex-shrink: 0; }
+.bank-head { display: flex; flex-direction: column; gap: var(--sp-1); }
+.bank-modes > button { padding-block: var(--sp-2); }
+.bank-preset { gap: var(--sp-3); padding: var(--sp-4); }
+.bank-preset > .chip { align-self: flex-start; }
+.bank-scope-tap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--sp-1);
+  inline-size: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+.bank-scope { display: block; font-size: var(--fs-xl); font-weight: 700; line-height: 1.3; overflow-wrap: anywhere; }
+bdi.bank-scope { font-family: var(--font-latin); }
+@media (hover: hover) { .bank-scope-tap:hover .bank-scope { color: var(--accent); } }
+.bank-scope-tap:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: var(--radius); }
+.bank-count { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); flex-wrap: wrap; }
+.bank-sum { background: var(--accent-soft); border-radius: var(--radius); padding: var(--sp-3) var(--sp-4); }
+.bank-sum strong { font-weight: 700; }
+.bank-go { inline-size: 100%; }
+.bank-customise { align-self: stretch; }
+.bank-customise[aria-expanded="true"] { border-color: var(--accent); color: var(--accent); }
+.bank-advanced { gap: var(--sp-2); }
+.bank-reset { align-self: flex-start; }
+.bank-empty { display: flex; flex-direction: column; gap: var(--sp-2); align-items: flex-start; }
+.bank-scope-note { color: var(--text); }
 
 /* ---------- history ---------- */
 .history { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--sp-2); }
@@ -59,7 +95,28 @@
   background: var(--bg);
 }
 .run-head { display: flex; align-items: center; gap: var(--sp-3); }
-.run-head .run-count { font-weight: 700; flex: 1; }
+.run-head .run-count { font-weight: 600; font-size: var(--fs-sm); color: var(--muted); flex: none; }
+.run-leave { flex: none; inline-size: var(--tap); block-size: var(--tap); border: 0; border-radius: 50%; background: transparent; color: var(--text); font-size: 1.1rem; cursor: pointer; }
+@media (hover: hover) { .run-leave:hover { background: var(--accent-soft); } }
+.run-progress { flex: 1; block-size: 6px; border-radius: var(--radius-pill); background: var(--line); overflow: hidden; }
+.run-progress-fill { block-size: 100%; background: var(--accent); border-radius: inherit; transition: inline-size var(--dur) var(--ease); }
+.run-sub { display: flex; align-items: center; gap: var(--sp-2); flex-wrap: wrap; }
+/* The next step sits at the foot of the scroller, above the nav bar, and
+   the last option can always scroll clear of it. */
+.run-foot {
+  position: sticky;
+  inset-block-end: calc(-1 * var(--sp-4));
+  margin-block-end: calc(-1 * var(--sp-4));
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  padding-block: var(--sp-3) var(--sp-4);
+  background: var(--bg);
+  border-block-start: 1px solid var(--line);
+}
+.run-hint { text-align: center; }
+.run-main-action { inline-size: 100%; }
 .run-actions { display: flex; flex-wrap: wrap; gap: var(--sp-2); justify-content: flex-end; }
 .run-actions .btn-primary { min-inline-size: 8rem; }
 
@@ -99,9 +156,11 @@
 
 /* ---------- one question ---------- */
 .q { gap: var(--sp-3); }
-.q-meta { display: flex; flex-wrap: wrap; gap: var(--sp-2); min-inline-size: 0; }
+/* The lecture and topic are a quiet line; the clinical stem leads. */
+.q-meta { display: flex; flex-wrap: wrap; gap: var(--sp-1) var(--sp-2); min-inline-size: 0; }
+.q-meta .chip { font-size: 0.75rem; line-height: 1.7; inline-size: fit-content; max-inline-size: 100%; }
 .q-stem, .q-text, .q-why { overflow-wrap: anywhere; }
-.q-stem { font-family: var(--font-latin); font-size: var(--fs-lg); line-height: 1.55; text-align: start; }
+.q-stem { font-family: var(--font-latin); font-size: calc(var(--fs-lg) * 1.12); font-weight: 600; line-height: 1.5; text-align: start; }
 .q-options { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--sp-2); font-family: var(--font-latin); }
 .q-option {
   inline-size: 100%;
@@ -212,19 +271,8 @@
 }
 .bank-sheet .start-row .btn { flex: 1 1 10rem; }
 
-/* ---------- tablet ---------- */
-/* From 600px the practice Start buttons stay at the foot of the screen
-   while the filters scroll (desk.css .tab-cols puts the mock exam beside
-   them from 840px). */
-@media (min-width: 600px) {
-  .bank-cols .tab-main .start-row {
-    position: sticky;
-    inset-block-end: 0;
-    z-index: 1;
-    background: var(--surface);
-    padding-block: var(--sp-2);
-    border-block-start: 1px solid var(--line);
-    /* Covers the strip of padding under it, so no chip shows below. */
-    box-shadow: 0 var(--sp-6) 0 var(--surface);
-  }
-}
+/* A running paper fills the screen, so its footer sits at the bottom even
+   under a short question. */
+.bank:has(> .bank-run) { min-block-size: 100%; }
+.bank-run { flex: 1 0 auto; }
+.run-foot { margin-block-start: auto; }

@@ -30,6 +30,10 @@ pub mod count {
     pub const MONTH: Noun = Noun { one: "شهر", two: "شهرين", few: "شهور", many: "شهر" };
     pub const QUESTION: Noun =
         Noun { one: "سؤال واحد", two: "سؤالين", few: "أسئلة", many: "سؤال" };
+    pub const LECTURE: Noun =
+        Noun { one: "محاضرة واحدة", two: "محاضرتين", few: "محاضرات", many: "محاضرة" };
+    pub const TOPIC: Noun =
+        Noun { one: "موضوع واحد", two: "موضوعين", few: "مواضيع", many: "موضوع" };
     /// Questions and cards together.
     pub const ITEM: Noun = Noun {
         one: "سؤال واحد", two: "سؤالين", few: "أسئلة وكروت", many: "سؤال وكارت"
@@ -337,7 +341,31 @@ pub mod bank {
     pub const PRACTISE_TOPIC: &str = "اتمرّن على الموضوع ده";
     pub const OPEN_LECTURE: &str = "افتح المحاضرة";
     pub const TITLE: &str = "بنك الأسئلة";
-    pub const LEAD: &str = "اختار المحاضرات والمواضيع، وجاوب بالشرح بعد كل سؤال أو بالوقت زي الامتحان.";
+    pub const LEAD: &str = "سؤال واحد، وفكرة تثبت. اختار طريقتك وابدأ.";
+    pub const MODE_LABEL: &str = "طريقة الحل";
+    pub const MODE_TUTOR_NAME: &str = "تدريب بشرح";
+    pub const MODE_TUTOR_HINT: &str = "الشرح بعد كل سؤال";
+    pub const MODE_TIMED_NAME: &str = "تدريب بالوقت";
+    pub const MODE_TIMED_HINT: &str = "الشرح في الآخر";
+    pub const MODE_MOCK_NAME: &str = "امتحان تجريبي";
+    pub const MODE_MOCK_HINT: &str = "من كل المحاضرات";
+    pub const SCOPE_ALL: &str = "كل الأسئلة";
+    pub const SCOPE_CHOSEN: &str = "النطاق اللي اخترته";
+    pub const MOCK_SCOPE_CHIP: &str = "زي الامتحان";
+    pub const MOCK_SCOPE_NOTE: &str = "الامتحان التجريبي بياخد من كل المحاضرات اللي خلصت، فاختيار المحاضرات والمواضيع مش بيأثر عليه.";
+    pub const ALL_LECTURES: &str = "كل المحاضرات";
+    pub const CUSTOMISE: &str = "خصّص المحاضرات والمواضيع";
+    pub const CUSTOMISE_CLOSE: &str = "اقفل التخصيص";
+    pub const RESET_SCOPE: &str = "رجّع النطاق لكل الأسئلة";
+    pub const SCOPE_NOW: &str = "النطاق دلوقتي:";
+    pub const POOL_OF: &str = "من";
+    pub const ABOUT: &str = "حوالي";
+    pub const EMPTY_ALL_RIGHT: &str = "جاوبت كل أسئلة النطاق ده صح آخر مرة. شغل حلو! شيل «الغلط واللي ما اتشافش بس» لو عايز تعيدها.";
+    pub const EMPTY_TAGS: &str = "مفيش أسئلة من النوع اللي اخترته في المحاضرات والمواضيع دي.";
+    pub const EMPTY_TOPICS: &str = "المواضيع اللي اخترتها لسه مالهاش أسئلة اختيار من متعدد.";
+    pub const WIDEN_ALL_RIGHT: &str = "هات كل أسئلة النطاق";
+    pub const WIDEN_TAGS: &str = "شيل نوع السؤال";
+    pub const WIDEN_ALL: &str = "رجّع لكل الأسئلة";
     pub const EMPTY_TITLE: &str = "لسه مفيش أسئلة اختيار من متعدد";
     pub const EMPTY_BODY: &str = "أول ما محاضرة فيها أسئلة MCQ تخلص، هتلاقيها هنا على طول.";
     pub const LECTURES: &str = "المحاضرات";
@@ -350,12 +378,11 @@ pub mod bank {
     pub const ONLY_WRONG: &str = "الغلط واللي ما اتشافش بس";
     pub const ALL: &str = "الكل";
     pub const COUNT: &str = "عدد الأسئلة";
-    pub const AVAILABLE: &str = "متاح:";
-    pub const NONE_MATCH: &str = "مفيش أسئلة بالاختيارات دي. جرّب توسّع الفلتر.";
-    pub const START_TUTOR: &str = "ابدأ بالشرح";
+    pub const NONE_MATCH: &str = "مفيش أسئلة بالاختيارات دي.";
+    pub const START_TUTOR: &str = "ابدأ التدريب";
     pub const START_TIMED: &str = "ابدأ بالوقت";
-    pub const TUTOR_HINT: &str = "الشرح وصفحة الكتاب بعد كل سؤال";
-    pub const TIMED_HINT: &str = "دقيقة وخُمس للسؤال، والمراجعة في الآخر";
+    pub const PRESET_TUTOR: &str = "تختار، وبعدين تصحّح، فيظهر الشرح وصفحة الكتاب، وتعدّي لما تفهم.";
+    pub const PRESET_TIMED: &str = "زي الامتحان: الوقت شغّال، تقدر تعلّم على سؤال وترجعله، والشرح كله في الآخر.";
     pub const MOCK_TITLE: &str = "امتحان تجريبي";
     pub const MOCK_LEAD: &str =
         "أسئلة متلخبطة من كل المحاضرات اللي خلصت، بالوقت، ودرجتك لكل محاضرة ولكل موضوع.";
@@ -368,6 +395,8 @@ pub mod bank {
     pub const OF: &str = "من";
     pub const NEXT: &str = "التالي";
     pub const PREV: &str = "السابق";
+    pub const CHECK: &str = "صحّح الإجابة";
+    pub const PICK_FIRST: &str = "اختار إجابتك الأول، وبعدين صحّحها.";
     pub const FLAG: &str = "علّم للمراجعة";
     pub const FLAGGED: &str = "متعلّم";
     pub const SUBMIT: &str = "سلّم";
@@ -632,6 +661,17 @@ pub mod oral {
     pub const EMPTY: &str = "لسه مفيش محاضرات جاهزة فيها أسئلة شفوي. أول ما محاضرة تخلص هتلاقيها هنا.";
     pub const NO_VOICE: &str = "مفيش صوت إنجليزي شغّال على الجهاز ده، فالأسئلة هتظهر مكتوبة بس. على أندرويد: الإعدادات ← تحويل النص إلى كلام ← نزّل صوت English.";
 
+    pub const HONEST: &str = "مفيش تسجيل لصوتك ولا تصحيح آلي: انت اللي بتقارن إجابتك بنقاط الكتاب وتقيّم نفسك.";
+    pub const PAUSED: &str = "المؤقت واقف";
+    pub const PAUSE_TIMER: &str = "وقّف المؤقت";
+    pub const RESUME_TIMER: &str = "كمّل المؤقت";
+    pub const RESTART_TIMER: &str = "عيد من الأول";
+    pub const NOTES: &str = "اكتب نقاط إجابتك (اختياري)";
+    pub const NOTES_HINT: &str = "ابدأ بالمراحل الرئيسية…";
+    pub const YOUR_NOTES: &str = "نقاطك";
+    pub const TICK_HINT: &str = "علّم على النقط اللي قلتها.";
+    pub const SAID: &str = "قلت";
+    pub const ENOUGH: &str = "كفاية للنجاح";
     pub const LISTEN: &str = "اسمع السؤال";
     pub const THINKING: &str = "فكّر وجاوب بصوتك";
     pub const WHAT_ELSE: &str = "وإيه كمان؟";
@@ -671,8 +711,14 @@ pub mod case {
     pub const EMPTY_CALC: &str = "لسه مفيش تمارين بالأرقام. هتظهر هنا مع المحاضرات، ولحد ده جرّب الحاسبات.";
     pub const STEPS: &str = "خطوات";
     pub const STEP: &str = "خطوة";
-    pub const OF: &str = "من";
     pub const NEW_DATA: &str = "بيانات جديدة";
+    pub const STEPS_LABEL: &str = "خطوات الحالة";
+    pub const NOW: &str = "دلوقتي";
+    pub const KNOWN: &str = "المعطيات لحد دلوقتي";
+    pub const CHECK: &str = "صحّح";
+    pub const PICK_FIRST: &str = "اختار قرارك الأول، وبعدين صحّحه.";
+    pub const RECAP: &str = "مراجعة تفكيرك";
+    pub const YOURS: &str = "إجابتك:";
     pub const RIGHT: &str = "صح، برافو.";
     pub const WRONG: &str = "مش دي. الإجابة الصح متعلّمة.";
     pub const CORRECT_WAS: &str = "الصح:";

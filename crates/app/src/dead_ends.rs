@@ -33,6 +33,11 @@ const TAPPABLE: &[&str] = &[
     // A book page's "ص N" chip (pagesheet/mod.rs).
     "page",
     "tap-chip",
+    // The bank's scope title opens its filters; a case's stepper jumps to
+    // a step; an oral answer point ticks itself.
+    "bank-scope-tap",
+    "case-stepper-step",
+    "oral-point",
 ];
 
 /// Elements that can be pressed (or, for `div.plan-day`, the plain line of

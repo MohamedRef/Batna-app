@@ -45,9 +45,43 @@
 .case-stem { display: block; font-weight: 600; }
 .case-reveal { border-block-start: 1px solid var(--line); padding-block-start: var(--sp-2); display: flex; flex-direction: column; }
 .case-reveal.new { background: var(--accent-soft); border-radius: var(--radius); border: 0; padding: var(--sp-2) var(--sp-3); }
-.case-question { display: block; font-weight: 600; font-size: var(--fs-lg); }
+.case-question { display: block; font-family: var(--font-latin); font-weight: 600; font-size: calc(var(--fs-lg) * 1.08); line-height: 1.5; }
+.case-stem { font-family: var(--font-latin); line-height: 1.6; }
+.ltr-count { direction: ltr; unicode-bidi: isolate; font-variant-numeric: tabular-nums; font-family: var(--font-latin); }
+
+/* ---------- stepper ---------- */
+.case-stepper { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+.case-stepper-step, .case-stepper-later {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+  min-block-size: var(--tap);
+  min-inline-size: var(--tap);
+  justify-content: center;
+  padding-inline: var(--sp-3);
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-sm);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text);
+}
+.case-stepper-step { cursor: pointer; }
+.case-stepper-step[data-state="now"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); font-weight: 700; }
+.case-stepper-step[data-state="ok"] { border-color: var(--good); color: var(--good); }
+.case-stepper-step[data-state="miss"] { border-color: var(--bad); color: var(--bad); }
+.case-stepper-later { color: var(--muted); border-color: transparent; background: none; }
+.case-stepper-step:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.case-history { scroll-margin-block-start: var(--sp-4); }
+.case-step { scroll-margin-block-start: var(--sp-4); }
+.case-hint { text-align: center; }
+.case-check { inline-size: 100%; }
+
 .options { display: grid; gap: var(--sp-2); }
 .option {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  font-family: var(--font-latin);
   text-align: start;
   border: 1px solid var(--line);
   background: var(--surface);
@@ -57,7 +91,21 @@
   cursor: pointer;
   transition: background var(--dur) var(--ease);
 }
-.option:disabled { cursor: default; }
+.option:disabled { cursor: default; color: var(--text); }
+.option-letter {
+  flex: none;
+  inline-size: 1.75rem;
+  block-size: 1.75rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--bg);
+  font-weight: 700;
+  font-size: var(--fs-sm);
+}
+@media (hover: hover) { .option:not(:disabled):hover { border-color: var(--accent); } }
+.option.selected { background: var(--accent-soft); border-color: var(--accent); font-weight: 600; }
+.option.selected .option-letter { background: var(--accent); color: var(--surface); }
 .option.right { background: var(--good-soft); border-color: var(--good); color: var(--good); font-weight: 600; }
 .option.wrong { background: var(--bad-soft); border-color: var(--bad); color: var(--bad); }
 .option.dim { opacity: 0.6; }
@@ -78,7 +126,8 @@
 .verdict.bad { color: var(--bad); }
 .case-why { display: flex; flex-direction: column; gap: var(--sp-1); background: var(--bg); border-radius: var(--radius); padding: var(--sp-3); }
 .case-score { font-size: var(--fs-xl); font-weight: 700; color: var(--accent); }
-.case-steps-done { margin: 0; padding-inline-start: var(--sp-4); display: grid; gap: var(--sp-2); text-align: start; }
+.case-steps-done { margin: 0; padding-inline-start: var(--sp-4); display: grid; gap: var(--sp-3); text-align: start; }
+.case-steps-done li { display: flex; flex-direction: column; gap: 2px; }
 .case-steps-done p { margin: 0; }
 .case-done-q { font-weight: 600; }
 .case-steps-done .ok .case-done-q span { color: var(--good); }
@@ -145,3 +194,5 @@
 
 /* Chips (book page, unverified) keep their own width inside column boxes. */
 .player :not(.player-meta) > .chip { align-self: flex-start; inline-size: fit-content; }
+/* The recap's English lines read left to right in the Latin face. */
+.case-steps-done [dir="ltr"] { text-align: start; font-family: var(--font-latin); }

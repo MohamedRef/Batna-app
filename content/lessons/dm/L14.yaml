@@ -1,0 +1,358 @@
+schema: batna.lesson/v1
+lecture: dm.L14
+lessons:
+  # ------------------------------------------------------------------
+  - id: dm.L14.lesson1
+    title: "السكر وقع: مين بيلحقه؟"
+    hook: "خمس هرمونات بتجري تنقذ السكر لما يوقع. ولو ما لحقوش، الدرجة بتتحدد بمين اللي بيلحقك."
+    minutes: 8
+    pages: [179, 180]
+    topics: [basics, causes]
+    goals:
+      - "تعدّ الـ counter-regulatory hormones"
+      - "تعرف تعريف الكتاب ودرجاته الـ 3"
+      - "تقسم الأسباب fasting و postprandial"
+    status: unverified
+    steps:
+      - kind: mnemonic
+        page: 179
+        quote: "Counter-regulatory hormones"
+        word: "GTECG"
+        hook: "الـ counter-regulatory hormones اللي بترفع السكر:"
+        parts:
+          - { key: "G", text: "GH" }
+          - { key: "T", text: "Thyroid hormones" }
+          - { key: "E", text: "Epinephrine و norepinephrine" }
+          - { key: "C", text: "Cortisol" }
+          - { key: "G", text: "Glucagon" }
+      - kind: aside
+        tone: analogy
+        page: 179
+        quote: "Counter-regulatory hormones"
+        text: |
+          الإنسولين لوحده هو اللي بينزّل السكر، وخمس **counter-regulatory hormones** ضده بيرفعوه. زي فريق كورة فيه مهاجم واحد وخمس مدافعين: لو المهاجم شاط جامد (insulinoma أو جرعة زيادة)، أو مدافع غاب (Addison، hypopituitarism)، السكر بيدخل جون.
+      - kind: explain
+        page: 179
+        quote: "Blood glucose levels below 70 mg/dL are accompanied by adrenergic or gastrointestinal manifestations."
+        title: "التعريف والصورة"
+        text: |
+          الـ ==hypoglycemia== عند الكتاب = سكر **أقل من 70 mg/dL** ومعاه أعراض **adrenergic** أو **GIT**.
+
+          - **GIT**: epigastric pain، nausea و vomiting.
+          - **Adrenergic**: palpitation، sweating، tremors، numbness، ولحد الـ coma.
+      - kind: figure
+        page: 179
+        quote: "Grade III: Severe, go to the hospital to receive glucose infusion and glucagon."
+        title: "التلات درجات"
+        alt: "Three stacked boxes: grade I mild, the patient helps himself; grade II moderate, needs someone's help to reach glucose; grade III severe, hospital glucose infusion and glucagon."
+        caption: "الدرجة بتتحدد بمين اللي بيعالج: انت، حد جنبك، ولا المستشفى."
+        svg: |
+          <svg viewBox="0 0 330 230" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="10" width="310" height="62" rx="8" class="fg-good"/>
+            <text x="20" y="34" class="t-b">Grade I · Mild</text>
+            <text x="20" y="56" class="t-sm">Helps himself (takes glucose)</text>
+            <rect x="10" y="84" width="310" height="62" rx="8" class="fg-acc"/>
+            <text x="20" y="108" class="t-b">Grade II · Moderate</text>
+            <text x="20" y="130" class="t-sm">Needs help to reach the glucose</text>
+            <rect x="10" y="158" width="310" height="62" rx="8" class="fg-bad"/>
+            <text x="20" y="182" class="t-b">Grade III · Severe</text>
+            <text x="20" y="204" class="t-sm">Hospital: glucose infusion + glucagon</text>
+          </svg>
+      - kind: update
+        ref: "ADA Standards of Care 2025, section 6"
+        text: "الـ ADA بيقسم بالرقم: level 1 أقل من 70، level 2 أقل من 54، و level 3 حدث شديد محتاج مساعدة. في الامتحان: درجات الكتاب."
+      - kind: check
+        page: 179
+        quote: "Grade II: Moderate needs help to reach the glucose."
+        question: "A patient with T1DM is confused and his wife has to give him juice. Book grade?"
+        options:
+          - "Grade II (moderate)"
+          - "Grade I (mild)"
+          - "Grade III (severe)"
+          - "Not hypoglycemia"
+        answer: 0
+        why:
+          - "صح: محتاج حد يساعده يوصل للجلوكوز."
+          - "الـ mild لما يلحق نفسه بنفسه."
+          - "الـ severe = مستشفى، glucose infusion و glucagon."
+          - "فيه أعراض والسكر واطي."
+      - kind: figure
+        page: 180
+        quote: "Common Causes of Hypoglycemia in Adults"
+        title: "خريطة الأسباب"
+        alt: "A tree: fasting hypoglycaemia splits into primary (hyperinsulinism from B-cell tumour or surreptitious insulin or OHA, and non-insulin-secreting tumour) and secondary (endocrine: hypopituitarism, Addison, myxoedema; liver: acute alcoholism, liver failure; renal failure). Postprandial splits into early (post-gastrectomy, vagal tone) and late (occult DM, counter-regulatory deficiency, idiopathic, alcohol, immunopathogenic)."
+        caption: "صايم ولا واكل؟ ده أول سؤال. وبعدين: الإنسولين عالي (primary) ولا عضو تاني بايظ (secondary)؟"
+        svg: |
+          <svg viewBox="0 0 330 404" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="10" width="310" height="28" rx="6" class="fg-ink"/>
+            <text x="165" y="29" text-anchor="middle" class="t-b">Fasting hypoglycemia</text>
+            <rect x="10" y="46" width="310" height="66" rx="6" class="fg-acc"/>
+            <text x="20" y="66" class="t-sm t-b">Primary</text>
+            <text x="20" y="84" class="t-sm">Hyperinsulinism: B-cell tumor,</text>
+            <text x="20" y="102" class="t-sm">surreptitious insulin/OHA · non-insulin tumor</text>
+            <rect x="10" y="120" width="310" height="84" rx="6" class="fg-box"/>
+            <text x="20" y="140" class="t-sm t-b">Secondary</text>
+            <text x="20" y="158" class="t-sm">Endocrine: hypopituitarism, Addison, myxedema</text>
+            <text x="20" y="176" class="t-sm">Liver: acute alcoholism, liver failure</text>
+            <text x="20" y="194" class="t-sm">Renal failure</text>
+            <rect x="10" y="222" width="310" height="28" rx="6" class="fg-ink"/>
+            <text x="165" y="241" text-anchor="middle" class="t-b">Postprandial hypoglycemia</text>
+            <rect x="10" y="258" width="310" height="48" rx="6" class="fg-acc"/>
+            <text x="20" y="278" class="t-sm t-b">Early (alimentary)</text>
+            <text x="20" y="296" class="t-sm">Post gastrectomy · functional vagal tone</text>
+            <rect x="10" y="314" width="310" height="80" rx="6" class="fg-box"/>
+            <text x="20" y="334" class="t-sm t-b">Late</text>
+            <text x="20" y="352" class="t-sm">Occult DM · counter-regulatory deficiency</text>
+            <text x="20" y="370" class="t-sm">Idiopathic · alcohol</text>
+            <text x="20" y="388" class="t-sm">Immunopathogenic</text>
+          </svg>
+      - kind: sort
+        page: 180
+        quote: "Endocrine (hypopituitrism – Addison – Myxedema)"
+        prompt: "صنّف كل سبب:"
+        bins: ["Fasting, primary", "Fasting, secondary", "Postprandial"]
+        cards:
+          - { text: "Insulinoma", bin: 0 }
+          - { text: "Surreptitious insulin", bin: 0 }
+          - { text: "Addison's disease", bin: 1 }
+          - { text: "Liver failure", bin: 1 }
+          - { text: "Renal failure", bin: 1 }
+          - { text: "Post gastrectomy", bin: 2 }
+          - { text: "Occult DM", bin: 2 }
+        why: "الـ primary = hyperinsulinism أو tumor. الـ secondary = غدد، كبد، كلى. والـ gastrectomy (early) والـ occult DM (late) postprandial."
+      - kind: try
+        items: [dm.L14.001, dm.L14.002, dm.L14.004, dm.L14.007, dm.L14.010]
+    recap:
+      - "Counter-regulation: GH، thyroid، epinephrine/NE، cortisol، glucagon."
+      - "Hypoglycemia (الكتاب) = <70 mg/dL مع أعراض adrenergic أو GIT."
+      - "Grade I يلحق نفسه، II محتاج مساعدة، III مستشفى."
+      - "Fasting: primary (hyperinsulinism) و secondary (غدد، كبد، كلى). Postprandial: early و late."
+    practice: [dm.L14.001, dm.L14.002, dm.L14.003, dm.L14.004, dm.L14.005, dm.L14.006, dm.L14.007, dm.L14.008, dm.L14.009, dm.L14.010, dm.L14.011]
+  # ------------------------------------------------------------------
+  - id: dm.L14.lesson2
+    title: "بعد الأكل، بعد الكاس، وبالحقنة"
+    hook: "تلات أنواع hypoglycemia ملهاش علاقة بورم: معدة مستعجلة، كبد سكران، وحقنة متخبية."
+    minutes: 7
+    pages: [180, 183]
+    topics: [reactive, autoimmune]
+    goals:
+      - "تشرح ميكانيزم الـ alimentary hypoglycemia وعلاجها"
+      - "تشرح الـ alcohol-induced hypoglycemia"
+      - "تشخّص الـ factitious و autoimmune hypoglycemia"
+    status: unverified
+    steps:
+      - kind: figure
+        page: 181
+        quote: "Rapid discharge of ingested CHO into the small bowel followed by rapid glucose absorption and hyperinsulinism"
+        title: "ليه السكر بيوقع بعد الأكل؟"
+        alt: "A vertical chain: gastric surgery leads to rapid discharge of carbohydrate into the small bowel, then rapid glucose absorption and a glucose spike, then excessive insulin release, then hypoglycaemia 1-2 hours later. Treatment: frequent small meals."
+        caption: "المعدة بتفضي بسرعة، السكر يطلع فجأة، الإنسولين يرد بزيادة، والسكر يقع."
+        svg: |
+          <svg viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L14a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-acc"/></marker></defs>
+            <rect x="40" y="10" width="250" height="40" rx="8" class="fg-box"/>
+            <text x="165" y="35" text-anchor="middle" class="t-sm">Gastric surgery (fast emptying)</text>
+            <path d="M165 50v16" class="fg-arrow-acc" marker-end="url(#L14a)"/>
+            <rect x="40" y="70" width="250" height="40" rx="8" class="fg-box"/>
+            <text x="165" y="95" text-anchor="middle" class="t-sm">CHO rushes into small bowel</text>
+            <path d="M165 110v16" class="fg-arrow-acc" marker-end="url(#L14a)"/>
+            <rect x="40" y="130" width="250" height="40" rx="8" class="fg-box"/>
+            <text x="165" y="155" text-anchor="middle" class="t-sm">Rapid absorption: glucose spike</text>
+            <path d="M165 170v16" class="fg-arrow-acc" marker-end="url(#L14a)"/>
+            <rect x="40" y="190" width="250" height="40" rx="8" class="fg-acc"/>
+            <text x="165" y="215" text-anchor="middle" class="t-sm t-b">Hyperinsulinism</text>
+            <path d="M165 230v16" class="fg-arrow-acc" marker-end="url(#L14a)"/>
+            <rect x="40" y="250" width="250" height="40" rx="8" class="fg-bad"/>
+            <text x="165" y="275" text-anchor="middle" class="t-sm t-b">Early reactive hypoglycemia</text>
+            <text x="165" y="318" text-anchor="middle" class="t-sm t-good">Rx: frequent small meals</text>
+          </svg>
+      - kind: explain
+        page: 181
+        quote: "It might be functional: as it may represent over activity of parasympathetic nervous system"
+        title: "الـ early من غير عملية"
+        text: |
+          ممكن تكون ==functional==: **parasympathetic overactivity** (vagal tone). وممكن يكون فيه **defective counter-regulation** (GH، cortisol، glucagon).
+
+          والعلاج في الـ alimentary: ==frequent feeding== بوجبات صغيرة.
+      - kind: reveal
+        page: 181
+        quote: "Due to hepatic glycogen depletion combined with alcohol mediated inhibition of gluconeogenesis"
+        prompt: "واحد شرب كتير وما أكلش من امبارح. ليه سكره يوقع؟"
+        answer: "ضربتين على الكبد: الـ ==glycogen== خلص من الجوع، والـ alcohol ==بيمنع الـ gluconeogenesis==. فمفيش مصدر للسكر. وبعدها بييجي **gastritis** و **vomiting**."
+      - kind: aside
+        tone: joke
+        page: 181
+        quote: "Due to hepatic glycogen depletion combined with alcohol mediated inhibition of gluconeogenesis"
+        text: |
+          الكبد في الحالة دي زي مخبز المخزن بتاعه فاضي (glycogen) والفرّان مشغول في حاجة تانية خالص (بيكسّر الـ alcohol). فالزباين (المخ) يقفوا في الطابور ومفيش عيش.
+      - kind: table
+        page: 183
+        quote: "Suppressed C-peptide"
+        title: "Factitious: إزاي تمسكها؟"
+        columns: ["التحليل", "النتيجة"]
+        rows:
+          - ["Immunoreactive insulin", "High"]
+          - ["C-peptide", "Suppressed"]
+          - ["Insulin antibodies", "High"]
+        hide: [[1, 1], [2, 1]]
+      - kind: reveal
+        page: 183
+        quote: "Suppressed C-peptide"
+        prompt: "ليه الـ C-peptide بيبقى suppressed في الـ factitious insulin، وعالي في الـ insulinoma؟"
+        answer: "البنكرياس بيقطع الـ proinsulin لـ ==insulin + C-peptide== بنفس العدد. الإنسولين اللي في الحقنة ملوش C-peptide، والإنسولين العالي بيكبس على البنكرياس فيقل. الـ insulinoma بيفرز الاتنين."
+      - kind: check
+        page: 183
+        quote: "High immuno-reactive insulin"
+        question: "Glucose 38 mg/dL, insulin very high, C-peptide suppressed, insulin antibodies high. Diagnosis?"
+        options:
+          - "Factitious hypoglycemia (injected insulin)"
+          - "Insulinoma"
+          - "Alcohol-induced hypoglycemia"
+          - "Addison's disease"
+        answer: 0
+        why:
+          - "صح: الـ triad بتاع الـ factitious."
+          - "الـ insulinoma الـ C-peptide بتاعه عالي."
+          - "الـ alcohol الإنسولين واطي."
+          - "الـ Addison الإنسولين مش عالي."
+      - kind: match
+        page: 180
+        quote: "Idiopathic anti-insulin antibodies (release bound insulin)"
+        prompt: "وصّل كل نوع immunopathogenic بالميكانيزم:"
+        pairs:
+          - ["Anti-insulin antibodies", "Bind insulin, then release it"]
+          - ["Insulin-receptor antibodies", "Act as agonists"]
+          - ["Pentamidine", "Drug-induced hypoglycemia"]
+        why: "الـ anti-insulin antibodies بتحجز الإنسولين وتسيبه بعدين، والـ receptor antibodies بتشغّل الـ receptor كأنها إنسولين، والـ pentamidine دوا."
+      - kind: try
+        items: [dm.L14.012, dm.L14.016, dm.L14.018, dm.L14.036, dm.L14.043]
+    recap:
+      - "Alimentary: تفريغ سريع → امتصاص سريع → hyperinsulinism. العلاج وجبات صغيرة متكررة."
+      - "Alcohol: glycogen خلص + gluconeogenesis متوقف، وبعده gastritis و vomiting."
+      - "Factitious: insulin عالي، C-peptide واطي، antibodies عالية."
+      - "Autoimmune: anti-insulin Ab، receptor Ab (agonist)، pentamidine."
+    practice: [dm.L14.012, dm.L14.013, dm.L14.014, dm.L14.015, dm.L14.016, dm.L14.017, dm.L14.018, dm.L14.019, dm.L14.036, dm.L14.037, dm.L14.038, dm.L14.040, dm.L14.043]
+  # ------------------------------------------------------------------
+  - id: dm.L14.lesson3
+    title: "الـ Insulinoma: الورم اللي بيصحى بدري"
+    hook: "مريض بيصحى متلخبط وبيتكلم تقيل، وبعد كوباية شاي بسكر يبقى زي الفل. ده Whipple بيخبط على الباب."
+    minutes: 9
+    pages: [181, 184]
+    topics: [insulinoma, other-tumors]
+    goals:
+      - "تحفظ Whipple's triad بصيغة الكتاب"
+      - "تعرف ليه الـ adrenergic symptoms ممكن تغيب"
+      - "ترتّب التشخيص والتحديد والعلاج"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 181
+        quote: "90% benign adenoma of the islet of Langerhans (single)"
+        title: "الورم نفسه"
+        text: |
+          الـ ==insulinoma== = B-cell tumor في الـ islets of Langerhans.
+
+          - **90%** benign adenoma ==single==.
+          - لو **multiple**: الكتاب بيقول malignant.
+          - مرتبط بالـ **MEN**.
+          - الأعراض: **subacute أو chronic neuroglycopenia**.
+      - kind: mnemonic
+        page: 182
+        quote: "FBG: less than 40 mg/dl"
+        word: "SLR"
+        hook: "Whipple's triad زي ما الكتاب كاتبها:"
+        parts:
+          - { key: "S", text: "Symptoms: history of hypoglycemic symptoms" }
+          - { key: "L", text: "Low FBG: less than 40 mg/dL" }
+          - { key: "R", text: "Relief: تختفي فورًا بعد الجلوكوز" }
+      - kind: update
+        ref: "Endocrine Society Clinical Practice Guideline on adult hypoglycemic disorders 2009"
+        text: "الـ Endocrine Society بتعرّف الـ triad بأعراض + سكر واطي متقاس وقتها + تحسن بالجلوكوز، وبتستخدم <55 mg/dL. في الامتحان: رقم الكتاب 40."
+      - kind: explain
+        page: 182
+        quote: "Symptoms develop early in the morning or after a missed meal, after exercise"
+        title: "إمتى وإزاي؟"
+        text: |
+          الأعراض ==الصبح بدري== (early in the morning)، أو بعد وجبة فايتة (missed meal)، أو بعد رياضة (exercise) (يعني لما الأكل يقل والاستهلاك يزيد).
+
+          - Blurred vision و diplopia و headache.
+          - Slurred speech و weakness.
+          - Personality و mental changes، لحد الـ coma.
+          - والـ **sweating و palpitation** ممكن ==ما يحصلوش==.
+      - kind: reveal
+        page: 182
+        quote: "Patient adapts to hypoglycemia"
+        prompt: "ليه مريض الـ insulinoma ممكن ما يعرقش ولا قلبه يدق وسكره 35؟"
+        answer: "الـ ==hypoglycemic unawareness== شائعة فيه: المريض ==بيتعود== على السكر الواطي من كتر ما بيتكرر، فالـ adrenergic alarm بيبطل يرن. وده اللي بيخلي الأعراض تبان neuroglycopenic بس (لخبطة، diplopia)."
+      - kind: aside
+        tone: trap
+        page: 182
+        quote: "Sweating & palpation may not occur"
+        text: |
+          الكتاب كاتب "palpation" وهو يقصد ==palpitation==. وما تستناش العرق عشان تفكر في insulinoma: غيابه جزء من الصورة.
+      - kind: order
+        page: 182
+        quote: "Prolonged fasting under hospital supervision"
+        prompt: "رتّب الشغل على insulinoma:"
+        steps:
+          - "Prolonged fasting تحت إشراف في المستشفى"
+          - "Insulin عالي وقت الـ hypoglycemia (ومعاه proinsulin)"
+          - "Localization: MRI أو EUS"
+          - "Surgery"
+        why: "الأول تثبت الـ hypoglycemia، بعدين تثبت إن سببها insulin، بعدين تدور على الورم، وبعدين تشيله."
+      - kind: table
+        page: 182
+        quote: "Stimulation test: Glucagon is better than tolbutamide"
+        title: "التشخيص والتحديد"
+        columns: ["البند", "الكتاب بيقول"]
+        rows:
+          - ["Key lab", "Insulin عالي وقت الـ hypo"]
+          - ["Stimulation test", "Glucagon أحسن من tolbutamide"]
+          - ["Imaging", "MRI (يبان الـ liver mets)"]
+          - ["MRI vs arteriography", "MRI أحسن"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: mnemonic
+        page: 183
+        quote: "Diazoxide 300-600 + diuretic therapy"
+        word: "SDDOS"
+        hook: "العلاج:"
+        parts:
+          - { key: "S", text: "Surgery" }
+          - { key: "D", text: "Diet" }
+          - { key: "D", text: "Diazoxide 300-600 + diuretic" }
+          - { key: "O", text: "Octreotide" }
+          - { key: "S", text: "Streptozotocin" }
+      - kind: explain
+        page: 183
+        quote: "Hypoglycemia due to an extra-pancreatic tumor"
+        title: "أورام برا البنكرياس"
+        text: |
+          الـ **extra-pancreatic tumor** اللي بيعمل hypoglycemia ==نادر==، والـ prognosis وحش:
+
+          - **Retroperitoneal sarcoma**
+          - **Hepatocellular carcinoma**
+          - **Adrenocortical carcinoma**
+      - kind: check
+        page: 182
+        quote: "MRI (hepatic metastasis)"
+        question: "Insulinoma is confirmed biochemically. Which imaging does the lecture prefer before surgery?"
+        options:
+          - "MRI, which also shows hepatic metastases"
+          - "Arteriography"
+          - "Plain abdominal X-ray"
+          - "Barium meal"
+        answer: 0
+        why:
+          - "صح: MRI أحسن من الـ arteriography، ومعاه الـ EUS."
+          - "الكتاب بيقول الـ MRI أحسن منه."
+          - "مش بيبيّن ورم صغير في البنكرياس."
+          - "مش أداة لتحديد الـ B-cell tumor."
+      - kind: try
+        items: [dm.L14.020, dm.L14.023, dm.L14.026, dm.L14.031, dm.L14.041]
+    recap:
+      - "Insulinoma: 90% benign single، multiple = malignant، مع MEN."
+      - "Whipple (الكتاب): أعراض، FBG <40، relief فوري بالجلوكوز."
+      - "الصبح بدري أو وجبة فايتة أو رياضة؛ unawareness شائعة."
+      - "Supervised fast، insulin عالي وقت الـ hypo، glucagon > tolbutamide، MRI > arteriography."
+      - "Rx: surgery، diet، diazoxide + diuretic، octreotide، streptozotocin."
+    practice: [dm.L14.020, dm.L14.021, dm.L14.022, dm.L14.023, dm.L14.024, dm.L14.025, dm.L14.026, dm.L14.027, dm.L14.028, dm.L14.029, dm.L14.030, dm.L14.031, dm.L14.032, dm.L14.033, dm.L14.034, dm.L14.035, dm.L14.039, dm.L14.041, dm.L14.042]

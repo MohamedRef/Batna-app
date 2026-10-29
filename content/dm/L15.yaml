@@ -1,0 +1,784 @@
+schema: batna.content/v1
+lecture: dm.L15
+title: Diabetic Emergencies
+author: Assist. Prof. Dr. Reem Fathallah
+book: { chapter: 6, pages: [185, 195] }
+topics:
+  - { id: background, title: "DKA and HHS: background and epidemiology" }
+  - { id: pathogenesis, title: "Pathogenesis and precipitating factors" }
+  - { id: clinical, title: "Clinical picture" }
+  - { id: diagnosis, title: "Diagnostic criteria, severity and euglycemic DKA" }
+  - { id: labs, title: "Sodium and potassium" }
+  - { id: fluids, title: "Fluid therapy" }
+  - { id: insulin, title: "Insulin, potassium, bicarbonate and additional measures" }
+  - { id: resolution, title: "Resolution criteria and transition to subcutaneous insulin" }
+  - { id: complications, title: "Treatment complications and cerebral edema" }
+items:
+  # ---------- p185-186: background ----------
+  - id: dm.L15.001
+    kind: card
+    topic: background
+    front: What kind of insulin deficiency underlies DKA, and what kind underlies HHS?
+    back: "DKA: absolute insulin deficiency. HHS: relative insulin deficiency."
+    src: { page: 185, quote: "DKA: Absolute insulin deficiency HHS: Relative insulin deficiency" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L15.002
+    kind: cloze
+    topic: background
+    text: Nearly {{c1::1%}} of hospitalizations in people with diabetes are for hyperglycemic crises, and DKA hospitalizations rose by {{c2::55%}} in the past decade, especially in adults under {{c3::45}}.
+    src: { page: 185, quote: "55% increase in the rate of DKA hospitalizations, especially in adults aged <45 years" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L15.003
+    kind: cloze
+    topic: background
+    text: DKA accounts for {{c1::14%}} of hospital admissions of patients with diabetes, and almost {{c2::50%}} of diabetes-related admissions in young people.
+    src: { page: 185, quote: "DKA accounts for 14% of all hospital admissions of patients with diabetes." }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L15.004
+    kind: card
+    topic: background
+    front: Who typically gets DKA, and what is its mortality in adults?
+    back: Young adults aged 18-44 (61.7%) with type 1 DM (70.6%); adult mortality is below 1%. It is the most common cause of death in children and adolescents with T1DM.
+    src: { page: 186, quote: "In adult subjects with DKA, the overall mortality is <1%." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L15.005
+    kind: table
+    topic: background
+    title: Epidemiology of DKA vs HHS
+    columns: [Feature, DKA, HHS]
+    rows:
+      - [Frequency, "More common; 14% of diabetic admissions", "Less common; 1% of diabetic admissions"]
+      - [Typical age, "Young adults 18-44", "Middle-aged 45-64"]
+      - [Mortality, "<1% in adults", "Considerably higher, 5-20%"]
+    blanks: [[1, 1], [1, 2], [2, 1], [2, 2]]
+    src: { page: 186, quote: "Mortality attributed to HHS is considerably higher 5–20%." }
+    status: unverified
+    tags: [numbers, high-yield]
+  # ---------- p186-187: pathogenesis ----------
+  - id: dm.L15.006
+    kind: enumerate
+    topic: pathogenesis
+    prompt: Enumerate the precipitating factors of DKA with their share.
+    points:
+      - "Stressful conditions: infection is the most common (30-40%)"
+      - "Others: trauma, surgery, cardiovascular events and drugs"
+      - "Discontinued or inadequate insulin, and new-onset T1DM (15-25%)"
+      - "No precipitating cause (20-25%)"
+    pass: 3
+    src: { page: 186, quote: "Infections (most common, 30-40%)" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L15.007
+    kind: cloze
+    topic: pathogenesis
+    text: "DKA precipitants: infection {{c1::30-40%}}, stopped or inadequate insulin and new T1DM {{c2::15-25%}}, no cause found {{c3::20-25%}}."
+    src: { page: 187, quote: "Discontinuation of or inadequate insulin therapy & New onset Type 1 DM. (15-25%)" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L15.008
+    kind: card
+    topic: pathogenesis
+    front: What proportion of DKA patients have a past history of T1DM?
+    back: Two thirds; DKA is a cardinal feature of T1DM.
+    src: { page: 187, quote: "DKA is a cardinal feature of T1DM. 2/3 have a past history of T1DM" }
+    status: unverified
+  - id: dm.L15.009
+    kind: card
+    topic: pathogenesis
+    front: What should the clinician do when DKA occurs in type 2 DM?
+    back: “Look under the sheets”, with an intensive search for the precipitating factor.
+    src: { page: 187, quote: "When DKA occurs in an individual with T2DM, the clinician should ―look under the sheets‖" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L15.010
+    kind: enumerate
+    topic: pathogenesis
+    prompt: Enumerate the precipitating factors of HHS.
+    points:
+      - Infection (the most common)
+      - Restricted water intake from the altered thirst response of the elderly
+      - Delayed recognition of hyperglycemic symptoms (20% have no known diabetes)
+    pass: 3
+    src: { page: 187, quote: "Restricted water intake due to altered thirst response of the elderly." }
+    status: unverified
+  - id: dm.L15.011
+    kind: cloze
+    topic: pathogenesis
+    text: About {{c1::20%}} of patients with HHS have no previous history of diabetes.
+    src: { page: 187, quote: "Delayed recognition of hyperglycemic symptoms (20% of these patients have no history of diabetes)." }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L15.012
+    kind: card
+    topic: pathogenesis
+    front: Why is there ketoacidosis in DKA but little or no ketosis in HHS (pathogenesis figure)?
+    back: Absolute insulin deficiency with counter-regulatory hormones drives lipolysis, FFA delivery to the liver and ketogenesis (DKA). In HHS relative insulin deficiency leaves enough insulin to keep ketogenesis absent or minimal, while hyperglycemia, osmotic diuresis and poor intake cause dehydration and hyperosmolarity.
+    src: { page: 186, quote: "Pathogenesis of DKA & HHS" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p187: clinical ----------
+  - id: dm.L15.013
+    kind: table
+    topic: clinical
+    title: Clinical picture of DKA vs HHS
+    columns: [Component, DKA, HHS]
+    rows:
+      - [Hyperglycemia, "Polyuria, polydipsia, dehydration", "Marked hyperglycemia and dehydration"]
+      - [Ketones, "Ketonemia: acetone breath", "Absent or minimal ketosis"]
+      - [Acidosis, "Metabolic acidosis: GIT symptoms, Kussmaul breathing", "Absent"]
+    blanks: [[1, 1], [1, 2], [2, 1]]
+    src: { page: 187, quote: "Metabolic acidosis: GIT, Kussmaul‘s Breathing" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p188-189: diagnosis ----------
+  - id: dm.L15.014
+    kind: table
+    topic: diagnosis
+    title: "DKA diagnostic criteria: D, K, A"
+    columns: [Letter, Criterion]
+    rows:
+      - ["D: diabetes/hyperglycemia", "Glucose ≥200 mg/dL (11.1 mmol/L) or prior history of diabetes"]
+      - ["K: ketosis", "β-hydroxybutyrate ≥3.0 mmol/L or urine ketone strip 2+ or more"]
+      - ["A: metabolic acidosis", "pH <7.3 and/or bicarbonate <18 mmol/L"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 188, quote: "Diagnostic criteria DKA" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L15.015
+    kind: table
+    topic: diagnosis
+    title: DKA severity and level of care
+    columns: [Feature, Mild, Moderate, Severe]
+    rows:
+      - [β-hydroxybutyrate, "3.0-6.0 mmol/L", "3.0-6.0 mmol/L", ">6.0 mmol/L"]
+      - [pH, ">7.25 to <7.30", "7.0-7.25", "<7.0"]
+      - [Bicarbonate, "15-18 mmol/L", "10 to <15 mmol/L", "<10 mmol/L"]
+      - [Mental status, Alert, Alert or drowsy, Stupor or coma]
+      - [Level of care, "Regular or observation unit", "Step-down or intermediate care", "ICU"]
+    blanks: [[0, 3], [1, 2], [1, 3], [2, 1], [2, 3], [4, 3]]
+    src: { page: 188, quote: "DKA classification and suggested level of care by severity: mild, moderate, or severe" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L15.016
+    kind: card
+    topic: diagnosis
+    front: Define euglycemic DKA and its frequency.
+    back: About 10% of DKA; random glucose <200 mg/dL with the ketosis and metabolic acidosis criteria of DKA.
+    src: { page: 188, quote: "10% of the DKA population. RBG <200 mg/dL in the presence of ketosis and metabolic acidosis criteria of DKA" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L15.017
+    kind: enumerate
+    topic: diagnosis
+    prompt: Enumerate the causes of euglycemic DKA listed in the lecture.
+    points:
+      - Insulin injection en route to hospital
+      - Antecedent food restriction
+      - Pregnancy
+      - SGLT2 inhibitors
+    pass: 4
+    src: { page: 188, quote: "Insulin injection en route to hospital." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L15.018
+    kind: table
+    topic: diagnosis
+    title: HHS diagnostic criteria
+    columns: [Criterion, Value]
+    rows:
+      - [Hyperglycemia, "Plasma glucose ≥600 mg/dL (33.3 mmol/L)"]
+      - [Hyperosmolarity, "Effective osmolality >300 mOsm/kg [2×Na + glucose (mmol/L)] or total osmolality >320 [2×Na + glucose + urea]"]
+      - [No significant ketonemia, "β-hydroxybutyrate <3.0 mmol/L or urine ketones less than 2+"]
+      - [No acidosis, "pH ≥7.3 and bicarbonate ≥15 mmol/L"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 189, quote: "Diagnostic criteria HHS" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L15.019
+    kind: cloze
+    topic: diagnosis
+    text: "HHS: glucose ≥{{c1::600}} mg/dL, effective osmolality >{{c2::300}} mOsm/kg (or total >320), and pH ≥{{c3::7.3}} with bicarbonate ≥15 mmol/L."
+    src: { page: 189, quote: "Diagnostic criteria HHS" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L15.020
+    kind: mcq
+    topic: diagnosis
+    stem: A 22-year-old with T1DM has glucose 410 mg/dL, β-hydroxybutyrate 5.2 mmol/L, pH 7.15 and bicarbonate 12 mmol/L. He is drowsy but rousable. Severity and level of care?
+    options: [Moderate DKA; step-down or intermediate care, Mild DKA; regular ward, Severe DKA; ICU, HHS; ICU, Euglycemic DKA; observation]
+    answer: 0
+    why:
+      - pH 7.0-7.25, bicarbonate 10 to <15, BOHB 3-6 and alert or drowsy make moderate DKA.
+      - Mild needs pH >7.25 or bicarbonate 15-18.
+      - Severe needs pH <7.0, bicarbonate <10, BOHB >6 or stupor.
+      - HHS has glucose ≥600 and no significant acidosis or ketonemia.
+      - His glucose is above 200.
+    src: { page: 188, quote: "DKA classification and suggested level of care by severity: mild, moderate, or severe" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L15.021
+    kind: mcq
+    topic: diagnosis
+    stem: A 58-year-old with T2DM started empagliflozin 2 months ago. After 3 days of vomiting she has glucose 165 mg/dL, β-hydroxybutyrate 4.5 mmol/L, pH 7.21 and bicarbonate 13. Diagnosis?
+    options: [Euglycemic DKA, Starvation ketosis only, HHS, Lactic acidosis, Not DKA because glucose is below 250]
+    answer: 0
+    why:
+      - Glucose <200 with DKA's ketosis and acidosis criteria is euglycemic DKA; SGLT2 inhibitors and food restriction are causes.
+      - pH 7.21 with BOHB 4.5 is a true ketoacidosis.
+      - HHS needs glucose ≥600 without acidosis.
+      - Ketones are high; nothing points to lactate.
+      - DKA does not need glucose ≥250; prior diabetes satisfies the D criterion.
+    src: { page: 188, quote: "SGLT2 inhibitors" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L15.022
+    kind: mcq
+    topic: diagnosis
+    stem: A 76-year-old with T2DM living alone is confused. Glucose 880 mg/dL, Na 148 mmol/L, BOHB 1.1 mmol/L, pH 7.34, bicarbonate 20. Which criteria does he meet?
+    options: [HHS, Severe DKA, Moderate DKA, Euglycemic DKA, Mixed DKA-HHS]
+    answer: 0
+    why:
+      - Glucose ≥600, effective osmolality 2×148 + 880/18 ≈ 345 (>300), BOHB <3 and pH ≥7.3 with bicarbonate ≥15 meet HHS.
+      - Severe DKA needs pH <7.0 and ketonemia >6.
+      - DKA needs BOHB ≥3 and pH <7.3 or bicarbonate <18.
+      - His glucose is very high.
+      - He has no ketoacidosis, so DKA criteria are not met.
+    src: { page: 189, quote: "Diagnostic criteria HHS" }
+    status: unverified
+  # ---------- p189: labs ----------
+  - id: dm.L15.023
+    kind: card
+    topic: labs
+    front: Why is serum sodium usually low in hyperglycemic crises?
+    back: Hyperglycemia draws water osmotically from the intracellular to the extracellular space, diluting sodium.
+    src: { page: 189, quote: "Usually low due to osmotic flux of water from the intracellular to the extracellular space by hyperglycemia." }
+    status: unverified
+  - id: dm.L15.024
+    kind: card
+    topic: labs
+    front: What does a high or normal serum sodium mean in DKA or HHS?
+    back: A profound degree of free water loss.
+    src: { page: 189, quote: "High or normal serum sodium indicates a profound degree of free water loss." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L15.025
+    kind: cloze
+    topic: labs
+    text: Corrected Na = measured Na + {{c1::0.016}} × (glucose − 100); that is {{c2::1.6 mEq/L}} for every {{c3::100 mg/dL}} of glucose above 100.
+    src: { page: 189, quote: "Corrected Sodium = Measured Sodium + 0.016 x (Serum glucose - 100)" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L15.026
+    kind: mcq
+    topic: labs
+    stem: Glucose is 500 mg/dL and measured sodium 132 mEq/L. What is the corrected sodium (book method)?
+    options: ["About 138 mEq/L", "About 132 mEq/L", "About 140 mEq/L", "About 128 mEq/L", "About 145 mEq/L"]
+    answer: 0
+    why:
+      - 1.6 × (500 − 100)/100 = 6.4; 132 + 6.4 = 138.4, about 138.
+      - That is the uncorrected value.
+      - That uses a larger factor than the book's 1.6.
+      - Correction adds sodium; it never subtracts.
+      - That overcorrects.
+    src: { page: 189, quote: "If glucose level is 500 and sodium is 132" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L15.027
+    kind: card
+    topic: labs
+    front: Why is serum potassium often high at presentation, and what does a low or low-normal potassium mean?
+    back: Insulin deficiency, hypertonicity and acidemia shift K out of cells. A low or low-normal K means severe total-body K deficiency.
+    src: { page: 189, quote: "Patients with low normal or low serum K have severe total-body K deficiency." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p190-191: fluids ----------
+  - id: dm.L15.028
+    kind: card
+    topic: fluids
+    front: What are the aims of fluid therapy in DKA and HHS?
+    back: Correct intravascular, interstitial and intracellular volume depletion, hypertonicity and renal perfusion.
+    src: { page: 190, quote: "The aim is to correct (intravascular, interstitial and intracellular) volume depletion, hypertonicity and renal perfusion." }
+    status: unverified
+  - id: dm.L15.029
+    kind: card
+    topic: fluids
+    front: When are fluids started before insulin?
+    back: Usually, and especially with severe volume contraction or hypokalemia.
+    src: { page: 190, quote: "It usually started before insulin therapy especially in patients with severe volume contraction and hypokalemia." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L15.030
+    kind: table
+    topic: fluids
+    title: Estimating the fluid deficit from orthostatic signs
+    columns: [Finding, ECV loss, Approximate deficit]
+    rows:
+      - ["Orthostatic pulse rise >10/min, BP unchanged", "About 10%", "2 L isotonic saline"]
+      - ["Orthostatic BP drop >15/10 mmHg", "15-20%", "3-4 L"]
+      - ["Supine hypotension", ">20% (severe)", ">4 L"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 1]]
+    src: { page: 190, quote: "An orthostatic drop in B.P. ( >15/10 mmHg) indicates a 15-20 % decrease in ECV ( i.e. 3-4 liters)" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L15.031
+    kind: card
+    topic: fluids
+    front: "Management algorithm, IV fluids: what is given for severe hypovolemia, and what is the target over the first 8-12 h?"
+    back: 0.9% NaCl or another crystalloid at 1.0 L/h for severe hypovolemia; then at a clinically appropriate rate to replace 50% of the estimated deficit in the first 8-12 h. Cardiac compromise needs hemodynamic monitoring or pressors.
+    src: { page: 190, quote: "0.9% NaCl or other crystalloid at a clinically appropriate rate aiming to replace 50% of the estimated fluid deficit in the first 8–12 h" }
+    status: unverified
+  - id: dm.L15.032
+    kind: cloze
+    topic: fluids
+    text: Hyperglycemia is corrected faster (about {{c1::6 h}}) than acidosis (about {{c2::12 h}}), so when glucose falls below {{c3::250}} mg/dL, 5-10% dextrose is added and insulin continued until ketonemia is controlled.
+    src: { page: 191, quote: "Hyperglycemia is corrected faster (6h) than acidosis (12h); RBG <250 mg/dl, 5-10% dextrose should be added" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L15.033
+    kind: card
+    topic: fluids
+    front: In euglycemic DKA, when is dextrose started (management algorithm)?
+    back: At the start of insulin treatment, 5% or 10% dextrose alongside 0.9% NaCl or crystalloid (glucose <200 mg/dL and positive BOHB).
+    src: { page: 190, quote: "In euglycemic DKA (glucose <200 mg/dL and positive BOHB), 5% or 10% dextrose needs to be started alongside 0.9% NaCl/crystalloid" }
+    status: unverified
+  # ---------- p190-192: insulin, potassium, bicarbonate, additional ----------
+  - id: dm.L15.034
+    kind: card
+    topic: insulin
+    front: What are the time goals of insulin therapy in DKA?
+    back: Correct hyperglycemia in about 6 h and reverse ketoacidosis in about 12 h.
+    src: { page: 191, quote: "The aim of insulin therapy is to correct hyperglycemia (6 h) and reverse ketoacidosis ( 12 h)." }
+    status: unverified
+  - id: dm.L15.035
+    kind: card
+    topic: insulin
+    front: When should insulin NOT be started in DKA?
+    back: With hypokalemia or severe volume contraction until they are corrected; it is preferable to wait for the serum potassium result.
+    src: { page: 191, quote: "Insulin should NOT be given if hypokalemia or severe volume contraction is present unless these conditions are corrected." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L15.036
+    kind: table
+    topic: insulin
+    title: Insulin dosing in the management algorithm
+    columns: [Setting, Route, Dose]
+    rows:
+      - [Mild DKA, s.c. rapid-acting analog, "0.1 units/kg bolus, then 0.1 units/kg every 1 h or 0.2 units/kg every 2 h"]
+      - [Moderate or severe DKA, i.v. short-acting, "Consider 0.1 units/kg bolus if the infusion is delayed; 0.1 units/kg/h fixed-rate infusion"]
+      - [HHS, i.v. short-acting, "0.05 units/kg/h fixed-rate infusion"]
+      - [Glucose <250 mg/dL, Reduce, "0.05 units/kg/h i.v. (or 0.1 units/kg every 2 h s.c. in mild DKA)"]
+    blanks: [[0, 2], [1, 2], [2, 2], [3, 2]]
+    src: { page: 190, quote: "When glucose reaches <250 mg/dL, reduce short-acting insulin dose to 0.05 units/kg/h i.v." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L15.037
+    kind: table
+    topic: insulin
+    title: Glucose targets until resolution (algorithm)
+    columns: [Crisis, Keep glucose]
+    rows:
+      - [DKA, "150-200 mg/dL"]
+      - [HHS, "200-250 mg/dL"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 190, quote: "Keep glucose between 150 and 200 mg/dL until resolution" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L15.038
+    kind: table
+    topic: insulin
+    title: Potassium replacement (after adequate urine output ~0.5 mL/kg/h)
+    columns: [Serum K, Action]
+    rows:
+      - ["<3.5 mmol/L", "10-20 mmol/L/h until K >3.5 (faster needs central access) before insulin"]
+      - ["3.5-5.0 mmol/L", "10-20 mmol K in each liter of IV fluid to keep K 4-5"]
+      - [">5.0 mmol/L", "Start insulin, give no K, check K every 2 h"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 190, quote: "Give 10–20 mmol/L K+ in each liter of i.v. fluid as needed to keep serum K+ between 4 and 5 mmol/L" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L15.039
+    kind: enumerate
+    topic: insulin
+    prompt: Enumerate the side effects of bicarbonate therapy in DKA.
+    points:
+      - Overshoot alkalosis
+      - Altered tissue oxygenation and increased ketone production
+      - Hypokalemia
+      - Cerebral edema
+      - Paradoxical CSF acidosis
+    pass: 4
+    src: { page: 191, quote: "Paradoxical CSF acidosis" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L15.040
+    kind: enumerate
+    topic: insulin
+    prompt: Enumerate the additional measures in managing DKA and HHS.
+    points:
+      - Broad-spectrum antibiotics if infection or invasive procedures
+      - Oxygen if PO2 <80 mmHg
+      - Plasma expanders or whole blood for shock
+      - Suspect brain edema if coma develops acutely in an alert patient (mannitol)
+      - LMWH prophylaxis in HHS for the whole admission
+      - CVP monitoring in cardiac patients
+      - Urinary catheter only if no urine in the first 3 hours
+    pass: 5
+    src: { page: 191, quote: "Use broad-spectrum antibiotics if any evidence of infection is present or if invasive procedures are used." }
+    status: unverified
+  - id: dm.L15.041
+    kind: card
+    topic: insulin
+    front: How is suspected brain edema treated during DKA management?
+    back: Mannitol 1 g/kg IV over 30 min, then 12.5 g mannitol in each liter of half-normal saline at 200 mL/h to maintain the raised osmolality.
+    src: { page: 192, quote: "give manitol 1g/kg IV over 30 min then add 12.5g manitol to each liter of half-normal saline" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L15.042
+    kind: card
+    topic: insulin
+    front: Which hyperglycemic crisis has the higher VTE risk, and what prophylaxis is given?
+    back: HHS (HHS > DKA); prophylactic LMWH for the full admission unless contraindicated.
+    src: { page: 192, quote: "Risk of venous thromboembolism is HHS > DKA, HHS should receive prophylactic LMWH for the full duration of admission" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L15.043
+    kind: card
+    topic: insulin
+    front: When is a urinary catheter inserted in DKA?
+    back: Only if no urine is passed in the first 3 hours.
+    src: { page: 192, quote: "Perform urinary catheterization only if no urine is passed in the first 3 hours" }
+    status: unverified
+  - id: dm.L15.044
+    kind: mcq
+    topic: insulin
+    stem: A 19-year-old in moderate DKA has K 3.1 mmol/L and good urine output. What comes first?
+    options: [Potassium 10-20 mmol/h until K >3.5 before starting insulin, Insulin 0.1 units/kg/h now with K in the fluid, Bicarbonate infusion, Insulin bolus then recheck K in 4 h, No K because acidosis raises K]
+    answer: 0
+    why:
+      - With K <3.5, give K first; insulin is not given with hypokalemia until corrected.
+      - Insulin drives K into cells and can cause dangerous hypokalemia.
+      - Bicarbonate causes hypokalemia among its side effects.
+      - Insulin must wait for K.
+      - A low K despite acidosis means severe total-body depletion.
+    src: { page: 191, quote: "Insulin should NOT be given if hypokalemia or severe volume contraction is present unless these conditions are corrected." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L15.045
+    kind: order
+    topic: fluids
+    prompt: Order the first steps in managing moderate DKA in a patient with K 4.2 mmol/L.
+    steps:
+      - Determine hydration status and start 0.9% NaCl
+      - Check potassium and urine output
+      - Start fixed-rate IV insulin 0.1 units/kg/h with 10-20 mmol K per liter
+      - When glucose <250, reduce insulin to 0.05 units/kg/h and add 5-10% dextrose
+      - Keep glucose 150-200 until DKA resolves, then overlap s.c. insulin 1-2 h
+    src: { page: 190, quote: "Determine hydration status" }
+    status: unverified
+  # ---------- p192-193: resolution and transition ----------
+  - id: dm.L15.046
+    kind: card
+    topic: resolution
+    front: What are the book's criteria for resolution of DKA?
+    back: "Glucose <200 mg/dL plus two of: bicarbonate ≥15 mEq/L, venous pH >7.3, calculated anion gap ≤12 mEq/L."
+    src: { page: 192, quote: "RBG< 200 mg/dl and two of the following criteria" }
+    status: unverified
+    tags: [high-yield]
+    update:
+      text: "The 2024 consensus defines DKA resolution as β-hydroxybutyrate <0.6 mmol/L with venous pH ≥7.3 or bicarbonate ≥18 mmol/L; glucose is no longer a resolution criterion."
+      ref: "ADA/EASD/JBDS/AACE/DTS hyperglycemic crises consensus 2024"
+  - id: dm.L15.047
+    kind: cloze
+    topic: resolution
+    text: "HHS resolves when glucose is <{{c1::250}} mg/dL, serum osmolality <{{c2::300}} mOsm/kg and urine output >{{c3::0.5 mL/kg/h}}."
+    src: { page: 192, quote: "RBG < 250 mg/dl  Serum osmolality <300 mOsm/kg  urine output is >0.5 mL/kg/h." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L15.048
+    kind: card
+    topic: resolution
+    front: How long before stopping the IV insulin infusion should subcutaneous insulin start?
+    back: 1-2 hours before, with a regimen that gives 24-hour coverage.
+    src: { page: 192, quote: "Transition to SC insulin" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L15.049
+    kind: card
+    topic: resolution
+    front: How is the subcutaneous regimen built after DKA or HHS?
+    back: Basal and rapid-acting analogs preferred (NPH and short-acting may be used); 40-60% of TDD as basal and the rest as three mealtime rapid-acting doses. If NPO, basal plus correction rapid-acting every 4-6 h.
+    src: { page: 192, quote: "Begin with 40–60% of TDD given as basal insulin + remaining proportion divided into three mealtime doses of rapid-acting insulin" }
+    status: unverified
+  - id: dm.L15.050
+    kind: table
+    topic: resolution
+    title: Options for calculating the subcutaneous TDD
+    columns: [Method, Detail]
+    rows:
+      - [Weight-based, "0.5-0.6 units/kg/day; 0.3 units/kg/day if risk of hypoglycemia (frailty, CKD)"]
+      - [Preadmission requirements, "TDD of the outpatient regimen, adjusted for adherence and nutrition"]
+      - [Hourly IV requirements, "Sum of stable hourly IV insulin (e.g., prior 6 h); may overestimate because of glucotoxicity"]
+    blanks: [[0, 1], [2, 1]]
+    src: { page: 193, quote: "Conversion from intravenous to subcutaneous insulin dosing may be guided by any of the following methods" }
+    status: unverified
+    tags: [numbers]
+  # ---------- p193-194: complications ----------
+  - id: dm.L15.051
+    kind: card
+    topic: complications
+    front: How common is hypoglycemia during DKA treatment, and how is it prevented?
+    back: Glucose <70 occurs in 16-28% and <40 in 2%; <40 carries a 4.8-fold mortality. Prevent with glucose checks every 1-2 h and, below 250 mg/dL, insulin 0.05 units/kg/h plus 5-10% dextrose.
+    src: { page: 193, quote: "When glucose levels are reduced to <250 mg/dL, it is advised to reduce the insulin infusion rate to 0.05 units/kg/h" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L15.052
+    kind: cloze
+    topic: complications
+    text: Hypokalemia (<3.5 mmol/L) occurs in about {{c1::55%}} of DKA and 51% of HHS; severe hypokalemia ≤2.5 raises inpatient mortality, so K is checked every {{c2::4 h}} and added to the fluids.
+    src: { page: 193, quote: "Potassium should be carefully monitored every 4 h during treatment." }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L15.053
+    kind: card
+    topic: complications
+    front: What causes hyperchloremic non-anion gap acidosis in the recovery phase of DKA?
+    back: Loss of ketoanions (which would have been metabolized to bicarbonate) and excess chloride-containing fluids. It is self-limited.
+    src: { page: 193, quote: "This may be caused by loss of ketoanions, which are metabolized to bicarbonate during the evolution of DKA" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L15.054
+    kind: card
+    topic: complications
+    front: How can hyperchloremic acidosis during DKA treatment be made less frequent?
+    back: Balanced electrolyte solutions and slower saline infusion.
+    src: { page: 193, quote: "and excess infusion of chloride containing fluids during treatment." }
+    status: unverified
+  - id: dm.L15.055
+    kind: card
+    topic: complications
+    front: How does cerebral edema present during DKA treatment?
+    back: "Mainly in children: headache, falling consciousness, seizures, sphincter incontinence, pupillary changes, papilledema, bradycardia, rising BP and respiratory arrest."
+    src: { page: 194, quote: "During treatment, esp in children, presented by onset of headache, gradual deterioration in level of consciousness, seizures" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L15.056
+    kind: enumerate
+    topic: complications
+    prompt: Enumerate the proposed mechanisms of cerebral edema in DKA.
+    points:
+      - Cerebral ischemia or hypoxia
+      - Inflammatory mediators
+      - Increased cerebral blood flow
+      - Disrupted cell-membrane ion transport
+      - Rapid extracellular-to-intracellular fluid shift from fast correction of osmolality and dehydration
+    pass: 4
+    src: { page: 194, quote: "Rapid fluid shift from extracellular to intracellular by rapid correction of osmolality and dehydration." }
+    status: unverified
+  - id: dm.L15.057
+    kind: enumerate
+    topic: complications
+    prompt: Enumerate the prevention and treatment of cerebral edema in DKA.
+    points:
+      - Avoid excessive hydration
+      - Avoid rapid reduction of plasma osmolarity
+      - Lower glucose gradually
+      - Keep glucose 200-300 mg/dL until osmolality and mental status normalize
+      - Mannitol infusion to keep osmolality raised
+    pass: 4
+    src: { page: 194, quote: "Maintenance of serum glucose between 200–300 mg/dl until the patient‘s serum osmolality is normalized" }
+    status: unverified
+  - id: dm.L15.058
+    kind: cloze
+    topic: complications
+    text: Cerebral edema is rare in adults (<{{c1::0.1%}} of events) but carries a mortality of about {{c2::30%}}.
+    src: { page: 194, quote: "Cerebral edema is rare in adults." }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L15.059
+    kind: mcq
+    topic: complications
+    stem: A 9-year-old treated for severe DKA is improving at 6 hours, then develops headache, bradycardia, rising BP and falling GCS. Best immediate step?
+    options: [Mannitol 1 g/kg IV over 30 min, Bolus of 0.9% saline 20 mL/kg, Increase the insulin infusion, Give sodium bicarbonate, Stop all fluids and wait for CT]
+    answer: 0
+    why:
+      - Acute coma in a previously alert patient suggests brain edema; mannitol is the treatment.
+      - Excess hydration worsens cerebral edema.
+      - A faster glucose fall lowers osmolality further.
+      - Bicarbonate can itself cause cerebral edema.
+      - Treatment should not wait for imaging.
+    src: { page: 192, quote: "If coma develops acutely in a previously alert patient, suspect brain edema" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L15.060
+    kind: mcq
+    topic: complications
+    stem: On day 2 of DKA treatment with large volumes of 0.9% saline, a patient has pH 7.31, bicarbonate 17, chloride 114 and anion gap 10. Ketones are cleared. Interpretation?
+    options: [Self-limited hyperchloremic non-anion gap acidosis, Recurrent DKA, Lactic acidosis, Need for bicarbonate, Renal tubular acidosis needing workup]
+    answer: 0
+    why:
+      - Loss of ketoanions and chloride-rich fluid cause a normal-gap acidosis in recovery; it is self-limited.
+      - Ketones are cleared and the gap is normal.
+      - Lactic acidosis raises the anion gap.
+      - It has few clinical consequences; bicarbonate is not indicated.
+      - This is expected in recovery, not RTA.
+    src: { page: 193, quote: "Recovery phase of DKA, is self-limited." }
+    status: unverified
+  # ---------- cases ----------
+  - id: dm.L15.061
+    kind: case
+    topic: fluids
+    stem: A 24-year-old with T1DM has vomited for 2 days after missing insulin. HR 124, BP 92/58 supine. Glucose 520 mg/dL, pH 6.95, bicarbonate 7, BOHB 7.1 mmol/L, Na 130, K 5.6.
+    steps:
+      - question: Severity and place of care?
+        options: [Severe DKA; ICU, Moderate DKA; step-down unit, Mild DKA; ward, HHS; ICU]
+        answer: 0
+        why: pH <7.0, bicarbonate <10 and BOHB >6 mean severe DKA, managed in ICU.
+      - question: What does his supine hypotension suggest about the deficit?
+        options: [More than 20% of ECV (over 4 L), About 10% (2 L), 15-20% (3-4 L), No deficit]
+        answer: 0
+        why: Supine hypotension means a >20% fall in ECV, more than 4 liters.
+      - question: What is his corrected sodium?
+        options: [About 137, About 130, About 146, About 125]
+        answer: 0
+        why: 130 + 1.6 × (520 − 100)/100 = 130 + 6.7 ≈ 137.
+      - question: Potassium plan with K 5.6?
+        options: [Start insulin; give no K; check K every 2 h, Give K 20 mmol/h now, Delay insulin until K is 4, Give bicarbonate to lower K]
+        answer: 0
+        why: With K >5.0, start insulin without K and recheck every 2 h.
+      - reveal: At 7 hours glucose is 230 mg/dL; pH 7.18.
+        question: Next?
+        options: [Reduce insulin to 0.05 units/kg/h and add 5-10% dextrose, Stop insulin, Keep the same rate without dextrose, Switch to s.c. insulin now]
+        answer: 0
+        why: Glucose corrects faster than acidosis; add dextrose and continue insulin until ketonemia clears.
+    src: { page: 190, quote: "Supine hypotension indicates a decrease of > 20% in ECV (i.e. > 4 liters)" }
+    status: unverified
+  - id: dm.L15.062
+    kind: case
+    topic: diagnosis
+    stem: An 81-year-old woman with T2DM on gliclazide is found confused after a week of a cough and poor intake.
+    steps:
+      - reveal: "Glucose 960 mg/dL, Na 150, urea 18 mmol/L, BOHB 0.8 mmol/L, pH 7.36, bicarbonate 22."
+        question: Diagnosis?
+        options: [HHS, DKA, Euglycemic DKA, Lactic acidosis]
+        answer: 0
+        why: Glucose ≥600, high osmolality, no significant ketonemia or acidosis.
+      - question: Which precipitants does the lecture link to HHS here?
+        options: [Infection and restricted water intake from blunted thirst, Insulin omission in T1DM, SGLT2 inhibitor, Pregnancy]
+        answer: 0
+        why: Infection is the most common precipitant; elderly patients have an altered thirst response.
+      - question: Which insulin infusion rate starts HHS treatment (algorithm)?
+        options: [0.05 units/kg/h, 0.1 units/kg/h after a bolus, 0.2 units/kg every 2 h s.c., No insulin]
+        answer: 0
+        why: HHS starts at 0.05 units/kg/h fixed-rate IV insulin.
+      - question: Which prophylaxis should she receive for the whole admission?
+        options: [LMWH, Aspirin, Warfarin, None]
+        answer: 0
+        why: VTE risk is higher in HHS than DKA; LMWH unless contraindicated.
+      - question: When has HHS resolved?
+        options: ["Glucose <250, osmolality <300, urine >0.5 mL/kg/h", "Glucose <200 and anion gap ≤12", pH >7.3 only, Glucose <150]
+        answer: 0
+        why: These are the book's HHS resolution criteria.
+    src: { page: 192, quote: "RBG < 250 mg/dl  Serum osmolality <300 mOsm/kg  urine output is >0.5 mL/kg/h." }
+    status: unverified
+  - id: dm.L15.063
+    kind: case
+    topic: resolution
+    stem: A 30-year-old with DKA (now on day 2) has glucose 180 mg/dL, bicarbonate 17, venous pH 7.34 and anion gap 11. He is eating breakfast. He weighs 70 kg and has no CKD.
+    steps:
+      - question: Has DKA resolved by the book's criteria?
+        options: [Yes, No, Only if BOHB is checked, Only if pH >7.4]
+        answer: 0
+        why: Glucose <200 plus two (actually all three) of bicarbonate ≥15, pH >7.3, AG ≤12.
+      - question: Weight-based subcutaneous TDD?
+        options: [35-42 units (0.5-0.6 units/kg), 21 units (0.3 units/kg), 70 units (1 unit/kg), 10 units]
+        answer: 0
+        why: 0.5-0.6 units/kg/day; 0.3 is for those at hypoglycemia risk.
+      - question: How is it split?
+        options: [40-60% basal and the rest as three mealtime rapid-acting doses, All basal, All prandial, Premixed twice daily only]
+        answer: 0
+        why: Basal 40-60% and the remainder as mealtime rapid-acting insulin.
+      - question: When do you stop the IV insulin?
+        options: [1-2 h after the first s.c. dose, Immediately before the s.c. dose, 6 h after, Before breakfast without s.c. insulin]
+        answer: 0
+        why: Start s.c. insulin 1-2 h before stopping the infusion to avoid rebound ketoacidosis.
+    src: { page: 192, quote: "RBG< 200 mg/dl and two of the following criteria" }
+    status: unverified
+  # ---------- p195: book questions ----------
+  - id: dm.L15.064
+    kind: essay
+    topic: background
+    prompt: Outline the main differences between DKA and HHS.
+    outline:
+      - "Mechanism: [DKA absolute insulin deficiency, HHS relative deficiency: enough insulin to block ketogenesis]"
+      - "Patients: [DKA young adults 18-44 with T1DM, HHS middle-aged 45-64; 20% have no known diabetes]"
+      - "Precipitants: [DKA infection 30-40%, insulin omission or new T1DM 15-25%, none 20-25%, HHS infection, restricted water intake in the elderly, delayed recognition]"
+      - "Clinical: [DKA acetone breath, Kussmaul breathing, GIT symptoms, HHS marked dehydration, minimal ketosis]"
+      - "Criteria: [DKA glucose ≥200 or known DM, BOHB ≥3, pH <7.3 or HCO3 <18, HHS glucose ≥600, effective osmolality >300, BOHB <3, pH ≥7.3 and HCO3 ≥15]"
+      - "Treatment and outcome: [Insulin 0.1 vs 0.05 units/kg/h; glucose kept 150-200 vs 200-250, HHS needs LMWH; mortality <1% vs 5-20%]"
+    src: { page: 189, quote: "Diagnostic criteria HHS" }
+    status: unverified
+    tags: [book-question, high-yield]
+  - id: dm.L15.065
+    kind: essay
+    topic: diagnosis
+    prompt: What are the diagnostic criteria and causes of euglycemic DKA?
+    outline:
+      - "Definition: [About 10% of DKA, Glucose <200 mg/dL with DKA's ketosis and acidosis criteria]"
+      - "Criteria: [BOHB ≥3.0 mmol/L or urine ketones 2+, pH <7.3 and/or bicarbonate <18 mmol/L]"
+      - "Causes: [Insulin injection en route to hospital, Antecedent food restriction, Pregnancy, SGLT2 inhibitors]"
+      - "Treatment point: [Start 5-10% dextrose with saline at the start of insulin]"
+    src: { page: 188, quote: "10% of the DKA population. RBG <200 mg/dL in the presence of ketosis and metabolic acidosis criteria of DKA" }
+    status: unverified
+    tags: [book-question, high-yield]
+  - id: dm.L15.066
+    kind: essay
+    topic: fluids
+    prompt: Discuss the lines of management of DKA.
+    outline:
+      - "Fluids: [Start before insulin, 0.9% NaCl 1 L/h if severe, then replace 50% of deficit in 8-12 h, Deficit from orthostatic signs: 2 L, 3-4 L, >4 L, Dextrose 5-10% when glucose <250]"
+      - "Insulin: [Fixed-rate IV 0.1 units/kg/h (s.c. analog in mild DKA), Not with K <3.5 or severe volume contraction, 0.05 units/kg/h when glucose <250; keep 150-200]"
+      - "Potassium: [After urine output, K <3.5: 10-20 mmol/h first, 3.5-5: 10-20 mmol per liter, >5: none, check every 2 h]"
+      - "Bicarbonate: [Side effects: overshoot alkalosis, ketone rise, hypokalemia, cerebral edema, paradoxical CSF acidosis]"
+      - "Additional: [Antibiotics, O2 if PO2 <80, Shock: expanders, Mannitol for brain edema, CVP in cardiac patients, catheter if anuric 3 h]"
+      - "Resolution and transition: [Glucose <200 + 2 of HCO3 ≥15, pH >7.3, AG ≤12, s.c. insulin 1-2 h before stopping IV; 40-60% basal]"
+      - "Complications: [Hypoglycemia, hypokalemia, hyperchloremic acidosis, cerebral edema]"
+    src: { page: 191, quote: "Insulin therapy is cornerstone in management." }
+    status: unverified
+    tags: [book-question, high-yield]
+  # ---------- calculators ----------
+  - id: dm.L15.067
+    kind: calc
+    topic: labs
+    calculator: corrected_sodium
+    stem: "A 26-year-old in DKA has glucose 500 mg/dL and measured sodium 132 mEq/L."
+    inputs: { na_meq_l: 132, glucose_mg_dl: 500 }
+    expect: "138.4 mEq/L"
+    interpret: "Add 1.6 mEq/L for every 100 mg/dL of glucose above 100: 132 + 6.4 = 138.4 (about 138), so the true sodium is normal."
+    src: { page: 189, quote: "If glucose level is 500 and sodium is 132" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L15.068
+    kind: calc
+    topic: labs
+    calculator: corrected_sodium
+    stem: "A 70-year-old with HHS has glucose 1,100 mg/dL and measured sodium 141 mEq/L."
+    inputs: { na_meq_l: 141, glucose_mg_dl: 1100 }
+    expect: "157 mEq/L"
+    interpret: "141 + 0.016 × 1,000 = 157. A normal measured sodium in severe hyperglycemia hides a profound free-water loss."
+    src: { page: 189, quote: "High or normal serum sodium indicates a profound degree of free water loss." }
+    status: unverified
+  - id: dm.L15.069
+    kind: calc
+    topic: diagnosis
+    calculator: effective_osmolality
+    stem: "A 76-year-old with T2DM is confused: glucose 880 mg/dL, Na 148 mEq/L, urea 15 mmol/L, BOHB 1.1 mmol/L, pH 7.34."
+    inputs: { na_meq_l: 148, glucose_mg_dl: 880, urea_mmol_l: 15 }
+    expect: "344.9 mOsm/kg (meets the HHS criterion)"
+    interpret: "Effective osmolality 2 × 148 + 880/18 ≈ 345 (>300; total ≈ 360, >320). With glucose ≥600, no significant ketonemia and pH ≥7.3 this is HHS."
+    src: { page: 189, quote: "Diagnostic criteria HHS" }
+    status: unverified
+    tags: [high-yield]

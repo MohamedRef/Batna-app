@@ -1,0 +1,786 @@
+schema: batna.lesson/v1
+lecture: neph.L06
+lessons:
+  # ------------------------------------------------------------------
+  - id: neph.L06.lesson1
+    title: "الميه والصوديوم: مين بيلعب بالـ Na؟"
+    hook: "الصوديوم الواطي مش دايمًا نقص صوديوم. أوقات ميه زيادة، وأوقات سكر، وأوقات المعمل بيضحك عليك."
+    minutes: 8
+    pages: [127, 129]
+    topics: [water, sodium, hypo-types, hypo-volume]
+    goals:
+      - "تفهم الـ osmoreceptors والـ ADH بيظبطوا الميه إزاي"
+      - "تفرّق الـ hypertonic والـ pseudo والـ hypotonic hyponatremia"
+      - "تمشي في الـ algorithm بالـ volume status والـ urine Na"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 127
+        title: "ترموستات الميه"
+        quote: "BW is mainly regulated by cerebral and peripheral osmoreceptors capable of sensing changes in ECF osmolality"
+        text: |
+          الجسم عنده ==osmoreceptors== في المخ وبرّه، بتحس بالـ **osmolality** بتاعة الـ ECF.
+
+          - الـ osmolality عليت؟ ييجي **عطش** ويتفرز **ADH** (vasopressin) من الـ pituitary.
+          - الـ osmolality نزلت (شربت ميه كتير)؟ العطش والـ ADH يقفوا، والبول يبقى مخفف، والـ osmolality ترجع **285 mOsmol/kg** في حوالي **6 ساعات**.
+          - ناشف؟ ADH يحبس الميه والبول يبقى مركّز جدًا، والعطش هو اللي يعوّض النقص في الآخر.
+      - kind: figure
+        page: 127
+        quote: "ADH binds V 2 (vasopressin) receptors on the Basolateral aspect of the principal cells in the collecting duct"
+        title: "الـ ADH بيفتح شبابيك الميه"
+        alt: "A collecting duct principal cell. ADH from the blood side binds the V2 receptor on the basolateral membrane; aquaporin channels move to the apical (urine) membrane; water flows from the tubule lumen through the cell into the hypertonic interstitium."
+        caption: "الـ ==ADH== بيمسك في **V2** على الناحية الـ basolateral، فالـ **aquaporins** تطلع على الناحية الـ apical، والميه تعدّي للـ interstitium الـ hypertonic."
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L06a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+              <marker id="L06b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-acc"/></marker>
+            </defs>
+            <rect x="5" y="20" width="85" height="200" rx="6" class="fg-thin"/>
+            <text x="47" y="40" text-anchor="middle" class="t-sm t-b">Tubule lumen</text>
+            <text x="47" y="56" text-anchor="middle" class="t-sm t-mut">(urine)</text>
+            <rect x="100" y="20" width="130" height="200" rx="10" class="fg-box"/>
+            <text x="165" y="40" text-anchor="middle" class="t-sm t-b">Principal cell</text>
+            <rect x="240" y="20" width="85" height="200" rx="6" class="fg-acc"/>
+            <text x="282" y="40" text-anchor="middle" class="t-sm t-b">Interstitium</text>
+            <text x="282" y="56" text-anchor="middle" class="t-sm t-mut">(hypertonic)</text>
+            <circle cx="232" cy="90" r="9" class="fg-dot-acc"/>
+            <text x="282" y="94" text-anchor="middle" class="t-sm t-acc">ADH → V2</text>
+            <path d="M222 94 L114 124" class="fg-arrow-acc" marker-end="url(#L06b)"/>
+            <rect x="94" y="115" width="14" height="30" rx="3" class="fg-good"/>
+            <text x="170" y="138" text-anchor="middle" class="t-sm">aquaporins</text>
+            <text x="170" y="152" text-anchor="middle" class="t-sm">move apical</text>
+            <path d="M40 175 L300 175" class="fg-arrow" marker-end="url(#L06a)"/>
+            <text x="165" y="195" text-anchor="middle" class="t-sm t-b">H2O</text>
+            <text x="165" y="211" text-anchor="middle" class="t-sm t-mut">free water reabsorbed</text>
+          </svg>
+      - kind: explain
+        page: 128
+        title: "الصوديوم: الكلية هي المدير"
+        quote: "Kidneys are the principal regulator"
+        text: |
+          الـ Na الطبيعي **135–145 mEq/L**، وهو ==principal active solute== اللي ماسك حجم الدم والـ interstitium.
+
+          بيتمص من الأمعاء كلها بالـ Na/K-ATPase، لكن **الكلية هي المدير**:
+          - **PCT**: يرجّع **2/3** الـ Na المترشح.
+          - **Loop of Henle**: الـ countercurrent system للـ Na والميه.
+          - **DCT والـ collecting duct**: الـ ==aldosterone== بيرجّع زيادة.
+      - kind: explain
+        page: 128
+        title: "Hyponatremia: هادي بس خطيرة"
+        quote: "In hospital, symptomatic hyponatraemia is associated with a mortality of 10-50%."
+        text: |
+          الـ ==hyponatremia== = Na أقل من **135**.
+
+          أغلب العيانين **مفيش عندهم أعراض**، بس الـ perception والمشي بيتلخبطوا كل ما الـ Na ينزل. أما الـ **symptomatic** في المستشفى فـ mortality **10–50%**. يعني ما تستهونش بيها.
+      - kind: reveal
+        page: 128
+        quote: "Extracellular hypertonicity associated with hyperglycemia favors efflux of water into the extracellular space, in turn decreasing the [Na+]."
+        prompt: "عيان DKA سكره 700 والـ Na بتاعه 128. هل عنده نقص صوديوم؟"
+        answer: "غالبًا لأ. ده ==translocational (hypertonic) hyponatremia==: السكر العالي بيشد **ميه من جوّه الخلايا** للـ ECF فيخفف الـ Na. الـ tonicity هنا **أكتر من 295**. والقاعدة: الـ Na بينزل **1.6 mEq/L لكل 100 mg/dL** زيادة في السكر."
+      - kind: aside
+        tone: analogy
+        page: 129
+        quote: "[Na+] decreases by 1.6 mEq/L for every 100 mg/dL increase in serum glucose level."
+        text: "زي كوباية شاي سكرها زيادة: تحط ميه عليها، **التركيز** بيقل وكمية السكر زي ما هي. الـ glucose هنا هو اللي بيجيب الميه من الخلايا ويخفف الـ Na."
+      - kind: mnemonic
+        page: 129
+        quote: "Glycine- or sorbitol-containing bladder irrigants may also be absorbed."
+        word: "LIPG"
+        parts:
+          - { key: "L", text: "Lipids high" }
+          - { key: "I", text: "Increased plasma proteins (myeloma)" }
+          - { key: "P", text: "Plus hyperglycemia" }
+          - { key: "G", text: "Glycine or sorbitol bladder irrigants" }
+        hook: "**LIPG** للـ ==pseudohyponatremia==: المعمل بيقرا Na واطي والجسم مش واطي فعلًا (إلا الـ irrigants اللي بتتمص)."
+      - kind: figure
+        page: 129
+        quote: "Assess volume status"
+        title: "الـ algorithm: شوف الـ volume الأول"
+        alt: "Hyponatremia algorithm. Assess volume status. Hypovolemia: urine Na above 20 means renal losses (diuretics, mineralocorticoid deficiency, salt-losing nephropathy, cerebral salt wasting); below 20 means extrarenal losses (vomiting, diarrhea, third spacing). Euvolemia: glucocorticoid deficiency, hypothyroidism, stress, drugs, SIADH. Hypervolemia: urine Na above 20 means kidney injury; below 20 means nephrotic syndrome, cirrhosis, heart failure."
+        caption: "سؤالين بس: العيان **ناشف ولا طبيعي ولا وارم**؟ وبعدين الـ ==urine Na== أكتر ولا أقل من **20**؟"
+        svg: |
+          <svg viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg">
+            <rect x="85" y="5" width="160" height="28" rx="8" class="fg-ink"/>
+            <text x="165" y="24" text-anchor="middle" class="t-b">Assess volume status</text>
+            <rect x="5" y="45" width="320" height="95" rx="8" class="fg-bad"/>
+            <text x="15" y="64" class="t-b">Hypovolemia (TBW ↓, Na ↓↓)</text>
+            <text x="15" y="84" class="t-sm">Urine Na &gt;20: renal losses</text>
+            <text x="25" y="100" class="t-sm t-mut">diuretics, mineralocorticoid def., salt-losing</text>
+            <text x="25" y="114" class="t-sm t-mut">nephropathy, osmotic diuresis, cerebral salt wasting</text>
+            <text x="15" y="132" class="t-sm">Urine Na &lt;20: vomiting, diarrhea, third spacing</text>
+            <rect x="5" y="150" width="320" height="75" rx="8" class="fg-box"/>
+            <text x="15" y="169" class="t-b">Euvolemia, no edema (TBW ↑, Na =)</text>
+            <text x="15" y="189" class="t-sm">Urine Na &gt;20</text>
+            <text x="15" y="207" class="t-sm t-mut">glucocorticoid def., hypothyroidism, stress,</text>
+            <text x="15" y="221" class="t-sm t-mut">drugs, SIADH</text>
+            <rect x="5" y="235" width="320" height="85" rx="8" class="fg-acc"/>
+            <text x="15" y="254" class="t-b">Hypervolemia (TBW ↑↑, Na ↑)</text>
+            <text x="15" y="276" class="t-sm">Urine Na &gt;20: acute or chronic kidney injury</text>
+            <text x="15" y="298" class="t-sm">Urine Na &lt;20: nephrotic syndrome, cirrhosis,</text>
+            <text x="25" y="312" class="t-sm">cardiac failure</text>
+          </svg>
+      - kind: sort
+        page: 129
+        quote: "Assess volume status"
+        prompt: "حط كل سبب في الـ volume status بتاعه:"
+        bins: ["Hypovolemia", "Euvolemia", "Hypervolemia"]
+        cards:
+          - { text: "Vomiting", bin: 0 }
+          - { text: "Cerebral salt wasting", bin: 0 }
+          - { text: "SIADH", bin: 1 }
+          - { text: "Hypothyroidism", bin: 1 }
+          - { text: "Glucocorticoid deficiency", bin: 1 }
+          - { text: "Cirrhosis", bin: 2 }
+          - { text: "Nephrotic syndrome", bin: 2 }
+          - { text: "Burns (third spacing)", bin: 0 }
+        why: "الناشف خسر Na أكتر من الميه (من الكلية أو برّه). الـ euvolemic زادت ميته من غير ما الـ Na يتغير. الوارم زاد الاتنين والميه أكتر."
+      - kind: explain
+        page: 129
+        title: "الأعراض: المخ بينفخ"
+        quote: "Symptoms due to cerebral swelling as osmolality falls: the encephalopathy."
+        text: |
+          الأعراض جاية من ==cerebral swelling==: الـ osmolality بتنزل فالميه تدخل خلايا المخ.
+
+          - **نادرة** لو chronic أو Na **فوق 125**.
+          - **شائعة** لو acute أو Na **تحت 110**: صداع، apathy، confusion (خصوصًا الكبار)، تشنجات و coma.
+      - kind: check
+        page: 129
+        quote: "Common in acute hyponatremia or Na <110mmol/L"
+        question: "Which hyponatremic patient is most likely to have symptoms?"
+        options:
+          - "Na 112 that fell over 12 hours"
+          - "Na 128 for 3 months"
+          - "Na 130 with hyperglycemia"
+          - "Na 126 for years in heart failure"
+        answer: 0
+        why:
+          - "صح: acute ونازل بسرعة وقريب من 110، المخ ملحقش يتأقلم."
+          - "Chronic وفوق 125: الأعراض نادرة."
+          - "ده غالبًا translocational، والـ Na فوق 125."
+          - "Chronic وفوق 125."
+      - kind: try
+        items: [neph.L06.005, neph.L06.015, neph.L06.016, neph.L06.018, neph.L06.020]
+    recap:
+      - "الـ osmoreceptors بتشغّل العطش والـ ADH؛ الـ ADH على V2 بيطلّع الـ aquaporins."
+      - "Na طبيعي 135–145؛ الكلية المدير: PCT 2/3، loop، aldosterone."
+      - "Hypertonic hyponatremia (>295) = السكر: Na ينزل 1.6 لكل 100 mg/dL."
+      - "Pseudo = LIPG: lipids، proteins (myeloma)، glucose، glycine irrigants."
+      - "الـ algorithm: volume status ثم urine Na فوق أو تحت 20."
+      - "الأعراض من الـ cerebral swelling: نادرة فوق 125 أو chronic، شائعة تحت 110 أو acute."
+    practice: [neph.L06.001, neph.L06.002, neph.L06.003, neph.L06.004, neph.L06.005, neph.L06.006, neph.L06.007, neph.L06.008, neph.L06.009, neph.L06.010, neph.L06.011, neph.L06.012, neph.L06.013, neph.L06.014, neph.L06.015, neph.L06.016, neph.L06.017, neph.L06.018, neph.L06.019, neph.L06.020, neph.L06.021, neph.L06.022, neph.L06.023, neph.L06.024]
+  # ------------------------------------------------------------------
+  - id: neph.L06.lesson2
+    title: "SIADH والعلاج: ارفع الـ Na بس ما تجريش"
+    hook: "الـ hypertonic saline بينقذ المخ، وبرضه لو استعجلت بيكسّر الـ pons. الفرق رقم واحد: 12."
+    minutes: 9
+    pages: [130, 132]
+    topics: [siadh, hypo-treat, ods]
+    goals:
+      - "تحفظ الـ Bartter and Schwartz criteria والأرقام بتاعتها"
+      - "تعالج حسب الأعراض والمدة (48 ساعة)"
+      - "تعرف حدود التصحيح والـ ODS"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 130
+        title: "SIADH: ADH شغال من غير سبب"
+        quote: "Bartter & Schwartz Criteria for SIADH"
+        text: |
+          الـ ==SIADH== = ADH بيتفرز رغم إن الـ osmolality واطية، فالكلية تحبس ميه.
+
+          **Bartter & Schwartz criteria**:
+          - **Hypotonic**: serum osm **أقل من 275**.
+          - **Euvolemia**.
+          - بول **مش مخفف للآخر**: urine osm **أكتر من 100**.
+          - **Urine Na أكتر من 30** مع أكل وشرب عادي.
+          - مفيش kidney disease متقدم ولا cirrhosis ولا heart failure.
+          - مفيش hypothyroidism ولا نقص glucocorticoid ولا diuretics.
+      - kind: mnemonic
+        page: 130
+        quote: "Hypotonic hyponatremia (effective Sosm < 275 mOsm/kg"
+        word: "SIADH"
+        parts:
+          - { key: "S", text: "Serum osm < 275 (hypotonic)" }
+          - { key: "I", text: "Isovolemic: euvolemia" }
+          - { key: "A", text: "Above 100: urine osm not maximally dilute" }
+          - { key: "D", text: "Discharging Na: urine Na > 30" }
+          - { key: "H", text: "Heart, liver, kidney, thyroid, adrenal, diuretics: all excluded" }
+        hook: "الاسم نفسه هو الـ criteria. الأرقام بالترتيب: **275، 100، 30**."
+      - kind: explain
+        page: 130
+        title: "أدلة زيادة"
+        quote: "Additional Data Supporting Diagnosis of SIADH"
+        text: |
+          أدلة تانية تدعّم الـ **SIADH**:
+
+          - **Serum uric acid أقل من 4 mg/dL** و FE uric acid **أكتر من 10%**.
+          - الـ Na ==بيسوء مع normal saline== (الكلية بتطلّع الملح وتحبس الميه).
+          - **Vasopressin أو copeptin** عالي بالنسبة للـ osmolality.
+          - **Water load test** غلط: يطلّع أقل من 80% من 20 mL/kg في 4 ساعات، والبول ما يتخففش تحت 100.
+      - kind: aside
+        tone: trap
+        page: 130
+        quote: "Worsening of hyponatremia with IV normal saline solution"
+        text: "فخ كلاسيكي: تدي عيان SIADH **normal saline** والـ Na **ينزل أكتر**. الملح بيخرج في البول المركّز والميه بتفضل. علشان كده الـ SIADH بيتعالج بـ **water restriction** مش saline."
+      - kind: match
+        page: 130
+        quote: "Box 4, Common Causes of SIADH"
+        prompt: "وصّل كل مثال بمجموعته في أسباب الـ SIADH:"
+        pairs:
+          - ["Meningitis, head trauma", "CNS disease"]
+          - ["Carbamazepine, SSRIs, vincristine", "Drugs"]
+          - ["Small cell lung carcinoma", "Malignancy"]
+          - ["Pneumonia, TB, COPD", "Pulmonary disease"]
+          - ["HIV, postoperative state", "Other"]
+        why: "أشهر malignancy هو ==small cell carcinoma of the lung==، بعده head and neck و non-small cell."
+      - kind: figure
+        page: 131
+        quote: "Emergency correction needed"
+        title: "العلاج: أعراض؟ ومن إمتى؟"
+        alt: "Treatment algorithm. Symptomatic acute (under 48 h): emergency correction with 3% saline 1-2 mL/kg/h plus furosemide. Symptomatic chronic (over 48 h or unknown): some immediate correction, 3% saline if seizures otherwise isotonic saline, furosemide 20 mg IV, switch to water restriction after a 10% rise; do not exceed 12 mmol/L in 24 h, goal 8. Asymptomatic chronic: no immediate correction. Then long-term: treat cause, water restriction, demeclocycline, urea 15-60 g daily, V2 antagonist."
+        caption: "القاعدة الذهبية في الـ chronic: ما تعدّيش **12 mmol/L في 24 ساعة**، والهدف ==8==."
+        svg: |
+          <svg viewBox="0 0 330 320" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L06c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="5" y="5" width="320" height="58" rx="8" class="fg-bad"/>
+            <text x="15" y="24" class="t-b">Symptomatic, acute (&lt;48 h)</text>
+            <text x="15" y="42" class="t-sm">Emergency: 3% saline 1–2 mL/kg/h</text>
+            <text x="15" y="56" class="t-sm">+ furosemide</text>
+            <rect x="5" y="72" width="320" height="104" rx="8" class="fg-acc"/>
+            <text x="15" y="91" class="t-b">Symptomatic, chronic (&gt;48 h / unknown)</text>
+            <text x="15" y="109" class="t-sm">3% saline if seizures, else isotonic saline</text>
+            <text x="15" y="124" class="t-sm">Furosemide 20 mg IV</text>
+            <text x="15" y="139" class="t-sm">Water restriction after Na rises 10%</text>
+            <text x="15" y="160" class="t-sm t-b t-bad">Max 12 mmol/L per 24 h, goal 8</text>
+            <rect x="5" y="185" width="320" height="34" rx="8" class="fg-good"/>
+            <text x="15" y="207" class="t-b">Asymptomatic chronic: no immediate correction</text>
+            <path d="M165 220 L165 236" class="fg-arrow" marker-end="url(#L06c)"/>
+            <rect x="5" y="238" width="320" height="76" rx="8" class="fg-box"/>
+            <text x="15" y="257" class="t-b">Long-term</text>
+            <text x="15" y="274" class="t-sm">Treat cause · water restriction</text>
+            <text x="15" y="290" class="t-sm">Demeclocycline 300–600 mg bid (2 weeks)</text>
+            <text x="15" y="306" class="t-sm">Urea 15–60 g/day · V2 receptor antagonist</text>
+          </svg>
+      - kind: update
+        page: 131
+        quote: "Do not correct serum [Na+] >12 mmol/24 hours"
+        text: "الـ European guideline سنة 2014 بيحط الحد **10 mmol/L في أول 24 ساعة** و 8 في كل 24 ساعة بعدها. في امتحان القسم اكتب رقم الكتاب: **12، والهدف 8**."
+        ref: "European clinical practice guideline on hyponatraemia (ESE/ESICM/ERBP) 2014"
+      - kind: explain
+        page: 131
+        title: "الـ hypertonic saline بيعمل إيه؟"
+        quote: "Both 3% and 5% hypertonic saline (HS) is currently FDA-approved for use in hyponatremia and increased intracranial pressure (ICP)."
+        text: |
+          الـ **3% و 5%** معتمدين للـ hyponatremia والـ **ICP العالي**.
+
+          بيرفع الـ osmolarity فيسحب ميه من برّه الأوعية لجوّه: ==brain edema== يقل، الـ cerebral blood flow يتحسن، والـ CSF يقل.
+
+          مقارنة بالـ **20% mannitol**: نفس تأثير الـ ICP، بس الـ saline بيرفع الـ Na و **diuresis أقل** (الـ Na بيطلّع ADH)، ومحتاج **حجم أقل**.
+      - kind: explain
+        page: 132
+        title: "أرقام لازم تتحفظ"
+        quote: "Each 1 ml/kg/h of 3% saline solution administered can be expected to increase [na+] by 1 meq/l/h."
+        text: |
+          - Severe hyponatremia: صحّح **4–6 mEq/L في اليوم**، بـ **boluses 100 mL** من 3% كل **10 دقايق**، لحد **3 boluses**.
+          - كل ==1 mL/kg/h== من 3% بيرفع الـ Na حوالي **1 mEq/L/h**.
+          - الأحسن **central line**؛ الـ peripheral ينفع لو مفيش غيره.
+      - kind: check
+        page: 132
+        quote: "Each 1 ml/kg/h of 3% saline solution administered can be expected to increase [na+] by 1 meq/l/h."
+        question: "A 70-kg patient gets 3% saline at 70 mL/h. Expected Na rise per hour?"
+        options:
+          - "About 1 mEq/L/h"
+          - "About 0.1 mEq/L/h"
+          - "About 3 mEq/L/h"
+          - "About 7 mEq/L/h"
+        answer: 0
+        why:
+          - "صح: 70 mL/h ÷ 70 kg = 1 mL/kg/h، يعني حوالي 1 mEq/L كل ساعة."
+          - "أقل بكتير من القاعدة."
+          - "ده لو 3 mL/kg/h."
+          - "خلطت بين الـ mL والـ mEq."
+      - kind: explain
+        page: 132
+        title: "الأعراض الجانبية والـ ODS"
+        quote: "Sequelae of ODS are often irreversible and include dysphagia, dysarthria, spasticity, behavioral disturbance, cognitive impairment, delirium"
+        text: |
+          الـ hypertonic saline ممكن يعمل:
+          - **Hyperchloremic metabolic acidosis** (NaCl زيادة).
+          - **Hypernatremia** مع الاستعمال الطويل.
+          - مشاكل الـ IV (الأشهر): infection، thrombophlebitis، extravasation، و hypervolemia. خلي بالك في الـ **CHF و renal insufficiency**.
+
+          والأخطر ==osmotic demyelination syndrome==: خلية المخ في الـ chronic hyponatremia رمت الـ **organic osmolytes** علشان ما تنفخش. لو الـ tonicity طلعت أسرع ما تلحق ترجّعهم، **تنكمش**. النتيجة غالبًا **irreversible**: dysphagia، dysarthria، spasticity، quadriparesis، و **locked-in**.
+      - kind: aside
+        tone: joke
+        page: 132
+        quote: "Osmotic demyelin- ation syndrome (ODS) can occur if correction of hypo-natremia is achieved too rapidly."
+        text: "الـ Na في الـ chronic hyponatremia زي عربية في زحمة الدائري: لو دست بنزين مرة واحدة هتخبط: الـ correction السريع (too rapidly) = **ODS**. **8 في اليوم** وانت مبسوط، و **12** آخرك."
+      - kind: case
+        page: 131
+        quote: "Do not correct serum [Na+] >12 mmol/24 hours"
+        stem: "A 75-year-old woman on a thiazide: Na 112 mmol/L, duration unknown, confused but no seizures."
+        steps:
+          - question: "Which group in the algorithm?"
+            options: ["Symptomatic chronic (unknown duration)", "Symptomatic acute", "Asymptomatic chronic", "Pseudohyponatremia"]
+            answer: 0
+            why: "المدة **unknown** بتتعامل كـ chronic، وهي confused يبقى symptomatic."
+          - question: "Fluid of choice now (no seizures)?"
+            options: ["Isotonic saline with furosemide 20 mg IV", "3% saline at a fast rate", "Water restriction only", "5% dextrose"]
+            answer: 0
+            why: "في الـ chronic symptomatic: 3% بس لو **seizures**، غير كده **isotonic saline** + furosemide."
+          - reveal: "Na after 24 h is 126."
+            question: "Is this safe?"
+            options: ["No: 14 exceeds the 12 mmol/L limit; ODS risk", "Yes: the goal is 14", "Yes: any rise is good", "No: it is too slow"]
+            answer: 0
+            why: "الحد **12 في 24 ساعة** والهدف **8**. هنا 14، فيه خطر ODS."
+      - kind: try
+        items: [neph.L06.025, neph.L06.026, neph.L06.029, neph.L06.033, neph.L06.039]
+    recap:
+      - "SIADH: serum osm <275، euvolemia، urine osm >100، urine Na >30، والباقي مستبعد."
+      - "يدعّمه: uric acid <4، FE urate >10%، يسوء مع normal saline، copeptin عالي."
+      - "أشهر malignancy: small cell lung carcinoma."
+      - "Acute symptomatic: 3% + furosemide. Chronic: max 12 في 24 ساعة، الهدف 8."
+      - "1 mL/kg/h من 3% = حوالي 1 mEq/L/h. Boluses 100 mL كل 10 دقايق لحد 3."
+      - "ODS: الخلية اللي رمت osmolytes تنكمش لو صححت بسرعة، والنتيجة غالبًا irreversible."
+    practice: [neph.L06.025, neph.L06.026, neph.L06.027, neph.L06.028, neph.L06.029, neph.L06.030, neph.L06.031, neph.L06.032, neph.L06.033, neph.L06.034, neph.L06.035, neph.L06.036, neph.L06.037, neph.L06.038, neph.L06.039, neph.L06.040, neph.L06.041, neph.L06.042, neph.L06.043, neph.L06.044, neph.L06.045, neph.L06.046, neph.L06.116, neph.L06.117]
+  # ------------------------------------------------------------------
+  - id: neph.L06.lesson3
+    title: "Hypernatremia: المخ اللي نشف"
+    hook: "الـ Na العالي غالبًا مش ملح زيادة، ده ميه ناقصة. والعلاج: ميه، بس بالراحة."
+    minutes: 7
+    pages: [133, 135]
+    topics: [hyperna, hyperna-treat]
+    goals:
+      - "تعرف أسباب الـ hypernatremia من Table 2 وتفرّق الـ central من الـ nephrogenic DI"
+      - "تعالج حسب الـ volume status"
+      - "تحفظ سرعة التصحيح في الـ acute والـ chronic"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 133
+        title: "Na فوق 146 = ميه ناقصة"
+        quote: "Serum Na >146mmol/L is usually due to a water deficit and is associated with severe underlying disease and significant mortality."
+        text: |
+          الـ ==hypernatremia== (Na **فوق 146**) غالبًا سببها **water deficit**، ومعاها مرض شديد و mortality عالية.
+
+          الـ ECF بقى مركّز فبيشد ميه من الخلايا. المخ **بينكمش**، والانكماش ده بيعمل ==vascular shear stress== فيحصل **نزيف و thrombosis**.
+      - kind: table
+        page: 133
+        quote: "Table 2. Causes of Hypernatremia"
+        title: "Table 2: أسباب الـ hypernatremia"
+        columns: [Cause, Urine clue]
+        rows:
+          - ["No access to water", "Urine osm >600"]
+          - ["GI losses, sweating", "Urine osm >600"]
+          - ["Loop diuretics, osmotic diuresis", "Isosthenuric"]
+          - ["Central DI", "Dilute; rises with desmopressin"]
+          - ["Nephrogenic DI", "<300; no desmopressin response"]
+          - ["Hypertonic fluids, TPN", ">600, urine Na >100"]
+        hide: [[0, 1], [3, 1], [4, 1], [5, 1]]
+      - kind: reveal
+        page: 133
+        quote: "Nephrogenic diabetes insipidus"
+        prompt: "إزاي تفرّق الـ central DI من الـ nephrogenic DI بتحليلين؟"
+        answer: "**Copeptin**: واطي في الـ central (مفيش ADH)، عالي في الـ nephrogenic (الـ ADH موجود والكلية مطنّشة).\n\n**Desmopressin**: الـ urine osm **تعلى** في الـ central و **ما تتحركش** في الـ nephrogenic. أسباب الـ nephrogenic: ==lithium==، demeclocycline، hypercalcemia، hypokalemia، tubulointerstitial disease."
+      - kind: explain
+        page: 134
+        title: "الأعراض"
+        quote: "The patient may have increased tone with brisk reflexes and myoclonus."
+        text: |
+          - أغلبهم: علامات **dehydration** وفقد سوائل.
+          - أعراض الـ CNS تظهر لو الـ Na طلع **بسرعة** أو عدّى ==160==.
+          - الأطفال: irritability و agitation لحد coma، و **صرخة عالية**.
+          - عطش، و polyuria و polydipsia في الـ DI.
+          - Orthostatic hypotension و tachycardia في الـ hypovolemic.
+          - **Tone عالي، brisk reflexes، myoclonus** (عكس الـ hypermagnesemia اللي هتشوفها بعدين).
+      - kind: figure
+        page: 134
+        quote: "Administer isotonic saline until hypovolemia improves"
+        title: "العلاج بالـ volume status"
+        alt: "Hypernatremia treatment by volume status. Hypovolemia: isotonic saline until hypovolemia improves and treat the cause, then correct the water deficit with 0.45% saline, 5% dextrose or oral water. Euvolemia: correct the water deficit; vasopressin 5 U subcutaneously every 6 h in central DI with severe losses; long-term central DI therapy, or for nephrogenic DI stop drugs, low sodium diet, thiazides, amiloride for lithium. Hypervolemia: remove sodium by stopping offending agents and furosemide; dialysis for renal failure."
+        caption: "الناشف ياخد **isotonic saline الأول** يرجّع الدورة الدموية، وبعدين الميه. الوارم محتاج **يطلّع Na** (furosemide)."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <rect x="5" y="5" width="320" height="80" rx="8" class="fg-bad"/>
+            <text x="15" y="24" class="t-b">Hypovolemia</text>
+            <text x="15" y="43" class="t-sm">1. Isotonic saline until volume improves</text>
+            <text x="25" y="58" class="t-sm t-mut">+ treat cause (insulin, relieve obstruction)</text>
+            <text x="15" y="76" class="t-sm">2. Then water deficit: 0.45% saline / D5 / oral</text>
+            <rect x="5" y="95" width="320" height="120" rx="8" class="fg-box"/>
+            <text x="15" y="114" class="t-b">Euvolemia</text>
+            <text x="15" y="133" class="t-sm">Water deficit: 0.45% saline, D5 or oral water</text>
+            <text x="15" y="150" class="t-sm">Central DI, big losses: vasopressin 5 U SC q6h</text>
+            <text x="15" y="167" class="t-sm">Watch Na: avoid water intoxication</text>
+            <text x="15" y="187" class="t-sm">Nephrogenic DI: stop drug, low Na diet,</text>
+            <text x="25" y="203" class="t-sm">thiazide, amiloride (lithium), fix K and Ca</text>
+            <rect x="5" y="225" width="320" height="68" rx="8" class="fg-acc"/>
+            <text x="15" y="244" class="t-b">Hypervolemia: remove Na</text>
+            <text x="15" y="263" class="t-sm">Stop offending agents · furosemide</text>
+            <text x="15" y="282" class="t-sm">Hemodialysis if renal failure</text>
+          </svg>
+      - kind: explain
+        page: 134
+        title: "كام لتر؟"
+        quote: "Volume of replacement fluid needed to correct the water deficit is determined by using the concentration of sodium in the replacement fluid."
+        text: |
+          حجم السائل بيعتمد على ==الـ Na اللي في السائل== مقارنة بـ **154** (الـ normal saline). كل ما السائل فيه Na أكتر، كل ما تحتاج حجم أكبر علشان تدي نفس الميه الحرة.
+
+          مثال: الـ **0.45% saline** نصّه بس ميه حرة، فهتحتاج حوالي **ضعف** الـ water deficit. والـ **5% dextrose** كله ميه حرة.
+
+          والحجم ده بيتدي **بالراحة على 48–72 ساعة**.
+      - kind: table
+        page: 135
+        quote: "Correct at no greater than 0.5mmol/L/h or no less than 10mmol/L/day."
+        title: "سرعة التصحيح"
+        columns: ["", Acute (<24 h), Chronic (>24 h)]
+        rows:
+          - [Rate, "1 mmol/L/h", "≤0.5 mmol/L/h (~10/day)"]
+          - [Deficit plan, "Reverse quickly", "50% in 12–24 h, rest in 24–48 h"]
+          - [Monitor Na, "2-hourly, then 4-hourly", "2-hourly, then 4-hourly"]
+        hide: [[0, 1], [0, 2], [1, 2]]
+      - kind: aside
+        tone: exam
+        page: 135
+        quote: "If chronic (>24 hours), correct more slowly to prevent rehydration injury to the brain"
+        text: "ليه الـ chronic بالراحة؟ المخ اتأقلم وعمل osmolytes علشان ما ينكمش. لو نزلت الـ Na بسرعة، الميه تدخل الخلايا و يحصل ==rehydration injury== (cerebral edema). نفس فكرة الـ ODS بس بالعكس."
+      - kind: check
+        page: 135
+        quote: "5% glucose or 0.45% (half-normal) saline IVI if cannot use the gut."
+        question: "An alert, oriented patient with chronic hypernatremia can swallow. Best way to give water?"
+        options:
+          - "Water by mouth"
+          - "5% dextrose IV at a fast rate"
+          - "0.9% saline"
+          - "3% saline"
+        answer: 0
+        why:
+          - "صح: الكتاب بيبدأ بالـ PO لو oriented، أو NG."
+          - "الـ IV لو الأمعاء ما تنفعش، ومش بسرعة في الـ chronic."
+          - "الـ normal saline مش ميه حرة؛ بيتدي الأول بس في الـ hypovolemia."
+          - "ده هيعلّي الـ Na أكتر."
+      - kind: try
+        items: [neph.L06.049, neph.L06.053, neph.L06.056, neph.L06.057, neph.L06.059]
+    recap:
+      - "Na >146 = غالبًا water deficit؛ المخ ينكمش ويحصل نزيف و thrombosis."
+      - "CNS symptoms لو طلع بسرعة أو >160؛ tone عالي و brisk reflexes و myoclonus."
+      - "Central DI: copeptin واطي ويستجيب للـ desmopressin. Nephrogenic: lithium، copeptin عالي، مفيش استجابة."
+      - "Hypovolemic: isotonic saline الأول، بعدين الميه. Hypervolemic: furosemide أو dialysis."
+      - "الحجم بيعتمد على Na السائل مقارنة بـ 154، على 48–72 ساعة."
+      - "Acute: 1 mmol/L/h. Chronic: ≤0.5/h، 50% في 12–24 ساعة."
+    practice: [neph.L06.047, neph.L06.048, neph.L06.049, neph.L06.050, neph.L06.051, neph.L06.052, neph.L06.053, neph.L06.054, neph.L06.055, neph.L06.056, neph.L06.057, neph.L06.058, neph.L06.059, neph.L06.060, neph.L06.061]
+  # ------------------------------------------------------------------
+  - id: neph.L06.lesson4
+    title: "البوتاسيوم العالي: احمي القلب الأول"
+    hook: "K 7 ورسم القلب متغير؟ عندك ترتيب تلات خطوات، والتلاتة بيبدأوا بحرف C."
+    minutes: 9
+    pages: [135, 139]
+    topics: [k-physiology, hyperk, hyperk-treat]
+    goals:
+      - "تفهم ليه الـ K بيأثر على القلب والعضلات"
+      - "تكشف الـ pseudo والـ reverse pseudohyperkalemia"
+      - "ترتّب العلاج الطارئ وتقارن الـ K binders"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 135
+        title: "الـ K ساكن جوّه الخلية"
+        quote: "Insulin and B adrenergic catecholamines stimulate membrane Na /K ATPase to pump K into cells (in a 3:2 ratio)."
+        text: |
+          أول ما الـ K يتمص، بيدخل الخلايا بسرعة. الـ ==insulin== والـ **beta-adrenergic catecholamines** بيشغّلوا الـ **Na/K-ATPase** (3 Na برّه لكل 2 K جوّه).
+
+          **98%** من الـ exchangeable K جوّه الخلية. الفرق ده هو اللي عامل الـ **resting membrane voltage**، علشان كده أي لخبطة في الـ K بتظهر في **القلب والعضلات والأعصاب**.
+      - kind: figure
+        page: 136
+        quote: "FILTERED LOAD 600-700 mEq/day"
+        title: "رحلة الـ K في الـ nephron"
+        alt: "Nephron diagram for potassium: filtered load 600-700 mEq/day; the proximal tubule reabsorbs most (about 75%), the loop of Henle about 15%; the distal tubule and collecting duct secrete K under aldosterone; urinary excretion about 90 mEq/day."
+        caption: "الـ PCT والـ loop بيرجّعوا معظم الـ K. اللي **بيقرر** الـ K اللي في البول هو الـ ==aldosterone== في الـ DCT والـ collecting duct."
+        svg: |
+          <svg viewBox="0 0 330 280" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L06d" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="5" y="5" width="320" height="38" rx="8" class="fg-ink"/>
+            <text x="165" y="29" text-anchor="middle" class="t-b">Filtered load 600–700 mEq/day</text>
+            <path d="M165 43 L165 58" class="fg-arrow" marker-end="url(#L06d)"/>
+            <rect x="5" y="60" width="320" height="40" rx="8" class="fg-good"/>
+            <text x="15" y="85" class="t-b">PCT</text>
+            <text x="315" y="85" text-anchor="end" class="t-sm">reabsorbs 75%</text>
+            <path d="M165 100 L165 115" class="fg-arrow" marker-end="url(#L06d)"/>
+            <rect x="5" y="117" width="320" height="40" rx="8" class="fg-good"/>
+            <text x="15" y="142" class="t-b">Loop of Henle</text>
+            <text x="315" y="142" text-anchor="end" class="t-sm">reabsorbs 15%</text>
+            <path d="M165 157 L165 172" class="fg-arrow" marker-end="url(#L06d)"/>
+            <rect x="5" y="174" width="320" height="50" rx="8" class="fg-acc"/>
+            <text x="15" y="195" class="t-b">DCT + collecting duct</text>
+            <text x="15" y="213" class="t-sm">K secretion, tightly set by aldosterone</text>
+            <path d="M165 224 L165 239" class="fg-arrow" marker-end="url(#L06d)"/>
+            <rect x="5" y="241" width="320" height="34" rx="8" class="fg-box"/>
+            <text x="165" y="263" text-anchor="middle" class="t-b">Urine ~90 mEq/day</text>
+          </svg>
+      - kind: explain
+        page: 136
+        title: "الكلية عندها ساعة"
+        quote: "characterized by lower excretion at night and in the early morning hours and then increasing in the afternoon"
+        text: |
+          إخراج الـ K (K excretion) له ==circadian rhythm==: **قليل بالليل والصبح بدري**، ويعلى **بعد الضهر**.
+
+          ليه؟ بيمشي مع مواعيد الأكل اللي فيه K، ومع rhythm في الـ genes بتاعة بروتينات إفراز الـ K، ومع rhythm الـ glucocorticoids والـ aldosterone مع النوم والصحيان.
+      - kind: explain
+        page: 137
+        title: "Pseudohyperkalemia: العينة هي العيانة"
+        quote: "Pseudohyperkalemia is a laboratory artifact in which there is marked elevation in serum K+ concentration (>0.5 mEq/L)"
+        text: |
+          الـ ==pseudohyperkalemia==: K عالي في المعمل (بأكتر من 0.5) والعيان سليم.
+
+          أسبابها في **سحب العينة**: tourniquet، قبض الإيد، إبرة رفيعة، خبط العينة في الـ pneumatic tube. وأسباب مرضية: **platelets فوق 500,000** و **WBC حوالي 70,000** (بيطلّعوا K وهي بتتجلط).
+
+          الـ ==reverse pseudohyperkalemia==: **plasma K** عالي والـ **serum K** طبيعي، في الـ **hematologic malignancy**، من الـ **heparin** اللي بيبوّظ غشاء الخلايا الهشة (أو الـ WBC الكتير مستهلكة الطاقة فالـ pump بيقف).
+      - kind: check
+        page: 137
+        quote: "Refers to a false elevation in plasma K+ concentration when serum K+ concentration is normal."
+        question: "CLL patient: heparin-tube K 6.9, clotted-tube K 4.2, normal ECG. What is this?"
+        options:
+          - "Reverse pseudohyperkalemia"
+          - "Classic pseudohyperkalemia"
+          - "True hyperkalemia"
+          - "Hypokalemia"
+        answer: 0
+        why:
+          - "صح: الـ plasma (heparin) عالي والـ serum طبيعي في malignancy."
+          - "الكلاسيكي العكس: الـ serum هو اللي عالي."
+          - "لو حقيقي كان الاتنين هيعلوا."
+          - "الـ K مش واطي."
+      - kind: sort
+        page: 138
+        quote: "Causes of Hyperkalaemia Increased potassium release from cells"
+        prompt: "الـ K عالي ليه؟ حط كل سبب في مكانه:"
+        bins: ["Release from cells", "Drugs", "Reduced urine excretion"]
+        cards:
+          - { text: "Rhabdomyolysis", bin: 0 }
+          - { text: "Metabolic acidosis", bin: 0 }
+          - { text: "Red cell transfusion", bin: 0 }
+          - { text: "ACEI + ARB", bin: 1 }
+          - { text: "Heparin", bin: 1 }
+          - { text: "High-dose trimethoprim", bin: 1 }
+          - { text: "Gordon syndrome", bin: 2 }
+          - { text: "Ureterojejunostomy", bin: 2 }
+        why: "الـ heparin بيقلل الـ **aldosterone**؛ الـ digoxin بس في الـ **toxicity**. والـ ureterojejunostomy: الأمعاء بتمص الـ K من البول تاني."
+      - kind: figure
+        page: 139
+        quote: "Stabilize myocardial cell membrane"
+        title: "الطوارئ: Calcium → Cells → Clear"
+        alt: "Emergent hyperkalemia ladder. Step 1 stabilize the myocardial membrane with calcium gluconate 10 mL of 10% IV. Step 2 shift potassium into cells with 10 units regular insulin IV plus 50 mL D50, and albuterol 20 mg nebulized. Step 3 remove potassium: hemodialysis in oliguria or ESKD, diuretics if hypervolemic nonoliguric, sodium bicarbonate in metabolic acidosis. Then consider potassium binders."
+        caption: "تلات خطوات: **Calcium** يحمي القلب، **Cells** (insulin و albuterol) تشيل الـ K جوّه، **Clear** يطلّعه من الجسم. الـ calcium **ما بينزّلش** الـ K."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L06e" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="5" y="5" width="320" height="58" rx="8" class="fg-bad"/>
+            <text x="15" y="25" class="t-b">1 Calcium: stabilize myocardium</text>
+            <text x="15" y="45" class="t-sm">Calcium gluconate 10 mL of 10% IV</text>
+            <path d="M165 63 L165 78" class="fg-arrow" marker-end="url(#L06e)"/>
+            <rect x="5" y="80" width="320" height="72" rx="8" class="fg-acc"/>
+            <text x="15" y="100" class="t-b">2 Cells: shift K in</text>
+            <text x="15" y="120" class="t-sm">Insulin 10 U IV + 50 mL D50</text>
+            <text x="15" y="138" class="t-sm">Albuterol 20 mg in 4 mL nebulized</text>
+            <path d="M165 152 L165 167" class="fg-arrow" marker-end="url(#L06e)"/>
+            <rect x="5" y="169" width="320" height="86" rx="8" class="fg-good"/>
+            <text x="15" y="189" class="t-b">3 Clear: remove from body</text>
+            <text x="15" y="209" class="t-sm">Oliguria / ESKD → hemodialysis</text>
+            <text x="15" y="226" class="t-sm">Hypervolemic, nonoliguric → diuretics</text>
+            <text x="15" y="243" class="t-sm">Metabolic acidosis → sodium bicarbonate</text>
+            <rect x="5" y="263" width="320" height="32" rx="8" class="fg-box"/>
+            <text x="165" y="284" text-anchor="middle" class="t-sm t-b">Then consider K-binding drugs</text>
+          </svg>
+      - kind: order
+        page: 139
+        quote: "Stabilize myocardial cell membrane"
+        prompt: "رتّب العلاج الطارئ لـ K 7.5 مع peaked T waves:"
+        steps:
+          - "Calcium gluconate IV"
+          - "Insulin + dextrose, nebulized albuterol"
+          - "Remove K (dialysis, diuretics or bicarbonate)"
+          - "Consider K binders"
+        why: "القلب الأول (stabilize the myocardial membrane)، بعدين نخبّي الـ K جوّه الخلايا (مؤقت)، بعدين نطلّعه فعلًا."
+      - kind: explain
+        page: 139
+        title: "الحالات اللي مش طارئة"
+        quote: "Exclude pseudo-hyperkalemia"
+        text: |
+          1. **استبعد الـ pseudohyperkalemia** الأول.
+          2. Dietary counseling، و **ابعد عن salt substitutes** (فيها KCl).
+          3. وقّف الأدوية اللي بتمنع إفراز الـ K، واسأل عن **NSAIDs والأعشاب**.
+          4. Diuretics فعّالة (**loop** لو eGFR تحت 30).
+          5. **Oral NaHCO3** للـ metabolic acidosis.
+          6. فكّر في الـ **K binders** (بتساعد تكمّل جرعات الـ RAASi).
+      - kind: table
+        page: 139
+        quote: "Sodium zirconium cyclosilicate"
+        title: "الـ K binders: SPS و patiromer و sodium zirconium cyclosilicate"
+        columns: [Binder, Onset · site, Watch for]
+        rows:
+          - ["SPS", "Hours–days · colon", "Hypernatremia, overload, colonic necrosis"]
+          - ["Patiromer", "7 h · colon", "Hypomagnesemia"]
+          - ["SZC", "1 h · whole gut", "Edema, raises gastric pH"]
+        hide: [[0, 1], [1, 1], [2, 1], [1, 2]]
+      - kind: mnemonic
+        page: 139
+        quote: "Sodium zirconium cyclosilicate"
+        word: "PSZ"
+        parts:
+          - { key: "P", text: "Patiromer: swaps Calcium, steals Magnesium, 7 h" }
+          - { key: "S", text: "SPS: Sodium for K, Slow (hours–days), Sorbitol, Separate drugs 3 h" }
+          - { key: "Z", text: "Zirconium (SZC): Zoom, 1 h, whole gut, H and Na exchange" }
+        hook: "الـ **Z** أسرع واحد (Zoom)، والـ **S** أبطأ واحد (Slow)."
+      - kind: try
+        items: [neph.L06.064, neph.L06.069, neph.L06.074, neph.L06.078, neph.L06.082]
+    recap:
+      - "Insulin و beta-agonists بيشغّلوا Na/K-ATPase (3:2)؛ 98% من الـ K جوّه الخلايا."
+      - "PCT 75%، loop 15%، والـ aldosterone بيقرر في الـ DCT والـ collecting duct."
+      - "Pseudo: tourniquet، fist، إبرة رفيعة، platelets >500,000، WBC 70,000. Reverse: plasma عالي و serum طبيعي في الـ malignancy (heparin)."
+      - "الطوارئ: Calcium ← Cells (insulin 10 U + D50، albuterol 20 mg) ← Clear."
+      - "Binders: SZC ساعة كل الأمعاء، patiromer 7 ساعات colon، SPS ساعات لأيام."
+    practice: [neph.L06.062, neph.L06.063, neph.L06.064, neph.L06.065, neph.L06.066, neph.L06.067, neph.L06.068, neph.L06.069, neph.L06.070, neph.L06.071, neph.L06.072, neph.L06.073, neph.L06.074, neph.L06.075, neph.L06.076, neph.L06.077, neph.L06.078, neph.L06.079, neph.L06.080, neph.L06.081, neph.L06.082, neph.L06.083, neph.L06.084]
+  # ------------------------------------------------------------------
+  - id: neph.L06.lesson5
+    title: "البوتاسيوم الواطي والماغنسيوم: الأخوات"
+    hook: "K واطي مش بيتصلح؟ دوّر على الـ Mg. الاتنين بيمشوا مع بعض."
+    minutes: 9
+    pages: [139, 144]
+    topics: [hypok, mg]
+    goals:
+      - "تقسم أسباب الـ hypokalemia لـ GI و shift و renal و drugs"
+      - "تعرف الأعراض والـ kaliopenic nephropathy وتعالج صح"
+      - "تتعامل مع الـ hypo والـ hypermagnesemia بالأرقام"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 139
+        title: "الـ K بيروح فين؟"
+        quote: "Villous adenoma of the colon, which causes massive potassium secretion."
+        text: |
+          **GI losses**: إسهال مزمن (منهم **laxative abuse**)، و ==villous adenoma== في القولون بيفرز K بكميات.
+
+          **Shift جوّه الخلايا**: TPN أو enteral feeding (بيطلّعوا insulin)، **insulin**، **beta-2 agonists** (albuterol، terbutaline)، **thyrotoxicosis** (thyrotoxic periodic paralysis)، و familial periodic paralysis.
+      - kind: sort
+        page: 140
+        quote: "Primary hyperaldosteronism."
+        prompt: "Hypokalemia: حط كل سبب في مكانه:"
+        bins: ["GI loss", "Shift into cells", "Renal loss", "Drug"]
+        cards:
+          - { text: "Villous adenoma", bin: 0 }
+          - { text: "Laxative abuse", bin: 0 }
+          - { text: "Salbutamol", bin: 1 }
+          - { text: "Thyrotoxic periodic paralysis", bin: 1 }
+          - { text: "Primary hyperaldosteronism", bin: 2 }
+          - { text: "Gitelman syndrome", bin: 2 }
+          - { text: "Hypomagnesemia", bin: 2 }
+          - { text: "Amphotericin B", bin: 3 }
+          - { text: "Theophylline", bin: 3 }
+        why: "الـ renal: Cushing، Conn، renin tumor، GRA، ==Bartter و Gitelman و Liddle==، RTA، Fanconi، و hypomagnesemia. الـ drugs: diuretics، laxatives، amphotericin، carbenicillin، penicillin جرعات عالية، theophylline."
+      - kind: explain
+        page: 141
+        title: "الأعراض: عضلات، كلى، سكر"
+        quote: "Hypokalemia can present with polyuria and polydipsia due to decreased concentrating ability of the kidney."
+        text: |
+          - **Weakness و fatigue** (الأشهر)؛ تظهر dyspnea، constipation، distension، exercise intolerance، ونادرًا **paralysis**.
+          - الشديدة: cramps و ==rhabdomyolysis==.
+          - **Polyuria و polydipsia**: الكلية مش قادرة تركّز البول.
+          - نفسي: psychosis، delirium، hallucinations، depression.
+          - المزمنة: ==kaliopenic nephropathy==: chronic TIN مع **cysts صغيرة**، tubular atrophy، macrophages و fibrosis.
+          - **Glucose intolerance**: السكر يعلى **10 mg/dL لكل 1 mEq/L** نقص في الـ K (الـ K بيظبط إفراز الـ insulin).
+      - kind: reveal
+        page: 141
+        quote: "K+ should be given before HCO3 therapy because correction of metabolic acidosis will cause an intracellular shift of K+"
+        prompt: "عيان عنده hypokalemia و metabolic acidosis. تدي bicarbonate ولا K الأول؟"
+        answer: "==K الأول==. لو صلّحت الـ acidosis، الـ K هيدخل الخلايا والـ K في الدم هينزل أكتر (ممكن arrhythmia أو شلل). بعد ما يستقر، اديله HCO3 مع الـ K."
+      - kind: explain
+        page: 141
+        title: "إزاي تدي K في الوريد"
+        quote: "IV 0.9% saline 1L with 20-40mmol KCl at no more than 10-20mmol KCl/h through peripheral cannula."
+        text: |
+          **0.9% saline لتر** فيه **20–40 mmol KCl**، بسرعة **ما تعدّيش 10–20 mmol/h** في وريد طرفي.
+
+          ==ابعد عن الـ glucose والـ bicarbonate==: الـ glucose بيطلّع insulin، والاتنين بيدخّلوا الـ K الخلايا.
+      - kind: aside
+        tone: joke
+        page: 141
+        quote: "(Avoid glucose-containing solutions or sodium bicarbonate)."
+        text: "تحط KCl في محلول glucose؟ ده زي ما تملا الحلة ميه وهي مخرومة من تحت: الـ insulin هيسحب الـ K لجوّه الخلايا أول ما يوصل."
+      - kind: explain
+        page: 142
+        title: "الماغنسيوم"
+        quote: "Normal range: 1.5-2.3 mg/dl. 60% stored in bone. 1% in extracellular space."
+        text: |
+          الطبيعي **1.5–2.3 mg/dL**؛ **60% في العضم** و **1% بس برّه الخلايا**. Cofactor لإنزيمات كتير، والكلية هي اللي بتظبطه.
+
+          **Hypomagnesemia**:
+          - **Renal**: loop أو thiazide، recovery من obstruction أو ATN، nephrotoxins (**aminoglycosides، cisplatin، ciclosporin، amphotericin، foscarnet**)، hypercalciuria، Gitelman و Bartter.
+          - **Gut**: إسهال، NG suction، جراحة، malabsorption، **pancreatitis**، **alcohol**.
+      - kind: aside
+        tone: exam
+        page: 142
+        quote: "Low Mg occurs in conjunction with low K (50% of cases), low Ca and a metabolic alkalosis."
+        text: "الـ Mg الواطي بييجي مع ==low K (50%)== و **low Ca** و metabolic alkalosis. أي K أو Ca **مش راضي يتصلح**: قيس الـ Mg."
+      - kind: explain
+        page: 143
+        title: "أعراض الـ Mg الواطي وعلاجه"
+        quote: "10mmol MgSO 4 IVI bolus over 5min, then 20mmol MgSO 4 in 100mL 0.9% saline IV over 4 hours."
+        text: |
+          **أعراض**: weakness، cramps، carpopedal spasm، **Chvostek و Trousseau**، tetany، تشنجات، delirium، nystagmus، و **arrhythmias** (supraventricular أو ventricular).
+
+          **العلاج**:
+          - Asymptomatic و Mg **فوق 0.4**: oral slow-release **6–18 mmol/day** على 4 جرعات.
+          - Symptomatic أو مع low Ca أو K: ==10 mmol MgSO4 في 5 دقايق==، بعدين **20 mmol في 100 mL saline على 4 ساعات**، وكرر لو محتاج.
+          - ارجع للـ oral لما يعدّي **0.5**؛ الإسهال ممكن يحدّ من الـ oral.
+      - kind: explain
+        page: 143
+        title: "Hypermagnesemia: كل حاجة بتهدى"
+        quote: "Occurs usually if excess Mg administered IV (as in treating pre-eclampsia) or in patients with impaired renal function given exogenous Mg."
+        text: |
+          نادرة لأن الكلية بتطلّع الزيادة. بتحصل مع **IV Mg زيادة** (زي الـ **pre-eclampsia**) أو Mg لعيان كليته تعبانة (**antacids**، MgSO4 enemas).
+
+          الـ Mg بيهدّي الـ CNS وبيقلل استجابة الـ neuromuscular junction للـ acetylcholine. الترتيب: ==hyporeflexia== و paresthesia ← weakness ← صعوبة بلع ← **respiratory depression**. فوق **3.5**: bradycardia و BP واطي.
+      - kind: case
+        page: 144
+        quote: "If respiratory depression, cardiac arrhythmias or Mg >5 mmol/L, give IV calcium gluconate 10% 10mL as slow IVI bolus."
+        stem: "Pre-eclampsia on IV MgSO4: knee jerks absent, RR 8/min, Mg 5.6 mmol/L, creatinine rising."
+        steps:
+          - question: "First drug?"
+            options: ["Calcium gluconate 10% 10 mL slow IV", "Furosemide alone", "More MgSO4", "Insulin and dextrose"]
+            answer: 0
+            why: "Respiratory depression أو Mg فوق 5: **calcium gluconate** (ووقّف الـ Mg)."
+          - question: "Her kidneys are failing. Fastest way to clear Mg?"
+            options: ["Hemodialysis", "Forced diuresis with furosemide", "Just wait", "Oral binders"]
+            answer: 0
+            why: "في الـ renal impairment، الـ **hemodialysis** بيرجّع الـ Mg بسرعة. الـ furosemide 40–80 mg ينفع لو الكلى شغالة."
+      - kind: check
+        page: 144
+        quote: "If clinically stable, with a good UO and normal renal function, stop containing preparation, and monitor."
+        question: "Mg 3.0 mmol/L in a stable patient with normal kidneys who took Mg antacids. Plan?"
+        options:
+          - "Stop the Mg preparation and monitor"
+          - "Urgent hemodialysis"
+          - "Calcium gluconate now"
+          - "Oral Mg replacement"
+        answer: 0
+        why:
+          - "صح: الكلية السليمة هتطلّع الزيادة بسرعة."
+          - "الـ dialysis للـ renal impairment."
+          - "الـ calcium لو respiratory depression أو arrhythmia أو Mg فوق 5."
+          - "هتزوّد الطين بلة."
+      - kind: try
+        items: [neph.L06.085, neph.L06.093, neph.L06.097, neph.L06.102, neph.L06.107]
+    recap:
+      - "Hypokalemia: GI (laxatives، villous adenoma)، shift (insulin، beta-2، thyrotoxicosis)، renal (Conn، Bartter، Gitelman، Liddle، RTA، low Mg)، drugs."
+      - "أعراض: weakness، polyuria، rhabdomyolysis، kaliopenic nephropathy، السكر يعلى 10 لكل 1 mEq/L."
+      - "K قبل الـ HCO3. Saline لتر + 20–40 KCl، max 10–20 mmol/h، بدون glucose."
+      - "Mg: 1.5–2.3 mg/dL، 60% عضم. الواطي مع low K (50%) و low Ca."
+      - "Symptomatic: 10 mmol في 5 دقايق ثم 20 mmol على 4 ساعات."
+      - "Mg العالي: hyporeflexia لحد respiratory depression؛ calcium gluconate لو >5، dialysis لو الكلى تعبانة."
+    practice: [neph.L06.085, neph.L06.086, neph.L06.087, neph.L06.088, neph.L06.089, neph.L06.090, neph.L06.091, neph.L06.092, neph.L06.093, neph.L06.094, neph.L06.095, neph.L06.096, neph.L06.097, neph.L06.098, neph.L06.099, neph.L06.100, neph.L06.101, neph.L06.102, neph.L06.103, neph.L06.104, neph.L06.105, neph.L06.106, neph.L06.107, neph.L06.108, neph.L06.109, neph.L06.110, neph.L06.111, neph.L06.112, neph.L06.113, neph.L06.114, neph.L06.115]

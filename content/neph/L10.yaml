@@ -1,0 +1,1241 @@
+schema: batna.content/v1
+lecture: neph.L10
+title: "Tubulointerstitial nephritis"
+author: "Prof. Hayam A. El Aggan"
+book: { chapter: 8, pages: [337, 351] }
+topics:
+  - { id: defs, title: "Definition of the interstitium" }
+  - { id: drug-vessels, title: "Drug damage: renal vessels, glomerulus and kidney hormones" }
+  - { id: drug-tubules, title: "Drug damage along the nephron" }
+  - { id: atin-causes, title: "Causes of acute tubulointerstitial nephritis" }
+  - { id: atin-picture, title: "Acute TIN: pathology and clinical picture" }
+  - { id: atin-labs, title: "Acute TIN: laboratory findings and imaging" }
+  - { id: atin-mx, title: "Acute TIN: management" }
+  - { id: ctin, title: "Chronic TIN: causes and manifestations" }
+  - { id: nephrotox, title: "Nephrotoxicity: risk factors and prevention" }
+  - { id: analgesic, title: "Analgesic nephropathy" }
+  - { id: uti-basics, title: "UTI: definition, who gets it, defences and routes" }
+  - { id: uti-organisms, title: "UTI organisms and infection-related TIN" }
+  - { id: uti-tx, title: "UTI: symptoms, diagnosis and treatment" }
+  - { id: uti-special, title: "Recurrent, catheter, abacteriuric and pregnancy UTI" }
+items:
+  # ---------- p337: definition, drugs and renal vessels ----------
+  - id: neph.L10.001
+    kind: card
+    topic: defs
+    front: What does the renal interstitium comprise?
+    back: Every renal component except the glomeruli.
+    src: { page: 337, quote: "Interstitium comprises of everything of renal component except glomeruli" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L10.002
+    kind: card
+    topic: defs
+    front: Why does progressive interstitial inflammation usually cause a large fall in renal function?
+    back: It typically destroys extensive amounts of kidney tissue, so renal function falls considerably.
+    src: { page: 337, quote: "typically destroys extensive amounts of kidney tissue and as a result usually produces a considerable decrement in renal function" }
+    status: unverified
+  - id: neph.L10.003
+    kind: table
+    topic: drug-vessels
+    title: Drug damage to the renal vessels
+    columns: [Mechanism, Drugs]
+    rows:
+      - ["Prerenal: antianabolic", "Tetracyclines"]
+      - ["Prerenal: reduced renal blood flow", "ACEI, ARA (ARBs), ciclosporin (CysA), radiocontrast, NSAIDs"]
+      - ["Vasculitis", "Allopurinol, procainamide, penicillins, sulphonamides"]
+      - ["Thrombotic microangiopathy", "Mithramycin, ciclosporin (CysA)"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 337, quote: "Reduced RBF:(diminish resistance or constriction); ACEI, ARA, CysA, radiocontrast, NSAIDS" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L10.004
+    kind: cloze
+    topic: drug-vessels
+    text: "Ciclosporin harms the renal vessels in two ways: {{c1::reduced renal blood flow}} and {{c2::thrombotic microangiopathy}}, the second shared with {{c3::mithramycin}}."
+    src: { page: 337, quote: "Thrombotic microangiopathy" }
+    status: unverified
+  - id: neph.L10.005
+    kind: mcq
+    topic: drug-vessels
+    stem: A 62-year-old man started a new drug 3 weeks ago. He now has palpable purpura, haematuria and a rising creatinine, and biopsy shows renal vasculitis. Which drug from the book's list is the likely cause?
+    options:
+      - Procainamide
+      - Gold
+      - Mithramycin
+      - Tetracycline
+      - Lithium
+    answer: 0
+    why:
+      - "Correct: allopurinol, procainamide, penicillins and sulphonamides cause drug vasculitis (p337)."
+      - Gold causes membranous glomerulonephritis (p338).
+      - Mithramycin causes thrombotic microangiopathy, not vasculitis.
+      - Tetracyclines are a prerenal (antianabolic) cause.
+      - Lithium causes minimal change disease, ADH resistance and medullary damage.
+    src: { page: 337, quote: "Allopurinol, procainamide, Penicillins, sulphonamides" }
+    status: unverified
+  # ---------- p338: glomerulus, hormones, proximal tubule, loop ----------
+  - id: neph.L10.006
+    kind: table
+    topic: drug-vessels
+    title: Drug damage to the glomerulus
+    columns: [Lesion, Drugs]
+    rows:
+      - ["Membranous glomerulonephritis", "Gold, penicillamine, captopril"]
+      - ["Minimal change disease", "NSAIDs, lithium, antibiotics"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 338, quote: "Gold, Penicillamine, Captopril" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L10.007
+    kind: mcq
+    topic: drug-vessels
+    stem: A woman with rheumatoid arthritis on gold injections develops heavy proteinuria and oedema. Which glomerular lesion does the book link to her drug?
+    options:
+      - Membranous glomerulonephritis
+      - Minimal change disease
+      - Thrombotic microangiopathy
+      - Acute tubular necrosis
+    answer: 0
+    why:
+      - "Correct: gold, penicillamine and captopril cause membranous GN (p338)."
+      - Minimal change follows NSAIDs, lithium and antibiotics.
+      - Thrombotic microangiopathy follows mithramycin and ciclosporin.
+      - Tubular necrosis is a tubular, not glomerular, lesion and does not cause nephrotic oedema.
+    src: { page: 338, quote: "Membranous glomerulonephritis" }
+    status: unverified
+  - id: neph.L10.008
+    kind: enumerate
+    topic: drug-vessels
+    prompt: Mention the endocrinal deficiencies of the damaged kidney and what each causes.
+    points:
+      - Erythropoietin deficiency (anaemia)
+      - Calcitriol deficiency (renal osteodystrophy)
+      - Hyporeninaemic hypoaldosteronism (hyperkalaemic metabolic acidosis)
+    pass: 3
+    src: { page: 338, quote: "Erythropoetin (Anemia). Calcitriol (renal osteodystrophy)." }
+    status: unverified
+  - id: neph.L10.009
+    kind: enumerate
+    topic: drug-tubules
+    prompt: Mention drugs and toxins that injure the proximal tubular epithelium.
+    points:
+      - Aminoglycosides
+      - Cephalosporins
+      - Acetaminophen
+      - Amphotericin B
+      - Mercuric chloride
+      - Cadmium
+      - Outdated tetracyclines
+      - Cisplatin
+    pass: 5
+    src: { page: 338, quote: "Aminoglycosides, Cephalosporins, Acetaminophen, Amphotericin" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L10.010
+    kind: card
+    topic: drug-tubules
+    front: Which two clinical syndromes follow drug injury to the proximal tubular epithelium?
+    back: Fanconi syndrome and tubular necrosis.
+    src: { page: 338, quote: "Fanconi syndrome" }
+    status: unverified
+  - id: neph.L10.011
+    kind: enumerate
+    topic: drug-tubules
+    prompt: Proximal tubular damage reduces reabsorption, so what appears in the urine?
+    points:
+      - Sodium
+      - Glucose (glucosuria)
+      - Amino acids (aminoaciduria)
+      - Beta-2 microglobulin
+      - Phosphate (phosphaturia)
+      - Potassium
+      - Uric acid
+      - Bicarbonate (bicarbonaturia)
+    pass: 5
+    src: { page: 338, quote: "Deceased reabsorption of Sodium, Glucosuria, Aminoaciduria" }
+    status: unverified
+  - id: neph.L10.012
+    kind: cloze
+    topic: drug-tubules
+    text: "Two heavy metals in the book's list of proximal tubular toxins are {{c1::mercuric chloride}} and {{c2::cadmium}}; among antibiotics, {{c3::outdated}} tetracyclines also injure it."
+    src: { page: 338, quote: "Mercuric chloride, Cadmium, Outdated tetracyclins, Cisplatinum" }
+    status: unverified
+  - id: neph.L10.013
+    kind: enumerate
+    topic: drug-tubules
+    prompt: Mention drugs that damage the loop of Henle and the papillae.
+    points:
+      - NSAIDs
+      - Lithium
+      - Tetracycline
+      - Fluoride
+    pass: 3
+    src: { page: 338, quote: "Drugs: NSAIDS, Lithium, Tetracycline, Fluoride" }
+    status: unverified
+  - id: neph.L10.014
+    kind: card
+    topic: drug-tubules
+    front: What two functional defects follow drug damage to the loop of Henle and papillae?
+    back: Reduced sodium reabsorption and reduced ability to concentrate the urine.
+    src: { page: 338, quote: "Deceased reabsorption sodium and deceased ability to concentrate urine" }
+    status: unverified
+  # ---------- p339: distal tubule, interstitium, malignancy, acute TIN causes ----------
+  - id: neph.L10.015
+    kind: table
+    topic: drug-tubules
+    title: Drug damage to the distal tubule
+    columns: [Damage, Drugs]
+    rows:
+      - ["Tubular necrosis", "Gentamicin, amphotericin B, phenacetin, toluene, lithium"]
+      - ["Reduced K+ and H+ excretion", "Amphotericin B, NSAIDs, K-sparing diuretics"]
+      - ["ADH resistance", "Cyclophosphamide, chlorpropamide, NSAIDs, lithium"]
+      - ["Clinical presentation", "Nephrogenic diabetes insipidus, distal RTA (type I, IV)"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 339, quote: "Drugs: Cyclophosphamide, Chlorpropamide, NSAIDS, Lithium" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L10.016
+    kind: mcq
+    topic: drug-tubules
+    stem: A man with bipolar disorder on long-term lithium passes large volumes of dilute urine. Water deprivation does not concentrate it and desmopressin does not help. Which tubular lesion explains this?
+    options:
+      - Distal tubular ADH resistance (nephrogenic diabetes insipidus)
+      - Proximal tubular injury (Fanconi syndrome)
+      - Distal failure to excrete K+ and H+
+      - Membranous glomerulonephritis
+      - Thrombotic microangiopathy
+    answer: 0
+    why:
+      - "Correct: lithium causes distal ADH resistance, presenting as nephrogenic DI (p339)."
+      - Fanconi syndrome gives glucosuria, aminoaciduria and phosphaturia, not ADH-resistant polyuria.
+      - That causes hyperkalaemia and acidosis (amphotericin B, NSAIDs, K-sparing diuretics).
+      - Membranous GN causes nephrotic proteinuria; lithium is linked to minimal change instead.
+      - TMA follows mithramycin or ciclosporin and presents with AKI, not isolated polyuria.
+    src: { page: 339, quote: "Clinical presentation: Nephrogenic diabetes insipidus, DRTA (Type I, IV)" }
+    status: unverified
+  - id: neph.L10.017
+    kind: cloze
+    topic: drug-tubules
+    text: "Distal tubular failure to excrete K+ and H+ follows {{c1::amphotericin B}}, {{c2::NSAIDs}} and {{c3::K-sparing diuretics}}."
+    src: { page: 339, quote: "Drugs: Amphotericin B, NSAIDS, K-sparing diuretics" }
+    status: unverified
+  - id: neph.L10.018
+    kind: enumerate
+    topic: drug-tubules
+    prompt: Mention drugs that cause tubulointerstitial damage.
+    points:
+      - Gentamicin
+      - Phenacetin
+      - NSAIDs
+      - Cisplatin
+      - Methicillin
+      - Rifampicin
+      - Allopurinol
+      - Diuretics
+    pass: 4
+    src: { page: 339, quote: "Drugs: Gentamycin, Phenacetin, NSAIDS, Cisplatinum, Methicellin," }
+    status: unverified
+  - id: neph.L10.019
+    kind: enumerate
+    topic: drug-tubules
+    prompt: What clinical pictures follow drug damage to the tubulointerstitium?
+    points:
+      - Acute kidney injury (acute tubulointerstitial nephritis)
+      - Chronic kidney disease (chronic tubulointerstitial nephritis)
+      - Reduced sodium reabsorption and reduced urine concentrating ability
+    pass: 2
+    src: { page: 339, quote: "Chronic Kidney Disease, (Chronic Tubulointerstitial Nephritis)" }
+    status: unverified
+  - id: neph.L10.020
+    kind: enumerate
+    topic: drug-tubules
+    prompt: Which malignancies does the book list among drug-related renal damage?
+    points:
+      - Transitional cell carcinoma
+      - Hypernephroma
+      - Sarcoma
+      - Chorionepithelioma
+    pass: 2
+    src: { page: 339, quote: "Hypernephroma, Sarcoma, Chorion epithelioma" }
+    status: unverified
+  - id: neph.L10.021
+    kind: enumerate
+    topic: atin-causes
+    prompt: Mention the causes of acute tubulointerstitial nephritis.
+    points:
+      - "Allergic TIN: antibiotics, NSAIDs, thiazide, cimetidine"
+      - "Infection: viral, bacterial, fungal"
+      - Acute cellular rejection
+      - "Infiltration: lymphoma, leukaemia, sarcoidosis"
+      - "Non-infectious inflammatory disorders: Sjögren's syndrome, SLE, Wegener's granulomatosis"
+      - Idiopathic (8%)
+    pass: 4
+    src: { page: 339, quote: "Allergic TIN (antibiotics, NSAIDs, thiazide, cimetidine)" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L10.022
+    kind: cloze
+    topic: atin-causes
+    text: "About {{c1::8%}} of acute tubulointerstitial nephritis is idiopathic."
+    src: { page: 339, quote: "Idiopathic 8%" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L10.023
+    kind: mcq
+    topic: atin-causes
+    stem: Which of these is an infiltrative cause of acute tubulointerstitial nephritis in the book's list?
+    options:
+      - Sarcoidosis
+      - Cimetidine
+      - Acute cellular rejection
+      - Sjögren's syndrome
+      - Legionella
+    answer: 0
+    why:
+      - "Correct: infiltration covers lymphoma, leukaemia and sarcoidosis (p339)."
+      - Cimetidine is an allergic cause.
+      - Acute cellular rejection is its own category.
+      - Sjögren's is a non-infectious inflammatory disorder.
+      - Legionella is an infectious cause.
+    src: { page: 339, quote: "Infiltration (lymphoma, leukemia, sarcoidosis)" }
+    status: unverified
+  # ---------- p340: pathology, clinical picture, urine ----------
+  - id: neph.L10.024
+    kind: card
+    topic: atin-picture
+    front: What do the kidneys look like grossly in acute tubulointerstitial nephritis?
+    back: Normal or enlarged; the cut section shows medullary congestion and necrosis with multiple abscesses.
+    src: { page: 340, quote: "The kidneys are normal or enlarged, cut section with medullary congestion and necrosis with multiple abscesses." }
+    status: unverified
+  - id: neph.L10.025
+    kind: card
+    topic: atin-picture
+    front: What does light microscopy show in acute tubulointerstitial nephritis?
+    back: Interstitial oedema with an infiltrate of lymphocytes, plasma cells, eosinophils and macrophages.
+    src: { page: 340, quote: "LM showed there is edema associated with an interstitial lymphoplasmocytic, oesinophils and macrophages infiltration" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L10.026
+    kind: cloze
+    topic: atin-picture
+    text: "Symptoms of acute TIN can appear {{c1::2 to 14}} days after exposure."
+    src: { page: 340, quote: "Symptoms can appear after two to fourteen days." }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L10.027
+    kind: enumerate
+    topic: atin-picture
+    prompt: Mention the clinical picture of acute tubulointerstitial nephritis.
+    points:
+      - Onset 2–14 days after exposure
+      - Haematuria and pyuria
+      - Polyuria and nocturia
+      - Deterioration of renal function
+      - "Systemic manifestations: fever, chills, flank pain, arthralgia, rash, disturbed liver function"
+      - Eosinophilia
+    pass: 4
+    src: { page: 340, quote: "Haematuria and pyuria." }
+    status: unverified
+  - id: neph.L10.028
+    kind: enumerate
+    topic: atin-picture
+    prompt: Mention the systemic manifestations of acute tubulointerstitial nephritis.
+    points:
+      - Fever and chills
+      - Flank pain
+      - Arthralgia
+      - Erythematous, pruritic maculopapular skin rash
+      - Disturbed liver function (raised enzymes, GI bleeding)
+    pass: 4
+    src: { page: 340, quote: "Systemic manifestations: Fever, chills, flank pain, arthralgia, erythematous," }
+    status: unverified
+  - id: neph.L10.029
+    kind: mcq
+    topic: atin-picture
+    stem: A 35-year-old woman took amoxicillin for 10 days. She now has fever, an itchy maculopapular rash, arthralgia and a creatinine rising from 0.8 to 2.6 mg/dL. Urine shows white cells, red cells and eosinophils, and blood shows eosinophilia. Most likely diagnosis?
+    options:
+      - Allergic acute tubulointerstitial nephritis
+      - Acute pyelonephritis
+      - Drug-induced minimal change disease
+      - Drug-induced thrombotic microangiopathy
+      - Analgesic nephropathy
+    answer: 0
+    why:
+      - "Correct: an antibiotic 2–14 days before, fever, rash, arthralgia, eosinophilia and cellular urine is allergic acute TIN (p339–340)."
+      - Pyelonephritis gives loin pain and significant bacteriuria, not rash and eosinophilia.
+      - Minimal change presents with nephrotic proteinuria, not fever, rash and pyuria.
+      - TMA follows mithramycin or ciclosporin, not amoxicillin.
+      - Analgesic nephropathy is chronic, after years of analgesic use.
+    src: { page: 340, quote: "Systemic manifestations: Fever, chills, flank pain, arthralgia, erythematous," }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L10.030
+    kind: card
+    topic: atin-labs
+    front: What does the urine sediment usually show in acute TIN?
+    back: It may be normal, but usually contains cellular elements; pyuria, red cells and eosinophils.
+    src: { page: 340, quote: "May be normal, but usually contain cellular elements (pyuria, red blood cells" }
+    status: unverified
+  - id: neph.L10.031
+    kind: cloze
+    topic: atin-labs
+    text: "Proteinuria in acute TIN is usually modest, under {{c1::1 g/day}}, and of {{c2::low molecular weight}} tubular proteins such as lysozyme and {{c3::beta-2 microglobulin}}."
+    src: { page: 340, quote: "Proteinuria is usually modest (<1g/day) of low molecular weight protein" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L10.032
+    kind: cloze
+    topic: atin-labs
+    text: "In acute TIN the fractional excretion of sodium is usually {{c1::more than 1}}%."
+    src: { page: 340, quote: "FE of sodium usually more than 1" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L10.033
+    kind: table
+    topic: atin-labs
+    title: Urine findings in acute TIN by the segment that fails
+    columns: [Segment, Findings]
+    rows:
+      - ["Proximal tubule", "Glycosuria, bicarbonaturia, phosphaturia, aminoaciduria, hypokalaemia"]
+      - ["Distal tubule", "Hyperkalaemia, sodium wasting, distal RTA"]
+      - ["Medulla", "Urinary concentration defects"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 340, quote: "Glycouria, bicabituria, phosphaturia, aminoaciduria, hypokalemia" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L10.034
+    kind: mcq
+    topic: atin-labs
+    stem: A patient with acute TIN has hyperkalaemia, sodium wasting and a distal renal tubular acidosis. Which part of the nephron is failing?
+    options:
+      - Distal tubule
+      - Proximal tubule
+      - Renal medulla
+      - Glomerulus
+    answer: 0
+    why:
+      - "Correct: hyperkalaemia, sodium wasting and dRTA are distal tubular defects (p340)."
+      - Proximal defects cause glycosuria, aminoaciduria, phosphaturia, bicarbonaturia and hypokalaemia.
+      - Medullary defects cause failure to concentrate the urine.
+      - Glomerular disease is not part of this pattern; proteinuria in TIN is modest and tubular.
+    src: { page: 340, quote: "Hyperkalemia, Sodium wasting, DRTA. (DT defects)." }
+    status: unverified
+  - id: neph.L10.035
+    kind: card
+    topic: atin-labs
+    front: How do renal function tests change in acute TIN?
+    back: Blood urea and serum creatinine rise suddenly.
+    src: { page: 340, quote: "Sudden rise of blood urea and serum creatinine" }
+    status: unverified
+  # ---------- p341: imaging, management, chronic TIN causes ----------
+  - id: neph.L10.036
+    kind: card
+    topic: atin-labs
+    front: What does renal ultrasound show in acute TIN?
+    back: Normal or enlarged kidneys.
+    src: { page: 341, quote: "Normal or enlarged kidney" }
+    status: unverified
+  - id: neph.L10.037
+    kind: card
+    topic: atin-labs
+    front: What is renal isotopic scanning used for in acute TIN?
+    back: To differentiate acute TIN from other causes of acute renal failure.
+    src: { page: 341, quote: "Differentiate ATIN from other causes of ARF" }
+    status: unverified
+  - id: neph.L10.038
+    kind: enumerate
+    topic: atin-mx
+    prompt: Mention the lines of management of acute tubulointerstitial nephritis.
+    points:
+      - Early diagnosis
+      - Identify the responsible drug and discontinue it
+      - Steroids for acute renal impairment
+      - Supportive treatment of acute kidney injury
+      - Dialysis
+      - Renal biopsy
+    pass: 4
+    src: { page: 341, quote: "Identification of the responsible drug and Discontinue." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L10.039
+    kind: cloze
+    topic: atin-mx
+    text: "Steroids for acute renal impairment in acute TIN: prednisone {{c1::60 mg/day}} for {{c2::10–14 days}}, or methylprednisolone {{c3::1 g/day for 3 days}}."
+    src: { page: 341, quote: "prednisone 60 mg/day for 10-14days, or 1g" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L10.040
+    kind: mcq
+    topic: atin-mx
+    stem: A man develops acute TIN 9 days after starting a new antibiotic. What is the key first step in management?
+    options:
+      - Identify the responsible drug and stop it
+      - Start dialysis at once
+      - Add a second antibiotic to cover infection
+      - Restrict fluids to protect the lungs
+    answer: 0
+    why:
+      - "Correct: after early diagnosis, the book's first step is to find and discontinue the culprit drug (p341)."
+      - Dialysis is for those who need it, not the first step for everyone.
+      - Adding antibiotics may add another allergen; allergic TIN is not an infection.
+      - Fluid restriction is not part of the book's management; AKI care is supportive.
+    src: { page: 341, quote: "Identification of the responsible drug and Discontinue." }
+    status: unverified
+  - id: neph.L10.041
+    kind: enumerate
+    topic: ctin
+    prompt: Mention the common causes of chronic tubulointerstitial nephritis.
+    points:
+      - Reflux nephropathy
+      - NSAIDs
+      - Diabetes mellitus
+      - Sickle cell disease or trait
+      - Cadmium or lead intoxication
+    pass: 3
+    src: { page: 341, quote: "Sickle cell disease or trait" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L10.042
+    kind: enumerate
+    topic: ctin
+    prompt: Mention the uncommon causes of chronic tubulointerstitial nephritis.
+    points:
+      - Alport's syndrome
+      - Irradiation
+      - Sjögren's syndrome
+      - Hyperuricaemic nephropathy
+    pass: 2
+    src: { page: 341, quote: "Hyperuricaemic nephropathy" }
+    status: unverified
+  # ---------- p342: nephrotoxicity risks, chronic TIN picture, analgesic nephropathy ----------
+  - id: neph.L10.043
+    kind: enumerate
+    topic: nephrotox
+    prompt: Mention the patient-related risk factors for nephrotoxicity.
+    points:
+      - Old age
+      - Pre-existing renal disease
+      - Female gender
+      - Mg, K or Ca deficiency
+      - Intravascular volume depletion
+      - Hypotension
+      - Hepatorenal syndrome
+      - Diabetes
+      - Multiple myeloma
+    pass: 5
+    src: { page: 342, quote: "Peexisting renal disease" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L10.044
+    kind: enumerate
+    topic: nephrotox
+    prompt: Mention the drug-related risk factors for nephrotoxicity.
+    points:
+      - Recent recurrent therapy
+      - Large dose
+      - Long duration of therapy
+      - Dose regimen
+      - Use of other nephrotoxic drugs
+    pass: 3
+    src: { page: 342, quote: "Recent recurrent therapy" }
+    status: unverified
+  - id: neph.L10.045
+    kind: mcq
+    topic: nephrotox
+    stem: Which of these is a patient-related, not a drug-related, risk factor for nephrotoxicity?
+    options:
+      - Female gender
+      - Large dose
+      - Long time therapy
+      - Recent recurrent courses
+      - Another nephrotoxic drug at the same time
+    answer: 0
+    why:
+      - "Correct: female gender is in the patient-related list with old age, renal disease and volume depletion (p342)."
+      - Dose is drug-related.
+      - Duration is drug-related.
+      - Recent recurrent therapy is drug-related.
+      - Combined nephrotoxins are drug-related.
+    src: { page: 342, quote: "Female gender" }
+    status: unverified
+  - id: neph.L10.046
+    kind: enumerate
+    topic: ctin
+    prompt: Mention the clinical manifestations of chronic tubulointerstitial nephritis.
+    points:
+      - Asymptomatic
+      - Manifestations of the cause
+      - Manifestations of chronic kidney disease
+    pass: 3
+    src: { page: 342, quote: "Manifestation of the etiologic factor" }
+    status: unverified
+  - id: neph.L10.047
+    kind: cloze
+    topic: analgesic
+    text: "Analgesic nephropathy follows {{c1::aspirin and acetaminophen}} and is more common in {{c2::women aged 30–50}}."
+    src: { page: 342, quote: "More common in women 30-50 ys." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L10.048
+    kind: card
+    topic: analgesic
+    front: What do patients with analgesic nephropathy typically complain of (the reason they take analgesics)?
+    back: Frequent headache, musculoskeletal pain and arthralgia.
+    src: { page: 342, quote: "Frequent complain of headache," }
+    status: unverified
+  # ---------- p343: analgesic nephropathy mechanism, late picture, pathology ----------
+  - id: neph.L10.049
+    kind: cloze
+    topic: analgesic
+    text: "Injury in analgesic nephropathy depends on the cumulative amount ingested; the book gives {{c1::10 kg}}."
+    src: { page: 343, quote: "Injury depend on the amount ingested.10Kg." }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L10.050
+    kind: card
+    topic: analgesic
+    front: Why does analgesic injury target the medulla and papilla?
+    back: The drugs are concentrated in the medulla and papilla, and aspirin reduces the ability of the epithelial cells to generate reducing substances.
+    src: { page: 343, quote: "Aspirin reduce the ability of EC to generate reducing substance." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L10.051
+    kind: enumerate
+    topic: analgesic
+    prompt: Mention the late features of analgesic nephropathy.
+    points:
+      - Sterile pyuria
+      - Reduced concentrating ability
+      - Distal tubular acidification defects
+      - Proximal tubular defects later, with renal failure
+      - Impaired sodium conservation
+      - Anaemia and peptic ulcer symptoms
+      - Small kidneys with nodularity and calcification
+    pass: 4
+    src: { page: 343, quote: "Anemia and peptic ulcer symptoms." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L10.052
+    kind: card
+    topic: analgesic
+    front: How does acute papillary necrosis develop in analgesic nephropathy?
+    back: Patchy necrosis calcifies; as larger necrotic foci develop, the whole papilla sloughs.
+    src: { page: 343, quote: "slough of the whole papilla (acute papillary necrosis)" }
+    status: unverified
+  - id: neph.L10.053
+    kind: card
+    topic: analgesic
+    front: What do the kidneys look like grossly in analgesic nephropathy?
+    back: Small, contracted, with an irregular surface, and asymmetric; adjacent areas hypertrophy.
+    src: { page: 343, quote: "The kidney is small and contracted with irregular surface and asymmetric." }
+    status: unverified
+  - id: neph.L10.054
+    kind: enumerate
+    topic: analgesic
+    prompt: Mention the light microscopy findings in analgesic nephropathy.
+    points:
+      - Interstitial infiltrate of plasma cells, lymphocytes and macrophages
+      - Tubules separated by interstitial fibrosis
+      - Patchy tubular atrophy and dilatation
+      - Glomeruli and vessels normal early, sclerosed later with periglomerular fibrosis
+    pass: 3
+    src: { page: 343, quote: "Separated tubules by interstitial fibrosis." }
+    status: unverified
+  - id: neph.L10.055
+    kind: cloze
+    topic: analgesic
+    text: "In analgesic nephropathy the glomeruli and vessels are {{c1::normal}} early; later they become {{c2::sclerosed}} with {{c3::periglomerular fibrosis}}."
+    src: { page: 343, quote: "Early the glomeruli and vessels are normal, later became sclerosed and periglomerular fibrosis developed" }
+    status: unverified
+  # ---------- p344: analgesic management, prevention, UTI definition ----------
+  - id: neph.L10.056
+    kind: enumerate
+    topic: analgesic
+    prompt: Mention the management of analgesic nephropathy.
+    points:
+      - Stop the drug
+      - Encourage fluid intake
+      - Avoid dehydration by diuretics or laxatives
+      - Psychological support to stop analgesics
+      - Avoid analgesic combinations
+    pass: 4
+    src: { page: 344, quote: "Psychological support to stop analgesics." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L10.057
+    kind: card
+    topic: analgesic
+    front: Does aspirin alone impair renal function in a normal kidney?
+    back: No, according to the book; the harm comes from analgesic combinations, so avoid those.
+    src: { page: 344, quote: "aspirin alone does not impair renal function in normal kidney" }
+    status: unverified
+  - id: neph.L10.058
+    kind: enumerate
+    topic: nephrotox
+    prompt: How to prevent drug nephrotoxicity?
+    points:
+      - Identify risk factors
+      - Single daily dose
+      - Shorten the treatment course
+      - Avoid giving nephrotoxic drugs together
+      - Leave an interval between courses
+      - Good hydration
+      - Calculate GFR from serum creatinine
+      - Use non-ionic contrast media
+      - Measure serum drug levels
+    pass: 5
+    src: { page: 344, quote: "Avoid giving nephrotoxic drugs together" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L10.059
+    kind: mcq
+    topic: nephrotox
+    stem: A 74-year-old diabetic woman needs gentamicin for a serious infection. Which plan follows the book's prevention of nephrotoxicity?
+    options:
+      - Single daily dose, short course, good hydration and serum levels
+      - Divided doses over a long course
+      - Give it with IV radiocontrast for a CT the same day
+      - Keep her slightly dry to avoid fluid overload
+      - Dose from serum creatinine alone without estimating GFR
+    answer: 0
+    why:
+      - "Correct: single daily dosing, a short course, hydration and drug levels are all in the book's list (p344)."
+      - Long courses raise risk; the book asks to reduce the course.
+      - Combining nephrotoxins is to be avoided.
+      - Volume depletion is a risk factor; good hydration prevents injury.
+      - The book asks to calculate GFR, not rely on creatinine alone, especially in the elderly.
+    src: { page: 344, quote: "Single daily dose" }
+    status: unverified
+  - id: neph.L10.060
+    kind: cloze
+    topic: uti-basics
+    text: "UTI: more than {{c1::10^5}} organisms/mL in a clean-catch midstream urine indicates infection; in suprapubic aspiration or in-and-out catheter samples, {{c2::10^2 to 10^4}}/mL generally does."
+    src: { page: 344, quote: "colony counts of 102 to 104/mL generally indicate infection" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L10.061
+    kind: card
+    topic: uti-basics
+    front: What is the acute urethral syndrome?
+    back: Dysuria, urgency and frequency without significant bacteriuria.
+    src: { page: 344, quote: "Symptoms of dysuria, urgency, and frequency that are unaccompanied by significant bacteriuria have been termed the acute urethral syndrome" }
+    status: unverified
+  - id: neph.L10.062
+    kind: card
+    topic: uti-basics
+    front: Where does UTI exist, by the book's definition?
+    back: When pathogenic microorganisms are detected in the urine, urethra, bladder, kidney or prostate.
+    src: { page: 344, quote: "pathogenic microorganisms are detected in the urine, urethra, bladder, kidney, or prostate" }
+    status: unverified
+  # ---------- p345: who gets UTI, defences, routes ----------
+  - id: neph.L10.063
+    kind: card
+    topic: uti-basics
+    front: Why does a UTI in a man or a child need investigation, unlike in most women?
+    back: In women UTI is common and usually occurs in a normal tract; in men and children it is uncommon and the tract is often abnormal.
+    src: { page: 345, quote: "it is uncommon in men and children, and the urinary tract is often abnormal and requires investigation" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L10.064
+    kind: card
+    topic: uti-basics
+    front: How do bacteria reach the urethra in women, and what raises the risk after menopause?
+    back: They colonise the periurethral area and reach the distal urethra; after menopause, atrophic vaginal mucosa and altered vaginal flora increase colonisation.
+    src: { page: 345, quote: "In women, bacteria colonize the periurethral area, from where they reach the distal part of the urethra." }
+    status: unverified
+  - id: neph.L10.065
+    kind: card
+    topic: uti-basics
+    front: Once bacteria reach the bladder, what helps bacteriuria establish itself?
+    back: Incomplete bladder emptying, that is, residual urine.
+    src: { page: 345, quote: "facilitated by incomplete bladder emptying, that is, if there is residual urine" }
+    status: unverified
+  - id: neph.L10.066
+    kind: enumerate
+    topic: uti-basics
+    prompt: Mention the factors that limit multiplication of organisms in the urinary tract.
+    points:
+      - High urine flow
+      - Regular complete bladder emptying
+      - Urinary glycosaminoglycans and Tamm–Horsfall mucoprotein binding E. coli
+      - "Mucosal defence: glycosaminoglycan surface layer, IgA and IgG secretion, mucosal phagocytosis"
+    pass: 3
+    src: { page: 345, quote: "Regular complete bladder emptying" }
+    status: unverified
+  - id: neph.L10.067
+    kind: card
+    topic: uti-basics
+    front: How does Tamm–Horsfall mucoprotein protect against UTI?
+    back: It may bind E. coli, preventing their attachment to the urothelium.
+    src: { page: 345, quote: "mucoprotein which may bind to E.Coli, thus" }
+    status: unverified
+  - id: neph.L10.068
+    kind: card
+    topic: uti-basics
+    front: Where do UTI bacteria usually come from, and by which route do they most often arrive?
+    back: From the patient's own bowel flora, most often by the ascending transurethral route (also bloodstream, lymphatics or direct extension such as a vesicocolic fistula).
+    src: { page: 345, quote: "but is most often via the ascending transurethral route" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p346: organisms, natural history, infection TIN ----------
+  - id: neph.L10.069
+    kind: table
+    topic: uti-organisms
+    title: Organisms causing UTI (approximate frequency)
+    columns: [Organism, "Frequency (%)"]
+    rows:
+      - ["Escherichia coli and other coliforms", "68"]
+      - ["Proteus mirabilis", "12"]
+      - ["Staphylococcus saprophyticus or epidermidis", "10"]
+      - ["Enterococcus faecalis", "6"]
+      - ["Klebsiella aerogenes", "4"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 346, quote: "Proteus mirabilis 12" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L10.070
+    kind: mcq
+    topic: uti-organisms
+    stem: After E. coli and other coliforms, which organism does the book list as the next commonest cause of UTI?
+    options:
+      - Proteus mirabilis
+      - Staphylococcus saprophyticus or epidermidis
+      - Enterococcus faecalis
+      - Klebsiella aerogenes
+      - Pseudomonas aeruginosa
+    answer: 0
+    why:
+      - "Correct: Proteus mirabilis is about 12% (p346)."
+      - Staphylococci are about 10%.
+      - Enterococcus faecalis is about 6%.
+      - Klebsiella aerogenes is about 4%.
+      - Pseudomonas is not in the book's table.
+    src: { page: 346, quote: "Proteus mirabilis 12" }
+    status: unverified
+  - id: neph.L10.071
+    kind: card
+    topic: uti-organisms
+    front: What is the usual natural history of UTI?
+    back: It is commonly an isolated, rather than a repeated, event.
+    src: { page: 346, quote: "UTI is commonly an isolated, rather than a repeated event." }
+    status: unverified
+  - id: neph.L10.072
+    kind: card
+    topic: uti-organisms
+    front: What separates complicated from uncomplicated UTI?
+    back: Whether the infection occurs in a functionally normal urinary tract (uncomplicated) or an abnormal one (complicated).
+    src: { page: 346, quote: "distinguish between UTI occurring in patients with functionally normal urinary tracts and in those with abnormal tract" }
+    status: unverified
+  - id: neph.L10.073
+    kind: card
+    topic: uti-organisms
+    front: What cellular infiltrate does acute pyelonephritis produce in the tubules?
+    back: A neutrophilic infiltrate.
+    src: { page: 346, quote: "Acute pyelonephritis leads to inflammation of the tubules, producing a neutrophilic cellular infiltrate." }
+    status: unverified
+  - id: neph.L10.074
+    kind: table
+    topic: uti-organisms
+    title: Systemic infections that can cause tubulointerstitial nephritis
+    columns: [Group, Organisms]
+    rows:
+      - ["Viruses", "Epstein–Barr virus, HIV, measles, adenovirus"]
+      - ["Bacteria", "Legionella, Leptospira, streptococci, Mycoplasma, Brucella, Chlamydia"]
+      - ["Protozoa", "Leishmania, Toxoplasma"]
+      - ["Renal graft (immunocompromised)", "CMV, herpes simplex virus"]
+    blanks: [[0, 1], [1, 1], [3, 1]]
+    src: { page: 346, quote: "Bacteria (Legionella, Leptospira, streptococci, Mycoplasma, Brucella," }
+    status: unverified
+  - id: neph.L10.075
+    kind: card
+    topic: uti-organisms
+    front: Which viruses cause acute TIN in a renal graft, and how is infection-related TIN treated?
+    back: CMV and herpes simplex virus; treatment is eradication of the infection with the appropriate antibiotic or antiviral.
+    src: { page: 346, quote: "CMV and herpes simplex virus can cause acute TIN in the renal graft." }
+    status: unverified
+  # ---------- p347-348: reflux, symptoms, diagnosis, treatment ----------
+  - id: neph.L10.076
+    kind: card
+    topic: uti-tx
+    front: How many grades of vesicoureteric reflux does the book's figure show, and how do they progress?
+    back: Five (I–V), from reflux into the ureter only up to gross dilatation and tortuosity of the ureter, pelvis and calyces.
+    src: { page: 347, quote: "Figure 6. Classification of grades of vesicoureteric reflux" }
+    status: unverified
+  - id: neph.L10.077
+    kind: enumerate
+    topic: uti-tx
+    prompt: Mention the most typical symptoms of UTI.
+    points:
+      - Frequency of micturition by day and night
+      - Painful voiding (dysuria)
+      - Suprapubic pain and tenderness
+      - Haematuria
+      - Smelly urine
+    pass: 4
+    src: { page: 347, quote: "Frequency of micturition by day and night" }
+    status: unverified
+  - id: neph.L10.078
+    kind: card
+    topic: uti-tx
+    front: What is the diagnosis of UTI based on?
+    back: Quantitative culture of a clean-catch midstream urine (at least 10^5 organisms/mL) and the presence or absence of pyuria.
+    src: { page: 347, quote: "This is based on quantitative culture of a clean-catch midstream specimen" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L10.079
+    kind: card
+    topic: uti-tx
+    front: For a single isolated UTI, is a pretreatment culture needed?
+    back: Desirable but not mandatory; in primary care a positive dipstick for nitrite and leucocyte esterase is sufficient.
+    src: { page: 347, quote: "a positive dipstick test for nitrite and leucocyte esterase is" }
+    status: unverified
+  - id: neph.L10.080
+    kind: cloze
+    topic: uti-tx
+    text: "A single isolated attack of UTI is treated for {{c1::3–5 days}}."
+    src: { page: 347, quote: "Treatment is over 3-5 days with:" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L10.081
+    kind: table
+    topic: uti-tx
+    title: Oral treatment of a single isolated UTI (3–5 days)
+    columns: [Drug, Dose]
+    rows:
+      - ["Amoxicillin", "250 mg three times daily"]
+      - ["Nitrofurantoin", "50 mg three times daily"]
+      - ["Trimethoprim", "200 mg twice daily"]
+      - ["Oral cephalosporin", "–"]
+      - ["Resistant organisms", "Co-amoxiclav or ciprofloxacin"]
+    blanks: [[0, 1], [1, 1], [2, 1], [4, 1]]
+    src: { page: 348, quote: "Trimethoprim (200 mg twice daily) or" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L10.082
+    kind: card
+    topic: uti-tx
+    front: How is an acutely ill patient with acute pyelonephritis treated?
+    back: An IV broad-spectrum antibiotic (cefuroxime, ciprofloxacin or gentamicin), switched to oral therapy for a further 7 days as symptoms improve; IV fluids may be needed for a good urine output.
+    src: { page: 348, quote: "A broad-spectrum antibiotic is given IV intravenously, such as cefuroxime, ciprofloxacin or gentamicin" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L10.083
+    kind: cloze
+    topic: uti-tx
+    text: "In acute pyelonephritis gentamicin is given at {{c1::2–5 mg/kg}} daily in divided doses, then oral therapy for a further {{c2::7 days}}."
+    src: { page: 348, quote: "gentamicin (2-5 mg/kg daily in divided doses)" }
+    status: unverified
+    tags: [numbers]
+  # ---------- p348-349: recurrent, catheter, abacteriuric, pregnancy ----------
+  - id: neph.L10.084
+    kind: card
+    topic: uti-special
+    front: Why are pre- and post-treatment cultures mandatory in recurrent UTI?
+    back: To confirm the diagnosis and to tell relapse from reinfection.
+    src: { page: 348, quote: "Pretreatment and post-treatment urine cultures are mandatory to confirm the" }
+    status: unverified
+  - id: neph.L10.085
+    kind: card
+    topic: uti-special
+    front: What should be done when a recurrent UTI is a relapse?
+    back: Search for a cause, such as stones or scarred kidneys, and eradicate it if possible.
+    src: { page: 348, quote: "In relapse, a search should be made for a cause (e.g. stones or scarred" }
+    status: unverified
+  - id: neph.L10.086
+    kind: card
+    topic: uti-special
+    front: Why is antibiotic treatment of bladder colonisation likely to fail while a catheter is in place?
+    back: Organisms form biofilms on the catheter, so while it stays in situ antibiotics are likely to be ineffective.
+    src: { page: 348, quote: "So long as the bladder catheter is in situ, antibiotic treatment is likely to be" }
+    status: unverified
+  - id: neph.L10.087
+    kind: card
+    topic: uti-special
+    front: When is a catheter-associated UTI treated with antibiotics?
+    back: Only if the patient has symptoms or evidence of infection, and the catheter should be replaced at the same time.
+    src: { page: 349, quote: "Treatment with antibiotics is indicated only if the patient has symptoms or" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L10.088
+    kind: mcq
+    topic: uti-special
+    stem: An 80-year-old man has had a long-term urinary catheter for 3 months. He is well and afebrile, but a routine urine culture grows 10^5 E. coli/mL. Best management?
+    options:
+      - No antibiotics; treat only if symptoms or evidence of infection appear
+      - Ciprofloxacin for 7 days, keeping the same catheter
+      - Long-term prophylactic antibiotics
+      - IV gentamicin for acute pyelonephritis
+    answer: 0
+    why:
+      - "Correct: colonisation is common and antibiotics are indicated only with symptoms or evidence of infection (p349)."
+      - Antibiotics are likely ineffective while the catheter stays, and treatment should come with catheter replacement.
+      - The book offers no prophylaxis; biofilm makes it futile.
+      - He has no fever or loin pain, so this is not acute pyelonephritis.
+    src: { page: 349, quote: "Treatment with antibiotics is indicated only if the patient has symptoms or" }
+    status: unverified
+  - id: neph.L10.089
+    kind: enumerate
+    topic: uti-special
+    prompt: Mention the causes of truly abacteriuric frequency and dysuria.
+    points:
+      - Postcoital bladder trauma
+      - Vaginitis
+      - Atrophic vaginitis or urethritis in the elderly
+      - Interstitial cystitis
+    pass: 3
+    src: { page: 349, quote: "postcoital bladder trauma, vaginitis, atrophic vaginitis or urethritis in the elderly, and interstitial cystitis" }
+    status: unverified
+  - id: neph.L10.090
+    kind: card
+    topic: uti-special
+    front: A symptomatic young woman has sterile pyuria. Which two infections must be excluded?
+    back: Chlamydia infection and tuberculosis.
+    src: { page: 349, quote: "In symptomatic young women with 'sterile pyuria', Chlamydia infection and tuberculosis must be excluded." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L10.091
+    kind: cloze
+    topic: uti-special
+    text: "The urine of pregnant women must always be cultured because {{c1::2–6%}} have asymptomatic bacteriuria."
+    src: { page: 349, quote: "The urine of pregnant women must always be cultured as 2-6% have asymptomatic bacteriuria." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L10.092
+    kind: enumerate
+    topic: uti-special
+    prompt: Mention the risks of untreated bacteriuria in pregnancy.
+    points:
+      - Severe symptomatic pyelonephritis later in pregnancy
+      - Premature labour
+      - "With previous renal disease: pre-eclamptic toxaemia"
+      - Anaemia of pregnancy
+      - Small or premature babies
+    pass: 3
+    src: { page: 349, quote: "may predispose to pre-eclamptic toxaemia, anaemia of pregnancy, and small or premature babies" }
+    status: unverified
+  - id: neph.L10.093
+    kind: table
+    topic: uti-special
+    title: Antibiotics for UTI in pregnancy
+    columns: [Drug, In pregnancy]
+    rows:
+      - ["Tetracycline", "Avoid"]
+      - ["Amoxicillin", "Can be used"]
+      - ["Trimethoprim", "Avoid"]
+      - ["Nitrofurantoin", "Can be used"]
+      - ["Sulphonamides", "Avoid"]
+      - ["Ampicillin", "Can be used"]
+      - ["4-quinolones", "Avoid"]
+      - ["Oral cephalosporins", "Can be used"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1]]
+    src: { page: 349, quote: "Drugs that must be avoided in pregnancy" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L10.094
+    kind: mcq
+    topic: uti-special
+    stem: A woman at 20 weeks of pregnancy has asymptomatic bacteriuria on routine culture. Which antibiotic from the book's list is suitable?
+    options:
+      - Amoxicillin
+      - Trimethoprim
+      - Ciprofloxacin
+      - Tetracycline
+      - Co-trimoxazole (a sulphonamide)
+    answer: 0
+    why:
+      - "Correct: amoxicillin, ampicillin, nitrofurantoin and oral cephalosporins can be used (p349–350)."
+      - Trimethoprim must be avoided in pregnancy.
+      - Ciprofloxacin is a 4-quinolone, to be avoided.
+      - Tetracycline must be avoided.
+      - Sulphonamides must be avoided.
+    src: { page: 349, quote: "Drugs that must be avoided in pregnancy" }
+    status: unverified
+  - id: neph.L10.095
+    kind: mcq
+    topic: uti-basics
+    stem: A 25-year-old woman has dysuria, urgency and frequency. Her midstream urine culture shows no significant bacteriuria. What has this picture been termed?
+    options:
+      - Acute urethral syndrome
+      - Asymptomatic bacteriuria
+      - Acute pyelonephritis
+      - Relapse of UTI
+    answer: 0
+    why:
+      - "Correct: dysuria, urgency and frequency without significant bacteriuria is the acute urethral syndrome (p344)."
+      - Asymptomatic bacteriuria is the opposite; bacteria without symptoms.
+      - Pyelonephritis has fever, loin pain and bacteriuria.
+      - Relapse needs a proven infection that returns with the same organism.
+    src: { page: 344, quote: "have been termed the acute urethral syndrome" }
+    status: unverified
+  - id: neph.L10.096
+    kind: mcq
+    topic: uti-basics
+    stem: A urine sample taken by suprapubic aspiration grows 10^3 organisms/mL. How should it be read?
+    options:
+      - It generally indicates infection
+      - It is contamination; infection needs more than 10^5/mL
+      - It is the acute urethral syndrome
+      - It must be repeated as a clean-catch sample before any conclusion
+    answer: 0
+    why:
+      - "Correct: in suprapubic or in-and-out catheter samples, 10^2 to 10^4/mL generally indicates infection (p344)."
+      - The 10^5 threshold is for clean-catch midstream samples, which can be contaminated on the way out.
+      - The urethral syndrome means symptoms without significant bacteriuria.
+      - A suprapubic sample is the cleaner one; a midstream repeat adds nothing.
+    src: { page: 344, quote: "In urine specimens obtained by suprapubic aspiration or" }
+    status: unverified
+  - id: neph.L10.097
+    kind: mcq
+    topic: uti-tx
+    stem: A 30-year-old woman has a temperature of 39.5 °C, rigors and left loin pain and tenderness, and is vomiting. Best initial treatment by the book?
+    options:
+      - IV broad-spectrum antibiotic such as cefuroxime, then oral therapy for a further 7 days
+      - Oral nitrofurantoin for 3 days
+      - Oral amoxicillin 250 mg three times daily for 5 days
+      - Wait for culture before any antibiotic
+    answer: 0
+    why:
+      - "Correct: acutely ill acute pyelonephritis needs IV cefuroxime, ciprofloxacin or gentamicin, then oral therapy (p348)."
+      - Short oral courses are for a single isolated lower UTI.
+      - Same; she is too ill for a 3–5 day oral course.
+      - She is acutely ill; treatment should not wait.
+    src: { page: 348, quote: "High fever, loin pain and tenderness (acute pyelonephritis)" }
+    status: unverified
+  # ---------- cases ----------
+  - id: neph.L10.098
+    kind: case
+    topic: atin-picture
+    stem: A 45-year-old man is on a penicillin for cellulitis. On day 10 he has fever, an itchy rash and joint pains, and his creatinine has risen from 1.0 to 3.2 mg/dL.
+    steps:
+      - reveal: Blood count shows eosinophilia.
+        question: Most likely diagnosis?
+        options: [Allergic acute tubulointerstitial nephritis, Prerenal azotaemia, Acute pyelonephritis, Drug-induced membranous GN]
+        answer: 0
+        why: "An antibiotic 2–14 days before, fever, rash, arthralgia, eosinophilia and rising creatinine is allergic acute TIN (p339–340)."
+      - reveal: Urine has white cells, red cells and eosinophils, protein 0.6 g/day of low molecular weight, and FENa above 1%.
+        question: What does the modest, low-molecular-weight proteinuria point to?
+        options: [Tubular damage, Glomerular nephrotic syndrome, Overflow from myeloma, Normal finding]
+        answer: 0
+        why: "Proteinuria under 1 g/day of tubular proteins (lysozyme, beta-2 microglobulin) is typical of acute TIN (p340)."
+      - question: First step in management?
+        options: [Identify the drug and stop it, Add a second antibiotic, Start dialysis now, Restrict fluids]
+        answer: 0
+        why: "After early diagnosis, identify and discontinue the responsible drug (p341)."
+      - reveal: Creatinine keeps rising despite stopping the drug.
+        question: Which steroid regimen does the book give?
+        options: ["Prednisone 60 mg/day for 10–14 days, or methylprednisolone 1 g/day for 3 days", "Prednisone 10 mg/day for 6 months", "Methylprednisolone 1 g once only", "Steroids are never used"]
+        answer: 0
+        why: "For acute renal impairment the book gives prednisone 60 mg/day for 10–14 days, or 1 g methylprednisolone a day for three days (p341)."
+    src: { page: 341, quote: "prednisone 60 mg/day for 10-14days, or 1g" }
+    status: unverified
+  - id: neph.L10.099
+    kind: case
+    topic: analgesic
+    stem: A 42-year-old woman has had chronic headaches for years and takes combined analgesic tablets almost daily. She now has anaemia and dyspepsia.
+    steps:
+      - reveal: Urine shows sterile pyuria and poor concentrating ability. Ultrasound shows small, irregular, asymmetric kidneys with calcification.
+        question: Most likely diagnosis?
+        options: [Analgesic nephropathy, Acute allergic TIN, Polycystic kidney disease, Acute pyelonephritis]
+        answer: 0
+        why: "Women 30–50 with headache taking analgesics, sterile pyuria, concentrating defects, anaemia, peptic symptoms and small calcified kidneys (p342–343)."
+      - reveal: One day she has sudden loin pain and passes a piece of tissue in her urine.
+        question: What happened?
+        options: [Acute papillary necrosis, Renal stone from hyperuricaemia, Acute rejection, Bladder tumour]
+        answer: 0
+        why: "Larger necrotic foci lead to slough of the whole papilla, acute papillary necrosis (p343)."
+      - question: Which plan fits the book's management?
+        options: ["Stop analgesics, encourage fluids, avoid diuretics and laxatives, psychological support", "Switch to a different analgesic combination", "Restrict fluids and add a loop diuretic", "Start prednisone 60 mg/day"]
+        answer: 0
+        why: "Stop the drug, encourage fluid intake, avoid dehydration by diuretics or laxatives, and give psychological support (p343–344)."
+    src: { page: 343, quote: "slough of the whole papilla (acute papillary necrosis)" }
+    status: unverified
+  - id: neph.L10.100
+    kind: case
+    topic: uti-special
+    stem: A 26-year-old woman at 14 weeks of pregnancy feels well. Routine urine culture grows more than 10^5 E. coli/mL.
+    steps:
+      - question: What should be done?
+        options: [Treat and confirm eradication, No treatment because she has no symptoms, Repeat culture after delivery, Treat only if pyuria is present]
+        answer: 0
+        why: "Bacteriuria in pregnancy must always be treated and shown to be eradicated (p349)."
+      - question: Which antibiotic?
+        options: [Nitrofurantoin, Trimethoprim, Ciprofloxacin, Tetracycline]
+        answer: 0
+        why: "Amoxicillin, ampicillin, nitrofurantoin and oral cephalosporins can be used; trimethoprim, quinolones, tetracycline and sulphonamides must be avoided (p349–350)."
+      - reveal: She did not take the course. At 30 weeks she has high fever and loin pain.
+        question: What is the main risk if this is not treated well?
+        options: [Premature labour, Nephrogenic diabetes insipidus, Analgesic nephropathy, Membranous GN]
+        answer: 0
+        why: "Untreated bacteriuria can lead to severe pyelonephritis later in pregnancy with the possibility of premature labour (p349)."
+    src: { page: 349, quote: "Failure to treat may thus result in severe symptomatic pyelonephritis later in pregnancy, with the possibility of premature labour." }
+    status: unverified
+  # ---------- p351: the lecture's own questions ----------
+  - id: neph.L10.101
+    kind: essay
+    topic: uti-organisms
+    prompt: What are the causative organisms of UTI?
+    outline:
+      - "Source and route": ["The patient's own bowel flora", "Most often ascending transurethral; also blood, lymphatics, direct extension (vesicocolic fistula)"]
+      - "Organisms (approximate %)": ["E. coli and other coliforms 68", "Proteus mirabilis 12", "Staphylococcus saprophyticus or epidermidis 10", "Enterococcus faecalis 6", "Klebsiella aerogenes 4"]
+    src: { page: 346, quote: "Escherichia coli and other 68" }
+    status: unverified
+    tags: [book-question]
+  - id: neph.L10.102
+    kind: essay
+    topic: drug-tubules
+    prompt: Which drugs can affect the proximal tubule?
+    outline:
+      - "Epithelial injury (Fanconi syndrome, tubular necrosis)": ["Aminoglycosides, cephalosporins, acetaminophen, amphotericin B", "Mercuric chloride, cadmium, outdated tetracyclines, cisplatin"]
+      - "Result: reduced reabsorption": ["Sodium, glucose, amino acids, beta-2 microglobulin", "Phosphate, potassium, uric acid, bicarbonate"]
+    src: { page: 338, quote: "Aminoglycosides, Cephalosporins, Acetaminophen, Amphotericin" }
+    status: unverified
+    tags: [book-question]
+  - id: neph.L10.103
+    kind: essay
+    topic: atin-causes
+    prompt: What are the causes of acute tubulointerstitial nephritis?
+    outline:
+      - "Allergic": ["Antibiotics, NSAIDs, thiazide, cimetidine"]
+      - "Infection": ["Viral, bacterial, fungal; e.g. EBV, HIV, Legionella, Leptospira, Toxoplasma", "CMV and HSV in a renal graft"]
+      - "Immune and infiltrative": ["Acute cellular rejection", "Lymphoma, leukaemia, sarcoidosis", "Sjögren's syndrome, SLE, Wegener's granulomatosis"]
+      - "Idiopathic": ["About 8%"]
+    src: { page: 339, quote: "Allergic TIN (antibiotics, NSAIDs, thiazide, cimetidine)" }
+    status: unverified
+    tags: [book-question]
+  - id: neph.L10.104
+    kind: essay
+    topic: atin-labs
+    prompt: What are the laboratory investigations in TIN?
+    outline:
+      - "Urine analysis": ["Normal or cellular: pyuria, red cells, eosinophils", "Modest (<1 g/day) low-molecular-weight proteinuria", "FENa usually >1"]
+      - "Tubular defects": ["Proximal: glycosuria, bicarbonaturia, phosphaturia, aminoaciduria, hypokalaemia", "Distal: hyperkalaemia, sodium wasting, dRTA", "Medullary: concentration defects"]
+      - "Renal function and imaging": ["Sudden rise of urea and creatinine", "Ultrasound: normal or enlarged kidneys", "Isotope scan separates ATIN from other causes of ARF"]
+      - "Blood": ["Eosinophilia"]
+    src: { page: 340, quote: "Laboratory Findings in ATIN" }
+    status: unverified
+    tags: [book-question]
+  - id: neph.L10.105
+    kind: essay
+    topic: nephrotox
+    prompt: How to prevent drug nephrotoxicity?
+    outline:
+      - "Know the risk": ["Identify patient risk factors: old age, renal disease, female, Mg/K/Ca deficiency, volume depletion, hypotension, HRS, diabetes, myeloma", "Calculate GFR from serum creatinine"]
+      - "Dosing": ["Single daily dose", "Shorter course, interval between courses", "Measure serum levels"]
+      - "Avoid added insults": ["No nephrotoxic drugs together", "Good hydration", "Non-ionic contrast media"]
+    src: { page: 344, quote: "Prevention of Nephrotoxicity" }
+    status: unverified
+    tags: [book-question]
+  - id: neph.L10.106
+    kind: essay
+    topic: uti-tx
+    prompt: How to manage UTI?
+    outline:
+      - "Single isolated attack": ["Culture desirable, not mandatory; dipstick nitrite and leucocyte esterase in primary care", "3–5 days: amoxicillin, nitrofurantoin, trimethoprim or oral cephalosporin; co-amoxiclav or ciprofloxacin if resistant"]
+      - "Acute pyelonephritis": ["IV cefuroxime, ciprofloxacin or gentamicin (2–5 mg/kg/day divided)", "Oral for a further 7 days; IV fluids for urine output"]
+      - "Recurrent": ["Pre- and post-treatment cultures: relapse or reinfection", "Relapse: find and remove the cause (stones, scarred kidneys)"]
+      - "Catheter": ["Treat only symptoms or evidence of infection, and replace the catheter"]
+      - "Pregnancy": ["Always culture; treat bacteriuria and confirm eradication", "Avoid tetracycline, trimethoprim, sulphonamides, quinolones"]
+    src: { page: 348, quote: "Pretreatment and post-treatment urine cultures are mandatory to confirm the" }
+    status: unverified
+    tags: [book-question]

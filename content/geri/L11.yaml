@@ -1,0 +1,1236 @@
+schema: batna.content/v1
+lecture: geri.L11
+title: Obstructive lung disease in the elderly
+author: Dr. Nahed M.E. Hamad
+book: { chapter: 7, pages: [188, 209] }
+topics:
+  - { id: volumes, title: "Lung volumes, capacities and PFT patterns" }
+  - { id: aging, title: "Aging of the respiratory system" }
+  - { id: obstruction, title: "Establishing airflow obstruction: LLN, GOLD and GLI" }
+  - { id: staging, title: "Staging, reversibility and Z-scores" }
+  - { id: pathogenesis, title: "Pathogenesis of COPD and respiratory impairments" }
+  - { id: phenotypes, title: "Clinical picture, phenotypes and course (BODE)" }
+  - { id: exacerbation, title: "Acute exacerbation: definition, work-up and treatment" }
+  - { id: oxygen, title: "Oxygen target and the dissociation curve" }
+  - { id: stable, title: "Pharmacologic management of stable COPD" }
+  - { id: devices, title: "Inhalers and nebulizers" }
+  - { id: nonpharm, title: "Nonpharmacologic therapies" }
+items:
+  # ---------- p188-189: volumes ----------
+  - id: geri.L11.001
+    kind: table
+    topic: volumes
+    title: Lung volumes (book, p188)
+    columns: [Volume, Value]
+    rows:
+      - [Tidal volume (TV), "300-500 ml (6-8 ml/kg)"]
+      - [Inspiratory reserve volume (IRV), "1900-3300 ml"]
+      - [Expiratory reserve volume (ERV), "700-1200 ml"]
+      - [Residual volume (RV), "1200 ml (20-25 ml/kg)"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 188, quote: "TV….. 300-500 ml (6‐8 ml/kg) IRV … 1900-3300ml ERV … 700-1200ml RV ….. 1200ml (20‐25 ml/kg)" }
+    status: unverified
+    tags: [numbers]
+  - id: geri.L11.002
+    kind: table
+    topic: volumes
+    title: Lung capacities (book, p188)
+    columns: [Capacity, Made of, Value]
+    rows:
+      - [Inspiratory capacity (IC), IRV + TV, "-"]
+      - [Total lung capacity (TLC), TV + IRV + ERV + RV, "4-6 L"]
+      - [Vital capacity (VC), TV + IRV + ERV, "4800 ml"]
+      - [Functional residual capacity (FRC), RV + ERV, "1800-2200 ml"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [3, 2]]
+    src: { page: 188, quote: "TLC … = TV+ IRV+ ERV+ RV = 4‐6 L VC …. = TV+IRV+ERV = 4800mL FRC … = RV+ERV = 1800 –2200 mL" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: geri.L11.003
+    kind: cloze
+    topic: volumes
+    text: "Obstructive pattern: FVC {{c1::above LLN}} with FEV1/FVC {{c2::below 70%}}."
+    src: { page: 189, quote: "b) ObstructivePattern..>LLN……………………….<70%" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p189-191: aging ----------
+  - id: geri.L11.004
+    kind: card
+    topic: aging
+    front: Where do the age-related changes of the respiratory system mainly occur?
+    back: In the alveoli rather than the large airways.
+    src: { page: 190, quote: "Changes associated with age occur in the alveoli rather than the large airways" }
+    status: unverified
+  - id: geri.L11.005
+    kind: card
+    topic: aging
+    front: What is "senile emphysema"?
+    back: Age-related loss of alveolar elastic recoil and enlargement, with alveolar dilatation but no destruction of alveolar walls, from degeneration of elastic fibres around the alveolar duct.
+    src: { page: 190, quote: "―Senile Emphysema‖ results in alveolar dilatation without any destructive changes to the alveolar walls but due to degeneration of elastic fibers around the alveolar duct." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L11.006
+    kind: card
+    topic: aging
+    front: How do the chest wall and respiratory muscles change with age?
+    back: The chest wall stiffens and muscle strength declines; inspiration depends mostly on the diaphragm.
+    src: { page: 190, quote: "Chest wall stiffer and age-related decline in muscle strength. Inspiration depends mostly on the diaphragm." }
+    status: unverified
+  - id: geri.L11.007
+    kind: cloze
+    topic: aging
+    text: "Healthy older persons have about {{c1::25%}} lower diaphragmatic strength, and vital capacity is {{c2::reduced}} when the diaphragm is weak."
+    src: { page: 190, quote: "Healthy older persons have approximately 25% lower diaphragmatic strength." }
+    status: unverified
+    tags: [numbers]
+  - id: geri.L11.008
+    kind: card
+    topic: aging
+    front: Why does TLC stay almost unchanged with age?
+    back: Lower lung elastic recoil makes expansion easier (raises TLC), while the stiffer chest wall lowers it; the two cancel out.
+    src: { page: 190, quote: "Thus, the two together result in an almost unchanged TLC with age." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L11.009
+    kind: card
+    topic: aging
+    front: Why does RV rise with age, and what is hyperinflation?
+    back: Lower recoil lets alveoli collapse and trap air, raising RV. An abnormally high RV/TLC is hyperinflation, often seen on chest X-ray.
+    src: { page: 190, quote: "Abnormally high RV/TLC is called hyperinflation, which can often be seen on a chest x-ray" }
+    status: unverified
+  - id: geri.L11.010
+    kind: enumerate
+    topic: aging
+    prompt: In which conditions does hyperinflation occur?
+    points: [Asthma, COPD, Advanced age]
+    pass: 3
+    src: { page: 190, quote: "Hyperinflation occurs in asthma ,COPD and advanced age." }
+    status: unverified
+  - id: geri.L11.011
+    kind: cloze
+    topic: aging
+    text: "Adults lose about {{c1::one-third of a litre}} of FEV1 per decade; FEV1 falls {{c2::more}} than FVC, so FEV1/FVC also {{c3::declines}} with age."
+    src: { page: 191, quote: "Adults normally experience declinein FEV1 with age (about one-third liter per decade)." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: geri.L11.012
+    kind: card
+    topic: aging
+    front: Why are age-related airflow limits not evident in healthy older adults?
+    back: The lungs have a large physiologic reserve; limitation shows only with a pathologic process.
+    src: { page: 191, quote: "The lungs have a large physiologic reserve and therefore these airflow limitations are not evident in older adults" }
+    status: unverified
+  - id: geri.L11.013
+    kind: card
+    topic: aging
+    front: Why may FEV1/FVC overestimate obstructive disease in old age?
+    back: Values below 0.65 usually indicate obstruction, but the ratio falls normally with age.
+    src: { page: 191, quote: "Since FEV1/FVC values below 0.65 are typically indicative of airway obstruction, this parameter may overestimate obstructive disease in old age." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L11.014
+    kind: enumerate
+    topic: aging
+    prompt: Sum up the respiratory changes of aging.
+    points:
+      - Senile emphysema in the alveoli
+      - Reduced lung recoil
+      - TLC does not change
+      - VC falls with a matching rise in RV
+      - FEV1 declines, more than FVC
+      - FEV1/FVC may overestimate obstruction
+      - Closing capacity rises
+    pass: 5
+    src: { page: 191, quote: "Age-related changes within alveoli ―senile emphysema‖. Reduced lung recoil. TLC does not change with age." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L11.015
+    kind: cloze
+    topic: aging
+    text: "Closing capacity (closing volume + RV) rises linearly from about {{c1::10%}} of TLC in young adults to about {{c2::30%}} of TLC by age {{c3::70}}."
+    src: { page: 191, quote: "increases linearly with age from approximately 10% of TLC inyoung adults to approximately 30% of TLC by the age of 70." }
+    status: unverified
+    tags: [numbers]
+  - id: geri.L11.016
+    kind: card
+    topic: aging
+    front: Define closing volume, and why does it increase with age?
+    back: The volume at which basal airways close during normal expiration. It rises because reduced elastic recoil lets small airways collapse.
+    src: { page: 192, quote: "Increased CV is likely a result of reduced elastic recoil in the lung, which results in the collapse of the small airways." }
+    status: unverified
+  # ---------- p192-193: obstruction ----------
+  - id: geri.L11.017
+    kind: card
+    topic: obstruction
+    front: What establishes airflow obstruction, and what must its threshold account for in the elderly?
+    back: A reduced FEV1/FVC; the threshold must account for normal aging, including more variable spirometric performance.
+    src: { page: 192, quote: "the threshold that establishes airflow obstruction must account for normal aging, including increased variability in spirometric performance." }
+    status: unverified
+  - id: geri.L11.018
+    kind: card
+    topic: obstruction
+    front: How does ATS/ERS define the LLN for FEV1/FVC?
+    back: The fifth percentile of reference values in healthy never-smokers matched for age, height, sex and ethnicity (NHANES III equations).
+    src: { page: 192, quote: "The ATS/ERS currently defines the LLN as the fifth percentile distribution of reference values" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L11.019
+    kind: card
+    topic: obstruction
+    front: First flaw of GOLD in older adults?
+    back: It uses a fixed FEV1/FVC below 0.70, so it cannot separate age-related airflow limitation from COPD; healthy asymptomatic never-smokers aged 65 or more often fall below 0.70.
+    src: { page: 192, quote: "GOLD defines areduced FEV1/FVC by a fixed ratio less than 0.70, thus failing to distinguish between age-related airflow limitationand" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L11.020
+    kind: card
+    topic: obstruction
+    front: Second flaw of GOLD in older adults?
+    back: It expresses FEV1 as % predicted, which ignores age-related variability in spirometric performance.
+    src: { page: 193, quote: "Second, GOLD expresses the FEV1 as%Pred, thus failing to account for age-related variability in spirometricperformance." }
+    status: unverified
+  - id: geri.L11.021
+    kind: cloze
+    topic: obstruction
+    text: "Prevalence of airflow obstruction in older persons: {{c1::37.7%}} by GOLD versus {{c2::15.4%}} by a Z-score approach."
+    src: { page: 193, quote: "Zscoreapproach (37.7% vs 15.4%, respectively)." }
+    status: unverified
+    tags: [numbers]
+  - id: geri.L11.022
+    kind: card
+    topic: obstruction
+    front: Is the extra obstruction diagnosed by GOLD in old age clinically meaningful?
+    back: No. GOLD overdiagnosis is not associated with symptoms, exercise intolerance, impaired mobility, COPD hospitalization or mortality.
+    src: { page: 193, quote: "Overdiagnosis of airflow obstruction by GOLD is not associated with respiratory symptoms, exercise intolerance, impaired mobility, COPD hospitalization, or mortality." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L11.023
+    kind: card
+    topic: obstruction
+    front: Two limits of the NHANES III equations?
+    back: Limited to age 80 or less, and they ignore variability in spirometric performance.
+    src: { page: 193, quote: "The NHANES III equations are limited to those aged less than or equal to 80 and do not consider variability in spirometric performance." }
+    status: unverified
+  - id: geri.L11.024
+    kind: cloze
+    topic: obstruction
+    text: "GLI defines the LLN as the fifth percentile of Z-scores, a Z-score of {{c1::-1.64}}; its equations cover many ethnicities and ages up to {{c2::95}}."
+    src: { page: 193, quote: "GLI has recommended that the LLN be instead defined as the fifth percentile distribution of Z-scores (Z-score of –1.64)." }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: geri.L11.025
+    kind: card
+    topic: obstruction
+    front: Which outcomes are linked to obstruction defined by FEV1/FVC Z-score below -1.64?
+    back: Respiratory symptoms, impaired mobility, frailty, COPD hospitalization and mortality.
+    src: { page: 193, quote: "is associated with respiratory symptoms, impaired mobility, frailty status, COPD hospitalization, and mortality." }
+    status: unverified
+  # ---------- p193-197: staging, reversibility, Z ----------
+  - id: geri.L11.026
+    kind: card
+    topic: staging
+    front: How does GOLD stage airflow obstruction?
+    back: By FEV1 % predicted (measured/predicted x 100), with thresholds of 80 and 50 % predicted.
+    src: { page: 193, quote: "GOLD recommend thresholds for FEV1 of 80and 50 % Pred when staging airflow obstruction." }
+    status: unverified
+  - id: geri.L11.027
+    kind: card
+    topic: staging
+    front: Why is % predicted a poor staging tool in older adults, and what should replace it?
+    back: It wrongly assumes spirometric variability is equal across the lifespan; use GLI-calculated FEV1 Z-scores.
+    src: { page: 194, quote: "To address this limitation, GLI-calculated FEV1 Z-scores should be used to stagethe severity of airflow obstruction." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L11.028
+    kind: table
+    topic: staging
+    title: Defining and staging COPD, GLI vs GOLD (book table, p195)
+    columns: [Scheme, Obstruction, Mild, Moderate, Severe]
+    rows:
+      - [GLI (Z-scores), "FEV1/FVC Z < -1.64", "FEV1 Z ≥ -1.64", "FEV1 Z < -1.64 but ≥ -2.55", "FEV1 Z < -2.55"]
+      - [GOLD (fixed), "FEV1/FVC < 0.70", "FEV1 ≥ 80 %Pred", "50-79 %Pred", "< 50 %Pred"]
+    blanks: [[0, 1], [0, 3], [0, 4], [1, 1], [1, 3]]
+    src: { page: 195, quote: "Global Lung Initiative (GLI) FEV1/FVC Z-score < -1.64" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: geri.L11.029
+    kind: card
+    topic: staging
+    front: How is COPD defined in terms of reversibility?
+    back: Chronic airflow obstruction that is not fully reversible.
+    src: { page: 194, quote: "COPDis defined as chronic airflow obstruction, meaning Not fully reversible." }
+    status: unverified
+  - id: geri.L11.030
+    kind: card
+    topic: staging
+    front: Why do guidelines do spirometry before and after a bronchodilator, and which values diagnose COPD?
+    back: To establish reversibility (pre- vs post-BD) and diagnose COPD using post-BD values.
+    src: { page: 194, quote: "(1) Reversibility (pre-vs post-BD values). (2) Diagnosis ofCOPD (using post-BD values)." }
+    status: unverified
+  - id: geri.L11.031
+    kind: card
+    topic: staging
+    front: Disadvantages of pre/post-bronchodilator spirometry in older persons?
+    back: Limited capacity to perform multiple FVC maneuvers, and possible adverse response to the inhaled bronchodilator.
+    src: { page: 194, quote: "Older persons have limited capacity to perform multiple FVC maneuvers, and may have an adverse response to an inhaledBD." }
+    status: unverified
+  - id: geri.L11.032
+    kind: cloze
+    topic: staging
+    text: "In a normal distribution, {{c1::68%}} of values lie within 1 SD, {{c2::95%}} within 2 SD and {{c3::99.7%}} within 3 SD of the mean."
+    src: { page: 195, quote: "68% of all values are within 1 standard deviation of mean value" }
+    status: unverified
+    tags: [numbers]
+  - id: geri.L11.033
+    kind: card
+    topic: staging
+    front: What does a Z-score represent, and how is it calculated?
+    back: How many SDs the measured value lies from the mean predicted value; z = (x - mean) / SD. Positive is above the mean, negative below.
+    src: { page: 196, quote: "The Z-score represents how many SD the measuredvalue is away from the mean predicted value." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L11.034
+    kind: card
+    topic: staging
+    front: On a Z-score display, what do the shaded zones and the dot show?
+    back: White = normal range, light shading = near the limits, heavy shading = outside normal. The dot or arrow shows the patient; more negative = more severe.
+    src: { page: 197, quote: "The location of the arrow or dot also allows to assess how severe any deficit is, with a more negative Z-score indicating more severe abnormality." }
+    status: unverified
+  - id: geri.L11.035
+    kind: card
+    topic: staging
+    front: With an LLN at Z = -1.64, how many healthy people fall below normal?
+    back: 5%, one in 20 PFTs; so relying on a number alone will misdiagnose. Treat the patient, not the numbers.
+    src: { page: 197, quote: "5% of healthy individuals (one in 20 PFTs) will have results below the lower limit of normal." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L11.036
+    kind: card
+    topic: staging
+    front: Can a lung function test alone define disease severity and prognosis?
+    back: No. Neither % predicted nor Z-scores alone can; other factors, including quality of life, contribute.
+    src: { page: 197, quote: "A lung function test must never be used in isolation to define disease severity and prognosis" }
+    status: unverified
+  # ---------- p197-199: pathogenesis ----------
+  - id: geri.L11.037
+    kind: enumerate
+    topic: pathogenesis
+    prompt: The two categories of early initiating phases of COPD.
+    points: [Antioxidant / oxidant imbalance, Antiprotease / protease imbalance]
+    pass: 2
+    src: { page: 197, quote: "Earlyinitiating phases of COPD fall into two categories: (1) Antioxidant / oxidant. (2) Antiprotease / protease imbalance." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L11.038
+    kind: card
+    topic: pathogenesis
+    front: Why does COPD keep progressing over decades despite smoking cessation?
+    back: Thought to be "progression" and "consolidation" phases of disease in genetically susceptible hosts.
+    src: { page: 197, quote: "COPD develops over decades despite smoking cessation, thought to be due to ―progression‖ and ―consolidation‖ phases of disease" }
+    status: unverified
+  - id: geri.L11.039
+    kind: card
+    topic: pathogenesis
+    front: How do telomeres link aging and COPD?
+    back: Lung-cell telomeres are shorter in COPD than in age-matched controls; shortening raises apoptosis, and an apoptosis-repair imbalance may underlie emphysema.
+    src: { page: 198, quote: "Telomere shortening: leads to increased apoptosis in the lungs of patients with COPD" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L11.040
+    kind: card
+    topic: pathogenesis
+    front: How does immunosenescence contribute to COPD?
+    back: Age-related loss of protective molecules such as macrophage migration inhibitory factor (MIF) and other growth factors may lead to destruction of alveoli and terminal airways.
+    src: { page: 198, quote: "Age-related loss of protective immune molecules such as macrophage migration inhibitory factor (MIF)" }
+    status: unverified
+  - id: geri.L11.041
+    kind: table
+    topic: pathogenesis
+    title: Chronic bronchitis vs emphysema (book figure, p198)
+    columns: [Feature, Chronic bronchitis, Emphysema]
+    rows:
+      - [Site, Larger airways, Terminal airways]
+      - [Main change, Airway remodeling, Loss of alveoli]
+      - [Second change, Mucus secretion, Loss of elastin]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 1], [2, 2]]
+    src: { page: 198, quote: "Chronic Bronchitis Emphysema Larger airways Terminal airways Airway remodeling Loss of alveoli Mucus secretion Loss of elastin" }
+    status: unverified
+  - id: geri.L11.042
+    kind: enumerate
+    topic: pathogenesis
+    prompt: COPD-based respiratory impairments.
+    points: [Mucus hypersecretion, Chronic airflow obstruction, Air trapping and hyperinflation, Gas exchange abnormalities (V/Q mismatch)]
+    pass: 4
+    src: { page: 199, quote: "(1) Mucus hypersecretion. (2) Chronic airflow obstruction. (3) Air trapping and hyperinflation, (4) Gas exchange abnormalities." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L11.043
+    kind: cloze
+    topic: pathogenesis
+    text: "Chronic bronchitis = chronic cough and sputum for at least {{c1::3 months}} per year for {{c2::2 consecutive years}}; its hallmark is {{c3::mucus hypersecretion}}."
+    src: { page: 199, quote: "chronic cough and sputum production for at least 3 months per year for 2 consecutive years." }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: geri.L11.044
+    kind: card
+    topic: pathogenesis
+    front: Major site of airway resistance in COPD?
+    back: Airways less than 2 mm in diameter.
+    src: { page: 199, quote: "major site of airway resistance (obstruction) the airways less than 2 mm in diameter." }
+    status: unverified
+    tags: [numbers]
+  # ---------- p199-201: clinical, phenotypes, course ----------
+  - id: geri.L11.045
+    kind: card
+    topic: phenotypes
+    front: Gas exchange in advanced COPD and its cardiovascular result?
+    back: Hypoxemia and hypercapnia (acute or chronic respiratory acidosis); hypoxic pulmonary vasoconstriction leads to pulmonary hypertension and cor pulmonale.
+    src: { page: 199, quote: "Hypoxic pulmonary vasoconstriction, pulmonary hypertension and cor pulmonale." }
+    status: unverified
+  - id: geri.L11.046
+    kind: card
+    topic: phenotypes
+    front: How can COPD reduce cardiac output?
+    back: Marked intrathoracic pressure swings lower LV preload and increase LV diastolic dysfunction.
+    src: { page: 199, quote: "Marked intrathoracic pressure swings can decrease left ventricular preload and increase left ventricular diastolic dysfunction, ultimately reducing the cardiac output." }
+    status: unverified
+  - id: geri.L11.047
+    kind: card
+    topic: phenotypes
+    front: Which COPD phenotype most often leads to osteoporosis and sarcopenia, and why?
+    back: The emphysema phenotype, through systemic inflammation, immune response, anorexia and severe deconditioning.
+    src: { page: 199, quote: "most often seen with the emphysema phenotype, can lead to osteoporosis and sarcopenia." }
+    status: unverified
+  - id: geri.L11.048
+    kind: table
+    topic: phenotypes
+    title: COPD clinical phenotypes (book, pp200-201)
+    columns: [Phenotype, Key features]
+    rows:
+      - [Airflow obstruction, "Without chronic bronchitis, bronchiectasis or emphysema"]
+      - [Chronic bronchitis, "Cough and sputum 3 mo/y for 2 years, airway inflammation, colonization/infection"]
+      - [Bronchiectasis, "Usually severe obstruction, bacteria in sputum (especially Pseudomonas), 1 or more exacerbations last year, bronchiectasis on CT"]
+      - [COPD-asthma overlap, "Better ICS response (not fully reversible), eosinophils in secretions, high IgE, 10 pack-years, asthma or atopy"]
+      - [Emphysema, "Alveolar-capillary destruction, hyperinflation, emphysema on CT, severe dyspnea, low BMI"]
+      - [Frequent exacerbator, "2 or more exacerbations a year, worse quality of life, faster decline"]
+      - [Combined pulmonary fibrosis emphysema, "Upper-lobe emphysema + lower-lobe fibrosis, male smokers, PH, lung injury, lung cancer"]
+      - [COPD-OSA overlap, "Worse nocturnal hypoxemia/hypercapnia than either alone"]
+    blanks: [[2, 1], [3, 1], [4, 1], [5, 1], [6, 1]]
+    src: { page: 200, quote: "(A) Airway Predominant" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L11.049
+    kind: card
+    topic: phenotypes
+    front: Features of the COPD-asthma overlap phenotype?
+    back: Airflow obstruction with an enhanced (but not fully reversible) response to ICS, eosinophils in respiratory secretions, high IgE, 10 pack-years of smoking, asthma and/or atopy.
+    src: { page: 200, quote: "Airflow obstruction, with enhanced response to inhaled corticosteroids (but not fully reversible), eosinophilia in respiratory secretions, high IgE" }
+    status: unverified
+  - id: geri.L11.050
+    kind: card
+    topic: phenotypes
+    front: Which pathogen is typical in the bronchiectasis phenotype of COPD?
+    back: Pseudomonas, isolated from sputum.
+    src: { page: 200, quote: "isolation of bacteria from sputum (especially pseudomonas)" }
+    status: unverified
+  - id: geri.L11.051
+    kind: card
+    topic: phenotypes
+    front: Define the frequent exacerbator phenotype.
+    back: Two or more symptom-defined exacerbations per year, with worse health-related quality of life and faster decline in lung function.
+    src: { page: 201, quote: "Two or moresymptom-defined exacerbations per year ↓ health-related quality of life and accelerated decline in lung function." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L11.052
+    kind: card
+    topic: phenotypes
+    front: "Combined pulmonary fibrosis-emphysema syndrome (CPFE): pattern, who, and associations?"
+    back: Upper-lobe emphysema with lower-lobe fibrosis, usually in male smokers; associated with pulmonary hypertension, acute lung injury and lung cancer.
+    src: { page: 201, quote: "Includes both upper-lobe emphysema and lower-lobe fibrosis. Usually occurs in male smokers" }
+    status: unverified
+  - id: geri.L11.053
+    kind: card
+    topic: phenotypes
+    front: "COPD-OSA overlap: what is special about it?"
+    back: Worse nocturnal hypoxemia and hypercapnia than either alone; the severity of obstruction and hyperinflation correlates with OSA severity.
+    src: { page: 201, quote: "Worse nocturnal hypoxemia / hypercapnia than COPD and OSA alone" }
+    status: unverified
+  - id: geri.L11.054
+    kind: table
+    topic: phenotypes
+    title: The BODE index
+    columns: [Letter, Measure, Measured by]
+    rows:
+      - [B, Body mass index, Nutritional status]
+      - [O, Airflow obstruction, FEV1]
+      - [D, Dyspnoea, Medical Research Council score]
+      - [E, Exercise capacity, 6-minute walk distance]
+    blanks: [[0, 1], [1, 2], [2, 2], [3, 2]]
+    src: { page: 201, quote: "Severity of Dyspnoea (D) ……. Measured by Medical Research Council score." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L11.055
+    kind: card
+    topic: phenotypes
+    front: How do exacerbations shape the clinical course of COPD?
+    back: They cycle between chronic and acute care settings and accelerate the decline in lung function.
+    src: { page: 201, quote: "exacerbationsthat cycle between chronic and acute care settings leading to accelerated declines in lung function." }
+    status: unverified
+  # ---------- p202-204: exacerbation ----------
+  - id: geri.L11.056
+    kind: card
+    topic: exacerbation
+    front: Define an acute exacerbation of COPD.
+    back: An acute change in sputum volume or purulence and/or more dyspnea beyond usual day-to-day variation that warrants a change in therapy.
+    src: { page: 202, quote: "an acute change in sputumvolumeor purulence, and/or an increase in dyspnea beyond usual day-to-day variation that warrants a change in therapy." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L11.057
+    kind: cloze
+    topic: exacerbation
+    text: "Respiratory infection accounts for {{c1::70%}} of COPD exacerbations."
+    src: { page: 202, quote: "Respiratory infection accounts for 70% of COPD exacerbations." }
+    status: unverified
+    tags: [numbers]
+  - id: geri.L11.058
+    kind: card
+    topic: exacerbation
+    front: Does a positive respiratory PCR prove the cause of a COPD exacerbation?
+    back: No, except influenza, which should be taken as causative and treated.
+    src: { page: 202, quote: "A positive PCR does Not indicate causality,Exceptif influenzapositivewhich should be considered a causative pathogen" }
+    status: unverified
+  - id: geri.L11.059
+    kind: card
+    topic: exacerbation
+    front: Is a COPD exacerbation a lab or a clinical diagnosis? What are sputum culture and procalcitonin good for?
+    back: Clinical. Culture often cannot separate colonizers from true pathogens; procalcitonin rises with bacterial toxins and may guide antibiotics.
+    src: { page: 202, quote: "Exacerbation of COPD is a clinical diagnosis." }
+    status: unverified
+  - id: geri.L11.060
+    kind: enumerate
+    topic: exacerbation
+    prompt: Investigations in an acute exacerbation of COPD.
+    points:
+      - "ABG on air (or record FiO2)"
+      - "Chest X-ray: pneumonia, pneumothorax"
+      - "Sputum: purulence, viscosity, culture"
+      - Blood culture if systemic infection suspected
+      - "U&E, CRP"
+      - ECG
+    pass: 5
+    src: { page: 202, quote: "ABG (on air …Or record FiO2 if condition does Not allow on air)." }
+    status: unverified
+  - id: geri.L11.061
+    kind: enumerate
+    topic: exacerbation
+    prompt: Differential diagnosis of an acute exacerbation of COPD.
+    points: [Pneumonia, Pneumothorax, Exacerbation of asthma, Pulmonary embolism, Left heart failure, "Drug-induced deterioration (sedatives, beta blockers)"]
+    pass: 5
+    src: { page: 202, quote: "Drug induced deterioration in resp function (check for sedatives …beta blockers)." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L11.062
+    kind: card
+    topic: exacerbation
+    front: Why must even a small pneumothorax be taken seriously in COPD?
+    back: Mortality of a small pneumothorax on top of COPD reaches 50%.
+    src: { page: 202, quote: "Pneumothx( even small pneumothxon top of COPD mortality up to 50%)." }
+    status: unverified
+    tags: [numbers]
+  - id: geri.L11.063
+    kind: card
+    topic: exacerbation
+    front: "Possible asthma exacerbation versus COPD exacerbation: what if you are in doubt?"
+    back: Treat it as asthma.
+    src: { page: 202, quote: "Exacerbation of asthma…if in doubt : treat as such (asthma)." }
+    status: unverified
+  - id: geri.L11.064
+    kind: enumerate
+    topic: exacerbation
+    prompt: Indications for hospital admission in a COPD exacerbation.
+    points: [Significant increase in symptom severity, Severe underlying COPD, Significant comorbidities, Failure to respond to initial management, Diagnostic uncertainty, Insufficient home support]
+    pass: 5
+    src: { page: 203, quote: "Significant increase in symptom severity. Severe underlying COPD. Significant comorbidities. Failure to respond to initial medical management." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L11.065
+    kind: enumerate
+    topic: exacerbation
+    prompt: Immediate treatment of an acute exacerbation of COPD.
+    points:
+      - "Oxygen to SpO2 88-92%"
+      - "Nebulized SABA (salbutamol or terbutaline)"
+      - "Nebulized SAMA (ipratropium); IV aminophylline may be needed"
+      - "Oral prednisolone (or IV hydrocortisone)"
+      - Antimicrobials
+      - Assisted ventilation
+      - Physiotherapy to clear secretions
+    pass: 6
+    src: { page: 203, quote: "Oxygen (target SpO2 88-92%) .. Do Not give high flow O2 unless ABG evidence absence of CO2 retention." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L11.066
+    kind: card
+    topic: exacerbation
+    front: When may high-flow oxygen be given in a COPD exacerbation?
+    back: Only when the ABG shows no CO2 retention.
+    src: { page: 203, quote: "Do Not give high flow O2 unless ABG evidence absence of CO2 retention." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L11.067
+    kind: card
+    topic: exacerbation
+    front: The patient is already on maintenance prednisolone and has an exacerbation. Steroid plan?
+    back: Increase the prednisolone dose; IV hydrocortisone may be needed.
+    src: { page: 203, quote: "Oral prednisolone (if already on maintenance prednisolone then increase the dose). may need IV hydrocortisone." }
+    status: unverified
+  - id: geri.L11.068
+    kind: card
+    topic: exacerbation
+    front: An exacerbation is not improving. What should you consider?
+    back: Resistant organisms and underlying disease such as bronchogenic carcinoma or bronchiectasis.
+    src: { page: 203, quote: "Consider: resistant organisms, underlying disease (bronchogenic carcinoma, bronchiectasis)." }
+    status: unverified
+  - id: geri.L11.069
+    kind: card
+    topic: exacerbation
+    front: Pathogens to consider in an acute exacerbation of COPD?
+    back: Haemophilus influenzae, Streptococcus pneumoniae, Moraxella catarrhalis, and Pseudomonas aeruginosa if risk factors are present.
+    src: { page: 203, quote: "Hemophilus influenzae , Strept.pneum., Moraxella catarrhalis may be also Pseudomonas aeruginosa (if risk factors were present)." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L11.070
+    kind: enumerate
+    topic: exacerbation
+    prompt: Risk factors for poor outcome or drug-resistant organisms (including Pseudomonas) in a COPD exacerbation.
+    points: [Age over 65, Comorbid conditions, Severe airflow obstruction (FEV1 below 50%), More than 3 exacerbations a year, Antibiotics or hospital admission in the last 3 months]
+    pass: 4
+    src: { page: 204, quote: "Age > 65, comorbid conditions , severe airflow obstruction (FEV1 < 50%), > 3 exacerbations/yr" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L11.071
+    kind: card
+    topic: exacerbation
+    front: Moderate vs severe COPD exacerbation?
+    back: Both need at least two of increased dyspnea, sputum volume and sputum purulence; moderate has no respiratory failure, severe has respiratory failure.
+    src: { page: 204, quote: "Severe exacerbation: at least twoof: increased dyspnea, sputum volume, and sputum purulence associated with respiratory failure." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L11.072
+    kind: table
+    topic: exacerbation
+    title: Antibiotics for acute exacerbation of COPD
+    columns: [Situation, Antibiotic]
+    rows:
+      - [Moderate attack without risk factors, "Macrolide, doxycycline, or 2nd/3rd-generation cephalosporin"]
+      - [Moderate attack with risk factors or severe attack, "Fluoroquinolone, piperacillin-tazobactam or ceftazidime; obtain sputum culture"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 204, quote: "Moderate attack and Absence of risk factors (for poor outcome or drug resist .organism) Macrolide, doxycycline, cephalosporin (second or third generation)." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L11.073
+    kind: card
+    topic: exacerbation
+    front: "Bronchodilators in COPD exacerbations: who needs escalation, which drug, and how delivered?"
+    back: All exacerbations need escalation (it may suffice in mild ones). Preferred is a SABA with or without a SAMA; nebulized delivery may be more effective and comfortable than an MDI.
+    src: { page: 204, quote: "Escalation of bronchodilator therapy is required for all COPD exacerbations and may be sufficient to treat mild cases." }
+    status: unverified
+  # ---------- p205: oxygen ----------
+  - id: geri.L11.074
+    kind: card
+    topic: oxygen
+    front: Which PaO2 corresponds to 90% saturation?
+    back: About 60 mmHg.
+    src: { page: 205, quote: "Please note 90% saturation vs 60 mmHg PaO2." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: geri.L11.075
+    kind: card
+    topic: oxygen
+    front: Meaning of the flat upper part and the steep lower part of the dissociation curve?
+    back: Flat top, O2 loading in the lung is protected when alveolar PO2 falls. Steep middle, tissues unload large amounts of O2 for a small fall in PO2.
+    src: { page: 205, quote: "peripheral tissues can withdraw large amounts of O2 for a small drop in PO2" }
+    status: unverified
+  - id: geri.L11.076
+    kind: card
+    topic: oxygen
+    front: Effect of a right shift of the dissociation curve, and when does it become dangerous?
+    back: More O2 released to tissues but harder loading in the lung; with a critically low arterial PO2, the impaired loading seriously harms tissue oxygenation.
+    src: { page: 205, quote: "Arterial PO2 ifcritically low then O2 binding in the lungs isimpaired by a shift to the right" }
+    status: unverified
+  - id: geri.L11.077
+    kind: card
+    topic: oxygen
+    front: Why can pulse oximetry miss significant hypoxia, especially on supplemental O2?
+    back: SaO2 barely falls until PaO2 reaches the steep part (60-70 mmHg); on O2, PaO2 may fall from 140 to 65 mmHg before saturation drops.
+    src: { page: 205, quote: "a fall in PaO2 from 140 to 65 mmHg would be required before a fall in O2 saturation is detected." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L11.078
+    kind: card
+    topic: oxygen
+    front: Saturation is 90%, inside the 88-92% target, but PaO2 is 60 mmHg. Is the patient safe?
+    back: "No. It is still critical: it sits where the steep part of the curve starts."
+    src: { page: 205, quote: "yet PaO2 is 60 mmHg or less this is still CRITICALas it lies on the critical point of starting steep part of the curve." }
+    status: unverified
+  # ---------- p206-209: stable COPD ----------
+  - id: geri.L11.079
+    kind: card
+    topic: stable
+    front: How are short-acting bronchodilators used in stable COPD, and who gets a nebulizer?
+    back: As rescue therapy, as needed rather than regularly. Nebulizers for older patients who have difficulty using handheld inhalers.
+    src: { page: 206, quote: "Nebulizer, for older patients who have difficulties using handheld inhalers rescue therapy (as needed, rather than regularly scheduled)." }
+    status: unverified
+  - id: geri.L11.080
+    kind: card
+    topic: stable
+    front: "Ipratropium (SAMA): cautions?"
+    back: Glaucoma, urine retention and cardiovascular disease.
+    src: { page: 206, quote: "Caution: (glaucoma ,urine retention,CVS)." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L11.081
+    kind: table
+    topic: stable
+    title: Long-acting bronchodilators
+    columns: [Class, Examples]
+    rows:
+      - [LABA, "Indacaterol, olodaterol, vilanterol"]
+      - [LAMA, "Aclidinium, tiotropium, umeclidinium"]
+      - [Nebulized LABA (twice daily), "Arformoterol, formoterol"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 206, quote: "(LABA)Long-acting β2-selective adrenergic agonists (indacaterol, olodaterol, vilanterol)." }
+    status: unverified
+  - id: geri.L11.082
+    kind: enumerate
+    topic: stable
+    prompt: Indications for long-acting bronchodilator maintenance in COPD.
+    points: [Symptoms not controlled with short-acting bronchodilators, Frequent exacerbators (2 or more a year), Moderate-to-severe airflow obstruction]
+    pass: 3
+    src: { page: 206, quote: "Persons whose symptoms are Not adequately controlled with one or both classes of short-acting bronchodilator(s)." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L11.083
+    kind: card
+    topic: stable
+    front: Which long-acting bronchodilators can be nebulized?
+    back: Only twice-daily LABAs (arformoterol, formoterol), and not for the acute state; nebulized anticholinergic exists only short-acting (ipratropium 4 times daily).
+    src: { page: 207, quote: "Whereas a nebulized anticholinergic is only available as a short-acting preparation (ipratropium4 times daily)." }
+    status: unverified
+  - id: geri.L11.084
+    kind: card
+    topic: stable
+    front: A LAMA is started. What happens to the short-acting anticholinergic?
+    back: It is discontinued.
+    src: { page: 207, quote: "NOTE when LAMA is prescribed the short acting anticholinergic is discontinued." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L11.085
+    kind: card
+    topic: stable
+    front: Who gets long-term ICS in COPD, and is ICS alone acceptable?
+    back: More severe obstruction, or frequent exacerbators not controlled on LABA or LAMA. ICS alone is not recommended; it is less effective than ICS + LABA.
+    src: { page: 207, quote: "NOTE Single therapy with ICS is not recommended in COPD as it is less effective than ICS + LABA." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L11.086
+    kind: card
+    topic: stable
+    front: Local adverse effects of ICS in older adults, and how to prevent them?
+    back: Dysphonia, oral candidiasis and allergic contact dermatitis of mouth, nostrils and eyes; rinse, gargle and spit after use, and good inhaler technique.
+    src: { page: 207, quote: "Older adults who forget to rinse, gargle, and spit after using their ICS are more likely to develop dysphonia and/or candidiasis" }
+    status: unverified
+  - id: geri.L11.087
+    kind: enumerate
+    topic: stable
+    prompt: Systemic adverse effects of inhaled corticosteroids.
+    points: [Decreased bone mineral density, Posterior subcapsular cataract, Pneumonia]
+    pass: 3
+    src: { page: 207, quote: "Systemic adverse effects of ICS : decreased bone mineral density ,cataract ( posterior subcapsular) and pneumonia." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L11.088
+    kind: table
+    topic: devices
+    title: The three inhaler forms
+    columns: [Device, What it is, Breath needed]
+    rows:
+      - [MDI, "Liquid with propellant, single bursts; spacer helps", "Deep fast breath, synchronized"]
+      - [DPI, "Dry powder, no propellant, no spacer", "Deep fast breath (hard in severe disease)"]
+      - [SMI, Slow mist, "Does not depend on inhalation speed"]
+    blanks: [[0, 2], [1, 1], [2, 2]]
+    src: { page: 208, quote: "SMI: This is a newer form of inhaler that delivers the medication in a slow mist." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L11.089
+    kind: card
+    topic: devices
+    front: "Nebulizers vs inhalers: pros and cons of nebulizers?"
+    back: Gentle breathing and easier delivery; but 10-20 minutes per dose, less portable, and the dose must be measured into the machine.
+    src: { page: 208, quote: "However, a nebulizer may take up to 10 -20 minutes to dispense the medication. Nebulizers are not as portable as inhalers." }
+    status: unverified
+  - id: geri.L11.090
+    kind: enumerate
+    topic: stable
+    prompt: Priorities in prescribing COPD inhalers for the elderly.
+    points: [Once-daily administration, Self-contained inhaler devices, Educating the patient or caregiver on administration]
+    pass: 3
+    src: { page: 208, quote: "Prioritization is given to Once-daily administration, Self-containedinhaler devices, educating the patient/caregiver on medication administration." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L11.091
+    kind: card
+    topic: stable
+    front: Where may the stepwise approach in elderly COPD end?
+    back: Triple-inhaler maintenance (LABA + LAMA + ICS) plus a prn SABA rescue inhaler; one device platform (Ellipta) can deliver all three.
+    src: { page: 208, quote: "A stepwise approach that may lead to triple-inhaler maintenance therapy" }
+    status: unverified
+  - id: geri.L11.092
+    kind: cloze
+    topic: stable
+    text: "Theophylline is a {{c1::nonselective phosphodiesterase}} inhibitor, the {{c2::third-line}} bronchodilator in stable COPD; goal level in older adults {{c3::8 to 12}} mcg/mL."
+    src: { page: 209, quote: "Goal serum level in older adults of 8 to 12 mcg/mL." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: geri.L11.093
+    kind: card
+    topic: stable
+    front: What is roflumilast?
+    back: A once-daily oral phosphodiesterase-4 inhibitor.
+    src: { page: 209, quote: "Roflumilastis a once-dailyoral phosphodiesterase-4 inhibitor." }
+    status: unverified
+  - id: geri.L11.094
+    kind: card
+    topic: stable
+    front: "Azithromycin maintenance in COPD: dose, benefit, risks and who qualifies?"
+    back: 250 mg once daily cuts exacerbations; risks are macrolide resistance and hearing loss. For frequent exacerbators maximized on triple therapy without hearing impairment, resting tachycardia or QTc risk.
+    src: { page: 209, quote: "Considered maintenance therapy for frequent exacerbators who are maximized on triple-inhaler therapy and do nothave a hearing impairment" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L11.095
+    kind: card
+    topic: stable
+    front: When are mucolytics (e.g. N-acetylcysteine) used in stable COPD?
+    back: Not routinely (little evidence); only for tenacious sputum refractory to standard therapy.
+    src: { page: 209, quote: "Mucolytic use is limited to tenacious sputum production that is refractory to standard therapy" }
+    status: unverified
+  - id: geri.L11.096
+    kind: enumerate
+    topic: nonpharm
+    prompt: Nonpharmacologic therapies for COPD.
+    points: [Influenza and pneumococcal vaccination, Smoking cessation, Long-term oxygen therapy, NPPV or CPAP (for OSA overlap), Pulmonary rehabilitation, Lung volume reduction surgery, Palliative care and hospice]
+    pass: 5
+    src: { page: 209, quote: "VaccinationInfluenzavaccination, Pneumococcal vaccination. Smoking cessation. Long-term oxygen therapy (LTOT)." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- MCQs ----------
+  - id: geri.L11.097
+    kind: mcq
+    topic: aging
+    stem: How does total lung capacity change with normal aging?
+    options: [It stays almost unchanged, It rises markedly, It falls markedly, It falls by one-third litre per decade]
+    answer: 0
+    why:
+      - "Correct: lower recoil (raises TLC) and stiffer chest wall (lowers TLC) cancel out."
+      - "Lower recoil alone would raise it, but the stiff chest wall offsets it."
+      - "The stiff chest wall alone would lower it, but recoil offsets it."
+      - "That is the yearly decline of FEV1 per decade, not TLC."
+    src: { page: 190, quote: "Thus, the two together result in an almost unchanged TLC with age." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L11.098
+    kind: mcq
+    topic: aging
+    stem: Which finding best describes "senile emphysema"?
+    options: [Alveolar dilatation without wall destruction, Alveolar wall destruction from protease excess, Bullae in the upper lobes, Mucus gland hypertrophy in large airways]
+    answer: 0
+    why:
+      - "Correct: degeneration of elastic fibres around the alveolar duct, no destruction."
+      - "Destruction defines true (COPD) emphysema."
+      - "Not part of normal aging."
+      - "That is chronic bronchitis."
+    src: { page: 190, quote: "―Senile Emphysema‖ results in alveolar dilatation without any destructive changes to the alveolar walls" }
+    status: unverified
+  - id: geri.L11.099
+    kind: mcq
+    topic: aging
+    stem: Which change in the elderly lung is correct?
+    options: [VC falls and RV rises, VC rises and RV falls, FVC falls more than FEV1, Closing capacity falls with age]
+    answer: 0
+    why:
+      - "Correct: decreased VC with a corresponding increase in RV."
+      - "The opposite of what happens."
+      - "FEV1 falls more than FVC, so the ratio falls."
+      - "It rises, from 10% to 30% of TLC by 70."
+    src: { page: 191, quote: "Decreased VC with a corresponding increase in RV." }
+    status: unverified
+  - id: geri.L11.100
+    kind: mcq
+    topic: obstruction
+    stem: A healthy, asymptomatic 78-year-old never-smoker has FEV1/FVC 0.67 with a Z-score of -1.1. What is the best interpretation?
+    options: [Normal for age; GOLD's fixed ratio overdiagnoses obstruction, COPD GOLD stage confirmed, Restrictive lung disease, Asthma until proven otherwise]
+    answer: 0
+    why:
+      - "Correct: Z above -1.64 is within normal; a ratio under 0.70 is common in healthy over-65s."
+      - "GOLD would label it, but that overdiagnosis has no link to symptoms or outcomes."
+      - "Restriction needs low FVC/TLC with a normal ratio."
+      - "Nothing here suggests asthma."
+    src: { page: 193, quote: "an FEV1/FVC less than 0.70 is frequently seen in otherwisehealthy, asymptomatic never-smokers who are aged greater than or equal to 65." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L11.101
+    kind: mcq
+    topic: obstruction
+    stem: Which definition of airflow obstruction does GLI recommend?
+    options: [FEV1/FVC Z-score below -1.64, FEV1/FVC below 0.70, FEV1/FVC below 0.65, FEV1 below 80% predicted]
+    answer: 0
+    why:
+      - "Correct: the fifth percentile of Z-scores."
+      - "That is GOLD's fixed ratio, which overdiagnoses the elderly."
+      - "The book says below 0.65 usually indicates obstruction but may still overestimate it in old age."
+      - "That is a GOLD staging threshold, not the definition of obstruction."
+    src: { page: 193, quote: "GLI has recommended that the LLN be instead defined as the fifth percentile distribution of Z-scores (Z-score of –1.64)." }
+    status: unverified
+  - id: geri.L11.102
+    kind: mcq
+    topic: staging
+    stem: By GLI, FEV1/FVC Z = -2.0 and FEV1 Z = -2.2. How severe is the obstruction?
+    options: [Moderate, Mild, Severe, No obstruction]
+    answer: 0
+    why:
+      - "Correct: FEV1 Z below -1.64 but at or above -2.55."
+      - "Mild is FEV1 Z of -1.64 or more."
+      - "Severe is FEV1 Z below -2.55."
+      - "FEV1/FVC Z below -1.64 means obstruction is present."
+    src: { page: 195, quote: "Global Lung Initiative (GLI) FEV1/FVC Z-score < -1.64" }
+    status: unverified
+    tags: [numbers]
+  - id: geri.L11.103
+    kind: mcq
+    topic: staging
+    stem: A patient's FEV1 is exactly 1 SD below the mean predicted. What is the Z-score?
+    options: ["-1", "+1", "0", "-1.64"]
+    answer: 0
+    why:
+      - "Correct: one SD below the mean."
+      - "Positive means above the mean."
+      - "Zero means identical to the mean."
+      - "-1.64 is the LLN (5th percentile)."
+    src: { page: 196, quote: "Z-score of −1 would be one SD below the mean predicted value." }
+    status: unverified
+  - id: geri.L11.104
+    kind: mcq
+    topic: pathogenesis
+    stem: Where is the major site of airway resistance in COPD?
+    options: [Airways less than 2 mm in diameter, The trachea, Main bronchi, Lobar bronchi]
+    answer: 0
+    why:
+      - "Correct: the small airways."
+      - "Large airways are not the main site in COPD."
+      - "Large airways are not the main site in COPD."
+      - "Large airways are not the main site in COPD."
+    src: { page: 199, quote: "major site of airway resistance (obstruction) the airways less than 2 mm in diameter." }
+    status: unverified
+  - id: geri.L11.105
+    kind: mcq
+    topic: phenotypes
+    stem: A 72-year-old smoker with COPD has upper-lobe emphysema, lower-lobe fibrosis and pulmonary hypertension. Which phenotype is this?
+    options: [Combined pulmonary fibrosis-emphysema, COPD-asthma overlap, Frequent exacerbator, Bronchiectasis phenotype]
+    answer: 0
+    why:
+      - "Correct: CPFE, typically in male smokers, with PH and lung cancer risk."
+      - "Overlap is defined by ICS response, eosinophils and IgE."
+      - "Defined by 2 or more exacerbations a year."
+      - "Defined by bronchiectasis on CT and bacteria such as Pseudomonas."
+    src: { page: 201, quote: "Includes both upper-lobe emphysema and lower-lobe fibrosis. Usually occurs in male smokers" }
+    status: unverified
+  - id: geri.L11.106
+    kind: mcq
+    topic: phenotypes
+    stem: Which variable is NOT part of the BODE index?
+    options: [Arterial PaCO2, Body mass index, FEV1, 6-minute walk distance]
+    answer: 0
+    why:
+      - "Correct: not in BODE."
+      - "B = BMI (nutritional status)."
+      - "O = obstruction by FEV1."
+      - "E = exercise capacity by 6-minute walk."
+    src: { page: 201, quote: "Exercise capacity (E) ……. Measured by 6-minute walk distance." }
+    status: unverified
+  - id: geri.L11.107
+    kind: mcq
+    topic: exacerbation
+    stem: A 74-year-old with COPD has more dyspnea and purulent sputum. PCR is positive for rhinovirus and influenza A. How do you read it?
+    options: [Treat influenza as causative, Both viruses are causative, PCR proves a viral cause so no further therapy, Ignore both results]
+    answer: 0
+    why:
+      - "Correct: a positive PCR does not prove causality, except influenza."
+      - "Rhinovirus positivity does not prove causality."
+      - "Exacerbation is clinical; he still needs exacerbation treatment."
+      - "Influenza should be treated."
+    src: { page: 202, quote: "A positive PCR does Not indicate causality,Exceptif influenzapositivewhich should be considered a causative pathogen" }
+    status: unverified
+  - id: geri.L11.108
+    kind: mcq
+    topic: exacerbation
+    stem: Which drug in an elderly patient's list can cause respiratory deterioration that mimics a COPD exacerbation?
+    options: [A sedative such as diazepam, Amlodipine, Atorvastatin, Omeprazole]
+    answer: 0
+    why:
+      - "Correct: sedatives (and beta blockers) are the book's examples."
+      - "Not listed."
+      - "Not listed."
+      - "Not listed."
+    src: { page: 202, quote: "Drug induced deterioration in resp function (check for sedatives …beta blockers)." }
+    status: unverified
+  - id: geri.L11.109
+    kind: mcq
+    topic: exacerbation
+    stem: What oxygen target is used in an acute exacerbation of COPD?
+    options: ["SpO2 88-92%", "SpO2 94-98%", "SpO2 above 98% with high flow", "SpO2 80-84%"]
+    answer: 0
+    why:
+      - "Correct: and no high-flow O2 unless the ABG shows no CO2 retention."
+      - "Too high for a COPD patient at risk of CO2 retention."
+      - "High flow is avoided unless CO2 retention is excluded."
+      - "Too low: 90% already equals a PaO2 of about 60."
+    src: { page: 203, quote: "Oxygen (target SpO2 88-92%) .. Do Not give high flow O2 unless ABG evidence absence of CO2 retention." }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: geri.L11.110
+    kind: mcq
+    topic: exacerbation
+    stem: A 70-year-old with COPD (FEV1 45%) admitted twice in 3 months has more dyspnea and purulent sputum without respiratory failure. Best antibiotic choice?
+    options: [Piperacillin-tazobactam with sputum culture, Doxycycline, Azithromycin, No antibiotic]
+    answer: 0
+    why:
+      - "Correct: moderate attack with risk factors needs antipseudomonal cover (fluoroquinolone, piperacillin-tazobactam or ceftazidime)."
+      - "Only for moderate attacks without risk factors."
+      - "Only for moderate attacks without risk factors."
+      - "Two of the three cardinal symptoms with risk factors warrant antibiotics."
+    src: { page: 204, quote: "Moderate attack in Presence of risk factors Or if Severe attack: Fluoroquinolone, antipseudomonal penicillin (pipercillin-tazobactam), ceftazidime" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L11.111
+    kind: mcq
+    topic: exacerbation
+    stem: A 62-year-old with COPD (FEV1 65%), no comorbidities and no recent antibiotics has more sputum volume and purulence without respiratory failure. Which antibiotic fits?
+    options: [Doxycycline, Ceftazidime, Piperacillin-tazobactam, Fluoroquinolone with sputum culture]
+    answer: 0
+    why:
+      - "Correct: moderate attack without risk factors: macrolide, doxycycline or 2nd/3rd-generation cephalosporin."
+      - "Reserved for risk factors or severe attacks."
+      - "Reserved for risk factors or severe attacks."
+      - "Reserved for risk factors or severe attacks."
+    src: { page: 204, quote: "Moderate attack and Absence of risk factors (for poor outcome or drug resist .organism) Macrolide, doxycycline, cephalosporin (second or third generation)." }
+    status: unverified
+  - id: geri.L11.112
+    kind: mcq
+    topic: oxygen
+    stem: An elderly man with COPD on nasal oxygen has SpO2 95%. Why can this reassure you less than it seems?
+    options: [PaO2 can fall from 140 to 65 mmHg before saturation drops, Pulse oximetry measures PaO2 directly, Saturation overestimates CO2, Oxygen shifts the curve to the left permanently]
+    answer: 0
+    why:
+      - "Correct: the flat top hides big falls in PaO2."
+      - "It does not measure PaO2."
+      - "Oximetry says nothing about CO2."
+      - "Not the book's point."
+    src: { page: 205, quote: "a fall in PaO2 from 140 to 65 mmHg would be required before a fall in O2 saturation is detected." }
+    status: unverified
+  - id: geri.L11.113
+    kind: mcq
+    topic: stable
+    stem: An 80-year-old with glaucoma and prostatic enlargement has COPD. Which short-acting bronchodilator needs caution?
+    options: [Ipratropium, Salbutamol, Terbutaline, Formoterol]
+    answer: 0
+    why:
+      - "Correct: anticholinergics need caution in glaucoma, urine retention and CVS disease."
+      - "A beta agonist; the cautions listed are for the anticholinergic."
+      - "A beta agonist; the cautions listed are for the anticholinergic."
+      - "A long-acting beta agonist."
+    src: { page: 206, quote: "Caution: (glaucoma ,urine retention,CVS)." }
+    status: unverified
+  - id: geri.L11.114
+    kind: mcq
+    topic: stable
+    stem: A patient on ipratropium is started on tiotropium. What should happen to ipratropium?
+    options: [Stop it, Continue it four times daily, Switch it to nebulized form, Add it only at night]
+    answer: 0
+    why:
+      - "Correct: when a LAMA is prescribed, the short-acting anticholinergic is discontinued."
+      - "Doubling anticholinergics adds side effects."
+      - "Still a duplicate anticholinergic."
+      - "Still a duplicate anticholinergic."
+    src: { page: 207, quote: "NOTE when LAMA is prescribed the short acting anticholinergic is discontinued." }
+    status: unverified
+  - id: geri.L11.115
+    kind: mcq
+    topic: stable
+    stem: Which is the correct role of inhaled corticosteroids in COPD?
+    options: [With a LABA for severe obstruction or frequent exacerbators, As monotherapy in mild COPD, As the first rescue inhaler, Never in COPD]
+    answer: 0
+    why:
+      - "Correct: ICS + LABA beats ICS alone."
+      - "ICS monotherapy is not recommended."
+      - "The rescue inhaler is a SABA."
+      - "They have a role in severe or frequently exacerbating disease."
+    src: { page: 207, quote: "NOTE Single therapy with ICS is not recommended in COPD as it is less effective than ICS + LABA." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L11.116
+    kind: mcq
+    topic: devices
+    stem: A frail 85-year-old with severe COPD cannot take a deep fast breath. Which inhaler form does not depend on inhalation speed?
+    options: [Soft mist inhaler, Dry powder inhaler, Metered dose inhaler without spacer, Metered dose inhaler with a fast breath]
+    answer: 0
+    why:
+      - "Correct: SMI delivers a slow mist."
+      - "DPI needs a deep fast breath."
+      - "MDI needs a deep fast synchronized breath."
+      - "That is exactly what she cannot do."
+    src: { page: 208, quote: "The effectiveness of delivery does notdepend on the speed of inhalation." }
+    status: unverified
+  - id: geri.L11.117
+    kind: mcq
+    topic: stable
+    stem: Who qualifies for azithromycin maintenance in COPD?
+    options: [Frequent exacerbator on triple therapy with normal hearing and no QTc risk, Any COPD patient after one exacerbation, A patient with resting tachycardia and long QTc, A patient with hearing impairment]
+    answer: 0
+    why:
+      - "Correct: 250 mg daily for frequent exacerbators maximized on triple therapy."
+      - "Only for frequent exacerbators already on triple therapy."
+      - "Tachycardia and QTc risk exclude it."
+      - "Hearing impairment excludes it (hearing decrements)."
+    src: { page: 209, quote: "Considered maintenance therapy for frequent exacerbators who are maximized on triple-inhaler therapy and do nothave a hearing impairment" }
+    status: unverified
+  - id: geri.L11.118
+    kind: mcq
+    topic: stable
+    stem: What is the goal serum theophylline level in older adults?
+    options: ["8 to 12 mcg/mL", "15 to 20 mcg/mL", "2 to 4 mcg/mL", "20 to 25 mcg/mL"]
+    answer: 0
+    why:
+      - "Correct per the book."
+      - "Higher than the book's goal for older adults."
+      - "Lower than the goal."
+      - "Toxic range."
+    src: { page: 209, quote: "Goal serum level in older adults of 8 to 12 mcg/mL." }
+    status: unverified
+    tags: [numbers]
+  # ---------- cases ----------
+  - id: geri.L11.119
+    kind: case
+    topic: exacerbation
+    stem: A 76-year-old woman with COPD (FEV1 42%) comes with three days of worse breathlessness and more, greener sputum. She lives alone.
+    steps:
+      - question: Is this an exacerbation, and how severe if there is no respiratory failure?
+        options: ["Yes, moderate", "Yes, severe", "No, day-to-day variation", "Cannot say without culture"]
+        answer: 0
+        why: "Two or more of dyspnea, sputum volume and purulence without respiratory failure = moderate. It is a clinical diagnosis."
+      - reveal: "SpO2 84% on air. ABG: PaO2 50 mmHg, PaCO2 58 mmHg, pH 7.33."
+        question: Oxygen plan?
+        options: ["Controlled O2 to SpO2 88-92%", "High-flow O2 to 98%", "No oxygen", "Oxygen only if SpO2 below 80%"]
+        answer: 0
+        why: "She retains CO2, so no high flow; target 88-92%. And the gas shows respiratory failure: this is now a severe exacerbation."
+      - question: Which antibiotic group fits?
+        options: ["Antipseudomonal: fluoroquinolone, piperacillin-tazobactam or ceftazidime, with sputum culture", "Doxycycline", "No antibiotic", "Oral amoxicillin only"]
+        answer: 0
+        why: "Severe attack and risk factors (age over 65, FEV1 under 50%)."
+      - question: Should she be admitted?
+        options: ["Yes", "No, home treatment", "Only if sputum culture is positive"]
+        answer: 0
+        why: "Severe COPD, failing gas exchange and insufficient home support are all admission indications."
+    src: { page: 203, quote: "Indications for hospital admission." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L11.120
+    kind: case
+    topic: obstruction
+    stem: An 81-year-old ex-smoker has spirometry for mild exertional breathlessness. FEV1/FVC is 0.66.
+    steps:
+      - question: By GOLD, how is this read?
+        options: ["Obstruction (ratio below 0.70)", "Normal", "Restriction", "Mixed"]
+        answer: 0
+        why: "GOLD uses a fixed ratio below 0.70."
+      - reveal: "GLI: FEV1/FVC Z-score -1.3."
+        question: By GLI?
+        options: ["Within normal limits", "Obstruction", "Severe obstruction", "Restriction"]
+        answer: 0
+        why: "Obstruction needs a Z-score below -1.64."
+      - question: What is the wisest conclusion?
+        options: ["Treat the patient, not the numbers: look for other causes of dyspnea", "Start triple therapy", "Repeat until the ratio is under 0.65", "Diagnose COPD from the GOLD ratio"]
+        answer: 0
+        why: "GOLD overdiagnoses obstruction in the elderly, and no reference equation decides normality in isolation."
+    src: { page: 193, quote: "GLI has recommended that the LLN be instead defined as the fifth percentile distribution of Z-scores (Z-score of –1.64)." }
+    status: unverified
+  - id: geri.L11.121
+    kind: case
+    topic: stable
+    stem: An 83-year-old man with COPD and mild memory problems uses salbutamol MDI several times a day and had three exacerbations last year.
+    steps:
+      - question: What is the next pharmacologic step?
+        options: ["Add long-acting bronchodilator maintenance", "Increase salbutamol only", "Start ICS alone", "Start theophylline first"]
+        answer: 0
+        why: "Uncontrolled on short-acting drugs and a frequent exacerbator: long-acting maintenance."
+      - question: What should guide the device choice?
+        options: ["Once-daily, self-contained device, teach patient and caregiver", "Several different inhalers four times daily", "Always DPI", "Nebulized LAMA"]
+        answer: 0
+        why: "The book's priorities for the elderly; nebulized anticholinergics exist only short-acting."
+      - reveal: "Later he is on LABA + LAMA + ICS and still has frequent exacerbations. Hearing and ECG are normal."
+        question: What may be added?
+        options: ["Azithromycin 250 mg daily", "Second ICS", "Oral ciprofloxacin long term", "Mucolytics routinely"]
+        answer: 0
+        why: "Azithromycin for frequent exacerbators maximized on triple therapy without hearing loss, tachycardia or QTc risk."
+      - question: Which local side effect of his ICS should you prevent?
+        options: ["Oral candidiasis and dysphonia: rinse, gargle and spit", "Tremor", "Hypokalemia", "Urine retention"]
+        answer: 0
+        why: "Older adults who forget to rinse get candidiasis and dysphonia."
+    src: { page: 206, quote: "Those who are frequent exacerbators (Two or moresymptom-defined exacerbations per year)." }
+    status: unverified
+  # ---------- essays ----------
+  - id: geri.L11.122
+    kind: essay
+    topic: aging
+    prompt: Describe the effect of aging on the respiratory system and lung function tests.
+    outline:
+      - "Alveoli": ["Senile emphysema: dilatation, no destruction", "Loss of elastic recoil"]
+      - "Chest wall and muscles": ["Stiffer chest wall", "Diaphragm 25% weaker, VC falls"]
+      - "Volumes": ["TLC unchanged", "RV up, air trapping, hyperinflation", "VC down", "Closing capacity 10% to 30% of TLC by 70"]
+      - "Flow": ["FEV1 down one-third litre per decade", "FEV1/FVC falls, may overestimate obstruction"]
+    src: { page: 191, quote: "Age-related changes within alveoli ―senile emphysema‖. Reduced lung recoil. TLC does not change with age." }
+    status: unverified
+  - id: geri.L11.123
+    kind: essay
+    topic: obstruction
+    prompt: Discuss the problems of diagnosing and staging airflow obstruction in older adults.
+    outline:
+      - "ATS/ERS": ["LLN = 5th percentile of healthy never-smokers", "NHANES III, only up to 80"]
+      - "GOLD flaws": ["Fixed 0.70 ratio overdiagnoses healthy over-65s", "%Pred ignores variability", "37.7% vs 15.4%", "Overdiagnosis not linked to outcomes"]
+      - "GLI": ["Z-score below -1.64", "Ages up to 95, many ethnicities", "Linked to symptoms, frailty, mortality", "Stage by FEV1 Z: -1.64 and -2.55"]
+      - "Reversibility": ["Post-BD values diagnose COPD", "Elderly: fewer maneuvers, BD side effects"]
+      - "Caution": ["1 in 20 healthy people below LLN", "Treat the patient, not the numbers"]
+    src: { page: 192, quote: "GOLD defines areduced FEV1/FVC by a fixed ratio less than 0.70" }
+    status: unverified
+  - id: geri.L11.124
+    kind: essay
+    topic: exacerbation
+    prompt: Discuss the management of an acute exacerbation of COPD in the elderly.
+    outline:
+      - "Definition": ["Change in sputum volume or purulence and/or dyspnea needing therapy change", "Infection 70%", "Clinical diagnosis; PCR only influenza"]
+      - "Work-up": ["ABG, CXR, sputum, blood culture, U&E, CRP, ECG", "DD: pneumonia, pneumothorax, asthma, PE, LHF, drugs"]
+      - "Admission": ["Severity, severe COPD, comorbidity, failure, uncertainty, home support"]
+      - "Treatment": ["O2 to 88-92%", "Nebulized SABA +/- SAMA, aminophylline", "Prednisolone", "Antibiotics by severity and risk factors", "Ventilation, physiotherapy"]
+    src: { page: 203, quote: "Immediate treatment (Acute Exacerbation)" }
+    status: unverified
+  - id: geri.L11.125
+    kind: essay
+    topic: stable
+    prompt: Outline the management of chronic stable COPD in the elderly.
+    outline:
+      - "Short-acting": ["SABA rescue, nebulizer if inhaler hard", "SAMA: caution glaucoma, retention, CVS"]
+      - "Long-acting": ["LABA, LAMA: indications", "Stop SAMA when LAMA starts"]
+      - "ICS": ["With LABA, not alone", "Local and systemic side effects"]
+      - "Elderly priorities": ["Once daily, self-contained device, education", "Stepwise to triple therapy"]
+      - "Others": ["Theophylline 8-12", "Roflumilast", "Azithromycin", "Mucolytics only refractory"]
+      - "Nonpharmacologic": ["Vaccines, smoking cessation, LTOT, NPPV/CPAP, rehab, LVRS, palliative care"]
+    src: { page: 208, quote: "A stepwise approach that may lead to triple-inhaler maintenance therapy" }
+    status: unverified

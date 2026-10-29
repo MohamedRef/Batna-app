@@ -266,6 +266,8 @@ enum Step {
 
 #[component]
 fn Runner() -> Element {
+    // A running round gets the whole phone screen; End is the way out.
+    crate::parts::use_focus_mode(true);
     let store = use_store();
     let mut phase = use_signal(|| Phase::Asking);
     let no_voice = use_signal(|| false);

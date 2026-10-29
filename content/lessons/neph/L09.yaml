@@ -1,0 +1,967 @@
+schema: batna.lesson/v1
+lecture: neph.L09
+lessons:
+  # ------------------------------------------------------------------
+  - id: neph.L09.lesson1
+    title: "اختيار الـ RRT وماكينة الغسيل من جوّه"
+    hook: "قبل ما تختار غسيل ولا زراعة، لازم تعرف الماكينة بتعمل إيه في الـ 4 ساعات دول."
+    minutes: 9
+    pages: [292, 295]
+    topics: [intro, modalities, hd-machine, hd-dose]
+    goals:
+      - "تعرف الـ RRT المثالي لازم يحقق إيه، وإزاي تختار بين HD و PD والزراعة"
+      - "تفرّق CRRT و SLED/PIRRT و HD العادي بالوقت والماكينة"
+      - "تفهم الـ dialyser والـ dialysate والمية والإنذارات، وجرعة الغسيل"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 293
+        title: "الـ RRT المثالي"
+        quote: "Prevent further deterioration of renal function. Preserve residual renal"
+        text: |
+          الـ RRT المثالي بيعمل 6 حاجات:
+          - ينضّف الـ **uraemic toxins**.
+          - يظبط الـ **electrolytes** والـ **acid–base**.
+          - يحافظ على الـ ==residual renal function== وما يبوّظش الكلية أكتر.
+          - يسرّع رجوع الكلية في الـ **AKI**.
+          - مريح ومرن (tolerance, flexibility).
+          - ما يضيّعش nutrients.
+      - kind: explain
+        page: 293
+        title: "HD ولا PD ولا زراعة؟"
+        quote: "The outcome comparison suggest that RT is a better overall treatment forESRD patients."
+        text: |
+          الـ ESRD ليه 3 حلول: **HD**، **PD**، و ==renal transplantation==. الزراعة **أحسن في المجمل** (better overall treatment).
+
+          بين HD و PD الدراسات متضاربة؛ مفيش واحد ينفع الكل. الاختيار حسب المريض: السن، الأمراض التانية، فيه متبرع ولا لأ، الفلوس، الظروف الاجتماعية، وجودة الحياة. وفي العالم كله حوالي ==80%== على الـ HD.
+      - kind: aside
+        tone: exam
+        page: 293
+        quote: "Councelling for RRT should be in stage 4CKD, to allow time for hepatitis B vaccination"
+        text: |
+          الكلام عن الـ RRT يبدأ في ==CKD stage 4==. ليه؟ علشان الـ **hepatitis B vaccine** محتاج وقت، والـ **AV fistula** محتاجة شهور تنضج.
+      - kind: table
+        page: 294
+        quote: "PIRRT or SLED 6-12h /session (can be done with the usual dialysis"
+        title: "كل modality قد إيه؟"
+        columns: [Modality, Session]
+        rows:
+          - ["CRRT (CKRT)", "24 h/day, special machine"]
+          - ["SLED / PIRRT", "6–12 h, usual machine"]
+          - ["Conventional HD", "4–5 h"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: figure
+        page: 294
+        quote: "blood circulates while dialysate flows countercurrent(to maintain conc gradients"
+        title: "الـ dialyser: دم في اتجاه ومحلول في الاتجاه التاني"
+        alt: "A long horizontal dialyser drawn as a tube. Blood enters on the left inside hollow fibres and leaves on the right. Dialysate enters on the right outside the fibres and leaves on the left. Small dots (urea, potassium) cross from blood into dialysate along the whole length; a note says the gradient stays high everywhere because the flows are countercurrent."
+        caption: "الـ ==countercurrent== بيخلي الفرق في التركيز عالي على طول الفلتر كله، فالـ urea بتفضل تعدّي من الدم للمحلول من أوله لآخره."
+        svg: |
+          <svg viewBox="0 0 330 200" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="N9a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-bad"/></marker>
+              <marker id="N9b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-acc"/></marker>
+            </defs>
+            <rect x="30" y="50" width="270" height="100" rx="40" class="fg-box"/>
+            <rect x="45" y="85" width="240" height="30" rx="12" class="fg-bad"/>
+            <path d="M5 100 L42 100" class="fg-arrow-bad" marker-end="url(#N9a)"/>
+            <path d="M288 100 L325 100" class="fg-arrow-bad" marker-end="url(#N9a)"/>
+            <text x="5" y="92" class="t-sm t-bad t-b">Blood in</text>
+            <text x="270" y="130" class="t-sm t-bad">out</text>
+            <path d="M325 62 L270 62" class="fg-arrow-acc" marker-end="url(#N9b)"/>
+            <path d="M60 138 L5 138" class="fg-arrow-acc" marker-end="url(#N9b)"/>
+            <text x="230" y="44" class="t-sm t-acc t-b">Dialysate in</text>
+            <text x="5" y="160" class="t-sm t-acc">Dialysate out</text>
+            <circle cx="100" cy="90" r="3" class="fg-dot-bad"/>
+            <circle cx="110" cy="72" r="3" class="fg-dot-bad"/>
+            <circle cx="170" cy="92" r="3" class="fg-dot-bad"/>
+            <circle cx="182" cy="74" r="3" class="fg-dot-bad"/>
+            <circle cx="240" cy="90" r="3" class="fg-dot-bad"/>
+            <circle cx="250" cy="73" r="3" class="fg-dot-bad"/>
+            <text x="165" y="185" text-anchor="middle" class="t-sm t-mut">Urea and K+ cross along the whole length</text>
+          </svg>
+      - kind: explain
+        page: 294
+        title: "الـ dialysate بيتعمل إزاي؟"
+        quote: "to prevent formation of insoluble calcium and magnesium salts with bicarbonate"
+        text: |
+          لو حطيت الـ **bicarbonate** مع الـ **calcium** و **magnesium** في جركن واحد، هيترسّبوا أملاح مش بتدوب. علشان كده المحلول من ==جزئين==:
+          - **Bicarbonate concentrate** (دلوقتي cartridges بودرة ناشفة علشان العدوى).
+          - **Acid concentrate**: كل الأملاح من غير bicarbonate، مركّز **34–36 مرة**، وفيه acetate قليل (3 mEq/L).
+
+          الماكينة تخلطهم مع **مية متنقية**. في 4 ساعات الدم بيشوف ==120 لتر مية== (dialysate flow 500 mL/min)!
+      - kind: order
+        page: 294
+        quote: "filtration, softening, activated charcoal filtration and reverse osmosis"
+        prompt: "120 لتر بتلمس دم العيان. رتّب تنقية المية:"
+        steps:
+          - "Filtration"
+          - "Softening"
+          - "Activated charcoal"
+          - "Reverse osmosis"
+        why: "الكتاب: filtration ← softening ← activated charcoal ← reverse osmosis، علشان تشيل الـ chloramines والميكروبات والأملاح الدايبة."
+      - kind: explain
+        page: 294
+        title: "الدايرتين والإنذارات"
+        quote: "Conductivity (reflection of sodium, bicarbonate conc)"
+        text: |
+          **دايرة الـ dialysate**: heating، deaeration، proportioning، monitoring، UF، disinfection. إنذاراتها: ==conductivity== (يعني تركيز الـ Na والـ bicarbonate)، الحرارة، والـ **haemoglobin** (blood leak).
+
+          **دايرة الدم**: blood pump، وإنذارات inflow pressure و outflow pressure و ==air detector==.
+      - kind: check
+        page: 294
+        quote: "Conductivity (reflection of sodium, bicarbonate conc)"
+        question: "The haemoglobin detector alarms during dialysis. What does it mean?"
+        options:
+          - "Blood leak into the dialysate"
+          - "Wrong sodium concentration"
+          - "Air in the blood line"
+          - "Dialysate too cold"
+        answer: 0
+        why:
+          - "صح: الـ haemoglobin sensor في دايرة المحلول = blood leak (الفلتر مخروم)."
+          - "ده الـ conductivity alarm."
+          - "ده الـ air detector في دايرة الدم."
+          - "ده الـ temperature alarm."
+      - kind: explain
+        page: 295
+        title: "الجرعة والـ heparin"
+        quote: "Dialysis should be delivered at least three times per week and the total duration should be at least 12 h per week."
+        text: |
+          - على الأقل ==3 مرات في الأسبوع== و **12 ساعة** في الأسبوع.
+          - زوّد الوقت أو المرات لو: haemodynamic أو CV instability، resistant hypertension، phosphate مش مظبوط.
+          - **الحامل**: ==5 جلسات و 20 ساعة== في الأسبوع على الأقل.
+          - **Incremental**: نبدأ أقل ونزوّد مع الوقت لو فيه residual renal function، ونقيسها كل فترة.
+
+          **Anticoagulation**: unfractionated أو LMWH للعادي (1A)، قلّل أو الغي لو فيه خطر نزيف (1C)، و non-heparin لو عنده heparin allergy (1A).
+      - kind: aside
+        tone: joke
+        page: 295
+        quote: "Pregnant women should receive at least 5 sessions/w, minimum duration of 20h/w."
+        text: |
+          الحامل على الغسيل بتقضي في الوحدة **20 ساعة** في الأسبوع. يعني الممرضات هيعرفوا اسم البيبي قبل باباه 😄
+      - kind: try
+        items: [neph.L09.001, neph.L09.008, neph.L09.011, neph.L09.019, neph.L09.023]
+    recap:
+      - "الزراعة أحسن RRT في المجمل؛ HD و PD حسب المريض، و 80% في العالم على HD."
+      - "الكلام عن الـ RRT من CKD stage 4: HBV vaccine و fistula."
+      - "CRRT 24 ساعة، SLED/PIRRT 6–12، HD العادي 4–5."
+      - "Dialysate من جزئين علشان الـ Ca و Mg ما يترسبوش مع الـ bicarbonate؛ 120 لتر مية في 4 ساعات."
+      - "3 مرات و 12 ساعة في الأسبوع؛ الحامل 5 مرات و 20 ساعة."
+    practice: [neph.L09.001, neph.L09.002, neph.L09.003, neph.L09.004, neph.L09.005, neph.L09.006, neph.L09.007, neph.L09.008, neph.L09.009, neph.L09.010, neph.L09.011, neph.L09.012, neph.L09.013, neph.L09.014, neph.L09.015, neph.L09.016, neph.L09.017, neph.L09.018, neph.L09.019, neph.L09.020, neph.L09.021, neph.L09.022, neph.L09.023, neph.L09.075]
+  # ------------------------------------------------------------------
+  - id: neph.L09.lesson2
+    title: "الوصلة والفيزيا: fistula و diffusion و convection"
+    hook: "الـ radial artery بيجيب 64 mL/min بس، والفلتر عايز 400. الحل وريد اتعلّم يبقى شريان."
+    minutes: 9
+    pages: [295, 299]
+    topics: [access, transport]
+    goals:
+      - "تعرف ليه الـ fistula، وامتى graft، وترتيب أماكن الـ catheter"
+      - "تفرّق diffusion و convection و adsorption و ultrafiltration"
+      - "تصنّف الـ solutes بالحجم، وتعرف الـ low flux من الـ high flux"
+    status: unverified
+    steps:
+      - kind: reveal
+        page: 295
+        quote: "to give adequate blood flow for the dialyser 250-400ml /min"
+        prompt: "ليه مش بنغسل من وريد عادي في الدراع؟"
+        answer: "الفلتر محتاج **250–400 mL/min**، والوريد العادي ما يستحملش **إبر 15 gauge** 3 مرات في الأسبوع. الـ ==arterialised vein== بيجيب الـ flow وجداره بيتقل فيستحمل الشك."
+      - kind: explain
+        page: 296
+        title: "الـ fistula والـ graft"
+        quote: "radial A to cephalic vein :BresciaCimino fistula, (radiocephalic)"
+        text: |
+          الـ ==Brescia–Cimino== = **radial artery** متوصل بالـ **cephalic vein** (radiocephalic). الـ radial بيجيب 64 mL/min قبل العملية، وبعد النضج ممكن يتضاعف **10 مرات**. والأوعية الأكبر (upper arm) بتنضج أحسن.
+
+          بتتعمل ==6 شهور قبل الاستخدام== (stage 4).
+
+          **AV graft** (PTFE) لو: الـ fistula ما نضجتش، الـ arterial inflow ضعيف، أو الأوردة رفيعة.
+
+          المتابعة: الضغوط على الغسيل والـ access flow، و **Doppler** لو شاكك في stenosis أو thrombosis.
+      - kind: figure
+        page: 296
+        quote: "radial A to cephalic vein :BresciaCimino fistula, (radiocephalic)"
+        title: "الـ radiocephalic fistula"
+        alt: "Forearm sketch: the radial artery runs along the thumb side and the cephalic vein beside it; near the wrist they are joined side to end. Above the joint the vein is drawn thicker and labelled arterialised vein, needles go here; blood flow rises from 64 to several hundred mL/min."
+        caption: "الشريان بيصب في الوريد عند الرسغ، فالوريد ==يتشرين== (يتخن ويوسع) ويبقى مكان الإبر."
+        svg: |
+          <svg viewBox="0 0 330 220" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 40 L310 40 L310 180 L20 180 Z" class="fg-thin"/>
+            <text x="24" y="30" class="t-sm t-mut">Forearm</text>
+            <text x="270" y="30" class="t-sm t-mut">Wrist</text>
+            <path d="M30 150 L280 150" class="fg-arrow-bad" stroke-width="5"/>
+            <text x="40" y="170" class="t-sm t-bad">Radial artery</text>
+            <path d="M30 80 L250 80 Q280 80 280 150" class="fg-arrow-acc" stroke-width="12"/>
+            <text x="40" y="66" class="t-sm t-acc t-b">Cephalic vein, arterialised</text>
+            <circle cx="280" cy="150" r="7" class="fg-dot-good"/>
+            <text x="226" y="200" class="t-sm t-good t-b">Anastomosis</text>
+            <path d="M110 110 L120 86" class="fg-ink"/>
+            <path d="M160 110 L170 86" class="fg-ink"/>
+            <text x="100" y="125" class="t-sm">Needles (15 G)</text>
+          </svg>
+      - kind: order
+        page: 297
+        quote: "the right jugular vein, the femoral vein, the left jugular vein or the subclavian vein"
+        prompt: "AKI محتاج catheter. رتّب الأوردة من الأحسن للأوحش:"
+        steps:
+          - "Right jugular"
+          - "Femoral"
+          - "Left jugular"
+          - "Subclavian"
+        why: "Right jugular أقصر وأقل مشاكل. الـ femoral فيه infection ويتجنب لو هيزرع. والـ subclavian آخر واحد لأنه بيعمل ==stenosis== تمنع أي fistula في الدراع ده. وكل ده تحت ultrasound (2A)."
+      - kind: mnemonic
+        page: 297
+        quote: "the right jugular vein, the femoral vein, the left jugular vein or the subclavian vein"
+        word: "RFLS"
+        parts:
+          - { key: "R", text: "Right jugular" }
+          - { key: "F", text: "Femoral" }
+          - { key: "L", text: "Left jugular" }
+          - { key: "S", text: "Subclavian: last, stenosis" }
+        hook: |
+          "**R**eally **F**ast, **L**ast **S**ubclavian": الـ subclavian آخر واحد، لأنه بيقفل طريق الـ fistula.
+      - kind: table
+        page: 297
+        quote: "Diffusion provides efficient clearance of low-molecular-weight solutes (< 500-1,500"
+        title: "إزاي الحاجة بتعدّي الغشا؟"
+        columns: [Mechanism, How, Best for]
+        rows:
+          - ["Diffusion", "Concentration gradient", "Small (<500–1,500 D)"]
+          - ["Convection", "Dragged with water (UF)", "Larger, faster"]
+          - ["Adsorption", "Sticks to membrane", "Hydrophobic"]
+        hide: [[0, 2], [1, 1], [2, 2]]
+      - kind: aside
+        tone: analogy
+        page: 297
+        quote: "Convection is the process whereby solutes pass through membrane pores, dragged by fluid movement"
+        text: |
+          الـ **diffusion** زي نقطة شاي في كوباية مية: بتنتشر لوحدها من الكتير للقليل، وده بيمشي مع الحاجات الصغيرة.
+
+          الـ ==convection== زي السيل: المية بتجري وبتشد معاها أي حاجة قدها، حتى الكبيرة.
+      - kind: explain
+        page: 298
+        title: "UF وأحجام الـ solutes"
+        quote: "Middle molecules MW 500-15000 B12(1355). B2 microglobulin (11800)"
+        text: |
+          الـ ==ultrafiltration== = مية البلازما بتعدّي الغشا بسبب فرق الضغط (TMP). الـ **KUF** = نفاذية الغشا للمية لكل mmHg ولكل m²، والـ **DKUF** = KUF × مساحة الفلتر.
+
+          **الأحجام**:
+          - **Small** (<500 D): Na، P، K، urea 60، creatinine 113، uric acid 186، glucose 180.
+          - ==Middle== (500–15,000): B12 1355، **β2-microglobulin 11,800**.
+          - **Large** (>15,000): myoglobin 17,800، albumin 68,000.
+
+          **Low flux**: UF coefficient 2–10. **High flux**: 20–50، cut-off حوالي 20 kD، وبيعمل convection كبير.
+      - kind: check
+        page: 298
+        quote: "Middle molecules MW 500-15000 B12(1355). B2 microglobulin (11800)"
+        question: "Which solute is a middle molecule?"
+        options:
+          - "Beta-2 microglobulin"
+          - "Urea"
+          - "Albumin"
+          - "Potassium"
+        answer: 0
+        why:
+          - "صح: 11,800 D، بين 500 و 15,000."
+          - "الـ urea 60 D: small."
+          - "الـ albumin 68,000: large."
+          - "الـ K small."
+      - kind: explain
+        page: 299
+        title: "الـ HD بيشتغل بإيه أساسًا؟"
+        quote: "A counter-current configuration is preferred because the average concentration gradient is kept higher"
+        text: |
+          الـ HD أساسه ==diffusion==، وده قوي مع الـ **small solutes**. والـ **counter-current** أحسن من الـ co-current لأنه بيخلي الـ gradient عالي على طول الفلتر. الـ **high-flux filters** بتضيف convection مهم.
+      - kind: try
+        items: [neph.L09.024, neph.L09.028, neph.L09.032, neph.L09.037, neph.L09.041]
+    recap:
+      - "Radial artery 64 mL/min، الفلتر عايز 250–400؛ الـ fistula بتتعمل 6 شهور قبل."
+      - "Brescia–Cimino = radial + cephalic. Graft (PTFE) لو الـ fistula فشلت أو الأوعية وحشة."
+      - "Catheter: right jugular ← femoral ← left jugular ← subclavian (آخر واحد، stenosis)، بالـ ultrasound."
+      - "Diffusion للصغير، convection للكبير، adsorption للـ hydrophobic."
+      - "Small <500، middle 500–15,000 (β2m)، large >15,000؛ high flux UF 20–50."
+    practice: [neph.L09.024, neph.L09.025, neph.L09.026, neph.L09.027, neph.L09.028, neph.L09.029, neph.L09.030, neph.L09.031, neph.L09.032, neph.L09.033, neph.L09.034, neph.L09.035, neph.L09.036, neph.L09.037, neph.L09.038, neph.L09.039, neph.L09.040, neph.L09.041, neph.L09.042, neph.L09.043, neph.L09.044]
+  # ------------------------------------------------------------------
+  - id: neph.L09.lesson3
+    title: "امتى نغسل، وإيه اللي ممكن يحصل في الجلسة"
+    hook: "عيان أول جلسة، كبير في السن، والـ BUN عالي. لو نضّفته بسرعة، مخه هيورم."
+    minutes: 9
+    pages: [299, 302]
+    topics: [prescription, hd-complications]
+    goals:
+      - "تعرف دواعي الغسيل الكلوية وغير الكلوية والسموم اللي بتتغسل"
+      - "تظبط أول جلسة (BUN ratio) والـ isolated UF مع الـ hyperkalaemia"
+      - "تفهم الـ disequilibrium والـ intradialytic hypotension"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 299
+        title: "الـ prescription بيتفصّل"
+        quote: "session length, Blood flow rate, Dialysis solution composition, Dialysate solution flow rate"
+        text: |
+          كل عيان ليه: مدة الجلسة، blood flow، تركيب المحلول، dialysate flow، كام هنسحب مية، والـ anticoagulation.
+
+          بتفرق: **acute ولا chronic**، **أول جلسة**، الـ residual renal function، الأمراض التانية (hypotension، قلب، كبد)، والـ acid–base والـ electrolytes.
+
+          أول جلسات الـ acute أو لو خطر الـ disequilibrium عالي: الـ ==post/pre BUN ratio 0.65–0.75== (يعني ما تنزّلش الـ urea أكتر من 25–35%).
+      - kind: mnemonic
+        page: 300
+        quote: "Electrolyte abnormalities not responding to medical treatment"
+        word: "AEIOU"
+        parts:
+          - { key: "A", text: "Acidosis not responding (or with oliguria/anuria)" }
+          - { key: "E", text: "Electrolytes: hyperkalaemia, hyponatraemia, hyperphosphataemia" }
+          - { key: "I", text: "Intoxication: dialysable drugs and toxins" }
+          - { key: "O", text: "Overload of volume not responding" }
+          - { key: "U", text: "Uraemia: encephalopathy, pericarditis" }
+        hook: |
+          دواعي الغسيل = **AEIOU**. وزوّد عليهم من الكتاب: ESRD بأعراض أو malnutrition، و AKI مستمر أو بيزيد.
+      - kind: check
+        page: 299
+        quote: "if hyperkalmia present isolated UF should be after not before dialysis"
+        question: "First session: pulmonary oedema plus K+ 7.0. When is isolated UF done?"
+        options:
+          - "After dialysis"
+          - "1–2 h before dialysis"
+          - "Instead of dialysis"
+          - "Never in a first session"
+        answer: 0
+        why:
+          - "صح: مع الـ hyperkalaemia اغسل الأول ونزّل الـ K، والـ isolated UF بعدين."
+          - "ده المعتاد لو مفيش hyperkalaemia."
+          - "الـ isolated UF بيشيل مية بس، مش K."
+          - "الكتاب بيسمح بيه في أول جلسة لو المية كتير."
+      - kind: explain
+        page: 300
+        title: "السموم والـ indications غير الكلوية"
+        quote: "Hemodialysis is more efficient for removal of lithium, ethanol, methanol, bromide, ethylene glycol, and salicylates"
+        text: |
+          - **Intractable HF** و oedema شديدة: UF أو SLED.
+          - **التسمم**: الـ ==antidote== الأول. نغسل لو الـ vital signs بتقع رغم الـ supportive care، أو acidosis شديدة، أو renal failure، أو electrolytes مش بتتظبط.
+
+          الـ HD أشطر حاجة مع: ==lithium، ethanol، methanol، bromide، ethylene glycol، salicylates==.
+      - kind: mnemonic
+        page: 300
+        quote: "Hemodialysis is more efficient for removal of lithium, ethanol, methanol, bromide, ethylene glycol, and salicylates"
+        word: "SLEMBE"
+        parts:
+          - { key: "S", text: "Salicylates" }
+          - { key: "L", text: "Lithium" }
+          - { key: "E", text: "Ethanol" }
+          - { key: "M", text: "Methanol" }
+          - { key: "B", text: "Bromide" }
+          - { key: "E", text: "Ethylene glycol" }
+        hook: |
+          السموم اللي الفلتر بيحبها: صغيرة، بتدوب في المية، ومش لازقة في البروتين.
+      - kind: explain
+        page: 301
+        title: "الـ disequilibrium syndrome"
+        quote: "Cerebral edema from urea removal from the blood more rapidly than from the CSF and brain tissue"
+        text: |
+          الـ urea بتنزل من **الدم** أسرع من **المخ والـ CSF**. المخ يفضل osmolality أعلى، فالمية تدخله: ==cerebral oedema==. وكمان الـ HD بيعمل CO2 gradient فالـ pH في الـ CSF ينزل.
+
+          **مين؟** أول جلسات، الكبار والأطفال، CNS lesions (stroke أو head trauma)، brain oedema (malignant HTN، hyponatraemia، hepatic encephalopathy)، و ==BUN عالي قبل الغسيل==.
+      - kind: figure
+        page: 301
+        quote: "Cerebral edema from urea removal from the blood more rapidly than from the CSF and brain tissue"
+        title: "ليه المخ بيورم؟"
+        alt: "Two boxes side by side: blood, where urea falls quickly during dialysis, and brain, where urea stays high. An arrow shows water moving from blood into the brain, giving cerebral oedema."
+        caption: "الدم اتنضّف بسرعة والمخ لسه مليان urea، فالمية تمشي ==ناحية المخ==. الحل: أول جلسة هادية."
+        svg: |
+          <svg viewBox="0 0 330 190" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="N9c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-acc"/></marker>
+            </defs>
+            <rect x="5" y="20" width="135" height="130" rx="10" class="fg-good"/>
+            <text x="72" y="45" text-anchor="middle" class="t-b">Blood</text>
+            <text x="72" y="70" text-anchor="middle" class="t-sm">Urea falls fast</text>
+            <circle cx="50" cy="105" r="4" class="fg-dot-bad"/>
+            <circle cx="95" cy="115" r="4" class="fg-dot-bad"/>
+            <rect x="190" y="20" width="135" height="130" rx="10" class="fg-bad"/>
+            <text x="257" y="45" text-anchor="middle" class="t-b">Brain and CSF</text>
+            <text x="257" y="70" text-anchor="middle" class="t-sm">Urea stays high</text>
+            <circle cx="215" cy="95" r="4" class="fg-dot-bad"/>
+            <circle cx="240" cy="115" r="4" class="fg-dot-bad"/>
+            <circle cx="265" cy="95" r="4" class="fg-dot-bad"/>
+            <circle cx="290" cy="118" r="4" class="fg-dot-bad"/>
+            <circle cx="300" cy="92" r="4" class="fg-dot-bad"/>
+            <path d="M142 100 L186 100" class="fg-arrow-acc" stroke-width="3" marker-end="url(#N9c)"/>
+            <text x="164" y="92" text-anchor="middle" class="t-sm t-acc t-b">Water</text>
+            <text x="165" y="178" text-anchor="middle" class="t-b t-bad">Cerebral oedema</text>
+          </svg>
+      - kind: explain
+        page: 301
+        title: "الـ intradialytic hypotension"
+        quote: "Intradialytic hypotension mostly associated with increased UF"
+        text: |
+          سببها الأساسي ==UF كتير==. نتايجها: severe metabolic acidosis، myocardial ischaemia و stunning، ischaemic stroke، venous thrombosis (retinal vein)، intestinal ischaemia، arteritis الرجلين بتسوء، الجلسة تتقفل بدري (inadequate dialysis)، الـ access يتجلّط، والوفيات تزيد.
+      - kind: aside
+        tone: exam
+        page: 302
+        quote: "a UFR>10 mL/kg/h correlated with higher odds of IDH"
+        text: |
+          رقم الـ DOPPS: **UFR أكتر من ==10 mL/kg/h==** = IDH أكتر و **all-cause mortality** أعلى، بس **مش** cardiovascular mortality. ودراسة 2011: أكتر من 10–13 بيزوّد الاتنين.
+      - kind: check
+        page: 301
+        quote: "First few dialysis sessions.Elderly and pediatric patients."
+        question: "First HD, age 74, BUN 180 mg/dL: confusion and vomiting near the end. Cause?"
+        options:
+          - "Disequilibrium syndrome"
+          - "Air embolism"
+          - "Dialyser reaction"
+          - "Hypoglycaemia from glucose-free dialysate"
+        answer: 0
+        why:
+          - "صح: أول جلسة + كبير + BUN عالي = urea نزلت بسرعة والمخ ورم."
+          - "الـ air embolism فجأة، ضيق نفس وانهيار، والـ air detector بيمسكه."
+          - "الـ dialyser reaction بيبدأ أول الجلسة."
+          - "الكتاب ما بيذكرش ده؛ الصورة دي disequilibrium."
+      - kind: try
+        items: [neph.L09.047, neph.L09.048, neph.L09.054, neph.L09.057, neph.L09.061]
+    recap:
+      - "أول جلسة: post/pre BUN 0.65–0.75."
+      - "AEIOU + ESRD بأعراض + AKI مستمر. مع hyperkalaemia: الـ isolated UF بعد الغسيل."
+      - "HD بيشيل lithium و ethanol و methanol و bromide و ethylene glycol و salicylates؛ الـ antidote الأول."
+      - "Disequilibrium = urea بتنزل من الدم أسرع من المخ = cerebral oedema."
+      - "IDH من الـ UF الكتير؛ UFR >10 mL/kg/h = IDH و mortality."
+    practice: [neph.L09.045, neph.L09.046, neph.L09.047, neph.L09.048, neph.L09.049, neph.L09.050, neph.L09.051, neph.L09.052, neph.L09.053, neph.L09.054, neph.L09.055, neph.L09.056, neph.L09.057, neph.L09.058, neph.L09.059, neph.L09.060, neph.L09.061, neph.L09.062, neph.L09.171, neph.L09.174]
+  # ------------------------------------------------------------------
+  - id: neph.L09.lesson4
+    title: "HF و HDF و CKRT و plasma exchange"
+    hook: "عيان في الـ ICU على noradrenaline. الـ HD العادي هيوقّع ضغطه. فيه طرق تانية أهدى."
+    minutes: 9
+    pages: [302, 310]
+    topics: [hf-hdf, ckrt, tpe]
+    goals:
+      - "تفرّق haemofiltration و haemodiafiltration و isolated UF"
+      - "تعرف امتى CKRT ومميزاته وعيوبه"
+      - "تعرف شروط الـ plasma exchange وأهم دواعيه"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 302
+        title: "الـ haemofiltration"
+        quote: "Hemofiltration is an exclusively ultrafiltration/convection treatment in which high-flux membranes are utilized in the absence of dialysis fluid."
+        text: |
+          ==Convection بس==: high-flux membrane ومفيش dialysate. بنسحب مية كتير ونرجّع **replacement fluid** معقّم.
+
+          الـ replacement ممكن **pre-filter** (pre-dilution) أو **post-filter** (post-dilution). الـ ==post-dilution أكفأ== بس بيسد الغشا أسرع (haemoconcentration).
+      - kind: sort
+        page: 303
+        quote: "thus achieving volume but not solute control in the patient"
+        prompt: "كل modality بتشتغل بإيه؟"
+        bins: ["Diffusion", "Convection", "Both", "Fluid only"]
+        cards:
+          - { text: "Conventional HD", bin: 0 }
+          - { text: "Haemofiltration", bin: 1 }
+          - { text: "Haemodiafiltration", bin: 2 }
+          - { text: "Isolated UF", bin: 3 }
+        why: "HD = diffusion أساسًا. HF = convection بس. HDF = الاتنين (online بـ endotoxin filter). Isolated UF = مية من غير replacement: volume control بس، مفيش solute control."
+      - kind: explain
+        page: 303
+        title: "امتى CKRT؟"
+        quote: "Indicated in Critically ill AKI specially on ventilator."
+        text: |
+          الـ ==CKRT== شغال 24 ساعة أو أكتر من غير وقفة، بـ UF rate أقل و clearance أبطأ. مناسب لـ:
+          - **Critically ill AKI**، خصوصًا على ventilator.
+          - **Haemodynamically unstable** على inotropes.
+          - ==Cerebral oedema== أو **liver failure**.
+          - **Severe acidosis**: pH أقل من 7.1–7.2 أو bicarbonate أقل من 12–15.
+
+          ولو على **lung-protective ventilation**، ابدأ بدري: metabolic + respiratory acidosis مع بعض.
+      - kind: aside
+        tone: trap
+        page: 303
+        quote: "Clinical trials have not demonstrated survival benefits or improvements in kidney function recovery with CKRT"
+        text: |
+          الـ CKRT أهدى على الضغط، بس ==مش بيحسّن الـ survival== ولا رجوع الكلية مقارنة بالـ intermittent. السؤال ممكن يقولك "CKRT improves survival": غلط.
+      - kind: table
+        page: 304
+        quote: "Increased risk of hypophosphatemia."
+        title: "CKRT: كسبنا إيه وخسرنا إيه"
+        columns: [Gain, Cost]
+        rows:
+          - ["Less hypotension", "Slower clearance"]
+          - ["Less ICP effect", "More anticoagulation"]
+          - ["Better volume and solutes", "Hypophosphataemia"]
+          - ["Free nutrition", "Catheter, immobility, cost"]
+        hide: [[1, 1], [2, 1], [3, 0]]
+      - kind: check
+        page: 304
+        quote: "Increased risk of hypophosphatemia."
+        question: "Day 3 of CKRT: phosphate is very low. Why?"
+        options:
+          - "A known disadvantage of CKRT"
+          - "Dialyser blood leak"
+          - "Disequilibrium syndrome"
+          - "Too much heparin"
+        answer: 0
+        why:
+          - "صح: الـ CKRT بيشيل phosphate باستمرار، والكتاب بيقول hypophosphataemia من عيوبه."
+          - "الـ blood leak بيدي alarm، مش hypophosphataemia."
+          - "الـ disequilibrium cerebral oedema، والـ CKRT أصلًا بيقلله."
+          - "الـ heparin مالوش علاقة بالـ phosphate."
+      - kind: explain
+        page: 308
+        title: "الـ plasma exchange: امتى يبقى منطقي؟"
+        quote: "Sufficiently large (≥15,000D)."
+        text: |
+          ==Apheresis== = "تشيل". بنشيل البلازما ونرجّع albumin أو FFP، علشان نشيل حاجات كبيرة: **autoantibodies**، **immune complexes**، lipoproteins.
+
+          يبقى منطقي لو الحاجة اللي عايز تشيلها:
+          - **كبيرة**: ==15,000 D أو أكتر== (الـ dialysis ما يشيلهاش).
+          - **Half-life طويل**.
+          - **سامة حادة** ومش بتستجيب للعلاج العادي.
+          - **Volume of distribution قليل** (موجودة في الدم مش في الأنسجة).
+
+          طريقتين: **centrifuge** (citrate، extraction 80%) أو **membrane** (heparin، extraction 30%).
+      - kind: explain
+        page: 309
+        title: "ASFA والدواعي"
+        quote: "Category I and II apheresis is first and second line therapy respectively."
+        text: |
+          **ASFA**: I = first line، II = second line، III = مش متثبت، IV = مش بينفع أو مضر.
+
+          **Category I كلوي**: ANCA RPGN (dialysis dependent أو alveolar haemorrhage)، ==anti-GBM==، cryoglobulinaemia شديدة، **FSGS راجعة في الكلية المزروعة**، atypical HUS (factor H antibodies)، الزراعة (AMR و desensitisation)، **TTP**، و ticlopidine TMA.
+
+          **غير كلوي**: Guillain–Barré، CIDP، hyperviscosity، myasthenia، NMDA encephalitis، fulminant Wilson.
+
+          المضاعفات: الـ access، الـ replacement fluid، الـ anticoagulation، والعدوى.
+      - kind: match
+        page: 309
+        quote: "Plasma pheresis by centrifugation method or by use of a filter and dialysis machine (membrane separation)."
+        prompt: "وصّل كل طريقة plasma exchange بالـ anticoagulant بتاعها والـ extraction:"
+        pairs:
+          - ["Centrifuge TPE", "Citrate, 80% extraction"]
+          - ["Membrane TPE", "Heparin, 30% extraction"]
+          - ["Both methods", "Albumin or FFP replacement"]
+        why: "الـ centrifuge بيفصل بالطرد المركزي مع citrate ويطلّع 80% من البلازما؛ الـ membrane فلتر مع heparin ويطلّع 30%. الاتنين بيرجّعوا albumin أو FFP."
+      - kind: try
+        items: [neph.L09.064, neph.L09.068, neph.L09.072, neph.L09.077, neph.L09.080]
+    recap:
+      - "HF = convection بس، post-dilution أكفأ بس بيسد؛ HDF = الاتنين؛ isolated UF = مية بس."
+      - "CKRT: ICU، ventilator، inotropes، cerebral oedema، liver failure، pH <7.1–7.2."
+      - "CKRT أهدى بس مش بيحسن الـ survival؛ عيبه hypophosphataemia و anticoagulation و تكلفة."
+      - "Plasma exchange للحاجات الكبيرة (≥15,000 D)، half-life طويل، سامة، Vd قليل."
+      - "ASFA I: anti-GBM، ANCA RPGN، TTP، FSGS في الكلية المزروعة، AMR."
+    practice: [neph.L09.063, neph.L09.064, neph.L09.065, neph.L09.066, neph.L09.067, neph.L09.068, neph.L09.069, neph.L09.070, neph.L09.071, neph.L09.072, neph.L09.073, neph.L09.074, neph.L09.076, neph.L09.077, neph.L09.078, neph.L09.079, neph.L09.080, neph.L09.081, neph.L09.082, neph.L09.083, neph.L09.175, neph.L09.176]
+  # ------------------------------------------------------------------
+  - id: neph.L09.lesson5
+    title: "الـ peritoneal dialysis: البطن كفلتر"
+    hook: "متر مربع واحد من الـ peritoneum، شوية سكر، وصبر. ده كل الـ PD."
+    minutes: 10
+    pages: [311, 318]
+    topics: [pd-principles, pd-solutions, pd-types, pd-complications]
+    goals:
+      - "تفهم الـ peritoneum كغشا والـ three-pore model"
+      - "تعرف محاليل الـ PD: glucose و icodextrin و amino acids"
+      - "تعرف CAPD و APD والـ PET والمضاعفات ومين ما يعملش PD"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 311
+        title: "الغشا"
+        quote: "The size of the peritoneum is one square metre"
+        text: |
+          الـ peritoneum حوالي ==1 m²==، وده صغير جنب فلتر الـ HD. والـ **visceral part** بس (10–15%) هو اللي بيشتغل، بس الـ microvilli بتكبّره **40 مرة**. وفي أول أسابيع الـ PD بيخسر microvilli و mesothelial cells.
+
+          **الطريقة**: diffusion و convection و ==osmosis==. المحلول يقعد (dwell)، يتصرف (effluent)، وييجي غيره. الـ **osmotic gradient** هو اللي بيسحب المية والـ solutes.
+      - kind: table
+        page: 312
+        quote: "Aquaporins allows water but not of solutes with radii exceeding 5"
+        title: "الـ three-pore model"
+        columns: [Pore, What passes]
+        rows:
+          - ["Small pores (SPT)", "Water + small solutes"]
+          - ["Aquaporins (FWT)", "Free water only"]
+          - ["Large pores (LPT)", "Macromolecules, occasional"]
+        hide: [[1, 1], [2, 1]]
+      - kind: explain
+        page: 313
+        title: "المحلول والسكر"
+        quote: "IP GLUCOSE: carbohydrate load: Truncal fattness, Dyslipidemia."
+        text: |
+          محلول الـ PD شبه الـ interstitial fluid بس ==hypertonic== للبلازما علشان يسحب مية. فيه **lactate** 35–40 كـ buffer، و glucose 1.5–4.25 g/dL، و **pH 5.2–5.5**.
+
+          العيان بيمص ==100–300 g glucose في اليوم== (30–100 kg في السنة!). النتيجة: تغيّر في الـ peritoneum، hyperglycaemia و superoxide، truncal obesity و dyslipidaemia، insulin resistance، new-onset diabetes، و CV disease. والـ glucose من البطن بيعمل hyperglycaemia و hyperinsulinaemia **أطول** من اللي بالبُق.
+      - kind: aside
+        tone: joke
+        page: 313
+        quote: "PD patients absorb from 100 -300 Glucose g/d. About 30-100 Kg/year"
+        text: |
+          30–100 kg سكر في السنة. يعني عيان الـ PD بياكل جوال سكر من غير ما يفتح بُقه 😄 علشان كده لازم بدايل.
+      - kind: table
+        page: 314
+        quote: "Icodextrin is a gluose polymer, Molecular WT 16,500 7.5% solution"
+        title: "البدايل الـ biocompatible"
+        columns: [Fluid, Best use]
+        rows:
+          - ["7.5% icodextrin", "Long dwell; peritonitis, lost UF, diabetics"]
+          - ["1.1% amino acids", "Malnutrition; watch urea and acidosis"]
+        hide: [[0, 1], [1, 1]]
+      - kind: reveal
+        page: 314
+        quote: "Osmolality 285 mOsm/Kg of water (act as a colloid) Absorption 10-20% of"
+        prompt: "ليه الـ icodextrin بيفضل يسحب مية في الـ long dwell والـ glucose لأ؟"
+        answer: "الـ glucose صغير، فبيتمص وبعد ساعات الـ gradient يختفي والمية ترجع. الـ ==icodextrin== polymer كبير (MW 16,500) بيشتغل زي **colloid**، بيتمص منه 10–20% بس في 8–12 ساعة، فالسحب مستمر."
+      - kind: explain
+        page: 315
+        title: "الـ catheter والأنواع"
+        quote: "tunnelled segment with 2 Dacron cuffs at the ends to anchor the catheter and prevent bacterial migration"
+        text: |
+          **Tenckhoff** silicone بـ 3 أجزاء: intraperitoneal مخرّم، tunnelled فيه ==2 Dacron cuffs== (تثبيت ومنع البكتيريا)، و extraperitoneal. الطرف في الـ **pelvis**، والـ exit site بعيد عن الـ midline بكام سنتي.
+
+          التركيب: surgical، laparoscopic، blind Seldinger، أو fluoroscopy.
+
+          **الأنواع**: ==CAPD== (يدوي) و **APD** (cycler): **NIPD** (البطن ناشفة بالنهار) و **CCPD** (مبلولة بالنهار).
+      - kind: figure
+        page: 316
+        title: "NIPD و CCPD و CAPD في اليوم"
+        image: { file: neph/L09-pd-regimens.webp, book: true }
+        caption: "البرتقالي = exchanges قصيرة، والأخضر = dwell طويل. الـ **NIPD** ليل بس والنهار ناشف، الـ **CCPD** ليل بالـ cycler ونهار مبلول، والـ **CAPD** dwell طويل بالليل و 3 بالنهار."
+        alt: "Book figure of peritoneal volume over 24 hours: NIPD has four short night exchanges and an empty day; CCPD has four short night exchanges and one long day dwell; CAPD has one long night dwell and three day exchanges."
+      - kind: explain
+        page: 317
+        title: "الكفاية والـ PET"
+        quote: "The ratio of solute concentrations in dialysate and plasma (D/P ratio) at specific times"
+        text: |
+          الهدف: ==Kt/V urea 2== أسبوعيًا و **creatinine clearance 60 L**/أسبوع/1.73 m² في الـ CAPD، وأعلى شوية في الـ APD. بيعتمد على عدد وحجم وقوة الـ exchanges والـ dwell time.
+
+          الـ ==PET== بيقيس سرعة الـ equilibration بالـ **D/P ratio**:
+          - **Fast transporter**: exchanges أكتر و dwell أقصر (cycler).
+          - **Low transporter**: حجم أكبر (3 لتر بدل 2.5).
+
+          الـ technique survival كانت 30–50% في 5 سنين. الفشل: **UF failure**، clearance مش كفاية، و **peritonitis**. والـ PD بيكسب بدري (residual renal function).
+      - kind: check
+        page: 317
+        quote: "the patients with fast transport properties can intensify their regime preferentially"
+        question: "Fast transporter on PET, poor UF on long dwells. Best change?"
+        options:
+          - "More exchanges, shorter dwells (cycler)"
+          - "Longer dwells"
+          - "Bigger 3 L bags only"
+          - "Stop PD now"
+        answer: 0
+        why:
+          - "صح: الـ fast transporter بيخسر الـ glucose gradient بسرعة، فالـ dwell القصير أحسن."
+          - "الـ dwell الطويل هيرجّع المية للدم."
+          - "ده للـ low transporter."
+          - "الكتاب بيغيّر الـ regimen الأول."
+      - kind: explain
+        page: 318
+        title: "المضاعفات ومين ما يعملش PD"
+        quote: "Contraindication for PD: No absolute but extracorporeal is preferred if"
+        text: |
+          **المضاعفات**: mechanical (hernia، leaks، امتلاء البطن، إمساك، malposition)، ==peritonitis== و exit-site و tunnel infection، metabolic (سمنة، lipids، فقد بروتين)، وتلف الغشا (sclerosis).
+
+          **مفيش contraindication مطلق**، بس الـ HD أحسن لو: chronic respiratory insufficiency، drains أو stoma، intestinal obstruction، عمليات بطن كتير، peritoneal malignancy، hernia كبيرة، cellulitis في جدار البطن، morbid obesity، و hypercatabolism.
+
+          **Non-renal**: heart failure مقاوم، hypothermia شديدة، hyperuricaemia، hypercalcaemia شديدة، وأطفال الـ HD صعب عليهم.
+      - kind: try
+        items: [neph.L09.094, neph.L09.100, neph.L09.101, neph.L09.104, neph.L09.109]
+    recap:
+      - "Peritoneum 1 m²، الـ visceral 10–15% بس؛ الـ osmotic gradient بيسحب."
+      - "Three pores: small، aquaporins (مية بس)، large."
+      - "PD fluid hypertonic، lactate، pH 5.2–5.5؛ 100–300 g glucose في اليوم."
+      - "Icodextrin للـ long dwell و peritonitis و diabetics؛ amino acids للـ malnutrition."
+      - "Kt/V 2 و CrCl 60 L/أسبوع؛ fast transporter = dwells أقصر، low = حجم أكبر."
+      - "HD أحسن مع stoma، عمليات كتير، hernia، obesity، respiratory failure."
+    practice: [neph.L09.084, neph.L09.085, neph.L09.086, neph.L09.087, neph.L09.088, neph.L09.089, neph.L09.090, neph.L09.091, neph.L09.092, neph.L09.093, neph.L09.094, neph.L09.095, neph.L09.096, neph.L09.097, neph.L09.098, neph.L09.099, neph.L09.100, neph.L09.101, neph.L09.102, neph.L09.103, neph.L09.104, neph.L09.105, neph.L09.106, neph.L09.107, neph.L09.108, neph.L09.109, neph.L09.110, neph.L09.111, neph.L09.172, neph.L09.177]
+  # ------------------------------------------------------------------
+  - id: neph.L09.lesson6
+    title: "الزراعة: مين ينفع يزرع، ومين ينفع يتبرع"
+    hook: "الزراعة أحسن علاج، بس مش لأي حد. وأخوه اللي عايز يتبرع محتاج فحص أدق من العيان نفسه."
+    minutes: 9
+    pages: [318, 325]
+    topics: [tx-outcome, tx-recipient, tx-donor]
+    goals:
+      - "تعرف نتايج الزراعة وأسباب الوفاة مع كلية شغالة"
+      - "تحفظ الـ absolute والـ relative contraindications والأمراض اللي بترجع"
+      - "تعرف أنواع المتبرعين وفحص المتبرع الحي"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 319
+        title: "الأرقام"
+        quote: "half life expectancy for living or deceased donor graft is around 14,10y respectively"
+        text: |
+          الزراعة ==treatment of choice== للـ CKD المتقدم: حياة أحسن وعمر أطول.
+
+          - **One-year graft survival** أكتر من 90%.
+          - **Half-life**: ==14 سنة living==، **10 سنين deceased**.
+          - الوفيات أعلى في **أول سنة**، حوالي 7% في سن 50–60.
+          - الوفاة مع كلية شغالة: **CVD، infection، malignancy**.
+          - الـ chronic graft dysfunction (fibrosis، tubular atrophy، vasculopathy، glomerulopathy) أساسًا من الـ **chronic rejection**.
+
+          ودلوقتي بنزرع ناس high-risk: HIV، highly sensitised، T-cell positive cross-match، و ABO-incompatible.
+      - kind: explain
+        page: 320
+        title: "الـ absolute contraindications"
+        quote: "Severe chronic pulmonary disease. Cardiac failure resistant to treatment"
+        text: |
+          الكلية بتتحط **extraperitoneal في الـ inguinal fossa**، والعيان ممكن يخرج بعد أسبوع.
+
+          **Absolute**:
+          - ==Malignancy== (إلا لو خالي من رجوع سنين، أو prostate Gleason ≤6، أو renal tumour ≤1 cm بالصدفة).
+          - Severe chronic lung disease، heart failure مقاوم، severe PVD، neuropathy بـ trophic ulcer.
+          - Advanced liver disease.
+          - Active infection أو active GN أو vasculitis.
+          - Lower urinary tract مش بيتصلّح.
+          - ==Positive CDC cross-match== وقت الزراعة.
+
+          **Relative**: morbid obesity، atherosclerosis، قلب، HTN مش منضبط، تدخين، مشاكل نفسية، systemic disease نشط (lupus، sickle cell).
+      - kind: sort
+        page: 320
+        quote: "Relative contraindications: morbid obesity, atherosclerosis, cardiac disease, uncontrolled hypertension, smoking"
+        prompt: "Absolute ولا relative؟"
+        bins: ["Absolute", "Relative"]
+        cards:
+          - { text: "Positive CDC cross-match", bin: 0 }
+          - { text: "Active infection", bin: 0 }
+          - { text: "Advanced liver disease", bin: 0 }
+          - { text: "Smoking", bin: 1 }
+          - { text: "Morbid obesity", bin: 1 }
+          - { text: "Uncontrolled hypertension", bin: 1 }
+        why: "الـ absolute: CDC موجب، عدوى نشطة، كبد متقدم، سرطان نشط، قلب أو رئة متقدمة. الـ relative حاجات ممكن تتظبط: تدخين، وزن، ضغط."
+      - kind: explain
+        page: 321
+        title: "الأمراض اللي بترجع"
+        quote: "Focal segmental glomerulosclerosis (FSG), membranous nephropathy (MN), IGA nephropathy and vasculitis"
+        text: |
+          بترجع في الكلية الجديدة: ==FSGS==، membranous، **IgA**، vasculitis، IC-MPGN، و C3 glomerulopathy.
+
+          ولازم تكون **هادية قبل الزراعة**: SLE، ANCA vasculitis، و antiphospholipid syndrome.
+
+          **Urology (KDIGO 2020)**: اتأكد لو فيه urologic malignancy، UTI متكرر، voiding dysfunction، bladder augmentation، ileal conduit، أو حصوات. و **cystoscopy** للي عنده خطر bladder cancer (cyclophosphamide أو تدخين ≥30 pack-years).
+      - kind: mnemonic
+        page: 321
+        quote: "Focal segmental glomerulosclerosis (FSG), membranous nephropathy (MN), IGA nephropathy and vasculitis"
+        word: "FIMVC"
+        parts:
+          - { key: "F", text: "FSGS" }
+          - { key: "I", text: "IgA nephropathy" }
+          - { key: "M", text: "Membranous and MPGN (immune complex)" }
+          - { key: "V", text: "Vasculitis" }
+          - { key: "C", text: "C3 glomerulopathy" }
+        hook: |
+          "**F**ine, **I** **M**ay **V**isit **C**airo": الأمراض دي بتزور الكلية الجديدة تاني.
+      - kind: explain
+        page: 322
+        title: "أنواع المتبرعين"
+        quote: "Commercially motivated (the latter is forbidden)."
+        text: |
+          **Living**: قريب بالدم، أو غير قريب بدافع عاطفي. أما ==commercially motivated فممنوع==.
+
+          **Cadaveric**: beating heart (brain-stem death) أو non-beating heart.
+
+          الـ living donor مميزاته: **متاح فورًا**، ==cold ischaemia قصير==، ووظيفة الكلية ممتازة. والـ living unrelated بيعيش زي الـ cadaver اللي HLA بتاعه متطابق تمامًا.
+
+          المتبرع لازم يكون سليم من أي حاجة تأذيه (سمنة شديدة، prediabetes، تاريخ عائلي لمرض كلى وراثي). على المدى البعيد ممكن hyperfiltration: HTN، proteinuria، FSGS.
+      - kind: explain
+        page: 323
+        title: "فحص المتبرع الحي"
+        quote: "GFRof 90mL/minper1.73m2 or greater should be considered acceptable level of kidney function for donation"
+        text: |
+          - **GFR**: eGFR وتأكيد بـ measured GFR (مثلًا 99mTc-DTPA) أو CrCl أو creatinine + cystatin C. المقبول ==90 mL/min/1.73 m² أو أكتر== (KDIGO 2017).
+          - **Albuminuria**: ACR وتأكيد بـ AER.
+          - Microscopic haematuria مستمرة؟ دوّر على السبب. حصوات؟ gout؟
+          - **BP** مرتين على الأقل.
+          - BMI، سكر (شخصي و gestational وعائلي)، fasting glucose أو HbA1c، lipids، تدخين.
+          - **Infections**: HIV، HBV، HCV، CMV، EBV، syphilis، UTI.
+          - Cancer screening، تاريخ عائلي لمرض كلى، **β-hCG** قبل التبرع على طول، وتقييم نفسي وجهًا لوجه.
+      - kind: check
+        page: 325
+        quote: "In general the left kidney should be procured because of the relative technical ease associated with a longer venous pedicle"
+        question: "Which donor kidney is usually taken, and why?"
+        options:
+          - "Left: longer renal vein"
+          - "Right: easier to reach"
+          - "The smaller one"
+          - "Always the one with two arteries"
+        answer: 0
+        why:
+          - "صح: الـ left renal vein أطول، فالعملية أسهل. الـ right لو فيه مشكلة vascular أو urological."
+          - "الـ right vein قصير، وده بيصعّب الزراعة."
+          - "الكتاب ما قالش كده."
+          - "الشرايين الكتير بتصعّب، مش بتسهّل."
+      - kind: aside
+        tone: tip
+        page: 325
+        quote: "Perform annual postdonation follow-up care including"
+        text: |
+          المتبرع ما بيتنساش بعد العملية: ==annual postdonation follow-up== (BP، BMI، creatinine و eGFR، albuminuria، ونمط حياة صحي). والجراحة: mini-open أو laparoscopic أو hand-assisted، بجراح متمرّس.
+      - kind: try
+        items: [neph.L09.113, neph.L09.118, neph.L09.123, neph.L09.128, neph.L09.130]
+    recap:
+      - "الزراعة أحسن علاج؛ half-life 14 سنة living و 10 deceased."
+      - "الوفاة مع كلية شغالة: CVD و infection و malignancy."
+      - "Absolute: سرطان، قلب أو رئة متقدمة، كبد متقدم، عدوى أو GN نشط، CDC موجب."
+      - "بيرجعوا: FSGS، IgA، membranous و MPGN، vasculitis، C3."
+      - "المتبرع: GFR ≥90، BP مرتين، infections، β-hCG؛ الكلية الشمال (vein أطول)."
+    practice: [neph.L09.112, neph.L09.113, neph.L09.114, neph.L09.115, neph.L09.116, neph.L09.117, neph.L09.118, neph.L09.119, neph.L09.120, neph.L09.121, neph.L09.122, neph.L09.123, neph.L09.124, neph.L09.125, neph.L09.126, neph.L09.127, neph.L09.128, neph.L09.129, neph.L09.130, neph.L09.131, neph.L09.132, neph.L09.133, neph.L09.134, neph.L09.135, neph.L09.136, neph.L09.173]
+  # ------------------------------------------------------------------
+  - id: neph.L09.lesson7
+    title: "HLA والـ rejection والأدوية اللي بتحمي الكلية"
+    hook: "الجسم شايف الكلية الجديدة غريبة. إزاي بيهاجمها، وإزاي بنقنعه يسيبها؟"
+    minutes: 10
+    pages: [325, 336]
+    topics: [hla, rejection, immunosuppression, is-complications]
+    goals:
+      - "تعرف الـ HLA classes والـ cross-match والـ acceptable mismatch"
+      - "تفرّق الـ direct والـ indirect allorecognition وأنواع الـ rejection"
+      - "تعرف الـ induction والـ protocol وعلاج الـ rejection ومضاعفات الـ immunosuppression"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 325
+        title: "الـ HLA"
+        quote: "three class I HLA (A, B, C) that are present on all nucleated cells"
+        text: |
+          - **Class I** (A، B، C): على ==كل الخلايا اللي فيها نواة==.
+          - **Class II** (DP، DQ، DR): على الـ **APCs** والـ lymphocytes بس.
+
+          أهم 3 في الـ mismatch: ==HLA-A، -B، -DRB1==. والـ HLA متنوّع جدًا: حوالي 6000 class I وأكتر من 1500 class II alleles.
+
+          الاسم زي **HLA-DRB1*0401**: أول رقمين serological، وآخر رقمين الـ PCR subtype.
+      - kind: explain
+        page: 328
+        title: "الـ cross-match والـ mismatch"
+        quote: "These are mismatched HLA antigens that do not result in a positive complement dependent cytotoxicity (CDC) crossmatch."
+        text: |
+          الـ ==acceptable mismatch== = HLA مختلف بس **ما بيعملش CDC cross-match موجب**، فمش هيعمل hyperacute rejection. وكل الـ **cross-match لازم يبقى سالب** قبل الزراعة.
+
+          الـ mismatch بيأثر على ==long-term survival== مش على الـ early rejection. الأحسن HLA-identical (خصوصًا living related)، والأوحش cadaver عشوائي.
+
+          **CDC-XM** قلّل الـ hyperacute بس ما بيقولش أنهي antigen. الـ **solid-phase** (ELISA، Luminex أحسن) حساس ويقيس كمية الـ antibodies.
+      - kind: figure
+        page: 328
+        quote: "In the indirect pathway the incompatible MHC molecules of donor are processed into peptides"
+        title: "Direct ضد indirect"
+        alt: "Two stacked panels. Direct: a donor APC shows intact donor MHC; a recipient T cell binds it directly (class II to CD4, class I to CD8). Indirect: a recipient APC takes up donor MHC, cuts it into peptides and shows a donor peptide on self MHC to a recipient CD4 T cell."
+        caption: "**Direct**: الـ T cell بتاع العيان شايف MHC المتبرع ==كامل== على خلية المتبرع. **Indirect**: خلايا العيان بتقطّع MHC المتبرع وتعرضه على ==self MHC==."
+        svg: |
+          <svg viewBox="0 0 330 260" xmlns="http://www.w3.org/2000/svg">
+            <rect x="5" y="5" width="320" height="115" rx="10" class="fg-box"/>
+            <text x="15" y="26" class="t-b">Direct</text>
+            <circle cx="62" cy="75" r="32" class="fg-acc"/>
+            <text x="62" y="72" text-anchor="middle" class="t-sm">Donor</text>
+            <text x="62" y="86" text-anchor="middle" class="t-sm">APC</text>
+            <rect x="100" y="66" width="28" height="18" rx="3" class="fg-bad"/>
+            <text x="114" y="60" text-anchor="middle" class="t-sm t-bad">MHC</text>
+            <circle cx="170" cy="75" r="30" class="fg-good"/>
+            <text x="170" y="79" text-anchor="middle" class="t-sm">T cell</text>
+            <text x="210" y="62" class="t-sm">II → CD4</text>
+            <text x="210" y="80" class="t-sm">I → CD8</text>
+            <text x="210" y="98" class="t-sm t-mut">intact donor MHC</text>
+            <rect x="5" y="135" width="320" height="120" rx="10" class="fg-box"/>
+            <text x="15" y="156" class="t-b">Indirect</text>
+            <circle cx="62" cy="205" r="32" class="fg-good"/>
+            <text x="62" y="201" text-anchor="middle" class="t-sm">Recip.</text>
+            <text x="62" y="215" text-anchor="middle" class="t-sm">APC</text>
+            <rect x="100" y="196" width="28" height="18" rx="3" class="fg-acc"/>
+            <circle cx="114" cy="190" r="5" class="fg-dot-bad"/>
+            <text x="114" y="176" text-anchor="middle" class="t-sm t-mut">self MHC</text>
+            <circle cx="170" cy="205" r="30" class="fg-good"/>
+            <text x="170" y="209" text-anchor="middle" class="t-sm">CD4</text>
+            <text x="210" y="198" class="t-sm">donor MHC</text>
+            <text x="210" y="216" class="t-sm">as peptide</text>
+          </svg>
+      - kind: explain
+        page: 329
+        title: "خطوات الـ rejection وأنواعه"
+        quote: "delayed type hypersensitivity, cell-mediated cytotoxicity,and alloantibody-mediated cytotoxicity"
+        text: |
+          الـ alloimmune response **قوي ومش محتاج priming**: T cells كتير جاهزة تتعرف على MHC غريب.
+
+          **الخطوات**: recognition (direct أو indirect) ← **CD4 activation** (cytokines و clonal expansion) ← CD4 يساعد CD8 والـ macrophages والـ B cells ← effector: ==DTH، cell-mediated cytotoxicity، alloantibody==.
+
+          **قبل الزراعة**: ABO، cross-match، HLA typing، و **PRA**.
+      - kind: table
+        page: 330
+        quote: "Minutes to hours Preexisting antibodies (IgG) Intravascular thrombosis"
+        title: "أنواع الـ rejection"
+        columns: [Type, Timing, Mechanism]
+        rows:
+          - ["Hyperacute", "Minutes–hours", "Pre-existing IgG, thrombosis"]
+          - ["Acute", "Days–weeks", "CD4 + CD8, antibodies"]
+          - ["Chronic", "6 months–years", "Fibrosis, arteriosclerosis"]
+        hide: [[0, 1], [0, 2], [1, 1], [2, 2]]
+      - kind: case
+        page: 330
+        quote: "Hx of blood transfusion, transplantation or multiple pregnancies."
+        stem: "A woman with 4 pregnancies and many transfusions gets a kidney. One hour after reperfusion it turns blue and stops."
+        steps:
+          - question: "Type of rejection?"
+            options: ["Hyperacute", "Acute cellular", "Chronic", "Recurrence"]
+            answer: 0
+            why: "دقايق لساعات + antibodies موجودة قبل كده (حمل ونقل دم) + thrombosis = hyperacute."
+          - question: "Which pre-transplant test is meant to prevent this?"
+            options: ["CDC cross-match", "Kt/V", "PET", "Doppler of the fistula"]
+            answer: 0
+            why: "الـ CDC cross-match قلّل الـ hyperacute rejection، ولازم يبقى سالب."
+      - kind: aside
+        tone: exam
+        page: 331
+        quote: "have a significantly greater risk of antibody-mediated rejection (AMR) and early graft loss"
+        text: |
+          **Flow cross-match موجب + CDC سالب** = خطر ==AMR== و early graft loss أعلى بكتير، بـ PPV 83%. يعني الـ CDC السالب لوحده مش ضمان.
+      - kind: explain
+        page: 331
+        title: "الـ immunosuppression"
+        quote: "Sparing cyclosporine and tacrolimus nephrotoxicisty."
+        text: |
+          3 مراحل: **induction**، **maintenance**، و **anti-rejection**.
+
+          **ليه induction؟** rejection prophylaxis، علاج subclinical rejection أو rejection مستخبي ورا الـ early graft dysfunction، ==تقليل الـ CNI nephrotoxicity==، و tolerance.
+
+          **KDIGO 2011**: ==IL-2RA== (basiliximab) first-line (1B)؛ **lymphocyte-depleting** (ATG) لو high immunologic risk (2B).
+
+          **البروتوكول**: CNI (ciclosporin، tacrolimus) + steroids + adjuvant (azathioprine، MMF، sirolimus) + induction antibody + CCB + prophylaxis (TMP-SMX، CMV antivirals). والـ **mTORi** ما يبدأش إلا بعد ما الكلية تشتغل والجرح يلم (1B).
+      - kind: order
+        page: 334
+        quote: "We recommend biopsy before treating acute rejection,unless the biopsy"
+        prompt: "Acute cellular rejection (KDIGO 2011). رتّب:"
+        steps:
+          - "Biopsy (unless it delays treatment)"
+          - "Corticosteroids"
+          - "Add back maintenance prednisone if off steroids"
+          - "Lymphocyte-depleting antibody if steroid-resistant"
+        why: "Biopsy الأول (1C)، steroids (1D)، رجّع الـ prednisone لو مش واخده (2D)، ولو مقاوم أو متكرر: lymphocyte-depleting أو OKT3 (2C). والـ AMR: plasma exchange، IVIG، anti-CD20، أو lymphocyte-depleting."
+      - kind: explain
+        page: 335
+        title: "التمن: toxicity وعدوى وسرطان"
+        quote: "calcineurin inhibitors: nephrotoxicity, diabetes mellitus, hypertension"
+        text: |
+          - **CNI**: ==nephrotoxicity==، diabetes، hypertension.
+          - **Steroids**: osteoporosis، peptic ulcer، hypertension، diabetes.
+          - والـ immunodeficiency نفسه: **infection** و **malignancy**.
+      - kind: figure
+        page: 335
+        title: "العدوى بعد الزراعة حسب الشهر"
+        image: { file: neph/L09-infection-timeline.webp, book: true }
+        caption: "**أول شهر** (conventional): HSV، wound، pneumonia، line، UTI، hepatitis B. **Months 1–6** (unconventional): ==CMV==، EBV، VZV، Pneumocystis، TB، Listeria، Aspergillus، Nocardia، Toxoplasma. **بعد كده**: Cryptococcus، CMV chorioretinitis، UTI أخف."
+        alt: "Book timeline from transplant to 6 months: HSV in the first month; CMV onset from 1 to 4 months; EBV, VZV, papova and adenovirus from about 2 to 6 months; fungal, TB and Pneumocystis from 1 to 6 months; Listeria, Aspergillus, Nocardia and Toxoplasma from 1 month; Cryptococcus from 4 months; bacterial wound, pneumonia and line infections in the first month; hepatitis B early and non-A non-B hepatitis from 1 month; UTI with bacteraemia and relapse until 4 months and relatively benign after 6."
+      - kind: table
+        page: 336
+        quote: "Kaposi s sarcoma (KS) 400-500"
+        title: "السرطانات بعد الزراعة (كام ضعف)"
+        columns: [Cancer, Fold]
+        rows:
+          - ["Kaposi's sarcoma", "400–500"]
+          - ["Vulva and anus", "100"]
+          - ["Hepatobiliary", "30"]
+          - ["Non-Hodgkin lymphoma", "29–49"]
+          - ["Lip", "29"]
+          - ["Skin", "4–21"]
+        hide: [[0, 1], [3, 1], [5, 1]]
+      - kind: try
+        items: [neph.L09.137, neph.L09.142, neph.L09.151, neph.L09.157, neph.L09.161]
+    recap:
+      - "Class I على كل الخلايا، class II على الـ APCs؛ أهم 3: A و B و DRB1."
+      - "Acceptable mismatch = CDC سالب؛ الـ mismatch بيأثر على الـ long-term survival."
+      - "Direct = MHC كامل؛ indirect = peptide على self MHC."
+      - "Hyperacute دقايق (IgG موجود)، acute أيام لأسابيع، chronic شهور لسنين."
+      - "Induction: IL-2RA، أو ATG لو high risk. Acute cellular: biopsy ثم steroids ثم ATG."
+      - "CMV من شهر لـ 4–6؛ Kaposi 400–500 ضعف."
+    practice: [neph.L09.137, neph.L09.138, neph.L09.139, neph.L09.140, neph.L09.141, neph.L09.142, neph.L09.143, neph.L09.144, neph.L09.145, neph.L09.146, neph.L09.147, neph.L09.148, neph.L09.149, neph.L09.150, neph.L09.151, neph.L09.152, neph.L09.153, neph.L09.154, neph.L09.155, neph.L09.156, neph.L09.157, neph.L09.158, neph.L09.159, neph.L09.160, neph.L09.161, neph.L09.162, neph.L09.163, neph.L09.164, neph.L09.165, neph.L09.166, neph.L09.167, neph.L09.168, neph.L09.169, neph.L09.170, neph.L09.178]

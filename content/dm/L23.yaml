@@ -1,0 +1,677 @@
+schema: batna.content/v1
+lecture: dm.L23
+title: "Dyslipidemia management: what's new"
+author: "Assist. Prof. Dr. Heba Sadek Kassab"
+# Every page footer in this lecture still reads "Lecture 4: Management of Diabetic Dyslipidemia".
+book: { chapter: 6, pages: [283, 300] }
+topics:
+  - { id: risk, title: "ESC/EAS 2019: CV risk categories" }
+  - { id: goals, title: "ESC/EAS 2019: LDL-C goals" }
+  - { id: diabetes, title: "ESC/EAS 2019: dyslipidaemia in diabetes" }
+  - { id: ada, title: "ADA statin algorithm" }
+  - { id: intensity, title: "Statin intensity and lipid-lowering intensity" }
+  - { id: lower, title: "Lower is better; pleiotropic effects" }
+  - { id: unmet, title: "Statin side effects, unmet need, residual risk" }
+  - { id: ezetimibe, title: "Ezetimibe" }
+  - { id: pcsk9, title: "PCSK9 inhibitors and inclisiran" }
+  - { id: bempedoic, title: "Bempedoic acid" }
+  - { id: hofh, title: "Lomitapide, mipomersen and LDL apheresis" }
+  - { id: omega3, title: "Omega-3 fatty acids and REDUCE-IT" }
+items:
+  # ---------- p283-284: ESC/EAS 2019 risk categories ----------
+  - id: dm.L23.001
+    kind: card
+    topic: risk
+    front: Which guideline does the "what's new" lecture build its risk categories and LDL-C goals on?
+    back: The 2019 ESC/EAS Guidelines for the management of dyslipidaemias (European Heart Journal 2020).
+    src: { page: 283, quote: "2019 ESC/EAS Guidelines for the management of dyslipidaemias: lipid modification to reduce cardiovascular risk" }
+    status: unverified
+    update:
+      text: "ESC/EAS published a 2025 focused update of the 2019 dyslipidaemia guidelines, and since the 2021 ESC prevention guidelines risk is estimated with SCORE2 / SCORE2-OP (fatal and non-fatal events), not the old SCORE (fatal only). Answer exam questions with the book's 2019 numbers."
+      ref: "ESC CVD prevention guidelines 2021; ESC/EAS dyslipidaemia focused update 2025"
+  - id: dm.L23.002
+    kind: enumerate
+    topic: risk
+    prompt: "List the five groups the ESC/EAS 2019 places at very-high CV risk."
+    points:
+      - Documented ASCVD, clinical or unequivocal on imaging
+      - "DM with target organ damage, ≥ 3 major risk factors, or early-onset T1DM of long duration (> 20 years)"
+      - "Severe CKD (eGFR < 30)"
+      - "Calculated SCORE ≥ 10% for 10-year risk of fatal CVD"
+      - FH with ASCVD or with another major risk factor
+    pass: 4
+    src: { page: 283, quote: "FH with ASCVD or with another major risk factor." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L23.003
+    kind: card
+    topic: risk
+    front: What counts as "unequivocally documented ASCVD on imaging" (ESC/EAS 2019)?
+    back: "Findings that predict clinical events: significant plaque on coronary angiography or CT (multivessel disease, two major epicardial arteries > 50% stenosis), or on carotid ultrasound."
+    src: { page: 283, quote: "multivessel coronary disease with two major epicardial arteries having >50% stenosis" }
+    status: unverified
+  - id: dm.L23.004
+    kind: enumerate
+    topic: risk
+    prompt: "List the high-risk groups in the ESC/EAS 2019 table."
+    points:
+      - "Markedly elevated single risk factor: TC > 310 mg/dL, LDL-C > 190 mg/dL, or BP ≥ 180/110"
+      - FH without other major risk factors
+      - "DM without target organ damage, duration ≥ 10 years or another risk factor"
+      - "Moderate CKD (eGFR 30-59)"
+      - "SCORE ≥ 5% and < 10%"
+    pass: 4
+    src: { page: 284, quote: "Markedly elevated single risk factors, in particular TC >8 mmol/L (>310 mg/dL), LDL-C >4.9 mmol/L (>190 mg/dL)" }
+    status: unverified
+  - id: dm.L23.005
+    kind: table
+    topic: risk
+    title: "ESC/EAS 2019 risk: diabetes and CKD"
+    columns: [Category, Diabetes, CKD]
+    rows:
+      - [Very high, "Target organ damage, ≥ 3 major RF, or T1DM > 20 years", "eGFR < 30"]
+      - [High, "No organ damage; duration ≥ 10 years or another RF", "eGFR 30-59"]
+      - [Moderate, "Young (T1DM < 35, T2DM < 50), duration < 10 years, no other RF", "-"]
+    blanks: [[0, 1], [0, 2], [1, 2], [2, 1]]
+    src: { page: 284, quote: "Young patients (T1DM <35 years; T2DM <50 years) with DM duration <10 years, without other risk factors." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L23.006
+    kind: table
+    topic: risk
+    title: "ESC/EAS 2019 risk by SCORE (10-year fatal CVD)"
+    columns: [Category, SCORE]
+    rows:
+      - [Very high, "≥ 10%"]
+      - [High, "≥ 5% and < 10%"]
+      - [Moderate, "≥ 1% and < 5%"]
+      - [Low, "< 1%"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 284, quote: "Calculated SCORE <1% for 10-year risk of fatal CVD." }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L23.007
+    kind: mcq
+    topic: risk
+    stem: "A 45-year-old with heterozygous FH, no ASCVD and no other risk factor. His ESC/EAS 2019 risk category?"
+    options: [High, Very high, Moderate, Low]
+    answer: 0
+    why:
+      - "Correct: FH without other major risk factors = high risk."
+      - "Very high needs FH with ASCVD or another major risk factor."
+      - "FH alone is never moderate."
+      - "FH alone is never low."
+    src: { page: 284, quote: "Patients with FH without other major risk factors." }
+    status: unverified
+  - id: dm.L23.008
+    kind: mcq
+    topic: risk
+    stem: "A 60-year-old with T2DM for 6 years has retinopathy and microalbuminuria. ESC/EAS 2019 category?"
+    options: [Very high, High, Moderate, Low]
+    answer: 0
+    why:
+      - "Correct: DM with target organ damage is very high risk."
+      - "High is DM without organ damage (duration ≥ 10 years or another RF)."
+      - "Moderate is young patients with short DM and no risk factors."
+      - "Diabetes is never low risk in this table."
+    src: { page: 283, quote: "DM with target organ damage,* or at least three major risk factors, or early onset of T1DM of long duration" }
+    status: unverified
+  # ---------- p284-285: LDL-C goals ----------
+  - id: dm.L23.009
+    kind: table
+    topic: goals
+    title: "ESC/EAS 2019 LDL-C goals"
+    columns: [Risk, LDL-C goal, Also]
+    rows:
+      - [Very high, "< 55 mg/dL (1.4 mmol/L)", "≥ 50% reduction from baseline"]
+      - [High, "< 70 mg/dL (1.8 mmol/L)", "≥ 50% reduction from baseline"]
+      - [Moderate, "< 100 mg/dL (2.6 mmol/L)", "-"]
+      - [Low, "< 116 mg/dL (3.0 mmol/L)", "-"]
+    blanks: [[0, 1], [0, 2], [1, 1], [2, 1], [3, 1]]
+    src: { page: 284, quote: "an LDL-C reduction of ≥50% from baseline and an LDL-C goal of <1.4 mmol/L (<55 mg/dL) are recommended" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: dm.L23.010
+    kind: cloze
+    topic: goals
+    text: "ASCVD patients with a second vascular event within {{c1::2 years}} on maximally tolerated statin therapy: an LDL-C goal of {{c2::< 40 mg/dL (1.0 mmol/L)}} may be considered."
+    src: { page: 284, quote: "experience a second vascular event within 2 years" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L23.011
+    kind: card
+    topic: goals
+    front: "Very-high-risk patients get two LDL-C targets at once (ESC/EAS 2019). What are they?"
+    back: "A ≥ 50% reduction from baseline AND an absolute LDL-C below 55 mg/dL (1.4 mmol/L). Both apply in secondary and primary prevention, and in FH at very high risk (should be considered)."
+    src: { page: 284, quote: "In primary prevention for individuals with FH at very-high risk, an LDL-C reduction of ≥50% from baseline" }
+    status: unverified
+  - id: dm.L23.012
+    kind: mcq
+    topic: goals
+    stem: "Moderate-risk patient by ESC/EAS 2019. Which LDL-C goal should be considered?"
+    options: ["< 100 mg/dL", "< 116 mg/dL", "< 70 mg/dL", "< 55 mg/dL"]
+    answer: 0
+    why:
+      - "Correct: moderate risk < 2.6 mmol/L (< 100 mg/dL)."
+      - "That is the low-risk goal (< 3.0 mmol/L)."
+      - "That is high risk."
+      - "That is very high risk."
+    src: { page: 284, quote: "In individuals at moderate risk, an LDL-C goal of <2.6 mmol/L (<100 mg/dL) should be considered." }
+    status: unverified
+  # ---------- p285: diabetes recommendations ----------
+  - id: dm.L23.013
+    kind: cloze
+    topic: diabetes
+    text: "ESC/EAS 2019: in T2DM at very-high risk, LDL-C reduction {{c1::≥ 50%}} and goal {{c2::< 55 mg/dL}}; at high risk, ≥ 50% and goal {{c3::< 70 mg/dL}}."
+    src: { page: 285, quote: "In patients with T2DM at high risk, an LDL-C reduction of ≥50% from baseline and an LDL-C goal of <1.8 mmol/L (<70 mg/dL)" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L23.014
+    kind: card
+    topic: diabetes
+    front: "Diabetic above goal on a statin: what comes first, intensifying the statin or adding a drug (ESC/EAS 2019)?"
+    back: Intensify the statin first; if the goal is still not reached, add ezetimibe.
+    src: { page: 285, quote: "Intensification of statin therapy should be considered before the introduction of combination therapy." }
+    status: unverified
+  - id: dm.L23.015
+    kind: card
+    topic: diabetes
+    front: In which diabetic patients is statin therapy NOT recommended (ESC/EAS 2019)?
+    back: Premenopausal women with diabetes who are considering pregnancy or are not using adequate contraception.
+    src: { page: 285, quote: "Statin therapy is not recommended in premenopausal patients with diabetes who are considering pregnancy" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L23.016
+    kind: card
+    topic: diabetes
+    front: When may a statin be considered in a diabetic aged 30 or younger (ESC/EAS 2019)?
+    back: "T1DM or T2DM aged ≤ 30 with end-organ damage and/or LDL-C > 2.5 mmol/L (about 100 mg/dL), as long as pregnancy is not planned."
+    src: { page: 285, quote: "Statin therapy may be considered in both T1DM and T2DM patients aged ≤30 years with evidence of end organ damage" }
+    status: unverified
+  - id: dm.L23.017
+    kind: card
+    topic: diabetes
+    front: Which T1DM patients are statins recommended for (ESC/EAS 2019)?
+    back: T1DM patients at high or very-high CV risk.
+    src: { page: 285, quote: "Statins are recommended in patients with T1DM who are at high or very-high risk" }
+    status: unverified
+  # ---------- p286: ADA algorithm ----------
+  - id: dm.L23.018
+    kind: table
+    topic: ada
+    title: "ADA statin algorithm, primary prevention"
+    columns: [Age, Situation, Action]
+    rows:
+      - [20-39 years, No risk factor, No statin]
+      - [20-39 years, Risk factors, Initiate statin]
+      - [40-75 years, No risk factor, Moderate-intensity statin]
+      - [40-75 years, High risk, "High-intensity: LDL < 70 and > 50% fall"]
+      - [Over 75, Already on a statin, Continue]
+      - [Over 75, Not on a statin, Initiate]
+    blanks: [[0, 2], [2, 2], [3, 2], [4, 2]]
+    src: { page: 286, quote: "High risk High intensity" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L23.019
+    kind: card
+    topic: ada
+    front: "ADA algorithm, secondary prevention in diabetes: statin intensity and LDL-C target?"
+    back: "High-intensity statin, aiming at LDL-C < 55 mg/dL and > 50% reduction; if not at target, add ezetimibe or a PCSK9 inhibitor."
+    src: { page: 286, quote: "LDL<55 >50% If not target Add Ezitimibe or PCSK9I" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L23.020
+    kind: mcq
+    topic: ada
+    stem: "A 52-year-old diabetic, hypertensive smoker (no ASCVD) is on high-intensity statin. LDL-C is 95 mg/dL. Per the ADA algorithm in the book, what next?"
+    options: [Add ezetimibe or a PCSK9 inhibitor, Continue unchanged, Switch to moderate intensity, Stop the statin and start a fibrate]
+    answer: 0
+    why:
+      - "Correct: 40-75 with high risk aims at LDL < 70 and > 50%; if not at target add ezetimibe or PCSK9I."
+      - "95 mg/dL is above the < 70 target."
+      - "Moderate intensity is for 40-75 without risk factors."
+      - "Statin plus fibrate is not recommended (ADA 10.32); a fibrate alone is not the LDL plan."
+    src: { page: 286, quote: "Not Add Ezitimibe or PCSK9I" }
+    status: unverified
+  # ---------- p287 + p292: intensity ----------
+  - id: dm.L23.021
+    kind: table
+    topic: intensity
+    title: "Statin intensity (ACC/AHA table 5)"
+    columns: [Intensity, LDL-C fall, Examples]
+    rows:
+      - [High, "≥ 50%", "Atorvastatin 40-80, rosuvastatin 20-40 mg"]
+      - [Moderate, "30-49%", "Atorvastatin 10-20, rosuvastatin 5-10, simvastatin 20-40 mg"]
+      - [Low, "< 30%", "Simvastatin 10, pravastatin 10-20 mg"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 1]]
+    src: { page: 287, quote: "Daily dose lowers LDL-C on average, by approximately ≥50%" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: dm.L23.022
+    kind: card
+    topic: intensity
+    front: Why is simvastatin 80 mg not started or titrated to?
+    back: The FDA advises against it because of the increased risk of myopathy, including rhabdomyolysis.
+    src: { page: 287, quote: "not recommended by the FDA due to the increased risk of myopathy, including rhabdomyolysis." }
+    status: unverified
+  - id: dm.L23.023
+    kind: mcq
+    topic: intensity
+    stem: Which of these is a high-intensity statin dose?
+    options: [Rosuvastatin 20 mg, Rosuvastatin 10 mg, Atorvastatin 20 mg, Simvastatin 40 mg]
+    answer: 0
+    why:
+      - "Correct: rosuvastatin 20-40 mg is high intensity."
+      - "Rosuvastatin 5-10 mg is moderate."
+      - "Atorvastatin 10-20 mg is moderate; high starts at 40."
+      - "Simvastatin 20-40 mg is moderate."
+    src: { page: 287, quote: "Rosuvastatin 20-40 mg" }
+    status: unverified
+  - id: dm.L23.024
+    kind: table
+    topic: intensity
+    title: "Intensity of lipid-lowering treatment"
+    columns: [Treatment, Average LDL-C fall]
+    rows:
+      - [Moderate-intensity statin, "≈ 30%"]
+      - [High-intensity statin, "≈ 50%"]
+      - [High statin + ezetimibe, "≈ 65%"]
+      - [PCSK9 inhibitor alone, "≈ 60%"]
+      - [PCSK9 inhibitor + high statin, "≈ 75%"]
+      - [PCSK9 inhibitor + high statin + ezetimibe, "≈ 85%"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1]]
+    src: { page: 292, quote: "Intensity of lipid lowering treatment" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: dm.L23.025
+    kind: mcq
+    topic: intensity
+    stem: "Very-high-risk patient, untreated LDL-C 160 mg/dL. He needs about 66% reduction to reach < 55 mg/dL. Which regimen is expected to get there?"
+    options: [PCSK9 inhibitor + high-intensity statin, High-intensity statin alone, High-intensity statin + ezetimibe, Moderate-intensity statin + ezetimibe]
+    answer: 0
+    why:
+      - "Correct: (160 − 55) / 160 ≈ 66%; PCSK9 inhibitor + high statin ≈ 75%."
+      - "≈ 50% only."
+      - "≈ 65%: just short; may still be tried first, then add PCSK9 inhibitor."
+      - "Less than high statin + ezetimibe."
+    src: { page: 292, quote: "PCSK9 inhibitor plus high intensity statin ≈ 75%" }
+    status: unverified
+    tags: [numbers]
+  # ---------- p288: lower is better, pleiotropic ----------
+  - id: dm.L23.026
+    kind: card
+    topic: lower
+    front: Is there an LDL-C level below which benefit stops or harm starts?
+    back: "None has been defined: the lower the achieved LDL-C, the lower the CV risk, with no lower limit or J-curve (\"lower is better\"). Safety data on very low LDL-C are reassuring, though longer monitoring is needed."
+    src: { page: 288, quote: "No level of LDL-C below which benefit ceases or harm occurs has been defined." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L23.027
+    kind: enumerate
+    topic: lower
+    prompt: "Name pleiotropic effects of statins shown in the book's figure."
+    points: [Less platelet activation, Less coagulation, Less inflammation, Less oxidative stress, Better endothelial function, Less proliferation and fibrosis]
+    pass: 4
+    src: { page: 288, quote: "Pleiotropic effect of Statins" }
+    status: unverified
+  # ---------- p289-290: side effects, unmet need ----------
+  - id: dm.L23.028
+    kind: enumerate
+    topic: unmet
+    prompt: "List the common statin side effects shown in the book."
+    points: [Statin-associated muscle symptoms (SAMS), Headache, Difficulty sleeping, Drowsiness, Dizziness, "Skin problems (flushing, rash)", High blood sugar, Digestive problems, Low platelets]
+    pass: 5
+    src: { page: 289, quote: "Statins side effects" }
+    status: unverified
+  - id: dm.L23.029
+    kind: table
+    topic: unmet
+    title: "Populations with an unmet need for more LDL-C lowering"
+    columns: [Population, Key fact]
+    rows:
+      - [FH, "HeFH 1:200-1:250; untreated LDL-C 200-400; 79% not at goal"]
+      - [High / very high CV risk, "59% at very high risk not at < 70 mg/dL"]
+      - [Statin intolerant, "10-15% on high-intensity statins; stop for muscle pain"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 289, quote: "What’s after statin" }
+    status: unverified
+  - id: dm.L23.030
+    kind: cloze
+    topic: unmet
+    text: "Despite well-controlled LDL-C on statins, up to {{c1::40%}} of patients still develop CV disease; this is called {{c2::residual risk}}."
+    src: { page: 290, quote: "Despite well-controlled LDL-C levels through statin administration, up to 40% patients still experience CV disease. (residual risk)" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L23.031
+    kind: table
+    topic: unmet
+    title: "ADA: statin combinations that are not recommended"
+    columns: [Combination, Why not, Grade]
+    rows:
+      - [Statin + fibrate, No better ASCVD outcomes, A]
+      - [Statin + niacin, "No extra benefit, may raise stroke risk", A]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 290, quote: "High-intensity statin is not enough; what comes next?" }
+    status: unverified
+  # ---------- p290-291: ezetimibe ----------
+  - id: dm.L23.032
+    kind: card
+    topic: ezetimibe
+    front: How does ezetimibe complement a statin?
+    back: "Ezetimibe blocks intestinal cholesterol absorption (NPC1L1); the statin blocks hepatic synthesis (HMG-CoA reductase). Less hepatic cholesterol raises LDL receptors and LDL-C clearance."
+    src: { page: 291, quote: "NPC1L1 = Niemann-Pick C1-like 1; HMG-CoA = 3-hydroxy-3-methylglutaryl acetyl coenzyme A" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L23.033
+    kind: cloze
+    topic: ezetimibe
+    text: "With a statin, ezetimibe lowers {{c1::hsCRP}} and LDL-C up to {{c2::3-fold}} compared with statin monotherapy."
+    src: { page: 290, quote: "ezetimibe reduces hsCRP and LDL-C levels up to 3-fold, compared with statin monotherapy." }
+    status: unverified
+  # ---------- p291-294: PCSK9 ----------
+  - id: dm.L23.034
+    kind: enumerate
+    topic: pcsk9
+    prompt: "Name the two PCSK9 monoclonal antibodies."
+    points: [Evolocumab (Repatha), Alirocumab (Praluent)]
+    pass: 2
+    src: { page: 291, quote: "Proprotein Convertase Subtilisin/Kexin Type 9 Inhibitors: 1. Evolocumab 2. Alirocumab" }
+    status: unverified
+  - id: dm.L23.035
+    kind: enumerate
+    topic: pcsk9
+    prompt: "List the indications of PCSK9 inhibitors."
+    points:
+      - High CV risk with persistently high LDL-C despite optimum lipid-lowering therapy
+      - "Familial hypercholesterolaemia: heterozygous, and to a lesser extent homozygous"
+      - Very-high and high-risk patients with true statin intolerance and persistently high LDL-C
+    pass: 3
+    src: { page: 291, quote: "Individuals with high CV risk who have persistently elevated LDL-C despite optimum lipid-modifying therapy." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L23.036
+    kind: order
+    topic: pcsk9
+    prompt: "Put PCSK9 biology in order (without inhibition)."
+    steps:
+      - PCSK9 binds the LDL receptor on hepatocytes
+      - The LDL-receptor complex is taken into the cell
+      - The receptor is degraded in the liver instead of recycling
+      - Fewer LDL receptors on the surface
+      - Blood LDL-C rises
+    src: { page: 292, quote: "PCSK9 binds to LDL receptor (LDLR) on hepatocytes" }
+    status: unverified
+  - id: dm.L23.037
+    kind: card
+    topic: pcsk9
+    front: How does alirocumab (Praluent) lower LDL-C?
+    back: A fully human monoclonal antibody that blocks PCSK9 from binding the LDL receptor, so the receptor recycles and more LDL-C is cleared.
+    src: { page: 292, quote: "Praluent is a fully human monoclonal antibody" }
+    status: unverified
+  - id: dm.L23.038
+    kind: table
+    topic: pcsk9
+    title: "FDA approval of PCSK9 antibodies (2015)"
+    columns: [Drug, Approved, Indication]
+    rows:
+      - [Alirocumab (Praluent), "July 24, 2015", "Adjunct to diet and max statin: HeFH or clinical ASCVD"]
+      - [Evolocumab (Repatha), "August 27, 2015", "Same, plus HoFH with other LDL-lowering therapies"]
+    blanks: [[0, 2], [1, 2]]
+    src: { page: 293, quote: "Evolocumab FDA Approved August 27,2015" }
+    status: unverified
+  - id: dm.L23.039
+    kind: mcq
+    topic: pcsk9
+    stem: "Indications of PCSK9 inhibitors include all EXCEPT (book question):"
+    options: [Patients with moderate CV risk, High CV risk with persistently high LDL-C on optimum therapy, Heterozygous familial hypercholesterolaemia, Very-high-risk patients with true statin intolerance]
+    answer: 0
+    why:
+      - "Correct: moderate risk is not an indication."
+      - "Indication 1 (p291)."
+      - "Indication 2 (p291)."
+      - "Indication 3 (p291)."
+    src: { page: 300, quote: "Indications of PCSK9 inhibitors include all except" }
+    status: unverified
+    tags: [book-question]
+  - id: dm.L23.040
+    kind: order
+    topic: pcsk9
+    prompt: "Order the ESC/EAS 2019 drug ladder for a very-high-risk patient."
+    steps:
+      - High-potency statin at highest tolerated dose
+      - "LDL-C goal reached? If not, add ezetimibe"
+      - "Still not at goal: add a PCSK9 inhibitor"
+      - "At goal: follow up annually, or more often if indicated"
+    src: { page: 294, quote: "High potency statin at highest recommended / tolerable dose to reach the goal" }
+    status: unverified
+  # ---------- p294: inclisiran ----------
+  - id: dm.L23.041
+    kind: card
+    topic: pcsk9
+    front: How does inclisiran differ from the PCSK9 antibodies?
+    back: "It is a small interfering RNA that neutralizes PCSK9 messenger RNA in the liver, so less PCSK9 is made. Its effect lasts ≥ 180 days, so it is given every 3 or 6 months instead of every 2 or 4 weeks; LDL-C lowering is similar."
+    src: { page: 294, quote: "SiRNAs have been developed to interfere with PCSK9 production in the liver by neutralizing the messenger RNA of PCSK9." }
+    status: unverified
+    tags: [high-yield]
+    update:
+      text: "The FDA label (December 2021) doses inclisiran at day 0, 3 months, then every 6 months; since 2023 it can be used with a statin earlier, not only after maximal therapy. Cardiovascular outcome trials (ORION-4, VICTORION-2 PREVENT) were still running in 2025."
+      ref: "Leqvio (inclisiran) FDA label 2021, updated 2023"
+  - id: dm.L23.042
+    kind: cloze
+    topic: pcsk9
+    text: "Inclisiran lowered LDL-C by {{c1::40-50%}} over {{c2::1.5 years}}, in FH and in non-FH high LDL-C."
+    src: { page: 294, quote: "Inclisiran successfully lowered LDL-C levels by 40–50% over a 1.5-year period" }
+    status: unverified
+    tags: [numbers]
+  # ---------- p295: bempedoic acid ----------
+  - id: dm.L23.043
+    kind: card
+    topic: bempedoic
+    front: What enzyme does bempedoic acid inhibit, and how is it given?
+    back: ATP citrate lyase, a key enzyme in cholesterol biosynthesis (upstream of HMG-CoA reductase). It is an oral, once-daily, non-statin LDL-lowering drug (Nexletol).
+    src: { page: 295, quote: "An inhibitor of ATP citrate lyase, a key enzyme involved In the cholesterol biosynthesis pathway." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L23.044
+    kind: card
+    topic: bempedoic
+    front: What are the book's indications for bempedoic acid?
+    back: "Adjunct to diet and maximally tolerated statin in adults with heterozygous FH or established ASCVD who need more LDL-C lowering."
+    src: { page: 295, quote: "Bempedoic acid is indicated as an adjunct to diet and maximally tolerated statin therapy" }
+    status: unverified
+    update:
+      text: "CLEAR Outcomes (NEJM 2023) showed bempedoic acid cut major CV events by 13% in statin-intolerant patients. The FDA widened the label in 2024 to reduce CV risk in patients who cannot take statins, with or without ASCVD, and the 2025 ESC/EAS focused update recommends it for statin-intolerant patients."
+      ref: "CLEAR Outcomes, NEJM 2023; FDA label 2024; ESC/EAS focused update 2025"
+  - id: dm.L23.045
+    kind: cloze
+    topic: bempedoic
+    text: "Bempedoic acid lowers LDL-C by about {{c1::23%}}, and also lowers total cholesterol, apo B, non-HDL-C and {{c2::CRP}}."
+    src: { page: 295, quote: "lowers LDL-C levels by about 23%" }
+    status: unverified
+    tags: [numbers]
+  # ---------- p296-298: HoFH tools ----------
+  - id: dm.L23.046
+    kind: card
+    topic: hofh
+    front: What does microsomal triglyceride transfer protein (MTP) do?
+    back: "In hepatocytes and enterocytes it loads TG, phospholipids and cholesteryl esters onto apo B in the ER: essential for making VLDL (liver) and chylomicrons (gut)."
+    src: { page: 296, quote: "MTP transfers TG, phospholipids, and cholesteryl esters to the ApoB in the endoplasmic reticulum" }
+    status: unverified
+  - id: dm.L23.047
+    kind: card
+    topic: hofh
+    front: "Lomitapide: mechanism, indication and side effects?"
+    back: "MTP inhibitor: blocks apo B lipidation, so less VLDL is made. FDA-approved for homozygous FH. Side effects: raised aminotransferases (liver fat) and poor GI tolerability."
+    src: { page: 296, quote: "Lomitapide approved for the treatment of homozygous familial hypercholesterolemia by the FDA." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L23.048
+    kind: card
+    topic: hofh
+    front: "Mipomersen: mechanism and main safety concerns?"
+    back: "A 20-nucleotide antisense oligonucleotide that binds apo B mRNA, lowering apo B production; approved for homozygous FH. Injection-site reactions are most common; the main concern is liver toxicity and steatosis."
+    src: { page: 297, quote: "Mipomersen is a synthetic 20-nucleotide antisense oligonucleotide that can bind to ApoB mRNA" }
+    status: unverified
+    update:
+      text: "Mipomersen (Kynamro) is no longer marketed: it was discontinued in 2018-2019. For homozygous FH, evinacumab (an ANGPTL3 antibody) was FDA-approved in 2021."
+      ref: "Evkeeza (evinacumab) FDA approval 2021; ESC/EAS focused update 2025"
+  - id: dm.L23.049
+    kind: mcq
+    topic: hofh
+    stem: "Antisense oligonucleotide against apolipoprotein B (book question):"
+    options: [Mipomersen, Lomitapide, Evolocumab, LDL apheresis]
+    answer: 0
+    why:
+      - "Correct: binds apo B mRNA."
+      - "Lomitapide inhibits MTP."
+      - "Evolocumab is a PCSK9 antibody."
+      - "Apheresis removes LDL physically."
+    src: { page: 300, quote: "Antisense oligonucleotide against apolipoprotein B include" }
+    status: unverified
+    tags: [book-question]
+  - id: dm.L23.050
+    kind: card
+    topic: hofh
+    front: Why is plasma apo B a good marker of atherogenic particles?
+    back: "Each atherogenic lipoprotein (VLDL, IDL, LDL including small dense LDL, Lp(a)) carries one apo B, so apo B concentration reflects their total number."
+    src: { page: 297, quote: "Plasma ApoB concentration is a reliable index of the total number of atherogenic lipoproteins such as small dense LDL-C." }
+    status: unverified
+  - id: dm.L23.051
+    kind: card
+    topic: hofh
+    front: When is LDL apheresis indicated?
+    back: "Homozygous FH not responding to maximal drug therapy; also considered in severe heterozygous FH with progressive CAD despite maximal drugs (high-intensity statin with ezetimibe/PCSK9 inhibitor)."
+    src: { page: 298, quote: "LDL-C apheresis is indicated in patients with homozygous FH who do not respond satisfactorily to maximum multiple drug therapy." }
+    status: unverified
+  - id: dm.L23.052
+    kind: table
+    topic: hofh
+    title: "Apheresis vs mipomersen vs lomitapide"
+    columns: [Feature, Apheresis, Mipomersen, Lomitapide]
+    rows:
+      - [LDL-C fall, "~70-80%", "~25-38%", "~40-50%"]
+      - [Lp(a) fall, "~70-80%", "~20-30%", "~1-19%"]
+      - [Short-term safety, Good, "Hepatic fat (5%)", "Hepatic fat (8-9%)"]
+      - [Cardiac benefit, "Yes", Unknown, Unknown]
+    blanks: [[0, 1], [0, 2], [0, 3], [1, 1], [3, 1]]
+    src: { page: 298, quote: "Apheresis Mipomersen Lomitapide" }
+    status: unverified
+    tags: [numbers]
+  # ---------- p299: omega-3 ----------
+  - id: dm.L23.053
+    kind: card
+    topic: omega3
+    front: "Which lipoproteins does the book call atherogenic (non-HDL-C)?"
+    back: "The apo B-containing ones: triglyceride-rich chylomicron remnants (apo B48), VLDL and IDL (apo B100), LDL and Lp(a). HDL (apo A-I) is not."
+    src: { page: 299, quote: "Atherogenic lipoproteins Non-HDL-C" }
+    status: unverified
+  - id: dm.L23.054
+    kind: cloze
+    topic: omega3
+    text: "REDUCE-IT: ASCVD or other risk factors, on a statin with controlled LDL-C but TG {{c1::135-499 mg/dL}}: add {{c2::icosapent ethyl (EPA) 4 g}} to cut CV risk."
+    src: { page: 299, quote: "the addition of icosapent ethyl EPA 4gm can be considered to reduce cardiovascular risk." }
+    status: unverified
+    tags: [high-yield]
+    update:
+      text: "The benefit is specific to purified EPA (icosapent ethyl). A mixed EPA + DHA carboxylic acid product at 4 g/day did not reduce CV events in STRENGTH (JAMA 2020), so ordinary fish-oil capsules are not a substitute."
+      ref: "STRENGTH trial, JAMA 2020"
+  - id: dm.L23.055
+    kind: mcq
+    topic: omega3
+    stem: "Omega-3 fatty acids (eicosapentaenoic acid) are indicated in (book question):"
+    options: [ASCVD on a statin with controlled LDL-C but elevated TG, ASCVD on a statin with uncontrolled LDL-C, ASCVD on statin plus ezetimibe with uncontrolled LDL-C, Patients without ASCVD]
+    answer: 0
+    why:
+      - "Correct: REDUCE-IT population."
+      - "Uncontrolled LDL-C needs more LDL lowering first."
+      - "Still an LDL problem: add a PCSK9 inhibitor."
+      - "REDUCE-IT also took diabetics with risk factors, but the book's answer is (b)."
+    src: { page: 300, quote: "Omega-3 fatty acids (eicosapentaenoic acid) are indicated in" }
+    status: unverified
+    tags: [book-question]
+  - id: dm.L23.056
+    kind: table
+    topic: hofh
+    title: "Where each LDL-lowering drug acts"
+    columns: [Drug, Target]
+    rows:
+      - [Ezetimibe, "NPC1L1: intestinal cholesterol absorption"]
+      - [Statins, "HMG-CoA reductase: liver synthesis"]
+      - [Bempedoic acid, "ATP citrate lyase: liver synthesis"]
+      - [Evolocumab / alirocumab, "PCSK9 protein (antibody)"]
+      - [Inclisiran, "PCSK9 mRNA (siRNA)"]
+      - [Lomitapide, "MTP: VLDL assembly"]
+      - [Mipomersen, "Apo B mRNA (antisense)"]
+    blanks: [[0, 1], [2, 1], [4, 1], [5, 1], [6, 1]]
+    src: { page: 291, quote: "NPC1L1 = Niemann-Pick C1-like 1; HMG-CoA = 3-hydroxy-3-methylglutaryl acetyl coenzyme A" }
+    status: unverified
+  # ---------- cases and essays ----------
+  - id: dm.L23.057
+    kind: case
+    topic: goals
+    stem: "A 62-year-old man had an MI a year ago. T2DM, on atorvastatin 80 mg. LDL-C 88 mg/dL (baseline before statin 170)."
+    steps:
+      - question: "His ESC/EAS 2019 LDL-C goal?"
+        options: ["< 55 mg/dL and ≥ 50% reduction", "< 70 mg/dL", "< 100 mg/dL", "< 116 mg/dL"]
+        answer: 0
+        why: "Documented ASCVD = very high risk: < 1.4 mmol/L and ≥ 50% (p284)."
+      - question: "Next step?"
+        options: [Add ezetimibe, Add a fibrate, Add niacin, Switch to simvastatin 80 mg]
+        answer: 0
+        why: "Statin is already maximal; add ezetimibe (ESC ladder p294). Fibrate and niacin are not recommended with statins (p290); simvastatin 80 is advised against."
+      - reveal: "Three months later on atorvastatin 80 + ezetimibe, LDL-C is 72 mg/dL."
+        question: "Now?"
+        options: [Add a PCSK9 inhibitor, Stop ezetimibe, Accept 72, Add omega-3 for LDL]
+        answer: 0
+        why: "Secondary prevention, very high risk, still above goal: add a PCSK9 inhibitor (p294). PCSK9 + high statin + ezetimibe ≈ 85% (p292)."
+      - reveal: "Within a year he has a second MI despite LDL-C 48 mg/dL."
+        question: "What goal may now be considered?"
+        options: ["< 40 mg/dL", "< 55 mg/dL", "< 70 mg/dL", "No goal"]
+        answer: 0
+        why: "Second event within 2 years on maximal statin: < 1.0 mmol/L (< 40 mg/dL) may be considered (p284)."
+    src: { page: 284, quote: "experience a second vascular event within 2 years" }
+    status: unverified
+  - id: dm.L23.058
+    kind: case
+    topic: hofh
+    stem: "A 19-year-old with homozygous FH: LDL-C 520 mg/dL on rosuvastatin 40 mg, ezetimibe and evolocumab; aortic stenosis on echo."
+    steps:
+      - question: "Which therapy has proven cardiac benefit and the longest safety record for him?"
+        options: [LDL apheresis, Mipomersen, Lomitapide, Bempedoic acid]
+        answer: 0
+        why: "Apheresis: ~70-80% LDL-C fall, cardiac benefit yes, ~40 years of safety (p298)."
+      - question: "Which oral drug blocks VLDL assembly and is approved for HoFH?"
+        options: [Lomitapide, Mipomersen, Inclisiran, Icosapent ethyl]
+        answer: 0
+        why: "MTP inhibitor, FDA-approved for HoFH (p296)."
+      - question: "Which test must be watched on lomitapide?"
+        options: [Aminotransferases, Creatine kinase only, Serum potassium, Platelets]
+        answer: 0
+        why: "Raised aminotransferases reflect liver fat (p296)."
+    src: { page: 298, quote: "LDL-C apheresis is indicated in patients with homozygous FH" }
+    status: unverified
+  - id: dm.L23.059
+    kind: essay
+    topic: pcsk9
+    prompt: What comes after a high-intensity statin when LDL-C is still above goal?
+    outline:
+      - "Why": ["Unmet need: FH, very high risk, statin intolerance", "Residual risk: up to 40% still get CVD"]
+      - "Ezetimibe": ["Blocks intestinal absorption (NPC1L1)", "High statin + ezetimibe ≈ 65%"]
+      - "PCSK9 pathway": ["Evolocumab, alirocumab (≈ 60%; ≈ 75-85% in combination)", "Inclisiran siRNA every 3-6 months"]
+      - "Others": ["Bempedoic acid (ATP citrate lyase, ≈ 23%)", "HoFH: lomitapide, mipomersen, LDL apheresis"]
+      - "Not recommended": ["Statin + fibrate, statin + niacin (ADA, A)"]
+      - "Residual TG": ["Icosapent ethyl 4 g if TG 135-499 on a statin"]
+    src: { page: 290, quote: "High-intensity statin is not enough; what comes next?" }
+    status: unverified
+    tags: [book-question]
+  - id: dm.L23.060
+    kind: essay
+    topic: risk
+    prompt: "Outline ESC/EAS 2019 risk categories and the matching LDL-C goals."
+    outline:
+      - "Very high (< 55, ≥ 50%)": ["ASCVD", "DM + organ damage / ≥ 3 RF / T1DM > 20 years", "eGFR < 30", "SCORE ≥ 10%", "FH + ASCVD or RF"]
+      - "High (< 70, ≥ 50%)": ["Single RF: TC > 310, LDL > 190, BP ≥ 180/110", "FH alone", "DM ≥ 10 years or + RF", "eGFR 30-59", "SCORE 5-10%"]
+      - "Moderate (< 100)": ["Young DM < 10 years, no RF", "SCORE 1-5%"]
+      - "Low (< 116)": ["SCORE < 1%"]
+    src: { page: 283, quote: "Table 4 Cardiovascular risk categories" }
+    status: unverified

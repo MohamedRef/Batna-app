@@ -1,0 +1,1035 @@
+schema: batna.content/v1
+lecture: hem.L12
+title: Lymphomas
+author: Prof. Nabil Elhalawany
+book: { chapter: 4, pages: [190, 206] }
+topics:
+  - { id: overview, title: "Definition, incidence, lymphoma vs leukaemia" }
+  - { id: cytogenetics, title: "Cytogenetics and molecular markers" }
+  - { id: workup, title: "Immunophenotyping, diagnosis and staging work-up" }
+  - { id: staging, title: "Ann Arbor staging and the International Prognostic Index" }
+  - { id: hl-basics, title: "Hodgkin lymphoma: pathogenesis, incidence, risk, diagnosis" }
+  - { id: hl-subtypes, title: "Classic Hodgkin subtypes" }
+  - { id: hl-clinical, title: "Hodgkin lymphoma: clinical picture" }
+  - { id: hl-management, title: "Hodgkin lymphoma: investigations and treatment" }
+  - { id: nhl-basics, title: "NHL: definition, epidemiology, predisposing factors" }
+  - { id: nhl-pathology, title: "NHL pathology and WHO classification" }
+  - { id: hl-vs-nhl, title: "Hodgkin vs non-Hodgkin lymphoma" }
+  - { id: follicular, title: "Follicular lymphoma" }
+  - { id: dlbcl, title: "Diffuse large B-cell lymphoma" }
+items:
+  # ---------- p190: overview, Burkitt ----------
+  - id: hem.L12.001
+    kind: card
+    topic: overview
+    front: Define lymphomas and their two main groups.
+    back: Malignant disorders derived from lymphoid cells (mature T or B cells), divided into Hodgkin and non-Hodgkin lymphoma.
+    src: { page: 190, quote: "Lymphomas are malignant disorders that derive from Lymphoid cells. They may arise from mature T-cells or B-cells." }
+    status: unverified
+  - id: hem.L12.002
+    kind: card
+    topic: overview
+    front: What makes the histological diagnosis of Hodgkin lymphoma?
+    back: The presence of Reed-Sternberg cells.
+    src: { page: 190, quote: "Hodgkin‘s Lymphoma is diagnosed histologically by the presence of Reed-Sternberg cells." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L12.003
+    kind: cloze
+    topic: overview
+    text: "Lymphoma incidence is {{c1::5-10}}/100,000 per year; there are about {{c2::2}} NHL cases for each Hodgkin case, and a {{c3::3:2}} male predilection."
+    src: { page: 190, quote: "The overall incidence of Lymphomas is 5-10 cases per/100,000 population each year. There are approximately 2 cases of non-Hodgkin‘s Lymphoma for each case of Hodgkin‘s." }
+    status: unverified
+    tags: [numbers]
+  - id: hem.L12.004
+    kind: card
+    topic: overview
+    front: How does the lecture distinguish lymphoma from lymphoid leukaemia, and how does WHO handle CLL and ALL?
+    back: Lymphomas are solid (lumps), leukaemias are liquid with malignant cells in the blood; the line is artificial, so WHO classifies CLL and ALL with lymphomas as lymphoid malignancies.
+    src: { page: 190, quote: "Lymphomas are generally thought of as being solid (lumps), whereas Leukaemias are liquid with malignant cells found into the peripheral blood." }
+    status: unverified
+  - id: hem.L12.005
+    kind: cloze
+    topic: cytogenetics
+    text: "Burkitt lymphoma: {{c1::t(8;14)}} in {{c2::75%}} of cases up-regulates {{c3::c-MYC}}, causing proliferation and failed apoptosis."
+    src: { page: 190, quote: "Burkitt‘s Lymphoma: In 75% of cases t (8;14) leading to up-regulation and expression of the C-MyC protein" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p191: cytogenetics ----------
+  - id: hem.L12.006
+    kind: table
+    topic: cytogenetics
+    title: Recurring cytogenetic lesions in lymphoma (p190-191)
+    columns: [Lymphoma, Lesion, Effect]
+    rows:
+      - [Burkitt, "t(8;14) (75%)", "c-MYC up: proliferation, failed apoptosis"]
+      - [Follicular, "t(14;18)", "BCL-2 expression: failed apoptosis"]
+      - [Mantle cell, "t(11;14)", "BCL-1 (cyclin D1): proliferation"]
+      - [Large cell, "BCL-6 expression", "-"]
+    blanks: [[0, 1], [1, 1], [2, 1], [1, 2], [2, 2], [3, 1]]
+    src: { page: 191, quote: "Follicular Lymphoma: t (14;18) → BCL-2 expression leading to failure of apoptosis." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L12.007
+    kind: card
+    topic: cytogenetics
+    front: Follicular lymphoma translocation and its effect?
+    back: t(14;18), giving BCL-2 expression and failure of apoptosis.
+    src: { page: 191, quote: "Follicular Lymphoma: t (14;18) → BCL-2 expression leading to failure of apoptosis." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L12.008
+    kind: card
+    topic: cytogenetics
+    front: Mantle cell lymphoma translocation and its effect?
+    back: t(11;14), giving BCL-1 (cyclin D1) expression and cell proliferation.
+    src: { page: 191, quote: "Mantle cell Lymphoma: t (11;14)→ BCL-1 (Cyclin D 1) expression→ cellular proliferation." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L12.009
+    kind: card
+    topic: cytogenetics
+    front: Which molecule characterises large cell lymphoma?
+    back: BCL-6 expression.
+    src: { page: 191, quote: "Large cell Lymphoma: characterized by the expression of BCL-6." }
+    status: unverified
+  - id: hem.L12.010
+    kind: card
+    topic: cytogenetics
+    front: What does the book's photo of Burkitt lymphoma show?
+    back: A characteristic facial swelling from extensive tumour involving the mandible and surrounding soft tissues.
+    src: { page: 191, quote: "Burkitt's lymphoma: characteristic facial swelling caused by extensive tumour involvement of the mandible and surrounding soft tissues" }
+    status: unverified
+  # ---------- p192: immunophenotyping, diagnosis, work-up ----------
+  - id: hem.L12.011
+    kind: card
+    topic: workup
+    front: What is immunophenotyping, and what naming scheme does it use?
+    back: Identifying antigenic molecules on white cells with labelled antibodies (flow cytometry); molecules are named by the Cluster Differentiation (CD) scheme.
+    src: { page: 192, quote: "The identification of antigenic molecules associated with human white cells, using labelled antibodies may be very helpful for diagnosis." }
+    status: unverified
+  - id: hem.L12.012
+    kind: cloze
+    topic: workup
+    text: "{{c1::CD20}} is expressed exclusively on B cells; {{c2::CD19, CD22 and CD79}} are other B-cell markers detected by flow cytometry."
+    src: { page: 192, quote: "The CD 20 is one such molecule exclusively expressed on B-cells. Besides, CD 19, CD 22 and CD 79 are other examples" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L12.013
+    kind: card
+    topic: workup
+    front: How is lymphoma diagnosed?
+    back: Histology of an enlarged lymph node or other tissue (or cytology of blood, marrow or CSF), backed by immunophenotyping, cytogenetic and molecular techniques.
+    src: { page: 192, quote: "The diagnosis is based on the histological appearance of an enlarged lymph node or other affected tissues" }
+    status: unverified
+  - id: hem.L12.014
+    kind: enumerate
+    topic: workup
+    prompt: Staging investigations once lymphoma is diagnosed.
+    points:
+      - "CT scanning, ultrasound, chest X-ray"
+      - "Bone marrow biopsy (important in NHL: frequent marrow involvement)"
+      - "Serum LDH (high confers poor prognosis)"
+      - "Immunoglobulins and monoclonal proteins"
+    pass: 3
+    src: { page: 192, quote: "Bone marrow biopsy is important in non-Hodgkin‘s Lymphoma due to the high frequency of bone marrow involvement in this disorder." }
+    status: unverified
+  - id: hem.L12.015
+    kind: card
+    topic: workup
+    front: Why is a bone marrow biopsy especially important in NHL staging?
+    back: Because bone marrow involvement is frequent in NHL.
+    src: { page: 192, quote: "Bone marrow biopsy is important in non-Hodgkin‘s Lymphoma due to the high frequency of bone marrow involvement in this disorder." }
+    status: unverified
+  - id: hem.L12.016
+    kind: card
+    topic: workup
+    front: What does a high serum LDH mean in lymphoma?
+    back: It confers a poor prognosis.
+    src: { page: 192, quote: "Serum Lactate dehydrogenase → confers a poor prognosis." }
+    status: unverified
+  # ---------- p192-193: Ann Arbor, IPI ----------
+  - id: hem.L12.017
+    kind: table
+    topic: staging
+    title: Ann Arbor staging (p192-193)
+    columns: [Stage, Involvement]
+    rows:
+      - ["I", "A single lymph node group"]
+      - ["II", "Two or more node groups on one side of the diaphragm"]
+      - ["III", "Node groups on both sides of the diaphragm"]
+      - ["IV", "Extralymphatic sites, e.g. bone marrow or liver"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 193, quote: "Stage IV: Involvement of extralymphatic sites e.g. bone marrow or liver." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L12.018
+    kind: cloze
+    topic: staging
+    text: "Ann Arbor stage II = two or more lymph node groups on {{c1::one side}} of the diaphragm; stage III = {{c2::both sides}}."
+    src: { page: 192, quote: "Stage II: Involvement of two or more lymph node groups on one side of the diaphragm." }
+    status: unverified
+  - id: hem.L12.019
+    kind: cloze
+    topic: staging
+    text: "Stage B = any one of {{c1::night sweats}}, {{c2::fever}} or weight loss of {{c3::10% in the past 6 months}}; stage A = none."
+    src: { page: 193, quote: "stage (B) in the presence of any one of; night sweats, fever or weight loss (10% in past 6 months)." }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: hem.L12.020
+    kind: enumerate
+    topic: staging
+    prompt: Adverse factors in the International Prognostic Index (as listed in the lecture).
+    points: ["Extranodal disease", "Advanced stage", "Elevated LDH", "Increasing age"]
+    pass: 4
+    src: { page: 193, quote: "Extranodal disease: Disease outside lymphatic sites confers a poor prognosis." }
+    status: unverified
+    tags: [high-yield]
+    update:
+      text: "The full IPI scores 5 factors: age > 60, ECOG performance status ≥ 2, stage III-IV, raised LDH and > 1 extranodal site. The book lists four (no performance status)."
+      ref: "International Non-Hodgkin's Lymphoma Prognostic Factors Project, NEJM 1993"
+  # ---------- p194: Hodgkin basics ----------
+  - id: hem.L12.021
+    kind: card
+    topic: hl-basics
+    front: What is the cell of origin of Hodgkin lymphoma?
+    back: Clonal germinal-centre B cells with a crippled immunoglobulin gene (mutations prevent synthesis of full-length immunoglobulin).
+    src: { page: 194, quote: "neoplastic cells in Hodgkin‘s Lymphoma are clonal B-cells originating in a lymph node germinal centre with a crippled immunoglobulin gene" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L12.022
+    kind: cloze
+    topic: hl-basics
+    text: "Hodgkin lymphoma was first described by Thomas Hodgkin in {{c1::1832}}; EBV genome is found in {{c2::50% or more}} of cases."
+    src: { page: 194, quote: "Epstein-Barr virus (EBV) genome has been detected in 50% or more of cases of Hodgkin‘s Diseases (HD)." }
+    status: unverified
+    tags: [numbers]
+  - id: hem.L12.023
+    kind: cloze
+    topic: hl-basics
+    text: "Hodgkin lymphoma has a bimodal age incidence: major peak at {{c1::20-29}} years and minor peak at {{c2::60}} years."
+    src: { page: 194, quote: "Bimodal age incidence- major peak between 20 and 29 years and minor peak 60 years." }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: hem.L12.024
+    kind: card
+    topic: hl-basics
+    front: Hodgkin incidence facts (registration, geography, sex, commonest subtype in young adults).
+    back: 1% of cancer registrations a year; less common in Japan; higher in males; nodular sclerosing is the commonest subtype in young adults.
+    src: { page: 194, quote: "One percent of cancer registration per year. Less common in Japan." }
+    status: unverified
+  - id: hem.L12.025
+    kind: enumerate
+    topic: hl-basics
+    prompt: Risk factors for Hodgkin lymphoma.
+    points:
+      - High socioeconomic status in childhood
+      - Familial aggregation
+      - EBV, especially with past infectious mononucleosis
+    pass: 3
+    src: { page: 194, quote: "Association with high socioeconomic status in childhood." }
+    status: unverified
+  - id: hem.L12.026
+    kind: card
+    topic: hl-basics
+    front: How is Hodgkin lymphoma diagnosed?
+    back: Histology of an excised lymph node; the RS cell is central to the four classic types and is part of the malignant clone.
+    src: { page: 194, quote: "It is made by histological examination of an excised lymph- node. RS-cell is central to the diagnosis of the four classic types" }
+    status: unverified
+  - id: hem.L12.027
+    kind: cloze
+    topic: hl-basics
+    text: "Reed-Sternberg cells stain with {{c1::CD30}} and {{c2::CD15}} but are usually {{c3::negative for B-cell antigens}}."
+    src: { page: 194, quote: "These cells stain with CD 30 and CD 15 but are usually negative for B-cell antigen expression." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L12.028
+    kind: card
+    topic: hl-basics
+    front: Which background cells accompany RS cells in Hodgkin lymphoma?
+    back: Lymphocytes, neutrophils, eosinophils, plasma cells (and histiocytes), with variable fibrosis.
+    src: { page: 194, quote: "inflammatory cells consist of lymphocytes, neutrophils, eosinophils, plasma cells and variable fibrosis." }
+    status: unverified
+  # ---------- p195: subtypes ----------
+  - id: hem.L12.029
+    kind: table
+    topic: hl-subtypes
+    title: Classic Hodgkin subtypes (p195)
+    columns: [Subtype, Frequency, Features]
+    rows:
+      - [Lymphocyte predominance, 10%, "Younger patients, rare RS cells, many lymphocytes, usually stage 1-2"]
+      - [Nodular sclerosis, "50% +", "Young adults, only type commoner in women, lacunar RS variants, fibrosis around nodules"]
+      - [Mixed cellularity, "30% +", "More abundant RS cells, richer inflammatory infiltrate"]
+      - [Lymphocyte depletion, Uncommon, "Numerous RS cells, few lymphocytes, atypical cells"]
+    blanks: [[0, 1], [1, 1], [2, 1], [1, 2], [3, 2]]
+    src: { page: 195, quote: "Nodular sclerosis +50% Young adults, only type more common in women, presence of Lacunar RS variants, fibrosis surrounding nodules." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L12.030
+    kind: card
+    topic: hl-subtypes
+    front: Which Hodgkin subtype is the only one commoner in women, and its histology?
+    back: "Nodular sclerosis: lacunar RS variants and fibrosis surrounding nodules."
+    src: { page: 195, quote: "Young adults, only type more common in women, presence of Lacunar RS variants, fibrosis surrounding nodules." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L12.031
+    kind: card
+    topic: hl-subtypes
+    front: Which Hodgkin subtype has rare RS cells and many lymphocytes, usually stage 1-2?
+    back: Lymphocyte predominance (10%, younger patients).
+    src: { page: 195, quote: "Lymphocyte predominance 10% Younger patients Rare RS cells Many lymphocytes Usually stage 1 or 2" }
+    status: unverified
+  - id: hem.L12.032
+    kind: card
+    topic: hl-subtypes
+    front: Which Hodgkin subtype has numerous RS cells with depleted lymphocytes?
+    back: Lymphocyte depletion (uncommon).
+    src: { page: 195, quote: "Lymphocyte depletion Uncommon Numerous RS-cells, decreased lymphocyte percentage, atypical cells" }
+    status: unverified
+  # ---------- p196: nodes ----------
+  - id: hem.L12.033
+    kind: card
+    topic: hl-clinical
+    front: Describe the lymph nodes of Hodgkin lymphoma.
+    back: Painless, non-tender, asymmetrical, firm, discrete and rubbery; may become matted.
+    src: { page: 196, quote: "Painless, non-tender, asymmetrical, firm, discrete and rubbery. Lymph nodes may become matted." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L12.034
+    kind: table
+    topic: hl-clinical
+    title: Node groups involved in Hodgkin lymphoma (p196)
+    columns: [Nodes, Frequency]
+    rows:
+      - [Cervical, 60-70%]
+      - [Axillary, 10-15%]
+      - [Inguinal, 6-12%]
+      - [Mediastinal, 6-11%]
+      - [Retroperitoneal, "Often, usually found on CT"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 196, quote: "Cervical nodes; are involved in 60 – 70 % Axillary nodes; in 10 – 15 % Inguinal nodes; in 6 – 12 %" }
+    status: unverified
+    tags: [numbers]
+  - id: hem.L12.035
+    kind: card
+    topic: hl-clinical
+    front: "Mediastinal node enlargement in Hodgkin lymphoma: frequency, subtype and complications?"
+    back: 6-11%; a feature of nodular sclerosing type; may cause pleural effusion or superior vena cava obstruction.
+    src: { page: 196, quote: "Mediastinal L.N. enlargement; in 6-11% of patients. This is a feature of the nodular sclerosing type." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p197: organomegaly, constitutional ----------
+  - id: hem.L12.036
+    kind: cloze
+    topic: hl-clinical
+    text: "Splenomegaly occurs during the course of Hodgkin lymphoma in {{c1::50%}} of cases but is {{c2::seldom massive}}."
+    src: { page: 197, quote: "Splenomegaly occurs during course of disease in 50% of cases, but seldom massive." }
+    status: unverified
+    tags: [numbers]
+  - id: hem.L12.037
+    kind: enumerate
+    topic: hl-clinical
+    prompt: Constitutional symptoms of Hodgkin lymphoma.
+    points: ["Fever (30%), continuous or cyclic", Weight loss, "Profuse sweating, especially at night", "Pruritus (25%), may be severe", Fatigue, Anorexia and cachexia]
+    pass: 4
+    src: { page: 197, quote: "Fever in 30% of patients, is continuous or cyclic. Weight loss. Profuse sweating especially at night." }
+    status: unverified
+  - id: hem.L12.038
+    kind: cloze
+    topic: hl-clinical
+    text: "In Hodgkin lymphoma fever occurs in {{c1::30%}} (continuous or {{c2::cyclic}}), and pruritus, which may be severe, in {{c3::25%}}."
+    src: { page: 197, quote: "Fever in 30% of patients, is continuous or cyclic." }
+    status: unverified
+    tags: [numbers]
+  - id: hem.L12.039
+    kind: card
+    topic: hl-clinical
+    front: Which organs other than spleen and liver may Hodgkin lymphoma involve, and how often?
+    back: Bone marrow, GIT, bone, lung and spinal cord; unusual.
+    src: { page: 197, quote: "Other organs e.g. BM, GIT, bone, lung and spinal cord may be involved, but this is unusual." }
+    status: unverified
+  # ---------- p198: investigations, treatment ----------
+  - id: hem.L12.040
+    kind: card
+    topic: hl-management
+    front: Best way to confirm Hodgkin lymphoma?
+    back: Excision biopsy of a lymph node for histology.
+    src: { page: 198, quote: "Confirm diagnosis by biopsy, best histology of lymph node by excision biopsy." }
+    status: unverified
+  - id: hem.L12.041
+    kind: card
+    topic: hl-management
+    front: Blood picture in Hodgkin lymphoma.
+    back: Normochromic normocytic anaemia, reactive leucocytosis, eosinophilia and/or mild reactive thrombocytosis.
+    src: { page: 198, quote: "Blood picture: normochromic normocytic anaemia, reactive leucocytosis, eosinophilia and / or reactive mild thrombocytosis." }
+    status: unverified
+  - id: hem.L12.042
+    kind: card
+    topic: hl-management
+    front: Which simple test reflects activity in Hodgkin lymphoma and helps follow-up?
+    back: ESR or plasma viscosity, high in active disease.
+    src: { page: 198, quote: "ESR/ plasma viscosity: high in active HD and could be good for follow up." }
+    status: unverified
+  - id: hem.L12.043
+    kind: card
+    topic: hl-management
+    front: Why may uric acid and kidney function be abnormal in Hodgkin lymphoma?
+    back: High uric acid (secondary gout) from lymphoproliferative activity; kidney impairment from HD involvement or secondary gout.
+    src: { page: 198, quote: "Blood uric acid: high i.e. secondary gout due to lympho-proliferative activity." }
+    status: unverified
+  - id: hem.L12.044
+    kind: enumerate
+    topic: hl-management
+    prompt: Imaging and marrow work-up in Hodgkin lymphoma.
+    points:
+      - "Chest X-ray: nodes or infection from immune suppression"
+      - "CT chest, abdomen and pelvis: nodal and extranodal disease"
+      - "Bone marrow trephine: exclude marrow involvement"
+      - "MRI or PET in difficult cases"
+    pass: 3
+    src: { page: 198, quote: "CT-chest, abdomen and pelvis: to define nodal and extra-nodal involvement." }
+    status: unverified
+  - id: hem.L12.045
+    kind: card
+    topic: hl-management
+    front: Treatment of early Hodgkin lymphoma (stage IA/IIA) per the book.
+    back: Extended-field radiotherapy, or 3 courses of ABVD plus localized radiotherapy.
+    src: { page: 198, quote: "Can be treated with extended field radiotherapy or 3 courses of ABVD+ localized radiotherapy." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L12.046
+    kind: card
+    topic: hl-management
+    front: Treatment of advanced Hodgkin lymphoma (stage IIB-IV) per the book.
+    back: Six to eight courses of ABVD combination chemotherapy.
+    src: { page: 198, quote: "Treated with six to eight courses of combination chemotherapy (ABVD)" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L12.047
+    kind: cloze
+    topic: hl-management
+    text: "ABVD = {{c1::Adriamycin}}, {{c2::Bleomycin}}, {{c3::Vinblastine}} and Dacarbazine."
+    src: { page: 198, quote: "ABVD = Adriamycin, Bleomycin, Vinblastine, and Decarbazine" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p199: NHL basics ----------
+  - id: hem.L12.048
+    kind: card
+    topic: nhl-basics
+    front: Define non-Hodgkin lymphoma.
+    back: A group of histologically and biologically heterogeneous clonal malignant diseases arising from the lymphoid system.
+    src: { page: 199, quote: "NHL is a diagnosis applied to a group of histologically and biologically heterogenous clonal malignant diseases arising from the lymphoid system." }
+    status: unverified
+  - id: hem.L12.049
+    kind: cloze
+    topic: nhl-basics
+    text: "NHL is about {{c1::4%}} of all cancers; incidence rises with age, M:F {{c2::3:2}}."
+    src: { page: 199, quote: "NHL constitutes about 4% of all cancers, and its rate per annum has increased since the 1970‘s." }
+    status: unverified
+    tags: [numbers]
+  - id: hem.L12.050
+    kind: enumerate
+    topic: nhl-basics
+    prompt: Why has NHL incidence increased since the 1970s?
+    points: [Older population, Better diagnosis, HIV pandemic, Immunosuppressive therapy]
+    pass: 3
+    src: { page: 199, quote: "The increased incidence is only part due to increased mean age of the population, improvement in diagnosis, the HIV pandemic and immunosuppressive therapy." }
+    status: unverified
+  - id: hem.L12.051
+    kind: table
+    topic: nhl-basics
+    title: Predisposing factors for NHL (p199)
+    columns: [Group, Examples]
+    rows:
+      - [Primary immunodeficiency, "Ataxia-telangiectasia, Wiskott-Aldrich, CVID, X-linked lymphoproliferative"]
+      - [Secondary immunodeficiency, "Organ transplantation, immunosuppressive therapy"]
+      - [Autoimmune, "Rheumatoid, Sjögren, Hashimoto thyroiditis"]
+      - [Microbial, "HIV, EBV (PTLD), HTLV-1 (ATLL), HHV-8 (PEL), H. pylori (MALT)"]
+      - [Environmental, "Pesticides, benzene, herbicides, chemotherapy, radiation, fertilizers"]
+    blanks: [[0, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 199, quote: "Predisposing etiological factors in the development of Non-Hodgkin’s Lymphoma" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L12.052
+    kind: table
+    topic: nhl-basics
+    title: Microbes and the lymphoma they cause (p199)
+    columns: [Agent, Lymphoma]
+    rows:
+      - [EBV, Post-transplant lymphoproliferative disorder (PTLD)]
+      - [HTLV-1, Adult T-cell leukaemia/lymphoma (ATLL)]
+      - [HHV-8, Primary effusion lymphoma (PEL)]
+      - [Helicobacter pylori, MALT lymphoma]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 199, quote: "PLTD =post-transplantation lymphoproliferative disorder ATLL =Adult T-cell Leukaemia / Lymphoma PEL=Primary effusion Lymphoma" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p200: pathology ----------
+  - id: hem.L12.053
+    kind: card
+    topic: nhl-pathology
+    front: Three histological features used to describe NHL.
+    back: Pattern (follicular or diffuse), cell size and nuclear contour.
+    src: { page: 200, quote: "Pattern: follicular or diffuse" }
+    status: unverified
+  - id: hem.L12.054
+    kind: table
+    topic: nhl-pathology
+    title: NHL by cell size (p200)
+    columns: [Size, Lymphomas]
+    rows:
+      - [Small, "Small lymphocytic, follicular, marginal zone B-cell"]
+      - [Intermediate, "Mantle cell, Burkitt, lymphoblastic"]
+      - [Large, Large cell lymphoma]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 200, quote: "Intermediate Mantle cell lymphoma Burkitt‘s lymphoma Lymphoblastic lymphoma" }
+    status: unverified
+  - id: hem.L12.055
+    kind: table
+    topic: nhl-pathology
+    title: NHL by nuclear contour (p200)
+    columns: [Contour, Lymphomas]
+    rows:
+      - [Round, "Small lymphocytic, Burkitt, large cell"]
+      - [Irregular, Mantle cell]
+      - [Cleaved, Follicular]
+      - [Convoluted, "Mycosis fungoides, Sézary syndrome, adult T-cell leukaemia/lymphoma"]
+      - [Monocytoid, Marginal zone B-cell]
+    blanks: [[1, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 200, quote: "Cleaved Follicular lymphoma Convoluted Mycosis fungoides Sezary syndrome Adult T cell leukemic lymphoma" }
+    status: unverified
+  - id: hem.L12.056
+    kind: card
+    topic: nhl-pathology
+    front: Diffuse vs follicular pattern in NHL histology (p201 figure).
+    back: Diffuse = normal node architecture totally replaced by neoplastic cells; follicular = nodules of neoplastic cells that compress surrounding tissue and lack a mantle of small lymphocytes.
+    src: { page: 201, quote: "a follicular or nodular pattern in follicular lymphoma, the follicles or nodules of neoplastic cells compress surrounding tissue and lack a mantle of small lymphocytes" }
+    status: unverified
+  - id: hem.L12.057
+    kind: card
+    topic: nhl-pathology
+    front: What do the peripheral blood cells of adult T-cell leukaemia/lymphoma look like?
+    back: Typical convoluted lymphoid cells.
+    src: { page: 201, quote: "Adult T-cell leukaemia/lymphoma. Typical convoluted lymphoid cells in peripheral blood" }
+    status: unverified
+  # ---------- p202: WHO, cell of origin ----------
+  - id: hem.L12.058
+    kind: cloze
+    topic: nhl-pathology
+    text: "WHO classification of NHL: {{c1::B-cell (85%)}} and {{c2::T-cell (15%)}}."
+    src: { page: 202, quote: "Classification of NHL (WHO) B-cell Lymphoma (85 %) T-cell Lymphoma (15%)" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: hem.L12.059
+    kind: table
+    topic: nhl-pathology
+    title: B-cell NHL by behaviour (book slide, p202)
+    columns: [Group, Lymphomas]
+    rows:
+      - [Indolent, "Small lymphocytic, follicular, marginal zone B-cell (MALT, splenic, nodal)"]
+      - [Aggressive, "Diffuse large B-cell, mantle cell"]
+      - [Highly aggressive, "Lymphoblastic, Burkitt"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 202, quote: "Indolent NHL Aggressive NHL Highly Aggressive NHL" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L12.060
+    kind: card
+    topic: nhl-pathology
+    front: What are the three types of marginal zone B-cell lymphoma?
+    back: MALT type, splenic and nodal.
+    src: { page: 202, quote: "Marginal Zone B-cell Lymphoma MALT-Type Splenic Nodal" }
+    status: unverified
+  - id: hem.L12.061
+    kind: card
+    topic: nhl-pathology
+    front: Which B-cell lymphomas have unmutated immunoglobulin genes (pre-germinal centre origin)?
+    back: Mantle cell lymphoma and a proportion of B-CLL; marginal zone, diffuse large cell, follicular, lymphoplasmacytoid and some B-CLL have mutated genes.
+    src: { page: 202, quote: "Mantle cell lymphoma and a proportion of B-CLL cases have unmutated immunoglobulin genes" }
+    status: unverified
+  - id: hem.L12.062
+    kind: card
+    topic: nhl-pathology
+    front: How is the cellular origin of a B-lymphoid malignancy inferred?
+    back: From the immunoglobulin gene rearrangement (mutation) status and the membrane phenotype.
+    src: { page: 202, quote: "The cellular origin of the different lymphoid malignancies can be inferred from immunoglobulin gene rearrangement status and membrane phenotype" }
+    status: unverified
+  # ---------- p203-204: HL vs NHL ----------
+  - id: hem.L12.063
+    kind: table
+    topic: hl-vs-nhl
+    title: Hodgkin vs non-Hodgkin lymphoma (p203-204)
+    columns: [Feature, Hodgkin, NHL]
+    rows:
+      - [B symptoms, 40%, 20%]
+      - [Presentation, Predominantly nodal, Often extranodal]
+      - [Nodal spread, "Centripetal (cervical, axial)", "Centrifugal (peripheral)"]
+      - [Extent, Usually localized, Rarely localized]
+      - [Peripheral blood, Not affected, Affected in 10-40%]
+      - [Bone marrow, Uncommon, Frequent]
+      - [Mediastinum, Common, "Uncommon (except lymphoblastic and mediastinal large B-cell)"]
+      - ["GIT, skin", Extremely rare, Common]
+      - [CNS, Extremely rare, Occasional]
+    blanks: [[0, 1], [0, 2], [2, 1], [2, 2], [4, 2], [6, 1], [7, 2]]
+    src: { page: 203, quote: "Comparison of Non-Hodgkin’s Lymphoma and Hodgkin’s Lymphoma" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L12.064
+    kind: cloze
+    topic: hl-vs-nhl
+    text: "B symptoms: Hodgkin {{c1::40%}}, NHL {{c2::20%}}. Peripheral blood is affected in {{c3::10-40%}} of NHL but not in Hodgkin."
+    src: { page: 203, quote: "40% 20% B- symptoms" }
+    status: unverified
+    tags: [numbers]
+  - id: hem.L12.065
+    kind: card
+    topic: hl-vs-nhl
+    front: Which NHL types commonly involve the mediastinum?
+    back: Lymphoblastic lymphoma and mediastinal large B-cell lymphoma (otherwise mediastinal disease is uncommon in NHL).
+    src: { page: 204, quote: "Lymphoblastic and mediastinal Large B-cell Lymphoma" }
+    status: unverified
+  # ---------- p204: follicular ----------
+  - id: hem.L12.066
+    kind: card
+    topic: follicular
+    front: What is the most common indolent NHL and its molecular hallmark?
+    back: Follicular lymphoma; t(14;18) with constitutive BCL-2 expression in most cases.
+    src: { page: 204, quote: "This is the most common form of indolent NHL and is associated with t (14;18) translocation and constitutive BCL-2 expression" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L12.067
+    kind: card
+    topic: follicular
+    front: Typical follicular lymphoma patient and course.
+    back: Middle-aged or elderly; benign course for many years (around 10) with painless lymphadenopathy.
+    src: { page: 204, quote: "The disease is characterized by a benign course for many years (around 10 years) presenting with painless lymphadenopathy" }
+    status: unverified
+  - id: hem.L12.068
+    kind: card
+    topic: follicular
+    front: Histology of follicular lymphoma.
+    back: Follicular (nodular) pattern of small cleaved B lymphocytes.
+    src: { page: 204, quote: "being of follicular or nodular pattern showing small cleaved B-cell lymphocytes." }
+    status: unverified
+  - id: hem.L12.069
+    kind: card
+    topic: follicular
+    front: Stage at presentation and the main risk in follicular lymphoma.
+    back: Most have stage III or IV; sudden transformation to an aggressive diffuse tumour, sometimes with a leukaemic phase.
+    src: { page: 204, quote: "The majority of patients will have stage III or IV disease. However, sudden transformation may occur to aggressive diffuse tumours" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L12.070
+    kind: enumerate
+    topic: follicular
+    prompt: Treatment options for follicular lymphoma in the book.
+    points:
+      - "Single oral agent: chlorambucil or cyclophosphamide"
+      - "CVP (cyclophosphamide, vincristine, prednisolone)"
+      - "Fludarabine alone or with cyclophosphamide or mitoxantrone"
+      - "Rituximab (anti-CD20), alone or with chemotherapy"
+    pass: 3
+    src: { page: 204, quote: "Treatment is usually with single oral agents i.e. Chlorambucil or Cyclophosphamide, Vincristine and Predisolone (CVP) combination." }
+    status: unverified
+    update:
+      text: "Advanced symptomatic or high-burden follicular lymphoma is now usually treated with an anti-CD20 antibody plus chemotherapy (e.g. bendamustine-rituximab or R-CHOP); low-burden disease is often watched. The book's answer is chlorambucil, CVP, fludarabine and rituximab."
+      ref: "ESMO Clinical Practice Guidelines for newly diagnosed and relapsed follicular lymphoma 2021"
+  # ---------- p205-206: DLBCL ----------
+  - id: hem.L12.071
+    kind: card
+    topic: dlbcl
+    front: Describe diffuse large B-cell lymphoma (grade, curability, histology).
+    back: Rapidly progressive, high-grade; aggressive but potentially curable; large B cells (centroblasts or immunoblasts).
+    src: { page: 205, quote: "It is aggressive but potentially curable. Histologically, the disorder is characterized by the presence of Large cells of B-cell origin (centroblasts or immunoblasts)." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L12.072
+    kind: cloze
+    topic: dlbcl
+    text: "DLBCL with a {{c1::3q27}} translocation and {{c2::BCL-6}} overexpression has a relatively {{c3::good}} prognosis."
+    src: { page: 205, quote: "Cases associated with 3q27 translocation showing BCL-6 over expression, have a relative good prognosis." }
+    status: unverified
+  - id: hem.L12.073
+    kind: card
+    topic: dlbcl
+    front: Which test gives prognostic information in DLBCL according to the book?
+    back: DNA microarray analysis.
+    src: { page: 205, quote: "DNA microarray analysis can give prognostic information." }
+    status: unverified
+  - id: hem.L12.074
+    kind: cloze
+    topic: dlbcl
+    text: "DLBCL occurs at all ages but is commoner later in life and represents {{c1::one-third}} of all lymphomas."
+    src: { page: 206, quote: "It represents one-third of all Lymphomas." }
+    status: unverified
+    tags: [numbers]
+  - id: hem.L12.075
+    kind: card
+    topic: dlbcl
+    front: How may DLBCL present?
+    back: Night sweats, fever, weight loss and lymphadenopathy, or extranodal sites such as GIT, testis, brain or bone.
+    src: { page: 206, quote: "Patients may present with night sweats, fever, weight loss and lymphadenopathy or with extranodal involved sites such as GIT, testis, brain or bone." }
+    status: unverified
+  - id: hem.L12.076
+    kind: cloze
+    topic: dlbcl
+    text: "CHOP = {{c1::Cyclophosphamide}}, {{c2::Hydroxydaunorubicin (doxorubicin)}}, {{c3::Oncovin (vincristine)}} and Prednisolone."
+    src: { page: 206, quote: "Cyclophosphamide, Doxorubicin (Hydroxydaunorubicin) Vincristine (Oncovin) and Predisolone (CHOP)." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L12.077
+    kind: card
+    topic: dlbcl
+    front: Standard treatment of DLBCL in the book (regimen, interval, number of courses).
+    back: CHOP plus rituximab (anti-CD20), every 3 weeks for 6 or 8 courses; radiotherapy to bulky or residual masses afterwards.
+    src: { page: 206, quote: "The treatment is administered every 3 weeks for a total of six or eight courses." }
+    status: unverified
+    tags: [high-yield]
+    update:
+      text: "Pola-R-CHP (polatuzumab vedotin replacing vincristine) is an option for previously untreated intermediate- to high-risk DLBCL after the POLARIX trial. The book's answer is R-CHOP."
+      ref: "NCCN Guidelines B-cell lymphomas 2024"
+  - id: hem.L12.078
+    kind: card
+    topic: dlbcl
+    front: When is radiotherapy given in DLBCL?
+    back: To sites of bulky or residual masses after chemotherapy is completed.
+    src: { page: 206, quote: "Radiotherapy is usually given to sites of bulky or residual masses after completion of chemotherapy." }
+    status: unverified
+  # ---------- MCQs ----------
+  - id: hem.L12.079
+    kind: mcq
+    topic: cytogenetics
+    stem: "A lymph node biopsy shows a lymphoma with t(11;14) and cyclin D1 expression. Which lymphoma is it?"
+    options: [Mantle cell lymphoma, Follicular lymphoma, Burkitt lymphoma, Diffuse large B-cell lymphoma, Hodgkin lymphoma]
+    answer: 0
+    why:
+      - "Correct: t(11;14) drives BCL-1 (cyclin D1) and proliferation."
+      - "Follicular is t(14;18) with BCL-2."
+      - "Burkitt is t(8;14) with c-MYC."
+      - "Large cell lymphoma is characterised by BCL-6."
+      - "Hodgkin is defined by RS cells, not a translocation."
+    src: { page: 191, quote: "Mantle cell Lymphoma: t (11;14)→ BCL-1 (Cyclin D 1) expression→ cellular proliferation." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L12.080
+    kind: mcq
+    topic: cytogenetics
+    stem: "Overexpression of which protein in follicular lymphoma explains why the tumour cells fail to die?"
+    options: [BCL-2, c-MYC, Cyclin D1, BCL-6]
+    answer: 0
+    why:
+      - "Correct: t(14;18) gives BCL-2 expression and failure of apoptosis."
+      - "c-MYC (Burkitt) drives proliferation as well as failed apoptosis."
+      - "Cyclin D1 (mantle cell) drives proliferation."
+      - "BCL-6 marks large cell lymphoma."
+    src: { page: 191, quote: "Follicular Lymphoma: t (14;18) → BCL-2 expression leading to failure of apoptosis." }
+    status: unverified
+  - id: hem.L12.081
+    kind: mcq
+    topic: staging
+    stem: "A 30-year-old has cervical and mediastinal nodes plus inguinal nodes, with drenching night sweats. Ann Arbor stage?"
+    options: [IIIB, IIB, IIIA, IVB, IIA]
+    answer: 0
+    why:
+      - "Correct: nodes on both sides of the diaphragm = III; night sweats = B."
+      - "II is one side of the diaphragm only."
+      - "Night sweats make it B, not A."
+      - "IV needs extralymphatic sites like marrow or liver."
+      - "Wrong on both counts."
+    src: { page: 193, quote: "Stage III: Involvement of lymph node groups on both sides of the diaphragm." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L12.082
+    kind: mcq
+    topic: staging
+    stem: "Which symptom does NOT make a lymphoma stage B?"
+    options: [Pruritus, Night sweats, Fever, Weight loss of 10% in 6 months]
+    answer: 0
+    why:
+      - "Correct: pruritus is a constitutional symptom of Hodgkin but not a B symptom."
+      - "A B symptom."
+      - "A B symptom."
+      - "A B symptom (10% in the past 6 months)."
+    src: { page: 193, quote: "stage (B) in the presence of any one of; night sweats, fever or weight loss (10% in past 6 months)." }
+    status: unverified
+  - id: hem.L12.083
+    kind: mcq
+    topic: hl-basics
+    stem: "Large binucleate 'owl-eye' cells in a node biopsy are positive for CD30 and CD15 and negative for CD20. What is the diagnosis?"
+    options: [Classic Hodgkin lymphoma, Diffuse large B-cell lymphoma, Follicular lymphoma, Burkitt lymphoma]
+    answer: 0
+    why:
+      - "Correct: Reed-Sternberg cells stain with CD30 and CD15 and usually lack B-cell antigens."
+      - "DLBCL cells are large B cells, so CD20 positive."
+      - "Follicular cells are small cleaved B cells, CD20 positive."
+      - "Burkitt is a B-cell (CD20+) lymphoma with t(8;14)."
+    src: { page: 194, quote: "These cells stain with CD 30 and CD 15 but are usually negative for B-cell antigen expression." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L12.084
+    kind: mcq
+    topic: hl-subtypes
+    stem: "A 24-year-old woman has a mediastinal mass. Biopsy shows lacunar RS cells and bands of fibrosis around nodules. Which subtype?"
+    options: [Nodular sclerosis, Mixed cellularity, Lymphocyte predominance, Lymphocyte depletion]
+    answer: 0
+    why:
+      - "Correct: lacunar RS variants, fibrosis around nodules, young adults, the only type commoner in women, mediastinal nodes."
+      - "Mixed cellularity has more RS cells in a rich inflammatory infiltrate, no lacunar cells or nodular fibrosis."
+      - "Lymphocyte predominance has rare RS cells and many lymphocytes."
+      - "Lymphocyte depletion has numerous RS cells and few lymphocytes."
+    src: { page: 195, quote: "Young adults, only type more common in women, presence of Lacunar RS variants, fibrosis surrounding nodules." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L12.085
+    kind: mcq
+    topic: hl-clinical
+    stem: "Which node group is most often involved in Hodgkin lymphoma?"
+    options: [Cervical, Axillary, Inguinal, Mediastinal]
+    answer: 0
+    why:
+      - "Correct: 60-70%."
+      - "10-15%."
+      - "6-12%."
+      - "6-11% (nodular sclerosis)."
+    src: { page: 196, quote: "Cervical nodes; are involved in 60 – 70 %" }
+    status: unverified
+  - id: hem.L12.086
+    kind: mcq
+    topic: hl-management
+    stem: "A 28-year-old has Hodgkin lymphoma stage IIIB. Which treatment matches the book?"
+    options: [Six to eight courses of ABVD, Extended-field radiotherapy alone, Three courses of ABVD plus localized radiotherapy, CHOP plus rituximab, Chlorambucil]
+    answer: 0
+    why:
+      - "Correct: advanced disease (IIB-IV) gets 6-8 courses of ABVD."
+      - "Radiotherapy alone is for early disease (IA/IIA)."
+      - "That is also for early disease."
+      - "R-CHOP is for DLBCL."
+      - "Chlorambucil is for follicular lymphoma."
+    src: { page: 198, quote: "Advanced disease (Stage IIB-IV) Treated with six to eight courses of combination chemotherapy (ABVD)" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L12.087
+    kind: mcq
+    topic: nhl-basics
+    stem: "A gastric lymphoma regresses after eradication therapy. Which agent is linked to this lymphoma?"
+    options: [Helicobacter pylori, HTLV-1, HHV-8, EBV]
+    answer: 0
+    why:
+      - "Correct: H. pylori is linked to MALT lymphoma."
+      - "HTLV-1 causes adult T-cell leukaemia/lymphoma."
+      - "HHV-8 causes primary effusion lymphoma."
+      - "EBV is linked to post-transplant lymphoproliferative disorder (and Burkitt, Hodgkin)."
+    src: { page: 199, quote: "Helicobacter pylori (MALT)" }
+    status: unverified
+  - id: hem.L12.088
+    kind: mcq
+    topic: nhl-basics
+    stem: "A kidney transplant recipient on tacrolimus develops a rapidly growing node mass. Which agent and lymphoma are most likely?"
+    options: ["EBV, post-transplant lymphoproliferative disorder", "HHV-8, primary effusion lymphoma", "HTLV-1, ATLL", "H. pylori, MALT lymphoma"]
+    answer: 0
+    why:
+      - "Correct: therapy-induced immunodeficiency plus EBV gives PTLD."
+      - "PEL presents as effusions, mainly in HIV."
+      - "ATLL is HTLV-1 related, not transplant-related."
+      - "MALT is gastric and H. pylori-related."
+    src: { page: 199, quote: "PLTD =post-transplantation lymphoproliferative disorder" }
+    status: unverified
+  - id: hem.L12.089
+    kind: mcq
+    topic: nhl-pathology
+    stem: "Which lymphoma is classed as highly aggressive in the WHO slide?"
+    options: [Burkitt lymphoma, Follicular lymphoma, Mantle cell lymphoma, Marginal zone lymphoma, Small lymphocytic lymphoma]
+    answer: 0
+    why:
+      - "Correct: lymphoblastic and Burkitt are highly aggressive."
+      - "Indolent."
+      - "Aggressive, with DLBCL."
+      - "Indolent."
+      - "Indolent."
+    src: { page: 202, quote: "Highly Aggressive NHL Lymphoblastic Lymphoma Burkitt's Lymphoma" }
+    status: unverified
+  - id: hem.L12.090
+    kind: mcq
+    topic: nhl-pathology
+    stem: "Convoluted (cerebriform) nuclei on a blood film suggest which group?"
+    options: ["Mycosis fungoides, Sézary syndrome or ATLL", "Follicular lymphoma", "Marginal zone lymphoma", "Mantle cell lymphoma"]
+    answer: 0
+    why:
+      - "Correct: convoluted nuclei are the T-cell lymphomas listed."
+      - "Follicular cells are cleaved."
+      - "Marginal zone cells are monocytoid."
+      - "Mantle cell nuclei are irregular."
+    src: { page: 200, quote: "Convoluted Mycosis fungoides Sezary syndrome Adult T cell leukemic lymphoma" }
+    status: unverified
+  - id: hem.L12.091
+    kind: mcq
+    topic: hl-vs-nhl
+    stem: "Which feature favours NHL over Hodgkin lymphoma?"
+    options: [Skin or GI involvement, Contiguous centripetal nodal spread, Usually localized disease, Mediastinal mass in a young woman]
+    answer: 0
+    why:
+      - "Correct: GIT and skin involvement are common in NHL and extremely rare in Hodgkin."
+      - "Centripetal (axial) spread is Hodgkin."
+      - "Hodgkin is usually localized; NHL rarely is."
+      - "Mediastinal disease is common in Hodgkin (nodular sclerosis)."
+    src: { page: 204, quote: "Extremely rare Common GIT involvement Extremely rare Common Skin involvement" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L12.092
+    kind: mcq
+    topic: follicular
+    stem: "A 62-year-old has painless generalized lymphadenopathy for 3 years and is well. Node biopsy: nodular pattern of small cleaved B cells, BCL-2 positive. What is the main long-term risk?"
+    options: [Transformation to an aggressive diffuse lymphoma, Hypercalcaemia, Spinal cord compression from lytic lesions, Hyperviscosity]
+    answer: 0
+    why:
+      - "Correct: follicular lymphoma may suddenly transform to an aggressive diffuse tumour."
+      - "A myeloma complication, not follicular lymphoma."
+      - "Myeloma, not follicular lymphoma."
+      - "Paraprotein disorders, not follicular lymphoma."
+    src: { page: 204, quote: "sudden transformation may occur to aggressive diffuse tumours which are sometimes associated with a leukemic phase." }
+    status: unverified
+  - id: hem.L12.093
+    kind: mcq
+    topic: dlbcl
+    stem: "A 65-year-old with diffuse large B-cell lymphoma, stage III. Which regimen does the book call the gold standard, now improved by adding an antibody?"
+    options: [CHOP plus rituximab, ABVD, CVP, Fludarabine and cyclophosphamide]
+    answer: 0
+    why:
+      - "Correct: CHOP is the gold standard and rituximab (anti-CD20) improves survival; every 3 weeks for 6-8 courses."
+      - "ABVD is for Hodgkin lymphoma."
+      - "CVP is a follicular lymphoma regimen."
+      - "A follicular lymphoma option."
+    src: { page: 206, quote: "Recently, the addition of CD20 antibody (Rituximab) to CHOP has improved survival rates." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L12.094
+    kind: mcq
+    topic: workup
+    stem: "Which marker is expressed exclusively on B cells and is the target of rituximab?"
+    options: [CD20, CD30, CD15, CD3]
+    answer: 0
+    why:
+      - "Correct: CD20 is exclusive to B cells; rituximab is anti-CD20."
+      - "CD30 marks RS cells."
+      - "CD15 marks RS cells."
+      - "CD3 is a T-cell marker."
+    src: { page: 192, quote: "The CD 20 is one such molecule exclusively expressed on B-cells." }
+    status: unverified
+  - id: hem.L12.095
+    kind: mcq
+    topic: dlbcl
+    stem: "Which finding carries a relatively good prognosis in DLBCL?"
+    options: [3q27 translocation with BCL-6 overexpression, High LDH, Advanced stage, Extranodal disease, Older age]
+    answer: 0
+    why:
+      - "Correct: the book says these cases have a relatively good prognosis."
+      - "High LDH worsens prognosis (IPI)."
+      - "Advanced stage worsens prognosis."
+      - "Extranodal disease worsens prognosis."
+      - "Increasing age worsens prognosis."
+    src: { page: 205, quote: "Cases associated with 3q27 translocation showing BCL-6 over expression, have a relative good prognosis." }
+    status: unverified
+  # ---------- cases ----------
+  - id: hem.L12.096
+    kind: case
+    topic: hl-clinical
+    stem: "A 22-year-old woman has a painless, rubbery left neck lump for 2 months, itching and night sweats."
+    steps:
+      - reveal: "Firm, discrete, non-tender rubbery cervical nodes. CXR: widened mediastinum."
+        question: Best diagnostic step?
+        options: ["Excision biopsy of a lymph node", "Fine-needle aspiration only", "Antibiotics and review in 2 weeks", "Bone marrow aspirate"]
+        answer: 0
+        why: "Hodgkin is diagnosed by histology of an excised node; FNA cannot show the architecture."
+      - reveal: "Histology: lacunar RS cells, CD30+ CD15+, bands of fibrosis around nodules."
+        question: Diagnosis?
+        options: ["Nodular sclerosis Hodgkin lymphoma", "Mixed cellularity Hodgkin", "Follicular lymphoma", "DLBCL"]
+        answer: 0
+        why: "Lacunar variants with nodular fibrosis in a young woman with a mediastinal mass."
+      - reveal: "CT: cervical and mediastinal nodes only. Marrow trephine clear. She has drenching night sweats."
+        question: Stage?
+        options: [IIB, IIA, IIIB, IB]
+        answer: 0
+        why: "Two node groups above the diaphragm = II; night sweats = B. Itching is not a B symptom."
+      - question: Treatment per the book?
+        options: ["Six to eight courses of ABVD", "Extended-field radiotherapy alone", "R-CHOP", "Chlorambucil"]
+        answer: 0
+        why: "Stage IIB-IV is advanced disease: 6-8 courses of ABVD."
+    src: { page: 198, quote: "Advanced disease (Stage IIB-IV) Treated with six to eight courses of combination chemotherapy (ABVD)" }
+    status: unverified
+  - id: hem.L12.097
+    kind: case
+    topic: dlbcl
+    stem: "A 68-year-old man has fever, night sweats, 9 kg weight loss and a fast-growing abdominal mass over 6 weeks."
+    steps:
+      - reveal: "CT: bulky retroperitoneal nodes and a gastric wall mass. LDH raised."
+        question: Which lymphoma type is most likely?
+        options: ["Diffuse large B-cell lymphoma", "Follicular lymphoma", "Lymphocyte predominance Hodgkin", "Small lymphocytic lymphoma"]
+        answer: 0
+        why: "Rapidly progressive with B symptoms and extranodal (GIT) involvement fits high-grade DLBCL."
+      - reveal: "Biopsy: sheets of large CD20+ cells (centroblasts)."
+        question: Which IPI features does he have (book list)?
+        options: ["Age, raised LDH, extranodal disease and advanced stage", "Only age", "Only LDH", "None"]
+        answer: 0
+        why: "The book's IPI: extranodal disease, advanced stage, elevated LDH and increasing age all worsen prognosis."
+      - question: Treatment?
+        options: ["R-CHOP every 3 weeks for 6-8 courses, radiotherapy to bulky residual masses", "ABVD", "Watch and wait", "Single-agent chlorambucil"]
+        answer: 0
+        why: "CHOP is the gold standard; rituximab improves survival; radiotherapy to bulky or residual sites after chemotherapy."
+    src: { page: 206, quote: "The treatment is administered every 3 weeks for a total of six or eight courses." }
+    status: unverified
+  - id: hem.L12.098
+    kind: case
+    topic: follicular
+    stem: "A 58-year-old woman has had slowly enlarging painless nodes in the neck, axillae and groins for 2 years."
+    steps:
+      - reveal: "Node biopsy: follicular pattern of small cleaved B cells. Marrow involved."
+        question: Which cytogenetic finding do you expect?
+        options: ["t(14;18) with BCL-2", "t(8;14) with c-MYC", "t(11;14) with cyclin D1", "3q27 with BCL-6"]
+        answer: 0
+        why: "Follicular lymphoma: t(14;18), constitutive BCL-2."
+      - question: "Her stage is IV. Is that unusual?"
+        options: ["No: most follicular lymphoma presents at stage III or IV", "Yes: it is usually localized", "Yes: marrow is never involved", "It cannot be staged"]
+        answer: 0
+        why: "The majority have stage III or IV disease, yet the course is benign for about 10 years."
+      - question: Which option is in the book's treatment list?
+        options: ["Rituximab alone or with chemotherapy", "ABVD", "Extended-field radiotherapy", "Allogeneic transplant first line"]
+        answer: 0
+        why: "Book: chlorambucil, cyclophosphamide, CVP, fludarabine combinations, and rituximab alone or with chemotherapy."
+    src: { page: 204, quote: "Rituximab (Anti CD20) is also effective alone or in combination with chemotherapy." }
+    status: unverified
+  # ---------- essays ----------
+  - id: hem.L12.099
+    kind: essay
+    topic: hl-clinical
+    prompt: Discuss the clinical picture, investigations and treatment of Hodgkin lymphoma.
+    outline:
+      - "Nodes": ["Painless, rubbery, discrete, asymmetrical; may mat", "Cervical 60-70%, axillary 10-15%, inguinal 6-12%, mediastinal 6-11% (nodular sclerosis)"]
+      - "Organs and symptoms": ["Splenomegaly 50% (seldom massive), liver", "Fever 30% (cyclic), sweats, weight loss, pruritus 25%"]
+      - "Investigations": ["Excision node biopsy: RS cells CD30+ CD15+", "Normocytic anaemia, eosinophilia, high ESR, LDH; CT, marrow trephine, PET"]
+      - "Staging": ["Ann Arbor I-IV", "B = fever, night sweats, weight loss 10% in 6 months"]
+      - "Treatment": ["IA/IIA: extended-field RT or 3 ABVD + local RT", "IIB-IV: 6-8 courses ABVD"]
+    src: { page: 196, quote: "Painless, non-tender, asymmetrical, firm, discrete and rubbery. Lymph nodes may become matted." }
+    status: unverified
+  - id: hem.L12.100
+    kind: essay
+    topic: hl-vs-nhl
+    prompt: Compare Hodgkin and non-Hodgkin lymphoma.
+    outline:
+      - "Cells": ["Hodgkin: RS cells (CD30, CD15), clonal crippled germinal-centre B cells", "NHL: B (85%) or T (15%) clonal lymphocytes"]
+      - "Spread": ["Hodgkin: nodal, centripetal, usually localized", "NHL: often extranodal, centrifugal, rarely localized"]
+      - "Sites": ["Marrow and blood: uncommon in Hodgkin, frequent in NHL", "GIT, skin, CNS: extremely rare in Hodgkin; common or occasional in NHL"]
+      - "Symptoms": ["B symptoms 40% Hodgkin vs 20% NHL", "Mediastinum common in Hodgkin"]
+    src: { page: 203, quote: "Comparison of Non-Hodgkin’s Lymphoma and Hodgkin’s Lymphoma" }
+    status: unverified
+  - id: hem.L12.101
+    kind: essay
+    topic: nhl-basics
+    prompt: Enumerate the predisposing factors of non-Hodgkin lymphoma.
+    outline:
+      - "Immunodeficiency": ["Primary: ataxia-telangiectasia, Wiskott-Aldrich, CVID, X-linked LPD", "Secondary: transplantation, immunosuppressive therapy"]
+      - "Autoimmune": ["Rheumatoid, Sjögren, Hashimoto"]
+      - "Microbial": ["HIV, EBV (PTLD), HTLV-1 (ATLL)", "HHV-8 (PEL), H. pylori (MALT)"]
+      - "Environmental": ["Pesticides, herbicides, fertilizers, benzene", "Chemotherapy, radiation"]
+    src: { page: 199, quote: "Predisposing etiological factors in the development of Non-Hodgkin’s Lymphoma" }
+    status: unverified

@@ -1,0 +1,553 @@
+schema: batna.lesson/v1
+lecture: hem.L05
+lessons:
+  # ------------------------------------------------------------------
+  - id: hem.L05.lesson1
+    title: "نهرين بيصبّوا في thrombin"
+    hook: "الـ cascade مش حفظ أرقام رومانية: هو نهرين بيتقابلوا عند factor X، وكل الحكاية بتخلص في thrombin."
+    minutes: 9
+    pages: [70, 73]
+    topics: [cascade, factors, inhibitors, fibrinolysis]
+    goals:
+      - "ترسم الـ intrinsic والـ extrinsic والـ common pathway"
+      - "تعرف أسامي الـ factors"
+      - "تعرف مين بيوقف التجلط ومين بيدوّب الجلطة"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 70
+        title: "Amplification"
+        quote: "Normal coagulation results from a series of amplification reactions in which procoagulant. Proteins (factors) circulate in plasma as inert precursors"
+        text: |
+          الـ factors بتلف في الـ plasma ==inert precursors==، ومحدش فيهم شغال لحد ما اللي قبله يشغّله.
+
+          ده الـ **cascade theory**: كل factor بيتحوّل لـ active form بالـ factor اللي قبله، في **chain reactions** بتكبّر الإشارة (amplification). جرح صغير يطلع جلطة كبيرة.
+      - kind: figure
+        page: 71
+        quote: "Eventually, both the extrinsic and internsic system lead to generation of the enzyme thrombin which converts fibrinogen to fibrin."
+        title: "نهرين بيتقابلوا"
+        alt: "Two streams. Intrinsic: XII to XI to IX, then IX with VIII. Extrinsic: tissue factor III with VII. Both meet at factor X. Common pathway: X with V converts prothrombin II to thrombin, thrombin converts fibrinogen I to fibrin, XIII cross-links it."
+        caption: "الـ **intrinsic** (12 ← 11 ← 9 + 8) والـ **extrinsic** (3 + 7) بيتقابلوا في ==factor X==، وبعدين X + V يعملوا thrombin، والـ thrombin يحوّل fibrinogen لـ fibrin."
+        svg: |
+          <svg viewBox="0 0 330 360" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L05a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="fg-head"/></marker></defs>
+            <text x="70" y="20" text-anchor="middle" class="t-sm t-b t-acc">INTRINSIC</text>
+            <text x="250" y="20" text-anchor="middle" class="t-sm t-b t-good">EXTRINSIC</text>
+            <rect x="35" y="30" width="70" height="26" rx="8" class="fg-acc"/><text x="70" y="48" text-anchor="middle" class="t-sm">XII</text>
+            <path d="M70 56 V72" class="fg-arrow" marker-end="url(#L05a)"/>
+            <rect x="35" y="74" width="70" height="26" rx="8" class="fg-acc"/><text x="70" y="92" text-anchor="middle" class="t-sm">XI</text>
+            <path d="M70 100 V116" class="fg-arrow" marker-end="url(#L05a)"/>
+            <rect x="20" y="118" width="100" height="26" rx="8" class="fg-acc"/><text x="70" y="136" text-anchor="middle" class="t-sm">IX + VIII</text>
+            <rect x="200" y="30" width="100" height="40" rx="8" class="fg-good"/><text x="250" y="48" text-anchor="middle" class="t-sm">Tissue factor</text><text x="250" y="63" text-anchor="middle" class="t-sm">(III) + VII</text>
+            <path d="M70 144 L150 180" class="fg-arrow" marker-end="url(#L05a)"/>
+            <path d="M250 70 L180 180" class="fg-arrow" marker-end="url(#L05a)"/>
+            <text x="225" y="200" class="t-sm t-mut">COMMON</text>
+            <rect x="110" y="182" width="110" height="28" rx="8" class="fg-ink"/><text x="165" y="201" text-anchor="middle" class="t-b">X + V</text>
+            <path d="M165 210 V228" class="fg-arrow" marker-end="url(#L05a)"/>
+            <rect x="80" y="230" width="170" height="28" rx="8" class="fg-box"/><text x="165" y="249" text-anchor="middle" class="t-sm">Prothrombin (II) → Thrombin</text>
+            <path d="M165 258 V276" class="fg-arrow" marker-end="url(#L05a)"/>
+            <rect x="80" y="278" width="170" height="28" rx="8" class="fg-box"/><text x="165" y="297" text-anchor="middle" class="t-sm">Fibrinogen (I) → Fibrin</text>
+            <path d="M165 306 V324" class="fg-arrow" marker-end="url(#L05a)"/>
+            <rect x="80" y="326" width="170" height="28" rx="8" class="fg-bad"/><text x="165" y="345" text-anchor="middle" class="t-sm t-b">XIII: cross-linked fibrin</text>
+          </svg>
+      - kind: reveal
+        page: 71
+        quote: "this pathway is intiated where factor III (tissue thromboplastin), a substance not found in the blood enters the vascular system."
+        prompt: "ليه اسمه extrinsic؟"
+        answer: |
+          لأنه بيبدأ بحاجة **من بره الدم**: ==factor III (tissue thromboplastin)== ماهوش موجود في الدم، وبيدخل الـ vascular system لما الأنسجة تتعوّر.
+
+          الـ intrinsic بقى كل مكوّناته **جوه الدم** (XII بيتنشّط على collagen أو activators تانية).
+      - kind: table
+        page: 71
+        quote: "The coagulation factors"
+        title: "أسامي الـ factors"
+        columns: [No., Name]
+        rows:
+          - ["I", "Fibrinogen"]
+          - ["II", "Prothrombin"]
+          - ["III", "Tissue factor"]
+          - ["V", "Labile factor"]
+          - ["VII", "Proconvertin"]
+          - ["VIII", "Antihemophilic globulin"]
+          - ["IX", "Christmas factor"]
+          - ["X", "Stuart-Prower"]
+          - ["XI", "Plasma thromboplastin antecedent"]
+          - ["XII", "Hageman"]
+          - ["XIII", "Fibrin-stabilizing"]
+        hide: [[3, 1], [5, 1], [6, 1], [7, 1], [9, 1], [10, 1]]
+      - kind: aside
+        tone: joke
+        page: 71
+        quote: "The coagulation factors"
+        text: |
+          الـ **Christmas factor (IX)** اتسمّى على اسم أول عيان اتشخّص بيه، Stephen Christmas، مش على العيد. يعني لو عيان هيموفيليا B قالك "أنا عندي Christmas" ما تبعتلوش تهنئة.
+
+          (المعلومة التاريخية مش من الكتاب، بس الاسم من جدول ص 71.)
+      - kind: check
+        page: 71
+        quote: "Eventually, both the extrinsic and internsic system lead to generation of the enzyme thrombin which converts fibrinogen to fibrin."
+        question: "Where do the intrinsic and extrinsic pathways meet?"
+        options: ["Factor X", "Factor XII", "Factor VII", "Factor XIII"]
+        answer: 0
+        why:
+          - "صح: الاتنين بيشغّلوا X، ومن هنا الـ common pathway."
+          - "الـ XII أول الـ intrinsic بس."
+          - "الـ VII في الـ extrinsic بس، مع الـ tissue factor."
+          - "الـ XIII آخر خطوة: بيربط الـ fibrin (cross-linking)."
+      - kind: explain
+        page: 72
+        title: "الفرامل: natural inhibitors"
+        quote: "Antithrombin III, most potent. It inactivate seriene proteases by combining with them. Heparin potentiates its action markedly."
+        text: |
+          1. **TFPI** (tissue factor pathway inhibitor): في الـ plasma والـ platelets، بيوقف **Xa** و **VIIa** والـ tissue factor.
+          2. ==Antithrombin III==: **الأقوى**، بيلزق في الـ serine proteases ويوقفها. والـ **heparin** بيقوّيه جدًا.
+          3. **Protein C** و **protein S**.
+          4. **Thrombomodulin**: الـ thrombin يلزق فيه على الـ endothelium، فيشغّل **protein C**، اللي مع **protein S** يكسّر **V** و **VIII**.
+      - kind: aside
+        tone: analogy
+        page: 72
+        quote: "Thrombin binds to an endothelial surface receptor thrombomodulin. The resulting complex activate the vitamin K dependent serine protease C"
+        text: |
+          الـ **thrombin** هنا زي الجهاز اللي بيقفل نفسه: طول ما هو في الجرح بيجلّط، ولما يوصل للـ endothelium السليم ويمسك في **thrombomodulin** يتحوّل لفرامل ويشغّل **protein C**. كده الجلطة ما تكبرش بره الجرح.
+      - kind: explain
+        page: 72
+        title: "Fibrinolysis: المنظّف"
+        quote: "The most important route follows the release of tPA (Tissue plasminogen activator) from endothelium."
+        text: |
+          - **Plasminogen** (globulin proenzyme) بيتحوّل لـ **plasmin** بـ activators من جدار الوعاء أو الأنسجة.
+          - أهم طريق: ==tPA== من الـ endothelium، وهو serine protease بيلزق في الـ fibrin.
+          - **Activated protein C** بيزوّد الـ fibrinolysis لأنه بيكسّر الـ tPA inhibitors.
+          - الـ **plasmin** بيهضم fibrinogen و fibrin و factor V و VIII.
+      - kind: figure
+        page: 73
+        quote: "Thrombin Fibrinogen Plasmin Fibrinolysis"
+        title: "التجلّط والتدويب"
+        alt: "Three panels left to right. Coagulation: thrombin converts fibrinogen to fibrin polymer. Clot. Fibrinolysis: thrombin also activates plasmin, which breaks the fibrin polymer into fibrin fragments."
+        caption: "نفس الـ **thrombin** اللي بيبني الجلطة بيشغّل كمان الـ fibrinolysis: ==plasmin== بيكسّر الـ fibrin لـ **fibrin fragments** (FDPs)."
+        svg: |
+          <svg viewBox="0 0 330 220" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L05b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="fg-head"/></marker></defs>
+            <rect x="110" y="10" width="110" height="30" rx="8" class="fg-bad"/><text x="165" y="30" text-anchor="middle" class="t-b">Thrombin</text>
+            <rect x="10" y="80" width="100" height="30" rx="8" class="fg-box"/><text x="60" y="100" text-anchor="middle" class="t-sm">Fibrinogen</text>
+            <path d="M110 95 H140" class="fg-arrow" marker-end="url(#L05b)"/>
+            <path d="M150 40 V75" class="fg-arrow" marker-end="url(#L05b)"/>
+            <rect x="140" y="78" width="80" height="36" rx="8" class="fg-acc"/><text x="180" y="100" text-anchor="middle" class="t-sm t-b">Fibrin</text>
+            <path d="M200 40 Q270 50 270 135" class="fg-arrow-acc" marker-end="url(#L05b)"/>
+            <text x="270" y="150" text-anchor="middle" class="t-sm t-b">Plasmin</text>
+            <path d="M180 114 V170" class="fg-arrow" marker-end="url(#L05b)"/>
+            <rect x="120" y="172" width="120" height="34" rx="8" class="fg-good"/><text x="180" y="194" text-anchor="middle" class="t-sm">Fibrin fragments</text>
+            <path d="M260 158 L240 180" class="fg-arrow" marker-end="url(#L05b)"/>
+          </svg>
+      - kind: try
+        items: [hem.L05.003, hem.L05.004, hem.L05.008, hem.L05.012, hem.L05.016]
+    recap:
+      - "Intrinsic XII ← XI ← IX + VIII. Extrinsic III + VII. الاتنين في X، وبعدين X + V ← thrombin ← fibrin، و XIII يربطه."
+      - "Extrinsic = factor III من بره الدم."
+      - "Inhibitors: TFPI (Xa، VIIa)، antithrombin III (الأقوى، heparin يقوّيه)، protein C/S (يكسّروا V و VIII) عن طريق thrombomodulin."
+      - "Fibrinolysis: tPA من الـ endothelium ← plasmin يهضم fibrinogen و fibrin و V و VIII."
+    practice: [hem.L05.001, hem.L05.002, hem.L05.003, hem.L05.004, hem.L05.005, hem.L05.006, hem.L05.007, hem.L05.008, hem.L05.009, hem.L05.010, hem.L05.011, hem.L05.012, hem.L05.013, hem.L05.014, hem.L05.015, hem.L05.016, hem.L05.017, hem.L05.018, hem.L05.019]
+  # ------------------------------------------------------------------
+  - id: hem.L05.lesson2
+    title: "PT ولا APTT؟ وبعدين الـ hemophilia"
+    hook: "تلات تحاليل بسيطة بيقولولك العيب في أنهي نهر، وبعدين الولد اللي ركبته بتورم."
+    minutes: 10
+    pages: [73, 76]
+    topics: [screening, deficiencies, hemophilia]
+    goals:
+      - "تقرا الـ TT والـ PT والـ APTT"
+      - "تعرف وراثة الـ hemophilia A و B ودرجاتها"
+      - "تجاوب سؤال الكتاب: management of hemophilia"
+    status: unverified
+    steps:
+      - kind: table
+        page: 73
+        quote: "Screening tests used in the diagnosis of coagulation disorders"
+        title: "الـ screening tests"
+        columns: [Test, Long in]
+        rows:
+          - ["Thrombin time", "DIC, heparin (fibrinogen low or abnormal)"]
+          - ["PT", "Low VII, X, II, I: liver disease, warfarin"]
+          - ["APTT", "Low XII, XI, IX, VIII, X, V, II, I: hemophilia A and B"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: mnemonic
+        page: 73
+        quote: "Screening tests used in the diagnosis of coagulation disorders"
+        word: "PET PITT"
+        parts:
+          - { key: "P", text: "PT" }
+          - { key: "E", text: "Extrinsic pathway (VII)" }
+          - { key: "T", text: "Tablets: warfarin, plus liver disease" }
+          - { key: "P", text: "PTT (APTT)" }
+          - { key: "I", text: "Intrinsic pathway (XII, XI, IX, VIII)" }
+          - { key: "T", text: "The hemophilias (A and B)" }
+          - { key: "T", text: "Thrombin time: heparin and DIC" }
+        hook: "أسهل طريقة تقرا الـ screening tests: **PET** = PT + Extrinsic. **PITT** = PTT + Intrinsic + الـ Thrombin time. وكلهم بيطولوا لو العيب في الـ common pathway."
+      - kind: check
+        page: 73
+        quote: "Screening tests used in the diagnosis of coagulation disorders"
+        question: "Screening tests: PT normal, APTT long, TT normal, platelets normal. Most likely disorder?"
+        options: ["Hemophilia", "Warfarin", "DIC", "Heparin"]
+        answer: 0
+        why:
+          - "صح: APTT لوحده = intrinsic = hemophilia أو Christmas disease."
+          - "الـ warfarin بيطوّل الـ PT الأول."
+          - "الـ DIC بيطوّل التلاتة والـ platelets واطية."
+          - "الـ heparin بيطوّل الـ thrombin time."
+      - kind: explain
+        page: 74
+        title: "Deficiencies: وراثي ومكتسب"
+        quote: "Acquired – due to: 1. Vitamin K deficiency 2. Liver disease 3. Consumption coagulopathy 4. Circulating inhibitors."
+        text: |
+          - **Congenital** (الأشهر): ==hemophilia A==، **von Willebrand disease**، **Christmas disease**، fibrinogen abnormalities.
+          - **Acquired**: **vitamin K deficiency**، **liver disease**، **consumption coagulopathy** (DIC)، **circulating inhibitors**.
+      - kind: explain
+        page: 74
+        title: "Hemophilia A"
+        quote: "Haemophilia A is inherited as X-linbed recessive disorder affecting males and transmitted by female."
+        text: |
+          - ==X-linked recessive==: بتصيب الرجالة وبتنقلها الستات.
+          - الـ **factor VIII gene** على طرف الـ long arm من الـ X.
+          - **FVIII:C** واطي أو مش موجود، و **VWF** و **VWF Ag** طبيعيين.
+      - kind: table
+        page: 74
+        quote: "VIII activity < 1% - sever bleeds after trival trauma. VIII activity 1-5% - moderate to sever post-traumatic bleeds."
+        title: "الدرجة على قد الـ VIII"
+        columns: [Bleeding, "VIII"]
+        rows:
+          - ["Severe after trivial trauma", "<1%"]
+          - ["Moderate–severe after trauma", "1–5%"]
+          - ["Mild; bleeds after surgery", "5–25%"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: reveal
+        page: 74
+        quote: "X-linbed recessive disorder affecting males and transmitted by female."
+        prompt: "الـ hemophilia A ==X-linked recessive==: ليه الـ males بيتصابوا والـ female لأ في الغالب، مع إن الأم هي اللي شايلة الجين؟"
+        answer: |
+          الولد عنده **X واحد** بس (من أمه). لو فيه الجين المعطوب مفيش X تاني يعوّض.
+
+          البنت عندها **اتنين X**: الطبيعي بيعمل VIII كفاية، فبتبقى ==carrier== وتنقله لنص ولادها الذكور. علشان كده الـ family history بتلاقيه في **خال** الولد.
+      - kind: explain
+        page: 75
+        title: "فين بينزف وإيه المضاعفات؟"
+        quote: "Arthritis, secondary to repeated haemorrhages 2. Peripheral nerve compression and pseudotumour. 3. FVIII antibodies/inhibitors in 5-10% of patients."
+        text: |
+          **النزيف**: في الـ ==synovial joints== (hemarthrosis، زي صورة الركبة في الكتاب)، في العضلات (في الـ severe)، من اللثة وخلع الأسنان، و epistaxis.
+
+          **المضاعفات**:
+          - **Arthritis** من النزيف المتكرر
+          - **Nerve compression** و **pseudotumor**
+          - **FVIII inhibitors** في **5–10%**
+          - **Chronic liver disease** (HBV، HCV) و **AIDS** من concentrates أوائل الثمانينات
+      - kind: explain
+        page: 76
+        title: "العلاج"
+        quote: "Treatment consists of I.V injection of factor VIII in a concentrated form to maintain plasma factor VIII activity between 5 and 100%"
+        text: |
+          - قبل **أي عملية** (prophylactic)، ومع **أول علامة** نزيف.
+          - **IV factor VIII concentrate** يخلّي الـ activity بين **5 و 100%** على حسب الإصابة أو العملية.
+          - ==Desmopressin== في الـ **mild**: بيطلّع FVIII من الـ endothelial cells.
+
+          **Hemophilia B (Christmas)**: عيب في **factor IX**، زي A في كل حاجة حتى الوراثة، بس أقل بكتير. العلاج **FFP** أو **factor IX concentrate**.
+      - kind: update
+        page: 76
+        quote: "Treatment consists of I.V injection of factor VIII in a concentrated form to maintain plasma factor VIII activity between 5 and 100%"
+        ref: "WFH Guidelines for the Management of Hemophilia, 3rd ed. 2020"
+        text: "الكتاب بيدّي **factor VIII concentrate** وقت الحاجة. دلوقتي الـ **regular prophylaxis** هو الـ standard في الـ severe hemophilia (مش on demand بس)، و **emicizumab** (bispecific antibody بيقلّد FVIIIa) بيتاخد كل أسبوع لشهر، مع أو من غير inhibitors."
+      - kind: case
+        page: 74
+        quote: "VIII activity 1-5% - moderate to sever post-traumatic bleeds."
+        stem: "A 7-year-old boy has a hot swollen knee, a post-traumatic bleed after a small fall. His maternal uncle had the same."
+        steps:
+          - question: "PT normal, APTT long, FVIII:C 3%, VWF Ag normal. Diagnosis?"
+            options: ["Moderate hemophilia A", "Severe hemophilia A", "Von Willebrand disease", "Hemophilia B"]
+            answer: 0
+            why: "**1–5%** = moderate. الـ VWF Ag طبيعي فمش VWD. والـ VIII واطي فمش B."
+          - question: "Best treatment now?"
+            options: ["IV factor VIII concentrate", "Desmopressin", "Vitamin K", "Platelets"]
+            answer: 0
+            why: "الـ desmopressin للـ **mild** بس. الـ vitamin K مالوش دعوة بـ VIII. والـ platelets طبيعية."
+      - kind: try
+        items: [hem.L05.020, hem.L05.025, hem.L05.028, hem.L05.030, hem.L05.087]
+    recap:
+      - "TT: heparin و DIC. PT: VII (extrinsic)، warfarin و liver. APTT: intrinsic، hemophilia A و B."
+      - "Hemophilia A: X-linked recessive، VIII واطي، VWF طبيعي."
+      - "<1% severe، 1–5% moderate، 5–25% mild."
+      - "مضاعفات: arthritis، nerve compression/pseudotumor، inhibitors 5–10%، hepatitis، AIDS."
+      - "العلاج: VIII concentrate (5–100%)، desmopressin في الـ mild. Hemophilia B: FFP أو IX."
+    practice: [hem.L05.020, hem.L05.021, hem.L05.022, hem.L05.023, hem.L05.024, hem.L05.025, hem.L05.026, hem.L05.027, hem.L05.028, hem.L05.029, hem.L05.030, hem.L05.031, hem.L05.032, hem.L05.033, hem.L05.034, hem.L05.035, hem.L05.036, hem.L05.037, hem.L05.038, hem.L05.039, hem.L05.040, hem.L05.083, hem.L05.087, hem.L05.089]
+  # ------------------------------------------------------------------
+  - id: hem.L05.lesson3
+    title: "Vitamin K، الكبد، والـ DIC"
+    hook: "تلات طرق تخسر بيها الـ factors: ما تتعملش، الكبد ما يعملهاش، أو تتحرق كلها في جلطات صغيرة."
+    minutes: 10
+    pages: [76, 80]
+    topics: [vitamin-k, dic, other-acquired]
+    goals:
+      - "تحفظ الـ vitamin K-dependent factors وأسباب النقص"
+      - "تفرّق liver disease عن vitamin K deficiency"
+      - "تجاوب سؤال الكتاب: causes and diagnosis of DIC"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 76
+        title: "الـ prothrombin complex"
+        quote: "The prothrombin complex or group which consist of factors II, VII, IX, X which are produced in the liver."
+        text: |
+          الـ ==prothrombin complex== = **II و VII و IX و X**، بيتعملوا في الـ **liver**.
+
+          الـ vitamin K (fat soluble) لازم للـ **carboxylase** اللي بيضيف **-COOH** للبروتينات دي في آخر خطوة، ومن غيرها مش بتشتغل كويس.
+      - kind: mnemonic
+        page: 76
+        quote: "The prothrombin complex or group which consist of factors II, VII, IX, X which are produced in the liver."
+        word: "1972"
+        parts:
+          - { key: "1", text: "X (ten): the 1 of 10" }
+          - { key: "9", text: "IX" }
+          - { key: "7", text: "VII" }
+          - { key: "2", text: "II" }
+        hook: "سنة **1972**: عشرة، تسعة، سبعة، اتنين. ده سهل تفتكره في الامتحان."
+      - kind: explain
+        page: 77
+        title: "أسباب النقص"
+        quote: "Secondary to oral anticoagulants 3- Prolonged treatment with broad spectrum antibiotics in association with low dietary intake in severly ill patients."
+        text: |
+          1. **Impaired absorption**: ==biliary obstruction==، pancreatic disease، steatorrhea (vitamin K fat soluble، محتاج bile).
+          2. **Oral anticoagulants** (warfarin).
+          3. **Broad-spectrum antibiotics** لفترة طويلة مع أكل قليل في العيان التعبان.
+          4. **Hemorrhagic disease of the newborn**.
+
+          مصدرها: **green vegetables** و **bacterial synthesis in the gut**.
+      - kind: reveal
+        page: 77
+        quote: "N.B vit K is obtained form green vegetables and bacterial synthesis in the gut"
+        prompt: "ليه عيان الـ ICU اللي بياخد meropenem أسبوعين ومش بياكل بيطوّل الـ PT؟"
+        answer: |
+          مصدرين بس للـ vitamin K: **الأكل** (green vegetables) و **بكتيريا الأمعاء**.
+
+          العيان ده مش بياكل، والـ antibiotic قتل البكتيريا. المصدرين اتقفلوا مع بعض، والـ II و VII و IX و X ما بقوش بيتعملوا صح.
+      - kind: explain
+        page: 77
+        title: "الصورة والعلاج"
+        quote: "Bruises, echymoses and mucous membrane bleeding. Lab findings PT increased APTT increased"
+        text: |
+          - **Clinically**: bruises، ecchymoses، mucous membrane bleeding.
+          - **Labs**: ==PT increased== و **APTT increased**.
+          - **العلاج**: **vitamin K** (10–20 mg في الكبار) و **FFP**.
+      - kind: explain
+        page: 77
+        title: "Liver disease: أكتر من vitamin K"
+        quote: "Impaired synthesis of factors V and fibrinogen. 3. Thrombocytopenia-due to folate depletion, alcoholism and/or hypersplenism. 4. Fibrinolysis."
+        text: |
+          1. نقص تصنيع **II و VII و IX و X**
+          2. نقص ==factor V== و **fibrinogen** (مش vitamin K-dependent)
+          3. **Thrombocytopenia**: folate depletion، alcohol، hypersplenism
+          4. **Fibrinolysis**
+
+          التشخيص زي الـ vitamin K deficiency **مع clotting defects زيادة**. النزيف غالبًا mild، بس ممكن severe من الـ **varices**. العلاج: السبب، و vitamin K (لوحده **ممكن ما ينفعش**)، و FFP.
+      - kind: check
+        page: 78
+        quote: "Vitamin K (which alone may be relatively ineffective) fresh frozen plasma."
+        question: "Cirrhotic man, long PT that does not correct with vitamin K, low factor V. Why?"
+        options: ["Failed hepatic synthesis", "Hemophilia B", "Vitamin K overdose", "Heparin"]
+        answer: 0
+        why:
+          - "صح: الكبد مش قادر يعمل الـ factors أصلًا، فالـ vitamin K لوحده مش كفاية، والـ V الواطي بيأكد."
+          - "الـ hemophilia B وراثية وبتطوّل الـ APTT بس."
+          - "الجرعة الزيادة مش هتصلّح تصنيع فاشل."
+          - "الـ heparin بيطوّل الـ TT، ومالوش دعوة بالـ V."
+      - kind: explain
+        page: 78
+        title: "DIC: أسبابه"
+        quote: "Bacterial toxin e.g. gram negative septicemia, miningoccacal septicaemia. 3. Other infection e.g. falciparm maleria. 4. Hypovolaemic shock."
+        text: |
+          - **Bacterial toxins**: ==gram-negative septicemia==، meningococcal septicemia
+          - **Other infections**: falciparum malaria
+          - **Hypovolemic shock**
+          - **Obstetric**: amniotic fluid embolism، abruptio placentae، intrauterine death
+          - **Tissue factor release**: trauma، burns، malignancy
+      - kind: figure
+        page: 79
+        quote: "Widespread activation of coagulation"
+        title: "الـ DIC: بيجلّط وبينزف في نفس الوقت"
+        alt: "A loop. Widespread activation of coagulation and generalized platelet aggregation make microthrombi. Microthrombi consume clotting factors and platelets, which leads to bleeding. Microthrombi also trigger fibrinolysis, raising FDPs, which worsens bleeding. Red cells passing the microthrombi fragment into schistocytes."
+        caption: "الـ microthrombi بتاكل الـ ==factors والـ platelets==، فالعيان ينزف، والـ fibrinolysis بتطلّع FDPs، والـ RBCs بتتقطّع (schistocytes)."
+        svg: |
+          <svg viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L05c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="fg-head"/></marker></defs>
+            <rect x="45" y="10" width="240" height="44" rx="10" class="fg-acc"/>
+            <text x="165" y="30" text-anchor="middle" class="t-sm t-b">Widespread coagulation</text>
+            <text x="165" y="46" text-anchor="middle" class="t-sm">+ platelet aggregation</text>
+            <path d="M165 54 V80" class="fg-arrow" marker-end="url(#L05c)"/>
+            <rect x="85" y="82" width="160" height="32" rx="10" class="fg-ink"/>
+            <text x="165" y="103" text-anchor="middle" class="t-b">Microthrombi</text>
+            <path d="M120 114 L70 150" class="fg-arrow" marker-end="url(#L05c)"/>
+            <path d="M165 114 V150" class="fg-arrow" marker-end="url(#L05c)"/>
+            <path d="M210 114 L260 150" class="fg-arrow" marker-end="url(#L05c)"/>
+            <rect x="5" y="152" width="110" height="50" rx="10" class="fg-box"/>
+            <text x="60" y="173" text-anchor="middle" class="t-sm">Factors and</text>
+            <text x="60" y="190" text-anchor="middle" class="t-sm">platelets used up</text>
+            <rect x="120" y="152" width="90" height="50" rx="10" class="fg-box"/>
+            <text x="165" y="173" text-anchor="middle" class="t-sm">Fibrinolysis</text>
+            <text x="165" y="190" text-anchor="middle" class="t-sm">FDPs, D-dimer</text>
+            <rect x="215" y="152" width="110" height="50" rx="10" class="fg-box"/>
+            <text x="270" y="173" text-anchor="middle" class="t-sm">RBCs cut:</text>
+            <text x="270" y="190" text-anchor="middle" class="t-sm">schistocytes</text>
+            <path d="M60 202 L130 250" class="fg-arrow-bad" marker-end="url(#L05c)"/>
+            <path d="M165 202 V248" class="fg-arrow-bad" marker-end="url(#L05c)"/>
+            <path d="M270 202 V248" class="fg-arrow" marker-end="url(#L05c)"/>
+            <rect x="95" y="250" width="140" height="32" rx="10" class="fg-bad"/>
+            <text x="165" y="271" text-anchor="middle" class="t-b t-bad">Bleeding</text>
+            <rect x="225" y="250" width="100" height="32" rx="10" class="fg-bad"/>
+            <text x="275" y="271" text-anchor="middle" class="t-sm t-b">MAHA</text>
+            <text x="165" y="315" text-anchor="middle" class="t-sm t-mut">Low platelets, long PT/APTT/TT, low fibrinogen</text>
+          </svg>
+      - kind: sort
+        page: 79
+        quote: "Fibrinogen level-decreased, fibrin degredation products (FDP) and D-dimers presents."
+        prompt: "في الـ DIC، ده بيعلى ولا بيقل؟"
+        bins: ["Up or prolonged", "Down"]
+        cards:
+          - { text: "PT", bin: 0 }
+          - { text: "APTT", bin: 0 }
+          - { text: "Thrombin time", bin: 0 }
+          - { text: "D-dimer, FDPs", bin: 0 }
+          - { text: "Platelets", bin: 1 }
+          - { text: "Fibrinogen", bin: 1 }
+        why: "اللي بيتاكل في الجلطات (platelets و fibrinogen) بيقل، والتحاليل اللي بتقيس وقت التجلّط بتطول، ونواتج التكسير (FDPs و D-dimer) بتعلى."
+      - kind: explain
+        page: 80
+        title: "علاج الـ DIC وباقي الأسباب"
+        quote: "Treatment of the underlying disease e.g. antibiotics in septicemia. 2. General supportive measure e.g. treatment of hypoxia and shock."
+        text: |
+          1. ==Treat the underlying disease== (antibiotics في الـ septicemia)
+          2. **Support**: hypoxia و shock
+          3. النزيف: **fresh blood**، **FFP** و **cryoprecipitate**، **platelet concentrates**
+          4. **Heparin**: لسه **controversial**
+
+          **Circulating inhibitors**: antibodies ضد FVIII، و non-specific inhibitors في **SLE** و **RA**.
+          **Miscellaneous**: heparin و thrombolytics، **L-asparaginase**، **massive transfusion**.
+      - kind: try
+        items: [hem.L05.041, hem.L05.043, hem.L05.048, hem.L05.056, hem.L05.088]
+    recap:
+      - "Vitamin K factors **1972**: X، IX، VII، II. الأسباب: absorption (biliary، pancreas)، warfarin، antibiotics + أكل قليل، newborn."
+      - "Vitamin K deficiency: PT و APTT طوال. العلاج vitamin K و FFP."
+      - "Liver disease = نفس الكلام + V و fibrinogen واطيين + platelets واطية + fibrinolysis."
+      - "DIC: sepsis، malaria، shock، obstetric، tissue factor. Platelets ↓، fibrinogen ↓، PT/APTT/TT ↑، FDPs/D-dimer، schistocytes."
+      - "علاج DIC: السبب أولًا، support، replacement، والـ heparin controversial."
+    practice: [hem.L05.041, hem.L05.042, hem.L05.043, hem.L05.044, hem.L05.045, hem.L05.046, hem.L05.047, hem.L05.048, hem.L05.049, hem.L05.050, hem.L05.051, hem.L05.052, hem.L05.053, hem.L05.054, hem.L05.055, hem.L05.056, hem.L05.057, hem.L05.058, hem.L05.059, hem.L05.060, hem.L05.061, hem.L05.062, hem.L05.063, hem.L05.064, hem.L05.065, hem.L05.084, hem.L05.088, hem.L05.090]
+  # ------------------------------------------------------------------
+  - id: hem.L05.lesson4
+    title: "Antiphospholipid syndrome: جلطة وإجهاض"
+    hook: "مريضة شابة عندها DVT وفقدت حمل: لازم تفتكر APS، والتشخيص له قاعدة واحدة واضحة."
+    minutes: 8
+    pages: [80, 83]
+    topics: [aps]
+    goals:
+      - "تعرف الـ clinical والـ laboratory criteria"
+      - "تعرف قاعدة الـ 12 weeks"
+      - "تعالج الـ thrombosis والحمل (سؤال كتاب: diagnostic approach)"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 80
+        title: "ليه APS مهم؟"
+        quote: "The essential features are arterial or venous thrombosis or recurrent pregnancy loss or placental dysfunction"
+        text: |
+          ==acquired thrombophilia== منتشرة وليها morbidity و mortality عالية.
+
+          الأساس: **arterial أو venous thrombosis**، أو **recurrent pregnancy loss** أو **placental dysfunction**، في حد الـ **antiphospholipid antibody** عنده **persistently positive**.
+      - kind: explain
+        page: 81
+        title: "فين بتيجي الجلطة؟"
+        quote: "A characteristic of APS in an individual patient is the tendency to recurrent problems in the same vascular bed."
+        text: |
+          الأشهر: **DVT** و **PE** و **ischemic stroke**، بس أي وعاء ممكن، حتى الـ microvasculature (renal thrombotic microangiopathy).
+
+          والمميز: الجلطات بترجع في ==same vascular bed==. اللي جاتله stroke قبل كده، الجاية غالبًا stroke.
+      - kind: table
+        page: 81
+        quote: "Diagnostic criteria in APS Clinical criteria∗ - Thrombosis: arterial, venous or microvascular thrombosis in any tissue or organ"
+        title: "الـ criteria"
+        columns: [Domain, Criterion]
+        rows:
+          - ["Thrombosis", "Arterial, venous or microvascular, any organ"]
+          - ["Fetal death", "Normal fetus at ≥10 weeks"]
+          - ["Miscarriage", "≥3 consecutive before 10 weeks"]
+          - ["Premature birth", "Before 34 weeks from pre-eclampsia or placental insufficiency"]
+          - ["Laboratory", "aCL moderate/high, anti-β2-GPI >99th centile, or lupus anticoagulant"]
+        hide: [[1, 1], [2, 1], [3, 1], [4, 1]]
+      - kind: mnemonic
+        page: 81
+        quote: "There must be at least one clinical and at least one laboratory criterion present."
+        word: "1-1-12"
+        parts:
+          - { key: "1", text: "At least 1 clinical criterion" }
+          - { key: "1", text: "At least 1 laboratory criterion" }
+          - { key: "1", text: "Lab test positive twice," }
+          - { key: "2", text: "…on 2 occasions 12 weeks apart" }
+        hook: "**واحد، واحد، اتناشر**: 1 clinical + 1 lab، والتحليل يتعاد بعد **12 weeks**."
+      - kind: reveal
+        page: 81
+        quote: "as transient antibodies may occur, for example in infection. Such antibodies are not usually associated with clinical events."
+        prompt: "ليه ما نشخصش APS من تحليل واحد positive؟"
+        answer: |
+          لأن الـ antiphospholipid antibodies ممكن تطلع ==transient==، مثلًا مع **infection**، والـ antibodies دي غالبًا مش بتعمل جلطات.
+
+          علشان كده التحليل لازم يبقى **positive مرتين بينهم 12 weeks**.
+      - kind: check
+        page: 81
+        quote: "One or more premature births of a morphologically normal fetus before 34 weeks of gestation due to pre-eclampsia"
+        question: "Which counts as an APS pregnancy criterion?"
+        options: ["Birth at 31 weeks from severe pre-eclampsia", "Two miscarriages at 6 weeks", "Birth at 36 weeks from pre-eclampsia", "Gestational diabetes"]
+        answer: 0
+        why:
+          - "صح: premature birth قبل **34 weeks** بسبب pre-eclampsia."
+          - "لازم **3 أو أكتر** miscarriages متتالية قبل 10 weeks."
+          - "36 weeks بعد حد الـ 34."
+          - "الـ gestational diabetes مش criterion."
+      - kind: explain
+        page: 82
+        title: "علاج الجلطة"
+        quote: "These patients should remain on indefinite oral anticoagulation, maintaining an International Normalized Ratio (INR) of 3–4."
+        text: |
+          - ==Indefinite oral anticoagulation==.
+          - الـ target كان **INR 3–4**، بس دراستين randomized أثبتوا إن **INR 2–3** كفاية لأغلب المرضى.
+          - شوية فيهم small-vessel thrombosis (lacunar infarcts على الـ MRI) لسه محتاجين **3–4** علشان الـ cerebral thrombosis ما ترجعش.
+          - **Immunosuppression**: مش في الـ primary APS، إلا لو الجلطة رجعت مع anticoagulation قوي.
+          - **Catastrophic APS**: antithrombotics + **corticosteroids** + immunomodulators زي **rituximab**، life saving.
+      - kind: update
+        page: 82
+        quote: "a lower target INR of 2–3 is effective in preventing recurrent thrombosis in the majority of patients."
+        ref: "EULAR recommendations for APS in adults 2019"
+        text: "علشان نمنع الـ **recurrent thrombosis**: الـ **DOACs** (خصوصًا rivaroxaban) نتجنبها في الـ **triple-positive** وفي الـ arterial APS، والـ **warfarin** هو الاختيار الأول."
+      - kind: explain
+        page: 83
+        title: "الحمل"
+        quote: "approach increases the chance of a successful outcome of a healthy live birth from 30% to 70–80%."
+        text: |
+          الأم اللي عندها poor obstetric history من APS: ==LMWH + low-dose aspirin== empirically. نسبة الـ live birth بتطلع من **30%** لـ **70–80%**.
+
+          وفيه رأي: الـ combination كـ first line للي عندها **placental dysfunction** قبل كده، أما الـ **recurrent first-trimester loss** فـ supportive care الأول، و aspirin أو aspirin/heparin لو الحمل فشل تاني.
+      - kind: case
+        page: 81
+        quote: "There must be at least one clinical and at least one laboratory criterion present."
+        stem: "A 29-year-old woman had an unprovoked DVT. Last year she had a stillbirth at 22 weeks with a normal fetus. Anticardiolipin IgG is high twice, 12 weeks apart."
+        steps:
+          - question: "Does she meet the APS criteria?"
+            options: ["Yes", "No: she needs 3 miscarriages", "No: she needs lupus anticoagulant too", "No: one DVT is not enough"]
+            answer: 0
+            why: "عندها clinical (DVT و fetal death ≥10 weeks) و lab criterion positive مرتين بينهم 12 weeks. lab test واحد كفاية."
+          - question: "She becomes pregnant again. Treatment?"
+            options: ["LMWH plus low-dose aspirin", "Warfarin", "Rituximab", "Nothing"]
+            answer: 0
+            why: "**LMWH + low-dose aspirin**. الـ rituximab للـ catastrophic APS بس."
+      - kind: try
+        items: [hem.L05.067, hem.L05.071, hem.L05.073, hem.L05.074, hem.L05.086]
+    recap:
+      - "APS = thrombosis أو pregnancy morbidity + antiphospholipid antibodies persistently positive."
+      - "Lab: anticardiolipin (moderate/high)، anti-β2-GPI >99th، lupus anticoagulant."
+      - "Pregnancy: fetal death ≥10 weeks، ≥3 miscarriages <10 weeks، premature <34 weeks."
+      - "**1-1-12**: 1 clinical + 1 lab، positive مرتين بينهم 12 weeks."
+      - "Thrombosis: anticoagulation مدى الحياة، INR 2–3 لأغلبهم. Pregnancy: LMWH + aspirin (30% ← 70–80%)."
+    practice: [hem.L05.066, hem.L05.067, hem.L05.068, hem.L05.069, hem.L05.070, hem.L05.071, hem.L05.072, hem.L05.073, hem.L05.074, hem.L05.075, hem.L05.076, hem.L05.077, hem.L05.078, hem.L05.079, hem.L05.080, hem.L05.081, hem.L05.082, hem.L05.085, hem.L05.086]

@@ -1,0 +1,1308 @@
+schema: batna.content/v1
+lecture: geri.L07
+title: "Comprehensive geriatric assessment"
+author: "Dr. Amr Mahmoud Salamah"
+book: { chapter: 7, pages: [106, 130] }
+topics:
+  - { id: population, title: "Age groups and how disease differs in old age" }
+  - { id: cga, title: "Aims of geriatric medicine and what CGA is" }
+  - { id: indications, title: "Indications for CGA" }
+  - { id: benefits, title: "Benefits of CGA" }
+  - { id: mdt, title: "The geriatric multidisciplinary team" }
+  - { id: components, title: "The 12 components of CGA" }
+  - { id: function, title: "Functional assessment: Katz ADL and Lawton IADL" }
+  - { id: mobility, title: "Mobility, gait and balance" }
+  - { id: falls, title: "Falls risk assessment and FRAT" }
+  - { id: fracture, title: "Fracture risk: NICE, FRAX and QFracture" }
+  - { id: cognition, title: "Cognitive assessment and screening tools" }
+  - { id: psych, title: "Depression, suicide risk and the GDS" }
+  - { id: frailty, title: "Clinical Frailty Scale and grip strength" }
+  - { id: nutrition, title: "Nutrition: risk factors, MUST and MNA" }
+  - { id: social-meds, title: "Social history, medication review, quality of life and goals" }
+items:
+  # ---------- p106-107: population and disease in old age ----------
+  - id: geri.L07.001
+    kind: table
+    topic: population
+    title: Age groups of the elderly
+    columns: [Age (years), Group]
+    rows:
+      - ["60–80", "Young elderly (old adults)"]
+      - ["80–100", "Old elderly"]
+      - ["100–110", "Centenarians"]
+      - ["≥110", "Supercentenarians"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 106, quote: "60–80: young elderly or old adults 80–100: old elderly 100–110: Centenarians" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: geri.L07.002
+    kind: cloze
+    topic: population
+    text: "A 105-year-old is a {{c1::centenarian}}; someone aged 110 or more is a {{c2::supercentenarian}}."
+    src: { page: 106, quote: "100–110: Centenarians ≥ 110: Supercentenarians" }
+    status: unverified
+    tags: [numbers]
+  - id: geri.L07.003
+    kind: enumerate
+    topic: population
+    prompt: Enumerate the special characteristics of diseases in old age.
+    points:
+      - Senescence
+      - Impaired homeostasis
+      - Atypical features
+      - Non-specific presentation
+      - Multiple pathology
+      - Multiple aetiological factors
+      - Unreported illnesses
+    pass: 5
+    src: { page: 107, quote: "Senescence Impaired homeostasis Atypical features Non-specific presentation Multiple pathology Multiple aetiological factors Unreported illnesses" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L07.004
+    kind: mcq
+    topic: population
+    stem: An 84-year-old woman with diabetes, heart failure and osteoarthritis presents only with "not being herself" and going off her food. She has never mentioned her urinary incontinence. Which listed feature of disease in old age does NOT fit this picture?
+    options:
+      - Isolated single pathology with a typical presentation
+      - Non-specific presentation
+      - Multiple pathology
+      - Unreported illness
+      - Atypical features
+    answer: 0
+    why:
+      - "Correct: the book lists multiple pathology and atypical, non-specific presentations, the opposite of a single typical disease (p107)."
+      - "\"Not herself\" and off her food is a non-specific presentation, one of the listed features."
+      - "Three chronic diseases at once is multiple pathology, a listed feature."
+      - "Hidden incontinence is an unreported illness, a listed feature."
+      - "Presenting without the usual signs is an atypical feature, a listed feature."
+    src: { page: 107, quote: "Atypical features Non-specific presentation Multiple pathology Multiple aetiological factors Unreported illnesses" }
+    status: unverified
+  # ---------- p107: aims and definition ----------
+  - id: geri.L07.005
+    kind: enumerate
+    topic: cga
+    prompt: What are the aims of geriatric medicine?
+    points:
+      - Maintain health in old age through a high level of engagement and avoidance of disease
+      - Early detection and appropriate treatment of disease
+      - Maintain maximum independence consistent with irreversible disease and disability
+      - Sympathetic care and support during terminal illness
+    pass: 3
+    src: { page: 107, quote: "Maintenance of maximum independence consistent with irreversible disease and disability." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L07.006
+    kind: card
+    topic: cga
+    front: What is Comprehensive Geriatric Assessment (CGA)?
+    back: A multistep process of care. A multidimensional, holistic assessment of the older person's health and wellbeing leads to a plan for the issues that concern them (and their family or carers); interventions support the plan, and progress is reviewed and the plan reassessed at intervals.
+    src: { page: 107, quote: "Comprehensive Geriatric Assessment (CGA) is a process of care comprising a number of steps." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L07.007
+    kind: cloze
+    topic: cga
+    text: "CGA starts with a {{c1::multidimensional holistic}} assessment of the older person, which leads to a {{c2::plan}} addressing the issues that concern the person and their family or carers."
+    src: { page: 107, quote: "Initially, a multidimensional holistic assessment of an older person considers health and wellbeing and leads to the formulation of a plan" }
+    status: unverified
+  - id: geri.L07.008
+    kind: order
+    topic: cga
+    prompt: Put the CGA cycle in order.
+    steps:
+      - Assessment
+      - Creation of a problem list
+      - Personalised care plan
+      - Intervention
+      - Regular planned review (back to assessment)
+    src: { page: 108, quote: "Assessment Regular planned view" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L07.009
+    kind: mcq
+    topic: cga
+    stem: What is the primary goal of Comprehensive Geriatric Assessment (CGA)?
+    options:
+      - To reduce healthcare costs
+      - To provide holistic, multidimensional assessment and individualized care planning
+      - To replace family caregivers
+      - To focus solely on pharmacological treatments
+      - To eliminate the need for hospitalization
+    answer: 1
+    why:
+      - Fewer admissions may follow, but saving money is not the goal.
+      - "Correct: CGA is a holistic multidimensional assessment that leads to an individual plan (p107)."
+      - CGA plans with the family and carers; it does not replace them.
+      - Medicines are one of 12 components, not the whole of CGA.
+      - CGA lowers admission rates; it cannot remove the need for hospital.
+    src: { page: 107, quote: "a multidimensional holistic assessment of an older person considers health and wellbeing and leads to the formulation of a plan" }
+    status: unverified
+    tags: [book-question]
+  - id: geri.L07.010
+    kind: mcq
+    topic: population
+    stem: Which group is classified as "young elderly" according to the lecture?
+    options: ["50–60 years", "60–80 years", "80–100 years", "≥110 years", "40–50 years"]
+    answer: 1
+    why:
+      - Below 60 is not elderly in the lecture's groups.
+      - "Correct: 60–80 years are the young elderly or old adults (p106)."
+      - 80–100 years are the old elderly.
+      - 110 and over are supercentenarians.
+      - 40–50 years is middle age, not elderly.
+    src: { page: 106, quote: "60–80: young elderly or old adults" }
+    status: unverified
+    tags: [book-question, numbers]
+  # ---------- p108: indications ----------
+  - id: geri.L07.011
+    kind: enumerate
+    topic: indications
+    prompt: Enumerate the indications for CGA.
+    points:
+      - Frailty or a frailty syndrome (falls, confusion, reduced mobility, increasing incontinence), even if the cause looks reversible
+      - Elderly at risk of frailty
+      - After hospital discharge, especially if admitted for a frailty syndrome or a long stay for a trivial reason
+      - All elderly in care homes
+      - Elderly patients in the perioperative period
+      - Any elderly person referred for CGA
+    pass: 5
+    src: { page: 108, quote: "Elderly with frailty or one of the frailty syndromes as falls, confusion, reduced mobility and increasing incontinence" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L07.012
+    kind: card
+    topic: indications
+    front: An older person has new falls that seem due to a new medication. Is CGA still indicated?
+    back: Yes. Frailty syndromes are an indication even if they appear to be due to a reversible cause, such as a new medication or a minor infection.
+    src: { page: 108, quote: "even if these appear to be due to a reversible cause (such as a new medication or minor infection)." }
+    status: unverified
+  - id: geri.L07.013
+    kind: enumerate
+    topic: indications
+    prompt: Name the frailty syndromes the lecture lists as indications for CGA.
+    points: [Falls, Confusion, Reduced mobility, Increasing incontinence]
+    pass: 4
+    src: { page: 108, quote: "frailty syndromes as falls, confusion, reduced mobility and increasing incontinence" }
+    status: unverified
+  - id: geri.L07.014
+    kind: card
+    topic: indications
+    front: Which patients discharged from hospital especially need a CGA?
+    back: Those admitted for one of the frailty syndromes, or those with a long hospital stay for an otherwise trivial reason.
+    src: { page: 108, quote: "After discharge from a hospital especially if the cause of admission was one of the frailty syndromes or there was a long hospital stay" }
+    status: unverified
+  - id: geri.L07.015
+    kind: mcq
+    topic: indications
+    stem: What is a key indication for initiating a CGA?
+    options:
+      - Elderly patients with a single acute illness
+      - Elderly at risk of frailty or exhibiting frailty syndromes (e.g., falls, confusion)
+      - Patients under 50 years with chronic pain
+      - Stable, fully independent older adults
+      - Individuals with normal cognitive function
+    answer: 1
+    why:
+      - A single acute illness alone is not on the list.
+      - "Correct: frailty, a frailty syndrome, or being at risk of frailty are indications (p108)."
+      - CGA is for older people, not patients under 50.
+      - Fit, independent older adults are not on the indication list.
+      - Normal cognition is not an indication; confusion is.
+    src: { page: 108, quote: "Elderly at risk of frailty." }
+    status: unverified
+    tags: [book-question]
+  - id: geri.L07.016
+    kind: mcq
+    topic: indications
+    stem: Which of these older people does NOT have an indication for CGA listed in the lecture?
+    options:
+      - A fit 68-year-old marathon runner seen for a routine eye test
+      - A 79-year-old living in a care home
+      - An 83-year-old due for hip replacement next week
+      - An 88-year-old discharged after 3 weeks in hospital for a mild chest infection
+      - An 81-year-old with new urinary incontinence after starting a diuretic
+    answer: 0
+    why:
+      - "Correct: he is not frail, not at risk, not in care, not perioperative and not referred (p108)."
+      - All elderly in care homes need a CGA.
+      - The perioperative period is an indication.
+      - A long stay for a trivial reason is an indication after discharge.
+      - Increasing incontinence is a frailty syndrome, even with a reversible cause like a new drug.
+    src: { page: 108, quote: "All elderly at care homes. Elderly patients at the perioperative period." }
+    status: unverified
+  # ---------- p109: benefits ----------
+  - id: geri.L07.017
+    kind: enumerate
+    topic: benefits
+    prompt: Enumerate the benefits of CGA.
+    points:
+      - Decreases hospital admission rates
+      - Decreases length of hospital stay
+      - Decreases hospital-related complications
+      - More discharges to home instead of a nursing home
+      - Decreases hospital mortality
+      - Decreases readmission after discharge
+      - Discharge in a better health state
+      - Improves diagnostic accuracy
+      - Improves quality of life
+      - Better management and rehabilitation plan
+      - Identifies future treatment goals and supports advance care planning
+      - Perioperative benefit (better health, shorter stay, fewer complications)
+      - Can reverse the progression of frailty
+    pass: 8
+    src: { page: 109, quote: "Decreases hospital admission rates." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L07.018
+    kind: card
+    topic: benefits
+    front: Can CGA change the course of frailty?
+    back: Yes. Comprehensive assessment with individualized care planning can reverse the progression of frailty.
+    src: { page: 109, quote: "Comprehensive assessment and individualized care planning can reverse the progression of frailty." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L07.019
+    kind: card
+    topic: benefits
+    front: Benefits of CGA in the perioperative period?
+    back: Better health status, shorter postoperative hospital stay and fewer postoperative complications.
+    src: { page: 109, quote: "Improves health status for elderly patients in the perioperative period, decreases postoperative hospital stay, and decreases postoperative complications." }
+    status: unverified
+  - id: geri.L07.020
+    kind: cloze
+    topic: benefits
+    text: "CGA increases the rate of discharge to {{c1::home}} instead of a {{c2::nursing home}}, and decreases {{c3::readmission}} after discharge."
+    src: { page: 109, quote: "Increases rates of discharge to home instead of nursing home." }
+    status: unverified
+  - id: geri.L07.021
+    kind: mcq
+    topic: benefits
+    stem: A hospital starts CGA for all frail older inpatients. Which change is NOT a benefit the lecture expects?
+    options:
+      - Longer hospital stays to complete the assessment
+      - Lower hospital mortality
+      - Better diagnostic accuracy
+      - More discharges home instead of to nursing homes
+      - Support for advance care planning
+    answer: 0
+    why:
+      - "Correct: CGA decreases the length of stay (p109)."
+      - Decreased hospital mortality is a listed benefit.
+      - Improved diagnostic accuracy is a listed benefit.
+      - More discharges home is a listed benefit.
+      - Identifying future goals and advance care planning is a listed benefit.
+    src: { page: 109, quote: "Decreases length of hospital stay." }
+    status: unverified
+  # ---------- p109-110: MDT ----------
+  - id: geri.L07.022
+    kind: enumerate
+    topic: mdt
+    prompt: Who are the core members of the geriatric multidisciplinary team?
+    points: [Geriatrician, Nurse, Social worker, Occupational therapist, Physiotherapist]
+    pass: 5
+    src: { page: 109, quote: "Core Members: Geriatrician Nurse Social Worker Occupational Therapist Physiotherapist" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L07.023
+    kind: enumerate
+    topic: mdt
+    prompt: Enumerate the supporting members of the geriatric MDT.
+    points:
+      - Podiatrist
+      - Speech therapist
+      - Dietitian
+      - Prosthetic and orthotic specialist
+      - Psychogeriatrician
+      - Clinical psychologist
+      - Volunteer
+      - Others
+    pass: 5
+    src: { page: 110, quote: "Supporting Members Podiatrist Speech Therapist Dietitian Prosthetic & orthotic specialist Psychogeriatrician Clinical psychologist Volunteer" }
+    status: unverified
+  - id: geri.L07.024
+    kind: mcq
+    topic: mdt
+    stem: Which of the following is a core member of the Geriatric Multi-disciplinary Team (MDT)?
+    options: [Podiatrist, Dietitian, Social Worker, Speech Therapist, Psychogeriatrician]
+    answer: 2
+    why:
+      - The podiatrist is a supporting member.
+      - The dietitian is a supporting member.
+      - "Correct: the social worker is one of the five core members (p109)."
+      - The speech therapist is a supporting member.
+      - The psychogeriatrician is a supporting member.
+    src: { page: 109, quote: "Core Members: Geriatrician Nurse Social Worker" }
+    status: unverified
+    tags: [book-question]
+  # ---------- p110: components ----------
+  - id: geri.L07.025
+    kind: enumerate
+    topic: components
+    prompt: Enumerate the components of Comprehensive Geriatric Assessment.
+    points:
+      - Ordinary clinical examination
+      - Functional assessment (ADL, IADL)
+      - Mobility assessment
+      - Falls and fracture assessment
+      - Cognitive function assessment
+      - Psychological assessment
+      - Frailty assessment
+      - Nutritional assessment
+      - Socioeconomic and environmental assessment
+      - Medication review
+      - Quality of life assessment
+      - Goals of care, advance care preferences and spirituality
+    pass: 9
+    src: { page: 110, quote: "Components of CGA" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L07.026
+    kind: card
+    topic: components
+    front: The last component of CGA covers which three things?
+    back: Goals of care, advance care preferences and spirituality.
+    src: { page: 110, quote: "Goals of care, Advance care preferences & Spirituality" }
+    status: unverified
+  # ---------- p111-112: functional assessment ----------
+  - id: geri.L07.027
+    kind: card
+    topic: function
+    front: What can functional assessment encompass?
+    back: Mobility, activities of daily living, and the ability to use technologies for telecare; sensory loss also affects function.
+    src: { page: 111, quote: "Functional assessment can encompass multiple factors like mobility, activities of daily living and the ability to interact with technologies used for telecare." }
+    status: unverified
+  - id: geri.L07.028
+    kind: card
+    topic: function
+    front: Does poor vision or hearing make an older person non-functional?
+    back: Not necessarily. They can be as functional as anyone else, but with very different coping strategies.
+    src: { page: 111, quote: "someone with poor vision or hearing can still be as functional as anyone else but with very different coping strategies." }
+    status: unverified
+  - id: geri.L07.029
+    kind: table
+    topic: function
+    title: What the speed of functional loss tells you
+    columns: [Loss of function, Suggests, Leads to]
+    rows:
+      - [Sudden, Acute illness, Active investigation and management]
+      - [Slow and sustained, Progressive decline, A more supportive care environment]
+    blanks: [[0, 1], [0, 2], [1, 2]]
+    src: { page: 111, quote: "Sudden loss in function may indicate acute illness and guide towards active investigation and management" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L07.030
+    kind: enumerate
+    topic: function
+    prompt: What are the two components of a functional assessment?
+    points:
+      - What can and what does the person actually do?
+      - How recently has it changed?
+    pass: 2
+    src: { page: 111, quote: "There are two components of a functional assessment: What can and what does the person actually do? How recently has it changed?" }
+    status: unverified
+  - id: geri.L07.031
+    kind: mcq
+    topic: function
+    stem: A slow-sustained loss of function during functional assessment (ADL/IADL) may indicate the need for
+    options:
+      - Acute medical intervention
+      - Supportive care environment
+      - Increased medication dosage
+      - Surgical referral
+      - Genetic testing
+    answer: 1
+    why:
+      - Acute intervention fits a sudden loss of function.
+      - "Correct: a slow, sustained loss steers the patient to a more supportive care environment (p111)."
+      - More medicine is not the response to a slow functional decline.
+      - Surgery is not suggested by gradual loss of function.
+      - Genetic testing has no place here.
+    src: { page: 111, quote: "a slow-sustained loss of function may steer the patient to a more supportive care environment." }
+    status: unverified
+    tags: [book-question]
+  - id: geri.L07.032
+    kind: enumerate
+    topic: function
+    prompt: List the six activities of the Katz Index of Independence in ADL.
+    points: [Bathing, Dressing, Toileting, Transferring, Continence, Feeding]
+    pass: 5
+    src: { page: 111, quote: "Katz Index of Independence in Activities of Daily Living" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L07.033
+    kind: cloze
+    topic: function
+    text: "Katz ADL: each activity scores {{c1::1}} point if done with no supervision, direction or personal assistance; the total {{c2::6}} means independent and {{c3::0}} means very dependent."
+    src: { page: 111, quote: "SCORING: 6 = High (patient independent) 0 = Low (patient very dependent" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: geri.L07.034
+    kind: table
+    topic: function
+    title: Katz ADL, what scores 1 point (independence)
+    columns: [Activity, Independent (1 point)]
+    rows:
+      - [Bathing, "Bathes self completely, or needs help with only one part (back, genital area or a disabled limb)"]
+      - [Dressing, "Gets clothes and puts them on with fasteners; may have help tying shoes"]
+      - [Toileting, "Goes to the toilet, gets on and off, arranges clothes, cleans genital area without help"]
+      - [Transferring, "Moves in and out of bed or chair unassisted; mechanical aids acceptable"]
+      - [Continence, "Complete self-control over urination and defecation"]
+      - [Feeding, "Gets food from plate to mouth without help; food may be prepared by another person"]
+    blanks: [[0, 1], [1, 1], [3, 1], [5, 1]]
+    src: { page: 111, quote: "Bathes self completely or needs help in bathing only a single part of the body" }
+    status: unverified
+  - id: geri.L07.035
+    kind: card
+    topic: function
+    front: "Katz ADL: a man uses a mechanical hoist alone to move from bed to chair. Does he score for transferring?"
+    back: Yes, 1 point. Mechanical transfer aids are acceptable as long as he moves unassisted.
+    src: { page: 111, quote: "Moves in and out of bed or chair unassisted. Mechanical transfer aids are acceptable" }
+    status: unverified
+  - id: geri.L07.036
+    kind: card
+    topic: function
+    front: "Katz ADL: a woman eats on her own but her daughter cooks and cuts the food. Feeding score?"
+    back: 1 point. Feeding counts getting food from plate to mouth without help; preparation may be done by another person.
+    src: { page: 111, quote: "Gets food from plate into mouth without help. Preparation of food may be done by another person." }
+    status: unverified
+  - id: geri.L07.037
+    kind: enumerate
+    topic: function
+    prompt: List the eight domains of the Lawton–Brody IADL scale.
+    points:
+      - Ability to use the telephone
+      - Shopping
+      - Food preparation
+      - Housekeeping
+      - Laundry
+      - Mode of transportation
+      - Responsibility for own medications
+      - Ability to handle finances
+    pass: 6
+    src: { page: 112, quote: "LAWTON - BRODY INSTRUMENTAL ACTIVITIES OF DAILY LIVING SCALE (I.A.D.L.)" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L07.038
+    kind: cloze
+    topic: function
+    text: "Lawton IADL: each domain scores 0 or 1; the summary score ranges from 0 to {{c1::8}} for women and 0 to {{c2::5}} for men, to avoid {{c3::gender bias}}."
+    src: { page: 112, quote: "A summary score ranges from 0 (low function, dependent) to 8 (high function, independent) for women and 0 through 5 for men" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: geri.L07.039
+    kind: table
+    topic: function
+    title: Lawton IADL, examples of scoring
+    columns: [Finding, Score]
+    rows:
+      - ["Answers the telephone but does not dial", "1"]
+      - ["Shops independently only for small purchases", "0"]
+      - ["Prepares adequate meals only if supplied with ingredients", "0"]
+      - ["Needs help with all home maintenance tasks", "1"]
+      - ["Travels by taxi only, not otherwise by public transport", "1"]
+      - ["Takes medication only if prepared in advance in separate doses", "0"]
+      - ["Manages day-to-day purchases but needs help with banking", "1"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [5, 1], [6, 1]]
+    src: { page: 112, quote: "Takes responsibility if medication is prepared in advance in separate dosage" }
+    status: unverified
+  - id: geri.L07.040
+    kind: card
+    topic: function
+    front: "ADL versus IADL: what is the difference in the examples used?"
+    back: ADL (Katz) are basic self-care tasks (bathing, dressing, toileting, transferring, continence, feeding). IADL (Lawton) are tasks for living independently (telephone, shopping, cooking, housework, laundry, transport, medications, finances).
+    src: { page: 112, quote: "LAWTON - BRODY INSTRUMENTAL ACTIVITIES OF DAILY LIVING SCALE" }
+    status: unverified
+  # ---------- p112: mobility ----------
+  - id: geri.L07.041
+    kind: enumerate
+    topic: mobility
+    prompt: What does a mobility assessment include?
+    points:
+      - History taking
+      - Establishing current and prior function
+      - Understanding time periods
+      - Goal-setting and prior intervention
+      - What the patient needs to be able to do
+      - Gait and balance assessment
+      - Simple tests for walking and balance
+      - Onward referral
+    pass: 6
+    src: { page: 112, quote: "History taking Establishing current and prior function Understanding time periods Goal-setting and prior Intervention" }
+    status: unverified
+  - id: geri.L07.042
+    kind: enumerate
+    topic: mobility
+    prompt: Name the three simple tests for walking and balance.
+    points: [Timed up and go test, Gait speed, Chair stand]
+    pass: 3
+    src: { page: 112, quote: "Simple tests for walking and balance i. Timed up and go test ii. Gait speed iii. Chair stand" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L07.043
+    kind: mcq
+    topic: mobility
+    stem: What is the purpose of the "Get Up and Go Test" in falls assessment?
+    options:
+      - To measure bone density
+      - To evaluate gait speed and balance
+      - To diagnose osteoporosis
+      - To assess dietary habits
+      - To screen for cognitive impairment
+    answer: 1
+    why:
+      - Bone density needs DXA, not a walking test.
+      - "Correct: the timed up and go is one of the simple tests for walking and balance (p112, p113)."
+      - Osteoporosis is diagnosed by bone density, not by walking.
+      - Diet is covered in the nutritional assessment.
+      - Cognition has its own screening tools.
+    src: { page: 112, quote: "Simple tests for walking and balance i. Timed up and go test" }
+    status: unverified
+    tags: [book-question]
+  # ---------- p113-114: falls ----------
+  - id: geri.L07.044
+    kind: enumerate
+    topic: falls
+    prompt: Which patients should receive a multifactorial falls risk assessment?
+    points:
+      - Two or more falls in the past 12 months
+      - Presenting for medical attention with a fall
+      - Difficulty with walking or balance
+    pass: 3
+    src: { page: 113, quote: "Two or more falls in the past 12 months. Presentation for medical attention with a fall. Difficulty with walking or balance." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L07.045
+    kind: cloze
+    topic: falls
+    text: "A multifactorial falls risk assessment is due after {{c1::two or more}} falls in the past {{c2::12 months}}."
+    src: { page: 113, quote: "Two or more falls in the past 12 months." }
+    status: unverified
+    tags: [numbers]
+  - id: geri.L07.046
+    kind: enumerate
+    topic: falls
+    prompt: What should a multifactorial falls risk assessment cover?
+    points:
+      - A thorough history of falls and their circumstances
+      - Impact of co-morbidities
+      - Medication review
+      - Focused examination
+      - Lying and standing blood pressure
+      - Get up and go test and FRAT
+      - Home hazard assessment by a trained professional, usually an occupational therapist
+    pass: 6
+    src: { page: 113, quote: "Enquire about a history of falls (this needs to be thorough to establish the circumstances of the fall) Consider the impact of co-morbidities Review medications" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L07.047
+    kind: enumerate
+    topic: falls
+    prompt: What should the examination focus on in a falls assessment?
+    points:
+      - Vision
+      - Heart rhythm and rate
+      - Muscle strength
+      - Other neurological impairment
+      - Knee exam
+      - Peripheral sensation
+      - Feet and footwear
+      - Baseline cognitive assessment
+    pass: 6
+    src: { page: 113, quote: "Vision ii. Heart rhythm and rate iii. Muscle strength iv. Other neurological impairment" }
+    status: unverified
+  - id: geri.L07.048
+    kind: card
+    topic: falls
+    front: Who usually assesses home hazards in a falls work-up?
+    back: A trained professional, usually an occupational therapist.
+    src: { page: 113, quote: "Assessment of home hazards by a trained professional, usually an occupational therapist" }
+    status: unverified
+  - id: geri.L07.049
+    kind: card
+    topic: falls
+    front: Which blood pressure measurement belongs in every falls assessment?
+    back: A lying and standing blood pressure (to look for postural hypotension).
+    src: { page: 113, quote: "Perform a lying and standing blood pressure" }
+    status: unverified
+  - id: geri.L07.050
+    kind: table
+    topic: falls
+    title: FRAT part 1, fall risk status (each factor scores 1–4, or 2–8 for falls)
+    columns: [Risk factor, Lowest level, Highest level]
+    rows:
+      - ["Recent falls", "None in last 12 months = 2", "One or more in last 3 months while inpatient or resident = 8"]
+      - ["Medications (sedatives, antidepressants, anti-Parkinson's, diuretics, antihypertensives, hypnotics)", "Taking none = 1", "Taking more than two = 4"]
+      - ["Psychological (anxiety, depression, cooperation, insight or judgement)", "None = 1", "Severely affected by one or more = 4"]
+      - ["Cognitive status (AMTS)", "AMTS 9 or 10/10, intact = 1", "AMTS 4 or less, severely impaired = 4"]
+    blanks: [[0, 1], [0, 2], [1, 2], [3, 2]]
+    src: { page: 114, quote: "Falls Risk Assessment Tool" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: geri.L07.051
+    kind: cloze
+    topic: falls
+    text: "FRAT recent falls: none in 12 months = {{c1::2}}, one or more 3–12 months ago = 4, one or more in the last 3 months = {{c2::6}}, and in the last 3 months while an inpatient or resident = {{c3::8}}."
+    src: { page: 114, quote: "Falls Risk Assessment Tool" }
+    status: unverified
+    tags: [numbers]
+  - id: geri.L07.052
+    kind: cloze
+    topic: falls
+    text: "FRAT total is out of {{c1::20}}: low risk {{c2::5–11}}, medium 12–15, high {{c3::16–20}}."
+    src: { page: 114, quote: "Falls Risk Assessment Tool" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: geri.L07.053
+    kind: enumerate
+    topic: falls
+    prompt: Which findings give an automatic high falls risk on the FRAT?
+    points:
+      - Recent change in functional status or medications affecting safe mobility (or anticipated)
+      - Dizziness or postural hypotension
+    pass: 2
+    src: { page: 114, quote: "Falls Risk Assessment Tool" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L07.054
+    kind: card
+    topic: falls
+    front: What must be done if the FRAT status is high?
+    back: Commence a fall alert, and list the fall status on the care plan or flow chart.
+    src: { page: 114, quote: "IMPORTANT: IF HIGH, COMMENCE FALL ALERT" }
+    status: unverified
+  - id: geri.L07.055
+    kind: cloze
+    topic: falls
+    text: "FRAT cognitive status uses the {{c1::Hodkinson Abbreviated Mental Test Score (AMTS)}}: 9–10 intact = 1, 7–8 mildly impaired = 2, 5–6 moderately impaired = 3, {{c2::4 or less}} severely impaired = 4."
+    src: { page: 114, quote: "AMTS: Hodkinson Abbreviated Mental Test Score" }
+    status: unverified
+    tags: [numbers]
+  - id: geri.L07.056
+    kind: enumerate
+    topic: falls
+    prompt: List the areas of the FRAT part 2 risk factor checklist.
+    points: [Vision, Mobility, Transfers, Behaviours, Activities of daily living, Environment, Nutrition, Continence]
+    pass: 6
+    src: { page: 114, quote: "Falls Risk Assessment Tool" }
+    status: unverified
+  - id: geri.L07.057
+    kind: case
+    topic: falls
+    stem: An 81-year-old woman in a rehabilitation ward fell yesterday. She takes furosemide, amlodipine and zopiclone. She is mildly anxious but cooperative. AMTS 7/10.
+    steps:
+      - question: What is her FRAT recent-falls score?
+        options: ["8", "6", "4", "2"]
+        answer: 0
+        why: "One or more falls in the last 3 months while an inpatient or resident scores 8 (p114). 6 is a fall in the last 3 months outside care, 4 is 3–12 months ago, 2 is none."
+      - reveal: "Three listed drugs (a diuretic, an antihypertensive, a hypnotic) = 4. Mildly affected psychologically = 2. AMTS 7 = 2."
+        question: What is her total and risk band?
+        options: ["16, high", "14, medium", "12, medium", "18, high"]
+        answer: 0
+        why: "8 + 4 + 2 + 2 = 16, and 16–20 is high risk (p114). 12–15 would be medium."
+      - question: What must the team do now?
+        options: [Commence a fall alert and put the status on the care plan, Repeat the FRAT in a year, Stop all three drugs at once, Nothing until she falls again]
+        answer: 0
+        why: "High status: commence fall alert and list it on the care plan (p114). Medication review is part of the multifactorial assessment, but stopping everything at once is not the FRAT action."
+      - question: Which other measurement should be part of her multifactorial assessment?
+        options: [Lying and standing blood pressure, Serum vitamin B12 only, Bone scan, Spirometry]
+        answer: 0
+        why: "A lying and standing BP is in the falls assessment (p113); dizziness or postural hypotension also makes risk automatically high (p114)."
+    src: { page: 114, quote: "Falls Risk Assessment Tool" }
+    status: unverified
+  # ---------- p114-116: fracture risk ----------
+  - id: geri.L07.058
+    kind: cloze
+    topic: fracture
+    text: "NICE: consider fracture risk assessment in all women aged {{c1::65}} and over and all men aged {{c2::75}} and over."
+    src: { page: 114, quote: "In all women aged 65 years and over and all men aged 75 years and over." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: geri.L07.059
+    kind: enumerate
+    topic: fracture
+    prompt: Risk factors that prompt fracture risk assessment in women under 65 and men under 75 (NICE)?
+    points:
+      - Previous fragility fracture
+      - Current or frequent recent oral or systemic glucocorticoids
+      - History of falls
+      - Family history of hip fracture
+      - Other causes of secondary osteoporosis
+      - Low BMI (less than 18.5 kg/m²)
+      - Smoking
+      - Alcohol more than 14 units per week
+    pass: 6
+    src: { page: 115, quote: "Current use or frequent recent use of oral or systemic glucocorticoids History of falls Family history of hip fracture" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L07.060
+    kind: cloze
+    topic: fracture
+    text: "Fracture risk factors (NICE) include BMI less than {{c1::18.5}} kg/m² and alcohol more than {{c2::14}} units per week for men and women."
+    src: { page: 115, quote: "Low body mass index (BMI) (less than 18.5 kg/m2) Smoking Alcohol intake of more than 14 units per week for men and women" }
+    status: unverified
+    tags: [numbers]
+  - id: geri.L07.061
+    kind: card
+    topic: fracture
+    front: When should fracture risk be assessed in people under 50?
+    back: Not routinely, only if they have major risk factors, such as current or frequent recent oral or systemic glucocorticoids, untreated premature menopause, or a previous fragility fracture.
+    src: { page: 115, quote: "Do not routinely assess fracture risk in people aged under 50 years unless they have major risk factors" }
+    status: unverified
+  - id: geri.L07.062
+    kind: mcq
+    topic: fracture
+    stem: Which tool is recommended by NICE guidelines to assess 10-year osteoporotic fracture risk?
+    options: [BMI Calculator, STOPP/START criteria, Q-Fracture or FRAX, Geriatric Depression Scale, Timed Up and Go Test]
+    answer: 2
+    why:
+      - BMI is one input, not a fracture risk tool.
+      - STOPP/START is for prescribing review.
+      - "Correct: QFracture or FRAX estimate the 10-year osteoporotic fragility fracture risk (p115)."
+      - The GDS screens for depression.
+      - The TUG tests gait and balance.
+    src: { page: 115, quote: "Use Q-Fracture or FRAX tools to assess the 10-year osteoporotic fragility fracture risk." }
+    status: unverified
+    tags: [book-question]
+  - id: geri.L07.063
+    kind: table
+    topic: fracture
+    title: FRAX versus QFracture
+    columns: [Feature, FRAX, QFracture]
+    rows:
+      - [Age range, "40–90 years", "30–99 years"]
+      - [Ethnicity, "No", "Yes"]
+      - [History of falls, "No", "Yes"]
+      - ["Epilepsy, CVD, antidepressants, menopausal symptoms", "No", "Yes"]
+      - [Bone mineral density, "Yes (optional femoral neck)", "No"]
+      - [Secondary osteoporosis, "Binary yes/no", "Specific conditions listed"]
+    blanks: [[0, 1], [0, 2], [2, 1], [4, 1], [4, 2], [5, 1]]
+    src: { page: 116, quote: "FRAX & Q-fracture Tools" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L07.064
+    kind: card
+    topic: fracture
+    front: Which fracture tool can take bone mineral density, FRAX or QFracture?
+    back: FRAX (femoral neck T-score or absolute value, optional). QFracture does not use BMD.
+    src: { page: 116, quote: "FRAX & Q-fracture Tools" }
+    status: unverified
+  - id: geri.L07.065
+    kind: card
+    topic: fracture
+    front: Which fracture tool includes history of falls, FRAX or QFracture?
+    back: QFracture. FRAX does not include falls (nor ethnicity, epilepsy, cardiovascular disease or antidepressants).
+    src: { page: 116, quote: "FRAX & Q-fracture Tools" }
+    status: unverified
+  - id: geri.L07.066
+    kind: enumerate
+    topic: fracture
+    prompt: Which groups of secondary osteoporosis causes does QFracture list?
+    points:
+      - "Endocrine: hyperparathyroidism, thyrotoxicosis, Cushing's, type 1 or 2 diabetes, HRT"
+      - "Gastrointestinal: Crohn's, UC, coeliac, steatorrhoea, blind loop"
+      - "Metabolic: CKD, chronic liver disease, immobility"
+      - "Neurological: Alzheimer's, Parkinson's"
+      - "Oncological: cancer"
+      - "Respiratory: COPD, asthma"
+      - "Rheumatological: RA, SLE"
+      - "Other: care or nursing home residence"
+    pass: 5
+    src: { page: 116, quote: "Secondary osteoporosis Binary yes/no choice Endocrine" }
+    status: unverified
+  - id: geri.L07.067
+    kind: mcq
+    topic: fracture
+    stem: A 35-year-old woman has untreated premature menopause. A 58-year-old woman has no risk factors. A 70-year-old man smokes and drinks 20 units a week. A 76-year-old man has no risk factors. According to NICE as given in the lecture, who should NOT have a fracture risk assessment?
+    options:
+      - The 58-year-old woman with no risk factors
+      - The 35-year-old with untreated premature menopause
+      - The 70-year-old man who smokes and drinks 20 units a week
+      - The 76-year-old man
+      - All four need assessment
+    answer: 0
+    why:
+      - "Correct: she is under 65 with no risk factor, so assessment is not advised (p114)."
+      - Under 50 is assessed only with major risk factors, and untreated premature menopause is one (p115).
+      - Men under 75 are assessed when they have risk factors; smoking and alcohol over 14 units count (p115).
+      - All men aged 75 and over are assessed (p114).
+      - The 58-year-old has no indication.
+    src: { page: 114, quote: "In women aged under 65 years and men aged under 75 years in the presence of risk factors" }
+    status: unverified
+  # ---------- p117-118: cognition ----------
+  - id: geri.L07.068
+    kind: card
+    topic: cognition
+    front: Key screening question for cognitive decline in CGA?
+    back: Has the person been more forgetful in the last 12 months to the extent it has affected their daily life (phone, shopping lists, money, medication, driving)?
+    src: { page: 117, quote: "Has the person been more forgetful in the last 12 months to the extent it has affected their daily life?" }
+    status: unverified
+  - id: geri.L07.069
+    kind: card
+    topic: cognition
+    front: How does the rate of cognitive decline separate delirium from dementia?
+    back: Rapid decline over days to weeks suggests delirium; decline over months or years suggests dementia.
+    src: { page: 117, quote: "Cognitive decline which is rapid and has taken place over days to weeks as opposed to months or years is more likely to represent delirium." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L07.070
+    kind: table
+    topic: cognition
+    title: Cognitive screening tools (selected)
+    columns: [Tool, Total score, Cut-point, Time group]
+    rows:
+      - [Clock-drawing test (CDT), "10", "<7", "Very brief (<5 min)"]
+      - [Mini-Cog, "5", "≤3", "Very brief (<5 min)"]
+      - [MMSE, "30", "23/24 or 24/25", "Brief (6–10 min)"]
+      - [MoCA, "30", "26", "Brief (6–10 min)"]
+      - [Abbreviated mental test (AMT), "10", "7/8", "Brief (6–10 min)"]
+      - [6CIT, "28", "7/8", "Brief (6–10 min)"]
+      - [AD8, "8", "≥2", "Self-administered (<20 min)"]
+      - [ACE-R, "100", "82 or 88", "Neuropsychological battery (>20 min)"]
+    blanks: [[1, 1], [2, 2], [3, 2], [4, 2], [7, 1]]
+    src: { page: 117, quote: "Very brief (<5 min)" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: geri.L07.071
+    kind: card
+    topic: cognition
+    front: What does the MoCA test that the MMSE does not, per the lecture's table?
+    back: Executive function. MMSE covers orientation, memory, language, attention and visuospatial; MoCA covers orientation, memory, language, attention and executive function.
+    src: { page: 117, quote: "Orientation, memory, language, attention, and executive function" }
+    status: unverified
+  - id: geri.L07.072
+    kind: card
+    topic: cognition
+    front: Which cognitive tools in the lecture's table are informant (self-administered) questionnaires?
+    back: IQCODE (informant questionnaire on cognitive decline in the elderly) and AD8 (8-item informant interview).
+    src: { page: 117, quote: "Self-administered (<20 min)" }
+    status: unverified
+  - id: geri.L07.073
+    kind: cloze
+    topic: cognition
+    text: "The Mini-Cog (total 5, cut-point {{c1::≤3}}) tests memory, {{c2::visuospatial}} and executive function in under 5 minutes."
+    src: { page: 117, quote: "Memory, visuospatial, and executive function" }
+    status: unverified
+    tags: [numbers]
+  - id: geri.L07.074
+    kind: cloze
+    topic: cognition
+    text: "The Arabic MoCA shown in the lecture is scored out of {{c1::30}}; normal is {{c2::26}} or more, and one point is added if education is 12 years or less."
+    src: { page: 118, quote: "MOCA" }
+    status: unverified
+    tags: [numbers]
+  - id: geri.L07.075
+    kind: mcq
+    topic: cognition
+    stem: An 80-year-old man's daughter says he became muddled and sleepy over the last 5 days. Before this he managed his own money and medicines. Which is most likely?
+    options: [Delirium, Alzheimer dementia, Normal ageing, Late-life depression, Vascular dementia with stepwise course over years]
+    answer: 0
+    why:
+      - "Correct: decline over days to weeks is more likely delirium (p117)."
+      - Dementia declines over months to years.
+      - Normal ageing does not cause new confusion over days.
+      - Depression is possible but the rapid confusion points to delirium.
+      - A course over years is dementia, not days.
+    src: { page: 117, quote: "The rate of decline is important to distinguish delirium from dementia." }
+    status: unverified
+  # ---------- p118-120: psychological ----------
+  - id: geri.L07.076
+    kind: cloze
+    topic: psych
+    text: "Depression affects {{c1::5–10%}} of people over {{c2::65}}, but is frequently {{c3::under-recognised}}."
+    src: { page: 118, quote: "Depression in older people has a prevalence of 5-10 per cent in those aged over 65, but is frequently under-recognised." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: geri.L07.077
+    kind: card
+    topic: psych
+    front: Why is depression missed in older people?
+    back: They under-report symptoms and may attribute them to ageing, and somatic symptoms are more common than in younger depressed people.
+    src: { page: 118, quote: "Older people under-report symptoms of depression, and may attribute them to the effects of ageing." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L07.078
+    kind: card
+    topic: psych
+    front: Why should you always ask a depressed older person about suicidal thoughts?
+    back: Older adults with depression are at higher risk of completed suicide than younger people.
+    src: { page: 118, quote: "Older adults with depression are at higher risk of completed suicide than younger people" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L07.079
+    kind: enumerate
+    topic: psych
+    prompt: Enumerate the risk factors for suicide in older people.
+    points:
+      - Older age and male gender
+      - Social isolation or bereavement
+      - History of attempts or evidence of planning
+      - Chronic painful illness or disability
+      - Drug or alcohol use
+    pass: 4
+    src: { page: 118, quote: "Older age, male gender. Social isolation and or bereavement. History of attempts and or evidence of planning." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L07.080
+    kind: mcq
+    topic: psych
+    stem: Which statement about depression in older adults is TRUE?
+    options:
+      - Prevalence is <1% in those over 65
+      - Somatic symptoms are rare compared to younger adults
+      - Older adults are less likely to complete suicide than younger people
+      - Risk factors include social isolation and chronic pain
+      - Depression is always self-reported accurately
+    answer: 3
+    why:
+      - The prevalence is 5–10% over 65.
+      - Somatic symptoms are more common than in younger people.
+      - Older depressed adults are at higher risk of completed suicide.
+      - "Correct: social isolation and chronic painful illness are listed suicide risk factors (p118, p119)."
+      - Older people under-report depression.
+    src: { page: 119, quote: "Chronic painful illness or disability. Drug or alcohol use" }
+    status: unverified
+    tags: [book-question]
+  - id: geri.L07.081
+    kind: cloze
+    topic: psych
+    text: "Geriatric Depression Scale short form: {{c1::15}} yes/no questions about the past week; {{c2::0–5}} is normal and a score {{c3::greater than 5}} suggests depression."
+    src: { page: 119, quote: "Geriatric Depression Scale (Short Form)" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: geri.L07.082
+    kind: table
+    topic: psych
+    title: GDS-15, which answer scores a point?
+    columns: [Question, Answer that scores]
+    rows:
+      - ["Are you basically satisfied with your life?", "No"]
+      - ["Have you dropped many of your activities and interests?", "Yes"]
+      - ["Are you in good spirits most of the time?", "No"]
+      - ["Do you prefer to stay at home rather than going out?", "Yes"]
+      - ["Do you think it is wonderful to be alive?", "No"]
+      - ["Do you feel full of energy?", "No"]
+      - ["Do you feel that your situation is hopeless?", "Yes"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1]]
+    src: { page: 119, quote: "Answers indicating depression are in bold and italicized; score one point for each one selected." }
+    status: unverified
+  - id: geri.L07.083
+    kind: card
+    topic: psych
+    front: Which GDS versions does the lecture show?
+    back: The 15-item short form in English (Sheikh & Yesavage, 1986) and the 30-item GDS in Arabic.
+    src: { page: 120, quote: "GDS" }
+    status: unverified
+  # ---------- p121-122: frailty ----------
+  - id: geri.L07.084
+    kind: table
+    topic: frailty
+    title: Clinical Frailty Scale (Rockwood)
+    columns: [Level, Name, Key feature]
+    rows:
+      - ["1", Very fit, "Robust, active, energetic, motivated; exercise regularly"]
+      - ["2", Well, "No active disease symptoms, but less fit than 1; active occasionally"]
+      - ["3", Managing well, "Medical problems well controlled; not regularly active beyond walking"]
+      - ["4", Vulnerable, "Not dependent, but symptoms limit activities; 'slowed up', tired"]
+      - ["5", Mildly frail, "Evident slowing; need help with high-order IADLs"]
+      - ["6", Moderately frail, "Need help with all outside activities, housekeeping, stairs, bathing"]
+      - ["7", Severely frail, "Completely dependent for personal care, but stable; not at high risk of dying within ~6 months"]
+      - ["8", Very severely frail, "Completely dependent, approaching end of life; could not recover even from a minor illness"]
+      - ["9", Terminally ill, "Life expectancy <6 months, not otherwise evidently frail"]
+    blanks: [[3, 1], [4, 2], [5, 2], [6, 2], [8, 2]]
+    src: { page: 121, quote: "Clinical Frailty Scale" }
+    status: unverified
+    tags: [high-yield, numbers]
+    update:
+      text: "CFS version 2.0 renames levels 2 and 4–8: 2 Fit, 4 Living with very mild frailty, 5 Living with mild frailty, 6 Living with moderate frailty, 7 Living with severe frailty, 8 Living with very severe frailty. The levels and their meaning are unchanged."
+      ref: "Rockwood K, Clinical Frailty Scale version 2.0, 2020"
+  - id: geri.L07.085
+    kind: card
+    topic: frailty
+    front: "Clinical Frailty Scale: what separates level 7 from level 9?"
+    back: Level 7 is completely dependent for personal care but stable and not at high risk of dying within about 6 months. Level 9 (terminally ill) has a life expectancy under 6 months but is not otherwise evidently frail.
+    src: { page: 121, quote: "Clinical Frailty Scale" }
+    status: unverified
+  - id: geri.L07.086
+    kind: card
+    topic: frailty
+    front: "Clinical Frailty Scale level 5 (mildly frail): what typically goes first?"
+    back: High-order IADLs (finances, transportation, heavy housework, medications); then shopping and walking outside alone, meal preparation and housework.
+    src: { page: 121, quote: "Clinical Frailty Scale" }
+    status: unverified
+  - id: geri.L07.087
+    kind: table
+    topic: frailty
+    title: Scoring frailty in people with dementia
+    columns: [Dementia, Typical picture]
+    rows:
+      - [Mild, "Forgets details of a recent event but remembers the event; repeats questions or stories; social withdrawal"]
+      - [Moderate, "Recent memory very impaired though past life events remembered; personal care with prompting"]
+      - [Severe, "Cannot do personal care without help"]
+    blanks: [[1, 1], [2, 1]]
+    src: { page: 121, quote: "Clinical Frailty Scale" }
+    status: unverified
+  - id: geri.L07.088
+    kind: card
+    topic: frailty
+    front: How is frailty scored in a person with dementia?
+    back: The degree of frailty corresponds to the degree of dementia.
+    src: { page: 121, quote: "Clinical Frailty Scale" }
+    status: unverified
+  - id: geri.L07.089
+    kind: cloze
+    topic: frailty
+    text: "In the lecture's grip strength table, mean right-hand grip at 65–69 years is about {{c1::40}} kg in men and {{c2::24}} kg in women, falling to about 28 kg and 17 kg at 85–89."
+    src: { page: 122, quote: "Means and Standard Deviations for Grip Strength (kg) According to Age and Sex" }
+    status: unverified
+    tags: [numbers]
+  - id: geri.L07.090
+    kind: card
+    topic: frailty
+    front: What do the lecture's grip strength norms show?
+    back: Grip strength (kg) falls steadily with age after middle life, is lower in women than men at every age, and is usually a little higher in the dominant (right) hand.
+    src: { page: 122, quote: "Means and Standard Deviations for Grip Strength (kg) According to Age and Sex" }
+    status: unverified
+  - id: geri.L07.091
+    kind: mcq
+    topic: frailty
+    stem: An 83-year-old man lives alone. He walks slowly and needs help with his finances, transport and heavy housework, but bathes and dresses himself. Clinical Frailty Scale level?
+    options: ["5, mildly frail", "4, vulnerable", "6, moderately frail", "7, severely frail", "3, managing well"]
+    answer: 0
+    why:
+      - "Correct: evident slowing with help in high-order IADLs is level 5 (p121)."
+      - Level 4 is not dependent on others for daily help.
+      - Level 6 needs help with all outside activities and housekeeping, and often with bathing.
+      - Level 7 is completely dependent for personal care.
+      - Level 3 has well-controlled problems without needing help.
+    src: { page: 121, quote: "Clinical Frailty Scale" }
+    status: unverified
+  # ---------- p123-125: nutrition ----------
+  - id: geri.L07.092
+    kind: card
+    topic: nutrition
+    front: Why should frailty assessment include questions on diet, appetite and weight?
+    back: Nutritional problems carry a poor prognosis but are potentially treatable, and they can also be markers of other underlying medical conditions.
+    src: { page: 123, quote: "Recognition of nutritional problems in older people is important as these are associated with poor prognosis but are potentially treatable." }
+    status: unverified
+  - id: geri.L07.093
+    kind: cloze
+    topic: nutrition
+    text: "Malnutrition risk factors: involuntary weight loss of more than {{c1::5%}} over the last month or more than {{c2::10%}} over six months; BMI below {{c3::20}} in people aged 65 or more; and decreased appetite or intake."
+    src: { page: 123, quote: "Involuntary weight loss (more than 5% over the last month or more than 10% over the last six months)." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: geri.L07.094
+    kind: mcq
+    topic: nutrition
+    stem: Which factor is NOT listed as a risk for malnutrition in older adults?
+    options:
+      - Involuntary weight loss >5% in one month
+      - BMI <20 in individuals ≥65 years
+      - Increased appetite
+      - Reduced food intake
+      - Decreased appetite
+    answer: 2
+    why:
+      - Weight loss over 5% in a month is a listed risk factor.
+      - BMI under 20 in those 65 or older is a listed risk factor.
+      - "Correct: the risk factor is decreased appetite, not increased (p123)."
+      - Reduced food intake is a listed risk factor.
+      - Decreased appetite is a listed risk factor.
+    src: { page: 123, quote: "BMI less than 20 for elderly (≥ 65y). Decreased appetite or reduced food intake" }
+    status: unverified
+    tags: [book-question]
+  - id: geri.L07.095
+    kind: table
+    topic: nutrition
+    title: MUST (Malnutrition Universal Screening Tool, BAPEN)
+    columns: [Step, Finding, Score]
+    rows:
+      - ["1 BMI (kg/m²)", ">20", "0"]
+      - ["1 BMI (kg/m²)", "18.5–20", "1"]
+      - ["1 BMI (kg/m²)", "<18.5", "2"]
+      - ["2 Unplanned weight loss in 3–6 months", "<5%", "0"]
+      - ["2 Unplanned weight loss in 3–6 months", "5–10%", "1"]
+      - ["2 Unplanned weight loss in 3–6 months", ">10%", "2"]
+      - ["3 Acute disease effect", "Acutely ill and no nutritional intake for >5 days", "2"]
+      - ["4 Overall risk", "0 low, 1 medium, 2 or more high", "Sum"]
+    blanks: [[1, 2], [2, 2], [4, 2], [5, 2], [6, 2], [7, 1]]
+    src: { page: 123, quote: "Acute disease effect score" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: geri.L07.096
+    kind: card
+    topic: nutrition
+    front: "MUST step 3: when does the acute disease effect score 2?"
+    back: When the patient is acutely ill and there has been, or is likely to be, no nutritional intake for more than 5 days.
+    src: { page: 123, quote: "Acute disease effect score" }
+    status: unverified
+  - id: geri.L07.097
+    kind: case
+    topic: nutrition
+    stem: A 78-year-old man is admitted with pneumonia. He has not eaten for 6 days and is unlikely to eat for several more. Weight 54 kg, height 1.70 m. He lost 4 kg unintentionally over the last 4 months (from 58 kg).
+    steps:
+      - question: What is his MUST BMI score?
+        options: ["1 (BMI 18.7)", "0 (BMI above 20)", "2 (BMI below 18.5)", "Cannot be scored"]
+        answer: 0
+        why: "54 / 1.70² = 18.7, in the 18.5–20 band, which scores 1 (p123)."
+      - question: What is his weight loss score?
+        options: ["1 (about 7%)", "0 (under 5%)", "2 (over 10%)", "Not scored in the elderly"]
+        answer: 0
+        why: "4/58 = 6.9% in 3–6 months, in the 5–10% band = 1 (p123)."
+      - question: What is his total MUST and risk?
+        options: ["4, high risk", "2, medium risk", "1, medium risk", "0, low risk"]
+        answer: 0
+        why: "BMI 1 + weight loss 1 + acute disease effect 2 (acutely ill, no intake >5 days) = 4. Two or more is high risk (p123)."
+    src: { page: 123, quote: "Overall risk of malnutrition" }
+    status: unverified
+  - id: geri.L07.098
+    kind: table
+    topic: nutrition
+    title: Mini Nutritional Assessment (MNA) bands
+    columns: [Part, Score, Meaning]
+    rows:
+      - ["Screening (max 14)", "12–14", "Normal nutritional status"]
+      - ["Screening (max 14)", "8–11", "At risk of malnutrition"]
+      - ["Screening (max 14)", "0–7", "Malnourished"]
+      - ["Total assessment (max 30)", "24–30", "Normal nutritional status"]
+      - ["Total assessment (max 30)", "17–23.5", "At risk of malnutrition"]
+      - ["Total assessment (max 30)", "<17", "Malnourished"]
+    blanks: [[0, 1], [1, 1], [2, 1], [4, 1], [5, 1]]
+    src: { page: 124, quote: "Mini Nutritional Assessment" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: geri.L07.099
+    kind: card
+    topic: nutrition
+    front: When do you continue past the MNA screening to the full assessment?
+    back: When the screening score is 11 or less (out of 14), to gain a malnutrition indicator score.
+    src: { page: 124, quote: "Mini Nutritional Assessment" }
+    status: unverified
+  - id: geri.L07.100
+    kind: enumerate
+    topic: nutrition
+    prompt: List the six MNA screening questions.
+    points:
+      - Decline in food intake over the past 3 months
+      - Weight loss during the last 3 months
+      - Mobility
+      - Psychological stress or acute disease in the past 3 months
+      - Neuropsychological problems (dementia or depression)
+      - Body mass index
+    pass: 5
+    src: { page: 124, quote: "Has food intake declined over the past 3 months" }
+    status: unverified
+  - id: geri.L07.101
+    kind: cloze
+    topic: nutrition
+    text: "MNA scores 0 for BMI below {{c1::19}}, for mid-arm circumference below {{c2::21}} cm, and for calf circumference below {{c3::31}} cm."
+    src: { page: 124, quote: "Calf circumference (CC) in cm" }
+    status: unverified
+    tags: [numbers]
+  - id: geri.L07.102
+    kind: cloze
+    topic: nutrition
+    text: "In the MNA assessment, taking more than {{c1::3}} prescription drugs per day scores 0, and weight loss greater than {{c2::3 kg}} in 3 months scores 0."
+    src: { page: 124, quote: "Mini Nutritional Assessment" }
+    status: unverified
+    tags: [numbers]
+  # ---------- p126: social, medications, QoL, goals ----------
+  - id: geri.L07.103
+    kind: card
+    topic: social-meds
+    front: What is the lecture's warning about the social history?
+    back: Most consultations happen away from the patient's home and without the next of kin or carers, so the social history is often thin (a single word, "married").
+    src: { page: 126, quote: "How often have you seen a social history comprising one word 'married'?" }
+    status: unverified
+  - id: geri.L07.104
+    kind: card
+    topic: social-meds
+    front: Why may guideline-based prescribing not fit frail older people?
+    back: Frail older people and those with major comorbidity are unlikely to have been represented in the trials behind the guidelines.
+    src: { page: 126, quote: "people are unlikely to have been represented in trial participants" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L07.105
+    kind: enumerate
+    topic: social-meds
+    prompt: Why may an established medication no longer be useful in an older person?
+    points:
+      - The disease may have run its course
+      - Physiology may have changed
+      - It may have been prescribed to treat another drug's side effect
+      - It is for long-term risk reduction, less relevant with a limited lifespan
+    pass: 3
+    src: { page: 126, quote: "even established medications may no longer be useful as diseases may have run their course, physiology may have changed" }
+    status: unverified
+  - id: geri.L07.106
+    kind: card
+    topic: social-meds
+    front: Give examples of long-term risk-reduction medicines that may matter less with a limited lifespan.
+    back: Antihypertensives, treatment for renal disease in diabetes, and lipid lowering.
+    src: { page: 126, quote: "many medicines are given for long-term risk reduction (e.g. hypertension, renal disease in diabetes, lipid lowering)" }
+    status: unverified
+  - id: geri.L07.107
+    kind: mcq
+    topic: social-meds
+    stem: What is a critical component of medication review in CGA?
+    options:
+      - Prescribing as many medications as possible
+      - Using STOPP & START criteria to individualize treatment
+      - Avoiding all long-term medications
+      - Focusing only on pain management
+      - Discontinuing all supplements
+    answer: 1
+    why:
+      - Polypharmacy can do more harm than good, especially in combination.
+      - "Correct: treatment is individualized with older-people prescribing criteria such as STOPP & START (p126)."
+      - Long-term drugs are reviewed, not banned.
+      - The review covers every medicine, not only analgesia.
+      - Nothing is stopped by blanket rule.
+    src: { page: 126, quote: "treatment should be individualized, and we should use older people prescription criteria e.g. STOPP & START." }
+    status: unverified
+    tags: [book-question]
+  - id: geri.L07.108
+    kind: enumerate
+    topic: social-meds
+    prompt: Which quality of life scales does the lecture name?
+    points: [Quality Of Life Scale (QOL), WHO Quality of Life Scale]
+    pass: 2
+    src: { page: 126, quote: "Quality Of Life Scale (QOL). WHO Quality of Life Scale" }
+    status: unverified
+  - id: geri.L07.109
+    kind: case
+    topic: components
+    stem: An 86-year-old woman is sent home after 3 weeks in hospital for a urinary infection. She has had 3 falls this year and her family say she is "not coping".
+    steps:
+      - question: Is she an indication for CGA?
+        options: [Yes, No, Only if she is in a care home, Only before surgery]
+        answer: 0
+        why: "Frailty syndromes (falls) and a long stay for an otherwise trivial reason after discharge are both indications (p108)."
+      - question: Which core MDT member assesses her home hazards?
+        options: [Occupational therapist, Dietitian, Speech therapist, Podiatrist]
+        answer: 0
+        why: "Home hazards are assessed by a trained professional, usually an OT (p113). The other three are supporting members."
+      - reveal: "She needs help with bathing and dressing. Katz score 4/6."
+        question: "Her daughter says she now also cannot manage her own pills or money. Which scale captures this?"
+        options: [Lawton IADL, Katz ADL, GDS, MUST]
+        answer: 0
+        why: "Medications and finances are IADL domains (p112). Katz covers basic self-care; GDS is depression and MUST is nutrition."
+      - question: Which drug class on her list would add to her FRAT medications score?
+        options: [Diuretic, Proton pump inhibitor, Paracetamol, Calcium]
+        answer: 0
+        why: "FRAT counts sedatives, antidepressants, anti-Parkinson's, diuretics, antihypertensives and hypnotics (p114)."
+    src: { page: 108, quote: "After discharge from a hospital especially if the cause of admission was one of the frailty syndromes" }
+    status: unverified
+  - id: geri.L07.110
+    kind: essay
+    topic: components
+    prompt: Discuss the comprehensive geriatric assessment (definition, indications, benefits, team and components).
+    outline:
+      - "Definition": ["Multistep process: multidimensional holistic assessment, plan, interventions, regular review"]
+      - "Indications": ["Frailty or frailty syndromes even if reversible; at risk of frailty", "After discharge; care homes; perioperative; any referral"]
+      - "Benefits": ["Fewer admissions, shorter stay, lower mortality and readmission", "More discharges home; better diagnosis and QoL; can reverse frailty"]
+      - "Team": ["Core: geriatrician, nurse, social worker, OT, physiotherapist", "Supporting: podiatrist, speech, dietitian, orthotist, psychogeriatrician, psychologist, volunteer"]
+      - "Components": ["Clinical exam, function (Katz ADL, Lawton IADL), mobility, falls and fracture (FRAT, FRAX/QFracture)", "Cognition, psychology (GDS), frailty (CFS), nutrition (MUST, MNA)", "Social, medication review (STOPP/START), QoL, goals of care"]
+    src: { page: 110, quote: "Components of Comprehensive Geriatric Assessment (CGA)" }
+    status: unverified
+    tags: [high-yield]

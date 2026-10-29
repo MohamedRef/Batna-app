@@ -1,0 +1,2084 @@
+schema: batna.content/v1
+lecture: rheum.L08
+title: "Vasculitis Syndrome: An Approach"
+author: "Dr. Ashraf Alzawawy"
+book: { chapter: 3, pages: [123, 163] }
+topics:
+  - { id: basics, title: "Definition, pathogenesis, pathology and epidemiology" }
+  - { id: classification, title: "Primary vs secondary and Chapel Hill 2012 names" }
+  - { id: clues, title: "When to suspect vasculitis and how it presents" }
+  - { id: organs, title: "Organ manifestations of systemic vasculitis" }
+  - { id: workup, title: "Diagnostic workup and mimics" }
+  - { id: gca, title: "Giant cell arteritis: features, criteria and biopsy" }
+  - { id: pmr, title: "Polymyalgia rheumatica" }
+  - { id: tak, title: "Takayasu arteritis criteria" }
+  - { id: lvv-rx, title: "Treatment of large vessel vasculitis and PMR" }
+  - { id: kawasaki, title: "Kawasaki disease" }
+  - { id: polychondritis, title: "Relapsing polychondritis" }
+  - { id: pan, title: "Polyarteritis nodosa" }
+  - { id: aav, title: "ANCA-associated vasculitis: GPA, MPA, EGPA and ANCA" }
+  - { id: aav-rx, title: "Treatment of ANCA-associated vasculitis (EULAR statements)" }
+  - { id: behcet, title: "Behçet disease" }
+  - { id: pacns, title: "Primary angiitis of the CNS" }
+  - { id: other, title: "Buerger, hypersensitivity vasculitis, HSP and cryoglobulinemia" }
+items:
+  # ---------- p123: introduction ----------
+  - id: rheum.L08.001
+    kind: card
+    topic: basics
+    front: Define the vasculitides.
+    back: A heterogeneous group of conditions marked by inflammation and necrosis of blood vessels.
+    src: { page: 123, quote: "Vasculitides are a hetrogenous group of conditions characterized by inflammation and necrosis of blood vessels." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L08.002
+    kind: card
+    topic: basics
+    front: Why does vasculitis produce such a wide variety of signs and symptoms?
+    back: Vessels of any size and in any organ may be affected.
+    src: { page: 123, quote: "Vessels of any size and of any organ may be affected." }
+    status: unverified
+  - id: rheum.L08.003
+    kind: card
+    topic: basics
+    front: Why does vasculitis need a systematic diagnostic approach?
+    back: It ranges from a benign, regionally restricted process to a life-threatening systemic disorder, so it can mimic or be mimicked by many diseases.
+    src: { page: 123, quote: "Thus, they can mimic or be mimicked by a variety of diseases." }
+    status: unverified
+  - id: rheum.L08.004
+    kind: enumerate
+    topic: basics
+    prompt: The two processes in the pathogenesis of vasculitis?
+    points:
+      - Inflammation of the vessel wall
+      - Ischaemia of tissues
+    pass: 2
+    src: { page: 123, quote: "Pathogenesis of vasculitis involves two processes, namely. 1. Inflammation of vessel wall. 2. Ischaemia of tissues." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L08.005
+    kind: card
+    topic: basics
+    front: Are most vasculitic syndromes idiopathic or secondary?
+    back: Idiopathic; they are immune-mediated diseases and most have no known cause.
+    src: { page: 123, quote: "Vasculitic syndromes are immune-mediated diseases. Most are idiopathic." }
+    status: unverified
+  # ---------- p123-124: mechanisms ----------
+  - id: rheum.L08.006
+    kind: table
+    topic: basics
+    title: Mechanisms of vessel wall involvement
+    columns: [Mechanism, Features, Examples]
+    rows:
+      - [Allergic angiitis, "Eosinophilia, raised IgE in blood and tissues", Churg–Strauss syndrome (EGPA)]
+      - [Antibody mediated (pauci-immune), ANCA-associated vasculitis, "Wegener (GPA), CSS, microscopic polyangiitis"]
+      - [Immune complex mediated, "Deposition or in-situ formation; low complement", "Henoch–Schönlein purpura, PAN"]
+      - [T-cell mediated hypersensitivity, Th1-induced inflammatory infiltrate, "Giant cell arteritis, Takayasu"]
+    blanks: [[0, 2], [1, 1], [2, 1], [3, 2]]
+    src: { page: 124, quote: "Immune complex mediated with immune complex deposition or formation in situ. This is associated with low complement levels" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L08.007
+    kind: cloze
+    topic: basics
+    text: "Allergic angiitis has {{c1::eosinophilia}} and raised {{c2::IgE}} in blood and tissues, as in {{c3::Churg–Strauss syndrome}}."
+    src: { page: 123, quote: "Allergic angiitis with eosinophilia and raised IgE levels in blood and in tissues e.g. in Churg Strauss syndrome (CSS)." }
+    status: unverified
+  - id: rheum.L08.008
+    kind: cloze
+    topic: basics
+    text: "ANCA-associated vasculitis is the {{c1::pauci-immune}} (antibody-mediated) type."
+    src: { page: 124, quote: "Antibody mediated (pauci-immune type) vasculitis which includes ANCA associated vasculitis (AAV)" }
+    status: unverified
+  - id: rheum.L08.009
+    kind: card
+    topic: basics
+    front: Which complement finding goes with immune-complex vasculitis, and two book examples?
+    back: Low complement levels; Henoch–Schönlein purpura and polyarteritis nodosa.
+    src: { page: 124, quote: "This is associated with low complement levels, e.g. Henoch-Schonlein purpura (HSP), polyarteritis nodosa (PAN)." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L08.010
+    kind: card
+    topic: basics
+    front: Which T-helper cells drive the infiltrate in giant cell and Takayasu arteritis?
+    back: Th1 cells (T-cell mediated hypersensitivity).
+    src: { page: 124, quote: "T cell mediated hypersentivitiy characterized by an inflammatory infiltrate induced by Th1 cells" }
+    status: unverified
+  - id: rheum.L08.011
+    kind: mcq
+    topic: basics
+    stem: A biopsy of a vasculitic lesion shows few or no immune deposits, and serum complement is normal. Which mechanism fits best?
+    options:
+      - Pauci-immune, antibody-mediated (ANCA) vasculitis
+      - Immune complex vasculitis
+      - Th1 T-cell mediated vasculitis
+      - Allergic angiitis with high IgE
+    answer: 0
+    why:
+      - "Correct: pauci-immune means few deposits; this is the ANCA-associated group (p124)."
+      - Immune complex vasculitis deposits complexes and lowers complement (HSP, PAN).
+      - The T-cell type is large vessel (GCA, Takayasu) with a Th1 infiltrate, not described by deposits.
+      - Allergic angiitis is defined by eosinophilia and raised IgE, not by the absence of deposits.
+    src: { page: 124, quote: "Antibody mediated (pauci-immune type) vasculitis which includes ANCA associated vasculitis (AAV)" }
+    status: unverified
+  # ---------- p124: pathology and epidemiology ----------
+  - id: rheum.L08.012
+    kind: card
+    topic: basics
+    front: Is the pathology of a vasculitis biopsy diagnostic of a specific syndrome?
+    back: No. Patterns overlap a lot, and involvement can be focal and segmental, so not all of the vessel is involved.
+    src: { page: 124, quote: "Pathologic findings not diagnostic for a specific syndrome." }
+    status: unverified
+  - id: rheum.L08.013
+    kind: order
+    topic: basics
+    prompt: Put the vessel-wall consequences of vasculitis in the book's sequence.
+    steps:
+      - Increased permeability (limited response)
+      - Weakening (aneurysm and/or haemorrhage)
+      - Intimal proliferation and thrombosis
+      - Obstruction and local ischaemia
+    src: { page: 124, quote: "(Limited Response) Increased permeability. Weakening (Aneurysm +/ hemorrhage) Intimal proliferation and thrombosis. Obstruction and local ischemia." }
+    status: unverified
+  - id: rheum.L08.014
+    kind: cloze
+    topic: basics
+    text: "UK annual incidence of primary systemic vasculitis is {{c1::19.8 per million}}; peak age at diagnosis is {{c2::65–74}}, with {{c3::male}} preponderance."
+    src: { page: 124, quote: "annual incidence of 19.8 per million. Peak age at diagnosis was 65-74. Male preponderance." }
+    status: unverified
+    tags: [numbers]
+  # ---------- p125-126: classification ----------
+  - id: rheum.L08.015
+    kind: table
+    topic: classification
+    title: Primary and secondary vasculitides
+    columns: [Group, Members]
+    rows:
+      - [Primary, "Temporal arteritis, Takayasu arteritis, Wegener granulomatosis, Churg–Strauss syndrome, polyarteritis nodosa, Henoch–Schönlein purpura"]
+      - [Secondary, "Polysystemic autoimmune diseases, infections, hypersensitivity, cryoglobulinaemic vasculitis, others (Cogan, Sweet syndromes)"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 125, quote: "Primary Secundary Arteritis temporalis Polysystemic autoimmun diseases Takayasu arteritis Infections" }
+    status: unverified
+  - id: rheum.L08.016
+    kind: table
+    topic: classification
+    title: Chapel Hill 2012 (CHCC) by vessel size
+    columns: [Group, Members]
+    rows:
+      - [Large vessel vasculitis, "Takayasu arteritis, giant cell arteritis"]
+      - [Medium vessel vasculitis, "Polyarteritis nodosa, Kawasaki disease"]
+      - ["Small vessel, ANCA-associated", "MPA, GPA (Wegener), EGPA (Churg–Strauss)"]
+      - ["Small vessel, immune complex", "Anti-GBM, cryoglobulinemic, IgA vasculitis (HSP), hypocomplementemic urticarial (anti-C1q)"]
+      - [Variable vessel vasculitis, "Behçet disease, Cogan syndrome"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 125, quote: "Large Vessel Vasculitis (LVV) Takayasu Arteritis (TAK). Giant Cell Arteritis (GCA). Medium Vessel Vasculitis (MVV) Polyarteritis Nodosa (PAN). Kawasaki Disease (KD)." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L08.017
+    kind: card
+    topic: classification
+    front: Which Chapel Hill 2012 group holds Behçet disease and Cogan syndrome?
+    back: Variable vessel vasculitis.
+    src: { page: 126, quote: "Variable Vessel Vasculitis (VVV) Behçet‘s Disease (BD). Cogan‘s Syndrome (CS)." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L08.018
+    kind: card
+    topic: classification
+    front: What is the CHCC 2012 name for Henoch–Schönlein purpura?
+    back: IgA vasculitis (IgAV).
+    src: { page: 125, quote: "IgA Vasculitis (Henoch-Schönlein)(IgAV)." }
+    status: unverified
+  - id: rheum.L08.019
+    kind: card
+    topic: classification
+    front: What is the other name of hypocomplementemic urticarial vasculitis?
+    back: Anti-C1q vasculitis.
+    src: { page: 125, quote: "Hypocomplementemic Urticarial Vasculitis (Anti-C1q Vasculitis)." }
+    status: unverified
+  - id: rheum.L08.020
+    kind: enumerate
+    topic: classification
+    prompt: Single-organ vasculitides named in CHCC 2012?
+    points:
+      - Cutaneous leukocytoclastic angiitis
+      - Cutaneous arteritis
+      - Primary CNS vasculitis
+      - Isolated aortitis
+    pass: 3
+    src: { page: 126, quote: "Single Organ Vasculitis (SOV) Cutaneous Leukocytoclastic Angiitis. Cutaneous Arteritis. Primary CNS Vasculitis. Isolated Aortitis." }
+    status: unverified
+  - id: rheum.L08.021
+    kind: enumerate
+    topic: classification
+    prompt: Vasculitis associated with a probable etiology (CHCC 2012)?
+    points:
+      - HCV-associated cryoglobulinemic vasculitis
+      - HBV-associated vasculitis
+      - Syphilis-associated aortitis
+      - Drug-associated immune complex vasculitis
+      - Drug-associated ANCA-associated vasculitis
+      - Cancer-associated vasculitis
+    pass: 4
+    src: { page: 126, quote: "Vasculitis Associated with Probable Etiology Hepatitis C Virus-Associated Cryoglobulinemic Vasculitis. Hepatitis B Virus-Associated Vasculitis. Syphilis-Associated Aortitis." }
+    status: unverified
+  - id: rheum.L08.022
+    kind: card
+    topic: classification
+    front: Three vasculitides associated with systemic disease (CHCC 2012)?
+    back: Lupus vasculitis, rheumatoid vasculitis and sarcoid vasculitis.
+    src: { page: 126, quote: "Vasculitis Associated with Systemic Disease Lupus Vasculitis. Rheumatoid Vasculitis. Sarcoid Vasculitis." }
+    status: unverified
+  - id: rheum.L08.023
+    kind: mcq
+    topic: classification
+    stem: Under the 2012 Chapel Hill nomenclature, Kawasaki disease is classified as which type?
+    options:
+      - Medium vessel vasculitis
+      - Large vessel vasculitis
+      - Small vessel immune complex vasculitis
+      - Variable vessel vasculitis
+      - Single-organ vasculitis
+    answer: 0
+    why:
+      - "Correct: medium vessel vasculitis is PAN and Kawasaki disease (p125)."
+      - Large vessel is Takayasu and giant cell arteritis.
+      - Immune complex small vessel includes anti-GBM, cryoglobulinemic, IgA and anti-C1q vasculitis.
+      - Variable vessel is Behçet and Cogan.
+      - Single-organ examples are cutaneous, CNS and isolated aortitis.
+    src: { page: 125, quote: "Medium Vessel Vasculitis (MVV) Polyarteritis Nodosa (PAN). Kawasaki Disease (KD)." }
+    status: unverified
+  # ---------- p126-127: when to suspect ----------
+  - id: rheum.L08.024
+    kind: enumerate
+    topic: clues
+    prompt: Clues that should make you suspect a vasculitic syndrome?
+    points:
+      - Occlusive arterial disease or hypertension in young adults
+      - Unexplained fever and weight loss
+      - Unexplained proteinuria with or without casts
+      - Splinter haemorrhages and palpable purpura or erythema
+      - Subcutaneous nodules or urticaria
+      - Sudden retinal vascular disease without hypertension or diabetes
+      - Persistent headache with sudden monocular blindness in the elderly, jaw claudication
+      - Sudden peripheral neuropathy (wrist or foot drop)
+      - Cerebrovascular or cardiovascular events in the young
+      - Unexplained pulmonary nodular or cavitary lesions
+    pass: 6
+    src: { page: 126, quote: "Occlusive arterial disease or hypertension in youngadults Unexplained fever, weight loss. Unexplained proteinuria with or without casts." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L08.025
+    kind: card
+    topic: clues
+    front: Elderly patient, persistent headache, sudden monocular blindness. Which vasculitis must you think of?
+    back: Giant cell (temporal) arteritis; jaw claudication is the companion clue.
+    src: { page: 127, quote: "Persistent headache with sudden visual impairment (monocular blindness) in elderly." }
+    status: unverified
+  - id: rheum.L08.026
+    kind: card
+    topic: clues
+    front: Sudden wrist drop or foot drop without trauma suggests what?
+    back: Vasculitic peripheral neuropathy (mononeuritis), a clue to systemic vasculitis.
+    src: { page: 127, quote: "Sudden appearance of peripheral neuropathy - wrist drop,foot drop." }
+    status: unverified
+  - id: rheum.L08.027
+    kind: cloze
+    topic: clues
+    text: "Systemic vasculitis usually presents in the {{c1::2nd–5th}} decades; the exceptions are {{c2::HSP and Kawasaki disease}} (children) and {{c3::Takayasu arteritis}} (young females)."
+    src: { page: 127, quote: "Systemic vasculitis usually presents in individuals of 2-5th decade, the exceptions being HSP and Kawasaki disease which are common in children" }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L08.028
+    kind: card
+    topic: clues
+    front: What helps identify the specific vasculitic syndrome clinically?
+    back: The pattern of organ systems involved.
+    src: { page: 127, quote: "The pattern of different organ system involvement may help in identifying the specific vasculitic syndrome." }
+    status: unverified
+  - id: rheum.L08.029
+    kind: enumerate
+    topic: clues
+    prompt: Salient features of predominantly cutaneous vasculitis?
+    points:
+      - Absence of systemic involvement
+      - Negative serology
+      - Small vessel leucocytoclastic vasculitis
+      - Better prognosis
+    pass: 3
+    src: { page: 127, quote: "Absence of systemic involvement. Negative serology. Small vessel leucocytoclastic vasculitis. Better prognosis." }
+    status: unverified
+  - id: rheum.L08.030
+    kind: card
+    topic: clues
+    front: Usual lesions and site of predominantly cutaneous vasculitis?
+    back: Palpable purpura, urticaria, bullous ulcers or splinter haemorrhages, mainly limited to the lower extremities.
+    src: { page: 127, quote: "palpable purpura,urticaria, bullous ulcers or splinter haemorrhages, mainly limited to lower extremities." }
+    status: unverified
+  - id: rheum.L08.031
+    kind: card
+    topic: organs
+    front: Prognosis of systemic vasculitis in general?
+    back: Poor (it involves various organ systems), unlike cutaneous vasculitis.
+    src: { page: 128, quote: "Systemic vasculitis involves various organ systems. Prognosis in general is poor." }
+    status: unverified
+  # ---------- p128-129: organs ----------
+  - id: rheum.L08.032
+    kind: card
+    topic: organs
+    front: Which two vasculitides spare the kidney's glomeruli in the book's table?
+    back: Classical PAN and Takayasu arteritis; the kidney is affected in most others.
+    src: { page: 128, quote: "Kidney -Affected in most of the vasculitis except PAN and TA: - Glomerulonephritis (absent in classical PAN)." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L08.033
+    kind: enumerate
+    topic: organs
+    prompt: Renal manifestations of systemic vasculitis?
+    points:
+      - Glomerulonephritis (absent in classical PAN)
+      - Renal failure
+      - Hypertension (usually; not seen in WG)
+      - Renal infarction
+    pass: 3
+    src: { page: 128, quote: "Glomerulonephritis (absent in classical PAN). Renal failure. Hypertension usually (not seen in WG). Renal infarction." }
+    status: unverified
+  - id: rheum.L08.034
+    kind: card
+    topic: organs
+    front: Which three vasculitides involve the lungs in the book's table?
+    back: Wegener granulomatosis (GPA), Churg–Strauss (EGPA) and microscopic polyangiitis.
+    src: { page: 128, quote: "Lungs – Involved in WG, CSS, MPA:" }
+    status: unverified
+  - id: rheum.L08.035
+    kind: card
+    topic: organs
+    front: Triad of alveolar haemorrhage in vasculitis?
+    back: Haemoptysis, anaemia and bilateral evanescent lung opacities.
+    src: { page: 128, quote: "Alveolar haemorrhage, characterized by haemoptysis, anaemia and bilateral evanescent lung opacities." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L08.036
+    kind: card
+    topic: organs
+    front: Which lung manifestation in the table belongs to Churg–Strauss only?
+    back: Asthma.
+    src: { page: 128, quote: "Nodules with/without cavities. Infarction. Asthma (CSS)." }
+    status: unverified
+  - id: rheum.L08.037
+    kind: table
+    topic: organs
+    title: Organ manifestations of systemic vasculitis (Table 2)
+    columns: [System, Features]
+    rows:
+      - [Cardiovascular, "MI, ischaemic cardiomyopathy and CHF, pulselessness"]
+      - [Abdomen, "Ischaemic mucosal necrosis (haematemesis, melaena), bowel infarction, hepatic and pancreatic infarction"]
+      - [CNS, "Focal deficit, altered mental state, seizures"]
+      - [Nerves, "Acute mononeuropathies, mononeuritis multiplex"]
+      - [Muscles, "Jaw claudication (GCA), arm claudication (TA), myalgia, weakness"]
+      - [Genitourinary, "Testicular, epididymal pain, ovarian involvement"]
+      - [Skin, "Rash, purpura, cutaneous infarcts, livedo reticularis, Raynaud"]
+      - [ENT, "Otitis media, nasal obstruction, epistaxis (WG)"]
+    blanks: [[3, 1], [4, 1], [5, 1], [7, 1]]
+    src: { page: 129, quote: "Nerves: Mononeuropathies (acute onset). Mononeuritis multiplex." }
+    status: unverified
+  - id: rheum.L08.038
+    kind: card
+    topic: organs
+    front: Arm claudication suggests which vasculitis; jaw claudication which?
+    back: Arm claudication, Takayasu arteritis; jaw claudication, giant cell arteritis.
+    src: { page: 129, quote: "Jaw claudication as in GCA. Myalgia. Arm claudication as in TA." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L08.039
+    kind: card
+    topic: organs
+    front: Ocular manifestations of systemic vasculitis?
+    back: Conjunctivitis, scleritis, episcleritis, dacryocystitis, uveitis and proptosis.
+    src: { page: 129, quote: "Conjunctivitis, scleritis, episcleritis, dacryocystitis, uveitis,proptosis." }
+    status: unverified
+  - id: rheum.L08.040
+    kind: card
+    topic: organs
+    front: Constitutional (B) symptoms of vasculitis?
+    back: Fever, malaise, anorexia, arthralgia and weight loss.
+    src: { page: 129, quote: "Constitutional (B symptoms): Fever, malaise, anorexia, arthralgia, weight loss." }
+    status: unverified
+  - id: rheum.L08.041
+    kind: mcq
+    topic: organs
+    stem: A 45-year-old man has chronic nasal obstruction with epistaxis, otitis media, haemoptysis and bilateral cavitating lung nodules. Urine shows red cell casts but his BP is normal. Which vasculitis fits best?
+    options:
+      - Wegener granulomatosis (GPA)
+      - Classical polyarteritis nodosa
+      - Takayasu arteritis
+      - Giant cell arteritis
+      - Henoch–Schönlein purpura
+    answer: 0
+    why:
+      - "Correct: ENT (nasal obstruction, epistaxis, otitis), cavitating nodules and GN; the book notes hypertension is not seen in WG (pp128-129)."
+      - Classical PAN has no glomerulonephritis and does not involve the lungs.
+      - Takayasu spares the glomeruli and causes pulselessness and arm claudication.
+      - GCA is an elderly large vessel disease with headache and jaw claudication.
+      - HSP is mainly a childhood purpura with arthritis, abdominal pain and GN, not ENT or cavities.
+    src: { page: 129, quote: "ENT: Otitis media, nasal obstruction or epistaxis (in WG)." }
+    status: unverified
+  # ---------- p130: workup and mimics ----------
+  - id: rheum.L08.042
+    kind: enumerate
+    topic: workup
+    prompt: Diagnostic workup of suspected vasculitis?
+    points:
+      - Haemogram
+      - Urinalysis
+      - Serum proteins
+      - ANCA (c-ANCA, p-ANCA, atypical)
+      - Renal and hepatic function tests
+      - Angiography
+      - Echocardiography
+      - Organ biopsy
+    pass: 6
+    src: { page: 130, quote: "Laboratory investigations. Haemogram. Urinalysis. Serum proteins. Antineutrophil cytoplasmic autoantibodies (ANCA):" }
+    status: unverified
+  - id: rheum.L08.043
+    kind: card
+    topic: workup
+    front: Three ANCA immunofluorescence patterns?
+    back: Cytoplasmic (c-ANCA), perinuclear (p-ANCA), and atypical (A- or x-ANCA).
+    src: { page: 130, quote: "Cytoplasmic ANCA (c-ANCA). ii. Perinuclear ANCA (p-ANCA). iii. Atypical staining (A or x-ANCA)." }
+    status: unverified
+  - id: rheum.L08.044
+    kind: enumerate
+    topic: workup
+    prompt: Mimics of vasculitis?
+    points:
+      - Bacterial endocarditis
+      - Antiphospholipid antibody syndrome
+      - Viral infections (HIV, CMV, HBV, HCV)
+      - Cholesterol emboli syndrome
+      - Vasoconstrictor drugs (ergot poisoning)
+      - Hypertensive arteriopathy
+      - Thoracic outlet syndrome
+      - Sepsis and DIC
+      - Sarcoidosis
+      - TTP
+      - Lymphoma, hairy cell leukaemia
+    pass: 6
+    src: { page: 130, quote: "Mimicks of vasculitis Bacterial endocarditis. Antiphospholipid antibody syndrome. Viral infections like HIV, CMV, HBV, HCV etc. Cholesterol emboli syndrome." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L08.045
+    kind: mcq
+    topic: workup
+    stem: A 70-year-old man develops livedo reticularis, painful blue toes and rising creatinine two weeks after coronary angiography. Which vasculitis mimic does the book list that fits?
+    options:
+      - Cholesterol emboli syndrome
+      - Thoracic outlet syndrome
+      - Hairy cell leukaemia
+      - Ergot poisoning
+    answer: 0
+    why:
+      - "Correct: cholesterol emboli after arterial instrumentation mimic vasculitis (p130)."
+      - Thoracic outlet syndrome gives arm ischaemia from compression, not toes and kidneys after angiography.
+      - Hairy cell leukaemia is a mimic, but nothing here points to it.
+      - Ergot causes vasospasm after drug exposure, not after angiography.
+    src: { page: 130, quote: "Cholesterol emboli syndrome. Vasoconstrictor drugs (ergot poisoning). Hypertensive arteriopathy. Thoracic outlet syndrome." }
+    status: unverified
+  # ---------- p131-133: giant cell arteritis ----------
+  - id: rheum.L08.046
+    kind: table
+    topic: gca
+    title: Giant cell (temporal) arteritis features
+    columns: [Group, Features]
+    rows:
+      - [Systemic, "Polymyalgia rheumatica, fever, anorexia, malaise, weight loss, elevated ESR, abnormal liver function, anaemia"]
+      - [Local, "Temporal headache, blindness, scalp necrosis, jaw claudication, cranial and peripheral neuropathies, rare organ involvement"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 131, quote: "Polymyalgia Rheumatica. Temporal Headache. Fever. Blindness. Anorexia. Scalp Necrosis. Malaise. Jaw Claudication." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L08.047
+    kind: card
+    topic: gca
+    front: Entry criteria of the book's GCA score?
+    back: Age at onset ≥50 years and absence of exclusion criteria.
+    src: { page: 131, quote: "Entry N/A Age at onset ≥50 years old Absence of exclusion criteria" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: rheum.L08.048
+    kind: table
+    topic: gca
+    title: GCA score (out of 11)
+    columns: [Item, Points]
+    rows:
+      - ["Domain I: new onset localized headache", "1"]
+      - ["Domain I: sudden onset of visual disturbances", "1"]
+      - ["Domain I: polymyalgia rheumatica", "2"]
+      - ["Domain I: jaw claudication", "1"]
+      - ["Domain I: abnormal temporal artery", "up to 2"]
+      - ["Domain II: unexplained fever and/or anaemia", "1"]
+      - ["Domain II: ESR ≥50 mm/hour", "1"]
+      - ["Domain II: compatible pathology", "up to 2"]
+    blanks: [[2, 1], [3, 1], [4, 1], [6, 1], [7, 1]]
+    src: { page: 131, quote: "Polymyalgia Rheumatica (PMR) 2p 1 Jaw Claudication 1p 2 Abnormal temporal artery up to 2p" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: rheum.L08.049
+    kind: cloze
+    topic: gca
+    text: "GCA is diagnosed with {{c1::≥3 points out of 11}}, at least {{c2::one point from domain I}}, and all entry criteria."
+    src: { page: 131, quote: "In the presence of 3 points or more out of 11 with at least one point belonging to domain I along with all entry criteria" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: rheum.L08.050
+    kind: enumerate
+    topic: gca
+    prompt: Exclusion criteria of the book's GCA score?
+    points:
+      - ENT and eye inflammation
+      - Kidney, skin and peripheral nervous system involvement
+      - Lung infiltration
+      - Lymphadenopathies
+      - Stiff neck
+      - Digital gangrene or ulceration
+    pass: 4
+    src: { page: 131, quote: "Exclusion criteria are including: ENT and eye inflammation, kidney, skin and peripheral nervous system involvement, lung infiltration" }
+    status: unverified
+  - id: rheum.L08.051
+    kind: card
+    topic: gca
+    front: In the GCA score, how does the abnormal temporal artery earn its points?
+    back: 1 point for an enlarged and/or pulseless temporal artery, 1 point for a tender one (up to 2).
+    src: { page: 132, quote: "Enlarged and/or pulseless temporal artery: 1.p./tender temporal artery." }
+    status: unverified
+  - id: rheum.L08.052
+    kind: card
+    topic: gca
+    front: In the GCA score, when must the "unexplained fever and/or anaemia" item be ignored?
+    back: In the presence of PMR.
+    src: { page: 132, quote: "E It must be ignored in the presence of PMR." }
+    status: unverified
+  - id: rheum.L08.053
+    kind: card
+    topic: gca
+    front: How does pathology earn its points in the GCA score?
+    back: 1 point for vascular or perivascular fibrinoid necrosis with leucocyte infiltration, 1 more for granuloma.
+    src: { page: 132, quote: "Vascular and/or perivascular fibrinoid necrosis along with leucocyte infiltration: 1.p. /and granuloma." }
+    status: unverified
+  - id: rheum.L08.054
+    kind: mcq
+    topic: gca
+    stem: "A 68-year-old woman has a new localized headache and jaw claudication. ESR is 30 mm/h, the temporal arteries are normal, and no biopsy has been done. She has no exclusion features. By the book's GCA score, what is her status?"
+    options:
+      - "2 points: GCA cannot yet be established"
+      - "3 points: GCA is established"
+      - "4 points: GCA is established"
+      - "She fails the entry criteria"
+    answer: 0
+    why:
+      - "Correct: headache 1 + jaw claudication 1 = 2; ESR <50 earns nothing, so she needs ≥3 (p131)."
+      - ESR 30 does not reach the ≥50 mm/hour item.
+      - No PMR, abnormal artery or pathology points have been earned.
+      - She is over 50 with no exclusion criteria, so she meets the entry criteria.
+    src: { page: 131, quote: "In the presence of 3 points or more out of 11 with at least one point belonging to domain I along with all entry criteria" }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L08.055
+    kind: enumerate
+    topic: gca
+    prompt: Rules for temporal artery biopsy in suspected temporal arteritis?
+    points:
+      - Biopsy the abnormal site
+      - Take 4–6 cm if the artery is not obviously abnormal
+      - If suspicion is strong and the biopsy is normal, biopsy the opposite side
+      - Consider Doppler guidance
+    pass: 3
+    src: { page: 132, quote: "Biopsy abnormal site. Occipital or facial. 4-6 cm. if not obviously abnormal. If strong suspicion and normal biopsy, then biopsy opposite side." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L08.056
+    kind: cloze
+    topic: gca
+    text: "If the temporal artery is not obviously abnormal, take a biopsy length of {{c1::4–6 cm}}; with strong suspicion and a normal biopsy, biopsy the {{c2::opposite side}}."
+    src: { page: 132, quote: "4-6 cm. if not obviously abnormal. If strong suspicion and normal biopsy, then biopsy opposite side." }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L08.057
+    kind: card
+    topic: gca
+    front: Why can a temporal artery biopsy be normal in true GCA?
+    back: Vasculitis can be focal and segmental (skip lesions), so a short or wrong segment misses it; hence a long segment or the opposite side.
+    src: { page: 124, quote: "Can be focal and segmental. Not all the vessel may be involved." }
+    status: unverified
+  # ---------- p133-134: PMR ----------
+  - id: rheum.L08.058
+    kind: card
+    topic: pmr
+    front: Who gets polymyalgia rheumatica?
+    back: Patients at least 50 years old, usually Caucasian.
+    src: { page: 133, quote: "Patients Affected: At Least 50 Years Old. Usually Caucasian." }
+    status: unverified
+  - id: rheum.L08.059
+    kind: card
+    topic: pmr
+    front: Where is the muscle pain of PMR and for how long?
+    back: Shoulders and pelvic girdle (also neck), persisting at least 1 month, with severe morning stiffness and gelling.
+    src: { page: 133, quote: "Muscle Pain Persisting for at Least 1 Month: Shoulders. Pelvic Girdle. Severe Morning Stiffness and Gelling." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L08.060
+    kind: card
+    topic: pmr
+    front: Three required criteria of the PMR scoring algorithm (without ultrasound)?
+    back: Age ≥50 years, bilateral shoulder aching and abnormal ESR/CRP.
+    src: { page: 133, quote: "Scoring Algorithm without Ultrasound – 3 required criteria: Age ≥50 years, bilateral shoulder aching, abnormal ESR/CRP." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L08.061
+    kind: table
+    topic: pmr
+    title: PMR optional criteria (without ultrasound)
+    columns: [Criterion, Points]
+    rows:
+      - [Morning stiffness >45 minutes, "2"]
+      - [Hip pain or limited range of motion, "1"]
+      - [Normal RF or ACPA, "2"]
+      - [Absence of other joint pain, "1"]
+      - [Optimal cut-off, "4"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 133, quote: "Morning stiffness >45 minutes 6.2 (3.2, 11.8) 2. Hip pain or limited range of motion 2.1 (1.1, 4.0) 1." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: rheum.L08.062
+    kind: mcq
+    topic: pmr
+    stem: "A 72-year-old woman has 6 weeks of bilateral shoulder aching, high CRP, morning stiffness for 90 minutes and hip pain. RF is positive; ACPA was not tested. She has no other joint pain. What is her PMR score without ultrasound?"
+    options:
+      - "4: classified as PMR"
+      - "3: below the cut-off"
+      - "6: classified as PMR"
+      - "2: below the cut-off"
+    answer: 0
+    why:
+      - "Correct: stiffness >45 min 2 + hip pain 1 + no other joint pain 1 = 4; positive RF earns nothing; cut-off is 4 (p133)."
+      - 3 forgets one of the earned items.
+      - 6 wrongly gives 2 points for a normal RF; her RF is positive.
+      - 2 counts only the stiffness.
+    src: { page: 133, quote: "Normal RF or ACPA 3.0 (1.3, 6.8) 2. Absence of other joint pain 2.7 (1.4, 5.0) 1. Optimal cut-off point = 4." }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L08.063
+    kind: enumerate
+    topic: pmr
+    prompt: Clinical picture of PMR (p134)?
+    points:
+      - 4 weeks of pain and stiffness
+      - Neck, shoulder and pelvic girdle, abrupt onset
+      - Malaise, night sweats and low-grade fever
+      - Raised ESR and CRP
+      - No pathognomonic test
+      - No myopathy
+    pass: 4
+    src: { page: 134, quote: "4-weeks of PAIN and Stiffness. In neck, shoulder and pelvic girdle...abrupt onset. Malaise, Night Sweats And Low-Grade Fever." }
+    status: unverified
+  - id: rheum.L08.064
+    kind: card
+    topic: pmr
+    front: Is there a pathognomonic test or a myopathy in PMR?
+    back: No pathognomonic test and no myopathy; even the concept of a normal ESR is debatable.
+    src: { page: 134, quote: "NO pathognomonic test. No myopathy. Concept of normal ESR debatable." }
+    status: unverified
+  - id: rheum.L08.065
+    kind: enumerate
+    topic: pmr
+    prompt: Differential diagnosis of polymyalgia rheumatica?
+    points:
+      - Temporal arteritis
+      - Fibrositis
+      - Viral myalgia
+      - Depression
+      - Rheumatoid arthritis
+      - Occult infection
+      - Polymyositis
+      - Occult malignancy
+      - Multiple myeloma
+      - Endocrinopathy
+      - Osteoarthritis
+    pass: 6
+    src: { page: 134, quote: "Temporal Arteritis. Fibrositis. Viral Myalgia. Depression. Rheumatoid Arthritis. Occult Infection. Polymyositis. Occult Malignancy. Multiple Myeloma." }
+    status: unverified
+  # ---------- p135-136: Takayasu ----------
+  - id: rheum.L08.066
+    kind: enumerate
+    topic: tak
+    prompt: The three major criteria for Takayasu arteritis?
+    points:
+      - Left mid subclavian artery lesion (angiography)
+      - Right mid subclavian artery lesion (angiography)
+      - Characteristic signs and symptoms of at least one month
+    pass: 3
+    src: { page: 135, quote: "Three major criteria 1. Left mid subclavian artery lesion" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L08.067
+    kind: card
+    topic: tak
+    front: Where is the left mid subclavian lesion in the Takayasu major criteria?
+    back: The most severe stenosis or occlusion from 1 cm proximal to the vertebral artery orifice to 3 cm distal to it, on angiography.
+    src: { page: 135, quote: "present in the mid portion from the point 1 cm proximal to the vertebral artery orifice up to 3 cm distal to the orifice" }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L08.068
+    kind: enumerate
+    topic: tak
+    prompt: Characteristic signs and symptoms of Takayasu (≥1 month) in the major criterion?
+    points:
+      - Limb claudication
+      - Pulselessness or pulse differences in limbs
+      - Unobtainable or different BP (>10 mmHg systolic between limbs)
+      - Fever, neck pain
+      - Transient amaurosis, blurred vision, syncope
+      - Dyspnea or palpitations
+    pass: 4
+    src: { page: 135, quote: "These include limb claudication, pulselessness or pulse differences in limbs, an unobtainable or significant blood pressure difference (>10 mmHg systolic" }
+    status: unverified
+  - id: rheum.L08.069
+    kind: cloze
+    topic: tak
+    text: "In Takayasu criteria, a significant limb blood pressure difference is {{c1::>10 mmHg}} systolic; a high ESR is {{c2::>20 mm/h}} (Westergren)."
+    src: { page: 135, quote: "significant blood pressure difference (>10 mmHg systolic blood pressure in limb)" }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L08.070
+    kind: cloze
+    topic: tak
+    text: "Takayasu hypertension criterion: persistent BP {{c1::>140/90}} mmHg brachial or {{c2::>160/90}} popliteal."
+    src: { page: 135, quote: "Hypertension Persistent blood pressure >140/90 mmHg brachial or >160/90 popliteal." }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L08.071
+    kind: enumerate
+    topic: tak
+    prompt: The ten minor criteria for Takayasu arteritis?
+    points:
+      - High ESR (>20 mm/h)
+      - Carotid artery tenderness
+      - Hypertension
+      - Aortic regurgitation or annuloaortic ectasia
+      - Pulmonary artery lesion
+      - Left mid common carotid lesion
+      - Distal brachiocephalic trunk lesion
+      - Descending thoracic aorta lesion
+      - Abdominal aorta lesion
+      - Coronary artery lesion
+    pass: 7
+    src: { page: 135, quote: "High ESR Unexplained high ESR >20 mm/h (Westergren) at diagnosis or evidence in patient‘s history" }
+    status: unverified
+  - id: rheum.L08.072
+    kind: card
+    topic: tak
+    front: In the Takayasu carotid tenderness criterion, what is not acceptable?
+    back: Neck muscle tenderness; it must be tenderness of the common carotid arteries on palpation.
+    src: { page: 135, quote: "Carotid artery tenderness Unilateral or bilateral tenderness of common carotid arteries on palpation. Neck muscle tenderness is unacceptable." }
+    status: unverified
+  - id: rheum.L08.073
+    kind: card
+    topic: tak
+    front: When does a coronary artery lesion count as a Takayasu criterion?
+    back: When documented on angiography below age 30 without risk factors such as hyperlipidaemia or diabetes.
+    src: { page: 136, quote: "Coronary artery lesion Documented on angiography below the age of 30 years in the absence of risk factors" }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L08.074
+    kind: card
+    topic: tak
+    front: Does tortuosity of the descending thoracic aorta alone count as a Takayasu lesion?
+    back: No; narrowing, dilation, aneurysm or luminal irregularity on angiography is needed.
+    src: { page: 136, quote: "luminal irregularity or any combination determined by angiography; tortuosity alone is unacceptable." }
+    status: unverified
+  # ---------- p136-137: management of LVV and PMR ----------
+  - id: rheum.L08.075
+    kind: card
+    topic: lvv-rx
+    front: How should a suspected diagnosis of large vessel vasculitis be confirmed?
+    back: By imaging or histology.
+    src: { page: 136, quote: "A suspected diagnosis of LVV should be confirmed by imaging or histology." }
+    status: unverified
+  - id: rheum.L08.076
+    kind: cloze
+    topic: lvv-rx
+    text: "Active GCA or Takayasu: start high-dose glucocorticoids, {{c1::40–60 mg/day}} prednisone-equivalent, {{c2::immediately}} for remission induction."
+    src: { page: 136, quote: "High dose glucocorticoid therapy (40-60 mg/day prednisone-equivalent) should be initiated immediately for induction of remission" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: rheum.L08.077
+    kind: card
+    topic: lvv-rx
+    front: Adjunctive therapy in selected GCA patients, and its alternative?
+    back: Tocilizumab; methotrexate may be used as an alternative.
+    src: { page: 137, quote: "or complications) using tocilizumab. Methotrexate may be used as an alternative." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L08.078
+    kind: card
+    topic: lvv-rx
+    front: Which GCA patients get adjunctive tocilizumab?
+    back: Refractory or relapsing disease, or increased risk of glucocorticoid-related adverse events or complications.
+    src: { page: 137, quote: "refractory or relapsing disease, presence of an increased risk for glucocorticoid-related adverse events or complications) using tocilizumab." }
+    status: unverified
+  - id: rheum.L08.079
+    kind: card
+    topic: lvv-rx
+    front: Steroid-sparing therapy in Takayasu arteritis?
+    back: Non-biologic glucocorticoid-sparing agents with glucocorticoids in all TAK patients; biologics for refractory or relapsing disease.
+    src: { page: 137, quote: "Non-biologic glucocorticoid-sparing agents should be given in combination with glucocorticoids in all patients with TAK" }
+    status: unverified
+  - id: rheum.L08.080
+    kind: card
+    topic: lvv-rx
+    front: Routine antiplatelet or anticoagulant therapy for large vessel vasculitis?
+    back: No longer recommended, unless indicated for other reasons.
+    src: { page: 137, quote: "We no longer recommend the routine use of antiplatelet or anticoagulant therapy for treatment of LVV unless it is indicated for other reasons." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L08.081
+    kind: mcq
+    topic: lvv-rx
+    stem: "A 74-year-old man with confirmed GCA relapses twice while tapering prednisone and has poorly controlled diabetes. Which add-on does the book recommend?"
+    options:
+      - Tocilizumab
+      - Routine low-dose aspirin
+      - Cyclophosphamide
+      - Warfarin
+      - Rituximab
+    answer: 0
+    why:
+      - "Correct: relapsing GCA with high steroid-risk gets adjunctive tocilizumab (methotrexate as alternative) (p137)."
+      - Routine antiplatelets are no longer recommended for LVV.
+      - Cyclophosphamide is an AAV induction drug, not the book's GCA add-on.
+      - Anticoagulation is not routine in LVV.
+      - Rituximab is an AAV drug, not the GCA adjunct.
+    src: { page: 137, quote: "adjunctive therapy in selected patients with GCA (refractory or relapsing disease" }
+    status: unverified
+  - id: rheum.L08.082
+    kind: enumerate
+    topic: lvv-rx
+    prompt: Treatment of polymyalgia rheumatica?
+    points:
+      - Prednisone 15 mg
+      - Slow taper over 12–18 months
+      - Methotrexate as possible 2nd-line agent
+      - GIOP (glucocorticoid-induced osteoporosis) prophylaxis
+      - Look for temporal arteritis
+    pass: 4
+    src: { page: 137, quote: "Treatment of PMR Prednisone 15 mg. Slow taper over 12 to 18 months. Possible mtx use as 2nd line agent. GIOP prophylaxis." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L08.083
+    kind: cloze
+    topic: lvv-rx
+    text: "PMR starts on prednisone {{c1::15 mg}} with a slow taper over {{c2::12–18 months}}; GCA starts on {{c3::40–60 mg/day}}."
+    src: { page: 137, quote: "Prednisone 15 mg. Slow taper over 12 to 18 months." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: rheum.L08.084
+    kind: card
+    topic: lvv-rx
+    front: Is the outcome of PMR always benign?
+    back: The concept of a benign outcome is challengeable; always look for temporal arteritis.
+    src: { page: 137, quote: "Look for temporal arteritis. Concept of benign outcome challengeable." }
+    status: unverified
+  # ---------- p137-140: medium vessel and Kawasaki ----------
+  - id: rheum.L08.085
+    kind: enumerate
+    topic: kawasaki
+    prompt: Medium vessel vasculitides listed in the lecture?
+    points:
+      - Kawasaki disease
+      - Polyarteritis nodosa
+      - Hepatitis B-related
+      - Familial Mediterranean fever
+      - Cutaneous PAN
+    pass: 4
+    src: { page: 137, quote: "Medium vessel vasculitis Kawasaki's disease. Polyarteritis nodosa. Hepatitis B –related. Familial Mediterranean fever. Cutaneous PAN." }
+    status: unverified
+  - id: rheum.L08.086
+    kind: cloze
+    topic: kawasaki
+    text: "Kawasaki disease: fever for at least {{c1::5 days}} with at least {{c2::4 of the 5}} principal clinical findings."
+    src: { page: 137, quote: "Fever lasting at least 5 days without any other explanation with at least 4 of the 5 following principal clinical findings" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: rheum.L08.087
+    kind: enumerate
+    topic: kawasaki
+    prompt: The five principal clinical findings of Kawasaki disease?
+    points:
+      - Bilateral bulbar conjunctival injection without exudate
+      - Lip erythema and cracking, strawberry tongue, oral and pharyngeal erythema
+      - Erythema and oedema of hands or feet, then periungual desquamation
+      - Rash (maculopapular, diffuse erythroderma, or erythema multiforme-like)
+      - Cervical lymphadenopathy (≥1 node >1.5 cm, usually unilateral)
+    pass: 5
+    src: { page: 138, quote: "Erythema and cracking of lips, strawberry tongue, and/or erythema of oral and pharyngeal mucosa" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L08.088
+    kind: cloze
+    topic: kawasaki
+    text: "Kawasaki lymphadenopathy: at least one node {{c1::>1.5 cm}}, usually {{c2::unilateral}}. Diagnosis may be made with only {{c3::4 days}} of fever if ≥4 principal findings are present."
+    src: { page: 138, quote: "Cervical lymphadenopathy (at least 1 lymph node >1.5 cm in diameter), usually unilaterally. Diagnosis may be made with only 4 days of fever" }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L08.089
+    kind: card
+    topic: kawasaki
+    front: Define incomplete Kawasaki disease.
+    back: Prolonged unexplained fever in an infant or child with fewer than 4 principal findings, plus compatible labs or echo (coronary dilatation).
+    src: { page: 138, quote: "Incomplete KD Prolonged unexplained fever in an infant or child with <4 of the principal clinical findings of KD." }
+    status: unverified
+  - id: rheum.L08.090
+    kind: card
+    topic: kawasaki
+    front: Compatible laboratory markers for incomplete Kawasaki?
+    back: Raised ESR/CRP, raised transaminases, and urine with leukocyte esterase-negative WBCs.
+    src: { page: 138, quote: "Compatible laboratory markers (elevated ESR/CRP level, elevated transaminase levels, UA with leukocyte." }
+    status: unverified
+  - id: rheum.L08.091
+    kind: table
+    topic: kawasaki
+    title: Kawasaki disease drug doses
+    columns: [Drug, Dose]
+    rows:
+      - [IVIG, "Single dose 2 g/kg (reasonable maximum 100–140 g)"]
+      - [Glucocorticoids, "Prednisone 2 mg/kg/day (max 60 mg/day), tapered over 15 days"]
+      - [Aspirin high dose, "80–100 mg/kg/day"]
+      - [Aspirin moderate dose, "30–50 mg/kg/day"]
+      - [Aspirin low dose, "3–5 mg/kg/day"]
+      - [Non-glucocorticoid immunomodulators, "Anakinra, cyclosporine or infliximab"]
+    blanks: [[0, 1], [1, 1], [2, 1], [4, 1], [5, 1]]
+    src: { page: 138, quote: "IVIG Single dose of 2 gm/kg (no defined maximum dose, but the reasonable maximum range is 100–140 gm)." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: rheum.L08.092
+    kind: enumerate
+    topic: kawasaki
+    prompt: When is an echocardiogram with coronary measurements strongly recommended without delay?
+    points:
+      - Suspected incomplete KD with fever
+      - Unexplained shock physiology
+      - Unexplained macrophage activation syndrome (MAS)
+    pass: 3
+    src: { page: 139, quote: "For children with unexplained MAS, obtaining an echocardiogram with coronary artery measurements is strongly recommended." }
+    status: unverified
+  - id: rheum.L08.093
+    kind: card
+    topic: kawasaki
+    front: Standard-of-care initial therapy for Kawasaki disease?
+    back: IVIG (good practice statement).
+    src: { page: 139, quote: "Good practice statement: IVIG is the standard-of-care therapy for the initial treatment of KD." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L08.094
+    kind: card
+    topic: kawasaki
+    front: Initial therapy for acute KD at high risk of IVIG resistance or coronary aneurysm?
+    back: IVIG plus adjunctive glucocorticoids, or IVIG plus a non-glucocorticoid immunomodulator (conditional), over IVIG alone.
+    src: { page: 139, quote: "use of IVIG with adjunctive glucocorticoids as initial therapy is conditionally recommended over treatment with IVIG alone." }
+    status: unverified
+  - id: rheum.L08.095
+    kind: card
+    topic: kawasaki
+    front: When should incomplete Kawasaki be treated with IVIG?
+    back: Promptly at diagnosis; strongly recommended over delaying until day 10 or later.
+    src: { page: 139, quote: "prompt treatment with IVIG at the time of diagnosis is strongly recommended over delaying treatment until day 10 or later." }
+    status: unverified
+  - id: rheum.L08.096
+    kind: card
+    topic: kawasaki
+    front: "Persistent fever after the first IVIG in acute KD: what next?"
+    back: A second course of IVIG (conditionally preferred over glucocorticoids).
+    src: { page: 139, quote: "persistent fevers after initial treatment with IVIG, a second course of IVIG is conditionally recommended over the use of glucocorticoids." }
+    status: unverified
+  - id: rheum.L08.097
+    kind: card
+    topic: kawasaki
+    front: Persistent fever after repeated IVIG courses in acute KD?
+    back: Either non-glucocorticoid immunosuppressive therapy or glucocorticoids (ungraded position statement).
+    src: { page: 140, quote: "persistent fevers after repeated treatment with IVIG, either nonglucocorticoid immunosuppressive therapy or glucocorticoids may be used." }
+    status: unverified
+  - id: rheum.L08.098
+    kind: card
+    topic: kawasaki
+    front: "Kawasaki arthritis persisting after IVIG, no coronary aneurysms: treatment?"
+    back: NSAIDs (conditionally recommended).
+    src: { page: 140, quote: "using NSAIDs to treat arthritis is conditionally recommended over not using NSAIDS." }
+    status: unverified
+  - id: rheum.L08.099
+    kind: card
+    topic: kawasaki
+    front: Aspirin in acute Kawasaki disease?
+    back: Strongly recommended over no aspirin.
+    src: { page: 140, quote: "For patients with acute KD, using aspirin is strongly recommended over no aspirin." }
+    status: unverified
+  - id: rheum.L08.100
+    kind: case
+    topic: kawasaki
+    stem: A 3-year-old boy has had fever for 6 days. He has red eyes without discharge, cracked red lips and a strawberry tongue, swollen red hands, and a 2 cm left cervical node.
+    steps:
+      - question: How many principal Kawasaki findings does he have, and is the diagnosis made?
+        options:
+          - "4 findings with ≥5 days of fever: Kawasaki disease"
+          - "3 findings: incomplete Kawasaki only"
+          - "5 findings: but fever must last 10 days"
+          - "Kawasaki needs a positive echo first"
+        answer: 0
+        why: "Correct: conjunctival injection, oral changes, extremity changes, node >1.5 cm = 4 of 5, fever ≥5 days (pp137-138). He has 4 findings, not 3. There is no rash, so 4 not 5; and 5 days of fever suffice. Complete KD is clinical; echo is not required for the diagnosis."
+      - reveal: You make the diagnosis on day 6.
+        question: What is the standard initial treatment?
+        options:
+          - "IVIG 2 g/kg single dose plus aspirin"
+          - "Prednisone 2 mg/kg/day alone"
+          - "Infliximab alone"
+          - "Wait until day 10 to see if the fever settles"
+        answer: 0
+        why: "Correct: IVIG is the standard of care, and aspirin is strongly recommended (pp138-140). Steroids are adjunctive for high-risk patients, not alone. Non-glucocorticoid agents are adjuncts or for resistant fever. Delay to day 10 is advised against."
+      - reveal: After IVIG, fever persists 36 hours later.
+        question: Next step?
+        options:
+          - "A second course of IVIG"
+          - "Stop aspirin"
+          - "Start cyclophosphamide"
+          - "No treatment; fever is expected"
+        answer: 0
+        why: "Correct: a second IVIG course is conditionally preferred over glucocorticoids (p139). Aspirin is continued; it is strongly recommended. Cyclophosphamide has no role in the book's KD plan. Persistent fever is IVIG resistance and needs treatment and monitoring."
+    src: { page: 139, quote: "a second course of IVIG is conditionally recommended over the use of glucocorticoids." }
+    status: unverified
+  # ---------- p140: relapsing polychondritis ----------
+  - id: rheum.L08.101
+    kind: enumerate
+    topic: polychondritis
+    prompt: Features of relapsing polychondritis?
+    points:
+      - Uncommon, episodic cartilage inflammation
+      - Auricular and nasal chondritis
+      - Saddle-nose deformity
+      - Arthritis, hearing loss, vertigo
+      - Laryngotracheobronchial symptoms
+      - Vasculitis and associated disorders
+    pass: 4
+    src: { page: 140, quote: "Uncommon, cartilage inflammation. Episodic. Auricular and nasal chondritis. Saddle-nose deformity." }
+    status: unverified
+  - id: rheum.L08.102
+    kind: card
+    topic: polychondritis
+    front: Main treatment of relapsing polychondritis in the book?
+    back: Prednisone (plus other agents as needed).
+    src: { page: 140, quote: "Associated disorders. Prednisone.+?." }
+    status: unverified
+  # ---------- p141-144: polyarteritis nodosa ----------
+  - id: rheum.L08.103
+    kind: enumerate
+    topic: pan
+    prompt: ACR 1990 diagnostic criteria for polyarteritis nodosa?
+    points:
+      - Weight loss >4 kg not due to diet or other factors
+      - Livedo reticularis
+      - Testicular pain or tenderness
+      - Myalgias, weakness or leg tenderness
+      - Mono- or polyneuropathy
+      - Diastolic BP >90 mmHg
+      - Raised urea or creatinine (not dehydration or obstruction)
+      - Hepatitis B surface antigen or antibody
+      - Abnormal coeliac or renal angiography
+      - Polymorphonuclear leukocytes in medium-small artery walls on biopsy
+    pass: 7
+    src: { page: 141, quote: "Weight loss of more than 4 kg which is not related with diet or other factors from the beginning of the disease." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L08.104
+    kind: cloze
+    topic: pan
+    text: "ACR 1990 PAN numbers: weight loss {{c1::>4 kg}} and diastolic BP {{c2::>90 mmHg}}."
+    src: { page: 141, quote: "Diastolic blood pressure > 90 mmHg." }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L08.105
+    kind: card
+    topic: pan
+    front: Which viral marker is one of the ACR 1990 PAN criteria?
+    back: Hepatitis B surface antigen or antibody.
+    src: { page: 141, quote: "Presence of Hepatitis B surface antigen or antibody." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L08.106
+    kind: card
+    topic: pan
+    front: Mandatory criterion of the (childhood) PAN criteria on p141?
+    back: A systemic illness with biopsy showing small and mid-size artery necrotizing vasculitis or angiographic aneurysms or occlusions, plus at least 2 of 7 criteria.
+    src: { page: 141, quote: "A systemic illness accompanied by either a biopsy showing small and mid- size artery necrotizing vasculitis or angiographic abnormalities (aneurysms or occlusions)" }
+    status: unverified
+  - id: rheum.L08.107
+    kind: card
+    topic: pan
+    front: In PAN workup, what if magnetic resonance angiography is negative?
+    back: Do conventional angiography.
+    src: { page: 141, quote: "(should include conventional angiography if magnetic resonance angiography is negative)" }
+    status: unverified
+  - id: rheum.L08.108
+    kind: enumerate
+    topic: pan
+    prompt: The seven minor criteria with the mandatory PAN criterion (need ≥2)?
+    points:
+      - Skin involvement (livedo, tender subcutaneous nodules)
+      - Myalgia or muscle tenderness
+      - Systemic hypertension
+      - Mono- or polyneuropathy
+      - Abnormal urine or GFR <50% of normal for age
+      - Testicular pain or tenderness
+      - Vasculitis of another major organ (GI, cardiac, pulmonary, CNS)
+    pass: 5
+    src: { page: 141, quote: "Skin involvement (livedo reticularis, tender subcutaneous nodules, other vasculitic lesions)." }
+    status: unverified
+  - id: rheum.L08.109
+    kind: card
+    topic: pan
+    front: Histopathology of cutaneous PAN (p142)?
+    back: Fibrinoid necrotizing vasculitis of small and medium calibre arteries.
+    src: { page: 142, quote: "Histopathological findings Fibrinoid necrotizing vasculitis of small and medium caliber arteries." }
+    status: unverified
+  - id: rheum.L08.110
+    kind: card
+    topic: pan
+    front: Exclusion manifestations for cutaneous PAN?
+    back: Peripheral neuropathy, arthralgia/arthritis or myalgia/myositis outside the affected skin region.
+    src: { page: 142, quote: "Exclusion manifestation Peripheral neuropathy outside the affected skin region; Arthralgia/arthritis or myalgia/myositis outside the affected skin region." }
+    status: unverified
+  - id: rheum.L08.111
+    kind: cloze
+    topic: pan
+    text: "Systemic PAN features in the p142 table: fever {{c1::≥38°C for ≥2 weeks}} and weight loss {{c2::≥6 kg in 6 months}}."
+    src: { page: 142, quote: "Fever (≥38°C, ≥2 weeks). Weight loss (≥6kg in 6 months). Arterial hypertension." }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L08.112
+    kind: table
+    topic: pan
+    title: PAN disease states (ACR guideline Table 1)
+    columns: [Term, Definition]
+    rows:
+      - [Severe disease, "Life- or organ-threatening: renal disease, mononeuritis multiplex, muscle disease, mesenteric ischaemia, coronary involvement, limb/digit ischaemia"]
+      - [Nonsevere disease, "Mild systemic symptoms, uncomplicated cutaneous disease, mild inflammatory arthritis"]
+      - [Remission, "No clinical signs or symptoms of PAN, on or off immunosuppression"]
+      - [Refractory, Persistent active disease despite an appropriate immunosuppressive course]
+      - [Relapse, Recurrence of active disease after a period of remission]
+    blanks: [[0, 1], [1, 1], [3, 1]]
+    src: { page: 144, quote: "Severe disease Vasculitis with life- or organ-threatening manifestations (e.g. renal disease, mononeuritis multiplex, muscle disease, mesenteric ischemia" }
+    status: unverified
+  - id: rheum.L08.113
+    kind: table
+    topic: pan
+    title: Glucocorticoid dose definitions (adults)
+    columns: [Term, Adult dose]
+    rows:
+      - [IV pulse GCs, "Methylprednisolone 500–1,000 mg/day for 3–5 days"]
+      - [High-dose oral GCs, "Prednisone 1 mg/kg/day (generally up to 80 mg/day)"]
+      - [Moderate-dose oral GCs, "Prednisone 0.25–0.5 mg/kg/day (10–40 mg/day)"]
+      - [Low-dose oral GCs, "Prednisone ≤10 mg/day"]
+      - [Non-GC immunosuppressives, "Azathioprine, cyclophosphamide, methotrexate, mycophenolate mofetil"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 144, quote: "NV pulse GCs IV methylprednisolone 500-1,000 mg/day (adults) or 30 mg/kg/day (children; maximum 1,000 mg/ day) or equivalent for 3-5 days" }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L08.114
+    kind: card
+    topic: pan
+    front: Remission induction for non-severe active PAN?
+    back: A non-GC immunosuppressive (e.g., methotrexate or azathioprine) with glucocorticoids, over GCs alone.
+    src: { page: 144, quote: "non-GC immunosuppressive agent (e.g., MTX or AZA) with GC over GC alone" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L08.115
+    kind: card
+    topic: pan
+    front: Remission induction for severe active PAN?
+    back: High-dose oral or pulse IV glucocorticoids with cyclophosphamide, over GCs alone.
+    src: { page: 144, quote: "High-dose oral or pulse IV GC with CYC over GC alone" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L08.116
+    kind: card
+    topic: pan
+    front: Remission maintenance in PAN after induction?
+    back: A non-GC (and after severe disease, non-CYC) immunosuppressive for 18 months, with a GC taper guided by the patient.
+    src: { page: 144, quote: "Remission maintenance: Non-GC, non-CYC immunosuppressive agent for 18 months" }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L08.117
+    kind: order
+    topic: pan
+    prompt: Order the book's algorithm for severe PAN.
+    steps:
+      - Classify active PAN as severe
+      - High-dose oral or pulse IV glucocorticoids with cyclophosphamide
+      - Check for clinical remission
+      - Maintain with a non-GC, non-CYC immunosuppressive for 18 months
+      - Taper glucocorticoids guided by the patient's condition and preferences
+    src: { page: 144, quote: "Key recommendations for the treatment of polyarteritis nodosa (PAN)" }
+    status: unverified
+  - id: rheum.L08.118
+    kind: mcq
+    topic: pan
+    stem: "A 50-year-old man (HBsAg negative) has fever, 7 kg weight loss, testicular pain, foot drop and new hypertension. Mesenteric angiography shows microaneurysms. Urine has no casts. Best induction?"
+    options:
+      - High-dose glucocorticoids with cyclophosphamide
+      - Glucocorticoids alone
+      - Methotrexate with glucocorticoids
+      - Rituximab alone
+      - NSAIDs and observation
+    answer: 0
+    why:
+      - "Correct: mononeuritis (foot drop) makes this severe PAN; induction is high-dose or pulse GC with CYC (p144)."
+      - GC alone is inferior to GC plus CYC in severe disease.
+      - MTX or AZA with GC is for non-severe PAN.
+      - Rituximab is an AAV drug, not the book's PAN induction.
+      - Severe vasculitis needs immunosuppression.
+    src: { page: 144, quote: "High-dose oral or pulse IV GC with CYC over GC alone" }
+    status: unverified
+  - id: rheum.L08.119
+    kind: card
+    topic: pan
+    front: Why does classical PAN cause renal infarction and hypertension but no glomerulonephritis?
+    back: It is a medium vessel arteritis (renal and interlobar arteries) that spares the glomerular capillaries; ischaemia triggers renin.
+    src: { page: 128, quote: "Glomerulonephritis (absent in classical PAN). Renal failure. Hypertension usually (not seen in WG). Renal infarction." }
+    status: unverified
+  # ---------- p145-150: ANCA-associated vasculitis ----------
+  - id: rheum.L08.120
+    kind: table
+    topic: aav
+    title: AAV spectrum
+    columns: [Group, Examples]
+    rows:
+      - [Organ- or life-threatening, "Alveolar haemorrhage, glomerulonephritis, mononeuritis multiplex, mesenteric ischaemia"]
+      - [Non-organ-threatening, "Sinusitis, lung nodule, purpura, arthralgia"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 145, quote: "Organ- or life-threatening disease Alveolar hemorrhage Glomerulonephritis Mononeuritis multiplex Mesenteric ischemia" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L08.121
+    kind: card
+    topic: aav
+    front: The three anatomopathologic diagnoses of AAV?
+    back: Granulomatosis with polyangiitis, microscopic polyangiitis, and eosinophilic granulomatosis with polyangiitis.
+    src: { page: 146, quote: "Anatomopathologic diagnoses Granulomatosis with polyangiitis Microscopic polyangiitis Eosinophilic granulomatosis with polyangiitis" }
+    status: unverified
+  - id: rheum.L08.122
+    kind: table
+    topic: aav
+    title: GPA versus MPA
+    columns: [Feature, GPA, MPA]
+    rows:
+      - [ANCA pattern, c-ANCA, p-ANCA]
+      - [Antigen, PR-3, MPO]
+      - [Histology, Necrotizing vasculitis and granulomas, Necrotizing vasculitis]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 1]]
+    src: { page: 146, quote: "GPA c-ANCA+ PR-3+ Necrotizing vasculitis and granulomas MPA p-ANCA+ MPO+ Necrotizing vasculitis" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L08.123
+    kind: table
+    topic: aav
+    title: 2022 ACR/EULAR classification criteria for GPA
+    columns: [Item, Points]
+    rows:
+      - ["Nasal bloody discharge, ulcers, crusting, congestion, septal defect", "+3"]
+      - ["Cartilaginous involvement (ear/nose, hoarseness, stridor, saddle nose)", "+2"]
+      - [Conductive or sensorineural hearing loss, "+1"]
+      - [c-ANCA or anti-PR3 positive, "+5"]
+      - ["Pulmonary nodules, mass or cavitation", "+2"]
+      - ["Granuloma or giant cells on biopsy", "+2"]
+      - ["Nasal/paranasal sinus inflammation or mastoiditis on imaging", "+1"]
+      - [Pauci-immune GN on biopsy, "+1"]
+      - [p-ANCA or anti-MPO positive, "−1"]
+      - ["Eosinophils ≥1 × 10⁹/L", "−4"]
+      - [Score needed, "≥5"]
+    blanks: [[0, 1], [3, 1], [4, 1], [8, 1], [9, 1], [10, 1]]
+    src: { page: 147, quote: "Sum scores for 10 items, if present. A score of ≥ 5 is needed for classification of granulomatosis with polyangiitis." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: rheum.L08.124
+    kind: table
+    topic: aav
+    title: 2022 ACR/EULAR classification criteria for MPA
+    columns: [Item, Points]
+    rows:
+      - ["Nasal bloody discharge, ulcers, crusting, congestion, septal defect", "−3"]
+      - [p-ANCA or anti-MPO positive, "+6"]
+      - [Fibrosis or interstitial lung disease on chest imaging, "+3"]
+      - [Pauci-immune GN on biopsy, "+3"]
+      - [c-ANCA positive, "−1"]
+      - ["Eosinophils ≥1 × 10⁹/L", "−4"]
+      - [Score needed, "≥5"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [6, 1]]
+    src: { page: 147, quote: "Sum scores for 6 items, if present. A score of ≥ 5 is needed for classification of microscopic polyangiitis." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: rheum.L08.125
+    kind: mcq
+    topic: aav
+    stem: "A 66-year-old man has rapidly rising creatinine, biopsy-proven pauci-immune GN, and fibrotic interstitial lung disease. He is MPO-ANCA positive and has no nasal disease. Eosinophils are normal. Which classification does the 2022 ACR/EULAR score give?"
+    options:
+      - "MPA (score 12)"
+      - "GPA (score 6)"
+      - "EGPA"
+      - "Neither: score below 5"
+    answer: 0
+    why:
+      - "Correct: MPA = MPO +6, ILD +3, pauci-immune GN +3 = 12 (p147)."
+      - "GPA score: pauci-immune GN +1, MPO −1 = 0; no c-ANCA, nodules or nasal disease."
+      - EGPA needs eosinophilia; his count is normal.
+      - His MPA score is well above 5.
+    src: { page: 147, quote: "Positive test for perinuclear antineutrophil cytoplasmic antibodies or antimyeloperoxidase antibodies ANCA positive +6" }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L08.126
+    kind: card
+    topic: aav
+    front: In both 2022 GPA and MPA criteria, which lab finding subtracts 4 points, and why?
+    back: Eosinophils ≥1 × 10⁹/L; it points to EGPA instead.
+    src: { page: 147, quote: "Serum eosinophil count ≥ 1 x 10⁹/liter -4" }
+    status: unverified
+  - id: rheum.L08.127
+    kind: table
+    topic: aav
+    title: Organ involvement in GPA vs MPA (%)
+    columns: [Organ, GPA, MPA]
+    rows:
+      - [Skin, 30–60, 40–70]
+      - [Kidneys, 50–80, 90–100]
+      - [Lungs, 60–80, 20–60]
+      - ["Ear, nose, throat", 80–90, 20–30]
+    blanks: [[1, 2], [2, 1], [3, 1], [3, 2]]
+    src: { page: 148, quote: "Kidneys 50-80 90-100 Lungs 60-80 20-60 Ear, Nose, Throat 80-90 20-30" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: rheum.L08.128
+    kind: card
+    topic: aav
+    front: Most frequently involved organ in GPA vs in MPA?
+    back: GPA, ear, nose and throat (80–90%); MPA, kidneys (90–100%).
+    src: { page: 148, quote: "Kidneys 50-80 90-100 Lungs 60-80 20-60 Ear, Nose, Throat 80-90 20-30" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L08.129
+    kind: table
+    topic: aav
+    title: EGPA, ANCA-positive vs ANCA-negative
+    columns: [Feature, ANCA positive, ANCA negative]
+    rows:
+      - [Clinical, "Necrotizing GN, purpura, pulmonary haemorrhage, mononeuritis", "Nasal polyposis, pulmonary infiltrate, cardiomyopathy, polyneuropathy, eosinophilic gastritis"]
+      - [Histopathology, Small vessel vasculitis, Eosinophil tissue infiltration]
+      - [Pathogenesis, ANCA related, Toxic products from eosinophils]
+    blanks: [[0, 1], [0, 2], [1, 2], [2, 2]]
+    src: { page: 149, quote: "Nasal polyposis. Pulm infilterate. Cardiomyopathy. Polyneuropathy. Esinophilic gastritis. Histopatholgy. Esinophil tissue infilteration." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L08.130
+    kind: mcq
+    topic: aav
+    stem: "A 40-year-old woman with late-onset asthma and nasal polyps develops heart failure from cardiomyopathy and eosinophilia. ANCA is negative. Which mechanism does the book link to this EGPA phenotype?"
+    options:
+      - Toxic products from eosinophils infiltrating tissue
+      - ANCA-mediated small vessel vasculitis
+      - Immune complex deposition with low complement
+      - Th1 granulomatous large vessel arteritis
+    answer: 0
+    why:
+      - "Correct: ANCA-negative EGPA (polyps, infiltrates, cardiomyopathy) is driven by eosinophil toxic products and tissue infiltration (p149)."
+      - ANCA-related small vessel vasculitis is the ANCA-positive phenotype (GN, purpura, haemorrhage, mononeuritis).
+      - Immune complex disease is HSP and PAN.
+      - Th1 large vessel disease is GCA and Takayasu.
+    src: { page: 149, quote: "Esinophil tissue infilteration. Pathogenesis. Toxic products from eosinophil." }
+    status: unverified
+  - id: rheum.L08.131
+    kind: enumerate
+    topic: aav
+    prompt: Facts about c-ANCA in the lecture?
+    points:
+      - Detected by indirect immunofluorescence
+      - 90% sensitive for systemic (GPA) in the active stage
+      - Antigen is proteinase 3
+      - Found rarely in other vasculitides
+    pass: 3
+    src: { page: 150, quote: "Indirect immunofluorescence. C-Anca. 90% sensitive for systemic in active stage of disease. Antigen is proteinase 3." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L08.132
+    kind: enumerate
+    topic: aav
+    prompt: PR3-ANCA is associated with what?
+    points:
+      - Fast decline of renal function
+      - More frequent extra-renal manifestations
+      - Granuloma formation
+      - More frequent relapses
+    pass: 4
+    src: { page: 150, quote: "PR3 ANCA associated with: Fast decline of renal function. Extra renal manifestations more frequent. Granuloma formation. Relapses more frequent." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L08.133
+    kind: table
+    topic: aav-rx
+    title: Recent standard of care in AAV (p150)
+    columns: [Phase, What the book shows]
+    rows:
+      - [Induction, "Rituximab and high-dose steroids; cyclophosphamide rarely; plasma exchange no"]
+      - [Maintenance, "Not all patients need it; rituximab for those who do"]
+      - [Shortcomings, "No sound remission, high relapse in some subsets, toxicity (glucocorticoids, COVID and B-cell depletion)"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 150, quote: "Induction Rituximab High-dose steroids Cyclophosphamide rarely Plasma exchange: no" }
+    status: unverified
+  # ---------- p151-156: AAV management ----------
+  - id: rheum.L08.134
+    kind: card
+    topic: aav-rx
+    front: Commonest treatment-related damage in the long-term EUVAS data, and what most of it relates to?
+    back: Osteoporosis (about 15%); glucocorticoids drive osteoporosis, diabetes, cataracts, atrophy and avascular necrosis.
+    src: { page: 151, quote: "Long-Term Data EUVAS Trials: Treatment-Related Organ Damage" }
+    status: unverified
+  - id: rheum.L08.135
+    kind: enumerate
+    topic: aav-rx
+    prompt: Why do we need steroid-sparing strategies in vasculitis?
+    points:
+      - High-dose steroids have been central to induction for 60 years
+      - Steroids are the major contributor to serious adverse events, especially infection, in year 1
+      - Long-term steroid damage rivals that of the disease
+    pass: 3
+    src: { page: 151, quote: "Steroids are the major contributor to serious adverse events, especially infection, in the first year of treatment" }
+    status: unverified
+  - id: rheum.L08.136
+    kind: order
+    topic: aav-rx
+    prompt: Order the EULAR algorithm for new organ-threatening AAV.
+    steps:
+      - New diagnosis of ANCA-associated vasculitis
+      - Organ- or life-threatening disease
+      - Cyclophosphamide or rituximab with glucocorticoid (plasma exchange if RPGN or pulmonary haemorrhage)
+      - Remission
+      - Azathioprine, methotrexate or rituximab with a continued glucocorticoid taper
+      - After 2 years, taper azathioprine or methotrexate, stop rituximab
+    src: { page: 151, quote: "Algorithm to describe the management of new antineutrophil cytoplasmic antibody (ANCA)-associated vasculitis." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L08.137
+    kind: card
+    topic: aav-rx
+    front: Protocol prednisolone target in key AAV induction trials?
+    back: About 60 mg at weeks 1–2, falling to about 20 mg by week 11–12 and under 10 mg by about week 20.
+    src: { page: 152, quote: "Protocol target prednisolone dosages in the key induction trials of antineutrophil cytoplasmic antibody associated vasculitis." }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L08.138
+    kind: card
+    topic: aav-rx
+    front: EULAR statement 1 on where AAV patients are managed?
+    back: In close collaboration with, or at, centres of expertise.
+    src: { page: 152, quote: "We recommend that patients with AAV are managed in close collaboration with, or at, centres of expertise." }
+    status: unverified
+  - id: rheum.L08.139
+    kind: card
+    topic: aav-rx
+    front: EULAR statement 2 on biopsy in AAV?
+    back: A positive biopsy strongly supports vasculitis; biopsy for a new diagnosis and for suspected relapse.
+    src: { page: 152, quote: "A positive biopsy is strongly supportive of a diagnosis of vasculitis and we recommend biopsies to assist in establishing a new diagnosis" }
+    status: unverified
+  - id: rheum.L08.140
+    kind: card
+    topic: aav-rx
+    front: Remission induction for new organ- or life-threatening AAV (statement 3)?
+    back: Glucocorticoids plus either cyclophosphamide or rituximab.
+    src: { page: 152, quote: "For remission-induction of new-onset organ-threatening or life-threatening AAV we recommend treatment with a combination of glucocorticoids and either cyclophosphamide OR rituximab." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L08.141
+    kind: card
+    topic: aav-rx
+    front: Remission induction for non-organ-threatening AAV (statement 4)?
+    back: Glucocorticoids plus either methotrexate or mycophenolate mofetil.
+    src: { page: 153, quote: "For remission-induction of non-organ-threatening AAV we recommend treatment with a combination of glucocorticoids and either methotrexate or mycophenolate mofetil." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L08.142
+    kind: enumerate
+    topic: aav-rx
+    prompt: Scenarios where methotrexate or MMF must NOT be used for AAV induction?
+    points:
+      - Meningeal involvement
+      - Retro-orbital disease
+      - Cardiac involvement
+      - Mesenteric involvement
+      - Acute-onset mononeuritis multiplex
+      - Pulmonary haemorrhage of any severity
+    pass: 5
+    src: { page: 153, quote: "Meningeal involvement. Retro-orbital disease. Cardiac involvement. Mesenteric involvement. Acute-onset mononeuritis multiplex. Pulmonary haemorrhage of any severity." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L08.143
+    kind: enumerate
+    topic: aav-rx
+    prompt: Non-organ-threatening examples where methotrexate may be used (no renal involvement)?
+    points:
+      - Nasal and paranasal disease without bony erosion, cartilage collapse, olfactory loss or deafness
+      - Skin involvement without ulceration
+      - Myositis (skeletal muscle only)
+      - Non-cavitating pulmonary nodules or infiltrate without haemoptysis
+      - When CYC or rituximab are unavailable, contraindicated, or by patient choice
+    pass: 4
+    src: { page: 153, quote: "Skin involvement without ulceration. Myositis (skeletal muscle only). Non-cavitating pulmonary nodules/infiltrate without haemoptysis." }
+    status: unverified
+  - id: rheum.L08.144
+    kind: card
+    topic: aav-rx
+    front: Treatment of a major relapse of organ-threatening AAV (statement 5)?
+    back: As for new disease, glucocorticoids plus cyclophosphamide or rituximab.
+    src: { page: 153, quote: "For a major relapse of organ-threatening or life-threatening disease in AAV we recommend treatment as per new disease" }
+    status: unverified
+  - id: rheum.L08.145
+    kind: cloze
+    topic: aav-rx
+    text: "Plasma exchange should be considered in AAV with RPGN and serum creatinine {{c1::>500 μmol/L (5.7 mg/dL)}}, and can be considered for severe {{c2::diffuse alveolar haemorrhage}}."
+    src: { page: 154, quote: "Plasma exchange should be considered for patients with AAV and a serum creatine level of >500 μmol/L (5.7 mg/dL)" }
+    status: unverified
+    tags: [numbers, high-yield]
+    update:
+      text: "PEXIVAS (2020) found no reduction in death or ESKD with routine plasma exchange; KDIGO 2024 advises considering it case by case (creatinine >3.4 mg/dL, dialysis, or rapidly rising creatinine; or DAH with hypoxemia). The book's >500 μmol/L threshold stays the exam answer."
+      ref: "KDIGO 2024 ANCA vasculitis guideline; PEXIVAS 2020"
+  - id: rheum.L08.146
+    kind: card
+    topic: aav-rx
+    front: Remission maintenance in AAV (statement 7)?
+    back: Low-dose glucocorticoids plus azathioprine, rituximab, methotrexate or mycophenolate mofetil.
+    src: { page: 154, quote: "For remission maintenance of AAV we recommend treatment with a combination of low-dose glucocorticoids and either azathioprine, rituximab, methotrexate or mycophenolate mofetil." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L08.147
+    kind: cloze
+    topic: aav-rx
+    text: "AAV remission-maintenance therapy continues for at least {{c1::24 months}} after sustained remission."
+    src: { page: 154, quote: "remission-maintenance therapy for AAV be continued for at least 24 months following induction of sustained remission." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: rheum.L08.148
+    kind: card
+    topic: aav-rx
+    front: AAV refractory to remission induction (statement 9)?
+    back: Switch cyclophosphamide to rituximab or rituximab to cyclophosphamide, with an expert centre.
+    src: { page: 154, quote: "we recommend switching from cyclophosphamide to rituximab or from rituximab to cyclophosphamide." }
+    status: unverified
+  - id: rheum.L08.149
+    kind: enumerate
+    topic: aav-rx
+    prompt: EULAR definition of refractory AAV?
+    points:
+      - Unchanged or increased activity after 4 weeks of standard therapy
+      - <50% reduction in disease activity score (BVAS) after 6 weeks
+      - Chronic persistent disease (≥1 major or 3 minor BVAS items) after >12 weeks
+    pass: 3
+    src: { page: 154, quote: "Unchanged or increased disease activity in acute AAV after 4 weeks of treatment with standard therapy in acute AAV" }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L08.150
+    kind: enumerate
+    topic: aav-rx
+    prompt: Questions to ask before labelling AAV refractory?
+    points:
+      - Is the primary diagnosis right; is it AAV?
+      - Has treatment been optimised (target doses reached)?
+      - Is this active disease or damage?
+      - Could it be infection, another comorbidity or malignancy?
+    pass: 4
+    src: { page: 155, quote: "Re-evaluate the primary diagnosis; are they truly refractory—do they have AAV? Has the treatment regimen been optimised" }
+    status: unverified
+  - id: rheum.L08.151
+    kind: card
+    topic: aav-rx
+    front: What should guide changes in AAV treatment, ANCA titre or clinical assessment?
+    back: Structured clinical assessment; a negative ANCA does not rule out active AAV.
+    src: { page: 155, quote: "We recommend that structured clinical assessment rather than ANCA testing should inform decisions on changes in treatment" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L08.152
+    kind: card
+    topic: aav-rx
+    front: Persistent unexplained haematuria after cyclophosphamide?
+    back: Investigate it (statement 11), because cyclophosphamide causes cystitis and bladder cancer.
+    src: { page: 155, quote: "We recommend the investigation of persistent unexplained haematuria in patients with prior exposure to cyclophosphamide." }
+    status: unverified
+  - id: rheum.L08.153
+    kind: card
+    topic: aav-rx
+    front: What to check before each rituximab course (statement 12)?
+    back: Serum immunoglobulins (hypogammaglobulinaemia), also in recurrent infection.
+    src: { page: 155, quote: "We recommend testing of serum immunoglobulin levels prior to each course of rituximab and in patients with recurrent infection." }
+    status: unverified
+  - id: rheum.L08.154
+    kind: card
+    topic: aav-rx
+    front: Long-term risk to assess periodically in AAV (statement 13)?
+    back: Cardiovascular risk.
+    src: { page: 155, quote: "We recommend periodic assessment of cardiovascular risk for patients with AAV." }
+    status: unverified
+  - id: rheum.L08.155
+    kind: card
+    topic: aav-rx
+    front: Why educate AAV patients about their disease (statement 14)?
+    back: AAV is characteristically relapsing; educated patients recognise early relapse, and each relapse adds morbidity.
+    src: { page: 156, quote: "AAV is characteristically a relapsing disease. Each relapse may result in further morbidity" }
+    status: unverified
+  - id: rheum.L08.156
+    kind: card
+    topic: aav-rx
+    front: Is AAV curable?
+    back: It is controllable but currently incurable and lifelong; care should be holistic.
+    src: { page: 156, quote: "AAV is a controllable but currently incurable lifelong illness." }
+    status: unverified
+  - id: rheum.L08.157
+    kind: card
+    topic: aav-rx
+    front: Which oral drug blocks the C5a receptor in AAV, and why is that downstream target preferred?
+    back: Avacopan; blocking C5aR stops leukocyte trafficking and activation while keeping C5b-9 (MAC) for Neisseria control.
+    src: { page: 156, quote: "Avacopan C5aR Leukocyte trafficking, migration and activation Downstream is best" }
+    status: unverified
+  - id: rheum.L08.158
+    kind: card
+    topic: aav-rx
+    front: Why does eculizumab carry a black box warning?
+    back: It blocks C5 cleavage, so no MAC (C5b-9) forms and Neisseria infections are not controlled.
+    src: { page: 156, quote: "Cell lysis (i.e., Neisseria control) Reason for black box warning for eculizumab" }
+    status: unverified
+  - id: rheum.L08.159
+    kind: case
+    topic: aav-rx
+    stem: "A 58-year-old man has 3 weeks of haemoptysis, sinus crusting and saddle-nose. Creatinine 6.1 mg/dL (540 μmol/L), RBC casts. PR3-ANCA positive."
+    steps:
+      - question: How would you class his disease?
+        options: ["Organ- and life-threatening AAV", "Non-organ-threatening AAV", "Single-organ vasculitis", "Large vessel vasculitis"]
+        answer: 0
+        why: "Pulmonary haemorrhage and glomerulonephritis are organ- or life-threatening (p145). Nasal disease alone would be non-organ-threatening. Several organs are involved. PR3-ANCA disease is small vessel."
+      - question: Remission induction?
+        options: ["Glucocorticoids plus cyclophosphamide or rituximab", "Glucocorticoids plus methotrexate", "Glucocorticoids alone", "Rituximab maintenance only"]
+        answer: 0
+        why: "Statement 3 (p152). MTX is barred by pulmonary haemorrhage (p153). GC alone is not enough. Maintenance comes after remission."
+      - reveal: "His creatinine is above 500 μmol/L from RPGN."
+        question: What else should be considered?
+        options: ["Plasma exchange", "Routine anticoagulation", "IVIG", "Tocilizumab"]
+        answer: 0
+        why: "Statement 6: creatinine >500 μmol/L from RPGN, or severe alveolar haemorrhage (p154). Anticoagulation, IVIG and tocilizumab are not AAV induction tools in the book."
+      - reveal: "He reaches remission at 4 months."
+        question: Maintenance plan?
+        options: ["Low-dose GC plus AZA, RTX, MTX or MMF for at least 24 months", "Stop all drugs at remission", "Cyclophosphamide for 2 years", "Follow ANCA titres and treat only if they rise"]
+        answer: 0
+        why: "Statements 7–8 (p154). Stopping invites relapse, which is frequent with PR3. Long CYC adds toxicity. Clinical assessment, not ANCA, drives treatment (p155)."
+    src: { page: 154, quote: "remission-maintenance therapy for AAV be continued for at least 24 months following induction of sustained remission." }
+    status: unverified
+  # ---------- p157-159: Behçet disease ----------
+  - id: rheum.L08.160
+    kind: card
+    topic: behcet
+    front: Mandatory criterion of the 1990 International criteria for Behçet disease?
+    back: Recurrent oral ulceration (minor, major aphthous or herpetiform) at least 3 times in one 12-month period, plus 2 of the other criteria.
+    src: { page: 157, quote: "reported reliably by a patient that recurs at least 3 times in one 12-month period plus 2 of the following" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: rheum.L08.161
+    kind: enumerate
+    topic: behcet
+    prompt: The four minor criteria of the 1990 Behçet criteria (need 2)?
+    points:
+      - Recurrent genital ulceration or scarring
+      - "Eye lesions: anterior or posterior uveitis, vitreous cells, retinal vasculitis"
+      - "Skin lesions: erythema nodosum-like, pseudofolliculitis, papulopustular, acneiform nodules"
+      - Positive pathergy test
+    pass: 4
+    src: { page: 157, quote: "Recurrent genital ulceration - Recurrent genital aphthous ulceration or scarring, especially males" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L08.162
+    kind: cloze
+    topic: behcet
+    text: "Positive pathergy: an erythematous papule {{c1::>2 mm}} at the prick site read at {{c2::48 hours}} after a {{c3::20–22-gauge}} needle enters avascular skin obliquely to 5 mm."
+    src: { page: 157, quote: "An erythematous papule larger than 2 mm at the prick site 48 hours after the application of a 20- to 22-gauge sterile needle" }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L08.163
+    kind: card
+    topic: behcet
+    front: When do acneiform nodules count as a Behçet skin criterion?
+    back: When seen by a physician in post-adolescent patients not receiving corticosteroids.
+    src: { page: 157, quote: "Acneiform nodules consistent with BD, observed by a physician, and in postadolescent patients not receiving corticosteroids." }
+    status: unverified
+  - id: rheum.L08.164
+    kind: table
+    topic: behcet
+    title: International criteria for Behçet disease (scoring)
+    columns: [Sign, Points]
+    rows:
+      - [Ocular lesions, "2"]
+      - [Genital aphthosis, "2"]
+      - [Oral aphthosis, "2"]
+      - [Skin lesions, "1"]
+      - [Neurological manifestations, "1"]
+      - [Vascular manifestations, "1"]
+      - [Positive pathergy test, "1"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [6, 1]]
+    src: { page: 157, quote: "Ocular lesions 2 Genital aphthosis 2 Oral aphthosis 2 Skin lesions 1 Neurological manifestations 1 Vascular manifestations 1" }
+    status: unverified
+    tags: [numbers, high-yield]
+    update:
+      text: "The book's table gives no cut-off. The ICBD (2014) classifies Behçet disease with a score of 4 or more."
+      ref: "International Criteria for Behçet's Disease (ICBD) 2014"
+  - id: rheum.L08.165
+    kind: card
+    topic: behcet
+    front: Causes of decreased visual acuity in Behçet eye disease?
+    back: Secondary glaucoma, cataracts or vitreous haemorrhage.
+    src: { page: 158, quote: "Decreased visual acuity is a result of secondary glaucoma, cataracts, or vitreous hemorrhage." }
+    status: unverified
+  - id: rheum.L08.166
+    kind: cloze
+    topic: behcet
+    text: "In Behçet disease, blindness has been reported within {{c1::4–5 years}} of ocular symptoms; {{c2::retinal vein thrombosis}} causing sudden blindness is not rare."
+    src: { page: 158, quote: "Blindness has been reported to occur within 4-5 years from the onset of ocular symptoms. Retinal vein thrombosis leading to sudden blindness is not rare." }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L08.167
+    kind: card
+    topic: behcet
+    front: When does Behçet eye disease appear?
+    back: Usually from the outset, but it may develop within the first few years.
+    src: { page: 158, quote: "Eye disease is usually present from the outset but also may develop within the first few years." }
+    status: unverified
+  - id: rheum.L08.168
+    kind: card
+    topic: behcet
+    front: How common are joint features in Behçet disease, and what pattern?
+    back: More than half develop synovitis, arthritis or arthralgia; multiple-joint involvement is common.
+    src: { page: 159, quote: "More than half the patients develop signs or symptoms of synovitis, arthritis, and/or arthralgia during the course of the disease." }
+    status: unverified
+  - id: rheum.L08.169
+    kind: card
+    topic: behcet
+    front: Most frequent minor feature in childhood-onset Behçet?
+    back: Arthritis (11 of 40 patients).
+    src: { page: 159, quote: "The most frequent minor feature in childhood-onset BD is reported to be arthritis, occurring in 11 of 40 patients." }
+    status: unverified
+  - id: rheum.L08.170
+    kind: table
+    topic: behcet
+    title: Treatment of Behçet disease (book)
+    columns: [Problem, Drug]
+    rows:
+      - [Aphthous lesions, "Colchicine, thalidomide"]
+      - [Ocular disease, Azathioprine]
+      - [Also listed, Cyclosporine]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 159, quote: "Apthous lesions...colchicine, thalidomide. Azathioprine for ocular. Cyclosporine." }
+    status: unverified
+  - id: rheum.L08.171
+    kind: mcq
+    topic: behcet
+    stem: "A 25-year-old man has oral ulcers 5 times this year, genital scarring, and a 3 mm red papule 48 hours after a needle prick. By the 1990 International criteria, does he meet Behçet disease?"
+    options:
+      - "Yes: recurrent oral ulcers plus 2 minor criteria"
+      - "No: eye lesions are mandatory"
+      - "No: he needs 3 minor criteria"
+      - "No: pathergy is not a criterion"
+    answer: 0
+    why:
+      - "Correct: oral ulceration ≥3 times in 12 months plus genital ulceration and positive pathergy (p157)."
+      - Eye lesions are one of the minor criteria, not mandatory.
+      - Two minor criteria are enough.
+      - A positive pathergy test is a minor criterion.
+    src: { page: 157, quote: "Positive pathergy test - An erythematous papule larger than 2 mm at the prick site 48 hours after the application" }
+    status: unverified
+  # ---------- p159-160: PACNS ----------
+  - id: rheum.L08.172
+    kind: card
+    topic: pacns
+    front: Proposed criteria for primary angiitis of the CNS (PACNS)?
+    back: An acquired unexplained neurologic deficit with classic angiographic or histopathologic angiitis of the CNS, and no systemic vasculitis or other cause.
+    src: { page: 159, quote: "The presence of an acquired and otherwise unexplained neurologic deficit with" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L08.173
+    kind: card
+    topic: pacns
+    front: Which clinical pictures make PACNS suspicious?
+    back: Multiple strokes over time in multiple territories, and a chronic meningitis formula in the CSF.
+    src: { page: 159, quote: "multiple strokes over time and in multiple territories is suspicious as is the presence of a chronic meningitis formula in the CSF." }
+    status: unverified
+  - id: rheum.L08.174
+    kind: card
+    topic: pacns
+    front: Why is lumbar puncture mandatory before diagnosing PACNS?
+    back: To rule out infection and malignancy, the must-rule-outs.
+    src: { page: 159, quote: "No diagnosis of PACNS should be made in the absence of a lumbar puncture to rule out infection and malignancy." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L08.175
+    kind: card
+    topic: pacns
+    front: Imaging test of choice in PACNS, and its weakness?
+    back: MRI; highly sensitive but nonspecific.
+    src: { page: 159, quote: "Neuroimaging is highly sensitive but nonspecific. MRI is the test of choice." }
+    status: unverified
+  - id: rheum.L08.176
+    kind: card
+    topic: pacns
+    front: Is any angiographic picture 100% specific for CNS arteritis?
+    back: No.
+    src: { page: 159, quote: "There is NO angiographic picture that is 100% specific for CNS arteritis." }
+    status: unverified
+  - id: rheum.L08.177
+    kind: card
+    topic: pacns
+    front: Role of brain biopsy in suspected PACNS?
+    back: It secures the diagnosis and rules out mimics.
+    src: { page: 160, quote: "Brian biopsy is valuable both for securing the diagnosis and ruling out the mimics." }
+    status: unverified
+  - id: rheum.L08.178
+    kind: card
+    topic: pacns
+    front: Suspected PACNS fails to respond to cyclophosphamide. What does that suggest?
+    back: An alternative diagnosis.
+    src: { page: 160, quote: "Failure to respond to cyclophosphamide generally is suggestive of an alternative diagnosis." }
+    status: unverified
+  - id: rheum.L08.179
+    kind: enumerate
+    topic: pacns
+    prompt: The 7 heuristics of PACNS?
+    points:
+      - No specific clinical scenario; multiple strokes in multiple territories or chronic meningitis CSF are suspicious
+      - No diagnosis without lumbar puncture
+      - Neuroimaging (MRI) is sensitive but nonspecific
+      - No angiographic picture is 100% specific
+      - Brain biopsy secures the diagnosis and rules out mimics
+      - Must-rule-outs are infection and malignancy
+      - Failure to respond to cyclophosphamide suggests another diagnosis
+    pass: 5
+    src: { page: 159, quote: "The 7 heuristics of PACNS:" }
+    status: unverified
+  # ---------- p160-162: other vasculitides ----------
+  - id: rheum.L08.180
+    kind: enumerate
+    topic: other
+    prompt: Features of thromboangiitis obliterans (Buerger) in the lecture?
+    points:
+      - Non-necrotizing vasculitis
+      - Cause unknown
+      - All populations, age 19–45
+      - Arms and legs, with claudication
+      - Limb amputation but not lethal
+    pass: 4
+    src: { page: 160, quote: "Non necrotizing vasculitis. Cause unknown. Affects all populations...19-45 years. Arms and legs.....claudication." }
+    status: unverified
+  - id: rheum.L08.181
+    kind: card
+    topic: other
+    front: Is thromboangiitis obliterans lethal?
+    back: No; it can cost the limb (amputation) but is not lethal.
+    src: { page: 160, quote: "Amputation of limb but not lethal." }
+    status: unverified
+  - id: rheum.L08.182
+    kind: card
+    topic: other
+    front: Treatment of thromboangiitis obliterans written in the book?
+    back: "The book writes \"alcohol abstinence\"."
+    src: { page: 160, quote: "RX = alcohol abstinence." }
+    status: unverified
+    update:
+      text: "Buerger disease is driven by tobacco; complete cessation of all tobacco use is the only proven treatment. The book's \"alcohol\" is almost certainly a slip; answer tobacco cessation in practice and quote the book if the exam copies its wording."
+      ref: "Standard references (e.g., Harrison's 21e, 2022)"
+  - id: rheum.L08.183
+    kind: enumerate
+    topic: other
+    prompt: ACR classification criteria for hypersensitivity vasculitis?
+    points:
+      - Age >16 at onset
+      - Medication at onset
+      - Palpable purpura
+      - Maculopapular rash
+      - Biopsy of arteriole and venule with perivascular or extravascular granulocytes
+    pass: 4
+    src: { page: 161, quote: "Age >16 Years at Disease Onset. Medication at Disease Onset. Palpable Purpura. Maculopapular Rash." }
+    status: unverified
+  - id: rheum.L08.184
+    kind: card
+    topic: other
+    front: Tetrad of Henoch–Schönlein purpura and its immune deposit?
+    back: Purpura, arthritis, abdominal pain and glomerulonephritis; IgA deposition.
+    src: { page: 161, quote: "Purpura, arthritis, abdominal pain and GN. IgA deposition." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L08.185
+    kind: cloze
+    topic: other
+    text: "HSP: {{c1::90%}} are under age 10, children have milder disease, and adults with GN have {{c2::13%}} renal failure."
+    src: { page: 161, quote: "90%=age<10. Children=milder. Adults with GN...13% renal failure." }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L08.186
+    kind: table
+    topic: other
+    title: Types of cryoglobulinemia
+    columns: [Type, Composition, Associations]
+    rows:
+      - [Type 1, "Monoclonal, lacks RF", Myeloma]
+      - [Type 2 (mixed), "IgG + monoclonal IgM with RF activity", "Hepatitis C, neoplastic and connective tissue diseases"]
+      - [Type 3 (mixed), Polyclonal IgM, Circulating immune complexes]
+    blanks: [[0, 2], [1, 1], [1, 2], [2, 1]]
+    src: { page: 162, quote: "Type 1..monoclonal and lack RF....myeloma. Type 2... mixed because contain IgG and IgM=RF...monoclonal...hep C" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L08.187
+    kind: card
+    topic: other
+    front: Clinical features of cryoglobulinemic vasculitis?
+    back: Purpura, weakness, arthralgias, Raynaud's, neuropathy and glomerulonephritis.
+    src: { page: 162, quote: "Purpura. Weakness. Arthralgias. Raynaud's. Neuropathy. GN." }
+    status: unverified
+  - id: rheum.L08.188
+    kind: card
+    topic: other
+    front: Treatment of cryoglobulinemic vasculitis?
+    back: Treat hepatitis C; prednisone and/or cyclophosphamide.
+    src: { page: 162, quote: "Treat Hep C. Prednisone and/ or Cytoxan." }
+    status: unverified
+  - id: rheum.L08.189
+    kind: mcq
+    topic: other
+    stem: "A 55-year-old woman with chronic hepatitis C has palpable purpura, arthralgia, neuropathy and proteinuria. RF is strongly positive and C4 is low. Which cryoglobulin type is most likely?"
+    options:
+      - "Type 2 (mixed: IgG with monoclonal IgM RF)"
+      - "Type 1 (monoclonal, no RF)"
+      - "Type 3 (polyclonal IgM)"
+      - Not cryoglobulinemia; this is HSP
+    answer: 0
+    why:
+      - "Correct: type 2 contains IgG and monoclonal IgM with RF activity and is linked to hepatitis C (p162)."
+      - Type 1 lacks RF and goes with myeloma.
+      - Type 3 is polyclonal; the book links HCV to type 2.
+      - HSP is an IgA disease of children, not RF-positive HCV vasculitis.
+    src: { page: 162, quote: "Type 2... mixed because contain IgG and IgM=RF...monoclonal...hep C, neoplastic and connective tissue diseases." }
+    status: unverified
+  - id: rheum.L08.190
+    kind: case
+    topic: gca
+    stem: "A 76-year-old woman has 3 weeks of new left temporal headache, pain on chewing, and shoulder and hip girdle aching with morning stiffness. Today she lost vision in her right eye for 10 minutes. ESR 88 mm/h."
+    steps:
+      - question: Most likely diagnosis?
+        options: ["Giant cell arteritis with PMR", "Migraine with aura", "Takayasu arteritis", "Polymyositis"]
+        answer: 0
+        why: "Age ≥50, headache, jaw claudication, PMR and visual disturbance (pp127, 131). Migraine does not raise the ESR to 88. Takayasu affects young females. PMR has no myopathy, and polymyositis does not cause headache or jaw claudication."
+      - question: "GCA score so far (headache, visual disturbance, PMR, jaw claudication, ESR ≥50)?"
+        options: ["6: GCA established", "4: GCA established", "3: borderline", "7: GCA established"]
+        answer: 0
+        why: "1 + 1 + 2 + 1 = 5 in domain I, plus ESR 1 = 6 (p131). Fever/anaemia is ignored with PMR (p132)."
+      - question: What now?
+        options: ["Start prednisone 40–60 mg/day immediately, then confirm by imaging or biopsy", "Wait for the biopsy before steroids", "Prednisone 15 mg as for PMR", "Start aspirin and anticoagulation"]
+        answer: 0
+        why: "Start high-dose GC immediately, and confirm by imaging or histology (p136). Waiting risks blindness. 15 mg is the PMR dose. Routine antiplatelets or anticoagulants are no longer recommended (p137)."
+      - reveal: "The left temporal artery looks normal; a 1 cm biopsy is negative."
+        question: Next step?
+        options: ["Repeat with a 4–6 cm segment or biopsy the opposite side", "Exclude GCA", "Stop steroids", "Start cyclophosphamide"]
+        answer: 0
+        why: "Skip lesions: take 4–6 cm if not obviously abnormal, and biopsy the opposite side if suspicion is strong (p132)."
+    src: { page: 136, quote: "High dose glucocorticoid therapy (40-60 mg/day prednisone-equivalent) should be initiated immediately for induction of remission" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p162-163: book questions (no answer key) ----------
+  - id: rheum.L08.191
+    kind: mcq
+    topic: lvv-rx
+    stem: Which imaging modality is particularly useful for diagnosing large vessel vasculitis?
+    options:
+      - MRI
+      - Ultrasound
+      - FDG-PET/CT
+      - X-ray
+      - Mammography
+    answer: 2
+    why:
+      - MRI/MRA shows wall thickening but does not show metabolic activity across the whole aorta as well.
+      - Ultrasound (halo sign) is first-line for cranial GCA but sees less of the aorta and its branches.
+      - "Correct: FDG-PET/CT shows vessel wall inflammation across the whole aorta and its branches; the book only says to confirm LVV by imaging or histology (p136)."
+      - Plain X-ray cannot show vessel wall inflammation.
+      - Mammography may show breast arterial calcification but is not a vasculitis test.
+    src: { page: 136, quote: "A suspected diagnosis of LVV should be confirmed by imaging or histology." }
+    status: unverified
+    tags: [book-question, no-key]
+  - id: rheum.L08.192
+    kind: mcq
+    topic: clues
+    stem: Cutaneous vasculitis affects small- or medium-sized vessels of the skin and subcutaneous tissue, not internal organs. Vasculitis of the small skin vessels tends to cause which lesions?
+    options:
+      - Deep ulcers
+      - Livedo reticularis
+      - Nodules
+      - Petechiae
+    answer: 3
+    why:
+      - Deep ulcers come from medium vessel (arterial) involvement.
+      - Livedo reticularis reflects medium vessel disease.
+      - Subcutaneous nodules reflect medium vessel disease (e.g., cutaneous PAN).
+      - "Correct: small vessel (leucocytoclastic) vasculitis gives petechiae and palpable purpura (p127)."
+    src: { page: 127, quote: "Usual presentation is in the form of palpable purpura,urticaria, bullous ulcers or splinter haemorrhages, mainly limited to lower extremities." }
+    status: unverified
+    tags: [book-question, no-key]
+  - id: rheum.L08.193
+    kind: mcq
+    topic: gca
+    stem: An older woman with unilateral headache, vision loss and morning joint stiffness has a temporal artery biopsy. What histology would you expect?
+    options:
+      - Large vessel giant cell vasculitis with fragmentation of elastic lamina
+      - Small vessel eosinophilic vasculitis
+      - Medium vessel vasculitis with fibrinoid necrosis
+      - Large vessel granulomatous vasculitis with massive intimal fibrosis
+      - Medium vessel transmural vasculitis
+    answer: 0
+    why:
+      - "Correct: GCA (with PMR) shows granulomatous inflammation with giant cells and a fragmented internal elastic lamina (pp131-133)."
+      - Eosinophilic small vessel vasculitis is EGPA.
+      - Fibrinoid necrosis of medium arteries is PAN.
+      - Massive intimal fibrosis is not the classic GCA picture; elastic lamina fragmentation is.
+      - Transmural medium vessel inflammation is PAN.
+    src: { page: 133, quote: "Giant cell arteritis: photomicrograph" }
+    status: unverified
+    tags: [book-question, no-key]
+  - id: rheum.L08.194
+    kind: essay
+    topic: clues
+    prompt: Outline your approach to a patient with suspected vasculitis.
+    outline:
+      - "When to suspect: young occlusive disease or hypertension, unexplained fever and weight loss, proteinuria, purpura, mononeuritis, pulmonary nodules, monocular blindness"
+      - "Classify: primary vs secondary; Chapel Hill vessel size"
+      - "Organ pattern: kidney, lung, ENT, nerves, skin, gut, eye"
+      - "Workup: blood count, urinalysis, ANCA, renal and liver tests, angiography, echo, biopsy"
+      - "Exclude mimics: endocarditis, APS, viral infection, cholesterol emboli, drugs, TTP, lymphoma"
+    src: { page: 126, quote: "Approach to Diagnosis Of Vasculitic Syndromes" }
+    status: unverified
+  - id: rheum.L08.195
+    kind: essay
+    topic: aav-rx
+    prompt: Discuss the EULAR recommendations for managing ANCA-associated vasculitis.
+    outline:
+      - "Centres of expertise; biopsy for diagnosis and relapse"
+      - "Induction: organ-threatening, GC + CYC or RTX; non-organ-threatening, GC + MTX or MMF (not with meningeal, orbital, cardiac, mesenteric, mononeuritis, pulmonary haemorrhage)"
+      - "Plasma exchange: creatinine >500 μmol/L from RPGN, or severe DAH"
+      - "Maintenance: low-dose GC + AZA, RTX, MTX or MMF for ≥24 months"
+      - "Refractory: switch CYC↔RTX; definitions at 4, 6 and 12 weeks"
+      - "Monitoring: clinical assessment not ANCA; haematuria after CYC; immunoglobulins before RTX; cardiovascular risk; education"
+    src: { page: 152, quote: "For remission-induction of new-onset organ-threatening or life-threatening AAV we recommend treatment with a combination of glucocorticoids and either cyclophosphamide OR rituximab." }
+    status: unverified

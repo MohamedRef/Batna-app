@@ -104,3 +104,17 @@
   .app[data-appearance="glossy"] :is(.card, .stat-tile, .tap-list, .lectures, .choice-list, .answer) { background: var(--surface); }
   .app[data-appearance="glossy"] .hero::after { display: none; }
 }
+
+/* ---------- list screens (parts.css .coll, .view-bar) ---------- */
+.app[data-appearance="glossy"] .coll:not([data-layout="cards"]),
+.app[data-appearance="glossy"] .coll[data-layout="cards"] button.coll-btn {
+  background: linear-gradient(145deg, color-mix(in srgb, var(--surface) 96%, var(--glass-white, white)), color-mix(in srgb, var(--surface) 90%, var(--bg)));
+  border-color: color-mix(in srgb, var(--accent) 16%, var(--line));
+  border-radius: var(--glass-radius);
+  box-shadow: var(--glass-hi), var(--glass-shadow);
+}
+.app[data-appearance="glossy"] .coll[data-layout="cards"] button.ls-soon { background: none; box-shadow: none; }
+.app[data-appearance="glossy"] .view-seg > button[aria-checked="true"] { box-shadow: var(--glass-hi); }
+@media (prefers-reduced-transparency: reduce) {
+  .app[data-appearance="glossy"] :is(.coll:not([data-layout="cards"]), .coll[data-layout="cards"] button.coll-btn) { background: var(--surface); }
+}

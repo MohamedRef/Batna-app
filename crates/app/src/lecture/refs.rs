@@ -12,6 +12,7 @@ use dioxus::prelude::*;
 use crate::content::{Library, lecture_code};
 use crate::i18n::refs as tx;
 use crate::look::{Css, css};
+use crate::parts::{Collection, Layout, Sort};
 use crate::stats::StudyData;
 use crate::store::use_review;
 use crate::{Screen, Ui};
@@ -59,6 +60,27 @@ pub fn rows(lib: &Library, data: &StudyData) -> Vec<Row> {
         .collect()
 }
 
+/// The lecture list's view choice: rows by default; "what's left first"
+/// puts lectures with content he hasn't checked yet on top.
+const VIEW: Collection = Collection {
+    key: "refs",
+    layout: Layout::List,
+    sorts: &[Sort::Book, Sort::Left, Sort::Name],
+    groups: false,
+};
+
+impl Row {
+    /// Written, with cards he hasn't checked against the book yet.
+    fn unchecked(&self) -> bool {
+        self.checked().is_some_and(|(a, t)| a < t)
+    }
+
+    /// Checked out of all, once the lecture has cards.
+    fn checked(&self) -> Option<(u32, u32)> {
+        self.counts.as_ref().filter(|c| c.total > 0).map(|c| (c.approved, c.total))
+    }
+}
+
 /// The rows whose title, number or topics hold every word of `query`.
 pub fn search<'a>(rows: &'a [Row], query: &str) -> Vec<&'a Row> {
     let words: Vec<String> = query.split_whitespace().map(str::to_lowercase).collect();
@@ -74,7 +96,9 @@ pub fn References() -> Element {
     let lib = Library::get();
     let data = StudyData::load(&*review.backend.borrow());
     let all = rows(lib, &data);
-    let shown = search(&all, &query.read());
+    let mut shown = search(&all, &query.read());
+    let pick = VIEW.pick();
+    crate::parts::sort_by(&mut shown, pick.sort, |r| r.unchecked(), |_| false, |r| r.title.clone());
     let (approved, total) =
         all.iter().filter_map(|r| r.counts.as_ref()).fold((0, 0), |(a, t), c| (a + c.approved, t + c.total));
 
@@ -120,32 +144,42 @@ pub fn References() -> Element {
                 if shown.is_empty() {
                     p { class: "note", {tx::NO_MATCH} }
                 } else {
-                    ul { class: "tap-list refs-list",
+                    crate::parts::ViewBar { of: VIEW }
+                    ul { class: "coll refs-list", "data-layout": pick.layout.as_str(),
                         for r in shown {
                             li { key: "{r.id}",
                                 button {
-                                    class: "tap tap-row refs-row",
+                                    class: "coll-btn refs-row",
                                     onclick: { let id = r.id.clone(); move |_| super::open(ui, &id) },
-                                    span { class: "num", aria_hidden: "true", "{r.code}" }
-                                    span { class: "tap-row-main",
-                                        bdi { dir: "ltr", lang: "en", class: "lecture-title", "{r.title}" }
-                                        span { class: "muted small",
+                                    span { class: "coll-lead", aria_hidden: "true",
+                                        span { class: "coll-badge", "data-tone": if r.counts.is_none() { "quiet" } else { "" }, "{r.code}" }
+                                    }
+                                    span { class: "coll-main",
+                                        bdi { dir: "ltr", lang: "en", class: "coll-title lecture-title", "{r.title}" }
+                                        span { class: "coll-sub",
                                             "{crate::i18n::lecture::PAGES} " span { class: "num-ltr", "{r.pages[0]}–{r.pages[1]}" }
                                             if r.lessons > 0 {
                                                 " · {crate::i18n::count::count(r.lessons, &crate::i18n::count::LESSON)}"
                                             }
                                         }
-                                        match &r.counts {
-                                            Some(c) if c.total > 0 => rsx! {
+                                        if let Some((a, t)) = r.checked() {
+                                            span { class: "coll-extra",
                                                 span {
                                                     class: "chip",
-                                                    "data-tone": if c.approved >= c.total { "good" } else { "" },
+                                                    "data-tone": if a >= t { "good" } else { "" },
                                                     title: tx::CHECKED_HINT,
-                                                    "{tx::CHECKED} " span { class: "num-ltr", "{c.approved}/{c.total}" }
+                                                    "{tx::CHECKED} " span { class: "num-ltr", "{a}/{t}" }
                                                 }
-                                            },
-                                            _ => rsx! { span { class: "chip", {tx::WRITING} } },
+                                            }
                                         }
+                                    }
+                                    match r.checked() {
+                                        Some((a, t)) => rsx! {
+                                            span { class: "coll-end coll-when-compact", title: tx::CHECKED_HINT,
+                                                span { class: "num-ltr", "{a}/{t}" }
+                                            }
+                                        },
+                                        None => rsx! { span { class: "coll-end", span { class: "chip", {tx::WRITING} } } },
                                     }
                                     span { class: "chev", aria_hidden: "true" }
                                 }

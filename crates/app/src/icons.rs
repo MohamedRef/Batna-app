@@ -132,6 +132,26 @@ pub fn arrow_go() -> Element {
     stroke("M19 12H5M11 6l-6 6 6 6")
 }
 
+/// View switcher: cards in a grid.
+pub fn layout_cards() -> Element {
+    stroke("M4.5 4.5h6v6h-6zM13.5 4.5h6v6h-6zM4.5 13.5h6v6h-6zM13.5 13.5h6v6h-6z")
+}
+
+/// View switcher: rows with a second line.
+pub fn layout_list() -> Element {
+    stroke("M4.5 5h4v4h-4zM11.5 6h8M11.5 8.5h5M4.5 15h4v4h-4zM11.5 16h8M11.5 18.5h5")
+}
+
+/// View switcher: one line per item.
+pub fn layout_compact() -> Element {
+    stroke("M4.5 5h15M4.5 9.67h15M4.5 14.33h15M4.5 19h15")
+}
+
+/// The order of a list: an arrow down beside shorter and shorter lines.
+pub fn sort() -> Element {
+    stroke("M7 4.5v15M4 16.5l3 3 3-3M13 6.5h7M13 11.5h5M13 16.5h3")
+}
+
 /// A tick, for a finished lesson.
 pub fn check() -> Element {
     stroke("M5 12.5l4.5 4.5L19 7.5")

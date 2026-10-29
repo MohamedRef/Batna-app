@@ -263,6 +263,37 @@ Source: Book Geriatrics Lecture 2, p. 30; Lecture 3, p. 42
 | `creatinine_mg_dl` | number, mg/dL | Serum creatinine |
 | `sex` | `male`, `female` | Sex |
 
+## `acr_eular_2010_ra`: ACR/EULAR 2010 RA criteria
+
+Source: Book Rheumatology Lecture 16, p. 246
+
+| input | kind | |
+|---|---|---|
+| `large_joints` | number | Medium-large joints involved |
+| `small_joints` | number | Small joints involved |
+| `serology` | `negative`, `low`, `high` | RF / ACPA |
+| `synovitis_6_weeks` | true / false (default false) | Synovitis 6 weeks or longer |
+| `abnormal_crp_esr` | true / false (default false) | Abnormal CRP or ESR |
+
+## `corrected_sodium`: Corrected sodium (hyperglycaemia)
+
+Source: Book Diabetology Lecture 15, p. 189
+
+| input | kind | |
+|---|---|---|
+| `na_meq_l` | number, mEq/L | Sodium |
+| `glucose_mg_dl` | number, mg/dL | Glucose |
+
+## `effective_osmolality`: Serum osmolality (HHS)
+
+Source: Book Diabetology Lecture 15, pp. 189, 192
+
+| input | kind | |
+|---|---|---|
+| `na_meq_l` | number, mEq/L | Sodium |
+| `glucose_mg_dl` | number, mg/dL | Glucose |
+| `urea_mmol_l` | number, mmol/L | Urea; optional |
+
 ## `incidence`: Incidence rate
 
 Source: Research L02: measures of disease frequency, slide 25

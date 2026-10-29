@@ -1,0 +1,1487 @@
+schema: batna.content/v1
+lecture: git.L02
+title: Advanced endoscopic procedures
+author: Dr. Hanan Hosny Nouh
+book: { chapter: 2, pages: [40, 75] }
+topics:
+  - { id: history, title: "Interventions in GIT and the history of endoscopy" }
+  - { id: enteroscopy, title: "Enteroscopy: types, technique, indications" }
+  - { id: capsule, title: "Wireless capsule endoscopy" }
+  - { id: utegd, title: "Ultrathin transnasal EGD" }
+  - { id: image-enhancement, title: "Magnifying endoscopy, chromoendoscopy, NBI, FICE, I-Scan, CLE" }
+  - { id: resection, title: "EMR and ESD" }
+  - { id: poem, title: "POEM, third-space endoscopy, G-POEM and Z-POEM" }
+  - { id: eus, title: "Endoscopic ultrasound" }
+  - { id: cholangioscopy, title: "Peroral cholangioscopy and pancreatoscopy" }
+  - { id: ablation, title: "RF (Stretta), microwave, cryotherapy, laser, PDT and APC" }
+  - { id: ai, title: "Artificial intelligence and image-enhanced endoscopy" }
+items:
+  # ---------- p40: interventions and history ----------
+  - id: git.L02.001
+    kind: card
+    topic: history
+    front: What does "intervention" mean in GIT?
+    back: Any interference made to diagnose and treat a disease or to follow up its course.
+    src: { page: 40, quote: "Interventions mean any interference which may occurs to diagnose and treat the disease or to follow-up its course." }
+    status: unverified
+  - id: git.L02.002
+    kind: order
+    topic: history
+    prompt: Put these milestones of endoscopy in historical order.
+    steps:
+      - Fiber optic gastroscope (1958)
+      - Colonoscopic polypectomy (1969)
+      - Endoscopic sphincterotomy with bile duct stone extraction (1974)
+      - Percutaneous endoscopic gastrostomy (1979)
+      - Electronic (charge coupled device) endoscope (1983)
+      - Endoscopic variceal ligation (1990)
+      - Self-expanding metal stents (1996)
+      - Endomicroscopy gives histological mucosal definition (2008)
+    src: { page: 40, quote: "1958 Development of fiber optic gastroscope" }
+    status: unverified
+  - id: git.L02.003
+    kind: cloze
+    topic: history
+    text: The fiber optic gastroscope was developed in {{c1::1958}}, and endoscopic variceal ligation was introduced in {{c2::1990}}.
+    src: { page: 40, quote: "1990 Endoscopic variceal ligation" }
+    status: unverified
+    tags: [numbers]
+  - id: git.L02.004
+    kind: cloze
+    topic: history
+    text: Percutaneous endoscopic gastrostomy dates from {{c1::1979}}, and endoscopic injection sclerotherapy from {{c2::1980}}.
+    src: { page: 40, quote: "1979 Percutaneous endoscopic gastrostomy 1980 Endoscopic injection sclerotherapy" }
+    status: unverified
+    tags: [numbers]
+  - id: git.L02.005
+    kind: cloze
+    topic: history
+    text: Endoscopic retrograde pancreatography came in {{c1::1968}} and endoscopic retrograde cholangiography in {{c2::1970}}.
+    src: { page: 40, quote: "1968 Endoscopic retrograde pancreatography" }
+    status: unverified
+    tags: [numbers]
+  # ---------- p41-43: enteroscopy ----------
+  - id: git.L02.006
+    kind: card
+    topic: enteroscopy
+    front: What is enteroscopy, and what is its major indication?
+    back: Endoscopic examination of the small bowel. Its major indication is locating the site of obscure GI bleeding.
+    src: { page: 41, quote: "The major indication is to locate a site of obscure GIT bleeding." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L02.007
+    kind: card
+    topic: enteroscopy
+    front: What do the enteroscope's working channels allow?
+    back: Tissue sampling and therapeutic interventions in the small intestine.
+    src: { page: 41, quote: "The enteroscope have working channels which allow tissue sampling & therapeutic interventions in the small intestine." }
+    status: unverified
+  - id: git.L02.008
+    kind: enumerate
+    topic: enteroscopy
+    prompt: Enumerate the types of small bowel enteroscopy.
+    points:
+      - Enteroscopy using a colonoscope
+      - Sonde enteroscope
+      - Push enteroscope
+      - Double balloon (push and pull) enteroscope
+      - Intraoperative enteroscope
+      - Spiral enteroscope
+    pass: 5
+    src: { page: 41, quote: "Enteroscopy using a colonoscope.  Sonde enteroscope.  Push enteroscope.  Double balloon (push and pull) enteroscope." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L02.009
+    kind: cloze
+    topic: enteroscopy
+    text: Enteroscopy is a {{c1::day-case}} procedure that takes between {{c2::45 minutes and 2 hours}} depending on the indication.
+    src: { page: 41, quote: "Is a day-case procedure.  Takes between 45 m-2 h depending on the indication." }
+    status: unverified
+    tags: [numbers]
+  - id: git.L02.010
+    kind: card
+    topic: enteroscopy
+    front: Which gas insufflates the small bowel during enteroscopy, and why?
+    back: Carbon dioxide, which minimizes bloating.
+    src: { page: 41, quote: "Carbon dioxide is used to insufflate the small bowel which minimize bloating." }
+    status: unverified
+  - id: git.L02.011
+    kind: card
+    topic: enteroscopy
+    front: How is the route of enteroscopy chosen, and what anesthesia is used?
+    back: Through the mouth or the rectum depending on which part of the small bowel needs assessment; under sedation or short-acting general anesthesia, sometimes with fluoroscopy.
+    src: { page: 41, quote: "Is performed through the mouth or the rectum depending on which part of the small bowel needs to be assessed." }
+    status: unverified
+  - id: git.L02.012
+    kind: table
+    topic: enteroscopy
+    title: Indications for enteroscopy (book p41-42)
+    columns: [Group, Indications]
+    rows:
+      - [Diagnostic, "Obscure GI bleeding; malabsorption and unexplained diarrhea; radiographic small bowel abnormalities; small bowel malignancy"]
+      - [Therapeutic, "Thermocoagulation of bleeding lesions; placement of a jejunostomy tube"]
+      - [Surveillance, Polyposis syndrome]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 42, quote: "Thermo coagulation of bleeding lesions. o Placement of jejonostomy tube. c) Surveillance o Polyposis syndrome." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L02.013
+    kind: enumerate
+    topic: enteroscopy
+    prompt: Enumerate the diagnostic indications for enteroscopy.
+    points:
+      - Obscure GI bleeding
+      - Malabsorption and unexplained diarrhea
+      - Exploration of radiographic small bowel abnormalities
+      - Investigation of small bowel malignancy
+    pass: 3
+    src: { page: 41, quote: "Mal absorption and unexplained diarrhea. o Exploration of radiographic abnormalities of the small bowel." }
+    status: unverified
+  - id: git.L02.014
+    kind: card
+    topic: enteroscopy
+    front: Which surveillance indication does the lecture give for enteroscopy?
+    back: Polyposis syndrome.
+    src: { page: 42, quote: "c) Surveillance o Polyposis syndrome." }
+    status: unverified
+  - id: git.L02.015
+    kind: card
+    topic: enteroscopy
+    front: Which two approaches of double balloon enteroscopy does the lecture show?
+    back: Antegrade (oral) DBE and retrograde (anal) DBE.
+    src: { page: 43, quote: "Antegrade (oral) DBE Retrograde (anal) DBE" }
+    status: unverified
+  # ---------- p43-47: capsule ----------
+  - id: git.L02.016
+    kind: card
+    topic: capsule
+    front: What is wireless capsule endoscopy?
+    back: A painless imaging system that shows the entire small bowel; the capsule transmits its images to a recording device.
+    src: { page: 43, quote: "A new painless image system to show the entire small bowel." }
+    status: unverified
+  - id: git.L02.017
+    kind: cloze
+    topic: capsule
+    text: The wireless capsule measures {{c1::11 x 25 mm}} and takes {{c2::2 frames per second}}.
+    src: { page: 43, quote: "The capsule which measures 11x25 mm takes 2frames/sec and transmits the images to a recording device." }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: git.L02.018
+    kind: enumerate
+    topic: capsule
+    prompt: Enumerate the exclusion criteria for capsule endoscopy.
+    points:
+      - Mental or physical disorders
+      - Swallowing problems
+      - History of major GI surgery
+      - Known fixed stricture or obstruction
+    pass: 4
+    src: { page: 44, quote: "Patients with mental or physical disorders  Swallowing problems  History of major GI surgery  Known fixed stricture or obstruction." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L02.019
+    kind: card
+    topic: capsule
+    front: Why is a known fixed stricture a contraindication to capsule endoscopy?
+    back: It is a listed exclusion criterion; the capsule could get stuck at the narrowing.
+    src: { page: 44, quote: "Known fixed stricture or obstruction." }
+    status: unverified
+  - id: git.L02.020
+    kind: enumerate
+    topic: capsule
+    prompt: Mention the small bowel findings the lecture shows on capsule endoscopy (its answer to "indications of capsule endoscopy").
+    points:
+      - Tumors and masses (lymphoma, GIST, polypoid mass, polyp)
+      - Vascular lesions and bleeding (phlebectasia, AVM, bleeding lesion)
+      - Lymphangiectasia
+      - NSAID stricture
+      - Radiation enteritis
+      - Sprue and villous drop-out
+    pass: 4
+    src: { page: 46, quote: "Lymphoma" }
+    status: unverified
+    tags: [book-question]
+  - id: git.L02.021
+    kind: card
+    topic: capsule
+    front: Which landmarks does the lecture's capsule sequence pass?
+    back: The GE junction, jejunum and ileocecal valve.
+    src: { page: 45, quote: "GE Junction" }
+    status: unverified
+  # ---------- p48: UTEGD ----------
+  - id: git.L02.022
+    kind: cloze
+    topic: utegd
+    text: Ultrathin EGD (UTEGD) became feasible with an ultrathin endoscope of {{c1::5.3 mm}}, as an alternative to {{c2::sedated trans-oral}} endoscopy.
+    src: { page: 48, quote: "UTEGD became feasible with the introduction of ultrathin endoscope (5.3 mm) as an alternative to traditional sedated trans-oral endoscopy." }
+    status: unverified
+    tags: [numbers]
+  - id: git.L02.023
+    kind: card
+    topic: utegd
+    front: Why is UTEGD useful in cirrhosis?
+    back: It needs no sedation and is well tolerated, so it is a rapid screening tool for the presence and size of varices.
+    src: { page: 48, quote: "well tolerated in patients with liver cirrhosis as a rapid screening tool for detecting the presence and size of varices." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L02.024
+    kind: card
+    topic: utegd
+    front: Main disadvantage of UTEGD?
+    back: The fiber-optic quality of the picture.
+    src: { page: 48, quote: "The main disadvantage is the fiber-optic quality of the picture." }
+    status: unverified
+  # ---------- p48-55: image enhancement ----------
+  - id: git.L02.025
+    kind: enumerate
+    topic: image-enhancement
+    prompt: Mention the techniques for improving visualization of the GI surface.
+    points:
+      - Magnifying endoscopy
+      - Tissue staining (chromoscopy)
+      - Stereo-microscopy and real-time video processing to enhance image contrast
+    pass: 3
+    src: { page: 48, quote: "Stereo-microscopy and real-time video processing for enhancing endoscopic image contrast." }
+    status: unverified
+  - id: git.L02.026
+    kind: enumerate
+    topic: image-enhancement
+    prompt: What does magnifying endoscopy require?
+    points:
+      - Deep sedation, because the focus range is limited (about 1 mm)
+      - A flexible plastic cap on the tip to keep a close, fixed focus
+      - Use of dyes
+      - Electronic structure enhancement at the maximal level
+    pass: 3
+    src: { page: 48, quote: "Deep sedation: to avoid patient's movements as focus range is limited (about 1 mm)." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L02.027
+    kind: card
+    topic: image-enhancement
+    front: Why does magnifying endoscopy need deep sedation?
+    back: To avoid patient movement, because the focus range is limited to about 1 mm.
+    src: { page: 48, quote: "Deep sedation: to avoid patient's movements as focus range is limited (about 1 mm)." }
+    status: unverified
+  - id: git.L02.028
+    kind: card
+    topic: image-enhancement
+    front: Cost and benefit of magnifying endoscopy?
+    back: It is time consuming (about 3 times the examination time) but gives more accurate diagnosis, biopsies and subsequent excellent mucosal resection.
+    src: { page: 48, quote: "Although it is a time consuming (examination time x3), magnifying endoscopy provides more accurate diagnosis" }
+    status: unverified
+  - id: git.L02.029
+    kind: card
+    topic: image-enhancement
+    front: In whom is chromoendoscopy recommended as an add-on to conventional upper endoscopy?
+    back: Patients at high risk for malignancy. It is easy, inexpensive, acceptable to patients and improves detection of dysplasia.
+    src: { page: 49, quote: "It is recommended that it should be added to conventional upper GI endoscopy in patients at high risk for malignancy." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L02.030
+    kind: card
+    topic: image-enhancement
+    front: Which combination is important for detecting early malignant change and for successful endoscopic mucosal resection?
+    back: Chromoendoscopy with high-resolution video endoscopy, magnifying endoscopy or endosonography.
+    src: { page: 49, quote: "A combination of chromo-endoscopy, high resolution video endoscopy, magnifying endoscopy or endo-sonography is very important for detection of early malignant changes" }
+    status: unverified
+  - id: git.L02.031
+    kind: table
+    topic: image-enhancement
+    title: Dyes used in chromoendoscopy (book p49)
+    columns: [Dye class, Examples]
+    rows:
+      - [Absorptive, "Methylene blue, toluidine blue, crystal violet, Lugol's iodine"]
+      - [Contrast, Indigo carmine]
+      - [Reactive, "Congo red, phenol red"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 49, quote: "Absorptive dyes (methylene blue, toluidine blue, crystal violet, and Lugol's iodine)," }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L02.032
+    kind: cloze
+    topic: image-enhancement
+    text: Indigo carmine is a {{c1::contrast}} dye, while Congo red and phenol red are {{c2::reactive}} dyes.
+    src: { page: 49, quote: "Contrast dyes (indigo carmine),  Reactive dyes (Congo red and phenol red)." }
+    status: unverified
+  - id: git.L02.033
+    kind: card
+    topic: image-enhancement
+    front: Chromoendoscopy with magnification can enlarge images how much?
+    back: Several hundred-fold, by adjustable lenses.
+    src: { page: 49, quote: "allows a several hundred-fold magnification of images by means of adjustable lenses." }
+    status: unverified
+  - id: git.L02.034
+    kind: card
+    topic: image-enhancement
+    front: What is the big advantage of virtual (digital) chromoendoscopy over dye spraying?
+    back: Chromoendoscopy-like images in a short time at the press of a button, without dyes, while keeping the traditional white-light view option.
+    src: { page: 50, quote: "Generation of chromoendoscopy-like images in a short time, simply by pressing a button on the endoscope" }
+    status: unverified
+  - id: git.L02.035
+    kind: card
+    topic: image-enhancement
+    front: In the lecture's gastric tumor example, what did indigo carmine spraying show?
+    back: The margin of the tumor could be recognized endoscopically.
+    src: { page: 50, quote: "After Indigo carmine dye-spraying, the margin" }
+    status: unverified
+  - id: git.L02.036
+    kind: cloze
+    topic: image-enhancement
+    text: NBI can provide up to {{c1::1000}}-fold magnification and typically uses {{c2::blue and green}} light.
+    src: { page: 52, quote: "NBI can provide up to 1000-fold magnification." }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: git.L02.037
+    kind: card
+    topic: image-enhancement
+    front: Why does NBI show superficial capillaries so well?
+    back: Blue light is better absorbed by hemoglobin, which images superficial capillaries and mucosal patterns.
+    src: { page: 52, quote: "Blue light is better absorption by hemoglobin, enabling imaging of superficial capillaries and superficial mucosal patterns." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L02.038
+    kind: cloze
+    topic: image-enhancement
+    text: The correlation between pathologic and NBI findings was {{c1::85.3%}}.
+    src: { page: 52, quote: "The correlation between pathologic and NBI findings was 85.3%." }
+    status: unverified
+    tags: [numbers]
+  - id: git.L02.039
+    kind: cloze
+    topic: image-enhancement
+    text: Chromoendoscopy and NBI are {{c1::equally effective}} for differentiating neoplasia from non-neoplasia, with {{c2::100%}} sensitivity and {{c3::75%}} specificity.
+    src: { page: 52, quote: "Chromoendoscopy and NBI are equally effective for differentiating neoplasia from non neoplasia, with 100% sensitivity and 75% specificity." }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: git.L02.040
+    kind: card
+    topic: image-enhancement
+    front: How does NBI compare with conventional endoscopy in early colorectal cancer?
+    back: NBI is superior for the diagnosis of early-stage colorectal cancer.
+    src: { page: 52, quote: "NBI is superior to conventional endoscopy for the diagnosis of early-stage colorectal cancer." }
+    status: unverified
+  - id: git.L02.041
+    kind: card
+    topic: image-enhancement
+    front: What is FICE and how does it work?
+    back: Flexible spectral imaging color enhancement, a software system that changes image colour in real time using virtual optical filters (changing the wavelength), creating 10 different images.
+    src: { page: 53, quote: "FICE creates a contrast difference by changing the wave length of light by means of virtual optical filters and the software creates 10 different images." }
+    status: unverified
+  - id: git.L02.042
+    kind: card
+    topic: image-enhancement
+    front: What contrast does FICE produce best?
+    back: The greatest contrast between normal mucosa and early-stage neoplastic tissue.
+    src: { page: 53, quote: "produces the greatest contrast between normal mucosa and early stage neoplastic tissue." }
+    status: unverified
+  - id: git.L02.043
+    kind: card
+    topic: image-enhancement
+    front: How does I-Scan differ from NBI and chromoendoscopy?
+    back: It is software-based, uses no dye (unlike chromoendoscopy) and no wavelength contrast (unlike NBI); it modifies each image element of the white-light image.
+    src: { page: 53, quote: "I-SCAN does not make use of the contrast created by light of different wave lengths, as does NBI." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L02.044
+    kind: card
+    topic: image-enhancement
+    front: Which light source does confocal laser endomicroscopy (CLE) use?
+    back: A laser rather than white light.
+    src: { page: 54, quote: "CLE uses a laser rather than white light as a light source." }
+    status: unverified
+  - id: git.L02.045
+    kind: card
+    topic: image-enhancement
+    front: What concept did CLE introduce?
+    back: Optical biopsy, real-time noninvasive assessment of the cellular and molecular properties of tissue with in vivo histologic diagnosis.
+    src: { page: 54, quote: "resulting in the concept of optical biopsy." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L02.046
+    kind: enumerate
+    topic: image-enhancement
+    prompt: Mention the features of the CLE system.
+    points:
+      - A miniature microscope on the endoscope tip gives in vivo histology
+      - Images magnified several hundred-fold, with contrast media for cellular and molecular images
+      - Two monitors, one for microscopic images and one for endoscopy
+      - Horizontal cross-sectional images at various depths
+      - Images can be recorded, stored and re-examined
+    pass: 3
+    src: { page: 54, quote: "The system also enables acquisition of horizontal cross-sectional images at various depths." }
+    status: unverified
+  - id: git.L02.047
+    kind: table
+    topic: image-enhancement
+    title: Differentiating cancer and precancerous lesions (book p55)
+    columns: [Technique, "Sensitivity (%)", "Specificity (%)"]
+    rows:
+      - [Chromoendoscopy, "97", "81"]
+      - [NBI, "97.9", "83.8"]
+      - [FICE, "not given", "90.9"]
+      - [Magnification endoscopy, "93", "95"]
+      - [I-Scan, "28.5", "78.4"]
+      - [CLE, "80", "94"]
+    blanks: [[0, 1], [1, 1], [3, 2], [4, 1], [5, 2]]
+    src: { page: 55, quote: "Magnification Endoscopy 93 95" }
+    status: unverified
+    tags: [numbers]
+  - id: git.L02.048
+    kind: card
+    topic: image-enhancement
+    front: In the book's table, which technique has the highest specificity, and which the lowest sensitivity, for cancer and precancerous lesions?
+    back: Highest specificity is magnification endoscopy (95%); lowest sensitivity is I-Scan (28.5%).
+    src: { page: 55, quote: "I-SCAN 28.5 78.4" }
+    status: unverified
+    tags: [numbers]
+  # ---------- p56-57: EMR / ESD ----------
+  - id: git.L02.049
+    kind: card
+    topic: resection
+    front: What is EMR?
+    back: Endoscopic mucosal resection, a minimally invasive technique for staging and treating early malignant lesions limited to the mucosa.
+    src: { page: 56, quote: "EMR is a minimally invasive technique for staging/ treatment of early malignant lesions limited to the mucosa." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L02.050
+    kind: card
+    topic: resection
+    front: From what did EMR develop, and what is its place now?
+    back: From the snare biopsy method; it has become the first-choice therapy for early GI carcinomas.
+    src: { page: 56, quote: "EMR has developed from the snare biopsy method, and recently has been the first-choice therapy for early GIT carcinomas." }
+    status: unverified
+  - id: git.L02.051
+    kind: enumerate
+    topic: resection
+    prompt: What are the two major procedures for grasping the swollen mucosa after saline injection in EMR?
+    points:
+      - Cap aspiration
+      - Forceps traction
+    pass: 2
+    src: { page: 56, quote: "Cap aspiration. o Forceps traction" }
+    status: unverified
+  - id: git.L02.052
+    kind: cloze
+    topic: resection
+    text: Maximal indicative diameters for EMR are {{c1::20 mm}} in elevated lesions and {{c2::10 mm}} in depressed lesions.
+    src: { page: 57, quote: "Maximal indicative diameters for EMR are 20/10 mm in elevated and depressed lesions respectively." }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: git.L02.053
+    kind: card
+    topic: resection
+    front: For which tumor should EMR not be chosen as radical treatment?
+    back: Poorly differentiated adenocarcinoma.
+    src: { page: 57, quote: "EMR should not be selected as a radical treatment for poorly differentiated adenocarcinoma." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L02.054
+    kind: cloze
+    topic: resection
+    text: After EMR, follow-up endoscopy every {{c1::6 months}} for {{c2::5 years}} is suitable and necessary.
+    src: { page: 57, quote: "Follow-up endoscopic examination every 6 months for 5 years are suitable and necessary." }
+    status: unverified
+    tags: [numbers]
+  - id: git.L02.055
+    kind: card
+    topic: resection
+    front: When is ESD endorsed rather than EMR?
+    back: For lesions likely to have cancer invading the superficial submucosa, and lesions EMR cannot remove because of submucosal fibrosis or post-EMR recurrence.
+    src: { page: 57, quote: "ESD is endorsed for lesions that have a high likelihood of cancer invading the superficial submucosa" }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L02.056
+    kind: table
+    topic: resection
+    title: EMR versus ESD (book p57)
+    columns: [Feature, EMR, ESD]
+    rows:
+      - [Concept, Natural extension of polypectomy to a flat lesion after submucosal injection, Tunnelling the endoscope into the submucosal plane]
+      - [Difficulty, Simpler, Technically more difficult]
+      - [Strength, "First choice for early GI carcinoma limited to the mucosa", "Curative en bloc resection of early cancers; submucosal invasion, fibrosis, post-EMR recurrence"]
+    blanks: [[0, 1], [0, 2], [2, 2]]
+    src: { page: 57, quote: "EMR is a natural extension of polypectomy, applied to a flat lesion after a submucosal injection." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p58-62: POEM ----------
+  - id: git.L02.057
+    kind: card
+    topic: poem
+    front: Gold standard treatment for achalasia according to the lecture?
+    back: Heller's myotomy (1914).
+    src: { page: 58, quote: "The gold standard treatment for achalasia is Heller‘s myotomy, 1914." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L02.058
+    kind: enumerate
+    topic: poem
+    prompt: Mention the other (non-Heller) treatments of achalasia listed with POEM.
+    points:
+      - Pneumatic balloon dilation
+      - Botulinum toxin injection
+      - Calcium channel blockers
+      - POEM (per-oral endoscopic myotomy)
+    pass: 3
+    src: { page: 58, quote: "Pneumatic balloon dilation, botulinum toxin injections and calcium channel blockers." }
+    status: unverified
+  - id: git.L02.059
+    kind: cloze
+    topic: poem
+    text: POEM was described by {{c1::Inoue}} et al in {{c2::2009}}, and uses a {{c3::natural orifice transluminal endoscopic surgical (NOTES)}} approach.
+    src: { page: 58, quote: "In 2009, Inoue et al, described a revolutionary technique for the treatment of achalasia, termed per-oral endoscopic myotomy (POEM)" }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L02.060
+    kind: order
+    topic: poem
+    prompt: Put the historical steps that led to human POEM in order.
+    steps:
+      - "1980: Ortega et al, endoscopic direct myotomy (6 dogs, then 17 patients)"
+      - "2007: the submucosal tunnelling concept is proposed"
+      - "Pasricha et al: completely endoscopic myotomy in swine"
+      - "2009: Inoue et al report the first human POEM"
+    src: { page: 58, quote: "In 2007, the concept of a submucosal tunnelling method was proposed." }
+    status: unverified
+  - id: git.L02.061
+    kind: order
+    topic: poem
+    prompt: Put the steps of the POEM procedure in order.
+    steps:
+      - Submucosal bleb and a 2 cm longitudinal mucosotomy
+      - Enter the submucosa with a tapered cap and create the tunnel (spray coagulation, hydrodissection with dilute indigo carmine)
+      - Extend the tunnel 3 cm beyond the GE junction into the cardia
+      - Selective myotomy of the inner circular fibres from 2 cm distal to the mucosotomy to 2 cm past the GEJ
+      - Withdraw and inspect the mucosa over the tunnel through the true lumen
+      - Close the mucosotomy entrance with endoscopic clips
+    src: { page: 59, quote: "The entrance to the sub-mucosal tunnel is then sequentially closed with endoscopic clips" }
+    status: unverified
+    tags: [high-yield, book-question]
+  - id: git.L02.062
+    kind: cloze
+    topic: poem
+    text: In POEM, the submucosal tunnel is extended {{c1::3 cm}} beyond the GE junction, and the myotomy is carried {{c2::2 cm}} past the GEJ into the cardia.
+    src: { page: 59, quote: "The submucosal tunnel was extended 3 cm beyond the GE junction into the gastric cardia" }
+    status: unverified
+    tags: [numbers]
+  - id: git.L02.063
+    kind: card
+    topic: poem
+    front: Which muscle layer is divided in POEM?
+    back: The inner circular muscle fibres (selective myotomy).
+    src: { page: 59, quote: "selective myotomy was performed by division of the inner circular muscle fibers" }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L02.064
+    kind: card
+    topic: poem
+    front: How long is the POEM mucosotomy, and how is it made?
+    back: A 2 cm longitudinal mucosotomy, made with a cutting current.
+    src: { page: 58, quote: "A 2 cm longitudinal mucosotomy was performed with a cutting current." }
+    status: unverified
+  - id: git.L02.065
+    kind: card
+    topic: poem
+    front: What is "third-space endoscopy"?
+    back: Using the submucosal space with a mucosal flap that can be closed safely with clips. The lumen is the first space and the extraluminal space the second.
+    src: { page: 60, quote: "If the intraluminal space was the first space, and the extraluminal space denotes the second space" }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L02.066
+    kind: enumerate
+    topic: poem
+    prompt: Beyond achalasia, to which disorders has the POEM concept expanded?
+    points:
+      - Medically refractory gastroparesis (G-POEM)
+      - Zenker's diverticulum (Z-POEM)
+      - Spastic esophageal disorders such as type III achalasia and diffuse esophageal spasm (long myotomy)
+    pass: 3
+    src: { page: 61, quote: "medically refractory gastroparesis as well as for Zenker‘s diverticulum" }
+    status: unverified
+  - id: git.L02.067
+    kind: card
+    topic: poem
+    front: Why may POEM suit spastic motility disorders better?
+    back: It offers a long myotomy, which may help type III achalasia and diffuse esophageal spasm.
+    src: { page: 61, quote: "The long myotomy offered by POEM may prove more beneficial for patients with spastic motility disorders of the esophagus" }
+    status: unverified
+  - id: git.L02.068
+    kind: card
+    topic: poem
+    front: Main risk after POEM, and what it requires?
+    back: A significant risk of GERD, so patients need counselling before and surveillance after the procedure.
+    src: { page: 61, quote: "POEM itself is associated with a significant risk of GERD" }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L02.069
+    kind: card
+    topic: poem
+    front: What is G-POEM, and for whom?
+    back: Gastric POEM, also called per-oral pyloromyotomy (POP), for medically refractory gastroparesis that may be due to pyloric spasm.
+    src: { page: 61, quote: "also known as (GPOEM) or Per-oral pyloromyotomy (POP) has also demonstrated promising short-term results." }
+    status: unverified
+  - id: git.L02.070
+    kind: enumerate
+    topic: poem
+    prompt: Mention the management options for gastroparesis from pyloric spasm.
+    points:
+      - Endoscopic dilation
+      - Botulinum toxin injection
+      - Pyloric stenting
+      - Pyloroplasty or pyloromyotomy (including G-POEM)
+    pass: 3
+    src: { page: 61, quote: "Management options include endoscopic dilation, botulinum toxin injection, pyloric stenting, pyloroplasty or pyloromyotomies." }
+    status: unverified
+  - id: git.L02.071
+    kind: order
+    topic: poem
+    prompt: Put the steps of G-POEM in order.
+    steps:
+      - Transverse lesser curve mucosotomy
+      - Create the submucosal tunnel and see the pylorus muscle
+      - Pyloromyotomy
+      - Close the mucosotomy defect
+    src: { page: 61, quote: "Transverse lesser curve mucosotomy (Fig. 4A);" }
+    status: unverified
+  - id: git.L02.072
+    kind: card
+    topic: poem
+    front: What is Z-POEM, and why does it work?
+    back: Endoscopic myotomy of the cricopharyngeus (upper esophageal sphincter). A hypertensive cricopharyngeus can form a Zenker's diverticulum over time.
+    src: { page: 62, quote: "The upper esophageal sphincter, or the cricopharyngeus muscle, can similarly be hypertensive" }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L02.073
+    kind: card
+    topic: poem
+    front: What does a barium swallow show after Z-POEM?
+    back: Smooth passage of contrast down the esophagus, with endoscopic clips in situ.
+    src: { page: 62, quote: "Barium swallow after Z-POEM, with smooth passage of contrast down the esophagus, and endoscopic clips in-situ" }
+    status: unverified
+  # ---------- p63-65: EUS ----------
+  - id: git.L02.074
+    kind: card
+    topic: eus
+    front: What is EUS, and what can it examine?
+    back: An endoscope with an ultrasound processor on its tip. It examines the GI lining, the wall and surrounding structures such as liver, pancreas, bile ducts and lymph nodes.
+    src: { page: 63, quote: "EUS allows examination of both the lining of GIT, but also of the wall of the tract and its surrounding structures" }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L02.075
+    kind: cloze
+    topic: eus
+    text: The new large-channel echo-endoscope has a {{c1::3.2 mm}} channel that allows more aggressive interventions under direct EUS control.
+    src: { page: 63, quote: "New large channel (3.2 mm) echo-endoscope allows more aggressive endoscopic interventions" }
+    status: unverified
+    tags: [numbers]
+  - id: git.L02.076
+    kind: card
+    topic: eus
+    front: What are the parts of 3D EUS?
+    back: An ultrasound probe, ultrasound processors and an ultrasound imaging system; images display well in any plane.
+    src: { page: 63, quote: "three dimension EUS (3D EUS) consisting of: US probe, an US processors, and US imaging system." }
+    status: unverified
+  - id: git.L02.077
+    kind: card
+    topic: eus
+    front: What is EUS primarily used for?
+    back: To detect and stage suspected cancer of the esophagus, stomach, pancreas and rectum, by imaging and fine-needle aspiration.
+    src: { page: 64, quote: "EUS is primarily used to detect and stage suspected cancer of the esophagus, stomach, pancreas and rectum" }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L02.078
+    kind: enumerate
+    topic: eus
+    prompt: Illustrate the indications of EUS.
+    points:
+      - Detect and stage cancer of the esophagus, stomach, pancreas and rectum (imaging and FNA)
+      - Local cytoimplant immunotherapy (accurate needle placement)
+      - Fecal incontinence, staging lung cancer, vascular assessment with Doppler
+      - Biopsy of suspicious lymph nodes, pancreatic and extra-intestinal masses
+      - Treating achalasia; hemostasis of bleeding gastroduodenal ulcers
+      - Drainage of cysts and pancreatic pseudocysts
+      - Celiac plexus neurolysis
+      - EUS-guided radiofrequency tumorectomy
+    pass: 6
+    src: { page: 64, quote: "Drainage of cysts and pancreatic pseudocyst. o Celiac plexus neurolysis. o EUS-guided R. frequency tumorectomy." }
+    status: unverified
+    tags: [high-yield, book-question]
+  - id: git.L02.079
+    kind: card
+    topic: eus
+    front: Why is EUS considered superior for local cytoimplant immunotherapy?
+    back: It can place a needle into the primary tumor site with great accuracy.
+    src: { page: 64, quote: "With the capability of placing a needle into a primary site of the tumour with great accuracy" }
+    status: unverified
+  - id: git.L02.080
+    kind: card
+    topic: eus
+    front: What does the lecture's EUS image show, and why can EUS see it?
+    back: A tumor infiltrating all wall layers. The small transducer on the tip gets very close to the organs.
+    src: { page: 65, quote: "A tumour is shown to have infiltrated all wall layers." }
+    status: unverified
+  # ---------- p66-68: cholangioscopy ----------
+  - id: git.L02.081
+    kind: card
+    topic: cholangioscopy
+    front: What is the "mother-baby-scope" system?
+    back: A thin fiberscope (2-3.5 mm) passed through the therapeutic channel of a large duodenoscope into the duct after endoscopic sphincterotomy.
+    src: { page: 66, quote: "A thin fiberscope (2-3.5 mm) is inserted into a therapeutic channels of a large duodenoscope, into the duct after endoscopic sphincterotomy." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L02.082
+    kind: enumerate
+    topic: cholangioscopy
+    prompt: What does the biopsy channel of the cholangioscope permit?
+    points:
+      - Tissue sampling
+      - Catheters for dye
+      - Probes for laser lithotripsy
+    pass: 3
+    src: { page: 66, quote: "Its biopsy channel permits : tissue sampling, insertion of catheters for dye or probes for laser lithotripsy." }
+    status: unverified
+  - id: git.L02.083
+    kind: cloze
+    topic: cholangioscopy
+    text: The baby scope is {{c1::2-3.5 mm}} wide and is inserted {{c2::after endoscopic sphincterotomy}}; new instruments that need no sphincterotomy are being evaluated.
+    src: { page: 66, quote: "New instruments that do not require a sphincterotomy are being evaluated." }
+    status: unverified
+    tags: [numbers]
+  # ---------- p69-73: ablation ----------
+  - id: git.L02.084
+    kind: card
+    topic: ablation
+    front: How does radiofrequency (RF) energy destroy tissue?
+    back: Rapidly alternating current produces heat, which causes tissue necrosis.
+    src: { page: 69, quote: "the passage of rapidly alternating current with subsequent heat production can generate tissue necrosis." }
+    status: unverified
+  - id: git.L02.085
+    kind: cloze
+    topic: ablation
+    text: RF energy has frequencies up to {{c1::900 MHz}}; higher frequencies are in the {{c2::microwave}} spectrum.
+    src: { page: 69, quote: "RF energy with frequency up to 900 MHz, while higher frequencies are in the microwave spectra." }
+    status: unverified
+    tags: [numbers]
+  - id: git.L02.086
+    kind: enumerate
+    topic: ablation
+    prompt: For which conditions is RF a promising modality?
+    points:
+      - GERD
+      - Nodular-type HCC under 3-4 cm
+    pass: 2
+    src: { page: 69, quote: "RF is a promising modality for: • GERD • Nodular type HCC <3-4 cm." }
+    status: unverified
+  - id: git.L02.087
+    kind: card
+    topic: ablation
+    front: How does RF treatment (Stretta) work in GERD?
+    back: Controlled RF energy induces collagen contraction in the LES region, as a minimally invasive alternative to antireflux surgery.
+    src: { page: 69, quote: "It involves the application of controlled RF energy to induces collagen contraction in the LES region." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L02.088
+    kind: cloze
+    topic: ablation
+    text: In Stretta, lesion temperature is kept below {{c1::100°C}}; rings of lesions are made {{c2::2 cm}} above and below the cardia, {{c3::48 to 60}} lesions over about 50 minutes.
+    src: { page: 69, quote: "Patients get 48 to 60 lesions placed over a period of 50 minutes." }
+    status: unverified
+    tags: [numbers]
+  - id: git.L02.089
+    kind: card
+    topic: ablation
+    front: Why is lesion temperature in Stretta kept below 100°C?
+    back: It minimizes collateral tissue damage from vaporization and high impedance.
+    src: { page: 69, quote: "Maintaining lesion temperatures below 100oC minimizes the collateral tissue damage due to vaporization and high impedence values." }
+    status: unverified
+  - id: git.L02.090
+    kind: enumerate
+    topic: ablation
+    prompt: Enumerate the ideal candidates for RF therapy of refractory GERD.
+    points:
+      - Adequate esophageal peristalsis and LES pressure of at least 5 mm Hg
+      - 24-hour pH study with pathologic acid reflux (total acid exposure time >4%)
+      - Nonerosive reflux disease or grade I-II esophagitis (Savary-Miller)
+      - Symptoms respond to PPIs or H2RAs but return when they are stopped
+    pass: 3
+    src: { page: 69, quote: "Have adequate esophageal peristalsis and LESP of at least 5 mm Hg." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L02.091
+    kind: cloze
+    topic: ablation
+    text: "Ideal RF candidate: LES pressure at least {{c1::5 mm Hg}} and total acid exposure time {{c2::>4%}} on a 24-hour pH study."
+    src: { page: 69, quote: "Have a 24-hour PH study demonstrating pathologic acid reflux (total acid exposure time > 4%)." }
+    status: unverified
+    tags: [numbers]
+  - id: git.L02.092
+    kind: enumerate
+    topic: ablation
+    prompt: Who is NOT a good candidate for RF therapy of GERD?
+    points:
+      - Fixed hiatal hernia longer than 2 cm
+      - Significant dysphagia
+      - Grade III or IV esophagitis (Savary-Miller) or extensive Barrett's metaplasia
+      - Inadequate peristalsis and incomplete LES relaxation on swallowing
+    pass: 3
+    src: { page: 70, quote: "Have > 2 cm long fixed hiatal hernia. • Have significant dysphagia." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L02.093
+    kind: card
+    topic: ablation
+    front: How does microwave coagulation therapy (MCT) work?
+    back: Microwave energy goes to a monopolar needle electrode; coagulation reaches a depth equal to the electrode length.
+    src: { page: 70, quote: "Tissue coagulation occurs and reaches a depth corresponding to the length of the electrode." }
+    status: unverified
+  - id: git.L02.094
+    kind: cloze
+    topic: ablation
+    text: Tumors treated with MCT were under {{c1::40 mm}} and at least {{c2::10 mm}} from major vessels; MCT cannot be a single treatment for HCC over {{c3::2 cm}}.
+    src: { page: 70, quote: "The maximum diameter of the tumors treated was <40 mm and were located at least 10 mm from major vessels and organs." }
+    status: unverified
+    tags: [numbers]
+  - id: git.L02.095
+    kind: card
+    topic: ablation
+    front: What gas does endoscopic cryotherapy use, and for what?
+    back: Nitrous oxide under high pressure, through a catheter, for hemostasis and controlled mucosal ablation (e.g. Barrett's esophagus).
+    src: { page: 70, quote: "They use a device with a gas (nitrous oxide under high pressure)" }
+    status: unverified
+  - id: git.L02.096
+    kind: card
+    topic: ablation
+    front: Immediate and delayed effects of endoscopic cryotherapy?
+    back: Immediate cryonecrosis of the epithelium (0.5 mm), then a latent inflammatory process that completes the mucosal ablation over several days.
+    src: { page: 71, quote: "epithelial ablation via cryonecrosis of 0.5 mm was achieved (immediate effect)" }
+    status: unverified
+  - id: git.L02.097
+    kind: card
+    topic: ablation
+    front: What is FREDDY, and what is it used for?
+    back: A frequency-doubled double-pulse Nd:YAG laser, applied at ERCP through a balloon catheter for laser lithotripsy of difficult stones (low fibre burn-off, better fragmentation).
+    src: { page: 71, quote: "FREquency Doubled Double-pulse Nd-YAG or FREDDY was already tested." }
+    status: unverified
+  - id: git.L02.098
+    kind: card
+    topic: ablation
+    front: How does photodynamic therapy (PDT) work?
+    back: A photosensitizer is retained preferentially by cancer tissue, then endoscopic laser light of a suitable wavelength destroys tumor cells selectively. It is non-thermal.
+    src: { page: 71, quote: "PDT is a non-thermal procedure which acts by endoscopic laser irradiation with an appropriate wave-length after administration of a photosensitizer" }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L02.099
+    kind: card
+    topic: ablation
+    front: What did early PDT trials in esophageal cancer show?
+    back: Significant palliation of dysphagia; PDT is technically easier and better tolerated than Nd:YAG laser therapy.
+    src: { page: 71, quote: "Initial trials in esophageal cancer have demonstrated that PDT is effective in providing significant palliation from dysphagia." }
+    status: unverified
+  - id: git.L02.100
+    kind: enumerate
+    topic: ablation
+    prompt: Mention other uses of PDT in gastroenterology.
+    points:
+      - Palliation of colon, gastric and pancreatic cancer
+      - Ampullary neoplasm and para-ampullary adenomas
+      - Lesions in familial adenomatous polyposis
+      - Kills H. pylori in vitro (no clinical data)
+    pass: 3
+    src: { page: 72, quote: "PDT has been used for photodestruction of ampullary neoplasm and paraampullary adenomas" }
+    status: unverified
+  - id: git.L02.101
+    kind: card
+    topic: ablation
+    front: What is argon plasma coagulation (APC)?
+    back: A non-contact electrocoagulation technique that delivers high-frequency alternating current through ionized argon gas.
+    src: { page: 72, quote: "APC is an endoscopic non-contacct electrocoagulation technique where high frequency alternating current is delivered through ionized argon gas." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L02.102
+    kind: cloze
+    topic: ablation
+    text: APC has a limited coagulation depth of {{c1::2-3 mm}}, which explains its {{c2::low risk of perforation}}.
+    src: { page: 72, quote: "The limited depth of coagulation (2-3 mm) explains the low risk of perforation." }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: git.L02.103
+    kind: enumerate
+    topic: ablation
+    prompt: Enumerate the well-established indications of APC.
+    points:
+      - Bleeding from angiodysplasia or a polypectomy site
+      - Radiation proctitis
+      - Palliation of malignant colorectal stenosis
+      - Early gastric cancer
+    pass: 3
+    src: { page: 72, quote: "Hemorrhage from angiodysplastic lesion or polypectomy site. • Radiation proctitis." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L02.104
+    kind: card
+    topic: ablation
+    front: How is APC used after piecemeal polyp resection?
+    back: To remove polyp remnants at the resection edges; it also controls bleeding or destroys tissue that is hard to remove.
+    src: { page: 73, quote: "APC is used to remove polyp remnants at the resection edges." }
+    status: unverified
+  # ---------- p74: AI ----------
+  - id: git.L02.105
+    kind: enumerate
+    topic: ai
+    prompt: Enumerate the four primary types of artificial intelligence.
+    points:
+      - Reactive
+      - Limited memory
+      - Theory of mind
+      - Self-aware
+    pass: 4
+    src: { page: 74, quote: "There are four primary AI types:  Reactive.  Limited memory.  Theory of mind.  Self-aware." }
+    status: unverified
+  - id: git.L02.106
+    kind: card
+    topic: ai
+    front: Uses of AI in the medical device industry?
+    back: Data management, remote surgery, diagnostic and procedural assistance, clinical trials, and better manufacturing efficiency.
+    src: { page: 74, quote: "data management, remote surgery, diagnostic and procedural assisting, clinical trials, and more." }
+    status: unverified
+  - id: git.L02.107
+    kind: card
+    topic: ai
+    front: Which digital chromoendoscopy systems are the most frequently used?
+    back: Flexible spectral-imaging color enhancement (FICE), narrow-band imaging (NBI) and I-Scan.
+    src: { page: 74, quote: "Digital chromoendoscopy systems, of which flexible spectral-imaging color enhancement, narrow-band imaging, and I-Scan are the most frequently used." }
+    status: unverified
+  # ---------- MCQs ----------
+  - id: git.L02.108
+    kind: mcq
+    topic: enteroscopy
+    stem: "A 64-year-old man has recurrent melena and iron deficiency anemia. Upper endoscopy and colonoscopy are normal twice. What is the major indication fulfilled for enteroscopy?"
+    options:
+      - Surveillance of polyposis
+      - Obscure GI bleeding
+      - Placement of a jejunostomy tube
+      - Unexplained diarrhea
+    answer: 1
+    why:
+      - "He has no polyposis syndrome."
+      - "Correct: locating obscure GI bleeding is the major indication."
+      - "A therapeutic indication not relevant here."
+      - "He has bleeding, not diarrhea."
+    src: { page: 41, quote: "The major indication is to locate a site of obscure GIT bleeding." }
+    status: unverified
+  - id: git.L02.109
+    kind: mcq
+    topic: enteroscopy
+    stem: "Which enteroscope works by push and pull?"
+    options:
+      - Sonde enteroscope
+      - Double balloon enteroscope
+      - Push enteroscope
+      - Intraoperative enteroscope
+    answer: 1
+    why:
+      - "A sonde enteroscope is not the push-and-pull type."
+      - "Correct: double balloon (push and pull) enteroscope."
+      - "Push only."
+      - "Used during surgery."
+    src: { page: 41, quote: "Double balloon (push and pull) enteroscope." }
+    status: unverified
+  - id: git.L02.110
+    kind: mcq
+    topic: capsule
+    stem: "Which patient should NOT have wireless capsule endoscopy?"
+    options:
+      - A man with obscure GI bleeding
+      - A woman with Crohn's disease and a known fixed ileal stricture
+      - A man with suspected small bowel lymphoma
+      - A woman with celiac disease and suspected villous atrophy
+    answer: 1
+    why:
+      - "Bleeding lesions are seen well on capsule."
+      - "Correct: a known fixed stricture or obstruction is an exclusion criterion."
+      - "Lymphoma is shown on capsule images in the lecture."
+      - "Sprue and villous drop-out are shown on capsule images."
+    src: { page: 44, quote: "Known fixed stricture or obstruction." }
+    status: unverified
+  - id: git.L02.111
+    kind: mcq
+    topic: capsule
+    stem: "How many frames per second does the capsule described in the lecture take?"
+    options:
+      - "1"
+      - "2"
+      - "6"
+      - "30"
+    answer: 1
+    why:
+      - "Too few."
+      - "Correct: 2 frames/sec."
+      - "Not the lecture's figure."
+      - "Video-rate; not the capsule in the lecture."
+    src: { page: 43, quote: "The capsule which measures 11x25 mm takes 2frames/sec and transmits the images to a recording device." }
+    status: unverified
+    tags: [numbers]
+  - id: git.L02.112
+    kind: mcq
+    topic: utegd
+    stem: "A cirrhotic patient refuses sedation but needs variceal screening. Which procedure suits him, and what is its drawback?"
+    options:
+      - Capsule endoscopy; poor small bowel views
+      - Ultrathin EGD; fiber-optic picture quality
+      - EUS; needs general anesthesia
+      - Magnifying endoscopy; needs deep sedation
+    answer: 1
+    why:
+      - "Capsule is for the small bowel."
+      - "Correct: UTEGD needs no sedation, screens varices quickly, but has fiber-optic image quality."
+      - "Not the screening tool in the lecture."
+      - "Magnifying endoscopy needs deep sedation, which he refuses."
+    src: { page: 48, quote: "The main disadvantage is the fiber-optic quality of the picture." }
+    status: unverified
+  - id: git.L02.113
+    kind: mcq
+    topic: image-enhancement
+    stem: "Which chromoendoscopy dye is a contrast (not absorptive) dye?"
+    options:
+      - Methylene blue
+      - Lugol's iodine
+      - Indigo carmine
+      - Crystal violet
+    answer: 2
+    why:
+      - "Absorptive."
+      - "Absorptive."
+      - "Correct: indigo carmine is the contrast dye."
+      - "Absorptive."
+    src: { page: 49, quote: "Contrast dyes (indigo carmine)," }
+    status: unverified
+  - id: git.L02.114
+    kind: mcq
+    topic: image-enhancement
+    stem: "Why does NBI highlight superficial capillaries?"
+    options:
+      - It sprays a reactive dye
+      - Blue light is strongly absorbed by hemoglobin
+      - It uses a laser for optical biopsy
+      - It reprocesses each white-light pixel in software
+    answer: 1
+    why:
+      - "NBI uses no dye."
+      - "Correct: blue light is absorbed by hemoglobin, imaging superficial capillaries."
+      - "That is CLE."
+      - "That is I-Scan."
+    src: { page: 52, quote: "Blue light is better absorption by hemoglobin, enabling imaging of superficial capillaries and superficial mucosal patterns." }
+    status: unverified
+  - id: git.L02.115
+    kind: mcq
+    topic: image-enhancement
+    stem: "Comparing chromoendoscopy and NBI for neoplasia versus non-neoplasia, the lecture says:"
+    options:
+      - NBI is clearly better
+      - Chromoendoscopy is clearly better
+      - They are equally effective (100% sensitivity, 75% specificity)
+      - Neither can differentiate neoplasia
+    answer: 2
+    why:
+      - "They are equally effective."
+      - "They are equally effective."
+      - "Correct: equally effective, 100% sensitivity and 75% specificity."
+      - "Both differentiate it."
+    src: { page: 52, quote: "Chromoendoscopy and NBI are equally effective for differentiating neoplasia from non neoplasia, with 100% sensitivity and 75% specificity." }
+    status: unverified
+    tags: [book-question]
+  - id: git.L02.116
+    kind: mcq
+    topic: image-enhancement
+    stem: "Which technique gives an 'optical biopsy' with in vivo histology?"
+    options:
+      - FICE
+      - Confocal laser endomicroscopy
+      - I-Scan
+      - Ultrathin EGD
+    answer: 1
+    why:
+      - "FICE changes colours with virtual filters."
+      - "Correct: CLE, with a laser and a miniature microscope on the tip."
+      - "I-Scan processes white-light images."
+      - "UTEGD is a thin fiber-optic scope."
+    src: { page: 54, quote: "resulting in the concept of optical biopsy." }
+    status: unverified
+  - id: git.L02.117
+    kind: mcq
+    topic: image-enhancement
+    stem: "Which imaging method creates 10 different images by changing the wavelength with virtual optical filters?"
+    options:
+      - NBI
+      - FICE
+      - I-Scan
+      - Chromoendoscopy
+    answer: 1
+    why:
+      - "NBI uses blue and green light, not software filters producing 10 images."
+      - "Correct: FICE."
+      - "I-Scan does not use wavelength contrast."
+      - "Chromoendoscopy uses dyes."
+    src: { page: 53, quote: "FICE creates a contrast difference by changing the wave length of light by means of virtual optical filters and the software creates 10 different images." }
+    status: unverified
+  - id: git.L02.118
+    kind: mcq
+    topic: image-enhancement
+    stem: "In the book's table on cancer and precancerous lesions, which technique has the lowest sensitivity?"
+    options:
+      - Chromoendoscopy
+      - CLE
+      - I-Scan
+      - Magnification endoscopy
+    answer: 2
+    why:
+      - "97%."
+      - "80%."
+      - "Correct: 28.5%."
+      - "93%."
+    src: { page: 55, quote: "I-SCAN 28.5 78.4" }
+    status: unverified
+    tags: [numbers]
+  - id: git.L02.119
+    kind: mcq
+    topic: resection
+    stem: "A 20 mm depressed early gastric cancer, well differentiated, limited to the mucosa. According to the lecture's EMR limits, what fits best?"
+    options:
+      - EMR, since it is under 20 mm
+      - ESD, since depressed lesions over 10 mm exceed EMR limits
+      - EMR, since depth does not matter
+      - No endoscopic therapy is possible
+    answer: 1
+    why:
+      - "20 mm is the limit for elevated lesions only."
+      - "Correct: EMR maximum is 10 mm for depressed lesions; ESD allows larger en bloc resection."
+      - "EMR is for lesions limited to the mucosa and within size limits."
+      - "ESD can resect early cancers en bloc."
+    src: { page: 57, quote: "Maximal indicative diameters for EMR are 20/10 mm in elevated and depressed lesions respectively." }
+    status: unverified
+    tags: [numbers]
+  - id: git.L02.120
+    kind: mcq
+    topic: resection
+    stem: "EMR should NOT be chosen as radical treatment for which lesion?"
+    options:
+      - 8 mm elevated well-differentiated adenocarcinoma
+      - Poorly differentiated adenocarcinoma
+      - Flat adenoma limited to the mucosa
+      - 15 mm elevated mucosal lesion
+    answer: 1
+    why:
+      - "Within EMR limits."
+      - "Correct: poorly differentiated adenocarcinoma is excluded."
+      - "A typical EMR lesion."
+      - "Within the 20 mm elevated limit."
+    src: { page: 57, quote: "EMR should not be selected as a radical treatment for poorly differentiated adenocarcinoma." }
+    status: unverified
+  - id: git.L02.121
+    kind: mcq
+    topic: poem
+    stem: "A 45-year-old with type III (spastic) achalasia asks about POEM. Which statement fits the lecture?"
+    options:
+      - POEM divides the outer longitudinal muscle
+      - POEM's long myotomy may suit spastic disorders, but carries a significant GERD risk
+      - POEM has no GERD risk because it is endoscopic
+      - Heller myotomy is no longer used
+    answer: 1
+    why:
+      - "POEM divides the inner circular fibres."
+      - "Correct: the long myotomy may benefit type III achalasia, and GERD risk needs counselling and surveillance."
+      - "GERD risk is significant."
+      - "The lecture still calls Heller's myotomy the gold standard."
+    src: { page: 61, quote: "POEM itself is associated with a significant risk of GERD" }
+    status: unverified
+  - id: git.L02.122
+    kind: mcq
+    topic: poem
+    stem: "A woman with medically refractory gastroparesis from pyloric spasm. Which endoscopic myotomy applies the POEM technique to her?"
+    options:
+      - Z-POEM
+      - G-POEM (per-oral pyloromyotomy)
+      - Heller myotomy
+      - Stretta
+    answer: 1
+    why:
+      - "Z-POEM is cricopharyngeal myotomy for Zenker's diverticulum."
+      - "Correct: G-POEM, also called POP."
+      - "Heller is surgical myotomy for achalasia."
+      - "Stretta is RF for GERD."
+    src: { page: 61, quote: "also known as (GPOEM) or Per-oral pyloromyotomy (POP) has also demonstrated promising short-term results." }
+    status: unverified
+  - id: git.L02.123
+    kind: mcq
+    topic: poem
+    stem: "Z-POEM cuts which muscle?"
+    options:
+      - Lower esophageal sphincter
+      - Cricopharyngeus (upper esophageal sphincter)
+      - Pylorus
+      - Inner circular muscle of the distal esophagus
+    answer: 1
+    why:
+      - "That is POEM for achalasia."
+      - "Correct: the hypertensive cricopharyngeus causes Zenker's diverticulum."
+      - "That is G-POEM."
+      - "That is POEM."
+    src: { page: 62, quote: "The upper esophageal sphincter, or the cricopharyngeus muscle, can similarly be hypertensive" }
+    status: unverified
+  - id: git.L02.124
+    kind: mcq
+    topic: eus
+    stem: "A 60-year-old has a pancreatic head mass on CT. Which procedure stages it and obtains tissue in one sitting?"
+    options:
+      - Capsule endoscopy
+      - EUS with fine-needle aspiration
+      - Magnifying endoscopy
+      - Cholangioscopy with laser lithotripsy
+    answer: 1
+    why:
+      - "It cannot sample tissue."
+      - "Correct: EUS detects and stages pancreatic cancer and takes FNA."
+      - "Surface imaging only."
+      - "For ducts and stones."
+    src: { page: 64, quote: "EUS is primarily used to detect and stage suspected cancer of the esophagus, stomach, pancreas and rectum" }
+    status: unverified
+  - id: git.L02.125
+    kind: mcq
+    topic: eus
+    stem: "Which is NOT an EUS-guided intervention listed in the lecture?"
+    options:
+      - Celiac plexus neurolysis
+      - Drainage of a pancreatic pseudocyst
+      - Variceal band ligation
+      - Radiofrequency tumorectomy
+    answer: 2
+    why:
+      - "Listed."
+      - "Listed."
+      - "Correct: variceal ligation is not on the EUS list."
+      - "Listed."
+    src: { page: 64, quote: "Drainage of cysts and pancreatic pseudocyst. o Celiac plexus neurolysis." }
+    status: unverified
+  - id: git.L02.126
+    kind: mcq
+    topic: ablation
+    stem: "A man with GERD responds to PPI but relapses off it. pH study shows acid exposure 7%, LES pressure 9 mm Hg, normal peristalsis, LA grade A esophagitis, no hiatal hernia. Is he a good RF (Stretta) candidate?"
+    options:
+      - "Yes: he meets the ideal criteria"
+      - "No: acid exposure must be below 4%"
+      - "No: LES pressure must be above 15 mm Hg"
+      - "No: he responds to PPI"
+    answer: 0
+    why:
+      - "Correct: adequate peristalsis, LES ≥5 mm Hg, pathologic acid exposure >4%, mild esophagitis, and PPI-responsive symptoms that relapse."
+      - "Pathologic reflux (>4%) is required, not excluded."
+      - "The criterion is at least 5 mm Hg."
+      - "PPI response with relapse off drug is an ideal feature."
+    src: { page: 69, quote: "Have adequate esophageal peristalsis and LESP of at least 5 mm Hg." }
+    status: unverified
+  - id: git.L02.127
+    kind: mcq
+    topic: ablation
+    stem: "Which finding makes a patient a POOR candidate for RF therapy of GERD?"
+    options:
+      - Nonerosive reflux disease
+      - Fixed hiatal hernia of 3 cm
+      - Total acid exposure time of 6%
+      - Symptoms that relapse after stopping PPI
+    answer: 1
+    why:
+      - "Nonerosive disease is ideal."
+      - "Correct: a fixed hiatal hernia >2 cm excludes."
+      - "Pathologic reflux is required."
+      - "This is an ideal feature."
+    src: { page: 70, quote: "Have > 2 cm long fixed hiatal hernia." }
+    status: unverified
+  - id: git.L02.128
+    kind: mcq
+    topic: ablation
+    stem: "Why does APC carry a low risk of perforation?"
+    options:
+      - It is a contact technique
+      - Its coagulation depth is limited to 2-3 mm
+      - It uses cryonecrosis
+      - It works only on polyps
+    answer: 1
+    why:
+      - "APC is non-contact."
+      - "Correct: the limited depth (2-3 mm) explains the low perforation risk."
+      - "That is cryotherapy."
+      - "It treats bleeding, radiation proctitis, stenosis and early gastric cancer too."
+    src: { page: 72, quote: "The limited depth of coagulation (2-3 mm) explains the low risk of perforation." }
+    status: unverified
+  - id: git.L02.129
+    kind: mcq
+    topic: ablation
+    stem: "A woman bleeds from radiation proctitis after pelvic radiotherapy. Which endoscopic therapy is well established for this?"
+    options:
+      - Argon plasma coagulation
+      - Stretta
+      - Microwave coagulation
+      - FREDDY laser
+    answer: 0
+    why:
+      - "Correct: radiation proctitis is a well-established APC indication."
+      - "Stretta is for GERD."
+      - "MCT is for tumors such as HCC."
+      - "FREDDY is laser lithotripsy for stones."
+    src: { page: 72, quote: "Hemorrhage from angiodysplastic lesion or polypectomy site. • Radiation proctitis." }
+    status: unverified
+  - id: git.L02.130
+    kind: mcq
+    topic: ablation
+    stem: "PDT destroys tumor cells selectively because:"
+    options:
+      - It heats the tumor above 100°C
+      - The photosensitizer is retained preferentially by cancer tissue
+      - Argon gas conducts current only to tumor
+      - Nitrous oxide freezes the tumor
+    answer: 1
+    why:
+      - "PDT is non-thermal."
+      - "Correct: preferential uptake of the photosensitizer, then laser light."
+      - "That describes APC."
+      - "That describes cryotherapy."
+    src: { page: 71, quote: "which retained preferentially by the cancerous tissue and can destroy tumor cells selectively." }
+    status: unverified
+  - id: git.L02.131
+    kind: mcq
+    topic: cholangioscopy
+    stem: "In the mother-baby-scope system, the baby scope is inserted:"
+    options:
+      - Through the nose
+      - Through the duodenoscope channel into the duct after sphincterotomy
+      - Through a percutaneous tract
+      - Through a colonoscope
+    answer: 1
+    why:
+      - "That is UTEGD."
+      - "Correct: a 2-3.5 mm fiberscope through the duodenoscope after sphincterotomy."
+      - "Not the system described."
+      - "Not the system described."
+    src: { page: 66, quote: "A thin fiberscope (2-3.5 mm) is inserted into a therapeutic channels of a large duodenoscope, into the duct after endoscopic sphincterotomy." }
+    status: unverified
+  # ---------- Cases ----------
+  - id: git.L02.132
+    kind: case
+    topic: capsule
+    stem: "A 58-year-old man has had three episodes of melena in 6 months with iron deficiency anemia. Repeated upper endoscopy and colonoscopy are normal."
+    steps:
+      - question: What is this called, and which part of the gut is suspected?
+        options: ["Obscure GI bleeding from the small bowel", "Occult colonic cancer", "Variceal bleeding", "Functional dyspepsia"]
+        answer: 0
+        why: "Obscure GI bleeding is the major indication for small bowel examination."
+      - reveal: "He is fit, swallows normally and has never had abdominal surgery."
+        question: Which painless test images the entire small bowel?
+        options: ["Wireless capsule endoscopy", "Push enteroscopy", "EUS", "Ultrathin EGD"]
+        answer: 0
+        why: "Capsule endoscopy shows the entire small bowel painlessly, and he has no exclusion criteria."
+      - reveal: "The capsule shows an AVM-like bleeding lesion in the jejunum."
+        question: How can it be treated endoscopically?
+        options: ["Enteroscopy with thermocoagulation", "Capsule re-run", "Z-POEM", "EUS-guided neurolysis"]
+        answer: 0
+        why: "Thermocoagulation of bleeding lesions is a therapeutic indication of enteroscopy, which has working channels."
+      - question: Which gas insufflates the bowel during enteroscopy to reduce bloating?
+        options: ["Carbon dioxide", "Room air", "Argon", "Nitrous oxide"]
+        answer: 0
+        why: "Carbon dioxide minimizes bloating."
+    src: { page: 41, quote: "The major indication is to locate a site of obscure GIT bleeding." }
+    status: unverified
+  - id: git.L02.133
+    kind: case
+    topic: poem
+    stem: "A 39-year-old woman has 2 years of dysphagia to solids and liquids and regurgitation. Manometry confirms achalasia."
+    steps:
+      - question: What does the lecture call the gold standard treatment?
+        options: ["Heller's myotomy", "Calcium channel blockers", "Botulinum toxin", "PPI"]
+        answer: 0
+        why: "Heller's myotomy (1914) is the gold standard."
+      - reveal: "She prefers a scar-less endoscopic option."
+        question: Which procedure fits?
+        options: ["POEM", "Stretta", "APC", "EMR"]
+        answer: 0
+        why: "POEM is a minimally invasive, scar-less NOTES myotomy, first reported in humans by Inoue in 2009."
+      - question: Which fibres are divided?
+        options: ["Inner circular muscle", "Outer longitudinal muscle", "Mucosa only", "Cricopharyngeus"]
+        answer: 0
+        why: "Selective myotomy of the inner circular fibres, carried 2 cm past the GEJ."
+      - question: What must she be counselled about?
+        options: ["Significant risk of GERD after POEM", "Zenker's diverticulum", "Need for lifelong antibiotics", "Gastroparesis"]
+        answer: 0
+        why: "POEM carries a significant GERD risk; counsel before and survey after."
+    src: { page: 58, quote: "The gold standard treatment for achalasia is Heller‘s myotomy, 1914." }
+    status: unverified
+  - id: git.L02.134
+    kind: case
+    topic: image-enhancement
+    stem: "A 62-year-old with long-standing atrophic gastritis is at high risk for gastric cancer and is booked for upper endoscopy."
+    steps:
+      - question: What does the lecture recommend adding to conventional endoscopy?
+        options: ["Chromoendoscopy", "Capsule endoscopy", "EUS for all", "Nothing extra"]
+        answer: 0
+        why: "Chromoendoscopy is easy, inexpensive, acceptable and improves dysplasia detection in high-risk patients."
+      - reveal: "A suspicious depressed area is found."
+        question: Which dye outlines tumor margins by contrast?
+        options: ["Indigo carmine", "Methylene blue", "Congo red", "Lugol's iodine"]
+        answer: 0
+        why: "Indigo carmine is the contrast dye; the book shows it revealing a tumor margin."
+      - question: Which dye-free option gives similar images at the press of a button?
+        options: ["Virtual chromoendoscopy such as NBI, FICE or I-Scan", "CLE", "UTEGD", "Capsule"]
+        answer: 0
+        why: "Digital chromoendoscopy produces chromoendoscopy-like images without dyes."
+      - reveal: "Biopsy shows a 9 mm well-differentiated mucosal cancer, depressed type."
+        question: What endoscopic therapy fits the EMR limits?
+        options: ["EMR (depressed lesion ≤10 mm)", "Not suitable for EMR", "APC only", "PDT"]
+        answer: 0
+        why: "EMR limits are 20 mm for elevated and 10 mm for depressed lesions; follow up every 6 months for 5 years."
+    src: { page: 49, quote: "It is recommended that it should be added to conventional upper GI endoscopy in patients at high risk for malignancy." }
+    status: unverified
+  # ---------- Book questions ----------
+  - id: git.L02.135
+    kind: essay
+    topic: capsule
+    prompt: What are the indications of capsule endoscopy?
+    outline:
+      - "What it is": ["Painless imaging of the entire small bowel; capsule 11 x 25 mm, 2 frames/sec"]
+      - "Uses shown in the lecture": ["Obscure bleeding and vascular lesions (bleeding lesion, AVM, phlebectasia)", "Tumors and masses (lymphoma, GIST, polyp, polypoid mass)", "Lymphangiectasia, NSAID stricture, radiation enteritis, sprue with villous drop-out"]
+      - "Exclusion criteria": ["Mental or physical disorders; swallowing problems", "Major GI surgery; known fixed stricture or obstruction"]
+    src: { page: 46, quote: "Lymphoma" }
+    status: unverified
+    tags: [book-question]
+  - id: git.L02.136
+    kind: essay
+    topic: image-enhancement
+    prompt: Differentiate between NBI and chromoendoscopy.
+    outline:
+      - "Chromoendoscopy": ["Dyes: absorptive (methylene blue, toluidine blue, crystal violet, Lugol), contrast (indigo carmine), reactive (Congo red, phenol red)", "Easy, inexpensive; added in patients at high risk for malignancy; several hundred-fold magnification"]
+      - "NBI": ["No dye; blue and green light, up to 1000-fold magnification", "Blue light absorbed by hemoglobin shows superficial capillaries; 85.3% correlation with pathology; superior for early colorectal cancer"]
+      - "Comparison": ["Equally effective for neoplasia (100% sensitivity, 75% specificity)", "Table: chromoendoscopy 97/81, NBI 97.9/83.8"]
+    src: { page: 52, quote: "Chromoendoscopy and NBI are equally effective for differentiating neoplasia from non neoplasia, with 100% sensitivity and 75% specificity." }
+    status: unverified
+    tags: [book-question]
+  - id: git.L02.137
+    kind: essay
+    topic: poem
+    prompt: Give a short account of POEM.
+    outline:
+      - "Background": ["Achalasia gold standard is Heller's myotomy (1914); others: balloon dilation, botox, CCBs", "Inoue 2009; a NOTES approach; scar-less and minimally invasive"]
+      - "Technique": ["2 cm mucosotomy, submucosal tunnel 3 cm beyond the GEJ", "Selective inner circular myotomy to 2 cm past the GEJ; inspect; close with clips"]
+      - "Extensions": ["Third-space endoscopy; G-POEM for gastroparesis; Z-POEM for Zenker's; long myotomy for type III achalasia and DES"]
+      - "Risk": ["Significant GERD: counsel before, survey after"]
+    src: { page: 59, quote: "selective myotomy was performed by division of the inner circular muscle fibers" }
+    status: unverified
+    tags: [book-question]
+  - id: git.L02.138
+    kind: essay
+    topic: eus
+    prompt: Illustrate the indications of EUS.
+    outline:
+      - "Diagnosis and staging": ["Detect and stage cancer of the esophagus, stomach, pancreas and rectum, with FNA", "Fecal incontinence, lung cancer staging, Doppler of vessels"]
+      - "Tissue": ["Biopsy of suspicious lymph nodes, pancreatic and extra-intestinal masses"]
+      - "Therapy": ["Cytoimplant immunotherapy; treating achalasia; hemostasis of bleeding ulcers", "Drainage of cysts and pseudocysts; celiac plexus neurolysis; RF tumorectomy"]
+    src: { page: 64, quote: "Take biopsy from suspicious L.N, pancreatic masses, extra-intestinal mass." }
+    status: unverified
+    tags: [book-question]

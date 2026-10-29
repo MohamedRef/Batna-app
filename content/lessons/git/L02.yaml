@@ -1,0 +1,657 @@
+schema: batna.lesson/v1
+lecture: git.L02
+lessons:
+  # ------------------------------------------------------------------
+  - id: git.L02.lesson1
+    title: "نوصل للأمعاء الدقيقة إزاي؟"
+    hook: "ستة متر أمعاء مش بيوصلها لا منظار المعدة ولا منظار القولون. نعمل إيه مع نزيف مش لاقيين مصدره؟"
+    minutes: 8
+    pages: [40, 48]
+    topics: [history, enteroscopy, capsule, utegd]
+    goals:
+      - "تعدّ أنواع الـ enteroscopy ودواعيها"
+      - "تعرف أرقام الـ capsule وموانعها"
+      - "تعرف فايدة وعيب الـ ultrathin EGD"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 40
+        quote: "Interventions mean any interference which may occurs to diagnose and treat the disease or to follow-up its course."
+        title: "المنظار بقى بيعالج مش بس بيشوف"
+        text: |
+          الـ ==intervention== في الـ GIT: أي تدخّل علشان **نشخّص** أو **نعالج** أو **نتابع** المرض.
+
+          والـ gastroenterologist بقى دوره كبير في العلاج، والتطور كان سريع جدًا: من **fiber optic gastroscope** سنة 1958 لحد **endomicroscopy** سنة 2008 اللي بتديك histology وانت جوه.
+      - kind: order
+        page: 40
+        quote: "1958 Development of fiber optic gastroscope"
+        prompt: "رتّب المحطات دي من الأقدم للأحدث:"
+        steps:
+          - "Fiber optic gastroscope"
+          - "Colonoscopic polypectomy"
+          - "Percutaneous endoscopic gastrostomy"
+          - "Endoscopic variceal ligation"
+          - "Self-expanding metal stents"
+          - "Endomicroscopy"
+        why: "الكتاب: 1958 fiber optic، 1969 polypectomy، 1979 PEG، 1990 variceal ligation، 1996 metal stents، 2008 endomicroscopy."
+      - kind: explain
+        page: 41
+        quote: "The major indication is to locate a site of obscure GIT bleeding."
+        title: "الـ enteroscopy"
+        text: |
+          الـ ==enteroscopy== = منظار للـ **small bowel**. دلالته الأولى: نلاقي مكان **obscure GI bleeding**. وفيه **working channels** للـ biopsy والعلاج.
+
+          أنواعه ستة: **colonoscope**، **sonde**، **push**، **double balloon (push and pull)**، **intraoperative**، و **spiral**.
+
+          - **Day-case**، من **45 دقيقة لساعتين**.
+          - **Sedation** أو short-acting GA.
+          - من **البق أو الشرج** حسب الجزء المطلوب.
+          - بينفخوا **CO2** علشان الانتفاخ يقل، وأحيانًا **fluoroscopy**.
+      - kind: figure
+        page: 43
+        quote: "Antegrade (oral) DBE Retrograde (anal) DBE"
+        title: "الـ double balloon بيمشي إزاي؟"
+        alt: "Sketch of a double balloon enteroscope: an overtube with a balloon and a scope with a balloon at its tip inside a looped small bowel; arrows show the push of the scope, inflation, and the pull that pleats the bowel onto the overtube."
+        caption: "**Push and pull**: بالونتين بيتبادلوا يمسكوا الأمعاء، والمنظار يتزق وبعدين يشد الأمعاء ويكرمشها على الـ overtube زي ما بتلبس شراب. 😄 يا من البق (antegrade) يا من الشرج (retrograde)."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="G2a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-acc"/></marker>
+            </defs>
+            <path d="M10 60 C80 60 90 140 160 140 C230 140 240 60 320 60" class="fg-thin" fill="none" stroke-width="40"/>
+            <path d="M10 60 C80 60 90 140 160 140 C230 140 240 60 300 60" class="fg-ink" fill="none" stroke-width="6"/>
+            <ellipse cx="115" cy="118" rx="16" ry="22" class="fg-acc"/>
+            <ellipse cx="292" cy="60" rx="14" ry="20" class="fg-good"/>
+            <text x="70" y="180" class="t-sm t-b">Overtube balloon</text>
+            <text x="196" y="26" class="t-sm t-b">Scope tip balloon</text>
+            <text x="10" y="30" class="t-sm t-mut">Small bowel</text>
+            <path d="M40 220h110" class="fg-arrow-acc" marker-end="url(#G2a)"/>
+            <text x="160" y="224" class="t-sm">push the scope</text>
+            <path d="M150 260h-110" class="fg-arrow-acc" marker-end="url(#G2a)"/>
+            <text x="160" y="264" class="t-sm">pull: bowel pleats onto it</text>
+          </svg>
+      - kind: sort
+        page: 42
+        quote: "Thermo coagulation of bleeding lesions. o Placement of jejonostomy tube. c) Surveillance o Polyposis syndrome."
+        prompt: "دلالات الـ enteroscopy: حط كل واحدة في نوعها:"
+        bins: ["Diagnostic", "Therapeutic", "Surveillance"]
+        cards:
+          - { text: "Obscure GI bleeding", bin: 0 }
+          - { text: "Malabsorption, unexplained diarrhea", bin: 0 }
+          - { text: "Small bowel malignancy", bin: 0 }
+          - { text: "Thermocoagulation of bleeding lesions", bin: 1 }
+          - { text: "Jejunostomy tube placement", bin: 1 }
+          - { text: "Polyposis syndrome", bin: 2 }
+        why: "الكتاب (ص 41-42): diagnostic أربعة (bleeding، malabsorption، radiographic abnormality، malignancy)، therapeutic اتنين، و surveillance واحدة: polyposis."
+      - kind: explain
+        page: 43
+        quote: "The capsule which measures 11x25 mm takes 2frames/sec and transmits the images to a recording device."
+        title: "الـ capsule: منظار تبلعه"
+        text: |
+          ==Wireless capsule endoscopy==: **painless**، بتصوّر الـ **small bowel كله**.
+
+          - الحجم **11 x 25 mm**.
+          - بتاخد **2 frames/sec** وتبعتهم لـ recording device.
+          - الصور **excellent** والمعلومة **accurate**.
+      - kind: mnemonic
+        page: 44
+        quote: "Patients with mental or physical disorders  Swallowing problems  History of major GI surgery  Known fixed stricture or obstruction."
+        word: "MSSS"
+        parts:
+          - { key: "M", text: "Mental or physical disorders" }
+          - { key: "S", text: "Swallowing problems" }
+          - { key: "S", text: "Surgery: history of major GI surgery" }
+          - { key: "S", text: "Stricture or obstruction, known and fixed" }
+        hook: "**«مِسّ»**: الـ capsule مش هتمِسّ المريض ده. وأخطرهم الـ **stricture**: الكبسولة ممكن تتزنق."
+      - kind: figure
+        page: 46
+        title: "الـ capsule بتشوف إيه؟"
+        image: { file: git/L02-capsule-findings.webp, book: true }
+        alt: "Eight capsule endoscopy frames labelled lymphoma, GIST, polypoid mass, polyp, phlebectasia, AVM, lymphangiectasia and bleeding lesion."
+        caption: |
+          دي إجابة سؤال «indications of capsule» من الكتاب:
+          - **Tumors**: lymphoma، GIST، polyp، polypoid mass.
+          - **Vascular**: phlebectasia، AVM، bleeding lesion.
+          - **Lymphangiectasia**.
+
+          وفي ص 47: NSAID stricture، radiation enteritis، sprue، و villous drop-out.
+      - kind: check
+        page: 44
+        quote: "Known fixed stricture or obstruction."
+        question: "Which patient should NOT swallow a capsule?"
+        options:
+          - "Crohn's disease with a known fixed ileal stricture"
+          - "Obscure GI bleeding with normal EGD and colonoscopy"
+          - "Suspected small bowel lymphoma"
+          - "Celiac disease with suspected villous atrophy"
+        answer: 0
+        why:
+          - "صح: **known fixed stricture or obstruction** من موانع الـ capsule."
+          - "ده بالظبط اللي الـ capsule معمولة له."
+          - "الـ lymphoma من صور الكتاب على الـ capsule."
+          - "الـ sprue والـ villous drop-out من صور الكتاب."
+      - kind: explain
+        page: 48
+        quote: "well tolerated in patients with liver cirrhosis as a rapid screening tool for detecting the presence and size of varices."
+        title: "UTEGD: المنظار الرفيع"
+        text: |
+          **Ultrathin EGD** بقى ممكن مع منظار **5.3 mm**، بديل للـ sedated trans-oral endoscopy.
+
+          - **من غير sedation**، والـ cirrhotic بيستحمله: ==rapid screening== للـ **varices** (موجودة ولا لأ، وحجمها).
+          - العيب الرئيسي: **fiber-optic quality** للصورة.
+          - هيبقى أحسن لما يبقى فيه **video endoscope** أقل من 6 mm.
+      - kind: try
+        items: [git.L02.006, git.L02.008, git.L02.017, git.L02.018]
+    recap:
+      - "Enteroscopy: الـ small bowel؛ أهم دلالة obscure GI bleeding؛ 6 أنواع منها double balloon (push and pull)."
+      - "Day-case، 45 دقيقة لساعتين، CO2 للانتفاخ، من البق أو الشرج."
+      - "Capsule: 11 x 25 mm، 2 frames/sec؛ موانعها «MSSS» وأخطرها الـ fixed stricture."
+      - "UTEGD 5.3 mm: varices screening من غير sedation؛ عيبه الصورة."
+    practice: [git.L02.001, git.L02.002, git.L02.003, git.L02.004, git.L02.005, git.L02.006, git.L02.007, git.L02.008, git.L02.009, git.L02.010, git.L02.011, git.L02.012, git.L02.013, git.L02.014, git.L02.015, git.L02.016, git.L02.017, git.L02.018, git.L02.019, git.L02.020, git.L02.021, git.L02.022, git.L02.023, git.L02.024, git.L02.108, git.L02.109, git.L02.110, git.L02.111, git.L02.112, git.L02.132, git.L02.135]
+  # ------------------------------------------------------------------
+  - id: git.L02.lesson2
+    title: "نشوف أحسن: صبغة، نور أزرق، وميكروسكوب"
+    hook: "الـ early cancer بيستخبى في الـ mucosa. نلوّنه؟ نغيّر النور؟ ولا نعمل biopsy من غير ما نقطع؟"
+    minutes: 10
+    pages: [48, 55]
+    topics: [image-enhancement]
+    goals:
+      - "تعرف شروط الـ magnifying endoscopy"
+      - "تصنّف صبغات الـ chromoendoscopy"
+      - "تفرّق بين NBI و FICE و I-Scan و CLE"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 48
+        quote: "Deep sedation: to avoid patient's movements as focus range is limited (about 1 mm)."
+        title: "الـ magnifying endoscopy محتاج إيه؟"
+        text: |
+          - ==Deep sedation==: لأن الـ **focus range** حوالي **1 mm** بس، وأي حركة بتبوّظ الصورة.
+          - **Plastic cap** على طرف المنظار، خصوصًا في الـ lower esophagus، علشان الـ focus يفضل ثابت وقريب.
+          - **Dyes**.
+          - **Electronic structure enhancement** على أعلى مستوى.
+
+          التمن: الفحص بياخد **3 أضعاف الوقت**. المكسب: تشخيص و biopsies أدق، و mucosal resection ممتاز بعدها.
+      - kind: aside
+        tone: analogy
+        page: 48
+        quote: "Deep sedation: to avoid patient's movements as focus range is limited (about 1 mm)."
+        text: |
+          زي ما تصوّر نملة بعدسة macro: لو إيدك اتهزّت **1 mm** الصورة باظت. علشان كده المريض لازم **deep sedation**، والـ cap بيبقى زي الـ tripod.
+      - kind: explain
+        page: 49
+        quote: "It is recommended that it should be added to conventional upper GI endoscopy in patients at high risk for malignancy."
+        title: "الـ chromoendoscopy: نلوّن علشان نشوف"
+        text: |
+          الـ ==chromoendoscopy== بتستخدم **dyes** علشان الـ lesions تبان، وكمان بتساعد تعمل **histo-pathologic diagnosis** وانت جوه.
+
+          - **سهلة**، **رخيصة**، المريض **بيقبلها**، وبتحسّن اكتشاف الـ **dysplasia**.
+          - علشان كده بتتضاف للـ upper GI endoscopy في اللي عندهم **high risk for malignancy**.
+          - مع الـ magnification بتوصل لـ **several hundred-fold**.
+      - kind: sort
+        page: 49
+        quote: "Absorptive dyes (methylene blue, toluidine blue, crystal violet, and Lugol's iodine),"
+        prompt: "صنّف الصبغة:"
+        bins: ["Absorptive", "Contrast", "Reactive"]
+        cards:
+          - { text: "Methylene blue", bin: 0 }
+          - { text: "Toluidine blue", bin: 0 }
+          - { text: "Crystal violet", bin: 0 }
+          - { text: "Lugol's iodine", bin: 0 }
+          - { text: "Indigo carmine", bin: 1 }
+          - { text: "Congo red", bin: 2 }
+          - { text: "Phenol red", bin: 2 }
+        why: "الكتاب: absorptive أربعة (methylene blue، toluidine blue، crystal violet، Lugol)؛ contrast واحدة (**indigo carmine**)؛ reactive اتنين (Congo red، phenol red). افتكر: «**الأحمر بيتفاعل**» (reactive = red)، و**الـ indigo لوحده contrast**."
+      - kind: explain
+        page: 52
+        quote: "Blue light is better absorption by hemoglobin, enabling imaging of superficial capillaries and superficial mucosal patterns."
+        title: "الـ NBI: نور من غير صبغة"
+        text: |
+          - بيستخدم نور **blue و green**، ويوصل لـ **1000-fold** magnification.
+          - ليه بيوضّح الـ capillaries؟ لأن ==blue light== بيتمص أكتر بالـ **hemoglobin**، فالأوعية السطحية تبان غامقة على خلفية فاتحة.
+          - الـ correlation مع الـ pathology **85.3%**.
+          - هو والـ chromoendoscopy **equally effective** في التفريق بين neoplasia و non-neoplasia: **100% sensitivity** و **75% specificity**.
+          - أحسن من الـ conventional في **early colorectal cancer**.
+      - kind: table
+        page: 53
+        quote: "I-SCAN does not make use of the contrast created by light of different wave lengths, as does NBI."
+        title: "الـ virtual chromoendoscopy: مين بيعمل إيه؟"
+        columns: ["Technique", "How", "Remember"]
+        rows:
+          - ["NBI", "Blue and green light", "Hemoglobin absorbs blue: capillaries"]
+          - ["FICE", "Virtual optical filters change wavelength", "Software makes 10 images"]
+          - ["I-Scan", "Software modifies each white-light pixel", "No dye, no wavelength contrast"]
+          - ["CLE", "Laser with a miniature microscope", "Optical biopsy"]
+        hide: [[0, 2], [1, 2], [2, 1], [3, 2]]
+      - kind: check
+        page: 53
+        quote: "FICE creates a contrast difference by changing the wave length of light by means of virtual optical filters and the software creates 10 different images."
+        question: "Which technique uses virtual optical filters and creates 10 different images?"
+        options:
+          - "FICE"
+          - "NBI"
+          - "I-Scan"
+          - "CLE"
+        answer: 0
+        why:
+          - "صح: **FICE** بيغيّر الـ wavelength بـ virtual filters والـ software بيطلّع 10 صور."
+          - "الـ NBI بيستخدم blue و green light فعلًا، مش filters في الـ software."
+          - "الـ I-Scan **مش** بيعتمد على الـ wavelength خالص."
+          - "الـ CLE بيستخدم laser للـ optical biopsy."
+      - kind: explain
+        page: 54
+        quote: "CLE uses a laser rather than white light as a light source."
+        title: "الـ CLE: biopsy من غير مقص"
+        text: |
+          ==Confocal laser endomicroscopy==:
+          - **Laser** بدل الـ white light.
+          - **Miniature microscope** على طرف المنظار ← **in vivo histology** ← مفهوم الـ ==optical biopsy==.
+          - تكبير **several hundred-fold**، و **contrast media** للصور على مستوى الخلية.
+          - **شاشتين**: واحدة للميكروسكوب وواحدة للمنظار، و **cross-sections** على أعماق مختلفة، وتقدر **تسجّل** الصور وترجعلها.
+      - kind: table
+        page: 55
+        quote: "Magnification Endoscopy 93 95"
+        title: "مين أدق في cancer و precancer؟ (ص 55)"
+        columns: ["Technique", "Sensitivity %", "Specificity %"]
+        rows:
+          - ["Chromoendoscopy", "97", "81"]
+          - ["NBI", "97.9", "83.8"]
+          - ["FICE", "not given", "90.9"]
+          - ["Magnification", "93", "95"]
+          - ["I-Scan", "28.5", "78.4"]
+          - ["CLE", "80", "94"]
+        hide: [[1, 1], [3, 2], [4, 1]]
+      - kind: aside
+        tone: exam
+        page: 55
+        quote: "I-SCAN 28.5 78.4"
+        text: |
+          من الجدول: أعلى **sensitivity** هو ==NBI (97.9)==، وأعلى **specificity** هو ==magnification (95)==، وأقل sensitivity بفرق كبير ==I-Scan (28.5)==.
+
+          وخلي بالك: الـ FICE في الكتاب ليه رقم واحد بس (90.9) تحت الـ specificity.
+      - kind: try
+        items: [git.L02.026, git.L02.031, git.L02.037, git.L02.039, git.L02.136]
+    recap:
+      - "Magnifying: deep sedation (focus 1 mm)، cap، dyes؛ 3 أضعاف الوقت."
+      - "Chromo: absorptive (methylene blue …)، contrast (indigo carmine)، reactive (Congo red، phenol red)؛ للـ high risk."
+      - "NBI: blue light والـ hemoglobin؛ 1000-fold؛ زي الـ chromo (100% / 75%)."
+      - "FICE: virtual filters، 10 صور. I-Scan: software على الـ white light. CLE: laser و optical biopsy."
+    practice: [git.L02.025, git.L02.026, git.L02.027, git.L02.028, git.L02.029, git.L02.030, git.L02.031, git.L02.032, git.L02.033, git.L02.034, git.L02.035, git.L02.036, git.L02.037, git.L02.038, git.L02.039, git.L02.040, git.L02.041, git.L02.042, git.L02.043, git.L02.044, git.L02.045, git.L02.046, git.L02.047, git.L02.048, git.L02.107, git.L02.113, git.L02.114, git.L02.115, git.L02.116, git.L02.117, git.L02.118, git.L02.134, git.L02.136]
+  # ------------------------------------------------------------------
+  - id: git.L02.lesson3
+    title: "نقطع من جوه: EMR و ESD و POEM"
+    hook: "تشيل cancer بدري من غير جراحة، وتعالج achalasia من غير ولا غرزة برّه. السر في الـ submucosa."
+    minutes: 10
+    pages: [56, 62]
+    topics: [resection, poem]
+    goals:
+      - "تعرف حدود الـ EMR والفرق بينه وبين الـ ESD"
+      - "ترتّب خطوات الـ POEM بالأرقام"
+      - "تعرف G-POEM و Z-POEM ومخاطر الـ POEM"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 56
+        quote: "EMR is a minimally invasive technique for staging/ treatment of early malignant lesions limited to the mucosa."
+        title: "الـ EMR"
+        text: |
+          ==EMR==: minimally invasive لـ **staging** و**treatment** الـ early malignant lesions **limited to the mucosa**.
+
+          - طلع من الـ **snare biopsy**، وبقى **first-choice** للـ early GI carcinoma.
+          - بتحقن saline تحت الـ mucosa فتنتفخ، وبعدين تمسكها بـ **cap aspiration** أو **forceps traction**.
+      - kind: aside
+        tone: exam
+        page: 57
+        quote: "Maximal indicative diameters for EMR are 20/10 mm in elevated and depressed lesions respectively."
+        text: |
+          الأرقام: ==20 mm== للـ **elevated**، ==10 mm== للـ **depressed**.
+
+          ومش radical treatment للـ **poorly differentiated adenocarcinoma**. والمتابعة: منظار **كل 6 شهور لمدة 5 سنين**.
+
+          افتكرها كده: الـ lesion «الواقفة» (elevated) مسموحلها الضعف.
+      - kind: table
+        page: 57
+        quote: "EMR is a natural extension of polypectomy, applied to a flat lesion after a submucosal injection."
+        title: "EMR ولا ESD؟"
+        columns: ["", "EMR", "ESD"]
+        rows:
+          - ["الفكرة", "Polypectomy for a flat lesion after submucosal injection", "Tunnel into the submucosal plane"]
+          - ["الصعوبة", "Simpler", "Technically harder"]
+          - ["إمتى", "Early cancer limited to mucosa, within size limits", "Likely superficial submucosal invasion, fibrosis, post-EMR recurrence"]
+        hide: [[0, 2], [2, 2]]
+      - kind: explain
+        page: 58
+        quote: "In 2009, Inoue et al, described a revolutionary technique for the treatment of achalasia, termed per-oral endoscopic myotomy (POEM)"
+        title: "الـ POEM: Heller من جوه"
+        text: |
+          الـ **gold standard** للـ achalasia في الكتاب: ==Heller's myotomy (1914)==. والبدائل: **pneumatic dilation**، **botulinum toxin**، **CCBs**.
+
+          الـ **POEM** (Inoue، **2009**): myotomy بالـ **NOTES** approach، يعني من فتحة طبيعية، **minimally invasive** و **scar-less**.
+
+          الطريق ليه: Ortega 1980 (كلاب ثم 17 مريض)، فكرة الـ **submucosal tunnel** 2007، Pasricha على الخنازير، وبعدين Inoue على البني آدمين.
+      - kind: figure
+        page: 59
+        quote: "The submucosal tunnel was extended 3 cm beyond the GE junction into the gastric cardia"
+        title: "الـ POEM بالأرقام"
+        alt: "Side view of the distal esophagus and cardia: mucosotomy entry high up, a submucosal tunnel running down between mucosa and muscle to 3 cm past the GE junction, and the myotomy of the inner circular layer starting 2 cm below the entry and ending 2 cm past the GE junction, with clips closing the entry."
+        caption: "الأرقام اللي هتتسأل: mucosotomy **2 cm**، النفق **3 cm** بعد الـ GEJ، والـ myotomy لحد **2 cm** بعد الـ GEJ. والـ entry بيتقفل بـ **clips**."
+        svg: |
+          <svg viewBox="0 0 330 470" xmlns="http://www.w3.org/2000/svg">
+            <rect x="90" y="20" width="22" height="370" class="fg-acc"/>
+            <rect x="112" y="20" width="16" height="370" class="fg-thin"/>
+            <rect x="128" y="20" width="60" height="370" class="fg-box"/>
+            <text x="150" y="16" text-anchor="middle" class="t-sm t-mut">lumen</text>
+            <text x="60" y="16" text-anchor="middle" class="t-sm t-mut">muscle</text>
+            <path d="M130 60h-12" class="fg-ink" stroke-width="3"/>
+            <text x="196" y="64" class="t-sm t-b">1. Mucosotomy 2 cm</text>
+            <path d="M120 70v280" class="fg-arrow-acc" stroke-width="3"/>
+            <text x="196" y="150" class="t-sm t-b">2. Submucosal tunnel</text>
+            <path d="M101 110v220" class="fg-ink" stroke-width="5" stroke-dasharray="4 4"/>
+            <text x="196" y="230" class="t-sm t-b t-bad">3. Circular myotomy</text>
+            <path d="M80 270h160" class="fg-thin" stroke-width="2"/>
+            <text x="196" y="266" class="t-sm t-mut">GE junction</text>
+            <text x="196" y="330" class="t-sm">myotomy: GEJ + 2 cm</text>
+            <text x="196" y="352" class="t-sm">tunnel: GEJ + 3 cm</text>
+            <text x="20" y="300" class="t-sm t-mut">cardia</text>
+            <rect x="113" y="52" width="14" height="16" rx="3" class="fg-good"/>
+            <text x="10" y="420" class="t-sm t-b t-good">4. Inspect through the true lumen</text>
+            <text x="10" y="442" class="t-sm t-b t-good">5. Close the entry with clips</text>
+          </svg>
+      - kind: figure
+        page: 59
+        title: "خطوات الـ POEM في المنظار"
+        image: { file: git/L02-poem-steps.webp, book: true }
+        alt: "Six endoscopic photos A to F: submucosal bleb, tunnel creation, completed tunnel, selective inner circular myotomy, completed myotomy, and clips closing the mucosotomy."
+        caption: "**A** bleb، **B** النفق، **C** النفق خلص، **D** selective inner circular myotomy، **E** الـ myotomy خلصت، **F** الـ clips قفلت الفتحة."
+      - kind: order
+        page: 59
+        quote: "The entrance to the sub-mucosal tunnel is then sequentially closed with endoscopic clips"
+        prompt: "رتّب خطوات الـ POEM:"
+        steps:
+          - "Submucosal bleb and 2 cm mucosotomy"
+          - "Create the submucosal tunnel"
+          - "Extend it 3 cm past the GEJ"
+          - "Divide the inner circular fibres"
+          - "Inspect the mucosa from the true lumen"
+          - "Close the entry with clips"
+        why: "زي Fig. 2 في الكتاب: bleb ← tunnel ← completion ← selective inner circular myotomy ← inspection ← closure بالـ clips."
+      - kind: reveal
+        page: 60
+        quote: "If the intraluminal space was the first space, and the extraluminal space denotes the second space"
+        prompt: "يعني إيه **third-space endoscopy**؟"
+        answer: |
+          - **First space**: جوه الـ lumen (المنظار العادي).
+          - **Second space**: برّه الأمعاء (الـ extraluminal).
+          - **Third space**: الـ ==submucosa==: تدخلها بـ **mucosal flap** وتقفلها بأمان بالـ **clips**. ده اللي خلّى POEM وأخواتها ممكنين.
+      - kind: match
+        page: 61
+        quote: "medically refractory gastroparesis as well as for Zenker‘s diverticulum"
+        prompt: "كل POEM ومكانه:"
+        pairs:
+          - ["POEM", "Achalasia: inner circular LES myotomy"]
+          - ["G-POEM (POP)", "Refractory gastroparesis: pyloromyotomy"]
+          - ["Z-POEM", "Zenker's: cricopharyngeal myotomy"]
+          - ["Long POEM myotomy", "Type III achalasia, diffuse esophageal spasm"]
+        why: "الكتاب (ص 61-62): الفكرة اتمدّت للـ **gastroparesis** (G-POEM أو per-oral pyloromyotomy) و **Zenker's** (الـ cricopharyngeus الـ hypertensive)، والـ myotomy الطويلة ممكن تفيد الـ spastic disorders."
+      - kind: aside
+        tone: trap
+        page: 61
+        quote: "POEM itself is associated with a significant risk of GERD"
+        text: |
+          الـ POEM بيفتح الـ LES كويس… كويس زيادة. 😅 فيه ==significant risk of GERD==، فلازم **counselling** قبلها و **surveillance** بعدها.
+
+          وفي الامتحان: الـ gold standard لسه **Heller's myotomy** حسب الكتاب.
+      - kind: try
+        items: [git.L02.052, git.L02.055, git.L02.061, git.L02.068, git.L02.137]
+    recap:
+      - "EMR: early cancer في الـ mucosa؛ 20 mm elevated و 10 mm depressed؛ مش للـ poorly differentiated؛ متابعة كل 6 شهور 5 سنين."
+      - "ESD: نفق في الـ submucosa؛ en bloc؛ للـ submucosal invasion والـ fibrosis والـ recurrence."
+      - "POEM (Inoue 2009): mucosotomy 2 cm، نفق 3 cm بعد الـ GEJ، inner circular myotomy لحد 2 cm بعد الـ GEJ، clips."
+      - "Third space = submucosa. G-POEM للـ gastroparesis، Z-POEM للـ Zenker's. خلي بالك من الـ GERD."
+    practice: [git.L02.049, git.L02.050, git.L02.051, git.L02.052, git.L02.053, git.L02.054, git.L02.055, git.L02.056, git.L02.057, git.L02.058, git.L02.059, git.L02.060, git.L02.061, git.L02.062, git.L02.063, git.L02.064, git.L02.065, git.L02.066, git.L02.067, git.L02.068, git.L02.069, git.L02.070, git.L02.071, git.L02.072, git.L02.073, git.L02.119, git.L02.120, git.L02.121, git.L02.122, git.L02.123, git.L02.133, git.L02.137]
+  # ------------------------------------------------------------------
+  - id: git.L02.lesson4
+    title: "سونار جوه المعدة، ومنظار جوه المنظار"
+    hook: "EUS بيشوف اللي ورا الحيطة، والـ mother-baby scope بيدخل جوه الـ bile duct نفسه."
+    minutes: 7
+    pages: [63, 68]
+    topics: [eus, cholangioscopy]
+    goals:
+      - "تعدّ دواعي الـ EUS التشخيصية والعلاجية"
+      - "تشرح الـ mother-baby-scope"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 63
+        quote: "EUS allows examination of both the lining of GIT, but also of the wall of the tract and its surrounding structures"
+        title: "الـ EUS بيشوف إيه؟"
+        text: |
+          ==EUS== = منظار في طرفه **ultrasound processor** (echoendoscope).
+
+          بيشوف مش بس الـ **lining**، لكن كمان **جدار** الأمعاء وحواليها: **liver**، **pancreas**، **bile ducts**، و **lymph nodes**. وأحيانًا بيلاقي حاجات الـ imaging التاني مش بيلاقيها.
+
+          الجديد: channel كبيرة **3.2 mm** لتدخلات أجرأ، و **3D EUS** بيعرض في أي plane.
+      - kind: figure
+        page: 65
+        quote: "A tumour is shown to have infiltrated all wall layers."
+        title: "الـ EUS قريب من العضو"
+        alt: "Sketch: an endoscope in the stomach lumen with a small ultrasound transducer at its tip sending a fan of sound through the layered gastric wall to the pancreas, a lymph node and a bile duct behind it."
+        caption: "الـ transducer صغير وعلى طرف المنظار، فبيقرب جدًا من العضو. علشان كده بيعمل **staging** للـ tumor في كل طبقات الحيطة، ويوصل للـ pancreas والـ nodes."
+        svg: |
+          <svg viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="20" width="310" height="60" rx="8" class="fg-box"/>
+            <text x="20" y="44" class="t-sm t-mut">Stomach lumen</text>
+            <path d="M20 60h200" class="fg-ink" stroke-width="10" stroke-linecap="round"/>
+            <circle cx="228" cy="60" r="10" class="fg-acc"/>
+            <text x="150" y="44" class="t-sm t-b">Echoendoscope tip</text>
+            <rect x="10" y="84" width="310" height="10" class="fg-acc"/>
+            <rect x="10" y="94" width="310" height="10" class="fg-thin"/>
+            <rect x="10" y="104" width="310" height="10" class="fg-bad"/>
+            <rect x="10" y="114" width="310" height="10" class="fg-thin"/>
+            <text x="10" y="142" class="t-sm t-mut">Wall layers</text>
+            <path d="M228 70L150 300M228 70L310 300" class="fg-thin" stroke-width="2"/>
+            <ellipse cx="230" cy="200" rx="60" ry="26" class="fg-good"/>
+            <text x="230" y="205" text-anchor="middle" class="t-sm t-b">Pancreas</text>
+            <circle cx="175" cy="265" r="14" class="fg-bad"/>
+            <text x="90" y="270" class="t-sm">Lymph node</text>
+            <path d="M285 250c10 20 10 40 0 60" class="fg-ink" stroke-width="6" fill="none"/>
+            <text x="250" y="320" class="t-sm">Bile duct</text>
+          </svg>
+      - kind: explain
+        page: 64
+        quote: "EUS is primarily used to detect and stage suspected cancer of the esophagus, stomach, pancreas and rectum"
+        title: "دواعي الـ EUS (سؤال امتحان)"
+        text: |
+          **أساسًا**: يكتشف ويعمل ==staging== لـ cancer الـ **esophagus**، **stomach**، **pancreas**، **rectum** بالـ imaging والـ **FNA**.
+
+          وكمان:
+          - **Cytoimplant immunotherapy**: الإبرة بتوصل للـ tumor بدقة عالية.
+          - **Fecal incontinence**، **staging lung cancer**، والأوعية بالـ **Doppler**.
+
+          ويُنصح بيه في:
+          - **Biopsy** من الـ LN المشكوك فيها، pancreatic masses، extra-intestinal masses.
+          - علاج **achalasia**، و**hemostasis** لـ bleeding ulcers.
+          - **Drainage** للـ cysts والـ **pseudocysts**.
+          - **Celiac plexus neurolysis**.
+          - **RF tumorectomy**.
+      - kind: mnemonic
+        page: 64
+        quote: "Drainage of cysts and pancreatic pseudocyst. o Celiac plexus neurolysis. o EUS-guided R. frequency tumorectomy."
+        word: "SONAR"
+        parts:
+          - { key: "S", text: "Stage cancer (esophagus, stomach, pancreas, rectum) with FNA" }
+          - { key: "O", text: "Other evaluations: fecal incontinence, lung cancer, Doppler vessels" }
+          - { key: "N", text: "Needle: biopsy of nodes and masses; cytoimplant immunotherapy" }
+          - { key: "A", text: "Achalasia treatment and Arrest of ulcer bleeding" }
+          - { key: "R", text: "Release: cyst/pseudocyst drainage, celiac plexus neurolysis, RF tumorectomy" }
+        hook: "الـ EUS هو **SONAR** جوه البطن: بيشوف، بيغرز إبرة، وبيصرّف."
+      - kind: check
+        page: 64
+        quote: "Drainage of cysts and pancreatic pseudocyst. o Celiac plexus neurolysis."
+        question: "Which of these is NOT an EUS indication in the lecture?"
+        options:
+          - "Variceal band ligation"
+          - "Celiac plexus neurolysis"
+          - "Pancreatic pseudocyst drainage"
+          - "Staging rectal cancer"
+        answer: 0
+        why:
+          - "صح: الـ band ligation مش في قايمة الـ EUS."
+          - "موجودة في القايمة."
+          - "موجودة في القايمة."
+          - "الـ rectum من الأربعة اللي بيعمل لهم staging."
+      - kind: explain
+        page: 66
+        quote: "A thin fiberscope (2-3.5 mm) is inserted into a therapeutic channels of a large duodenoscope, into the duct after endoscopic sphincterotomy."
+        title: "الـ mother-baby scope"
+        text: |
+          في الـ **peroral cholangioscopy والـ pancreatoscopy**: منظار رفيع (**baby**، **2-3.5 mm**) بيدخل من الـ channel بتاعة **duodenoscope** كبير (**mother**) جوه الـ duct، **بعد sphincterotomy**.
+
+          الـ biopsy channel بتاعه بيسمح بـ:
+          - **Tissue sampling**
+          - **Dye** catheters
+          - **Laser lithotripsy** probes
+
+          والأجهزة الجديدة بتتجرّب **من غير sphincterotomy**.
+      - kind: aside
+        tone: joke
+        text: |
+          الـ mother-baby scope ده أصدق تمثيل للأم المصرية: شايلة ابنها جوّاها لحد آخر لحظة، ولما يطلع يروح على طول للحتة الضيقة اللي محدش عارف يوصلها. 😄
+      - kind: try
+        items: [git.L02.074, git.L02.077, git.L02.078, git.L02.081]
+    recap:
+      - "EUS: الجدار وما حوله؛ staging لـ esophagus، stomach، pancreas، rectum مع FNA."
+      - "تدخلات EUS: biopsy، achalasia، hemostasis، pseudocyst drainage، celiac neurolysis، RF tumorectomy (SONAR)."
+      - "Mother-baby: baby 2-3.5 mm من الـ duodenoscope بعد sphincterotomy؛ sampling، dye، laser lithotripsy."
+    practice: [git.L02.074, git.L02.075, git.L02.076, git.L02.077, git.L02.078, git.L02.079, git.L02.080, git.L02.081, git.L02.082, git.L02.083, git.L02.124, git.L02.125, git.L02.131, git.L02.138]
+  # ------------------------------------------------------------------
+  - id: git.L02.lesson5
+    title: "نحرق، نجمّد، ونضوّي"
+    hook: "RF للـ GERD، ثلج للـ Barrett، ونور للـ cancer، وغاز argon للنزيف. كل واحد بعمقه وبمريضه."
+    minutes: 9
+    pages: [69, 75]
+    topics: [ablation, ai]
+    goals:
+      - "تختار المريض المناسب للـ Stretta"
+      - "تعرف عمق وأمان الـ APC ودواعيه"
+      - "تفرق بين PDT و APC والـ cryotherapy"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 69
+        quote: "It involves the application of controlled RF energy to induces collagen contraction in the LES region."
+        title: "الـ RF و Stretta"
+        text: |
+          الـ **RF**: تيار متردد سريع ← حرارة ← **tissue necrosis**. لحد **900 MHz**، وفوقها **microwave**.
+
+          بيتستخدم في **GERD** و**nodular HCC أقل من 3-4 cm**.
+
+          في الـ GERD (**Stretta**): RF energy بتعمل ==collagen contraction== في منطقة الـ **LES**، بديل minimally invasive للجراحة.
+          - Generator بأربع قنوات، وكل إبرة فيها **thermocouple** يظبط الحرارة.
+          - الحرارة **أقل من 100°C** علشان الضرر الجانبي يقل.
+          - حلقات lesions **2 cm** فوق وتحت الـ cardia، **48-60 lesion** في حوالي **50 دقيقة**.
+      - kind: sort
+        page: 70
+        quote: "Have > 2 cm long fixed hiatal hernia. • Have significant dysphagia."
+        prompt: "Stretta: المريض ده مناسب ولا لأ؟"
+        bins: ["Ideal candidate", "Not a good candidate"]
+        cards:
+          - { text: "LES pressure at least 5 mm Hg, good peristalsis", bin: 0 }
+          - { text: "Acid exposure time above 4% on 24-h pH", bin: 0 }
+          - { text: "Nonerosive or Savary-Miller grade I-II", bin: 0 }
+          - { text: "Responds to PPI, relapses off it", bin: 0 }
+          - { text: "Fixed hiatal hernia over 2 cm", bin: 1 }
+          - { text: "Significant dysphagia", bin: 1 }
+          - { text: "Grade III-IV esophagitis or extensive Barrett", bin: 1 }
+          - { text: "Poor peristalsis, incomplete LES relaxation", bin: 1 }
+        why: "المنطق: الـ Stretta بتشد الـ LES، فلازم يكون فيه **peristalsis كويسة** و**reflux حقيقي** (أكتر من 4%) و**مرض خفيف بيستجيب للـ PPI**. الـ hernia الكبيرة والـ dysphagia والـ esophagitis الشديدة بتطلّعه برّه."
+      - kind: explain
+        page: 70
+        quote: "MCT cannot be used as a single treatment for HCCs >2 cm on the long axis"
+        title: "Microwave و cryotherapy"
+        text: |
+          **Microwave coagulation (MCT)**: microwave لإبرة **monopolar**، والعمق = **طول الـ electrode**.
+          - الأورام اللي اتعالجت **أقل من 40 mm** وبعيدة **10 mm** على الأقل عن الأوعية الكبيرة.
+          - **مش لوحده** لـ HCC أكبر من **2 cm**: محتاج applications كتير.
+
+          **Endoscopic cryotherapy**: **nitrous oxide** تحت ضغط عالي من catheter. لـ **hemostasis** و **mucosal ablation** (زي **Barrett's**).
+          - فوري: ==cryonecrosis 0.5 mm==.
+          - متأخر: inflammation بتكمّل الـ ablation في كام يوم.
+      - kind: explain
+        page: 71
+        quote: "PDT is a non-thermal procedure which acts by endoscopic laser irradiation with an appropriate wave-length after administration of a photosensitizer"
+        title: "Laser و PDT"
+        text: |
+          - **FREDDY**: frequency-doubled double-pulse **Nd:YAG** laser، في الـ **ERCP** من balloon catheter، لتكسير الـ **difficult stones**: آمن وفعال ورخيص.
+          - ==PDT==: **non-thermal**. بتدي **photosensitizer** بيتحجز أكتر في الـ **cancer**، وبعدين laser بالـ wavelength المناسب ← الخلايا السرطانية بس اللي بتموت.
+            - في **esophageal cancer**: palliation كويس للـ **dysphagia**، وأسهل وأريح من Nd:YAG.
+            - كمان: palliation لـ colon و gastric و pancreatic cancer، ampullary و para-ampullary adenomas، و **FAP**.
+            - بيقتل **H. pylori** in vitro، بس مفيش clinical data.
+      - kind: explain
+        page: 72
+        quote: "The limited depth of coagulation (2-3 mm) explains the low risk of perforation."
+        title: "الـ APC"
+        text: |
+          ==Argon plasma coagulation==: **non-contact** electrocoagulation، تيار high frequency بيعدّي في **ionized argon gas**.
+
+          العمق محدود ==2-3 mm== ← **low risk of perforation**.
+
+          دواعيه المعروفة:
+          - نزيف من **angiodysplasia** أو مكان **polypectomy**
+          - **Radiation proctitis**
+          - **Palliation** للـ malignant colorectal stenosis
+          - **Early gastric cancer**
+
+          وبعد الـ **piecemeal** polypectomy بيشيل بواقي الـ polyp عند الحواف.
+      - kind: table
+        page: 72
+        quote: "APC is an endoscopic non-contacct electrocoagulation technique where high frequency alternating current is delivered through ionized argon gas."
+        title: "مين بيعمل إيه؟"
+        columns: ["Method", "Energy", "Key fact"]
+        rows:
+          - ["Stretta (RF)", "Radiofrequency heat", "LES collagen contraction; below 100°C"]
+          - ["MCT", "Microwave, monopolar needle", "Depth = electrode length; tumors under 40 mm"]
+          - ["Cryotherapy", "Nitrous oxide", "0.5 mm cryonecrosis; Barrett"]
+          - ["PDT", "Laser after photosensitizer", "Non-thermal; selective tumor kill"]
+          - ["APC", "Current through argon", "Non-contact; 2-3 mm; low perforation"]
+        hide: [[0, 2], [2, 1], [3, 2], [4, 2]]
+      - kind: check
+        page: 72
+        quote: "Hemorrhage from angiodysplastic lesion or polypectomy site. • Radiation proctitis."
+        question: "A man bleeds from colonic angiodysplasia. Which therapy is well established and safest against perforation?"
+        options:
+          - "Argon plasma coagulation"
+          - "Stretta"
+          - "Microwave coagulation"
+          - "Photodynamic therapy"
+        answer: 0
+        why:
+          - "صح: الـ APC well established للـ angiodysplasia، وعمقه 2-3 mm بس."
+          - "الـ Stretta للـ GERD."
+          - "الـ MCT للأورام زي الـ HCC."
+          - "الـ PDT للـ cancer palliation."
+      - kind: explain
+        page: 74
+        quote: "There are four primary AI types:  Reactive.  Limited memory.  Theory of mind.  Self-aware."
+        title: "وأخيرًا: الـ AI"
+        text: |
+          الـ **AI**: أنظمة بتعمل حاجات محتاجة ذكاء بشري (رؤية، كلام، قرار، ترجمة).
+
+          أنواعه الأربعة: **reactive**، **limited memory**، **theory of mind**، **self-aware**.
+
+          في الأجهزة الطبية: **data management**، **remote surgery**، مساعدة في التشخيص والإجراء، **clinical trials**، وكفاءة التصنيع.
+
+          والـ digital chromoendoscopy الأكتر استخدامًا: **FICE** و **NBI** و **I-Scan**، ومع الـ **CLE** زادت قيمة المنظار في التشخيص.
+      - kind: aside
+        tone: joke
+        text: |
+          من الأربع أنواع، الـ **self-aware AI** لسه مجاش. لما ييجي، أول حاجة هيعملها إنه يرفض يعمل الـ night shift. 😄
+      - kind: try
+        items: [git.L02.090, git.L02.092, git.L02.102, git.L02.103, git.L02.098]
+    recap:
+      - "RF لحد 900 MHz؛ Stretta بتعمل collagen contraction في الـ LES؛ أقل من 100°C؛ 48-60 lesion."
+      - "Stretta مناسب: LES 5 mm Hg أو أكتر، AET أكتر من 4%، esophagitis خفيفة، بيستجيب للـ PPI. لا: hernia أكبر من 2 cm، dysphagia، grade III-IV، Barrett واسع."
+      - "MCT: العمق = الـ electrode؛ مش لوحده لـ HCC أكبر من 2 cm. Cryo: N2O و 0.5 mm."
+      - "PDT non-thermal و selective. APC non-contact، 2-3 mm، للنزيف والـ radiation proctitis."
+      - "AI: reactive، limited memory، theory of mind، self-aware."
+    practice: [git.L02.084, git.L02.085, git.L02.086, git.L02.087, git.L02.088, git.L02.089, git.L02.090, git.L02.091, git.L02.092, git.L02.093, git.L02.094, git.L02.095, git.L02.096, git.L02.097, git.L02.098, git.L02.099, git.L02.100, git.L02.101, git.L02.102, git.L02.103, git.L02.104, git.L02.105, git.L02.106, git.L02.126, git.L02.127, git.L02.128, git.L02.129, git.L02.130]

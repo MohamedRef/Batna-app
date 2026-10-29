@@ -1,0 +1,616 @@
+schema: batna.content/v1
+lecture: hem.L01
+title: "Hematopoiesis"
+author: "Prof. Dr. Manal Elsorady"
+book: { chapter: 4, pages: [1, 8] }
+topics:
+  - { id: definition, title: "Definition and the haematopoietic system" }
+  - { id: ontogeny, title: "Intrauterine haematopoiesis and postnatal changes" }
+  - { id: lineages, title: "Blood cell lineages and the marrow" }
+  - { id: stem-cells, title: "Stem cells and lymphopoiesis" }
+  - { id: myelopoiesis, title: "Granulopoiesis and CFU-GEMM" }
+  - { id: microenvironment, title: "Bone marrow microenvironment" }
+  - { id: growth-factors, title: "Haematopoietic growth factors" }
+  - { id: erythropoietin, title: "Erythropoietin and haemoglobin" }
+  - { id: platelets, title: "Megakaryocytopoiesis" }
+  - { id: extramedullary, title: "Extramedullary haematopoiesis" }
+  - { id: gene-therapy, title: "HSCs and gene therapy" }
+items:
+  # ---------- p1: definition and ontogeny ----------
+  - id: hem.L01.001
+    kind: card
+    topic: definition
+    front: Define haematopoiesis.
+    back: The process of blood cell production, differentiation and development.
+    src: { page: 1, quote: "is the process of blood cell production, differentiation and development" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L01.002
+    kind: enumerate
+    topic: definition
+    prompt: Mention the organs of the haematopoietic system.
+    points:
+      - Bone marrow
+      - Liver
+      - Spleen
+      - Lymph nodes
+      - Thymus
+    pass: 4
+    src: { page: 1, quote: "The haematopoietic system consists of the bone marrow, liver, spleen, lymph nodes and thymus." }
+    status: unverified
+  - id: hem.L01.003
+    kind: cloze
+    topic: ontogeny
+    text: "Haematopoiesis begins in the {{c1::yolk sac}} of the {{c2::14–19}}-day human embryo."
+    src: { page: 1, quote: "begins in the yolk sac of the 14-19 day human embryo" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: hem.L01.004
+    kind: order
+    topic: ontogeny
+    prompt: Put the main sites of haematopoiesis in the order they take over, from embryo to adult.
+    steps:
+      - Yolk sac (day 14–19 of the embryo)
+      - Fetal liver (second trimester)
+      - Fetal bone marrow (third trimester)
+      - Bone marrow alone (after birth)
+    src: { page: 1, quote: "The fetal liver becomes the main site of hematopoiesis in the second trimester of pregnancy" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L01.005
+    kind: cloze
+    topic: ontogeny
+    text: "The fetal liver is the main site of haematopoiesis in the {{c1::second}} trimester; the fetal bone marrow starts blood cell production in the {{c2::third}} trimester."
+    src: { page: 1, quote: "the fetal bone marrow starts blood cell production in the third trimester" }
+    status: unverified
+    tags: [numbers]
+  - id: hem.L01.006
+    kind: card
+    topic: ontogeny
+    front: What is the site of haematopoiesis after birth in a healthy person?
+    back: The bone marrow is the sole site.
+    src: { page: 1, quote: "After birth, the marrow is the sole site of hematopoiesis in healthy individuals." }
+    status: unverified
+  - id: hem.L01.007
+    kind: cloze
+    topic: ontogeny
+    text: "During the first {{c1::4}} years of life nearly all marrow cavities hold {{c2::red haemopoietic}} marrow with very few fat cells."
+    src: { page: 1, quote: "During the first 4 years of life, nearly all the marrow cavities contain red hemopoietic marrow with very few fat cells." }
+    status: unverified
+    tags: [numbers]
+  - id: hem.L01.008
+    kind: cloze
+    topic: ontogeny
+    text: "By the age of {{c1::18}} years active haematopoiesis is confined to the {{c2::axial skeleton}} and the {{c3::proximal ends of the femur and humerus}}; the other cavities hold yellow fatty marrow."
+    src: { page: 1, quote: "the only sites of active hematopoiesis are the axial skeleton and the proximal ends of the shafts of the femur and humerus" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: hem.L01.009
+    kind: mcq
+    topic: ontogeny
+    stem: A 25-year-old needs a bone marrow aspirate. Which site still holds active red marrow at his age, according to the book?
+    options:
+      - Posterior iliac crest (axial skeleton)
+      - Distal shaft of the femur
+      - Distal radius
+      - Tibial shaft
+      - Bones of the feet
+    answer: 0
+    why:
+      - "Correct: after 18 years active haematopoiesis is confined to the axial skeleton and the proximal femur and humerus (p1)."
+      - Only the proximal ends of the femoral shaft stay active; the distal shaft is yellow fatty marrow.
+      - The forearm bones are not in the axial skeleton; their marrow is fatty in adults.
+      - The tibia is peripheral; its cavity is yellow fatty marrow by 18 years.
+      - The feet are peripheral; fatty marrow by adulthood.
+    src: { page: 1, quote: "By the age of 18 years, the only sites of active hematopoiesis are the axial skeleton" }
+    status: unverified
+  # ---------- p2: lineages (figure) ----------
+  - id: hem.L01.010
+    kind: order
+    topic: lineages
+    prompt: Order the stages of red cell maturation shown in the book's lineage figure.
+    steps:
+      - Proerythroblast
+      - Basophilic erythroblast
+      - Erythroblast
+      - Normoblast
+      - Reticulocyte
+      - Erythrocyte
+    src: { page: 2, quote: "proerythroblast" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L01.011
+    kind: enumerate
+    topic: lineages
+    prompt: Name the five blast cells that the uncommitted stem cell gives rise to (book figure, p2).
+    points:
+      - Proerythroblast
+      - Monoblast
+      - Myeloblast
+      - Lymphoblast
+      - Megakaryoblast
+    pass: 5
+    src: { page: 2, quote: "proerythroblast monoblast myeloblast lymphoblast megakaryoblast" }
+    status: unverified
+  - id: hem.L01.012
+    kind: table
+    topic: lineages
+    title: Which blast makes which mature cell (p2 figure)
+    columns: [Blast, Mature cell(s)]
+    rows:
+      - [Proerythroblast, Erythrocyte]
+      - [Monoblast, Monocyte]
+      - [Myeloblast (via promyelocyte), "Neutrophil, basophil, eosinophil"]
+      - [Lymphoblast, Lymphocyte]
+      - [Megakaryoblast (via megakaryocyte), Platelets]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 2, quote: "Uncommitted stem cell gives rise to committed cells" }
+    status: unverified
+  - id: hem.L01.013
+    kind: card
+    topic: lineages
+    front: In the granulocyte line, which cell comes between the myeloblast and the three granulocytes?
+    back: The promyelocyte. It then branches into the neutrophil, basophil and eosinophil lines.
+    src: { page: 2, quote: "promyelocyte" }
+    status: unverified
+  # ---------- p3: adult stem cells, lymphopoiesis ----------
+  - id: hem.L01.014
+    kind: card
+    topic: stem-cells
+    front: Which cell is the first step in adult haematopoietic cell generation and maturation?
+    back: The pluripotential stem cell.
+    src: { page: 3, quote: "The pluripotential stem cell is the first in a sequence of steps of hematopoietic cell generation and maturation." }
+    status: unverified
+  - id: hem.L01.015
+    kind: enumerate
+    topic: stem-cells
+    prompt: Mention the capacities of the haematopoietic stem cell.
+    points:
+      - Self-renewal
+      - Proliferation
+      - Differentiation into committed progenitor cells
+    pass: 3
+    src: { page: 3, quote: "These cells have the capacity for self-renewal as well as proliferation and differentiation into committed progenitor cells." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L01.016
+    kind: card
+    topic: stem-cells
+    front: What is the fate of committed progenitor cells?
+    back: Each group is destined to develop into a distinct cell line.
+    src: { page: 3, quote: "This group of committed progenitors is destined to develop into distinct cell lines." }
+    status: unverified
+  - id: hem.L01.017
+    kind: table
+    topic: growth-factors
+    title: Growth factor on each arrow of the book's stem cell figure (p3)
+    columns: [Product, Factor(s) on the arrow]
+    rows:
+      - [Red blood cells, EPO]
+      - [Megakaryocyte → platelets, "TPO, IL-11"]
+      - [Myeloid precursor from the stem cell, GM-CSF]
+      - [Monocyte, M-CSF]
+      - [Neutrophil, G-CSF]
+      - [Basophil, IL-3]
+      - [Eosinophil, IL-5]
+      - [Lymphoid precursor, IL-7]
+      - [B lymphocyte, IL-6]
+    blanks: [[0, 1], [1, 1], [3, 1], [4, 1], [6, 1], [7, 1]]
+    src: { page: 3, quote: "GM-CSF" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L01.018
+    kind: mcq
+    topic: growth-factors
+    stem: In the book's stem cell figure (p3), which factor drives the megakaryocyte to platelets?
+    options:
+      - TPO and IL-11
+      - EPO
+      - IL-5
+      - M-CSF
+      - IL-7
+    answer: 0
+    why:
+      - "Correct: the arrow to the megakaryocyte and platelets carries TPO and IL-11 (p3)."
+      - EPO is on the red cell arrow.
+      - IL-5 drives the eosinophil.
+      - M-CSF drives the monocyte.
+      - IL-7 drives the lymphoid line.
+    src: { page: 3, quote: "TPO" }
+    status: unverified
+  - id: hem.L01.019
+    kind: card
+    topic: stem-cells
+    front: What does the lymphoid stem cell give rise to?
+    back: Mature T cells, or B cells and plasma cells.
+    src: { page: 3, quote: "The lymphoid stem cell is the precursor of either mature T-cells or B-cells / plasma cells." }
+    status: unverified
+  # ---------- p4: B and T cells, granulopoiesis, microenvironment ----------
+  - id: hem.L01.020
+    kind: card
+    topic: stem-cells
+    front: Where do B cells mature, and where do they go next?
+    back: In the bone marrow microenvironment; then they travel in the blood to the B-cell zones of peripheral lymphoid tissue.
+    src: { page: 4, quote: "undergo maturation into B-cells in the microenvironment of the marrow" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L01.021
+    kind: card
+    topic: stem-cells
+    front: Where do T-cell progenitors mature, and where do mature T cells go?
+    back: In the thymus; they later migrate to the T-cell zones of peripheral lymphoid organs.
+    src: { page: 4, quote: "The T-cell progenitors undergo maturation in the thymus." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L01.022
+    kind: mcq
+    topic: stem-cells
+    stem: A child born without a thymus (DiGeorge syndrome) has a normal marrow. Which cell line fails to mature?
+    options:
+      - T lymphocytes
+      - B lymphocytes
+      - Plasma cells
+      - Neutrophils
+      - Platelets
+    answer: 0
+    why:
+      - "Correct: T-cell progenitors mature in the thymus (p4)."
+      - B cells mature in the marrow microenvironment, not the thymus.
+      - Plasma cells come from B cells, which mature in the marrow.
+      - Neutrophils come from the myeloid line in the marrow.
+      - Platelets come from marrow megakaryocytes.
+    src: { page: 4, quote: "The T-cell progenitors undergo maturation in the thymus." }
+    status: unverified
+  - id: hem.L01.023
+    kind: cloze
+    topic: myelopoiesis
+    text: "The myeloid stem cell progresses to the progenitor {{c1::CFU-GEMM}}: colony forming unit, {{c2::granulocyte-erythrocyte-monocyte-megakaryocyte}}."
+    src: { page: 4, quote: "The myeloid stem cell progresses to the progenitor colony forming unit" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L01.024
+    kind: enumerate
+    topic: myelopoiesis
+    prompt: Name the committed progenitor subsets that CFU-GEMM can give rise to (besides the erythroid line).
+    points:
+      - CFU-granulocyte-monocyte (CFU-GM)
+      - CFU-eosinophil
+      - CFU-basophil
+      - CFU-megakaryocyte
+    pass: 4
+    src: { page: 4, quote: "CFU-basophil and CFU-megakaryocyte" }
+    status: unverified
+  - id: hem.L01.025
+    kind: card
+    topic: myelopoiesis
+    front: During erythropoiesis, what does CFU-GEMM differentiate into?
+    back: The burst-forming unit erythroid (BFU-E).
+    src: { page: 4, quote: "During eythropoiesis, the CFU- GEMM differentiates into the burst-forming unit erythroid." }
+    status: unverified
+  - id: hem.L01.026
+    kind: card
+    topic: myelopoiesis
+    front: What can each colony forming unit produce under the right growth conditions?
+    back: A colony of one haematopoietic lineage.
+    src: { page: 4, quote: "Each of the colony forming units in turn can produce a colony of one haematopoietic lineage" }
+    status: unverified
+  - id: hem.L01.027
+    kind: enumerate
+    topic: microenvironment
+    prompt: What controls the formation of mature blood cells from the multipotential marrow stem cell?
+    points:
+      - Growth factors
+      - Inhibitors
+      - The bone marrow microenvironment
+    pass: 3
+    src: { page: 4, quote: "is controlled by growth factors and inhibitors as well as the BM micro-environment" }
+    status: unverified
+  - id: hem.L01.028
+    kind: card
+    topic: microenvironment
+    front: What is the bone marrow microenvironment made of?
+    back: Stromal cells and a microvascular network.
+    src: { page: 4, quote: "It is composed of stromal cells and a microvascular network." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L01.029
+    kind: card
+    topic: microenvironment
+    front: What do stromal cells produce, and why does it matter?
+    back: An extracellular matrix of collagen and proteins. It is critical for normal renewal and differentiation of marrow cells.
+    src: { page: 4, quote: "The extra-cellular matrix is critical for the maintenance of normal renewal and differentiation of bone marrow cells." }
+    status: unverified
+  - id: hem.L01.030
+    kind: card
+    topic: microenvironment
+    front: Why do haematopoietic stem cells infused intravenously seed the recipient's marrow?
+    back: Because of CAM (cell adhesion molecule) receptors in the bone marrow microenvironment.
+    src: { page: 4, quote: "they seed the marrow of the recipient successfully due to CAM receptors in the BM" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p5: CAMs, stroma figure, growth factors ----------
+  - id: hem.L01.031
+    kind: card
+    topic: microenvironment
+    front: How do maturing marrow cells leave the marrow for the circulation?
+    back: As they differentiate they lose their cell adhesion molecules (CAMs), so they can leave the marrow.
+    src: { page: 5, quote: "As the marrow cells differentiate, they lose cell adhesion molecules (CAMS), thus they can leave the marrow to the circulation." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L01.032
+    kind: mcq
+    topic: microenvironment
+    stem: A donor's stem cells are given as a simple intravenous infusion, yet they settle in the recipient's marrow within weeks. What explains the homing?
+    options:
+      - CAM receptors in the marrow microenvironment
+      - Erythropoietin secreted by the recipient's kidney
+      - Loss of adhesion molecules by the stem cells
+      - Thymic education of the donor cells
+      - Phagocytosis of the cells by marrow macrophages
+    answer: 0
+    why:
+      - "Correct: infused stem cells seed the marrow because of CAM receptors in the BM microenvironment (p4–5)."
+      - EPO drives red cell production; it does not make stem cells home.
+      - Losing CAMs is how mature cells leave the marrow, the opposite of homing.
+      - The thymus matures T-cell progenitors; it has nothing to do with marrow seeding.
+      - Macrophages engulf bare megakaryocyte nuclei; they do not anchor stem cells.
+    src: { page: 4, quote: "If haematopoietic stem cells are infused intravenously, they seed the marrow of the recipient successfully" }
+    status: unverified
+  - id: hem.L01.033
+    kind: enumerate
+    topic: microenvironment
+    prompt: What is the marrow stroma composed of (book figure, p5)?
+    points:
+      - Fibroblast-like reticular cells
+      - Collagenous fibres
+      - Extracellular matrix
+    pass: 3
+    src: { page: 5, quote: "The stroma is composed of fibroblast-like reticular cells, collagenous fibers, and extracellular matrix." }
+    status: unverified
+  - id: hem.L01.034
+    kind: card
+    topic: platelets
+    front: In the marrow figure (p5), how do platelets form, and what does the reticulocyte do before it leaves?
+    back: Fragments of the megakaryocyte break off to become platelets; the reticulocyte forms by expelling its nucleus. Mature cells squeeze through the endothelium into the circulation.
+    src: { page: 5, quote: "Fragments of megakaryocyte break off to become platelets." }
+    status: unverified
+  - id: hem.L01.035
+    kind: card
+    topic: growth-factors
+    front: What do haematopoietic growth factors do?
+    back: They regulate proliferation and differentiation of haemopoietic progenitor cells and the function of mature blood cells.
+    src: { page: 5, quote: "regulate the proliferation and differentiation of haemopoietic progenitor cells and the function of mature blood cells" }
+    status: unverified
+  - id: hem.L01.036
+    kind: cloze
+    topic: growth-factors
+    text: "Haematopoietic growth factors act locally where they are produced ({{c1::paracrine}}) or circulate in the plasma ({{c2::endocrine}})."
+    src: { page: 5, quote: "They act locally at the site where they are produced (paracrine) or circulate in the plasma (endocrine)." }
+    status: unverified
+  - id: hem.L01.037
+    kind: enumerate
+    topic: growth-factors
+    prompt: Mention the major sources of haematopoietic growth factors.
+    points:
+      - T lymphocytes
+      - Monocytes and macrophages
+      - Endothelial cells
+      - Fibroblasts (stromal cells)
+    pass: 3
+    src: { page: 5, quote: "Major sources are the T-lymphocytes, monocytes (and macrophages), endothelial cells and fibroblasts (stromal cells)." }
+    status: unverified
+  # ---------- p5-6: growth factor classes ----------
+  - id: hem.L01.038
+    kind: table
+    topic: growth-factors
+    title: The most important haematopoietic growth factors, by target
+    columns: [Target, Factors]
+    rows:
+      - [Stromal cells, "IL-1, TNF (they make stroma produce GM-CSF, G-CSF, M-CSF, IL-6)"]
+      - [Pluripotential cells, SCF (stem cell factor)]
+      - [Early multipotential cells, "IL-3, IL-6, GM-CSF"]
+      - [One or two committed lineages, "G-CSF, M-CSF, IL-5 (Eo-CSF)"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 6, quote: "B- Acting on pluripotential cells" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L01.039
+    kind: card
+    topic: growth-factors
+    front: Which growth factors act on stromal cells, and what do they make the stroma produce?
+    back: IL-1 and TNF. They stimulate production of GM-CSF, G-CSF, M-CSF and IL-6.
+    src: { page: 6, quote: "They stimulate production of GM-CSF, G-CSF, M-CSF, IL-6" }
+    status: unverified
+  - id: hem.L01.040
+    kind: cloze
+    topic: growth-factors
+    text: "{{c1::SCF (stem cell factor)}} acts on pluripotential cells; {{c2::IL-3, IL-6 and GM-CSF}} act on early multipotential cells."
+    src: { page: 6, quote: "SCF (Stem Cell Factor)" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L01.041
+    kind: mcq
+    topic: growth-factors
+    stem: Which growth factor acts on only one or two committed lineages rather than on early multipotential cells?
+    options:
+      - G-CSF
+      - IL-3
+      - GM-CSF
+      - SCF
+      - IL-1
+    answer: 0
+    why:
+      - "Correct: G-CSF, M-CSF and IL-5 act on one or two committed lineages (p6)."
+      - IL-3 acts on early multipotential cells.
+      - GM-CSF acts on early multipotential cells.
+      - SCF acts on pluripotential cells.
+      - IL-1 acts on stromal cells.
+    src: { page: 6, quote: "D-Acting on one or two committed cell lineages" }
+    status: unverified
+  - id: hem.L01.042
+    kind: card
+    topic: growth-factors
+    front: What is the other name of IL-5, and which line does it drive?
+    back: Eo-CSF, the eosinophil colony stimulating factor.
+    src: { page: 6, quote: "Interleukin-5, Eosinophil Colony Stimulating Factor" }
+    status: unverified
+  # ---------- p6-7: erythropoietin and haemoglobin ----------
+  - id: hem.L01.043
+    kind: card
+    topic: erythropoietin
+    front: What primarily regulates the rate of erythropoiesis, and where is it made?
+    back: The hormone erythropoietin, secreted by the kidneys.
+    src: { page: 6, quote: "The rate of erythropoiesis is primarily regulated by the hormone erythropoietin which is secreted by the kidneys." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L01.044
+    kind: cloze
+    topic: erythropoietin
+    text: "Erythropoietin production is stimulated by {{c1::renal hypoxia}}; it raises red cell production mainly by speeding the conversion of {{c2::CFU-E}} to {{c3::pronormoblasts}}."
+    src: { page: 6, quote: "It increases red-cell production mainly by stimulating the rate of conversion of CFU-E to pronormoblasts." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L01.045
+    kind: mcq
+    topic: erythropoietin
+    stem: A man on haemodialysis for end-stage renal disease has a normocytic anaemia with normal iron stores. Which lack best explains it, from this lecture?
+    options:
+      - Erythropoietin from the kidney
+      - Thrombopoietin
+      - G-CSF from stromal cells
+      - Stem cell factor
+      - IL-5
+    answer: 0
+    why:
+      - "Correct: erythropoietin is secreted by the kidneys and is the main regulator of erythropoiesis (p6)."
+      - TPO drives platelets, not red cells.
+      - G-CSF drives neutrophils.
+      - SCF acts on pluripotential cells and is not a kidney hormone.
+      - IL-5 drives eosinophils.
+    src: { page: 6, quote: "regulated by the hormone erythropoietin which is secreted by the kidneys" }
+    status: unverified
+  - id: hem.L01.046
+    kind: card
+    topic: erythropoietin
+    front: What is the structure of a haemoglobin molecule (book figure, p7)?
+    back: Four globin chains, each around a heme group; most adult haemoglobin has two alpha and two beta chains. Each heme is a porphyrin ring with an iron atom in the centre.
+    src: { page: 7, quote: "A hemoglobin molecule is composed of four protein globin chains, each centered around a heme group." }
+    status: unverified
+  - id: hem.L01.047
+    kind: cloze
+    topic: erythropoietin
+    text: "Each heme group is a {{c1::porphyrin}} ring with an {{c2::iron}} atom in the centre; most adult haemoglobin has two {{c3::alpha}} and two beta chains."
+    src: { page: 7, quote: "Each heme group consists of a porphyrin ring with an iron atom in the center." }
+    status: unverified
+  # ---------- p7: megakaryocytopoiesis, extramedullary ----------
+  - id: hem.L01.048
+    kind: card
+    topic: platelets
+    front: Where are platelets released, and what happens to the megakaryocyte nucleus left behind?
+    back: They form from the megakaryocyte cytoplasm and are discharged straight into the marrow sinusoids; the bare nucleus is phagocytosed by macrophages.
+    src: { page: 7, quote: "The residual \"bare\" megakaryocyte nucleus is phagocytosed by macrophages." }
+    status: unverified
+  - id: hem.L01.049
+    kind: card
+    topic: extramedullary
+    front: What is extramedullary haematopoiesis?
+    back: In abnormal circumstances the spleen, liver and lymph nodes revert to producing immature blood cells.
+    src: { page: 7, quote: "the spleen, liver and lymph nodes revert back to producing immature blood cells" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L01.050
+    kind: card
+    topic: extramedullary
+    front: What physical sign often accompanies extramedullary haematopoiesis, and what does it suggest?
+    back: Enlargement of the spleen and liver. It suggests that undifferentiated primitive blood cells sit there and can proliferate with the right stimulus.
+    src: { page: 7, quote: "enlargement of the spleen and liver is frequently noted on physical examination" }
+    status: unverified
+  - id: hem.L01.051
+    kind: enumerate
+    topic: extramedullary
+    prompt: Mention the conditions in which extramedullary haematopoiesis occurs.
+    points:
+      - "Dysfunctional marrow: myelofibrosis"
+      - "Dysfunctional marrow: infiltration by malignant cells"
+      - "Marrow unable to meet demand: severe haemolytic anaemias"
+    pass: 3
+    src: { page: 7, quote: "When the bone marrow becomes dysfunctional in cases such as: myelofibrosis, infiltration by malignant cells." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L01.052
+    kind: mcq
+    topic: extramedullary
+    stem: A 9-year-old with severe haemolytic anaemia has a big liver and spleen. Which mechanism of extramedullary haematopoiesis does he show?
+    options:
+      - Marrow unable to meet the demand placed on it
+      - Marrow replaced by fibrosis
+      - Marrow infiltrated by malignant cells
+      - Failure of B-cell maturation
+      - Excess thrombopoietin
+    answer: 0
+    why:
+      - "Correct: severe haemolytic anaemia is the book's example of a marrow that cannot meet demand (p7)."
+      - Myelofibrosis is the dysfunctional-marrow mechanism, not this one.
+      - Malignant infiltration is also a dysfunctional-marrow cause.
+      - B-cell maturation has nothing to do with extramedullary red cell production.
+      - The book does not list TPO excess as a cause.
+    src: { page: 7, quote: "When the bone marrow is unable to meet the demands placed on it, as in severe hemolytic anemias." }
+    status: unverified
+  # ---------- p8: gene therapy ----------
+  - id: hem.L01.053
+    kind: enumerate
+    topic: gene-therapy
+    prompt: Mention the advantages of haematopoietic stem cells for gene therapy.
+    points:
+      - Self-renewal and multilineage differentiation, so one engineered cell gives long-term, widely distributed transgene production
+      - Many inherited and acquired disorders disrupt HSCs and their descendants
+      - Extensive clinical experience with bone marrow transplantation
+      - Possible production of non-haematopoietic cells that home to the right sites
+    pass: 3
+    src: { page: 8, quote: "Extensive clinical experience with bone marrow transplantation" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L01.054
+    kind: card
+    topic: gene-therapy
+    front: Why can a single engineered stem cell give long-term gene therapy?
+    back: Its self-renewal and multilineage differentiation allow long-term and widely distributed production of the transgene.
+    src: { page: 8, quote: "Property of self-renewal and multilineage differentiation, allowing long term and widely distributed production of the transgene" }
+    status: unverified
+  # ---------- cases ----------
+  - id: hem.L01.055
+    kind: case
+    topic: extramedullary
+    stem: A 62-year-old man has fatigue and a spleen felt 12 cm below the costal margin. His liver is also enlarged.
+    steps:
+      - reveal: The blood film shows nucleated red cells and immature granulocytes.
+        question: The spleen and liver are making blood cells. What is this called?
+        options: [Extramedullary haematopoiesis, Lymphopoiesis, Thymic maturation, Megakaryocytopoiesis]
+        answer: 0
+        why: "When the marrow fails or is overwhelmed, the spleen, liver and lymph nodes revert to producing immature blood cells, and they enlarge (p7)."
+      - reveal: A trephine biopsy shows the marrow replaced by fibrous tissue.
+        question: Which of the book's two mechanisms is this?
+        options: [Dysfunctional marrow (myelofibrosis), Marrow unable to meet demand (haemolysis), Loss of erythropoietin, Loss of stromal CAMs]
+        answer: 0
+        why: "Myelofibrosis is the book's example of a dysfunctional marrow (p7); severe haemolysis is the other mechanism."
+    src: { page: 7, quote: "When the bone marrow becomes dysfunctional in cases such as: myelofibrosis" }
+    status: unverified
+  - id: hem.L01.056
+    kind: case
+    topic: erythropoietin
+    stem: A 40-year-old climber spends three months at high altitude. On return his haemoglobin is higher than before.
+    steps:
+      - question: Which hormone drove the rise?
+        options: [Erythropoietin, Thrombopoietin, G-CSF, IL-5]
+        answer: 0
+        why: "Erythropoietin, from the kidneys, is the primary regulator of the rate of erythropoiesis (p6)."
+      - question: What triggered its release?
+        options: [Renal hypoxia, Low platelet count, Bacterial infection, Eosinophilia]
+        answer: 0
+        why: "Its production is stimulated by renal hypoxia (p6)."
+      - question: At which step does it mainly act?
+        options: [CFU-E to pronormoblast, Myeloblast to promyelocyte, Lymphoid stem cell to T cell, Megakaryocyte to platelets]
+        answer: 0
+        why: "It increases red cell production mainly by speeding conversion of CFU-E to pronormoblasts (p6)."
+    src: { page: 6, quote: "Its production is stimulated by renal hypoxia." }
+    status: unverified

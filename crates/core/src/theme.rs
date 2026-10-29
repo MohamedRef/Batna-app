@@ -32,19 +32,31 @@ pub struct Palette {
     pub text: &'static str,
     pub muted: &'static str,
     pub line: &'static str,
-    /// Bile ochre: brand, links, the current nav item.
+    /// The brand colour (the design's "primary"): main actions, links, the
+    /// current nav item.
     pub accent: &'static str,
+    /// Text and icons on a solid `accent` fill (the primary button).
+    pub on_accent: &'static str,
+    /// The accent container: selected rows, the active nav pill, tonal
+    /// buttons.
     pub accent_soft: &'static str,
+    /// Text and icons on `accent_soft` when the accent itself is too loud.
+    pub accent_ink: &'static str,
+    /// A quiet tinted container: notes, flat cards, the lecture header.
+    pub soft: &'static str,
     /// Liver-tissue green: right answers, "ready".
     pub good: &'static str,
     pub good_soft: &'static str,
     pub bad: &'static str,
     pub bad_soft: &'static str,
+    /// Warm supporting notes (a guideline update, a mnemonic), never a grade.
+    pub gold: &'static str,
+    pub gold_soft: &'static str,
 }
 
 impl Palette {
     /// `(css variable, value)` for every token.
-    pub fn tokens(&self) -> [(&'static str, &'static str); 12] {
+    pub fn tokens(&self) -> [(&'static str, &'static str); 17] {
         [
             ("--bg", self.bg),
             ("--surface", self.surface),
@@ -53,12 +65,22 @@ impl Palette {
             ("--muted", self.muted),
             ("--line", self.line),
             ("--accent", self.accent),
+            ("--on-accent", self.on_accent),
             ("--accent-soft", self.accent_soft),
+            ("--accent-ink", self.accent_ink),
+            ("--soft", self.soft),
             ("--good", self.good),
             ("--good-soft", self.good_soft),
             ("--bad", self.bad),
             ("--bad-soft", self.bad_soft),
+            ("--gold", self.gold),
+            ("--gold-soft", self.gold_soft),
         ]
+    }
+
+    /// The page and cards are pure black (OLED pixels off).
+    pub fn is_true_black(&self) -> bool {
+        self.bg == "#000000" && self.surface == "#000000"
     }
 
     /// The tokens as CSS declarations, plus `color-scheme`.
@@ -70,6 +92,13 @@ impl Palette {
             out.push_str(value);
             out.push(';');
         }
+        // Glossy's highlights mix toward white and its page glows with the
+        // accent; on True black both turn to black, so its pixels stay off.
+        out.push_str(if self.is_true_black() {
+            "--glass-white:#000000;--glass-glow:transparent;"
+        } else {
+            "--glass-white:#ffffff;--glass-glow:var(--accent-soft);"
+        });
         out.push_str("color-scheme:");
         out.push_str(self.scheme.as_str());
         out.push(';');
@@ -77,44 +106,57 @@ impl Palette {
     }
 }
 
-/// Paper: a faint green-grey page, the default light theme.
+/// Paper: cool paper and petrol blue, the default light theme (the 2026-10
+/// redesign's "batna-light"). Muted is one step darker than the design's
+/// #5b7080 so it still reads on the raised surface.
 pub const PAPER: Palette = Palette {
     scheme: Scheme::Light,
-    bg: "#f6f7f4",
+    bg: "#f3f6f9",
     surface: "#ffffff",
-    surface_2: "#eef0ec",
-    text: "#1d2420",
-    muted: "#5b665f",
-    line: "#d9ded8",
-    accent: "#8a5e0f",
-    accent_soft: "#f3e7cc",
-    good: "#2f6b4f",
-    good_soft: "#e1efe7",
-    bad: "#a13a2c",
-    bad_soft: "#f6e1dc",
+    surface_2: "#eaf0f5",
+    text: "#193348",
+    muted: "#5a6f7f",
+    line: "#dce5ec",
+    accent: "#245f7c",
+    on_accent: "#ffffff",
+    accent_soft: "#d8eaf2",
+    accent_ink: "#27576b",
+    soft: "#e7f0f5",
+    good: "#277654",
+    good_soft: "#e8f4ec",
+    bad: "#ad493c",
+    bad_soft: "#fbece7",
+    gold: "#8a641d",
+    gold_soft: "#fbf1d9",
 };
 
-/// Night: the default dark theme.
+/// Night: the default dark theme ("batna-dark"): deep petrol with a light
+/// blue brand, so a primary button is light with dark text.
 pub const NIGHT: Palette = Palette {
     scheme: Scheme::Dark,
-    bg: "#141917",
-    surface: "#1b211e",
-    surface_2: "#232a26",
-    text: "#e6ebe7",
-    muted: "#9aa69f",
-    line: "#2f3833",
-    accent: "#e0b25a",
-    accent_soft: "#3a2f18",
-    good: "#7cc7a0",
-    good_soft: "#1d3329",
-    bad: "#ee8f80",
-    bad_soft: "#3d2320",
+    bg: "#11202b",
+    surface: "#192d3b",
+    surface_2: "#213c4d",
+    text: "#eef4f8",
+    muted: "#adc3d2",
+    line: "#435e70",
+    accent: "#9bcde3",
+    on_accent: "#132d3b",
+    accent_soft: "#234656",
+    accent_ink: "#c0e0ee",
+    soft: "#20394a",
+    good: "#a0d7b3",
+    good_soft: "#1c3c31",
+    bad: "#f1b2a3",
+    bad_soft: "#4a2e30",
+    gold: "#e3c581",
+    gold_soft: "#3d3624",
 };
 
 /// True black, for OLED screens: the page and cards are `#000000`, so those
 /// pixels switch off. Cards are told apart by their `line` outline instead of
 /// a grey surface. Text is a soft off-white, which smears less than pure
-/// white when an OLED screen scrolls.
+/// white when an OLED screen scrolls. The brand blue is Night's.
 pub const BLACK: Palette = Palette {
     scheme: Scheme::Dark,
     bg: "#000000",
@@ -123,16 +165,22 @@ pub const BLACK: Palette = Palette {
     text: "#e6ebe7",
     muted: "#9fa9a3",
     line: "#353c38",
-    accent: "#e0b25a",
-    accent_soft: "#2e2410",
+    accent: "#9bcde3",
+    on_accent: "#0b1c25",
+    accent_soft: "#10252f",
+    accent_ink: "#c0e0ee",
+    soft: "#0c171d",
     good: "#7cc7a0",
     good_soft: "#10251b",
     bad: "#ee8f80",
     bad_soft: "#331a17",
+    gold: "#e3c581",
+    gold_soft: "#2a2416",
 };
 
 /// Night shift: for studying late. Very dark and warm, with no colour where
 /// blue outweighs red, so the screen stays easy on the eyes before sleep.
+/// It keeps its amber accent: the petrol brand blue would break that rule.
 pub const NIGHT_SHIFT: Palette = Palette {
     scheme: Scheme::Dark,
     bg: "#110d0a",
@@ -142,11 +190,16 @@ pub const NIGHT_SHIFT: Palette = Palette {
     muted: "#a8998a",
     line: "#3a3029",
     accent: "#e3a552",
+    on_accent: "#1a1108",
     accent_soft: "#3a2a16",
+    accent_ink: "#efc890",
+    soft: "#211a14",
     good: "#c2b56c",
     good_soft: "#2a2614",
     bad: "#ef9373",
     bad_soft: "#3d1f17",
+    gold: "#d9b56a",
+    gold_soft: "#2e2414",
 };
 
 /// What the learner picked in Settings › Look.
@@ -282,6 +335,15 @@ mod tests {
                 ("text on accent-soft", p.text, p.accent_soft),
                 ("text on surface-2", p.text, p.surface_2),
                 ("muted on surface-2", p.muted, p.surface_2),
+                ("on-accent on accent", p.on_accent, p.accent),
+                ("accent-ink on accent-soft", p.accent_ink, p.accent_soft),
+                ("text on soft", p.text, p.soft),
+                ("muted on soft", p.muted, p.soft),
+                ("accent on soft", p.accent, p.soft),
+                ("gold on gold-soft", p.gold, p.gold_soft),
+                ("text on gold-soft", p.text, p.gold_soft),
+                ("good on surface", p.good, p.surface),
+                ("bad on surface", p.bad, p.surface),
             ];
             for (what, fg, bg) in pairs {
                 let c = contrast(fg, bg);
@@ -315,9 +377,12 @@ mod tests {
         // With surface == bg, cards are drawn by their outline alone.
         assert!(contrast(BLACK.line, BLACK.bg) >= 1.5, "card outlines must show on black");
         assert_eq!(Theme::Black.css(), format!(":root{{{}}}", BLACK.css()));
+        // Glossy's white highlights and glow turn black too.
+        assert!(BLACK.css().contains("--glass-white:#000000;--glass-glow:transparent;"));
+        assert!(!PAPER.is_true_black() && PAPER.css().contains("--glass-white:#ffffff;"));
         let auto = Theme::SystemBlack.css();
         assert!(auto.contains("prefers-color-scheme: dark){:root{--bg:#000000;"), "{auto}");
-        assert!(auto.starts_with(":root{--bg:#f6f7f4;"));
+        assert!(auto.starts_with(":root{--bg:#f3f6f9;"));
     }
 
     #[test]
@@ -327,6 +392,19 @@ mod tests {
         assert_eq!(Theme::SystemBlack.css_for(Some(false)), format!(":root{{{}}}", PAPER.css()));
         assert_eq!(Theme::Night.css_for(Some(false)), Theme::Night.css());
         assert_eq!(Theme::System.css_for(None), Theme::System.css());
+    }
+
+    #[test]
+    fn the_default_pair_is_the_redesign_palette() {
+        // Paper and Night carry the 2026-10 design's batna-light/dark brand;
+        // True black shares Night's brand blue.
+        assert_eq!((PAPER.bg, PAPER.accent, PAPER.accent_soft), ("#f3f6f9", "#245f7c", "#d8eaf2"));
+        assert_eq!((NIGHT.bg, NIGHT.accent, NIGHT.on_accent), ("#11202b", "#9bcde3", "#132d3b"));
+        assert_eq!(BLACK.accent, NIGHT.accent);
+        let css = PAPER.css();
+        for token in ["--on-accent:", "--accent-ink:", "--soft:", "--gold:", "--gold-soft:"] {
+            assert!(css.contains(token), "{token} missing from {css}");
+        }
     }
 
     #[test]

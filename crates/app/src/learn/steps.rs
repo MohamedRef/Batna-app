@@ -5,6 +5,7 @@
 
 use batna_core::content::CaseStep;
 use batna_core::lesson::{MnemonicPart, Picture, SortCard, StepBody, Tone};
+use batna_core::response::{Attempt, Draft};
 use dioxus::prelude::*;
 
 use super::text::{Line, Rich, is_latin};
@@ -13,32 +14,68 @@ use crate::order::grade::{misplaced, shuffled};
 
 const LETTERS: [&str; 5] = ["A", "B", "C", "D", "E"];
 
-/// The player's footer check button. A step whose answer is complete but
-/// not yet checked (order, sort) puts its check in its slot; the footer
-/// then shows its primary as "صحّح" and calls it. One primary, always in
-/// the same place. Slots are per step because visited steps stay mounted.
+/// The player's footer gate, one slot per step (visited steps stay
+/// mounted). A step whose response is complete but not checked yet puts its
+/// check here; the footer's primary then reads "صحّح" and runs it: one
+/// primary, always in the same place. `hint` says what the step still needs
+/// while Continue is off.
 #[derive(Clone, Copy)]
-pub struct CheckBar(pub Signal<Vec<Option<Callback<()>>>>);
+pub struct CheckBar(pub Signal<Vec<Gate>>);
+
+#[derive(Clone, Default, PartialEq)]
+pub struct Gate {
+    pub check: Option<Callback<()>>,
+    pub hint: Option<String>,
+}
 
 /// The index of the step a component belongs to.
 #[derive(Clone, Copy)]
 pub struct StepAt(pub usize);
 
+/// The open attempt's saved responses (`batna_core::response`) and a way to
+/// keep a step's response. Every interactive step starts from its saved
+/// response and writes each change back, so leaving and coming back (Back,
+/// the page view, a rotation, a restart) shows exactly what he did.
+#[derive(Clone, Copy)]
+pub struct Responses {
+    pub attempt: Signal<Attempt>,
+    pub put: Callback<(usize, Draft)>,
+}
+
+/// The step's saved response (taken once, at mount) and a setter.
+fn use_draft() -> (Draft, Callback<Draft>) {
+    let r = try_use_context::<Responses>();
+    let k = try_use_context::<StepAt>().map_or(0, |s| s.0);
+    let saved = use_hook(|| {
+        r.and_then(|r| r.attempt.peek().drafts.get(k).map(|s| s.draft.clone())).unwrap_or_default()
+    });
+    let put = use_callback(move |d: Draft| {
+        if let Some(r) = r {
+            r.put.call((k, d));
+        }
+    });
+    (saved, put)
+}
+
 /// Wires a step to the footer: while `can_check` holds, the footer's
-/// primary runs `check`.
-fn use_check_bar(can_check: impl Fn() -> bool + 'static, check: impl FnMut(()) + 'static) {
-    let CheckBar(mut slots) = use_context::<CheckBar>();
-    let StepAt(k) = use_context::<StepAt>();
+/// primary runs `check`; `hint` explains a disabled Continue.
+pub(super) fn use_check_bar(
+    can_check: impl Fn() -> bool + 'static,
+    hint: impl Fn() -> Option<String> + 'static,
+    check: impl FnMut(()) + 'static,
+) {
+    let Some(CheckBar(mut slots)) = try_use_context::<CheckBar>() else { return };
+    let k = try_use_context::<StepAt>().map_or(0, |s| s.0);
     let check = use_callback(check);
     use_effect(move || {
-        let v = can_check().then_some(check);
-        if let Some(slot) = slots.write().get_mut(k) {
-            *slot = v;
+        let v = Gate { check: can_check().then_some(check), hint: hint() };
+        if slots.peek().get(k).is_some_and(|g| *g != v) {
+            slots.write()[k] = v;
         }
     });
     use_drop(move || {
         if let Some(slot) = slots.write().get_mut(k) {
-            *slot = None;
+            *slot = Gate::default();
         }
     });
 }
@@ -168,7 +205,9 @@ fn Figure(
 
 #[component]
 fn Reveal(prompt: String, answer: String, on_answer: EventHandler<bool>) -> Element {
-    let mut open = use_signal(|| false);
+    let (saved, put) = use_draft();
+    let mut open = use_signal(|| matches!(saved, Draft::Reveal { open: true }));
+    use_check_bar(|| false, move || (!open()).then(|| tx::REVEAL_FIRST.to_string()), |_| {});
     rsx! {
         div { class: "ls-reveal",
             p { class: "ls-kicker", {tx::THINK} }
@@ -182,6 +221,7 @@ fn Reveal(prompt: String, answer: String, on_answer: EventHandler<bool>) -> Elem
                     "aria-keyshortcuts": "Space",
                     onclick: move |_| {
                         open.set(true);
+                        put.call(Draft::Reveal { open: true });
                         on_answer.call(true);
                     },
                     {tx::REVEAL}
@@ -194,8 +234,16 @@ fn Reveal(prompt: String, answer: String, on_answer: EventHandler<bool>) -> Elem
 #[component]
 fn Mnemonic(word: String, parts: Vec<MnemonicPart>, hook: Option<String>) -> Element {
     let n = parts.len();
-    let mut shown = use_signal(|| vec![false; n]);
+    let (saved, put) = use_draft();
+    let mut shown = use_signal(|| match saved {
+        Draft::Mnemonic { shown } if shown.len() == n => shown,
+        _ => vec![false; n],
+    });
     let all = shown.read().iter().all(|s| *s);
+    let mut show = move |v: Vec<bool>| {
+        put.call(Draft::Mnemonic { shown: v.clone() });
+        shown.set(v);
+    };
     rsx! {
         div { class: "ls-mnemonic",
             p { class: "ls-kicker", {tx::MNEMONIC} }
@@ -205,7 +253,11 @@ fn Mnemonic(word: String, parts: Vec<MnemonicPart>, hook: Option<String>) -> Ele
                         key: "{i}",
                         class: "ls-mn-key",
                         "aria-pressed": if shown.read()[i] { "true" } else { "false" },
-                        onclick: move |_| shown.write()[i] = true,
+                        onclick: move |_| {
+                            let mut v = shown.peek().clone();
+                            v[i] = true;
+                            show(v);
+                        },
                         "{p.key}"
                     }
                 }
@@ -224,7 +276,7 @@ fn Mnemonic(word: String, parts: Vec<MnemonicPart>, hook: Option<String>) -> Ele
                 }
             }
             if !all {
-                button { class: "btn-link", onclick: move |_| shown.set(vec![true; n]), {tx::SHOW_ALL} }
+                button { class: "btn-link", onclick: move |_| show(vec![true; n]), {tx::SHOW_ALL} }
             }
             if let Some(h) = hook {
                 div { class: "ls-mn-hook", Rich { text: h } }
@@ -250,6 +302,12 @@ fn Aside(tone: Tone, text: String) -> Element {
     }
 }
 
+fn cue(right: bool) {
+    crate::sounds::play(if right { crate::sounds::Cue::Right } else { crate::sounds::Cue::Wrong });
+}
+
+/// Single best answer: a tap picks (and can change), the footer's "صحّح"
+/// checks, then every option explains itself.
 #[component]
 fn Check(
     question: String,
@@ -260,39 +318,62 @@ fn Check(
     on_answer: EventHandler<bool>,
 ) -> Element {
     let order = use_hook(|| shuffled(options.len(), &seed));
-    let mut picked = use_signal(|| None::<usize>);
+    let (saved, put) = use_draft();
+    let (pick0, checked0) = match saved {
+        Draft::Check { pick, checked } => (pick, checked && pick.is_some()),
+        _ => (None, false),
+    };
+    let mut picked = use_signal(|| pick0);
+    let mut checked = use_signal(|| checked0);
+    use_check_bar(
+        move || picked().is_some() && !checked(),
+        move || (picked().is_none() && !checked()).then(|| tx::PICK_FIRST.to_string()),
+        move |_| {
+            let Some(p) = *picked.peek() else { return };
+            checked.set(true);
+            put.call(Draft::Check { pick: Some(p), checked: true });
+            on_answer.call(p == answer);
+            cue(p == answer);
+        },
+    );
     let ltr = options.iter().all(|o| is_latin(o));
     rsx! {
         div { class: "ls-check",
             p { class: "ls-kicker", {tx::CHECK} }
             div { class: "ls-q", dir: if is_latin(&question) { "ltr" } else { "rtl" }, Rich { text: question.clone() } }
-            div { class: "ls-options", dir: if ltr { "ltr" } else { "rtl" },
+            if !checked() { p { class: "muted small", {tx::CHECK_HINT} } }
+            div { class: "ls-options", dir: if ltr { "ltr" } else { "rtl" }, role: if checked() { "list" } else { "radiogroup" },
                 for (pos , &i) in order.iter().enumerate() {
                     {
-                        let state = match picked() {
-                            None => "open",
-                            Some(_) if i == answer => "right",
-                            Some(p) if p == i => "wrong",
-                            Some(_) => "other",
+                        let state = match (checked(), picked()) {
+                            (false, Some(p)) if p == i => "picked",
+                            (false, _) => "open",
+                            (true, _) if i == answer => "right",
+                            (true, Some(p)) if p == i => "wrong",
+                            (true, _) => "other",
                         };
                         rsx! {
                             div { key: "{i}", class: "ls-option-wrap",
                                 button {
                                     class: "ls-option",
+                                    role: if !checked() { "radio" } else { "listitem" },
+                                    "aria-checked": if !checked() { if picked() == Some(i) { "true" } else { "false" } } else { "" },
                                     "data-state": state,
                                     "aria-keyshortcuts": LETTERS.get(pos).copied().unwrap_or(""),
-                                    disabled: picked().is_some(),
+                                    disabled: checked(),
                                     onclick: move |_| {
-                                        if picked().is_none() {
+                                        if !checked() {
                                             picked.set(Some(i));
-                                            on_answer.call(i == answer);
-                                            crate::sounds::play(if i == answer { crate::sounds::Cue::Right } else { crate::sounds::Cue::Wrong });
+                                            put.call(Draft::Check { pick: Some(i), checked: false });
                                         }
                                     },
                                     span { class: "ls-letter", "{LETTERS.get(pos).copied().unwrap_or(\"\")}" }
                                     span { Line { text: options[i].clone() } }
+                                    if checked() && picked() == Some(i) {
+                                        span { class: "ls-mine small", {tx::PICKED} }
+                                    }
                                 }
-                                if picked().is_some() && (i == answer || picked() == Some(i)) {
+                                if checked() && (i == answer || picked() == Some(i)) {
                                     p { class: "ls-why small ls-pop", Line { text: why.get(i).cloned().unwrap_or_default() } }
                                 }
                             }
@@ -300,8 +381,8 @@ fn Check(
                     }
                 }
             }
-            if let Some(p) = picked() {
-                p { class: if p == answer { "ls-verdict good" } else { "ls-verdict bad" },
+            if let Some(p) = picked().filter(|_| checked()) {
+                p { class: if p == answer { "ls-verdict good" } else { "ls-verdict bad" }, role: "status",
                     {if p == answer { tx::RIGHT } else { tx::NOT_QUITE }}
                 }
             }
@@ -309,6 +390,9 @@ fn Check(
     }
 }
 
+/// Put the steps in order: numbered slots fill as he taps the pool. Before
+/// Check any placed step can come out (tap it, or Undo the last); after
+/// Check the order is read-only and every slot shows right or wrong.
 #[component]
 fn Order(
     prompt: String,
@@ -319,55 +403,124 @@ fn Order(
 ) -> Element {
     let n = steps.len();
     let pool = use_hook(|| shuffled(n, &seed));
-    let mut placed = use_signal(Vec::<usize>::new);
-    let mut checked = use_signal(|| false);
-    let wrong = if checked() { misplaced(&placed.read()) } else { Vec::new() };
-    let full = placed.read().len() == n;
+    let (saved, put) = use_draft();
+    let (placed0, checked0) = match saved {
+        Draft::Order { placed, checked } => {
+            let full = placed.len() == n;
+            (placed, checked && full)
+        }
+        _ => (Vec::new(), false),
+    };
+    let mut placed = use_signal(|| placed0);
+    let mut checked = use_signal(|| checked0);
+    let mut set = move |v: Vec<usize>| {
+        put.call(Draft::Order { placed: v.clone(), checked: false });
+        placed.set(v);
+    };
     use_check_bar(
         move || placed.read().len() == n && !checked(),
+        move || {
+            let left = n - placed.read().len();
+            (left > 0 && !checked()).then(|| tx::left_to_place(left))
+        },
         move |_| {
+            let v = placed.peek().clone();
             checked.set(true);
-            let right = misplaced(&placed.peek()).is_empty();
+            let right = misplaced(&v).is_empty();
+            put.call(Draft::Order { placed: v, checked: true });
             on_answer.call(right);
-            crate::sounds::play(if right { crate::sounds::Cue::Right } else { crate::sounds::Cue::Wrong });
+            cue(right);
         },
     );
+    let wrong = if checked() { misplaced(&placed.read()) } else { Vec::new() };
+    let k = placed.read().len();
     rsx! {
         div { class: "ls-order",
             p { class: "ls-kicker", {tx::ORDER} }
             div { class: "ls-q", Rich { text: prompt } }
-            ol { class: "ls-placed", dir: "ltr", lang: "en",
-                for (pos , &s) in placed.read().iter().enumerate() {
-                    li {
-                        key: "{s}",
-                        "data-state": if !checked() { "open" } else if wrong.contains(&pos) { "wrong" } else { "right" },
-                        button {
-                            class: "ls-tile",
-                            disabled: checked(),
-                            onclick: move |_| {
-                                placed.write().remove(pos);
-                            },
-                            span { class: "ls-num", "{pos + 1}" }
-                            bdi { "{steps[s]}" }
-                        }
-                        if checked() && wrong.contains(&pos) {
-                            span { class: "ls-should small", dir: "rtl", lang: "ar", {tx::should_be(s + 1)} }
-                        }
+            if !checked() {
+                p { class: "muted small", {tx::ORDER_HINT} }
+                div { class: "ls-order-bar",
+                    span { class: "ls-order-count small", role: "status", {tx::placed_of(k, n)} }
+                    button {
+                        class: "btn-link ls-undo",
+                        disabled: k == 0,
+                        onclick: move |_| {
+                            let mut v = placed.peek().clone();
+                            v.pop();
+                            set(v);
+                        },
+                        span { aria_hidden: "true", "↶ " }
+                        {tx::UNDO}
                     }
                 }
             }
-            if !full {
-                p { class: "muted small", {tx::ORDER_HINT} }
+            ol { class: "ls-slots", dir: "ltr", lang: "en",
+                for pos in 0..n {
+                    match placed.read().get(pos).copied() {
+                        Some(s) if !checked() => rsx! {
+                            li { key: "{pos}", "data-state": "filled",
+                                // The whole slot takes the step back out.
+                                button {
+                                    class: "ls-slot",
+                                    aria_label: "{tx::REMOVE}: {steps[s]}",
+                                    title: tx::REMOVE,
+                                    onclick: move |_| {
+                                        let mut v = placed.peek().clone();
+                                        if pos < v.len() {
+                                            v.remove(pos);
+                                        }
+                                        set(v);
+                                    },
+                                    span { class: "ls-num", "{pos + 1}" }
+                                    bdi { class: "ls-slot-text", "{steps[s]}" }
+                                    span { class: "ls-x", aria_hidden: "true", "×" }
+                                }
+                            }
+                        },
+                        Some(s) => rsx! {
+                            li { key: "{pos}", "data-state": if wrong.contains(&pos) { "wrong" } else { "right" },
+                                div { class: "ls-slot",
+                                    span { class: "ls-num", "{pos + 1}" }
+                                    bdi { class: "ls-slot-text", "{steps[s]}" }
+                                    span { class: "ls-mark", aria_hidden: "true", if wrong.contains(&pos) { "✗" } else { "✓" } }
+                                }
+                                if wrong.contains(&pos) {
+                                    span { class: "ls-should small", dir: "rtl", lang: "ar", {tx::should_be(s + 1)} }
+                                }
+                            }
+                        },
+                        None => rsx! {
+                            li { key: "{pos}", "data-state": "empty",
+                                div { class: "ls-slot",
+                                    span { class: "ls-num", "{pos + 1}" }
+                                    span { class: "ls-slot-text muted small", dir: "rtl", lang: "ar", {tx::slot(pos + 1)} }
+                                }
+                            }
+                        },
+                    }
+                }
+            }
+            if k < n && !checked() {
                 div { class: "ls-pool", dir: "ltr", lang: "en",
                     for &s in pool.iter().filter(|s| !placed.read().contains(s)) {
-                        button { key: "{s}", class: "ls-tile", onclick: move |_| placed.write().push(s), bdi { "{steps[s]}" } }
+                        button {
+                            key: "{s}",
+                            class: "ls-tile",
+                            onclick: move |_| {
+                                let mut v = placed.peek().clone();
+                                if !v.contains(&s) && v.len() < n {
+                                    v.push(s);
+                                }
+                                set(v);
+                            },
+                            bdi { "{steps[s]}" }
+                        }
                     }
                 }
-            } else if !checked() {
-                button { class: "btn-link", onclick: move |_| placed.write().clear(), {tx::CLEAR} }
             }
             if checked() {
-                p { class: if wrong.is_empty() { "ls-verdict good" } else { "ls-verdict bad" },
+                p { class: if wrong.is_empty() { "ls-verdict good" } else { "ls-verdict bad" }, role: "status",
                     {if wrong.is_empty() { tx::RIGHT.to_string() } else { tx::in_place(n - wrong.len(), n) }}
                 }
                 if !wrong.is_empty() {
@@ -381,6 +534,7 @@ fn Order(
     }
 }
 
+/// Match pairs: each pair is checked as he makes it, and wrong taps count.
 #[component]
 fn Match(
     prompt: String,
@@ -391,27 +545,31 @@ fn Match(
 ) -> Element {
     let n = pairs.len();
     let rights = use_hook(|| shuffled(n, &format!("{seed}/r")));
-    let mut done = use_signal(Vec::<usize>::new);
+    let (saved, put) = use_draft();
+    let (done0, misses0) = match saved {
+        Draft::Match { done, misses } => (done, misses as usize),
+        _ => (Vec::new(), 0),
+    };
+    let mut done = use_signal(|| done0);
     let mut left = use_signal(|| None::<usize>);
     let mut flash = use_signal(|| None::<usize>);
-    let mut misses = use_signal(|| 0usize);
-    let mut reported = use_signal(|| false);
+    let mut misses = use_signal(|| misses0);
     let finished = done.read().len() == n;
+    use_check_bar(|| false, move || (done.read().len() < n).then(|| tx::MATCH_FIRST.to_string()), |_| {});
     let mut tap_right = move |r: usize| {
         let Some(l) = left() else { return };
         if l == r {
             done.write().push(l);
             left.set(None);
             flash.set(None);
-            if done.read().len() == n && !reported() {
-                reported.set(true);
-                let right = misses() == 0;
-                on_answer.call(right);
-                crate::sounds::play(crate::sounds::Cue::Right);
-            }
         } else {
             *misses.write() += 1;
             flash.set(Some(r));
+        }
+        put.call(Draft::Match { done: done.peek().clone(), misses: *misses.peek() as u32 });
+        if l == r && done.peek().len() == n {
+            on_answer.call(*misses.peek() == 0);
+            crate::sounds::play(crate::sounds::Cue::Right);
         }
     };
     rsx! {
@@ -426,6 +584,7 @@ fn Match(
                             key: "l{i}",
                             class: "ls-tile",
                             "data-state": if done.read().contains(&i) { "right" } else if left() == Some(i) { "picked" } else { "open" },
+                            "aria-pressed": if left() == Some(i) { "true" } else { "false" },
                             disabled: done.read().contains(&i),
                             onclick: move |_| {
                                 left.set(Some(i));
@@ -449,7 +608,7 @@ fn Match(
                 }
             }
             if finished {
-                p { class: if misses() == 0 { "ls-verdict good" } else { "ls-verdict" },
+                p { class: if misses() == 0 { "ls-verdict good" } else { "ls-verdict" }, role: "status",
                     {if misses() == 0 { tx::RIGHT.to_string() } else { tx::misses(misses()) }}
                 }
                 if let Some(w) = why { div { class: "ls-why-box", Rich { text: w } } }
@@ -458,6 +617,8 @@ fn Match(
     }
 }
 
+/// Sort cards into bins: tap a card, then its bin. Before Check a placed
+/// card goes back to the pool on a tap; after Check it is read-only.
 #[component]
 fn Sort(
     prompt: String,
@@ -469,25 +630,42 @@ fn Sort(
 ) -> Element {
     let n = cards.len();
     let order = use_hook(|| shuffled(n, &seed));
+    let (saved, save) = use_draft();
+    let (put0, checked0) = match saved {
+        Draft::Sort { put, checked } if put.len() == n => {
+            let all = put.iter().all(Option::is_some);
+            (put, checked && all)
+        }
+        _ => (vec![None; n], false),
+    };
     // Where each card was dropped.
-    let mut put = use_signal(|| vec![None::<usize>; n]);
+    let mut put = use_signal(|| put0);
     let mut held = use_signal(|| None::<usize>);
-    let mut checked = use_signal(|| false);
+    let mut checked = use_signal(|| checked0);
     let all_in = put.read().iter().all(Option::is_some);
     let wrong = put.read().iter().enumerate().filter(|(i, b)| **b != Some(cards[*i].bin)).count();
     let key: Vec<usize> = cards.iter().map(|c| c.bin).collect();
+    let mut set = move |c: usize, bin: Option<usize>| {
+        put.write()[c] = bin;
+        save.call(Draft::Sort { put: put.peek().clone(), checked: false });
+    };
     use_check_bar(
         move || put.read().iter().all(Option::is_some) && !checked(),
+        move || (!put.read().iter().all(Option::is_some) && !checked()).then(|| tx::SORT_FIRST.to_string()),
         move |_| {
             checked.set(true);
-            let right = put.peek().iter().zip(&key).all(|(p, b)| *p == Some(*b));
+            let v = put.peek().clone();
+            let right = v.iter().zip(&key).all(|(p, b)| *p == Some(*b));
+            save.call(Draft::Sort { put: v, checked: true });
             on_answer.call(right);
-            crate::sounds::play(if right { crate::sounds::Cue::Right } else { crate::sounds::Cue::Wrong });
+            cue(right);
         },
     );
     let mut drop_in = move |bin: usize| {
         if let Some(c) = held() {
-            put.write()[c] = Some(bin);
+            if !checked() {
+                set(c, Some(bin));
+            }
             held.set(None);
         }
     };
@@ -504,6 +682,7 @@ fn Sort(
                             class: "ls-tile",
                             draggable: "true",
                             "data-state": if held() == Some(c) { "picked" } else { "open" },
+                            "aria-pressed": if held() == Some(c) { "true" } else { "false" },
                             ondragstart: move |_| held.set(Some(c)),
                             onclick: move |_| held.set(if held() == Some(c) { None } else { Some(c) }),
                             Line { text: cards[c].text.clone() }
@@ -531,15 +710,20 @@ fn Sort(
                             for &c in order.iter().filter(|c| put.read()[**c] == Some(b)) {
                                 li { key: "in{c}",
                                     "data-state": if !checked() { "open" } else if cards[c].bin == b { "right" } else { "wrong" },
-                                    button {
-                                        class: "ls-chiplet",
-                                        disabled: checked(),
-                                        onclick: move |e| {
-                                            // Back to the pool, without dropping a held card here.
-                                            e.stop_propagation();
-                                            put.write()[c] = None;
-                                        },
-                                        Line { text: cards[c].text.clone() }
+                                    if checked() {
+                                        span { class: "ls-chiplet-done", Line { text: cards[c].text.clone() } }
+                                    } else {
+                                        button {
+                                            class: "ls-chiplet",
+                                            aria_label: "{tx::REMOVE}: {cards[c].text}",
+                                            onclick: move |e| {
+                                                // Back to the pool, without dropping a held card here.
+                                                e.stop_propagation();
+                                                set(c, None);
+                                            },
+                                            Line { text: cards[c].text.clone() }
+                                            span { class: "ls-x", aria_hidden: "true", "×" }
+                                        }
                                     }
                                     if checked() && cards[c].bin != b {
                                         span { class: "ls-should small", "→ " Line { text: bins[cards[c].bin].clone() } }
@@ -551,7 +735,7 @@ fn Sort(
                 }
             }
             if checked() {
-                p { class: if wrong == 0 { "ls-verdict good" } else { "ls-verdict bad" },
+                p { class: if wrong == 0 { "ls-verdict good" } else { "ls-verdict bad" }, role: "status",
                     {if wrong == 0 { tx::RIGHT.to_string() } else { tx::in_place(n - wrong, n) }}
                 }
                 if let Some(w) = why { div { class: "ls-why-box", Rich { text: w } } }
@@ -560,6 +744,8 @@ fn Sort(
     }
 }
 
+/// A mini case, part by part: pick, check with the footer, read why, go on.
+/// The last part's check finishes the case.
 #[component]
 fn MiniCase(stem: String, steps: Vec<CaseStep>, seed: String, on_answer: EventHandler<bool>) -> Element {
     let n = steps.len();
@@ -571,26 +757,63 @@ fn MiniCase(stem: String, steps: Vec<CaseStep>, seed: String, on_answer: EventHa
             .map(|(si, s)| shuffled(s.options.len(), &format!("{seed}.{si}")))
             .collect::<Vec<_>>()
     });
-    let mut at = use_signal(|| 0usize);
-    // The option picked at each step (a step without options: Some(0) once shown).
-    let mut picks = use_signal(|| vec![None::<usize>; n]);
-    let mut all_right = use_signal(|| true);
-    let mut reported = use_signal(|| false);
+    let (saved, put) = use_draft();
+    let (picks0, at0, pick0) = match saved {
+        Draft::Case { picks, at, pick } if picks.len() == n && at < n => (picks, at, pick),
+        _ => (vec![None; n], 0, None),
+    };
+    let mut at = use_signal(|| at0);
+    // The checked pick per part (a part without options: Some(0) once shown).
+    let mut picks = use_signal(|| picks0);
+    // The current part's pick, before Check.
+    let mut pick = use_signal(|| pick0);
+    let save = use_callback(move |()| {
+        put.call(Draft::Case { picks: picks.peek().clone(), at: *at.peek(), pick: *pick.peek() })
+    });
+    let answers: Vec<Option<usize>> = steps.iter().map(|s| s.answer).collect();
+    let has_options: Vec<bool> = steps.iter().map(|s| !s.options.is_empty()).collect();
+    let part_answers = answers.clone();
+    // A part is settled: the whole case is done once the last one is.
+    let settle = use_callback(move |(si, p): (usize, usize)| {
+        picks.write()[si] = Some(p);
+        pick.set(None);
+        save.call(());
+        if si + 1 == n {
+            let v = picks.peek().clone();
+            let right = v.iter().zip(&answers).zip(&has_options).all(|((p, a), o)| !*o || *p == *a);
+            on_answer.call(right);
+        }
+    });
+    use_check_bar(
+        move || pick().is_some(),
+        move || {
+            let done = picks.read().iter().all(Option::is_some);
+            (!done && pick().is_none()).then(|| tx::CASE_FIRST.to_string())
+        },
+        move |_| {
+            let si = *at.peek();
+            let Some(p) = *pick.peek() else { return };
+            if picks.peek()[si].is_none() {
+                settle.call((si, p));
+                cue(part_answers[si] == Some(p));
+            }
+        },
+    );
     rsx! {
         div { class: "ls-case",
             p { class: "ls-kicker", {tx::CASE} }
             div { class: "ls-case-stem", dir: "ltr", lang: "en", Rich { text: stem } }
             for (si , s) in steps.iter().take(at() + 1).enumerate() {
                 {
-                    let pick = picks.read()[si];
+                    let done = picks.read()[si];
                     let last = si == at();
                     rsx! {
                         div { key: "{si}", class: "ls-case-step ls-pop",
                             if let Some(r) = &s.reveal { p { class: "ls-case-reveal", dir: "ltr", lang: "en", Line { text: r.clone() } } }
                             p { class: "ls-case-q", dir: "ltr", lang: "en", strong { Line { text: s.question.clone() } } }
                             if s.options.is_empty() {
-                                if pick.is_none() {
-                                    button { class: "btn btn-secondary", "aria-keyshortcuts": "Space", onclick: move |_| picks.write()[si] = Some(0), {tx::CASE_SHOW} }
+                                if done.is_none() {
+                                    button { class: "btn btn-secondary", "aria-keyshortcuts": "Space", onclick: move |_| settle.call((si, 0)), {tx::CASE_SHOW} }
                                 }
                             } else {
                                 div { class: "ls-options", dir: "ltr", lang: "en",
@@ -598,22 +821,19 @@ fn MiniCase(stem: String, steps: Vec<CaseStep>, seed: String, on_answer: EventHa
                                         button {
                                             key: "{oi}",
                                             class: "ls-option",
-                                            "aria-keyshortcuts": if last { LETTERS.get(pos).copied().unwrap_or("") } else { "" },
-                                            "data-state": match pick {
+                                            "aria-keyshortcuts": if last && done.is_none() { LETTERS.get(pos).copied().unwrap_or("") } else { "" },
+                                            "data-state": match done {
+                                                None if last && pick() == Some(oi) => "picked",
                                                 None => "open",
                                                 Some(_) if Some(oi) == s.answer => "right",
                                                 Some(p) if p == oi => "wrong",
                                                 Some(_) => "other",
                                             },
-                                            disabled: pick.is_some(),
-                                            onclick: {
-                                                let right = Some(oi) == s.answer;
-                                                move |_| {
-                                                    picks.write()[si] = Some(oi);
-                                                    if !right {
-                                                        all_right.set(false);
-                                                    }
-                                                    crate::sounds::play(if right { crate::sounds::Cue::Right } else { crate::sounds::Cue::Wrong });
+                                            disabled: done.is_some(),
+                                            onclick: move |_| {
+                                                if picks.peek()[si].is_none() {
+                                                    pick.set(Some(oi));
+                                                    save.call(());
                                                 }
                                             },
                                             span { class: "ls-letter", "{LETTERS.get(pos).copied().unwrap_or(\"\")}" }
@@ -622,20 +842,16 @@ fn MiniCase(stem: String, steps: Vec<CaseStep>, seed: String, on_answer: EventHa
                                     }
                                 }
                             }
-                            if pick.is_some() {
+                            if done.is_some() {
                                 div { class: "ls-why-box ls-pop", dir: "ltr", lang: "en", Rich { text: s.why.clone() } }
-                                if last && !reported() {
+                                if last && si + 1 < n {
                                     button {
                                         class: "btn btn-secondary",
                                         onclick: move |_| {
-                                            if si + 1 < n {
-                                                at.set(si + 1);
-                                            } else {
-                                                reported.set(true);
-                                                on_answer.call(all_right());
-                                            }
+                                            at.set(si + 1);
+                                            save.call(());
                                         },
-                                        {if si + 1 < n { tx::CASE_NEXT } else { tx::CASE_DONE }}
+                                        {tx::CASE_NEXT}
                                     }
                                 }
                             }
@@ -655,7 +871,15 @@ fn is_value(cell: &str) -> bool {
 
 #[component]
 fn Table(title: String, columns: Vec<String>, rows: Vec<Vec<String>>, hide: Vec<[usize; 2]>) -> Element {
-    let mut open = use_signal(Vec::<[usize; 2]>::new);
+    let (saved, put) = use_draft();
+    let mut open = use_signal(|| match saved {
+        Draft::Table { open } => open,
+        _ => Vec::new(),
+    });
+    let mut show = move |v: Vec<[usize; 2]>| {
+        put.call(Draft::Table { open: v.clone() });
+        open.set(v);
+    };
     let hidden_left = hide.iter().filter(|c| !open.read().contains(c)).count();
     rsx! {
         div { class: "ls-table",
@@ -676,7 +900,11 @@ fn Table(title: String, columns: Vec<String>, rows: Vec<Vec<String>>, hide: Vec<
                                 for (c , cell) in row.iter().enumerate() {
                                     if hide.contains(&[r, c]) && !open.read().contains(&[r, c]) {
                                         td { key: "{c}",
-                                            button { class: "ls-cell-hidden", onclick: move |_| open.write().push([r, c]), aria_label: tx::REVEAL, "؟" }
+                                            button { class: "ls-cell-hidden", onclick: move |_| {
+                                                let mut v = open.peek().clone();
+                                                v.push([r, c]);
+                                                show(v);
+                                            }, aria_label: tx::REVEAL, "؟" }
                                         }
                                     } else if c == 0 {
                                         th { key: "{c}", scope: "row", "{cell}" }
@@ -695,8 +923,83 @@ fn Table(title: String, columns: Vec<String>, rows: Vec<Vec<String>>, hide: Vec<
                 }
             }
             if hidden_left > 0 {
-                button { class: "btn-link", onclick: move |_| open.set(hide.clone()), {tx::SHOW_ALL} }
+                button { class: "btn-link", onclick: move |_| show(hide.clone()), {tx::SHOW_ALL} }
             }
+        }
+    }
+}
+
+/// A question answered before its response was saved (an older version of
+/// the app), or whose content changed since: the result he got and the
+/// answer key, read-only. Never an empty task with Continue already on.
+#[component]
+pub fn AnsweredBefore(body: StepBody, right: bool) -> Element {
+    let (kicker, prompt) = match &body {
+        StepBody::Check { question, .. } => (tx::CHECK, question.clone()),
+        StepBody::Order { prompt, .. } => (tx::ORDER, prompt.clone()),
+        StepBody::Match { prompt, .. } => (tx::MATCH, prompt.clone()),
+        StepBody::Sort { prompt, .. } => (tx::SORT, prompt.clone()),
+        StepBody::Case { stem, .. } => (tx::CASE, stem.clone()),
+        _ => (tx::CHECK, String::new()),
+    };
+    let key = match body {
+        StepBody::Check { options, answer, why, .. } => rsx! {
+            p { class: "ls-key-line", Line { text: options.get(answer).cloned().unwrap_or_default() } }
+            p { class: "ls-why small", Line { text: why.get(answer).cloned().unwrap_or_default() } }
+        },
+        StepBody::Order { steps, why, .. } => rsx! {
+            ol { class: "ls-key small", dir: "ltr", lang: "en",
+                for (i , s) in steps.iter().enumerate() { li { key: "{i}", "{s}" } }
+            }
+            if let Some(w) = why { div { class: "ls-why-box", Rich { text: w } } }
+        },
+        StepBody::Match { pairs, why, .. } => rsx! {
+            ul { class: "ls-key small", dir: "ltr", lang: "en",
+                for (i , p) in pairs.iter().enumerate() { li { key: "{i}", bdi { "{p[0]}" } " → " bdi { "{p[1]}" } } }
+            }
+            if let Some(w) = why { div { class: "ls-why-box", Rich { text: w } } }
+        },
+        StepBody::Sort { bins, cards, why, .. } => rsx! {
+            ul { class: "ls-key small",
+                for (b , name) in bins.iter().enumerate() {
+                    li { key: "{b}",
+                        strong { Line { text: name.clone() } }
+                        ": "
+                        for (i , c) in cards.iter().enumerate().filter(|(_, c)| c.bin == b) {
+                            span { key: "{i}", class: "ls-key-item", Line { text: c.text.clone() } }
+                        }
+                    }
+                }
+            }
+            if let Some(w) = why { div { class: "ls-why-box", Rich { text: w } } }
+        },
+        StepBody::Case { steps, .. } => rsx! {
+            ol { class: "ls-key small", dir: "ltr", lang: "en",
+                for (si , s) in steps.iter().enumerate() {
+                    li { key: "{si}",
+                        strong { Line { text: s.question.clone() } }
+                        if let Some(a) = s.answer.and_then(|a| s.options.get(a)) {
+                            " → "
+                            Line { text: a.clone() }
+                        }
+                    }
+                }
+            }
+        },
+        _ => rsx! {},
+    };
+    rsx! {
+        div { class: "ls-before",
+            p { class: "ls-kicker", {kicker} }
+            div { class: "ls-q", Rich { text: prompt } }
+            p { class: if right { "ls-verdict good" } else { "ls-verdict" }, role: "status",
+                {tx::BEFORE}
+                " "
+                {if right { tx::BEFORE_RIGHT } else { tx::BEFORE_WRONG }}
+            }
+            p { class: "muted small", {tx::BEFORE_HINT} }
+            p { class: "ls-kicker", {tx::KEY} }
+            {key}
         }
     }
 }

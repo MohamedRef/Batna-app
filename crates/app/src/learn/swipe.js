@@ -10,7 +10,7 @@
   if (window.__batnaSwipe) return;
   window.__batnaSwipe = true;
   const NOT_HERE =
-    ".ls-tile, .ls-chiplet, .ls-pool, .ls-bins, .ls-order, .ls-match, .ls-viewer, .ls-table-scroll, .ls-mn-letters, input, textarea, select, [data-noswipe]";
+    ".ls-tile, .ls-slot, .ls-chiplet, .ls-pool, .ls-bins, .ls-order, .ls-match, .ls-viewer, .ls-table-scroll, .ls-mn-letters, input, textarea, select, [data-noswipe]";
   const rtl = () => (document.querySelector(".app")?.getAttribute("dir") || document.dir) === "rtl";
   const button = (fwd) => document.querySelector(`.ls-nav [data-nav=${fwd ? "next" : "back"}]:not(:disabled)`);
   let g = null;

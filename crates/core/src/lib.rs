@@ -10,6 +10,7 @@ pub mod lesson;
 pub mod own;
 pub mod pack;
 pub mod plan;
+pub mod response;
 pub mod review;
 pub mod session;
 pub mod srs;

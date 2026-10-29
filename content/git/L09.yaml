@@ -1,0 +1,898 @@
+schema: batna.content/v1
+lecture: git.L09
+title: "Malabsorption"
+author: "Prof. Amira Shams Eldeen"
+# Pages 257-268 repeat git.L08 (celiac disease and co.) word for word; L08 owns that material.
+book: { chapter: 2, pages: [246, 256] }
+topics:
+  - { id: defs, title: "Definition, types and the three phases" }
+  - { id: fat, title: "Intraluminal phase: fat digestion" }
+  - { id: protein-cho, title: "Intraluminal phase: protein and carbohydrate digestion" }
+  - { id: mucosal, title: "Mucosal and postabsorptive phases, sites of absorption" }
+  - { id: causes, title: "Causes by pathogenesis" }
+  - { id: classification, title: "Table 1: classification of causes" }
+  - { id: gi, title: "Gastrointestinal manifestations" }
+  - { id: extra, title: "Extraintestinal manifestations" }
+  - { id: nutrients, title: "Table 3: findings by malabsorbed nutrient" }
+  - { id: stool-blood, title: "Stool and blood tests" }
+  - { id: absorption-tests, title: "Oral absorption and breath tests, Schilling test" }
+  - { id: imaging, title: "Imaging, endoscopy and biopsy" }
+items:
+  # ---------- p246: definition, types, phases ----------
+  - id: git.L09.001
+    kind: card
+    topic: defs
+    front: Define malabsorption.
+    back: Disorders in which digestion and nutrient absorption are disrupted.
+    src: { page: 246, quote: "This term defines as disorders in which there is a disruption of digestion and nutrient absorption." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L09.002
+    kind: table
+    topic: defs
+    title: Types of malabsorption
+    columns: [Type, Meaning, Nickname]
+    rows:
+      - [Pan malabsorption, All nutrient intakes are malabsorbed, GLOBAL]
+      - [Specific malabsorption, One nutrient or one class of nutrients is malabsorbed, PARTIAL]
+    blanks: [[0, 2], [1, 1], [1, 2]]
+    src: { page: 246, quote: "Pan malabsorption: Here malabsorption to all nutrient intakes. GLOBAL" }
+    status: unverified
+  - id: git.L09.003
+    kind: enumerate
+    topic: defs
+    prompt: Name the three major categories of diseases associated with malabsorption.
+    points:
+      - Impaired intraluminal digestion
+      - Impaired mucosal digestion and absorption
+      - Impaired postmucosal nutrient transport
+    pass: 3
+    src: { page: 246, quote: "those associated with impaired intraluminal digestion; (2) those associated with impaired mucosal digestion and absorption" }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L09.004
+    kind: order
+    topic: defs
+    prompt: Put the phases of digestion and absorption in order.
+    steps:
+      - Luminal (intraluminal) phase
+      - Mucosal phase
+      - Postabsorptive phase
+    src: { page: 246, quote: "into three major phases: luminal, mucosal, and postabsorptive" }
+    status: unverified
+  # ---------- p246-247: fat ----------
+  - id: git.L09.005
+    kind: card
+    topic: fat
+    front: Where does fat digestion start, and which enzyme starts it?
+    back: In the duodenum, by pancreatic lipase acting on the food bolus. It splits long-chain triglycerides into monoglycerides and free fatty acids.
+    src: { page: 246, quote: "the fat digestion starts by the action of pancreatic lipase at the duodenum on the food bolus" }
+    status: unverified
+  - id: git.L09.006
+    kind: order
+    topic: fat
+    prompt: Order the steps of long-chain fat digestion and absorption.
+    steps:
+      - Pancreatic lipase splits long-chain triglycerides into monoglycerides and free fatty acids
+      - They combine with bile acids and phospholipids to form micelles
+      - Micelles pass into jejunal enterocytes
+      - Fatty acids are resynthesized and packed with protein, cholesterol and phospholipid into chylomicrons
+      - Chylomicrons are carried away by the lymphatics
+    src: { page: 246, quote: "combine with bile acids and phospholipids to form micelles that pass through jejunal enterocytes" }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L09.007
+    kind: cloze
+    topic: fat
+    text: "Long-chain fat leaves the enterocyte as {{c1::chylomicrons}} through the {{c2::lymphatics}}, while medium-chain triglycerides go directly into the {{c3::portal blood}} without micelles."
+    src: { page: 247, quote: "Medium chain triglycerides MCT absorbed directly into portal blood without the need of miceller formation." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L09.008
+    kind: card
+    topic: fat
+    front: Why does fat malabsorption cause deficiency of vitamins A, D, E and K?
+    back: Unabsorbed fat traps the fat-soluble vitamins (and possibly some minerals), so they are lost with it.
+    src: { page: 247, quote: "Unabsorbed fats trap fat-soluble vitamins (A, D, E, K) and possibly some minerals, causing deficiency." }
+    status: unverified
+  - id: git.L09.009
+    kind: card
+    topic: fat
+    front: At what pH does pancreatic lipase work best, and what inactivates it?
+    back: It is optimally active at alkaline pH (8) and is inhibited by acid, so gastric hyperacidity inactivates it.
+    src: { page: 247, quote: "The pancreatic lipase are optimally activated at alkaline PH (8) and inhibited at acidic media." }
+    status: unverified
+  - id: git.L09.010
+    kind: cloze
+    topic: fat
+    text: "A person may lose nearly {{c1::90%}} of pancreatic lipase output before fat digestion and absorption are affected."
+    src: { page: 247, quote: "a person may lose nearly 90% of lipase output from the pancreas before the efficiency of fat digestion and absorption is affected" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: git.L09.011
+    kind: card
+    topic: fat
+    front: What degree of steatorrhea follows low bile salt concentration, and from what causes?
+    back: Mild steatorrhea, from biliary obstruction or liver disease.
+    src: { page: 247, quote: "Decreased bile salt concentration may be due to biliary obstruction or liver disease lead to mild steatorrhea." }
+    status: unverified
+  - id: git.L09.012
+    kind: card
+    topic: fat
+    front: How does bacterial overgrowth impair fat absorption?
+    back: Bacteria deconjugate and dehydroxylate bile salts, so micelles do not form and fat absorption is limited.
+    src: { page: 247, quote: "Bacterial overgrowth results in deconjugation and dehydroxylation of bile salts, limiting the absorption of fats." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L09.013
+    kind: card
+    topic: fat
+    front: Why do unabsorbed bile salts cause diarrhea?
+    back: They stimulate water secretion in the colon.
+    src: { page: 247, quote: "Unabsorbed bile salts stimulate water secretion in the colon, causing diarrhea." }
+    status: unverified
+  # ---------- p247-248: protein and carbohydrate ----------
+  - id: git.L09.014
+    kind: cloze
+    topic: protein-cho
+    text: "Protein breakdown starts with gastric pepsins, activated at pH {{c1::1–3}} and inactivated at pH above {{c2::5}}; pepsin also releases {{c3::cholecystokinin}}, which drives pancreatic enzyme secretion."
+    src: { page: 247, quote: "Initial breakdown started by gastric pepsins activated by PH 1-3 and inactivated at PH >5." }
+    status: unverified
+    tags: [numbers]
+  - id: git.L09.015
+    kind: card
+    topic: protein-cho
+    front: Which brush border enzyme activates trypsinogen, and why does it matter?
+    back: Enterokinase. It turns trypsinogen into trypsin, which then activates many other pancreatic proteases.
+    src: { page: 247, quote: "Enterokinase, a brush border enzyme, activates trypsinogen into trypsin, which converts many pancreatic proteases into their active forms." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L09.016
+    kind: card
+    topic: protein-cho
+    front: In what forms are digested proteins absorbed?
+    back: As oligopeptides (absorbed directly) or as free amino acids after further hydrolysis, helped by brush border oligopeptidases.
+    src: { page: 247, quote: "Active pancreatic enzymes hydrolyze proteins into oligopeptides, which are absorbed directly or hydrolyzed into amino acids." }
+    status: unverified
+  - id: git.L09.017
+    kind: order
+    topic: protein-cho
+    prompt: Order carbohydrate digestion.
+    steps:
+      - Salivary and pancreatic amylases split starch into mono- and disaccharides
+      - Brush border enzymes split disaccharides into monosaccharides
+      - Monosaccharides (glucose, galactose, fructose) are transported into the enterocyte
+    src: { page: 248, quote: "Salivary and pancreatic amylases hydrolyze starch into mono and disaccharides." }
+    status: unverified
+  - id: git.L09.018
+    kind: table
+    topic: protein-cho
+    title: How monosaccharides cross the enterocyte
+    columns: [Sugar, Transport]
+    rows:
+      - [Fructose, Facilitated diffusion]
+      - [Glucose, Sodium-dependent active transporter (SGLT-1)]
+      - [Galactose, Sodium-dependent active transporter (SGLT-1)]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 248, quote: "Fructose is transported by facilitated diffusion, but glucose and galactose are transported by a sodium-dependent active transporter (SGLT-1)." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L09.019
+    kind: mcq
+    topic: protein-cho
+    stem: Which sugar is absorbed by facilitated diffusion rather than by SGLT-1?
+    options:
+      - Fructose
+      - Glucose
+      - Galactose
+      - Lactose
+    answer: 0
+    why:
+      - "Correct: fructose crosses by facilitated diffusion (p248)."
+      - Glucose uses the sodium-dependent transporter SGLT-1.
+      - Galactose shares SGLT-1 with glucose.
+      - Lactose is a disaccharide; lactase must split it before absorption.
+    src: { page: 248, quote: "Fructose is transported by facilitated diffusion" }
+    status: unverified
+  - id: git.L09.020
+    kind: card
+    topic: protein-cho
+    front: What do colonic bacteria make from unabsorbed carbohydrate, and what does each product cause?
+    back: Carbon dioxide, methane and hydrogen (abdominal distension and bloating) and short-chain fatty acids such as butyrate, propionate, acetate and lactate (diarrhea).
+    src: { page: 248, quote: "Colonic bacteria ferment unabsorbed carbohydrates into carbon dioxide, methane, hydrogen, and short-chain fatty acids" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p248-249: mucosal and postabsorptive phases ----------
+  - id: git.L09.021
+    kind: card
+    topic: mucosal
+    front: What does the mucosal phase need to work?
+    back: A sufficient intact absorptive area and intact brush border enzymes (important for splitting disaccharides).
+    src: { page: 248, quote: "This phase needs sufficient intact area; also intact brush border enzymes." }
+    status: unverified
+  - id: git.L09.022
+    kind: card
+    topic: mucosal
+    front: What is the most common disaccharidase deficiency?
+    back: Lactase deficiency, primary or secondary. It causes lactose intolerance.
+    src: { page: 248, quote: "Lactase deficiency, either primary or secondary, is the most common form of disaccharidase deficiency" }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L09.023
+    kind: enumerate
+    topic: mucosal
+    prompt: Mention causes of secondary lactase deficiency.
+    points:
+      - Acute gastroenteritis (rotavirus, giardia)
+      - Chronic alcoholism
+      - Celiac sprue
+      - Radiation enteritis
+      - Regional enteritis (Crohn)
+      - AIDS enteropathy
+    pass: 4
+    src: { page: 248, quote: "Secondary lactase deficiency can be result from acute gastroenteritis (rotavirus and giardia infection), chronic alcoholism, celiac sprue, radiation enteritis" }
+    status: unverified
+  - id: git.L09.024
+    kind: card
+    topic: mucosal
+    front: What two kinds of lesion damage the mucosal phase?
+    back: Primary mucosal disease, or resection of part of the intestine.
+    src: { page: 248, quote: "This phase lesion is either due to primarily mucosal disease or resection of part of the intestine." }
+    status: unverified
+  - id: git.L09.025
+    kind: card
+    topic: mucosal
+    front: What happens in the postabsorptive phase, and what disturbs it?
+    back: Reassembled lipids and other nutrients leave the epithelial cells through the lymphatics and portal circulation. Lymphatic obstruction impairs chylomicron and lipoprotein transport.
+    src: { page: 248, quote: "Lymphatic obstruction leads to impaired chylomicrons and lipoproteins." }
+    status: unverified
+  - id: git.L09.026
+    kind: table
+    topic: mucosal
+    title: Where each nutrient is absorbed
+    columns: [Site, Absorbed]
+    rows:
+      - [Proximal small intestine, "Fat, iron, calcium"]
+      - [Proximal and middle parts, "Carbohydrate, folic acid, other water-soluble vitamins"]
+      - [Middle part, Protein]
+      - [Distal terminal ileum, "Bile salts, vitamin B12"]
+      - [Whole intestine and colon, "Water and electrolytes"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 248, quote: "Site of absorption of each element: at the Proximal small intestine: fat, iron, and calcium." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L09.027
+    kind: mcq
+    topic: mucosal
+    stem: A man had 120 cm of terminal ileum resected for Crohn disease. Which pair is he most likely to malabsorb?
+    options:
+      - Vitamin B12 and bile salts
+      - Iron and calcium
+      - Folic acid and carbohydrate
+      - Protein only
+      - Water-soluble vitamins only
+    answer: 0
+    why:
+      - "Correct: the distal terminal ileum absorbs bile salts and vitamin B12 (p249)."
+      - Iron and calcium are absorbed in the proximal small intestine.
+      - Folic acid and carbohydrate are absorbed in the proximal and middle parts.
+      - Protein is absorbed mainly in the middle part.
+      - Water-soluble vitamins are absorbed proximally and in the middle.
+    src: { page: 249, quote: "at the distal part of terminal ileum absorption of bile salt, Vit. B 12 occurs" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p249-250: causes ----------
+  - id: git.L09.028
+    kind: enumerate
+    topic: causes
+    prompt: Mention causes of impaired digestion.
+    points:
+      - "Exocrine pancreatic insufficiency: post pancreatectomy, advanced chronic pancreatitis, pancreatic hemochromatosis"
+      - "Reduced bile salts: bacterial overgrowth, chronic liver disease, ileal disease or resection"
+      - "Gastric surgery (Billroth, pyloroplasty, gastroenterostomy, vagotomy) and gastrocolic fistula"
+      - "Gastrinoma"
+    pass: 3
+    src: { page: 249, quote: "Reduced bile salt: which occurs in small intestinal Bacterial overgrowth, chronic Liver disease, Ileal disease and resection." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L09.029
+    kind: card
+    topic: causes
+    front: How does gastric surgery cause malabsorption?
+    back: Inadequate gastric mixing, rapid emptying, or both.
+    src: { page: 249, quote: "the mechanisms are Inadequate gastric mixing, rapid emptying, or both" }
+    status: unverified
+  - id: git.L09.030
+    kind: mcq
+    topic: causes
+    stem: A patient with recurrent duodenal ulcers, diarrhea and steatorrhea has a very high fasting gastrin. Why is fat malabsorbed?
+    options:
+      - Acid inactivates pancreatic enzymes
+      - Gastrin damages the villi directly
+      - Bile salts are lost in the ileum
+      - Lymphatics are obstructed
+    answer: 0
+    why:
+      - "Correct: in gastrinoma, gastrin-driven hyperacidity inactivates the pancreatic enzymes (p249)."
+      - The lecture gives no direct villous injury from gastrin.
+      - Ileal bile salt loss follows ileal disease or resection.
+      - Lymphatic obstruction is a postabsorptive cause such as lymphangiectasia.
+    src: { page: 249, quote: "Gastrinoma: due to the inactivation of the pancreatic enzymes by the hyperacidity stimulated by high gastrin level." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L09.031
+    kind: enumerate
+    topic: causes
+    prompt: Mention inherited defects that cause impaired absorption.
+    points:
+      - Glucose-galactose malabsorption
+      - Abetalipoproteinemia
+      - Cystinuria
+      - Hartnup disease
+      - Sucrase-isomaltase deficiency
+    pass: 3
+    src: { page: 249, quote: "Inherited defects include glucose-galactose malabsorption, abetalipoproteinemia, cystinuria, and Hartnup disease or Sucrose-isomaltase deficiency" }
+    status: unverified
+  - id: git.L09.032
+    kind: table
+    topic: causes
+    title: Acquired causes of impaired absorption
+    columns: [Mechanism, Examples]
+    rows:
+      - [Decreased absorptive surface, "Intestinal resection or bypass"]
+      - [Damaged absorbing surface, "Celiac sprue, tropical sprue, Crohn disease, AIDS enteropathy, chemotherapy, radiation"]
+      - [Infiltration of the wall, "Lymphoma, amyloidosis"]
+      - [Infections, "Bacterial overgrowth, giardiasis, Whipple disease, cryptosporidiosis, microsporidiosis"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 249, quote: "Acquired disorders are far more common and are caused by the following" }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L09.033
+    kind: card
+    topic: causes
+    front: Which are more common causes of impaired absorption, inherited or acquired defects?
+    back: Acquired disorders are far more common.
+    src: { page: 249, quote: "Acquired disorders are far more common" }
+    status: unverified
+  - id: git.L09.034
+    kind: card
+    topic: causes
+    front: How does IgA deficiency behave as a cause of malabsorption?
+    back: It is the most common immunodeficiency. Low or absent serum and intestinal IgA give a picture like celiac disease that does not respond to a gluten-free diet.
+    src: { page: 250, quote: "which clinically appears similar to celiac disease and is unresponsive to a gluten-free diet" }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L09.035
+    kind: card
+    topic: causes
+    front: What is acrodermatitis enteropathica?
+    back: An autosomal recessive disease with a selective inability to absorb zinc, leading to villous atrophy.
+    src: { page: 250, quote: "Acrodermatitis enteropathica is an autosomal recessive disease with selective inability to absorb zinc, leading to villous atrophy" }
+    status: unverified
+  - id: git.L09.036
+    kind: card
+    topic: causes
+    front: Describe autoimmune enteropathy.
+    back: Mostly diagnosed in children with intractable secretory diarrhea and villous atrophy, from antibodies against intestinal epithelial and goblet cells (also islet and parietal cells).
+    src: { page: 250, quote: "Autoimmune enteropathy is primarily diagnosed in children presenting with intractable secretory diarrhea and villous atrophy." }
+    status: unverified
+  - id: git.L09.037
+    kind: mcq
+    topic: causes
+    stem: A child has intractable secretory diarrhea and villous atrophy. Serology shows antibodies against enterocytes and goblet cells, and also islet cells. Most likely diagnosis?
+    options:
+      - Autoimmune enteropathy
+      - Celiac disease
+      - Acrodermatitis enteropathica
+      - Abetalipoproteinemia
+      - Intestinal lymphangiectasia
+    answer: 0
+    why:
+      - "Correct: autoimmune enteropathy comes from antibodies to intestinal epithelial and goblet cells, sometimes islet and parietal cells (p250)."
+      - Celiac disease has tTG or EMA antibodies, not anti-goblet cell antibodies.
+      - Acrodermatitis enteropathica is a zinc absorption defect.
+      - Abetalipoproteinemia is an inherited lipoprotein defect.
+      - Lymphangiectasia is a postabsorptive (lymphatic) cause.
+    src: { page: 250, quote: "antibodies directed against intestinal epithelial and goblet cells" }
+    status: unverified
+  - id: git.L09.038
+    kind: card
+    topic: causes
+    front: Give postabsorptive causes of malabsorption.
+    back: Lymphatic obstruction, for example lymphangiectasia and lymphoma.
+    src: { page: 250, quote: "Postabsorptive phase: Lymphatic obstruction e.g. lymphangiectasia and lymphoma." }
+    status: unverified
+  - id: git.L09.039
+    kind: enumerate
+    topic: causes
+    prompt: Mention drugs that cause malabsorption.
+    points:
+      - Cholestyramine
+      - Neomycin
+      - Colchicine
+      - Irritant laxatives
+    pass: 3
+    src: { page: 250, quote: "Drugs: cholestyramine, neomycin, colchicine, irritant laxative" }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L09.040
+    kind: enumerate
+    topic: causes
+    prompt: Mention other (systemic) causes of malabsorption listed with the drugs.
+    points:
+      - Congestive heart failure (small bowel congestion)
+      - Carcinoid tumor
+      - Diabetes mellitus
+      - Adrenal insufficiency
+      - Thyroid disorders
+    pass: 3
+    src: { page: 250, quote: "C.H.F, (congestion of the small intestine), carcinoid tumor, diabetes mellitus, adrenal insufficiency, thyroid disorders" }
+    status: unverified
+  # ---------- p255: Table 1 ----------
+  - id: git.L09.041
+    kind: table
+    topic: classification
+    title: Table 1, classification of causes of intestinal malabsorption
+    columns: [Dominant problem, Examples]
+    rows:
+      - [Impaired intraluminal digestion, "Pancreatic diseases, hepatobiliary disease, postgastrectomy malabsorption"]
+      - ["Impaired mucosal digestion, uptake and transport", "Celiac disease, refractory sprue, IPSID and lymphoma, tropical sprue, eosinophilic gastroenteritis, mastocytosis, radiation enteritis, amyloidosis, Whipple, Crohn, abetalipoproteinemia, parasites, carbohydrate intolerance"]
+      - [Both intraluminal and mucosal, "Bacterial overgrowth, short bowel syndrome, gastrinoma (Zollinger-Ellison)"]
+      - [Impaired postmucosal transport, "Primary and secondary intestinal lymphangiectasia"]
+    blanks: [[0, 1], [2, 1], [3, 1]]
+    src: { page: 255, quote: "Diseases in which impaired intraluminal digestion is dominant" }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L09.042
+    kind: mcq
+    topic: classification
+    stem: In Table 1 of the lecture, which condition impairs both intraluminal digestion and mucosal function?
+    options:
+      - Short bowel syndrome
+      - Celiac disease
+      - Primary intestinal lymphangiectasia
+      - Postgastrectomy malabsorption
+      - Hepatobiliary disease
+    answer: 0
+    why:
+      - "Correct: bacterial overgrowth, short bowel syndrome and gastrinoma impair both (p255)."
+      - Celiac disease is mainly a mucosal disease.
+      - Lymphangiectasia impairs postmucosal transport.
+      - Postgastrectomy malabsorption is mainly intraluminal.
+      - Hepatobiliary disease is mainly intraluminal (bile salts).
+    src: { page: 255, quote: "Intestinal bacterial overgrowth" }
+    status: unverified
+  - id: git.L09.043
+    kind: cloze
+    topic: classification
+    text: "In Table 1, primary and secondary intestinal {{c1::lymphangiectasia}} are the examples of impaired {{c2::postmucosal}} transport."
+    src: { page: 255, quote: "Primary intestinal lymphangiectasia" }
+    status: unverified
+  # ---------- p250-251: GI manifestations ----------
+  - id: git.L09.044
+    kind: enumerate
+    topic: gi
+    prompt: Mention gastrointestinal manifestations of malabsorption.
+    points:
+      - Diarrhea
+      - Weight loss
+      - Flatulence
+      - Abdominal bloating
+      - Abdominal cramps and pain
+    pass: 4
+    src: { page: 250, quote: "Diarrhea, weight loss, flatulence, abdominal bloating, abdominal cramps, and pain may be present." }
+    status: unverified
+  - id: git.L09.045
+    kind: card
+    topic: gi
+    front: Why do some patients with malabsorption complain of constipation?
+    back: Stools can range from over 10 watery stools a day to less than one voluminous putty-like stool; the bulky infrequent stool is felt as constipation.
+    src: { page: 250, quote: "less than one voluminous putty-like stool, the latter causing some patients to complain of constipation" }
+    status: unverified
+  - id: git.L09.046
+    kind: enumerate
+    topic: gi
+    prompt: What forms the stool mass in malabsorption?
+    points:
+      - Unabsorbed nutrients
+      - Water and electrolytes secreted by inflamed mucosa
+      - Unabsorbed fatty acids, turned into hydroxy fatty acids by colonic flora
+      - Unabsorbed bile acids, which make the colon secrete water and electrolytes
+    pass: 3
+    src: { page: 250, quote: "The stool mass is formed by unabsorbed nutrients, water and electrolytes secreted from the inflamed intestinal mucosa" }
+    status: unverified
+  - id: git.L09.047
+    kind: card
+    topic: gi
+    front: What causes excessive flatus and bloating in malabsorption?
+    back: Gas from fermentation of unabsorbed carbohydrate (especially with disaccharidase deficiency), plus fluid secreted by inflamed mucosa.
+    src: { page: 251, quote: "Excessive flatus and abdominal bloating may reflect excessive gas production due to fermentation of unabsorbed carbohydrate" }
+    status: unverified
+  - id: git.L09.048
+    kind: table
+    topic: gi
+    title: Abdominal pain in malabsorption
+    columns: [Pain, Diseases]
+    rows:
+      - [Common, "Chronic pancreatitis, pancreatic cancer, Crohn disease"]
+      - [Often absent, "Celiac disease, postgastrectomy malabsorption"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 251, quote: "pain is common in patients with chronic pancreatitis or pancreatic cancer and Crohn disease" }
+    status: unverified
+  # ---------- p251-252, Table 2: extraintestinal ----------
+  - id: git.L09.049
+    kind: card
+    topic: extra
+    front: How do more celiac patients present, with GI symptoms or without them?
+    back: More present with anemia and osteopenic bone disease without significant GI symptoms than with classic GI symptoms.
+    src: { page: 251, quote: "more patients with celiac disease present with anemia and osteopenic bone disease in the absence of significant gastrointestinal symptoms" }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L09.050
+    kind: table
+    topic: extra
+    title: Anemia type and the malabsorbed nutrient
+    columns: [Anemia, Malabsorbed]
+    rows:
+      - [Microcytic, Iron]
+      - [Macrocytic, Folate or vitamin B12]
+      - [Dimorphic, Iron plus folate or B12]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 251, quote: "Microcytic, macrocytic, or dimorphic anemia may reflect impaired iron, folate, or vitamin B12 malabsorption." }
+    status: unverified
+  - id: git.L09.051
+    kind: card
+    topic: extra
+    front: Why can malabsorption cause purpura, subconjunctival hemorrhage or frank bleeding?
+    back: Hypoprothrombinemia from vitamin K malabsorption.
+    src: { page: 251, quote: "Purpura, subconjunctival hemorrhage, or even frank bleeding may reflect hypoprothrombinemia secondary to vitamin K malabsorption." }
+    status: unverified
+  - id: git.L09.052
+    kind: enumerate
+    topic: extra
+    prompt: Why is osteopenic bone disease common in malabsorption, especially with steatorrhea?
+    points:
+      - Impaired calcium absorption
+      - Impaired vitamin D absorption
+      - Unabsorbed fatty acids chelate calcium, so it is lost in stool
+      - Prolonged calcium deficiency leads to secondary hyperparathyroidism
+    pass: 3
+    src: { page: 251, quote: "Impaired calcium and vitamin D absorption and chelation of calcium by unabsorbed fatty acids resulting in fecal loss of calcium" }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L09.053
+    kind: card
+    topic: extra
+    front: What endocrine effects can prolonged malnutrition cause?
+    back: Amenorrhea, infertility and impotence.
+    src: { page: 252, quote: "Prolonged malnutrition may induce amenorrhea, infertility, and impotence." }
+    status: unverified
+  - id: git.L09.054
+    kind: card
+    topic: extra
+    front: Why may edema and even ascites appear in malabsorption?
+    back: Hypoproteinemia from protein-losing enteropathy, caused by lymphatic obstruction or extensive mucosal inflammation.
+    src: { page: 252, quote: "Edema and even ascites may reflect hypoproteinemia associated with protein-losing enteropathy" }
+    status: unverified
+  - id: git.L09.055
+    kind: table
+    topic: extra
+    title: Table 2, clinical findings and their cause
+    columns: [Finding, Cause]
+    rows:
+      - ["Glossitis, stomatitis, cheilosis", "Iron, riboflavin, niacin deficiency"]
+      - [Microcytic anemia, "Iron, pyridoxine deficiency"]
+      - [Tetany, "Calcium, magnesium and vitamin D deficiency"]
+      - [Osteoarthropathy, Not known]
+      - ["Follicular hyperkeratosis and dermatitis", "Vitamin A, zinc, essential fatty acids, niacin deficiency"]
+      - [Hyperpigmentation, "Secondary hypopituitarism and adrenal insufficiency"]
+      - [Vesicular eruption, Dermatitis herpetiformis]
+      - ["Xerophthalmia, night blindness", Vitamin A deficiency]
+      - [Peripheral neuropathy, "Vitamin B12, thiamine deficiency"]
+    blanks: [[0, 1], [2, 1], [4, 1], [5, 1], [8, 1]]
+    src: { page: 256, quote: "Table 2: Clinical findings in intestinal malabsorption" }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L09.056
+    kind: mcq
+    topic: extra
+    stem: In Table 2, which cause is listed for hyperpigmentation in malabsorption?
+    options:
+      - Secondary hypopituitarism and adrenal insufficiency
+      - Vitamin K deficiency
+      - Niacin deficiency alone
+      - Dermatitis herpetiformis
+    answer: 0
+    why:
+      - "Correct: Table 2 links hyperpigmentation to secondary hypopituitarism and adrenal insufficiency (p256)."
+      - Vitamin K deficiency causes purpura and bleeding.
+      - Niacin is listed with glossitis and with follicular hyperkeratosis and dermatitis.
+      - Dermatitis herpetiformis causes a vesicular eruption.
+    src: { page: 256, quote: "Table 2: Clinical findings in intestinal malabsorption" }
+    status: unverified
+  # ---------- p256, Table 3 ----------
+  - id: git.L09.057
+    kind: table
+    topic: nutrients
+    title: Table 3, manifestation, laboratory finding and malabsorbed nutrient
+    columns: [Manifestation, Laboratory finding, Nutrient]
+    rows:
+      - ["Steatorrhea (bulky, light stools)", "High fecal fat; low cholesterol, carotene, vitamins A and D", "Fats; vitamins A, D, E, K"]
+      - ["Diarrhea", "High stool volume, fecal fat and osmolality gap", "Fats, carbohydrates"]
+      - ["Weight loss, muscle wasting", "High fecal fat; low D-xylose absorption", "Fat, protein, carbohydrate"]
+      - ["Paresthesia, tetany, Trousseau and Chvostek", "Low calcium or magnesium", "Calcium, vitamin D, magnesium"]
+      - ["Bleeding tendency", "Prolonged PT or INR", "Vitamin K"]
+      - ["Edema", "Low total protein and albumin; high fecal alpha-1-antitrypsin", "Protein"]
+      - ["Milk intolerance", "Abnormal lactose tolerance test", "Lactose"]
+    blanks: [[0, 2], [2, 1], [3, 2], [5, 1], [6, 1]]
+    src: { page: 256, quote: "Clinical manifestations and laboratory findings in malabsorption of various nutrients" }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L09.058
+    kind: mcq
+    topic: nutrients
+    stem: A patient with malabsorption has leg edema. Which laboratory finding from Table 3 fits protein loss into the gut?
+    options:
+      - Increased fecal alpha-1-antitrypsin
+      - Increased stool osmolality gap
+      - Abnormal lactose tolerance test
+      - Low serum iron
+      - Prolonged INR
+    answer: 0
+    why:
+      - "Correct: edema goes with low total protein and albumin and increased fecal alpha-1-antitrypsin (p256)."
+      - The osmolality gap points to carbohydrate malabsorption.
+      - The lactose tolerance test is for milk intolerance.
+      - Low iron gives microcytic anemia.
+      - A prolonged INR reflects vitamin K malabsorption.
+    src: { page: 256, quote: "Clinical manifestations and laboratory findings in malabsorption of various nutrients" }
+    status: unverified
+  # ---------- p252-253: stool and blood tests ----------
+  - id: git.L09.059
+    kind: cloze
+    topic: stool-blood
+    text: "In carbohydrate malabsorption the stool pH is acidic, below {{c1::6}}, and the stool {{c2::osmotic gap}} is increased."
+    src: { page: 252, quote: "Stool PH is acidic <6 and increased stool osmotic gap occurs in carbohydrate malabsorption." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: git.L09.060
+    kind: card
+    topic: stool-blood
+    front: What are the limits of stool elastase?
+    back: It is low in severe exocrine pancreatic disease but not significant in mild disease.
+    src: { page: 252, quote: "Stool elastase is low in severe exocrine pancreatic disorders but it is not signif icant in mild of the disease." }
+    status: unverified
+  - id: git.L09.061
+    kind: enumerate
+    topic: stool-blood
+    prompt: Mention the stool tests for malabsorption in the lecture.
+    points:
+      - Inspection by the physician
+      - Stool pH and osmotic gap (carbohydrate malabsorption)
+      - Ova and parasites
+      - Stool elastase (severe pancreatic insufficiency)
+    pass: 3
+    src: { page: 252, quote: "Stool examination for ova and parasites is essential to role out many forms of parasites" }
+    status: unverified
+  - id: git.L09.062
+    kind: card
+    topic: stool-blood
+    front: Which conditions interfere with vitamin B12 absorption and cause macrocytic anemia?
+    back: Ileal resection or severe ileal disease, bacterial overgrowth, and rarely severe pancreatic exocrine insufficiency.
+    src: { page: 252, quote: "Ileal resection or severe ileal disease as well as intraluminal bacterial overgrowth and, rarely, severe pancreatic exocrine insufficiency interfere with vitamin B12 absorption" }
+    status: unverified
+  - id: git.L09.063
+    kind: card
+    topic: stool-blood
+    front: What does normocytic anemia suggest in a patient with malabsorption?
+    back: Acute or subacute blood loss, as in Crohn disease, intestinal lymphoma or Whipple disease.
+    src: { page: 252, quote: "Normocytic anemia may reflect acute or subacute blood loss as may occur in Crohn disease, intestinal lymphoma, or Whipple disease." }
+    status: unverified
+  - id: git.L09.064
+    kind: table
+    topic: stool-blood
+    title: White cell and platelet clues
+    columns: [Finding, Suggests]
+    rows:
+      - [Eosinophilia, "Eosinophilic enteritis or some parasitic diseases"]
+      - [Profound lymphopenia, "Intestinal lymphangiectasia"]
+      - [Thrombocytosis, "Hyposplenism (some adults with celiac disease)"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 252, quote: "the differential count may reveal eosinophilia in eosinophilic enteritis or some parasitic diseases or profound lymphopenia in patients with intestinal lymphangiectasia" }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L09.065
+    kind: mcq
+    topic: stool-blood
+    stem: A 35-year-old with chronic diarrhea and edema has profound lymphopenia and low albumin. Which diagnosis do these findings point to?
+    options:
+      - Intestinal lymphangiectasia
+      - Eosinophilic enteritis
+      - Chronic pancreatitis
+      - Lactase deficiency
+    answer: 0
+    why:
+      - "Correct: profound lymphopenia points to intestinal lymphangiectasia (p252), and lymphatic obstruction causes protein-losing enteropathy and edema."
+      - Eosinophilic enteritis shows eosinophilia.
+      - Chronic pancreatitis causes steatorrhea with low elastase, not lymphopenia.
+      - Lactase deficiency causes bloating and acidic stool.
+    src: { page: 252, quote: "profound lymphopenia in patients with intestinal lymphangiectasia" }
+    status: unverified
+  - id: git.L09.066
+    kind: enumerate
+    topic: stool-blood
+    prompt: Mention blood chemistry and serology clues to malabsorption.
+    points:
+      - Low serum carotene (fat malabsorption)
+      - Low calcium or vitamin D
+      - Low serum albumin
+      - Prolonged prothrombin time (vitamin K)
+      - Celiac serology
+    pass: 3
+    src: { page: 253, quote: "low serum caroten in fat malabsorption, calcium or vitamin D deficiency, low serum albumin or prolonged prothrombin time" }
+    status: unverified
+  # ---------- p253-254: absorption and breath tests ----------
+  - id: git.L09.067
+    kind: card
+    topic: absorption-tests
+    front: Why can the D-xylose test separate small bowel disease from pancreatic insufficiency?
+    back: D-xylose is absorbed by passive diffusion in the small bowel, needs no pancreatic enzymes, and is excreted in urine. Low absorption means mucosal disease, not pancreatic disease.
+    src: { page: 253, quote: "D-xylose test can be useful to differentiate SB cause from pancreatic insufficiency." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L09.068
+    kind: cloze
+    topic: absorption-tests
+    text: "D-xylose test: after an oral dose of {{c1::25 g}}, normally {{c2::5 g}} or more appear in the urine over {{c3::5 hours}}, and blood reaches 25 mg/dL at 2 hours."
+    src: { page: 253, quote: "After administration of a 25-g dose orally to a well-hydrated patient, 5 g or more are normally excreted in the urine over 5 hours" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: git.L09.069
+    kind: mcq
+    topic: absorption-tests
+    stem: A patient with steatorrhea has low urinary and blood D-xylose after a 25 g oral dose. Where is the problem most likely?
+    options:
+      - Proximal small intestinal mucosa
+      - Exocrine pancreas
+      - Biliary tree
+      - Terminal ileum only
+      - Colon
+    answer: 0
+    why:
+      - "Correct: low urine and blood D-xylose suggests disease of the proximal small bowel mucosa, such as celiac disease (p253)."
+      - D-xylose needs no pancreatic enzymes, so pancreatic insufficiency leaves it normal.
+      - Absorbing D-xylose does not need bile salts.
+      - D-xylose is absorbed proximally, so a disease confined to the terminal ileum does not lower it.
+      - The colon does not absorb D-xylose.
+    src: { page: 253, quote: "Low urine excretion and blood levels suggest disease of the mucosa of the proximal small intestine such as celiac disease." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L09.070
+    kind: card
+    topic: absorption-tests
+    front: How is the oral glucose tolerance test read in malabsorption?
+    back: A low rise in blood glucose after a standard oral glucose dose suggests malabsorption.
+    src: { page: 253, quote: "after standard dose of oral glucose low rise is an indication of malabsorption" }
+    status: unverified
+  - id: git.L09.071
+    kind: card
+    topic: absorption-tests
+    front: What is the principle of the breath hydrogen test, and what gives a false positive?
+    back: Unabsorbed carbohydrate (such as lactose in lactase deficiency) is fermented by colonic bacteria into hydrogen, which is exhaled. SIBO gives a false positive with an early hydrogen rise.
+    src: { page: 253, quote: "small intestinal bacterial overgrowth may give false positive result with early increase in the level of hydrogen in exhaled air" }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L09.072
+    kind: table
+    topic: absorption-tests
+    title: The Schilling test, stage by stage
+    columns: [Stage, What is done, Normal result means]
+    rows:
+      - ["1", "Oral labelled B12 plus 1000 mcg IM unlabelled B12; 24-hour urine", "Urine below 8% of oral dose = B12 malabsorption"]
+      - ["2", "Repeat with intrinsic factor", "Pernicious anemia"]
+      - ["3", "Repeat with pancreatic enzymes", "Pancreatic insufficiency"]
+      - ["4", "Repeat after antibiotics with anaerobic cover", "Bacterial overgrowth"]
+    blanks: [[1, 2], [2, 2], [3, 2]]
+    src: { page: 254, quote: "Pernicious anemia is present if intrinsic factor normalizes absorption." }
+    status: unverified
+    tags: [high-yield]
+    update: { ref: "BSH guideline on cobalamin and folate disorders, 2014", text: "The Schilling test is no longer available in most countries because radiolabelled cobalamin was withdrawn; B12 causes are now worked up with serum B12, anti-intrinsic factor antibodies and other tests. Keep the book's stages for the exam." }
+  - id: git.L09.073
+    kind: cloze
+    topic: absorption-tests
+    text: "In stage 1 of the Schilling test, urinary excretion below {{c1::8%}} of the oral dose means cobalamin malabsorption; the 1000 mcg IM dose is given to {{c2::saturate hepatic binding sites}}."
+    src: { page: 254, quote: "urinary excretion of < 8% of the oral dose indicates malabsorption of cobalamin" }
+    status: unverified
+    tags: [numbers]
+  - id: git.L09.074
+    kind: mcq
+    topic: absorption-tests
+    stem: A patient's Schilling test stays abnormal in all four stages. What is the most likely cause?
+    options:
+      - Ileal disease or ileal resection
+      - Pernicious anemia
+      - Pancreatic insufficiency
+      - Bacterial overgrowth
+    answer: 0
+    why:
+      - "Correct: ileal disease or resection leaves every stage abnormal (p254)."
+      - Pernicious anemia corrects with intrinsic factor in stage 2.
+      - Pancreatic insufficiency corrects with pancreatic enzymes in stage 3.
+      - Bacterial overgrowth corrects after antibiotics in stage 4.
+    src: { page: 254, quote: "Cobalamin deficiency secondary to ileal disease or ileal resection results in abnormalities in all stages." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L09.075
+    kind: case
+    topic: absorption-tests
+    stem: A 50-year-old man had a Billroth II gastrectomy years ago. He now has bloating, diarrhea and macrocytic anemia.
+    steps:
+      - reveal: Serum B12 is low.
+        question: Stage 1 Schilling urine shows 3% of the oral dose. What does that mean?
+        options: [B12 malabsorption, Normal absorption, Pancreatic insufficiency confirmed, Pernicious anemia confirmed]
+        answer: 0
+        why: "Below 8% of the oral dose means cobalamin malabsorption (p254); the later stages find the cause."
+      - reveal: Adding intrinsic factor (stage 2) and pancreatic enzymes (stage 3) does not correct it.
+        question: Next stage?
+        options: [Repeat after antibiotics with anaerobic cover, Repeat with more intrinsic factor, Stop; this is ileal disease, Give IV B12 and repeat stage 1]
+        answer: 0
+        why: "Stage 4 repeats the test after antimicrobial therapy with anaerobic coverage (p254)."
+      - reveal: After antibiotics the result is normal.
+        question: Diagnosis?
+        options: [Bacterial overgrowth, Pernicious anemia, Ileal resection, Pancreatic insufficiency]
+        answer: 0
+        why: "Normalization after antibiotics suggests bacterial overgrowth (p254); a blind afferent loop after Billroth II is a classic stagnant loop."
+    src: { page: 254, quote: "normalization after antibiotics suggests bacterial overgrowth" }
+    status: unverified
+  # ---------- p254: imaging and endoscopy ----------
+  - id: git.L09.076
+    kind: enumerate
+    topic: imaging
+    prompt: Mention imaging studies used in malabsorption.
+    points:
+      - ERCP
+      - MRCP
+      - Abdominal CT
+      - Abdominal MRI
+      - Abdominal and endoscopic ultrasonography
+    pass: 3
+    src: { page: 254, quote: "Imaging studies: These include endoscopic retrograde cholangiopancreatography" }
+    status: unverified
+  - id: git.L09.077
+    kind: table
+    topic: imaging
+    title: Endoscopy and biopsy in malabsorption
+    columns: [Tool, Use]
+    rows:
+      - [Upper endoscopy (EGD), "See abnormalities and take duodenal biopsies (celiac disease, lymphangiectasia); not specific"]
+      - ["Enteroscopy (double balloon, single balloon, spiral)", "See and biopsy the small intestine"]
+      - [Wireless capsule, "See the whole small intestine (no biopsy)"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 254, quote: "upper endoscopy (EGD) to visualize the abnormalities" }
+    status: unverified
+  # ---------- book questions ----------
+  - id: git.L09.078
+    kind: essay
+    topic: extra
+    prompt: Mention extra-intestinal manifestations of malabsorption.
+    outline:
+      - "Blood": ["Microcytic, macrocytic or dimorphic anemia (iron, folate, B12)", "Purpura, subconjunctival hemorrhage, bleeding (vitamin K)"]
+      - "Bone and muscle": ["Osteopenic bone disease (calcium and vitamin D, calcium chelated by fatty acids)", "Secondary hyperparathyroidism", "Tetany (calcium, magnesium, vitamin D)"]
+      - "Endocrine": ["Amenorrhea, infertility, impotence"]
+      - "Skin and mucosa": ["Glossitis, stomatitis, cheilosis", "Follicular hyperkeratosis, dermatitis, hyperpigmentation", "Edema and ascites (protein-losing enteropathy)", "Vesicular eruption (dermatitis herpetiformis)"]
+      - "Nerves and eyes": ["Peripheral neuropathy (B12, thiamine)", "Night blindness, xerophthalmia (vitamin A)"]
+    src: { page: 251, quote: "Some patients with intestinal malabsorption present initially with symptoms or laboratory abnormalities that point to other organ systems" }
+    status: unverified
+    tags: [book-question]
+  - id: git.L09.079
+    kind: essay
+    topic: classification
+    prompt: Illustrate the causes of malabsorption, classified by pathogenesis.
+    outline:
+      - "Impaired digestion (luminal)": ["Pancreatic insufficiency", "Reduced bile salts: SIBO, liver disease, ileal disease", "Gastric surgery, gastrocolic fistula", "Gastrinoma (acid inactivates enzymes)"]
+      - "Impaired absorption (mucosal)": ["Inherited: glucose-galactose malabsorption, abetalipoproteinemia, cystinuria, Hartnup, sucrase-isomaltase", "Acquired: resection, celiac and tropical sprue, Crohn, lymphoma, amyloidosis, infections (Whipple, giardia)", "IgA deficiency, acrodermatitis enteropathica, autoimmune enteropathy"]
+      - "Postabsorptive": ["Lymphatic obstruction: lymphangiectasia, lymphoma"]
+      - "Other": ["Drugs: cholestyramine, neomycin, colchicine, laxatives", "CHF, carcinoid, diabetes, adrenal insufficiency, thyroid disease"]
+    src: { page: 249, quote: "The causes can be classified according to pathogenesis into" }
+    status: unverified
+    tags: [book-question]

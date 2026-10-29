@@ -1,0 +1,461 @@
+schema: batna.lesson/v1
+lecture: git.L09
+lessons:
+  # ------------------------------------------------------------------
+  - id: git.L09.lesson1
+    title: "رحلة الأكل: هضم وامتصاص في 3 مراحل"
+    hook: "عشان تفهم الـ malabsorption لازم تعرف الأكل بيتهضم ويتمص إزاي الأول. كل مرحلة ليها أمراضها."
+    minutes: 7
+    pages: [246, 249]
+    topics: [defs, fat, protein-cho, mucosal]
+    goals:
+      - "تعرّف الـ malabsorption وتفرّق الـ pan من الـ specific"
+      - "تمشي مع الدهون والبروتين والسكريات من البُق لحد الدم"
+      - "تعرف كل nutrient بيتمص فين في الأمعاء"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 246
+        title: "يعني إيه malabsorption؟"
+        quote: "This term defines as disorders in which there is a disruption of digestion and nutrient absorption."
+        text: |
+          الـ ==malabsorption== هو أي مرض بيبوّظ **الهضم** أو **امتصاص** الأكل.
+
+          نوعين:
+          - **Pan malabsorption** (GLOBAL): كل الأكل مش بيتمص.
+          - **Specific malabsorption** (PARTIAL): nutrient واحد أو نوع واحد، زي اللاكتوز.
+      - kind: figure
+        page: 246
+        quote: "In general, the digestion and absorption of food materials can be divided into three major phases: luminal, mucosal, and postabsorptive."
+        title: "3 مراحل، 3 أنواع أمراض"
+        alt: "Three boxes left to right joined by arrows: luminal phase in the gut lumen (pancreatic enzymes and bile; diseases are pancreatic insufficiency, low bile salts and gastric surgery), mucosal phase in the enterocyte (brush border enzymes and surface area; diseases are celiac disease, lactase deficiency and resection), postabsorptive phase in the lymphatics and portal blood (diseases are lymphangiectasia and lymphoma)."
+        caption: "الأكل بيعدّي على **3 محطات**: الـ lumen، بعدين الـ mucosa، بعدين الـ lymphatics والدم. اسأل نفسك دايمًا: العطل في أنهي محطة؟"
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L09a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="5" y="10" width="320" height="80" rx="8" class="fg-acc"/>
+            <text x="15" y="32" class="t-b">1 Luminal (intraluminal)</text>
+            <text x="15" y="52" class="t-sm">Pancreatic enzymes + bile salts</text>
+            <text x="15" y="72" class="t-sm t-mut">Pancreatic insufficiency, low bile salts, gastric surgery</text>
+            <path d="M165 90 L165 108" class="fg-arrow" marker-end="url(#L09a)"/>
+            <rect x="5" y="110" width="320" height="80" rx="8" class="fg-box"/>
+            <text x="15" y="132" class="t-b">2 Mucosal</text>
+            <text x="15" y="152" class="t-sm">Intact surface + brush border enzymes</text>
+            <text x="15" y="172" class="t-sm t-mut">Celiac, lactase deficiency, resection</text>
+            <path d="M165 190 L165 208" class="fg-arrow" marker-end="url(#L09a)"/>
+            <rect x="5" y="210" width="320" height="80" rx="8" class="fg-bad"/>
+            <text x="15" y="232" class="t-b">3 Postabsorptive</text>
+            <text x="15" y="252" class="t-sm">Lymphatics (chylomicrons) + portal blood</text>
+            <text x="15" y="272" class="t-sm t-mut">Lymphangiectasia, lymphoma</text>
+          </svg>
+      - kind: explain
+        page: 246
+        title: "الدهون: أصعب أكلة"
+        quote: "the fat digestion starts by the action of pancreatic lipase at the duodenum on the food bolus"
+        text: |
+          الـ ==pancreatic lipase== بيبدأ في الـ **duodenum**: يكسّر الـ long-chain triglycerides لـ **monoglycerides** و **free fatty acids**.
+
+          دول يتجمعوا مع الـ **bile acids** والـ phospholipids ويعملوا ==micelles== تدخل الـ jejunal enterocytes. جوّه الخلية يتعاد تركيبهم لـ **chylomicrons** تمشي في الـ **lymphatics**.
+      - kind: order
+        page: 246
+        quote: "combine with bile acids and phospholipids to form micelles that pass through jejunal enterocytes"
+        prompt: "رتّب رحلة الدهون (long-chain):"
+        steps:
+          - "Lipase splits triglycerides"
+          - "Micelles form with bile acids"
+          - "Micelles enter jejunal enterocytes"
+          - "Chylomicrons are built"
+          - "Lymphatics carry them away"
+        why: "Lipase الأول، بعدين bile salts تعمل micelles، تدخل الخلية، تتحول chylomicrons، وتمشي في الـ lymph. أي خطوة تقع = steatorrhea."
+      - kind: aside
+        tone: exam
+        page: 247
+        quote: "Medium chain triglycerides MCT absorbed directly into portal blood without the need of miceller formation."
+        text: |
+          الـ **MCT** (medium-chain triglycerides) بيتمص **مباشرة في الـ portal blood** من غير micelles ولا chylomicrons.
+
+          علشان كده الـ MCT oil بينفع عيان عنده نقص bile أو **lymphatic obstruction**.
+      - kind: explain
+        page: 247
+        title: "أرقام وفخاخ الدهون"
+        quote: "a person may lose nearly 90% of lipase output from the pancreas before the efficiency of fat digestion and absorption is affected"
+        text: |
+          - الـ lipase شغال أحسن على **pH 8** (alkaline)، والـ **hyperacidity** بتقفله.
+          - البنكرياس لازم يخسر حوالي ==90%== من الـ lipase قبل ما الدهون تتأثر.
+          - نقص الـ bile salts (biliary obstruction أو liver disease) = **mild steatorrhea** بس.
+          - الـ **bacterial overgrowth** بيعمل deconjugation للـ bile salts، فمفيش micelles. والـ bile salts اللي ما اتمصّتش بتعمل **إسهال** في القولون.
+          - الدهون اللي ما اتمصّتش بتاخد معاها الـ **A, D, E, K**.
+      - kind: explain
+        page: 247
+        title: "البروتين والسكريات"
+        quote: "Enterokinase, a brush border enzyme, activates trypsinogen into trypsin, which converts many pancreatic proteases into their active forms."
+        text: |
+          **البروتين**: الـ **pepsin** يبدأ في المعدة (pH 1–3، ويقف فوق 5)، ويطلّع **CCK** اللي بيشغّل البنكرياس. الـ ==enterokinase== في الـ brush border يحوّل **trypsinogen** لـ **trypsin**، والـ trypsin يشغّل باقي الإنزيمات. الناتج **oligopeptides** وأحماض أمينية.
+
+          **السكريات**: الـ amylase (ريق وبنكرياس) يكسّر النشا، والـ brush border يكسّر الـ disaccharides لـ glucose و galactose و fructose.
+      - kind: table
+        page: 248
+        quote: "Fructose is transported by facilitated diffusion, but glucose and galactose are transported by a sodium-dependent active transporter (SGLT-1)."
+        title: "السكر بيدخل الخلية إزاي؟"
+        columns: [Sugar, Transport]
+        rows:
+          - ["Fructose", "Facilitated diffusion"]
+          - ["Glucose", "SGLT-1 (sodium-dependent, active)"]
+          - ["Galactose", "SGLT-1 (sodium-dependent, active)"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: reveal
+        page: 248
+        quote: "Colonic bacteria ferment unabsorbed carbohydrates into carbon dioxide, methane, hydrogen, and short-chain fatty acids"
+        prompt: "عيان عنده lactase deficiency شرب كوباية لبن. ليه بيتنفخ وبيجيله إسهال؟"
+        answer: "اللاكتوز ما اتكسرش فوصل القولون. الـ **colonic bacteria** خمّرته لـ **CO2 و methane و hydrogen** (انتفاخ وغازات) و **short-chain fatty acids** (إسهال)."
+      - kind: explain
+        page: 248
+        title: "الـ mucosal phase والـ lactase"
+        quote: "Lactase deficiency, either primary or secondary, is the most common form of disaccharidase deficiency"
+        text: |
+          الـ mucosal phase محتاج **مساحة سليمة** و **brush border enzymes** سليمة.
+
+          ==Lactase deficiency== (primary أو secondary) هو **أشهر disaccharidase deficiency**. الـ secondary بييجي بعد **rotavirus أو giardia**، **alcoholism**، **celiac**، **radiation**، **Crohn**، و **AIDS enteropathy**.
+
+          وبعد الـ mucosa، الـ **postabsorptive phase**: الـ lymphatics والـ portal blood. لو الـ lymphatics اتسدت، الـ chylomicrons ما تمشيش.
+      - kind: figure
+        page: 248
+        quote: "Site of absorption of each element: at the Proximal small intestine: fat, iron, and calcium."
+        title: "خريطة الامتصاص"
+        alt: "A vertical small bowel strip from duodenum to colon with labels: proximal part absorbs fat, iron and calcium; proximal and middle parts absorb carbohydrate, folic acid and water-soluble vitamins; middle part absorbs protein; terminal ileum absorbs bile salts and vitamin B12; the whole gut and colon absorb water and electrolytes."
+        caption: "الحديد والكالسيوم **فوق**، الـ ==B12== والـ bile salts **تحت** في الـ terminal ileum. عشان كده الـ celiac بيعمل anemia حديد، والـ Crohn في الـ ileum بيعمل نقص B12."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <rect x="20" y="10" width="40" height="250" rx="16" class="fg-acc"/>
+            <rect x="20" y="10" width="40" height="70" rx="16" class="fg-good"/>
+            <rect x="20" y="200" width="40" height="60" rx="16" class="fg-bad"/>
+            <rect x="10" y="266" width="60" height="28" rx="8" class="fg-box"/>
+            <text x="40" y="285" text-anchor="middle" class="t-sm t-b">Colon</text>
+            <path d="M62 40 L84 40" class="fg-thin"/>
+            <text x="90" y="36" class="t-sm t-b">Proximal</text>
+            <text x="90" y="52" class="t-sm">fat, iron, calcium</text>
+            <path d="M62 100 L84 100" class="fg-thin"/>
+            <text x="90" y="96" class="t-sm t-b">Proximal + middle</text>
+            <text x="90" y="112" class="t-sm">carbohydrate, folic acid,</text>
+            <text x="90" y="128" class="t-sm">water-soluble vitamins</text>
+            <path d="M62 160 L84 160" class="fg-thin"/>
+            <text x="90" y="156" class="t-sm t-b">Middle</text>
+            <text x="90" y="172" class="t-sm">protein</text>
+            <path d="M62 230 L84 230" class="fg-thin"/>
+            <text x="90" y="226" class="t-sm t-b">Terminal ileum</text>
+            <text x="90" y="242" class="t-sm">bile salts, vitamin B12</text>
+            <text x="90" y="284" class="t-sm t-mut">Whole gut + colon: water, electrolytes</text>
+          </svg>
+      - kind: check
+        page: 249
+        quote: "at the distal part of terminal ileum absorption of bile salt, Vit. B 12 occurs"
+        question: "After terminal ileal resection, which pair is lost?"
+        options:
+          - "Vitamin B12 and bile salts"
+          - "Iron and calcium"
+          - "Folic acid and glucose"
+          - "Protein only"
+        answer: 0
+        why:
+          - "صح: الـ terminal ileum بيمص الـ B12 والـ bile salts."
+          - "دول proximal."
+          - "دول proximal و middle."
+          - "البروتين middle، ومش هو اللي بيضيع هنا."
+      - kind: try
+        items: [git.L09.003, git.L09.007, git.L09.012, git.L09.018, git.L09.026]
+    recap:
+      - "Malabsorption = عطل في الهضم أو الامتصاص؛ pan (global) أو specific (partial)."
+      - "3 مراحل: luminal، mucosal، postabsorptive."
+      - "الدهون: lipase ← micelles (bile) ← chylomicrons ← lymph. الـ MCT على الـ portal blood مباشرة."
+      - "Lipase pH 8، لازم يضيع 90% قبل الـ steatorrhea؛ الـ SIBO بيبوّظ الـ bile salts."
+      - "Fructose diffusion؛ glucose و galactose بالـ SGLT-1. Lactase deficiency أشهر disaccharidase deficiency."
+      - "حديد وكالسيوم فوق، B12 و bile salts في الـ terminal ileum."
+    practice: [git.L09.001, git.L09.002, git.L09.003, git.L09.004, git.L09.005, git.L09.006, git.L09.007, git.L09.008, git.L09.009, git.L09.010, git.L09.011, git.L09.012, git.L09.013, git.L09.014, git.L09.015, git.L09.016, git.L09.017, git.L09.018, git.L09.019, git.L09.020, git.L09.021, git.L09.022, git.L09.023, git.L09.024, git.L09.025, git.L09.026, git.L09.027]
+  # ------------------------------------------------------------------
+  - id: git.L09.lesson2
+    title: "الأسباب والأعراض: من الإسهال لحد العضم"
+    hook: "عيان ممكن ييجي بإسهال، أو ييجي بأنيميا وكسور ومفيش إسهال خالص. الاتنين malabsorption."
+    minutes: 7
+    pages: [249, 256]
+    topics: [causes, classification, gi, extra, nutrients]
+    goals:
+      - "تقسّم أسباب الـ malabsorption حسب المرحلة"
+      - "تعرف الأعراض المعوية وليه بتحصل"
+      - "تربط كل عَرَض برّه الأمعاء بالـ nutrient الناقص"
+    status: unverified
+    steps:
+      - kind: table
+        page: 249
+        quote: "The causes can be classified according to pathogenesis into"
+        title: "الأسباب حسب الـ pathogenesis"
+        columns: [Group, Examples]
+        rows:
+          - ["Impaired digestion", "Pancreatic insufficiency, low bile salts, gastric surgery, gastrinoma"]
+          - ["Impaired absorption, inherited", "Glucose-galactose malabsorption, abetalipoproteinemia, cystinuria, Hartnup, sucrase-isomaltase"]
+          - ["Impaired absorption, acquired", "Resection, celiac, tropical sprue, Crohn, lymphoma, amyloidosis, infections"]
+          - ["Post-absorptive", "Lymphangiectasia, lymphoma"]
+          - ["Other", "Cholestyramine, neomycin, colchicine, laxatives; CHF, carcinoid, diabetes, adrenal, thyroid"]
+        hide: [[0, 1], [3, 1], [4, 1]]
+      - kind: reveal
+        page: 249
+        quote: "Gastrinoma: due to the inactivation of the pancreatic enzymes by the hyperacidity stimulated by high gastrin level."
+        prompt: "الـ gastrinoma ورم بيطلّع gastrin. إيه دخله بالـ steatorrhea؟"
+        answer: "الـ **gastrin** العالي بيعمل **hyperacidity**، والحمض بيوصل الـ duodenum ويقفل الـ **pancreatic enzymes** (الـ lipase بيحب pH 8). فالدهون ما تتهضمش. افتكر الكلام ده من الدرس اللي فات."
+      - kind: aside
+        tone: trap
+        page: 250
+        quote: "which clinically appears similar to celiac disease and is unresponsive to a gluten-free diet"
+        text: |
+          عيان شكله **celiac** بالظبط، بس الـ **gluten-free diet** ما عملتش أي حاجة؟ فكّر في ==IgA deficiency== (أشهر immunodeficiency).
+
+          وفي الأطفال: **autoimmune enteropathy** (antibodies ضد الـ enterocytes والـ goblet cells، وساعات islet و parietal cells) بتعمل **secretory diarrhea** و villous atrophy. و **acrodermatitis enteropathica**: عيب وراثي في امتصاص الـ **zinc**.
+      - kind: sort
+        page: 255
+        quote: "Diseases in which impaired intraluminal digestion is dominant"
+        prompt: "Table 1: العطل الأساسي فين؟"
+        bins: ["Intraluminal digestion", "Mucosal", "Postmucosal transport"]
+        cards:
+          - { text: "Chronic pancreatitis", bin: 0 }
+          - { text: "Postgastrectomy", bin: 0 }
+          - { text: "Hepatobiliary disease", bin: 0 }
+          - { text: "Celiac disease", bin: 1 }
+          - { text: "Whipple disease", bin: 1 }
+          - { text: "Abetalipoproteinemia", bin: 1 }
+          - { text: "Primary lymphangiectasia", bin: 2 }
+          - { text: "Secondary lymphangiectasia", bin: 2 }
+        why: "وفيه مجموعة رابعة في Table 1 بتعمل الاتنين (luminal و mucosal): **bacterial overgrowth**، **short bowel syndrome**، و **gastrinoma**."
+      - kind: explain
+        page: 250
+        title: "الأعراض المعوية"
+        quote: "Diarrhea, weight loss, flatulence, abdominal bloating, abdominal cramps, and pain may be present."
+        text: |
+          **إسهال** (diarrhea)، **نزول وزن** (weight loss)، **غازات وانتفاخ** (flatulence، bloating)، و **مغص** (cramps).
+
+          الـ stool mass جاي من: أكل ما اتمصّش، مية وأملاح من الـ mucosa الملتهبة، **fatty acids** البكتيريا بتحولها لـ hydroxy fatty acids، و **bile acids** بتخلي القولون يفرز مية.
+
+          الغازات من **تخمير الكربوهيدرات** (خصوصًا مع الـ disaccharidase deficiency).
+      - kind: aside
+        tone: trap
+        page: 250
+        quote: "less than one voluminous putty-like stool, the latter causing some patients to complain of constipation"
+        text: |
+          مش كل malabsorption إسهال! ممكن **أكتر من 10 مرات مية** في اليوم، أو **أقل من مرة**: براز كبير زي **المعجون** (putty-like)، والعيان يقولك «عندي **إمساك**».
+      - kind: table
+        page: 251
+        quote: "pain is common in patients with chronic pancreatitis or pancreatic cancer and Crohn disease"
+        title: "الألم: موجود ولا لأ؟"
+        columns: [Pain, Diseases]
+        rows:
+          - ["Common", "Chronic pancreatitis, pancreatic cancer, Crohn disease"]
+          - ["Often absent", "Celiac disease, postgastrectomy malabsorption"]
+        hide: [[1, 1]]
+      - kind: explain
+        page: 251
+        title: "برّه الأمعاء"
+        quote: "more patients with celiac disease present with anemia and osteopenic bone disease in the absence of significant gastrointestinal symptoms"
+        text: |
+          عيانين **celiac** كتير بييجوا بـ ==anemia== و **osteopenic bone disease** **من غير** أعراض معوية تُذكر.
+
+          - **Anemia**: microcytic (حديد)، macrocytic (folate أو B12)، أو dimorphic.
+          - **نزيف و purpura**: نقص **vitamin K** (hypoprothrombinemia).
+          - **العضم**: كالسيوم و vitamin D قليلين، والـ fatty acids بتمسك الكالسيوم في البراز، ولو طوّل: **secondary hyperparathyroidism**.
+          - **Amenorrhea، infertility، impotence** من سوء التغذية.
+          - **Edema وحتى ascites** من الـ **protein-losing enteropathy**.
+      - kind: match
+        page: 256
+        quote: "Table 2: Clinical findings in intestinal malabsorption"
+        prompt: "Table 2: وصّل كل عَرَض بسببه:"
+        pairs:
+          - ["Night blindness", "Vitamin A deficiency"]
+          - ["Tetany", "Calcium, magnesium, vitamin D"]
+          - ["Purpura", "Vitamin K deficiency"]
+          - ["Glossitis, cheilosis", "Iron, riboflavin, niacin"]
+          - ["Peripheral neuropathy", "Vitamin B12, thiamine"]
+          - ["Hyperpigmentation", "Secondary hypopituitarism, adrenal insufficiency"]
+        why: "كل عَرَض برّه الأمعاء بيشاور على nutrient ناقص. الغريب فيهم الـ **hyperpigmentation**: سببها في الجدول **secondary hypopituitarism و adrenal insufficiency**، مش فيتامين."
+      - kind: table
+        page: 256
+        quote: "Clinical manifestations and laboratory findings in malabsorption of various nutrients"
+        title: "Table 3: العَرَض، التحليل، والناقص"
+        columns: [Manifestation, Lab, Nutrient]
+        rows:
+          - ["Steatorrhea", "High fecal fat, low carotene", "Fat, A D E K"]
+          - ["Weight loss", "Low D-xylose absorption", "Fat, protein, CHO"]
+          - ["Bleeding", "Prolonged PT/INR", "Vitamin K"]
+          - ["Edema", "High fecal alpha-1-antitrypsin", "Protein"]
+          - ["Milk intolerance", "Abnormal lactose tolerance", "Lactose"]
+        hide: [[0, 2], [2, 2], [3, 1], [4, 2]]
+      - kind: check
+        page: 256
+        quote: "Clinical manifestations and laboratory findings in malabsorption of various nutrients"
+        question: "Edema in malabsorption with high fecal alpha-1-antitrypsin points to loss of which nutrient?"
+        options:
+          - "Protein"
+          - "Lactose"
+          - "Vitamin K"
+          - "Iron"
+        answer: 0
+        why:
+          - "صح: protein-losing enteropathy، والـ alpha-1-antitrypsin في البراز دليله."
+          - "اللاكتوز = milk intolerance."
+          - "Vitamin K = نزيف و INR طويل."
+          - "الحديد = microcytic anemia."
+      - kind: try
+        items: [git.L09.028, git.L09.034, git.L09.041, git.L09.052, git.L09.055]
+    recap:
+      - "الأسباب: digestion (بنكرياس، bile، جراحة معدة، gastrinoma)، absorption (وراثي أو مكتسب)، postabsorptive (lymphatics)، وأدوية وأمراض عامة."
+      - "Gastrinoma: الحمض بيقفل الـ pancreatic enzymes."
+      - "شكل celiac ومش بيستجيب للـ GFD: فكّر في IgA deficiency."
+      - "الإسهال ممكن يبقى براز معجون مرة في اليوم، والعيان يقول إمساك."
+      - "الألم شائع في البنكرياس و Crohn، وغالبًا مش موجود في الـ celiac."
+      - "Anemia وعضم من غير أعراض معوية = celiac لحد ما يثبت العكس."
+    practice: [git.L09.028, git.L09.029, git.L09.030, git.L09.031, git.L09.032, git.L09.033, git.L09.034, git.L09.035, git.L09.036, git.L09.037, git.L09.038, git.L09.039, git.L09.040, git.L09.041, git.L09.042, git.L09.043, git.L09.044, git.L09.045, git.L09.046, git.L09.047, git.L09.048, git.L09.049, git.L09.050, git.L09.051, git.L09.052, git.L09.053, git.L09.054, git.L09.055, git.L09.056, git.L09.057, git.L09.058, git.L09.078, git.L09.079]
+  # ------------------------------------------------------------------
+  - id: git.L09.lesson3
+    title: "التحاليل: من البراز لحد الـ Schilling"
+    hook: "تحليل براز، D-xylose، نَفَس هيدروجين، و B12 على 4 مراحل. كل واحد بيسأل سؤال مختلف."
+    minutes: 7
+    pages: [252, 256]
+    topics: [stool-blood, absorption-tests, imaging]
+    goals:
+      - "تعرف تحاليل البراز والدم وبتقول إيه"
+      - "تفرّق الـ small bowel من البنكرياس بالـ D-xylose"
+      - "تقرا الـ Schilling test مرحلة مرحلة"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 252
+        title: "البراز أول حاجة"
+        quote: "Stool PH is acidic <6 and increased stool osmotic gap occurs in carbohydrate malabsorption."
+        text: |
+          الدكتور لازم **يبص** على البراز بنفسه.
+
+          - **pH أقل من 6** و **osmotic gap** عالي = ==carbohydrate malabsorption==.
+          - **Ova and parasites**: لازم، علشان طفيليات كتير بتعمل malabsorption.
+          - **Stool elastase**: بيقل في الـ **severe** pancreatic insufficiency بس، ومش مفيد في الـ mild.
+      - kind: table
+        page: 252
+        quote: "the differential count may reveal eosinophilia in eosinophilic enteritis or some parasitic diseases or profound lymphopenia in patients with intestinal lymphangiectasia"
+        title: "الـ CBC بيقول إيه؟"
+        columns: [Finding, Think of]
+        rows:
+          - ["Low MCV", "Microcytic: iron deficiency or blood loss (proximal disease: celiac, Whipple)"]
+          - ["High MCV", "Macrocytic: folate or B12 (ileal disease, SIBO, rarely pancreas)"]
+          - ["Normal MCV", "Normocytic: acute blood loss: Crohn, lymphoma, Whipple"]
+          - ["Eos high", "Eosinophilia: eosinophilic enteritis, parasites"]
+          - ["Lymph low", "Profound lymphopenia: intestinal lymphangiectasia"]
+          - ["Platelets high", "Thrombocytosis: hyposplenism in celiac"]
+        hide: [[2, 1], [3, 1], [4, 1], [5, 1]]
+      - kind: aside
+        tone: tip
+        page: 253
+        quote: "low serum caroten in fat malabsorption, calcium or vitamin D deficiency, low serum albumin or prolonged prothrombin time"
+        text: |
+          كيميا تفيدك: **carotene قليل** (دهون)، **كالسيوم و vitamin D** قليلين، **albumin** واطي، **PT طويل** (vitamin K)، و **celiac serology**.
+      - kind: explain
+        page: 253
+        title: "الـ D-xylose: البنكرياس بريء؟"
+        quote: "D-xylose test can be useful to differentiate SB cause from pancreatic insufficiency."
+        text: |
+          الـ ==D-xylose== سكر بيتمص بالـ **passive diffusion** في الـ small bowel، و**مش محتاج pancreatic enzymes**، وبيطلع في البول.
+
+          اديله **25 g** بالبُق: الطبيعي **5 g أو أكتر** في البول خلال **5 ساعات**، والدم يوصل **25 mg/dL** بعد ساعتين.
+
+          لو **قليل** = المشكلة في الـ **mucosa** بتاعة الـ proximal small bowel (زي celiac). لو **طبيعي** مع steatorrhea = دوّر على البنكرياس.
+      - kind: figure
+        page: 253
+        quote: "Low urine excretion and blood levels suggest disease of the mucosa of the proximal small intestine such as celiac disease."
+        title: "شجرة الـ D-xylose"
+        alt: "Flow chart: steatorrhea leads to an oral 25 g D-xylose test; a low urine and blood level points to proximal small bowel mucosal disease such as celiac disease; a normal level with steatorrhea points to pancreatic insufficiency, because D-xylose needs no pancreatic enzymes."
+        caption: "الـ D-xylose مش محتاج البنكرياس. فلو اتمص كويس والدهون لسه بايظة، العيب في ==pancreatic insufficiency==."
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L09b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="65" y="5" width="200" height="48" rx="8" class="fg-acc"/>
+            <text x="165" y="25" text-anchor="middle" class="t-b">Steatorrhea</text>
+            <text x="165" y="43" text-anchor="middle" class="t-sm">oral D-xylose 25 g</text>
+            <path d="M120 53 L80 100" class="fg-arrow" marker-end="url(#L09b)"/>
+            <path d="M210 53 L250 100" class="fg-arrow" marker-end="url(#L09b)"/>
+            <text x="85" y="76" text-anchor="end" class="t-sm t-mut">low</text>
+            <text x="245" y="76" class="t-sm t-mut">normal</text>
+            <rect x="5" y="103" width="150" height="90" rx="8" class="fg-bad"/>
+            <text x="80" y="125" text-anchor="middle" class="t-sm t-b">Mucosal disease</text>
+            <text x="80" y="145" text-anchor="middle" class="t-sm">proximal small bowel</text>
+            <text x="80" y="163" text-anchor="middle" class="t-sm">e.g. celiac disease</text>
+            <rect x="175" y="103" width="150" height="90" rx="8" class="fg-box"/>
+            <text x="250" y="125" text-anchor="middle" class="t-sm t-b">Pancreatic</text>
+            <text x="250" y="143" text-anchor="middle" class="t-sm t-b">insufficiency</text>
+            <text x="250" y="163" text-anchor="middle" class="t-sm">xylose needs no</text>
+            <text x="250" y="179" text-anchor="middle" class="t-sm">pancreatic enzymes</text>
+            <text x="165" y="225" text-anchor="middle" class="t-sm t-mut">Normal: 5 g or more in urine over 5 h; blood 25 mg/dL at 2 h</text>
+          </svg>
+      - kind: reveal
+        page: 253
+        quote: "small intestinal bacterial overgrowth may give false positive result with early increase in the level of hydrogen in exhaled air"
+        prompt: "الـ breath hydrogen test طلع إيجابي بدري جدًا بعد اللاكتوز. ده lactase deficiency أكيد؟"
+        answer: "مش شرط. الفكرة إن الكربوهيدرات اللي ما اتمصّتش بتتخمّر في **القولون** وتطلّع hydrogen في النَفَس. بس لو فيه **SIBO**، البكتيريا موجودة **فوق** في الـ small bowel، فالـ hydrogen يطلع **بدري**، وده **false positive**. (والـ **OGTT**: لو الجلوكوز ما طلعش كفاية في الدم = malabsorption.)"
+      - kind: explain
+        page: 253
+        title: "الـ Schilling test: 4 أسئلة لـ B12"
+        quote: "Its 4 stages determine whether the deficiency results from pernicious anemia, pancreatic exocrine insufficiency, bacterial overgrowth, or ileal disease."
+        text: |
+          **Stage 1**: B12 مُعلَّم بالبُق + **1000 mcg B12 IM** (علشان يملا أماكن الربط في الكبد)، وتجمع بول 24 ساعة. أقل من ==8%== = في malabsorption.
+
+          بعد كده تعيد وتضيف حاجة كل مرة. **اللي يصلّح الرقم هو التشخيص**:
+          - **Stage 2** + intrinsic factor ← **pernicious anemia**
+          - **Stage 3** + pancreatic enzymes ← **pancreatic insufficiency**
+          - **Stage 4** بعد antibiotics (anaerobic) ← **bacterial overgrowth**
+          - ولا حاجة صلّحت؟ ← **ileal disease أو resection**
+      - kind: mnemonic
+        page: 254
+        quote: "Stage 2: If stage 1 is abnormal, the test is repeated with the addition of intrinsic factor."
+        word: "BIPA"
+        parts:
+          - { key: "B", text: "Stage 1: B12 alone (labelled oral + IM flush)" }
+          - { key: "I", text: "Stage 2: Intrinsic factor fixes it = pernicious anemia" }
+          - { key: "P", text: "Stage 3: Pancreatic enzymes fix it = pancreatic insufficiency" }
+          - { key: "A", text: "Stage 4: Antibiotics fix it = bacterial overgrowth" }
+        hook: "**BIPA**: بتضيف حرف كل مرحلة. ولو الأربعة فشلوا، العيب في الـ **ileum** نفسه."
+      - kind: update
+        page: 254
+        quote: "Stage 1: The patient is given 1 mcg of radiolabeled cyanocobalamin po concurrent with 1000 mcg of nonlabeled cobalamin IM"
+        text: "الـ **Schilling test** مش متاح تقريبًا في أي حتة دلوقتي، لأن الـ radiolabelled cobalamin اتسحب من السوق. الشغل بقى بـ serum B12 و anti-intrinsic factor antibodies وتحاليل تانية. في الامتحان اكتب مراحل الكتاب الأربعة."
+        ref: "BSH guideline on cobalamin and folate disorders, 2014"
+      - kind: case
+        page: 254
+        quote: "Stage 4 is done after antimicrobial therapy with anaerobic coverage; normalization after antibiotics suggests bacterial overgrowth."
+        stem: "Man, 50, Billroth II gastrectomy years ago. Bloating, diarrhea, macrocytic anemia, low serum B12."
+        steps:
+          - question: "Stage 1 urine: 3% of the oral dose. Meaning?"
+            options: ["B12 malabsorption", "Normal", "Pernicious anemia confirmed", "Pancreatic insufficiency confirmed"]
+            answer: 0
+            why: "أقل من 8% = malabsorption. لسه ما نعرفش السبب."
+          - question: "Stages 2 and 3 stay abnormal; stage 4 (after antibiotics) is normal. Diagnosis?"
+            options: ["Bacterial overgrowth", "Ileal resection", "Pernicious anemia", "Pancreatic insufficiency"]
+            answer: 0
+            why: "الـ antibiotics هي اللي صلّحت = **bacterial overgrowth**، والـ afferent loop بتاع الـ Billroth II مكان مثالي للبكتيريا. لو كان ileal كان فضل abnormal في الأربعة."
+      - kind: explain
+        page: 254
+        title: "أشعة ومناظير"
+        quote: "Wirelessintestinalcapsulecanvisualizeallthesmallintestines."
+        text: |
+          **أشعة**: ERCP، MRCP، CT، MRI، و abdominal أو endoscopic ultrasound (للبنكرياس والقنوات).
+
+          **مناظير**:
+          - **Upper endoscopy (EGD)** + biopsies من الـ duodenum (celiac، lymphangiectasia)، بس مش specific.
+          - **Enteroscopy** (double balloon، single balloon، spiral): يشوف ويـbiopsy الـ small bowel.
+          - ==Wireless capsule==: يشوف الـ small bowel **كله**.
+      - kind: try
+        items: [git.L09.059, git.L09.064, git.L09.069, git.L09.072, git.L09.074]
+    recap:
+      - "Stool pH أقل من 6 و osmotic gap = كربوهيدرات؛ elastase بيبان في الـ severe pancreatic بس."
+      - "Lymphopenia = lymphangiectasia؛ eosinophilia = eosinophilic enteritis أو طفيليات؛ thrombocytosis = hyposplenism."
+      - "D-xylose 25 g: طبيعي 5 g في 5 ساعات. قليل = mucosa؛ طبيعي مع steatorrhea = بنكرياس."
+      - "Breath hydrogen: الـ SIBO بيدّي false positive بدري."
+      - "Schilling **BIPA**؛ الأربعة abnormal = ileum."
+      - "صفحات 257–268 هي محاضرة الـ celiac (محاضرة 8) بالحرف، فذاكرها من دروس محاضرة 8."
+    practice: [git.L09.059, git.L09.060, git.L09.061, git.L09.062, git.L09.063, git.L09.064, git.L09.065, git.L09.066, git.L09.067, git.L09.068, git.L09.069, git.L09.070, git.L09.071, git.L09.072, git.L09.073, git.L09.074, git.L09.075, git.L09.076, git.L09.077]

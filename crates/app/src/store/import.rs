@@ -69,11 +69,19 @@ pub struct TablePlan {
     pub new: usize,
     /// Rows newer than this device's copy (they replace it).
     pub newer: usize,
+    /// After an import: rows this build couldn't take (a missing key, HLC or
+    /// NOT NULL column). Always 0 in a plan.
+    pub failed: usize,
 }
 
 impl ImportPlan {
     pub fn changes(&self) -> usize {
         self.tables.iter().map(|t| t.new + t.newer).sum()
+    }
+
+    /// Rows an import couldn't take.
+    pub fn failed(&self) -> usize {
+        self.tables.iter().map(|t| t.failed).sum()
     }
 
     #[cfg(test)]
@@ -187,36 +195,66 @@ impl Store {
         Ok(plan)
     }
 
-    /// Merges `doc` into the store in one transaction. Returns what changed.
+    /// Merges `doc` into the store in one transaction. Returns what actually
+    /// changed, counted row by row as it is written, and the rows that
+    /// couldn't be taken, so the screen never reports the plan as done.
     pub fn apply_import(&self, doc: &Value) -> Result<ImportPlan, ImportError> {
-        let plan = self.plan_import(doc)?;
+        let planned = self.plan_import(doc)?;
         let tables = doc["tables"].as_object().ok_or(ImportError::NotBatna)?;
         let mut targets = BTreeMap::new();
-        for t in &plan.tables {
+        for t in &planned.tables {
             if let Some(target) = self.target(&t.name)? {
                 targets.insert(t.name.clone(), target);
             }
         }
+        let mut done = ImportPlan { tables: Vec::new(), ..planned.clone() };
         let mut newest: Option<Hlc> = None;
         let device = self.device();
         {
             let mut conn = self.conn.lock().unwrap();
             let tx = conn.transaction()?;
-            for (name, target) in &targets {
+            for t in &planned.tables {
+                let Some(target) = targets.get(&t.name) else { continue };
+                let name = &t.name;
+                let mut out = TablePlan { name: name.clone(), rows: t.rows, ..TablePlan::default() };
                 for row in rows_of(&tables[name]) {
-                    let Some(obj) = row.as_object() else { continue };
-                    let Some((_, hlc)) = key_and_hlc(row, &target.key) else { continue };
-                    // A row this build can't take (a missing NOT NULL column) is skipped.
-                    let Ok(changed) = merge_row(&tx, name, target, obj) else { continue };
-                    // What the backup brought goes on to Batna Cloud too, as a
-                    // relay when another device wrote it.
-                    if changed && let Some(key) = row[target.key.as_str()].as_str() {
-                        sync::enqueue(&tx, name, &target.key, key, &device)?;
+                    let (Some(obj), Some((id, hlc))) = (row.as_object(), key_and_hlc(row, &target.key))
+                    else {
+                        out.failed += 1;
+                        continue;
+                    };
+                    let had: bool = tx.query_row(
+                        &format!("SELECT EXISTS (SELECT 1 FROM \"{name}\" WHERE \"{}\" = ?1)", target.key),
+                        [&id],
+                        |r| r.get(0),
+                    )?;
+                    // A row this build can't take (a missing NOT NULL column) is
+                    // counted, not hidden.
+                    let changed = match merge_row(&tx, name, target, obj) {
+                        Ok(changed) => changed,
+                        Err(e) => {
+                            crate::diag::report!("import: a row of {name} was not merged: {e}");
+                            out.failed += 1;
+                            continue;
+                        }
+                    };
+                    if changed {
+                        if had {
+                            out.newer += 1
+                        } else {
+                            out.new += 1
+                        }
+                        // What the backup brought goes on to Batna Cloud too, as a
+                        // relay when another device wrote it.
+                        if let Some(key) = row[target.key.as_str()].as_str() {
+                            sync::enqueue(&tx, name, &target.key, key, &device)?;
+                        }
                     }
                     if newest.as_ref().is_none_or(|n| hlc > *n) {
                         newest = Some(hlc);
                     }
                 }
+                done.tables.push(out);
             }
             tx.commit()?;
         }
@@ -224,7 +262,7 @@ impl Store {
         if let Some(h) = newest {
             self.clock.lock().unwrap().observe(&h);
         }
-        Ok(plan)
+        Ok(done)
     }
 }
 
@@ -313,6 +351,29 @@ mod tests {
         assert_eq!(tablet.plan_import(&doc).unwrap().changes(), 0);
         tablet.apply_import(&doc).unwrap();
         assert_eq!(tablet.reviews().unwrap().len(), 3);
+    }
+
+    #[test]
+    fn rows_that_fail_are_counted_not_reported_as_merged() {
+        let phone = Store::open_in_memory().unwrap();
+        phone.append_review(ev("hb.L01.001", 10)).unwrap();
+        phone.append_review(ev("hb.L01.002", 20)).unwrap();
+        phone.append_review(ev("hb.L01.003", 30)).unwrap();
+        let mut doc = round_trip(&phone);
+        let rows = doc["tables"]["review_events"]["rows"].as_array_mut().unwrap();
+        // One row this build can't take (a NOT NULL column missing), one
+        // with no HLC at all.
+        rows[0].as_object_mut().unwrap().remove("item_id");
+        rows[1].as_object_mut().unwrap().remove("hlc_wall");
+
+        let tablet = Store::open_in_memory().unwrap();
+        assert_eq!(tablet.plan_import(&doc).unwrap().table("review_events").unwrap().new, 2);
+        let done = tablet.apply_import(&doc).unwrap();
+        let t = done.table("review_events").unwrap();
+        assert_eq!((t.rows, t.new, t.newer, t.failed), (3, 1, 0, 2));
+        assert_eq!(done.changes(), 1);
+        assert_eq!(done.failed(), 2);
+        assert_eq!(tablet.reviews().unwrap().len(), 1);
     }
 
     #[test]

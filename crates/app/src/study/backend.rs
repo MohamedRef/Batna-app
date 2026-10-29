@@ -20,14 +20,14 @@ pub(super) struct MemoryStore {
 
 impl StudyStore for MemoryStore {
     fn record(&mut self, event: ReviewEvent) {
-        self.record_logged(event);
+        let _ = self.record_logged(event);
     }
-    fn record_logged(&mut self, event: ReviewEvent) -> Option<String> {
+    fn record_logged(&mut self, event: ReviewEvent) -> Result<Option<String>, String> {
         self.next += 1;
         let id = format!("mem-{}", self.next);
         self.ids.push(id.clone());
         self.sink.record(event);
-        Some(id)
+        Ok(Some(id))
     }
     fn retract(&mut self, event_id: &str) -> bool {
         let Some(i) = self.ids.iter().position(|x| x == event_id) else { return true };

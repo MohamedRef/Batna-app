@@ -1,0 +1,722 @@
+schema: batna.content/v1
+lecture: res.L02
+title: Measures of disease frequency
+author: Prof. Nadia Farghaly
+book: { chapter: 1, pages: [1, 71] }
+topics:
+  - { id: definition, title: "Definition and components of epidemiology" }
+  - { id: uses, title: "Uses of epidemiology" }
+  - { id: sources, title: "Sources of epidemiological data" }
+  - { id: measures, title: "Counts, proportions and rates" }
+  - { id: incidence, title: "Incidence rate and attack rate" }
+  - { id: prevalence, title: "Prevalence and its link to incidence" }
+  - { id: secondary, title: "Secondary attack rate and recovery rate" }
+  - { id: mortality, title: "Mortality rates and ratios" }
+items:
+  # ---------- slides 2-11: definition and components ----------
+  - id: res.L02.001
+    kind: card
+    topic: definition
+    front: Define epidemiology.
+    back: The study of the frequency, distribution and determinants of health-related phenomena in the human population.
+    src: { page: 3, quote: "Epidemiology is the study of ▪ Frequency ▪ Distribution ▪ Determinants of health related phenomenon in the human population." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L02.002
+    kind: cloze
+    topic: definition
+    text: "The three components of epidemiology are disease {{c1::frequency}}, {{c2::distribution}} and {{c3::determinants}}."
+    src: { page: 7, quote: "Disease frequency Distribution of disease Determinants of disease" }
+    status: unverified
+  - id: res.L02.003
+    kind: table
+    topic: definition
+    title: The components of epidemiology
+    columns: [Component, What it covers, Branch]
+    rows:
+      - [Frequency, Rates and ratios, "Measurement (this lecture)"]
+      - [Distribution, "Who? When? Where?", Descriptive epidemiology]
+      - [Determinants, Test hypotheses and identify causes or risk factors, Analytic epidemiology]
+    blanks: [[0, 1], [1, 1], [1, 2], [2, 2]]
+    src: { page: 8, quote: "1.Frequency Rates & Ratios 2.Distribution Who? When? Where? Descriptive epidemiology" }
+    status: unverified
+  - id: res.L02.004
+    kind: card
+    topic: definition
+    front: What is "distribution" in epidemiology, and what is "determinants"?
+    back: "Distribution: how disease distributes in the human population (who, when, where). Determinants: what determines differences in disease risk among different population subgroups."
+    src: { page: 6, quote: "What determines differences in disease risk among different population subgroups “Determinants”" }
+    status: unverified
+  - id: res.L02.005
+    kind: mcq
+    topic: definition
+    stem: A study maps HBV prevalence by country as low (<2%), intermediate (2-8%) and high (>8%) endemicity. Which component of epidemiology does it describe?
+    options: [Distribution, Determinants, Frequency only, Intervention]
+    answer: 0
+    why:
+      - Correct. Where the disease is, and how much in each place, is its distribution (slides 4-5).
+      - Determinants would explain why risk differs between groups.
+      - It does use frequency, but mapping it by place is distribution.
+      - No intervention is tested.
+    src: { page: 5, quote: "Low endemicity <2% Intermediate endemicity 2-8% High endemicity >8%" }
+    status: unverified
+  - id: res.L02.006
+    kind: card
+    topic: definition
+    front: How does knowledge of frequency and distribution lead to analytic epidemiology?
+    back: Frequency and distribution let you formulate a hypothesis about possible causal or preventive factors. Analytic epidemiology then tests the hypothesis and identifies causes or risk factors (determinants).
+    src: { page: 9, quote: "Knowledge of frequency and distribution Formulate hypothesis Possible causal or preventive factors" }
+    status: unverified
+  - id: res.L02.007
+    kind: table
+    topic: definition
+    title: Descriptive vs analytic epidemiology
+    columns: [Branch, What it does]
+    rows:
+      - [Descriptive, "Examines, identifies and reports the frequency and distribution of disease in a population"]
+      - [Analytic, "Identifies factors underlying disease; tests a hypothesis by studying how exposures relate to outcomes"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 10, quote: "Testing a hypothesis by studying how exposures relate to outcomes" }
+    status: unverified
+  - id: res.L02.008
+    kind: order
+    topic: definition
+    prompt: Put the logical sequence of epidemiology in disease prevention in order.
+    steps: [Descriptive, Analytical, Interventions, Programs]
+    src: { page: 11, quote: "Descriptive Analytical Interventions Programs Disease prevention" }
+    status: unverified
+  # ---------- slides 12-15: uses ----------
+  - id: res.L02.009
+    kind: enumerate
+    topic: uses
+    prompt: List the uses of epidemiology (5).
+    points:
+      - Natural history of disease
+      - Classification of disease
+      - Identify determinants (risk factors)
+      - Planning and evaluation
+      - Data on availability, accessibility and utilization (of services)
+    pass: 4
+    src: { page: 12, quote: "1.Natural history of disease 2.Classification of disease 3.Identify determinants (risk factors) 4.Planning and evaluation" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L02.010
+    kind: order
+    topic: uses
+    prompt: Order the stages of the natural history of disease.
+    steps:
+      - Stage of susceptibility
+      - Stage of subclinical disease
+      - Stage of clinical disease
+      - Stage of recovery, disability or death
+    src: { page: 13, quote: "Stage of Stage of Stage of Stage of Recovery, Susceptibility Subclinical Disease Clinical Disease Disability or Death" }
+    status: unverified
+  - id: res.L02.011
+    kind: mcq
+    topic: uses
+    stem: In the natural history timeline, which event marks the start of the stage of subclinical disease?
+    options: [Pathologic changes, Exposure, Onset of symptoms, Usual time of diagnosis]
+    answer: 0
+    why:
+      - Correct. Exposure happens in susceptibility; pathologic changes open the subclinical stage.
+      - Exposure comes earlier, in the stage of susceptibility.
+      - Onset of symptoms starts the stage of clinical disease.
+      - Diagnosis usually comes after the onset of symptoms, within clinical disease.
+    src: { page: 13, quote: "Pathologic Onset of Exposure Changes Symptoms" }
+    status: unverified
+  - id: res.L02.012
+    kind: card
+    topic: uses
+    front: How does epidemiology classify diseases, compared with clinicians?
+    back: "Clinically: by presentation (diarrheal, respiratory, febrile diseases), which guides treatment. Epidemiologically: by mode of transmission (water-borne, food-borne, vector-borne), which guides prevention."
+    src: { page: 14, quote: "By mode of transmission ▪ Water born ▪ Food borne ▪ Vector born" }
+    status: unverified
+  - id: res.L02.013
+    kind: card
+    topic: uses
+    front: Give examples of epidemiology used for planning and evaluation.
+    back: Measuring the extent of a health problem to plan health services, evaluating an immunization program, and data on the availability, accessibility and utilization of services.
+    src: { page: 15, quote: "The extent of a health problem for planning health services ▪ Evaluation of an immunization program" }
+    status: unverified
+  # ---------- slides 16-20: sources ----------
+  - id: res.L02.014
+    kind: enumerate
+    topic: sources
+    prompt: List the 9 sources of epidemiological data.
+    points:
+      - Census
+      - Population estimates
+      - Vital records (birth and death registration)
+      - Notification of infectious diseases
+      - Disease registers
+      - Hospital records (inpatient and outpatient)
+      - Special subgroups records
+      - Morbidity surveys
+      - Record linkage
+    pass: 7
+    src: { page: 16, quote: "1.Census 2.Population estimates" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L02.015
+    kind: card
+    topic: sources
+    front: What is record linkage?
+    back: Linking records that belong to the same individual from different sources.
+    src: { page: 20, quote: "9.Record Linkage To link records that belong to the same individual from different sources" }
+    status: unverified
+  - id: res.L02.016
+    kind: mcq
+    topic: sources
+    stem: The National Cancer Registry in Egypt is an example of which source of epidemiological data?
+    options: [Disease registers, Vital records, Notification of infectious diseases, Census]
+    answer: 0
+    why:
+      - Correct. Registers cover diseases of public health importance (cancer, TB, hepatitis).
+      - Vital records are birth and death registration.
+      - Notification is for infectious diseases and shows their fluctuation.
+      - The census counts the population; it is used to plan services and compute rates.
+    src: { page: 18, quote: "5.Disease registers ▪ Diseases of public health importance Examples National cancer registry in EGYPT" }
+    status: unverified
+  - id: res.L02.017
+    kind: card
+    topic: sources
+    front: What are the census and population estimates used for, and what does notification of infectious diseases show?
+    back: "Census and population estimates: planning services and computing rates (they give the denominators). Notification: the fluctuation of infectious disease occurrence, for planning and evaluation."
+    src: { page: 16, quote: "Planning services Computing rates" }
+    status: unverified
+  # ---------- slides 21-23: counts, proportions, rates ----------
+  - id: res.L02.018
+    kind: card
+    topic: measures
+    front: Give the lecture's example of counting cases (raw numbers).
+    back: A health planner counts the cases of malaria seen last year to estimate how many chloroquine tablets to order for next year.
+    src: { page: 21, quote: "number of cases of malaria seen in the last year, so that they can estimate how many chloroquine tablets to order" }
+    status: unverified
+  - id: res.L02.019
+    kind: mcq
+    topic: measures
+    stem: Of 120 cases of malaria admitted to a hospital last year, 80 were children. What is the proportion of children among cases?
+    options: ["66.7%", "40%", "80%", "150%"]
+    answer: 0
+    why:
+      - Correct. 80/120 × 100 = 66.7%.
+      - 40/120 would be 33%; 40% isn't from these numbers.
+      - 80 is the count, not the percentage.
+      - "That is 120/80: numerator and denominator are flipped."
+    src: { page: 21, quote: "The proportion (percentage) of children among cases is(80/120) x 100 or 66.7%." }
+    status: unverified
+  - id: res.L02.020
+    kind: card
+    topic: measures
+    front: Define a rate.
+    back: The relative frequency of cases in a population during a specified period of time (usually one year). Usually expressed per 100 or per 1000 population. Examples are morbidity and mortality rates.
+    src: { page: 22, quote: "Rates: the relative frequency of cases in a population during a specified period of time." }
+    status: unverified
+  - id: res.L02.021
+    kind: mcq
+    topic: measures
+    stem: What distinguishes a rate from a proportion?
+    options:
+      - A rate has a time dimension; a proportion does not
+      - A proportion has a time dimension; a rate does not
+      - A rate is always expressed as a percentage
+      - A proportion's numerator is not part of its denominator
+    answer: 0
+    why:
+      - Correct, slide 23.
+      - The reverse is true.
+      - Rates are usually per 100 or per 1000; attack rates are the ones usually given as percentages.
+      - In a proportion the numerator is part of the denominator (80 children out of 120 cases).
+    src: { page: 23, quote: "It has a time dimension, whereas a PROPORTION does not." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- slides 24-29: incidence and attack rate ----------
+  - id: res.L02.022
+    kind: cloze
+    topic: incidence
+    text: "Incidence rate = number of {{c1::new}} cases during a specific period ÷ total {{c2::midperiod}} population {{c3::at risk}}."
+    src: { page: 25, quote: "Number of new cases during a specific period Total midperiod population at risk" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L02.023
+    kind: card
+    topic: incidence
+    front: Define the attack rate.
+    back: A specific type of incidence rate, calculated for a narrowly defined population observed for a limited time, such as during an outbreak or epidemic, and usually expressed as a percentage (10ⁿ = 100).
+    src: { page: 26, quote: "An attack rate is a specific type of incidence rate. It is calculated for a narrowly defined population observed for a limited time" }
+    status: unverified
+  - id: res.L02.024
+    kind: cloze
+    topic: incidence
+    text: "Attack rate = {{c1::new cases among the population during the period}} ÷ population at risk at the {{c2::beginning}} of the period × 100. It measures the {{c3::probability or risk}} of becoming a case."
+    src: { page: 28, quote: "For a defined population (the population at risk), during a limited time period:" }
+    status: unverified
+  - id: res.L02.025
+    kind: enumerate
+    topic: incidence
+    prompt: List the special characteristics of attack rates.
+    points:
+      - Restricted to a special age group
+      - Limited by "place" variables
+      - Time period is usually brief (limited period of risk)
+      - Usually expressed as a percentage
+    pass: 3
+    src: { page: 28, quote: "Restricted to a special age group ➢Limited by “place” variables ➢Time period is usually brief : limited period of risk" }
+    status: unverified
+  - id: res.L02.026
+    kind: mcq
+    topic: incidence
+    stem: Of 75 people who attended a wedding dinner, 46 developed gastroenteritis within the incubation period. What is the attack rate?
+    options: ["61%", "46%", "39%", "163%"]
+    answer: 0
+    why:
+      - Correct. 46/75 × 100 = 61%. Among those at the dinner, the risk of GI illness was 61%.
+      - 46 is the number of cases, not the rate.
+      - "29/75 = 39% is the share who stayed well."
+      - "75/46: numerator and denominator flipped."
+    src: { page: 29, quote: "Then, the attack rate for GI illness is 46/75 x 100 = 61%" }
+    status: unverified
+  # ---------- slides 30-43: prevalence ----------
+  - id: res.L02.027
+    kind: table
+    topic: prevalence
+    title: Point vs period prevalence
+    columns: [Measure, Numerator, Denominator]
+    rows:
+      - [Point prevalence, Existing cases at a specific point of time, Total midpoint population at risk]
+      - [Period prevalence, Existing cases during a specific period of time, Total midperiod population at risk]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2]]
+    src: { page: 31, quote: "Number of existing cases at a Point prevalence = specific point of time ; Total midpoint population at risk" }
+    status: unverified
+  - id: res.L02.028
+    kind: enumerate
+    topic: prevalence
+    prompt: List the features of prevalence rates (slide 32).
+    points:
+      - Indicate the amount of illness requiring care
+      - Affected by migration of diseased people
+      - Easier to measure than incidence rate
+    pass: 3
+    src: { page: 32, quote: "They indicate amount of illness requiring care. •Affected by migration of diseased people. •Easier to measure than incidence rate." }
+    status: unverified
+  - id: res.L02.029
+    kind: table
+    topic: prevalence
+    title: Difference between incidence and prevalence
+    columns: [Characteristic, Incidence, Prevalence]
+    rows:
+      - [What is measured, Rapidity of disease occurrence, Proportion of population with disease]
+      - [Time of diagnosis, Newly diagnosed, Surviving cases diagnosed at any time]
+      - [Period of time, Period of study that allows monitoring disease occurrence, Specific time]
+      - [Denominator, Population at risk, Whole population]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [3, 1], [3, 2]]
+    src: { page: 33, quote: "Rapidity of disease occurrence Newly diagnosed" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L02.030
+    kind: case
+    topic: prevalence
+    stem: "A cohort of 30 people is followed for 3 years. In year 1, 5 develop the disease; in year 2, 7 more; in year 3, 4 more. Nobody recovers or dies."
+    steps:
+      - question: What is the prevalence of disease in year 2?
+        options: ["40%", "23%", "28%", "53%"]
+        answer: 0
+        why: "Existing cases at year 2 = 5 + 7 = 12, over the whole sample of 30: 12/30 = 0.4 = 40%."
+      - question: What is the incidence (risk) of disease in year 2?
+        options: ["28%", "23%", "40%", "24%"]
+        answer: 0
+        why: "New cases in year 2 = 7. At risk = 30 − 5 already diseased = 25. 7/25 = 0.28 = 28%. Using 30 (23%) forgets that the 5 cases are no longer at risk."
+      - question: "What is the incidence in year 3?"
+        options: ["22%", "13%", "53%", "16%"]
+        answer: 0
+        why: "4 new cases over 30 − 12 = 18 still at risk: 4/18 = 22%."
+    src: { page: 36, quote: "25 people at risk (5 people already developed the disease in Year 1 and are thus not at risk)" }
+    status: unverified
+  - id: res.L02.031
+    kind: cloze
+    topic: prevalence
+    text: "Prevalence = {{c1::incidence}} × {{c2::mean duration}}. With an incidence of 10 per 1000 per year and a mean duration of 5 years, prevalence = {{c3::50 per 1000}}."
+    src: { page: 37, quote: "Prevalence =Incidence x Mean Duration" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L02.032
+    kind: card
+    topic: prevalence
+    front: How can a low-incidence disease become an important public health problem?
+    back: If the disease is long (incurable and non-fatal), the prevalence becomes high relative to the incidence, as in diabetes.
+    src: { page: 38, quote: "Low incidence diseases become important public health problems due to high prevalence." }
+    status: unverified
+  - id: res.L02.033
+    kind: table
+    topic: prevalence
+    title: Incidence, duration and prevalence (slide 39)
+    columns: [Disease, Incidence, Duration, Prevalence]
+    rows:
+      - [Cancer of the pancreas, Low, Short, Low]
+      - [Common cold, High, Short, Low]
+      - [Adult-onset diabetes, Low, Long, High]
+      - [Essential hypertension, High, Long, High]
+    blanks: [[0, 3], [1, 3], [2, 3], [3, 3], [1, 2]]
+    src: { page: 39, quote: "Cancer of the pancreas ▪ Common cold – Incidence low – Incidence high – Duration short – Duration short – Prevalence low – Prevalence low" }
+    status: unverified
+  - id: res.L02.034
+    kind: card
+    topic: prevalence
+    front: Explain the epidemiologist's bathtub.
+    back: "Prevalence is the water in the tub. Incidence (new cases) is the tap filling it. Recovery (cure) and death (mortality) are the two drains emptying it. Prevalence = incidence × average duration, assuming constant incidence."
+    src: { page: 40, quote: "Relationship Between Prevalence and Incidence Recovery" }
+    status: unverified
+  - id: res.L02.035
+    kind: mcq
+    topic: prevalence
+    stem: If a drug prevents mortality but does not affect cure, which of the following will be true?
+    options: [Prevalence will increase, Incidence will decrease, Incidence will increase, Prevalence will decrease]
+    answer: 0
+    why:
+      - Correct (slide 41, answer d). Patients live longer with the disease, so the duration rises and the tub fills.
+      - The drug acts after the disease starts; it does not prevent new cases.
+      - Nothing creates new cases.
+      - Closing the death drain without opening the cure drain raises prevalence.
+    src: { page: 41, quote: "If a drug prevents mortality but does not affect cure, then which of the following will be true:" }
+    status: unverified
+    tags: [high-yield, slide-question]
+  - id: res.L02.036
+    kind: mcq
+    topic: prevalence
+    stem: "Annual incidence = 20 per 10,000,000, annual mortality = 4 per 10,000,000, point prevalence = 80 per 10,000,000. What is the average duration of the disease?"
+    options: ["4 years", "1 year", "2 years", "5 years", Insufficient data]
+    answer: 0
+    why:
+      - "Correct. P = I × D, so D = P/I = 80/20 = 4 years."
+      - Using the mortality (4) instead of the duration mixes the drains.
+      - No combination of the given numbers gives 2.
+      - "80/4 = 20, and 20/4 = 5: both use mortality wrongly."
+      - P and I are enough.
+    src: { page: 42, quote: "P= I * D 80 = 20 * D D= 80/20 = 4 years" }
+    status: unverified
+    tags: [slide-question]
+  - id: res.L02.037
+    kind: mcq
+    topic: prevalence
+    stem: "In children under five, pneumococcal pneumonia incidence stayed roughly flat at about 10 per 100,000 from 1981 to 1991 while prevalence fell steadily from about 50 to below 20 per 100,000. What can you conclude?"
+    options:
+      - Recovery from the disease is becoming rapid
+      - Primary prevention is successful due to vaccination
+      - The duration of the disease is increasing
+      - Incidence is decreasing
+      - The rate of recovery remains the same
+    answer: 0
+    why:
+      - "Correct. With incidence constant, P = I × D means the fall in prevalence comes from a shorter duration: faster recovery."
+      - Successful primary prevention would lower the incidence, which is flat.
+      - A longer duration would raise prevalence.
+      - The incidence line is flat.
+      - If recovery were unchanged, prevalence would not fall with a flat incidence.
+    src: { page: 43, quote: "The incidence and prevalence rates of pneumococcal pneumo- nia in children under five years of age in a defined community are" }
+    status: unverified
+    tags: [slide-question]
+  # ---------- slides 44-50: secondary attack rate, recovery rate ----------
+  - id: res.L02.038
+    kind: card
+    topic: secondary
+    front: Define the secondary attack rate (SAR) and give its formula.
+    back: "The frequency of new cases among the contacts of known (primary) cases. SAR = exposed persons developing the disease within the incubation period ÷ total exposed susceptible contacts × 100. The primary case is excluded from both numerator and denominator."
+    src: { page: 44, quote: "The primary case is excluded from both the numerator and denominator." }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L02.039
+    kind: enumerate
+    topic: secondary
+    prompt: Which people do you subtract from the household total to get the SAR denominator, and which two factors does the slide stress?
+    points: [The primary cases, Immune individuals, Incubation period matters, State of immunity matters]
+    pass: 3
+    src: { page: 46, quote: "subtract the number of primary cases from the total number living in the households. Immune individuals should also be subtracted." }
+    status: unverified
+  - id: res.L02.040
+    kind: case
+    topic: secondary
+    stem: "A shigellosis outbreak: 18 people in 18 different households fall ill in a community of 1,000. One incubation period later, 17 more people in the same households fall ill. The 18 households hold 86 people."
+    steps:
+      - question: What is the overall attack rate?
+        options: ["1.8%", "18%", "20.9%", "3.5%"]
+        answer: 0
+        why: "18/1,000 × 100 = 1.8%."
+      - question: What is the denominator of the secondary attack rate?
+        options: ["68", "86", "1,000", "69"]
+        answer: 0
+        why: "Household members minus the primary cases: 86 − 18 = 68."
+      - question: What is the secondary attack rate?
+        options: ["25%", "19.8%", "1.7%", "94%"]
+        answer: 0
+        why: "17/68 × 100 = 25%. Using 86 (19.8%) forgets to exclude the primary cases."
+    src: { page: 48, quote: "17 ----------------------------------- x100 68" }
+    status: unverified
+  - id: res.L02.041
+    kind: case
+    topic: secondary
+    stem: "Seven cases of hepatitis A occur among 70 children at a nursery, each from a different family. The 7 families hold 32 people. One incubation period later, 5 family members fall ill."
+    steps:
+      - question: What is the attack rate in the nursery?
+        options: ["10%", "7%", "22%", "15.6%"]
+        answer: 0
+        why: "7/70 × 100 = 10%."
+      - question: What is the secondary attack rate among family contacts?
+        options: ["20%", "15.6%", "7.1%", "16%"]
+        answer: 0
+        why: "At risk = 32 − 7 infected children = 25. 5/25 × 100 = 20%. 5/32 = 15.6% forgets to remove the primary cases."
+    src: { page: 49, quote: "Seven cases of hepatitis A occurred among 70 children attending a" }
+    status: unverified
+  - id: res.L02.042
+    kind: card
+    topic: secondary
+    front: Give the recovery rate formula.
+    back: Number of recoveries from a disease in a certain period and area ÷ number of ill persons in the same period and area × 100.
+    src: { page: 50, quote: "The no. of recoveries from a certain disease in a certain period of time in a certain area" }
+    status: unverified
+  # ---------- slides 51-68: mortality ----------
+  - id: res.L02.043
+    kind: table
+    topic: mortality
+    title: Types of mortality rates (formulas)
+    columns: [Rate, Numerator, Denominator, Multiplier]
+    rows:
+      - [Crude death rate, Deaths from all causes, Estimated midyear population, "× 1000"]
+      - [Age-specific mortality rate, Deaths in an age group, Midyear population of the same age group, "× 1000"]
+      - [Cause-specific mortality rate, Deaths due to a specific disease, Total midyear population, "× 1000"]
+      - [Proportionate mortality rate, Deaths due to a certain disease, Deaths from all causes, "× 100"]
+      - [Case fatality rate, Deaths due to a disease, People with the same disease, "× 100"]
+    blanks: [[0, 2], [2, 2], [3, 2], [4, 2], [3, 1]]
+    src: { page: 53, quote: "Proportionate mortality rate (PMR) Deaths from cause All deaths" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L02.044
+    kind: mcq
+    topic: mortality
+    stem: A city of 2 million reports 12,000 deaths from all causes in one year. What is the crude death rate?
+    options: ["6 per 1000 per year", "0.6 per 1000 per year", "60 per 1000 per year", "6%"]
+    answer: 0
+    why:
+      - "Correct. 12,000/2,000,000 × 1000 = 6."
+      - Off by a factor of 10.
+      - Off by a factor of 10.
+      - "Crude death rate is per 1000, and 6% would be 60 per 1000."
+    src: { page: 54, quote: "or 6 deaths per 1000 population per year." }
+    status: unverified
+  - id: res.L02.045
+    kind: mcq
+    topic: mortality
+    stem: "PCP in Miami: age 17-27 had 50 deaths in 50,000; age 28-47, 750 deaths in 150,000; age >48, 1000 deaths in 250,000. Which age group has the highest age-specific mortality rate?"
+    options: ["28-47 (5.0 per 1000)", ">48 (4.0 per 1000)", "17-27 (1.0 per 1000)", "All are equal"]
+    answer: 0
+    why:
+      - "Correct. 750/150,000 × 1000 = 5.0."
+      - The >48 group has the most deaths, but its rate is 1000/250,000 × 1000 = 4.0.
+      - 50/50,000 × 1000 = 1.0.
+      - The rates differ.
+    src: { page: 56, quote: "28-47 (750/150,000) x 1000 = 5.0 per 1000 population" }
+    status: unverified
+  - id: res.L02.046
+    kind: case
+    topic: mortality
+    stem: "A county of 2.5 million has 6000 deaths in a year: 1200 leukemia, 1750 stroke, 250 pneumonia, 250 Hodgkin's disease and 2500 acute MI."
+    steps:
+      - question: What is the cause-specific mortality rate for acute MI?
+        options: ["1 per 1000", "41.7%", "2.5 per 1000", "0.1 per 1000"]
+        answer: 0
+        why: "Deaths from MI over the whole midyear population: 2500/2,500,000 × 1000 = 1 per 1000."
+      - question: What is the proportionate mortality rate for leukemia?
+        options: ["20%", "0.48 per 1000", "1200 per 1000", "2%"]
+        answer: 0
+        why: "Deaths from leukemia over all deaths: 1200/6000 × 100 = 20%."
+      - question: Can you calculate the case fatality rate of leukemia from these data?
+        options: ["No", "Yes, 20%", "Yes, 0.48 per 1000"]
+        answer: 0
+        why: The case fatality rate needs the number of people with leukemia, which isn't given.
+    src: { page: 59, quote: "The proportionate mortality rate for leukemia is: (1200/6000) x 100 = 20%" }
+    status: unverified
+  - id: res.L02.047
+    kind: mcq
+    topic: mortality
+    stem: In a county, 500 people are HIV-positive and 5 die within a year of diagnosis. What is the case fatality rate?
+    options: ["1%", "10%", "0.1%", "5%"]
+    answer: 0
+    why:
+      - "Correct. 5/500 × 100 = 1%."
+      - Off by a factor of 10.
+      - Off by a factor of 10.
+      - 5 is the number of deaths, not the rate.
+    src: { page: 60, quote: "five died within a year after their initial diagnosis. The case fatal- ity rate is 5/500 x 100 =1%" }
+    status: unverified
+  - id: res.L02.048
+    kind: mcq
+    topic: mortality
+    stem: Which of the following is a good measure of the severity of an acute disease?
+    options: [Case fatality rate, Standardized mortality ratio, Cause-specific death rate, Age-specific death rate]
+    answer: 0
+    why:
+      - Correct. Of those who get the disease, what share die of it?
+      - The SMR compares observed to expected deaths in a population.
+      - Its denominator is the whole population, so it mixes how common and how deadly the disease is.
+      - It describes deaths in an age group from all causes.
+    src: { page: 61, quote: "Which of the following is a good measure of the severity of an acute disease?" }
+    status: unverified
+    tags: [high-yield, slide-question]
+  - id: res.L02.049
+    kind: mcq
+    topic: mortality
+    stem: "At the end of 2000 a district had 200,000 people and 800 TB cases. At the end of 2001 the population was 210,000, 200 new cases were detected and 12 cases died. All of the following can be calculated EXCEPT:"
+    options: [Proportional mortality, Prevalence, Incidence, Case fatality]
+    answer: 0
+    why:
+      - Correct (slide 62, answer c). PMR needs deaths from all causes, which aren't given.
+      - Existing cases over the population give prevalence.
+      - New cases over the population at risk give incidence.
+      - TB deaths over TB cases give the case fatality.
+    src: { page: 62, quote: "all of the following rates can be calculated except:" }
+    status: unverified
+    tags: [slide-question]
+  - id: res.L02.050
+    kind: table
+    topic: mortality
+    title: Child and maternal mortality measures
+    columns: [Measure, Numerator, Denominator, Multiplier]
+    rows:
+      - [Infant mortality rate, Infant deaths under 1 year, Live births in the same year, "× 1000"]
+      - [Neonatal mortality rate, Neonatal deaths (birth to 28 days), Live births in the same year, "× 1000"]
+      - [Under-five mortality rate, Deaths below age 5 in a period, Live births in the same period, "× 1000"]
+      - [Perinatal mortality rate (period I), "Fetal deaths ≥28 weeks + postnatal deaths in the first 7 days", Fetal deaths + live births in the same period, "× 1000"]
+      - [Maternal mortality ratio, Maternal deaths in a year and area, Live births in the same year and area, "× 100,000"]
+    blanks: [[0, 2], [1, 1], [3, 1], [3, 2], [4, 3]]
+    src: { page: 63, quote: "Number of infant deaths less than one year of age x1000 Total number of live births during the same year" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L02.051
+    kind: mcq
+    topic: mortality
+    stem: A city reports 270 infant deaths and 30,000 live births in a year. What is the infant mortality rate?
+    options: ["9 per 1000 live births", "0.9 per 1000 live births", "90 per 1000 live births", "Cannot be calculated without the population"]
+    answer: 0
+    why:
+      - "Correct. 270/30,000 × 1000 = 9."
+      - Off by a factor of 10.
+      - Off by a factor of 10.
+      - The denominator is live births, not the population.
+    src: { page: 63, quote: "or 9 infant deaths per 1000 live births per year." }
+    status: unverified
+  - id: res.L02.052
+    kind: mcq
+    topic: mortality
+    stem: A city reports 150 neonatal deaths and 30,000 live births in a year. What is the neonatal mortality rate?
+    options: ["5 per 1000 live births", "0.5 per 1000 live births", "50 per 1000 live births", "5%"]
+    answer: 0
+    why:
+      - "Correct. 150/30,000 × 1000 = 5."
+      - Off by a factor of 10.
+      - Off by a factor of 10.
+      - It is per 1000 live births, not a percentage.
+    src: { page: 64, quote: "or 5 neonatal deaths per 1000 live births per year." }
+    status: unverified
+  - id: res.L02.053
+    kind: cloze
+    topic: mortality
+    text: "The neonatal period is the interval between birth and {{c1::28 days}} postpartum. Perinatal period I runs from {{c2::28 weeks}} of gestation to {{c3::7 days}} after birth."
+    src: { page: 64, quote: "The neonatal period is defined as the interval of time between birth and 28 days postpartum." }
+    status: unverified
+    tags: [numbers]
+  - id: res.L02.054
+    kind: card
+    topic: mortality
+    front: Why is the maternal mortality ratio called a ratio, and what is its multiplier?
+    back: Its denominator is live births, not the women at risk (some maternal deaths come from pregnancies that never end in a live birth). It is expressed per 100,000 live births.
+    src: { page: 68, quote: "Number of maternal deaths in a given year and area Number of live births in the same year and area" }
+    status: unverified
+  - id: res.L02.055
+    kind: enumerate
+    topic: mortality
+    prompt: List the common mortality rates named in the lecture (slide 52).
+    points:
+      - Crude death rate
+      - Age-specific mortality rate
+      - Sex-specific mortality rate
+      - Cause-specific mortality rate
+      - Proportionate mortality ratio
+      - Case fatality rate
+      - Fetal death rate
+      - Perinatal mortality rate
+      - Neonatal mortality rate
+      - Infant mortality rate
+      - Child mortality rate
+      - Under-five mortality rate
+      - Maternal mortality ratio
+    pass: 10
+    src: { page: 52, quote: "Common Mortality rates Crude death rate Perinatal mortality rate Age-specific mortality rate Neonatal mortality rate" }
+    status: unverified
+  - id: res.L02.056
+    kind: card
+    topic: mortality
+    front: What is the multiplier for an age-specific (or age- and cause-specific) death rate in the 15-24 examples, and why?
+    back: "× 100,000: deaths in young people are rare, so a bigger base gives readable numbers. The general age-specific mortality rate formula uses × 1000."
+    src: { page: 65, quote: "Age-specific death rate" }
+    status: unverified
+  # ---------- slides 69-71: practice ----------
+  - id: res.L02.057
+    kind: mcq
+    topic: prevalence
+    stem: "Malignant melanoma: annual incidence 30 per 1,000,000, annual mortality 5 per 1,000,000, point prevalence 90 per 1,000,000. What is the average duration of the disease?"
+    options: ["3 years", "4 years", "5 years", "6 years", Unable to be determined due to insufficient data]
+    answer: 0
+    why:
+      - "Correct. D = P/I = 90/30 = 3 years."
+      - No division of the given numbers gives 4.
+      - 5 is the mortality rate, not a duration.
+      - 30/5 = 6 divides incidence by mortality, which is not P = I × D.
+      - P and I are enough.
+    src: { page: 70, quote: "With the information given, the average duration of the disease is" }
+    status: unverified
+    tags: [slide-question]
+  - id: res.L02.058
+    kind: table
+    topic: mortality
+    title: "Match the description to the rate (slide 71)"
+    columns: [Description (per 1000 live births or total births in 1 year), Rate]
+    rows:
+      - [Deaths in the first 28 days of life, Neonatal mortality]
+      - [Fetal deaths plus deaths in the first week of life (per 1000 total births), Perinatal mortality]
+      - [Deaths under the age of 1 year, Infant mortality]
+      - [Deaths between 28 days and 11 months, Postneonatal mortality]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 71, quote: "Number of fetal deaths plus deaths in the first week of life per 1000 total births in 1 year." }
+    status: unverified
+    tags: [slide-question]
+  - id: res.L02.059
+    kind: mcq
+    topic: mortality
+    stem: "The number of fetal deaths plus deaths in the first week of life per 1000 total births in 1 year is the:"
+    options: [Perinatal mortality rate, Neonatal mortality rate, Infant mortality rate, Fetal mortality rate, Postneonatal mortality rate]
+    answer: 0
+    why:
+      - Correct (slide 71, item 65 = c).
+      - Neonatal = deaths in the first 28 days per 1000 live births.
+      - Infant = deaths under 1 year per 1000 live births.
+      - Fetal mortality counts fetal deaths only.
+      - Postneonatal = deaths from 28 days to 11 months.
+    src: { page: 71, quote: "Number of fetal deaths plus deaths in the first week of life per 1000 total births in 1 year." }
+    status: unverified
+    tags: [slide-question]
+  - id: res.L02.060
+    kind: mcq
+    topic: secondary
+    stem: In a household outbreak, which statement about the secondary attack rate is correct?
+    options:
+      - The primary case is excluded from both numerator and denominator
+      - The primary case is counted in the numerator only
+      - Immune household members stay in the denominator
+      - It is calculated without regard to the incubation period
+    answer: 0
+    why:
+      - Correct, slide 44.
+      - The primary case is excluded from both.
+      - Immune people are not susceptible, so they are subtracted.
+      - Only cases within the range of the incubation period count.
+    src: { page: 44, quote: "The primary case is excluded from both the numerator and denominator." }
+    status: unverified

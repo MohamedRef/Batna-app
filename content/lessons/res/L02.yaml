@@ -1,0 +1,782 @@
+schema: batna.lesson/v1
+lecture: res.L02
+lessons:
+  # ------------------------------------------------------------------
+  - id: res.L02.lesson1
+    title: "الوبائيات في 3 كلمات"
+    hook: "كام واحد عيان؟ فين ومين وإمتى؟ وليه هما بالذات؟ دي الـ epidemiology كلها."
+    minutes: 8
+    pages: [1, 15]
+    topics: [definition, uses]
+    goals:
+      - "تعرّف الـ epidemiology بالـ 3 كلمات: frequency، distribution، determinants"
+      - "تفرق بين descriptive وanalytic epidemiology"
+      - "تعدّ الـ uses of epidemiology وترتب الـ natural history of disease"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 3
+        quote: "Epidemiology is the study of ▪ Frequency ▪ Distribution ▪ Determinants of health related phenomenon in the human population."
+        title: "التعريف"
+        text: |
+          **Epidemiology** = دراسة الـ ==frequency== والـ ==distribution== والـ ==determinants== لأي health-related phenomenon في **human population**.
+
+          - **Frequency**: كام؟ (rates وratios).
+          - **Distribution**: المرض متوزع إزاي: **who? when? where?**
+          - **Determinants**: إيه اللي بيخلي الـ risk مختلف بين مجموعة والتانية؟
+
+          لاحظ: الطب الإكلينيكي بيبص على **عيان واحد**، والـ epidemiology بتبص على **population**.
+      - kind: figure
+        page: 5
+        quote: "Low endemicity <2% Intermediate endemicity 2-8% High endemicity >8%"
+        title: "Distribution على الخريطة"
+        alt: "Three boxes from the slide map legend for hepatitis B endemicity: low below 2 percent, intermediate 2 to 8 percent, high above 8 percent."
+        caption: "الخريطة دي بتجاوب «where?»: نفس الفيروس، بس الـ ==distribution== مختلف جدًا من بلد للتانية."
+        svg: |
+          <svg viewBox="0 0 330 200" xmlns="http://www.w3.org/2000/svg">
+            <text x="165" y="18" text-anchor="middle" class="t-b">HBV endemicity (slide 5)</text>
+            <rect x="10" y="34" width="100" height="40" rx="6" class="fg-good"/>
+            <text x="60" y="52" text-anchor="middle" class="t-sm t-b">Low</text>
+            <text x="60" y="67" text-anchor="middle" class="t-sm">&lt;2%</text>
+            <rect x="115" y="34" width="100" height="40" rx="6" class="fg-acc"/>
+            <text x="165" y="52" text-anchor="middle" class="t-sm t-b">Intermediate</text>
+            <text x="165" y="67" text-anchor="middle" class="t-sm">2-8%</text>
+            <rect x="220" y="34" width="100" height="40" rx="6" class="fg-bad"/>
+            <text x="270" y="52" text-anchor="middle" class="t-sm t-b">High</text>
+            <text x="270" y="67" text-anchor="middle" class="t-sm">&gt;8%</text>
+            <text x="165" y="110" text-anchor="middle" class="t-sm t-mut">Same virus, very different burden</text>
+            <text x="165" y="130" text-anchor="middle" class="t-sm t-mut">from one region to another</text>
+            <text x="165" y="180" text-anchor="middle" class="t-sm">Who? When? Where? = distribution</text>
+          </svg>
+      - kind: table
+        page: 8
+        quote: "1.Frequency Rates & Ratios 2.Distribution Who? When? Where? Descriptive epidemiology"
+        title: "Components of epidemiology"
+        columns: ["Component", "Question", "Branch"]
+        rows:
+          - ["Frequency", "How many? (rates, ratios)", "Measurement"]
+          - ["Distribution", "Who? When? Where?", "Descriptive epidemiology"]
+          - ["Determinants", "Why? (causes, risk factors)", "Analytic epidemiology"]
+        hide: [[1, 2], [2, 2]]
+      - kind: explain
+        page: 10
+        quote: "Testing a hypothesis by studying how exposures relate to outcomes"
+        title: "Descriptive بيولّد فرضية، وAnalytic بيختبرها"
+        text: |
+          - ==Descriptive epidemiology==: بتفحص وتبلّغ عن الـ **frequency and distribution**. بتعرف الـ basic features.
+          - ==Analytic epidemiology==: بتدوّر على العوامل ورا المرض، **testing a hypothesis** بدراسة علاقة الـ **exposures** بالـ **outcomes**.
+
+          الكوبري بينهم (slide 9): لما تعرف الـ frequency والـ distribution، تقدر **formulate a hypothesis** عن عوامل ممكن تكون causal أو preventive. وبعدين الـ analytic تختبرها.
+
+          مثال: لاحظت إن الـ HCV أعلى في قرى الدلتا عند الكبار (descriptive). فرضيتك: حقن الـ tartar emetic القديمة. بتختبرها بـ case-control (analytic).
+      - kind: order
+        page: 11
+        quote: "Descriptive Analytical Interventions Programs Disease prevention"
+        prompt: "رتّب الـ logical sequence of epidemiology in disease prevention:"
+        steps: ["Descriptive", "Analytical", "Interventions", "Programs"]
+        why: "توصف ← تلاقي السبب ← تجرب حل ← تعمّمه في برنامج، والنتيجة disease prevention."
+      - kind: explain
+        page: 12
+        quote: "1.Natural history of disease 2.Classification of disease 3.Identify determinants (risk factors) 4.Planning and evaluation"
+        title: "الـ uses of epidemiology"
+        text: |
+          - **Natural history of disease**.
+          - **Classification of disease**.
+          - **Identify determinants** (risk factors).
+          - **Planning and evaluation**: حجم المشكلة علشان تخطط الخدمات، وتقييم برنامج تطعيم مثلًا.
+          - **Data on availability, accessibility and utilization** للخدمات.
+      - kind: figure
+        page: 13
+        quote: "Natural history of disease timeline"
+        title: "الـ natural history of disease"
+        alt: "A horizontal timeline in four stages: susceptibility, subclinical disease, clinical disease, and recovery, disability or death. Arrows mark exposure (start of susceptibility to subclinical), pathologic changes (start of subclinical), onset of symptoms and the usual time of diagnosis (start of clinical disease)."
+        caption: "التشخيص عادةً بيحصل ==بعد== الـ symptoms. كل اللي قبله (subclinical) هو هدف الـ screening."
+        svg: |
+          <svg viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L02n" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="20" y="10" width="290" height="58" rx="6" class="fg-good"/>
+            <text x="165" y="34" text-anchor="middle" class="t-b">1 Stage of susceptibility</text>
+            <text x="165" y="54" text-anchor="middle" class="t-sm">ends with: exposure</text>
+            <path d="M165 68v14" class="fg-arrow" marker-end="url(#L02n)"/>
+            <rect x="20" y="86" width="290" height="58" rx="6" class="fg-acc"/>
+            <text x="165" y="110" text-anchor="middle" class="t-b">2 Stage of subclinical disease</text>
+            <text x="165" y="130" text-anchor="middle" class="t-sm">starts with: pathologic changes</text>
+            <path d="M165 144v14" class="fg-arrow" marker-end="url(#L02n)"/>
+            <rect x="20" y="162" width="290" height="72" rx="6" class="fg-bad"/>
+            <text x="165" y="186" text-anchor="middle" class="t-b">3 Stage of clinical disease</text>
+            <text x="165" y="206" text-anchor="middle" class="t-sm">starts with: onset of symptoms</text>
+            <text x="165" y="224" text-anchor="middle" class="t-sm t-b">then the usual time of diagnosis</text>
+            <path d="M165 234v14" class="fg-arrow" marker-end="url(#L02n)"/>
+            <rect x="20" y="252" width="290" height="58" rx="6" class="fg-box"/>
+            <text x="165" y="276" text-anchor="middle" class="t-b">4 Recovery, disability</text>
+            <text x="165" y="296" text-anchor="middle" class="t-b">or death</text>
+          </svg>
+      - kind: check
+        page: 13
+        quote: "Pathologic Onset of Exposure Changes Symptoms"
+        question: "A smoker has early dysplasia on bronchoscopy but no symptoms. Which stage of the natural history is he in?"
+        options:
+          - "Subclinical disease"
+          - "Susceptibility"
+          - "Clinical disease"
+          - "Recovery, disability or death"
+        answer: 0
+        why:
+          - "صح: فيه pathologic changes ومفيش symptoms."
+          - "الـ susceptibility قبل أي تغير مرضي."
+          - "الـ clinical تبدأ مع الـ onset of symptoms."
+          - "لسه ماوصلش للنهاية."
+      - kind: explain
+        page: 14
+        quote: "By mode of transmission ▪ Water born ▪ Food borne ▪ Vector born"
+        title: "تصنيف الدكتور وتصنيف الوبائي"
+        text: |
+          - **Clinically (diarrheal, respiratory, febrile diseases)**: ده بيخدم ==treatment==. عيان سخن جدًا في منطقة malaria؟ فكّر malaria.
+          - **Epidemiologically, by mode of transmission (water-borne, food-borne, vector-borne)**: ده بيخدم ==prevention==. لو المرض water-borne، الحل في المية.
+      - kind: try
+        items: [res.L02.001, res.L02.003, res.L02.009, res.L02.010]
+    recap:
+      - "Epidemiology = frequency + distribution + determinants في population."
+      - "Descriptive: who/when/where ← hypothesis. Analytic: تختبر الـ hypothesis."
+      - "Sequence: descriptive ← analytical ← interventions ← programs."
+      - "Natural history: susceptibility ← subclinical ← clinical ← recovery/disability/death."
+      - "Clinical classification للعلاج، epidemiological (by transmission) للوقاية."
+    practice: [res.L02.001, res.L02.002, res.L02.003, res.L02.004, res.L02.005, res.L02.006, res.L02.007, res.L02.008, res.L02.009, res.L02.010, res.L02.011, res.L02.012, res.L02.013]
+  # ------------------------------------------------------------------
+  - id: res.L02.lesson2
+    title: "الأرقام بتيجي منين؟ عدد، نسبة، ولا معدل؟"
+    hook: "«عندنا 80 طفل malaria» جملة ناقصة. 80 من كام؟ وفي قد إيه؟ هنا بتفرق الـ count والـ proportion والـ rate."
+    minutes: 7
+    pages: [16, 23]
+    topics: [sources, measures]
+    goals:
+      - "تعدّ الـ 9 sources of epidemiological data"
+      - "تفرق بين count وproportion وrate"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 16
+        quote: "1.Census 2.Population estimates Planning services Computing rates"
+        title: "9 مصادر للداتا"
+        text: |
+          - **Census** و**Population estimates**: بيدّوك الـ ==denominator==، لتخطيط الخدمات وحساب الـ rates.
+          - **Vital records**: تسجيل المواليد والوفيات.
+          - **Notification of infectious diseases**: بتوري الـ fluctuation في حدوث الأمراض المعدية.
+          - **Disease registers**: لأمراض ليها أهمية public health: **National cancer registry in Egypt**، TB، hepatitis.
+          - **Hospital records**: inpatient وoutpatient.
+          - **Special subgroups records** (مدارس، مصانع، جيش...).
+          - **Morbidity surveys**.
+          - ==Record linkage==: ربط سجلات نفس الشخص من مصادر مختلفة.
+      - kind: match
+        page: 18
+        quote: "5.Disease registers ▪ Diseases of public health importance Examples National cancer registry in EGYPT"
+        prompt: "وصّل المثال بمصدر الداتا:"
+        pairs:
+          - ["National cancer registry in Egypt", "Disease register"]
+          - ["Birth and death certificates", "Vital records"]
+          - ["Linking one person's clinic and lab files", "Record linkage"]
+          - ["Weekly reports of measles cases", "Notification"]
+          - ["Counting the whole population every 10 years", "Census"]
+        why: "الـ registers للأمراض المهمة، الـ vital records للمواليد والوفيات، الـ notification للأمراض المعدية، والـ census بيعدّ الكل."
+      - kind: explain
+        page: 21
+        quote: "The proportion (percentage) of children among cases is(80/120) x 100 or 66.7%."
+        title: "1. Count و 2. Proportion"
+        text: |
+          - **Counting cases (raw numbers)**: مفيد للتخطيط المباشر: عدد حالات الـ malaria السنة اللي فاتت علشان تعرف تطلب كام علبة **chloroquine**.
+          - **Proportion (%)**: جزء من كل. من 120 حالة malaria في المستشفى، 80 أطفال:
+          - **Children among cases = 80/120 × 100 = 66.7%**
+
+          في الـ proportion الـ numerator ==جزء من== الـ denominator.
+      - kind: explain
+        page: 23
+        quote: "It has a time dimension, whereas a PROPORTION does not."
+        title: "3. Rate: فيه زمن"
+        text: |
+          الـ **rate** = الـ relative frequency للحالات في population ==خلال فترة زمنية محددة== (غالبًا سنة).
+
+          - بيتكتب غالبًا **per 100 أو per 1000** population.
+          - أمثلة: birth rate، growth rate، accident rate، morbidity وmortality rates.
+          - الفرق الجوهري: الـ rate ليه **time dimension**، والـ **proportion** لأ.
+      - kind: aside
+        tone: analogy
+        page: 23
+        quote: "Usually expressed per 100 or perl 000 population."
+        text: |
+          الـ count زي «العربية مشيت 100 كيلو». الـ proportion زي «مشيت ربع المسافة». الـ rate زي «==100 كيلو في الساعة==»: من غير الزمن مالهاش معنى.
+      - kind: check
+        page: 23
+        quote: "It has a time dimension, whereas a PROPORTION does not."
+        question: "What distinguishes a rate from a proportion?"
+        options:
+          - "A rate has a time dimension; a proportion does not"
+          - "A proportion has a time dimension; a rate does not"
+          - "A rate is always a percentage"
+          - "A proportion's numerator is not part of its denominator"
+        answer: 0
+        why:
+          - "صح، slide 23."
+          - "العكس."
+          - "الـ rates غالبًا per 1000؛ الـ attack rate بس هو اللي غالبًا %."
+          - "في الـ proportion الـ numerator جزء من الـ denominator."
+      - kind: try
+        items: [res.L02.014, res.L02.015, res.L02.020]
+    recap:
+      - "9 مصادر: census، population estimates، vital records، notification، registers، hospital records، special subgroups، morbidity surveys، record linkage."
+      - "Count = رقم خام للتخطيط. Proportion = جزء من كل. Rate = ومعاه زمن."
+    practice: [res.L02.014, res.L02.015, res.L02.016, res.L02.017, res.L02.018, res.L02.019, res.L02.020, res.L02.021]
+  # ------------------------------------------------------------------
+  - id: res.L02.lesson3
+    title: "Incidence: الحالات الجديدة بس"
+    hook: "75 واحد اتعشوا في فرح و46 جالهم إسهال. الـ attack rate كام؟ وليه في الـ incidence بنشيل اللي عيان أصلًا؟"
+    minutes: 8
+    pages: [24, 36]
+    topics: [incidence, prevalence]
+    goals:
+      - "تكتب الـ incidence rate formula صح: new cases وpopulation at risk"
+      - "تعرف الـ attack rate وخصائصه وتحسبه"
+      - "تشيل اللي عيان أصلًا من الـ denominator"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 25
+        quote: "Number of new cases during a specific period Total midperiod population at risk"
+        title: "الـ incidence rate"
+        text: |
+          المعادلة:
+
+          - **Incidence rate = new cases during a specific period ÷ total midperiod population at risk**
+
+          ركّز على الـ ==new cases== والـ ==at risk==.
+
+          كلمتين مهمين:
+
+          - **New**: الحالات القديمة مش محسوبة.
+          - **At risk**: اللي عنده المرض أصلًا (أو immune) مش at risk، يبقى يطلع من المقام.
+
+          الـ incidence بتقيس ==سرعة== ظهور المرض (rapidity of occurrence).
+      - kind: explain
+        page: 26
+        quote: "An attack rate is a specific type of incidence rate. It is calculated for a narrowly defined population observed for a limited time"
+        title: "الـ attack rate: incidence وقت الأزمة"
+        text: |
+          الـ **attack rate** = نوع خاص من الـ incidence rate، بنحسبه لـ population محددة ضيقة لفترة قصيرة، زي ==outbreak== أو epidemic، وغالبًا للأمراض المعدية.
+
+          - **Attack rate = new cases during the period ÷ population at risk at the beginning of the period × 100**
+
+          وهو مقياس للـ ==probability or risk== إنك تبقى case.
+      - kind: mnemonic
+        page: 28
+        quote: "Restricted to a special age group ➢Limited by “place” variables ➢Time period is usually brief : limited period of risk"
+        word: "APTP"
+        parts:
+          - { key: "A", text: "Age group: restricted to a special one" }
+          - { key: "P", text: "Place variables limit it" }
+          - { key: "T", text: "Time period is brief (limited period of risk)" }
+          - { key: "P", text: "Percentage: usually expressed as one" }
+        hook: |
+          الـ attack rate بيهجم زي **APTP**: على **سن** معين، في **مكان** معين، في **وقت** قصير، وبيتكتب **%**.
+      - kind: case
+        page: 29
+        quote: "Then, the attack rate for GI illness is 46/75 x 100 = 61%"
+        stem: "فرح في المنصورة: 75 معزوم، و46 منهم جالهم gastroenteritis خلال الـ incubation period."
+        steps:
+          - question: "What is the numerator?"
+            options: ["46", "75", "29"]
+            answer: 0
+            why: "x = الحالات اللي حصلت خلال الـ incubation period بين اللي حضروا = 46."
+          - question: "What is the attack rate?"
+            options: ["61%", "46%", "39%", "163%"]
+            answer: 0
+            why: "46/75 × 100 = 61%. يعني الـ risk إنك تتعب لو اتعشيت في الفرح ده = 61%."
+      - kind: explain
+        page: 34
+        quote: "Year 1, 5 individuals developed the outcome"
+        title: "مثال المجموعة: 30 واحد على 3 سنين"
+        text: |
+          30 شخص متابعين:
+
+          - سنة 1: **5** جالهم المرض.
+          - سنة 2: **7** زيادة.
+          - سنة 3: **4** زيادة.
+
+          (مفيش حد خف أو مات.)
+      - kind: reveal
+        page: 36
+        quote: "25 people at risk (5 people already developed the disease in Year 1 and are thus not at risk)"
+        prompt: "الـ incidence في سنة 2 كام؟ 7/30 ولا حاجة تانية؟"
+        answer: |
+          **7/25 = 0.28 = 28%**.
+
+          الـ numerator = **7 new cases** في سنة 2.
+          الـ denominator = 30 − 5 = ==25 at risk==: الـ 5 بتوع سنة 1 عيانين أصلًا، مش ممكن «يجيلهم» المرض تاني.
+
+          لو قسمت على 30 (23%) يبقى وقعت في أشهر فخ.
+      - kind: check
+        page: 36
+        quote: "25 people at risk (5 people already developed the disease in Year 1 and are thus not at risk)"
+        question: "Same cohort of 30: what is the incidence in year 3?"
+        options: ["4/18 = 22%", "4/30 = 13%", "4/25 = 16%", "16/30 = 53%"]
+        answer: 0
+        why:
+          - "صح: at risk = 30 − (5 + 7) = 18، والجديد 4."
+          - "نسيت تشيل الـ 12 اللي عيانين."
+          - "شلت بتوع سنة 1 بس، ونسيت بتوع سنة 2."
+          - "ده الـ prevalence في آخر سنة 3، مش incidence."
+      - kind: try
+        items: [res.L02.022, res.L02.024, res.L02.025]
+    recap:
+      - "Incidence = **new cases** ÷ **population at risk** (midperiod)، وبتقيس سرعة ظهور المرض."
+      - "Attack rate = incidence في outbreak: **APTP** (age، place، time قصير، %)."
+      - "اللي عيان أصلًا مش at risk: اطرحه من المقام."
+    practice: [res.L02.022, res.L02.023, res.L02.024, res.L02.025, res.L02.026, res.L02.030]
+  # ------------------------------------------------------------------
+  - id: res.L02.lesson4
+    title: "البانيو: prevalence = incidence × duration"
+    hook: "الحنفية بتملا، والبلاعتين بيفضّوا. لو قفلت بلاعة الموت، البانيو هيعمل إيه؟"
+    minutes: 10
+    pages: [30, 43]
+    topics: [prevalence]
+    goals:
+      - "تفرق بين point وperiod prevalence"
+      - "تفرق بين incidence وprevalence في 4 خصائص"
+      - "تستخدم P = I × D وتحل أسئلة الـ slides"
+    status: unverified
+    steps:
+      - kind: table
+        page: 31
+        quote: "Number of existing cases at a Point prevalence = specific point of time ; Total midpoint population at risk"
+        title: "Prevalence rate"
+        columns: ["Type", "Numerator", "Denominator"]
+        rows:
+          - ["Point prevalence", "Existing cases at a specific point of time", "Total midpoint population at risk"]
+          - ["Period prevalence", "Existing cases during a specific period", "Total midperiod population at risk"]
+        hide: [[0, 1], [1, 1]]
+      - kind: explain
+        page: 32
+        quote: "They indicate amount of illness requiring care. •Affected by migration of diseased people. •Easier to measure than incidence rate."
+        title: "الـ prevalence مفيد في إيه؟"
+        text: |
+          الـ **prevalence** = ==existing cases== (القديم + الجديد) في وقت أو فترة.
+
+          - بيوري **amount of illness requiring care**: كام سرير وكام علبة دوا محتاجين.
+          - بيتأثر بـ **migration of diseased people**: لو عيانين الـ dialysis بيروحوا يعيشوا جنب مركز كويس، الـ prevalence هناك بيعلى.
+          - ==Easier to measure== من الـ incidence: مسح واحد (cross-sectional) بيكفي، بينما الـ incidence محتاج متابعة.
+      - kind: table
+        page: 33
+        quote: "Rapidity of disease occurrence Newly diagnosed"
+        title: "Incidence vs prevalence"
+        columns: ["Characteristic", "Incidence", "Prevalence"]
+        rows:
+          - ["What is measured", "Rapidity of disease occurrence", "Proportion of population with disease"]
+          - ["Time of diagnosis", "Newly diagnosed", "Surviving cases diagnosed at any time"]
+          - ["Period of time", "Study period that allows monitoring occurrence", "Specific time"]
+          - ["Denominator", "Population at risk", "Whole population"]
+        hide: [[0, 1], [0, 2], [1, 2], [3, 1], [3, 2]]
+      - kind: reveal
+        page: 35
+        quote: "Prevalence = 12/30 = 0.4 The prevalence of disease in Year 2 is 40%"
+        prompt: "نرجع للـ 30 شخص: 5 في سنة 1 و7 في سنة 2. الـ prevalence في سنة 2 كام؟"
+        answer: |
+          **12/30 = 40%**.
+
+          الـ numerator = **كل** الحالات الموجودة: 5 + 7 = 12.
+          الـ denominator = ==whole population== = 30.
+
+          قارن بالـ incidence اللي طلعت 7/25 = 28%: نفس الداتا، سؤالين مختلفين.
+      - kind: figure
+        page: 40
+        quote: "Relationship Between Prevalence and Incidence Recovery"
+        title: "The epidemiologist's bathtub"
+        alt: "A bathtub. A tap above pours water labelled incidence (new cases). The water in the tub is labelled prevalence. Steam rising off the top is labelled recovery, and a drain at the bottom is labelled death (mortality). Below: prevalence equals incidence times average duration, assuming constant incidence."
+        caption: "الحنفية = ==incidence==. المية = ==prevalence==. البخار (recovery) والبلاعة (death) بيفضّوا. الـ duration = المية بتقعد قد إيه قبل ما تخرج."
+        svg: |
+          <svg viewBox="0 0 330 360" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L02b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-acc"/></marker>
+              <marker id="L02d" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-bad"/></marker>
+            </defs>
+            <path d="M40 30h70v30" class="fg-ink" stroke-width="6"/>
+            <path d="M110 66v50" class="fg-arrow-acc" marker-end="url(#L02b)"/>
+            <text x="120" y="92" class="t-b t-acc">Incidence</text>
+            <text x="120" y="108" class="t-sm t-mut">new cases in</text>
+            <path d="M232 110c-8-12 8-20 0-32M252 110c-8-12 8-20 0-32M272 110c-8-12 8-20 0-32" class="fg-arrow-acc"/>
+            <text x="252" y="64" text-anchor="middle" class="t-b t-good">Recovery</text>
+            <text x="252" y="48" text-anchor="middle" class="t-sm t-mut">cure out</text>
+            <path d="M40 130h250l-18 100h-214z" class="fg-acc"/>
+            <text x="165" y="176" text-anchor="middle" class="t-lg t-b">Prevalence</text>
+            <text x="165" y="198" text-anchor="middle" class="t-sm">all existing cases</text>
+            <path d="M165 230v40" class="fg-arrow-bad" marker-end="url(#L02d)"/>
+            <text x="178" y="256" class="t-b t-bad">Death</text>
+            <text x="178" y="272" class="t-sm t-mut">(mortality) out</text>
+            <rect x="20" y="300" width="290" height="44" rx="8" class="fg-box"/>
+            <text x="165" y="320" text-anchor="middle" class="t-b">P = I × D</text>
+            <text x="165" y="336" text-anchor="middle" class="t-sm t-mut">assumes constant incidence</text>
+          </svg>
+      - kind: explain
+        page: 37
+        quote: "Prevalence =Incidence x Mean Duration"
+        title: "المعادلة"
+        text: |
+          ==Prevalence = Incidence × Mean duration==
+
+          مثال slide 37:
+
+          - **Incidence 10 per 1000 per year × duration 5 years = prevalence 50 per 1000**
+
+          وبالعكس:
+
+          - **D = P ÷ I**
+      - kind: table
+        page: 39
+        quote: "Adult onset diabetes ▪ Essential hypertension – Incidence low – Incidence high – Duration long – Duration long – Prevalence high – Prevalence high"
+        title: "Incidence + duration ← prevalence"
+        columns: ["Disease", "Incidence, duration", "Prevalence"]
+        rows:
+          - ["Cancer of the pancreas", "Low, short", "Low"]
+          - ["Common cold", "High, short", "Low"]
+          - ["Adult-onset diabetes", "Low, long", "High"]
+          - ["Essential hypertension", "High, long", "High"]
+        hide: [[0, 2], [1, 2], [2, 2], [3, 2]]
+      - kind: aside
+        tone: exam
+        page: 38
+        quote: "Low incidence diseases become important public health problems due to high prevalence."
+        text: |
+          الـ **duration** هو اللي بيحسم: مرض ==incidence واطي بس مزمن ومبيموتش== (زي الـ diabetes) بيبقى prevalence عالي ومشكلة public health كبيرة. والـ common cold incidence عالي جدًا بس بيخلص في أسبوع، فالـ prevalence واطي.
+      - kind: check
+        page: 41
+        quote: "If a drug prevents mortality but does not affect cure, then which of the following will be true:"
+        question: "If a drug prevents mortality but does not affect cure, which will be true?"
+        options:
+          - "Prevalence will increase"
+          - "Prevalence will decrease"
+          - "Incidence will decrease"
+          - "Incidence will increase"
+        answer: 0
+        why:
+          - "صح (إجابة الـ slide: d): قفلت بلاعة الموت وبلاعة الشفا زي ما هي ← الناس بتعيش أطول بالمرض ← duration بيزيد ← البانيو بيتملي."
+          - "ده يحصل لو الدوا بيشفي (بيفتح بلاعة الـ recovery)."
+          - "الدوا مش بيمنع حالات جديدة، الحنفية زي ما هي."
+          - "مفيش سبب لحالات جديدة أكتر."
+      - kind: check
+        page: 42
+        quote: "P= I * D 80 = 20 * D D= 80/20 = 4 years"
+        question: "Incidence 20 per 10,000,000 per year, mortality 4 per 10,000,000, prevalence 80 per 10,000,000. Average duration?"
+        options: ["4 years", "5 years", "20 years", "Insufficient data"]
+        answer: 0
+        why:
+          - "صح: D = P/I = 80/20 = 4."
+          - "80/4 = 20 و20/4 = 5: الاتنين استخدموا الـ mortality غلط، وهي مش داخلة في المعادلة."
+          - "80/4: الـ mortality مش الـ incidence."
+          - "P وI كفاية."
+      - kind: case
+        page: 43
+        quote: "The incidence and prevalence rates of pneumococcal pneumo- nia in children under five years of age in a defined community are"
+        stem: "Pneumococcal pneumonia في أطفال أقل من 5 سنين، 1981-1991: الـ incidence ثابتة تقريبًا حوالي 10 per 100,000، والـ prevalence نازلة من حوالي 50 لأقل من 20."
+        steps:
+          - question: "With incidence flat, what must have changed to lower the prevalence?"
+            options: ["Duration got shorter", "Fewer new cases", "Duration got longer"]
+            answer: 0
+            why: "P = I × D. الـ I ثابت، فالـ P نزل لأن الـ D قصر."
+          - question: "Which conclusion fits the figure?"
+            options:
+              - "Recovery from the disease is becoming rapid"
+              - "Primary prevention by vaccination is succeeding"
+              - "Incidence is decreasing"
+              - "The rate of recovery remains the same"
+            answer: 0
+            why: "Duration قصير = الناس بتخف أسرع (أو بتموت أسرع، بس ده مش في الاختيارات). الـ vaccination كانت هتنزّل الـ incidence، وهي ثابتة."
+      - kind: try
+        items: [res.L02.027, res.L02.029, res.L02.031, res.L02.033]
+    recap:
+      - "Prevalence = **existing** cases ÷ whole population، point أو period."
+      - "Incidence = سرعة، newly diagnosed، at risk. Prevalence = حجم، surviving cases، whole population."
+      - "**P = I × D**، و D = P/I. الـ mortality مش داخلة في المعادلة."
+      - "تقفل بلاعة الموت ← prevalence يزيد. تشفي أسرع ← prevalence يقل."
+    practice: [res.L02.027, res.L02.028, res.L02.029, res.L02.030, res.L02.031, res.L02.032, res.L02.033, res.L02.034, res.L02.035, res.L02.036, res.L02.037, res.L02.057]
+  # ------------------------------------------------------------------
+  - id: res.L02.lesson5
+    title: "Secondary attack rate: العدوى في البيت"
+    hook: "طفل جاب hepatitis A من الحضانة، وبعد فترة حضانة أخوه وأمه تعبوا. نحسب البيت إزاي من غير ما نعدّ الطفل الأول؟"
+    minutes: 7
+    pages: [44, 50]
+    topics: [secondary]
+    goals:
+      - "تكتب الـ SAR formula وتعرف تشيل مين من المقام"
+      - "تحل أمثلة الـ shigellosis والـ hepatitis A"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 44
+        quote: "The primary case is excluded from both the numerator and denominator."
+        title: "الـ SAR"
+        text: |
+          الـ **secondary attack rate** بيقيس الحالات الجديدة بين ==contacts== حالة معروفة (الـ primary case). مهم في الأمراض اللي بتنتقل person-to-person: TB، measles، shigellosis، varicella.
+
+          - **SAR = exposed persons who develop the disease within the incubation period ÷ total exposed susceptible contacts × 100**
+
+          يعني بتعدّ بس اللي تعبوا ==within the incubation period==، وبتقسم على الـ **susceptible** contacts.
+
+          والقاعدة الذهبية: الـ **primary case** بيطلع من البسط والمقام.
+      - kind: reveal
+        page: 46
+        quote: "subtract the number of primary cases from the total number living in the households. Immune individuals should also be subtracted."
+        prompt: "مين تاني بيطلع من المقام غير الـ primary case؟ وليه؟"
+        answer: |
+          الـ ==immune individuals== (متطعمين أو جالهم قبل كده).
+
+          المقام = **susceptibles** بس. اللي مش ممكن يتعدي مالوش مكان فيه. علشان كده slide 45 بيقول إن الـ **incubation period** والـ **state of immunity** مهمين.
+      - kind: case
+        page: 48
+        quote: "17 ----------------------------------- x100 68"
+        stem: "Shigellosis: 18 شخص في 18 بيت مختلف تعبوا، والقرية 1,000. بعد incubation period، 17 كمان تعبوا في نفس البيوت. الـ 18 بيت فيهم 86 شخص."
+        steps:
+          - question: "Overall attack rate in the community?"
+            options: ["1.8%", "18%", "3.5%"]
+            answer: 0
+            why: "18/1,000 × 100 = 1.8%."
+          - question: "SAR denominator?"
+            options: ["68", "86", "69", "1,000"]
+            answer: 0
+            why: "86 − 18 primary = 68 susceptible contacts."
+          - question: "Secondary attack rate?"
+            options: ["25%", "19.8%", "94%", "1.7%"]
+            answer: 0
+            why: "17/68 × 100 = 25%. لو قسمت على 86 (19.8%) نسيت تشيل الـ primary cases."
+      - kind: check
+        page: 49
+        quote: "Seven cases of hepatitis A occurred among 70 children attending a"
+        question: "7 of 70 nursery children get hepatitis A, each from a different family. The 7 families hold 32 people; 5 family members fall ill one incubation period later. Secondary attack rate?"
+        options: ["20%", "15.6%", "10%", "7.1%"]
+        answer: 0
+        why:
+          - "صح: at risk = 32 − 7 = 25، و5/25 = 20%."
+          - "5/32: نسيت تشيل الأطفال الـ primary."
+          - "ده الـ attack rate في الحضانة (7/70)."
+          - "5/70: مقام غلط خالص."
+      - kind: aside
+        tone: trap
+        page: 47
+        quote: "One incubation period later, 17 persons in the same households as these \"primary\" cases developed shigellosis."
+        text: |
+          في الامتحان هتلاقي رقمين: ==عدد البيت كله== و==عدد الـ primary cases==. اطرح دايمًا، وبعدين اسأل نفسك: هل فيه immune مذكورين؟ اطرحهم كمان.
+      - kind: explain
+        page: 50
+        quote: "The no. of recoveries from a certain disease in a certain period of time in a certain area"
+        title: "Recovery rate"
+        text: |
+          - **Recovery rate = recoveries from a disease ÷ ill persons in the same period and area × 100**
+
+          يعني نسبة اللي ==خفّوا== من العيانين.
+
+          افتكر البانيو: ده حجم بلاعة الـ **recovery**.
+      - kind: try
+        items: [res.L02.038, res.L02.039, res.L02.042]
+    recap:
+      - "SAR = حالات بين الـ contacts خلال الـ incubation period ÷ susceptible contacts × 100."
+      - "اطرح الـ primary cases والـ immune من المقام، والـ primary من البسط."
+      - "Recovery rate = recoveries ÷ ill persons × 100."
+    practice: [res.L02.038, res.L02.039, res.L02.040, res.L02.041, res.L02.042, res.L02.060]
+  # ------------------------------------------------------------------
+  - id: res.L02.lesson6
+    title: "الوفيات: crude، specific، fatality، ولا proportionate؟"
+    hook: "6000 وفاة في مقاطعة، 1200 منهم leukemia. ده 20%؟ ولا 0.48 per 1000؟ الإجابتين صح، بس لسؤالين مختلفين."
+    minutes: 10
+    pages: [51, 71]
+    topics: [mortality]
+    goals:
+      - "تفرق بين crude وcause-specific وproportionate وcase fatality بالمقام"
+      - "تحسب infant وneonatal mortality وتعرف perinatal period I"
+      - "تحل أسئلة الـ slides 61، 62، 71"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 53
+        quote: "Crude mortality rate Deaths Population Cause-specific mortality rate Deaths from cause Population"
+        title: "السر كله في المقام"
+        text: |
+          - **Crude death rate = all deaths ÷ estimated midyear population × 1000**
+          - **Age-specific = deaths in an age group ÷ midyear population of that age group × 1000**
+          - **Cause-specific = deaths from a disease ÷ total midyear population × 1000**
+          - **Proportionate mortality = deaths from a disease ÷ all deaths × 100**
+          - **Case fatality = deaths from a disease ÷ people with the same disease × 100**
+
+          البسط في آخر 3 واحد (deaths from a disease). ==المقام== هو اللي بيقولك أنهي rate.
+      - kind: figure
+        page: 53
+        quote: "Case-fatality rate Deaths from cause Number of persons with the disease/cause"
+        title: "نفس البسط، 3 مقامات"
+        alt: "One box at the top, deaths from disease X, with three arrows down to three denominators: whole population (cause-specific mortality rate, per 1000), all deaths (proportionate mortality, percent), people with disease X (case fatality rate, percent)."
+        caption: "اسأل: «من مين؟» من **الناس كلها** = cause-specific. من **كل الميتين** = proportionate. من **العيانين بالمرض** = ==case fatality==."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L02m" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-bad"/></marker>
+            </defs>
+            <rect x="75" y="8" width="180" height="44" rx="8" class="fg-bad"/>
+            <text x="165" y="35" text-anchor="middle" class="t-b">Deaths from disease X</text>
+            <path d="M120 52L60 112" class="fg-arrow-bad" marker-end="url(#L02m)"/>
+            <path d="M165 52v60" class="fg-arrow-bad" marker-end="url(#L02m)"/>
+            <path d="M210 52L270 112" class="fg-arrow-bad" marker-end="url(#L02m)"/>
+            <text x="165" y="90" text-anchor="middle" class="t-sm t-mut">÷</text>
+            <rect x="4" y="118" width="104" height="60" rx="6" class="fg-box"/>
+            <text x="56" y="140" text-anchor="middle" class="t-sm t-b">Whole</text>
+            <text x="56" y="156" text-anchor="middle" class="t-sm t-b">population</text>
+            <text x="56" y="171" text-anchor="middle" class="t-sm t-mut">midyear</text>
+            <rect x="113" y="118" width="104" height="60" rx="6" class="fg-box"/>
+            <text x="165" y="146" text-anchor="middle" class="t-sm t-b">All deaths</text>
+            <text x="165" y="164" text-anchor="middle" class="t-sm t-mut">any cause</text>
+            <rect x="222" y="118" width="104" height="60" rx="6" class="fg-box"/>
+            <text x="274" y="140" text-anchor="middle" class="t-sm t-b">People with</text>
+            <text x="274" y="156" text-anchor="middle" class="t-sm t-b">disease X</text>
+            <rect x="4" y="196" width="104" height="70" rx="6" class="fg-acc"/>
+            <text x="56" y="218" text-anchor="middle" class="t-sm t-b">Cause-specific</text>
+            <text x="56" y="234" text-anchor="middle" class="t-sm t-b">mortality</text>
+            <text x="56" y="254" text-anchor="middle" class="t-sm">× 1000</text>
+            <rect x="113" y="196" width="104" height="70" rx="6" class="fg-acc"/>
+            <text x="165" y="218" text-anchor="middle" class="t-sm t-b">Proportionate</text>
+            <text x="165" y="234" text-anchor="middle" class="t-sm t-b">mortality</text>
+            <text x="165" y="254" text-anchor="middle" class="t-sm">× 100 (%)</text>
+            <rect x="222" y="196" width="104" height="70" rx="6" class="fg-good"/>
+            <text x="274" y="218" text-anchor="middle" class="t-sm t-b">Case fatality</text>
+            <text x="274" y="234" text-anchor="middle" class="t-sm t-b">rate</text>
+            <text x="274" y="254" text-anchor="middle" class="t-sm">× 100 (%)</text>
+            <text x="165" y="290" text-anchor="middle" class="t-sm t-mut">Case fatality = severity of the disease</text>
+          </svg>
+      - kind: case
+        page: 59
+        quote: "There were 6000 deaths (1200 leukemia, 1750 stroke, 250 pneu- monia, 250 Hodgkin’s disease, and 2500 acute myocardial infarc-"
+        stem: "مقاطعة فيها 2.5 مليون، و6000 وفاة في السنة: 1200 leukemia، 1750 stroke، 250 pneumonia، 250 Hodgkin، 2500 acute MI."
+        steps:
+          - question: "Cause-specific mortality rate for acute MI?"
+            options: ["1 per 1000", "41.7%", "2.4 per 1000"]
+            answer: 0
+            why: "2500/2,500,000 × 1000 = 1 per 1000 (slide 58)."
+          - question: "Proportionate mortality rate for leukemia?"
+            options: ["20%", "0.48 per 1000", "2%"]
+            answer: 0
+            why: "1200/6000 × 100 = 20% (slide 59)."
+          - question: "Crude death rate?"
+            options: ["2.4 per 1000", "6 per 1000", "24 per 1000"]
+            answer: 0
+            why: "6000/2,500,000 × 1000 = 2.4 per 1000."
+      - kind: check
+        page: 61
+        quote: "Which of the following is a good measure of the severity of an acute disease?"
+        question: "Which is a good measure of the severity of an acute disease?"
+        options:
+          - "Case fatality rate"
+          - "Standardized mortality ratio"
+          - "Cause-specific death rate"
+          - "Age-specific death rate"
+        answer: 0
+        why:
+          - "صح: من اللي جالهم المرض، كام مات منه؟ ده بالظبط «قد إيه خطير»."
+          - "الـ SMR بيقارن الوفيات الفعلية بالمتوقعة في population."
+          - "مقامه الناس كلها، فبيخلط «منتشر قد إيه» مع «خطير قد إيه»."
+          - "وفيات فئة عمرية من كل الأسباب."
+      - kind: check
+        page: 62
+        quote: "all of the following rates can be calculated except:"
+        question: "TB district: 800 cases in a population of 200,000 at the end of 2000; in 2001, 200 new cases and 12 TB deaths, population 210,000. Which rate can NOT be calculated?"
+        options: ["Proportional mortality", "Prevalence", "Incidence", "Case fatality"]
+        answer: 0
+        why:
+          - "صح (إجابة الـ slide: c): الـ PMR محتاج ==كل الوفيات== من كل الأسباب، ومش مذكورة."
+          - "حالات موجودة ÷ population."
+          - "حالات جديدة ÷ at risk."
+          - "وفيات الـ TB ÷ حالات الـ TB."
+      - kind: figure
+        page: 66
+        quote: "Perinatal mortality rate ="
+        title: "خط الزمن حوالين الولادة"
+        alt: "A timeline from 20 weeks of gestation through birth to 1 year. Before birth: abortion up to 28 weeks, then stillbirth. Perinatal period I spans 28 weeks gestation to 7 days after birth. After birth: neonatal 0 to 28 days (early under 7 days), postneonatal 28 days to 1 year; infant mortality covers birth to 1 year."
+        caption: "الـ ==perinatal period I== = من 28 أسبوع حمل لحد 7 أيام بعد الولادة. الـ neonatal = أول 28 يوم. الـ postneonatal = من 28 يوم لسنة. الـ infant = السنة كلها."
+        svg: |
+          <svg viewBox="0 0 330 270" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 130h310" class="fg-ink" stroke-width="4"/>
+            <path d="M140 110v40" class="fg-ink" stroke-width="3"/>
+            <text x="140" y="104" text-anchor="middle" class="t-b">birth</text>
+            <text x="20" y="150" text-anchor="middle" class="t-sm t-mut">20w</text>
+            <text x="75" y="150" text-anchor="middle" class="t-sm t-mut">28w</text>
+            <text x="175" y="150" text-anchor="middle" class="t-sm t-mut">7d</text>
+            <text x="225" y="150" text-anchor="middle" class="t-sm t-mut">28d</text>
+            <text x="315" y="150" text-anchor="end" class="t-sm t-mut">1y</text>
+            <rect x="10" y="20" width="64" height="30" rx="5" class="fg-box"/>
+            <text x="42" y="40" text-anchor="middle" class="t-sm">Abortion</text>
+            <rect x="76" y="20" width="62" height="30" rx="5" class="fg-box"/>
+            <text x="107" y="40" text-anchor="middle" class="t-sm">Stillbirth</text>
+            <rect x="10" y="56" width="128" height="26" rx="5" class="fg-thin"/>
+            <text x="74" y="74" text-anchor="middle" class="t-sm t-mut">Fetal deaths</text>
+            <rect x="142" y="20" width="82" height="30" rx="5" class="fg-acc"/>
+            <text x="183" y="40" text-anchor="middle" class="t-sm">Neonatal</text>
+            <rect x="226" y="20" width="94" height="30" rx="5" class="fg-acc"/>
+            <text x="273" y="40" text-anchor="middle" class="t-sm">Postneonatal</text>
+            <rect x="142" y="56" width="178" height="26" rx="5" class="fg-good"/>
+            <text x="231" y="74" text-anchor="middle" class="t-sm">Infant mortality (to 1 year)</text>
+            <rect x="75" y="166" width="100" height="34" rx="5" class="fg-bad"/>
+            <text x="125" y="188" text-anchor="middle" class="t-sm t-b">Perinatal I</text>
+            <text x="125" y="222" text-anchor="middle" class="t-sm">28 weeks gestation</text>
+            <text x="125" y="240" text-anchor="middle" class="t-sm">to 7 days after birth</text>
+          </svg>
+      - kind: table
+        page: 63
+        quote: "Number of infant deaths less than one year of age x1000 Total number of live births during the same year"
+        title: "معدلات الأطفال والأمهات"
+        columns: ["Rate", "Numerator", "Denominator"]
+        rows:
+          - ["Infant mortality (per 1000)", "Deaths under 1 year", "Live births, same year"]
+          - ["Neonatal mortality (per 1000)", "Deaths in first 28 days", "Live births, same year"]
+          - ["Under-five mortality (per 1000)", "Deaths below age 5", "Live births, same period"]
+          - ["Perinatal, period I (per 1000)", "Fetal deaths ≥28 wk + deaths in first 7 days", "Fetal deaths + live births"]
+          - ["Maternal mortality ratio (per 100,000)", "Maternal deaths", "Live births, same year and area"]
+        hide: [[0, 2], [3, 1], [3, 2], [4, 2]]
+      - kind: aside
+        tone: trap
+        page: 68
+        quote: "Number of maternal deaths in a given year and area Number of live births in the same year and area"
+        text: |
+          الـ **maternal mortality** اسمها ==ratio== مش rate، ومقامها **live births** مش الستات الحوامل، وبتتكتب **per 100,000** live births. والـ **perinatal** بس هو اللي مقامه فيه ==fetal deaths + live births== (total births).
+      - kind: check
+        page: 63
+        quote: "or 9 infant deaths per 1000 live births per year."
+        question: "A city with 2.37 million people reports 270 infant deaths and 30,000 live births in a year. Infant mortality rate?"
+        options: ["9 per 1000 live births", "0.11 per 1000 population", "90 per 1000 live births", "Cannot be calculated"]
+        answer: 0
+        why:
+          - "صح: 270/30,000 × 1000 = 9."
+          - "المقام live births، مش الـ population (الـ 2.37 مليون رقم مُلهي)."
+          - "غلطة في الصفار."
+          - "عندك كل اللي محتاجه."
+      - kind: match
+        page: 71
+        quote: "Number of fetal deaths plus deaths in the first week of life per 1000 total births in 1 year."
+        prompt: "وصّل الوصف بالـ rate (slide 71):"
+        pairs:
+          - ["Deaths in the first 28 days per 1000 live births", "Neonatal mortality"]
+          - ["Fetal deaths + first-week deaths per 1000 total births", "Perinatal mortality"]
+          - ["Deaths under 1 year per 1000 live births", "Infant mortality"]
+          - ["Deaths from 28 days to 11 months per 1000 live births", "Postneonatal mortality"]
+        why: "إجابة الـ slide: 64-d (neonatal)، 65-c (perinatal)، 66-b (infant)، 67-e (postneonatal)."
+      - kind: check
+        page: 70
+        quote: "With the information given, the average duration of the disease is"
+        question: "Melanoma: incidence 30 per 1,000,000/year, mortality 5 per 1,000,000/year, point prevalence 90 per 1,000,000. Average duration?"
+        options: ["3 years", "6 years", "18 years", "Insufficient data"]
+        answer: 0
+        why:
+          - "صح: D = P/I = 90/30 = 3 سنين. الـ mortality رقم مُلهي."
+          - "30/5: قسمت الـ incidence على الـ mortality، مالهاش معنى هنا."
+          - "90/5: الـ mortality مش الـ incidence."
+          - "P وI كفاية."
+      - kind: try
+        items: [res.L02.043, res.L02.050, res.L02.058, res.L02.053]
+    recap:
+      - "المقام بيحدد: population ← cause-specific (×1000)، all deaths ← proportionate (%)، المرضى ← case fatality (%)."
+      - "Case fatality = **severity**."
+      - "Infant/neonatal/under-5 ÷ live births × 1000. Perinatal ÷ (fetal deaths + live births). MMR ÷ live births × 100,000."
+      - "Perinatal I = 28 أسبوع حمل لـ 7 أيام. Neonatal = 28 يوم."
+    practice: [res.L02.043, res.L02.044, res.L02.045, res.L02.046, res.L02.047, res.L02.048, res.L02.049, res.L02.050, res.L02.051, res.L02.052, res.L02.053, res.L02.054, res.L02.055, res.L02.056, res.L02.058, res.L02.059]

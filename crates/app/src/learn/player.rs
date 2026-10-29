@@ -189,7 +189,19 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                     step: st.clone(),
                     seed: format!("{}#{}", lesson.id, k),
                     before: before[k],
-                    skipped: k == i && state == StepState::Skipped,
+                    retry: {
+                        let st_k = attempt.read().state(&lesson, k);
+                        let q = st.body.is_question();
+                        (q && st_k == StepState::Done, q && st_k == StepState::AnsweredBefore)
+                    },
+                    on_retry: {
+                        let sig = sig(&st.body);
+                        let save_now = save_now.clone();
+                        move |_| {
+                            attempt.write().put(k, sig.clone(), Draft::None);
+                            save_now();
+                        }
+                    },
                     on_answer: {
                         let save_now = save_now.clone();
                         move |right: bool| {
@@ -202,9 +214,6 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                 }
             }
             footer { class: "ls-nav",
-                if let Some(h) = if ready.is_some() && !can_go { Some(tx::READY.to_string()) } else if can_go { None } else { gate.hint.clone() } {
-                    p { class: "ls-gate small", role: "status", "{h}" }
-                }
                 button {
                     class: if pages { "ls-arrow" } else { "btn btn-secondary" },
                     "data-nav": "back",
@@ -232,7 +241,7 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                 } else if pages {
                     span { class: "ls-page-of muted small", "{tx::PAGE_OF} {i + 1} {tx::OF_N} {n}" }
                 }
-                if let Some(run) = ready.filter(|_| !can_go) {
+                if let Some(run) = ready {
                     button {
                         class: "btn btn-primary btn-lg ls-next",
                         "data-nav": "check",
@@ -275,11 +284,19 @@ fn Stage(
     seed: String,
     /// Answered before its response was saved: Some(right) (Try steps: done).
     before: Option<bool>,
-    skipped: bool,
+    /// (checked now, answered before): a question he can do again.
+    retry: (bool, bool),
+    on_retry: EventHandler<()>,
     on_answer: EventHandler<bool>,
 ) -> Element {
     use_context_provider(|| StepAt(k));
     let try_done = before.is_some() && matches!(step.body, StepBody::Try { .. });
+    // "حاول تاني": the step starts over as a fresh task. Practice only: the
+    // first result stays the one that counts (Attempt::answer).
+    let mut round = use_signal(|| 0u32);
+    let mut fresh = use_signal(|| false);
+    let (checked, answered_before) = retry;
+    let can_retry = checked || (answered_before && !fresh());
     rsx! {
         article { class: "card ls-stage", hidden: !current, "data-kind": step.body.kind(), "data-n": k + 1,
             if try_done {
@@ -288,11 +305,25 @@ fn Stage(
                     p { {tx::TRY_DONE} }
                     p { class: "muted small", {tx::TRY_DONE_HINT} }
                 }
-            } else if let Some(right) = before {
-                AnsweredBefore { body: step.body.clone(), right }
+            } else if before.is_some() && !fresh() {
+                AnsweredBefore { body: step.body.clone() }
             } else {
-                if skipped { p { class: "note small ls-skipped", {tx::SKIPPED} } }
-                StepView { body: step.body.clone(), seed, on_answer }
+                for r in std::iter::once(round()) {
+                    StepView { key: "{r}", body: step.body.clone(), seed: seed.clone(), on_answer }
+                }
+            }
+            if can_retry && !try_done {
+                button {
+                    class: "icon-button ls-retry",
+                    aria_label: tx::RETRY,
+                    title: tx::RETRY,
+                    onclick: move |_| {
+                        on_retry.call(());
+                        fresh.set(true);
+                        *round.write() += 1;
+                    },
+                    span { aria_hidden: "true", "↻" }
+                }
             }
             if let Some(page) = step.page {
                 footer { class: "ls-src",

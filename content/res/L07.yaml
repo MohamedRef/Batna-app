@@ -1,0 +1,1474 @@
+schema: batna.content/v1
+lecture: res.L07
+title: Experimental studies, part 2
+author: Prof. Afaf Gaber Ibrahim
+book: { chapter: 1, pages: [1, 124] }
+topics:
+  - { id: sample-size, title: "Step 5: sample size, errors and power" }
+  - { id: conduct, title: "Steps 6, 7 and 9 to 11: protocols, enrolment, placebo, blinding, follow-up and stopping" }
+  - { id: randomization, title: "Step 8: simple, block and stratified randomization" }
+  - { id: concealment, title: Allocation concealment and the biases it prevents }
+  - { id: effect-measures, title: "Step 12: CER, EER, RRR, ARR and NNT" }
+  - { id: chance, title: "The role of chance: p-values and confidence intervals" }
+  - { id: itt, title: Intention-to-treat vs per-protocol analysis }
+  - { id: ethics, title: "Ethics: Helsinki, equipoise, consent and registration" }
+  - { id: appraisal, title: "Strengths, CONSORT, costs and quality assessment" }
+  - { id: quasi, title: Quasi-experimental designs }
+  - { id: practice, title: Practice exercises from the lecture }
+items:
+  # ---------------- sample-size (slides 1-21) ----------------
+  - id: res.L07.001
+    kind: card
+    topic: sample-size
+    front: Why must the sample size of a clinical trial be calculated, rather than guessed?
+    back: >-
+      Too small a sample gives insignificant results and wastes the effort; too large a sample wastes money,
+      because every subject in a trial costs a lot, so even one extra subject is poor financial management.
+    src: { page: 1, quote: "Too small a sample would produce insignificant results and would be a waste of efforts" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L07.002
+    kind: card
+    topic: sample-size
+    front: What is a type I (alpha) error?
+    back: >-
+      A false-positive conclusion: rejecting a true null hypothesis, that is, detecting a difference that is not really present.
+      In plain words: putting a useless medicine onto the market.
+    src: { page: 3, quote: "describes the phenomenon of detecting a difference that is not really present" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L07.003
+    kind: card
+    topic: sample-size
+    front: What is a type II (beta) error?
+    back: >-
+      A false-negative conclusion: failing to reject a false null hypothesis, so a real difference is missed.
+      In plain words: keeping a good medicine away from patients.
+    src: { page: 4, quote: "keep a good medicine away from patients" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L07.004
+    kind: table
+    topic: sample-size
+    title: Possible trial outcomes
+    columns: [Trial result, "Truth: no real difference", "Truth: real difference"]
+    rows:
+      - [Treatments differ, Type I error (alpha), Correct (power)]
+      - [Treatments do not differ, Correct, Type II error (beta)]
+    blanks: [[0, 1], [1, 2], [0, 2]]
+    src: { page: 5, quote: "Possible trial outcomes" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L07.005
+    kind: card
+    topic: sample-size
+    front: What is power, and how is it calculated?
+    back: >-
+      Power = 1 - beta: the ability of the study to find true differences of a given size (delta),
+      that is, the chance of correctly identifying a better medicine.
+    src: { page: 6, quote: "Power quantifies the ability of the study to find true differences" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L07.006
+    kind: card
+    topic: sample-size
+    front: What is the minimal clinically relevant difference (MCRD, delta)? Give the lecture's two examples.
+    back: >-
+      The smallest difference between the groups that the investigator considers clinically relevant.
+      Continuous outcome: 5 kg of body weight. Binary outcome (myocardial infarction yes/no): a 10% difference between treatment and control groups.
+    src: { page: 7, quote: "an investigator could choose a difference of 10% between the treatment group and the control group as MCRD" }
+    status: unverified
+  - id: res.L07.007
+    kind: enumerate
+    topic: sample-size
+    prompt: Enumerate the five factors that affect the sample size of an RCT.
+    points:
+      - Alpha (type I error)
+      - Beta (type II error)
+      - Power (1 - beta)
+      - Minimal clinically relevant difference (MCRD, delta)
+      - Variance of the outcome (SD for a continuous outcome)
+    pass: 4
+    src: { page: 8, quote: "Factors affecting sample size of RCT" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L07.008
+    kind: table
+    topic: sample-size
+    title: "Increase the factor: what happens to the sample size?"
+    columns: [Factor increased, Sample size needed, Why]
+    rows:
+      - [Alpha (accept more type I error), Smaller, Z for alpha falls]
+      - [Power, Larger, Z for beta rises]
+      - [MCRD (delta), Smaller, A big difference is easy to see]
+      - [Variance (SD of the outcome), Larger, More variability hides the difference]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 8, quote: "The variability of the outcome measure as the SD in case of continuous outcome" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L07.009
+    kind: card
+    topic: sample-size
+    front: What goes wrong if the margin delta is set too large, or too small?
+    back: >-
+      Too large: several inefficacious drugs reach the market, because they can be judged non-inferior or equivalent.
+      Too small: some potentially useful drugs are neglected.
+    src: { page: 9, quote: "several inefficacious drugs will appear in the market" }
+    status: unverified
+  - id: res.L07.010
+    kind: card
+    topic: sample-size
+    front: Write the simple sample-size formula for a difference in proportions, and name each part.
+    back: >-
+      n per group = 2 x p(1 - p) x (Z-beta + Z-alpha/2)^2 / (p1 - p2)^2. p(1 - p) is the variability, Z-beta the desired power
+      (0.84 for 80%), Z-alpha/2 the significance level (1.96 for 0.05), and p1 - p2 the effect size. It assumes equal-sized groups.
+    src: { page: 10, quote: "Simple formula for difference in proportions" }
+    status: unverified
+  - id: res.L07.011
+    kind: cloze
+    topic: sample-size
+    text: >-
+      For a difference in means, n per group = 2 x {{c1::sigma squared (SD of the outcome)}} x (Z-beta + Z-alpha/2)^2 / difference squared (the effect size).
+      Z-beta is typically {{c2::0.84}} for 80% power and Z-alpha/2 is typically {{c3::1.96}}.
+    src: { page: 11, quote: "typically .84 for 80% power" }
+    status: unverified
+  - id: res.L07.012
+    kind: card
+    topic: sample-size
+    front: What is the most feasible way to improve the estimate of random error in a trial?
+    back: Recruit a sufficient number of subjects according to a sample-size calculation (power analysis).
+    src: { page: 2, quote: "recruit a sufficient number of subjects according to a sample size calculation or power analysis" }
+    status: unverified
+  - id: res.L07.013
+    kind: mcq
+    topic: sample-size
+    stem: >-
+      An RCT comparing two drugs shows a difference between them (p < 0.05), but in reality the two groups do not differ.
+      This is an example of:
+    options:
+      - Type 1 error (alpha error)
+      - Type 2 error (beta error)
+      - 1 - alpha
+      - 1 - beta
+    answer: 0
+    why:
+      - The trial found a difference that is not really there, a false positive.
+      - A type 2 error misses a real difference; here there was none to miss.
+      - 1 - alpha is the chance of correctly finding no difference.
+      - 1 - beta is power, the chance of correctly finding a real difference.
+    src: { page: 13, quote: "Assume in reality, however, the 2 groups do not differ" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L07.014
+    kind: mcq
+    topic: sample-size
+    stem: Which of the following best describes a type I error?
+    options:
+      - The null is true, but we mistakenly reject it.
+      - The null is false and we reject it.
+      - The null is false, but we fail to reject it.
+      - The null is true and we fail to reject it.
+    answer: 0
+    why:
+      - Rejecting a true null is a false positive, which is a type I error.
+      - Rejecting a false null is the correct decision; its probability is the power.
+      - Failing to reject a false null is a type II error.
+      - Keeping a true null is the correct decision (1 - alpha).
+    src: { page: 14, quote: "The null is true, but we mistakenly reject it" }
+    status: unverified
+  - id: res.L07.015
+    kind: mcq
+    topic: sample-size
+    stem: In a statistical test of hypotheses, a type II error is committed if
+    options:
+      - We reject the null hypothesis when it is in fact valid.
+      - We fail to reject the null hypothesis when it is in fact invalid.
+      - We reject the null hypothesis when it is in fact invalid.
+      - We fail to reject the null hypothesis when it is in fact valid.
+    answer: 1
+    why:
+      - That is a type I error.
+      - A false null that survives is a missed difference, a false negative.
+      - That is the correct decision (power).
+      - That is also a correct decision.
+    src: { page: 15, quote: "We fail to reject the null hypothesis when, in fact, the null hypothesis is invalid" }
+    status: unverified
+  - id: res.L07.016
+    kind: mcq
+    topic: sample-size
+    stem: Which alpha level gives the smallest chance of committing a type I error?
+    options: ["0.025", "0.10", "0.01", "0.05"]
+    answer: 2
+    why:
+      - 0.025 allows a 2.5% chance, more than 0.01.
+      - 0.10 is the largest chance of the four.
+      - Alpha is the type I error rate itself, so the smallest alpha, 0.01, is the smallest chance.
+      - 0.05 allows a 5% chance.
+    src: { page: 16, quote: "Which alpha level provides the smallest chance of committing a Type I error" }
+    status: unverified
+  - id: res.L07.017
+    kind: mcq
+    topic: sample-size
+    stem: >-
+      In a well-designed trial of ovarian cancer treatment, remission at one year is similar for a new drug and usual care, p = 0.4.
+      This means that
+    options:
+      - Both treatments are effective
+      - Neither treatment is effective
+      - The statistical power of this study is 60%
+      - The best estimate of the treatment effect is 0.4
+      - It is not possible to decide which treatment is better from this information
+    answer: 4
+    why:
+      - A non-significant comparison says nothing about whether either works against no treatment.
+      - There was no placebo arm, so we cannot say neither works.
+      - Power is planned from alpha, beta, delta and variance; it is not 1 - p.
+      - The p value is a probability, not the size of the effect.
+      - p = 0.4 is not significant, and without the effect size and its CI we cannot pick a winner.
+    src: { page: 17, quote: "It is not possible to decide which treatment is better based on these information" }
+    status: unverified
+  - id: res.L07.018
+    kind: mcq
+    topic: sample-size
+    stem: All of the following can be increased to get a smaller sample size in an RCT EXCEPT
+    options: [Alpha error, Power, MCRD (delta), Beta error]
+    answer: 1
+    why:
+      - Accepting a larger alpha lowers Z-alpha, so fewer subjects are needed.
+      - Higher power raises Z-beta, so more subjects are needed.
+      - A larger difference is easier to detect, so fewer subjects are needed.
+      - Accepting a larger beta means lower power, so fewer subjects are needed.
+    src: { page: 18, quote: "All of the followings can be increased to get smaller sample size in RCT EXCEPT" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L07.019
+    kind: mcq
+    topic: sample-size
+    stem: >-
+      For your RCT, you want 80% power to detect a reduction of 10 points or more in the treatment group relative to placebo.
+      What is the 10 in your sample-size formula?
+    options: [Standard deviation, Mean change, Effect size, Standard error, Significance level]
+    answer: 2
+    why:
+      - The SD is the variability of the outcome, a separate input.
+      - It is a planned difference between groups, not the mean change in one group.
+      - The smallest difference worth detecting is the effect size (MCRD, delta).
+      - The standard error comes out of the data, not the plan.
+      - The significance level is alpha, typically 0.05.
+    src: { page: 20, quote: "you want 80% power to detect a reduction of 10 points or more in the treatment group relative to placebo" }
+    status: unverified
+  - id: res.L07.020
+    kind: mcq
+    topic: sample-size
+    stem: >-
+      A significance test based on a small sample may not give a statistically significant result even if the true value
+      differs substantially from the null value. This type of result is known as
+    options:
+      - The significance level of the test
+      - The power of the study
+      - A type 1 error
+      - A type 2 error
+    answer: 3
+    why:
+      - The significance level is alpha, fixed before the test.
+      - Power is the chance of avoiding exactly this miss.
+      - A type 1 error is a false positive; this is a false negative.
+      - A real difference was missed, a false negative, which small samples make likely.
+    src: { page: 21, quote: "may not produce a statistically significant result even if the true value differs substantially from the null value" }
+    status: unverified
+  # ---------------- conduct (slides 22-25, 45-50) ----------------
+  - id: res.L07.021
+    kind: card
+    topic: conduct
+    front: What does step 6 (detailed descriptions of protocols) require?
+    back: >-
+      Detailed protocols of clinical procedures, laboratory investigations, and questionnaire and interview protocols,
+      written explicitly for every variable: intervention, co-intervention, confounders, and major and minor outcomes.
+    src: { page: 22, quote: "Detailed protocols of clinical procedures, laboratory investigations as well as the details of questionnaire and interview protocols" }
+    status: unverified
+  - id: res.L07.022
+    kind: enumerate
+    topic: conduct
+    prompt: For each variable in the trial protocol, which questions must be written down clearly?
+    points:
+      - Who will make the measurement?
+      - When will it be made?
+      - What equipment or instrument will be used?
+      - What technique will be used?
+      - How will the equipment, techniques and personnel be standardized and validated?
+    pass: 4
+    src: { page: 23, quote: "How the equipment, techniques and personnel be standardized and validated" }
+    status: unverified
+  - id: res.L07.023
+    kind: card
+    topic: conduct
+    front: What should be presented in step 7, enrolling the participants?
+    back: A "Recruitment and Participation Flow Chart" giving the numbers (n) at each step.
+    src: { page: 24, quote: "Recruitment and Participation Flow Chart" }
+    status: unverified
+  - id: res.L07.024
+    kind: card
+    topic: conduct
+    front: In step 9, how should the placebo be prepared, and what else must be planned?
+    back: >-
+      The placebo must have the same shape, colour, size and taste and be given by similar procedures.
+      Procedures for checking compliance must also be developed.
+    src: { page: 45, quote: "same shape, colour, size and taste" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L07.025
+    kind: card
+    topic: conduct
+    front: What rule applies to data collection in the two study groups, and what happens if it is broken?
+    back: >-
+      Data for each group must be of the same quality: treatment (assigned and received) recorded, and outcome criteria
+      explicitly stated and measured comparably in all groups. Otherwise there is observer bias.
+    src: { page: 46, quote: "It is essential that data collected for each of the study groups be of the same quality" }
+    status: unverified
+  - id: res.L07.026
+    kind: card
+    topic: conduct
+    front: Why is blinding step 10 of an RCT, and who can be blinded?
+    back: >-
+      Knowing whether a participant is in the treatment or control group can influence behaviour.
+      It is overcome by blinding the participants, the observer and/or the data reviewer.
+    src: { page: 47, quote: "Knowledge of whether the participant is in a treatment or control group can influence behaviour" }
+    status: unverified
+  - id: res.L07.027
+    kind: card
+    topic: conduct
+    front: In step 11, how long are subjects followed, and what must be avoided?
+    back: >-
+      Until the end point or the end of the trial period, whichever is earlier.
+      Losses to follow-up must be avoided, because they can seriously bias the results.
+    src: { page: 48, quote: "Follow up the subjects till the end point, or the period of trial, whichever is earlier" }
+    status: unverified
+  - id: res.L07.028
+    kind: enumerate
+    topic: conduct
+    prompt: "Stopping rules: when may an RCT be stopped early?"
+    points:
+      - Larger than expected benefit
+      - Larger than expected harm
+      - No important difference between the groups
+      - Clearly high mortality or complications in the intervention group
+    pass: 3
+    src: { page: 49, quote: "Evidence of clearly high mortality or complication in the intervention group" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L07.029
+    kind: mcq
+    topic: conduct
+    stem: A randomized, single-masked experimental study is conducted. Which of the following problems is surely avoided?
+    options:
+      - Noncompliance
+      - Confounding
+      - Biased assessment of the disease outcome
+      - Loss to follow-up
+    answer: 2
+    why:
+      - Masking does not make people take their treatment.
+      - Randomization balances confounders on average but cannot guarantee it, so it is not surely avoided.
+      - "This is the slide's answer: masking is the tool against biased outcome assessment. Strictly, single masking hides the group from one party only."
+      - People can still drop out of a masked trial.
+    src: { page: 50, quote: "Suppose that a randomized single masked experimental study is conducted" }
+    status: unverified
+  # ---------------- randomization (slides 26-34) ----------------
+  - id: res.L07.030
+    kind: enumerate
+    topic: randomization
+    prompt: How does randomization avoid bias? (slide 26)
+    points:
+      - Ensures the next assignment is unpredictable
+      - Reduces baseline differences in risk between treatment and control groups
+      - It is the only way to control for unknown factors
+      - Makes both groups similar in the distribution of confounding variables
+    pass: 3
+    src: { page: 26, quote: "Only way to control for unknown factors" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L07.031
+    kind: enumerate
+    topic: randomization
+    prompt: Enumerate the three benefits of randomization quoted on slide 27.
+    points:
+      - Eliminates bias in treatment assignment (selection bias and confounding)
+      - Facilitates blinding (masking) of treatments from investigators, participants and assessors
+      - Permits probability theory to express how likely a difference is due to chance
+    pass: 3
+    src: { page: 27, quote: "It permits the use of probability theory to express the likelihood that any difference in outcome between treatment groups merely indicates chance" }
+    status: unverified
+  - id: res.L07.032
+    kind: card
+    topic: randomization
+    front: How does the size of the randomized groups affect baseline balance?
+    back: The larger the randomized groups, the greater the probability of equal baseline risks.
+    src: { page: 26, quote: "larger the randomized groups, the greater the probability of equal baseline risks" }
+    status: unverified
+  - id: res.L07.033
+    kind: enumerate
+    topic: randomization
+    prompt: Enumerate the three methods of random allocation of subjects.
+    points:
+      - Simple randomization
+      - Block randomization
+      - Stratified randomization
+    pass: 3
+    src: { page: 28, quote: "How to Do Random Allocation of subjects" }
+    status: unverified
+  - id: res.L07.034
+    kind: card
+    topic: randomization
+    front: What is the purpose of block randomization, and what are its steps?
+    back: >-
+      To give groups of equal sample size. Divide patients into blocks, list the ways a block can be balanced, choose the blocks randomly,
+      and randomize within each block.
+    src: { page: 29, quote: "Divide potential patients into blocks" }
+    status: unverified
+  - id: res.L07.035
+    kind: cloze
+    topic: randomization
+    text: >-
+      With two treatments A and B and a block size of 4, there are {{c1::6}} ways to assign participants equally:
+      AABB, BBAA, ABAB, BABA, ABBA and BAAB. A study of 20 participants would use {{c2::5}} such blocks.
+    src: { page: 29, quote: "given a block size of 4, there are 6 possible ways to equally assign participants to a block" }
+    status: unverified
+  - id: res.L07.036
+    kind: card
+    topic: randomization
+    front: How large should a randomization block be?
+    back: >-
+      It depends on the number of treatments. Short enough to prevent imbalance, and long enough to prevent guessing the allocation.
+    src: { page: 29, quote: "it should be short enough to prevent imbalance, and long enough to prevent guessing allocation" }
+    status: unverified
+  - id: res.L07.037
+    kind: card
+    topic: randomization
+    front: What is stratified randomization, and how is it done?
+    back: >-
+      It balances covariates (prognostic variables) between groups. A separate block is made for each combination of covariates,
+      then simple randomization is done within each block.
+    src: { page: 31, quote: "Stratified randomization is achieved by generating a separate block for each combination of covariates" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L07.038
+    kind: case
+    topic: randomization
+    stem: >-
+      A trial enrols 1,000 patients: 600 males (360 young, 240 old) and 400 females (300 young, 100 old).
+      They are stratified by sex, then by age, and each subgroup is randomized to new or current treatment.
+    steps:
+      - question: How many strata (sub-groups) are randomized?
+        options: ["2", "4", "6", "1,000"]
+        answer: 1
+        why: Sex (2) x age (2) = 4 sub-groups, each randomized separately.
+      - question: How many young males end up on the new treatment?
+        options: ["360", "180", "120", "150"]
+        answer: 1
+        why: Half of each stratum goes to each arm, so 360 / 2 = 180.
+      - question: How many patients does each arm get in total?
+        options: ["500 (180 + 120 + 150 + 50)", "600", "400", "It cannot be predicted"]
+        answer: 0
+        why: Each arm gets half of every stratum, so 180 + 120 + 150 + 50 = 500, balanced for sex and age.
+    src: { page: 32, quote: "Stratify By Sex" }
+    status: unverified
+  - id: res.L07.039
+    kind: card
+    topic: randomization
+    front: How was stratification used in the lecture's zidovudine trial in pregnant women?
+    back: >-
+      Eligible women were stratified by gestational age at entry (14-26 weeks vs more than 26 weeks),
+      then randomized within each stratum to zidovudine or placebo.
+    src: { page: 33, quote: "Eligible women" }
+    status: unverified
+  - id: res.L07.040
+    kind: mcq
+    topic: randomization
+    stem: Which of the following statements about the advantages of randomized design is INCORRECT?
+    options:
+      - Randomization removes selection bias in the allocation of participants to the intervention or control group
+      - Randomization guarantees that all participants will receive the intervention
+      - Randomization tends to produce comparable groups on measured as well as unknown or unmeasured confounders
+      - Randomization permits probability theory to judge whether a difference is due to chance
+    answer: 1
+    why:
+      - This is a true advantage.
+      - Randomization decides who gets what, and the control group by design does not get the intervention; it guarantees nothing about receiving it.
+      - This is a true advantage.
+      - This is a true advantage (slide 27).
+    src: { page: 34, quote: "Randomization guarantee that all participants will receive the intervention" }
+    status: unverified
+  # ---------------- concealment (slides 35-44) ----------------
+  - id: res.L07.041
+    kind: enumerate
+    topic: concealment
+    prompt: Enumerate the standard methods of allocation concealment.
+    points:
+      - Sequentially numbered, opaque, sealed envelopes (SNOSE)
+      - Pharmacy-controlled allocation
+      - Off-site centralized randomization centre
+    pass: 3
+    src: { page: 35, quote: "Sequentially numbered, opaque, sealed envelopes" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L07.042
+    kind: table
+    topic: concealment
+    title: Allocation concealment vs blinding
+    columns: [Feature, Allocation concealment, Blinding]
+    rows:
+      - [When, Before and until the intervention is given, After allocation (once the trial begins)]
+      - [Bias prevented, Selection bias, "Ascertainment (performance, assessment) bias"]
+      - [Feasible?, Always, Not always]
+    blanks: [[0, 1], [1, 1], [1, 2], [2, 1], [2, 2]]
+    src: { page: 37, quote: "Prevents selection bias Prevents ascertainment bias" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L07.043
+    kind: card
+    topic: concealment
+    front: What happens if allocation is not concealed?
+    back: Selection bias. The benefits of randomization are lost, and treatment assignment is no longer truly random.
+    src: { page: 36, quote: "treatment assignment is no longer truly random" }
+    status: unverified
+  - id: res.L07.044
+    kind: card
+    topic: concealment
+    front: What happens if blinding is not done?
+    back: >-
+      Patients may bias their responses because they know their treatment, and investigators who know the treatment may assess outcomes in a biased way.
+    src: { page: 36, quote: "If not done, can result in patients biasing their responses because of their knowledge of treatment" }
+    status: unverified
+  - id: res.L07.045
+    kind: card
+    topic: concealment
+    front: Who should hold the randomization list?
+    back: >-
+      Someone separate and distant from the clinicians conducting the trial. The clinician learns only the pack number (for example X32)
+      and is told what it contained after the trial.
+    src: { page: 39, quote: "Randomization should be separate & distant from clinicians conducting the trial" }
+    status: unverified
+  - id: res.L07.046
+    kind: mcq
+    topic: concealment
+    stem: Allocation concealment reduces bias because
+    options:
+      - It prevents researchers from influencing which participants are assigned to the intervention or control group.
+      - It prevents the participants from knowing which arm of the trial they are on.
+      - It makes the placebo look identical to the active drug.
+      - It increases the power of the trial.
+    answer: 0
+    why:
+      - Concealment protects the sequence before assignment, so recruiters cannot steer patients, which prevents selection bias.
+      - Hiding the arm from participants after allocation is blinding.
+      - An identical placebo is part of blinding (step 9).
+      - Power depends on sample size, alpha and effect size, not on concealment.
+    src: { page: 40, quote: "It prevents researchers from influencing which participants are assigned to the intervention/ control group" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L07.047
+    kind: mcq
+    topic: concealment
+    stem: Which is NOT an issue with RCTs?
+    options: [Contamination, Losses to follow-up, Recall bias, Bias in assessment of outcome]
+    answer: 2
+    why:
+      - Controls can pick up the intervention, which is a real RCT problem.
+      - Losses to follow-up can seriously bias the results.
+      - Recall bias comes from asking about past exposure, as in case-control studies; in an RCT the exposure is assigned and recorded.
+      - Without blinding, outcome assessment can be biased.
+    src: { page: 41, quote: "Which is not an issue with RCTs" }
+    status: unverified
+  - id: res.L07.048
+    kind: mcq
+    topic: concealment
+    stem: A difference between the groups at the start, for example more severe illness in one group, is
+    options: [Bias, Chance, Random error, Measurement error]
+    answer: 0
+    why:
+      - This is the slide's answer. A systematic baseline difference (for example from an unconcealed allocation) is selection bias.
+      - Chance imbalance can happen, but the slide treats a baseline difference as bias.
+      - Random error is the same idea as chance.
+      - Measurement error is about how outcomes are measured, not who is in each group.
+    src: { page: 42, quote: "Difference between groups at the start e.g. more severe illness is" }
+    status: unverified
+  - id: res.L07.049
+    kind: mcq
+    topic: concealment
+    stem: People are asked to take part in a trial based on knowledge of which study group they will be allocated to. This is
+    options: [Detection bias, Sampling bias, Selection bias, Recall bias]
+    answer: 2
+    why:
+      - Detection bias is about how outcomes are measured.
+      - Sampling bias is about how the sample represents the population.
+      - Knowing the next allocation lets recruiters choose who enters, which is selection bias, prevented by concealment.
+      - Recall bias is about remembering past exposure, as in case-control studies.
+    src: { page: 43, quote: "When people are asked to take part in a trial based on knowledge of which study group they will be allocated" }
+    status: unverified
+  - id: res.L07.050
+    kind: mcq
+    topic: concealment
+    stem: In a randomized controlled trial, which type of bias is reduced by randomization?
+    options: [Ascertainment bias, Selection bias, Recall bias, Publication bias, Bias in handling dropout]
+    answer: 1
+    why:
+      - Ascertainment bias is reduced by blinding.
+      - Random allocation (with concealment) stops investigators choosing who gets what, which is selection bias.
+      - Recall bias is a case-control problem.
+      - Publication bias happens after the trial, when results are or are not published.
+      - Dropout bias is handled by intention-to-treat analysis.
+    src: { page: 44, quote: "the following types of biases are reduced by randomization" }
+    status: unverified
+  # ---------------- effect-measures (slides 51-63) ----------------
+  - id: res.L07.051
+    kind: card
+    topic: effect-measures
+    front: What are the two first things to show in step 12, statistical analysis?
+    back: >-
+      A table comparing baseline characteristics of the intervention and placebo groups, and a 2x2 table with the data placed
+      exactly in cells a, b, c and d.
+    src: { page: 51, quote: "A table showing baseline comparison between the interventional group and the placebo group" }
+    status: unverified
+  - id: res.L07.052
+    kind: enumerate
+    topic: effect-measures
+    prompt: Which three measures help you judge the size of the effect of an intervention in an RCT?
+    points:
+      - Relative risk reduction (RRR)
+      - Absolute risk reduction (ARR)
+      - Number needed to treat (NNT)
+    pass: 3
+    src: { page: 52, quote: "The relative risk reduction (RRR) The absolute risk reduction (ARR) The numbers needed to treat (NNT)" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L07.053
+    kind: table
+    topic: effect-measures
+    title: Effect measures from the 2x2 table (outcome present a/c, absent b/d)
+    columns: [Measure, Formula, "Example: 17% vs 12% mortality"]
+    rows:
+      - [Control event rate (CER), c / (c + d), 17%]
+      - [Experimental event rate (EER), a / (a + b), 12%]
+      - [Relative risk reduction (RRR), (CER - EER) / CER, 29%]
+      - [Absolute risk reduction (ARR), CER - EER, 5%]
+      - [Number needed to treat (NNT), 1 / ARR, "20"]
+    blanks: [[0, 1], [2, 1], [3, 1], [4, 1], [2, 2], [4, 2]]
+    src: { page: 53, quote: "Number Needed to Treat NNT =1/ ARR" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L07.054
+    kind: cloze
+    topic: effect-measures
+    text: >-
+      Mortality is 17% with control and 12% with the intervention. RRR = (17 - 12) / 17 = {{c1::29%}};
+      ARR = 17% - 12% = {{c2::5%}}; NNT = 100 / 5 = {{c3::20}}, so we need to treat 20 people to prevent one death.
+    src: { page: 54, quote: "We need to treat 20 people to prevent one death" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L07.055
+    kind: card
+    topic: effect-measures
+    front: What does the relative risk reduction tell you, and what is its weakness?
+    back: >-
+      How much a treatment reduces risk compared with patients not receiving it: RRR = (CER - EER) / CER.
+      It does not discriminate between huge absolute treatment effects and trivial ones.
+    src: { page: 55, quote: "does not discriminate between huge absolute treatment effects and trivial ones" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L07.056
+    kind: table
+    topic: effect-measures
+    title: "Same RRR (50%), different baseline risk: why NNT matters"
+    columns: [CER and EER, ARR, NNT]
+    rows:
+      - [50% and 25%, 25%, "4"]
+      - [5% and 2.5%, 2.5%, "40"]
+      - [0.05% and 0.025%, 0.025%, "4,000"]
+    blanks: [[0, 2], [1, 2], [2, 2]]
+    src: { page: 56, quote: "Importance of NNT" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L07.057
+    kind: case
+    topic: effect-measures
+    stem: >-
+      Of 100 children who are contacts of TB cases, 10 already have TB. Of the other 90, 45 are given isoniazid and 3 of them develop TB;
+      45 do not take isoniazid and 9 of them develop TB.
+    steps:
+      - question: What are the CER and EER?
+        options: ["CER 20%, EER 6.67%", "CER 6.67%, EER 20%", "CER 9%, EER 3%", "CER 10%, EER 3%"]
+        answer: 0
+        why: CER = 9/45 = 20% in the untreated contacts; EER = 3/45 = 6.67% in those given isoniazid.
+      - question: What is the ARR?
+        options: ["13.33%", "6.67%", "0.67", "3.0"]
+        answer: 0
+        why: ARR = CER - EER = 20% - 6.67% = 13.33%.
+      - question: What is the RRR?
+        options: ["0.67 (67%)", "0.33", "13.33%", "3.0"]
+        answer: 0
+        why: RRR = 13.33 / 20 = 0.67. Isoniazid removed two thirds of the risk.
+      - question: What is the NNT?
+        options: ["7.69, so 8 children", "13", "20", "3"]
+        answer: 0
+        why: NNT = 1 / 0.1333 = 7.69 (the slide's figure); round up to 8 children treated to prevent one case.
+    src: { page: 59, quote: "CER = 9/45 = 20%" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L07.058
+    kind: case
+    topic: effect-measures
+    stem: >-
+      In a trial of zidovudine to prevent mother-to-infant HIV transmission, 13 of 180 infants were infected in the zidovudine group
+      and 40 of 183 in the placebo group.
+    steps:
+      - question: What are the EER and CER?
+        options: ["EER 0.07, CER 0.22", "EER 0.22, CER 0.07", "EER 0.13, CER 0.40", "EER 0.07, CER 0.15"]
+        answer: 0
+        why: EER = 13/180 = 0.07 (zidovudine); CER = 40/183 = 0.22 (placebo).
+      - question: What are the RRR and ARR?
+        options: ["RRR 68%, ARR 0.15", "RRR 15%, ARR 0.68", "RRR 32%, ARR 0.15", "RRR 68%, ARR 0.29"]
+        answer: 0
+        why: RRR = (0.22 - 0.07) / 0.22 = 68%; ARR = 0.22 - 0.07 = 0.15.
+      - question: "The slide prints RR = 3.14 and NNT = 100/15 = 6. What should you write?"
+        options: ["RR = EER/CER = 0.33; NNT = 6.7, so 7", "RR = 3.14; NNT = 6", "RR = 0.68; NNT = 15", "RR = 3.14; NNT = 7"]
+        answer: 0
+        why: 3.14 is CER/EER, the inverse. The risk ratio of treated over untreated is 0.07/0.22 = about 0.33 (protective). 100/15 = 6.7, and NNT is always rounded up, so 7.
+    src: { page: 60, quote: "EER = 13/180 =0.07" }
+    status: unverified
+  - id: res.L07.059
+    kind: mcq
+    topic: effect-measures
+    stem: >-
+      In a randomized trial, the event rate was 1% in the treatment group and 5% in the control group.
+      Which measure best describes by how much, in relative terms, the treatment decreased the event rate?
+    options: [The control event rate, The relative risk reduction, The absolute risk reduction, The number needed to treat]
+    answer: 1
+    why:
+      - The CER is just the control group's 5%.
+      - "\"In relative terms\" is RRR: (5 - 1) / 5 = 80%."
+      - The ARR is the absolute difference, 4%.
+      - The NNT is 1 / ARR = 25.
+    src: { page: 61, quote: "The measure that best describes by how much in relative terms the event rate was decreased by the treatment" }
+    status: unverified
+  - id: res.L07.060
+    kind: mcq
+    topic: effect-measures
+    stem: Considering the relative risk reduction (RRR) and baseline risk, which scenario gives the lowest NNT?
+    options:
+      - A greater RRR and higher baseline risk
+      - A lower RRR and lower baseline risk
+      - A lower RRR and higher baseline risk
+      - A lower RRR regardless of baseline risk
+      - A greater RRR and lower baseline risk
+    answer: 0
+    why:
+      - ARR = RRR x baseline risk, so both being high gives the biggest ARR and the smallest NNT.
+      - Both low gives the smallest ARR and the largest NNT.
+      - The lower RRR shrinks the ARR.
+      - A lower RRR always raises the NNT for a given baseline risk.
+      - The low baseline risk shrinks the ARR.
+    src: { page: 62, quote: "which scenario results in the lowest NNT" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L07.061
+    kind: mcq
+    topic: effect-measures
+    stem: In an RCT the control event rate (CER) was 20% and the treatment event rate was 10%. The results are
+    options:
+      - RR = 2.0, RRR = 10%, ARR 10%, NNT 20
+      - RR = 0.5, RRR = 50%, ARR 10%, NNT 10
+      - RR = 2.0, RRR = 50%, ARR 10%, NNT 10
+      - RR = 1.0, RRR = 30%, ARR 20%, NNT 20
+    answer: 1
+    why:
+      - RR is treated over control, 10/20 = 0.5, not 2.0.
+      - RR = 10/20 = 0.5; RRR = 1 - 0.5 = 50%; ARR = 20 - 10 = 10%; NNT = 1/0.10 = 10.
+      - RR is upside down; it is 0.5.
+      - None of these numbers fit.
+    src: { page: 63, quote: "the control event rate (CER) was 20% and the treatment event rate (TER) was 10%" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L07.062
+    kind: case
+    topic: effect-measures
+    stem: >-
+      A trial at a liver unit gives norfloxacin or placebo to cirrhotic patients with ascites. Spontaneous bacterial peritonitis
+      develops in 20% on placebo and 8% on norfloxacin within a year. (Teaching numbers, not a real trial.)
+    steps:
+      - question: What is the ARR?
+        options: ["12%", "60%", "8%", "40%"]
+        answer: 0
+        why: The absolute risk reduction is ARR = CER - EER = 20% - 8% = 12%.
+      - question: What is the RRR?
+        options: ["60%", "12%", "40%", "2.5"]
+        answer: 0
+        why: RRR = (20 - 8) / 20 = 60%.
+      - question: What is the NNT, and how do you report it?
+        options: ["9 patients for one year", "8.3 patients", "12 patients", "60 patients"]
+        answer: 0
+        why: NNT = 100 / 12 = 8.3, rounded up to 9, and an NNT always carries its time frame (one year here).
+    src: { page: 53, quote: "Absolute Risk Reduction" }
+    status: unverified
+  # ---------------- chance (slides 64-68) ----------------
+  - id: res.L07.063
+    kind: card
+    topic: chance
+    front: What are the two methods of assessing the role of chance?
+    back: >-
+      P-values (hypothesis testing): a statistical test of the null hypothesis, significant if p < 0.05.
+      Confidence intervals (estimation): the range of values likely to include the true value.
+    src: { page: 64, quote: "Two methods of assessing the role of chance" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L07.064
+    kind: card
+    topic: chance
+    front: How do you read statistical significance from a confidence interval?
+    back: >-
+      If the value of no effect (RR = 1, or RRR or risk difference = 0) falls outside the CI, the result is statistically significant.
+      If the CI includes it, the groups are not significantly different.
+    src: { page: 65, quote: "a confidence interval that includes the value of no effect" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L07.065
+    kind: table
+    topic: chance
+    title: Reading relative risks with their 95% CI
+    columns: [RR (95% CI), Significant?, Meaning]
+    rows:
+      - [1.77 (1.22-2.45), "Yes", Increased risk]
+      - [1.63 (0.85-2.46), "No", Risk is the same]
+      - [0.78 (0.56-0.94), "Yes", Decreased risk]
+    blanks: [[0, 1], [1, 1], [2, 1], [1, 2], [2, 2]]
+    src: { page: 67, quote: "Statistically significant (increased risk)" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L07.066
+    kind: card
+    topic: chance
+    front: In the DVT study, how do the CIs 0.12-0.18 and 0.12-1.5 for the relative risk differ?
+    back: >-
+      0.12-0.18 does not include 1, so it is statistically significant (p = 0.001).
+      0.12-1.5 includes 1, so it is not statistically significant (p = 0.6).
+    src: { page: 66, quote: "Confidence interval does not include 1" }
+    status: unverified
+  - id: res.L07.067
+    kind: card
+    topic: chance
+    front: What does the width of a confidence interval tell you? Use the fibre example.
+    back: >-
+      The width shows precision. Vegetable fibre (0.9-1.4) and fruit fibre (0.8-1.2) cross 1 and are wide: insignificant and less precise.
+      Cereal fibre (0.6-0.7) is narrow and below 1: significant and precise.
+    src: { page: 68, quote: "Insignificant less precised" }
+    status: unverified
+  - id: res.L07.068
+    kind: mcq
+    topic: chance
+    stem: >-
+      A ten-year prospective study of folic acid supplements and Alzheimer's dementia reports a relative risk of 0.77
+      (95% CI 0.59-0.98). Which p value most likely matches this result?
+    options: ["0.03", "0.06", "0.07", "0.09", "0.15"]
+    answer: 0
+    why:
+      - The 95% CI excludes 1, so p must be below 0.05; and the upper limit 0.98 is close to 1, so p is just under 0.05.
+      - p = 0.06 would give a CI that just crosses 1.
+      - A CI with p = 0.07 would include 1.
+      - A CI with p = 0.09 would include 1.
+      - A CI with p = 0.15 would clearly include 1.
+    src: { page: 122, quote: "The investigators report a relative risk of 0.77" }
+    status: unverified
+    tags: [high-yield]
+  # ---------------- itt (slides 69-78) ----------------
+  - id: res.L07.069
+    kind: card
+    topic: itt
+    front: What is intention-to-treat (ITT) analysis?
+    back: >-
+      All participants are analysed in the groups to which they were randomized, whether or not they completed the study or complied
+      with treatment. Analysis follows the original randomized assignment.
+    src: { page: 69, quote: "all study participants are included in the analyses as part of the groups to which they were randomized" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L07.070
+    kind: card
+    topic: itt
+    front: What is per-protocol analysis?
+    back: It excludes patients who deviate from the protocol, analysing only those who adhered.
+    src: { page: 69, quote: "Per protocol analysis excludes patients who deviate from protocol" }
+    status: unverified
+  - id: res.L07.071
+    kind: case
+    topic: itt
+    stem: >-
+      100 patients with cerebrovascular disease are randomized to surgery plus aspirin (ASA) and 100 to ASA alone.
+      In the surgery arm, 10 have a stroke before they can be operated on; of the 90 operated, 10 have a stroke. In the ASA arm, 20 have a stroke.
+    steps:
+      - question: What is the per-protocol stroke rate in the surgery arm?
+        options: ["10/90 = 0.11", "20/100 = 0.20", "10/100 = 0.10", "20/90 = 0.22"]
+        answer: 0
+        why: Per protocol keeps only those who got surgery, so the 10 early strokes vanish from the numerator and denominator.
+      - question: What does each analysis show?
+        options: ["Per protocol RRR 0.45; ITT RRR 0", "Both show RRR 0.45", "Per protocol RRR 0; ITT RRR 0.45", "Both show no effect"]
+        answer: 0
+        why: Per protocol 0.11 vs 0.20 gives RRR 0.45; ITT counts everyone, 20/100 vs 20/100, so RRR 0.
+      - question: Which one shows the underlying truth?
+        options: [Intention to treat, Per protocol]
+        answer: 0
+        why: The ITT analysis suggests the true effect is zero; per protocol made surgery look good by dropping the sickest patients (Montori, CMAJ 2001).
+    src: { page: 71, quote: "which represents a relative risk reduction (RRR) of 0.45" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L07.072
+    kind: card
+    topic: itt
+    front: What is intention-to-treat analysis best and worst at estimating?
+    back: It is the optimal estimate of the true benefit of the intervention, but it is not optimal for measuring harm.
+    src: { page: 73, quote: "Optimal estimate of the true benefit of the intervention" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L07.073
+    kind: card
+    topic: itt
+    front: In the cancer-prevention diet example, why does excluding non-compliant people distort the result?
+    back: >-
+      Some treated subjects had GI symptoms that were really early signs of cancer, so they stopped the diet.
+      Excluding them removes future cancers from the diet group and makes the diet look more effective than it is.
+    src: { page: 75, quote: "If these non compliant people were excluded from the analysis" }
+    status: unverified
+  - id: res.L07.074
+    kind: mcq
+    topic: itt
+    stem: Intention-to-treat analysis of a clinical trial means
+    options:
+      - Subjects are enrolled only if they really intend to take the treatment, proven in a run-in period.
+      - Anyone randomized must be included in the final analysis in the group to which they were originally randomized, whether or not they adhered.
+      - Anyone randomized is included only if they actually took the assigned drug throughout the study.
+      - All subjects must agree to be randomized and to take the treatment of their group.
+    answer: 1
+    why:
+      - A run-in period is about choosing compliant subjects, not about analysis.
+      - Analyse as randomized, whatever happened afterwards.
+      - That describes per-protocol analysis.
+      - That is consent to randomization, not an analysis method.
+    src: { page: 74, quote: "regardless of whether they adhered to the protocol or not" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L07.075
+    kind: mcq
+    topic: itt
+    stem: Investigators worry about loss to follow-up because
+    options:
+      - It reduces the power of the study.
+      - It often has a negative influence on internal validity.
+      - Subjects lost to follow-up may have more side effects than those who remain, biasing the conclusions.
+      - All of the above
+    answer: 3
+    why:
+      - True, but not the only reason.
+      - True, but not the only reason.
+      - True, but not the only reason.
+      - Losses shrink the sample (power) and are rarely random, so they bias the result (internal validity).
+    src: { page: 76, quote: "Investigators worry about lost-to-follow-up" }
+    status: unverified
+  - id: res.L07.076
+    kind: mcq
+    topic: itt
+    stem: Excessive exclusion criteria may result in which of the following?
+    options:
+      - Decreased external validity
+      - Increased internal validity
+      - Problems with recruitment
+      - Increased costs
+      - All of the above
+    answer: 0
+    why:
+      - This is the slide's answer. A very selected sample is unlike everyday patients, so the results generalize poorly.
+      - A homogeneous sample can help internal validity, but that is not the problem being asked about.
+      - True in practice, but the slide keys external validity.
+      - True in practice, but the slide keys external validity.
+      - "\"All of the above\" is defensible, but the slide's key is a."
+    src: { page: 77, quote: "Excessive exclusion criteria may result in which of the following" }
+    status: unverified
+  - id: res.L07.077
+    kind: mcq
+    topic: itt
+    stem: Which of the following is CORRECT about intention to treat?
+    options:
+      - Analysis is according to whether they comply with treatment or not
+      - It is the optimal estimate of the true harm of the intervention
+      - The analysis follows the original randomized assignment
+      - It is not optimal for measuring benefit of the intervention
+    answer: 2
+    why:
+      - ITT ignores compliance.
+      - It is the best estimate of benefit, not of harm.
+      - Analyse as randomized.
+      - It is the optimal estimate of benefit.
+    src: { page: 78, quote: "Performing the analysis of RCTs according to original randomised assignment" }
+    status: unverified
+  # ---------------- ethics (slides 79-85, 101-105) ----------------
+  - id: res.L07.078
+    kind: card
+    topic: ethics
+    front: What is the Declaration of Helsinki?
+    back: A set of ethical principles, developed by the World Medical Association, that guides medical researchers doing research on human subjects.
+    src: { page: 79, quote: "Developed by the World Medical Association" }
+    status: unverified
+  - id: res.L07.079
+    kind: enumerate
+    topic: ethics
+    prompt: Enumerate the ethical issues listed for experimental studies.
+    points:
+      - Competence
+      - Stage of research
+      - Research with special populations (women, children, prisoners, HIV, suicidal individuals)
+      - Institutional approval
+      - Conflict of interest
+    pass: 4
+    src: { page: 80, quote: "Institutional approval Conflict of interest" }
+    status: unverified
+  - id: res.L07.080
+    kind: card
+    topic: ethics
+    front: What is a conflict of interest, and why does it matter?
+    back: >-
+      Financial or other personal considerations that may compromise an investigator's judgment in conducting research or reporting results.
+      It threatens the integrity of research, erodes public trust in science, and can harm the rights and welfare of subjects.
+    src: { page: 81, quote: "Financial or other personal considerations may compromise an investigator's judgment" }
+    status: unverified
+  - id: res.L07.081
+    kind: card
+    topic: ethics
+    front: What is equipoise, and when is it ethical to run an experimental study?
+    back: >-
+      Genuine uncertainty about the right course of action, that is, whether to give or withhold a treatment: enough belief to justify
+      exposing subjects to it and enough doubt to justify withholding it. A trial is ethical only when the expert community is in equipoise.
+    src: { page: 82, quote: "genuine uncertainty about the appropriate course of action" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L07.082
+    kind: enumerate
+    topic: ethics
+    prompt: Enumerate the elements of the consent process for a trial.
+    points:
+      - Participation is voluntary for all eligible subjects
+      - The investigator describes in simple language the nature, objectives, treatment, procedures, tests, assignment method and data collected
+      - Likely benefits and risks of participation
+      - Confidentiality is ensured
+      - Participants may withdraw at any time without losing their medical care
+      - Written or oral consent following a protocol approved by the ethics committee
+    pass: 5
+    src: { page: 83, quote: "Participants may withdraw from the study at any time without losing their medical care" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L07.083
+    kind: enumerate
+    topic: ethics
+    prompt: What is recommended about the registration of RCTs?
+    points:
+      - Register all RCTs at their inception (at ethical or funding approval)
+      - Registered information should be accessible to all interested parties
+      - The register must meet an appropriate minimum standard
+      - Prospective registration should be part of ethical guidelines
+      - Governments should provide the mechanisms so all RCTs can be registered prospectively
+    pass: 4
+    src: { page: 84, quote: "all RCTs trials are registered at their inception" }
+    status: unverified
+  - id: res.L07.084
+    kind: card
+    topic: ethics
+    front: What is the ISRCTN registry?
+    back: >-
+      International Standard Randomised Controlled Trial Number: a WHO-recognized primary registry that accepts all clinical research
+      studies involving humans (proposed, ongoing or completed), gives the unique number needed for publication, and is freely searchable.
+      Registration should ideally be prospective, before recruitment.
+    src: { page: 85, quote: "primary clinical trial registry recognized by WHO" }
+    status: unverified
+  - id: res.L07.085
+    kind: mcq
+    topic: ethics
+    stem: Which best describes equipoise as the rationale for a randomized trial of two drugs?
+    options:
+      - The drugs are known to be equally effective.
+      - One of the drugs is known to be more toxic.
+      - Neither drug is known to be more effective than the other.
+      - One drug is more effective, but the other is easier to take with fewer side effects.
+    answer: 2
+    why:
+      - If we already knew they were equal, there would be no question to test.
+      - Known extra toxicity would make giving that drug unethical.
+      - Genuine uncertainty about which is better is equipoise.
+      - If one is known to be better, withholding it is unethical.
+    src: { page: 102, quote: "Neither drug is known to be more effective than the other" }
+    status: unverified
+    tags: [high-yield]
+  # ---------------- appraisal (slides 86-96) ----------------
+  - id: res.L07.086
+    kind: enumerate
+    topic: appraisal
+    prompt: Enumerate the advantages of RCTs.
+    points:
+      - Best evidence for causality
+      - Individuals are allocated to intervention or control without prejudice
+      - Minimizes unequal distribution of factors that influence the outcome between groups
+    pass: 3
+    src: { page: 86, quote: "Best evidence for causality" }
+    status: unverified
+  - id: res.L07.087
+    kind: enumerate
+    topic: appraisal
+    prompt: Enumerate the disadvantages of RCTs.
+    points:
+      - Expensive (time and money)
+      - Organisationally difficult
+      - Not always generalisable
+      - Sometimes ethical problems
+    pass: 4
+    src: { page: 86, quote: "Organisationally difficult" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L07.088
+    kind: card
+    topic: appraisal
+    front: What is the CONSORT statement? (name, first year, aim, developers)
+    back: >-
+      Consolidated Standards of Reporting Trials, first published in 1996, to improve the quality of conduct and reporting of RCTs.
+      Developed by an international group of trialists, statisticians, epidemiologists and biomedical editors.
+    src: { page: 87, quote: "Aim - improve quality of conduct & reporting of RCTs" }
+    status: unverified
+  - id: res.L07.089
+    kind: cloze
+    topic: appraisal
+    text: >-
+      The CONSORT 2010 checklist contains {{c1::25}} items and focuses on individually randomised, two-group,
+      {{c2::parallel}} trials. It comprises a checklist and a {{c3::flow diagram}}.
+    src: { page: 88, quote: "The CONSORT 2010 checklist contains 25 items" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L07.090
+    kind: order
+    topic: appraisal
+    prompt: Put the boxes of the CONSORT 2010 flow diagram in order.
+    steps:
+      - Assessed for eligibility (excluded, with reasons)
+      - Randomized
+      - Allocated to intervention (received or not)
+      - Lost to follow-up or discontinued (with reasons)
+      - Analysed (excluded from analysis, with reasons)
+    src: { page: 92, quote: "CONSORT 2010 Flow Diagram" }
+    status: unverified
+  - id: res.L07.091
+    kind: card
+    topic: appraisal
+    front: How much does a phase III RCT cost, according to the lecture?
+    back: The mean cost of phase III RCTs funded by the US National Institute of Neurological Disorders and Stroke is US$12 million.
+    src: { page: 93, quote: "National Institute of Neurological Disorders and Stroke" }
+    status: unverified
+  - id: res.L07.092
+    kind: card
+    topic: appraisal
+    front: What are the two approaches to quality assessment of RCTs, and which is discouraged?
+    back: >-
+      The checklist approach and the quality-scoring approach. Scores are discouraged because they are complicated and vary with the instrument used.
+    src: { page: 94, quote: "Quality scores are complicated and tend to vary depending on the instrument used" }
+    status: unverified
+  - id: res.L07.093
+    kind: card
+    topic: appraisal
+    front: Describe the Jadad quality score shown in the lecture.
+    back: >-
+      Questions: described as randomised? described as double blind? withdrawals and dropouts described?
+      1 point for each yes, 0 for each no. The slide gives a range of 0-5, with poor quality below 3.
+    src: { page: 95, quote: "Was there a description of withdrawals and drop outs" }
+    status: unverified
+  - id: res.L07.094
+    kind: enumerate
+    topic: appraisal
+    prompt: "Users' Guides checklist for a therapy article: what are the three big questions?"
+    points:
+      - Are the results valid?
+      - What are the results?
+      - How can I apply the results to patient care?
+    pass: 3
+    src: { page: 96, quote: "Users' Guides for an Article About Therapy Are the results valid" }
+    status: unverified
+  - id: res.L07.095
+    kind: enumerate
+    topic: appraisal
+    prompt: Did the experimental and control groups begin the study with a similar prognosis? Which four questions check this?
+    points:
+      - Were patients randomized?
+      - Was randomization concealed?
+      - Were patients analysed in the groups to which they were randomized?
+      - Were the groups similar in known prognostic factors?
+    pass: 3
+    src: { page: 96, quote: "Were patients analyzed in the groups to which they were randomized" }
+    status: unverified
+  # ---------------- quasi (slides 97-100) ----------------
+  - id: res.L07.096
+    kind: card
+    topic: quasi
+    front: What makes a study quasi-experimental?
+    back: One characteristic of a true experiment is missing, either randomization or a separate control group.
+    src: { page: 97, quote: "one characteristic of a true experiment is missing" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L07.097
+    kind: table
+    topic: quasi
+    title: Two quasi-experimental designs
+    columns: [Feature, One-group pre-test/post-test, Classical quasi-experimental]
+    rows:
+      - [Control group, None, "Yes, not randomized"]
+      - [Measurements, Before and after the treatment, Before and after in both groups]
+      - [What is missing, A separate control group, Randomization]
+    blanks: [[0, 1], [0, 2], [2, 1], [2, 2]]
+    src: { page: 99, quote: "Classical Quasi-Experimental Design" }
+    status: unverified
+  - id: res.L07.098
+    kind: card
+    topic: quasi
+    front: Why are quasi-experiments a concern for internal validity, and what is internal validity?
+    back: >-
+      The treatment and control groups may not be comparable at baseline. Internal validity is how sure the researcher can be
+      that the treatment caused the change in the experimental group.
+    src: { page: 100, quote: "Internal validity refers to the degree to which a researcher can be sure that the treatment was responsible for the change" }
+    status: unverified
+    tags: [high-yield]
+  # ---------------- practice (slides 19, 107-121) ----------------
+  - id: res.L07.099
+    kind: mcq
+    topic: practice
+    stem: In an RCT, a planned crossover design
+    options:
+      - Requires standardization
+      - Must take into account possible residual effects
+      - Enhances generalisability of the study
+      - Eliminates the need for monitoring compliance
+    answer: 1
+    why:
+      - Every trial needs standardization; it is not specific to crossover.
+      - The first treatment can carry over into the second period, so a washout is needed.
+      - A crossover suits chronic stable disease only, which narrows generalisability.
+      - Compliance must still be monitored in each period.
+    src: { page: 19, quote: "Must take into account possible residual effects" }
+    status: unverified
+  - id: res.L07.100
+    kind: card
+    topic: practice
+    front: When the sample size of a trial is increased, what happens to the confidence interval, the power and randomization balance?
+    back: The confidence interval narrows, the power increases, and the risk of unbalanced randomization decreases.
+    src: { page: 107, quote: "The risk of unbalanced randomization decreases" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L07.101
+    kind: mcq
+    topic: practice
+    stem: Comparing randomized controlled trials with cohort studies, which is generally true?
+    options:
+      - Both are prospective
+      - RCT results are less likely to be generalisable than cohort results
+      - RCT results are less likely to be affected by confounding
+      - A, B and C are all true
+      - None of the above is true
+    answer: 2
+    why:
+      - Cohorts can be retrospective too, so this is not generally true.
+      - The slide's key is c; generalisability depends on the trial.
+      - Randomization balances known and unknown confounders, which a cohort cannot do.
+      - Only c is keyed true.
+      - c is true.
+    src: { page: 108, quote: "The results of the RCT are less likely to be affected by confounding" }
+    status: unverified
+  - id: res.L07.102
+    kind: mcq
+    topic: practice
+    stem: The purpose of a double-blind (double-masked) study is to
+    options:
+      - Achieve comparability of treated and untreated subjects
+      - Reduce the effects of sampling variation
+      - Avoid observer and subject bias
+      - Introduce observer and subject bias
+    answer: 2
+    why:
+      - Comparable groups come from randomization.
+      - Sampling variation is reduced by a larger sample.
+      - Hiding the treatment from both subject and observer stops each from biasing the outcome.
+      - Blinding removes these biases.
+    src: { page: 109, quote: "Avoid observer and subject bias" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L07.103
+    kind: mcq
+    topic: practice
+    stem: The major purpose of random assignment in an RCT is to
+    options:
+      - Facilitate double blinding
+      - Facilitate measurement of outcome variables
+      - Ensure study groups are comparable on baseline characteristics
+      - Reduce ascertainment bias
+    answer: 2
+    why:
+      - It helps blinding, but that is not its main purpose.
+      - Measurement depends on protocols, not on allocation.
+      - Randomization makes the groups comparable at baseline, including on unknown factors.
+      - Ascertainment bias is reduced by blinding.
+    src: { page: 110, quote: "Ensure study groups are comparable on baseline characteristics" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L07.104
+    kind: mcq
+    topic: practice
+    stem: Phase 1 trials are
+    options:
+      - Trials that recruit large numbers of subjects
+      - Done for post-marketing surveillance
+      - Multi-centred
+      - Small studies of 20-80 subjects looking at the toxic and pharmacological effects of drugs
+    answer: 3
+    why:
+      - Large numbers belong to phase 3.
+      - Post-marketing surveillance is phase 4.
+      - Multicentre trials are typically phase 3.
+      - Phase 1 is the first, small, safety and pharmacology step.
+    src: { page: 111, quote: "Small studies with 20-80 patients looking at toxic & pharmacological effects of drugs" }
+    status: unverified
+  - id: res.L07.105
+    kind: mcq
+    topic: practice
+    stem: >-
+      Researchers used police and phone records to find 699 people with cell phones who had a car accident, and compared phone use
+      just before the accident with phone use at the same time on a previous day. The risk was four times higher when using a phone.
+      This study is
+    options:
+      - A randomized comparative experiment
+      - An experiment without randomization
+      - An observational study
+      - A simple random sample
+    answer: 2
+    why:
+      - Nobody was assigned to use a phone.
+      - An experiment needs the investigator to assign the exposure.
+      - The investigators only looked at records of what people did, so it is observational.
+      - A simple random sample is a sampling method, not a design.
+    src: { page: 112, quote: "Researchers compared telephone company and police records" }
+    status: unverified
+  - id: res.L07.106
+    kind: mcq
+    topic: practice
+    stem: An experimental study can be used in all of the following settings EXCEPT
+    options: [Study of risk factors, Preventive trial, Therapeutic trial, Health system evaluation trial]
+    answer: 0
+    why:
+      - Exposing people to a risk factor on purpose is unethical, so risk factors are studied by observation.
+      - Preventive trials are experiments.
+      - Therapeutic trials are experiments.
+      - New ways of delivering services can be tested by experiment.
+    src: { page: 113, quote: "Health system evaluation trial" }
+    status: unverified
+  - id: res.L07.107
+    kind: card
+    topic: practice
+    front: "In a double-blind trial, true or false: (a) patients do not know their treatment; (b) each patient receives a placebo; (c) patients do not know they are in a trial; (d) each patient receives both treatments; (e) the assessing clinician does not know the treatment."
+    back: >-
+      a True; b False (only the control group gets placebo); c False (they consented to a trial); d False (that is a crossover);
+      e True.
+    src: { page: 114, quote: "the clinician assessing the patients condition does not know which treatment the patient has received" }
+    status: unverified
+  - id: res.L07.108
+    kind: mcq
+    topic: practice
+    stem: Phase IV of a clinical trial is
+    options: [Post-marketing surveillance, Clinical trial, Animal studies, None of the above]
+    answer: 0
+    why:
+      - Phase IV follows the drug after approval to catch rare and long-term effects.
+      - Phases I to III are the pre-approval clinical trials.
+      - Animal studies are preclinical.
+      - a is correct.
+    src: { page: 115, quote: "Post marketing surveillance" }
+    status: unverified
+  - id: res.L07.109
+    kind: order
+    topic: practice
+    prompt: Arrange these designs in ascending order of level of evidence (lowest first).
+    steps:
+      - Expert opinion
+      - Case series
+      - Case-control study
+      - Cohort study
+      - Randomized controlled trial
+    src: { page: 116, quote: "Arrange the followings ascending according to the level of evidence" }
+    status: unverified
+  - id: res.L07.110
+    kind: mcq
+    topic: practice
+    stem: In single blinding, who is unaware of the subject's group?
+    options: [Analyzer, Observer, Subject, All of the above]
+    answer: 2
+    why:
+      - The analyzer is blinded only in triple blinding.
+      - The observer is added in double blinding.
+      - Single blinding hides the group from the subject only.
+      - All three is triple blinding.
+    src: { page: 117, quote: "In single blinding" }
+    status: unverified
+  - id: res.L07.111
+    kind: order
+    topic: practice
+    prompt: Put these steps of an experimental study in order.
+    steps:
+      - Enumerate the inclusion and exclusion criteria
+      - Randomization
+      - Blinding
+      - Statistical analysis
+    src: { page: 118, quote: "While conducting experimental study, arrange the following steps in sequential manner" }
+    status: unverified
+  - id: res.L07.112
+    kind: mcq
+    topic: practice
+    stem: What is the tool for controlling confounders in an experimental design?
+    options: [Blinding, Statistical analysis, Randomization, None of the above]
+    answer: 2
+    why:
+      - Blinding prevents measurement bias.
+      - Analysis can adjust only for measured confounders, after the fact.
+      - Randomization balances known and unknown confounders at the design stage.
+      - c is correct.
+    src: { page: 119, quote: "What is the tool for control of confounders in experimental design" }
+    status: unverified
+    tags: [high-yield]
+  - id: res.L07.113
+    kind: mcq
+    topic: practice
+    stem: Which one of the following characterizes phase II drug testing?
+    options:
+      - It uses a single dose determined from the phase I experience.
+      - It always treats divergent pathologies in a single trial.
+      - It is the first human clinical experience with a new agent.
+      - It always leads to FDA approval of a new drug.
+    answer: 0
+    why:
+      - This is the slide's answer. Phase I finds a safe dose, which phase II then tests for efficacy.
+      - Phase II usually studies one condition.
+      - The first human experience is phase I.
+      - Many drugs fail at phase II or III.
+    src: { page: 120, quote: "It uses a single dose of drug determined from the Phase I experience" }
+    status: unverified
+  - id: res.L07.114
+    kind: mcq
+    topic: practice
+    stem: Which research method best suits comparing cognitive behavioural therapy with an SSRI in anxiety disorder?
+    options:
+      - Double blind and placebo controlled
+      - Randomization and open label
+      - Randomization and placebo controlled (unblinded)
+      - Randomization and triple blind
+    answer: 1
+    why:
+      - A patient always knows whether they are getting psychotherapy, so double blinding is impossible.
+      - Randomize, but the label stays open because therapy versus a pill cannot be hidden.
+      - Both arms are active treatments; no placebo is being compared.
+      - Triple blinding is impossible when patients can see their treatment.
+    src: { page: 121, quote: "best suited to comparing cognitive behavioural therapy with a selective reuptake inhibitor" }
+    status: unverified

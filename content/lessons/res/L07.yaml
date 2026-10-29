@@ -1,0 +1,1175 @@
+schema: batna.lesson/v1
+lecture: res.L07
+lessons:
+  # ------------------------------------------------------------------
+  - id: res.L07.lesson1
+    title: "حجم العينة: كام عيان يكفي؟"
+    hook: "عيّنة صغيرة تضيّع مجهودك، وعيّنة كبيرة تضيّع فلوسك. الرقم الصح بيطلع من ٥ حاجات بس."
+    minutes: 8
+    pages: [1, 21]
+    topics: [sample-size]
+    goals:
+      - "تفرّق بين type I و type II error ومعنى الـ power"
+      - "تعدّ الـ 5 factors اللي بتحدد الـ sample size واتجاه كل واحد"
+      - "تعرف مكان كل حاجة في معادلة الـ sample size"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 1
+        quote: "Too small a sample would produce insignificant results and would be a waste of efforts"
+        title: "Step 5: ليه نحسب الـ sample size؟"
+        text: |
+          كمّلنا الـ 12 step بتوع تخطيط الـ RCT. الـ step الخامسة: ==sample size calculation==.
+
+          - عيّنة **صغيرة**: النتيجة تطلع **insignificant** حتى لو الدوا شغّال، يعني مجهود ضايع.
+          - عيّنة **كبيرة زيادة**: كل subject في الـ trial بيكلّف فلوس كتير، فحتى subject واحد زيادة يبقى **poor financial management**.
+
+          والطريقة العملية الوحيدة إنك تقلّل الـ random error: عدد كافي من الناس، محسوب بـ **sample size calculation** أو **power analysis**.
+      - kind: explain
+        page: 2
+        quote: "the probability of a false-negative conclusion accepting a false null hypothesis"
+        title: "غلطتين ممكن تقع فيهم"
+        text: |
+          - ==Type I error (alpha)==: لقيت **فرق مش موجود** في الحقيقة. رفضت null hypothesis صح. ده **false positive**.
+            بالبلدي: **نزّلت دوا ملوش لازمة السوق**.
+          - ==Type II error (beta)==: فاتك **فرق موجود فعلًا**. فشلت ترفض null hypothesis غلط. ده **false negative**.
+            بالبلدي: **خبّيت دوا كويس عن العيانين**.
+      - kind: figure
+        page: 5
+        quote: "Possible trial outcomes"
+        title: "الحقيقة ضد نتيجة الـ trial"
+        alt: "Two by two grid. Columns are the truth: no real difference, or a real difference. Rows are the trial result: treatments differ, or do not differ. Differ when there is no real difference is a type I error, alpha. Do not differ when there is a real difference is a type II error, beta. The other two cells are correct; finding a real difference is the power, 1 minus beta."
+        caption: "خانتين صح وخانتين غلط. الـ **power** هي الخانة الخضرا اللي تحت **real difference**."
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <text x="215" y="16" text-anchor="middle" class="t-sm t-b">The truth</text>
+            <rect x="110" y="26" width="105" height="34" rx="6" class="fg-thin"/>
+            <text x="162" y="47" text-anchor="middle" class="t-sm">No difference</text>
+            <rect x="220" y="26" width="105" height="34" rx="6" class="fg-thin"/>
+            <text x="272" y="47" text-anchor="middle" class="t-sm">Real difference</text>
+            <text x="55" y="16" text-anchor="middle" class="t-sm t-b">Trial says</text>
+            <rect x="5" y="66" width="100" height="80" rx="6" class="fg-box"/>
+            <text x="55" y="102" text-anchor="middle" class="t-sm t-b">Differ</text>
+            <text x="55" y="120" text-anchor="middle" class="t-sm t-mut">p &lt; 0.05</text>
+            <rect x="5" y="152" width="100" height="80" rx="6" class="fg-box"/>
+            <text x="55" y="188" text-anchor="middle" class="t-sm t-b">Do not differ</text>
+            <text x="55" y="206" text-anchor="middle" class="t-sm t-mut">p ≥ 0.05</text>
+            <rect x="110" y="66" width="105" height="80" rx="6" class="fg-bad"/>
+            <text x="162" y="98" text-anchor="middle" class="t-sm t-b">Type I error</text>
+            <text x="162" y="116" text-anchor="middle" class="t-sm">alpha</text>
+            <text x="162" y="134" text-anchor="middle" class="t-sm t-mut">false positive</text>
+            <rect x="220" y="66" width="105" height="80" rx="6" class="fg-good"/>
+            <text x="272" y="98" text-anchor="middle" class="t-sm t-b">Correct</text>
+            <text x="272" y="116" text-anchor="middle" class="t-sm">Power</text>
+            <text x="272" y="134" text-anchor="middle" class="t-sm t-mut">1 - beta</text>
+            <rect x="110" y="152" width="105" height="80" rx="6" class="fg-good"/>
+            <text x="162" y="184" text-anchor="middle" class="t-sm t-b">Correct</text>
+            <text x="162" y="202" text-anchor="middle" class="t-sm">1 - alpha</text>
+            <rect x="220" y="152" width="105" height="80" rx="6" class="fg-bad"/>
+            <text x="272" y="184" text-anchor="middle" class="t-sm t-b">Type II error</text>
+            <text x="272" y="202" text-anchor="middle" class="t-sm">beta</text>
+            <text x="272" y="220" text-anchor="middle" class="t-sm t-mut">false negative</text>
+          </svg>
+      - kind: mnemonic
+        page: 4
+        quote: "the probability of a false- negative conclusion by fail to reject a false null hypothesis"
+        word: "PN"
+        parts:
+          - { key: "P", text: "Type I = false Positive: شفت فرق مش موجود. دوا فاشل نزل السوق." }
+          - { key: "N", text: "Type II = false Negative: فاتك فرق حقيقي. دوا كويس اتحرم منه العيانين." }
+        hook: "زي ترتيب الحروف: **P** الأول (type I)، و **N** بعده (type II). والـ **power = 1 - beta**: فرصتك ماتفوتكش الفرق."
+      - kind: check
+        page: 13
+        quote: "Assume in reality, however, the 2 groups do not differ"
+        question: "An RCT finds a difference between two drugs (p < 0.05), but in reality they do not differ. This is:"
+        options:
+          - "Type 1 error (alpha)"
+          - "Type 2 error (beta)"
+          - "Power"
+          - "1 - alpha"
+        answer: 0
+        why:
+          - "صح: لقينا فرق مش موجود في الحقيقة، يعني false positive."
+          - "الـ type 2 هو إن يفوتك فرق موجود، وهنا مفيش فرق أصلًا."
+          - "الـ power هو إنك تلاقي فرق موجود فعلًا."
+          - "الـ 1 - alpha هو إنك صح تقول مفيش فرق."
+      - kind: explain
+        page: 7
+        quote: "an investigator could choose a difference of 10% between the treatment group and the control group as MCRD"
+        title: "الـ MCRD: أقل فرق يفرق مع العيان"
+        text: |
+          ==Minimal clinically relevant difference== (delta): أقل فرق بين المجموعتين **الباحث شايفه مهم إكلينيكيًا**.
+
+          - outcome **continuous** زي الوزن: ممكن الـ MCRD يبقى **5 kg**.
+          - outcome **binary** زي MI أيوه ولا لأ: ممكن تختار فرق **10%** بين الـ treatment والـ control.
+
+          وخلي بالك: لو delta **كبيرة أوي**، أدوية مش فعالة هتعدّي كـ non-inferior وتنزل السوق. لو **صغيرة أوي**، أدوية مفيدة هتتهمل.
+      - kind: table
+        page: 8
+        quote: "Factors affecting sample size of RCT"
+        title: "الـ 5 factors: لو زوّدت الحاجة دي، العيّنة تعمل إيه؟"
+        columns: ["Factor increased", "Sample size", "Why"]
+        rows:
+          - ["Alpha", "Smaller", "Z alpha falls"]
+          - ["Power", "Larger", "Z beta rises"]
+          - ["MCRD (delta)", "Smaller", "Big effects are easy to see"]
+          - ["Variance (SD)", "Larger", "Noise hides the effect"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1]]
+      - kind: aside
+        tone: analogy
+        page: 8
+        quote: "The variability of the outcome measure as the SD in case of continuous outcome"
+        text: |
+          تخيّل إنك عايز تسمع حد بيكلّمك في فرح.
+
+          - لو صوته **عالي** (delta كبيرة) هتسمعه من أول كلمة: عيّنة صغيرة تكفي.
+          - لو **الدوشة** حواليك عالية (variability أو variance كبيرة) محتاج تقرّب أكتر: عيّنة أكبر.
+          - ولو عايز تبقى **متأكد** إنك مش هتفوّت ولا كلمة (power أعلى): برضه عيّنة أكبر.
+      - kind: figure
+        page: 11
+        quote: "typically .84 for 80% power"
+        title: "معادلة الـ sample size للـ means"
+        alt: "Formula: n per group equals 2 times sigma squared times the square of Z beta plus Z alpha over 2, divided by the difference squared. Labels: sigma is the standard deviation of the outcome, Z beta is the desired power, 0.84 for 80 percent, Z alpha over 2 is the significance level, 1.96, and the difference is the effect size. Variability and power sit on top; the effect size sits underneath."
+        caption: "اللي **فوق** الكسر بيكبّر العيّنة: variance و power. اللي **تحت** بيصغّرها: الـ effect size. وللـ proportions بتحط **p(1-p)** مكان sigma تربيع."
+        svg: |
+          <svg viewBox="0 0 330 230" xmlns="http://www.w3.org/2000/svg">
+            <text x="20" y="96" class="t-lg t-b">n = 2 ×</text>
+            <text x="200" y="80" text-anchor="middle" class="t-lg">σ² (Zβ + Zα/2)²</text>
+            <path d="M110 92H292" class="fg-arrow"/>
+            <text x="200" y="120" text-anchor="middle" class="t-lg">difference²</text>
+            <rect x="120" y="20" width="60" height="30" rx="6" class="fg-box"/>
+            <text x="150" y="40" text-anchor="middle" class="t-sm">SD</text>
+            <rect x="190" y="20" width="60" height="30" rx="6" class="fg-good"/>
+            <text x="220" y="40" text-anchor="middle" class="t-sm">0.84</text>
+            <rect x="260" y="20" width="60" height="30" rx="6" class="fg-acc"/>
+            <text x="290" y="40" text-anchor="middle" class="t-sm">1.96</text>
+            <text x="150" y="14" text-anchor="middle" class="t-sm t-mut">variability</text>
+            <text x="220" y="14" text-anchor="middle" class="t-sm t-mut">80% power</text>
+            <text x="290" y="14" text-anchor="middle" class="t-sm t-mut">alpha 0.05</text>
+            <rect x="140" y="140" width="120" height="30" rx="6" class="fg-thin"/>
+            <text x="200" y="160" text-anchor="middle" class="t-sm">effect size (MCRD)</text>
+            <text x="165" y="200" text-anchor="middle" class="t-sm t-bad">Top grows → more patients</text>
+            <text x="165" y="220" text-anchor="middle" class="t-sm t-good">Bottom grows → fewer patients</text>
+          </svg>
+      - kind: check
+        page: 18
+        quote: "All of the followings can be increased to get smaller sample size in RCT EXCEPT"
+        question: "All of the following can be increased to get a smaller sample size EXCEPT:"
+        options:
+          - "Alpha error"
+          - "Power"
+          - "MCRD (delta)"
+          - "Beta error"
+        answer: 1
+        why:
+          - "لو قبلت alpha أكبر، الـ Z alpha يقل والعيّنة تصغر."
+          - "صح: power أعلى يعني Z beta أكبر فوق الكسر، يعني عيّانين أكتر."
+          - "الـ delta تحت الكسر؛ لما تكبر العيّنة تصغر."
+          - "beta أكبر يعني power أقل، يعني عيّنة أصغر."
+      - kind: aside
+        tone: trap
+        page: 17
+        quote: "It is not possible to decide which treatment is better based on these information"
+        text: |
+          سؤال الـ ovarian cancer: remission متشابه، **p = 0.4**. الإجابة: **مش ممكن نحكم أنهي treatment أحسن من المعلومات دي**.
+
+          الفخاخ: الـ p مش «الـ power = 60%» ولا «الـ effect = 0.4». والـ p الكبيرة مش معناها إن الاتنين فاشلين أو الاتنين شغالين؛ مفيش placebo أصلًا.
+      - kind: try
+        items: [res.L07.004, res.L07.008, res.L07.011]
+    recap:
+      - "Type I (alpha) = false positive، دوا فاشل نزل السوق. Type II (beta) = false negative، دوا كويس اتحرم منه الناس."
+      - "Power = 1 - beta: فرصة إنك تلاقي الفرق الحقيقي."
+      - "الـ 5 factors: alpha، beta، power، MCRD، variance. Power و variance أكبر = عيّنة أكبر. Alpha و MCRD أكبر = عيّنة أصغر."
+      - "المعادلة: Zβ = 0.84 لـ 80% power، Zα/2 = 1.96."
+    practice: [res.L07.001, res.L07.002, res.L07.003, res.L07.004, res.L07.005, res.L07.006, res.L07.007, res.L07.008, res.L07.009, res.L07.010, res.L07.011, res.L07.012, res.L07.013, res.L07.014, res.L07.015, res.L07.016, res.L07.017, res.L07.018, res.L07.019, res.L07.020]
+  # ------------------------------------------------------------------
+  - id: res.L07.lesson2
+    title: "القرعة: simple و block و stratified"
+    hook: "إزاي توزّع ١٠٠٠ عيان على علاجين وتضمن إن الستات والكبار متقسّمين بالعدل؟"
+    minutes: 8
+    pages: [22, 34]
+    topics: [conduct, randomization]
+    goals:
+      - "تعرف المطلوب في step 6 و step 7"
+      - "تعدّ فوايد الـ randomization"
+      - "تفرّق بين simple و block و stratified randomization وتحسب مثال"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 22
+        quote: "Detailed protocols of clinical procedures, laboratory investigations"
+        title: "Step 6: كل variable ليه بروتوكول"
+        text: |
+          قبل ما تبدأ، اكتب **detailed protocols** للـ clinical procedures والـ lab والـ questionnaire. ولكل variable (intervention، co-intervention، confounders، outcomes) جاوب:
+
+          - **مين** هيقيس؟ و**إمتى**؟
+          - بأنهي **equipment** وأنهي **technique**؟
+          - إزاي الأجهزة والطرق والناس هيكونوا ==standardized and validated==؟
+      - kind: explain
+        page: 24
+        quote: "Recruitment and Participation Flow Chart"
+        title: "Step 7: الـ flow chart"
+        text: |
+          في الـ enrolment لازم تعرض ==Recruitment and Participation Flow Chart== فيه **n عند كل خطوة**: اتعرض عليهم كام، اتقيّموا كام، اتوزّعوا كام، خدوا العلاج كام، ضاعوا كام، واتحلّلوا كام.
+
+          مثال المحاضرة: برنامج **web** ضد **print**. حوالي 247 في الـ web، و 233 في الـ print، ومن كل جروب ناس ماخدوش العلاج وناس ضاعت في الـ follow-up. وده بالظبط شكل الـ **CONSORT flow diagram** اللي هنشوفه في آخر المحاضرة.
+      - kind: explain
+        page: 26
+        quote: "Only way to control for unknown factors"
+        title: "Step 8: الـ randomization بتمنع الـ bias إزاي؟"
+        text: |
+          - بتخلي **الـ assignment الجاي مش متوقع**.
+          - بتقلّل **الفروق في الـ baseline risk** بين الجروبين.
+          - هي ==the only way to control for unknown factors==: حتى الحاجات اللي إنت مش عارف إنها confounders.
+
+          وكل ما الجروبات **أكبر**، فرصة إن الـ baseline risks تتساوى بتزيد.
+      - kind: reveal
+        page: 27
+        quote: "It permits the use of probability theory to express the likelihood that any difference in outcome between treatment groups merely indicates chance"
+        prompt: "المحاضرة بتقول للـ randomization **3 فوايد**. افتكرهم قبل ما تفتح."
+        answer: |
+          1. بتلغي الـ **bias in treatment assignment**: الـ selection bias والـ confounding.
+          2. بتسهّل الـ **blinding**: الدوا والـ placebo بيتوزّعوا بأرقام، محدش عارف مين خد إيه.
+          3. بتسمح نستخدم **probability theory**: نقدر نحسب احتمال إن الفرق ده مجرد صدفة (الـ p value).
+      - kind: explain
+        page: 29
+        quote: "given a block size of 4, there are 6 possible ways to equally assign participants to a block"
+        title: "Block randomization: علشان الجروبات تبقى بنفس الحجم"
+        text: |
+          الـ simple randomization زي رمي العملة: ممكن تطلع 12 ضد 8 في 20 عيان. الـ ==block randomization== بتضمن **equal sample sizes**.
+
+          مع علاجين A و B و **block size = 4**، فيه **6 طرق** يتقسّم فيها البلوك بالتساوي:
+          AABB، BBAA، ABAB، BABA، ABBA، BAAB.
+
+          تختار البلوكات **عشوائيًا**: 20 عيان = **5 blocks** كل واحد فيه 4. وفي آخر كل بلوك، الجروبين متساويين.
+      - kind: aside
+        tone: trap
+        page: 29
+        quote: "it should be short enough to prevent imbalance, and long enough to prevent guessing allocation"
+        text: |
+          حجم البلوك: **قصير كفاية** يمنع الـ imbalance، و**طويل كفاية** يمنع إن حد **يخمّن** الـ allocation.
+
+          لو البلوك 2 والدكتور عارف، أول عيان خد A يبقى التاني أكيد B: الـ concealment باظ.
+      - kind: explain
+        page: 31
+        quote: "Stratified randomization is achieved by generating a separate block for each combination of covariates"
+        title: "Stratified randomization: وازن الـ covariates المهمة"
+        text: |
+          لما فيه **prognostic variable** مهمة (السن، النوع، شدة المرض) وعايز تضمن إنها متوزعة بالعدل:
+
+          - اعمل ==separate block for each combination of covariates==.
+          - جوه كل block اعمل **simple randomization** للجروبين.
+
+          مثال المحاضرة: تجربة **zidovudine** في الحوامل اتقسّمت حسب **gestational age**: 14 لـ 26 أسبوع وأكتر من 26، وبعدين قرعة جوه كل واحدة.
+      - kind: figure
+        page: 32
+        quote: "Stratify By Sex"
+        title: "١٠٠٠ عيان: sex ثم age ثم قرعة"
+        alt: "Tree: 1,000 patients split by sex into 600 males and 400 females. Males split by age into 360 young and 240 old; females into 300 young and 100 old. Each of the four sub-groups is randomized in half, giving 180 plus 120 plus 150 plus 50, which is 500, in the new treatment and the same 500 in the current treatment."
+        caption: "كل **stratum** بيتقسم نصّين بالقرعة، فالجروبين بيطلعوا **500 و 500** وفيهم نفس نسبة الرجالة والستات والكبار والصغار."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="R07s" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="115" y="6" width="100" height="30" rx="6" class="fg-ink"/>
+            <text x="165" y="26" text-anchor="middle" class="t-sm t-b">1,000 patients</text>
+            <path d="M140 36L90 62" class="fg-arrow" marker-end="url(#R07s)"/>
+            <path d="M190 36L240 62" class="fg-arrow" marker-end="url(#R07s)"/>
+            <text x="165" y="58" text-anchor="middle" class="t-sm t-mut">sex</text>
+            <rect x="40" y="66" width="100" height="30" rx="6" class="fg-box"/>
+            <text x="90" y="86" text-anchor="middle" class="t-sm">600 males</text>
+            <rect x="190" y="66" width="100" height="30" rx="6" class="fg-box"/>
+            <text x="240" y="86" text-anchor="middle" class="t-sm">400 females</text>
+            <text x="165" y="118" text-anchor="middle" class="t-sm t-mut">age</text>
+            <path d="M75 96L45 126M105 96L125 126M225 96L205 126M255 96L285 126" class="fg-arrow" marker-end="url(#R07s)"/>
+            <rect x="5" y="130" width="72" height="40" rx="6" class="fg-thin"/>
+            <text x="41" y="148" text-anchor="middle" class="t-sm">360</text>
+            <text x="41" y="163" text-anchor="middle" class="t-sm t-mut">young</text>
+            <rect x="85" y="130" width="72" height="40" rx="6" class="fg-thin"/>
+            <text x="121" y="148" text-anchor="middle" class="t-sm">240</text>
+            <text x="121" y="163" text-anchor="middle" class="t-sm t-mut">old</text>
+            <rect x="173" y="130" width="72" height="40" rx="6" class="fg-thin"/>
+            <text x="209" y="148" text-anchor="middle" class="t-sm">300</text>
+            <text x="209" y="163" text-anchor="middle" class="t-sm t-mut">young</text>
+            <rect x="253" y="130" width="72" height="40" rx="6" class="fg-thin"/>
+            <text x="289" y="148" text-anchor="middle" class="t-sm">100</text>
+            <text x="289" y="163" text-anchor="middle" class="t-sm t-mut">old</text>
+            <text x="165" y="194" text-anchor="middle" class="t-sm t-acc t-b">randomize each half and half</text>
+            <rect x="5" y="210" width="155" height="56" rx="6" class="fg-good"/>
+            <text x="82" y="232" text-anchor="middle" class="t-sm t-b">New treatment</text>
+            <text x="82" y="254" text-anchor="middle" class="t-sm">180+120+150+50</text>
+            <rect x="170" y="210" width="155" height="56" rx="6" class="fg-acc"/>
+            <text x="247" y="232" text-anchor="middle" class="t-sm t-b">Current treatment</text>
+            <text x="247" y="254" text-anchor="middle" class="t-sm">180+120+150+50</text>
+            <text x="82" y="288" text-anchor="middle" class="t-sm t-b">= 500</text>
+            <text x="247" y="288" text-anchor="middle" class="t-sm t-b">= 500</text>
+          </svg>
+      - kind: match
+        page: 28
+        quote: "How to Do Random Allocation of subjects"
+        prompt: "وصّل كل هدف بطريقة الـ randomization المناسبة:"
+        pairs:
+          - ["Just give each patient a fair coin toss", "Simple randomization"]
+          - ["Keep the two arms equal in size as patients arrive", "Block randomization"]
+          - ["Balance age and sex between the arms", "Stratified randomization"]
+        why: "**Simple** = قرعة لكل واحد. **Block** = بلوكات متوازنة فالعدد يفضل متساوي. **Stratified** = بلوك لكل combination من الـ covariates، وقرعة جوّاه."
+      - kind: check
+        page: 34
+        quote: "Randomization guarantee that all participants will receive the intervention"
+        question: "Which statement about the advantages of randomization is INCORRECT?"
+        options:
+          - "It removes selection bias in allocation"
+          - "It guarantees that all participants will receive the intervention"
+          - "It tends to balance measured and unmeasured confounders"
+          - "It lets probability theory judge the role of chance"
+        answer: 1
+        why:
+          - "دي ميزة حقيقية."
+          - "صح، دي الغلط: القرعة بتحدد مين ياخد إيه، والـ control مش هياخد الـ intervention أصلًا."
+          - "دي ميزة حقيقية، وأهم واحدة."
+          - "دي ميزة حقيقية، من شريحة 27."
+      - kind: try
+        items: [res.L07.035, res.L07.037, res.L07.038]
+    recap:
+      - "Step 6: بروتوكول لكل variable: مين، إمتى، بإيه، وإزاي standardized و validated."
+      - "Step 7: flow chart فيه n عند كل خطوة."
+      - "الـ randomization: الـ assignment مش متوقع، الـ baseline متوازن، والطريقة الوحيدة للـ unknown confounders."
+      - "Block = عدد متساوي (block of 4 = 6 ترتيبات). Stratified = block لكل combination من الـ covariates وقرعة جوّاه."
+    practice: [res.L07.021, res.L07.022, res.L07.023, res.L07.030, res.L07.031, res.L07.032, res.L07.033, res.L07.034, res.L07.035, res.L07.036, res.L07.037, res.L07.038, res.L07.039, res.L07.040]
+  # ------------------------------------------------------------------
+  - id: res.L07.lesson3
+    title: "الظرف المقفول: concealment ضد blinding"
+    hook: "الدكتور شاف إن الظرف الجاي فيه الدوا الجديد، فاختار له عيان شكله هيتحسّن. ده اسمه إيه؟"
+    minutes: 8
+    pages: [35, 50]
+    topics: [concealment, conduct]
+    goals:
+      - "تعدّ طرق الـ allocation concealment"
+      - "تفرّق بين concealment و blinding: التوقيت، الـ bias، وإمكانية التنفيذ"
+      - "تعرف steps 9 لـ 11 والـ stopping rules"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 35
+        quote: "Sequentially numbered, opaque, sealed envelopes"
+        title: "إزاي تخبّي القرعة؟"
+        text: |
+          الـ ==allocation concealment== بتحمي تسلسل القرعة **قبل** ما العيان يدخل التجربة. طرقها:
+
+          - ظروف متنمّرة ومقفولة ومش شفافة: **SNOSE**
+          - الصيدلية ماسكة القايمة: **pharmacy-controlled**
+          - مركز بعيد يقولك رقم العلبة: **central randomization**
+
+          والـ SNOSE اختصار: Sequentially Numbered, Opaque, Sealed Envelopes.
+      - kind: figure
+        page: 38
+        quote: "Selection bias Performance bias"
+        title: "خط الزمن: قبل القرعة وبعدها"
+        alt: "Timeline with randomisation in the middle. Before it, allocation concealment protects the sequence and prevents selection bias. After it, blinding hides the treatment and prevents performance and ascertainment bias."
+        caption: "**قبل** القرعة: concealment ضد الـ selection bias. **بعد** القرعة: blinding ضد الـ performance والـ ascertainment bias."
+        svg: |
+          <svg viewBox="0 0 330 200" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="R07t" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <path d="M10 100H318" class="fg-arrow" marker-end="url(#R07t)"/>
+            <text x="318" y="120" text-anchor="end" class="t-sm t-mut">time</text>
+            <rect x="140" y="80" width="50" height="40" rx="6" class="fg-ink"/>
+            <text x="165" y="104" text-anchor="middle" class="t-sm t-b">R</text>
+            <text x="165" y="140" text-anchor="middle" class="t-sm t-b">randomisation</text>
+            <rect x="8" y="20" width="125" height="50" rx="6" class="fg-acc"/>
+            <text x="70" y="40" text-anchor="middle" class="t-sm t-b">Concealment</text>
+            <text x="70" y="58" text-anchor="middle" class="t-sm">always possible</text>
+            <rect x="197" y="20" width="125" height="50" rx="6" class="fg-good"/>
+            <text x="259" y="40" text-anchor="middle" class="t-sm t-b">Blinding</text>
+            <text x="259" y="58" text-anchor="middle" class="t-sm">not always</text>
+            <rect x="8" y="155" width="125" height="34" rx="6" class="fg-bad"/>
+            <text x="70" y="177" text-anchor="middle" class="t-sm">Selection bias</text>
+            <rect x="197" y="155" width="125" height="34" rx="6" class="fg-bad"/>
+            <text x="259" y="177" text-anchor="middle" class="t-sm">Performance bias</text>
+          </svg>
+      - kind: table
+        page: 37
+        quote: "Can always be implemented Can not always be implemented"
+        title: "الفرق في جدول"
+        columns: ["", "Concealment", "Blinding"]
+        rows:
+          - ["When", "Before and until treatment is given", "After allocation"]
+          - ["Prevents", "Selection bias", "Ascertainment bias"]
+          - ["Feasible", "Always", "Not always"]
+        hide: [[1, 1], [1, 2], [2, 1], [2, 2]]
+      - kind: aside
+        tone: analogy
+        page: 39
+        quote: "Randomization should be separate & distant from clinicians conducting the trial"
+        text: |
+          الكارتون في الشريحة: الدكتور بيتصل بالمركز: «العيانة مناسبة وموافقة، أدّيها أنهي علبة؟» والمركز يرد: «أدّيها **علبة X32**، وبعد التجربة هنقولك X32 كانت إيه».
+
+          ده الـ concealment الصح: الـ randomization **بعيدة ومنفصلة** عن الـ clinicians اللي بيعملوا التجربة. زي ورقة امتحان التنسيق: مكتوب عليها رقم جلوس مش اسم.
+      - kind: check
+        page: 40
+        quote: "It prevents researchers from influencing which participants are assigned to the intervention/ control group"
+        question: "Allocation concealment reduces bias because:"
+        options:
+          - "It prevents researchers from influencing which participants are assigned to each group"
+          - "It prevents participants from knowing which arm they are on"
+          - "It makes the placebo identical to the drug"
+          - "It increases the power of the trial"
+        answer: 0
+        why:
+          - "صح: الباحث مايقدرش يختار مين يدخل الجروب ده، فبيمنع الـ selection bias."
+          - "ده blinding، وبيحصل بعد الـ allocation."
+          - "الـ placebo المتطابق جزء من الـ blinding."
+          - "الـ power بيعتمد على الـ sample size والـ alpha والـ effect size."
+      - kind: sort
+        page: 44
+        quote: "the following types of biases are reduced by randomization"
+        prompt: "كل bias من دول بيتمنع بإيه؟"
+        bins: ["Randomization + concealment", "Blinding", "Intention to treat"]
+        cards:
+          - { text: "Selection bias", bin: 0 }
+          - { text: "Unknown confounders unequal at baseline", bin: 0 }
+          - { text: "Ascertainment (assessment) bias", bin: 1 }
+          - { text: "Patients bias their answers because they know their drug", bin: 1 }
+          - { text: "Bias from dropouts and non-compliers", bin: 2 }
+        why: "القرعة والظرف المقفول بيخلّوا الجروبين شبه بعض في البداية. الـ blinding بيحمي القياس بعد كده. والـ intention to treat بيحمي التحليل من اللي وقفوا العلاج."
+      - kind: explain
+        page: 45
+        quote: "same shape, colour, size and taste"
+        title: "Steps 9 و 10: الـ placebo والـ blinding"
+        text: |
+          - **Step 9**: الـ placebo لازم يبقى ==same shape, colour, size and taste== ويتدّى بنفس الطريقة. واعمل procedures لمراجعة الـ **compliance**.
+          - الـ **data collection** لازم تبقى **same quality** في الجروبين: الـ treatment (assigned و received)، والـ outcome بمعايير واضحة ومتقاسة بنفس الطريقة. غير كده: **observer bias**.
+          - **Step 10**: الناس لو عرفت هي في أنهي جروب، سلوكها بيتغيّر. الحل: blinding للـ participants و/أو الـ observer و/أو الـ data reviewer.
+      - kind: explain
+        page: 49
+        quote: "Evidence of clearly high mortality or complication in the intervention group"
+        title: "Step 11 والـ stopping rules"
+        text: |
+          **Step 11**: تابع الناس لحد الـ **end point** أو **آخر مدة التجربة، أيهما أقرب**، وامنع الـ ==losses to follow up== لأنها ممكن تعمل bias كبير.
+
+          **إمتى نوقف الـ RCT بدري؟**
+          - **Benefit** أكبر من المتوقع (مش أخلاقي نحرم الـ control منه).
+          - **Harm** أكبر من المتوقع.
+          - مفيش **important difference** خالص (futility).
+          - **Mortality** أو complications عالية بوضوح في جروب الـ intervention.
+      - kind: aside
+        tone: trap
+        page: 50
+        quote: "Suppose that a randomized single masked experimental study is conducted"
+        text: |
+          سؤال شريحة 50: «randomized **single masked** study، إيه المشكلة اللي **أكيد** اتمنعت؟» إجابة الشريحة: **biased assessment of the outcome**.
+
+          ممكن تعترض إن الـ single masking بيخبّي عن طرف واحد بس، وإن القرعة بتقلل الـ confounding. لكن إجابة الامتحان هي إجابة الشريحة: الـ **masking** = سلاح ضد الـ **biased assessment**. والـ noncompliance والـ loss to follow-up مفيش حاجة بتمنعهم.
+      - kind: try
+        items: [res.L07.042, res.L07.041, res.L07.028]
+    recap:
+      - "Concealment: SNOSE، pharmacy، central. بيحمي القرعة قبل الإعطاء، دايمًا ممكن، وبيمنع الـ selection bias."
+      - "Blinding: بعد الـ allocation، مش دايمًا ممكن، وبيمنع الـ ascertainment والـ performance bias."
+      - "الـ placebo: نفس الشكل واللون والحجم والطعم. والـ data بنفس الجودة في الجروبين، وإلا observer bias."
+      - "Stopping rules: benefit أو harm أكبر من المتوقع، مفيش فرق، أو mortality عالية."
+    practice: [res.L07.024, res.L07.025, res.L07.026, res.L07.027, res.L07.028, res.L07.029, res.L07.041, res.L07.042, res.L07.043, res.L07.044, res.L07.045, res.L07.046, res.L07.047, res.L07.048, res.L07.049, res.L07.050]
+  # ------------------------------------------------------------------
+  - id: res.L07.lesson4
+    title: "NNT: كام عيان نعالج علشان ننقذ واحد؟"
+    hook: "دوا بيقلل الوفيات 50%... بس ده ممكن يعني ٤ عيانين أو ٤٠٠٠ عيان. الفرق كله في الـ NNT."
+    minutes: 9
+    pages: [51, 63]
+    topics: [effect-measures]
+    goals:
+      - "تحسب CER و EER و RRR و ARR و NNT من 2x2 table"
+      - "تفهم ليه الـ RRR لوحده بيخدع"
+      - "تحل تمرين الـ INH وتمرين الـ zidovudine وتلاقي غلطة الشريحة"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 52
+        quote: "The relative risk reduction (RRR) The absolute risk reduction (ARR) The numbers needed to treat (NNT)"
+        title: "Step 12: حجم الأثر بـ 3 أرقام"
+        text: |
+          في الـ analysis: أول حاجة **baseline table** يقارن الجروبين، وبعدين **2x2 table** بخانات a و b و c و d.
+
+          وعلشان تحكم على حجم الأثر عندك 3 مقاييس:
+          - ==Relative risk reduction (RRR)==
+          - ==Absolute risk reduction (ARR)==
+          - ==Number needed to treat (NNT)==
+      - kind: table
+        page: 53
+        quote: "Number Needed to Treat NNT =1/ ARR"
+        title: "المعادلات"
+        columns: ["Measure", "Formula"]
+        rows:
+          - ["CER (control)", "c / (c + d)"]
+          - ["EER (experimental)", "a / (a + b)"]
+          - ["RRR", "(CER - EER) / CER"]
+          - ["ARR", "CER - EER"]
+          - ["NNT", "1 / ARR"]
+        hide: [[2, 1], [3, 1], [4, 1]]
+      - kind: figure
+        page: 54
+        quote: "We need to treat 20 people to prevent one death"
+        title: "مثال المحاضرة: 17% ضد 12%"
+        alt: "Bar chart. Control mortality 17 percent, intervention 12 percent. The gap between the bars is the absolute risk reduction, 5 percent. The relative risk reduction is 5 divided by 17, 29 percent. The number needed to treat is 100 divided by 5, 20."
+        caption: "الفرق بين العمودين هو الـ **ARR = 5%**. اقسمه على عمود الـ control تاخد **RRR = 29%**. و **NNT = 100 / 5 = 20**."
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <path d="M40 210H300" class="fg-thin"/>
+            <rect x="70" y="40" width="70" height="170" rx="4" class="fg-bad"/>
+            <text x="105" y="32" text-anchor="middle" class="t-sm t-b">17%</text>
+            <text x="105" y="230" text-anchor="middle" class="t-sm">Control</text>
+            <rect x="190" y="90" width="70" height="120" rx="4" class="fg-good"/>
+            <text x="225" y="82" text-anchor="middle" class="t-sm t-b">12%</text>
+            <text x="225" y="230" text-anchor="middle" class="t-sm">Intervention</text>
+            <path d="M150 40H270M270 40V90" class="fg-arrow-acc"/>
+            <text x="278" y="60" class="t-sm t-acc t-b">ARR</text>
+            <text x="278" y="76" class="t-sm t-acc">5%</text>
+            <text x="165" y="248" text-anchor="middle" class="t-sm t-mut">RRR = 5/17 = 29% · NNT = 100/5 = 20</text>
+          </svg>
+      - kind: explain
+        page: 56
+        quote: "Importance of NNT"
+        title: "ليه الـ RRR لوحده بيخدع؟"
+        text: |
+          الـ RRR ==does not discriminate== بين أثر absolute ضخم وأثر تافه. بص على 3 أدوية كلهم **RRR = 50%**:
+
+          - CER 50%، EER 25%: ARR 25%، **NNT = 4**.
+          - CER 5%، EER 2.5%: ARR 2.5%، **NNT = 40**.
+          - CER 0.05%، EER 0.025%: ARR 0.025%، **NNT = 4000**.
+
+          نفس الـ 50%، بس التالت محتاج تعالج **4000 واحد** علشان تنفع واحد. القاعدة: ==ARR = RRR × baseline risk==، فكل ما الـ baseline risk يقل، الـ NNT يكبر.
+      - kind: aside
+        tone: analogy
+        page: 55
+        quote: "does not discriminate between huge absolute treatment effects and trivial ones"
+        text: |
+          إعلان: «خصم 50%!» على إيه؟ لو على عربية، ده فرق مهول. لو على باكو لبان، فرقت معاك نص جنيه.
+
+          الـ **RRR** هو الـ «50%» اللي في الإعلان. الـ **ARR** هو الفرق الـ absolute: الفلوس اللي وفّرتها فعلًا. وشركات الأدوية بتحب تكتب الـ RRR بخط كبير.
+      - kind: check
+        page: 62
+        quote: "which scenario results in the lowest NNT"
+        question: "Which scenario gives the lowest NNT?"
+        options:
+          - "Greater RRR and higher baseline risk"
+          - "Lower RRR and lower baseline risk"
+          - "Lower RRR and higher baseline risk"
+          - "Greater RRR and lower baseline risk"
+        answer: 0
+        why:
+          - "صح: ARR = RRR × baseline risk، فالاتنين عاليين يدّوا أكبر ARR وأصغر NNT."
+          - "الاتنين واطيين = أصغر ARR = أكبر NNT."
+          - "الـ RRR الواطي بيصغّر الـ ARR."
+          - "الـ baseline risk الواطي بيصغّر الـ ARR."
+      - kind: case
+        page: 59
+        quote: "CER = 9/45 = 20%"
+        stem: "100 أطفال contacts لعيانين TB. 10 عندهم TB أصلًا. من الـ 90 الباقيين: 45 خدوا isoniazid و 3 منهم جالهم TB، و 45 ماخدوش و 9 منهم جالهم TB."
+        steps:
+          - question: "What are CER and EER?"
+            options: ["CER 20%, EER 6.67%", "CER 6.67%, EER 20%", "CER 9%, EER 3%", "CER 10%, EER 3%"]
+            answer: 0
+            why: "الـ control هم اللي ماخدوش: 9/45 = 20%. الـ experimental خدوا INH: 3/45 = 6.67%. والـ 10 اللي عندهم TB أصلًا برّه الحسبة."
+          - question: "ARR and RRR?"
+            options: ["ARR 13.33%, RRR 0.67", "ARR 0.67, RRR 13.33%", "ARR 6.67%, RRR 0.33", "ARR 20%, RRR 0.5"]
+            answer: 0
+            why: "ARR = 20 - 6.67 = 13.33%. RRR = 13.33 / 20 = 0.67."
+          - question: "NNT?"
+            options: ["7.69, so treat 8 children", "13", "20", "3"]
+            answer: 0
+            why: "NNT = 1 / 0.1333 = 7.69، والـ NNT دايمًا بيتقرّب لفوق: 8 أطفال علشان نمنع حالة TB واحدة."
+      - kind: case
+        page: 60
+        quote: "EER = 13/180 =0.07"
+        stem: "Zidovudine للحوامل: 13 من 180 طفل اتعدوا بالـ HIV في جروب الـ zidovudine، و 40 من 183 في الـ placebo."
+        steps:
+          - question: "EER and CER?"
+            options: ["EER 0.07, CER 0.22", "EER 0.22, CER 0.07", "EER 0.13, CER 0.40", "EER 0.07, CER 0.15"]
+            answer: 0
+            why: "EER = 13/180 = 0.07. CER = 40/183 = 0.22."
+          - question: "RRR and ARR?"
+            options: ["RRR 68%, ARR 0.15", "RRR 15%, ARR 0.68", "RRR 32%, ARR 0.15", "RRR 68%, ARR 0.22"]
+            answer: 0
+            why: "RRR = 0.15 / 0.22 = 68%. ARR = 0.22 - 0.07 = 0.15."
+          - question: "The slide prints RR = 3.14 and NNT = 100/15 = 6. What is right?"
+            options: ["RR = 0.33; NNT = 7", "RR = 3.14; NNT = 6", "RR = 0.68; NNT = 15", "RR = 3.14; NNT = 7"]
+            answer: 0
+            why: "الـ 3.14 هي CER/EER، مقلوبة. الـ RR = EER/CER = 0.07/0.22 = حوالي 0.33، يعني الدوا بيحمي. و 100/15 = 6.7، والـ NNT بيتقرّب لفوق: 7."
+      - kind: aside
+        tone: exam
+        page: 63
+        quote: "the control event rate (CER) was 20% and the treatment event rate (TER) was 10%"
+        text: |
+          سؤال شريحة 63 بيتكرر كتير: CER 20%، treatment 10%.
+
+          - **RR** = 10/20 = **0.5** (مش 2.0: الـ RR دايمًا treated على control).
+          - **RRR** = 1 - 0.5 = **50%**.
+          - **ARR** = 20 - 10 = **10%**.
+          - **NNT** = 1/0.10 = **10**.
+
+          لو شفت RR = 2.0 في الاختيارات، ده فخ القسمة بالمقلوب.
+      - kind: try
+        items: [res.L07.053, res.L07.054, res.L07.057]
+    recap:
+      - "CER = c/(c+d)، EER = a/(a+b)، RRR = (CER-EER)/CER، ARR = CER-EER، NNT = 1/ARR، وبيتقرّب لفوق."
+      - "17% ضد 12%: RRR 29%، ARR 5%، NNT 20."
+      - "الـ RRR مابيفرّقش بين أثر ضخم وتافه. ARR = RRR × baseline risk."
+      - "INH: CER 20%، EER 6.67%، ARR 13.33%، RRR 0.67، NNT 7.69. Zidovudine: الـ RR الصح 0.33 مش 3.14، والـ NNT 7."
+    practice: [res.L07.051, res.L07.052, res.L07.053, res.L07.054, res.L07.055, res.L07.056, res.L07.057, res.L07.058, res.L07.059, res.L07.060, res.L07.061, res.L07.062]
+  # ------------------------------------------------------------------
+  - id: res.L07.lesson5
+    title: "صدفة ولا حقيقة؟ وحلّل زي ما قرعت"
+    hook: "فيه عيانين ماتوا قبل العملية. تشيلهم من الحسبة؟ لو شلتهم، العملية هتبان معجزة وهي مالهاش أي لازمة."
+    minutes: 9
+    pages: [64, 78]
+    topics: [chance, itt]
+    goals:
+      - "تقرا الـ significance من الـ confidence interval"
+      - "تفرّق بين الـ intention to treat والـ per protocol"
+      - "تعرف ليه الـ ITT أحسن تقدير للـ benefit ومش للـ harm"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 64
+        quote: "Two methods of assessing the role of chance"
+        title: "طريقتين نقيس بيهم دور الصدفة"
+        text: |
+          عندنا طريقتين نقيس بيهم دور الـ **chance**:
+
+          - ==P-values== (hypothesis testing): اختبار للـ null hypothesis. لو **p < 0.05** يبقى statistically significant.
+          - ==Confidence intervals== (estimation): range غالبًا فيه القيمة الحقيقية.
+
+          والعلاقة بينهم: لو قيمة الـ **no effect** **برّه** الـ CI، النتيجة significant.
+
+          وقيمة الـ no effect في الـ RR هي **1**، وفي الـ risk difference هي **صفر**.
+      - kind: figure
+        page: 67
+        quote: "Statistically significant (increased risk)"
+        title: "الـ CI والخط اللي عند 1"
+        alt: "Forest plot with a vertical line at relative risk 1. RR 1.77, CI 1.22 to 2.45, lies wholly right of 1: significant increased risk. RR 1.63, CI 0.85 to 2.46, crosses 1: not significant. RR 0.78, CI 0.56 to 0.94, lies wholly left of 1: significant decreased risk."
+        caption: "الـ CI **عدّى** الخط اللي عند 1؟ يبقى **مش significant**. كله يمين الخط = خطر **زاد**. كله شمال = خطر **قلّ**."
+        svg: |
+          <svg viewBox="0 0 330 220" xmlns="http://www.w3.org/2000/svg">
+            <path d="M30 190H320" class="fg-thin"/>
+            <path d="M130 20V190" class="fg-arrow-acc"/>
+            <text x="130" y="206" text-anchor="middle" class="t-sm t-acc t-b">1</text>
+            <text x="60" y="206" text-anchor="middle" class="t-sm t-mut">0.5</text>
+            <text x="230" y="206" text-anchor="middle" class="t-sm t-mut">2</text>
+            <text x="300" y="206" text-anchor="middle" class="t-sm t-mut">2.5</text>
+            <path d="M161 50H289" class="fg-arrow"/>
+            <rect x="200" y="44" width="12" height="12" class="fg-bad"/>
+            <text x="226" y="36" text-anchor="middle" class="t-sm">1.77 (1.22-2.45)</text>
+            <text x="320" y="70" text-anchor="end" class="t-sm t-bad t-b">significant, risk up</text>
+            <path d="M101 110H291" class="fg-arrow"/>
+            <rect x="183" y="104" width="12" height="12" class="fg-box"/>
+            <text x="196" y="96" text-anchor="middle" class="t-sm">1.63 (0.85-2.46)</text>
+            <text x="320" y="130" text-anchor="end" class="t-sm t-mut t-b">crosses 1: not significant</text>
+            <path d="M74 160H124" class="fg-arrow"/>
+            <rect x="96" y="154" width="12" height="12" class="fg-good"/>
+            <text x="75" y="150" text-anchor="middle" class="t-sm">0.78 (0.56-0.94)</text>
+            <text x="320" y="170" text-anchor="end" class="t-sm t-good t-b">significant, risk down</text>
+          </svg>
+      - kind: explain
+        page: 68
+        quote: "Insignificant less precised"
+        title: "عرض الـ CI = الدقة"
+        text: |
+          مثال الألياف:
+          - **Vegetable fibre** 0.9-1.4، و **fruit fibre** 0.8-1.2: بيعدّوا الـ 1 وعريضين، يعني **insignificant and less precise**.
+          - **Cereal fibre** 0.6-0.7: ضيّق وتحت الـ 1، يعني ==significant and precise==.
+
+          وكل ما الـ sample size يكبر، الـ CI **يضيق** (precision أعلى).
+      - kind: check
+        page: 66
+        quote: "If the confidence interval is 0.12- 1.5 ( includes 1) this is not statistically significant"
+        question: "In the DVT study, the relative risk has a 95% confidence interval of 0.12-1.5. What do you conclude?"
+        options:
+          - "Not statistically significant, because the interval includes 1"
+          - "Significant, because the point estimate is below 1"
+          - "Significant, because 0.12 is far from 1"
+          - "The drug doubles the risk of DVT"
+        answer: 0
+        why:
+          - "صح: الـ CI فيه الـ 1، يعني ممكن مفيش أثر خالص (p = 0.6 في المحاضرة)."
+          - "الـ point estimate لوحده مش كفاية؛ المهم الـ CI عدّى الـ 1 ولا لأ."
+          - "طرف واحد بعيد مش كفاية؛ الطرف التاني عدّى الـ 1."
+          - "الـ CI بيروح من حماية لزيادة بسيطة، مفيش حاجة بتقول ضعف."
+      - kind: explain
+        page: 69
+        quote: "all study participants are included in the analyses as part of the groups to which they were randomized"
+        title: "Intention to treat ضد per protocol"
+        text: |
+          - ==Intention-to-treat (ITT)==: **كل** اللي اتقرعوا بيتحلّلوا في **الجروب اللي اتقرعوا فيه**، سواء كمّلوا أو التزموا أو لأ.
+          - ==Per protocol==: بيشيل اللي **خالفوا الـ protocol**.
+
+          يعني في الـ ITT: all participants are analysed as **randomized**.
+
+          الـ ITT هو **optimal estimate of the true benefit**، بس ==not optimal for measuring harm== (لأن اللي ماخدش الدوا مش هيبان عليه الـ side effect).
+      - kind: case
+        page: 71
+        quote: "which represents a relative risk reduction (RRR) of 0.45"
+        stem: "100 عيان cerebrovascular disease اتقرعوا على surgery + aspirin، و 100 على aspirin بس. في جروب العملية، 10 جالهم stroke قبل ما يلحقوا يعملوا العملية، ومن الـ 90 اللي اتعملّهم 10 جالهم stroke. في جروب الـ aspirin، 20 جالهم stroke."
+        steps:
+          - question: "Per-protocol stroke rate in the surgery arm?"
+            options: ["10/90 = 0.11", "20/100 = 0.20", "10/100 = 0.10", "20/90 = 0.22"]
+            answer: 0
+            why: "الـ per protocol بيشيل اللي ماتعملّهمش العملية، فالـ 10 اللي جالهم stroke بدري اختفوا من البسط والمقام."
+          - question: "What does each analysis show?"
+            options: ["Per protocol RRR 0.45; ITT RRR 0", "Both RRR 0.45", "Per protocol 0; ITT 0.45", "Both no effect"]
+            answer: 0
+            why: "Per protocol: 0.11 ضد 0.20، RRR 0.45. ITT: 20/100 ضد 20/100، RRR صفر."
+          - question: "Which one shows the underlying truth?"
+            options: ["Intention to treat", "Per protocol"]
+            answer: 0
+            why: "الـ ITT بيقول الأثر الحقيقي صفر. الـ per protocol خلّى العملية تبان كويسة لأنه شال أسوأ العيانين (Montori, CMAJ 2001)."
+      - kind: aside
+        tone: analogy
+        page: 75
+        quote: "If these non compliant people were excluded from the analysis"
+        text: |
+          مثال الـ diet: تجربة **cancer-prevention diet** ضد placebo diet. ناس في جروب الـ diet جالهم أعراض GI ووقفوا الـ diet، والأعراض دي كانت **أول علامات الـ cancer**.
+
+          لو عملتلهم exclude من الـ analysis لأنهم مش compliant، شلت الـ cancers من جروب الـ diet، فالـ diet هيبان **أقوى من الحقيقة**. زي مدرس يقول «فصلي كله نجح» بعد ما طرد الضعاف قبل الامتحان.
+      - kind: check
+        page: 78
+        quote: "Performing the analysis of RCTs according to original randomised assignment"
+        question: "Which is CORRECT about intention to treat?"
+        options:
+          - "Analysis depends on whether patients complied"
+          - "It is the optimal estimate of the true harm"
+          - "Analysis follows the original randomised assignment"
+          - "It is not optimal for measuring benefit"
+        answer: 2
+        why:
+          - "الـ ITT بيتجاهل الـ compliance."
+          - "هو أحسن تقدير للـ benefit، مش للـ harm."
+          - "صح: حلّل زي ما قرعت."
+          - "بالعكس، هو الـ optimal للـ benefit."
+      - kind: aside
+        tone: trap
+        page: 77
+        quote: "Excessive exclusion criteria may result in which of the following"
+        text: |
+          شريحة 77: «excessive exclusion criteria بتعمل إيه؟» والاختيارات فيها recruitment problems وزيادة costs و all of the above. **إجابة الشريحة: a، decreased external validity.**
+
+          منطقيًا «all» قابلة للنقاش، بس الامتحان بياخد إجابة الشريحة. افتكر: exclusion كتير = عيّنة مش شبه عيانينك = **external validity** أقل.
+      - kind: try
+        items: [res.L07.065, res.L07.071, res.L07.069]
+    recap:
+      - "P < 0.05 أو CI مش فيه قيمة الـ no effect (RR 1، RRR 0) = significant."
+      - "CI ضيّق = precise. عيّنة أكبر = CI أضيق."
+      - "ITT: حلّل الكل في الجروب اللي اتقرع فيه. أحسن تقدير للـ benefit، مش للـ harm."
+      - "Per protocol بيشيل المخالفين فبيبالغ في الأثر (Montori: RRR 0.45 ضد 0)."
+    practice: [res.L07.063, res.L07.064, res.L07.065, res.L07.066, res.L07.067, res.L07.068, res.L07.069, res.L07.070, res.L07.071, res.L07.072, res.L07.073, res.L07.074, res.L07.075, res.L07.076, res.L07.077]
+  # ------------------------------------------------------------------
+  - id: res.L07.lesson6
+    title: "أخلاقيات التجربة: Helsinki و equipoise والموافقة"
+    hook: "إمتى يبقى من حقك تدّي نص العيانين placebo؟ بس لما تكون فعلًا مش عارف مين الأحسن."
+    minutes: 7
+    pages: [79, 105]
+    topics: [ethics]
+    goals:
+      - "تعرف الـ Declaration of Helsinki والـ ethical issues الخمسة"
+      - "تعرّف الـ equipoise"
+      - "تعدّ عناصر الـ consent وتوصيات الـ registration"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 79
+        quote: "Developed by the World Medical Association"
+        title: "Declaration of Helsinki"
+        text: |
+          ==Declaration of Helsinki==: مجموعة **ethical principles** عملتها الـ **World Medical Association**، بتوجّه الباحثين في أي research على human subjects.
+
+          والـ ethical issues اللي المحاضرة بتعدّها:
+          - **Competence** الباحث.
+          - **Stage of research**.
+          - **Special populations**: ستات، أطفال، مساجين، HIV، و suicidal individuals.
+          - **Institutional approval**.
+          - **Conflict of interest**.
+      - kind: explain
+        page: 81
+        quote: "Financial or other personal considerations may compromise an investigator's judgment"
+        title: "Conflict of interest"
+        text: |
+          ==Conflict of interest==: اعتبارات **financial** أو personal ممكن تأثر على حكم الباحث، يعني الـ judgment بتاعه، في إدارة البحث أو كتابة النتايج.
+
+          نتيجته: بيهدد **integrity** البحث، بيهزّ **ثقة الناس في العلم**، وممكن يضر **حقوق وسلامة** المشاركين.
+      - kind: explain
+        page: 82
+        quote: "genuine uncertainty about the appropriate course of action"
+        title: "Equipoise: الحيرة الأمينة"
+        text: |
+          ==Equipoise==: حالة **genuine uncertainty**: هل ندّي العلاج ولا نمنعه؟
+
+          - عندك **belief كفاية** يبرر إنك تعرّض الناس للعلاج.
+          - وعندك **doubt كفاية** يبرر إنك تمنعه عن الـ control.
+
+          والتجربة **أخلاقية بس** لما الـ **expert community** كلها في equipoise.
+      - kind: figure
+        page: 82
+        quote: "Sufficient belief to Sufficient doubt to"
+        title: "الميزان"
+        alt: "A balance scale held level. The left pan reads sufficient belief to justify exposing subjects to treatment. The right pan reads sufficient doubt to justify withholding treatment. The level beam is labelled equipoise."
+        caption: "الميزان **متوازن** = equipoise. لو مال لأي ناحية، يبقى عارف الإجابة، والتجربة مابقتش أخلاقية."
+        svg: |
+          <svg viewBox="0 0 330 220" xmlns="http://www.w3.org/2000/svg">
+            <path d="M165 40V180M120 190H210" class="fg-arrow"/>
+            <path d="M40 60H290" class="fg-arrow-acc"/>
+            <rect x="155" y="30" width="20" height="20" rx="10" class="fg-acc"/>
+            <path d="M60 60L30 110M60 60L90 110M270 60L240 110M270 60L300 110" class="fg-thin"/>
+            <rect x="10" y="110" width="100" height="56" rx="8" class="fg-good"/>
+            <text x="60" y="132" text-anchor="middle" class="t-sm t-b">Belief</text>
+            <text x="60" y="150" text-anchor="middle" class="t-sm">to give it</text>
+            <rect x="220" y="110" width="100" height="56" rx="8" class="fg-bad"/>
+            <text x="270" y="132" text-anchor="middle" class="t-sm t-b">Doubt</text>
+            <text x="270" y="150" text-anchor="middle" class="t-sm">to withhold it</text>
+            <text x="165" y="212" text-anchor="middle" class="t-sm t-acc t-b">Equipoise = level beam</text>
+          </svg>
+      - kind: check
+        page: 102
+        quote: "Neither drug is known to be more effective than the other"
+        question: "Which best describes equipoise as the rationale for a trial of two drugs?"
+        options:
+          - "The drugs are known to be equally effective"
+          - "One drug is known to be more toxic"
+          - "Neither drug is known to be more effective than the other"
+          - "One is more effective but the other is easier to take"
+        answer: 2
+        why:
+          - "لو عارفين إنهم زي بعض، مفيش سؤال نجرّبه."
+          - "لو عارفين إنه أسمّ، مش أخلاقي ندّيه."
+          - "صح: محدش عارف مين الأحسن، ودي الـ genuine uncertainty."
+          - "لو واحد معروف إنه أحسن، مش أخلاقي نمنعه."
+      - kind: explain
+        page: 83
+        quote: "Participants may withdraw from the study at any time without losing their medical care"
+        title: "الـ consent process"
+        text: |
+          - المشاركة **voluntary** لكل الـ eligible subjects.
+          - الباحث يشرح **بلغة بسيطة**: طبيعة الدراسة وأهدافها، العلاج، الـ procedures والتحاليل، **طريقة توزيع العلاج**، والـ data اللي هتتجمع.
+          - الـ **benefits والـ risks** المتوقعة.
+          - **Confidentiality**.
+          - ==withdraw at any time without losing their medical care==.
+          - موافقة **written أو oral** حسب protocol موافق عليه من الـ **ethics committee**.
+      - kind: aside
+        tone: tip
+        page: 83
+        quote: "All eligible subjects must voluntarily agree to participate in a trial"
+        text: |
+          في العيادة عندنا الجملة دي مهمة جدًا: الموافقة لازم تبقى voluntarily، والعيان لازم يعرف إنه لو انسحب، **مش هيتحرم من علاجه** ولا الدكتور هيزعل منه.
+
+          ولو العيان مش بيقرا، الشرح الشفوي والـ oral consent ممكن، **بس** حسب protocol اللجنة موافقة عليه.
+      - kind: explain
+        page: 84
+        quote: "all RCTs trials are registered at their inception"
+        title: "Registration: سجّل قبل ما تبدأ"
+        text: |
+          التوصيات:
+          - كل الـ RCTs تتسجّل ==at their inception==، وقت الـ ethical أو funding approval.
+          - المعلومات تكون **متاحة لكل المهتمين**.
+          - الـ register يكون مطابق لـ **minimum standard**.
+          - الـ **prospective registration** جزء من الـ ethical guidelines.
+          - الحكومات توفّر الإمكانيات علشان كل الـ RCTs تتسجّل prospectively.
+
+          مثال: **ISRCTN**، registry معترف بيه من **WHO**، بيدّي الرقم اللي محتاجه علشان تنشر، ومفتوح للبحث مجانًا. وده بيقلّل الـ **selective reporting**.
+      - kind: match
+        page: 80
+        quote: "Institutional approval Conflict of interest"
+        prompt: "وصّل كل موقف بالـ ethical issue بتاعه:"
+        pairs:
+          - ["A drug company pays the investigator per patient enrolled", "Conflict of interest"]
+          - ["A trial plans to enrol children and prisoners", "Special populations"]
+          - ["The protocol has not been seen by the ethics committee", "Institutional approval"]
+          - ["A first-year resident runs a complex trial alone", "Competence"]
+        why: "الفلوس اللي بتأثر على الحكم = **conflict of interest**. الفئات الضعيفة = **special populations**. اللجنة = **institutional approval**. الخبرة = **competence**."
+      - kind: try
+        items: [res.L07.081, res.L07.082, res.L07.079]
+    recap:
+      - "Helsinki: مبادئ الـ World Medical Association للبحث على البشر."
+      - "Ethical issues: competence، stage of research، special populations، institutional approval، conflict of interest."
+      - "Equipoise: genuine uncertainty. أخلاقي بس لما الخبراء مش عارفين مين الأحسن."
+      - "Consent: voluntary، شرح بسيط، benefits و risks، confidentiality، انسحاب من غير ما يخسر علاجه، protocol موافق عليه."
+      - "Register at inception، و ISRCTN معترف بيه من WHO."
+    practice: [res.L07.078, res.L07.079, res.L07.080, res.L07.081, res.L07.082, res.L07.083, res.L07.084, res.L07.085]
+  # ------------------------------------------------------------------
+  - id: res.L07.lesson7
+    title: "تقييم الـ RCT والـ quasi-experimental"
+    hook: "الـ RCT أقوى دليل... بس غالي وصعب ومش دايمًا ينفع يتعمم. وإزاي تحكم على جودته؟"
+    minutes: 8
+    pages: [86, 100]
+    topics: [appraisal, quasi]
+    goals:
+      - "تعدّ مزايا وعيوب الـ RCT"
+      - "تعرف الـ CONSORT 2010 وترتيب الـ flow diagram"
+      - "تفرّق بين الـ checklist والـ quality score وتعرف الـ quasi-experimental"
+    status: unverified
+    steps:
+      - kind: table
+        page: 86
+        quote: "Best evidence for causality"
+        title: "الـ RCT: الحلو والوحش"
+        columns: ["Advantages", "Disadvantages"]
+        rows:
+          - ["Best evidence for causality", "Expensive (time and money)"]
+          - ["Allocation without prejudice", "Organisationally difficult"]
+          - ["Balances factors that affect outcome", "Not always generalisable; sometimes ethical problems"]
+        hide: [[0, 0], [1, 1], [2, 1]]
+      - kind: aside
+        tone: joke
+        page: 93
+        quote: "National Institute of Neurological Disorders and Stroke"
+        text: |
+          «Expensive» يعني قد إيه؟ متوسط تكلفة الـ phase III RCT اللي بيموّلها الـ **National Institute of Neurological Disorders and Stroke**: **12 مليون دولار**. 💸
+
+          يعني لما حد يقولك «ما تعمل RCT في الرسالة»، قوله: «حاضر، بس نجيب الـ 12 مليون منين؟» 😄
+      - kind: explain
+        page: 88
+        quote: "The CONSORT 2010 checklist contains 25 items"
+        title: "CONSORT: إزاي تكتب الـ RCT"
+        text: |
+          ==CONSORT== = **Consolidated Standards of Reporting Trials**.
+
+          - أول نسخة **1996**. الهدف: تحسين **conduct and reporting** للـ RCTs.
+          - عملها فريق دولي: trialists و statisticians و epidemiologists و biomedical editors.
+          - الـ **CONSORT 2010**: ==25 items== في checklist، ومعاه **flow diagram**.
+          - بيركّز على الـ **individually randomised, two-group, parallel trials**، أشهر نوع RCT.
+          - مدعوم من مجلات زي **The Lancet** و **JAMA** و **Annals of Internal Medicine**.
+      - kind: order
+        page: 92
+        quote: "CONSORT 2010 Flow Diagram"
+        prompt: "رتّب مربعات الـ CONSORT flow diagram من فوق لتحت:"
+        steps:
+          - "Assessed for eligibility"
+          - "Randomized"
+          - "Allocated to intervention"
+          - "Lost to follow-up or discontinued"
+          - "Analysed"
+        why: "الترتيب: **enrolment** (assessed، والـ excluded بأسبابهم)، ثم **randomized**، ثم **allocation** (خد أو ماخدش)، ثم **follow-up** (ضاع أو وقف)، ثم **analysis**. ونفس الترتيب في كل جروب."
+      - kind: explain
+        page: 94
+        quote: "Quality scores are complicated and tend to vary depending on the instrument used"
+        title: "إزاي تحكم على جودة الـ RCT؟"
+        text: |
+          طريقتين:
+          - **Checklist approach**: زي الـ Users' Guides: ==Are the results valid? What are the results? How can I apply them?==
+          - **Quality score approach**: زي **Jadad**: randomised؟ double blind؟ اتوصف الـ withdrawals والـ dropouts؟ نقطة لكل «yes». الشريحة بتقول range **0-5**، و **أقل من 3 = poor quality**.
+
+          بس الـ quality scores **complicated** وبتختلف حسب الأداة، **فمش مُشجَّعة**.
+      - kind: reveal
+        page: 96
+        quote: "Did experimental and control groups begin the study with a similar prognosis"
+        prompt: "في الـ checklist: «هل الجروبين **بدأوا** بنفس الـ prognosis؟» إيه الـ 4 أسئلة اللي بتجاوب ده؟"
+        answer: |
+          1. Were patients **randomized**?
+          2. Was randomization **concealed**?
+          3. Were patients **analyzed in the groups to which they were randomized**؟ (ITT)
+          4. Were the groups similar in **known prognostic factors**?
+
+          وبعدها: «هل **فضلوا** بنفس الـ prognosis؟» = blinding للعيان والدكتور والـ assessor، و follow-up كامل.
+      - kind: explain
+        page: 97
+        quote: "one characteristic of a true experiment is missing"
+        title: "Quasi-experimental: ناقصها حاجة"
+        text: |
+          في الـ ==quasi-experimental study== حاجة واحدة من الـ true experiment ناقصة:
+          - **Randomization**، أو
+          - **Separate control group**.
+
+          تصميمين:
+          - **One-group pre-test/post-test**: تقيس، تدّي العلاج، تقيس تاني. **مفيش control**.
+          - **Classical quasi-experimental**: جروب intervention وجروب comparison **من غير قرعة**، وقياس قبل وبعد في الاتنين.
+      - kind: figure
+        page: 99
+        quote: "Classical Quasi-Experimental Design"
+        title: "التصميمين جنب بعض"
+        alt: "Top row, one-group pre-test post-test: measurement, treatment, measurement, with no control group. Bottom, classical quasi-experimental design: non-random assignment into an intervention group and a comparison group; both are measured before (A1, B1) and after (A2, B2), and only the intervention group gets the treatment."
+        caption: "فوق: **مفيش control**. تحت: فيه control **بس مش بالقرعة**. في الاتنين الـ **internal validity** في خطر."
+        svg: |
+          <svg viewBox="0 0 330 240" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="R07q" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <text x="165" y="16" text-anchor="middle" class="t-sm t-b">One-group pre/post</text>
+            <rect x="10" y="26" width="90" height="32" rx="6" class="fg-thin"/>
+            <text x="55" y="47" text-anchor="middle" class="t-sm">Measure</text>
+            <path d="M100 42H118" class="fg-arrow" marker-end="url(#R07q)"/>
+            <rect x="120" y="26" width="90" height="32" rx="6" class="fg-acc"/>
+            <text x="165" y="47" text-anchor="middle" class="t-sm t-b">Treatment</text>
+            <path d="M210 42H228" class="fg-arrow" marker-end="url(#R07q)"/>
+            <rect x="230" y="26" width="90" height="32" rx="6" class="fg-thin"/>
+            <text x="275" y="47" text-anchor="middle" class="t-sm">Measure</text>
+            <text x="165" y="80" text-anchor="middle" class="t-sm t-bad">no control group</text>
+            <path d="M10 96H320" class="fg-thin"/>
+            <text x="165" y="118" text-anchor="middle" class="t-sm t-b">Classical quasi-experimental</text>
+            <text x="165" y="136" text-anchor="middle" class="t-sm t-bad">non-random assignment</text>
+            <rect x="10" y="148" width="60" height="32" rx="6" class="fg-thin"/>
+            <text x="40" y="169" text-anchor="middle" class="t-sm">A1</text>
+            <rect x="110" y="148" width="110" height="32" rx="6" class="fg-acc"/>
+            <text x="165" y="169" text-anchor="middle" class="t-sm t-b">Intervention</text>
+            <rect x="260" y="148" width="60" height="32" rx="6" class="fg-thin"/>
+            <text x="290" y="169" text-anchor="middle" class="t-sm">A2</text>
+            <rect x="10" y="196" width="60" height="32" rx="6" class="fg-thin"/>
+            <text x="40" y="217" text-anchor="middle" class="t-sm">B1</text>
+            <rect x="110" y="196" width="110" height="32" rx="6" class="fg-box"/>
+            <text x="165" y="217" text-anchor="middle" class="t-sm">No intervention</text>
+            <rect x="260" y="196" width="60" height="32" rx="6" class="fg-thin"/>
+            <text x="290" y="217" text-anchor="middle" class="t-sm">B2</text>
+            <path d="M70 164H108M220 164H258M70 212H108M220 212H258" class="fg-arrow" marker-end="url(#R07q)"/>
+          </svg>
+      - kind: check
+        page: 100
+        quote: "Internal validity refers to the degree to which a researcher can be sure that the treatment was responsible for the change"
+        question: "Why are quasi-experiments a concern for internal validity?"
+        options:
+          - "The groups may not be comparable at baseline"
+          - "They always have too few subjects"
+          - "They cannot measure outcomes before the intervention"
+          - "They never have a comparison group"
+        answer: 0
+        why:
+          - "صح: من غير قرعة، الجروبين ممكن يختلفوا من الأول، فمش متأكد إن العلاج هو اللي عمل الفرق."
+          - "العدد مش هو المشكلة الأساسية."
+          - "بالعكس، فيها pre-test."
+          - "الـ classical design فيه comparison group."
+      - kind: try
+        items: [res.L07.089, res.L07.090, res.L07.097]
+    recap:
+      - "مزايا الـ RCT: أقوى دليل للسببية، توزيع من غير تحيّز، توازن العوامل. العيوب: غالي، صعب تنظيميًا، مش دايمًا generalisable، ومشاكل أخلاقية أحيانًا."
+      - "CONSORT: 1996، و CONSORT 2010 فيه 25 item و flow diagram للـ two-group parallel trials."
+      - "Quality: checklist أحسن من الـ scores. Jadad: 3 أسئلة، range 0-5، أقل من 3 poor."
+      - "Quasi-experimental: ناقصه randomization أو control منفصل، فالـ internal validity في خطر."
+    practice: [res.L07.086, res.L07.087, res.L07.088, res.L07.089, res.L07.090, res.L07.091, res.L07.092, res.L07.093, res.L07.094, res.L07.095, res.L07.096, res.L07.097, res.L07.098]
+  # ------------------------------------------------------------------
+  - id: res.L07.lesson8
+    title: "تمارين المحاضرة: جولة سريعة"
+    hook: "١٧ سؤال من آخر المحاضرة. تعال نحل أشهرهم ونشوف الفخاخ."
+    minutes: 8
+    pages: [106, 123]
+    topics: [practice]
+    goals:
+      - "تحل أسئلة المحاضرة عن الـ phases والـ blinding والـ randomization"
+      - "ترتب مستويات الـ evidence وخطوات التجربة"
+      - "تتعرف على الفخاخ: observational ولا experimental، و open label"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 107
+        quote: "The risk of unbalanced randomization decreases"
+        title: "لو كبّرت العيّنة..."
+        text: |
+          سؤال شريحة 107 ليه **3 إجابات صح**:
+
+          - الـ ==confidence interval decreases== (يضيق).
+          - الـ **power increases**.
+          - الـ **risk of unbalanced randomization decreases**.
+
+          والغلط: إن الـ CI يوسع، أو إن الـ power يقل.
+      - kind: check
+        page: 110
+        quote: "Ensure study groups are comparable on baseline characteristics"
+        question: "The major purpose of random assignment in an RCT is to:"
+        options:
+          - "Facilitate double blinding"
+          - "Facilitate measurement of outcomes"
+          - "Ensure groups are comparable on baseline characteristics"
+          - "Reduce ascertainment bias"
+        answer: 2
+        why:
+          - "بتساعد في الـ blinding، بس مش ده الهدف الأساسي."
+          - "القياس بيعتمد على الـ protocols."
+          - "صح: القرعة بتخلي الجروبين شبه بعض في البداية، حتى في الحاجات اللي مش بنقيسها."
+          - "الـ ascertainment bias بيتمنع بالـ blinding."
+      - kind: sort
+        page: 117
+        quote: "In single blinding"
+        prompt: "مين مش عارف الجروب في كل نوع blinding؟"
+        bins: ["Single", "Double", "Triple"]
+        cards:
+          - { text: "Only the subject", bin: 0 }
+          - { text: "The subject and the observer", bin: 1 }
+          - { text: "Subject, observer and analyzer", bin: 2 }
+        why: "**Single** = العيان بس (إجابة شريحة 117: subject). **Double** = العيان والـ observer. **Triple** = العيان والـ observer والـ analyzer."
+      - kind: aside
+        tone: trap
+        page: 114
+        quote: "the clinician assessing the patients condition does not know which treatment the patient has received"
+        text: |
+          شريحة 114: «في الـ double blind trial» صح ولا غلط:
+
+          - العيانين مش عارفين بياخدوا إيه: **صح**.
+          - كل عيان بياخد placebo: **غلط**، الـ control بس.
+          - العيانين مش عارفين إنهم في تجربة: **غلط**، دول مضيين consent.
+          - كل عيان بياخد العلاجين: **غلط**، ده crossover.
+          - الـ clinician اللي بيقيّم مش عارف العلاج: **صح**.
+      - kind: check
+        page: 112
+        quote: "Researchers compared telephone company and police records"
+        question: "699 drivers with accidents; phone use just before the crash compared with the same time on a previous day. This study is:"
+        options:
+          - "A randomized comparative experiment"
+          - "An experiment without randomization"
+          - "An observational study"
+          - "A simple random sample"
+        answer: 2
+        why:
+          - "محدش اتقال له «اتكلم في التليفون وانت سايق»."
+          - "التجربة لازم الباحث يدّي الـ exposure بإيده."
+          - "صح: الباحثين اتفرجوا على سجلات اللي الناس عملوه، يعني observational."
+          - "الـ simple random sample طريقة sampling، مش design."
+      - kind: order
+        page: 116
+        quote: "Arrange the followings ascending according to the level of evidence"
+        prompt: "رتّب من الأضعف للأقوى في الـ evidence:"
+        steps:
+          - "Expert opinion"
+          - "Case series"
+          - "Case-control study"
+          - "Cohort study"
+          - "Randomized controlled trial"
+        why: "إجابة الشريحة E، D، C، A، B: expert opinion، ثم case series، ثم case-control، ثم cohort، وفوق الكل الـ RCT."
+      - kind: order
+        page: 118
+        quote: "While conducting experimental study, arrange the following steps in sequential manner"
+        prompt: "رتّب الخطوات دي في التجربة:"
+        steps:
+          - "Enumerate the inclusion and exclusion criteria"
+          - "Randomization"
+          - "Blinding"
+          - "Statistical analysis"
+        why: "خطوات الـ experimental study بالترتيب: الـ criteria الأول (step 3)، بعدين القرعة (step 8)، بعدين الـ blinding (step 10)، وآخر حاجة التحليل (step 12)."
+      - kind: check
+        page: 121
+        quote: "best suited to comparing cognitive behavioural therapy with a selective reuptake inhibitor"
+        question: "Best method to compare CBT with an SSRI in anxiety disorder?"
+        options:
+          - "Double blind and placebo controlled"
+          - "Randomization and open label"
+          - "Randomization and placebo controlled, unblinded"
+          - "Randomization and triple blind"
+        answer: 1
+        why:
+          - "العيان عارف هو بيعمل جلسات ولا بياخد حباية، فمستحيل double blind."
+          - "صح: قرعة، بس الـ label مفتوح لأن العلاجين مختلفين في الشكل."
+          - "الاتنين علاجات فعّالة؛ مفيش placebo."
+          - "مستحيل والعيان شايف علاجه."
+      - kind: aside
+        tone: exam
+        page: 120
+        quote: "It uses a single dose of drug determined from the Phase I experience"
+        text: |
+          أسئلة الـ **phases** في التمارين:
+
+          - **Phase 1**: دراسات صغيرة **20-80** عيان، بتبص على الـ **toxic & pharmacological effects** (شريحة 111).
+          - **Phase 2**: بيستخدم **single dose** محددة من تجربة الـ phase 1 (إجابة شريحة 120). وأول تجربة على البشر هي phase 1 مش 2.
+          - **Phase 4**: **post marketing surveillance** (شريحة 115).
+
+          وكمان: الـ experimental study **مينفعش** لـ **study of risk factors**، لأنك مش هتعرّض الناس لخطر عن قصد (شريحة 113).
+      - kind: try
+        items: [res.L07.109, res.L07.111, res.L07.107]
+    recap:
+      - "عيّنة أكبر: CI أضيق، power أعلى، والقرعة أكثر توازنًا."
+      - "هدف القرعة الأساسي: جروبين متشابهين في الـ baseline. وهي أداة الـ confounders."
+      - "Single = العيان. Double = + observer. Triple = + analyzer. CBT ضد SSRI = randomized open label."
+      - "Phase 1 = 20-80، toxicity. Phase 2 = single dose من phase 1. Phase 4 = post marketing."
+    practice: [res.L07.099, res.L07.100, res.L07.101, res.L07.102, res.L07.103, res.L07.104, res.L07.105, res.L07.106, res.L07.107, res.L07.108, res.L07.109, res.L07.110, res.L07.111, res.L07.112, res.L07.113, res.L07.114]

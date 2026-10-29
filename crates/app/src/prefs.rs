@@ -14,6 +14,7 @@ const TEXT_SIZE: &str = "text_size";
 const NAV_STYLE: &str = "nav_style";
 const PEN_HOVER: &str = "pen_hover";
 const MOUSE_HOVER: &str = "mouse_hover";
+const APPEARANCE: &str = "appearance";
 
 /// The app's own data folder: the local database and device files live here.
 pub fn data_dir() -> Option<PathBuf> {
@@ -102,6 +103,33 @@ impl NavStyle {
     }
 }
 
+/// The surface style (Settings › Look › "نمط الواجهة"), independent of the
+/// colour theme: Calm is solid and quiet; Glossy adds tonal gradients, a
+/// soft top highlight, pill buttons and blur on small floating surfaces.
+/// `data-appearance` on `.app` (assets/appearance.css).
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub enum Appearance {
+    #[default]
+    Calm,
+    Glossy,
+}
+
+impl Appearance {
+    pub const ALL: [Self; 2] = [Self::Calm, Self::Glossy];
+
+    /// Stored value and `data-appearance`.
+    pub fn as_str(self) -> &'static str {
+        match self {
+            Self::Calm => "calm",
+            Self::Glossy => "glossy",
+        }
+    }
+
+    fn parse(s: &str) -> Self {
+        Self::ALL.into_iter().find(|t| t.as_str() == s).unwrap_or_default()
+    }
+}
+
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct DevicePrefs {
     pub theme: Theme,
@@ -111,6 +139,9 @@ pub struct DevicePrefs {
     pub pen_hover: bool,
     /// Peeks when the mouse rests on a word (Settings › Mac).
     pub mouse_hover: bool,
+    /// Calm or Glossy. A file from before the redesign has no line for it
+    /// and loads as Calm.
+    pub appearance: Appearance,
 }
 
 impl Default for DevicePrefs {
@@ -121,6 +152,7 @@ impl Default for DevicePrefs {
             nav_style: NavStyle::default(),
             pen_hover: true,
             mouse_hover: true,
+            appearance: Appearance::default(),
         }
     }
 }
@@ -153,18 +185,20 @@ impl DevicePrefs {
             nav_style: map.get(NAV_STYLE).map_or_else(NavStyle::default, |v| NavStyle::parse(v)),
             pen_hover: map.get(PEN_HOVER) != Some(&"off"),
             mouse_hover: map.get(MOUSE_HOVER) != Some(&"off"),
+            appearance: map.get(APPEARANCE).map_or_else(Appearance::default, |v| Appearance::parse(v)),
         }
     }
 
     fn render(&self) -> String {
         let on_off = |on: bool| if on { "on" } else { "off" };
         format!(
-            "{THEME}={}\n{TEXT_SIZE}={}\n{NAV_STYLE}={}\n{PEN_HOVER}={}\n{MOUSE_HOVER}={}\n",
+            "{THEME}={}\n{TEXT_SIZE}={}\n{NAV_STYLE}={}\n{PEN_HOVER}={}\n{MOUSE_HOVER}={}\n{APPEARANCE}={}\n",
             self.theme.as_str(),
             self.text_size.as_str(),
             self.nav_style.as_str(),
             on_off(self.pen_hover),
             on_off(self.mouse_hover),
+            self.appearance.as_str(),
         )
     }
 
@@ -192,6 +226,7 @@ mod tests {
             nav_style: NavStyle::Slim,
             pen_hover: false,
             mouse_hover: true,
+            appearance: Appearance::Glossy,
         };
         assert_eq!(DevicePrefs::parse(&p.render()), p);
         assert_eq!(DevicePrefs::parse("theme=neon\nnonsense\ntext_size=huge"), DevicePrefs::default());
@@ -201,7 +236,19 @@ mod tests {
     fn css_carries_theme_and_size() {
         let p = DevicePrefs { theme: Theme::Paper, text_size: TextSize::Large, ..DevicePrefs::default() };
         let css = p.css();
-        assert!(css.contains("--bg:#f6f7f4") && css.ends_with("html{font-size:112%;}"), "{css}");
+        assert!(css.contains("--bg:#f3f6f9") && css.ends_with("html{font-size:112%;}"), "{css}");
+    }
+
+    #[test]
+    fn a_file_from_before_the_redesign_loads_as_calm() {
+        // The exact file an older build wrote: no appearance line.
+        let old = "theme=night\ntext_size=small\nnav_style=labels\npen_hover=on\nmouse_hover=off\n";
+        let p = DevicePrefs::parse(old);
+        assert_eq!(p.appearance, Appearance::Calm);
+        assert_eq!((p.theme, p.text_size, p.mouse_hover), (Theme::Night, TextSize::Small, false));
+        assert_eq!(DevicePrefs::parse("appearance=sparkly").appearance, Appearance::Calm);
+        let glossy = DevicePrefs { appearance: Appearance::Glossy, ..p };
+        assert_eq!(DevicePrefs::parse(&glossy.render()), glossy);
     }
 
     #[test]

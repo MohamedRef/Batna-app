@@ -1,4 +1,4 @@
-//! Settings › Look: colours and text size, per device.
+//! Settings › Look: colours, the Calm/Glossy style and text size, per device.
 
 use batna_core::theme::Theme;
 use dioxus::prelude::*;
@@ -6,7 +6,7 @@ use dioxus::prelude::*;
 use super::DeviceOnly;
 use crate::Ui;
 use crate::i18n::settings as tx;
-use crate::prefs::TextSize;
+use crate::prefs::{Appearance, TextSize};
 
 fn theme_label(t: Theme) -> (&'static str, &'static str) {
     match t {
@@ -16,6 +16,13 @@ fn theme_label(t: Theme) -> (&'static str, &'static str) {
         Theme::Night => (tx::THEME_NIGHT, tx::THEME_NIGHT_SUB),
         Theme::Black => (tx::THEME_BLACK, tx::THEME_BLACK_SUB),
         Theme::NightShift => (tx::THEME_SHIFT, tx::THEME_SHIFT_SUB),
+    }
+}
+
+fn appearance_label(a: Appearance) -> (&'static str, &'static str) {
+    match a {
+        Appearance::Calm => (tx::APPEARANCE_CALM, tx::APPEARANCE_CALM_SUB),
+        Appearance::Glossy => (tx::APPEARANCE_GLOSSY, tx::APPEARANCE_GLOSSY_SUB),
     }
 }
 
@@ -62,6 +69,36 @@ pub fn LookSection() -> Element {
                         span { class: "choice-text",
                             span { class: "choice-title", {theme_label(t).0} }
                             span { class: "muted small", {theme_label(t).1} }
+                        }
+                    }
+                }
+            }
+        }
+        section { class: "card",
+            h2 { {tx::APPEARANCE} DeviceOnly {} }
+            div { class: "choice-list", role: "radiogroup", aria_label: tx::APPEARANCE,
+                for a in Appearance::ALL {
+                    button {
+                        key: "{a.as_str()}",
+                        class: "choice",
+                        role: "radio",
+                        aria_checked: if now.appearance == a { "true" } else { "false" },
+                        // Only the look changes: the screen under the sheet
+                        // keeps its answer, scroll and typing.
+                        onclick: move |_| {
+                            prefs.write().appearance = a;
+                            prefs.peek().save();
+                        },
+                        span { class: "appearance-swatch", "data-swatch": a.as_str(), aria_hidden: "true" }
+                        span { class: "choice-text",
+                            span { class: "choice-title",
+                                if a == Appearance::Glossy {
+                                    bdi { {appearance_label(a).0} }
+                                } else {
+                                    {appearance_label(a).0}
+                                }
+                            }
+                            span { class: "muted small", {appearance_label(a).1} }
                         }
                     }
                 }

@@ -967,7 +967,7 @@ pub mod settings {
     pub const THIS_DEVICE: &str = "للجهاز ده بس";
 
     pub const LOOK: &str = "الشكل";
-    pub const LOOK_SUB: &str = "الألوان وحجم الواجهة";
+    pub const LOOK_SUB: &str = "الألوان، نمط الواجهة وحجمها";
     pub const DATA: &str = "بياناتك";
     pub const DATA_SUB: &str = "فين بتتحفظ، والتصدير";
     pub const ABOUT: &str = "عن باطنة";
@@ -986,6 +986,13 @@ pub mod settings {
     pub const THEME_BLACK_SUB: &str = "أسود خالص، فبكسلات شاشة الأموليد بتطفي: أريح للعين بالليل وبتوفّر بطارية";
     pub const THEME_SHIFT: &str = "نبطشية";
     pub const THEME_SHIFT_SUB: &str = "غامق ودافي من غير ضوء أزرق، للمذاكرة متأخر قبل النوم";
+
+    pub const APPEARANCE: &str = "نمط الواجهة";
+    pub const APPEARANCE_CALM: &str = "هادئ";
+    pub const APPEARANCE_CALM_SUB: &str = "أسطح سادة وهادية، من غير لمعة";
+    pub const APPEARANCE_GLOSSY: &str = "Glossy · Material You";
+    pub const APPEARANCE_GLOSSY_SUB: &str =
+        "أسطح ملونة فيها لمعة خفيفة وأزرار مدوّرة. ألوانها من ألوان باطنة، مش من خلفية الموبايل";
 
     pub const TEXT_SIZE: &str = "حجم الواجهة";
     pub const TEXT_SMALLER: &str = "أصغر";

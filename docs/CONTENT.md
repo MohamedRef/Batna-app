@@ -2,7 +2,7 @@
 
 The full rules are in `/mnt/project-files/medstudy/SPLIT.md` §4–5. In short:
 
-- Courses: `content/program.yaml` lists the MSc's 20 courses (hours, group, semester, default status). A course owns every lecture whose id starts with its id: `hb.L01` is Hepatology, `res.L01` Basics of Research. `validate` fails on a lecture with no course.
+- Courses: `content/program.yaml` lists the MSc's 20 courses (hours, group, semester, default status). A course owns every lecture whose id starts with its id: `hb.L01` is Hepatology, `res.L01` Basics of Research. `validate` fails on a lecture with no course. A course with `source: slides` (Basics of Research) is taught from slide decks: its `pages` are `[1, slides]` and `src.page` is the slide of that lecture; the app shows "سلايد N" and opens that lecture's slide. Slide text lives in `/mnt/project-files/medstudy/courses/<course>/text/`, never in git.
 - There is one file per lecture: `content/<course>/LNN.yaml` (`content/hb/L01.yaml`), listed in `content/index.yaml` with its printed page range.
 - Every item has `id` (`hb.L01.001`, never reused), `kind`, `topic`, `src.page` (inside the lecture's range), and `status: unverified`.
 - The kinds are `card`, `cloze`, `mcq`, `enumerate`, `essay`, `case`, `table`, `order` and `calc`. `fixtures/content/sample.yaml` shows one of each.

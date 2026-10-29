@@ -1,0 +1,298 @@
+schema: batna.lesson/v1
+lecture: rheum.L05
+lessons:
+  # ------------------------------------------------------------------
+  - id: rheum.L05.lesson1
+    title: "الجهاز المناعي بيعرف أهله إزاي؟"
+    hook: "كل يوم جسمك بيصنع ملايين خلايا ممكن تهاجمه. السؤال مش ليه بيحصل autoimmunity، السؤال ليه مش بيحصل دايمًا."
+    minutes: 9
+    pages: [77, 80]
+    topics: [tolerance, principles, t-tolerance, b-tolerance]
+    goals:
+      - "تفرّق بين activation و tolerance و ignorance"
+      - "تشرح الـ central و peripheral tolerance للـ T و B cells"
+      - "تعرّف الـ anergy (سؤال كتاب)"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 78
+        title: "self ولا non-self؟"
+        quote: "Such reactions are called autoimmunity, and the disease they cause are called autoimmune diseases."
+        text: |
+          أهم ميزة في الجهاز المناعي إنه **يفرّق بين self و non-self**.
+
+          لو التفريق ده باظ، المناعة تهاجم خلايا الجسم نفسه. ده اسمه ==autoimmunity==، والأمراض اللي بتطلع منه هي **autoimmune diseases**.
+      - kind: table
+        page: 78
+        quote: "antigens that induce tolerance are said to be tolerogenic"
+        title: "الـ lymphocyte قابل الـ antigen بتاعه: 3 احتمالات"
+        columns: [Outcome, What happens, Antigen]
+        rows:
+          - ["Activation", "Immune response", "Immunogenic"]
+          - ["Tolerance", "Inactivated or killed", "Tolerogenic"]
+          - ["Ignorance", "No reaction at all", "-"]
+        hide: [[0, 2], [1, 1], [1, 2], [2, 1]]
+      - kind: aside
+        tone: analogy
+        page: 78
+        quote: "Normally microbes are immunogenic and self antigens are either tolerogenic or are ignored"
+        text: |
+          فكّر في أمن عمارة: الغريب (**microbe**) بيتمسك، يعني **immunogenic**.
+
+          ساكن العمارة (**self antigen**) يا إما الأمن عارفه وبيسلّم عليه (**tolerogenic**)، يا إما ساكن في الدور الأخير وعمره ما نزل فالأمن **ignoring** وجوده خالص.
+      - kind: explain
+        page: 78
+        title: "ليه الـ tolerance مهمة؟"
+        quote: "Strategies for inducing tolerance are being tested to treat allergic and autoimmune diseases and to prevent the rejection of organ transplantation."
+        text: |
+          1. الـ **self antigens** طبيعي بتعمل tolerance.
+          2. لو عرفنا **نعمل tolerance** لـ antigen معيّن، نقدر نمنع أي immune reaction مش عايزينها.
+
+          علشان كده بيجرّبوا ==tolerance induction== في علاج الـ **allergy** والـ **autoimmune diseases** ومنع **transplant rejection**.
+      - kind: figure
+        page: 79
+        quote: "when developing lymphocytes encounter these antigens in the generative lymphoid organs, called central tolerance"
+        title: "خطين دفاع: central و peripheral"
+        alt: "Two-tier diagram. Top tier, central tolerance in the generative organs: thymus for T cells, where high-avidity self recognition leads to apoptosis by negative selection; bone marrow for B cells, where cells are killed or change receptor specificity. Arrow down to the periphery for mature cells. Bottom tier, peripheral tolerance: anergy, deletion by activation-induced cell death, and suppression by regulatory T cells for T cells; anergy for B cells."
+        caption: "الـ ==central tolerance== في المصنع، يعني الـ thymus والـ bone marrow. والـ **peripheral** في الشارع للخلايا الناضجة اللي هربت."
+        svg: |
+          <svg viewBox="0 0 330 360" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L05a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10z" class="fg-head-acc"/></marker></defs>
+            <text x="165" y="20" text-anchor="middle" class="t-b t-acc">Central (immature cells)</text>
+            <rect x="10" y="32" width="150" height="120" rx="10" class="fg-acc"/>
+            <text x="85" y="54" text-anchor="middle" class="t-b">Thymus · T</text>
+            <text x="20" y="80" class="t-sm">High-avidity self</text>
+            <text x="20" y="96" class="t-sm">recognition</text>
+            <text x="20" y="120" class="t-sm t-bad">→ apoptosis</text>
+            <text x="20" y="138" class="t-sm t-mut">negative selection</text>
+            <rect x="170" y="32" width="150" height="120" rx="10" class="fg-acc"/>
+            <text x="245" y="54" text-anchor="middle" class="t-b">Marrow · B</text>
+            <text x="180" y="80" class="t-sm">Strong self binding</text>
+            <text x="180" y="104" class="t-sm t-bad">→ killed, or</text>
+            <text x="180" y="122" class="t-sm t-good">→ change receptor</text>
+            <text x="180" y="138" class="t-sm t-good">specificity</text>
+            <path d="M165 158 V190" class="fg-arrow-acc" stroke-width="2" marker-end="url(#L05a)"/>
+            <text x="175" y="180" class="t-sm t-mut">escapees mature</text>
+            <text x="165" y="212" text-anchor="middle" class="t-b t-acc">Peripheral (mature cells)</text>
+            <rect x="10" y="222" width="150" height="130" rx="10" class="fg-good"/>
+            <text x="85" y="244" text-anchor="middle" class="t-b">T cells</text>
+            <text x="20" y="270" class="t-sm">1. Anergy</text>
+            <text x="20" y="292" class="t-sm">2. Deletion (AICD)</text>
+            <text x="20" y="314" class="t-sm">3. Suppression</text>
+            <text x="32" y="330" class="t-sm">by Tregs</text>
+            <rect x="170" y="222" width="150" height="130" rx="10" class="fg-good"/>
+            <text x="245" y="244" text-anchor="middle" class="t-b">B cells</text>
+            <text x="180" y="270" class="t-sm">Anergy after high</text>
+            <text x="180" y="288" class="t-sm">concentrations of</text>
+            <text x="180" y="306" class="t-sm">self antigen</text>
+          </svg>
+      - kind: explain
+        page: 79
+        title: "Central T tolerance"
+        quote: "process is also termed negative selection and it is the principal mechanism of central tolerance."
+        text: |
+          الـ **immature T cell** في الـ **thymus** لو شافت self antigen بـ **high avidity** ← بتموت بـ **apoptosis**.
+
+          ده اسمه ==negative selection==، وهو **the principal mechanism of central tolerance**.
+      - kind: explain
+        page: 79
+        title: "Anergy: من غير signal 2 مفيش شغل"
+        quote: "Anergy is the functional inactivation of T lymphocytes that occurs when these cells recognize antigens with out adequate levels of the co stimulators"
+        text: |
+          الـ ==anergy== = **functional inactivation** للـ T cell لما تشوف الـ antigen **من غير costimulators كفاية**.
+
+          الـ T cell محتاجة إشارتين: **signal 1** هو الـ antigen، و **signal 2** هو الـ costimulator. إشارة واحدة لوحدها = الخلية تتقفل.
+
+          وكمان ممكن تحصل لما الـ T cell تستخدم **inhibitory receptors** تشوف بيها الـ costimulators.
+      - kind: aside
+        tone: joke
+        page: 79
+        quote: "Anergy is the functional inactivation of T lymphocytes"
+        text: |
+          الـ T cell زي موظف حكومي: لو جاله الطلب، ده **signal 1**، من غير ختم النسر، ده **signal 2**، مش بس مش هيمضي، ده هيقفل الشباك خالص. ده الـ **anergy**.
+      - kind: explain
+        page: 80
+        title: "Deletion و Tregs"
+        quote: "this process is called activation-induced cell death."
+        text: |
+          - **Deletion:** الـ mature T cell لو اتنشّطت **بشكل متكرر** بالـ self antigen، أو شافته من غير second signal ← apoptosis. ده اسمه ==activation-induced cell death==.
+          - **Regulatory T cells:** بعض الـ self-reactive T cells بتتحوّل لـ **Tregs** بتمنع أو تكبت تنشيط الخلايا الـ self-reactive التانية. بتتكوّن في الـ **thymus** أو الـ **peripheral lymphoid organs**.
+      - kind: match
+        page: 80
+        quote: "Regulatory T cells may develop in the thymus or in peripheral lymphoid organ."
+        prompt: "وصّل كل mechanism بتعريفه:"
+        pairs:
+          - ["Negative selection", "Immature cell dies in the thymus"]
+          - ["Anergy", "Antigen seen without costimulators"]
+          - ["Activation-induced cell death", "Apoptosis after repeated activation"]
+          - ["Regulatory T cells", "Suppress other self-reactive cells"]
+        why: "الأولى central، والتلاتة التانيين peripheral. الـ anergy بتقفل الخلية وهي عايشة، والـ AICD بتموّتها، والـ Tregs بتكبتها من بره."
+      - kind: explain
+        page: 80
+        title: "B cell tolerance"
+        quote: "bone marrow, the B cells are either killed (negative selection) or they change receptor specificity."
+        text: |
+          - **Central:** الـ immature B cell في الـ **bone marrow** لو مسكت self antigen جامد ← يا **تتقتل**، ودي negative selection، يا ==change receptor specificity==.
+          - **Peripheral:** الـ mature B cell لو قابلت **تركيز عالي** من الـ self antigen في الـ peripheral lymphoid tissues ← تبقى **anergic** وما تردش عليه تاني.
+      - kind: check
+        page: 80
+        quote: "the B cells are either killed (negative selection) or they change receptor specificity."
+        question: "Which tolerance mechanism belongs to B cells and NOT T cells in this lecture?"
+        options:
+          - "Changing receptor specificity in the bone marrow"
+          - "Negative selection"
+          - "Anergy"
+          - "Activation-induced cell death"
+        answer: 0
+        why:
+          - "صح: الـ B cell بس اللي ممكن تغيّر الـ receptor بتاعها بدل ما تموت."
+          - "الـ negative selection موجودة في الاتنين: thymus و bone marrow."
+          - "الـ anergy برضه في الاتنين في الـ periphery."
+          - "الـ AICD اتشرحت للـ mature T cells."
+      - kind: try
+        items: [rheum.L05.003, rheum.L05.009, rheum.L05.014, rheum.L05.015, rheum.L05.023]
+    recap:
+      - "Activation = immunogenic، tolerance = tolerogenic، ignorance = ولا رد فعل."
+      - "Central: thymus ← negative selection؛ bone marrow ← تموت أو تغيّر الـ receptor."
+      - "Peripheral T: anergy (من غير costimulators)، deletion (AICD)، و Tregs."
+      - "Peripheral B: anergy بعد تركيز عالي من الـ self antigen."
+    practice: [rheum.L05.001, rheum.L05.002, rheum.L05.003, rheum.L05.004, rheum.L05.005, rheum.L05.006, rheum.L05.007, rheum.L05.008, rheum.L05.009, rheum.L05.010, rheum.L05.011, rheum.L05.012, rheum.L05.013, rheum.L05.014, rheum.L05.015, rheum.L05.016, rheum.L05.017, rheum.L05.018, rheum.L05.019, rheum.L05.020, rheum.L05.021, rheum.L05.022, rheum.L05.023, rheum.L05.024, rheum.L05.038]
+  # ------------------------------------------------------------------
+  - id: rheum.L05.lesson2
+    title: "جينات وعدوى: ليه الـ tolerance بتقع؟"
+    hook: "التوأم المتطابق، الـ B27 بـ relative risk 90، وعين اتعورت فالتانية ولّعت."
+    minutes: 7
+    pages: [79, 82]
+    topics: [principles, genetics, infections, tolerance]
+    goals:
+      - "تعرف العاملين الأساسيين: susceptibility genes و infections"
+      - "تحفظ جدول الـ HLA والـ relative risk"
+      - "تشرح إزاي العدوى بتعمل autoimmunity"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 79
+        title: "العاملين الأساسيين"
+        quote: "The inheritance of susceptibility genes which may contribute to failure of"
+        text: |
+          الـ **autoimmunity** = immune response ضد الـ **self antigens**، أو autologous. وأهم عاملين:
+
+          1. وراثة ==susceptibility genes== بتساعد إن الـ self tolerance تفشل.
+          2. **Environmental triggers** زي الـ **infections** بتنشّط الـ self-reactive lymphocytes.
+      - kind: explain
+        page: 80
+        title: "الجينات"
+        quote: "Increased incidence among monozygotic twins than among dizygotic twins."
+        text: |
+          - جينات كتير بتهيّئ للمرض، و ==MHC genes== أهمهم.
+          - لو توأم متطابق جاله autoimmune disease، أخوه أقرب يجيله من أي حد غريب.
+          - الـ incidence أعلى في الـ **monozygotic** عن الـ **dizygotic** twins.
+      - kind: reveal
+        page: 80
+        quote: "Increased incidence among monozygotic twins than among dizygotic twins."
+        prompt: "ليه المقارنة بين monozygotic و dizygotic twins بتثبت إن السبب وراثي؟"
+        answer: |
+          الاتنين اتربّوا في نفس البيت ونفس البيئة تقريبًا. الفرق الوحيد إن الـ **monozygotic** شايلين **نفس الجينات 100%** والـ dizygotic زي أي أخوات.
+
+          فلو المرض أكتر في الـ monozygotic، يبقى الفرق ده جاي من ==الجينات== مش من البيئة. ده منطق الـ twin studies، والملاحظة نفسها من الكتاب.
+      - kind: table
+        page: 81
+        quote: "increased incidence is called relative risk of HLA disease association."
+        title: "الـ HLA والـ relative risk"
+        columns: [Disease, HLA, RR]
+        rows:
+          - ["Ankylosing spondylitis", "B27", "90"]
+          - ["Rheumatoid arthritis", "DR2 (book)", "4"]
+          - ["IDDM", "DR3/DR4", "25"]
+          - ["Pemphigus vulgaris", "DR4", "14"]
+        hide: [[0, 1], [0, 2], [2, 1], [2, 2], [3, 2]]
+      - kind: update
+        page: 81
+        quote: "arthritis DR2 4"
+        text: "جدول الكتاب كاتب **DR2** للـ rheumatoid arthritis، بس المرجع الأصلي والكتب كلها بتقول ==HLA-DR4==، وده الـ shared epitope. والـ DR2 ده بتاع الـ multiple sclerosis. لو السؤال من جدول الكتاب اكتب اللي فيه، وخلّي بالك من الفرق."
+        ref: "Abbas, Lichtman and Pillai, Basic Immunology, 6th ed., 2020 (MHC–disease table)"
+      - kind: aside
+        tone: tip
+        page: 81
+        quote: "Animal models: breeding"
+        text: |
+          الـ **relative risk** = الـ incidence في اللي ورثوا الـ allele مقسومة على اللي ما ورثوهوش.
+
+          احفظ الترتيب من الأعلى: **B27 = 90**، **DR3/DR4 = 25**، **DR4 pemphigus = 14**، **RA = 4**. وفي الـ animal breeding studies والـ genome scanning، المثال هو **IDDM** في الحالتين.
+      - kind: check
+        page: 81
+        quote: "Ankylosing B27 90"
+        question: "Which disease has the highest HLA relative risk in the lecture's table?"
+        options: ["Ankylosing spondylitis", "IDDM", "Pemphigus vulgaris", "Rheumatoid arthritis"]
+        answer: 0
+        why:
+          - "صح: B27 بـ RR **90**."
+          - "الـ IDDM مع DR3/DR4 = 25."
+          - "الـ pemphigus مع DR4 = 14."
+          - "الـ RA = 4 بس."
+      - kind: explain
+        page: 81
+        title: "العدوى"
+        quote: "Infections may activate self reactive lymphocytes and lead to the development"
+        text: |
+          الـ ==infections== بتعمل autoimmunity بأكتر من طريقة:
+          - **تنشّط self-reactive lymphocytes**.
+          - **تعوّر الأنسجة** وتطلّع **sequestered antigens** عمر المناعة ما شافتها، زي **العين والـ testis**.
+          - تعمل **inflammation** و **aberrant expression of costimulators**.
+          - **Cross-reaction** بين الـ microbial antigens والـ self antigens.
+      - kind: figure
+        page: 82
+        quote: "Infections predispose to autoimmunity, by causing inflammation and inducing the aberrant expression of co stimulators"
+        title: "أربع طرق من العدوى للـ autoimmunity"
+        alt: "A central box labelled infection with four arrows to four boxes: activates self-reactive lymphocytes; injures tissue and releases sequestered antigens such as eye and testis; inflammation with aberrant costimulator expression; cross-reaction between microbial and self antigens. All four arrows converge on a bottom box: autoimmunity."
+        caption: "الطرق الأربعة بتوصل لنفس النتيجة. الـ ==costimulators== هنا هي نفس الـ signal 2 اللي غيابها كان بيعمل anergy."
+        svg: |
+          <svg viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L05b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10z" class="fg-head-bad"/></marker></defs>
+            <rect x="105" y="10" width="120" height="40" rx="10" class="fg-ink"/>
+            <text x="165" y="36" text-anchor="middle" class="t-b">Infection</text>
+            <rect x="10" y="80" width="150" height="62" rx="10" class="fg-acc"/>
+            <text x="20" y="104" class="t-sm">Activates self-</text>
+            <text x="20" y="122" class="t-sm">reactive lymphocytes</text>
+            <rect x="170" y="80" width="150" height="62" rx="10" class="fg-acc"/>
+            <text x="180" y="104" class="t-sm">Releases sequestered</text>
+            <text x="180" y="122" class="t-sm">antigens (eye, testis)</text>
+            <rect x="10" y="160" width="150" height="62" rx="10" class="fg-acc"/>
+            <text x="20" y="184" class="t-sm">Inflammation, aberrant</text>
+            <text x="20" y="202" class="t-sm">costimulators</text>
+            <rect x="170" y="160" width="150" height="62" rx="10" class="fg-acc"/>
+            <text x="180" y="184" class="t-sm">Cross-reaction:</text>
+            <text x="180" y="202" class="t-sm">microbe ≈ self</text>
+            <path d="M140 50 L90 78" class="fg-arrow"/>
+            <path d="M190 50 L240 78" class="fg-arrow"/>
+            <path d="M85 222 L150 268" class="fg-arrow-bad" marker-end="url(#L05b)"/>
+            <path d="M245 222 L180 268" class="fg-arrow-bad" marker-end="url(#L05b)"/>
+            <rect x="85" y="272" width="160" height="44" rx="10" class="fg-bad"/>
+            <text x="165" y="300" text-anchor="middle" class="t-b t-bad">Autoimmunity</text>
+          </svg>
+      - kind: case
+        page: 81
+        quote: "release of these antigens may initiate an autoimmune reaction against the tissue."
+        stem: "A man has a penetrating injury to his right eye. Weeks later, his left eye becomes inflamed."
+        steps:
+          - question: "Best explanation from the lecture?"
+            options: ["Release of a sequestered antigen", "HLA-B27", "Failure of central B tolerance", "Ignorance"]
+            answer: 0
+            why: "الـ eye antigens **sequestered**: المناعة عمرها ما شافتها، فما اتعملهاش tolerance. الإصابة طلّعتها، فالمناعة هاجمت العينين الاتنين."
+      - kind: explain
+        page: 82
+        title: "الـ take-home message"
+        quote: "Immunologic tolerance is specific unresponsiveness to an antigen induced by"
+        text: |
+          - **Immunologic tolerance** = ==specific unresponsiveness== لـ antigen، بتتعمل لما الـ lymphocytes تتعرّض له. وكلنا tolerant لـ self antigens بتوعنا.
+          - ممكن نعمل tolerance بإعطاء الـ antigen بطريقة معيّنة: علاج immunologic diseases ومنع الـ transplant rejection.
+          - الـ **autoimmune diseases** = **failure of self tolerance**، وعواملها: immunologic abnormalities و susceptibility genes و infections.
+          - أقوى ارتباط بين الـ **HLA genes** والـ **T cell–mediated** autoimmune diseases.
+      - kind: try
+        items: [rheum.L05.011, rheum.L05.028, rheum.L05.033, rheum.L05.034, rheum.L05.039]
+    recap:
+      - "Autoimmunity = failure of self tolerance: genes + infections + immunologic abnormalities."
+      - "MHC/HLA أهم الجينات. MZ twins أكتر من DZ."
+      - "B27 ← AS بـ RR 90؛ DR3/DR4 ← IDDM 25؛ DR4 ← pemphigus 14؛ RA ← 4 (الكتاب DR2، المراجع DR4)."
+      - "العدوى: تنشيط، sequestered antigens، costimulators، cross-reaction."
+    practice: [rheum.L05.010, rheum.L05.011, rheum.L05.025, rheum.L05.026, rheum.L05.027, rheum.L05.028, rheum.L05.029, rheum.L05.030, rheum.L05.031, rheum.L05.032, rheum.L05.033, rheum.L05.034, rheum.L05.035, rheum.L05.036, rheum.L05.037, rheum.L05.039]

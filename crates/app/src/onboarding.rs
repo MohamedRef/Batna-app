@@ -70,7 +70,21 @@ impl Answers {
 
 /// Default study session length: his first-run answer, else 10 minutes.
 pub fn session_minutes() -> u32 {
+    let _ = MINUTES_REV();
     Answers::load().minutes.filter(|m| MINUTE_CHOICES.contains(m)).unwrap_or(10)
+}
+
+/// Bumped when Today's chips change the session length, so readers re-read it.
+static MINUTES_REV: GlobalSignal<u64> = Signal::global(|| 0);
+
+/// Today's session-length chips: saves the new default length.
+pub fn set_session_minutes(m: u32) {
+    let mut a = Answers::load();
+    if a.minutes != Some(m) {
+        a.minutes = Some(m);
+        a.save();
+        *MINUTES_REV.write() += 1;
+    }
 }
 
 /// Shown on this device (device-only: each device asks once, or never

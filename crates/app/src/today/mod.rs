@@ -34,6 +34,8 @@ pub fn Today() -> Element {
     let settings = use_context::<crate::settings::SettingsNav>();
     let ready = o.due + new_today > 0;
     let minutes = crate::onboarding::session_minutes();
+    // Everything today, reviews and the new items' first looks.
+    let all_minutes = o.due_minutes + (new_today as u32 * NEW_ITEM_SECS).div_ceil(60);
 
     rsx! {
         style { {CSS.text()} }
@@ -41,79 +43,110 @@ pub fn Today() -> Element {
         // side while the lecture library scrolls on the other.
         div { class: "tab-cols today-cols", "data-wide": "aside",
             div { class: "tab-main tab-sticky",
-                section { class: "card today-hero",
-                    h1 { {tx::TITLE} }
-                    if let Some(t) = target.clone() {
-                        PlanHero { t, due: o.due, due_minutes: o.due_minutes }
+                header { class: "td-greet",
+                    div { class: "td-greet-text",
+                        p { class: "td-eyebrow", {tx::EYEBROW} }
+                        h1 { {if ready { tx::READY_Q } else { tx::DONE_Q }} }
                     }
-                    // Each count opens what it counts: what's due, today's new
-                    // items, or the checks he has made.
-                    div { class: "tiles",
-                        Tile {
-                            value: o.due,
-                            label: tx::DUE,
-                            hint: if o.due > 0 { tx::DUE_HINT } else { tx::FORECAST_HINT },
-                            accent: o.due > 0,
-                            onclick: {
-                                let due = review.backend.borrow().session_due(store::now_ms());
-                                move |_| if due.is_empty() { crate::stats::open(ui, crate::stats::Tab::Plan) } else { session(ui, due.clone()) }
-                            },
-                        }
-                        Tile {
-                            value: new_today,
-                            label: tx::NEW,
-                            hint: if new_today > 0 { tx::NEW_HINT } else { tx::FORECAST_HINT },
-                            onclick: {
-                                let fresh = unseen(&*review.backend.borrow(), &o, new_today);
-                                move |_| if fresh.is_empty() { crate::stats::open(ui, crate::stats::Tab::Plan) } else { session(ui, fresh.clone()) }
-                            },
-                        }
-                        Tile {
-                            value: o.checked,
-                            label: tx::CHECKED,
-                            hint: tx::CHECKED_HINT,
-                            onclick: move |_| settings.show(Some(crate::settings::Section::Data)),
-                        }
-                    }
-                    if !o.due_cases.is_empty() {
-                        DueCases { ids: o.due_cases.clone() }
-                    }
-                    if ready {
-                        if o.due > 0 {
-                            p { class: "muted small", {tx::due_time(o.due_minutes)} }
-                        }
+                    span { class: "td-art", aria_hidden: "true", {crate::icons::pulse()} }
+                }
+                // The session length: the start button below uses it, and
+                // it stays his default (the first-run answer).
+                div { class: "td-time", role: "radiogroup", aria_label: tx::TIME_Q, title: tx::TIME_HINT,
+                    span { class: "td-time-q", {tx::TIME_Q} }
+                    for m in crate::onboarding::MINUTE_CHOICES {
                         button {
-                            class: "btn btn-primary btn-lg start",
-                            onclick: move |_| {
-                                *crate::study::START.write() = Some(crate::study::Start { lectures: None, items: None, minutes });
-                                ui.screen.set(Screen::Study);
-                            },
-                            {tx::start(minutes)}
+                            key: "{m}",
+                            class: "td-chip",
+                            role: "radio",
+                            "aria-checked": minutes == m,
+                            onclick: move |_| crate::onboarding::set_session_minutes(m),
+                            bdi { {tx::minutes_short(m)} }
                         }
-                    } else if o.seen == 0 && o.unseen == 0 {
-                        p { class: "muted", {tx::NOTHING_WRITTEN} }
-                    } else if o.unseen > 0 {
-                        p { {tx::ALL_DONE} }
-                        p { class: "muted small", "{tx::NEW_CAP_REACHED} · {tx::TOMORROW} {o.due_tomorrow}" }
-                        if target.is_some() {
-                            crate::stats::SessionButton { label: tx::AHEAD, ids: unseen(&*review.backend.borrow(), &o, AHEAD_ITEMS) }
-                        }
-                    } else {
-                        p { {tx::ALL_DONE} }
-                        p { class: "muted small", "{tx::TOMORROW} {o.due_tomorrow}" }
                     }
-                    if let Some(e) = store::open_error() {
-                        p { class: "note", "{tx::STORE_FAILED} " bdi { dir: "ltr", "{e}" } }
-                    } else if let Some(e) = store::write_error() {
-                        p { class: "note", "{tx::WRITE_FAILED} " bdi { dir: "ltr", "{e}" } }
+                }
+                section { class: "td-hero",
+                    Hero { target: target.clone(), due: o.due, new_today, unseen: o.unseen, due_minutes: o.due_minutes, due_tomorrow: o.due_tomorrow, nothing: o.seen == 0 && o.unseen == 0, minutes }
+                }
+                // Each count opens what it counts.
+                div { class: "tiles",
+                    Tile {
+                        value: o.due,
+                        label: tx::DUE,
+                        hint: if o.due > 0 { tx::DUE_HINT } else { tx::FORECAST_HINT },
+                        accent: o.due > 0,
+                        onclick: {
+                            let due = review.backend.borrow().session_due(store::now_ms());
+                            move |_| if due.is_empty() { crate::stats::open(ui, crate::stats::Tab::Plan) } else { session(ui, due.clone()) }
+                        },
+                    }
+                    Tile {
+                        value: new_today,
+                        label: tx::NEW,
+                        hint: if new_today > 0 { tx::NEW_HINT } else { tx::FORECAST_HINT },
+                        onclick: {
+                            let fresh = unseen(&*review.backend.borrow(), &o, new_today);
+                            move |_| if fresh.is_empty() { crate::stats::open(ui, crate::stats::Tab::Plan) } else { session(ui, fresh.clone()) }
+                        },
+                    }
+                    Tile {
+                        value: all_minutes as usize,
+                        label: tx::MINUTES_ALL,
+                        hint: tx::MINUTES_HINT,
+                        onclick: move |_| crate::stats::open(ui, crate::stats::Tab::Plan),
+                    }
+                }
+                if !o.due_cases.is_empty() {
+                    DueCases { ids: o.due_cases.clone() }
+                }
+                if let Some(e) = store::open_error() {
+                    p { class: "note", "{tx::STORE_FAILED} " bdi { dir: "ltr", "{e}" } }
+                } else if let Some(e) = store::write_error() {
+                    p { class: "note", "{tx::WRITE_FAILED} " bdi { dir: "ltr", "{e}" } }
+                }
+                div { class: "td-sec",
+                    h2 { {tx::CONTINUE_HEAD} }
+                    button {
+                        class: "btn-link",
+                        onclick: move |_| {
+                            crate::learn::forget();
+                            ui.screen.set(Screen::Learn);
+                        },
+                        {tx::ALL_LESSONS}
+                        span { class: "chev", aria_hidden: "true" }
                     }
                 }
                 crate::learn::TodayLesson { prefer: o.lectures.iter().map(|l| l.id.clone()).collect::<Vec<_>>() }
                 crate::recap::TodayRecap { due_left: o.due, due_tomorrow: o.due_tomorrow }
+                h2 { class: "td-h", {tx::MORE_HEAD} }
+                ul { class: "tap-list",
+                    li {
+                        button { class: "tap tap-row", onclick: move |_| ui.screen.set(Screen::Bank),
+                            span { class: "td-ico", aria_hidden: "true", {crate::icons::nav(Screen::Bank)} }
+                            span { class: "tap-row-main",
+                                strong { {tx::QUICK_BANK} }
+                                span { class: "muted small", {tx::QUICK_BANK_SUB} }
+                            }
+                            span { class: "chev", aria_hidden: "true" }
+                        }
+                    }
+                    // Content checks are a separate thing from memory: their
+                    // marks and export live in Settings › Data.
+                    li {
+                        button { class: "tap tap-row", title: tx::CHECKED_HINT, onclick: move |_| settings.show(Some(crate::settings::Section::Data)),
+                            span { class: "td-ico", aria_hidden: "true", {crate::icons::check()} }
+                            span { class: "tap-row-main",
+                                strong { {tx::CHECKED_ROW} }
+                                span { class: "muted small", {tx::checked_sub(o.checked)} }
+                            }
+                            span { class: "chev", aria_hidden: "true" }
+                        }
+                    }
+                }
                 if !o.lectures.is_empty() {
                     section { class: "in-progress",
-                        h2 { {tx::IN_PROGRESS} }
-                        ul { class: "progress-list",
+                        h2 { class: "td-h", {tx::IN_PROGRESS} }
+                        ul { class: "tap-list progress-list",
                             for l in o.lectures.iter() {
                                 Progress { key: "{l.id}", lecture: l.clone() }
                             }
@@ -124,6 +157,78 @@ pub fn Today() -> Element {
             div { class: "tab-aside", LibraryList {} }
         }
     }
+}
+
+/// The one recommended start: what today holds in a sentence and the
+/// button that starts it. With an exam plan, the plan's day leads.
+#[component]
+fn Hero(
+    target: Option<DailyTarget>,
+    due: usize,
+    new_today: usize,
+    unseen: usize,
+    due_minutes: u32,
+    due_tomorrow: u32,
+    nothing: bool,
+    minutes: u32,
+) -> Element {
+    let mut ui = use_context::<Ui>();
+    let review = use_review();
+    let ready = due + new_today > 0;
+    let start = rsx! {
+        button {
+            class: "btn btn-lg td-go",
+            onclick: move |_| {
+                *crate::study::START.write() = Some(crate::study::Start { lectures: None, items: None, minutes });
+                ui.screen.set(Screen::Study);
+            },
+            {tx::start_session(minutes)}
+            {crate::icons::arrow_go()}
+        }
+    };
+    rsx! {
+        div { class: "td-meta",
+            span { {if target.is_some() { tx::HERO_KICKER_PLAN } else if due > 0 { tx::HERO_KICKER } else { tx::HERO_KICKER_NEW }} }
+            match target.clone() {
+                Some(t) => rsx! {
+                    button {
+                        class: "td-pill tap",
+                        title: tx::PLAN_HINT,
+                        onclick: move |_| crate::stats::open(ui, crate::stats::Tab::Plan),
+                        {tx::exam_in(t.days_left)}
+                    }
+                },
+                None => rsx! {},
+            }
+        }
+        if let Some(t) = target.clone() {
+            // The plan's day says what today holds; the start follows it.
+            PlanHero { t, due, due_minutes }
+        } else if ready {
+            h2 { {tx::headline(due, new_today)} }
+            p { class: "td-body", {tx::hero_body(due, new_today)} }
+        }
+        if ready {
+            {start}
+        } else if nothing {
+            p { class: "td-body", {tx::NOTHING_WRITTEN} }
+        } else if unseen > 0 {
+            h2 { {tx::ALL_DONE} }
+            p { class: "td-body", "{tx::NEW_CAP_REACHED} · {tx::TOMORROW} {due_tomorrow}" }
+            if target.is_some() {
+                crate::stats::SessionButton { label: tx::AHEAD, ids: unseen_ids(&review, unseen) }
+            }
+        } else {
+            h2 { {tx::ALL_DONE} }
+            p { class: "td-body", "{tx::TOMORROW} {due_tomorrow}" }
+        }
+    }
+}
+
+fn unseen_ids(review: &crate::store::Review, unseen: usize) -> Vec<String> {
+    let b = review.backend.borrow();
+    let o = b.overview(Library::get(), store::now_ms());
+    self::unseen(&*b, &o, AHEAD_ITEMS.min(unseen))
 }
 
 /// Cases and calc items that fell due: they play on the Cases screen, not
@@ -171,12 +276,6 @@ fn PlanHero(t: DailyTarget, due: usize, due_minutes: u32) -> Element {
     };
     let mut ui = use_context::<Ui>();
     rsx! {
-        button {
-            class: "tap tap-plain plan-countdown",
-            title: tx::PLAN_HINT,
-            onclick: move |_| crate::stats::open(ui, crate::stats::Tab::Plan),
-            {tx::exam_in(t.days_left)}
-        }
         div { class: "plan-line",
             button {
                 class: "tap tap-plain ring-tap",
@@ -316,18 +415,18 @@ fn Progress(lecture: LectureProgress) -> Element {
     rsx! {
         li {
             button {
-                class: "progress-row tap",
+                class: "tap tap-row progress-row",
                 onclick: { let id = lecture.id.clone(); move |_| crate::lecture::open(ui, &id) },
                 span { class: "num", "{number}" }
-                div { class: "lecture-main",
-                    bdi { class: "lecture-title", "{lecture.title}" }
-                    div {
+                span { class: "tap-row-main",
+                    bdi { class: "lecture-title", dir: "ltr", "{lecture.title}" }
+                    span {
                         class: "bar",
                         role: "progressbar",
                         aria_valuemin: "0",
                         aria_valuemax: "{lecture.total}",
                         aria_valuenow: "{lecture.seen}",
-                        div { class: "bar-fill", style: "inline-size: {pct}%" }
+                        span { class: "bar-fill", style: "inline-size: {pct}%" }
                     }
                     span { class: "muted small", "{lecture.seen} {tx::OF} {lecture.total} {tx::STARTED}" }
                 }
@@ -355,8 +454,8 @@ fn LibraryList() -> Element {
     rsx! {
         // A heading, not a card: the lectures under it are what open.
         div { class: "library-head",
-            h2 { {tx::LIBRARY} }
-            p { class: "muted", bdi { {tx::CHAPTER} } }
+            h2 { class: "td-h", {tx::LIBRARY} }
+            p { class: "muted small", bdi { dir: "ltr", {tx::CHAPTER} } }
             // The note says to mark items; the marks are sent from Settings › Data.
             button {
                 class: "note tap library-note",
@@ -365,16 +464,16 @@ fn LibraryList() -> Element {
                 {tx::UNVERIFIED_NOTE}
             }
         }
-        ol { class: "lectures",
+        ol { class: "tap-list lectures-list",
             for (id, number, title, items, pages) in rows {
                 li { key: "{id}",
                     button {
-                        class: "lecture tap",
+                        class: "tap tap-row lecture-row",
                         "data-ready": if items.is_some() { "yes" } else { "no" },
                         onclick: { let id = id.clone(); move |_| crate::lecture::open(ui, &id) },
                         span { class: "num", "{number}" }
-                        div { class: "lecture-main",
-                            bdi { class: "lecture-title", "{title}" }
+                        span { class: "tap-row-main",
+                            bdi { class: "lecture-title", dir: "ltr", "{title}" }
                             span { class: "muted small", "{tx::PAGES} " bdi { dir: "ltr", "{pages}" } }
                         }
                         match items {

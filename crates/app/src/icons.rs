@@ -75,6 +75,26 @@ pub fn chevron(next: bool) -> Element {
     stroke(if next { "M15 5l-7 7 7 7" } else { "M9 5l7 7-7 7" })
 }
 
+/// Today's greeting: a pulse line.
+pub fn pulse() -> Element {
+    stroke("M3 12h4l2-5 4 10 2-5h6")
+}
+
+/// "Go" on a start button. The app is right to left, so it points left.
+pub fn arrow_go() -> Element {
+    stroke("M19 12H5M11 6l-6 6 6 6")
+}
+
+/// A search field's magnifier.
+pub fn search() -> Element {
+    stroke("M11 4a7 7 0 1 0 0 14 7 7 0 1 0 0-14zM16 16l4 4")
+}
+
+/// A tick, for a finished lesson.
+pub fn check() -> Element {
+    stroke("M5 12.5l4.5 4.5L19 7.5")
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

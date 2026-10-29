@@ -426,6 +426,8 @@ fn book_pages(book: &Path, ocr: &[PathBuf], num: &str) -> Result<BTreeMap<u32, S
     let mut out: BTreeMap<u32, String> = BTreeMap::new();
     let mut cur = None;
     for line in text.lines() {
+        // pdftotext ends each page with a form feed, which can lead the next marker.
+        let line = line.trim_start_matches('\u{c}');
         if let Some(rest) = line.strip_prefix("=== book page ").or_else(|| line.strip_prefix("=== slide ")) {
             cur = rest.split_whitespace().next().and_then(|p| p.parse().ok());
             if let Some(p) = cur {
@@ -776,11 +778,12 @@ mod tests {
         let dir = tempfile::tempdir().unwrap();
         std::fs::write(
             dir.path().join("L02.txt"),
-            "=== slide 1 ===\nEpidemiology\n=== slide 2 ===\nIncidence rate\n",
+            "=== slide 1 ===\nEpidemiology\n\u{c}=== slide 2 ===\nIncidence rate\n",
         )
         .unwrap();
         let pages = book_pages(dir.path(), &[], "L02").unwrap();
         assert_eq!(pages.len(), 2);
         assert!(pages[&2].contains("Incidence rate"));
+        assert!(!pages[&1].contains("slide 2"));
     }
 }

@@ -1,0 +1,587 @@
+schema: batna.lesson/v1
+lecture: git.L05
+lessons:
+  # ------------------------------------------------------------------
+  - id: git.L05.lesson1
+    title: "يعني إيه polyp؟ ومين فيهم بيقلب سرطان"
+    hook: "أي حاجة طالعة من الحيطة اسمها polyp. السؤال المهم: neoplastic ولا لأ؟"
+    minutes: 8
+    pages: [185, 187]
+    topics: [definition, gastric, classification, adenoma]
+    goals:
+      - "تعرّف الـ polyp وتفرّق sessile من pedunculated"
+      - "تعرف التلات gastric polyps بالـ histology"
+      - "تصنّف الـ colorectal polyps وتعرف أنواع الـ adenoma بالنسبة"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 185
+        quote: "A polyp is any lesion that is elevated above the mucosal surface of the bowel."
+        title: "التعريف"
+        text: |
+          الـ ==polyp== هو **any lesion elevated above the mucosal surface**. يعني أي حاجة طالعة فوق مستوى الـ mucosa، مهما كان نوعها.
+
+          - أكتر مكان: الـ **colon**، وممكن في المريء والمعدة والأمعاء الدقيقة.
+          - من غير stalk = **sessile**. بـ stalk = **pedunculated**.
+      - kind: figure
+        page: 185
+        quote: "Polyps without stalks are referred to as sessile while those with stalks are termed pedunculated."
+        title: "Sessile ولا pedunculated"
+        alt: "Two drawings of the bowel wall. Left: a dome-shaped sessile polyp sitting flat on the mucosa. Right: a pedunculated polyp, a round head on a stalk, with small arrows showing traction pulling the head into the lumen."
+        caption: "الـ stalk بيتعمل من نمو الخلايا اللي جنب البوليب مع شدّ حركة الأمعاء عليه (traction)."
+        svg: |
+          <svg viewBox="0 0 330 220" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="G05a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-acc"/></marker>
+            </defs>
+            <rect x="5" y="160" width="150" height="24" class="fg-box"/>
+            <path d="M40 160c0-50 70-50 70 0z" class="fg-acc"/>
+            <text x="40" y="208" class="t-b">Sessile</text>
+            <text x="30" y="30" class="t-sm t-mut">no stalk</text>
+            <rect x="175" y="160" width="150" height="24" class="fg-box"/>
+            <rect x="243" y="100" width="14" height="60" class="fg-acc"/>
+            <circle cx="250" cy="80" r="30" class="fg-acc"/>
+            <path d="M250 40V18" class="fg-arrow-acc" marker-end="url(#G05a)"/>
+            <text x="262" y="28" class="t-sm t-acc">traction</text>
+            <text x="200" y="208" class="t-b">Pedunculated</text>
+          </svg>
+      - kind: table
+        page: 186
+        quote: "gastric hyperplastic polyps (GHP) characterized by pronounced foveolar hyperplasia, fundic gland polyps (FGP) characterized by dilated and irregularly budded fundic glands"
+        title: "التلات gastric polyps الأشهر"
+        columns: ["Polyp", "Histology"]
+        rows:
+          - ["Hyperplastic (GHP)", "Pronounced foveolar hyperplasia"]
+          - ["Fundic gland (FGP)", "Dilated, budded fundic glands; mostly parietal cells"]
+          - ["Adenomatous", "Low-grade glandular dysplasia"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: sort
+        page: 186
+        quote: "Adenoma > Adenocarcinoma"
+        prompt: "صنّف الـ colorectal polyps زي جدول الكتاب:"
+        bins: ["Neoplastic benign", "Neoplastic malignant", "Non-neoplastic"]
+        cards:
+          - { text: "Adenoma", bin: 0 }
+          - { text: "Serrated polyps", bin: 0 }
+          - { text: "Granular cell tumour", bin: 0 }
+          - { text: "Adenocarcinoma", bin: 1 }
+          - { text: "Stromal", bin: 1 }
+          - { text: "Lymphoid", bin: 1 }
+          - { text: "Hyperplastic polyp", bin: 2 }
+          - { text: "Inflammatory polyp", bin: 2 }
+          - { text: "Hamartoma", bin: 2 }
+          - { text: "Lipoma", bin: 2 }
+        why: "ده تقسيم جدول الكتاب في صفحة 186. الـ carcinoid مكتوب في الـ benign والـ malignant الاتنين، والـ lipoma والـ leiomyoma تحت non-neoplastic."
+      - kind: explain
+        page: 187
+        quote: "Adenomatous polyps are the most common colonic polyps and they carry malignant potential."
+        title: "الـ adenoma"
+        text: |
+          الـ ==adenomatous polyps== هي **the most common colonic polyps**، وعندها **malignant potential**.
+
+          - بتطلع من الـ mucus-secreting epithelial cells، وتعريفها وجود **epithelial dysplasia**.
+          - حجمها من 0.3 لـ 10 cm، وملمسها زي **velvet** أو **raspberry**.
+      - kind: figure
+        page: 187
+        quote: "Tubular adenomas (0-25% villous tissue) Tubulovillous adenomas (25-75% villous tissue) Villous adenoma (75-100% villous tissue)"
+        title: "المسطرة: كام في المية villous؟"
+        alt: "A horizontal ruler from 0 to 100 percent villous tissue, split at 25 and 75. 0 to 25 is tubular, 25 to 75 tubulovillous, 75 to 100 villous. An arrow under it says cancer risk rises to the right."
+        caption: "كل ما الـ villous يزيد، الخطر يزيد (المحاضرة 4: tubulovillous 20%، villous 40%)."
+        svg: |
+          <svg viewBox="0 0 330 170" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="G05b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-bad"/></marker>
+            </defs>
+            <rect x="15" y="40" width="75" height="40" class="fg-good"/>
+            <rect x="90" y="40" width="150" height="40" class="fg-acc"/>
+            <rect x="240" y="40" width="75" height="40" class="fg-bad"/>
+            <text x="22" y="65" class="t-sm t-b">Tubular</text>
+            <text x="110" y="65" class="t-sm t-b">Tubulovillous</text>
+            <text x="250" y="65" class="t-sm t-b">Villous</text>
+            <text x="10" y="100" class="t-sm">0</text>
+            <text x="80" y="100" class="t-sm">25%</text>
+            <text x="230" y="100" class="t-sm">75%</text>
+            <text x="295" y="100" class="t-sm">100%</text>
+            <text x="15" y="28" class="t-sm t-mut">villous tissue</text>
+            <path d="M20 130H300" class="fg-arrow-bad" marker-end="url(#G05b)"/>
+            <text x="90" y="155" class="t-sm t-bad">cancer risk rises</text>
+          </svg>
+      - kind: check
+        page: 187
+        quote: "Tubulovillous adenomas (25-75% villous tissue)"
+        question: "An adenoma with 60% villous tissue is:"
+        options: ["Tubulovillous", "Tubular", "Villous", "Serrated"]
+        answer: 0
+        why:
+          - "صح: من 25 لـ 75%."
+          - "Tubular لحد 25% بس."
+          - "Villous من 75% لفوق."
+          - "الـ serrated بيتعرف بشكل الـ crypt (sawtooth) مش بنسبة الـ villous."
+      - kind: aside
+        tone: analogy
+        page: 187
+        quote: "Typical adenomas range from 0.3 to 10 cm in diameter having a texture resembling velvet or a raspberry"
+        text: "الـ adenoma ملمسه زي القطيفة أو التوت (velvet or raspberry). لو شفته في المنظار هتفتكر الفاكهة."
+      - kind: try
+        items: [git.L05.001, git.L05.003, git.L05.006, git.L05.008, git.L05.012]
+    recap:
+      - "Polyp = أي lesion طالع فوق الـ mucosa؛ أكتر في الـ colon."
+      - "Sessile من غير stalk، pedunculated بـ stalk (proliferation + traction)."
+      - "Gastric: GHP (foveolar hyperplasia)، FGP (parietal cells)، adenomatous (low-grade dysplasia)."
+      - "Adenoma أشهر colonic polyp، فيه dysplasia و malignant potential."
+      - "Tubular 0-25%، tubulovillous 25-75%، villous 75-100%."
+    practice: [git.L05.001, git.L05.002, git.L05.003, git.L05.004, git.L05.005, git.L05.006, git.L05.007, git.L05.008, git.L05.009, git.L05.010, git.L05.011, git.L05.012, git.L05.069]
+  # ------------------------------------------------------------------
+  - id: git.L05.lesson2
+    title: "الـ serrated: البوليب اللي بيستخبى"
+    hook: "تلت سرطانات القولون جاية من بوليب مسطّح، أصفر، في اليمين، ومتغطي بمخاط. يعني عامل نفسه مش موجود."
+    minutes: 9
+    pages: [187, 192]
+    topics: [serrated]
+    goals:
+      - "تعرف الـ serrated pathway (BRAF و methylation)"
+      - "تفرّق HP و SSA/P و TSA بالمكان والجنس والشكل"
+      - "تعرف ليه بيتفوّتوا، ومعايير الـ SPS"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 187
+        quote: "Serrated polyp is a general term for any polyp that shows a serrated (sawtooth or stellate) appearance of the crypt epithelium."
+        title: "يعني إيه serrated؟"
+        text: |
+          **Serrated** = الـ crypt epithelium شكله ==sawtooth== أو stellate، زي سنان المنشار.
+
+          وأهميته إنه precursor لمجموعة سرطانات:
+
+          - فيها **hypermethylation**.
+          - بتطلع أساسًا في الـ **proximal colon**.
+          - حوالي **one-third (30%)** من كل الـ CRCs.
+      - kind: figure
+        page: 188
+        quote: "Multiple genetic pathways in colorectal cancer pathogenesis"
+        title: "تلات طرق للسرطان"
+        alt: "Three rows. A, chromosomal instability: APC loss, then K-ras and 18q LOH, then TP53 inactivation; normal, early adenoma, late adenoma, cancer. B, microsatellite instability: APC loss and failure of MMR genes, then TGF-beta RII and BAX mutations; adenoma, cancer. C, serrated: BRAF mutation and DNA methylation, then TP53, p16 inactivation and LOH; serrated adenoma, cancer."
+        caption: "الطريق التالت (C) هو بتاع الدرس ده: BRAF + methylation ← serrated adenoma ← cancer."
+        svg: |
+          <svg viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="G05c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="5" y="8" width="320" height="95" rx="8" class="fg-box"/>
+            <text x="15" y="28" class="t-b">A. Chromosomal instability</text>
+            <text x="15" y="54" class="t-sm">APC loss</text>
+            <path d="M70 50h18" class="fg-arrow" marker-end="url(#G05c)"/>
+            <text x="92" y="54" class="t-sm">K-ras, 18q LOH</text>
+            <path d="M188 50h18" class="fg-arrow" marker-end="url(#G05c)"/>
+            <text x="210" y="54" class="t-sm">TP53 off</text>
+            <text x="15" y="85" class="t-sm t-mut">early → late adenoma → cancer</text>
+            <rect x="5" y="113" width="320" height="95" rx="8" class="fg-box"/>
+            <text x="15" y="133" class="t-b">B. Microsatellite instability</text>
+            <text x="15" y="159" class="t-sm">APC loss + MMR fails</text>
+            <path d="M150 155h18" class="fg-arrow" marker-end="url(#G05c)"/>
+            <text x="172" y="159" class="t-sm">TGF-beta RII, BAX</text>
+            <text x="15" y="190" class="t-sm t-mut">adenoma → cancer</text>
+            <rect x="5" y="218" width="320" height="105" rx="8" class="fg-acc"/>
+            <text x="15" y="238" class="t-b t-acc">C. Serrated pathway</text>
+            <text x="15" y="264" class="t-sm t-b">BRAF + DNA methylation</text>
+            <path d="M165 260h18" class="fg-arrow" marker-end="url(#G05c)"/>
+            <text x="187" y="264" class="t-sm">serrated adenoma</text>
+            <text x="15" y="290" class="t-sm">TP53, p16 off, LOH</text>
+            <path d="M135 286h18" class="fg-arrow" marker-end="url(#G05c)"/>
+            <text x="157" y="290" class="t-sm t-b">cancer</text>
+            <text x="15" y="312" class="t-sm t-mut">proximal colon, about 30% of CRC</text>
+          </svg>
+      - kind: explain
+        page: 188
+        quote: "WHO Classification of Serrated Lesions (2010) Hyperplastic polyp (HP) Microvesicular HP (MVHP) (60%)"
+        title: "WHO 2010"
+        text: |
+          - ==Hyperplastic polyp (HP)==: microvesicular 60%، goblet cell rich 30%، mucin poor 10%.
+          - **Sessile serrated adenoma/polyp (SSA/P)**: with atypia (adenomatous أو serrated) أو without atypia.
+          - **Traditional serrated adenoma (TSA)**.
+      - kind: table
+        page: 190
+        quote: "More common in the right side of colon and in females"
+        title: "التلاتة جنب بعض"
+        columns: ["", "HP", "SSA/P"]
+        rows:
+          - ["Side", "Left", "Right"]
+          - ["Sex", "Males", "Females"]
+          - ["Size and look", "Under 5 mm, flat or sessile", "Large, sessile, yellow, mucus cap"]
+          - ["Meaning", "Most common, 60-75%", "Precursor of many sporadic CRCs"]
+        hide: [[0, 1], [0, 2], [1, 1], [1, 2]]
+      - kind: mnemonic
+        page: 190
+        quote: "More common in the right side of colon and in females They are large, sessile, yellow in color, may have a mucus cap"
+        word: "SHY"
+        parts:
+          - { key: "S", text: "Sessile and large" }
+          - { key: "H", text: "Hidden under a mucus cap, so easily missed" }
+          - { key: "Y", text: "Yellow" }
+        hook: |
+          الـ SSA بنت **SHY** (مكسوفة): أكتر في الستات، قاعدة على اليمين (right colon)، كبيرة بس مستخبية تحت الـ mucus cap ولونها أصفر. (الـ HP العكس: صغير، شمال، رجالة.)
+      - kind: explain
+        page: 190
+        quote: "Rare subtype (<6% of serrated polyps). Occur in older adults particularly females. Located in the left colon."
+        title: "الـ TSA"
+        text: |
+          - ==Rare== (أقل من 6% من الـ serrated).
+          - في الكبار، خصوصًا الستات، وفي الـ **left colon**.
+          - Polypoid: reddish و **granulo-lobular**. Sessile: أكبر، proximal، و white mucosa.
+          - عنده **significant malignant potential**.
+      - kind: check
+        page: 189
+        quote: "larger (≥1 cm) hyperplastic polyps involving the right colon and those seen in the serrated polyposis syndrome SPS are more likely to harbor malignant potential."
+        question: "Which hyperplastic polyps are more likely to be malignant?"
+        options:
+          - "1 cm or more in the right colon, or in SPS"
+          - "Any HP under 5 mm in the rectum"
+          - "All left-sided HPs in men"
+          - "HPs never carry malignant potential"
+        answer: 0
+        why:
+          - "صح: الكبير في اليمين، واللي في الـ serrated polyposis syndrome."
+          - "ده الشكل المعتاد البريء."
+          - "ده التوزيع المعتاد، مش علامة خطر."
+          - "مش دايمًا؛ الكبار في اليمين و SPS ممكن."
+      - kind: reveal
+        page: 191
+        quote: "High frequency in proximal colon: Missed in colonoscopy. Flat/Sessile Morphology: Easily Overlooked. Ill defined Borders: Incomplete Resection."
+        prompt: "ليه الـ serrated lesions مهمة كده رغم إنها شكلها بريء؟"
+        answer: "عشان: (1) كتير في الـ proximal colon فبتتفوّت في المنظار، (2) flat/sessile فسهل ما تخدش بالك منها، (3) الـ borders مش واضحة فالشيل بيبقى incomplete، (4) الـ MSI cancers ممكن تكبر بسرعة، (5) الـ BRAF, MSS cancers عدوانية و outcome أوحش."
+      - kind: aside
+        tone: joke
+        page: 191
+        quote: "Flat/Sessile Morphology: Easily Overlooked."
+        text: "الـ SSA زي الضيف اللي قاعد ساكت في آخر الصالة بالبيج: flat و sessile و easily overlooked. وأول ما تمشي يطلعلك interval cancer."
+      - kind: table
+        page: 192
+        quote: "Update on the World Health Organization Criteria for Diagnosis of Serrated Polyposis Syndrome"
+        title: "Serrated polyposis syndrome: WHO 2019"
+        columns: ["Criterion", "2019"]
+        rows:
+          - ["I", "5 or more serrated lesions proximal to the rectum, all 5 mm or more, at least 2 of 10 mm or more"]
+          - ["II", "More than 20 serrated lesions of any size in the large bowel, 5 or more proximal to the rectum"]
+        hide: [[0, 1], [1, 1]]
+      - kind: aside
+        tone: exam
+        page: 192
+        quote: "Any number of serrated polyps proximal to the sigmoid colon in an individual who has a first degree relative with serrated polyposis syndrome"
+        text: "الفرق بين 2010 و 2019: الـ 2010 كان بيعدّ proximal to the sigmoid، وكان فيه معيار 'أي عدد مع first-degree relative عنده SPS'. الـ 2019 بيعدّ proximal to the rectum، واشترط كلهم 5 mm أو أكتر، وشال معيار القريب."
+      - kind: try
+        items: [git.L05.014, git.L05.017, git.L05.028, git.L05.029]
+    recap:
+      - "Serrated = sawtooth crypts؛ precursor لحوالي 30% من الـ CRC، proximal، hypermethylation."
+      - "Serrated pathway: BRAF + DNA methylation."
+      - "HP: الأشهر (60-75%)، شمال، رجالة، أقل من 5 mm. الكبير في اليمين أو في SPS ممكن يبقى خطر."
+      - "SSA/P: يمين، ستات، كبير، أصفر، mucus cap، precursor لكتير من الـ sporadic CRC."
+      - "TSA: نادر، شمال، ستات كبار، significant malignant potential."
+    practice: [git.L05.013, git.L05.014, git.L05.015, git.L05.016, git.L05.017, git.L05.018, git.L05.019, git.L05.020, git.L05.021, git.L05.022, git.L05.023, git.L05.024, git.L05.025, git.L05.026, git.L05.027, git.L05.028, git.L05.029, git.L05.030, git.L05.031, git.L05.070, git.L05.071, git.L05.072, git.L05.073, git.L05.074]
+  # ------------------------------------------------------------------
+  - id: git.L05.lesson3
+    title: "بوليبات الالتهاب والـ hamartoma، والـ NICE بالـ NBI"
+    hook: "بوليب ورا التهاب، وبوليب أحمر زي الكرز عند طفل، وضوء أزرق بيقولك ده adenoma ولا لأ."
+    minutes: 9
+    pages: [192, 197]
+    topics: [inflammatory, hamartoma, nice]
+    goals:
+      - "تعرف الـ inflammatory polyps والـ DALM"
+      - "تعدّ الـ hamartomatous syndromes وتعرف مين acquired"
+      - "تقرا الـ NICE classification وتطلع منها الـ pathology"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 192
+        quote: "Typically seen in IBD, are indicative of regenerative and/or healing phases of mucosal ulceration."
+        title: "Inflammatory polyps"
+        text: |
+          - **Typically seen in IBD**، وبتدل على ==regenerative== أو healing phase بعد الـ ulceration.
+          - كتير وأحيانًا **filiform**، وممكن تكبر لدرجة **intussusception** أو luminal obstruction.
+          - على السطح: erosions، congestion، hemorrhage، crypt abscesses.
+      - kind: explain
+        page: 192
+        quote: "Dysplasia-associated lesion or mass (DALM): a raised mucosal lesion in a patient with long-standing inflammatory bowel disease (IBD), mainly mucosal"
+        title: "DALM: البوليب اللي في الـ UC ومش بريء"
+        text: |
+          **DALM** = dysplasia-associated lesion or mass: lesion **raised** في مريض **long-standing IBD** (خصوصًا UC)، والـ histology فيها ==dysplasia==.
+
+          والمهم: بيتحول لسرطان **much faster** من الـ classic adenoma-to-carcinoma sequence.
+      - kind: explain
+        page: 193
+        quote: "Also known as ‗juvenile polyps‘, consist mainly of connective tissue covered by a hypertrophic epithelium. They are pedunculated, cherry-red, smooth polyps."
+        title: "Hamartomatous (juvenile) polyps"
+        text: |
+          - **Connective tissue** متغطي بـ hypertrophic epithelium.
+          - شكلها: ==pedunculated, cherry-red, smooth==.
+          - الـ **sporadic**: غالبًا solitary، في سن صغير، ومن غير malignant potential.
+          - أو جزء من **polyposis syndrome**.
+      - kind: mnemonic
+        page: 193
+        quote: "Several different syndromes have been described as Juvenile Polyposis, Peutz-Jeghers syndrome, hereditary mixed polyposis syndrome, and the PTEN hamartoma tumor"
+        word: "JPHPC"
+        parts:
+          - { key: "J", text: "Juvenile polyposis" }
+          - { key: "P", text: "Peutz-Jeghers syndrome" }
+          - { key: "H", text: "Hereditary mixed polyposis syndrome" }
+          - { key: "P", text: "PTEN hamartoma tumor syndromes: Cowden and Bannayan-Riley-Ruvalcaba" }
+          - { key: "C", text: "Cronkhite-Canada: the only acquired one" }
+        hook: |
+          **J**ust **P**olyps **H**ave **P**retty **C**herries: كلهم autosomal dominant إلا آخر واحد، الـ C (Cronkhite-Canada) acquired.
+      - kind: check
+        page: 193
+        quote: "which are autosomal-dominantly inherited, and Cronkhite-Canada syndrome, which is acquired."
+        question: "Which polyposis syndrome is acquired?"
+        options: ["Cronkhite-Canada", "Peutz-Jeghers", "Cowden", "Juvenile polyposis"]
+        answer: 0
+        why:
+          - "صح: الوحيد الـ acquired."
+          - "Autosomal dominant."
+          - "PTEN، autosomal dominant."
+          - "Autosomal dominant."
+      - kind: explain
+        page: 194
+        quote: "It is an autosomal dominant genetic disease. Thousands of adenomatous polyps throughout the colon and rectum, some extra-intestinal manifestations may occur."
+        title: "FAP في سطر"
+        text: "**FAP**: hereditary polyposis، ==autosomal dominant==، **thousands of adenomatous polyps** في القولون والمستقيم، وممكن extra-intestinal manifestations، وعندها malignant potential. (التفاصيل في محاضرة 4.)"
+      - kind: explain
+        page: 195
+        quote: "The classification uses staining, vascular patterns, and surface patterns to distinguish between hyperplastic and adenomatous colon polyps"
+        title: "NICE: النور الأزرق"
+        text: |
+          **NICE** = NBI International Colorectal Endoscopic classification. بنبص على البوليب بالـ **narrow-band imaging** وبنقيّم 3 حاجات:
+
+          - ==Color== (staining)
+          - **Vessels**
+          - **Surface pattern**
+
+          وبينفع مع أو من غير zoom.
+      - kind: figure
+        page: 195
+        quote: "Has area(s) of disrupted or missing vessels"
+        title: "NICE في صورة"
+        alt: "Three stacked panels drawn as polyp sketches. Type 1: pale polyp the same colour as the background, no vessels, uniform dots; hyperplastic. Type 2: brown polyp with brown vessels surrounding oval and branched white structures; adenoma. Type 3: dark brown polyp with broken missing vessels and an amorphous surface; deep submucosal invasive cancer."
+        caption: "Type 1 فاتح ومن غير vessels = hyperplastic. Type 2 بني وفيه vessels حوالين white structures = adenoma. Type 3 غامق والـ vessels مقطعة = deep submucosal cancer."
+        svg: |
+          <svg viewBox="0 0 330 420" xmlns="http://www.w3.org/2000/svg">
+            <rect x="5" y="5" width="320" height="130" rx="8" class="fg-box"/>
+            <circle cx="65" cy="70" r="45" class="fg-thin"/>
+            <circle cx="50" cy="55" r="3" class="fg-dot-good"/>
+            <circle cx="70" cy="60" r="3" class="fg-dot-good"/>
+            <circle cx="60" cy="80" r="3" class="fg-dot-good"/>
+            <circle cx="80" cy="85" r="3" class="fg-dot-good"/>
+            <text x="125" y="35" class="t-b t-good">Type 1: hyperplastic</text>
+            <text x="125" y="58" class="t-sm">same or lighter colour</text>
+            <text x="125" y="78" class="t-sm">no or lacy vessels</text>
+            <text x="125" y="98" class="t-sm">uniform dark/white spots</text>
+            <rect x="5" y="145" width="320" height="130" rx="8" class="fg-acc"/>
+            <circle cx="65" cy="210" r="45" class="fg-acc"/>
+            <ellipse cx="50" cy="195" rx="12" ry="6" class="fg-box"/>
+            <ellipse cx="80" cy="205" rx="12" ry="6" class="fg-box"/>
+            <ellipse cx="60" cy="228" rx="12" ry="6" class="fg-box"/>
+            <text x="125" y="175" class="t-b t-acc">Type 2: adenoma</text>
+            <text x="125" y="198" class="t-sm">browner than background</text>
+            <text x="125" y="218" class="t-sm">brown vessels around</text>
+            <text x="125" y="238" class="t-sm">oval/branched white parts</text>
+            <rect x="5" y="285" width="320" height="130" rx="8" class="fg-bad"/>
+            <circle cx="65" cy="350" r="45" class="fg-dot-bad"/>
+            <path d="M40 335l10 5m10 0l8-6m-18 30l12 4" class="fg-ink"/>
+            <text x="125" y="315" class="t-b t-bad">Type 3: deep invasive</text>
+            <text x="125" y="338" class="t-sm">brown to dark brown</text>
+            <text x="125" y="358" class="t-sm">disrupted or missing vessels</text>
+            <text x="125" y="378" class="t-sm">amorphous or no surface</text>
+          </svg>
+      - kind: match
+        page: 195
+        quote: "Has area(s) of disrupted or missing vessels"
+        prompt: "وصّل الوصف بالـ NICE type:"
+        pairs:
+          - ["Same or lighter colour, uniform spots", "Type 1 (hyperplastic)"]
+          - ["Brown vessels around white structures", "Type 2 (adenoma)"]
+          - ["Missing vessels, amorphous surface", "Type 3 (deep submucosal cancer)"]
+        why: "الـ type 2 بيشمل Vienna 3، 4 و superficial 5، يعني adenoma بـ low أو high grade dysplasia أو superficial submucosal carcinoma. لو الـ vessels أو الـ surface irregular أو في depressed area، فكّر في high-grade أو superficial cancer."
+      - kind: try
+        items: [git.L05.035, git.L05.037, git.L05.039, git.L05.043, git.L05.088]
+    recap:
+      - "Inflammatory polyps في الـ IBD = healing؛ ممكن intussusception."
+      - "DALM: raised dysplastic lesion في long-standing IBD، بيقلب سرطان أسرع من الـ adenoma."
+      - "Hamartoma/juvenile: pedunculated، cherry-red، smooth؛ الـ sporadic غالبًا بريء."
+      - "Syndromes: Juvenile، Peutz-Jeghers، hereditary mixed، PTEN (Cowden، BRR)؛ Cronkhite-Canada acquired."
+      - "NICE: 1 hyperplastic، 2 adenoma، 3 deep submucosal cancer، بالـ color والـ vessels والـ surface."
+    practice: [git.L05.032, git.L05.033, git.L05.034, git.L05.035, git.L05.036, git.L05.037, git.L05.038, git.L05.039, git.L05.040, git.L05.041, git.L05.042, git.L05.043, git.L05.044, git.L05.045, git.L05.046, git.L05.047, git.L05.048, git.L05.075, git.L05.076, git.L05.077, git.L05.078, git.L05.079, git.L05.088]
+  # ------------------------------------------------------------------
+  - id: git.L05.lesson4
+    title: "تلاقيه، تشيله، وترجع تبص إمتى"
+    hook: "كاب على المنظار، snare بارد ولا سخن، وتاتو 3 سنتي. وبعدها: 10 سنين ولا 3 ولا شهرين؟"
+    minutes: 10
+    pages: [197, 205]
+    topics: [detection, polypectomy, surveillance]
+    goals:
+      - "تعرف الأجهزة اللي بتزوّد الـ adenoma detection"
+      - "تمشي في الـ ESGE algorithm بالحجم والـ invasion"
+      - "تحفظ فترات الـ ACS surveillance للـ increased و high risk"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 197
+        quote: "multiple flexible \"arms\" which opens up the field of view by holding back colonic folds during colonoscope withdrawal."
+        title: "إزاي ما نفوّتش بوليب"
+        text: |
+          البوليبات بتستخبى ورا الـ folds. عشان نرفع الـ ==adenoma detection rate==:
+
+          - **ENDOCUFF / ENDOCUFF VISION**: cap فيه arms بتمسك الـ **colonic folds** وانت بتسحب.
+          - **RetroView** (PENTAX): منظار رفيع بـ short turn radius وزاوية 210 درجة يشوف ورا الـ folds.
+          - **Third Eye**: retrograde view يلاقي ويشيل البوليب المستخبي.
+      - kind: explain
+        page: 199
+        quote: "Hot‖ refers to techniques using the electrosurgery generator unit (ESU) and ―cold‖ means without use of the ESU."
+        title: "طرق الـ polypectomy"
+        text: |
+          - Cold و hot **forceps**.
+          - Cold و hot **snare**.
+          - **EMR** (endoscopic mucosal resection).
+          - **ESD** (endoscopic submucosal dissection).
+
+          ==Hot== = بالـ **electrosurgery generator unit (ESU)**، و cold = من غيره.
+      - kind: figure
+        page: 201
+        quote: "Submucosal injection prior to HSP should be considered to reduce the risk of deep thermal injury."
+        title: "ESGE: الشجرة كلها"
+        alt: "Decision tree. Superficial colorectal neoplastic polyp, sessile or flat. 5 mm or less and 5 to 9 mm: cold snare en bloc. 10 mm or more: advanced imaging for submucosal invasion. Non-invasive 10 to 19 mm: hot snare, consider submucosal injection. Non-invasive 20 mm or more: en bloc EMR, piecemeal if not feasible, over 40 mm or complex to expert centre. Suspected superficial invasion: tattoo 3 cm distal, expert centre for EMR, ESD or surgery. Suspected deep invasion: tattoo, surgery. Pedunculated: head under 20 and stalk under 10 mm hot snare; otherwise adrenaline or clip then hot snare."
+        caption: "تحت 10 mm: cold snare. فوق 10: بص الأول على الـ invasion. Non-invasive: hot snare أو EMR حسب الحجم. Invasion: تاتو، و expert أو جراحة."
+        svg: |
+          <svg viewBox="0 0 330 520" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="G05d" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="65" y="5" width="200" height="30" rx="6" class="fg-box"/>
+            <text x="80" y="25" class="t-sm t-b">Sessile or flat polyp</text>
+            <path d="M120 35l-40 20" class="fg-arrow" marker-end="url(#G05d)"/>
+            <path d="M210 35l40 20" class="fg-arrow" marker-end="url(#G05d)"/>
+            <rect x="5" y="58" width="150" height="52" rx="6" class="fg-good"/>
+            <text x="15" y="78" class="t-sm t-b">Under 10 mm</text>
+            <text x="15" y="98" class="t-sm">cold snare, en bloc</text>
+            <rect x="175" y="58" width="150" height="52" rx="6" class="fg-acc"/>
+            <text x="185" y="78" class="t-sm t-b">10 mm or more</text>
+            <text x="185" y="98" class="t-sm">advanced imaging</text>
+            <path d="M210 110l-50 25" class="fg-arrow" marker-end="url(#G05d)"/>
+            <path d="M290 110v25" class="fg-arrow" marker-end="url(#G05d)"/>
+            <rect x="5" y="138" width="195" height="30" rx="6" class="fg-box"/>
+            <text x="15" y="158" class="t-sm t-b">Non-invasive</text>
+            <rect x="210" y="138" width="115" height="30" rx="6" class="fg-bad"/>
+            <text x="218" y="158" class="t-sm t-b">Invasion?</text>
+            <rect x="5" y="178" width="95" height="96" rx="6" class="fg-box"/>
+            <text x="12" y="196" class="t-sm t-b">10-19 mm</text>
+            <text x="12" y="214" class="t-sm">hot snare;</text>
+            <text x="12" y="232" class="t-sm">inject first</text>
+            <text x="12" y="250" class="t-sm">(less thermal</text>
+            <text x="12" y="266" class="t-sm">injury)</text>
+            <rect x="105" y="178" width="95" height="96" rx="6" class="fg-box"/>
+            <text x="112" y="196" class="t-sm t-b">20 mm +</text>
+            <text x="112" y="214" class="t-sm">en bloc EMR</text>
+            <text x="112" y="232" class="t-sm">piecemeal if</text>
+            <text x="112" y="250" class="t-sm">needed; 40+</text>
+            <text x="112" y="266" class="t-sm">→ expert</text>
+            <rect x="210" y="178" width="115" height="96" rx="6" class="fg-bad"/>
+            <text x="216" y="196" class="t-sm t-b">Superficial:</text>
+            <text x="216" y="214" class="t-sm">tattoo 3 cm,</text>
+            <text x="216" y="232" class="t-sm">expert: EMR/ESD</text>
+            <text x="216" y="250" class="t-sm t-b">Deep:</text>
+            <text x="216" y="266" class="t-sm">tattoo, surgery</text>
+            <rect x="65" y="300" width="200" height="30" rx="6" class="fg-box"/>
+            <text x="80" y="320" class="t-sm t-b">Pedunculated polyp</text>
+            <path d="M120 330l-40 20" class="fg-arrow" marker-end="url(#G05d)"/>
+            <path d="M210 330l40 20" class="fg-arrow" marker-end="url(#G05d)"/>
+            <rect x="5" y="353" width="150" height="80" rx="6" class="fg-good"/>
+            <text x="15" y="373" class="t-sm t-b">Head under 20 mm</text>
+            <text x="15" y="391" class="t-sm t-b">and stalk under 10</text>
+            <text x="15" y="415" class="t-sm">hot snare</text>
+            <rect x="175" y="353" width="150" height="110" rx="6" class="fg-acc"/>
+            <text x="185" y="373" class="t-sm t-b">Head 20 mm + or</text>
+            <text x="185" y="391" class="t-sm t-b">stalk 10 mm +</text>
+            <text x="185" y="413" class="t-sm">adrenaline 1:10 000</text>
+            <text x="185" y="431" class="t-sm">and/or clip, then</text>
+            <text x="185" y="449" class="t-sm">hot snare</text>
+          </svg>
+      - kind: case
+        page: 200
+        quote: "cold snare polypectomy to achieve en bloc resection"
+        stem: "Colonoscopy in a 64-year-old man finds three lesions."
+        steps:
+          - reveal: "A 6 mm flat adenoma in the sigmoid."
+            question: "How do you remove it?"
+            options: ["Cold snare, en bloc", "Hot snare after injection", "Surgery", "Hot forceps"]
+            answer: 0
+            why: "Small 5-9 mm sessile: cold snare polypectomy to achieve en bloc resection."
+          - reveal: "A 15 mm non-invasive sessile adenoma in the transverse colon."
+            question: "And this one?"
+            options: ["Hot snare, consider submucosal injection first", "Cold snare", "Tattoo and surgery", "ESD in all cases"]
+            answer: 0
+            why: "Intermediate 10-19 mm non-invasive: hot snare polypectomy; submucosal injection reduces deep thermal injury."
+          - reveal: "A pedunculated polyp, head 22 mm, stalk 8 mm."
+            question: "And this?"
+            options: ["Adrenaline 1:10 000 and/or mechanical hemostasis, then hot snare", "Hot snare alone", "Cold snare", "Refer for surgery"]
+            answer: 0
+            why: "Head 20 mm or more (or stalk 10 mm or more) needs bleeding prophylaxis first."
+      - kind: table
+        page: 203
+        quote: "People with sessile adenomas that are removed in pieces"
+        title: "ACS: لو كان عنده polyps قبل كده"
+        columns: ["Finding", "Next look"]
+        rows:
+          - ["Small rectal hyperplastic polyps", "10 years"]
+          - ["1-2 small tubular adenomas, low-grade", "5-10 years"]
+          - ["3-10 adenomas, or 1 cm+, or HGD or villous", "3 years"]
+          - ["More than 10 adenomas", "Within 3 years"]
+          - ["Sessile adenoma removed in pieces", "2-6 months"]
+        hide: [[0, 1], [1, 1], [2, 1], [4, 1]]
+      - kind: aside
+        tone: tip
+        page: 203
+        quote: "2 to 6 months after adenoma removal"
+        text: "المنطق بسيط: كل ما البوليب يبقى أكتر أو أكبر أو أوحش، نرجع أسرع. واللي اتشال piecemeal ممكن يكون فاضل منه حتة، فنرجع بعد 2 to 6 months."
+      - kind: explain
+        page: 203
+        quote: "Age 40, or 10 years before the youngest case in the immediate family, whichever is earlier."
+        title: "ACS: لو في family history"
+        text: |
+          - **First-degree relative قبل 60**، أو اتنين first-degree في أي سن: ابدأ عند ==age 40, or 10 years before the youngest case== (الأبكر)، وكرر **every 5 years**.
+          - **First-degree عنده 60 أو أكتر**، أو اتنين second-degree: ابدأ عند **age 40**، وكرر **every 10 years**.
+      - kind: check
+        page: 203
+        quote: "Age 40, or 10 years before the youngest case in the immediate family, whichever is earlier."
+        question: "His father had colon cancer at 44. When should he start colonoscopy?"
+        options: ["At 34, then every 5 years", "At 40, then every 10 years", "At 50, then every 10 years", "At 10-12, yearly sigmoidoscopy"]
+        answer: 0
+        why:
+          - "صح: 44 ناقص 10 = 34، وده أبكر من 40، وبعدين كل 5 سنين."
+          - "ده لما القريب عنده 60 أو أكتر."
+          - "ده average risk."
+          - "ده FAP."
+      - kind: table
+        page: 204
+        quote: "Age 10 to 12"
+        title: "ACS: high risk"
+        columns: ["Group", "Start", "Test"]
+        rows:
+          - ["FAP", "Age 10-12", "Yearly flexible sigmoidoscopy, counseling; colectomy if gene positive"]
+          - ["Lynch (HNPCC)", "20-25, or 10 years before youngest case", "Colonoscopy every 1-2 years, counseling; test first-degree relatives"]
+        hide: [[0, 1], [0, 2], [1, 1], [1, 2]]
+      - kind: explain
+        page: 204
+        quote: "Post-polypectomy surveillance for serrated lesions"
+        title: "BSG: بعد شيل الـ serrated"
+        text: |
+          (excluding diminutive hyperplastic)
+
+          - كلهم **under 10 mm**، من غير dysplasia، ومش SPS: ==no surveillance== على أساس الـ serrated.
+          - أي واحد **10 mm أو أكتر**، أو dysplasia، أو **TSA**: one-off colonoscopy **at 3 years**.
+          - **SPS**: colonoscopy **every 1-2 years** بعد ما القولون يتنضف.
+      - kind: try
+        items: [git.L05.052, git.L05.054, git.L05.063, git.L05.066, git.L05.089]
+    recap:
+      - "ENDOCUFF، RetroView، Third Eye: كلهم بيشوفوا ورا الـ folds."
+      - "Hot = بالـ ESU، cold = من غيره."
+      - "Sessile: تحت 10 mm cold snare؛ 10-19 hot snare (+injection)؛ 20+ EMR؛ 40+ expert؛ invasion → tattoo 3 cm."
+      - "Pedunculated: head 20+ أو stalk 10+ → adrenaline/clip قبل الـ hot snare."
+      - "ACS: piecemeal 2-6 شهور؛ 3-10 adenomas أو 1 cm+ → 3 سنين؛ family history قبل 60 → 40 أو 10 سنين قبل أصغر حالة، كل 5."
+    practice: [git.L05.049, git.L05.050, git.L05.051, git.L05.052, git.L05.053, git.L05.054, git.L05.055, git.L05.056, git.L05.057, git.L05.058, git.L05.059, git.L05.060, git.L05.061, git.L05.062, git.L05.063, git.L05.064, git.L05.065, git.L05.066, git.L05.067, git.L05.068, git.L05.080, git.L05.081, git.L05.082, git.L05.083, git.L05.084, git.L05.085, git.L05.086, git.L05.087, git.L05.089, git.L05.090, git.L05.091]

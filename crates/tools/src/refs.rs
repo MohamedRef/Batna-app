@@ -35,9 +35,11 @@ const LOCKS: &str = "content/book-refs";
 const MIN_SCORE: f64 = 0.3;
 /// …and no page of the lecture may carry this much more.
 const MAX_GAP: f64 = 0.2;
-/// Terms a quote must share with its item or step (fewer only when the quote
-/// itself has fewer terms, then all of them).
-const QUOTE_SHARED: usize = 2;
+/// Terms a quote must share with its item or step. Lesson steps are mostly
+/// Arabic around a few English terms, so one is the floor; terms match on
+/// their first [`STEM`] letters ("transplant" ~ "transplantation").
+const QUOTE_SHARED: usize = 1;
+const STEM: usize = 6;
 
 const STOP: &[&str] = &[
     "the",
@@ -139,7 +141,7 @@ const STOP: &[&str] = &[
 
 /// Keys whose values are not the reference's own words.
 const SKIP_KEYS: &[&str] =
-    &["id", "kind", "status", "src", "topic", "tags", "page", "quote", "image", "bin", "answer", "pages"];
+    &["id", "kind", "status", "src", "topic", "tags", "page", "quote", "image", "pages"];
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct Ref {
@@ -314,10 +316,10 @@ pub fn read_lock(path: &Path) -> Result<BTreeMap<String, LockRow>, String> {
 /// Whether a quote shares enough terms with what its reference says.
 pub fn quote_relates(r: &Ref) -> bool {
     let Some(q) = &r.quote else { return true };
-    let q = terms(q);
-    let t = terms(&r.text);
-    let shared = q.intersection(&t).count();
-    shared >= QUOTE_SHARED.min(q.len().max(1))
+    let stem = |w: String| w.chars().take(STEM).collect::<String>();
+    let q: BTreeSet<String> = terms(q).into_iter().map(stem).collect();
+    let t: BTreeSet<String> = terms(&r.text).into_iter().map(stem).collect();
+    q.is_empty() || q.intersection(&t).count() >= QUOTE_SHARED
 }
 
 /// The book-free half, run by `validate`: lock rows match the content, and
@@ -364,7 +366,7 @@ pub fn check_locks(root: &Path, lectures: &[String]) -> Vec<String> {
             }
             if !quote_relates(r) {
                 problems.push(format!(
-                    "{at}: {}'s quote shares fewer than {QUOTE_SHARED} terms with what it says; quote the line that holds its fact",
+                    "{at}: {}'s quote shares no term with what it says; quote the line that holds its fact",
                     r.id
                 ));
             }
@@ -599,6 +601,10 @@ mod tests {
             zones
         )));
         assert!(quote_relates(&r("accelerated starvation", "a state of accelerated starvation")));
+        assert!(quote_relates(&r(
+            "do not necessarily preclude transplantation",
+            "مش بيقفلوا الباب للـ transplant"
+        )));
     }
 
     #[test]

@@ -1,0 +1,505 @@
+schema: batna.lesson/v1
+lecture: dm.L11
+lessons:
+  # ------------------------------------------------------------------
+  - id: dm.L11.lesson1
+    title: "ليه الـ insulin مش آخر الطريق"
+    hook: "أغلب عيانين الـ type 2 هيحتاجوه في يوم. نعرف ليه، ونفكّ الخوف اللي بيأخّره."
+    minutes: 7
+    pages: [130, 132]
+    topics: [indications, facts, barriers, targets]
+    goals:
+      - "تعدّ دواعي الـ insulin بقائمة المحاضرة دي"
+      - "تحفظ الـ two facts"
+      - "تعرف الـ fears والـ beliefs وترد عليها"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 130
+        title: "الدواعي (النسخة دي)"
+        quote: "Initial stabilization of patients with severe hyperglycemia"
+        text: |
+          نفس قائمة محاضرة الـ injectable therapy، وزيادة بند مهم:
+
+          - ==Initial stabilization== لعيان عنده **severe hyperglycemia**
+          - **Hyperglycemic crises**
+          - **Pregnancy**
+          - **Significant liver or kidney disease**
+          - **Stress**: ACS، ICU، major surgery، severe infection، corticosteroids
+          - **Oral therapy failed**
+
+          والـ **insulin therapy** عند الكتاب = تبدأ + تعمل **titration** + **تعدّل** الـ regimen لما يلزم.
+      - kind: figure
+        page: 131
+        quote: "Type 2 diabetes is a progressive disease that often requires stepwise intensification of treatment to maintain good glycemic control."
+        title: "الطريقة التقليدية: خطوة متأخرة كل مرة"
+        alt: "A zigzag HbA1c line over years. Each step (diet, OAD monotherapy, up-titration, combination, basal insulin, multiple injections) is added only after HbA1c has climbed above the 8 to 9 percent band, then it falls and climbs again."
+        caption: "الخط بيطلع فوق الـ goal لفترة طويلة قبل كل خطوة. ده الـ ==stepwise== المتأخر اللي المحاضرة عايزانا نتجنّبه."
+        svg: |
+          <svg viewBox="0 0 330 200" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 70 H320" class="fg-thin"/>
+            <path d="M20 110 H320" class="fg-thin"/>
+            <text x="2" y="74" class="t-sm t-mut">9%</text>
+            <text x="2" y="114" class="t-sm t-mut">8%</text>
+            <path d="M25 55 L50 112 L80 75 L100 115 L135 65 L155 105 L190 58 L210 100 L245 45 L268 112 L300 62 L318 100" class="fg-arrow-bad" fill="none" stroke-width="2.5"/>
+            <text x="25" y="150" class="t-sm">Diet</text>
+            <text x="68" y="150" class="t-sm">OAD</text>
+            <text x="120" y="150" class="t-sm">↑dose</text>
+            <text x="175" y="150" class="t-sm">combo</text>
+            <text x="228" y="150" class="t-sm">+basal</text>
+            <text x="282" y="150" class="t-sm">MDI</text>
+            <text x="165" y="185" text-anchor="middle" class="t-sm t-mut">Duration of diabetes →</text>
+          </svg>
+      - kind: explain
+        page: 131
+        title: "الحقيقتين"
+        quote: "Most people with type 2 diabetes will, in time, need insulin therapy."
+        text: |
+          1. الـ type 2 ==progressive disease== ومحتاج **stepwise intensification**.
+          2. ==Most people with type 2 diabetes will, in time, need insulin==.
+
+          في الـ figure (Wright 2002)، اللي احتاجوا insulin زيادة طلعوا من حوالي **17%** في أول سنة لحوالي **53%** في السنة السادسة.
+      - kind: sort
+        page: 132
+        quote: "Insulin causes complications 3. Insulin is a personal failure 4. Adverse impact on relationships/lifestyle"
+        prompt: "صنّف كلام العيان: fear ولا belief؟"
+        bins: ["Fear", "Belief"]
+        cards:
+          - { text: "Needles", bin: 0 }
+          - { text: "Hypoglycemia", bin: 0 }
+          - { text: "Weight gain", bin: 0 }
+          - { text: "Insulin is the last option", bin: 1 }
+          - { text: "Insulin causes complications", bin: 1 }
+          - { text: "Insulin is a personal failure", bin: 1 }
+          - { text: "It will ruin my relationships and lifestyle", bin: 1 }
+        why: "الـ **fears** تلاتة (needles، hypoglycemia، weight gain). الـ **beliefs** أربعة: last option، complications، personal failure، وأثره على الحياة والعلاقات."
+      - kind: aside
+        tone: joke
+        page: 132
+        quote: "Insulin is a personal failure"
+        text: "العيان: «الـ insulin معناه إني فشلت». انت: «لأ يا حاج، معناه إن البنكرياس طلع معاش بدري، وإحنا بنجيبله بديل.» 😄 الفشل مش بتاع العيان، ده **progressive disease**. وكتير بيفتكروا ==Insulin causes complications== لأنهم شافوا ناس بدأوه متأخر بعد ما الـ complications حصلت."
+      - kind: check
+        page: 131
+        quote: "Common Fears: 1. Needles 2. Hypoglycemia 3. Weight gain"
+        question: "Which is a common FEAR (not a belief) about insulin?"
+        options:
+          - "Weight gain"
+          - "Insulin is the last option"
+          - "Insulin is a personal failure"
+          - "Insulin causes complications"
+        answer: 0
+        why:
+          - "صح: needles، hypoglycemia، weight gain = fears."
+          - "دي belief."
+          - "دي belief."
+          - "دي belief."
+      - kind: table
+        page: 132
+        quote: "Preprandial capillary plasma glucose 80-130 mg/dL* (4.4-7.2 mmol/L}"
+        title: "الأهداف (ADA Table 6.3)"
+        columns: [Measure, Target]
+        rows:
+          - [A1C, "<7.0% (53 mmol/mol)"]
+          - [Preprandial, "80–130 mg/dl"]
+          - [Peak postprandial, "<180 mg/dl"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: reveal
+        page: 132
+        quote: "Physiological insulin secretion profile:"
+        prompt: "البنكرياس السليم بيطلّع insulin إزاي طول اليوم؟"
+        answer: |
+          حاجتين فوق بعض:
+          - **basal** ثابت وواطي ليل ونهار (يمسك سكر الصيام).
+          - **prandial peaks** عالية بعد الفطار والغدا والعشا.
+
+          كل الـ regimens اللي جاية بتحاول تقلّد الشكل ده: الـ basal insulin للخط الثابت، والـ prandial للقمم.
+      - kind: try
+        items: [dm.L11.001, dm.L11.007, dm.L11.010, dm.L11.012]
+    recap:
+      - "Insulin indications + **initial stabilization of severe hyperglycemia**."
+      - "Fact 1: progressive، stepwise. Fact 2: أغلبهم هيحتاجوا insulin (17% ← 53% في 6 سنين)."
+      - "Fears: needles، hypo، weight. Beliefs: last option، complications، failure، lifestyle."
+      - "Targets: A1C <7%، preprandial 80–130، peak postprandial <180."
+      - "الطبيعي = basal ثابت + prandial peaks."
+    practice: [dm.L11.001, dm.L11.002, dm.L11.003, dm.L11.004, dm.L11.005, dm.L11.006, dm.L11.007, dm.L11.008, dm.L11.009, dm.L11.010, dm.L11.011, dm.L11.012, dm.L11.013]
+  # ------------------------------------------------------------------
+  - id: dm.L11.lesson2
+    title: "Basal-oral: صلّح الصيام الأول"
+    hook: "حقنة واحدة بالليل مع الأقراص، وأرقام بسيطة كل 3 أيام. ده أسهل باب للـ insulin."
+    minutes: 9
+    pages: [133, 135]
+    topics: [basal-oral, titration]
+    goals:
+      - "تفهم ليه نبدأ بالـ fasting"
+      - "تعدّ مزايا الـ basal والـ ideal basal insulin (سؤال كتاب)"
+      - "تبدأ وتعمل titration بجدول Nathan"
+    status: unverified
+    steps:
+      - kind: figure
+        page: 134
+        quote: "Hence need to fix fasting first"
+        title: "Fix fasting first"
+        alt: "A day glucose curve with three meal peaks sitting on top of a fasting baseline. A yellow arrow labelled basal insulin pushes the baseline down into the normal fasting band; a blue arrow labelled PPBG points at the peaks."
+        caption: "القمم بتقعد فوق خط الصيام. لو نزّلت الخط بالـ ==basal insulin==، اليوم كله بينزل معاه."
+        svg: |
+          <svg viewBox="0 0 330 200" xmlns="http://www.w3.org/2000/svg">
+            <rect x="40" y="140" width="280" height="35" rx="8" class="fg-good"/>
+            <text x="180" y="162" text-anchor="middle" class="t-sm t-b">Normal fasting blood glucose</text>
+            <path d="M40 135 C70 135 75 40 90 50 C100 60 110 110 130 120 C150 125 155 80 170 85 C185 95 190 120 210 125 C230 128 235 60 250 62 C265 70 275 120 320 132" class="fg-arrow" fill="none" stroke-width="2"/>
+            <rect x="2" y="118" width="34" height="34" rx="6" class="fg-acc"/>
+            <text x="19" y="132" text-anchor="middle" class="t-sm t-b">Basal</text>
+            <text x="19" y="146" text-anchor="middle" class="t-sm">first</text>
+            <text x="120" y="30" class="t-sm t-acc t-b">PPBG peaks sit on the baseline</text>
+          </svg>
+      - kind: explain
+        page: 134
+        title: "ليه نبدأ بالـ basal؟"
+        quote: "1 injection with no mixing 2. Insulin pens for increased acceptance 3. Slow, safe, simple titration"
+        text: |
+          - ==1 injection with no mixing==
+          - **Insulin pens**: العيان بيتقبّلها أكتر
+          - **Slow, safe, simple titration**
+          - **Low dosage**
+          - **Effective** improvement in control
+          - **Limited weight gain**
+      - kind: mnemonic
+        page: 134
+        quote: "Closely mimic normal pancreatic basal insulin secretion 2. No distinct peak effect 3. Continued effect over 24 hours"
+        word: "MPLNOP"
+        parts:
+          - { key: "M", text: "Mimics normal basal secretion" }
+          - { key: "P", text: "Peak: no distinct peak" }
+          - { key: "L", text: "Long: continued effect over 24 hours" }
+          - { key: "N", text: "Nocturnal hypoglycemia reduced" }
+          - { key: "O", text: "Once daily for compliance" }
+          - { key: "P", text: "Predictable absorption" }
+        hook: "سؤال كتاب: **ideal basal insulin**. الستة دول بالترتيب: **M-P-L-N-O-P**، اقرأها «ام بي ال نوب»."
+      - kind: explain
+        page: 135
+        title: "الـ qualified A1c"
+        quote: "A ―qualified A1c‖ by hypoglycemia The impact of hypoglycemia on A1c"
+        text: |
+          الـ A1c لوحده مش كفاية: لازم تسأل **وصلته بكام hypoglycemia؟** ده الـ ==qualified A1c==.
+
+          في الـ figure: عند نفس مستوى الـ hypoglycemia، الـ **long-acting analogue** بيوصل لـ A1c أقل من **NPH** بحوالي **0.4–0.6%**. يعني تقدر تضغط على السكر أكتر وانت أأمن.
+      - kind: figure
+        page: 135
+        quote: "Initiate insulin with a single injection of a basal insulin (Glargine)"
+        title: "Initiate → titrate → monitor"
+        alt: "Three stacked boxes. Initiate: bedtime or morning long-acting, or bedtime intermediate, 10 units or 0.2 units per kg. Check fasting glucose daily. Titrate: plus 2 units every 3 days until fasting glucose 80 to 130; if above 180, plus 4. Side box: hypoglycemia or fasting below 70, reduce by at least 4 units or 10 percent if above 60 units. Monitor: HbA1c every 3 months."
+        caption: "ابدأ بـ ==10 units or 0.2 units/kg==، وقيس الصيام كل يوم، وزوّد كل **3 أيام**."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L11a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="fg-head"/></marker></defs>
+            <rect x="10" y="10" width="310" height="62" rx="10" class="fg-acc"/>
+            <text x="20" y="30" class="t-b">Initiate</text>
+            <text x="20" y="48" class="t-sm">Bedtime/morning long-acting, or bedtime NPH</text>
+            <text x="20" y="64" class="t-sm">10 units or 0.2 U/kg</text>
+            <path d="M165 74 V92" class="fg-arrow" marker-end="url(#L11a)"/>
+            <text x="175" y="88" class="t-sm t-mut">check FPG daily</text>
+            <rect x="10" y="96" width="310" height="62" rx="10" class="fg-box"/>
+            <text x="20" y="116" class="t-b">Titrate (every 3 days)</text>
+            <text x="20" y="134" class="t-sm">+2 U until FPG 80–130 mg/dl</text>
+            <text x="20" y="150" class="t-sm">FPG &gt;180: +4 U</text>
+            <rect x="10" y="170" width="310" height="50" rx="10" class="fg-bad"/>
+            <text x="20" y="190" class="t-sm t-b">Hypo or FPG &lt;70</text>
+            <text x="20" y="208" class="t-sm">Reduce ≥4 U, or 10% if dose &gt;60 U</text>
+            <path d="M165 222 V240" class="fg-arrow" marker-end="url(#L11a)"/>
+            <rect x="10" y="244" width="310" height="44" rx="10" class="fg-good"/>
+            <text x="20" y="264" class="t-b">Monitor</text>
+            <text x="20" y="280" class="t-sm">Continue; HbA1c every 3 months</text>
+          </svg>
+      - kind: aside
+        tone: trap
+        page: 135
+        quote: "Daily dose: 10 units or 0.2 units/kg"
+        text: "فخ امتحان: محاضرة الـ injectable therapy قالت **10 units or 0.15 U/kg** و قاعدة **3–0–3**. المحاضرة دي (Nathan 2009) بتقول ==0.2 units/kg== و **+2 كل 3 أيام** (أو +4 لو FPG >180). جاوب برقم المحاضرة اللي السؤال منها."
+      - kind: check
+        page: 135
+        quote: "If FPG is >180 mg/dL, increase dose by 4 units every 3 days"
+        question: "On glargine, FPG over 3 days is 150, 158, 146 mg/dl. Per this lecture's chart?"
+        options:
+          - "+2 units"
+          - "+4 units"
+          - "No change"
+          - "−4 units"
+        answer: 0
+        why:
+          - "صح: فوق 130 ومش فوق 180 ← +2 كل 3 أيام."
+          - "+4 بس لو FPG >180."
+          - "لسه فوق الـ 80–130."
+          - "التقليل للـ hypo أو FPG <70."
+      - kind: case
+        page: 135
+        quote: "Reduce bedtime insulin dose by ≥4 units, or by 10% if >60 units"
+        stem: "Man on NPH 80 units at bedtime. Night sweats, FPG 61 mg/dl."
+        steps:
+          - question: "How much to reduce?"
+            options: ["8 units (10%, dose >60)", "2 units", "4 units only", "Stop NPH"]
+            answer: 0
+            why: "≥4 units، أو 10% لو الجرعة >60. 10% من 80 = 8."
+          - question: "Which insulin type would help most with these night hypos long term?"
+            options: ["A long-acting analogue with no distinct peak", "Regular at bedtime", "More NPH", "Premix at bedtime"]
+            answer: 0
+            why: "الـ ideal basal: no distinct peak و reduce nocturnal hypoglycemia، والـ qualified A1c أحسن من NPH."
+      - kind: try
+        items: [dm.L11.017, dm.L11.018, dm.L11.022, dm.L11.023]
+    recap:
+      - "Fix fasting first: القمم قاعدة على خط الصيام."
+      - "Basal: حقنة واحدة، pens، titration سهلة، جرعة قليلة، وزن أقل."
+      - "Ideal basal: **MPLNOP**."
+      - "Qualified A1c: analogue أحسن من NPH بـ 0.4–0.6% عند نفس الـ hypo."
+      - "Start 10 U أو 0.2 U/kg؛ +2 كل 3 أيام لحد 80–130؛ +4 لو >180؛ hypo ← −≥4 أو 10%."
+    practice: [dm.L11.014, dm.L11.015, dm.L11.016, dm.L11.017, dm.L11.018, dm.L11.019, dm.L11.020, dm.L11.021, dm.L11.022, dm.L11.023, dm.L11.024, dm.L11.025, dm.L11.044, dm.L11.046, dm.L11.047]
+  # ------------------------------------------------------------------
+  - id: dm.L11.lesson3
+    title: "بعد الـ basal: prandial ولا premix؟"
+    hook: "الصيام بقى تمام والـ HbA1c لسه عالي؟ يبقى المشكلة بعد الأكل. قدامك طريقين."
+    minutes: 9
+    pages: [136, 139]
+    topics: [prandial, premix]
+    goals:
+      - "تعرف امتى تكثّف بعد الـ basal"
+      - "تبدأ وتعمل titration للـ prandial"
+      - "تضبط الـ premix بجدول BIAsp 30"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 136
+        title: "امتى نكثّف؟"
+        quote: "Despite adequately titrated basal insulin OR once basal dose >0.7–1.0 IU/kg OR FPG at target"
+        text: |
+          لو الـ **HbA1c فوق الـ target** و:
+          - الـ basal اتعمله titration كويس، **أو**
+          - جرعة الـ basal عدّت ==0.7–1.0 IU/kg==، **أو**
+          - الـ **FPG at target**
+
+          يبقى زيادة الـ basal مش الحل. الـ basal الزيادة عن اللزوم بيعمل hypo بالليل من غير ما يصلّح سكر الأكل.
+      - kind: figure
+        page: 136
+        quote: "Usually one dose with the largest meal or meal with greatest PPG excursion"
+        title: "Either / Or"
+        alt: "A top box: HbA1c above target despite titrated basal, or basal above 0.7 to 1.0 IU per kg, or FPG at target. Two arrows: left to twice or three times daily premix with a caution of more hypoglycemia and weight gain; right, with a tick, to adding prandial insulin, usually one dose with the largest meal."
+        caption: "الطريق المفضّل (عليه ✓): ==Add prandial insulin== مع أكبر وجبة. الـ premix ممكن، بس **hypoglycemia** و **weight gain** أكتر."
+        svg: |
+          <svg viewBox="0 0 330 230" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L11b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="fg-head"/></marker></defs>
+            <rect x="10" y="10" width="310" height="55" rx="10" class="fg-acc"/>
+            <text x="165" y="30" text-anchor="middle" class="t-sm t-b">HbA1c above target despite</text>
+            <text x="165" y="48" text-anchor="middle" class="t-sm">titrated basal, or basal &gt;0.7–1.0 IU/kg, or FPG at target</text>
+            <path d="M85 67 V95" class="fg-arrow" marker-end="url(#L11b)"/>
+            <path d="M245 67 V95" class="fg-arrow" marker-end="url(#L11b)"/>
+            <text x="165" y="88" text-anchor="middle" class="t-sm t-mut">either / or</text>
+            <rect x="10" y="100" width="150" height="120" rx="10" class="fg-bad"/>
+            <text x="20" y="122" class="t-sm t-b">Premix 2–3 times daily</text>
+            <text x="20" y="150" class="t-sm t-bad">Caution:</text>
+            <text x="20" y="168" class="t-sm">more hypoglycemia</text>
+            <text x="20" y="186" class="t-sm">and/or weight gain</text>
+            <rect x="170" y="100" width="150" height="120" rx="10" class="fg-good"/>
+            <text x="180" y="122" class="t-sm t-b">✓ Add prandial</text>
+            <text x="180" y="150" class="t-sm">One dose with the</text>
+            <text x="180" y="168" class="t-sm">largest meal, or meal</text>
+            <text x="180" y="186" class="t-sm">with biggest PPG rise</text>
+          </svg>
+      - kind: table
+        page: 137
+        quote: "4 IU a day or 10% of basal dose"
+        title: "Prandial: البداية والـ titration"
+        columns: [Step, Rule]
+        rows:
+          - [Start, "4 IU a day or 10% of basal"]
+          - ["If HbA1c <8%", "Lower total dose by 4 IU or 10% of basal"]
+          - [Titrate, "+1–2 IU or 10–15%, twice weekly"]
+          - [Unexplained hypo, "Lower that dose 10–20%"]
+        hide: [[0, 1], [2, 1], [3, 1]]
+      - kind: reveal
+        page: 137
+        quote: "If HbA1c <64 mmol/mol (8%) consider lowering the total dose by 4 IU a day or 10% of basal dose"
+        prompt: "ليه لو الـ HbA1c أقل من 8% بنقلّل الجرعة الكلية لما نضيف prandial؟"
+        answer: |
+          لأن العيان قريب من الهدف. لو ضفت prandial فوق نفس الـ basal، المجموع يزيد مرة واحدة ويقع في **hypoglycemia**.
+
+          علشان كده بنشيل ==4 IU or 10%== من الـ basal ونحطهم prandial: نفس الإجمالي تقريبًا، بس متوزّع صح.
+      - kind: explain
+        page: 137
+        title: "Premixed insulin"
+        quote: "Twice-daily injections, a mixture of short and intermediate, before breakfast and the evening meal"
+        text: |
+          ==Twice-daily injections==: خليط **short + intermediate** في نفس القلم، **قبل الفطار** و**قبل العشا**.
+
+          مثال الكتاب **BIAsp 30** (30% aspart، 70% intermediate):
+          - **30 U** الصبح = **9 U** سريع + **21 U** intermediate
+          - **10 U** بالليل = **3 U** + **7 U**
+      - kind: explain
+        page: 138
+        title: "ظبط الـ premix"
+        quote: "Titrate once weekly, based on the lowest SMPG value over the previous 3 days before titration."
+        text: |
+          - ==once weekly==
+          - على **أقل قراية SMPG** في آخر **3 أيام** (مش المتوسط، ومش أعلى رقم: الأقل علشان الأمان).
+          - قراية **قبل الفطار** بتظبط **جرعة العشا**، وقراية **قبل العشا** بتظبط **جرعة الفطار** (الـ intermediate بتاع كل حقنة هو اللي بيوصل للوجبة اللي بعدها).
+      - kind: table
+        page: 138
+        quote: "Pre-meal blood glucose level mg/dl < 80 80-120 121-140 141-180 > 180"
+        title: "BIAsp 30 adjustment"
+        columns: [Pre-meal mg/dl, Units]
+        rows:
+          - ["<80", "−2"]
+          - ["80–120", "0"]
+          - ["121–140", "+2"]
+          - ["141–180", "+4"]
+          - [">180", "+6"]
+        hide: [[0, 1], [2, 1], [3, 1], [4, 1]]
+      - kind: aside
+        tone: tip
+        page: 138
+        quote: "Titrate once weekly, based on the lowest SMPG value over the previous 3 days before titration."
+        text: "عشان تعمل **titrate** صح، الجدول بيمشي كل **2**: −2، 0، +2، +4، +6. والحدود: **80، 120، 140، 180**. افتكر إن **80–120** هو «المنطقة الآمنة» اللي ما تلمسش فيها الجرعة."
+      - kind: check
+        page: 138
+        quote: "Titrate once weekly, based on the lowest SMPG value over the previous 3 days before titration."
+        question: "Pre-breakfast SMPG over 3 days: 190, 176, 202. Change the evening BIAsp 30 dose by?"
+        options:
+          - "+4 (lowest is 176)"
+          - "+6 (two readings >180)"
+          - "+2"
+          - "No change"
+        answer: 0
+        why:
+          - "صح: أقل قراية 176 ← 141–180 ← +4."
+          - "الكتاب بياخد أقل قراية، مش الأغلبية."
+          - "+2 لـ 121–140."
+          - "لسه فوق 120."
+      - kind: explain
+        page: 139
+        title: "مشاكل الـ premix في الـ curves"
+        quote: "III. Basal-bolus regimen"
+        text: |
+          الـ curves في ص 139 بتوضّح مشاكل الحقنتين:
+          - الـ intermediate بتاع العشا يعمل ==nocturnal hypoglycemia== حوالي 2–3 الفجر، فالعيان محتاج **snack** قبل النوم.
+          - لو الغدا اتأخر أو اتلغى: **hypoglycemia** الضهر.
+          - وبعد الغدا ممكن **hyperglycemia** العصر.
+          - الحل في آخر رسمة: جرعة **سريعة مستقلة للغدا** (حقنة تالتة).
+
+          وده بالظبط اللي بيوصّلنا للـ **basal-bolus**.
+      - kind: try
+        items: [dm.L11.026, dm.L11.030, dm.L11.032, dm.L11.036, dm.L11.037]
+    recap:
+      - "كثّف لو HbA1c عالي رغم basal متظبط، أو basal >0.7–1.0 IU/kg، أو FPG at target."
+      - "الأفضل: prandial واحدة مع أكبر وجبة. الـ premix: hypo و وزن أكتر."
+      - "Prandial: ابدأ 4 IU أو 10% basal؛ +1–2 IU أو 10–15% مرتين في الأسبوع؛ hypo ← −10–20%."
+      - "Premix: short + intermediate قبل الفطار والعشا؛ BIAsp 30: 30 U = 9 + 21."
+      - "Titrate أسبوعيًا على أقل SMPG في 3 أيام: <80 −2، 80–120 0، 121–140 +2، 141–180 +4، >180 +6."
+    practice: [dm.L11.026, dm.L11.027, dm.L11.028, dm.L11.029, dm.L11.030, dm.L11.031, dm.L11.032, dm.L11.033, dm.L11.034, dm.L11.035, dm.L11.036, dm.L11.037, dm.L11.038, dm.L11.039, dm.L11.045]
+  # ------------------------------------------------------------------
+  - id: dm.L11.lesson4
+    title: "Basal-bolus: الحسبة والاختيار"
+    hook: "نص للخلفية ونص للأكل، والقرار بين premix و basal-bolus مش علمي بس: ده أسلوب حياة."
+    minutes: 7
+    pages: [139, 141]
+    topics: [basal-bolus]
+    goals:
+      - "تحسب جرعة الـ basal-bolus"
+      - "تختار بين premix و basal-bolus بالـ lifestyle (سؤال كتاب)"
+    status: unverified
+    steps:
+      - kind: figure
+        page: 140
+        quote: "TDD = Weight (kg) x 0.5 U/kg"
+        title: "حسبة الـ basal-bolus"
+        alt: "A tree. Total daily dose equals weight in kilograms times 0.5 units per kg. It splits into half as basal and half as bolus; the bolus splits into one sixth of the total daily dose before breakfast, lunch and dinner."
+        caption: "==0.5 U/kg== = TDD. **½** basal، و **½** bolus متقسّم **1/6** قبل كل وجبة."
+        svg: |
+          <svg viewBox="0 0 330 230" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L11c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="fg-head"/></marker></defs>
+            <rect x="65" y="10" width="200" height="36" rx="8" class="fg-acc"/>
+            <text x="165" y="33" text-anchor="middle" class="t-sm t-b">TDD = weight × 0.5 U/kg</text>
+            <path d="M120 48 L80 78" class="fg-arrow" marker-end="url(#L11c)"/>
+            <path d="M210 48 L250 78" class="fg-arrow" marker-end="url(#L11c)"/>
+            <rect x="15" y="82" width="120" height="40" rx="8" class="fg-good"/>
+            <text x="75" y="100" text-anchor="middle" class="t-sm t-b">Basal</text>
+            <text x="75" y="115" text-anchor="middle" class="t-sm">½ TDD</text>
+            <rect x="195" y="82" width="120" height="40" rx="8" class="fg-box"/>
+            <text x="255" y="100" text-anchor="middle" class="t-sm t-b">Bolus</text>
+            <text x="255" y="115" text-anchor="middle" class="t-sm">½ TDD</text>
+            <path d="M255 124 L130 160" class="fg-arrow" marker-end="url(#L11c)"/>
+            <path d="M255 124 V160" class="fg-arrow" marker-end="url(#L11c)"/>
+            <path d="M255 124 L310 160" class="fg-arrow" marker-end="url(#L11c)"/>
+            <rect x="90" y="164" width="76" height="40" rx="8" class="fg-box"/>
+            <text x="128" y="182" text-anchor="middle" class="t-sm">Breakfast</text>
+            <text x="128" y="197" text-anchor="middle" class="t-sm t-b">1/6</text>
+            <rect x="174" y="164" width="76" height="40" rx="8" class="fg-box"/>
+            <text x="212" y="182" text-anchor="middle" class="t-sm">Lunch</text>
+            <text x="212" y="197" text-anchor="middle" class="t-sm t-b">1/6</text>
+            <rect x="258" y="164" width="66" height="40" rx="8" class="fg-box"/>
+            <text x="291" y="182" text-anchor="middle" class="t-sm">Dinner</text>
+            <text x="291" y="197" text-anchor="middle" class="t-sm t-b">1/6</text>
+          </svg>
+      - kind: check
+        page: 140
+        quote: "TDD = 110 (kg) x 0.5 U/kg"
+        question: "The book's 110 kg example: total daily dose and each meal bolus?"
+        options:
+          - "55 U total, about 9 U per meal"
+          - "33 U total, 11 U per meal"
+          - "110 U total, 18 U per meal"
+          - "22 U total, 4 U per meal"
+        answer: 0
+        why:
+          - "صح: 110 × 0.5 = 55؛ basal ≈ 27.5، وكل وجبة 55/6 ≈ 9."
+          - "ده 0.3 U/kg (الـ biphasic)."
+          - "ده 1 U/kg: ضعف الكتاب."
+          - "ده 0.2 U/kg: بداية الـ basal بس."
+      - kind: table
+        page: 141
+        quote: "Premix vs. Basal-Bolus: It’s all about lifestyle"
+        title: "Premix ولا basal-bolus؟"
+        columns: [Factor, Premix, Basal-bolus]
+        rows:
+          - [Injections, Fewer, More is fine]
+          - [SMBG, Unwilling, Willing]
+          - [Routine, Fixed, Variable]
+          - [Ability, Limited cognition, "Motivated, good cognition"]
+          - [Support, Essential, Extremely essential]
+        hide: [[0, 1], [1, 2], [2, 1], [2, 2], [4, 2]]
+      - kind: aside
+        tone: analogy
+        page: 141
+        quote: "Premix vs. Basal-Bolus: It’s all about lifestyle"
+        text: "الـ **premix** زي **الأتوبيس**: مواعيد ثابتة، مش محتاج تسوق، بس لازم تلحقه. الـ **basal-bolus** زي **عربيتك**: تروح في أي وقت، بس لازم تعرف تسوق (SMBG، carb، ظبط جرعات). ==It's all about lifestyle==."
+      - kind: case
+        page: 141
+        quote: "Premix vs. Basal-Bolus: It’s all about lifestyle"
+        stem: "Two patients need intensification."
+        steps:
+          - reveal: "A: 28-year-old engineer, type 2 DM, variable shifts, checks glucose 4 times a day, happy with injections."
+            question: "Best regimen for A?"
+            options: ["Basal-bolus", "Premix twice daily", "Basal only forever", "Stop insulin"]
+            answer: 0
+            why: "Variable routine، willing to self-monitor، more injections OK، motivated ← basal-bolus."
+          - reveal: "B: 78-year-old with mild dementia, lives with his daughter, fixed meals, hates finger pricks."
+            question: "Best regimen for B?"
+            options: ["Premix twice daily", "Basal-bolus with carb counting", "Four injections a day", "Prandial before each meal"]
+            answer: 0
+            why: "Fewer injections، unwilling to self-monitor، fixed routine، limited cognition ← premix، والـ support essential."
+      - kind: sort
+        page: 141
+        quote: "Premix vs. Basal-Bolus: It’s all about lifestyle"
+        prompt: "صنّف العيان: premix ولا basal-bolus؟"
+        bins: ["Premix", "Basal-bolus"]
+        cards:
+          - { text: "Prefers fewer injections", bin: 0 }
+          - { text: "Unwilling to self-monitor", bin: 0 }
+          - { text: "Fixed daily routine", bin: 0 }
+          - { text: "Willing to self-monitor", bin: 1 }
+          - { text: "Variable routine", bin: 1 }
+          - { text: "Motivated, good cognition", bin: 1 }
+        why: "الـ support مطلوب في الاتنين: **essential** للـ premix و **extremely essential** للـ basal-bolus."
+      - kind: try
+        items: [dm.L11.040, dm.L11.042, dm.L11.048]
+    recap:
+      - "Basal-bolus: TDD = 0.5 U/kg؛ ½ basal؛ 1/6 قبل كل وجبة."
+      - "Premix: حقن أقل، من غير SMBG، روتين ثابت، cognition محدودة."
+      - "Basal-bolus: حقن أكتر عادي، SMBG، روتين متغيّر، motivated."
+      - "Support: essential للـ premix، extremely essential للـ basal-bolus."
+    practice: [dm.L11.040, dm.L11.041, dm.L11.042, dm.L11.043, dm.L11.048]

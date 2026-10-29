@@ -1,0 +1,602 @@
+schema: batna.lesson/v1
+lecture: neph.L04
+lessons:
+  # ------------------------------------------------------------------
+  - id: neph.L04.lesson1
+    title: "قيس الضغط صح الأول"
+    hook: "نص الـ hypertension اللي بتشوفها في العيادة ممكن تكون غلطة cuff أو قعدة. ابدأ من هنا."
+    minutes: 9
+    pages: [80, 82]
+    topics: [measurement, classification]
+    goals:
+      - "تقيس الضغط بالطريقة اللي الكتاب عايزها"
+      - "تعرف الـ dipper والـ salt-sensitive والـ HTN paradox"
+      - "تحفظ thresholds كل طريقة قياس وتصنيف الـ BHS والأسباب الثانوية"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 80
+        title: "Brain chips في القياس"
+        quote: "Sitting 5 minuts Legs on the ground Arm at level of the heart Cuff = 80% of The arm"
+        text: |
+          - **قاعد 5 دقايق**، رجليه على الأرض، ودراعه في ==مستوى القلب==.
+          - الـ **cuff = 80%** من الدراع.
+          - خلي بالك من الـ **auscultatory gap**، والـ inflation ما يوجعش، والزئبق ينزل بمعدل مظبوط.
+          - قارن الدراعين، وفكّر في الـ **AF**، واعرف تعيد النفخ من أنهي مستوى.
+
+          والتشخيص لازم يكون على ==two measurements one week apart==.
+      - kind: reveal
+        page: 80
+        quote: "Cuff = 80% of The arm"
+        prompt: "ليه الـ cuff الصغير على دراع تخين بيدي رقم عالي؟"
+        answer: |
+          الـ **cuff** الضيق محتاج ضغط أعلى علشان يقفل الشريان تحت نسيج كتير، فالقراءة تطلع **أعلى من الحقيقة**.
+
+          وده بالظبط سبب من أسباب الـ **pseudoresistance** اللي هنشوفها: **small cuff in obese patients**. (الشرح فسيولوجي؛ الـ 80% من الكتاب.)
+      - kind: explain
+        page: 80
+        title: "أول زيارة والضغط عالي جدًا"
+        quote: "Femoral pulse delay Coarctation Leriche syndrome Aortitis"
+        text: |
+          قيس في **مكان تاني**، وجسّ الـ **femoral pulse**. لو فيه ==femoral pulse delay== فكّر في:
+          - **Coarctation**
+          - **Leriche syndrome**
+          - **Aortitis**: Takayasu
+      - kind: explain
+        page: 81
+        title: "Dipper و salt sensitive"
+        quote: "Dipper – non dipper : MAB ↓10-20 mmHg at Mid night till→ 6 am"
+        text: |
+          - **Dipper:** الـ mean BP بينزل **10–20 mmHg** من نص الليل لحد **6 الصبح**. اللي ما بينزلش = **non-dipper**.
+          - ==Salt-sensitive HT==: الـ SBP يعلى **≥10 mmHg** مع الـ salt loading؛ أغلبه في **الكبار** و **African Americans**.
+          - **Postural:** normal، orthostatic، و **supine** (في الـ pregnancy والـ tumour).
+      - kind: aside
+        tone: exam
+        page: 81
+        quote: "More than two thirds of hypertensive adults in the United States fail to reach the blood pressure (BP) goal of <140/90 mm Hg"
+        text: |
+          ==HTN paradox==: عدد العيانين **uncontrolled** بيزيد **رغم** تقدم العلاج. أكتر من **تلتين** في أمريكا مش واصلين لـ <140/90، وأكتر من **80%** في كندا وأوروبا control مش كويس.
+      - kind: table
+        page: 81
+        quote: "Office or Clinic 140 90 24-hour 125-130 80 Day 130-135 85 Night 120 70 Home 130-135 85"
+        title: "الـ threshold بيختلف حسب طريقة القياس"
+        columns: [Measurement, SBP, DBP]
+        rows:
+          - ["Office", "140", "90"]
+          - ["24-hour", "125–130", "80"]
+          - ["Day", "130–135", "85"]
+          - ["Night", "120", "70"]
+          - ["Home", "130–135", "85"]
+        hide: [[0, 1], [1, 1], [3, 1], [3, 2], [4, 1]]
+      - kind: check
+        page: 81
+        quote: "Office or Clinic 140 90 24-hour 125-130 80 Day 130-135 85 Night 120 70"
+        question: "Which ambulatory reading is hypertensive?"
+        options:
+          - "Night average 124/72"
+          - "Day average 128/82"
+          - "24-hour average 122/76"
+          - "Home average 128/80"
+        answer: 0
+        why:
+          - "صح: الـ night threshold = 120/70، و 124/72 فوقه."
+          - "الـ day threshold 130–135/85؛ 128/82 تحته."
+          - "الـ 24-hour threshold 125–130/80؛ 122/76 تحته."
+          - "الـ home threshold 130–135/85؛ 128/80 تحته."
+      - kind: figure
+        page: 82
+        quote: "Grade 1 (mild) 140-159 and/or 90-99 Grade 2 (moderate) 160-179 and/or 100-109 Grade 3 (severe) ≥180 ≥110"
+        title: "سلّم الـ BHS"
+        alt: "A vertical BP ladder. Optimal below 120 over 80, normal 120 to 129 over 80 to 84, high normal 130 to 139 over 85 to 89, grade 1 140 to 159 over 90 to 99, grade 2 160 to 179 over 100 to 109, grade 3 at least 180 over at least 110."
+        caption: "كل grade بيطلع **20** في الـ SBP و **10** في الـ DBP. ولو الـ SBP والـ DBP في درجتين مختلفين، خد ==الأعلى==."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <rect x="20" y="250" width="290" height="38" rx="8" class="fg-good"/>
+            <text x="32" y="274" class="t-sm t-b">Optimal</text>
+            <text x="300" y="274" text-anchor="end" class="t-sm">&lt;120 / &lt;80</text>
+            <rect x="20" y="208" width="290" height="38" rx="8" class="fg-good"/>
+            <text x="32" y="232" class="t-sm t-b">Normal</text>
+            <text x="300" y="232" text-anchor="end" class="t-sm">120–129 / 80–84</text>
+            <rect x="20" y="166" width="290" height="38" rx="8" class="fg-box"/>
+            <text x="32" y="190" class="t-sm t-b">High normal</text>
+            <text x="300" y="190" text-anchor="end" class="t-sm">130–139 / 85–89</text>
+            <rect x="20" y="124" width="290" height="38" rx="8" class="fg-acc"/>
+            <text x="32" y="148" class="t-sm t-b">Grade 1 (mild)</text>
+            <text x="300" y="148" text-anchor="end" class="t-sm">140–159 / 90–99</text>
+            <rect x="20" y="82" width="290" height="38" rx="8" class="fg-bad"/>
+            <text x="32" y="106" class="t-sm t-b">Grade 2 (moderate)</text>
+            <text x="300" y="106" text-anchor="end" class="t-sm">160–179 / 100–109</text>
+            <rect x="20" y="40" width="290" height="38" rx="8" class="fg-dot-bad"/>
+            <text x="32" y="64" class="t-sm t-b">Grade 3 (severe)</text>
+            <text x="300" y="64" text-anchor="end" class="t-sm">≥180 / ≥110</text>
+            <text x="165" y="24" text-anchor="middle" class="t-sm t-mut">SBP / DBP, mmHg</text>
+          </svg>
+      - kind: explain
+        page: 82
+        title: "الأسباب الثانوية"
+        quote: "Renal Diabetic nephropathy Chronic glomerulonephritis Adult polycystic disease Chronic tubulointerstitial nephritis Renovascular disease"
+        text: |
+          - ==Renal==: diabetic nephropathy، chronic GN، adult polycystic disease، chronic TIN، **renovascular disease**.
+          - **Endocrine:** Cushing، acromegaly، thyroid، hyperparathyroid.
+          - **Adrenal:** **Conn**، adrenal hyperplasia، **phaeochromocytoma**.
+          - **Cardiovascular:** aortic coarctation.
+          - **Drugs:** NSAIDs، OCPs، steroids، carbenoxolone، liquorice، sympathomimetics، vasopressin، MAOIs مع tyramine.
+      - kind: mnemonic
+        page: 82
+        quote: "Drugs NSAIDS Oral contraceptives Steroids Carbenoxalone Liquorice Sympathomimetics Vasopressin Monoamine oxidase inhibitors"
+        word: "NOSCLSVM"
+        parts:
+          - { key: "N", text: "NSAIDs" }
+          - { key: "O", text: "Oral contraceptives" }
+          - { key: "S", text: "Steroids" }
+          - { key: "C", text: "Carbenoxolone" }
+          - { key: "L", text: "Liquorice" }
+          - { key: "S", text: "Sympathomimetics" }
+          - { key: "V", text: "Vasopressin" }
+          - { key: "M", text: "MAO inhibitors with tyramine" }
+        hook: "تمن حروف = تمن أدوية. اسأل عنهم في كل عيان ضغطه طلع فجأة: الـ NSAIDs والـ OCPs والـ steroids والعرقسوس بيحبسوا ملح، والباقي بيضيّق الشرايين."
+      - kind: try
+        items: [neph.L04.001, neph.L04.009, neph.L04.012, neph.L04.014, neph.L04.018]
+    recap:
+      - "قاعد 5 دقايق، الدراع في مستوى القلب، cuff = 80% من الدراع، وقراءتين بينهم أسبوع."
+      - "ضغط عالي جدًا أول مرة: قيس مكان تاني ودوّر على femoral delay (coarctation، Leriche، Takayasu)."
+      - "Dipper ينزل 10–20 بالليل. Salt-sensitive = SBP ↑≥10 مع الملح."
+      - "Thresholds: office 140/90، 24h 125–130/80، day و home 130–135/85، night 120/70."
+      - "BHS: grade 1 140–159/90–99، grade 2 160–179/100–109، grade 3 ≥180/≥110؛ خد الأعلى."
+    practice: [neph.L04.001, neph.L04.002, neph.L04.003, neph.L04.004, neph.L04.005, neph.L04.006, neph.L04.007, neph.L04.008, neph.L04.009, neph.L04.010, neph.L04.011, neph.L04.012, neph.L04.013, neph.L04.014, neph.L04.015, neph.L04.016, neph.L04.017, neph.L04.018, neph.L04.019, neph.L04.020, neph.L04.021]
+  # ------------------------------------------------------------------
+  - id: neph.L04.lesson2
+    title: "ليه الضغط مش بينزل، ومين بيدفع التمن؟"
+    hook: "قبل ما تضيف دوا رابع، اسأل: هو فعلًا resistant ولا حد بيضحك عليك؟"
+    minutes: 10
+    pages: [83, 87]
+    topics: [refractory, pathogenesis, complications]
+    goals:
+      - "تعدّ أسباب الـ refractory HT (pseudoresistance أولها)"
+      - "تشرح الـ pathogenesis بتاع الـ essential HT وتغيّرات الأوعية"
+      - "تعرف الـ end-organ damage والـ malignant HT ودرجات Keith–Wagener"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 83
+        title: "أسباب الـ refractory HT"
+        quote: "Pseudoresistance Nonadherence to prescribed therapy Volume overload Drug-related causes Concomitant conditions Secondary causes of hypertension"
+        text: |
+          1. ==Pseudoresistance==: white-coat، pseudohypertension في الكبار، **small cuff** في التخان
+          2. **Nonadherence**
+          3. **Volume overload**
+          4. **Drug-related:** جرعات قليلة، diuretic غلط، combinations غلط، interactions، وأدوية بترفع الضغط
+          5. **Concomitant:** obesity، **sleep apnea**، ethanol >**30 ml/day**، anxiety
+          6. **Secondary causes**
+      - kind: sort
+        page: 83
+        quote: "Cyclosporine, tacrolimus Erythropoietin Antidepressants Nonsteroidal anti-inflammatory drugs"
+        prompt: "صنّف سبب الـ refractory HT:"
+        bins: ["Pseudoresistance", "Drug-related", "Concomitant condition"]
+        cards:
+          - { text: "White-coat hypertension", bin: 0 }
+          - { text: "Small cuff on an obese arm", bin: 0 }
+          - { text: "Tacrolimus", bin: 1 }
+          - { text: "Erythropoietin", bin: 1 }
+          - { text: "Nasal decongestant", bin: 1 }
+          - { text: "Sleep apnea", bin: 2 }
+          - { text: "Ethanol over 30 ml a day", bin: 2 }
+        why: "الـ pseudoresistance = القياس نفسه غلط. الأدوية (cyclosporine/tacrolimus، EPO، decongestants، NSAIDs، licorice) بترفع الضغط فعلًا. والـ obesity والـ sleep apnea والكحول حالات مصاحبة."
+      - kind: explain
+        page: 83
+        title: "الـ essential HT: 80–90% من العيانين"
+        quote: "Low birth weight is associated with subsequent high blood pressure due to: Prolonged malnutrition Long term changes in B.V. Structure Low Nephron Number"
+        text: |
+          state معقدة بتربط **genetic** و **behavioral** factors لحد ما ==vascular resistance== يزيد.
+
+          - **Genetic:** بيمشي في العيلة (genes وبيئة مشتركة).
+          - **Fetal:** الـ **low birth weight** ← malnutrition، تغيير في الأوعية، و ==low nephron number==.
+      - kind: explain
+        page: 84
+        title: "البيئة والهرمونات"
+        quote: "Sodium intake: it is a major determinant of blood pressure differences."
+        text: |
+          - **Obesity** (وكمان overestimation للقراءة و sleep disturbance)، **alcohol** بكميات كبيرة.
+          - ==Sodium intake== major determinant؛ والـ **high potassium** ممكن يحمي.
+          - **Stress و pain** بيرفعوا الضغط، بس علاقة الـ **chronic stress** مش معروفة.
+          - **ANS، RAAS، natriuretic peptide، kallikrein–kinin:** بيتحكموا في الـ short-term BP وفي الـ pathogenesis، **مش في maintenance**.
+          - imbalance بين **endothelin** و **NO**، و **insulin resistance** (hyperinsulinemia، glucose intolerance، ↓HDL ↑TG، central obesity).
+      - kind: check
+        page: 84
+        quote: "play a role in pathophysiological regulation of short term blood pressure and pathogenesis of essential HT but are not directly involved in maintenance of HT."
+        question: "Per the lecture, the RAAS and autonomic system in essential HT are:"
+        options:
+          - "Involved in short-term regulation and pathogenesis, not directly in maintenance"
+          - "The main factors maintaining established hypertension"
+          - "Unrelated to hypertension"
+          - "Only active in secondary hypertension"
+        answer: 0
+        why:
+          - "صح: short-term و pathogenesis، مش maintenance."
+          - "الكتاب بيقول بالظبط إنهم not directly involved in maintenance؛ اللي بيحافظ على الضغط هو الـ resistance vessels."
+          - "ليهم دور في الـ pathogenesis."
+          - "الكتاب بيتكلم عنهم في الـ essential HT."
+      - kind: figure
+        page: 85
+        quote: "have increased wall thicknees and reduction of vessel lumen diameter which leads to increased vascular resistance which maintains HT"
+        title: "الأوعية الصغيرة والكبيرة"
+        alt: "Two cross-sections of a small artery: normal with a thin wall and wide lumen, and hypertensive with a thick wall and narrow lumen labelled increased resistance. Below, a large vessel box lists thick media, increased collagen and secondary calcium deposition leading to loss of compliance and a higher pulse wave velocity."
+        caption: "الشرايين الصغيرة: ==wall تخين و lumen ضيق== = resistance عالي وده اللي بيحافظ على الضغط، والـ cardiac output **normal**. الكبيرة: media تخينة، collagen، calcium ← تفقد الـ compliance."
+        svg: |
+          <svg viewBox="0 0 330 290" xmlns="http://www.w3.org/2000/svg">
+            <text x="85" y="20" text-anchor="middle" class="t-sm t-b">Normal arteriole</text>
+            <circle cx="85" cy="80" r="45" class="fg-acc"/>
+            <circle cx="85" cy="80" r="33" class="fg-box"/>
+            <text x="245" y="20" text-anchor="middle" class="t-sm t-b">Hypertensive</text>
+            <circle cx="245" cy="80" r="45" class="fg-bad"/>
+            <circle cx="245" cy="80" r="16" class="fg-box"/>
+            <text x="245" y="146" text-anchor="middle" class="t-sm t-bad">thick wall, narrow lumen</text>
+            <text x="85" y="146" text-anchor="middle" class="t-sm t-mut">thin wall, wide lumen</text>
+            <rect x="20" y="168" width="290" height="110" rx="10" class="fg-box"/>
+            <text x="35" y="192" class="t-sm t-b">Large vessels</text>
+            <text x="35" y="214" class="t-sm">• Thick media  • ↑ Collagen</text>
+            <text x="35" y="234" class="t-sm">• Secondary calcium deposition</text>
+            <text x="35" y="256" class="t-sm t-acc">→ loss of compliance, pressure wave</text>
+            <text x="35" y="272" class="t-sm t-acc">→ ↑ pulse wave velocity (stiffness)</text>
+          </svg>
+      - kind: aside
+        tone: analogy
+        page: 85
+        quote: "Pulse wave velocity, it measures arterial stiffness and is inversely related to distensibility"
+        text: |
+          الـ **pulse wave velocity** زي الصوت في خرطوم: الخرطوم الطري بيمتص الموجة فتمشي بالراحة، والـ **ناشف** بيوصّلها بسرعة. علشان كده الـ PWV بيقيس الـ ==arterial stiffness== وعكس الـ distensibility.
+
+          ومع **↑PVR** القلب يشيل حمل أكتر ← ==LVH==، وده prognostic indicator مهم للـ CV events.
+      - kind: explain
+        page: 86
+        title: "التمن: end-organ damage"
+        quote: "HT patients have a sixfold increase in strokes There is a threefold increase in cardiac death."
+        text: |
+          المخ (hemorrhage، stroke)، القلب (LVH، CHD، CHF)، العين (retinopathy)، الـ PVD، والكلى (renal failure، proteinuria).
+
+          الأرقام: stroke **×6**، cardiac death **×3**، PVD **×2**.
+
+          ==Malignant (accelerated) HT==: الضغط يطلع بسرعة مع **DBP >120** و **fibrinoid necrosis**. من غير علاج: renal failure بـ proteinuria و hematuria، HF، aortic dissection، stroke، cerebral edema، hemorrhage، و HT encephalopathy.
+      - kind: table
+        page: 86
+        quote: "GII: GI + arteriovenous nipping. GIII: GII + flame shaped hemorrhages, soft exudates"
+        title: "Keith–Wagener"
+        columns: [Grade, Adds]
+        rows:
+          - ["I", "Tortuous arteries, silver wiring"]
+          - ["II", "AV nipping"]
+          - ["III", "Flame hemorrhages, cotton wool exudates"]
+          - ["IV", "Papilledema"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1]]
+      - kind: aside
+        tone: trap
+        page: 86
+        quote: "GIII and IV are diagnostic of malignant HT"
+        text: |
+          ==GIII و GIV== هما اللي **diagnostic of malignant HT**. يعني مش لازم تستنى الـ papilledema: الـ flame hemorrhages والـ cotton wool لوحدهم كفاية.
+      - kind: try
+        items: [neph.L04.022, neph.L04.023, neph.L04.031, neph.L04.047, neph.L04.049]
+    recap:
+      - "Refractory = مش واصل للـ target على triple therapy فيها diuretic في عيان ملتزم."
+      - "الأسباب: pseudoresistance، nonadherence، volume، drugs، concomitant، secondary."
+      - "Essential 80–90%: genetic، fetal (low nephron number)، sodium، obesity، endothelin/NO، insulin resistance."
+      - "Resistance vessels: wall تخين و lumen ضيق؛ الـ cardiac output normal؛ LVH = prognosis."
+      - "Malignant: DBP >120 + fibrinoid necrosis؛ KW III و IV diagnostic."
+    practice: [neph.L04.022, neph.L04.023, neph.L04.024, neph.L04.025, neph.L04.026, neph.L04.027, neph.L04.028, neph.L04.029, neph.L04.030, neph.L04.031, neph.L04.032, neph.L04.033, neph.L04.034, neph.L04.035, neph.L04.036, neph.L04.037, neph.L04.038, neph.L04.039, neph.L04.040, neph.L04.041, neph.L04.042, neph.L04.043, neph.L04.044, neph.L04.045, neph.L04.046, neph.L04.047, neph.L04.048, neph.L04.049, neph.L04.050, neph.L04.051, neph.L04.116]
+  # ------------------------------------------------------------------
+  - id: neph.L04.lesson3
+    title: "الكلى والضغط، والعلاج خطوة خطوة"
+    hook: "الكلى بترفع الضغط والضغط بيبوّظ الكلى. نكسر الدايرة دي إزاي؟"
+    minutes: 10
+    pages: [87, 91]
+    topics: [renal-ht, treatment]
+    goals:
+      - "تعرف أرقام الـ renoparenchymal HT وآلياته"
+      - "تحفظ الـ lifestyle table والـ targets"
+      - "تختار أول دوا وتصعّد بـ A، C، D"
+    status: unverified
+    steps:
+      - kind: table
+        page: 87
+        quote: "60% of CKD Stage III (GFR 30-59 mL / min) are hypertensive >80% CKD stage IV – V are hypertensive"
+        title: "Renoparenchymal HT بالأرقام"
+        columns: [Group, Number]
+        rows:
+          - ["CKD stage III hypertensive", "60%"]
+          - ["CKD stage IV–V hypertensive", ">80%"]
+          - ["Hypertensive CKD uncontrolled", "70%"]
+          - ["HD patients hypertensive", "86%"]
+          - ["HD patients controlled", "Only 30%"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+      - kind: explain
+        page: 87
+        title: "إزاي الكلى بترفع الضغط"
+        quote: "one reason to sodium sensitivity could result from renal TIN ischemia which needs a high pressure for natriuresis."
+        text: |
+          ==Proteinuria== أقوى predictor للـ HT وللـ poor control.
+
+          1. **Low nephron number** من الحمل ← Na و volume homeostasis أضعف.
+          2. **Salt و water:** الـ **TIN ischemia** محتاجة ضغط أعلى علشان تطلّع الصوديوم (**pressure natriuresis**).
+          3. **SNS:** ↑renin، ↓Na excretion، ↓RBF ← renal damage و salt-sensitive HT. العلاج: renal denervation، nephrectomy، ACEi و ARBs. و ==renalase== (من الكلى) بيكسّر الـ catecholamines.
+      - kind: figure
+        page: 88
+        quote: "Renal damage → ↑ ACE expression → ↑ATII → renal damage + SSHT"
+        title: "دايرة الـ RAAS في الكلى"
+        alt: "A cycle: renal damage leads to increased ACE expression, then increased angiotensin II, which causes sodium reabsorption, arteriolar vasoconstriction and aldosterone secretion, leading back to more renal damage and salt-sensitive hypertension."
+        caption: "الـ renin من الـ **JG cells** في الـ afferent arteriole. الـ AT II: ↑Na reabsorption، vasoconstriction، aldosterone. والدايرة تقفل: damage ← ↑ACE ← ↑AT II ← damage أكتر."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L04a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-bad"/></marker></defs>
+            <rect x="105" y="12" width="120" height="40" rx="10" class="fg-bad"/>
+            <text x="165" y="37" text-anchor="middle" class="t-sm t-b">Renal damage</text>
+            <rect x="220" y="120" width="104" height="40" rx="10" class="fg-acc"/>
+            <text x="272" y="145" text-anchor="middle" class="t-sm t-b">↑ ACE</text>
+            <rect x="105" y="236" width="120" height="40" rx="10" class="fg-acc"/>
+            <text x="165" y="261" text-anchor="middle" class="t-sm t-b">↑ Angiotensin II</text>
+            <rect x="6" y="110" width="110" height="60" rx="10" class="fg-box"/>
+            <text x="61" y="130" text-anchor="middle" class="t-sm">↑ Na reabsorption</text>
+            <text x="61" y="146" text-anchor="middle" class="t-sm">vasoconstriction</text>
+            <text x="61" y="162" text-anchor="middle" class="t-sm">aldosterone</text>
+            <path d="M225 40 C270 50 280 80 275 114" class="fg-arrow-bad" fill="none" marker-end="url(#L04a)"/>
+            <path d="M272 162 C272 210 250 250 230 254" class="fg-arrow-bad" fill="none" marker-end="url(#L04a)"/>
+            <path d="M105 254 C70 245 60 210 61 174" class="fg-arrow-bad" fill="none" marker-end="url(#L04a)"/>
+            <path d="M61 108 C60 70 80 40 100 34" class="fg-arrow-bad" fill="none" marker-end="url(#L04a)"/>
+            <text x="165" y="150" text-anchor="middle" class="t-sm t-mut">+ salt-sensitive HT</text>
+          </svg>
+      - kind: explain
+        page: 88
+        title: "Oxidative stress"
+        quote: "Salt sensitve HT and CKD have ↑ level of asymmetric dimethyl argenine (ADMA) which inhibits NO synthetase"
+        text: |
+          الكلى بتطلّع **ROS** وعندها enzymes تعادلها. في الـ CKD الـ enzymes دي بتبوظ ← ==↓NO== (nitrosative stress) ← vasoconstriction.
+
+          وكمان **ADMA** بتعلى في الـ CKD والـ salt-sensitive HT، وهي بتمنع الـ **NO synthase**.
+      - kind: explain
+        page: 88
+        title: "مبادئ العلاج"
+        quote: "First dose profound hypotension occurs with ACEi Alpha blockers (Post Synaptic)"
+        text: |
+          Assessment، قياس متكرر، lifestyle، target، ambulatory target.
+
+          - ==أغلب العيانين محتاجين combination==.
+          - **First-dose profound hypotension:** مع **ACEi** و **alpha blockers**.
+          - مع **ACEi و ARBs** تابع الـ renal function، وممكن **angioedema**.
+          - **Refractory** = مش واصل للـ target على **optimal triple therapy including a diuretic** في عيان ملتزم.
+      - kind: table
+        page: 89
+        quote: "Reduce salt intake <100 mmol/day (<6 g NaCl or <2.4 g Na/day)"
+        title: "Lifestyle"
+        columns: [Measure, Target]
+        rows:
+          - ["BMI", "20–25 kg/m²"]
+          - ["Walk", "≥30 min most days"]
+          - ["Salt", "<100 mmol/day (<6 g NaCl)"]
+          - ["Alcohol", "≤3 units men, <2 women"]
+          - ["Fruit, vegetables", "≥5 portions/day"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+      - kind: aside
+        tone: joke
+        text: |
+          الـ lifestyle table كله في جملة: **امشي نص ساعة، كُل خمس حاجات خضرا، وما تحطش ملح زيادة على الفول**. ولو قال «بس الفول مش بيتاكل من غير ملح»، قوله إن الـ cardiologist كمان مش بيتاكل.
+      - kind: table
+        page: 90
+        quote: "Uncomplicated <140/90 Complicated Diabetes mellitus <130/80 Kidney disease <130/80*"
+        title: "Targets (ESH/ESC و JNC 7)"
+        columns: [Patient, Goal]
+        rows:
+          - ["Uncomplicated", "<140/90"]
+          - ["Diabetes", "<130/80"]
+          - ["Kidney disease", "<130/80; lower if proteinuria >1 g/day"]
+          - ["Stroke, MI", "<130/80"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: update
+        page: 90
+        quote: "*Lower if proteinuria is >1 g/day"
+        text: "الـ **KDIGO 2021** بيقترح SBP **<120** (standardized office BP) في الـ CKD لو العيان مستحمل، والـ **ESH 2023** بيستهدف <130/80 لأغلب المتعالجين. في الامتحان جاوب بجدول الكتاب: <130/80، وأقل لو الـ **proteinuria** >1 g/day."
+        ref: "KDIGO BP in CKD 2021; ESH 2023"
+      - kind: figure
+        page: 91
+        quote: "Then GOAL is ….to Achieve reduction of BP And protect TOD"
+        title: "تختار أول دوا إزاي"
+        alt: "A four-step flowchart. Step 1: younger than 55 gets A; 55 or older or black gets C or D. Step 2: A plus C or A plus D. Step 3: A plus C plus D. Step 4: add further diuretic, alpha-blocker or beta-blocker and consider specialist advice."
+        caption: "**A** = ACEi (ARB لو مش مستحمل)، **C** = CCB، **D** = thiazide-type. والهدف مش بس تنزّل الضغط، كمان ==protect TOD==."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L04b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker></defs>
+            <rect x="10" y="10" width="145" height="50" rx="8" class="fg-acc"/>
+            <text x="82" y="30" text-anchor="middle" class="t-sm">Younger than 55</text>
+            <text x="82" y="50" text-anchor="middle" class="t-b">A</text>
+            <rect x="175" y="10" width="145" height="50" rx="8" class="fg-good"/>
+            <text x="247" y="30" text-anchor="middle" class="t-sm">55+ or black</text>
+            <text x="247" y="50" text-anchor="middle" class="t-b">C or D</text>
+            <path d="M82 62 L150 92" class="fg-arrow" marker-end="url(#L04b)"/>
+            <path d="M247 62 L180 92" class="fg-arrow" marker-end="url(#L04b)"/>
+            <rect x="85" y="96" width="160" height="40" rx="8" class="fg-box"/>
+            <text x="165" y="121" text-anchor="middle" class="t-b">A + C  or  A + D</text>
+            <path d="M165 138 V158" class="fg-arrow" marker-end="url(#L04b)"/>
+            <rect x="85" y="162" width="160" height="40" rx="8" class="fg-box"/>
+            <text x="165" y="187" text-anchor="middle" class="t-b">A + C + D</text>
+            <path d="M165 204 V224" class="fg-arrow" marker-end="url(#L04b)"/>
+            <rect x="20" y="228" width="290" height="62" rx="8" class="fg-bad"/>
+            <text x="165" y="250" text-anchor="middle" class="t-sm t-b">Add diuretic, alpha- or beta-blocker</text>
+            <text x="165" y="272" text-anchor="middle" class="t-sm">Consider specialist advice</text>
+          </svg>
+      - kind: update
+        page: 91
+        quote: "A = ACE inhibitor (angiotensin-Il receptor antagonist if ACE intolerant)"
+        text: "الـ **NICE 2019** (اتحدّث 2022): ACEi أو ARB تحت 55، و CCB لـ 55+ أو Black African/Caribbean، ويفضّل ARB على الـ **ACE inhibitor** في الـ Black patients لما تجمع، وفي step 4 low-dose spironolactone لو K ≤4.5. الكتاب هو إجابة الامتحان."
+        ref: "NICE NG136, 2019 (2022 update)"
+      - kind: check
+        page: 91
+        quote: "Black patients are those of African or Caribbean descent and not mixed-race, Asian or Chinese patients"
+        question: "A 40-year-old Nigerian man has new hypertension. First drug per the figure?"
+        options:
+          - "CCB or thiazide-type diuretic"
+          - "ACE inhibitor"
+          - "Beta-blocker"
+          - "Alpha-blocker"
+        answer: 0
+        why:
+          - "صح: الـ black patients من أي سن بيبدأوا بـ C أو D."
+          - "الـ A للأصغر من 55 من غير black."
+          - "الـ beta-blocker في step 4."
+          - "الـ alpha-blocker في step 4."
+      - kind: try
+        items: [neph.L04.052, neph.L04.055, neph.L04.070, neph.L04.073, neph.L04.078]
+    recap:
+      - "60% من CKD III و >80% من IV–V عندهم HT؛ 86% من الـ HD و 30% بس controlled؛ proteinuria أقوى predictor."
+      - "الآليات: low nephron number، TIN ischemia (salt)، SNS، RAAS cycle، ↓NO و ADMA."
+      - "First-dose hypotension: ACEi و alpha-blockers. تابع الـ RF والـ angioedema مع ACEi/ARB."
+      - "Targets: <140/90؛ <130/80 في DM و CKD (أقل لو proteinuria >1 g) و high risk."
+      - "A تحت 55؛ C أو D لـ 55+ أو black؛ A+C أو A+D؛ A+C+D؛ وبعدين diuretic أو alpha أو beta."
+    practice: [neph.L04.052, neph.L04.053, neph.L04.054, neph.L04.055, neph.L04.056, neph.L04.057, neph.L04.058, neph.L04.059, neph.L04.060, neph.L04.061, neph.L04.062, neph.L04.063, neph.L04.064, neph.L04.065, neph.L04.066, neph.L04.067, neph.L04.068, neph.L04.069, neph.L04.070, neph.L04.071, neph.L04.072, neph.L04.073, neph.L04.074, neph.L04.075, neph.L04.076, neph.L04.077, neph.L04.078, neph.L04.079, neph.L04.080, neph.L04.081, neph.L04.082, neph.L04.119, neph.L04.121]
+  # ------------------------------------------------------------------
+  - id: neph.L04.lesson4
+    title: "الأدوية، الطوارئ، والـ renal artery stenosis"
+    hook: "كل دوا ليه عيان بيحبه وعيان لازم يبعد عنه. وفي الطوارئ: مش كل ضغط عالي بينزل بنفس السرعة."
+    minutes: 10
+    pages: [92, 97]
+    topics: [drugs, emergencies, renovascular]
+    goals:
+      - "تختار الدوا حسب الحالة المصاحبة وتعرف موانعه"
+      - "تعرف drug of choice والـ target في كل hypertensive emergency"
+      - "تعرف امتى تدوّر على RAS وتشخّصه إزاي"
+    status: unverified
+    steps:
+      - kind: match
+        page: 92
+        quote: "Benign prostatic hypertrophy Phaeochromocytoma crisis Postural hypotension, urinary incontinence Profound hypotension"
+        prompt: "وصّل الدوا بالعيان اللي بيستفيد منه:"
+        pairs:
+          - ["Alpha-blocker", "Benign prostatic hypertrophy"]
+          - ["Spironolactone", "Primary hyperaldosteronism"]
+          - ["Methyldopa", "Pregnancy and breastfeeding"]
+          - ["Aliskiren", "Resistant hypertension"]
+          - ["Hydralazine + nitrates", "Black patients with heart failure"]
+        why: "الـ alpha-blocker بيرخّي البروستاتا، والـ spironolactone بيقفل مستقبل الـ aldosterone، والـ methyldopa أأمن في الحمل، والـ aliskiren renin inhibitor للـ resistant HT، والـ hydralazine مع nitrates في الـ black patients مع HF."
+      - kind: table
+        page: 92
+        quote: "Diabetes, peripheral vascular disease, asthma/COPD, heart block, unstable heart failure"
+        title: "الموانع والتحذيرات"
+        columns: [Drug, Caution]
+        rows:
+          - ["Alpha-blockers", "Postural hypotension, incontinence"]
+          - ["Spironolactone", "Hyperkalaemia"]
+          - ["ACEi, ARB", "Renal failure, renovascular PVD, pregnancy"]
+          - ["Beta-blockers", "Asthma/COPD, heart block, PVD, diabetes"]
+          - ["Verapamil", "With beta-blockers, heart block"]
+          - ["Methyldopa", "Monitor blood counts and LFTs"]
+          - ["Thiazides", "Gout, diabetes, hypokalaemia"]
+          - ["Hydralazine", "SLE"]
+          - ["Nitroprusside", "Intra-arterial BP; avoid prolonged use"]
+        hide: [[1, 1], [2, 1], [3, 1], [6, 1], [7, 1]]
+      - kind: aside
+        tone: trap
+        page: 92
+        quote: "Renal failure (monitor electrolytes), peripheral vascular disease (if renovascular disease), pregnancy"
+        text: |
+          الـ **PVD** مع ACEi أو ARB مش مانع في حد ذاته؛ الخوف إن عنده ==renovascular disease== كمان، فالكلى تقع لما تقفل الـ AT II. علشان كده تابع الـ electrolytes والـ creatinine.
+      - kind: explain
+        page: 94
+        title: "الطوارئ: drug of choice"
+        quote: "Aortic dissection Beta blocker+ nitroprusside 120 mm Hg systolic in 20 minutes (if possible)"
+        text: |
+          - ==Aortic dissection==: **beta-blocker + nitroprusside**، SBP **120 في 20 دقيقة** لو ينفع.
+          - **Ischemia/MI:** nitroglycerin، nitroprusside، nicardipine أو clevidipine حتى يقف الـ ischemia.
+          - **HF/pulmonary edema:** nitroprusside و/أو nitroglycerin؛ غالبًا **10–15%** كفاية.
+          - **Bleeding** (epistaxis، hematuria، suture lines): أي دوا ± anxiolytic، 10–15% في 1–2 ساعة.
+          - **Eclampsia:** MgSO4، hydralazine، methyldopa؛ DBP <90.
+          - **Pheo، cocaine:** ==phentolamine==.
+          - **Renal** (hematuria أو acute renal impairment): **fenoldopam**، 0–25% MAP في 1–12 ساعة.
+          - **Encephalopathy:** nitroprusside، **25% في 2–3 ساعات**. **Head injury:** nitroprusside، 0–25% (controversial).
+      - kind: reveal
+        page: 94
+        quote: "Hypertensive encephalopathy Nitroprusside 25% reduction over 2-3 hours"
+        prompt: "ليه في الـ dissection بننزل بسرعة لـ 120، وفي الـ encephalopathy 25% بس؟"
+        answer: |
+          في الـ **dissection** كل ضربة قلب بضغط عالي بتشقّ الـ aorta أكتر، فلازم تقلل الـ shear بسرعة (والـ beta-blocker الأول علشان الـ reflex tachycardia من الـ nitroprusside).
+
+          في المخ، الـ **autoregulation** اتنقل لفوق في العيان المزمن؛ لو نزّلت بسرعة المخ يعمل **ischemia**. علشان كده **25% في 2–3 ساعات**. (الشرح فسيولوجي؛ الأرقام من الكتاب.)
+      - kind: check
+        page: 94
+        quote: "Major hematuria or acute renal impairment Fenoldopam 0% to 25% reduction in mean arterial pressure over 1-12 hours"
+        question: "Hypertensive emergency with acute renal impairment: drug of choice?"
+        options:
+          - "Fenoldopam"
+          - "Phentolamine"
+          - "MgSO4"
+          - "Beta-blocker + nitroprusside"
+        answer: 0
+        why:
+          - "صح: الـ renal row = fenoldopam، 0–25% MAP في 1–12 ساعة."
+          - "الـ phentolamine للـ pheo والـ cocaine."
+          - "الـ MgSO4 للـ eclampsia."
+          - "ده الـ dissection."
+      - kind: explain
+        page: 95
+        title: "Renal artery stenosis"
+        quote: "Reno vascular HT (RVHT). Progressive loss of RF due to ischemic nephropathey Recurrent episodes of flash, pulmonary edema Asymptomatic"
+        text: |
+          **4 صور:** renovascular HT، **ischemic nephropathy**، **flash pulmonary edema** متكرر، أو asymptomatic.
+
+          **الآلية:** stenosis significant ← ↓renal perfusion ← ==RAAS activation== ← RVHT.
+
+          **السبب:**
+          - **Atherosclerosis:** الشائع، في الكبار، و **15%** يوصلوا ESRD.
+          - ==Fibromuscular dysplasia==: ستات صغيرين.
+      - kind: mnemonic
+        page: 95
+        quote: "Sudden onset of HT in healthy youger < 30 or older age > 50 year"
+        word: "SWAP RABH"
+        parts:
+          - { key: "S", text: "Sudden onset HT, <30 or >50 years" }
+          - { key: "W", text: "Worsening of previously well-controlled HT" }
+          - { key: "A", text: "Atrophic kidney on one side" }
+          - { key: "P", text: "Pulmonary edema, recurrent flash" }
+          - { key: "R", text: "Renal failure after RAAS antagonists" }
+          - { key: "A", text: "Atherosclerosis in other vascular beds" }
+          - { key: "B", text: "Bruit" }
+          - { key: "H", text: "Hypokalemia, unexplained" }
+        hook: "**SWAP RABH**: «بدّل الربح»: لو العيان فيه واحدة من التمانية دول، بدّل الـ plan ودوّر على RAS."
+      - kind: table
+        page: 96
+        quote: "CTA 98% Sensitive and 94% Specific."
+        title: "تشخيص الـ RAS"
+        columns: [Test, Note]
+        rows:
+          - ["Duplex US", "First listed"]
+          - ["CTA", "98% sensitive, 94% specific"]
+          - ["MRA", "100% sensitive, 97% specific; NSF risk"]
+          - ["Conventional DSA", "Gold standard"]
+        hide: [[1, 1], [2, 1], [3, 1]]
+      - kind: case
+        page: 95
+        quote: "Renal failure precipitated, By RAAS antagonists."
+        stem: "72-year-old smoker with carotid disease. Ramipril started 10 days ago; creatinine rose from 1.2 to 2.3 mg/dL. Ultrasound: left kidney 8 cm."
+        steps:
+          - question: "What do you suspect?"
+            options: ["Atherosclerotic renal artery stenosis", "Fibromuscular dysplasia", "Acute interstitial nephritis"]
+            answer: 0
+            why: "Renal failure بعد RAAS antagonist، atrophic kidney، و atherosclerosis في مكان تاني = screen for RAS. الـ FMD في الستات الصغيرين."
+          - question: "His eGFR is 25. Which test risks nephrogenic systemic fibrosis?"
+            options: ["MRA", "Duplex ultrasound", "Conventional DSA"]
+            answer: 0
+            why: "الـ MRA (gadolinium) ممكن يعمل NSF رغم إنه 100% sensitive."
+          - question: "Treatment options in the book?"
+            options: ["Medical, lifestyle, angioplasty and stenting, surgery", "Nephrectomy only", "Dialysis"]
+            answer: 0
+            why: "الكتاب بيذكر الأربعة: medical، lifestyle، PC angioplasty and stenting، surgery."
+      - kind: update
+        page: 96
+        quote: "Medical Treatment Life style Modification. P.C. Angioplasty and stenting Surgery"
+        text: "**ASTRAL (2009)** و **CORAL (2014)** ما لقوش فايدة للـ stenting فوق العلاج الدوائي في أغلب الـ atherosclerotic RAS؛ الـ stent بيتساب للـ flash pulmonary edema أو الـ GFR اللي بيقع بسرعة أو الـ refractory HT. والـ FMD بيتعمله angioplasty من غير stent. الكتاب هو إجابة الامتحان."
+        ref: "ASTRAL 2009; CORAL 2014"
+      - kind: try
+        items: [neph.L04.083, neph.L04.097, neph.L04.105, neph.L04.109, neph.L04.110]
+    recap:
+      - "Alpha: BPH، pheo. Spironolactone: Conn، HF. ACEi/ARB: <55، HF، DN، CKD؛ ممنوع في الحمل."
+      - "Beta-blockers ممنوعين في asthma و heart block؛ verapamil مع beta-blocker لأ؛ methyldopa في الحمل."
+      - "Dissection: BB + nitroprusside لـ 120 في 20 دقيقة. Encephalopathy: 25% في 2–3 ساعات. Pheo و cocaine: phentolamine. Renal: fenoldopam."
+      - "RAS: atherosclerosis (كبار، 15% ESRD) أو FMD (ستات صغيرين). Screening = **SWAP RABH**."
+      - "CTA 98/94، MRA 100/97 (NSF)، DSA gold standard."
+    practice: [neph.L04.083, neph.L04.084, neph.L04.085, neph.L04.086, neph.L04.087, neph.L04.088, neph.L04.089, neph.L04.090, neph.L04.091, neph.L04.092, neph.L04.093, neph.L04.094, neph.L04.095, neph.L04.096, neph.L04.097, neph.L04.098, neph.L04.099, neph.L04.100, neph.L04.101, neph.L04.102, neph.L04.103, neph.L04.104, neph.L04.105, neph.L04.106, neph.L04.107, neph.L04.108, neph.L04.109, neph.L04.110, neph.L04.111, neph.L04.112, neph.L04.113, neph.L04.114, neph.L04.115, neph.L04.117, neph.L04.118, neph.L04.120]

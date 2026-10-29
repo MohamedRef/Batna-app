@@ -1,0 +1,254 @@
+schema: batna.lesson/v1
+lecture: rheum.L10
+lessons:
+  # ------------------------------------------------------------------
+  - id: rheum.L10.lesson1
+    title: "الـ T cells والـ biologics: مين بنضرب؟"
+    hook: "كل biologic اسمه غريب، بس الفكرة واحدة: نختار cytokine أو خلية ونقفلها."
+    minutes: 8
+    pages: [173, 175]
+    topics: [approaches, tcells, molecules]
+    goals:
+      - "تعرف التلات استراتيجيات الكبار"
+      - "ترسم Th1 و Th2 و Th17 و T reg بالـ cytokines"
+      - "تفرّق soluble receptor عن monoclonal antibody"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 173
+        title: "تلات طرق"
+        quote: "Interfere with cytokine function or production. Inhibit the ―second signal‖ required for T-cell activation. Deplete B cells."
+        text: |
+          من أواخر التسعينات، الـ biologics والـ kinase inhibitors غيّروا علاج الـ RA وأخواتها. بيعملوا واحدة من تلاتة:
+          1. ==Interfere with cytokines== (function أو production)
+          2. يوقفوا الـ **second signal** اللي الـ T cell محتاجاه علشان تتنشط
+          3. ==Deplete B cells==
+      - kind: figure
+        page: 174
+        quote: "Some of the proinflammatory mediators produced by Th1 cells include interferon gamma (IFNg), tumor necrosis factor (TNF), and interleukin (IL)- 2."
+        title: "أربع عائلات T helper"
+        alt: "A naive T cell in the centre branches into four boxes. Th1 makes IFN-gamma, TNF and IL-2 and drives RA, psoriasis and graft rejection. Th2 makes IL-4, 5, 10 and 13 and drives antibodies, eosinophils, SLE and systemic sclerosis. Th17 forms under TGF-beta, IL-6 and IL-23 and makes IL-17. T reg forms under TGF-beta and protects with IL-10 and TGF-beta. A double arrow between Th1 and Th2 shows mutual inhibition."
+        caption: "الـ ==Th1== والـ **Th2** بيكبتوا بعض، والـ **Th17** بيعمل IL-17، والـ ==T reg== هو الفرامل."
+        svg: |
+          <svg viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L10t" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" class="fg-head"/></marker></defs>
+            <circle cx="165" cy="165" r="32" class="fg-ink"/>
+            <text x="165" y="161" text-anchor="middle" class="t-sm t-b">Naive</text>
+            <text x="165" y="177" text-anchor="middle" class="t-sm t-b">T cell</text>
+            <rect x="10" y="10" width="140" height="85" rx="10" class="fg-bad"/>
+            <text x="80" y="32" text-anchor="middle" class="t-b">Th1</text>
+            <text x="80" y="52" text-anchor="middle" class="t-sm">IFN-γ, TNF, IL-2</text>
+            <text x="80" y="72" text-anchor="middle" class="t-sm t-mut">RA, psoriasis,</text>
+            <text x="80" y="88" text-anchor="middle" class="t-sm t-mut">graft rejection</text>
+            <rect x="180" y="10" width="140" height="85" rx="10" class="fg-acc"/>
+            <text x="250" y="32" text-anchor="middle" class="t-b">Th2</text>
+            <text x="250" y="52" text-anchor="middle" class="t-sm">IL-4, 5, 10, 13</text>
+            <text x="250" y="72" text-anchor="middle" class="t-sm t-mut">antibodies, eos,</text>
+            <text x="250" y="88" text-anchor="middle" class="t-sm t-mut">SLE, SSc, cGVHD</text>
+            <path d="M152 50 H178" class="fg-arrow-bad" marker-end="url(#L10t)"/>
+            <path d="M178 62 H152" class="fg-arrow-bad" marker-end="url(#L10t)"/>
+            <rect x="10" y="235" width="140" height="85" rx="10" class="fg-good"/>
+            <text x="80" y="257" text-anchor="middle" class="t-b">Th17</text>
+            <text x="80" y="277" text-anchor="middle" class="t-sm">TGF-β + IL-6 + IL-23</text>
+            <text x="80" y="297" text-anchor="middle" class="t-sm">makes IL-17</text>
+            <rect x="180" y="235" width="140" height="85" rx="10" class="fg-thin"/>
+            <text x="250" y="257" text-anchor="middle" class="t-b">T reg</text>
+            <text x="250" y="277" text-anchor="middle" class="t-sm">TGF-β</text>
+            <text x="250" y="297" text-anchor="middle" class="t-sm">protects: IL-10, TGF-β</text>
+            <path d="M143 145 L110 98" class="fg-arrow" marker-end="url(#L10t)"/>
+            <path d="M187 145 L220 98" class="fg-arrow" marker-end="url(#L10t)"/>
+            <path d="M143 187 L110 232" class="fg-arrow" marker-end="url(#L10t)"/>
+            <path d="M187 187 L220 232" class="fg-arrow" marker-end="url(#L10t)"/>
+          </svg>
+      - kind: match
+        page: 174
+        quote: "IFNg and IL-2 can inhibit Th2 cell proliferation."
+        prompt: "وصّل الـ cytokine بالخلية اللي بتعمله:"
+        pairs:
+          - ["IFN-γ", "Th1"]
+          - ["IL-4", "Th2"]
+          - ["IL-17", "Th17"]
+          - ["IL-10 + TGF-β (protective)", "T reg"]
+        why: "الـ Th1 = IFN-γ و TNF و IL-2. الـ Th2 = IL-4، 5، 10، 13. الـ Th17 = IL-17. والـ T reg بيحمي بـ IL-10 و TGF-β."
+      - kind: reveal
+        page: 174
+        quote: "The activation of Th2 cells contributes to the development of chronic graft- versus-host disease, systemic lupus erythematosus, and systemic sclerosis."
+        prompt: "ليه الـ SLE بيتحسب على Th2 مش Th1؟"
+        answer: |
+          لأن الـ **Th2** بيحفّز الـ **B cells تعمل antibodies**، والـ SLE مرض ==autoantibodies== في الأساس. أما الـ RA والـ psoriasis فـ **cell-mediated** فبيتحسبوا على Th1.
+      - kind: explain
+        page: 174
+        title: "Th17 و T reg"
+        quote: "Th17 cells differentiate from naïve T cells in response to antigen, transforming growth factor (TGF) beta, IL-6, and IL-23."
+        text: |
+          - **Th17:** antigen + ==TGF-β + IL-6 + IL-23==. بيعمل **IL-17** اللي بيكبّر الالتهاب ويحفّز keratinocytes و synoviocytes و macrophages و fibroblasts و neutrophils.
+          - **T reg:** antigen + **TGF-β**. بيحمي بـ **IL-10** و TGF-β. ليه دور في GCA و GPA و RA و SLE و SpA و Sjögren. لسه **مش متجرب** كـ cell therapy.
+      - kind: aside
+        tone: analogy
+        page: 174
+        quote: "T reg cells function largely to regulate other T cells."
+        text: |
+          الـ **TGF-β** زي "مدرسة" بتخرّج نوعين: لو معاه **IL-6** يطلع ==Th17== مشاغب، ولو لوحده يطلع ==T reg== ناظر المدرسة اللي بيهدّي الكل.
+      - kind: table
+        page: 175
+        quote: "Soluble receptor antagonists (Etanarcept). Monoclonal antibodies to cytokines or their receptors (Infleximab, Adalimumab, Certolizumab, Golomumab, Secukinumab, and ustekinumab)."
+        title: "أنواع الجزيئات"
+        columns: [Type, Examples]
+        rows:
+          - ["Soluble receptor", "Etanercept"]
+          - ["Monoclonal antibody", "Infliximab, adalimumab, certolizumab, golimumab, secukinumab, ustekinumab"]
+          - ["Receptor antagonist proteins", "Anakinra, rilonacept, canakinumab, brodalumab, IL-6R antagonist"]
+          - ["Oral small molecule", "JAK inhibitors"]
+        hide: [[0, 1], [3, 1]]
+      - kind: aside
+        tone: tip
+        page: 175
+        quote: "Soluble receptor antagonists (Etanarcept)."
+        text: |
+          الاسم بيقولك النوع: آخره **-cept** = receptor (==etanercept==)، آخره **-mab** = monoclonal antibody: **-ximab** chimeric (infliximab)، **-umab** human (adalimumab، golimumab، secukinumab). (قاعدة تسمية عامة، مش من الكتاب.)
+      - kind: check
+        page: 175
+        quote: "The combination of a TNF blocker and methotrexate was superior to either methotrexate or a TNF blocker alone"
+        question: "RA on methotrexate, still active. Best evidence in the lecture?"
+        options:
+          - "Add a TNF blocker to methotrexate"
+          - "Swap methotrexate for a TNF blocker alone"
+          - "Double the methotrexate"
+          - "Add a T reg cell infusion"
+        answer: 0
+        why:
+          - "صح: TNF blocker + MTX أحسن من كل واحد لوحده."
+          - "الـ TNF blocker لوحده أقل من الكومبو."
+          - "الكتاب ما قارنش زيادة الجرعة."
+          - "الـ T reg لسه مش متجرب إكلينيكيًا."
+      - kind: try
+        items: [rheum.L10.001, rheum.L10.004, rheum.L10.007, rheum.L10.011, rheum.L10.014]
+    recap:
+      - "Biologics: يقفلوا cytokines، يوقفوا الـ second signal، أو يشيلوا B cells."
+      - "Th1 (IFN-γ، TNF، IL-2) ضد Th2 (IL-4، 5، 10، 13). Th17 = TGF-β + IL-6 + IL-23 ← IL-17. T reg = TGF-β، يحمي بـ IL-10."
+      - "Etanercept = soluble receptor. الـ -mab = antibodies. JAK inhibitors oral."
+      - "TNF blocker + MTX أحسن من أي واحد لوحده."
+    practice: [rheum.L10.001, rheum.L10.002, rheum.L10.003, rheum.L10.004, rheum.L10.005, rheum.L10.006, rheum.L10.007, rheum.L10.008, rheum.L10.009, rheum.L10.010, rheum.L10.011, rheum.L10.012, rheum.L10.013, rheum.L10.014, rheum.L10.015]
+  # ------------------------------------------------------------------
+  - id: rheum.L10.lesson2
+    title: "IL-17، B cells، biosimilars، وحبوب الـ kinase"
+    hook: "حقنة كل 3 شهور، infusion كل شهر، أو حباية الصبح: كل دوا بيقفل باب مختلف."
+    minutes: 9
+    pages: [175, 179]
+    topics: [il17-il23, bcells, biosimilars, kinase]
+    goals:
+      - "تفرّق secukinumab عن ustekinumab"
+      - "تشرح rituximab و belimumab (سؤال الكتاب)"
+      - "تعرف الـ biosimilar وأعراض tofacitinib و apremilast"
+    status: unverified
+    steps:
+      - kind: table
+        page: 176
+        quote: "Ustekinumab is a human IgG1 kappa monoclonal antibody that binds to the shared p40 subunit of IL-12 and IL- 23."
+        title: "IL-17 ضد IL-12/23"
+        columns: [Feature, Secukinumab, Ustekinumab]
+        rows:
+          - ["Target", "IL-17", "p40 of IL-12 and IL-23"]
+          - ["Dosing", "Monthly SC", "Every 12 weeks SC"]
+          - ["Uses", "Psoriasis, PsA, AS (uveitis)", "Psoriasis, PsA"]
+        hide: [[0, 1], [0, 2], [1, 2]]
+      - kind: aside
+        tone: tip
+        page: 176
+        quote: "Its efficacy in rheumatoid arthritis appears to be modest"
+        text: |
+          الـ **secukinumab** ممتاز في الجلد والـ spine، بس في الـ ==RA efficacy modest==: مش هو اختيارك الأول للـ RA.
+      - kind: explain
+        page: 176
+        title: "الـ B cells"
+        quote: "Biologic agents that can deplete B cells (eg, rituximab) or inhibit factors that activate B cells (belimumab)"
+        text: |
+          الـ B cell مش مصنع antibodies بس: ==بيقدّم antigen== للـ T cells، بينشّطها، وبيطلع IL-1، 6، TNF-α، VEGF وغيرهم.
+
+          - **Rituximab** ← ==deplete== B cells: NHL، CLL، **RA**، **GPA**، **MPA**؛ واستُخدم في SLE و SSc و vasculitis تانية.
+          - **Belimumab** ← يمسك **soluble BLyS** فما يوصلش يحفّز الـ B cell: **SLE**، IV كل 4 أسابيع.
+      - kind: check
+        page: 177
+        quote: "Belimumab is an anti-B lymphocyte stimulator (BLyS) mAb which binds to soluble BLyS, preventing its binding and stimulation of B cells."
+        question: "Belimumab works by:"
+        options:
+          - "Binding soluble BLyS so it cannot stimulate B cells"
+          - "Killing CD20+ B cells"
+          - "Blocking IL-12/23 p40"
+          - "Inhibiting JAK-1 and JAK-3"
+        answer: 0
+        why:
+          - "صح: anti-BLyS، بيمنع التحفيز مش بيقتل."
+          - "ده rituximab (depletion)."
+          - "ده ustekinumab."
+          - "ده tofacitinib."
+      - kind: explain
+        page: 177
+        title: "Biosimilar مش copy"
+        quote: "biotherapeutic product which is similar in terms of quality, safety and efficacy to an already licensed reference biotherapeutic product."
+        text: |
+          الـ WHO: منتج ==similar in quality, safety and efficacy== لـ reference مرخّص.
+
+          الفرق عن الـ **biomimic/biocopy**: نفس الـ **primary amino acid sequence** + اختبارات analytic و clinical صارمة.
+
+          مراجعة **2016** (19 دراسة) دعمت biosimilars الـ infliximab و etanercept و adalimumab. مثال: ==infliximab-dyyb (CT-P13)==، IgG1 chimeric، في كوريا من **2012**.
+      - kind: figure
+        page: 178
+        quote: "Tofacitinib (formerly CP-690,550) is a small, orally active drug available in the United States that preferentially inhibits JAK-1 and JAK-3"
+        title: "الحبوب: بيقفلوا جوه الخلية"
+        alt: "A cell membrane with a cytokine receptor on top. Inside the cell a JAK box is blocked by tofacitinib, a Syk box is blocked by fostamatinib, and a PDE4 box is blocked by apremilast. Each drug box lists its main adverse effects."
+        caption: "الـ biologics بتقفل برّه الخلية، والحبوب ==بتقفل جوّه==: **JAK** (tofacitinib)، **Syk** (fostamatinib)، **PDE4** (apremilast)."
+        svg: |
+          <svg viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="60" width="310" height="12" class="fg-dot-acc"/>
+            <rect x="140" y="20" width="50" height="60" rx="8" class="fg-ink"/>
+            <text x="165" y="15" text-anchor="middle" class="t-sm t-b">cytokine receptor</text>
+            <text x="20" y="52" class="t-sm t-mut">outside: biologics</text>
+            <text x="20" y="92" class="t-sm t-mut">inside: oral pills</text>
+            <rect x="10" y="105" width="310" height="65" rx="10" class="fg-bad"/>
+            <text x="20" y="125" class="t-sm t-b">JAK → tofacitinib (JAK-1, 3)</text>
+            <text x="20" y="143" class="t-sm">infection, LFTs, neutropenia,</text>
+            <text x="20" y="160" class="t-sm">lipids, creatinine</text>
+            <rect x="10" y="180" width="310" height="60" rx="10" class="fg-acc"/>
+            <text x="20" y="200" class="t-sm t-b">Syk → fostamatinib (R788)</text>
+            <text x="20" y="220" class="t-sm">neutropenia, HTN, diarrhoea, LFTs</text>
+            <rect x="10" y="250" width="310" height="70" rx="10" class="fg-good"/>
+            <text x="20" y="270" class="t-sm t-b">PDE4 → apremilast (PsA)</text>
+            <text x="20" y="290" class="t-sm">GI upset, headache (early),</text>
+            <text x="20" y="308" class="t-sm">weight loss, depression</text>
+          </svg>
+      - kind: update
+        page: 178
+        quote: "The relative safety of tofacitinib appears similar to that of biologic DMARDs, including increased risk of infections and liver function test abnormalities"
+        text: "بعد ORAL Surveillance (2021)، الـ FDA والـ EMA حطوا boxed warning على الـ JAK inhibitors: MACE و malignancy و thrombosis و وفيات أكتر من الـ TNF blockers في عيانين RA فوق 50 عندهم risk factor. في الامتحان: كلام الكتاب."
+        ref: "FDA Drug Safety Communication 2021; EMA PRAC 2022"
+      - kind: explain
+        page: 179
+        title: "Apremilast"
+        quote: "It is used in early psoriatic nonersoive arthritis with enthesitis, dactilitis, and with multiple comorbidity"
+        text: |
+          **Oral PDE4 inhibitor** للـ **PsA**، **20 أو 30 mg twice daily**.
+          - المناسب: ==early non-erosive PsA== مع enthesitis و dactylitis و comorbidities كتير
+          - أعراض: GI خفيفة و headache **بدري وبتروح لوحدها**
+          - انتبه: ==weight loss== (ممكن توقفه) و **depression**
+      - kind: case
+        page: 178
+        quote: "It reduced signs and symptoms of disease activity in patients with rheumatoid arthritis."
+        stem: "A 45-year-old woman with rheumatoid arthritis (RA), active on methotrexate, refuses injections."
+        steps:
+          - question: "Oral option from the lecture?"
+            options: ["Tofacitinib", "Secukinumab", "Belimumab", "Etanercept"]
+            answer: 0
+            why: "Tofacitinib oral JAK-1/3 وقلل نشاط الـ RA. الباقيين حقن أو infusion."
+          - question: "What do you monitor?"
+            options: ["Infections, LFTs, neutrophils, lipids, creatinine", "Only weight", "Mood only", "Nothing extra"]
+            answer: 0
+            why: "ده بالظبط اللي الكتاب كتبه للـ tofacitinib. الـ weight والـ mood دول apremilast."
+      - kind: try
+        items: [rheum.L10.019, rheum.L10.023, rheum.L10.027, rheum.L10.037, rheum.L10.046]
+    recap:
+      - "Secukinumab = anti-IL-17 شهري. Ustekinumab = p40 (IL-12/23) كل 12 أسبوع."
+      - "Rituximab يشيل B cells (RA، GPA، MPA). Belimumab يمسك soluble BLyS (SLE)."
+      - "Biosimilar = نفس الـ amino acid sequence + تجارب. مثال infliximab-dyyb."
+      - "Tofacitinib JAK-1/3: infection، LFTs، neutropenia، lipids، creatinine. Apremilast PDE4: GI، weight loss، depression."
+    practice: [rheum.L10.016, rheum.L10.017, rheum.L10.018, rheum.L10.019, rheum.L10.020, rheum.L10.021, rheum.L10.022, rheum.L10.023, rheum.L10.024, rheum.L10.025, rheum.L10.026, rheum.L10.027, rheum.L10.028, rheum.L10.029, rheum.L10.030, rheum.L10.031, rheum.L10.032, rheum.L10.033, rheum.L10.034, rheum.L10.035, rheum.L10.036, rheum.L10.037, rheum.L10.038, rheum.L10.039, rheum.L10.040, rheum.L10.041, rheum.L10.042, rheum.L10.043, rheum.L10.044, rheum.L10.045, rheum.L10.046]

@@ -1,0 +1,686 @@
+schema: batna.content/v1
+lecture: geri.L09
+title: "Immunosenescence and infection"
+author: "Prof. Noha Elsabbagh"
+book: { chapter: 7, pages: [155, 168] }
+topics:
+  - { id: overview, title: "Immunosenescence: what changes and why it matters" }
+  - { id: replicative, title: "Replicative senescence and the immune risk phenotype" }
+  - { id: innate, title: "Innate immunity with age" }
+  - { id: acquired, title: "Acquired immunity and inflammaging" }
+  - { id: risks, title: "Risks of infection in the elderly" }
+  - { id: vaccination, title: "Vaccination in the elderly" }
+  - { id: covid, title: "COVID-19 in the elderly" }
+  - { id: boosting, title: "Physical activity, diet and supplements" }
+items:
+  # ---------- p155-156: overview ----------
+  - id: geri.L09.001
+    kind: card
+    topic: overview
+    front: Why are elderly people more susceptible to infections and cancer?
+    back: Ageing brings a decline in immune function, so the immune system responds less well to antigenic stimulation.
+    src: { page: 155, quote: "This situation implies increased susceptibility to infections and cancer due to decreased capacity in the immune system to respond to antigenic stimulation." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L09.002
+    kind: table
+    topic: overview
+    title: Immunosenescence at a glance, the decline in immune function (book figure)
+    columns: [Compartment, Changes with age]
+    rows:
+      - [Thymic involution, "↓ thymic output, ↑ adiposity in thymus, ↓ thymic epithelial cells, ↓ IL-7"]
+      - [T lymphocytes, "↓ naive T cells, ↑ memory T cells, ↓ TCR diversity, ↑ CD8 ↓ CD4"]
+      - [B lymphocytes, "↓ naive B cells, ↑ memory B cells, ↓ IgM and IgD, ↑ IgG and IgA"]
+      - [Inflamm-aging, "↑ inflammatory mediators, ↑ IL-6 and CRP, ↑ tissue dysfunction"]
+      - [Overall, "↓ telomerase, ↑ tumours, ↑ infection, ↑ autoimmune and inflammatory reactions, ↓ vaccine response"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 155, quote: "Aging is associated with a decline in immune function." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L09.003
+    kind: cloze
+    topic: overview
+    text: "As immune function declines with age, serum {{c1::IgM and IgD}} fall while {{c2::IgG and IgA}} rise; the CD4 count falls and CD8 rises."
+    src: { page: 155, quote: "Aging is associated with a decline in immune function." }
+    status: unverified
+  - id: geri.L09.004
+    kind: enumerate
+    topic: overview
+    prompt: Name the four hallmarks of immunosenescence drawn in the lecture (Medscape figure).
+    points:
+      - Changes in lymphocyte subpopulations (↓ naive, ↑ memory)
+      - Inflammaging (↑ IL-6, TNF-α, CRP; ↓ IL-10)
+      - Accumulation of senescent T cells (CD28 lost; KLRG1, CD57)
+      - Telomere shortening and resistance to apoptosis
+    pass: 3
+    src: { page: 156, quote: "Immunosenescence" }
+    status: unverified
+  - id: geri.L09.005
+    kind: card
+    topic: overview
+    front: Which factors accelerate immunosenescence, per the lecture's figure?
+    back: CMV infection, obesity and stress.
+    src: { page: 156, quote: "Immunosenescence" }
+    status: unverified
+  - id: geri.L09.006
+    kind: enumerate
+    topic: overview
+    prompt: What are the clinical results of immunosenescence?
+    points:
+      - More autoimmune diseases, cardiovascular diseases and cancer
+      - More severe infections
+      - Poorer response to vaccines
+      - Chronic inflammatory diseases and frailty
+    pass: 3
+    src: { page: 156, quote: "Immunosenescence" }
+    status: unverified
+  # ---------- p156: replicative senescence ----------
+  - id: geri.L09.007
+    kind: card
+    topic: replicative
+    front: Define replicative senescence.
+    back: Age-related shortening of telomere length with impaired cell division; clonal expansion falls, as T cells cannot replicate as avidly after binding antigen.
+    src: { page: 156, quote: "Replicative senescence is the age-related shortening of telomere length and impairment of cell division." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L09.008
+    kind: card
+    topic: replicative
+    front: Why do old people fight old infections but not new ones?
+    back: Naive cells fall and memory cells rise, so defence against previously recognized pathogens is intact but response to novel antigens is reduced.
+    src: { page: 156, quote: "The decrease in naive cells and the increase in memory cells" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L09.009
+    kind: enumerate
+    topic: replicative
+    prompt: List the components of the immune risk phenotype (immunosenescence figure).
+    points:
+      - CD8+ CD28− CD57+ cells
+      - CD4:CD8 ratio below 1
+      - CMV seropositivity
+      - Poor T-cell proliferation
+    pass: 3
+    src: { page: 156, quote: "Immunosenescence" }
+    status: unverified
+  - id: geri.L09.010
+    kind: cloze
+    topic: replicative
+    text: "In the immunosenescence figure, the immune risk phenotype includes a CD4:CD8 ratio {{c1::below 1}} and {{c2::CMV}} seropositivity."
+    src: { page: 156, quote: "Immunosenescence" }
+    status: unverified
+  - id: geri.L09.011
+    kind: card
+    topic: replicative
+    front: Which other systems does ageing affect alongside immunosenescence (two-way)?
+    back: Endocrine and neural function, cardiovascular health, muscle homeostasis, glucose metabolism and oxidative stress.
+    src: { page: 156, quote: "Immunosenescence" }
+    status: unverified
+  # ---------- p157-158: innate ----------
+  - id: geri.L09.012
+    kind: table
+    topic: innate
+    title: Innate immunity with age
+    columns: [Cell, Change]
+    rows:
+      - [Monocytes and macrophages, "Reduced phagocytic capacity; enhanced oxidative stress"]
+      - [Neutrophils, "Reduced phagocytic activity; impaired free radical production"]
+      - [Dendritic cells, "Reduced antigen presentation; impaired clearing of apoptotic cells"]
+      - [NK cells, "Increased number; reduced cytotoxicity"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 157, quote: "Natural killer cells (NK): increase number of NK, reduced cytotoxicity." }
+    status: unverified
+    tags: [high-yield, book-question]
+  - id: geri.L09.013
+    kind: card
+    topic: innate
+    front: What happens to NK cells with age?
+    back: Their number increases but their cytotoxicity falls (antibody-dependent cytotoxicity does not change).
+    src: { page: 157, quote: "Natural killer cells (NK): increase number of NK, reduced cytotoxicity." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L09.014
+    kind: enumerate
+    topic: innate
+    prompt: What decreases in ageing neutrophils (book figure)?
+    points:
+      - Chemotaxis
+      - Intra- and extracellular killing
+      - FcR-dependent killing
+      - Tumour cell toxicity
+      - Pathogen elimination
+      - ROS generation
+      - Phagocytosis (or no change)
+    pass: 5
+    src: { page: 158, quote: "INNATE IMMUNE RESPONSE : AGE-ASSOCIATED CHANGES NEUTROPHILS AND MACROPHAGES" }
+    status: unverified
+  - id: geri.L09.015
+    kind: enumerate
+    topic: innate
+    prompt: What decreases in ageing monocytes and macrophages (book figure)?
+    points:
+      - Phagocytosis
+      - Surface TLR1 and TLR4
+      - TLR-induced CD80 up-regulation
+      - TLR1/2-induced IL-6 and TNF-α production
+      - CD68+ macrophages in bone marrow
+    pass: 4
+    src: { page: 158, quote: "INNATE IMMUNE RESPONSE : AGE-ASSOCIATED CHANGES NEUTROPHILS AND MACROPHAGES" }
+    status: unverified
+  - id: geri.L09.016
+    kind: enumerate
+    topic: innate
+    prompt: What decreases in ageing NK cells (book figure)?
+    points:
+      - CD69 expression
+      - IL-2 and IL-12 mediated chemokine production
+      - Calcium mobilization
+      - Cytotoxicity
+      - IL-2 dependent IFN-γ production
+    pass: 4
+    src: { page: 158, quote: "INNATE IMMUNE RESPONSE : AGE-ASSOCIATED CHANGES NK CELLS AND DENDRITIC CELLS" }
+    status: unverified
+  - id: geri.L09.017
+    kind: enumerate
+    topic: innate
+    prompt: What decreases in ageing dendritic cells (book figure)?
+    points:
+      - Langerhans cell density in skin
+      - Processing capacity
+      - Micropinocytosis and phagocytosis
+      - Migration
+      - TLR function
+      - LPS-induced IL-12 and IFN-α production
+    pass: 4
+    src: { page: 158, quote: "INNATE IMMUNE RESPONSE : AGE-ASSOCIATED CHANGES NK CELLS AND DENDRITIC CELLS" }
+    status: unverified
+  - id: geri.L09.018
+    kind: mcq
+    topic: innate
+    stem: Which age-related change in innate immunity is described in the lecture?
+    options:
+      - NK cells increase in number but lose cytotoxicity
+      - Neutrophils show enhanced free radical production
+      - Dendritic cells present antigen more efficiently
+      - Macrophages gain phagocytic capacity
+      - NK cell antibody-dependent cytotoxicity is lost completely
+    answer: 0
+    why:
+      - "Correct: NK cells increase in number with reduced cytotoxicity (p157)."
+      - Neutrophil free radical production is impaired.
+      - Dendritic cell antigen presentation is reduced.
+      - Macrophage phagocytosis is reduced, with more oxidative stress.
+      - The figure shows no change in antibody-dependent cytotoxicity (p158).
+    src: { page: 157, quote: "Natural killer cells (NK): increase number of NK, reduced cytotoxicity." }
+    status: unverified
+  # ---------- p159: acquired, inflammaging ----------
+  - id: geri.L09.019
+    kind: table
+    topic: acquired
+    title: Acquired immunity with age
+    columns: [Cell, Change]
+    rows:
+      - [T cells, "↓ thymopoiesis; accumulated highly differentiated memory cells; loss of CD28 and CD69; ↓ CD8+ proliferation to antigen"]
+      - [B cells, "↓ lymphopoiesis; ↑ memory B cells; impaired antibody response to vaccination"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 159, quote: "B cells: reduction in B cell lymphoiesis, increase in memory B cells, impaired antibody response to vaccination." }
+    status: unverified
+    tags: [high-yield, book-question]
+  - id: geri.L09.020
+    kind: card
+    topic: acquired
+    front: Which T-cell surface antigens are lost with age, and why does it matter?
+    back: CD28 and CD69, which are needed for T-cell activation and signal transduction.
+    src: { page: 159, quote: "Loss of CD28 antigen CD69 antigen required for T cell activation& signal transduction" }
+    status: unverified
+  - id: geri.L09.021
+    kind: card
+    topic: acquired
+    front: Which B-cell change explains poor vaccine responses in old age?
+    back: Reduced B-cell lymphopoiesis with more memory B cells, giving an impaired antibody response to vaccination.
+    src: { page: 159, quote: "impaired antibody response to vaccination." }
+    status: unverified
+  - id: geri.L09.022
+    kind: card
+    topic: acquired
+    front: What is inflamaging?
+    back: The dysregulated cytokine response of ageing, especially an increase in the pro-inflammatory cytokine IL-6.
+    src: { page: 159, quote: "in particular an increase in pro-inflammatory cytokine IL-6, this phenomenon has been referred to as inflamaging." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L09.023
+    kind: card
+    topic: acquired
+    front: What has chronic IL-6 elevation been linked to in old age?
+    back: Chronic disease and functional decline.
+    src: { page: 159, quote: "Chronic elevation of IL-6 has been correlated with chronic disease and functional decline in old." }
+    status: unverified
+  - id: geri.L09.024
+    kind: mcq
+    topic: acquired
+    stem: An 84-year-old has a poor antibody response to a vaccine. Which change in acquired immunity best explains it?
+    options:
+      - Reduced B-cell lymphopoiesis with impaired antibody response
+      - Increased naive T-cell pool
+      - Increased CD28 expression on T cells
+      - Increased thymopoiesis
+      - Fewer memory B cells
+    answer: 0
+    why:
+      - "Correct: B-cell lymphopoiesis falls and the antibody response to vaccination is impaired (p159)."
+      - The naive T-cell pool falls with age.
+      - CD28 is lost with age.
+      - Thymopoiesis is reduced.
+      - Memory B cells increase.
+    src: { page: 159, quote: "B cells: reduction in B cell lymphoiesis, increase in memory B cells, impaired antibody response to vaccination." }
+    status: unverified
+  # ---------- p160: risks ----------
+  - id: geri.L09.025
+    kind: enumerate
+    topic: risks
+    prompt: Discuss the risk factors of infection in old age.
+    points:
+      - Living in long-term care facilities
+      - Chronic diseases
+      - Malnutrition
+      - Immunosenescence
+      - Polypharmacy and immunosuppressive drugs
+      - Prosthetic devices
+      - Frequent hospitalization (nosocomial infection) and medical therapy
+      - Delayed recognition from atypical presentation
+      - Weaker cough reflex and mucociliary clearance
+      - Decreased gastric acidity
+    pass: 7
+    src: { page: 160, quote: "Living in a long term care facilities, chronic diseases, malnutrition, immune senescence, polypharmacy, increase use of prosthetic devices." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L09.026
+    kind: card
+    topic: risks
+    front: Why do infections in the elderly cause serious complications?
+    back: Atypical presentations delay recognition of symptoms.
+    src: { page: 160, quote: "Delayed recognition of symptoms, related to atypical presentations of infection in elderly make them liable to serious complications." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L09.027
+    kind: table
+    topic: risks
+    title: Lost protection and the infection it invites
+    columns: [Lost protection, Infection risk]
+    rows:
+      - [Weaker cough reflex and mucociliary clearance, Respiratory infection]
+      - [Lower gastric acidity (ageing and drugs), Gastrointestinal infection]
+      - [Frequent hospitalization, Nosocomial infection]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 160, quote: "Diminished anatomic & physiologic protection as cough reflex and mucociliary clearance, increase the susceptibility to respiratory infection." }
+    status: unverified
+  - id: geri.L09.028
+    kind: mcq
+    topic: risks
+    stem: A 79-year-old woman on a long-term proton pump inhibitor develops infectious diarrhoea. Which age-related risk does the lecture link to this?
+    options:
+      - Decreased gastric acidity
+      - Weaker cough reflex
+      - Increased NK cell number
+      - Increased memory B cells
+      - Prosthetic joint
+    answer: 0
+    why:
+      - "Correct: lower gastric acidity, physiological and from medication, raises GI infection risk (p160)."
+      - The cough reflex protects the airways, not the gut.
+      - More NK cells is an immune change, not a gut barrier.
+      - More memory B cells does not explain gut infection.
+      - Prosthetic devices raise device infection risk.
+    src: { page: 160, quote: "Decreased gastric acidity in old due to both physiological and medication side effects can increase susceptibility to gastrointestinal infections." }
+    status: unverified
+  # ---------- p161-162: vaccination ----------
+  - id: geri.L09.029
+    kind: cloze
+    topic: vaccination
+    text: "Elderly people account for about {{c1::90%}} of all influenza-related deaths."
+    src: { page: 161, quote: "Elderly people account for approximately 90% of all influenza-related deaths." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: geri.L09.030
+    kind: card
+    topic: vaccination
+    front: Why does vaccination matter so much in the elderly?
+    back: It is cost-effective and efficient against infection-related morbidity and mortality, and since infections worsen pre-existing health problems, prevention allows healthy independent living.
+    src: { page: 161, quote: "prevention of infection by vaccination allow healthy independent living." }
+    status: unverified
+  - id: geri.L09.031
+    kind: card
+    topic: vaccination
+    front: Which influenza vaccine is generally recommended for everyone over 65, per the lecture?
+    back: The seasonal trivalent inactivated influenza vaccine (TIV), plus a pandemic influenza vaccine if applicable, to maintain serum antibody levels.
+    src: { page: 161, quote: "every one over 65 years, receive the seasonal trivalent inactivated influenza vaccine (TIV)" }
+    status: unverified
+    tags: [high-yield]
+    update:
+      text: "CDC ACIP (2022 onward) preferentially recommends a higher-dose, adjuvanted or recombinant influenza vaccine for adults 65 and over; current US vaccines are trivalent again from 2024–25."
+      ref: "CDC ACIP influenza recommendations 2024–25"
+  - id: geri.L09.032
+    kind: card
+    topic: vaccination
+    front: What happens to vaccine efficacy with ageing?
+    back: It decreases.
+    src: { page: 161, quote: "However the efficacy of vaccination decrease with aging." }
+    status: unverified
+  - id: geri.L09.033
+    kind: enumerate
+    topic: vaccination
+    prompt: Novel approaches to vaccination in the elderly?
+    points:
+      - Increasing vaccine dosage
+      - "Adjuvants: TIV MF59, TLR agonists"
+      - Viral vector-based vaccines
+    pass: 3
+    src: { page: 161, quote: "Increasing vaccine dosage. Use of adjuvants: TIV MF59, TLR agonists. Introducing viral vector-based vaccine." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L09.034
+    kind: table
+    topic: vaccination
+    title: Influenza vaccine strategies for the elderly
+    columns: [Strategy, Mechanism]
+    rows:
+      - [More antigen, "More antigen available: more immunogenic"]
+      - [Quadrivalent instead of trivalent, "More antigen; avoids vaccine mismatch"]
+      - [Repeated vaccinations, Increased immunogenicity]
+      - [Mucosal or microneedle-intradermal route, "More efficient delivery and antigen presentation"]
+      - ["Adjuvants (MF59, AS03)", Enhanced immunogenicity]
+    blanks: [[1, 1], [3, 1], [2, 1]]
+    src: { page: 162, quote: "Quadrivalent instead of" }
+    status: unverified
+  - id: geri.L09.035
+    kind: table
+    topic: vaccination
+    title: Shingles vaccine strategies for the elderly
+    columns: [Strategy, Mechanism]
+    rows:
+      - ["Live-attenuated VZV with >10 times the titre of chickenpox vaccine", More antigen available]
+      - ["Subunit glycoprotein E vaccine with AS01 adjuvant", "Robust, persistent VZV-specific antibody and CD4+ T-cell responses"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 162, quote: "Major Ag with adjuvants" }
+    status: unverified
+  - id: geri.L09.036
+    kind: cloze
+    topic: vaccination
+    text: "The live-attenuated shingles vaccine has more than {{c1::10 times}} higher viral titres than the chickenpox vaccine; the subunit vaccine uses glycoprotein {{c2::E}} with adjuvant {{c3::AS01}}."
+    src: { page: 162, quote: "Subunit glycoprotein E vaccine with AS01" }
+    status: unverified
+    tags: [numbers]
+  - id: geri.L09.037
+    kind: mcq
+    topic: vaccination
+    stem: Which is NOT a strategy the lecture lists for making vaccines work better in the elderly?
+    options:
+      - Giving a lower antigen dose to avoid reactions
+      - Adding adjuvants such as MF59 or AS03
+      - Quadrivalent instead of trivalent influenza strains
+      - Microneedle intradermal delivery
+      - Viral vector-based vaccines
+    answer: 0
+    why:
+      - "Correct: the strategy is to increase the dose and antigen, not lower it (p161-162)."
+      - Adjuvants enhance immunogenicity.
+      - Quadrivalent vaccines add antigen and avoid mismatch.
+      - Intradermal delivery improves antigen presentation.
+      - Viral vectors are a novel approach.
+    src: { page: 161, quote: "Increasing vaccine dosage." }
+    status: unverified
+  # ---------- p162-164: COVID ----------
+  - id: geri.L09.038
+    kind: card
+    topic: covid
+    front: How is SARS-CoV-2 transmitted and how does it present?
+    back: Mainly by respiratory droplets; fever, cough, myalgia and fatigue.
+    src: { page: 162, quote: "SARS-CoV-2 is transmitted predominantly via respiratory droplets. Clinically, patients frequently present with fever, cough, myalgia, and fatigue" }
+    status: unverified
+  - id: geri.L09.039
+    kind: order
+    topic: covid
+    prompt: Order the course of severe COVID-19 in an elderly patient.
+    steps:
+      - Bilateral diffuse alveolar damage
+      - Acute respiratory distress syndrome
+      - Cytokine storm
+      - Endothelial injury and coagulation activation
+      - DIC with consumption of clotting factors
+      - Organ damage and death
+    src: { page: 163, quote: "The uncontrolled systemic inflammation causes endothelial injury and activation of coagulation cascade." }
+    status: unverified
+  - id: geri.L09.040
+    kind: card
+    topic: covid
+    front: How does SARS-CoV-2 enter human cells?
+    back: Its spike (S) protein binds ACE2; entry needs priming of S by TMPRSS2, a human serine protease.
+    src: { page: 163, quote: "The successful entry needs the priming of the S protein by TMPRSS2, a human cellular serine protease" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L09.041
+    kind: card
+    topic: covid
+    front: Why may the elderly develop worse COVID-19 inflammation?
+    back: Elderly lung macrophages may produce more IL-6 and other pro-inflammatory cytokines.
+    src: { page: 163, quote: "Macrophages from elderly lungs may have a more pronounced production of IL-6 and other pro-inflammatory cytokines" }
+    status: unverified
+  - id: geri.L09.042
+    kind: cloze
+    topic: covid
+    text: "Severe COVID-19 has a higher {{c1::IL-6/interferon-γ}} ratio and fewer interferon-γ producing {{c2::CD4+}} T cells than moderate disease; rising IL-6 causes a relative {{c3::immunoparalysis}}."
+    src: { page: 163, quote: "Patients with severe COVID-19 have a higher IL-6/Interferon-γ ratio than those who present with a moderate disease" }
+    status: unverified
+  - id: geri.L09.043
+    kind: mcq
+    topic: covid
+    stem: An 82-year-old with COVID-19 deteriorates on day 9 with ARDS, high IL-6, falling platelets and prolonged clotting times. Which mechanism does the lecture describe?
+    options:
+      - Cytokine storm causing endothelial injury and DIC
+      - Isolated bacterial superinfection only
+      - Increased interferon-γ producing CD4+ T cells
+      - Direct TMPRSS2 deficiency
+      - Overactive NK cytotoxicity
+    answer: 0
+    why:
+      - "Correct: uncontrolled inflammation injures endothelium and activates coagulation, giving DIC, organ damage and death (p163)."
+      - Secondary bacterial infection can occur but does not explain DIC here.
+      - Severe disease has fewer IFN-γ producing CD4+ T cells.
+      - TMPRSS2 primes viral entry; a deficiency would not cause this.
+      - NK cytotoxicity is reduced in old age.
+    src: { page: 163, quote: "The consequence is an explosive process of disseminated intravascular coagulation and consumption of coagulation factors" }
+    status: unverified
+  - id: geri.L09.044
+    kind: card
+    topic: covid
+    front: In the lecture's age figure, what rises and what falls in the immune system with chronological age in COVID-19?
+    back: Pro-inflammatory cytokines and terminally differentiated memory T and B cells rise; the naive T-cell amount falls, shifting from an adaptive response towards cytokine storm and organ failure.
+    src: { page: 164, quote: "Physical activity &Immune System" }
+    status: unverified
+  # ---------- p164-166: boosting ----------
+  - id: geri.L09.045
+    kind: enumerate
+    topic: boosting
+    prompt: Which benefits of exercise and physical activity on ageing immunity does the lecture show?
+    points:
+      - Lower risk of chronic age-related disease and all-cause mortality
+      - Lower cardiometabolic risk factors
+      - Better muscle mass and function
+      - Lower systemic inflammation, anti-inflammatory profile
+      - Better vaccine responses
+    pass: 4
+    src: { page: 164, quote: "Physical activity &Immune System" }
+    status: unverified
+  - id: geri.L09.046
+    kind: table
+    topic: boosting
+    title: Isolation (COVID-19) with and without physical activity
+    columns: [Feature, Without activity, With activity]
+    rows:
+      - [Behaviour, "More inactivity, physical dysfunction and mental distress", "Activity kept; less dysfunction and distress"]
+      - [Immunity, "Dysfunctional innate and adaptive function", "Maintained or enhanced function"]
+      - [Results, "Pro-inflammatory, latent virus reactivation, higher infection risk", "Anti-inflammatory, effective antiviral and antibacterial responses, lower risk"]
+    blanks: [[1, 1], [1, 2], [2, 1]]
+    src: { page: 164, quote: "Potential Impact of Isolation" }
+    status: unverified
+  - id: geri.L09.047
+    kind: card
+    topic: boosting
+    front: How does the Mediterranean diet help ageing immunity?
+    back: It down-regulates inflammatory mediators such as ICAM-1, VCAM-1, CRP and IL-6.
+    src: { page: 165, quote: "The Mediterranean diet down-regulates the levels of inflammatory mediators" }
+    status: unverified
+  - id: geri.L09.048
+    kind: card
+    topic: boosting
+    front: Which dietary approach may reverse immunosenescence, and how?
+    back: Caloric restriction; it down-regulates IL-1β, IL-6 and TNF-α genes and the pro-inflammatory state.
+    src: { page: 165, quote: "A new interesting approach related to the possible reversion of immunosenescence is caloric restriction." }
+    status: unverified
+  - id: geri.L09.049
+    kind: card
+    topic: boosting
+    front: Main micronutrient studied for immune function in the elderly, and its roles?
+    back: Zinc; it is involved in signal transduction, apoptosis, proliferation and differentiation of immune cells.
+    src: { page: 165, quote: "One of the main micronutrients related to physiologic processes associated with immune system, and one of the main studied factors, is zinc." }
+    status: unverified
+  - id: geri.L09.050
+    kind: table
+    topic: boosting
+    title: Vitamins and ageing immunity
+    columns: [Vitamin, Effect in older adults]
+    rows:
+      - [Vitamin E, "↑ IL-2 production and activation-induced proliferation of naive (not memory) T cells; variable"]
+      - [Vitamin C, "Counters oxidative stress (inflamm-aging); ↑ antibody generation; T-cell and NK maturation"]
+      - [Vitamin D, "↓ pro-inflammatory cytokines, ↑ antimicrobial peptides (cathelicidin, defensin), ↑ macrophage autophagy"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 165, quote: "vitamin E in the production of IL-2 as well as the activation induced T cell proliferation in naive but not in memory T cells" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L09.051
+    kind: card
+    topic: boosting
+    front: Why is vitamin C intake so much higher than other vitamins?
+    back: It is water-soluble and humans store little, so regular intake is up to 100-fold higher than for many other vitamins.
+    src: { page: 165, quote: "Because vitamin C is water-soluble and humans have low storage capacity, its regular intake is up to 100-fold higher" }
+    status: unverified
+    tags: [numbers]
+  - id: geri.L09.052
+    kind: order
+    topic: boosting
+    prompt: Order vitamin D activation as drawn in the lecture.
+    steps:
+      - 7-dehydrocholesterol in skin
+      - Cholecalciferol (UV light)
+      - Calcidiol, 25-hydroxyvitamin D3 (liver, CYP27A1)
+      - Calcitriol, 1,25-dihydroxyvitamin D3 (kidney or immune cell, CYP27B1)
+    src: { page: 166, quote: "Vitamin D" }
+    status: unverified
+  - id: geri.L09.053
+    kind: enumerate
+    topic: boosting
+    prompt: Respiratory effects of vitamin D shown in the lecture?
+    points:
+      - Less inflammation
+      - Fewer acute respiratory tract infections
+      - Fewer asthma and COPD exacerbations
+      - Less lung fibrosis
+      - Better lung function
+    pass: 4
+    src: { page: 166, quote: "Vitamin D" }
+    status: unverified
+  - id: geri.L09.054
+    kind: enumerate
+    topic: boosting
+    prompt: Immune effects of probiotics and prebiotics in older adults?
+    points:
+      - Lower TNF-α, IL-1β and IL-6
+      - Higher anti-inflammatory IL-10
+      - Better phagocytosis and cytotoxicity against bacteria such as Staphylococcus aureus
+      - More NK cell activity
+      - Lower CD25 on resting T cells
+    pass: 4
+    src: { page: 166, quote: "lower production of TNF-α, IL-1β, and IL-6 as well as an increase of anti- inflammatory cytokine IL-10, by PBMCs." }
+    status: unverified
+  - id: geri.L09.055
+    kind: card
+    topic: boosting
+    front: Why are probiotic results hard to reproduce?
+    back: Randomized controlled trials are complex and humans lack specific biomarkers.
+    src: { page: 166, quote: "the complexity of randomized controlled trials and lack of specific biomarkers in humans make difficult the reproducibility of the data" }
+    status: unverified
+  - id: geri.L09.056
+    kind: case
+    topic: risks
+    stem: An 86-year-old care-home resident with diabetes, a hip prosthesis and 9 regular medicines becomes drowsy and stops eating. Temperature 37.2 °C.
+    steps:
+      - question: Why might her infection be missed?
+        options: [Atypical presentation delays recognition, Elderly never get fever with infection, Her NK cells are too active, Vaccines always prevent infection]
+        answer: 0
+        why: "Atypical presentations delay recognition and lead to serious complications (p160)."
+      - question: Which of her features are listed infection risks?
+        options: ["Care home, chronic disease, prosthesis, polypharmacy", Only her age, Only the prosthesis, None of them]
+        answer: 0
+        why: "Long-term care, chronic disease, malnutrition, immunosenescence, polypharmacy and prosthetic devices are all listed (p160)."
+      - reveal: She recovers from a pneumonia. It is October.
+        question: Which vaccine does the lecture recommend for her?
+        options: [Seasonal inactivated influenza vaccine, No vaccine as efficacy falls with age, Live chickenpox vaccine, BCG]
+        answer: 0
+        why: "Everyone over 65 should receive the seasonal inactivated influenza vaccine (p161). Efficacy falls with age, which is why boosted strategies exist, not a reason to skip it."
+      - question: Which lifestyle advice supports her immunity, per the lecture?
+        options: [Physical activity and a Mediterranean diet, Strict bed rest, High-dose vitamin A, Avoiding all zinc]
+        answer: 0
+        why: "Exercise improves vaccine responses and lowers inflammation; the Mediterranean diet lowers inflammatory mediators (p164-165)."
+    src: { page: 160, quote: "Living in a long term care facilities, chronic diseases, malnutrition, immune senescence, polypharmacy, increase use of prosthetic devices." }
+    status: unverified
+  # ---------- p168: book questions ----------
+  - id: geri.L09.057
+    kind: essay
+    topic: innate
+    prompt: Describe the age-associated changes in innate immunity.
+    outline:
+      - "Monocytes and macrophages": ["Reduced phagocytosis, enhanced oxidative stress", "Less TLR1/TLR4, CD80 up-regulation, IL-6 and TNF-α to TLR stimulation; altered cytokines"]
+      - "Neutrophils": ["Reduced phagocytic activity, impaired free radical (ROS) production", "Less chemotaxis, killing and pathogen elimination"]
+      - "Dendritic cells": ["Reduced antigen presentation and clearing of apoptotic cells", "Fewer skin Langerhans cells; less migration, TLR function, IL-12 and IFN-α"]
+      - "NK cells": ["More cells, less cytotoxicity", "Less CD69, calcium mobilization, IFN-γ; ADCC unchanged"]
+    src: { page: 157, quote: "Monocyte or macrophage: reduced phagocytic capacity and enhanced oxidative stress." }
+    status: unverified
+    tags: [book-question]
+  - id: geri.L09.058
+    kind: essay
+    topic: acquired
+    prompt: Describe the age-associated changes in acquired immunity.
+    outline:
+      - "Thymus": ["Involution: less output, epithelial cells and IL-7; more fat"]
+      - "T cells": ["Less thymopoiesis; fewer naive, more highly differentiated memory cells", "Loss of CD28 and CD69; less CD8+ proliferation; ↓ TCR diversity; ↑ CD8 ↓ CD4", "Replicative senescence: short telomeres, less clonal expansion"]
+      - "B cells": ["Less lymphopoiesis; more memory B cells", "Impaired antibody response to vaccination; ↓ IgM/IgD, ↑ IgG/IgA"]
+      - "Consequence": ["Good memory for old pathogens, poor response to new antigens", "Inflammaging: ↑ IL-6 linked to chronic disease and decline"]
+    src: { page: 159, quote: "T cells: reduction in T cell thymopoiesis, accumulated highly differentiated memory cells." }
+    status: unverified
+    tags: [book-question]
+  - id: geri.L09.059
+    kind: essay
+    topic: risks
+    prompt: Discuss the different risk factors of infection in old age.
+    outline:
+      - "Host": ["Immunosenescence, chronic diseases, malnutrition"]
+      - "Setting and care": ["Long-term care facilities; frequent hospitalization and nosocomial infection", "Medical therapy, prosthetic devices"]
+      - "Drugs": ["Polypharmacy; immunosuppressive medicines"]
+      - "Recognition": ["Atypical presentation delays diagnosis and causes complications"]
+      - "Barriers": ["Weaker cough reflex and mucociliary clearance: respiratory infection", "Lower gastric acidity: GI infection"]
+    src: { page: 160, quote: "Living in a long term care facilities, chronic diseases, malnutrition, immune senescence, polypharmacy, increase use of prosthetic devices." }
+    status: unverified
+    tags: [book-question]
+  - id: geri.L09.060
+    kind: essay
+    topic: boosting
+    prompt: Discuss the different factors contributing to improve the immune function.
+    outline:
+      - "Vaccination": ["Influenza vaccine for everyone over 65", "Higher dose, adjuvants (MF59, AS03, AS01), quadrivalent, intradermal, viral vectors; recombinant zoster vaccine"]
+      - "Physical activity": ["Lower inflammation, better vaccine responses; protects during isolation"]
+      - "Diet": ["Mediterranean diet lowers ICAM-1, VCAM-1, CRP, IL-6", "Caloric restriction lowers IL-1β, IL-6, TNF-α"]
+      - "Micronutrients": ["Zinc; vitamins E, C and D"]
+      - "Biotics": ["Pro- and prebiotics: less TNF-α/IL-6, more IL-10, NK activity; data hard to reproduce"]
+    src: { page: 165, quote: "The Mediterranean diet down-regulates the levels of inflammatory mediators" }
+    status: unverified
+    tags: [book-question]

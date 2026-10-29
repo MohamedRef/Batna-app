@@ -291,7 +291,15 @@ mark {
   padding-block: var(--sp-2) calc(var(--sp-2) + env(safe-area-inset-bottom, 0px));
   background: var(--bg);
 }
+.ls-nav { flex-wrap: wrap; }
 .ls-nav .ls-next { margin-inline-start: auto; min-inline-size: 8rem; }
+/* What the step still needs while Continue is off. */
+.ls-gate { flex: 1 0 100%; margin: 0; text-align: center; color: var(--muted); }
+.ls-skipped { margin: 0; }
+.ls-before { display: flex; flex-direction: column; gap: var(--sp-2); }
+.ls-before > p { margin: 0; }
+.ls-key-line { font-weight: 700; }
+.ls-key-item:not(:last-child)::after { content: "، "; }
 @media (max-width: 599px) { .ls-nav .ls-next { flex: 1; } }
 
 /* figure */
@@ -486,6 +494,8 @@ mark {
 .ls-option[data-state="right"] { border-color: var(--good); background: var(--good-soft); }
 .ls-option[data-state="wrong"] { border-color: var(--bad); background: var(--bad-soft); animation: ls-shake 260ms; }
 .ls-option[data-state="other"] { opacity: 0.55; }
+.ls-option[data-state="picked"] { border-color: var(--accent); background: var(--accent-soft); box-shadow: 0 0 0 2px var(--accent-soft); }
+.ls-mine { margin-inline-start: auto; color: var(--muted); font-weight: 600; }
 .ls-letter {
   flex: none;
   inline-size: 1.7rem;
@@ -527,9 +537,38 @@ mark {
 .ls-tile[data-state="right"], li[data-state="right"] > .ls-tile { border-color: var(--good); background: var(--good-soft); }
 .ls-tile[data-state="wrong"], li[data-state="wrong"] > .ls-tile { border-color: var(--bad); background: var(--bad-soft); animation: ls-shake 260ms; }
 .ls-tile:disabled { cursor: default; }
-.ls-placed { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-2); }
-.ls-placed li { display: flex; flex-direction: column; gap: 2px; }
-.ls-placed .ls-tile { inline-size: 100%; }
+/* order: numbered slots that fill from the pool */
+.ls-order-bar { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-2); }
+.ls-order-count { color: var(--muted); font-variant-numeric: tabular-nums; }
+.ls-undo { min-block-size: 44px; }
+.ls-undo:disabled { opacity: 0.4; text-decoration: none; cursor: default; }
+.ls-slots li[data-state="empty"] .ls-slot { min-block-size: 40px; }
+.ls-slots { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-2); }
+.ls-slots li { display: flex; flex-direction: column; gap: 2px; }
+.ls-slot {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  inline-size: 100%;
+  min-block-size: 48px;
+  padding: var(--sp-2) var(--sp-3);
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  text-align: start;
+}
+button.ls-slot { cursor: pointer; touch-action: manipulation; }
+button.ls-slot:hover { border-color: var(--accent); }
+.ls-slots li[data-state="empty"] .ls-slot { border-style: dashed; background: transparent; }
+.ls-slots li[data-state="empty"] .ls-num { background: var(--line); color: var(--muted); }
+.ls-slots li[data-state="right"] .ls-slot { border-color: var(--good); background: var(--good-soft); }
+.ls-slots li[data-state="wrong"] .ls-slot { border-color: var(--bad); background: var(--bad-soft); }
+.ls-slot-text { flex: 1; min-inline-size: 0; overflow-wrap: anywhere; }
+.ls-x, .ls-mark { flex: none; color: var(--muted); font-size: 1.1em; line-height: 1; }
+.ls-slots li[data-state="right"] .ls-mark { color: var(--good); }
+.ls-slots li[data-state="wrong"] .ls-mark { color: var(--bad); }
 .ls-num {
   flex: none;
   inline-size: 1.6rem;
@@ -573,7 +612,11 @@ mark {
 .ls-bin-head:disabled { cursor: default; }
 .ls-bin-cards { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
 .ls-bin-cards li { display: flex; flex-direction: column; }
-.ls-chiplet {
+.ls-chiplet, .ls-chiplet-done {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-1);
   inline-size: 100%;
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -581,10 +624,11 @@ mark {
   padding: 4px var(--sp-2);
   text-align: start;
   font-size: var(--fs-sm);
-  cursor: pointer;
+  color: var(--text);
 }
-.ls-bin-cards li[data-state="right"] .ls-chiplet { border-color: var(--good); background: var(--good-soft); }
-.ls-bin-cards li[data-state="wrong"] .ls-chiplet { border-color: var(--bad); background: var(--bad-soft); }
+.ls-chiplet { cursor: pointer; min-block-size: 36px; }
+.ls-bin-cards li[data-state="right"] .ls-chiplet-done { border-color: var(--good); background: var(--good-soft); }
+.ls-bin-cards li[data-state="wrong"] .ls-chiplet-done { border-color: var(--bad); background: var(--bad-soft); }
 .ls-sort > .btn, .ls-order .btn, .ls-case .btn { align-self: start; }
 
 /* mini case */

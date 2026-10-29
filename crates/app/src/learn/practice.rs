@@ -30,18 +30,10 @@ pub fn find(id: &str) -> Option<(&'static Lecture, &'static Item)> {
     .copied()
 }
 
-/// A Try step part-way through: the cards graded so far and how many were
-/// "Again". Kept in the lesson's saved position (player.rs).
-#[derive(Debug, Clone, Default, PartialEq, serde::Serialize, serde::Deserialize)]
-pub struct TryLog {
-    pub graded: Vec<String>,
-    pub again: u32,
-}
-
-/// The player's Try logs, one per step, and a way to save them.
+/// The open attempt (its Try logs) and a way to save it.
 #[derive(Clone, Copy)]
 pub struct Tries {
-    pub log: Signal<Vec<TryLog>>,
+    pub attempt: Signal<batna_core::response::Attempt>,
     pub save: Callback<()>,
 }
 
@@ -65,14 +57,16 @@ pub fn TryItems(items: Vec<String>, on_answer: EventHandler<bool>) -> Element {
     let tries = try_context();
     let k = try_context_step();
     // Taken once, like the list: later grades go to the log, not to this.
-    let before =
-        use_hook(|| tries.map(|t| t.log.peek().get(k).cloned().unwrap_or_default()).unwrap_or_default());
+    let before = use_hook(|| {
+        tries.map(|t| t.attempt.peek().tries.get(k).cloned().unwrap_or_default()).unwrap_or_default()
+    });
     let n_before = playable.iter().filter(|id| before.graded.contains(id)).count();
     let playable: Vec<String> = playable.into_iter().filter(|id| !before.graded.contains(id)).collect();
     let mut at = use_signal(|| 0usize);
     let mut again = use_signal(|| before.again as usize);
     let mut started = use_signal(std::time::Instant::now);
     let mut reported = use_signal(|| false);
+    super::steps::use_check_bar(|| false, move || (!reported()).then(|| tx::TRY_FIRST.to_string()), |_| {});
     use_effect(move || {
         // Nothing playable, or every card graded before he left mid-step.
         if n == n_before && !reported() {
@@ -104,7 +98,7 @@ pub fn TryItems(items: Vec<String>, on_answer: EventHandler<bool>) -> Element {
                     *again.write() += 1;
                 }
                 if let Some(mut t) = tries {
-                    if let Some(log) = t.log.write().get_mut(k) {
+                    if let Some(log) = t.attempt.write().tries.get_mut(k) {
                         log.graded.push(id.clone());
                         log.again = again() as u32;
                     }

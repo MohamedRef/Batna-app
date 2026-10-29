@@ -344,11 +344,12 @@ pub fn Study() -> Element {
                     };
                     rsx! {
                         div { class: "st-progress",
-                            div { class: "st-bar", role: "progressbar",
+                            div { class: "progress st-bar", "data-tone": "good", role: "progressbar",
                                 aria_valuemin: "0", aria_valuemax: "{len}", aria_valuenow: "{pos}",
-                                div { class: "st-bar-fill", style: "inline-size: {pos * 100 / len.max(1)}%" }
+                                aria_label: "{pos + 1} {tx::OF} {len}",
+                                div { class: "progress-fill", style: "inline-size: {pos * 100 / len.max(1)}%" }
                             }
-                            span { class: "muted small st-count", "{pos + 1} {tx::OF} {len}" }
+                            span { class: "muted small num-ltr st-count", "{pos + 1} / {len}" }
                             if can_undo {
                                 button {
                                     class: "btn-link st-undo",

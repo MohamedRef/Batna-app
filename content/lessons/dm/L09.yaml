@@ -1,0 +1,760 @@
+schema: batna.lesson/v1
+lecture: dm.L09
+lessons:
+  # ------------------------------------------------------------------
+  - id: dm.L09.lesson1
+    title: "الصورة الكبيرة والـ sulfonylureas"
+    hook: "الـ type 2 مرض بيمشي لقدّام. نعرف امتى نضيف دوا، وأقدم دوا بيعصر الـ beta cell إزاي."
+    minutes: 9
+    pages: [103, 106]
+    topics: [overview, su]
+    goals:
+      - "تحفظ سلّم الـ HbA1c: monotherapy ولا dual ولا triple"
+      - "تعدّ الـ 8 classes"
+      - "تفهم الـ SU بيقفل الـ KATP channel ليه بيعمل hypoglycemia وweight gain"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 103
+        title: "مرض بيمشي لقدّام"
+        quote: "Type 2 diabetes is a progressive disease. In all stages diet therapy and exercise are fundamental in order to attain glycemic goals."
+        text: |
+          الـ **type 2 diabetes** ==progressive disease==: الـ beta cells بتتعب سنة ورا سنة.
+
+          - في **كل** مرحلة: **diet therapy and exercise** هما الأساس.
+          - لما الأول ما يكفّيش، نضيف تاني وتالت.
+          - ومع ==beta-cell exhaustion== غالبًا هنحتاج **insulin**.
+
+          الهدف: **treat to target** ونمنع أو نأخّر الـ complications.
+      - kind: figure
+        page: 103
+        quote: "Initially oral monotherapy is used when the HBA1c is less than 7.5%"
+        title: "سلّم الـ HbA1c وقت التشخيص"
+        alt: "A three-step ladder. HbA1c below 7.5% starts with oral monotherapy; 7.5 to 9% can start with dual oral therapy; above 9% can start with dual or triple oral therapy."
+        caption: "كل ما الـ HbA1c وقت التشخيص يعلى، تبدأ بأدوية أكتر. ==7.5== و ==9== هما الحدّين."
+        svg: |
+          <svg viewBox="0 0 330 230" xmlns="http://www.w3.org/2000/svg">
+            <rect x="20" y="160" width="290" height="50" rx="10" class="fg-good"/>
+            <text x="35" y="182" class="t-b">HbA1c &lt; 7.5%</text>
+            <text x="35" y="200" class="t-sm">Oral monotherapy</text>
+            <rect x="20" y="95" width="290" height="50" rx="10" class="fg-acc"/>
+            <text x="35" y="117" class="t-b">HbA1c 7.5 – 9%</text>
+            <text x="35" y="135" class="t-sm">Can begin with dual oral therapy</text>
+            <rect x="20" y="30" width="290" height="50" rx="10" class="fg-bad"/>
+            <text x="35" y="52" class="t-b">HbA1c &gt; 9%</text>
+            <text x="35" y="70" class="t-sm">Can begin with dual or triple oral therapy</text>
+            <text x="165" y="20" text-anchor="middle" class="t-sm t-mut">later: insulin as beta cells fail</text>
+          </svg>
+      - kind: table
+        page: 103
+        quote: "Preprandial BG 80-130 mg/dl Postprandial BG <180 mg/dl HbA1c <7%"
+        title: "ADA goals"
+        columns: [Measure, Goal]
+        rows:
+          - [Preprandial BG, "80–130 mg/dl"]
+          - [Postprandial BG, "<180 mg/dl"]
+          - [HbA1c, "<7%"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: check
+        page: 103
+        quote: "If HBA1c at the time of diagnosis is ranging between 7.5% and 9% we can begin by dual oral therapy"
+        question: "New type 2 DM, HbA1c 8.3% at diagnosis. How can you start, per the lecture?"
+        options:
+          - "Dual oral therapy"
+          - "Oral monotherapy only"
+          - "Insulin first"
+          - "Diet alone for 6 months"
+        answer: 0
+        why:
+          - "صح: 7.5–9% وقت التشخيص = ممكن تبدأ dual."
+          - "الـ monotherapy لما يكون أقل من 7.5%."
+          - "الكتاب ما قالش insulin في البداية هنا؛ الـ insulin لما الـ beta cells تتعب."
+          - "الـ diet والرياضة أساس بس مش لوحدهم بالرقم ده."
+      - kind: match
+        page: 104
+        quote: "8 distinct classes of oral antidiabetic agents are actually available"
+        prompt: "الـ 8 classes: وصّل كل class بدوا منها"
+        pairs:
+          - ["Sulfonylurea", "Gliclazide"]
+          - ["Biguanide", "Metformin"]
+          - ["Meglitinide", "Repaglinide"]
+          - ["Alpha-glucosidase inhibitor", "Acarbose"]
+          - ["Thiazolidinedione", "Pioglitazone"]
+          - ["SGLT2 inhibitor", "Empagliflozin"]
+        why: "والاتنين الباقيين: **DPP-4 inhibitors** (sitagliptin) و **oral GLP-1 RA** (semaglutide). المجموع 8 classes."
+      - kind: explain
+        page: 104
+        title: "الـ SU: بيعصر الـ beta cell"
+        quote: "leading to closure of the ATP-sensitive K+ (KATP) channels."
+        text: |
+          الـ **sulfonylureas** بتنزّل الـ HbA1c حوالي **1.5%** (1–2%).
+
+          الـ main effect **pancreatic**: الدوا يركب على الـ **SUR** على غشاء الـ beta cell، فيقفل ==KATP channels==، الخلية تعمل depolarization، والـ insulin يطلع.
+
+          المهم: ده بيحصل **حتى لو السكر واطي**. افتكر الجملة دي، هي سر الـ side effects.
+      - kind: table
+        page: 104
+        quote: "Glimepiride: 1-8 mg/d ……………………………( Intermediate acting)"
+        title: "الأجيال والجرعات"
+        columns: [Drug, Dose/day, Acting]
+        rows:
+          - ["Tolbutamide (1st)", "500–3000 mg", "Short 4–6 h"]
+          - ["Chlorpropamide (1st)", "100–500 mg", "Long 24–60 h"]
+          - ["Glibenclamide", "0.5–20 mg", Intermediate]
+          - ["Gliclazide MR", "30–120 mg", Intermediate]
+          - ["Glipizide", "2.5–40 mg", Short]
+          - ["Glimepiride (3rd)", "1–8 mg", Intermediate]
+        hide: [[1, 2], [4, 2], [5, 1]]
+      - kind: aside
+        tone: exam
+        page: 106
+        quote: "SURx (65 Kd) in pancreatic -cells for binding of glimepiride (3rd generation SU)"
+        text: |
+          سؤال حلو للـ MCQ: معظم الـ SUs بتركب على **SUR1 (140 kDa)**، أما ==glimepiride== فبيركب على **SURx (65 kDa)**.
+
+          والـ glimepiride وبعض الجيل التاني ليهم extrapancreatic effects (GLUT4 translocation، adiponectin ↑، TNF-alpha ↓)، بس الكتاب بيقول الموضوع **controversial**.
+      - kind: reveal
+        page: 106
+        quote: "Hypoglycemia. Weight gain. Skin rashes. Cholestatic jaundice in case of chlorpropamide & acetohexamide"
+        prompt: "ليه الـ SU بيعمل hypoglycemia و weight gain مع بعض؟"
+        answer: |
+          لأنه بيطلّع **insulin** من غير ما يسأل السكر كام. لو العيان ما أكلش، الـ insulin شغال ← **hypoglycemia**.
+
+          والـ insulin هرمون **anabolic** بيخزّن دهون، وكمان العيان بياكل علشان يعالج الهبوط ← **weight gain**.
+
+          باقي الـ side effects: skin rashes، **cholestatic jaundice** (chlorpropamide و acetohexamide)، blood dyscrasia، و primary/secondary failure كتير.
+      - kind: aside
+        tone: joke
+        page: 106
+        quote: "Advantages: o High efficacy o Inexpensive"
+        text: "الـ SU زي الميكانيكي اللي في أول الشارع: **High efficacy** و **Inexpensive**، بس ساعات يشد العربية زيادة عن اللزوم ويوقعك في hypoglycemia. 😅"
+      - kind: check
+        page: 106
+        quote: "Effect on CVD: neutral. 7. Effect on HF: neutral. 8. Effect on progression of DKD: neutral."
+        question: "Sulfonylureas' effect on CVD, heart failure and DKD progression?"
+        options:
+          - "Neutral, neutral, neutral"
+          - "Benefit, neutral, benefit"
+          - "Neutral, increased risk, neutral"
+          - "Benefit, benefit, benefit"
+        answer: 0
+        why:
+          - "صح: الـ SU **neutral** في التلاتة."
+          - "ده أقرب للـ SGLT2i أو metformin (potential CV benefit)."
+          - "الـ increased HF risk ده للـ TZDs."
+          - "ده SGLT2i تقريبًا، مش SU."
+      - kind: try
+        items: [dm.L09.002, dm.L09.007, dm.L09.008, dm.L09.013, dm.L09.019]
+    recap:
+      - "Diet and exercise في كل مرحلة. HbA1c <7.5% mono، 7.5–9% dual، >9% dual أو triple."
+      - "ADA: preprandial 80–130، postprandial <180، HbA1c <7%."
+      - "8 classes: SU، biguanide، AGI، meglitinide، TZD، DPP-4i، SGLT2i، oral GLP-1 RA."
+      - "SU: يقفل KATP ← insulin حتى مع سكر واطي ← hypoglycemia + weight gain. HbA1c ↓ 1.5%."
+      - "Glimepiride على SURx (65 kDa). Cholestasis: chlorpropamide و acetohexamide. CVD/HF/DKD: neutral."
+    practice: [dm.L09.001, dm.L09.002, dm.L09.003, dm.L09.004, dm.L09.005, dm.L09.006, dm.L09.007, dm.L09.008, dm.L09.009, dm.L09.010, dm.L09.011, dm.L09.012, dm.L09.013, dm.L09.014, dm.L09.015, dm.L09.016, dm.L09.017, dm.L09.018, dm.L09.019, dm.L09.020, dm.L09.021, dm.L09.022, dm.L09.023]
+  # ------------------------------------------------------------------
+  - id: dm.L09.lesson2
+    title: "Metformin: الدوا اللي بيقفل حنفية الكبد"
+    hook: "أرخص دوا، ومفيهوش hypoglycemia، وفوائده برّه السكر كتير. بس عنده قواعد مع الـ contrast والعمليات."
+    minutes: 9
+    pages: [106, 109]
+    topics: [metformin]
+    goals:
+      - "تشرح الـ mechanism من غير ما تقع في فخ insulin secretion"
+      - "تعدّ الـ non-glycemic benefits وأرقام UKPDS"
+      - "تعرف امتى توقفه: eGFR <30، contrast، anesthesia"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 106
+        title: "مش بيطلّع insulin"
+        quote: "The precise mode of action of metformin remains controversial; most certainly, it does not stimulate insulin secretion."
+        text: |
+          من الـ **biguanides** (phenformin، metformin، buformin) فاضل **metformin** بس. بينزّل الـ HbA1c حوالي **1.5%**.
+
+          الـ mechanism بالظبط controversial، بس المؤكد إنه ==does not stimulate insulin secretion==. علشان كده مفيش hypoglycemia لوحده.
+      - kind: figure
+        page: 107
+        quote: "Increases GLUT4 in the plasma membrane of insulin-resistant cells. May lead to anorexia, and it decreases intestinal glucose absorption."
+        title: "Metformin شغال فين؟"
+        alt: "Three stacked panels. Liver: gluconeogenesis blocked, the main effect. Muscle: more anaerobic glycolysis and more GLUT4 in the membrane. Gut: less glucose absorption and anorexia."
+        caption: "التأثير الرئيسي في الـ ==liver==: يقفل الـ gluconeogenesis. والعضلات بتاخد glucose أكتر، والأمعاء بتمتص أقل."
+        svg: |
+          <svg viewBox="0 0 330 260" xmlns="http://www.w3.org/2000/svg">
+            <rect x="15" y="10" width="300" height="70" rx="12" class="fg-acc"/>
+            <text x="30" y="35" class="t-b t-acc">Liver (main effect)</text>
+            <text x="30" y="55" class="t-sm">Gluconeogenesis blocked</text>
+            <text x="30" y="70" class="t-sm">→ less hepatic glucose output</text>
+            <rect x="15" y="95" width="300" height="70" rx="12" class="fg-box"/>
+            <text x="30" y="120" class="t-b">Muscle and peripheral tissue</text>
+            <text x="30" y="140" class="t-sm">Anaerobic glycolysis ↑</text>
+            <text x="30" y="155" class="t-sm">Insulin-mediated uptake ↑, GLUT4 in membrane ↑</text>
+            <rect x="15" y="180" width="300" height="70" rx="12" class="fg-box"/>
+            <text x="30" y="205" class="t-b">Gut and appetite</text>
+            <text x="30" y="225" class="t-sm">Intestinal glucose absorption ↓</text>
+            <text x="30" y="240" class="t-sm">May cause anorexia</text>
+          </svg>
+      - kind: aside
+        tone: trap
+        page: 106
+        quote: "inhibiting gluconeogenesis: directly or through insulin sensitizing effect (main effect)."
+        text: "سطر الكتاب مكتوب «Increases hepatic glucose production by inhibiting gluconeogenesis»، وده غلط مطبعي واضح: لو ==inhibiting gluconeogenesis== يبقى الـ hepatic glucose output **بيقل**. في الامتحان اكتب: decreases hepatic glucose output by inhibiting gluconeogenesis (main effect)."
+      - kind: explain
+        page: 107
+        title: "فوايد برّه السكر"
+        quote: "Decreases the antifibrinolytic factor PAI-1."
+        text: |
+          الجرعة **500–2500 mg/d**. والـ **non-glycemic benefits** (سؤال كتاب):
+
+          - **Weight**: neutral، وممكن ينزّل.
+          - **No hypoglycemia** لوحده أو مع non-secretagogues.
+          - **Lipids**: TG ↓ و LDL-C ↓.
+          - ==PAI-1== ↓ و endothelial function أحسن (anti-atherosclerotic).
+          - **PCOS**: بيحسّن الـ ovulation.
+          - **Anticancer** effect، و potential CV benefit.
+          - primary/secondary failure نادر، ورخيص.
+      - kind: mnemonic
+        page: 107
+        quote: "Improves ovulatory function in PCOS."
+        word: "WHALE PC"
+        parts:
+          - { key: "W", text: "Weight neutral (may lose)" }
+          - { key: "H", text: "Hypoglycemia: none alone" }
+          - { key: "A", text: "Anti-atherosclerotic: endothelium better, PAI-1 down" }
+          - { key: "L", text: "Lipids: TG and LDL-C down" }
+          - { key: "E", text: "Economic (inexpensive), rare failure" }
+          - { key: "P", text: "PCOS ovulation improves" }
+          - { key: "C", text: "Cancer: anticancer effect, plus CV benefit" }
+        hook: "الـ metformin **حوت** (WHALE) في فوايده، ومعاه **PC**."
+      - kind: table
+        page: 107
+        quote: "32% -----in any DM-related endpoint - 42% -----in DM-related deaths - 36% -----in all cause mortality - 39% -----in the risk of MI"
+        title: "UKPDS 1998 مع metformin"
+        columns: [Endpoint, Reduction]
+        rows:
+          - [Any DM-related endpoint, "32%"]
+          - [DM-related deaths, "42%"]
+          - [All-cause mortality, "36%"]
+          - [MI, "39%"]
+          - [All macrovascular, "30%"]
+          - [Microvascular, Not significant]
+        hide: [[0, 1], [1, 1], [3, 1], [5, 1]]
+      - kind: aside
+        tone: tip
+        page: 107
+        quote: "UKPDS (1998) is the only study that has examined the overall effectiveness of metformin on long-term complications"
+        text: "عشان تحفظ الأرقام: **32 – 42 – 36 – 39 – 30**. الرقم الكبير (42) للـ **deaths**، والـ **MI** قريب منه (39). و **UKPDS** هي الدراسة الوحيدة اللي بصّت على الـ long-term complications."
+      - kind: explain
+        page: 108
+        title: "الـ side effects"
+        quote: "Lactic acidosis: rare and fatal in 30% of cases, it occurs if metformin is given in high doses particularly in patients with impaired kidney functions"
+        text: |
+          - **GI**: nausea، dyspepsia، anorexia، diarrhea (الأشهر).
+          - ==Lactic acidosis==: نادرة بس **fatal in 30%**، مع الجرعات العالية خصوصًا لو الكلى بايظة أو CHF مش متظبط.
+          - **Vitamin B12** و folic acid absorption ↓.
+
+          Contraindicated لو **eGFR <30** أو chronic alcoholism.
+      - kind: reveal
+        page: 108
+        quote: "IV iodinated materials can lead to acute alteration of renal function and lactic acidosis in patients receiving metformin"
+        prompt: "ليه بنوقف metformin قبل الـ CT بالصبغة؟"
+        answer: |
+          الـ **IV iodinated contrast** ممكن يعمل AKI. الـ metformin بيطلع من الكلى، فلو الكلى وقفت فجأة يتراكم ← **lactic acidosis** (حوالي 1 in 500,000).
+
+          علشان كده: وقّفه **at or before** الصبغة، **withhold 48 hours**، ورجّعه بس لما الـ renal function تبقى normal. وفي الـ general anesthesia: وقّفه **صباح العملية** ورجّعه بعد ما الكلى تتأكد.
+      - kind: update
+        page: 108
+        quote: "Contraindicated in severely impaired renal function (eGFR <30 ml/min/1.73m2), chronic alcoholism."
+        text: "الـ FDA (2016) بتقول كمان: ما تبدأش metformin لو eGFR 30–45، ووقّفه مع الصبغة أساسًا لو eGFR 30–60 أو liver disease أو alcoholism أو heart failure أو intra-arterial contrast. في الامتحان: الكتاب (CI <30، stop مع أي IV contrast 48 h)."
+        ref: "FDA metformin labeling revision, 2016"
+      - kind: check
+        page: 108
+        quote: "With the use of general anesthesia: stop metformin on the morning of surgery and restart when renal function are re-evaluated & found to be normal."
+        question: "Patient on metformin for elective surgery under general anesthesia. When to stop it?"
+        options:
+          - "On the morning of surgery"
+          - "3–4 days before"
+          - "One week before"
+          - "No need to stop"
+        answer: 0
+        why:
+          - "صح: صباح العملية، ويرجع لما الـ renal function تبقى normal."
+          - "3–4 days ده rule الـ SGLT2 inhibitors."
+          - "مش محتاج أسبوع."
+          - "الكتاب بيقول وقّفه."
+      - kind: try
+        items: [dm.L09.026, dm.L09.029, dm.L09.031, dm.L09.035, dm.L09.038]
+    recap:
+      - "Metformin: مش بيطلّع insulin. Main effect: يقفل الـ hepatic gluconeogenesis. HbA1c ↓ 1.5%."
+      - "Non-glycemic: **WHALE PC**."
+      - "UKPDS: 32 / 42 / 36 / 39 / 30؛ microvascular مش significant."
+      - "Side effects: GI، lactic acidosis (fatal 30%)، B12 ↓. CI: eGFR <30، alcoholism."
+      - "Contrast: stop قبل، 48 h، ورجّع بعد ما الكلى تتأكد. Anesthesia: صباح العملية."
+    practice: [dm.L09.024, dm.L09.025, dm.L09.026, dm.L09.027, dm.L09.028, dm.L09.029, dm.L09.030, dm.L09.031, dm.L09.032, dm.L09.033, dm.L09.034, dm.L09.035, dm.L09.036, dm.L09.037, dm.L09.038, dm.L09.039, dm.L09.040, dm.L09.041, dm.L09.042, dm.L09.043, dm.L09.131, dm.L09.134]
+  # ------------------------------------------------------------------
+  - id: dm.L09.lesson3
+    title: "Acarbose والـ glinides والـ TZDs"
+    hook: "دوا بيأخّر النشويات، ودوا بيدّي insulin على الأكل بس، ودوا بيصالح الخلايا على الـ insulin."
+    minutes: 10
+    pages: [109, 115]
+    topics: [agi, glinides, tzd]
+    goals:
+      - "تعرف ليه الـ hypoglycemia مع acarbose بتتعالج بـ glucose بس"
+      - "تفرّق الـ glinide عن الـ SU"
+      - "تفهم الـ PPAR-gamma وتحفظ الـ side effects بتاعة الـ fluid retention"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 109
+        title: "Alpha-glucosidase inhibitors"
+        quote: "through competitive inhibition of the action of the intestinal brush border alpha- glucosidase enzyme. So, the postprandial blood glucose peaks are blunted."
+        text: |
+          **Acarbose، miglitol، voglibose**: HbA1c ↓ **0.5–0.8%** بس.
+
+          بتعمل ==competitive inhibition== لإنزيم الـ **alpha-glucosidase** في الـ brush border، فالـ disaccharides والنشويات تتهضم أبطأ، والـ **postprandial peaks** تتسطّح. وكمان بتزوّد الـ **GLP-1**.
+
+          الجرعة: acarbose و miglitol **25–300 mg/d**.
+      - kind: reveal
+        page: 110
+        quote: "the hypoglycemia which occurs in the presence of alpha-glucosidase inhibitors is only reversed by glucose intake."
+        prompt: "عيان على acarbose + SU جاله hypoglycemia. ليه العصير بالسكر (sucrose) مش هينفع؟"
+        answer: |
+          الـ **sucrose** disaccharide، محتاج alpha-glucosidase علشان يتكسر لـ glucose + fructose. والإنزيم ده **متقفّل** بالدوا.
+
+          علشان كده الـ hypoglycemia مع الـ AGIs ==only reversed by glucose intake== (glucose tablets أو dextrose).
+      - kind: aside
+        tone: joke
+        page: 109
+        quote: "GIT distress: abdominal discomfort, flatulence and diarrhea, frequently leading to discontinuation of the drug."
+        text: "الكربوهيدرات اللي ما اتهضمتش بتوصل القولون والبكتيريا تعمل عليها حفلة ← **flatulence** و diarrhea. علشان كده عيان الـ acarbose بيبطّل الدوا قبل ما أهله يبطّلوه هو. 😄 وكمان الجرعة **3 مرات في اليوم** والـ efficacy أقل من SU و metformin."
+      - kind: explain
+        page: 110
+        title: "Meglitinides: insulin على قد الأكلة"
+        quote: "Meglitinides are distinguished from SUs by their rapid onset of action and short metabolic half-lives."
+        text: |
+          **Repaglinide** (benzoic acid، 1–16 mg/d) و **nateglinide** (phenylalanine، 120–360 mg/d، نادر).
+
+          بيشتغلوا على الـ KATP channel زي الـ SU بس على **site مختلف**، وبيركبوا ويسيبوا بسرعة. الفرق: ==rapid onset== و **short half-life**.
+
+          تاخده **قبل الأكلة** ← دفعة insulin قصيرة، والـ beta cell ترتاح بين الأكلات:
+          - postprandial excursion أقل
+          - hypoglycemia متأخرة أقل
+          - weight gain أقل
+      - kind: sort
+        page: 111
+        quote: "Hypoglycemia: less than SUs. Weight gain: less than SUs. Nateglinide appears to be a less potent secretagogue."
+        prompt: "صنّف: ده بيحصل مع الـ AGIs ولا الـ meglitinides؟"
+        bins: ["Alpha-glucosidase inhibitors", "Meglitinides"]
+        cards:
+          - { text: "Flatulence and diarrhea", bin: 0 }
+          - { text: "Raises GLP-1 release", bin: 0 }
+          - { text: "Weight neutral, no hypoglycemia alone", bin: 0 }
+          - { text: "Hypoglycemia, less than SUs", bin: 1 }
+          - { text: "Efficacy like SUs (repaglinide)", bin: 1 }
+          - { text: "Binds a site distinct from the SU site", bin: 1 }
+        why: "الاتنين جرعتهم 3 مرات في اليوم. الـ AGI بيشتغل في الأمعاء (gas، GLP-1، weight neutral). الـ glinide secretagogue زي الـ SU بس أخف (hypoglycemia و weight أقل)."
+      - kind: explain
+        page: 111
+        title: "TZDs: PPAR-gamma"
+        quote: "PPAR binds to retinoid X receptor to form a heterodimer that enhances production of proteins essential in cell response to insulin"
+        text: |
+          **Pioglitazone** و **rosiglitazone** (HbA1c ↓ 0.5–1.4%). أول واحد **troglitazone** اتسحب **March 2000** بسبب hepatocellular injury.
+
+          بيشغّلوا الـ ==PPAR-gamma== (nuclear receptor) اللي يركب مع الـ **retinoid X receptor** ويطلّعوا proteins لـ glucose transport و lipid metabolism. النتيجة: **insulin sensitivity** أحسن في العضلات والدهون والكبد، و **GLUT4** أكتر.
+      - kind: figure
+        page: 112
+        quote: "Increased differentiation of small adipocytes which are more sensitive to insulin."
+        title: "الـ TZD بيعمل إيه في الخلية الدهنية"
+        alt: "One large fat cell on top releases FFAs and TNF-alpha. An arrow labelled TZD leads to several small fat cells below that release adiponectin, with fat moving from central to subcutaneous depots."
+        caption: "خلايا دهون **صغيرة** حساسة للـ insulin بدل الكبيرة العنيدة، و ==adiponectin== ↑، و FFAs/TNF-alpha ↓، والدهون تنقل من الـ central للـ subcutaneous."
+        svg: |
+          <svg viewBox="0 0 330 270" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L09a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="fg-head-acc"/></marker></defs>
+            <circle cx="90" cy="60" r="45" class="fg-bad"/>
+            <text x="90" y="58" text-anchor="middle" class="t-sm t-b">Large</text>
+            <text x="90" y="74" text-anchor="middle" class="t-sm">adipocyte</text>
+            <text x="190" y="45" class="t-sm t-bad">FFAs ↑</text>
+            <text x="190" y="65" class="t-sm t-bad">TNF-alpha ↑</text>
+            <text x="190" y="85" class="t-sm t-mut">insulin resistant</text>
+            <path d="M165 115 V150" class="fg-arrow-acc" marker-end="url(#L09a)"/>
+            <text x="180" y="138" class="t-sm t-acc t-b">TZD (PPAR-gamma)</text>
+            <circle cx="50" cy="200" r="20" class="fg-good"/>
+            <circle cx="95" cy="215" r="20" class="fg-good"/>
+            <circle cx="70" cy="245" r="18" class="fg-good"/>
+            <text x="140" y="190" class="t-sm t-good">Small, insulin-sensitive</text>
+            <text x="140" y="210" class="t-sm t-good">Adiponectin ↑</text>
+            <text x="140" y="230" class="t-sm">FFAs, TNF-alpha ↓</text>
+            <text x="140" y="250" class="t-sm">Central → subcutaneous fat</text>
+          </svg>
+      - kind: explain
+        page: 113
+        title: "فوايد الـ TZDs"
+        quote: "Pioglitazone is without effect on LDL-C, rosiglitazone increases LDL-C due to a shift from small dense to large LDL particles"
+        text: |
+          - **Beta cells**: أقل glucotoxicity و FFAs، وضغط أقل على البنكرياس.
+          - **Lipids**: FFAs و TG ↓، HDL ↑. ==rosiglitazone increases LDL-C== بس لأن الـ particles بقت large (أقل atherogenic)؛ pioglitazone مالوش تأثير على الـ LDL.
+          - **CV markers**: BP ↓، microalbuminuria ↓، endothelium أحسن، cIMT ↓، PAI-1 ↓.
+          - **Pioglitazone و NASH**، و once daily، ومفيش hypoglycemia لوحده.
+      - kind: reveal
+        page: 114
+        quote: "Contraindicated in heart failure and CHF due to fluid retention/volume overload."
+        prompt: "Edema، anemia، heart failure: إيه اللي بيجمع التلاتة دول مع الـ TZD؟"
+        answer: |
+          سبب واحد: ==fluid retention/volume overload==.
+
+          - المية في الرجلين ← **edema**.
+          - المية بتخفّف الدم ← **hemodilutional anemia**.
+          - المية بتتقل على القلب ← **contraindicated in HF**.
+
+          وباقي اللستة: weight gain، slow onset، fractures (postmenopausal)، bladder cancer?، macular edema?، و CI في decompensated liver disease.
+      - kind: aside
+        tone: trap
+        page: 114
+        quote: "Hepatotoxicity is not a class effect."
+        text: "فخ: الـ hepatotoxicity كانت للـ **troglitazone** بس، ==not a class effect==. والـ pioglitazone بالعكس، مفيد في الـ NASH. بس ممنوع في الـ **decompensated** liver disease."
+      - kind: check
+        page: 115
+        quote: "Effect on HF: increased risk. 3. Effect on progression of DKD: neutral."
+        question: "Which oral class has 'increased risk' for heart failure in this lecture?"
+        options:
+          - "Thiazolidinediones"
+          - "Sulfonylureas"
+          - "Metformin"
+          - "SGLT2 inhibitors"
+        answer: 0
+        why:
+          - "صح: TZDs = HF increased risk (fluid retention)."
+          - "SUs: neutral."
+          - "Metformin: neutral على الـ HF."
+          - "SGLT2i بالعكس، بتقلّل الـ HF."
+      - kind: try
+        items: [dm.L09.045, dm.L09.050, dm.L09.055, dm.L09.072, dm.L09.075]
+    recap:
+      - "AGIs: brush-border inhibition، HbA1c ↓ 0.5–0.8%، gas، 3×/day. Hypoglycemia = glucose بس."
+      - "Glinides: rapid onset، short half-life، قبل الأكل، hypoglycemia و weight أقل من SU."
+      - "TZDs: PPAR-gamma + RXR، GLUT4 ↑، small adipocytes، adiponectin ↑. HbA1c ↓ 0.5–1.4%."
+      - "Fluid retention ← edema، dilutional anemia، CI في HF. كمان fractures و bladder cancer?."
+      - "Hepatotoxicity troglitazone بس. Pioglitazone مفيد في NASH. Rosiglitazone LDL ↑ (large particles)."
+    practice: [dm.L09.044, dm.L09.045, dm.L09.046, dm.L09.047, dm.L09.048, dm.L09.049, dm.L09.050, dm.L09.051, dm.L09.052, dm.L09.053, dm.L09.054, dm.L09.055, dm.L09.056, dm.L09.057, dm.L09.058, dm.L09.059, dm.L09.060, dm.L09.061, dm.L09.062, dm.L09.063, dm.L09.064, dm.L09.065, dm.L09.066, dm.L09.067, dm.L09.068, dm.L09.069, dm.L09.070, dm.L09.071, dm.L09.072, dm.L09.073, dm.L09.074, dm.L09.075, dm.L09.076, dm.L09.077]
+  # ------------------------------------------------------------------
+  - id: dm.L09.lesson4
+    title: "الـ incretins: DPP-4 inhibitors و oral semaglutide"
+    hook: "ليه السكر بالبُق بيطلّع insulin أكتر من السكر في الوريد؟ ومن هنا اتولدت عيلتين أدوية."
+    minutes: 10
+    pages: [115, 120]
+    topics: [incretin, dpp4, oral-glp1]
+    goals:
+      - "تشرح الـ incretin effect (سؤال كتاب)"
+      - "تفرّق GLP-1 عن GIP، وإيه اللي بيبوظ في T2DM"
+      - "تعرف الـ DPP-4i والـ oral semaglutide: جرعات ومزايا وعيوب"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 115
+        title: "الـ incretin effect"
+        quote: "the plasma insulin response to an oral glucose load is far greater than the plasma insulin response to an IV glucose load"
+        text: |
+          لو اديت نفس كمية الـ glucose **بالبُق** و**في الوريد**، الـ insulin اللي بيطلع مع البُق ==far greater==. ده الـ **incretin effect**.
+
+          السبب: الأمعاء بتطلّع **GLP-1** و **GIP** مع الأكل، وهما مسؤولين عن لحد **60%** من الـ postprandial insulin. وكل ده **glucose-dependent**: بيشتغلوا بس لما السكر عالي.
+      - kind: table
+        page: 115
+        quote: "GIP: Is released from K cells in duodenum, stimulates insulin response from β-cells in a glucose-dependent manner"
+        title: "GLP-1 ضد GIP"
+        columns: [Feature, GLP-1, GIP]
+        rows:
+          - [Cells, "L cells, ileum and colon", "K cells, duodenum"]
+          - [Glucagon, Inhibits, No effect]
+          - [Gastric emptying, Slows, Minimal]
+          - [Satiety and weight, Reduces, No effect]
+          - [In T2DM, "Level ↓, action intact", "Level intact, action ↓"]
+        hide: [[0, 1], [0, 2], [1, 2], [4, 1], [4, 2]]
+      - kind: mnemonic
+        page: 115
+        quote: "GLP-1: Is released from L cells in ileum and colon"
+        word: "LK"
+        parts:
+          - { key: "L", text: "GLP-1 from L cells: Lower gut (ileum and colon)" }
+          - { key: "K", text: "GIP from K cells: duodenum (K for 'Kick-off', the first part)" }
+        hook: "**L = Lower** (ileum و colon) لـ GLP-1، و **K** في أول الأمعاء (duodenum) لـ GIP."
+      - kind: reveal
+        page: 118
+        quote: "the main beneficial action of the DPP-4 inhibitors is to increase the level of GLP-1(whose function remains intact in T2DM)."
+        prompt: "في T2DM الـ GLP-1 قليل بس شغال، والـ GIP موجود بس مش شغال. يبقى نعالج بإيه؟"
+        answer: |
+          نزوّد الـ ==GLP-1==، لأنه الوحيد اللي لسه بيسمع الكلام.
+
+          الـ DPP-4i بيرفعوا الاتنين، بس ==the main beneficial action== جاي من الـ GLP-1. زي ما تزوّد صوت الراديو الشغال، مش الراديو البايظ.
+      - kind: figure
+        page: 117
+        quote: "Long-acting DPP-4-resistant GLP-1 analogues / incretin mimetics. 2. DPP-4 inhibitors / incretin enhancers."
+        title: "طريقتين نستفيد من الـ GLP-1"
+        alt: "Top: native GLP-1 is cut by the DPP-4 enzyme into two inactive fragments. Below, two solutions: a DPP-4 inhibitor blocks the enzyme so native GLP-1 lasts longer (incretin enhancer); a GLP-1 analogue resists the enzyme (incretin mimetic)."
+        caption: "الـ **DPP-4** بيقطّع الـ GLP-1 بسرعة لـ fragments مالهاش لازمة. يا تقفل المقص (==incretin enhancers==)، يا تجيب GLP-1 ما يتقصّش (==incretin mimetics==)."
+        svg: |
+          <svg viewBox="0 0 330 280" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L09b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="fg-head"/></marker></defs>
+            <rect x="15" y="10" width="90" height="36" rx="8" class="fg-good"/>
+            <text x="60" y="33" text-anchor="middle" class="t-sm t-b">GLP-1</text>
+            <path d="M108 28 H150" class="fg-arrow" marker-end="url(#L09b)"/>
+            <rect x="153" y="10" width="70" height="36" rx="8" class="fg-bad"/>
+            <text x="188" y="33" text-anchor="middle" class="t-sm t-b">DPP-4</text>
+            <path d="M226 28 H250" class="fg-arrow" marker-end="url(#L09b)"/>
+            <text x="255" y="25" class="t-sm t-mut">inactive</text>
+            <text x="255" y="40" class="t-sm t-mut">fragments</text>
+            <rect x="15" y="80" width="300" height="85" rx="12" class="fg-acc"/>
+            <text x="30" y="103" class="t-b t-acc">1. Incretin enhancers (oral)</text>
+            <text x="30" y="123" class="t-sm">DPP-4 inhibitors block the enzyme</text>
+            <text x="30" y="140" class="t-sm">→ own GLP-1 rises and lasts longer</text>
+            <text x="30" y="157" class="t-sm t-mut">sita-, vilda-, saxa-, lina-, alogliptin</text>
+            <rect x="15" y="180" width="300" height="85" rx="12" class="fg-good"/>
+            <text x="30" y="203" class="t-b t-good">2. Incretin mimetics</text>
+            <text x="30" y="223" class="t-sm">GLP-1 analogues resist DPP-4</text>
+            <text x="30" y="240" class="t-sm">exenatide, liraglutide, dulaglutide…</text>
+            <text x="30" y="257" class="t-sm t-mut">semaglutide: injection or tablet</text>
+          </svg>
+      - kind: explain
+        page: 118
+        title: "DPP-4 inhibitors"
+        quote: "Well tolerated. Weight neutral Minimal episodes of hypoglycemia"
+        text: |
+          HbA1c ↓ **0.5–1%**.
+
+          - **مزايا**: well tolerated، ==weight neutral==، hypoglycemia قليلة جدًا (لأن الأثر glucose-dependent).
+          - **عيوب**: intermediate efficacy، arthralgia? و pancreatitis? (extremely rare).
+      - kind: table
+        page: 119
+        quote: "sitagliptin: 100mg/d, vildagliptin: 50mg Bid, saxagliptin: 5mg/d, linagliptin 5 mg/d, and alogliptin 25 mg/d."
+        title: "جرعات الـ gliptins"
+        columns: [Drug, Dose]
+        rows:
+          - [Sitagliptin, "100 mg/d"]
+          - [Vildagliptin, "50 mg twice daily"]
+          - [Saxagliptin, "5 mg/d"]
+          - [Linagliptin, "5 mg/d"]
+          - [Alogliptin, "25 mg/d"]
+        hide: [[0, 1], [1, 1], [4, 1]]
+      - kind: aside
+        tone: exam
+        page: 119
+        quote: "Effect on HF: neutral (Except Saxagliptin)."
+        text: "الـ DPP-4i كلهم **neutral** على الـ CVD و الـ HF و الـ DKD، ==Except Saxagliptin== في الـ HF. لو السؤال فيه عيان heart failure وبيسأل أي gliptin تتجنّب: saxagliptin."
+      - kind: explain
+        page: 119
+        title: "Oral semaglutide"
+        quote: "Oral GLP-1 receptor agonist (GLP-1RA) or incretin mimetics: decrease HBA1c >2% The only available oral GLP-1 RA is Semaglutide"
+        text: |
+          الـ GLP-1 RA الوحيد اللي بيتاخد بالبُق: ==semaglutide==. HbA1c ↓ **>2%**.
+
+          - **مزايا**: beneficial CV effect، very high efficacy، no hypoglycemia، weight loss.
+          - **عيوب**: GI (nausea، vomiting، diarrhea) في الأول، acute pancreatitis? (rare)، **very high cost**.
+      - kind: order
+        page: 120
+        quote: "3 mg tablet for initiation of treatment during the first month, 7 mg tablet during the second month of therapy,"
+        prompt: "رتّب جرعات الـ oral semaglutide"
+        steps:
+          - "3 mg: first month"
+          - "7 mg: second month"
+          - "14 mg: maintenance"
+        why: "بنطلع بالتدريج علشان الـ GI side effects اللي بتيجي on initiation."
+      - kind: check
+        page: 120
+        quote: "Patients should wait 30-60 minutes after taking oral semaglutide before consuming any food, other drinks, or other medications."
+        question: "How should oral semaglutide be taken?"
+        options:
+          - "Then wait 30–60 min before food, drinks or other medicines"
+          - "With a fatty meal to improve absorption"
+          - "At bedtime with other tablets"
+          - "Any time, with or without food"
+        answer: 0
+        why:
+          - "صح: الكتاب بيقول wait 30–60 minutes."
+          - "الأكل بيقلّل امتصاصه؛ لازم الانتظار."
+          - "ممنوع مع أدوية تانية في نفس الوقت."
+          - "مش أي وقت: محتاج معدة فاضية وانتظار."
+      - kind: try
+        items: [dm.L09.080, dm.L09.083, dm.L09.087, dm.L09.096, dm.L09.102]
+    recap:
+      - "Incretin effect: oral glucose ← insulin أكتر من IV. GLP-1 و GIP = لحد 60% من postprandial insulin."
+      - "GLP-1 من L cells (ileum، colon)، يقلّل glucagon و gastric emptying والأكل. GIP من K cells (duodenum)."
+      - "T2DM: GLP-1 قليل بس شغال؛ GIP موجود بس مش شغال ← نرفع الـ GLP-1."
+      - "DPP-4i: HbA1c ↓ 0.5–1%، weight neutral، كله neutral إلا saxagliptin في HF."
+      - "Oral semaglutide: >2%، CV benefit، weight ↓، 3 → 7 → 14 mg، استنى 30–60 دقيقة."
+    practice: [dm.L09.078, dm.L09.079, dm.L09.080, dm.L09.081, dm.L09.082, dm.L09.083, dm.L09.084, dm.L09.085, dm.L09.086, dm.L09.087, dm.L09.088, dm.L09.089, dm.L09.090, dm.L09.091, dm.L09.092, dm.L09.093, dm.L09.094, dm.L09.095, dm.L09.096, dm.L09.097, dm.L09.098, dm.L09.099, dm.L09.100, dm.L09.101, dm.L09.102, dm.L09.135, dm.L09.136]
+  # ------------------------------------------------------------------
+  - id: dm.L09.lesson5
+    title: "SGLT2 inhibitors والـ algorithm"
+    hook: "دوا بيخلّي الكلى ترمي السكر في البول، وبيحمي القلب والكلى نفسها. وبعدين نرتّب كل الأدوية في جدول واحد."
+    minutes: 10
+    pages: [120, 124]
+    topics: [sglt2, algorithm]
+    goals:
+      - "تفهم الكلى بتتعامل مع الـ glucose إزاي وإيه اللي بيتغير في T2DM"
+      - "تحفظ مزايا وأعراض وموانع الـ SGLT2i وقاعدة الـ eGFR 45 و 20"
+      - "تقرا الـ ADA 2025 figure وتصنّف الأدوية بالوزن والـ hypoglycemia والـ efficacy"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 120
+        title: "الكلى والسكر"
+        quote: "In normal renal glucose handling, 90% of glucose is reabsorbed by SGLT2 in the S1 and S2 segments of the renal proximal convoluted tubules."
+        text: |
+          الكلى بتفلتر لحد **180 g glucose** في اليوم، وبترجّعه كله:
+          - ==SGLT2== في الـ **S1 و S2**: حوالي **90%** (high capacity، low affinity).
+          - **SGLT1** في الـ S3: حوالي **10%** (low capacity، high affinity).
+
+          الـ **renal threshold** الطبيعي **180 mg/dl**. في T2DM بيعلى لـ **240** أو أكتر، لأن الـ SGLT2 بيزيد، فالكلى بتحافظ على السكر العالي بدل ما ترميه.
+      - kind: figure
+        page: 121
+        quote: "The renal glucose threshold (RTG) is increased up to 240 mg/dl or even more, in subjects with T2DM (normal RTG is 180 mg/dl)."
+        title: "الـ renal threshold"
+        alt: "A horizontal plasma glucose scale from 100 to 300 mg/dl. Normal threshold at 180, type 2 diabetes threshold at 240 or more, and an arrow showing SGLT2 inhibition moving the threshold far to the left so glucose spills into urine at lower levels."
+        caption: "الـ SGLT2i بيوطّي الـ threshold جامد، فالسكر يطلع في البول حتى وهو قريب من الطبيعي: حوالي **50–80 g/day**."
+        svg: |
+          <svg viewBox="0 0 330 200" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L09c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="fg-head-acc"/></marker></defs>
+            <path d="M20 120 H310" class="fg-arrow" stroke-width="2"/>
+            <text x="20" y="140" class="t-sm t-mut">100</text>
+            <text x="135" y="140" class="t-sm t-mut">200</text>
+            <text x="285" y="140" class="t-sm t-mut">300</text>
+            <text x="165" y="165" text-anchor="middle" class="t-sm t-mut">Plasma glucose, mg/dl</text>
+            <circle cx="112" cy="120" r="7" class="fg-dot-good"/>
+            <text x="112" y="100" text-anchor="middle" class="t-sm t-good t-b">180</text>
+            <text x="112" y="85" text-anchor="middle" class="t-sm">normal</text>
+            <circle cx="182" cy="120" r="7" class="fg-dot-bad"/>
+            <text x="182" y="100" text-anchor="middle" class="t-sm t-bad t-b">240+</text>
+            <text x="182" y="85" text-anchor="middle" class="t-sm">T2DM</text>
+            <path d="M175 40 H60" class="fg-arrow-acc" marker-end="url(#L09c)"/>
+            <text x="190" y="44" class="t-sm t-acc t-b">SGLT2i lowers it</text>
+            <text x="20" y="190" class="t-sm">Glucosuria 50–80 g/day, glucotoxicity reversed</text>
+          </svg>
+      - kind: explain
+        page: 121
+        title: "المزايا"
+        quote: "Weight loss (↓ ~3 - 4 kg ). Modest systolic BP lowering (↓ ~5 - 6 mmHg). Once-daily dosing."
+        text: |
+          HbA1c ↓ **1–2%**. Canagliflozin 100–300، dapagliflozin 5–10، empagliflozin 10–25، ertugliflozin 5–15 mg، كلهم **once daily**.
+
+          - high efficacy، no/low hypoglycemia
+          - ==Weight loss== ~**3–4 kg** (كالوريز في البول)
+          - systolic BP ↓ ~**5–6 mmHg** (natriuresis)
+          - **Compelling**: HF و CVD events في T2DM، HF في non-diabetics، CKD progression في الاتنين.
+      - kind: reveal
+        page: 122
+        quote: "Genital and urinary tract infections. 9. Increased frequency and/or volume of urination."
+        prompt: "استنتج الـ side effects من الـ mechanism: سكر كتير في البول + صوديوم ومية بتطلع."
+        answer: |
+          - سكر في البول = أكل للبكتيريا والـ candida ← ==Genital and urinary tract infections==.
+          - glucose بيشد مية ← **urination** أكتر.
+          - مية وصوديوم بيطلعوا ← **volume depletion، hypotension، dizziness**.
+          - insulin أقل و ketones ← **euglycemic DKA** (extremely rare).
+      - kind: explain
+        page: 122
+        title: "الموانع والاحتياطات"
+        quote: "Renal impairment (eGFR<45 mL/min) not to be used as antihyperglycemic agent, but the cardiorenal protective effect still continues"
+        text: |
+          - Hypersensitivity، **pregnancy**، **lactation**.
+          - ==eGFR <45==: ما تستخدموش علشان السكر (الكلى ما بتفلترش كفاية)، بس الـ **cardiorenal protection** مكمّلة لحد **eGFR 20**.
+          - حذر مع الكبار اللي عندهم postural hypotension.
+          - **وقّفه 3–4 أيام قبل العملية** (ketoacidosis و UTI، خصوصًا مع catheter).
+          - ما تبدأوش في الـ critically ill في المستشفى، حتى مع AMI أو CKD.
+      - kind: aside
+        tone: tip
+        page: 122
+        quote: "Should be stopped 3-4 days before surgery to prevent postsurgical ketoacidosis and UTI particularly in catheterized patients."
+        text: "فرّق بين قاعدتين العمليات: **metformin** يتوقف **صباح العملية**، و **SGLT2i** يتوقف **3–4 days before surgery**. اللي بيطلّع ketones محتاج مهلة أطول."
+      - kind: check
+        page: 123
+        quote: "Superior BP reduction – Cardiovascular protection – Renal Protection"
+        question: "Which is NOT one of the lecture's reasons SGLT2 inhibitors are superior to DPP-4 inhibitors?"
+        options:
+          - "Lower cost"
+          - "Higher efficacy"
+          - "Superior weight loss"
+          - "Renal protection"
+        answer: 0
+        why:
+          - "صح: التكلفة مش في اللستة."
+          - "Higher efficacy من الأسباب."
+          - "Superior weight loss من الأسباب."
+          - "Renal protection من الأسباب، ومعاها BP و CV protection."
+      - kind: figure
+        page: 123
+        quote: "Lifestyle modification is a cornerstone in the management of type 2 diabetic patients."
+        title: "ADA 2025: هدفين"
+        alt: "Two columns under a lifestyle banner. Left goal, cardiovascular and kidney risk reduction: ASCVD or high risk gets a GLP-1 RA or SGLT2i with proven CVD benefit; heart failure gets an SGLT2i; CKD gets an SGLT2i or a GLP-1 RA with proven CKD benefit. Right goal, weight and glucose: choose by efficacy."
+        caption: "الأساس ==lifestyle==. وبعدين سؤالين: عنده قلب أو كلى؟ (اختار الدوا اللي بيحمي)، وعايز ينزل وزن وسكر قد إيه؟ (اختار بالـ efficacy). وراجع كل 3–6 شهور."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="10" width="310" height="34" rx="8" class="fg-acc"/>
+            <text x="165" y="32" text-anchor="middle" class="t-sm t-b">Healthy lifestyle + DSMES · reassess 3–6 months</text>
+            <rect x="10" y="55" width="310" height="28" rx="6" class="fg-bad"/>
+            <text x="165" y="74" text-anchor="middle" class="t-sm t-b">Goal 1: heart and kidney risk reduction</text>
+            <rect x="10" y="90" width="310" height="34" rx="6" class="fg-box"/>
+            <text x="20" y="104" class="t-sm t-b">ASCVD / high CV risk</text>
+            <text x="20" y="118" class="t-sm">GLP-1 RA or SGLT2i with proven CVD benefit</text>
+            <rect x="10" y="130" width="310" height="34" rx="6" class="fg-box"/>
+            <text x="20" y="144" class="t-sm t-b">Heart failure (HFrEF or HFpEF)</text>
+            <text x="20" y="158" class="t-sm">SGLT2i with proven HF benefit</text>
+            <rect x="10" y="170" width="310" height="34" rx="6" class="fg-box"/>
+            <text x="20" y="184" class="t-sm t-b">CKD (eGFR &lt;60 or ACR ≥3 mg/mmol)</text>
+            <text x="20" y="198" class="t-sm">SGLT2i (start ≥20) or GLP-1 RA with CKD benefit</text>
+            <rect x="10" y="215" width="310" height="28" rx="6" class="fg-good"/>
+            <text x="165" y="234" text-anchor="middle" class="t-sm t-b">Goal 2: weight and glucose targets</text>
+            <rect x="10" y="250" width="310" height="40" rx="6" class="fg-box"/>
+            <text x="20" y="266" class="t-sm">Pick by efficacy; avoid hypoglycemia in high risk</text>
+            <text x="20" y="282" class="t-sm t-mut">MASLD/MASH: GLP-1 RA, GIP/GLP-1 RA, pioglitazone</text>
+          </svg>
+      - kind: sort
+        page: 123
+        quote: "Efficacy for glucose lowering"
+        prompt: "الـ ADA 2025 figure: efficacy for glucose lowering. صنّف:"
+        bins: ["Very high", "High", "Intermediate"]
+        cards:
+          - { text: "Semaglutide", bin: 0 }
+          - { text: "Insulin", bin: 0 }
+          - { text: "Tirzepatide", bin: 0 }
+          - { text: "Metformin", bin: 1 }
+          - { text: "SGLT2i", bin: 1 }
+          - { text: "Sulfonylureas", bin: 1 }
+          - { text: "Pioglitazone", bin: 1 }
+          - { text: "DPP-4i", bin: 2 }
+        why: "Very high: dulaglutide (high dose)، semaglutide، tirzepatide، insulin، والـ combinations. High: باقي الـ GLP-1 RA، metformin، pioglitazone، SGLT2i، SU. Intermediate: DPP-4i لوحدهم."
+      - kind: table
+        page: 124
+        quote: "Classify the different oral antidiabetic drugs according to their effect on changes in body weight."
+        title: "سؤال الكتاب: صنّف بالوزن والـ hypoglycemia"
+        columns: [Class, Weight, Hypo alone]
+        rows:
+          - [SUs, Gain, Yes]
+          - [Metformin, Neutral/loss, No]
+          - [AGIs, Neutral, No]
+          - [Glinides, "Gain (less)", "Yes (less)"]
+          - [TZDs, Gain, No]
+          - [DPP-4i, Neutral, Minimal]
+          - [Oral sema, Loss, No]
+          - [SGLT2i, Loss, Low]
+        hide: [[0, 1], [1, 2], [4, 1], [5, 1], [6, 1], [7, 1]]
+      - kind: case
+        page: 122
+        quote: "Beneficial effects in reduction of progression of CKD in non-diabetics and T2 diabetics."
+        stem: "65-year-old man, T2DM on metformin. eGFR 38, albuminuria. HbA1c 7.6%."
+        steps:
+          - question: "Add an SGLT2 inhibitor?"
+            options: ["Yes, for CKD protection (works down to eGFR 20)", "No, contraindicated below 45 for any use", "Yes, as the main glucose-lowering drug", "No, it causes hypoglycemia"]
+            answer: 0
+            why: "تحت 45 مش للسكر، بس الـ cardiorenal protection مكمّلة لحد 20."
+          - reveal: "His glucose is still above goal on the SGLT2i."
+            question: "Why is the SGLT2i not enough for glucose here?"
+            options: ["Its glucose-lowering effect falls with low eGFR", "He is resistant to SGLT2", "The dose is always too low", "SGLT2i do not lower glucose at all"]
+            answer: 0
+            why: "الكلى بتفلتر glucose أقل، فالدوا يرمي سكر أقل. الـ figure بتقول: glucose-lowering efficacy is reduced with eGFR <45."
+      - kind: try
+        items: [dm.L09.104, dm.L09.107, dm.L09.112, dm.L09.114, dm.L09.138]
+    recap:
+      - "SGLT2: 90% من الـ reabsorption في S1/S2. Threshold 180 طبيعي، 240+ في T2DM. الدوا يرمي 50–80 g/day."
+      - "HbA1c ↓ 1–2%، weight ↓ 3–4 kg، SBP ↓ 5–6. يحمي HF و CVD و CKD، حتى في non-diabetics."
+      - "Side effects: genital/UTI، polyuria، volume depletion، euglycemic DKA. CI: pregnancy، lactation."
+      - "eGFR <45 مش للسكر، الحماية لحد 20. وقّفه 3–4 أيام قبل العملية."
+      - "ADA 2025: ASCVD ← GLP-1 RA أو SGLT2i؛ HF ← SGLT2i؛ CKD ← SGLT2i أو GLP-1 RA. DPP-4i = intermediate efficacy."
+    practice: [dm.L09.103, dm.L09.104, dm.L09.105, dm.L09.106, dm.L09.107, dm.L09.108, dm.L09.109, dm.L09.110, dm.L09.111, dm.L09.112, dm.L09.113, dm.L09.114, dm.L09.115, dm.L09.116, dm.L09.117, dm.L09.118, dm.L09.119, dm.L09.120, dm.L09.121, dm.L09.122, dm.L09.123, dm.L09.124, dm.L09.125, dm.L09.126, dm.L09.127, dm.L09.128, dm.L09.129, dm.L09.130, dm.L09.132, dm.L09.133, dm.L09.137, dm.L09.138, dm.L09.139]

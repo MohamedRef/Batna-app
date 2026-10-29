@@ -1,0 +1,1149 @@
+schema: batna.content/v1
+lecture: endo.L05
+title: Neuroendocrine tumours
+author: Prof. Samir Naim Assaad
+book: { chapter: 5, pages: [77, 98] }
+topics:
+  - { id: overview, title: "Definition and the neuroendocrine cell" }
+  - { id: classification, title: "Sites, incidence and classification" }
+  - { id: markers, title: "Presentation and tumour markers" }
+  - { id: localization, title: "Tumour localization and imaging" }
+  - { id: treatment, title: "Treatment: somatostatin analogs, interferon, chemotherapy" }
+  - { id: targeted, title: "Targeted therapy" }
+  - { id: gastrinoma, title: "Gastrinoma and Zollinger-Ellison syndrome" }
+  - { id: insulinoma, title: "Insulinoma" }
+  - { id: glucagonoma, title: "Glucagonoma" }
+  - { id: vipoma, title: "VIPoma (Verner-Morrison, WDHA)" }
+  - { id: somatostatinoma, title: "Somatostatinoma and ectopic tumours" }
+  - { id: carcinoid, title: "Carcinoid tumours and carcinoid syndrome" }
+  - { id: syndromes, title: "Syndromes, sites and secretory products" }
+items:
+  # ---------- p77: definition, neuroendocrine cells ----------
+  - id: endo.L05.001
+    kind: enumerate
+    topic: overview
+    prompt: Neuroendocrine tumours are a heterogeneous group of neoplasms. Which three features do they share?
+    points: [Originate from neuroendocrine cells, Have secretory characteristics, Frequently present with hypersecretory syndromes]
+    pass: 3
+    src: { page: 77, quote: "Frequently present with hypersecretory syndromes." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.002
+    kind: cloze
+    topic: overview
+    text: "In {{c1::1969}}, Pearse described {{c2::APUD}} cells: {{c3::Amine Precursor Uptake and Decarboxylation}}."
+    src: { page: 77, quote: "In 1969, Pearse described APUD cells (Amine Precursor Uptake and Decarboxylation)." }
+    status: unverified
+  - id: endo.L05.003
+    kind: card
+    topic: overview
+    front: What do neuroendocrine (APUD) cells produce, and where do they store their hormones?
+    back: Polypeptides and biogenic amines, stored in dense core secretory granules that release them in response to external stimuli.
+    src: { page: 77, quote: "Contain dense core secretory granules that store and release hormones in response to external stimuli." }
+    status: unverified
+  - id: endo.L05.004
+    kind: card
+    topic: overview
+    front: How do neuroendocrine cells differ from neurons, and to which system do they belong?
+    back: They lack axons and synapses. They are part of the diffuse endocrine system (DES), from which the endocrine tumours of the gut and pancreas arise.
+    src: { page: 77, quote: "Lack axons and synapses. Part of the diffuse endocrine system (DES)." }
+    status: unverified
+  # ---------- p78: the cell, sites, background ----------
+  - id: endo.L05.005
+    kind: order
+    topic: overview
+    prompt: Order the serotonin pathway in the neuroendocrine cell.
+    steps: [Tryptophan, 5-HTP, 5-HT (serotonin), 5-HIAA]
+    src: { page: 78, quote: "Tryptophan → 5-HTP → 5-HT → 5-HIAA." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.006
+    kind: enumerate
+    topic: overview
+    prompt: Name three proteins found in the secretory granules of neuroendocrine cells.
+    points: [Pancreastatin, Chromostatin, Chromogranin A (CgA)]
+    pass: 3
+    src: { page: 78, quote: "Secretory granules contain pancreastatin, chromostatin, and chromogranin A (CgA)." }
+    status: unverified
+  - id: endo.L05.007
+    kind: enumerate
+    topic: overview
+    prompt: Enumerate the four regulation modes of neuroendocrine cells.
+    points: [Endocrine, Autocrine, Paracrine, Neurocrine]
+    pass: 4
+    src: { page: 78, quote: "Neurocrine." }
+    status: unverified
+  - id: endo.L05.008
+    kind: enumerate
+    topic: classification
+    prompt: Enumerate the sites of neuroendocrine tumours.
+    points: [Pancreatic islet cells, Gastroenteric tissue, Respiratory epithelium, Gastroenteropancreatic NETs (includes carcinoid tumours)]
+    pass: 3
+    src: { page: 78, quote: "Pancreatic islet cells. Gastroenteric tissue. Respiratory epithelium. Gastroenteropancreatic NETs (includes carcinoid tumors)." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.009
+    kind: cloze
+    topic: classification
+    text: "NET incidence is {{c1::1-2 per 100,000}} (likely underestimated because of vague presentations and misdiagnosis); they are {{c2::<2%}} of GI malignancies."
+    src: { page: 78, quote: "Incidence: 1–2 per 100,000 (likely underestimated due to vague presentations and misdiagnosis). <2% of GI malignancies." }
+    status: unverified
+    tags: [numbers]
+  - id: endo.L05.010
+    kind: card
+    topic: classification
+    front: Which age group gets most NETs of the lung, GI tract and mediastinum, and which NET is the exception?
+    back: Patients over 50. Appendiceal carcinoids are the exception, more common under 30.
+    src: { page: 78, quote: "Exception: Appendiceal carcinoids more common in patients <30 years." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p78-79: WHO classification ----------
+  - id: endo.L05.011
+    kind: card
+    topic: classification
+    front: What is the general behaviour of most GEP tumours?
+    back: Most are malignant but slow-growing.
+    src: { page: 78, quote: "Most GEP tumors are malignant but slow-growing." }
+    status: unverified
+  - id: endo.L05.012
+    kind: table
+    topic: classification
+    title: WHO classification of GEP neuroendocrine tumours
+    columns: [Category, Behaviour]
+    rows:
+      - [Well-differentiated NET, "Non-invasive; benign-behaving or uncertain malignant potential"]
+      - [Well-differentiated NE carcinoma, "Low-grade malignant, with invasion of the muscularis propria or metastasis"]
+      - [Poorly differentiated endocrine carcinoma, "High-grade, malignant"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 79, quote: "Well-differentiated NE carcinomas: Low-grade malignant with invasion of muscularis propria or metastasis." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.013
+    kind: card
+    topic: classification
+    front: Besides the WHO category, what helps grade a NET?
+    back: The level of tumour differentiation and proliferation indices such as Ki-67.
+    src: { page: 79, quote: "Level of tumor differentiation and proliferation indices such as Ki-67 are useful" }
+    status: unverified
+    update:
+      text: "WHO 2019 grades GEP-NETs by Ki-67 and mitoses: G1 <3%, G2 3-20%, G3 >20%; poorly differentiated NECs are a separate group. The book's WHO categories stay the exam answer."
+      ref: WHO Classification of Digestive System Tumours, 5th ed., 2019
+  - id: endo.L05.014
+    kind: table
+    topic: classification
+    title: Carcinoid tumours by embryonic gut
+    columns: [Gut, Share, Sites]
+    rows:
+      - [Foregut, "25%", "Lung, thymus, gastric mucosa, duodenum"]
+      - [Midgut, "40-60%", "Distal ileum and jejunum; includes carcinoid syndrome"]
+      - [Hindgut, "-", "Colon, rectum"]
+    blanks: [[0, 2], [1, 1], [1, 2], [2, 2]]
+    src: { page: 79, quote: "40–60% Midgut (distal ileum and jejunum) — includes carcinoid syndrome." }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: endo.L05.015
+    kind: card
+    topic: classification
+    front: What share of endocrine pancreatic tumours are functioning, and what is typical of the non-functioning ones?
+    back: About 60% are functioning (Zollinger-Ellison, hyperglycaemic, Verner-Morrison, glucagonomas, VIPomas). Non-functioning ones are usually large and metastatic at diagnosis.
+    src: { page: 79, quote: "Non-functioning (usually large and metastatic at diagnosis)." }
+    status: unverified
+  - id: endo.L05.016
+    kind: cloze
+    topic: classification
+    text: "Pancreatic endocrine tumours are {{c1::3-5%}} of all pancreatic neoplasms; most are {{c2::sporadic}}."
+    src: { page: 79, quote: "Account for 3–5% of all pancreatic neoplasms. Most are sporadic." }
+    status: unverified
+    tags: [numbers]
+  - id: endo.L05.017
+    kind: enumerate
+    topic: classification
+    prompt: Enumerate the familial syndromes with pancreatic endocrine tumours.
+    points: ["MEN-1 (20%, gastrinoma or non-functioning)", Tuberous sclerosis, "Neurofibromatosis (ampulla of Vater)", Von Hippel-Lindau]
+    pass: 4
+    src: { page: 79, quote: "MEN-1 (20%, gastrinoma or non-functioning)." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.018
+    kind: enumerate
+    topic: classification
+    prompt: Enumerate the hormones that pancreatic endocrine tumours may secrete.
+    points: [Insulin, Gastrin, Glucagon, VIP, Serotonin, ACTH]
+    pass: 5
+    src: { page: 80, quote: "Serotonin." }
+    status: unverified
+  # ---------- p80: presentation and markers ----------
+  - id: endo.L05.019
+    kind: card
+    topic: markers
+    front: How do neuroendocrine tumours present?
+    back: Asymptomatic or with obstructive symptoms; symptoms are usually due to liver metastases, or to hormone release into the circulation (e.g. serotonin, tachykinin).
+    src: { page: 80, quote: "Asymptomatic or present with obstructive symptoms. Symptoms usually due to liver metastases." }
+    status: unverified
+  - id: endo.L05.020
+    kind: cloze
+    topic: markers
+    text: "General NET markers: chromogranin A is raised in {{c1::90-100%}}; pancreatic polypeptide in {{c2::40-60%}}."
+    src: { page: 80, quote: "Chromogranin A: 90–100%. Pancreatic Polypeptide: 40–60%." }
+    status: unverified
+    tags: [numbers]
+  - id: endo.L05.021
+    kind: card
+    topic: markers
+    front: What is the general stimulation test for neuroendocrine pancreatic tumours?
+    back: A meal stimulation test, measuring pancreatic polypeptide (PP) every 10 minutes for 1.5 hours.
+    src: { page: 80, quote: "Meal stimulation test with measurement of PP every 10 minutes for 1.5 hours." }
+    status: unverified
+  - id: endo.L05.022
+    kind: card
+    topic: markers
+    front: What is chromogranin A, and how good is it as a NET marker?
+    back: A constitutive neuroendocrine secretory protein and the most widely accepted biomarker; against a panel of markers it was the most accurate (specificity 85.7%, sensitivity 67.9%).
+    src: { page: 80, quote: "Represents a constitutive neuroendocrine secretory protein. Most widely accepted biomarker." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.023
+    kind: cloze
+    topic: markers
+    text: "Chromogranin A: specificity {{c1::85.7%}}, sensitivity {{c2::67.9%}}; elevated in {{c3::60-80%}} of patients with NETs."
+    src: { page: 80, quote: "Elevated in 60–80% of patients with NETs." }
+    status: unverified
+    tags: [numbers]
+  - id: endo.L05.024
+    kind: card
+    topic: markers
+    front: What does the CgA level correlate with, and what does an early fall mean in pancreatic NETs?
+    back: It correlates with disease burden and poor outcome. In pancreatic NETs, an early fall during chemotherapy or everolimus is associated with a better prognosis.
+    src: { page: 80, quote: "In pancreatic NETs, early declines in CgA during treatment with chemotherapy and everolimus are associated with improved prognosis." }
+    status: unverified
+  # ---------- p81-83: localization ----------
+  - id: endo.L05.025
+    kind: enumerate
+    topic: localization
+    prompt: Enumerate the methods for tumour localization of NETs.
+    points: [Transabdominal ultrasound, CT, MRI, Selective arterial angiography, Selective venous sampling, Hepatic venous sampling, Radiolabeled somatostatin scanning, Endoscopic and intraoperative ultrasound]
+    pass: 6
+    src: { page: 81, quote: "Transabdominal ultrasound. CT. MRI. Selective arterial angiography. Selective venous sampling. Hepatic venous sampling. Radiolabeled somatostatin scanning." }
+    status: unverified
+  - id: endo.L05.026
+    kind: card
+    topic: localization
+    front: What is the best noninvasive modality to localize GEP tumours, and what else can it do?
+    back: Radiolabeled somatostatin scanning. It finds up to 70% of primary tumours and can distinguish GEP tumours from nonendocrine tumours.
+    src: { page: 81, quote: "Radiolabeled somatostatin scanning is the best noninvasive modality, identifying up to 70% of primary tumors." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.027
+    kind: table
+    topic: localization
+    title: Sensitivity of NET imaging
+    columns: [Modality, Small tumours, Liver metastases]
+    rows:
+      - ["Octreoscan (111In-DTPA-octreotide, SRI)", "<10 mm 40%; 10 mm 90%", "90%"]
+      - ["EUS", "<10 mm about 50%", "-"]
+      - ["SRI + EUS", "<10 mm about 90%", "-"]
+      - ["Ultrasound", "10-30%", "90%"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 81, quote: "Sensitivity for <10 mm tumors: ~50%. Combined SRI + EUS sensitivity for <10 mm tumors: ~90%." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: endo.L05.028
+    kind: card
+    topic: localization
+    front: Which newer technique is used to image NETs, and with which tracers?
+    back: Positron emission tomography (PET) with C11-5HTP or C11-L-dopa; traditional techniques (CT with angiography, MRI, ultrasound) are always a complement.
+    src: { page: 82, quote: "With C11-5HTP or C11-L-dopa. Traditional Techniques (always a complement)." }
+    status: unverified
+    update:
+      text: "68Ga-DOTA somatostatin-analog PET/CT (DOTATATE/DOTATOC) has replaced Octreoscan as the first-choice functional imaging for well-differentiated NETs."
+      ref: ENETS guidance 2023 / SNMMI appropriate use criteria 2018
+  - id: endo.L05.029
+    kind: mcq
+    topic: localization
+    stem: A 52-year-old man has a pancreatic NET suspected biochemically. CT is negative. You want the best chance of finding a lesion under 10 mm. Which approach does the lecture support?
+    options: [Combined somatostatin receptor imaging and endoscopic ultrasound, Transabdominal ultrasound alone, Octreoscan alone, Repeat CT with thinner cuts]
+    answer: 0
+    why:
+      - "Correct: SRI + EUS together reach about 90% for tumours under 10 mm."
+      - "Ultrasound finds only 10-30% of small tumours."
+      - "Octreoscan alone finds only 40% of tumours under 10 mm."
+      - "The lecture gives CT as a complement, not as the way to find tiny tumours."
+    src: { page: 81, quote: "Combined SRI + EUS sensitivity for <10 mm tumors: ~90%." }
+    status: unverified
+  # ---------- p84: treatment ----------
+  - id: endo.L05.030
+    kind: card
+    topic: treatment
+    front: What offers the only chance of cure for a resectable NET?
+    back: Complete surgical removal of a solitary tumour.
+    src: { page: 84, quote: "Complete surgical removal of a solitary tumor offers a chance of cure." }
+    status: unverified
+  - id: endo.L05.031
+    kind: enumerate
+    topic: treatment
+    prompt: If surgical cure is not possible, enumerate the measures to control symptoms and tumour growth.
+    points: [Surgical debulking, "Antisecretory drugs (e.g. gastrinomas)", "Somatostatin analogs (e.g. VIPomas)", "Tumour embolization (± chemotherapy)", Cryotherapy, Radiofrequency ablation, Cytotoxic chemotherapy, Radiolabeled somatostatin analogs, Interferon, Liver transplantation]
+    pass: 7
+    src: { page: 84, quote: "Surgical tumor debulking. Antisecretory drugs (e.g., for gastrinomas). Somatostatin analogs (e.g., for VIPomas)." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.032
+    kind: cloze
+    topic: treatment
+    text: "Cytotoxic chemotherapy for NETs: {{c1::69%}} response to {{c2::streptozotocin + doxorubicin}}."
+    src: { page: 84, quote: "Cytotoxic chemotherapy (69% response to streptozotocin + doxorubicin)." }
+    status: unverified
+    tags: [numbers]
+  - id: endo.L05.033
+    kind: card
+    topic: treatment
+    front: Where do somatostatin analogs fit in NET treatment?
+    back: Synthetic hormone-blocking agents (octreotide, lanreotide), used since the 1980s. First-line for GEP NETs; second- or third-line for insulinomas and gastrinomas.
+    src: { page: 84, quote: "First-line for neuroendocrine gastroenteropancreatic tumors. Second- or third-line for insulinomas and gastrinomas." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.034
+    kind: enumerate
+    topic: treatment
+    prompt: Enumerate the side effects of somatostatin analogs.
+    points: [Gallstones, Pain at injection site, Hypo/hyperglycaemia, Rash, Alopecia, Fluid retention]
+    pass: 5
+    src: { page: 84, quote: "Gallstones (due to inhibition of cholecystokinin release). Pain at injection site. Hypo/hyperglycemia. Rash. Alopecia. Fluid retention." }
+    status: unverified
+  - id: endo.L05.035
+    kind: card
+    topic: treatment
+    front: Why do somatostatin analogs cause gallstones?
+    back: They inhibit cholecystokinin release (and gallbladder contractility and bile flow), so bile stagnates.
+    src: { page: 84, quote: "Gallstones (due to inhibition of cholecystokinin release)." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p85: physiology, interferon, chemo ----------
+  - id: endo.L05.036
+    kind: enumerate
+    topic: treatment
+    prompt: Enumerate the physiological effects of somatostatin (and its analogs).
+    points: [Reduces liver blood flow, Inhibits gastric acid and pepsin, Inhibits gallbladder contractility and bile flow, Inhibits pancreatic exocrine secretion, Inhibits GI and pancreatic peptide hormones, Slows GI transit and glucose/amino acid absorption, Reduces splanchnic blood flow, Stimulates water and electrolyte absorption, Inhibits tissue growth and proliferation]
+    pass: 6
+    src: { page: 85, quote: "Reduces liver blood flow. Inhibits gastric acid and pepsin secretion. Inhibits gallbladder contractility and bile flow." }
+    status: unverified
+  - id: endo.L05.037
+    kind: card
+    topic: treatment
+    front: Which somatostatin effect explains its use in VIPoma diarrhoea?
+    back: It inhibits GI and pancreatic peptide hormone secretion and stimulates water and electrolyte absorption.
+    src: { page: 85, quote: "Inhibits GI and pancreatic peptide hormone secretion." }
+    status: unverified
+  - id: endo.L05.038
+    kind: card
+    topic: treatment
+    front: For which NETs is interferon alpha used, and how does it act?
+    back: Midgut carcinoids, with or without somatostatin analogs. Direct effect on tumour cells, blocks the cell cycle at G1/S, inhibits protein/hormone synthesis and inhibits angiogenesis.
+    src: { page: 85, quote: "Blocks cell cycle in G1/S phase." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.039
+    kind: enumerate
+    topic: treatment
+    prompt: Enumerate the side effects of interferon alpha listed on p85.
+    points: [Flu-like symptoms, Fever, Anaemia, Thrombocytopenia, Leukopenia]
+    pass: 4
+    src: { page: 85, quote: "Flu-like symptoms. Fever. Anemia. Thrombocytopenia. Leukopenia." }
+    status: unverified
+  - id: endo.L05.040
+    kind: card
+    topic: treatment
+    front: What is the role of chemotherapy in NETs?
+    back: Generally a palliative option for metastasizing neuroendocrine carcinomas.
+    src: { page: 85, quote: "Generally a palliative option for metastasizing neuroendocrine carcinomas." }
+    status: unverified
+  - id: endo.L05.041
+    kind: table
+    topic: treatment
+    title: Chemotherapy regimens for NETs
+    columns: [Regimen, Use]
+    rows:
+      - ["Streptozotocin + 5-FU and doxorubicin", "Response rate >50% in malignant NETs"]
+      - ["Cisplatin/Paraplatin + etoposide", "Poorly differentiated foregut NETs"]
+      - ["Temozolomide + thalidomide", "Listed regimen"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 86, quote: "For poorly differentiated NETs in foregut" }
+    status: unverified
+  # ---------- p86-87: targeted ----------
+  - id: endo.L05.042
+    kind: table
+    topic: targeted
+    title: Targeted agents in NETs
+    columns: [Target, Agents]
+    rows:
+      - [VEGF inhibitors, "Bevacizumab, sunitinib, sorafenib, pazopanib"]
+      - [mTOR inhibitor, Everolimus]
+      - [IGF-1 targeting, AMG-479]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 86, quote: "VEGF Inhibitors Bevacizumab. Sunitinib. Sorafenib. Pazopanib. mTOR Inhibitor Everolimus." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.043
+    kind: card
+    topic: targeted
+    front: Why are somatostatin receptors a good target in NETs?
+    back: NETs express them highly, so targeting SST receptors gives both symptom and disease control.
+    src: { page: 86, quote: "Targeting SST receptors provides symptom and disease control." }
+    status: unverified
+  - id: endo.L05.044
+    kind: enumerate
+    topic: targeted
+    prompt: Enumerate the emerging targets in NETs.
+    points: [mTOR, PI3K, VEGF inhibitors, Other antiangiogenic agents]
+    pass: 3
+    src: { page: 87, quote: "mTOR. PI3K. VEGF inhibitors. Other antiangiogenic agents. High potential for combination therapies." }
+    status: unverified
+  - id: endo.L05.045
+    kind: order
+    topic: targeted
+    prompt: Order the signalling pathway from the somatostatin receptor to cell-cycle activation.
+    steps: [SST receptor, G protein, PI3K, Akt, mTOR, "Cell-cycle activation, protein synthesis"]
+    src: { page: 87, quote: "SST receptor → G protein → PI3K → Akt → mTOR → Cell cycle activation, protein synthesis." }
+    status: unverified
+  # ---------- p87-88: gastrinoma ----------
+  - id: endo.L05.046
+    kind: card
+    topic: gastrinoma
+    front: What causes Zollinger-Ellison syndrome, and where is the tumour?
+    back: Over-secretion of gastrin by a gastrinoma; associated with islet-cell pancreatic tumours (usually multiple), occasionally duodenal.
+    src: { page: 87, quote: "Associated with islet cell pancreatic tumors (usually multiple), occasionally duodenal." }
+    status: unverified
+  - id: endo.L05.047
+    kind: cloze
+    topic: gastrinoma
+    text: "Gastrinoma: {{c1::20%}} with MEN-1; age at diagnosis about {{c2::50}}; males about 60%; metastasis in {{c3::60%}}."
+    src: { page: 87, quote: "20% associated with MEN-1. Age at diagnosis: ~50 years. More common in males (~60%). Metastasis in 60% of patients." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: endo.L05.048
+    kind: card
+    topic: gastrinoma
+    front: What is the outlook after complete resection of a gastrinoma?
+    back: 10-year survival of 90%; less likely with a large primary tumour.
+    src: { page: 87, quote: "Complete resection results in 10-year survival of 90% (less likely if large primary tumor)." }
+    status: unverified
+  - id: endo.L05.049
+    kind: enumerate
+    topic: gastrinoma
+    prompt: Clinical picture of Zollinger-Ellison syndrome.
+    points: [Reflux oesophagitis, Recurrent ulcers, "Diarrhoea (malabsorption)"]
+    pass: 3
+    src: { page: 87, quote: "Reflux esophagitis. Recurrent ulcers. Diarrhea (malabsorption)." }
+    status: unverified
+  - id: endo.L05.050
+    kind: cloze
+    topic: gastrinoma
+    text: "Fasting gastrin must be measured off all antisecretory drugs: stop PPIs for {{c1::14 days}} and H2 blockers for {{c2::3 days}}."
+    src: { page: 88, quote: "Stop PPIs for 14 days." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: endo.L05.051
+    kind: cloze
+    topic: gastrinoma
+    text: "Gastrin {{c1::>250 pmol/L}} even on PPIs may indicate gastrinoma; gastric acid output is usually {{c2::>15 mEq/hr}}."
+    src: { page: 88, quote: "Very high gastrin levels (>250 pmol/L) on PPIs may indicate gastrinoma. Gastric acid output usually >15 mEq/hr." }
+    status: unverified
+    tags: [numbers]
+  - id: endo.L05.052
+    kind: card
+    topic: gastrinoma
+    front: How is the secretin stimulation test done and read (endocrinology lecture)?
+    back: 2 U/kg IV secretin; measure gastrin at 2, 5, 10 and 20 minutes. A rise of 50% or more confirms gastrinoma.
+    src: { page: 88, quote: "Increase ≥50% confirms gastrinoma." }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: endo.L05.053
+    kind: card
+    topic: gastrinoma
+    front: Which imaging is most useful to find the primary gastrinoma and its metastases, and how does it look on MRI?
+    back: Radiolabeled octreotide scanning. On MRI the primary is low signal on T1, high on T2, and enhances with gadolinium.
+    src: { page: 88, quote: "Radiolabeled octreotide scanning: most useful for identifying primary tumor and metastases." }
+    status: unverified
+  - id: endo.L05.054
+    kind: card
+    topic: gastrinoma
+    front: What does the intra-arterial calcium test show in gastrinoma localization?
+    back: A doubling of the serum hormone level within 30 seconds.
+    src: { page: 88, quote: "Intraarterial calcium: double serum hormone level in 30 seconds." }
+    status: unverified
+  - id: endo.L05.055
+    kind: table
+    topic: gastrinoma
+    title: Treatment of Zollinger-Ellison syndrome
+    columns: [Situation, Treatment]
+    rows:
+      - [Symptom control, "Acid antisecretory drugs; rarely somatostatin analogs"]
+      - [Solitary tumour, Surgery may cure]
+      - [Metastatic disease, "Somatostatin analogs, debulking surgery, interferon, chemotherapy, hepatic tumour embolization"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 88, quote: "Symptomatic control: acid antisecretory medications, rarely somatostatin analogs. Solitary tumors: surgery may cure." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.056
+    kind: mcq
+    topic: gastrinoma
+    stem: A 48-year-old man has recurrent duodenal ulcers, reflux oesophagitis and chronic diarrhoea. He takes omeprazole. What should you do before measuring fasting gastrin?
+    options: [Stop the PPI for 14 days, Stop the PPI for 3 days, Measure it now; PPIs do not affect gastrin, Switch to a double-dose PPI]
+    answer: 0
+    why:
+      - "Correct: PPIs must be stopped 14 days before fasting gastrin."
+      - "3 days is the washout for H2 blockers."
+      - "PPIs raise gastrin, so a level on PPIs is hard to read unless it is very high (>250 pmol/L)."
+      - "A higher PPI dose raises gastrin further."
+    src: { page: 88, quote: "Stop PPIs for 14 days." }
+    status: unverified
+  - id: endo.L05.057
+    kind: mcq
+    topic: gastrinoma
+    stem: In suspected gastrinoma, IV secretin 2 U/kg raises serum gastrin from 300 to 480 pg/mL at 10 minutes. How should this be read per the endocrinology lecture?
+    options: [Confirms gastrinoma (60% rise), Excludes gastrinoma, Needs a rise of 200% to confirm, Inconclusive without calcium stimulation]
+    answer: 0
+    why:
+      - "Correct: 180/300 = 60%, above the 50% threshold."
+      - "A rise above 50% confirms, not excludes."
+      - "The lecture's threshold is 50%, not 200%."
+      - "The secretin test alone confirms when the rise is 50% or more."
+    src: { page: 88, quote: "Increase ≥50% confirms gastrinoma." }
+    status: unverified
+    tags: [numbers]
+  # ---------- p89: insulinoma ----------
+  - id: endo.L05.058
+    kind: card
+    topic: insulinoma
+    front: Insulinoma demographics, metastasis rate and outcome?
+    back: Islet-cell tumour secreting insulin, presenting at 40-50, more common in women; 10% metastasize; complete resection cures most.
+    src: { page: 89, quote: "Present at age 40–50. More common in women." }
+    status: unverified
+  - id: endo.L05.059
+    kind: enumerate
+    topic: insulinoma
+    prompt: Symptoms of insulinoma listed in the lecture.
+    points: [Sweating, Tremors, Tachycardia, Confusion, Weakness]
+    pass: 4
+    src: { page: 89, quote: "Tachycardia." }
+    status: unverified
+  - id: endo.L05.060
+    kind: enumerate
+    topic: insulinoma
+    prompt: Tumour markers of insulinoma.
+    points: [Serum insulin, Serum proinsulin, Plasma chromogranin B, "Malignant ones may also make gastrin and glucagon"]
+    pass: 3
+    src: { page: 89, quote: "Plasma chromogranin B." }
+    status: unverified
+  - id: endo.L05.061
+    kind: cloze
+    topic: insulinoma
+    text: "Insulinoma stimulatory test: a {{c1::48-72 hr}} fast measuring insulin/proinsulin and glucose; an insulin/glucose ratio {{c2::>0.5}} is positive."
+    src: { page: 89, quote: "Insulin/glucose ratio >0.5." }
+    status: unverified
+    tags: [numbers, high-yield]
+    update:
+      text: "Endocrine Society 2009 criteria: glucose <55 mg/dL with insulin ≥3 µU/mL, C-peptide ≥0.6 ng/mL and proinsulin ≥5 pmol/L, negative sulfonylurea screen; ratios are no longer recommended."
+      ref: Endocrine Society hypoglycemia guideline, 2009
+  - id: endo.L05.062
+    kind: card
+    topic: insulinoma
+    front: Which imaging does the lecture list for insulinoma?
+    back: CT-angiography, ultrasound (for liver metastases) and endoscopic ultrasonography.
+    src: { page: 89, quote: "Endoscopic ultrasonography." }
+    status: unverified
+  - id: endo.L05.063
+    kind: mcq
+    topic: insulinoma
+    stem: A 45-year-old woman has spells of sweating, tremor and confusion before breakfast. During a supervised 72-hour fast, glucose is 40 mg/dL and insulin 30 µU/mL. Which statement fits the lecture?
+    options: [Insulin/glucose ratio 0.75 is above 0.5 and supports insulinoma, The ratio must be above 2 to diagnose insulinoma, A fast is not used for insulinoma, "Most insulinomas are metastatic, so resection rarely cures"]
+    answer: 0
+    why:
+      - "Correct: 30/40 = 0.75, above the 0.5 cut-off."
+      - "The lecture's cut-off is 0.5."
+      - "The 48-72 hour fast is the lecture's stimulatory test."
+      - "Only 10% metastasize; complete resection cures most."
+    src: { page: 89, quote: "Insulin/glucose ratio >0.5." }
+    status: unverified
+  # ---------- p90: glucagonoma ----------
+  - id: endo.L05.064
+    kind: card
+    topic: glucagonoma
+    front: "Glucagonoma: cell of origin, usual site and behaviour?"
+    back: An α-cell tumour making excess glucagon, typically in the pancreatic tail, often malignant with liver metastases; older adults, slight female predominance.
+    src: { page: 90, quote: "Tumor of α-cells → excess glucagon. Typically arises in the pancreatic tail. Often malignant with liver metastases." }
+    status: unverified
+  - id: endo.L05.065
+    kind: card
+    topic: glucagonoma
+    front: What is the hallmark rash of glucagonoma?
+    back: Necrolytic migratory erythema (NME), often misdiagnosed.
+    src: { page: 90, quote: "Necrolytic migratory erythema (NME): hallmark rash, often misdiagnosed" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.066
+    kind: enumerate
+    topic: glucagonoma
+    prompt: Enumerate the clinical features of glucagonoma.
+    points: [Necrolytic migratory erythema, Mild to moderate diabetes, Weight loss, "Glossitis, cheilitis, stomatitis", Diarrhoea, Thromboembolism, Neuropsychiatric symptoms, Low zinc and amino acids]
+    pass: 6
+    src: { page: 90, quote: "Diabetes mellitus (mild to moderate) Weight loss Glossitis, cheilitis, stomatitis Diarrhea Thromboembolism" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.067
+    kind: cloze
+    topic: glucagonoma
+    text: "Glucagonoma diagnosis: serum glucagon {{c1::>500 pg/mL}}; plasma glucagon {{c2::10-20x}} normal."
+    src: { page: 90, quote: "Elevated serum glucagon (>500 pg/mL)." }
+    status: unverified
+    tags: [numbers]
+  - id: endo.L05.068
+    kind: card
+    topic: glucagonoma
+    front: Treatment of glucagonoma, and what may help the rash?
+    back: Resection if localized; somatostatin analogs for symptoms; chemotherapy for metastases; arterial embolization. Nutritional support with zinc and amino acids may help NME.
+    src: { page: 90, quote: "Nutritional support (zinc, amino acids) may help NME." }
+    status: unverified
+  - id: endo.L05.069
+    kind: mcq
+    topic: glucagonoma
+    stem: A 61-year-old woman has a spreading, crusting rash on the perineum and legs, new mild diabetes, weight loss and a sore red tongue. Which tumour is most likely?
+    options: [Glucagonoma, VIPoma, Insulinoma, Somatostatinoma]
+    answer: 0
+    why:
+      - "Correct: NME + diabetes + weight loss + glossitis = glucagonoma."
+      - "VIPoma gives watery diarrhoea and hypokalaemia, not a rash."
+      - "Insulinoma gives hypoglycaemia, not diabetes."
+      - "Somatostatinoma gives diabetes but with gallstones and steatorrhoea, not NME."
+    src: { page: 90, quote: "Necrolytic migratory erythema (NME): hallmark rash, often misdiagnosed" }
+    status: unverified
+  # ---------- p91-92: VIPoma ----------
+  - id: endo.L05.070
+    kind: card
+    topic: vipoma
+    front: "VIPoma: other names, main features and site?"
+    back: Verner-Morrison or WDHA syndrome. Excess VIP causes watery diarrhoea and marked hypokalaemia; 80% are pancreatic.
+    src: { page: 91, quote: "Causes watery diarrhea, marked hypokalemia. 80% are associated with the pancreas." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.071
+    kind: cloze
+    topic: vipoma
+    text: "VIPoma: metastasis in about {{c1::70%}}; complete resection gives 5-year survival of {{c2::95%}}; {{c3::>80%}} are malignant."
+    src: { page: 91, quote: "Metastasis occurs in ~70% of patients. Complete resection results in 5 year survival of 95%." }
+    status: unverified
+    tags: [numbers]
+  - id: endo.L05.072
+    kind: enumerate
+    topic: vipoma
+    prompt: Where are VIPomas found?
+    points: [Pancreas, Lung, Ganglioneuromas]
+    pass: 3
+    src: { page: 91, quote: "Pancreas. Lung. Ganglioneuromas. >80% Malignant." }
+    status: unverified
+  - id: endo.L05.073
+    kind: enumerate
+    topic: vipoma
+    prompt: Enumerate the clinical features of VIPoma.
+    points: ["Secretory watery diarrhoea, 3-20 L/day", "Hypokalaemia, hypomagnesaemia, hypercalcaemia", Acidosis, Achlorhydria, Dehydration, Flushing (sometimes), Flaccid distended gallbladder, Ileus/subileus]
+    pass: 6
+    src: { page: 91, quote: "Watery diarrhea (Secretory) (up to 3–20 L/day). Hypokalemia, Hypomagnesemia, hypercalcemia. Acidosis. Achlorhydria." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.074
+    kind: cloze
+    topic: vipoma
+    text: "VIPoma marker: plasma VIP {{c1::>200 pg/ml}}."
+    src: { page: 91, quote: "Tumour Markers: p-VIP (>200 pg/ml, s-Calcitonin)." }
+    status: unverified
+    tags: [numbers]
+  - id: endo.L05.075
+    kind: card
+    topic: vipoma
+    front: Treatment of VIPoma?
+    back: Fluid and electrolyte replacement, somatostatin analogs (octreotide), resection if feasible, chemotherapy for metastatic disease.
+    src: { page: 92, quote: "Fluid and electrolyte replacement. Somatostatin analogs (octreotide). Surgical resection if feasible." }
+    status: unverified
+  - id: endo.L05.076
+    kind: mcq
+    topic: vipoma
+    stem: A 50-year-old man passes 5 L of watery stool a day that continues while fasting. K+ is 2.4 mmol/L, he is acidotic and gastric pH studies show achlorhydria. What is the first step in management?
+    options: [Fluid and electrolyte replacement, Immediate Whipple resection, High-dose PPI, Cyproheptadine]
+    answer: 0
+    why:
+      - "Correct: WDHA is a VIPoma; replace fluids and electrolytes first, then octreotide."
+      - "Resection comes when feasible, after resuscitation and localization."
+      - "He already has achlorhydria; acid suppression is for gastrinoma."
+      - "Cyproheptadine is a serotonin antagonist for carcinoid diarrhoea."
+    src: { page: 92, quote: "Fluid and electrolyte replacement. Somatostatin analogs (octreotide)." }
+    status: unverified
+  # ---------- p92-93: somatostatinoma, ectopic ----------
+  - id: endo.L05.077
+    kind: card
+    topic: somatostatinoma
+    front: "Somatostatinoma: cell of origin, site and behaviour?"
+    back: A δ-cell tumour with excess somatostatin; rare, often malignant, in the pancreas or duodenum; metastasis in about 50%.
+    src: { page: 92, quote: "Tumor of δ-cells → excess somatostatin. Rare, often malignant. Arises in pancreas or duodenum. Metastasis in ~50% patients." }
+    status: unverified
+  - id: endo.L05.078
+    kind: cloze
+    topic: somatostatinoma
+    text: "Somatostatinoma: complete resection gives 5-year survival of {{c1::95%}}, falling to {{c2::60%}} with metastases."
+    src: { page: 92, quote: "Complete resection with 5 year survival of 95% and if has metastasis the 5 year survival decreases to 60%." }
+    status: unverified
+    tags: [numbers]
+  - id: endo.L05.079
+    kind: enumerate
+    topic: somatostatinoma
+    prompt: Clinical features of somatostatinoma.
+    points: [Diabetes mellitus, "Steatorrhoea, diarrhoea", Gallstones, Weight loss]
+    pass: 4
+    src: { page: 92, quote: "Diabetes mellitus. Steatorrhea, diarrhea. Gallstones. Weight loss." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.080
+    kind: card
+    topic: somatostatinoma
+    front: Where else may somatostatinomas arise, and what is odd about their function?
+    back: Duodenum, pancreas and colon/rectum; over 80% are mixed tumours. They may cause occasional hypoglycaemia and are often "non-functioning".
+    src: { page: 93, quote: "Often ―non-functioning‖ tumours." }
+    status: unverified
+  - id: endo.L05.081
+    kind: card
+    topic: somatostatinoma
+    front: Diagnosis and treatment of somatostatinoma?
+    back: "Histopathology (argyrophil, CgA, somatostatin); plasma CgA and somatostatin; CT angiography, MRI, SRS, EUS for duodenal lesions, colonoscopy, US for liver mets. Treat by resection, somatostatin analogs for symptoms, chemotherapy if metastatic."
+    src: { page: 93, quote: "Surgical resection. Somatostatin analogs (for symptom control). Chemotherapy if metastatic." }
+    status: unverified
+  - id: endo.L05.082
+    kind: table
+    topic: somatostatinoma
+    title: Ectopic hormones from GI endocrine tumours
+    columns: [Hormone, Result]
+    rows:
+      - [PTHrP, Hypercalcaemia]
+      - [ACTH, "Cushing's syndrome"]
+      - [GHRH, Acromegaly]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 93, quote: "secrete PTHrP causing hypercalcemia), ACTH (resulting in Cushing's syndrome), and growth hormone–releasing hormone (GHRH) (resulting in acromegaly)" }
+    status: unverified
+  - id: endo.L05.083
+    kind: card
+    topic: somatostatinoma
+    front: What does Cushing's syndrome mean in a patient with gastrinoma?
+    back: It has been described with gastrinoma and appears to confer a poor prognosis.
+    src: { page: 93, quote: "Cushing's syndrome has been described in patients with gastrinoma and appears to confer a poor prognosis." }
+    status: unverified
+  # ---------- p94-95: carcinoid ----------
+  - id: endo.L05.084
+    kind: card
+    topic: carcinoid
+    front: What is the most common form of NET, and where does it most often arise?
+    back: Carcinoid tumours (1.5 per 100,000); most arise in the appendix, less often the small bowel, stomach and duodenum.
+    src: { page: 94, quote: "Carcinoid tumors are the most common form of NET's. The majority of carcinoids arise in the appendix" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.085
+    kind: card
+    topic: carcinoid
+    front: How common is the carcinoid syndrome among carcinoid tumours, and what are its symptoms?
+    back: About 10%; flushing of the face, severe diarrhoea and "asthma" symptoms.
+    src: { page: 94, quote: "Symptoms include flushing of the face, severe diarrhea, and can have ―asthma‖ symptoms (Carcinoid syndrome~10%)." }
+    status: unverified
+  - id: endo.L05.086
+    kind: card
+    topic: carcinoid
+    front: Why are carcinoids called "carcinoid", and what does "enterochromaffin" mean?
+    back: They looked different from, and less aggressive than, intestinal adenocarcinoma. They arise from enterochromaffin cells, which stain with potassium chromate (chromaffin), a feature of serotonin-containing cells.
+    src: { page: 94, quote: "The term enterochromaffin refers to the ability to stain with potassium chromate (chromaffin), a feature of cells that contain serotonin." }
+    status: unverified
+  - id: endo.L05.087
+    kind: card
+    topic: carcinoid
+    front: How does a lung carcinoid present, and which paraneoplastic syndromes can it cause?
+    back: In the 50s with recurrent pneumonia, cough, haemoptysis or chest pain. It can cause Cushing's syndrome, acromegaly and the carcinoid syndrome (under 5%).
+    src: { page: 94, quote: "Patients usually present in their 50s with recurrent pneumonia, cough, hemoptysis or chest pain." }
+    status: unverified
+  - id: endo.L05.088
+    kind: table
+    topic: carcinoid
+    title: Gastric carcinoid types
+    columns: [Type, Association]
+    rows:
+      - [Type 1, Atrophic gastritis + pernicious anaemia]
+      - [Type 2, ZES]
+      - [Type 3, Sporadic]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 95, quote: "Type 1: with atrophic gastritis + pernicious anemia. Type 2: with ZES. Type 3: sporadic." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.089
+    kind: table
+    topic: carcinoid
+    title: Carcinoid syndrome and its causal agents
+    columns: [Feature, Causal agent]
+    rows:
+      - [Flushing, "Tachykinins, bradykinins"]
+      - [Diarrhoea, "Serotonin, prostaglandins"]
+      - [Right heart failure, "Unknown (TGFβ)"]
+      - [Bronchoconstriction, "Tachykinins, bradykinins"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 95, quote: "Flushing. Tachykinins, Bradykinins Diarrhea. Serotonin, Prostaglandins. Right Heart Failure. Unknown (TGFβ )." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.090
+    kind: enumerate
+    topic: carcinoid
+    prompt: Enumerate the causes of a flushing reaction.
+    points: [Menopause, Carcinoid syndrome, Mastocytosis, Medullary thyroid carcinoma, WDHA syndrome, Phaeochromocytoma, Neurologic disorders, Drugs, Food, Ethanol, Idiopathic]
+    pass: 8
+    src: { page: 95, quote: "Menopause. Carcinoid syndrome. Mastocytosis. Medullary thyroid carcinoma. WDHA syndrome (watery diarrhea, hypokalemia, achlorhydria). Pheochromocytoma." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.091
+    kind: card
+    topic: carcinoid
+    front: Which drugs and foods cause flushing (p95)?
+    back: "Drugs: bromocriptine, tamoxifen, nicotinic acid, opiates, calcium-channel blockers, ketoconazole, chlorpromazine, cephalosporins. Foods: spicy food, glutamate, sodium nitrate, sulfites, hot drinks."
+    src: { page: 95, quote: "Drugs: Bromocriptine Tamoxifen, Nicotinic acid, Opiates, Calcium channel blockers, Ketoconazole, Chlorpromazine, Cephalosporin." }
+    status: unverified
+  # ---------- p96-97: carcinoid diagnosis and treatment ----------
+  - id: endo.L05.092
+    kind: table
+    topic: carcinoid
+    title: Carcinoid tumour diagnosis
+    columns: [Step, Test]
+    rows:
+      - [Histopathology, "Argyrophil/argentaffin staining, CgA, serotonin"]
+      - [Tumour markers, "CgA, urinary 5-HIAA"]
+      - [Stimulatory test, "Flush provocation with pentagastrin 0.6 µg/kg IV"]
+      - [Radiology, "Octreoscan; CT, US, MRI, CT-angiography"]
+      - [Other, Endoscopy (EUS)]
+    blanks: [[1, 1], [2, 1], [3, 1]]
+    src: { page: 96, quote: "Tumour Markers: CgA, u-5-HIAA. Stimulatory Tests: Flush provocation: Pentagastrin 0,6 ug/kg bw i.v." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.093
+    kind: card
+    topic: carcinoid
+    front: In which carcinoids is 24-hour urinary 5-HIAA raised, and in which is it usually not?
+    back: Raised in foregut and midgut carcinoids; not generally raised in hindgut carcinoids.
+    src: { page: 96, quote: "24 hour urinary 5-HIAA raised in carcinoid tumors of the foregut and midgut but not generally raised in tumors of the hindgut." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.094
+    kind: card
+    topic: carcinoid
+    front: Besides octreotide, which drugs treat carcinoid diarrhoea and histamine-secreting gastric carcinoids?
+    back: Cyproheptadine (a serotonin antagonist) for diarrhoea; a histamine blocker for gastric carcinoids that make histamine.
+    src: { page: 96, quote: "Patients with diarrhea could be treated with cyproheptadine, a serotonin antagonist" }
+    status: unverified
+  - id: endo.L05.095
+    kind: table
+    topic: carcinoid
+    title: Octreotide dosing in carcinoid
+    columns: [Setting, Dose]
+    rows:
+      - [Recommended, "100-600 µg/day s.c. in 2-3 doses"]
+      - [Experimental, "1,500-3,000 µg/day s.c."]
+      - [Before surgery, "100 µg s.c. 30 min before, then 50 µg/hr IV during and after"]
+      - [Carcinoid crisis, "IV 50-100 µg/hr (+ H1 and H2 blockers if foregut with histamine)"]
+      - [Octreotide LAR, "20-30 mg IM every 4 weeks"]
+    blanks: [[0, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 96, quote: "Carcinoid Crises: Octreotide i.v. 50-100 μg/hr (Foregut carcinoid with histamine production, continue with H 1 and H 2 receptor blockers)." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: endo.L05.096
+    kind: card
+    topic: carcinoid
+    front: What is pasireotide (SOM230) and how did it do after octreotide failure?
+    back: "A multi-ligand somatostatin analog (30x affinity for sst1, 5x sst3, 40x sst5) that inhibits GH and IGF-1. In 45 patients progressing on long-acting octreotide: symptomatic response 27%."
+    src: { page: 97, quote: "Multi-ligand somatostatin analog– 30x greater affinity for sst1– 5x greater affinity for sst 3– 40x greater affinity for sst5." }
+    status: unverified
+  - id: endo.L05.097
+    kind: cloze
+    topic: carcinoid
+    text: "Interferon alpha in carcinoid: biochemical response {{c1::40%}}, tumour stabilization {{c2::15-40%}}, regression {{c3::12%}}."
+    src: { page: 97, quote: "Biochemical response in 40%. Stabilizes tumor in 15-40%. Tumor regression in 12%." }
+    status: unverified
+    tags: [numbers]
+  - id: endo.L05.098
+    kind: enumerate
+    topic: carcinoid
+    prompt: Toxicity of interferon alpha (p97).
+    points: [Fatigue, Myelosuppression, Fever, Flu-like illness, Depression]
+    pass: 4
+    src: { page: 97, quote: "Myelosuppression." }
+    status: unverified
+  - id: endo.L05.099
+    kind: order
+    topic: carcinoid
+    prompt: Order the diagnostic algorithm for suspected carcinoid (positive branch).
+    steps: [Patient with flushing and diarrhoea, "Biochemical diagnosis: 24h urinary 5-HIAA, plasma CgA", "Localization: SRS, US", "CT, MRI, US", "Biopsy: histopathology (CgA, Syn, NSE, serotonin, Ki67)", Therapy]
+    src: { page: 97, quote: "Biochemical diagnosis U-5-HIAA (24h), CgA/pl" }
+    status: unverified
+  - id: endo.L05.100
+    kind: card
+    topic: carcinoid
+    front: In the carcinoid algorithm, what if SRS is negative?
+    back: Do PET-5HTP. If positive, go on to CT, MRI, US and biopsy; if negative, follow up.
+    src: { page: 97, quote: "PET-5HTP" }
+    status: unverified
+  # ---------- p98: syndromes table, advanced NETs ----------
+  - id: endo.L05.101
+    kind: table
+    topic: syndromes
+    title: NET syndromes, sites and secretory products
+    columns: [Syndrome, Site, Products]
+    rows:
+      - ["Carcinoid (foregut)", "Lung, stomach, pancreas", "Serotonin, histamine, tachykinins, bradykinin"]
+      - ["Carcinoid (midgut)", "Ileum, jejunum", "Serotonin, tachykinins, bradykinin"]
+      - [Zollinger-Ellison, "Pancreas, duodenum", Gastrin]
+      - ["Hypoglycaemic (insulinoma)", Pancreas, "Insulin, proinsulin, IGF-I/II"]
+      - ["Verner-Morrison (WDHA)", "Pancreas, ganglioneuromas, paraganglioma, lung", "VIP, PHM"]
+      - [Glucagonoma, Pancreas, "Glucagon (glicentin)"]
+      - [Somatostatinoma, "Pancreas, duodenum", Somatostatin]
+      - [Non-functioning, "Pancreas, colon", "CgA, HCG-α/β, PP, PYY"]
+    blanks: [[0, 2], [2, 2], [4, 2], [5, 2], [7, 2]]
+    src: { page: 98, quote: "Clinical Syndrome Tumour Location Secretory Products Causing the Syndrome" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.102
+    kind: table
+    topic: syndromes
+    title: Limited options for advanced NETs
+    columns: [Tumour, Group, First option]
+    rows:
+      - [pNET, Functional, Octreotide LAR + chemotherapy]
+      - [pNET, Nonfunctional, Chemotherapy]
+      - [Carcinoid, Carcinoid syndrome, Octreotide LAR]
+      - [Carcinoid, "Midgut, no syndrome", No standard]
+      - [Carcinoid, "Non-midgut, no syndrome", No standard]
+    blanks: [[0, 2], [1, 2], [2, 2], [3, 2]]
+    src: { page: 98, quote: "Limited Options for Advanced NETs" }
+    status: unverified
+  - id: endo.L05.103
+    kind: card
+    topic: syndromes
+    front: In advanced NETs, what options remain after disease progression?
+    back: Hepatic artery embolization and investigational agents.
+    src: { page: 98, quote: "Hepatic artery embolization Investigational agents" }
+    status: unverified
+  # ---------- cases ----------
+  - id: endo.L05.104
+    kind: case
+    topic: carcinoid
+    stem: A 58-year-old man has 6 months of facial flushing, watery diarrhoea and wheeze. Exam shows a raised JVP and a tricuspid murmur.
+    steps:
+      - question: Which first test does the book's algorithm use?
+        options: ["24-hour urinary 5-HIAA and plasma CgA", Secretin stimulation test, 72-hour fast, Serum VIP]
+        answer: 0
+        why: "Flushing and diarrhoea start the carcinoid algorithm with urinary 5-HIAA and CgA."
+      - reveal: "Urinary 5-HIAA is very high. US shows multiple liver lesions."
+        question: Where is the primary most likely?
+        options: [Midgut (ileum or jejunum), Hindgut (rectum), Appendix, Pancreatic tail]
+        answer: 0
+        why: "Carcinoid syndrome is a midgut feature, usually once there are liver metastases. Hindgut tumours rarely raise 5-HIAA."
+      - question: What causes his right heart failure, per the book?
+        options: ["Unknown (TGFβ)", Bradykinin, Histamine, Gastrin]
+        answer: 0
+        why: "The book's table lists right heart failure as unknown (TGFβ)."
+      - question: Which drug controls his symptoms first?
+        options: [Octreotide (somatostatin analog), Streptozotocin, Everolimus, Omeprazole]
+        answer: 0
+        why: "Somatostatin analogs are first-line for symptoms and SST receptors are highly expressed by NETs."
+    src: { page: 96, quote: "Tumour Markers: CgA, u-5-HIAA." }
+    status: unverified
+  - id: endo.L05.105
+    kind: case
+    topic: gastrinoma
+    stem: A 50-year-old man has had three duodenal ulcers in two years despite H. pylori eradication, plus diarrhoea. His brother had a parathyroid adenoma.
+    steps:
+      - question: Which syndrome do you suspect?
+        options: [Zollinger-Ellison syndrome (gastrinoma), VIPoma, Somatostatinoma, Carcinoid syndrome]
+        answer: 0
+        why: "Recurrent ulcers and diarrhoea point to ZES; a family history of hyperparathyroidism raises MEN-1 (20% of gastrinomas)."
+      - question: How should he prepare for fasting gastrin?
+        options: [Stop PPIs 14 days and H2 blockers 3 days, Stop PPIs 3 days, Fast for 72 hours, No preparation]
+        answer: 0
+        why: "The lecture's washouts: PPIs 14 days, H2 blockers 3 days."
+      - reveal: "Fasting gastrin is high. Secretin raises it by 70%."
+        question: What next?
+        options: [Radiolabeled octreotide scan to find the primary and metastases, Start chemotherapy, Total gastrectomy, Repeat secretin test]
+        answer: 0
+        why: "A rise of 50% or more confirms; octreotide scanning is the most useful localization."
+      - reveal: "A solitary 1.5 cm duodenal tumour, no metastases."
+        question: Best treatment?
+        options: [Surgical resection, Interferon, Hepatic embolization, Octreotide LAR only]
+        answer: 0
+        why: "Solitary tumours: surgery may cure; complete resection gives 90% 10-year survival."
+    src: { page: 88, quote: "Solitary tumors: surgery may cure." }
+    status: unverified
+  - id: endo.L05.106
+    kind: case
+    topic: vipoma
+    stem: A 47-year-old woman has 4 L/day of watery diarrhoea that continues while fasting. K+ 2.6 mmol/L, Ca2+ 10.9 mg/dL, Mg2+ low. Ultrasound shows a flaccid distended gallbladder.
+    steps:
+      - question: Most likely diagnosis?
+        options: ["VIPoma (WDHA)", Carcinoid syndrome, Gastrinoma, Somatostatinoma]
+        answer: 0
+        why: "Secretory diarrhoea, hypokalaemia, hypercalcaemia, hypomagnesaemia and a flaccid gallbladder fit WDHA."
+      - question: Which level supports it?
+        options: ["Plasma VIP >200 pg/ml", "Serum glucagon >500 pg/mL", "Gastrin >250 pmol/L", "Insulin/glucose >0.5"]
+        answer: 0
+        why: "p-VIP above 200 pg/ml is the VIPoma marker."
+      - question: First treatment step?
+        options: [Fluid and electrolyte replacement, Somatostatin withdrawal, Insulin infusion, Immediate liver transplant]
+        answer: 0
+        why: "Replace fluids and electrolytes, then octreotide; resect if feasible."
+    src: { page: 91, quote: "Watery diarrhea (Secretory) (up to 3–20 L/day). Hypokalemia, Hypomagnesemia, hypercalcemia." }
+    status: unverified
+  - id: endo.L05.107
+    kind: mcq
+    topic: carcinoid
+    stem: A 24-year-old woman has an incidental 8 mm carcinoid at appendicectomy. Which statement fits the lecture?
+    options: [Appendiceal carcinoids are more common under 30, Most NETs occur under 30, Appendiceal carcinoids always cause carcinoid syndrome, Carcinoids rarely arise in the appendix]
+    answer: 0
+    why:
+      - "Correct: appendiceal carcinoids are the exception, commoner under 30."
+      - "Lung, GI and mediastinal NETs are commoner over 50."
+      - "Carcinoid syndrome occurs in about 10%."
+      - "Most carcinoids arise in the appendix."
+    src: { page: 78, quote: "Exception: Appendiceal carcinoids more common in patients <30 years." }
+    status: unverified
+  - id: endo.L05.108
+    kind: mcq
+    topic: carcinoid
+    stem: A woman with pernicious anaemia has multiple small gastric carcinoids on endoscopy. Which type are they?
+    options: [Type 1, Type 2, Type 3, Hindgut carcinoid]
+    answer: 0
+    why:
+      - "Correct: type 1 goes with atrophic gastritis and pernicious anaemia."
+      - "Type 2 goes with ZES."
+      - "Type 3 is sporadic."
+      - "The stomach is foregut."
+    src: { page: 95, quote: "Type 1: with atrophic gastritis + pernicious anemia." }
+    status: unverified
+  - id: endo.L05.109
+    kind: mcq
+    topic: carcinoid
+    stem: A patient with a rectal carcinoid has normal 24-hour urinary 5-HIAA. What is the best interpretation?
+    options: [Expected; hindgut carcinoids generally do not raise 5-HIAA, The tumour cannot be a carcinoid, The sample was taken wrongly, It proves the tumour is benign]
+    answer: 0
+    why:
+      - "Correct: 5-HIAA rises in foregut and midgut, not generally hindgut."
+      - "Histology (CgA, argyrophil) defines a carcinoid, not 5-HIAA."
+      - "A normal value is expected here; no sampling error is needed to explain it."
+      - "5-HIAA does not judge malignancy."
+    src: { page: 96, quote: "not generally raised in tumors of the hindgut." }
+    status: unverified
+  - id: endo.L05.110
+    kind: mcq
+    topic: treatment
+    stem: A man on long-term octreotide for a midgut NET develops right upper quadrant colic. Why?
+    options: [Gallstones from inhibited cholecystokinin release, Hepatic metastasis bleeding, Hypoglycaemia, Injection-site pain]
+    answer: 0
+    why:
+      - "Correct: somatostatin analogs inhibit CCK and gallbladder contraction, so gallstones form."
+      - "Possible in NETs but not a drug side effect."
+      - "Hypo/hyperglycaemia is a side effect but does not cause biliary colic."
+      - "Injection-site pain is local."
+    src: { page: 84, quote: "Gallstones (due to inhibition of cholecystokinin release)." }
+    status: unverified
+  - id: endo.L05.111
+    kind: mcq
+    topic: somatostatinoma
+    stem: A 55-year-old has new diabetes, gallstones and steatorrhoea, and a duodenal mass on EUS. Which hormone is most likely in excess?
+    options: [Somatostatin, Glucagon, Insulin, VIP]
+    answer: 0
+    why:
+      - "Correct: diabetes + gallstones + steatorrhoea = the somatostatin 'inhibitory' triad."
+      - "Glucagon gives diabetes with NME, not gallstones/steatorrhoea."
+      - "Insulin causes hypoglycaemia."
+      - "VIP causes watery diarrhoea and hypokalaemia."
+    src: { page: 92, quote: "Diabetes mellitus. Steatorrhea, diarrhea. Gallstones. Weight loss." }
+    status: unverified
+  - id: endo.L05.112
+    kind: mcq
+    topic: markers
+    stem: Which is the most widely accepted general biomarker for NETs?
+    options: [Chromogranin A, Pancreatic polypeptide, Urinary 5-HIAA, Neuron-specific enolase]
+    answer: 0
+    why:
+      - "Correct: CgA, raised in 60-80% (90-100% as a general marker)."
+      - "PP is raised in only 40-60%."
+      - "5-HIAA is specific to serotonin-secreting carcinoids."
+      - "NSE appears only on the histology list in the algorithm."
+    src: { page: 80, quote: "Most widely accepted biomarker." }
+    status: unverified
+  - id: endo.L05.113
+    kind: mcq
+    topic: targeted
+    stem: Which drug is the mTOR inhibitor used in NETs?
+    options: [Everolimus, Sunitinib, Bevacizumab, AMG-479]
+    answer: 0
+    why:
+      - "Correct."
+      - "Sunitinib is a VEGF (tyrosine kinase) inhibitor."
+      - "Bevacizumab is an anti-VEGF antibody."
+      - "AMG-479 targets IGF-1."
+    src: { page: 86, quote: "mTOR Inhibitor Everolimus." }
+    status: unverified
+  # ---------- book questions (p98) ----------
+  - id: endo.L05.114
+    kind: essay
+    topic: classification
+    prompt: Describe the different anatomical locations of neuroendocrine tumours.
+    outline:
+      - "Sites": ["Pancreatic islet cells", "Gastroenteric tissue", "Respiratory epithelium", "GEP NETs including carcinoids"]
+      - "Carcinoids": ["Foregut 25%: lung, thymus, stomach, duodenum", "Midgut 40-60%: distal ileum, jejunum (carcinoid syndrome)", "Hindgut: colon, rectum", "Most in the appendix"]
+      - "Pancreatic endocrine tumours": ["60% functioning", "Gastrinoma: pancreas/duodenum; insulinoma, glucagonoma (tail), VIPoma (80% pancreas, also lung, ganglioneuromas)", "Somatostatinoma: pancreas, duodenum, colon/rectum"]
+    src: { page: 78, quote: "Pancreatic islet cells. Gastroenteric tissue. Respiratory epithelium." }
+    status: unverified
+    tags: [book-question]
+  - id: endo.L05.115
+    kind: essay
+    topic: targeted
+    prompt: Discuss targeted therapy for neuroendocrine tumours.
+    outline:
+      - "Somatostatin receptor targeting": ["SST receptors highly expressed", "Octreotide, lanreotide, LAR, pasireotide", "Radiolabeled somatostatin analogs"]
+      - "VEGF inhibitors": ["Bevacizumab", "Sunitinib", "Sorafenib", "Pazopanib"]
+      - "mTOR inhibitor": ["Everolimus; early CgA fall predicts benefit in pNETs"]
+      - "IGF-1 targeting": ["AMG-479"]
+      - "Emerging": ["mTOR, PI3K, VEGF, antiangiogenics", "SST → G protein → PI3K → Akt → mTOR pathway", "Combination therapy potential"]
+    src: { page: 86, quote: "Somatostatin receptors are highly expressed by NETs." }
+    status: unverified
+    tags: [book-question]
+  - id: endo.L05.116
+    kind: essay
+    topic: carcinoid
+    prompt: Delineate the clinical picture and diagnosis of carcinoid syndrome.
+    outline:
+      - "Clinical picture": ["About 10% of carcinoids", "Flushing (tachykinins, bradykinins)", "Diarrhoea (serotonin, prostaglandins)", "Bronchoconstriction (tachykinins, bradykinins)", "Right heart failure (unknown, TGFβ)"]
+      - "Diagnosis": ["Histopathology: argyrophil/argentaffin, CgA, serotonin", "Markers: CgA, 24h urinary 5-HIAA (foregut and midgut)", "Pentagastrin flush provocation", "Octreoscan, CT, US, MRI, EUS", "Algorithm: 5-HIAA/CgA → SRS/US (PET-5HTP if negative) → CT/MRI → biopsy"]
+    src: { page: 96, quote: "Tumour Markers: CgA, u-5-HIAA." }
+    status: unverified
+    tags: [book-question]
+  - id: endo.L05.117
+    kind: essay
+    topic: localization
+    prompt: Give details of radiologic localization of neuroendocrine tumours.
+    outline:
+      - "Methods": ["Transabdominal US, CT, MRI", "Selective arterial angiography, venous and hepatic venous sampling", "Radiolabeled somatostatin scanning", "Endoscopic and intraoperative US"]
+      - "Octreoscan": ["Best noninvasive, up to 70% of primaries", "<10 mm 40%, 10 mm 90%, liver mets 90%"]
+      - "EUS": ["<10 mm about 50%; with SRI about 90%"]
+      - "Newer": ["PET with C11-5HTP or C11-L-dopa", "CT/MRI/US always a complement; US small tumours 10-30%, liver mets 90%"]
+    src: { page: 81, quote: "Radiolabeled somatostatin scanning is the best noninvasive modality, identifying up to 70% of primary tumors." }
+    status: unverified
+    tags: [book-question]
+  - id: endo.L05.118
+    kind: essay
+    topic: gastrinoma
+    prompt: Discuss the treatment of Zollinger-Ellison syndrome.
+    outline:
+      - "Symptom control": ["Acid antisecretory drugs", "Rarely somatostatin analogs"]
+      - "Solitary tumour": ["Surgery may cure", "10-year survival 90% after complete resection"]
+      - "Metastatic disease": ["Somatostatin analogs", "Debulking surgery", "Interferon", "Chemotherapy", "Hepatic tumour embolization"]
+    src: { page: 88, quote: "Symptomatic control: acid antisecretory medications, rarely somatostatin analogs." }
+    status: unverified
+    tags: [book-question]

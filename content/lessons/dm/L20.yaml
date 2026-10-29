@@ -1,0 +1,407 @@
+schema: batna.lesson/v1
+lecture: dm.L20
+lessons:
+  # ------------------------------------------------------------------
+  - id: dm.L20.lesson1
+    title: "الـ HDL بيحمي الشريان إزاي؟"
+    hook: "الـ HDL مش بس \"الكوليسترول الحلو\". عنده 6 أسلحة ضد الـ atherosclerosis، وأولهم عربية الزبالة."
+    minutes: 8
+    pages: [252, 254]
+    topics: [metabolism, anti]
+    goals:
+      - "تمشي مع الـ HDL من الـ ABCA1 لحد الـ bile"
+      - "تعرف دور الـ CETP والـ LCAT والـ SR-B1"
+      - "تعد الـ 6 anti-atherogenic effects"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 252
+        title: "Reverse cholesterol transport"
+        quote: "Reverse Cholesterol Transport (RCT)"
+        text: |
+          الـ ==reverse cholesterol transport== (RCT) هو إن الكوليسترول الزيادة يطلع من **الأنسجة** ← يمشي في **الدم** ← يوصل **الكبد** ← يخرج في الـ **bile**.
+
+          "Reverse" لأن الطريق العادي (LDL) بيودّي الكوليسترول **للأنسجة**؛ الـ HDL بيرجّعه.
+      - kind: figure
+        page: 253
+        quote: "HDL Metabolism"
+        title: "دورة حياة الـ HDL"
+        alt: "Flow from right to left drawn top to bottom: lipid-poor ApoA-I takes free cholesterol from a cell through ABCA1 and becomes nascent HDL; LCAT turns it into mature HDL with a cholesteryl ester core; mature HDL gives cholesteryl ester to the liver through SR-B1, and the liver sends it to bile; a side branch shows CETP swapping cholesteryl ester from HDL for triglyceride from VLDL, and LDL returning to the liver through the LDL receptor."
+        caption: "**ABCA1** يملا ← **LCAT** ينضّج ← **SR-B1** يفضّي في الكبد ← **bile**. والـ ==CETP== طريق جانبي: ياخد الـ CE من الـ HDL ويديه للـ VLDL/LDL مقابل TG."
+        svg: |
+          <svg viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L20a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="10" y="10" width="200" height="36" rx="8" class="fg-bad"/>
+            <text x="110" y="33" text-anchor="middle" class="t-sm t-b">Cell: free cholesterol</text>
+            <path d="M110 46 L110 66" class="fg-arrow" marker-end="url(#L20a)"/>
+            <text x="118" y="61" class="t-sm t-acc">ABCA1</text>
+            <rect x="10" y="68" width="200" height="36" rx="8" class="fg-box"/>
+            <text x="110" y="91" text-anchor="middle" class="t-sm">Lipid-poor ApoA-I → nascent HDL</text>
+            <path d="M110 104 L110 124" class="fg-arrow" marker-end="url(#L20a)"/>
+            <text x="118" y="119" class="t-sm t-acc">LCAT</text>
+            <rect x="10" y="126" width="200" height="36" rx="8" class="fg-acc"/>
+            <text x="110" y="149" text-anchor="middle" class="t-sm t-b">Mature HDL (CE core)</text>
+            <path d="M210 144 L240 144 L240 196" class="fg-arrow" marker-end="url(#L20a)"/>
+            <text x="246" y="166" class="t-sm t-acc">CETP</text>
+            <text x="246" y="182" class="t-sm">CE ⇄ TG</text>
+            <rect x="215" y="198" width="105" height="36" rx="8" class="fg-bad"/>
+            <text x="267" y="221" text-anchor="middle" class="t-sm t-b">VLDL, LDL</text>
+            <path d="M110 162 L110 196" class="fg-arrow" marker-end="url(#L20a)"/>
+            <text x="118" y="184" class="t-sm t-acc">SR-B1</text>
+            <rect x="10" y="198" width="200" height="50" rx="8" class="fg-good"/>
+            <text x="110" y="220" text-anchor="middle" class="t-b">Liver</text>
+            <text x="110" y="238" text-anchor="middle" class="t-sm">FC ← CE</text>
+            <path d="M267 234 L267 262 L212 262 L212 240" class="fg-arrow" marker-end="url(#L20a)"/>
+            <text x="230" y="278" class="t-sm">LDL receptor</text>
+            <path d="M110 248 L110 290" class="fg-arrow" marker-end="url(#L20a)"/>
+            <rect x="60" y="292" width="100" height="30" rx="8" class="fg-box"/>
+            <text x="110" y="312" text-anchor="middle" class="t-sm t-b">Bile</text>
+          </svg>
+      - kind: reveal
+        page: 253
+        quote: "HDL Metabolism"
+        prompt: "لو الـ CETP بقى نشيط زيادة، الـ HDL-C هيعلى ولا يوطى؟ وليه؟"
+        answer: "**يوطى**. الـ CETP بيسحب الـ cholesteryl ester من الـ HDL ويديه للـ VLDL و LDL. نشاط زيادة = HDL مصفّى. وده بالظبط فكرة الـ CETP inhibitors: اقفله، الـ HDL يعلى."
+      - kind: explain
+        page: 254
+        title: "الـ 6 أسلحة"
+        quote: "Anti-Oxidant Properties: Prevents oxidation of LDL."
+        text: |
+          1. **RCT**: يشيل الكوليسترول من الـ macrophage.
+          2. ==Anti-oxidant==: يمنع **oxidation** الـ LDL.
+          3. **Anti-inflammatory**: يمنع ظهور الـ **adhesion molecules** على الـ endothelium، فالـ monocyte مايلزقش.
+          4. **Vasodilator**: ↑ **NO**، ↑ **prostacyclin (PGI2)**، ↓ **ET-1**.
+          5. **Anti-thrombotic**: ↓ **PAF**، ↓ **vWF**، ↓ **tissue factor**.
+          6. **Endothelial protection**: يزوّد تكاثر الـ endothelial cells ويقلل الـ apoptosis.
+      - kind: mnemonic
+        page: 254
+        quote: "Anti-Thrombotic: Decrease PAF, Decrease vWF, and Decrease TF."
+        word: "RAIVTE"
+        parts:
+          - { key: "R", text: "Reverse cholesterol transport" }
+          - { key: "A", text: "Anti-oxidant: no LDL oxidation" }
+          - { key: "I", text: "Inflammation down: fewer adhesion molecules" }
+          - { key: "V", text: "Vasodilator: NO and PGI2 up, ET-1 down" }
+          - { key: "T", text: "Thrombosis down: PAF, vWF, TF" }
+          - { key: "E", text: "Endothelium protected: proliferation up, apoptosis down" }
+        hook: "**RAIVTE** ≈ \"رايفته\": الـ HDL بيعمل للشريان **رايفة** (ريفريش) من 6 جهات."
+      - kind: figure
+        page: 253
+        quote: "Anti-atherogenic Effects of HDL"
+        title: "الـ HDL بيضرب فين في الـ plaque؟"
+        alt: "Three stacked steps of atherogenesis each with an HDL block: monocyte adhesion to endothelium, blocked by HDL inhibiting adhesion molecule expression; LDL oxidation in the intima, blocked by HDL inhibiting LDL oxidation; macrophage turning into a foam cell, opposed by HDL promoting cholesterol efflux."
+        caption: "3 نقط تفتيش في الكتاب: **يمنع اللزق** (adhesion)، **يمنع الأكسدة**، و **يسحب الكوليسترول** من الـ macrophage قبل ما يبقى foam cell."
+        svg: |
+          <svg viewBox="0 0 330 230" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="10" width="180" height="56" rx="8" class="fg-bad"/>
+            <text x="100" y="34" text-anchor="middle" class="t-sm t-b">Monocyte adhesion</text>
+            <text x="100" y="52" text-anchor="middle" class="t-sm">to endothelium</text>
+            <rect x="200" y="10" width="120" height="56" rx="8" class="fg-good"/>
+            <text x="260" y="34" text-anchor="middle" class="t-sm t-b">HDL: blocks</text>
+            <text x="260" y="52" text-anchor="middle" class="t-sm">adhesion molecules</text>
+            <rect x="10" y="86" width="180" height="56" rx="8" class="fg-bad"/>
+            <text x="100" y="110" text-anchor="middle" class="t-sm t-b">LDL → oxidized LDL</text>
+            <text x="100" y="128" text-anchor="middle" class="t-sm">in the intima</text>
+            <rect x="200" y="86" width="120" height="56" rx="8" class="fg-good"/>
+            <text x="260" y="110" text-anchor="middle" class="t-sm t-b">HDL: blocks</text>
+            <text x="260" y="128" text-anchor="middle" class="t-sm">LDL oxidation</text>
+            <rect x="10" y="162" width="180" height="56" rx="8" class="fg-bad"/>
+            <text x="100" y="186" text-anchor="middle" class="t-sm t-b">Macrophage → foam cell</text>
+            <text x="100" y="204" text-anchor="middle" class="t-sm">cytokines, MMPs</text>
+            <rect x="200" y="162" width="120" height="56" rx="8" class="fg-good"/>
+            <text x="260" y="186" text-anchor="middle" class="t-sm t-b">HDL: promotes</text>
+            <text x="260" y="204" text-anchor="middle" class="t-sm">cholesterol efflux</text>
+          </svg>
+      - kind: check
+        page: 254
+        quote: "Vasodilator: Increases NO, increases Prostacyclin (PG I2), and Decreases ET-1."
+        question: "HDL's vasodilator effect includes which of the following?"
+        options:
+          - "Decreased endothelin-1"
+          - "Increased thromboxane"
+          - "Decreased nitric oxide"
+          - "Increased tissue factor"
+        answer: 0
+        why:
+          - "صح: ↓ ET-1 مع ↑ NO و ↑ PGI2."
+          - "الكتاب ما ذكرش thromboxane، والـ HDL anti-thrombotic أصلًا."
+          - "بالعكس: الـ HDL بيزوّد الـ NO."
+          - "بالعكس: بيقلل الـ TF."
+      - kind: try
+        items: [dm.L20.002, dm.L20.005, dm.L20.006, dm.L20.008, dm.L20.009]
+    recap:
+      - "RCT: أنسجة ← دم ← كبد ← bile."
+      - "ABCA1 يملا الـ ApoA-I، LCAT ينضّج، SR-B1 يفضّي في الكبد؛ CETP يبدّل CE بـ TG مع الـ VLDL/LDL."
+      - "6 أسلحة (RAIVTE): RCT، anti-oxidant، anti-inflammatory، vasodilator، anti-thrombotic، endothelial protection."
+      - "Vasodilator: ↑NO ↑PGI2 ↓ET-1. Anti-thrombotic: ↓PAF ↓vWF ↓TF."
+    practice: [dm.L20.001, dm.L20.002, dm.L20.003, dm.L20.004, dm.L20.005, dm.L20.006, dm.L20.007, dm.L20.008, dm.L20.009, dm.L20.010, dm.L20.011, dm.L20.012, dm.L20.057]
+  # ------------------------------------------------------------------
+  - id: dm.L20.lesson2
+    title: "ليه الـ HDL واطي؟ وإزاي نعلّيه من غير دوا"
+    hook: "لوز برتقاني، طحال كبير، وتنميل في الرجلين. ده مش كرتون، ده Tangier disease. وبعدين: سيجارة، كرش، وbeta-blocker."
+    minutes: 8
+    pages: [254, 256]
+    topics: [primary, secondary, lifestyle]
+    goals:
+      - "تعرف الـ 4 primary causes وعيب كل واحد"
+      - "تعد الـ secondary causes"
+      - "تحفظ أرقام الـ lifestyle: 3 kg، 7-20%، 30-60 يوم"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 254
+        title: "Tangier disease"
+        quote: "ABC A1 Transporter gene defect."
+        text: |
+          - ==ABCA1== transporter gene defect، فالـ **cholesterol efflux** بيقل.
+          - الكتاب بيقول **autosomal dominant**.
+          - **HDL-C واطي جدًا**.
+          - الكوليسترول بيتراكم: **لوز برتقاني كبير**، **hepatosplenomegaly**، **peripheral neuropathy**.
+          - **Premature atherosclerosis**، وسبب الوفاة **premature CAD**.
+      - kind: update
+        page: 254
+        quote: "Autosomal dominant disorder."
+        text: "مراجع الوراثة (OMIM) بتوصف Tangier disease إنه **autosomal recessive** (الـ allele الاتنين)، والـ heterozygote عنده HDL نص الطبيعي. في الامتحان اكتب إجابة الكتاب: autosomal dominant."
+        ref: "OMIM #205400, Tangier disease"
+      - kind: aside
+        tone: joke
+        page: 254
+        quote: "Cholesterol accumulation: Enlarged orange tonsils, hepatosplenomegaly, Peripheral neuropathy."
+        text: "الـ ABCA1 هو **باب الخروج** من الخلية. في Tangier الباب مقفول، فالـ **cholesterol accumulation** بيبدأ: الكوليسترول بيقعد جوّه **يعمل حفلة**: اللوز يبقى برتقاني، والطحال والكبد يتنفخوا. حتى الكوليسترول عايز يخرج ومش لاقي باب."
+      - kind: table
+        page: 254
+        quote: "Familial Hypoalphalipoproteinemia"
+        title: "الـ primary causes"
+        columns: [Disorder, Defect, Result]
+        rows:
+          - ["Tangier", "ABCA1", "Orange tonsils, HSM, neuropathy, CAD"]
+          - ["Familial hypoalpha", "ApoA-I (AD)", "Premature CAD, strokes"]
+          - ["CETP ↑ activity", "CETP polymorphism", "Premature CAD"]
+          - ["LCAT ↓ activity", "LCAT mutation", "Premature CAD"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1]]
+      - kind: check
+        page: 254
+        quote: "Due to Apo AI Gene defect."
+        question: "Familial hypoalphalipoproteinemia is due to a defect in:"
+        options:
+          - "ApoA-I gene"
+          - "ABCA1 gene"
+          - "LCAT gene"
+          - "CETP gene"
+        answer: 0
+        why:
+          - "صح: ApoA-I، autosomal dominant، premature CAD و strokes."
+          - "ده Tangier."
+          - "ده decreased LCAT activity."
+          - "ده increased CETP activity (polymorphism)."
+      - kind: explain
+        page: 255
+        title: "Secondary causes"
+        quote: "Secondary Causes of Low HDL-C"
+        text: |
+          1. **Smoking**
+          2. **Obesity** (==visceral fat==)
+          3. **Very-low-fat diet**
+          4. أدوية: **beta-blockers** و ==androgenic steroids==
+      - kind: sort
+        page: 255
+        quote: "Secondary Causes of Low HDL-C"
+        prompt: "يوطّي الـ HDL ولا يعلّيه؟"
+        bins: ["Lowers HDL-C", "Raises HDL-C"]
+        cards:
+          - { text: "Smoking", bin: 0 }
+          - { text: "Beta-blocker", bin: 0 }
+          - { text: "Anabolic steroids", bin: 0 }
+          - { text: "Very-low-fat diet", bin: 0 }
+          - { text: "Running, dose-dependent", bin: 1 }
+          - { text: "Losing 3 kg", bin: 1 }
+          - { text: "Niacin", bin: 1 }
+        why: "التدخين والكرش والـ beta-blockers والـ androgens والـ very-low-fat diet بيوطّوه. الرياضة والوزن والـ niacin بيعلّوه."
+      - kind: explain
+        page: 255
+        title: "أرقام الـ lifestyle"
+        quote: "For every 3 kg of weight loss, HDL-C levels increase 1 mg/dl."
+        text: |
+          - **الوزن**: كل ==3 kg== تنزلهم ← HDL-C يعلى **1 mg/dL**.
+          - **التدخين**: الـ HDL-C عند المدخنين أقل بـ **7-20%**، ويرجع طبيعي خلال **30-60 يوم** من الإيقاف.
+          - **الرياضة**: الـ HDL بيعلى بس مع رياضة ==intense و frequent==. الـ aerobic (زي الجري) بتعلّيه **dose-dependent**.
+      - kind: aside
+        tone: exam
+        page: 256
+        quote: "HDL-C levels return to normal within 30–60 days after smoking cessation."
+        text: "رقمين بيتلخبطوا: **3 kg ← 1 mg/dL** (وزن)، و **30-60 يوم** (تدخين). فكّر: 3 كيلو = 1، وشهر لشهرين ويرجع."
+      - kind: check
+        page: 255
+        quote: "For every 3 kg of weight loss, HDL-C levels increase 1 mg/dl."
+        question: "A patient loses 12 kg. Expected HDL-C rise from weight loss alone?"
+        options:
+          - "4 mg/dL"
+          - "12 mg/dL"
+          - "1 mg/dL"
+          - "36 mg/dL"
+        answer: 0
+        why:
+          - "صح: 12 ÷ 3 = 4 mg/dL."
+          - "ده 1 لكل كيلو؛ غلط."
+          - "ده لـ 3 kg بس."
+          - "ده ضرب مش قسمة."
+      - kind: try
+        items: [dm.L20.013, dm.L20.016, dm.L20.024, dm.L20.029, dm.L20.030]
+    recap:
+      - "Tangier: ABCA1، AD في الكتاب، لوز برتقاني و HSM و neuropathy، والوفاة premature CAD."
+      - "Familial hypoalphalipoproteinemia: ApoA-I، AD، CAD و strokes."
+      - "CETP ↑ (polymorphism) و LCAT ↓ (mutation): premature CAD."
+      - "Secondary: تدخين، visceral obesity، very-low-fat diet، beta-blockers، androgens."
+      - "3 kg ← 1 mg/dL؛ المدخن أقل 7-20% ويرجع في 30-60 يوم؛ رياضة intense و frequent."
+    practice: [dm.L20.013, dm.L20.014, dm.L20.015, dm.L20.016, dm.L20.017, dm.L20.018, dm.L20.019, dm.L20.020, dm.L20.021, dm.L20.022, dm.L20.023, dm.L20.024, dm.L20.025, dm.L20.026, dm.L20.027, dm.L20.028, dm.L20.029, dm.L20.030, dm.L20.031, dm.L20.032, dm.L20.055, dm.L20.056, dm.L20.058, dm.L20.059]
+  # ------------------------------------------------------------------
+  - id: dm.L20.lesson3
+    title: "أدوية تعلّي الـ HDL: نجاحات وفضايح"
+    hook: "دوا علّى الـ HDL 106% وزوّد الوفيات 60%. قصة الـ HDL therapy فيها دروس أكتر من الأرقام."
+    minutes: 9
+    pages: [256, 259]
+    topics: [drugs, apoa1, efflux, cetp]
+    goals:
+      - "تحفظ جدول niacin و fibrates و statins"
+      - "تقسم العلاجات الجديدة لـ 3 طرق"
+      - "تعرف مشاكل الـ glitazars والـ CETP inhibitors"
+    status: unverified
+    steps:
+      - kind: table
+        page: 256
+        quote: "Effects of Lipid-Modifying Drugs on HDL-C Levels"
+        title: "الأدوية بتعلّي الـ HDL-C قد إيه؟"
+        columns: [Drug, HDL-C rise]
+        rows:
+          - ["Niacin", "15-35%"]
+          - ["Fibrates", "10-15%"]
+          - ["Statins", "5-10%"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: aside
+        tone: tip
+        page: 256
+        quote: "Niacin 15–35%"
+        text: "الترتيب **N-F-S** زي **\"نفس\"**: Niacin الأول، Fibrates، وآخرهم Statins. والأرقام نازلة: 35، 15، 10."
+      - kind: update
+        page: 256
+        quote: "Effects of Lipid-Modifying Drugs on HDL-C Levels"
+        text: "رفع الـ HDL-C بالدوا ما قللش الـ cardiovascular events: الـ niacin فوق الـ statin فشل في **AIM-HIGH (2011)** و **HPS2-THRIVE (2014)**. الـ ESC/EAS 2019 ما حطتش target للـ HDL-C. الامتحان: أرقام الكتاب."
+        ref: "ESC/EAS dyslipidaemia guidelines 2019"
+      - kind: figure
+        page: 256
+        quote: "Specific Approaches to Increase HDL"
+        title: "3 طرق لتعلية الـ HDL"
+        alt: "Three stacked boxes: one, promote ApoA-I production, with ApoA-I Milano, autologous ApoA-I and mimetic peptides including oral D-4F; two, promote cholesterol efflux and RCT, with ABCA1 regulated by LXR and RXR and PPAR agonists; three, slow HDL removal from blood, with CETP inhibitors and a CETP vaccine."
+        caption: "يا **تصنّع** ApoA-I أكتر، يا **تسرّع** خروج الكوليسترول (efflux)، يا **تبطّأ** شيل الـ HDL من الدم (CETP)."
+        svg: |
+          <svg viewBox="0 0 330 260" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="10" width="310" height="74" rx="8" class="fg-acc"/>
+            <text x="20" y="32" class="t-b">1 More ApoA-I</text>
+            <text x="20" y="52" class="t-sm">ApoA-I Milano (IV), autologous ApoA-I (IV)</text>
+            <text x="20" y="70" class="t-sm">Mimetic peptides: IV, oral D-4F</text>
+            <rect x="10" y="94" width="310" height="74" rx="8" class="fg-good"/>
+            <text x="20" y="116" class="t-b">2 More efflux and RCT</text>
+            <text x="20" y="136" class="t-sm">ABCA1 (regulated by LXR, RXR)</text>
+            <text x="20" y="154" class="t-sm">PPAR agonists: pioglitazone, fibrates, glitazars</text>
+            <rect x="10" y="178" width="310" height="74" rx="8" class="fg-bad"/>
+            <text x="20" y="200" class="t-b">3 Slower HDL removal</text>
+            <text x="20" y="220" class="t-sm">CETP inhibitors: torcetrapib, dalcetrapib,</text>
+            <text x="20" y="238" class="t-sm">evacetrapib, anacetrapib; CETP vaccine</text>
+          </svg>
+      - kind: explain
+        page: 256
+        title: "الطريق الأول: ApoA-I"
+        quote: "Significant reduction of coronary atheroma volume as measured by IVUS."
+        text: |
+          - **ApoA-I Milano** (IV): **5 infusions أسبوعية** قللت حجم الـ ==coronary atheroma== بالـ **IVUS**.
+          - **Autologous ApoA-I** (IV): ApoA-I بتاع العيان نفسه؛ الـ HDL يتعمله **de-lipidation ex vivo** فيطلع lipid-poor ApoA-I، ويرجع يتحقن. ليه؟ لأن الـ ApoA-I الفاضي أشطر في الـ **efflux** من الـ HDL الناضج.
+          - **Mimetic peptides** (IV): peptides صناعية زي الـ ApoA-I، قللت تقدم الـ atherosclerosis، بس الحقن مشكلة على المدى الطويل.
+          - ==D-4F== (**oral**): الـ gut peptidases مش بتعرفه فمش بيتكسر؛ قلل الـ atherosclerosis جدًا في **الفيران**.
+      - kind: check
+        page: 257
+        quote: "ApoA-I is more effective in promoting cholesterol efflux than mature HDL particles."
+        question: "Why is the patient's HDL de-lipidated before re-infusion in autologous ApoA-I therapy?"
+        options:
+          - "Lipid-poor ApoA-I promotes cholesterol efflux better than mature HDL"
+          - "To remove LDL from the plasma"
+          - "To inactivate CETP"
+          - "To make it orally absorbable"
+        answer: 0
+        why:
+          - "صح: الـ ApoA-I الفاضي أشطر في سحب الكوليسترول."
+          - "الهدف الـ HDL مش الـ LDL."
+          - "ده طريق تالت (CETP)، مش ده."
+          - "ده بيرجع IV، مش oral."
+      - kind: explain
+        page: 257
+        title: "الطريق التاني: efflux و PPAR"
+        quote: "The major regulator of ABCA1 gene expression is the Nuclear Receptors Liver X receptor (LXR) and Retinoid X receptor (RXR)."
+        text: |
+          - الـ efflux بيمشي عبر الـ **ABCA1** للـ ApoA-I. زيادة الـ ABCA1 في الفيران علّت الـ HDL-C.
+          - المنظّم الأساسي للـ ABCA1: ==LXR== و **RXR** (nuclear receptors).
+          - **PPAR-γ** (pioglitazone): insulin sensitivity.
+          - **PPAR-α** (fibrates): dyslipidemia، خصوصًا **TG عالي و HDL واطي**.
+          - **Dual PPAR-α/γ** (==glitazars==): lipids و glucose مع بعض.
+      - kind: match
+        page: 258
+        quote: "Naveglitazar: Increased risk of bladder cancer."
+        prompt: "وصّل كل glitazar بمشكلته:"
+        pairs:
+          - ["Muraglitazar", "Adverse CV events"]
+          - ["Naveglitazar", "Bladder cancer"]
+          - ["Tesaglitazar", "Renal dysfunction"]
+          - ["Aleglitazar", "Heart failure, GI bleeding"]
+        why: "Mura الأول واتوقف لـ CV events؛ Nave = Bladder؛ Tesa = Kidney؛ Ale = HF و GI bleeding."
+      - kind: aside
+        tone: tip
+        page: 258
+        quote: "Tesaglitazar: Risk of renal dysfunction."
+        text: "احفظها بأول حرف: **M**uraglitazar = **M**I (CV events)، **N**aveglitazar = **N**eoplasm (bladder cancer)، **T**esaglitazar = **T**ubules (renal dysfunction)، **A**leglitazar = **A**ll the bleeding + heart failure."
+      - kind: explain
+        page: 258
+        title: "الطريق التالت: CETP"
+        quote: "Rationale: Pharmacological inhibition of CETP might be a novel approach to raise HDL-C levels."
+        text: |
+          يابانيين كتير عندهم **HDL-C عالي جدًا** لأنهم عندهم **CETP deficiency** وراثي. الفكرة: اقفل الـ ==CETP== بدوا، الـ HDL يعلى.
+
+          - **Torcetrapib** 120 mg/day ← HDL-C **+46%**؛ 240 mg/day ← **+106%**.
+          - بس Pfizer وقفت تجربة ==ILLUMINATE== لأن الوفيات والـ CV events زادت: **+60% deaths**.
+          - بعده 3 أدوية: **dalcetrapib**، **evacetrapib**، **anacetrapib**.
+          - وفيه فكرة **CETP vaccine**: peptide يخلي الجسم يعمل **anti-CETP autoantibodies**.
+      - kind: aside
+        tone: joke
+        page: 258
+        quote: "60% increase in deaths was observed among patients taking Torcetrapib!!"
+        text: "الـ Torcetrapib علّى الـ HDL **106%** والوفيات **60%**. أول تحليل حلو في التاريخ والعيان مش موجود يفرح بيه. الدرس: **رقم المعمل مش هو العيان**."
+      - kind: update
+        page: 258
+        quote: "Then, 3 newer CETP inhibitors have been developed"
+        text: "الـ outcome trials للـ **CETP inhibitors** الجديدة: **dalcetrapib** (dal-OUTCOMES 2012) و **evacetrapib** (ACCELERATE 2017) ما فادوش؛ **anacetrapib** (REVEAL 2017) قلل الأحداث شوية، والسبب نزول الـ non-HDL-C مش علو الـ HDL. ولا واحد منهم مستخدم."
+        ref: "ESC/EAS dyslipidaemia guidelines 2019"
+      - kind: check
+        page: 258
+        quote: "Pfizer terminated ILLUMINATE trial because of increased mortality and CV events!"
+        question: "The ILLUMINATE trial was stopped because torcetrapib:"
+        options:
+          - "Increased mortality and CV events"
+          - "Failed to raise HDL-C"
+          - "Caused bladder cancer"
+          - "Caused renal dysfunction"
+        answer: 0
+        why:
+          - "صح: الوفيات زادت 60% رغم إن الـ HDL علي."
+          - "بالعكس: علّاه 46-106%."
+          - "ده naveglitazar."
+          - "ده tesaglitazar."
+      - kind: try
+        items: [dm.L20.033, dm.L20.035, dm.L20.041, dm.L20.046, dm.L20.050]
+    recap:
+      - "Niacin 15-35%، fibrates 10-15%، statins 5-10%."
+      - "3 طرق: ApoA-I أكتر، efflux أكتر، شيل أبطأ (CETP)."
+      - "ApoA-I Milano: 5 infusions، atheroma أقل بالـ IVUS. D-4F: oral."
+      - "ABCA1 منظّم بـ LXR و RXR. PPAR-α = fibrates، PPAR-γ = pioglitazone، dual = glitazars."
+      - "Glitazars: Mura CV، Nave مثانة، Tesa كلى، Ale HF و GI bleeding."
+      - "Torcetrapib (ILLUMINATE): HDL +106% بس الوفيات +60%."
+    practice: [dm.L20.033, dm.L20.034, dm.L20.035, dm.L20.036, dm.L20.037, dm.L20.038, dm.L20.039, dm.L20.040, dm.L20.041, dm.L20.042, dm.L20.043, dm.L20.044, dm.L20.045, dm.L20.046, dm.L20.047, dm.L20.048, dm.L20.049, dm.L20.050, dm.L20.051, dm.L20.052, dm.L20.053, dm.L20.054]

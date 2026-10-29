@@ -859,6 +859,7 @@ pub mod calc {
     pub const AREA_TUMOUR: &str = "الأورام";
     pub const AREA_ACUTE: &str = "الفشل الكبدي الحاد";
     pub const AREA_PANCREAS: &str = "البنكرياس";
+    pub const AREA_RESEARCH: &str = "الريسيرش";
     // The `calc` item: compute it, then interpret it.
     pub const YOUR_RESULT: &str = "حسبتها كام؟";
     pub const YOUR_RESULT_HINT: &str = "اكتب الرقم أو المرحلة، أو سيبها فاضية واستخدم الحاسبة.";
@@ -881,6 +882,19 @@ pub mod calc {
             ("ascitic_pmn", "pmn_per_mm3") => "عدد كرات الدم البيضا الكلي × نسبة النيوتروفيل.",
             ("bisap", "bun_mg_dl") => "اليوريا ÷ 2.14.",
             ("ranson", "bun_rise_mg_dl") => "زيادة اليوريا ÷ 2.14.",
+            ("relative_risk", "a") => "معرّض وعنده المرض (أو case)",
+            ("relative_risk", "b") => "معرّض ومعندوش المرض (أو control)",
+            ("relative_risk", "c") => "مش معرّض وعنده المرض (أو case)",
+            ("relative_risk", "d") => "مش معرّض ومعندوش المرض (أو control)",
+            ("odds_ratio", "a") => "معرّض وعنده المرض (أو case)",
+            ("odds_ratio", "b") => "معرّض ومعندوش المرض (أو control)",
+            ("odds_ratio", "c") => "مش معرّض وعنده المرض (أو case)",
+            ("odds_ratio", "d") => "مش معرّض ومعندوش المرض (أو control)",
+            ("diagnostic_accuracy", "tp") => "التحليل + والمرض +",
+            ("diagnostic_accuracy", "fp") => "التحليل + والمرض −",
+            ("diagnostic_accuracy", "fn") => "التحليل − والمرض +",
+            ("diagnostic_accuracy", "tn") => "التحليل − والمرض −",
+            ("sar", "primary_cases") => "بيتشالوا من اللي ممكن يتعدوا.",
             _ => return None,
         })
     }

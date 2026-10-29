@@ -1,0 +1,742 @@
+schema: batna.lesson/v1
+lecture: geri.L08
+lessons:
+  # ------------------------------------------------------------------
+  - id: geri.L08.lesson1
+    title: "العضلة اللي بتختفي: sarcopenia"
+    hook: "جدّك مش «ضعيف من السن» وخلاص. ده مرض ليه اسم، و screening من 5 أسئلة، وعلاج من غير دوا."
+    minutes: 9
+    pages: [131, 135]
+    topics: [intro, sarcopenia, sarc-mx]
+    goals:
+      - "تعرّف الـ sarcopenia وتفرّق primary من secondary"
+      - "تعرف probable و confirmed و severe"
+      - "تحسب الـ SARC-F وتعرف العلاج"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 131
+        title: "التلاتي اللي بيقعّد الكبير"
+        quote: "main ―components‖: sarcopenia, tendinopathies, and arthritis."
+        text: |
+          أمراض العضم والعضل في الكبير معناها: **pain**، مشاكل حركة، **falls و fractures** أكتر، وصعوبة في الـ ADL.
+
+          والكتاب بيقول فيه ==pathological triad== مترابط: **sarcopenia**، **tendinopathies**، و **arthritis**. والمحاضرة ماشية عليهم بالترتيب، وبعدين gout و osteoporosis و fibromyalgia و PMR.
+      - kind: explain
+        page: 131
+        title: "يعني إيه sarcopenia؟"
+        quote: "Sarcopenia is the loss of skeletal muscle mass and function that occurs during the aging process (primary sarcopenia)"
+        text: |
+          ==Loss of skeletal muscle mass and function==.
+          - **Primary:** من السن نفسه، وده الأصعب في التحديد.
+          - **Secondary:** من مرض أو دوا، وعلاجها إنك تعالج السبب.
+
+          والـ **EWGSOP** وصفتها: syndrome فيه فقد progressive و generalized للكتلة والقوة، مع خطر disability و poor QoL و death.
+      - kind: aside
+        tone: exam
+        page: 132
+        quote: "whole body and appendicular lean mass decline by about 20% in men and 30% in women."
+        text: "من العقد التاني للتامن: الـ lean mass بتقل حوالي **20% في الرجالة** و **30% في الستات**. علشان كده الـ sarcopenia أكتر في **الستات**."
+      - kind: figure
+        page: 132
+        quote: "Low muscle strength is identified as a key characteristic and a primary indicator of probable sarcopenia."
+        title: "3 درجات: probable، confirmed، severe"
+        alt: "Three stacked steps: low muscle strength gives probable sarcopenia; adding low muscle quantity or quality confirms it; adding low physical performance makes it severe."
+        caption: "القوة الأول (==probable==)، الكمية/الجودة بتأكد (**confirmed**)، والأداء بيحدد الشدة (**severe** لو التلاتة)."
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="G08a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker></defs>
+            <rect x="10" y="10" width="310" height="55" rx="10" class="fg-acc"/>
+            <text x="20" y="32" class="t-sm t-b">Low muscle STRENGTH</text>
+            <text x="20" y="52" class="t-sm">→ probable sarcopenia (key feature)</text>
+            <path d="M165 67 V87" class="fg-arrow" marker-end="url(#G08a)"/>
+            <rect x="10" y="92" width="310" height="55" rx="10" class="fg-box"/>
+            <text x="20" y="114" class="t-sm t-b">+ Low muscle QUANTITY or QUALITY</text>
+            <text x="20" y="134" class="t-sm">→ sarcopenia confirmed</text>
+            <path d="M165 149 V169" class="fg-arrow" marker-end="url(#G08a)"/>
+            <rect x="10" y="174" width="310" height="55" rx="10" class="fg-bad"/>
+            <text x="20" y="196" class="t-sm t-b">+ Low physical PERFORMANCE</text>
+            <text x="20" y="216" class="t-sm">→ severe sarcopenia</text>
+          </svg>
+      - kind: explain
+        page: 132
+        title: "Screening"
+        quote: "specifically the SARC-F questionnaire, mid-arm muscle circumference (MAMC), calf circumference (CC), hand grip strength and gait speed."
+        text: |
+          الـ screening tool لازم **high sensitivity**، متاح، سهل، رخيص، و non-invasive. والأدوات:
+          - ==SARC-F== questionnaire
+          - **MAMC** و **calf circumference**
+          - **hand grip strength** و **gait speed**
+
+          والأحسن تجمع: **SARC-F + CC أو MAMC + grip أو gait speed** (Ishii و EWGSOP).
+      - kind: mnemonic
+        page: 133
+        quote: "Strength: How much difficulty do you have in lifting and carrying 10 pounds?"
+        word: "SARCF"
+        parts:
+          - { key: "S", text: "Strength: lifting and carrying 10 pounds" }
+          - { key: "A", text: "Assistance in walking: across a room" }
+          - { key: "R", text: "Rise from a chair or bed" }
+          - { key: "C", text: "Climb a flight of 10 stairs" }
+          - { key: "F", text: "Falls in the past year (4 or more = 2)" }
+        hook: "الاسم نفسه هو الـ mnemonic. كل سؤال 0 أو 1 أو 2، والمجموع من 10، و ==≥4== يستاهل تقييم أعمق."
+      - kind: check
+        page: 134
+        quote: "Data suggests that a SARC-F score of .4 best predicts the need for further, more comprehensive evaluation."
+        question: "SARC-F total 5. Next step?"
+        options:
+          - "Further comprehensive evaluation"
+          - "Diagnose severe sarcopenia now"
+          - "Normal: no action"
+          - "Start a sarcopenia drug"
+        answer: 0
+        why:
+          - "صح: 4 أو أكتر = محتاج evaluation أشمل (الكتاب كاتبها «.4»، يعني ≥4)."
+          - "الـ SARC-F screen، مش تشخيص ولا grading."
+          - "4 أو أكتر مش طبيعي."
+          - "مفيش دوا approved."
+      - kind: explain
+        page: 134
+        title: "ليه العضلة بتروح؟"
+        quote: "In recent years, inflammation and mitochondrial dysfunction received particular attention as a major determinant of sarcopenia."
+        text: |
+          الـ mechanisms كتير: malnutrition، inactivity، hormonal changes، inflammation، catabolism زيادة و **anabolic resistance**، myocyte loss، satellite cells أقل، فقد **α-motor neurons**، mitochondrial dysfunction، insulin resistance.
+
+          وآخر سنين الاهتمام على اتنين: ==inflammation== و **mitochondrial dysfunction** (نفس اللي في السكر والـ CVD).
+      - kind: explain
+        page: 135
+        title: "العلاج: الحديد مش في الصيدلية"
+        quote: "only vitamin D, especially in older women, and testosterone in older men with low testosterone levels and muscle weakness can be justified"
+        text: |
+          - الأساس: ==physical exercise== لوحده أو مع nutrition، وأحسنه **high-intensity resistance training**.
+          - **مفيش دوا approved**.
+          - الـ umbrella review: بس **vitamin D** (خصوصًا الستات الكبار) و **testosterone** (رجالة عندهم low testosterone وضعف).
+      - kind: aside
+        tone: joke
+        page: 134
+        quote: "physical exercise, most notably high-intensity resistance training, improves the strength and mass of skeletal muscles"
+        text: "يعني الروشتة: «**dumbbells** مرتين في اليوم بعد الأكل». الـ resistance training هو الدوا الوحيد اللي الكتاب واثق فيه."
+      - kind: try
+        items: [geri.L08.003, geri.L08.008, geri.L08.011, geri.L08.014, geri.L08.023]
+    recap:
+      - "Triad: sarcopenia، tendinopathies، arthritis."
+      - "Sarcopenia = loss of muscle mass and function؛ primary (السن) أو secondary (مرض/دوا)."
+      - "Strength = probable، quantity/quality = confirmed، performance = severe."
+      - "SARC-F (Strength، Assistance، Rise، Climb، Falls): ≥4 = evaluation."
+      - "علاج: resistance exercise ± nutrition؛ مفيش دوا approved؛ vitamin D و testosterone في فئات معينة."
+    practice: [geri.L08.001, geri.L08.002, geri.L08.003, geri.L08.004, geri.L08.005, geri.L08.006, geri.L08.007, geri.L08.008, geri.L08.009, geri.L08.010, geri.L08.011, geri.L08.012, geri.L08.013, geri.L08.014, geri.L08.015, geri.L08.016, geri.L08.017, geri.L08.018, geri.L08.019, geri.L08.020, geri.L08.021, geri.L08.022, geri.L08.023, geri.L08.024, geri.L08.123]
+  # ------------------------------------------------------------------
+  - id: geri.L08.lesson2
+    title: "الوتر الزعلان: tendinopathy"
+    hook: "كتف بيوجع بالليل، وجنب الورك بيوجع لما تنام عليه: إمتى tendon وإمتى frozen shoulder؟"
+    minutes: 9
+    pages: [135, 139]
+    topics: [tendinopathy, tendon-clinic, tendon-mx]
+    goals:
+      - "تفهم ليه الوتر بيبوظ (tension، compression، stress-shielding)"
+      - "تفرّق rotator cuff tendinopathy عن frozen shoulder"
+      - "تعرف العلاج والـ PRP"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 135
+        title: "يعني إيه tendinopathy؟"
+        quote: "Tendinopathy is a musculoskeletal disorder characterized by tendon pain during an activity, tendon swelling and localized tenderness upon palpation, and loss of function."
+        text: |
+          ==Tendon pain during activity==، swelling، **localized tenderness**، و loss of function.
+
+          تحت الميكروسكوب: **collagen degeneration**، mucoid ground substance زيادة، و tenocytes أكتر بتتحول myofibroblasts (repair cells).
+      - kind: explain
+        page: 135
+        title: "3 أنواع ضغط بتبوّظ الوتر"
+        quote: "not only excessive tensile stress, but also excessive compressive stress as well as ―stress-shielding‖"
+        text: |
+          1. **Excessive tensile load**: زيادة مفاجئة في الحِمل أو مدته أو تكراره ← micro-injury.
+          2. **Excessive compressive stress**.
+          3. ==Stress-shielding==: الوتر **مش واخد حِمل كفاية**، فالخلايا بتكسل والوتر يضعف.
+
+          والطبقات **العميقة** بتتشد أكتر من السطحية.
+      - kind: aside
+        tone: analogy
+        page: 135
+        quote: "the lack of adequate local stress producing understimulation of the tendon cells"
+        text: "الوتر زي الحبل في مركب: لو شدّيته جامد مرة واحدة يتقطع، ولو سبته مرمي سنين يعفّن. الـ **stress-shielding** هو الحبل المرمي."
+      - kind: order
+        page: 136
+        quote: "High levels of tendon compression and the associated tissue hypoxia stimulate the fibrocartilaginous metaplasia of tenocytes"
+        prompt: "إزاي بيحصل الـ calcific tendinopathy؟ رتّب:"
+        steps:
+          - "High compression"
+          - "Tissue hypoxia"
+          - "Tenocyte fibrocartilaginous metaplasia"
+          - "Calcium deposits (hydroxyapatite)"
+        why: "الضغط ← hypoxia ← الـ tenocytes تتحول chondrocyte-like cells ← تعمل calcium deposits أغلبها **hydroxyapatite** = calcific tendinopathy."
+      - kind: explain
+        page: 136
+        title: "مين معرّض؟"
+        quote: "The individual factors that should be considered are genes, age, sex, biomechanics, and body composition."
+        text: |
+          **Individual:** genes، age، sex، biomechanics، body composition، ==obesity== وأمراضها، systemic diseases.
+
+          **Extrinsic:** الـ **weight bearing** للرجلين، و الـ **overload movements** للإيدين.
+      - kind: table
+        page: 136
+        quote: "Frozen shoulder is an idiopathic and self-limiting condition in which movement of the shoulder becomes restricted in both active and passive external rotation."
+        title: "الكتف: tendon ولا frozen؟"
+        columns: [Feature, Rotator cuff, Frozen shoulder]
+        rows:
+          - ["Nature", "Degenerative, old age", "Idiopathic, self-limiting"]
+          - ["Pain", "Night pain → deltoid", "Restricted shoulder"]
+          - ["External rotation", "Active lost", "Active AND passive lost"]
+        hide: [[2, 1], [2, 2]]
+      - kind: check
+        page: 136
+        quote: "Movement testing helps to distinguish rotator cuff degenerative tendinopathy from frozen shoulder (adhesive capsulitis)."
+        question: "Active external rotation is weak, but you can rotate the arm passively. Diagnosis?"
+        options:
+          - "Rotator cuff degenerative tendinopathy"
+          - "Frozen shoulder"
+          - "Gluteal tendinopathy"
+          - "Calcific Achilles tendinopathy"
+        answer: 0
+        why:
+          - "صح: الـ passive سليم = المشكلة في العضلة/الوتر نفسه (rotator cuff)."
+          - "الـ frozen shoulder بيقفل الـ active والـ passive مع بعض."
+          - "ده الورك."
+          - "دي الرجل."
+      - kind: explain
+        page: 136
+        title: "Gluteal tendinopathy"
+        quote: "This pain presents in the lateral hip and is aggravated with activities (such as walking and other weight-bearing activities) and side-lying on the affected side."
+        text: |
+          ألم **low-grade** في ==lateral hip==، بيزيد بالمشي والـ weight bearing و **النوم على الجنب المصاب**.
+
+          الصورة: ست كبيرة، overweight، عندها ألم ضهر أو ورك، hip abductors ضعيفة، مشيها متغير، و psychological distress.
+      - kind: explain
+        page: 137
+        title: "العلاج"
+        quote: "conservative treatment through exercise and load management should be the first source of treatment"
+        text: |
+          1. ==Exercise و load management== أول حاجة، ومعاهم **ESWT** (shockwave).
+          2. **Corticosteroid** حوالين الوتر: moderate relief بس **أقل من 4 أسابيع**.
+          3. **PRP**: preliminary evidence في الـ gluteal tendinopathy.
+          4. **Surgery** آخر حل، بعد فشل الـ conservative **6–12 شهر**.
+      - kind: explain
+        page: 138
+        title: "الـ PRP بيتعمل إزاي؟"
+        quote: "The platelets are collected and concentrated from 2 to 8 times their normal number."
+        text: |
+          تسحب أنبوبة أو كام من **دمه**، تلفّها في **centrifuge**، تركّز الـ platelets ==2 لـ 8 مرات==، تخلطها في plasma، وتحقنها مكان الإصابة (أحيانًا بالـ ultrasound).
+
+          الـ platelets بتطلّع **growth factors** تزوّد الـ reparative cells. بيتستخدم في minor rotator cuff و Achilles tears و tennis/golfer's elbow. والـ risk: **infection** بعيد.
+      - kind: try
+        items: [geri.L08.028, geri.L08.035, geri.L08.038, geri.L08.043, geri.L08.045]
+    recap:
+      - "Tendinopathy = ألم مع النشاط، swelling، tenderness، loss of function."
+      - "السبب: tension زيادة، compression زيادة، أو stress-shielding."
+      - "Compression + hypoxia ← metaplasia ← hydroxyapatite = calcific tendinopathy."
+      - "Rotator cuff: active ER ضعيف؛ frozen shoulder: active و passive."
+      - "Exercise + load management أولًا؛ steroid <4 أسابيع؛ surgery بعد 6–12 شهر."
+    practice: [geri.L08.025, geri.L08.026, geri.L08.027, geri.L08.028, geri.L08.029, geri.L08.030, geri.L08.031, geri.L08.032, geri.L08.033, geri.L08.034, geri.L08.035, geri.L08.036, geri.L08.037, geri.L08.038, geri.L08.039, geri.L08.040, geri.L08.041, geri.L08.042, geri.L08.043, geri.L08.044, geri.L08.045, geri.L08.046, geri.L08.047, geri.L08.048, geri.L08.049, geri.L08.050]
+  # ------------------------------------------------------------------
+  - id: geri.L08.lesson3
+    title: "الـ osteoarthritis: مش بس «استهلاك»"
+    hook: "الـ OA طلع فيه inflammation ومناعة، مش غضروف اتآكل وخلاص."
+    minutes: 8
+    pages: [139, 143]
+    topics: [oa, oa-mx]
+    goals:
+      - "تعرّف primary و secondary arthritis وأرقام الـ WHO"
+      - "تشرح الـ vicious cycle (سؤال كتاب)"
+      - "تعرف التشخيص والعلاج"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 139
+        title: "Primary ولا secondary؟"
+        quote: "Primary or idiopathic arthritis is without a specific or known antecedent and primarily affects the hands, hips, knees, and spine."
+        text: |
+          - ==Primary (idiopathic)==: من غير سبب معروف، في **hands، hips، knees، spine**.
+          - **Secondary**: وراه سبب: trauma، rheumatologic، metabolic، أو infectious.
+      - kind: table
+        page: 139
+        quote: "the WHO states that 10% of men and 20% of women over the age of 60 have symptomatic osteoarthritis."
+        title: "أرقام الـ WHO"
+        columns: [Fact, Number]
+        rows:
+          - ["Men over 60 with symptomatic OA", "10%"]
+          - ["Women over 60 with symptomatic OA", "20%"]
+          - ["Expected symptomatic OA by 2050", "130 million"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: figure
+        page: 140
+        quote: "additional inflammatory mediators and mechanical stress create a ―vicious cycle‖ of cartilage degeneration."
+        title: "الـ vicious cycle بتاع الغضروف"
+        alt: "A loop of four boxes: low-grade synovial inflammation and mechanical stress, less functional collagen and fewer proteoglycans, more inflammatory mediators, cartilage degeneration, then back to inflammation. A side box shows ageing chondrocytes feeding in."
+        caption: "Inflammation + mechanical stress ← collagen و proteoglycans أقل ← mediators أكتر ← تكسير أكتر. والـ ==ageing chondrocyte== بيغذّي الدايرة."
+        svg: |
+          <svg viewBox="0 0 330 320" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="G08b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-bad"/></marker></defs>
+            <rect x="60" y="10" width="210" height="48" rx="10" class="fg-bad"/>
+            <text x="165" y="30" text-anchor="middle" class="t-sm t-b">Low-grade synovitis</text>
+            <text x="165" y="48" text-anchor="middle" class="t-sm">+ mechanical stress</text>
+            <rect x="170" y="100" width="155" height="56" rx="10" class="fg-box"/>
+            <text x="247" y="122" text-anchor="middle" class="t-sm t-b">Less collagen,</text>
+            <text x="247" y="142" text-anchor="middle" class="t-sm t-b">fewer proteoglycans</text>
+            <rect x="60" y="195" width="210" height="48" rx="10" class="fg-box"/>
+            <text x="165" y="224" text-anchor="middle" class="t-sm t-b">More inflammatory mediators</text>
+            <rect x="5" y="100" width="150" height="56" rx="10" class="fg-acc"/>
+            <text x="80" y="122" text-anchor="middle" class="t-sm t-b">Cartilage</text>
+            <text x="80" y="142" text-anchor="middle" class="t-sm t-b">degeneration</text>
+            <path d="M250 60 V95" class="fg-arrow-bad" marker-end="url(#G08b)"/>
+            <path d="M247 158 V190" class="fg-arrow-bad" marker-end="url(#G08b)"/>
+            <path d="M60 219 H30 V160" class="fg-arrow-bad" marker-end="url(#G08b)"/>
+            <path d="M80 98 V62" class="fg-arrow-bad" marker-end="url(#G08b)"/>
+            <rect x="20" y="258" width="290" height="56" rx="10" class="fg-thin"/>
+            <text x="165" y="280" text-anchor="middle" class="t-sm t-b">Ageing chondrocyte</text>
+            <text x="165" y="300" text-anchor="middle" class="t-sm">telomeres, oxidative damage, apoptosis</text>
+          </svg>
+      - kind: explain
+        page: 139
+        title: "التعريف الجديد"
+        quote: "a complex multifactorial joint pathology caused by inflammatory and metabolic factors underlying joint damage."
+        text: |
+          الـ OA دلوقتي ==complex multifactorial joint pathology== سببها **inflammatory و metabolic factors**:
+          - **Low-grade chronic synovitis**
+          - مناعة **innate و adaptive**
+          - **Neuroinflammation و central sensitization**: علشان كده الألم بيبقى chronic حتى لو المفصل «مش وحش أوي».
+      - kind: reveal
+        page: 140
+        quote: "there is likely an inherent age-associated change in the chondrocyte phenotype that also impairs cartilage homeostasis."
+        prompt: "ليه الكبير بالذات؟ هو الحِمل الميكانيكي بس؟"
+        answer: |
+          لأ. فيه **تغيّر في الـ chondrocyte نفسه مع السن**:
+          - altered gene expression (senescence)
+          - ==DNA و telomere dysfunction==
+          - altered protein secretion، **oxidative damage**
+          - decreased growth factor response، **apoptosis**
+      - kind: explain
+        page: 141
+        title: "الصورة الإكلينيكية"
+        quote: "Osteoarthritis can affect any joint but is most common in the knees, hips, spine and small joints in the hands."
+        text: |
+          **Pain، swelling، stiffness، صعوبة حركة**. ومع قلة الحركة العضلات تضعف.
+
+          الأشهر: ==knees، hips، spine، small joints of hands==. chronic و progressive، وفي الشديد المفصل يبوظ والألم حتى وقت الراحة.
+      - kind: sort
+        page: 141
+        quote: "Although there's no blood test for osteoarthritis, certain tests can help rule out other causes of joint pain, such as rheumatoid arthritis."
+        prompt: "الفحص ده بيعمل إيه في الـ OA؟"
+        bins: ["Shows OA", "Rules out others", "Rarely needed"]
+        cards:
+          - { text: "X-ray: joint space narrowing", bin: 0 }
+          - { text: "X-ray: bone spurs", bin: 0 }
+          - { text: "Blood tests (RA)", bin: 1 }
+          - { text: "Joint fluid (gout, infection)", bin: 1 }
+          - { text: "MRI", bin: 2 }
+        why: "مفيش **blood test** للـ OA؛ الدم والـ joint fluid بيستبعدوا RA و gout و infection. الغضروف ما بيظهرش على X-ray، بس الـ **narrowing** والـ **spurs** بيظهروا. الـ **MRI** not commonly needed."
+      - kind: explain
+        page: 143
+        title: "العلاج"
+        quote: "Cortisone injections. Lubrication injections. Realigning bones. Joint replacement."
+        text: |
+          1. **Acetaminophen**: للـ mild–moderate pain؛ الجرعة الزيادة = ==liver damage==.
+          2. **NSAIDs**.
+          3. **Physical therapy**: تقوية العضلات حوالين المفصل والـ flexibility؛ والمشي أو العوم بنفس الفايدة. الكتاب راسم strengthening و aerobic و range of motion.
+          4. **Cortisone injections**، **lubrication injections**.
+          5. **Realigning bones** و **joint replacement**.
+      - kind: update
+        page: 143
+        quote: "Taking more than the recommended dose of acetaminophen can cause liver damage."
+        text: "الـ **ACR 2019**: topical NSAIDs strongly recommended للركبة، والـ oral NSAIDs أقوى دوا بالبُق؛ والـ acetaminophen conditional بس لفترات قصيرة. في الامتحان ترتيب الكتاب."
+        ref: "ACR/Arthritis Foundation OA guideline 2019"
+      - kind: try
+        items: [geri.L08.053, geri.L08.057, geri.L08.060, geri.L08.063, geri.L08.124]
+    recap:
+      - "Primary OA: hands، hips، knees، spine من غير سبب؛ secondary وراه سبب."
+      - "WHO: 10% رجالة و20% ستات فوق 60؛ 130 مليون في 2050."
+      - "OA = inflammatory + metabolic: synovitis، مناعة، central sensitization، chondrocyte عجوز."
+      - "X-ray: narrowing و spurs؛ blood و fluid يستبعدوا؛ MRI مش محتاجه غالبًا."
+      - "علاج: acetaminophen، NSAIDs، PT، injections، realignment، replacement."
+    practice: [geri.L08.051, geri.L08.052, geri.L08.053, geri.L08.054, geri.L08.055, geri.L08.056, geri.L08.057, geri.L08.058, geri.L08.059, geri.L08.060, geri.L08.061, geri.L08.062, geri.L08.063, geri.L08.064, geri.L08.065, geri.L08.066, geri.L08.067, geri.L08.068, geri.L08.069, geri.L08.124]
+  # ------------------------------------------------------------------
+  - id: geri.L08.lesson4
+    title: "بلورات في المفصل: gout و pseudogout"
+    hook: "نفس الشكل، بلورة مختلفة، وعلاج مختلف. ده سؤال كتاب مضمون."
+    minutes: 10
+    pages: [143, 148]
+    topics: [gout, gout-mx, pseudogout]
+    goals:
+      - "تعدّ risk factors الـ gout وأدويتها"
+      - "تعرف كل دوا بيشتغل فين، والعلاج مع الـ comorbidities"
+      - "تفرّق gout عن pseudogout (سؤال كتاب)"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 144
+        title: "الـ uric acid جاي منين؟"
+        quote: "Uric acid is produced as part of the body‘s metabolism of purines"
+        text: |
+          الـ gout مرض قديم: ==uric acid deposits== في المفاصل والكلى. الـ uric acid ناتج من **purine metabolism**: من الأكل (nucleic acids) أو من تكسير خلايانا.
+      - kind: table
+        page: 144
+        quote: "Medications Diuretics (thiazides, loop diuretics) Low-dose aspirin Ciclosporin Niacin Ethambutol."
+        title: "Risk factors"
+        columns: [Group, Factors]
+        rows:
+          - ["Age, sex, race", "Onset >50; male; African American"]
+          - ["Lifestyle", "Beer, red meat, seafood, purines, obesity"]
+          - ["Drugs", "Thiazides, loops, low-dose aspirin, ciclosporin, niacin, ethambutol"]
+          - ["Diseases", "Metabolic syndrome, HTN, CVD, HF, CKD"]
+        hide: [[2, 1]]
+      - kind: mnemonic
+        page: 144
+        quote: "Medications Diuretics (thiazides, loop diuretics) Low-dose aspirin Ciclosporin Niacin Ethambutol."
+        word: "CANDLE"
+        parts:
+          - { key: "C", text: "Ciclosporin" }
+          - { key: "A", text: "Aspirin (low dose)" }
+          - { key: "N", text: "Niacin" }
+          - { key: "D", text: "Diuretics: thiazides" }
+          - { key: "L", text: "Loop diuretics (the second diuretic)" }
+          - { key: "E", text: "Ethambutol" }
+        hook: "**CANDLE**: الشمعة اللي بتولّع الـ ==gout==. الأدوية دي بتقلل إخراج الـ uric acid من الكلى."
+      - kind: explain
+        page: 145
+        title: "التشخيص"
+        quote: "First toe eventually affected in about 90% of people with gout"
+        text: |
+          الكتاب: ==6 أو أكتر== من: أكتر من attack، الـ inflammation توصل الذروة في **يوم**، monoarthritis، احمرار، **1st MTP** مؤلم أو وارم، unilateral 1st MTP، unilateral tarsal، **tophus**، hyperuricaemia، asymmetric swelling على الأشعة، subcortical cysts من غير erosions، و culture سلبي.
+
+          والـ **first toe** بيتصاب في الآخر في حوالي **90%**. والفحوص: **serum uric acid** و **joint aspiration**.
+      - kind: figure
+        page: 145
+        quote: "How Gout Medications Work"
+        title: "كل دوا بيضرب فين"
+        alt: "A vertical pathway: food and cell breakdown give purines, then uric acid, then crystals deposited in tissue, then gouty arthritis. Allopurinol blocks purines to uric acid; uricase breaks down uric acid; probenecid increases urinary excretion; NSAIDs, colchicine and corticosteroids reduce inflammation at the crystal step."
+        caption: "**Gout medications**: ==allopurinol== يمنع التكوين، **uricase** يكسّر، **probenecid** يطلّع في البول، و **NSAIDs/colchicine/steroids** يهدّوا الالتهاب."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="G08c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-bad"/></marker></defs>
+            <rect x="10" y="10" width="130" height="38" rx="8" class="fg-box"/>
+            <text x="75" y="34" text-anchor="middle" class="t-sm t-b">Purines</text>
+            <rect x="10" y="88" width="130" height="38" rx="8" class="fg-bad"/>
+            <text x="75" y="112" text-anchor="middle" class="t-sm t-b">Uric acid</text>
+            <rect x="10" y="166" width="130" height="38" rx="8" class="fg-bad"/>
+            <text x="75" y="190" text-anchor="middle" class="t-sm t-b">Crystals in tissue</text>
+            <rect x="10" y="244" width="130" height="38" rx="8" class="fg-bad"/>
+            <text x="75" y="268" text-anchor="middle" class="t-sm t-b">Gouty arthritis</text>
+            <path d="M75 50 V83" class="fg-arrow-bad" marker-end="url(#G08c)"/>
+            <path d="M75 128 V161" class="fg-arrow-bad" marker-end="url(#G08c)"/>
+            <path d="M75 206 V239" class="fg-arrow-bad" marker-end="url(#G08c)"/>
+            <rect x="160" y="50" width="160" height="34" rx="8" class="fg-good"/>
+            <text x="170" y="72" class="t-sm"><tspan class="t-b">Allopurinol</tspan> blocks</text>
+            <rect x="160" y="110" width="160" height="34" rx="8" class="fg-good"/>
+            <text x="170" y="132" class="t-sm"><tspan class="t-b">Uricase</tspan> breaks down</text>
+            <rect x="160" y="150" width="160" height="34" rx="8" class="fg-good"/>
+            <text x="170" y="172" class="t-sm"><tspan class="t-b">Probenecid</tspan> → urine</text>
+            <rect x="160" y="205" width="160" height="34" rx="8" class="fg-good"/>
+            <text x="170" y="227" class="t-sm t-b">NSAIDs, colchicine, steroids</text>
+          </svg>
+      - kind: table
+        page: 146
+        quote: "Therapeutic Options for Gout"
+        title: "Gout therapy: الـ attack وبعده"
+        columns: [Drug, Note]
+        rows:
+          - ["NSAIDs", "3–5 days usually effective"]
+          - ["Colchicine", "CYP450: interacts with CCBs, antineoplastics"]
+          - ["Corticosteroids", "30–40 mg/d for 5 days, then taper"]
+          - ["Urate-lowering", "Tophi, ≥2 attacks/year, CKD, stones"]
+          - ["Allopurinol, febuxostat", "Xanthine oxidase inhibitors"]
+        hide: [[0, 1], [2, 1], [3, 1]]
+      - kind: match
+        page: 146
+        quote: "Therapeutic Options for Gout"
+        prompt: "العيان عنده gout ومعاه... وصّل بالنصيحة:"
+        pairs:
+          - ["Renal failure", "Steroids, not NSAIDs or colchicine"]
+          - ["Diabetes", "Consider IL-1 blockers over steroids"]
+          - ["Hypertension or CAD", "Losartan or a CCB"]
+          - ["Heart failure on furosemide", "Allopurinol works less well"]
+        why: "جدول الكتاب: الـ renal failure ممنوع NSAIDs و colchicine؛ الـ steroids بتعلّي السكر؛ الـ **losartan** والـ CCBs uricosuric؛ والـ furosemide بيقلل أثر الـ allopurinol."
+      - kind: update
+        page: 146
+        quote: "Used in patients with tophi, two or more attacks yearly, history of chronic kidney disease, or history of urolithiasis"
+        text: "**ACR 2020**: urate-lowering strongly recommended مع tophi (tophus) أو radiographic damage أو ≥2 flares/سنة، والـ **allopurinol** first line لحد ما الـ serum urate ينزل **<6 mg/dL**."
+        ref: "ACR gout guideline 2020"
+      - kind: table
+        page: 146
+        quote: "Gout is caused by sodium urate crystals and pseudogout is caused by calcium pyrophosphate crystals."
+        title: "Gout ولا pseudogout؟"
+        columns: [Feature, Gout, Pseudogout]
+        rows:
+          - ["Crystal", "Sodium urate", "Calcium pyrophosphate"]
+          - ["Who", "Middle-aged men", "Older, both sexes"]
+          - ["First joint", "Big toe (podagra)", "Knee"]
+          - ["Diet", "Meat, beer, spirits", "No relation"]
+          - ["Prevention", "Lower urate, low purine", "None for CPP"]
+        hide: [[0, 2], [1, 2], [2, 1], [2, 2], [3, 2], [4, 2]]
+      - kind: aside
+        tone: trap
+        page: 146
+        quote: "Drinking certain types of alcohol, such as beer and distilled liquor may increase attacks. Wine does not seem to cause gout."
+        text: "الكتاب: **beer و distilled liquor** بيزوّدوا الـ attacks، و ==wine does not seem to cause gout==. والاتنين ممكن يمسكوا مفاصل **اليد والرسغ**."
+      - kind: explain
+        page: 147
+        title: "علاج الـ pseudogout"
+        quote: "Chondrocalcinosis which produces no symptoms does not need any treatment."
+        text: |
+          - الاتنين: **steroid injections**، anti-inflammatories، **colchicine**. والـ gout يزيد عليهم urate-lowering و low-purine diet.
+          - ==Chondrocalcinosis== من غير أعراض: **ما يتعالجش**.
+          - الـ attack: ice، rest، painkillers، **سحب السائل**، steroid في المفصل أو أقراص.
+          - **مفيش وقاية** من الـ CPP crystals، بس عالج السبب (**dehydration**، low **magnesium**)، وخلي الوزن طبيعي ومارس رياضة معتدلة.
+      - kind: check
+        page: 147
+        quote: "If an underlying condition caused an episode of pseudogout (eg, lack of fluid (dehydration) or low magnesium levels), treating this may prevent further attacks."
+        question: "Which may prevent further pseudogout attacks?"
+        options:
+          - "Correcting dehydration or low magnesium"
+          - "A low-purine diet"
+          - "Allopurinol"
+          - "Stopping wine"
+        answer: 0
+        why:
+          - "صح: علاج السبب (dehydration، low Mg) ممكن يمنع attacks تانية."
+          - "الـ pseudogout مالوش علاقة بالأكل."
+          - "الـ allopurinol للـ urate، مش للـ CPP."
+          - "حتى في الـ gout، الـ wine مش بيعمل gout حسب الكتاب."
+      - kind: try
+        items: [geri.L08.073, geri.L08.074, geri.L08.083, geri.L08.086, geri.L08.125]
+    recap:
+      - "Gout = urate من الـ purines؛ >50، رجالة؛ أدوية CANDLE."
+      - "تشخيص: ≥6 criteria؛ 1st MTP في 90%؛ uric acid + aspiration."
+      - "Allopurinol يمنع، uricase يكسّر، probenecid يطلّع، NSAIDs/colchicine/steroids للالتهاب."
+      - "Renal failure: steroids مش NSAIDs/colchicine؛ HTN: losartan أو CCB."
+      - "Pseudogout = CPP، الركبة، كبار من الجنسين، مالوش علاقة بالأكل، ومفيش وقاية."
+    practice: [geri.L08.070, geri.L08.071, geri.L08.072, geri.L08.073, geri.L08.074, geri.L08.075, geri.L08.076, geri.L08.077, geri.L08.078, geri.L08.079, geri.L08.080, geri.L08.081, geri.L08.082, geri.L08.083, geri.L08.084, geri.L08.085, geri.L08.086, geri.L08.087, geri.L08.088, geri.L08.089, geri.L08.090, geri.L08.091, geri.L08.092, geri.L08.125]
+  # ------------------------------------------------------------------
+  - id: geri.L08.lesson5
+    title: "العضم الهش والألم اللي في كل حتة"
+    hook: "Osteoporosis ساكتة لحد ما حاجة تتكسر، و fibromyalgia بتوجع في كل حتة والتحاليل سليمة."
+    minutes: 8
+    pages: [148, 152]
+    topics: [osteoporosis, fibromyalgia]
+    goals:
+      - "تعرف risk factors والوقاية والـ T-score"
+      - "تعرف أدوية الـ osteoporosis"
+      - "تعرف صورة الـ fibromyalgia وعلاجها"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 148
+        title: "Osteoporosis"
+        quote: "Osteoporosis occurs when the creation of new bone doesn't keep up with the loss of old bone."
+        text: |
+          العضم بيتهد ويتبني طول الوقت. الـ ==osteoporosis== لما البنا ما يلحقش الهدم.
+
+          الصورة: **back pain** من vertebra مكسورة، **loss of height**، **stooped posture**، وعضمة تتكسر أسهل من المتوقع.
+      - kind: sort
+        page: 148
+        quote: "Medications like corticosteroids, anticonvulsants, proton pump inhibitors, drugs used in the treatment of cancer and transplant rejection."
+        prompt: "Risk factor للـ osteoporosis حسب الكتاب؟"
+        bins: ["Risk factor", "Not listed"]
+        cards:
+          - { text: "Proton pump inhibitors", bin: 0 }
+          - { text: "Anticonvulsants", bin: 0 }
+          - { text: "Hyperthyroidism", bin: 0 }
+          - { text: "Multiple myeloma", bin: 0 }
+          - { text: "White or Asian descent", bin: 0 }
+          - { text: "Male sex", bin: 1 }
+          - { text: "High calcium intake", bin: 1 }
+        why: "الكتاب: female، old age، white/Asian، family history، **low calcium**، low sex hormones، hyperthyroidism، hyperparathyroidism، adrenal، أدوية (steroids، anticonvulsants، **PPIs**، cancer و transplant drugs)، و IBD و MM و chronic liver/kidney disease."
+      - kind: explain
+        page: 149
+        title: "الوقاية"
+        quote: "Most people need 600 IU/day, increased to 800IU/day at 70 years."
+        text: |
+          - **Calcium**: low-fat dairy، الخضار الورقي الغامق، سردين أو سالمون معلّب بعضمه، tofu، cereals و orange juice مدعّمين.
+          - **Vitamin D**: cod liver oil و salmon. ==600 IU/day==، وتبقى **800 IU/day عند 70**.
+          - **Exercise**: strength training + weight-bearing + **balance**. بينفع في أي سن، والأحسن تبدأ صغير.
+      - kind: figure
+        page: 150
+        quote: "A T-score between -1.0 and -2.5 defines osteopenia."
+        title: "الـ T-score على مسطرة"
+        alt: "A horizontal T-score ruler: zero and above -1 is normal (green), between -1 and -2.5 is osteopenia (accent), -2.5 and below is osteoporosis (red)."
+        caption: "الـ ==T-score== = كام SD بعيد عن peak bone mass لشاب من نفس الجنس والعرق (DXA). بين -1 و -2.5 osteopenia، و **-2.5 أو أقل** osteoporosis."
+        svg: |
+          <svg viewBox="0 0 330 140" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="40" width="100" height="40" class="fg-good"/>
+            <rect x="110" y="40" width="110" height="40" class="fg-acc"/>
+            <rect x="220" y="40" width="100" height="40" class="fg-bad"/>
+            <text x="60" y="65" text-anchor="middle" class="t-sm t-b">Normal</text>
+            <text x="165" y="65" text-anchor="middle" class="t-sm t-b">Osteopenia</text>
+            <text x="270" y="65" text-anchor="middle" class="t-sm t-b">Osteoporosis</text>
+            <text x="10" y="30" class="t-sm">0</text>
+            <text x="110" y="30" text-anchor="middle" class="t-sm t-b">-1.0</text>
+            <text x="220" y="30" text-anchor="middle" class="t-sm t-b">-2.5</text>
+            <text x="10" y="105" class="t-sm t-mut">T-score (SD from young peak bone mass)</text>
+            <text x="10" y="125" class="t-sm t-mut">measured by DXA</text>
+          </svg>
+      - kind: match
+        page: 150
+        quote: "Bisphosphonates: These are antiresorptive drugs that slow bone loss and reduce a person‘s fracture risk."
+        prompt: "وصّل الدوا بميزته في الكتاب:"
+        pairs:
+          - ["Bisphosphonates", "Antiresorptive, slow bone loss"]
+          - ["Raloxifene", "Fewer spine fractures after menopause"]
+          - ["Calcitonin", "Pain relief after a fracture"]
+          - ["Teriparatide", "Stimulates bone formation"]
+          - ["Romosozumab", "FDA black box warning"]
+        why: "الـ **teriparatide** (PTH) الوحيد هنا اللي **بيبني** عضم؛ والـ denosumab و romosozumab monoclonal antibodies بعد الـ menopause."
+      - kind: explain
+        page: 150
+        title: "Fibromyalgia"
+        quote: "Fibromyalgia (fi·bro·my·al·gi·a) is a condition that causes pain all over the body, also called widespread pain."
+        text: |
+          ==Widespread pain== مع **sleep problems**، fatigue، و distress نفسي؛ وحساسية أعلى للألم.
+
+          - جسدي: muscle tenderness، TMJ pain، headache/migraine، إسهال وإمساك، **bladder** issues.
+          - نفسي: ==fibro fog== (ذاكرة)، anxiety، depression، insomnia.
+      - kind: aside
+        tone: joke
+        page: 151
+        quote: "Memory problems (sometimes called ―fibro fog‖ or ―brain fog‖)."
+        text: "الـ **fibro fog** ده لما تدخل المطبخ وتنسى دخلت ليه... بس كل يوم، ومع وجع في كل حتة."
+      - kind: explain
+        page: 151
+        title: "مين ويقلب امتى؟"
+        quote: "Women are twice as likely to have fibromyalgia as men."
+        text: |
+          **Risk:** الستات (**women**) ==ضعف== الرجالة، traumatic events (PTSD، حوادث، طفولة صعبة)، repetitive injuries، viral illness، family history، obesity.
+
+          **Flare:** stress (شغل، فلوس، علاقات)، تغيير الروتين أو الأكل، hormones، **قلة النوم أو تغيير مواعيده**، وتغيّر الجو.
+      - kind: check
+        page: 151
+        quote: "There‘s no test that can diagnose fibromyalgia. Usually, diagnosing it is part of a differential diagnosis."
+        question: "How is fibromyalgia diagnosed, per the lecture?"
+        options:
+          - "No specific test; exclude others such as anemia or thyroid disease"
+          - "A positive anti-CCP"
+          - "Raised ESR above 50"
+          - "Muscle biopsy"
+        answer: 0
+        why:
+          - "صح: مفيش test؛ التشخيص جزء من differential، والدم يستبعد anemia والـ thyroid."
+          - "الـ anti-CCP للـ RA."
+          - "الـ ESR العالي يخليك تفكر في PMR أو GCA."
+          - "مش بيتعمل biopsy."
+      - kind: explain
+        page: 152
+        title: "العلاج 4 محاور"
+        quote: "Non-pharmacological treatments: physical therapy to relax and strengthen muscles and joints."
+        text: |
+          1. **Physical therapy** يرخّي ويقوّي.
+          2. **Psychological** treatment.
+          3. **Medicines** للأعراض.
+          4. ==Occupational therapist== للأنشطة اليومية.
+      - kind: try
+        items: [geri.L08.095, geri.L08.097, geri.L08.100, geri.L08.101, geri.L08.106]
+    recap:
+      - "Osteoporosis: البنا ما يلحقش الهدم؛ back pain، قِصر، انحناء، كسر سهل."
+      - "Vitamin D 600 IU، و800 عند 70؛ strength + weight-bearing + balance."
+      - "T-score: -1 لـ -2.5 osteopenia؛ ≤ -2.5 osteoporosis."
+      - "Teriparatide بيبني؛ bisphosphonates antiresorptive؛ romosozumab black box."
+      - "Fibromyalgia: widespread pain، fibro fog، الستات ×2، مفيش test."
+    practice: [geri.L08.093, geri.L08.094, geri.L08.095, geri.L08.096, geri.L08.097, geri.L08.098, geri.L08.099, geri.L08.100, geri.L08.101, geri.L08.102, geri.L08.103, geri.L08.104, geri.L08.105, geri.L08.106, geri.L08.107, geri.L08.108, geri.L08.109]
+  # ------------------------------------------------------------------
+  - id: geri.L08.lesson6
+    title: "PMR و GCA: الكتاف المتخشبة والعين اللي في خطر"
+    hook: "تيبس الصبح في الكتفين ممكن يكون أول خيط لمرض ياخد النظر لو اتأخرت."
+    minutes: 7
+    pages: [152, 154]
+    topics: [pmr]
+    goals:
+      - "تعرف صورة الـ PMR وتشخيصه وجرعته"
+      - "تربط PMR بـ GCA بالأرقام"
+      - "تعرف علاج الـ GCA الفوري"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 152
+        title: "Polymyalgia rheumatica"
+        quote: "The main symptom is musclestiffness in the morning that lasts longer than 45 minutes."
+        text: |
+          Pain و stiffness و inflammation في عضلات **الكتفين والرقبة والوراك**.
+
+          - العَرَض الأساسي: ==morning stiffness أكتر من 45 دقيقة==.
+          - كمان: سخونية وعرق، fatigue، anorexia، weight loss، depression.
+          - السبب مش معروف (genetic + environmental).
+      - kind: aside
+        tone: exam
+        page: 152
+        quote: "Most people who are diagnosed with the condition are over 70. It‘s extremely rare in people younger than 50."
+        text: "أغلبهم **فوق 70**، و ==نادر جدًا تحت 50==، وفي الستات أكتر. يعني شاب عنده 35 بتيبس كتاف؟ دوّر على حاجة تانية."
+      - kind: explain
+        page: 153
+        title: "التشخيص والعلاج"
+        quote: "Prednisone 10 to15 mg/day can relief pain and stiffness. If symptoms improve patient can take the drug for one year."
+        text: |
+          **مفيش test specific**. اطلب: **ESR و CRP**، RF و anti-CCP، thyroid، kidney و liver functions (علشان تستبعد).
+
+          العلاج: ==prednisone 10–15 mg/day==، ولو تحسّن ياخده **سنة**.
+      - kind: update
+        page: 153
+        quote: "Prednisone 10 to15 mg/day can relief pain and stiffness."
+        text: "**EULAR/ACR 2015**: البداية prednisone **12.5–25 mg/day** وبعدين taper، و methotrexate ممكن يتضاف لو خطر relapse أو side effects عالي. في الامتحان 10–15 بتاع الكتاب."
+        ref: "EULAR/ACR PMR recommendations 2015"
+      - kind: figure
+        page: 153
+        quote: "Approximately 15 percent to 20 percent of people with PMR will develop GCA, while about half of patients with GCA also have symptoms of PMR."
+        title: "الاتنين متداخلين"
+        alt: "Two overlapping circles: PMR on the left and GCA on the right. An arrow from PMR says 15 to 20 percent develop GCA; an arrow from GCA says about half have PMR symptoms."
+        caption: "==15–20%== من الـ PMR يعملوا GCA، و **نص** الـ GCA عندهم أعراض PMR، وممكن ييجوا مع بعض."
+        svg: |
+          <svg viewBox="0 0 330 200" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="120" cy="100" r="75" class="fg-acc"/>
+            <circle cx="210" cy="100" r="75" class="fg-bad"/>
+            <text x="85" y="95" text-anchor="middle" class="t-b">PMR</text>
+            <text x="245" y="95" text-anchor="middle" class="t-b">GCA</text>
+            <text x="85" y="118" text-anchor="middle" class="t-sm">15–20%</text>
+            <text x="85" y="134" text-anchor="middle" class="t-sm">get GCA</text>
+            <text x="245" y="118" text-anchor="middle" class="t-sm">~50% have</text>
+            <text x="245" y="134" text-anchor="middle" class="t-sm">PMR</text>
+            <text x="245" y="150" text-anchor="middle" class="t-sm">symptoms</text>
+            <text x="165" y="104" text-anchor="middle" class="t-sm t-b">both</text>
+          </svg>
+      - kind: explain
+        page: 153
+        title: "Giant cell arteritis"
+        quote: "The most common symptom of GCA is a new headache, usually around the temples, but headache can occur anywhere."
+        text: |
+          **Vasculitis** في شرايين الراس (الصدغ) و **الـ aorta**.
+          - أشهر عرض: ==new headache== غالبًا temporal.
+          - fatigue، anorexia، weight loss، flu-like.
+          - **Jaw pain on chewing**.
+          - النظر: ممكن **فقد مفاجئ ودائم**؛ والعلاج الصح بيمنعه. ومن غير علاج: **blindness و stroke**.
+      - kind: case
+        page: 154
+        quote: "GCA treatment should start immediately after diagnosis to prevent vision loss."
+        stem: "76-year-old woman with PMR on prednisone 10 mg. New left temporal headache, jaw pain while eating, ESR 90."
+        steps:
+          - question: "ESR 90. Is GCA proven?"
+            options: ["No: high ESR alone is not proof", "Yes: ESR >50 confirms GCA", "Yes, if CRP is also high", "No: ESR is never raised in GCA"]
+            answer: 0
+            why: "الكتاب: مفيش blood test بيأكد؛ الـ **high ESR لوحده مش دليل**. التأكيد غالبًا **temporal artery biopsy**، وأحيانًا ultrasound."
+          - question: "Treatment now?"
+            options: ["Prednisone 40–60 mg/day immediately", "Keep 10 mg and wait for biopsy", "NSAIDs", "Colchicine"]
+            answer: 0
+            why: "العلاج يبدأ **فورًا** بعد التشخيص علشان النظر: **40–60 mg/day**، وبعد شهر taper لـ 5–10 mg على كام شهر، ويوقف بعد **1–2 سنة**."
+      - kind: update
+        page: 154
+        quote: "First-line treatment usually is 40-60 mg per day of prednisone."
+        text: "**ACR 2021** بينصح (conditional) بإضافة **tocilizumab** للـ steroids في الـ GCA الجديد علشان يقلل الـ steroid. في الامتحان 40–60 mg بتاع الكتاب."
+        ref: "ACR/Vasculitis Foundation GCA guideline 2021"
+      - kind: try
+        items: [geri.L08.111, geri.L08.113, geri.L08.115, geri.L08.116, geri.L08.120]
+    recap:
+      - "PMR: كتاف ورقبة ووراك، morning stiffness >45 دقيقة، فوق 70، نادر تحت 50."
+      - "مفيش test؛ ESR/CRP والباقي يستبعد. Prednisone 10–15 mg لمدة سنة."
+      - "15–20% من PMR يعملوا GCA؛ نص الـ GCA عندهم PMR."
+      - "GCA: صداع جديد، jaw pain، خطر عمى؛ biopsy؛ prednisone 40–60 فورًا."
+    practice: [geri.L08.110, geri.L08.111, geri.L08.112, geri.L08.113, geri.L08.114, geri.L08.115, geri.L08.116, geri.L08.117, geri.L08.118, geri.L08.119, geri.L08.120, geri.L08.121, geri.L08.122]

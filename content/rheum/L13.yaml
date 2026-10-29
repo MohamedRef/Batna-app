@@ -1,0 +1,653 @@
+schema: batna.content/v1
+lecture: rheum.L13
+title: Musculoskeletal ultrasound and nailfold capillaroscopy
+author: Prof. Dr. Eiman Soliman
+book: { chapter: 3, pages: [211, 220] }
+topics:
+  - { id: why-msus, title: "Imaging in rheumatology and why MSUS" }
+  - { id: equipment, title: "MSUS equipment, probes and planes" }
+  - { id: ra, title: "MSUS in rheumatoid arthritis" }
+  - { id: spa, title: "MSUS in spondyloarthritis" }
+  - { id: other, title: "MSUS in gout, CPPD, PMR and vasculitis" }
+  - { id: doppler, title: "Power Doppler and scoring" }
+  - { id: decisions, title: "MSUS in clinical decisions" }
+  - { id: nfc, title: "Nailfold capillaroscopy: why and technique" }
+  - { id: patterns, title: "Capillaroscopic patterns" }
+  - { id: nfc-practice, title: "Capillaroscopy in clinical practice and summary" }
+items:
+  # ---------- p211: why MSUS ----------
+  - id: rheum.L13.001
+    kind: card
+    topic: why-msus
+    front: Why is plain X-ray limited in early inflammatory arthritis?
+    back: It cannot detect early inflammatory changes; MSUS and nailfold capillaroscopy help early diagnosis and monitoring.
+    src: { page: 211, quote: "Traditional methods like X-ray are limited in detecting early inflammatory changes" }
+    status: unverified
+  - id: rheum.L13.002
+    kind: card
+    topic: why-msus
+    front: What do MSUS and capillaroscopy let the rheumatologist see in real time?
+    back: Joints, tendons, soft tissue and microvascular abnormalities, improving diagnosis, treatment decisions and outcomes.
+    src: { page: 211, quote: "These tools allow for real-time visualization of joints, tendons, soft tissue, and microvascular abnormalities" }
+    status: unverified
+  - id: rheum.L13.003
+    kind: enumerate
+    topic: why-msus
+    prompt: What MSUS can do (non-invasive, bedside, radiation-free).
+    points:
+      - Detect early synovitis before structural damage
+      - Monitor disease activity and treatment response
+      - Evaluate tendons, bursae, entheses and peripheral nerves
+      - Guide joint injections or aspirations
+    pass: 3
+    src: { page: 211, quote: "Detect early synovitis before structural damage occurs. Monitor disease activity and treatment response." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L13.004
+    kind: enumerate
+    topic: why-msus
+    prompt: Advantages of MSUS.
+    points:
+      - High patient acceptability
+      - Reproducibility
+      - Cost-effectiveness
+      - Portability
+      - Detects early subtle inflammation invisible on X-ray or MRI
+    pass: 4
+    src: { page: 211, quote: "Its advantages include high patient acceptability, reproducibility, cost- effectiveness, and portability." }
+    status: unverified
+  # ---------- p212: equipment, RA ----------
+  - id: rheum.L13.005
+    kind: enumerate
+    topic: equipment
+    prompt: Components of a basic ultrasound machine for MSUS.
+    points:
+      - High-frequency linear transducer/probe
+      - Monitor
+      - Software with colour and power Doppler
+      - Gel for acoustic coupling
+    pass: 3
+    src: { page: 212, quote: "Transducer/probe (high-frequency linear for superficial structures) Monitor Software with color and power Doppler capabilities Gel for acoustic coupling" }
+    status: unverified
+  - id: rheum.L13.006
+    kind: table
+    topic: equipment
+    title: MSUS probe types (p212)
+    columns: [Probe, Frequency, Used for]
+    rows:
+      - [Linear, 6–15 MHz, "Joints, tendons, superficial tissues"]
+      - [Curvilinear, 2–5 MHz, "Deeper structures, e.g. hips"]
+    blanks: [[0, 1], [1, 1], [1, 2]]
+    src: { page: 212, quote: "Linear probe: 6–15 MHz – used for joints, tendons, and superficial tissues. Curvilinear probe: 2–5 MHz – for deeper structures (e.g., hips)." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: rheum.L13.007
+    kind: card
+    topic: equipment
+    front: In which planes do EULAR guidelines stress scanning, and why does positioning matter?
+    back: Both longitudinal and transverse planes; correct patient and probe positioning makes imaging standardized and reproducible.
+    src: { page: 212, quote: "The EULAR guidelines stress the importance of scanning in both longitudinal and transverse planes." }
+    status: unverified
+  - id: rheum.L13.008
+    kind: enumerate
+    topic: ra
+    prompt: Ultrasound findings in rheumatoid arthritis.
+    points:
+      - Synovial hypertrophy (grey scale)
+      - Joint effusion
+      - Power Doppler activity (vascularized synovium)
+      - Erosions
+    pass: 4
+    src: { page: 212, quote: "Synovial hypertrophy (GS). Joint effusion. Power Doppler activity (vascularized synovium). Erosions." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L13.009
+    kind: card
+    topic: ra
+    front: Why is MSUS especially helpful in early RA?
+    back: It can show synovitis before serological markers appear or radiographic erosions develop.
+    src: { page: 212, quote: "especially helpful in diagnosing early RA, often before serologic markers appear or radiographic erosions develop." }
+    status: unverified
+  - id: rheum.L13.010
+    kind: cloze
+    topic: ra
+    text: In RA, ultrasound detects {{c1::grey-scale (GS)}} changes and {{c2::power Doppler (PD)}} signals indicating active inflammation.
+    src: { page: 212, quote: "Ultrasound can detect gray-scale (GS) changes and power Doppler (PD) signals indicating active inflammation." }
+    status: unverified
+  # ---------- p213: SpA, other ----------
+  - id: rheum.L13.011
+    kind: enumerate
+    topic: spa
+    prompt: What MSUS identifies in spondyloarthritis.
+    points:
+      - "Enthesitis (inflammation at tendon or ligament insertions)"
+      - Peripheral arthritis and dactylitis
+      - Tenosynovitis
+    pass: 3
+    src: { page: 213, quote: "Enthesitis: Inflammation at tendon or ligament insertions. Peripheral arthritis and dactylitis. Tenosynovitis." }
+    status: unverified
+  - id: rheum.L13.012
+    kind: enumerate
+    topic: spa
+    prompt: Entheseal abnormalities on MSUS.
+    points:
+      - Thickening
+      - Hypoechogenicity
+      - Calcification
+      - Erosions
+      - Doppler signal at the enthesis
+    pass: 4
+    src: { page: 213, quote: "Entheseal abnormalities include: Thickening. Hypoechogenicity. Calcification. Erosions. Doppler signal at the enthesis." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L13.013
+    kind: card
+    topic: spa
+    front: Why is MSUS increasingly used in spondyloarthritis?
+    back: It detects subclinical enthesitis and monitors response to biologic therapy.
+    src: { page: 213, quote: "MSUS is increasingly used in SpA assessment due to its ability to detect subclinical enthesitis and monitor response to biologic therapy." }
+    status: unverified
+  - id: rheum.L13.014
+    kind: table
+    topic: other
+    title: MSUS signs in other conditions (p213)
+    columns: [Condition, MSUS finding]
+    rows:
+      - [Gout, Double contour sign]
+      - [CPPD, Chondrocalcinosis]
+      - [PMR, "Subacromial-subdeltoid bursitis, biceps tenosynovitis, hip effusion or trochanteric bursitis"]
+      - [Giant cell arteritis, Temporal artery thickening and halo sign]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 213, quote: "Double contour sign in gout. Chondrocalcinosis in CPPD." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L13.015
+    kind: card
+    topic: other
+    front: Which crystal-disease features can MSUS show besides the double contour sign and chondrocalcinosis?
+    back: Tophi, erosions and joint inflammation.
+    src: { page: 213, quote: "Visualization of tophi, erosions, and joint inflammation." }
+    status: unverified
+  - id: rheum.L13.016
+    kind: enumerate
+    topic: other
+    prompt: MSUS findings in polymyalgia rheumatica.
+    points:
+      - Subacromial-subdeltoid bursitis
+      - Biceps tenosynovitis
+      - Hip joint effusion or trochanteric bursitis
+    pass: 3
+    src: { page: 213, quote: "Subacromial-subdeltoid bursitis. Biceps tenosynovitis. Hip joint effusion or trochanteric bursitis." }
+    status: unverified
+  - id: rheum.L13.017
+    kind: card
+    topic: other
+    front: MSUS sign of giant cell arteritis?
+    back: Temporal artery wall thickening, the halo sign.
+    src: { page: 213, quote: "Temporal artery thickening and ―halo sign‖ in giant cell arteritis." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p214: Doppler, scoring, decisions ----------
+  - id: rheum.L13.018
+    kind: card
+    topic: doppler
+    front: What does power Doppler add to grey-scale ultrasound, and what does a falling PD signal mean?
+    back: Functional data on blood flow in inflamed tissue (synovial vascularity); a decrease in PD signal means remission.
+    src: { page: 214, quote: "Response to treatment (decrease in PD signal = remission)." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L13.019
+    kind: card
+    topic: doppler
+    front: Power Doppler versus colour Doppler in synovitis?
+    back: Power Doppler is more sensitive to slow flow in small vessels and is essential for scoring disease activity.
+    src: { page: 214, quote: "Power Doppler is more sensitive than color Doppler in detecting slow flow in small vessels and is essential for scoring disease activity." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L13.020
+    kind: table
+    topic: doppler
+    title: Semi-quantitative GS and PD grading (p214)
+    columns: [Grade, Meaning]
+    rows:
+      - ["0", None]
+      - ["1", Mild]
+      - ["2", Moderate]
+      - ["3", Severe]
+    blanks: [[1, 1], [2, 1], [3, 1]]
+    src: { page: 214, quote: "Gray-scale (GS) and Power Doppler (PD) signals are graded 0–3." }
+    status: unverified
+  - id: rheum.L13.021
+    kind: card
+    topic: doppler
+    front: Name the composite MSUS scores that use the 0–3 grading.
+    back: US7, GLOESS and the OMERACT-EULAR systems.
+    src: { page: 214, quote: "Used in composite scores such as US7, GLOESS, and OMERACT- EULAR systems." }
+    status: unverified
+  - id: rheum.L13.022
+    kind: enumerate
+    topic: decisions
+    prompt: How MSUS helps clinical decision-making.
+    points:
+      - Confirms active synovitis when the clinical exam is equivocal
+      - Finds subclinical disease in apparent remission
+      - Guides steroid injection into inflamed joints or bursae
+      - Detects flares early and personalizes DMARD/biologic tapering
+    pass: 3
+    src: { page: 214, quote: "Confirm active synovitis in equivocal clinical exams. Identify subclinical disease in patients in apparent remission." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L13.023
+    kind: card
+    topic: decisions
+    front: What is the predictive value of a Doppler scan without inflammation?
+    back: High negative predictive value.
+    src: { page: 214, quote: "It has high negative predictive value when inflammation is not seen on Doppler." }
+    status: unverified
+  # ---------- p215: capillaroscopy ----------
+  - id: rheum.L13.024
+    kind: card
+    topic: nfc
+    front: What is nailfold capillaroscopy?
+    back: A non-invasive technique that visualizes nailfold capillaries to assess microvascular involvement.
+    src: { page: 215, quote: "Nailfold capillaroscopy (NFC) is a non-invasive technique that visualizes the capillaries at the nailfold to assess microvascular involvement." }
+    status: unverified
+  - id: rheum.L13.025
+    kind: enumerate
+    topic: nfc
+    prompt: Why perform capillaroscopy?
+    points:
+      - Detect early microangiopathy in SSc and other connective tissue diseases
+      - Differentiate primary from secondary Raynaud's
+      - Predict internal organ involvement in SSc
+    pass: 3
+    src: { page: 215, quote: "Helps differentiate primary from secondary Raynaud‘s phenomenon. Predicts internal organ involvement in SSc." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L13.026
+    kind: card
+    topic: nfc
+    front: Which fingers are examined in capillaroscopy?
+    back: The nailfolds of the 2nd to 5th fingers; the thumb is often excluded.
+    src: { page: 215, quote: "Nailfold of the 2nd–5th fingers (thumb often excluded)." }
+    status: unverified
+  - id: rheum.L13.027
+    kind: card
+    topic: nfc
+    front: What equipment is used for capillaroscopy, and what improves transparency?
+    back: Dermatoscope, videocapillaroscope or ophthalmoscope; immersion oil or gel.
+    src: { page: 215, quote: "Dermatoscope, videocapillaroscope, or ophthalmoscope. Immersion oil or gel to enhance transparency." }
+    status: unverified
+  - id: rheum.L13.028
+    kind: cloze
+    topic: nfc
+    text: Before capillaroscopy, the patient acclimatizes at {{c1::20–22 °C}} for {{c2::15–20 minutes}} and avoids caffeine, smoking and cold.
+    src: { page: 215, quote: "Acclimatize patient to room temperature (20–22°C) for 15–20 minutes." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: rheum.L13.029
+    kind: card
+    topic: patterns
+    front: Describe the normal capillaroscopic pattern.
+    back: Regular, uniform hairpin-shaped capillaries, evenly spaced, with no haemorrhages or enlarged loops.
+    src: { page: 215, quote: "Regular, uniform hairpin-shaped capillaries. Evenly spaced, no hemorrhages or enlarged loops." }
+    status: unverified
+  # ---------- p216: patterns, practice, summary ----------
+  - id: rheum.L13.030
+    kind: table
+    topic: patterns
+    title: Scleroderma capillaroscopic patterns (p215–216)
+    columns: [Pattern, Features]
+    rows:
+      - [Early, "Few enlarged capillaries, few haemorrhages, architecture mostly preserved"]
+      - [Active, "Frequent giant capillaries and haemorrhages, moderate capillary loss"]
+      - [Late, "Severe capillary loss, disorganized architecture, ramified capillaries"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 216, quote: "Active pattern: Frequent giant capillaries and hemorrhages, moderate capillary loss." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L13.031
+    kind: order
+    topic: patterns
+    prompt: Order the scleroderma capillaroscopy findings from earliest to latest.
+    steps:
+      - Few enlarged capillaries with preserved architecture
+      - Frequent giant capillaries and haemorrhages
+      - Severe capillary loss with ramified capillaries
+    src: { page: 216, quote: "Late pattern: Severe capillary loss, disorganized architecture, ramified capillaries." }
+    status: unverified
+  - id: rheum.L13.032
+    kind: card
+    topic: nfc-practice
+    front: Where does the scleroderma capillaroscopy pattern appear in SSc classification?
+    back: It is part of the 2013 ACR/EULAR classification criteria.
+    src: { page: 216, quote: "Specific ―scleroderma pattern‖ is part of the 2013 ACR/EULAR classification criteria." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L13.033
+    kind: enumerate
+    topic: nfc-practice
+    prompt: SSc complications that correlate with the capillaroscopic pattern.
+    points:
+      - Pulmonary arterial hypertension
+      - Interstitial lung disease
+      - Digital ulcers
+    pass: 3
+    src: { page: 216, quote: "Correlates with: o Pulmonary arterial hypertension. o Interstitial lung disease. o Digital ulcers." }
+    status: unverified
+  - id: rheum.L13.034
+    kind: table
+    topic: nfc-practice
+    title: Capillaroscopy in other conditions (p216)
+    columns: [Condition, Capillaroscopy]
+    rows:
+      - [Dermatomyositis, "Capillary dropout, dilated loops, haemorrhages"]
+      - [SLE, Non-specific changes]
+      - [Primary Raynaud's, Normal or minimally altered]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 216, quote: "Dermatomyositis: Capillary dropout, dilated loops, hemorrhages. SLE: Non-specific changes. Primary Raynaud‘s: Normal or minimally altered pattern." }
+    status: unverified
+  - id: rheum.L13.035
+    kind: card
+    topic: nfc-practice
+    front: In whom is capillaroscopy especially important for early diagnosis?
+    back: ANA-positive individuals with Raynaud's phenomenon.
+    src: { page: 216, quote: "Capillaroscopy is an important tool in early diagnosis, especially in ANA-positive individuals with Raynaud‘s phenomenon." }
+    status: unverified
+  - id: rheum.L13.036
+    kind: table
+    topic: nfc-practice
+    title: "Summary: MSUS versus nailfold capillaroscopy (p216)"
+    columns: [Feature, MSUS, Capillaroscopy]
+    rows:
+      - [Target, "Joints, tendons, entheses", Nailfold capillaries]
+      - [Modality, High-frequency ultrasound, Optical magnification]
+      - [Main indications, "RA, SpA, gout, PMR, vasculitis", "SSc, Raynaud's, myositis"]
+      - [Key advantage, Real-time inflammation and guidance, Early detection of microangiopathy]
+      - [Diagnostic relevance, "Synovitis, enthesitis, erosions", "Capillary morphology, dropout"]
+    blanks: [[0, 2], [1, 2], [2, 1], [2, 2], [4, 1]]
+    src: { page: 216, quote: "Target Joints, tendons, entheses Nailfold capillaries" }
+    status: unverified
+  - id: rheum.L13.037
+    kind: enumerate
+    topic: nfc-practice
+    prompt: Take-home messages of the lecture.
+    points:
+      - MSUS extends the exam and improves early diagnosis, monitoring and precise treatment
+      - Power Doppler shows real-time inflammation
+      - Capillaroscopy is critical for early SSc and evaluating Raynaud's
+      - Both are non-invasive, safe and informative
+    pass: 3
+    src: { page: 217, quote: "Power Doppler adds value by showing real-time inflammation." }
+    status: unverified
+  # ---------- own MCQs ----------
+  - id: rheum.L13.038
+    kind: mcq
+    topic: equipment
+    stem: "You need to scan a patient's hip effusion. Which probe?"
+    options: ["Curvilinear 2–5 MHz", "Linear 6–15 MHz", "Linear 20–30 MHz", "Phased array cardiac probe", "Any probe, frequency does not matter"]
+    answer: 0
+    why:
+      - "Correct: curvilinear 2–5 MHz for deeper structures such as hips."
+      - "High-frequency linear probes are for superficial joints and tendons."
+      - "Not in the book; too superficial for the hip."
+      - "Not discussed for MSK."
+      - "Frequency sets depth; deeper needs lower."
+    src: { page: 212, quote: "Curvilinear probe: 2–5 MHz – for deeper structures (e.g., hips)." }
+    status: unverified
+  - id: rheum.L13.039
+    kind: mcq
+    topic: ra
+    stem: "A 35-year-old woman has 8 weeks of hand pain; RF and anti-CCP are negative and X-rays are normal. Which MSUS finding would most support early RA?"
+    options: ["Synovial hypertrophy with power Doppler signal", "Double contour sign", "Halo sign", "Chondrocalcinosis", "Hairpin capillaries"]
+    answer: 0
+    why:
+      - "Correct: GS synovial hypertrophy plus PD activity, often before serology or erosions."
+      - "Gout."
+      - "Giant cell arteritis."
+      - "CPPD."
+      - "A normal capillaroscopy pattern, not an ultrasound sign."
+    src: { page: 212, quote: "especially helpful in diagnosing early RA, often before serologic markers appear or radiographic erosions develop." }
+    status: unverified
+  - id: rheum.L13.040
+    kind: mcq
+    topic: other
+    stem: "A 72-year-old has bilateral shoulder and hip girdle aching and morning stiffness. Which MSUS finding fits best?"
+    options: ["Subacromial-subdeltoid bursitis", "Double contour sign", "Erosions with PD at the MCPs", "Halo sign of the radial artery", "Enthesitis at the Achilles"]
+    answer: 0
+    why:
+      - "Correct: PMR shows subacromial-subdeltoid bursitis, biceps tenosynovitis, hip effusion or trochanteric bursitis."
+      - "Gout."
+      - "RA."
+      - "The halo sign is in the temporal artery in GCA."
+      - "Spondyloarthritis."
+    src: { page: 213, quote: "Subacromial-subdeltoid bursitis. Biceps tenosynovitis. Hip joint effusion or trochanteric bursitis." }
+    status: unverified
+  - id: rheum.L13.041
+    kind: mcq
+    topic: decisions
+    stem: "An RA patient in clinical remission wants to taper her biologic. How can MSUS help?"
+    options: ["Detect subclinical synovitis before tapering", "It cannot assess remission", "It replaces ESR and CRP entirely", "It measures bone density", "It confirms RF negativity"]
+    answer: 0
+    why:
+      - "Correct: identifies subclinical disease in apparent remission and personalizes tapering."
+      - "PD decrease marks remission; MSUS can assess it."
+      - "Not claimed by the book."
+      - "That is DEXA."
+      - "Serology is a blood test."
+    src: { page: 214, quote: "Detect flares early and personalize tapering of DMARDs/biologics." }
+    status: unverified
+  - id: rheum.L13.042
+    kind: mcq
+    topic: nfc-practice
+    stem: "A 25-year-old woman with Raynaud's has a negative ANA and a normal hairpin capillary pattern. Most likely?"
+    options: ["Primary Raynaud's phenomenon", "Early systemic sclerosis", "Dermatomyositis", "Active scleroderma pattern", "SLE"]
+    answer: 0
+    why:
+      - "Correct: primary Raynaud's shows a normal or minimally altered pattern."
+      - "SSc shows enlarged or giant capillaries, haemorrhages, dropout."
+      - "Dermatomyositis shows dropout, dilated loops, haemorrhages."
+      - "Needs giant capillaries and haemorrhages."
+      - "SLE gives non-specific changes; ANA is negative here."
+    src: { page: 216, quote: "Primary Raynaud‘s: Normal or minimally altered pattern." }
+    status: unverified
+  - id: rheum.L13.043
+    kind: mcq
+    topic: nfc-practice
+    stem: "In SSc, an abnormal capillaroscopy pattern correlates with all EXCEPT:"
+    options: ["Erosive arthritis", "Pulmonary arterial hypertension", "Interstitial lung disease", "Digital ulcers"]
+    answer: 0
+    why:
+      - "Correct (the exception): erosions are an MSUS finding, not a capillaroscopy correlate."
+      - "Listed correlate."
+      - "Listed correlate."
+      - "Listed correlate."
+    src: { page: 216, quote: "Correlates with: o Pulmonary arterial hypertension. o Interstitial lung disease. o Digital ulcers." }
+    status: unverified
+  # ---------- cases ----------
+  - id: rheum.L13.044
+    kind: case
+    topic: nfc-practice
+    stem: "A 38-year-old woman has had Raynaud's phenomenon for 1 year. ANA is positive."
+    steps:
+      - question: "Which test best looks for early microangiopathy?"
+        options: ["Nailfold capillaroscopy", "Plain hand X-ray", "Power Doppler of the wrist", "DEXA"]
+        answer: 0
+        why: "Capillaroscopy detects early microangiopathy, especially in ANA-positive Raynaud's."
+      - question: "How do you prepare her?"
+        options: ["20–22 °C room for 15–20 min, no caffeine, smoking or cold, then oil", "Warm hands in hot water first", "Cold challenge before scanning", "No preparation"]
+        answer: 0
+        why: "Acclimatize at room temperature, avoid caffeine, smoking and cold; oil or gel improves transparency."
+      - reveal: "Fingers 2–5 show frequent giant capillaries, haemorrhages and moderate capillary loss."
+        question: "Which pattern?"
+        options: ["Active scleroderma pattern", "Early scleroderma pattern", "Late scleroderma pattern", "Normal"]
+        answer: 0
+        why: "Frequent giant capillaries and haemorrhages with moderate loss = active."
+      - question: "Which complications should you look for, since this pattern correlates with them?"
+        options: ["PAH, ILD and digital ulcers", "Uveitis", "Amyloidosis", "Erosive arthritis"]
+        answer: 0
+        why: "The pattern correlates with PAH, ILD and digital ulcers in SSc."
+    src: { page: 216, quote: "Active pattern: Frequent giant capillaries and hemorrhages, moderate capillary loss." }
+    status: unverified
+  - id: rheum.L13.045
+    kind: case
+    topic: spa
+    stem: "A 30-year-old man with psoriasis has heel pain and a swollen 'sausage' toe. X-rays are normal."
+    steps:
+      - question: "Which imaging is most sensitive for early enthesitis?"
+        options: ["MSUS", "Plain X-ray", "CT", "Capillaroscopy"]
+        answer: 0
+        why: "MSUS is sensitive and preferred for early inflammation at the enthesis."
+      - reveal: "Achilles insertion: thick, hypoechoic, with Doppler signal at the enthesis."
+        question: "What does this show?"
+        options: ["Active enthesitis", "Gouty tophus", "Halo sign", "Normal tendon"]
+        answer: 0
+        why: "Thickening, hypoechogenicity and Doppler at the enthesis are entheseal abnormalities of SpA."
+      - reveal: "He starts a biologic. Three months later the Doppler signal has gone."
+        question: "What does this mean?"
+        options: ["Response to treatment (towards remission)", "Disease progression", "Scan is unreliable", "Calcification"]
+        answer: 0
+        why: "A decrease in PD signal = remission; MSUS monitors response to biologics."
+    src: { page: 213, quote: "MSUS is increasingly used in SpA assessment due to its ability to detect subclinical enthesitis and monitor response to biologic therapy." }
+    status: unverified
+  # ---------- book MCQs (p217–220) ----------
+  - id: rheum.L13.046
+    kind: mcq
+    topic: why-msus
+    stem: "Which of the following is a key advantage of musculoskeletal ultrasound (MSUS) in rheumatology?"
+    options: ["Detects only structural joint damage", "Requires radiation exposure", "Cannot visualize tendons", "Detects early synovitis and guides injections"]
+    answer: 3
+    why:
+      - "It detects early inflammation, not only damage."
+      - "MSUS is radiation-free."
+      - "It evaluates tendons, bursae, entheses and nerves."
+      - "Correct: non-invasive, radiation-free and sensitive for early inflammation."
+    src: { page: 217, quote: "Correct Answer: D. Detects early synovitis and guides injections." }
+    status: unverified
+    tags: [book-question]
+  - id: rheum.L13.047
+    kind: mcq
+    topic: equipment
+    stem: "Which probe frequency is typically used for superficial joints in MSUS?"
+    options: ["2–3 MHz", "5–7 MHz", "6–15 MHz", "20–30 MHz"]
+    answer: 2
+    why:
+      - "Too low: curvilinear range for deep structures."
+      - "Not the book's range."
+      - "Correct: high-frequency linear probes for superficial MSK structures."
+      - "Not the book's range."
+    src: { page: 217, quote: "Correct Answer: C. 6–15 MHz." }
+    status: unverified
+    tags: [book-question]
+  - id: rheum.L13.048
+    kind: mcq
+    topic: doppler
+    stem: "What does a positive Power Doppler (PD) signal indicate in a joint?"
+    options: ["Presence of joint effusion only", "Synovial vascularity and active inflammation", "Old joint erosion", "Cartilage thinning"]
+    answer: 1
+    why:
+      - "Effusion is a grey-scale finding; PD shows flow."
+      - "Correct: PD detects blood flow in inflamed synovium."
+      - "An old erosion has no flow."
+      - "Cartilage has no flow signal."
+    src: { page: 218, quote: "Correct Answer: B. Synovial vascularity and active inflammation." }
+    status: unverified
+    tags: [book-question]
+  - id: rheum.L13.049
+    kind: mcq
+    topic: spa
+    stem: "Which of the following is a typical MSUS finding in spondyloarthritis?"
+    options: ["Perifascicular atrophy", "Erosions with power Doppler in metacarpophalangeal joints", "Enthesitis with Doppler signal", "Subcutaneous calcification"]
+    answer: 2
+    why:
+      - "A muscle biopsy finding in dermatomyositis."
+      - "Typical of RA."
+      - "Correct: enthesitis is the hallmark of SpA and is well seen on ultrasound."
+      - "Not an SpA ultrasound sign."
+    src: { page: 218, quote: "Correct Answer: C. Enthesitis with Doppler signal." }
+    status: unverified
+    tags: [book-question]
+  - id: rheum.L13.050
+    kind: mcq
+    topic: patterns
+    stem: "In nailfold capillaroscopy, which pattern is highly specific for systemic sclerosis?"
+    options: ["Uniform, hairpin-shaped capillaries", "Giant capillaries and dropout", "Capillary loop elongation", "Spot hemorrhages only"]
+    answer: 1
+    why:
+      - "That is the normal pattern."
+      - "Correct: dilated loops, haemorrhages and capillary loss are specific for SSc."
+      - "Not specific."
+      - "Not enough on their own."
+    src: { page: 218, quote: "Correct Answer: B. giant capillaries and dropout." }
+    status: unverified
+    tags: [book-question]
+  - id: rheum.L13.051
+    kind: mcq
+    topic: nfc
+    stem: "What is the correct patient preparation before nailfold capillaroscopy?"
+    options: ["Warm fingers, apply immersion oil, then scan in cold room", "Let patient smoke before scan", "Acclimatize at room temperature and apply oil before imaging", "No preparation needed"]
+    answer: 2
+    why:
+      - "Cold exposure must be avoided."
+      - "Smoking must be avoided."
+      - "Correct: proper temperature and clarity avoid false findings."
+      - "Preparation is required."
+    src: { page: 219, quote: "Correct Answer: C. Acclimatize at room temperature and apply oil before imaging." }
+    status: unverified
+    tags: [book-question]
+  - id: rheum.L13.052
+    kind: mcq
+    topic: other
+    stem: "Which joint condition is best diagnosed using the 'double contour sign' on MSUS?"
+    options: ["Rheumatoid arthritis", "Gout", "Osteoarthritis", "Polymyalgia rheumatica"]
+    answer: 1
+    why:
+      - "RA shows synovial hypertrophy, PD and erosions."
+      - "Correct: urate crystals deposited on the cartilage surface."
+      - "Not the double contour sign."
+      - "PMR shows bursitis and tenosynovitis."
+    src: { page: 219, quote: "Correct Answer: B. Gout." }
+    status: unverified
+    tags: [book-question]
+  - id: rheum.L13.053
+    kind: mcq
+    topic: spa
+    stem: "Which imaging modality is most sensitive for detecting early enthesitis?"
+    options: ["X-ray", "MRI", "MSUS", "CT scan"]
+    answer: 2
+    why:
+      - "X-ray misses early inflammatory change."
+      - "The book's answer is ultrasound."
+      - "Correct: sensitive and preferred for early entheseal inflammation."
+      - "Not sensitive for early inflammation."
+    src: { page: 219, quote: "Correct Answer: C. MSUS." }
+    status: unverified
+    tags: [book-question]
+  - id: rheum.L13.054
+    kind: mcq
+    topic: patterns
+    stem: "Which capillaroscopy feature is most suggestive of severe or late-stage systemic sclerosis?"
+    options: ["Few giant capillaries", "Preserved architecture", "Ramified and bushy capillaries with avascular areas", "Single hemorrhage"]
+    answer: 2
+    why:
+      - "Early pattern."
+      - "Early pattern."
+      - "Correct: the late pattern, irreversible damage and progression."
+      - "Not a late feature."
+    src: { page: 220, quote: "Correct Answer: C. Ramified and bushy capillaries with avascular areas." }
+    status: unverified
+    tags: [book-question]
+  - id: rheum.L13.055
+    kind: mcq
+    topic: nfc-practice
+    stem: "Which of the following is TRUE regarding nailfold capillaroscopy in primary Raynaud's phenomenon?"
+    options: ["Always shows scleroderma pattern", "Typically normal or mildly abnormal", "Shows hemorrhages and dropout", "Should be avoided in young patients"]
+    answer: 1
+    why:
+      - "That would suggest secondary (SSc) Raynaud's."
+      - "Correct: normal or non-specific pattern."
+      - "Suggests SSc or dermatomyositis."
+      - "No such restriction."
+    src: { page: 220, quote: "Correct Answer: B. Typically normal or mildly abnormal." }
+    status: unverified
+    tags: [book-question]

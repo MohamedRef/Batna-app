@@ -1,0 +1,1308 @@
+schema: batna.content/v1
+lecture: hem.L06
+title: "Blood transfusion"
+author: "Dr. Mayada Moussa"
+book: { chapter: 4, pages: [84, 103] }
+topics:
+  - { id: antigens, title: "Blood group antigens and the red cell membrane" }
+  - { id: antibodies, title: "Naturally occurring and immune antibodies, IgM and IgG" }
+  - { id: compatibility, title: "Blood group systems and ABO compatibility" }
+  - { id: components, title: "Blood components and modifications" }
+  - { id: derivatives, title: "Blood derivatives and factor concentrates" }
+  - { id: acute-reactions, title: "Acute transfusion reactions" }
+  - { id: delayed-reactions, title: "Delayed reactions: DHTR and post-transfusion purpura" }
+  - { id: non-immune, title: "Sepsis, TACO, infections and hemosiderosis" }
+  - { id: massive, title: "Massive transfusion" }
+items:
+  # ---------- p84-85: antigens ----------
+  - id: hem.L06.001
+    kind: enumerate
+    topic: antigens
+    prompt: Name the clinically important blood group systems listed in the lecture.
+    points: [ABO, Rh, Kell, Kidd, Duffy]
+    pass: 4
+    src: { page: 84, quote: "there are several clinically important blood group system: ABO, Rh, Kell, Kidd, and Duffy." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L06.002
+    kind: cloze
+    topic: antigens
+    text: "The red cell membrane is about {{c1::40%}} lipid and up to {{c2::10%}} carbohydrate; the rest is protein."
+    src: { page: 84, quote: "The red cell membrane is composed of about 40% lipids and up to 10% carbohydrates, the remainder being protein." }
+    status: unverified
+    tags: [numbers]
+  - id: hem.L06.003
+    kind: card
+    topic: antigens
+    front: What chemical forms can blood group antigens take?
+    back: Integral proteins or glycoproteins of the red cell membrane, or membrane glycolipids.
+    src: { page: 84, quote: "Blood group antigens may be integral proteins or glycoproteins of the red cell membrane, or they may be membrane glycolipids." }
+    status: unverified
+  - id: hem.L06.004
+    kind: table
+    topic: antigens
+    title: Where blood group polymorphism lies
+    columns: [Antigen type, Polymorphism, Example]
+    rows:
+      - [Proteins and glycoproteins, Amino acid sequence, "Rh, Kell"]
+      - [Glycoproteins and glycolipids, Oligosaccharide (carbohydrate) sequence, ABO]
+    blanks: [[0, 2], [1, 1], [1, 2]]
+    src: { page: 84, quote: "polymorphism is associated with differences in the oligosaccharide sequence (e.g. ABO)." }
+    status: unverified
+  - id: hem.L06.005
+    kind: card
+    topic: antigens
+    front: How are the blood group proteins drawn on p85 grouped?
+    back: By how they sit in the membrane; single-pass type 1 (glycophorins A–D, Lutheran) and type 2 (Kell), polytopic multi-pass type 3 (RhD, RhCcEe, Kidd, Duffy) and GPI-anchored type 5 (Cromer, JMH); type 4 proteins are cytoplasmic and absent in red cells.
+    src: { page: 85, quote: "(Type 4 proteins are cytoplasmic and not present in red cells.)" }
+    status: unverified
+  # ---------- p84-86: antibodies ----------
+  - id: hem.L06.006
+    kind: card
+    topic: antibodies
+    front: What is a naturally occurring antibody?
+    back: One produced without any obvious immunizing stimulus such as pregnancy or transfusion (e.g. anti-A and anti-B).
+    src: { page: 85, quote: "Antibodies are naturally occurring when they are produced without any obvious immunizing stimulus, such as pregnancy or transfusion." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L06.007
+    kind: cloze
+    topic: antibodies
+    text: "Anti-A and anti-B are not present at birth; they appear at about {{c1::3–6 months}} of age."
+    src: { page: 85, quote: "anti-A and anti-B, start to appear in the serum at about 3–6 months of age." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: hem.L06.008
+    kind: card
+    topic: antibodies
+    front: What probably triggers the "naturally occurring" ABO antibodies?
+    back: Antigens of bacteria, viruses and other substances that are inhaled or ingested.
+    src: { page: 85, quote: "ABO antibodies are probably produced in response to antigens of bacteria, viruses and other substances that are inhaled or ingested." }
+    status: unverified
+  - id: hem.L06.009
+    kind: card
+    topic: antibodies
+    front: When are immune (allo-) red cell antibodies produced?
+    back: Only after pregnancy, transfusion, or injection of blood or blood group substances.
+    src: { page: 85, quote: "‗Immune‘ red cell or alloantibodies are only produced after pregnancy or followingtransfusion or injection of blood or blood group substances" }
+    status: unverified
+  - id: hem.L06.010
+    kind: card
+    topic: antibodies
+    front: Alloantibody versus autoantibody?
+    back: An alloantibody is made against antigens from another person (transfused or fetal cells) and needs prior sensitization; an autoantibody is made against the person's own antigens. Most antibodies other than anti-A and anti-B are allo-antibodies.
+    src: { page: 84, quote: "Development of most other allo-Abs requires prior sensitization. What is ALLO Vs AUTO antibodies." }
+    status: unverified
+  - id: hem.L06.011
+    kind: card
+    topic: antibodies
+    front: How do most adults' ABO antibodies relate to their own antigens?
+    back: They have naturally occurring antibodies to the ABO antigens they lack.
+    src: { page: 86, quote: "they have ‗naturally occurring‘ antibodies to those ABO antigens they lack." }
+    status: unverified
+  - id: hem.L06.012
+    kind: card
+    topic: antibodies
+    front: How are antibodies to most non-ABO blood groups formed?
+    back: Only by immunization, by transfused red cells or by fetal red cells leaking into the mother during pregnancy or childbirth.
+    src: { page: 86, quote: "are only formed as a result of immunization by transfused red cells or by fetal red cells leaking into the maternal circulation" }
+    status: unverified
+  - id: hem.L06.013
+    kind: table
+    topic: antibodies
+    title: IgM versus IgG blood group antibodies
+    columns: [Feature, IgM, IgG]
+    rows:
+      - [Agglutinates saline-suspended red cells, "Yes (saline or directly agglutinating)", Usually not]
+      - [To show agglutination, Nothing extra, "Potentiators or anti-human globulin"]
+    blanks: [[0, 1], [0, 2], [1, 2]]
+    src: { page: 86, quote: "IgM antibodies will directly agglutinate antigen-positive red cells in a saline medium, whereas most IgG antibodies require potentiators or anti-human globulin" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L06.014
+    kind: card
+    topic: antibodies
+    front: Which immunoglobulin classes are blood group antibodies?
+    back: Usually IgM or IgG, though some may be IgA.
+    src: { page: 86, quote: "Blood group antibodies are usually IgM or IgG, although some may be IgA." }
+    status: unverified
+  # ---------- p86-87: systems and compatibility ----------
+  - id: hem.L06.015
+    kind: cloze
+    topic: compatibility
+    text: "The ISBT recognizes {{c1::339}} blood group antigens; {{c2::297}} of them fall into {{c3::33}} blood group systems."
+    src: { page: 86, quote: "The International Society of Blood Transfusion (ISBT) recognizes 339 blood group antigens; 297 of these are classified into 1 of 33 blood group systems" }
+    status: unverified
+    tags: [numbers]
+    update:
+      text: "The ISBT list keeps growing; it counted 47 blood group systems by 2024."
+      ref: "ISBT Red Cell Immunogenetics and Blood Group Terminology working party, 2024"
+  - id: hem.L06.016
+    kind: card
+    topic: compatibility
+    front: What does each blood group system represent genetically?
+    back: A single gene or a cluster of two or three closely linked related genes with little or no recombination, so each system is a genetically discrete entity.
+    src: { page: 86, quote: "Each blood group system represents either a single gene or a cluster of two or three closely linked genes of related sequence" }
+    status: unverified
+  - id: hem.L06.017
+    kind: cloze
+    topic: compatibility
+    text: "Blood components containing more than {{c1::2 ml}} of red cells must be compatible with the patient's {{c2::plasma}}."
+    src: { page: 87, quote: "Blood components that contain > 2 ml of RBC must be compatible with patient‘s plasma." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: hem.L06.018
+    kind: table
+    topic: compatibility
+    title: ABO groups (p87 figure)
+    columns: [Group, Red cell antigens, Plasma antibodies]
+    rows:
+      - [A, A antigen, Anti-B]
+      - [B, B antigen, Anti-A]
+      - [AB, A and B antigens, None]
+      - [O, None, Anti-A and anti-B]
+    blanks: [[0, 2], [1, 2], [2, 2], [3, 2]]
+    src: { page: 87, quote: "Group AB Group O Red blood cell type Antibodies in Plasma None Anti-A and Anti-B" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L06.019
+    kind: card
+    topic: compatibility
+    front: Define major ABO incompatibility, with examples.
+    back: The recipient's antibodies destroy the transfused red cells, e.g. A to O, B to O, A to B, B to A.
+    src: { page: 87, quote: "Major incompatibility, where antibodies in the recipient will destroy transfused red cells (e.g. A to O, B to O, A to B, B to A)." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L06.020
+    kind: card
+    topic: compatibility
+    front: Define minor ABO incompatibility, with examples.
+    back: Antibodies in the donated blood destroy the recipient's red cells, e.g. O to A, O to B.
+    src: { page: 87, quote: "Minor incompatibility, where antibodies in the donated blood will destroy the recipient‘s red cells (e.g. O to A, O to B)." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L06.021
+    kind: mcq
+    topic: compatibility
+    stem: A group A patient is given a unit of group O whole blood in an emergency. Which incompatibility could this cause?
+    options:
+      - Minor incompatibility (donor anti-A against the recipient's cells)
+      - Major incompatibility (recipient anti-O against donor cells)
+      - No incompatibility is possible
+      - Major incompatibility (recipient anti-B against donor cells)
+      - Rh incompatibility only
+    answer: 0
+    why:
+      - "Correct: O to A is minor; the donor's anti-A acts on the recipient's red cells (p87)."
+      - "There is no anti-O antibody; O cells carry no A or B antigen."
+      - "Group O plasma carries anti-A and anti-B, so minor incompatibility is possible."
+      - "Recipient anti-B does not react with O cells."
+      - "Rh is not part of the stem."
+    src: { page: 87, quote: "Minor incompatibility, where antibodies in the donated blood will destroy the recipient‘s red cells (e.g. O to A, O to B)." }
+    status: unverified
+  - id: hem.L06.022
+    kind: mcq
+    topic: compatibility
+    stem: Which transfusion is an example of major ABO incompatibility?
+    options:
+      - Group A red cells to a group O patient
+      - Group O red cells to a group A patient
+      - Group O red cells to a group B patient
+      - Group A red cells to a group AB patient
+      - Group B red cells to a group AB patient
+    answer: 0
+    why:
+      - "Correct: the O recipient's anti-A destroys the A cells: major (p87)."
+      - "O to A is minor incompatibility."
+      - "O to B is minor incompatibility."
+      - "AB recipients have no anti-A or anti-B."
+      - "AB recipients have no anti-B."
+    src: { page: 87, quote: "Major incompatibility, where antibodies in the recipient will destroy transfused red cells (e.g. A to O, B to O, A to B, B to A)." }
+    status: unverified
+  # ---------- p88-92: components ----------
+  - id: hem.L06.023
+    kind: table
+    topic: components
+    title: Blood components (p88)
+    columns: [Group, Products]
+    rows:
+      - [Cellular, "Packed RBCs; random platelets (from whole blood); apheresis platelets"]
+      - [Modifications, "CMV-negative; leukoreduced; irradiated; washed (only PRBCs)"]
+      - [Non-cellular, "Plasma (FFP, FP24, thawed plasma); cryoprecipitate"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 88, quote: "Possible modifications (specifications) = CMV-negative = Leukoreduced = Irradiated = Washed (only PRBCs)" }
+    status: unverified
+  - id: hem.L06.024
+    kind: card
+    topic: components
+    front: Do the modifications (CMV-negative, leukoreduced, irradiated, washed) apply to plasma and cryoprecipitate?
+    back: No; they apply to cellular products only (washing to PRBCs only).
+    src: { page: 88, quote: "Cryoprecipitate = Above specifications do not apply" }
+    status: unverified
+  - id: hem.L06.025
+    kind: card
+    topic: components
+    front: Indication for whole blood, and why it is not a source of platelets or granulocytes?
+    back: Acute hypovolemia with red cell loss; platelets and granulocytes deteriorate in under 24 hours at refrigerator temperature.
+    src: { page: 88, quote: "It is not a source of functional PLT or granulocytes, which deteriorate in < 24 hours at refrigerator temp." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L06.026
+    kind: cloze
+    topic: components
+    text: "One unit of packed RBCs raises Hb by about {{c1::1 g/dl}} in an average-sized adult; its indication is {{c2::symptomatic anemia}}."
+    src: { page: 89, quote: "1 Unit of packed RBC increases Hb by 1 g/dl in an average-sized adult. Indications: treatment of symptomatic anemia." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: hem.L06.027
+    kind: card
+    topic: components
+    front: What is leukoreduction and what does it remove?
+    back: Filtration through special filters that bind 99.9% of donor white cells.
+    src: { page: 89, quote: "Filtration with specialized filters that bind 99.9% of WBC from donor unit" }
+    status: unverified
+  - id: hem.L06.028
+    kind: enumerate
+    topic: components
+    prompt: Which risks does leukoreduction essentially eliminate or reduce?
+    points:
+      - Febrile non-hemolytic transfusion reaction
+      - CMV and HTLV I–II
+      - Herpesviruses, EBV
+      - Trypanosoma cruzi
+      - TRALI (decreased risk)
+    pass: 4
+    src: { page: 89, quote: "LR essentially eliminates risk of: Febrile non-hemolytic transfusion reaction" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L06.029
+    kind: enumerate
+    topic: components
+    prompt: Indications for washed PRBCs?
+    points:
+      - Severe IgA deficiency (to prevent anaphylaxis)
+      - Significant hyperkalemia
+      - Ongoing hemolysis from anti-A or anti-B
+      - History of repeated allergic reactions
+    pass: 3
+    src: { page: 89, quote: "Severe IgA deficiency to prevent anaphylaxis" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L06.030
+    kind: card
+    topic: components
+    front: What does washing PRBCs remove, and what is its drawback?
+    back: The supernatant (plasma proteins, potassium, additive solution); the bag is opened and saline added many times, so contamination risk rises and shelf life is only 24 hours.
+    src: { page: 89, quote: "To remove supernatant (plasma proteins, K, additive solution, etc)" }
+    status: unverified
+  - id: hem.L06.031
+    kind: card
+    topic: components
+    front: Purpose of irradiating blood products?
+    back: To prevent donor lymphocyte proliferation in the recipient and transfusion-associated graft-versus-host disease (TA-GVHD).
+    src: { page: 90, quote: "To prevent lymphocyte proliferation in recipient and transfusion-associated graft-versus-host disease (TA-GVHD)" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L06.032
+    kind: enumerate
+    topic: components
+    prompt: Enumerate the indications for irradiated blood products.
+    points:
+      - Stem cell transplant patients (from at least 30 days before, indefinitely after)
+      - Products from first-degree relatives
+      - Intrauterine transfusions and babies up to 4 months
+      - Congenital immunodeficiency syndromes
+      - Recipients of fludarabine, nelarabine or clofarabine
+    pass: 4
+    src: { page: 90, quote: "Recipients of blood products from 1st degree relatives" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L06.033
+    kind: card
+    topic: components
+    front: Why must blood from a first-degree relative be irradiated?
+    back: The donor's lymphocytes share HLA with the recipient, escape rejection, proliferate and cause TA-GVHD; irradiation prevents their proliferation.
+    src: { page: 90, quote: "Recipients of blood products from 1st degree relatives" }
+    status: unverified
+  - id: hem.L06.034
+    kind: card
+    topic: components
+    front: Two ways platelets are collected?
+    back: Separated from whole blood by centrifugation shortly after collection (random donor platelet concentrates), or by apheresis (single donor).
+    src: { page: 90, quote: "May be separated from whole blood shortly after collection by centrifugation (random donor or PLT concentrates) or collected by apheresis" }
+    status: unverified
+  - id: hem.L06.035
+    kind: enumerate
+    topic: components
+    prompt: Indications for platelet transfusion?
+    points: [Bleeding with thrombocytopenia, Qualitative platelet defects]
+    pass: 2
+    src: { page: 90, quote: "Indications: - Bleeding associated with thrombocytopenia. - Qualitative PLT defects." }
+    status: unverified
+  - id: hem.L06.036
+    kind: table
+    topic: components
+    title: Platelet refractoriness (p90)
+    columns: [Type, Causes]
+    rows:
+      - [Non-immune, "Fever, infection, splenomegaly, DIC, massive bleeding, drugs that destroy platelets"]
+      - [Immune, "Repeated transfusions (esp. non-leukoreduced platelets), multiparity: HLA and HPA alloimmunization"]
+      - [Management, "HLA-compatible or cross-match compatible platelets"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 90, quote: "Immune-mediated: repeated transfusions especially with non-leukocyte reduced PLT and multiparity (alloimmunization to HLA and human PLT antigens)." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L06.037
+    kind: card
+    topic: components
+    front: How are granulocytes collected for transfusion?
+    back: By apheresis from donors mobilized beforehand with G-CSF.
+    src: { page: 91, quote: "Collected by apheresis, form donors who are mobilized prior to collection with G-CSF." }
+    status: unverified
+  - id: hem.L06.038
+    kind: enumerate
+    topic: components
+    prompt: Indications for granulocyte transfusion?
+    points: ["Neutropenia (ANC <0.5 × 10⁹/L) with documented infection", Defective granulocyte function (chronic granulomatous disease)]
+    pass: 2
+    src: { page: 91, quote: "Neutropenia (ANC < 0.5 109/L) and documented infection. - Defective granulocyte function (in chronic granulomatous disease)." }
+    status: unverified
+  - id: hem.L06.039
+    kind: enumerate
+    topic: components
+    prompt: Enumerate the indications for fresh frozen plasma.
+    points:
+      - Multiple clotting factor deficiencies in bleeding patients or before invasive procedures
+      - DIC, liver disease, massive transfusion
+      - Plasma exchange (TTP)
+      - Rapid reversal of warfarin
+      - Congenital factor deficiencies (concentrates preferred)
+    pass: 4
+    src: { page: 91, quote: "Correction of multiple clotting factor deficiencies in bleeding patients or prior to invasive procedures. DIC, liver disease, massive transfusions." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L06.040
+    kind: card
+    topic: components
+    front: What should FFP NOT be used for?
+    back: Volume expansion, or protein replacement in nutritional deficiency.
+    src: { page: 91, quote: "Should not be used for volume expansion or protein replacement in nutritional deficiencies" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L06.041
+    kind: card
+    topic: components
+    front: Why are factor concentrates preferred to FFP for congenital factor deficiencies?
+    back: Concentrated or recombinant preparations decrease viral transmission.
+    src: { page: 91, quote: "Congenital factor deficiencies (concentrated or recombinant factor preparations are preferable to decrease viral transmission)." }
+    status: unverified
+  - id: hem.L06.042
+    kind: enumerate
+    topic: components
+    prompt: What does a unit of cryoprecipitate contain?
+    points: [Factor VIII, Fibrinogen, Factor XIII, VWF activity]
+    pass: 4
+    src: { page: 91, quote: "A unit of cryoprecipitate is a fraction of plasma and contains factor VIII, fibrinogen, factor XIII and vWF activity." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L06.043
+    kind: enumerate
+    topic: components
+    prompt: Indications for cryoprecipitate?
+    points:
+      - Fibrinogen deficiency
+      - Dysfibrinogenemia
+      - Factor XIII deficiency
+      - DIC
+      - Urgent hemophilia A or VWD when FVIII concentrate is unavailable
+    pass: 4
+    src: { page: 92, quote: "Urgent treatment of hemophilia A and von Willebrand disease in the absence of F VIII concentrate or recombinant F VIII." }
+    status: unverified
+  - id: hem.L06.044
+    kind: mcq
+    topic: components
+    stem: A 30-year-old man with no family history of bleeding has a hip replacement planned. He had an anaphylactic reaction to a previous transfusion and his IgA is undetectable. Which red cell product is indicated?
+    options:
+      - Washed PRBCs
+      - Irradiated PRBCs
+      - CMV-negative PRBCs
+      - Whole blood
+      - Leukoreduced platelets
+    answer: 0
+    why:
+      - "Correct: washing removes plasma proteins (including IgA); severe IgA deficiency is an indication to prevent anaphylaxis (p89)."
+      - "Irradiation prevents TA-GVHD; it does not remove IgA."
+      - "CMV-negative units still contain plasma IgA."
+      - "Whole blood carries the most plasma."
+      - "He needs red cells, not platelets."
+    src: { page: 89, quote: "Severe IgA deficiency to prevent anaphylaxis" }
+    status: unverified
+  - id: hem.L06.045
+    kind: mcq
+    topic: components
+    stem: A 55-year-old man is being treated with fludarabine for CLL and needs red cell transfusion. Which modification is required?
+    options:
+      - Irradiation
+      - Washing
+      - Nothing; standard units are fine
+      - Cryoprecipitate added
+      - Whole blood instead
+    answer: 0
+    why:
+      - "Correct: recipients of fludarabine, nelarabine or clofarabine need irradiated products to prevent TA-GVHD (p90)."
+      - "Washing is for IgA deficiency, hyperkalemia, allergic reactions, anti-A/B hemolysis."
+      - "Purine analogues impair T cells, so TA-GVHD risk is high."
+      - "Cryoprecipitate is a plasma product, not a modification."
+      - "Whole blood is for acute hypovolemia."
+    src: { page: 90, quote: "Recipients of Fludarabine/Nelarabine/Clofarabine" }
+    status: unverified
+  - id: hem.L06.046
+    kind: mcq
+    topic: components
+    stem: A woman with five previous pregnancies and acute leukemia gets platelet transfusions. Her 1-hour post-transfusion count barely rises. She has no fever, no splenomegaly and no DIC. Best next step?
+    options:
+      - HLA-compatible or cross-match compatible platelets
+      - Double the dose of random platelets
+      - Fresh frozen plasma
+      - Stop all platelet transfusions forever
+      - Granulocyte transfusion
+    answer: 0
+    why:
+      - "Correct: multiparity points to immune refractoriness (HLA/HPA); give HLA- or cross-match compatible platelets (p90)."
+      - "More random platelets will be destroyed by the same antibodies."
+      - "FFP does not supply platelets."
+      - "Platelets are still needed for bleeding; choose compatible units."
+      - "Granulocytes are for neutropenic infection."
+    src: { page: 90, quote: "Management: HLA-compatible PLT or cross-match compatible PLT." }
+    status: unverified
+  - id: hem.L06.047
+    kind: mcq
+    topic: components
+    stem: A 70-year-old man on warfarin (INR 6) has an acute subdural hematoma and needs surgery now. Which blood component does the lecture give for rapid warfarin reversal?
+    options:
+      - Fresh frozen plasma
+      - Cryoprecipitate alone
+      - Platelet concentrate
+      - Albumin
+      - Packed RBCs
+    answer: 0
+    why:
+      - "Correct: rapid removal of warfarin effect is an FFP indication (p91)."
+      - "Cryo lacks factors II, VII, IX and X."
+      - "Platelet function is not the problem."
+      - "Albumin is a volume expander, not a factor source."
+      - "Packed cells carry no useful factors."
+    src: { page: 91, quote: "Plasma exchange (as in TTP). Rapid removal of warfarin effect." }
+    status: unverified
+    update:
+      text: "Four-factor prothrombin complex concentrate plus IV vitamin K is now preferred over FFP for urgent warfarin reversal."
+      ref: "ACC Expert Consensus on anticoagulant-associated bleeding 2020"
+  - id: hem.L06.048
+    kind: mcq
+    topic: components
+    stem: A woman with postpartum hemorrhage has fibrinogen 0.8 g/L after FFP. Which component best raises fibrinogen?
+    options:
+      - Cryoprecipitate
+      - Albumin
+      - Platelet concentrate
+      - Washed PRBCs
+      - IVIG
+    answer: 0
+    why:
+      - "Correct: cryoprecipitate contains fibrinogen and treats fibrinogen deficiency and DIC (p91–92)."
+      - "Albumin has no fibrinogen."
+      - "Platelets do not replace fibrinogen."
+      - "Washed red cells have the plasma removed."
+      - "IVIG is an immunoglobulin."
+    src: { page: 91, quote: "A unit of cryoprecipitate is a fraction of plasma and contains factor VIII, fibrinogen, factor XIII and vWF activity." }
+    status: unverified
+  # ---------- p92-93: derivatives ----------
+  - id: hem.L06.049
+    kind: card
+    topic: derivatives
+    front: What are blood derivatives?
+    back: Products made commercially by fractionating plasma (albumin, immune globulins, factor concentrates), heat- or chemically treated to inactivate viruses.
+    src: { page: 92, quote: "Blood products produced commercially by fractionation of plasma and include colloids such as albumin, immune globulins, coagulation factor concentrates." }
+    status: unverified
+  - id: hem.L06.050
+    kind: card
+    topic: derivatives
+    front: Indication for Rh immune globulin?
+    back: Preventing anti-D formation in Rh-negative pregnant women with Rh-positive fetuses, and so hemolytic disease of the newborn.
+    src: { page: 92, quote: "Prevention of development of anti-D by pregnant Rh –ve women with Rh +ve fetuses and subsequent hemolytic dis. Of newborn (HDN)." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L06.051
+    kind: enumerate
+    topic: derivatives
+    prompt: Enumerate the indications for albumin.
+    points:
+      - Hypovolemia (volume expansion)
+      - Acute liver failure (oncotic pressure, binds bilirubin)
+      - Cardiopulmonary bypass (hemodilution)
+      - After extensive burns
+      - Before exchange transfusion for HDN (binds free bilirubin, lowers kernicterus risk)
+    pass: 4
+    src: { page: 92, quote: "Hypovolemia: volume expansion. - Acute liver failure: osmotic pressure, binds excess bilirubin. - Cardiopulmonary bypass surgery: hemodilution." }
+    status: unverified
+  - id: hem.L06.052
+    kind: enumerate
+    topic: derivatives
+    prompt: Enumerate the indications for IVIG.
+    points:
+      - Passive immunity and passive antibody prophylaxis
+      - Replacement in primary immunodeficiencies
+      - Immunomodulation, e.g. refractory ITP
+      - Certain infections (HIV thrombocytopenia, CMV pneumonitis, Guillain-Barré)
+    pass: 3
+    src: { page: 93, quote: "Passive immunity and passive Ab prophylaxis. Replacement in 1ry immunodeficiencies. Immunomodulation of some autoimmune disorders: refractory ITP." }
+    status: unverified
+  - id: hem.L06.053
+    kind: enumerate
+    topic: derivatives
+    prompt: Indications for recombinant factor VIIa?
+    points:
+      - Factor VII deficiency (rare)
+      - Refractory hemophilia A or B
+      - High FVIII or FIX inhibitor levels
+      - Severe bleeding refractory to other therapy
+    pass: 3
+    src: { page: 93, quote: "High F VIII or IX inhibitor levels in hemophilia A or B. - Severe bleeding refractory to other therapy." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L06.054
+    kind: table
+    topic: derivatives
+    title: Factor products and their uses (p93)
+    columns: [Product, Use]
+    rows:
+      - [Factor VIII concentrate, "FVIII deficiency and vWD"]
+      - [Recombinant FVIII, Hemophilia A]
+      - [Factor IX complex (prothrombin complex), "Hemophilia B, FX deficiency, FVII deficiency"]
+      - [Recombinant factor IX, Hemophilia B]
+      - [Recombinant factor XIII, FXIII deficiency]
+    blanks: [[0, 1], [2, 1], [4, 1]]
+    src: { page: 93, quote: "Factor IX complex (prothrombin complex): concentrated F IX and variable amounts of activated F II, VII, X and protein C" }
+    status: unverified
+  - id: hem.L06.055
+    kind: card
+    topic: derivatives
+    front: What does factor IX complex (prothrombin complex) contain?
+    back: Concentrated factor IX with variable amounts of activated II, VII, X and protein C.
+    src: { page: 93, quote: "Factor IX complex (prothrombin complex): concentrated F IX and variable amounts of activated F II, VII, X and protein C" }
+    status: unverified
+  # ---------- p94-96: acute reactions ----------
+  - id: hem.L06.056
+    kind: table
+    topic: acute-reactions
+    title: Transfusion reactions (p94)
+    columns: [Type, Acute (immediate), Delayed]
+    rows:
+      - [Immunologic, "FNHTR; allergic; AHTR", "DHTR; PTP"]
+      - [Non-immunologic, "Bacterial contamination; hypocalcemia; TACO", "Infections; hemosiderosis"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2]]
+    src: { page: 94, quote: "Immunologic -FNHTR DHTR -Allergic PTP -AHTR" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L06.057
+    kind: card
+    topic: acute-reactions
+    front: What is the most common transfusion reaction?
+    back: Febrile non-hemolytic transfusion reaction (FNHTR).
+    src: { page: 94, quote: "Febrile Non-hemolytic Transfusion Reaction Most common blood transfusion reaction" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L06.058
+    kind: card
+    topic: acute-reactions
+    front: How is FNHTR defined and what must be excluded?
+    back: A temperature rise of more than 1°C; it is a diagnosis of exclusion (AHTR, TRALI and sepsis).
+    src: { page: 94, quote: "Defined by > 1°C increase in temperature. It is a diagnosis of exclusion (AHTR, TRALI and sepsis)." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L06.059
+    kind: card
+    topic: acute-reactions
+    front: Mechanism of FNHTR?
+    back: Cytokines accumulated in the bag during storage are passively transferred from donor to recipient.
+    src: { page: 94, quote: "Mechanism: Cytokines in blood component bag accumulated during storage passively transferred from the donor to the recipient" }
+    status: unverified
+  - id: hem.L06.060
+    kind: card
+    topic: acute-reactions
+    front: Management and prevention of FNHTR?
+    back: Slow the transfusion and give an antipyretic (paracetamol); prevent with leukodepletion, plasma removal and antipyretic premedication.
+    src: { page: 94, quote: "Management: slow the rate of transfusion, and antipyretic (paracetamol). Prevention: leukodepletion, removal of plasma and premedication with antipyretics." }
+    status: unverified
+  - id: hem.L06.061
+    kind: card
+    topic: acute-reactions
+    front: "Mild allergic (urticarial) reaction: presentation, mechanism and treatment?"
+    back: Localized erythema, pruritus, flushing and urticaria near the IV site; IgE antibodies against donor plasma proteins release histamine; treat with antihistamines.
+    src: { page: 95, quote: "Presentation: localized erythema, pruritus, flushing and urticaria, usually near the IV site." }
+    status: unverified
+  - id: hem.L06.062
+    kind: card
+    topic: acute-reactions
+    front: Do mild urticarial reactions progress or recur?
+    back: They are relatively common, do not progress to anaphylaxis, are rarely lethal and do not necessarily recur.
+    src: { page: 95, quote: "Relatively common, do not progress to anaphylaxis and rarely lethal and do not necessarily recur with subsequent transfusions." }
+    status: unverified
+  - id: hem.L06.063
+    kind: card
+    topic: acute-reactions
+    front: Mechanism of anaphylactic transfusion reaction?
+    back: Anti-IgA antibodies in an IgA-deficient patient react with IgA in the transfused plasma.
+    src: { page: 95, quote: "Mechanism: presence of anti-IgA in an IgA deficient patient. These Abs react with IgA in the transfused plasma." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L06.064
+    kind: card
+    topic: acute-reactions
+    front: Which feature is absent in anaphylactic transfusion reactions?
+    back: Fever (initial hypertension, then hypotension, edema, wheeze, stridor, laryngeal edema and shock occur).
+    src: { page: 95, quote: "laryngeal edema respiratory distress and shock. Fever is not a feature." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L06.065
+    kind: card
+    topic: acute-reactions
+    front: Management of anaphylactic transfusion reaction?
+    back: Stop the transfusion, adrenaline, corticosteroids and circulatory support.
+    src: { page: 95, quote: "Management: stop transfusion, adrenaline, corticosteroids and circulatory support." }
+    status: unverified
+  - id: hem.L06.066
+    kind: card
+    topic: acute-reactions
+    front: Mechanism of acute hemolytic transfusion reaction (AHTR)?
+    back: ABO-mismatched transfusion; preformed naturally occurring IgM isohemagglutinins (anti-A and/or anti-B) in the recipient destroy the transfused red cells.
+    src: { page: 95, quote: "destruction of transfused RBCs by pre-formed, naturally occurring isohemagglutinins of the IgM class in the recipient‘s plasma (anti-A &/or anti-B)" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L06.067
+    kind: enumerate
+    topic: acute-reactions
+    prompt: Enumerate the presentation of AHTR.
+    points:
+      - Fever, chills
+      - Flank or back pain
+      - Dyspnea, chest pain, anxiety
+      - Facial flushing, throbbing head, nausea
+      - "Severe: hypotension, renal failure, shock, death"
+    pass: 4
+    src: { page: 95, quote: "Presentation: fever, chills, flank/back pain, dyspnea, chest pain, anxiety, flushing of face, throbbing in the head, nausea" }
+    status: unverified
+  - id: hem.L06.068
+    kind: order
+    topic: acute-reactions
+    prompt: Order the first steps in managing a suspected AHTR.
+    steps:
+      - Stop the transfusion
+      - Support BP and renal flow (fluids, pressors, diuresis for urine >100 ml/h)
+      - Check the identity of the patient and units
+      - Send samples (repeat type and cross-match, DAT, Hct, LDH, bilirubin)
+    src: { page: 96, quote: "Stop transfusion. - Support of BP and renal blood flow with fluids and pressors and induction of diuresis to maintain urine output > 100 ml/hour." }
+    status: unverified
+  - id: hem.L06.069
+    kind: cloze
+    topic: acute-reactions
+    text: "In AHTR, diuresis aims to keep urine output above {{c1::100 ml/hour}}; bilirubin rises within {{c2::6–10 hours}}."
+    src: { page: 96, quote: "induction of diuresis to maintain urine output > 100 ml/hour." }
+    status: unverified
+    tags: [numbers]
+  - id: hem.L06.070
+    kind: enumerate
+    topic: acute-reactions
+    prompt: Lab findings of hemolysis in AHTR (at least two needed)?
+    points:
+      - Decreased fibrinogen
+      - Decreased haptoglobin
+      - Elevated bilirubin
+      - Elevated LDH
+      - Hemoglobinemia
+      - Hemoglobinuria
+      - Plasma discoloration from free hemoglobin
+      - Spherocytes on the film
+    pass: 6
+    src: { page: 96, quote: "At least two laboratory findings must be present, such as: 1. Decreased fibrinogen 2. Decreased haptoglobin 3. Elevated bilirubin" }
+    status: unverified
+  - id: hem.L06.071
+    kind: card
+    topic: acute-reactions
+    front: How is an immune AHTR confirmed, and how is a non-immune one recognized?
+    back: Immune is confirmed by a positive DAT (anti-IgG and/or anti-C3) and a positive elution with alloantibody on the transfused cells; non-immune has negative serology and a physical cause (thermal, osmotic, mechanical or chemical).
+    src: { page: 96, quote: "Diagnosis is confirmed by a positive direct antiglobulin test for anti-IgG and/or anti-C3 and positive elution test" }
+    status: unverified
+  - id: hem.L06.072
+    kind: mcq
+    topic: acute-reactions
+    stem: Ten minutes into a red cell transfusion, a woman develops fever, rigors, back pain and a sense of doom. BP falls to 80/50 and her urine turns red. What is the first step?
+    options:
+      - Stop the transfusion
+      - Slow the transfusion and give paracetamol
+      - Give an antihistamine and continue
+      - Give adrenaline and continue
+      - Send a DAT and wait for the result
+    answer: 0
+    why:
+      - "Correct: this is AHTR; first stop the transfusion, then support BP and renal flow (p96)."
+      - "Slowing and paracetamol is FNHTR management; this is hemolysis with shock."
+      - "Antihistamines treat mild urticaria."
+      - "Anaphylaxis has no fever; the transfusion must be stopped in any case."
+      - "Samples are taken after stopping the transfusion and supporting the patient."
+    src: { page: 96, quote: "Management: - Stop transfusion. - Support of BP and renal blood flow with fluids and pressors" }
+    status: unverified
+  - id: hem.L06.073
+    kind: mcq
+    topic: acute-reactions
+    stem: A patient with known IgA deficiency develops wheeze, stridor, generalized edema and hypotension within minutes of a plasma transfusion. Temperature is normal. Mechanism?
+    options:
+      - Anti-IgA antibodies reacting with IgA in donor plasma
+      - Cytokines accumulated during storage
+      - Recipient IgM anti-A destroying donor cells
+      - Donor anti-HPA-1a antibodies
+      - Bacterial contamination of the bag
+    answer: 0
+    why:
+      - "Correct: anaphylaxis from anti-IgA in an IgA-deficient patient; fever is not a feature (p95)."
+      - "Stored cytokines cause FNHTR, with fever."
+      - "AHTR causes fever, back pain and hemoglobinuria."
+      - "Anti-HPA-1a causes post-transfusion purpura days later."
+      - "Sepsis causes high fever and rigors."
+    src: { page: 95, quote: "Mechanism: presence of anti-IgA in an IgA deficient patient. These Abs react with IgA in the transfused plasma." }
+    status: unverified
+  - id: hem.L06.074
+    kind: mcq
+    topic: acute-reactions
+    stem: Halfway through a platelet transfusion a man's temperature rises from 37.0 to 38.3°C with chills. BP is normal, no back pain, no dyspnea, urine clear. Hemolysis screen is negative. Most likely diagnosis?
+    options:
+      - Febrile non-hemolytic transfusion reaction
+      - Acute hemolytic transfusion reaction
+      - Anaphylactic reaction
+      - Post-transfusion purpura
+      - TACO
+    answer: 0
+    why:
+      - "Correct: a rise over 1°C with no hemolysis, TRALI or sepsis is FNHTR, the most common reaction (p94)."
+      - "AHTR has back pain, hypotension and hemolysis."
+      - "Anaphylaxis has no fever."
+      - "PTP is thrombocytopenia 5–10 days later."
+      - "TACO presents with dyspnea, orthopnea and raised JVP."
+    src: { page: 94, quote: "Defined by > 1°C increase in temperature. It is a diagnosis of exclusion (AHTR, TRALI and sepsis)." }
+    status: unverified
+  # ---------- p97-99: delayed reactions ----------
+  - id: hem.L06.075
+    kind: card
+    topic: delayed-reactions
+    front: When does a delayed hemolytic transfusion reaction occur, and what is its triad?
+    back: 1–3 weeks after transfusion; fever, hyperbilirubinemia and anemia, with a positive DAT.
+    src: { page: 97, quote: "Occurs within 1 to 3 weeks post transfusion. Presentation: triad of fever, hyperbilirubinemia and anemia. DAT is +ve." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L06.076
+    kind: card
+    topic: delayed-reactions
+    front: Why is there no hemoglobinuria in DHTR?
+    back: The hemolysis is extravascular.
+    src: { page: 97, quote: "There is no Hemoglobinuria because hemolysis is extra-vascular." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L06.077
+    kind: card
+    topic: delayed-reactions
+    front: Mechanism of DHTR?
+    back: An anamnestic (memory) response in a patient alloimmunized by earlier transfusion or pregnancy, on re-exposure to the offending antigen.
+    src: { page: 97, quote: "Mechanism: Anamnestic reaction in a previously alloimmunized patient (by transfusion or pregnancy) upon re-exposure to the offending Ag." }
+    status: unverified
+  - id: hem.L06.078
+    kind: card
+    topic: delayed-reactions
+    front: Management and prevention of DHTR?
+    back: Self-limited; monitor Hb until hemolysis ends with supportive care; future units must be negative for the implicated antigen.
+    src: { page: 97, quote: "Prevention: future transfusion must be Ag –ve for the implicated Ab." }
+    status: unverified
+  - id: hem.L06.079
+    kind: card
+    topic: delayed-reactions
+    front: In DHTR, what defines brisk hemolysis, and what can be given if hemolysis continues?
+    back: Falling Hb, rising bilirubin, absent haptoglobin and/or hemoglobinuria; with ongoing hemolysis consider a glucocorticoid, IVIG or rituximab, plus hydration to protect the kidneys.
+    src: { page: 98, quote: "If there is ongoing hemolysis, you may consider giving a glucocorticoid, intravenous immune globulin (IVIG), or rituximab." }
+    status: unverified
+  - id: hem.L06.080
+    kind: card
+    topic: delayed-reactions
+    front: "Post-transfusion purpura: what and when?"
+    back: Rare, sudden profound thrombocytopenia 5–10 days after transfusion of a platelet-containing component, usually RBCs.
+    src: { page: 98, quote: "Rare sudden profound thrombocytopenia 5-10 days after transfusion of PLT-containing blood components, usually RBCs." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L06.081
+    kind: card
+    topic: delayed-reactions
+    front: Which antibody most commonly causes post-transfusion purpura?
+    back: Anti-HPA-1a, against the platelet-specific antigen HPA-1a, from earlier transfusion, transplant or pregnancy.
+    src: { page: 98, quote: "Anti-HPA-1a is the most common culprit" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L06.082
+    kind: enumerate
+    topic: delayed-reactions
+    prompt: Proposed ways the alloantibody destroys the patient's own platelets in PTP?
+    points:
+      - Passive transfer of antibody
+      - Antibody to autologous GPIIb/IIIa
+      - Immune complex binding to platelets
+      - Adhesion of transfused alloantigen to autologous platelets
+    pass: 3
+    src: { page: 98, quote: "Passive transfer of antibody is possible Antibody to autologous GPIIb/IIIa platelet receptor Immune complex binding to platelets" }
+    status: unverified
+  - id: hem.L06.083
+    kind: card
+    topic: delayed-reactions
+    front: Management and prevention of PTP?
+    back: May be self-limited; if severe, IVIG or plasma exchange; prevent with antigen-negative blood.
+    src: { page: 98, quote: "Management: may be self limited, but if severe, IVIG or plasma exchange." }
+    status: unverified
+  - id: hem.L06.084
+    kind: enumerate
+    topic: delayed-reactions
+    prompt: Which reference-lab tests detect HPA antibodies or type platelets?
+    points: [Immunofluorescence, ELISA, Platelet genotyping (PCR), MAIPA]
+    pass: 3
+    src: { page: 99, quote: "Detection of HPA antibodies by immunofluorescence o Enzyme linked immunoassay (ELISA) o Platelet genotyping (PCR)" }
+    status: unverified
+  - id: hem.L06.085
+    kind: mcq
+    topic: delayed-reactions
+    stem: A 45-year-old woman with two previous pregnancies had 2 units of red cells after surgery. Ten days later she has fever, jaundice and Hb has fallen from 10 to 7.5 g/dL. Urine is clear. DAT is positive. Most likely?
+    options:
+      - Delayed hemolytic transfusion reaction
+      - Acute hemolytic transfusion reaction
+      - Post-transfusion purpura
+      - Hemosiderosis
+      - FNHTR
+    answer: 0
+    why:
+      - "Correct: 1–3 weeks, fever, jaundice, anemia, positive DAT, no hemoglobinuria (extravascular) = DHTR (p97)."
+      - "AHTR occurs during the transfusion."
+      - "PTP causes thrombocytopenia, not anemia and jaundice."
+      - "Hemosiderosis needs over 20 transfusions."
+      - "FNHTR is during or soon after the transfusion, without hemolysis."
+    src: { page: 97, quote: "Presentation: triad of fever, hyperbilirubinemia and anemia. DAT is +ve. There is no Hemoglobinuria because hemolysis is extra-vascular." }
+    status: unverified
+  - id: hem.L06.086
+    kind: mcq
+    topic: delayed-reactions
+    stem: A 60-year-old woman gets 3 units of red cells for GI bleeding. Seven days later she has widespread purpura and platelets 5,000/mm³. Most likely mechanism?
+    options:
+      - Anti-HPA-1a alloantibody destroying platelets
+      - Anti-IgA antibodies
+      - Cytokines in the stored bag
+      - Dilution from massive transfusion
+      - IgM anti-A destroying red cells
+    answer: 0
+    why:
+      - "Correct: post-transfusion purpura 5–10 days after RBCs; anti-HPA-1a is the most common culprit (p98)."
+      - "Anti-IgA causes anaphylaxis during transfusion."
+      - "Stored cytokines cause FNHTR."
+      - "Three units are not a massive transfusion."
+      - "Anti-A causes AHTR, a red cell problem."
+    src: { page: 98, quote: "Anti-HPA-1a is the most common culprit" }
+    status: unverified
+  # ---------- p99-101: non-immune ----------
+  - id: hem.L06.087
+    kind: table
+    topic: non-immune
+    title: Bacteria in contaminated units (p99)
+    columns: [Product, Stored at, Typical bacteria]
+    rows:
+      - [Red cells, Cold (refrigerator), "Cold-surviving: Yersinia, Pseudomonas"]
+      - [Platelets, Room temperature (more bacterial growth), "Staphylococci and streptococci"]
+    blanks: [[0, 2], [1, 1], [1, 2]]
+    src: { page: 99, quote: "PLT are stored at room temp. and thus more susceptible to bacterial growth. Commonly implicated bacteria in PLT: staphylococci & streptococci." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L06.088
+    kind: card
+    topic: non-immune
+    front: Presentation of transfusion of a bacterially contaminated unit?
+    back: Rigors, chills, fever, nausea, vomiting, abdominal cramps, bloody diarrhea, hemolysis, hemoglobinuria, hypotension, renal failure, shock and DIC.
+    src: { page: 99, quote: "Presentation: rigors, chills, fever, nausea, vomiting, abd. cramps, bloody diarrhea, hemolysis, hemoglobinuria" }
+    status: unverified
+  - id: hem.L06.089
+    kind: card
+    topic: non-immune
+    front: Management and prevention of transfusion sepsis?
+    back: Broad-spectrum antibiotics and treatment of shock; store blood in controlled refrigerators at 2–6°C and never collect several units and leave unused ones at room temperature.
+    src: { page: 99, quote: "Keep blood in controlled refrigerators (at 2-6°C) and never obtain multiple units for the same patient and leave unused units at room temp." }
+    status: unverified
+  - id: hem.L06.090
+    kind: card
+    topic: non-immune
+    front: Who is at particular risk of TACO?
+    back: Children, the elderly, and those with cardiac or pulmonary compromise.
+    src: { page: 99, quote: "Children, elderly, those with cardiac or pulmonary function compromise are at particular risk." }
+    status: unverified
+  - id: hem.L06.091
+    kind: card
+    topic: non-immune
+    front: Presentation and nature of the pulmonary edema in TACO?
+    back: Cough, dyspnea, cyanosis, orthopnea, rales, headache, congested neck veins, restlessness, tachycardia; CVP rises, and the pulmonary edema is cardiogenic.
+    src: { page: 100, quote: "There is increase in CVP and cardiac failure. Pulm. edema is cardiogenic in origin" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L06.092
+    kind: cloze
+    topic: non-immune
+    text: "Patients at risk of TACO should receive smaller amounts at {{c1::1–4 ml/kg/h}}, within the maximum transfusion time of {{c2::4 hours}} for any product."
+    src: { page: 100, quote: "At risk patients should receive smaller amounts of blood at slower rates (1 - 4 ml/kg/H) i.e., at the maximum time of transfusion" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: hem.L06.093
+    kind: card
+    topic: non-immune
+    front: Management of TACO?
+    back: Stop the transfusion and give supportive care (oxygen, diuresis, phlebotomy if necessary).
+    src: { page: 100, quote: "Stop transfusion. - Supportive care (O2, diuresis, phlebotomy if necessary)." }
+    status: unverified
+  - id: hem.L06.094
+    kind: table
+    topic: non-immune
+    title: Transfusion-transmitted infections (p100–101)
+    columns: [Group, Agents]
+    rows:
+      - [Hepatotropic viruses, "HAV (very rare), HBV, HCV"]
+      - [Retroviruses, "HIV-1, HIV-2, HTLV I and II"]
+      - [Herpesviruses, "CMV, EBV"]
+      - [Other viruses, "Parvovirus B19, West Nile virus"]
+      - [Bacteria, "TB, brucellosis, syphilis"]
+      - [Parasites, "Malaria, trypanosomiasis, leishmaniasis, toxoplasmosis"]
+      - [Prions, Creutzfeldt-Jakob disease]
+    blanks: [[1, 1], [2, 1], [4, 1], [5, 1], [6, 1]]
+    src: { page: 100, quote: "Retroviruses: HIV1, and HIV2, HTLV I and HTLV II. Herpesviruses: CMV, EBV." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L06.095
+    kind: cloze
+    topic: non-immune
+    text: "Transfusional hemosiderosis occurs after more than {{c1::20}} transfusions; each red cell unit contains {{c2::200–250 mg}} of iron."
+    src: { page: 101, quote: "Occurs in patients who receive repeated (> 20 blood transfusions)." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: hem.L06.096
+    kind: card
+    topic: non-immune
+    front: Presentation of transfusional hemosiderosis?
+    back: Bronze skin, hepatic fibrosis, diabetes, other endocrine dysfunction and cardiac failure.
+    src: { page: 101, quote: "Presentation: Bronze skin, hepatic fibrosis, diabetes, other endocrine dysfunction and cardiac failure." }
+    status: unverified
+  - id: hem.L06.097
+    kind: cloze
+    topic: non-immune
+    text: "Consider iron chelation for a red cell burden over {{c1::20 units}} and/or serum ferritin above {{c2::1000 ng/ml}}."
+    src: { page: 101, quote: "Prevention: consider chelation for > 20 unit RBC burden &/or serum ferritin > 1000 ng/ml" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: hem.L06.098
+    kind: mcq
+    topic: non-immune
+    stem: An 82-year-old woman with heart failure gets her second unit of red cells over 90 minutes. She becomes breathless and orthopneic with raised JVP, basal crackles and BP 170/95. Diagnosis and first step?
+    options:
+      - TACO; stop the transfusion and give oxygen and diuretic
+      - AHTR; give pressors
+      - Anaphylaxis; give adrenaline
+      - FNHTR; give paracetamol
+      - Sepsis; give antibiotics only
+    answer: 0
+    why:
+      - "Correct: elderly with cardiac compromise, raised CVP and cardiogenic edema = TACO; stop, O2, diuresis (p99–100)."
+      - "AHTR has fever, back pain and hypotension."
+      - "Anaphylaxis has wheeze, stridor and hypotension."
+      - "FNHTR is fever without breathlessness."
+      - "Sepsis causes rigors, fever and shock."
+    src: { page: 100, quote: "Stop transfusion. - Supportive care (O2, diuresis, phlebotomy if necessary)." }
+    status: unverified
+  - id: hem.L06.099
+    kind: mcq
+    topic: non-immune
+    stem: Shortly after a platelet transfusion, a patient has rigors, temperature 40°C, vomiting and BP 75/40. Gram-positive cocci grow from the bag. Why are platelets especially prone to this?
+    options:
+      - They are stored at room temperature
+      - They are stored frozen
+      - They are washed many times
+      - They contain anti-IgA
+      - They are irradiated
+    answer: 0
+    why:
+      - "Correct: platelets are kept at room temperature, so bacteria (staphylococci, streptococci) grow (p99)."
+      - "Platelets are not frozen; FFP is."
+      - "Washing applies to PRBCs."
+      - "Anti-IgA is a recipient antibody causing anaphylaxis."
+      - "Irradiation prevents TA-GVHD; it does not promote bacteria."
+    src: { page: 99, quote: "PLT are stored at room temp. and thus more susceptible to bacterial growth." }
+    status: unverified
+  - id: hem.L06.100
+    kind: mcq
+    topic: non-immune
+    stem: A 16-year-old with beta-thalassemia major has had monthly transfusions for years. Ferritin is 3,200 ng/ml. What does the lecture recommend?
+    options:
+      - Iron chelation
+      - Stop all transfusions
+      - Oral iron
+      - Washed red cells to remove iron
+      - Irradiated red cells
+    answer: 0
+    why:
+      - "Correct: over 20 units and/or ferritin above 1000 ng/ml: consider chelation (p101)."
+      - "He still needs transfusions."
+      - "Oral iron would worsen overload."
+      - "Washing removes plasma, not the iron inside red cells."
+      - "Irradiation prevents TA-GVHD."
+    src: { page: 101, quote: "Prevention: consider chelation for > 20 unit RBC burden &/or serum ferritin > 1000 ng/ml" }
+    status: unverified
+  # ---------- p101-103: massive transfusion ----------
+  - id: hem.L06.101
+    kind: cloze
+    topic: massive
+    text: "Massive transfusion is giving, over {{c1::24 hours}}, at least the patient's total blood volume: about {{c2::10 units}} of whole blood or {{c3::20 units}} of packed RBCs in an adult."
+    src: { page: 101, quote: "The administration of blood components over a 24-hour period in amounts that equal or exceed the total blood volume of the patient" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: hem.L06.102
+    kind: enumerate
+    topic: massive
+    prompt: Enumerate the problems of massive transfusion.
+    points:
+      - Dilution and consumption of platelets and factors (DIC)
+      - Hypothermia
+      - Acidosis
+      - Electrolyte disturbances
+      - Hypocalcemia from citrate
+      - Hyperkalemia, hypomagnesemia
+      - Low oncotic pressure (interstitial edema)
+    pass: 5
+    src: { page: 101, quote: "Hypothermia, acidosis, and electrolyte disturbances. Hypocalcemia 2ry to citrate accumulation when large volumes of blood are administered at rapid rate." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L06.103
+    kind: card
+    topic: massive
+    front: Why does dilutional coagulopathy happen in hemorrhagic shock?
+    back: Fluid shifts from the interstitium into vessels and dilutes the factors, worsened by replacing loss with factor-poor fluids; colloids and crystalloids cause more coagulopathy than dilution alone explains.
+    src: { page: 101, quote: "Dilutional coagulopathy: During haemorrhagic shock, there is fluid shift from the interstitial to the intravascular compartment" }
+    status: unverified
+  - id: hem.L06.104
+    kind: cloze
+    topic: massive
+    text: "Each blood bag has {{c1::80 ml}} of CPDA solution with about {{c2::3 g}} of citrate, which a healthy adult metabolizes in {{c3::5 min}}."
+    src: { page: 102, quote: "80 ml of citrate phosphate dextrose adenine solution present in each blood bag contains approximately 3 g citrate." }
+    status: unverified
+    tags: [numbers]
+  - id: hem.L06.105
+    kind: card
+    topic: massive
+    front: Why does citrate toxicity occur in massive transfusion, and what does it cause?
+    back: Hypoperfusion or hypothermia slows citrate metabolism by the liver; unmetabolized citrate causes hypocalcemia, hypomagnesemia and worse acidosis.
+    src: { page: 102, quote: "Unmetabolised citrate can then lead to hypocalcaemia, hypomagnesemia and worsen the acidosis." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L06.106
+    kind: card
+    topic: massive
+    front: Which appears first in citrate-induced hypocalcemia, and what should alert you?
+    back: Myocardial depression appears before hypocalcemic coagulopathy; hypotension not responding to fluids should alert you. Calcium is needed in most massive transfusions.
+    src: { page: 102, quote: "Hypotension not responding to fluids should alert the physician to this complication." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L06.107
+    kind: card
+    topic: massive
+    front: How is citrate-induced hypocalcemia monitored?
+    back: Watch the transfusion rate, BP and corrected QT; measure ionized calcium with the ion-specific electrode on a blood gas machine, especially in liver disease or poor hepatic perfusion.
+    src: { page: 102, quote: "following physiologic markers such as the blood pressure and corrected QT interval." }
+    status: unverified
+  - id: hem.L06.108
+    kind: card
+    topic: massive
+    front: In liver dysfunction, which calcium salt is preferred and why?
+    back: Calcium chloride, because releasing ionized calcium from it does not need normal liver function (unlike gluconate).
+    src: { page: 103, quote: "For individuals with abnormal liver function, саlϲium chloride may be preferable to саlcium gluconate since release of ionized ϲalсium" }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L06.109
+    kind: cloze
+    topic: massive
+    text: "Potassium in stored PRBCs ranges from {{c1::7 to 77 mEq/L}}; transient hyperkalemia is frequent at transfusion rates above {{c2::100–150 ml/min}}."
+    src: { page: 103, quote: "Potassium concentrations in PRBCs can range from 7 to 77 mEq/L depending on age of stored blood." }
+    status: unverified
+    tags: [numbers]
+  - id: hem.L06.110
+    kind: card
+    topic: massive
+    front: What makes hyperkalemia more dangerous in massive transfusion?
+    back: Poor renal function, tissue injury, fast transfusion and acidosis raise it; its cardiac effects are accentuated by hypocalcemia.
+    src: { page: 103, quote: "Cardiac effects of hyperkalemia are accentuated by hypocalcaemia." }
+    status: unverified
+  - id: hem.L06.111
+    kind: card
+    topic: massive
+    front: Why does hypomagnesemia occur in massive transfusion?
+    back: Citrate binds magnesium, and large volumes of magnesium-poor fluid are infused; it further accentuates hypocalcemia.
+    src: { page: 103, quote: "Hypomagnesemia: Citrate also binds to magnesium and can lead to hypomagnesaemia which can further accentuate effects of hypocalcaemia." }
+    status: unverified
+  - id: hem.L06.112
+    kind: card
+    topic: massive
+    front: Causes and effects of hypothermia in massive transfusion?
+    back: Cold fluids and blood, opened body cavities and low heat production; it slows citrate metabolism and drug clearance and causes coagulopathy below 34°C.
+    src: { page: 103, quote: "Slowing of enzyme activity and decreased platelet function individually have been shown to contribute to hypothermic coagulopathy at core temperatures below 34°C." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L06.113
+    kind: card
+    topic: massive
+    front: Why is hypothermic coagulopathy missed by lab tests?
+    back: Samples are warmed during processing.
+    src: { page: 103, quote: "Coagulopathy due to hypothermia is not reflected in laboratory tests as the samples are warmed during processing." }
+    status: unverified
+    tags: [high-yield]
+  - id: hem.L06.114
+    kind: mcq
+    topic: massive
+    stem: A trauma patient with a shocked liver receives 14 units of red cells in 2 hours. Despite fluids his BP stays at 75/40 and QTc is prolonged. Ionized calcium is low. Best treatment?
+    options:
+      - IV calcium chloride
+      - IV calcium gluconate, as it is always preferred
+      - More normal saline
+      - Sodium bicarbonate only
+      - Stop all blood products
+    answer: 0
+    why:
+      - "Correct: citrate hypocalcemia causes fluid-resistant hypotension; with liver dysfunction calcium chloride is preferred (p102–103)."
+      - "Gluconate needs liver function to release ionized calcium."
+      - "More saline worsens dilution and does not treat hypocalcemia."
+      - "Bicarbonate does not correct the calcium."
+      - "He is still bleeding and needs blood."
+    src: { page: 103, quote: "For individuals with abnormal liver function, саlϲium chloride may be preferable to саlcium gluconate" }
+    status: unverified
+  - id: hem.L06.115
+    kind: mcq
+    topic: massive
+    stem: During a massive transfusion the core temperature is 33°C, the patient oozes from every wound, but the lab PT and APTT are near normal. Why?
+    options:
+      - Samples are warmed during processing, hiding hypothermic coagulopathy
+      - There is no coagulopathy
+      - The lab made an error
+      - Hypothermia shortens clotting times
+      - Citrate corrects the PT
+    answer: 0
+    why:
+      - "Correct: hypothermic coagulopathy is not reflected in tests because samples are warmed (p103)."
+      - "He is clearly bleeding: slowed enzymes and poor platelet function below 34°C."
+      - "It is expected, not an error."
+      - "Hypothermia slows enzymes; it does not shorten clotting."
+      - "Citrate causes hypocalcemia; it does not correct the PT."
+    src: { page: 103, quote: "Coagulopathy due to hypothermia is not reflected in laboratory tests as the samples are warmed during processing." }
+    status: unverified
+  # ---------- cases ----------
+  - id: hem.L06.116
+    kind: case
+    topic: acute-reactions
+    stem: A 50-year-old woman group O is given a unit labelled for the patient in the next bed (group A). Fifteen minutes later she has fever, chills, flank pain and chest tightness.
+    steps:
+      - question: Which reaction is this?
+        options: [Acute hemolytic transfusion reaction, FNHTR, Mild allergic reaction, TACO]
+        answer: 0
+        why: "ABO mismatch: her IgM anti-A destroys the A cells (p95). FNHTR is a diagnosis of exclusion; allergic gives urticaria; TACO gives dyspnea with raised CVP."
+      - question: First action?
+        options: [Stop the transfusion, Slow it and give paracetamol, Give an antihistamine, Finish the unit then investigate]
+        answer: 0
+        why: "Stop, then support BP and renal flow and check identities (p96)."
+      - reveal: "BP 85/50. Urine is dark red."
+        question: Target urine output with fluids and diuresis?
+        options: ["Above 100 ml/hour", "Above 30 ml/hour", "Above 0.5 ml/kg/hour", "No target"]
+        answer: 0
+        why: "Keep urine output above 100 ml/hour (p96)."
+      - question: Which test confirms an immune AHTR?
+        options: ["Positive DAT and elution showing the alloantibody", "Normal haptoglobin", "Negative DAT", "High platelet count"]
+        answer: 0
+        why: "Positive DAT (anti-IgG and/or anti-C3) and positive elution confirm it (p96). Haptoglobin falls in hemolysis."
+    src: { page: 95, quote: "Acute hemolytic transfusion reaction (AHTR) = ABO incompatibility = Mismatched blood transfusion" }
+    status: unverified
+  - id: hem.L06.117
+    kind: case
+    topic: components
+    stem: A 34-year-old man is 2 weeks away from an allogeneic stem cell transplant for AML. He needs red cells and platelets.
+    steps:
+      - question: Which modification must his products have?
+        options: [Irradiation, Washing only, None, CMV-positive units]
+        answer: 0
+        why: "Stem cell transplant patients need irradiated products from at least 30 days before and indefinitely after (p90), to prevent TA-GVHD."
+      - question: Why are his products also leukoreduced?
+        options: ["To prevent FNHTR, CMV/HTLV transmission and HLA alloimmunization", "To remove potassium", "To add clotting factors", "To raise the platelet count"]
+        answer: 0
+        why: "LR removes 99.9% of WBCs, cutting FNHTR, CMV, HTLV, EBV and TRALI risk (p89), and non-leukoreduced platelets drive immune refractoriness (p90)."
+      - reveal: "After transplant his platelet increments become poor. He has fever and splenomegaly."
+        question: Which type of refractoriness is most likely?
+        options: [Non-immune, Immune HLA alloimmunization, Post-transfusion purpura, Hemosiderosis]
+        answer: 0
+        why: "Fever, infection and splenomegaly are non-immune causes (p90). Immune refractoriness follows repeated non-LR transfusions or multiparity."
+    src: { page: 90, quote: "Stem cell transplant patients Must give at least 30 days before, and indefinitely after" }
+    status: unverified
+  - id: hem.L06.118
+    kind: case
+    topic: massive
+    stem: A 30-year-old man after a road accident has received 22 units of red cells in 6 hours, with crystalloids. He is cold and still bleeding.
+    steps:
+      - question: Is this a massive transfusion?
+        options: ["Yes: over 20 units of PRBCs in 24 hours", "No: it needs 50 units", "No: it needs whole blood", "Only if over 48 hours"]
+        answer: 0
+        why: "Blood volume replaced in 24 hours: about 10 units of whole blood or 20 units of PRBCs (p101)."
+      - reveal: "BP stays low despite fluids; ECG shows prolonged QT."
+        question: Which complication explains this?
+        options: [Citrate-induced hypocalcemia, Hypokalemia, Hypernatremia, Hemosiderosis]
+        answer: 0
+        why: "Hypotension not responding to fluids should alert to citrate hypocalcemia; myocardial depression comes first (p102)."
+      - reveal: "Core temperature 33.5°C. The lab coagulation profile looks only mildly abnormal."
+        question: Why might the lab underestimate his coagulopathy?
+        options: ["Samples are warmed during processing", "Citrate corrects the tests", "Hypothermia speeds enzymes", "Platelets work better in the cold"]
+        answer: 0
+        why: "Hypothermic coagulopathy below 34°C is not reflected because the samples are warmed (p103). Warm the fluids."
+    src: { page: 101, quote: "The administration of blood components over a 24-hour period in amounts that equal or exceed the total blood volume of the patient" }
+    status: unverified
+  # ---------- summary essays ----------
+  - id: hem.L06.119
+    kind: essay
+    topic: acute-reactions
+    prompt: Classify the adverse effects of blood transfusion and describe the acute hemolytic transfusion reaction.
+    outline:
+      - "Classification": ["Acute immune: FNHTR, allergic, AHTR", "Delayed immune: DHTR, PTP", "Acute non-immune: bacterial contamination, hypocalcemia, TACO", "Delayed non-immune: infections, hemosiderosis"]
+      - "AHTR mechanism and features": ["ABO mismatch; recipient IgM anti-A/anti-B destroy donor cells", "Fever, chills, flank pain, dyspnea, chest pain; severe: hypotension, renal failure, shock"]
+      - "Management": ["Stop; fluids, pressors, diuresis >100 ml/h", "Check identities; repeat type, cross-match, DAT, Hct, LDH, bilirubin"]
+      - "Diagnosis": ["≥2 hemolysis findings (low haptoglobin, high LDH, bilirubin, hemoglobinemia/uria, spherocytes)", "Positive DAT and elution; non-immune if serology negative with a physical cause"]
+    src: { page: 94, quote: "Immunologic -FNHTR DHTR -Allergic PTP -AHTR" }
+    status: unverified
+  - id: hem.L06.120
+    kind: essay
+    topic: massive
+    prompt: Outline the complications of massive blood transfusion.
+    outline:
+      - "Definition": ["≥ total blood volume in 24 hours: 10 units whole blood or 20 units PRBCs"]
+      - "Dilutional": ["Dilution and consumption of platelets and factors", "Low oncotic pressure, interstitial edema"]
+      - "Citrate": ["Hypocalcemia: myocardial depression, fluid-resistant hypotension; monitor ionized Ca and QTc; calcium chloride in liver disease", "Hypomagnesemia, worse acidosis"]
+      - "Potassium": ["Hyperkalemia (7–77 mEq/L in stored cells; rates >100–150 ml/min)"]
+      - "Hypothermia": ["Coagulopathy below 34°C, slower citrate and drug clearance; not seen in lab tests"]
+    src: { page: 101, quote: "The administration of blood components over a 24-hour period in amounts that equal or exceed the total blood volume of the patient" }
+    status: unverified
+  - id: hem.L06.121
+    kind: essay
+    topic: components
+    prompt: Give an account of blood components and their indications.
+    outline:
+      - "Whole blood": ["Acute hypovolemia with red cell loss; no functional platelets or granulocytes"]
+      - "Packed RBCs": ["Symptomatic anemia; 1 unit raises Hb ~1 g/dl", "Modifications: leukoreduced, irradiated, washed, CMV-negative"]
+      - "Platelets": ["Bleeding with thrombocytopenia, qualitative defects", "Refractoriness: HLA- or cross-match compatible"]
+      - "Granulocytes": ["ANC <0.5 with documented infection; CGD"]
+      - "FFP and cryoprecipitate": ["FFP: multiple factor deficiency, DIC, liver disease, TTP exchange, warfarin reversal; not for volume", "Cryo: fibrinogen, dysfibrinogenemia, XIII, DIC, urgent hemophilia A/vWD"]
+    src: { page: 91, quote: "Correction of multiple clotting factor deficiencies in bleeding patients or prior to invasive procedures. DIC, liver disease, massive transfusions." }
+    status: unverified

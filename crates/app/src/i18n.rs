@@ -505,6 +505,39 @@ pub mod stats {
     pub const MISTAKE_HINT: &str = "جرّب السؤال ده تاني";
     pub const MISTAKES_TOPIC_HINT: &str = "جرّب أخطاء الموضوع ده";
     pub const DEMO: &str = "أرقام تجريبية للعرض بس، مش مذاكرتك.";
+
+    // The 2026-10-29 redesign: a period switch with retention, activity and a next step.
+    pub const HEAD: &str = "تقدّم له معنى";
+    pub const HEAD_SUB: &str = "شوف اللي اتحسن، واعرف خطوتك الجاية.";
+    pub const PERIOD_LABEL: &str = "الفترة";
+    pub const WEEK: &str = "الأسبوع ده";
+    pub const MONTH: &str = "الشهر ده";
+    pub const RECALL: &str = "تذكّر المعلومات";
+    pub const RECALL_SUB: &str = "من الأسئلة اللي رجعتلك بعد يوم أو أكتر.";
+    pub const RECALL_NONE: &str = "لسه مفيش أسئلة رجعتلك تاني في الفترة دي.";
+    pub const RECALL_HINT: &str = "شوف اللي غلطت فيه";
+    pub fn better(week: bool, pts: u32) -> String {
+        format!("أحسن من {} بـ {pts}%", if week { "الأسبوع اللي فات" } else { "الشهر اللي فات" })
+    }
+    pub fn worse(week: bool, pts: u32) -> String {
+        format!("أقل من {} بـ {pts}%، عادي يحصل", if week { "الأسبوع اللي فات" } else { "الشهر اللي فات" })
+    }
+    pub fn same(week: bool) -> String {
+        format!("زي {} تقريبًا", if week { "الأسبوع اللي فات" } else { "الشهر اللي فات" })
+    }
+    pub const ACTIVITY: &str = "جلساتك على مدار الفترة";
+    pub const ACTIVITY_UNIT: &str = "دقيقة / يوم";
+    pub const ACTIVITY_HINT: &str = "افتح خطة الامتحان والأيام الجاية";
+    pub const ACTIVITY_EMPTY: &str = "مفيش مذاكرة متسجّلة في الفترة دي لسه.";
+    pub const DAYS_STUDIED: &str = "أيام ذاكرت فيهم";
+    pub const MINUTES: &str = "دقيقة تركيز";
+    pub const ANSWERS: &str = "سؤال وكارت جاوبتهم";
+    pub const MONTH_START: &str = "من 30 يوم";
+    pub const TODAY: &str = "النهارده";
+    pub fn day_bar(minutes: u32, answers: u32) -> String {
+        format!("{minutes} دقيقة، {answers} إجابة")
+    }
+    pub const NEXT_STEP: &str = "خطوة تفيدك دلوقتي";
 }
 
 pub mod plan {
@@ -1311,23 +1344,13 @@ pub mod remind {
 
 pub mod onboard {
     pub const TITLE: &str = "أهلاً في باطنة";
-    pub const STEP: &str = "خطوة";
-    pub const OF: &str = "من";
-    pub const NEXT: &str = "التالي";
     pub const BACK: &str = "رجوع";
-    pub const DONE: &str = "يلا نبدأ";
-    pub const SKIP_ALL: &str = "بعدين";
-    pub const EXAM_TITLE: &str = "امتحانك إمتى؟";
-    pub const EXAM_BODY: &str =
-        "عشان أوزّع المحاضرات والمراجعة على الأيام اللي فاضلة بهدوء. لو لسه مش متأكد، سيبها فاضية.";
-    pub const EXAM_DAY: &str = "يوم الامتحان";
     pub const PICK_FUTURE: &str = "اختار يوم بعد النهارده.";
     pub const PICK_FAR: &str = "اختار يوم في خلال 3 سنين من النهارده.";
     pub const DAYS_TITLE: &str = "بتذاكر أنهي أيام في الأسبوع؟";
     pub const DAYS_BODY: &str = "الخطة والتذكير هيمشوا على الأيام دي بس. أيام الراحة راحة.";
     pub const PICK_A_DAY: &str = "اختار يوم واحد على الأقل.";
     pub const MINUTES_TITLE: &str = "قد إيه في اليوم؟";
-    pub const MINUTES_BODY: &str = "طول الجلسة العادي. تقدر تغيّره قبل أي جلسة.";
     pub const STUDIED_TITLE: &str = "ذاكرت أنهي محاضرات قبل كده؟";
     pub const STUDIED_BODY: &str = "علّم اللي قريته قبل كده. لو مفيش، كمّل عادي.";
     pub const ALL: &str = "كلهم";
@@ -1343,6 +1366,48 @@ pub mod onboard {
     pub const REOPEN_TITLE: &str = "أسئلة البداية";
     pub const REOPEN_BODY: &str = "يوم الامتحان، أيام المذاكرة، طول الجلسة، التذكير والألوان، في مكان واحد.";
     pub const REOPEN: &str = "افتحها تاني";
+
+    // The 2026-10-29 redesign: three quick screens, details optional.
+    pub fn progress(n: usize, of: usize) -> String {
+        format!("البداية · {n} من {of}")
+    }
+    pub const LATER: &str = "بعد كده";
+    pub const CONTINUE: &str = "كمّل";
+    pub const WELCOME_TITLE: &str = "مذاكرة تناسب يومك.";
+    pub const WELCOME_BODY: &str = "درس قصير، محاولة تفتكر، ومراجعة تثبّت الفهم.";
+    pub const WELCOME_NOTE: &str =
+        "الفهم والتذكّر وتدريب الأسئلة، كل واحد له مكانه. والكتاب هو المرجع في الامتحان.";
+    pub const TIME_TITLE: &str = "خلّي البداية على قد وقتك.";
+    pub const TIME_BODY: &str = "كل جلسة صغيرة وتخلص. تقدر تغيّر ده بعدين.";
+    pub const EXAM_OPTIONAL: &str = "يوم الامتحان (لو تعرفه)";
+    pub const EXAM_HINT: &str = "بيوزّع المحاضرات والمراجعة على الأيام اللي فاضلة.";
+    pub const READY_TITLE: &str = "كده جاهز تبدأ.";
+    pub const READY_BODY: &str = "اختياراتك تتعدّل في أي وقت. ودي حاجات اختيارية لو حابب تظبطها دلوقتي:";
+    pub const START_LESSON: &str = "ابدأ أول درس";
+    pub const START_TODAY: &str = "افتح النهارده";
+    pub const DETAIL_DONE: &str = "تمام";
+    pub const DAYS_ROW: &str = "أيام المذاكرة";
+    pub fn days_sub(n: usize) -> String {
+        match n {
+            7 => "كل أيام الأسبوع".to_string(),
+            1 => "يوم واحد في الأسبوع".to_string(),
+            2 => "يومين في الأسبوع".to_string(),
+            n => format!("{n} أيام في الأسبوع"),
+        }
+    }
+    pub const STUDIED_ROW: &str = "اللي ذاكرته قبل كده";
+    pub fn studied_sub(n: usize) -> String {
+        match n {
+            0 => "ولا محاضرة لسه".to_string(),
+            1 => "محاضرة واحدة".to_string(),
+            2 => "محاضرتين".to_string(),
+            3..=10 => format!("{n} محاضرات"),
+            n => format!("{n} محاضرة"),
+        }
+    }
+    pub const REMIND_ROW: &str = "التذكير";
+    pub const REMIND_OFF: &str = "من غير تذكير";
+    pub const THEME_ROW: &str = "الألوان";
 }
 
 pub mod recap {

@@ -209,7 +209,7 @@
 :is(.field, .search) :is(input, textarea, select):focus-visible { outline: 2px solid var(--accent); outline-offset: 0; border-color: var(--accent); }
 .field[data-invalid="true"] :is(input, textarea, select) { border-color: var(--bad); }
 .search { position: relative; display: flex; align-items: center; }
-.search input { padding-inline-start: 2.5rem; border-radius: var(--radius-pill); background: var(--surface-2); border-color: transparent; }
+.search :is(input:not([type="checkbox"]):not([type="radio"])) { padding-inline-start: 2.5rem; border-radius: var(--radius-pill); background: var(--surface-2); border-color: transparent; }
 .search > svg { position: absolute; inset-inline-start: var(--sp-3); inline-size: 1.25rem; block-size: 1.25rem; color: var(--muted); pointer-events: none; }
 
 /* ---------- switch ----------

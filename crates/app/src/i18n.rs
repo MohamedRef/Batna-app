@@ -216,6 +216,7 @@ pub mod today {
     }
     pub const MINUTES_ALL: &str = "دقايق للكل تقريبًا";
     pub const MINUTES_HINT: &str = "شوف الحمل في الأيام الجاية";
+    pub const OPEN_NEXT_LESSON: &str = "افتح الدرس الجاي";
     pub const CONTINUE_HEAD: &str = "كمّل من مكانك";
     pub const ALL_LESSONS: &str = "كل الدروس";
     pub const MORE_HEAD: &str = "حاجات تانية تفيدك";

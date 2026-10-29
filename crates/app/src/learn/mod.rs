@@ -249,9 +249,9 @@ fn LessonList() -> Element {
     let query = QUERY();
     let q = query.trim().to_lowercase();
     rsx! {
-        header { class: "pg-head",
+        header { class: "page-head",
             h1 { {tx::HEAD} }
-            p { class: "muted small",
+            p { class: "page-sub",
                 {tx::HEAD_SUB}
                 if total > 0 { " · " span { class: "ls-nowrap", {tx::done_of(done, total)} } }
             }
@@ -259,7 +259,7 @@ fn LessonList() -> Element {
         if total == 0 {
             p { class: "note", {tx::NONE_YET} }
         } else {
-            label { class: "ls-search",
+            label { class: "search ls-search",
                 {crate::icons::search()}
                 input {
                     r#type: "search",
@@ -287,7 +287,7 @@ fn LessonList() -> Element {
             if done == total && total > 0 {
                 p { class: "ls-verdict good", {tx::ALL_LESSONS_DONE} }
             }
-            h2 { class: "ls-sec", {tx::OTHER_LECTURES} }
+            div { class: "section-head", h2 { {tx::OTHER_LECTURES} } }
             div { class: "ls-others",
                 for entry in lib.index.lectures.iter().filter(|e| e.id != shown) {
                     {
@@ -346,12 +346,12 @@ fn Meter(done: usize, total: usize) -> Element {
     let pct = (done * 100).checked_div(total).unwrap_or(0);
     rsx! {
         span {
-            class: "ls-meter",
+            class: "progress ls-meter",
             role: "progressbar",
             aria_valuemin: "0",
             aria_valuemax: "{total}",
             aria_valuenow: "{done}",
-            span { style: "inline-size: {pct}%" }
+            span { class: "progress-fill", style: "inline-size: {pct}%" }
         }
     }
 }
@@ -380,7 +380,7 @@ fn Shown(id: String, next_id: Option<String>) -> Element {
         // The whole header opens the lecture's next lesson (its button's
         // click bubbles up); the lecture page has its own link.
         section {
-            class: if go_id.is_some() { "ls-lec card-action" } else { "ls-lec" },
+            class: if go_id.is_some() { "card card-flat card-action ls-lec" } else { "card card-flat ls-lec" },
             onclick: move |_| if let Some(g) = &go_id { open(ui, g) },
             div { class: "ls-lec-meta",
                 span { {tx::lecture_n(&code)} }
@@ -495,7 +495,7 @@ fn LessonRow(n: usize, lesson: Lesson, next: Option<String>) -> Element {
                     match st {
                         State::Done(m) => rsx! {
                             span { class: "ls-state", {tx::STATE_DONE} }
-                            bdi { dir: "ltr", "{m.right}/{m.asked}" }
+                            bdi { class: "num-ltr", "{m.right}/{m.asked}" }
                         },
                         State::Current { at } => rsx! {
                             span { class: "ls-state", {tx::STATE_CURRENT} }
@@ -571,7 +571,7 @@ pub fn TodayLesson(prefer: Vec<String>) -> Element {
         button { class: "card tap ls-now",
             onclick: { let id = l.id.clone(); move |_| open(ui, &id) },
             span { class: "ls-now-top",
-                span { class: "pill", {if at.is_some() { tx::NOW_KICKER } else { tx::NEXT_KICKER }} }
+                span { class: "chip", "data-tone": "accent", {if at.is_some() { tx::NOW_KICKER } else { tx::NEXT_KICKER }} }
                 span { class: "muted small ls-now-where",
                     match at {
                         Some(at) => rsx! { {tx::step_of(at + 1, steps)} },

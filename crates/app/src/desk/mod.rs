@@ -48,7 +48,6 @@ pub fn Chrome() -> Element {
     rsx! {
         style { {NAV_CSS.text()} }
         style { {DESK_CSS.text()} }
-        crate::shortcuts::KeysSheet {}
     }
 }
 

@@ -88,22 +88,10 @@ button.tap-chip[data-peek] { text-decoration: none; }
 @media (hover: none) { .q-option[data-peek] { text-decoration: none; } }
 
 /* ---------- keyboard shortcut sheet ---------- */
-.keys-scrim {
-  position: fixed;
-  inset: 0;
-  z-index: 40;
-  background: rgb(0 0 0 / 0.35);
-  display: grid;
-  place-items: center;
-  padding: var(--sp-4);
-}
-.keys-sheet {
-  inline-size: min(32rem, 100%);
-  max-block-size: calc(100dvh - 2rem);
-  overflow-y: auto;
-  box-shadow: 0 12px 40px rgb(0 0 0 / 0.25);
-}
-.keys-head { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); }
+/* The shared .sheet (parts.css); it opens over Settings (40/41), so it
+   sits one layer higher. */
+.keys-backdrop { z-index: 44; }
+.keys-sheet { z-index: 45; }
 .keys-table { border-collapse: collapse; inline-size: 100%; }
 .keys-table td { padding-block: var(--sp-2); border-block-end: 1px solid var(--line); vertical-align: middle; }
 .keys-cell { text-align: end; white-space: nowrap; }

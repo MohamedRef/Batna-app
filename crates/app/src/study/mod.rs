@@ -92,6 +92,23 @@ fn ready_lectures() -> Vec<&'static Lecture> {
         .collect()
 }
 
+/// A lecture the setup offers: one of the course in view, or his own deck.
+fn in_view(lecture: &str) -> bool {
+    lecture == batna_core::own::LECTURE || crate::courses::focus::shows(lecture)
+}
+
+/// Cards due now in the courses out of view (none with every course in view).
+fn due_elsewhere(store: &StudyStoreHandle) -> usize {
+    if crate::courses::focus::current().is_none() {
+        return 0;
+    }
+    let s = store.0.borrow();
+    s.due(now_ms())
+        .iter()
+        .filter(|id| !in_view(batna_core::program::lecture_of(id)) && !s.is_hidden(id))
+        .count()
+}
+
 fn plan(
     store: &StudyStoreHandle,
     lectures: &[&Lecture],
@@ -156,8 +173,25 @@ pub fn Study() -> Element {
     let store = use_store();
     // His own cards' deck changes with the review store (a save, an import, a sync).
     let _ = crate::store::use_review().revision.read();
-    let ready = ready_lectures();
-    let chosen = use_signal(|| ready.iter().map(|l| l.lecture.clone()).collect::<BTreeSet<String>>());
+    // The course in view (`courses::focus`), and his own cards' deck.
+    let focus = crate::courses::focus::current();
+    let ready: Vec<&Lecture> = ready_lectures().into_iter().filter(|l| in_view(&l.lecture)).collect();
+    let mut chosen = use_signal(|| ready.iter().map(|l| l.lecture.clone()).collect::<BTreeSet<String>>());
+    // A new course in view starts with all its lectures picked.
+    let mut chosen_for = use_signal(|| focus.clone());
+    use_effect(move || {
+        let now = crate::courses::focus::current();
+        if *chosen_for.peek() != now {
+            chosen_for.set(now);
+            chosen.set(
+                ready_lectures()
+                    .into_iter()
+                    .filter(|l| in_view(&l.lecture))
+                    .map(|l| l.lecture.clone())
+                    .collect(),
+            );
+        }
+    });
     let topics = use_signal(HashSet::<String>::new);
     let mut minutes = use_signal(crate::onboarding::session_minutes);
     // Global, so a session survives switching tabs (like Bank and Oral).
@@ -295,6 +329,7 @@ pub fn Study() -> Element {
                     preview_count: preview.len(),
                     preview_new: preview.iter().filter(|p| p.fresh).count(),
                     preview_mins: preview.iter().map(|p| p.est_secs).sum::<u32>().div_ceil(60),
+                    elsewhere: due_elsewhere(&store),
                     on_start: move |_| begin(picked.clone(), topics.read().clone(), minutes()),
                 }
                 crate::own::OwnCardsCard {
@@ -472,6 +507,7 @@ fn Setup(
     preview_count: usize,
     preview_new: usize,
     preview_mins: u32,
+    elsewhere: usize,
     on_start: EventHandler<()>,
 ) -> Element {
     // Topic chips only when one lecture is picked: across lectures they'd be a wall.
@@ -488,6 +524,7 @@ fn Setup(
             // beside the lecture and topic picker.
             div { class: "tab-cols", "data-wide": "aside",
                 div { class: "tab-main tab-sticky st-setup-go",
+                    crate::courses::CourseChip {}
                     h1 { {tx::TITLE} }
                     p { class: "muted", {tx::SETUP_INTRO} }
 
@@ -504,6 +541,13 @@ fn Setup(
                         }
                     }
 
+                    if elsewhere > 0 {
+                        p { class: "note small st-elsewhere",
+                            {tx::due_elsewhere(elsewhere)}
+                            " "
+                            button { class: "btn-link", onclick: move |_| crate::courses::focus::set(None), {tx::ELSEWHERE_ALL} }
+                        }
+                    }
                     if preview_count == 0 {
                         p { class: "note", {tx::NOTHING_NOW} }
                     } else {

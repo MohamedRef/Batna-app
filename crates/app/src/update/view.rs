@@ -8,7 +8,7 @@ use batna_core::update::Channel;
 use dioxus::prelude::*;
 
 use super::sheet::{SheetMode, UpdateSheetNav};
-use super::{Failure, Mode, Off, Offer, Phase, Status, Updater};
+use super::{ContentCheck, Failure, Mode, Off, Offer, Phase, Status, Updater};
 use crate::i18n::update as tx;
 use crate::settings::{DeviceOnly, Section, SettingsNav};
 use crate::{Screen, Ui};
@@ -28,6 +28,15 @@ pub(super) const UPDATE_CSS: &str = r#"
 .content-note p { flex: 1 1 14rem; min-inline-size: 0; margin: 0;
   display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
 .content-note .btn, .content-note .icon-button { flex: none; }
+.ur-card { padding: var(--sp-1) 0; gap: 0; }
+.ur-row { display: flex; align-items: center; gap: var(--sp-3); inline-size: 100%; min-block-size: var(--tap-lg);
+  padding: var(--sp-2) var(--sp-3); background: none; border: 0; color: inherit; text-align: start; font: inherit; cursor: pointer; }
+.ur-row + .ur-row { border-block-start: 1px solid var(--line); }
+.ur-row:disabled { cursor: default; }
+.ur-row:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.ur-text { flex: 1; min-inline-size: 0; display: grid; gap: 2px; }
+.ur-title { font-weight: 600; }
+.ur-sub { color: var(--muted); font-size: var(--fs-sm); overflow-wrap: anywhere; }
 .update-toggle { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); }
 .update-toggle-text { display: grid; gap: var(--sp-1); }
 "#;
@@ -137,30 +146,84 @@ pub fn UpdatesSection() -> Element {
     });
     let sheet = try_use_context::<UpdateSheetNav>();
 
+    // The content row opens what the content update brought while it is
+    // new to him, else the whole changelog.
+    let content_news = s.as_ref().is_some_and(Status::content_news);
+    let open_changes = move |mode: SheetMode| {
+        move |_| {
+            if let Some(sheet) = sheet {
+                sheet.open(mode);
+            }
+        }
+    };
+    let content_mode = if content_news { SheetMode::Updated } else { SheetMode::History };
+    let content_sub = match s.as_ref().and_then(Status::content_ahead) {
+        Some(c) => {
+            let when = s.as_ref().and_then(|s| s.content_at).map(|at| {
+                let now = super::now_ms();
+                format!(" · {} {}", tx::CONTENT_PUBLISHED, crate::cloud::ago((at.max(0) as u64) * 1000, now))
+            });
+            rsx! {
+                {tx::BUILD} " "
+                bdi { dir: "ltr", "{c}" }
+                {when.unwrap_or_default()}
+            }
+        }
+        None => rsx! { {tx::CONTENT_BUILT_IN} },
+    };
+    let last_check = s.as_ref().and_then(|s| s.prefs.last_check_ms);
+    let feed_down = s.as_ref().is_some_and(|s| {
+        matches!(s.phase, Phase::Failed { why: Failure::Network, offer: None })
+            && s.content_check == Some(ContentCheck::Failed)
+            && !s.content_waiting
+    });
+
     rsx! {
         style { {UPDATE_CSS} }
-        section { class: "card", aria_labelledby: "updates-title",
-            h2 { id: "updates-title", {tx::TITLE} }
-            p {
-                span { class: "muted", {tx::THIS_BUILD} ": " }
-                // Each Latin piece isolated on its own, so the Arabic word
-                // "build" doesn't reorder the numbers around it.
-                bdi { dir: "ltr", {env!("CARGO_PKG_VERSION")} }
-                if build > 0 {
-                    " · {tx::BUILD} "
-                    bdi { dir: "ltr", "{build}" }
+        // What is on this device: the app, and the lessons/questions/look
+        // apart from it, since a content-only update changes only the second.
+        div { class: "section-head", h2 { id: "updates-title", {tx::GROUP_HAVE} } }
+        section { class: "card ur-card", aria_labelledby: "updates-title",
+            button {
+                class: "ur-row",
+                disabled: sheet.is_none(),
+                onclick: open_changes(SheetMode::History),
+                span { class: "row-icon", aria_hidden: "true", {crate::icons::section("updates")} }
+                span { class: "ur-text",
+                    span { class: "ur-title", {tx::ROW_APP} }
+                    span { class: "ur-sub",
+                        // Each Latin piece isolated on its own, so the Arabic
+                        // word "build" doesn't reorder the numbers around it.
+                        bdi { dir: "ltr", {env!("CARGO_PKG_VERSION")} }
+                        if build > 0 {
+                            " · {tx::BUILD} "
+                            bdi { dir: "ltr", "{build}" }
+                        }
+                        if let Some(c) = commit {
+                            " · "
+                            bdi { dir: "ltr", "{c}" }
+                        }
+                    }
                 }
-                // A content-only update on top: the lectures are newer than
-                // the app (#336).
-                if let Some(c) = s.as_ref().and_then(Status::content_ahead) {
-                    " · {tx::CONTENT_FROM} "
-                    bdi { dir: "ltr", "{c}" }
-                }
-                if let Some(c) = commit {
-                    " · "
-                    bdi { dir: "ltr", "{c}" }
-                }
+                span { class: "chev", aria_hidden: "true" }
             }
+            button {
+                class: "ur-row",
+                disabled: sheet.is_none(),
+                onclick: open_changes(content_mode),
+                span { class: "row-icon", aria_hidden: "true", {crate::icons::book()} }
+                span { class: "ur-text",
+                    span { class: "ur-title", {tx::ROW_CONTENT} }
+                    span { class: "ur-sub", {content_sub} }
+                }
+                if content_news {
+                    span { class: "chip", "data-tone": "good", {tx::BADGE_NEW} }
+                }
+                span { class: "chev", aria_hidden: "true" }
+            }
+        }
+        div { class: "section-head", h2 { {tx::GROUP_CHECK} } }
+        section { class: "card",
             if let Some(off) = off {
                 p { class: "muted small", role: "status",
                     {match off {
@@ -171,13 +234,23 @@ pub fn UpdatesSection() -> Element {
                     }}
                 }
             } else if let Some(s) = s.clone() {
-                PhaseView { phase: s.phase.clone(), auto: s.prefs.mode == Mode::Auto }
-                if s.content_waiting {
-                    p { class: "note", role: "status", {tx::CONTENT_WAITING} }
+                p { class: "muted small", {tx::CHECK_BOTH_SUB} }
+                // The feed itself out of reach is one line, not two.
+                if feed_down {
+                    PhaseView { phase: s.phase.clone(), auto: s.prefs.mode == Mode::Auto, label: false }
+                } else {
+                    PhaseView { phase: s.phase.clone(), auto: s.prefs.mode == Mode::Auto, label: true }
+                    ContentResult { status: s.clone() }
+                }
+                p { class: "muted small ur-last",
+                    match last_check {
+                        Some(t) => rsx! { {tx::LAST_CHECK} " " {crate::cloud::ago(t, super::now_ms())} },
+                        None => rsx! { {tx::NEVER_CHECKED} },
+                    }
                 }
                 div { class: "row",
                     button {
-                        class: "btn btn-secondary",
+                        class: "btn btn-primary",
                         disabled: busy,
                         onclick: move |_| work(|u| u.check(false)),
                         {tx::CHECK_NOW}
@@ -264,8 +337,29 @@ pub fn UpdatesSection() -> Element {
     }
 }
 
+/// What the last check found for the lessons and questions. A waiting
+/// pack says so whatever came after; nothing shows before the first check.
 #[component]
-fn PhaseView(phase: Phase, auto: bool) -> Element {
+fn ContentResult(status: Status) -> Element {
+    let (mark, line) = match (status.content_waiting, status.content_check) {
+        (true, _) | (_, Some(ContentCheck::New)) => ("", tx::CONTENT_NEW),
+        (false, Some(ContentCheck::Current)) => ("✓ ", tx::CONTENT_CURRENT),
+        (false, Some(ContentCheck::Failed)) => ("", tx::CONTENT_FAILED),
+        (false, None) => return rsx! {},
+    };
+    // The same box as the app's half above, so the two read as a pair.
+    rsx! {
+        div { class: "update-state", role: "status", aria_live: "polite",
+            p {
+                strong { {tx::RESULT_CONTENT} ": " }
+                strong { "{mark}" {line} }
+            }
+        }
+    }
+}
+
+#[component]
+fn PhaseView(phase: Phase, auto: bool, label: bool) -> Element {
     let action = primary_action(&phase);
     let offer: Option<Offer> = match &phase {
         Phase::Available(o)
@@ -309,6 +403,10 @@ fn PhaseView(phase: Phase, auto: bool) -> Element {
     rsx! {
         div { class: "update-state", role: "status", aria_live: "polite",
             p {
+                // The content's half shows right under it.
+                if label {
+                    strong { {tx::RESULT_APP} ": " }
+                }
                 strong {
                     if matches!(phase, Phase::UpToDate) { "✓ " }
                     {headline}

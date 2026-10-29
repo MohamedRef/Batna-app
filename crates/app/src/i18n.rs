@@ -1174,11 +1174,7 @@ pub mod update {
     // Settings › Updates (crates/app/src/update/view.rs).
     pub const SECTION: &str = "التحديثات";
     pub const SECTION_SUB: &str = "نسخة جديدة ومحتوى جديد";
-    pub const TITLE: &str = "التحديثات";
-    pub const THIS_BUILD: &str = "النسخة اللي معاك";
     pub const BUILD: &str = "بناء";
-    /// After the build: the content-only update he is on (#336).
-    pub const CONTENT_FROM: &str = "المحتوى من";
     /// "بناء 40 · محتوى 45" in the "what's new" sheet.
     pub const CONTENT_SHORT: &str = "محتوى";
 
@@ -1191,7 +1187,7 @@ pub mod update {
 
     // Where things stand.
     pub const CHECKING: &str = "بيدوّر على تحديث…";
-    pub const CHECK_NOW: &str = "دوّر دلوقتي";
+    pub const CHECK_NOW: &str = "دوّر على تحديث";
     pub const UP_TO_DATE: &str = "معاك آخر نسخة";
     pub const NOT_FOR_DEVICE: &str = "فيه نسخة أحدث، بس لسه مش منشورة للجهاز ده.";
     pub const AVAILABLE: &str = "فيه نسخة جديدة";
@@ -1224,7 +1220,25 @@ pub mod update {
     pub const WAITING_WIFI: &str = "هينزّلها لوحده أول ما تبقى على واي فاي.";
     pub const LATER: &str = "بعدين";
     pub const WHATS_NEW: &str = "الجديد";
-    pub const CONTENT_WAITING: &str = "محتوى جديد نزل، وهيظهر لوحده أول ما تخلّص اللي بتذاكره.";
+
+    // Settings › Updates: what is on this device, and one check for both.
+    pub const GROUP_HAVE: &str = "اللي على جهازك";
+    pub const ROW_APP: &str = "التطبيق";
+    pub const ROW_CONTENT: &str = "الدروس والأسئلة والشكل";
+    /// The content row when no content-only update is in use.
+    pub const CONTENT_BUILT_IN: &str = "اللي جه مع التطبيق";
+    /// Before "من يومين": when the content in use was published.
+    pub const CONTENT_PUBLISHED: &str = "اتنشر";
+    pub const GROUP_CHECK: &str = "البحث عن تحديث";
+    pub const CHECK_BOTH_SUB: &str = "بيدوّر على نسخة جديدة من التطبيق، وعلى دروس وأسئلة جديدة، مرة واحدة.";
+    pub const LAST_CHECK: &str = "آخر مرة دوّرنا";
+    pub const NEVER_CHECKED: &str = "لسه ما دوّرناش على الجهاز ده";
+    /// The two halves of a check's result.
+    pub const RESULT_APP: &str = "التطبيق";
+    pub const RESULT_CONTENT: &str = "الدروس والأسئلة";
+    pub const CONTENT_CURRENT: &str = "معاك آخر محتوى";
+    pub const CONTENT_NEW: &str = "فيه محتوى جديد نزل، وهيفتح لوحده أول ما تخلّص اللي بتذاكره";
+    pub const CONTENT_FAILED: &str = "مقدرش يجيب المحتوى الجديد دلوقتي، هيجرّب تاني بعدين";
 
     // Mode and channel.
     pub const MODE: &str = "إزاي يتحدّث";
@@ -1233,7 +1247,7 @@ pub mod update {
     pub const MODE_NOTIFY: &str = "قولّي الأول";
     pub const MODE_NOTIFY_SUB: &str = "يقولك إن فيه نسخة جديدة، وإنت تختار امتى.";
     pub const MODE_OFF: &str = "لأ";
-    pub const MODE_OFF_SUB: &str = "بس لما تدوس \"دوّر دلوقتي\".";
+    pub const MODE_OFF_SUB: &str = "بس لما تدوس \"دوّر على تحديث\".";
     pub const CHANNEL: &str = "القناة";
     pub const CHANNEL_SUB: &str = "ألفا بتوصل الأول، والثابتة بتوصل آخر حاجة.";
     pub const ALPHA: &str = "ألفا";

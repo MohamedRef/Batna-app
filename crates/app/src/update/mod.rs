@@ -364,6 +364,17 @@ pub enum Phase {
     },
 }
 
+/// The content half of a check.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum ContentCheck {
+    /// The pack in use (or the built-in one) is the feed's.
+    Current,
+    /// A newer pack was fetched; it opens between sessions.
+    New,
+    /// The feed or the pack couldn't be fetched or taken; tried again later.
+    Failed,
+}
+
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct Status {
     pub off: Option<Off>,
@@ -382,6 +393,11 @@ pub struct Status {
     /// The feed build whose content pack is in use, when newer than this
     /// build (a content-only update), else 0.
     pub content_build: u64,
+    /// When that pack's feed was published (seconds), for Settings.
+    pub content_at: Option<i64>,
+    /// What the last check found for the lessons and questions, apart from
+    /// the app's own `phase` (Settings shows both).
+    pub content_check: Option<ContentCheck>,
     /// Every build's changes seen so far, newest first (changelog.rs).
     pub history: Vec<BuildChanges>,
 }
@@ -446,6 +462,12 @@ impl Status {
     }
 
     /// Whether "What's new" has anything waiting to be seen.
+    /// A content-only update came that he hasn't looked at yet: Settings
+    /// marks the content row "new" until "What's new" is closed.
+    pub fn content_news(&self) -> bool {
+        self.whats_new().iter().any(|b| b.content_only)
+    }
+
     pub fn news_pending(&self) -> bool {
         self.prefs.whats_new_from.is_some() || self.prefs.content_from.is_some()
     }
@@ -645,7 +667,9 @@ impl Updater {
         } else {
             None
         });
-        let content_build = pack_in_use(&dir, &info).map_or(0, |p| p.build);
+        let pack = pack_in_use(&dir, &info);
+        let content_build = pack.as_ref().map_or(0, |p| p.build);
+        let content_at = pack.and_then(|p| p.published_at);
         let this = format!("{}+{}", info.version, info.build);
         let content = (content_build > 0).then(|| format!("{}+{content_build}", info.version));
         if off.is_none()
@@ -689,6 +713,8 @@ impl Updater {
             version: info.version.to_string(),
             build: info.build,
             content_build,
+            content_at,
+            content_check: None,
             history,
         };
         let (tx, _) = watch::channel(status);
@@ -834,11 +860,17 @@ impl Updater {
         self.update_prefs(|p| p.last_check_ms = Some(now_ms()));
         let m = match manifest {
             Ok(m) => m,
-            Err(why) => return self.set_phase(Phase::Failed { offer: None, why }),
+            Err(why) => {
+                if content {
+                    self.tx.send_modify(|s| s.content_check = Some(ContentCheck::Failed));
+                }
+                return self.set_phase(Phase::Failed { offer: None, why });
+            }
         };
         self.remember_history(&m.history);
         if content {
-            self.refresh_content(&m);
+            let found = self.refresh_content(&m);
+            self.tx.send_modify(|s| s.content_check = Some(found));
         }
         match self.offer(&m) {
             Ok(Some(offer)) => {
@@ -910,18 +942,24 @@ impl Updater {
     /// Downloads the feed's content pack when it differs from the one in
     /// use, checks it decodes, and keeps it for the next start. Failures
     /// are only reported: the pack built into the app keeps working.
-    fn refresh_content(&self, m: &UpdateManifest) {
+    fn refresh_content(&self, m: &UpdateManifest) -> ContentCheck {
         let current = load_pack_info(&self.dir).and_then(|i| i.origin());
         let asset = match content_update(&self.installed(), m, current.as_ref()) {
             Ok(Some(a)) => a.clone(),
-            Ok(None) => return,
-            Err(e) => return report!("content pack: {e}"),
+            Ok(None) => return ContentCheck::Current,
+            Err(e) => {
+                report!("content pack: {e}");
+                return ContentCheck::Failed;
+            }
         };
         if asset.size > MAX_PACK_BYTES {
-            return report!("content pack: {} bytes is too large", asset.size);
+            report!("content pack: {} bytes is too large", asset.size);
+            return ContentCheck::Failed;
         }
+        // A pack refused before stays refused: what is in use is the newest
+        // there is for this device.
         if is_rejected(&self.dir, &asset.sha256) {
-            return;
+            return ContentCheck::Current;
         }
         // Err((true, _)): the file itself is bad, and is remembered so it
         // isn't fetched again; Err((false, _)): try again next time.
@@ -957,12 +995,16 @@ impl Updater {
             write_json(&self.dir, PACK_INFO, &info).map_err(|e| (false, e))
         })();
         match result {
-            Ok(()) => self.tx.send_modify(|s| s.content_waiting = true),
+            Ok(()) => {
+                self.tx.send_modify(|s| s.content_waiting = true);
+                ContentCheck::New
+            }
             Err((bad, e)) => {
                 if bad {
                     reject(&self.dir, &asset.sha256);
                 }
-                report!("content pack {} not taken: {e}", asset.file)
+                report!("content pack {} not taken: {e}", asset.file);
+                ContentCheck::Failed
             }
         }
     }
@@ -1008,6 +1050,7 @@ impl Updater {
         self.tx.send_modify(|s| {
             s.content_waiting = false;
             s.content_build = pack.build.max(s.content_build);
+            s.content_at = pack.published_at.or(s.content_at);
         });
         let now = self.status().content_key();
         if now.as_ref() != Some(&before) {
@@ -1544,6 +1587,8 @@ mod tests {
             version: "0.1.0".into(),
             build: 41,
             content_build: 0,
+            content_at: None,
+            content_check: None,
             history: Vec::new(),
         }
     }
@@ -1951,6 +1996,7 @@ mod tests {
         let (u, _data) = updater("http://127.0.0.1:9", build("0.1.0", 41, true));
         u.check(false);
         assert!(matches!(u.status().phase, Phase::Failed { why: Failure::Network, .. }));
+        assert_eq!(u.status().content_check, Some(ContentCheck::Failed), "both halves say so");
     }
 
     /// A signed preview feed of `build` with a content pack (and the app,
@@ -2021,12 +2067,20 @@ mod tests {
         let url = serve(feed.path().to_path_buf());
         let info = BuildInfo { key: Some(signer.verifying_key()), ..build("0.1.0", 40, true) };
         let (u, data) = updater(&url, info.clone());
+        assert_eq!(u.status().content_check, None, "nothing to say before a check");
         u.check(true);
         assert_eq!(u.status().phase, Phase::UpToDate, "the feed carries the app he runs");
         assert!(u.status().content_waiting);
+        // Settings says the two halves apart: the app is current, content came.
+        assert_eq!(u.status().content_check, Some(ContentCheck::New));
         assert!(u.apply_content());
         let s = u.status();
         assert_eq!((s.content_build, s.shown_build()), (45, 45));
+        assert!(s.content_at.is_some(), "Settings dates the content in use");
+        assert!(s.content_news(), "marked new in Settings until seen");
+        u.check(false);
+        assert_eq!(u.status().content_check, Some(ContentCheck::Current));
+        let s = u.status();
         assert_eq!(s.whats_new().len(), 1, "what came opens once");
         assert!(s.whats_new()[0].content_only);
         // A quiet note on Today, not the sheet; the app build stays 40 and
@@ -2035,6 +2089,7 @@ mod tests {
         assert_eq!((s.build, s.content_ahead()), (40, Some(45)));
         u.close_whats_new();
         assert!(!u.status().content_only_news());
+        assert!(!u.status().content_news());
 
         // At the next start the pack is still in use: nothing new to say.
         let again = updater_in(data.path(), &url, info);
@@ -2050,6 +2105,7 @@ mod tests {
         let (u, data) = updater(&url, build("0.1.0", 42, true));
         u.check(false);
         assert!(!u.status().content_waiting);
+        assert_eq!(u.status().content_check, Some(ContentCheck::Failed));
         assert!(!data.path().join("updates").join(PACK_FILE).exists());
         // A bad file is remembered, so it isn't fetched again (#344).
         let rejected = fs::read_to_string(data.path().join("updates").join(PACK_REJECTED)).unwrap();

@@ -1,0 +1,699 @@
+schema: batna.lesson/v1
+lecture: rheum.L20
+lessons:
+  # ------------------------------------------------------------------
+  - id: rheum.L20.lesson1
+    title: "الصدفية لما تنزل على المفاصل"
+    hook: "مش كل صدفية بتعمل arthritis، بس لما تعمل، IL-23 هو المايسترو."
+    minutes: 8
+    pages: [326, 328]
+    topics: [definition, genetics, pathogenesis]
+    goals:
+      - "تعرّف الـ PsA وتعرف نسبتها في الصدفية"
+      - "تربط الـ HLA alleles بشكل المرض"
+      - "ترسم محور IL-23 / IL-17 / TNF"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 326
+        title: "التعريف"
+        quote: "PsA is an inflammatory arthropathy occurring in 5-20% of patients with psoriasis."
+        text: |
+          الـ **psoriatic arthritis** (PsA) هو inflammatory arthropathy بيحصل في ==5–20%== من عيانين الصدفية.
+
+          مرض **chronic immune-mediated** بيمسك: الـ **axial** والـ **peripheral joints**، الـ **nails**، الـ **skin**، والـ **entheses**.
+
+          زمان كانوا فاكرينه خفيف، دلوقتي معروف إنه ممكن يبقى **progressive, destructive, deforming**.
+      - kind: explain
+        page: 326
+        title: "الوراثة"
+        quote: "Approximately 33 to 50% of PsA patients have at least one first-degree relative who also has PsO or PsA."
+        text: |
+          - **33–50%** عندهم قريب درجة أولى عنده PsO أو PsA.
+          - جينات الـ PsA و الـ PsO ==مش متطابقة==، وفيه جينات بتحدد **phenotype** معين.
+          - **HLA genes:** antigen presentation. **Non-HLA genes:** immune activation، cytokine signaling، T-cell function.
+      - kind: match
+        page: 327
+        quote: "Axial involvement, symmetric sacroiliitis, enthesitis, dactylitis"
+        prompt: "وصّل الـ HLA بالشكل اللي بيعمله (جدول p327):"
+        pairs:
+          - ["HLA-B*27:05", "Axial, symmetric sacroiliitis, dactylitis"]
+          - ["HLA-B*08:01", "Joint damage, asymmetric sacroiliitis"]
+          - ["HLA-C*06:02", "Milder, long delay after psoriasis"]
+          - ["HLA-DR4", "Symmetric polyarthritis"]
+          - ["HLA-B*44:02", "Protective, milder disease"]
+        why: "الـ B27 بيجيب الـ axial والـ enthesitis، الـ B8 بيجيب الـ damage، والـ C*06:02 (جين الصدفية الأشهر) بيأخر الـ arthritis ويخففه."
+      - kind: explain
+        page: 328
+        title: "الـ triggers من بره"
+        quote: "joint trauma may induce a flare of arthritis, referred to as the \"internal\" or \"deep\" Koebner phenomenon."
+        text: |
+          - **Streptococcal infection** (guttate psoriasis) و **antibiotics** حديثة
+          - ==Deep Koebner==: زي ما جرح الجلد بيطلّع صدفية (Koebner)، **trauma للمفصل** ممكن يعمل flare
+          - **Dysbiosis**
+          - **Tobacco** شكله **protective** (controversial)
+      - kind: aside
+        tone: joke
+        page: 328
+        quote: "Tobacco appears to be protective against the development of psoriatic arthritis (controversial)."
+        text: "الكتاب بيقول التدخين شكله protective ضد الـ PsA. لو عيانك قالك «يبقى أدخّن يا دكتور؟»، قوله: «لا. هتحمي ركبتك وتبوّظ قلبك ورئتك، صفقة خسرانة.» 🚭 والكلمة المهمة هنا **controversial**."
+      - kind: figure
+        page: 328
+        quote: "It stimulates resident T cells (CD3+, CD4-, CD8-, IL-23R+) leading to the production of IL-17, IL-22, and TNF-alpha"
+        title: "محور IL-23"
+        alt: "Flow diagram. Gut dysbiosis or barrier leak and macrophages and dendritic cells produce IL-23. IL-23 acts on resident IL-23R positive T cells, which release IL-17, IL-22 and TNF-alpha. These cause three outcomes: inflammation, bone erosion via neutrophils and osteoclasts, and new bone (osteoproliferation). TNF-alpha also kills osteoblasts, reducing repair."
+        caption: "==IL-23== هو المايسترو، والـ **IL-17 / IL-22 / TNF-α** هم العازفين. علشان كده أدوية الـ PsA بتضرب **TNF** و **IL-17** و **IL-12/23**."
+        svg: |
+          <svg viewBox="0 0 330 400" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L20a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="fg-head"/></marker></defs>
+            <rect x="20" y="10" width="290" height="50" rx="10" class="fg-box"/>
+            <text x="165" y="31" text-anchor="middle" class="t-sm t-b">Macrophages, dendritic cells</text>
+            <text x="165" y="49" text-anchor="middle" class="t-sm t-mut">gut barrier leak, dysbiosis</text>
+            <path d="M165 60 V82" class="fg-arrow" marker-end="url(#L20a)"/>
+            <rect x="95" y="84" width="140" height="40" rx="10" class="fg-acc"/>
+            <text x="165" y="110" text-anchor="middle" class="t-lg t-b t-acc">IL-23</text>
+            <path d="M165 124 V146" class="fg-arrow" marker-end="url(#L20a)"/>
+            <rect x="20" y="148" width="290" height="46" rx="10" class="fg-box"/>
+            <text x="165" y="176" text-anchor="middle" class="t-sm t-b">Resident IL-23R+ T cells</text>
+            <path d="M165 194 V216" class="fg-arrow" marker-end="url(#L20a)"/>
+            <rect x="20" y="218" width="290" height="40" rx="10" class="fg-acc"/>
+            <text x="165" y="243" text-anchor="middle" class="t-b t-acc">IL-17 · IL-22 · TNF-α</text>
+            <path d="M70 258 V290" class="fg-arrow" marker-end="url(#L20a)"/>
+            <path d="M165 258 V290" class="fg-arrow" marker-end="url(#L20a)"/>
+            <path d="M260 258 V290" class="fg-arrow" marker-end="url(#L20a)"/>
+            <rect x="10" y="292" width="100" height="56" rx="10" class="fg-bad"/>
+            <text x="60" y="316" text-anchor="middle" class="t-sm t-b">Inflammation</text>
+            <text x="60" y="334" text-anchor="middle" class="t-sm t-mut">skin, joint</text>
+            <rect x="115" y="292" width="100" height="56" rx="10" class="fg-bad"/>
+            <text x="165" y="316" text-anchor="middle" class="t-sm t-b">Erosions</text>
+            <text x="165" y="334" text-anchor="middle" class="t-sm t-mut">osteoclasts</text>
+            <rect x="220" y="292" width="100" height="56" rx="10" class="fg-good"/>
+            <text x="270" y="316" text-anchor="middle" class="t-sm t-b">New bone</text>
+            <text x="270" y="334" text-anchor="middle" class="t-sm t-mut">proliferation</text>
+            <text x="165" y="378" text-anchor="middle" class="t-sm t-mut">TNF-α also kills osteoblasts: less repair</text>
+          </svg>
+      - kind: reveal
+        page: 328
+        quote: "promote inflammation, bone loss with erosions, and osteoproliferation."
+        prompt: "إزاي نفس المرض يعمل erosions ويعمل new bone في نفس الوقت؟"
+        answer: |
+          نفس الـ cytokines بتشتغل في اتجاهين: الـ **neutrophils** والـ **osteoclasts** بياكلوا العضم (**erosions**)، وفي نفس الوقت الالتهاب عند الـ **enthesis** بيحفّز **osteoproliferation**.
+
+          ده بالظبط اللي هتشوفه في الأشعة: **destruction + new bone** في نفس الصباع.
+      - kind: check
+        page: 328
+        quote: "IL-23, is a central cytokine in the pathogenesis of PsO & PsA."
+        question: "Central cytokine in psoriasis and PsA, made by macrophages and dendritic cells?"
+        options: ["IL-23", "IL-6", "Interferon-α", "IL-4"]
+        answer: 0
+        why:
+          - "صح: IL-23 بيشغّل الـ resident T cells تطلّع IL-17 و IL-22 و TNF-α."
+          - "مش في الـ pathway بتاع الكتاب للـ PsA."
+          - "الـ interferon ده بتاع الـ SLE و Sjögren."
+          - "IL-4 Th2، مش هنا."
+      - kind: try
+        items: [rheum.L20.001, rheum.L20.007, rheum.L20.013, rheum.L20.017, rheum.L20.018]
+    recap:
+      - "PsA في 5–20% من الصدفية؛ joints، axial، nails، skin، entheses."
+      - "33–50% عندهم قريب. B27:05 = axial، B8 = damage، C*06:02 = milder، DR4 = symmetric."
+      - "Triggers: strep، antibiotics، deep Koebner، dysbiosis؛ tobacco protective (controversial)."
+      - "IL-23 ← T cells ← IL-17، IL-22، TNF-α ← inflammation + erosions + new bone."
+    practice: [rheum.L20.001, rheum.L20.002, rheum.L20.003, rheum.L20.004, rheum.L20.005, rheum.L20.006, rheum.L20.007, rheum.L20.008, rheum.L20.009, rheum.L20.010, rheum.L20.011, rheum.L20.012, rheum.L20.013, rheum.L20.014, rheum.L20.015, rheum.L20.016, rheum.L20.017, rheum.L20.018, rheum.L20.019]
+  # ------------------------------------------------------------------
+  - id: rheum.L20.lesson2
+    title: "خمس أشكال وصباع زي السجق"
+    hook: "الـ DIP بتتعب في الـ PsA ومش في الـ RA، والسبب في كلمة واحدة: enthesis."
+    minutes: 10
+    pages: [329, 332]
+    topics: [clinical, patterns]
+    goals:
+      - "تعدّ الـ domains وتدوّر على الصدفية المستخبية"
+      - "تحفظ أشكال Moll and Wright بنسبها"
+      - "تفرّق الـ axial PsA حسب الـ HLA-B27"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 329
+        title: "الـ domains"
+        quote: "Peripheral arthritis. - Axial involvement. - Enthesitis. - Dactylitis. - Uveitis. - Cutaneous and nail psoriasis."
+        text: |
+          ستة domains: **peripheral arthritis**، **axial**، ==enthesitis==، **dactylitis**، **uveitis**، و **skin and nail psoriasis**.
+
+          ومعاهم comorbidities: **metabolic syndrome**، obesity، **cardiovascular disease**، depression.
+
+          ومفيش أي marker يتوقع مين من عيانين الصدفية هيجيله arthritis.
+      - kind: aside
+        tone: exam
+        page: 330
+        quote: "including the scalp, nails, umbilicus ,gluteal cleft and behind the ear."
+        text: "عيان joints شكلها PsA وبيقول مفيش صدفية؟ دوّر في: **scalp**، **nails**، **umbilicus**، **gluteal cleft**، و **behind the ear**. الأماكن اللي محدش بيبصلها."
+      - kind: table
+        page: 330
+        quote: "The skin lesions of psoriasis usually appear before the arthritis in up to 80% and typically by 5-10 years."
+        title: "مين الأول: الجلد ولا المفصل؟"
+        columns: [Order, Share]
+        rows:
+          - ["Skin first (by 5–10 y)", "Up to 80%"]
+          - ["Together", "10–15%"]
+          - ["Joints first", "10–15%"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: explain
+        page: 330
+        title: "الجلد والمفاصل مش ماشيين مع بعض"
+        quote: "In one prospective study, only 35% of patients reported that their skin and joint components flared at the same time."
+        text: |
+          - **Psoriasis vulgaris** هو أشيع phenotype.
+          - شدة الجلد ==مالهاش علاقة كبيرة== بشدة المفاصل.
+          - **35%** بس الـ flare بتاعهم بيبقى مع بعض.
+      - kind: figure
+        page: 330
+        quote: "5 types of arthritis were originally described by Moll and Wright (1973)."
+        title: "Moll and Wright: خمس أشكال"
+        alt: "Five stacked hand sketches with percentages. Oligoarticular 70 percent: two asymmetric swollen joints and a sausage digit. Asymmetric DIP 10 percent: swollen fingertip joints with pitted nails. Arthritis mutilans 5 percent: shortened telescoped finger. Symmetric RA-like 15 percent: matching swollen joints on both hands. Psoriatic spondylitis 5 percent: a spine."
+        caption: "الترتيب في الكتاب: ==oligo 70%==، DIP 10%، mutilans 5%، RA-like 15%، spondylitis 5%. (دراسات لاحقة لقت الـ poly 63% والـ oligo 13%.)"
+        svg: |
+          <svg viewBox="0 0 330 390" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="8" width="310" height="66" rx="10" class="fg-acc"/>
+            <text x="22" y="34" class="t-b">Oligoarticular</text>
+            <text x="22" y="54" class="t-sm t-mut">asymmetric, sausage digit</text>
+            <text x="300" y="46" text-anchor="end" class="t-lg t-b t-acc">70%</text>
+            <rect x="10" y="82" width="310" height="66" rx="10" class="fg-box"/>
+            <text x="22" y="108" class="t-b">Asymmetric DIP</text>
+            <text x="22" y="128" class="t-sm t-mut">nail pitting, "classic"</text>
+            <text x="300" y="120" text-anchor="end" class="t-lg t-b">10%</text>
+            <rect x="10" y="156" width="310" height="66" rx="10" class="fg-bad"/>
+            <text x="22" y="182" class="t-b">Arthritis mutilans</text>
+            <text x="22" y="202" class="t-sm t-mut">phalanges destroyed</text>
+            <text x="300" y="194" text-anchor="end" class="t-lg t-b t-bad">5%</text>
+            <rect x="10" y="230" width="310" height="66" rx="10" class="fg-box"/>
+            <text x="22" y="256" class="t-b">Symmetric, RA-like</text>
+            <text x="22" y="276" class="t-sm t-mut">RF usually negative</text>
+            <text x="300" y="268" text-anchor="end" class="t-lg t-b">15%</text>
+            <rect x="10" y="304" width="310" height="66" rx="10" class="fg-box"/>
+            <text x="22" y="330" class="t-b">Psoriatic spondylitis</text>
+            <text x="22" y="350" class="t-sm t-mut">axial</text>
+            <text x="300" y="342" text-anchor="end" class="t-lg t-b">5%</text>
+          </svg>
+      - kind: reveal
+        page: 331
+        quote: "DIP joints are frequently involved in PsA but not so in RA because these joints have many entheses but very little synovial tissue."
+        prompt: "ليه الـ DIP بتتعب في الـ PsA ومش في الـ RA؟"
+        answer: |
+          الـ **RA** مرض **synovitis**: محتاج synovium كتير. الـ DIP فيها synovium قليل جدًا.
+
+          الـ **PsA** مرض **enthesitis**: والـ DIP مليانة ==entheses== (أوتار وأربطة داخلة في العضم). علشان كده الـ DIP + الضافر المنقّر = PsA.
+      - kind: check
+        page: 331
+        quote: "A severe deforming arthritis in which there is massive destruction of the phalanges."
+        question: "Which PsA pattern shows massive destruction of the phalanges?"
+        options: ["Arthritis mutilans", "Asymmetric DIP", "Oligoarticular", "Symmetric RA-like"]
+        answer: 0
+        why:
+          - "صح: 5%، ومحتمل يزيد لو المرض مش متسيطر عليه."
+          - "الـ DIP pattern بيبقى مع الـ nail changes."
+          - "الـ oligo asymmetric مع sausage digit."
+          - "الـ RA-like symmetric، RF negative."
+      - kind: table
+        page: 332
+        quote: "Patients who are HLA-B27 negative have different clinical features with similar frequency in males and females, older age of onset, less back pain"
+        title: "الـ axial PsA: B27 بيفرق"
+        columns: [Feature, B27+, B27−]
+        rows:
+          - ["Onset", "Earlier", "Older"]
+          - ["Back pain", "More", "Less"]
+          - ["Neck", "–", "More cervical"]
+          - ["SI joints", "Like AS", "Unilateral, asymmetric"]
+          - ["Syndesmophytes", "Like AS", "Bulky, skipping"]
+        hide: [[0, 2], [2, 2], [3, 2], [4, 2]]
+      - kind: aside
+        tone: tip
+        page: 332
+        quote: "HLA-B27 gene is present in about 30% of patients with axial PsA."
+        text: "الـ **B27** موجود في **30%** بس من الـ axial PsA، والعمود الفقري ممكن يتأثر في **40–70%** (حسب لو عملت أشعة ولا لأ). الـ B27-negative بيعمل syndesmophytes **bulky** و **non-marginal** و **بتنطّ** فقرات."
+      - kind: explain
+        page: 332
+        title: "الـ enthesitis"
+        quote: "The Achilles. - Plantar fascia insertions. - Insertions of the quadriceps and patellar tendons. - The iliac crest. - The rotator cuff."
+        text: |
+          ممكن تكون أول عرض: ألم و tenderness وأحيانًا تورم.
+
+          أشهر الأماكن: ==Achilles==، **plantar fascia**، **quadriceps/patellar** tendons، **iliac crest**، **rotator cuff**، و **epicondyles**.
+
+          وممكن تبقى **asymptomatic**: الـ **US** أحسن من الـ palpation.
+      - kind: try
+        items: [rheum.L20.020, rheum.L20.024, rheum.L20.027, rheum.L20.030, rheum.L20.034]
+    recap:
+      - "6 domains: peripheral، axial، enthesitis، dactylitis، uveitis، skin/nails."
+      - "دوّر على الصدفية في scalp، nails، umbilicus، gluteal cleft، behind the ear."
+      - "الجلد الأول في 80% (5–10 سنين)؛ الشدة مش مرتبطة."
+      - "Oligo 70، DIP 10، mutilans 5، RA-like 15، spondylitis 5."
+      - "DIP = entheses مش synovium. B27 في 30% من الـ axial؛ B27− = older، cervical، unilateral SI، bulky skipping."
+    practice: [rheum.L20.020, rheum.L20.021, rheum.L20.022, rheum.L20.023, rheum.L20.024, rheum.L20.025, rheum.L20.026, rheum.L20.027, rheum.L20.028, rheum.L20.029, rheum.L20.030, rheum.L20.031, rheum.L20.032, rheum.L20.033, rheum.L20.034, rheum.L20.035, rheum.L20.036, rheum.L20.037, rheum.L20.038, rheum.L20.099, rheum.L20.100]
+  # ------------------------------------------------------------------
+  - id: rheum.L20.lesson3
+    title: "التشخيص: CASPAR والأشعة"
+    hook: "مفيش test واحد للـ PsA، بس فيه عدّاد نقط وصورة أشعة مشهورة: pencil-in-cup."
+    minutes: 9
+    pages: [333, 335]
+    topics: [extraarticular, diagnosis, imaging]
+    goals:
+      - "تقارن الـ PsA بباقي الـ SpA"
+      - "تحسب الـ CASPAR"
+      - "تعرف علامات الأشعة"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 333
+        title: "بره المفاصل"
+        quote: "Ocular disease: Iritis or uveitis occurs in 7% to 18%, more bilateral than in AS, but is usually found in patients with spinal involvement."
+        text: |
+          أقل من الـ RA:
+          - ==Uveitis== في **7–18%**، **bilateral** أكتر من الـ AS، وغالبًا مع الـ spinal disease
+          - **Aortic insufficiency**
+          - **Metabolic syndrome** و cardiovascular risk
+          - **IBD**، **amyloidosis**، fatigue و fibromyalgia
+      - kind: table
+        page: 333
+        quote: "HLA-B27 45–50% 90–95% 70% 30%"
+        title: "الـ PsA وإخواته"
+        columns: [Feature, PsA, AS]
+        rows:
+          - ["M:F", "1:1", "2:1"]
+          - ["HLA-B27", "45–50%", "90–95%"]
+          - ["Peripheral", "95%", "30%"]
+          - ["Axial", "50%", "100%"]
+          - ["Dactylitis", "+++", "–"]
+          - ["Psoriasis", "All", "10%"]
+        hide: [[0, 1], [1, 1], [2, 1], [4, 1]]
+      - kind: aside
+        tone: tip
+        page: 333
+        quote: "HLA-B27 45–50% 90–95% 70% 30%"
+        text: "وفي نفس الجدول: **reactive arthritis** M:F **3:1**، B27 **70%**، peripheral **90%**. والـ **enteropathic** M:F **2:1**، B27 **30%**، peripheral و axial **30%**، ومفيش dactylitis ولا enthesitis."
+      - kind: explain
+        page: 334
+        title: "CASPAR (2006)"
+        quote: "Inflammatory articular disease (joint,spine or entheseal)with 3 or more points from the following:"
+        text: |
+          الشرط: **inflammatory articular disease** (joint أو spine أو enthesis) + ==3 نقط أو أكتر==:
+
+          - **Psoriasis:** current **2**، past **1**، أو family history **1** (لو هو مش مصاب)
+          - **Nail lesions:** onycholysis، pitting، hyperkeratosis **1**
+          - **Dactylitis** (حالي أو قديم، rheumatologist شافه) **1**
+          - **RF negative** (أي طريقة غير latex) **1**
+          - **Juxta-articular new bone** (مش osteophyte) **1**
+
+          Specificity **98.7%**، sensitivity **91.4%**.
+      - kind: check
+        page: 334
+        quote: "Skin psoriasis: present - 2 / previously present -1"
+        question: "Inflammatory arthritis + current psoriasis + RF positive. Nothing else. CASPAR?"
+        options: ["2: not classified", "3: classified", "4: classified", "1: not classified"]
+        answer: 0
+        why:
+          - "صح: current psoriasis 2، والـ RF positive مش بيدّي نقطة. لازم 3."
+          - "محتاج نقطة كمان: nails أو dactylitis أو new bone."
+          - "مفيش بنود كفاية."
+          - "الصدفية الحالية بـ 2 مش 1."
+      - kind: explain
+        page: 334
+        title: "المعمل: usually seronegative"
+        quote: "low levels of RF may be found in patients (5% to 16%) with typical PsA features."
+        text: |
+          - **ESR و CRP** ممكن يعلوا أو لأ.
+          - **RF** low-level في **5–16%**.
+          - **ACPA** في حوالي **5%**.
+          - **ANA** > 1:80 في **14%**.
+
+          علشان كده الوصف الأدق: ==usually seronegative==.
+      - kind: figure
+        page: 335
+        quote: "Pencil-in-cup changes of digital joints. - Periostitis. - Joint ankyloses. - Tuft osteolysis."
+        title: "Pencil-in-cup"
+        alt: "Sketch of a finger joint. The proximal bone end is whittled to a pointed pencil tip; the distal bone base is widened into a cup that receives it. A fuzzy line along the shaft marks periostitis, and the fingertip tuft is partly dissolved."
+        caption: "الطرف القريب بيتبري زي ==قلم رصاص==، والبعيد بيتوسّع زي **كوباية**. وجنبه **periostitis** (عضم جديد): destruction و new bone في نفس الصباع."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <path d="M120 20 L210 20 L210 120 L180 175 L150 175 L120 120 Z" class="fg-box"/>
+            <path d="M100 205 Q165 160 230 205 L230 280 L100 280 Z" class="fg-box"/>
+            <path d="M120 195 Q165 175 210 195" class="fg-ink"/>
+            <path d="M112 30 Q106 70 112 110" class="fg-thin"/>
+            <text x="225" y="70" class="t-sm t-b">Pencil</text>
+            <text x="225" y="88" class="t-sm t-mut">bone end whittled</text>
+            <text x="240" y="235" class="t-sm t-b">Cup</text>
+            <text x="240" y="253" class="t-sm t-mut">base widened</text>
+            <text x="10" y="70" class="t-sm t-good">Periostitis</text>
+            <text x="10" y="88" class="t-sm t-mut">(new bone)</text>
+          </svg>
+      - kind: explain
+        page: 335
+        title: "الأشعة"
+        quote: "Despite treatment with DMARDs, PsA results in radiographic damage in about 47% of patients during the first two years of the disease."
+        text: |
+          **X-ray:** pencil-in-cup، **periostitis**، **ankylosis**، **tuft osteolysis**، asymmetric syndesmophytes و SI changes. وحتى مع الـ DMARDs، ==47%== بيحصلهم damage في أول سنتين.
+
+          **US:** أحسن من الكشف في الـ **subclinical synovitis** والـ **enthesitis**، وبيتابع الاستجابة.
+
+          **MRI:** للـ spine و الـ SIJs، خصوصًا الـ **HLA-B27** active axial PsA.
+      - kind: try
+        items: [rheum.L20.041, rheum.L20.044, rheum.L20.045, rheum.L20.050, rheum.L20.047]
+    recap:
+      - "Extra-articular أقل من RA: uveitis 7–18% bilateral، AI، metabolic، IBD، amyloid."
+      - "PsA 1:1، B27 45–50%، peripheral 95%، dactylitis +++."
+      - "CASPAR: articular disease + ≥3 (psoriasis 2/1، family 1، nails، dactylitis، RF−، new bone). Spec 98.7%."
+      - "RF 5–16%، ACPA 5%، ANA 14% ← usually seronegative."
+      - "Pencil-in-cup، periostitis، ankylosis، tuft osteolysis. 47% damage في سنتين."
+    practice: [rheum.L20.039, rheum.L20.040, rheum.L20.041, rheum.L20.042, rheum.L20.043, rheum.L20.044, rheum.L20.045, rheum.L20.046, rheum.L20.047, rheum.L20.048, rheum.L20.049, rheum.L20.050, rheum.L20.051, rheum.L20.052, rheum.L20.098]
+  # ------------------------------------------------------------------
+  - id: rheum.L20.lesson4
+    title: "بنقيس النشاط إزاي؟"
+    hook: "DAPSA بأربع عتبات، وMDA محتاج 5 من 7."
+    minutes: 8
+    pages: [335, 338]
+    topics: [activity]
+    goals:
+      - "تعرف الـ severe PsA والـ poor prognosis"
+      - "تعرف أداة كل domain"
+      - "تحسب DAPSA وتعرف شروط الـ MDA"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 335
+        title: "Severe PsA (ACR/NPF)"
+        quote: "Erosive disease. • Elevated markers of inflammation (ESR, CRP) attributable to PsA."
+        text: |
+          - ==Erosive disease==
+          - **ESR/CRP** عالي بسبب الـ PsA
+          - **Damage** بيأثر على الوظيفة (deformities)
+          - نشاط عالي بيبوّظ الـ **quality of life**
+          - نشاط في أماكن كتير، منها dactylitis و enthesitis
+          - **Rapidly progressive**
+      - kind: explain
+        page: 336
+        title: "EULAR poor prognosis"
+        quote: "Many swollen joints. • Structure damage in the presence of inflammation. • High ESR or CRP."
+        text: |
+          1. **Many swollen joints**
+          2. **Structural damage** مع inflammation
+          3. **High ESR أو CRP**
+          4. **Extra-articular** manifestations مهمة إكلينيكيًا
+      - kind: match
+        page: 336
+        quote: "Axial disease activity is determined by BASDAI (Bath Ankylosing Spondylitis Disease Activity Index)"
+        prompt: "كل domain وأداته:"
+        pairs:
+          - ["Peripheral joints", "68 tender / 66 swollen"]
+          - ["Axial disease", "BASDAI"]
+          - ["Quality of life", "PsAQoL"]
+          - ["Fatigue", "FACIT"]
+          - ["Quick routine visit", "RAPID3"]
+        why: "68 مفصل للـ tender و66 للـ swollen (الـ hips مش بتتعد swollen). الـ BASDAI نفسه بتاع الـ AS. الـ RAPID3 الأسهل في العيادة."
+      - kind: explain
+        page: 337
+        title: "DAPSA"
+        quote: "Tender joint count (0-68). • Swollen joint count (0-66). • Crp level (mg/dl). • Patient vas for pain (0-10)."
+        text: |
+          مجموع خمس حاجات:
+          - **Tender joints** (0–68)
+          - **Swollen joints** (0–66)
+          - **CRP** (mg/dl)
+          - **Pain VAS** (0–10)
+          - **Patient global VAS** (0–10)
+
+          القراءة: ==0–4 remission==، **5–14 low**، **15–28 moderate**، **> 28 high**.
+      - kind: check
+        page: 337
+        quote: "0-4 = remission. - 5-14 =low. - 15-28 =moderate. - >28 = v.high."
+        question: "DAPSA = 12. Category?"
+        options: ["Low", "Remission", "Moderate", "High"]
+        answer: 0
+        why:
+          - "صح: 5–14 = low."
+          - "الـ remission لحد 4."
+          - "الـ moderate من 15."
+          - "الـ high فوق 28."
+      - kind: explain
+        page: 337
+        title: "MDA: 5 من 7"
+        quote: "Patients with PsA are considered to have MDA when they meet 5 out 7 of the following criteria:"
+        text: |
+          الـ ==MDA== بيشمل الـ remission والـ low activity كهدف مقبول، وبيتستخدم كـ responder index:
+
+          1. Tender joints **≤ 1**
+          2. Swollen joints **≤ 1**
+          3. **PASI ≤ 1** أو **BSA ≤ 3**
+          4. Pain VAS **≤ 15**
+          5. Patient global VAS **≤ 20**
+          6. **HAQ ≤ 0.5** (الكتاب كاتب ≤5)
+          7. Tender entheseal points **≤ 1**
+      - kind: aside
+        tone: tip
+        page: 337
+        quote: "Tender joint count ≤1. - Swollen joint count ≤1."
+        text: "افتكر الـ MDA كده: **1، 1، 1، 1** (tender، swollen، PASI، entheses) و **15 / 20** (pain، global) و **HAQ 0.5**. محتاج **5** من الـ 7."
+      - kind: explain
+        page: 338
+        title: "الخلاصة"
+        quote: "Assessment of patients with PsA requires consideration of all disease domains."
+        text: |
+          قيّم **كل الـ domains**، وتأثير المرض على الألم والوظيفة والـ QoL والـ damage.
+
+          وخلي بالك من الـ ==comorbidities==: obesity، metabolic syndrome، **CVD**، depression و anxiety، **liver disease**، chronic infections، malignancy، osteoporosis، fibromyalgia، reproductive health.
+      - kind: try
+        items: [rheum.L20.054, rheum.L20.057, rheum.L20.058, rheum.L20.059, rheum.L20.055]
+    recap:
+      - "Severe: erosive، ESR/CRP، damage، QoL، أماكن كتير، rapidly progressive."
+      - "Poor prognosis: swollen joints كتير، damage + inflammation، ESR/CRP، extra-articular."
+      - "68/66، BASDAI، PsAQoL، FACIT، RAPID3."
+      - "DAPSA: 4 / 14 / 28. MDA: 5 من 7."
+    practice: [rheum.L20.053, rheum.L20.054, rheum.L20.055, rheum.L20.056, rheum.L20.057, rheum.L20.058, rheum.L20.059, rheum.L20.060, rheum.L20.061, rheum.L20.062]
+  # ------------------------------------------------------------------
+  - id: rheum.L20.lesson5
+    title: "العلاج: من الـ NSAID للـ biologic"
+    hook: "MTX للجلد والمفصل، TNF للـ erosive، وما تديش hydroxychloroquine."
+    minutes: 10
+    pages: [338, 342]
+    topics: [treatment]
+    goals:
+      - "تعرف كل class وأمثلته"
+      - "تمشي على الـ algorithm بتاع الـ peripheral arthritis"
+      - "تعرف تبدّل بعد فشل أول TNF inhibitor"
+    status: unverified
+    steps:
+      - kind: table
+        page: 338
+        quote: "IL17i secukinumab, ixekizumab, brodalumab"
+        title: "قايمة الأدوية"
+        columns: [Class, Examples]
+        rows:
+          - ["Oral small molecules", "MTX, SSZ, CsA, LEF, apremilast"]
+          - ["TNF inhibitors", "Etanercept, infliximab, adalimumab..."]
+          - ["IL-12/23", "Ustekinumab"]
+          - ["IL-17", "Secukinumab, ixekizumab, brodalumab"]
+          - ["CTLA4-Ig", "Abatacept"]
+          - ["JAK", "Tofacitinib"]
+        hide: [[1, 1], [2, 1], [3, 1], [4, 1], [5, 1]]
+      - kind: explain
+        page: 339
+        title: "قواعد ذهبية"
+        quote: "Methotrexate is the drug of choice for both joint & skin manifestations."
+        text: |
+          - **NSAIDs** للـ mild.
+          - ==Methotrexate== = drug of choice للجلد **و** المفاصل.
+          - **Antimalarials** ممكن تزوّد الصدفية (فيه اللي بيعتبرها contraindicated).
+          - **Steroids** بحذر: لو نزلت بسرعة ← **skin flare**. وما تحقنش **IA** من جوه plaque.
+          - **TNF inhibitors**: arthritis، dactylitis، enthesitis، spondylitis، والجلد.
+          - **Apremilast**: oral **PDE-4 inhibitor** بيعلّي الـ cAMP.
+          - **JAK** (tofacitinib، upadacitinib): بيأثروا على IL-17 و IL-21 و IL-23.
+      - kind: aside
+        tone: trap
+        page: 339
+        quote: "Antimalarial drugs may increase the skin lesions (some consider them to be contraindicated)."
+        text: "الـ **hydroxychloroquine** نجم في الـ SLE والـ RA، بس في الـ **PsA** ممكن يولّع الصدفية. سؤال «which drug to avoid» إجابته غالبًا antimalarials."
+      - kind: explain
+        page: 340
+        title: "الاستراتيجية"
+        quote: "A treat-to–target approach should be employed for peripheral and axial arthritis, with a target of remission/inactive disease or low/minimal disease activity."
+        text: |
+          - ابدأ **بدري**، وحسب الشدة في كل domain.
+          - ==Treat-to-target==: remission أو low/minimal activity.
+          - قبل الدوا: **screening** للـ comorbidities، baseline tests، و **vaccinations**.
+          - **Non-drug:** PT، OT، exercise، و **weight reduction** (السمنة بتقلل الاستجابة).
+          - **Education:** المرض، أثر الـ **stress**، الأدوية والمتابعة.
+      - kind: figure
+        page: 341
+        quote: "In patients presenting with severe disease (erosive disease and functional limitation), start a TNFinhibitor as first-line therapy"
+        title: "Peripheral PsA: السلّم"
+        alt: "Flowchart for peripheral psoriatic arthritis. Mild, under four joints, no damage: NSAID, or apremilast 30 mg twice daily. Moderate to severe without erosions, or NSAID failure, no axial symptoms: methotrexate 15 to 25 mg weekly; alternatives leflunomide, sulfasalazine, apremilast if not erosive. Severe, erosive with functional limitation: TNF inhibitor first line, or secukinumab or ustekinumab. After 3 months of a cDMARD without improvement or more than three tender and swollen joints: TNF inhibitor."
+        caption: "السؤال اللي بيحدد: ==فيه erosions و functional limitation؟== لو آه ← TNF من الأول. لو لأ ← MTX الأول."
+        svg: |
+          <svg viewBox="0 0 330 420" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L20b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="fg-head"/></marker></defs>
+            <rect x="10" y="10" width="310" height="70" rx="10" class="fg-good"/>
+            <text x="22" y="34" class="t-sm t-b">Mild: &lt;4 joints, no damage</text>
+            <text x="22" y="54" class="t-sm">NSAID</text>
+            <text x="22" y="72" class="t-sm t-mut">or apremilast 30 mg twice daily</text>
+            <path d="M165 80 V102" class="fg-arrow" marker-end="url(#L20b)"/>
+            <rect x="10" y="104" width="310" height="88" rx="10" class="fg-acc"/>
+            <text x="22" y="128" class="t-sm t-b">NSAID failure or moderate, no erosions</text>
+            <text x="22" y="148" class="t-sm">MTX 15–25 mg weekly</text>
+            <text x="22" y="166" class="t-sm t-mut">alt: LEF 20 mg, SSZ</text>
+            <text x="22" y="184" class="t-sm t-mut">apremilast only if non-erosive</text>
+            <path d="M165 192 V214" class="fg-arrow" marker-end="url(#L20b)"/>
+            <text x="175" y="208" class="t-sm t-mut">3 months, &gt;3 joints</text>
+            <rect x="10" y="216" width="310" height="70" rx="10" class="fg-bad"/>
+            <text x="22" y="240" class="t-sm t-b">Severe: erosive + functional limit</text>
+            <text x="22" y="260" class="t-sm">TNF inhibitor first line</text>
+            <text x="22" y="278" class="t-sm t-mut">alt: secukinumab, ustekinumab</text>
+            <path d="M165 286 V308" class="fg-arrow" marker-end="url(#L20b)"/>
+            <rect x="10" y="310" width="310" height="100" rx="10" class="fg-box"/>
+            <text x="22" y="334" class="t-sm t-b">TNF inhibitor fails</text>
+            <text x="22" y="354" class="t-sm">2nd TNFi (antibody ↔ etanercept)</text>
+            <text x="22" y="374" class="t-sm">→ secukinumab → ustekinumab</text>
+            <text x="22" y="394" class="t-sm t-mut">→ abatacept, guselkumab; JAKi</text>
+          </svg>
+      - kind: case
+        page: 341
+        quote: "or who still have more than three tender and swollen joints, use a TNF inhibitor."
+        stem: "PsA, 5 swollen joints, no erosions, no back pain. NSAIDs failed."
+        steps:
+          - question: "Next?"
+            options: ["MTX 15–25 mg weekly", "Etanercept", "Hydroxychloroquine", "Apremilast because he has erosions"]
+            answer: 0
+            why: "NSAID failure من غير erosions ومن غير axial ← cDMARD، غالبًا MTX."
+          - reveal: "3 months later: 4 tender and swollen joints."
+            question: "Next?"
+            options: ["TNF inhibitor", "Increase NSAID", "Add hydroxychloroquine", "Wait 6 more months"]
+            answer: 0
+            why: "مفيش تحسن بعد 3 شهور أو أكتر من 3 مفاصل ← TNF inhibitor."
+          - reveal: "Adalimumab for 4 months: inadequate response."
+            question: "Next?"
+            options: ["Etanercept", "Golimumab", "Abatacept first", "Stop all"]
+            answer: 0
+            why: "تاني TNF، وبدّل من antibody لـ soluble receptor (etanercept). الـ golimumab antibody زي الـ adalimumab."
+      - kind: explain
+        page: 342
+        title: "بعد التاني"
+        quote: "use ustekinumab (stelara) (by sc.i. 45 mg, given initially and 4 weeks later, then every 12 weeks."
+        text: |
+          - لو تاني TNF فشل ← ==secukinumab==: **150 mg** SC أسابيع 0، 1، 2، 3، 4، وبعدين كل **4 أسابيع** (ممكن **300 mg**).
+          - فشل ← **ustekinumab**: **45 mg** SC في 0 و 4، وبعدين كل **12 أسبوع**. (الاتنين مع أو من غير MTX.)
+          - بعدها: **abatacept** أو **guselkumab**؛ و الـ **JAK inhibitors** (tofacitinib على JAK3 و JAK1).
+          - اختيار الـ TNF نفسه: route، frequency، cost.
+          - **Axial** فشل أول TNF ← تاني TNF ← secukinumab أو ustekinumab.
+      - kind: check
+        page: 341
+        quote: "Another alternative to MTX is apremilast, which should not be used in patients with erosive disease"
+        question: "Why avoid apremilast in erosive PsA?"
+        options:
+          - "Its ability to prevent joint damage is not established"
+          - "It worsens psoriasis"
+          - "It is an IV drug"
+          - "It is a TNF inhibitor"
+        answer: 0
+        why:
+          - "صح: مفيش إثبات إنه بيمنع الـ joint injury."
+          - "اللي بيزوّد الصدفية الـ antimalarials."
+          - "الـ apremilast oral."
+          - "ده PDE-4 inhibitor."
+      - kind: try
+        items: [rheum.L20.063, rheum.L20.064, rheum.L20.076, rheum.L20.081, rheum.L20.101]
+    recap:
+      - "MTX للجلد والمفصل؛ antimalarials ممكن تزوّد الصدفية؛ steroids بحذر ومن غير حقن في plaque."
+      - "Treat-to-target؛ screening + vaccines؛ PT/OT، exercise، weight loss، education."
+      - "Mild ← NSAID (أو apremilast). Non-erosive ← MTX 15–25. Erosive ← TNF من الأول."
+      - "3 شهور أو > 3 مفاصل ← TNF. فشل ← تاني TNF (switch type) ← secukinumab ← ustekinumab."
+    practice: [rheum.L20.063, rheum.L20.064, rheum.L20.065, rheum.L20.066, rheum.L20.067, rheum.L20.068, rheum.L20.069, rheum.L20.070, rheum.L20.071, rheum.L20.072, rheum.L20.073, rheum.L20.074, rheum.L20.075, rheum.L20.076, rheum.L20.077, rheum.L20.078, rheum.L20.079, rheum.L20.080, rheum.L20.081, rheum.L20.082, rheum.L20.083, rheum.L20.084, rheum.L20.085, rheum.L20.086, rheum.L20.087, rheum.L20.088, rheum.L20.101]
+  # ------------------------------------------------------------------
+  - id: rheum.L20.lesson6
+    title: "لما الأمعاء تتعب المفاصل"
+    hook: "Type 1 بيمشي مع القولون، وType 2 ماشي لوحده، والـ Salmonella ممكن تسيب ركبة وارمة."
+    minutes: 7
+    pages: [343, 344]
+    topics: [enteropathic]
+    goals:
+      - "تعرّف الـ enteropathic arthritis"
+      - "تفرّق الـ axial و Type 1 و Type 2"
+      - "تعرف الـ post-enteritic reactive arthritis"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 343
+        title: "التعريف والآلية"
+        quote: "Increased gut permeability is a possible pathophysiologic significance by allowing penetration of harmful products."
+        text: |
+          الـ **enteropathic arthritis** = arthritis بسبب أو مع مرض في الأمعاء: **UC**، **Crohn**، **Whipple**، و **post-enteritic reactive arthritis**.
+
+          الآلية: ==increased gut permeability== بيدخّل حاجات ضارة (وفيه allergens بتعدي سليمة)، وممكن العدوى تنتشر من الـ pelvic organs عن طريق الـ **pelvic and paraspinal lymphatics** للعمود الفقري.
+      - kind: explain
+        page: 343
+        title: "الـ axial"
+        quote: "Improved by moderate activity. • More common in CD than in UC. • Independent of GI symptoms."
+        text: |
+          - **Low back pain** بيبدأ ببطء، خصوصًا في الصغيرين
+          - **Morning stiffness**
+          - بيزيد مع القعدة أو الوقفة الطويلة، ويتحسن مع الحركة
+          - أشيع في ==Crohn== من الـ UC
+          - **Independent** عن أعراض الأمعاء
+      - kind: sort
+        page: 343
+        quote: "Type 2 (polyarticular [>5 joints]) - Chronic, lasting months to years; more likely symmetrical, affecting small joints of the hands; independent of bowel activity."
+        prompt: "Type 1 ولا Type 2؟"
+        bins: ["Type 1", "Type 2"]
+        cards:
+          - { text: "Fewer than 5 joints", bin: 0 }
+          - { text: "Attacks under 6–10 weeks", bin: 0 }
+          - { text: "Knees, hips, shoulders", bin: 0 }
+          - { text: "Tracks IBD activity", bin: 0 }
+          - { text: "More than 5 joints", bin: 1 }
+          - { text: "Months to years", bin: 1 }
+          - { text: "Small hand joints, symmetric", bin: 1 }
+          - { text: "Independent of bowel activity", bin: 1 }
+        why: "Type 1 = **pauci**، acute، large، asymmetric، ماشي مع الـ IBD ومع extra-intestinal manifestations. Type 2 = **poly**، chronic، small، symmetric، مستقل."
+      - kind: aside
+        tone: analogy
+        page: 343
+        quote: "Non-deforming and non-erosive."
+        text: "Type 1 زي **ضيف ماشي مع صاحبه**: ييجي لما الـ colitis تولّع ويمشي لما تهدى. Type 2 **ساكن لوحده**: ملوش دعوة بالأمعاء. والاتنين **non-erosive** و **non-deforming**."
+      - kind: explain
+        page: 344
+        title: "Post-enteritic reactive arthritis"
+        quote: "It is triggered by a number of organisms: Shigella, Salmonella, yersinia and campylobacter jejuni."
+        text: |
+          - الأسباب: ==Shigella، Salmonella، Yersinia، Campylobacter jejuni==
+          - بيحب الـ **HLA-B27**
+          - **Knees** و **ankles**، و **plantar fasciitis** و **Achilles tendinitis**، و axial
+          - غالبًا **self-limited** في أسابيع لشهور
+      - kind: mnemonic
+        page: 344
+        quote: "It is triggered by a number of organisms: Shigella, Salmonella, yersinia and campylobacter jejuni."
+        word: "SSYC"
+        parts:
+          - { key: "S", text: "Shigella" }
+          - { key: "S", text: "Salmonella" }
+          - { key: "Y", text: "Yersinia" }
+          - { key: "C", text: "Campylobacter jejuni" }
+        hook: "«**S**afe **S**andwich? **Y**ou **C**ould get arthritis.» أي سندوتش مشكوك فيه ممكن يسيبلك ركبة وارمة."
+      - kind: check
+        page: 343
+        quote: "Independent of GI symptoms."
+        question: "Which is TRUE about enteropathic arthritis?"
+        options:
+          - "RF is typically negative"
+          - "Always with significant GI symptoms"
+          - "Usually symmetric polyarthritis"
+          - "Rarely affects the spine"
+        answer: 0
+        why:
+          - "صح: seronegative spondyloarthritis."
+          - "الـ axial independent، والـ arthritis ممكن يسبق الأمعاء."
+          - "الـ Type 1 (المرتبط بالنشاط) asymmetric pauci."
+          - "الـ sacroiliitis و spondylitis جزء أساسي."
+      - kind: try
+        items: [rheum.L20.091, rheum.L20.092, rheum.L20.094, rheum.L20.102]
+    recap:
+      - "Enteropathic: IBD، Whipple، post-enteritic. Gut permeability + lymphatic spread."
+      - "Axial: insidious، morning stiffness، أحسن بالحركة، Crohn > UC، independent."
+      - "Type 1 pauci acute large ماشي مع IBD؛ Type 2 poly chronic small مستقل. Non-erosive."
+      - "Reactive: SSYC، HLA-B27، knees/ankles، plantar fasciitis، self-limited."
+    practice: [rheum.L20.089, rheum.L20.090, rheum.L20.091, rheum.L20.092, rheum.L20.093, rheum.L20.094, rheum.L20.095, rheum.L20.096, rheum.L20.097, rheum.L20.102]

@@ -1,0 +1,543 @@
+schema: batna.lesson/v1
+lecture: endo.L06
+lessons:
+  # ------------------------------------------------------------------
+  - id: endo.L06.lesson1
+    title: "الـ TSH مش دايمًا بيقول الحقيقة"
+    hook: "التحليل الأشهر في الغدد، وبرضه أسهل تحليل تتلخبط فيه."
+    minutes: 8
+    pages: [99, 102]
+    topics: [intro, physiology, screening]
+    goals:
+      - "تعرف الـ confounders اللي بتلخبط الـ TFTs"
+      - "تفهم الـ HPT axis والـ deiodinases"
+      - "تعرف إمتى الـ TSH لوحده يضحك عليك"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 99
+        quote: "Rare genetic disorder e.g: resistance to thyroid hormone."
+        title: "إمتى الـ TFTs تلخبط؟"
+        text: |
+          أغلب الـ TFTs سهلة وبتأكد اللي شايفه: euthyroid أو hypo أو hyper. بس في مجموعة مهمة النتيجة:
+
+          - **discordant** مع الصورة الإكلينيكية، أو
+          - التحاليل **incongruent** مع بعض.
+
+          ساعتها دوّر على ==confounders==: pregnancy، non-thyroidal illness، أدوية، laboratory artifact، وحاجة genetic نادرة زي **resistance to thyroid hormone**.
+      - kind: mnemonic
+        page: 99
+        quote: "Rare genetic disorder e.g: resistance to thyroid hormone."
+        word: "PNMLR"
+        hook: "الـ confounders: \"Please Never Misread Lab Results\"."
+        parts:
+          - { key: "P", text: "Pregnancy" }
+          - { key: "N", text: "Non-thyroidal illness" }
+          - { key: "M", text: "Medication usage" }
+          - { key: "L", text: "Laboratory artifact" }
+          - { key: "R", text: "Rare genetic disorder (resistance to thyroid hormone)" }
+      - kind: explain
+        page: 100
+        quote: "85–90% T4 and 10–15% T3."
+        title: "الغدة بتطلّع إيه؟"
+        text: |
+          - الـ T4 والـ T3 عند كل واحد ثابتين طول عمره تقريبًا: ده الـ **set-point** بتاعه.
+          - الغدة بتفرز ==85-90% T4== و 10-15% T3.
+          - أكتر من **99.5%** متشال على بروتينات: **TBG**، albumin، transthyretin (prealbumin).
+          - الدخول للخلايا (زي المخ) محتاج **MCT8**.
+      - kind: figure
+        page: 100
+        quote: "family of intracellular deiodinases (DIOs)"
+        title: "التلات deiodinases"
+        alt: "Three boxes. DIO1 in the liver converts T4 to T3 in the periphery. DIO2 converts T4 to T3 in the hypothalamus and pituitary. DIO3 converts T4 to reverse T3 and T3 to T2, limiting hormone action."
+        caption: "DIO1 و DIO2 بيشغّلوا الهرمون، DIO3 بيطفّيه. افتكر DIO3 في الـ NTI والحمل."
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="E06a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="10" y="10" width="310" height="66" rx="8" class="fg-good"/>
+            <text x="20" y="32" class="t-b">DIO1 (liver)</text>
+            <text x="20" y="54" class="t-sm">T4</text>
+            <path d="M40 50h40" class="fg-arrow" marker-end="url(#E06a)"/>
+            <text x="86" y="54" class="t-sm t-b">T3</text>
+            <text x="120" y="54" class="t-sm t-mut">peripheral conversion</text>
+            <rect x="10" y="88" width="310" height="66" rx="8" class="fg-good"/>
+            <text x="20" y="110" class="t-b">DIO2</text>
+            <text x="20" y="132" class="t-sm">T4</text>
+            <path d="M40 128h40" class="fg-arrow" marker-end="url(#E06a)"/>
+            <text x="86" y="132" class="t-sm t-b">T3</text>
+            <text x="120" y="132" class="t-sm t-mut">hypothalamus, pituitary</text>
+            <rect x="10" y="166" width="310" height="76" rx="8" class="fg-bad"/>
+            <text x="20" y="188" class="t-b t-bad">DIO3 (inactivates)</text>
+            <text x="20" y="210" class="t-sm">T4 → reverse T3</text>
+            <text x="20" y="230" class="t-sm">T3 → T2</text>
+            <text x="170" y="220" class="t-sm t-mut">limits TH action</text>
+          </svg>
+      - kind: explain
+        page: 101
+        quote: "2 thyroid hormone receptor genes (THRA, THRB) exist on chromosomes 17 and 3 respectively."
+        title: "الـ receptor"
+        text: |
+          الـ ==T3== هو الـ principal bioactive hormone، وبيشتغل على **nuclear receptor (TR)**.
+
+          - جينين: **THRA** على chromosome 17 و **THRB** على chromosome 3.
+          - الـ splicing بيدّي TRα1، TRα2، TRβ1، TRβ2، وكل واحد في أنسجة مختلفة.
+          - الـ **THRB** هو اللي بيتغيّر في الـ resistance to thyroid hormone.
+      - kind: reveal
+        page: 102
+        quote: "as a modest changes in TH concentrations are associated with marked excursions in TSH."
+        prompt: "ليه الـ TSH بقى الـ frontline screening test؟"
+        answer: "عشان العلاقة log-linear: تغيير صغير في الـ TH بيعمل تغيير **كبير** في الـ TSH، فهو حساس جدًا. بس الحساسية دي هي نفسها اللي بتخلّيه يضحك عليك لو الـ axis نفسه مش سليم."
+      - kind: explain
+        page: 102
+        quote: "Conditions in which measurement of TSH alone may be misleading"
+        title: "إمتى الـ TSH لوحده يضللك"
+        text: |
+          - ==Recent treatment for thyrotoxicosis==: الـ TSH بيفضل suppressed أسابيع حتى بعد ما الهرمونات تتظبط.
+          - **NTI**.
+          - **TSH assay interference**.
+          - **Central hypothyroidism** (hypothalamic/pituitary).
+          - **TSHoma**.
+          - **Resistance to thyroid hormone**.
+          - اضطرابات الـ TH transport أو metabolism.
+
+          عشان كده الكتاب بيقول: الـ screening دلوقتي بـ ==FT4 + TSH== مع بعض.
+      - kind: check
+        page: 102
+        quote: "TSH may remain suppressed even when TH concentrations have normalised"
+        question: "Six weeks after starting carbimazole for Graves', FT4 is normal but TSH is still <0.01. What does this mean?"
+        options: ["TSH can stay suppressed after recent treatment; follow FT4", "She is still thyrotoxic; increase the dose", "She has central hypothyroidism", "Assay interference is certain"]
+        answer: 0
+        why:
+          - "صح: الـ TSH بيتأخر بعد العلاج، فالـ FT4 هو اللي يمشّيك دلوقتي."
+          - "الـ FT4 طبيعي، فزيادة الجرعة ممكن تعمل hypothyroidism."
+          - "مفيش سبب للـ pituitary disease؛ ده تأخر متوقع."
+          - "الـ interference مش أول تفسير، القصة كفاية."
+      - kind: aside
+        tone: analogy
+        page: 102
+        quote: "for these patients tissue markers of TH action are required."
+        text: "الـ TSH زي ترموستات في الصالة: ممكن الصالة تبقى مظبوطة والأوضة التانية لسه ساقعة. عشان كده مريض على thyroxine بـ TFTs ممتازة وبرضه تعبان محتاج **tissue markers** of TH action."
+      - kind: try
+        items: [endo.L06.002, endo.L06.004, endo.L06.007, endo.L06.011, endo.L06.012]
+    recap:
+      - "الـ confounders: pregnancy، NTI، أدوية، lab artifact، RTH."
+      - "85-90% T4، وأكتر من 99.5% bound على TBG و albumin و transthyretin."
+      - "DIO1 و DIO2: T4 → T3. DIO3: T4 → rT3 و T3 → T2."
+      - "THRA (17) و THRB (3)."
+      - "Screening = FT4 + TSH، مش TSH لوحده."
+    practice: [endo.L06.001, endo.L06.002, endo.L06.003, endo.L06.004, endo.L06.005, endo.L06.006, endo.L06.007, endo.L06.008, endo.L06.009, endo.L06.010, endo.L06.011, endo.L06.012, endo.L06.013, endo.L06.014, endo.L06.075]
+  # ------------------------------------------------------------------
+  - id: endo.L06.lesson2
+    title: "سبع أنماط، وعيّان مش عنده غدة"
+    hook: "مريض في الـ ICU بـ T4 واطي وT3 واطي. هل تديله thyroxine؟ لأ، وهنعرف ليه."
+    minutes: 9
+    pages: [103, 105]
+    topics: [patterns, nti]
+    goals:
+      - "تقرا الـ TFTs بالأنماط السبعة"
+      - "تعرف الـ NTI: النمط، الأسباب والـ mechanisms"
+      - "متتخضّش من الـ TSH العالي في فترة النقاهة"
+    status: unverified
+    steps:
+      - kind: figure
+        page: 103
+        quote: "When interpreting TFTs seven major patterns should be considered:"
+        title: "خريطة الأنماط"
+        alt: "A three by three grid with FT4/FT3 low, normal or high across, and TSH low, normal or high down. Each filled cell names the main causes: high hormones with low TSH is Graves and toxic nodules; normal hormones with low TSH is subclinical hyperthyroidism; low hormones with low or normal TSH is NTI or central; normal hormones with high TSH is subclinical hypothyroidism; low hormones with high TSH is primary hypothyroidism; high hormones with normal or high TSH is interference, TSHoma or RTH; all normal is euthyroid."
+        caption: "السبع TFT patterns. الخانة اللي فيها FT4 عالي + TSH مش واطي هي أكتر خانة فيها مطبات."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <text x="110" y="16" class="t-sm t-b">FT4 / FT3</text>
+            <text x="78" y="36" class="t-sm">low</text>
+            <text x="165" y="36" class="t-sm">normal</text>
+            <text x="262" y="36" class="t-sm">high</text>
+            <text x="4" y="80" class="t-sm">TSH low</text>
+            <text x="4" y="160" class="t-sm">TSH N</text>
+            <text x="4" y="240" class="t-sm">TSH high</text>
+            <rect x="60" y="44" width="86" height="76" class="fg-acc"/>
+            <text x="66" y="74" class="t-sm">NTI, central,</text>
+            <text x="66" y="92" class="t-sm">assay</text>
+            <rect x="150" y="44" width="86" height="76" class="fg-box"/>
+            <text x="156" y="70" class="t-sm">subclinical</text>
+            <text x="156" y="88" class="t-sm">hyper,</text>
+            <text x="156" y="106" class="t-sm">steroids</text>
+            <rect x="240" y="44" width="86" height="76" class="fg-bad"/>
+            <text x="246" y="74" class="t-sm t-b">Graves',</text>
+            <text x="246" y="92" class="t-sm">toxic nodules</text>
+            <rect x="60" y="124" width="86" height="76" class="fg-acc"/>
+            <text x="66" y="160" class="t-sm">NTI, central</text>
+            <rect x="150" y="124" width="86" height="76" class="fg-good"/>
+            <text x="160" y="166" class="t-sm t-b">euthyroid</text>
+            <rect x="240" y="124" width="86" height="156" class="fg-bad"/>
+            <text x="246" y="170" class="t-sm t-b">trap zone:</text>
+            <text x="246" y="190" class="t-sm">assay, FDH,</text>
+            <text x="246" y="208" class="t-sm">L-T4, heparin,</text>
+            <text x="246" y="226" class="t-sm">TSHoma, RTH</text>
+            <rect x="60" y="204" width="86" height="76" class="fg-bad"/>
+            <text x="66" y="238" class="t-sm t-b">primary</text>
+            <text x="66" y="256" class="t-sm">hypothyroid</text>
+            <rect x="150" y="204" width="86" height="76" class="fg-box"/>
+            <text x="156" y="230" class="t-sm">subclinical</text>
+            <text x="156" y="248" class="t-sm">hypo, poor</text>
+            <text x="156" y="266" class="t-sm">compliance</text>
+          </svg>
+      - kind: sort
+        page: 103
+        quote: "When interpreting TFTs seven major patterns should be considered:"
+        prompt: "حط كل سبب في الـ TFT pattern بتاعه:"
+        bins: ["High FT4, low TSH", "Low FT4, TSH low/normal", "High FT4, TSH normal/high"]
+        cards:
+          - { text: "Toxic multinodular goitre", bin: 0 }
+          - { text: "Hyperemesis gravidarum", bin: 0 }
+          - { text: "Excess thyroxine ingestion", bin: 0 }
+          - { text: "Isolated TSH deficiency", bin: 1 }
+          - { text: "Central hypothyroidism", bin: 1 }
+          - { text: "TSH-secreting adenoma", bin: 2 }
+          - { text: "Resistance to thyroid hormone", bin: 2 }
+          - { text: "Heparin", bin: 2 }
+        why: "الـ TSHoma والـ RTH والـ heparin كلهم بيدّوا هرمون عالي من غير ما الـ TSH يقع. والـ central بيدّي هرمون واطي بـ TSH مش عالي."
+      - kind: explain
+        page: 103
+        quote: "NTI is a common finding following any acute or chronic illness defined by the absence of an intrinsic abnormality of HPT function."
+        title: "الـ NTI (sick euthyroid)"
+        text: |
+          أول قاعدة: اطلب الـ TFTs **بس لو فيه clinical features** لمشكلة في الغدة.
+
+          الـ ==non-thyroidal illness==: بيحصل بعد أي مرض acute أو chronic، **من غير** عيب حقيقي في الـ HPT axis. ده **beneficial adaptive change** بيقلل الـ metabolic rate.
+      - kind: table
+        page: 104
+        quote: "↓TT4 ↓TT3 ↑ reverse T3 ↓ or N TSH"
+        title: "النمط"
+        columns: ["Test", "NTI"]
+        rows:
+          - ["Total T4", "↓"]
+          - ["Total T3", "↓"]
+          - ["Reverse T3", "↑"]
+          - ["TSH", "↓ or normal"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1]]
+      - kind: explain
+        page: 104
+        quote: "Changes in TH may occur 24 h after the onset of nonthyroidal illness"
+        title: "بيحصل إمتى وليه؟"
+        text: |
+          بيبدأ بعد **24 ساعة** من المرض في: poor nutrition، starvation، **sepsis**، burns، malignancy، **MI**، بعد العمليات، وأمراض الكبد والكلى المزمنة.
+
+          الـ total hormones بتقع عشان الـ ==binding proteins== بتقل. والـ mechanisms:
+
+          - ↓TRH (paraventricular nuclei) و ↓TSH.
+          - ↓binding capacity و ↓cellular uptake.
+          - **Altered deiodinase**، وده سبب الـ rT3 العالي.
+          - ↓leptin في الـ malnutrition.
+          - Cytokines: IL-1، IL-6، TNF-α.
+          - Excess endogenous **glucocorticoids**.
+      - kind: aside
+        tone: joke
+        page: 103
+        quote: "It is considered a secondary beneficial adaptive change to reduce metabolic rate."
+        text: "الجسم في الـ sepsis عامل زي البيت في انقطاع الكهربا: قافل التكييف (metabolic rate) عشان يوفّر للتلاجة. متجيش أنت تشغّل التكييف بـ thyroxine."
+      - kind: check
+        page: 104
+        quote: "↓TT4 ↓TT3 ↑ reverse T3 ↓ or N TSH"
+        question: "Which finding best separates NTI from central hypothyroidism here?"
+        options: ["High reverse T3", "Low TSH", "Low total T4", "Low total T3"]
+        answer: 0
+        why:
+          - "صح: الـ rT3 بيعلى في الـ NTI بسبب تغيير الـ deiodinase."
+          - "الـ TSH ممكن يبقى واطي أو طبيعي في الاتنين."
+          - "الـ TT4 واطي في الاتنين."
+          - "الـ TT3 واطي في الاتنين."
+      - kind: case
+        page: 105
+        quote: "it is important to be aware of this transient phenomenon in order to avoid inappropriate diagnosis and treatment."
+        stem: "A 70-year-old man is recovering from a hip fracture repair and pneumonia. A routine panel on day 12 shows TSH 8.5 mU/L, FT4 normal."
+        steps:
+          - question: "What is the most likely explanation?"
+            options: ["Recovery phase of NTI", "New Hashimoto's", "TSHoma", "Levothyroxine non-compliance"]
+            answer: 0
+            why: "في النقاهة الـ TSH ممكن يعلى شوية لفترة قصيرة. ده transient phenomenon."
+          - question: "What should you do?"
+            options: ["Repeat TFTs after recovery", "Start levothyroxine", "Pituitary MRI", "Thyroid ultrasound"]
+            answer: 0
+            why: "الكتاب بيحذّر من inappropriate diagnosis and treatment. استنى وكرر."
+      - kind: try
+        items: [endo.L06.015, endo.L06.019, endo.L06.022, endo.L06.024, endo.L06.025]
+    recap:
+      - "اطلب TFTs بس لو فيه clinical features."
+      - "سبع أنماط؛ FT4 عالي بـ TSH مش واطي = منطقة المطبات."
+      - "NTI: ↓TT4، ↓TT3، ↑rT3، TSH ↓ أو طبيعي؛ adaptive."
+      - "بيبدأ بعد 24 ساعة؛ cytokines، deiodinase، steroids، leptin."
+      - "في النقاهة الـ TSH ممكن يعلى مؤقتًا: متعالجش."
+    practice: [endo.L06.015, endo.L06.016, endo.L06.017, endo.L06.018, endo.L06.019, endo.L06.020, endo.L06.021, endo.L06.022, endo.L06.023, endo.L06.024, endo.L06.025, endo.L06.026, endo.L06.027]
+  # ------------------------------------------------------------------
+  - id: endo.L06.lesson3
+    title: "الحمل والـ thyroxine: لما المريضة نفسها تلخبط التحليل"
+    hook: "الـ hCG بيتنكّر في هيئة TSH، والقهوة الصبح بتسرق نص جرعة الـ thyroxine."
+    minutes: 9
+    pages: [105, 106]
+    topics: [pregnancy, levothyroxine]
+    goals:
+      - "تفسر تغيرات الـ TFTs في الحمل"
+      - "تفرّق gestational من Graves'"
+      - "تحل لغز المريض اللي على thyroxine والـ TSH مش راضي ينزل"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 105
+        quote: "Total t4 and t3 ↑ to 150% of non-pregnant values during the first half of pregnancy and maintained until parturition."
+        title: "الحمل بيعمل إيه؟"
+        text: |
+          - ==TBG== بيعلى: الـ oestrogen بيزوّد تصنيعه في الكبد وبيقلل تكسيره.
+          - **Total T4 و T3** بيوصلوا **150%** في النص الأول من الحمل ويفضلوا كده للولادة.
+          - **FT4** بيعلى مؤقتًا في الـ first trimester عشان الـ **hCG** بيشتغل على الـ TSH receptor.
+          - كمان: زيادة الـ plasma volume، وزيادة الـ **DIO3** من الـ placenta، و زيادة الـ urinary iodine clearance، ودي بتعمل goitre في المناطق الفقيرة في اليود.
+      - kind: figure
+        page: 105
+        quote: "Transient ↑ in ft4 in first trimester is due to the stimulatory effects of ↑ hcg acting on the tsh receptor."
+        title: "الـ hCG والـ TSH: مراية"
+        alt: "Line chart across the three trimesters. hCG peaks at the end of the first trimester; TSH dips at the same time, a mirror image, then both settle. Total T4 rises to 150 percent by mid-pregnancy and stays."
+        caption: "لما الـ hCG يوصل الذروة آخر الـ first trimester، الـ TSH بينزل. ده مش Graves'."
+        svg: |
+          <svg viewBox="0 0 330 230" xmlns="http://www.w3.org/2000/svg">
+            <path d="M30 190H320" class="fg-ink"/>
+            <path d="M30 190V20" class="fg-ink"/>
+            <text x="50" y="208" class="t-sm">1st</text>
+            <text x="150" y="208" class="t-sm">2nd</text>
+            <text x="250" y="208" class="t-sm">3rd trimester</text>
+            <path d="M126 190V20M226 190V20" class="fg-thin"/>
+            <path d="M30 170C70 160 90 30 115 30C140 30 150 140 226 150L320 155" class="fg-arrow-acc" stroke-width="3"/>
+            <text x="120" y="28" class="t-sm t-acc t-b">hCG</text>
+            <path d="M30 80C70 82 90 160 115 160C140 160 150 95 226 90L320 88" class="fg-arrow-bad" stroke-width="3"/>
+            <text x="60" y="176" class="t-sm t-bad t-b">TSH dips</text>
+            <path d="M30 130C80 120 120 70 180 62L320 62" class="fg-arrow" stroke-width="2"/>
+            <text x="236" y="56" class="t-sm t-b">total T4 150%</text>
+          </svg>
+      - kind: check
+        page: 105
+        quote: "it is important to distinguish gestational hyperthyroidism from other causes of thyrotoxicosis (e.g. Graves‘ disease) & (trab) measurement is helpful."
+        question: "A woman with hyperemesis gravidarum has a suppressed TSH and high FT4. Which test best separates gestational hyperthyroidism from Graves'?"
+        options: ["TRAb", "Total T4", "TBG", "Reverse T3"]
+        answer: 0
+        why:
+          - "صح: الـ TRAb موجبة في الـ Graves'."
+          - "الـ total T4 عالي في الحمل أصلًا بسبب الـ TBG."
+          - "الـ TBG عالي في أي حمل."
+          - "الـ rT3 مش هو اللي بيفرّق هنا."
+      - kind: explain
+        page: 106
+        quote: "Causes of anomalous TFTs in patients receiving levothyroxine therapy"
+        title: "المريض على L-T4 والتحاليل غريبة"
+        text: |
+          أغلب المرضى على **levothyroxine** بيتظبطوا بسهولة، بس فيه مجموعة عندها **anomalous TFTs** بتجنن الدكتور والمريض. جدول الكتاب ستة أنماط:
+
+          1. **Normal TSH، FT4 عالي شوية**: physiological variant: الـ deiodination أقل كفاءة، والـ FT3 طبيعي.
+          2. **TSH عالي، FT4 واطي/واطي-طبيعي، محتاج جرعة كبيرة**: maladministration، malabsorption، زيادة الـ metabolism، أو زيادة الـ binding.
+          3. **الجرعة اتغيرت فجأة**: غيّر الـ preparation.
+          4. **TSH عالي، FT4 طبيعي**: ==assay interference== (heterophilic antibodies)، FT3 طبيعي.
+          5. **TSH عالي على طول مع FT4 أي حاجة رغم جرعة كبيرة**: ==poor compliance==.
+          6. **محتاج جرعة supraphysiologic وFT4 وFT3 عاليين**: **RTH**.
+      - kind: sort
+        page: 106
+        quote: "Patients should be advised to take L-T4 on an empty stomach"
+        prompt: "ليه المريض محتاج جرعة أكبر؟ صنّف السبب:"
+        bins: ["Absorption", "↑ Metabolism or loss", "↑ Binding (TBG)"]
+        cards:
+          - { text: "Espresso coffee", bin: 0 }
+          - { text: "Calcium, iron, PPIs", bin: 0 }
+          - { text: "Coeliac disease", bin: 0 }
+          - { text: "Rifampicin", bin: 1 }
+          - { text: "Carbamazepine", bin: 1 }
+          - { text: "Nephrotic syndrome", bin: 1 }
+          - { text: "Oral oestrogen", bin: 2 }
+          - { text: "IVF treatment", bin: 2 }
+        why: "L-T4 لازم على empty stomach: الأكل والأدوية والـ coeliac بيقللوا الامتصاص. الـ enzyme inducers بيكسّروا الهرمون، والـ nephrotic بيضيّعه في البول. والـ oestrogen بيعلّي الـ TBG."
+      - kind: aside
+        tone: joke
+        page: 106
+        quote: "Patients should be advised to take L-T4 on an empty stomach; certain foodstuffs (e.g. fibre, espresso coffee)"
+        text: "المريض بياخد الـ thyroxine مع الفول والعيش البلدي (fibre) وفنجان espresso وحباية الكالسيوم؟ يبقى بياخد الجرعة للمعدة تتفرج عليها بس. **Empty stomach** يا جماعة."
+      - kind: reveal
+        page: 106
+        quote: "Owing to their differing half-lives, intermittent thyroxine ingestion may result in normal or even elevated TH concentrations, but fails to normalize TSH"
+        prompt: "ليه المريض اللي بينسى ويرجع ياخد كذا حباية قبل العيادة يطلع FT4 عالي و TSH عالي في نفس الوقت؟"
+        answer: "الـ FT4 بيعكس آخر كام يوم (جرعة الصبح)، أما الـ TSH بيحتاج أسابيع ينزل. فالـ **half-lives** المختلفة بتكشف الـ ==poor compliance==."
+      - kind: check
+        page: 106
+        quote: "Heterophilic antibody interference in the TSH assay may yield falsely elevated results; FT3 is normal"
+        question: "On levothyroxine: TSH high, FT4 normal, FT3 normal, and the patient feels well on a reasonable dose. Which cause should you suspect?"
+        options: ["TSH assay interference", "Resistance to thyroid hormone", "Increased TBG", "Physiological variant"]
+        answer: 0
+        why:
+          - "صح: الـ heterophilic antibodies بتعلّي الـ TSH كذب، والـ FT3 طبيعي."
+          - "الـ RTH بيدّي FT4 و FT3 عاليين."
+          - "زيادة الـ TBG بتخلّي الـ FT4 يقع."
+          - "الـ variant: TSH طبيعي و FT4 عالي شوية."
+      - kind: explain
+        page: 106
+        quote: "usually fall in the range 1.6–2.0 mcg/kg"
+        title: "الجرعة"
+        text: |
+          في الـ athyreotic، الجرعة الكاملة حوالي ==1.6-2.0 mcg/kg== في اليوم.
+
+          - **الكبار في السن** محتاجين أقل.
+          - خد بالك مع **ischaemic heart disease** أو arrhythmias.
+          - تغيير الـ brand: تجنّبه، ولو حصل كتّر الـ TFTs.
+      - kind: try
+        items: [endo.L06.029, endo.L06.030, endo.L06.034, endo.L06.036, endo.L06.040]
+    recap:
+      - "الحمل: ↑TBG، total T4/T3 = 150%، FT4 بيعلى في الـ 1st trimester من الـ hCG."
+      - "Hyperemesis + TSH suppressed: الـ TRAb بتفرّق عن Graves'."
+      - "L-T4 على معدة فاضية؛ coffee، fibre، calcium، iron، PPIs بتقلل الامتصاص."
+      - "Enzyme inducers و nephrotic بيزوّدوا الاحتياج؛ oestrogen/IVF بيعلّي الـ TBG."
+      - "TSH عالي + FT4 طبيعي + FT3 طبيعي = interference. TSH عالي مع FT4 عالي = compliance."
+    practice: [endo.L06.028, endo.L06.029, endo.L06.030, endo.L06.031, endo.L06.032, endo.L06.033, endo.L06.034, endo.L06.035, endo.L06.036, endo.L06.037, endo.L06.038, endo.L06.039, endo.L06.040, endo.L06.041, endo.L06.042, endo.L06.043, endo.L06.044, endo.L06.045, endo.L06.046, endo.L06.047, endo.L06.073]
+  # ------------------------------------------------------------------
+  - id: endo.L06.lesson4
+    title: "الأدوية، الـ binding proteins، والخطوات الخمسة"
+    hook: "الـ amiodarone لوحده ممكن يعمل تلات أنماط مختلفة. وبعدين نختم بالـ algorithm اللي بيحل أي لغز."
+    minutes: 10
+    pages: [107, 110]
+    topics: [drugs, binding, rth]
+    goals:
+      - "تعرف أنماط الـ iodide والـ amiodarone والـ lithium والـ TKIs"
+      - "تعرف الأدوية اللي بتغير الـ TBG أو بتزاحم عليه"
+      - "تفرّق RTH من TSHoma وتمشي في الخطوات الخمسة"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 107
+        quote: "may develop overt hyperthyroidism following exposure to iodine-containing compounds (Jod- Basedow effect), which may persist for months"
+        title: "اليود: يقفل ولا يفتح؟"
+        text: |
+          اليود من الأكل أو الـ supplements أو الـ **contrast** ممكن يعمل حاجتين عكس بعض:
+
+          - **↑TSH، ↓FT4**: اضطراب مؤقت، وممكن hypothyroidism دايم لو الغدة احتياطيها قليل (chronic autoimmune thyroiditis).
+          - **↓TSH، ↑FT4**: ==Jod-Basedow==، يعني overt hyperthyroidism بعد iodine-containing compounds لو فيه autonomy (زي MNG قديمة)، وممكن يفضل شهور.
+
+          والـ **Wolff-Chaikoff** = اليود العالي جوه الغدة بيوقف تصنيع T4 و T3.
+      - kind: table
+        page: 107
+        quote: "Two main types of thyrotoxicosis are recognised: type 1 (large iodine load precipitating latent thyroid autonomy); type 2 (destructive thyroiditis)"
+        title: "الـ amiodarone: تلات وشوش"
+        columns: ["Pattern", "Why"]
+        rows:
+          - ["Transient ↑TSH, ↑FT4, N FT3", "Type 1 DIO blocked (early months)"]
+          - ["↓TSH, ↑FT4", "Type 1 iodine / type 2 thyroiditis"]
+          - ["↑TSH, ↓FT4", "Up to 15%; no Wolff-Chaikoff escape"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: check
+        page: 107
+        quote: "inhibition of type 1 DIO leads to persistent elevation of FT4, but normal FT3"
+        question: "Why is FT4 raised with a normal FT3 early on amiodarone?"
+        options: ["It inhibits type 1 deiodinase", "It is a heterophilic antibody", "It raises TBG", "It stimulates the TSH receptor"]
+        answer: 0
+        why:
+          - "صح: الـ DIO1 بيتقفل فالـ T4 مش بيتحول لـ T3."
+          - "ده دوا مش antibody."
+          - "الكتاب مش بيقول إنه بيعلّي الـ TBG."
+          - "مش بيشتغل على الـ TSH receptor."
+      - kind: match
+        page: 107
+        quote: "Primary hypothyroidism (possibly due to a direct toxic effect on the thyroid gland) has been observed with some TKIs, e.g. Sunitinib, Sorafenib"
+        prompt: "وصّل كل دوا بتأثيره:"
+        pairs:
+          - ["Lithium", "Overt or subclinical hypothyroidism"]
+          - ["Sunitinib", "Hypothyroidism ± thyrotoxic prodrome"]
+          - ["Alemtuzumab", "Graves' disease"]
+          - ["Interferon alpha", "Hashimoto's (or Graves')"]
+          - ["Bexarotene", "↓TSH and ↓FT4 (TSHβ blocked)"]
+        why: "الـ bexarotene الوحيد من الـ TSH suppressors اللي بيعمل hypothyroidism حقيقي في نسبة كبيرة."
+      - kind: explain
+        page: 108
+        quote: "Both octreotide and lanreotide suppress pituitary TSH secretion through a direct inhibitory action on pituitary thyrotrophs"
+        title: "أدوية بتوطّي الـ TSH"
+        text: |
+          - **Dopamine/agonists**: على الـ D2 في الـ thyrotrophs.
+          - **Glucocorticoids**: بتقفل الـ TRH من الـ paraventricular nucleus.
+          - **Somatostatin analogues**: octreotide و lanreotide على الـ thyrotrophs مباشرة.
+          - **Metformin**: TSH بيقل ظاهريًا، و FT4 طبيعي.
+
+          كلهم عادةً ==transient== ومن غير central hypothyroidism مهم.
+      - kind: table
+        page: 108
+        quote: "Drugs that inhibit TBG synthesis: androgens, chronic glucocorticoid therapy, nicotinic acid."
+        title: "الـ TBG"
+        columns: ["Effect", "Drugs"]
+        rows:
+          - ["↑TBG", "Oral oestrogen, raloxifene, tamoxifen, mitotane, 5-FU, methadone, heroin"]
+          - ["↓TBG", "Androgens, chronic steroids, nicotinic acid"]
+        hide: [[0, 1], [1, 1]]
+      - kind: aside
+        tone: trap
+        page: 108
+        quote: "oral (but not transdermal) oestrogen"
+        text: "الـ **transdermal** oestrogen مش بيعلّي الـ TBG، بس الـ **oral** بيعلّيه (بيعدّي على الكبد الأول). سؤال امتحان كلاسيكي."
+      - kind: explain
+        page: 109
+        quote: "Furosemide (especially with doses >80 mg/day and when given intravenously)."
+        title: "أدوية بتزاحم على الـ binding sites"
+        text: |
+          بتطرد الـ T4 والـ T3 من الـ TBG والـ albumin والـ transthyretin وبتبوّظ الـ FT4/FT3:
+
+          - **Furosemide** (أكتر من 80 mg/day و IV).
+          - **Aspirin**، **NSAIDs**، **phenytoin**.
+          - ==Heparin==: متقيسش FT4 أصلًا لو تقدر؛ ولو لازم، خد العينة **بعد 10 ساعات على الأقل** من آخر حقنة وحللها على طول.
+      - kind: table
+        page: 109
+        quote: "Somatostatin receptor ligand therapy →Most TSHomas respond."
+        title: "RTH ولا TSHoma؟"
+        columns: ["Clue", "TSHoma", "RTH"]
+        rows:
+          - ["SRL trial", "Most respond", "No change"]
+          - ["Relatives", "Normal", "Same TFTs"]
+          - ["Gene", "-", "THRB"]
+        hide: [[0, 1], [0, 2], [1, 2], [2, 2]]
+      - kind: order
+        page: 110
+        quote: "Step 1: Re-evaluate clinical history"
+        prompt: "رتّب الخطوات الخمسة للـ discordant TFTs:"
+        steps: ["Re-evaluate clinical history", "Re-assess thyroid status", "Decide which TFT is discordant", "Exclude assay interference", "Investigate rare HPT disorders"]
+        why: "ابدأ بالقصة (السن، الحمل، الـ thyroxine، الأدوية، الـ NTI)، وآخر حاجة الأمراض النادرة في مركز متخصص."
+      - kind: figure
+        page: 110
+        quote: "Step 1: Re-evaluate clinical history"
+        title: "Step 1 بالتفصيل"
+        alt: "Five branches from clinical history: age (neonatal, elderly), pregnancy (low TSH in first trimester from hCG, high total hormones from TBG), thyroxine therapy (diet, malabsorption, metabolism, compliance), confounding drugs (amiodarone, furosemide, heparin, steroids, dopamine) and non-thyroidal illness."
+        caption: "خمس أسئلة في القصة بتحل أغلب الألغاز قبل ما تطلب أي تحليل زيادة."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <rect x="80" y="6" width="170" height="30" rx="6" class="fg-acc"/>
+            <text x="95" y="26" class="t-sm t-b">Step 1: history</text>
+            <path d="M165 36V50" class="fg-arrow"/>
+            <rect x="10" y="52" width="310" height="40" rx="6" class="fg-box"/>
+            <text x="18" y="70" class="t-sm t-b">Age</text>
+            <text x="18" y="86" class="t-sm">neonatal period, elderly</text>
+            <rect x="10" y="96" width="310" height="40" rx="6" class="fg-box"/>
+            <text x="18" y="114" class="t-sm t-b">Pregnancy</text>
+            <text x="18" y="130" class="t-sm">↓TSH (hCG), ↑TT4/TT3 (TBG), pregnancy RR</text>
+            <rect x="10" y="140" width="310" height="40" rx="6" class="fg-box"/>
+            <text x="18" y="158" class="t-sm t-b">Thyroxine therapy</text>
+            <text x="18" y="174" class="t-sm">diet/drugs, malabsorption, compliance</text>
+            <rect x="10" y="184" width="310" height="40" rx="6" class="fg-box"/>
+            <text x="18" y="202" class="t-sm t-b">Confounding drugs</text>
+            <text x="18" y="218" class="t-sm">amiodarone, furosemide, heparin, steroids</text>
+            <rect x="10" y="228" width="310" height="40" rx="6" class="fg-box"/>
+            <text x="18" y="246" class="t-sm t-b">Non-thyroidal illness</text>
+            <text x="18" y="262" class="t-sm">NTI and its recovery</text>
+            <text x="10" y="290" class="t-sm t-mut">then steps 2-5</text>
+          </svg>
+      - kind: update
+        page: 110
+        quote: "including the role of biotin, heterophile antibodies, and macro-TSH."
+        text: "الـ biotin بجرعات كبيرة في supplements الشعر والضوافر بيدّي TSH واطي كذب و FT4 عالي كذب في الـ streptavidin-biotin assays، فيقلّد Graves'. وقّفه يومين على الأقل قبل التحليل. الـ macro-TSH بيدّي TSH عالي كذب."
+        ref: "ATA/ETA assay interference statements; FDA safety communication 2019"
+      - kind: try
+        items: [endo.L06.050, endo.L06.061, endo.L06.064, endo.L06.067, endo.L06.069]
+    recap:
+      - "Iodide: hypothyroid (low reserve) أو Jod-Basedow (MNG)."
+      - "Amiodarone: ↑FT4 بـ FT3 طبيعي (DIO1)، thyrotoxicosis type 1/2، hypothyroid 15%."
+      - "TSH suppressors: dopamine، steroids، SSA، metformin؛ bexarotene بيعمل hypothyroidism حقيقي."
+      - "الـ oral oestrogen بيعلّي الـ TBG، والـ transdermal لأ. Heparin: عينة بعد 10 ساعات."
+      - "TSHoma بيستجيب للـ SRL؛ RTH: الأقارب و THRB. خمس خطوات للـ discordant TFTs."
+    practice: [endo.L06.048, endo.L06.049, endo.L06.050, endo.L06.051, endo.L06.052, endo.L06.053, endo.L06.054, endo.L06.055, endo.L06.056, endo.L06.057, endo.L06.058, endo.L06.059, endo.L06.060, endo.L06.061, endo.L06.062, endo.L06.063, endo.L06.064, endo.L06.065, endo.L06.066, endo.L06.067, endo.L06.068, endo.L06.069, endo.L06.070, endo.L06.071, endo.L06.072, endo.L06.074, endo.L06.076, endo.L06.077, endo.L06.078]

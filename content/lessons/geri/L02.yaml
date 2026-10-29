@@ -1,0 +1,599 @@
+schema: batna.lesson/v1
+lecture: geri.L02
+lessons:
+  # ------------------------------------------------------------------
+  - id: geri.L02.lesson1
+    title: "الكلية العجوزة: أقل عدد، نفس الشغل"
+    hook: "الكلية بتخسر لحد نص الـ glomeruli وهي ساكتة. المشكلة بتبان أول ما تزوّدها حمل: ملح، ميه، أو دوا."
+    minutes: 9
+    pages: [25, 29]
+    topics: [overview, anatomy, physiology]
+    goals:
+      - "تعرف التغييرات التشريحية في الكلية مع السن"
+      - "تفهم ليه الكبار بيتعبوا من نقص الملح ومن الـ hyperkalemia ومن الجفاف"
+      - "تحفظ رقم الـ GFR مع كل عشر سنين"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 25
+        title: "رسايل المحاضرة"
+        quote: "ESRD has increased over the past 20 years and most of these changes have occurred in the aged population."
+        text: |
+          المحاضرة كلها في كام جملة:
+          - الـ ==GFR== بيقل مع السن.
+          - الـ **ESRD** زاد في آخر 20 سنة، وأغلب الزيادة عند الكبار.
+          - **Cystatin C** بيعكس وظيفة الكلى عند الكبار كويس.
+          - الـ **UTI** شائع جدًا، ولازم تفرّقه عن ==asymptomatic bacteriuria== اللي غالبًا مش بتتعالج.
+          - الـ **catheter-induced UTI** من أشهر الـ nosocomial infections.
+      - kind: table
+        page: 26
+        quote: "Glomeruli: ↓ in No (30-50%). ↓ Cells Sclerotic glomeruli Glomerular ischaemia"
+        title: "التشريح بيتغيّر إزاي؟"
+        columns: [Part, Change]
+        rows:
+          - [Weight, "Falls from 40–50 y; cortex more"]
+          - [Glomeruli, "Down 30–50%, sclerosis"]
+          - [Nephrons, "Fewer; the rest enlarge"]
+          - [BM, "Thicker; more type IV collagen"]
+          - [Tubules, "Shorter; less proximal volume"]
+          - [Interstitium, "More fibrosis"]
+        hide: [[0, 1], [1, 1], [2, 1], [5, 1]]
+      - kind: aside
+        tone: analogy
+        page: 26
+        quote: "Nephrons: ↓ No, ↑ Size of residuals."
+        text: "زي مصنع بيقفل خطوط إنتاج كل سنة، والعمال اللي فاضلين بيشتغلوا وقت إضافي: الـ **nephrons** بتقل، واللي فاضل بيكبر. الإنتاج العادي ماشي، بس أول طلبية كبيرة، المصنع يقع."
+      - kind: explain
+        page: 28
+        title: "الملح: لا تزوّده ولا تمنعه خالص"
+        quote: "Caution: intense Na+ restriction → volume contraction →↓ Renal functions → Orthostatic hypotension"
+        text: |
+          - إخراج الـ **Na و K** والـ solutes بيزيد ==بالليل== ← ده جزء من ليه الحاج بيصحى يدخل الحمام.
+          - الكلية العجوزة **مش بتعرف تحافظ على الصوديوم**. علشان كده الـ ==intense Na restriction== ← volume contraction ← وظايف الكلى تقل ← **orthostatic hypotension**.
+          - الـ **ANP** بيعلى، وده بيزوّد خروج الصوديوم.
+      - kind: explain
+        page: 28
+        title: "الـ RAAS نايم ← البوتاسيوم بيعلى"
+        quote: "↓ RAAS → hyper kalemia. Caution: K. sparing diuretic, RAAS blockade, NSAIDs, BBs."
+        text: |
+          الـ **renin** والـ **aldosterone** بيقلوا مع السن ← ==hyperkalemia== أسهل.
+
+          خلّي بالك من أربع أدوية:
+          - **K-sparing diuretics**
+          - **RAAS blockade**: ACEI و ARB
+          - **NSAIDs**
+          - **Beta-blockers**
+      - kind: mnemonic
+        page: 28
+        quote: "Caution: K. sparing diuretic, RAAS blockade, NSAIDs, BBs."
+        word: "KRNB"
+        parts:
+          - { key: "K", text: "K-sparing diuretics" }
+          - { key: "R", text: "RAAS blockade (ACEI, ARB)" }
+          - { key: "N", text: "NSAIDs" }
+          - { key: "B", text: "Beta-blockers" }
+        hook: "**«كرنب»**: KRNB. الحاج اللي بياكل كرنب وواخد الأربعة دول، البوتاسيوم عنده هيطلع السما."
+      - kind: case
+        page: 28
+        quote: "↓ RAAS → hyper kalemia. Caution: K. sparing diuretic, RAAS blockade, NSAIDs, BBs."
+        stem: "An 81-year-old man on lisinopril and bisoprolol is given spironolactone, a K-sparing diuretic, on top of his RAAS blockade, and buys ibuprofen, an NSAID, for knee pain."
+        steps:
+          - question: "Which electrolyte do you fear most?"
+            options:
+              - "Hyperkalemia"
+              - "Hypernatremia"
+              - "Hypocalcemia"
+              - "Hypokalemia"
+            answer: 0
+            why: "Low renin and aldosterone with age, plus all four KRNB drugs at once."
+          - reveal: "K+ comes back 6.4 mmol/L."
+            question: "Which drug is the easiest first one to stop?"
+            options:
+              - "Ibuprofen"
+              - "Lisinopril"
+              - "Bisoprolol"
+              - "Nothing; K+ is fine at his age"
+            answer: 0
+            why: "The NSAID adds nothing for his heart and also harms the kidney; stop it first, then review spironolactone. (Clinical reasoning; the drug list is from the book.)"
+      - kind: explain
+        page: 28
+        title: "الميه: لا بيخففها ولا بيركّزها"
+        quote: "↓ Capacity to maximally concentrate the urine (defective Na re-absorption in ALOH)."
+        text: |
+          - **Dilution:** لو شرب ميه كتير، الـ free water clearance بتبقى قليلة، علشان الـ nephrons قليلة والـ **ADH** عالي ← ممكن **hyponatremia**.
+          - **Concentration:** مش بيعرف يركّز البول للآخر، علشان الـ Na reabsorption في الـ ==ascending loop of Henle== ضعيف.
+          - وفوق ده ==الـ thirst بيقل==.
+
+          النتيجة: في الحر، الحاج بيخسر ميه ومش عطشان ← **hypernatremia** و dehydration.
+      - kind: reveal
+        page: 28
+        quote: "↓ Capacity to maximally concentrate the urine"
+        prompt: "ليه ضعف الـ Na reabsorption في الـ ascending loop يبوّظ تركيز البول؟"
+        answer: |
+          الـ ascending loop بيطلّع **NaCl** في الـ medulla من غير ميه، وده اللي بيعمل الـ **medullary gradient**. الـ collecting duct بعد كده بيسحب الميه على الـ gradient ده بالـ ADH.
+
+          لو الـ loop ضعيف، الـ gradient يقل، فحتى مع ADH عالي الكلية مش هتقدر **maximally concentrate the urine**. (تفسير فسيولوجي.)
+      - kind: figure
+        page: 29
+        title: "الكلية والسن: الأرقام"
+        quote: "GFR: ↓ ⁓ 10 ml/decade) above 40 years RPF: ↓ ⁓ 10% decade above 40 years"
+        alt: "Bar chart of an approximate GFR by age: about 120 at 40, falling by about 10 ml per decade to about 80 at 80; beside it arrows showing reduced response to vasodilators and increased response to vasoconstrictors."
+        caption: "بعد الـ 40: الـ ==GFR== بيقل حوالي **10 ml كل عشر سنين**، والـ RPF حوالي **10%** كل عشر سنين. الأرقام في الرسمة توضيحية على أساس الـ rule ده."
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <text x="10" y="20" class="t-sm t-b">GFR (ml/min), illustrative</text>
+            <path d="M40 200 H320" class="fg-arrow"/>
+            <rect x="55" y="80" width="40" height="120" class="fg-good"/>
+            <rect x="120" y="90" width="40" height="110" class="fg-good"/>
+            <rect x="185" y="100" width="40" height="100" class="fg-acc"/>
+            <rect x="250" y="110" width="40" height="90" class="fg-bad"/>
+            <text x="75" y="72" text-anchor="middle" class="t-sm">~120</text>
+            <text x="140" y="82" text-anchor="middle" class="t-sm">~110</text>
+            <text x="205" y="92" text-anchor="middle" class="t-sm">~100</text>
+            <text x="270" y="102" text-anchor="middle" class="t-sm">~90</text>
+            <text x="75" y="218" text-anchor="middle" class="t-sm">40 y</text>
+            <text x="140" y="218" text-anchor="middle" class="t-sm">50 y</text>
+            <text x="205" y="218" text-anchor="middle" class="t-sm">60 y</text>
+            <text x="270" y="218" text-anchor="middle" class="t-sm">70 y</text>
+            <text x="165" y="242" text-anchor="middle" class="t-sm t-acc t-b">−10 ml per decade after 40</text>
+          </svg>
+      - kind: table
+        page: 29
+        quote: "Effective renal plasma flow (ERPF) ↓ Response to vasodilators ↓↓ Response to vasoconstrictor ↑"
+        title: "الـ hemodynamics"
+        columns: [Parameter, Change]
+        rows:
+          - [GFR, Down]
+          - [ERPF, Down]
+          - [Vasodilator response, Markedly down]
+          - [Vasoconstrictor response, Up]
+        hide: [[2, 1], [3, 1]]
+      - kind: check
+        page: 29
+        quote: "↓ Thirst mechanism."
+        question: "Heat wave: an 85-year-old is drowsy, Na+ 156, and 'never felt thirsty'. Best explanation?"
+        options:
+          - "Reduced thirst and reduced urine concentrating ability"
+          - "High RAAS activity"
+          - "Rising GFR with age"
+          - "Low ADH"
+        answer: 0
+        why:
+          - "صح: العطش قليل والكلية مش بتركّز البول."
+          - "الـ RAAS بيقل مع السن."
+          - "الـ GFR بيقل 10 ml كل عشر سنين."
+          - "الكتاب بيقول الـ ADH عالي."
+      - kind: try
+        items: [geri.L02.005, geri.L02.006, geri.L02.012, geri.L02.017, geri.L02.018]
+    recap:
+      - "Glomeruli تقل 30–50%، والـ nephrons الباقية تكبر، والـ interstitium يتليّف."
+      - "Intense Na restriction ← volume contraction و orthostatic hypotension."
+      - "RAAS قليل ← hyperkalemia. حذر من KRNB."
+      - "مش بيعرف يخفف ولا يركّز البول، والعطش قليل."
+      - "GFR −10 ml كل عشر سنين بعد 40، والـ RPF −10%."
+    practice: [geri.L02.001, geri.L02.002, geri.L02.003, geri.L02.004, geri.L02.005, geri.L02.006, geri.L02.007, geri.L02.008, geri.L02.009, geri.L02.010, geri.L02.011, geri.L02.012, geri.L02.013, geri.L02.014, geri.L02.015, geri.L02.016, geri.L02.017, geri.L02.018, geri.L02.019, geri.L02.020, geri.L02.021, geri.L02.064]
+  # ------------------------------------------------------------------
+  - id: geri.L02.lesson2
+    title: "الكرياتينين بيكدب على الكبار"
+    hook: "ست عندها 70 سنة وشاب عنده 25، الاتنين كرياتينين 1.2. واحد كليته نص التانية."
+    minutes: 9
+    pages: [29, 35]
+    topics: [gfr, presentation, ckd, drugs]
+    goals:
+      - "تحسب الـ CrCl بـ Cockcroft-Gault"
+      - "تعرف ليه الـ cystatin C أحسن عند الكبار"
+      - "تعدّ طرق ظهور أمراض الكلى وفحوصاتها"
+      - "تعرف مخاطر الأدوية على الكلية العجوزة"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 29
+        title: "ليه الكرياتينين بيكدب؟"
+        quote: "(↓ Body mass, debilitation, muscle atrophy) Standard measures of GFR or renal functions as s.cr, may be inappropriate"
+        text: |
+          الكرياتينين بييجي من ==العضلات==. الحاج عضلاته قليلة، فالكرياتينين اللي بيتعمل أصلًا قليل.
+
+          يعني الـ **GFR** ممكن يكون واطي جدًا والـ **serum creatinine** شكله "طبيعي". علشان كده الكتاب بيقول الـ s.Cr ممكن يكون ==inappropriate== لمتابعة وظيفة الكلى عند الكبار.
+      - kind: explain
+        page: 30
+        title: "Cockcroft-Gault"
+        quote: "(140-age) x body weight (Kg) CG equation= ------------------------- - (85% if female) 72x s.creatinine (mg/dl)"
+        text: |
+          الـ GFR = **creatinine clearance**: يا تقيسه **U × V / P**، يا تحسبه:
+
+          ==CrCl = (140 − age) × weight ÷ (72 × s.Cr)==
+
+          والست **× 0.85**.
+
+          شوف المعادلة: السن بيتطرح، والوزن بيضرب. يعني العجوز الرفيع هو أكتر واحد الكرياتينين بيضحك عليه.
+      - kind: figure
+        page: 34
+        title: "نفس الكرياتينين، كلية مختلفة"
+        quote: "S.Cr. Does not accurately reflect kidney function"
+        alt: "Two patient cards side by side, both with serum creatinine 1.2 mg/dL: a 70-year-old 60 kg woman with creatinine clearance 41.3 ml/min and a 25-year-old 70 kg man with 93.2 ml/min."
+        caption: "جدول الكتاب في ص 34: الـ S.Cr does not accurately reflect kidney function. الاتنين ==s.Cr 1.2==، بس الست الكبيرة CrCl حوالي **41** والشاب حوالي **93**. احسبها بنفسك بالمعادلة، هتطلع نفس الأرقام."
+        svg: |
+          <svg viewBox="0 0 330 200" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="10" width="150" height="180" rx="12" class="fg-bad"/>
+            <text x="83" y="38" text-anchor="middle" class="t-sm t-b">70 y woman</text>
+            <text x="83" y="56" text-anchor="middle" class="t-sm">60 kg</text>
+            <text x="83" y="92" text-anchor="middle" class="t-sm">s.Cr</text>
+            <text x="83" y="112" text-anchor="middle" class="t-lg t-b">1.2</text>
+            <text x="83" y="148" text-anchor="middle" class="t-sm">CrCl</text>
+            <text x="83" y="172" text-anchor="middle" class="t-lg t-b t-bad">41.3</text>
+            <rect x="172" y="10" width="150" height="180" rx="12" class="fg-good"/>
+            <text x="247" y="38" text-anchor="middle" class="t-sm t-b">25 y man</text>
+            <text x="247" y="56" text-anchor="middle" class="t-sm">70 kg</text>
+            <text x="247" y="92" text-anchor="middle" class="t-sm">s.Cr</text>
+            <text x="247" y="112" text-anchor="middle" class="t-lg t-b">1.2</text>
+            <text x="247" y="148" text-anchor="middle" class="t-sm">CrCl</text>
+            <text x="247" y="172" text-anchor="middle" class="t-lg t-b t-good">93.2</text>
+          </svg>
+      - kind: check
+        page: 30
+        quote: "(140-age) x body weight (Kg) CG equation= ------------------------- - (85% if female) 72x s.creatinine (mg/dl)"
+        question: "80-year-old woman, 50 kg, creatinine 1.0 mg/dl. CrCl by Cockcroft-Gault?"
+        options:
+          - "About 35 ml/min"
+          - "About 42 ml/min"
+          - "About 60 ml/min"
+          - "About 100 ml/min"
+        answer: 0
+        why:
+          - "صح: 60 × 50 ÷ 72 = 41.7، × 0.85 = 35.4."
+          - "نسيت الـ 0.85 بتاع الستات."
+          - "60 ده (140 − age) بس."
+          - "الكرياتينين 1.0 مش معناه كلية طبيعية."
+      - kind: explain
+        page: 34
+        title: "Cystatin C: الـ marker اللي ما بيتأثرش"
+        quote: "Synthesized by all nucleated cells, not affected by inflammation. Cleared by glomerular filtration, no tubular secretion."
+        text: |
+          **Cystatin C** = protease inhibitor، single-chain protein حجمه **13 kD**:
+          - بيتعمل من ==كل الـ nucleated cells== بمعدل ثابت، ومش بيتأثر بالـ inflammation.
+          - بيتفلتر بالـ glomerulus، **من غير tubular secretion**، ومش بيرجع للدم.
+          - مستواه ثابت، و**بيعلى لما الـ GFR يقل**.
+          - ==Independent of gender, age, body mass==: ده بالظبط اللي الكرياتينين بيفشل فيه.
+
+          وفي دراسة Fliser: الكبار CrCl حوالي **74** مقابل **114** للشباب، والـ cystatin **0.84** مقابل **0.69** mg/L.
+      - kind: sort
+        page: 34
+        quote: "Ideal marker for GFR. It increases as GFR decreases. Independent of gender, age or body mass."
+        prompt: "مين بيتأثر بإيه؟"
+        bins: ["Creatinine", "Cystatin C"]
+        cards:
+          - { text: "Falls with muscle atrophy", bin: 0 }
+          - { text: "Misleading in a thin old woman", bin: 0 }
+          - { text: "Made by all nucleated cells", bin: 1 }
+          - { text: "Independent of age, gender, body mass", bin: 1 }
+          - { text: "No tubular secretion, constant level", bin: 1 }
+        why: "الكرياتينين بييجي من العضلات، فبيتأثر بكتلة الجسم والسن. الـ cystatin بييجي من كل الخلايا بمعدل ثابت."
+      - kind: explain
+        page: 30
+        title: "أمراض الكلى بتظهر إزاي؟"
+        quote: "1- With disorder of micturition: frequency, nocturia , hesitancy, terminal dribbling , dysuria , or enuresis"
+        text: |
+          يا **asymptomatic**، يا **بأعراض كلى**، يا **مع مرض systemic** معروف إنه بيمس الكلى.
+
+          الأعراض سبع مجموعات:
+          1. **Micturition:** frequency، nocturia، hesitancy، terminal dribbling، dysuria، enuresis
+          2. **Volume:** oliguria، anuria، polyuria
+          3. **Urine components:** hematuria، pigmenturia، proteinuria، pyuria، calculi، pneumaturia
+          4. **Pain:** renal colic أو flank pain
+          5. **Renal mass**
+          6. **Edema**
+          7. **Uremia** وضعف وظايف الكلى
+      - kind: mnemonic
+        page: 31
+        quote: "Investigations of renal diseases Biochemical investigations Microbiological investigations. Immunological investigations."
+        word: "BMIHR"
+        parts:
+          - { key: "B", text: "Biochemical" }
+          - { key: "M", text: "Microbiological" }
+          - { key: "I", text: "Immunological" }
+          - { key: "H", text: "Histopathological" }
+          - { key: "R", text: "Radiological" }
+        hook: "الفحوصات الخمسة: **BMI** و **HR**. «وزن ونبض»، زي أي كشف."
+      - kind: figure
+        page: 32
+        title: "Radiological: ultrasound من الكتاب"
+        image: { file: geri/L02-kidney-us.webp, book: true }
+        caption: "الـ ultrasound بتاع الكلية اليمين في الكتاب، وطولها **9.74 cm**. الـ US أسهل radiological investigation للكبار: من غير contrast ولا إشعاع."
+        alt: "The book's ultrasound of the right kidney with a length caliper reading 9.74 cm."
+      - kind: explain
+        page: 33
+        title: "الـ CKD والأدوية"
+        quote: "These risks are higher when associated with DM, CVD, and hyperuricemia."
+        text: |
+          **CKD:** الـ ESRD والوفيات بيزيدوا مع السن، وأكتر مع ==DM و CVD و hyperuricemia==.
+
+          **الأدوية في الكلية العجوزة:**
+          - Polypharmacy، interactions، errors
+          - **Pharmacokinetics:** الإخراج الكلوي يقل ← ==half-life أطول== ← toxicity أكتر
+          - **Pharmacodynamics:** الـ diuretics تعمل glucose intolerance، والـ metformin يعمل diarrhea
+      - kind: try
+        items: [geri.L02.024, geri.L02.025, geri.L02.027, geri.L02.032, geri.L02.036]
+    recap:
+      - "الكرياتينين بيقل مع العضلات، فبيخبّي الـ GFR الواطي."
+      - "CG = (140 − age) × weight ÷ (72 × s.Cr)، والست × 0.85."
+      - "Cystatin C: 13 kD، من كل الخلايا، ثابت، independent of age و gender و body mass."
+      - "الفحوصات: Biochemical، Microbiological، Immunological، Histopathological، Radiological."
+      - "الـ CKD أخطر مع DM و CVD و hyperuricemia. الأدوية: half-life أطول و toxicity."
+    practice: [geri.L02.022, geri.L02.023, geri.L02.024, geri.L02.025, geri.L02.026, geri.L02.027, geri.L02.028, geri.L02.029, geri.L02.030, geri.L02.031, geri.L02.032, geri.L02.033, geri.L02.034, geri.L02.035, geri.L02.036, geri.L02.037, geri.L02.060, geri.L02.061, geri.L02.066]
+  # ------------------------------------------------------------------
+  - id: geri.L02.lesson3
+    title: "الـ UTI عند الكبار: عالِج المريض مش المزرعة"
+    hook: "نص الستات الكبار في دور الرعاية مزرعتهم إيجابية. لو عالجتهم كلهم، هتعمل resistance ومش هتفيد حد."
+    minutes: 10
+    pages: [35, 38]
+    topics: [uti, male]
+    goals:
+      - "تعرف الميكروبات حسب المريض"
+      - "تعدّ الـ risk factors"
+      - "تعرف إمتى تعالج الـ asymptomatic bacteriuria"
+      - "تشك في الـ CAUTI لما يجي atypical"
+    status: unverified
+    steps:
+      - kind: table
+        page: 35
+        quote: "Bacteriuria: Bacteria in urine (symptomatic, Asymptomatic) Pyuria: Pus cells in the urine (Bacteria, sterile)"
+        title: "الكلمات"
+        columns: [Term, Meaning]
+        rows:
+          - [Bacteriuria, "Bacteria in urine, with or without symptoms"]
+          - [Pyuria, "Pus cells; bacterial or sterile"]
+          - [Dysuria, "Discomfort on micturition"]
+          - [Frequency, "Frequent bladder emptying"]
+          - [Pyelonephritis, "Loin pain, tenderness, fever, pyuria ± hematuria"]
+        hide: [[0, 1], [4, 1]]
+      - kind: explain
+        page: 35
+        title: "مين الميكروب؟"
+        quote: "E coli > 80% in women. Enterococcus fecalis common in elderly men. Psendemonas-Klebsiella: more after catheterization"
+        text: |
+          **Bacterial:**
+          - ==E. coli==: أكتر من **80%** عند الستات
+          - ==Enterococcus faecalis==: شائع عند **الرجالة الكبار**
+          - **Pseudomonas و Klebsiella**: أكتر بعد الـ **catheter**
+          - نادر: **TB**
+
+          **Non-bacterial:** fungi بعد antibiotics أو catheter أو immunocompromise، و chlamydia، و **Trichomonas vaginalis**.
+      - kind: match
+        page: 35
+        quote: "E coli > 80% in women. Enterococcus fecalis common in elderly men. Psendemonas-Klebsiella: more after catheterization"
+        prompt: "وصّل الميكروب بالمريض:"
+        pairs:
+          - ["E. coli", "Older woman, >80%"]
+          - ["Enterococcus faecalis", "Elderly man"]
+          - ["Pseudomonas, Klebsiella", "After a catheter"]
+          - ["Fungi", "After antibiotics"]
+        why: "الـ catheter والـ antibiotics بيغيّروا الـ flora، فبتطلع ميكروبات hospital وفطريات."
+      - kind: explain
+        page: 36
+        title: "الـ risk factors"
+        quote: "Short urethra Transperineal contamination. Sexual activity Prolapse Vaginal infection. Senile vaginitis Pregnancy Estrogen ↓↓"
+        text: |
+          1. **Female:** urethra قصيرة، transperineal contamination، sexual activity، ==prolapse==، vaginal infection و senile vaginitis، pregnancy، و ==estrogen deficiency==: الـ lactobacilli بتختفي والـ vaginal pH بيتغير.
+          2. **Stones:** infection مستمرة ± obstruction.
+          3. **Obstruction:** urethral stricture، **BPH**، neurogenic bladder، و **anticholinergic** drugs.
+          4. **Vesicoureteric reflux.**
+          5. **Congenital anomalies.**
+          6. **Instrumentation.**
+      - kind: reveal
+        page: 36
+        quote: "Estrogen ↓↓ Disappearance of colonizing lactobacilli Vaginal pH."
+        prompt: "إزاي نقص الـ estrogen بعد سن اليأس بيجيب UTI؟"
+        answer: |
+          الـ **estrogen** بيخلّي خلايا المهبل مليانة **glycogen**، والـ **lactobacilli** بتاكله وتعمل **lactic acid** فالـ pH يبقى حامضي ويمنع الـ E. coli.
+
+          من غير estrogen: مفيش glycogen ← الـ lactobacilli تختفي ← الـ pH يعلى ← الـ E. coli تستوطن وتطلع للمثانة. (تفسير فسيولوجي؛ الكتاب بيذكر الـ lactobacilli والـ pH.)
+      - kind: aside
+        tone: trap
+        page: 36
+        quote: "3- Obstruction: - Urethral strictures - SPH - Neurogenic bladder - Drugs: anticholinergic"
+        text: "الكتاب كاتب **SPH** في الـ obstruction، والمقصود **BPH**، يعني تضخم البروستاتا. والدوا الـ **anticholinergic** زي أدوية الـ overactive bladder أو بعض الـ antidepressants ممكن يحبس البول ويجيب UTI عند الحاج."
+      - kind: explain
+        page: 38
+        title: "Asymptomatic bacteriuria: سيبها"
+        quote: "Treatment of asymptomatic bacteriuria is rarely indicated in elderly unless a patient is about to undergo a procedure involving the urinary tract."
+        text: |
+          الـ **asymptomatic bacteriuria** عند الكبار ==نادرًا ما بتتعالج==.
+
+          الاستثناء في الكتاب: لو هيعمل ==procedure على المسالك البولية==.
+
+          ليه؟ العلاج مش بيقلل الوفيات ولا الأعراض، وبيزوّد الـ resistance والـ C. difficile والآثار الجانبية.
+      - kind: update
+        page: 38
+        quote: "Treatment of asymptomatic bacteriuria is rarely indicated in elderly unless a patient is about to undergo a procedure involving the urinary tract."
+        text: "الـ IDSA 2019 بتعالج الـ ASB في الحمل وقبل urologic procedures فيها mucosal trauma بس، وبتقول ما تعملش screening للكبار، حتى في دور الرعاية أو مع delirium من غير systemic signs. نفس رسالة الكتاب."
+        ref: "IDSA asymptomatic bacteriuria guideline, 2019"
+      - kind: explain
+        page: 38
+        title: "الـ catheter: العدو الساكت"
+        quote: "40% of nosocomial infections 4% will become bacteremic"
+        text: |
+          الـ **CAUTI**:
+          - ==40%== من الـ nosocomial infections
+          - **4%** بيعملوا bacteremia
+          - بيجي ==atypical==: lower abdominal discomfort، restlessness، loss of appetite
+          - العلاج الـ empiric في الكتاب: **fluoroquinolones**
+      - kind: update
+        page: 38
+        quote: "Empiric treatment with flouro-quinolones"
+        text: "الـ empiric treatment بالـ fluoroquinolones عليها تحذيرات عند الكبار: tendon rupture و aortic aneurysm و CNS effects. اختار حسب الـ local resistance، وغيّر أو شيل الـ catheter قبل العلاج. في الامتحان: fluoroquinolones زي الكتاب."
+        ref: "EMA/FDA fluoroquinolone safety communications 2018–2019; IDSA CAUTI guideline 2009"
+      - kind: check
+        page: 38
+        quote: "Present with Atypical manifestations as o Lower abdominal discomfort o Restlessness o Loss of appetite"
+        question: "86-year-old man with a long-term catheter: restless, not eating, vague lower abdominal discomfort, no fever. First suspicion?"
+        options:
+          - "Catheter-associated UTI"
+          - "New dementia"
+          - "Depression"
+          - "Normal aging"
+        answer: 0
+        why:
+          - "صح: الـ CAUTI عند الكبار بييجي بالتلاتة دول."
+          - "الـ dementia مش بتبدأ فجأة."
+          - "الـ depression بعد ما تستبعد الأسباب الحادة."
+          - "التغيير المفاجئ عمره ما يبقى normal aging."
+      - kind: aside
+        tone: joke
+        text: "الحاج اللي معاه catheter وفجأة رفض الأكل وبقى عصبي: مش زعلان من الأكل، ومش زعلان منك. ده الـ **E. coli** اللي بيكلّمك من جوه."
+      - kind: explain
+        page: 37
+        title: "الراجل الكبير والـ prostatitis"
+        quote: "Prostatitis Infection of prostate Clinically: Frequency. Urgency. Urethral pain. Suprapubic and perineal pain. General malaise"
+        text: |
+          **التغييرات مع السن:** testosterone أقل، الخصيتين بيضمروا ويطروا، sperm أقل، seminal fluid أقل وأتقل، الـ erection محتاجة وقت أطول، والـ refractory period ممكن توصل ==أيام==.
+
+          **Prostatitis:** frequency، urgency، urethral pain، ==suprapubic و perineal pain==، general malaise.
+
+          **الميكروبات:** E. coli، Trichomonas، Candida، Chlamydia.
+      - kind: case
+        page: 36
+        quote: "Short urethra Transperineal contamination. Sexual activity Prolapse Vaginal infection. Senile vaginitis Pregnancy Estrogen ↓↓"
+        stem: "A 76-year-old woman has her third UTI this year. She has vaginal dryness and a large cystocele with a high post-void residual."
+        steps:
+          - question: "Likely organism?"
+            options:
+              - "E. coli"
+              - "Mycobacterium tuberculosis"
+              - "Candida"
+              - "Enterococcus"
+            answer: 0
+            why: "E. coli, more than 80% in women."
+          - question: "Which risk factors does she show?"
+            options:
+              - "Estrogen deficiency and prolapse with poor emptying"
+              - "Pregnancy"
+              - "Instrumentation"
+              - "None; it is bad luck"
+            answer: 0
+            why: "Senile vaginitis and low estrogen, plus prolapse; incomplete emptying behaves like obstruction."
+      - kind: try
+        items: [geri.L02.040, geri.L02.044, geri.L02.046, geri.L02.049, geri.L02.052]
+    recap:
+      - "E. coli >80% عند الستات، Enterococcus عند الرجالة، Pseudomonas و Klebsiella بعد الـ catheter."
+      - "Risk factors: female، stones، obstruction، VUR، congenital، instrumentation."
+      - "ASB: ما تعالجش إلا قبل procedure على المسالك."
+      - "CAUTI: 40% من الـ nosocomial، 4% bacteremia، ويجي atypical."
+      - "Prostatitis: suprapubic و perineal pain، و E. coli و Trichomonas و Candida و Chlamydia."
+    practice: [geri.L02.038, geri.L02.039, geri.L02.040, geri.L02.041, geri.L02.042, geri.L02.043, geri.L02.044, geri.L02.045, geri.L02.046, geri.L02.047, geri.L02.048, geri.L02.049, geri.L02.050, geri.L02.051, geri.L02.052, geri.L02.053, geri.L02.054, geri.L02.055, geri.L02.056, geri.L02.057, geri.L02.065, geri.L02.067]
+  # ------------------------------------------------------------------
+  - id: geri.L02.lesson4
+    title: "مسألة الـ acid-base: الحاجة اللي جت نايمة"
+    hook: "ضغط واطي، بوتاسيوم واطي، و HCO3 تمانية. المسألة دي في الكتاب، وبتتحل في أربع خطوات."
+    minutes: 7
+    pages: [38, 39]
+    topics: [acid-base]
+    goals:
+      - "تحل مسألة الكتاب خطوة بخطوة"
+      - "تحسب الـ anion gap والـ expected PCO2"
+      - "تعرف السبب من الـ K والـ urine pH"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 38
+        title: "المسألة"
+        quote: "An arterial blood gas show PaO2 80mmHg, PCO2 24mmHg, pH 7.29."
+        text: |
+          ست عندها **84 سنة** جت الطوارئ ==lethargic==. الضغط **85/60**، النبض **101**، الحرارة **37.8**.
+
+          - Na **135**، K ==2.8==، HCO3 **8**، Cl **117**
+          - BUN **17**، creatinine **1.9**
+          - ABG: pH **7.29**، PCO2 **24**
+          - Urine pH **4.5**
+      - kind: order
+        page: 38
+        quote: "What is the acid base disorder?"
+        prompt: "رتّب خطوات الحل:"
+        steps:
+          - "pH 7.29 is low: acidemia"
+          - "HCO3 8 is low: metabolic acidosis"
+          - "Anion gap 135 − 117 − 8 = 10: normal"
+          - "Expected PCO2 = 1.5 × 8 + 8 = 20 ± 2"
+          - "Look at K+ and urine pH for the cause"
+        why: "دايمًا: pH ← primary disorder ← anion gap ← compensation ← السبب."
+      - kind: reveal
+        page: 38
+        quote: "An arterial blood gas show PaO2 80mmHg, PCO2 24mmHg, pH 7.29."
+        prompt: "الـ PCO2 المتوقع 18–22، والفعلي 24. يعني إيه؟"
+        answer: |
+          الـ PCO2 **مش أقل** من المتوقع، فمفيش ==respiratory alkalosis== زيادة، والاختيار التالت غلط.
+
+          هو أعلى بشوية، فلو في حاجة يبقى respiratory acidosis خفيف، ست lethargic ومش بتتنفس كفاية. الاختيار ده مش موجود، فالإجابة الأقرب: **non-anion-gap metabolic acidosis**. (الكتاب ما كتبش الإجابة.)
+      - kind: check
+        page: 38
+        quote: "What is the acid base disorder?"
+        question: "What is the acid-base disorder?"
+        options:
+          - "Non-anion-gap metabolic acidosis"
+          - "Anion-gap metabolic acidosis"
+          - "Non-anion-gap metabolic acidosis and respiratory alkalosis"
+          - "Respiratory acidosis"
+        answer: 0
+        why:
+          - "صح: AG = 10 طبيعي، و PCO2 مش أقل من المتوقع."
+          - "الـ AG طبيعي."
+          - "الـ PCO2 أعلى من 22، مش أقل."
+          - "الـ PCO2 واطي، فالـ primary metabolic."
+      - kind: figure
+        page: 39
+        title: "السبب: البوتاسيوم والـ urine pH"
+        quote: "What is the most likely cause of acid base disorder of the patient in the preceding scenario?"
+        alt: "Decision tree for normal anion gap acidosis: potassium high points to hypoaldosteronism (type 4 RTA); potassium low splits by urine pH: below 5.5 points to diarrhea or GI loss (or proximal RTA), above 5.5 points to distal RTA."
+        caption: "إيه سبب الـ acid base disorder؟ شجرة تعليمية مش من الكتاب: الـ K واطي + urine pH حامضي ==4.5== + volume depletion = GI loss، يعني **diarrhea**."
+        svg: |
+          <svg viewBox="0 0 330 270" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L02a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="fg-head"/></marker></defs>
+            <rect x="75" y="8" width="180" height="36" rx="8" class="fg-acc"/>
+            <text x="165" y="31" text-anchor="middle" class="t-sm t-b">Normal AG acidosis</text>
+            <path d="M120 44 L70 78" class="fg-arrow" marker-end="url(#L02a)"/>
+            <path d="M210 44 L260 78" class="fg-arrow" marker-end="url(#L02a)"/>
+            <rect x="5" y="80" width="130" height="50" rx="8" class="fg-box"/>
+            <text x="70" y="100" text-anchor="middle" class="t-sm t-b">K+ high</text>
+            <text x="70" y="118" text-anchor="middle" class="t-sm">Hypoaldosteronism</text>
+            <rect x="195" y="80" width="130" height="50" rx="8" class="fg-box"/>
+            <text x="260" y="100" text-anchor="middle" class="t-sm t-b">K+ low</text>
+            <text x="260" y="118" text-anchor="middle" class="t-sm">check urine pH</text>
+            <path d="M235 130 L185 168" class="fg-arrow" marker-end="url(#L02a)"/>
+            <path d="M285 130 L300 168" class="fg-arrow" marker-end="url(#L02a)"/>
+            <rect x="95" y="170" width="160" height="90" rx="8" class="fg-good"/>
+            <text x="175" y="192" text-anchor="middle" class="t-sm t-b">Urine pH &lt; 5.5</text>
+            <text x="175" y="212" text-anchor="middle" class="t-sm">Diarrhea, GI loss</text>
+            <text x="175" y="230" text-anchor="middle" class="t-sm t-mut">(or proximal RTA)</text>
+            <text x="175" y="250" text-anchor="middle" class="t-sm t-acc t-b">She has pH 4.5</text>
+            <rect x="262" y="170" width="64" height="90" rx="8" class="fg-thin"/>
+            <text x="294" y="200" text-anchor="middle" class="t-sm t-b">&gt; 5.5</text>
+            <text x="294" y="220" text-anchor="middle" class="t-sm">Distal</text>
+            <text x="294" y="238" text-anchor="middle" class="t-sm">RTA</text>
+          </svg>
+      - kind: check
+        page: 39
+        quote: "What is the most likely cause of acid base disorder of the patient in the preceding scenario?"
+        question: "Most likely cause of her acid-base disorder?"
+        options:
+          - "Diarrhea"
+          - "Acute renal failure"
+          - "Hypoaldosteronism"
+          - "Proximal RTA"
+        answer: 0
+        why:
+          - "صح: hypokalemia + بول حامضي + hypotension = خسارة HCO3 و K من الأمعاء."
+          - "الـ renal failure بتعمل high-AG، والكرياتينين 1.9 بس."
+          - "الـ hypoaldosteronism بيعلّي الـ K."
+          - "أقل احتمالًا من مرض حاد مع جفاف."
+      - kind: aside
+        tone: tip
+        page: 38
+        quote: "Her urine analysis is clear and has pH of 4.5."
+        text: "الـ urine pH **4.5** معناه إن الكلية شغالة كويس وبتطلّع acid. يبقى المشكلة **مش في الكلية** (distal RTA)، المشكلة إن البيكربونات خرجت من حتة تانية: الأمعاء."
+      - kind: try
+        items: [geri.L02.068, geri.L02.069]
+    recap:
+      - "pH ← primary ← anion gap ← expected PCO2 ← السبب."
+      - "AG = 135 − 117 − 8 = 10: non-anion-gap."
+      - "Expected PCO2 = 1.5 × HCO3 + 8 ± 2 = 18–22."
+      - "K واطي + urine pH 4.5 + جفاف = diarrhea."
+    practice: [geri.L02.058, geri.L02.059, geri.L02.062, geri.L02.063, geri.L02.068, geri.L02.069]

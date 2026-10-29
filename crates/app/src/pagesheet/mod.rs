@@ -95,31 +95,26 @@ pub fn BookSheet() -> Element {
 
     rsx! {
         style { {CSS.text()} }
-        div { class: "sheet-backdrop bk-backdrop", onclick: move |_| close() }
-        div { class: "sheet bk-sheet", role: "dialog", aria_modal: "true", aria_labelledby: "bk-title",
-            div { class: "sheet-head bk-head",
-                span { class: "bk-page", aria_hidden: "true", bdi { "{page}" } }
-                div {
-                    h2 { id: "bk-title", "{tx::TITLE} " bdi { "{page}" } }
-                    if let Some(e) = entry {
-                        p { class: "muted small",
-                            bdi { "{lecture_code(&e.id)}" }
-                            " · "
-                            bdi { dir: "ltr", lang: "en", "{e.title}" }
+        crate::sheet::Sheet {
+            label_id: "bk-title",
+            on_close: move |_| close(),
+            head: rsx! {
+                div { class: "bk-head",
+                    span { class: "bk-page", aria_hidden: "true", bdi { "{page}" } }
+                    div {
+                        h2 { id: "bk-title", "{tx::TITLE} " bdi { "{page}" } }
+                        if let Some(e) = entry {
+                            p { class: "muted small",
+                                bdi { "{lecture_code(&e.id)}" }
+                                " · "
+                                bdi { dir: "ltr", lang: "en", "{e.title}" }
+                            }
+                        } else {
+                            p { class: "muted small", {tx::NO_LECTURE} }
                         }
-                    } else {
-                        p { class: "muted small", {tx::NO_LECTURE} }
                     }
                 }
-                button {
-                    class: "icon-button bk-close",
-                    "data-back": "true",
-                    aria_label: tx::CLOSE,
-                    title: tx::CLOSE,
-                    onclick: move |_| close(),
-                    span { aria_hidden: "true", "✕" }
-                }
-            }
+            },
             div { class: "bk-body",
                 if let Some(q) = &quote {
                     figure { class: "bk-quote",

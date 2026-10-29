@@ -52,11 +52,14 @@ pub struct Palette {
     /// Warm supporting notes (a guideline update, a mnemonic), never a grade.
     pub gold: &'static str,
     pub gold_soft: &'static str,
+    /// The info sheet (what a tapped "ص N" chip opens): a raised layer in
+    /// its own tint, so it never reads as one more card on the page.
+    pub sheet: &'static str,
 }
 
 impl Palette {
     /// `(css variable, value)` for every token.
-    pub fn tokens(&self) -> [(&'static str, &'static str); 17] {
+    pub fn tokens(&self) -> [(&'static str, &'static str); 18] {
         [
             ("--bg", self.bg),
             ("--surface", self.surface),
@@ -75,6 +78,7 @@ impl Palette {
             ("--bad-soft", self.bad_soft),
             ("--gold", self.gold),
             ("--gold-soft", self.gold_soft),
+            ("--sheet", self.sheet),
         ]
     }
 
@@ -128,6 +132,7 @@ pub const PAPER: Palette = Palette {
     bad_soft: "#fbece7",
     gold: "#8a641d",
     gold_soft: "#fbf1d9",
+    sheet: "#fcf4e0",
 };
 
 /// Night: the default dark theme ("batna-dark"): deep petrol with a light
@@ -151,6 +156,7 @@ pub const NIGHT: Palette = Palette {
     bad_soft: "#4a2e30",
     gold: "#e3c581",
     gold_soft: "#3d3624",
+    sheet: "#2c4f64",
 };
 
 /// True black, for OLED screens: the page and cards are `#000000`, so those
@@ -176,6 +182,7 @@ pub const BLACK: Palette = Palette {
     bad_soft: "#331a17",
     gold: "#e3c581",
     gold_soft: "#2a2416",
+    sheet: "#1c2a33",
 };
 
 /// Night shift: for studying late. Very dark and warm, with no colour where
@@ -200,6 +207,7 @@ pub const NIGHT_SHIFT: Palette = Palette {
     bad_soft: "#3d1f17",
     gold: "#d9b56a",
     gold_soft: "#2e2414",
+    sheet: "#3a2c1f",
 };
 
 /// What the learner picked in Settings › Look.
@@ -344,10 +352,39 @@ mod tests {
                 ("text on gold-soft", p.text, p.gold_soft),
                 ("good on surface", p.good, p.surface),
                 ("bad on surface", p.bad, p.surface),
+                ("text on sheet", p.text, p.sheet),
+                ("muted on sheet", p.muted, p.sheet),
+                ("accent on sheet", p.accent, p.sheet),
+                ("good on sheet", p.good, p.sheet),
+                ("bad on sheet", p.bad, p.sheet),
             ];
             for (what, fg, bg) in pairs {
                 let c = contrast(fg, bg);
                 assert!(c >= 4.5, "{name}: {what} is {c:.2}:1, below 4.5:1");
+            }
+        }
+    }
+
+    #[test]
+    fn the_info_sheet_stands_out() {
+        // The sheet floats over the page and its cards: it must read as a
+        // different layer at a glance (adapted from kabar-app main:
+        // crates/core/src/theme.rs word_sheet_stands_out).
+        let dist = |a: &str, b: &str| {
+            let (a, b) = (rgb(a), rgb(b));
+            let d = |x: u8, y: u8| (f64::from(x) - f64::from(y)).powi(2);
+            (d(a.0, b.0) + d(a.1, b.1) + d(a.2, b.2)).sqrt()
+        };
+        for (name, p) in ALL {
+            for (what, under) in [("page", p.bg), ("card", p.surface), ("chip", p.surface_2)] {
+                let d = dist(p.sheet, under);
+                assert!(d >= 24.0, "{name}: sheet vs {what} too close ({d:.0})");
+            }
+            if p.scheme == Scheme::Dark {
+                assert!(
+                    luminance(p.sheet) > luminance(p.surface),
+                    "{name}: a dark sheet sits above its cards"
+                );
             }
         }
     }

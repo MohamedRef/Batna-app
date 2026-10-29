@@ -34,6 +34,7 @@ a hex value in a feature stylesheet.
 | `--good`, `--good-soft` | right, done | `#277654` / `#e8f4ec` | `#a0d7b3` / `#1c3c31` |
 | `--bad`, `--bad-soft` | wrong, needs work | `#ad493c` / `#fbece7` | `#f1b2a3` / `#4a2e30` |
 | `--gold`, `--gold-soft` | supporting notes (guideline update, mnemonic), never a grade | `#8a641d` / `#fbf1d9` | `#e3c581` / `#3d3624` |
+| `--sheet` | the info sheet: its own raised tint, never a card colour | `#fcf4e0` | `#2c4f64` |
 
 Aliases in `parts.css` for code ported from the design reference:
 `--primary` = `--accent`, `--on-primary` = `--on-accent`, `--good-bg`,
@@ -96,7 +97,8 @@ Radii: `--radius-control` 13px, `--radius-card` 18px (22px Glossy),
 | Counter | `span.num-ltr` | Any "3 / 12", %, count in Arabic text. |
 | Progress | `div.progress[role=progressbar] > div.progress-fill` | `data-tone="good"` for done. |
 | Rating row | `div.rating-row > button.rating[data-grade=again\|hard\|good\|easy] > span + span.rating-when` | Real intervals only. Content checks never sit here. |
-| Sheet | `div.sheet-backdrop` + `div.sheet[role=dialog] > div.sheet-head` | Bottom sheet on phones, ≤430px box from 600px; scrolls inside. |
+| Sheet | `div.sheet-backdrop` + `div.sheet[role=dialog] > div.sheet-head` | Bottom sheet on phones, ≤430px box from 600px; scrolls inside. For forms, confirms and lists. |
+| Info sheet | `crate::sheet::Sheet { label_id, on_close, head, children }` | What a tap opens to tell more (the book page). No scrim; `--sheet` colour; he drags it to any height (stops at 32/56/90%), flings or drags down to close, Esc/Back close; the size is remembered (`assets/sheet.js`). |
 | Field | `label.field > span + input + span.field-hint? + span.field-error[role=alert]?`, `[data-invalid=true]` | Keep the typed text on errors. |
 | Search | `label.search > svg + input[type=search]` | |
 | Segmented | `div.segmented[role=radiogroup] > button[role=radio]` | |

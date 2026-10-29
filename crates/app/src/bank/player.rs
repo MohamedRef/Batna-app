@@ -64,21 +64,21 @@ pub fn Player() -> Element {
                             span { aria_hidden: "true", "✕" }
                         }
                         div {
-                            class: "run-progress",
+                            class: "progress run-progress",
                             role: "progressbar",
                             "aria-valuemin": "0",
                             "aria-valuemax": "100",
                             "aria-valuenow": "{progress}",
-                            div { class: "run-progress-fill", style: "inline-size: {progress}%;" }
+                            div { class: "progress-fill", style: "inline-size: {progress}%;" }
                         }
-                        span { class: "run-count ltr-count", "aria-label": "{tx::QUESTION} {at + 1} {tx::OF} {n}", "{at + 1} / {n}" }
+                        span { class: "run-count num-ltr", "aria-label": "{tx::QUESTION} {at + 1} {tx::OF} {n}", "{at + 1} / {n}" }
                     }
                     div { class: "run-sub",
-                        span { class: "chip", {mode_name} }
+                        span { class: "chip", "data-tone": "accent", {mode_name} }
                         if timed {
                             span { class: "muted small", "{tx::LEFT_ABOUT} " {count(left, &MINUTE)} }
                         } else if answered > 0 {
-                            span { class: "muted small", "{tx::RIGHT} " bdi { class: "ltr-count", "{right} / {answered}" } }
+                            span { class: "muted small", "{tx::RIGHT} " bdi { class: "num-ltr", "{right} / {answered}" } }
                         }
                     }
                     if timed {
@@ -181,13 +181,12 @@ fn ConfirmSubmit(
         }
     };
     rsx! {
-        div { class: "bank-scrim", onclick: move |_| onclose.call(()),
-            div {
-                class: "bank-sheet card",
+        div { class: "sheet-backdrop", onclick: move |_| onclose.call(()) }
+        div {
+                class: "sheet bank-confirm",
                 role: "alertdialog",
                 "aria-modal": "true",
                 "aria-labelledby": "bank-confirm-title",
-                onclick: move |e| e.stop_propagation(),
                 h2 { id: "bank-confirm-title", {tx::CONFIRM_TITLE} }
                 if blank > 0 {
                     p { {tx::CONFIRM_BLANK_A} " " bdi { "{blank}" } " " {tx::CONFIRM_BLANK_B} }
@@ -218,7 +217,6 @@ fn ConfirmSubmit(
                     }
                 }
             }
-        }
     }
 }
 

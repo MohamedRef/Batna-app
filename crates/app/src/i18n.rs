@@ -728,6 +728,8 @@ pub mod case {
     pub const PICK_FIRST: &str = "اختار قرارك الأول، وبعدين صحّحه.";
     pub const RECAP: &str = "مراجعة تفكيرك";
     pub const YOURS: &str = "إجابتك:";
+    pub const MARK_RIGHT: &str = "الصح";
+    pub const MARK_YOURS: &str = "اختيارك";
     pub const RIGHT: &str = "صح، برافو.";
     pub const WRONG: &str = "مش دي. الإجابة الصح متعلّمة.";
     pub const CORRECT_WAS: &str = "الصح:";

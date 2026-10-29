@@ -315,7 +315,7 @@ pub fn CasePlayer(item_id: String, on_back: EventHandler) -> Element {
                                 },
                                 "aria-current": if i == k { "step" } else { "false" },
                                 onclick: move |_| scroll_to(&if i == k { "case-q".to_string() } else { format!("case-step-{i}") }),
-                                span { class: "ltr-count", "{i + 1}" }
+                                span { class: "num-ltr", "{i + 1}" }
                                 match run.results.get(i) {
                                     Some((true, _)) if i < k => rsx! { span { aria_hidden: "true", "✓" } },
                                     Some(_) if i < k => rsx! { span { aria_hidden: "true", "✗" } },
@@ -324,7 +324,7 @@ pub fn CasePlayer(item_id: String, on_back: EventHandler) -> Element {
                             }
                         } else {
                             span { class: "case-stepper-later", "data-state": if done { "ok" } else { "later" },
-                                span { class: "ltr-count", "{i + 1}" }
+                                span { class: "num-ltr", "{i + 1}" }
                             }
                         }
                     }
@@ -340,7 +340,7 @@ pub fn CasePlayer(item_id: String, on_back: EventHandler) -> Element {
                         div { key: "{i}", id: "case-step-{i}", class: "case-history",
                             if let Some(reveal) = &s.reveal {
                                 div { class: if i == k && !done { "case-reveal new" } else { "case-reveal" },
-                                    span { class: "small muted", "{tx::STEP} " span { class: "ltr-count", "{i + 1}" } if i == k && !done { " · {tx::NEW_DATA}" } }
+                                    span { class: "small muted", "{tx::STEP} " span { class: "num-ltr", "{i + 1}" } if i == k && !done { " · {tx::NEW_DATA}" } }
                                     bdi { lang: "en", "{reveal}" }
                                 }
                             }
@@ -371,7 +371,7 @@ pub fn CasePlayer(item_id: String, on_back: EventHandler) -> Element {
                 }
                 if !done {
                     section { class: "card case-step", key: "{k}", id: "case-q",
-                        p { class: "small muted", "{tx::STEP} " span { class: "ltr-count", "{k + 1} / {total}" } }
+                        p { class: "small muted", "{tx::STEP} " span { class: "num-ltr", "{k + 1} / {total}" } }
                         bdi { class: "case-question", lang: "en", "{steps[k].question}" }
                         if !steps[k].options.is_empty() {
                             div { class: "options", role: "list",
@@ -382,11 +382,17 @@ pub fn CasePlayer(item_id: String, on_back: EventHandler) -> Element {
                                         dir: "auto",
                                         "aria-keyshortcuts": option_key(pos),
                                         "aria-pressed": if selected == Some(i) { "true" } else { "false" },
-                                        class: option_class(i, run.picked, run.draft, steps[k].answer),
+                                        class: if option_state(i, run.picked, run.draft, steps[k].answer) == "dim" { "answer case-option dim" } else { "answer case-option" },
+                                        "data-state": option_state(i, run.picked, run.draft, steps[k].answer),
                                         disabled: run.picked.is_some(),
                                         onclick: move |_| edit(&|r| r.select(i)),
-                                        span { class: "option-letter", aria_hidden: "true", {option_key(pos)} }
-                                        bdi { "{steps[k].options[i]}" }
+                                        span { class: "answer-key", aria_hidden: "true", {option_key(pos)} }
+                                        bdi { class: "answer-text", "{steps[k].options[i]}" }
+                                        match option_state(i, run.picked, run.draft, steps[k].answer) {
+                                            "correct" | "missed" => rsx! { span { class: "answer-mark", "✓ {tx::MARK_RIGHT}" } },
+                                            "wrong" => rsx! { span { class: "answer-mark", "✗ {tx::MARK_YOURS}" } },
+                                            _ => rsx! {},
+                                        }
                                     }
                                 }
                             }
@@ -509,18 +515,21 @@ fn option_key(pos: usize) -> &'static str {
     ["A", "B", "C", "D", "E", "F"].get(pos).copied().unwrap_or("")
 }
 
-fn option_class(
+/// The shared `button.answer` state (docs/DESIGN.md) of option `i`; "dim"
+/// is an option neither picked nor right, once checked.
+fn option_state(
     i: usize,
     picked: Option<usize>,
     draft: Option<usize>,
     answer: Option<usize>,
 ) -> &'static str {
     match picked {
-        None if draft == Some(i) => "option selected",
-        None => "option",
-        Some(_) if answer == Some(i) => "option right",
-        Some(p) if p == i => "option wrong",
-        Some(_) => "option dim",
+        None if draft == Some(i) => "selected",
+        None => "",
+        Some(p) if answer == Some(i) && p == i => "correct",
+        Some(_) if answer == Some(i) => "missed",
+        Some(p) if p == i => "wrong",
+        Some(_) => "dim",
     }
 }
 
@@ -540,7 +549,7 @@ fn Summary(
     };
     rsx! {
         section { class: "card case-summary",
-            p { class: "case-score", bdi { class: "ltr-count", "{right} / {total}" } " " {tx::SCORE} }
+            p { class: "case-score", bdi { class: "num-ltr", "{right} / {total}" } " " {tx::SCORE} }
             p { {message} }
             // The reasoning, step by step: the question, his answer, the
             // right one when his wasn't, and why.
@@ -630,11 +639,12 @@ mod tests {
 
     #[test]
     fn options_are_marked_after_a_pick() {
-        assert_eq!(option_class(0, None, None, Some(1)), "option");
-        assert_eq!(option_class(0, None, Some(0), Some(1)), "option selected");
-        assert_eq!(option_class(1, Some(0), None, Some(1)), "option right");
-        assert_eq!(option_class(0, Some(0), None, Some(1)), "option wrong");
-        assert_eq!(option_class(2, Some(0), None, Some(1)), "option dim");
+        assert_eq!(option_state(0, None, None, Some(1)), "");
+        assert_eq!(option_state(0, None, Some(0), Some(1)), "selected");
+        assert_eq!(option_state(1, Some(1), None, Some(1)), "correct");
+        assert_eq!(option_state(1, Some(0), None, Some(1)), "missed");
+        assert_eq!(option_state(0, Some(0), None, Some(1)), "wrong");
+        assert_eq!(option_state(2, Some(0), None, Some(1)), "dim");
     }
 
     fn opts(xs: &[&str]) -> Vec<String> {

@@ -270,12 +270,12 @@ pub fn Setup() -> Element {
     rsx! {
         // Tablet landscape and the Mac: the setup in the wide column, past
         // papers beside it.
-        div { class: "tab-cols bank-cols", "data-wide": "main",
+        div { class: if has_history { "tab-cols bank-cols" } else { "bank-cols" }, "data-wide": "main",
             div { class: "tab-main bank-setup",
                 Paused {}
-                header { class: "bank-head",
+                header { class: "page-head",
                     h1 { {tx::TITLE} }
-                    p { class: "muted small", {tx::LEAD} }
+                    p { class: "page-sub", {tx::LEAD} }
                 }
                 div { class: "segmented bank-modes", role: "radiogroup", "aria-label": tx::MODE_LABEL,
                     for (m, name, hint) in MODES {
@@ -292,7 +292,7 @@ pub fn Setup() -> Element {
 
                 if mode == Mode::Mock {
                     section { class: "card bank-preset",
-                        span { class: "chip", {tx::MOCK_SCOPE_CHIP} }
+                        span { class: "chip", "data-tone": "accent", {tx::MOCK_SCOPE_CHIP} }
                         h2 { class: "bank-scope", {tx::ALL_LECTURES} }
                         p { class: "muted small", {tx::MOCK_LEAD} }
                         div { class: "bank-count",
@@ -323,7 +323,7 @@ pub fn Setup() -> Element {
                             "aria-controls": "bank-advanced",
                             title: tx::CUSTOMISE,
                             onclick: move |_| { let open = *ADVANCED.peek(); *ADVANCED.write() = !open; },
-                            span { class: "chip", if filtered { {tx::SCOPE_CHOSEN} } else { {tx::SCOPE_ALL} } }
+                            span { class: "chip", "data-tone": "accent", if filtered { {tx::SCOPE_CHOSEN} } else { {tx::SCOPE_ALL} } }
                             if latin {
                                 bdi { class: "bank-scope", lang: "en", "{title}" }
                             } else {

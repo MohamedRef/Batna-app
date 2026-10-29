@@ -47,7 +47,6 @@
 .case-reveal.new { background: var(--accent-soft); border-radius: var(--radius); border: 0; padding: var(--sp-2) var(--sp-3); }
 .case-question { display: block; font-family: var(--font-latin); font-weight: 600; font-size: calc(var(--fs-lg) * 1.08); line-height: 1.5; }
 .case-stem { font-family: var(--font-latin); line-height: 1.6; }
-.ltr-count { direction: ltr; unicode-bidi: isolate; font-variant-numeric: tabular-nums; font-family: var(--font-latin); }
 
 /* ---------- stepper ---------- */
 .case-stepper { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--sp-2); }
@@ -77,41 +76,13 @@
 .case-check { inline-size: 100%; }
 
 .options { display: grid; gap: var(--sp-2); }
-.option {
-  display: flex;
-  align-items: center;
-  gap: var(--sp-3);
-  font-family: var(--font-latin);
-  text-align: start;
-  border: 1px solid var(--line);
-  background: var(--surface);
-  border-radius: var(--radius);
-  padding: var(--sp-3);
-  min-height: var(--tap-lg);
-  cursor: pointer;
-  transition: background var(--dur) var(--ease);
-}
-.option:disabled { cursor: default; color: var(--text); }
-.option-letter {
-  flex: none;
-  inline-size: 1.75rem;
-  block-size: 1.75rem;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  background: var(--bg);
-  font-weight: 700;
-  font-size: var(--fs-sm);
-}
-@media (hover: hover) { .option:not(:disabled):hover { border-color: var(--accent); } }
-.option.selected { background: var(--accent-soft); border-color: var(--accent); font-weight: 600; }
-.option.selected .option-letter { background: var(--accent); color: var(--surface); }
-.option.right { background: var(--good-soft); border-color: var(--good); color: var(--good); font-weight: 600; }
-.option.wrong { background: var(--bad-soft); border-color: var(--bad); color: var(--bad); }
-.option.dim { opacity: 0.6; }
+/* Options are the shared button.answer (assets/parts.css). */
+.case-option { font-family: var(--font-latin); }
+.case-option .answer-mark { font-family: var(--font); }
+.case-option.dim { opacity: 0.6; }
 /* Phone: once answered, keep only the picked and the right option so the
    feedback fits on screen. */
-@media (max-width: 599px) { .case-step .option.dim { display: none; } }
+@media (max-width: 599px) { .case-step .case-option.dim { display: none; } }
 .case-feedback { display: flex; flex-direction: column; gap: var(--sp-3); scroll-margin-block-end: calc(var(--nav-h) + var(--sp-3)); }
 .case-history { display: flex; flex-direction: column; gap: var(--sp-2); }
 .case-done { display: flex; flex-direction: column; gap: 2px; padding-inline-start: var(--sp-2); border-inline-start: 3px solid var(--line); }

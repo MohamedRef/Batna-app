@@ -154,7 +154,7 @@ fn Setup() -> Element {
                     onclick: move |_| if available > 0 { start(&store.read()) },
                     h1 { {tx::TITLE} }
                     p { class: "muted", {tx::INTRO} }
-                    p { class: "note small oral-honest", {tx::HONEST} }
+                    p { class: "note small", {tx::HONEST} }
                     if available > 0 {
                         p { class: "muted small", "{tx::AVAILABLE} " {count(available, &QUESTION)} }
                         button {
@@ -409,14 +409,14 @@ fn Runner() -> Element {
             "data-phase": if revealed { "answer" } else { "ask" },
             header { class: "oral-top",
                 div {
-                    class: "oral-progress",
+                    class: "progress oral-progress",
                     role: "progressbar",
                     "aria-valuemin": "0",
                     "aria-valuemax": "100",
                     "aria-valuenow": "{progress}",
-                    div { class: "oral-progress-fill", style: "inline-size: {progress}%;" }
+                    div { class: "progress-fill", style: "inline-size: {progress}%;" }
                 }
-                span { class: "muted small", "{tx::LEFT} " bdi { class: "ltr-count", "{left}" } }
+                span { class: "muted small", "{tx::LEFT} " bdi { class: "num-ltr", "{left}" } }
                 if entry.follow_up {
                     span { class: "chip accent", {tx::FOLLOW_UP} }
                 }
@@ -522,9 +522,9 @@ fn Runner() -> Element {
                             }
                         }
                         p { class: "small oral-said", "data-enough": if enough { "yes" } else { "no" },
-                            "{tx::SAID} " bdi { class: "ltr-count", "{said} / {points.len()}" }
+                            "{tx::SAID} " bdi { class: "num-ltr", "{said} / {points.len()}" }
                             if let Some((pass, _)) = p.pass {
-                                " · {tx::PASS} " bdi { class: "ltr-count", "{pass}" }
+                                " · {tx::PASS} " bdi { class: "num-ltr", "{pass}" }
                                 if enough { " · {tx::ENOUGH}" }
                             }
                         }

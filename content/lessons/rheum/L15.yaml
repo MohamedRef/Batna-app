@@ -1,0 +1,392 @@
+schema: batna.lesson/v1
+lecture: rheum.L15
+lessons:
+  # ------------------------------------------------------------------
+  - id: rheum.L15.lesson1
+    title: "الـ OA مش مجرد استهلاك"
+    hook: "لو الـ OA مجرد احتكاك، كان العدّائين كلهم ركبهم باظت. بس ده مش اللي بيحصل."
+    minutes: 8
+    pages: [233, 235]
+    topics: [concept, pathogenesis, diagnosis]
+    goals:
+      - "تعرف المفهوم الجديد: whole-joint disease"
+      - "تعدّ الأدلة إن الميكانيكا مش كل حاجة، وتفهم الـ crosstalk"
+      - "تشخّص الـ OA من الحكاية والكشف والأشعة"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 233
+        quote: "Now OA is considered as a progressive complex multifactorial disorder of the whole joint"
+        title: "المفهوم اتغيّر"
+        text: |
+          الـ OA **مش** مجرد ==wear and tear==.
+
+          دلوقتي هو **progressive complex multifactorial disorder** للـ ==whole joint==:
+
+          - Articular cartilage.
+          - Subchondral bone.
+          - Synovium.
+          - Ligaments و capsule.
+      - kind: explain
+        page: 233
+        quote: "Obese individuals have higher rates of hand OA, whereas they do not experience greater stresses in those joints."
+        title: "ليه الميكانيكا مش كفاية؟"
+        text: |
+          - الـ **obesity** مش مرتبطة بـ OA أكتر في الـ **hip**، مع إنه بيشيل وزن.
+          - التخان عندهم ==hand OA== أكتر، مع إن إيديهم مش شايلة حاجة زيادة.
+          - الـ **running** بيزوّد الضغط على الـ hip والـ knee، ومع ذلك مش بيزود الـ OA.
+          - الـ **synovitis** بتظهر **قبل** ما الـ cartilage يبوظ بشكل واضح (arthroscopy، MRI، US، و histology).
+      - kind: reveal
+        page: 233
+        quote: "Obese individuals have higher rates of hand OA, whereas they do not experience greater stresses in those joints."
+        prompt: "لو التخين عنده hand OA أكتر وإيده مش شايلة وزن، ده معناه إيه؟"
+        answer: "إن فيه عامل **systemic** (metabolic أو inflammatory) غير الوزن. الـ obesity بتأثر على المفصل كمان من جوه الجسم، مش بس بالحمل الميكانيكي."
+      - kind: figure
+        page: 234
+        quote: "Infra patellar fat pad & neighboring articular tissues cross talk. Bone, cartilage, synovium Cross talks."
+        title: "الـ Crosstalk"
+        alt: "A knee drawn as four boxes in a circle: cartilage, subchondral bone, synovium and infrapatellar fat pad, with two-way arrows between them. In the middle, a synovial macrophage releases IL-1 beta, TNF alpha and TGF beta. Below, results: chondrocyte apoptosis, osteophytes, sclerosis."
+        caption: "كل نسيج في المفصل بيكلّم التاني. لما الكلام يبقى unhealthy، الإصلاح بيفشل."
+        svg: |
+          <svg viewBox="0 0 330 320" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="R15a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="10" y="10" width="120" height="40" rx="8" class="fg-acc"/>
+            <text x="22" y="35" class="t-sm t-b">Cartilage</text>
+            <rect x="200" y="10" width="120" height="40" rx="8" class="fg-acc"/>
+            <text x="212" y="35" class="t-sm t-b">Synovium</text>
+            <rect x="10" y="150" width="120" height="40" rx="8" class="fg-acc"/>
+            <text x="18" y="175" class="t-sm t-b">Subchondral bone</text>
+            <rect x="200" y="150" width="120" height="40" rx="8" class="fg-acc"/>
+            <text x="212" y="175" class="t-sm t-b">Fat pad</text>
+            <path d="M135 30H195" class="fg-arrow" marker-start="url(#R15a)" marker-end="url(#R15a)"/>
+            <path d="M135 170H195" class="fg-arrow" marker-start="url(#R15a)" marker-end="url(#R15a)"/>
+            <path d="M70 55V145" class="fg-arrow" marker-start="url(#R15a)" marker-end="url(#R15a)"/>
+            <path d="M260 55V145" class="fg-arrow" marker-start="url(#R15a)" marker-end="url(#R15a)"/>
+            <circle cx="165" cy="100" r="30" class="fg-bad"/>
+            <text x="143" y="97" class="t-sm t-b">macro-</text>
+            <text x="143" y="111" class="t-sm t-b">phage</text>
+            <text x="100" y="225" class="t-sm t-bad">IL-1β, TNF-α, TGF-β</text>
+            <rect x="10" y="240" width="310" height="70" rx="8" class="fg-box"/>
+            <text x="20" y="262" class="t-sm">Failed repair, chondrocyte apoptosis,</text>
+            <text x="20" y="282" class="t-sm">osteophytes, bad remodeling,</text>
+            <text x="20" y="300" class="t-sm">bone attrition and sclerosis</text>
+          </svg>
+      - kind: explain
+        page: 234
+        quote: "synovial macrophages respond to danger-associated molecular associated patterns, including cartilage fragments and intracellular proteins from necrotic cells"
+        title: "الـ Macrophage هو المحرّض"
+        text: |
+          الـ ==synovial macrophages== بتشوف **danger-associated molecular patterns (DAMPs)**: قطع cartilage و proteins من خلايا ميتة.
+
+          فبتطلّع **IL-1β، TNF-α، TGF-β** اللي بتأذي الـ cartilage وتغيّر العضم.
+      - kind: aside
+        tone: analogy
+        page: 234
+        quote: "Unhealthy crosstalk resulting in activation of specific molecular cascades and inflammatory mediators exacerbates the failure of repair mechanisms"
+        text: "زي عمارة: الـ cartilage شقة، والعضم السقف، والـ synovium الجيران، والـ fat pad البواب. لو كل واحد بيشتكي من التاني بدل ما يصلّحوا، العمارة كلها بتقع. ده الـ unhealthy crosstalk."
+      - kind: explain
+        page: 234
+        quote: "Joint pain brought on and exacerbated by activity and relieved with rest."
+        title: "التشخيص"
+        text: |
+          **الحكاية**:
+
+          - ألم مع ==activity== وبيروح مع الراحة.
+          - Stiffness **قصيرة** الصبح أو بعد قعدة طويلة.
+          - **مفيش** constitutional symptoms واضحة.
+
+          **الكشف**:
+
+          - Bony prominence عند حواف المفصل.
+          - **Crepitus**.
+          - Tenderness على الـ joint line.
+          - تورم والتهاب في الـ **inflammatory OA**.
+
+          **الإيد**: ==DIP، PIP، و first CMC==.
+      - kind: explain
+        page: 235
+        quote: "Knee osteoarthritis with medial joint space narrowing and osteophytes."
+        title: "الأشعة"
+        text: |
+          - **الإيد**: joint space narrowing في الـ DIP والـ PIP، و **sclerosis (eburnation)**.
+          - **الركبة**: ==medial joint space narrowing== و **osteophytes**.
+      - kind: check
+        page: 234
+        quote: "Osteoarthritis of distal interphalangeal (DIP), proximal interphalangeal (PIP) & 1scarpometacarpal (CMC) joints."
+        question: "Which hand pattern points to OA rather than RA?"
+        options: ["DIP, PIP and first CMC", "MCPs and wrists", "MCPs only, sparing DIP", "Wrist and elbow"]
+        answer: 0
+        why:
+          - "صح: الـ DIP والـ PIP والـ first CMC."
+          - "دي صورة الـ RA."
+          - "الـ OA بيمسك الـ DIP."
+          - "مش صورة الـ OA."
+      - kind: check
+        page: 233
+        quote: "Obese individuals have higher rates of hand OA, whereas they do not experience greater stresses in those joints."
+        question: "Which statement about OA pathogenesis is NOT correct?"
+        options: ["Obese people have lower rates of hand OA", "Obesity is not linked to more hip OA", "Running does not raise OA incidence", "Synovitis precedes visible cartilage loss"]
+        answer: 0
+        why:
+          - "صح، دي الغلط: التخان عندهم hand OA أكتر."
+          - "صح في الكتاب."
+          - "صح في الكتاب."
+          - "صح في الكتاب."
+      - kind: try
+        items: [rheum.L15.003, rheum.L15.007, rheum.L15.009, rheum.L15.010, rheum.L15.012]
+    recap:
+      - "OA = whole-joint disease، مش wear and tear."
+      - "الدليل: hip مش أكتر مع السمنة، hand أكتر، الجري مش بيضر، synovitis بدري."
+      - "Macrophages + DAMPs ← IL-1β و TNF-α و TGF-β."
+      - "ألم مع الحركة، stiffness قصيرة، مفيش أعراض عامة، crepitus."
+      - "الإيد DIP و PIP و first CMC؛ الركبة medial narrowing و osteophytes."
+    practice: [rheum.L15.001, rheum.L15.002, rheum.L15.003, rheum.L15.004, rheum.L15.005, rheum.L15.006, rheum.L15.007, rheum.L15.008, rheum.L15.009, rheum.L15.010, rheum.L15.011, rheum.L15.012, rheum.L15.013, rheum.L15.014, rheum.L15.040, rheum.L15.041, rheum.L15.042, rheum.L15.043, rheum.L15.049, rheum.L15.051]
+  # ------------------------------------------------------------------
+  - id: rheum.L15.lesson2
+    title: "سونار و MRI جديد، ومين معرّض"
+    hook: "الـ X-ray بيشوف الـ OA لما يبقى متأخر. الأجهزة الجديدة بتسمع الـ cartilage وهو بيلين."
+    minutes: 7
+    pages: [235, 236]
+    topics: [imaging, risk-types, treatment]
+    goals:
+      - "تعرف الجديد في السونار والـ MRI"
+      - "تحفظ الـ risk factors وأماكنها والأنواع"
+      - "تعرف أهداف العلاج وخطواته"
+    status: unverified
+    steps:
+      - kind: table
+        page: 235
+        quote: "Superb microvascular Doppler could detect low-velocity blood flow. It is superior detect low-grade inflammation in knee OA."
+        title: "الجديد في السونار"
+        columns: ["Technique", "Shows"]
+        rows:
+          - ["Shear wave elastography", "Soft cartilage (low SWV), early OA"]
+          - ["3D US", "Early osteophytes, cartilage volume"]
+          - ["Superb microvascular Doppler", "Low-velocity flow, low-grade inflammation"]
+          - ["Contrast-enhanced US", "Microbubble perfusion, mild synovitis"]
+        hide: [[0, 1], [2, 1], [3, 1]]
+      - kind: reveal
+        page: 235
+        quote: "Lower shear wave velocity (SWV) values indicate a softening in cartilage this may help in the diagnosis of early-stage OA."
+        prompt: "ليه الـ shear wave velocity الواطية معناها cartilage تعبان؟"
+        answer: "الموجة بتمشي أسرع في النسيج الجامد وأبطأ في الطري. الـ **cartilage** السليم جامد ومرن؛ لما يبدأ يبوظ بيلين، فالـ **SWV** تقل. وده بيحصل قبل ما الـ joint space يضيق في الـ X-ray."
+      - kind: explain
+        page: 235
+        quote: "Determine the amount and network integrity of collagen, the amount of proteoglycans."
+        title: "الـ Biochemical MRI"
+        text: |
+          الـ ==quantitative MRI== الجديد بيقيس:
+
+          - مكونات الـ articular cartilage.
+          - كمية و integrity الـ **collagen**، وكمية الـ **proteoglycans**.
+          - الـ **perfusion** في الـ synovium والأنسجة التانية بالأرقام.
+          - Lesions مرتبطة بالالتهاب: **infrapatellar fat pad** و **bone marrow lesions**.
+      - kind: table
+        page: 236
+        quote: "Obesity (most sites, but more marked for the knee than other joints)."
+        title: "الـ Risk factors"
+        columns: ["Factor", "Sites"]
+        rows:
+          - ["Age", "All sites"]
+          - ["Female sex", "Knee and hand mainly"]
+          - ["Race", "Variable"]
+          - ["Genetics", "All sites"]
+          - ["Obesity", "Most sites, knee most"]
+          - ["Trauma, occupation", "Repetitive activities"]
+        hide: [[0, 1], [1, 1], [4, 1]]
+      - kind: check
+        page: 236
+        quote: "Obesity (most sites, but more marked for the knee than other joints)."
+        question: "Obesity is the most marked risk for OA at the:"
+        options: ["Knee", "Hip", "Hand", "Shoulder"]
+        answer: 0
+        why:
+          - "صح: most sites، بس أوضح في الركبة."
+          - "الكتاب قال السمنة مش مرتبطة بـ hip OA أكتر."
+          - "موجودة، بس الركبة أوضح."
+          - "مش مذكورة."
+      - kind: explain
+        page: 236
+        quote: "Primary: Nodular type. Erosive. Inflammatory. 2- Secondary to any MSK disease, diseases, trauma, metabolic and congenital conditions."
+        title: "الأنواع والعلاج"
+        text: |
+          **الأنواع**:
+
+          - **Primary**: nodular، ==erosive==، inflammatory.
+          - **Secondary**: لأي MSK disease، trauma، metabolic أو congenital.
+
+          **أهداف العلاج**: control pain، improve function، minimize disability، وتحسين الـ quality of life.
+
+          **الخطوات**: education، moderate exercise، weight loss، physiotherapy، mechanical aids، أدوية، وجراحة.
+      - kind: mnemonic
+        page: 236
+        quote: "Education. Moderate exercises. Weight loss programs. Physiotherapy for the joints. Mechanical aids or appliances."
+        word: "EMWPAMS"
+        parts:
+          - { key: "E", text: "Education" }
+          - { key: "M", text: "Moderate exercise" }
+          - { key: "W", text: "Weight loss" }
+          - { key: "P", text: "Physiotherapy" }
+          - { key: "A", text: "Aids and appliances" }
+          - { key: "M", text: "Medications" }
+          - { key: "S", text: "Surgery" }
+        hook: |
+          اقراها كده: **Every Monday We Practice And Move Slowly**. من التثقيف للجراحة بالترتيب، والجراحة آخر حاجة.
+      - kind: aside
+        tone: trap
+        page: 236
+        quote: "Education. Moderate exercises. Weight loss programs. Physiotherapy for the joints. Mechanical aids or appliances."
+        text: "سؤال الكتاب (ص 240) بيقولك: quadriceps strengthening **contraindicated** في الـ knee OA؟ لأ، ده الغلط. الرياضة والـ physiotherapy من أساسيات العلاج."
+      - kind: try
+        items: [rheum.L15.016, rheum.L15.018, rheum.L15.019, rheum.L15.021, rheum.L15.023]
+    recap:
+      - "SWE: SWV واطية = cartilage طري = early OA."
+      - "Superb microvascular Doppler و contrast US: التهاب خفيف."
+      - "Biochemical MRI: collagen و proteoglycans و perfusion."
+      - "Obesity أوضح في الركبة؛ age و genetics كل الأماكن."
+      - "Primary: nodular، erosive، inflammatory؛ العلاج يبدأ education و exercise و weight loss."
+    practice: [rheum.L15.015, rheum.L15.016, rheum.L15.017, rheum.L15.018, rheum.L15.019, rheum.L15.020, rheum.L15.021, rheum.L15.022, rheum.L15.023, rheum.L15.044, rheum.L15.045, rheum.L15.052, rheum.L15.053]
+  # ------------------------------------------------------------------
+  - id: rheum.L15.lesson3
+    title: "مستقبل علاج الـ OA: حقن وخلايا وجينات"
+    hook: "الحباية مش بتوصل للـ cartilage. فالعلم قرر يدخل المفصل بنفسه بالحقنة."
+    minutes: 8
+    pages: [237, 240]
+    topics: [ia-cell, dmoad]
+    goals:
+      - "تفهم ليه الـ intra-articular route"
+      - "تعرف MSCs و gene therapy و ACI و PRP + HA"
+      - "تعرف الـ DMOADs والـ MISHA وإمتى نحوّل لـ joint replacement"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 237
+        quote: "due to the local immune and paracrine dysregulation in the joint, paired with the avascular nature of articular cartilage."
+        title: "ليه الحقن جوه المفصل؟"
+        text: |
+          الـ **oral drugs** صعب توصل بتركيز يغيّر الخلايا عشان:
+
+          - الـ **local immune و paracrine dysregulation** في المفصل.
+          - الـ cartilage ==avascular==.
+          - والـ systemic route ممكن يعمل **toxicity**.
+
+          الحل: ==intra-articular route== بـ local bioavailability أعلى وأمان أكتر.
+
+          (الكتاب بيشير كمان لـ **ESCEO** stepwise algorithm للـ knee OA.)
+      - kind: figure
+        page: 237
+        quote: "Intra-articular route for drugs can potentially enhance the local bioavailability, thereby maximizing therapeutic effects locally in the joint with a higher safety profile"
+        title: "الحباية ضد الحقنة"
+        alt: "Two paths to a knee joint. Top: a pill goes through the bloodstream, most of it spreads to the whole body with a warning of systemic toxicity, and only a thin arrow reaches the avascular cartilage. Bottom: a syringe injects directly into the joint with a thick arrow labelled high local level."
+        caption: "الحباية بتتوزع على الجسم كله والـ cartilage مالوش أوعية. الحقنة بتحط الدوا في المكان على طول."
+        svg: |
+          <svg viewBox="0 0 330 240" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="R15b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+              <marker id="R15c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-acc"/></marker>
+            </defs>
+            <rect x="10" y="20" width="60" height="30" rx="15" class="fg-box"/>
+            <text x="22" y="40" class="t-sm t-b">Oral</text>
+            <path d="M75 35H150" class="fg-arrow" marker-end="url(#R15b)"/>
+            <rect x="155" y="15" width="80" height="40" rx="6" class="fg-bad"/>
+            <text x="162" y="33" class="t-sm">systemic</text>
+            <text x="162" y="48" class="t-sm">toxicity</text>
+            <path d="M195 58L255 100" class="fg-thin" marker-end="url(#R15b)"/>
+            <text x="200" y="95" class="t-sm t-mut">little</text>
+            <rect x="250" y="95" width="70" height="60" rx="10" class="fg-acc"/>
+            <text x="258" y="120" class="t-sm t-b">Joint</text>
+            <text x="258" y="138" class="t-sm">avascular</text>
+            <rect x="10" y="185" width="60" height="30" rx="4" class="fg-box"/>
+            <text x="16" y="205" class="t-sm t-b">IA shot</text>
+            <path d="M75 200L245 150" class="fg-arrow-acc" stroke-width="5" marker-end="url(#R15c)"/>
+            <text x="110" y="215" class="t-sm t-acc">high local level, safer</text>
+          </svg>
+      - kind: table
+        page: 237
+        quote: "Multiple sources (bone marrow, adipose, synovium). Their ability to self-renew, immunomodulatory properties."
+        title: "الـ Cellular و gene therapy"
+        columns: ["Therapy", "Key point"]
+        rows:
+          - ["MSCs", "Bone marrow, adipose, synovium; self-renew, immunomodulate, make chondrocytes"]
+          - ["IA adipose MSCs", "Finished phase 4 trial, July 2021"]
+          - ["Gene therapy", "Allogeneic chondrocytes + GP2-293 cells overexpressing TGF-β"]
+          - ["ACI", "Large defects, durable; but invasive, needs lab culture"]
+        hide: [[1, 1], [2, 1]]
+      - kind: explain
+        page: 238
+        quote: "TGF-β is an anti-inflammatory cytokine that controls chondrocyte proliferation and differentiation, as well as ECM accumulation."
+        title: "ليه TGF-β في الـ gene therapy؟"
+        text: |
+          الـ ==TGF-β== هنا **anti-inflammatory cytokine** بيتحكم في تكاثر وتمايز الـ chondrocytes وتراكم الـ **ECM**.
+
+          الكتاب بيقول إن تجربتين phase 3 كبار كانوا شغالين في أمريكا (أكتوبر 2022).
+      - kind: aside
+        tone: trap
+        page: 238
+        quote: "TGF-β is an anti-inflammatory cytokine that controls chondrocyte proliferation and differentiation, as well as ECM accumulation."
+        text: "لاحظ: الكتاب ذكر TGF-β مع IL-1β و TNF-α كـ cytokines بتأذي في الـ pathogenesis (ص 234)، وبعدين بيستخدمه كـ anti-inflammatory في الـ gene therapy (ص 238). لو اتسألت، جاوب حسب الجزء اللي السؤال جاي منه."
+      - kind: explain
+        page: 238
+        quote: "PRP combined with HA is more effective than PRP or HA alone at inhibiting synovial inflammation"
+        title: "الحقن التانية"
+        text: |
+          ==PRP + HA== أحسن من أي واحد لوحده في:
+
+          - تقليل الـ synovial inflammation.
+          - تحسين الألم والـ function.
+          - أعراض جانبية أقل.
+
+          والـ guidelines: **AAOS**، **ACR** (CR = conditionally recommended، CRA = conditionally recommended against)، **ESCEO**، **NICE**، **OARSI**، **PANLAR**، و **EULAR recommendations for IA therapies 2021**.
+      - kind: match
+        page: 239
+        quote: "OARSI: Osteoarthritis Research Society International."
+        prompt: "وصّل الاختصار بمعناه:"
+        pairs:
+          - ["OARSI", "Osteoarthritis Research Society International"]
+          - ["ESCEO", "European Society for Clinical and Economic Aspects of Osteoporosis"]
+          - ["AAOS", "American Academy of Orthopaedic Surgeons"]
+          - ["CRA", "Conditionally recommended against"]
+          - ["PANLAR", "Pan-American League of Rheumatology Associations"]
+        why: "الكتاب بيعرّف الاختصارات دي في ص 238–239 عشان توصيات الـ IA therapies."
+      - kind: explain
+        page: 239
+        quote: "Lorecivivint, intra-articular Wnt pathway inhibitor."
+        title: "DMOADs والـ implant"
+        text: |
+          - ==Lorecivivint==: **intra-articular Wnt pathway inhibitor**؛ بيحسن صحة الـ chondrocytes ويقلل الالتهاب. نجح في **phase 2b (24 أسبوع)** في الـ knee OA، و phase III بدأت.
+          - **MISHA Knee System** (FDA 2023): **shock-absorbing implant** للـ refractory knee OA، تحت الجلد في الـ medial extra-capsular space ومتثبت في الـ tibia والـ femur بـ screws، outpatient.
+      - kind: explain
+        page: 239
+        quote: "Do not exclude people with osteoarthritis from referral for joint replacement because of their age, sex or gender, smoking, comorbidities, overweight or obesity."
+        title: "إمتى نحوّل لـ joint replacement؟"
+        text: |
+          Hip أو knee أو shoulder OA لو:
+
+          - الأعراض (ألم، stiffness، function أقل، deformity) ==substantially impacting quality of life==.
+          - والـ non-surgical management فشل أو مش مناسب.
+
+          و**ما تستبعدش** حد عشان: السن، الجنس، السجاير، الـ comorbidities، أو السمنة.
+      - kind: case
+        page: 239
+        quote: "Their joint symptoms (such as pain, stiffness, reduced function or progressive joint deformity) are substantially impacting their quality of life ."
+        stem: "A 76-year-old woman, BMI 36, smoker, with diabetes, cannot shop or climb stairs because of knee OA despite a year of physiotherapy, weight-loss attempts and analgesia."
+        steps:
+          - question: "Refer for knee replacement?"
+            options: ["Yes", "No, too old", "No, BMI too high", "No, she smokes"]
+            answer: 0
+            why: "Symptoms substantially affect quality of life and non-surgical care failed; age, obesity, smoking and comorbidity must not exclude her."
+          - question: "Her neighbour has early knee OA with mild synovitis. Which imaging can show mild synovitis?"
+            options: ["Contrast-enhanced ultrasound", "Plain X-ray", "Shear wave elastography only", "DEXA"]
+            answer: 0
+            why: "Microbubble contrast US shows perfusion and helps detect mild synovitis."
+      - kind: try
+        items: [rheum.L15.025, rheum.L15.027, rheum.L15.032, rheum.L15.035, rheum.L15.038]
+    recap:
+      - "الـ oral drugs صعب توصل: cartilage avascular و dysregulation؛ IA أحسن وأأمن."
+      - "MSCs: bone marrow و adipose و synovium؛ IA adipose MSCs خلّصت phase 4 (2021)."
+      - "Gene therapy: chondrocytes + خلايا بتطلّع TGF-β."
+      - "PRP + HA أحسن من كل واحد لوحده."
+      - "Lorecivivint = IA Wnt inhibitor؛ joint replacement لو الحياة اتأثرت والعلاج فشل، من غير استبعاد بسبب السن أو السمنة."
+    practice: [rheum.L15.024, rheum.L15.025, rheum.L15.026, rheum.L15.027, rheum.L15.028, rheum.L15.029, rheum.L15.030, rheum.L15.031, rheum.L15.032, rheum.L15.033, rheum.L15.034, rheum.L15.035, rheum.L15.036, rheum.L15.037, rheum.L15.038, rheum.L15.039, rheum.L15.046, rheum.L15.047, rheum.L15.048, rheum.L15.050]

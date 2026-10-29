@@ -546,7 +546,7 @@ pub fn UpdateSheet() -> Element {
                         }
                         if let Some((done, total)) = progress {
                             progress { max: "{total}", value: "{done}" }
-                            p { class: "us-mb", "{megabytes(done)} / {megabytes(total)}" }
+                            p { class: "us-mb num-ltr", "{megabytes(done)} / {megabytes(total)}" }
                         }
                     }
                 }

@@ -28,6 +28,7 @@ mod oral;
 mod order;
 mod own;
 mod pagesheet;
+mod parts;
 mod plan;
 mod platform;
 mod prefs;
@@ -66,7 +67,8 @@ pub enum Screen {
 }
 
 impl Screen {
-    /// Bottom bar on phones, side rail from 600dp. Settings is a sheet opened from the top bar.
+    /// Bottom bar on phones (Cases, Oral and Stats under More), side rail
+    /// from 600dp. Settings is a sheet opened from the top bar.
     pub const NAV: [Screen; 7] =
         [Self::Today, Self::Learn, Self::Study, Self::Bank, Self::Cases, Self::Oral, Self::Stats];
 
@@ -100,6 +102,9 @@ pub struct Ui {
     pub screen: Signal<Screen>,
     /// This device's theme and text size (Settings › Look).
     pub prefs: Signal<prefs::DevicePrefs>,
+    /// A focused study task is open: the phone bar hides
+    /// (`parts::use_focus_mode`).
+    pub focus: Signal<bool>,
 }
 
 fn main() {
@@ -142,6 +147,7 @@ fn App() -> Element {
     let ui = use_context_provider(|| Ui {
         screen: Signal::new(Screen::from_env().unwrap_or(Screen::Today)),
         prefs: Signal::new(prefs::DevicePrefs::load()),
+        focus: Signal::new(false),
     });
     let settings = use_context_provider(settings::SettingsNav::new);
     use_context_provider(update::sheet::UpdateSheetNav::new);
@@ -203,6 +209,7 @@ fn App() -> Element {
             // Calm or Glossy (Settings › Look): only CSS keys on it, so a
             // switch keeps every screen's state (assets/appearance.css).
             "data-appearance": ui.prefs.read().appearance.as_str(),
+            "data-focus": if *ui.focus.read() { "true" } else { "false" },
             header { class: "topbar",
                 div { class: "brand",
                     span { class: "brand-name", {i18n::app::NAME} }
@@ -230,8 +237,10 @@ fn App() -> Element {
                         class: more::nav_class(screen),
                     }
                 }
-                // Phones: Cases and Oral sit under More (more.rs).
+                // Phones: Cases, Oral and Progress sit under More (more.rs).
                 more::More {}
+                // From 600px: References, a new card and the calculators.
+                more::ToolButtons {}
                 // From 600px the rail or sidebar carries Settings at its foot (nav.css).
                 button {
                     class: "nav-item nav-foot",

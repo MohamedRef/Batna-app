@@ -4,7 +4,7 @@
    "slim" (Settings › Tablet and Mac) keeps the rail. Phones keep the top
    bar and bottom bar from main.css. Logical properties only. */
 
-.nav-brand, .nav-foot { display: none; }
+.nav-brand, .nav-foot, .nav-tools { display: none; }
 
 @media (min-width: 600px) {
   .nav-brand {
@@ -17,6 +17,14 @@
   }
   .nav-brand .brand-name { font-size: var(--fs-md); }
   .nav-brand .brand-tag { display: none; }
+  /* References, a new card and the calculators, under the screens and
+     set off by a hairline (more.rs ToolButtons; phones use More). */
+  .nav-tools {
+    display: flex; flex-direction: column; gap: inherit;
+    margin-block-start: var(--sp-1); padding-block-start: var(--sp-2);
+    border-block-start: 1px solid var(--line-soft, var(--line));
+  }
+  .nav-tool { color: var(--muted); }
   /* Settings sits at the foot of the rail; the top bar is gone. */
   .nav-foot { display: flex; margin-block-start: auto; }
   .nav-foot .label { font-size: 0.75rem; }

@@ -2217,3 +2217,27 @@ items:
     src: { page: 274, quote: "baricitinib (Olumiant), tofacitinib (Xeljanz), and upadacitinib (Rinvoq), are approved by the FDA to treat rheumatoid arthritis." }
     status: unverified
     tags: [book-question]
+  - id: rheum.L16.208
+    kind: calc
+    topic: criteria
+    calculator: acr_eular_2010_ra
+    stem: "A 45-year-old woman has 8 weeks of swelling in both wrists and five MCP joints (7 small joints). RF is twice the upper limit of normal; ESR is raised."
+    question: Does she meet the ACR/EULAR 2010 criteria for RA?
+    inputs: { large_joints: 0, small_joints: 7, serology: low, synovitis_6_weeks: true, abnormal_crp_esr: true }
+    expect: "7 of 10: definite RA"
+    interpret: "Joints 4–10 small = 3, low-positive RF = 2, synovitis 6 weeks or more = 1, abnormal ESR = 1. Total 7, so definite RA (6 or more)."
+    src: { page: 246, quote: "Patients are definitively diagnosed with RA if they score 6 or more points according to the following criteria" }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L16.209
+    kind: calc
+    topic: criteria
+    calculator: acr_eular_2010_ra
+    stem: "A 38-year-old man has 3 weeks of swollen knees and ankles (4 medium-large joints, no small joints). RF and anti-CCP are negative; CRP is high."
+    question: Does he meet the ACR/EULAR 2010 criteria for RA?
+    inputs: { large_joints: 4, small_joints: 0, serology: negative, synovitis_6_weeks: false, abnormal_crp_esr: true }
+    expect: "2 of 10: criteria not met"
+    interpret: "Joints 2–10 large = 1, negative serology = 0, under 6 weeks = 0, abnormal CRP = 1. Total 2, well below 6: not classifiable as RA now; think of reactive or other arthritis and reassess."
+    src: { page: 246, quote: "Patients are definitively diagnosed with RA if they score 6 or more points according to the following criteria" }
+    status: unverified
+    tags: [numbers]

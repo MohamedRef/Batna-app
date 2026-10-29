@@ -1,0 +1,903 @@
+schema: batna.lesson/v1
+lecture: rheum.L08
+lessons:
+  # ------------------------------------------------------------------
+  - id: rheum.L08.lesson1
+    title: "الأوعية بتولّع: ليه وإزاي نقسّمها؟"
+    hook: "مرض واحد ممكن يعمل صداع، أو purpura، أو فشل كلوي. السر في حجم الوعاء."
+    minutes: 8
+    pages: [123, 126]
+    topics: [basics, classification]
+    goals:
+      - "تفهم الـ pathogenesis: التهاب في الجدار + ischaemia"
+      - "تعرف الأربع mechanisms وأمثلتها"
+      - "ترسم الـ Chapel Hill 2012 حسب حجم الوعاء"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 123
+        title: "يعني إيه vasculitis؟"
+        quote: "Vasculitides are a hetrogenous group of conditions characterized by inflammation and necrosis of blood vessels."
+        text: |
+          الـ **vasculitides** مجموعة أمراض مختلفة، يجمعها ==inflammation and necrosis of blood vessels==.
+
+          - أي وعاء، بأي حجم، في أي organ ممكن يتصاب.
+          - علشان كده الأعراض متنوعة جدًا: من مرض **benign** في الجلد بس، لحد مرض **life-threatening** systemic.
+          - وبالتالي بيقلّد أمراض كتير، وأمراض كتير بتقلّده. فلازم **systematic approach**.
+      - kind: explain
+        page: 123
+        title: "عمليتين بس"
+        quote: "Pathogenesis of vasculitis involves two processes, namely. 1. Inflammation of vessel wall. 2. Ischaemia of tissues."
+        text: |
+          الـ pathogenesis كلها عمليتين:
+          1. ==Inflammation of vessel wall==
+          2. **Ischaemia of tissues** (الوعاء ضاق أو اتسد، فالعضو اللي بيغذيه جاع)
+
+          أغلبهم **immune-mediated** و **idiopathic**.
+      - kind: table
+        page: 124
+        quote: "Immune complex mediated with immune complex deposition or formation in situ. This is associated with low complement levels"
+        title: "إزاي الجدار بيتضرب؟"
+        columns: [Mechanism, Clue, Example]
+        rows:
+          - ["Allergic angiitis", "Eosinophils, high IgE", "Churg–Strauss"]
+          - ["Pauci-immune (ANCA)", "Few deposits", "GPA, MPA, CSS"]
+          - ["Immune complex", "Low complement", "HSP, PAN"]
+          - ["T cell (Th1)", "Granulomatous infiltrate", "GCA, Takayasu"]
+        hide: [[0, 2], [1, 1], [2, 1], [3, 2]]
+      - kind: check
+        page: 124
+        quote: "This is associated with low complement levels, e.g. Henoch-Schonlein purpura (HSP), polyarteritis nodosa (PAN)."
+        question: "Which vasculitis mechanism typically lowers serum complement?"
+        options:
+          - "Immune complex mediated"
+          - "Pauci-immune ANCA"
+          - "Th1 T-cell mediated"
+          - "Allergic angiitis"
+        answer: 0
+        why:
+          - "صح: الـ immune complexes بتستهلك الـ complement (HSP، PAN)."
+          - "الـ pauci-immune معناها deposits قليلة، فالـ complement عادي."
+          - "الـ Th1 ده GCA و Takayasu، مفيش استهلاك complement."
+          - "الـ allergic angiitis علامته eosinophilia و IgE."
+      - kind: explain
+        page: 124
+        title: "الـ pathology مش هتقولك الاسم"
+        quote: "Pathologic findings not diagnostic for a specific syndrome. Can be focal and segmental. Not all the vessel may be involved."
+        text: |
+          - الأنماط بتتداخل جامد، والـ pathology ==not diagnostic== لمرض بعينه.
+          - الإصابة ممكن تبقى **focal and segmental**: حتة مصابة وحتة سليمة (skip lesions).
+          - الجدار الملتهب: permeability تزيد، يضعف (**aneurysm** أو نزيف)، أو الـ intima تتكاثر و thrombosis، والنهاية **obstruction and ischaemia**.
+
+          الأرقام: incidence **19.8 per million** في السنة، الذروة **65–74** سنة، والرجالة أكتر.
+      - kind: reveal
+        page: 124
+        quote: "Can be focal and segmental. Not all the vessel may be involved."
+        prompt: "ليه الـ focal and segmental دي بتهمك عمليًا قدام عيان GCA؟"
+        answer: |
+          لأن الـ biopsy ممكن تيجي **سليمة** لو أخدت حتة ما فيهاش التهاب. علشان كده في GCA بناخد **4–6 cm**، ولو الشك قوي والـ biopsy سليمة نعمل الناحية التانية (هتشوفها في درس 3).
+      - kind: figure
+        page: 125
+        quote: "Large Vessel Vasculitis (LVV) Takayasu Arteritis (TAK). Giant Cell Arteritis (GCA). Medium Vessel Vasculitis (MVV) Polyarteritis Nodosa (PAN). Kawasaki Disease (KD)."
+        title: "Chapel Hill 2012: حسب حجم الوعاء"
+        alt: "Three vessels drawn from large to small. The aorta-sized tube is labelled Takayasu and GCA; the medium artery tube is labelled PAN and Kawasaki; the small vessel splits into ANCA-associated (MPA, GPA, EGPA) and immune complex (anti-GBM, cryoglobulinemic, IgA vasculitis, anti-C1q). A side box says variable vessel: Behçet, Cogan."
+        caption: "كل ما الوعاء يصغر، تبقى الإصابة أقرب للجلد والكلى والرئة. الـ ==variable vessel== هو **Behçet** و **Cogan**."
+        svg: |
+          <svg viewBox="0 0 330 360" xmlns="http://www.w3.org/2000/svg">
+            <rect x="15" y="15" width="300" height="70" rx="35" class="fg-acc"/>
+            <text x="165" y="42" text-anchor="middle" class="t-b">Large vessel</text>
+            <text x="165" y="64" text-anchor="middle" class="t-sm">Takayasu · Giant cell arteritis</text>
+            <rect x="55" y="105" width="220" height="50" rx="25" class="fg-good"/>
+            <text x="165" y="126" text-anchor="middle" class="t-b">Medium vessel</text>
+            <text x="165" y="145" text-anchor="middle" class="t-sm">PAN · Kawasaki</text>
+            <rect x="15" y="175" width="145" height="110" rx="12" class="fg-bad"/>
+            <text x="87" y="196" text-anchor="middle" class="t-sm t-b">Small: ANCA</text>
+            <text x="87" y="218" text-anchor="middle" class="t-sm">MPA</text>
+            <text x="87" y="238" text-anchor="middle" class="t-sm">GPA (Wegener)</text>
+            <text x="87" y="258" text-anchor="middle" class="t-sm">EGPA (Churg–Strauss)</text>
+            <rect x="170" y="175" width="145" height="110" rx="12" class="fg-bad"/>
+            <text x="242" y="196" text-anchor="middle" class="t-sm t-b">Small: immune complex</text>
+            <text x="242" y="218" text-anchor="middle" class="t-sm">Anti-GBM</text>
+            <text x="242" y="236" text-anchor="middle" class="t-sm">Cryoglobulinemic</text>
+            <text x="242" y="254" text-anchor="middle" class="t-sm">IgA vasculitis (HSP)</text>
+            <text x="242" y="272" text-anchor="middle" class="t-sm">Anti-C1q urticarial</text>
+            <rect x="15" y="300" width="300" height="45" rx="10" class="fg-thin"/>
+            <text x="165" y="320" text-anchor="middle" class="t-sm t-b">Variable vessel: Behçet · Cogan</text>
+            <text x="165" y="337" text-anchor="middle" class="t-sm t-mut">+ single organ, systemic disease, probable etiology</text>
+          </svg>
+      - kind: mnemonic
+        page: 125
+        quote: "Large Vessel Vasculitis (LVV) Takayasu Arteritis (TAK). Giant Cell Arteritis (GCA). Medium Vessel Vasculitis (MVV) Polyarteritis Nodosa (PAN). Kawasaki Disease (KD)."
+        word: "LMSV"
+        parts:
+          - { key: "L", text: "Large: Takayasu, giant cell arteritis" }
+          - { key: "M", text: "Medium: PAN, Kawasaki" }
+          - { key: "S", text: "Small: ANCA (MPA, GPA, EGPA) + immune complex (anti-GBM, cryo, IgA, anti-C1q)" }
+          - { key: "V", text: "Variable: Behçet, Cogan" }
+        hook: "**L-M-S-V** زي مقاسات التيشيرت: Large, Medium, Small... والـ **V** ده Behçet اللي بيلبس أي مقاس."
+      - kind: sort
+        page: 126
+        quote: "Vasculitis Associated with Probable Etiology Hepatitis C Virus-Associated Cryoglobulinemic Vasculitis. Hepatitis B Virus-Associated Vasculitis. Syphilis-Associated Aortitis."
+        prompt: "الكتاب كمّل بأقسام تانية. حط كل واحدة في مكانها:"
+        bins: ["Single organ", "Systemic disease", "Probable etiology"]
+        cards:
+          - { text: "Primary CNS vasculitis", bin: 0 }
+          - { text: "Isolated aortitis", bin: 0 }
+          - { text: "Lupus vasculitis", bin: 1 }
+          - { text: "Sarcoid vasculitis", bin: 1 }
+          - { text: "HCV cryoglobulinemic vasculitis", bin: 2 }
+          - { text: "Syphilis-associated aortitis", bin: 2 }
+          - { text: "Drug-associated AAV", bin: 2 }
+        why: "الـ single organ محصور في عضو واحد (جلد، CNS، aorta). الـ systemic disease جزء من مرض تاني (lupus، RA، sarcoid). والـ probable etiology ليه سبب: فيروس، syphilis، دوا، أو cancer."
+      - kind: try
+        items: [rheum.L08.004, rheum.L08.006, rheum.L08.016, rheum.L08.017, rheum.L08.021]
+    recap:
+      - "Vasculitis = inflammation + necrosis of vessels، والـ pathogenesis = التهاب الجدار + ischaemia."
+      - "Mechanisms: allergic (EGPA)، pauci-immune ANCA، immune complex (complement واطي: HSP، PAN)، Th1 (GCA، Takayasu)."
+      - "الـ pathology مش بتدي الاسم، والإصابة focal and segmental."
+      - "Chapel Hill: **LMSV**."
+    practice: [rheum.L08.001, rheum.L08.002, rheum.L08.003, rheum.L08.004, rheum.L08.005, rheum.L08.006, rheum.L08.007, rheum.L08.008, rheum.L08.009, rheum.L08.010, rheum.L08.011, rheum.L08.012, rheum.L08.013, rheum.L08.014, rheum.L08.015, rheum.L08.016, rheum.L08.017, rheum.L08.018, rheum.L08.019, rheum.L08.020, rheum.L08.021, rheum.L08.022, rheum.L08.023]
+  # ------------------------------------------------------------------
+  - id: rheum.L08.lesson2
+    title: "امتى تشك؟ وإزاي تتأكد؟"
+    hook: "شاب عنده جلطة، أو ست كبيرة فقدت النظر فجأة: الاتنين ممكن يبقوا vasculitis."
+    minutes: 8
+    pages: [126, 130]
+    topics: [clues, organs, workup]
+    goals:
+      - "تحفظ الـ red flags اللي تخليك تفكر في vasculitis"
+      - "تفرّق بين cutaneous و systemic"
+      - "تعرف الـ workup والـ mimics"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 126
+        title: "الـ red flags"
+        quote: "Occlusive arterial disease or hypertension in youngadults Unexplained fever, weight loss. Unexplained proteinuria with or without casts."
+        text: |
+          فكّر في vasculitis لما تلاقي حاجة ==مش مفسّرة== أو في سن مش سنها:
+          - **Occlusive arterial disease** أو **hypertension** في شاب
+          - **Unexplained fever** و weight loss
+          - **Proteinuria** مع أو من غير casts
+          - **Splinter haemorrhages**، palpable purpura، erythema، nodules، urticaria
+      - kind: explain
+        page: 127
+        title: "وكمان..."
+        quote: "Persistent headache with sudden visual impairment (monocular blindness) in elderly."
+        text: |
+          - **Retinal vascular disease** فجأة من غير ضغط أو سكر
+          - كبير في السن عنده **headache** و ==monocular blindness== فجأة، و **jaw claudication**
+          - **Wrist drop** أو **foot drop** فجأة (mononeuritis)
+          - **Stroke** أو **MI** في شاب
+          - **Pulmonary nodules** أو cavities مش مفسّرة
+      - kind: check
+        page: 127
+        quote: "Systemic vasculitis usually presents in individuals of 2-5th decade, the exceptions being HSP and Kawasaki disease which are common in children"
+        question: "Systemic vasculitis usually presents in the 2nd–5th decade. Which is NOT one of the book's exceptions?"
+        options:
+          - "PAN"
+          - "HSP"
+          - "Kawasaki disease"
+          - "Takayasu arteritis"
+        answer: 0
+        why:
+          - "صح: PAN مش من الاستثناءات."
+          - "الـ HSP شائع في الأطفال: استثناء."
+          - "الـ Kawasaki في الأطفال: استثناء."
+          - "الـ Takayasu أكتر في الـ young females: استثناء."
+      - kind: table
+        page: 127
+        quote: "Absence of systemic involvement. Negative serology. Small vessel leucocytoclastic vasculitis. Better prognosis."
+        title: "Cutaneous ضد systemic"
+        columns: [Feature, Cutaneous, Systemic]
+        rows:
+          - ["Organs", "Skin only, legs", "Many systems"]
+          - ["Serology", "Negative", "Often positive"]
+          - ["Vessel", "Small, leucocytoclastic", "Any size"]
+          - ["Prognosis", "Better", "Poor in general"]
+        hide: [[1, 1], [2, 1], [3, 1], [3, 2]]
+      - kind: figure
+        page: 128
+        quote: "Kidney -Affected in most of the vasculitis except PAN and TA: - Glomerulonephritis (absent in classical PAN)."
+        title: "خريطة الأعضاء"
+        alt: "A body outline as boxes from head to legs. ENT: epistaxis, otitis in WG. Eye: scleritis, uveitis, proptosis. Lung: alveolar haemorrhage, nodules, asthma in CSS. Kidney: GN except PAN and Takayasu. Gut: ischaemic necrosis, infarction. Nerves: mononeuritis multiplex. Skin: purpura, livedo, Raynaud."
+        caption: "الكلية متصابة في أغلبهم ==except PAN and TA==. الرئة: **WG، CSS، MPA**. والـ asthma علامة **CSS**."
+        svg: |
+          <svg viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="165" cy="40" r="28" class="fg-box"/>
+            <text x="165" y="45" text-anchor="middle" class="t-sm t-b">Head</text>
+            <text x="20" y="25" class="t-sm t-b">ENT</text>
+            <text x="20" y="41" class="t-sm t-mut">epistaxis, otitis (WG)</text>
+            <text x="230" y="25" class="t-sm t-b">Eye</text>
+            <text x="230" y="41" class="t-sm t-mut">scleritis, uveitis</text>
+            <rect x="110" y="80" width="110" height="140" rx="16" class="fg-box"/>
+            <text x="20" y="100" class="t-sm t-b">Lung</text>
+            <text x="20" y="116" class="t-sm t-mut">haemorrhage, nodules</text>
+            <text x="20" y="132" class="t-sm t-mut">asthma (CSS)</text>
+            <text x="235" y="100" class="t-sm t-b">Heart</text>
+            <text x="235" y="116" class="t-sm t-mut">MI, CHF</text>
+            <text x="235" y="160" class="t-sm t-b t-bad">Kidney</text>
+            <text x="235" y="176" class="t-sm t-mut">GN, not PAN/TA</text>
+            <text x="20" y="180" class="t-sm t-b">Gut</text>
+            <text x="20" y="196" class="t-sm t-mut">ischaemia, infarct</text>
+            <rect x="125" y="230" width="35" height="85" rx="10" class="fg-box"/>
+            <rect x="170" y="230" width="35" height="85" rx="10" class="fg-box"/>
+            <text x="20" y="260" class="t-sm t-b">Nerves</text>
+            <text x="20" y="276" class="t-sm t-mut">mononeuritis multiplex</text>
+            <text x="225" y="260" class="t-sm t-b">Skin</text>
+            <text x="225" y="276" class="t-sm t-mut">purpura, livedo</text>
+            <text x="225" y="292" class="t-sm t-mut">Raynaud</text>
+          </svg>
+      - kind: aside
+        tone: exam
+        page: 128
+        quote: "Glomerulonephritis (absent in classical PAN). Renal failure. Hypertension usually (not seen in WG). Renal infarction."
+        text: |
+          فخ مشهور: **classical PAN** = ==no glomerulonephritis== (بيعمل renal infarction و hypertension).
+          والعكس: **WG** بيعمل GN بس الكتاب بيقول **hypertension not seen in WG**.
+      - kind: match
+        page: 129
+        quote: "Jaw claudication as in GCA. Myalgia. Arm claudication as in TA."
+        prompt: "وصّل العلامة بالمرض اللي الكتاب ربطها بيه:"
+        pairs:
+          - ["Jaw claudication", "GCA"]
+          - ["Arm claudication", "Takayasu"]
+          - ["Asthma", "Churg–Strauss"]
+          - ["Epistaxis, otitis media", "Wegener (GPA)"]
+        why: "الـ GCA بيمسك الـ temporal و maxillary arteries فالمضغ يوجع. الـ Takayasu بيضيّق الـ subclavian فالدراع يتعب. الـ CSS = asthma + eosinophils. والـ WG بيبدأ من الأنف والودن."
+      - kind: explain
+        page: 130
+        title: "الـ workup"
+        quote: "Laboratory investigations. Haemogram. Urinalysis. Serum proteins. Antineutrophil cytoplasmic autoantibodies (ANCA):"
+        text: |
+          - **Haemogram**، **urinalysis** (ما تنساش casts)، serum proteins
+          - ==ANCA==: **c-ANCA**، **p-ANCA**، و atypical (A أو x-ANCA)
+          - Renal و hepatic function، **echo**، **angiography**
+          - والأهم: ==organ biopsy==
+      - kind: aside
+        tone: trap
+        page: 130
+        quote: "Mimicks of vasculitis Bacterial endocarditis. Antiphospholipid antibody syndrome. Viral infections like HIV, CMV, HBV, HCV etc. Cholesterol emboli syndrome."
+        text: |
+          قبل ما تبدأ steroids، استبعد اللي بيقلّد:
+          **Endocarditis**، **APS**، viruses (HIV، CMV، HBV، HCV)، **cholesterol emboli**، ergot، hypertensive arteriopathy، thoracic outlet، sepsis/DIC، sarcoid، **TTP**، lymphoma و hairy cell leukaemia.
+
+          أخطرهم إنك تدي steroids لـ **endocarditis**: العيان هيتعب جدًا.
+      - kind: check
+        page: 130
+        quote: "Cholesterol emboli syndrome. Vasoconstrictor drugs (ergot poisoning). Hypertensive arteriopathy. Thoracic outlet syndrome."
+        question: "Painful blue toes, livedo and rising creatinine 2 weeks after coronary angiography. Which mimic?"
+        options:
+          - "Cholesterol emboli syndrome"
+          - "Thoracic outlet syndrome"
+          - "Ergot poisoning"
+          - "Hairy cell leukaemia"
+        answer: 0
+        why:
+          - "صح: الـ catheter كسر plaques فطلعت cholesterol emboli."
+          - "الـ thoracic outlet بيأثر على الدراع من compression."
+          - "الـ ergot بيعمل vasospasm بعد دوا، مش بعد قسطرة."
+          - "مفيش هنا حاجة تشاور على leukaemia."
+      - kind: try
+        items: [rheum.L08.024, rheum.L08.029, rheum.L08.033, rheum.L08.037, rheum.L08.044]
+    recap:
+      - "شك في vasculitis مع: انسداد أو ضغط في شاب، fever، proteinuria، purpura، mononeuritis، nodules، عمى مفاجئ في كبير."
+      - "Cutaneous: جلد بس، serology سلبي، small vessel، prognosis أحسن."
+      - "الكلية متصابة في أغلبهم إلا PAN و Takayasu. الرئة: WG، CSS، MPA."
+      - "Workup: CBC، urine، ANCA، organ tests، echo، angio، biopsy. واستبعد الـ mimics."
+    practice: [rheum.L08.024, rheum.L08.025, rheum.L08.026, rheum.L08.027, rheum.L08.028, rheum.L08.029, rheum.L08.030, rheum.L08.031, rheum.L08.032, rheum.L08.033, rheum.L08.034, rheum.L08.035, rheum.L08.036, rheum.L08.037, rheum.L08.038, rheum.L08.039, rheum.L08.040, rheum.L08.041, rheum.L08.042, rheum.L08.043, rheum.L08.044, rheum.L08.045, rheum.L08.192, rheum.L08.194]
+  # ------------------------------------------------------------------
+  - id: rheum.L08.lesson3
+    title: "الكبار: GCA و PMR و Takayasu"
+    hook: "صداع ووجع في الفك عند ست عندها 75 سنة: عندك ساعات قبل ما تفقد النظر."
+    minutes: 10
+    pages: [131, 137]
+    topics: [gca, pmr, tak, lvv-rx]
+    goals:
+      - "تحسب الـ GCA score وتعرف الـ biopsy rules"
+      - "تحسب الـ PMR score"
+      - "تعرف الـ Takayasu criteria وعلاج الـ LVV والـ PMR"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 131
+        title: "GCA: systemic و local"
+        quote: "Polymyalgia Rheumatica. Temporal Headache. Fever. Blindness. Anorexia. Scalp Necrosis. Malaise. Jaw Claudication."
+        text: |
+          - **Systemic:** ==polymyalgia rheumatica==، fever، anorexia، malaise، weight loss، **ESR عالي**، abnormal LFTs، anaemia
+          - **Local:** **temporal headache**، ==blindness==، scalp necrosis، **jaw claudication**، cranial و peripheral neuropathies
+
+          المنطق: الشريان اللي بيغذي الجلد والفك والعين ضاق، فكل حاجة بيغذيها تشتكي.
+      - kind: figure
+        page: 131
+        quote: "In the presence of 3 points or more out of 11 with at least one point belonging to domain I along with all entry criteria"
+        title: "عدّاد الـ GCA score"
+        alt: "A scoring board. Entry: age 50 or more and no exclusion criteria. Domain I items: headache 1, visual disturbance 1, PMR 2, jaw claudication 1, abnormal temporal artery up to 2. Domain II: fever or anaemia 1, ESR 50 or more 1, pathology up to 2. A bar at the bottom marks 3 of 11 as the threshold with at least one domain I point."
+        caption: "لازم **age ≥50** ومفيش exclusion، وبعدين ==≥3 من 11== ومنهم نقطة على الأقل من **Domain I**."
+        svg: |
+          <svg viewBox="0 0 330 350" xmlns="http://www.w3.org/2000/svg">
+            <rect x="15" y="10" width="300" height="40" rx="8" class="fg-thin"/>
+            <text x="165" y="35" text-anchor="middle" class="t-sm t-b">Entry: age ≥50 + no exclusion criteria</text>
+            <rect x="15" y="62" width="300" height="140" rx="10" class="fg-acc"/>
+            <text x="25" y="82" class="t-sm t-b t-acc">Domain I (clinical)</text>
+            <text x="25" y="104" class="t-sm">New localized headache</text><text x="300" y="104" text-anchor="end" class="t-sm t-b">1</text>
+            <text x="25" y="124" class="t-sm">Sudden visual disturbance</text><text x="300" y="124" text-anchor="end" class="t-sm t-b">1</text>
+            <text x="25" y="144" class="t-sm">Polymyalgia rheumatica</text><text x="300" y="144" text-anchor="end" class="t-sm t-b">2</text>
+            <text x="25" y="164" class="t-sm">Jaw claudication</text><text x="300" y="164" text-anchor="end" class="t-sm t-b">1</text>
+            <text x="25" y="184" class="t-sm">Abnormal temporal artery</text><text x="300" y="184" text-anchor="end" class="t-sm t-b">≤2</text>
+            <rect x="15" y="212" width="300" height="80" rx="10" class="fg-good"/>
+            <text x="25" y="232" class="t-sm t-b t-good">Domain II (lab, pathology)</text>
+            <text x="25" y="252" class="t-sm">Fever and/or anaemia (not with PMR)</text><text x="300" y="252" text-anchor="end" class="t-sm t-b">1</text>
+            <text x="25" y="270" class="t-sm">ESR ≥50 mm/h</text><text x="300" y="270" text-anchor="end" class="t-sm t-b">1</text>
+            <text x="25" y="288" class="t-sm">Compatible pathology</text><text x="300" y="288" text-anchor="end" class="t-sm t-b">≤2</text>
+            <rect x="15" y="302" width="300" height="38" rx="8" class="fg-bad"/>
+            <text x="165" y="326" text-anchor="middle" class="t-sm t-b">GCA: ≥3 of 11, with ≥1 from Domain I</text>
+          </svg>
+      - kind: check
+        page: 131
+        quote: "Polymyalgia Rheumatica (PMR) 2p 1 Jaw Claudication 1p 2 Abnormal temporal artery up to 2p"
+        question: "Age 70, new headache (1), PMR (2), ESR 60. No exclusions. GCA score and verdict?"
+        options:
+          - "4: GCA established"
+          - "3: GCA established"
+          - "2: not yet"
+          - "5: GCA established"
+        answer: 0
+        why:
+          - "صح: headache 1 + PMR 2 + ESR ≥50 = 1 → 4، ومنهم نقط من Domain I."
+          - "نسيت نقطة: الـ PMR بـ 2 مش 1."
+          - "فاتك الـ ESR والـ PMR."
+          - "مفيش jaw claudication أو artery points هنا."
+      - kind: aside
+        tone: trap
+        page: 132
+        quote: "E It must be ignored in the presence of PMR."
+        text: |
+          نقطة **fever and/or anaemia** ==بتتلغي لو فيه PMR==: الـ PMR نفسها بتعمل الحاجات دي، فما ينفعش تعدّها مرتين.
+      - kind: explain
+        page: 132
+        title: "الـ biopsy صح"
+        quote: "Biopsy abnormal site. Occipital or facial. 4-6 cm. if not obviously abnormal. If strong suspicion and normal biopsy, then biopsy opposite side."
+        text: |
+          1. خُد من **المكان الـ abnormal** (temporal، occipital أو facial)
+          2. لو الشريان شكله سليم: خُد ==4–6 cm== (علشان الـ skip lesions)
+          3. الشك قوي والـ biopsy سليمة؟ ==biopsy the opposite side==
+          4. الـ **Doppler guidance** ممكن يساعد
+      - kind: explain
+        page: 133
+        title: "PMR: الكتف والحوض الصبح"
+        quote: "Muscle Pain Persisting for at Least 1 Month: Shoulders. Pelvic Girdle. Severe Morning Stiffness and Gelling."
+        text: |
+          - **≥50 سنة**، غالبًا Caucasian
+          - وجع في ==shoulders و pelvic girdle== (والرقبة) **≥1 month**، بداية مفاجئة
+          - **Severe morning stiffness** و gelling، malaise، night sweats، low-grade fever
+          - ESR و CRP عاليين، **no pathognomonic test**، و ==no myopathy== (الـ CK عادي، العضلة نفسها سليمة)
+      - kind: table
+        page: 133
+        quote: "Morning stiffness >45 minutes 6.2 (3.2, 11.8) 2. Hip pain or limited range of motion 2.1 (1.1, 4.0) 1."
+        title: "PMR score (من غير ultrasound)"
+        columns: [Item, Points]
+        rows:
+          - ["Required", "Age ≥50, bilateral shoulder aching, high ESR/CRP"]
+          - ["Morning stiffness >45 min", "2"]
+          - ["Hip pain or limited ROM", "1"]
+          - ["Normal RF or ACPA", "2"]
+          - ["No other joint pain", "1"]
+          - ["Cut-off", "4"]
+        hide: [[1, 1], [3, 1], [5, 1]]
+      - kind: aside
+        tone: tip
+        page: 133
+        quote: "Normal RF or ACPA 3.0 (1.3, 6.8) 2. Absence of other joint pain 2.7 (1.4, 5.0) 1. Optimal cut-off point = 4."
+        text: |
+          احفظها **2-1-2-1 = 4**: stiffness 2، hip 1، **normal** RF/ACPA 2، مفيش مفاصل تانية 1، والـ cut-off **4**.
+
+          الـ RF الطبيعي بياخد نقطتين لأنه بيبعدك عن **RA** اللي ممكن تبدأ بنفس الشكل في الكبار.
+      - kind: explain
+        page: 135
+        title: "Takayasu: الشابة اللي مالهاش نبض"
+        quote: "Three major criteria 1. Left mid subclavian artery lesion"
+        text: |
+          **3 major:**
+          1. **Left mid subclavian** lesion (من 1 cm قبل الـ vertebral لحد 3 cm بعدها)
+          2. **Right mid subclavian** lesion
+          3. أعراض **≥1 month**: limb claudication، ==pulselessness==، فرق ضغط **>10 mmHg**، fever، neck pain، amaurosis، syncope
+
+          **10 minor:** ESR >20، carotid tenderness (مش عضلات الرقبة)، HTN (>140/90 brachial أو >160/90 popliteal)، AR، pulmonary artery، left mid carotid، brachiocephalic، thoracic aorta، abdominal aorta، coronary (<30 سنة من غير risk factors).
+      - kind: reveal
+        page: 136
+        quote: "Coronary artery lesion Documented on angiography below the age of 30 years in the absence of risk factors"
+        prompt: "ليه الـ coronary lesion بتتحسب بس تحت 30 سنة ومن غير risk factors؟"
+        answer: |
+          لأن فوق كده أو مع **hyperlipidaemia** أو **diabetes**، الـ atherosclerosis تفسرها. الشرط ده بيخلي الـ lesion **مالهاش تفسير تاني** غير الـ arteritis.
+      - kind: explain
+        page: 136
+        title: "العلاج"
+        quote: "High dose glucocorticoid therapy (40-60 mg/day prednisone-equivalent) should be initiated immediately for induction of remission"
+        text: |
+          - أكّد الـ LVV بـ **imaging أو histology**
+          - **GCA/TAK active:** ==prednisone 40–60 mg/day immediately==
+          - **GCA refractory/relapsing** أو خطر steroids عالي: ==tocilizumab== (أو methotrexate)
+          - **TAK:** non-biologic steroid-sparing لكل العيانين، و biologics للـ refractory
+          - **No routine** antiplatelets أو anticoagulants
+          - **PMR:** prednisone **15 mg**، taper على **12–18 months**، MTX second line، **GIOP prophylaxis**، ودوّر على temporal arteritis
+      - kind: check
+        page: 137
+        quote: "Treatment of PMR Prednisone 15 mg. Slow taper over 12 to 18 months. Possible mtx use as 2nd line agent. GIOP prophylaxis."
+        question: "Pure PMR, no GCA features. Starting prednisone dose in the book?"
+        options:
+          - "15 mg"
+          - "40–60 mg/day"
+          - "1 mg/kg/day"
+          - "Pulse methylprednisolone"
+        answer: 0
+        why:
+          - "صح: PMR = 15 mg و taper بطيء 12–18 شهر."
+          - "40–60 mg ده للـ GCA/TAK."
+          - "1 mg/kg ده الـ high-dose في PAN."
+          - "الـ pulse للـ severe vasculitis مش PMR."
+      - kind: try
+        items: [rheum.L08.049, rheum.L08.055, rheum.L08.061, rheum.L08.066, rheum.L08.083]
+    recap:
+      - "GCA: age ≥50، score ≥3 من 11 ومنهم Domain I. الـ fever/anaemia تتلغي مع PMR."
+      - "Biopsy: المكان الـ abnormal، 4–6 cm، والناحية التانية لو الشك قوي."
+      - "PMR: 3 required + 2-1-2-1، cut-off 4. علاجها 15 mg و 12–18 شهر."
+      - "Takayasu: 3 major + 10 minor. LVV: 40–60 mg فورًا، tocilizumab للـ GCA الصعبة، ومفيش routine antiplatelets."
+    practice: [rheum.L08.046, rheum.L08.047, rheum.L08.048, rheum.L08.049, rheum.L08.050, rheum.L08.051, rheum.L08.052, rheum.L08.053, rheum.L08.054, rheum.L08.055, rheum.L08.056, rheum.L08.057, rheum.L08.058, rheum.L08.059, rheum.L08.060, rheum.L08.061, rheum.L08.062, rheum.L08.063, rheum.L08.064, rheum.L08.065, rheum.L08.066, rheum.L08.067, rheum.L08.068, rheum.L08.069, rheum.L08.070, rheum.L08.071, rheum.L08.072, rheum.L08.073, rheum.L08.074, rheum.L08.075, rheum.L08.076, rheum.L08.077, rheum.L08.078, rheum.L08.079, rheum.L08.080, rheum.L08.081, rheum.L08.082, rheum.L08.083, rheum.L08.084, rheum.L08.190, rheum.L08.191, rheum.L08.193]
+  # ------------------------------------------------------------------
+  - id: rheum.L08.lesson4
+    title: "الوعاء المتوسط: Kawasaki و PAN"
+    hook: "طفل سخن 5 أيام بعين حمرا ولسان فراولة، وراجل عنده foot drop وخصيته بتوجعه: نفس حجم الوعاء."
+    minutes: 10
+    pages: [137, 144]
+    topics: [kawasaki, polychondritis, pan]
+    goals:
+      - "تشخّص Kawasaki وتعالجه"
+      - "تعرف الـ relapsing polychondritis"
+      - "تشخّص PAN وتختار علاجه حسب الـ severity"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 137
+        title: "Kawasaki: القاعدة"
+        quote: "Fever lasting at least 5 days without any other explanation with at least 4 of the 5 following principal clinical findings"
+        text: |
+          ==Fever ≥5 days== مالهاش تفسير + ==≥4 من 5== principal findings.
+
+          ولو فيه **≥4 findings** ممكن تشخّص من **اليوم الرابع**.
+      - kind: mnemonic
+        page: 138
+        quote: "Erythema and cracking of lips, strawberry tongue, and/or erythema of oral and pharyngeal mucosa"
+        word: "CRASH"
+        parts:
+          - { key: "C", text: "Conjunctival injection, bilateral, bulbar, no exudate" }
+          - { key: "R", text: "Rash: maculopapular, erythroderma or erythema multiforme-like" }
+          - { key: "A", text: "Adenopathy: cervical, ≥1 node >1.5 cm, usually unilateral" }
+          - { key: "S", text: "Strawberry tongue, cracked red lips, oral erythema" }
+          - { key: "H", text: "Hands and feet: erythema and oedema, then periungual peeling" }
+        hook: "**CRASH and burn**: الـ burn هو الـ fever ≥5 أيام."
+      - kind: explain
+        page: 138
+        title: "Incomplete KD"
+        quote: "Incomplete KD Prolonged unexplained fever in an infant or child with <4 of the principal clinical findings of KD."
+        text: |
+          طفل بـ **fever طويلة** و ==<4 findings== + labs متوافقة (**ESR/CRP** عالي، transaminases عالية، urine فيها WBCs **esterase-negative**) أو echo فيه **coronary dilatation**.
+
+          العلاج: **IVIG فورًا** عند التشخيص، مش نستنى لليوم 10.
+      - kind: table
+        page: 138
+        quote: "IVIG Single dose of 2 gm/kg (no defined maximum dose, but the reasonable maximum range is 100–140 gm)."
+        title: "جرعات Kawasaki"
+        columns: [Drug, Dose]
+        rows:
+          - ["IVIG", "2 g/kg single dose"]
+          - ["Prednisone", "2 mg/kg/day (max 60), taper 15 days"]
+          - ["Aspirin high", "80–100 mg/kg/day"]
+          - ["Aspirin moderate", "30–50 mg/kg/day"]
+          - ["Aspirin low", "3–5 mg/kg/day"]
+        hide: [[0, 1], [2, 1], [4, 1]]
+      - kind: order
+        page: 139
+        quote: "persistent fevers after initial treatment with IVIG, a second course of IVIG is conditionally recommended over the use of glucocorticoids."
+        prompt: "رتّب خطة الـ acute KD لو السخونية مش راضية تنزل:"
+        steps:
+          - "IVIG (+ aspirin) as initial therapy"
+          - "Persistent fever: second IVIG course"
+          - "Still febrile after repeated IVIG: non-GC immunosuppressive or glucocorticoids"
+        why: "الـ IVIG هو الـ standard of care، والكورس التاني مفضّل على الـ steroids. بعد كذا كورس ممكن non-GC immunosuppressive أو steroids."
+      - kind: check
+        page: 139
+        quote: "use of IVIG with adjunctive glucocorticoids as initial therapy is conditionally recommended over treatment with IVIG alone."
+        question: "Acute KD at high risk of IVIG resistance or coronary aneurysm. Initial therapy?"
+        options:
+          - "IVIG plus adjunctive glucocorticoids"
+          - "IVIG alone"
+          - "Glucocorticoids alone"
+          - "Aspirin alone"
+        answer: 0
+        why:
+          - "صح: الـ high risk ياخد IVIG + steroids (أو non-GC immunomodulator)."
+          - "الـ IVIG لوحده للـ standard risk."
+          - "الـ steroids مش بديل للـ IVIG."
+          - "الـ aspirin مساعد مش علاج لوحده."
+      - kind: explain
+        page: 140
+        title: "Relapsing polychondritis"
+        quote: "Uncommon, cartilage inflammation. Episodic. Auricular and nasal chondritis. Saddle-nose deformity."
+        text: |
+          التهاب ==cartilage== **episodic** ونادر: **الودن** (auricular) و **الأنف** (saddle nose)، arthritis، hearing loss، vertigo، أعراض **laryngotracheobronchial**، و vasculitis. العلاج **prednisone**.
+      - kind: aside
+        tone: joke
+        page: 140
+        quote: "Auricular and nasal chondritis. Saddle-nose deformity."
+        text: |
+          الـ polychondritis بتمسك أي غضروف: **auricular chondritis** تحمّر الودن، و **nasal chondritis** توقّع الأنف (**saddle-nose deformity**). الفرق إن **فص الودن** (lobule) مافيهوش غضروف، فبيفضل سليم وكأنه عامل نفسه مش من العيلة. (معلومة تشريح، مش من الكتاب.)
+      - kind: explain
+        page: 141
+        title: "PAN: ACR 1990"
+        quote: "Weight loss of more than 4 kg which is not related with diet or other factors from the beginning of the disease."
+        text: |
+          10 criteria:
+          - **Weight loss >4 kg**، **livedo reticularis**، ==testicular pain==
+          - Myalgia، **mono- أو polyneuropathy**، diastolic **>90**
+          - Urea/creatinine عالي، ==HBsAg أو anti-HBs==
+          - **Abnormal coeliac أو renal angiography** (aneurysms)، و biopsy فيها PMNs في الشرايين
+
+          المعيار التاني (p141): biopsy أو angiography **mandatory** + ≥2 من 7، ولو MRA سلبي اعمل **conventional angiography**.
+      - kind: figure
+        page: 144
+        quote: "Key recommendations for the treatment of polyarteritis nodosa (PAN)"
+        title: "علاج PAN: severe ولا لأ؟"
+        alt: "Algorithm. Active PAN splits into non-severe and severe. Non-severe: GC plus MTX or AZA, then remission maintenance with a non-GC agent for 18 months. Severe: high-dose oral or pulse IV GC with cyclophosphamide, then maintenance with a non-GC non-CYC agent for 18 months. No remission: consider other agents or CYC."
+        caption: "الـ ==severe== (كلية، mononeuritis، mesenteric، coronary، limb ischaemia) ياخد **GC + CYC**. الـ non-severe ياخد **GC + MTX/AZA**. والاتنين maintenance **18 شهر**."
+        svg: |
+          <svg viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L08p" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" class="fg-head"/></marker></defs>
+            <rect x="115" y="10" width="100" height="32" rx="16" class="fg-ink"/>
+            <text x="165" y="31" text-anchor="middle" class="t-sm t-b">Active PAN</text>
+            <path d="M140 42 L85 72" class="fg-arrow" marker-end="url(#L08p)"/>
+            <path d="M190 42 L245 72" class="fg-arrow" marker-end="url(#L08p)"/>
+            <rect x="10" y="75" width="150" height="32" rx="16" class="fg-good"/>
+            <text x="85" y="96" text-anchor="middle" class="t-sm t-b">Non-severe</text>
+            <rect x="170" y="75" width="150" height="32" rx="16" class="fg-bad"/>
+            <text x="245" y="96" text-anchor="middle" class="t-sm t-b">Severe</text>
+            <rect x="10" y="125" width="150" height="55" rx="8" class="fg-box"/>
+            <text x="85" y="148" text-anchor="middle" class="t-sm">GC + MTX or AZA</text>
+            <text x="85" y="166" text-anchor="middle" class="t-sm t-mut">over GC alone</text>
+            <rect x="170" y="125" width="150" height="55" rx="8" class="fg-box"/>
+            <text x="245" y="148" text-anchor="middle" class="t-sm">High-dose / pulse GC</text>
+            <text x="245" y="166" text-anchor="middle" class="t-sm">+ cyclophosphamide</text>
+            <path d="M85 180 V205" class="fg-arrow" marker-end="url(#L08p)"/>
+            <path d="M245 180 V205" class="fg-arrow" marker-end="url(#L08p)"/>
+            <rect x="10" y="210" width="150" height="65" rx="8" class="fg-acc"/>
+            <text x="85" y="232" text-anchor="middle" class="t-sm t-b">Remission:</text>
+            <text x="85" y="250" text-anchor="middle" class="t-sm">non-GC agent 18 mo</text>
+            <text x="85" y="266" text-anchor="middle" class="t-sm t-mut">+ GC taper</text>
+            <rect x="170" y="210" width="150" height="65" rx="8" class="fg-acc"/>
+            <text x="245" y="232" text-anchor="middle" class="t-sm t-b">Remission:</text>
+            <text x="245" y="250" text-anchor="middle" class="t-sm">non-GC, non-CYC 18 mo</text>
+            <text x="245" y="266" text-anchor="middle" class="t-sm t-mut">+ GC taper</text>
+            <text x="165" y="305" text-anchor="middle" class="t-sm t-mut">No remission: other non-GC agent (or CYC)</text>
+          </svg>
+      - kind: case
+        page: 144
+        quote: "High-dose oral or pulse IV GC with CYC over GC alone"
+        stem: "A 50-year-old man: fever, 7 kg weight loss, testicular pain, new foot drop, BP 170/100. Angiography shows renal and mesenteric microaneurysms. Urine has no RBC casts."
+        steps:
+          - question: "Most likely diagnosis?"
+            options: ["Polyarteritis nodosa", "Microscopic polyangiitis", "Takayasu arteritis", "HSP"]
+            answer: 0
+            why: "Testicular pain، foot drop، weight loss، hypertension و microaneurysms من غير GN = classical PAN. الـ MPA بيعمل GN. الـ Takayasu في الـ aorta. الـ HSP purpura في طفل."
+          - question: "Severity and induction?"
+            options: ["Severe: high-dose or pulse GC + cyclophosphamide", "Non-severe: GC + methotrexate", "GC alone", "Rituximab"]
+            answer: 0
+            why: "الـ mononeuritis (foot drop) والـ mesenteric involvement = severe، فـ GC + CYC. الـ MTX للـ non-severe. الـ GC لوحده أقل. الـ rituximab مش في خطة الـ PAN."
+      - kind: try
+        items: [rheum.L08.087, rheum.L08.091, rheum.L08.103, rheum.L08.114, rheum.L08.115]
+    recap:
+      - "Kawasaki: fever ≥5 أيام + 4 من **CRASH**. علاجه IVIG 2 g/kg + aspirin، وكورس IVIG تاني لو السخونية فضلت."
+      - "Incomplete KD: <4 findings + labs/echo، و IVIG فورًا."
+      - "Polychondritis: ودن وأنف وحنجرة، و prednisone."
+      - "PAN: no GN، HBV، testicular pain، mononeuritis، microaneurysms. Severe = GC + CYC، non-severe = GC + MTX/AZA، maintenance 18 شهر."
+    practice: [rheum.L08.085, rheum.L08.086, rheum.L08.087, rheum.L08.088, rheum.L08.089, rheum.L08.090, rheum.L08.091, rheum.L08.092, rheum.L08.093, rheum.L08.094, rheum.L08.095, rheum.L08.096, rheum.L08.097, rheum.L08.098, rheum.L08.099, rheum.L08.100, rheum.L08.101, rheum.L08.102, rheum.L08.103, rheum.L08.104, rheum.L08.105, rheum.L08.106, rheum.L08.107, rheum.L08.108, rheum.L08.109, rheum.L08.110, rheum.L08.111, rheum.L08.112, rheum.L08.113, rheum.L08.114, rheum.L08.115, rheum.L08.116, rheum.L08.117, rheum.L08.118, rheum.L08.119]
+  # ------------------------------------------------------------------
+  - id: rheum.L08.lesson5
+    title: "ANCA: GPA و MPA و EGPA وعلاجهم"
+    hook: "أنف بتنزف ورئة فيها كهوف وكلية بتقع: ده الـ c-ANCA بيكلمك."
+    minutes: 10
+    pages: [145, 156]
+    topics: [aav, aav-rx]
+    goals:
+      - "تفرّق GPA و MPA و EGPA بالأعضاء والـ ANCA والـ criteria"
+      - "تختار induction حسب organ-threatening ولا لأ"
+      - "تحفظ الـ maintenance والـ refractory والـ monitoring"
+    status: unverified
+    steps:
+      - kind: table
+        page: 146
+        quote: "GPA c-ANCA+ PR-3+ Necrotizing vasculitis and granulomas MPA p-ANCA+ MPO+ Necrotizing vasculitis"
+        title: "GPA ضد MPA"
+        columns: [Feature, GPA, MPA]
+        rows:
+          - ["ANCA", "c-ANCA", "p-ANCA"]
+          - ["Antigen", "PR-3", "MPO"]
+          - ["Histology", "Vasculitis + granulomas", "Vasculitis only"]
+          - ["Top organ", "ENT 80–90%", "Kidney 90–100%"]
+        hide: [[0, 1], [1, 2], [2, 1], [3, 2]]
+      - kind: aside
+        tone: tip
+        page: 146
+        quote: "GPA c-ANCA+ PR-3+ Necrotizing vasculitis and granulomas MPA p-ANCA+ MPO+ Necrotizing vasculitis"
+        text: |
+          **C** = **C**lassic Wegener = **c**-ANCA = PR3 (حرف الـ **P** في الـ PR3 بيقعد مع الـ **c**، مش منطقي بس بيتحفظ).
+          **M**PA = **M**PO = p-ANCA: حرف **M** مع **M**.
+      - kind: explain
+        page: 147
+        title: "2022 ACR/EULAR: GPA ≥5"
+        quote: "Sum scores for 10 items, if present. A score of ≥ 5 is needed for classification of granulomatosis with polyangiitis."
+        text: |
+          **+5** c-ANCA/PR3، **+3** nasal discharge/crusting/septal perforation، **+2** cartilage (saddle nose، stridor)، **+2** lung nodules/cavity، **+2** granuloma، **+1** hearing loss، **+1** sinusitis/mastoiditis، **+1** pauci-immune GN.
+
+          بالسالب: **−1** p-ANCA/MPO، و ==−4 eosinophils ≥1 × 10⁹/L== (علشان دي EGPA).
+      - kind: explain
+        page: 147
+        title: "MPA ≥5"
+        quote: "Sum scores for 6 items, if present. A score of ≥ 5 is needed for classification of microscopic polyangiitis."
+        text: |
+          ==+6 p-ANCA/MPO==، **+3** fibrosis أو ILD، **+3** pauci-immune GN.
+          بالسالب: **−3** nasal disease، **−1** c-ANCA، **−4** eosinophils.
+
+          المنطق: الأنف علامة GPA، فبتطرح من الـ MPA.
+      - kind: check
+        page: 147
+        quote: "Positive test for perinuclear antineutrophil cytoplasmic antibodies or antimyeloperoxidase antibodies ANCA positive +6"
+        question: "MPO-ANCA +, ILD, pauci-immune GN, no nasal disease, normal eosinophils. MPA score?"
+        options:
+          - "12"
+          - "9"
+          - "6"
+          - "15"
+        answer: 0
+        why:
+          - "صح: 6 + 3 + 3 = 12، أكتر من 5."
+          - "نسيت بند من الـ +3."
+          - "عدّيت الـ MPO بس."
+          - "مفيش بنود تانية بالموجب."
+      - kind: table
+        page: 149
+        quote: "Nasal polyposis. Pulm infilterate. Cardiomyopathy. Polyneuropathy. Esinophilic gastritis. Histopatholgy. Esinophil tissue infilteration."
+        title: "EGPA: وشّين"
+        columns: [Feature, ANCA +, ANCA −]
+        rows:
+          - ["Clinical", "Necrotizing GN, purpura, lung haemorrhage, mononeuritis", "Nasal polyps, lung infiltrate, cardiomyopathy, polyneuropathy, eosinophilic gastritis"]
+          - ["Tissue", "Small vessel vasculitis", "Eosinophil infiltration"]
+          - ["Mechanism", "ANCA", "Eosinophil toxic products"]
+        hide: [[0, 2], [1, 2], [2, 2]]
+      - kind: explain
+        page: 150
+        title: "الـ c-ANCA والـ PR3"
+        quote: "PR3 ANCA associated with: Fast decline of renal function. Extra renal manifestations more frequent. Granuloma formation. Relapses more frequent."
+        text: |
+          - **Indirect immunofluorescence**، **90% sensitive** للـ GPA الـ active، الـ antigen = **proteinase 3**
+          - ==PR3-ANCA== معناه: **fast** decline في الكلية، extra-renal أكتر، granulomas، و ==relapses أكتر==
+      - kind: figure
+        page: 151
+        quote: "Algorithm to describe the management of new antineutrophil cytoplasmic antibody (ANCA)-associated vasculitis."
+        title: "خطة الـ AAV"
+        alt: "Algorithm. New AAV splits into organ- or life-threatening disease treated with cyclophosphamide or rituximab plus glucocorticoid, and non-organ-threatening disease treated with methotrexate or mycophenolate plus glucocorticoid. Rapidly progressive renal failure or pulmonary haemorrhage adds consideration of plasma exchange. Both lead to remission, then maintenance with azathioprine, methotrexate or rituximab and a glucocorticoid taper, and after 2 years taper or stop."
+        caption: "السؤال الأول: ==organ-threatening ولا لأ؟== وبعدين maintenance **≥24 شهر**."
+        svg: |
+          <svg viewBox="0 0 330 360" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L08a" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" class="fg-head"/></marker></defs>
+            <rect x="95" y="8" width="140" height="30" rx="15" class="fg-ink"/>
+            <text x="165" y="28" text-anchor="middle" class="t-sm t-b">New AAV</text>
+            <path d="M140 38 L85 62" class="fg-arrow" marker-end="url(#L08a)"/>
+            <path d="M190 38 L245 62" class="fg-arrow" marker-end="url(#L08a)"/>
+            <rect x="10" y="65" width="150" height="60" rx="8" class="fg-bad"/>
+            <text x="85" y="85" text-anchor="middle" class="t-sm t-b">Organ/life-threatening</text>
+            <text x="85" y="103" text-anchor="middle" class="t-sm">GC + CYC or RTX</text>
+            <text x="85" y="118" text-anchor="middle" class="t-sm t-mut">PLEX if RPGN / DAH</text>
+            <rect x="170" y="65" width="150" height="60" rx="8" class="fg-good"/>
+            <text x="245" y="85" text-anchor="middle" class="t-sm t-b">Non-organ-threatening</text>
+            <text x="245" y="103" text-anchor="middle" class="t-sm">GC + MTX or MMF</text>
+            <path d="M85 125 L150 160" class="fg-arrow" marker-end="url(#L08a)"/>
+            <path d="M245 125 L180 160" class="fg-arrow" marker-end="url(#L08a)"/>
+            <rect x="115" y="162" width="100" height="30" rx="15" class="fg-acc"/>
+            <text x="165" y="182" text-anchor="middle" class="t-sm t-b">Remission</text>
+            <path d="M165 192 V215" class="fg-arrow" marker-end="url(#L08a)"/>
+            <rect x="30" y="218" width="270" height="50" rx="8" class="fg-box"/>
+            <text x="165" y="238" text-anchor="middle" class="t-sm">Low-dose GC + AZA, RTX, MTX or MMF</text>
+            <text x="165" y="256" text-anchor="middle" class="t-sm t-b">≥ 24 months</text>
+            <rect x="30" y="285" width="270" height="62" rx="8" class="fg-thin"/>
+            <text x="165" y="305" text-anchor="middle" class="t-sm t-b">Refractory: switch CYC ↔ RTX</text>
+            <text x="165" y="323" text-anchor="middle" class="t-sm t-mut">re-check diagnosis, doses,</text>
+            <text x="165" y="339" text-anchor="middle" class="t-sm t-mut">damage vs activity, infection</text>
+          </svg>
+      - kind: aside
+        tone: exam
+        page: 153
+        quote: "Meningeal involvement. Retro-orbital disease. Cardiac involvement. Mesenteric involvement. Acute-onset mononeuritis multiplex. Pulmonary haemorrhage of any severity."
+        text: |
+          ==MTX/MMF ممنوع في الـ induction== مع: **meningeal**، **retro-orbital**، **cardiac**، **mesenteric**، acute **mononeuritis multiplex**، و **pulmonary haemorrhage بأي درجة**.
+
+          الـ MTX مسموح بس في الحاجات البسيطة: أنف من غير erosion، جلد من غير ulcer، myositis، nodules من غير haemoptysis، ومن غير كلية.
+      - kind: check
+        page: 154
+        quote: "Plasma exchange should be considered for patients with AAV and a serum creatine level of >500 μmol/L (5.7 mg/dL)"
+        question: "In the book, plasma exchange is considered in AAV with RPGN when creatinine exceeds:"
+        options:
+          - "500 μmol/L (5.7 mg/dL)"
+          - "200 μmol/L (2.3 mg/dL)"
+          - "300 μmol/L (3.4 mg/dL)"
+          - "Any creatinine rise"
+        answer: 0
+        why:
+          - "صح: >500 μmol/L، وكمان في الـ severe DAH."
+          - "200 مش رقم الكتاب."
+          - "300 (3.4 mg/dL) ده رقم KDIGO 2024، مش الكتاب."
+          - "مش أي ارتفاع؛ الكتاب حط رقم."
+      - kind: update
+        page: 154
+        quote: "Plasma exchange should be considered for patients with AAV and a serum creatine level of >500 μmol/L (5.7 mg/dL)"
+        text: "PEXIVAS (2020) لقت إن الـ plasma exchange الروتيني ما قللش الوفاة أو الـ ESKD. KDIGO 2024 بتقول ممكن تفكر فيه لو creatinine >3.4 mg/dL، أو dialysis، أو creatinine بيعلى بسرعة، أو DAH مع hypoxemia. في الامتحان: رقم الكتاب >500 μmol/L."
+        ref: "KDIGO 2024 ANCA vasculitis guideline; PEXIVAS 2020"
+      - kind: explain
+        page: 155
+        title: "المتابعة"
+        quote: "We recommend that structured clinical assessment rather than ANCA testing should inform decisions on changes in treatment"
+        text: |
+          - غيّر العلاج حسب ==clinical assessment مش الـ ANCA==؛ والـ ANCA السلبي ما بينفيش AAV
+          - **Haematuria** مستمرة بعد **cyclophosphamide** ← افحصها (المثانة)
+          - **Immunoglobulins** قبل كل كورس **rituximab**
+          - **Cardiovascular risk** دوريًا، وعلّم العيان علامات الـ relapse
+          - الـ AAV **controllable but incurable**
+      - kind: reveal
+        page: 156
+        quote: "Cell lysis (i.e., Neisseria control) Reason for black box warning for eculizumab"
+        prompt: "ليه الـ avacopan (C5aR) أأمن من الـ eculizumab (anti-C5)؟"
+        answer: |
+          الـ **eculizumab** بيوقف الـ C5 كله، فمفيش **MAC (C5b-9)**، والـ MAC هو اللي بيقتل **Neisseria**؛ علشان كده عليه black box warning.
+
+          الـ **avacopan** بيقفل الـ **C5a receptor** بس: يوقف جذب وتنشيط الـ neutrophils، ويسيب الـ MAC شغال. "Downstream is best".
+      - kind: try
+        items: [rheum.L08.122, rheum.L08.123, rheum.L08.140, rheum.L08.142, rheum.L08.147]
+    recap:
+      - "GPA = c-ANCA/PR3، granulomas، ENT. MPA = p-ANCA/MPO، كلية. EGPA = asthma + eosinophils."
+      - "2022 criteria: GPA ≥5، MPA ≥5، والـ eosinophils ≥1 × 10⁹ = −4."
+      - "Organ-threatening: GC + CYC أو RTX. Non-organ: GC + MTX أو MMF. PLEX لو creatinine >500 أو DAH شديد."
+      - "Maintenance ≥24 شهر. Refractory: بدّل CYC ↔ RTX. العلاج حسب الـ clinical assessment مش الـ ANCA."
+    practice: [rheum.L08.120, rheum.L08.121, rheum.L08.122, rheum.L08.123, rheum.L08.124, rheum.L08.125, rheum.L08.126, rheum.L08.127, rheum.L08.128, rheum.L08.129, rheum.L08.130, rheum.L08.131, rheum.L08.132, rheum.L08.133, rheum.L08.134, rheum.L08.135, rheum.L08.136, rheum.L08.137, rheum.L08.138, rheum.L08.139, rheum.L08.140, rheum.L08.141, rheum.L08.142, rheum.L08.143, rheum.L08.144, rheum.L08.145, rheum.L08.146, rheum.L08.147, rheum.L08.148, rheum.L08.149, rheum.L08.150, rheum.L08.151, rheum.L08.152, rheum.L08.153, rheum.L08.154, rheum.L08.155, rheum.L08.156, rheum.L08.157, rheum.L08.158, rheum.L08.159, rheum.L08.195]
+  # ------------------------------------------------------------------
+  - id: rheum.L08.lesson6
+    title: "Behçet والمخ وباقي العيلة"
+    hook: "قرحة في البق 3 مرات في السنة ونقطة حمرا مكان الإبرة: كده عرفت Behçet."
+    minutes: 9
+    pages: [157, 163]
+    topics: [behcet, pacns, other]
+    goals:
+      - "تطبّق criteria الـ Behçet والـ scoring"
+      - "تعرف الـ 7 heuristics بتاعة PACNS"
+      - "تفرّق Buerger و hypersensitivity و HSP و cryoglobulinemia"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 157
+        title: "Behçet 1990"
+        quote: "reported reliably by a patient that recurs at least 3 times in one 12-month period plus 2 of the following"
+        text: |
+          **لازم:** ==recurrent oral ulcers ≥3 مرات في 12 شهر==
+          **+ 2 من:**
+          - **Genital** ulcers أو scars (خصوصًا الرجالة)
+          - **Eye:** anterior/posterior uveitis، vitreous cells، retinal vasculitis
+          - **Skin:** erythema nodosum-like، pseudofolliculitis، papulopustular، acneiform nodules (بعد البلوغ ومن غير steroids)
+          - ==Positive pathergy==
+      - kind: explain
+        page: 157
+        title: "الـ pathergy test"
+        quote: "An erythematous papule larger than 2 mm at the prick site 48 hours after the application of a 20- to 22-gauge sterile needle"
+        text: |
+          إبرة **20–22 gauge** معقمة تدخل مايلة في جلد avascular لعمق **5 mm**، وتقرا بعد ==48 hours==: papule حمرا **>2 mm** = positive.
+
+          الفكرة: الـ neutrophils في Behçet "متحمسين زيادة"، فأي جرح بسيط يعمل التهاب أكبر من حجمه.
+      - kind: figure
+        page: 157
+        quote: "Ocular lesions 2 Genital aphthosis 2 Oral aphthosis 2 Skin lesions 1 Neurological manifestations 1 Vascular manifestations 1"
+        title: "Behçet points"
+        alt: "Bar chart of Behçet scoring points: ocular lesions 2, genital aphthosis 2, oral aphthosis 2, skin lesions 1, neurological manifestations 1, vascular manifestations 1, positive pathergy test 1."
+        caption: "العين والأعضاء التناسلية والبق بـ ==2==، والباقي بـ **1**. الكتاب ما كتبش cut-off (الـ ICBD 2014: ≥4)."
+        svg: |
+          <svg viewBox="0 0 330 260" xmlns="http://www.w3.org/2000/svg">
+            <text x="10" y="30" class="t-sm">Ocular lesions</text><rect x="150" y="17" width="140" height="18" rx="4" class="fg-dot-acc"/><text x="300" y="31" class="t-sm t-b">2</text>
+            <text x="10" y="62" class="t-sm">Genital aphthosis</text><rect x="150" y="49" width="140" height="18" rx="4" class="fg-dot-acc"/><text x="300" y="63" class="t-sm t-b">2</text>
+            <text x="10" y="94" class="t-sm">Oral aphthosis</text><rect x="150" y="81" width="140" height="18" rx="4" class="fg-dot-acc"/><text x="300" y="95" class="t-sm t-b">2</text>
+            <text x="10" y="126" class="t-sm">Skin lesions</text><rect x="150" y="113" width="70" height="18" rx="4" class="fg-dot-good"/><text x="230" y="127" class="t-sm t-b">1</text>
+            <text x="10" y="158" class="t-sm">Neurological</text><rect x="150" y="145" width="70" height="18" rx="4" class="fg-dot-good"/><text x="230" y="159" class="t-sm t-b">1</text>
+            <text x="10" y="190" class="t-sm">Vascular</text><rect x="150" y="177" width="70" height="18" rx="4" class="fg-dot-good"/><text x="230" y="191" class="t-sm t-b">1</text>
+            <text x="10" y="222" class="t-sm">Pathergy test</text><rect x="150" y="209" width="70" height="18" rx="4" class="fg-dot-good"/><text x="230" y="223" class="t-sm t-b">1</text>
+          </svg>
+      - kind: update
+        page: 157
+        quote: "Ocular lesions 2 Genital aphthosis 2 Oral aphthosis 2 Skin lesions 1 Neurological manifestations 1 Vascular manifestations 1"
+        text: "جدول الكتاب (ocular lesions 2، genital 2، oral 2، skin 1، neurological 1، vascular 1، pathergy 1) من غير cut-off. الـ ICBD 2014 بيصنّف Behçet عند score 4 أو أكتر."
+        ref: "International Criteria for Behçet's Disease (ICBD) 2014"
+      - kind: explain
+        page: 158
+        title: "العين والمفاصل والعلاج"
+        quote: "Blindness has been reported to occur within 4-5 years from the onset of ocular symptoms. Retinal vein thrombosis leading to sudden blindness is not rare."
+        text: |
+          - العين غالبًا من البداية. النظر يقل من **secondary glaucoma**، cataract أو vitreous haemorrhage
+          - ==Blindness خلال 4–5 سنين==، و **retinal vein thrombosis** مش نادرة
+          - المفاصل: **أكتر من النص**، multiple joints. في الأطفال الـ arthritis أشهر minor feature (11 من 40)
+          - العلاج: aphthous ← ==colchicine، thalidomide==؛ العين ← **azathioprine**؛ وكمان cyclosporine
+      - kind: check
+        page: 157
+        quote: "Positive pathergy test - An erythematous papule larger than 2 mm at the prick site 48 hours after the application"
+        question: "Oral ulcers 5 times this year + genital scarring + positive pathergy. 1990 criteria met?"
+        options:
+          - "Yes: oral ulcers + 2 minor"
+          - "No: eye disease is required"
+          - "No: 3 minor criteria are needed"
+          - "No: pathergy does not count"
+        answer: 0
+        why:
+          - "صح: الـ oral ulcers + اتنين (genital + pathergy)."
+          - "العين واحدة من الـ minor مش شرط."
+          - "اتنين بس كفاية."
+          - "الـ pathergy من الـ criteria."
+      - kind: explain
+        page: 159
+        title: "PACNS: 7 heuristics"
+        quote: "No diagnosis of PACNS should be made in the absence of a lumbar puncture to rule out infection and malignancy."
+        text: |
+          Neuro deficit مكتسب مش مفسّر + angiography أو histology فيها angiitis في الـ CNS + مفيش systemic vasculitis.
+          1. مفيش صورة مميزة؛ اشتبه مع **strokes متعددة في territories مختلفة** أو CSF فيه **chronic meningitis**
+          2. ==No LP = no diagnosis==
+          3. **MRI** حساس بس مش specific
+          4. مفيش angiography **100% specific**
+          5. ==Brain biopsy== بتأكد وتستبعد الـ mimics
+          6. الـ must-rule-outs: **infection و malignancy**
+          7. مفيش استجابة لـ **cyclophosphamide** ← فكّر في تشخيص تاني
+      - kind: explain
+        page: 160
+        title: "Buerger"
+        quote: "Non necrotizing vasculitis. Cause unknown. Affects all populations...19-45 years. Arms and legs.....claudication."
+        text: |
+          **Thromboangiitis obliterans:** non-necrotizing، **19–45** سنة، الدراعين والرجلين و claudication، ممكن amputation بس ==not lethal==.
+
+          الكتاب كاتب العلاج "**alcohol** abstinence".
+      - kind: update
+        page: 160
+        quote: "RX = alcohol abstinence."
+        text: "الـ Buerger مرتبط بالتدخين، والعلاج الوحيد المثبت هو بطّل أي tobacco تمامًا. كلمة alcohol غالبًا غلطة في الكتاب؛ في الامتحان لو السؤال نقل كلام الكتاب اكتبه، وفي العيادة: smoking cessation."
+        ref: "Standard references (e.g., Harrison's 21e, 2022)"
+      - kind: table
+        page: 162
+        quote: "Type 1..monoclonal and lack RF....myeloma. Type 2... mixed because contain IgG and IgM=RF...monoclonal...hep C"
+        title: "الـ cryoglobulins"
+        columns: [Type, What, Linked to]
+        rows:
+          - ["1", "Monoclonal, no RF", "Myeloma"]
+          - ["2 (mixed)", "IgG + monoclonal IgM RF", "Hepatitis C"]
+          - ["3 (mixed)", "Polyclonal IgM", "Immune complexes"]
+        hide: [[0, 2], [1, 2], [2, 1]]
+      - kind: sort
+        page: 161
+        quote: "Purpura, arthritis, abdominal pain and GN. IgA deposition. 90%=age<10. Children=milder."
+        prompt: "صنّف العلامة:"
+        bins: ["HSP", "Hypersensitivity vasculitis", "Cryoglobulinemia"]
+        cards:
+          - { text: "IgA deposition", bin: 0 }
+          - { text: "90% under age 10", bin: 0 }
+          - { text: "Medication at onset", bin: 1 }
+          - { text: "Age >16 at onset", bin: 1 }
+          - { text: "Raynaud's and neuropathy", bin: 2 }
+          - { text: "Treat hepatitis C", bin: 2 }
+        why: "الـ HSP: IgA و purpura و arthritis و abdominal pain و GN في الأطفال. الـ hypersensitivity: دوا عند البداية وسن >16. الـ cryo: purpura و weakness و arthralgia و Raynaud و neuropathy و GN، وعلاجها HCV + prednisone أو cyclophosphamide."
+      - kind: try
+        items: [rheum.L08.161, rheum.L08.164, rheum.L08.179, rheum.L08.184, rheum.L08.186]
+    recap:
+      - "Behçet: oral ulcers ≥3/سنة + 2 (genital، eye، skin، pathergy). Pathergy: papule >2 mm بعد 48 ساعة."
+      - "عين Behçet ممكن تعمي في 4–5 سنين. Colchicine/thalidomide للقرح، azathioprine للعين."
+      - "PACNS: من غير LP ما فيش تشخيص، MRI حساس مش specific، والـ biopsy بتحسم."
+      - "Buerger 19–45 سنة، not lethal. HSP = IgA في الأطفال. Cryo type 2 = HCV."
+    practice: [rheum.L08.160, rheum.L08.161, rheum.L08.162, rheum.L08.163, rheum.L08.164, rheum.L08.165, rheum.L08.166, rheum.L08.167, rheum.L08.168, rheum.L08.169, rheum.L08.170, rheum.L08.171, rheum.L08.172, rheum.L08.173, rheum.L08.174, rheum.L08.175, rheum.L08.176, rheum.L08.177, rheum.L08.178, rheum.L08.179, rheum.L08.180, rheum.L08.181, rheum.L08.182, rheum.L08.183, rheum.L08.184, rheum.L08.185, rheum.L08.186, rheum.L08.187, rheum.L08.188, rheum.L08.189]

@@ -1,0 +1,703 @@
+schema: batna.lesson/v1
+lecture: hem.L07
+lessons:
+  # ------------------------------------------------------------------
+  - id: hem.L07.lesson1
+    title: "النخاع اتحتل: يعني إيه acute leukemia؟"
+    hook: "خلية واحدة صغيرة نسيت تكبر، وقررت تتكاثر لحد ما تطرد الكل من البيت."
+    minutes: 8
+    pages: [104, 106]
+    topics: [definition, etiology, incidence]
+    goals:
+      - "تعرّف الـ acute leukemia وتفهم ليه الـ counts بتقع"
+      - "تعدّ الـ etiology الأربعة بأمثلتها"
+      - "تحفظ أرقام الـ incidence وتفهم آليتين للـ pancytopenia"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 104
+        title: "الخلية اللي رفضت تكبر"
+        quote: "Acute leukemia is the result of a malignant events, occurring in an early hematpoietic precursor"
+        text: |
+          الـ **acute leukemia** بتبدأ بـ ==malignant event== في **early hematopoietic precursor**.
+
+          الخلية دي المفروض تـ differentiate وتبقى RBC أو neutrophil أو platelet. بدل كده بتفضل **تتكاثر من غير كنترول** وهي لسه صغيرة.
+
+          النتيجة: خلايا immature اسمها ==blasts== بتتراكم بسرعة وتحتل النخاع، فإنتاج الـ RBCs والـ WBCs والـ platelets الطبيعي يقع.
+      - kind: figure
+        page: 104
+        quote: "immature cells often called blasts, rapidly accuumalate and replace the bone marrow"
+        title: "النخاع قبل وبعد"
+        alt: "Two marrow panels stacked. The top panel shows a normal marrow with mixed red cells, neutrophils and platelets coming out. The bottom panel shows a marrow packed with blasts and only a few normal cells, with arrows to anemia, infection and bleeding."
+        caption: "الـ blasts بتملا النخاع، فالمصنع الطبيعي يقفل: ==anemia== وinfection وbleeding."
+        svg: |
+          <svg viewBox="0 0 330 320" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L07a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="fg-head"/></marker></defs>
+            <text x="165" y="18" text-anchor="middle" class="t-sm t-b">Normal marrow</text>
+            <rect x="20" y="26" width="290" height="110" rx="12" class="fg-good"/>
+            <circle cx="60" cy="60" r="10" class="fg-dot-bad"/>
+            <circle cx="95" cy="95" r="10" class="fg-dot-acc"/>
+            <circle cx="130" cy="58" r="6" class="fg-dot-good"/>
+            <circle cx="170" cy="100" r="10" class="fg-dot-bad"/>
+            <circle cx="205" cy="62" r="10" class="fg-dot-acc"/>
+            <circle cx="245" cy="98" r="6" class="fg-dot-good"/>
+            <circle cx="275" cy="60" r="10" class="fg-dot-bad"/>
+            <text x="165" y="128" text-anchor="middle" class="t-sm t-mut">RBC · WBC · platelets</text>
+            <text x="165" y="168" text-anchor="middle" class="t-sm t-b">Acute leukemia</text>
+            <rect x="20" y="176" width="290" height="96" rx="12" class="fg-bad"/>
+            <g class="fg-box">
+              <circle cx="50" cy="205" r="13"/><circle cx="85" cy="205" r="13"/><circle cx="120" cy="205" r="13"/><circle cx="155" cy="205" r="13"/><circle cx="190" cy="205" r="13"/><circle cx="225" cy="205" r="13"/><circle cx="260" cy="205" r="13"/>
+              <circle cx="67" cy="240" r="13"/><circle cx="102" cy="240" r="13"/><circle cx="137" cy="240" r="13"/><circle cx="207" cy="240" r="13"/><circle cx="242" cy="240" r="13"/><circle cx="282" cy="240" r="13"/>
+            </g>
+            <circle cx="172" cy="240" r="6" class="fg-dot-good"/>
+            <text x="165" y="266" text-anchor="middle" class="t-sm t-bad t-b">blasts everywhere</text>
+            <path d="M70 276 L50 296" class="fg-arrow" marker-end="url(#L07a)"/>
+            <path d="M165 276 L165 296" class="fg-arrow" marker-end="url(#L07a)"/>
+            <path d="M260 276 L280 296" class="fg-arrow" marker-end="url(#L07a)"/>
+            <text x="45" y="312" text-anchor="middle" class="t-sm">Anemia</text>
+            <text x="165" y="312" text-anchor="middle" class="t-sm">Infection</text>
+            <text x="285" y="312" text-anchor="middle" class="t-sm">Bleeding</text>
+          </svg>
+      - kind: mnemonic
+        page: 104
+        quote: "Ionizing radiation is leukemogenic"
+        word: "RVGC"
+        parts:
+          - { key: "R", text: "Radiation: ionizing (ankylosing spondylitis radiotherapy, atomic bomb)" }
+          - { key: "V", text: "Viruses: HTLV-1 → adult T-cell leukemia" }
+          - { key: "G", text: "Genetic and congenital: Fanconi, ataxia telangiectasia, Down, X-linked agammaglobulinemia" }
+          - { key: "C", text: "Chemicals: benzene, alkylating agents" }
+        hook: "**R**ed **V**ery **G**ood **C**ells... بس للأسف مش good خالص."
+      - kind: explain
+        page: 104
+        title: "الإشعاع: مين يتأذي أكتر؟"
+        quote: "Greater risk results from higher dose radiation delivered over shorter periods to younger patients."
+        text: |
+          الـ **ionizing radiation** بتزوّد **ALL** و **AML** و **CML**، واتشاف ده في:
+          - عيانين اتعالجوا بـ radiotherapy للـ **ankylosing spondylitis**
+          - الناجين من **القنبلة الذرية**
+
+          والخطر بيزيد مع ==higher dose== على **مدة أقصر** في **عيان أصغر**. وفيه قلق كمان من الـ low-frequency **non-ionizing electromagnetic fields**.
+      - kind: check
+        page: 104
+        quote: "Human T cell lymphotropic virus type 1 (HTLV-1) is considered the causative agent of adult T-cell leukemia."
+        question: "Adult T-cell leukemia in a patient from the Caribbean is caused by:"
+        options:
+          - "HTLV-1"
+          - "Benzene"
+          - "EBV"
+          - "Ionizing radiation"
+        answer: 0
+        why:
+          - "صح: الـ HTLV-1 هو السبب، وموجود في الـ Caribbean basin وأفريقيا."
+          - "الـ benzene بيعمل marrow hypoplasia ممكن تتحول acute leukemia، مش T-cell leukemia بالذات."
+          - "الـ EBV بيعمل infectious mononucleosis اللي ممكن تتلخبط مع ALL."
+          - "الإشعاع بيزوّد ALL وAML وCML."
+      - kind: explain
+        page: 105
+        title: "الجينات والكيماويات"
+        quote: "Several autosomal recessive disorders associated with chromosomal instability are prone to terminate in acute leukemia including fanconi anemia and ataxia telangiectasia."
+        text: |
+          - **Fanconi anemia** و **ataxia telangiectasia**: autosomal recessive وفيهم ==chromosomal instability==، فالـ DNA بيتكسر بسهولة وتطلع leukemia.
+          - **Down syndrome** و **infantile X-linked agammaglobulinemia**: incidence أعلى.
+          - **Benzene** (شغل المصانع) ← marrow hypoplasia ← أحيانًا acute leukemia.
+          - ==Alkylating agents== (chlorambucil، melphalan، nitrogen mustard) ← **AML**.
+      - kind: aside
+        tone: exam
+        page: 105
+        quote: "Prior exposure to alkylating agents such as cholramboucil, melphalan and nitrogen mustard is associated with an increased risk of AML."
+        text: "سؤال كلاسيكي: عيان myeloma خد **melphalan** من سنين وجاله leukemia. الإجابة **AML**، مش CLL ومش ALL."
+      - kind: table
+        page: 105
+        quote: "the relative incidence for the four categories of leukemia are as follows ALL 11%, CLL 29%, AML 46%, and CML 14%"
+        title: "مين الأكتر؟ (من كل الـ leukemias)"
+        columns: [Leukemia, Share]
+        rows:
+          - [AML, "46%"]
+          - [CLL, "29%"]
+          - [CML, "14%"]
+          - [ALL, "11%"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1]]
+      - kind: aside
+        tone: tip
+        page: 105
+        quote: "ALL is the most common cancer and the second leading cause of death in children under 15 years of age."
+        text: |
+          الـ incidence الكلي **8–10 per 100,000** في السنة.
+
+          الـ ALL أقل واحدة في الكبار (11%)، بس هي ==most common cancer== في الأطفال تحت 15 سنة وتاني سبب وفاة عندهم. علشان كده تأثيرها كبير.
+      - kind: reveal
+        page: 106
+        quote: "marrow failure is not simply due to physical replacement of the marrow but also due to leukemia inhibitory substances released by malignant cells"
+        prompt: "لو الـ pancytopenia سببها إن الـ blasts خدت مكان الخلايا بس، يبقى النخاع لازم يبقى hypercellular. طب ليه فيه عيانين نخاعهم hypocellular؟"
+        answer: |
+          لأن الـ marrow failure مش بس **physical replacement**.
+
+          الخلايا الخبيثة كمان بتفرز ==leukemia inhibitory substances== بتكتم النخاع الطبيعي. فممكن تلاقي pancytopenia ونخاع فاضي نسبيًا.
+      - kind: try
+        items: [hem.L07.001, hem.L07.003, hem.L07.005, hem.L07.013, hem.L07.017]
+    recap:
+      - "Acute leukemia = early precursor بيتكاثر من غير ما يكبر، والـ blasts بتحتل النخاع."
+      - "الأسباب **RVGC**: Radiation، Virus (HTLV-1)، Genetic، Chemicals."
+      - "Alkylating agents ← AML. Benzene ← hypoplasia ثم leukemia."
+      - "AML 46%، CLL 29%، CML 14%، ALL 11%؛ ALL أشهر cancer في الأطفال."
+      - "Pancytopenia = replacement + inhibitory substances."
+    practice: [hem.L07.001, hem.L07.002, hem.L07.003, hem.L07.004, hem.L07.005, hem.L07.006, hem.L07.007, hem.L07.008, hem.L07.009, hem.L07.010, hem.L07.011, hem.L07.012, hem.L07.013, hem.L07.014, hem.L07.015, hem.L07.016, hem.L07.017, hem.L07.094, hem.L07.095, hem.L07.104]
+  # ------------------------------------------------------------------
+  - id: hem.L07.lesson2
+    title: "AML ولا ALL؟ اقرا الخلية"
+    hook: "الفرق بين AML وALL بيغيّر العلاج كله، والميكروسكوب والـ CD markers بيقولوهولك."
+    minutes: 10
+    pages: [106, 109]
+    topics: [classification, morphology, markers, cytogenetics]
+    goals:
+      - "تفرّق AML عن ALL بالشكل والـ markers"
+      - "تعرف الـ FAB subtypes وأهم translocations"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 106
+        title: "أهم سؤال: myeloid ولا lymphoid؟"
+        quote: "The most important distinction is between AML and ALL, since these two diseases differ considerably in their clinical behavior, prognosis and response to therapy"
+        text: |
+          ممكن تصنّف الـ acute leukemia بـ **morphology** و **cytochemistry** و **cell surface markers** و **cytogenetics** و **oncogene expression**.
+
+          بس أهم تفرقة هي ==AML vs ALL==، لأنهم مختلفين في **الـ behavior** و **الـ prognosis** و **الاستجابة للعلاج**.
+      - kind: figure
+        page: 107
+        quote: "Leukemic cells in AML typically are 12 to 20 um in diameter with discrete nuclear chromatin"
+        title: "اتنين blasts جنب بعض"
+        alt: "Two cells stacked. Top: a large AML blast, 12 to 20 micrometres, with granules in the cytoplasm, a slender red Auer rod and several nucleoli. Bottom: a smaller ALL blast with scanty cytoplasm and no granules."
+        caption: "الـ AML أكبر وفيها granules وممكن ==Auer rod==. الـ ALL أصغر ومن غير granules."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <text x="165" y="18" text-anchor="middle" class="t-sm t-b">AML blast (12–20 µm)</text>
+            <circle cx="120" cy="85" r="60" class="fg-acc"/>
+            <circle cx="112" cy="82" r="36" class="fg-ink"/>
+            <circle cx="100" cy="72" r="5" class="fg-dot-acc"/>
+            <circle cx="122" cy="92" r="5" class="fg-dot-acc"/>
+            <circle cx="160" cy="55" r="3" class="fg-dot-bad"/>
+            <circle cx="168" cy="100" r="3" class="fg-dot-bad"/>
+            <circle cx="150" cy="128" r="3" class="fg-dot-bad"/>
+            <circle cx="80" cy="130" r="3" class="fg-dot-bad"/>
+            <path d="M150 70 L172 112" class="fg-arrow-bad" stroke-width="4"/>
+            <text x="200" y="60" class="t-sm">granules</text>
+            <text x="200" y="95" class="t-sm t-bad t-b">Auer rod</text>
+            <text x="200" y="112" class="t-sm t-mut">pathognomonic</text>
+            <text x="200" y="135" class="t-sm">nucleoli</text>
+            <text x="165" y="178" text-anchor="middle" class="t-sm t-b">ALL blast (smaller)</text>
+            <circle cx="120" cy="235" r="40" class="fg-box"/>
+            <circle cx="120" cy="235" r="33" class="fg-ink"/>
+            <text x="200" y="225" class="t-sm">scanty cytoplasm</text>
+            <text x="200" y="245" class="t-sm">no granules</text>
+            <text x="200" y="265" class="t-sm t-mut">TdT +</text>
+          </svg>
+      - kind: explain
+        page: 107
+        title: "L1 وL2 وL3"
+        quote: "L3 blasts are quite distinct with prominent nucleoli and deeply basophilic cytoplasm with vacuoles"
+        text: |
+          الـ **ALL blasts** أصغر من الـ AML ومن غير granules:
+          - **L1**: حجمها **uniform** و cytoplasm قليلة.
+          - **L2**: أكبر و **variable** وممكن فيها nucleoli.
+          - ==L3==: مميزة: **prominent nucleoli** و cytoplasm **deeply basophilic** فيها ==vacuoles== (Burkitt-like).
+      - kind: check
+        page: 107
+        quote: "auer rods which are slender, fusiform cytoplasmic inclusions that stain red with Giemsa stain, are pathognomic of AML."
+        question: "Slender red fusiform cytoplasmic inclusions on Giemsa stain are pathognomonic of:"
+        options:
+          - "AML"
+          - "L3 ALL"
+          - "CLL"
+          - "Leukemoid reaction"
+        answer: 0
+        why:
+          - "صح: الـ Auer rods = AML، pathognomonic."
+          - "الـ L3 فيها vacuoles وcytoplasm basophilic، مفيش Auer rods."
+          - "الـ CLL خلاياها lymphocytes ناضجة صغيرة."
+          - "الـ leukemoid reaction خلايا myeloid بتنضج طبيعي."
+      - kind: explain
+        page: 108
+        title: "الـ markers: الكارنيه بتاع الخلية"
+        quote: "AML express CD13, CD14, CD33 and CD34"
+        text: |
+          الـ **CD antigens** زي كارنيه على سطح الخلية بيتقرا بـ monoclonal antibodies:
+          - **AML**: ==CD13، CD14، CD33، CD34==
+          - **ALL**: حوالي **60%** عندها **CALLA (CD10)** = early B cell
+          - حوالي **20%** من الـ ALL **T-cell**: CD4، CD3، CD2
+
+          ومن جوه الخلية: ==TdT== (nuclear enzyme) في **أكتر من 90%** من الـ ALL lymphoblasts، ومش موجود في الخلايا الناضجة.
+      - kind: sort
+        page: 108
+        quote: "in ALL approximately 60% of case express the common ALL antigen or CALLA (CD10)."
+        prompt: "الـ marker ده يشاور على إيه؟"
+        bins: ["AML", "ALL"]
+        cards:
+          - { text: "CD13", bin: 0 }
+          - { text: "CD33", bin: 0 }
+          - { text: "CD14", bin: 0 }
+          - { text: "CD10 (CALLA)", bin: 1 }
+          - { text: "TdT", bin: 1 }
+          - { text: "CD3, CD2", bin: 1 }
+        why: "الـ CD13 وCD14 وCD33 (وCD34) بتاعة AML. الـ CALLA (CD10) والـ TdT والـ T-cell antigens (CD4، CD3، CD2) بتاعة ALL."
+      - kind: table
+        page: 106
+        quote: "M3, Acute promyelocytic leukemia Hypergranular promyelocytes predominate T(15;17)"
+        title: "الـ FAB بتاع AML (Table 1)"
+        columns: [FAB, "Name: clue"]
+        rows:
+          - [M0, "Undifferentiated: very undifferentiated blasts"]
+          - [M1, "Minimal differentiation: few azurophilic granules"]
+          - [M2, "With differentiation: granulated blasts, Auer rods"]
+          - [M3, "Promyelocytic: hypergranular promyelocytes, t(15;17)"]
+          - [M4, "Myelomonocytic: monoblasts + myeloblasts, inv(16)"]
+          - [M5, "Monocytic: monoblasts, NSE +++, t(9;11)"]
+          - [M6, "Erythroleukemia: erythroblasts, antiglycophorin"]
+          - [M7, "Megakaryocytic: antiplatelet GpIIb/IIIa"]
+        hide: [[3, 1], [4, 1], [5, 1], [6, 1], [7, 1]]
+      - kind: aside
+        tone: analogy
+        page: 106
+        quote: "M3, Acute promyelocytic leukemia Hypergranular promyelocytes predominate T(15;17)"
+        text: "افتكر الترتيب بالـ myeloid tree: **M0–M2** myeloblasts بتنضج شوية شوية، **M3** promyelocyte، **M4** نص myelo ونص mono، **M5** mono خالص، **M6** red cells، **M7** platelets. كأنك ماشي في شارع من أوله لآخره."
+      - kind: match
+        page: 109
+        quote: "t (4;11), an abnormality seen mostly in neonatal ALL, t (8: 14) an abnormality associated with the L3 varient"
+        prompt: "وصّل كل translocation بمرضه:"
+        pairs:
+          - ["t(15;17)", "APL (M3), always"]
+          - ["inv(16)", "M4 with abnormal eosinophilia"]
+          - ["t(8;21)", "M2, relatively favorable"]
+          - ["t(4;11)", "Neonatal ALL"]
+          - ["t(8;14)", "L3 ALL"]
+        why: "الـ APL دايمًا t(15;17). الـ inv(16) مع M4 والـ eosinophils. الـ t(8;21) في M2 وبتستجيب كويس للـ chemo. الـ t(4;11) في الـ neonates، والـ t(8;14) في الـ L3 (Burkitt)."
+      - kind: aside
+        tone: joke
+        page: 109
+        quote: "patients with M2 AML with t (8: 21) express CD56 have a relatively favorable outcome with chemotherapy."
+        text: "**8 و21**: زي سن الـ 21 كده، شباب ومتفائل. الـ t(8;21) في M2 بتاخد chemo وتطلع **favorable**."
+      - kind: try
+        items: [hem.L07.020, hem.L07.027, hem.L07.035, hem.L07.040, hem.L07.036]
+    recap:
+      - "أهم تفرقة: AML vs ALL (behavior، prognosis، therapy)."
+      - "AML: 12–20 µm، granules، **Auer rods pathognomonic**. ALL: أصغر من غير granules؛ L3 فيها vacuoles."
+      - "AML: CD13/14/33/34. ALL: CALLA (CD10) 60%، T-cell 20%، TdT >90%."
+      - "t(15;17) APL، inv(16) M4Eo، t(8;21) M2 favorable، t(4;11) neonatal ALL، t(8;14) L3."
+    practice: [hem.L07.018, hem.L07.019, hem.L07.020, hem.L07.021, hem.L07.022, hem.L07.023, hem.L07.024, hem.L07.025, hem.L07.026, hem.L07.027, hem.L07.028, hem.L07.029, hem.L07.030, hem.L07.031, hem.L07.032, hem.L07.033, hem.L07.034, hem.L07.035, hem.L07.036, hem.L07.037, hem.L07.038, hem.L07.039, hem.L07.040, hem.L07.041, hem.L07.042, hem.L07.093, hem.L07.108]
+  # ------------------------------------------------------------------
+  - id: hem.L07.lesson3
+    title: "العيان جالك: شكله إيه وهتشخصه إزاي؟"
+    hook: "أنيميا وحرارة ونزيف في نفس الوقت؟ النخاع بيستغيث."
+    minutes: 9
+    pages: [109, 111]
+    topics: [clinical, lab, ddx, supportive]
+    goals:
+      - "تربط كل عرض بـ marrow failure أو infiltration"
+      - "تحفظ أرقام الـ lab وطريقة التشخيص والـ DD"
+      - "تعدّ الـ supportive measures"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 109
+        title: "مصدرين لكل الأعراض"
+        quote: "result from decreased normal marrow function and invasion of normal organs by leukemic blasts"
+        text: |
+          كل أعراض الـ acute leukemia جاية من حاجتين:
+          1. ==Marrow failure==: النخاع مش بيعمل خلايا طبيعية.
+          2. ==Infiltration==: الـ blasts بتغزو الأعضاء.
+      - kind: figure
+        page: 109
+        quote: "Anemia is present at diagnosis in most patients, causing fatigue, pallor and headache."
+        title: "تلات خطوط مقطوعة"
+        alt: "A marrow box at the top with three arrows down to three boxes: low red cells giving fatigue, pallor and headache; low platelets giving petechiae, ecchymoses, gum bleeding and epistaxis; low granulocytes giving serious infections."
+        caption: "كل سلالة بتقع بتدي عرض: ==anemia== تعب، thrombocytopenia نزيف، granulocytopenia infection."
+        svg: |
+          <svg viewBox="0 0 330 270" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L07b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="fg-head-bad"/></marker></defs>
+            <rect x="85" y="10" width="160" height="40" rx="10" class="fg-bad"/>
+            <text x="165" y="35" text-anchor="middle" class="t-sm t-b">Marrow full of blasts</text>
+            <path d="M120 50 L60 90" class="fg-arrow-bad" marker-end="url(#L07b)"/>
+            <path d="M165 50 L165 90" class="fg-arrow-bad" marker-end="url(#L07b)"/>
+            <path d="M210 50 L270 90" class="fg-arrow-bad" marker-end="url(#L07b)"/>
+            <rect x="10" y="95" width="100" height="40" rx="8" class="fg-box"/>
+            <text x="60" y="120" text-anchor="middle" class="t-sm t-b">↓ RBC</text>
+            <rect x="115" y="95" width="100" height="40" rx="8" class="fg-box"/>
+            <text x="165" y="120" text-anchor="middle" class="t-sm t-b">↓ Platelets</text>
+            <rect x="220" y="95" width="100" height="40" rx="8" class="fg-box"/>
+            <text x="270" y="120" text-anchor="middle" class="t-sm t-b">↓ Granulocytes</text>
+            <text x="60" y="160" text-anchor="middle" class="t-sm">Fatigue</text>
+            <text x="60" y="178" text-anchor="middle" class="t-sm">Pallor</text>
+            <text x="60" y="196" text-anchor="middle" class="t-sm">Headache</text>
+            <text x="165" y="160" text-anchor="middle" class="t-sm">Petechiae</text>
+            <text x="165" y="178" text-anchor="middle" class="t-sm">Ecchymoses</text>
+            <text x="165" y="196" text-anchor="middle" class="t-sm">Gum bleeding</text>
+            <text x="165" y="214" text-anchor="middle" class="t-sm">Epistaxis</text>
+            <text x="270" y="160" text-anchor="middle" class="t-sm">Serious</text>
+            <text x="270" y="178" text-anchor="middle" class="t-sm">infections</text>
+            <text x="165" y="255" text-anchor="middle" class="t-sm t-mut">platelets often below 20,000/µL</text>
+          </svg>
+      - kind: explain
+        page: 110
+        title: "الـ infiltration: ALL أشطر"
+        quote: "ALL tends to infiltrate normal organs more often than AML."
+        text: |
+          الـ ==ALL== بتـ infiltrate الأعضاء **أكتر من AML**:
+          - **Lymph nodes** و **liver** و **spleen** كبار وقت التشخيص.
+          - **Bone pain**: من infiltration الـ **periosteum** أو تمدد الـ **medullary cavity**، خصوصًا في الأطفال.
+          - **Leukemic meningitis** (leptomeninges): headache، nausea، **nerve palsies**، seizures.
+      - kind: aside
+        tone: trap
+        page: 110
+        quote: "particularly in children with ALL, in many of whom the original diagnosis was juvenile rheumatoid arthritis"
+        text: "طفل عنده **ألم عضم ومفاصل** واتشخص ==juvenile rheumatoid arthritis==؟ اعمل CBC وبص على الـ film. كتير من أطفال الـ ALL اتشخصوا JRA الأول."
+      - kind: reveal
+        page: 110
+        quote: "patients with acute promyelocytic leukemia (M3) commonly have subclincial or clinical DIC, coaused by tissue thromboplastins present in the leukemic cells."
+        prompt: "ليه الـ APL (M3) بالذات بتجيب DIC؟"
+        answer: |
+          لأن الـ promyelocytes بتاعتها مليانة granules فيها ==tissue thromboplastins==.
+
+          لما تتكسر بتطلّق الـ thromboplastin في الدم، فتشغّل الـ coagulation في كل حتة وتستهلك الـ platelets والـ factors: ==DIC== (subclinical أو clinical).
+      - kind: table
+        page: 110
+        quote: "25% of patients having very high white counts (> 50,000 per dl), 50%, having WBCs between 5000 to 50,000"
+        title: "الـ WBC وقت التشخيص"
+        columns: [WBC per µL, Patients]
+        rows:
+          - [">50,000", "25%"]
+          - ["5,000–50,000", "50%"]
+          - ["<5,000", "25%"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: aside
+        tone: tip
+        page: 110
+        quote: "25% of patients having very high white counts (> 50,000 per dl), 50%, having WBCs between 5000 to 50,000"
+        text: "**25 / 50 / 25**: ربع عالي، نص في النص، ربع واطي. يعني WBC طبيعي أو واطي **ما يستبعدش** leukemia. أغلبهم **granulocytopenic** مهما كان الـ total."
+      - kind: explain
+        page: 110
+        title: "التشخيص والـ DD"
+        quote: "The diagnosis of acute leukemia is generally established by BM aspiration and biopsy which are usually hypercllular and contain 20 to 100% blast cells."
+        text: |
+          - الـ **blasts** موجودة في الـ peripheral blood في أغلب الحالات.
+          - التشخيص بـ ==BM aspiration and biopsy==: غالبًا **hypercellular** و **20–100% blasts**.
+          - **Hyperuricemia** و **↑LDH** (خلايا بتتكسر كتير).
+
+          الـ **DD**: **aplastic anemia** (نخاع hypoplastic ==من غير blasts==)، **MDS**، **leukemoid reaction** للـ infection، و **infectious mononucleosis** (بتشبه ALL).
+      - kind: update
+        page: 110
+        quote: "The diagnosis of acute leukemia is generally established by BM aspiration and biopsy which are usually hypercllular and contain 20 to 100% blast cells."
+        text: "الـ WHO 2022 لغى شرط الـ 20% blasts في معظم الـ AML اللي ليها genetic abnormality مميزة، والـ ICC 2022 خلاه 10%. في الامتحان: **20–100%** زي الكتاب."
+        ref: "WHO Classification 5th ed. 2022; International Consensus Classification 2022"
+      - kind: case
+        page: 111
+        quote: "Platlet transfusion for thrombocytopenia, over hydration and allopurinal in cases of hyperuricemia."
+        stem: "A 50-year-old with new AML: Hb 6.8 g/dL, platelets 9,000/µL, temperature 39 °C, uric acid 11 mg/dL."
+        steps:
+          - question: "Which supportive set fits the book?"
+            options:
+              - "Packed RBCs, platelets, hydration + allopurinol, antibiotics"
+              - "Packed RBCs only, then wait for chemotherapy"
+              - "Heparin for everyone"
+              - "Steroids for the fever"
+            answer: 0
+            why: "الكتاب: packed RBCs للأنيميا، platelets للـ thrombocytopenia، overhydration + allopurinol للـ hyperuricemia، و antibiotics للحرارة. الـ heparin بس لـ DIC في M3."
+      - kind: try
+        items: [hem.L07.044, hem.L07.047, hem.L07.049, hem.L07.053, hem.L07.058]
+    recap:
+      - "الأعراض = marrow failure (أنيميا، نزيف، infection) + infiltration."
+      - "ALL بتـ infiltrate أكتر: nodes، liver، spleen، bone pain (فخ الـ JRA)، meningitis."
+      - "M3 = DIC من tissue thromboplastins."
+      - "WBC: 25% فوق 50,000، 50% بين 5,000 و50,000، 25% تحت 5,000. Marrow 20–100% blasts."
+      - "Aplastic anemia: hypoplastic من غير blasts."
+    practice: [hem.L07.043, hem.L07.044, hem.L07.045, hem.L07.046, hem.L07.047, hem.L07.048, hem.L07.049, hem.L07.050, hem.L07.051, hem.L07.052, hem.L07.053, hem.L07.054, hem.L07.055, hem.L07.056, hem.L07.057, hem.L07.058, hem.L07.096, hem.L07.097, hem.L07.111]
+  # ------------------------------------------------------------------
+  - id: hem.L07.lesson4
+    title: "علاج AML وAPL: 3 + 7 وما بعدها"
+    hook: "تلات أيام anthracycline وسبعة Ara-C، وبعدين المعركة الحقيقية: إن المرض ما يرجعش."
+    minutes: 10
+    pages: [111, 114]
+    topics: [aml-induction, aml-postremission, apl, supportive]
+    goals:
+      - "تكتب الـ 3 + 7 بالجرعات"
+      - "تعرف الـ post-remission options ومين ياخد allogeneic"
+      - "تعرف علاج الـ APL من الـ induction للـ maintenance"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 111
+        title: "الـ 3 + 7"
+        quote: "Cytosine-anabinoside 100 mg/m2/day, IVI for 7 days."
+        text: |
+          الـ **remission induction** في AML:
+          - ==Cytosine arabinoside== **100 mg/m2/day** IV infusion لمدة **7 أيام**
+          - ==Adriamycin== **25–30 mg/m2** أيام 1، 2، 3 (أو 5، 6، 7)
+
+          ممكن بدل الـ Adriamycin: **daunorubicin 45**، **idarubicin 8–12**، أو **mitoxantrone 12 mg/m2** أيام 1–3.
+      - kind: aside
+        tone: tip
+        page: 111
+        quote: "Adriamycin 25-30 mg/rn2. Days 1, 2, and 3 or days 5, 6, and 7."
+        text: "**3** = أيام الـ anthracycline، **7** = أيام الـ Ara-C. والـ Ara-C جرعتها **100**: رقم سهل، ولمدة أسبوع."
+      - kind: update
+        page: 111
+        quote: "Cytosine-anabinoside 100 mg/m2/day, IVI for 7 days."
+        text: "النهارده الـ 7 + 3 بتستخدم daunorubicin **60–90 mg/m2** أو idarubicin 12. في الامتحان اكتب جرعات الكتاب."
+        ref: "ELN 2022 AML recommendations"
+      - kind: table
+        page: 112
+        quote: "Oral hydroxyurea or etoposide or low dose cytarabine 10 mg/m2 S.C. daily."
+        title: "Induction حسب العيان"
+        columns: [Patient, Induction]
+        rows:
+          - ["Standard", "3 + 7"]
+          - ["Alternative (modified ICE)", "Ara-C × 7 + Adriamycin days 1, 3, 5 + etoposide 100 mg/m2 days 1–5"]
+          - ["Elderly", "Ara-C 100 mg/m2 × 5 days + Adriamycin 25 mg/m2 once"]
+          - ["High WBC or high-risk elderly", "Oral hydroxyurea, etoposide, or low-dose Ara-C 10 mg/m2 SC daily"]
+        hide: [[2, 1], [3, 1]]
+      - kind: figure
+        page: 112
+        quote: "Patients under the age of 60 have three main options"
+        title: "خريطة علاج الـ AML"
+        alt: "A vertical flow: induction 3 + 7, then a day-14 marrow. If there is no complete remission, a day-28 marrow and a second induction. Once in complete remission, three options for patients under 60: intensive consolidation, autologous HSCT, or allogeneic HSCT for unfavourable cytogenetics."
+        caption: "الـ induction بيوصلك للـ CR، والـ ==post-remission== هو اللي بيمنع الرجوع."
+        svg: |
+          <svg viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L07d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="fg-head"/></marker></defs>
+            <rect x="75" y="10" width="180" height="40" rx="10" class="fg-acc"/>
+            <text x="165" y="35" text-anchor="middle" class="t-sm t-b">Induction 3 + 7</text>
+            <path d="M165 50 L165 72" class="fg-arrow" marker-end="url(#L07d)"/>
+            <rect x="75" y="75" width="180" height="40" rx="10" class="fg-box"/>
+            <text x="165" y="100" text-anchor="middle" class="t-sm t-b">Day-14 marrow</text>
+            <path d="M255 95 L278 95 L278 140" class="fg-arrow" marker-end="url(#L07d)"/>
+            <text x="300" y="88" text-anchor="middle" class="t-sm t-mut">no CR</text>
+            <rect x="230" y="143" width="95" height="56" rx="10" class="fg-bad"/>
+            <text x="277" y="165" text-anchor="middle" class="t-sm">Day-28 marrow</text>
+            <text x="277" y="183" text-anchor="middle" class="t-sm">→ 2nd induction</text>
+            <path d="M120 115 L120 158" class="fg-arrow" marker-end="url(#L07d)"/>
+            <rect x="60" y="161" width="120" height="36" rx="10" class="fg-good"/>
+            <text x="120" y="184" text-anchor="middle" class="t-sm t-b">CR</text>
+            <path d="M120 197 L120 222" class="fg-arrow" marker-end="url(#L07d)"/>
+            <text x="165" y="238" text-anchor="middle" class="t-sm t-b">Under 60: prevent recurrence</text>
+            <rect x="5" y="250" width="100" height="70" rx="10" class="fg-box"/>
+            <text x="55" y="275" text-anchor="middle" class="t-sm t-b">Intensive</text>
+            <text x="55" y="292" text-anchor="middle" class="t-sm">consolidation</text>
+            <text x="55" y="309" text-anchor="middle" class="t-sm t-mut">× 3</text>
+            <rect x="115" y="250" width="100" height="70" rx="10" class="fg-box"/>
+            <text x="165" y="275" text-anchor="middle" class="t-sm t-b">Autologous</text>
+            <text x="165" y="292" text-anchor="middle" class="t-sm">HSCT</text>
+            <text x="165" y="309" text-anchor="middle" class="t-sm t-mut">no donor</text>
+            <rect x="225" y="250" width="100" height="70" rx="10" class="fg-acc"/>
+            <text x="275" y="275" text-anchor="middle" class="t-sm t-b">Allogeneic</text>
+            <text x="275" y="292" text-anchor="middle" class="t-sm">HSCT</text>
+            <text x="275" y="309" text-anchor="middle" class="t-sm t-mut">unfavourable</text>
+          </svg>
+      - kind: explain
+        page: 112
+        title: "بعد الـ CR: امنع الرجوع"
+        quote: "After CR is achieved, the most important goal is to prevent recurrence."
+        text: |
+          بعد الـ **complete remission** أهم هدف: ==prevent recurrence==. تحت **60 سنة** فيه 3 اختيارات:
+          1. **Intensive chemotherapy**: 3 cycles consolidation (high-dose Ara-C).
+          2. **Autologous HSCT**: relapse أقل من الـ chemo بس أعلى من الـ allogeneic؛ لمين relapse بعد الـ consolidation أو مالوش donor.
+          3. ==Allogeneic HSCT==: أكبر فايدة لأصحاب الـ **unfavorable cytogenetics**.
+      - kind: order
+        page: 112
+        quote: "Etoposide 75 mg/m2, IVI daily for 5 days"
+        prompt: "رتّب الـ consolidation courses:"
+        steps:
+          - "Repeat the induction regimen"
+          - "High-dose Ara-C 1 g/m2 q12h days 1, 3, 5 + etoposide 75 mg/m2 × 5"
+          - "HAM: high-dose Ara-C days 1–3 + mitoxantrone days 3–5"
+        why: "الأول زي الـ induction، وبعدين الـ high-dose Ara-C مع etoposide، وآخر واحد HAM = High-dose Ara-C + Mitoxantrone."
+      - kind: explain
+        page: 113
+        title: "Residual disease والـ relapse"
+        quote: "Up to 50% of patients with AML achieve a second CR using the same drugs used that induce the first remission or HDAC."
+        text: |
+          - نخاع **day 14** فيه نزول كويس بس مفيش CR ← كرّر النخاع **day 28**؛ لو لسه فيه residual ← ==second induction course==.
+          - في الـ **relapse**: لحد **50%** بيعملوا second CR بنفس الأدوية أو **HDAC**.
+          - المؤهل ← **allogeneic transplant**؛ مالوش donor ← autologous.
+          - High risk أو فوق 60 ← investigational: ==Mylotarg== (**anti-CD33**) 9 mg/m2 وتتكرر بعد 14 يوم.
+      - kind: check
+        page: 112
+        quote: "Patients with unfavorable cytogenetics seem to drive the maximal benefit from allogenic"
+        question: "AML in CR, age 38, unfavorable cytogenetics, matched sibling. Best post-remission option?"
+        options:
+          - "Allogeneic HSCT"
+          - "Autologous HSCT"
+          - "No further treatment"
+          - "ATRA for one year"
+        answer: 0
+        why:
+          - "صح: الـ unfavorable cytogenetics بياخدوا أكبر فايدة من الـ allogeneic."
+          - "الـ autologous relapse بتاعه أعلى، وبيتساب لمين مالوش donor."
+          - "بعد الـ CR الهدف منع الرجوع، مش التوقف."
+          - "الـ ATRA للـ APL بس."
+      - kind: explain
+        page: 113
+        title: "الـ APL: علاج مختلف خالص"
+        quote: "Dose 45 mg/m PO divided in 1 x 2 daily for 45-90 days."
+        text: |
+          - **Induction**: ==Vesanoid (ATRA)== **45 mg/m2** بالبق على جرعتين، **45–90 يوم** + **idarubicin 8–12 mg/m2** أيام 2، 4، 6، 8، وممكن **Adriamycin 25–30** بداله.
+          - **Consolidation**: بعد الـ CR **2 courses** anthracycline + cytarabine.
+          - **Maintenance**: ATRA يوميًا ==سنة كاملة==.
+
+          والـ **DIC** في M3: الكتاب بيدي **low-dose heparin 50 units/kg كل 6 ساعات**.
+      - kind: reveal
+        page: 113
+        quote: "Vesanoid (ATRA): Supplied 10 mg capsules. Dose 45 mg/m PO divided in 1 x 2 daily for 45-90 days."
+        prompt: "ليه الـ ATRA بتنفع في الـ APL بالذات؟"
+        answer: |
+          الـ t(15;17) بتعمل fusion protein بيقفل على الـ **retinoic acid receptor**، فالـ promyelocyte بيقف عند مرحلته.
+
+          جرعة عالية من **all-trans retinoic acid** بتفك القفلة دي، فالخلايا تكمّل **differentiation** لـ neutrophils بدل ما تتكسر وتعمل DIC. (ده تفسير فسيولوجي؛ الجرعات من الكتاب.)
+      - kind: update
+        page: 113
+        quote: "Vesanoid (ATRA): Supplied 10 mg capsules."
+        text: "النهارده الـ APL الـ low/intermediate risk (WBC ≤10,000) بتتعالج بـ ATRA + arsenic trioxide من غير chemo، ومفيش heparin روتيني للـ DIC. الامتحان: الكتاب."
+        ref: "ELN recommendations for APL, 2019"
+      - kind: try
+        items: [hem.L07.060, hem.L07.067, hem.L07.070, hem.L07.076, hem.L07.077]
+    recap:
+      - "3 + 7 = Ara-C 100 mg/m2 × 7 + Adriamycin 25–30 × 3."
+      - "Elderly: Ara-C × 5 + Adriamycin مرة. High WBC: hydroxyurea أو etoposide أو low-dose Ara-C."
+      - "بعد الـ CR: consolidation × 3، auto، أو allo (unfavorable cytogenetics)."
+      - "Day 14 ثم day 28؛ relapse: second CR لحد 50%، Mylotarg anti-CD33 فوق 60."
+      - "APL: ATRA + idarubicin ← 2 consolidations ← ATRA سنة."
+    practice: [hem.L07.059, hem.L07.060, hem.L07.061, hem.L07.062, hem.L07.063, hem.L07.064, hem.L07.065, hem.L07.066, hem.L07.067, hem.L07.068, hem.L07.069, hem.L07.070, hem.L07.071, hem.L07.072, hem.L07.073, hem.L07.074, hem.L07.075, hem.L07.076, hem.L07.077, hem.L07.078, hem.L07.079, hem.L07.080, hem.L07.081, hem.L07.098, hem.L07.099, hem.L07.100, hem.L07.103, hem.L07.105, hem.L07.106, hem.L07.109]
+  # ------------------------------------------------------------------
+  - id: hem.L07.lesson5
+    title: "علاج الـ ALL: ماراثون مش سباق"
+    hook: "الـ AML بتخلص في شهور، الـ ALL بتاخد سنين: induction، consolidation، maintenance، والـ CNS."
+    minutes: 9
+    pages: [114, 115]
+    topics: [all]
+    goals:
+      - "تعدّ أدوية الـ induction الخمسة"
+      - "تعرف الـ consolidation والـ maintenance ومدتها"
+      - "تعرف احتياطات الـ asparaginase والـ intrathecal"
+    status: unverified
+    steps:
+      - kind: figure
+        page: 114
+        quote: "Cyclophosphamide: 800 mg/m2 day 1"
+        title: "رحلة الـ ALL"
+        alt: "A vertical timeline with four stages: induction with five drugs; consolidation courses 1 and 2; maintenance for 2 to 3 years; and CNS therapy running alongside with intrathecal methotrexate."
+        caption: "تلات مراحل وراء بعض، والـ ==CNS== بيتغطى على جنب طول الوقت."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L07c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="fg-head-acc"/></marker></defs>
+            <rect x="10" y="10" width="215" height="70" rx="10" class="fg-acc"/>
+            <text x="20" y="32" class="t-sm t-b">1. Induction</text>
+            <text x="20" y="50" class="t-sm">Cyclophosphamide, doxorubicin,</text>
+            <text x="20" y="68" class="t-sm">vincristine, dexa, L-asparaginase</text>
+            <path d="M117 80 L117 105" class="fg-arrow-acc" marker-end="url(#L07c)"/>
+            <rect x="10" y="108" width="215" height="70" rx="10" class="fg-box"/>
+            <text x="20" y="130" class="t-sm t-b">2. Consolidation</text>
+            <text x="20" y="148" class="t-sm">Course 1: CPM, 6-MP, VCR, Ara-C</text>
+            <text x="20" y="166" class="t-sm">Course 2: doxo, etoposide, CPM</text>
+            <path d="M117 178 L117 203" class="fg-arrow-acc" marker-end="url(#L07c)"/>
+            <rect x="10" y="206" width="215" height="84" rx="10" class="fg-good"/>
+            <text x="20" y="228" class="t-sm t-b">3. Maintenance 2–3 years</text>
+            <text x="20" y="246" class="t-sm">Steroid 5 days / 28 days</text>
+            <text x="20" y="264" class="t-sm">VCR monthly, 6-MP daily</text>
+            <text x="20" y="282" class="t-sm">Methotrexate weekly</text>
+            <rect x="240" y="10" width="80" height="280" rx="10" class="fg-thin"/>
+            <text x="280" y="120" text-anchor="middle" class="t-sm t-b">CNS</text>
+            <text x="280" y="140" text-anchor="middle" class="t-sm">IT MTX</text>
+            <text x="280" y="160" text-anchor="middle" class="t-sm t-mut">triple if</text>
+            <text x="280" y="176" text-anchor="middle" class="t-sm t-mut">CNS disease</text>
+          </svg>
+      - kind: table
+        page: 114
+        quote: "Vincristine: 1.5 mg/m2 (maximum 2 tug) days 1, 7, 14, 21."
+        title: "Adult ALL induction"
+        columns: [Drug, Dose]
+        rows:
+          - [CPM, "Cyclophosphamide 800 mg/m2 day 1"]
+          - [Doxo, "Doxorubicin 25–30 mg/m2 days 1–3"]
+          - [VCR, "Vincristine 1.5 mg/m2 (max 2 mg) days 1, 7, 14, 21"]
+          - [Dexa, "Dexamethasone 6 mg/m2/day × 3–4 weeks (or prednisone 40–60)"]
+          - [L-asp, "L-asparaginase 6000 IU/m2 IM, 6–9 doses"]
+        hide: [[0, 1], [2, 1], [4, 1]]
+      - kind: mnemonic
+        page: 114
+        quote: "L-Asparaginase: 6000 lU/m2 per dose I.M for 6-9 doses (maximum 10000 per dose)."
+        word: "CDVDA"
+        parts:
+          - { key: "C", text: "Cyclophosphamide 800 mg/m2" }
+          - { key: "D", text: "Doxorubicin 25–30 mg/m2" }
+          - { key: "V", text: "Vincristine 1.5 mg/m2, max 2 mg" }
+          - { key: "D", text: "Dexamethasone (or prednisone)" }
+          - { key: "A", text: "L-Asparaginase 6000 IU/m2" }
+        hook: "**C**ome **D**octor, **V**ery **D**ifficult **A**LL: خمس أدوية للـ induction."
+      - kind: explain
+        page: 114
+        title: "الـ consolidation"
+        quote: "Cytarabine: 75 mg/m2/per dose IVI or subcutaneous."
+        text: |
+          **Course 1**:
+          - Cyclophosphamide 800 mg/m2 أيام 1 و 28
+          - ==6-mercaptopurine== 60 mg/m2 بالبق **بالليل على معدة فاضية** أيام 1–27
+          - Vincristine 1.4 mg/m2 أيام 14، 18، 22، 25
+          - Cytarabine 75 mg/m2 IV أو SC على 4 بلوكات
+
+          **Course 2**: doxorubicin، **etoposide** 100 mg/m2 أيام 1–5، cyclophosphamide. وممكن يتكرروا **مرة أو اتنين**.
+      - kind: check
+        page: 115
+        quote: "Prednisone: 40-60 mg/m2/day or dexamethasone 6 mg/m2/day for 5 days every 28 days."
+        question: "How long is maintenance in adult ALL?"
+        options:
+          - "2–3 years"
+          - "6 months"
+          - "One year, like APL"
+          - "Until the first remission only"
+        answer: 0
+        why:
+          - "صح: الـ maintenance سنتين لتلاتة."
+          - "6 شهور قليلة جدًا على الـ ALL."
+          - "السنة دي maintenance الـ ATRA في الـ APL."
+          - "الـ remission هو البداية؛ الـ maintenance بعدها."
+      - kind: explain
+        page: 115
+        title: "الـ maintenance"
+        quote: "Methotrexate: 20 mg/m2 orally once weekly."
+        text: |
+          لمدة ==2–3 years==:
+          - **Prednisone 40–60** أو dexamethasone 6 mg/m2/day لمدة **5 أيام كل 28 يوم**
+          - **Vincristine** 1.4 mg/m2 (max 2 mg) كل 4 أسابيع
+          - **6-MP** 75 mg/m2 يوميًا بالليل
+          - ==Methotrexate== 20 mg/m2 بالبق **مرة في الأسبوع**
+      - kind: aside
+        tone: trap
+        page: 115
+        quote: "Administer a small (2 Unites) intradermal test dose to check for hypersensitivity."
+        text: |
+          ==L-asparaginase== ممكن تعمل **anaphylaxis**:
+          - **Intradermal test dose** صغيرة (2 units) قبلها.
+          - **Epinephrine** و **hydrocortisone 100 mg** و **diphenhydramine 50 mg** جاهزين **كل مرة**.
+      - kind: explain
+        page: 115
+        title: "الـ CNS"
+        quote: "Single agent intrathecal chemotherapy (methotrexate) is standard therapy."
+        text: |
+          - الـ standard: ==single-agent intrathecal methotrexate==.
+          - **Triple agent** في الـ **CNS leukemia** خصوصًا meningeal relapse (فوق 9 سنين): MTX 12 mg/m2 (max 15)، hydrocortisone 15 mg/m2، Ara-C 30 mg/m2 (max 50) في 10 ml.
+          - ==Cranial irradiation== بقى بيتجنب قد ما نقدر في الأطفال بسبب الـ side effects.
+      - kind: reveal
+        page: 115
+        quote: "Triple agent is used in CNS leukaemia especially in the management of meningeal relapse."
+        prompt: "ليه الـ ALL محتاجة علاج للـ CNS حتى لو العيان ما عندوش أعراض؟"
+        answer: |
+          الـ ALL بتحب تـ infiltrate، ومنها الـ **leptomeninges**.
+
+          ومعظم الأدوية الـ systemic ما بتعديش الـ **blood–brain barrier** كويس، فالـ CNS يبقى ==sanctuary== تستخبى فيه الخلايا وترجع بعدين. علشان كده بنحقن في الـ CSF مباشرة. (تفسير فسيولوجي.)
+      - kind: try
+        items: [hem.L07.083, hem.L07.087, hem.L07.089, hem.L07.090, hem.L07.091]
+    recap:
+      - "Induction **CDVDA**: cyclophosphamide، doxorubicin، vincristine (max 2 mg)، dexa، asparaginase."
+      - "Consolidation course 1 (CPM، 6-MP، VCR، Ara-C) وcourse 2 (doxo، etoposide، CPM)."
+      - "Maintenance 2–3 سنين: steroid 5 أيام/28، VCR شهري، 6-MP يومي، MTX أسبوعي."
+      - "Asparaginase: test dose + epinephrine/hydrocortisone/diphenhydramine جاهزين."
+      - "IT MTX standard، triple للـ CNS leukemia، ابعد عن الـ cranial irradiation في الأطفال."
+    practice: [hem.L07.082, hem.L07.083, hem.L07.084, hem.L07.085, hem.L07.086, hem.L07.087, hem.L07.088, hem.L07.089, hem.L07.090, hem.L07.091, hem.L07.092, hem.L07.101, hem.L07.102, hem.L07.107, hem.L07.110]

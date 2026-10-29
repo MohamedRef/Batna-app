@@ -6,6 +6,7 @@
 //! batna-tools packs build [--out DIR] [--check]   the offline content pack
 //! batna-tools verdicts FILE [--approve]   fix list from the app's ✎/✗ export
 //! batna-tools update <keygen | manifest | sign | verify>   update feeds (docs/RELEASE.md §5)
+//! batna-tools refs [--lecture hb.L01] [--write]   page references against the book (refs.rs)
 //! ```
 
 use std::collections::BTreeSet;
@@ -19,6 +20,7 @@ mod anki;
 mod changes;
 mod lessons;
 mod packs;
+mod refs;
 mod update;
 mod verdicts;
 
@@ -49,6 +51,7 @@ fn main() -> ExitCode {
         Some("packs") => report(packs::run(&root, &args[1..])),
         Some("verdicts") => report(verdicts::run(&root, &args[1..])),
         Some("update") => report(update::run(&root, &args[1..])),
+        Some("refs") => report(refs::run(&root, &args[1..])),
         _ => usage(),
     }
 }
@@ -75,7 +78,7 @@ fn flag<'a>(args: &'a [String], name: &str) -> Option<&'a str> {
 
 fn usage() -> ExitCode {
     eprintln!(
-        "usage: batna-tools <validate | anki | packs build | verdicts FILE | update …> [--root DIR] (see the top of crates/tools/src/main.rs)"
+        "usage: batna-tools <validate | anki | packs build | verdicts FILE | update … | refs> [--root DIR] (see the top of crates/tools/src/main.rs)"
     );
     ExitCode::from(2)
 }
@@ -171,6 +174,8 @@ pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
     }
     // Lessons (docs/LESSONS.md).
     let (_, lessons) = lessons::validate_all(root, &approved, &mut problems);
+    // Page references checked against the book (refs.rs).
+    problems.extend(refs::check_locks(root, &listed.iter().cloned().collect::<Vec<_>>()));
     if problems.is_empty() {
         Ok(format!(
             "content OK: {files} of {} lectures written, {items} items, {lessons} lessons, {terms} glossary terms",

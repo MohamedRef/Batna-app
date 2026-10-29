@@ -161,6 +161,8 @@ pub fn Study() -> Element {
     let mut phase = PHASE.signal();
     let mut started = STARTED.signal();
     let mut undo_note = UNDO_NOTE.signal();
+    // A running session gets the whole phone screen; "end" is the way out.
+    crate::parts::use_focus_mode(phase() == Phase::Running);
     // Coming back to a running session: don't count the time away.
     let mut quiet = use_hook(|| {
         if *phase.peek() == Phase::Running {
@@ -365,6 +367,7 @@ pub fn Study() -> Element {
                             button {
                                 class: "btn-link",
                                 "aria-keyshortcuts": "Escape",
+                                "data-back": "true",
                                 onclick: move |_| phase.set(Phase::Summary),
                                 {tx::END}
                             }

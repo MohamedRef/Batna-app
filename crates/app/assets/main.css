@@ -74,6 +74,9 @@ html, body { margin: 0; height: 100%; overflow: hidden; background: var(--bg); }
 }
 
 bdi { font-family: var(--font-latin); }
+/* WebKitGTK ignores the dir attribute's isolation on bdi: "1–22" showed as
+   "22–1" (B5). Say it in CSS so every bdi dir="ltr" reads left to right. */
+bdi[dir="ltr"] { direction: ltr; unicode-bidi: isolate; }
 /* Date, time and number fields read left to right inside the Arabic form:
    otherwise WebKit lays 19:00 out as "PM 00:07" (UX #101). */
 input[type="date"], input[type="time"], input[type="datetime-local"], input[type="number"] {
@@ -285,6 +288,9 @@ input[type="file"]::file-selector-button {
   flex-direction: column;
   gap: var(--sp-4);
   min-width: 0;
+  /* A field or card scrolled into view (keyboard focus, the Android
+     keyboard) stops clear of a screen's sticky bar instead of under it. */
+  scroll-padding-block: var(--sp-6) calc(var(--tap-lg) + var(--sp-6));
 }
 /* Redrawn when a content update switches in (main.rs); adds no box. */
 .content-rev { display: contents; }

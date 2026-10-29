@@ -14,8 +14,10 @@ pub fn nav_path(screen: Screen) -> &'static str {
         Screen::Learn => {
             "M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"
         }
-        // open book
-        Screen::Study => "M3 6c3-1 6-1 9 1 3-2 6-2 9-1v12c-3-1-6-1-9 1-3-2-6-2-9-1zM12 7v12",
+        // two stacked review cards
+        Screen::Study => {
+            "M8 4h10a2 2 0 0 1 2 2v10M6 8h9a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2z"
+        }
         // a list of answer choices, the second one ticked
         Screen::Bank => "M4 6h.01M4 12l1.5 1.5L8 11M4 18h.01M10 6h10M11 12h9M10 18h10",
         // stethoscope
@@ -60,9 +62,29 @@ fn stroke(d: &'static str) -> Element {
     }
 }
 
+/// An open book: the lesson view toggle (pages) and References.
+const OPEN_BOOK: &str = "M3 6c3-1 6-1 9 1 3-2 6-2 9-1v12c-3-1-6-1-9 1-3-2-6-2-9-1zM12 7v12";
+
 /// Lesson view toggle: an open book (pages).
 pub fn book() -> Element {
-    stroke(nav_path(Screen::Study))
+    stroke(OPEN_BOOK)
+}
+
+/// References (More, the rail): the same open book.
+pub fn references() -> Element {
+    stroke(OPEN_BOOK)
+}
+
+/// A new card: a card with a plus.
+pub fn add_card() -> Element {
+    stroke("M5 5h14a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zM12 9v6M9 12h6")
+}
+
+/// The calculators: a calculator.
+pub fn calculator() -> Element {
+    stroke(
+        "M7 3h10a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zM9 7h6M9 12h.01M12 12h.01M15 12h.01M9 16h.01M12 16h.01M15 16h.01",
+    )
 }
 
 /// Lesson view toggle: stacked cards (steps).

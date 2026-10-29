@@ -34,6 +34,8 @@ const SWIPE_JS: &str = include_str!("swipe.js");
 #[component]
 pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
     let ui = use_context::<Ui>();
+    // The lesson gets the whole phone screen; × (data-back) is the way out.
+    crate::parts::use_focus_mode(true);
     let n = lesson.steps.len();
     let id = lesson.id.clone();
     // The saved attempt, restored before any step decides Check or Continue.

@@ -112,13 +112,15 @@ pub mod nav {
     pub const LABEL: &str = "التنقل";
     pub const TODAY: &str = "النهارده";
     pub const LEARN: &str = "الدروس";
-    pub const STUDY: &str = "مذاكرة";
+    pub const STUDY: &str = "المراجعة";
     pub const BANK: &str = "الأسئلة";
     pub const CASES: &str = "حالات";
     pub const ORAL: &str = "شفوي";
     pub const STATS: &str = "تقدّمي";
     pub const SETTINGS: &str = "الإعدادات";
     pub const MORE: &str = "المزيد";
+    pub const MORE_PRACTICE: &str = "درّب طريقة تفكيرك";
+    pub const MORE_TOOLS: &str = "مراجعك وأدواتك";
 }
 
 pub mod today {
@@ -530,7 +532,7 @@ pub mod stats {
     pub const MISSED: &str = "غلطت";
 
     pub const SESSION_COUNT: &str = "في الجلسة";
-    pub const STUDY_HINT: &str = "افتح المذاكرة";
+    pub const STUDY_HINT: &str = "افتح المراجعة";
     pub const APPROVED_HINT: &str = "علاماتك وتصديرها في الإعدادات";
     pub const TOPIC_HINT: &str = "ذاكر الموضوع ده لوحده";
     pub const OPEN_LECTURE: &str = "افتح المحاضرة";
@@ -723,7 +725,7 @@ pub mod order {
 }
 
 pub mod oral {
-    pub const MISSED_HINT: &str = "راجع السؤال ده في المذاكرة";
+    pub const MISSED_HINT: &str = "راجع السؤال ده في المراجعة";
     pub const TITLE: &str = "امتحان شفوي";
     pub const INTRO: &str = "التطبيق يسألك بصوت عالي، وانت تجاوب بصوتك. بعد وقت التفكير يقولك الإجابة، وانت تقيّم نفسك. ينفع وانت ماشي.";
     pub const LECTURE: &str = "المحاضرة";

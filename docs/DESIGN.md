@@ -106,3 +106,24 @@ Radii: `--radius-control` 13px, `--radius-card` 18px (22px Glossy),
 No dead UI: anything that looks tappable opens what it shows.
 `crates/app/src/dead_ends.rs` lists the tappable-looking classes; add a new
 one there when you make it.
+
+## Shell and navigation
+
+- Phones (under 600dp): top bar, then the screen, then a floating bar with
+  five tabs: Today, Lessons (`Learn`), Review (`Study`), Questions (`Bank`),
+  More. More (`more.rs`) is a bounded sheet with two groups, "درّب طريقة
+  تفكيرك" (Cases, Oral) and "مراجعك وأدواتك" (Progress, Settings). Every
+  screen off the bar has a row there; `more.rs` tests enforce it. Add a row
+  to `GROUPS` (a `Row` variant) rather than a new tab.
+- Tablet and Mac (600dp and up): the rail, or the labelled sidebar from
+  840dp, shows every screen; More hides.
+- Focused study: `crate::parts::use_focus_mode(on)` in a running lesson,
+  session or question set hides the phone's bar and top bar
+  (`.app[data-focus="true"]`). The screen must show its own way out, a
+  close or finish button with `"data-back": "true"` so Android Back takes
+  it. The rail stays from 600dp.
+- `main.content` is the one scroll container. Its children keep their
+  natural height, and `scroll-padding` keeps a focused field clear of a
+  sticky action bar. `.tab-grid` and `.tab-cols` rows are `max-content`
+  and start-aligned, so a short card never stretches and a tall one never
+  collapses.

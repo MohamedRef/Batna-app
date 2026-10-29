@@ -1,0 +1,760 @@
+schema: batna.lesson/v1
+lecture: endo.L07
+lessons:
+  # ------------------------------------------------------------------
+  - id: endo.L07.lesson1
+    title: "الـ apoplexy: صداع زي الرعد في الغدة النخامية"
+    hook: "أول قاعدة في طوارئ الغدد: الـ cortisol قبل أي حاجة تانية."
+    minutes: 8
+    pages: [111, 113]
+    topics: [overview, apoplexy]
+    goals:
+      - "تعرف السبع طوارئ"
+      - "تشخّص الـ pituitary apoplexy وتفرّقه عن الـ SAH"
+      - "ترتّب العلاج: hydrocortisone الأول، والـ thyroxine بعده"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 111
+        quote: "Endocrine Emergencies include"
+        title: "السبع طوارئ"
+        text: |
+          الكتاب بيعدّ سبع ==endocrine emergencies==:
+
+          1. Pituitary apoplexy
+          2. Myxedema coma
+          3. Thyroid storm
+          4. Acute hypocalcemia
+          5. Acute hypercalcemia
+          6. Acute adrenal insufficiency
+          7. Pheochromocytoma crisis
+      - kind: explain
+        page: 111
+        quote: "cortisol deficiency is the most serious amongst all hormone deficiencies because it can cause life-threatening hypotension."
+        title: "يعني إيه apoplexy؟"
+        text: |
+          ==Haemorrhage into a pituitary adenoma==. نادر، بس اتوصف في **0.6% لـ 25%** من الـ treated adenomas.
+
+          النتيجة **hypopituitarism**، وأخطر نقص فيهم هو ==cortisol== لأنه بيعمل **life-threatening hypotension**.
+
+          مرتبط بـ trauma، hypertension، cardiac surgery، dynamic pituitary function tests، وحاجات تانية كتير.
+      - kind: mnemonic
+        page: 112
+        quote: "The usual triad for apoplexy is: – Sudden severe headache. – Diplopia. – Features of hypopituitarism."
+        word: "HDH"
+        hook: "التلاتية: \"Head, Double, Hormones\"."
+        parts:
+          - { key: "H", text: "Sudden severe Headache" }
+          - { key: "D", text: "Diplopia" }
+          - { key: "H", text: "Features of Hypopituitarism" }
+      - kind: explain
+        page: 112
+        quote: "Altered conscious level, confusion and even coma."
+        title: "الصورة الكاملة"
+        text: |
+          ممكن تبقى خفيفة، وممكن **adrenal crisis**، coma، أو sudden death. بتتطور على ساعات أو أيام:
+
+          - Sudden severe headache.
+          - **Visual field defects** و visual loss.
+          - Nausea و vomiting.
+          - Focal neurological deficit.
+          - Altered consciousness لحد الـ coma.
+          - ==Shock==.
+      - kind: check
+        page: 112
+        quote: "This will require imaging of the brain and should identify a pituitary problem."
+        question: "Sudden severe headache with vomiting and confusion. Which two diagnoses must be separated from apoplexy?"
+        options: ["Subarachnoid haemorrhage and bacterial meningitis", "Migraine and tension headache", "Hypoglycaemia and stroke", "Sinusitis and glaucoma"]
+        answer: 0
+        why:
+          - "صح: والـ brain imaging هو اللي بيفرّق وبيبيّن الـ pituitary."
+          - "مش الـ differential اللي في الكتاب، ومش بالخطورة دي."
+          - "مش المذكورين في الكتاب."
+          - "مش المذكورين في الكتاب."
+      - kind: figure
+        page: 113
+        quote: "Treatment of cardiovascular collapse by giving hydrocortisone 100 mg iv every six hours in normal saline."
+        title: "الخطوات"
+        alt: "A vertical flowchart: suspect apoplexy; vital signs and glucose every 1 to 2 hours; hydrocortisone 100 mg IV six-hourly in saline; brain imaging; thyroxine only after steroids; surgery if visual deficit, conservative if none or resolving; full endocrine work-up and lifelong follow-up."
+        caption: "الـ steroid الأول دايمًا. الـ thyroxine قبله بيعلّي الـ metabolic rate والقلب مش مستحمل."
+        svg: |
+          <svg viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="E07a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="40" y="6" width="250" height="32" rx="6" class="fg-box"/>
+            <text x="52" y="27" class="t-sm t-b">Vitals + glucose every 1-2 h</text>
+            <path d="M165 38v12" class="fg-arrow" marker-end="url(#E07a)"/>
+            <rect x="40" y="52" width="250" height="44" rx="6" class="fg-bad"/>
+            <text x="52" y="70" class="t-sm t-b">Hydrocortisone 100 mg IV</text>
+            <text x="52" y="88" class="t-sm">6-hourly in normal saline</text>
+            <path d="M165 96v12" class="fg-arrow" marker-end="url(#E07a)"/>
+            <rect x="40" y="110" width="250" height="32" rx="6" class="fg-box"/>
+            <text x="52" y="131" class="t-sm">Brain imaging (vs SAH, meningitis)</text>
+            <path d="M165 142v12" class="fg-arrow" marker-end="url(#E07a)"/>
+            <rect x="40" y="156" width="250" height="32" rx="6" class="fg-acc"/>
+            <text x="52" y="177" class="t-sm t-b">Thyroxine only after steroids</text>
+            <path d="M165 188v12" class="fg-arrow" marker-end="url(#E07a)"/>
+            <rect x="5" y="202" width="155" height="56" rx="6" class="fg-good"/>
+            <text x="12" y="222" class="t-sm t-b">Visual deficit</text>
+            <text x="12" y="242" class="t-sm">early TSS surgery</text>
+            <rect x="170" y="202" width="155" height="56" rx="6" class="fg-thin"/>
+            <text x="177" y="222" class="t-sm t-b">No / resolving</text>
+            <text x="177" y="242" class="t-sm">conservative</text>
+            <rect x="40" y="272" width="250" height="44" rx="6" class="fg-box"/>
+            <text x="52" y="290" class="t-sm">Full endocrine work-up</text>
+            <text x="52" y="308" class="t-sm">lifelong follow-up</text>
+          </svg>
+      - kind: reveal
+        page: 113
+        quote: "it must be given after the administration of glucorticoids, to avoid exacerbation of the cardiovascular collapse"
+        prompt: "ليه الـ thyroxine لازم ييجي بعد الـ glucocorticoid؟"
+        answer: "الـ thyroxine بيرفع الـ **metabolic rate** فالجسم بيستهلك cortisol أكتر. لو مفيش cortisol أصلًا، الـ **cardiovascular collapse** هيزيد. نفس القاعدة في أي hypopituitarism."
+      - kind: aside
+        tone: joke
+        page: 113
+        quote: "it must be given after the administration of glucorticoids, to avoid exacerbation of the cardiovascular collapse"
+        text: "الـ thyroxine من غير steroid زي ما تدوس بنزين في عربية مفيهاش زيت: هتتحرك ثانيتين وبعدين المكنة تقف وييجي **cardiovascular collapse**. **Glucocorticoids first**."
+      - kind: try
+        items: [endo.L07.001, endo.L07.003, endo.L07.005, endo.L07.009, endo.L07.012]
+    recap:
+      - "سبع طوارئ: apoplexy، myxedema coma، storm، hypo/hypercalcaemia، adrenal crisis، pheo crisis."
+      - "Apoplexy = نزيف في adenoma؛ أخطر حاجة نقص الـ cortisol."
+      - "Triad: headache، diplopia، hypopituitarism. الـ DD: SAH و meningitis."
+      - "Hydrocortisone 100 mg IV كل 6 ساعات؛ thyroxine بعده بس."
+      - "TSS بدري لو فيه visual deficit."
+    practice: [endo.L07.001, endo.L07.002, endo.L07.003, endo.L07.004, endo.L07.005, endo.L07.006, endo.L07.007, endo.L07.008, endo.L07.009, endo.L07.010, endo.L07.011, endo.L07.012, endo.L07.013, endo.L07.100]
+  # ------------------------------------------------------------------
+  - id: endo.L07.lesson2
+    title: "الـ myxedema coma: لما الجسم يدخل بيات شتوي"
+    hook: "مش لازم يكون في غيبوبة. كفاية واحدة كبيرة، بردانة، بطيئة، ودواها في الدرج مقفول."
+    minutes: 8
+    pages: [113, 115]
+    topics: [myxedema]
+    goals:
+      - "تعرف التعريف والـ clues"
+      - "تفهم ليه الـ sodium والسكر بيقعوا"
+      - "تكتب العلاج بالجرعات والأولويات"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 113
+        quote: "It is defined as severe hypothyroidism with: – Depressed mental status. – Hypothermia. – Reduced function of other organs."
+        title: "التعريف"
+        text: |
+          ==Myxedema coma== = **severe hypothyroidism** مع:
+
+          - Depressed mental status.
+          - **Hypothermia**.
+          - Reduced function of other organs.
+
+          Medical emergency بـ mortality عالية، والتشخيص بدري مهم. و **myxedema** نفسها يعني انتفاخ الوش والأطراف من ترسّب الـ **mucin** في الجلد.
+      - kind: explain
+        page: 114
+        quote: "Hypotension (has prognostic significance)."
+        title: "الـ clues والصورة"
+        text: |
+          **Clues**: thyroid surgery، radioactive iodine، أو ==poor compliance== على الـ thyroxine.
+
+          **الصورة**: depressed mental state، **bradycardia**، hypothermia، **hypotension** وليها prognostic significance، و **type 2 respiratory failure**.
+
+          ورغم الاسم، أغلبهم بييجوا confused أو psychotic، **مش** في coma.
+      - kind: figure
+        page: 114
+        quote: "Hyponatremia is common and seen in at least 50% of the patients."
+        title: "الجسم في بيات شتوي"
+        alt: "A body outline in the centre with labelled slowed systems: brain drowsy and confused, heart slow and low blood pressure, lungs retaining CO2, temperature low, kidneys holding water causing low sodium, liver giving low glucose."
+        caption: "كل حاجة بتبطّأ. الـ hyponatraemia في 50% على الأقل، والـ hypoglycaemia شائعة."
+        svg: |
+          <svg viewBox="0 0 330 280" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="165" cy="40" r="22" class="fg-acc"/>
+            <rect x="140" y="66" width="50" height="110" rx="20" class="fg-acc"/>
+            <path d="M150 176L140 250M180 176L190 250" class="fg-ink" stroke-width="10"/>
+            <text x="5" y="34" class="t-sm t-b">Brain</text>
+            <text x="5" y="50" class="t-sm">drowsy, confused</text>
+            <text x="225" y="34" class="t-sm t-b">Temp</text>
+            <text x="225" y="50" class="t-sm">hypothermia</text>
+            <text x="5" y="100" class="t-sm t-b">Heart</text>
+            <text x="5" y="116" class="t-sm">brady, low BP</text>
+            <text x="225" y="100" class="t-sm t-b">Lungs</text>
+            <text x="225" y="116" class="t-sm">low O2, high CO2</text>
+            <text x="5" y="170" class="t-sm t-b">Kidney</text>
+            <text x="5" y="186" class="t-sm">low Na (50%)</text>
+            <text x="225" y="170" class="t-sm t-b">Liver</text>
+            <text x="225" y="186" class="t-sm">low glucose</text>
+            <text x="90" y="272" class="t-sm t-mut">everything slows down</text>
+          </svg>
+      - kind: check
+        page: 114
+        quote: "Any patient with a low serum sodium and normal volume status should be suspected of having an underactive thyroid."
+        question: "A patient has Na 124 mmol/L and looks euvolaemic. Which condition should you suspect per the lecture?"
+        options: ["Hypothyroidism", "Hyperthyroidism", "Pheochromocytoma", "Hypercalcaemia"]
+        answer: 0
+        why:
+          - "صح: أي low sodium مع normal volume status فكّر في underactive thyroid."
+          - "الـ hyperthyroidism مش بيعمل كده."
+          - "مش مذكورة كسبب."
+          - "الـ hypercalcaemia بتعمل polyuria مش hyponatraemia."
+      - kind: explain
+        page: 115
+        quote: "a short synacthen test should be considered, as coexisting hypoadrenalism is a possibility"
+        title: "التحاليل"
+        text: |
+          اسحب **TSH**، **free T4**، و ==cortisol==.
+
+          ولو تقدر، اعمل **short synacthen test**: ممكن يكون معاه hypoadrenalism، خصوصًا لو الـ hypothyroidism **secondary** من الـ pituitary.
+      - kind: table
+        page: 115
+        quote: "The dose of T4 is between 200 μg and 400 μg per day iv"
+        title: "العلاج"
+        columns: ["Step", "Detail"]
+        rows:
+          - ["Start", "Quickly if suspicion is high"]
+          - ["T4", "200-400 µg/day IV"]
+          - ["T3", "10 µg three times a day IV"]
+          - ["Steroid", "Hydrocortisone 100 mg 8-hourly"]
+          - ["Support", "Careful warming, HR, BP, Na"]
+        hide: [[1, 1], [2, 1], [3, 1]]
+      - kind: aside
+        tone: trap
+        page: 115
+        quote: "The young, obese and those with less likely cardiac risk should receive a higher dose than their counterparts."
+        text: "الجرعة الأعلى للـ **young** والـ **obese** وقليلي الـ cardiac risk. يعني الست الكبيرة اللي عندها قلب تاخد الطرف الواطي من الـ 200-400."
+      - kind: reveal
+        page: 115
+        quote: "Hypothermia by careful warming."
+        prompt: "ليه الـ warming لازم يكون careful؟"
+        answer: "التدفية بسرعة بتعمل **peripheral vasodilatation** والـ BP الواطي أصلًا هيقع أكتر. والكتاب بيقول إن الـ ==supportive treatment== هو الـ crucial aspect: warming بالراحة، bradycardia، hypotension، hyponatraemia، وعلاج السبب."
+      - kind: check
+        page: 115
+        quote: "around a third may succumb to the illness."
+        question: "Despite aggressive treatment, roughly how many patients with myxedema coma die?"
+        options: ["About a third", "Under 5%", "About 85%", "Nearly all"]
+        answer: 0
+        why:
+          - "صح: حوالي التلت."
+          - "أقل بكتير من الحقيقة."
+          - "ده رقم الكتاب للـ pheo crisis."
+          - "مبالغة."
+      - kind: try
+        items: [endo.L07.014, endo.L07.017, endo.L07.019, endo.L07.022, endo.L07.024]
+    recap:
+      - "Severe hypothyroidism + depressed mentation + hypothermia + organ failure."
+      - "Clues: surgery، RAI، poor compliance. Hypotension = prognostic."
+      - "Na واطي في 50% على الأقل، وhypoglycaemia شائعة."
+      - "TSH، FT4، cortisol؛ SST لو ممكن."
+      - "T4 200-400 + T3 10 tds IV، hydrocortisone 100 كل 8 ساعات، warming بالراحة. تلت بيموتوا."
+    practice: [endo.L07.014, endo.L07.015, endo.L07.016, endo.L07.017, endo.L07.018, endo.L07.019, endo.L07.020, endo.L07.021, endo.L07.022, endo.L07.023, endo.L07.024, endo.L07.025, endo.L07.026, endo.L07.099, endo.L07.102]
+  # ------------------------------------------------------------------
+  - id: endo.L07.lesson3
+    title: "الـ thyroid storm: الغدة ولّعت"
+    hook: "حرارة، قلب بيجري أسرع من الحرارة، ومريضة مش قادرة تقعد. والأسبرين هنا ممنوع."
+    minutes: 9
+    pages: [115, 118]
+    topics: [storm]
+    goals:
+      - "تعرف الـ precipitants والصورة"
+      - "ترتّب العلاج بالتلات مبادئ وبالجرعات"
+      - "تعرف ليه الـ salicylates ممنوعة"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 116
+        quote: "Diabetic ketoacidosis. Cardiovascular accident. Parturition. Status epilepticus. I131 treatment. Iodinated contrast dyes."
+        title: "إيه اللي بيولّعها؟"
+        text: |
+          ==Precipitants==: surgery، sepsis، burns، **DKA**، cardiovascular accident، **parturition**، status epilepticus، **I-131**، و iodinated contrast.
+
+          **Thyroxine overdose لا يعمل thyroid storm**. السبب مش واضح، بس فيه:
+
+          - Acute discharge لـ T4 و T3 من الغدة.
+          - Inhibition لارتباطهم بالـ binding globulin.
+      - kind: explain
+        page: 116
+        quote: "Tachycardia out of proportion to the fever."
+        title: "الصورة"
+        text: |
+          Thyrotoxicosis بس أشد:
+
+          - **Fever** 38.5°C.
+          - ==Tachycardia out of proportion to the fever==.
+          - Confusion، agitation.
+          - Nausea و vomiting.
+          - Hypertension، **congestive cardiac failure**.
+
+          التحاليل: TSH واطي، T3 و T4 عاليين، ومعاهم ALT و ALP و bilirubin عاليين.
+      - kind: check
+        page: 116
+        quote: "Thyroxine overdose does not cause thyroid storm."
+        question: "Which of these does NOT cause thyroid storm, per the lecture?"
+        options: ["Thyroxine overdose", "Parturition", "Iodinated contrast", "Diabetic ketoacidosis"]
+        answer: 0
+        why:
+          - "صح: الكتاب بيقولها صريحة."
+          - "الولادة precipitant."
+          - "الـ contrast precipitant."
+          - "الـ DKA precipitant."
+      - kind: figure
+        page: 117
+        quote: "Decrease the production and release of thyroid hormones, – Block the effects of circulating t4 and t3."
+        title: "اقفل المصنع، اقفل التحويل، اقفل التأثير"
+        alt: "A pipeline from thyroid gland to tissues. Block 1 at the gland: methimazole or PTU stop synthesis. Block 2 at release and conversion: Lugol's iodine (lithium if allergic), steroids and PTU stop T4 to T3. Block 3 at the tissues: propranolol. Below: treat the precipitant, fluids, cooling, paracetamol, no aspirin."
+        caption: "الـ PTU بيقفل خطوتين: الـ synthesis والـ T4 → T3."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="10" width="310" height="70" rx="8" class="fg-bad"/>
+            <text x="20" y="32" class="t-b">1. Gland: synthesis</text>
+            <text x="20" y="52" class="t-sm">methimazole 20 mg IV 4-6 h</text>
+            <text x="20" y="70" class="t-sm">or PTU 200 mg 4-hourly</text>
+            <rect x="10" y="90" width="310" height="90" rx="8" class="fg-acc"/>
+            <text x="20" y="112" class="t-b">2. Release and T4 to T3</text>
+            <text x="20" y="132" class="t-sm">Lugol's 0.3 ml in 50 ml 8-hourly, 5 days</text>
+            <text x="20" y="150" class="t-sm">iodine allergy: lithium 300 mg 6-hourly</text>
+            <text x="20" y="168" class="t-sm">dexamethasone 4 mg or HC 100 mg qds</text>
+            <rect x="10" y="190" width="310" height="52" rx="8" class="fg-good"/>
+            <text x="20" y="212" class="t-b">3. Tissues: propranolol</text>
+            <text x="20" y="230" class="t-sm">80 mg tds or 1 mg/min IV to HR 100</text>
+            <rect x="10" y="250" width="310" height="42" rx="8" class="fg-thin"/>
+            <text x="20" y="268" class="t-sm">fluids, cooling, paracetamol</text>
+            <text x="20" y="284" class="t-sm t-bad t-b">no salicylates; treat precipitant</text>
+          </svg>
+      - kind: table
+        page: 117
+        quote: "Lugol‘s iodine: 0.3 ml diluted to 50 ml every 8 hours given orally or via nasogastric tube for 5 days."
+        title: "الجرعات"
+        columns: ["Drug", "Dose"]
+        rows:
+          - ["Methimazole", "20 mg IV 4-6-hourly"]
+          - ["Carbimazole", "30 mg twice daily (oral)"]
+          - ["PTU", "200 mg 4-hourly"]
+          - ["Lugol's", "0.3 ml in 50 ml 8-hourly x5 d"]
+          - ["Lithium", "300 mg 6-hourly, level 1 mmol/l"]
+          - ["Propranolol", "80 mg tds or 1 mg/min IV"]
+        hide: [[0, 1], [2, 1], [3, 1], [5, 1]]
+      - kind: aside
+        tone: tip
+        page: 117
+        quote: "Both drugs can also be given per rectum."
+        text: "المريض بيرجّع ومفيش IV؟ الكتاب بيقول الاتنين، methimazole و PTU، ممكن **per rectum**، والـ PTU والـ Lugol's ممكن بالـ NG tube."
+      - kind: case
+        page: 118
+        quote: "If β-blockers are contraindicated, the possible alternatives would include calcium channel blockers or digoxin."
+        stem: "A 40-year-old man with Graves' and asthma develops storm after pneumonia. Pulse 150, temperature 39.5°C."
+        steps:
+          - question: "Rate control?"
+            options: ["Calcium-channel blocker or digoxin", "Propranolol 1 mg/min IV", "Adenosine", "No rate control"]
+            answer: 0
+            why: "الـ asthma = β-blocker contraindicated، فالبديل CCB أو digoxin."
+          - question: "Fever?"
+            options: ["Paracetamol and external cooling", "Aspirin", "Diclofenac", "Ice bath"]
+            answer: 0
+            why: "الـ salicylates بتطرد الهرمون من الـ binding فبتزوّد الـ storm."
+          - question: "Where should he be managed?"
+            options: ["HDU, consider ICU", "General ward", "Outpatient", "Day unit"]
+            answer: 0
+            why: "Medical high-dependency unit، والـ ICU لازم يتفكر فيه."
+      - kind: aside
+        tone: joke
+        page: 118
+        quote: "Salicylates should be avoided as they inhibit thyroid hormone binding and can worsen the thyroid storm."
+        text: "إنك تدّي **aspirin** في الـ thyroid storm زي ما تطفي حريقة بجركن بنزين: بيطرد الهرمون من الـ TBG فيبقى free أكتر. خليك في الـ **paracetamol**."
+      - kind: try
+        items: [endo.L07.027, endo.L07.029, endo.L07.032, endo.L07.035]
+    recap:
+      - "Precipitants: surgery، sepsis، DKA، ولادة، I-131، contrast. الـ thyroxine overdose لا."
+      - "Fever + tachycardia أكبر من الحرارة + agitation + CCF؛ ALT و bilirubin عاليين."
+      - "Methimazole 20 IV أو PTU 200 كل 4 ساعات؛ Lugol's 0.3 ml كل 8 ساعات 5 أيام."
+      - "Lithium لو حساسية يود؛ steroids؛ propranolol، أو CCB/digoxin."
+      - "Paracetamol و cooling؛ salicylates ممنوعة."
+    practice: [endo.L07.027, endo.L07.028, endo.L07.029, endo.L07.030, endo.L07.031, endo.L07.032, endo.L07.033, endo.L07.034, endo.L07.035, endo.L07.036, endo.L07.037, endo.L07.038, endo.L07.097, endo.L07.101]
+  # ------------------------------------------------------------------
+  - id: endo.L07.lesson4
+    title: "الكالسيوم: واطي يشنّج، عالي يكسّر"
+    hook: "\"Stones, bones, groans and psychic moans\" على ناحية، وحنجرة مقفولة بـ tetany على الناحية التانية."
+    minutes: 10
+    pages: [118, 128]
+    topics: [hypocalcemia, hypercalcemia]
+    goals:
+      - "تعالج الـ hypocalcaemia الحادة بالجرعات"
+      - "تعرف أسباب ومظاهر الـ hypercalcaemia"
+      - "ترتّب علاج الـ hypercalcaemic crisis"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 118
+        quote: "More commonly due to vitamin d deficiency."
+        title: "الـ hypocalcaemia: ليه؟"
+        text: |
+          - **Low PTH** بعد عمليات الـ thyroid أو parathyroid أو neck.
+          - Autoimmune، renal disease.
+          - والأشيع: ==vitamin D deficiency==.
+          - وأحيانًا **low magnesium**: diuretics، chronic diarrhoea، malabsorption.
+      - kind: explain
+        page: 119
+        quote: "Paresthesia and numbness around the mouth and in the extremities."
+        title: "الصورة والتحاليل"
+        text: |
+          1. **Paresthesia** و numbness حوالين البق والأطراف.
+          2. **Muscle spasms**، خصوصًا الإيدين والرجلين.
+          3. ==Laryngeal spasm==: stridor وممكن موت، و convulsions.
+
+          التحاليل: calcium و ionized calcium واطيين، **phosphate عالي**، PTH واطي، vitamin D واطي، الكلى، والـ magnesium.
+      - kind: table
+        page: 120
+        quote: "Immediate IV injection of 20 ml of 10% Ca gluconate at a rate of 2 ml/min."
+        title: "علاج الـ hypocalcaemia"
+        columns: ["Step", "Dose"]
+        rows:
+          - ["IV if Ca < 7.5", "20 ml 10% Ca gluconate at 2 ml/min, repeat 4-hourly"]
+          - ["Intractable", "100 ml 10% Ca gluconate in 1 l D5 every 4 h"]
+          - ["Oral", "Ca gluconate 1.5-3 g tds + vit D 50,000-100,000 IU/day"]
+          - ["Or", "1,25(OH)2 vitamin D 4 µg/day"]
+          - ["Target", "Ca 8-9 mg/dl, check every 3 months + urine Ca"]
+          - ["Vit D deficiency", "50,000 IU D2/D3 weekly for 6-8 weeks"]
+        hide: [[0, 1], [1, 1], [4, 1]]
+      - kind: check
+        page: 120
+        quote: "In patients with hypocalcemia with magnesium deficiency, hypomagnesemia should be corrected first."
+        question: "Calcium keeps falling despite IV calcium in a patient on diuretics with chronic diarrhoea. What next?"
+        options: ["Correct hypomagnesaemia first", "Double the IV calcium", "Add thiazide", "Give bisphosphonate"]
+        answer: 0
+        why:
+          - "صح: من غير magnesium الـ PTH مش هيشتغل، فالكالسيوم مش هيثبت."
+          - "مش هيمسك طول ما الـ Mg واطي."
+          - "مش علاج للحالة دي."
+          - "ده بيوطّي الكالسيوم."
+      - kind: explain
+        page: 120
+        quote: "Primary hyperparathyroidism [parathyroid hormone (pth) mediated] which is long standing. – Malignancy (more severe and symptomatic)."
+        title: "الـ hypercalcaemia: مين السبب؟"
+        text: |
+          أكتر من **90%**: ==primary hyperparathyroidism== اللي long standing، و ==malignancy== وده أشد وبأعراض.
+
+          - **PTH-related تاني**: tertiary في الـ ESRD، جزء من MEN، و familial hypocalciuric hypercalcaemia.
+          - **Non-PTH**: osteolytic mets و PTHrP، calcitriol من extrarenal conversion، vitamin D زيادة، granulomas.
+          - **أدوية**: thiazides، lithium، vitamin A زيادة.
+          - و hyperthyroidism، acromegaly، pheochromocytoma.
+      - kind: sort
+        page: 122
+        quote: "Hypertension ‐ Shortened Q-T interval"
+        prompt: "حط كل علامة في الـ system بتاعها:"
+        bins: ["Renal", "Skeletal", "GI", "Cardiovascular"]
+        cards:
+          - { text: "Nephrocalcinosis", bin: 0 }
+          - { text: "Polyuria", bin: 0 }
+          - { text: "Brown tumours", bin: 1 }
+          - { text: "Chondrocalcinosis", bin: 1 }
+          - { text: "Constipation", bin: 2 }
+          - { text: "Chronic pancreatitis", bin: 2 }
+          - { text: "Shortened QT", bin: 3 }
+          - { text: "Hypertension", bin: 3 }
+        why: "الكتاب بيقسّمها لـ GI، neuropsychiatric، cardiovascular، skeletal، renal. والصور في صفحات 123-126."
+      - kind: aside
+        tone: tip
+        page: 125
+        quote: "well marginated cortical lytic lesion with endosteal scalloping in the distal femur (brown tumor)"
+        text: "الـ **brown tumour** في الأشعة: lytic lesion حدودها واضحة مع **endosteal scalloping**، وممكن pathological fracture. والـ **nephrocalcinosis** في الـ US: أهرامات hyperechoic بـ acoustic shadowing."
+      - kind: figure
+        page: 127
+        quote: "0.9% saline to correct dehydration (4-8 l every 24 hours)."
+        title: "الـ hypercalcaemic crisis خطوة بخطوة"
+        alt: "A timeline. First hours: 0.9 percent saline 4 to 8 litres per 24 hours, furosemide only if fluid overload, monitor urine output and electrolytes. First 48 hours: calcitonin 4 IU per kg twice daily, then tachyphylaxis. Day 1 to several days: bisphosphonate, pamidronate 60 to 90 mg or zoledronic acid 4 mg, preferred. Cause-specific: prednisolone for granulomas, cinacalcet for PTH-driven and dialysis patients."
+        caption: "تحت 12 mg من غير أعراض ممكن متحتاجش علاج فوري. فوق كده: سوايل، وبعدين calcitonin سريع، و bisphosphonate هو الأساس."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 10V290" class="fg-ink"/>
+            <circle cx="20" cy="30" r="6" class="fg-dot-acc"/>
+            <text x="34" y="26" class="t-b">Hours: rehydrate</text>
+            <text x="34" y="44" class="t-sm">0.9% saline 4-8 l / 24 h</text>
+            <text x="34" y="60" class="t-sm">furosemide 80-120 mg only if overload</text>
+            <text x="34" y="76" class="t-sm t-mut">monitor UOP, Mg, K, Na, CVP</text>
+            <circle cx="20" cy="110" r="6" class="fg-dot-acc"/>
+            <text x="34" y="106" class="t-b">First 48 h: calcitonin</text>
+            <text x="34" y="124" class="t-sm">4 IU/kg SC/IM twice daily</text>
+            <text x="34" y="140" class="t-sm t-bad">then tachyphylaxis</text>
+            <circle cx="20" cy="174" r="6" class="fg-dot-good"/>
+            <text x="34" y="170" class="t-b t-good">Preferred: bisphosphonate</text>
+            <text x="34" y="188" class="t-sm">pamidronate 60-90 mg over 2-4 h</text>
+            <text x="34" y="204" class="t-sm">zoledronic acid 4 mg over 15-30 min</text>
+            <circle cx="20" cy="238" r="6" class="fg-dot-acc"/>
+            <text x="34" y="234" class="t-b">By cause</text>
+            <text x="34" y="252" class="t-sm">prednisolone 30-60 mg: sarcoid</text>
+            <text x="34" y="268" class="t-sm">cinacalcet: severe, haemodialysis</text>
+          </svg>
+      - kind: check
+        page: 127
+        quote: "for the first 48 hours due to their immediate effects, after which tachyphylaxis may develop."
+        question: "Why is calcitonin limited to the first 48 hours?"
+        options: ["Tachyphylaxis develops", "It causes hypocalcaemia", "It is nephrotoxic", "It needs a bisphosphonate first"]
+        answer: 0
+        why:
+          - "صح: سريع المفعول بس الجسم بيتعوّد عليه."
+          - "مش السبب في الكتاب."
+          - "مش السبب في الكتاب."
+          - "بالعكس، هو اللي بيشتغل الأول لحد ما الـ bisphosphonate يمسك."
+      - kind: reveal
+        page: 128
+        quote: "by decreasing calcitriol production by the activated mononuclear cells in the lung and lymph nodes"
+        prompt: "ليه الـ prednisolone بيشتغل في hypercalcaemia الـ sarcoid ومش في الـ hyperparathyroidism؟"
+        answer: "في الـ **sarcoid** الـ macrophages المتنشطة في الرئة والـ lymph nodes بتعمل **calcitriol** من غير تحكم. الـ steroid بيقفلها. في الـ hyperparathyroidism المشكلة PTH، فالحل **cinacalcet** أو الجراحة."
+      - kind: try
+        items: [endo.L07.042, endo.L07.045, endo.L07.049, endo.L07.053, endo.L07.060]
+    recap:
+      - "Hypocalcaemia: low PTH بعد الجراحة، vit D (الأشيع)، low Mg."
+      - "Ca < 7.5: 20 ml 10% Ca gluconate IV بـ 2 ml/min. صحّح الـ Mg الأول."
+      - "Hypercalcaemia: أكتر من 90% primary HPT أو malignancy."
+      - "Short QT، brown tumours، nephrocalcinosis، pancreatitis."
+      - "Saline 4-8 l، calcitonin 48 ساعة، bisphosphonate هو المفضل، steroids للـ granulomas، cinacalcet."
+    practice: [endo.L07.039, endo.L07.040, endo.L07.041, endo.L07.042, endo.L07.043, endo.L07.044, endo.L07.045, endo.L07.046, endo.L07.047, endo.L07.048, endo.L07.049, endo.L07.050, endo.L07.051, endo.L07.052, endo.L07.053, endo.L07.054, endo.L07.055, endo.L07.056, endo.L07.057, endo.L07.058, endo.L07.059, endo.L07.060, endo.L07.061, endo.L07.062, endo.L07.063, endo.L07.064, endo.L07.098, endo.L07.103]
+  # ------------------------------------------------------------------
+  - id: endo.L07.lesson5
+    title: "الـ adrenal crisis: shock مش راضي يستجيب"
+    hook: "مريض في shock والـ fluids والـ pressors مش نافعين؟ اسأل نفسك: فين الـ cortisol؟"
+    minutes: 9
+    pages: [128, 132]
+    topics: [adrenal]
+    goals:
+      - "تعرف الأسباب وإمتى تشك"
+      - "تقرا الـ SST والـ long ACTH test"
+      - "تعالج فورًا وتعلّم المريض الـ sick-day rules"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 128
+        quote: "patients on steroid replacement with intercurrent infection or acute stress with failure to increase the steroid dose."
+        title: "مين بيعمل crisis؟"
+        text: |
+          - **Addison's** مش متشخّص، أو مريض على replacement جاله infection أو stress ==ومزوّدش الجرعة==.
+          - مريض **وقّف الـ steroids فجأة**.
+          - نادر: bilateral adrenal infarction أو haemorrhage.
+
+          **Primary**: autoimmune، **TB**، metastases، أدوية زي الـ antifungals.
+
+          **Secondary** يعني pituitary: glucocorticoid بس، والـ mineralocorticoid سليم، فالـ crisis نادرة، وممكن تيجي بـ **hypoglycaemia**.
+      - kind: explain
+        page: 129
+        quote: "particularly if there is coexisting unexplained severe hypo- glycemia or hyponatremia."
+        title: "إمتى تشك؟"
+        text: |
+          ==Shock== مع حاجات مش محددة: anorexia، nausea، vomiting، **abdominal pain**، fever، lethargy.
+
+          فكّر فيها في **أي** مريض في shock حتى من غير تاريخ adrenal، خصوصًا لو فيه **severe hypoglycaemia** أو **hyponatraemia** مش مفهومين.
+      - kind: table
+        page: 130
+        quote: "Intravenous glucocorticoid (100 mg hydrocortisone six hourly) should be initiated immediately and not delayed, pending the short synacthen test."
+        title: "العلاج الفوري"
+        columns: ["Step", "Detail"]
+        rows:
+          - ["Fluids", "2-3 l 0.9% saline IV"]
+          - ["Bloods", "Cortisol + ACTH, on ice, lab in 30 min"]
+          - ["Steroid", "Hydrocortisone 100 mg IV 6-hourly now"]
+          - ["Fludrocortisone", "Not needed acutely"]
+          - ["Then", "Find and treat the precipitant"]
+        hide: [[0, 1], [2, 1], [3, 1]]
+      - kind: reveal
+        page: 130
+        quote: "replacement in acute adrenal crisis is not required as sodium and volume replacement with 0.9% saline is sufficient."
+        prompt: "الـ hypotension أساسًا من نقص الـ mineralocorticoid. طب ليه منديش fludrocortisone في الـ crisis؟"
+        answer: "عشان الـ **0.9% saline** بيعوّض الـ sodium والـ volume، وده كفاية. وكمان الـ **hydrocortisone** بجرعة 100 mg ليه تأثير mineralocorticoid. الـ fludrocortisone للـ maintenance بعدين."
+      - kind: figure
+        page: 130
+        quote: "but in primary hypoadrenalism there is no response at either time."
+        title: "الـ ACTH tests"
+        alt: "Two charts. Top: short synacthen test, cortisol at 0 and 30 minutes, with a dashed line at 550 nmol per litre; a normal response crosses it, a failed one does not. Bottom: long ACTH test over 48 hours; normal rises above 1000 at 4 hours then flat; secondary rises slowly and is much higher at 24 and 48 hours; primary stays flat."
+        caption: "الـ long test بيفرّق: الـ secondary غدة كسلانة بتصحى ببطء، والـ primary غدة مش موجودة."
+        svg: |
+          <svg viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg">
+            <text x="10" y="18" class="t-b">Short test (0 and 30 min)</text>
+            <path d="M40 130H310M40 130V30" class="fg-ink"/>
+            <path d="M40 70H310" class="fg-thin"/>
+            <text x="230" y="64" class="t-sm t-mut">550 nmol/l</text>
+            <path d="M60 110L200 45" class="fg-arrow-acc" stroke-width="3"/>
+            <text x="205" y="44" class="t-sm t-good t-b">normal</text>
+            <path d="M60 115L200 100" class="fg-arrow-bad" stroke-width="3"/>
+            <text x="205" y="104" class="t-sm t-bad t-b">fails</text>
+            <text x="10" y="170" class="t-b">Long test (24-48 h)</text>
+            <path d="M40 310H310M40 310V180" class="fg-ink"/>
+            <path d="M40 300L80 200L310 200" class="fg-arrow-acc" stroke-width="3"/>
+            <text x="230" y="194" class="t-sm t-good t-b">normal</text>
+            <path d="M40 300L80 285L180 240L310 215" class="fg-arrow" stroke-width="3"/>
+            <text x="200" y="250" class="t-sm t-b">secondary</text>
+            <path d="M40 300L310 298" class="fg-arrow-bad" stroke-width="3"/>
+            <text x="230" y="292" class="t-sm t-bad t-b">primary</text>
+            <text x="74" y="326" class="t-sm t-mut">4 h</text>
+            <text x="280" y="326" class="t-sm t-mut">48 h</text>
+          </svg>
+      - kind: explain
+        page: 129
+        quote: "a basal cortisol value greater than 400 nmol/l (14.5 mg/dl) invariably indicates an intact HPA axis."
+        title: "الأرقام"
+        text: |
+          - **Basal cortisol** ممكن يطلع low-normal، فميستبعدش. بس لو ==أكتر من 400 nmol/l== يبقى الـ HPA axis سليم.
+          - **SST**: 250 µg tetracosactide، cortisol عند 0 و 30 دقيقة؛ الطبيعي peak ==أكتر من 550 nmol/l==.
+          - **Long test**: الطبيعي أكتر من 1000 nmol/l عند 4 ساعات.
+          - **Primary**: الـ ACTH عالي جدًا بالنسبة للـ cortisol.
+      - kind: update
+        page: 130
+        quote: "a normal response is defined by a peak plasma cortisol of greater than 550 nmol/l (>20 mg/dl)."
+        text: "الكتاب كاتب الوحدات mg/dl و 250 mg، والصح µg/dl و 250 µg. وكتير من المعامل الحديثة بتستخدم cut-off أقل، حوالي 400-450 nmol/l، مع الـ assays الجديدة. في الامتحان: 550 زي الكتاب."
+        ref: "Endocrine Society primary adrenal insufficiency guideline, 2016"
+      - kind: check
+        page: 130
+        quote: "Intravenous glucocorticoid (100 mg hydrocortisone six hourly) should be initiated immediately and not delayed, pending the short synacthen test."
+        question: "A shocked patient with suspected adrenal crisis. What is right?"
+        options: ["Take cortisol and ACTH, give hydrocortisone now, SST later", "Do the SST first, then treat", "Wait for the cortisol result", "Give fludrocortisone alone"]
+        answer: 0
+        why:
+          - "صح: اسحب الدم، وادّي الـ hydrocortisone فورًا، والـ SST لما يستقر."
+          - "متأخرش العلاج عشان التحليل."
+          - "نفس الغلطة."
+          - "مش محتاجه في الحاد، ومش كفاية لوحده."
+      - kind: mnemonic
+        page: 131
+        quote: "In minor illnesses such as upper respiratory tract infection, patients need to double the usual steroid dosage until they are well"
+        word: "CDIE"
+        hook: "نصايح المريض: \"Card, Double, IV, Emergency shot\"."
+        parts:
+          - { key: "C", text: "Steroid Card or medic-alert bracelet" }
+          - { key: "D", text: "Double the dose in minor illness, then taper" }
+          - { key: "I", text: "Can't take oral: admission for IV steroid" }
+          - { key: "E", text: "Emergency IM hydrocortisone for self-injection" }
+      - kind: explain
+        page: 131
+        quote: "hydrocortisone 10 mg twice a day (taken first thing in the morning and at 17:00)"
+        title: "الـ maintenance والمتابعة"
+        text: |
+          - **Hydrocortisone** 10 mg الصبح و 10 mg الساعة 5، أو 10 + 5 + 5.
+          - **Fludrocortisone** 50-200 µg/day حسب الأعراض والـ postural BP.
+          - الـ glucocorticoid كفاية لو: well-being، وزن طبيعي مش زيادة، cortisol طبيعي مع hydrocortisone بس.
+          - الـ fludrocortisone كفاية لو: electrolytes طبيعية، الـ systolic ميقعش أكتر من **10 mmHg** بعد دقيقتين وقوف، و renin طبيعي.
+          - **العمليات**: 100 mg IV عند الـ induction، وبعدين 50 mg tds.
+      - kind: try
+        items: [endo.L07.065, endo.L07.068, endo.L07.071, endo.L07.074, endo.L07.078]
+    recap:
+      - "السبب الأشهر: Addison's مش متشخص أو مريض مزوّدش الجرعة في stress، أو وقّف فجأة."
+      - "Shock + hypoglycaemia أو hyponatraemia مش مفهومين = فكّر adrenal."
+      - "Saline 2-3 l + hydrocortisone 100 mg IV كل 6 ساعات فورًا؛ مفيش fludrocortisone في الحاد."
+      - "Basal > 400 = سليم؛ SST peak > 550؛ long test بيفرّق primary من secondary."
+      - "Sick-day: card، double، IV لو مش قادر، IM shot؛ surgery 100 ثم 50 tds."
+    practice: [endo.L07.065, endo.L07.066, endo.L07.067, endo.L07.068, endo.L07.069, endo.L07.070, endo.L07.071, endo.L07.072, endo.L07.073, endo.L07.074, endo.L07.075, endo.L07.076, endo.L07.077, endo.L07.078, endo.L07.079, endo.L07.080, endo.L07.081, endo.L07.082, endo.L07.104]
+  # ------------------------------------------------------------------
+  - id: endo.L07.lesson6
+    title: "الـ pheo crisis: الـ alpha قبل الـ beta"
+    hook: "غلطة واحدة في الترتيب تعمل hypertensive crisis أسوأ من اللي بدأت بيه."
+    minutes: 8
+    pages: [132, 138]
+    topics: [pheo]
+    goals:
+      - "تعرف الـ crisis والـ precipitants"
+      - "تختار التحليل والأشعة"
+      - "تعالج بالترتيب الصح والجرعات"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 132
+        quote: "either in the form of hypertensive crisis or cardiogenic (or adrenergic) shock."
+        title: "الـ crisis"
+        text: |
+          ==Pheochromocytoma crisis==: اضطراب hemodynamic يهدد الحياة، يا **hypertensive crisis** يا **cardiogenic adrenergic shock**. الكتاب كاتب mortality حوالي 85%.
+
+          مفيش رقم ثابت، بس الحدود المقبولة: **220/120 mmHg**.
+
+          **Precipitants**: straining، exercise، **pressure on the abdomen**، وأدوية زي الـ **anaesthesia**.
+      - kind: explain
+        page: 133
+        quote: "Sustained or paroxysmal hypertension is the most common sign; however, around 10% may have normal blood pressure."
+        title: "الصورة"
+        text: |
+          الـ paroxysm من دقايق لساعات، ممكن كذا مرة في اليوم أو مرة في الشهر.
+
+          - **Triad**: episodic headache، sweating، tachycardia.
+          - ==Hypertension== sustained أو paroxysmal هي أشيع علامة، بس **10%** ضغطهم طبيعي.
+          - Pallor، numbness، tingling، أطراف ساقعة.
+          - الـ triad مع hypertension: **specificity 93.8%**، **sensitivity 90.9%**.
+      - kind: table
+        page: 133
+        quote: "measuring the fractionated metanephrines in the plasma, is a first-line test."
+        title: "التشخيص"
+        columns: ["Step", "Test"]
+        rows:
+          - ["High suspicion", "Plasma fractionated metanephrines"]
+          - ["Low suspicion", "24-h urine catecholamines + metanephrines"]
+          - ["Then", "CT or MRI adrenals"]
+          - ["No adrenal mass", "123I-MIBG scan"]
+        hide: [[0, 1], [1, 1], [3, 1]]
+      - kind: aside
+        tone: tip
+        page: 135
+        quote: "T2-Weighted MRI of the Adrenal Gland in Pheochromocytoma"
+        text: "في صور الكتاب: الـ pheo في الـ **T2 MRI** بيبان bright يعني increased signal، والـ **MIBG** بيلقط الـ focus حتى برّه الـ adrenal زي الـ paraganglioma."
+      - kind: order
+        page: 137
+        quote: "it must always be given after the α- blocker to prevent unopposed α-mediated vasoconstriction which may worsen the hypertension."
+        prompt: "رتّب علاج الـ pheo hypertensive crisis:"
+        steps: ["IV α-blocker (phentolamine)", "Nitroprusside if resistant", "Oral phenoxybenzamine once stable", "β-blocker added after α-blockade", "Surgery once BP controlled"]
+        why: "الـ β-blocker دايمًا بعد الـ α، والجراحة هي الـ definitive وبتظبط الضغط في 75%."
+      - kind: figure
+        page: 137
+        quote: "it must always be given after the α- blocker to prevent unopposed α-mediated vasoconstriction which may worsen the hypertension."
+        title: "ليه الـ beta لوحده كارثة؟"
+        alt: "A blood vessel drawn twice. Top, with adrenaline acting on alpha and beta2 receptors: alpha constricts, beta2 dilates, so pressure is high but balanced. Bottom, after a beta-blocker alone: beta2 dilation is gone and alpha constriction is unopposed, the vessel narrows more and pressure rises further."
+        caption: "الـ β2 كان بيوسّع شوية. اقفله، والـ α يقفل الشريان على الآخر."
+        svg: |
+          <svg viewBox="0 0 330 270" xmlns="http://www.w3.org/2000/svg">
+            <text x="10" y="18" class="t-b">Catecholamine excess</text>
+            <path d="M20 40H310M20 92H310" class="fg-ink" stroke-width="3"/>
+            <path d="M80 30V44M74 38L80 44L86 38M80 102V88M74 94L80 88L86 94" class="fg-ink" stroke-width="2" fill="none"/>
+            <text x="92" y="36" class="t-sm">α</text>
+            <path d="M220 60V46M214 52L220 46L226 52M220 72V86M214 80L220 86L226 80" class="fg-ink" stroke-width="2" fill="none"/>
+            <text x="232" y="70" class="t-sm">β2</text>
+            <text x="20" y="118" class="t-sm">α squeezes, β2 opens a little</text>
+            <text x="250" y="118" class="t-sm t-acc t-b">BP high</text>
+            <text x="10" y="152" class="t-b t-bad">β-blocker first</text>
+            <path d="M20 168H60C90 168 100 184 130 184H310M20 232H60C90 232 100 216 130 216H310" class="fg-ink" stroke-width="3" fill="none"/>
+            <path d="M200 160V180M194 174L200 180L206 174M200 240V220M194 226L200 220L206 226" class="fg-ink" stroke-width="2" fill="none"/>
+            <text x="212" y="166" class="t-sm t-bad">α alone</text>
+            <text x="20" y="260" class="t-sm">β2 blocked: vessel narrows</text>
+            <text x="235" y="260" class="t-sm t-bad t-b">BP higher</text>
+          </svg>
+      - kind: table
+        page: 136
+        quote: "The aim is to reduce diastolic blood pressure to around 100 mm Hg and systolic should be dropped by not more than 25%."
+        title: "الجرعات"
+        columns: ["Drug", "Dose / note"]
+        rows:
+          - ["Phentolamine", "1-5 mg IV every 15 min"]
+          - ["Phenoxybenzamine IV", "1 mg/kg over ≥2 h"]
+          - ["Nitroprusside", "0.25-0.5 µg/kg/min, max 8-10"]
+          - ["Target", "Diastolic ~100; systolic drop ≤25%"]
+          - ["Phenoxybenzamine oral", "10 mg twice daily, titrate"]
+        hide: [[0, 1], [2, 1], [3, 1], [4, 1]]
+      - kind: check
+        page: 136
+        quote: "The use of nitroprusside should be brief, due to possible cyanide toxicity."
+        question: "Why should nitroprusside be used only briefly?"
+        options: ["Cyanide toxicity", "Tachyphylaxis", "It is an α-agonist", "It lasts 24 hours"]
+        answer: 0
+        why:
+          - "صح: والـ hydroxocobalamin 25 mg/h بيقلل الخطر."
+          - "ده بتاع الـ calcitonin."
+          - "هو vasodilator."
+          - "العكس: أقل من 5 دقايق، فالـ hypotension بيرجع بسرعة لو وقفته."
+      - kind: aside
+        tone: joke
+        page: 137
+        quote: "it must always be given after the α- blocker to prevent unopposed α-mediated vasoconstriction which may worsen the hypertension."
+        text: "قاعدة الحروف: **A** قبل **B** زي الأبجدية. لو بدأت بالـ **beta** يبقى رجعت ابتدائي."
+      - kind: aside
+        tone: tip
+        page: 138
+        quote: "it is important not to miss the diagnosis in de novo presentations."
+        text: "رسالة الكتاب في الآخر: الطوارئ دي نادرة، بس كتير منها بتيجي **de novo** من غير تاريخ مرضي. لو فكرت فيها بدري، هتلحقها."
+      - kind: try
+        items: [endo.L07.086, endo.L07.088, endo.L07.090, endo.L07.093]
+    recap:
+      - "Crisis: hypertensive أو adrenergic shock؛ 220/120؛ precipitants: straining، الضغط على البطن، anaesthesia."
+      - "Triad: headache، sweating، tachycardia؛ 10% ضغطهم طبيعي."
+      - "High suspicion: plasma metanephrines؛ low: urine 24 h؛ CT/MRI؛ MIBG لو مفيش adrenal mass."
+      - "IV α-blocker زي phentolamine الأول؛ nitroprusside للـ resistant مع خطر cyanide؛ β بعد α بس."
+      - "Diastolic حوالي 100، systolic ميقعش أكتر من 25%. الجراحة بتظبط 75%."
+    practice: [endo.L07.083, endo.L07.084, endo.L07.085, endo.L07.086, endo.L07.087, endo.L07.088, endo.L07.089, endo.L07.090, endo.L07.091, endo.L07.092, endo.L07.093, endo.L07.094, endo.L07.095, endo.L07.096]

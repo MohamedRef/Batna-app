@@ -55,8 +55,7 @@
 .st-undo { min-block-size: var(--tap); }
 .st-undo-note { margin: 0; }
 .st-undo-note[data-failed="yes"] { color: var(--bad); }
-.st-bar { flex: 1; block-size: 6px; border-radius: var(--radius-pill); background: var(--line); overflow: hidden; }
-.st-bar-fill { block-size: 100%; background: var(--good); transition: inline-size var(--dur) var(--ease); }
+.st-bar { flex: 1; }
 
 /* ---------- item ---------- */
 .st-item { gap: var(--sp-3); }
@@ -66,11 +65,16 @@
 .st-unverified { border-style: dashed; }
 .st-where { margin-block-start: calc(-1 * var(--sp-1)); }
 .st-body { display: flex; flex-direction: column; gap: var(--sp-3); }
-.st-prompt { font-size: var(--fs-lg); font-family: var(--font-latin); line-height: 1.6; white-space: pre-line; }
+/* The clinical question leads (~20px, the reference's question card);
+   lecture and topic stay small above it. */
+.st-prompt { font-size: 1.25rem; font-weight: 600; font-family: var(--font-latin); line-height: 1.5; white-space: pre-line; }
 .st-answer {
-  font-family: var(--font-latin); white-space: pre-line;
-  background: var(--good-soft); border-radius: var(--radius); padding: var(--sp-3) var(--sp-4);
+  font-family: var(--font-latin); white-space: pre-line; line-height: 1.6;
+  background: var(--accent-soft); color: var(--text);
+  border-inline-start: 3px solid var(--accent); border-radius: var(--radius-control);
+  padding: var(--sp-3) var(--sp-4);
 }
+.st-body > .btn-primary { align-self: stretch; }
 .st-item-foot { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--sp-3); border-block-start: 1px solid var(--line); padding-block-start: var(--sp-2); font-size: var(--fs-sm); color: var(--muted); }
 .st-page { font-weight: 600; }
 .st-quote summary, .st-mine summary { cursor: pointer; }
@@ -115,22 +119,17 @@
 .st-pre { white-space: pre-line; font-family: var(--font-latin); }
 @media (min-width: 840px) { .st-compare:has(.st-mine-col) { grid-template-columns: 1fr 2fr; } }
 
-/* ---------- grades ---------- */
-.st-grades { display: flex; flex-direction: column; gap: var(--sp-1); margin-block-start: var(--sp-2); }
+/* ---------- grades ----------
+   "افتكرتها قد إيه؟": the shared .rating-row (parts.css) under its title.
+   The suggestion a kind computes gets a thicker ring; Good keeps its
+   filled brand look. */
+.st-grades { display: flex; flex-direction: column; gap: var(--sp-2); margin-block-start: var(--sp-2); }
 .st-grade-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 var(--sp-2); margin: 0; }
+.st-grades .rating[data-suggested="yes"] { box-shadow: 0 0 0 2px currentColor; }
+.st-grades .rating[data-grade="good"][data-suggested="yes"] { box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--accent); }
+.st-grades .rating:disabled { opacity: 0.6; cursor: default; }
 /* The content check above stays visibly apart from the rating row. */
 .verify + .st-grades { margin-block-start: var(--sp-4); }
-.st-grade-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-2); }
-.st-grade {
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  min-block-size: var(--row); border-radius: var(--radius); cursor: pointer;
-  border: 1px solid var(--line); background: var(--surface); font-weight: 600;
-}
-.st-grade[data-grade="again"] { color: var(--bad); }
-.st-grade[data-grade="good"], .st-grade[data-grade="easy"] { color: var(--good); }
-.st-grade[data-suggested="yes"] { border: 2px solid currentColor; background: var(--bg); }
-.st-grade:disabled { opacity: 0.6; cursor: default; }
-.st-grade-when { color: var(--muted); font-weight: 400; }
 /* Tablets and the Mac: the item card fills the screen, so the grade row
    sits at the foot of the window on every item, in the same place for the
    thumb, the S Pen and the eye, however short the question is. */
@@ -143,7 +142,11 @@
 @media (max-width: 839.98px) {
   /* Thumb reach on the phone and the tablet in portrait: long items keep
      the grades at the bottom of the screen. */
-  .st-grades { position: sticky; inset-block-end: 0; background: var(--surface); padding-block: var(--sp-2); }
+  .st-grades {
+    position: sticky; inset-block-end: 0; z-index: 2;
+    background: var(--surface); padding-block: var(--sp-2);
+    border-block-start: 1px solid var(--line-soft);
+  }
 }
 
 /* ---------- summary ---------- */
@@ -162,4 +165,16 @@
   .st:has(> .st-item) { max-inline-size: 72rem; }
   .st-body:not(:has(> .desk-split)) > :not(.st-grades, .desk-footer) { max-inline-size: 46rem; }
   .st-item .desk-side .st-grades { position: static; }
+}
+
+/* ---------- Glossy ----------
+   The pinned progress row is a small floating surface: a light blur over
+   the gradient instead of a solid band. Solid when transparency is reduced. */
+.app[data-appearance="glossy"] .st-progress {
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px);
+}
+.app[data-appearance="glossy"] .st-answer { border-radius: 18px; }
+@media (prefers-reduced-transparency: reduce) {
+  .app[data-appearance="glossy"] .st-progress { background: var(--bg); -webkit-backdrop-filter: none; backdrop-filter: none; }
 }

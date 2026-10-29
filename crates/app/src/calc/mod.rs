@@ -21,10 +21,12 @@ fn area_label(area: Area) -> &'static str {
         Area::Tumour => tx::AREA_TUMOUR,
         Area::AcuteFailure => tx::AREA_ACUTE,
         Area::Pancreas => tx::AREA_PANCREAS,
+        Area::Research => tx::AREA_RESEARCH,
     }
 }
 
-const AREAS: [Area; 5] = [Area::Liver, Area::Ascites, Area::Tumour, Area::AcuteFailure, Area::Pancreas];
+const AREAS: [Area; 6] =
+    [Area::Liver, Area::Ascites, Area::Tumour, Area::AcuteFailure, Area::Pancreas, Area::Research];
 
 /// Every calculator, grouped by area. On phones the list and the open
 /// calculator take turns; from 840dp they sit side by side.

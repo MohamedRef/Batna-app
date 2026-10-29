@@ -157,10 +157,14 @@ mod tests {
     #[test]
     fn every_embedded_file_parses() {
         let lib = Library::get();
-        assert_eq!(lib.index.lectures.len(), 20);
-        let written = std::fs::read_dir(concat!(env!("CARGO_MANIFEST_DIR"), "/../../content/hb"))
-            .unwrap()
-            .flatten()
+        assert!(lib.index.lectures.iter().filter(|l| l.id.starts_with("hb.")).count() == 20);
+        let content = concat!(env!("CARGO_MANIFEST_DIR"), "/../../content");
+        let written: usize = lib
+            .program
+            .courses
+            .iter()
+            .filter_map(|c| std::fs::read_dir(format!("{content}/{}", c.id)).ok())
+            .flat_map(|dir| dir.flatten())
             .filter(|f| f.path().extension().is_some_and(|e| e == "yaml"))
             .count();
         assert_eq!(lib.lectures.len(), written, "every lecture file made it into the pack");

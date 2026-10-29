@@ -34,6 +34,24 @@ const OCR: [&str; 2] =
     ["/mnt/project-files/medstudy/pagerefs/ocr", "/mnt/project-files/medstudy/pagerefs/ocr-all"];
 const CHECKED: &str = "/mnt/project-files/medstudy/pagerefs/verdicts";
 const LOCKS: &str = "content/book-refs";
+/// Other courses keep their text, page checks and locks per course.
+const COURSES: &str = "/mnt/project-files/medstudy/courses";
+
+/// Where a course's references are locked: Hepatology (the first course)
+/// in `content/book-refs/`, every other course in `content/book-refs/<course>/`.
+fn lock_dir(root: &Path, course: &str) -> PathBuf {
+    if course == "hb" { root.join(LOCKS) } else { root.join(LOCKS).join(course) }
+}
+
+/// A course's source text by page or slide, unless `--book` names one:
+/// the hepatobiliary book, or `courses/<course>/text/` (slide decks).
+fn source_dir(given: Option<&str>, course: &str) -> PathBuf {
+    match given {
+        Some(dir) => PathBuf::from(dir),
+        None if course == "hb" => PathBuf::from(BOOK),
+        None => Path::new(COURSES).join(course).join("text"),
+    }
+}
 
 /// A cited page must carry this share of the reference's weighted terms…
 const MIN_SCORE: f64 = 0.3;
@@ -344,7 +362,7 @@ pub fn check_locks(root: &Path, lectures: &[String]) -> Vec<String> {
     let mut problems = Vec::new();
     for id in lectures {
         let (chapter, num) = id.split_once('.').unwrap_or((id, ""));
-        let lock_path = root.join(LOCKS).join(format!("{num}.tsv"));
+        let lock_path = lock_dir(root, chapter).join(format!("{num}.tsv"));
         if !lock_path.exists() || !root.join("content").join(chapter).join(format!("{num}.yaml")).exists() {
             continue;
         }
@@ -400,14 +418,15 @@ pub fn check_locks(root: &Path, lectures: &[String]) -> Vec<String> {
     problems
 }
 
-/// Printed page → text for one lecture: `book/LNN.txt` plus any OCR files.
+/// Printed page (or slide) → text for one lecture: `LNN.txt`, split at
+/// `=== book page N` or `=== slide N` lines, plus any OCR files.
 fn book_pages(book: &Path, ocr: &[PathBuf], num: &str) -> Result<BTreeMap<u32, String>, String> {
     let path = book.join(format!("{num}.txt"));
     let text = std::fs::read_to_string(&path).map_err(|e| format!("{}: {e}", path.display()))?;
     let mut out: BTreeMap<u32, String> = BTreeMap::new();
     let mut cur = None;
     for line in text.lines() {
-        if let Some(rest) = line.strip_prefix("=== book page ") {
+        if let Some(rest) = line.strip_prefix("=== book page ").or_else(|| line.strip_prefix("=== slide ")) {
             cur = rest.split_whitespace().next().and_then(|p| p.parse().ok());
             if let Some(p) = cur {
                 out.entry(p).or_default();
@@ -486,13 +505,13 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
     let index: batna_core::content::Index =
         crate::read_yaml(&root.join("content/index.yaml")).map_err(|e| vec![e])?;
     let only = crate::flag(args, "--lecture");
-    let book = PathBuf::from(crate::flag(args, "--book").unwrap_or(BOOK));
+    let book_flag = crate::flag(args, "--book");
     let ocr: Vec<PathBuf> = {
         let given: Vec<PathBuf> =
             args.windows(2).filter(|w| w[0] == "--ocr").map(|w| PathBuf::from(&w[1])).collect();
         if given.is_empty() { OCR.iter().map(PathBuf::from).collect() } else { given }
     };
-    let checked_dir = PathBuf::from(crate::flag(args, "--checked").unwrap_or(CHECKED));
+    let checked_flag = crate::flag(args, "--checked");
     let write = args.iter().any(|a| a == "--write");
 
     let mut problems = Vec::new();
@@ -502,7 +521,14 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
         if !root.join("content").join(chapter).join(format!("{num}.yaml")).exists() {
             continue;
         }
-        let pages = book_pages(&book, &ocr, num).map_err(|e| vec![e])?;
+        // Slide text already holds the OCR of image-only slides.
+        let ocr: &[PathBuf] = if chapter == "hb" { &ocr } else { &[] };
+        let pages = book_pages(&source_dir(book_flag, chapter), ocr, num).map_err(|e| vec![e])?;
+        let checked_dir = match checked_flag {
+            Some(dir) => PathBuf::from(dir),
+            None if chapter == "hb" => PathBuf::from(CHECKED),
+            None => Path::new(COURSES).join(chapter).join("verdicts"),
+        };
         let page_terms: BTreeMap<u32, BTreeSet<String>> = pages.iter().map(|(p, t)| (*p, terms(t))).collect();
         let squashed: BTreeMap<u32, String> = pages.iter().map(|(p, t)| (*p, squash(t))).collect();
         let mut df: HashMap<String, usize> = HashMap::new();
@@ -511,7 +537,7 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
                 *df.entry(w.clone()).or_default() += 1;
             }
         }
-        let lock_path = root.join(LOCKS).join(format!("{num}.tsv"));
+        let lock_path = lock_dir(root, chapter).join(format!("{num}.tsv"));
         let old =
             if lock_path.exists() { read_lock(&lock_path).map_err(|e| vec![e])? } else { BTreeMap::new() };
         let checked = read_checked(&checked_dir.join(format!("{num}.tsv")));
@@ -601,7 +627,7 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
                 out.push_str(&row);
                 out.push('\n');
             }
-            std::fs::create_dir_all(root.join(LOCKS)).map_err(|e| vec![e.to_string()])?;
+            std::fs::create_dir_all(lock_dir(root, chapter)).map_err(|e| vec![e.to_string()])?;
             std::fs::write(&lock_path, out).map_err(|e| vec![format!("{}: {e}", lock_path.display())])?;
         }
         problems.extend(bad.into_iter().map(|b| format!("{}: {b}", entry.id)));
@@ -736,5 +762,25 @@ mod tests {
         assert_eq!(lock["hb.L01.001"].basis, "quote");
         assert_eq!(lock["hb.L01.002"].basis, "quote");
         assert!(check_locks(root, &["hb.L01".into()]).is_empty());
+    }
+
+    #[test]
+    fn other_courses_keep_their_own_slides_and_locks() {
+        let root = Path::new("/r");
+        assert_eq!(lock_dir(root, "hb"), Path::new("/r/content/book-refs"));
+        assert_eq!(lock_dir(root, "res"), Path::new("/r/content/book-refs/res"));
+        assert_eq!(source_dir(None, "hb"), Path::new(BOOK));
+        assert_eq!(source_dir(None, "res"), Path::new(COURSES).join("res/text"));
+        assert_eq!(source_dir(Some("/x"), "res"), Path::new("/x"));
+
+        let dir = tempfile::tempdir().unwrap();
+        std::fs::write(
+            dir.path().join("L02.txt"),
+            "=== slide 1 ===\nEpidemiology\n=== slide 2 ===\nIncidence rate\n",
+        )
+        .unwrap();
+        let pages = book_pages(dir.path(), &[], "L02").unwrap();
+        assert_eq!(pages.len(), 2);
+        assert!(pages[&2].contains("Incidence rate"));
     }
 }

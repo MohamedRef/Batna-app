@@ -1,0 +1,594 @@
+schema: batna.lesson/v1
+lecture: git.L11
+lessons:
+  # ------------------------------------------------------------------
+  - id: git.L11.lesson1
+    title: "الدم طالع منين؟"
+    hook: "لون الدم وشكله بيقولولك المصدر فين وبينزف بسرعة قد إيه، قبل ما تمسك منظار."
+    minutes: 8
+    pages: [299, 308]
+    topics: [overview, causes]
+    goals:
+      - "تفرّق بين upper و lower GI bleeding بالـ ligament of Treitz"
+      - "تقرا الـ hematemesis والـ melena والـ hematochezia كمؤشر للسرعة"
+      - "تحفظ أسباب الـ UGIB بنسبها"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 299
+        quote: "Acute gastrointestinal bleeding is one of the most common medical emergencies with 250,000 to 300,000 hospitalizations annually."
+        title: "طوارئ يومية"
+        text: |
+          الـ ==acute GI bleeding== من أشهر الطوارئ الباطنة: **250,000-300,000** دخول مستشفى في السنة، و **mortality** حوالي **6-8%**.
+
+          الخطر الأعلى عند **advanced age** واللي عندهم **severe comorbidities**. ومش دكتور واحد اللي بيعالجه: طوارئ، باطنة، جهاز هضمي، جراحة، interventional radiology، وهيماتولوجي.
+      - kind: figure
+        page: 299
+        quote: "Upper GI bleeding (UGIB) is defined as bleeding derived from a source proximal to the ligament of Treitz."
+        title: "الخط الفاصل: Treitz"
+        alt: "A vertical sketch of the GI tract: esophagus, stomach and duodenum above a dashed line labelled ligament of Treitz marked upper GI bleeding, about 4 times more common; small bowel and colon below it marked lower GI bleeding."
+        caption: "اللي فوق الـ ligament of Treitz = upper، واللي تحته = lower. والـ upper أشهر بحوالي 4 مرات."
+        svg: |
+          <svg viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="10" width="310" height="140" rx="8" class="fg-acc"/>
+            <text x="20" y="34" class="t-b">Upper GI bleeding</text>
+            <text x="20" y="56" class="t-sm">Esophagus, stomach, duodenum</text>
+            <text x="20" y="78" class="t-sm t-mut">Proximal to the ligament of Treitz</text>
+            <text x="20" y="110" class="t-lg t-acc t-b">×4</text>
+            <text x="60" y="110" class="t-sm">more common than lower</text>
+            <text x="20" y="132" class="t-sm t-mut">Non-variceal or variceal</text>
+            <path d="M10 165h310" class="fg-ink" stroke-width="3" stroke-dasharray="8 6"/>
+            <text x="165" y="186" text-anchor="middle" class="t-sm t-b">Ligament of Treitz</text>
+            <rect x="10" y="200" width="310" height="120" rx="8" class="fg-box"/>
+            <text x="20" y="224" class="t-b">Lower GI bleeding</text>
+            <text x="20" y="246" class="t-sm">Small bowel and colon</text>
+            <text x="20" y="268" class="t-sm t-mut">Lecture 7 owns lower GI bleeding</text>
+            <text x="20" y="300" class="t-sm t-mut">Course: acute, chronic, intermittent, occult</text>
+          </svg>
+      - kind: aside
+        tone: trap
+        page: 299
+        quote: "relation to ligament of trietz (at the junction of 2nd and 3rd parts of duodenum)."
+        text: |
+          الكتاب كاتب إن الـ **ligament of Treitz** عند الـ junction بين الجزء التاني والتالت من الـ duodenum. التشريح المعروف إنه عند الـ **duodenojejunal flexure** (آخر الـ duodenum). لو اتسألت عن التعريف، الأهم: **proximal to the ligament of Treitz** = upper.
+      - kind: explain
+        page: 300
+        quote: "Melena develops after as little as 50–100 mL of blood loss in the upper gastrointestinal tract."
+        title: "شكل الدم بيقول السرعة"
+        text: |
+          - ==Hematemesis with clots==: أخطر شكل؛ النزيف سريع لدرجة إن الجلطة ما لحقتش تدوب.
+          - **Hematemesis** بدم فريش، أو **coffee ground** لو أبطأ.
+          - ==Melena==: براز أسود زي القطران وريحته وحشة = نزيف upper **بطيء**. ممكن ييجي بعد hematemesis أو حتى نزيف لثة لكام يوم. و **50-100 mL** كفاية تعمله.
+          - **Hematochezia** من مصدر upper = نزيف **سريع وكبير** (حوالي **1 لتر**).
+      - kind: check
+        page: 300
+        quote: "Hematochezia (fresh bleeding per rectum) if associated with upper GI bleeding presents rapid and huge blood loss (about 1 liter)."
+        question: "Fresh blood per rectum and an NG aspirate full of red blood. What does this tell you?"
+        options:
+          - "Rapid, huge upper GI loss (about 1 liter)"
+          - "Slow upper GI bleeding of 50-100 mL"
+          - "A lower GI source only"
+          - "Bleeding has stopped"
+        answer: 0
+        why:
+          - "صح: hematochezia مع مصدر upper = نزيف سريع وكبير، حوالي لتر."
+          - "الـ 50-100 mL دي اللي تكفي تعمل melena."
+          - "الـ aspirate الأحمر بيأكد إن المصدر upper."
+          - "دم فريش = النزيف شغال."
+      - kind: table
+        page: 300
+        quote: "Peptic ulcers account for 40% of major upper gastrointestinal bleeding with an overall mortality rate of less than 5%."
+        title: "الأسباب بالنسب"
+        columns: ["Cause", "Share of UGIB"]
+        rows:
+          - ["Peptic ulcer", "40% (mortality <5%)"]
+          - ["Portal hypertension", "10-20%"]
+          - ["Vascular anomalies", "7%"]
+          - ["Erosive gastritis", "<5% of severe bleeds"]
+          - ["Gastric neoplasms", "1%"]
+        hide: [[0, 1], [1, 1], [2, 1], [4, 1]]
+      - kind: explain
+        page: 300
+        quote: "The incidence of bleeding from ulcers is declining due to eradication of H pylori and prophylaxis with proton pump inhibitors in high-risk patients."
+        title: "القرحة والدوالي"
+        text: |
+          - ==Peptic ulcer== لسه السبب الأول، بس بيقل بفضل **H. pylori eradication** و **PPI prophylaxis** للـ high-risk.
+          - ==Portal hypertension==: من **esophageal varices** غالبًا، وأقل من gastric أو duodenal varices أو **portal hypertensive gastropathy**. (تفاصيل الدوالي في hb.L03.)
+      - kind: match
+        page: 301
+        quote: "The Dieulafoy lesion is an aberrant, large-caliber submucosal artery, most commonly in the proximal stomach that causes recurrent, intermittent bleeding."
+        prompt: "وصّل كل vascular lesion بوصفها:"
+        pairs:
+          - ["Angioectasia", "1-10 mm stellate vessels, mostly right colon"]
+          - ["Telangiectasia", "Cherry-red dilated venules; HHT or CREST"]
+          - ["Dieulafoy lesion", "Large submucosal artery, proximal stomach"]
+          - ["Aortoenteric fistula", "Complicates 2% of aortic grafts"]
+        why: "الـ angioectasia = أوعية مشوّهة 1-10 mm، أكتر حاجة في الـ right colon. الـ telangiectasia = venules متوسعة، مع HHT أو CREST. الـ Dieulafoy = شريان كبير غلط تحت الـ mucosa، بينزف ويقف ويرجع. والـ aortoenteric fistula مع 2% من الـ aortic grafts."
+      - kind: aside
+        tone: analogy
+        page: 301
+        quote: "The Dieulafoy lesion is an aberrant, large-caliber submucosal artery, most commonly in the proximal stomach that causes recurrent, intermittent bleeding."
+        text: |
+          الـ **Dieulafoy** زي ماسورة مياه رئيسية معدّية تحت بلاط رفيع. البلاط يتشرخ شرخ صغير، المية تطرطش جامد، وبعدين يقف. المنظار ممكن يطلع normal مرتين قبل ما تمسكه وهو بينزف.
+      - kind: explain
+        page: 301
+        quote: "Unusual causes of upper gastrointestinal bleeding include hemobilia (from hepatic tumor, angioma, penetrating trauma), and pancreatic malignancy and pseudoaneurysm"
+        title: "الباقي"
+        text: |
+          - **Erosive gastritis**: superficial فنادرًا تعمل نزيف شديد (<5%)، وغالبًا **chronic loss**. أسبابها **NSAIDs**، **alcohol**، و **stress-related mucosal disease**.
+          - **Severe erosive esophagitis** نادرًا تنزف جامد، خصوصًا في اللي نايمين على السرير مدة طويلة.
+          - غريبة: ==hemobilia== (hepatic tumor، angioma، trauma) و ==hemosuccus pancreaticus== (pancreatic malignancy أو pseudoaneurysm).
+      - kind: sort
+        page: 308
+        quote: "Etiologies of non-variceal upper gastrointestinal bleeding"
+        prompt: "حط كل سبب في مجموعته من Table 1 (etiologies of non-variceal bleeding):"
+        bins: ["Ulcer / inflammation", "Vascular", "Malignant", "Others / post procedural"]
+        cards:
+          - { text: "Anastomotic ulcer after gastric bypass", bin: 0 }
+          - { text: "Erosive duodenitis", bin: 0 }
+          - { text: "GAVE", bin: 1 }
+          - { text: "Dieulafoy lesion", bin: 1 }
+          - { text: "GIST", bin: 2 }
+          - { text: "Schwannoma", bin: 2 }
+          - { text: "Mallory-Weiss tear", bin: 3 }
+          - { text: "Post sphincterotomy", bin: 3 }
+          - { text: "Cameron ulcer", bin: 3 }
+        why: "الجدول بيقسّم: ulcer/inflammation، vascular، congestive (PHG)، malignant (GIST، non-GIST زي lipoma و schwannoma، cancer، metastases)، post procedural، و others (Mallory-Weiss و Cameron)."
+      - kind: try
+        items: [git.L11.003, git.L11.010, git.L11.012, git.L11.019, git.L11.025]
+    recap:
+      - "UGIB = proximal to the ligament of Treitz، أشهر من الـ lower بـ 4 مرات. Mortality 6-8%."
+      - "Clots في الـ hematemesis = سريع. Melena = بطيء، و 50-100 mL كفاية. Hematochezia من upper = حوالي لتر."
+      - "Peptic ulcer 40%، portal hypertension 10-20%، vascular 7%، erosive gastritis أقل من 5%، neoplasm 1%."
+      - "Dieulafoy = شريان كبير في الـ proximal stomach. Aortoenteric fistula في 2% من الـ grafts."
+    practice: [git.L11.001, git.L11.002, git.L11.003, git.L11.004, git.L11.005, git.L11.006, git.L11.007, git.L11.008, git.L11.009, git.L11.010, git.L11.011, git.L11.012, git.L11.013, git.L11.014, git.L11.015, git.L11.016, git.L11.017, git.L11.018, git.L11.019, git.L11.020, git.L11.021, git.L11.022, git.L11.023, git.L11.024, git.L11.025, git.L11.026, git.L11.027, git.L11.028]
+  # ------------------------------------------------------------------
+  - id: git.L11.lesson2
+    title: "أول ساعة: GBS ومحاليل ودم"
+    hook: "رقم واحد بيقولك المريض يروّح ولا يدخل، وحدّ واحد بيقولك تنقل دم ولا لأ."
+    minutes: 9
+    pages: [301, 309]
+    topics: [risk, resuscitation]
+    goals:
+      - "تحسب الـ Glasgow-Blatchford score وتعرف معنى GBS ≤1"
+      - "تعرف مين يدخل ICU"
+      - "تختار المحلول وحدود نقل الدم"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 301
+        quote: "When the patient with acute bleeding can be discharged and followed up as an outpatient?"
+        title: "خمس أسئلة لأي نزيف"
+        text: |
+          المحاضرة بتقولك اسأل نفسك في كل حالة:
+          - أصنّف الـ ==severity== إزاي؟
+          - الـ initial assessment على حسب الـ severity والنوع؟
+          - إمتى يروّح ويتابع **outpatient**؟
+          - إيه الـ **indications for admission**؟
+          - يدخل فين: **ward** ولا **ICU**؟
+      - kind: explain
+        page: 302
+        quote: "Patients with GBS ≤ 1 are at very low risk of rebleeding, mortality within 30 days, or needing hospital-based intervention"
+        title: "Glasgow-Blatchford قبل المنظار"
+        text: |
+          الـ ==GBS== هو الـ score المنصوح بيه **pre-endoscopy**، وهو الأدق في التنبؤ بالحاجة لـ **hospital-based intervention** (نقل دم، endoscopic treatment، embolization، surgery) أو الوفاة.
+
+          الرقم السحري: ==GBS ≤ 1== = **very low risk**، يروّح ويعمل المنظار **outpatient**.
+      - kind: table
+        page: 309
+        quote: "Table 2: Glasgow-Blatchford score"
+        title: "نقط الـ GBS (Table 2)"
+        columns: ["Factor", "Range", "Points"]
+        rows:
+          - ["BUN (mg/dL)", "18.2-<22.4 / 22.4-<28 / 28-<70 / ≥70", "2 / 3 / 4 / 6"]
+          - ["Hb men (g/dL)", "12-<13 / 10-<12 / <10", "1 / 3 / 6"]
+          - ["Hb women (g/dL)", "10-<12 / <10", "1 / 6"]
+          - ["Systolic BP", "100-109 / 90-99 / <90", "1 / 2 / 3"]
+          - ["Heart rate", "≥100", "1"]
+          - ["Melena", "present", "1"]
+          - ["Syncope, hepatic disease, cardiac failure", "each present", "2 each"]
+        hide: [[0, 2], [1, 2], [3, 2], [5, 2], [6, 2]]
+      - kind: aside
+        tone: tip
+        page: 309
+        quote: "Table 2: Glasgow-Blatchford score"
+        text: |
+          حيلة للحفظ: **4 أرقام + 4 أسئلة آه/لأ**.
+          - الأرقام: **BUN**، **Hb**، **BP**، **pulse**. أعلى نقطة 6 بتاعة BUN ≥70 و Hb <10.
+          - الآه/لأ: **melena = 1**، والتلاتة التانيين (**syncope**، **liver**، **heart failure**) = **2 لكل واحد**.
+
+          الـ endoscopy مش جوه الـ score: علشان كده اسمه **pre-endoscopy**.
+      - kind: case
+        page: 309
+        quote: "Table 2: Glasgow-Blatchford score"
+        stem: "A 64-year-old man with known heart failure has melena. HR 108/min, SBP 96 mmHg, Hb 11 g/dL, BUN 30 mg/dL, no syncope."
+        steps:
+          - question: "Points for BUN 30 mg/dL?"
+            options: ["4", "3", "6", "2"]
+            answer: 0
+            why: "28 لحد أقل من 70 = 4 نقط. الـ 6 محتاجة 70 أو أكتر."
+          - question: "Points for Hb 11 g/dL in a man?"
+            options: ["3", "1", "6", "0"]
+            answer: 0
+            why: "في الراجل 10 لأقل من 12 = 3. (في الست نفس الرقم = 1.)"
+          - question: "Total GBS?"
+            options: ["13", "11", "15", "9"]
+            answer: 0
+            why: "BUN 4 + Hb 3 + SBP 96 = 2 + HR 108 = 1 + melena 1 + cardiac failure 2 = 13."
+          - question: "What does it mean?"
+            options: ["Admit: well above the GBS ≤1 cut-off", "Discharge with outpatient endoscopy", "No endoscopy needed", "Only a repeat Hb tomorrow"]
+            answer: 0
+            why: "GBS ≤1 بس هو اللي يروّح. 13 = محتاج hospital-based care."
+      - kind: explain
+        page: 302
+        quote: "shock, persistent hemodynamic derangement despite fluid resuscitation, serious comorbid medical illness, or evidence of advanced liver disease require admission to an ICU."
+        title: "مين يدخل ICU؟"
+        text: |
+          - **Active bleeding**: hematemesis أو دم أحمر في الـ NG aspirate.
+          - ==Shock==.
+          - **Persistent hemodynamic derangement** رغم المحاليل.
+          - **Serious comorbid illness**.
+          - **Advanced liver disease**.
+      - kind: explain
+        page: 302
+        quote: "either saline 0.9% sodium chloride or balanced crystalloids"
+        title: "المحاليل والـ NG tube"
+        text: |
+          الـ ==early intensive resuscitation== بتقلل الـ mortality، تصلّح الـ hypovolemia، وتمنع الـ multiorgan failure.
+
+          - المحلول: **crystalloids**، يا **0.9% saline** يا **balanced** زي **Ringer's lactate** (قلل الـ mortality والـ renal events في الـ critically ill).
+          - الـ **NG tube** مش روتين. ممكن يفيد في triage حالات مختارة، ولو طلع دم أحمر أو **coffee grounds** يبقى المصدر upper.
+      - kind: explain
+        page: 303
+        quote: "A restrictive red blood cell (RBC) transfusion strategy is considered standard of care in non- massive, acute UGIH both in variceal or nonvariceal."
+        title: "نقل الدم: restrictive"
+        text: |
+          الـ ==restrictive strategy== هي الـ standard of care في النزيف الـ non-massive، variceal أو non-variceal، ومعاها **in-hospital mortality** أقل.
+
+          - من غير قلب: انقل لو **Hb <7**، والهدف **7-9**.
+          - مع **cardiovascular disease**: انقل لو **Hb <8**، والهدف **>10**.
+          - في الدوالي (الدرس 4): خليه حوالي **8**.
+      - kind: check
+        page: 303
+        quote: "in patients with cardiovascular diseases transfusion should start if Hg <8 gm targeting > 10 gm."
+        question: "A 72-year-old with ischaemic heart disease, no longer bleeding, Hb 7.7 g/dL. Transfuse?"
+        options:
+          - "Yes: with cardiovascular disease the threshold is Hb <8"
+          - "No: wait until Hb <7"
+          - "No: transfuse only below 6"
+          - "Yes, to a target of 14"
+        answer: 0
+        why:
+          - "صح: مريض القلب بيتنقله لو أقل من 8، والهدف أكتر من 10."
+          - "الـ 7 للي مالوش مرض قلب."
+          - "الـ 6 مش موجود في المحاضرة."
+          - "الهدف أكتر من 10، مش 14."
+      - kind: try
+        items: [git.L11.031, git.L11.033, git.L11.034, git.L11.043]
+    recap:
+      - "GBS قبل المنظار: 4 أرقام (BUN، Hb، BP، pulse) + melena 1 + syncope/liver/heart 2 لكل واحد."
+      - "GBS ≤1 = very low risk، يروّح والمنظار outpatient."
+      - "ICU: active bleeding، shock، hemodynamics مش بتتظبط، comorbidity خطيرة، advanced liver disease."
+      - "Crystalloids (saline أو Ringer's). NG مش روتين. Restrictive: Hb <7 (هدف 7-9)، مع القلب <8 (هدف >10)."
+    practice: [git.L11.029, git.L11.030, git.L11.031, git.L11.032, git.L11.033, git.L11.034, git.L11.035, git.L11.036, git.L11.037, git.L11.038, git.L11.039, git.L11.040, git.L11.041, git.L11.042, git.L11.043, git.L11.044, git.L11.102, git.L11.103, git.L11.104]
+  # ------------------------------------------------------------------
+  - id: git.L11.lesson3
+    title: "الأسبرين والوارفارين والـ PPI والمنظار"
+    hook: "مريض بنزف وعامل stent من 3 شهور: توقف الأسبرين؟ ده سؤال الكتاب بالظبط."
+    minutes: 10
+    pages: [303, 305]
+    topics: [antithrombotics, drugs, endoscopy]
+    goals:
+      - "تعرف تعمل إيه في كل antithrombotic (سؤال essay)"
+      - "تكتب جرعة الـ PPI صح، وتعرف الـ vasoactive لمين"
+      - "تعرف توقيت المنظار ومين يتعالج وإزاي"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 303
+        quote: "In patients with acute UGIH who are taking low dose aspirin as monotherapy for secondary cardiovascular prophylaxis, aspirin should not be interrupted."
+        title: "الأسبرين: primary ولا secondary؟"
+        text: |
+          السؤال الأول: الأسبرين ده **ليه**؟
+          - ==Primary prophylaxis== (مفيش حدث قلبي قبل كده): **وقّفه مؤقتًا**، وارجع له بعد ما تراجع الـ indication.
+          - ==Secondary prophylaxis== (MI، stent، stroke): **ما توقفوش**. ولو اتوقف لأي سبب، رجّعه بسرعة، **within 3-5 days**.
+          - **DAPT**: خلّي الأسبرين، و**وقّف التاني** (زي clopidogrel) ورجّعه **within 5 days**.
+      - kind: aside
+        tone: analogy
+        page: 303
+        quote: "The second antiplatelet agent should be interrupted, but restarted as soon as possible, preferably within 5 days."
+        text: |
+          الـ stent زي جسر جديد لسه الخرسانة طرية. شيل الأسبرين = تقفل الجسر وتستنى الجلطة. علشان كده في الـ secondary prophylaxis القرحة بتتعالج بالمنظار والـ PPI، والأسبرين يفضل.
+      - kind: explain
+        page: 304
+        quote: "the anticoagulant should be withheld and endoscopy not delayed."
+        title: "الـ anticoagulants"
+        text: |
+          - ==VKA== (warfarin): وقّفه. لو المريض **unstable**: **low-dose vitamin K** + **IV PCC**، أو **FFP** لو مفيش PCC.
+          - ==DOAC==: وقّفه، و**ما تأخرش المنظار**. لو النزيف شديد ومستمر: **reversal agent** أو **IV PCC**.
+          - الرجوع: بعد ما النزيف يتحكم، **within or soon after 7 days** حسب الـ thromboembolic risk. وافتكر إن الـ DOAC بيشتغل أسرع من الـ VKA.
+      - kind: sort
+        page: 303
+        quote: "who are taking low dose aspirin as monotherapy for primary cardiovascular prophylaxis, aspirin should be temporarily interrupted."
+        prompt: "أثناء النزيف: يفضل ولا يتوقف؟"
+        bins: ["Continue", "Withhold / interrupt"]
+        cards:
+          - { text: "Aspirin after a coronary stent", bin: 0 }
+          - { text: "Aspirin in DAPT for secondary prophylaxis", bin: 0 }
+          - { text: "Aspirin for primary prevention only", bin: 1 }
+          - { text: "Clopidogrel in DAPT", bin: 1 }
+          - { text: "Warfarin", bin: 1 }
+          - { text: "Apixaban", bin: 1 }
+        why: "الأسبرين الـ secondary بس هو اللي يفضل (لوحده أو جوه DAPT). الـ primary aspirin، والـ antiplatelet التاني، والـ VKA، والـ DOAC كلهم يتوقفوا ويرجعوا بمواعيد."
+      - kind: explain
+        page: 304
+        quote: "It is advised to start high dose PPI (8 mg/hr) infusion for 72 h following a bolus dose of 80 mg."
+        title: "الـ PPI والأدوية"
+        text: |
+          - ==PPI==: **80 mg bolus** وبعده **8 mg/h** لمدة **72 h**. أو **40 mg كل 12 ساعة** بعد الـ bolus، وبنفس الكفاءة في منع الـ rebleeding.
+          - الـ PPI **قبل المنظار** بيقلل عدد القرح اللي محتاجة endoscopic therapy.
+          - المعتمدين من الـ FDA للـ NVUGIB: **esomeprazole**، **pantoprazole**، **lansoprazole**.
+          - ==Splanchnic vasoconstrictors== (somatostatin، octreotide، terlipressin): **variceal بس**.
+          - **Prokinetic** قبل المنظار يفضّي المعدة ويوضح الرؤية، وأكتر واحد اتدرس **erythromycin**.
+      - kind: check
+        page: 304
+        quote: "It is advised to start high dose PPI (8 mg/hr) infusion for 72 h following a bolus dose of 80 mg."
+        question: "Write the high-dose PPI regimen for a bleeding ulcer."
+        options:
+          - "80 mg IV bolus, then 8 mg/h for 72 h"
+          - "40 mg IV once daily for 72 h"
+          - "8 mg bolus, then 80 mg/h for 24 h"
+          - "Octreotide 50 µg/h for 5 days"
+        answer: 0
+        why:
+          - "صح: 80 bolus ثم 8 في الساعة 72 ساعة (أو 40 كل 12 ساعة)."
+          - "مرة واحدة في اليوم مش high dose."
+          - "الأرقام مقلوبة."
+          - "الـ octreotide للدوالي بس."
+      - kind: explain
+        page: 305
+        quote: "Patients without evidence of active bleeding undergo nonemergent endoscopy usually within 24 hours."
+        title: "المنظار: إمتى وليه"
+        text: |
+          - من غير active bleeding: **within 24 hours**.
+          - Active bleeding (بعد الـ resuscitation) أو **suspected variceal**: ==within 12 hours==.
+          - ممكن يتأخر في comorbidity خطيرة زي **ACS** لو مفيش نزيف مستمر.
+
+          وقيمته تلات حاجات: **etiology**، **prognosis of rebleeding**، و**therapy**.
+      - kind: explain
+        page: 305
+        quote: "Ulcers with active bleeding and non-bleeding visible vessels should receive endoscopic therapy; endoscopic therapy may also be used for ulcers with adherent clots."
+        title: "مين يتعالج بالمنظار؟"
+        text: |
+          - **Active bleeding** و **non-bleeding visible vessel**: لازم ==endoscopic therapy==.
+          - **Adherent clot**: ممكن.
+          - الأدوات: **injection** (epinephrine)، **thermal** (bipolar، heater probe)، أو **clips**.
+          - القاعدة الذهبية: ==epinephrine دايمًا معاه second modality==.
+
+          درجات القرحة دي هي **Forrest classification** اللي اتشرحت في محاضرة 1.
+      - kind: order
+        page: 305
+        quote: "Recurrent bleeding should be treated with repeat endoscopic therapy but subsequent bleeding by transarterial embolization or surgery."
+        prompt: "القرحة نزفت تاني بعد العلاج. رتّب الخطوات:"
+        steps:
+          - "First endoscopic therapy (dual modality)"
+          - "Repeat endoscopic therapy for rebleeding"
+          - "Transarterial embolization or surgery if it bleeds again"
+        why: "أول rebleed = منظار تاني. اللي بعده = TAE أو surgery."
+      - kind: explain
+        page: 305
+        quote: "Patients who have ulcers with high risk lesions (active bleeding, visible vessel, adherent clot) should receive high dose proton pump inhibitors for 72 h."
+        title: "بعد المنظار"
+        text: |
+          - القرح ==high risk== (active bleeding، visible vessel، adherent clot): **high-dose PPI لمدة 72 h**.
+          - الأسبرين الـ **secondary**: يكمل أو يرجع بسرعة بعد الـ hemostasis.
+          - باقي الـ **antithrombotics**: رجوع بدري بيقلل الـ thrombotic events والوفاة.
+      - kind: case
+        page: 305
+        quote: "Epinephrine injection should always be followed by a second modality."
+        stem: "A 66-year-old on aspirin after a stent has melena, HR 112, SBP 92. Endoscopy shows a duodenal ulcer with a visible vessel."
+        steps:
+          - question: "His aspirin?"
+            options: ["Keep it (secondary prophylaxis)", "Stop it for 4 weeks", "Swap it for clopidogrel", "Stop it permanently"]
+            answer: 0
+            why: "Secondary prophylaxis = ما يتوقفش."
+          - question: "Endoscopic treatment of the visible vessel?"
+            options: ["Epinephrine plus clips or thermal probe", "Epinephrine alone", "PPI only, no therapy", "Band ligation"]
+            answer: 0
+            why: "الـ visible vessel لازم يتعالج، والـ epinephrine دايمًا معاه second modality."
+          - question: "After endoscopy?"
+            options: ["High-dose PPI for 72 h", "Oral PPI once daily only", "Octreotide 5 days", "No PPI"]
+            answer: 0
+            why: "High-risk lesion = high-dose PPI 72 ساعة."
+      - kind: try
+        items: [git.L11.051, git.L11.055, git.L11.056, git.L11.063, git.L11.073]
+    recap:
+      - "Aspirin primary: وقّف وراجع. Aspirin secondary: ما توقفش (لو وقف، رجّع خلال 3-5 أيام). DAPT: خلي الأسبرين ووقّف التاني لحد 5 أيام."
+      - "VKA unstable: vitamin K قليل + IV PCC (أو FFP). DOAC: وقّف وما تأخرش المنظار. الرجوع خلال 7 أيام."
+      - "PPI: 80 bolus ثم 8 mg/h لمدة 72 h، أو 40 كل 12 ساعة. Vasoactive للدوالي بس. Erythromycin قبل المنظار."
+      - "المنظار خلال 24 h، أو 12 h لو active أو variceal. Active أو visible vessel = علاج. Epinephrine + second modality."
+    practice: [git.L11.045, git.L11.046, git.L11.047, git.L11.048, git.L11.049, git.L11.050, git.L11.051, git.L11.052, git.L11.053, git.L11.054, git.L11.055, git.L11.056, git.L11.057, git.L11.058, git.L11.059, git.L11.060, git.L11.061, git.L11.062, git.L11.063, git.L11.064, git.L11.065, git.L11.066, git.L11.067, git.L11.068, git.L11.069, git.L11.070, git.L11.071, git.L11.072, git.L11.073, git.L11.099, git.L11.100]
+  # ------------------------------------------------------------------
+  - id: git.L11.lesson4
+    title: "الدوالي: من الـ screening لحد الـ TIPS"
+    hook: "النزيف الـ variceal أخطر، مش علشان الدوالي، علشان الكبد اللي وراها."
+    minutes: 10
+    pages: [305, 312]
+    topics: [variceal]
+    goals:
+      - "تعرف مين يتعمله EGD screening وكل قد إيه"
+      - "تطبّق الـ bundle بتاع النزيف الحاد"
+      - "تختار EVL ولا cyanoacrylate، وإمتى TIPS والـ balloon"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 305
+        quote: "Patients with variceal bleeding have a higher mortality than those with nonvariceal bleeding, and this is largely related to the severity of underlying liver disease."
+        title: "ليه أخطر؟"
+        text: |
+          الـ ==variceal bleeding== الـ mortality بتاعه أعلى من الـ non-variceal، وده بالأساس من **شدة مرض الكبد**.
+
+          - الـ **EGD screening** في الـ cirrhosis **mandatory**: يكتشف الدوالي ويوصفها ويصنّفها.
+          - الدوالي سبب **5-11%** من الـ GI bleeding.
+
+          (المحاضرات hb.L03 و hb.L04 فيها الـ portal hypertension بالتفصيل.)
+      - kind: explain
+        page: 306
+        quote: "Variceal size, red wale marks on varices, and advanced liver disease are risk factors for variceal hemorrhage."
+        title: "مين هينزف؟"
+        text: |
+          - ==Variceal size== (الكبيرة أخطر).
+          - ==Red wale marks==.
+          - **Advanced liver disease**: Child C أكتر من Child A.
+          - **Ascites**.
+          - **MELD** أعلى و comorbidities.
+      - kind: figure
+        page: 310
+        quote: "EGD can be avoided"
+        title: "خريطة الـ screening (p310)"
+        alt: "Flowchart for compensated cirrhosis. If liver stiffness is under 20 kPa and platelets over 150,000, EGD can be avoided with ongoing monitoring. Otherwise screening EGD: no varices leads to EGD every 3 years without ongoing injury or every 2 years with it; small varices under 5 mm lead to EGD every 2 years without ongoing injury or every year with it; medium or large varices lead to NSBB with no follow-up EGD, or EVL every 1 to 4 weeks until eradication then every 6 to 12 months."
+        caption: "لو الـ LS أقل من 20 kPa والصفايح فوق 150,000 ممكن تستغنى عن المنظار. غير كده: المواعيد على حسب حجم الدوالي واستمرار الـ liver injury."
+        svg: |
+          <svg viewBox="0 0 330 470" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L11v1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="80" y="8" width="170" height="30" rx="6" class="fg-ink"/>
+            <text x="165" y="28" text-anchor="middle" class="t-sm t-b">Compensated cirrhosis</text>
+            <path d="M165 38v12" class="fg-arrow" marker-end="url(#L11v1)"/>
+            <rect x="10" y="54" width="310" height="44" rx="6" class="fg-good"/>
+            <text x="20" y="72" class="t-sm t-b">LS &lt;20 kPa and PLT &gt;150,000/µL</text>
+            <text x="20" y="90" class="t-sm">EGD can be avoided; keep monitoring</text>
+            <text x="165" y="118" text-anchor="middle" class="t-sm t-mut">otherwise: screening EGD</text>
+            <path d="M165 122v12" class="fg-arrow" marker-end="url(#L11v1)"/>
+            <rect x="10" y="138" width="310" height="70" rx="6" class="fg-box"/>
+            <text x="20" y="158" class="t-sm t-b">No varices</text>
+            <text x="20" y="178" class="t-sm">No ongoing injury: EGD every 3 yr</text>
+            <text x="20" y="198" class="t-sm">Ongoing injury: EGD every 2 yr</text>
+            <rect x="10" y="218" width="310" height="70" rx="6" class="fg-acc"/>
+            <text x="20" y="238" class="t-sm t-b">Small varices (&lt;5 mm)</text>
+            <text x="20" y="258" class="t-sm">No injury or cofactor: every 2 yr</text>
+            <text x="20" y="278" class="t-sm">Ongoing injury/cofactor: every year</text>
+            <rect x="10" y="298" width="310" height="110" rx="6" class="fg-bad"/>
+            <text x="20" y="318" class="t-sm t-b">Medium or large varices</text>
+            <text x="20" y="340" class="t-sm">NSBBs: no follow-up EGD</text>
+            <text x="20" y="362" class="t-sm">EVL: EGD every 1-4 wk until</text>
+            <text x="20" y="378" class="t-sm">eradication, then every 6-12 mo</text>
+            <text x="10" y="440" class="t-sm t-mut">Bigger varices or ongoing injury = shorter intervals.</text>
+          </svg>
+      - kind: check
+        page: 310
+        quote: "EGD can be avoided"
+        question: "Compensated cirrhosis, still drinking, screening EGD shows small varices (<5 mm). Next EGD?"
+        options:
+          - "Every year"
+          - "Every 2 years"
+          - "Every 3 years"
+          - "No follow-up"
+        answer: 0
+        why:
+          - "صح: small varices + ongoing injury (الكحول) = كل سنة."
+          - "كل سنتين لو small varices من غير ongoing injury."
+          - "كل 3 سنين لو مفيش دوالي ولا injury."
+          - "No follow-up بس للـ medium/large على NSBB."
+      - kind: explain
+        page: 306
+        quote: "Short-term (maximum 7 days) antibiotic prophylaxis should be instituted in any patient with cirrhosis and GI hemorrhage"
+        title: "الـ bundle في النزيف الحاد"
+        text: |
+          نزيف عند مريض cirrhosis = **emergency**:
+          - **Volume support** ونقل دم، مع ==Hb حوالي 8== (ما تزوّدش).
+          - ==Antibiotics== **max 7 days** لكل مريض cirrhosis بينزف: **norfloxacin 400 mg BID** أو **IV ciprofloxacin**، و**IV ceftriaxone 1 g/day** أفضل في الـ advanced cirrhosis أو لو الـ quinolone resistance عالية.
+          - ==Vasoactive drug== (somatostatin، octreotide، vapreotide، terlipressin) **أول ما تشك**، ويكمل **3-5 days**.
+          - الـ **PPI** في الـ cirrhosis بيزوّد الـ infections والـ SBP. البداية قبل المنظار debated بس شائعة.
+      - kind: mnemonic
+        page: 306
+        quote: "should be initiated as soon as variceal hemorrhage is suspected and continued for 3–5 days after diagnosis is confirmed."
+        word: "BAVE"
+        parts:
+          - { key: "B", text: "Blood: restrictive, Hb about 8 g/dL" }
+          - { key: "A", text: "Antibiotics: max 7 days (ceftriaxone 1 g/day in advanced cirrhosis)" }
+          - { key: "V", text: "Vasoactive drug as soon as suspected, for 3-5 days" }
+          - { key: "E", text: "Endoscopy within 12 h: band ligation" }
+        hook: |
+          **BAVE** زي **Baveno** من غير "no" 😄. أربع حاجات قبل ما تفكر في أي حاجة تانية.
+      - kind: update
+        page: 306
+        quote: "Oral norfloxacin(400 mg BID) or intravenous ciprofloxacin (in patients in whom oral administration is not possible) is the recommended antibiotic."
+        text: |
+          الـ **Baveno VII** بقى يفضّل **IV ceftriaxone 1 g/24 h** لحد 7 أيام كاختيار أساسي، حسب الـ resistance المحلية، والـ norfloxacin مش متاح في أماكن كتير. في الامتحان اكتب كلام الكتاب (norfloxacin أو cipro، و ceftriaxone في الـ advanced).
+        ref: "Baveno VII consensus, 2022"
+      - kind: explain
+        page: 307
+        quote: "The optimal endoscopic therapy for esophageal variceal bleeding is variceal band ligation, which is associated with less rebleeding and fewer side effects than sclerotherapy."
+        title: "المنظار: rubber band ولا غِرا؟"
+        text: |
+          - **Esophageal varices**: ==band ligation== (rebleeding أقل و side effects أقل من الـ sclerotherapy).
+          - **GOV1** (دوالي المريء نازلة على الـ lesser curve): ligation برضه.
+          - **أي gastric varices تانية**: ==tissue adhesive== (**N-butyl-cyanoacrylate**)، وممكن **thrombin**.
+      - kind: explain
+        page: 307
+        quote: "Balloon tamponade should be used as a temporizing measure (maximum 24 hours) in patients with uncontrollable bleeding"
+        title: "لو ما وقفش"
+        text: |
+          - ==TIPS==: لو النزيف مش بيتحكم، أو رجع رغم الـ drug + endoscopic therapy.
+          - ==Balloon tamponade==: **temporizing**، **max 24 hours**، لحد ما الـ TIPS أو المنظار يتعمل.
+      - kind: update
+        page: 307
+        quote: "TIPS is indicated in patients in whom hemorrhage from esophageal varices cannot be controlled"
+        text: |
+          الـ **Baveno VII** كمان بينصح بـ **pre-emptive TIPS** خلال 72 ساعة (أحسن خلال 24) للـ high risk: Child C أقل من 14 نقطة، أو Child B فوق 7 مع active bleeding في المنظار، أو HVPG فوق 20. الكتاب بيذكر الـ TIPS للفشل أو الرجوع بس، ودي إجابة الامتحان.
+        ref: "Baveno VII consensus, 2022"
+      - kind: explain
+        page: 307
+        quote: "Combination of NSBB/EVL is first-line therapy in the prevention of rebleeding."
+        title: "بعد ما يعدّي"
+        text: |
+          - الـ **rebleeding** بعد أول نزيف: ==60% في أول سنة==، والـ mortality لحد **33%**.
+          - الوقاية: ==NSBB + EVL== هي الـ first line.
+          - لو ينفع transplant: حوّله لـ **transplant center**.
+      - kind: table
+        page: 310
+        quote: "Table 3 The Child–Pugh score."
+        title: "Child-Pugh في الجدول ده (SI units)"
+        columns: ["Criterion", "1 point", "3 points"]
+        rows:
+          - ["Bilirubin (µmol/L)", "<34", ">50"]
+          - ["Albumin (g/L)", ">35", "<28"]
+          - ["INR", "<1.7", ">2.3"]
+          - ["Ascites", "None", "Severe (diuretic refractory)"]
+          - ["HE", "None", "Grade 3-4"]
+        hide: [[0, 2], [1, 2], [2, 1], [2, 2]]
+      - kind: aside
+        tone: trap
+        page: 310
+        quote: "Table 3 The Child–Pugh score."
+        text: |
+          جدول **Table 3** هنا بالـ **SI units** والـ **INR** (bilirubin 34-50 µmol/L، albumin 28-35 g/L، INR 1.7-2.3)، مش زي جدول hb.L01 اللي بالـ mg/dL والـ PT seconds. الـ classes نفسها: **A 5-6، B 7-9، C 10-15**. وجدول **MELD** (Table 4، ص 311): 3.78 ln bilirubin + 11.2 ln INR + 9.57 ln creatinine + 6.43، وأي قيمة أقل من 1 تتحسب 1، والـ dialysis مرتين في أسبوع = creatinine 4.
+      - kind: case
+        page: 307
+        quote: "TIPS is indicated in patients in whom hemorrhage from esophageal varices cannot be controlled"
+        stem: "A 49-year-old with alcohol-related cirrhosis and ascites vomits a large amount of fresh blood."
+        steps:
+          - question: "Which drug starts now, before endoscopy?"
+            options: ["Terlipressin or octreotide", "Pantoprazole alone", "Propranolol", "Tranexamic acid"]
+            answer: 0
+            why: "الـ vasoactive أول ما تشك، ويكمل 3-5 أيام."
+          - question: "Antibiotic?"
+            options: ["IV ceftriaxone 1 g/day, up to 7 days", "None unless febrile", "Rifaximin long term", "Norfloxacin for 6 months"]
+            answer: 0
+            why: "كل cirrhosis بينزف ياخد antibiotic لحد 7 أيام، والـ ceftriaxone أحسن في الـ advanced."
+          - reveal: "Endoscopy within 12 h: bleeding esophageal varices, banded. He rebleeds 2 days later despite terlipressin."
+            question: "Definitive rescue?"
+            options: ["TIPS", "Balloon tamponade for 3 days", "Sclerotherapy", "Surgery"]
+            answer: 0
+            why: "رجوع النزيف رغم الـ drug + endoscopy = TIPS. الـ balloon كوبري 24 ساعة بس."
+      - kind: try
+        items: [git.L11.077, git.L11.087, git.L11.089, git.L11.091, git.L11.098]
+    recap:
+      - "Variceal أخطر بسبب الكبد. EGD screening في كل cirrhosis، إلا لو LS أقل من 20 kPa والصفايح فوق 150,000."
+      - "Risk: الحجم، red wale، Child C، ascites، MELD عالي."
+      - "BAVE: Blood (Hb ~8)، Antibiotics (max 7 أيام)، Vasoactive (أول ما تشك، 3-5 أيام)، Endoscopy (EVL خلال 12 h)."
+      - "Gastric varices غير GOV1 = cyanoacrylate. فشل أو رجوع = TIPS. Balloon max 24 h."
+      - "Rebleeding 60% في سنة، mortality لحد 33%. الوقاية NSBB + EVL، وحوّل للـ transplant."
+    practice: [git.L11.074, git.L11.075, git.L11.076, git.L11.077, git.L11.078, git.L11.079, git.L11.080, git.L11.081, git.L11.082, git.L11.083, git.L11.084, git.L11.085, git.L11.086, git.L11.087, git.L11.088, git.L11.089, git.L11.090, git.L11.091, git.L11.092, git.L11.093, git.L11.094, git.L11.095, git.L11.096, git.L11.097, git.L11.098, git.L11.101]

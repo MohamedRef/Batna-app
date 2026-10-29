@@ -105,8 +105,9 @@ fn Sheet(draft: Draft) -> Element {
         DraftKind::Edit => tx::FORM_EDIT,
         DraftKind::Shared => tx::FORM_SHARED,
     };
+    let lib = Library::get();
     let lectures: Vec<(String, String)> =
-        Library::get().index.lectures.iter().map(|e| (e.id.clone(), e.title.clone())).collect();
+        lib.index.lectures.iter().map(|e| (e.id.clone(), lib.crumb(&e.id))).collect();
     let mut invalid = use_signal(|| None::<(Field, Problem)>);
     let close = move || *DRAFT.write() = None;
     // A failed check or save keeps every word he typed: the sheet stays

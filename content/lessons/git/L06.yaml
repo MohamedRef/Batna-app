@@ -1,0 +1,807 @@
+schema: batna.lesson/v1
+lecture: git.L06
+lessons:
+  # ------------------------------------------------------------------
+  - id: git.L06.lesson1
+    title: "الـ IBD: مناعة زعلانة من بكتيريا صاحبتها"
+    hook: "بكتيريا عايشة معانا من زمان وفجأة المناعة قررت تتخانق معاها: دي حكاية الـ IBD."
+    minutes: 8
+    pages: [206, 208]
+    topics: [epidemiology, etiology]
+    goals:
+      - "تعرّف الـ IBD والنوعين بتوعه"
+      - "تحفظ أرقام الـ incidence والسن من غير لخبطة"
+      - "تفهم ليه السجاير بتأذي الـ Crohn وبتحمي من الـ UC"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 206
+        title: "يعني إيه IBD؟"
+        quote: "Inflammatory Bowel Disease is a chronic inflammatory condition of the intestines that is marked by remission and relapses"
+        text: |
+          الـ ==Inflammatory Bowel Disease== هو **chronic inflammatory condition** في الأمعاء، ماشي بنظام **remission and relapses**: يهدى شوية ويرجع يولّع.
+
+          وبيتقسم لنوعين كبار:
+          - **Ulcerative colitis (UC)**
+          - **Crohn disease (CD)**
+
+          الاتنين أصلهم واحد: **dysregulated mucosal immune response** ضد مكونات الـ **normal commensal microbiota**، يعني البكتيريا الطبيعية اللي الناس السليمة عايشة معاها في سلام.
+      - kind: aside
+        tone: analogy
+        page: 206
+        quote: "derived from a dysregulated mucosal immune response to antigenic components of the normal commensal microbiota"
+        text: |
+          تخيّل عمارة فيها بوّاب (المناعة) والسكان الطيبين (الـ **commensal bacteria**). البوّاب الطبيعي بيعدّيهم كل يوم عادي.
+
+          في الـ IBD البوّاب اتلخبط وبقى يمسك كل ساكن على الباب ويعمل له محضر. الساكن ما عملش حاجة، بس الخناقة نفسها هي اللي بتبوّظ مدخل العمارة (الـ mucosa).
+      - kind: table
+        page: 206
+        quote: "The incidence of ulcerative colitis in North America is estimated to be 8–15 per 100,000 persons, with a prevalence of 170–230 per 100,000"
+        title: "الأرقام في North America (لكل 100,000)"
+        columns: ["", Incidence, Prevalence]
+        rows:
+          - [Ulcerative colitis, "8–15", "170–230"]
+          - [Crohn disease, "5–15", "140–200"]
+        hide: [[0, 1], [0, 2], [1, 2]]
+      - kind: explain
+        page: 206
+        title: "مين بيجيله أكتر؟"
+        quote: "found in developed nations, northern locale (at least within the northern hemisphere), and urban"
+        text: |
+          الـ IBD أكتر في:
+          - **developed nations**
+          - **northern locale** (في نص الكرة الشمالي)
+          - **urban environments**
+          - **Caucasians**
+          - **Jewish ethnicity**
+
+          وفي الدول الصناعية الـ **Crohn** زاد جامد في آخر نص قرن، والـ **UC** فضل ثابت تقريبًا. أما في الدول النامية فالاتنين زادوا **dramatically**.
+      - kind: check
+        page: 207
+        quote: "The median age of diagnosis for Crohn disease and ulcerative colitis is the third and fourth decades of life, respectively."
+        question: "Median age at diagnosis of Crohn disease and UC, per the book?"
+        options:
+          - "Crohn: third decade; UC: fourth decade"
+          - "Crohn: fourth decade; UC: third decade"
+          - "Both in the sixth decade"
+          - "Both in childhood"
+        answer: 0
+        why:
+          - "صح: الكتاب بيقول **third and fourth decades, respectively**. والـ Crohn أصغر، زي ما هو أشقى."
+          - "معكوسة: الـ Crohn هو اللي في العقد التالت."
+          - "العقد السادس والسابع ده **second smaller peak**، وأوضح في الـ UC."
+          - "بيبدأ بدري (adolescence) بس الـ median مش في الطفولة."
+      - kind: explain
+        page: 207
+        title: "السبب: تلات حاجات مع بعض"
+        quote: "interplay of genetic, microbial, and immunologic factors clearly exists"
+        text: |
+          السبب لسه **elusive**، بس فيه تفاعل بين تلاتة:
+
+          - **Genetic:** في الـ Crohn فيه ==NOD2/CARD15== على **chromosome 16** و **IL23R** على **chromosome 1**. الاتنين ليهم دور في تنظيم المناعة في الأمعاء، بس الـ mutations دي موجودة في **minority** بس من العيانين.
+          - **Microbial:** تجارب الحيوانات بيّنت إن وجود الـ commensal bacteria **necessary** علشان الـ IBD يحصل.
+          - **Immune:** هنشوفها كمان شوية.
+      - kind: figure
+        page: 207
+        quote: "Cigarette smoking increases the risk for Crohn disease but is protective for ulcerative colitis."
+        title: "الـ environment: مين بيزوّد ومين بيحمي"
+        alt: "Two columns. Left, red: factors that raise risk: smoking for Crohn, oral contraceptives and NSAIDs for IBD. Right, green: protective factors for UC: smoking and appendectomy."
+        caption: "السجاير هي الحاجة الوحيدة اللي في العمودين: بتزوّد الـ **Crohn** وبتحمي من الـ **UC**. وده مش مبرر تشرب سجاير طبعًا."
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <rect x="5" y="5" width="155" height="240" rx="8" class="fg-bad"/>
+            <rect x="170" y="5" width="155" height="240" rx="8" class="fg-good"/>
+            <text x="82" y="30" text-anchor="middle" class="t-b t-bad">Raise risk</text>
+            <text x="247" y="30" text-anchor="middle" class="t-b t-good">Protect (UC)</text>
+            <rect x="15" y="50" width="135" height="50" rx="6" class="fg-box"/>
+            <text x="82" y="72" text-anchor="middle" class="t-b">Smoking</text>
+            <text x="82" y="90" text-anchor="middle" class="t-sm t-mut">Crohn disease</text>
+            <rect x="15" y="112" width="135" height="50" rx="6" class="fg-box"/>
+            <text x="82" y="134" text-anchor="middle" class="t-b">Oral contraceptives</text>
+            <text x="82" y="152" text-anchor="middle" class="t-sm t-mut">IBD</text>
+            <rect x="15" y="174" width="135" height="50" rx="6" class="fg-box"/>
+            <text x="82" y="196" text-anchor="middle" class="t-b">NSAIDs</text>
+            <text x="82" y="214" text-anchor="middle" class="t-sm t-mut">IBD</text>
+            <rect x="180" y="50" width="135" height="50" rx="6" class="fg-box"/>
+            <text x="247" y="72" text-anchor="middle" class="t-b">Smoking</text>
+            <text x="247" y="90" text-anchor="middle" class="t-sm t-mut">Ulcerative colitis</text>
+            <rect x="180" y="112" width="135" height="50" rx="6" class="fg-box"/>
+            <text x="247" y="134" text-anchor="middle" class="t-b">Appendectomy</text>
+            <text x="247" y="152" text-anchor="middle" class="t-sm t-mut">may protect, UC</text>
+          </svg>
+      - kind: mnemonic
+        page: 207
+        quote: "Both oral contraceptive and nonsteroidal anti-inflammatory medications have been implicated as risk factors for IBD. Appendectomy may protect against the UC."
+        word: "SCAN"
+        parts:
+          - { key: "S", text: "Smoking: raises Crohn, protects UC" }
+          - { key: "C", text: "Contraceptives (oral): risk factor for IBD" }
+          - { key: "A", text: "Appendectomy: may protect against UC" }
+          - { key: "N", text: "NSAIDs: risk factor for IBD" }
+        hook: "قبل ما تعمل **SCAN** للقولون، اسأل عن الأربع حاجات دول في الـ history."
+      - kind: explain
+        page: 208
+        title: "المناعة: Th1 و Th17 ضد Th2"
+        quote: "Crohns disease (CD) may preferentially exhibit overactivity of Th1 and Th17 cells, and ulcerative colitis (UC) may exhibit overactivity of Th2 cells"
+        text: |
+          الـ **GALT** طبيعته غريبة: فيه **physiologic inflammation** دايمًا، وبيميل يكبت المناعة (**oral tolerance**)، وبيطلّع **secretory immunoglobulins**.
+
+          الـ IBD في الآخر سببه إن الـ **proinflammatory mediators** بقت أكتر من الـ anti-inflammatory، جاية من خلايا الـ adaptive (T helper) والـ innate (macrophages و dendritic cells).
+
+          - **Crohn:** ==Th1 و Th17==
+          - **UC:** **Th2**
+          - الاتنين: زيادة **TNF** و **IL-6**، مع overlap كبير.
+      - kind: aside
+        tone: tip
+        page: 208
+        quote: "Excess production of cytokines derived from innate immune pathways (tumor necrosis factor [TNF] and interleukin-6 [IL-6]) occurs in both CD and UC."
+        text: |
+          افتكرها كده: **Crohn** فيه حرف **C** زي **Cell-mediated** (Th1). و الـ **UC** فاضل له **Th2**.
+
+          والـ **TNF** مشترك في الاتنين، وده سبب إن نفس الـ anti-TNF بيشتغل فيهم.
+      - kind: try
+        items: [git.L06.002, git.L06.007, git.L06.013, git.L06.017]
+    recap:
+      - "IBD = chronic relapsing inflammation من **dysregulated immune response** للـ commensal bacteria."
+      - "UC: incidence 8–15، prevalence 170–230. Crohn: 5–15 و 140–200 (لكل 100,000)."
+      - "Crohn العقد التالت، UC الرابع، وفيه peak تاني في 6–7 أوضح في UC. الجنسين زي بعض."
+      - "NOD2/CARD15 (chr 16) و IL23R (chr 1) في الـ Crohn، بس في minority."
+      - "**SCAN**: Smoking، Contraceptives، Appendectomy، NSAIDs."
+    practice: [git.L06.001, git.L06.002, git.L06.003, git.L06.004, git.L06.005, git.L06.006, git.L06.007, git.L06.008, git.L06.009, git.L06.010, git.L06.011, git.L06.012, git.L06.013, git.L06.014, git.L06.015, git.L06.016, git.L06.017, git.L06.018, git.L06.019]
+  # ------------------------------------------------------------------
+  - id: git.L06.lesson2
+    title: "الـ Crohn: من البُق للشرج وعامل نُقَط"
+    hook: "مرض بيخرم الحيطة كلها وبينط من مكان لمكان: اعرف شكله وتصنيفه والعيان بيشتكي من إيه."
+    minutes: 9
+    pages: [208, 218]
+    topics: [cd-pattern, cd-clinical]
+    goals:
+      - "تفهم ليه الـ transmural بيعمل fistula و stricture"
+      - "تصنّف أي Crohn بالـ Montreal في ثانية"
+      - "تربط كل fistula بالعَرَض بتاعها"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 208
+        title: "الـ Crohn بيخرم الحيطة كلها"
+        quote: "The inflammation in Crohn disease is typically transmural. This frequently leads to complications from perforating disease or from progressive fibrosis and stricturing."
+        text: |
+          Dr. Crohn وصف المرض في أمريكا سنة **1932**.
+
+          أهم كلمة فيه: ==transmural==. الالتهاب مش واقف عند الـ mucosa، ده واخد الحيطة كلها. وعلشان كده بيعمل حاجتين:
+          - **perforating disease**: abscesses و fistulae
+          - **fibrosis and stricturing**: تضيّق
+
+          وبيقدر يمسك **any part of the alimentary canal** بشكل **skip lesions**: حتة عيانة، حتة سليمة، حتة عيانة.
+      - kind: figure
+        page: 208
+        quote: "Nearly half of all patients with Crohn disease have inflammation localized to the Terminal ileum and cecum"
+        title: "فين الـ Crohn بيحب يقعد؟"
+        alt: "Sketch of the gut from mouth to anus. Patchy red segments mark Crohn skip lesions; the terminal ileum and cecum are shaded darkest and labelled 'nearly half'. The upper GI tract is faint and labelled rare, only with small bowel or colonic disease. A perianal fistula is drawn near the anus."
+        caption: "نُص العيانين تقريبًا الالتهاب عندهم في ==terminal ileum and cecum==. الـ upper GI نادر جدًا ومش بيجي لوحده من غير small bowel أو colon."
+        svg: |
+          <svg viewBox="0 0 330 360" xmlns="http://www.w3.org/2000/svg">
+            <text x="165" y="20" text-anchor="middle" class="t-b">Crohn: skip lesions, mouth to anus</text>
+            <rect x="140" y="34" width="50" height="60" rx="10" class="fg-thin"/>
+            <text x="200" y="58" class="t-sm t-mut">Esophagus, stomach,</text>
+            <text x="200" y="74" class="t-sm t-mut">duodenum: rare</text>
+            <path d="M165 94 C 60 110, 60 150, 165 160 C 270 170, 270 200, 165 210" class="fg-ink" fill="none" stroke-width="10"/>
+            <path d="M92 128 C 88 136, 90 142, 96 148" class="fg-arrow-bad" fill="none" stroke-width="10"/>
+            <path d="M232 178 C 240 186, 240 192, 232 198" class="fg-arrow-bad" fill="none" stroke-width="10"/>
+            <text x="20" y="118" class="t-sm">Small bowel</text>
+            <circle cx="165" cy="232" r="22" class="fg-bad"/>
+            <text x="165" y="237" text-anchor="middle" class="t-sm t-b">TI</text>
+            <text x="196" y="228" class="t-sm t-b">Terminal ileum + cecum</text>
+            <text x="196" y="244" class="t-sm t-bad t-b">nearly half of patients</text>
+            <rect x="60" y="262" width="210" height="22" rx="8" class="fg-acc"/>
+            <rect x="120" y="262" width="40" height="22" rx="4" class="fg-dot-bad"/>
+            <text x="165" y="300" text-anchor="middle" class="t-sm">Colon: patchy; rectum often spared</text>
+            <rect x="150" y="310" width="30" height="24" rx="6" class="fg-box"/>
+            <path d="M180 326 l40 14" class="fg-arrow-bad" stroke-width="3"/>
+            <text x="225" y="345" class="t-sm t-bad">Perianal fistula</text>
+          </svg>
+      - kind: order
+        page: 208
+        quote: "inflammatory disease frequently progresses to penetrating disease, and then to fibrosis and stricturing"
+        prompt: "الـ Crohn behaviour بيتطور عند نفس العيان إزاي؟ رتّب:"
+        steps:
+          - "Inflammatory"
+          - "Penetrating (abscess, fistula)"
+          - "Fibrosis and stricturing"
+        why: "الكتاب: الـ inflammatory غالبًا بيبقى **penetrating** وبعدين **fibrosis and stricturing**. يعني الـ behaviour مش ثابت عند نفس العيان."
+      - kind: table
+        page: 218
+        quote: "A1 <16 years A2 17-40 years A3 >40 years"
+        title: "Montreal classification of Crohn (Table 1)"
+        columns: [Domain, Codes]
+        rows:
+          - ["Age (A)", "A1 <16 · A2 17–40 · A3 >40"]
+          - ["Location (L)", "L1 ileal · L2 colonic · L3 ileocolonic · L4 isolated upper"]
+          - ["Behaviour (B)", "B1 non-stricturing non-penetrating · B2 stricturing · B3 penetrating"]
+          - ["Modifier", "p = perianal disease"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1]]
+      - kind: aside
+        tone: exam
+        page: 218
+        quote: "A1 < 40 years A2 >40 years"
+        text: |
+          الفرق بين **Vienna** و **Montreal** سؤال حلو:
+          - Vienna: سنّين بس (**A1 <40**، **A2 >40**).
+          - Montreal: تلاتة (**A1 <16**، **A2 17–40**، **A3 >40**)، و L4 بقت **isolated upper**، وزوّد الـ **p** للـ perianal.
+
+          افتكر **16 و 40**: الـ Montreal فصل الأطفال لوحدهم.
+      - kind: check
+        page: 218
+        quote: "B1 non-stricturing, non-penetrating B2 stricturing B3 penetratng p perianal disease modifier"
+        question: "A 45-year-old has colonic Crohn with an enterovesical fistula. Montreal code?"
+        options:
+          - "A3 L2 B3"
+          - "A2 L2 B3"
+          - "A3 L3 B2"
+          - "A3 L2 B1p"
+        answer: 0
+        why:
+          - "صح: فوق 40 = **A3**، colonic = **L2**، fistula = penetrating = **B3**."
+          - "A2 من 17 لـ 40، وهو 45."
+          - "مفيش ileum هنا، ومفيش stricture."
+          - "الـ fistula دي للـ bladder مش perianal، والـ behaviour penetrating مش B1."
+      - kind: explain
+        page: 209
+        title: "العيان بيشتكي من إيه؟"
+        quote: "Abdominal pain and diarrhea are the most typical symptoms. Unlike ulcerative colitis, the diarrhea in Crohn disease is often nonbloody."
+        text: |
+          البداية **insidious**، والـ course متغيّر جدًا: نوبات ونوبات هدوء.
+
+          - أشهر حاجتين: **abdominal pain** و **diarrhea**.
+          - الإسهال غالبًا ==nonbloody== (عكس الـ UC).
+          - **fever** و **weight loss** شائعين.
+
+          والقاعدة: الـ **location** والـ **phenotype** والـ **severity** هما اللي بيحددوا الأعراض.
+      - kind: match
+        page: 209
+        quote: "gut—diarrhea, weight loss; skin—drainage; vagina—drainage; bladder—pneumaturia"
+        prompt: "وصّل كل fistula بالعَرَض بتاعها:"
+        pairs:
+          - ["Entero-enteric (gut)", "Diarrhea, weight loss"]
+          - ["Enterovesical (bladder)", "Pneumaturia"]
+          - ["Enterocutaneous (skin)", "Drainage on the skin"]
+          - ["Perianal", "Pain and purulent or fecal drainage"]
+        why: "الـ fistula بتوصّل الأمعاء بعضو تاني، فالعَرَض بيطلع في العضو ده: هوا في البول لو bladder، إفرازات لو skin أو vagina، وإسهال لو وصّلت الأمعاء ببعضها (short circuit)."
+      - kind: aside
+        tone: joke
+        page: 209
+        quote: "bladder—pneumaturia"
+        text: |
+          عيان Crohn قالك «يا دكتور بعمل حمّام وبيطلع فقاقيع زي البيبسي» 🥤
+
+          ده مش مشروب غازي، ده **pneumaturia**: الـ fistula وصلت الـ bladder.
+      - kind: explain
+        page: 209
+        title: "والكشف؟"
+        quote: "Signs of Crohn disease include abdominal tenderness, most classically in the right lower quadrant. An abdominal mass may be palpable."
+        text: |
+          - **tenderness** في الـ ==right lower quadrant== (مكان الـ terminal ileum).
+          - ممكن **abdominal mass**.
+          - **temporal wasting** و **cachexia**: malnutrition شديد.
+          - في الـ stenosing: علامات **small bowel obstruction** (distention، tympany، high-pitched bowel sounds).
+          - افحص الـ perineum والجلد كويس: الـ fistulae بتبان بسهولة.
+      - kind: reveal
+        page: 209
+        quote: "Perianal disease, including abscesses and fistulae, is commonly encountered, particularly in conjunction with terminal ileal disease."
+        prompt: "عيان عنده RLQ pain و perianal fistula. تتوقع الـ Crohn فين بالظبط؟"
+        answer: "في الـ **terminal ileum**. الكتاب بيقول الـ perianal disease شائع **particularly in conjunction with terminal ileal disease**، والـ RLQ tenderness هو مكان الـ TI."
+      - kind: try
+        items: [git.L06.022, git.L06.028, git.L06.033, git.L06.035, git.L06.041]
+    recap:
+      - "Crohn = **transmural** + **skip lesions** + أي حتة من البُق للشرج."
+      - "Phenotypes: inflammatory → penetrating → stricturing."
+      - "نُص العيانين: terminal ileum + cecum. الـ upper GI نادر ومش لوحده."
+      - "Montreal: A1 <16، A2 17–40، A3 >40؛ L1–L4؛ B1–B3؛ p perianal."
+      - "إسهال غالبًا nonbloody، RLQ tenderness، والـ fistula عَرَضها في العضو اللي وصلته."
+    practice: [git.L06.020, git.L06.021, git.L06.022, git.L06.023, git.L06.024, git.L06.025, git.L06.026, git.L06.027, git.L06.028, git.L06.029, git.L06.030, git.L06.031, git.L06.032, git.L06.033, git.L06.034, git.L06.035, git.L06.036, git.L06.037, git.L06.038, git.L06.039, git.L06.040, git.L06.041, git.L06.131]
+  # ------------------------------------------------------------------
+  - id: git.L06.lesson3
+    title: "الـ Crohn: التحاليل والأشعة والمضاعفات"
+    hook: "من الـ calprotectin للـ creeping fat لحصوة الكلى: كل حاجة الـ Crohn بيسيبها وراه."
+    minutes: 10
+    pages: [210, 212]
+    topics: [cd-labs, cd-imaging, cd-complications]
+    goals:
+      - "تعرف ليه مفيش test واحد بيشخّص الـ Crohn"
+      - "تختار الأشعة الصح لكل سؤال"
+      - "تفهم حكاية الـ 100 cm ileum والـ oxalate stones"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 210
+        title: "التحاليل: مفيش test سحري"
+        quote: "No single laboratory test is diagnostic or specific for Crohn disease."
+        text: |
+          **No single laboratory test** بيشخّص الـ Crohn. اللي هتلاقيه:
+          - **anemia**، غالبًا ==iron deficiency==
+          - **leukocytosis** و **thrombocytosis** (systemic inflammation)
+          - **low albumin**: protein-losing enterocolitis أو malnutrition
+          - نقص **calcium، magnesium، B12، D، folate** من الـ malabsorption
+          - **CRP** عالي (والـ ESR أقل منه)
+      - kind: explain
+        page: 210
+        title: "البراز والـ serology"
+        quote: "Stool inflammatory markers like fecal lactoferrin and calprotectin, are available that can help distinguish IBD from irritable bowel syndrome (IBS)"
+        text: |
+          **البراز:** ممكن **excess fat** (malabsorption) أو **fecal leukocytes** (inflammation). ولازم يطلع **negative** للـ bacteria والـ C. difficile والـ ova and parasites.
+
+          ==Fecal calprotectin== و **lactoferrin**: بيفرّقوا الـ IBD عن الـ **IBS**، وبيقيسوا الـ activity، ويتوقعوا الـ flare، ويتابعوا العلاج.
+
+          **Serology:** **ASCA**، **Omp-C**، **I2**، **CBir-1** مع الـ Crohn. والـ **P-ANCA** مع الـ UC والـ Crohn colitis. كلهم **limited diagnostic accuracy** لوحدهم.
+      - kind: check
+        page: 210
+        quote: "fecal lactoferrin and calprotectin, are available that can help distinguish IBD from irritable bowel syndrome (IBS)"
+        question: "Young woman, loose stools with cramps for months, normal exam. Best test to separate IBD from IBS?"
+        options:
+          - "Fecal calprotectin"
+          - "Serum ASCA"
+          - "Fecal fat"
+          - "ESR"
+        answer: 0
+        why:
+          - "صح: ده بالظبط استخدام الـ calprotectin في الكتاب."
+          - "الـ serology لوحدها limited accuracy."
+          - "الـ fecal fat بيقيس malabsorption مش inflammation."
+          - "الـ ESR nonspecific."
+      - kind: figure
+        page: 211
+        quote: "Common abnormalities of the gut include thickening and excessive mesenteric fat proliferation (so-called creeping fat)."
+        title: "اختار الأشعة المناسبة"
+        alt: "Five stacked boxes pairing each imaging test with what it is best for: plain film for obstruction and megacolon; CT for wall thickening, creeping fat, abscess; MR enterography for mild disease without radiation; MRI pelvis for perianal fistula; intestinal ultrasound safe without radiation or contrast."
+        caption: "كل أشعة ليها شغلانة: الـ **plain film** للـ obstruction، الـ **CT** للـ creeping fat والـ abscess، الـ **MRE** أحسن في الـ mild disease، والـ **MRI pelvis** للـ perianal fistula."
+        svg: |
+          <svg viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg">
+            <rect x="5" y="5" width="320" height="56" rx="8" class="fg-box"/>
+            <text x="15" y="28" class="t-b">Plain abdominal film</text>
+            <text x="15" y="48" class="t-sm t-mut">Obstruction, megacolon; otherwise limited</text>
+            <rect x="5" y="70" width="320" height="56" rx="8" class="fg-acc"/>
+            <text x="15" y="93" class="t-b">CT / CT enterography</text>
+            <text x="15" y="113" class="t-sm">Wall thickening, creeping fat, abscess, mass</text>
+            <rect x="5" y="135" width="320" height="56" rx="8" class="fg-good"/>
+            <text x="15" y="158" class="t-b">MR enterography</text>
+            <text x="15" y="178" class="t-sm">Better for mild disease than CTE; no radiation</text>
+            <rect x="5" y="200" width="320" height="56" rx="8" class="fg-bad"/>
+            <text x="15" y="223" class="t-b">MRI pelvis</text>
+            <text x="15" y="243" class="t-sm">Perianal fistulae and abscesses</text>
+            <rect x="5" y="265" width="320" height="56" rx="8" class="fg-box"/>
+            <text x="15" y="288" class="t-b">Intestinal ultrasound</text>
+            <text x="15" y="308" class="t-sm t-mut">Safe: no radiation, no contrast</text>
+          </svg>
+      - kind: explain
+        page: 211
+        title: "المنظار"
+        quote: "Ileal ulceration and skip lesions help distinguish Crohn disease from ulcerative colitis. The rectum is often spared."
+        text: |
+          الـ **colonoscopy** هو الأساس: بتشوف وبتاخد biopsy. هتلاقي ulcerations، erythema، granularity، strictures، وممكن **pseudopolyps**.
+
+          اللي بيفرّقه عن الـ UC: ==ileal ulceration== و **skip lesions**، والـ **rectum often spared**.
+
+          - الـ **fistulae** صعب تتشاف بالمنظار: أحسن بالـ **contrast studies** أو **MRI**.
+          - الـ **capsule endoscopy** بتشوف الـ small bowel، بس لو فيه **stricture** الكبسولة ممكن تتحبس ومحتاجة جراحة.
+      - kind: aside
+        tone: trap
+        page: 212
+        quote: "Capsule endoscopy can visualize the small intestine provided there was no stricture otherwise retention of the capsule can occur"
+        text: |
+          فخ: عيان Crohn عنده أعراض obstruction (ألم، انتفاخ، ترجيع) وحد اقترح **capsule endoscopy**؟
+
+          لأ. الـ stricture هيحبس الكبسولة والعيان هيروح العمليات علشان يطلّعها. استبعد الـ stricture الأول.
+      - kind: explain
+        page: 212
+        title: "المضاعفات: خرم، تضييق، ونقص"
+        quote: "Deficiencies in iron, folate, vitamin B12, and fat-soluble vitamins (A, D, E, and K) are common"
+        text: |
+          - من الـ **penetrating و stenosing**: perforation، abscess، fistulae، obstruction.
+          - نقص **iron، folate، B12** و الـ fat-soluble vitamins **A, D, E, K** ← anemia و osteoporosis.
+          - **short gut syndrome** بعد resection كبير ← protein-calorie deficiency واعتماد على ==parenteral nutrition==.
+          - **small bowel bacterial overgrowth**، خصوصًا مع stricture أو بعد شيل الـ **ileocecal valve**.
+      - kind: figure
+        page: 212
+        quote: "Resection of 50–100 cm of ileum typically causes bile salts to spill into the colon, resulting in a bile salt– induced diarrhea"
+        title: "مسطرة الـ ileum: 50 و 100 سم"
+        alt: "A horizontal ruler of resected ileum. Under 50 cm: no label. 50 to 100 cm, amber: bile salts spill into the colon, watery bile salt diarrhea, treat with bile acid sequestrants. Over 100 cm, red: bile salt pool depleted, fat maldigestion, steatorrhea."
+        caption: "**50–100 cm**: الـ bile salts بتعدّي للقولون وتعمل إسهال، والـ ==bile acid sequestrants== بتعالجه. **فوق 100 cm**: الـ pool نفسه خلص، فالدهون ما بتتهضمش: **steatorrhea**."
+        svg: |
+          <svg viewBox="0 0 330 260" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L06r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <text x="165" y="20" text-anchor="middle" class="t-b">Ileum resected or diseased</text>
+            <rect x="10" y="35" width="90" height="30" class="fg-box"/>
+            <rect x="100" y="35" width="110" height="30" class="fg-acc"/>
+            <rect x="210" y="35" width="110" height="30" class="fg-bad"/>
+            <text x="100" y="82" text-anchor="middle" class="t-sm t-b">50 cm</text>
+            <text x="210" y="82" text-anchor="middle" class="t-sm t-b">100 cm</text>
+            <path d="M155 70v40" class="fg-arrow" marker-end="url(#L06r)"/>
+            <path d="M265 70v100" class="fg-arrow" marker-end="url(#L06r)"/>
+            <rect x="10" y="115" width="200" height="50" rx="6" class="fg-acc"/>
+            <text x="20" y="135" class="t-sm t-b">Bile salts spill into colon</text>
+            <text x="20" y="155" class="t-sm">Watery diarrhea: sequestrants help</text>
+            <rect x="120" y="175" width="200" height="70" rx="6" class="fg-bad"/>
+            <text x="130" y="197" class="t-sm t-b">Bile salt pool depleted</text>
+            <text x="130" y="216" class="t-sm">Fat maldigestion</text>
+            <text x="130" y="234" class="t-sm t-bad t-b">Steatorrhea</text>
+          </svg>
+      - kind: check
+        page: 212
+        quote: "If more than 100 cm of ileum is resected or diseased, reabsorption of bile salts may be so impaired that the total pool is depleted"
+        question: "After 130 cm of ileal resection, a patient has greasy stools that get worse on cholestyramine. Why?"
+        options:
+          - "The bile salt pool is depleted, so fat is maldigested"
+          - "Bile salts are irritating the colon"
+          - "He needs a higher sequestrant dose"
+          - "Lactose intolerance"
+        answer: 0
+        why:
+          - "صح: فوق 100 cm الـ pool خلص، والـ sequestrant بيسحب الباقي فيزوّد الـ steatorrhea."
+          - "ده سيناريو الـ 50–100 cm."
+          - "الـ sequestrant هنا بيضر، مش محتاج جرعة أعلى."
+          - "الـ lactose intolerance إسهال مائي مش دهني."
+      - kind: order
+        page: 212
+        quote: "Calcium readily binds unabsorbed fatty acids, allowing oxalate to be taken up by the bowel in greater quantity."
+        prompt: "حصوة الكلى في الـ Crohn: رتّب الخطوات"
+        steps:
+          - "Fatty acids are not absorbed"
+          - "Calcium binds the free fatty acids in the lumen"
+          - "Oxalate is left free and absorbed more"
+          - "Kidneys excrete excess oxalate"
+          - "Calcium oxalate stones form"
+        why: "الـ calcium عادة بيمسك الـ oxalate في الأمعاء فيخرج في البراز. لما الدهون تمسك الـ calcium، الـ oxalate بيفضل حر ويتمص، ويروح الكلى."
+      - kind: aside
+        tone: analogy
+        page: 212
+        quote: "Subsequent renal excretion of this excess oxalate promotes the precipitation of calcium oxalate calculi."
+        text: |
+          الـ calcium زي **أمين شرطة** واقف في الأمعاء ماسك الـ oxalate من إيده علشان ما يدخلش.
+
+          جات الدهون اللي ما اتمصتش وشغلته (الـ calcium اتلزق فيها)، فالـ oxalate **هرب** واتمص، وراح عمل مشكلة في الكلى.
+      - kind: try
+        items: [git.L06.047, git.L06.056, git.L06.059, git.L06.066, git.L06.071]
+    recap:
+      - "مفيش test بيشخّص؛ anemia (iron)، thrombocytosis، low albumin، CRP عالي."
+      - "Calprotectin/lactoferrin: IBD ضد IBS، activity، flare، response."
+      - "CT: wall thickening + **creeping fat**. MRE أحسن في الـ mild. MRI pelvis للـ perianal."
+      - "Colonoscopy: ileal ulcers + skip lesions + rectal sparing. Capsule ممنوعة مع stricture."
+      - "50–100 cm ileum: bile salt diarrhea (sequestrants). فوق 100: steatorrhea."
+      - "Fat يمسك calcium ← oxalate يتمص ← calcium oxalate stones."
+    practice: [git.L06.042, git.L06.043, git.L06.044, git.L06.045, git.L06.046, git.L06.047, git.L06.048, git.L06.049, git.L06.050, git.L06.051, git.L06.052, git.L06.053, git.L06.054, git.L06.055, git.L06.056, git.L06.057, git.L06.058, git.L06.059, git.L06.060, git.L06.061, git.L06.062, git.L06.063, git.L06.064, git.L06.065, git.L06.066, git.L06.067, git.L06.068, git.L06.069, git.L06.070, git.L06.071, git.L06.072, git.L06.073, git.L06.133]
+  # ------------------------------------------------------------------
+  - id: git.L06.lesson4
+    title: "الـ UC: من الـ rectum ولفوق من غير ما يفوّت حتة"
+    hook: "التهاب سطحي بس عنيد: بيبدأ من الـ rectum ويطلع لفوق، وأخطر حاجة فيه الـ toxic megacolon."
+    minutes: 10
+    pages: [213, 224]
+    topics: [uc-extent, uc-clinical, uc-tests]
+    goals:
+      - "ترسم الـ Montreal E1–E3 من دماغك (سؤال كتاب)"
+      - "تقيّم شدة النوبة بالجدول"
+      - "تقرأ الـ plain film في الـ severe UC"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 213
+        title: "الـ UC عكس الـ Crohn في كل حاجة تقريبًا"
+        quote: "Inflammation in ulcerative colitis is limited to the mucosal layer of the colon. The rectum is virtually always involved"
+        text: |
+          - الالتهاب في ==mucosal layer== بس، وفي الـ **colon** بس.
+          - الـ **rectum** متصاب **virtually always**، والالتهاب بيطلع لفوق **confluent** (من غير skip).
+          - البداية غالبًا **acute or subacute** (الـ Crohn insidious).
+
+          التوزيع: جزء كبير **proctitis** بس، حوالي **تلت** proctosigmoiditis، والأغلبية تحت الـ **splenic flexure**، وحوالي **تلت** فوقها (extensive)، وكتير pancolitis.
+      - kind: figure
+        page: 222
+        quote: "Involvement limited to the rectum (that is, proximal extent of inflammation is distal to the rectosigmoid junction)"
+        title: "Montreal: E1، E2، E3"
+        alt: "Three colon sketches stacked vertically, with the splenic flexure marked. E1: only the rectum is red, ulcerative proctitis. E2: rectum, sigmoid and descending colon are red up to the splenic flexure, left-sided UC. E3: the red passes the splenic flexure into the transverse and ascending colon, extensive UC or pancolitis."
+        caption: "العلامة اللي بتفصل E2 عن E3 هي ==splenic flexure==. لو الالتهاب عدّاها ولو بسنتي يبقى **E3**."
+        svg: |
+          <svg viewBox="0 0 330 520" xmlns="http://www.w3.org/2000/svg">
+            <text x="10" y="18" class="t-b t-acc">E1 Ulcerative proctitis</text>
+            <rect x="40" y="50" width="22" height="70" rx="6" class="fg-box"/>
+            <rect x="40" y="30" width="200" height="22" rx="6" class="fg-box"/>
+            <rect x="218" y="30" width="22" height="70" rx="6" class="fg-box"/>
+            <rect x="160" y="98" width="80" height="22" rx="6" class="fg-box"/>
+            <rect x="160" y="98" width="22" height="34" rx="6" class="fg-dot-bad"/>
+            <circle cx="229" cy="41" r="4" class="fg-dot-acc"/>
+            <text x="248" y="45" class="t-sm t-acc">splenic flexure</text>
+            <text x="190" y="136" class="t-sm t-mut">rectum</text>
+            <text x="10" y="156" class="t-sm">rectum only (distal to the rectosigmoid junction)</text>
+            <text x="10" y="190" class="t-b t-acc">E2 Left-sided (distal) UC</text>
+            <rect x="40" y="222" width="22" height="70" rx="6" class="fg-box"/>
+            <rect x="40" y="202" width="200" height="22" rx="6" class="fg-box"/>
+            <rect x="218" y="202" width="22" height="70" rx="6" class="fg-dot-bad"/>
+            <rect x="160" y="270" width="80" height="22" rx="6" class="fg-dot-bad"/>
+            <rect x="160" y="270" width="22" height="34" rx="6" class="fg-dot-bad"/>
+            <circle cx="229" cy="213" r="4" class="fg-dot-acc"/>
+            <text x="248" y="217" class="t-sm t-acc">splenic flexure</text>
+            <text x="190" y="308" class="t-sm t-mut">rectum</text>
+            <text x="10" y="328" class="t-sm">up to, not beyond, the splenic flexure</text>
+            <text x="10" y="362" class="t-b t-acc">E3 Extensive UC (pancolitis)</text>
+            <rect x="40" y="394" width="22" height="70" rx="6" class="fg-dot-bad"/>
+            <rect x="40" y="374" width="200" height="22" rx="6" class="fg-dot-bad"/>
+            <rect x="218" y="374" width="22" height="70" rx="6" class="fg-dot-bad"/>
+            <rect x="160" y="442" width="80" height="22" rx="6" class="fg-dot-bad"/>
+            <rect x="160" y="442" width="22" height="34" rx="6" class="fg-dot-bad"/>
+            <circle cx="229" cy="385" r="4" class="fg-dot-acc"/>
+            <text x="248" y="389" class="t-sm t-acc">splenic flexure</text>
+            <text x="190" y="480" class="t-sm t-mut">rectum</text>
+            <text x="10" y="500" class="t-sm">extends proximal to the splenic flexure</text>
+          </svg>
+      - kind: sort
+        page: 222
+        quote: "Extensive UC (pancolitis) Involvement extends proximal to the splenic flexure"
+        prompt: "صنّف كل colonoscopy:"
+        bins: ["E1", "E2", "E3"]
+        cards:
+          - { text: "Rectum only, up to 12 cm", bin: 0 }
+          - { text: "Rectum to sigmoid", bin: 1 }
+          - { text: "Rectum to descending colon", bin: 1 }
+          - { text: "Rectum to mid-transverse colon", bin: 2 }
+          - { text: "Rectum to cecum", bin: 2 }
+        why: "الـ rectum بس = E1. لحد الـ splenic flexure = E2. عدّى الـ splenic flexure = E3."
+      - kind: aside
+        tone: trap
+        page: 213
+        quote: "Cecal patch can be found especially in children with peri appendiceal involvement. Backwash ileitis can occur in UC especially in extensive colitis."
+        text: |
+          تلات حاجات في الـ UC ممكن تخليك تفتكره Crohn:
+          - **cecal patch** (حوالين الـ appendix)، خصوصًا في الأطفال
+          - **backwash ileitis** في الـ extensive colitis
+          - **skip lesions** عند عيان **under treatment** (العلاج بيخف حتت قبل حتت)
+      - kind: explain
+        page: 213
+        title: "الأعراض"
+        quote: "Overt rectal bleeding and tenesmus are virtually universally present and may be the only symptoms in patients with proctitis alone."
+        text: |
+          - ==rectal bleeding== و **tenesmus**: موجودين في كله تقريبًا، وفي الـ proctitis ممكن يبقوا هما بس.
+          - لما يطلع لفوق: **diarrhea** و **abdominal pain** أكتر.
+          - **nausea و weight loss**: مرض أشد.
+          - **severe pain أو fever**: fulminant colitis أو **toxic megacolon**.
+
+          الكشف: tenderness خفيف في الـ **hypogastrium / LLQ**، والـ DRE ممكن يطلّع **red blood**. و **severe tenderness، fever، tachycardia** = fulminant.
+      - kind: table
+        page: 222
+        quote: "Table 4 Mayo score for assessment of UC activity"
+        title: "شدة النوبة (Table 4 في الكتاب)"
+        columns: [Feature, "Mild · Moderate", Severe]
+        rows:
+          - ["Stools/day", "≤4 · 4–6", "≥6 + one systemic (*)"]
+          - [Blood, "Small · between", Visible]
+          - ["Temp >37.8 °C *", "No · No", "Yes"]
+          - ["Pulse ≥90 *", "No · No", "Yes"]
+          - ["Anaemia *", "No · No", "Yes"]
+          - ["ESR *", "≤30 · ≤30", ">30"]
+        hide: [[0, 1], [0, 2], [3, 2], [5, 2]]
+      - kind: update
+        page: 222
+        quote: "Table 4 Mayo score for assessment of UC activity"
+        text: "الجدول ده اسمه في الكتاب **Mayo score**، بس الأرقام دي هي **Truelove and Witts criteria**. الـ Mayo score حاجة تانية مجموعها 12، وبنودها: stool frequency، rectal bleeding، endoscopy و physician's global assessment. في الامتحان اكتب جدول الكتاب، ولو اتسألت عن الاسم قول إنه Truelove–Witts."
+        ref: "Truelove & Witts, BMJ 1955; ECCO UC guideline 2022"
+      - kind: check
+        page: 222
+        quote: "Table 4 Mayo score for assessment of UC activity"
+        question: "UC patient: 8 bloody stools/day, pulse 104, temperature 37.2 °C, ESR 22. Severity?"
+        options:
+          - "Severe"
+          - "Moderate"
+          - "Mild"
+          - "Moderate, because ESR is normal"
+        answer: 0
+        why:
+          - "صح: ≥6 مع دم + **systemic feature واحدة** (pulse ≥90) = severe."
+          - "الـ moderate من غير أي systemic feature."
+          - "الـ mild ≤4."
+          - "feature واحدة كفاية، الـ ESR الطبيعي ما يلغيش الـ tachycardia."
+      - kind: explain
+        page: 214
+        title: "التحاليل"
+        quote: "P-ANCA is the most commonly associated marker. However, it is also present in Crohn colitis"
+        text: |
+          - anemia، low iron، leukocytosis، thrombocytosis، **hypoalbuminemia** لو شديد وواسع.
+          - البراز: **negative** للـ infection، و **positive** للـ fecal leukocytes و **calprotectin**.
+          - ==P-ANCA==: أشهر marker، بس موجود في الـ Crohn colitis كمان.
+          - الـ P-ANCA UC: أكتر **refractory**، محتاج **early surgery**، و **chronic pouchitis** بعد الـ IPAA.
+      - kind: figure
+        page: 223
+        quote: "Abdominal X ray in patient with acute severe UC with dilated colon and thumbprinting sign of severe inflammation:"
+        title: "الـ plain film في الـ acute severe UC"
+        image: { file: git/L06-asuc-xray-ct.webp, book: true }
+        alt: "Left: plain abdominal X-ray with a dilated gas-filled colon and white arrows on thick wall folds (thumbprinting). Right: coronal CT of a dilated, inflamed colon with an arrow and an arrowhead."
+        caption: "Figure 7 من الكتاب: قولون **dilated** والأسهم على الـ ==thumbprinting== (edema في الحيطة)."
+      - kind: table
+        page: 214
+        quote: "So-called thumbprinting or thickening of the colon wall indicates severe colitis with bowel wall edema."
+        title: "اقرا الـ plain film"
+        columns: [Finding, Meaning]
+        rows:
+          - ["Thumbprinting / thick wall", "Severe colitis, wall edema"]
+          - ["Dilated colon, no haustra", "Toxic megacolon"]
+          - ["Pneumatosis", "Late: ischemia and infarction"]
+          - ["Obstruction", "Rare in UC: think malignancy"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1]]
+      - kind: explain
+        page: 215
+        title: "المنظار والـ barium والـ CT"
+        quote: "confluent inflammation extending proximally from the anal verge, with mucosal erythema, edema, and granularity and loss of normal vasculature"
+        text: |
+          **Colonoscopy:** التهاب **confluent** من الـ **anal verge** ولفوق: erythema، edema، granularity، و ==loss of normal vasculature==. والانتقال من العيان للسليم **abrupt**. في الشديد: hemorrhagic، ulcers، purulent exudate.
+
+          **Pseudopolyps** في المرض القديم: nondysplastic، **no malignant potential**. بس الـ dysplastic lesions فعلًا أكتر في الـ UC.
+
+          **Barium:** قولون **granular and shortened**. **CT:** wall thickening (الطبيعي **<3 mm**). **Pouchography** بعد الـ IPAA.
+      - kind: figure
+        page: 224
+        quote: "Colonscopic findings in patient with severe UC with pseudopolyps:"
+        title: "شكل الـ severe UC في المنظار"
+        image: { file: git/L06-uc-pseudopolyps-endoscopy.webp, book: true }
+        alt: "Three colonoscopy photos: A, red granular mucosa with small ulcers around the lumen; B, smooth polypoid pseudopolyps; C, hemorrhagic ulcerated mucosa with exudate."
+        caption: "Figure 9: (A) mucosa حمرا ومحببة ومقرّحة، (B) **pseudopolyps**، (C) hemorrhagic مع exudate."
+      - kind: try
+        items: [git.L06.077, git.L06.081, git.L06.086, git.L06.093, git.L06.101]
+    recap:
+      - "UC = mucosal، colon بس، من الـ rectum ولفوق confluent."
+      - "Montreal: E1 rectum، E2 لحد الـ splenic flexure، E3 عدّاها."
+      - "Cecal patch، backwash ileitis، skip under treatment = ممكن تلخبطك مع Crohn."
+      - "Severe = ≥6 bloody stools + temp >37.8، pulse ≥90، anaemia أو ESR >30."
+      - "Thumbprinting = edema، dilated بدون haustra = toxic megacolon، pneumatosis = infarction."
+      - "Pseudopolyps مش premalignant."
+    practice: [git.L06.074, git.L06.075, git.L06.076, git.L06.077, git.L06.078, git.L06.079, git.L06.080, git.L06.081, git.L06.082, git.L06.083, git.L06.084, git.L06.085, git.L06.086, git.L06.087, git.L06.088, git.L06.089, git.L06.090, git.L06.091, git.L06.092, git.L06.093, git.L06.094, git.L06.095, git.L06.096, git.L06.097, git.L06.098, git.L06.099, git.L06.100, git.L06.101, git.L06.102, git.L06.132, git.L06.134]
+  # ------------------------------------------------------------------
+  - id: git.L06.lesson5
+    title: "الـ biopsy، اللي برّه الأمعاء، والسرطان"
+    hook: "سؤالين الكتاب في آخر المحاضرة واحد منهم هنا: الـ histopathology. ومعاه الـ EIM والـ CRC surveillance."
+    minutes: 10
+    pages: [215, 224]
+    topics: [histology, eim, uc-complications, diagnosis]
+    goals:
+      - "تكتب الـ histopathology of UC كإجابة كاملة (سؤال كتاب)"
+      - "تعدّ الـ EIM بالجهاز"
+      - "تعرف امتى تبدأ الـ CRC surveillance"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 215
+        title: "الـ biopsy: إزاي وليه"
+        quote: "The biopsies should be two biopsies from each 5 segments of the colon including the terminal ileum and rectum."
+        text: |
+          الـ histopathology مهمة لـ: **diagnosis**، **disease activity**، واكتشاف **early dysplasia and neoplasia**.
+
+          البروتوكول: ==two biopsies from each of 5 segments==، ومنهم الـ **terminal ileum** والـ **rectum**.
+      - kind: figure
+        page: 224
+        quote: "Histopathological findings in patients with UC:"
+        title: "الطبيعي ضد الـ UC"
+        image: { file: git/L06-uc-histology-diagram.webp, book: true }
+        alt: "Diagram of normal colon crypts with goblet cells beside UC crypts that are distorted, lose goblet cells and contain crypt abscesses; a bracket shows UC affects the mucosal layer only. Below, two H&E panels: regular crypts versus distorted inflamed crypts."
+        caption: "Figure 10 (histopathological findings in UC): في الـ UC الـ crypts **distorted** وفيها **crypt abscess**، والـ goblet cells بتقل، وكل ده في الـ **mucosal layer only**."
+      - kind: order
+        page: 216
+        quote: "Widespread mucosal or crypt architectural distortion, mucosal atrophy, and an irregular or villous mucosal surface"
+        prompt: "رتّب الـ histology من الأول للأشد للشفا:"
+        steps:
+          - "Basal plasmacytosis (early)"
+          - "Crypt architectural distortion and mucosal atrophy"
+          - "Cryptitis and crypt abscesses (active severe disease)"
+          - "Healing: distortion and infiltrate resolve"
+        why: "الكتاب: early = **basal plasmacytosis**، الأشد = distortion و atrophy و villous surface مع **cryptitis و crypt abscesses**، والـ healing = resolution بس ممكن يفضل crypt density قليل و branching."
+      - kind: mnemonic
+        page: 216
+        quote: "with active inflammation causing cryptitis and crypt abscesses"
+        word: "BAD CV"
+        parts:
+          - { key: "B", text: "Basal plasmacytosis: the earliest sign" }
+          - { key: "A", text: "Atrophy of the mucosa" }
+          - { key: "D", text: "Distortion of crypt architecture" }
+          - { key: "C", text: "Cryptitis and crypt abscesses" }
+          - { key: "V", text: "Villous or irregular mucosal surface" }
+        hook: "الـ UC تحت الميكروسكوب عنده **BAD CV**: سيرة ذاتية وحشة. اكتب الخمسة بالترتيب ده، وزوّد في الآخر الـ healing: الـ distortion والـ infiltrate بيروحوا، بس ممكن يفضل crypt density قليل مع branching."
+      - kind: explain
+        page: 220
+        title: "والـ Crohn تحت الميكروسكوب؟"
+        quote: "The inflammatory infiltrate in Crohn‘s disease is patchy, often transmural and can lead to fissuring ulcers"
+        text: |
+          - ==Granulomas==: **pathognomonic** للـ Crohn، بس غيابها ما ينفيش.
+          - الـ infiltrate **patchy** و **transmural**، وممكن **fissuring ulcers**.
+          - الـ granulomas اللي جنب crypt مفتوحة (**cryptolytic**) مش specific.
+          - **pyloric gland metaplasia** في الـ terminal ileum = التهاب قديم.
+      - kind: check
+        page: 216
+        quote: "Granulomas (pathognomonic in CD but its absence doesn‘t exclude the diagnosis)."
+        question: "Colonic biopsies of a suspected Crohn patient show no granulomas. What does that mean?"
+        options:
+          - "Crohn is still possible: absent granulomas do not exclude it"
+          - "Crohn is excluded"
+          - "It must be UC"
+          - "Repeat with only one biopsy from the rectum"
+        answer: 0
+        why:
+          - "صح: الكتاب قالها صريحة."
+          - "الغياب ما ينفيش."
+          - "مش لازم، الـ diagnosis clinical وبالمجموع."
+          - "البروتوكول اتنين من كل segment من الخمسة، مش واحدة."
+      - kind: explain
+        page: 216
+        title: "اللي برّه الأمعاء: 50%"
+        quote: "Crohn disease and ulcerative colitis may be associated in 50% of patients with a number of extraintestinal manifestations"
+        text: |
+          الـ EIM بتحصل في حوالي ==50%==. الكتاب في Table 2 قسّمها بالجهاز، والـ **hepatobiliary** فيها **PSC** اللي هيرجع معانا في الـ CRC.
+      - kind: figure
+        page: 221
+        quote: "Hepatobiliary Primary sclerosing cholangitis Cholangiocarcinoma Gallstones"
+        title: "الـ EIM من فوق لتحت"
+        alt: "A simple body outline from head to legs with labels: eye, episcleritis and uveitis; mouth, aphthous ulcers; liver, PSC, cholangiocarcinoma, gallstones; joints and spine, enteropathic arthropathy, sacroiliitis, ankylosing spondylitis, osteoporosis; skin, erythema nodosum, pyoderma gangrenosum, Sweet syndrome; blood, thromboembolism."
+        caption: "امشي من الراس لتحت: **عين، بُق، كبد، مفاصل، جلد، دم**. ده Table 2 كله."
+        svg: |
+          <svg viewBox="0 0 330 400" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="70" cy="45" r="28" class="fg-box"/>
+            <rect x="45" y="78" width="50" height="120" rx="18" class="fg-box"/>
+            <path d="M55 198 L45 320 M85 198 L95 320" class="fg-ink" stroke-width="10"/>
+            <circle cx="60" cy="40" r="4" class="fg-dot-acc"/>
+            <circle cx="80" cy="40" r="4" class="fg-dot-acc"/>
+            <path d="M62 56 h16" class="fg-ink"/>
+            <rect x="72" y="110" width="20" height="16" rx="4" class="fg-dot-bad"/>
+            <path d="M120 40 H140" class="fg-thin"/><text x="145" y="36" class="t-sm t-b">Ocular</text><text x="145" y="52" class="t-sm">Episcleritis, uveitis/iritis</text>
+            <path d="M120 62 H140" class="fg-thin"/><text x="145" y="74" class="t-sm t-b">Oral</text><text x="145" y="90" class="t-sm">Aphthous ulceration</text>
+            <path d="M95 118 H140" class="fg-thin"/><text x="145" y="114" class="t-sm t-b">Hepatobiliary</text><text x="145" y="130" class="t-sm">PSC, cholangiocarcinoma,</text><text x="145" y="146" class="t-sm">gallstones</text>
+            <path d="M95 180 H140" class="fg-thin"/><text x="145" y="176" class="t-sm t-b">Musculoskeletal</text><text x="145" y="192" class="t-sm">Enteropathic arthropathy,</text><text x="145" y="208" class="t-sm">sacroiliitis, AS, osteoporosis</text>
+            <path d="M100 260 H140" class="fg-thin"/><text x="145" y="256" class="t-sm t-b">Dermatologic</text><text x="145" y="272" class="t-sm">Erythema nodosum, pyoderma</text><text x="145" y="288" class="t-sm">gangrenosum, Sweet syndrome</text>
+            <path d="M100 330 H140" class="fg-thin"/><text x="145" y="326" class="t-sm t-b">Hematologic</text><text x="145" y="342" class="t-sm">Thromboembolic disease</text>
+          </svg>
+      - kind: explain
+        page: 216
+        title: "المضاعفات والـ CRC"
+        quote: "Colorectal cancer: is the most feared long-term complication for ulcerative colitis."
+        text: |
+          - **life-threatening hemorrhage**
+          - **acute severe UC**: ممكن يحتاج colectomy لو حصل perforation أو toxic megacolon
+          - **pouchitis**: بس عند اللي عمل **IPAA**
+          - ==Colorectal cancer==: أكتر حاجة بنخاف منها على المدى البعيد
+
+          **Risk factors:** duration، extent، severity of inflammation، family history of CRC، **PSC**، وغالبًا early onset.
+
+          الـ excess risk بيبان بعد **8–10 سنين**، فالكتاب: **screening colonoscopy بعد 8 سنين** في الـ extensive colitis، و **surveillance كل 1–2 سنة**.
+      - kind: update
+        page: 216
+        quote: "The excess risk of CRC appears after 8–10 years of disease. Hence, a screening colonoscopy is recommended after 8 years"
+        text: "الـ ECCO والـ BSG بيقولوا screening colonoscopy بعد حوالي 8 سنين من الأعراض **لكل** عيان UC (علشان نعيد تحديد الـ extent)، وبعدين surveillance حسب الـ risk كل 1 أو 3 أو 5 سنين، والـ PSC كل سنة من التشخيص. في الامتحان اكتب إجابة الكتاب."
+        ref: "ECCO UC guideline 2017; BSG IBD guideline 2019"
+      - kind: explain
+        page: 217
+        title: "التشخيص والـ differential"
+        quote: "Of particular importance is the exclusion of infectious pathogens, as the treatment of active IBD frequently involves immunosuppressive medications."
+        text: |
+          التشخيص ==clinical==: history + exam + labs + imaging + endoscopy + histology. مفيش finding واحد.
+
+          وفي كل flare لازم تستبعد **infection** الأول، لأن علاج الـ IBD **immunosuppressive**.
+
+          الـ differential: **indeterminate colitis**، **IBS**، **infectious colitis**، mimics زي diverticulitis و appendicitis و lymphoma و malignancy، و non-infectious colitis: **microscopic**، **radiation**، **ischemic**، **NSAID**، و diversion و CGD و GVHD و amyloid.
+      - kind: sort
+        page: 223
+        quote: "Triad of watery diarrhea, endoscopically normal mucosa and collagenous or lymphocytic infiltrate"
+        prompt: "Table 5: صنّف الـ mimic"
+        bins: ["Infectious", "Non-infectious"]
+        cards:
+          - { text: "Yersinia", bin: 0 }
+          - { text: "CMV", bin: 0 }
+          - { text: "Entamoeba histolytica", bin: 0 }
+          - { text: "NSAIDs (eosinophilic infiltrate)", bin: 1 }
+          - { text: "Ischemic: normal rectal biopsy", bin: 1 }
+          - { text: "Radiation: telangiectasia", bin: 1 }
+          - { text: "Microscopic colitis: normal endoscopy", bin: 1 }
+        why: "الـ bacteria والـ viruses والـ protozoa infectious. الباقي non-infectious وكل واحد ليه clue: eosinophils للـ NSAIDs، rectal biopsy طبيعية في الـ ischemic والـ diverticular، telangiectasia للـ radiation، و normal endoscopy للـ microscopic colitis."
+      - kind: try
+        items: [git.L06.104, git.L06.106, git.L06.114, git.L06.120, git.L06.135]
+    recap:
+      - "Biopsy: اتنين من كل segment من الخمسة، منهم TI و rectum."
+      - "Early: basal plasmacytosis. Severe: distortion، atrophy، villous، cryptitis، crypt abscess (**BAD CV**)."
+      - "Granulomas pathognomonic للـ Crohn، وغيابها ما ينفيش."
+      - "EIM في 50%: عين، بُق، كبد (PSC)، مفاصل، جلد، دم."
+      - "CRC risk: duration، extent، severity، FH، PSC. Screening بعد 8 سنين، surveillance كل 1–2."
+      - "استبعد الـ infection قبل أي immunosuppression."
+    practice: [git.L06.103, git.L06.104, git.L06.105, git.L06.106, git.L06.107, git.L06.108, git.L06.109, git.L06.110, git.L06.111, git.L06.112, git.L06.113, git.L06.114, git.L06.115, git.L06.116, git.L06.117, git.L06.118, git.L06.119, git.L06.120, git.L06.121, git.L06.122, git.L06.123, git.L06.124, git.L06.125, git.L06.126, git.L06.127, git.L06.128, git.L06.129, git.L06.130, git.L06.135]

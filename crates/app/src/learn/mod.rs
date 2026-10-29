@@ -228,8 +228,11 @@ pub fn state(lesson: &Lesson, next: Option<&str>) -> State {
 
 /// Does a lesson match the search? Its title, hook, topics and lecture.
 fn matches(q: &str, lecture: &str, lecture_title: &str, l: &Lesson) -> bool {
-    let code = crate::content::lecture_code(lecture).to_lowercase();
-    [l.title.as_str(), l.hook.as_str(), lecture_title, code.as_str()]
+    let lib = Library::get();
+    let code =
+        format!("l{:0>2} {}", crate::content::lecture_no(lecture), lib.lecture_tag(lecture)).to_lowercase();
+    let course = lib.course_of(lecture).map(|c| c.title.as_str()).unwrap_or_default();
+    [l.title.as_str(), l.hook.as_str(), lecture_title, code.as_str(), course]
         .into_iter()
         .chain(l.topics.iter().map(String::as_str))
         .any(|t| t.to_lowercase().contains(q))
@@ -325,58 +328,61 @@ fn Others(shown: String) -> Element {
     sort_by(&mut others, pick.sort, |e| left(&e.id), |_| false, |e| e.title.clone());
     rsx! {
         ViewBar { of: LECTURES_VIEW }
-        ul { class: "coll ls-others", "data-layout": pick.layout.as_str(),
-            for entry in others {
-                {
-                    let id = entry.id.clone();
-                    let code = crate::content::lecture_code(&entry.id);
-                    match lib.lessons.get(&entry.id) {
-                        Some(file) => {
-                            let n = file.lessons.len();
-                            let d = file.lessons.iter().filter(|l| mark(&l.id).is_some()).count();
-                            rsx! {
+        for group in lib.by_course(others, |e| e.id.as_str()) {
+            crate::parts::CourseHead { key: "{group.id}", short: group.short().to_string(), title: group.title().to_string() }
+            ul { class: "coll ls-others", "data-layout": pick.layout.as_str(),
+                for entry in group.rows {
+                    {
+                        let id = entry.id.clone();
+                        let code = crate::content::lecture_no(&entry.id);
+                        match lib.lessons.get(&entry.id) {
+                            Some(file) => {
+                                let n = file.lessons.len();
+                                let d = file.lessons.iter().filter(|l| mark(&l.id).is_some()).count();
+                                rsx! {
+                                    li { key: "{entry.id}",
+                                        button {
+                                            class: "coll-btn ls-other",
+                                            title: tx::SHOW_LECTURE,
+                                            onclick: move |_| {
+                                                *SHOWN.write() = Some(id.clone());
+                                                document::eval(r#"document.querySelector("main.content")?.scrollTo(0, 0);"#);
+                                            },
+                                            span { class: "coll-lead",
+                                                span { class: "coll-badge", "data-tone": if d == n && n > 0 { "good" } else { "" }, "{code}" }
+                                            }
+                                            span { class: "coll-main",
+                                                bdi { class: "coll-title", dir: "ltr", "{entry.title}" }
+                                                span { class: "coll-sub", {tx::lessons_n(n)} " · " {tx::done_of(d, n)} }
+                                                span { class: "coll-extra", Meter { done: d, total: n } }
+                                            }
+                                            span { class: "coll-end coll-when-compact",
+                                                crate::parts::Count { done: d, total: n }
+                                            }
+                                            span { class: "chev", aria_hidden: "true" }
+                                        }
+                                    }
+                                }
+                            }
+                            None => rsx! {
                                 li { key: "{entry.id}",
                                     button {
-                                        class: "coll-btn ls-other",
-                                        title: tx::SHOW_LECTURE,
-                                        onclick: move |_| {
-                                            *SHOWN.write() = Some(id.clone());
-                                            document::eval(r#"document.querySelector("main.content")?.scrollTo(0, 0);"#);
-                                        },
+                                        class: "coll-btn ls-other ls-soon",
+                                        title: tx::OPEN_LECTURE,
+                                        onclick: move |_| crate::lecture::open(ui, &id),
                                         span { class: "coll-lead",
-                                            span { class: "coll-badge", "data-tone": if d == n && n > 0 { "good" } else { "" }, "{code}" }
+                                            span { class: "coll-badge", "data-tone": "quiet", "{code}" }
                                         }
                                         span { class: "coll-main",
                                             bdi { class: "coll-title", dir: "ltr", "{entry.title}" }
-                                            span { class: "coll-sub", {tx::lessons_n(n)} " · " {tx::done_of(d, n)} }
-                                            span { class: "coll-extra", Meter { done: d, total: n } }
+                                            span { class: "coll-sub", {tx::OPEN_LECTURE} }
                                         }
-                                        span { class: "coll-end coll-when-compact",
-                                            crate::parts::Count { done: d, total: n }
-                                        }
+                                        span { class: "coll-end", span { class: "chip", {tx::WRITING} } }
                                         span { class: "chev", aria_hidden: "true" }
                                     }
                                 }
-                            }
+                            },
                         }
-                        None => rsx! {
-                            li { key: "{entry.id}",
-                                button {
-                                    class: "coll-btn ls-other ls-soon",
-                                    title: tx::OPEN_LECTURE,
-                                    onclick: move |_| crate::lecture::open(ui, &id),
-                                    span { class: "coll-lead",
-                                        span { class: "coll-badge", "data-tone": "quiet", "{code}" }
-                                    }
-                                    span { class: "coll-main",
-                                        bdi { class: "coll-title", dir: "ltr", "{entry.title}" }
-                                        span { class: "coll-sub", {tx::OPEN_LECTURE} }
-                                    }
-                                    span { class: "coll-end", span { class: "chip", {tx::WRITING} } }
-                                    span { class: "chev", aria_hidden: "true" }
-                                }
-                            }
-                        },
                     }
                 }
             }
@@ -408,7 +414,7 @@ fn Shown(id: String, next_id: Option<String>) -> Element {
     let lib = Library::get();
     let Some(file) = lib.lessons.get(&id) else { return rsx! {} };
     let title = lib.title(&id).to_string();
-    let code = crate::content::lecture_code(&id);
+    let kicker = tx::lecture_n(lib.course_short(&id), &crate::content::lecture_no(&id));
     let n = file.lessons.len();
     let d = file.lessons.iter().filter(|l| mark(&l.id).is_some()).count();
     let pct = (d * 100).checked_div(n).unwrap_or(0);
@@ -429,7 +435,7 @@ fn Shown(id: String, next_id: Option<String>) -> Element {
             class: if go_id.is_some() { "card card-flat card-action ls-lec" } else { "card card-flat ls-lec" },
             onclick: move |_| if let Some(g) = &go_id { open(ui, g) },
             div { class: "ls-lec-meta",
-                span { {tx::lecture_n(&code)} }
+                span { "{kicker}" }
                 button {
                     class: "btn-link ls-lec-page",
                     onclick: { let id = id.clone(); move |e: MouseEvent| { e.stop_propagation(); crate::lecture::open(ui, &id) } },
@@ -507,7 +513,7 @@ fn Results(q: String, next_id: Option<String>) -> Element {
                         class: "tap tap-plain ls-group-head",
                         title: tx::OPEN_LECTURE,
                         onclick: { let id = id.clone(); move |_| crate::lecture::open(ui, &id) },
-                        span { class: "num", "{crate::content::lecture_code(&id)}" }
+                        span { class: "num", "{lib.lecture_tag(&id)}" }
                         bdi { dir: "ltr", "{title}" }
                         span { class: "chev", aria_hidden: "true" }
                     }
@@ -600,7 +606,7 @@ pub fn LessonCard(n: usize, lesson: Lesson) -> Element {
                         span { class: "ls-nowrap", {count(lesson.minutes, &MINUTE)} }
                         span { class: "ls-nowrap", {count(questions, &QUESTION)} }
                         span { class: "ls-nowrap",
-                            "{tx::PAGES} "
+                            if Library::get().program.slides(&lesson.id) { "{crate::i18n::lecture::SLIDES} " } else { "{tx::PAGES} " }
                             bdi { dir: "ltr", "{lesson.pages[0]}–{lesson.pages[1]}" }
                         }
                     }
@@ -628,7 +634,6 @@ pub fn TodayLesson(prefer: Vec<String>) -> Element {
         return rsx! {};
     };
     let lecture = l.id.rsplit_once('.').map(|(l, _)| l).unwrap_or(&l.id);
-    let title = lib.title(lecture).to_string();
     let steps = l.steps.len();
     let at = resume_step(&l.id);
     let done_steps = at.unwrap_or(0);
@@ -647,7 +652,7 @@ pub fn TodayLesson(prefer: Vec<String>) -> Element {
                 }
             }
             strong { class: "ls-now-title", text::Line { text: l.title.clone() } }
-            span { class: "muted small", bdi { dir: "ltr", "{crate::content::lecture_code(lecture)} · {title}" } }
+            span { class: "muted small", bdi { "{lib.crumb(lecture)}" } }
             span { class: "small ls-now-hook", text::Line { text: l.hook.clone() } }
             Meter { done: done_steps, total: steps }
         }
@@ -679,7 +684,7 @@ mod list_tests {
         let lib = Library::get();
         let (lec, l) = lib.all_lessons().next().expect("a lesson is written");
         let title = lib.title(lec).to_string();
-        let code = crate::content::lecture_code(lec).to_lowercase();
+        let code = Library::get().lecture_tag(lec).to_lowercase();
         assert!(matches(&code, lec, &title, l));
         assert!(matches(&title.to_lowercase(), lec, &title, l));
         if let Some(t) = l.topics.first() {

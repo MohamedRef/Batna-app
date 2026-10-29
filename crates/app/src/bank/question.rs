@@ -6,8 +6,7 @@ use batna_core::exam::Question;
 use batna_core::review::verify::Check;
 use dioxus::prelude::*;
 
-use super::{lookup, short_lecture_title, topic_title};
-use crate::content::lecture_code;
+use super::{lookup, topic_title};
 use crate::i18n::bank as tx;
 use crate::store::use_review;
 
@@ -48,10 +47,10 @@ pub fn QuestionView(
                         class: "chip tap",
                         title: tx::OPEN_LECTURE,
                         onclick: { let id = lecture.lecture.clone(); move |_| crate::lecture::open(ui, &id) },
-                        bdi { "{lecture_code(&lecture.lecture)} · {short_lecture_title(&lecture.lecture)}" }
+                        bdi { "{crate::content::Library::get().crumb(&lecture.lecture)}" }
                     }
                 } else {
-                    span { class: "chip", bdi { "{lecture_code(&lecture.lecture)} · {short_lecture_title(&lecture.lecture)}" } }
+                    span { class: "chip", bdi { "{crate::content::Library::get().crumb(&lecture.lecture)}" } }
                 }
                 if let Some(t) = topic {
                     span { class: "chip", bdi { "{t}" } }

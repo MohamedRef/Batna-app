@@ -1,0 +1,875 @@
+schema: batna.content/v1
+lecture: rheum.L14
+title: Osteoporosis
+author: Prof. Dr. Eiman Soliman
+book: { chapter: 3, pages: [221, 232] }
+topics:
+  - { id: definition, title: "Definition, significance and epidemiology" }
+  - { id: biology, title: "Bone composition and remodeling" }
+  - { id: types, title: "Primary and secondary osteoporosis" }
+  - { id: risk, title: "Risk factors" }
+  - { id: dexa, title: "DEXA, T-score and FRAX" }
+  - { id: screening, title: "Indications for BMD testing and laboratory work-up" }
+  - { id: nonpharm, title: "Non-pharmacologic treatment" }
+  - { id: indications, title: "Who needs drug treatment" }
+  - { id: bisphosphonates, title: "Bisphosphonates" }
+  - { id: denosumab, title: "Denosumab" }
+  - { id: serm-hrt, title: "SERMs and HRT" }
+  - { id: anabolic, title: "Teriparatide and romosozumab" }
+  - { id: strategy, title: "Drug selection, monitoring and GIOP" }
+items:
+  # ---------- p221: definition ----------
+  - id: rheum.L14.001
+    kind: enumerate
+    topic: definition
+    prompt: Osteoporosis is a systemic skeletal disorder characterized by...
+    points:
+      - Decreased bone mass
+      - Microarchitectural deterioration of bone tissue
+      - Increased bone fragility and fracture risk
+    pass: 3
+    src: { page: 221, quote: "Decreased bone mass. Microarchitectural deterioration of bone tissue. Increased bone fragility and risk of fractures." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L14.002
+    kind: card
+    topic: definition
+    front: Bone strength reflects which two things?
+    back: Bone density and bone quality.
+    src: { page: 221, quote: "Bone strength reflects both bone density and bone quality." }
+    status: unverified
+  - id: rheum.L14.003
+    kind: enumerate
+    topic: definition
+    prompt: Consequences of osteoporotic fractures.
+    points:
+      - Pain
+      - Disability
+      - Reduced quality of life
+      - Increased mortality
+    pass: 3
+    src: { page: 221, quote: "Pain. Disability. Reduced quality of life. Increased mortality." }
+    status: unverified
+  - id: rheum.L14.004
+    kind: enumerate
+    topic: definition
+    prompt: Typical sites of osteoporotic fracture.
+    points:
+      - Vertebral bodies (spine)
+      - Proximal femur (hip)
+      - "Distal forearm (Colles' fracture)"
+    pass: 3
+    src: { page: 221, quote: "Vertebral bodies (spine). Proximal femur (hip). Distal forearm (Colles‘ fracture)." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L14.005
+    kind: cloze
+    topic: definition
+    text: Osteoporosis affects {{c1::1 in 3}} women and {{c2::1 in 5}} men over the age of 50.
+    src: { page: 221, quote: "Affects 1 in 3 women and 1 in 5 men over the age of 50." }
+    status: unverified
+    tags: [numbers, high-yield]
+  # ---------- p222: biology, types, risk ----------
+  - id: rheum.L14.006
+    kind: table
+    topic: biology
+    title: Bone composition (p222)
+    columns: [Bone, Found in]
+    rows:
+      - [Cortical (compact), Shafts of long bones]
+      - [Trabecular (spongy), "Vertebrae, pelvis, ends of long bones"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 222, quote: "Cortical bone (compact) – found in shafts of long bones. Trabecular bone (spongy) – found in vertebrae, pelvis, and ends of long bones." }
+    status: unverified
+  - id: rheum.L14.007
+    kind: card
+    topic: biology
+    front: Which cells regulate bone remodeling, and what does each do?
+    back: Osteoclasts resorb bone; osteoblasts form bone.
+    src: { page: 222, quote: "Regulated by osteoclasts (resorption) and osteoblasts (formation)." }
+    status: unverified
+  - id: rheum.L14.008
+    kind: enumerate
+    topic: biology
+    prompt: Influences on bone remodeling.
+    points:
+      - Mechanical stress
+      - "Hormones: estrogen, PTH, vitamin D"
+      - "Cytokines: IL-6, TNF-α, RANKL"
+    pass: 3
+    src: { page: 222, quote: "Mechanical stress. o Hormonal signals (estrogen, PTH, vitamin D). o Cytokines (IL-6, TNF-α, RANKL)." }
+    status: unverified
+  - id: rheum.L14.009
+    kind: table
+    topic: types
+    title: Primary osteoporosis (p222)
+    columns: [Type, Mechanism]
+    rows:
+      - [Type I (postmenopausal), Estrogen deficiency increases osteoclast activity]
+      - [Type II (senile), Age-related decline in osteoblast function]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 222, quote: "Type I (Postmenopausal): Estrogen deficiency leads to increased osteoclast activity. Type II (Senile): Age-related decline in osteoblast function." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L14.010
+    kind: enumerate
+    topic: types
+    prompt: Causes of secondary osteoporosis.
+    points:
+      - "Endocrine disorders, e.g. hyperthyroidism, Cushing's"
+      - "Medications, e.g. glucocorticoids, heparin, anticonvulsants"
+      - Malabsorption syndromes
+      - "Chronic illnesses, e.g. RA, CKD"
+    pass: 4
+    src: { page: 222, quote: "Endocrine disorders (e.g., hyperthyroidism, Cushing's). Medications (e.g., glucocorticoids, heparin, anticonvulsants)." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L14.011
+    kind: card
+    topic: types
+    front: Name three drug classes that cause secondary osteoporosis.
+    back: Glucocorticoids, heparin and anticonvulsants.
+    src: { page: 222, quote: "Medications (e.g., glucocorticoids, heparin, anticonvulsants)." }
+    status: unverified
+  - id: rheum.L14.012
+    kind: enumerate
+    topic: risk
+    prompt: Non-modifiable risk factors for osteoporosis.
+    points:
+      - Advanced age
+      - Female sex
+      - Caucasian or Asian ethnicity
+      - Family history of osteoporosis or hip fracture
+    pass: 3
+    src: { page: 222, quote: "Advanced age. Female sex. Caucasian or Asian ethnicity. Family history of osteoporosis or hip fracture." }
+    status: unverified
+  # ---------- p223: modifiable, DEXA, FRAX, BMD indications ----------
+  - id: rheum.L14.013
+    kind: enumerate
+    topic: risk
+    prompt: Modifiable risk factors for osteoporosis.
+    points:
+      - Low body weight
+      - Smoking
+      - Excess alcohol
+      - Sedentary lifestyle
+      - Poor calcium or vitamin D intake
+    pass: 4
+    src: { page: 223, quote: "Low body weight. Smoking. Excess alcohol intake. Sedentary lifestyle. Poor calcium/vitamin D intake." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L14.014
+    kind: card
+    topic: dexa
+    front: Gold standard test for bone mineral density?
+    back: Dual-energy X-ray absorptiometry (DEXA).
+    src: { page: 223, quote: "Dual-energy X-ray absorptiometry (DEXA) is the gold standard." }
+    status: unverified
+  - id: rheum.L14.015
+    kind: table
+    topic: dexa
+    title: DEXA T-score interpretation (p223)
+    columns: [Category, T-score]
+    rows:
+      - [Normal, "T ≥ –1"]
+      - [Osteopenia, "–1 > T > –2.5"]
+      - [Osteoporosis, "T ≤ –2.5"]
+      - [Severe osteoporosis, "T ≤ –2.5 plus a fragility fracture"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 223, quote: "Normal: T ≥ –1. o Osteopenia: –1 > T > –2.5. o Osteoporosis: T ≤ –2.5." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: rheum.L14.016
+    kind: cloze
+    topic: dexa
+    text: Osteoporosis is a T-score {{c1::≤ –2.5}}; it is severe when combined with a {{c2::fragility fracture}}.
+    src: { page: 223, quote: "Severe osteoporosis: T ≤ –2.5 + fragility fracture." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: rheum.L14.017
+    kind: card
+    topic: dexa
+    front: What does FRAX estimate, and does it need BMD?
+    back: The 10-year probability of hip fracture and of major osteoporotic fracture; it can be used with or without BMD.
+    src: { page: 223, quote: "Estimates 10-year probability of: o Hip fracture. o Major osteoporotic fracture. Can be used with or without BMD" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L14.018
+    kind: enumerate
+    topic: screening
+    prompt: Indications for BMD testing.
+    points:
+      - Women ≥ 65 years
+      - Men ≥ 70 years
+      - Postmenopausal women < 65 with risk factors
+      - Adults with fragility fractures
+      - "Long-term glucocorticoids (≥ 5 mg prednisone for ≥ 3 months)"
+    pass: 4
+    src: { page: 223, quote: "Women ≥ 65 years. Men ≥ 70 years. Postmenopausal women < 65 with risk factors. Adults with fragility fractures." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L14.019
+    kind: cloze
+    topic: screening
+    text: BMD testing is indicated in women aged ≥ {{c1::65}} and men aged ≥ {{c2::70}}.
+    src: { page: 223, quote: "Women ≥ 65 years. Men ≥ 70 years." }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L14.020
+    kind: cloze
+    topic: screening
+    text: Long-term glucocorticoid therapy of ≥ {{c1::5 mg}} prednisone for ≥ {{c2::3 months}} is an indication for BMD testing (p223).
+    src: { page: 223, quote: "Long-term glucocorticoid therapy (≥5 mg prednisone for ≥3 months)." }
+    status: unverified
+    tags: [numbers]
+  # ---------- p224: labs, non-pharm, drug indications, BP ----------
+  - id: rheum.L14.021
+    kind: enumerate
+    topic: screening
+    prompt: Laboratory tests to rule out secondary osteoporosis.
+    points:
+      - CBC and ESR
+      - Calcium and phosphate
+      - ALP, creatinine and TSH
+      - 25-hydroxyvitamin D
+      - PTH
+      - Serum protein electrophoresis if myeloma suspected
+    pass: 5
+    src: { page: 224, quote: "CBC, ESR. Calcium, phosphate. ALP, creatinine, TSH. 25-hydroxyvitamin D. PTH." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L14.022
+    kind: card
+    topic: screening
+    front: When is serum protein electrophoresis added to the osteoporosis work-up?
+    back: When multiple myeloma is suspected.
+    src: { page: 224, quote: "Serum protein electrophoresis (if multiple myeloma is suspected)." }
+    status: unverified
+  - id: rheum.L14.023
+    kind: table
+    topic: nonpharm
+    title: Non-pharmacologic treatment of osteoporosis (p224)
+    columns: [Measure, Detail]
+    rows:
+      - [Calcium, "1000–1200 mg/day (diet plus supplements if needed)"]
+      - [Vitamin D, "800–1000 IU/day, adjusted to 25(OH)D"]
+      - [Exercise, Weight-bearing and resistance training]
+      - [Fall prevention, "Home safety, vision correction, strength and balance training"]
+      - [Lifestyle, "Stop smoking, alcohol < 2 drinks/day"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 224, quote: "Calcium intake: 1000–1200 mg/day (diet + supplements if needed). Vitamin D: 800–1000 IU/day (adjust based on 25(OH)D levels)." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: rheum.L14.024
+    kind: cloze
+    topic: nonpharm
+    text: In osteoporosis give calcium {{c1::1000–1200 mg/day}} and vitamin D {{c2::800–1000 IU/day}}.
+    src: { page: 224, quote: "Calcium intake: 1000–1200 mg/day (diet + supplements if needed). Vitamin D: 800–1000 IU/day" }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L14.025
+    kind: enumerate
+    topic: indications
+    prompt: Postmenopausal women or men ≥ 50 years need drug treatment if they have...
+    points:
+      - Hip or vertebral fracture
+      - "T-score ≤ –2.5 at spine, femoral neck or total hip"
+      - "Osteopenia (T –1 to –2.5) with a high FRAX score"
+    pass: 3
+    src: { page: 224, quote: "Hip or vertebral fracture. o T-score ≤ –2.5 at spine, femoral neck, or total hip." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L14.026
+    kind: card
+    topic: bisphosphonates
+    front: Name four bisphosphonates and their mechanism.
+    back: Alendronate, risedronate, ibandronate, zoledronic acid; they inhibit osteoclast-mediated bone resorption and raise BMD.
+    src: { page: 224, quote: "Mechanism: Inhibit osteoclast-mediated bone resorption → increase bone mineral density." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p225: bisphosphonates ----------
+  - id: rheum.L14.027
+    kind: card
+    topic: bisphosphonates
+    front: Where are bisphosphonates first-line?
+    back: Postmenopausal, steroid-induced and male osteoporosis.
+    src: { page: 225, quote: "First-line for postmenopausal osteoporosis, steroid-induced osteoporosis, male osteoporosis." }
+    status: unverified
+  - id: rheum.L14.028
+    kind: table
+    topic: bisphosphonates
+    title: Bisphosphonate doses (p225)
+    columns: [Drug, Dose]
+    rows:
+      - [Alendronate, 70 mg weekly orally]
+      - [Risedronate, 35 mg weekly]
+      - [Zoledronic acid, 5 mg IV yearly]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 225, quote: "Alendronate: 70 mg weekly (oral). Risedronate: 35 mg weekly. Zoledronic acid: 5 mg IV yearly." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: rheum.L14.029
+    kind: card
+    topic: bisphosphonates
+    front: How must oral bisphosphonates be taken?
+    back: On an empty stomach with a full glass of water, staying upright for at least 30–60 minutes.
+    src: { page: 225, quote: "Take on empty stomach with a full glass of water. Stay upright for at least 30–60 minutes." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L14.030
+    kind: enumerate
+    topic: bisphosphonates
+    prompt: Side effects of bisphosphonates.
+    points:
+      - GI irritation (oral forms)
+      - Flu-like symptoms (IV)
+      - "Rare: atypical femoral fractures"
+      - "Rare: osteonecrosis of the jaw"
+    pass: 3
+    src: { page: 225, quote: "GI irritation (oral forms). Flu-like symptoms (IV). Rare: Atypical femoral fractures, osteonecrosis of the jaw (ONJ)." }
+    status: unverified
+  - id: rheum.L14.031
+    kind: enumerate
+    topic: bisphosphonates
+    prompt: Contraindications to bisphosphonates.
+    points:
+      - Esophageal disorders
+      - Hypocalcemia
+      - "Severe renal impairment (eGFR < 30–35 mL/min)"
+    pass: 3
+    src: { page: 225, quote: "Esophageal disorders Hypocalcemia Severe renal impairment (eGFR <30–35 mL/min)" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L14.032
+    kind: card
+    topic: denosumab
+    front: Denosumab - brand, dose and mechanism?
+    back: Prolia 60 mg SC every 6 months; a monoclonal antibody to RANKL that inhibits osteoclast formation and survival.
+    src: { page: 225, quote: "(Prolia – 60 mg SC every 6 months). Mechanism: Monoclonal antibody to RANKL → inhibits osteoclast formation and survival." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p226: denosumab, SERM ----------
+  - id: rheum.L14.033
+    kind: card
+    topic: denosumab
+    front: Indications and benefits of denosumab?
+    back: High fracture risk and CKD (not nephrotoxic); raises BMD at spine and hip and is well tolerated.
+    src: { page: 226, quote: "High fracture risk patients. CKD patients (not nephrotoxic)." }
+    status: unverified
+  - id: rheum.L14.034
+    kind: enumerate
+    topic: denosumab
+    prompt: Risks of denosumab.
+    points:
+      - Hypocalcemia, especially in CKD
+      - Osteonecrosis of the jaw
+      - Infections
+      - Rebound vertebral fractures if stopped without another agent
+    pass: 3
+    src: { page: 226, quote: "Hypocalcemia (especially with CKD). ONJ. Infections." }
+    status: unverified
+  - id: rheum.L14.035
+    kind: card
+    topic: denosumab
+    front: What happens if denosumab is stopped without a follow-on drug?
+    back: Rebound vertebral fractures may occur.
+    src: { page: 226, quote: "Rebound vertebral fractures may occur if discontinued without transition to another agent." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L14.036
+    kind: card
+    topic: serm-hrt
+    front: How does raloxifene act on bone, breast and uterus?
+    back: Estrogen agonist in bone (less resorption); antagonist in breast and uterus.
+    src: { page: 226, quote: "Mechanism: Estrogen agonist in bone → reduces bone resorption; antagonist in breast/uterus." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L14.037
+    kind: card
+    topic: serm-hrt
+    front: Who suits raloxifene best, and who should not get it?
+    back: Postmenopausal women, especially at risk of breast cancer; not for men or patients at high fracture risk.
+    src: { page: 226, quote: "Especially those at risk for breast cancer." }
+    status: unverified
+  - id: rheum.L14.038
+    kind: card
+    topic: serm-hrt
+    front: Risks of raloxifene?
+    back: Hot flashes and VTE (DVT, PE).
+    src: { page: 226, quote: "Hot flashes. VTE risk (DVT, PE)." }
+    status: unverified
+  # ---------- p227: HRT, anabolics ----------
+  - id: rheum.L14.039
+    kind: card
+    topic: serm-hrt
+    front: Role of HRT in osteoporosis and its risks?
+    back: For symptomatic menopausal women with osteoporosis risk, not for prevention alone; raises breast cancer, thromboembolism and stroke risk.
+    src: { page: 227, quote: "Not recommended solely for osteoporosis prevention." }
+    status: unverified
+  - id: rheum.L14.040
+    kind: card
+    topic: anabolic
+    front: Teriparatide - what is it and how does it work?
+    back: PTH 1–34; stimulates osteoblasts to form new bone (anabolic).
+    src: { page: 227, quote: "Mechanism: Stimulates osteoblast activity → promotes new bone formation." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L14.041
+    kind: cloze
+    topic: anabolic
+    text: Teriparatide is given {{c1::20 mcg}} SC daily for a maximum of {{c2::2 years}}.
+    src: { page: 227, quote: "Dose: 20 mcg SC daily (max 2 years)." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: rheum.L14.042
+    kind: enumerate
+    topic: anabolic
+    prompt: Indications for teriparatide.
+    points:
+      - "Severe osteoporosis (T-score ≤ –3.0)"
+      - Multiple vertebral fractures
+      - Failure of or intolerance to bisphosphonates
+    pass: 3
+    src: { page: 227, quote: "Severe osteoporosis (T-score ≤ –3.0). Multiple vertebral fractures. Failed/intolerant of bisphosphonates." }
+    status: unverified
+  - id: rheum.L14.043
+    kind: card
+    topic: anabolic
+    front: Side effects and boxed warning of teriparatide?
+    back: Nausea, leg cramps, hypercalcemia; boxed warning of osteosarcoma in rats (not seen in humans).
+    src: { page: 227, quote: "Black box warning: osteosarcoma in rats (not seen in humans)." }
+    status: unverified
+  - id: rheum.L14.044
+    kind: card
+    topic: anabolic
+    front: Romosozumab - mechanism, dose and use?
+    back: Anti-sclerostin monoclonal antibody with dual action (more formation, less resorption); 210 mg SC monthly for 12 months for high-risk postmenopausal osteoporosis.
+    src: { page: 227, quote: "Mechanism: Anti-sclerostin monoclonal antibody → dual action: ↑ bone formation + ↓ resorption." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L14.045
+    kind: cloze
+    topic: anabolic
+    text: Romosozumab is {{c1::210 mg}} SC monthly for {{c2::12 months}}.
+    src: { page: 227, quote: "Dose: 210 mg SC monthly for 12 months." }
+    status: unverified
+    tags: [numbers]
+  # ---------- p228: caution, strategy, monitoring, GIOP ----------
+  - id: rheum.L14.046
+    kind: card
+    topic: anabolic
+    front: In whom should romosozumab be avoided, and why?
+    back: In recent MI or stroke, because some trials showed more cardiovascular events.
+    src: { page: 228, quote: "Caution: Increased risk of CV events in some trials → avoid in recent MI/stroke." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L14.047
+    kind: table
+    topic: strategy
+    title: Drug selection strategy (book table, p228)
+    columns: [Patient profile, Suggested treatment]
+    rows:
+      - [Postmenopausal with vertebral fracture, Bisphosphonate or denosumab]
+      - ["Severe osteoporosis (T-score < –3)", Start with teriparatide or romosozumab]
+      - [CKD or GI intolerance, Denosumab or IV bisphosphonate]
+      - ["Younger, menopausal symptoms", "HRT or SERM (e.g. raloxifene)"]
+      - [Steroid-induced osteoporosis, Oral or IV bisphosphonate]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 228, quote: "Severe osteoporosis (T-score < –3) Start with Teriparatide or Romosozumab" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L14.048
+    kind: enumerate
+    topic: strategy
+    prompt: Treatment monitoring in osteoporosis.
+    points:
+      - Repeat DEXA every 1–2 years
+      - Check adherence and calcium/vitamin D status
+      - "Watch for drug side effects (atypical fractures, ONJ)"
+    pass: 3
+    src: { page: 228, quote: "Repeat DEXA every 1–2 years to assess response. Monitor adherence and calcium/vitamin D status." }
+    status: unverified
+  - id: rheum.L14.049
+    kind: cloze
+    topic: strategy
+    text: In GIOP, risk begins within {{c1::3 months}} of starting steroids, and everyone on ≥ {{c2::2.5 mg/day}} prednisone for > 3 months should be assessed.
+    src: { page: 228, quote: "Risk begins within 3 months of starting steroids. All patients on ≥2.5 mg/day of prednisone for >3 months should be assessed." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: rheum.L14.050
+    kind: card
+    topic: strategy
+    front: First-line therapy for glucocorticoid-induced osteoporosis, and what else is essential?
+    back: Bisphosphonates; plus lifestyle change and calcium/vitamin D supplements.
+    src: { page: 228, quote: "Bisphosphonates are first-line therapy for GIOP. Lifestyle changes and calcium/vitamin D supplementation are essential." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- own MCQs ----------
+  - id: rheum.L14.051
+    kind: mcq
+    topic: dexa
+    stem: "A 62-year-old woman has a T-score of –2.1 at the femoral neck and no fractures. Her category?"
+    options: ["Osteopenia", "Normal", "Osteoporosis", "Severe osteoporosis", "Cannot classify without FRAX"]
+    answer: 0
+    why:
+      - "Correct: –1 > T > –2.5."
+      - "Normal is T ≥ –1."
+      - "Osteoporosis needs T ≤ –2.5."
+      - "Severe needs T ≤ –2.5 plus a fragility fracture."
+      - "The T-score alone classifies; FRAX estimates risk."
+    src: { page: 223, quote: "Osteopenia: –1 > T > –2.5." }
+    status: unverified
+  - id: rheum.L14.052
+    kind: mcq
+    topic: indications
+    stem: "The same 62-year-old woman (T –2.1) has a high FRAX score. What next?"
+    options: ["Start drug therapy", "Calcium alone, repeat DEXA in 10 years", "No action until T ≤ –2.5", "Start teriparatide first", "Order a bone biopsy"]
+    answer: 0
+    why:
+      - "Correct: osteopenia plus high FRAX is a drug indication."
+      - "Under-treats a high-risk patient."
+      - "High FRAX qualifies even with osteopenia."
+      - "Anabolics are for severe disease (T ≤ –3), multiple vertebral fractures or bisphosphonate failure."
+      - "Not part of the work-up."
+    src: { page: 224, quote: "Osteopenia (T-score between –1 and –2.5) + high FRAX score." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L14.053
+    kind: mcq
+    topic: types
+    stem: "Type I primary osteoporosis is mainly due to:"
+    options: ["Estrogen deficiency increasing osteoclast activity", "Age-related decline in osteoblast function", "Glucocorticoid excess", "Vitamin D malabsorption", "Hyperparathyroidism"]
+    answer: 0
+    why:
+      - "Correct: postmenopausal type."
+      - "That is type II (senile)."
+      - "A secondary cause."
+      - "A secondary cause."
+      - "A secondary cause."
+    src: { page: 222, quote: "Type I (Postmenopausal): Estrogen deficiency leads to increased osteoclast activity." }
+    status: unverified
+  - id: rheum.L14.054
+    kind: mcq
+    topic: bisphosphonates
+    stem: "A 70-year-old woman with osteoporosis has achalasia. Which is the best choice?"
+    options: ["Avoid oral bisphosphonates; consider denosumab or IV zoledronic acid", "Alendronate 70 mg weekly", "Risedronate 35 mg weekly", "Raloxifene as first choice", "No treatment"]
+    answer: 0
+    why:
+      - "Correct: esophageal disorders contraindicate (oral) bisphosphonates; for GI intolerance the table suggests denosumab or IV bisphosphonate."
+      - "Oral, so contraindicated with an esophageal disorder."
+      - "Oral, same problem."
+      - "SERMs suit younger women with menopausal symptoms or breast cancer risk."
+      - "She needs treatment."
+    src: { page: 225, quote: "Esophageal disorders Hypocalcemia Severe renal impairment (eGFR <30–35 mL/min)" }
+    status: unverified
+  - id: rheum.L14.055
+    kind: mcq
+    topic: denosumab
+    stem: "A 74-year-old woman with osteoporosis has eGFR 25 mL/min. Which drug fits best?"
+    options: ["Denosumab", "Alendronate", "Zoledronic acid", "Teriparatide only if T > –2", "HRT"]
+    answer: 0
+    why:
+      - "Correct: suitable in CKD (not nephrotoxic); watch for hypocalcemia."
+      - "Contraindicated with eGFR < 30–35."
+      - "Same renal contraindication."
+      - "Not an indication."
+      - "Not for osteoporosis alone; risks of breast cancer, VTE and stroke."
+    src: { page: 226, quote: "CKD patients (not nephrotoxic)." }
+    status: unverified
+  - id: rheum.L14.056
+    kind: mcq
+    topic: denosumab
+    stem: "A woman on denosumab for 4 years wants to stop it. What is the key risk?"
+    options: ["Rebound vertebral fractures unless switched to another agent", "Osteosarcoma", "Hypercalcemia", "Atrial fibrillation", "None"]
+    answer: 0
+    why:
+      - "Correct: transition to another agent when stopping."
+      - "A rat warning for teriparatide."
+      - "Denosumab causes hypocalcemia, and stopping it is not linked to hypercalcemia in the book."
+      - "Not in the book."
+      - "The rebound risk is real."
+    src: { page: 226, quote: "Rebound vertebral fractures may occur if discontinued without transition to another agent." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L14.057
+    kind: mcq
+    topic: serm-hrt
+    stem: "A 56-year-old postmenopausal woman with osteopenia and a strong family history of breast cancer, no VTE history. Which drug suits her best?"
+    options: ["Raloxifene", "HRT", "Romosozumab", "Teriparatide", "Denosumab"]
+    answer: 0
+    why:
+      - "Correct: SERM agonist in bone, antagonist in breast; especially for those at breast cancer risk."
+      - "HRT raises breast cancer risk."
+      - "For high-risk postmenopausal osteoporosis."
+      - "For severe osteoporosis."
+      - "For high fracture risk or CKD."
+    src: { page: 226, quote: "Especially those at risk for breast cancer." }
+    status: unverified
+  - id: rheum.L14.058
+    kind: mcq
+    topic: anabolic
+    stem: "Which patient should not receive romosozumab?"
+    options: ["A woman who had a myocardial infarction 2 months ago", "A woman with T –3.4 and vertebral fractures", "A woman intolerant of bisphosphonates", "A woman with high fracture risk", "A postmenopausal woman aged 70"]
+    answer: 0
+    why:
+      - "Correct: avoid in recent MI or stroke (CV events in some trials)."
+      - "Severe osteoporosis: a good candidate."
+      - "Could be considered."
+      - "That is its use."
+      - "Age alone is not a contraindication."
+    src: { page: 228, quote: "Caution: Increased risk of CV events in some trials → avoid in recent MI/stroke." }
+    status: unverified
+  - id: rheum.L14.059
+    kind: mcq
+    topic: strategy
+    stem: "How often should DEXA be repeated on treatment?"
+    options: ["Every 1–2 years", "Every 3 months", "Every 5 years", "Only if a fracture occurs", "Monthly"]
+    answer: 0
+    why:
+      - "Correct: to assess response."
+      - "Too often."
+      - "Not the book's interval."
+      - "Response is monitored routinely."
+      - "Too often."
+    src: { page: 228, quote: "Repeat DEXA every 1–2 years to assess response." }
+    status: unverified
+  - id: rheum.L14.060
+    kind: mcq
+    topic: strategy
+    stem: "A 45-year-old man has taken prednisone 7.5 mg/day for 4 months for polymyalgia. Which is correct?"
+    options: ["Assess him for GIOP; bisphosphonate is first-line if treatment needed", "No risk until 1 year of steroids", "Only women get GIOP", "Raloxifene is first-line", "Calcitonin is first-line"]
+    answer: 0
+    why:
+      - "Correct: ≥ 2.5 mg/day for > 3 months should be assessed; bisphosphonates are first-line."
+      - "Risk starts within 3 months."
+      - "Men are included."
+      - "SERMs are not for men."
+      - "Not the book's first line."
+    src: { page: 228, quote: "All patients on ≥2.5 mg/day of prednisone for >3 months should be assessed. Bisphosphonates are first-line therapy for GIOP." }
+    status: unverified
+  # ---------- cases ----------
+  - id: rheum.L14.061
+    kind: case
+    topic: strategy
+    stem: "A 68-year-old woman falls from standing height and breaks her wrist."
+    steps:
+      - question: "What is this fracture called, and what does it suggest?"
+        options: ["Colles' fracture, a fragility fracture suggesting osteoporosis", "A traumatic fracture, no bone work-up needed", "A pathological fracture from metastasis only", "A stress fracture"]
+        answer: 0
+        why: "The distal forearm (Colles') is a typical osteoporotic fracture site; adults with fragility fractures need BMD testing."
+      - reveal: "DEXA: lumbar spine T –2.8, femoral neck T –2.6."
+        question: "Diagnosis?"
+        options: ["Severe osteoporosis", "Osteopenia", "Osteoporosis without fracture", "Normal"]
+        answer: 0
+        why: "T ≤ –2.5 plus a fragility fracture = severe osteoporosis."
+      - question: "Which tests rule out secondary causes?"
+        options: ["CBC, ESR, Ca, phosphate, ALP, creatinine, TSH, 25(OH)D, PTH", "Only serum calcium", "Bone scan", "Anti-CCP"]
+        answer: 0
+        why: "The book's laboratory panel; add serum protein electrophoresis if myeloma is suspected."
+      - reveal: "All normal. eGFR 70, no swallowing problems."
+        question: "Reasonable first drug (book table: postmenopausal with fracture)?"
+        options: ["Alendronate 70 mg weekly", "HRT", "Calcitonin", "No drug, calcium only"]
+        answer: 0
+        why: "Bisphosphonate (or denosumab), with calcium 1000–1200 mg and vitamin D 800–1000 IU."
+      - question: "How should she take it?"
+        options: ["Empty stomach, full glass of water, upright 30–60 min", "With breakfast and milk", "At bedtime lying down", "With calcium tablets"]
+        answer: 0
+        why: "The book's instructions for oral bisphosphonates."
+    src: { page: 223, quote: "Severe osteoporosis: T ≤ –2.5 + fragility fracture." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L14.062
+    kind: case
+    topic: anabolic
+    stem: "A 72-year-old woman has three vertebral compression fractures. Lumbar T-score is –3.6."
+    steps:
+      - question: "Per the book's strategy table, how should treatment start?"
+        options: ["Teriparatide or romosozumab", "Raloxifene", "HRT", "Calcium and vitamin D only"]
+        answer: 0
+        why: "Severe osteoporosis (T < –3): start with an anabolic agent."
+      - reveal: "She had a stroke 6 weeks ago."
+        question: "Which anabolic now?"
+        options: ["Teriparatide 20 mcg SC daily", "Romosozumab 210 mg monthly", "Either, no difference", "Neither"]
+        answer: 0
+        why: "Avoid romosozumab after recent MI or stroke."
+      - question: "Maximum duration of teriparatide?"
+        options: ["2 years", "6 months", "5 years", "Lifelong"]
+        answer: 0
+        why: "20 mcg SC daily, max 2 years."
+      - question: "Which side effect should you check for on teriparatide?"
+        options: ["Hypercalcemia", "Hypocalcemia", "Osteosarcoma in humans", "VTE"]
+        answer: 0
+        why: "Nausea, leg cramps and hypercalcemia; osteosarcoma was seen in rats, not in humans."
+    src: { page: 227, quote: "Severe osteoporosis (T-score ≤ –3.0). Multiple vertebral fractures. Failed/intolerant of bisphosphonates." }
+    status: unverified
+  - id: rheum.L14.063
+    kind: case
+    topic: denosumab
+    stem: "A 78-year-old man has CKD stage 4 (eGFR 22) and a hip fracture."
+    steps:
+      - question: "Does he need drug treatment?"
+        options: ["Yes: men ≥ 50 with a hip fracture", "No: osteoporosis is a women's disease", "Only if T ≤ –3", "Only after a second fracture"]
+        answer: 0
+        why: "Men ≥ 50 with a hip or vertebral fracture qualify."
+      - question: "Which drug?"
+        options: ["Denosumab 60 mg SC every 6 months", "Alendronate", "Zoledronic acid", "Raloxifene"]
+        answer: 0
+        why: "Bisphosphonates are contraindicated with eGFR < 30–35; denosumab is not nephrotoxic. Raloxifene is not for men."
+      - question: "Which risk is greatest in him on this drug?"
+        options: ["Hypocalcemia", "Hypercalcemia", "Osteosarcoma", "Hot flashes"]
+        answer: 0
+        why: "Hypocalcemia, especially with CKD; also ONJ and infections."
+    src: { page: 226, quote: "Hypocalcemia (especially with CKD). ONJ. Infections." }
+    status: unverified
+  - id: rheum.L14.064
+    kind: order
+    topic: indications
+    prompt: Order the T-scores from the best to the worst category.
+    steps:
+      - "T –0.5 (normal)"
+      - "T –1.8 (osteopenia)"
+      - "T –2.7 (osteoporosis)"
+      - "T –2.7 with a hip fracture (severe)"
+    src: { page: 223, quote: "Normal: T ≥ –1. o Osteopenia: –1 > T > –2.5. o Osteoporosis: T ≤ –2.5." }
+    status: unverified
+  # ---------- book MCQs (p229–232) ----------
+  - id: rheum.L14.065
+    kind: mcq
+    topic: dexa
+    stem: "What is the WHO T-score threshold for diagnosing osteoporosis on DEXA scan?"
+    options: ["–1.0", "–1.5", "–2.0", "–2.5"]
+    answer: 3
+    why:
+      - "That separates normal from osteopenia."
+      - "Within osteopenia."
+      - "Within osteopenia."
+      - "Correct: a T-score of –2.5 or lower defines osteoporosis."
+    src: { page: 229, quote: "Correct Answer: D. –2.5." }
+    status: unverified
+    tags: [book-question]
+  - id: rheum.L14.066
+    kind: mcq
+    topic: definition
+    stem: "Which of the following is the most common site for osteoporotic fracture?"
+    options: ["Skull", "Proximal femur", "Humerus", "Rib"]
+    answer: 1
+    why:
+      - "Not a typical site."
+      - "Correct (book answer): hip, vertebral and distal forearm are the common sites."
+      - "Not among the book's typical sites."
+      - "Not among the book's typical sites."
+    src: { page: 229, quote: "Correct Answer: B. Proximal femur" }
+    status: unverified
+    tags: [book-question]
+  - id: rheum.L14.067
+    kind: mcq
+    topic: types
+    stem: "Which of the following is NOT a risk factor for secondary osteoporosis?"
+    options: ["Rheumatoid arthritis", "Long-term corticosteroids", "Type 1 diabetes", "Beta blockers"]
+    answer: 3
+    why:
+      - "A risk factor: chronic illness."
+      - "A risk factor: the classic drug cause."
+      - "A risk factor in the book's question."
+      - "Correct: beta blockers are not associated with bone loss."
+    src: { page: 229, quote: "Correct Answer: D. Beta blockers" }
+    status: unverified
+    tags: [book-question]
+  - id: rheum.L14.068
+    kind: mcq
+    topic: nonpharm
+    stem: "What is the recommended calcium intake for an adult over 50 with osteoporosis?"
+    options: ["500–700 mg/day", "800–1000 mg/day", "1000–1200 mg/day", "1500 mg/day"]
+    answer: 2
+    why:
+      - "Too low."
+      - "That is the vitamin D range in IU, not the calcium dose."
+      - "Correct: needed to maintain bone health in older adults."
+      - "Above the book's range."
+    src: { page: 230, quote: "Correct Answer: C. 1000–1200 mg/day" }
+    status: unverified
+    tags: [book-question]
+  - id: rheum.L14.069
+    kind: mcq
+    topic: denosumab
+    stem: "Which osteoporosis drug works by inhibiting RANKL?"
+    options: ["Alendronate", "Raloxifene", "Teriparatide", "Denosumab"]
+    answer: 3
+    why:
+      - "A bisphosphonate that inhibits osteoclast-mediated resorption."
+      - "A SERM."
+      - "A PTH analogue that stimulates osteoblasts."
+      - "Correct: anti-RANKL monoclonal antibody blocking osteoclast activation."
+    src: { page: 230, quote: "Correct Answer: D. Denosumab" }
+    status: unverified
+    tags: [book-question]
+  - id: rheum.L14.070
+    kind: mcq
+    topic: bisphosphonates
+    stem: "What is a key adverse effect of long-term bisphosphonate use?"
+    options: ["Hypoglycemia", "Hyponatremia", "Osteonecrosis of the jaw", "Atrial fibrillation"]
+    answer: 2
+    why:
+      - "Not a bisphosphonate effect in the book."
+      - "Not a bisphosphonate effect in the book."
+      - "Correct: rare, but seen with prolonged therapy."
+      - "Not the book's answer."
+    src: { page: 230, quote: "Correct Answer: C. Osteonecrosis of the jaw." }
+    status: unverified
+    tags: [book-question]
+  - id: rheum.L14.071
+    kind: mcq
+    topic: anabolic
+    stem: "Which osteoporosis drug has an anabolic effect on bone?"
+    options: ["Raloxifene", "Teriparatide", "Denosumab", "Alendronate"]
+    answer: 1
+    why:
+      - "Antiresorptive SERM."
+      - "Correct: recombinant PTH analogue stimulating osteoblasts."
+      - "Antiresorptive anti-RANKL."
+      - "Antiresorptive bisphosphonate."
+    src: { page: 231, quote: "Correct Answer: B. Teriparatide" }
+    status: unverified
+    tags: [book-question]
+  - id: rheum.L14.072
+    kind: mcq
+    topic: screening
+    stem: "In which patient is DEXA screening not routinely indicated?"
+    options: ["68-year-old woman", "72-year-old man", "50-year-old woman with recent wrist fracture", "42-year-old woman with no risk factors"]
+    answer: 3
+    why:
+      - "Women ≥ 65 are screened."
+      - "Men ≥ 70 are screened."
+      - "Adults with fragility fractures are tested."
+      - "Correct: young, no risk factors."
+    src: { page: 231, quote: "Correct Answer: D. 42-year-old woman with no risk factors." }
+    status: unverified
+    tags: [book-question]
+  - id: rheum.L14.073
+    kind: mcq
+    topic: anabolic
+    stem: "Which statement about romosozumab is true?"
+    options: ["It is given orally once weekly", "It is contraindicated in patients with vertebral fractures", "It is a monoclonal antibody that inhibits sclerostin", "It suppresses PTH secretion"]
+    answer: 2
+    why:
+      - "It is 210 mg SC monthly."
+      - "Vertebral fractures are not a contraindication; recent MI or stroke is."
+      - "Correct: dual action, more formation and less resorption."
+      - "Not its mechanism."
+    src: { page: 231, quote: "Correct Answer: C. It is a monoclonal antibody that inhibits sclerostin." }
+    status: unverified
+    tags: [book-question]
+  - id: rheum.L14.074
+    kind: mcq
+    topic: strategy
+    stem: "What is the preferred first-line therapy for glucocorticoid-induced osteoporosis (GIOP)?"
+    options: ["Raloxifene", "Teriparatide", "Bisphosphonates", "Calcitonin"]
+    answer: 2
+    why:
+      - "Not first-line for GIOP."
+      - "Not first-line in the book."
+      - "Correct: first-line for patients on long-term steroids."
+      - "Not first-line."
+    src: { page: 232, quote: "Correct Answer: C. Bisphosphonates." }
+    status: unverified
+    tags: [book-question]

@@ -22,6 +22,8 @@ fn area_label(area: Area) -> &'static str {
         Area::AcuteFailure => tx::AREA_ACUTE,
         Area::Pancreas => tx::AREA_PANCREAS,
         Area::Gi => tx::AREA_GI,
+        Area::Renal => tx::AREA_RENAL,
+        Area::Elderly => tx::AREA_ELDERLY,
         Area::Research => tx::AREA_RESEARCH,
     }
 }
@@ -31,13 +33,24 @@ fn area_label(area: Area) -> &'static str {
 fn area_course(area: Area) -> &'static str {
     match area {
         Area::Gi => "git",
+        Area::Renal => "neph",
+        Area::Elderly => "geri",
         Area::Research => "res",
         _ => "hb",
     }
 }
 
-const AREAS: [Area; 7] =
-    [Area::Liver, Area::Ascites, Area::Tumour, Area::AcuteFailure, Area::Pancreas, Area::Gi, Area::Research];
+const AREAS: [Area; 9] = [
+    Area::Liver,
+    Area::Ascites,
+    Area::Tumour,
+    Area::AcuteFailure,
+    Area::Pancreas,
+    Area::Gi,
+    Area::Renal,
+    Area::Elderly,
+    Area::Research,
+];
 
 /// Every calculator, grouped by area. On phones the list and the open
 /// calculator take turns; from 840dp they sit side by side.

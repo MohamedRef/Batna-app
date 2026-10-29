@@ -11,6 +11,8 @@ use crate::i18n::count::{MINUTE, count};
 
 #[component]
 pub fn Player() -> Element {
+    // A running paper gets the whole phone screen; ✕ is the way out.
+    crate::parts::use_focus_mode(true);
     let Phase::Running(p) = PHASE.read().clone() else {
         return rsx! {};
     };

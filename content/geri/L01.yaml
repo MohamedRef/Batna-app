@@ -1,0 +1,1426 @@
+schema: batna.content/v1
+lecture: geri.L01
+title: "Cardiovascular disorders in the elderly"
+author: "Prof. Azza Hassan Mohamed"
+book: { chapter: 7, pages: [1, 24] }
+topics:
+  - { id: aging, title: "Age-associated cardiovascular changes" }
+  - { id: htn, title: "Hypertension: key facts and ACC/AHA vs ESC/ESH" }
+  - { id: htn-treatment, title: "Treating hypertension, including old and frail patients" }
+  - { id: cad, title: "Coronary artery disease: risk factors and subclinical disease" }
+  - { id: angina, title: "Angina in the elderly: presentation, diagnosis, treatment" }
+  - { id: mi, title: "Myocardial infarction: suspicion, ECG, atypical picture, treatment" }
+  - { id: hf-causes, title: "Heart failure: burden, systolic and diastolic causes, prognosis" }
+  - { id: hf-signs, title: "Heart failure: physical and chest X-ray findings" }
+  - { id: hf-diagnosis, title: "Heart failure: diagnostic algorithm and natriuretic peptides" }
+  - { id: hf-treatment, title: "Heart failure treatment: HFrEF algorithm, doses, diuretics, SGLT2i" }
+  - { id: elderly-drugs, title: "Tips for cardiac drug treatment in the elderly" }
+items:
+  # ---------- p1-2: age-associated changes ----------
+  - id: geri.L01.001
+    kind: card
+    topic: aging
+    front: How does amyloid deposition affect the aging heart?
+    back: It may be a frequent cause of cardiac conduction disease, and amyloid heart disease leads to restrictive cardiomyopathy and heart failure in the elderly.
+    src: { page: 1, quote: "Amyloid deposition may be a frequent cause of cardiac conduction disease and Amyloid heart disease → Restrictive Cardiomyopathy → heart failure in the elderly." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L01.002
+    kind: cloze
+    topic: aging
+    text: "The most common arrhythmia in the elderly is {{c1::atrial fibrillation}}, seen in about {{c2::one-third}} of older individuals and often {{c3::\"lone\"}}."
+    src: { page: 1, quote: "Most common arrhythmia seen is atrial fibrillation (⅓ in older individuals) and is often ―lone‖ atrial fibrillation" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: geri.L01.003
+    kind: cloze
+    topic: aging
+    text: "Left ventricular {{c1::stiffness}} impairs diastolic filling, which declines {{c2::50%}} between ages 20 and 80, leading to {{c3::diastolic heart failure}}."
+    src: { page: 2, quote: "Left ventricular stiffness → impaired diastolic filling which declines 50% between ages 20 and 80 → diastolic heart failure." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: geri.L01.004
+    kind: card
+    topic: aging
+    front: Why do about 20% of older people get postural hypotension and syncope?
+    back: Sensitivity to filling volumes combined with an impaired heart-rate response to stress.
+    src: { page: 2, quote: "The combination of sensitivity to filling volumes and impaired heart rate response to stress may explain the syndrome of postural hypotension in 20%" }
+    status: unverified
+    tags: [numbers]
+  - id: geri.L01.005
+    kind: card
+    topic: aging
+    front: Which heart valves thicken and stiffen with age, and what lesion results?
+    back: Mainly the mitral and aortic valves; the result is calcific stenosis.
+    src: { page: 2, quote: "Heart valves thicken and stiffen, particularly the Mitral and Aortic ( calcific stenosis)." }
+    status: unverified
+  - id: geri.L01.006
+    kind: cloze
+    topic: aging
+    text: "The aging aorta dilates and its medial walls calcify; loss of elasticity raises {{c1::systolic}} BP, which rises after age {{c2::30}} until the {{c3::mid-70s}}, then falls through the 80s and 90s."
+    src: { page: 2, quote: "increase in systolic blood pressure (systolic BP ↑after age 30 years until the mid-70s, then ↓through the 80s and 90s)." }
+    status: unverified
+    tags: [numbers]
+  - id: geri.L01.007
+    kind: card
+    topic: aging
+    front: What causes sick sinus syndrome and AV block in the aging heart?
+    back: Loss of pacemaker cells in the sinus node and of conduction fibers in the bundle branches.
+    src: { page: 2, quote: "Loss of pacemaker cells in the sinus node and conduction fibers in the bundle branches in the aging heart" }
+    status: unverified
+  - id: geri.L01.008
+    kind: card
+    topic: aging
+    front: What is the most important principle in approaching cardiovascular disorders in old age?
+    back: Recognize the narrowed homeostatic capacity of the elderly.
+    src: { page: 2, quote: "The most important principle in the approach to cardio-vascular disorders with advancing age is to recognize the narrowed homeostatic capacity of the elderly." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L01.009
+    kind: enumerate
+    topic: aging
+    prompt: List the age-associated cardiovascular disorders (book question Q1).
+    points:
+      - Amyloid heart disease (conduction disease, restrictive cardiomyopathy, heart failure)
+      - Atrial fibrillation, often lone (one-third)
+      - Diastolic heart failure from LV stiffness
+      - Postural hypotension and syncope (20%)
+      - Coronary atherosclerosis and silent MI
+      - Calcific mitral and aortic valve disease
+      - Aortic stiffening with systolic hypertension
+      - Sick sinus syndrome and AV block
+    pass: 6
+    src: { page: 2, quote: "Coronary Atherosclerosis is common and Silent MI." }
+    status: unverified
+    tags: [book-question, high-yield]
+  - id: geri.L01.010
+    kind: mcq
+    topic: aging
+    stem: "A 72-year-old smoker with obesity and diabetes has exertional dyspnea, a delayed-peak pulse, an LV heave, an S4 and a grade IV/VI mid-systolic murmur at the base radiating to the carotids. Echo: severe isolated aortic stenosis. What most likely contributed to his valve lesion?"
+    options:
+      - Diabetes mellitus
+      - Congenital bicuspid aortic valve
+      - Occult rheumatic heart disease
+      - Underlying connective tissue disease
+    answer: 0
+    why:
+      - "Correct: at 72 this is calcific degenerative aortic stenosis (p2, p14), and diabetes, smoking and obesity are atherosclerotic risk factors that drive valve calcification. The book prints no key; this is the standard answer."
+      - "A bicuspid valve usually becomes stenotic earlier, in the 50s to 60s."
+      - "Rheumatic disease almost always involves the mitral valve too; his is isolated aortic."
+      - "Connective tissue disease causes aortic regurgitation from root dilatation, not stenosis."
+    src: { page: 2, quote: "Heart valves thicken and stiffen, particularly the Mitral and Aortic ( calcific stenosis)." }
+    status: unverified
+    tags: [book-question]
+  - id: geri.L01.011
+    kind: mcq
+    topic: aging
+    stem: "A 70-year-old woman, breathless for several months, is admitted with chest pain. Her ECG shows an irregularly irregular narrow-complex rhythm with no P waves and no ST elevation. What does it show?"
+    options:
+      - Atrial fibrillation
+      - Myocardial infarction
+      - Sinus tachycardia
+      - Pericarditis
+    answer: 0
+    why:
+      - "Correct: no P waves and irregular RR intervals are AF, the most common arrhythmia in older people (p1). The book prints no key."
+      - "There is no ST elevation or Q wave."
+      - "Sinus tachycardia has a P wave before every QRS and a regular rhythm."
+      - "Pericarditis gives diffuse saddle ST elevation and PR depression."
+    src: { page: 1, quote: "Most common arrhythmia seen is atrial fibrillation (⅓ in older individuals)" }
+    status: unverified
+    tags: [book-question]
+  # ---------- p4-5: hypertension key facts and guidelines ----------
+  - id: geri.L01.012
+    kind: cloze
+    topic: htn
+    text: "About {{c1::1.28 billion}} adults aged 30–79 years have hypertension worldwide, {{c2::two-thirds}} of them in low- and middle-income countries."
+    src: { page: 4, quote: "An estimated 1.28 billion adults aged 30–79 years worldwide have hypertension, most (two-thirds) living in low- and middle-income countries" }
+    status: unverified
+    tags: [numbers]
+  - id: geri.L01.013
+    kind: cloze
+    topic: htn
+    text: "Of adults with hypertension, {{c1::46%}} are unaware of it, {{c2::42%}} are diagnosed and treated, and only {{c3::21%}} (1 in 5) are controlled."
+    src: { page: 4, quote: "Less than half of adults (42%) with hypertension are diagnosed and treated. Approximately 1 in 5 adults (21%) with hypertension have it under control." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: geri.L01.014
+    kind: card
+    topic: htn
+    front: What is a major source of blood pressure misclassification?
+    back: Errors in BP measurement.
+    src: { page: 4, quote: "Errors in BP measurement are a major source of BP misclassification." }
+    status: unverified
+  - id: geri.L01.015
+    kind: card
+    topic: htn
+    front: "A 63-year-old bus driver has clinic BP 176/108 and LVH on ECG but refuses ambulatory BP monitoring (ABPM). What alternative test confirms hypertension?"
+    back: Home blood pressure monitoring (HBPM). The book prints no answer; HBPM is the accepted alternative when ABPM is refused or not tolerated.
+    src: { page: 4, quote: "You are unable to confirm the diagnosis of hypertension with ambulatory blood pressure monitoring (ABPM)" }
+    status: unverified
+    tags: [book-question]
+    update:
+      text: "NICE confirms hypertension with ABPM, and with home BP monitoring (HBPM) if ABPM is unsuitable or not tolerated."
+      ref: "NICE NG136 Hypertension in adults, 2019 (updated 2023)"
+  - id: geri.L01.016
+    kind: table
+    topic: htn
+    title: "ACC/AHA 2017 vs ESC/ESH 2018 hypertension guidelines"
+    columns: [Parameter, ACC/AHA, ESC/ESH]
+    rows:
+      - [Definition of hypertension, ">130/80", ">140/90"]
+      - [Normal, "<120/80", "120–129/80–84 (optimal <120/80)"]
+      - [High normal, "120–129/<80", "130–139/85–89"]
+      - [Grade 1, "130–139/80–89", "140–159/90–99"]
+      - [Grade 2, "≥140/90", "160–179/100–109"]
+      - [Grade 3, "None", "≥180/110"]
+      - [Target under 65 y, "<130/80", "<130/80"]
+      - [Target 65 y and over, "<130/80", "<140/80"]
+    blanks: [[0, 1], [0, 2], [3, 1], [3, 2], [5, 2], [7, 1], [7, 2]]
+    src: { page: 5, quote: "Definition of hypertension (mm Hg) >130/80 > 140/90" }
+    status: unverified
+    tags: [high-yield, numbers]
+    update:
+      text: "ESC 2024 adds an 'elevated BP' category (office 120–139/70–89) and targets a systolic BP of 120–129 mmHg if tolerated, including most older adults; targets are relaxed in those 85 and over or frail."
+      ref: "ESC Guidelines for the management of elevated blood pressure and hypertension, 2024"
+  - id: geri.L01.017
+    kind: cloze
+    topic: htn
+    text: "Hypertension is defined as BP above {{c1::130/80}} by ACC/AHA and above {{c2::140/90}} by ESC/ESH."
+    src: { page: 5, quote: "Definition of hypertension (mm Hg) >130/80 > 140/90" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: geri.L01.018
+    kind: mcq
+    topic: htn
+    stem: "A fit 70-year-old man with hypertension asks for his BP target. According to the ESC/ESH table in the lecture, what is it?"
+    options:
+      - "<140/80 mmHg"
+      - "<130/80 mmHg"
+      - "<120/80 mmHg"
+      - "<150/90 mmHg"
+    answer: 0
+    why:
+      - "Correct: ESC/ESH targets <140/80 at 65 and over (p5)."
+      - "<130/80 is the ESC/ESH target under 65, and the ACC/AHA target at every age."
+      - "<120/80 is the definition of optimal BP, not a treatment target."
+      - "<150/90 is not a target in either guideline in the table."
+    src: { page: 5, quote: "Target blood pressure in various subsets ≤65 y, <130/80 ≥65 y, <130/80 <65 y, <130/80 ≥65 y, <140/80" }
+    status: unverified
+    tags: [numbers]
+  - id: geri.L01.019
+    kind: mcq
+    topic: htn
+    stem: "A 58-year-old has repeated office BP readings around 136/86 mmHg. How is this classified by ACC/AHA and by ESC/ESH?"
+    options:
+      - "ACC/AHA grade 1 hypertension; ESC/ESH high normal"
+      - "Hypertension by both guidelines"
+      - "ACC/AHA elevated; ESC/ESH grade 1"
+      - "Normal by both guidelines"
+    answer: 0
+    why:
+      - "Correct: ACC/AHA grade 1 is 130–139/80–89; ESC/ESH high normal is 130–139/85–89 (p5)."
+      - "ESC/ESH only calls it hypertension above 140/90."
+      - "ESC/ESH grade 1 starts at 140/90."
+      - "Normal is <120/80 (ACC/AHA) or 120–129/80–84 (ESC/ESH)."
+    src: { page: 5, quote: "Grade 1, 130–139/80–89 Grade 2, ≥140/90" }
+    status: unverified
+    tags: [numbers]
+  # ---------- p6-7: treatment ----------
+  - id: geri.L01.020
+    kind: enumerate
+    topic: htn-treatment
+    prompt: List the steps of non-pharmacological treatment of hypertension.
+    points:
+      - Avoid harmful habits (smoking, alcohol)
+      - Reduce salt and high-fat diets
+      - Lose weight if obese
+      - Regular exercise
+      - DASH diet
+    pass: 4
+    src: { page: 6, quote: "Avoid harmful habits ,smoking ,alcohol Reduce salt and high fat diets Loose weight , if obese Regular exercise DASH diet" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L01.021
+    kind: table
+    topic: htn-treatment
+    title: "Initial drug choice in hypertension (book figure, p6)"
+    columns: [Situation, BP, First drugs]
+    rows:
+      - [Stage 1, "SBP 140–159 or DBP 90–99", "Thiazide-type diuretic for most; may consider ACEI, ARB, BB, CCB or a combination"]
+      - [Stage 2, "SBP ≥160 or DBP ≥100", "2-drug combination for most (usually thiazide-type diuretic + ACEI, ARB, BB or CCB)"]
+      - [Compelling indication, "Any", "Drug(s) for the compelling indication, plus other antihypertensives as needed"]
+      - [Not at goal, "Above goal", "Optimize doses or add drugs; consider a hypertension specialist"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [3, 2]]
+    src: { page: 6, quote: "Stage 1 Hypertension (SBP 140–159 or DBP 90–99 mmHg) Thiazide-type diuretics for most." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L01.022
+    kind: cloze
+    topic: htn-treatment
+    text: "In the treatment algorithm, the goal BP is below {{c1::140/90}} mmHg, or below {{c2::130/80}} mmHg in {{c3::diabetes or chronic kidney disease}}."
+    src: { page: 6, quote: "Not at Goal Blood Pressure (<140/90 mmHg) (<130/80 mmHg for those with diabetes or chronic kidney disease)" }
+    status: unverified
+    tags: [numbers]
+  - id: geri.L01.023
+    kind: cloze
+    topic: htn-treatment
+    text: "ESC/ESH treat hypertension at SBP ≥{{c1::140}} mmHg in patients aged 65–79, and at SBP ≥{{c2::160}} mmHg in those aged {{c3::80 or over}} (DBP ≥90 in both)."
+    src: { page: 7, quote: "AGE 65-79 years SBP ≥140 mm Hg and/or DBP ≥90 mm Hg AGE ≥80 years SBP ≥160 mm Hg" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: geri.L01.024
+    kind: table
+    topic: htn-treatment
+    title: "Old, very old and frail hypertensive patients (ESC/ESH 2018)"
+    columns: [Point, "Age 65–79", "Age ≥80"]
+    rows:
+      - [Treat when, "SBP ≥140 and/or DBP ≥90", "SBP ≥160 and/or DBP ≥90"]
+      - [Start with, "A combination at the lowest dose", "A single drug, low dose"]
+      - [If tolerated but uncontrolled, "Increase doses", "Use combinations, from the lowest doses"]
+      - [Adherence, "Fixed combinations (2 or 3 drugs)", "Fixed combinations"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 2]]
+    src: { page: 7, quote: "Treat hypertension preferentially starting from a single drug, low dose approach" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L01.025
+    kind: enumerate
+    topic: htn-treatment
+    prompt: "Beyond the age bands, what does ESC/ESH 2018 advise for old, very old and frail hypertensive patients?"
+    points:
+      - Evaluate frailty and comorbidities first
+      - "Fit old and very old: non-drug treatment plus antihypertensive drugs"
+      - "Frail: drugs can be considered if tolerated; avoid combinations"
+      - "Consider temporary or permanent de-prescription (SBP ≤130, acute illness, temperature changes)"
+      - "Monitor carefully: postural hypotension, hypotensive episodes, injurious falls, renal function"
+    pass: 4
+    src: { page: 7, quote: "Antihypertensive drugs can be considered in frail older patients, if tolerated (avoid combinations)" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L01.026
+    kind: card
+    topic: htn-treatment
+    front: Which antihypertensives should be avoided in older patients unless another disease requires them, and why?
+    back: Loop diuretics and alpha-blockers, because of their association with injurious falls. Preferred are diuretics (thiazide-like), ACE inhibitors, ARBs and dihydropyridine CCBs.
+    src: { page: 7, quote: "loop diuretics and alpha-blockers should be avoided because of their association with injurious falls" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L01.027
+    kind: mcq
+    topic: htn-treatment
+    stem: "An 84-year-old woman who walks with a frame and fell twice this year has SBP 168 mmHg on repeated visits. Per ESC/ESH 2018 in the lecture, how should treatment start?"
+    options:
+      - "A single drug at a low dose, if tolerated; avoid combinations"
+      - "A fixed two-drug combination at full dose"
+      - "No treatment: drugs are never used after 80"
+      - "A loop diuretic plus an alpha-blocker"
+    answer: 0
+    why:
+      - "Correct: over 80 start with a single low-dose drug, and in frail patients avoid combinations (p7)."
+      - "Starting with a combination is for ages 65–79, and not in the frail."
+      - "Drugs are recommended for fit and can be considered for frail very old patients."
+      - "Loop diuretics and alpha-blockers are linked to injurious falls."
+    src: { page: 7, quote: "Antihypertensive drugs can be considered in frail older patients, if tolerated (avoid combinations)" }
+    status: unverified
+  - id: geri.L01.028
+    kind: enumerate
+    topic: htn-treatment
+    prompt: Give the take-home messages on hypertension.
+    points:
+      - Major cause of morbidity and mortality; needs treatment
+      - Extremely common yet under-diagnosed and undertreated
+      - Easy to diagnose and easy to treat
+      - Aim is to save the target organs
+      - Lifestyle modification for every hypertensive patient
+    pass: 4
+    src: { page: 7, quote: "Aim of the management is to save the target organ from the deleterious effect." }
+    status: unverified
+  # ---------- p8: coronary artery disease ----------
+  - id: geri.L01.029
+    kind: cloze
+    topic: cad
+    text: "The incidence of coronary artery disease rises with age: {{c1::85%}} of all CAD deaths occur after age {{c2::65}}."
+    src: { page: 8, quote: "85% of all deaths from coronary artery disease occur after the age of 65." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: geri.L01.030
+    kind: enumerate
+    topic: cad
+    prompt: List the traditional risk factors for coronary artery disease.
+    points:
+      - Hypertension
+      - Diabetes
+      - Lack of exercise
+      - High total cholesterol to HDL ratio
+      - Smoking
+      - Age
+    pass: 5
+    src: { page: 8, quote: "The traditional Risk Factors are: Hypertension, Diabetes, Lack of exercise, Ratio of high total cholesterol to high-density lipoprotein, Smoking, Age." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L01.031
+    kind: enumerate
+    topic: cad
+    prompt: List the newer risk factors for coronary artery disease.
+    points:
+      - C-reactive protein
+      - Lipoprotein(a)
+      - Homocysteine
+      - Microalbuminuria
+    pass: 4
+    src: { page: 8, quote: "Newer Risk Factors are: C-reactive protein, Lipoprotein a, Homocysteine, Microalbuminuria." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L01.032
+    kind: enumerate
+    topic: cad
+    prompt: How can subclinical atherosclerotic disease be measured?
+    points:
+      - CT coronary angiography
+      - Carotid ultrasound (plaque predicts stroke risk)
+      - Ankle-brachial index
+    pass: 3
+    src: { page: 8, quote: "Several measures have been developed to determine subclinical atherosclerotic disease: 1. CT coronary angiography 2. Carotid ultrasound" }
+    status: unverified
+  - id: geri.L01.033
+    kind: cloze
+    topic: cad
+    text: "A normal ankle-brachial index is above {{c1::0.9–0.95}}."
+    src: { page: 8, quote: "Ankle-brachial index (ABI) (normal ratio is > 0.9 – 0.95)" }
+    status: unverified
+    tags: [numbers]
+  - id: geri.L01.034
+    kind: mcq
+    topic: cad
+    stem: "Which of these is listed in the lecture as a NEWER (not traditional) coronary risk factor?"
+    options:
+      - Microalbuminuria
+      - Smoking
+      - Age
+      - Total cholesterol to HDL ratio
+      - Lack of exercise
+    answer: 0
+    why:
+      - "Correct: the newer factors are CRP, lipoprotein(a), homocysteine and microalbuminuria (p8)."
+      - "Smoking is a traditional risk factor."
+      - "Age is a traditional risk factor."
+      - "The cholesterol/HDL ratio is a traditional risk factor."
+      - "Lack of exercise is a traditional risk factor."
+    src: { page: 8, quote: "Newer Risk Factors are: C-reactive protein, Lipoprotein a, Homocysteine, Microalbuminuria." }
+    status: unverified
+  # ---------- p9-10: angina ----------
+  - id: geri.L01.035
+    kind: cloze
+    topic: angina
+    text: "Angina is the most common presenting symptom of CAD, occurring in {{c1::80%}} of the elderly."
+    src: { page: 9, quote: "Angina is the most common presenting symptoms of coronary artery disease, occurring in 80% of the elderly." }
+    status: unverified
+    tags: [numbers]
+  - id: geri.L01.036
+    kind: card
+    topic: angina
+    front: Why is classic exertional angina hard to elicit in the elderly?
+    back: Their activity is limited, so they do not develop symptoms until late in the disease.
+    src: { page: 9, quote: "The history of classic exertional angina may be difficult to obtain as the elderly patient who has limited activity" }
+    status: unverified
+  - id: geri.L01.037
+    kind: card
+    topic: angina
+    front: What is a very common manifestation of coronary disease in the elderly instead of chest pain?
+    back: Dyspnea on exertion.
+    src: { page: 9, quote: "Dyspnea on exertion is a very common manifestation of coronary disease in the elderly." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L01.038
+    kind: enumerate
+    topic: angina
+    prompt: Other symptoms of coronary disease in the elderly?
+    points:
+      - Palpitation
+      - Weakness
+      - Unexplained diaphoresis
+      - Indigestion
+      - Neck and shoulder pain
+      - Rest (unstable) or rapidly progressive angina, which is frequent
+    pass: 5
+    src: { page: 9, quote: "Other symptoms include Palpitation, Weakness, Unexplained diaphoresis, Indigestion, Neck and shoulder pain" }
+    status: unverified
+  - id: geri.L01.039
+    kind: enumerate
+    topic: angina
+    prompt: Signs of angina in the elderly?
+    points:
+      - Faint heart sounds
+      - S4 (reduced LV compliance)
+      - Reversed splitting of S2 (LBBB)
+      - Transient mitral regurgitation murmur
+    pass: 4
+    src: { page: 9, quote: "1- Faint heart sounds. 2- S4 → reduced left ventricular compliance. 3- Reversed splitting of S2 dt LBBB." }
+    status: unverified
+  - id: geri.L01.040
+    kind: card
+    topic: angina
+    front: What does an S4 mean in an elderly patient with angina?
+    back: Reduced left ventricular compliance (a stiff ventricle).
+    src: { page: 9, quote: "S4 → reduced left ventricular compliance." }
+    status: unverified
+  - id: geri.L01.041
+    kind: cloze
+    topic: angina
+    text: "ECG in angina: ST depression of more than {{c1::2 mm}} in more than {{c2::one}} lead, and {{c3::inverted or flat}} T waves."
+    src: { page: 9, quote: "1- Depressed ST segment > 2mm >1 lead 2- Inverted or flat T-wave" }
+    status: unverified
+    tags: [numbers]
+  - id: geri.L01.042
+    kind: card
+    topic: angina
+    front: What are the cardiac enzymes in stable angina?
+    back: Normal.
+    src: { page: 10, quote: "Cardiac enzymes → Normal" }
+    status: unverified
+  - id: geri.L01.043
+    kind: enumerate
+    topic: angina
+    prompt: Investigations used to diagnose angina?
+    points:
+      - ECG
+      - Cardiac enzymes (normal)
+      - Treadmill
+      - Thallium scintigraphy
+      - 24-hour ambulatory monitoring
+      - Coronary arteriography
+    pass: 5
+    src: { page: 10, quote: "Treadmill Thallium Scintigraphy 24-hour ambulatory monitoring Coronary arteriography" }
+    status: unverified
+  - id: geri.L01.044
+    kind: card
+    topic: angina
+    front: What remains the definitive test for diagnosing CAD?
+    back: Coronary arteriography.
+    src: { page: 10, quote: "Coronary arteriography - Remains the definitive test for the diagnosis of CAD" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L01.045
+    kind: enumerate
+    topic: angina
+    prompt: How do you correct the factors that precipitate coronary artery disease?
+    points:
+      - Increased physical activity
+      - Weight management (optimal BMI ≤24)
+      - Glycemic control
+      - Blood pressure control
+      - LDL-lowering therapy (statin, fibrates, nicotinic acid)
+    pass: 4
+    src: { page: 10, quote: "Increased physical activity Weight management (optimal mass index ≤ 24) Glycemic control Blood pressure control" }
+    status: unverified
+  - id: geri.L01.046
+    kind: cloze
+    topic: angina
+    text: "In angina, the optimal body mass index is {{c1::≤24}}."
+    src: { page: 10, quote: "Weight management (optimal mass index ≤ 24)" }
+    status: unverified
+    tags: [numbers]
+  - id: geri.L01.047
+    kind: card
+    topic: angina
+    front: Side effects of nitrates between angina attacks?
+    back: Orthostatic hypotension, headache and syncope.
+    src: { page: 10, quote: "Nitrates (Dinitra): SE: orthostatic hypotension, headache, syncope." }
+    status: unverified
+  - id: geri.L01.048
+    kind: card
+    topic: angina
+    front: "Beta-blockers in angina: contraindication and side effects?"
+    back: "Contraindicated in vasospastic angina. Side effects: fatigue, depression, bradycardia, heart block, hypotension."
+    src: { page: 10, quote: "B blockers (contraindicated in vasospastic angina) SE: Fatigue, depression, bradycardia, heart block, hypotension." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L01.049
+    kind: table
+    topic: angina
+    title: "Treatment of angina"
+    columns: [Step, Treatment]
+    rows:
+      - [During the attack, Sublingual nitroglycerin]
+      - [Between attacks, "Nitrates, beta-blockers, CCB, antiplatelets (clopidogrel, aspirin)"]
+      - [Interventional, "PTCA (angioplasty) or CABG"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 10, quote: "During attack: Sublingual NG. Between attacks:" }
+    status: unverified
+  - id: geri.L01.050
+    kind: mcq
+    topic: angina
+    stem: "A 76-year-old woman with exertional chest tightness has documented transient ST elevation during episodes at rest at night, with normal coronaries on arteriography. Which anti-anginal drug should be avoided?"
+    options:
+      - Beta-blocker
+      - Calcium channel blocker
+      - Long-acting nitrate
+      - Sublingual nitroglycerin
+    answer: 0
+    why:
+      - "Correct: this is vasospastic angina, where beta-blockers are contraindicated (p10)."
+      - "CCBs are the mainstay of vasospastic angina."
+      - "Nitrates relieve spasm; watch for orthostatic hypotension."
+      - "Sublingual nitroglycerin treats the attack."
+    src: { page: 10, quote: "B blockers (contraindicated in vasospastic angina)" }
+    status: unverified
+  # ---------- p11-13: myocardial infarction ----------
+  - id: geri.L01.051
+    kind: enumerate
+    topic: mi
+    prompt: Features of the pain of myocardial infarction?
+    points:
+      - Retrosternal or precordial
+      - Stabbing or compressing
+      - More than 30 minutes
+      - Not relieved by nitroglycerin
+      - With fever and tachycardia
+      - Radiates to the left shoulder, jaw and inner left arm
+    pass: 5
+    src: { page: 11, quote: "More than 30 min Not relived by Nitroglycerine Associated with fever and tachycardia" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L01.052
+    kind: enumerate
+    topic: mi
+    prompt: Signs of myocardial infarction?
+    points:
+      - Faint heart sounds
+      - S3 and S4 gallop
+      - Mitral regurgitation murmur
+      - Pericardial rub
+      - Fine basal crepitations
+    pass: 4
+    src: { page: 11, quote: "1. Faint heart sounds 2. S3 & S4 gallop 3. Mitral regurge murmur 4. Pericardial rub 5. Fine basal crepitation" }
+    status: unverified
+  - id: geri.L01.053
+    kind: table
+    topic: mi
+    title: "ECG: STEMI vs NSTEMI"
+    columns: [Feature, "STEMI (Q-wave)", NSTEMI]
+    rows:
+      - [ST segment, "Elevation, with reciprocal ST depression", Depression]
+      - [T wave, Hyperacute, Inverted]
+      - [Q wave, "Present", "No pathological Q wave"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 2]]
+    src: { page: 11, quote: "STEMI/Q-wave ST segment elevation Reciprocal ST depression Hyper-acute T-wave Q wave" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L01.054
+    kind: table
+    topic: mi
+    title: "The four ECG faces of myocardial ischemia (book figure, p13)"
+    columns: [Type, ECG]
+    rows:
+      - ["Noninfarction subendocardial ischemia (classic angina)", "Transient ST depressions"]
+      - ["Noninfarction transmural ischemia (Prinzmetal variant angina)", "Transient ST elevations"]
+      - ["Non-Q wave infarction", "ST depressions or T wave inversions without pathologic Q waves"]
+      - ["Q wave infarction", "ST elevations, new Q waves, preceded by hyperacute T waves and followed by T wave inversions"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 13, quote: "Noninfarction subendocardial ischemia (classic angina): transient ST depressions" }
+    status: unverified
+  - id: geri.L01.055
+    kind: enumerate
+    topic: mi
+    prompt: Cardinal signs of myocardial infarction?
+    points:
+      - Suggestive pain over 30 minutes
+      - ECG changes
+      - Raised cardiac enzymes
+    pass: 3
+    src: { page: 12, quote: "Cardinal signs of MI 1- Suggestive pain > 30 min 2- ECG 3- Increased cardiac enzymes" }
+    status: unverified
+    tags: [high-yield]
+    update:
+      text: "The Fourth Universal Definition of MI requires a rise and/or fall of cardiac troponin with at least one value above the 99th percentile, plus evidence of ischemia (symptoms, new ECG changes, Q waves, imaging or thrombus)."
+      ref: "Fourth Universal Definition of Myocardial Infarction (ESC/ACC/AHA/WHF), 2018"
+  - id: geri.L01.056
+    kind: enumerate
+    topic: mi
+    prompt: How can MI present atypically in the elderly, especially over 80 (book question Q2)?
+    points:
+      - Silent MI
+      - Dyspnea, very common and early
+      - Mental confusion
+      - Syncope
+      - Gastrointestinal complaints
+      - Conduction defects
+    pass: 5
+    src: { page: 12, quote: "The presenting symptoms of (MI) can be quite atypical, specially in patients over age 80 or Silent MI" }
+    status: unverified
+    tags: [high-yield, book-question]
+  - id: geri.L01.057
+    kind: cloze
+    topic: mi
+    text: "MI presents most atypically in patients over age {{c1::80}}; {{c2::dyspnea}} is a very common early manifestation."
+    src: { page: 12, quote: "Dyspnea is very common early manifestation," }
+    status: unverified
+    tags: [numbers]
+  - id: geri.L01.058
+    kind: card
+    topic: mi
+    front: Why is full-dose anticoagulation often given after an anterior MI?
+    back: Because of the high risk of mural thrombus and possible embolization.
+    src: { page: 13, quote: "Full-dose anticoagulation therapy is often given to patients with anterior MI because of the high risk of mural thrombus and possible embolization." }
+    status: unverified
+  - id: geri.L01.059
+    kind: cloze
+    topic: mi
+    text: "Tissue plasminogen activator given in the first {{c1::3 hours}} of MI is the more effective thrombolytic, with potentially {{c2::less hemorrhagic}} complication."
+    src: { page: 13, quote: "Tissue plasminogen activator during the first 3 hours of MI has been shown to be more effective thrombolytic agent" }
+    status: unverified
+    tags: [numbers]
+  - id: geri.L01.060
+    kind: card
+    topic: mi
+    front: What decides PTCA or bypass surgery after MI in elderly patients?
+    back: The severity of symptoms.
+    src: { page: 13, quote: "The indication for PTCA or coronary bypass surgery after MI in elderly patients depend on the severity of symptoms." }
+    status: unverified
+  - id: geri.L01.061
+    kind: order
+    topic: mi
+    prompt: Put the acute treatment of MI in the order the lecture gives it.
+    steps:
+      - Morphine
+      - Oxygen
+      - Nitroglycerin
+      - Primary PCI (best treatment)
+      - CABG if PCI is contraindicated (left main disease)
+      - Medical treatment as for angina between attacks
+    src: { page: 13, quote: "In acute stage: Morphine Oxygen Nitroglycerine Best treatment is primary PCI" }
+    status: unverified
+  - id: geri.L01.062
+    kind: card
+    topic: mi
+    front: "Best treatment of acute MI, and the alternative when it is contraindicated (as in left main disease)?"
+    back: Primary PCI; if contraindicated, as in left main vessel disease, CABG.
+    src: { page: 13, quote: "Best treatment is primary PCI If PCI is contraindicated as in left main vessel disease → CABG" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L01.063
+    kind: mcq
+    topic: mi
+    stem: "An 83-year-old woman is brought in because she became suddenly confused and breathless this morning. She denies chest pain. Pulse 52, irregular. What must be excluded first?"
+    options:
+      - Acute myocardial infarction
+      - Alzheimer disease
+      - Anxiety
+      - Primary lung fibrosis
+    answer: 0
+    why:
+      - "Correct: over 80, MI is often atypical or silent, with dyspnea, confusion, syncope and conduction defects (p12)."
+      - "Dementia is gradual; sudden confusion is acute illness until proven otherwise."
+      - "Anxiety is a diagnosis of exclusion, never first."
+      - "Fibrosis does not cause sudden confusion with bradycardia."
+    src: { page: 12, quote: "Mental confusion, syncope Gastrointestinal complaints Many patients have conduction defects." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L01.064
+    kind: mcq
+    topic: mi
+    stem: "A 74-year-old man has 45 minutes of crushing retrosternal pain unrelieved by nitroglycerin. ECG: ST depression and T inversion in V4–V6, no Q waves. Troponin is raised. Diagnosis?"
+    options:
+      - NSTEMI
+      - STEMI
+      - Stable angina
+      - Prinzmetal angina
+    answer: 0
+    why:
+      - "Correct: ST depression and T inversion without pathological Q waves, with raised enzymes, is NSTEMI (p12)."
+      - "STEMI needs ST elevation, often with reciprocal depression and Q waves."
+      - "In angina the enzymes are normal (p10)."
+      - "Prinzmetal angina gives transient ST elevation."
+    src: { page: 12, quote: "NSTEMI: ST depression Inverted T-wave No pathological Q-wave" }
+    status: unverified
+  # ---------- p14-16: heart failure burden and causes ----------
+  - id: geri.L01.065
+    kind: cloze
+    topic: hf-causes
+    text: "About {{c1::6–10%}} of people older than 65 have heart failure."
+    src: { page: 14, quote: "It is a common disease in the elderly about 6-10% of people older than 65 years old have heart failure." }
+    status: unverified
+    tags: [numbers]
+  - id: geri.L01.066
+    kind: cloze
+    topic: hf-causes
+    text: "Systolic dysfunction is present when the ejection fraction is less than {{c1::40%}}; normal EF is {{c2::55–60%}}."
+    src: { page: 14, quote: "Systolic dysfunction: is present when the ejection fraction is less than 40% (normal ejection fraction: 55-60%)" }
+    status: unverified
+    tags: [numbers, high-yield]
+    update:
+      text: "ESC 2021 classifies HF by EF: reduced ≤40%, mildly reduced 41–49%, preserved ≥50%."
+      ref: "ESC Guidelines for the diagnosis and treatment of acute and chronic heart failure, 2021"
+  - id: geri.L01.067
+    kind: enumerate
+    topic: hf-causes
+    prompt: Causes of systolic heart failure in the elderly?
+    points:
+      - Coronary artery disease (most common)
+      - Hypertensive heart disease
+      - "Valvular: calcific aortic stenosis, mitral annular calcification"
+      - Cor pulmonale
+      - Myocarditis
+      - Thyroid disease
+      - Tachy- or bradyarrhythmias
+      - Idiopathic (diagnosis of exclusion)
+    pass: 6
+    src: { page: 14, quote: "Coronary artery disease (most common ) Hypertensive heart disease Valvular heart disease:" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L01.068
+    kind: card
+    topic: hf-causes
+    front: Most common cause of systolic heart failure?
+    back: Coronary artery disease.
+    src: { page: 14, quote: "Coronary artery disease (most common )" }
+    status: unverified
+  - id: geri.L01.069
+    kind: cloze
+    topic: hf-causes
+    text: "{{c1::30–50%}} of patients with CHF have normal LV systolic function; diastolic HF is more prevalent with {{c2::age}} and more common in {{c3::females}}."
+    src: { page: 14, quote: "30-50% of patients with CHF have normal LV systolic functionMore prevalent with age More common in females" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: geri.L01.070
+    kind: card
+    topic: hf-causes
+    front: Which is more common, asymptomatic or symptomatic diastolic dysfunction?
+    back: Asymptomatic diastolic dysfunction.
+    src: { page: 14, quote: "Asymptomatic diastolic dysfunction more common than symptomatic" }
+    status: unverified
+  - id: geri.L01.071
+    kind: table
+    topic: hf-causes
+    title: "Causes of diastolic dysfunction"
+    columns: [Type, Causes]
+    rows:
+      - [Structural, "Hypertrophy, fibrosis, constriction"]
+      - [Functional, "Ischemia, calcium overload, ATP depletion"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 15, quote: "Structural Abnormalities - Hypertrophy - Fibrosis - Constriction Functional Abnormalities - Ischemia - Calcium overload - ATP depletion" }
+    status: unverified
+  - id: geri.L01.072
+    kind: card
+    topic: hf-causes
+    front: How does age affect diastolic dysfunction?
+    back: Its incidence is age-related, and heart failure due to diastolic dysfunction rises dramatically with age.
+    src: { page: 15, quote: "The Incidence of Diastolic Dysfunction Is Age-Related and Heart Failure Due To Diastolic Dysfunction Rises Dramatically With Age." }
+    status: unverified
+  - id: geri.L01.073
+    kind: cloze
+    topic: hf-causes
+    text: "About {{c1::50%}} of heart failure patients die within {{c2::5 years}} of diagnosis."
+    src: { page: 15, quote: "~50% DIE WITHIN 5 YEARS OF DIAGNOSIS" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: geri.L01.074
+    kind: cloze
+    topic: hf-causes
+    text: "In the book's figure, {{c1::34%}} of NYHA class I–II and {{c2::42%}} of NYHA class III–IV patients died."
+    src: { page: 16, quote: "34% OF NYHA CLASS I AND II PATIENTS DIED 42% OF NYHA CLASS III AND IV PATIENTS DIED" }
+    status: unverified
+    tags: [numbers]
+  - id: geri.L01.075
+    kind: card
+    topic: hf-causes
+    front: Why are even asymptomatic (NYHA I) or mildly symptomatic (NYHA II) heart failure patients at high risk of dying?
+    back: The neurohormonal imbalance that drives progression is present in all HF patients and keeps working silently even when symptoms are stabilised.
+    src: { page: 16, quote: "The neurohormonal imbalance that causes the disease to progress is present in all heart failure patients, even in those who are considered asymptomatic" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L01.076
+    kind: cloze
+    topic: hf-causes
+    text: "{{c1::Sudden death}} is the most frequent cause of cardiovascular mortality in systolic heart failure, about {{c2::45%}} of CV deaths."
+    src: { page: 16, quote: "~45% OF CARDIOVASCULAR DEATHS ARE DUE TO SUDDEN DEATH" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: geri.L01.077
+    kind: mcq
+    topic: hf-causes
+    stem: "A 78-year-old hypertensive woman has exertional dyspnea and ankle edema. Echo: concentric LVH with an ejection fraction of 62%. Which statement fits the lecture?"
+    options:
+      - "This is diastolic heart failure, which rises dramatically with age and is commoner in women"
+      - "Heart failure is excluded because the EF is above 40%"
+      - "This is systolic dysfunction from coronary disease"
+      - "Diastolic dysfunction is usually symptomatic"
+    answer: 0
+    why:
+      - "Correct: 30–50% of CHF has normal systolic function; it is more prevalent with age and in females, and hypertrophy is a structural cause (p14–15)."
+      - "Normal EF does not exclude HF: up to half of CHF has normal systolic function."
+      - "Systolic dysfunction needs an EF below 40%."
+      - "Asymptomatic diastolic dysfunction is more common than symptomatic."
+    src: { page: 14, quote: "30-50% of patients with CHF have normal LV systolic functionMore prevalent with age More common in females" }
+    status: unverified
+  # ---------- p16-17: findings ----------
+  - id: geri.L01.078
+    kind: table
+    topic: hf-signs
+    title: "Classic physical findings of congestive heart failure"
+    columns: [Region, Findings]
+    rows:
+      - [Vital signs, "Tachypnea, Cheyne-Stokes respiration"]
+      - [Heart, "S3 gallop (heart sounds may be normal)"]
+      - [Neck, "Jugular venous distention, hepatojugular reflux"]
+      - [Chest, "Bibasilar rales, diffuse bubbling rales of pulmonary edema, wheezing (cardiac asthma), pleural effusion"]
+      - ["Abdomen, back, limbs", "Large tender liver, ascites, sacral edema, peripheral edema"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 16, quote: "Classic physical findings of congestive heart failure Vital signs: Tachypnea. Cheyne -Stokes Respiration Heart: S3 Gallop." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L01.079
+    kind: card
+    topic: hf-signs
+    front: What is "cardiac asthma"?
+    back: Wheezing caused by congestive heart failure.
+    src: { page: 17, quote: "Wheezing (cardiac asthma)" }
+    status: unverified
+  - id: geri.L01.080
+    kind: card
+    topic: hf-signs
+    front: Signs of pleural effusion in heart failure?
+    back: Flatness to percussion and decreased to absent breath sounds.
+    src: { page: 17, quote: "Signs of pleural effusion (flatness to percussion, decreased to absent breath sounds)" }
+    status: unverified
+  - id: geri.L01.081
+    kind: enumerate
+    topic: hf-signs
+    prompt: Classic chest X-ray findings in congestive heart failure?
+    points:
+      - Cardiothoracic ratio above 0.50
+      - Large hila with indistinct margins
+      - Upper lobe venous prominence (cephalization)
+      - Fluid in the interlobar fissures
+      - Pleural effusion
+      - Kerley B lines
+      - Alveolar edema
+      - Peribronchial cuffing
+    pass: 6
+    src: { page: 17, quote: "Increased heart size-cardiothoracic ratio > 0.50. Large hila with indistinct margins. Prominence of superior pulmonary veins; cephalization of flow." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L01.082
+    kind: cloze
+    topic: hf-signs
+    text: "On chest X-ray, cardiomegaly in CHF is a cardiothoracic ratio above {{c1::0.50}}; distension of the upper lobe veins is called {{c2::cephalization}} of flow."
+    src: { page: 17, quote: "Increased heart size-cardiothoracic ratio > 0.50." }
+    status: unverified
+    tags: [numbers]
+  - id: geri.L01.083
+    kind: mcq
+    topic: hf-signs
+    stem: "The husband of a 68-year-old woman with congestive heart failure says she stops breathing for about 10 seconds during sleep, followed by a similar period of hyperventilation. She wakes rested but is very dyspneic on mild activity. What is the problem?"
+    options:
+      - Cheyne-Stokes breathing
+      - Sleep apnea
+      - Normal breathing pattern
+      - Biot's breathing
+    answer: 0
+    why:
+      - "Correct: cyclic apnea alternating with waxing hyperventilation in CHF is Cheyne-Stokes respiration, a classic vital sign of CHF (p16). The book prints no key."
+      - "Obstructive sleep apnea has snoring and unrefreshing sleep, without the crescendo hyperventilation."
+      - "Recurrent apneas are not normal."
+      - "Biot's breathing is irregular clusters of breaths with apnea, seen in brainstem lesions."
+    src: { page: 16, quote: "Vital signs: Tachypnea. Cheyne -Stokes Respiration" }
+    status: unverified
+    tags: [book-question]
+  # ---------- p18-19: diagnosis ----------
+  - id: geri.L01.084
+    kind: order
+    topic: hf-diagnosis
+    prompt: Order the ESC 2016 work-up of a patient with suspected non-acute heart failure.
+    steps:
+      - "Assess HF probability: history, examination, ECG"
+      - "If at least one is abnormal: natriuretic peptides"
+      - "If NT-proBNP ≥125 or BNP ≥35 pg/ml: echocardiography"
+      - "If HF is confirmed: find the cause and start treatment"
+    src: { page: 18, quote: "ASSESSMENT OF HF PROBABILITY" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L01.085
+    kind: cloze
+    topic: hf-diagnosis
+    text: "In non-acute suspected HF, natriuretic peptides are raised if NT-proBNP is ≥{{c1::125}} pg/ml or BNP is ≥{{c2::35}} pg/ml; below these, HF is {{c3::unlikely}}."
+    src: { page: 18, quote: "NATRIURETIC PEPTIDES NT-proBNP ≥125 pg/mL BNP ≥35 pg/mL" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: geri.L01.086
+    kind: enumerate
+    topic: hf-diagnosis
+    prompt: Which history points raise the probability of heart failure (ESC 2016 algorithm)?
+    points:
+      - Coronary artery disease (MI, revascularization)
+      - Arterial hypertension
+      - Exposure to cardiotoxic drugs or radiation
+      - Use of diuretics
+      - Orthopnea or paroxysmal nocturnal dyspnea
+    pass: 4
+    src: { page: 18, quote: "History of CAD (MI, revascularization) History of arterial hypertension Exposition to cardiotoxic drug/radiation Use of diuretics" }
+    status: unverified
+  - id: geri.L01.087
+    kind: enumerate
+    topic: hf-diagnosis
+    prompt: Which examination findings raise the probability of heart failure (ESC 2016 algorithm)?
+    points:
+      - Rales
+      - Bilateral ankle edema
+      - Heart murmur
+      - Jugular venous dilatation
+      - Laterally displaced or broadened apex beat
+    pass: 4
+    src: { page: 18, quote: "Rales Bilateral ankle oedema Heart murmur Jugular venous dilatation Laterally displaced/broadened apical beat" }
+    status: unverified
+  - id: geri.L01.088
+    kind: table
+    topic: hf-diagnosis
+    title: "Causes of elevated natriuretic peptides"
+    columns: [Group, Causes]
+    rows:
+      - [Cardiac, "Heart failure, ACS, pulmonary embolism, myocarditis, LVH, hypertrophic or restrictive cardiomyopathy, valvular and congenital heart disease, atrial and ventricular tachyarrhythmias, heart contusion, cardioversion or ICD shock, cardiac surgery, pulmonary hypertension"]
+      - [Non-cardiac, "Advanced age, ischemic stroke, subarachnoid hemorrhage, renal dysfunction, liver cirrhosis with ascites, paraneoplastic syndrome, COPD, severe infection (pneumonia, sepsis), severe burns, anemia, severe metabolic and hormone disorders (thyrotoxicosis, diabetic ketosis)"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 19, quote: "Causes of elevated natriuretic peptides" }
+    status: unverified
+  - id: geri.L01.089
+    kind: mcq
+    topic: hf-diagnosis
+    stem: "An 86-year-old woman with CKD stage 4 has mild dyspnea; BNP is 60 pg/ml. Echo is normal. Which explanation for the raised BNP is listed in the lecture?"
+    options:
+      - "Advanced age and renal dysfunction both raise natriuretic peptides"
+      - "A BNP above 35 pg/ml proves heart failure"
+      - "BNP is only raised by cardiac disease"
+      - "BNP falls with renal dysfunction"
+    answer: 0
+    why:
+      - "Correct: advanced age and renal dysfunction are non-cardiac causes of raised natriuretic peptides (p19); with a normal echo, HF is unlikely (p18)."
+      - "Raised peptides lead to echo; they do not prove HF."
+      - "The table lists many non-cardiac causes."
+      - "Renal dysfunction raises BNP."
+    src: { page: 19, quote: "Causes of elevated natriuretic peptides" }
+    status: unverified
+  # ---------- p19-23: treatment ----------
+  - id: geri.L01.090
+    kind: enumerate
+    topic: hf-treatment
+    prompt: Treatment of CHF due to systolic dysfunction?
+    points:
+      - Diet
+      - Exercise
+      - Diuretics
+      - ACE inhibitors and ARBs
+      - Digoxin
+      - Vasodilators
+      - Beta-blockers
+    pass: 6
+    src: { page: 19, quote: "Treatment of CHF due to systolic dysfunction" }
+    status: unverified
+  - id: geri.L01.091
+    kind: order
+    topic: hf-treatment
+    prompt: Order the ESC 2016 treatment steps for symptomatic HFrEF.
+    steps:
+      - ACE inhibitor and beta-blocker, up-titrated to maximum tolerated doses
+      - "Still symptomatic, LVEF ≤35%: add an MR antagonist"
+      - "Still symptomatic, LVEF ≤35%: ARNI to replace ACEI, CRT if QRS ≥130 ms, ivabradine if sinus HR ≥70"
+      - "Resistant symptoms: digoxin, H-ISDN, LVAD or heart transplantation"
+    src: { page: 20, quote: "Therapy with ACE-I and beta-blocker (Up-titrate to maximum tolerated evidence-based doses)" }
+    status: unverified
+    tags: [high-yield]
+    update:
+      text: "ESC 2021 starts all four disease-modifying drugs early in HFrEF, not one after another: ACEI or ARNI, a beta-blocker, an MRA and an SGLT2 inhibitor (dapagliflozin or empagliflozin)."
+      ref: "ESC Guidelines for the diagnosis and treatment of acute and chronic heart failure, 2021"
+  - id: geri.L01.092
+    kind: table
+    topic: hf-treatment
+    title: "HFrEF still symptomatic on ACEI + BB + MRA (LVEF ≤35%)"
+    columns: [Condition, Add]
+    rows:
+      - ["Able to tolerate ACEI (or ARB)", "ARNI (sacubitril/valsartan) to replace the ACEI"]
+      - ["Sinus rhythm, QRS ≥130 ms", "Evaluate need for CRT"]
+      - ["Sinus rhythm, HR ≥70 bpm", "Ivabradine"]
+      - ["LVEF ≤35% despite OMT, or symptomatic VT/VF", "Implant ICD"]
+      - ["Congestion at any step", "Diuretics"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 20, quote: "Sinus rhythm, QRS duration ≥130 msec" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L01.093
+    kind: cloze
+    topic: hf-treatment
+    text: "Ivabradine is added in symptomatic HFrEF with LVEF ≤35% when the patient is in {{c1::sinus rhythm}} with a heart rate ≥{{c2::70}} bpm."
+    src: { page: 20, quote: "Sinus rhythm, HR ≥70 bpm Ivabradine" }
+    status: unverified
+    tags: [numbers]
+  - id: geri.L01.094
+    kind: mcq
+    topic: hf-treatment
+    stem: "A 71-year-old man with ischemic HFrEF (LVEF 30%) is still NYHA III on up-titrated ramipril, bisoprolol and spironolactone. He is in sinus rhythm, HR 64, QRS 150 ms (LBBB). Following the book's ESC 2016 algorithm, which step fits?"
+    options:
+      - Evaluate for cardiac resynchronization therapy
+      - Ivabradine
+      - Stop the beta-blocker
+      - No further action required
+    answer: 0
+    why:
+      - "Correct: sinus rhythm with QRS ≥130 ms → evaluate need for CRT; with LVEF ≤35% an ICD is also considered (p20)."
+      - "Ivabradine needs a sinus rate ≥70 bpm; his is 64."
+      - "Beta-blockers are core therapy, kept at maximum tolerated dose."
+      - "He is still symptomatic with LVEF ≤35%, so treatment must go on."
+    src: { page: 20, quote: "Sinus rhythm, QRS duration ≥130 msec" }
+    status: unverified
+  - id: geri.L01.095
+    kind: table
+    topic: hf-treatment
+    title: "Evidence-based HFrEF doses (ESC 2016)"
+    columns: [Drug, Starting dose (mg), Target dose (mg)]
+    rows:
+      - [Captopril, "6.25 t.i.d.", "50 t.i.d."]
+      - [Enalapril, "2.5 b.i.d.", "10–20 b.i.d."]
+      - [Lisinopril, "2.5–5.0 o.d.", "20–35 o.d."]
+      - [Ramipril, "2.5 o.d.", "10 o.d."]
+      - [Trandolapril, "0.5 o.d.", "4 o.d."]
+      - [Bisoprolol, "1.25 o.d.", "10 o.d."]
+      - [Carvedilol, "3.125 b.i.d.", "25 b.i.d."]
+      - [Metoprolol succinate, "12.5–25 o.d.", "200 o.d."]
+      - [Nebivolol, "1.25 o.d.", "10 o.d."]
+      - [Candesartan, "4–8 o.d.", "32 o.d."]
+      - [Valsartan, "40 b.i.d.", "160 b.i.d."]
+      - [Losartan, "50 o.d.", "150 o.d."]
+      - [Eplerenone, "25 o.d.", "50 o.d."]
+      - [Spironolactone, "25 o.d.", "50 o.d."]
+      - [Sacubitril/valsartan, "49/51 b.i.d.", "97/103 b.i.d."]
+      - [Ivabradine, "5 b.i.d.", "7.5 b.i.d."]
+    blanks: [[1, 1], [3, 2], [5, 1], [5, 2], [6, 1], [13, 2], [14, 1], [14, 2], [15, 1]]
+    src: { page: 21, quote: "Bisoprolol 1.25 o.d. 10 o.d." }
+    status: unverified
+    tags: [numbers]
+  - id: geri.L01.096
+    kind: cloze
+    topic: hf-treatment
+    text: "In HFrEF, bisoprolol starts at {{c1::1.25}} mg once daily (target 10 mg), and sacubitril/valsartan starts at {{c2::49/51}} mg twice daily (target 97/103 mg)."
+    src: { page: 21, quote: "Sacubitril/valsartan 49/51 b.i.d. 97/103 b.i.d." }
+    status: unverified
+    tags: [numbers]
+  - id: geri.L01.097
+    kind: table
+    topic: hf-treatment
+    title: "Diuretic doses in heart failure (ESC 2016)"
+    columns: [Diuretic, Initial dose (mg), Usual daily dose (mg)]
+    rows:
+      - [Furosemide, "20–40", "40–240"]
+      - [Bumetanide, "0.5–1.0", "1–5"]
+      - [Torasemide, "5–10", "10–20"]
+      - [Bendroflumethiazide, "2.5", "2.5–10"]
+      - [Hydrochlorothiazide, "25", "12.5–100"]
+      - [Metolazone, "2.5", "2.5–10"]
+      - [Indapamide, "2.5", "2.5–5"]
+      - ["Spironolactone/eplerenone", "12.5–25 with ACEI/ARB; 50 without", "50 with ACEI/ARB; 100–200 without"]
+      - [Amiloride, "2.5 with ACEI/ARB; 5 without", "5–10 with ACEI/ARB; 10–20 without"]
+      - [Triamterene, "25 with ACEI/ARB; 50 without", "100 with ACEI/ARB; 200 without"]
+    blanks: [[0, 1], [0, 2], [2, 2], [4, 1], [7, 1]]
+    src: { page: 22, quote: "Furosemide Bumetanide Torasemide" }
+    status: unverified
+    tags: [numbers]
+  - id: geri.L01.098
+    kind: cloze
+    topic: hf-treatment
+    text: "Do not use thiazides if eGFR is below {{c1::30}} ml/min/1.73 m², except when given synergistically with {{c2::loop diuretics}}."
+    src: { page: 22, quote: "Do not use thiazides if estimated glomerular filtration rate <30 mL/min/1.73 m?, except when prescribed synergistically with loop diuretics." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: geri.L01.099
+    kind: card
+    topic: hf-treatment
+    front: "Which potassium-sparing diuretic is preferred in HF, and which may not be combined with it?"
+    back: "A mineralocorticoid antagonist (spironolactone or eplerenone) is always preferred. Amiloride and triamterene must not be combined with an MRA."
+    src: { page: 22, quote: "spironolactone/eplerenone is always preferred. Amiloride and triamterene should not be combined with an MRA." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L01.100
+    kind: card
+    topic: hf-treatment
+    front: What do excessive doses of loop diuretics cause?
+    back: Renal impairment and ototoxicity. The dose is adjusted to volume status and weight.
+    src: { page: 22, quote: "excessive doses may cause renal impairment and ototoxicity." }
+    status: unverified
+  - id: geri.L01.101
+    kind: card
+    topic: hf-treatment
+    front: What kind of drug is indapamide?
+    back: A non-thiazide sulfonamide diuretic.
+    src: { page: 22, quote: "‘[ndapamide is a non-thiazide sulfonamide." }
+    status: unverified
+  - id: geri.L01.102
+    kind: card
+    topic: hf-treatment
+    front: "What does the 2022 AHA/ACC/HFSA guideline recommend about SGLT2 inhibitors in heart failure?"
+    back: "In symptomatic chronic HFrEF, SGLT2i are recommended (class 1, level A) to reduce HF hospitalization and cardiovascular mortality, whether or not the patient has type 2 diabetes. They provide intermediate economic value."
+    src: { page: 23, quote: "Recommendation for SGLT2i 2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure" }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L01.103
+    kind: mcq
+    topic: hf-treatment
+    stem: "A 69-year-old non-diabetic woman has symptomatic chronic HFrEF. Her doctor says SGLT2 inhibitors are 'only for diabetics'. Per the 2022 AHA/ACC/HFSA guideline in the lecture:"
+    options:
+      - "SGLT2i are class 1 to reduce HF hospitalization and CV death, irrespective of diabetes"
+      - "SGLT2i are only for HFrEF with type 2 diabetes"
+      - "SGLT2i are class 3 (harm) in the elderly"
+      - "SGLT2i improve symptoms only, not outcomes"
+    answer: 0
+    why:
+      - "Correct: class 1, level A, irrespective of type 2 diabetes (p23)."
+      - "The recommendation says irrespective of diabetes."
+      - "There is no age-based harm recommendation."
+      - "They reduce HF hospitalization and cardiovascular mortality."
+    src: { page: 23, quote: "Recommendation for SGLT2i 2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure" }
+    status: unverified
+  - id: geri.L01.104
+    kind: enumerate
+    topic: hf-treatment
+    prompt: Treatment of CHF due to diastolic dysfunction?
+    points:
+      - Diet
+      - Exercise
+      - Diuretics
+      - Other pharmacologic considerations
+    pass: 3
+    src: { page: 23, quote: "Treatment of CHF due to diastolic dysfunction Diet Exercise Diuretics Other Pharmacologic Considerations." }
+    status: unverified
+    update:
+      text: "SGLT2 inhibitors (empagliflozin, dapagliflozin) are now recommended in HF with mildly reduced or preserved EF too: class 2a in AHA/ACC/HFSA 2022 and class I in the ESC 2023 focused update."
+      ref: "AHA/ACC/HFSA heart failure guideline 2022; ESC heart failure focused update 2023"
+  # ---------- p23: tips in the elderly ----------
+  - id: geri.L01.105
+    kind: card
+    topic: elderly-drugs
+    front: What can happen after the first dose of an ACE inhibitor in an older patient?
+    back: An exaggerated drop in blood pressure.
+    src: { page: 23, quote: "Older people may show an exaggerated drop in blood pressure after the first dose of an ACE inhibitor." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L01.106
+    kind: enumerate
+    topic: elderly-drugs
+    prompt: What should you monitor when treating heart failure in an older patient?
+    points:
+      - Postural blood pressures, frequently
+      - BUN/creatinine ratio at intervals (volume depletion)
+      - Serum electrolytes and magnesium, replacing when needed
+    pass: 3
+    src: { page: 23, quote: "Check postural blood pressures frequently and BUN/creatinine ratios at intervals to monitor volume depletion." }
+    status: unverified
+  - id: geri.L01.107
+    kind: card
+    topic: elderly-drugs
+    front: How should maintenance digoxin be dosed in older people?
+    back: On the basis of creatinine clearance, and for a short time, because many have reduced renal function.
+    src: { page: 23, quote: "give maintenance doses of digoxin on the basis of creatinine clearance and for a short time." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L01.108
+    kind: card
+    topic: elderly-drugs
+    front: How can digoxin toxicity present atypically in the elderly?
+    back: With headache and other neurological manifestations.
+    src: { page: 23, quote: "Digoxin toxicity can present atypically in the elderly with headache and other neurological manifestations." }
+    status: unverified
+    tags: [high-yield]
+  - id: geri.L01.109
+    kind: card
+    topic: elderly-drugs
+    front: In which type of CHF is digoxin useful?
+    back: CHF due to systolic dysfunction.
+    src: { page: 23, quote: "Digoxin is useful in treating CHF due to systolic dysfunction." }
+    status: unverified
+  - id: geri.L01.110
+    kind: mcq
+    topic: elderly-drugs
+    stem: "An 87-year-old woman (45 kg) on digoxin 0.25 mg daily for systolic HF develops headache, confusion and poor appetite. Creatinine clearance is 28 ml/min. Most likely cause?"
+    options:
+      - Digoxin toxicity
+      - Stroke
+      - Tension headache
+      - Hyperthyroidism
+    answer: 0
+    why:
+      - "Correct: digoxin toxicity in the elderly can present atypically with headache and neurological features; her low CrCl means the dose should have been reduced (p23)."
+      - "Stroke gives focal deficits; this is a drug picture in a patient with low clearance."
+      - "Confusion and anorexia do not fit tension headache."
+      - "Nothing points to thyroid disease."
+    src: { page: 23, quote: "Digoxin toxicity can present atypically in the elderly with headache and other neurological manifestations." }
+    status: unverified
+  # ---------- p24: problem solving and book questions ----------
+  - id: geri.L01.111
+    kind: mcq
+    topic: hf-signs
+    stem: "A 92-year-old with long-standing hypertension has weeks of dyspnea at rest, leg swelling, orthopnea and PND. The apex is displaced laterally and there is a fourth heart sound. Echo: EF 70%. What is the significance of the S4?"
+    options:
+      - Left ventricular hypertrophy
+      - Left ventricular dilatation
+      - Left ventricular dyskinesia
+      - Left ventricular aneurysm
+    answer: 0
+    why:
+      - "Correct: S4 means reduced LV compliance (p9); with hypertension and EF 70% this is a stiff hypertrophied ventricle and diastolic HF. The book prints no key."
+      - "Dilatation goes with systolic failure and an S3, not a preserved EF."
+      - "Dyskinesia is a regional wall-motion problem after infarction."
+      - "An aneurysm follows a transmural MI and lowers the EF."
+    src: { page: 9, quote: "S4 → reduced left ventricular compliance." }
+    status: unverified
+    tags: [book-question]
+  - id: geri.L01.112
+    kind: essay
+    topic: aging
+    prompt: List common cardiovascular disorders in the elderly.
+    outline:
+      - Age-associated changes:
+        - Amyloid heart disease (conduction disease, restrictive cardiomyopathy)
+        - Atrial fibrillation, one-third, often lone
+        - LV stiffness and diastolic heart failure
+        - Postural hypotension (20%) and syncope
+        - Calcific aortic and mitral valve disease
+        - Sick sinus syndrome and AV block
+      - Hypertension:
+        - Mainly systolic, from a stiff calcified aorta
+        - Treat 65–79 at SBP ≥140, ≥80 at SBP ≥160
+      - Coronary artery disease:
+        - 85% of CAD deaths after 65
+        - Angina in 80%; dyspnea on exertion common
+        - Silent and atypical MI, especially over 80
+      - Heart failure:
+        - 6–10% over 65
+        - Systolic (CAD most common) and diastolic (30–50%, rises with age, females)
+    src: { page: 2, quote: "Coronary Atherosclerosis is common and Silent MI." }
+    status: unverified
+    tags: [book-question]
+  - id: geri.L01.113
+    kind: essay
+    topic: mi
+    prompt: What are the atypical presentations of cardiac disorders in the elderly?
+    outline:
+      - Coronary disease:
+        - Exertional angina hard to elicit (limited activity)
+        - Dyspnea on exertion instead of pain
+        - Palpitation, weakness, unexplained sweating, indigestion, neck and shoulder pain
+        - Rest or rapidly progressive angina is frequent
+      - Myocardial infarction (especially over 80):
+        - Silent MI
+        - Early dyspnea, confusion, syncope
+        - GI complaints; conduction defects
+      - Other:
+        - Postural hypotension and syncope
+        - Digoxin toxicity with headache and neurological signs
+    src: { page: 12, quote: "The presenting symptoms of (MI) can be quite atypical, specially in patients over age 80 or Silent MI" }
+    status: unverified
+    tags: [book-question]
+  # ---------- cases ----------
+  - id: geri.L01.114
+    kind: case
+    topic: htn-treatment
+    stem: "An 82-year-old retired teacher lives alone, walks with a stick and fell once last winter. Repeated clinic BP readings are 168/84 mmHg. She has no diabetes or kidney disease."
+    steps:
+      - question: Does she meet the ESC/ESH 2018 threshold for drug treatment?
+        options:
+          - "Yes: at 80 or over, treat from SBP ≥160"
+          - "No: over 80 the threshold is SBP ≥180"
+          - "Yes: treat any SBP ≥130 at every age"
+          - "No: drugs are never started after 80"
+        answer: 0
+        why: "At ≥80, treat when SBP ≥160 and/or DBP ≥90 (p7). Her SBP is 168."
+      - reveal: You assess frailty first. She is independent but slow, and had one fall.
+        question: How should you start?
+        options:
+          - "A single drug at a low dose"
+          - "A fixed three-drug combination"
+          - "Two drugs at full dose"
+          - "Loop diuretic"
+        answer: 0
+        why: "Over 80 start with a single drug at a low dose; in the frail avoid combinations (p7). Loop diuretics are linked to injurious falls."
+      - reveal: Two months later she feels dizzy on standing; SBP is 126 mmHg and she has a chest infection.
+        question: What does the lecture advise?
+        options:
+          - "Consider temporary de-prescription and check postural BP"
+          - "Add an alpha-blocker"
+          - "Keep the dose; dizziness is unrelated"
+          - "Double the dose to prevent rebound"
+        answer: 0
+        why: "De-prescription is considered when SBP ≤130 or during acute illness, with careful monitoring for postural hypotension and falls (p7)."
+    src: { page: 7, quote: "Consider temporary or permanent de-prescription in specific situations" }
+    status: unverified
+  - id: geri.L01.115
+    kind: case
+    topic: mi
+    stem: "An 81-year-old diabetic man is brought in at 3 am because he is suddenly short of breath and confused. He denies chest pain."
+    steps:
+      - question: Why is MI high on your list despite no pain?
+        options:
+          - "Over 80, MI is often silent or atypical, with dyspnea and confusion"
+          - "Confusion always means stroke"
+          - "Diabetics never get chest pain"
+          - "Dyspnea excludes MI"
+        answer: 0
+        why: "MI over 80 is often atypical or silent: early dyspnea, confusion, syncope, GI complaints, conduction defects (p12)."
+      - reveal: "ECG: ST elevation in V1–V4 with reciprocal depression inferiorly. Symptoms started 2 hours ago."
+        question: Best reperfusion treatment?
+        options:
+          - Primary PCI
+          - Thrombolysis after 24 hours
+          - Medical treatment only
+          - Emergency CABG for every STEMI
+        answer: 0
+        why: "Best treatment is primary PCI; CABG is for when PCI is contraindicated, as in left main disease (p13)."
+      - reveal: Cath shows an occluded LAD. After PCI, echo shows a large anterior akinetic area.
+        question: Why might full-dose anticoagulation be given?
+        options:
+          - High risk of mural thrombus and embolization after anterior MI
+          - To treat the confusion
+          - To replace antiplatelets
+          - To prevent restenosis
+        answer: 0
+        why: "Anterior MI carries a high risk of mural thrombus and possible embolization (p13)."
+    src: { page: 12, quote: "The presenting symptoms of (MI) can be quite atypical, specially in patients over age 80 or Silent MI" }
+    status: unverified
+  - id: geri.L01.116
+    kind: case
+    topic: hf-treatment
+    stem: "A 79-year-old man with a previous anterior MI has 3 months of orthopnea, PND and ankle swelling. He has bibasal rales, a raised JVP and an S3."
+    steps:
+      - question: What is the next test in the ESC 2016 work-up?
+        options:
+          - Natriuretic peptides
+          - Coronary arteriography
+          - Thallium scan
+          - Treadmill test
+        answer: 0
+        why: "With at least one abnormal finding (history, exam, ECG), measure natriuretic peptides; NT-proBNP ≥125 or BNP ≥35 pg/ml → echo (p18)."
+      - reveal: "NT-proBNP 2400 pg/ml. Echo: LVEF 30%, dilated LV."
+        question: Which pair starts treatment in the book's HFrEF algorithm?
+        options:
+          - ACE inhibitor and beta-blocker
+          - Digoxin and nitrates
+          - Ivabradine and amiloride
+          - Spironolactone and triamterene
+        answer: 0
+        why: "Start ACEI and beta-blocker, up-titrated to maximum tolerated doses, with diuretics for congestion (p20). Triamterene must never be combined with an MRA (p22)."
+      - reveal: You start ramipril. He is 79 and takes furosemide.
+        question: What does the lecture warn about at the first dose?
+        options:
+          - An exaggerated drop in blood pressure
+          - Hyperglycemia
+          - Ototoxicity
+          - Bradycardia
+        answer: 0
+        why: "Older people may show an exaggerated BP drop after the first ACE inhibitor dose; check postural BP and BUN/creatinine (p23)."
+      - reveal: Three months later he is still NYHA III; LVEF 30%, sinus rhythm, HR 78, QRS 100 ms.
+        question: Next step per the book's algorithm?
+        options:
+          - Add an MR antagonist
+          - Stop the beta-blocker
+          - Add amiloride
+          - No further action
+        answer: 0
+        why: "Still symptomatic with LVEF ≤35% → add an MRA; afterwards ARNI, CRT or ivabradine as indicated (p20). Today an SGLT2i is also added early (ESC 2021)."
+    src: { page: 20, quote: "Therapy with ACE-I and beta-blocker (Up-titrate to maximum tolerated evidence-based doses)" }
+    status: unverified

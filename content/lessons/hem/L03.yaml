@@ -1,0 +1,1080 @@
+schema: batna.lesson/v1
+lecture: hem.L03
+lessons:
+  # ------------------------------------------------------------------
+  - id: hem.L03.lesson1
+    title: "الكرة بتموت بدري: الـ haemolysis والـ spherocytosis"
+    hook: "الكرة الحمرا المفروض تعيش 120 يوم. لو غشاها بايظ، الطحال بيعدمها قبل معادها."
+    minutes: 8
+    pages: [18, 21]
+    topics: [haemolysis, hs]
+    goals:
+      - "تفرّق الـ intravascular من الـ extravascular haemolysis"
+      - "تفهم عيب الغشا في الـ HS وليه الكرة بتبقى كورة"
+      - "تعرف التشخيص (EMA) والعلاج (splenectomy + folate)"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 18
+        title: "يعني إيه haemolysis؟"
+        quote: "Hemolysis is defined as premature destruction and hence a shortened RBC life span (< 120 days)."
+        text: |
+          الـ ==haemolysis== = الكرة الحمرا بتتكسر **قبل معادها**، فعمرها يبقى أقل من **120 يوم**.
+
+          وفيه مكانين للتكسير:
+          - **Intravascular**: الكرة بتنفجر **جوّه الأوعية** ومحتواها يطلع في البلازما.
+          - **Extravascular**: خلايا الـ ==RE system== (الطحال أساسًا) بتاكلها وتهضمها.
+      - kind: figure
+        page: 18
+        quote: "INTRAVASCULAR HEMOLYSIS-Red cells undergo lysis in the circulation and release their contents into plasma."
+        title: "فين الكرة بتموت؟"
+        alt: "Two panels. Intravascular: a red cell bursts inside a blood vessel and free haemoglobin enters the plasma. Extravascular: a red cell is engulfed by a macrophage in the spleen (RE system)."
+        caption: "**Intravascular** = انفجار في الشارع، والـ Hb بيطلع في البلازما. **Extravascular** = القبض عليها في الطحال وأكلها. هتقابل الاتنين: الـ G6PD و الـ PNH فيهم intravascular، والـ HS والـ warm AIHA extravascular."
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <rect x="5" y="10" width="320" height="105" rx="10" class="fg-bad"/>
+            <text x="15" y="32" class="t-b">Intravascular</text>
+            <path d="M20 70 L310 70" class="fg-thin"/>
+            <path d="M20 100 L310 100" class="fg-thin"/>
+            <circle cx="90" cy="85" r="12" class="fg-dot-bad"/>
+            <text x="120" y="90" class="t-sm">→ bursts in the vessel</text>
+            <circle cx="270" cy="80" r="3" class="fg-dot-bad"/>
+            <circle cx="282" cy="90" r="3" class="fg-dot-bad"/>
+            <circle cx="262" cy="94" r="3" class="fg-dot-bad"/>
+            <text x="15" y="54" class="t-sm t-mut">free Hb into plasma</text>
+            <rect x="5" y="130" width="320" height="110" rx="10" class="fg-acc"/>
+            <text x="15" y="152" class="t-b">Extravascular</text>
+            <ellipse cx="100" cy="200" rx="55" ry="28" class="fg-box"/>
+            <text x="100" y="204" text-anchor="middle" class="t-sm">Macrophage</text>
+            <circle cx="170" cy="200" r="12" class="fg-dot-bad"/>
+            <text x="190" y="196" class="t-sm">eaten in the</text>
+            <text x="190" y="212" class="t-sm">spleen (RE system)</text>
+          </svg>
+      - kind: explain
+        page: 18
+        title: "Hereditary spherocytosis"
+        quote: "characterized by an inherited defect in the red cell membrane cytoskeleton leading to the formation of spherocytic red cells"
+        text: |
+          الـ ==HS== مرض وراثي في **الـ cytoskeleton** بتاع غشا الكرة، فالكرة تبقى **spherocyte** (كورة بدل قرص).
+
+          الـ spherocyte **أقل مرونة**، فبتتحبس وتتكسر في **الطحال**.
+
+          الوراثة غالبًا ==autosomal dominant==، وأحيانًا recessive.
+      - kind: explain
+        page: 18
+        title: "الغشا متربط إزاي؟"
+        quote: "The first linkage involves interaction of ankyrin with spectrin in skeleton and band 3 in the bilayer."
+        text: |
+          الـ lipid bilayer متربط بالـ skeleton بـ **رابطين**:
+          1. **Ankyrin** مع **spectrin** (في الـ skeleton) و **band 3** (في الـ bilayer).
+          2. **Glycophorin C** مع **protein 4.1**.
+
+          أي نقص فيهم = الـ bilayer يفك من الـ skeleton ويتقشر، فالـ ==surface area تقل بالنسبة للـ volume==، والكرة تتكوّر.
+      - kind: aside
+        tone: analogy
+        page: 19
+        quote: "This causes decrease in surface area of red cell relative to volume with resultant spherocyte formation."
+        text: "تخيل بلونة طويلة بتفقد حتة من جلدها كل شوية: نفس الهوا جوّه، بس الجلد أقل، فتبقى **كورة مشدودة**. والكورة المشدودة ما تعرفش تتلوى وتعدّي من فتحات الطحال الضيقة، فتتحبس."
+      - kind: check
+        page: 19
+        quote: "The second attachment between skeleton and bilayer provided by glycophorin C and protein 4.1."
+        question: "Which pair forms the SECOND linkage of the red cell membrane?"
+        options:
+          - "Glycophorin C and protein 4.1"
+          - "Ankyrin and spectrin"
+          - "Band 3 and ankyrin"
+          - "Spectrin and haemoglobin"
+        answer: 0
+        why:
+          - "صح: الرابط التاني = glycophorin C + protein 4.1."
+          - "ده جزء من الرابط الأول."
+          - "ده كمان الرابط الأول."
+          - "الـ Hb جوّه الكرة، مش جزء من الروابط دي."
+      - kind: explain
+        page: 19
+        title: "الصورة الإكلينيكية"
+        quote: "Mild to moderate anaemia"
+        text: |
+          أغلبهم بيظهروا في **الطفولة** بـ:
+          - **Anaemia** خفيفة لمتوسطة
+          - **Jaundice** متقطعة
+          - **Splenomegaly**
+          - ==Gall stones== (bilirubin كتير = pigment stones)
+          - **Chronic leg ulcers**
+      - kind: figure
+        page: 20
+        title: "Blood film من الكتاب (ص 20)"
+        image: { file: hem/L03-hs-film.webp, book: true }
+        alt: "Book photomicrograph of a peripheral blood film in hereditary spherocytosis with red cells and a neutrophil."
+        caption: "صورة الكتاب لفيلم الـ HS. الـ ==spherocyte== صغيرة وكثيفة ومن غير **central pallor**، لأنها كورة مش قرص."
+      - kind: explain
+        page: 20
+        title: "التحاليل"
+        quote: "Eosin -5- Maleimide Binding test is the gold standard confirmatory test"
+        text: |
+          - **Anaemia** خفيفة لمتوسطة، و **reticulocytosis**.
+          - الـ **film**: ==spherocytosis==.
+          - **Bone marrow**: erythroid hyperplasia.
+          - **Osmotic fragility**: نحط الكرات في **saline أقل تركيز** بالتدريج ونقيس الـ haemolysis. الكورة ما عندهاش مساحة تنفخ، فتنفجر بدري.
+          - الـ **gold standard**: ==Eosin-5-maleimide (EMA) binding==: صبغة fluorescent بتلزق على سطح الكرة، ونقيسها بالـ **flow cytometry**. سطح أقل = fluorescence أقل.
+      - kind: reveal
+        page: 21
+        quote: "Administration of folate is necessary in moderate or severe disease to prevent megaloblastic anaemia due to increased erythrocyte turnover."
+        prompt: "ليه عيان الـ HS المتوسط أو الشديد لازم ياخد folate؟"
+        answer: "النخاع شغال **overtime** عشان يعوّض الكرات اللي بتتكسر، فبيستهلك الـ **folate** بسرعة. لو خلص، يجيله **megaloblastic anaemia** فوق الـ haemolysis. والحالات الشديدة علاجها ==splenectomy==، لأن الطحال هو مكان الإعدام."
+      - kind: try
+        items: [hem.L03.002, hem.L03.006, hem.L03.008, hem.L03.011, hem.L03.012]
+    recap:
+      - "Haemolysis = عمر الكرة < 120 يوم؛ intravascular (في الأوعية) أو extravascular (RE system)."
+      - "HS: عيب cytoskeleton، غالبًا AD؛ ankyrin–spectrin–band 3 و glycophorin C–protein 4.1."
+      - "مساحة أقل للـ volume ← spherocyte ← بتتحبس في الطحال."
+      - "Anaemia، jaundice متقطعة، splenomegaly، gall stones، leg ulcers."
+      - "EMA binding (flow cytometry) هو الـ gold standard؛ osmotic fragility بيقيس الـ haemolysis في saline مخفف."
+      - "علاج الشديد: splenectomy؛ و folate للمتوسط والشديد."
+    practice: [hem.L03.001, hem.L03.002, hem.L03.003, hem.L03.004, hem.L03.005, hem.L03.006, hem.L03.007, hem.L03.008, hem.L03.009, hem.L03.010, hem.L03.011, hem.L03.012, hem.L03.013, hem.L03.014]
+  # ------------------------------------------------------------------
+  - id: hem.L03.lesson2
+    title: "الثلاسيميا: لما سلسلة تقل والتانية تزيد"
+    hook: "مش المشكلة إن الـ β ناقصة بس. المشكلة إن الـ α الزيادة بتترسب وتموّت الكرة وهي لسه في النخاع."
+    minutes: 9
+    pages: [21, 25]
+    topics: [thal-class, beta-major]
+    goals:
+      - "تعرّف الثلاسيميا وتقسمها بطريقتين"
+      - "تشرح pathogenesis الـ β-thalassaemia major خطوة خطوة"
+      - "تربط العضم والحديد والطحال بالـ pathogenesis، وتعرف التحاليل"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 21
+        title: "الثلاسيميا وتقسيمها"
+        quote: "characterized by reduced or absent production of one of the globin chains"
+        text: |
+          الـ ==thalassaemias== أمراض وراثية في الـ Hb فيها إنتاج **سلسلة globin** واحدة **قليل أو معدوم**.
+
+          بتتقسم بطريقتين:
+          1. **نوع السلسلة الناقصة**: أشهرهم **α** و **β**.
+          2. **الشدة الإكلينيكية**: major، intermedia، minor.
+      - kind: table
+        page: 22
+        quote: "Thalassaemia intermedia is characterized by intermediate degree of severity of anaemia that does not require regular blood transfusions."
+        title: "Major ولا intermedia ولا minor؟"
+        columns: [Type, Transfusion]
+        rows:
+          - ["Major", "Regular, dependent"]
+          - ["Intermedia", "None or intermittent"]
+          - ["Minor", "None (mild or no anaemia)"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: explain
+        page: 22
+        title: "Cooley's anaemia: الـ pathogenesis"
+        quote: "leading to the lysis of erythroblasts and red cells in the bone marrow (ineffective erythropoiesis)"
+        text: |
+          الـ **β-thalassaemia major** (==Cooley's anaemia==) أشد نوع:
+          1. الخلية مش قادرة تعمل **β chains** كفاية.
+          2. الـ **α chains** الحرة تتراكم.
+          3. تترسب جوّه الـ erythroblasts والكرات، فتموت **في النخاع**: ==ineffective erythropoiesis==.
+          4. الكرات اللي فيها α aggregates **ناشفة** وتتحبس في الطحال.
+          5. Hb قليل = كرات **microcytic hypochromic**.
+          6. التكسير برّه = **splenomegaly**.
+          7. الـ **HbF** هو الغالب، وده بيزوّد الـ tissue hypoxia.
+      - kind: figure
+        page: 22
+        quote: "The unbound chains precipitate within erythroblasts and red cells"
+        title: "الحلقة المفرغة"
+        alt: "A cycle: low beta chains leave excess alpha chains, which precipitate and kill erythroblasts (ineffective erythropoiesis) and make rigid red cells destroyed in the spleen; severe anaemia and hypoxia drive erythropoietin and marrow expansion (bone deformity), and raise iron absorption; transfusions add iron; iron overload damages organs."
+        caption: "كل حاجة في الـ thalassaemia major طالعة من نقطة واحدة: ==α chains زيادة==. هي اللي بتموّت الخلايا، والـ anaemia بتزق النخاع يتمدد، والـ ineffective erythropoiesis بتزوّد امتصاص الحديد."
+        svg: |
+          <svg viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="h03a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="85" y="5" width="160" height="34" rx="8" class="fg-acc"/>
+            <text x="165" y="27" text-anchor="middle" class="t-sm t-b">↓ β chains, free α excess</text>
+            <path d="M120 39 L70 64" class="fg-arrow" marker-end="url(#h03a)"/>
+            <path d="M210 39 L260 64" class="fg-arrow" marker-end="url(#h03a)"/>
+            <rect x="5" y="66" width="150" height="48" rx="8" class="fg-bad"/>
+            <text x="80" y="86" text-anchor="middle" class="t-sm t-b">α precipitates</text>
+            <text x="80" y="102" text-anchor="middle" class="t-sm">ineffective erythropoiesis</text>
+            <rect x="175" y="66" width="150" height="48" rx="8" class="fg-bad"/>
+            <text x="250" y="86" text-anchor="middle" class="t-sm t-b">Rigid RBCs</text>
+            <text x="250" y="102" text-anchor="middle" class="t-sm">trapped → splenomegaly</text>
+            <path d="M80 114 L150 140" class="fg-arrow" marker-end="url(#h03a)"/>
+            <path d="M250 114 L180 140" class="fg-arrow" marker-end="url(#h03a)"/>
+            <rect x="85" y="142" width="160" height="40" rx="8" class="fg-box"/>
+            <text x="165" y="160" text-anchor="middle" class="t-sm t-b">Severe anaemia + hypoxia</text>
+            <text x="165" y="175" text-anchor="middle" class="t-sm t-mut">(HbF adds to hypoxia)</text>
+            <path d="M120 182 L70 210" class="fg-arrow" marker-end="url(#h03a)"/>
+            <path d="M210 182 L260 210" class="fg-arrow" marker-end="url(#h03a)"/>
+            <rect x="5" y="212" width="150" height="48" rx="8" class="fg-acc"/>
+            <text x="80" y="232" text-anchor="middle" class="t-sm t-b">Marrow expansion</text>
+            <text x="80" y="248" text-anchor="middle" class="t-sm">skull, face, fractures</text>
+            <rect x="175" y="212" width="150" height="48" rx="8" class="fg-acc"/>
+            <text x="250" y="232" text-anchor="middle" class="t-sm t-b">Transfusion</text>
+            <text x="250" y="248" text-anchor="middle" class="t-sm">+ ↑ gut iron absorption</text>
+            <path d="M250 260 L200 284" class="fg-arrow" marker-end="url(#h03a)"/>
+            <rect x="85" y="286" width="160" height="38" rx="8" class="fg-bad"/>
+            <text x="165" y="310" text-anchor="middle" class="t-sm t-b">Iron overload → organs</text>
+          </svg>
+      - kind: check
+        page: 22
+        quote: "leading to the lysis of erythroblasts and red cells in the bone marrow (ineffective erythropoiesis)"
+        question: "What is the main cause of ineffective erythropoiesis in β-thalassaemia major?"
+        options:
+          - "Free α chains precipitate in erythroblasts"
+          - "Lack of erythropoietin"
+          - "Iron deficiency"
+          - "Antibodies against erythroblasts"
+        answer: 0
+        why:
+          - "صح: الـ α الحرة بتترسب وتكسّر الـ erythroblasts في النخاع."
+          - "الـ EPO عالي جدًا هنا، وده اللي بيمدد النخاع."
+          - "بالعكس، فيه iron overload."
+          - "مفيش antibodies في الثلاسيميا."
+      - kind: explain
+        page: 23
+        title: "العضم والحديد"
+        quote: "Thinning of cortex may lead to pathological fractures."
+        text: |
+          **العضم**: الـ anaemia والـ hypoxia بيشغّلوا النخاع ==hyperplasia== شديدة. النخاع بيتمدد فيضعّف ويشوّه **الجمجمة** و**عضم الوش**، والـ cortex يرق فيحصل **pathological fractures**.
+
+          **الحديد** بيزيد من سببين:
+          - **امتصاص أكتر من الأمعاء** بسبب الـ ineffective erythropoiesis.
+          - **نقل الدم** المنتظم.
+
+          والـ ==iron overload== بيبوّظ: البنكرياس (**DM**)، الكبد (**cirrhosis**)، الـ gonads (**infertility**)، الـ parathyroid والـ thyroid، و**القلب** (arrhythmias و heart failure).
+      - kind: figure
+        page: 23
+        title: "Hair-on-end (صورة الكتاب ص 23)"
+        image: { file: hem/L03-hair-on-end-xray.webp, book: true }
+        alt: "Book lateral skull X-ray in thalassaemia major with arrows on the vertical striations of the expanded vault (hair-on-end appearance)."
+        caption: "النخاع المتمدد بيرفع الـ periosteum فتطلع خطوط رأسية زي **الشعر الواقف**: ==hair-on-end==. والأسهم الزرقا عليها."
+      - kind: mnemonic
+        page: 23
+        quote: "Iron overload may damage parenchymal cells of various organs such as pancreas (diabetes mellitus), liver (cirrhosis), gonads (infertility)"
+        word: "PLGEH"
+        parts:
+          - { key: "P", text: "Pancreas: diabetes mellitus" }
+          - { key: "L", text: "Liver: cirrhosis" }
+          - { key: "G", text: "Gonads: infertility" }
+          - { key: "E", text: "Endocrine: hypoparathyroidism, hypothyroidism" }
+          - { key: "H", text: "Heart: arrhythmias, heart failure" }
+        hook: "**P-L-G-E-H**: «**بلج** **إيه**؟» الحديد بيبلّج كل غدة وعضو. والقلب (**H**) هو أخطرهم: أشهر سبب وفاة في الـ iron overload."
+      - kind: explain
+        page: 24
+        title: "مضاعفات تانية وتحاليل"
+        quote: "a haemoglobin concentration between 2-6 gm/dl. Anaemia is typically microcytic and hypochromic."
+        text: |
+          **مضاعفات**: hypersplenism، بؤر **extramedullary haematopoiesis** ممكن تضغط على الـ **spinal cord**، والعيان من غير علاج بيموت قبل **5 سنين**، والنقل بينقل **HIV و HBV و HCV**.
+
+          **التحاليل**:
+          - Hb ==2–6 g/dL==، microcytic hypochromic.
+          - Film: anisopoikilocytosis، hypochromia شديدة، **target cells** كتير، basophilic stippling، nucleated RBCs. الـ reticulocytes **modest** بس.
+          - **Electrophoresis**: ==HbF 10–98%==، والـ HbA2 طبيعي أو عالي.
+          - النخاع: erythroid hyperplasia شديدة؛ **ferritin** عالي؛ unconjugated bilirubin عالي.
+      - kind: figure
+        page: 25
+        title: "Target cells (صورة الكتاب ص 25)"
+        image: { file: hem/L03-target-cells.webp, book: true }
+        alt: "Book blood film with hypochromic red cells and an arrow on a target cell with a central dot of haemoglobin."
+        caption: "الـ ==target cell==: نقطة Hb في النص وحلقة حواليها، زي الـ target بتاع الرماية. من علامات الثلاسيميا."
+      - kind: reveal
+        page: 24
+        quote: "Reticulocytosis is modest."
+        prompt: "النخاع شغال بأقصى سرعة، ليه الـ reticulocytes مش عالية قوي زي الـ HS؟"
+        answer: "لأن معظم الـ erythroblasts بتموت **جوّه النخاع** قبل ما تطلع (==ineffective erythropoiesis==). النخاع بيشتغل كتير بس الإنتاج اللي بيوصل الدم قليل، فالـ reticulocytosis **modest**."
+      - kind: try
+        items: [hem.L03.017, hem.L03.019, hem.L03.025, hem.L03.027, hem.L03.029]
+    recap:
+      - "Thalassaemia = سلسلة globin قليلة أو معدومة؛ تقسيم بالسلسلة (α، β) أو بالشدة (major، intermedia، minor)."
+      - "Major = transfusion-dependent؛ intermedia = مش محتاج نقل منتظم؛ minor = asymptomatic غالبًا."
+      - "β major: α زيادة تترسب ← ineffective erythropoiesis + كرات ناشفة في الطحال."
+      - "النخاع يتمدد ← جمجمة hair-on-end ووش متشوّه وكسور."
+      - "Iron overload من النقل + امتصاص زيادة ← DM، cirrhosis، infertility، hypothyroid/hypoparathyroid، قلب."
+      - "Hb 2–6، target cells، HbF 10–98%، retics modest."
+    practice: [hem.L03.015, hem.L03.016, hem.L03.017, hem.L03.018, hem.L03.019, hem.L03.020, hem.L03.021, hem.L03.022, hem.L03.023, hem.L03.024, hem.L03.025, hem.L03.026, hem.L03.027, hem.L03.028, hem.L03.029, hem.L03.030, hem.L03.031, hem.L03.032, hem.L03.163]
+  # ------------------------------------------------------------------
+  - id: hem.L03.lesson3
+    title: "الـ minor والـ alpha والعلاج: من النقل للـ chelation"
+    hook: "4 جينات α، وكل جين بيروح بيغيّر المرض. وفي الآخر، علاج الـ major محتاج دم وحديد يطلع وصبر."
+    minutes: 9
+    pages: [25, 29]
+    topics: [beta-minor, alpha-thal, thal-rx]
+    goals:
+      - "تشخّص الـ β-thalassaemia minor من الـ indices"
+      - "ترتّب الـ α-thalassaemias حسب عدد الجينات"
+      - "تحفظ علاج الـ major: النقل، الـ chelators وآثارهم، الـ splenectomy، والـ HSCT"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 26
+        title: "β-thalassaemia minor"
+        quote: "Haemoglobin level is either normal or mildly decreased and is generally not less than 9 gms/dl."
+        text: |
+          الـ ==carrier state== (heterozygous): anaemia قليلة أو مفيش، بس شكل الكرات متغير جدًا.
+
+          - غالبًا **asymptomatic**، بس ممكن تظهر الأنيميا في **العدوى** أو **الحمل**.
+          - Hb طبيعي أو قليل شوية، ==مش أقل من 9 g/dL== غالبًا.
+          - **MCV و MCH قليلين**، بس ==RBC count عالي==.
+          - الـ reticulocytes والـ bilirubin عاليين شوية.
+      - kind: aside
+        tone: exam
+        page: 26
+        quote: "Red cell count is increased."
+        text: "الفخ المشهور: microcytic hypochromic زي الـ **iron deficiency**. الفرق في الكتاب: الـ thalassaemia minor ==RBC count عالي== والأنيميا خفيفة، أما نقص الحديد فالـ RBC count قليل. وطبعًا الـ ferritin هيفصل."
+      - kind: explain
+        page: 26
+        title: "α-thalassaemia: عدّ الجينات"
+        quote: "globin genes, two on each chromosome no. 16"
+        text: |
+          عندنا ==4 جينات α==: اتنين على كل **chromosome 16**. كل ما جين يروح، المرض يزيد:
+          - **3 شغالين** (-α/αα): **silent**؛ indices طبيعية أو MCV/MCH أقل شوية.
+          - **2 شغالين** (--/αα أو -α/-α): **α trait**؛ asymptomatic، anaemia خفيفة جدًا، microcytic.
+          - **1 شغال** (--/-α): ==HbH disease==.
+          - **0** (--/--): ==Hb Bart's hydrops fetalis==، قاتل.
+      - kind: figure
+        page: 27
+        quote: "HbH disease"
+        title: "سلّم الـ α-thalassaemia"
+        alt: "A ladder of five rows with four gene boxes each: four filled is normal; three filled is silent alpha+ thalassaemia; two filled is alpha thalassaemia trait; one filled is HbH disease with beta-4 tetramers; none filled is Hb Bart's hydrops fetalis with gamma-4 tetramers, lethal."
+        caption: "كل ما تنزل درجة، جين بيقع. في الـ **HbH** الـ β الزيادة بتعمل **β4**، وفي الـ **Bart's** الجنين ما عندوش α خالص فالـ γ بتعمل **γ4**."
+        svg: |
+          <svg viewBox="0 0 330 270" xmlns="http://www.w3.org/2000/svg">
+            <text x="10" y="30" class="t-sm t-b">Normal</text>
+            <rect x="140" y="16" width="22" height="18" class="fg-dot-acc"/><rect x="166" y="16" width="22" height="18" class="fg-dot-acc"/>
+            <rect x="200" y="16" width="22" height="18" class="fg-dot-acc"/><rect x="226" y="16" width="22" height="18" class="fg-dot-acc"/>
+            <text x="258" y="30" class="t-sm">4 genes</text>
+            <text x="10" y="80" class="t-sm t-b">Silent α+</text>
+            <rect x="140" y="66" width="22" height="18" class="fg-thin"/><rect x="166" y="66" width="22" height="18" class="fg-dot-acc"/>
+            <rect x="200" y="66" width="22" height="18" class="fg-dot-acc"/><rect x="226" y="66" width="22" height="18" class="fg-dot-acc"/>
+            <text x="258" y="80" class="t-sm">3 genes</text>
+            <text x="10" y="130" class="t-sm t-b">α trait</text>
+            <rect x="140" y="116" width="22" height="18" class="fg-thin"/><rect x="166" y="116" width="22" height="18" class="fg-thin"/>
+            <rect x="200" y="116" width="22" height="18" class="fg-dot-acc"/><rect x="226" y="116" width="22" height="18" class="fg-dot-acc"/>
+            <text x="258" y="130" class="t-sm">2 genes</text>
+            <text x="10" y="180" class="t-sm t-b">HbH (β4)</text>
+            <rect x="140" y="166" width="22" height="18" class="fg-thin"/><rect x="166" y="166" width="22" height="18" class="fg-thin"/>
+            <rect x="200" y="166" width="22" height="18" class="fg-thin"/><rect x="226" y="166" width="22" height="18" class="fg-dot-acc"/>
+            <text x="258" y="180" class="t-sm">1 gene</text>
+            <text x="10" y="230" class="t-sm t-b t-bad">Bart's (γ4)</text>
+            <rect x="140" y="216" width="22" height="18" class="fg-thin"/><rect x="166" y="216" width="22" height="18" class="fg-thin"/>
+            <rect x="200" y="216" width="22" height="18" class="fg-thin"/><rect x="226" y="216" width="22" height="18" class="fg-thin"/>
+            <text x="258" y="230" class="t-sm t-bad">0: lethal</text>
+            <text x="10" y="262" class="t-sm t-mut">Chromosome 16: two genes on each copy</text>
+          </svg>
+      - kind: explain
+        page: 27
+        title: "HbH disease"
+        quote: "These patients have anaemia (haemoglobin 7-10 gms/dl), icterus, and hepatosplenomegaly. Transfusions are usually not needed."
+        text: |
+          **3 جينات واقعة** (--/-α، يعني α0 + α+). الـ α قليلة جدًا، فالـ **β تعمل tetramers (β4) = HbH**.
+
+          الـ HbH بيترسب في الكرات **العجوزة** ويعمل inclusions، والطحال يكسّرها.
+
+          الصورة: Hb ==7–10 g/dL==، **icterus**، **hepatosplenomegaly**، و**النقل غالبًا مش محتاج**. الفيلم: anisopoikilocytosis، hypochromia، microcytes، target cells.
+      - kind: check
+        page: 26
+        quote: "They are severely anaemic, and have massive anasarca"
+        question: "A fetus has hydrops with massive anasarca and hepatosplenomegaly. Genotype?"
+        options:
+          - "--/-- (no α genes)"
+          - "--/-α"
+          - "-α/αα"
+          - "Heterozygous β-thalassaemia"
+        answer: 0
+        why:
+          - "صح: Hb Bart's hydrops = homozygous α0، الطفل بيتولد ميت أو يموت بعد الولادة."
+          - "ده HbH disease، Hb 7–10 ومن غير نقل."
+          - "ده silent، indices شبه طبيعية."
+          - "الـ β minor carrier asymptomatic."
+      - kind: explain
+        page: 28
+        title: "علاج الـ β major: دم وحديد"
+        quote: "Regular red cell transfusions and chelation therapy for iron overload are the cornerstones of therapy"
+        text: |
+          الأساس: ==regular transfusion + iron chelation==.
+
+          **النقل**: يخلّي الـ Hb **فوق 9.5–10 g/dL** دايمًا. الهدف: يمنع الـ anaemia والـ hypoxia، و==يكتم الـ erythropoiesis بتاعة الجسم== (فالنخاع ما يتمددش والامتصاص يقل).
+
+          **الـ chelation** بيبدأ عادة على ==3 سنين==. الـ **desferrioxamine**: **25–60 mg/kg** SC بـ infusion pump على 12 ساعة، **5–6 أيام** في الأسبوع.
+      - kind: table
+        page: 29
+        quote: "Deferiprone: major side effects are agranulocytosis, arthropathy, and possible hepatic fibrosis."
+        title: "الـ chelators"
+        columns: [Drug, Watch for]
+        rows:
+          - ["Desferrioxamine", "Eyes, ears, growth, Yersinia; poor compliance"]
+          - ["Deferiprone", "Agranulocytosis, arthropathy"]
+          - ["Deferasirox", "Oral 20–30 mg/kg; GIT, kidney"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: aside
+        tone: trap
+        page: 29
+        quote: "Deferiprone: major side effects are agranulocytosis"
+        text: "**Deferiprone = agranulocytosis**. عيان thalassaemia بياخد chelator بالبُق وجاله حرارة؟ اعمل CBC فورًا. والـ **desferrioxamine** = **Yersinia** (الحديد المربوط بيأكّل البكتيريا دي). 😅 حتى البكتيريا بتحب الحديد ببلاش."
+      - kind: explain
+        page: 29
+        title: "باقي العلاج"
+        quote: "Due to the risk of sepsis, splenectomy should be avoided before 5-6 years of age."
+        text: |
+          - **Splenectomy**: للـ hypersplenism، بس ==مش قبل 5–6 سنين== (sepsis).
+          - **Luspatercept**: recombinant fusion protein بيمسك الـ **TGF-β ligands**، فالـ **SMAD signalling** يقل والـ erythroid maturation تتحسن.
+          - **General**: folic acid، و hormone replacement للغدد اللي باظت.
+          - ==HSCT== هو **العلاج الوحيد اللي بيشفي**.
+      - kind: case
+        page: 28
+        quote: "maintain the haemoglobin concentration constantly above 9.5 to 10.0 grams/dl"
+        stem: "A 4-year-old with β-thalassaemia major is on monthly transfusions; ferritin is rising."
+        steps:
+          - question: "Why keep Hb above 9.5–10 g/dL, not just above 7?"
+            options: ["To suppress his own ineffective erythropoiesis", "To raise HbF", "To prevent iron overload", "To avoid antibodies"]
+            answer: 0
+            why: "الهدف مش بس منع الـ anaemia: الـ Hb العالي **يكتم الـ erythropoiesis** فالعضم ما يتشوهش والامتصاص يقل."
+          - question: "Chelation should have started at:"
+            options: ["About 3 years", "Birth", "10 years", "Only after cirrhosis"]
+            answer: 0
+            why: "الـ chelation بيبدأ عادة على **3 سنين**."
+          - reveal: "On deferiprone he develops fever with neutrophils 0.3 × 10⁹/L."
+            question: "Most likely cause?"
+            options: ["Agranulocytosis from deferiprone", "Yersinia from desferrioxamine", "Hypersplenism", "Parvovirus"]
+            answer: 0
+            why: "الـ **deferiprone** أهم أعراضه الجانبية **agranulocytosis**."
+      - kind: try
+        items: [hem.L03.035, hem.L03.039, hem.L03.044, hem.L03.051, hem.L03.052]
+    recap:
+      - "β minor: Hb ≥ 9، MCV و MCH قليلين، RBC count عالي، بيبان في العدوى أو الحمل."
+      - "4 جينات α على chromosome 16: 3 = silent، 2 = trait، 1 = HbH (β4)، 0 = Bart's (γ4) hydrops."
+      - "HbH: Hb 7–10، icterus، HSM، inclusions في الكرات العجوزة، نقل غالبًا مش محتاج."
+      - "Major: نقل يخلي Hb فوق 9.5–10، chelation من 3 سنين."
+      - "Desferrioxamine SC (Yersinia)؛ deferiprone (agranulocytosis)؛ deferasirox بالبق (GIT، كلى)."
+      - "Splenectomy مش قبل 5–6 سنين؛ luspatercept؛ HSCT هو الشفا الوحيد."
+    practice: [hem.L03.033, hem.L03.034, hem.L03.035, hem.L03.036, hem.L03.037, hem.L03.038, hem.L03.039, hem.L03.040, hem.L03.041, hem.L03.042, hem.L03.043, hem.L03.044, hem.L03.045, hem.L03.046, hem.L03.047, hem.L03.048, hem.L03.049, hem.L03.050, hem.L03.051, hem.L03.052, hem.L03.053, hem.L03.054, hem.L03.055, hem.L03.056, hem.L03.057, hem.L03.058]
+  # ------------------------------------------------------------------
+  - id: hem.L03.lesson4
+    title: "الـ sickle cell: حرف واحد غيّر كل حاجة"
+    hook: "Valine مكان glutamic acid، في مكان واحد من سلسلة واحدة. والنتيجة: كرة بتتحول لمنجل لما الأكسجين يقل."
+    minutes: 9
+    pages: [30, 35]
+    topics: [scd, scd-clinical, scd-rx]
+    goals:
+      - "تشرح الطفرة والـ polymerisation وإيه اللي بيزوّد الـ sickling"
+      - "تفرّق أنواع الـ crises وتعرف الـ aplastic crisis"
+      - "تعرف التحاليل والعلاج: hydroxyurea والأدوية الجديدة والـ HSCT"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 30
+        title: "الطفرة"
+        quote: "This in turn results in substitution of valine for glutamic acid at position 6"
+        text: |
+          - **Sickle cell anaemia** = **HbSS** (homozygous، الجين من الأب والأم).
+          - **Sickle cell trait** = **HbAS** (heterozygous).
+
+          الطفرة: base واحد **A → T** في الـ **codon 6** من جين الـ β، فالـ ==valine تيجي مكان glutamic acid== (**β6 Glu → Val**).
+
+          الـ HbS لما يفقد الأكسجين بيعمل ==polymerisation== جوّه الكرة، فتتحول **منجل** ناشف، والطحال يحبسه ويكسّره.
+      - kind: mnemonic
+        page: 31
+        quote: "Intracellular concentration of HbS and of other haemoglobins"
+        word: "CHOCA"
+        parts:
+          - { key: "C", text: "Concentration of HbS (and other Hbs)" }
+          - { key: "H", text: "Hydration loss: cellular dehydration" }
+          - { key: "O", text: "Oxygen tension low" }
+          - { key: "C", text: "Cold: vasoconstriction" }
+          - { key: "A", text: "Acidosis: favours deoxy Hb" }
+        hook: "**CHOCA** زي **شوكولا**: كل حاجة من دول بتخلي الكرة «تجمد» وتتمنجل. ولاحظ: الـ dehydration بيزوّد تركيز الـ HbS، يعني **C** و **H** بيكملوا بعض."
+      - kind: figure
+        page: 32
+        quote: "Polymerization"
+        title: "من الـ polymer للألم"
+        alt: "Flow: deoxygenation, acidosis and high HbS concentration lead to HbS polymerisation; this causes red cell rigidity, adhesion and haemolysis; these damage the endothelium and activate coagulation and inflammation, ending in vaso-occlusion, tissue hypoxia, pain and organ damage. Haemolysis also gives anaemia."
+        caption: "ده ملخص شكل الكتاب (ص 32): الـ ==polymerisation== ← كرات ناشفة ولزجة ← endothelium يتجرح ← ==vaso-occlusion== ← ألم وتلف أعضاء."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="h03b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="5" y="6" width="320" height="34" rx="8" class="fg-box"/>
+            <text x="165" y="28" text-anchor="middle" class="t-sm">Deoxygenation · acidosis · ↑HbS concentration</text>
+            <path d="M165 40 L165 56" class="fg-arrow" marker-end="url(#h03b)"/>
+            <rect x="85" y="58" width="160" height="32" rx="8" class="fg-bad"/>
+            <text x="165" y="79" text-anchor="middle" class="t-b">HbS polymerisation</text>
+            <path d="M165 90 L165 106" class="fg-arrow" marker-end="url(#h03b)"/>
+            <rect x="5" y="108" width="100" height="32" rx="8" class="fg-acc"/>
+            <text x="55" y="129" text-anchor="middle" class="t-sm">RBC rigidity</text>
+            <rect x="115" y="108" width="100" height="32" rx="8" class="fg-acc"/>
+            <text x="165" y="129" text-anchor="middle" class="t-sm">RBC adhesion</text>
+            <rect x="225" y="108" width="100" height="32" rx="8" class="fg-acc"/>
+            <text x="275" y="129" text-anchor="middle" class="t-sm">Haemolysis</text>
+            <path d="M275 140 L275 164" class="fg-arrow" marker-end="url(#h03b)"/>
+            <rect x="225" y="166" width="100" height="30" rx="8" class="fg-box"/>
+            <text x="275" y="186" text-anchor="middle" class="t-sm">Anaemia</text>
+            <path d="M110 140 L110 164" class="fg-arrow" marker-end="url(#h03b)"/>
+            <rect x="5" y="166" width="210" height="44" rx="8" class="fg-box"/>
+            <text x="110" y="184" text-anchor="middle" class="t-sm t-b">Endothelial damage</text>
+            <text x="110" y="200" text-anchor="middle" class="t-sm">coagulation + inflammation</text>
+            <path d="M110 210 L110 234" class="fg-arrow" marker-end="url(#h03b)"/>
+            <rect x="5" y="236" width="320" height="56" rx="8" class="fg-bad"/>
+            <text x="165" y="258" text-anchor="middle" class="t-b">Vaso-occlusion → tissue hypoxia</text>
+            <text x="165" y="278" text-anchor="middle" class="t-sm">pain · organ damage · early death</text>
+          </svg>
+      - kind: explain
+        page: 32
+        title: "الصورة الإكلينيكية"
+        quote: "Main complications are vasoocclusive crises while anaemia itself poses little problem."
+        text: |
+          المشكلة الكبيرة ==الـ vaso-occlusive crises==؛ الـ anaemia نفسها مش بتعمل مشكلة كبيرة.
+
+          - **النمو** متأخر في الأطفال.
+          - **الطحال**: كبير في الرضيع، وبعدين ==يصغر ويتليف== من الـ infarctions المتكررة (autosplenectomy).
+          - **العدوى**: الأطفال (خصوصًا < 5 سنين) معرضين لعدوى **fulminant** لأن الطحال مش شغال.
+          - الـ **vaso-occlusive crisis**: ألم مفاجئ شديد في العضم والمفاصل والصدر أو البطن.
+      - kind: table
+        page: 33
+        quote: "Aplastic crisis appears to be caused by infection by parvovirus that selectively infects erythroblasts."
+        title: "الـ haematologic crises"
+        columns: [Crisis, Clue]
+        rows:
+          - ["Aplastic", "Parvovirus; retics vanish 7–10 days"]
+          - ["Haemolytic", "Hb falls; jaundice and retics rise"]
+          - ["Sequestration", "Spleen swells in hours; shock"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: check
+        page: 33
+        quote: "Suppression of erythropoiesis is usually transient lasting for about 7-10 days."
+        question: "Sickle cell child: Hb fell sharply, reticulocytes are near zero. Which crisis?"
+        options:
+          - "Aplastic (parvovirus)"
+          - "Haemolytic"
+          - "Splenic sequestration"
+          - "Vaso-occlusive"
+        answer: 0
+        why:
+          - "صح: الـ parvovirus بيصيب الـ erythroblasts فالـ retics تختفي 7–10 أيام. النقل ضروري."
+          - "الـ haemolytic crisis الـ retics فيها **عالية**."
+          - "الـ sequestration الطحال بيكبر فجأة."
+          - "الـ vaso-occlusive ألم، مش انهيار retics."
+      - kind: match
+        page: 33
+        quote: "Priapism: It is due to obstruction of venous return of corpora cavernosa."
+        prompt: "وصّل كل جهاز بمضاعفته:"
+        pairs:
+          - ["Brain", "Ischaemic stroke"]
+          - ["Kidney", "Papillary necrosis, haematuria"]
+          - ["Penis", "Priapism"]
+          - ["Hands and feet", "Dactylitis"]
+          - ["Lungs", "Pulmonary hypertension"]
+          - ["Skin", "Chronic leg ulcers"]
+        why: "كلهم **ischaemia** من الـ vaso-occlusion: الـ renal medulla أكسجينها أصلًا قليل فبتموت بسهولة، والـ priapism من انسداد الـ **venous return** من الـ corpora cavernosa."
+      - kind: explain
+        page: 34
+        title: "التحاليل"
+        quote: "Anaemia is usually moderate with haemoglobin concentration ranging between 6 and 9 gm/dl. Anaemia is normocytic and normochromic."
+        text: |
+          - Hb ==6–9 g/dL==، **normocytic normochromic** (مش microcytic زي الثلاسيميا)، و sickled cells في الفيلم.
+          - **Reticulocytes** عالية، و unconjugated bilirubin عالي.
+          - التأكيد: ==Hb electrophoresis== (HbS).
+      - kind: explain
+        page: 34
+        title: "العلاج"
+        quote: "Hydroxyurea increases production of HbF and reduces number and severity of crises."
+        text: |
+          **الوقاية**: علاج العدوى بدري، **pneumococcal** و**influenza vaccines**، و**penicillin prophylaxis** في الطفولة.
+
+          **الـ crisis**: مسكنات، **تدفئة**، **سوايل**، **أكسجين**، وعلاج العدوى (عكس الـ CHOCA بالظبط).
+
+          **قبل العمليات**: ==exchange transfusion== تقلل نسبة الـ HbS.
+
+          **Hydroxyurea**: يرفع الـ ==HbF==، والـ HbF مش بيدخل مع الـ HbS في الـ polymer، فالـ crises تقل.
+      - kind: table
+        page: 35
+        quote: "Crizanlizumab is a monoclonal antibody that binds to p-selectin which is the primary mediator of vaso-occlusive crisis in SCD"
+        title: "الأدوية الجديدة"
+        columns: [Drug, How]
+        rows:
+          - ["L-glutamine", "NAD; less oxidative stress"]
+          - ["Voxelotor", "↑ O2 affinity; less polymer"]
+          - ["Crizanlizumab", "Blocks P-selectin"]
+          - ["HSCT", "The only cure"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1]]
+      - kind: update
+        page: 35
+        quote: "Voxelotor is a hemoglobin modulator"
+        text: "الـ **voxelotor** (Oxbryta) اتسحب من السوق في العالم كله في سبتمبر 2024 بعد ما ظهر زيادة في الوفيات والـ crises. في امتحان القسم اكتب كلام الكتاب: hemoglobin modulator بيزوّد الـ O2 affinity، فوق 12 سنة، للي ما استجابش للـ hydroxyurea."
+        ref: "Pfizer voluntary withdrawal of Oxbryta, September 2024"
+      - kind: try
+        items: [hem.L03.060, hem.L03.062, hem.L03.069, hem.L03.076, hem.L03.079]
+    recap:
+      - "HbSS = anaemia؛ HbAS = trait. الطفرة β6 Glu → Val (A → T في codon 6)."
+      - "الـ HbS بيعمل polymer لما الأكسجين يقل ← منجل ناشف بيتحبس في الطحال."
+      - "CHOCA: concentration، hydration loss، O2 قليل، cold، acidosis."
+      - "Vaso-occlusion هي المشكلة؛ الطحال بيصغر ويتليف؛ عدوى fulminant تحت 5 سنين."
+      - "Aplastic crisis = parvovirus، 7–10 أيام، النقل ضروري؛ haemolytic = retics عالية؛ sequestration = طحال بيكبر في ساعات."
+      - "Hb 6–9 normocytic؛ electrophoresis للتشخيص. Hydroxyurea يرفع HbF؛ crizanlizumab ضد P-selectin؛ HSCT هو الشفا."
+    practice: [hem.L03.059, hem.L03.060, hem.L03.061, hem.L03.062, hem.L03.063, hem.L03.064, hem.L03.065, hem.L03.066, hem.L03.067, hem.L03.068, hem.L03.069, hem.L03.070, hem.L03.071, hem.L03.072, hem.L03.073, hem.L03.074, hem.L03.075, hem.L03.076, hem.L03.077, hem.L03.078, hem.L03.079, hem.L03.080, hem.L03.081, hem.L03.082, hem.L03.083, hem.L03.164]
+  # ------------------------------------------------------------------
+  - id: hem.L03.lesson5
+    title: "الفول والـ antibodies: G6PD والـ immune haemolysis"
+    hook: "طبق فول أخضر ممكن يودّي طفل المستشفى. وجسمك نفسه ممكن يعمل antibodies ضد كراتك، سخنة أو باردة."
+    minutes: 9
+    pages: [35, 39]
+    topics: [g6pd, aiha]
+    goals:
+      - "تشرح ليه نقص الـ G6PD بيخلي الكرة ضعيفة قدام الـ oxidants"
+      - "تعرف الـ favism والأعراض والتحاليل والعلاج"
+      - "تفرّق الـ warm من الـ cold AIHA في الـ antibody والسبب والعلاج"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 35
+        title: "الـ G6PD بيحمي الكرة إزاي؟"
+        quote: "G6PD enzyme catalyses the first step in the hexose monophosphate (HMP) shunt. It generates NADPH from NADP."
+        text: |
+          الـ ==G6PD== أول إنزيم في الـ **HMP shunt**. بيعمل **NADPH** من NADP.
+
+          الـ NADPH بيخلّي الـ **glutathione** في الحالة الـ reduced (**GSH**)، والـ GSH بيحوّل الـ **H2O2** لميه.
+
+          لو الـ G6PD ناقص: الـ H2O2 يتراكم ← الـ Hb يتأكسد ← الـ globin يترسب (==Heinz bodies==) ← الكرة تتكسر في الطحال **و** جوّه الأوعية.
+      - kind: order
+        page: 35
+        quote: "NADPH is required for continuous supply of reduced glutathione (GSH)."
+        prompt: "رتّب سلسلة الحماية:"
+        steps:
+          - "G6PD (first step of HMP shunt)"
+          - "NADPH from NADP"
+          - "Reduced glutathione (GSH)"
+          - "H2O2 detoxified to water"
+        why: "لو أول حلقة وقعت، كل اللي بعدها يقع. والـ H2O2 يفضل يأكسد الـ Hb."
+      - kind: explain
+        page: 36
+        title: "الصورة والـ favism"
+        quote: "Favism (precipitation of haemolysis by ingestion of fava beans) is a unique feature occurring in individuals in Mediterranean and Arab countries."
+        text: |
+          الوراثة ==X-linked==، والكتاب بيقول بيحصل في **الرجالة** بس.
+
+          بعد **oxidant stress** (أدوية، عدوى): فجأة **شحوب**، **صفار**، و**بول غامق** (haemoglobinuria)، وممكن **acute renal failure**.
+
+          الـ ==Favism==: haemolysis بعد أكل **الفول** (fava beans) اللي فيه oxidants، بعد ساعات أو أيام، وممكن يموّت. منتشر في **البحر المتوسط والدول العربية**.
+      - kind: aside
+        tone: joke
+        page: 36
+        quote: "Fava beans contain oxidants that cause haemolysis hours or days following ingestion; it may be fatal."
+        text: "في مصر الفول مش أكلة، ده **أسلوب حياة**. 😄 بس لعيان الـ G6PD، الفول الأخضر بالذات ممكن يبقى خطر حقيقي. فكّر فيه في أي طفل جه ببول غامق بعد الفطار."
+      - kind: explain
+        page: 36
+        title: "الصور الإكلينيكية والتحاليل"
+        quote: "Peripheral blood smear shows fragmented red cells, bite cells"
+        text: |
+          الصور: **neonatal jaundice**، **drug-induced** haemolysis، **chronic** haemolytic anaemia، **favism**، و**بعد العدوى**.
+
+          **التحاليل**: علامات الـ haemolysis، والفيلم فيه **fragmented cells** و ==bite cells== (الطحال «قضم» الـ Heinz body)، unconjugated hyperbilirubinaemia، haemoglobinuria.
+
+          **تشخيص الإنزيم**: ==fluorescent spot test== (screening)، و **quantitative assay**.
+
+          **العلاج**: ابعد عن الـ oxidant drugs، عالج العدوى بسرعة، supportive في الأزمة، نقل في الشديد، و**بول كفاية** يحمي الكلية.
+      - kind: check
+        page: 36
+        quote: "Fluorescent spot test"
+        question: "Screening test for G6PD deficiency?"
+        options:
+          - "Fluorescent spot test"
+          - "Osmotic fragility"
+          - "EMA binding"
+          - "Sucrose haemolysis test"
+        answer: 0
+        why:
+          - "صح: الـ fluorescent spot test هو الـ screening، والـ quantitative assay بيأكد."
+          - "ده للـ HS."
+          - "ده الـ gold standard للـ HS."
+          - "ده للـ PNH."
+      - kind: explain
+        page: 37
+        title: "Immune haemolysis: التقسيم"
+        quote: "Haemolytic disease of newborn-Rh or ABO."
+        text: |
+          1. **Autoimmune**: ==warm== أو ==cold==.
+          2. **Alloimmune**: haemolytic disease of the newborn (Rh أو ABO)، و haemolytic transfusion reactions.
+          3. **Drug-induced**.
+
+          الـ **warm AIHA** أشهر نوع: **IgG** أو **C3b** على الكرة، والـ macrophages في **الطحال** بتمسكها وتكسرها.
+      - kind: table
+        page: 38
+        quote: "Cold antibody type (antibody maximally active at 0 to 4C) Cold-reactive antibody is IgM."
+        title: "Warm ولا cold؟"
+        columns: [Feature, Warm, Cold]
+        rows:
+          - ["Temp", "37 °C", "0–4 °C"]
+          - ["Antibody", "IgG", "IgM"]
+          - ["Causes", "SLE, CLL, lymphoma", "Mycoplasma, EBV, CMV"]
+          - ["Film", "Spherocytes", "Agglutination"]
+          - ["Steroids", "Yes", "No"]
+        hide: [[0, 1], [0, 2], [1, 1], [1, 2], [3, 2], [4, 2]]
+      - kind: mnemonic
+        page: 38
+        quote: "Cold-reactive antibody is IgM."
+        word: "GM"
+        parts:
+          - { key: "G", text: "IgG: warm (37 °C), spleen, steroids work" }
+          - { key: "M", text: "IgM: cold (0–4 °C), Mycoplasma, steroids fail" }
+        hook: "**G**ood weather = warm = Ig**G**. **M**ountain snow = cold = Ig**M** (و**M**ycoplasma). سهلة."
+      - kind: explain
+        page: 38
+        title: "التشخيص: Coombs"
+        quote: "Direct antiglobulin test (DAT) is used to demonstrate antibodies or the complement attached to red cells in vivo."
+        text: |
+          - ==DAT== (direct): بيدوّر على antibody أو complement **لازقين على الكرة** في الجسم. ده اللي بيأكد الـ AIHA.
+          - **IAT** (indirect): بيدوّر على antibody **في السيرم**.
+
+          الـ warm AIHA: anaemia، **icterus**، **splenomegaly**؛ الفيلم فيه **microspherocytes** و reticulocytosis.
+      - kind: order
+        page: 39
+        quote: "Splenectomy is indicated when improvement does not occur with corticosteroids."
+        prompt: "رتّب علاج الـ warm AIHA:"
+        steps:
+          - "Treat the underlying disease"
+          - "Steroids 1 mg/kg/day"
+          - "Splenectomy if steroids fail"
+          - "Azathioprine or cyclophosphamide"
+        why: "الـ **steroids** أغلب العيانين بيستجيبوا. لو لأ، **splenectomy** (الطحال هو المكان اللي بيتكسر فيه). ولو برضه لأ، **immunosuppressants**. والـ **rituximab** (anti-CD20) خيار، والنقل بس لو **ضروري جدًا**."
+      - kind: explain
+        page: 39
+        title: "الـ cold AIHA"
+        quote: "Corticosteroids and splenectomy are not helpful."
+        text: |
+          الـ antibody (**IgM**) شغال أحسن في ==0–4 °C==. الأنيميا خفيفة لمتوسطة، والفيلم فيه **autoagglutination** (الكرات بتتلم مع بعض). الـ **DAT** موجب.
+
+          **العلاج**:
+          - عالج السبب (زي الـ **lymphoma**)، و**ابعد عن البرد**.
+          - ==Steroids و splenectomy مش بيفيدوا==.
+          - **Chlorambucil** يقلل الـ antibodies، **sutimlimab** (anti-**C1s**، يوقف الـ classical pathway)، **plasmapheresis** مؤقت، والنقل لو ضروري بدم **متدفّي**.
+      - kind: reveal
+        page: 39
+        quote: "Sutimlimab is monoclonal antibody designed to target C1s by selectively inhibiting the classical complement pathway at C1s."
+        prompt: "ليه الـ steroids والـ splenectomy بيفيدوا الـ warm ومش بيفيدوا الـ cold؟"
+        answer: "الـ **warm IgG** بيخلي الكرة **تتمسك في الطحال** بالـ macrophages، فشيل الطحال أو تهدية الـ macrophages بالـ steroids بيفيد. الـ **cold IgM** بيشغّل الـ **complement** والكرة بتتكسر غالبًا في **الكبد** أو جوّه الأوعية، فالطحال مش هو الملعب. عشان كده الحل يوقف الـ complement (**sutimlimab** على C1s) أو يقلل الـ IgM."
+      - kind: try
+        items: [hem.L03.085, hem.L03.089, hem.L03.090, hem.L03.096, hem.L03.099]
+    recap:
+      - "G6PD ← NADPH ← GSH ← يكسر H2O2. النقص = Hb يتأكسد ويترسب؛ haemolysis extra + intravascular."
+      - "X-linked؛ بعد أدوية أو عدوى أو فول (favism، البحر المتوسط والعرب): شحوب، صفار، بول غامق، ممكن AKI."
+      - "Bite cells؛ fluorescent spot test للـ screening؛ ابعد عن الـ oxidants وخلي البول كفاية."
+      - "Immune: autoimmune (warm/cold)، alloimmune (HDN، transfusion)، drug-induced."
+      - "Warm: IgG، 37°، SLE/CLL/lymphoma، microspherocytes؛ steroids ← splenectomy ← immunosuppressants، rituximab."
+      - "Cold: IgM، 0–4°، Mycoplasma/EBV/CMV، agglutination؛ steroids و splenectomy مش بيفيدوا؛ دفّي، chlorambucil، sutimlimab."
+    practice: [hem.L03.084, hem.L03.085, hem.L03.086, hem.L03.087, hem.L03.088, hem.L03.089, hem.L03.090, hem.L03.091, hem.L03.092, hem.L03.093, hem.L03.094, hem.L03.095, hem.L03.096, hem.L03.097, hem.L03.098, hem.L03.099, hem.L03.100, hem.L03.101, hem.L03.102, hem.L03.103, hem.L03.104, hem.L03.105, hem.L03.162, hem.L03.166]
+  # ------------------------------------------------------------------
+  - id: hem.L03.lesson6
+    title: "التجلطات الصغيرة: TTP و HUS"
+    hook: "صفايح قليلة ومع ذلك فيه جلطات؟ ده مش تناقض. ده الـ thrombotic microangiopathy، والفرق بين الـ TTP والـ HUS ممكن ينقذ حياة."
+    minutes: 10
+    pages: [40, 49]
+    topics: [ttp, hus]
+    goals:
+      - "تعرّف الـ TMA وتعرف أسبابها"
+      - "تشرح الـ TTP: ADAMTS13 والـ VWF، العلامات، التحاليل، والـ plasma exchange"
+      - "تفرّق الـ typical من الـ atypical HUS وتعرف العلاج وإيه اللي ممنوع"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 40
+        title: "الـ thrombotic microangiopathy"
+        quote: "characterized by disseminated thrombus formation in arterioles and capillaries resulting in"
+        text: |
+          ==TMA== = جلطات صغيرة منتشرة في الـ **arterioles** والـ **capillaries**، والنتيجة:
+          1. **Thrombocytopenia** (الصفايح اتصرفت في الجلطات).
+          2. ==MAHA== (الكرات بتتقطع وهي معدية جنب الجلطات).
+          3. **تلف أعضاء**.
+
+          أشهر نوعين **TTP** و **HUS**، وكمان: malignant hypertension، عدوى، أدوية، cancer، و **HELLP**.
+      - kind: explain
+        page: 40
+        title: "الـ TTP و ADAMTS13"
+        quote: "This definition was recently completed by the presence of a severe deficiency of ADAMTS13 (activity <10%)"
+        text: |
+          الـ ==ADAMTS13== هو المقص اللي بيقطّع الـ **VWF multimers** الكبيرة.
+
+          لو ناقص جدًا (**activity < 10%**)، الـ **ultralarge VWF** يفضل في الدم، لزج جدًا للصفايح، فتتكون **platelet-rich microthrombi** في الـ arterioles.
+
+          الـ ADAMTS13 < 10% هو ==العلامة الوحيدة الـ specific للـ TTP==.
+      - kind: figure
+        page: 40
+        quote: "causes the blood accumulation of platelet-hyperadhesive ultralarge VWF multimers"
+        title: "المقص الناقص"
+        alt: "Two panels. Normal: a long VWF chain is cut by ADAMTS13 scissors into small pieces, and platelets pass. TTP: no ADAMTS13 (antibody or mutation), the ultralarge VWF chain catches many platelets forming a microthrombus in an arteriole, and a red cell is cut into a schistocyte as it passes."
+        caption: "الطبيعي: ==ADAMTS13== بيقص الـ VWF. في الـ TTP: المقص مش شغال، فالـ VWF الطويل بيصطاد الصفايح ويعمل جلطة، والكرة الحمرا بتتقطع وهي معدية = **schistocyte**."
+        svg: |
+          <svg viewBox="0 0 330 260" xmlns="http://www.w3.org/2000/svg">
+            <rect x="5" y="8" width="320" height="110" rx="10" class="fg-good"/>
+            <text x="15" y="30" class="t-b">Normal</text>
+            <path d="M20 70 L90 70" class="fg-ink" stroke-width="4"/>
+            <text x="100" y="66" class="t-sm t-b t-good">✂ ADAMTS13</text>
+            <path d="M200 70 L225 70 M235 70 L260 70 M270 70 L295 70" class="fg-ink" stroke-width="4"/>
+            <circle cx="60" cy="98" r="6" class="fg-dot-acc"/>
+            <circle cx="150" cy="100" r="6" class="fg-dot-acc"/>
+            <circle cx="250" cy="98" r="6" class="fg-dot-acc"/>
+            <text x="315" y="30" text-anchor="end" class="t-sm t-mut">small VWF; platelets flow</text>
+            <rect x="5" y="132" width="320" height="120" rx="10" class="fg-bad"/>
+            <text x="15" y="154" class="t-b">TTP: ADAMTS13 &lt; 10%</text>
+            <path d="M20 200 L310 200" class="fg-ink" stroke-width="4"/>
+            <circle cx="60" cy="190" r="6" class="fg-dot-acc"/>
+            <circle cx="75" cy="208" r="6" class="fg-dot-acc"/>
+            <circle cx="95" cy="192" r="6" class="fg-dot-acc"/>
+            <circle cx="115" cy="208" r="6" class="fg-dot-acc"/>
+            <circle cx="135" cy="190" r="6" class="fg-dot-acc"/>
+            <circle cx="155" cy="208" r="6" class="fg-dot-acc"/>
+            <text x="20" y="236" class="t-sm">ultralarge VWF + platelets = microthrombus</text>
+            <path d="M262 176 L278 176 L272 188 L288 188" class="fg-arrow-bad" stroke-width="3"/>
+            <text x="315" y="166" text-anchor="end" class="t-sm t-bad">schistocyte</text>
+          </svg>
+      - kind: table
+        page: 41
+        quote: "Congenital TTP is very rare (1 in 1 million) and represents 5% of all TTP cases."
+        title: "Congenital ولا acquired؟ (ص 41)"
+        columns: [Type, Key facts]
+        rows:
+          - ["Congenital", "1/million, 5%; ADAMTS13 gene (9q34); AR"]
+          - ["Acquired", ">99% of adults; anti-ADAMTS13 IgG"]
+        hide: [[0, 1], [1, 1]]
+      - kind: explain
+        page: 42
+        title: "الـ pentad مات"
+        quote: "these 5 symptoms were present in less than 10% of patients with an acute TTP"
+        text: |
+          الـ **pentad** القديم (fever، thrombocytopenia، MAHA، neuro، renal) بقى ==obsolete==: موجود في **أقل من 10%** بس.
+
+          العلامات الثابتة تقريبًا:
+          1. **Thrombocytopenia شديدة** (غالبًا ==< 30 × 10⁹/L==).
+          2. **MAHA** مع **schistocytes**.
+          3. **Ischaemia**، أغلبها **المخ** (حوالي **60%**): صداع، confusion، stroke، coma، seizures.
+          4. **الكلى**: proteinuria أو haematuria بس؛ الـ **AKI مش شائع** (creatinine < 2 mg/dL).
+      - kind: aside
+        tone: exam
+        page: 43
+        quote: "Thrombin time (PT), and the fibrinogen concentration, are characteristically normal."
+        text: "الفرق عن الـ **DIC**: في الـ TTP الـ **PT والـ fibrinogen طبيعيين**، لأن المشكلة صفايح و VWF مش coagulation factors. والفرق عن الـ **HUS**: الـ TTP مخ أكتر وكلى أقل؛ الـ HUS كلى أكتر."
+      - kind: explain
+        page: 43
+        title: "التحاليل والعلاج"
+        quote: "TPE) should be started as soon as the diagnosis of TTP is established or even suspected."
+        text: |
+          **التحاليل**: anaemia و thrombocytopenia شديدين، ==schistocytes== (helmet cells)، retics و indirect bilirubin عاليين، haptoglobin **مختفي**، و **LDH عالي جدًا** (haemolysis + ischaemia).
+
+          **العلاج**:
+          - ==Plasma exchange (TPE)== هو الأساس، ويبدأ **أول ما تشك**. كل يوم لحد ما الأعضاء تتحسن والصفايح تثبت والـ haemolysis يقف.
+          - **Steroids** (high-dose methylprednisolone 10 mg/kg × 3 أيام ثم 2.5 mg/kg).
+          - **Rituximab** للـ refractory أو الاستجابة الضعيفة.
+          - ==Caplacizumab==: anti-VWF يمنع الـ VWF يمسك الصفايح؛ 11 mg IV قبل الـ TPE ثم 11 mg SC، ويكمل 30 يوم بعد آخر TPE.
+      - kind: check
+        page: 43
+        quote: "TPE with replacement of plasma remains the cornerstone of current management of TTP ."
+        question: "TTP is suspected; ADAMTS13 result will take 3 days. What now?"
+        options:
+          - "Start plasma exchange now"
+          - "Wait for ADAMTS13"
+          - "Transfuse platelets"
+          - "Give eculizumab"
+        answer: 0
+        why:
+          - "صح: الـ TPE يبدأ أول ما تشك. التأخير بيموّت."
+          - "الانتظار خطر؛ الـ TTP من غير علاج قاتل."
+          - "الصفايح وقود للجلطات (الكتاب قالها في الـ HUS)."
+          - "الـ eculizumab للـ atypical HUS والـ PNH."
+      - kind: explain
+        page: 45
+        title: "الـ HUS"
+        quote: "The typical variant is caused by Shiga-like toxin (verotoxin) produced by E. coli (O157: H7)"
+        text: |
+          الـ triad: **thrombocytopenia** + ==acute renal impairment== + **MAHA**، والـ Coombs **سالب** (mechanical).
+
+          من أهم أسباب الـ AKI في **الأطفال**. الحدث الأول ==endothelial damage==.
+
+          **Typical**: **Shiga-like toxin** من **E. coli O157:H7** (لحمة مش مستوية، لبن مش مبستر) أو Shigella.
+
+          أدوية: mitomycin C، cyclosporine، cisplatin، cocaine، quinine.
+      - kind: table
+        page: 46
+        quote: "Stx-HUS is largely a disease of children younger than 2-3 years and often results in diarrhea (denoted D+HUS)."
+        title: "Typical ولا atypical HUS؟"
+        columns: [Feature, Typical, Atypical]
+        rows:
+          - ["Who", "Kids < 2–3 y", "Adults"]
+          - ["Diarrhoea", "D+ mostly", "D-"]
+          - ["Outcome", "70–85% recover", "50% ESRD"]
+          - ["Cause", "Shiga toxin", "Complement"]
+        hide: [[1, 2], [2, 1], [2, 2], [3, 2]]
+      - kind: explain
+        page: 48
+        title: "العلاج: إيه اللي تعمله وإيه الممنوع"
+        quote: "Not recommended to use antibiotics(has no role) and antiperistaltic"
+        text: |
+          - **Supportive**: سوايل (غالبًا dehydrated) مع مراقبة الكلى؛ بعضهم يحتاج **dialysis**.
+          - ==ممنوع antibiotics و antimotility==: الأولى ملهاش دور، والتانية بتخلي الـ toxin يفضل.
+          - نقل **packed RBCs** لو Hb ==7–8 g/dL== أو Ht < 18%.
+          - **الصفايح**: غالبًا لأ (بتزوّد الجلطات)، إلا لو فيه نزيف أو procedure.
+          - **Atypical HUS**: ==eculizumab== أو **ravulizumab** (anti-**C5**)، و plasmapheresis للـ familial.
+      - kind: case
+        page: 47
+        quote: "The Coombs test is negative, consistent with mechanical hemolysis."
+        stem: "A 2-year-old has 4 days of bloody diarrhoea after eating a beef burger, then pallor and very little urine."
+        steps:
+          - reveal: "Hb 7.2 g/dL with schistocytes, platelets 38 × 10⁹/L, creatinine 3.1 mg/dL, Coombs negative."
+            question: "Diagnosis?"
+            options: ["Typical (Stx) HUS", "TTP", "Warm AIHA", "DIC"]
+            answer: 0
+            why: "طفل < 3 سنين، إسهال بدم، triad HUS، و Coombs سالب = **typical HUS** من الـ Shiga toxin."
+          - question: "His mother asks for an antibiotic and an antidiarrhoeal. Reply?"
+            options: ["Neither: both raise complications", "Both now", "Antibiotic only", "Antidiarrhoeal only"]
+            answer: 0
+            why: "الكتاب: الـ antibiotics ملهاش دور، والـ antiperistaltics بتخلي الـ toxin يفضل."
+          - question: "Prognosis of his kidneys?"
+            options: ["Most (70–85%) recover", "Half go to ESRD", "All need transplant", "Kidneys are never affected"]
+            answer: 0
+            why: "الـ typical HUS: AKI في 55–70%، بس 70–85% بيرجعوا. الـ **atypical** هو اللي 50% منه ESRD."
+      - kind: try
+        items: [hem.L03.108, hem.L03.113, hem.L03.118, hem.L03.128, hem.L03.133]
+    recap:
+      - "TMA = microthrombi ← thrombocytopenia + MAHA + تلف أعضاء. TTP و HUS، وكمان malignant HTN و HELLP."
+      - "TTP: ADAMTS13 < 10% (الماركر الوحيد) ← ultralarge VWF ← جلطات صفايح."
+      - "Congenital 5% (ADAMTS13 gene، AR)؛ acquired > 99% في الكبار (anti-ADAMTS13 IgG)."
+      - "Pentad < 10%؛ الثابت: platelets < 30، schistocytes، مخ 60%، كلى خفيفة (Cr < 2). PT و fibrinogen طبيعيين."
+      - "TPE فورًا ولو شك؛ steroids، rituximab، caplacizumab (anti-VWF)."
+      - "HUS: triad + Coombs سالب؛ typical = E. coli O157:H7 في أطفال < 3؛ atypical = complement، eculizumab/ravulizumab. ممنوع antibiotics و antimotility."
+    practice: [hem.L03.106, hem.L03.107, hem.L03.108, hem.L03.109, hem.L03.110, hem.L03.111, hem.L03.112, hem.L03.113, hem.L03.114, hem.L03.115, hem.L03.116, hem.L03.117, hem.L03.118, hem.L03.119, hem.L03.120, hem.L03.121, hem.L03.122, hem.L03.123, hem.L03.124, hem.L03.125, hem.L03.126, hem.L03.127, hem.L03.128, hem.L03.129, hem.L03.130, hem.L03.131, hem.L03.132, hem.L03.133, hem.L03.134, hem.L03.135, hem.L03.136, hem.L03.137, hem.L03.165]
+  # ------------------------------------------------------------------
+  - id: hem.L03.lesson7
+    title: "الـ PNH: الكرة اللي فقدت درعها"
+    hook: "طفرة واحدة في جين على الـ X بتشيل الدرع اللي بيحمي الكرة من الـ complement. والنتيجة: haemolysis و pancytopenia وجلطات في أماكن غريبة."
+    minutes: 9
+    pages: [49, 56]
+    topics: [pnh]
+    goals:
+      - "تشرح الـ PIGA والـ GPI anchor وليه الـ complement بيكسّر الكرة"
+      - "تربط نقص الـ NO بالأعراض، وتعرف أماكن الجلطات"
+      - "تعرف مين تعمله screening، والتحاليل (CD59، CD55)، والعلاج (complement inhibitors، HSCT)"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 50
+        title: "الـ triad والسبب"
+        quote: "The triad of hemolytic anemia, pancytopenia, and thrombosis makes PNH a unique clinical syndrome."
+        text: |
+          الـ ==PNH== مرض نادر ومزمن، بيبدأ غالبًا في **أول الشباب**، وحوالي **50%** بيموتوا من **الجلطات**.
+
+          الـ triad: ==haemolytic anaemia + pancytopenia + thrombosis==.
+
+          السبب: طفرة في جين **PIGA** على الـ **X chromosome**، فالخلية مش قادرة تعمل الـ **GPI anchor** اللي بيثبّت بروتينات معينة على الغشا. ومن البروتينات دي اللي بيحموا الكرة من الـ complement: **CD55** و **CD59**.
+      - kind: aside
+        tone: analogy
+        page: 50
+        quote: "a genetic mutation leading to the inability to synthesize the glycosyl-phosphatidylinositol (GPI) anchor"
+        text: "الـ GPI anchor زي **مسمار التعليق**. الـ CD55 والـ CD59 هما **الدروع** المعلقة عليه. من غير مسمار، الدروع بتقع، والـ **complement** (اللي شغال طول الوقت بشويش) بيخرم الكرة."
+      - kind: order
+        page: 50
+        quote: "free hemoglobin circulates and binds irreversibly with nitric oxide (NO), depleting NO levels in peripheral blood"
+        prompt: "رتّب الطريق من الـ complement للمغص:"
+        steps:
+          - "Complement lyses the red cell"
+          - "Haemoglobin saturates haptoglobin"
+          - "Free Hb binds nitric oxide"
+          - "NO is depleted"
+          - "Smooth muscle contracts"
+        why: "الـ NO بيرخّي العضلات الملسا. لما الـ Hb الحر يخطفه، العضلات تنقبض: **vasoconstriction**، **مغص وانتفاخ**، **esophageal spasm**، **erectile dysfunction**، **pulmonary hypertension**."
+      - kind: explain
+        page: 51
+        title: "الأعراض وأماكن الجلطات"
+        quote: "The most frequent sites of thrombosis include the hepatic, pulmonary, cerebral, and deep and superficial veins"
+        text: |
+          **أعراض NO**: ألم بطن، انتفاخ، ألم ضهر، صداع، esophageal spasm، erectile dysfunction، fatigue.
+
+          **الصورة**: أعراض أنيميا، ==haemoglobinuria (25% بس)==، haemolysis على نوبات، كلى، dysphagia، عدوى، ونزيف من الـ thrombocytopenia.
+
+          **الجلطات** في أماكن غريبة: ==hepatic (Budd-Chiari)==، pulmonary، cerebral، deep و superficial veins، والـ IVC.
+      - kind: match
+        page: 51
+        quote: "Papilledema in the presence of cerebral vein thrombosis"
+        prompt: "الجلطة فين؟ العلامة إيه؟"
+        pairs:
+          - ["Budd-Chiari", "Hepatomegaly and ascites"]
+          - ["Splenic vein", "Splenomegaly"]
+          - ["Bowel necrosis", "Absent bowel sounds"]
+          - ["Cerebral vein", "Papilloedema"]
+          - ["Dermal vein", "Red painful skin nodules"]
+        why: "أي **Budd-Chiari** أو جلطة **cerebral** أو **intra-abdominal** في شاب، فكّر في الـ PNH، خصوصًا لو معاها haemolysis."
+      - kind: table
+        page: 52
+        quote: "Recommendation for Screening Patients for PNH"
+        title: "مين نعمله screening؟ (Table 40-1)"
+        columns: [Who, Note]
+        rows:
+          - ["Episodic haemoglobinuria", "History"]
+          - ["Coombs-negative haemolysis", "Non-spherocytic, high LDH"]
+          - ["Aplastic anaemia", "At diagnosis, then yearly"]
+          - ["MDS (RA, RCMD)", "Refractory cytopenias"]
+          - ["Unusual venous thrombosis", "Budd-Chiari, cerebral, dermal"]
+        hide: [[1, 1], [2, 1], [4, 1]]
+      - kind: explain
+        page: 52
+        title: "التحاليل"
+        quote: "Reticulocyte count: Increased (lesser comparing degree of anaemia)."
+        text: |
+          - **CBC**: anaemia (غالبًا شديدة)، leucopenia (neutrophils)، thrombocytopenia خفيفة.
+          - **البول**: urobilinogen، و haemoglobinuria و ==haemosiderinuria==؛ والحديد بيضيع في البول فالـ **iron stores قليلة**.
+          - **Retics** عالية بس **أقل من المتوقع** (النخاع نفسه ضعيف).
+          - **LDH** و unconjugated bilirubin عاليين، و haptoglobin واطي.
+          - **Bone marrow**: يفرّق PNH من PNH فوق bone marrow failure تانية.
+          - الاختبارات القديمة: **Ham test** و **sucrose haemolysis test**.
+          - ==Flow cytometry==: الأسهل **CD59 (MIRL)** على الكرات، و **CD55 (DAF)** كمان مفيد.
+      - kind: check
+        page: 53
+        quote: "The simplest method is to analyze expression of MIRL (CD59) on erythrocytes."
+        question: "Best diagnostic test for PNH?"
+        options:
+          - "Flow cytometry for CD59 and CD55"
+          - "Direct antiglobulin test"
+          - "ADAMTS13 activity"
+          - "Hb electrophoresis"
+        answer: 0
+        why:
+          - "صح: الـ flow cytometry بيبيّن الخلايا اللي ناقصها الـ GPI-anchored proteins."
+          - "الـ DAT سالب في الـ PNH (Coombs-negative haemolysis)."
+          - "ده للـ TTP."
+          - "ده للـ haemoglobinopathies."
+      - kind: explain
+        page: 54
+        title: "العلاج"
+        quote: "Patients with PNH who develop acute thrombosis should immediately be started on eculizumab or ravulizumab"
+        text: |
+          **الجلطة الحادة**: ==eculizumab أو ravulizumab فورًا== + **heparin**، وبعدين **warfarin**.
+
+          **Complement inhibitors**:
+          - **Eculizumab** و **ravulizumab**: ضد ==C5==؛ بيقللوا الـ intravascular haemolysis والنقل.
+          - **Pegcetacoplan**: ضد ==C3==؛ بيتحكم في الـ intravascular **و** الـ extravascular.
+          - بيقللوا الجلطات (أشهر سبب وفاة).
+          - الخطر: **Neisseria meningitidis** (زي نقص الـ complement الوراثي)، فلازم التطعيم.
+
+          **Steroids**: prednisone 20–40 mg/day وقت الـ haemolysis، وحوالي 70% بيتحسنوا، بس المدى الطويل مشاكل.
+      - kind: reveal
+        page: 55
+        quote: "Pegcetacoplan targets complement protein C3, and can control both intravascular and extravascular hemolysis."
+        prompt: "ليه الـ pegcetacoplan (C3) بيتحكم في الـ extravascular كمان، والـ eculizumab (C5) لأ؟"
+        answer: "الـ C5 inhibitor بيوقف الـ **MAC** فالكرة ما تتخرمش (intravascular). بس الـ **C3b** لسه بيلزق على الكرة، والطحال والكبد بياكلوها (**extravascular**). وقف **C3** بيمنع الاتنين، لأنه قبل C5 وقبل الـ C3b."
+      - kind: explain
+        page: 56
+        title: "الكلى والأنيميا والنخاع"
+        quote: "Hematopoietic stem cell transplantation (HSCT) using allogeneic donors is the only curative therapy for PNH."
+        text: |
+          - **الكلى**: haemolysis مزمن وحديد في الكلى ← AKI؛ ==CRRT== من أحسن الخيارات.
+          - **الأنيميا**: نقل **leuko-depleted** packed RBCs (يمنع الـ alloimmunisation)، **folic acid**، و**حديد**.
+          - **Marrow hypoplasia**: bone marrow transplant، أو **ATG** لو مفيش donor.
+          - ==Allogeneic HSCT== هو **العلاج الوحيد الشافي**.
+      - kind: try
+        items: [hem.L03.138, hem.L03.141, hem.L03.146, hem.L03.151, hem.L03.157]
+    recap:
+      - "PNH: haemolysis + pancytopenia + جلطات؛ 50% بيموتوا من الجلطات."
+      - "PIGA (X) ← مفيش GPI anchor ← CD55 و CD59 يقعوا ← complement يكسّر الكرة."
+      - "Hb الحر يخطف الـ NO ← مغص، انتفاخ، esophageal spasm، ED، pulmonary HTN."
+      - "جلطات غريبة: Budd-Chiari، cerebral، intra-abdominal، dermal. Haemoglobinuria في 25% بس."
+      - "Flow cytometry: CD59 (MIRL) و CD55 (DAF). الحديد قليل من الـ haemosiderinuria."
+      - "Eculizumab/ravulizumab (C5)، pegcetacoplan (C3)؛ خطر Neisseria. HSCT هو الشفا."
+    practice: [hem.L03.138, hem.L03.139, hem.L03.140, hem.L03.141, hem.L03.142, hem.L03.143, hem.L03.144, hem.L03.145, hem.L03.146, hem.L03.147, hem.L03.148, hem.L03.149, hem.L03.150, hem.L03.151, hem.L03.152, hem.L03.153, hem.L03.154, hem.L03.155, hem.L03.156, hem.L03.157, hem.L03.158, hem.L03.159, hem.L03.160, hem.L03.161]

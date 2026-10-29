@@ -26,6 +26,7 @@ fn area_label(area: Area) -> &'static str {
         Area::Elderly => tx::AREA_ELDERLY,
         Area::Rheum => tx::AREA_RHEUM,
         Area::Diabetes => tx::AREA_DIABETES,
+        Area::Blood => tx::AREA_BLOOD,
         Area::Research => tx::AREA_RESEARCH,
     }
 }
@@ -39,12 +40,13 @@ fn area_course(area: Area) -> &'static str {
         Area::Elderly => "geri",
         Area::Rheum => "rheum",
         Area::Diabetes => "dm",
+        Area::Blood => "hem",
         Area::Research => "res",
         _ => "hb",
     }
 }
 
-const AREAS: [Area; 11] = [
+const AREAS: [Area; 12] = [
     Area::Liver,
     Area::Ascites,
     Area::Tumour,
@@ -55,6 +57,7 @@ const AREAS: [Area; 11] = [
     Area::Elderly,
     Area::Rheum,
     Area::Diabetes,
+    Area::Blood,
     Area::Research,
 ];
 

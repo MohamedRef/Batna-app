@@ -66,7 +66,6 @@ pub fn TryItems(items: Vec<String>, on_answer: EventHandler<bool>) -> Element {
     let mut again = use_signal(|| before.again as usize);
     let mut started = use_signal(std::time::Instant::now);
     let mut reported = use_signal(|| false);
-    super::steps::use_check_bar(|| false, move || (!reported()).then(|| tx::TRY_FIRST.to_string()), |_| {});
     use_effect(move || {
         // Nothing playable, or every card graded before he left mid-step.
         if n == n_before && !reported() {

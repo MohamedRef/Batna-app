@@ -13,7 +13,7 @@ use batna_core::review::StudyStore;
 use batna_core::stats::WeakTopic;
 use dioxus::prelude::*;
 
-use crate::content::{Library, lecture_code};
+use crate::content::{Library, lecture_no};
 use crate::i18n::lecture as tx;
 use crate::look::{Css, css};
 use crate::stats::{StudyData, pct};
@@ -165,7 +165,8 @@ pub fn LecturePage(id: String) -> Element {
     let done_lessons =
         lessons.map_or(0, |f| f.lessons.iter().filter(|l| crate::learn::mark(&l.id).is_some()).count());
     let [first, last] = entry.pages;
-    let number = lecture_code(&id);
+    let number = lecture_no(&id);
+    let course = lib.course_short(&id).to_string();
     let (seen, total) = stats.as_ref().map_or((0, 0), |s| (s.counts.seen, s.counts.total));
     let share = (seen * 100).checked_div(total).unwrap_or(0);
     let due_n = due.len();
@@ -183,7 +184,11 @@ pub fn LecturePage(id: String) -> Element {
                     onclick: move |_| close(),
                     span { aria_hidden: "true", "→" }
                 }
-                span { class: "muted small", {tx::KICKER} }
+                // Course › lecture: the course opens the course map.
+                nav { class: "muted small lec-crumbs", aria_label: tx::KICKER,
+                    button { class: "btn-link", title: crate::i18n::courses::TITLE, onclick: move |_| crate::courses::open_map(ui), "{course}" }
+                    " › {tx::KICKER} {number}"
+                }
             }
             section { class: "card lec-hero",
                 div { class: "lec-head",

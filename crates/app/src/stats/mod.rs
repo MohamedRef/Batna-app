@@ -14,7 +14,7 @@ use batna_core::review::{ReviewEvent, StudyStore};
 use batna_core::stats::{self, Clock, Counts, LectureStats, Ratio, WeakTopic};
 use dioxus::prelude::*;
 
-use crate::content::{Library, lecture_code};
+use crate::content::{Library, lecture_no};
 use crate::i18n::stats as tx;
 use crate::look::{Css, css};
 use crate::plan::Planner;
@@ -194,8 +194,11 @@ fn Progress(data: std::rc::Rc<StudyData>) -> Element {
             div { class: "tab-aside", WeakCard { weak, ids: weak_ids, data: data.clone() } }
         }
         section { class: "stat-lectures",
-            for l in rows.iter() {
-                LectureCard { key: "{l.id}", l: l.clone(), data: data.clone() }
+            for group in Library::get().by_course(rows.iter().collect(), |l| l.id.as_str()) {
+                crate::parts::CourseHead { key: "{group.id}", short: group.short().to_string(), title: group.title().to_string() }
+                for l in group.rows {
+                    LectureCard { key: "{l.id}", l: l.clone(), data: data.clone() }
+                }
             }
         }
         p { class: "muted small", {tx::RETENTION_HINT} }
@@ -243,7 +246,7 @@ fn WeakCard(weak: Vec<WeakTopic>, ids: Vec<String>, data: std::rc::Rc<StudyData>
                                 span { class: "tap-row-main",
                                     span { class: "weak-title", bdi { dir: "ltr", "{w.title}" } }
                                     span { class: "muted small",
-                                        "{lecture_code(&w.lecture)} · {tx::COL_RETENTION} "
+                                        "{Library::get().crumb(&w.lecture)} · {tx::COL_RETENTION} "
                                         bdi { {pct(w.retention)} }
                                         " · "
                                         bdi { "MCQ" }
@@ -342,7 +345,7 @@ fn LectureCard(l: LectureStats, data: std::rc::Rc<StudyData>) -> Element {
     rsx! {
         details { class: "stat-lecture",
             summary {
-                span { class: "num", "{lecture_code(&l.id)}" }
+                span { class: "num", "{lecture_no(&l.id)}" }
                 div { class: "lecture-main",
                     span { class: "lecture-title", bdi { dir: "ltr", {Library::get().title(&l.id)} } }
                     div { class: "bars",

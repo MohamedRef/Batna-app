@@ -151,8 +151,7 @@ pub mod today {
     pub const OF: &str = "من";
     pub const STARTED: &str = "بدأتهم";
     pub const DUE_CHIP: &str = "مستحق";
-    pub const LIBRARY: &str = "محاضرات الفصل الأول";
-    pub const CHAPTER: &str = "Hepato-Biliary Pancreatic Unit";
+    pub const LIBRARY: &str = "المحاضرات";
     pub const READY: &str = "جاهزة";
     pub const WRITING: &str = "بتتكتب";
     pub const PAGES: &str = "صفحات";
@@ -1687,8 +1686,9 @@ pub mod learn {
     pub fn no_match(q: &str) -> String {
         format!("مفيش درس فيه «{q}». جرّب كلمة تانية أو اسم المحاضرة بالإنجليزي.")
     }
-    pub fn lecture_n(code: &str) -> String {
-        format!("المحاضرة {code}")
+    /// `كبد › المحاضرة 3`: the course, then the lecture's number in it.
+    pub fn lecture_n(course: &str, n: &str) -> String {
+        format!("{course} › المحاضرة {n}")
     }
     pub fn lessons_n(n: usize) -> String {
         match n {

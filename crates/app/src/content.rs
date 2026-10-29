@@ -10,7 +10,7 @@ use std::sync::atomic::{AtomicU64, Ordering};
 use batna_core::content::{Index, Lecture};
 use batna_core::lesson::{Lesson, LessonFile};
 use batna_core::pack::Pack;
-use batna_core::program::Program;
+use batna_core::program::{Course, Program};
 
 mod embedded {
     include!(concat!(env!("OUT_DIR"), "/embedded.rs"));
@@ -126,15 +126,74 @@ impl<T: Send + Sync + 'static> Derived<T> {
     }
 }
 
-/// `hb.L1` or `hb.L01` → `L01`, `hem.L03` → `HEM L03`: the one way every
-/// screen names a lecture. Hepatology, the first course, keeps the bare
-/// number it always had; every other course says which it is.
-pub fn lecture_code(id: &str) -> String {
-    let n = id.rsplit('.').next().unwrap_or(id).trim_start_matches('L').trim_start_matches('0');
-    match batna_core::program::course_of(id) {
-        "hb" => format!("L{n:0>2}"),
-        c if c != id => format!("{} L{n:0>2}", c.to_uppercase()),
-        _ => format!("L{n:0>2}"),
+/// `hb.L03` → `3`: a lecture's number inside its course. Screens show it
+/// under the course's name, never as a bare code (Mohamed, 2026-10-29: the
+/// course, then the lecture's real title, then its lessons).
+pub fn lecture_no(id: &str) -> String {
+    let n = batna_core::program::lecture_of(id).rsplit('.').next().unwrap_or(id);
+    let n = n.trim_start_matches('L').trim_start_matches('0');
+    if n.is_empty() { "0".into() } else { n.into() }
+}
+
+impl Library {
+    /// The course a lecture, item or lesson id belongs to.
+    pub fn course_of(&self, id: &str) -> Option<&Course> {
+        self.program.course_for(id)
+    }
+
+    /// The course's short Arabic name (`كبد`), else its id.
+    pub fn course_short<'a>(&'a self, id: &'a str) -> &'a str {
+        self.course_of(id).map_or(batna_core::program::course_of(id), |c| c.short.as_str())
+    }
+
+    /// `كبد 3`: a lecture named where its course isn't on screen.
+    pub fn lecture_tag(&self, id: &str) -> String {
+        format!("{} {}", self.course_short(id), lecture_no(id))
+    }
+
+    /// `كبد › Portal hypertension`: a lecture by course and title, for chips
+    /// and one-line labels.
+    pub fn crumb(&self, id: &str) -> String {
+        let lecture = batna_core::program::lecture_of(id);
+        format!("{} › {}", self.course_short(lecture), self.title(lecture))
+    }
+
+    /// Splits rows into their courses, in the program's order (rows keep
+    /// their order inside a course). Rows of a course the program doesn't
+    /// list go last, under their prefix.
+    pub fn by_course<'a, T>(&'a self, rows: Vec<T>, id: impl Fn(&T) -> &str) -> Vec<CourseRows<'a, T>> {
+        let mut out: Vec<CourseRows<'a, T>> = Vec::new();
+        for row in rows {
+            let course = batna_core::program::course_of(id(&row)).to_string();
+            match out.iter_mut().find(|g| g.id == course) {
+                Some(g) => g.rows.push(row),
+                None => {
+                    out.push(CourseRows { course: self.program.course(&course), id: course, rows: vec![row] })
+                }
+            }
+        }
+        let pos = |g: &CourseRows<'a, T>| {
+            self.program.courses.iter().position(|c| c.id == g.id).unwrap_or(usize::MAX)
+        };
+        out.sort_by_key(|g| pos(g));
+        out
+    }
+}
+
+/// One course's share of a list ([`Library::by_course`]).
+pub struct CourseRows<'a, T> {
+    pub id: String,
+    pub course: Option<&'a Course>,
+    pub rows: Vec<T>,
+}
+
+impl<T> CourseRows<'_, T> {
+    pub fn short(&self) -> &str {
+        self.course.map_or(self.id.as_str(), |c| c.short.as_str())
+    }
+
+    pub fn title(&self) -> &str {
+        self.course.map_or(self.id.as_str(), |c| c.title.as_str())
     }
 }
 
@@ -143,15 +202,27 @@ mod tests {
     use super::*;
 
     #[test]
-    fn lecture_codes_and_titles_are_one_spelling() {
-        assert_eq!(lecture_code("hb.L01"), "L01");
-        assert_eq!(lecture_code("hb.L1"), "L01");
-        assert_eq!(lecture_code("hb.L20"), "L20");
-        assert_eq!(lecture_code("hem.L3"), "HEM L03");
-        assert_eq!(lecture_code("L05"), "L05");
+    fn lectures_are_named_by_course_number_and_title() {
+        assert_eq!(lecture_no("hb.L01"), "1");
+        assert_eq!(lecture_no("hb.L20"), "20");
+        assert_eq!(lecture_no("res.L03.012"), "3");
+        assert_eq!(lecture_no("res.L03.lesson2#4"), "3");
         let lib = Library::get();
         let first = &lib.index.lectures[0];
         assert_eq!(lib.title(&first.id), first.title);
+        assert_eq!(lib.lecture_tag("hb.L03"), "كبد 3");
+        assert_eq!(lib.crumb("hb.L03.004"), format!("كبد › {}", lib.title("hb.L03")));
+    }
+
+    #[test]
+    fn rows_group_by_course_in_program_order() {
+        let lib = Library::get();
+        let groups = lib.by_course(vec!["hb.L02", "res.L01", "hb.L01", "zz.L01"], |s| s);
+        let ids: Vec<_> = groups.iter().map(|g| g.id.as_str()).collect();
+        assert_eq!(ids, ["res", "hb", "zz"]);
+        assert_eq!(groups[1].rows, ["hb.L02", "hb.L01"]);
+        assert_eq!(groups[1].short(), "كبد");
+        assert_eq!(groups[2].short(), "zz");
     }
 
     #[test]

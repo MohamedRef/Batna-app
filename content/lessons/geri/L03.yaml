@@ -1,0 +1,689 @@
+schema: batna.lesson/v1
+lecture: geri.L03
+lessons:
+  # ------------------------------------------------------------------
+  - id: geri.L03.lesson1
+    title: "الدوا جوه جسم عجوز: فين بيروح؟"
+    hook: "نفس الجرعة اللي بتريّح شاب ممكن توقّع الحاج من على السلم. السر مش في الدوا، في الجسم اللي استقبله."
+    minutes: 8
+    pages: [40, 43]
+    topics: [challenges, pk, renal]
+    goals:
+      - "تعرف التحديات الخمسة في علاج الكبار"
+      - "تفهم إزاي الـ distribution بيتغير: دهون أكتر، ميه أقل، albumin أقل"
+      - "تحسب الـ CrCl بـ Cockcroft-Gault"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 40
+        title: "ليه علاج الكبار صعب؟"
+        quote: "Impaired physiological reserve in older patients- \"homeostenosis\"."
+        text: |
+          خمس تحديات:
+          - ==homeostenosis==: الـ physiological reserve قليل، أي حمل يوقّعه.
+          - **أمراض كتير وأدوية كتير** مع بعض.
+          - العرض **non-specific أو cryptic**.
+          - لو ما اتعالجش، بيتدهور بسرعة: loss of adaptability.
+          - **المضاعفات** كتير، من المرض ومن العلاج كمان.
+      - kind: mnemonic
+        page: 40
+        quote: "Multiple disease and multiple drug use. Non-specific or cryptic presentation."
+        word: "HMNRC"
+        parts:
+          - { key: "H", text: "Homeostenosis" }
+          - { key: "M", text: "Multiple disease, multiple drugs" }
+          - { key: "N", text: "Non-specific presentation" }
+          - { key: "R", text: "Rapid deterioration" }
+          - { key: "C", text: "Complications high" }
+        hook: "**«حَمْنَرْك»**: الحاج بيقولك «حمّنّرك يا دكتور»، يعني «هتعبك معايا». وفعلًا هيتعبك في الخمسة دول."
+      - kind: figure
+        page: 40
+        title: "كل ما الأدوية تزيد، الـ side effects تطير"
+        image: { file: geri/L03-drugs-side-effects.webp, book: true }
+        quote: "Relationship between number of drugs and side effects"
+        caption: "رسمة الكتاب: من **0–5** أدوية حوالي 5% عندهم side effects، ومن **16–20** دوا أكتر من ==50%==. الزيادة مش خطية، دي بتقفز."
+        alt: "The book's bar chart: percent of patients with side effects by number of drugs, about 5% for 0–5, 10% for 6–10, about 28% for 11–15 and about 55% for 16–20."
+      - kind: figure
+        page: 41
+        title: "وكل ما الدكاترة يزيدوا كمان"
+        image: { file: geri/L03-prescribers.webp, book: true }
+        quote: "Number of prescribing physicians and risk of side effects"
+        caption: "Number of prescribing physicians: الـ **psychotropic** بالذات بيطلع من حوالي 17% مع دكتور واحد لحوالي ==34%== مع خمسة. كل دكتور بيكتب لوحده ومحدش شايف الروشتة كلها."
+        alt: "The book's bar chart: prevalence of drug combinations by number of prescribing physicians 1 to 5 for NSAIDs, cardiovascular and psychotropic drugs; psychotropic rises from about 17% to about 34%."
+      - kind: explain
+        page: 41
+        title: "الامتصاص: مش مشكلة غالبًا"
+        quote: "From a practical standpoint this is not usually a problem in the elderly Caveat: Tube feedings may reduce absorption if continuous"
+        text: |
+          الـ **absorption** عمليًا مش مشكلة عند الكبار.
+
+          الاستثناء: ==tube feeding== لو continuous، ممكن يقلل الامتصاص.
+      - kind: explain
+        page: 42
+        title: "الـ distribution: دهون أكتر، ميه أقل"
+        quote: "Decreased body water -- the most important change, lower Vd. in polar drugs"
+        text: |
+          - **Albumin قليل** ← نسبة الدوا الـ free تزيد.
+          - **دهون أكتر** ← الـ half-life بتاع الـ lipophilic drugs يطول، زي **diazepam** والـ anesthetics.
+          - **ميه أقل**، وده ==the most important change== ← الـ Vd بتاع الـ polar drugs يقل ← التركيز يعلى.
+          - **عضلات أقل**.
+      - kind: aside
+        tone: analogy
+        page: 42
+        quote: "Increased fat -- increases the half life of lipophylic drugs (e.g. diazepam, anesthetics)"
+        text: "تخيّل الدهون زي **إسفنجة**: الـ diazepam بيتشرّب فيها ويفضل يرشح منها بالراحة أيام. والميه زي **كوباية صغيرة**: نفس كمية السكر فيها تبقى أحلى، يعني الدوا الـ polar تركيزه أعلى."
+      - kind: sort
+        page: 42
+        quote: "Increased fat -- increases the half life of lipophylic drugs (e.g. diazepam, anesthetics)"
+        prompt: "الـ Vd بتاع الدوا ده بيعمل إيه مع السن؟"
+        bins: ["Vd up", "Vd down"]
+        cards:
+          - { text: "Diazepam", bin: 0 }
+          - { text: "Lipophilic drug", bin: 0 }
+          - { text: "Hydrophilic drug", bin: 1 }
+          - { text: "Polar drug", bin: 1 }
+        why: "الدهون بتزيد فالـ lipophilic Vd up، والميه بتقل فالـ hydrophilic أو polar Vd down."
+      - kind: explain
+        page: 43
+        title: "الـ half-life = Vd ÷ clearance"
+        quote: "Half-life(t1/2) ≈ vol. of distribution(Vd) over clearance(CI)"
+        text: |
+          ==t½ ≈ Vd ÷ clearance==
+
+          يعني عند الكبار الـ half-life بيطول من ناحيتين:
+          - الـ **Vd** بتاع الـ lipophilic بيزيد.
+          - الـ **clearance** بيقل من الكلية والكبد.
+      - kind: explain
+        page: 43
+        title: "الكلية: ثلث الشغل راح"
+        quote: "Renal function declines by about 1/3 with normal ageing- NB- digoxin, gentamicin."
+        text: |
+          - الـ renal function بيقل حوالي ==الثلث== مع السن الطبيعي. خلي بالك من **digoxin** و **gentamicin**.
+          - السبب: الكلية أصغر، والـ tubular secretion والـ renal blood flow أقل.
+          - **normal renal function tests do not mean normal renal function**. الكرياتينين مش مقياس كويس، احسب الـ CrCl.
+      - kind: explain
+        page: 42
+        title: "معادلة Cockcroft-Gault"
+        quote: "(140-age) x body wt. (kg.) Cr cl. = 72 x Serum Cr. (x 0.85 for Women)"
+        text: |
+          **CrCl = (140 − age) × weight ÷ (72 × s.Cr)**
+
+          وللستات: ==× 0.85==.
+
+          الكتاب بيقول إنها **estimate**، والـ renal function بيختلف جدًا من حاج للتاني.
+      - kind: check
+        page: 42
+        quote: "(140-age) x body wt. (kg.) Cr cl. = 72 x Serum Cr. (x 0.85 for Women)"
+        question: "85-year-old woman, 50 kg, creatinine 1.0 mg/dl. CrCl by Cockcroft-Gault?"
+        options:
+          - "About 32 ml/min"
+          - "About 38 ml/min"
+          - "About 55 ml/min"
+          - "About 100 ml/min"
+        answer: 0
+        why:
+          - "صح: 55 × 50 ÷ 72 = 38.2، × 0.85 = 32.5."
+          - "نسيت الـ 0.85 بتاع الستات."
+          - "55 ده (140 − age) بس."
+          - "الكرياتينين 1.0 مش معناه كلية طبيعية."
+      - kind: try
+        items: [geri.L03.002, geri.L03.011, geri.L03.014, geri.L03.019, geri.L03.021]
+    recap:
+      - "HMNRC: homeostenosis، أمراض وأدوية كتير، عرض مش واضح، تدهور سريع، مضاعفات."
+      - "الـ side effects بتقفز مع عدد الأدوية وعدد الدكاترة."
+      - "Absorption مش مشكلة، إلا الـ continuous tube feeding."
+      - "دهون أكتر ← lipophilic t½ أطول. ميه أقل ← polar Vd أقل، وده الأهم."
+      - "الكلية −⅓. CG = (140 − age) × wt ÷ (72 × Cr)، والست × 0.85."
+    practice: [geri.L03.001, geri.L03.002, geri.L03.003, geri.L03.004, geri.L03.005, geri.L03.006, geri.L03.007, geri.L03.008, geri.L03.009, geri.L03.010, geri.L03.011, geri.L03.012, geri.L03.013, geri.L03.014, geri.L03.015, geri.L03.016, geri.L03.017, geri.L03.018, geri.L03.019, geri.L03.020, geri.L03.021]
+  # ------------------------------------------------------------------
+  - id: geri.L03.lesson2
+    title: "الكبد العجوز: Phase I تعبان، Phase II شغال"
+    hook: "ليه الدكتور الكبير يكتب oxazepam مش diazepam؟ الإجابة في كلمتين: phase two."
+    minutes: 8
+    pages: [42, 46]
+    topics: [hepatic, pk, renal]
+    goals:
+      - "تفرّق بين Phase I و Phase II ومين اللي بيتأثر بالسن"
+      - "تعرف قاعدة جرعة الـ high و low extraction drugs"
+      - "تحفظ الأدوية اللي بتخرج من الكلية"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 42
+        title: "الكبد بيصغر وبيبطّأ"
+        quote: "Reduced liver function due to decreased liver size, blood flow, and disease (e.g. CHF)"
+        text: |
+          الـ drug metabolism ==very liver dependent==، والكبد عند الكبار:
+          - **أصغر**.
+          - الـ **blood flow** أقل.
+          - وممكن فيه مرض زي **CHF**.
+
+          والـ biotransforming enzymes عمومًا أقل.
+      - kind: table
+        page: 44
+        quote: "Phase I (introduction of functional groups) Oxidation Reduction Hydrolysis Most metabolites active and potentially hepatotoxic"
+        title: "Phase I ولا Phase II؟"
+        columns: [Phase, Reactions, Products]
+        rows:
+          - ["I", "Oxidation, reduction, hydrolysis", "Active, maybe hepatotoxic"]
+          - ["II", "Conjugation: glucuronidation etc.", "Inactive, not toxic"]
+        hide: [[0, 2], [1, 2]]
+      - kind: explain
+        page: 42
+        title: "السن بيضرب Phase I بس"
+        quote: "phase I reactions (oxidative) in the liver impaired even with normal ageing, phase II (conjugation reactions) - relatively spared."
+        text: |
+          - **Phase I** أي الـ oxidation: بيضعف ==even with normal ageing==. مثال الكتاب للـ first pass: **propranolol**.
+          - **Phase II** أي الـ conjugation: ==relatively spared==.
+
+          علشان كده ==Phase II drugs are preferred==، ومثال الكتاب: **oxazepam**.
+      - kind: mnemonic
+        page: 45
+        quote: "Lorazepam (II) Oxazepam (II)"
+        word: "LOT"
+        parts:
+          - { key: "L", text: "Lorazepam" }
+          - { key: "O", text: "Oxazepam" }
+          - { key: "T", text: "Temazepam (not in the book's table)" }
+        hook: "كلمة **LOT**: الـ benzodiazepines الآمنة للكبد العجوز بتعدّي على phase II بس. الكتاب ذكر **L و O**، والـ T زيادة من المراجع."
+      - kind: check
+        page: 42
+        quote: "Phase II - drugs are preferred (oxazepam)"
+        question: "80-year-old needs a short benzodiazepine course. Which is preferred?"
+        options:
+          - "Oxazepam"
+          - "Diazepam"
+          - "Flurazepam"
+          - "Chlordiazepoxide"
+        answer: 0
+        why:
+          - "صح: phase II بس، والـ phase II spared مع السن."
+          - "Phase I و lipophilic، الـ t½ بيطول جدًا."
+          - "Long-acting وله active metabolites."
+          - "بيتعمله oxidation لـ active metabolites طويلة."
+      - kind: figure
+        page: 45
+        title: "High ولا low extraction؟"
+        image: { file: geri/L03-hepatic-extraction.webp, book: true }
+        quote: "Hepatic extraction of drugs"
+        caption: "جدول الكتاب: **High extraction** أكتر من 0.5 زي ==propranolol، verapamil، morphine==، و **low extraction** أقل من 0.5 زي warfarin و theophylline و phenytoin. علامة II جنب lorazepam و oxazepam معناها phase II بس."
+        alt: "The book's two-column list: high extraction drugs (bromocriptine, chlorpromazine, clomethiazole, dihydroergotamine, diltiazem, metoclopramide, metoprolol, midazolam, morphine, nifedipine, propranolol, verapamil) and low extraction drugs with their metabolic phases (antidepressants, codeine, diazepam, isoniazid, lorazepam II, neuroleptics, oxazepam II, phenobarbital, phenytoin, procainamide, quinidine, theophylline, warfarin)."
+      - kind: table
+        page: 45
+        quote: "High extraction drugs - reduce initial dose by approximately 50% - find appropriate maintenance dose by uptitration"
+        title: "الجرعة حسب نوع الدوا"
+        columns: [Drug, Dose rule]
+        rows:
+          - ["High extraction", "Start ~50% lower, uptitrate; keep 30–50% lower"]
+          - ["Low, phase I + II", "Start at maintenance; keep 30–50% lower"]
+          - ["Low, phase II only", "No change"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: reveal
+        page: 46
+        quote: "Bioavailability - \"first-pass effect\"↓ ↑"
+        prompt: "ليه الـ high extraction drug بالذات محتاج الجرعة الأولى تقل للنص؟"
+        answer: |
+          الـ high extraction drug الكبد بيكسر أغلبه من **أول مرور** بعد البلع. عند الكبار الـ ==first-pass effect== بيقل، فالـ **bioavailability** تعلى، وكمية أكبر توصل الدم من نفس الحباية.
+
+          علشان كده تبدأ بنص الجرعة وتطلع بالراحة. (تفسير فارماكولوجي.)
+      - kind: check
+        page: 45
+        quote: "Low extraction drugs with phase II metabolism - No change"
+        question: "Lorazepam is low extraction with phase II metabolism only. Hepatic dose change in an 80-year-old?"
+        options:
+          - "No change"
+          - "Halve the first dose, then uptitrate"
+          - "Start at maintenance, cut 30–50%"
+          - "Contraindicated"
+        answer: 0
+        why:
+          - "صح: low extraction و phase II بس ← no change. بس start low, go slow برضه علشان الـ sensitivity."
+          - "دي قاعدة الـ high extraction."
+          - "دي قاعدة الـ low extraction بـ phase I و II."
+          - "بالعكس، ده من الأدوية المفضلة."
+      - kind: explain
+        page: 45
+        title: "أدوية بتخرج من الكلية"
+        quote: "Drugs with predominant renal elimination Aminoglycosides Antimycotics: fluconazole, flucytosine Antivirals: acyclovir, gancyclovir, ribavirin"
+        text: |
+          الجرعة دي بتتظبط على الـ ==CrCl==:
+          - **Aminoglycosides**
+          - **Antimycotics**: fluconazole، flucytosine
+          - **Antivirals**: acyclovir، ganciclovir، ribavirin
+          - **Beta-blockers**: atenolol، sotalol
+          - **Beta-lactams**: penicillins، cephalosporins
+          - **Digoxin**، **H2-blockers**، **Lithium**
+      - kind: mnemonic
+        page: 46
+        quote: "Betablockers: atenolol, sotalol Betalactam antibiotics: penicillins, cepha-losporins Digoxin H2-Blockers Lithium"
+        word: "A-A-A-B-B-D-H-L"
+        parts:
+          - { key: "A", text: "Aminoglycosides" }
+          - { key: "A", text: "Antimycotics: fluconazole, flucytosine" }
+          - { key: "A", text: "Antivirals: acyclovir, ganciclovir" }
+          - { key: "B", text: "Beta-blockers: atenolol, sotalol" }
+          - { key: "B", text: "Beta-lactams" }
+          - { key: "D", text: "Digoxin" }
+          - { key: "H", text: "H2-blockers" }
+          - { key: "L", text: "Lithium" }
+        hook: "**تلات A، اتنين B، وبعدين DHL**: زي شركة الشحن، الأدوية دي بتتشحن برّه الجسم عن طريق **الكلية**."
+      - kind: table
+        page: 46
+        quote: "Alterations in pharmacokinetics in geriatric patients Absorption ±unchanged"
+        title: "ملخص الـ PK عند الكبار"
+        columns: [Parameter, Change]
+        rows:
+          - ["Absorption", "About unchanged"]
+          - ["Bioavailability", "Up (less first pass)"]
+          - ["Vd, hydrophilic", "Down"]
+          - ["Vd, lipophilic", "Up"]
+          - ["Kidney elimination", "Down"]
+          - ["Liver elimination", "Down"]
+        hide: [[1, 1], [2, 1], [3, 1], [5, 1]]
+      - kind: try
+        items: [geri.L03.025, geri.L03.026, geri.L03.030, geri.L03.022, geri.L03.036]
+    recap:
+      - "الكبد أصغر والدم أقل، والـ enzymes أقل."
+      - "Phase I يضعف، Phase II spared ← oxazepam و lorazepam."
+      - "High extraction: نص الجرعة الأولى، والـ maintenance −30–50%."
+      - "Low extraction phase II بس: no change."
+      - "الكلية: AAA BB DHL."
+    practice: [geri.L03.024, geri.L03.025, geri.L03.026, geri.L03.027, geri.L03.028, geri.L03.029, geri.L03.030, geri.L03.031, geri.L03.032, geri.L03.033, geri.L03.034, geri.L03.035, geri.L03.036, geri.L03.037, geri.L03.038, geri.L03.039, geri.L03.040, geri.L03.022, geri.L03.023]
+  # ------------------------------------------------------------------
+  - id: geri.L03.lesson3
+    title: "الجسم بيحس بالدوا غير، والروشتة بتغلط"
+    hook: "الـ morphine اللي بيسكّن الشاب ممكن ينيّم الحاج. والـ propranolol اللي بيبطّأ قلب الشاب، عند الحاج تأثيره أضعف."
+    minutes: 8
+    pages: [46, 48]
+    topics: [pd, problems]
+    goals:
+      - "تعرف الـ pharmacodynamic changes لكل عضو"
+      - "تحفظ الـ medication therapy problems التسعة"
+      - "تعرف أمثلة الـ undertreatment و Beers"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 46
+        title: "الـ pharmacodynamics: نفس التركيز، تأثير مختلف"
+        quote: "Ageing is associated with an increased sensitivity for many compounds- opiates, decreased B-adrenergic responses in the elderly"
+        text: |
+          مش بس الدوا بيوصل بكمية مختلفة، كمان الـ **receptor** بيرد بشكل مختلف:
+          - ==increased sensitivity== لأدوية كتير، زي الـ **opiates**.
+          - ==decreased β-adrenergic responses==، زي الـ propranolol والـ isoproterenol.
+      - kind: table
+        page: 46
+        quote: "Urinary bladder: Anticholinergics → urine retention Eye: Anticholinergics → disturbed accommodation, acute glaucoma"
+        title: "كل عضو والدوا اللي بيتعبه"
+        columns: [Organ, Drug, Effect]
+        rows:
+          - ["Bladder", "Anticholinergics", "Retention"]
+          - ["Eye", "Anticholinergics", "Glaucoma, blurred"]
+          - ["CNS", "Benzos, opiates", "Sedation"]
+          - ["CNS", "BB, digoxin", "Depression"]
+          - ["BP", "ACEI, neuroleptics", "Hypotension"]
+          - ["Kidney", "NSAIDs", "Renal failure"]
+          - ["Heart, lungs", "BB, sympathomimetics", "Less response"]
+        hide: [[0, 2], [1, 2], [3, 2], [4, 2], [5, 2]]
+      - kind: match
+        page: 47
+        quote: "Blood pressure regulation: ACE-inhibitors, neuroleptics → hypotonia Kidney: NSAIDs → renal failure"
+        prompt: "وصّل الدوا بالمشكلة اللي بيعملها عند الحاج:"
+        pairs:
+          - ["Anticholinergics", "Urine retention"]
+          - ["Digoxin", "Depression"]
+          - ["Opiates", "Sedation"]
+          - ["NSAIDs", "Renal failure"]
+          - ["Neuroleptics", "Hypotension"]
+        why: "الجدول في ص 46–47."
+      - kind: explain
+        page: 47
+        title: "إيه المختلف في روشتة الكبار؟"
+        quote: "Risk/Benefit Ratio in this vulnerable, frail population. Ability to recognize side effects in the elderly is reduced."
+        text: |
+          - المشكلة ممكن تكون **underuse أو overuse أو misuse**.
+          - الـ **PK والـ PD** متغيرين.
+          - الـ ==risk/benefit== مختلف في الـ frail.
+          - الـ **side effects** صعب تتعرف.
+          - **دكاترة كتير** ومحدش بيكلم التاني.
+          - الـ **adherence**.
+      - kind: explain
+        page: 47
+        title: "تسع مشاكل في الأدوية"
+        quote: "Polypharmacy: drug use without indication Undertreatment: indication without drug use"
+        text: |
+          - ==Polypharmacy==: دوا من غير indication.
+          - ==Undertreatment==: indication من غير دوا.
+          - Dose too low، و dose too high.
+          - Adverse drug reaction، و drug interaction.
+          - Inappropriate drug.
+          - Lack of adherence.
+          - Medication error.
+      - kind: aside
+        tone: joke
+        text: "الـ polypharmacy والـ undertreatment زي اتنين أخوات بيتخانقوا على نفس الشنطة: واحد حاطط فيها أدوية مالهاش لازمة، والتاني ناسي فيها التطعيم. والحاج شايل الشنطة."
+      - kind: explain
+        page: 47
+        title: "الـ undertreatment: الأدوية اللي بتتنسي"
+        quote: "Examples of Undertreatment Pain management Pneumococcal and flu vaccine Depression Secondary heart attack prevention"
+        text: |
+          أمثلة الكتاب:
+          - **Pain management**: الحاج بيستحمل الألم.
+          - **Pneumococcal و flu vaccine**.
+          - **Depression**: بيتحسب على إنه «كبر».
+          - **Secondary heart attack prevention**.
+      - kind: check
+        page: 47
+        quote: "Polypharmacy: drug use without indication Undertreatment: indication without drug use"
+        question: "A 76-year-old had an MI last year and takes no statin or aspirin, with no contraindication. This is:"
+        options:
+          - "Undertreatment"
+          - "Polypharmacy"
+          - "Drug interaction"
+          - "Dose too high"
+        answer: 0
+        why:
+          - "صح: indication من غير دوا، وده من أمثلة الكتاب: secondary heart attack prevention."
+          - "Polypharmacy = دوا من غير indication."
+          - "مفيش دوا أصلًا علشان يعمل interaction."
+          - "مفيش دوا أصلًا."
+      - kind: explain
+        page: 48
+        title: "الـ ADEs بالأرقام"
+        quote: "Rate of ADEs requiring hospitalization is nearly seven times greater for persons age 65 or over versus persons under age 65."
+        text: |
+          مقارنة بالأصغر من 65:
+          - زيارات الطوارئ بسبب الـ ADE: ==أكتر من الضعف==.
+          - دخول المستشفى بسبب الـ ADE: ==حوالي 7 أضعاف==.
+      - kind: explain
+        page: 48
+        title: "الأدوية الـ inappropriate و Beers"
+        quote: "\"Beers medications\" - medications considered potentially inappropriate for older adults based on risk versus benefit (expert consensus)"
+        text: |
+          مثالين للـ **inappropriate drug**:
+          - **Antibacterial** لـ viral infection.
+          - الـ ==Beers medications==: أدوية potentially inappropriate للكبار على أساس risk vs benefit، بـ **expert consensus**.
+      - kind: update
+        page: 48
+        quote: "Ref: Arch Intern Med 2003;163:2716-24"
+        text: "الكتاب بيستشهد بـ Beers **2003**. النسخة الحالية **AGS Beers Criteria 2023**، وفي أوروبا **STOPP/START v3 2023**، والـ START بيفكّرك بالـ undertreatment. في الامتحان: كلام الكتاب."
+        ref: "AGS Beers Criteria 2023; STOPP/START version 3, 2023"
+      - kind: try
+        items: [geri.L03.042, geri.L03.047, geri.L03.049, geri.L03.050, geri.L03.052]
+    recap:
+      - "PD: sensitivity أعلى للـ opiates، و β response أقل."
+      - "Anticholinergics: retention و glaucoma. BB و digoxin: depression."
+      - "Polypharmacy = دوا بلا indication. Undertreatment = indication بلا دوا."
+      - "Undertreatment: الألم، التطعيمات، الاكتئاب، secondary MI prevention."
+      - "ADE: ER أكتر من الضعف، دخول المستشفى حوالي 7 أضعاف."
+    practice: [geri.L03.041, geri.L03.042, geri.L03.043, geri.L03.044, geri.L03.045, geri.L03.046, geri.L03.047, geri.L03.048, geri.L03.049, geri.L03.050, geri.L03.051, geri.L03.052]
+  # ------------------------------------------------------------------
+  - id: geri.L03.lesson4
+    title: "اكتب صح: ابدأ قليل وامشي بالراحة"
+    hook: "أحسن روشتة للحاج ساعات بتبقى اللي فيها دوا أقل، مش دوا زيادة."
+    minutes: 9
+    pages: [48, 51]
+    topics: [principles, high-risk]
+    goals:
+      - "تعرف الـ principles والـ rational prescribing بالترتيب"
+      - "تحفظ الـ high risk drugs"
+      - "تعرف أشهر الـ drug-drug و drug-disease interactions"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 48
+        title: "قبل ما تكتب أي دوا"
+        quote: "Ask: Is treatment warranted? Are nonpharmacologic alternatives available? Consider risk vs. benefit of drug therapy Establish goals of therapy"
+        text: |
+          - هل العلاج **warranted** أصلًا؟
+          - في **nonpharmacologic** بديل؟
+          - الـ **risk vs benefit**.
+          - حدد الـ goals: ==quality of care، quality of life، functional status==.
+          - شوف **الإنسان كله**، مش مرض واحد ولا دوا واحد.
+          - الـ **guidelines** معمولة لمرض واحد، ومع أمراض كتير ممكن ما تنفعش.
+      - kind: explain
+        page: 49
+        title: "Appropriate مش زي Polypharmacy"
+        quote: "The potential benefit outweighs the potential risk. which is different from Polypharmacy -- the concurrent use of many medications."
+        text: |
+          - ==Appropriateness==: الفايدة المتوقعة أكبر من الضرر المتوقع.
+          - **Polypharmacy**: أدوية كتير في نفس الوقت.
+
+          ممكن الحاج ياخد 7 أدوية كلهم appropriate، وممكن ياخد 2 منهم واحد inappropriate.
+      - kind: order
+        page: 49
+        quote: "Determine if a drug is needed at all Indeed, review all drugs to see if they are still needed If a drug is needed"
+        prompt: "رتّب خطوات الـ rational prescribing:"
+        steps:
+          - "Is a drug needed at all? Review all drugs"
+          - "Assess frailty and co-morbidities"
+          - "Review prior and current drugs"
+          - "Assess ability to comply"
+          - "Pick a drug and dose"
+          - "Check with explicit criteria"
+          - "Ask a pharmacist if unsure"
+        why: "الأول تسأل محتاج دوا ولا لأ، وبعدين تقيّم الحاج، وبعدين تختار وتراجع اختيارك."
+      - kind: explain
+        page: 50
+        title: "التوصيات"
+        quote: "Well documented pharmacotherapy - Avoid new drugs and drugs with long half-lifes Avoid polypharmacy Start low, go slow"
+        text: |
+          - هل الدوا **ضروري**؟ تشخيص واضح، وجرّب البدائل.
+          - **Well documented**: ابعد عن الأدوية الجديدة واللي الـ half-life بتاعها طويل.
+          - **Avoid polypharmacy**.
+          - ==Start low, go slow==.
+          - فكّر في الـ **unusual side effects**.
+          - ودايمًا اسأل تلات أسئلة: ينفع أوقف دوا؟ فاهم العلاج؟ يقدر يمشي عليه؟
+      - kind: aside
+        tone: joke
+        quote: "Can a drug be stopped? unprescribing or „pruning\" of drug regimen"
+        page: 50
+        text: "الكتاب بيسميها **pruning**: تقليم الشجرة. الروشتة زي شجرة الجنينة، لو ما قلّمتهاش كل زيارة هتلاقيها غابة، والحاج تايه جواها."
+      - kind: explain
+        page: 50
+        title: "أدوية خطر على الكبار"
+        quote: "High Risk Drugs for Elderly Warfarin Digoxin > 0.125/day Meperidine Ticlodipine Antihistamines (esp Diphenhydramine-Benadryl!) Chlorpropamide"
+        text: |
+          - **Warfarin**
+          - **Digoxin** فوق ==0.125 mg/day==
+          - **Meperidine**
+          - **Ticlopidine**
+          - **Antihistamines**، خصوصًا الـ diphenhydramine
+          - **Chlorpropamide**
+          - **NSAIDs**، خصوصًا الـ ==indomethacin==
+          - **Propoxyphene**
+      - kind: mnemonic
+        page: 50
+        quote: "Warfarin Digoxin > 0.125/day Meperidine Ticlodipine"
+        word: "WD-MT-ACNP"
+        parts:
+          - { key: "W", text: "Warfarin" }
+          - { key: "D", text: "Digoxin >0.125 mg/day" }
+          - { key: "M", text: "Meperidine" }
+          - { key: "T", text: "Ticlopidine" }
+          - { key: "A", text: "Antihistamines (diphenhydramine)" }
+          - { key: "C", text: "Chlorpropamide" }
+          - { key: "N", text: "NSAIDs (indomethacin)" }
+          - { key: "P", text: "Propoxyphene" }
+        hook: "**«ودّ مَت، اكنب»**: الحاج قال «ودّني مت»، يعني الأدوية دي «ودّته» للمستشفى. W D M T و A C N P."
+      - kind: update
+        page: 50
+        quote: "NSAIDS (esp indomethacin) Propoxyphene"
+        text: "الـ **propoxyphene** اتسحب من السوق في أمريكا وأوروبا 2009–2010 بسبب الـ cardiac toxicity، والـ **ticlopidine** اتبدل بالـ clopidogrel تقريبًا. الباقي لسه في **Beers 2023**."
+        ref: "FDA propoxyphene withdrawal 2010; EMA 2009; AGS Beers Criteria 2023"
+      - kind: table
+        page: 51
+        quote: "Common drug-drug interactions"
+        title: "Drug-drug interactions"
+        columns: [Combination, Risk]
+        rows:
+          - ["ACEI + potassium", "Hyperkalemia"]
+          - ["ACEI + K-sparing", "Hyperkalemia, hypotension"]
+          - ["Digoxin + antiarrhythmic", "Bradycardia, arrhythmia"]
+          - ["Digoxin or antiarrhythmic + diuretic", "Electrolytes; arrhythmia"]
+          - ["Diuretic + diuretic", "Electrolytes; dehydration"]
+          - ["Benzo + antidepressant or antipsychotic", "Sedation, confusion, falls"]
+          - ["CCB, nitrate, vasodilator, diuretic", "Hypotension"]
+        hide: [[0, 1], [2, 1], [4, 1], [5, 1], [6, 1]]
+      - kind: table
+        page: 51
+        quote: "Common drug-disease interactions"
+        title: "Drug-disease interactions"
+        columns: [Combination, Risk]
+        rows:
+          - ["NSAIDs or TZD + CHF", "Fluid retention, CHF worse"]
+          - ["BPH + anticholinergics", "Urinary retention"]
+          - ["CCB, narcotics, anticholinergics + constipation", "Worse constipation"]
+          - ["Metformin + CHF", "Hypoxia; lactic acidosis"]
+          - ["NSAIDs + gastropathy", "Ulcer and bleeding"]
+          - ["NSAIDs + HTN", "Fluid retention; diuretics weaker"]
+        hide: [[0, 1], [1, 1], [3, 1], [5, 1]]
+      - kind: check
+        page: 51
+        quote: "Benzodiazepine + antidepressant Benzodiazepine + antipsychotic Sedation; confusion; falls"
+        question: "83-year-old on sertraline is started on a benzodiazepine for sleep. Main risk?"
+        options:
+          - "Sedation, confusion, falls"
+          - "Hyperkalemia"
+          - "Bradycardia"
+          - "Fluid retention"
+        answer: 0
+        why:
+          - "صح: benzo + antidepressant."
+          - "دي ACEI + K أو K-sparing."
+          - "دي digoxin + antiarrhythmic."
+          - "دي NSAIDs مع CHF أو HTN."
+      - kind: update
+        page: 51
+        quote: "Metformin + CHF Hypoxia; increased risk of lactic acidosis"
+        text: "الـ HF اتشال من موانع الـ **metformin** في الـ label الأمريكي سنة 2006. الـ **ADA** دلوقتي بيسمح بيه في الـ **stable HF** لو الـ eGFR فوق 30، ويتجنب في الـ HF غير المستقر أو في المستشفى. في الامتحان: جدول الكتاب."
+        ref: "ADA Standards of Care in Diabetes 2024"
+      - kind: try
+        items: [geri.L03.057, geri.L03.062, geri.L03.063, geri.L03.067, geri.L03.068]
+    recap:
+      - "قبل الدوا: محتاجه؟ في بديل؟ risk vs benefit؟ الـ goals؟"
+      - "Appropriate = benefit > risk، ومش زي polypharmacy."
+      - "Start low, go slow، وابعد عن الجديد والـ long half-life، وقلّم الروشتة."
+      - "High risk: W D M T A C N P."
+      - "Benzo + antidepressant ← falls. Digoxin + antiarrhythmic ← bradycardia. NSAIDs + CHF/HTN ← fluid retention."
+    practice: [geri.L03.053, geri.L03.054, geri.L03.055, geri.L03.056, geri.L03.057, geri.L03.058, geri.L03.059, geri.L03.060, geri.L03.061, geri.L03.062, geri.L03.063, geri.L03.064, geri.L03.065, geri.L03.066, geri.L03.067, geri.L03.068, geri.L03.069, geri.L03.070, geri.L03.071, geri.L03.072, geri.L03.073]
+  # ------------------------------------------------------------------
+  - id: geri.L03.lesson5
+    title: "الحاج أحمد و13 دوا"
+    hook: "راجل عنده 69 سنة كان ماشي على رجله وعقله تمام، وفي 4 أيام بقى بيقع ومش مركّز. مفيش مرض جديد، في روشتة."
+    minutes: 8
+    pages: [52, 53]
+    topics: [principles, questions]
+    goals:
+      - "تحفظ ملخص الـ prescribing rules"
+      - "تحل سؤال الحاج أحمد خطوة خطوة"
+      - "تجاوب سؤال الـ antidepressant"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 52
+        title: "الملخص في عشر قواعد"
+        quote: "Obtain a complete medication history Review medications regularly and before prescribing a new medication"
+        text: |
+          - **Medication history** كاملة.
+          - راجع الأدوية **بانتظام** وقبل أي دوا جديد.
+          - اعرف الـ actions والـ adverse events والـ toxicity.
+          - ابدأ الـ long-term **low** وظبّط على الـ response.
+          - وصّل لـ **therapeutic dose** قبل ما تغيّر أو تزوّد.
+          - علّم الحاج أو اللي بيرعاه.
+          - ==ما تعالجش side effect بدوا تاني==.
+          - حاول **دوا واحد لمرضين**.
+          - ابعد عن أدوية **نفس الـ class**.
+          - كلّم **الدكاترة التانيين**.
+      - kind: aside
+        tone: analogy
+        page: 52
+        quote: "Avoid using one medication to treat the adverse events caused by another"
+        text: "استعمال **medication** علشان تعالج الـ **adverse events** بتاعة دوا تاني اسمه **prescribing cascade**: الـ amlodipine عمل edema، فاتكتب furosemide، فعمل incontinence، فاتكتب anticholinergic، فعمل confusion... وكل ده كان حله إنك توقف أول دوا."
+      - kind: case
+        page: 52
+        quote: "Digoxin 250 mcg daily; Metoprolol 50 mg/day, Diclofenac 75 mg twice daily; Frusemide 40 mg daily"
+        stem: "Mr Ahmed, 69, 4 days of malaise, vomiting, confusion and falls. AF, CAD, HTN, gout, insomnia, BPH, edema, dizziness. On simvastatin 40, verapamil 240, quinine, perindopril/indapamide, digoxin 250 mcg, metoprolol 50, diclofenac 75 bd, furosemide 40, betahistine, paracetamol, warfarin, flurazepam 30, vitamin D."
+        steps:
+          - reveal: "Supine BP 122/70, erect 92/62, pulse 52. eGFR 38, K+ 2.8, Na+ 126, Hb 10.2."
+            question: "Which drugs best explain the pulse of 52?"
+            options:
+              - "Digoxin + verapamil + metoprolol"
+              - "Simvastatin + vitamin D"
+              - "Paracetamol"
+              - "Betahistine"
+            answer: 0
+            why: "Digoxin + antiarrhythmic ← bradycardia، ص 51. والـ digoxin 250 mcg فوق خط الـ 0.125، ص 50، مع eGFR 38 و K+ 2.8."
+          - question: "Most likely cause of K+ 2.8 and Na+ 126?"
+            options:
+              - "Indapamide + furosemide"
+              - "Perindopril alone"
+              - "Warfarin"
+              - "Paracetamol"
+            answer: 0
+            why: "Diuretic + diuretic ← electrolyte imbalance و dehydration، ص 51. والـ K الواطي بيزوّد الـ digoxin toxicity."
+          - question: "Which drug is the riskiest with his warfarin, eGFR 38 and edema?"
+            options:
+              - "Diclofenac"
+              - "Paracetamol"
+              - "Vitamin D"
+              - "Metoprolol"
+            answer: 0
+            why: "NSAIDs: renal failure و fluid retention و bleeding مع الـ warfarin، ص 47 و 51. الـ paracetamol هو البديل."
+          - question: "Which drug most raises his falls and confusion?"
+            options:
+              - "Flurazepam 30 mg"
+              - "Vitamin D"
+              - "Simvastatin"
+              - "Paracetamol"
+            answer: 0
+            why: "Long-acting benzo، lipophilic، phase I ← بيتراكم. يتوقف بالتدريج."
+      - kind: check
+        page: 53
+        quote: "A systematic approach should be considered to determine which medications are necessary for a patient given his/ co-morbidities"
+        question: "In order to reduce polypharmacy in Mr Ahmed:"
+        options:
+          - "A systematic approach decides which drugs he needs"
+          - "Stop all and restart one by one"
+          - "Stop the newest drugs first"
+          - "Stop any second drug for the same condition"
+        answer: 0
+        why:
+          - "صح، ده **B** في الكتاب. الكتاب ما كتبش الإجابة."
+          - "توقيف الكل مرة واحدة خطر: rebound و AF rate و anticoagulation."
+          - "قِدَم الدوا مالوش علاقة بإنه لازم ولا لأ."
+          - "ساعات دواين لنفس المرض صح، دي مش قاعدة."
+      - kind: reveal
+        page: 52
+        quote: "Simvastatin 40 mg daily; Verapamil 240 mg daily; Quinine Sulphate 300 mg daily"
+        prompt: "إيه كمان في الروشتة غلط غير اللي فات؟"
+        answer: |
+          - **Simvastatin 40 مع verapamil**: خطر myopathy. الـ FDA سنة 2011 حدّد الـ simvastatin بـ 10 mg مع الـ verapamil.
+          - **Quinine** للـ cramps: الـ FDA بيحذّر منه بسبب hematologic reactions خطيرة.
+          - **Betahistine** للـ dizziness: indication ضعيف.
+          - **Warfarin** مع falls و Hb 10.2: راجع الـ bleeding risk والـ INR.
+
+          الحل: systematic review لكل دوا قصاد كل مرض، وغيّر حاجة واحدة في المرة.
+      - kind: check
+        page: 53
+        quote: "In considering geriatric prescribing principles, which of the following is most important to keep in mind when reviewing his medications?"
+        question: "78-year-old with depression starts an antidepressant. Most important to keep in mind?"
+        options:
+          - "Drug hepatic metabolism"
+          - "Drug absorption"
+          - "Drug protein binding"
+          - "Drug renal excretion"
+        answer: 0
+        why:
+          - "صح، ده **C**. الـ antidepressants low extraction بـ phase I و II، والـ phase I بيضعف مع السن، ص 42 و 45. الكتاب ما كتبش الإجابة."
+          - "الـ absorption مش مشكلة عند الكبار، ص 41."
+          - "بيتغير، بس الـ metabolism هو الأهم هنا."
+          - "مش في قايمة الكلية."
+      - kind: try
+        items: [geri.L03.074, geri.L03.075, geri.L03.077, geri.L03.078, geri.L03.079]
+    recap:
+      - "Medication history كاملة، ومراجعة قبل أي دوا جديد."
+      - "ما تعالجش side effect بدوا: ده prescribing cascade."
+      - "الحاج أحمد: digoxin + verapamil + metoprolol، دواين diuretic، diclofenac، flurazepam."
+      - "Polypharmacy: systematic approach، مش توقيف الكل."
+      - "Antidepressant عند الكبار: فكّر في الـ hepatic metabolism."
+    practice: [geri.L03.074, geri.L03.075, geri.L03.076, geri.L03.077, geri.L03.078, geri.L03.079, geri.L03.080]

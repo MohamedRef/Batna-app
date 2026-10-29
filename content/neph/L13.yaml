@@ -1,0 +1,1111 @@
+schema: batna.content/v1
+lecture: neph.L13
+title: "Diabetic Kidney Disease"
+author: "Prof. Iman ElGohary"
+book: { chapter: 8, pages: [425, 446] }
+topics:
+  - { id: epidemiology, title: "Epidemiology and hyperfiltration" }
+  - { id: definition, title: "DKD versus diabetic nephropathy, definition" }
+  - { id: pathogenesis, title: "Pathophysiology pathways" }
+  - { id: pathology, title: "Light, immunofluorescence and electron microscopy" }
+  - { id: stages, title: "Stages of DKD and atypical course" }
+  - { id: screening, title: "Screening, albuminuria and eGFR equations" }
+  - { id: alternative, title: "Laboratory evaluation and when to suspect another diagnosis" }
+  - { id: risk, title: "Risk factors" }
+  - { id: biomarkers, title: "New biomarkers" }
+  - { id: glycemia, title: "Glycemic control and drugs in CKD" }
+  - { id: bp, title: "Blood pressure, RAAS and mineralocorticoid receptor blockers" }
+  - { id: sglt2, title: "SGLT2 inhibitors and GLP-1 agonists" }
+  - { id: future, title: "Future treatments and the holistic approach" }
+items:
+  # ---------- p425-426: epidemiology ----------
+  - id: neph.L13.001
+    kind: cloze
+    topic: epidemiology
+    text: "In 2021, {{c1::537 million}} people ({{c2::11%}} of the world) had diabetes, expected to reach {{c3::783 million}} (12%) by 2045."
+    src: { page: 425, quote: "In 2021, 537 million people worldwide (11% of the global population) had diabetes, and this number is expected to increase to 783 million (12%)" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L13.002
+    kind: card
+    topic: epidemiology
+    front: What mainly drives the global rise in diabetes?
+    back: The increase in type 2 diabetes mellitus.
+    src: { page: 425, quote: "has risen dramatically, owing mainly to the increase in type 2 diabetes mellitus." }
+    status: unverified
+  - id: neph.L13.003
+    kind: cloze
+    topic: epidemiology
+    text: "About {{c1::20-50%}} of patients with T2DM ultimately develop DKD."
+    src: { page: 425, quote: "Approximately 20–50% of patients with T2DM will ultimately develop DKD." }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L13.004
+    kind: cloze
+    topic: epidemiology
+    text: "DKD is the {{c1::leading cause}} of CKD and end-stage kidney disease, accounting for {{c2::50%}} of cases."
+    src: { page: 425, quote: "DKD is the leading cause of chronic kidney disease and end-stage kidney disease, accounting for 50% of cases." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L13.005
+    kind: card
+    topic: epidemiology
+    front: Besides kidney failure, what does DKD cause?
+    back: High cardiovascular morbidity and mortality, and lower health-related quality of life.
+    src: { page: 425, quote: "DKD results in high cardiovascular morbidity and mortality, and decreases patients‘ health-related quality of life." }
+    status: unverified
+  - id: neph.L13.006
+    kind: cloze
+    topic: epidemiology
+    text: "DKD develops in nearly {{c1::half}} of patients with T2DM and {{c2::one-third}} of those with T1DM during their lifetime."
+    src: { page: 425, quote: "Diabetic kidney disease develops in nearly half of patients with T2DM and one-third of those with T1DM during their lifetime." }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L13.007
+    kind: cloze
+    topic: epidemiology
+    text: "Glomerular hyperfiltration occurs within {{c1::1 to 5 years}} of T1DM and is present in {{c2::70%}} of T1DM and {{c3::50%}} of T2DM."
+    src: { page: 425, quote: "Glomerular hyperfiltration occurs within 1 to 5 years of T1DM and is present in 70% of those with T1DM and 50% of those with T2DM." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L13.008
+    kind: card
+    topic: epidemiology
+    front: Why is glomerular hyperfiltration thought to matter in diabetes?
+    back: It is hypothesized to predispose to irreversible nephron damage, starting and driving progression of diabetic kidney disease.
+    src: { page: 425, quote: "Glomerular hyperfiltration classically has been hypothesized to predispose towards irreversible nephron damage" }
+    status: unverified
+  # ---------- p425-426: definition ----------
+  - id: neph.L13.009
+    kind: card
+    topic: definition
+    front: DKD versus diabetic nephropathy (KDIGO)?
+    back: DKD is a clinical diagnosis, CKD in a person with diabetes; DN is reserved for the histologic glomerular changes on biopsy.
+    src: { page: 426, quote: "Whereas the term DN is exclusively reserved for the histologic diagnosis of glomerular changes observed on biopsy." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L13.010
+    kind: cloze
+    topic: definition
+    text: "DKD = CKD in diabetes with persistent (at least {{c1::3 months}}) albuminuria (ACR {{c2::≥30 mg/g}}) and/or eGFR {{c3::<60}} mL/min/1.73 m²."
+    src: { page: 426, quote: "(albumin-to-creatine ratio ≥ 30 mg/g) and/or low estimated glomerular filtration rate (eGFR < 60 mL/min/1.73 m2) in a person with diabetes." }
+    status: unverified
+    tags: [numbers, high-yield]
+  # ---------- p426-427: pathogenesis ----------
+  - id: neph.L13.011
+    kind: card
+    topic: pathogenesis
+    front: Hyperfiltration in diabetes reflects what hemodynamic change?
+    back: Increased intraglomerular capillary pressure.
+    src: { page: 426, quote: "Hyperfiltration is thought to be a manifestation of increased intraglomerular capillary pressure" }
+    status: unverified
+  - id: neph.L13.012
+    kind: cloze
+    topic: pathogenesis
+    text: "Glomerular hyperfiltration is a GFR of {{c1::120 to 180}} mL/min/1.73 m², or more than {{c2::two standard deviations}} above the age-matched mean."
+    src: { page: 426, quote: "defined as a GFR from 120 to 180 mL/min/173 m2, or an absolute increase in GFR of more than two standard deviations" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L13.013
+    kind: enumerate
+    topic: pathogenesis
+    prompt: Four pathways from hyperglycemia to diabetic kidney disease (Figure, p427)?
+    points:
+      - Renal hemodynamic changes
+      - Activation of RAAS
+      - Ischemia and inflammation
+      - Oxidative stress
+    pass: 4
+    src: { page: 427, quote: "Renal hemodynamic changes Activation of RAAS Ischemia and Inflammation Oxidative stress" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L13.014
+    kind: table
+    topic: pathogenesis
+    title: Hyperglycemia pathways to DKD (Figure, p427)
+    columns: [Pathway, Mediators, Result]
+    rows:
+      - [Renal hemodynamic changes, "IGF-1, TGF-β, VEGF, PG, glucagon, ET-1, SGLT2", "Efferent constriction, glomerular hypertension, hypertrophy, sclerosis"]
+      - [Activation of RAAS, "ROS, TGF-β, Ang II, aldosterone", "Podocyte injury, decreased HIF stability, proteinuria"]
+      - [Ischemia and inflammation, "AGEs, TNF-α, NF-κB", "Podocyte injury and tubulointerstitial fibrosis"]
+      - [Oxidative stress, "JAK/STAT, VEGF, MCP-1", "Tubulointerstitial fibrosis, tubular atrophy, mesangial expansion, ECM accumulation"]
+    blanks: [[0, 2], [1, 1], [2, 1], [3, 2]]
+    src: { page: 427, quote: "Efferent arteriolar constriction Glomerular hypertension Glomerular hypertrophy Glomerular sclerosis" }
+    status: unverified
+  - id: neph.L13.015
+    kind: order
+    topic: pathogenesis
+    prompt: Order the hemodynamic chain in the lower figure on p427.
+    steps:
+      - Increased glucose load on the kidney
+      - Increased tubular reabsorption
+      - Less NaCl delivered to the distal tubule
+      - Initial glomerular hyperfiltration
+      - Shear stress on the glomerulus
+      - Mesangial matrix expansion, podocyte loss, tubular fibrosis
+    src: { page: 427, quote: "Glucose load on kidney Tubule reabsorption NaCl to distal tubule Initial Glomerular hyperfilteration Sheer Stress on glomerulus" }
+    status: unverified
+  - id: neph.L13.016
+    kind: enumerate
+    topic: pathogenesis
+    prompt: Metabolic pathways fed by oxidative stress in the p427 figure?
+    points:
+      - Polyol pathway flux
+      - AGE formation
+      - PKC activation
+      - Hexosamine flux
+    pass: 3
+    src: { page: 427, quote: "Polyol pathway Flux AGE formation PKC Activation Hexosmine Flux" }
+    status: unverified
+  # ---------- p428-430: pathology ----------
+  - id: neph.L13.017
+    kind: card
+    topic: pathology
+    front: Classic light microscopy finding in diabetic nephropathy?
+    back: Mesangial expansion from increased mesangial matrix, diffuse at first and nodular later (Kimmelstiel-Wilson nodules).
+    src: { page: 428, quote: "Classic findings include mesangial expansion mainly due to increased mesangial matrix, which can be diffuse and, as kidney disease progresses, more typically nodular" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L13.018
+    kind: card
+    topic: pathology
+    front: Describe a Kimmelstiel-Wilson nodule.
+    back: A round, hypocellular matrix core surrounded by patent capillary loops, like a sunflower.
+    src: { page: 428, quote: "The nodules are round with a hypocellular matrix core surrounded by patent capillary loops, resembling a sunflower." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L13.019
+    kind: card
+    topic: pathology
+    front: What capillary lesion is often seen with mesangiolysis or nodules?
+    back: Microaneurysms of glomerular capillaries.
+    src: { page: 428, quote: "Microaneurysms of glomerular capillaries are often seen along with mesangiolysis or nodules." }
+    status: unverified
+  - id: neph.L13.020
+    kind: card
+    topic: pathology
+    front: Which sclerosis pattern is common in late diabetic nephropathy?
+    back: Segmental glomerulosclerosis, especially at the tubular outlet (tip lesion).
+    src: { page: 429, quote: "Segmental glomerulosclerosis, especially at the tubular outlet (ie, tip lesion), is common in later stages of diabetic nephropathy." }
+    status: unverified
+  - id: neph.L13.021
+    kind: card
+    topic: pathology
+    front: Typical immunofluorescence in diabetic nephropathy?
+    back: Diffuse linear accentuation of glomerular and tubular basement membranes with IgG (κ and λ) and albumin.
+    src: { page: 429, quote: "Diffuse linear accentuation of glomerular and tubular basement membranes with IgG (and κ and λ light chains) and albumin is typical." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L13.022
+    kind: card
+    topic: pathology
+    front: Nonspecific immunofluorescence staining in advanced diabetic nephropathy?
+    back: Segmental staining of hyaline deposits or sclerotic areas for IgM, C3 and C1q.
+    src: { page: 429, quote: "Nonspecific segmental staining of hyaline deposits or glomerular sclerotic regions for IgM, C3, and C1q is common in advanced disease." }
+    status: unverified
+  - id: neph.L13.023
+    kind: card
+    topic: pathology
+    front: Earliest structural change in diabetic nephropathy on electron microscopy?
+    back: Diffuse thickening of the glomerular basement membranes.
+    src: { page: 429, quote: "Diffuse thickening of GBMs is usually the earliest structural change." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L13.024
+    kind: enumerate
+    topic: pathology
+    prompt: Electron microscopy findings in diabetic nephropathy?
+    points:
+      - Diffuse GBM thickening (earliest)
+      - Thickened tubular basement membranes of nonatrophic tubules
+      - Mesangial expansion from matrix accumulation
+      - No immune complexes
+      - Variable podocyte foot process effacement, especially late
+    pass: 4
+    src: { page: 429, quote: "Mesangial regions are expanded, predominantly due to accumulation of mesangial matrix. There are no immune complexes." }
+    status: unverified
+  - id: neph.L13.025
+    kind: mcq
+    topic: pathology
+    stem: A biopsy from a man with 20 years of diabetes shows round acellular nodules ringed by open capillary loops, linear IgG along the GBM, and on EM thick GBMs without deposits. Which statement is true?
+    options:
+      - These are Kimmelstiel-Wilson nodules; the linear IgG is typical, not anti-GBM disease
+      - Linear IgG means anti-GBM disease and needs plasmapheresis
+      - Missing immune deposits rule out diabetic nephropathy
+      - Nodules are the earliest change of diabetic nephropathy
+      - The tip lesion is the earliest EM change
+    answer: 0
+    why:
+      - "Correct: sunflower nodules, linear IgG/albumin accentuation and no immune complexes are classic DN (p428-429)."
+      - Linear IgG with albumin is typical of DN (p429).
+      - DN has no immune complexes on EM.
+      - Nodules come later; GBM thickening is earliest.
+      - The tip lesion is a late finding; GBM thickening is earliest.
+    src: { page: 429, quote: "Diffuse thickening of GBMs is usually the earliest structural change." }
+    status: unverified
+  # ---------- p430-431: stages ----------
+  - id: neph.L13.026
+    kind: table
+    topic: stages
+    title: Classic stages of DKD
+    columns: [Stage, Timing, Key features]
+    rows:
+      - [Hypertrophy-hyperfunction, "0-2 years", "Big glomeruli and kidneys; GFR >150 mL/min; microalbuminuria reversible with insulin"]
+      - [Latent nephropathy, "2-5 years", "GFR normal or high; histologic lesions; microalbuminuria only with exercise or ketosis"]
+      - [Microalbuminuria, "5-15 years", "Persistent 30-300 mg/24 h, below dipstick detection; high risk of overt nephropathy"]
+      - [Overt nephropathy, "15-25 years", "Proteinuria >0.5 g/day; ESRD 5-10 years later"]
+    blanks: [[0, 1], [1, 2], [2, 2], [3, 1], [3, 2]]
+    src: { page: 431, quote: "Proteinuria or overt diabetic nephropathy (15-25y) proteinuria (>0.5g/D) associated with ESRD 5-10 years after development of overt nephropathy" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L13.027
+    kind: card
+    topic: stages
+    front: Features of the hypertrophy-hyperfunction stage (0-2 years)?
+    back: Increased glomerular and kidney size, hyperfiltration (GFR >150 mL/min), and microalbuminuria reversible with insulin.
+    src: { page: 430, quote: "Hypertrophy hyperfunction (0-2y)1. Increased glomerular and kidney size hyperfiltration (GFR>150ml/min)3. Reversible microalbuminuria with insulin therapy." }
+    status: unverified
+  - id: neph.L13.028
+    kind: card
+    topic: stages
+    front: Which hormonal factors drive the early hyperfunction stage?
+    back: Hyperglycemia, glucagon and growth hormone.
+    src: { page: 430, quote: "(hyperglycemia, glucagon, growth hormone)" }
+    status: unverified
+  - id: neph.L13.029
+    kind: card
+    topic: stages
+    front: In latent nephropathy (2-5 years), when may microalbuminuria appear?
+    back: Only with exercise or ketosis; GFR is normal or high normal with histological lesions.
+    src: { page: 431, quote: "Latent nephropathy (2-5y) GFR normal or high normal histological lesions, microalbuminuria may occur with exercise or ketosis" }
+    status: unverified
+  - id: neph.L13.030
+    kind: cloze
+    topic: stages
+    text: "Microalbuminuria stage ({{c1::5-15}} years): persistent {{c2::30-300 mg/24 hour}}, below dipstick detection."
+    src: { page: 431, quote: "Microalbuminuria (5-15years) persisten microalbuminuria ( 30-300 mg/24 hour below limit of detection by dipsticks)" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L13.031
+    kind: cloze
+    topic: stages
+    text: "Overt nephropathy ({{c1::15-25}} years): proteinuria above {{c2::0.5 g/day}}, with ESRD {{c3::5-10 years}} later."
+    src: { page: 431, quote: "Proteinuria or overt diabetic nephropathy (15-25y) proteinuria (>0.5g/D) associated with ESRD 5-10 years after development of overt nephropathy" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L13.032
+    kind: card
+    topic: stages
+    front: How can the course differ in type 2 diabetes?
+    back: It may be shorter; patients may present with established nephropathy, hypertension and falling kidney function, and nephrotic syndrome may occur.
+    src: { page: 431, quote: "In type II course may be shorter and patients may present with established nephropathy, hypertension and progressive loss of renal function" }
+    status: unverified
+  - id: neph.L13.033
+    kind: card
+    topic: stages
+    front: Do most diabetics follow the classic albuminuric course?
+    back: "No: many T1DM and most T2DM do not; many have CKD without albuminuria, and albuminuria can regress."
+    src: { page: 431, quote: "Many patients with T1DM and most with T2DM do not follow the classic course of DKD." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L13.034
+    kind: card
+    topic: stages
+    front: What does regression of albuminuria in diabetes tell us?
+    back: Raised urinary albumin excretion does not necessarily mean progressive nephropathy.
+    src: { page: 431, quote: "indicating that elevated urinary albumin excretion does not imply progressive nephropathy" }
+    status: unverified
+  # ---------- p431-432: screening ----------
+  - id: neph.L13.035
+    kind: cloze
+    topic: screening
+    text: "Screen for DKD {{c1::annually}}: from {{c2::diagnosis}} in T2DM and from {{c3::5 years after onset}} in T1DM."
+    src: { page: 431, quote: "Annually screening for DKD is recommended from the time of diagnosis of T2DM and 5 years after the onset of T1DM." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L13.036
+    kind: card
+    topic: screening
+    front: Can a urine dipstick detect microalbuminuria?
+    back: "No: microalbuminuria (30-300 mg/24 h) is below the dipstick's limit of detection."
+    src: { page: 431, quote: "persisten microalbuminuria ( 30-300 mg/24 hour below limit of detection by dipsticks)" }
+    status: unverified
+  - id: neph.L13.037
+    kind: enumerate
+    topic: screening
+    prompt: Three ways to screen for microalbuminuria?
+    points:
+      - 24-hour collection with creatinine (gives creatinine clearance too)
+      - Timed (4-hour or overnight) collection
+      - Albumin/creatinine ratio on a random spot sample
+    pass: 3
+    src: { page: 431, quote: "Timed (four-hour or overnight) collection; or measurement of the albumin/creatinine ratio in a random spot collection." }
+    status: unverified
+  - id: neph.L13.038
+    kind: cloze
+    topic: screening
+    text: "Microalbuminuria needs {{c1::two of three}} ACR samples over {{c2::3-6 months}} to be {{c3::30-300 mg/g}}."
+    src: { page: 432, quote: "must be abnormal (30 mg albumin per g creatinine to 300 mg albumin per g creatinine) before diagnosis of microalbuminuria can be made." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L13.039
+    kind: card
+    topic: screening
+    front: Why must two of three ACR samples be abnormal?
+    back: Because urinary albumin excretion varies.
+    src: { page: 431, quote: "Because of variability in urinary albumin excretion, two of three urine albumin/creatinine ratio specimens" }
+    status: unverified
+  - id: neph.L13.040
+    kind: cloze
+    topic: screening
+    text: "Macroalbuminuria (more than {{c1::300 mg/g}}) on a {{c2::single}} sample confirms the diagnosis without complicating factors."
+    src: { page: 432, quote: "Macroalbuminuria (more than 300 mg per g) on a single sample can confirm diagnosis in the absence of complicating factors." }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L13.041
+    kind: card
+    topic: screening
+    front: Besides albuminuria, what else must DKD screening include?
+    back: Serum creatinine and eGFR, calculated with the CKD-EPI equation.
+    src: { page: 432, quote: "Screening for DKD should also include measurement of serum creatinine and eGFR." }
+    status: unverified
+  - id: neph.L13.042
+    kind: cloze
+    topic: screening
+    text: "In the CKD-EPI creatinine equation, κ is {{c1::0.7}} for females and {{c2::0.9}} for males."
+    src: { page: 432, quote: "κ is 0.7 for females and 0.9 for males, α is -0.329 for females and - 0.411 for males" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L13.043
+    kind: card
+    topic: screening
+    front: Which variables does the CKD-EPI creatinine equation in the lecture use?
+    back: Serum creatinine, age, sex (female factor 1.018) and race (black factor 1.159).
+    src: { page: 432, quote: "1.018 [if female] × 1.159 [if black]" }
+    status: unverified
+    update:
+      text: "The 2021 CKD-EPI creatinine equation removed race; KDIGO 2024 recommends it. Write the book's equation in the exam."
+      ref: "CKD-EPI 2021; KDIGO 2024 CKD guideline"
+  - id: neph.L13.044
+    kind: card
+    topic: screening
+    front: Which serum marker does the lecture call more accurate than creatinine?
+    back: Cystatin C (with its own CKD-EPI cystatin C equation).
+    src: { page: 432, quote: "Cystatin C was a more accurate serum marker than serum creatinine." }
+    status: unverified
+  - id: neph.L13.045
+    kind: mcq
+    topic: screening
+    stem: A 52-year-old with T2DM for 3 years has a spot ACR of 85 mg/g at a routine visit. eGFR 92. What is the right conclusion?
+    options:
+      - Repeat the ACR; two of three samples over 3-6 months must be 30-300 mg/g
+      - Diagnose DKD now from this single result
+      - Diagnose macroalbuminuria
+      - Ignore it; screening starts 5 years after diagnosis in T2DM
+      - Order a kidney biopsy
+    answer: 0
+    why:
+      - "Correct: albumin excretion varies, so microalbuminuria needs 2 of 3 abnormal samples over 3-6 months (p431-432)."
+      - One microalbuminuric sample is not enough.
+      - Macroalbuminuria is >300 mg/g.
+      - In T2DM screening starts at diagnosis; the 5-year delay is for T1DM.
+      - Nothing here suggests an alternative diagnosis.
+    src: { page: 431, quote: "Because of variability in urinary albumin excretion, two of three urine albumin/creatinine ratio specimens collected over a three- to six-month period" }
+    status: unverified
+  - id: neph.L13.046
+    kind: mcq
+    topic: screening
+    stem: A 19-year-old was diagnosed with type 1 diabetes 2 years ago. When should annual DKD screening begin?
+    options:
+      - 5 years after the onset of diabetes
+      - Now, at once
+      - At age 30
+      - Only when hypertension appears
+      - Only after retinopathy is found
+    answer: 0
+    why:
+      - "Correct: T1DM screening starts 5 years after onset (p431)."
+      - Immediate screening is for T2DM.
+      - Age is not the trigger.
+      - Hypertension is not the trigger.
+      - Retinopathy is not the trigger.
+    src: { page: 431, quote: "Annually screening for DKD is recommended from the time of diagnosis of T2DM and 5 years after the onset of T1DM." }
+    status: unverified
+  # ---------- p437: lab evaluation and alternatives ----------
+  - id: neph.L13.047
+    kind: table
+    topic: alternative
+    title: Laboratory evaluation of DKD (Table 2)
+    columns: [Test, Microalbuminuria, Macroalbuminuria]
+    rows:
+      - [24-hour urine, "30-300 mg/24 h", ">300 mg/24 h"]
+      - [Spot urine ACR, "30-300 mg/g", ">300 mg/g"]
+      - [Timed 4-hour or overnight urine, "20-200 mcg/min", ">200 mcg/min"]
+    blanks: [[0, 1], [1, 1], [2, 1], [2, 2]]
+    src: { page: 437, quote: "Laboratory Evaluation of Diabetic Kidney Disease" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L13.048
+    kind: card
+    topic: alternative
+    front: According to Table 2, when is a renal biopsy performed in diabetes, and what does it show?
+    back: If the cause of kidney disease is unclear (it risks bleeding); EM shows GBM thickening, LM shows mesangial expansion and Kimmelstiel-Wilson nodules.
+    src: { page: 437, quote: "Performed if unclear etiology of kidney disease Procedure has risks of complication, especially bleeding" }
+    status: unverified
+  - id: neph.L13.049
+    kind: card
+    topic: alternative
+    front: Per Table 2, how does eGFR behave over the course of DKD?
+    back: Hyperfiltration raises eGFR early, then it falls as disease progresses.
+    src: { page: 437, quote: "Hyperfiltration occurs early in disease with eGFR, then continues to decrease as disease progresses" }
+    status: unverified
+  - id: neph.L13.050
+    kind: enumerate
+    topic: alternative
+    prompt: Conditions that give a falsely abnormal albumin/creatinine ratio?
+    points:
+      - Congestive heart failure
+      - Exercise within 24 hours of testing
+      - Fever
+      - Infection
+      - Marked hyperglycemia
+      - Menstruation
+    pass: 5
+    src: { page: 437, quote: "Congestive heart failure Exercise within 24 hours of testing Fever Infection Marked hyperglycemia Menstruation" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L13.051
+    kind: enumerate
+    topic: alternative
+    prompt: When should you consider a cause of albuminuria other than DKD?
+    points:
+      - Absence of diabetic retinopathy
+      - Low or rapidly decreasing GFR
+      - More than 30% fall in GFR within 2-3 months of starting ACEi or ARB
+      - Active urinary sediment
+      - Rapidly increasing proteinuria or nephrotic syndrome
+      - Refractory hypertension
+      - Signs or symptoms of another systemic disease
+    pass: 5
+    src: { page: 437, quote: "Absence of diabetic retinopathy Low or rapidly decreasing GFR More than 30% reduction in GFR within two to three months" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L13.052
+    kind: cloze
+    topic: alternative
+    text: "A GFR fall of more than {{c1::30%}} within {{c2::two to three months}} of starting an ACEi or ARB should prompt a search for another diagnosis."
+    src: { page: 437, quote: "More than 30% reduction in GFR within two to three months Of initiation of ACE inhibitor or ARB" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L13.053
+    kind: mcq
+    topic: alternative
+    stem: A 48-year-old with T2DM for 2 years has nephrotic-range proteinuria that rose over 3 months, red cell casts, and no retinopathy on fundoscopy. What is the best next step?
+    options:
+      - Kidney biopsy for an alternative diagnosis
+      - Label it DKD and add finerenone
+      - Repeat ACR in 6 months
+      - Start an SGLT2 inhibitor and reassess yearly
+      - Order cystatin C
+    answer: 0
+    why:
+      - "Correct: no retinopathy, active sediment and rapidly rising proteinuria suggest another cause; biopsy is for unclear etiology (p437)."
+      - These red flags argue against DKD.
+      - Waiting delays a treatable diagnosis.
+      - Treats DKD without excluding something else.
+      - Cystatin C measures GFR, not the cause.
+    src: { page: 437, quote: "Presence of active urinary sediment Rapidly increasing proteinuria or nephrotic syndrome Refractory hypertension" }
+    status: unverified
+  - id: neph.L13.054
+    kind: mcq
+    topic: alternative
+    stem: A man with T2DM gives a spot urine sample the morning after a marathon. ACR is 70 mg/g; he also has a fever from flu. What do you do?
+    options:
+      - Repeat the test after recovery and no exercise for 24 hours
+      - Diagnose microalbuminuria
+      - Start an ACE inhibitor today
+      - Do a 24-hour collection now
+      - Refer for biopsy
+    answer: 0
+    why:
+      - "Correct: exercise within 24 h and fever falsely raise ACR (p437)."
+      - The result is unreliable.
+      - Treatment needs a confirmed diagnosis.
+      - The same confounders would affect a 24-hour sample now.
+      - No indication for biopsy.
+    src: { page: 437, quote: "Exercise within 24 hours of testing Fever Infection" }
+    status: unverified
+  # ---------- p433: risk factors ----------
+  - id: neph.L13.055
+    kind: enumerate
+    topic: risk
+    prompt: Non-modifiable risk factors for DKD?
+    points:
+      - Genetic factors
+      - Male sex
+      - Older age
+      - Onset of diabetes between 5-15 years of age
+      - Family history of T2DM or DKD
+      - Insulin resistance
+      - Ethnicity (Black, Hispanic, American Indian, Asian)
+    pass: 5
+    src: { page: 433, quote: "Genetic factors, Male sex, Older age, Onset of diabetes between 5–15 years, Family history of DMT2 or DKD, Insulin resistance" }
+    status: unverified
+  - id: neph.L13.056
+    kind: enumerate
+    topic: risk
+    prompt: Modifiable risk factors for DKD?
+    points:
+      - Obesity
+      - Metabolic syndrome
+      - Poor glycemic control
+      - Hypertension
+      - AKI
+      - Cigarette smoking
+      - Dyslipidemia
+      - Sedentary lifestyle
+      - High salt intake
+    pass: 6
+    src: { page: 433, quote: "Obesity, Metabolic syndrome, Poor glycemic control, Hypertension, AKI, Smoking of cigarettes, Dyslipidemia, Sedentary lifestyle, High salt intake," }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L13.057
+    kind: card
+    topic: risk
+    front: Is AKI a risk factor for DKD, and is it modifiable?
+    back: Yes, the lecture lists AKI among the modifiable risk factors.
+    src: { page: 433, quote: "Hypertension, AKI, Smoking of cigarettes," }
+    status: unverified
+  # ---------- p433-436: biomarkers ----------
+  - id: neph.L13.058
+    kind: card
+    topic: biomarkers
+    front: Why do we need biomarkers beyond albuminuria in DKD?
+    back: Significant glomerular damage has already occurred by the time albuminuria appears, and GFR can fall without albuminuria.
+    src: { page: 433, quote: "significant glomerular damage has already occurred by the time albuminuria is apparent." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L13.059
+    kind: card
+    topic: biomarkers
+    front: Is a falling GFR in diabetes always accompanied by more albuminuria?
+    back: No.
+    src: { page: 433, quote: "A decrease in the renal function of a diabetic patient is not always accompanied by increased albuminuria." }
+    status: unverified
+  - id: neph.L13.060
+    kind: enumerate
+    topic: biomarkers
+    prompt: Non-albumin proteinuria (NAP) markers in the lecture?
+    points:
+      - α-1 microglobulin
+      - β-2 microglobulin
+      - Immunoglobulin G
+      - Cystatin C
+      - Nephrin
+      - Transferrin
+      - Metalloproteinase-9
+      - Tissue inhibitor of metalloproteinases-1
+    pass: 6
+    src: { page: 434, quote: "Non –albumin proteinuria (NAP): α-1 microglobulin. β-2 macroglobulin. Immunoglobulin G . Cystatin C." }
+    status: unverified
+  - id: neph.L13.061
+    kind: table
+    topic: biomarkers
+    title: Urinary biomarkers by site of damage (Figure, p434)
+    columns: [Site, Markers]
+    rows:
+      - [Glomerular damage, "Albuminuria, nephrin, matrix metalloproteinase-9"]
+      - [Tubular damage, "α-1 microglobulin, β-2 microglobulin, cystatin C"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 434, quote: "Non –albumin proteinuria (NAP): α-1 microglobulin. β-2 macroglobulin. Immunoglobulin G . Cystatin C." }
+    status: unverified
+  - id: neph.L13.062
+    kind: card
+    topic: biomarkers
+    front: Which urinary proteins rose before microalbuminuria in normoalbuminuric T2DM and may mark early DN?
+    back: Transferrin, together with ceruloplasmin and immunoglobulin G.
+    src: { page: 435, quote: "As increased urinary transferrin was found in type 2 DM normoalbuminuric patients, concomitantly with urinary ceruloplasmin and immunoglobulin G" }
+    status: unverified
+  - id: neph.L13.063
+    kind: card
+    topic: biomarkers
+    front: Why can urinary type IV collagen be an early marker of DN?
+    back: Type IV collagen is part of the GBM and mesangial matrix, both injured in DN.
+    src: { page: 435, quote: "Type IV collagen is a component of the GBM and of the mesangial matrix." }
+    status: unverified
+  - id: neph.L13.064
+    kind: card
+    topic: biomarkers
+    front: What is nephrin, and why does nephrinuria occur in diabetes?
+    back: A transmembrane protein of the slit diaphragm; diabetic podocyte dysfunction injures the slit diaphragm (DN is a podocytopathy).
+    src: { page: 436, quote: "In DM podocyte dysfunction is present. DN is considered a podocytopathy. Injury of the slit diaphragm leads to nephrinuria." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L13.065
+    kind: card
+    topic: biomarkers
+    front: When can nephrinuria appear relative to microalbuminuria?
+    back: Before microalbuminuria in some T1DM patients, and in some normoalbuminuric T2DM patients.
+    src: { page: 436, quote: "Nephrinuria can occur in some T1DM patients prior to microalbuminuria." }
+    status: unverified
+  - id: neph.L13.066
+    kind: cloze
+    topic: biomarkers
+    text: "Metabolomics measures metabolites of small molecular mass ({{c1::<1,500 Da}}), functional readouts that closely reflect the {{c2::phenotype}}."
+    src: { page: 436, quote: "Metabolomics identifies and quantifies metabolites that are small molecular mass (<1,500 Da) end products of biochemical processes." }
+    status: unverified
+  - id: neph.L13.067
+    kind: cloze
+    topic: biomarkers
+    text: "MicroRNAs are small non-coding molecules of about {{c1::22}} nucleotides that work in {{c2::RNA silencing}} and post-transcriptional regulation."
+    src: { page: 436, quote: "A small non-coding molecule (containing about 22 nucleotide) functions in RNA silencing and post-transcriptional regulation of gene expression." }
+    status: unverified
+  - id: neph.L13.068
+    kind: card
+    topic: biomarkers
+    front: Why could microRNAs serve as DKD biomarkers?
+    back: They exist in plasma, serum and urine.
+    src: { page: 436, quote: "The existence of microRNAs in plasma, serum, and urine suggests their possibility to be biomarkers in diabetic kidney diseases." }
+    status: unverified
+  # ---------- p438: classic treatment and glycemia ----------
+  - id: neph.L13.069
+    kind: enumerate
+    topic: glycemia
+    prompt: Classic treatment pillars of DKD?
+    points:
+      - Glycemic control
+      - Blood pressure control
+      - Treatment of dyslipidemia
+      - Management of anemia
+      - Management of hyperphosphatemia
+    pass: 4
+    src: { page: 438, quote: "Glycemic control. Blood pressure control. Treatment of dyslipidemia. Management of anemia. Management of Hyperphosphatemia." }
+    status: unverified
+  - id: neph.L13.070
+    kind: cloze
+    topic: glycemia
+    text: "The ADA recommends A1C {{c1::<7%}} for many adults; the ACP 2018 suggests {{c2::7% to 8%}} may be more appropriate."
+    src: { page: 438, quote: "2018 guideline from the American College of Physicians suggests that a target of 7% to 8% may be more appropriate." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L13.071
+    kind: card
+    topic: glycemia
+    front: What is the cost of a lower A1C target (<6%) in DKD?
+    back: Less DKD, but more hypoglycemia, polypharmacy and increased mortality.
+    src: { page: 438, quote: "has been associated with a reduction in DKD but at the cost of more hypoglycemic events, polypharmacy, and increased mortality." }
+    status: unverified
+  - id: neph.L13.072
+    kind: card
+    topic: glycemia
+    front: Why can A1C be falsely low in CKD stage 4-5, and what is better?
+    back: Shortened red-cell survival and chronic anemia; routine glucose monitoring is more accurate.
+    src: { page: 438, quote: "A1C measurements in patients with chronic kidney disease stage 4 or 5 may be falsely low because of shortened red-cell survival time" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L13.073
+    kind: mcq
+    topic: glycemia
+    stem: A woman with DKD, eGFR 18 and Hb 8.9 g/dL has an A1C of 5.8% but frequent fingerstick readings above 250 mg/dL. Why the mismatch?
+    options:
+      - Shortened red-cell survival and anemia make A1C falsely low
+      - Her glucose meter is wrong; trust the A1C
+      - Uremia falsely raises A1C
+      - A1C is accurate at any eGFR
+      - She has hypoglycemia unawareness
+    answer: 0
+    why:
+      - "Correct: in CKD 4-5 A1C may be falsely low; use glucose monitoring (p438)."
+      - In this setting glucose monitoring is the more accurate test.
+      - The lecture says falsely low, not high.
+      - A1C is unreliable in stage 4-5.
+      - Her readings are high, not low.
+    src: { page: 438, quote: "In these circumstances, routine glucose monitoring may be more accurate for testing and treatment planning." }
+    status: unverified
+  - id: neph.L13.074
+    kind: table
+    topic: glycemia
+    title: Glucose-lowering drugs by CKD stage (Figure 1, p444)
+    columns: [Drug, Use down to]
+    rows:
+      - [Insulin, "All stages including hemodialysis (dose reduction)"]
+      - [Repaglinide, "All stages including hemodialysis"]
+      - ["Sitagliptin, saxagliptin, linagliptin", "Stage 3b (dose reduction), then dotted (caution) to dialysis"]
+      - [Pioglitazone, "Stage 1-2, then dotted (caution) to dialysis"]
+      - [Nateglinide, "Stage 4 (dose reduction)"]
+      - [Metformin, "Stage 1-2, dotted (dose reduction) through stage 3a"]
+      - ["Gliclazide, vildagliptin, liraglutide", "Stage 3a"]
+      - ["Glibenclamide, glimepiride, acarbose", "Stage 1-2 only"]
+    blanks: [[0, 1], [5, 1], [7, 1]]
+    src: { page: 444, quote: "Insulin Repaglinide Sitagliptin Saxagliptin Linagliptin Pioglitazone Nateglinide Exenatide Metformin Gliclazide Vildagliptin Liraglutide Glibenclamide Glimepiride Acarbose" }
+    status: unverified
+  - id: neph.L13.075
+    kind: card
+    topic: glycemia
+    front: Which glucose-lowering drugs in Figure 1 (p444) can be used in hemodialysis?
+    back: Insulin (with dose reduction) and repaglinide; DPP-4 inhibitors and pioglitazone continue with caution.
+    src: { page: 444, quote: "Insulin Repaglinide Sitagliptin" }
+    status: unverified
+  - id: neph.L13.076
+    kind: card
+    topic: glycemia
+    front: Which sulfonylureas and other agents are limited to CKD stage 1-2 in Figure 1?
+    back: Glibenclamide, glimepiride and acarbose.
+    src: { page: 444, quote: "Glibenclamide Glimepiride Acarbose" }
+    status: unverified
+  - id: neph.L13.077
+    kind: table
+    topic: glycemia
+    title: Metformin dosing by eGFR (Figure 27, KDIGO)
+    columns: [eGFR, Action]
+    rows:
+      - ["≥60", "Usual dose; monitor kidney function at least annually"]
+      - ["45-59", "Continue same dose (reduce in certain conditions); monitor every 3-6 months"]
+      - ["30-44", "Start at half dose (max half dose); halve the dose if already on it"]
+      - ["<30", "Stop metformin; do not initiate"]
+    blanks: [[2, 1], [3, 1]]
+    src: { page: 444, quote: "Suggested approach in dosing metformin based on the level of kidney function." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: neph.L13.078
+    kind: card
+    topic: glycemia
+    front: When should vitamin B12 be monitored on metformin (Figure 27)?
+    back: Annually if on metformin for more than 4 years or at risk of B12 deficiency.
+    src: { page: 444, quote: "Monitor vitamin B12 Annually if on metformin for more than 4 years or at risk of vitamin B12 deficiency" }
+    status: unverified
+  - id: neph.L13.079
+    kind: card
+    topic: glycemia
+    front: Metformin immediate-release start and titration (Figure 27)?
+    back: 500 mg or 850 mg once daily, up by 500 or 850 mg/day every 7 days to the maximum; use extended release if GI side effects.
+    src: { page: 444, quote: "Initial 500 mg or 850 mg once daily Titrate upwards by 500 mg/d or 850 mg/d every 7 days until maximum dose" }
+    status: unverified
+  - id: neph.L13.080
+    kind: table
+    topic: glycemia
+    title: KDIGO algorithm for glucose-lowering drugs in T2D and CKD (Figure 23)
+    columns: [Step, What]
+    rows:
+      - [Lifestyle, "Physical activity, nutrition, weight loss"]
+      - [First-line, "Metformin + SGLT2 inhibitor"]
+      - [Metformin limits, "eGFR <45 reduce dose; <30 or dialysis discontinue"]
+      - [SGLT2i limits, "eGFR <20 do not initiate; dialysis discontinue"]
+      - [Additional, "GLP-1 RA preferred; then DPP-4i, insulin, sulfonylurea, TZD, alpha-glucosidase inhibitor"]
+    blanks: [[1, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 443, quote: "Treatment algorithm for selecting glucose-lowering drugs for patients with type 2 diabetes (T2D) and chronic kidney disease (CKD)." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L13.081
+    kind: mcq
+    topic: glycemia
+    stem: A man with T2DM has eGFR 26 mL/min/1.73 m² and ACR 600 mg/g. He takes metformin 2 g/day. Best change per Figures 23 and 27?
+    options:
+      - Stop metformin; continue or start an SGLT2 inhibitor; add a GLP-1 RA if needed
+      - Halve the metformin dose and avoid SGLT2 inhibitors
+      - Continue full-dose metformin
+      - Switch to glibenclamide
+      - Start acarbose
+    answer: 0
+    why:
+      - "Correct: eGFR <30 stops metformin; SGLT2i can start if eGFR ≥20; GLP-1 RA is the preferred add-on (p443-444)."
+      - Halving is for eGFR 30-44; SGLT2i is only withheld below 20.
+      - Metformin is contraindicated below 30.
+      - Glibenclamide is for stage 1-2 only.
+      - Acarbose is for stage 1-2 only.
+    src: { page: 444, quote: "Stop metformin; do not initiate metformin" }
+    status: unverified
+  # ---------- p438-440: BP and MRA ----------
+  - id: neph.L13.082
+    kind: cloze
+    topic: bp
+    text: "JNC 8 recommended a BP of {{c1::140/90}} mm Hg for diabetes or CKD; the ADA targets {{c2::130/80}} mm Hg with albuminuria."
+    src: { page: 438, quote: "Specifically, 130/80 mm Hg is considered the target blood pressure in subjects with albuminuria." }
+    status: unverified
+    tags: [numbers, high-yield]
+    update:
+      text: "KDIGO 2021 BP guideline suggests a systolic target below 120 mm Hg (standardized office BP) when tolerated in CKD, including diabetes. The book's targets are the exam answer."
+      ref: "KDIGO 2021 blood pressure in CKD guideline"
+  - id: neph.L13.083
+    kind: card
+    topic: bp
+    front: What is "aldosterone breakthrough"?
+    back: Albuminuria benefit from adding a mineralocorticoid receptor blocker to an ACEi or ARB in DKD.
+    src: { page: 439, quote: "in combination with ACE inhibitors or ARBs might have benefits on albuminuria in diabetic kidney disease, a phenomenon referred to as ―aldosterone breakthrough‖." }
+    status: unverified
+  - id: neph.L13.084
+    kind: card
+    topic: bp
+    front: Effect of spironolactone added to an ACEi or ARB in DKD?
+    back: Albuminuria fell significantly compared with placebo.
+    src: { page: 439, quote: "The combination of spironolactone with an ACE inhibitor or ARB significantly decreased albuminuria compared with the results of placebo." }
+    status: unverified
+  - id: neph.L13.085
+    kind: card
+    topic: bp
+    front: Effect of adding finerenone to an ACEi or ARB in diabetic nephropathy?
+    back: More patients improved their urinary ACR than with placebo.
+    src: { page: 439, quote: "More patients with diabetic nephropathy who received an ACE inhibitor or an ARB as well as finerenone showed an improvement in urinary ACR" }
+    status: unverified
+  - id: neph.L13.086
+    kind: cloze
+    topic: bp
+    text: "FIDELIO-DKD: finerenone {{c1::10 mg}} if eGFR <60 and {{c2::20 mg}} if eGFR ≥60, added to ACEi or ARB (not both)."
+    src: { page: 440, quote: "Finerenone 10mg if eGFR <60mL/min/1.73m2 Finerenone 20mg if eGFR ≥60mL/min/1.73m2" }
+    status: unverified
+    tags: [numbers]
+  - id: neph.L13.087
+    kind: card
+    topic: bp
+    front: Main result of FIDELIO-DKD?
+    back: In T2D with CKD, finerenone lowered the kidney composite (17.8% vs 21.1%, HR 0.82) and the cardiovascular composite (HR 0.86) versus placebo.
+    src: { page: 440, quote: "In patients with CKD and type 2 diabetes, treatment with finerenone resulted in lower risk of CKD progression and cardiovascular events than placebo." }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L13.088
+    kind: mcq
+    topic: bp
+    stem: A man with T2DM, eGFR 48 and ACR 900 mg/g is on maximum-dose losartan. K is 4.4 mEq/L. Which addition has trial evidence (FIDELIO-DKD) to slow CKD progression?
+    options:
+      - Finerenone 10 mg daily
+      - Lisinopril with losartan (dual RAAS)
+      - Finerenone 20 mg daily
+      - Amiloride
+      - Hydralazine
+    answer: 0
+    why:
+      - "Correct: finerenone 10 mg if eGFR <60, with an ACEi or ARB but not both (p440)."
+      - FIDELIO used ACEi or ARB but not both.
+      - 20 mg is the starting dose only when eGFR ≥60.
+      - Not in the lecture.
+      - Not in the lecture.
+    src: { page: 440, quote: "Treatment with either ACEi or ARB but not both" }
+    status: unverified
+  # ---------- p441-443: SGLT2 and GLP-1 ----------
+  - id: neph.L13.089
+    kind: card
+    topic: sglt2
+    front: How does diabetes cause hyperfiltration at the tubule (Figure, p441)?
+    back: More SGLT2 reabsorption of glucose and sodium, so less distal Na reaches the macula densa, tubuloglomerular feedback falls and GFR rises.
+    src: { page: 441, quote: "Diminshed distal Na delivery and hyperfiltration" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L13.090
+    kind: card
+    topic: sglt2
+    front: How do SGLT2 inhibitors lower intraglomerular pressure?
+    back: More distal Na delivery restores tubuloglomerular feedback, causing afferent arteriolar vasoconstriction, so glomerular hypertension and albuminuria fall.
+    src: { page: 441, quote: "SGLT2 inhibitors induce renal arteriolar vasoconstriction: glomerular hypertension albuminuria" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L13.091
+    kind: cloze
+    topic: sglt2
+    text: "In diabetes filtration rises to about {{c1::120%}}; an SGLT2 inhibitor gives enhanced distal Na delivery and diminished GFR, to about {{c2::90%}} (Figure, p441)."
+    src: { page: 441, quote: "Enhanced distal Na delivery and diminished GFR" }
+    status: unverified
+  - id: neph.L13.092
+    kind: card
+    topic: sglt2
+    front: What did the EMPA-REG OUTCOME kidney analysis show?
+    back: Empagliflozin slowed CKD progression in T2D regardless of drugs that alter intrarenal hemodynamics (ACEi/ARB, diuretics, CCB, NSAIDs).
+    src: { page: 441, quote: "Empagliflozin's renoprotective effects are independent of concomitant medications that may also alter renal hemodynamics" }
+    status: unverified
+  - id: neph.L13.093
+    kind: card
+    topic: sglt2
+    front: "CANVAS: how did canagliflozin's benefit vary with albuminuria?"
+    back: Proportional effects were similar across albuminuria levels, but absolute benefit was greatest with severely increased albuminuria.
+    src: { page: 442, quote: "but absolute benefits are greatest in people with severely increased albuminuria." }
+    status: unverified
+  - id: neph.L13.094
+    kind: card
+    topic: sglt2
+    front: Who was enrolled in DAPA-CKD, and what was the result?
+    back: 4304 CKD patients (eGFR 25-75, ACR 200-5000 mg/g, 67.5% T2D); dapagliflozin 10 mg cut the primary composite (9.2% vs 14.5%) and death.
+    src: { page: 442, quote: "Among patients with chronic kidney disease, the risk of any composite kidney or cardiovascular outcomes or death was significantly lower with dapagliflozin than with placebo." }
+    status: unverified
+  - id: neph.L13.095
+    kind: mcq
+    topic: sglt2
+    stem: Why does an SGLT2 inhibitor cause a small early eGFR dip in DKD?
+    options:
+      - More distal sodium reaches the macula densa, restoring tubuloglomerular feedback and constricting the afferent arteriole
+      - It is directly nephrotoxic to the proximal tubule
+      - It dilates the efferent arteriole like an ACE inhibitor
+      - It causes volume overload
+      - It blocks SGLT1 in the glomerulus
+    answer: 0
+    why:
+      - "Correct: enhanced distal Na delivery diminishes GFR via tubuloglomerular feedback (p441)."
+      - The figure shows a hemodynamic, protective effect.
+      - Efferent dilation is the ACEi/ARB mechanism, not shown here.
+      - SGLT2i cause natriuresis, not overload.
+      - SGLT2 is in the proximal tubule; SGLT1 remains active.
+    src: { page: 441, quote: "Enhanced distal Na delivery and diminished GFR" }
+    status: unverified
+  - id: neph.L13.096
+    kind: enumerate
+    topic: sglt2
+    prompt: Renoprotective effects of GLP-1 (incretin-based therapy) in the p443 figure?
+    points:
+      - Less NADPH oxidase-induced free radicals (via cAMP/PKA)
+      - Vasodilation (more NO, less ROS)
+      - Less inflammation (lower CRP, IL-6, TNF-α)
+      - Less apoptosis via PI3K/AKT, so less renal fibrosis
+    pass: 3
+    src: { page: 443, quote: "Reno- protective effect of GLP-1" }
+    status: unverified
+  - id: neph.L13.097
+    kind: card
+    topic: sglt2
+    front: In the KDIGO algorithm (Figure 23), which add-on drug class is preferred after metformin plus SGLT2i?
+    back: A GLP-1 receptor agonist.
+    src: { page: 443, quote: "Treatment algorithm for selecting glucose-lowering drugs for patients with type 2 diabetes (T2D) and chronic kidney disease (CKD)." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p445-446: future and holistic ----------
+  - id: neph.L13.098
+    kind: enumerate
+    topic: future
+    prompt: Growth factor and vasopeptide targets for future DKD treatment?
+    points:
+      - Insulin-like growth factor-1
+      - Growth hormone
+      - Transforming growth factor-β
+      - VEGF-neutralizing antibodies
+      - Endothelin-1 (ETA) antagonists
+    pass: 4
+    src: { page: 445, quote: "Vascular endothelial growth factor neutralizing antibodies. Endothelin-1 antagonists. (ETA antagonists)" }
+    status: unverified
+  - id: neph.L13.099
+    kind: card
+    topic: future
+    front: Which ETA-selective antagonist showed renoprotection in diabetic nephropathy?
+    back: Atrasentan, a rationale for trials adding ETA antagonists to RAAS blockade.
+    src: { page: 445, quote: "ETA-selective antagonists (Atrasentan) have been shown to provide renoprotective effects" }
+    status: unverified
+  - id: neph.L13.100
+    kind: card
+    topic: future
+    front: Role of TGF-β in DKD, and anti-TGF-β approaches?
+    back: A fibrogenic cytokine key to DKD; anti-TGF-β2 IgG4, antisense ODNs or soluble TGF-β type II receptor were renoprotective in animals.
+    src: { page: 446, quote: "TGF- β, a fibrogenic cytokine plays a key role in the development of DKD." }
+    status: unverified
+  - id: neph.L13.101
+    kind: enumerate
+    topic: future
+    prompt: Biochemical targets for future DKD therapy?
+    points:
+      - Protein kinase C inhibitors
+      - Inhibition of AGE formation
+      - AGE cross-link breakers
+      - Blockade of the receptor for AGE
+    pass: 3
+    src: { page: 446, quote: "Protein kinase C inhibitors. Inhibition of formation of advanced glycation end-products (AGE). AGE cross link breakers. Blockade of receptor for AGE." }
+    status: unverified
+  - id: neph.L13.102
+    kind: table
+    topic: future
+    title: Holistic approach in diabetes and CKD (KDIGO, p446)
+    columns: [Layer, Content]
+    rows:
+      - [Lifestyle, "Healthy diet, physical activity, smoking cessation, weight management"]
+      - [First-line (T2D), "SGLT2i (start if eGFR ≥20, continue until dialysis or transplant); metformin if eGFR ≥30"]
+      - [First-line (all), "RAS inhibitor at maximum tolerated dose if HTN; moderate- or high-intensity statin"]
+      - [Add-on (T2D), "GLP-1 RA for glycemic target; nonsteroidal MRA if ACR ≥30 mg/g and normal potassium"]
+      - [Add-on (all), "DHP CCB and/or diuretic for BP; steroidal MRA for resistant HTN if eGFR ≥45; antiplatelet for ASCVD; ezetimibe, PCSK9i or icosapent ethyl"]
+      - [Reassessment, "Risk factors every 3-6 months"]
+    blanks: [[1, 1], [2, 1], [3, 1], [5, 1]]
+    src: { page: 446, quote: "Holistic approach for improving outcomes in patients with diabetes and chronic kidney disease" }
+    status: unverified
+    tags: [high-yield]
+  - id: neph.L13.103
+    kind: cloze
+    topic: future
+    text: "In the holistic figure, an SGLT2i is started if eGFR {{c1::≥20}} and continued until {{c2::dialysis or transplant}}; nonsteroidal MRA needs ACR {{c3::≥30 mg/g}} and normal K."
+    src: { page: 446, quote: "Holistic approach for improving outcomes in patients with diabetes and chronic kidney disease" }
+    status: unverified
+    tags: [numbers]
+  # ---------- cases and essays ----------
+  - id: neph.L13.104
+    kind: case
+    topic: screening
+    stem: A 58-year-old man has had T2DM for 10 years and hypertension. Routine labs are due.
+    steps:
+      - question: What does yearly DKD screening include?
+        options: ["Urine albumin/creatinine ratio plus serum creatinine with eGFR (CKD-EPI)", "Urine dipstick only", "Kidney ultrasound", "Cystatin C alone"]
+        answer: 0
+        why: "Screening = ACR plus creatinine and CKD-EPI eGFR (p431-432). Dipsticks miss microalbuminuria."
+      - reveal: "ACR 140 and 190 mg/g on two samples 3 months apart; eGFR 52. He has background retinopathy. BP 146/88."
+        question: How do you classify him?
+        options: ["DKD with microalbuminuria and eGFR <60", "Macroalbuminuria", "Not DKD: needs a biopsy", "Normal for age"]
+        answer: 0
+        why: "Two of three samples 30-300 mg/g = microalbuminuria; with eGFR <60 for >3 months = DKD (p426, p432). Retinopathy supports DKD."
+      - question: Which BP target does the lecture give for him?
+        options: ["130/80 mm Hg (albuminuria)", "140/90 mm Hg", "150/90 mm Hg", "120/70 for everyone"]
+        answer: 0
+        why: "ADA: 130/80 with albuminuria; JNC 8: 140/90 for diabetes or CKD in general (p438)."
+      - reveal: "He is on metformin 1 g twice daily. Repeat eGFR 41."
+        question: What happens to metformin?
+        options: [Halve the dose, Stop it, Keep full dose, Switch to glimepiride]
+        answer: 0
+        why: "eGFR 30-44: halve the dose (Figure 27, p444); stop below 30. Glimepiride is stage 1-2 only."
+      - question: Which first-line drug should be added for kidney protection?
+        options: [SGLT2 inhibitor, Acarbose, Glibenclamide, Pioglitazone]
+        answer: 0
+        why: "First-line in T2D with CKD = metformin + SGLT2 inhibitor (Figure 23, p443)."
+    src: { page: 432, quote: "Screening for DKD should also include measurement of serum creatinine and eGFR." }
+    status: unverified
+  - id: neph.L13.105
+    kind: case
+    topic: pathogenesis
+    stem: A 22-year-old with type 1 diabetes for 3 years has a measured GFR of 160 mL/min and transient albuminuria after a football match.
+    steps:
+      - question: Which DKD stage best fits?
+        options: [Latent nephropathy (2-5 years), Hypertrophy-hyperfunction (0-2 years), Overt nephropathy, Microalbuminuria stage]
+        answer: 0
+        why: "2-5 years, GFR normal or high, microalbuminuria only with exercise or ketosis (p431)."
+      - question: What drives the high GFR?
+        options: ["Raised intraglomerular capillary pressure from proximal Na-glucose reabsorption and low distal Na", "Immune complex deposition", "Renal artery stenosis", "Tubular necrosis"]
+        answer: 0
+        why: "Hyperfiltration reflects raised intraglomerular pressure (p426); more SGLT2 reabsorption means less distal Na and less tubuloglomerular feedback (p441)."
+      - question: When does his annual screening start?
+        options: ["5 years after onset (in 2 years)", "Already overdue", "At diagnosis", "At age 30"]
+        answer: 0
+        why: "T1DM screening starts 5 years after onset (p431)."
+    src: { page: 431, quote: "Latent nephropathy (2-5y) GFR normal or high normal histological lesions, microalbuminuria may occur with exercise or ketosis" }
+    status: unverified
+  - id: neph.L13.106
+    kind: essay
+    topic: definition
+    prompt: Define diabetic kidney disease and distinguish it from diabetic nephropathy. Outline its pathology.
+    outline:
+      - "Definition: CKD in diabetes, ACR ≥30 mg/g and/or eGFR <60 for ≥3 months; DN = histologic diagnosis"
+      - "Epidemiology: 20-50% of T2DM, leading cause of ESKD (50%)"
+      - "LM: mesangial expansion, Kimmelstiel-Wilson nodules, microaneurysms, tip lesion"
+      - "IF: linear IgG and albumin; EM: GBM thickening first, no immune complexes"
+    src: { page: 426, quote: "Typically, DKD is defined by the presence of chronic kidney disease (CKD) characterized by persistently (at least 3 months) elevated urinary albumin excretion" }
+    status: unverified
+  - id: neph.L13.107
+    kind: essay
+    topic: screening
+    prompt: Discuss screening for diabetic kidney disease and when to suspect another diagnosis.
+    outline:
+      - "When: yearly from T2DM diagnosis; 5 years after T1DM onset"
+      - "How: 24-h urine, timed collection or spot ACR; 2 of 3 abnormal over 3-6 months; >300 single sample; plus creatinine and CKD-EPI eGFR"
+      - "False positives: CHF, exercise within 24 h, fever, infection, marked hyperglycemia, menstruation"
+      - "Red flags: no retinopathy, low or falling GFR, >30% GFR drop on ACEi/ARB, active sediment, rapid proteinuria, refractory HTN, systemic disease"
+    src: { page: 431, quote: "Screening for microalbuminuria can be completed in three ways:" }
+    status: unverified
+  - id: neph.L13.108
+    kind: essay
+    topic: sglt2
+    prompt: Outline the management of diabetic kidney disease.
+    outline:
+      - "Classic: glycemia (A1C <7% ADA, 7-8% ACP), BP (140/90 JNC 8; 130/80 with albuminuria), lipids, anemia, phosphate"
+      - "RAAS blockade plus MRA (spironolactone, finerenone: FIDELIO-DKD)"
+      - "SGLT2 inhibitors (EMPA-REG, CANVAS, DAPA-CKD) and GLP-1 RA; metformin by eGFR"
+      - "Future: ETA antagonists (atrasentan), anti-TGF-β, PKC inhibitors, AGE blockers; holistic KDIGO approach"
+    src: { page: 438, quote: "Glycemic control. Blood pressure control. Treatment of dyslipidemia. Management of anemia. Management of Hyperphosphatemia." }
+    status: unverified

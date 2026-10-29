@@ -1,0 +1,612 @@
+schema: batna.content/v1
+lecture: rheum.L07
+title: "Complement System: Part 1"
+author: "Prof. Dr. Eiman Soliman"
+book: { chapter: 3, pages: [105, 122] }
+topics:
+  - { id: overview, title: "What complement is, where it is made, general functions" }
+  - { id: nomenclature, title: "Nomenclature" }
+  - { id: classical, title: "Classical pathway" }
+  - { id: alternative, title: "Alternative pathway and its regulators" }
+  - { id: lectin, title: "Lectin pathway" }
+  - { id: c3-c5, title: "C3 and C5 activation, convertases" }
+  - { id: mac, title: "Terminal sequence and membrane attack complex" }
+  - { id: activities, title: "Biological activities of complement" }
+items:
+  # ---------- p105-106: overview ----------
+  - id: rheum.L07.001
+    kind: card
+    topic: overview
+    front: Define the complement system and explain its name.
+    back: A group of plasma and membrane proteins with a key role in innate and adaptive immunity. "Complement" refers to their ability to assist (complement) the antimicrobial activity of antibodies.
+    src: { page: 105, quote: "The term complement refers to the ability of these proteins to assist, or complement, the" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L07.002
+    kind: card
+    topic: overview
+    front: How are complement proteins activated?
+    back: In a cascade of proenzymes that undergo sequential proteolytic cleavage, by a mechanism similar to the coagulation pathway.
+    src: { page: 105, quote: "sequence consisting of proenzymes that undergo sequential proteolytic cleavage," }
+    status: unverified
+  - id: rheum.L07.003
+    kind: card
+    topic: overview
+    front: Where are most complement components made, and by which other cells?
+    back: Mostly by hepatocytes in the liver; also by blood monocytes, tissue macrophages, fibroblasts, and epithelial cells of the GI and genitourinary tracts.
+    src: { page: 105, quote: "Most complement components are synthesized in the liver by hepatocytes," }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L07.004
+    kind: card
+    topic: overview
+    front: What is the most important function of complement?
+    back: Modifying the pathogen membrane by coating its surface with clusters of complement activation fragments (opsonization).
+    src: { page: 105, quote: "The most imp function of the complement system is to modify the" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L07.005
+    kind: card
+    topic: overview
+    front: What is the second general function of complement?
+    back: Activating cells to promote inflammatory and immune responses, preparing the local environment for defense against infection.
+    src: { page: 106, quote: "inflammatory & immune responses, thus prepares the local environment for" }
+    status: unverified
+  - id: rheum.L07.006
+    kind: cloze
+    topic: overview
+    text: "The low molecular weight fragments {{c1::C4a, C3a and C5a}} are called {{c2::anaphylatoxins}}, because in excess they cause a reaction resembling anaphylaxis."
+    src: { page: 106, quote: "These low MW fragments (C4a, C3a, C5a)" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L07.007
+    kind: enumerate
+    topic: overview
+    prompt: Enumerate the three complement activation cascades.
+    points: [Classical pathway, Alternative pathway, Lectin pathway]
+    pass: 3
+    src: { page: 106, quote: "There are three activation cascades:" }
+    status: unverified
+  - id: rheum.L07.008
+    kind: card
+    topic: overview
+    front: Where do the three complement pathways converge?
+    back: On activating C3, the most abundant complement protein in plasma; they then generate the same set of effector molecules.
+    src: { page: 106, quote: "they converge to activate C3, which is the most abundant C protein in plasma" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L07.009
+    kind: table
+    topic: overview
+    title: "The three pathways: what starts them (p108 figure)"
+    columns: [Pathway, Trigger]
+    rows:
+      - [Classical, Antigen:antibody complexes]
+      - [MB-lectin, Lectin binding to pathogen surfaces]
+      - [Alternative, Pathogen surfaces]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 108, quote: "Antigen:antibody complexes" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L07.010
+    kind: enumerate
+    topic: overview
+    prompt: Enumerate the three outcomes of complement activation shown in the p108 figure.
+    points: [Recruitment of inflammatory cells, Opsonization of pathogens, Killing of pathogens]
+    pass: 3
+    src: { page: 108, quote: "Recruitment of inflammatory cells" }
+    status: unverified
+  # ---------- p107: nomenclature ----------
+  - id: rheum.L07.011
+    kind: card
+    topic: nomenclature
+    front: How are the classical pathway proteins named, and which one breaks the numerical order?
+    back: Nine proteins named "C" plus a number; they act in numerical order except C4, which acts before C2 and C3. Numbers reflect order of discovery, not order of activation.
+    src: { page: 107, quote: "The numbered components act in a numerical order except C4, which acts" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L07.012
+    kind: card
+    topic: nomenclature
+    front: How are alternative pathway components and regulatory proteins named?
+    back: AP components by capital letters (e.g. factor B); regulatory proteins by a descriptive title (e.g. C4 binding protein) or, in the AP, by a letter (e.g. factor H).
+    src: { page: 107, quote: "designed by capital letters e.g. factor B Regulatory proteins are designed by" }
+    status: unverified
+  - id: rheum.L07.013
+    kind: card
+    topic: nomenclature
+    front: Which fragment is "a" and which is "b"? What does each do?
+    back: "The smaller fragment is \"a\": soluble and released into the surroundings. The larger \"b\" fragment is usually deposited on the activating surface and continues the cascade; it may be cut further to c, d, e."
+    src: { page: 107, quote: "The smaller fragment is given" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L07.014
+    kind: mcq
+    topic: nomenclature
+    stem: Which statement about complement nomenclature is correct?
+    options:
+      - The numbers give the order of activation, without exception
+      - The smaller "a" fragment is soluble; the larger "b" fragment usually stays on the surface and continues the cascade
+      - Alternative pathway components are named C followed by a number
+      - C2 acts before C4
+    answer: 1
+    why:
+      - Numbers give order of discovery; C4 acts before C2 and C3.
+      - "Correct: a = small, soluble, released; b = large, deposited, continues the cascade (p107)."
+      - AP components get capital letters, e.g. factor B.
+      - C4 acts before C2.
+    src: { page: 107, quote: "deposited on the surface of the activating cells, and continues the cascade." }
+    status: unverified
+  # ---------- p108-110: classical ----------
+  - id: rheum.L07.015
+    kind: card
+    topic: classical
+    front: How is the classical pathway initiated, and why is it a link between innate and adaptive immunity?
+    back: Mainly by C1q binding antigen–antibody complexes (adaptive), or by C1q binding the pathogen surface directly (innate).
+    src: { page: 109, quote: "The classical pathway is initiated primarily by the binding of C1q to" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L07.016
+    kind: card
+    topic: classical
+    front: Describe the C1 complex.
+    back: The first classical protein, C1, is C1q + C1r + C1s. C1q has six identical subunits with globular heads and collagen-like tails; the tails bind two molecules each of C1r and C1s.
+    src: { page: 108, quote: "C1q is composed of six identical subunits with globular heads and long collagen-like tails." }
+    status: unverified
+  - id: rheum.L07.017
+    kind: card
+    topic: classical
+    front: What happens when the C1q heads bind antibody or a pathogen?
+    back: A conformational change in C1r, which then cleaves and activates the C1s zymogen (C1 esterase).
+    src: { page: 108, quote: "then cleaves and activates the C1s zymogen (C1estrase)." }
+    status: unverified
+  - id: rheum.L07.018
+    kind: table
+    topic: classical
+    title: "Proteins of the classical pathway (p110)"
+    columns: [Active form, Function]
+    rows:
+      - [C1q, "Binds pathogen surfaces directly or antibody bound to pathogens; allows autoactivation of C1r"]
+      - [C1r, Cleaves C1s to active protease]
+      - [C1s, Cleaves C4 and C2]
+      - [C4b, "Covalently binds pathogen and opsonizes it; binds C2 for cleavage by C1s"]
+      - [C4a, "Peptide mediator of inflammation (weak)"]
+      - [C2b, "Active enzyme of classical C3/C5 convertase; cleaves C3 and C5"]
+      - [C2a, Precursor of vasoactive C2 kinin]
+      - [C3b, "Binds pathogen and opsonizes; starts alternative-pathway amplification; binds C5 for cleavage by C2b"]
+      - [C3a, "Peptide mediator of inflammation (intermediate)"]
+    blanks: [[1, 1], [2, 1], [3, 1], [5, 1], [6, 1], [7, 1]]
+    src: { page: 110, quote: "Proteins of the classical pathway of complement activation" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L07.019
+    kind: order
+    topic: classical
+    prompt: Order the classical pathway from initiation to the C3 convertase.
+    steps:
+      - C1q binds antigen–antibody complexes
+      - C1r is activated and cleaves C1s
+      - C1s cleaves C4; C4b binds the surface
+      - C2 binds C4b and is cleaved by C1s
+      - C4b2b forms the C3 convertase
+    src: { page: 110, quote: "Cleaves C4 and C2" }
+    status: unverified
+  - id: rheum.L07.020
+    kind: mcq
+    topic: classical
+    stem: Which activated C1 subcomponent cleaves C4 and C2?
+    options: [C1q, C1r, C1s, C4b]
+    answer: 2
+    why:
+      - C1q binds antibody or pathogen and triggers C1r.
+      - C1r cleaves C1s.
+      - "Correct: C1s (C1 esterase) cleaves C4 and C2 (p110)."
+      - C4b binds C2 so that C1s can cleave it.
+    src: { page: 110, quote: "Cleaves C4 and C2" }
+    status: unverified
+  # ---------- p111-114: alternative ----------
+  - id: rheum.L07.021
+    kind: card
+    topic: alternative
+    front: Why is it called the "alternative" pathway, and what triggers it?
+    back: It was the second discovered. It starts when C3b binds antigens on a pathogen surface such as lipopolysaccharides and endotoxins.
+    src: { page: 111, quote: "It was the second to be discovered, hence the name." }
+    status: unverified
+  - id: rheum.L07.022
+    kind: card
+    topic: alternative
+    front: Does the alternative pathway need antibody?
+    back: No. It is antibody independent and generates an innate immune response.
+    src: { page: 111, quote: "response and it does not require an Ab for activation (Ab independent mech)." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L07.023
+    kind: card
+    topic: alternative
+    front: Why doesn't C3b bind stably to normal host cells?
+    back: Several regulatory proteins present on host cells, and absent from microbes, prevent it.
+    src: { page: 111, quote: "proteins, that are present on host cells but absent from microbes." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L07.024
+    kind: card
+    topic: alternative
+    front: What happens without fluid-phase regulators such as factors H and I?
+    back: The system fires to exhaustion, as in inherited deficiency of these regulators.
+    src: { page: 111, quote: "these regulators, the system fires to exhaustion, as in inherited deficiency of" }
+    status: unverified
+  - id: rheum.L07.025
+    kind: card
+    topic: alternative
+    front: Why is the alternative pathway called an amplification loop?
+    back: "It amplifies C3 deposition whatever pathway deposited the first C3b: C3b laid down by the classical or lectin pathway is enhanced many-fold by the AP."
+    src: { page: 111, quote: "(regardless of which path deposited C3). Thus, if C3 is deposited on a target by" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L07.026
+    kind: cloze
+    topic: alternative
+    text: "In the alternative pathway, factor {{c1::B}} (homologous to C2) binds C3b and is cleaved by factor {{c2::D}} into Ba and Bb; {{c3::C3bBb}} is the AP C3 convertase."
+    src: { page: 112, quote: "the deposited C3b,then is cleaved by active factor D, into Ba & Bb. C3bBb is" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L07.027
+    kind: card
+    topic: alternative
+    front: What stabilises the alternative C3 convertase?
+    back: Properdin (factor P), forming C3bBbP, a serine protease that cleaves C3 into C3a and C3b.
+    src: { page: 112, quote: "the AP convertase. It is stabilized by properdin (P)." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L07.028
+    kind: card
+    topic: alternative
+    front: Where does the first C3b of the alternative pathway come from (p113 figure)?
+    back: Spontaneous hydrolysis of C3, with deposition of C3b on a cell surface.
+    src: { page: 113, quote: "Spontaneous hydrolysis" }
+    status: unverified
+  - id: rheum.L07.029
+    kind: enumerate
+    topic: alternative
+    prompt: Which complement-regulatory proteins on host cells bind C3b and stop the alternative pathway (p113–114)?
+    points: [CR1, Factor H, MCP, DAF]
+    pass: 3
+    src: { page: 113, quote: "On host cells, the complement-regulatory proteins CR1, H, MCP, and DAF bind to C3b." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L07.030
+    kind: card
+    topic: alternative
+    front: How do host cells inactivate C3b, and what happens on a pathogen instead (p113–114)?
+    back: On host cells, CR1, H and DAF displace Bb, and C3b bound to H, CR1 or MCP is cleaved by factor I to inactive iC3b, so there is no activation. Pathogens lack these regulators; properdin stabilises C3bBb, which deposits many C3b molecules, giving opsonization and terminal complement activation.
+    src: { page: 114, quote: "C3b bound to H, CR1, and MCP is cleaved by factor I to yield inactive C3b (iC3b)" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L07.031
+    kind: mcq
+    topic: alternative
+    stem: Which factor cleaves C3b that is bound to factor H, CR1 or MCP into inactive iC3b?
+    options: [Factor B, Factor D, Factor I, Properdin, C1s]
+    answer: 2
+    why:
+      - Factor B binds C3b and becomes part of the convertase.
+      - Factor D cleaves factor B into Ba and Bb.
+      - "Correct: factor I yields inactive iC3b on host cells (p114)."
+      - Properdin stabilises the convertase on pathogens.
+      - C1s belongs to the classical pathway.
+    src: { page: 114, quote: "C3b bound to H, CR1, and MCP is cleaved by factor I to yield inactive C3b (iC3b)" }
+    status: unverified
+  - id: rheum.L07.032
+    kind: mcq
+    topic: alternative
+    stem: >-
+      A child has recurrent infections and very low C3. Testing shows inherited absence of factor H. Using the
+      lecture, why is C3 low?
+    options:
+      - The liver cannot make C3
+      - Without the fluid-phase regulator, the alternative pathway fires to exhaustion and consumes C3
+      - Antibodies are missing, so complement is never activated
+      - Factor H is the C3 convertase
+    answer: 1
+    why:
+      - Hepatocytes still make C3; the problem is consumption.
+      - "Correct: in inherited deficiency of fluid-phase regulators (H, I) the system fires to exhaustion (p111)."
+      - The AP needs no antibody, and the problem is uncontrolled activation.
+      - The AP convertase is C3bBb; factor H restrains it.
+    src: { page: 111, quote: "these regulators, the system fires to exhaustion, as in inherited deficiency of" }
+    status: unverified
+  - id: rheum.L07.033
+    kind: mcq
+    topic: alternative
+    stem: Which protein of the alternative pathway is structurally and functionally homologous to C2?
+    options: [Factor D, Factor B, Properdin, Factor H]
+    answer: 1
+    why:
+      - Factor D is the protease that cleaves factor B.
+      - "Correct: factor B is homologous to C2; like C2 it is cleaved after binding the b fragment (p112)."
+      - Properdin stabilises the convertase.
+      - Factor H is a regulator.
+    src: { page: 112, quote: "In AP factor B is structurally & functionally homologous to C2." }
+    status: unverified
+  # ---------- p114-115: lectin ----------
+  - id: rheum.L07.034
+    kind: card
+    topic: lectin
+    front: What are lectins, and what is MBL?
+    back: Lectins are carbohydrate-binding proteins, important in innate immunity and rheumatic disease. MBL is a hepatocyte-made serum protein that preferentially binds repeating mannoses on pathogens.
+    src: { page: 114, quote: "MBL is a hepatocyte synthesized serum protein that prfrentially binds to repeating mannoses of the pathogen." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L07.035
+    kind: card
+    topic: lectin
+    front: Which classical pathway protein does MBL resemble, and what does its binding activate?
+    back: C1q. Like C1q binding the Fc of Ig, MBL binding a sugar activates serine proteases called MASPs (mannan-associated serine proteases), MASP-1 and MASP-2.
+    src: { page: 114, quote: "These are called MASPs (mannan associated serine proteases). These are MASP-1 & MASP-2." }
+    status: unverified
+  - id: rheum.L07.036
+    kind: card
+    topic: lectin
+    front: What does MASP-2 do, and what convertase results?
+    back: It cleaves C4 and C2 into a and b; the C4b2b complex formed is the same C3 convertase as the classical pathway's.
+    src: { page: 114, quote: "MASP-2 cleaves C4 into a&b and cleaves also C2 into a&b. C4b2b complex" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L07.037
+    kind: table
+    topic: lectin
+    title: "Lectin pathway elements and their classical twins"
+    columns: [Lectin pathway, Classical pathway]
+    rows:
+      - [MBL, C1q]
+      - [MASP-1, C1r]
+      - [MASP-2, C1s]
+      - [C4b2b made by MASP-2, The same C3 convertase]
+    blanks: [[0, 1], [2, 1], [3, 1]]
+    src: { page: 114, quote: "MBL resembles C1q of CP." }
+    status: unverified
+  # ---------- p115-116: C3, C5 ----------
+  - id: rheum.L07.038
+    kind: card
+    topic: c3-c5
+    front: What do C3 convertases produce, and what does each fragment do?
+    back: C3a, the smaller fluid-phase fragment, is an anaphylatoxin; C3b, the larger one, continues the sequential activation of successive components.
+    src: { page: 115, quote: "C3b larger, continues the sequential activation of successive components." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L07.039
+    kind: enumerate
+    topic: c3-c5
+    prompt: What are the activities of activated C3?
+    points:
+      - C3a promotes inflammation
+      - C3b fixation to surfaces leads to opsonization
+      - C3b fixation leads to immune complex clearance
+      - Generation of C5 convertase activity
+    pass: 4
+    src: { page: 115, quote: "C3b fixation to surfaces leads to opsonization." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L07.040
+    kind: table
+    topic: c3-c5
+    title: "C3 and C5 convertases of each pathway (p116 figure)"
+    columns: [Pathway, C3 convertase, C5 convertase]
+    rows:
+      - [Classical and lectin, C4b2b, C4b2b3b]
+      - [Alternative, C3bBb, C3bBb3b]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2]]
+    src: { page: 116, quote: "C3 and C5 Convertases of Each Pathway" }
+    status: unverified
+    tags: [high-yield]
+    update:
+      text: "The p116 figure labels the classical convertase C4b2a (the older name), while the p110 table and p114 text use C4b2b. The larger C2 fragment is now called C2b, so C4b2b is the current name for the same enzyme."
+      ref: "Bohlson et al., Complement nomenclature: deconvoluted, Front Immunol 2019"
+  - id: rheum.L07.041
+    kind: card
+    topic: c3-c5
+    front: What are the two fragments of C5, and what does each do?
+    back: C5a is released into the fluid phase and is a potent anaphylatoxin. C5b binds the cell surface and is the nucleus for binding the terminal components.
+    src: { page: 116, quote: "Serves as a nucleus for binding the terminal complement components" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L07.042
+    kind: enumerate
+    topic: c3-c5
+    prompt: Enumerate the biological effects of C5a shown on p117.
+    points:
+      - Neutrophil activation
+      - Neutrophil adhesion
+      - Neutrophil emigration and chemotaxis
+      - Monocyte activation (IL-1, IL-6)
+      - Mast cell degranulation (smooth muscle contraction, increased vascular permeability)
+    pass: 4
+    src: { page: 117, quote: "Biological Effects of C5a" }
+    status: unverified
+  - id: rheum.L07.043
+    kind: mcq
+    topic: c3-c5
+    stem: Which complement fragment is the most potent anaphylatoxin and also drives neutrophil chemotaxis and monocyte activation?
+    options: [C5a, C5b, C3b, C4b, C2a]
+    answer: 0
+    why:
+      - "Correct: C5a is a potent anaphylatoxin with neutrophil activation, adhesion, chemotaxis and monocyte activation (p116–117)."
+      - C5b nucleates the MAC.
+      - C3b is the main opsonin.
+      - C4b binds the surface and opsonizes.
+      - In the lecture's table C2a is the precursor of C2 kinin.
+    src: { page: 116, quote: "Potent anaphy latoxin." }
+    status: unverified
+  # ---------- p117-118: MAC ----------
+  - id: rheum.L07.044
+    kind: card
+    topic: mac
+    front: Which components form the membrane attack complex, and how does it kill?
+    back: C5b, C6, C7, C8 and C9 bind each other into a large transmembrane channel that disrupts the membrane, letting ions and small molecules diffuse freely, causing cell lysis.
+    src: { page: 117, quote: "C9 bind to each other and form a MAC (membrane attack complex)." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L07.045
+    kind: order
+    topic: mac
+    prompt: Order the assembly of the membrane attack complex.
+    steps:
+      - C5b binds the cell surface
+      - C6 and C7 bind C5b
+      - C8 binds and inserts into the membrane
+      - Many C9 molecules polymerise (poly-C9) into a pore
+      - Water and ions rush in and the cell lyses
+    src: { page: 117, quote: "transmembrane channel is created that disrupts the membrane and enables ions" }
+    status: unverified
+  - id: rheum.L07.046
+    kind: card
+    topic: mac
+    front: What forms the pore of the MAC (p118)?
+    back: Poly-C9 inserted around C5b678 in the phospholipid bilayer, letting fluids rush in.
+    src: { page: 118, quote: "Poly-C9" }
+    status: unverified
+  - id: rheum.L07.047
+    kind: mcq
+    topic: mac
+    stem: Which complement component polymerises to form the pore of the membrane attack complex?
+    options: [C9, C5a, C3b, C1q, Factor B]
+    answer: 0
+    why:
+      - "Correct: poly-C9 forms the channel on C5b678 (p118)."
+      - C5a is a soluble anaphylatoxin.
+      - C3b is an opsonin and part of the convertases.
+      - C1q starts the classical pathway.
+      - Factor B is part of the AP convertase.
+    src: { page: 118, quote: "Poly-C9" }
+    status: unverified
+  # ---------- p119-122: activities ----------
+  - id: rheum.L07.048
+    kind: enumerate
+    topic: activities
+    prompt: Enumerate the biological activities of complement.
+    points:
+      - Production of opsonins
+      - Production of anaphylatoxins
+      - Lysis of cells
+      - Enhancing B cell response to antigens
+      - Controlling formation and clearance of immune complexes
+      - Removing dead and dying cells
+    pass: 5
+    src: { page: 119, quote: "Production of Opsonins. Production of Anaphylatoxins. Lysis of Cells." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L07.049
+    kind: card
+    topic: activities
+    front: Define opsonization.
+    back: Coating a bacterium with antibody and/or a complement component (an opsonin), leading to enhanced phagocytosis.
+    src: { page: 119, quote: "It is the coating of a bacterium, with antibody and/or a complement" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L07.050
+    kind: cloze
+    topic: activities
+    text: "{{c1::C3b}} is the primary opsonin (also C4b); it is bound by complement receptors {{c2::CR1, CR3 and CR4}} on phagocytes."
+    src: { page: 119, quote: "macrophages). Bound by complement receptors (CR1, CR3, CR4) on phagocytes." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L07.051
+    kind: card
+    topic: activities
+    front: How do anaphylatoxins enhance the response to a pathogen?
+    back: C5a, C3a and C4a release histamine from mast cells and basophils, increasing vascular permeability and the influx of phagocytes and antibodies; they are chemotactic for neutrophils and induce smooth muscle contraction.
+    src: { page: 120, quote: "Substances such as C5a, C3a, and C4a capable of releasing histamine from" }
+    status: unverified
+  - id: rheum.L07.052
+    kind: card
+    topic: activities
+    front: How does complement lyse cells?
+    back: By forming the MAC on the cell surface, the final stage of all three pathways.
+    src: { page: 120, quote: "This is done by the formation of MAC on the surface of the cell, which is" }
+    status: unverified
+  - id: rheum.L07.053
+    kind: card
+    topic: activities
+    front: How does complement help memory responses?
+    back: C3d covalently bound to antigen in immune complexes is taken up by germinal-centre dendritic cells expressing CR2, giving a long-lasting deposit of antigen.
+    src: { page: 120, quote: "covalently bound to antigen in immune complexes is taken up by germinal center" }
+    status: unverified
+  - id: rheum.L07.054
+    kind: cloze
+    topic: activities
+    text: "Binding of {{c1::C3d}} on a microbial antigen to {{c2::CR2}} makes the B cell response more rapid, because it enhances uptake and processing of the antigen."
+    src: { page: 120, quote: "Interactions of the complement fragment C3d and CR2 with a microbial" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L07.055
+    kind: card
+    topic: activities
+    front: How does C3b help remove immune complexes?
+    back: C3b deposited on large complexes disrupts the bonds holding them, breaking them into smaller pieces macrophages can clear. C3b also lets complexes bind CR1 on red cells, which carry them to the spleen for removal by macrophages.
+    src: { page: 121, quote: "binding to RBCs (which express the CR1 receptor on their surface). RBCs clear" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L07.056
+    kind: mcq
+    topic: activities
+    stem: Which cells carry C3b-coated immune complexes through the circulation to the spleen, and by which receptor?
+    options: ["Red blood cells, CR1", "Neutrophils, CR3", "Dendritic cells, CR2", "Platelets, CR4"]
+    answer: 0
+    why:
+      - "Correct: RBCs express CR1 and take complexes to splenic macrophages (p121)."
+      - CR3 on phagocytes is an opsonin receptor; the lecture's carrier is the RBC.
+      - CR2 on dendritic cells binds C3d for memory, not clearance from blood.
+      - The lecture does not give platelets this role.
+    src: { page: 121, quote: "binding to RBCs (which express the CR1 receptor on their surface). RBCs clear" }
+    status: unverified
+  - id: rheum.L07.057
+    kind: card
+    topic: activities
+    front: How does complement clear necrotic cells and subcellular membranes?
+    back: Subcellular membranes (mitochondria, endoplasmic reticulum) activate the classical and alternative pathways and are cleared like immune complexes; complement removes dead or dying cells and helps maintain homeostasis.
+    src: { page: 122, quote: "mitochondria and endoplasmic reticulum - activate classical and alternative" }
+    status: unverified
+  - id: rheum.L07.058
+    kind: case
+    topic: activities
+    stem: A pneumococcus enters the lung of a person with normal antibodies and complement.
+    steps:
+      - question: Which pathway can start before any antibody exists, on the bacterial surface itself?
+        options: [Alternative pathway, Classical pathway only, "None, until antibodies form"]
+        answer: 0
+        why: "The AP is antibody independent and triggered by C3b on surfaces such as lipopolysaccharides (p111). The lectin pathway can also act on surface mannose."
+      - question: Which fragment then coats the bacterium so neutrophils can eat it?
+        options: [C3b, C5a, C3a, C9]
+        answer: 0
+        why: "C3b is the primary opsonin, bound by CR1, CR3 and CR4 on phagocytes (p119)."
+      - question: Which fragment calls neutrophils to the site?
+        options: [C5a, C3b, C5b, C4b]
+        answer: 0
+        why: "C5a drives neutrophil activation, adhesion, emigration and chemotaxis (p117)."
+    src: { page: 119, quote: "C3b – primary opsonin, also C4b." }
+    status: unverified
+  - id: rheum.L07.059
+    kind: essay
+    topic: c3-c5
+    prompt: What are the activities of activated C3?
+    outline:
+      - "C3a": ["Smaller, fluid-phase anaphylatoxin", "Promotes inflammation"]
+      - "C3b": ["Larger, continues the cascade", "Fixation to surfaces → opsonization (CR1, CR3, CR4)", "Fixation to immune complexes → clearance (CR1 on RBCs, spleen)", "Generates C5 convertase activity", "Starts the AP amplification loop"]
+      - "C3d": ["Binds CR2 on B cells and follicular dendritic cells → enhanced B cell and memory responses"]
+    src: { page: 115, quote: "C3b fixation to surfaces leads to opsonization." }
+    status: unverified
+    tags: [book-question]
+  - id: rheum.L07.060
+    kind: essay
+    topic: activities
+    prompt: What are the biological activities of complement?
+    outline:
+      - "Opsonins": ["C3b primary, also C4b", "CR1, CR3, CR4 on phagocytes"]
+      - "Anaphylatoxins": ["C5a, C3a, C4a", "Histamine release, permeability, neutrophil chemotaxis, smooth muscle contraction"]
+      - "Cell lysis": ["MAC: C5b–C9, poly-C9 pore", "Final stage of all three pathways"]
+      - "B cell response": ["C3d–CR2", "Long-lasting antigen deposit on germinal-centre dendritic cells"]
+      - "Immune complexes": ["C3b breaks large complexes", "CR1 on RBCs → spleen"]
+      - "Dead cells": ["Mitochondria and ER activate CP and AP", "Homeostasis"]
+    src: { page: 119, quote: "Biological Activities of Complement" }
+    status: unverified
+    tags: [book-question]

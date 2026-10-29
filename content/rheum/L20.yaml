@@ -1,0 +1,1123 @@
+schema: batna.content/v1
+lecture: rheum.L20
+title: "Seronegative spondyloarthritis II: psoriatic arthritis"
+author: "Prof. Ibtisam Abdelhamed"
+book: { chapter: 3, pages: [326, 344] }
+topics:
+  - { id: definition, title: "Definition and etiology" }
+  - { id: genetics, title: "HLA and non-HLA genes" }
+  - { id: pathogenesis, title: "Pathophysiology, environment and IL-23/IL-17" }
+  - { id: clinical, title: "Domains, comorbidities and skin–joint timing" }
+  - { id: patterns, title: "Moll and Wright patterns, axial disease, enthesitis" }
+  - { id: extraarticular, title: "Extra-articular features and comparison with other SpAs" }
+  - { id: diagnosis, title: "Diagnosis, CASPAR and laboratory tests" }
+  - { id: imaging, title: "Radiology, ultrasound and MRI" }
+  - { id: activity, title: "Severity, prognosis and disease activity measures" }
+  - { id: treatment, title: "Drugs and treatment strategy" }
+  - { id: enteropathic, title: "Enteropathic and post-enteritic reactive arthritis" }
+items:
+  # ---------- p326: definition and etiology ----------
+  - id: rheum.L20.001
+    kind: card
+    topic: definition
+    front: Define psoriatic arthritis.
+    back: A chronic immune-mediated inflammatory arthropathy in 5–20% of people with psoriasis, involving axial and peripheral joints, nails, skin and entheses.
+    src: { page: 326, quote: "PsA is an inflammatory arthropathy occurring in 5-20% of patients with psoriasis." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L20.002
+    kind: cloze
+    topic: definition
+    text: "Psoriatic arthritis occurs in {{c1::5–20%}} of patients with psoriasis."
+    src: { page: 326, quote: "PsA is an inflammatory arthropathy occurring in 5-20% of patients with psoriasis." }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L20.003
+    kind: card
+    topic: definition
+    front: Is psoriatic arthritis a mild arthritis?
+    back: It was once thought mild, but it can be progressive, destructive and deforming.
+    src: { page: 326, quote: "there has been a growing appreciation that PsA can be progressive, destructive, and deforming." }
+    status: unverified
+  - id: rheum.L20.004
+    kind: cloze
+    topic: definition
+    text: "About {{c1::33–50%}} of PsA patients have at least one first-degree relative with psoriasis or PsA."
+    src: { page: 326, quote: "Approximately 33 to 50% of PsA patients have at least one first-degree relative who also has PsO or PsA." }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L20.005
+    kind: card
+    topic: genetics
+    front: Are the genes of PsA and psoriasis the same?
+    back: No. Some PsA genes are not psoriasis genes and vice versa, and some genes go with specific PsA phenotypes.
+    src: { page: 326, quote: "The genetic associations between PsA and PsO are not identical." }
+    status: unverified
+  - id: rheum.L20.006
+    kind: card
+    topic: genetics
+    front: What do HLA and non-HLA genes do in PsA?
+    back: HLA genes work in antigen presentation and immune recognition; non-HLA genes in immune activation and inflammation (intracellular signaling, cytokine signaling, T-cell effector function).
+    src: { page: 326, quote: "Genes associated with PsA include those in the HLA region, which are involved in antigen presentation and immune recognition" }
+    status: unverified
+  # ---------- p327: genetics tables ----------
+  - id: rheum.L20.007
+    kind: table
+    topic: genetics
+    title: HLA genes and PsA expression (p327)
+    columns: [Gene, Disease expression]
+    rows:
+      - [HLA-B*08:01, "Peripheral arthritis, joint damage, ankylosis, asymmetric sacroiliitis"]
+      - [HLA-B*27:05, "Axial involvement, symmetric sacroiliitis, enthesitis, dactylitis"]
+      - [HLA-B*44:02/03, Milder disease]
+      - [HLA-C*06:02, "Milder disease, longer delay of arthritis after psoriasis"]
+      - [HLA-DR4, Symmetric polyarthritis]
+    blanks: [[0, 1], [1, 1], [3, 1], [4, 1]]
+    src: { page: 327, quote: "Axial involvement, symmetric sacroiliitis, enthesitis, dactylitis" }
+    status: unverified
+  - id: rheum.L20.008
+    kind: card
+    topic: genetics
+    front: Which HLA allele is listed as protective in PsA?
+    back: HLA-B*44:02 (its haplotype is linked to milder disease).
+    src: { page: 327, quote: "HLA-B*44:02 (protective)" }
+    status: unverified
+  - id: rheum.L20.009
+    kind: table
+    topic: genetics
+    title: Non-HLA susceptibility genes in PsA (p327)
+    columns: [Gene, Product and role]
+    rows:
+      - [IL23R, "IL-23 receptor; IL-17 pathway"]
+      - [TNFAIP3, "TNF-α-induced protein 3; TNF-α-induced inflammation"]
+      - [TRAF3IP2, "TRAF3-interacting protein 2; activates NF-κB or Jun kinase"]
+      - [REL, "NF-κB subunit"]
+      - [FBXL19, "Degrades the IL-1 receptor-like 1"]
+      - [PTPN22, "Protein tyrosine phosphatase; immune regulation"]
+    blanks: [[0, 1], [1, 1], [2, 1], [5, 1]]
+    src: { page: 327, quote: "IL-23 Receptor; involved in the IL-17 pathway" }
+    status: unverified
+  - id: rheum.L20.010
+    kind: mcq
+    topic: genetics
+    stem: A man with psoriasis develops axial PsA with symmetric sacroiliitis, enthesitis and dactylitis. Which HLA allele does the lecture link to this expression?
+    options:
+      - HLA-B*27:05
+      - HLA-C*06:02
+      - HLA-B*44:02
+      - HLA-DR4
+      - HLA-B*08:01
+    answer: 0
+    why:
+      - "Correct: B*27:05 goes with axial involvement, symmetric sacroiliitis, enthesitis and dactylitis (p327)."
+      - C*06:02 goes with milder disease and a longer delay after psoriasis.
+      - B*44:02 is protective, milder disease.
+      - DR4 goes with symmetric polyarthritis.
+      - B*08:01 goes with asymmetric sacroiliitis and joint damage.
+    src: { page: 327, quote: "Axial involvement, symmetric sacroiliitis, enthesitis, dactylitis" }
+    status: unverified
+  # ---------- p327-328: pathogenesis ----------
+  - id: rheum.L20.011
+    kind: card
+    topic: pathogenesis
+    front: Which triggers promote PsA in a predisposed person?
+    back: Infections, dysbiosis or mechanical stress.
+    src: { page: 327, quote: "triggering factors, like infections, dysbiosis or mechanic stress may promote the development of the disease." }
+    status: unverified
+  - id: rheum.L20.012
+    kind: card
+    topic: pathogenesis
+    front: What follows Toll-like receptor stimulation in PsA?
+    back: Activation of innate and adaptive immunity with expansion of dendritic cells, macrophages, CD4+ and CD8+ T cells, neutrophils, monocytes and NK cells, ending in inflammation and damage of skin, joints and entheses.
+    src: { page: 327, quote: "Stimulation of Toll-like Receptors will lead to activation of the innate and adaptive immune system" }
+    status: unverified
+  - id: rheum.L20.013
+    kind: card
+    topic: pathogenesis
+    front: What is the deep (internal) Koebner phenomenon?
+    back: A flare of arthritis induced by joint trauma, by analogy with skin trauma inducing psoriatic lesions (Koebner phenomenon).
+    src: { page: 328, quote: "joint trauma may induce a flare of arthritis, referred to as the \"internal\" or \"deep\" Koebner phenomenon." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L20.014
+    kind: enumerate
+    topic: pathogenesis
+    prompt: List the environmental factors linked to PsA in the lecture.
+    points:
+      - Streptococcal infection (guttate psoriasis)
+      - Recent antibiotic exposure
+      - Joint trauma (deep Koebner)
+      - Dysbiosis
+      - Tobacco (appears protective, controversial)
+    pass: 4
+    src: { page: 328, quote: "Epidemiological studies have shown an association between streptococcal infection (guttate psoriasis) and recent antibiotic exposure." }
+    status: unverified
+  - id: rheum.L20.015
+    kind: card
+    topic: pathogenesis
+    front: What is the effect of tobacco on the development of PsA, per the lecture?
+    back: It appears protective (controversial).
+    src: { page: 328, quote: "Tobacco appears to be protective against the development of psoriatic arthritis (controversial)." }
+    status: unverified
+  - id: rheum.L20.016
+    kind: card
+    topic: pathogenesis
+    front: Which cells make IL-23 in PsA, and where may it come from?
+    back: Macrophages and dendritic cells; the gut may be a source through a disturbed barrier or changed microbiota.
+    src: { page: 328, quote: "Macrophages and dendritic cells produce IL-23. The GIT may be the source of IL-23 due to disturbed barrier function or changes in the microbiota." }
+    status: unverified
+  - id: rheum.L20.017
+    kind: cloze
+    topic: pathogenesis
+    text: "{{c1::IL-23}} is the central cytokine of PsO and PsA: it stimulates resident T cells to make {{c2::IL-17}}, IL-22 and {{c3::TNF-alpha}}, causing inflammation, erosions and osteoproliferation."
+    src: { page: 328, quote: "IL-23, is a central cytokine in the pathogenesis of PsO & PsA." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L20.018
+    kind: card
+    topic: pathogenesis
+    front: How do neutrophils and TNF-α damage bone in PsA?
+    back: Neutrophils activate synoviocytes, angiogenesis and osteoclast bone destruction; TNF-α also causes osteoblast apoptosis, reducing bone repair.
+    src: { page: 328, quote: "TNF-α can also induce apoptosis of osteoblasts, which also subsequently decreases the capacity to repair bone." }
+    status: unverified
+  - id: rheum.L20.019
+    kind: mcq
+    topic: pathogenesis
+    stem: Which cytokine does the lecture call central to the pathogenesis of both psoriasis and PsA, acting on resident IL-23R+ T cells?
+    options: [IL-23, IL-1, IL-6, Interferon-alpha, IL-4]
+    answer: 0
+    why:
+      - "Correct: IL-23 stimulates resident T cells to make IL-17, IL-22 and TNF-α (p328)."
+      - Not named as central in the book's PsA pathway.
+      - Not named as central in the book's PsA pathway.
+      - Interferon-alpha belongs to the SLE and Sjögren story, not PsA.
+      - IL-4 is a Th2 cytokine, not part of the PsA pathway.
+    src: { page: 328, quote: "IL-23, is a central cytokine in the pathogenesis of PsO & PsA." }
+    status: unverified
+  # ---------- p329-330: clinical ----------
+  - id: rheum.L20.020
+    kind: enumerate
+    topic: clinical
+    prompt: List the clinical domains of PsA.
+    points:
+      - Peripheral arthritis
+      - Axial involvement
+      - Enthesitis
+      - Dactylitis
+      - Uveitis
+      - Cutaneous and nail psoriasis
+    pass: 5
+    src: { page: 329, quote: "Peripheral arthritis. - Axial involvement. - Enthesitis. - Dactylitis. - Uveitis. - Cutaneous and nail psoriasis." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L20.021
+    kind: enumerate
+    topic: clinical
+    prompt: Which comorbidities are associated with PsA?
+    points:
+      - Metabolic syndrome
+      - Obesity
+      - Cardiovascular disease
+      - Depressive disorder
+    pass: 3
+    src: { page: 329, quote: "Metabolic syndrome. - Obesity. - Cardiovascular disease. - Depressive disorder." }
+    status: unverified
+  - id: rheum.L20.022
+    kind: card
+    topic: clinical
+    front: Is there a marker that predicts which psoriasis patients will develop arthritis?
+    back: No clinical, immunohistochemical or genetic marker has been identified.
+    src: { page: 329, quote: "no specific marker, either clinical, immunohistochemical, or genetic, has been identified" }
+    status: unverified
+  - id: rheum.L20.023
+    kind: card
+    topic: clinical
+    front: A patient has classic PsA joints but denies psoriasis. Where must you look for skin lesions?
+    back: Scalp, nails, umbilicus, gluteal cleft and behind the ears.
+    src: { page: 330, quote: "including the scalp, nails, umbilicus ,gluteal cleft and behind the ear." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L20.024
+    kind: table
+    topic: clinical
+    title: Timing of skin and joint disease in PsA (p330)
+    columns: [Sequence, Share]
+    rows:
+      - [Skin before arthritis (typically by 5–10 years), "Up to 80%"]
+      - [Skin and joints together, "10–15%"]
+      - [Joints first (may be labelled undifferentiated SpA), "10–15%"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 330, quote: "The skin lesions of psoriasis usually appear before the arthritis in up to 80% and typically by 5-10 years." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: rheum.L20.025
+    kind: card
+    topic: clinical
+    front: What is the most common skin phenotype in PsA?
+    back: Psoriasis vulgaris.
+    src: { page: 330, quote: "Psoriasis vulgaris, is the most common skin phenotype in patients with PsA." }
+    status: unverified
+  - id: rheum.L20.026
+    kind: cloze
+    topic: clinical
+    text: "Skin severity and arthritis severity are {{c1::poorly related}}; in one study only {{c2::35%}} said skin and joints flared together."
+    src: { page: 330, quote: "In one prospective study, only 35% of patients reported that their skin and joint components flared at the same time." }
+    status: unverified
+    tags: [numbers]
+  # ---------- p330-332: patterns ----------
+  - id: rheum.L20.027
+    kind: table
+    topic: patterns
+    title: Moll and Wright (1973) patterns of PsA (book percentages)
+    columns: [Pattern, Share, Clue]
+    rows:
+      - [Oligoarticular, "70%", "Asymmetric large and small joints; sausage digit"]
+      - [Asymmetric DIP ("classic"), "10%", "Nail pitting, transverse depressions, subungual hyperkeratosis"]
+      - [Arthritis mutilans, "5%", "Massive destruction of phalanges"]
+      - [Symmetric polyarthritis like RA, "15%", "RF usually negative"]
+      - [Psoriatic spondylitis, "5%", "Axial disease"]
+    blanks: [[0, 1], [1, 1], [1, 2], [2, 1], [3, 1], [3, 2], [4, 1]]
+    src: { page: 330, quote: "5 types of arthritis were originally described by Moll and Wright (1973)." }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: rheum.L20.028
+    kind: card
+    topic: patterns
+    front: Is the Moll and Wright pattern fixed for a patient?
+    back: No. Some patients have more than one pattern and many change pattern during follow-up.
+    src: { page: 330, quote: "Some patients present with more than one pattern, and many change the pattern of their arthritis during follow-up." }
+    status: unverified
+  - id: rheum.L20.029
+    kind: cloze
+    topic: patterns
+    text: "Later publications found about {{c1::63%}} polyarticular vs {{c2::13%}} oligoarticular PsA, unlike the original 70% oligoarticular."
+    src: { page: 330, quote: "approximately 63% of patients had polyarticular joint involvement, compared with 13% with oligoarticular disease." }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L20.030
+    kind: card
+    topic: patterns
+    front: Why are DIP joints often involved in PsA but not in RA?
+    back: DIP joints have many entheses but very little synovium; PsA is an enthesitis-driven disease, RA a synovitis.
+    src: { page: 331, quote: "DIP joints are frequently involved in PsA but not so in RA because these joints have many entheses but very little synovial tissue." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L20.031
+    kind: card
+    topic: patterns
+    front: Which nail changes go with the asymmetric DIP pattern?
+    back: Nail pitting, transverse depressions and subungual hyperkeratosis.
+    src: { page: 331, quote: "Nail pitting, transverse depressions and subungual hyperkeratosis often occur in association with this pattern." }
+    status: unverified
+  - id: rheum.L20.032
+    kind: card
+    topic: patterns
+    front: Define arthritis mutilans.
+    back: A severe deforming arthritis with massive destruction of the phalanges (5%); rare, but it may develop in more patients if disease is not controlled.
+    src: { page: 331, quote: "A severe deforming arthritis in which there is massive destruction of the phalanges." }
+    status: unverified
+  - id: rheum.L20.033
+    kind: cloze
+    topic: patterns
+    text: "HLA-B27 is present in about {{c1::30%}} of axial PsA; spinal involvement may be found in {{c2::40–70%}} of PsA, depending on whether radiographs are taken."
+    src: { page: 332, quote: "HLA-B27 gene is present in about 30% of patients with axial PsA." }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L20.034
+    kind: table
+    topic: patterns
+    title: Axial PsA by HLA-B27 (p332)
+    columns: [Feature, HLA-B27 positive, HLA-B27 negative]
+    rows:
+      - [Resembles, Ankylosing spondylitis, Different picture]
+      - [Age of onset, Earlier, Older]
+      - [Back pain, More, Less]
+      - [Sex, –, Similar in males and females]
+      - [Spine, AS-like X-rays, "More cervical disease; asymmetric unilateral sacroiliitis; bulky non-marginal skipping syndesmophytes"]
+    blanks: [[1, 1], [1, 2], [2, 2], [4, 2]]
+    src: { page: 332, quote: "asymmetrical, unilateral sacroiliitis and non-marginal, bulky syndesmophytes which are often asymmetric and discontinuous skipping vertebral levels." }
+    status: unverified
+  - id: rheum.L20.035
+    kind: enumerate
+    topic: patterns
+    prompt: List the most common entheseal sites in PsA.
+    points:
+      - Achilles
+      - Plantar fascia insertions
+      - Quadriceps and patellar tendon insertions
+      - Iliac crest
+      - Rotator cuff
+      - Epicondyles at the elbow
+    pass: 5
+    src: { page: 332, quote: "The Achilles. - Plantar fascia insertions. - Insertions of the quadriceps and patellar tendons. - The iliac crest. - The rotator cuff." }
+    status: unverified
+  - id: rheum.L20.036
+    kind: card
+    topic: patterns
+    front: Which is more sensitive for enthesitis, palpation or ultrasound?
+    back: Ultrasound; entheseal involvement may be asymptomatic.
+    src: { page: 332, quote: "Entheseal involvement may be asymptomatic, and US is more sensitive than clinical palpation." }
+    status: unverified
+  - id: rheum.L20.037
+    kind: mcq
+    topic: patterns
+    stem: A 55-year-old woman with psoriasis, HLA-B27 negative, has neck pain. X-ray shows unilateral sacroiliitis and bulky, non-marginal syndesmophytes that skip vertebral levels. Diagnosis?
+    options:
+      - HLA-B27-negative axial PsA
+      - Ankylosing spondylitis
+      - Diffuse idiopathic skeletal hyperostosis
+      - Enteropathic spondylitis
+      - Rheumatoid cervical disease
+    answer: 0
+    why:
+      - "Correct: B27-negative axial PsA: older onset, cervical disease, asymmetric unilateral sacroiliitis, bulky skipping syndesmophytes (p332)."
+      - AS gives symmetric sacroiliitis and marginal, continuous syndesmophytes, like B27-positive PsA.
+      - DISH is not discussed and lacks sacroiliitis.
+      - Enteropathic spondylitis needs bowel disease.
+      - RA does not give sacroiliitis or syndesmophytes.
+    src: { page: 332, quote: "Patients who are HLA-B27 negative have different clinical features with similar frequency in males and females, older age of onset, less back pain" }
+    status: unverified
+  - id: rheum.L20.038
+    kind: mcq
+    topic: patterns
+    stem: A man with psoriasis has swollen DIP joints of several fingers with pitted nails. Which pattern and why are DIPs spared in RA?
+    options:
+      - Classic asymmetric DIP PsA; DIPs have many entheses and little synovium
+      - Arthritis mutilans; DIPs have the most synovium
+      - RA-like symmetric polyarthritis; DIPs are always involved in RA
+      - Psoriatic spondylitis; DIPs are axial joints
+      - Oligoarticular PsA; nails are never involved
+    answer: 0
+    why:
+      - "Correct: the asymmetric DIP pattern (10%) goes with nail pitting; DIPs are entheseal, not synovial (p331)."
+      - Mutilans is phalangeal destruction, and DIPs have little synovium.
+      - RA spares DIPs.
+      - DIPs are peripheral joints.
+      - Nail changes go with the DIP pattern.
+    src: { page: 331, quote: "DIP joints are frequently involved in PsA but not so in RA because these joints have many entheses but very little synovial tissue." }
+    status: unverified
+  # ---------- p333: extra-articular and comparison ----------
+  - id: rheum.L20.039
+    kind: cloze
+    topic: extraarticular
+    text: "Iritis or uveitis occurs in {{c1::7–18%}} of PsA, more {{c2::bilateral}} than in AS, and usually with spinal involvement."
+    src: { page: 333, quote: "Ocular disease: Iritis or uveitis occurs in 7% to 18%, more bilateral than in AS, but is usually found in patients with spinal involvement." }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L20.040
+    kind: enumerate
+    topic: extraarticular
+    prompt: List the extra-articular manifestations of PsA (less common than in RA).
+    points:
+      - Iritis or uveitis
+      - Aortic insufficiency
+      - Metabolic syndrome, cardiovascular risk factors
+      - Inflammatory bowel disease
+      - Amyloidosis
+      - Fatigue and fibromyalgia
+    pass: 5
+    src: { page: 333, quote: "Aortic insufficiency has also been reported." }
+    status: unverified
+  - id: rheum.L20.041
+    kind: table
+    topic: extraarticular
+    title: PsA compared with other spondyloarthritides (p333)
+    columns: [Feature, PsA, AS, Reactive, Enteropathic]
+    rows:
+      - [M:F, "1:1", "2:1", "3:1", "2:1"]
+      - [HLA-B27, "45–50%", "90–95%", "70%", "30%"]
+      - [Peripheral, "95%", "30%", "90%", "30%"]
+      - [Axial, "50%", "100%", "15–50%", "30%"]
+      - [Dactylitis, "+++", "–", "+", "–"]
+      - [Enthesitis, "++", "+++", "+", "–"]
+      - [Psoriasis, All, "10%", Rare, Rare]
+    blanks: [[0, 1], [1, 1], [1, 2], [2, 1], [4, 1], [5, 2]]
+    src: { page: 333, quote: "Comparison with other SpAs" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L20.042
+    kind: mcq
+    topic: extraarticular
+    stem: Which spondyloarthritis in the lecture's table has a 1:1 sex ratio and the most dactylitis (+++)?
+    options: [Psoriatic arthritis, Ankylosing spondylitis, Reactive arthritis, Enteropathic SpA]
+    answer: 0
+    why:
+      - "Correct: PsA is 1:1 with dactylitis +++ (p333)."
+      - AS is 2:1 with no dactylitis and the most enthesitis.
+      - Reactive arthritis is 3:1 with dactylitis +.
+      - Enteropathic SpA is 2:1 without dactylitis.
+    src: { page: 333, quote: "Dactylitis +++" }
+    status: unverified
+  # ---------- p333-334: diagnosis ----------
+  - id: rheum.L20.043
+    kind: card
+    topic: diagnosis
+    front: What is the simplest working definition of PsA?
+    back: Arthritis in the presence of psoriasis and the absence of rheumatoid factor. There is no diagnostic test.
+    src: { page: 333, quote: "PsA can be considered as an arthritis occurring in the presence of psoriasis, but in the absence of rheumatoid factor." }
+    status: unverified
+  - id: rheum.L20.044
+    kind: table
+    topic: diagnosis
+    title: CASPAR criteria (2006)
+    columns: [Item, Points]
+    rows:
+      - [Current psoriasis, "2"]
+      - [Past psoriasis, "1"]
+      - [Family history (patient not affected), "1"]
+      - ["Nail lesions: onycholysis, pitting, hyperkeratosis", "1"]
+      - [Dactylitis present or past (rheumatologist), "1"]
+      - [Negative RF (any method except latex), "1"]
+      - [Juxta-articular new bone (not osteophyte), "1"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [5, 1], [6, 1]]
+    src: { page: 334, quote: "Skin psoriasis: present - 2 / previously present -1" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L20.045
+    kind: cloze
+    topic: diagnosis
+    text: "CASPAR needs inflammatory articular disease (joint, spine or enthesis) with {{c1::3 or more}} points; specificity {{c2::98.7%}}, sensitivity {{c3::91.4%}}."
+    src: { page: 334, quote: "Inflammatory articular disease (joint,spine or entheseal)with 3 or more points from the following:" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: rheum.L20.046
+    kind: mcq
+    topic: diagnosis
+    stem: "A 40-year-old man has inflammatory knee and ankle arthritis. He has no psoriasis now and never had it, but his mother has psoriasis. His nails are pitted and RF is negative (ELISA). CASPAR score?"
+    options:
+      - "3: classified as PsA"
+      - "2: not classified"
+      - "4: classified"
+      - "Cannot score without skin psoriasis"
+      - "1: not classified"
+    answer: 0
+    why:
+      - "Correct: family history 1 + nail lesions 1 + negative RF 1 = 3 (p334)."
+      - Nails, family and RF each count.
+      - He has no current (2) or past (1) psoriasis.
+      - CASPAR can be met without skin psoriasis.
+      - Three items each give 1.
+    src: { page: 334, quote: "Family history, patient not affected – 1" }
+    status: unverified
+  - id: rheum.L20.047
+    kind: cloze
+    topic: diagnosis
+    text: "In PsA, low-level RF occurs in {{c1::5–16%}}, ACPA in about {{c2::5%}}, and ANA above 1:80 in {{c3::14%}}."
+    src: { page: 334, quote: "low levels of RF may be found in patients (5% to 16%) with typical PsA features." }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L20.048
+    kind: card
+    topic: diagnosis
+    front: Why does the lecture call PsA "usually seronegative"?
+    back: Because low-level RF (5–16%), ACPA (~5%) and low-titre ANA can be positive in typical PsA.
+    src: { page: 334, quote: "As a result, the term \"usually seronegative\" arthritis is most suitable for psa." }
+    status: unverified
+  # ---------- p335: imaging ----------
+  - id: rheum.L20.049
+    kind: card
+    topic: imaging
+    front: What radiological combination is characteristic of PsA?
+    back: Bone destruction and pathologic new bone formation, often in the same digit or even the same joint.
+    src: { page: 335, quote: "Radiological findings are driven by bone destruction and pathologic new bone formation, often in the same digit or even the same joint" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L20.050
+    kind: enumerate
+    topic: imaging
+    prompt: List the characteristic X-ray changes of PsA.
+    points:
+      - Pencil-in-cup changes of digital joints
+      - Periostitis
+      - Joint ankylosis
+      - Tuft osteolysis
+      - Asymmetric syndesmophytes and sacroiliac changes
+    pass: 4
+    src: { page: 335, quote: "Pencil-in-cup changes of digital joints. - Periostitis. - Joint ankyloses. - Tuft osteolysis." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L20.051
+    kind: cloze
+    topic: imaging
+    text: "Despite DMARDs, PsA causes radiographic damage in about {{c1::47%}} of patients in the first {{c2::two years}}."
+    src: { page: 335, quote: "Despite treatment with DMARDs, PsA results in radiographic damage in about 47% of patients during the first two years of the disease." }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L20.052
+    kind: card
+    topic: imaging
+    front: What are ultrasound and MRI used for in PsA?
+    back: Ultrasound detects subclinical synovitis and enthesitis better than examination and monitors synovitis response; MRI of the spine or SIJs helps, especially in HLA-B27-related active axial PsA.
+    src: { page: 335, quote: "Is more sensitive than clinical examination in detecting subclinical synovitis and enthesitis in early psa." }
+    status: unverified
+  # ---------- p335-337: activity ----------
+  - id: rheum.L20.053
+    kind: enumerate
+    topic: activity
+    prompt: List the ACR/NPF features of severe psoriatic arthritis.
+    points:
+      - Erosive disease
+      - Elevated ESR or CRP due to PsA
+      - Long-term damage interfering with function
+      - Highly active disease with major quality-of-life impairment
+      - Active PsA at many sites including dactylitis and enthesitis
+      - Rapidly progressive disease
+    pass: 4
+    src: { page: 335, quote: "Erosive disease. • Elevated markers of inflammation (ESR, CRP) attributable to PsA." }
+    status: unverified
+  - id: rheum.L20.054
+    kind: enumerate
+    topic: activity
+    prompt: List the EULAR poor prognostic factors in PsA.
+    points:
+      - Many swollen joints
+      - Structural damage with inflammation
+      - High ESR or CRP
+      - Clinically relevant extra-articular manifestations
+    pass: 4
+    src: { page: 336, quote: "Many swollen joints. • Structure damage in the presence of inflammation. • High ESR or CRP." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L20.055
+    kind: table
+    topic: activity
+    title: Tools for PsA disease activity (p336)
+    columns: [Domain, Tool]
+    rows:
+      - [Peripheral joints, "68 tender and 66 swollen joint counts"]
+      - [Axial disease, BASDAI]
+      - [Quality of life, PsAQoL]
+      - [Fatigue, FACIT]
+      - [Simple routine care, RAPID3]
+    blanks: [[0, 1], [1, 1], [3, 1], [4, 1]]
+    src: { page: 336, quote: "Axial disease activity is determined by BASDAI (Bath Ankylosing Spondylitis Disease Activity Index)" }
+    status: unverified
+  - id: rheum.L20.056
+    kind: enumerate
+    topic: activity
+    prompt: Name the composite indices used in PsA.
+    points:
+      - DAPSA
+      - MDA (minimal disease activity)
+      - ACR 20/50/70
+      - PsARC
+      - CPDAI
+    pass: 4
+    src: { page: 336, quote: "DAPSA (Disease Activity Index for PsA). - MDA (Minimal Disease Activity). - ACR 20/50/70 criteria." }
+    status: unverified
+  - id: rheum.L20.057
+    kind: enumerate
+    topic: activity
+    prompt: What are the components of DAPSA?
+    points:
+      - Tender joint count (0–68)
+      - Swollen joint count (0–66)
+      - CRP (mg/dl)
+      - Patient pain VAS (0–10)
+      - Patient global disease activity VAS (0–10)
+    pass: 5
+    src: { page: 337, quote: "Tender joint count (0-68). • Swollen joint count (0-66). • Crp level (mg/dl). • Patient vas for pain (0-10)." }
+    status: unverified
+  - id: rheum.L20.058
+    kind: table
+    topic: activity
+    title: DAPSA categories (p337)
+    columns: [DAPSA, Activity]
+    rows:
+      - ["0–4", Remission]
+      - ["5–14", Low]
+      - ["15–28", Moderate]
+      - [">28", High]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 337, quote: "0-4 = remission. - 5-14 =low. - 15-28 =moderate. - >28 = v.high." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: rheum.L20.059
+    kind: enumerate
+    topic: activity
+    prompt: List the 7 MDA criteria (5 needed).
+    points:
+      - Tender joints ≤1
+      - Swollen joints ≤1
+      - PASI ≤1 or BSA ≤3
+      - Pain VAS ≤15
+      - Patient global VAS ≤20
+      - HAQ ≤0.5 (printed ≤5)
+      - Tender entheseal points ≤1
+    pass: 6
+    src: { page: 337, quote: "Patients with PsA are considered to have MDA when they meet 5 out 7 of the following criteria:" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L20.060
+    kind: card
+    topic: activity
+    front: What does MDA include, and how is it used?
+    back: Both remission and low disease activity as acceptable targets; used as a treatment target and a responder index.
+    src: { page: 337, quote: "MDA encompasses both remission and low disease activity as acceptable targets for therapy." }
+    status: unverified
+  - id: rheum.L20.061
+    kind: mcq
+    topic: activity
+    stem: A patient with PsA has a DAPSA of 18. How is the disease activity graded?
+    options: [Moderate, Low, Remission, High]
+    answer: 0
+    why:
+      - "Correct: 15–28 is moderate (p337)."
+      - Low is 5–14.
+      - Remission is 0–4.
+      - High is above 28.
+    src: { page: 337, quote: "0-4 = remission. - 5-14 =low. - 15-28 =moderate. - >28 = v.high." }
+    status: unverified
+  - id: rheum.L20.062
+    kind: enumerate
+    topic: activity
+    prompt: Which comorbidities and related conditions should be considered in PsA (conclusion)?
+    points:
+      - Obesity and metabolic syndrome
+      - Cardiovascular disease
+      - Depression and anxiety
+      - Liver disease
+      - Chronic infections
+      - Malignancy
+      - Osteoporosis, fibromyalgia, reproductive health
+    pass: 5
+    src: { page: 338, quote: "obesity, metabolic syndrome, cardiovascular disease, depression and anxiety, liver disease, chronic infections, malignancy, osteoporosis, fibromyalgia" }
+    status: unverified
+  # ---------- p338-339: drugs ----------
+  - id: rheum.L20.063
+    kind: table
+    topic: treatment
+    title: PsA treatment classes (p338)
+    columns: [Class, Drugs]
+    rows:
+      - [Non-pharmacologic, "PT, OT, smoking cessation, weight loss, massage, exercise"]
+      - [Symptomatic, "NSAIDs, glucocorticoids, local steroid injections"]
+      - [Oral small molecules, "Methotrexate, sulfasalazine, cyclosporine, leflunomide, apremilast"]
+      - [TNF inhibitors, "Etanercept, infliximab, adalimumab, golimumab, certolizumab pegol"]
+      - [IL-12/23 inhibitor, Ustekinumab]
+      - [IL-17 inhibitors, "Secukinumab, ixekizumab, brodalumab"]
+      - [CTLA4-Ig, Abatacept]
+      - [JAK inhibitor, Tofacitinib]
+    blanks: [[2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1]]
+    src: { page: 338, quote: "Treatment" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L20.064
+    kind: card
+    topic: treatment
+    front: Which conventional drug is the drug of choice for both joint and skin disease in PsA?
+    back: Methotrexate.
+    src: { page: 339, quote: "Methotrexate is the drug of choice for both joint & skin manifestations." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L20.065
+    kind: card
+    topic: treatment
+    front: Why are antimalarials avoided in PsA?
+    back: They may worsen psoriatic skin lesions; some consider them contraindicated.
+    src: { page: 339, quote: "Antimalarial drugs may increase the skin lesions (some consider them to be contraindicated)." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L20.066
+    kind: card
+    topic: treatment
+    front: Two cautions with corticosteroids in PsA?
+    back: Rapid tapering may flare the skin disease; never give an intra-articular injection through a psoriatic plaque.
+    src: { page: 339, quote: "In patients who require IA injections avoid injection through psoriatic plaques." }
+    status: unverified
+  - id: rheum.L20.067
+    kind: card
+    topic: treatment
+    front: For which PsA domains are TNF inhibitors effective?
+    back: Arthritis, dactylitis, enthesitis, spondylitis and skin disease.
+    src: { page: 339, quote: "Effective for arthritis, dactylitis, enthesitis, spondylitis and skin disease." }
+    status: unverified
+  - id: rheum.L20.068
+    kind: card
+    topic: treatment
+    front: What do ustekinumab and secukinumab target?
+    back: Ustekinumab inhibits IL-12/23; secukinumab is a fully human anti-IL-17A monoclonal antibody that binds and neutralizes IL-17A.
+    src: { page: 339, quote: "Is a fully human, anti-il-17a monoclonal antibody that binds to and neutralizes il-17a." }
+    status: unverified
+  - id: rheum.L20.069
+    kind: card
+    topic: treatment
+    front: How does apremilast work?
+    back: An oral phosphodiesterase-4 inhibitor specific for cAMP, raising intracellular cAMP.
+    src: { page: 339, quote: "Is a novel, orally administered phosphodiesterase-4 inhibitor that is specific for camp, resulting in increased intracellular camp levels." }
+    status: unverified
+  - id: rheum.L20.070
+    kind: mcq
+    topic: treatment
+    stem: "Which of the following medications is a targeted synthetic DMARD specifically approved for psoriatic arthritis?"
+    options: [Methotrexate, Apremilast, Sulfasalazine, Leflunomide]
+    answer: 1
+    why:
+      - Methotrexate is a conventional DMARD.
+      - "Correct: apremilast is an oral PDE-4 inhibitor, a targeted small molecule (p339)."
+      - Sulfasalazine is a conventional DMARD.
+      - Leflunomide is a conventional DMARD.
+    src: { page: 339, quote: "Is a novel, orally administered phosphodiesterase-4 inhibitor that is specific for camp, resulting in increased intracellular camp levels." }
+    status: unverified
+    tags: [book-question]
+  - id: rheum.L20.071
+    kind: card
+    topic: treatment
+    front: Which JAK inhibitors work in PsA, and how?
+    back: Tofacitinib and upadacitinib interfere with the IL-17, IL-21 and IL-23 cascade; tofacitinib acts on JAK3 and JAK1.
+    src: { page: 339, quote: "Tofacitinib & upadacitinib are also able to interfere in the inflammatory cascade of IL-17, IL-21, and IL-23." }
+    status: unverified
+  # ---------- p339-340: strategy ----------
+  - id: rheum.L20.072
+    kind: card
+    topic: treatment
+    front: What guides initial PsA treatment, and what is the target?
+    back: Start early, guided by severity (activity, damage and impact) in each domain; treat to target of remission/inactive disease or low/minimal disease activity.
+    src: { page: 340, quote: "A treat-to–target approach should be employed for peripheral and axial arthritis, with a target of remission/inactive disease or low/minimal disease activity." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L20.073
+    kind: card
+    topic: treatment
+    front: What must be done before giving PsA drugs?
+    back: Screen for comorbidities, baseline tests and appropriate vaccinations; refer for cardiovascular and liver risk management as needed.
+    src: { page: 340, quote: "Patients should undergo pretreatment screening for comorbidities and baseline testing and appropriate vaccinations before drug administration." }
+    status: unverified
+  - id: rheum.L20.074
+    kind: card
+    topic: treatment
+    front: Why is weight reduction part of PsA treatment?
+    back: Obesity and metabolic syndrome are common and may lessen the response to treatment.
+    src: { page: 340, quote: "Obesity and metabolic syndrome are common comorbidities in PsA and may lessen treatment response to treatment." }
+    status: unverified
+  - id: rheum.L20.075
+    kind: enumerate
+    topic: treatment
+    prompt: What should PsA patients be educated about?
+    points:
+      - The nature of their condition
+      - The effect of stress on their disease
+      - Follow-up of associated comorbidities
+      - Their medications, regular use and monitoring for side effects
+    pass: 3
+    src: { page: 340, quote: "To the nature of their condition. - To the effect of stress on their disease." }
+    status: unverified
+  # ---------- p341-342: peripheral arthritis algorithm ----------
+  - id: rheum.L20.076
+    kind: card
+    topic: treatment
+    front: Define mild peripheral PsA and its first treatment.
+    back: Fewer than four joints, no radiological damage, minimal discomfort or impairment; start an NSAID (apremilast 30 mg twice daily is a safer alternative with many comorbidities).
+    src: { page: 341, quote: "Defined as disease involving less than four joints. - No radiological evidence of damage. - Minimal discomfort or functional impairment." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L20.077
+    kind: cloze
+    topic: treatment
+    text: "Active despite NSAIDs, or moderate–severe without erosions: start a cDMARD, usually {{c1::MTX 15–25 mg}} once weekly, rather than a biologic."
+    src: { page: 341, quote: "Initiate treatment with a cDMARD, usually MTX; 15 to 25 mg once weekly rather than a biologic agent." }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L20.078
+    kind: card
+    topic: treatment
+    front: Alternatives to methotrexate for peripheral PsA, and their limits?
+    back: Leflunomide (20 mg daily; less helpful for skin) and sulfasalazine; apremilast, but not in erosive disease since it is not proven to prevent joint damage.
+    src: { page: 341, quote: "Another alternative to MTX is apremilast, which should not be used in patients with erosive disease" }
+    status: unverified
+  - id: rheum.L20.079
+    kind: card
+    topic: treatment
+    front: First-line therapy for severe peripheral PsA (erosive with functional limitation)?
+    back: A TNF inhibitor, to limit joint damage and restore function faster; secukinumab or ustekinumab is an alternative.
+    src: { page: 341, quote: "In patients presenting with severe disease (erosive disease and functional limitation), start a TNFinhibitor as first-line therapy" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L20.080
+    kind: card
+    topic: treatment
+    front: When do you move from a cDMARD to a TNF inhibitor in peripheral PsA?
+    back: When joint counts do not improve after 3 months of a cDMARD, or more than three tender and swollen joints remain.
+    src: { page: 341, quote: "do not improve after 3 months of treatment with a cDMARD (ex, MTX), or who still have more than three tender and swollen joints" }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L20.081
+    kind: order
+    topic: treatment
+    prompt: Order the biologic sequence for peripheral PsA after a first TNF inhibitor fails.
+    steps:
+      - Second TNF inhibitor (switch antibody ↔ etanercept)
+      - Secukinumab
+      - Ustekinumab
+      - Abatacept or guselkumab
+    src: { page: 342, quote: "use a second TNF inhibitor rather than trying a different class of biologic agent." }
+    status: unverified
+  - id: rheum.L20.082
+    kind: card
+    topic: treatment
+    front: How do you choose the second TNF inhibitor in PsA?
+    back: Switch from an antibody (infliximab, adalimumab, golimumab, certolizumab) to the soluble receptor etanercept, or vice versa.
+    src: { page: 342, quote: "It is preferred to switch from one of the antibody- based agents (eg, infliximab, adalimumab, golimumab, or certolizumab) to the soluble TNF receptor (etanercept)" }
+    status: unverified
+  - id: rheum.L20.083
+    kind: cloze
+    topic: treatment
+    text: "Secukinumab: {{c1::150 mg}} SC at weeks 0–4, then 150 mg every {{c2::4 weeks}} (up to 300 mg). Ustekinumab: {{c3::45 mg}} SC at 0 and 4 weeks, then every 12 weeks."
+    src: { page: 342, quote: "loading dose of 150 mg given at weeks 0, 1, 2, 3, and 4, followed by 150 mg every four weeks" }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L20.084
+    kind: card
+    topic: treatment
+    front: What determines the choice among TNF inhibitors?
+    back: Patient preference for route (SC or IV) and frequency, and cost to the patient.
+    src: { page: 342, quote: "The choice of the agent is based upon patient preferences for route (sc versus IV) and frequency of administration, and potential cost to the patient." }
+    status: unverified
+  - id: rheum.L20.085
+    kind: card
+    topic: treatment
+    front: Axial PsA not responding to a first TNF inhibitor?
+    back: Switch to a second TNF inhibitor, then to secukinumab or ustekinumab.
+    src: { page: 342, quote: "In patients with axial symptoms that do not respond adequately to initial therapy with a TNF inhibitor, switch to a second TNF inhibitor" }
+    status: unverified
+  - id: rheum.L20.086
+    kind: mcq
+    topic: treatment
+    stem: A 45-year-old man with PsA has 8 swollen joints, erosions on X-ray and cannot work. What does the lecture advise first?
+    options:
+      - A TNF inhibitor
+      - NSAID alone
+      - Apremilast
+      - Hydroxychloroquine
+      - Leflunomide alone
+    answer: 0
+    why:
+      - "Correct: severe (erosive, functional limitation) disease starts a TNF inhibitor first-line (p341)."
+      - NSAIDs are for mild disease.
+      - Apremilast should not be used in erosive disease.
+      - Antimalarials may worsen psoriasis.
+      - cDMARDs are for moderate disease without erosions.
+    src: { page: 341, quote: "In patients presenting with severe disease (erosive disease and functional limitation), start a TNFinhibitor as first-line therapy" }
+    status: unverified
+  - id: rheum.L20.087
+    kind: mcq
+    topic: treatment
+    stem: A woman with PsA on adalimumab has an inadequate joint response. Which next step does the lecture prefer?
+    options:
+      - Switch to etanercept
+      - Switch to infliximab
+      - Switch to abatacept
+      - Add hydroxychloroquine
+      - Switch to apremilast
+    answer: 0
+    why:
+      - "Correct: use a second TNF inhibitor, switching antibody to soluble receptor (p342)."
+      - Infliximab is another antibody; the book prefers switching type.
+      - Abatacept is for when other drugs failed.
+      - Antimalarials may worsen psoriasis.
+      - Not the book's next step after TNF inhibitor failure.
+    src: { page: 342, quote: "It is preferred to switch from one of the antibody- based agents (eg, infliximab, adalimumab, golimumab, or certolizumab) to the soluble TNF receptor (etanercept)" }
+    status: unverified
+  - id: rheum.L20.088
+    kind: mcq
+    topic: treatment
+    stem: A man with PsA in 4 joints, no erosions, is still active after 2 months of NSAIDs. He has no back pain. Next step?
+    options:
+      - Methotrexate 15–25 mg weekly
+      - Etanercept
+      - Ustekinumab
+      - Oral prednisolone with rapid taper
+      - Hydroxychloroquine
+    answer: 0
+    why:
+      - "Correct: active despite NSAIDs, no erosions, no axial disease: a cDMARD, usually MTX (p341)."
+      - A biologic is for severe or cDMARD-resistant disease.
+      - A biologic is for severe or cDMARD-resistant disease.
+      - Rapid steroid tapers can flare psoriasis.
+      - Antimalarials may worsen psoriasis.
+    src: { page: 341, quote: "Initiate treatment with a cDMARD, usually MTX; 15 to 25 mg once weekly rather than a biologic agent." }
+    status: unverified
+  # ---------- p343-344: enteropathic ----------
+  - id: rheum.L20.089
+    kind: card
+    topic: enteropathic
+    front: Define enteropathic arthritis.
+    back: Arthritis induced by or occurring with intestinal disease, such as IBD (ulcerative colitis, Crohn disease), Whipple disease and post-enteritic reactive arthritis.
+    src: { page: 343, quote: "Enteropathic arthritis can be defined as arthritis induced by or occurring with intestinal disease" }
+    status: unverified
+  - id: rheum.L20.090
+    kind: card
+    topic: enteropathic
+    front: How might gut disease cause arthritis?
+    back: Increased gut permeability lets harmful products (and intact allergens) through; infection may spread from pelvic organs via pelvic and paraspinal lymphatics to the spine.
+    src: { page: 343, quote: "Increased gut permeability is a possible pathophysiologic significance by allowing penetration of harmful products." }
+    status: unverified
+  - id: rheum.L20.091
+    kind: enumerate
+    topic: enteropathic
+    prompt: Characteristics of axial arthritis in IBD?
+    points:
+      - Insidious low back pain, especially in the young
+      - Morning stiffness
+      - Worse with prolonged sitting or standing
+      - Better with moderate activity
+      - More common in Crohn than in UC
+      - Independent of GI symptoms
+    pass: 5
+    src: { page: 343, quote: "Improved by moderate activity. • More common in CD than in UC. • Independent of GI symptoms." }
+    status: unverified
+  - id: rheum.L20.092
+    kind: table
+    topic: enteropathic
+    title: Peripheral arthritis in IBD (p343)
+    columns: [Feature, Type 1, Type 2]
+    rows:
+      - [Joints, "Pauciarticular (<5)", "Polyarticular (>5)"]
+      - [Course, "Acute, self-limiting, <6–10 weeks", "Chronic, months to years"]
+      - [Pattern, "Asymmetric, large joints", "Symmetric, small hand joints"]
+      - [Bowel activity, "Strongly correlated", Independent]
+    blanks: [[0, 1], [1, 2], [2, 1], [3, 1], [3, 2]]
+    src: { page: 343, quote: "Type 2 (polyarticular [>5 joints]) - Chronic, lasting months to years; more likely symmetrical, affecting small joints of the hands; independent of bowel activity." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L20.093
+    kind: card
+    topic: enteropathic
+    front: Is IBD peripheral arthritis erosive, and when does it appear?
+    back: Non-deforming and non-erosive; it may precede the bowel disease but usually comes with or after it, as late as 10 years.
+    src: { page: 343, quote: "Non-deforming and non-erosive." }
+    status: unverified
+  - id: rheum.L20.094
+    kind: card
+    topic: enteropathic
+    front: Which organisms trigger post-enteritic reactive arthritis, and which HLA is predisposing?
+    back: Shigella, Salmonella, Yersinia and Campylobacter jejuni; strong predilection for HLA-B27.
+    src: { page: 344, quote: "It is triggered by a number of organisms: Shigella, Salmonella, yersinia and campylobacter jejuni." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L20.095
+    kind: card
+    topic: enteropathic
+    front: Clinical picture and course of post-enteritic reactive arthritis?
+    back: Knees and ankles, often with plantar fasciitis, Achilles tendinitis and axial disease; usually self-limited over weeks to months.
+    src: { page: 344, quote: "The arthritis is often self limited with complete resolution in several weeks to months." }
+    status: unverified
+  - id: rheum.L20.096
+    kind: mcq
+    topic: enteropathic
+    stem: "Which of the following statements regarding enteropathic arthritis is true?"
+    options:
+      - It is always associated with significant gastrointestinal symptoms
+      - The arthritis often presents as symmetrical polyarthritis
+      - It rarely affects the spine compared to peripheral joints
+      - Patients typically have a negative rheumatoid factor
+    answer: 3
+    why:
+      - Axial disease is independent of GI symptoms, and arthritis may precede bowel disease (p343).
+      - Type 1, the acute form tied to bowel activity, is asymmetric and pauciarticular.
+      - Sacroiliitis and spondylitis are part of the picture.
+      - "Correct: it is a seronegative spondyloarthritis, so RF is typically negative."
+    src: { page: 343, quote: "Independent of GI symptoms." }
+    status: unverified
+    tags: [book-question]
+  - id: rheum.L20.097
+    kind: mcq
+    topic: enteropathic
+    stem: A 30-year-old with active ulcerative colitis develops a painful swollen knee and ankle that settle within 4 weeks as the colitis is treated. Which type?
+    options:
+      - Type 1 peripheral arthritis
+      - Type 2 peripheral arthritis
+      - Axial enteropathic arthritis
+      - Psoriatic arthritis mutilans
+      - Rheumatoid arthritis
+    answer: 0
+    why:
+      - "Correct: pauciarticular, large joints, acute, self-limited, tracks bowel activity = type 1 (p343)."
+      - Type 2 is chronic, symmetric small-joint and independent of bowel activity.
+      - Axial disease is the spine and sacroiliac joints.
+      - No psoriasis or phalangeal destruction.
+      - RA is chronic symmetric small-joint disease.
+    src: { page: 343, quote: "Acute, self-limiting attacks, lasting less than 6- 10 weeks; asymmetrical and affecting large joints" }
+    status: unverified
+  # ---------- cases and essays ----------
+  - id: rheum.L20.098
+    kind: case
+    topic: diagnosis
+    stem: A 38-year-old man has a swollen "sausage" right second toe and painful left knee for 4 months. He denies skin disease.
+    steps:
+      - question: Where should you look for hidden psoriasis?
+        options: ["Scalp, nails, umbilicus, gluteal cleft, behind the ears", "Only the extensor elbows", "Only the palms", "Skin is irrelevant to the diagnosis"]
+        answer: 0
+        why: "The book lists scalp, nails, umbilicus, gluteal cleft and behind the ear (p330)."
+      - reveal: "You find a plaque in the gluteal cleft and pitted nails. RF negative by ELISA."
+        question: CASPAR score?
+        options: ["5", "3", "4", "2"]
+        answer: 0
+        why: "Current psoriasis 2 + nails 1 + dactylitis 1 + negative RF 1 = 5; he has inflammatory articular disease, so ≥3 classifies PsA (p334)."
+      - reveal: "X-ray: no erosions. After 3 months of NSAIDs the knee is still swollen."
+        question: Next?
+        options: ["MTX 15–25 mg weekly", "TNF inhibitor", "Hydroxychloroquine", "Apremilast only if erosive"]
+        answer: 0
+        why: "Active despite NSAIDs without erosions or axial symptoms: cDMARD, usually MTX (p341)."
+      - reveal: "After 3 more months on MTX he still has 5 tender and swollen joints."
+        question: Next?
+        options: ["TNF inhibitor", "Add hydroxychloroquine", "Stop MTX and observe", "Rapid steroid taper"]
+        answer: 0
+        why: "No improvement after 3 months of a cDMARD, or >3 tender and swollen joints: TNF inhibitor (p341)."
+    src: { page: 334, quote: "Dactylitis: present or past, documented by a rheumatologist – 1" }
+    status: unverified
+  - id: rheum.L20.099
+    kind: case
+    topic: patterns
+    stem: A 50-year-old woman with 12 years of plaque psoriasis has neck stiffness and asymmetric finger swelling.
+    steps:
+      - question: Most common time order of skin and joints in PsA?
+        options: ["Skin first, typically by 5–10 years (up to 80%)", "Joints first in most", "Always simultaneous", "Skin after 20 years"]
+        answer: 0
+        why: "Skin appears before arthritis in up to 80%, typically by 5–10 years (p330)."
+      - reveal: "HLA-B27 negative. X-ray: unilateral sacroiliitis, bulky non-marginal syndesmophytes."
+        question: Does this fit?
+        options: ["Yes, B27-negative axial PsA", "No, PsA never affects the neck", "No, this is AS", "No, sacroiliitis is always bilateral"]
+        answer: 0
+        why: "B27-negative axial PsA: older onset, more cervical disease, asymmetric unilateral sacroiliitis, bulky skipping syndesmophytes (p332)."
+      - reveal: Hand X-ray shows pencil-in-cup DIP change with periostitis in the same finger.
+        question: What is characteristic about this?
+        options: ["Destruction and new bone in the same digit", "Only osteopenia", "Symmetric erosions like RA", "Chondrocalcinosis"]
+        answer: 0
+        why: "Bone destruction with pathologic new bone formation in the same digit or joint is characteristic (p335)."
+    src: { page: 332, quote: "Axial disease in PsA is more complicated." }
+    status: unverified
+  - id: rheum.L20.100
+    kind: essay
+    topic: patterns
+    prompt: Describe the clinical patterns and extra-articular features of psoriatic arthritis.
+    outline:
+      - "Moll and Wright": ["Oligoarticular 70% (later series: polyarticular 63%)", "Asymmetric DIP 10% with nail changes", "Mutilans 5%; RA-like symmetric 15% (RF negative); spondylitis 5%"]
+      - "Axial": ["B27 in 30%; spine 40–70% on X-ray", "B27+: AS-like; B27−: older, cervical, unilateral SI, bulky skipping syndesmophytes"]
+      - "Enthesitis and dactylitis": ["Achilles, plantar fascia, patellar, iliac crest, rotator cuff, epicondyles", "US beats palpation"]
+      - "Extra-articular": ["Uveitis 7–18%, bilateral, with spinal disease", "Aortic insufficiency, metabolic syndrome, IBD, amyloidosis, fatigue"]
+    src: { page: 330, quote: "5 types of arthritis were originally described by Moll and Wright (1973)." }
+    status: unverified
+  - id: rheum.L20.101
+    kind: essay
+    topic: treatment
+    prompt: Outline the management of peripheral psoriatic arthritis.
+    outline:
+      - "Principles": ["Start early; severity per domain; treat to target (remission or MDA)", "Screen comorbidities, baseline tests, vaccines; PT/OT, exercise, weight loss, education"]
+      - "Mild (<4 joints, no damage)": ["NSAID; apremilast 30 mg bd as safer alternative"]
+      - "Moderate, non-erosive": ["MTX 15–25 mg weekly (also helps skin); LEF, SSZ; apremilast not if erosive"]
+      - "Severe or cDMARD failure": ["TNF inhibitor (or secukinumab, ustekinumab)", "After 3 months or >3 tender and swollen joints", "Second TNFi (switch type) → secukinumab → ustekinumab → abatacept, guselkumab; JAK inhibitors"]
+      - "Cautions": ["Antimalarials may worsen skin", "Steroids: flare on fast taper, no injection through plaques"]
+    src: { page: 341, quote: "In patients presenting with severe disease (erosive disease and functional limitation), start a TNFinhibitor as first-line therapy" }
+    status: unverified
+  - id: rheum.L20.102
+    kind: essay
+    topic: enteropathic
+    prompt: Discuss enteropathic arthritis.
+    outline:
+      - "Definition and mechanism": ["Arthritis with IBD, Whipple, post-enteritic reactive arthritis", "Gut permeability; spread via pelvic and paraspinal lymphatics"]
+      - "Axial": ["Insidious back pain in the young, morning stiffness, better with activity", "Crohn > UC; independent of GI symptoms"]
+      - "Peripheral": ["Non-erosive; usually with or after bowel disease, up to 10 years", "Type 1 pauciarticular acute large-joint, tracks IBD", "Type 2 polyarticular chronic small-joint, independent"]
+      - "Post-enteritic ReA": ["Shigella, Salmonella, Yersinia, Campylobacter; HLA-B27", "Knees, ankles, plantar fasciitis, Achilles; self-limited"]
+    src: { page: 343, quote: "Enteropathic arthritis can be defined as arthritis induced by or occurring with intestinal disease" }
+    status: unverified

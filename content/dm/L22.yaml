@@ -1,0 +1,508 @@
+schema: batna.content/v1
+lecture: dm.L22
+title: "Diabetic dyslipidemia"
+author: "Prof. Dr. Magdy Helmy"
+# Printed page numbers skip 281-282 in the book: this lecture ends on p280.
+book: { chapter: 6, pages: [271, 282] }
+topics:
+  - { id: case, title: "Case study: a real-life patient" }
+  - { id: cvrisk, title: "Why diabetes drives atherogenesis" }
+  - { id: pleiotropic, title: "Pleiotropic effects of statins" }
+  - { id: jupiter, title: "JUPITER trial" }
+  - { id: esc, title: "ESC 2023: risk categories, LDL targets, treatment" }
+  - { id: intensity, title: "Intensity of lipid-lowering treatment, I-ROSETTE" }
+  - { id: residual, title: "Residual risk and triglycerides" }
+  - { id: icosapent, title: "Icosapent ethyl: ADA 2024, REDUCE-IT, FDA" }
+items:
+  # ---------- p271-272: the case ----------
+  - id: dm.L22.001
+    kind: table
+    topic: case
+    title: "The book's real-life patient (p271)"
+    columns: [Finding, Value]
+    rows:
+      - [Age and history, "55 years, T2DM 7 years, HTN 2 years, smoker"]
+      - [BMI and BP, "32 kg/m2, 130/80 mmHg"]
+      - [HbA1c, 6.9%]
+      - [Lipids, "TC 209, LDL-C 128, HDL-C 35, TG 230 mg/dL"]
+      - [Kidney, "Creatinine 0.9 mg/dL, eGFR 88, UACR 16 mg/g"]
+      - [Feet, Diminished vibration sense]
+    blanks: [[3, 1], [4, 1]]
+    src: { page: 271, quote: "Lipid panel: TC: 209 mg/dl, LDL-C: 128 mg/dl, HDL-C: 35 mg/dl, TG: 230 mg/dl." }
+    status: unverified
+  - id: dm.L22.002
+    kind: card
+    topic: case
+    front: "What 10-year CV risk did SCORE2-Diabetes give the book's 55-year-old smoker (TC 209, HDL 35, HbA1c 6.9%, eGFR 88, SBP 130, diabetes from 48)?"
+    back: "27.6%, which is very high CV risk (10-year risk ≥ 20%)."
+    src: { page: 275, quote: "27.6% 10-year CV Risk" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L22.003
+    kind: enumerate
+    topic: case
+    prompt: "List the inputs of the ESC SCORE2-Diabetes calculator used for the book's case."
+    points: [Sex, Age, Age at diabetes diagnosis, Current smoking, Systolic blood pressure, Total cholesterol, HDL cholesterol, HbA1c, eGFR]
+    pass: 7
+    src: { page: 275, quote: "Age at Diabetes Diagnosis 48ys" }
+    status: unverified
+  # ---------- p272: CV risk in diabetes ----------
+  - id: dm.L22.004
+    kind: enumerate
+    topic: cvrisk
+    prompt: Mention the three metabolic drivers by which diabetes harms the endothelium (book figure).
+    points: [Hyperglycemia, Excess free fatty acids, Insulin resistance]
+    pass: 3
+    src: { page: 272, quote: "Hyperglycemia Excess Free Fatty Acids Insulin Resistance" }
+    status: unverified
+  - id: dm.L22.005
+    kind: enumerate
+    topic: cvrisk
+    prompt: Through which three mechanisms do those drivers damage the endothelium?
+    points: [Oxidative stress, Protein kinase C activation, RAGE (receptor for advanced glycation end products) activation]
+    pass: 3
+    src: { page: 272, quote: "Oxidative Stress Protein Kinase C Activation Receptor for Advanced Glycation End Product (RAGE) Activation" }
+    status: unverified
+  - id: dm.L22.006
+    kind: table
+    topic: cvrisk
+    title: Endothelial dysfunction in diabetes (book figure p272)
+    columns: [Pathway, Endothelial change, Result]
+    rows:
+      - [Vasoconstriction, "↓ NO, ↑ endothelin-1, ↑ angiotensin II", "Hypertension, vascular smooth muscle growth"]
+      - [Inflammation, "↓ NO, ↑ NF-κB, ↑ angiotensin II, ↑ activator protein-1", "Chemokines, cytokines, adhesion molecules"]
+      - [Thrombosis, "↓ NO, ↑ tissue factor, ↑ PAI-1, ↓ prostacyclin", "Hypercoagulation, platelet activation, less fibrinolysis"]
+    blanks: [[0, 1], [1, 2], [2, 1], [2, 2]]
+    src: { page: 272, quote: "Vasoconstriction Inflammation Thrombosis Atherogenesis" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L22.007
+    kind: mcq
+    topic: cvrisk
+    stem: "In the book's figure of CV risk in diabetes, which endothelial change drives thrombosis?"
+    options: [Increased PAI-1 and tissue factor, Increased prostacyclin, Increased nitric oxide, Decreased endothelin-1]
+    answer: 0
+    why:
+      - "Correct: ↑ TF, ↑ PAI-1, ↓ prostacyclin and ↓ NO give hypercoagulation and less fibrinolysis."
+      - "Prostacyclin FALLS in diabetes."
+      - "NO falls in every arm of the figure."
+      - "Endothelin-1 rises (vasoconstriction)."
+    src: { page: 272, quote: "Vasoconstriction Inflammation Thrombosis Atherogenesis" }
+    status: unverified
+  # ---------- p272: pleiotropic ----------
+  - id: dm.L22.008
+    kind: enumerate
+    topic: pleiotropic
+    prompt: Mention pleiotropic (non-LDL) effects of statins on the vessel wall.
+    points:
+      - "↑ Endothelial function and NO bioactivity"
+      - ↓ Free radicals and endothelin
+      - ↓ Macrophages and inflammation
+      - ↓ Platelet activation and coagulation
+      - ↑ Endothelial progenitor cells
+      - ↓ Collagen and MMPs
+      - ↓ AT1 receptor and proliferation
+    pass: 5
+    src: { page: 272, quote: "Pleiotropic effects of statins on the vessel wall" }
+    status: unverified
+  - id: dm.L22.009
+    kind: card
+    topic: pleiotropic
+    front: Besides lowering LDL-C, how do statins change HDL-C and triglycerides (book figure)?
+    back: They raise HDL-C and lower triglycerides.
+    src: { page: 272, quote: "Pleiotropic effects of statins on the vessel wall" }
+    status: unverified
+  - id: dm.L22.010
+    kind: mcq
+    topic: pleiotropic
+    stem: "Which is NOT a pleiotropic effect of statins in the book's figure?"
+    options: [Increased endothelin, Increased NO bioactivity, Fewer matrix metalloproteinases, Fewer AT1 receptors]
+    answer: 0
+    why:
+      - "Correct: statins DEcrease endothelin."
+      - "Listed: ↑ NO bioactivity."
+      - "Listed: ↓ MMPs."
+      - "Listed: ↓ AT1 receptor."
+    src: { page: 272, quote: "Pleiotropic effects of statins on the vessel wall" }
+    status: unverified
+  # ---------- p273-274: JUPITER ----------
+  - id: dm.L22.011
+    kind: enumerate
+    topic: jupiter
+    prompt: Mention the JUPITER entry criteria.
+    points: [No history of CAD, "Men ≥ 50 years, women ≥ 60 years", "LDL-C < 130 mg/dL", "CRP ≥ 2.0 mg/L"]
+    pass: 4
+    src: { page: 273, quote: "No history of CAD men ≥50 yrs women ≥60 yrs LDL-C <130 mg/dl CRP ≥2.0 mg/L" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L22.012
+    kind: cloze
+    topic: jupiter
+    text: "JUPITER randomised {{c1::rosuvastatin 20 mg}} against placebo (8901 each), median follow-up {{c2::1.9 years}}."
+    src: { page: 273, quote: "Rosuvastatin 20 mg (n=8901) Placebo (n=8901) Median follow-up 1.9 years" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L22.013
+    kind: table
+    topic: jupiter
+    title: JUPITER results
+    columns: [Outcome, Reduction, Hazard ratio]
+    rows:
+      - [Fatal or nonfatal MI, 54%, "0.46 (31 vs 68 events)"]
+      - [Fatal or nonfatal stroke, 48%, "0.52 (33 vs 64 events)"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 273, quote: "Fatal or Nonfatal Myocardial Infarction HR 0.46 (95% CI 0.30-0.70) - 54 %" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L22.014
+    kind: card
+    topic: jupiter
+    front: What was special about the JUPITER population, and what did it show?
+    back: People without CAD and with LDL-C under 130 but CRP ≥ 2 mg/L; rosuvastatin 20 mg still cut MI by 54% and stroke by 48%, supporting statin benefit beyond LDL (inflammation).
+    src: { page: 273, quote: "No history of CAD men ≥50 yrs women ≥60 yrs LDL-C <130 mg/dl CRP ≥2.0 mg/L" }
+    status: unverified
+  - id: dm.L22.015
+    kind: mcq
+    topic: jupiter
+    stem: "A 62-year-old woman without CAD has LDL-C 110 mg/dL and hs-CRP 3.5 mg/L. Which trial supports giving her a statin?"
+    options: [JUPITER, REDUCE-IT, I-ROSETTE, ILLUMINATE]
+    answer: 0
+    why:
+      - "Correct: JUPITER enrolled women ≥ 60 with LDL-C < 130 and CRP ≥ 2.0; rosuvastatin cut MI 54%."
+      - "REDUCE-IT tested icosapent ethyl for raised TG on a statin."
+      - "I-ROSETTE compared rosuvastatin plus ezetimibe with rosuvastatin alone."
+      - "ILLUMINATE tested torcetrapib (lecture 20)."
+    src: { page: 273, quote: "No history of CAD men ≥50 yrs women ≥60 yrs LDL-C <130 mg/dl CRP ≥2.0 mg/L" }
+    status: unverified
+  # ---------- p274-275: ESC 2023 ----------
+  - id: dm.L22.016
+    kind: table
+    topic: esc
+    title: ESC 2023 CV risk categories in type 2 diabetes
+    columns: [Category, Criteria]
+    rows:
+      - [Very high, "Clinical ASCVD, or severe target-organ damage, or 10-year CVD risk ≥ 20% (SCORE2-Diabetes)"]
+      - [High, "10-year risk 10 to < 20%"]
+      - [Moderate, "10-year risk 5 to < 10%"]
+      - [Low, "10-year risk < 5%"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 274, quote: "Cardiovascular risk categories in type 2 diabetes" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: dm.L22.017
+    kind: card
+    topic: esc
+    front: Which risk score does ESC 2023 use for 10-year CVD risk in type 2 diabetes?
+    back: SCORE2-Diabetes.
+    src: { page: 274, quote: "10-year CVD risk ≥20% using SCORE2-Diabetes" }
+    status: unverified
+  - id: dm.L22.018
+    kind: table
+    topic: esc
+    title: ESC 2023 LDL-C targets in diabetes (Class I)
+    columns: [Risk, LDL-C target]
+    rows:
+      - [Very high, "< 55 mg/dL (1.4 mmol/L)"]
+      - [High, "< 70 mg/dL (1.8 mmol/L)"]
+      - [Moderate, "< 100 mg/dL (2.6 mmol/L)"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 275, quote: "Very high risk LDL-C <1.4 mmol/L (<55 mg/dL) (Class I)" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: dm.L22.019
+    kind: cloze
+    topic: esc
+    text: "In diabetes at very high CV risk the LDL-C target is below {{c1::55 mg/dL}}; at high risk below {{c2::70 mg/dL}}; at moderate risk below {{c3::100 mg/dL}}."
+    src: { page: 275, quote: "Very high risk LDL-C <1.4 mmol/L (<55 mg/dL) (Class I)" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L22.020
+    kind: order
+    topic: esc
+    prompt: Order LDL-lowering therapy in diabetes per ESC 2023 (book p275).
+    steps:
+      - Statin first, dosed to CV risk and target (IA)
+      - Add ezetimibe if the target is not reached (IB)
+      - "Add a PCSK9 inhibitor at very high risk if still above target on maximum statin plus ezetimibe (IA)"
+    src: { page: 275, quote: "Statins are recommended as the first-choice LDL-C-lowering treatment in patients with diabetes" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L22.021
+    kind: card
+    topic: esc
+    front: When is a PCSK9 inhibitor recommended in diabetes (ESC 2023)?
+    back: At very high CV risk with LDL-C persistently above target despite maximum tolerated statin plus ezetimibe, or with statin intolerance (Class I, level A).
+    src: { page: 275, quote: "A PCSK9 inhibitor is recommended in patients at very high CV risk, with persistently high LDL-C levels above target" }
+    status: unverified
+  - id: dm.L22.022
+    kind: mcq
+    topic: esc
+    stem: "A 60-year-old man with type 2 diabetes had an MI last year. LDL-C is 82 mg/dL on atorvastatin 80 mg. Next step per ESC 2023?"
+    options: [Add ezetimibe, Add a PCSK9 inhibitor now, Switch to a moderate-intensity statin, No change; LDL-C is under 100]
+    answer: 0
+    why:
+      - "Correct: ASCVD = very high risk, target < 55; above target on a statin, add ezetimibe (IB)."
+      - "PCSK9 inhibitor comes after statin plus ezetimibe fails (or statin intolerance)."
+      - "Lowering intensity moves him away from target."
+      - "< 100 is the MODERATE-risk target."
+    src: { page: 275, quote: "If the target LDL-C is not reached with statins, combination therapy with ezetimibe is recommended." }
+    status: unverified
+  # ---------- p276-277: intensity ----------
+  - id: dm.L22.023
+    kind: table
+    topic: intensity
+    title: Intensity of lipid-lowering treatment (average LDL-C reduction)
+    columns: [Treatment, LDL-C reduction]
+    rows:
+      - [Moderate-intensity statin, ≈ 30%]
+      - [High-intensity statin, ≈ 50%]
+      - [High-intensity statin + ezetimibe, ≈ 65%]
+      - [PCSK9 inhibitor, ≈ 60%]
+      - [PCSK9 inhibitor + high-intensity statin, ≈ 75%]
+      - [PCSK9 inhibitor + high-intensity statin + ezetimibe, ≈ 85%]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1]]
+    src: { page: 276, quote: "Intensity of lipid-lowering treatment" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: dm.L22.024
+    kind: mcq
+    topic: intensity
+    stem: "The book's patient has LDL-C 128 mg/dL and very high risk (target < 55). Which is the least intensive regimen expected to reach target?"
+    options: [High-intensity statin plus ezetimibe, Moderate-intensity statin, High-intensity statin alone, No drug; lifestyle first]
+    answer: 0
+    why:
+      - "Correct: he needs about 57% reduction (128 to 55); high statin plus ezetimibe gives about 65%."
+      - "About 30% gives roughly 90 mg/dL."
+      - "About 50% gives roughly 64 mg/dL, still above 55."
+      - "Very high risk needs drug therapy."
+    src: { page: 276, quote: "Intensity of lipid-lowering treatment" }
+    status: unverified
+  - id: dm.L22.025
+    kind: card
+    topic: intensity
+    front: What did the I-ROSETTE trial compare and find?
+    back: Rosuvastatin plus ezetimibe against rosuvastatin alone in hypercholesterolemia; the combination lowered LDL-C more at every dose (overall -57% vs -44.4%).
+    src: { page: 276, quote: "Combination Therapy With Ezetimibe and Rosuvastatin Versus Rosuvastatin Monotherapy in Patients With Hypercholesterolemia" }
+    status: unverified
+  - id: dm.L22.026
+    kind: table
+    topic: intensity
+    title: I-ROSETTE LDL-C change
+    columns: [Rosuvastatin dose, With ezetimibe, Alone]
+    rows:
+      - [5 mg, -51.8%, -40.5%]
+      - [10 mg, -55.8%, -44.4%]
+      - [20 mg, -62.2%, -47.1%]
+      - [All doses, -57%, -44.4%]
+    blanks: [[2, 1], [3, 1], [3, 2]]
+    src: { page: 276, quote: "I-ROSETTE (Ildong Rosuvastatin & Ezetimibe for Hypercholesterolemia) Randomized Controlled Trial" }
+    status: unverified
+    tags: [numbers]
+  # ---------- p277-278: residual risk ----------
+  - id: dm.L22.027
+    kind: card
+    topic: residual
+    front: What question did the 2019 Diabetes, Obesity and Metabolism real-world study ask?
+    back: Whether high TG, with statin-controlled LDL-C, raises CVD risk in patients with diabetes.
+    src: { page: 277, quote: "To determine whether high triglycerides (TG) in the presence of statin- controlled LDL-C influence the risk of cardiovascular disease (CVD)" }
+    status: unverified
+  - id: dm.L22.028
+    kind: cloze
+    topic: residual
+    text: "The study took diabetic patients with statin-controlled LDL ({{c1::40-100 mg/dL}}) and compared TG {{c2::200-499}} with TG {{c3::< 150}} mg/dL over 7 years (n = 27,953)."
+    src: { page: 278, quote: "Diabetic Patients with Statin controlled LDL (40 – 100 mg/dl)" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L22.029
+    kind: table
+    topic: residual
+    title: High TG (200-499) vs normal TG on statins
+    columns: [End point, Higher with high TG, "Significant?"]
+    rows:
+      - [Non-fatal MI, 30%, "Yes (P = 0.006)"]
+      - [Non-fatal stroke, 23%, "Yes (P = 0.037)"]
+      - [Coronary revascularization, 21%, "Yes (P = 0.027)"]
+      - [Unstable angina, 33%, "No (P = 0.185)"]
+    blanks: [[0, 1], [1, 1], [3, 2]]
+    src: { page: 278, quote: "Non Fatal MI 30 %* Higher in Gp 1 with ↑ TGs (P = 0.006)" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L22.030
+    kind: card
+    topic: residual
+    front: What explains the increased residual CV risk in statin-controlled diabetic patients, according to the study?
+    back: Elevated triglycerides.
+    src: { page: 278, quote: "The Increase of Residual CV Risk in Statin controlled patients is explained by elevated TGs." }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L22.031
+    kind: mcq
+    topic: residual
+    stem: "In the real-world diabetes study, which end point was NOT significantly higher with TG 200-499 mg/dL?"
+    options: [Unstable angina, Non-fatal MI, Non-fatal stroke, Coronary revascularization]
+    answer: 0
+    why:
+      - "Correct: 33% higher but P = 0.185."
+      - "30% higher, P = 0.006."
+      - "23% higher, P = 0.037."
+      - "21% higher, P = 0.027."
+    src: { page: 278, quote: "Unstable Angina 33% Higher in Gp 1 with ↑ TGs (P = 0.185)" }
+    status: unverified
+  # ---------- p278-280: icosapent ethyl ----------
+  - id: dm.L22.032
+    kind: card
+    topic: icosapent
+    front: What does ESC 2023 say about icosapent ethyl in diabetes?
+    back: High-dose icosapent ethyl (2 g twice daily) may be considered with a statin in hypertriglyceridaemia (TG 150-499 mg/dL, REDUCE-IT criteria); Class IIb, level B.
+    src: { page: 278, quote: "High-dose icosapent ethyl (2 g b.i.d.) may be considered in combination with a statin in patients with hypertriglyceridaemia" }
+    status: unverified
+  - id: dm.L22.033
+    kind: cloze
+    topic: icosapent
+    text: "ADA 2024 (10.30): with ASCVD or other risk factors on a statin with controlled LDL-C but TG {{c1::135-499 mg/dL}}, add {{c2::icosapent ethyl}} to reduce CV risk (grade A)."
+    src: { page: 279, quote: "triglycerides (135–499 mg/dL), the addition of icosapent ethyl can be considered to reduce cardiovascular risk" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: dm.L22.034
+    kind: table
+    topic: icosapent
+    title: REDUCE-IT design
+    columns: [Feature, Detail]
+    rows:
+      - [Patients, "Established CVD, or diabetes with other risk factors (n = 8179)"]
+      - [Prevention, Primary and secondary]
+      - [Sites, "473 sites in 11 countries"]
+      - [Drug, "Icosapent ethyl 2 g twice daily (4 g/day) vs placebo"]
+      - [Follow-up, 4.9 years]
+      - [Design, "Phase 3b, multicentre, randomized, double-blind, placebo-controlled"]
+    blanks: [[0, 1], [3, 1], [4, 1]]
+    src: { page: 279, quote: "Patients with established Cardiovascular disease or diabetes & other risk factors (n=8179)" }
+    status: unverified
+  - id: dm.L22.035
+    kind: table
+    topic: icosapent
+    title: REDUCE-IT results
+    columns: [End point, Relative reduction, NNT]
+    rows:
+      - ["Primary: CV death, MI, stroke, coronary revasc, unstable angina", "25% (HR 0.75, ARR 4.8%)", "21"]
+      - ["Key secondary: CV death, MI, stroke", "26% (HR 0.74, ARR 3.6%)", "28"]
+    blanks: [[0, 1], [0, 2], [1, 2]]
+    src: { page: 279, quote: "(REDUCE-IT) RESULTS: PRIMARY ENDPOINT" }
+    status: unverified
+    tags: [numbers]
+  - id: dm.L22.036
+    kind: card
+    topic: icosapent
+    front: For whom did the FDA approve icosapent ethyl (EPA)?
+    back: As add-on therapy to reduce CV risk in adults with TG above 150 mg/dL who have established CVD, or diabetes with additional CV risk factors.
+    src: { page: 280, quote: "The FDA approved use of Icosapent ethyl ( EPA ) as an adjunctive therapy to reduce CV risk" }
+    status: unverified
+  - id: dm.L22.037
+    kind: card
+    topic: icosapent
+    front: Why is icosapent ethyl's FDA approval described as a first?
+    back: It is the first approved drug targeting residual CV risk on top of maximum statin dose, based on REDUCE-IT (approved in 4 months).
+    src: { page: 280, quote: "First & Recently Approved drug targeting Residual CV Risk Reduction on Top of Statins maximum dose" }
+    status: unverified
+  - id: dm.L22.038
+    kind: card
+    topic: icosapent
+    front: What is the book's take-home message on statins in diabetes?
+    back: Unless contraindicated, and if tolerated, all diabetic patients above 40 years should be statinized.
+    src: { page: 280, quote: "Unless contra-indicated, and if tolerated, ALL Diabetic patients above 40 years, Should be STATINIZED!!" }
+    status: unverified
+    tags: [high-yield]
+  - id: dm.L22.039
+    kind: mcq
+    topic: icosapent
+    stem: "A 58-year-old diabetic with prior stroke has LDL-C 50 mg/dL on high-intensity statin and ezetimibe, but TG 260 mg/dL. Which add-on has trial evidence for fewer CV events?"
+    options: [Icosapent ethyl 2 g twice daily, Niacin, CETP inhibitor, Increase ezetimibe dose]
+    answer: 0
+    why:
+      - "Correct: REDUCE-IT; ESC IIb and ADA grade A for TG 135/150-499 on a statin."
+      - "Niacin raised HDL but did not cut events (lecture 20 update)."
+      - "CETP inhibitors failed (lecture 20)."
+      - "Ezetimibe has a single fixed dose and lowers LDL, not residual TG risk."
+    src: { page: 279, quote: "triglycerides (135–499 mg/dL), the addition of icosapent ethyl can be considered to reduce cardiovascular risk" }
+    status: unverified
+  # ---------- case walk-through ----------
+  - id: dm.L22.040
+    kind: case
+    topic: case
+    stem: "The book's patient: 55-year-old man, T2DM 7 years, HTN, smoker, BMI 32, BP 130/80. On amlodipine/valsartan and dapagliflozin/metformin. HbA1c 6.9%."
+    steps:
+      - reveal: "TC 209, LDL-C 128, HDL-C 35, TG 230 mg/dL. eGFR 88, UACR 16 mg/g. Stress ECG and echo normal."
+        question: "SCORE2-Diabetes gives 27.6% 10-year risk. His ESC 2023 category?"
+        options: [Very high, High, Moderate, Low]
+        answer: 0
+        why: "10-year risk ≥ 20% = very high CV risk (p274)."
+      - question: "His LDL-C target?"
+        options: ["< 55 mg/dL", "< 70 mg/dL", "< 100 mg/dL", "< 130 mg/dL"]
+        answer: 0
+        why: "Very high risk: LDL-C < 1.4 mmol/L (< 55 mg/dL), Class I (p275)."
+      - question: "Which starting regimen can reach it (needs about 57% reduction)?"
+        options: [High-intensity statin plus ezetimibe, Moderate-intensity statin, High-intensity statin alone, PCSK9 inhibitor alone first]
+        answer: 0
+        why: "High statin plus ezetimibe ≈ 65% (p276). Statins stay first choice; PCSK9 inhibitor only if target is missed on both."
+      - reveal: "Six months later LDL-C is 50 mg/dL but TG remain 210 mg/dL."
+        question: "What can be added for residual risk?"
+        options: [Icosapent ethyl 2 g twice daily, Torcetrapib, Stop the statin, Nothing; residual risk is not real]
+        answer: 0
+        why: "High TG explain residual risk on statins (p278); icosapent ethyl per REDUCE-IT, ESC 2023 IIb and ADA 2024 (p278-279)."
+    src: { page: 271, quote: "Lipid panel: TC: 209 mg/dl, LDL-C: 128 mg/dl, HDL-C: 35 mg/dl, TG: 230 mg/dl." }
+    status: unverified
+  - id: dm.L22.041
+    kind: case
+    topic: esc
+    stem: "A 45-year-old woman with type 2 diabetes for 3 years, non-smoker, no organ damage. SCORE2-Diabetes 10-year risk is 7%. LDL-C 140 mg/dL."
+    steps:
+      - question: "Her ESC 2023 risk category?"
+        options: [Moderate, Low, High, Very high]
+        answer: 0
+        why: "5 to < 10% = moderate (p274)."
+      - question: "Her LDL-C target?"
+        options: ["< 100 mg/dL", "< 70 mg/dL", "< 55 mg/dL", "No target"]
+        answer: 0
+        why: "Moderate risk: < 2.6 mmol/L (< 100 mg/dL) (p275)."
+      - question: "Should she get a statin, according to the book's take-home message?"
+        options: ["Yes: diabetic above 40, unless contraindicated or not tolerated", "No: only after an MI", "No: only if LDL-C > 190", "Only if CRP ≥ 2"]
+        answer: 0
+        why: "ALL diabetic patients above 40 should be statinized unless contraindicated (p280)."
+    src: { page: 274, quote: "Cardiovascular risk categories in type 2 diabetes" }
+    status: unverified
+  # ---------- book questions (p280) ----------
+  - id: dm.L22.042
+    kind: essay
+    topic: esc
+    prompt: How to categorize diabetic patients according to their cardiovascular risk?
+    outline:
+      - "Very high": ["Clinically established ASCVD", "Severe target-organ damage", "10-year CVD risk ≥ 20% by SCORE2-Diabetes"]
+      - "High": ["10-year risk 10 to < 20%"]
+      - "Moderate": ["10-year risk 5 to < 10%"]
+      - "Low": ["10-year risk < 5%"]
+    src: { page: 274, quote: "Cardiovascular risk categories in type 2 diabetes" }
+    status: unverified
+    tags: [book-question]
+  - id: dm.L22.043
+    kind: essay
+    topic: esc
+    prompt: What should be the lipids targets in diabetic patients?
+    outline:
+      - "LDL-C (ESC 2023, Class I)": ["Very high risk < 55 mg/dL (1.4 mmol/L)", "High risk < 70 mg/dL (1.8 mmol/L)", "Moderate risk < 100 mg/dL (2.6 mmol/L)"]
+      - "Non-HDL-C": ["Statin dose is set by CV risk and the LDL-C (or non-HDL-C) target"]
+      - "Triglycerides": ["Residual risk with TG 200-499 despite controlled LDL", "Icosapent ethyl for TG 135/150-499 on a statin"]
+    src: { page: 275, quote: "Very high risk LDL-C <1.4 mmol/L (<55 mg/dL) (Class I)" }
+    status: unverified
+    tags: [book-question]
+  - id: dm.L22.044
+    kind: essay
+    topic: esc
+    prompt: How to manage diabetic dyslipidemia?
+    outline:
+      - "Assess": ["Estimate risk with SCORE2-Diabetes; place in a category", "Set the LDL-C target"]
+      - "Statin": ["All diabetics above 40 unless contraindicated", "First choice (IA); intensity by the reduction needed (moderate ≈ 30%, high ≈ 50%)"]
+      - "Add-ons": ["Ezetimibe if above target (IB; high statin + ezetimibe ≈ 65%)", "PCSK9 inhibitor at very high risk if still above target or statin intolerant (IA)"]
+      - "Residual TG risk": ["Icosapent ethyl 2 g twice daily (REDUCE-IT): ESC IIb, ADA 2024 A"]
+    src: { page: 275, quote: "Statins are recommended as the first-choice LDL-C-lowering treatment in patients with diabetes" }
+    status: unverified
+    tags: [book-question]

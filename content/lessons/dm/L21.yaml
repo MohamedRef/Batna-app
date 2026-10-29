@@ -1,0 +1,535 @@
+schema: batna.lesson/v1
+lecture: dm.L21
+lessons:
+  # ------------------------------------------------------------------
+  - id: dm.L21.lesson1
+    title: "Fredrickson: 6 أنواع في جدول واحد"
+    hook: "الجدول ده بيتسأل كل سنة. وقبل ما تقول \"familial\"، دوّر على السبب الـ secondary الأول."
+    minutes: 8
+    pages: [260, 262]
+    topics: [fredrickson, etiologic, secondary]
+    goals:
+      - "تحفظ جدول Fredrickson بالـ lipoprotein والتكرار"
+      - "تعرف التقسيم الـ etiologic: primary و secondary"
+      - "تربط كل secondary cause بالـ lipid اللي بيعلّيه"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 260
+        title: "Fredrickson، الستينات"
+        quote: "based on the composition of serum lipoproteins, Fredrickson suggested five different phenotypes of hyperlipoproteinemia"
+        text: |
+          في الستينات، ==Fredrickson== قسّم الـ hyperlipoproteinemia لـ **5 phenotypes** على حسب **تركيب الـ serum lipoproteins** (أنهي lipoprotein عالي).
+
+          النوع II اتقسم a و b، فبقوا 6 صفوف في الجدول.
+      - kind: figure
+        page: 260
+        quote: "Fredrickson Classification of Hyperlipidemia"
+        title: "الجدول على هيئة سلم"
+        alt: "Six rows, one per Fredrickson type, each showing the elevated lipoprotein and its frequency: I chylomicrons under 1 percent; IIa LDL 10 percent; IIb LDL and VLDL 40 percent; III IDL under 1 percent; IV VLDL 45 percent; V VLDL and chylomicrons 6 percent. Bars for IV and IIb are longest."
+        caption: "الـ ==IV== (VLDL) أشهر واحد 45%، بعده **IIb** 40%. الـ **I** والـ **III** نادرين (أقل من 1%)."
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <text x="10" y="18" class="t-sm t-b">Type</text>
+            <text x="50" y="18" class="t-sm t-b">Elevated</text>
+            <text x="320" y="18" text-anchor="end" class="t-sm t-b">%</text>
+            <text x="10" y="48" class="t-b">I</text>
+            <text x="50" y="48" class="t-sm">Chylomicrons</text>
+            <rect x="170" y="36" width="4" height="16" class="fg-dot-bad"/>
+            <text x="320" y="48" text-anchor="end" class="t-sm">&lt;1</text>
+            <text x="10" y="84" class="t-b">IIa</text>
+            <text x="50" y="84" class="t-sm">LDL</text>
+            <rect x="170" y="72" width="27" height="16" class="fg-dot-acc"/>
+            <text x="320" y="84" text-anchor="end" class="t-sm">10</text>
+            <text x="10" y="120" class="t-b">IIb</text>
+            <text x="50" y="120" class="t-sm">LDL + VLDL</text>
+            <rect x="170" y="108" width="107" height="16" class="fg-dot-acc"/>
+            <text x="320" y="120" text-anchor="end" class="t-sm">40</text>
+            <text x="10" y="156" class="t-b">III</text>
+            <text x="50" y="156" class="t-sm">IDL</text>
+            <rect x="170" y="144" width="4" height="16" class="fg-dot-bad"/>
+            <text x="320" y="156" text-anchor="end" class="t-sm">&lt;1</text>
+            <text x="10" y="192" class="t-b">IV</text>
+            <text x="50" y="192" class="t-sm">VLDL</text>
+            <rect x="170" y="180" width="120" height="16" class="fg-dot-good"/>
+            <text x="320" y="192" text-anchor="end" class="t-sm">45</text>
+            <text x="10" y="228" class="t-b">V</text>
+            <text x="50" y="228" class="t-sm">VLDL + chylo</text>
+            <rect x="170" y="216" width="16" height="16" class="fg-dot-acc"/>
+            <text x="320" y="228" text-anchor="end" class="t-sm">6</text>
+          </svg>
+      - kind: aside
+        tone: tip
+        page: 260
+        quote: "Fredrickson Classification of Hyperlipidemia"
+        text: "احفظ الـ Fredrickson بالترتيب، وامشي مع رحلة الـ lipoproteins: **I** = أول محطة (chylomicrons)، **II** = آخر محطة (LDL، و b معاه VLDL)، **III** = اللي في النص (IDL)، **IV** = اللي الكبد بيطلّعه (VLDL)، **V** = I + IV مع بعض (VLDL + chylomicrons)."
+      - kind: table
+        page: 260
+        quote: "I Chylomicrons Normal to ↑ ↑↑↑↑ <1 IIa LDL ↑↑ Normal 10"
+        title: "الكوليسترول والـ TG في كل نوع"
+        columns: [Type, Cholesterol, TG]
+        rows:
+          - ["I", "Normal to ↑", "↑↑↑↑"]
+          - ["IIa", "↑↑", "Normal"]
+          - ["IIb", "↑↑", "↑↑"]
+          - ["III", "↑↑", "↑↑↑"]
+          - ["IV", "Normal to ↑", "↑↑"]
+          - ["V", "↑ to ↑↑", "↑↑↑↑"]
+        hide: [[0, 2], [1, 2], [4, 1], [5, 2]]
+      - kind: check
+        page: 260
+        quote: "Fredrickson Classification of Hyperlipidemia"
+        question: "Raised cholesterol (↑↑) with NORMAL triglyceride is which Fredrickson type?"
+        options:
+          - "IIa"
+          - "IIb"
+          - "IV"
+          - "I"
+        answer: 0
+        why:
+          - "صح: IIa = LDL بس، والـ TG طبيعي."
+          - "IIb فيه VLDL كمان فالـ TG بيعلى."
+          - "IV = VLDL، الـ TG عالي."
+          - "I = chylomicrons، الـ TG ↑↑↑↑."
+      - kind: explain
+        page: 261
+        title: "Primary ولا secondary؟"
+        quote: "Primary Disorders of ApoB-Containing Lipoproteins"
+        text: |
+          التقسيم الـ ==etiologic==:
+          1. **Primary**: أمراض الـ **ApoB-containing lipoproteins**، وأمراض الـ **HDL-C**.
+          2. **Secondary**: مرض أو دوا تاني هو السبب.
+
+          قبل ما تشخّص familial، استبعد الـ secondary: علاجه بيصلّح الدهون.
+      - kind: table
+        page: 261
+        quote: "Diabetes mellitus ↑ TG & ↓ HDL"
+        title: "الـ secondary causes (جدول ص 261)"
+        columns: [Cause, Main change]
+        rows:
+          - ["Diabetes", "↑ TG, ↓ HDL"]
+          - ["Alcohol", "↑ TG (mild: ↑ HDL)"]
+          - ["Drugs", "↑ TG/chol, ↓ HDL"]
+          - ["Hypothyroidism", "↑ Chol"]
+          - ["Chronic renal failure", "↑ TG"]
+          - ["Nephrotic", "↑ Chol ± ↑ TG"]
+          - ["Cholestasis", "↑ Chol"]
+          - ["Bulimia", "↑ TG"]
+          - ["Anorexia nervosa", "↑ Chol"]
+          - ["Pregnancy", "↑ TG"]
+        hide: [[0, 1], [3, 1], [4, 1], [7, 1], [8, 1]]
+      - kind: aside
+        tone: trap
+        page: 261
+        quote: "Anorexia nervosa ↑ Cholesterol"
+        text: "فخ سؤال الكتاب: **Bulimia** ← **TG**، و **Anorexia nervosa** ← **Cholesterol**. البوليميا بتاكل كتير (سكريات ← VLDL ← TG)، والأنوركسيا جعانة (cholesterol عالي)."
+      - kind: sort
+        page: 261
+        quote: "Hypothyroidism ↑ Cholesterol"
+        prompt: "يعلّي الكوليسترول ولا الـ TG أساسًا؟"
+        bins: ["Cholesterol", "TG"]
+        cards:
+          - { text: "Hypothyroidism", bin: 0 }
+          - { text: "Cholestasis", bin: 0 }
+          - { text: "Anorexia nervosa", bin: 0 }
+          - { text: "Chronic renal failure", bin: 1 }
+          - { text: "Bulimia", bin: 1 }
+          - { text: "Pregnancy", bin: 1 }
+          - { text: "Alcohol abuse", bin: 1 }
+        why: "Cholesterol: hypothyroidism و cholestasis و anorexia (والـ nephrotic). TG: CRF و bulimia و pregnancy و alcohol (والـ DM مع HDL واطي)."
+      - kind: explain
+        page: 262
+        title: "الجدول الكبير (ص 262)"
+        quote: "Secondary Forms of Hyperlipidemia"
+        text: |
+          الجدول ده بيقسم الـ secondary causes **حسب الـ lipoprotein**. أهم اللقطات:
+          - **IDL عالي**: ==multiple myeloma==، monoclonal gammopathy، autoimmune، hypothyroidism.
+          - **Lp(a) عالي**: renal insufficiency، inflammation، menopause، orchidectomy، hypothyroidism، acromegaly، nephrosis، growth hormone، isotretinoin.
+          - **HDL واطي**: smoking، DM type 2، obesity، anabolic steroids، beta-blockers.
+          - **LDL واطي**: severe liver disease، malabsorption، malnutrition، hyperthyroidism.
+      - kind: try
+        items: [dm.L21.002, dm.L21.003, dm.L21.008, dm.L21.009, dm.L21.011]
+    recap:
+      - "Fredrickson: I chylo، IIa LDL، IIb LDL+VLDL، III IDL، IV VLDL، V VLDL+chylo."
+      - "IV أشهر (45%)، IIb (40%)، IIa (10%)، V (6%)، I و III أقل من 1%."
+      - "Etiologic: primary (ApoB أو HDL) و secondary."
+      - "DM ↑TG ↓HDL؛ hypothyroid و cholestasis و anorexia ↑chol؛ CRF و bulimia و pregnancy ↑TG."
+    practice: [dm.L21.001, dm.L21.002, dm.L21.003, dm.L21.004, dm.L21.005, dm.L21.006, dm.L21.007, dm.L21.008, dm.L21.009, dm.L21.010, dm.L21.011, dm.L21.012, dm.L21.013, dm.L21.014, dm.L21.015, dm.L21.059, dm.L21.060]
+  # ------------------------------------------------------------------
+  - id: dm.L21.lesson2
+    title: "Familial hypercholesterolemia: الـ receptor البايظ"
+    hook: "طفل عنده 9 سنين وعنده جلطة في القلب. السبب: باب واحد في الكبد مقفول."
+    minutes: 8
+    pages: [262, 264]
+    topics: [fh]
+    goals:
+      - "تفهم ليه الـ LDL بيعلى لما الـ receptor يبوظ"
+      - "تفرّق الـ homozygous من الـ heterozygous"
+      - "تعرف العلامات والتشخيص والعلاج"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 262
+        title: "3 مجموعات primary"
+        quote: "Lipid Disorders Associated with Elevated LDL-C and Normal Triglycerides"
+        text: |
+          الـ primary disorders of ApoB lipoproteins:
+          1. **LDL عالي و TG طبيعي** ← ==familial hypercholesterolemia==.
+          2. **TG عالي** ← familial hypertriglyceridemia.
+          3. **الاتنين** ← familial combined dyslipidemia.
+      - kind: explain
+        page: 262
+        title: "FH في سطرين"
+        quote: "FH is an autosomal dominant disorder characterized by"
+        text: |
+          - Fredrickson ==Type II== (a و b)، **relatively common**، **autosomal dominant**.
+          - LDL-C عالي، **TG طبيعي**، **tendon xanthomas**، و **premature coronary atherosclerosis**.
+      - kind: figure
+        page: 263
+        quote: "Pathogenesis: defective LDL receptors."
+        title: "ليه الـ LDL بيعلى؟"
+        alt: "Two lanes. Normal: IDL is partly cleared by LDL receptors on the liver, the rest becomes LDL, and LDL is cleared by the same receptors. FH: receptors are defective, so less IDL is cleared and more becomes LDL, and LDL removal is delayed; LDL builds up in blood."
+        caption: "الـ receptor بيشيل حاجتين: جزء من الـ **IDL** والـ **LDL**. لما يبوظ: ==IDL أكتر يتحول LDL== و **LDL يقعد أطول**. ضربتين."
+        svg: |
+          <svg viewBox="0 0 330 250" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L21a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <text x="80" y="18" text-anchor="middle" class="t-b t-good">Normal</text>
+            <text x="245" y="18" text-anchor="middle" class="t-b t-bad">FH</text>
+            <rect x="20" y="30" width="120" height="32" rx="8" class="fg-box"/>
+            <text x="80" y="51" text-anchor="middle" class="t-sm">IDL</text>
+            <rect x="185" y="30" width="120" height="32" rx="8" class="fg-box"/>
+            <text x="245" y="51" text-anchor="middle" class="t-sm">IDL</text>
+            <path d="M80 62 L80 100" class="fg-arrow" marker-end="url(#L21a)"/>
+            <path d="M140 46 L160 46 L160 196" class="fg-arrow" marker-end="url(#L21a)"/>
+            <text x="100" y="86" class="t-sm t-mut">part</text>
+            <path d="M245 62 L245 100" class="fg-arrow-bad" stroke-width="4" marker-end="url(#L21a)"/>
+            <text x="268" y="86" class="t-sm t-bad">more</text>
+            <rect x="20" y="102" width="120" height="32" rx="8" class="fg-acc"/>
+            <text x="80" y="123" text-anchor="middle" class="t-sm">LDL</text>
+            <rect x="185" y="102" width="120" height="50" rx="8" class="fg-bad"/>
+            <text x="245" y="123" text-anchor="middle" class="t-sm t-b">LDL ↑↑</text>
+            <text x="245" y="141" text-anchor="middle" class="t-sm">slow removal</text>
+            <path d="M80 134 L80 196" class="fg-arrow" marker-end="url(#L21a)"/>
+            <path d="M245 152 L245 196" class="fg-thin" marker-end="url(#L21a)"/>
+            <rect x="20" y="198" width="150" height="40" rx="8" class="fg-good"/>
+            <text x="95" y="222" text-anchor="middle" class="t-sm t-b">LDL receptor (liver)</text>
+            <rect x="185" y="198" width="120" height="40" rx="8" class="fg-thin"/>
+            <text x="245" y="222" text-anchor="middle" class="t-sm t-bad">defective receptor</text>
+          </svg>
+      - kind: table
+        page: 263
+        quote: "Children with homozygous FH often develop symptomatic coronary atherosclerosis before puberty"
+        title: "Homo ولا hetero؟"
+        columns: [Type, Alleles, Course]
+        rows:
+          - ["Homozygous", "2 mutant", "CAD before puberty"]
+          - ["Heterozygous", "1 mutant", "CAD in adulthood, more common"]
+        hide: [[0, 2], [1, 2]]
+      - kind: aside
+        tone: analogy
+        page: 263
+        quote: "Individuals with two mutated LDL receptor alleles (FH homozygotes) have much higher LDL-C levels"
+        text: "تخيّل الكبد **عمارة فيها بابين** للـ LDL. الـ heterozygous: باب واحد شغال، الزحمة متوسطة. الـ homozygous: البابين مقفولين، الزحمة في الشارع (الدم) رهيبة، والقلب بيتعب **قبل البلوغ**."
+      - kind: explain
+        page: 263
+        title: "شكل العيان"
+        quote: "Tendon xanthoma: Cholesterol deposits in tendons of extensor muscles (hand or Achilles tendon)."
+        text: |
+          1. **Family history** لـ xanthomata ووفاة بدري من CHD.
+          2. ==Xanthelasma==: cholesterol حوالين العين (الجفون).
+          3. **Tendon xanthoma**: في extensor tendons اليد أو الـ **Achilles**.
+          4. **Tuberous xanthoma**: أماكن الضغط (**elbow، knee**).
+          5. **Juvenile corneal arcus**: حلقة بيضا أو رمادي على حافة الـ cornea.
+          6. Accelerated coronary و peripheral atherosclerosis.
+      - kind: match
+        page: 263
+        quote: "Tuberous xanthoma at pressure sites (elbow or Knee)"
+        prompt: "وصّل العلامة بمكانها:"
+        pairs:
+          - ["Xanthelasma", "Eyelids"]
+          - ["Tendon xanthoma", "Achilles, hand extensors"]
+          - ["Tuberous xanthoma", "Elbow, knee"]
+          - ["Corneal arcus", "Corneal margin"]
+        why: "Tendon = أوتار، tuberous = أماكن الضغط، xanthelasma = الجفون، arcus = حافة القرنية."
+      - kind: explain
+        page: 264
+        title: "التشخيص والعلاج"
+        quote: "Elevated plasma levels of LDL-C (usually 200–400 mg/dL)"
+        text: |
+          **التشخيص**:
+          - LDL-C عادة ==200-400 mg/dL==.
+          - TG طبيعي.
+          - **LDL receptor activity** قليلة في **cultured skin fibroblasts**.
+
+          **العلاج**:
+          - Diet: **low cholesterol** و low fat (polyunsaturated غالبًا).
+          - **Statins**، و **cholestyramine** (bile acid binder).
+          - **LDL apheresis**: بيشيل الـ LDL particles بالذات من الدم.
+          - **Liver transplantation**.
+      - kind: update
+        page: 264
+        quote: "Bile acid-binding drugs: Cholestyramine"
+        text: "دلوقتي، جنب الـ statins والـ **cholestyramine**، بيضيفوا **ezetimibe** و **PCSK9 inhibitors** لو الـ statin مش كفاية، وفي الـ homozygous FH ممكن **evinacumab** أو **lomitapide**. الامتحان: قائمة الكتاب."
+        ref: "ESC/EAS dyslipidaemia guidelines 2019; EAS homozygous FH consensus 2023"
+      - kind: check
+        page: 262
+        quote: "Elevated plasma levels of LDL-C with"
+        question: "Regarding familial hypercholesterolemia (book question):"
+        options:
+          - "Elevated plasma level of LDL-C"
+          - "Elevated plasma TG level"
+          - "Autosomal recessive inheritance"
+          - "Decreased plasma level of HDL-C"
+        answer: 0
+        why:
+          - "صح: LDL-C عالي (200-400)."
+          - "الـ TG طبيعي في الـ FH."
+          - "الـ FH autosomal dominant."
+          - "مش من صفات الـ FH في الكتاب."
+      - kind: try
+        items: [dm.L21.019, dm.L21.021, dm.L21.022, dm.L21.024, dm.L21.026]
+    recap:
+      - "FH = Type II، autosomal dominant، LDL receptor بايظ."
+      - "LDL بيعلى: IDL أكتر يتحول LDL، و LDL بيتشال أبطأ."
+      - "Homozygous (2 alleles): CAD قبل البلوغ. Heterozygous: أشهر، CAD في الكبر."
+      - "Xanthelasma، tendon (Achilles)، tuberous (elbow/knee)، juvenile arcus."
+      - "LDL-C 200-400، TG طبيعي، receptor activity قليلة في skin fibroblasts."
+      - "Diet، statins، cholestyramine، LDL apheresis، liver transplant."
+    practice: [dm.L21.016, dm.L21.017, dm.L21.018, dm.L21.019, dm.L21.020, dm.L21.021, dm.L21.022, dm.L21.023, dm.L21.024, dm.L21.025, dm.L21.026, dm.L21.027, dm.L21.028, dm.L21.029, dm.L21.057, dm.L21.061]
+  # ------------------------------------------------------------------
+  - id: dm.L21.lesson3
+    title: "الـ TG العالي: لوحده ولا مع صاحبه؟"
+    hook: "Familial hypertriglyceridemia وFamilial combined: اتنين شبه بعض، والفرق بيتحسم بالكوليسترول والـ xanthoma."
+    minutes: 8
+    pages: [265, 267]
+    topics: [fhtg, fchl]
+    goals:
+      - "تعرف الـ triad بتاع الـ FHTG وأرقامه"
+      - "تعرف إيه اللي بيزوّد الـ VLDL"
+      - "تفرّق الـ FCHL وتعرف علاجه"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 265
+        title: "Familial hypertriglyceridemia"
+        quote: "Type IV Fredrickson Hyperlipoproteinaemia"
+        text: |
+          - Fredrickson ==Type IV==، **أشهر نوع**، genetically **heterogeneous**.
+          - العيب: **VLDL synthesis** زيادة، أو **VLDL catabolism** ضعيف، أو الاتنين.
+      - kind: mnemonic
+        page: 265
+        quote: "Elevated levels of plasma triglycerides (250–1000 mg/dL)"
+        word: "TCH"
+        parts:
+          - { key: "T", text: "TG 250-1000 mg/dL" }
+          - { key: "C", text: "Cholesterol normal or mildly up, under 250 mg/dL" }
+          - { key: "H", text: "HDL-C reduced" }
+        hook: "**TCH**: الـ triad. لاحظ الـ **250** بتتكرر: TG فوقها، والكوليسترول تحتها."
+      - kind: explain
+        page: 265
+        title: "إيه اللي بيولّعها؟"
+        quote: "Increased intake of simple carbohydrates, obesity, insulin resistance, alcohol use, and estrogen treatment"
+        text: |
+          أي حاجة بتزوّد ==VLDL synthesis==:
+          - **Simple carbohydrates**
+          - **Obesity** و **insulin resistance**
+          - **Alcohol**
+          - **Estrogen**
+
+          والـ risk: **strong**، خصوصًا **CHD** (premature)، وأقل في الـ peripheral والـ cerebrovascular.
+      - kind: explain
+        page: 266
+        title: "Eruptive xanthoma"
+        quote: "These occur in crops on the back, buttocks, legs and abdomen."
+        text: |
+          في الـ FHTG مفيش xanthoma مميز، بس ممكن ==eruptive xanthoma==:
+          - بتطلع **crops** (مجموعات) على الضهر والـ buttocks والرجلين والبطن.
+          - صغيرة، **firm**، ساعات شبه pustules.
+          - جواها **triglycerides**.
+      - kind: explain
+        page: 266
+        title: "علاج الـ FHTG"
+        quote: "For more moderate elevations in triglyceride levels (250-500 mg/dL), statins are effective at lowering triglyceride levels."
+        text: |
+          **Diet**: تقليل السعرات والوزن، **low-carbohydrate**، تقليل الكوليسترول، polyunsaturated بدل saturated.
+
+          **Drugs**: ==fibrates== و **niacin**. ولو الـ TG متوسط (**250-500 mg/dL**) الـ **statins** بتنفع.
+      - kind: check
+        page: 265
+        quote: "Normal or only mildly increased cholesterol levels (<250 mg/dL), and"
+        question: "TG 700 mg/dL, cholesterol 230 mg/dL, low HDL-C, no tendon xanthomas. Which primary disorder?"
+        options:
+          - "Familial hypertriglyceridemia"
+          - "Familial hypercholesterolemia"
+          - "Familial hyperchylomicronemia"
+          - "Tangier disease"
+        answer: 0
+        why:
+          - "صح: الـ triad: TG 250-1000، chol أقل من 250، HDL واطي."
+          - "الـ FH فيها LDL عالي جدًا و TG طبيعي."
+          - "Type I فيه TG أعلى بكتير مع pancreatitis وكوليسترول طبيعي."
+          - "Tangier = HDL واطي جدًا مع لوز برتقاني، مش TG."
+      - kind: explain
+        page: 266
+        title: "Familial combined hyperlipidemia"
+        quote: "Characterized by moderate elevations in plasma levels of triglycerides (VLDL) and cholesterol (LDL) and reduced plasma levels of HDL-C"
+        text: |
+          - الكتاب بيقول ==Type V==.
+          - **TG (VLDL)** و **cholesterol (LDL)** عاليين **باعتدال**، و **HDL-C واطي**.
+          - Heterogeneous.
+          - Pathogenesis: **VLDL overproduction**، clearance ضعيف للـ VLDL والـ chylomicrons، و **partial LPL deficiency**.
+      - kind: update
+        page: 266
+        quote: "Type V Fredrickson Hyperlipoproteinaemia"
+        text: "أغلب المراجع بتحط الـ FCHL في **Fredrickson IIb** أساسًا (وممكن IIa أو IV في نفس العيلة)، والـ Type V هو VLDL + chylomicrons. في الامتحان اكتب إجابة الكتاب: Type V."
+        ref: "Harrison's Principles of Internal Medicine 21e (2022), lipoprotein disorders"
+      - kind: explain
+        page: 267
+        title: "شكل الـ FCHL وعلاجه"
+        quote: "These patients do not develop xanthomas."
+        text: |
+          - **Premature CHD** risk عالي جدًا.
+          - ممكن يظهر في الطفولة، بس غالبًا يكتمل في **الكبر**.
+          - معاه **metabolic syndrome**: obesity، glucose intolerance، insulin resistance، hypertension.
+          - ==مفيش xanthomas==.
+
+          **العلاج**: TLC diet، ضبط السكر في الـ diabetics، و **statins**، وكتير محتاجين **دوا تاني** (ezetimibe، niacin، fibrate، fish oil).
+      - kind: sort
+        page: 267
+        quote: "These patients do not develop xanthomas."
+        prompt: "FHTG ولا FCHL؟"
+        bins: ["FHTG (type IV)", "FCHL"]
+        cards:
+          - { text: "Cholesterol under 250, TG 250-1000", bin: 0 }
+          - { text: "TG and LDL both moderately raised", bin: 1 }
+          - { text: "Eruptive xanthoma may occur", bin: 0 }
+          - { text: "Never xanthomas", bin: 1 }
+          - { text: "Partial LPL deficiency", bin: 1 }
+          - { text: "The most common type", bin: 0 }
+        why: "الـ FHTG = TG لوحده تقريبًا، type IV، ممكن eruptive. الـ FCHL = الاتنين، مفيش xanthoma، partial LPL deficiency."
+      - kind: try
+        items: [dm.L21.032, dm.L21.033, dm.L21.036, dm.L21.039, dm.L21.041]
+    recap:
+      - "FHTG: Type IV، أشهر نوع، VLDL synthesis زيادة أو catabolism ضعيف."
+      - "Triad: TG 250-1000، chol أقل من 250، HDL واطي."
+      - "يولّعه: سكريات، سمنة، insulin resistance، alcohol، estrogen."
+      - "Eruptive xanthoma: crops على الضهر والـ buttocks، جواها TG."
+      - "علاج: diet، fibrates، niacin؛ statins لـ TG 250-500."
+      - "FCHL: Type V في الكتاب، TG و LDL باعتدال، HDL واطي، metabolic syndrome، مفيش xanthoma."
+    practice: [dm.L21.030, dm.L21.031, dm.L21.032, dm.L21.033, dm.L21.034, dm.L21.035, dm.L21.036, dm.L21.037, dm.L21.038, dm.L21.039, dm.L21.040, dm.L21.041, dm.L21.042, dm.L21.043, dm.L21.058]
+  # ------------------------------------------------------------------
+  - id: dm.L21.lesson4
+    title: "الدم اللبني: Type I"
+    hook: "عيّنة الدم شكلها لبن، وبعد ليلة في التلاجة طلع فوقها قشطة. التشخيص من غير lab."
+    minutes: 7
+    pages: [267, 270]
+    topics: [digestion, chylo]
+    goals:
+      - "تمشي مع الدهون من المعدة للـ lymph"
+      - "تعرف عيب الـ Type I وشكله وتحاليله وعلاجه"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 268
+        title: "هضم الدهون في 3 خطوات"
+        quote: "95% of fat consumed is absorbed."
+        text: |
+          المعدة بتهضم **حاجة بسيطة**، والـ ==small intestine== هو المكان الأساسي. **95%** من الدهون بتتمص.
+
+          1. **Emulsification**: الـ bile salts بتكسّر الدهون لنقط صغيرة وتغلّفها، فالـ lipase يوصلها.
+          2. **Hydrolysis**: الـ lipases تكسّر TG لـ glycerol و fatty acids.
+          3. **Micelles**: تلم نواتج الهضم (ومعاها الكوليسترول) وتوصّلها للـ brush border.
+      - kind: order
+        page: 269
+        quote: "Chylomicrons are secreted into lacteals and then carried via lymph to the veins"
+        prompt: "رتّب رحلة الدهون:"
+        steps:
+          - "Bile salts emulsify"
+          - "Lipases hydrolyse TG"
+          - "Micelles carry products"
+          - "Cells re-make TG"
+          - "Chylomicrons form"
+          - "Lacteals and lymph"
+        why: "Emulsify ← hydrolyse ← micelles ← re-synthesis ← chylomicron ← lacteal ← lymph ← veins."
+      - kind: explain
+        page: 269
+        title: "Familial hyperchylomicronemia"
+        quote: "apo C-II is a cofactor for LPL"
+        text: |
+          - Fredrickson ==Type I==، **autosomal recessive**.
+          - نقص أو تعطّل الـ **LPL** أو الـ cofactor بتاعه ==apo C-II==، فالـ chylomicrons مش بتتكسر وبتتراكم.
+          - **Cholesterol طبيعي**، **TG عالي جدًا جدًا**.
+          - الـ atherogenic risk ==مش زايد==.
+      - kind: reveal
+        page: 269
+        quote: "Risk for atherogenesis: Not increased"
+        prompt: "ليه الـ TG عالي جدًا ومع ذلك مفيش زيادة في الـ atherosclerosis؟"
+        answer: "الـ chylomicrons **أكبر بكتير** من إنها تعدّي الـ endothelium وتتحبس في الجدار (فاكر إن الـ retention هو أول خطوة؟). خطرها في حتة تانية: **pancreatitis**."
+      - kind: explain
+        page: 269
+        title: "شكله"
+        quote: "Recurrent abdominal pain due to pancreatitis"
+        text: |
+          1. ==Recurrent abdominal pain== من الـ **pancreatitis**.
+          2. **Tender hepatosplenomegaly**.
+          3. **Eruptive xanthoma** (macrophages مليانة TG).
+          4. **Lipemia retinalis**.
+      - kind: figure
+        page: 270
+        quote: "Clear serum + creamy layer when left at four °C overnight"
+        title: "اختبار التلاجة"
+        alt: "Two test tubes. Left, fresh: milky turbid serum. Right, after a night at 4 °C: a creamy white layer on top of clear serum, labelled chylomicrons float."
+        caption: "سيب العينة ليلة في ==4 °C==: الـ **chylomicrons** خفيفة فبتطلع فوق **طبقة قشطة**، وتحتها serum **رايق**. ده Type I."
+        svg: |
+          <svg viewBox="0 0 330 230" xmlns="http://www.w3.org/2000/svg">
+            <rect x="60" y="30" width="60" height="160" rx="10" class="fg-ink"/>
+            <rect x="64" y="70" width="52" height="116" rx="8" class="fg-acc"/>
+            <text x="90" y="210" text-anchor="middle" class="t-sm t-b">Fresh</text>
+            <text x="90" y="134" text-anchor="middle" class="t-sm">milky</text>
+            <rect x="210" y="30" width="60" height="160" rx="10" class="fg-ink"/>
+            <rect x="214" y="70" width="52" height="26" rx="6" class="fg-good"/>
+            <rect x="214" y="98" width="52" height="88" rx="6" class="fg-box"/>
+            <text x="240" y="210" text-anchor="middle" class="t-sm t-b">4 °C overnight</text>
+            <text x="240" y="88" text-anchor="middle" class="t-sm">cream</text>
+            <text x="240" y="146" text-anchor="middle" class="t-sm">clear</text>
+            <text x="165" y="20" text-anchor="middle" class="t-sm t-mut">Chylomicrons float to the top</text>
+          </svg>
+      - kind: explain
+        page: 270
+        title: "التحاليل والعلاج"
+        quote: "Marked decrease in dietary fat (to as little as 15 g/d) with fat-soluble vitamin supplementation."
+        text: |
+          **التحاليل**: serum لبني، طبقة قشطة فوق serum رايق في 4 °C، **chylomicrons** في الـ lipogram، و TG عالي.
+
+          **العلاج**: الدهون في الأكل تنزل لـ ==15 g/day== بس، مع **fat-soluble vitamins** (A، D، E، K). والـ **fish oils** نفعت مع بعض العيانين.
+      - kind: aside
+        tone: exam
+        page: 269
+        quote: "Genetics: Autosomal recessive"
+        text: "قارن: **FH** = autosomal **dominant** (Type II). **Type I** = autosomal **recessive**. والـ IV و V (في الكتاب) **heterogeneous**."
+      - kind: check
+        page: 269
+        quote: "apo C-II is a cofactor for LPL"
+        question: "A child with recurrent pancreatitis and milky serum most likely lacks:"
+        options:
+          - "Lipoprotein lipase or apo C-II"
+          - "LDL receptor"
+          - "ABCA1"
+          - "LCAT"
+        answer: 0
+        why:
+          - "صح: Type I، الـ chylomicrons ما بتتكسرش."
+          - "ده FH: LDL عالي و TG طبيعي."
+          - "ده Tangier: HDL واطي جدًا."
+          - "ده سبب HDL واطي."
+      - kind: try
+        items: [dm.L21.045, dm.L21.049, dm.L21.051, dm.L21.052, dm.L21.053]
+    recap:
+      - "الهضم في الـ small intestine: emulsification ← hydrolysis ← micelles ← chylomicrons ← lacteals."
+      - "Type I: autosomal recessive، LPL أو apo C-II."
+      - "Cholesterol طبيعي، TG عالي جدًا، atherosclerosis مش زايد."
+      - "Pancreatitis، tender HSM، eruptive xanthoma، lipemia retinalis."
+      - "التلاجة: قشطة فوق serum رايق. العلاج: دهون 15 g/day + فيتامينات A D E K، و fish oil."
+    practice: [dm.L21.044, dm.L21.045, dm.L21.046, dm.L21.047, dm.L21.048, dm.L21.049, dm.L21.050, dm.L21.051, dm.L21.052, dm.L21.053, dm.L21.054, dm.L21.055, dm.L21.056]

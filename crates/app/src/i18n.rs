@@ -272,6 +272,16 @@ pub mod study_settings {
 }
 
 pub mod study {
+    pub const ELSEWHERE_ALL: &str = "اعرض كل المقررات";
+
+    pub fn due_elsewhere(n: usize) -> String {
+        match n {
+            1 => "فيه كارت واحد مستحق في مقرر تاني.".to_string(),
+            2 => "فيه كارتين مستحقين في مقررات تانية.".to_string(),
+            3..=10 => format!("فيه {n} كروت مستحقة في مقررات تانية."),
+            _ => format!("فيه {n} كارت مستحق في مقررات تانية."),
+        }
+    }
     pub const TITLE: &str = "جلسة مذاكرة";
     pub const SETUP_INTRO: &str =
         "اختار المحاضرات والوقت. هنبدأ بالمراجعات اللي عليها الدور، وبعدها الجديد موضوع موضوع.";
@@ -413,6 +423,9 @@ pub mod bank {
     pub const MOCK_SCOPE_NOTE: &str =
         "الامتحان التجريبي بياخد من كل المحاضرات اللي خلصت، فاختيار المحاضرات والمواضيع مش بيأثر عليه.";
     pub const ALL_LECTURES: &str = "كل المحاضرات";
+    pub fn all_of(course: &str) -> String {
+        format!("كل محاضرات {course}")
+    }
     pub const CUSTOMISE: &str = "خصّص المحاضرات والمواضيع";
     pub const CUSTOMISE_CLOSE: &str = "اقفل التخصيص";
     pub const RESET_SCOPE: &str = "رجّع النطاق لكل الأسئلة";
@@ -863,6 +876,7 @@ pub mod calc {
     pub const AREA_ELDERLY: &str = "المسنين";
     pub const AREA_RHEUM: &str = "الروماتيزم";
     pub const AREA_DIABETES: &str = "السكر";
+    pub const AREA_BLOOD: &str = "الدم";
     pub const AREA_RESEARCH: &str = "الريسيرش";
     // The `calc` item: compute it, then interpret it.
     pub const YOUR_RESULT: &str = "حسبتها كام؟";
@@ -892,6 +906,7 @@ pub mod calc {
                 "الـ MCP والـ PIP والـ MTP من ٢ لـ ٥ والـ IP بتاع الإبهام والرسغ."
             }
             ("effective_osmolality", "urea_mmol_l") => "للأوزمولاليتي الكلية. اليوريا بالـ mg/dL ÷ 6.",
+            ("feurea", "urine_urea_mg_dl") => "يوريا أو BUN، بس بنفس وحدة البلازما.",
             ("anion_gap", "albumin_g_dl") => "بيصحح الـ gap لو الألبومين واطي.",
             ("ranson", "bun_rise_mg_dl") => "زيادة اليوريا ÷ 2.14.",
             ("relative_risk", "a") => "معرّض وعنده المرض (أو case)",
@@ -1717,6 +1732,9 @@ pub mod learn {
     }
     pub const LECTURE_PAGE: &str = "صفحة المحاضرة";
     pub const OTHER_LECTURES: &str = "محاضرات تانية";
+    pub const COURSE_NO_LESSONS: &str =
+        "دروس المقرر ده لسه بتتكتب. محاضراته تحت، وكل واحدة بتفتح صفحتها بالكروت وصفحات الكتاب.";
+    pub const SEARCH_ALL_COURSES: &str = "دوّر في كل المقررات";
     pub const SHOW_LECTURE: &str = "اعرض دروس المحاضرة دي";
     pub const STATE_CURRENT: &str = "كمّل";
     pub const STATE_NEXT: &str = "الجاي";
@@ -1763,6 +1781,23 @@ pub mod courses {
     pub const STATUS: &str = "المقرر ده فين؟";
     pub const OPEN_LECTURES: &str = "افتح المحاضرات";
     pub const NO_CONTENT: &str = "لسه مفيش محاضرات. هتنزل لما المنهج يوصل.";
+    pub const ALL: &str = "كل المقررات";
+    pub const PICK_TITLE: &str = "تذاكر إيه دلوقتي؟";
+    pub const PICK_SUB: &str = "الدروس والمراجعة والأسئلة هيتعرضوا للمقرر اللي تختاره بس.";
+    pub const MAP_LINK: &str = "خريطة المقررات والساعات";
+
+    pub fn chip_label(name: &str) -> String {
+        format!("المقرر المعروض: {name}. دوس عشان تبدّل")
+    }
+    pub fn all_sub(courses: usize) -> String {
+        format!("{courses} مقررات مع بعض")
+    }
+    pub fn lessons_done(done: usize, all: usize) -> String {
+        format!("{done} من {all} درس")
+    }
+    pub fn lectures_only(n: usize) -> String {
+        format!("{n} محاضرة، الدروس جاية")
+    }
 
     pub fn hours_line(total: &str, courses: usize) -> String {
         format!("{total} ساعة معتمدة في {courses} مقرر")

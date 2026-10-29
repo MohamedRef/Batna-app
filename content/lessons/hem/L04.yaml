@@ -1,0 +1,489 @@
+schema: batna.lesson/v1
+lecture: hem.L04
+lessons:
+  # ------------------------------------------------------------------
+  - id: hem.L04.lesson1
+    title: "الأنبوبة بعد الـ centrifuge: الدم من جوه"
+    hook: "لف الأنبوبة شوية في الـ centrifuge، وهتشوف الدم كله في تلات طبقات."
+    minutes: 8
+    pages: [57, 64]
+    topics: [blood, hematopoiesis]
+    goals:
+      - "تفرّق بين الـ plasma والـ serum والـ buffy coat"
+      - "تعرف شجرة الـ stem cells: مين myeloid ومين lymphoid"
+      - "تحفظ أرقام الـ CBC والـ differential الطبيعية"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 57
+        title: "الدم نسيج"
+        quote: "Specialized connective tissue Blood cells (formed elements) suspended in plasma"
+        text: |
+          الدم ==specialized connective tissue==: خلايا (**formed elements**) عايمة في **plasma**.
+
+          - الحجم: **5–6 L** في الرجالة و **4–5 L** في الستات.
+          - الـ **hematocrit** = نسبة الـ RBCs من حجم الدم: متوسط **47** في الرجالة و **42** في الستات.
+          - الـ plasma مية وأيونات وتلات بروتينات مهمة: **albumin** و **globulins** و **fibrinogen**.
+      - kind: figure
+        page: 58
+        quote: "Plasma (55% of whole blood) Buffy coat: leukocytes and platelets (<1% of whole blood)"
+        title: "تلات طبقات"
+        alt: "A centrifuged blood tube. Top layer plasma 55 percent, a thin middle buffy coat of leukocytes and platelets under 1 percent, bottom layer erythrocytes 45 percent."
+        caption: "الـ RBCs التقيلة تحت، والـ plasma الخفيفة فوق، وبينهم خط رفيع أبيض هو ==buffy coat== (WBCs + platelets)."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <rect x="40" y="20" width="80" height="260" rx="18" class="fg-ink"/>
+            <rect x="44" y="24" width="72" height="130" rx="14" class="fg-acc"/>
+            <rect x="44" y="154" width="72" height="10" class="fg-box"/>
+            <rect x="44" y="164" width="72" height="112" rx="14" class="fg-bad"/>
+            <text x="140" y="80" class="t-b">Plasma</text>
+            <text x="140" y="98" class="t-sm t-mut">55% of whole blood</text>
+            <text x="140" y="155" class="t-b">Buffy coat</text>
+            <text x="140" y="173" class="t-sm t-mut">WBCs + platelets, &lt;1%</text>
+            <text x="140" y="225" class="t-b">Erythrocytes</text>
+            <text x="140" y="243" class="t-sm t-mut">45% (= hematocrit)</text>
+          </svg>
+      - kind: reveal
+        page: 58
+        quote: "Clear fluid serum is left = plasma without the clotting factors"
+        prompt: "ليه الـ serum مفيهاش fibrinogen والـ plasma فيها؟"
+        answer: |
+          الـ **serum** هي السايل اللي بيفضل بعد ما الدم **يتجلّط**. الجلطة استهلكت الـ fibrinogen والـ clotting factors.
+
+          فالقاعدة: ==serum = plasma without the clotting factors==. علشان كده أنبوبة الـ coagulation profile لازم فيها anticoagulant (citrate)، عايزين plasma مش serum.
+      - kind: aside
+        tone: analogy
+        page: 58
+        quote: "RBCs lack nuclei and organelles Platelets are fragments Most cannot divide"
+        text: |
+          الكتاب بيقول الـ formed elements "some are not truly cells": الـ **RBCs** من غير nucleus ولا organelles، والـ **platelets** مجرد fragments، وأغلبهم **cannot divide**.
+
+          زي موظفين اتعيّنوا بعقد مؤقت: بيشتغلوا وبيموتوا، ومحدش فيهم بيخلّف. اللي بيعوّضهم هو الـ marrow.
+      - kind: explain
+        page: 59
+        title: "مصنع واحد: الـ red marrow"
+        quote: "All cells arise from same blood stem cell (pluripotent hematopoietic stem cells)"
+        text: |
+          الـ **hematopoiesis** بيحصل أساسًا في الـ **red bone marrow**، وكل الخلايا جاية من ==pluripotent hematopoietic stem cell== واحدة.
+
+          وفي الكبار فيه كمان **mesenchymal stem cells** بتعمل fat cells و osteoblasts و chondrocytes و fibroblasts و muscle cells.
+      - kind: figure
+        page: 61
+        quote: "All except for lymphocytes arise from myeloid stem cells"
+        title: "شجرة الـ stem cells"
+        alt: "A tree: pluripotent stem cell splits into myeloid and lymphoid stem cells. Myeloid gives erythrocytes, megakaryocytes to platelets, granulocytes (neutrophil, eosinophil, basophil) and monocytes. Lymphoid gives lymphocytes."
+        caption: "كله myeloid ما عدا ==lymphocytes==. ولما الخلية تتقسم بتبقى **committed** (CFU): تطلع نوع واحد بس."
+        svg: |
+          <svg viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L04a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="fg-head"/></marker></defs>
+            <rect x="85" y="10" width="160" height="36" rx="10" class="fg-acc"/>
+            <text x="165" y="33" text-anchor="middle" class="t-sm t-b">Pluripotent stem cell</text>
+            <path d="M130 46 L80 80" class="fg-arrow" marker-end="url(#L04a)"/>
+            <path d="M200 46 L255 80" class="fg-arrow" marker-end="url(#L04a)"/>
+            <rect x="15" y="82" width="130" height="34" rx="10" class="fg-box"/>
+            <text x="80" y="104" text-anchor="middle" class="t-sm t-b">Myeloid stem cell</text>
+            <rect x="190" y="82" width="130" height="34" rx="10" class="fg-good"/>
+            <text x="255" y="104" text-anchor="middle" class="t-sm t-b">Lymphoid stem cell</text>
+            <path d="M80 116 L80 140" class="fg-arrow" marker-end="url(#L04a)"/>
+            <text x="20" y="160" class="t-sm">Erythrocytes (RBCs)</text>
+            <text x="20" y="182" class="t-sm">Megakaryocyte → platelets</text>
+            <text x="20" y="204" class="t-sm">Neutrophil</text>
+            <text x="20" y="226" class="t-sm">Eosinophil</text>
+            <text x="20" y="248" class="t-sm">Basophil</text>
+            <text x="20" y="270" class="t-sm">Monocyte → macrophage</text>
+            <path d="M255 116 L255 140" class="fg-arrow" marker-end="url(#L04a)"/>
+            <text x="200" y="160" class="t-sm t-good t-b">Lymphocytes</text>
+            <text x="200" y="182" class="t-sm">T, B, NK cells</text>
+            <text x="200" y="204" class="t-sm">B → plasma cell</text>
+            <text x="20" y="305" class="t-sm t-mut">Committed progenitors = CFUs</text>
+          </svg>
+      - kind: check
+        page: 61
+        quote: "All except for lymphocytes arise from myeloid stem cells"
+        question: "Which cell does NOT come from the myeloid stem cell?"
+        options: ["Lymphocyte", "Monocyte", "Megakaryocyte", "Eosinophil"]
+        answer: 0
+        why:
+          - "صح: الـ lymphocytes بس من الـ lymphoid stem cell."
+          - "الـ monocyte myeloid، وبيبقى macrophage في الـ tissues."
+          - "الـ megakaryocyte myeloid وبيطلّع platelets."
+          - "الـ eosinophil granulocyte، يعني myeloid."
+      - kind: table
+        page: 62
+        quote: "WBC: White Blood Cells: 4,000 - 10,000 / mm"
+        title: "الـ CBC الطبيعي"
+        columns: [Test, Normal]
+        rows:
+          - ["WBC", "4,000–10,000 /mm³"]
+          - ["RBC", "4.2–5.9 million /mm³"]
+          - ["Hb", "M 14–18, F 12–16 g/dL"]
+          - ["Hct", "M 40–54%, F 37–47%"]
+          - ["MCV", "86–98 µm³"]
+          - ["MCH", "27–32 pg"]
+          - ["RDW", "11.5–14.5"]
+          - ["Platelets", "150,000–400,000 /mm³"]
+        hide: [[0, 1], [2, 1], [4, 1], [7, 1]]
+      - kind: mnemonic
+        page: 62
+        quote: "Neutrophils: 40-75% Lymphocytes: 15-45% Monocytes: 1-10% Eosinophils: 1-6% Basophils: 0-2%"
+        word: "NLMEB"
+        parts:
+          - { key: "N", text: "Neutrophils 40–75%" }
+          - { key: "L", text: "Lymphocytes 15–45%" }
+          - { key: "M", text: "Monocytes 1–10%" }
+          - { key: "E", text: "Eosinophils 1–6%" }
+          - { key: "B", text: "Basophils 0–2%" }
+        hook: "**Never Let Monkeys Eat Bananas**: الترتيب من الأكتر للأقل في الـ differential."
+      - kind: aside
+        tone: exam
+        page: 64
+        quote: "Monocytes 4-8% of WBCs"
+        text: |
+          فخ أرقام: الـ CBC table (ص 62) بتقول **monocytes 1–10%**، وصفحة 64 بتقول **4–8% of WBCs**.
+
+          الاتنين من الكتاب. لو السؤال عن "normal differential" اكتب **1–10%**، ولو عن الـ monocytes لوحدها افتكر **4–8%**.
+      - kind: try
+        items: [hem.L04.005, hem.L04.007, hem.L04.011, hem.L04.014, hem.L04.015]
+    recap:
+      - "Plasma 55%، buffy coat أقل من 1% (WBCs + platelets)، RBCs 45%."
+      - "Serum = plasma من غير clotting factors."
+      - "كله من الـ myeloid stem cell ما عدا الـ lymphocytes. الـ committed cells اسمها CFUs."
+      - "WBC 4,000–10,000، platelets 150,000–400,000، والـ differential **Never Let Monkeys Eat Bananas**."
+    practice: [hem.L04.001, hem.L04.002, hem.L04.003, hem.L04.004, hem.L04.005, hem.L04.006, hem.L04.007, hem.L04.008, hem.L04.009, hem.L04.010, hem.L04.011, hem.L04.012, hem.L04.013, hem.L04.014, hem.L04.015, hem.L04.016]
+  # ------------------------------------------------------------------
+  - id: hem.L04.lesson2
+    title: "الـ film بيتكلم: شكل الخلية وصغارها"
+    hook: "نواة بفصّين، حبوب عملاقة، أو nucleated RBCs: كل واحدة بتقولك تشخيص."
+    minutes: 9
+    pages: [63, 66]
+    topics: [leukocytes, morphology, blood-film]
+    goals:
+      - "تفرّق بين الـ phagocytes والـ immunocytes"
+      - "تعرف الـ congenital والـ acquired morphology changes"
+      - "تفرّق بين left shift و leukoerythroblastic و leukemoid"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 63
+        title: "فريقين"
+        quote: "Granulolcytes, which include three types of cells: neutrophils, eosinophils & basophils; together with monocyte comprise the phagocytes."
+        text: |
+          - ==Phagocytes==: الـ **granulocytes** (neutrophils و eosinophils و basophils) + **monocytes**.
+          - ==Immunocytes==: الـ **lymphocytes** وسلايفها والـ **plasma cells**.
+
+          وفي الـ peripheral blood الطبيعي مش بتلاقي غير **mature phagocytes** و **lymphocytes**. أي خلية صغيرة (immature) في الـ film يبقى فيه حاجة.
+      - kind: explain
+        page: 64
+        title: "T و B و NK"
+        quote: "T cells attack foreign cells directly - Killer cells (―cytotoxic‖), or CD8+ is a main type"
+        text: |
+          - **T cells** بتهاجم بإيدها: الـ **cytotoxic CD8+** بتلزق في الـ target، تفرز proteins تخرم الـ membrane، وتقولها تموت (apoptosis).
+          - **B cells** بتبقى **plasma cells** تفرز **antibodies**، والـ antibodies بتعلّم البكتيريا علشان الـ **macrophages** تاكلها.
+          - وفيه كمان **natural killer cells**.
+
+          والـ **monocytes** في الـ connective tissue بتبقى **macrophages** (phagocytes بـ pseudopods).
+      - kind: order
+        page: 64
+        quote: "Differentiate into plasma cells Plasma cells secrete antibodies Antibodies flag cells for destruction by macrophages"
+        prompt: "رتّب طريق الـ B cell لحد ما البكتيريا تتاكل:"
+        steps:
+          - "B cell → plasma cell"
+          - "Plasma cell secretes antibodies"
+          - "Antibodies coat the bacteria"
+          - "Macrophage phagocytoses the coated bacteria"
+        why: "الـ B cell مش بتقتل بنفسها: بتعلّم الهدف (opsonization) والـ macrophage هي اللي بتاكل."
+      - kind: explain
+        page: 65
+        title: "تقسيم الـ leukocyte disorders وأشكال الـ congenital"
+        quote: "Barr bodies: Drumstick appendage in females, it represents inactive X chromosome."
+        text: |
+          بتتقسم: **benign/malignant**، **hereditary/acquired**، **functional/numerical**، و **morphological**.
+
+          الـ congenital morphology:
+          - **Barr body**: ==drumstick== في نواة الـ neutrophil عند الستات = الـ **inactive X**.
+          - **Pelger-Huët anomaly**: neutrophil **bilobed**.
+          - **Hereditary hypersegmentation**: **autosomal dominant**.
+      - kind: explain
+        page: 65
+        title: "Chediak-Higashi: الطفل الأشقر اللي بيتعب كتير"
+        quote: "a rare autosomal recessive disorder characterized by oculocutaneous albinism, recurrent and severe bacterial infections, giant blue-grey granules"
+        text: |
+          ==Chediak-Higashi== نادر و **autosomal recessive**:
+          - **Oculocutaneous albinism**: photophobia و sun sensitivity
+          - **Recurrent severe bacterial infections**، خصوصًا **Staph aureus**
+          - **Giant blue-grey granules** في الـ granulocytes والـ monocytes والـ lymphocytes
+          - **Mild bleeding diathesis**
+          - **Progressive peripheral neuropathy** و cranial nerve abnormalities
+
+          العلاج: **BMT**.
+      - kind: mnemonic
+        page: 65
+        quote: "a mild bleeding diathesis, progressive peripheral neuropathy and cranial nerve abnormalities."
+        word: "GIANT"
+        parts:
+          - { key: "G", text: "Giant blue-grey granules" }
+          - { key: "I", text: "Infections: recurrent, severe, Staph aureus" }
+          - { key: "A", text: "Albinism (oculocutaneous): photophobia, sun sensitivity" }
+          - { key: "N", text: "Neuropathy: peripheral and cranial nerves" }
+          - { key: "T", text: "Thrombocyte problem: mild bleeding diathesis; treat with BMT" }
+        hook: "الحبوب **GIANT** والمشاكل GIANT كمان."
+      - kind: table
+        page: 65
+        quote: "Toxic Granulation: Infection Hypersegmented Neutrophils: megaloblastic anemia, cytotoxic drugs Pseudo-Pelger Huet(acquired): myelodysplasia"
+        title: "الـ acquired: الشكل ← السبب"
+        columns: [Finding, Cause]
+        rows:
+          - ["Toxic granulation", "Infection"]
+          - ["Hypersegmented", "Megaloblastic anemia, cytotoxic drugs"]
+          - ["Pseudo-Pelger", "Myelodysplasia"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: aside
+        tone: trap
+        page: 65
+        quote: "Pelger Huet anomaly: bilobed neutrophil"
+        text: |
+          نفس الشكل (bilobed neutrophil) ومعنيين:
+          - من الولادة وطول عمره ← **Pelger-Huët anomaly** (congenital، مالهاش لازمة).
+          - راجل كبير فجأة ومعاه cytopenias ← **pseudo-Pelger-Huët** = فكّر في ==myelodysplasia==.
+      - kind: figure
+        page: 66
+        quote: "Leukoerythroblastic picture: a presence of a shift to left plus nucleated RBC in the peripheral blood."
+        title: "تلات كلمات بتتلخبط"
+        alt: "Three stacked boxes. Shift to the left equals more band forms and occasional primitive cells. Leukoerythroblastic equals left shift plus nucleated RBCs. Leukemoid reaction equals excessive reactive leukocytosis plus left shift."
+        caption: "ابدأ دايمًا بالـ ==shift to the left==، وبعدين اسأل: فيه nucleated RBCs؟ ولا الـ WBC عالي جدًا؟"
+        svg: |
+          <svg viewBox="0 0 330 305" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L04b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="fg-head"/></marker></defs>
+            <rect x="40" y="10" width="250" height="60" rx="10" class="fg-acc"/>
+            <text x="165" y="34" text-anchor="middle" class="t-b">Shift to the left</text>
+            <text x="165" y="54" text-anchor="middle" class="t-sm">more bands ± primitive cells</text>
+            <path d="M60 70 L60 110" class="fg-arrow" marker-end="url(#L04b)"/>
+            <path d="M270 70 L270 110" class="fg-arrow" marker-end="url(#L04b)"/>
+            <text x="68" y="96" class="t-sm t-mut">+ nucleated RBCs</text>
+            <text x="262" y="96" text-anchor="end" class="t-sm t-mut">+ big leukocytosis</text>
+            <rect x="5" y="112" width="155" height="70" rx="10" class="fg-bad"/>
+            <text x="82" y="140" text-anchor="middle" class="t-sm t-b">Leukoerythroblastic</text>
+            <text x="82" y="160" text-anchor="middle" class="t-sm">marrow invaded</text>
+            <text x="82" y="175" text-anchor="middle" class="t-sm">or stressed</text>
+            <rect x="170" y="112" width="155" height="70" rx="10" class="fg-good"/>
+            <text x="247" y="140" text-anchor="middle" class="t-sm t-b">Leukemoid reaction</text>
+            <text x="247" y="160" text-anchor="middle" class="t-sm">reactive, usually</text>
+            <text x="247" y="175" text-anchor="middle" class="t-sm">neutrophilic</text>
+            <text x="10" y="210" class="t-sm t-b">Metastases</text>
+            <text x="10" y="226" class="t-sm t-b">Myelofibrosis</text>
+            <text x="10" y="242" class="t-sm t-b">AML, CML</text>
+            <text x="10" y="258" class="t-sm t-b">Myeloma, lymphoma</text>
+            <text x="10" y="274" class="t-sm t-b">Miliary TB, megaloblastic</text>
+            <text x="10" y="290" class="t-sm t-b">Hemolysis, osteopetrosis</text>
+            <text x="185" y="210" class="t-sm t-b">Severe infection</text>
+            <text x="185" y="226" class="t-sm t-b">Severe hemolysis</text>
+            <text x="185" y="242" class="t-sm t-b">Metastatic cancer</text>
+          </svg>
+      - kind: mnemonic
+        page: 66
+        quote: "Metastatic neoplasm in the marrow Primary myelofi brosis Acute and chronic myeloid leukaemia Myeloma, lymphoma Miliary tuberculosis"
+        word: "MMMMMM HO"
+        parts:
+          - { key: "M", text: "Metastatic neoplasm in the marrow" }
+          - { key: "M", text: "Myelofibrosis (primary)" }
+          - { key: "M", text: "Myeloid leukemia, acute and chronic" }
+          - { key: "M", text: "Myeloma, lymphoma" }
+          - { key: "M", text: "Miliary tuberculosis" }
+          - { key: "M", text: "Megaloblastic anemia (severe)" }
+          - { key: "H", text: "Hemolysis (severe)" }
+          - { key: "O", text: "Osteopetrosis" }
+        hook: "ستة **M** وبعدين **HO**: الـ marrow اتزحم فطرد الصغيرين بره، حتى الـ nucleated RBCs."
+      - kind: check
+        page: 66
+        quote: "a reactive excessive leukocytosis with the presence of immature cells (myeloblasts, promyelocytes and myelocyte) in the peripheral blood."
+        question: "WBC 60,000/mm³ with myelocytes and promyelocytes in severe pneumonia, no nucleated RBCs. Name it."
+        options: ["Leukemoid reaction", "Leukoerythroblastic picture", "Toxic granulation", "Pseudo-Pelger-Huët"]
+        answer: 0
+        why:
+          - "صح: leukocytosis + left shift، reactive، وسببه severe infection."
+          - "مفيش nucleated RBCs، فمش leukoerythroblastic."
+          - "الـ toxic granulation شكل حبوب، مش عدد."
+          - "الـ pseudo-Pelger علامة myelodysplasia."
+      - kind: aside
+        tone: joke
+        page: 66
+        quote: "Causes : 1. Severe infection 2. Severe haemolysis 3. Metastatic cancer"
+        text: |
+          الـ **leukemoid reaction** زي الأم اللي سمعت ابنها بيكح: بعتت الكبار والصغيرين والبيبي اللي لسه بيحبي (myelocytes) للمستشفى. كل ده reactive، ولما الكحة تخف كله يرجع البيت.
+
+          أسبابه تلاتة بس: **severe infection** و **severe hemolysis** و **metastatic cancer**.
+      - kind: try
+        items: [hem.L04.017, hem.L04.028, hem.L04.031, hem.L04.035, hem.L04.037]
+    recap:
+      - "Phagocytes = granulocytes + monocytes. Immunocytes = lymphocytes + precursors + plasma cells."
+      - "Barr body = drumstick (inactive X)، Pelger-Huët = bilobed، hypersegmentation AD."
+      - "Chediak-Higashi: AR، **GIANT** granules، albinism، Staph، neuropathy، bleeding، العلاج BMT."
+      - "Acquired: toxic granulation = infection، hypersegmented = megaloblastic/cytotoxics، pseudo-Pelger = MDS."
+      - "Left shift + nRBC = leukoerythroblastic (**MMMMMM HO**). Leukocytosis + left shift = leukemoid (infection، hemolysis، metastases)."
+    practice: [hem.L04.017, hem.L04.018, hem.L04.019, hem.L04.020, hem.L04.021, hem.L04.022, hem.L04.023, hem.L04.024, hem.L04.025, hem.L04.026, hem.L04.027, hem.L04.028, hem.L04.029, hem.L04.030, hem.L04.031, hem.L04.032, hem.L04.033, hem.L04.034, hem.L04.035, hem.L04.036, hem.L04.037, hem.L04.038, hem.L04.039, hem.L04.040, hem.L04.041, hem.L04.064]
+  # ------------------------------------------------------------------
+  - id: hem.L04.lesson3
+    title: "كتير ولا قليل؟ أعداد الـ WBCs"
+    hook: "كل خلية ليها رقم لو عدّته، وليها قايمة أسباب بتتسأل في الامتحان."
+    minutes: 10
+    pages: [67, 69]
+    topics: [neutrophils, other-counts]
+    goals:
+      - "تعدّ أسباب الـ neutrophilia والـ neutropenia"
+      - "تحفظ الـ cut-offs: 2.5 و 1.5 و 0.5 و 0.1 و 0.8"
+      - "تجاوب أسئلة الكتاب: HES و febrile neutropenia و benign monocytosis"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 67
+        title: "Neutrophilia: عشرة أسباب"
+        quote: "Infection (bacterial) 2. Inflammatory conditions 3. Neoplasia 4. Metabolic conditions 5. Hemorrhage, Hemolysis 6. MPD"
+        text: |
+          1. **Bacterial infection**
+          2. **Inflammatory conditions**
+          3. **Neoplasia**
+          4. **Metabolic conditions**
+          5. **Hemorrhage**، **hemolysis**
+          6. **MPD**
+          7. **Drugs**: ==corticosteroids== (inhibit margination)، lithium، tetracycline
+          8. **G-CSF**
+          9. **Rare inherited disorders**
+          10. **Asplenia**
+      - kind: reveal
+        page: 67
+        quote: "Drugs (e.g. corticosteroid therapy (inhibits margination): lithium, tetracycline)"
+        prompt: "الـ steroids مش بتعمل neutrophils جديدة. طب الـ count بيعلى إزاي؟"
+        answer: |
+          نص الـ neutrophils تقريبًا بيبقى **marginated**: لازق في جدار الأوعية ومش بيتعد في الـ CBC.
+
+          الـ **corticosteroids** بتمنع الـ ==margination==، فالخلايا تسيب الجدار وتعوم في الدم، والعدد يعلى من غير ما المصنع يشتغل زيادة. (التفسير فسيولوجي، والمعلومة من الكتاب.)
+      - kind: explain
+        page: 67
+        title: "Neutropenia: الأرقام اللي بتفرق"
+        quote: "When the absolute neutrophil level falls below 0.5 *10 9/L the patient is likely to have recurrent infections"
+        text: |
+          - الـ lower limit الطبيعي **2.5 × 10⁹/L**، ما عدا black people و ==Middle East== = **1.5 × 10⁹/L** طبيعي.
+          - تحت **0.5 × 10⁹/L** ← **recurrent infections** متوقعة.
+
+          يعني المصري اللي الـ ANC بتاعه 1.6 ومفيش عنده infections ده طبيعي، ما تعملّوش bone marrow!
+      - kind: sort
+        page: 68
+        quote: "Infections (typhoid, miliary TB, viral hepatitis) 6. Drugs 7. Irradiation 8. Immune disorders 9. Hypersplenism"
+        prompt: "ده بيعلّي الـ neutrophils ولا بيقلّلها؟"
+        bins: ["Neutrophilia", "Neutropenia"]
+        cards:
+          - { text: "Asplenia", bin: 0 }
+          - { text: "Corticosteroids", bin: 0 }
+          - { text: "G-CSF", bin: 0 }
+          - { text: "Hemorrhage", bin: 0 }
+          - { text: "Hypersplenism", bin: 1 }
+          - { text: "Typhoid", bin: 1 }
+          - { text: "Kostmann syndrome", bin: 1 }
+          - { text: "Megaloblastic anemia", bin: 1 }
+          - { text: "Irradiation", bin: 1 }
+        why: "الطحال اللي بيشتغل زيادة (hypersplenism) بيحبس الخلايا، ومن غير طحال (asplenia) بتفضل في الدم. والـ typhoid و miliary TB و viral hepatitis infections بتقلّل مش بتعلّي، عكس الـ bacterial infection العادية."
+      - kind: mnemonic
+        page: 68
+        quote: "Parasitic infection 2. Skin disorders 3. Allergic conditions 4. Neoplasia 5. Myeloproliferative disorders 6. Hypereosinophilic syndrome"
+        word: "PSANMH"
+        parts:
+          - { key: "P", text: "Parasitic infection" }
+          - { key: "S", text: "Skin disorders" }
+          - { key: "A", text: "Allergic conditions" }
+          - { key: "N", text: "Neoplasia" }
+          - { key: "M", text: "Myeloproliferative disorders" }
+          - { key: "H", text: "Hypereosinophilic syndrome" }
+        hook: "**P**ass **S**ome **A**llergy **N**ow, **M**y **H**ero: الـ eosinophil بطل الحساسية والديدان."
+      - kind: explain
+        page: 68
+        title: "Basophils و monocytes"
+        quote: "An increase in blood basophils above 0.1 *10 9 /L is uncommon. The usual cause is a myeloproliferative disorder"
+        text: |
+          - ==Basophilia== (فوق **0.1 × 10⁹/L**) نادرة، وسببها المعتاد **MPN**: **CML** أو **polycythemia vera**. الـ reactive: myxedema، smallpox/chickenpox، ulcerative colitis.
+          - **Monocytosis** (فوق **0.8 × 10⁹/L**) قليلة. أسبابها: chronic bacterial infections (**TB، brucellosis، endocarditis، typhoid**)، connective tissue (SLE، temporal arteritis، RA)، protozoa، chronic neutropenia، و malignancies (Hodgkin، AML، **CMML**).
+      - kind: aside
+        tone: exam
+        page: 68
+        quote: "The usual cause is a myeloproliferative disorder such as chronic myeloid leukemia or polycythaemia vera."
+        text: |
+          basophils عالية في CBC = افتكر **CML** الأول. الكتاب بيقول "the usual cause"، وده بيتسأل MCQ كتير.
+      - kind: figure
+        page: 68
+        quote: "Monocytosis: A rise in blood monocyte count above 0.8 *10 9 /L is infrequent."
+        title: "مسطرة الأرقام"
+        alt: "A ruler of cut-offs in units of 10 to the 9 per litre: basophils above 0.1, ANC below 0.5 means recurrent infections, monocytes above 0.8, neutrophil lower limit 1.5 in the Middle East and 2.5 elsewhere."
+        caption: "خمس أرقام بس: **0.1** basophils، **0.5** infections، **0.8** monocytes، **1.5** Middle East، **2.5** الـ lower limit العادي."
+        svg: |
+          <svg viewBox="0 0 330 260" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 60 H310" class="fg-ink" stroke-width="3"/>
+            <text x="20" y="30" class="t-sm t-mut">× 10⁹/L</text>
+            <circle cx="32" cy="60" r="7" class="fg-dot-acc"/>
+            <circle cx="72" cy="60" r="7" class="fg-dot-bad"/>
+            <circle cx="104" cy="60" r="7" class="fg-dot-acc"/>
+            <circle cx="180" cy="60" r="7" class="fg-dot-good"/>
+            <circle cx="290" cy="60" r="7" class="fg-dot-good"/>
+            <text x="32" y="90" text-anchor="middle" class="t-b">0.1</text>
+            <text x="72" y="90" text-anchor="middle" class="t-b">0.5</text>
+            <text x="104" y="90" text-anchor="middle" class="t-b">0.8</text>
+            <text x="180" y="90" text-anchor="middle" class="t-b">1.5</text>
+            <text x="290" y="90" text-anchor="middle" class="t-b">2.5</text>
+            <text x="20" y="130" class="t-sm">0.1: basophilia above this</text>
+            <text x="20" y="152" class="t-sm t-bad">0.5: ANC below → recurrent infections</text>
+            <text x="20" y="174" class="t-sm">0.8: monocytosis above this</text>
+            <text x="20" y="196" class="t-sm t-good">1.5: normal ANC floor, Middle East</text>
+            <text x="20" y="218" class="t-sm t-good">2.5: normal ANC floor, others</text>
+          </svg>
+      - kind: table
+        page: 69
+        quote: "Bacterial infections: (Pertussis, occasionally healing TB, Brucellosis, Secondary and Congenital Syphilis, Typhoid fever, Diphtheria)"
+        title: "Lymphocytosis"
+        columns: [Group, Causes]
+        rows:
+          - ["Viral", "IM, infectious lymphocytosis, CMV"]
+          - ["Bacterial", "Pertussis, healing TB, brucellosis, syphilis, typhoid, diphtheria"]
+          - ["Protozoal", "Toxoplasmosis"]
+          - ["Neoplastic", "CLL, lymphoma"]
+        hide: [[0, 1], [1, 1], [3, 1]]
+      - kind: match
+        page: 68
+        quote: "Chronic bacterial infections: tuberculosis, brucellosis, bacterial endocarditis, typhoid"
+        prompt: "وصّل كل حالة بالخلية اللي بتعلى معاها:"
+        pairs:
+          - ["Parasites", "Eosinophils"]
+          - ["Pertussis", "Lymphocytes"]
+          - ["Bacterial endocarditis", "Monocytes"]
+          - ["Polycythemia vera", "Basophils"]
+          - ["Asplenia", "Neutrophils"]
+        why: "الديدان eosinophils، الـ pertussis lymphocytes، الـ chronic bacterial (endocarditis، TB) monocytes، الـ MPN basophils، والـ asplenia neutrophils."
+      - kind: case
+        page: 67
+        quote: "When the absolute neutrophil level falls below 0.5 *10 9/L the patient is likely to have recurrent infections"
+        stem: "A 55-year-old woman on chemotherapy has a fever of 38.6°C. ANC 0.3 × 10⁹/L."
+        steps:
+          - question: "What does the lecture say about an ANC this low?"
+            options: ["Recurrent infections are likely", "Normal for the Middle East", "It is a leukemoid reaction", "It needs no action"]
+            answer: 0
+            why: "تحت **0.5 × 10⁹/L** الـ infections متوقعة. الـ 1.5 هو الطبيعي عندنا، و 0.3 بعيد عنه خالص."
+          - question: "Cultures grow a Gram-negative organism and she is not improving on antibiotics. Which blood component does lecture 6 allow?"
+            options: ["Granulocyte transfusion", "Cryoprecipitate", "Albumin", "Fresh frozen plasma"]
+            answer: 0
+            why: "الـ **granulocytes** للـ ANC تحت 0.5 مع **documented infection** (ص 91). الباقي مش بيدّي neutrophils."
+      - kind: update
+        page: 67
+        quote: "When the absolute neutrophil level falls below 0.5 *10 9/L the patient is likely to have recurrent infections"
+        ref: "ASCO/IDSA outpatient febrile neutropenia guideline 2018"
+        text: "الكتاب ما ادّاش algorithm. التعريف الحالي: حرارة **38.3°C** مرة، أو **38.0°C** لمدة ساعة، مع **ANC <0.5** (أو متوقع ينزل تحتها في 48 ساعة). خد cultures، قيّم الـ risk بالـ **MASCC score**، وابدأ **empirical anti-pseudomonal beta-lactam** خلال ساعة."
+      - kind: update
+        page: 68
+        quote: "Myeloproliferative disorders 6. Hypereosinophilic syndrome"
+        ref: "WHO classification of haematolymphoid tumours, 5th ed. 2022"
+        text: "الكتاب ذكر **HES (hypereosinophilic syndrome)** كسبب للـ eosinophilia بس. التعريف الحالي: eosinophils فوق **1.5 × 10⁹/L** مرتين بينهم شهر على الأقل، مع **organ damage** (قلب، رئة، جلد، أعصاب) بعد استبعاد الأسباب الـ secondary. اللي فيهم **PDGFRA** بيستجيبوا لـ **imatinib**."
+      - kind: try
+        items: [hem.L04.042, hem.L04.044, hem.L04.046, hem.L04.056, hem.L04.069]
+    recap:
+      - "Neutrophilia: bacterial infection، inflammation، neoplasia، steroids (margination)، G-CSF، asplenia."
+      - "ANC الطبيعي 2.5، و 1.5 في الـ Middle East. تحت 0.5 = recurrent infections."
+      - "Neutropenia: Kostmann، cyclical، aplasia، megaloblastic، typhoid/miliary TB/hepatitis، drugs، irradiation، immune، hypersplenism."
+      - "Eosinophilia **PSANMH**. Basophilia فوق 0.1 = MPN (CML/PV). Monocytosis فوق 0.8."
+      - "Lymphocytosis: IM، CMV، pertussis، toxoplasmosis، CLL."
+    practice: [hem.L04.042, hem.L04.043, hem.L04.044, hem.L04.045, hem.L04.046, hem.L04.047, hem.L04.048, hem.L04.049, hem.L04.050, hem.L04.051, hem.L04.052, hem.L04.053, hem.L04.054, hem.L04.055, hem.L04.056, hem.L04.057, hem.L04.058, hem.L04.059, hem.L04.060, hem.L04.061, hem.L04.062, hem.L04.063, hem.L04.065, hem.L04.066, hem.L04.067, hem.L04.068, hem.L04.069, hem.L04.070, hem.L04.071]

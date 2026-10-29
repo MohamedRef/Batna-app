@@ -1,0 +1,682 @@
+schema: batna.lesson/v1
+lecture: geri.L11
+lessons:
+  # ------------------------------------------------------------------
+  - id: geri.L11.lesson1
+    title: "رئة عندها 80 سنة"
+    hook: "الرئة الكبيرة مش مريضة، بس اتغيرت: أوسع، أرخى، وحابسة هوا أكتر. لازم تعرف الطبيعي قبل ما تقول COPD."
+    minutes: 9
+    pages: [188, 192]
+    topics: [volumes, aging]
+    goals:
+      - "تفتكر الـ lung volumes والـ capacities بأرقامها"
+      - "تفهم الـ senile emphysema وليه الـ TLC مش بيتغير"
+      - "تعرف ليه الـ FEV1/FVC بيضلّلنا في الكبار"
+    status: unverified
+    steps:
+      - kind: figure
+        page: 188
+        quote: "TLC … = TV+ IRV+ ERV+ RV = 4‐6 L VC …. = TV+IRV+ERV = 4800mL FRC … = RV+ERV = 1800 –2200 mL"
+        title: "الأحجام في عمود واحد"
+        alt: "A vertical bar for total lung capacity of 4 to 6 litres, split from bottom to top into residual volume 1200 ml, expiratory reserve volume 700 to 1200 ml, tidal volume 300 to 500 ml and inspiratory reserve volume 1900 to 3300 ml. Brackets on the right: FRC is RV plus ERV, IC is TV plus IRV, VC is everything except RV."
+        caption: "الـ capacity = مجموع volumes. الـ VC هي كل حاجة ما عدا الـ RV، والـ FRC هي اللي فاضل بعد زفير عادي."
+        svg: |
+          <svg viewBox="0 0 330 360" xmlns="http://www.w3.org/2000/svg">
+            <rect x="20" y="10" width="120" height="120" class="fg-acc"/>
+            <rect x="20" y="130" width="120" height="50" class="fg-good"/>
+            <rect x="20" y="180" width="120" height="70" class="fg-box"/>
+            <rect x="20" y="250" width="120" height="100" class="fg-bad"/>
+            <text x="30" y="60" class="t-sm t-b">IRV</text>
+            <text x="30" y="80" class="t-sm">1900-3300 ml</text>
+            <text x="30" y="152" class="t-sm t-b">TV</text>
+            <text x="30" y="170" class="t-sm">300-500 ml</text>
+            <text x="30" y="210" class="t-sm t-b">ERV</text>
+            <text x="30" y="230" class="t-sm">700-1200 ml</text>
+            <text x="30" y="290" class="t-sm t-b">RV</text>
+            <text x="30" y="310" class="t-sm">1200 ml</text>
+            <path d="M150 10v170" class="fg-arrow-acc" stroke-width="3"/>
+            <text x="158" y="100" class="t-sm t-b t-acc">IC</text>
+            <path d="M150 180v170" class="fg-arrow" stroke-width="3"/>
+            <text x="158" y="270" class="t-sm t-b">FRC 1.8-2.2 L</text>
+            <path d="M240 10v240" class="fg-arrow-acc" stroke-width="3"/>
+            <text x="248" y="130" class="t-sm t-b t-acc">VC</text>
+            <text x="248" y="148" class="t-sm">4.8 L</text>
+            <path d="M300 10v340" class="fg-arrow" stroke-width="3"/>
+            <text x="190" y="345" class="t-sm t-b">TLC 4-6 L</text>
+          </svg>
+      - kind: match
+        page: 188
+        quote: "TLC … = TV+ IRV+ ERV+ RV = 4‐6 L VC …. = TV+IRV+ERV = 4800mL FRC … = RV+ERV = 1800 –2200 mL"
+        prompt: "وصّل الـ capacity باللي بتتكون منه:"
+        pairs:
+          - ["IC", "IRV + TV"]
+          - ["FRC", "RV + ERV"]
+          - ["VC", "TV + IRV + ERV"]
+          - ["TLC", "TV + IRV + ERV + RV"]
+        why: "افتكر: الـ RV عمره ما بيطلع، فهو جوه الـ FRC والـ TLC بس. الـ VC هي اللي تقدر تنفخها كلها."
+      - kind: explain
+        page: 190
+        quote: "―Senile Emphysema‖ results in alveolar dilatation without any destructive changes to the alveolar walls but due to degeneration of elastic fibers around the alveolar duct."
+        title: "الـ senile emphysema"
+        text: |
+          التغيير في السن بيحصل في الـ **alveoli** مش في الـ large airways.
+
+          الـ alveoli بتفقد الـ ==elastic recoil== وتوسع، وده اسمه **senile emphysema**: dilatation **من غير destruction** في الحيطان، بسبب degeneration للـ elastic fibers حوالين الـ alveolar duct.
+
+          وده الفرق الجوهري عن الـ emphysema بتاع الـ COPD، اللي فيه destruction.
+      - kind: explain
+        page: 190
+        quote: "Healthy older persons have approximately 25% lower diaphragmatic strength."
+        title: "الصدر والعضلات"
+        text: |
+          - الـ chest wall بيبقى **أنشف**، والعضلات أضعف.
+          - الشهيق بيعتمد أساسًا على الـ **diaphragm**، وده أضعف بحوالي ==25%== في الكبار الأصحاء.
+          - الـ diaphragm الضعيف = **VC أقل**.
+      - kind: reveal
+        page: 190
+        quote: "Thus, the two together result in an almost unchanged TLC with age."
+        prompt: "الـ recoil قلّ (الرئة بتتمد أسهل) والـ chest wall نشف. يحصل إيه للـ TLC؟"
+        answer: "الأولى بتزوّد الـ TLC والتانية بتقلّله، فبيلغوا بعض، والـ ==TLC== يفضل **تقريبًا ثابت** مع السن."
+      - kind: explain
+        page: 190
+        quote: "Abnormally high RV/TLC is called hyperinflation, which can often be seen on a chest x-ray"
+        title: "Air trapping"
+        text: |
+          الـ recoil القليل بيخلي الـ alveoli تقفل بدري في الزفير، فالهوا يتحبس ← الـ **RV يزيد**، والـ VC يقل.
+
+          لو الـ RV/TLC عالي بشكل غير طبيعي = ==hyperinflation==، وبيبان في الـ X-ray. بيحصل في **asthma** و **COPD** و **السن المتقدم**.
+      - kind: aside
+        tone: analogy
+        page: 190
+        quote: "Elastic recoil of lung tissue decreases with aging, which makes it easier for the lungs to expand with less effort, increasing TLC."
+        text: "الرئة الكبيرة زي بلونة اتنفخت كتير: بتتمد بسهولة، بس لما تسيبها مش بترجع لحجمها، وبيفضل فيها هوا."
+      - kind: explain
+        page: 191
+        quote: "Adults normally experience declinein FEV1 with age (about one-third liter per decade)."
+        title: "الـ FEV1 والـ ratio"
+        text: |
+          - الـ ==FEV1== بينزل حوالي **تلت لتر كل 10 سنين**.
+          - بينزل **أكتر** من الـ FVC، فالـ **FEV1/FVC كمان بينزل** مع السن.
+          - الرئة عندها reserve كبير، فده مش بيبان إلا لو فيه مرض.
+          - الـ ratio تحت **0.65** عادة معناه obstruction، فالـ parameter ده ممكن **يبالغ** في تشخيص الـ obstruction في الكبار.
+      - kind: check
+        page: 191
+        quote: "TLC does not change with age. Decreased VC with a corresponding increase in RV."
+        question: "Which pair of changes is expected in a healthy 80-year-old lung?"
+        options: ["TLC unchanged, RV up, VC down", "TLC up, RV down, VC up", "TLC down, RV down, VC down", "TLC unchanged, FEV1/FVC up"]
+        answer: 0
+        why:
+          - "صح: ده ملخّص الكتاب بالظبط."
+          - "الـ RV بيزيد مش بيقل، والـ VC بيقل."
+          - "الـ TLC تقريبًا ثابت والـ RV بيزيد."
+          - "الـ ratio بينزل لأن الـ FEV1 بينزل أكتر من الـ FVC."
+      - kind: explain
+        page: 191
+        quote: "increases linearly with age from approximately 10% of TLC inyoung adults to approximately 30% of TLC by the age of 70."
+        title: "الـ closing volume"
+        text: |
+          الـ **closing volume (CV)**: الحجم اللي عنده الـ basal airways بتقفل في الزفير العادي. الـ CV + RV = **closing capacity (CC)**.
+
+          الـ CC بتزيد خطيًا من حوالي ==10%== من الـ TLC في الشباب لـ **30%** عند سن 70، لأن الـ recoil القليل بيخلي الـ small airways تقع.
+      - kind: try
+        items: [geri.L11.002, geri.L11.005, geri.L11.008, geri.L11.011, geri.L11.015]
+    recap:
+      - "TLC = TV + IRV + ERV + RV (4-6 L)؛ VC 4.8 L؛ FRC = RV + ERV."
+      - "Senile emphysema: dilatation من غير destruction."
+      - "Diaphragm أضعف 25%، chest wall أنشف."
+      - "TLC ثابت، RV يزيد، VC يقل."
+      - "FEV1 ينزل ثلث لتر كل 10 سنين؛ الـ ratio ممكن يبالغ في الـ obstruction."
+      - "Closing capacity: من 10% لـ 30% من الـ TLC عند 70."
+    practice: [geri.L11.001, geri.L11.002, geri.L11.003, geri.L11.004, geri.L11.005, geri.L11.006, geri.L11.007, geri.L11.008, geri.L11.009, geri.L11.010, geri.L11.011, geri.L11.012, geri.L11.013, geri.L11.014, geri.L11.015, geri.L11.016, geri.L11.097, geri.L11.098, geri.L11.099, geri.L11.122]
+  # ------------------------------------------------------------------
+  - id: geri.L11.lesson2
+    title: "0.70 ولا Z-score؟"
+    hook: "لو مشيت بالـ 0.70، تلت الكبار الأصحاء هيبقوا COPD. الدرس ده بيعلّمك ليه الـ Z-score أعدل."
+    minutes: 9
+    pages: [192, 197]
+    topics: [obstruction, staging]
+    goals:
+      - "تعرف عيبين الـ GOLD في الكبار"
+      - "تعرف الـ LLN بتاع الـ GLI وتستاج بالـ Z-score"
+      - "تحسب وتقرا الـ Z-score"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 192
+        quote: "The ATS/ERS currently defines the LLN as the fifth percentile distribution of reference values"
+        title: "التلات تعريفات"
+        text: |
+          الـ obstruction = **FEV1/FVC قليل**. بس كام هو القليل في واحد عنده 80 سنة؟
+
+          1. **ATS/ERS**: الـ ==LLN== = الـ **5th percentile** في never-smokers أصحاء بنفس السن والطول والجنس والعرق (معادلات NHANES III).
+          2. **GOLD**: ratio ثابت **أقل من 0.70**.
+          3. **GLI**: **Z-score أقل من -1.64**.
+      - kind: explain
+        page: 193
+        quote: "Second, GOLD expresses the FEV1 as%Pred, thus failing to account for age-related variability in spirometricperformance."
+        title: "عيبين الـ GOLD"
+        text: |
+          - **الأول**: الـ ratio الثابت 0.70 مش بيفرّق بين التغيير الطبيعي بالسن والـ COPD. ratio أقل من 0.70 بيتشاف كتير في **never-smokers أصحاء فوق 65**.
+          - **التاني**: بيعبّر عن الـ FEV1 كـ **%Pred**، فبيتجاهل إن الـ variability بتزيد مع السن.
+
+          النتيجة: الـ prevalence بالـ GOLD ==37.7%== مقابل **15.4%** بالـ Z-score. والـ overdiagnosis ده **مش مرتبط** بأعراض ولا دخول مستشفى ولا وفيات.
+      - kind: aside
+        tone: joke
+        page: 193
+        quote: "Overdiagnosis of airflow obstruction by GOLD is not associated with respiratory symptoms"
+        text: "جدّك اللي عمره ما شرب سيجارة وبيمشي 5 كيلو كل يوم؟ بالـ GOLD ممكن يطلع COPD. هو مش مريض، هو بس عيد ميلاده كتير."
+      - kind: explain
+        page: 193
+        quote: "GLI calculated Z-scores account for the age-related decline in lung function and increased variability in spirometric performance"
+        title: "الـ GLI"
+        text: |
+          - معادلات NHANES III لحد سن **80** بس، ومش بتحسب الـ variability.
+          - الـ **GLI** بيعرّف الـ LLN = ==Z-score -1.64== (الـ 5th percentile).
+          - بيحسب حساب نزول الوظايف بالسن والـ variability، ومعادلاته لأعراق كتير ولحد سن **95**.
+          - الـ obstruction بالتعريف ده **مرتبط فعلًا** بالأعراض، الـ mobility، الـ frailty، دخول المستشفى والوفيات.
+      - kind: figure
+        page: 195
+        quote: "Global Lung Initiative (GLI) FEV1/FVC Z-score < -1.64"
+        title: "التعريف والـ staging"
+        alt: "Two rulers. GLI: FEV1/FVC Z-score below -1.64 defines obstruction; FEV1 Z-score of -1.64 or more is mild, between -1.64 and -2.55 moderate, below -2.55 severe. GOLD: FEV1/FVC below 0.70; FEV1 80 percent predicted or more mild, 50 to 79 moderate, below 50 severe."
+        caption: "GLI بالـ Z: -1.64 و -2.55. GOLD بالنسبة: 80 و 50 %Pred."
+        svg: |
+          <svg viewBox="0 0 330 270" xmlns="http://www.w3.org/2000/svg">
+            <text x="10" y="22" class="t-b t-acc">GLI</text>
+            <text x="60" y="22" class="t-sm">obstruction: FEV1/FVC Z &lt; -1.64</text>
+            <rect x="10" y="34" width="105" height="40" class="fg-good"/>
+            <rect x="115" y="34" width="105" height="40" class="fg-acc"/>
+            <rect x="220" y="34" width="105" height="40" class="fg-bad"/>
+            <text x="20" y="59" class="t-sm t-b">Mild</text>
+            <text x="125" y="59" class="t-sm t-b">Moderate</text>
+            <text x="230" y="59" class="t-sm t-b">Severe</text>
+            <text x="12" y="94" class="t-sm">Z ≥ -1.64</text>
+            <text x="117" y="94" class="t-sm">-1.64 to -2.55</text>
+            <text x="222" y="94" class="t-sm">Z &lt; -2.55</text>
+            <text x="10" y="150" class="t-b">GOLD</text>
+            <text x="70" y="150" class="t-sm">obstruction: FEV1/FVC &lt; 0.70</text>
+            <rect x="10" y="162" width="105" height="40" class="fg-good"/>
+            <rect x="115" y="162" width="105" height="40" class="fg-acc"/>
+            <rect x="220" y="162" width="105" height="40" class="fg-bad"/>
+            <text x="20" y="187" class="t-sm t-b">Mild</text>
+            <text x="125" y="187" class="t-sm t-b">Moderate</text>
+            <text x="230" y="187" class="t-sm t-b">Severe</text>
+            <text x="12" y="222" class="t-sm">≥ 80 %Pred</text>
+            <text x="117" y="222" class="t-sm">50-79 %Pred</text>
+            <text x="222" y="222" class="t-sm">&lt; 50 %Pred</text>
+            <text x="10" y="258" class="t-sm t-mut">FEV1 grades the severity in both</text>
+          </svg>
+      - kind: check
+        page: 195
+        quote: "Global Lung Initiative (GLI) FEV1/FVC Z-score < -1.64"
+        question: "GLI: FEV1/FVC Z = -2.1, FEV1 Z = -2.8. Severity?"
+        options: ["Severe", "Moderate", "Mild", "No obstruction"]
+        answer: 0
+        why:
+          - "صح: FEV1 Z أقل من -2.55."
+          - "الـ moderate بين -1.64 و -2.55."
+          - "الـ mild من -1.64 وطالع."
+          - "الـ ratio Z أقل من -1.64، يعني فيه obstruction."
+      - kind: explain
+        page: 194
+        quote: "Older persons have limited capacity to perform multiple FVC maneuvers, and may have an adverse response to an inhaledBD."
+        title: "الـ reversibility"
+        text: |
+          الـ COPD = chronic airflow obstruction **مش fully reversible**. فالـ guidelines بتعمل spirometry قبل وبعد bronchodilator:
+
+          - عشان الـ ==reversibility== (pre مقابل post).
+          - والتشخيص بالـ **post-BD values**.
+
+          بس في الكبار: صعب يعملوا FVC maneuvers كتير، وممكن يحصل adverse response للـ BD.
+      - kind: explain
+        page: 196
+        quote: "The Z-score represents how many SD the measuredvalue is away from the mean predicted value."
+        title: "يعني إيه Z-score؟"
+        text: |
+          الـ ==Z-score== = المريض بعيد عن المتوسط المتوقع بكام **SD**.
+
+          **z = (x - mean) / SD**
+
+          - 0 = زي المتوسط بالظبط.
+          - موجب = فوق المتوسط، سالب = تحت.
+          - -1 = SD واحد تحت المتوسط.
+
+          وفي الـ normal curve: **68%** جوه 1 SD، **95%** جوه 2، و **99.7%** جوه 3.
+      - kind: figure
+        page: 197
+        quote: "The location of the arrow or dot also allows to assess how severe any deficit is, with a more negative Z-score indicating more severe abnormality."
+        title: "الـ Z-score على المسطرة"
+        alt: "A horizontal Z-score scale from -4 to +2. The area right of -1.64 is white (normal), a lightly shaded band near -1.64 marks the edge, and the area left of it is heavily shaded (abnormal). A dot sits at -2.2 in the heavily shaded area."
+        caption: "الأبيض طبيعي، الفاتح على الحدود، الغامق بره. وكل ما النقطة تروح شمال أكتر، المشكلة أشد."
+        svg: |
+          <svg viewBox="0 0 330 150" xmlns="http://www.w3.org/2000/svg">
+            <rect x="15" y="40" width="110" height="40" class="fg-bad"/>
+            <rect x="125" y="40" width="30" height="40" class="fg-acc"/>
+            <rect x="155" y="40" width="160" height="40" class="fg-box"/>
+            <circle cx="98" cy="60" r="8" class="fg-dot-bad"/>
+            <text x="12" y="100" class="t-sm">-4</text>
+            <text x="120" y="100" class="t-sm t-b">-1.64</text>
+            <text x="210" y="100" class="t-sm">0</text>
+            <text x="300" y="100" class="t-sm">+2</text>
+            <text x="20" y="30" class="t-sm t-bad">abnormal</text>
+            <text x="200" y="30" class="t-sm t-good">normal</text>
+            <text x="15" y="130" class="t-sm t-mut">dot = this patient (Z -2.2)</text>
+          </svg>
+      - kind: aside
+        tone: exam
+        page: 197
+        quote: "5% of healthy individuals (one in 20 PFTs) will have results below the lower limit of normal."
+        text: "مع LLN = -1.64، **5% من الأصحاء** (واحد في كل 20 PFT) هيطلعوا تحت الطبيعي. عشان كده جملة الكتاب: treat the patient, not the numbers. ومفيش test لوحده يحدد الـ severity أو الـ prognosis."
+      - kind: try
+        items: [geri.L11.019, geri.L11.024, geri.L11.028, geri.L11.033, geri.L11.035]
+    recap:
+      - "ATS/ERS: LLN = 5th percentile (NHANES III لحد 80)."
+      - "GOLD: 0.70 ثابت و %Pred؛ بيبالغ (37.7% مقابل 15.4%) ومن غير علاقة بالـ outcomes."
+      - "GLI: Z < -1.64 للتشخيص؛ staging بالـ FEV1 Z: -1.64 و -2.55."
+      - "COPD = مش fully reversible؛ التشخيص بالـ post-BD."
+      - "Z = (x - mean)/SD؛ 5% من الأصحاء تحت الـ LLN: عالج المريض مش الرقم."
+    practice: [geri.L11.017, geri.L11.018, geri.L11.019, geri.L11.020, geri.L11.021, geri.L11.022, geri.L11.023, geri.L11.024, geri.L11.025, geri.L11.026, geri.L11.027, geri.L11.028, geri.L11.029, geri.L11.030, geri.L11.031, geri.L11.032, geri.L11.033, geri.L11.034, geri.L11.035, geri.L11.036, geri.L11.100, geri.L11.101, geri.L11.102, geri.L11.103, geri.L11.120, geri.L11.123]
+  # ------------------------------------------------------------------
+  - id: geri.L11.lesson3
+    title: "الـ COPD: وشوش كتير لمرض واحد"
+    hook: "مريض بيكح بلغم، ومريض نحيف بينهج، ومريض بيشخّر بالليل. التلاتة COPD، بس كل واحد phenotype."
+    minutes: 9
+    pages: [197, 201]
+    topics: [pathogenesis, phenotypes]
+    goals:
+      - "تعرف بداية الـ COPD ودور الـ telomeres والـ immunosenescence"
+      - "تفرّق chronic bronchitis عن emphysema"
+      - "تعرف الـ phenotypes والـ BODE index"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 197
+        quote: "Earlyinitiating phases of COPD fall into two categories: (1) Antioxidant / oxidant. (2) Antiprotease / protease imbalance."
+        title: "البداية"
+        text: |
+          البداية المبكرة للـ COPD نوعين:
+
+          1. **Antioxidant / oxidant** imbalance.
+          2. **Antiprotease / protease** imbalance.
+
+          والمرض بيكمّل على عشرات السنين **حتى بعد وقف التدخين**، والتفسير مراحل ==progression== و **consolidation** في host عنده استعداد وراثي.
+      - kind: explain
+        page: 198
+        quote: "Telomere shortening: leads to increased apoptosis in the lungs of patients with COPD"
+        title: "ليه مرض كبار؟"
+        text: |
+          - **Telomeres** أقصر في خلايا رئة مرضى الـ COPD من ناس في نفس السن من غير COPD. القِصَر ده بيزوّد الـ ==apoptosis==، وعدم التوازن بين الـ apoptosis والـ repair ممكن يكون أساس الـ emphysema.
+          - **Immunosenescence**: بنفقد مع السن جزيئات حماية زي **MIF** (macrophage migration inhibitory factor) و growth factors، فالـ alveoli والـ terminal airways تتدمر.
+
+          (نفس فكرة الـ telomeres في الـ IPF في المحاضرة اللي فاتت.)
+      - kind: table
+        page: 198
+        quote: "Chronic Bronchitis Emphysema Larger airways Terminal airways Airway remodeling Loss of alveoli Mucus secretion Loss of elastin"
+        title: "Chronic bronchitis ضد emphysema"
+        columns: ["", "Chronic bronchitis", "Emphysema"]
+        rows:
+          - ["Site", "Larger airways", "Terminal airways"]
+          - ["Main change", "Airway remodeling", "Loss of alveoli"]
+          - ["Also", "Mucus secretion", "Loss of elastin"]
+        hide: [[0, 2], [1, 1], [2, 2]]
+      - kind: explain
+        page: 199
+        quote: "(1) Mucus hypersecretion. (2) Chronic airflow obstruction. (3) Air trapping and hyperinflation, (4) Gas exchange abnormalities."
+        title: "الـ impairments"
+        text: |
+          الـ COPD بيعمل أربع مشاكل: **mucus hypersecretion**، **chronic airflow obstruction**، **air trapping و hyperinflation**، و **V/Q mismatch**.
+
+          - الـ ==chronic bronchitis==: كحة وبلغم **3 شهور في السنة لمدة سنتين ورا بعض**؛ الـ hallmark هو الـ mucus hypersecretion من airway inflammation مستمر.
+          - أهم مكان للـ resistance: airways **أقل من 2 mm**.
+      - kind: explain
+        page: 199
+        quote: "Marked intrathoracic pressure swings can decrease left ventricular preload and increase left ventricular diastolic dysfunction, ultimately reducing the cardiac output."
+        title: "الصورة الإكلينيكية"
+        text: |
+          - Exercise intolerance و dyspnea بيحددوا النشاط، وخطر **respiratory failure**.
+          - المتقدم: hypoxemia و hypercapnia → respiratory acidosis.
+          - **Hypoxic pulmonary vasoconstriction** → pulmonary hypertension → ==cor pulmonale==.
+          - تقلبات الضغط جوه الصدر بتقلل الـ LV preload وتزود الـ diastolic dysfunction، فالـ cardiac output يقل.
+          - الـ emphysema phenotype بالذات (inflammation، anorexia، deconditioning) بيعمل **osteoporosis و sarcopenia**.
+      - kind: sort
+        page: 200
+        quote: "(A) Airway Predominant"
+        prompt: "حط كل phenotype في مجموعته:"
+        bins: ["Airway predominant", "Emphysema predominant / other"]
+        cards:
+          - { text: "Chronic bronchitis", bin: 0 }
+          - { text: "Bronchiectasis", bin: 0 }
+          - { text: "COPD-asthma overlap", bin: 0 }
+          - { text: "Airflow obstruction alone", bin: 0 }
+          - { text: "Emphysema", bin: 1 }
+          - { text: "Frequent exacerbator", bin: 1 }
+          - { text: "Combined fibrosis-emphysema", bin: 1 }
+          - { text: "COPD-OSA overlap", bin: 1 }
+        why: "الكتاب بيحط تحت (A) airway predominant: obstruction لوحده، chronic bronchitis، bronchiectasis، COPD-asthma overlap. وتحت (B) emphysema، وبعدين الـ frequent exacerbator والـ CPFE والـ COPD-OSA."
+      - kind: match
+        page: 200
+        quote: "isolation of bacteria from sputum (especially pseudomonas)"
+        prompt: "وصّل الـ phenotype بعلامته:"
+        pairs:
+          - ["Bronchiectasis", "Pseudomonas in sputum"]
+          - ["COPD-asthma overlap", "Eosinophils, high IgE"]
+          - ["Emphysema", "Low BMI, severe dyspnea"]
+          - ["Frequent exacerbator", "2 or more exacerbations a year"]
+          - ["CPFE", "Upper emphysema, lower fibrosis"]
+        why: "الـ CPFE غالبًا في رجالة مدخنين ومعاه PH و lung cancer. الـ COPD-OSA: hypoxemia بالليل أوحش من الاتنين لوحدهم."
+      - kind: mnemonic
+        page: 201
+        quote: "The prognosisof COPD is informed by the BODEIndex, which includes:"
+        word: "BODE"
+        parts:
+          - { key: "B", text: "Body mass index: nutritional status" }
+          - { key: "O", text: "Obstruction: FEV1" }
+          - { key: "D", text: "Dyspnoea: MRC score" }
+          - { key: "E", text: "Exercise capacity: 6-minute walk distance" }
+        hook: |
+          الـ **BODE** بيقولك الـ prognosis، وكل حرف ليه أداة قياس. الـ exacerbations بقى هي اللي بتنقل المريض بين البيت والمستشفى وبتسرّع نزول الوظايف.
+      - kind: check
+        page: 201
+        quote: "Two or moresymptom-defined exacerbations per year ↓ health-related quality of life and accelerated decline in lung function."
+        question: "A COPD patient had 3 symptom-defined exacerbations last year. Phenotype?"
+        options: ["Frequent exacerbator", "COPD-OSA overlap", "Emphysema only", "COPD-asthma overlap"]
+        answer: 0
+        why:
+          - "صح: اتنين أو أكتر في السنة."
+          - "ده بيتعرّف بالـ OSA والـ nocturnal hypoxemia."
+          - "ده بيتعرّف بالـ CT والـ BMI والـ hyperinflation."
+          - "ده بيتعرّف بالـ eosinophils والـ IgE والـ ICS response."
+      - kind: try
+        items: [geri.L11.037, geri.L11.042, geri.L11.043, geri.L11.048, geri.L11.054]
+    recap:
+      - "البداية: oxidant و protease imbalance؛ بيكمّل بعد وقف السجاير."
+      - "Telomeres أقصر بتزوّد الـ apoptosis، وده أساس الـ emphysema؛ immunosenescence (MIF)."
+      - "Bronchitis: large airways، remodeling، mucus. Emphysema: terminal airways، loss of alveoli و elastin."
+      - "Chronic bronchitis: 3 شهور × سنتين؛ الـ resistance في airways أقل من 2 mm."
+      - "Phenotypes: airway، emphysema، frequent exacerbator، CPFE، COPD-OSA."
+      - "BODE: BMI، FEV1، MRC dyspnoea، 6-minute walk."
+    practice: [geri.L11.037, geri.L11.038, geri.L11.039, geri.L11.040, geri.L11.041, geri.L11.042, geri.L11.043, geri.L11.044, geri.L11.045, geri.L11.046, geri.L11.047, geri.L11.048, geri.L11.049, geri.L11.050, geri.L11.051, geri.L11.052, geri.L11.053, geri.L11.054, geri.L11.055, geri.L11.104, geri.L11.105, geri.L11.106]
+  # ------------------------------------------------------------------
+  - id: geri.L11.lesson4
+    title: "الـ exacerbation: أوكسجين بحساب"
+    hook: "أكتر غلطة في الطوارئ: تدّي مريض COPD أوكسجين لحد 100%. الدرس ده بيقولك ليه 88-92 كفاية، وليه 90 ممكن تبقى خطر."
+    minutes: 10
+    pages: [202, 205]
+    topics: [exacerbation, oxygen]
+    goals:
+      - "تعرّف الـ exacerbation وتعرف الـ work-up والـ DD"
+      - "تعرف إمتى تحجز وإزاي تعالج"
+      - "تختار الـ antibiotic بالـ severity والـ risk factors"
+      - "تفهم الـ dissociation curve وحدود الـ pulse oximetry"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 202
+        quote: "an acute change in sputumvolumeor purulence, and/or an increase in dyspnea beyond usual day-to-day variation that warrants a change in therapy."
+        title: "التعريف"
+        text: |
+          الـ ==exacerbation==: تغيير حاد في **كمية أو صديد البلغم** و/أو **dyspnea** أكتر من التقلب اليومي، بشكل **يستاهل تغيير العلاج**.
+
+          - **70%** سببها respiratory infection.
+          - PCR موجب **مش دليل سببية**، إلا **influenza**: اعتبره السبب وعالجه.
+          - التشخيص **clinical**؛ الـ sputum culture غالبًا مش بتفرّق colonizer من pathogen.
+          - الـ **procalcitonin** بيعلى مع الـ bacterial toxins وممكن يوجّه الـ antibiotic.
+      - kind: explain
+        page: 202
+        quote: "Pneumothx( even small pneumothxon top of COPD mortality up to 50%)."
+        title: "Work-up و DD"
+        text: |
+          **Investigations**: ABG (على هوا الأوضة أو اكتب الـ FiO2)، chest X-ray، sputum، blood culture لو شاكك في systemic infection، U&E و CRP، ECG.
+
+          **DD**:
+          - Pneumonia.
+          - ==Pneumothorax==: حتى الصغير فوق COPD الـ mortality ممكن توصل **50%**.
+          - Asthma: لو شاكك، عالجه كـ asthma.
+          - PE، left heart failure.
+          - أدوية: **sedatives** و **beta blockers**.
+      - kind: check
+        page: 202
+        quote: "Drug induced deterioration in resp function (check for sedatives …beta blockers)."
+        question: "An 82-year-old with COPD worsened after starting night sedation. What is this in the book's DD?"
+        options: ["Drug-induced respiratory deterioration", "Pulmonary embolism", "Left heart failure", "Asthma"]
+        answer: 0
+        why:
+          - "صح: افحص الـ sedatives والـ beta blockers."
+          - "مفيش هنا حاجة بتوحي بـ PE."
+          - "مفيش علامات heart failure في السؤال."
+          - "التوقيت مع الدوا بيوجّه للـ drug cause."
+      - kind: explain
+        page: 203
+        quote: "Significant increase in symptom severity. Severe underlying COPD. Significant comorbidities. Failure to respond to initial medical management."
+        title: "تحجزه إمتى؟"
+        text: |
+          - زيادة كبيرة في الأعراض.
+          - COPD شديد أصلًا.
+          - Comorbidities مهمة.
+          - مفيش استجابة للعلاج الأولي.
+          - التشخيص مش واضح.
+          - ==Insufficient home support==: مهمة جدًا في الكبار اللي عايشين لوحدهم.
+      - kind: explain
+        page: 203
+        quote: "Oxygen (target SpO2 88-92%) .. Do Not give high flow O2 unless ABG evidence absence of CO2 retention."
+        title: "العلاج الفوري"
+        text: |
+          1. **Oxygen**: target ==SpO2 88-92%==. مفيش high flow إلا لو الـ ABG أثبت إن مفيش CO2 retention.
+          2. **SABA** (salbutamol أو terbutaline) nebulizer.
+          3. **SAMA** (ipratropium) لو الـ SABA مش كفاية؛ وممكن **IV aminophylline**.
+          4. **Oral prednisolone** (لو أصلًا عليه maintenance، زوّد الجرعة)؛ وممكن IV hydrocortisone.
+          5. Antimicrobials.
+          6. Assisted ventilation.
+          7. Physiotherapy للإفرازات.
+
+          مش بيتحسن؟ فكّر في resistant organisms أو مرض تحتي: **bronchogenic carcinoma** أو **bronchiectasis**.
+      - kind: explain
+        page: 204
+        quote: "Age > 65, comorbid conditions , severe airflow obstruction (FEV1 < 50%), > 3 exacerbations/yr"
+        title: "الـ antibiotic"
+        text: |
+          **الميكروبات**: H. influenzae، Strep. pneumoniae، Moraxella، و **Pseudomonas** لو فيه risk factors.
+
+          **Risk factors** (poor outcome أو resistant organism): سن **فوق 65**، comorbidities، **FEV1 < 50%**، **أكتر من 3** exacerbations في السنة، antibiotic أو دخول مستشفى في آخر **3 شهور**.
+
+          **الـ severity**: الاتنين محتاجين **2 من 3** (dyspnea، كمية البلغم، صديد البلغم). ==Moderate== من غير respiratory failure، و **severe** معاه.
+      - kind: table
+        page: 204
+        quote: "Moderate attack and Absence of risk factors (for poor outcome or drug resist .organism) Macrolide, doxycycline, cephalosporin (second or third generation)."
+        title: "اختار المضاد"
+        columns: ["Situation", "Antibiotic"]
+        rows:
+          - ["Moderate, no risk factors", "Macrolide, doxycycline, 2nd/3rd-gen cephalosporin"]
+          - ["Moderate + risk factors, or severe", "Fluoroquinolone, piperacillin-tazobactam, ceftazidime + sputum culture"]
+        hide: [[0, 1], [1, 1]]
+      - kind: case
+        page: 204
+        quote: "Moderate attack in Presence of risk factors Or if Severe attack: Fluoroquinolone, antipseudomonal penicillin (pipercillin-tazobactam), ceftazidime"
+        stem: "A 79-year-old man with COPD has more dyspnea and purulent sputum. SpO2 89% on air, ABG without respiratory failure. He finished amoxicillin 6 weeks ago."
+        steps:
+          - question: "How severe is the attack?"
+            options: ["Moderate", "Severe", "Mild, no antibiotic", "Not an exacerbation"]
+            answer: 0
+            why: "2 من 3 من غير respiratory failure = moderate."
+          - question: "Does he have risk factors?"
+            options: ["Yes: age over 65 and antibiotics within 3 months", "No", "Only if FEV1 is under 30%", "Only if he smokes"]
+            answer: 0
+            why: "السن فوق 65 و antibiotic في آخر 3 شهور، الاتنين risk factors."
+          - question: "Which antibiotic?"
+            options: ["Piperacillin-tazobactam or a fluoroquinolone, with sputum culture", "Doxycycline", "Azithromycin", "No antibiotic"]
+            answer: 0
+            why: "Moderate + risk factors = antipseudomonal، واطلب sputum culture."
+      - kind: aside
+        tone: exam
+        page: 204
+        quote: "The preferred bronchodilator is a short-acting inhaled â2-agonist (SABA) with or without a short acting anticholinergic.(SAMA)."
+        text: "كل exacerbation محتاجة تصعيد الـ bronchodilator، وممكن يكفي لوحده في الـ mild. المفضّل SABA مع أو من غير SAMA، والـ nebulizer ممكن يبقى أحسن وأريح من الـ MDI."
+      - kind: figure
+        page: 205
+        quote: "Please note 90% saturation vs 60 mmHg PaO2."
+        title: "الـ dissociation curve"
+        alt: "Oxygen dissociation curve: saturation on the y-axis, PaO2 on the x-axis. The curve is steep below 60 mmHg and flat above it. A marked point at PaO2 60 and saturation 90 percent sits at the knee. A shaded band shows the target 88 to 92 percent. A note on the flat part: PaO2 can fall from 140 to 65 with little change in saturation."
+        caption: "على الجزء المفلطح: الـ PaO2 بينزل كتير والـ saturation مش بيتحرك. عند 60 mmHg (90%) إحنا على حافة الجزء المنحدر."
+        svg: |
+          <svg viewBox="0 0 330 260" xmlns="http://www.w3.org/2000/svg">
+            <path d="M40 20V220H320" class="fg-arrow"/>
+            <rect x="40" y="52" width="280" height="20" class="fg-acc"/>
+            <text x="262" y="88" class="t-sm t-acc">88-92%</text>
+            <path d="M40 215C70 210 85 150 100 110C110 80 120 66 130 62C170 50 230 46 310 44" class="fg-arrow-bad" stroke-width="3"/>
+            <circle cx="130" cy="62" r="6" class="fg-dot-bad"/>
+            <path d="M130 62V220" class="fg-thin"/>
+            <text x="112" y="238" class="t-sm t-b">60</text>
+            <text x="140" y="90" class="t-sm t-b t-bad">90% = 60 mmHg</text>
+            <text x="170" y="130" class="t-sm">flat: 140 → 65 mmHg</text>
+            <text x="170" y="148" class="t-sm">barely moves SpO2</text>
+            <text x="48" y="160" class="t-sm">steep</text>
+            <text x="250" y="238" class="t-sm">PaO2</text>
+            <text x="4" y="30" class="t-sm">SaO2</text>
+          </svg>
+      - kind: reveal
+        page: 205
+        quote: "yet PaO2 is 60 mmHg or less this is still CRITICALas it lies on the critical point of starting steep part of the curve."
+        prompt: "المريض الـ saturation بتاعه 90%، يعني جوه الـ target. ليه الكتاب بيقول ده لسه ممكن يبقى critical؟"
+        answer: "لأن 90% تساوي PaO2 حوالي **60 mmHg**، وده ==أول الجزء المنحدر==. أي نزول بسيط بعدها هيوقع الـ saturation بسرعة. وكمان الـ pulse oximetry مش بيقيس PaO2، وعلى الأوكسجين ممكن الـ PaO2 ينزل من 140 لـ 65 قبل ما الـ saturation يتحرك."
+      - kind: try
+        items: [geri.L11.056, geri.L11.064, geri.L11.065, geri.L11.072, geri.L11.077]
+    recap:
+      - "Exacerbation: بلغم أكتر أو صديد و/أو dyspnea يستاهل تغيير علاج؛ 70% infection؛ PCR بس الـ influenza."
+      - "DD: pneumonia، pneumothorax (50%)، asthma، PE، LHF، sedatives و beta blockers."
+      - "O2 لـ 88-92%؛ no high flow من غير ABG."
+      - "SABA ± SAMA nebulized، prednisolone، antibiotics، ventilation، physio."
+      - "Risk factors: فوق 65، comorbidity، FEV1 < 50%، أكتر من 3/سنة، antibiotic أو دخول في 3 شهور."
+      - "90% = 60 mmHg: حافة المنحدر؛ الـ oximetry بيفوّت hypoxia."
+    practice: [geri.L11.056, geri.L11.057, geri.L11.058, geri.L11.059, geri.L11.060, geri.L11.061, geri.L11.062, geri.L11.063, geri.L11.064, geri.L11.065, geri.L11.066, geri.L11.067, geri.L11.068, geri.L11.069, geri.L11.070, geri.L11.071, geri.L11.072, geri.L11.073, geri.L11.074, geri.L11.075, geri.L11.076, geri.L11.077, geri.L11.078, geri.L11.107, geri.L11.108, geri.L11.109, geri.L11.110, geri.L11.111, geri.L11.112, geri.L11.119, geri.L11.124]
+  # ------------------------------------------------------------------
+  - id: geri.L11.lesson5
+    title: "البخاخة المناسبة للإيد المناسبة"
+    hook: "أحسن دوا في الدنيا مالوش لازمة لو الحاج مش عارف يشده. في الكبار، الجهاز نص العلاج."
+    minutes: 10
+    pages: [206, 209]
+    topics: [stable, devices, nonpharm]
+    goals:
+      - "تعرف الـ short و long-acting bronchodilators وإمتى"
+      - "تعرف مكان الـ ICS وآثاره"
+      - "تختار الجهاز المناسب للكبير"
+      - "تعرف الـ add-ons والـ nonpharmacologic"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 206
+        quote: "Caution: (glaucoma ,urine retention,CVS)."
+        title: "الـ short-acting"
+        text: |
+          - **SABA** (albuterol/salbutamol): inhaler أو nebulizer للكبار اللي صعب عليهم البخاخة. ==rescue== (prn)، مش بمواعيد.
+          - **SAMA** (ipratropium): MDI أو nebulizer. **Caution**: glaucoma، urine retention، CVS.
+      - kind: explain
+        page: 206
+        quote: "Persons whose symptoms are Not adequately controlled with one or both classes of short-acting bronchodilator(s)."
+        title: "الـ long-acting"
+        text: |
+          - **LABA**: indacaterol، olodaterol، vilanterol.
+          - **LAMA**: aclidinium، tiotropium، umeclidinium.
+
+          **إمتى maintenance؟**
+          - الأعراض مش متظبطة على الـ short-acting.
+          - ==Frequent exacerbators== (2 أو أكتر في السنة).
+          - Moderate-to-severe obstruction.
+
+          الـ long-acting متاحة بالـ handheld inhalers بس؛ الـ nebulized منها **LABA مرتين في اليوم** (arformoterol، formoterol)، ومش للـ acute. الـ anticholinergic الـ nebulized short-acting بس (ipratropium 4 مرات).
+      - kind: aside
+        tone: trap
+        page: 207
+        quote: "NOTE when LAMA is prescribed the short acting anticholinergic is discontinued."
+        text: "فخ: لما تبدأ LAMA (tiotropium)، **وقّف** الـ ipratropium. اتنين anticholinergic مع بعض = side effects مضاعفة على نفس الـ glaucoma والـ prostate."
+      - kind: explain
+        page: 207
+        quote: "NOTE Single therapy with ICS is not recommended in COPD as it is less effective than ICS + LABA."
+        title: "الـ ICS"
+        text: |
+          **لمين؟** obstruction أشد، أو frequent exacerbators مش متظبطين على LABA أو LAMA.
+
+          - ==ICS لوحده لأ==: أضعف من ICS + LABA.
+          - غالبًا مدى الحياة، فالتعرّض طويل.
+          - **Local**: ترسيب في الـ oropharynx؛ اللي بينسى يشطف ويغرغر ويتف بيجيله **dysphonia**، **candidiasis**، contact dermatitis للبق والمناخير والعين.
+          - **Systemic**: bone density أقل، **posterior subcapsular cataract**، **pneumonia**.
+      - kind: check
+        page: 207
+        quote: "Systemic adverse effects of ICS : decreased bone mineral density ,cataract ( posterior subcapsular) and pneumonia."
+        question: "Which is a systemic adverse effect of inhaled corticosteroids in the book?"
+        options: ["Pneumonia", "Dysphonia", "Oral candidiasis", "Contact dermatitis of the mouth"]
+        answer: 0
+        why:
+          - "صح: مع الـ bone density والـ cataract."
+          - "دي local من الترسيب في الزور."
+          - "دي local؛ بتتمنع بالشطف."
+          - "دي local."
+      - kind: table
+        page: 208
+        quote: "SMI: This is a newer form of inhaler that delivers the medication in a slow mist."
+        title: "التلات بخاخات"
+        columns: ["Device", "What", "Breath"]
+        rows:
+          - ["MDI", "Liquid + propellant, bursts; spacer helps", "Deep fast, synchronized"]
+          - ["DPI", "Dry powder, no propellant, no spacer", "Deep fast; hard in severe disease"]
+          - ["SMI", "Slow mist", "Speed does not matter"]
+        hide: [[0, 2], [1, 2], [2, 2]]
+      - kind: explain
+        page: 208
+        quote: "However, a nebulizer may take up to 10 -20 minutes to dispense the medication. Nebulizers are not as portable as inhalers."
+        title: "Nebulizer ولا inhaler؟"
+        text: |
+          الـ ==nebulizer== بيحوّل الدوا لـ mist بيتنفس براحة (من غير شهيق سريع عميق)، فهو أسهل.
+
+          بس: بياخد **10-20 دقيقة**، مش portable، ولازم تقيس الجرعة وتحطها في الجهاز. الـ inhaler فيه جرعة محددة في كل puff.
+      - kind: mnemonic
+        page: 208
+        quote: "Prioritization is given to Once-daily administration, Self-containedinhaler devices, educating the patient/caregiver on medication administration."
+        word: "OSE"
+        parts:
+          - { key: "O", text: "Once-daily administration" }
+          - { key: "S", text: "Self-contained inhaler devices" }
+          - { key: "E", text: "Educate the patient and caregiver" }
+        hook: |
+          في الكبار افتكر **OSE**، زي ما تقول للحاج «أوسَع لنفسك»: جرعة واحدة، جهاز واحد، وعلّم اللي بيرعاه. والـ stepwise ممكن يوصل لـ **triple therapy** (LABA + LAMA + ICS) في جهاز واحد (Ellipta) + SABA للإنقاذ.
+      - kind: explain
+        page: 209
+        quote: "Goal serum level in older adults of 8 to 12 mcg/mL."
+        title: "الـ add-ons"
+        text: |
+          - **Theophylline**: nonselective PDE inhibitor، **third-line** بعد الـ β-agonists والـ anticholinergics. الـ level في الكبار ==8-12 mcg/mL==.
+          - **Roflumilast**: oral PDE-4 inhibitor مرة في اليوم.
+          - **Azithromycin 250 mg** يوميًا: بيقلل الـ exacerbations. لمين؟ frequent exacerbators على triple therapy، من غير ضعف سمع أو resting tachycardia أو خطر QTc. المخاطر: resistance و hearing decrements.
+          - **Mucolytics** (NAC): مش routine؛ بس لبلغم لزج مقاوم للعلاج.
+      - kind: check
+        page: 209
+        quote: "Considered maintenance therapy for frequent exacerbators who are maximized on triple-inhaler therapy and do nothave a hearing impairment"
+        question: "Which patient should NOT get azithromycin maintenance?"
+        options: ["A frequent exacerbator with prolonged QTc", "A frequent exacerbator on triple therapy with normal ECG and hearing", "One with 3 exacerbations a year on LABA + LAMA + ICS", "One whose hearing test is normal"]
+        answer: 0
+        why:
+          - "صح: خطر الـ QTc prolongation بيمنعه."
+          - "ده المرشح المثالي."
+          - "ده بالظبط اللي الكتاب بيقصده."
+          - "السمع الطبيعي شرط مش مانع."
+      - kind: explain
+        page: 209
+        quote: "VaccinationInfluenzavaccination, Pneumococcal vaccination. Smoking cessation. Long-term oxygen therapy (LTOT)."
+        title: "من غير أدوية"
+        text: |
+          - Vaccines: **influenza** و **pneumococcal**.
+          - **Smoking cessation**.
+          - **LTOT**.
+          - **NPPV** أو **CPAP** (لو معاه OSA).
+          - ==Pulmonary rehabilitation==.
+          - **LVRS** (lung volume reduction surgery).
+          - **Palliative care** و hospice: وده بيوصلنا لآخر محاضرة في الـ course.
+      - kind: try
+        items: [geri.L11.082, geri.L11.085, geri.L11.088, geri.L11.090, geri.L11.096]
+    recap:
+      - "SABA rescue؛ SAMA: caution glaucoma و retention و CVS."
+      - "LABA/LAMA لو مش متظبط، frequent exacerbator، أو moderate-severe؛ وقّف الـ SAMA مع الـ LAMA."
+      - "ICS مع LABA مش لوحده؛ اشطف؛ systemic: bone، cataract، pneumonia."
+      - "MDI و DPI محتاجين نفس سريع؛ SMI لأ؛ nebulizer أسهل بس 10-20 دقيقة."
+      - "OSE في الكبار؛ ممكن triple therapy."
+      - "Theophylline 8-12، roflumilast، azithromycin بشروط، mucolytics للمقاوم بس."
+    practice: [geri.L11.079, geri.L11.080, geri.L11.081, geri.L11.082, geri.L11.083, geri.L11.084, geri.L11.085, geri.L11.086, geri.L11.087, geri.L11.088, geri.L11.089, geri.L11.090, geri.L11.091, geri.L11.092, geri.L11.093, geri.L11.094, geri.L11.095, geri.L11.096, geri.L11.113, geri.L11.114, geri.L11.115, geri.L11.116, geri.L11.117, geri.L11.118, geri.L11.121, geri.L11.125]

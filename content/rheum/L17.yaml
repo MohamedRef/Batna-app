@@ -1,0 +1,1553 @@
+schema: batna.content/v1
+lecture: rheum.L17
+title: "Seronegative spondyloarthritis I"
+author: "Prof. Ibtisam Abdelhamed"
+book: { chapter: 3, pages: [279, 300] }
+topics:
+  - { id: spa, title: "Spondyloarthritis: shared features and classification" }
+  - { id: as-history, title: "AS: history clues and prevalence" }
+  - { id: etiology, title: "AS: HLA-B27, ERAP-1, IL-23/IL-17 and environment" }
+  - { id: pathology, title: "AS: enthesis pathology" }
+  - { id: clinical, title: "AS: symptoms, signs and joints involved" }
+  - { id: extra, title: "AS: extra-articular manifestations" }
+  - { id: course, title: "AS: prognosis, differential diagnosis and laboratory" }
+  - { id: imaging, title: "AS: X-ray, ultrasound and MRI" }
+  - { id: criteria, title: "Modified New York and ASAS criteria" }
+  - { id: activity, title: "BASDAI and ASDAS" }
+  - { id: drugs, title: "AS treatment: non-drug, NSAIDs, csDMARDs, biologics, JAKi, surgery" }
+  - { id: guidelines, title: "Treatment guidelines for axial and peripheral SpA" }
+  - { id: nr-axspa, title: "Non-radiographic axial SpA" }
+  - { id: uspa, title: "Undifferentiated spondyloarthropathy" }
+  - { id: reactive, title: "Reiter syndrome (reactive arthritis)" }
+items:
+  # ---------- p279-280: SpA ----------
+  - id: rheum.L17.001
+    kind: card
+    topic: spa
+    front: What is spondyloarthropathy (SpA), and how is it classified by site?
+    back: A heterogeneous, interrelated group of rheumatic diseases with common clinical and genetic features, classified as peripheral or axial (axSpA) by the parts mainly affected.
+    src: { page: 279, quote: "which are classified as peripheral or axial (axSpA) based on what parts of the body are predominantly affected." }
+    status: unverified
+  - id: rheum.L17.002
+    kind: enumerate
+    topic: spa
+    prompt: Mention the shared characteristics of the spondyloarthropathies.
+    points:
+      - Absence of rheumatoid factor
+      - Axial arthritis (spondylitis and sacroiliitis)
+      - Peripheral inflammatory oligoarthritis
+      - Enthesitis rather than synovitis
+      - Extra-articular changes (eye, aortic valve, lung parenchyma, skin)
+      - Overlap among the diseases
+      - Familial aggregation
+      - Presence of HLA-B27
+    pass: 6
+    src: { page: 279, quote: "Absence of rheumatoid factor. Axial arthritis including spondylitis and sacroiliitis. Peripheral inflammatory oligoarthritis." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L17.003
+    kind: cloze
+    topic: spa
+    text: "In SpA the primary lesion is {{c1::enthesitis}} rather than {{c2::synovitis}}."
+    src: { page: 279, quote: "Enthesitis rather than synovitis." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L17.004
+    kind: enumerate
+    topic: spa
+    prompt: Mention the classification of spondyloarthritis.
+    points:
+      - Ankylosing spondylitis (AS)
+      - Non-radiographic axial SpA (nr-axSpA)
+      - Undifferentiated SpA (uSpA)
+      - Reactive arthritis (Reiter syndrome)
+      - SpA associated with psoriasis
+      - SpA associated with IBD (Crohn disease, ulcerative colitis)
+      - Juvenile-onset AS
+    pass: 5
+    src: { page: 279, quote: "Ankylosing spondylitis (AS). Non-radiographic axial SpA (nr-axSpA). Undifferentiated spondyloarthritis (UspA)." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L17.005
+    kind: mcq
+    topic: spa
+    stem: Which feature is shared by the spondyloarthropathies?
+    options: [Enthesitis rather than synovitis, Positive rheumatoid factor, Symmetrical small-joint polyarthritis, Anti-CCP antibodies]
+    answer: 0
+    why:
+      - "Correct: enthesitis rather than synovitis is a defining SpA feature (p279)."
+      - SpA is seronegative; RF is absent.
+      - The peripheral arthritis is an oligoarthritis, unlike RA.
+      - Anti-CCP is an RA marker.
+    src: { page: 279, quote: "Enthesitis rather than synovitis." }
+    status: unverified
+  # ---------- p280: AS history and prevalence ----------
+  - id: rheum.L17.006
+    kind: enumerate
+    topic: as-history
+    prompt: Mention the key points in the history that suggest ankylosing spondylitis.
+    points:
+      - Insidious onset of low back pain
+      - Onset before age 40 (usually 20-30)
+      - Symptoms for more than 3 months
+      - Worse in the morning or with inactivity
+      - Improves with exercise
+    pass: 4
+    src: { page: 280, quote: "Insidious onset of low back pain. Onset of symptoms before age 40 years(20-30years). Presence of symptoms for more than 3 months." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L17.007
+    kind: cloze
+    topic: as-history
+    text: "AS has a prevalence comparable to RA, with a male to female ratio of {{c1::4:1}}."
+    src: { page: 280, quote: "Prevalence comparable to that of RA with an increased male: female ratio (4:1)." }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L17.008
+    kind: enumerate
+    topic: as-history
+    prompt: Why may AS be under-recognized in women?
+    points:
+      - Non-specific symptoms and under-diagnosis of women's pain
+      - More peripheral joint disease, so misdiagnosed as RA
+      - Less new bone formation, so radiography is less helpful
+    pass: 3
+    src: { page: 280, quote: "Women tend to have more peripheral joint manifestations thus leading to an inappropriate diagnosis of RA." }
+    status: unverified
+  - id: rheum.L17.009
+    kind: mcq
+    topic: as-history
+    stem: A 26-year-old man has 6 months of low back pain that started gradually, is worst on waking and eases after exercise. What is the most likely diagnosis?
+    options: [Ankylosing spondylitis, Mechanical low back pain, Lumbar disc prolapse, Osteoarthritis of the spine]
+    answer: 0
+    why:
+      - "Correct: insidious onset under 40, over 3 months, worse in the morning or with rest and better with exercise suggests AS (p280)."
+      - Mechanical pain worsens with activity and eases with rest.
+      - Disc prolapse is usually sudden with radicular pain.
+      - Spinal OA belongs to older patients.
+    src: { page: 280, quote: "Symptoms worse in the morning or with inactivity. Improvement of symptoms with exercise." }
+    status: unverified
+  - id: rheum.L17.010
+    kind: mcq
+    topic: as-history
+    stem: A 32-year-old woman with buttock pain and knee and ankle arthritis was labelled RA. Why is AS easily missed in women?
+    options:
+      - They have more peripheral joint disease and less new bone formation on X-ray
+      - AS never affects women
+      - Women always have a positive RF
+      - Women lack HLA-B27
+    answer: 0
+    why:
+      - "Correct: more peripheral arthritis leads to an RA label, and less new bone formation makes X-ray diagnosis harder (p280)."
+      - Women are affected; the ratio is 4:1.
+      - SpA is RF-negative.
+      - HLA-B27 is not sex-linked.
+    src: { page: 280, quote: "women also tend to have less new bone formation, making diagnosis of AS more difficult by radiography." }
+    status: unverified
+  # ---------- p280-282: etiology ----------
+  - id: rheum.L17.011
+    kind: card
+    topic: etiology
+    front: Which genetic factors predispose to AS?
+    back: Genes influencing antigen presentation (HLA-B27) and the IL-23/IL-17A pathway.
+    src: { page: 280, quote: "Genetic factors influencing antigen presentation (HLA –B27) and the IL- 23/17 A pathway confer predisposition to AS." }
+    status: unverified
+  - id: rheum.L17.012
+    kind: cloze
+    topic: etiology
+    text: "HLA-B27 is found in {{c1::90-95%}} of AS patients, {{c2::1%}} of the general population and {{c3::20%}} of relatives of AS patients."
+    src: { page: 281, quote: "It is present in1% in the general population & in 20% of relatives of AS patients." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: rheum.L17.013
+    kind: cloze
+    topic: etiology
+    text: "HLA-B27-positive persons carry a {{c1::20-fold}} increased risk of SpA, yet HLA-B27 explains only about {{c2::20%}} of AS heritability."
+    src: { page: 281, quote: "HLA‐B27 positive persons carry a 20 fold-increased risk of developing SpA." }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L17.014
+    kind: card
+    topic: etiology
+    front: What is the proposed mechanism linking HLA-B27 to AS?
+    back: HLA-B27 (class I MHC) presents an antigen to CD8+ T cells, which activate the immune system to attack fibrocartilage or cartilage.
+    src: { page: 281, quote: "The HLAB27 presents an antigen to the CD8+ T cells and this in turn activates the immune system to attack the ﬁbrocartilage or cartilage." }
+    status: unverified
+  - id: rheum.L17.015
+    kind: card
+    topic: etiology
+    front: Which HLA-B27 subtype does the book link with Mediterranean populations?
+    back: HLA-B2702 (HLA-B27 is highly polymorphic).
+    src: { page: 281, quote: "has a high degree of polymorphism (HLA-B2702 Mediterranean populations)." }
+    status: unverified
+  - id: rheum.L17.016
+    kind: card
+    topic: etiology
+    front: What is ERAP-1 and why does it matter in AS?
+    back: Endoplasmic reticulum aminopeptidase 1 trims peptides to the optimal length for binding HLA class I molecules (including HLA-B27); its variants are associated with AS.
+    src: { page: 281, quote: "ERAP-1 is involved in trimming peptides to optimal length for binding to HLA class 1 molecules (including HLA-B27)." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L17.017
+    kind: card
+    topic: etiology
+    front: How are IL-23 and IL-17A linked in AS?
+    back: IL-23 activates proinflammatory Th17 cells, and IL-17-producing CD4+ T cells play a crucial role in AS pathogenesis.
+    src: { page: 281, quote: "Release of the inflammatory cytokine IL-23 can activate pro- inflammatory T helper 17 cells." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L17.018
+    kind: enumerate
+    topic: etiology
+    prompt: Mention the infections associated with active synovitis in AS.
+    points: [Klebsiella species in faeces, Chronic prostatitis, Urethral chlamydial organisms]
+    pass: 3
+    src: { page: 282, quote: "presence of Klebsiella species in faeces, chronic prostatitis, and urethral chlamydial organisms have been reported." }
+    status: unverified
+  - id: rheum.L17.019
+    kind: cloze
+    topic: etiology
+    text: "Subclinical gut inflammation is found in {{c1::60%}} of AS patients, implicating a {{c2::gut-joint axis}}."
+    src: { page: 282, quote: "subclinical gut inflammation is observed in 60% of patients with AS, implicating a potential gut–joint axis in AS pathogenesis." }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L17.020
+    kind: card
+    topic: etiology
+    front: How does intestinal dysbiosis promote AS?
+    back: It impairs the gut mucosal barrier and disturbs mucosal immunity, raising pro-inflammatory cytokines; the gut microbiome of AS patients differs from controls.
+    src: { page: 282, quote: "Dysbiosis impairs the gut mucosal barrier &leads to disorder of intestinal mucosal immunity, resulting in increased pro-inflammatory cytokines." }
+    status: unverified
+  - id: rheum.L17.021
+    kind: mcq
+    topic: etiology
+    stem: A medical student asks how much of the heritability of AS is explained by HLA-B27. What does the book say?
+    options: [About 20%, About 95%, About 1%, 100%]
+    answer: 0
+    why:
+      - "Correct: HLA-B27 contributes only about 20% of AS heritability, so other genes matter (p281)."
+      - 90-95% is the proportion of AS patients who carry HLA-B27, not heritability.
+      - 1% is the HLA-B27 frequency in the general population.
+      - Non-HLA genes such as ERAP-1 and IL-23/IL-17 genes also contribute.
+    src: { page: 281, quote: "the overall contribution of HLA-B27 to AS heritability is only ~20%, indicating that other genetic influences contribute to AS." }
+    status: unverified
+  - id: rheum.L17.022
+    kind: mcq
+    topic: etiology
+    stem: Which cytokine axis is most implicated in AS pathogenesis in the book?
+    options: [IL-23/IL-17A, IL-6/hepcidin, IL-4/IL-13, IFN-alpha]
+    answer: 0
+    why:
+      - "Correct: genes of the IL-17A/IL-23 axis are associated with AS; IL-17-producing CD4+ T cells play a crucial role (p281-282)."
+      - IL-6 and hepcidin relate to anaemia of inflammation (RA lecture).
+      - IL-4 and IL-13 are Th2 cytokines.
+      - Type I interferon is an SLE theme.
+    src: { page: 282, quote: "Research over the past 10 years has demonstrated a crucial role for IL-17- producing CD4+ T cells in the pathogenesis of AS." }
+    status: unverified
+  # ---------- p282: pathology ----------
+  - id: rheum.L17.023
+    kind: card
+    topic: pathology
+    front: What is the primary site of pathology in AS?
+    back: The enthesis (for example the annulus fibrosus of intervertebral discs and the Achilles tendon).
+    src: { page: 282, quote: "The enthesis is thought to be the primary site of pathology (annulus fibrosis of intervertebral discs, the tendon Achilles)." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L17.024
+    kind: enumerate
+    topic: pathology
+    prompt: Other than the enthesis, which tissues are involved in AS?
+    points: [Subchondral bone (osteitis), Periosteum (periostitis), Synovial membranes (synovitis)]
+    pass: 3
+    src: { page: 282, quote: "Other areas involved are the subchondral bone (osteitis), periostium (periosteitis), and synovial membranes (synovitis)." }
+    status: unverified
+  - id: rheum.L17.025
+    kind: card
+    topic: pathology
+    front: How does AS inflammation heal?
+    back: With fibrosis and ankylosis of the affected joint.
+    src: { page: 282, quote: "Inflammation usually heals with fibrosis and ankylosis of the affected joint." }
+    status: unverified
+  # ---------- p282-283: clinical ----------
+  - id: rheum.L17.026
+    kind: card
+    topic: clinical
+    front: Describe the back pain of AS.
+    back: Insidious, intermittent bouts that may radiate down the thighs, with stiffness worst in the early morning and after prolonged rest.
+    src: { page: 283, quote: "Intermittent bouts of back pain that may radiate down the thighs, stiffness that is often worse in early morning hours and after prolonged rest." }
+    status: unverified
+  - id: rheum.L17.027
+    kind: card
+    topic: clinical
+    front: What happens to spinal posture as AS advances?
+    back: Back motion becomes limited, the lumbar curve flattens and the thoracic curvature (kyphosis) is exaggerated.
+    src: { page: 283, quote: "back motion becomes limited, with flattening of the lumbar curve and exaggeration of the thoracic curvature." }
+    status: unverified
+  - id: rheum.L17.028
+    kind: card
+    topic: clinical
+    front: Why is chest expansion limited in AS, and what can it mimic?
+    back: Costovertebral and costosternal joint involvement; the anterior chest pain can mimic angina pectoris.
+    src: { page: 283, quote: "This can lead to anterior chest pain that mimics angina pectoris." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L17.029
+    kind: enumerate
+    topic: clinical
+    prompt: Mention the joints involved in AS.
+    points:
+      - Axial skeleton (SIJs, disc spaces, apophyseal and costovertebral joints)
+      - Shoulder girdle (glenohumeral, acromioclavicular, sternoclavicular)
+      - Costosternal junctions
+      - Manubriosternal joint
+      - Symphysis pubis
+      - Temporomandibular joint
+      - Large proximal joints (hips, knees, shoulders)
+    pass: 5
+    src: { page: 283, quote: "Costosternal junctions. Manubriosternal joint. Symphysis pubis. Temporomandibular joint." }
+    status: unverified
+  - id: rheum.L17.030
+    kind: cloze
+    topic: clinical
+    text: "In AS, {{c1::large proximal}} joints (hips, knees, shoulders) are involved, while {{c2::small peripheral}} joints are infrequently involved."
+    src: { page: 283, quote: "Large proximal synovial joints, (hips, knees, shoulders). Small peripheral joints are infrequently involved." }
+    status: unverified
+  - id: rheum.L17.031
+    kind: mcq
+    topic: clinical
+    stem: A 30-year-old man with AS presents with central chest pain on deep breathing. ECG and troponin are normal. What is the likely cause?
+    options:
+      - Costovertebral and costosternal joint involvement
+      - Aortic dissection
+      - Pulmonary embolism
+      - Pericarditis is the usual cause
+    answer: 0
+    why:
+      - "Correct: costovertebral and costosternal involvement limits chest expansion and causes anterior chest pain mimicking angina (p283)."
+      - Nothing here points to dissection.
+      - PE is not the AS explanation given.
+      - Pericarditis is rare in AS (p284).
+    src: { page: 283, quote: "Chest expansion is often limited as consequence of costovertebral and costosternal joint involvement." }
+    status: unverified
+  # ---------- p283-285: extra-articular ----------
+  - id: rheum.L17.032
+    kind: cloze
+    topic: extra
+    text: "Uveitis occurs in up to {{c1::25%}} of AS patients."
+    src: { page: 283, quote: "Eye: uveitis occurs in up to 25% of AS patients." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: rheum.L17.033
+    kind: card
+    topic: extra
+    front: What is the lung disease of severe AS?
+    back: Apical fibrobullous disease, chronic infiltrative and fibrotic upper-zone changes with cavitation and fungal infection mimicking TB; plus restricted chest movement.
+    src: { page: 283, quote: "fibrotic changes in the upper lung field with cavitation and fungal infection that mimic TB (Apical fibrobullous disease)." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L17.034
+    kind: enumerate
+    topic: extra
+    prompt: Mention the cardiovascular manifestations of AS.
+    points:
+      - Aortitis of the ascending aorta with aortic ring dilatation and aortic regurgitation (5%)
+      - Conduction defects (fibrosis of the bundle of His or AV node)
+      - Pericarditis and cardiomyopathy (rare)
+    pass: 3
+    src: { page: 284, quote: "Aortitis of the ascending aorta and the resulting fibrosis can cause dilatation of the aortic ring and aortic valve incompetence (AR) in 5% of patients." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L17.035
+    kind: cloze
+    topic: extra
+    text: "Aortitis in AS causes aortic regurgitation in about {{c1::5%}} of patients; fibrosis of the {{c2::bundle of His or AV node}} causes conduction defects."
+    src: { page: 284, quote: "Cardiac conduction abnormalities from involvement of the bundle of Hiss or the AV node by fibrosis." }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L17.036
+    kind: enumerate
+    topic: extra
+    prompt: Mention the causes of renal disease in AS.
+    points: [NSAID side effects, IgA nephropathy, Amyloidosis]
+    pass: 3
+    src: { page: 284, quote: "Side effects of NSAIDs. An IgA nephropathy. Amyloidosis." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L17.037
+    kind: card
+    topic: extra
+    front: Why is osteoporosis seen in AS, and what is the typical bone feature?
+    back: Restricted spinal mobility causes osteoporosis with fractures after trivial trauma; AS typically combines new bone formation (syndesmophytes) with bone resorption.
+    src: { page: 284, quote: "A typical feature of AS is bone formation (eg.syndesmophytes) with bone resorption." }
+    status: unverified
+  - id: rheum.L17.038
+    kind: enumerate
+    topic: extra
+    prompt: Mention the neurological complications of AS.
+    points:
+      - Vertebral fracture
+      - Spinal instability or compression
+      - Nerve root inflammation (radicular symptoms, cauda equina syndrome)
+      - Spontaneous anterior atlantoaxial subluxation (about 2%)
+    pass: 3
+    src: { page: 284, quote: "Neurologic complications of AS can be caused by vertebral fracture, instability, compression, or inflammation of nerve roots" }
+    status: unverified
+  - id: rheum.L17.039
+    kind: cloze
+    topic: extra
+    text: "Spontaneous anterior atlantoaxial subluxation complicates about {{c1::2%}} of AS patients, with or without cord compression."
+    src: { page: 285, quote: "well-recognized complication in approximately 2% of patients and manifests with or without signs of spinal cord compression." }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L17.040
+    kind: mcq
+    topic: extra
+    stem: A 45-year-old man with long-standing AS has a diastolic murmur at the left sternal edge. What is the likely lesion?
+    options: [Aortic regurgitation from aortitis, Mitral stenosis, Pulmonary stenosis, Tricuspid regurgitation]
+    answer: 0
+    why:
+      - "Correct: ascending aortitis dilates the aortic ring and causes AR in 5% (p284)."
+      - Mitral stenosis is rheumatic, not AS.
+      - Pulmonary stenosis is not an AS feature.
+      - Tricuspid regurgitation is not described in AS.
+    src: { page: 284, quote: "dilatation of the aortic ring and aortic valve incompetence (AR) in 5% of patients." }
+    status: unverified
+  - id: rheum.L17.041
+    kind: mcq
+    topic: extra
+    stem: An AS patient on NSAIDs for 15 years develops proteinuria and nephrotic syndrome. Which cause should you look for besides NSAID toxicity?
+    options: [Amyloidosis, Lupus nephritis, Diabetic nephropathy only, Minimal change from HLA-B27]
+    answer: 0
+    why:
+      - "Correct: renal disease in AS comes from NSAIDs, IgA nephropathy or amyloidosis (p284)."
+      - Glomerular function is usually spared in AS, unlike SLE.
+      - Diabetes is not part of the AS list.
+      - HLA-B27 does not cause minimal change disease.
+    src: { page: 284, quote: "Unlike other CT diseases as SLE, glomerular function is usually unimpaired in AS." }
+    status: unverified
+  - id: rheum.L17.042
+    kind: mcq
+    topic: extra
+    stem: A man with advanced AS has upper-zone cavitating lung shadows. Sputum AFB is negative but Aspergillus grows. What is this?
+    options: [Apical fibrobullous disease, Caplan syndrome, Pulmonary TB, Interstitial fibrosis of the lower lobes]
+    answer: 0
+    why:
+      - "Correct: AS causes upper-zone fibrosis with cavitation and fungal infection that mimics TB (p283)."
+      - Caplan syndrome is RA nodules with pneumoconiosis.
+      - The picture mimics TB, but AFB is negative.
+      - Lower-lobe fibrosis is the RA pattern.
+    src: { page: 283, quote: "Patient with severe disease may exhibit chronic infiltrative and fibrotic changes in the upper lung field" }
+    status: unverified
+  # ---------- p285: prognosis, DDx, labs ----------
+  - id: rheum.L17.043
+    kind: card
+    topic: course
+    front: What is the prognosis of AS?
+    back: Variable, with common remissions and relapses; occasionally the whole spine ankyloses; under 10% become crippled; function is generally good unless the hips are seriously involved.
+    src: { page: 285, quote: "In general the functional prognosis is good unless the hips are seriously involved." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L17.044
+    kind: cloze
+    topic: course
+    text: "Less than {{c1::10%}} of AS patients develop crippling disease; the functional prognosis is good unless the {{c2::hips}} are seriously involved."
+    src: { page: 285, quote: "Less than 10% develop crippling disease." }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L17.045
+    kind: enumerate
+    topic: course
+    prompt: Mention the differential diagnosis of AS.
+    points:
+      - Other causes of low back pain
+      - Other seronegative spondyloarthropathies
+      - Degenerative disease of lumbosacral and intervertebral joints
+      - DISH (Forestier disease)
+      - Other causes of polyarthritis and sacroiliitis
+    pass: 4
+    src: { page: 285, quote: "Other causes of low back pain Other seronegative sponydloarthropathies." }
+    status: unverified
+  - id: rheum.L17.046
+    kind: card
+    topic: course
+    front: How is DISH (Forestier disease) distinguished from AS?
+    back: DISH is a proliferative form of osteoarthritis that can mimic AS but lacks apophyseal and sacroiliac involvement.
+    src: { page: 285, quote: "is a proliferative form of osteoarthritis can mimic AS but lacks apophyseal and sacroiliac involvement." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L17.047
+    kind: enumerate
+    topic: course
+    prompt: Mention the laboratory findings in AS.
+    points:
+      - HLA-B27 in 90-95%
+      - Raised ESR and CRP in most cases
+      - Mild normochromic normocytic anaemia in severe cases
+      - Calprotectin to find patients at high risk of IBD
+    pass: 3
+    src: { page: 285, quote: "HLA-B27 is present in 90-95% of patients. ESR& CRP are elevated in most cases." }
+    status: unverified
+  - id: rheum.L17.048
+    kind: card
+    topic: course
+    front: What is calprotectin used for in AS?
+    back: To identify AS patients at high risk of developing IBD.
+    src: { page: 285, quote: "Calprotectin: could be used to identify patients with AS at high risk of developing IBD." }
+    status: unverified
+  - id: rheum.L17.049
+    kind: mcq
+    topic: course
+    stem: A 65-year-old man has thoracic spine stiffness and flowing anterior osteophytes on X-ray. Sacroiliac and apophyseal joints are normal. What is the likely diagnosis?
+    options: [DISH (Forestier disease), Ankylosing spondylitis, Reactive arthritis, Psoriatic spondylitis]
+    answer: 0
+    why:
+      - "Correct: DISH mimics AS but spares the apophyseal and sacroiliac joints (p285)."
+      - AS involves the sacroiliac joints.
+      - Reactive arthritis gives asymmetric sacroiliitis after infection.
+      - Psoriatic spondylitis also involves the sacroiliac joints.
+    src: { page: 285, quote: "Diffuse idiopathic skeletal hyperostosis (DISH syndrome /Forestier‘s disease)" }
+    status: unverified
+  # ---------- p286: imaging ----------
+  - id: rheum.L17.050
+    kind: card
+    topic: imaging
+    front: Describe sacroiliitis of AS on plain X-ray.
+    back: Usually symmetrical and bilateral, with subchondral erosions, sclerosis and proliferation on the iliac side; total SI occlusion at end stage. X-ray is not very sensitive.
+    src: { page: 286, quote: "There are subchondral erosions, sclerosis, and proliferation on the iliac side." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L17.051
+    kind: table
+    topic: imaging
+    title: Radiographic grading of sacroiliitis
+    columns: [Grade, Finding]
+    rows:
+      - ["0", Normal]
+      - [I, Some blurring of joint margins (suspicious)]
+      - [II, "Minimal sclerosis with some erosion (pseudo-widening)"]
+      - [III, Severe erosions and definite sclerosis on both sides of the joint]
+      - [IV, Complete ankylosis]
+    blanks: [[1, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 286, quote: "II: Minimal sclerosis with some erosion (pseudo-widening)." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L17.052
+    kind: table
+    topic: imaging
+    title: Spine X-ray signs of AS
+    columns: [Sign, Cause]
+    rows:
+      - [Squaring of vertebral bodies, Periostitis at the periphery of the vertebral body]
+      - [Bamboo spine, "Syndesmophytes: vertical new bone from the annulus fibrosus bridging vertebrae"]
+      - [Railway appearance (lateral view), Calcification of the anterior and lateral spinal ligaments]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 286, quote: "Squaring of the vertebral bodies due to periostitis of the periphery of the vertebral body." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L17.053
+    kind: card
+    topic: imaging
+    front: What is the role of ultrasound in AS?
+    back: To document active enthesitis.
+    src: { page: 286, quote: "Can be used to document active enthesitis." }
+    status: unverified
+  - id: rheum.L17.054
+    kind: card
+    topic: imaging
+    front: What does MRI show in early and chronic sacroiliitis?
+    back: "Early: bone marrow oedema. Chronic: erosions, sclerosis and periarticular fatty tissue accumulation."
+    src: { page: 286, quote: "May reveal evidence of early sacroiliitis (bone marrow edema), or chronic changes including bone erosions, sclerosis" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L17.055
+    kind: mcq
+    topic: imaging
+    stem: A lateral spine X-ray in AS shows vertical bony bridges between vertebrae from the annulus fibrosus. What are they called?
+    options: [Syndesmophytes, Osteophytes, Schmorl nodes, Romanus lesions only]
+    answer: 0
+    why:
+      - "Correct: syndesmophytes grow vertically from the annulus fibrosus and bridge vertebrae, giving a bamboo spine (p286)."
+      - Osteophytes are horizontal degenerative spurs.
+      - Schmorl nodes are disc herniations into the end plate.
+      - The book describes squaring from periostitis, not this bridging.
+    src: { page: 286, quote: "new bone formation growing vertically from the annulous fibrosis bony bridging of adjacent vertebrae ―bamboo spine‖." }
+    status: unverified
+  - id: rheum.L17.056
+    kind: mcq
+    topic: imaging
+    stem: An X-ray of a patient's SI joints shows minimal sclerosis with some erosion and apparent widening. What grade is this?
+    options: [Grade II, Grade I, Grade III, Grade IV]
+    answer: 0
+    why:
+      - "Correct: grade II = minimal sclerosis with some erosion (pseudo-widening) (p286)."
+      - Grade I is only blurring of the margins.
+      - Grade III is severe erosions and definite sclerosis on both sides.
+      - Grade IV is complete ankylosis.
+    src: { page: 286, quote: "II: Minimal sclerosis with some erosion (pseudo-widening)." }
+    status: unverified
+  # ---------- p287-288: criteria ----------
+  - id: rheum.L17.057
+    kind: enumerate
+    topic: criteria
+    prompt: Mention the clinical criteria of the (modified) New York criteria 1984.
+    points:
+      - Low back pain and stiffness for at least 3 months, improved by exercise, not relieved by rest
+      - Limited lumbar spine motion in both sagittal and frontal planes
+      - Limited chest expansion (corrected for age and sex)
+    pass: 3
+    src: { page: 287, quote: "Limitation of lumbar spine motion in both sagittal and frontal planes. 3- Limitation of chest expansion (correlated for age and sex)." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L17.058
+    kind: card
+    topic: criteria
+    front: How is definite AS defined by the New York criteria 1984?
+    back: The radiological criterion (sacroiliitis grade 2 or more bilaterally, or grade 3-4 unilaterally) plus at least one clinical criterion.
+    src: { page: 287, quote: "Define AS if radiologic criterion is associated with at least one clinical criterion." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L17.059
+    kind: cloze
+    topic: criteria
+    text: "Radiographic sacroiliitis for the modified NY criteria: grade {{c1::2}} bilateral or grade {{c2::3 to 4}} unilateral."
+    src: { page: 288, quote: "definite radiographic disease at grade 2 bilateral or grade 3 to 4 unilateral (according to modified NY criteria 1984)" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: rheum.L17.060
+    kind: enumerate
+    topic: criteria
+    prompt: Why is AS diagnosed late with the New York criteria?
+    points:
+      - Average delay of 8-11 years from symptoms to diagnosis
+      - No pathognomonic clinical feature or laboratory test
+      - Low back pain is extremely common (misdiagnosis)
+      - Radiographic sacroiliitis may take years to develop
+    pass: 3
+    src: { page: 287, quote: "Lack of a pathognomonic clinical feature or laboratory test." }
+    status: unverified
+  - id: rheum.L17.061
+    kind: cloze
+    topic: criteria
+    text: "Using the New York criteria, the average delay between symptom onset and diagnosis of AS is {{c1::8-11 years}}."
+    src: { page: 287, quote: "an average delay of 8–11 years between onset of symptoms and time of diagnosis has been reported." }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L17.062
+    kind: card
+    topic: criteria
+    front: What two developments answered the diagnostic delay in AS?
+    back: MRI to detect the earliest signs of inflammation, and new classification criteria for SpA (ASAS).
+    src: { page: 287, quote: "Introduction of MRI as one of the key diagnostic tools in detecting the earliest signs of inflammation" }
+    status: unverified
+  - id: rheum.L17.063
+    kind: table
+    topic: criteria
+    title: ASAS classification criteria for axial SpA (back pain 3 months or more)
+    columns: [Arm, Entry, Plus]
+    rows:
+      - [Imaging arm, Sacroiliitis on imaging (X-ray or MRI), 1 or more SpA feature]
+      - [Clinical arm, HLA-B27, 2 or more other SpA features]
+    blanks: [[0, 2], [1, 1], [1, 2]]
+    src: { page: 288, quote: "HLA-B27 Plus 2 or more other SpA features." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L17.064
+    kind: enumerate
+    topic: criteria
+    prompt: Mention the SpA features used in the ASAS axial criteria.
+    points:
+      - Inflammatory back pain
+      - Arthritis
+      - Enthesitis
+      - Uveitis
+      - Dactylitis
+      - Psoriasis
+      - Crohn disease or ulcerative colitis
+      - Good response to NSAIDs
+      - Family history of SpA
+      - Raised CRP
+      - HLA-B27
+    pass: 8
+    src: { page: 288, quote: "arthritis, enthesitis, uveitis, dactylitis, psoriasis, Crohn‘s disease/ulcerative colitis, good response to NSAIDs" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L17.065
+    kind: card
+    topic: criteria
+    front: What counts as sacroiliitis on imaging in the ASAS criteria?
+    back: Definite radiographic sacroiliitis (grade 2 bilateral or 3-4 unilateral) or active (acute) inflammation of the SI joints on MRI.
+    src: { page: 288, quote: "or there should be active (acute) inflammation of sacroiliac joints on MRI." }
+    status: unverified
+  - id: rheum.L17.066
+    kind: enumerate
+    topic: criteria
+    prompt: Mention the features of inflammatory back pain (IBP) given in the book.
+    points:
+      - Age at onset under 45 years
+      - Insidious onset
+      - Duration more than 3 months
+      - Pain at night
+      - Alternating buttock pain
+      - Morning stiffness more than 30 minutes
+      - Improves with exercise, not with rest
+      - Improves with NSAIDs
+    pass: 6
+    src: { page: 288, quote: "Age at onset < 45 yr, insidious onset, duration more than 3mths, pain at night, alternating buttock pains" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L17.067
+    kind: table
+    topic: criteria
+    title: ASAS classification criteria for peripheral SpA
+    columns: [Step, Requirement]
+    rows:
+      - [Entry, "Arthritis or enthesitis or dactylitis"]
+      - [Plus 1 or more of, "Psoriasis, IBD, preceding infection, HLA-B27, uveitis, sacroiliitis on imaging"]
+      - [Or plus 2 or more of, "Arthritis, enthesitis, dactylitis, past inflammatory back pain, family history of SpA"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 288, quote: "Arthritis or ethesitis or dactylitis" }
+    status: unverified
+  - id: rheum.L17.068
+    kind: mcq
+    topic: criteria
+    stem: A 24-year-old man has 6 months of inflammatory back pain. X-rays of the SI joints are normal, MRI is normal, and he is HLA-B27 positive with uveitis and a raised CRP. Does he meet ASAS axial SpA criteria?
+    options:
+      - Yes, by the clinical arm (HLA-B27 plus 2 or more SpA features)
+      - No, imaging is required in all cases
+      - Yes, by the imaging arm
+      - No, CRP is not an SpA feature
+    answer: 0
+    why:
+      - "Correct: HLA-B27 plus 2 or more SpA features (uveitis, raised CRP, IBP) fulfils the clinical arm (p288)."
+      - The clinical arm needs no imaging.
+      - His imaging is normal, so not the imaging arm.
+      - Raised CRP is an SpA feature.
+    src: { page: 288, quote: "HLA-B27 Plus 2 or more other SpA features." }
+    status: unverified
+  - id: rheum.L17.069
+    kind: mcq
+    topic: criteria
+    stem: A 30-year-old man has grade 2 bilateral sacroiliitis on X-ray and limited chest expansion. Does he have AS by modified New York criteria?
+    options:
+      - Yes, radiological criterion plus one clinical criterion
+      - No, he needs all three clinical criteria
+      - No, he needs HLA-B27
+      - No, grade 2 bilateral is not enough
+    answer: 0
+    why:
+      - "Correct: the radiological criterion with at least one clinical criterion defines AS (p287)."
+      - One clinical criterion is enough.
+      - HLA-B27 is not part of the New York criteria.
+      - Grade 2 bilateral meets the radiological criterion (p288).
+    src: { page: 287, quote: "Define AS if radiologic criterion is associated with at least one clinical criterion." }
+    status: unverified
+  # ---------- p289: disease activity ----------
+  - id: rheum.L17.070
+    kind: card
+    topic: activity
+    front: What is BASDAI, and what are its advantage and drawbacks?
+    back: "The gold standard for following disease activity and function in AS. Advantage: easy to complete. Drawbacks: entirely expert-driven, redundant items, false results with fibromyalgia."
+    src: { page: 289, quote: "It is entirely expert-driven and many of the items are redundant." }
+    status: unverified
+  - id: rheum.L17.071
+    kind: enumerate
+    topic: activity
+    prompt: Mention the parameters used to calculate ASDAS.
+    points:
+      - Total back pain (BASDAI question 2)
+      - Patient global assessment
+      - Peripheral pain or swelling (BASDAI question 3)
+      - Duration of morning stiffness (BASDAI question 6)
+      - CRP in mg/L (or ESR)
+    pass: 4
+    src: { page: 289, quote: "Total back pain (BASDAI question 2)" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L17.072
+    kind: table
+    topic: activity
+    title: ASDAS disease activity cut-offs (book figure)
+    columns: [ASDAS, Disease activity]
+    rows:
+      - ["Below 1.3", Inactive disease]
+      - ["1.3 to below 2.1", Moderate disease activity]
+      - ["2.1 to 3.5", High disease activity]
+      - ["Above 3.5", Very high disease activity]
+    blanks: [[0, 1], [2, 1], [3, 1]]
+    src: { page: 289, quote: "Inactive disease Moderate disease activity High disease activity Very high disease activity" }
+    status: unverified
+    tags: [numbers, high-yield]
+    update:
+      text: "ASAS (2018 update) renamed the 1.3 to below 2.1 band 'low disease activity'; the cut-offs are unchanged."
+      ref: "ASAS ASDAS cut-off update, Machado et al., Ann Rheum Dis 2018"
+  - id: rheum.L17.073
+    kind: cloze
+    topic: activity
+    text: "ASDAS improvement: clinically important = a change of at least {{c1::1.1}} units; major improvement = at least {{c2::2.0}} units."
+    src: { page: 289, quote: "a change of at least 1.1 units, and a change of at least 2.0 units for major improvement." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: rheum.L17.074
+    kind: enumerate
+    topic: activity
+    prompt: Mention the drawbacks of ASDAS.
+    points:
+      - Ignores peripheral and extra-articular features (enthesitis, uveitis)
+      - Does not assess function
+      - Ignores inflammation seen on MRI
+    pass: 3
+    src: { page: 289, quote: "Fails to consider peripheral extraarticular manifestations of the disease, such as enthesitis and uveitis" }
+    status: unverified
+  - id: rheum.L17.075
+    kind: mcq
+    topic: activity
+    stem: An AS patient's ASDAS falls from 3.8 to 2.5 after 12 weeks of a TNF inhibitor. How is this response classified?
+    options: [Clinically important improvement, Major improvement, No meaningful change, Inactive disease]
+    answer: 0
+    why:
+      - "Correct: a fall of 1.3 is at least 1.1 (clinically important) but under 2.0 (major) (p289)."
+      - Major improvement needs a change of at least 2.0.
+      - A change of 1.1 or more is meaningful.
+      - Inactive disease is below 1.3.
+    src: { page: 289, quote: "The cutoffs selected for ‗clinically important improvement‘ is a change of at least 1.1 units" }
+    status: unverified
+  - id: rheum.L17.076
+    kind: mcq
+    topic: activity
+    stem: A woman with AS and coexisting fibromyalgia has a very high BASDAI. What limitation of BASDAI explains this?
+    options:
+      - Fibromyalgia gives false results in BASDAI
+      - BASDAI includes CRP
+      - BASDAI is based on MRI
+      - BASDAI is not used in AS
+    answer: 0
+    why:
+      - "Correct: isolated or concomitant fibromyalgia gives false results (p289)."
+      - CRP is part of ASDAS, not BASDAI.
+      - Neither index uses MRI.
+      - BASDAI is the gold standard in AS.
+    src: { page: 289, quote: "Patients with isolated or concomitant fibromyalgia will have false results." }
+    status: unverified
+  # ---------- p290-292: treatment ----------
+  - id: rheum.L17.077
+    kind: card
+    topic: drugs
+    front: What are the aims of AS treatment?
+    back: There is no cure; treatment maintains normal upright posture and spinal mobility and reduces pain and stiffness.
+    src: { page: 290, quote: "Treatment is aimed at maintaining normal upright posture & spinal mobility and reducing pain and stiffness." }
+    status: unverified
+  - id: rheum.L17.078
+    kind: enumerate
+    topic: drugs
+    prompt: Mention the non-pharmacological measures in AS.
+    points:
+      - Education about the disease and its management
+      - Smoking cessation counselling
+      - Depression screening and psychosocial support
+      - Minimizing comorbidities
+      - Physical therapy with home exercises, breathing exercises, swimming and hydrotherapy
+    pass: 4
+    src: { page: 290, quote: "counseling regarding smoking cessation, depression screening and psychosocial support, and minimizing associated co-morbidities." }
+    status: unverified
+  - id: rheum.L17.079
+    kind: card
+    topic: drugs
+    front: How are NSAIDs used in AS?
+    back: In full anti-inflammatory doses, with a trial of 2 NSAIDs over 4 weeks; no NSAID is preferred, and continuous use appears to reduce radiographic progression.
+    src: { page: 290, quote: "NSAIDs are to be given in full anti-inflammatory doses (trial of 2 NSAIDs for 4 weeks)." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L17.080
+    kind: card
+    topic: drugs
+    front: What is the role of sulfasalazine and methotrexate in AS?
+    back: Sulfasalazine (up to 1 g twice daily) can help peripheral arthritis but does little for spinal and sacroiliac disease; methotrexate is of questionable benefit.
+    src: { page: 290, quote: "has little symptomatic effect on spinal and sacroiliac disease." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L17.081
+    kind: card
+    topic: drugs
+    front: Where do corticosteroids fit in AS?
+    back: Local injections help symptomatic sacroiliitis, peripheral enthesitis and arthritis; systemic glucocorticoids are strongly discouraged.
+    src: { page: 291, quote: "Treatment with systemic glucocorticoids is strongly discouraged." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L17.082
+    kind: card
+    topic: drugs
+    front: When are biologics recommended in AS?
+    back: In patients who have not responded to a trial of 2 NSAIDs (over 4 weeks).
+    src: { page: 291, quote: "Biological agents: recommended in patients who have not responded to a trial of 2 NSAIDs (4weeks)." }
+    status: unverified
+  - id: rheum.L17.083
+    kind: card
+    topic: drugs
+    front: In AS with IBD or uveitis, which TNF inhibitor type is preferred?
+    back: TNFi monoclonal antibodies are strongly recommended over etanercept.
+    src: { page: 291, quote: "Treatment with TNFi monoclonal antibodies is strongly recommended over. Treatment with etanercept." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L17.084
+    kind: enumerate
+    topic: drugs
+    prompt: Mention the toxicities of TNF-alpha antagonists listed in the AS lecture.
+    points:
+      - Injection-site and infusion reactions
+      - Bacterial infections
+      - Reactivation of latent TB and fungal infections
+      - Malignancy (lymphoma, non-melanoma skin cancer)
+      - New-onset congestive heart failure
+      - Lupus-like autoimmune syndromes
+      - Demyelinating syndromes (MS)
+      - Cytopenias
+    pass: 6
+    src: { page: 291, quote: "Increased risk of malignancy (lymphoma and non melanotic skin cancers). Increased risk for new-onset congestive heart failure." }
+    status: unverified
+  - id: rheum.L17.085
+    kind: card
+    topic: drugs
+    front: Which infections must be screened for before TNF inhibitors in AS, and what about hepatitis?
+    back: Latent TB, hepatitis B and HIV. Avoid TNFi in active HBV; they appear safe in chronic HCV.
+    src: { page: 291, quote: "Patients should be screened for latent TB, hepatitis B, and HIV infection before beginning therapy." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L17.086
+    kind: card
+    topic: drugs
+    front: What is secukinumab and how is it used in AS?
+    back: A human IgG1 monoclonal antibody that neutralizes IL-17A (FDA-approved for AS in January 2016); used as first-line biologic after NSAIDs or second-line after TNF-blocker failure.
+    src: { page: 292, quote: "It can be used both as first line biologic drug after NSAIDs and as second line drug after failure of a TNF blocker." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L17.087
+    kind: table
+    topic: drugs
+    title: Interleukin and JAK inhibitors in AS
+    columns: [Drug, Target, Status in AS]
+    rows:
+      - [Secukinumab (Cosentyx), IL-17A, Approved (FDA 2016)]
+      - [Ixekizumab (Taltz), IL-17A, Used]
+      - [Ustekinumab (Stelara), IL-12/IL-23, Not approved (lack of efficacy)]
+      - [Tofacitinib (Xeljanz), JAK, Approved recently (oral)]
+      - [Upadacitinib (Rinvoq), JAK, Approved recently (oral)]
+    blanks: [[0, 1], [1, 1], [2, 1], [2, 2]]
+    src: { page: 292, quote: "Ustekinumab (Anti-IL-12/IL-23) (Stelara) not approved owing to lack of efficacy." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L17.088
+    kind: card
+    topic: drugs
+    front: Which surgery helps advanced AS?
+    back: Total hip replacement, and lumbar osteotomies to relieve severe spinal kyphosis.
+    src: { page: 292, quote: "Lumbar osteotomies to relieve severe spinal kyphosis." }
+    status: unverified
+  - id: rheum.L17.089
+    kind: mcq
+    topic: drugs
+    stem: A 28-year-old man with AS and Crohn disease has failed two NSAIDs. Which biologic is best?
+    options: [A TNFi monoclonal antibody such as adalimumab, Etanercept, Secukinumab, Ustekinumab]
+    answer: 0
+    why:
+      - "Correct: with IBD or uveitis, TNFi monoclonal antibodies are strongly recommended over etanercept (p291, p293)."
+      - Etanercept is not preferred in IBD or uveitis.
+      - IL-17 inhibitors may exacerbate IBD (p293).
+      - Ustekinumab is not approved for AS (lack of efficacy).
+    src: { page: 293, quote: "A TNF inhibitor (except etanercept) would be preferred in patients with uveitis or IBD (it may be exacerbated by anti-IL-17 agents)." }
+    status: unverified
+  - id: rheum.L17.090
+    kind: mcq
+    topic: drugs
+    stem: A man with axial AS has persistent back pain despite sulfasalazine 2 g/day for 4 months. What is the problem with this plan?
+    options:
+      - Sulfasalazine does little for spinal and sacroiliac disease
+      - The sulfasalazine dose is too low for axial disease
+      - He should add systemic prednisolone
+      - Methotrexate is the proven axial drug
+    answer: 0
+    why:
+      - "Correct: SSZ helps peripheral arthritis but has little effect on spinal and SI disease (p290)."
+      - The problem is the drug, not the dose.
+      - Systemic glucocorticoids are strongly discouraged.
+      - Methotrexate is of questionable benefit in AS.
+    src: { page: 290, quote: "especially for peripheral arthritis but has little symptomatic effect on spinal and sacroiliac disease." }
+    status: unverified
+  - id: rheum.L17.091
+    kind: mcq
+    topic: drugs
+    stem: Before starting golimumab for AS, a patient is found to have active hepatitis B. What does the book advise?
+    options:
+      - Do not use the TNF inhibitor in active HBV
+      - Start it; HBV is not a concern
+      - Start it with isoniazid
+      - It is only a problem in chronic HCV
+    answer: 0
+    why:
+      - "Correct: TNF inhibitors should not be used in active HBV (p291)."
+      - HBV is a screening target before therapy.
+      - Isoniazid is for latent TB, not HBV.
+      - The book says TNFi appear safe in chronic HCV.
+    src: { page: 291, quote: "Although these agents should not be used in patients with active HBV infection, they appear to be safe in patients with chronic HCV infection." }
+    status: unverified
+  # ---------- p292-294: guidelines ----------
+  - id: rheum.L17.092
+    kind: order
+    topic: guidelines
+    prompt: Put the initial therapy of axial SpA in order.
+    steps:
+      - Full-dose NSAID
+      - A second, different NSAID if no response
+      - Add a TNF inhibitor (rather than IL-17i or JAKi)
+      - Switch to an IL-17 inhibitor or JAK inhibitor if the TNFi fails
+    src: { page: 293, quote: "add a TNFi rather than an IL- 17i or a JAKi." }
+    status: unverified
+  - id: rheum.L17.093
+    kind: enumerate
+    topic: guidelines
+    prompt: Mention the guideline rules for biologics in axial SpA.
+    points:
+      - After at least two NSAIDs fail, add a TNFi rather than IL-17i or JAKi
+      - Any TNFi may be used, without csDMARD co-therapy
+      - IL-17i is a reasonable first biologic if psoriasis coexists
+      - TNFi (not etanercept) preferred in uveitis or IBD
+      - JAKi after inadequate response or intolerance to TNFi
+      - Loss of efficacy after initial TNFi response, switch to a second TNFi
+      - Primary TNFi failure, prefer an IL-17i over another TNFi
+      - Primary IL-17i failure after 3 months, switch to a TNFi
+    pass: 6
+    src: { page: 293, quote: "The IL-17 inhibitors are reasonable alternatives to a TNFi as initial biologic therapy in case of concomitant psoriasis." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L17.094
+    kind: card
+    topic: guidelines
+    front: Is a DMARD added in the initial treatment of axial SpA, and are systemic glucocorticoids used?
+    back: Adding a DMARD is typically not indicated; systemic glucocorticoids in low to moderate doses are ineffective for axial SpA and not indicated.
+    src: { page: 293, quote: "Systemic glucocorticoids are ineffective for axial SpA in low to moderate doses and are not indicated." }
+    status: unverified
+  - id: rheum.L17.095
+    kind: card
+    topic: guidelines
+    front: Initial therapy for peripheral SpA presenting as mono- or oligoarthritis?
+    back: NSAIDs; aspirate and inject accessible joints with IA glucocorticoid; if no response, sulfasalazine.
+    src: { page: 293, quote: "If joints are accessible to injection perform joint aspiration and IA glucocorticoid injection." }
+    status: unverified
+  - id: rheum.L17.096
+    kind: card
+    topic: guidelines
+    front: "Peripheral arthritis not controlled by NSAIDs while axial disease is controlled: what next?"
+    back: A csDMARD such as SSZ 2-3 g daily or MTX 15-25 mg weekly; if no response, a TNFi. Leflunomide is of little or no benefit.
+    src: { page: 294, quote: "give a traditional csDMARD, such as SSZ; 2 to 3 g daily or MTX; 15 to 25 mg once weekly." }
+    status: unverified
+  - id: rheum.L17.097
+    kind: card
+    topic: guidelines
+    front: Why are biologics indicated when axial disease is not controlled by NSAIDs, even with peripheral arthritis?
+    back: Because csDMARDs are ineffective for axial inflammatory disease.
+    src: { page: 294, quote: "biologic agents are indicated because csDMARDs are ineffective for the axial inflammatory disease." }
+    status: unverified
+  - id: rheum.L17.098
+    kind: card
+    topic: guidelines
+    front: How is persistent enthesitis treated, and where must steroid injection be avoided?
+    back: Local glucocorticoid injection if NSAIDs fail, but not around the Achilles tendon (risk of rupture); bDMARDs often help if both fail.
+    src: { page: 294, quote: "It should be avoided in the area of the Achilles tendon, as they might induce tendon rupture." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L17.099
+    kind: table
+    topic: guidelines
+    title: ASAS-EULAR axSpA management algorithm (book figure p294)
+    columns: [Phase, Action, Checkpoint]
+    rows:
+      - [I, "Education, exercise, stop smoking, physiotherapy; NSAID to maximum tolerated dose", "Sufficient response at 2-4 weeks? (at least 2 NSAID courses)"]
+      - [II, "Purely axial: TNFi, IL-17i or JAKi (TNFi or IL-17i current practice). Mainly peripheral: local glucocorticoid, consider SSZ", "ASDAS improvement of 1.1 or more after at least 12 weeks?"]
+      - [III, "Re-evaluate diagnosis and comorbidities; switch to another bDMARD (TNFi or IL-17i) or JAKi", "ASDAS improvement of 1.1 or more after at least 12 weeks?"]
+    blanks: [[0, 2], [1, 1], [2, 1]]
+    src: { page: 294, quote: "Start NSAID and titrate up to the maximum tolerated dose" }
+    status: unverified
+  - id: rheum.L17.100
+    kind: mcq
+    topic: guidelines
+    stem: A 35-year-old man with axial SpA and extensive plaque psoriasis has failed two NSAIDs. Which first biologic is a reasonable choice?
+    options: [An IL-17 inhibitor such as secukinumab, Ustekinumab, Systemic prednisolone, Leflunomide]
+    answer: 0
+    why:
+      - "Correct: IL-17 inhibitors are reasonable alternatives to TNFi as the first biologic with concomitant psoriasis (p293)."
+      - Ustekinumab lacks efficacy in AS.
+      - Systemic glucocorticoids are not indicated in axial SpA.
+      - Leflunomide is of little or no benefit.
+    src: { page: 293, quote: "The IL-17 inhibitors are reasonable alternatives to a TNFi as initial biologic therapy in case of concomitant psoriasis." }
+    status: unverified
+  - id: rheum.L17.101
+    kind: mcq
+    topic: guidelines
+    stem: A woman with AS never responded to adalimumab after 3 months. What does the guideline recommend next?
+    options:
+      - Switch to an IL-17 inhibitor rather than another TNFi
+      - Switch to another TNFi
+      - Add methotrexate
+      - Stop all biologics
+    answer: 0
+    why:
+      - "Correct: after inadequate response to the first TNFi, an IL-17i is recommended over another TNFi (p293)."
+      - A second TNFi is for secondary loss of efficacy after an initial response.
+      - csDMARDs do not help axial disease.
+      - Effective options remain.
+    src: { page: 293, quote: "For patients with inadequate response to the first TNFi, use of an anti-IL-17i is recommended over use of a different TNFi." }
+    status: unverified
+  - id: rheum.L17.102
+    kind: mcq
+    topic: guidelines
+    stem: A man with AS responded well to etanercept for 2 years, then lost efficacy. What next?
+    options: [Switch to a second TNF inhibitor, Switch to ustekinumab, Add prednisolone, Add leflunomide]
+    answer: 0
+    why:
+      - "Correct: initial response followed by loss of efficacy, switch to a second TNFi (p293)."
+      - Ustekinumab is not approved for AS.
+      - Systemic steroids are not indicated.
+      - Leflunomide is of little or no benefit.
+    src: { page: 293, quote: "For patients with an initial response to a TNFi followed by a loss of efficacy, switch to a second TNF inhibitor." }
+    status: unverified
+  - id: rheum.L17.103
+    kind: mcq
+    topic: guidelines
+    stem: A patient with AS has painful Achilles enthesitis despite NSAIDs. Which option should be avoided?
+    options: [Local steroid injection at the Achilles tendon, Continuing NSAIDs, A bDMARD if local measures fail, Physiotherapy]
+    answer: 0
+    why:
+      - "Correct: steroid injection around the Achilles tendon may cause rupture (p294)."
+      - NSAIDs are first line for enthesitis.
+      - bDMARDs often help after NSAIDs and local injections fail.
+      - Physiotherapy is recommended in all patients.
+    src: { page: 294, quote: "It should be avoided in the area of the Achilles tendon, as they might induce tendon rupture." }
+    status: unverified
+  # ---------- p295-296: nr-axSpA ----------
+  - id: rheum.L17.104
+    kind: card
+    topic: nr-axspa
+    front: What is nr-axSpA?
+    back: Axial SpA whose SI joints show no definite damage on plain X-ray; with AS it is one of two subtypes of axial SpA.
+    src: { page: 295, quote: "In nr-axSpA, the SI joints do not show ―definitive‖ damage on plain x-rays, as seen in AS." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L17.105
+    kind: cloze
+    topic: nr-axspa
+    text: "nr-axSpA is {{c1::2 to 4}} times as common as AS; {{c2::5% to 30%}} progress to AS (radiographic sacroiliitis) over 2 to 30 years."
+    src: { page: 295, quote: "Different cohort studies have found rates of progression from nr-axSpA to AS of 5% to 30% over 2 to 30 years" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: rheum.L17.106
+    kind: table
+    topic: nr-axspa
+    title: nr-axSpA compared with AS
+    columns: [Feature, nr-axSpA, AS]
+    rows:
+      - [Sex, "No male preponderance; women equal or more", Male preponderance]
+      - [HLA-B27, Prevalence varies widely, "90-95%"]
+      - [X-ray structural change, Less, More extensive]
+      - [CRP and MRI inflammation, Less often, More often]
+      - [Functional impairment from spinal damage, Less often, More often]
+      - [Heterogeneity, More heterogeneous, Less]
+    blanks: [[0, 1], [2, 1], [3, 2], [4, 2]]
+    src: { page: 295, quote: "Objective signs of inflammation (CRP, MRI) are observed more frequently in AS." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L17.107
+    kind: card
+    topic: nr-axspa
+    front: Is the disease burden of nr-axSpA lighter than AS?
+    back: No. Several studies show the burden is as severe as AS, and symptoms are no different (chronic inflammatory back pain starting before 40-45).
+    src: { page: 295, quote: "Several studies have shown that the disease burden in nr-axSpA is as severe as that in AS." }
+    status: unverified
+  - id: rheum.L17.108
+    kind: card
+    topic: nr-axspa
+    front: How is nr-axSpA treated, and which drug did the FDA approve for it first?
+    back: Like AS. Certolizumab was FDA-approved in March 2019 (other TNFi off label); ixekizumab, secukinumab and upadacitinib were approved later.
+    src: { page: 296, quote: "approved certolizumab (Cimzia) for treatment of nr-axSpA. Other TNFi are used off label." }
+    status: unverified
+  - id: rheum.L17.109
+    kind: mcq
+    topic: nr-axspa
+    stem: A 29-year-old woman has 2 years of inflammatory back pain, normal SI X-rays and bone marrow oedema of the SI joints on MRI. Which statement is true?
+    options:
+      - This is nr-axSpA, which may or may not progress to AS
+      - She will certainly progress to AS
+      - nr-axSpA has a lighter disease burden than AS, so no treatment is needed
+      - nr-axSpA is mainly a disease of men
+    answer: 0
+    why:
+      - "Correct: no definite X-ray damage defines nr-axSpA, and not all patients progress (5-30%) (p295)."
+      - Not all nr-axSpA progresses.
+      - The burden is as severe as AS, and it is treated the same way.
+      - There is no male preponderance in nr-axSpA.
+    src: { page: 295, quote: "However, it is also known that not all nr-axSpA patients progress to AS." }
+    status: unverified
+  # ---------- p296-297: uSpA ----------
+  - id: rheum.L17.110
+    kind: card
+    topic: uspa
+    front: What is undifferentiated spondyloarthropathy?
+    back: A syndrome with SpA features that fulfils no specific SpA criteria; it may be an early or incomplete AS, or a distinct entity.
+    src: { page: 296, quote: "but affected patients do not fulfill criteria for any specific spondyloarthropathy." }
+    status: unverified
+  - id: rheum.L17.111
+    kind: table
+    topic: uspa
+    title: Clinical features of undifferentiated SpA
+    columns: [Feature, Frequency]
+    rows:
+      - [Inflammatory back pain, "90%"]
+      - [Buttock pain, "80%"]
+      - [Enthesitis, "75%"]
+      - [Fatigue, "55%"]
+      - [Peripheral arthritis, "40%"]
+      - [Elevated ESR, "32%"]
+      - [HLA-B27 positive, "25%"]
+      - [Dactylitis, "20%"]
+      - [Acute anterior uveitis, "1-2%"]
+    blanks: [[0, 1], [2, 1], [6, 1], [8, 1]]
+    src: { page: 296, quote: "Inflammatory back pain 90%" }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L17.112
+    kind: card
+    topic: uspa
+    front: How is undifferentiated SpA treated?
+    back: Most (over 75%) need long-term therapy; most respond to NSAIDs; non-responders follow the AS pathway (sulfasalazine, methotrexate, TNF antagonists).
+    src: { page: 297, quote: "Most patients with undifferentiated spondyloarthropathy (>75%) require long- term therapy for ongoing symptomatic disease." }
+    status: unverified
+  - id: rheum.L17.113
+    kind: mcq
+    topic: uspa
+    stem: Which is the most frequent feature of undifferentiated spondyloarthropathy?
+    options: [Inflammatory back pain, HLA-B27 positivity, Acute anterior uveitis, Dactylitis]
+    answer: 0
+    why:
+      - "Correct: inflammatory back pain occurs in 90% (p296)."
+      - HLA-B27 is positive in only 25%.
+      - Acute anterior uveitis occurs in 1-2%.
+      - Dactylitis occurs in 20%.
+    src: { page: 296, quote: "Inflammatory back pain 90%" }
+    status: unverified
+  # ---------- p297-300: reactive arthritis ----------
+  - id: rheum.L17.114
+    kind: card
+    topic: reactive
+    front: Define Reiter syndrome.
+    back: An HLA-B27-associated seronegative reactive arthritis with the triad of arthritis, conjunctivitis and urethritis.
+    src: { page: 297, quote: "It is a seronegative reactive arthritis characterized by the triad of symptoms: arthritis, conjunctivitis, and urethritis." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L17.115
+    kind: enumerate
+    topic: reactive
+    prompt: Mention the infections that trigger reactive arthritis.
+    points: [Chlamydial urethritis, Mycoplasmal urethritis, Salmonella dysentery, Shigella dysentery, Yersinia dysentery]
+    pass: 4
+    src: { page: 297, quote: "These include both chlamydial and mycoplasmal urethritis, as well as dysenteric infections caused by salmonella, shigella, and yersinia." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L17.116
+    kind: card
+    topic: reactive
+    front: Who gets Reiter syndrome, and why is it harder to diagnose in women?
+    back: Mainly young adult men; in women cervicitis is less symptomatic than urethritis. Cases occur in children.
+    src: { page: 297, quote: "It is difficult to be diagnosed in women, because cervicitis is less symptomatic than urethritis." }
+    status: unverified
+  - id: rheum.L17.117
+    kind: enumerate
+    topic: reactive
+    prompt: Mention the musculoskeletal features of reactive arthritis.
+    points:
+      - Arthritis 2-6 weeks after the infection
+      - Asymmetric oligo- or polyarthritis of knees and ankles
+      - Acute self-limited, relapsing or chronic course
+      - Asymmetric sacroiliitis (20%)
+      - Tenosynovitis, plantar fasciitis, Achilles tendinitis, dactylitis (sausage toe)
+    pass: 4
+    src: { page: 298, quote: "Tenosynovitis, plantar fasciitis, Achillis tendinitis and dactylitis (sausage toe) are common." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L17.118
+    kind: cloze
+    topic: reactive
+    text: "Reactive arthritis appears {{c1::2-6 weeks}} after the infection, as an {{c2::asymmetric}} oligoarthritis of knees and ankles."
+    src: { page: 297, quote: "Arthritis appears 2-6 weeks after the initiating infection. Asymmetric poly- or oligoarthritis knees and ankles." }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L17.119
+    kind: table
+    topic: reactive
+    title: Mucocutaneous and eye lesions in reactive arthritis
+    columns: [Lesion, Frequency or feature]
+    rows:
+      - [Painless buccal and tongue ulcers, "10%"]
+      - [Keratoderma blennorrhagica, "10%; hyperkeratotic lesions on soles, palms, scrotum"]
+      - [Circinate balanitis, "25-50%"]
+      - [Nail hyperkeratosis, Present]
+      - [Non-infectious conjunctivitis, "40%"]
+      - ["Iritis, uveitis, episcleritis, corneal ulcers", Less common]
+    blanks: [[0, 1], [1, 1], [2, 1], [4, 1]]
+    src: { page: 298, quote: "Keratoderma blennorrhagica (10%) is a hyperkeratotic skin lesion occuring predominantly on the soles, the plams, the scrotum" }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L17.120
+    kind: enumerate
+    topic: reactive
+    prompt: Mention the genitourinary features of reactive arthritis.
+    points:
+      - Symptomatic or asymptomatic urethritis, with prostatitis
+      - Urethral culture negative or Chlamydia (30%)
+      - Haematuria and dysuria
+    pass: 3
+    src: { page: 298, quote: "Urethral culture is negative or shows Chlamydia 30%." }
+    status: unverified
+  - id: rheum.L17.121
+    kind: enumerate
+    topic: reactive
+    prompt: Mention the cardiovascular, neurological and general features of reactive arthritis.
+    points:
+      - Aortic regurgitation and conduction defects
+      - Nervous system involvement (15%) (peripheral neuritis, encephalitis, transverse myelitis)
+      - Weight loss, fever, rarely lymphadenopathy
+    pass: 3
+    src: { page: 298, quote: "(15%) the peripheral or the central nervous system may be affected." }
+    status: unverified
+  - id: rheum.L17.122
+    kind: enumerate
+    topic: reactive
+    prompt: Mention the laboratory and radiographic findings in reactive arthritis.
+    points:
+      - ESR raised in acute episodes
+      - Anaemia of chronic illness
+      - Pyuria and haematuria; urethral discharge rich in neutrophils
+      - HLA-B27 in 70-80%
+      - Asymmetric sacroiliitis
+      - Asymmetric large syndesmophytes at scattered levels
+    pass: 4
+    src: { page: 299, quote: "The HLA-B27 is present in 70-80% of patients." }
+    status: unverified
+    tags: [high-yield]
+  - id: rheum.L17.123
+    kind: enumerate
+    topic: reactive
+    prompt: Mention the differential diagnosis of reactive arthritis.
+    points:
+      - Disseminated gonococcal infection
+      - Ankylosing spondylitis
+      - Psoriatic arthritis
+      - Colitic arthropathy
+      - Behcet syndrome (painful orogenital ulcers)
+      - Rheumatoid arthritis
+      - Gout
+      - Other STD-associated arthropathy (HIV)
+    pass: 5
+    src: { page: 299, quote: "Disseminated gonococcal infection. Ankylosing spondylitis. Psoriatic arthritis. Colitic arthropathy." }
+    status: unverified
+  - id: rheum.L17.124
+    kind: enumerate
+    topic: reactive
+    prompt: Mention the treatment of reactive arthritis.
+    points:
+      - NSAIDs for arthritis
+      - Intra-articular steroid injections
+      - Sulfasalazine 1-3 g/day
+      - Methotrexate
+      - Short-term antibiotics if infection is still active
+      - Combination antibiotics in trials (rifampicin with doxycycline or azithromycin)
+    pass: 4
+    src: { page: 299, quote: "appropriate short term antibiotic therapy should be administered if the infection remains active." }
+    status: unverified
+  - id: rheum.L17.125
+    kind: card
+    topic: reactive
+    front: What does the book say about antibiotics once the triggering infection is gone, and about biologics?
+    back: There is limited data for antibiotics in treating or preventing arthritis once infection is no longer detected; biologic agents have not been studied.
+    src: { page: 299, quote: "There is limited data to support role of antibiotics in the Rx or prevention of arthritis when active infection is no longer detected." }
+    status: unverified
+  - id: rheum.L17.126
+    kind: card
+    topic: reactive
+    front: What is the prognosis of reactive arthritis?
+    back: Most improve significantly with anti-inflammatory therapy over 3-4 months; 25-40% run a chronic course with sustained activity or flares; a minority have long-term disability.
+    src: { page: 300, quote: "In 25 - 40% chronic course a sustained disease activity or intermittent flares." }
+    status: unverified
+    tags: [numbers]
+  - id: rheum.L17.127
+    kind: mcq
+    topic: reactive
+    stem: A 24-year-old man develops a swollen left knee and right ankle, red eyes and dysuria 3 weeks after a diarrhoeal illness. What is the diagnosis?
+    options: [Reactive arthritis (Reiter syndrome), Disseminated gonococcal infection, Septic arthritis, Rheumatoid arthritis]
+    answer: 0
+    why:
+      - "Correct: asymmetric knee-ankle arthritis 2-6 weeks after dysentery with conjunctivitis and urethritis is Reiter's triad (p297)."
+      - Gonococcal infection is a differential, but the post-dysentery triad points to reactive arthritis.
+      - Septic arthritis is usually a single hot joint without conjunctivitis.
+      - RA is symmetrical small-joint polyarthritis.
+    src: { page: 297, quote: "the triad of symptoms: arthritis, conjunctivitis, and urethritis." }
+    status: unverified
+  - id: rheum.L17.128
+    kind: mcq
+    topic: reactive
+    stem: A man with reactive arthritis has painless shallow ulcers on the glans. What is this lesion?
+    options: [Circinate balanitis, Keratoderma blennorrhagica, Behcet ulcer, Primary chancre]
+    answer: 0
+    why:
+      - "Correct: circinate balanitis occurs in 25-50% of reactive arthritis (p298)."
+      - Keratoderma is hyperkeratotic skin of soles, palms and scrotum.
+      - Behcet orogenital ulcers are painful (p299).
+      - A chancre is a syphilitic lesion, not part of reactive arthritis.
+    src: { page: 298, quote: "Circinate balanitis (25-50%)." }
+    status: unverified
+  - id: rheum.L17.129
+    kind: mcq
+    topic: reactive
+    stem: How does the sacroiliitis of reactive arthritis differ from that of AS?
+    options: [It is typically asymmetrical, It is always bilateral and symmetrical, It never occurs, It is the main feature in all cases]
+    answer: 0
+    why:
+      - "Correct: reactive arthritis sacroiliitis is typically asymmetrical (p299); AS is symmetrical and bilateral (p286)."
+      - Symmetrical bilateral sacroiliitis is the AS pattern.
+      - Sacroiliac involvement occurs in about 20%.
+      - It affects only about 20% of patients.
+    src: { page: 299, quote: "Sacroiliitis is typically asymmetrical." }
+    status: unverified
+  - id: rheum.L17.130
+    kind: mcq
+    topic: reactive
+    stem: Oral ulcers in a young man with arthritis and urethritis are painless. Which differential becomes less likely?
+    options: [Behcet syndrome, Reactive arthritis, Gonococcal arthritis, Psoriatic arthritis]
+    answer: 0
+    why:
+      - "Correct: Behcet orogenital ulcers are painful; reactive arthritis ulcers are painless (p298-299)."
+      - Painless buccal ulcers fit reactive arthritis.
+      - Gonococcal arthritis remains in the differential.
+      - Psoriatic arthritis is not excluded by ulcer pain.
+    src: { page: 299, quote: "Behcet‘s syndrome: Orogenital ulcers are painful." }
+    status: unverified
+  # ---------- cases ----------
+  - id: rheum.L17.131
+    kind: case
+    topic: criteria
+    stem: A 23-year-old man has 9 months of low back and alternating buttock pain that wakes him at night and eases with exercise and ibuprofen.
+    steps:
+      - question: What kind of back pain is this?
+        options: [Inflammatory back pain, Mechanical back pain, Radicular pain, Visceral pain]
+        answer: 0
+        why: "Onset under 45, insidious, over 3 months, night pain, alternating buttock pain, better with exercise and NSAIDs (p288)."
+      - reveal: SI joint X-rays are normal. MRI shows bone marrow oedema of both SI joints.
+        question: What does the MRI finding mean?
+        options: [Early active sacroiliitis, Chronic ankylosis, Degenerative disease, Normal variant]
+        answer: 0
+        why: "Bone marrow oedema on MRI is the sign of early sacroiliitis (p286); X-ray is not very sensitive."
+      - question: How is he classified?
+        options: [Axial SpA (imaging arm), non-radiographic subtype, AS by modified New York criteria, Undifferentiated SpA only, Not SpA]
+        answer: 0
+        why: "MRI sacroiliitis plus 1 or more SpA feature (IBP, NSAID response) meets ASAS axial SpA; with a normal X-ray it is nr-axSpA (p288, p295)."
+      - reveal: Two full-dose NSAIDs over 4 weeks fail. He has no psoriasis, IBD or uveitis.
+        question: Next step?
+        options: [Add a TNF inhibitor, Add sulfasalazine, Systemic prednisolone, Methotrexate]
+        answer: 0
+        why: "After two NSAIDs fail, add a TNFi rather than an IL-17i or JAKi; DMARDs and systemic steroids do not help axial disease (p293)."
+    src: { page: 288, quote: "pain at night, alternating buttock pains, morning stiffness more than 1/2hr, improves with exercise" }
+    status: unverified
+  - id: rheum.L17.132
+    kind: case
+    topic: reactive
+    stem: A 22-year-old man develops a hot swollen right knee and left ankle 3 weeks after unprotected intercourse. He has burning micturition and red eyes.
+    steps:
+      - question: Most likely diagnosis?
+        options: [Reactive arthritis (Reiter syndrome), Gout, RA, AS]
+        answer: 0
+        why: "Arthritis, urethritis and conjunctivitis 2-6 weeks after infection (p297)."
+      - question: Which organism is the likely trigger?
+        options: [Chlamydia, Salmonella, Staphylococcus aureus, Streptococcus pyogenes]
+        answer: 0
+        why: "Chlamydial (and mycoplasmal) urethritis trigger it; urethral culture shows Chlamydia in 30% (p297-298)."
+      - reveal: Urethral swab confirms active chlamydial infection.
+        question: Treatment?
+        options: [Short-term antibiotics plus NSAIDs, Anti-TNF, Long-term antibiotics for 1 year, Systemic steroids alone]
+        answer: 0
+        why: "NSAIDs for arthritis and short-term antibiotics while infection is active; biologics have not been studied (p299)."
+      - question: What is his likely course?
+        options: [Most improve over 3-4 months; 25-40% become chronic, Always crippling, Always self-limited in 1 week, Progresses to RA]
+        answer: 0
+        why: "Significant improvement in 3-4 months for most; 25-40% chronic or flaring (p300)."
+    src: { page: 297, quote: "Specific infections trigger the clinical features of arthritis in genetically susceptible patients." }
+    status: unverified
+  - id: rheum.L17.133
+    kind: case
+    topic: guidelines
+    stem: A 34-year-old man with AS on full-dose NSAIDs has recurrent acute anterior uveitis and active back pain (ASDAS 3.9).
+    steps:
+      - question: What ASDAS activity band is 3.9?
+        options: [Very high disease activity, High disease activity, Moderate disease activity, Inactive disease]
+        answer: 0
+        why: "Above 3.5 is very high disease activity (p289)."
+      - question: Which biologic class is preferred?
+        options: [TNFi monoclonal antibody (not etanercept), IL-17 inhibitor, Etanercept, Ustekinumab]
+        answer: 0
+        why: "With uveitis or IBD, a TNFi monoclonal antibody is preferred; IL-17 agents may exacerbate them (p291, p293)."
+      - question: What must be screened for first?
+        options: [Latent TB, hepatitis B and HIV, HLA-B27 only, Anti-CCP, Calprotectin only]
+        answer: 0
+        why: "Screen for latent TB, HBV and HIV before TNFi (p291)."
+      - reveal: After 12 weeks of adalimumab ASDAS is 1.6.
+        question: How is the response graded?
+        options: [Major improvement, Clinically important only, No change, Inactive disease]
+        answer: 0
+        why: "A fall of 2.3 is at least 2.0 units: major improvement (p289)."
+    src: { page: 289, quote: "a change of at least 1.1 units, and a change of at least 2.0 units for major improvement." }
+    status: unverified
+  # ---------- end-of-lecture questions (p300) ----------
+  - id: rheum.L17.134
+    kind: mcq
+    topic: imaging
+    stem: In ankylosing spondylitis, the development of syndesmophytes is primarily due to which process?
+    options:
+      - Inflammation of the entheses leading to new bone formation
+      - Increased osteoclast activity
+      - Direct mechanical stress on vertebral bodies
+      - Genetic predisposition to cartilage degeneration
+    answer: 0
+    why:
+      - "Correct (book answer, p300): enthesitis of the annulus fibrosus heals with new bone that grows vertically and bridges vertebrae (p282, p286)."
+      - Osteoclast activity causes resorption, not new bone.
+      - AS is inflammatory, not mechanical.
+      - AS is not a cartilage-degeneration disease.
+    src: { page: 286, quote: "Syndesmophytes new bone formation growing vertically from the annulous fibrosis bony bridging of adjacent vertebrae" }
+    status: unverified
+    tags: [book-question]
+  - id: rheum.L17.135
+    kind: mcq
+    topic: imaging
+    stem: Which imaging feature is most indicative of early-stage ankylosing spondylitis on MRI?
+    options:
+      - Bone marrow oedema in the sacroiliac joints
+      - Fatty infiltration of bone marrow
+      - Erosions in the vertebral bodies
+      - Ankylosis of the spine
+    answer: 0
+    why:
+      - "Correct (book answer, p300): MRI shows early sacroiliitis as bone marrow oedema (p286)."
+      - Periarticular fat accumulation is a chronic change.
+      - Erosions are a chronic change.
+      - Ankylosis is end-stage.
+    src: { page: 286, quote: "May reveal evidence of early sacroiliitis (bone marrow edema)" }
+    status: unverified
+    tags: [book-question]
+  - id: rheum.L17.136
+    kind: essay
+    topic: spa
+    prompt: Discuss the extra-articular manifestations of ankylosing spondylitis.
+    outline:
+      - "General and eye": ["Weight loss, low-grade fever, fatigue", "Uveitis in up to 25%"]
+      - "Lung": ["Restricted chest movement", "Apical fibrobullous disease with cavitation and fungal infection, mimicking TB"]
+      - "Heart": ["Ascending aortitis with AR (5%)", "Conduction defects (bundle of His, AV node)", "Pericarditis, cardiomyopathy (rare)"]
+      - "Kidney": ["Glomeruli usually spared", "NSAID toxicity, IgA nephropathy, amyloidosis"]
+      - "Bone and nerves": ["Osteoporosis, fractures with trivial trauma", "Fracture, instability, root inflammation, cauda equina", "Anterior atlantoaxial subluxation (2%)"]
+    src: { page: 284, quote: "Aortitis of the ascending aorta and the resulting fibrosis can cause dilatation of the aortic ring" }
+    status: unverified

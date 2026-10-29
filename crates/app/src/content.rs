@@ -10,6 +10,7 @@ use std::sync::atomic::{AtomicU64, Ordering};
 use batna_core::content::{Index, Lecture};
 use batna_core::lesson::{Lesson, LessonFile};
 use batna_core::pack::Pack;
+use batna_core::program::Program;
 
 mod embedded {
     include!(concat!(env!("OUT_DIR"), "/embedded.rs"));
@@ -21,6 +22,8 @@ pub struct Library {
     pub lectures: BTreeMap<String, Lecture>,
     /// Lesson files, by lecture id (`hb.L01`), in book order.
     pub lessons: BTreeMap<String, LessonFile>,
+    /// The MSc's courses (`content/program.yaml`).
+    pub program: Program,
 }
 
 /// The library in use. Each one is leaked: screens hold `&'static` items,
@@ -62,12 +65,14 @@ impl Library {
         // A newer pack from the update feed wins (checked and decoded
         // there); else the embedded one, which build.rs wrote from types
         // it just parsed, so it can't fail.
-        let Pack { index, lectures, lessons, look, .. } = crate::update::installed_pack()
+        let pack = crate::update::installed_pack()
             .unwrap_or_else(|| Pack::decode(embedded::PACK).expect("embedded content pack"));
+        let program = pack.program_or_fallback();
+        let Pack { index, lectures, lessons, look, .. } = pack;
         crate::look::set(look);
         let lectures = lectures.into_iter().map(|l| (l.lecture.clone(), l)).collect();
         let lessons = lessons.into_iter().map(|l| (l.lecture.clone(), l)).collect();
-        Library { index, lectures, lessons }
+        Library { index, lectures, lessons, program }
     }
 
     /// Every lesson in book order, with its lecture id.
@@ -121,10 +126,16 @@ impl<T: Send + Sync + 'static> Derived<T> {
     }
 }
 
-/// `hb.L1` or `hb.L01` → `L01`: the one way every screen names a lecture.
+/// `hb.L1` or `hb.L01` → `L01`, `hem.L03` → `HEM L03`: the one way every
+/// screen names a lecture. Hepatology, the first course, keeps the bare
+/// number it always had; every other course says which it is.
 pub fn lecture_code(id: &str) -> String {
     let n = id.rsplit('.').next().unwrap_or(id).trim_start_matches('L').trim_start_matches('0');
-    format!("L{n:0>2}")
+    match batna_core::program::course_of(id) {
+        "hb" => format!("L{n:0>2}"),
+        c if c != id => format!("{} L{n:0>2}", c.to_uppercase()),
+        _ => format!("L{n:0>2}"),
+    }
 }
 
 #[cfg(test)]
@@ -136,6 +147,8 @@ mod tests {
         assert_eq!(lecture_code("hb.L01"), "L01");
         assert_eq!(lecture_code("hb.L1"), "L01");
         assert_eq!(lecture_code("hb.L20"), "L20");
+        assert_eq!(lecture_code("hem.L3"), "HEM L03");
+        assert_eq!(lecture_code("L05"), "L05");
         let lib = Library::get();
         let first = &lib.index.lectures[0];
         assert_eq!(lib.title(&first.id), first.title);

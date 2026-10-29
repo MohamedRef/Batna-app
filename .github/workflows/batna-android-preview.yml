@@ -132,7 +132,7 @@ jobs:
             exit 1
           fi
       # Content-only: when everything merged since the build on the feed is
-      # lectures, lessons, changes/ notes, docs or stylesheets, the feed keeps
+      # lectures (any course), the program, lessons, changes/ notes, docs or stylesheets, the feed keeps
       # that APK and only the content pack (which carries the stylesheets,
       # crates/app/src/look.rs) is new. Devices then switch over in the
       # background with nothing to install. Any other file, a new version or
@@ -153,7 +153,7 @@ jobs:
           if [ -z "$changed" ]; then
             exit 0
           fi
-          if grep -Ev '^(content/(index\.yaml|hb/|lessons/)|changes/|docs/|[^/]+\.md$|crates/app/.+\.css$)' <<<"$changed"; then
+          if grep -Ev '^(content/(index\.yaml|program\.yaml|[a-z]+/)|changes/|docs/|[^/]+\.md$|crates/app/.+\.css$)' <<<"$changed"; then
             echo "Code changed since $prev (above): a full build."
             exit 0
           fi

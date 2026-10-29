@@ -75,6 +75,11 @@ pub fn references() -> Element {
     stroke(OPEN_BOOK)
 }
 
+/// The MSc map: a graduation cap.
+pub fn courses() -> Element {
+    stroke("M2 9l10-5 10 5-10 5zM6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5M22 9v6")
+}
+
 /// A new card: a card with a plus.
 pub fn add_card() -> Element {
     stroke("M5 5h14a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zM12 9v6M9 12h6")

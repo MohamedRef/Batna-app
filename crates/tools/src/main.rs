@@ -95,6 +95,15 @@ pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
     if index.schema != SCHEMA {
         problems.push(format!("content/index.yaml: schema must be {SCHEMA}"));
     }
+    // The MSc's courses: every lecture belongs to one.
+    let mut courses = 0;
+    match read_yaml::<batna_core::program::Program>(&content.join("program.yaml")) {
+        Ok(p) => {
+            courses = p.courses.len();
+            problems.extend(p.problems(&index).into_iter().map(|e| format!("content/program.yaml: {e}")));
+        }
+        Err(e) => problems.push(e),
+    }
     let approved = read_approved(&content.join("approved.txt"));
 
     let mut items = 0;
@@ -178,7 +187,7 @@ pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
     problems.extend(refs::check_locks(root, &listed.iter().cloned().collect::<Vec<_>>()));
     if problems.is_empty() {
         Ok(format!(
-            "content OK: {files} of {} lectures written, {items} items, {lessons} lessons, {terms} glossary terms",
+            "content OK: {courses} courses, {files} of {} lectures written, {items} items, {lessons} lessons, {terms} glossary terms",
             index.lectures.len()
         ))
     } else {
@@ -269,6 +278,7 @@ mod tests {
         let problems = validate_all(&dir).unwrap_err();
         assert!(problems.iter().any(|p| p.contains("unknown key `fornt`")), "{problems:#?}");
         assert!(problems.iter().any(|p| p.contains("L99.yaml: not listed")), "{problems:#?}");
+        assert!(problems.iter().any(|p| p.contains("program.yaml")), "{problems:#?}");
         std::fs::remove_dir_all(&dir).unwrap();
     }
 }

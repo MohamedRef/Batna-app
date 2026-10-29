@@ -1,0 +1,217 @@
+//! The MSc map (More › المقررات): every course of the program as a tile,
+//! grouped by where it stands, with the credit hours behind him. A tile
+//! opens its course: hours, lectures, and the status he can change.
+
+use batna_core::program::{CourseStatus, Group};
+use dioxus::prelude::*;
+
+use super::{Summary, fmt_hours, hours, set_status, summaries};
+use crate::content::Library;
+use crate::i18n::courses as tx;
+use crate::look::{Css, css};
+
+const CSS: Css = css!("src/courses/courses.css");
+
+/// The order of the map's groups.
+const ORDER: [CourseStatus; 4] =
+    [CourseStatus::Active, CourseStatus::Maintenance, CourseStatus::Later, CourseStatus::Archived];
+
+fn status_label(s: CourseStatus) -> &'static str {
+    match s {
+        CourseStatus::Active => tx::ACTIVE,
+        CourseStatus::Maintenance => tx::MAINTENANCE,
+        CourseStatus::Archived => tx::ARCHIVED,
+        CourseStatus::Later => tx::LATER,
+    }
+}
+
+fn status_hint(s: CourseStatus) -> &'static str {
+    match s {
+        CourseStatus::Active => tx::ACTIVE_HINT,
+        CourseStatus::Maintenance => tx::MAINTENANCE_HINT,
+        CourseStatus::Archived => tx::ARCHIVED_HINT,
+        CourseStatus::Later => tx::LATER_HINT,
+    }
+}
+
+fn group_label(g: Group) -> &'static str {
+    match g {
+        Group::Research => tx::G_RESEARCH,
+        Group::Clinical => tx::G_CLINICAL,
+        Group::Subspecialty => tx::G_SUBSPECIALTY,
+        Group::BasicScience => tx::G_BASIC,
+    }
+}
+
+fn group_key(g: Group) -> &'static str {
+    match g {
+        Group::Research => "research",
+        Group::Clinical => "clinical",
+        Group::Subspecialty => "subspecialty",
+        Group::BasicScience => "basic",
+    }
+}
+
+#[component]
+pub fn Map() -> Element {
+    let ui = use_context::<crate::Ui>();
+    let lib = Library::get();
+    let all = summaries(lib, super::status);
+    let (done, now, total) = hours(&all);
+    let mut open = use_signal(|| None::<String>);
+    // The ring: done hours solid, this semester's lighter after them.
+    let c = 2.0 * std::f32::consts::PI * 42.0;
+    let done_len = c * done / total.max(1.0);
+    let now_len = c * now / total.max(1.0);
+
+    rsx! {
+        style { {CSS.text()} }
+        style { {crate::lecture::CSS.text()} }
+        div { class: "lec-page courses",
+            div { class: "refs-head",
+                button {
+                    class: "icon-button lec-back",
+                    "data-back": "true",
+                    aria_label: crate::i18n::lecture::BACK,
+                    title: crate::i18n::lecture::BACK,
+                    onclick: move |_| crate::lecture::close(),
+                    span { aria_hidden: "true", "→" }
+                }
+                header { class: "page-head refs-title",
+                    h1 { {tx::TITLE} }
+                    p { class: "page-sub", bdi { "{lib.program.title}" } }
+                }
+            }
+            section { class: "card cm-hours",
+                svg {
+                    class: "cm-ring",
+                    view_box: "0 0 104 104",
+                    width: "104",
+                    height: "104",
+                    "aria-hidden": "true",
+                    circle { class: "cm-ring-track", cx: "52", cy: "52", r: "42" }
+                    circle {
+                        class: "cm-ring-now",
+                        cx: "52",
+                        cy: "52",
+                        r: "42",
+                        stroke_dasharray: "{done_len + now_len} {c}",
+                        transform: "rotate(-90 52 52)",
+                    }
+                    if done > 0.0 {
+                        circle {
+                            class: "cm-ring-done",
+                        cx: "52",
+                        cy: "52",
+                        r: "42",
+                            stroke_dasharray: "{done_len} {c}",
+                            transform: "rotate(-90 52 52)",
+                        }
+                    }
+                    text { class: "cm-ring-num", x: "52", y: "58", text_anchor: "middle",
+                        "{fmt_hours(done + now)}/{fmt_hours(total)}"
+                    }
+                }
+                div { class: "cm-hours-text",
+                    p { class: "cm-big", {tx::hours_line(&fmt_hours(total), all.len())} }
+                    p { span { class: "cm-key cm-key-done" } {tx::hours_done(&fmt_hours(done))} }
+                    p { span { class: "cm-key cm-key-now" } {tx::hours_now(&fmt_hours(now))} }
+                }
+            }
+            for st in ORDER {
+                if all.iter().any(|s| s.status == st) {
+                    section { key: "{st.key()}", class: "cm-group", aria_label: status_label(st),
+                        h2 { {status_label(st)} }
+                        p { class: "muted small", {status_hint(st)} }
+                        div { class: "cm-grid",
+                            for s in all.iter().filter(|s| s.status == st).cloned() {
+                                CourseTile {
+                                    key: "{s.course.id}",
+                                    open: open() == Some(s.course.id.clone()),
+                                    on_toggle: move |id: String| {
+                                        let same = open() == Some(id.clone());
+                                        open.set(if same { None } else { Some(id) });
+                                    },
+                                    on_lectures: move |_| crate::lecture::open_references(ui),
+                                    summary: s,
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+#[component]
+fn CourseTile(
+    summary: Summary,
+    open: bool,
+    on_toggle: EventHandler<String>,
+    on_lectures: EventHandler<()>,
+) -> Element {
+    let s = summary;
+    let id = s.course.id.clone();
+    let half = s.course.hours.fract() != 0.0;
+    let whole = s.course.hours.trunc() as usize;
+    rsx! {
+        div { class: "cm-cell", "data-open": open,
+            button {
+                class: "tap card tile cm-tile",
+                "data-group": group_key(s.course.group),
+                "aria-expanded": open,
+                onclick: move |_| on_toggle.call(id.clone()),
+                span { class: "cm-bar", aria_hidden: "true" }
+                span { class: "cm-name", bdi { "{s.course.title}" } }
+                span { class: "cm-meta",
+                    span { class: "cm-dots", aria_hidden: "true",
+                        for k in 0..whole {
+                            i { key: "{k}" }
+                        }
+                        if half {
+                            i { class: "half" }
+                        }
+                    }
+                    span { class: "muted small", {tx::tile_line(&s.course.short, &fmt_hours(s.course.hours))} }
+                }
+            }
+            if open {
+                div { class: "cm-detail card", role: "region", aria_label: s.course.title.clone(),
+                    p { class: "small",
+                        {group_label(s.course.group)}
+                        if let Some(n) = s.course.semester {
+                            " · "
+                            {tx::semester(n)}
+                        }
+                    }
+                    if s.lectures > 0 {
+                        p { class: "small", {tx::content_line(s.written, s.lectures, s.items, s.lessons)} }
+                        button {
+                            class: "btn btn-ghost cm-open",
+                            onclick: move |_| on_lectures.call(()),
+                            {tx::OPEN_LECTURES}
+                        }
+                    } else {
+                        p { class: "muted small", {tx::NO_CONTENT} }
+                    }
+                    h3 { class: "small cm-status-title", {tx::STATUS} }
+                    div { class: "segmented cm-status", role: "radiogroup", aria_label: tx::STATUS,
+                        for st in CourseStatus::ALL {
+                            button {
+                                key: "{st.key()}",
+                                role: "radio",
+                                "aria-checked": s.status == st,
+                                onclick: {
+                                    let id = s.course.id.clone();
+                                    move |_| set_status(&id, st)
+                                },
+                                {status_label(st)}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

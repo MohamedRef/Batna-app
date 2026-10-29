@@ -20,7 +20,7 @@ use crate::stats::{StudyData, pct};
 use crate::store::{now_ms, use_review};
 use crate::{Screen, Ui};
 
-const CSS: Css = css!("src/lecture/lecture.css");
+pub(crate) const CSS: Css = css!("src/lecture/lecture.css");
 
 /// The open pages (last on top) and the screen they opened over. A page is a
 /// lecture id or [`REFERENCES`]. `BATNA_OPEN_LECTURE=hb.L01` (or
@@ -135,6 +135,9 @@ fn start(mut ui: Ui, lecture: &str, items: Option<Vec<String>>) {
 pub fn LecturePage(id: String) -> Element {
     if id == REFERENCES {
         return rsx! { refs::References {} };
+    }
+    if id == crate::courses::MAP {
+        return rsx! { crate::courses::Map {} };
     }
     let ui = use_context::<Ui>();
     let lib = Library::get();

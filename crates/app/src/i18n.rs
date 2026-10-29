@@ -1712,6 +1712,44 @@ pub mod views {
     pub const CLOSE_MENU: &str = "اقفل القايمة";
 }
 
+pub mod courses {
+    pub const TITLE: &str = "المقررات";
+    pub const ACTIVE: &str = "الترم ده";
+    pub const MAINTENANCE: &str = "صيانة";
+    pub const ARCHIVED: &str = "أرشيف";
+    pub const LATER: &str = "لسه";
+    pub const ACTIVE_HINT: &str = "اللي بتذاكره دلوقتي.";
+    pub const MAINTENANCE_HINT: &str = "خلص امتحانه. مراجعات خفيفة عشان يفضل حاضر لامتحان آخر الماستر.";
+    pub const ARCHIVED_HINT: &str = "مستخبي من اليوم، بس موجود في المراجع وفي ملف Anki.";
+    pub const LATER_HINT: &str = "ترم جاي. أول ما كتابه يوصل، المحاضرات بتاعته تظهر هنا.";
+    pub const G_RESEARCH: &str = "ريسيرش";
+    pub const G_CLINICAL: &str = "إكلينيكي";
+    pub const G_SUBSPECIALTY: &str = "تخصص";
+    pub const G_BASIC: &str = "علوم أساسية";
+    pub const STATUS: &str = "المقرر ده فين؟";
+    pub const OPEN_LECTURES: &str = "افتح المحاضرات";
+    pub const NO_CONTENT: &str = "لسه مفيش محاضرات. هتنزل لما المنهج يوصل.";
+
+    pub fn hours_line(total: &str, courses: usize) -> String {
+        format!("{total} ساعة معتمدة في {courses} مقرر")
+    }
+    pub fn hours_done(h: &str) -> String {
+        format!("{h} ساعة خلصت امتحانها")
+    }
+    pub fn hours_now(h: &str) -> String {
+        format!("{h} ساعة بتذاكرها الترم ده")
+    }
+    pub fn tile_line(short: &str, hours: &str) -> String {
+        format!("{short} · {hours} س")
+    }
+    pub fn semester(n: u32) -> String {
+        format!("ترم {n}")
+    }
+    pub fn content_line(written: usize, lectures: usize, items: usize, lessons: usize) -> String {
+        format!("{written} من {lectures} محاضرة مكتوبة · {items} كارت · {lessons} درس")
+    }
+}
+
 pub mod refs {
     pub const TITLE: &str = "مراجعك";
     pub const SUBTITLE: &str = "المحاضرات وصفحات الكتاب وكروتك، في مكان واحد.";

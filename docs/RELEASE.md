@@ -130,7 +130,8 @@ any other build takes the lectures and keeps its own look. Strings, icons,
 layout and logic are code and still come with an APK.
 
 **Content-only feeds.** When everything merged since the build on the
-preview feed is under `content/index.yaml`, `content/hb/`, `content/lessons/`,
+preview feed is under `content/index.yaml`, `content/program.yaml`, a course
+folder such as `content/hb/`, `content/lessons/`,
 `changes/`, `docs/`, a top-level `.md` or a `crates/app/**/*.css` file, CI
 builds no APK: `batna-tools update manifest --carry android-arm64` keeps the
 feed's APK entry as it is (same file, its own `build`), and only the pack is

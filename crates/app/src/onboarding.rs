@@ -46,6 +46,7 @@ const CSS: &str = r#"
 .onboard-check { flex: none; inline-size: 1.1rem; block-size: 1.1rem; border-radius: 4px; border: 2px solid var(--line); }
 .onboard-lecture[aria-pressed="true"] .onboard-check { background: var(--accent); border-color: var(--accent); }
 .onboard-num { flex: none; font-variant-numeric: tabular-nums; color: var(--muted); }
+.onboard-lectures li.onboard-course { margin-block-start: var(--sp-2); font-weight: 700; color: var(--accent); }
 .onboard-upto { flex: none; min-block-size: 44px; padding-inline: var(--sp-2); border: 0; background: none; color: var(--accent); }
 /* Six themes with long names: whole-word rows, two columns once there is room (#232). */
 .onboard-themes { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 12rem), 1fr)); gap: var(--sp-2); }
@@ -338,35 +339,48 @@ fn Questions() -> Element {
                     button { class: "btn btn-secondary", onclick: move |_| studied.set(Vec::new()), {tx::NONE} }
                 }
                 ul { class: "onboard-lectures", aria_label: tx::STUDIED_TITLE,
-                    for (n , l) in Library::get().index.lectures.iter().enumerate() {
-                        li { key: "{l.id}",
-                            button {
-                                class: "onboard-lecture",
-                                "aria-pressed": if studied.read().contains(&l.id) { "true" } else { "false" },
-                                onclick: {
-                                    let id = l.id.clone();
-                                    move |_| {
-                                        let mut s = studied.write();
-                                        match s.iter().position(|x| *x == id) {
-                                            Some(i) => {
-                                                s.remove(i);
+                    for group in Library::get().by_course(Library::get().index.lectures.iter().enumerate().collect(), |(_, l)| l.id.as_str()) {
+                        li { key: "{group.id}", class: "onboard-course", "{group.short()}" }
+                        for (n , l) in group.rows {
+                            li { key: "{l.id}",
+                                button {
+                                    class: "onboard-lecture",
+                                    "aria-pressed": if studied.read().contains(&l.id) { "true" } else { "false" },
+                                    onclick: {
+                                        let id = l.id.clone();
+                                        move |_| {
+                                            let mut s = studied.write();
+                                            match s.iter().position(|x| *x == id) {
+                                                Some(i) => {
+                                                    s.remove(i);
+                                                }
+                                                None => s.push(id.clone()),
                                             }
-                                            None => s.push(id.clone()),
                                         }
-                                    }
-                                },
-                                span { class: "onboard-check", aria_hidden: "true" }
-                                bdi { class: "onboard-num", "{crate::content::lecture_code(&l.id)}" }
-                                bdi { {l.title.clone()} }
-                            }
-                            button {
-                                class: "onboard-upto small",
-                                title: tx::UP_TO_HERE,
-                                onclick: {
-                                    let upto = ids[..=n].to_vec();
-                                    move |_| studied.set(upto.clone())
-                                },
-                                {tx::UP_TO_HERE}
+                                    },
+                                    span { class: "onboard-check", aria_hidden: "true" }
+                                    bdi { class: "onboard-num", "{crate::content::lecture_no(&l.id)}" }
+                                    bdi { {l.title.clone()} }
+                                }
+                                button {
+                                    class: "onboard-upto small",
+                                    title: tx::UP_TO_HERE,
+                                    onclick: {
+                                        // Up to here in this course; other courses keep their picks.
+                                        let course = batna_core::program::course_of(&l.id).to_string();
+                                        let upto: Vec<String> = ids[..=n]
+                                            .iter()
+                                            .filter(|x| batna_core::program::course_of(x) == course)
+                                            .cloned()
+                                            .collect();
+                                        move |_| {
+                                            let mut s = studied.write();
+                                            s.retain(|x| batna_core::program::course_of(x) != course);
+                                            s.extend(upto.iter().cloned());
+                                        }
+                                    },
+                                    {tx::UP_TO_HERE}
+                                }
                             }
                         }
                     }

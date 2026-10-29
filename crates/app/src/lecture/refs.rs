@@ -9,7 +9,7 @@
 use batna_core::stats::Counts;
 use dioxus::prelude::*;
 
-use crate::content::{Library, lecture_code};
+use crate::content::{Library, lecture_no};
 use crate::i18n::refs as tx;
 use crate::look::{Css, css};
 use crate::parts::{Collection, Layout, Sort};
@@ -44,9 +44,15 @@ pub fn rows(lib: &Library, data: &StudyData) -> Vec<Row> {
                 .lectures
                 .get(&e.id)
                 .map(|l| l.topics.iter().map(|t| t.title.as_str()).collect::<Vec<_>>());
-            let code = lecture_code(&e.id);
-            let haystack =
-                format!("{} {} {}", e.title, code, topics.unwrap_or_default().join(" ")).to_lowercase();
+            let code = lecture_no(&e.id);
+            let course = lib.course_of(&e.id).map(|c| format!("{} {}", c.short, c.title)).unwrap_or_default();
+            let haystack = format!(
+                "{} {course} {} l{code:0>2} {}",
+                e.title,
+                lib.lecture_tag(&e.id),
+                topics.unwrap_or_default().join(" ")
+            )
+            .to_lowercase();
             Row {
                 id: e.id.clone(),
                 code,
@@ -145,44 +151,47 @@ pub fn References() -> Element {
                     p { class: "note", {tx::NO_MATCH} }
                 } else {
                     crate::parts::ViewBar { of: VIEW }
-                    ul { class: "coll refs-list", "data-layout": pick.layout.as_str(),
-                        for r in shown {
-                            li { key: "{r.id}",
-                                button {
-                                    class: "coll-btn refs-row",
-                                    onclick: { let id = r.id.clone(); move |_| super::open(ui, &id) },
-                                    span { class: "coll-lead", aria_hidden: "true",
-                                        span { class: "coll-badge", "data-tone": if r.counts.is_none() { "quiet" } else { "" }, "{r.code}" }
-                                    }
-                                    span { class: "coll-main",
-                                        bdi { dir: "ltr", lang: "en", class: "coll-title lecture-title", "{r.title}" }
-                                        span { class: "coll-sub",
-                                            if lib.program.slides(&r.id) { "{crate::i18n::lecture::SLIDES} " } else { "{crate::i18n::lecture::PAGES} " }
-                                            span { class: "num-ltr", "{r.pages[0]}–{r.pages[1]}" }
-                                            if r.lessons > 0 {
-                                                " · {crate::i18n::count::count(r.lessons, &crate::i18n::count::LESSON)}"
-                                            }
+                    for group in lib.by_course(shown, |r| r.id.as_str()) {
+                        crate::parts::CourseHead { key: "{group.id}", short: group.short().to_string(), title: group.title().to_string() }
+                        ul { class: "coll refs-list", "data-layout": pick.layout.as_str(),
+                            for r in group.rows.iter() {
+                                li { key: "{r.id}",
+                                    button {
+                                        class: "coll-btn refs-row",
+                                        onclick: { let id = r.id.clone(); move |_| super::open(ui, &id) },
+                                        span { class: "coll-lead", aria_hidden: "true",
+                                            span { class: "coll-badge", "data-tone": if r.counts.is_none() { "quiet" } else { "" }, "{r.code}" }
                                         }
-                                        if let Some((a, t)) = r.checked() {
-                                            span { class: "coll-extra",
-                                                span {
-                                                    class: "chip",
-                                                    "data-tone": if a >= t { "good" } else { "" },
-                                                    title: tx::CHECKED_HINT,
-                                                    "{tx::CHECKED} " span { class: "num-ltr", "{a}/{t}" }
+                                        span { class: "coll-main",
+                                            bdi { dir: "ltr", lang: "en", class: "coll-title lecture-title", "{r.title}" }
+                                            span { class: "coll-sub",
+                                                if lib.program.slides(&r.id) { "{crate::i18n::lecture::SLIDES} " } else { "{crate::i18n::lecture::PAGES} " }
+                                                span { class: "num-ltr", "{r.pages[0]}–{r.pages[1]}" }
+                                                if r.lessons > 0 {
+                                                    " · {crate::i18n::count::count(r.lessons, &crate::i18n::count::LESSON)}"
+                                                }
+                                            }
+                                            if let Some((a, t)) = r.checked() {
+                                                span { class: "coll-extra",
+                                                    span {
+                                                        class: "chip",
+                                                        "data-tone": if a >= t { "good" } else { "" },
+                                                        title: tx::CHECKED_HINT,
+                                                        "{tx::CHECKED} " span { class: "num-ltr", "{a}/{t}" }
+                                                    }
                                                 }
                                             }
                                         }
+                                        match r.checked() {
+                                            Some((a, t)) => rsx! {
+                                                span { class: "coll-end coll-when-compact", title: tx::CHECKED_HINT,
+                                                    span { class: "num-ltr", "{a}/{t}" }
+                                                }
+                                            },
+                                            None => rsx! { span { class: "coll-end", span { class: "chip", {tx::WRITING} } } },
+                                        }
+                                        span { class: "chev", aria_hidden: "true" }
                                     }
-                                    match r.checked() {
-                                        Some((a, t)) => rsx! {
-                                            span { class: "coll-end coll-when-compact", title: tx::CHECKED_HINT,
-                                                span { class: "num-ltr", "{a}/{t}" }
-                                            }
-                                        },
-                                        None => rsx! { span { class: "coll-end", span { class: "chip", {tx::WRITING} } } },
-                                    }
-                                    span { class: "chev", aria_hidden: "true" }
                                 }
                             }
                         }

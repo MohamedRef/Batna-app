@@ -4,7 +4,7 @@
 //! the app's «export to Anki» button shares; see docs/ANKI.md.
 //!
 //! By default it writes one file, `dist/anki/batna.apkg`, with a `Batna`
-//! deck and one subdeck per lecture (`Batna::L01 Liver Cirrhosis`).
+//! deck, a level per course and one subdeck per lecture (`Batna::Hepatology::01 Liver Cirrhosis`).
 //! `--lecture` writes just that lecture to `batna-hb-L01.apkg`.
 //!
 //! So the file never shrinks while content threads work, a lecture that

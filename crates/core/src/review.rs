@@ -203,10 +203,12 @@ pub fn enumerate_grade(recalled: usize, total: usize, pass: usize) -> Grade {
 pub trait StudyStore {
     fn record(&mut self, event: ReviewEvent);
     /// [`Self::record`], returning the id the event was logged under (so it
-    /// can be taken back), or `None` when it wasn't saved or can't be.
-    fn record_logged(&mut self, event: ReviewEvent) -> Option<String> {
+    /// can be taken back), or `None` when it can't be taken back. `Err`
+    /// when the answer wasn't saved: the caller keeps the item open so it
+    /// can be rated again, and says so.
+    fn record_logged(&mut self, event: ReviewEvent) -> Result<Option<String>, String> {
         self.record(event);
-        None
+        Ok(None)
     }
     /// Takes a logged answer back (Undo): the event gets its tombstone, the
     /// one correction the append-only log allows, and the schedule is

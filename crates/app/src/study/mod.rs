@@ -137,8 +137,12 @@ fn plan_items(store: &StudyStoreHandle, ids: &[String]) -> Vec<Planned> {
 static SESSION: GlobalSignal<Session> = Signal::global(Session::default);
 static PHASE: GlobalSignal<Phase> = Signal::global(|| Phase::Setup);
 static STARTED: GlobalSignal<Instant> = Signal::global(Instant::now);
-/// What the last Undo said: taken back (the item is reopened) or not saved.
+/// What the last Undo said: taken back (the item is reopened) or not saved,
+/// or that the last rating wasn't saved.
 static UNDO_NOTE: GlobalSignal<Option<&'static str>> = Signal::global(|| None);
+/// Ratings that couldn't be saved so far. The rating row lets him rate again
+/// once this moves past the count it was pressed at.
+pub(crate) static SAVE_FAILS: GlobalSignal<u32> = Signal::global(|| 0);
 
 #[derive(Clone, Copy, PartialEq)]
 enum Phase {
@@ -323,13 +327,22 @@ pub fn Study() -> Element {
                     let item_id = p.item_id.clone();
                     let on_grade = move |grade: Grade| {
                         let took = started().elapsed().as_millis().min(u32::MAX as u128) as u32;
-                        let event = store.0.borrow_mut().record_logged(ReviewEvent {
+                        let event = match store.0.borrow_mut().record_logged(ReviewEvent {
                             item_id: item_id.clone(),
                             grade,
                             origin: Origin::Study,
                             at_ms: now_ms(),
                             took_ms: took,
-                        });
+                        }) {
+                            Ok(event) => event,
+                            // Not saved: stay on this item with his answer on
+                            // screen, say so, and let him rate again.
+                            Err(_) => {
+                                undo_note.set(Some(tx::SAVE_FAILED));
+                                *SAVE_FAILS.write() += 1;
+                                return;
+                            }
+                        };
                         let hidden = |id: &str| store.0.borrow().is_hidden(id);
                         session.write().grade_logged(grade, event, hidden);
                         undo_note.set(None);
@@ -376,7 +389,7 @@ pub fn Study() -> Element {
                             p {
                                 class: "note st-undo-note",
                                 role: "status",
-                                "data-failed": if note == tx::UNDO_FAILED { "yes" } else { "no" },
+                                "data-failed": if note == tx::UNDO_FAILED || note == tx::SAVE_FAILED { "yes" } else { "no" },
                                 {note}
                             }
                         }

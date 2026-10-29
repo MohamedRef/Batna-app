@@ -341,6 +341,7 @@ pub mod study {
     pub const UNDO_HINT: &str = "رجّع آخر تقييم";
     pub const UNDONE: &str = "رجّعت تقييمك، وكأنك ما قيّمتش. جاوب وقيّم من جديد.";
     pub const UNDO_FAILED: &str = "ما عرفتش أرجّع التقييم. جرّب تاني بعد شوية.";
+    pub const SAVE_FAILED: &str = "ما عرفتش أحفظ تقييمك، فلسه على نفس السؤال وإجابتك زي ما هي. قيّم تاني.";
     pub const UNDO_LAST: &str = "↶ رجّع آخر تقييم";
     pub const SUGGESTED: &str = "اقتراحي متعلّم عليه، والقرار ليك.";
     pub const AGAIN: &str = "تاني";
@@ -1048,6 +1049,8 @@ pub mod data {
     pub const IMPORT_DONE_1: &str = "تمام، اتدمج";
     pub const IMPORT_DONE_2: &str = "تغيير. الجدول اتحدّث.";
     pub const IMPORT_FAILED: &str = "ما عرفتش أقرا النسخة دي:";
+    pub const IMPORT_PARTIAL_1: &str = "بس فيه";
+    pub const IMPORT_PARTIAL_2: &str = "صف ما اتدمجوش (ناقصهم بيانات أو من نسخة أحدث من باطنة). الباقي اتحفظ، وتقدر تجرب تاني بعد ما تحدّث التطبيق.";
     pub const COL_WHAT: &str = "إيه";
     pub const COL_IN_FILE: &str = "في الملف";
     pub const COL_NEW: &str = "جديد";

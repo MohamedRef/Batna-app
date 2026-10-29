@@ -15,7 +15,9 @@ const GRADES: [Grade; 4] = [Grade::Again, Grade::Hard, Grade::Good, Grade::Easy]
 pub fn GradeRow(item_id: String, suggested: Option<Grade>, on_grade: EventHandler<Grade>) -> Element {
     let store = use_store();
     let intervals = store.0.borrow().intervals(&item_id, now_ms());
-    let mut done = use_signal(|| false);
+    // Pressed at this count of failed saves: a failed save re-enables the row.
+    let mut done = use_signal(|| None::<u32>);
+    let pressed = move || done() == Some(*super::SAVE_FAILS.read());
     // The answer is out: let the frame show the book quote.
     let revealed = try_use_context::<super::item::Revealed>();
     use_effect(move || {
@@ -43,10 +45,10 @@ pub fn GradeRow(item_id: String, suggested: Option<Grade>, on_grade: EventHandle
                         "aria-keyshortcuts": "{i + 1}",
                         "data-grade": grade_name(grade),
                         "data-suggested": if suggested == Some(grade) { "yes" } else { "no" },
-                        disabled: done(),
+                        disabled: pressed(),
                         onclick: move |_| {
-                            if !done() {
-                                done.set(true);
+                            if !pressed() {
+                                done.set(Some(*super::SAVE_FAILS.peek()));
                                 on_grade.call(grade);
                             }
                         },

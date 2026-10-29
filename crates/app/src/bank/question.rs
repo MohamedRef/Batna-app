@@ -31,12 +31,7 @@ pub fn QuestionView(
         let text = options.get(orig)?.clone();
         let reason = why.get(orig).cloned().unwrap_or_default();
         let letter = char::from(b'A' + shown as u8);
-        let state = match (reveal, orig == q.answer, chosen == Some(orig)) {
-            (true, true, _) => "right",
-            (true, false, true) => "wrong",
-            (false, _, true) => "picked",
-            _ => "",
-        };
+        let state = answer_state(reveal, orig == q.answer, chosen == Some(orig));
         Some((orig, letter, text, reason, state))
     });
     let rows: Vec<_> = rows.collect();
@@ -67,7 +62,7 @@ pub fn QuestionView(
                 for (orig, letter, text, reason, state) in rows.clone() {
                     li { key: "{orig}",
                         button {
-                            class: "q-option",
+                            class: "q-option answer",
                             "data-state": state,
                             disabled: locked,
                             "aria-pressed": if chosen == Some(orig) { "true" } else { "false" },
@@ -78,13 +73,13 @@ pub fn QuestionView(
                                     h.call(orig);
                                 }
                             },
-                            span { class: "q-letter", "{letter}" }
-                            span { class: "q-text", "{text}" }
-                            if reveal && state == "right" {
-                                span { class: "q-mark", lang: "ar", dir: "rtl", "✓ {tx::RIGHT}" }
+                            span { class: "answer-key", "{letter}" }
+                            span { class: "q-text answer-text", "{text}" }
+                            if reveal && matches!(state, "correct" | "missed") {
+                                span { class: "answer-mark", lang: "ar", dir: "rtl", "✓ {tx::RIGHT}" }
                             }
                             if reveal && state == "wrong" {
-                                span { class: "q-mark", lang: "ar", dir: "rtl", "✗ {tx::YOUR_ANSWER}" }
+                                span { class: "answer-mark", lang: "ar", dir: "rtl", "✗ {tx::YOUR_ANSWER}" }
                             }
                         }
                         // Under each option on phones; the side pane has them on wide windows.
@@ -105,7 +100,7 @@ pub fn QuestionView(
         div { class: "q-explain card",
             ol { class: "q-why-list", lang: "en", dir: "ltr",
                 for (orig, letter, _, reason, state) in rows {
-                    li { key: "{orig}", "data-state": state,
+                    li { key: "{orig}", "data-state": if matches!(state, "correct" | "missed") { "right" } else { state },
                         span { class: "q-letter", "{letter}" }
                         span { "{reason}" }
                     }
@@ -126,6 +121,34 @@ pub fn QuestionView(
     };
     rsx! {
         crate::desk::Panes { primary, secondary: Some(secondary) }
+    }
+}
+
+/// The shared `button.answer` state (docs/DESIGN.md): a draft is
+/// "selected"; once revealed the right option is "correct" when he picked
+/// it and "missed" when he didn't, and his wrong pick is "wrong".
+fn answer_state(reveal: bool, right: bool, picked: bool) -> &'static str {
+    match (reveal, right, picked) {
+        (true, true, true) => "correct",
+        (true, true, false) => "missed",
+        (true, false, true) => "wrong",
+        (false, _, true) => "selected",
+        _ => "",
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::answer_state;
+
+    #[test]
+    fn answer_states_follow_the_shared_part() {
+        assert_eq!(answer_state(false, true, true), "selected");
+        assert_eq!(answer_state(false, false, false), "");
+        assert_eq!(answer_state(true, true, true), "correct");
+        assert_eq!(answer_state(true, true, false), "missed");
+        assert_eq!(answer_state(true, false, true), "wrong");
+        assert_eq!(answer_state(true, false, false), "");
     }
 }
 

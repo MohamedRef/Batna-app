@@ -33,6 +33,10 @@ pub struct Paper {
     pub started_ms: i64,
     /// When the current question came on screen, for `Answer::took_ms`.
     pub shown_ms: i64,
+    /// Tutor mode: the option picked on the current question but not yet
+    /// checked. Checking sends it to review; moving on clears it.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub draft: Option<usize>,
 }
 
 impl Paper {
@@ -45,7 +49,35 @@ impl Paper {
             at: 0,
             started_ms: now,
             shown_ms: now,
+            draft: None,
         }
+    }
+
+    /// Select an option. Tutor mode holds it as a draft until it is checked
+    /// (a checked question is locked); timed papers take it as the answer,
+    /// changeable until the paper goes in.
+    fn pick(&mut self, option: usize) {
+        let at = self.at;
+        match self.mode {
+            Mode::Tutor if self.answers[at].chosen.is_some() => {}
+            Mode::Tutor => self.draft = Some(option),
+            _ => self.answers[at].chosen = Some(option),
+        }
+    }
+
+    /// Tutor mode: check the draft once. Returns the question and answer to
+    /// send to review, or `None` when there is no draft or it was already
+    /// checked (a second tap or Enter).
+    fn check(&mut self, now: i64) -> Option<(Question, Answer)> {
+        let at = self.at;
+        if self.mode != Mode::Tutor || self.answers[at].chosen.is_some() {
+            return None;
+        }
+        let option = self.draft.take()?;
+        let a = &mut self.answers[at];
+        a.chosen = Some(option);
+        a.took_ms = u32::try_from(now.saturating_sub(self.shown_ms).max(0)).unwrap_or(u32::MAX);
+        Some((self.questions[at].clone(), a.clone()))
     }
 
     /// Add the time on the current question before moving off it.
@@ -285,11 +317,9 @@ fn to_top() {
     document::eval(r#"document.querySelector("main.content")?.scrollTo(0, 0);"#);
 }
 
-/// Pick an option. Tutor mode locks the first pick and sends it to review
-/// right away; timed papers let him change his mind until he submits.
+/// Select an option: a draft in tutor mode, the answer on a timed paper.
 pub fn choose(option: usize) {
     let now = now_ms();
-    let mut sent = None;
     {
         let mut phase = PHASE.write();
         let Phase::Running(p) = &mut *phase else { return };
@@ -298,26 +328,25 @@ pub fn choose(option: usize) {
             finish();
             return;
         }
-        let at = p.at;
-        let mode = p.mode;
-        let a = &mut p.answers[at];
-        match mode {
-            Mode::Tutor if a.chosen.is_some() => return,
-            Mode::Tutor => {
-                a.chosen = Some(option);
-                a.took_ms = u32::try_from(now.saturating_sub(p.shown_ms).max(0)).unwrap_or(u32::MAX);
-                sent = Some((p.questions[at].clone(), a.clone()));
-            }
-            _ => a.chosen = Some(option),
-        }
+        p.pick(option);
     }
+    keep_open();
+}
+
+/// Tutor mode: check the selected option, reveal the explanation and send
+/// the answer to review, exactly once per question.
+pub fn check() {
+    let now = now_ms();
+    let sent = match &mut *PHASE.write() {
+        Phase::Running(p) => p.check(now),
+        _ => None,
+    };
     if let Some((q, a)) = sent {
         if let Some(e) = exam::review_event(&q, &a, Mode::Tutor, now) {
             record(e);
         }
         HISTORY.write().record(std::slice::from_ref(&q), std::slice::from_ref(&a));
     }
-    keep_open();
 }
 
 /// Move to question `to` (clamped).
@@ -328,6 +357,7 @@ pub fn go(to: usize) {
         let Phase::Running(p) = &mut *phase else { return };
         p.leave(now);
         p.at = to.min(p.questions.len().saturating_sub(1));
+        p.draft = None;
         p.overdue(now)
     };
     if overdue {
@@ -503,5 +533,55 @@ mod tests {
         p.leave(6_000);
         assert_eq!(p.answers[0].took_ms, 4_000);
         assert_eq!(p.answers[1].took_ms, 1_000);
+    }
+
+    fn question(id: &str) -> Question {
+        Question { id: id.into(), lecture: "hb.L01".into(), topic: None, answer: 1, order: vec![0, 1, 2] }
+    }
+
+    #[test]
+    fn tutor_selects_then_checks_once() {
+        let mut p = Paper::new(Mode::Tutor, vec![question("a"), question("b")]);
+        p.shown_ms = 0;
+        // Nothing selected: nothing to check.
+        assert_eq!(p.check(10), None);
+        // A selection is a draft he can change; nothing is graded yet.
+        p.pick(0);
+        p.pick(1);
+        assert_eq!((p.draft, p.answers[0].chosen), (Some(1), None));
+        let (q, a) = p.check(2_000).expect("the draft is checked");
+        assert_eq!((q.id.as_str(), a.chosen, a.took_ms), ("a", Some(1), 2_000));
+        // A second Check, and a later pick, change nothing.
+        assert_eq!(p.check(3_000), None);
+        p.pick(2);
+        assert_eq!((p.draft, p.answers[0].chosen), (None, Some(1)));
+    }
+
+    #[test]
+    fn moving_on_drops_an_unchecked_draft() {
+        let mut p = Paper::new(Mode::Tutor, vec![question("a"), question("b")]);
+        p.pick(2);
+        p.leave(5);
+        p.at = 1;
+        p.draft = None;
+        assert_eq!(p.check(6), None);
+        assert!(p.answers.iter().all(|a| a.chosen.is_none()));
+    }
+
+    #[test]
+    fn timed_papers_take_the_pick_as_the_answer() {
+        let mut p = Paper::new(Mode::Mock, vec![question("a")]);
+        p.pick(0);
+        p.pick(2);
+        assert_eq!((p.draft, p.answers[0].chosen), (None, Some(2)));
+        assert_eq!(p.check(1), None, "timed papers are never checked one by one");
+    }
+
+    #[test]
+    fn papers_saved_before_drafts_still_load() {
+        let p = Paper::new(Mode::Timed, vec![question("a")]);
+        let mut json: serde_json::Value = serde_json::to_value(&p).unwrap();
+        json.as_object_mut().unwrap().remove("draft");
+        assert_eq!(serde_json::from_value::<Paper>(json).unwrap(), p);
     }
 }

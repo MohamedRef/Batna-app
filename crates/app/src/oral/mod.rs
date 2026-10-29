@@ -32,7 +32,8 @@ const AUTO_WAIT: Duration = Duration::from_secs(8);
 /// key cannot flash the next question's answer.
 const SETTLE: Duration = Duration::from_millis(700);
 
-#[derive(Clone, Debug, PartialEq)]
+#[derive(Clone, Debug, PartialEq, serde::Serialize, serde::Deserialize)]
+#[serde(default)]
 struct Settings {
     lecture: Option<String>,
     size: usize,
@@ -64,6 +65,25 @@ enum Phase {
 // Kept across screen changes, for this run of the app. Ratings go to the
 // review store (FSRS), like the study player's.
 static SETTINGS: GlobalSignal<Settings> = Signal::global(Settings::default);
+/// The setup he used last, kept on this device.
+const SETTINGS_KEY: &str = "oral.settings";
+static RESTORED: GlobalSignal<bool> = Signal::global(|| false);
+
+fn restore_settings() {
+    if *RESTORED.peek() {
+        return;
+    }
+    *RESTORED.write() = true;
+    if let Some(mut s) = crate::store::shared().local_setting::<Settings>(SETTINGS_KEY) {
+        s.size = if SIZES.contains(&s.size) { s.size } else { Settings::default().size };
+        s.think = s.think.clamp(THINK_MIN, THINK_MAX);
+        s.rate = s.rate.min(tts::RATES.len() - 1);
+        if s.lecture.as_ref().is_some_and(|l| !Library::get().lectures.contains_key(l)) {
+            s.lecture = None;
+        }
+        *SETTINGS.write() = s;
+    }
+}
 static SESSION: GlobalSignal<Option<Session>> = Signal::global(|| None);
 
 #[component]
@@ -106,6 +126,11 @@ fn start(store: &StudyStoreHandle) {
 #[component]
 fn Setup() -> Element {
     let store = use_store();
+    use_hook(restore_settings);
+    use_effect(|| {
+        let s = SETTINGS.read().clone();
+        let _ = crate::store::shared().put_local_setting(SETTINGS_KEY, &s);
+    });
     let settings = SETTINGS.read().clone();
     let lib = Library::get();
     let all = pool(&store.read(), None);
@@ -129,6 +154,7 @@ fn Setup() -> Element {
                     onclick: move |_| if available > 0 { start(&store.read()) },
                     h1 { {tx::TITLE} }
                     p { class: "muted", {tx::INTRO} }
+                    p { class: "note small", {tx::HONEST} }
                     if available > 0 {
                         p { class: "muted small", "{tx::AVAILABLE} " {count(available, &QUESTION)} }
                         button {
@@ -247,6 +273,12 @@ fn Runner() -> Element {
     let mut run = use_signal(|| 0u64);
     let mut asked_at = use_signal(Instant::now);
     let mut rated_at = use_signal(|| None::<Instant>);
+    // The think timer is his to stop and restart; a new question runs it again.
+    let mut paused = use_signal(|| false);
+    // Answer points he says he covered, and his own typed points: this
+    // question only, never saved or sent anywhere.
+    let mut ticked = use_signal(BTreeSet::<usize>::new);
+    let mut notes = use_signal(String::new);
     let settled = move || rated_at.peek().is_none_or(|at| at.elapsed() >= SETTLE);
     // Rates question `turn` once and shows the next one as unasked right away
     // (the driver's own task runs later), so a second tap finds nothing to grade.
@@ -261,6 +293,7 @@ fn Runner() -> Element {
     let mut drive = move |step: Step| {
         let id = *run.peek() + 1;
         run.set(id);
+        paused.set(false);
         tts::stop();
         if step == Step::Reveal && !settled() {
             return;
@@ -278,14 +311,14 @@ fn Runner() -> Element {
                 asked_at.set(Instant::now());
                 phase.set(Phase::Asking);
                 say(spoken_question(&entry)).await;
-                if !live() || !countdown(think, Phase::Thinking, phase, live).await {
+                if !live() || !countdown(think, Phase::Thinking, phase, paused, live).await {
                     return;
                 }
                 if entry.prompt.what_else {
                     let more = (think / 2).max(THINK_MIN);
                     phase.set(Phase::WhatElse(more));
                     say("And what else?".into()).await;
-                    if !live() || !countdown(more, Phase::WhatElse, phase, live).await {
+                    if !live() || !countdown(more, Phase::WhatElse, phase, paused, live).await {
                         return;
                     }
                 }
@@ -308,6 +341,8 @@ fn Runner() -> Element {
     use_effect(use_reactive!(|asked_now| {
         if asked_now != 0 && *asked.peek() != asked_now {
             asked.set(asked_now);
+            ticked.set(BTreeSet::new());
+            notes.set(String::new());
             drive(Step::Ask);
         }
     }));
@@ -354,8 +389,15 @@ fn Runner() -> Element {
     let Some(s) = session.as_ref() else { return rsx! {} };
     let Some(entry) = s.current.clone() else { return rsx! {} };
     let left = s.left();
+    let total = s.total.max(1);
     let turn = s.asked;
     drop(session);
+    // Questions behind him, out of the session (Agains add to the end).
+    let done_n = total.saturating_sub(left.min(total));
+    let progress = 100 * done_n / total;
+    let points = entry.prompt.answer.clone();
+    let said = ticked.read().len();
+    let enough = entry.prompt.pass.is_some_and(|(pass, _)| said >= pass);
     let phase_now = *phase.read();
     let revealed = phase_now == Phase::Answer;
     let p = &entry.prompt;
@@ -366,7 +408,15 @@ fn Runner() -> Element {
             class: "oral-run",
             "data-phase": if revealed { "answer" } else { "ask" },
             header { class: "oral-top",
-                span { class: "muted small", "{tx::LEFT} " bdi { "{left}" } }
+                div {
+                    class: "progress oral-progress",
+                    role: "progressbar",
+                    "aria-valuemin": "0",
+                    "aria-valuemax": "100",
+                    "aria-valuenow": "{progress}",
+                    div { class: "progress-fill", style: "inline-size: {progress}%;" }
+                }
+                span { class: "muted small", "{tx::LEFT} " bdi { class: "num-ltr", "{left}" } }
                 if entry.follow_up {
                     span { class: "chip accent", {tx::FOLLOW_UP} }
                 }
@@ -377,6 +427,7 @@ fn Runner() -> Element {
                 crate::hover::BookPage { page: p.page, quote: p.quote.clone() }
                 button {
                     class: "oral-end",
+                    "data-back": "true",
                     "aria-keyshortcuts": "Escape",
                     onclick: move |_| end_session(),
                     {tx::END}
@@ -398,6 +449,19 @@ fn Runner() -> Element {
                             span { class: "chip", "{tx::PASS} " bdi { "{pass}" } " {tx::OF} " bdi { "{of}" } }
                         }
                     }
+                    if !revealed {
+                        details { class: "oral-notes",
+                            summary { {tx::NOTES} }
+                            textarea {
+                                lang: "en",
+                                dir: "auto",
+                                rows: "4",
+                                placeholder: tx::NOTES_HINT,
+                                value: "{notes}",
+                                oninput: move |e| notes.set(e.value()),
+                            }
+                        }
+                    }
                     match phase_now {
                         Phase::Asking => rsx! {
                             section { class: "oral-timer", "aria-live": "polite",
@@ -409,10 +473,23 @@ fn Runner() -> Element {
                             let full = if what_else { (SETTINGS.peek().think / 2).max(THINK_MIN) } else { SETTINGS.peek().think };
                             let pct = 100 * n / full.max(1);
                             rsx! {
-                                section { class: "oral-timer", "aria-live": "polite",
+                                section { class: "oral-timer", "aria-live": "polite", "data-paused": if paused() { "yes" } else { "no" },
                                     div { class: "oral-ring", style: "--p: {pct}", span { "{n}" } }
                                     span { class: "oral-status",
-                                        if what_else { {tx::WHAT_ELSE} } else { {tx::THINKING} }
+                                        if paused() { {tx::PAUSED} } else if what_else { {tx::WHAT_ELSE} } else { {tx::THINKING} }
+                                    }
+                                    div { class: "row oral-timer-controls",
+                                        button {
+                                            class: "btn btn-secondary",
+                                            "aria-pressed": if paused() { "true" } else { "false" },
+                                            onclick: move |_| { let p = *paused.peek(); paused.set(!p); },
+                                            if paused() { "▶ {tx::RESUME_TIMER}" } else { "⏸ {tx::PAUSE_TIMER}" }
+                                        }
+                                        button {
+                                            class: "btn btn-ghost",
+                                            onclick: move |_| drive(Step::Ask),
+                                            "↺ {tx::RESTART_TIMER}"
+                                        }
                                     }
                                 }
                             }
@@ -423,9 +500,39 @@ fn Runner() -> Element {
                 secondary: revealed.then(|| rsx! {
                     section { class: "card oral-answer",
                         h2 { class: "small", {tx::ANSWER} }
-                        ul { class: "en", dir: "ltr", lang: "en",
-                            for (i, line) in p.answer.iter().enumerate() {
-                                li { key: "{i}", "{line}" }
+                        p { class: "muted small", {tx::TICK_HINT} }
+                        // The model answer as a checklist he ticks against
+                        // what he said; the rating stays his.
+                        ul { class: "oral-points", lang: "en",
+                            for (i, line) in points.iter().cloned().enumerate() {
+                                li { key: "{i}",
+                                    button {
+                                        class: "oral-point",
+                                        dir: "ltr",
+                                        "aria-pressed": if ticked.read().contains(&i) { "true" } else { "false" },
+                                        onclick: move |_| {
+                                            let mut t = ticked.write();
+                                            if !t.remove(&i) {
+                                                t.insert(i);
+                                            }
+                                        },
+                                        span { class: "oral-tick", aria_hidden: "true", if ticked.read().contains(&i) { "✓" } else { "" } }
+                                        span { "{line}" }
+                                    }
+                                }
+                            }
+                        }
+                        p { class: "small oral-said", "data-enough": if enough { "yes" } else { "no" },
+                            "{tx::SAID} " bdi { class: "num-ltr", "{said} / {points.len()}" }
+                            if let Some((pass, _)) = p.pass {
+                                " · {tx::PASS} " bdi { class: "num-ltr", "{pass}" }
+                                if enough { " · {tx::ENOUGH}" }
+                            }
+                        }
+                        if !notes.read().trim().is_empty() {
+                            div { class: "oral-your-notes",
+                                h3 { class: "small", {tx::YOUR_NOTES} }
+                                p { lang: "en", dir: "auto", "{notes}" }
                             }
                         }
                     }
@@ -445,6 +552,7 @@ fn Runner() -> Element {
                     }
                     button {
                         class: "oral-big good",
+                        "data-suggest": if enough { "yes" } else { "no" },
                         "aria-keyshortcuts": "3 2 Space",
                         onclick: move |_| grade_turn(turn, Some(Grade::Good)),
                         span { class: "big-label", {tx::GOOD} }
@@ -464,18 +572,27 @@ fn Runner() -> Element {
     }
 }
 
-/// Counts down `secs`, showing each second. `false` if the step was replaced.
+/// Counts down `secs`, showing each second; time stands still while
+/// `paused`. `false` if the step was replaced.
 async fn countdown(
     secs: u32,
     show: fn(u32) -> Phase,
     mut phase: Signal<Phase>,
+    paused: Signal<bool>,
     live: impl Fn() -> bool,
 ) -> bool {
+    const TICK: Duration = Duration::from_millis(100);
     for n in (1..=secs).rev() {
         phase.set(show(n));
-        tokio::time::sleep(Duration::from_secs(1)).await;
-        if !live() {
-            return false;
+        let mut ran = Duration::ZERO;
+        while ran < Duration::from_secs(1) {
+            tokio::time::sleep(TICK).await;
+            if !live() {
+                return false;
+            }
+            if !*paused.peek() {
+                ran += TICK;
+            }
         }
     }
     true

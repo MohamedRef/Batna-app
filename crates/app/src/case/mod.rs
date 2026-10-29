@@ -48,14 +48,24 @@ enum Tab {
     Calculators,
 }
 
+// The tab and the open case or calc item, kept across screens so a case
+// left half-way opens where it was.
+static TAB: GlobalSignal<Tab> = Signal::global(|| Tab::Cases);
+static OPEN: GlobalSignal<Option<String>> = Signal::global(|| None);
+
 #[component]
 pub fn CasesScreen() -> Element {
-    let mut tab = use_signal(|| START_TAB.write().take().unwrap_or(Tab::Cases));
-    let mut open = use_signal(|| None::<String>);
-    let back = move |_| open.set(None);
+    use_hook(|| {
+        if let Some(t) = START_TAB.write().take() {
+            *TAB.write() = t;
+            *OPEN.write() = None;
+        }
+    });
+    let tab = move || *TAB.read();
+    let back = move |_| *OPEN.write() = None;
     rsx! {
         style { {CSS.text()} }
-        if let Some(id) = open() {
+        if let Some(id) = OPEN.read().clone() {
             if tab() == Tab::Cases {
                 CasePlayer { key: "{id}", item_id: id, on_back: back }
             } else {
@@ -68,14 +78,14 @@ pub fn CasesScreen() -> Element {
                         key: "{t:?}",
                         role: "tab",
                         "aria-selected": if tab() == t { "true" } else { "false" },
-                        onclick: move |_| tab.set(t),
+                        onclick: move |_| *TAB.write() = t,
                         {label}
                     }
                 }
             }
             match tab() {
-                Tab::Cases => rsx! { ItemList { kind: "case", on_open: move |id| open.set(Some(id)) } },
-                Tab::CalcItems => rsx! { ItemList { kind: "calc", on_open: move |id| open.set(Some(id)) } },
+                Tab::Cases => rsx! { ItemList { kind: "case", on_open: move |id| *OPEN.write() = Some(id) } },
+                Tab::CalcItems => rsx! { ItemList { kind: "calc", on_open: move |id| *OPEN.write() = Some(id) } },
                 Tab::Calculators => rsx! { Calculators {} },
             }
         }
@@ -187,54 +197,164 @@ pub fn ItemMeta(lecture: String, item_id: String, on_back: EventHandler) -> Elem
     }
 }
 
+/// A case in progress. Global, so leaving the screen half-way and coming
+/// back finds the same step, selection and answers.
+#[derive(Clone, Debug, PartialEq)]
+struct CaseRun {
+    item_id: String,
+    /// Runs past the last index once the case is finished.
+    step: usize,
+    /// The option selected on this step but not yet checked (written index).
+    draft: Option<usize>,
+    /// The checked option on this step.
+    picked: Option<usize>,
+    /// A step without options: its answer is showing.
+    shown: bool,
+    /// One entry per finished step: right or not, and the option picked
+    /// (written index; `None` when he graded himself).
+    results: Vec<(bool, Option<usize>)>,
+    started: i64,
+}
+
+impl CaseRun {
+    fn new(item_id: &str) -> Self {
+        CaseRun {
+            item_id: item_id.to_owned(),
+            step: 0,
+            draft: None,
+            picked: None,
+            shown: false,
+            results: Vec::new(),
+            started: now_ms(),
+        }
+    }
+
+    /// Select an option; a checked step is locked.
+    fn select(&mut self, option: usize) {
+        if self.picked.is_none() && self.results.len() == self.step {
+            self.draft = Some(option);
+        }
+    }
+
+    /// Check the selection against the step's answer, once.
+    fn check(&mut self, answer: Option<usize>) -> bool {
+        if self.picked.is_some() || self.results.len() != self.step {
+            return false;
+        }
+        let Some(d) = self.draft.take() else { return false };
+        self.picked = Some(d);
+        self.results.push((answer == Some(d), Some(d)));
+        true
+    }
+
+    /// A step without options, graded by himself.
+    fn grade_self(&mut self, right: bool) {
+        if self.results.len() == self.step {
+            self.results.push((right, None));
+        }
+    }
+
+    fn next(&mut self) {
+        if self.results.len() > self.step {
+            self.step += 1;
+            self.draft = None;
+            self.picked = None;
+            self.shown = false;
+        }
+    }
+}
+
+static RUN: GlobalSignal<Option<CaseRun>> = Signal::global(|| None);
+
+/// Brings a step of the case into view (the stepper's buttons).
+fn scroll_to(id: &str) {
+    document::eval(&format!(
+        r#"document.getElementById("{id}")?.scrollIntoView({{behavior: "smooth", block: "start"}});"#
+    ));
+}
+
 #[component]
 pub fn CasePlayer(item_id: String, on_back: EventHandler) -> Element {
-    // `step` runs past the last index once the case is finished.
-    let mut step = use_signal(|| 0usize);
-    let mut picked = use_signal(|| None::<usize>);
-    let mut shown = use_signal(|| false);
-    // One entry per finished step: right or not, and the option picked
-    // (written index; `None` when he graded himself).
-    let mut results = use_signal(Vec::<(bool, Option<usize>)>::new);
-    let mut started = use_signal(now_ms);
     let store = use_case_store();
+    if RUN.peek().as_ref().is_none_or(|r| r.item_id != item_id) {
+        *RUN.write() = Some(CaseRun::new(&item_id));
+    }
+    let Some(run) = RUN.read().clone() else { return rsx! {} };
 
     let Some((lecture, item)) = find_item(&item_id) else { return rsx! {} };
     let item = effective(store.as_ref(), item);
     let Body::Case { stem, steps } = &item.body else { return rsx! {} };
     let total = steps.len();
-    let k = step();
+    let k = run.step;
     let done = k >= total;
-    let answered = results.read().len() > k;
+    let answered = run.results.len() > k;
     let page = item.src.page;
     let record_id = item.id.clone();
     let step_answer = steps.get(k).and_then(|s| s.answer);
     // A fresh order on every attempt, steady while the step is open.
-    let order = steps.get(k).map_or_else(Vec::new, |s| option_order(&s.options, started() as u64, k));
-
-    let mut answer = move |right: bool, pick: Option<usize>| {
-        if results.read().len() == step() {
-            results.write().push((right, pick));
+    let order = steps.get(k).map_or_else(Vec::new, |s| option_order(&s.options, run.started as u64, k));
+    let selected = run.picked.or(run.draft);
+    let edit = |f: &dyn Fn(&mut CaseRun)| {
+        if let Some(r) = RUN.write().as_mut() {
+            f(r);
         }
+    };
+    let leave = move |_| {
+        // A finished case starts fresh next time; one half-way is kept.
+        if RUN.peek().as_ref().is_some_and(|r| r.step >= total) {
+            *RUN.write() = None;
+        }
+        on_back.call(());
     };
 
     rsx! {
         article { class: "player case",
-            ItemMeta { lecture: lecture.to_owned(), item_id: item.id.clone(), on_back }
+            ItemMeta { lecture: lecture.to_owned(), item_id: item.id.clone(), on_back: leave }
+            // Where he is in the case: each step done (✓/✗) opens its place
+            // in the data, the current one its question.
+            ol { class: "case-stepper", "aria-label": tx::STEPS_LABEL,
+                for i in 0..total {
+                    li { key: "{i}",
+                        if i < k || (i == k && !done) {
+                            button {
+                                class: "case-stepper-step",
+                                "data-state": match run.results.get(i) {
+                                    _ if i == k => "now",
+                                    Some((true, _)) => "ok",
+                                    _ => "miss",
+                                },
+                                "aria-current": if i == k { "step" } else { "false" },
+                                onclick: move |_| scroll_to(&if i == k { "case-q".to_string() } else { format!("case-step-{i}") }),
+                                span { class: "num-ltr", "{i + 1}" }
+                                match run.results.get(i) {
+                                    Some((true, _)) if i < k => rsx! { span { aria_hidden: "true", "✓" } },
+                                    Some(_) if i < k => rsx! { span { aria_hidden: "true", "✗" } },
+                                    _ => rsx! { span { {tx::NOW} } },
+                                }
+                            }
+                        } else {
+                            span { class: "case-stepper-later", "data-state": if done { "ok" } else { "later" },
+                                span { class: "num-ltr", "{i + 1}" }
+                            }
+                        }
+                    }
+                }
+            }
             div { class: "case-grid",
                 // What is known so far: the stem, every reveal up to this
                 // step, and each finished step's question and answer.
                 section { class: "card case-data",
-                    bdi { class: "case-stem", "{stem}" }
+                    h2 { class: "label", {tx::KNOWN} }
+                    bdi { class: "case-stem", lang: "en", "{stem}" }
                     for (i, s) in steps.iter().enumerate().take(k + 1) {
-                        div { key: "{i}", class: "case-history",
+                        div { key: "{i}", id: "case-step-{i}", class: "case-history",
                             if let Some(reveal) = &s.reveal {
-                                div { class: if i == k { "case-reveal new" } else { "case-reveal" },
-                                    span { class: "small muted", "{tx::STEP} {i + 1}" if i == k { " · {tx::NEW_DATA}" } }
-                                    bdi { "{reveal}" }
+                                div { class: if i == k && !done { "case-reveal new" } else { "case-reveal" },
+                                    span { class: "small muted", "{tx::STEP} " span { class: "num-ltr", "{i + 1}" } if i == k && !done { " · {tx::NEW_DATA}" } }
+                                    bdi { lang: "en", "{reveal}" }
                                 }
                             }
-                            if let Some((ok, pick)) = results.read().get(i).copied().filter(|_| i < k) {
+                            if let Some((ok, pick)) = run.results.get(i).copied().filter(|_| i < k) {
                                 div { class: if ok { "case-done ok" } else { "case-done miss" },
                                     bdi { class: "small case-done-q", dir: "ltr", "{s.question}" }
                                     match pick.and_then(|p| s.options.get(p)) {
@@ -260,9 +380,9 @@ pub fn CasePlayer(item_id: String, on_back: EventHandler) -> Element {
                     }
                 }
                 if !done {
-                    section { class: "card case-step", key: "{k}",
-                        p { class: "small muted", "{tx::STEP} {k + 1} {tx::OF} {total}" }
-                        bdi { class: "case-question", "{steps[k].question}" }
+                    section { class: "card case-step", key: "{k}", id: "case-q",
+                        p { class: "small muted", "{tx::STEP} " span { class: "num-ltr", "{k + 1} / {total}" } }
+                        bdi { class: "case-question", lang: "en", "{steps[k].question}" }
                         if !steps[k].options.is_empty() {
                             div { class: "options", role: "list",
                                 for (pos, i) in order.iter().copied().enumerate() {
@@ -271,20 +391,37 @@ pub fn CasePlayer(item_id: String, on_back: EventHandler) -> Element {
                                         role: "listitem",
                                         dir: "auto",
                                         "aria-keyshortcuts": option_key(pos),
-                                        class: option_class(i, picked(), steps[k].answer),
-                                        disabled: picked().is_some(),
-                                        onclick: move |_| {
-                                            picked.set(Some(i));
-                                            answer(step_answer == Some(i), Some(i));
-                                        },
-                                        bdi { "{steps[k].options[i]}" }
+                                        "aria-pressed": if selected == Some(i) { "true" } else { "false" },
+                                        class: if option_state(i, run.picked, run.draft, steps[k].answer) == "dim" { "answer case-option dim" } else { "answer case-option" },
+                                        "data-state": option_state(i, run.picked, run.draft, steps[k].answer),
+                                        disabled: run.picked.is_some(),
+                                        onclick: move |_| edit(&|r| r.select(i)),
+                                        span { class: "answer-key", aria_hidden: "true", {option_key(pos)} }
+                                        bdi { class: "answer-text", "{steps[k].options[i]}" }
+                                        match option_state(i, run.picked, run.draft, steps[k].answer) {
+                                            "correct" | "missed" => rsx! { span { class: "answer-mark", "✓ {tx::MARK_RIGHT}" } },
+                                            "wrong" => rsx! { span { class: "answer-mark", "✗ {tx::MARK_YOURS}" } },
+                                            _ => rsx! {},
+                                        }
                                     }
                                 }
                             }
-                        } else if !shown() {
-                            button { class: "btn btn-primary", "aria-keyshortcuts": "Space", onclick: move |_| shown.set(true), {tx::SHOW_ANSWER} }
+                            if run.picked.is_none() {
+                                if run.draft.is_none() {
+                                    p { class: "muted small case-hint", {tx::PICK_FIRST} }
+                                }
+                                button {
+                                    class: "btn btn-primary btn-lg case-check",
+                                    disabled: run.draft.is_none(),
+                                    "aria-keyshortcuts": "Enter",
+                                    onclick: move |_| edit(&|r| { r.check(step_answer); }),
+                                    {tx::CHECK}
+                                }
+                            }
+                        } else if !run.shown {
+                            button { class: "btn btn-primary", "aria-keyshortcuts": "Space", onclick: move |_| edit(&|r| r.shown = true), {tx::SHOW_ANSWER} }
                         }
-                        if picked().is_some() || shown() {
+                        if run.picked.is_some() || run.shown {
                             // Brought into view on the phone, where it would
                             // otherwise open below the fold.
                             div {
@@ -298,35 +435,34 @@ pub fn CasePlayer(item_id: String, on_back: EventHandler) -> Element {
                                         })
                                         .await;
                                 },
-                                if let Some(p) = picked() {
+                                if let Some(p) = run.picked {
                                     p { class: if steps[k].answer == Some(p) { "verdict good" } else { "verdict bad" },
                                         if steps[k].answer == Some(p) { {tx::RIGHT} } else { {tx::WRONG} }
                                     }
                                 }
                                 div { class: "case-why",
-                                    bdi { "{steps[k].why}" }
+                                    bdi { lang: "en", "{steps[k].why}" }
                                     BookPage { page, quote: item.src.quote.clone() }
                                 }
-                                if shown() && !answered {
+                                if run.shown && !answered {
                                     div { class: "row",
-                                        button { class: "btn btn-good", "aria-keyshortcuts": "3", onclick: move |_| answer(true, None), {tx::GOT_IT} }
-                                        button { class: "btn btn-secondary", "aria-keyshortcuts": "1", onclick: move |_| answer(false, None), {tx::MISSED} }
+                                        button { class: "btn btn-good", "aria-keyshortcuts": "3", onclick: move |_| edit(&|r| r.grade_self(true)), {tx::GOT_IT} }
+                                        button { class: "btn btn-secondary", "aria-keyshortcuts": "1", onclick: move |_| edit(&|r| r.grade_self(false)), {tx::MISSED} }
                                     }
                                 }
                                 if answered {
                                     button {
-                                        class: "btn btn-primary",
+                                        class: "btn btn-primary btn-lg",
                                         "aria-keyshortcuts": "Enter",
                                         onclick: {
                                             let record_id = record_id.clone();
                                             move |_| {
-                                                if k + 1 == total {
-                                                    let right = results.read().iter().filter(|r| r.0).count() as u32;
-                                                    record(store.as_ref(), &record_id, right, total as u32, started());
+                                                let Some(r) = RUN.peek().clone() else { return };
+                                                if r.step + 1 == total && r.results.len() == total {
+                                                    let right = r.results.iter().filter(|x| x.0).count() as u32;
+                                                    record(store.as_ref(), &record_id, right, total as u32, r.started);
                                                 }
-                                                step.set(k + 1);
-                                                picked.set(None);
-                                                shown.set(false);
+                                                edit(&|r| r.next());
                                             }
                                         },
                                         if k + 1 == total { {tx::FINISH} } else { {tx::NEXT} }
@@ -337,22 +473,40 @@ pub fn CasePlayer(item_id: String, on_back: EventHandler) -> Element {
                     }
                 } else {
                     Summary {
-                        results: results().iter().map(|r| r.0).collect::<Vec<_>>(),
-                        steps: steps.iter().map(|s| (s.question.clone(), s.why.clone())).collect::<Vec<_>>(),
+                        recap: steps
+                            .iter()
+                            .zip(&run.results)
+                            .map(|(s, &(ok, pick))| Recap {
+                                ok,
+                                question: s.question.clone(),
+                                yours: pick.and_then(|p| s.options.get(p)).cloned(),
+                                right: s.answer.filter(|_| !ok).and_then(|a| s.options.get(a)).cloned(),
+                                why: s.why.clone(),
+                            })
+                            .collect::<Vec<_>>(),
                         update: item.update.as_ref().map(|u| format!("{} ({})", u.text, u.reference)),
-                        on_again: move |_| {
-                            step.set(0);
-                            picked.set(None);
-                            shown.set(false);
-                            results.set(Vec::new());
-                            started.set(now_ms());
+                        on_again: {
+                            let id = item_id.clone();
+                            move |_| *RUN.write() = Some(CaseRun::new(&id))
                         },
-                        on_back,
+                        on_back: move |_| leave(()),
                     }
                 }
             }
         }
     }
+}
+
+/// One finished step in the recap.
+#[derive(Clone, Debug, PartialEq)]
+struct Recap {
+    ok: bool,
+    question: String,
+    /// The option he picked; `None` when he graded himself.
+    yours: Option<String>,
+    /// The right option, when his was not.
+    right: Option<String>,
+    why: String,
 }
 
 /// The order a step's options are shown in, as written indices. Shuffled
@@ -371,26 +525,33 @@ fn option_key(pos: usize) -> &'static str {
     ["A", "B", "C", "D", "E", "F"].get(pos).copied().unwrap_or("")
 }
 
-fn option_class(i: usize, picked: Option<usize>, answer: Option<usize>) -> &'static str {
+/// The shared `button.answer` state (docs/DESIGN.md) of option `i`; "dim"
+/// is an option neither picked nor right, once checked.
+fn option_state(
+    i: usize,
+    picked: Option<usize>,
+    draft: Option<usize>,
+    answer: Option<usize>,
+) -> &'static str {
     match picked {
-        None => "option",
-        Some(_) if answer == Some(i) => "option right",
-        Some(p) if p == i => "option wrong",
-        Some(_) => "option dim",
+        None if draft == Some(i) => "selected",
+        None => "",
+        Some(p) if answer == Some(i) && p == i => "correct",
+        Some(_) if answer == Some(i) => "missed",
+        Some(p) if p == i => "wrong",
+        Some(_) => "dim",
     }
 }
 
 #[component]
 fn Summary(
-    results: Vec<bool>,
-    /// Each step's question and explanation.
-    steps: Vec<(String, String)>,
+    recap: Vec<Recap>,
     update: Option<String>,
     on_again: EventHandler,
     on_back: EventHandler,
 ) -> Element {
-    let right = results.iter().filter(|r| **r).count();
-    let total = results.len();
+    let right = recap.iter().filter(|r| r.ok).count();
+    let total = recap.len();
     let message = match grade_for(right as u32, total as u32) {
         Grade::Good | Grade::Easy => tx::ALL_RIGHT,
         Grade::Hard => tx::SOME_RIGHT,
@@ -398,16 +559,29 @@ fn Summary(
     };
     rsx! {
         section { class: "card case-summary",
-            p { class: "case-score", bdi { dir: "ltr", "{right} / {total}" } " " {tx::SCORE} }
+            p { class: "case-score", bdi { class: "num-ltr", "{right} / {total}" } " " {tx::SCORE} }
             p { {message} }
-            ol { class: "case-steps-done", dir: "ltr",
-                for (i, (ok, (question, why))) in results.iter().zip(steps.iter()).enumerate() {
-                    li { key: "{i}", class: if *ok { "ok" } else { "miss" },
-                        p { class: "case-done-q",
-                            span { aria_hidden: "true", if *ok { "✓ " } else { "✗ " } }
-                            "{question}"
+            // The reasoning, step by step: the question, his answer, the
+            // right one when his wasn't, and why.
+            h2 { class: "label", {tx::RECAP} }
+            ol { class: "case-steps-done",
+                for (i, r) in recap.into_iter().enumerate() {
+                    li { key: "{i}", class: if r.ok { "ok" } else { "miss" },
+                        p { class: "case-done-q", dir: "ltr", lang: "en",
+                            span { aria_hidden: "true", if r.ok { "✓ " } else { "✗ " } }
+                            "{r.question}"
                         }
-                        p { class: "small muted", "{why}" }
+                        p { class: "small",
+                            "{tx::YOURS} "
+                            match r.yours {
+                                Some(y) => rsx! { bdi { lang: "en", "{y}" } },
+                                None => rsx! { if r.ok { {tx::GOT_IT} } else { {tx::MISSED} } },
+                            }
+                        }
+                        if let Some(right) = r.right {
+                            p { class: "small", "{tx::CORRECT_WAS} " bdi { lang: "en", "{right}" } }
+                        }
+                        p { class: "small muted", dir: "ltr", lang: "en", "{r.why}" }
                     }
                 }
             }
@@ -475,10 +649,12 @@ mod tests {
 
     #[test]
     fn options_are_marked_after_a_pick() {
-        assert_eq!(option_class(0, None, Some(1)), "option");
-        assert_eq!(option_class(1, Some(0), Some(1)), "option right");
-        assert_eq!(option_class(0, Some(0), Some(1)), "option wrong");
-        assert_eq!(option_class(2, Some(0), Some(1)), "option dim");
+        assert_eq!(option_state(0, None, None, Some(1)), "");
+        assert_eq!(option_state(0, None, Some(0), Some(1)), "selected");
+        assert_eq!(option_state(1, Some(1), None, Some(1)), "correct");
+        assert_eq!(option_state(1, Some(0), None, Some(1)), "missed");
+        assert_eq!(option_state(0, Some(0), None, Some(1)), "wrong");
+        assert_eq!(option_state(2, Some(0), None, Some(1)), "dim");
     }
 
     fn opts(xs: &[&str]) -> Vec<String> {
@@ -502,6 +678,30 @@ mod tests {
         // "All of the above" steps keep their written order.
         let fixed = opts(&["a", "b", "c", "All of the above"]);
         assert_eq!(option_order(&fixed, 7, 0), [0, 1, 2, 3]);
+    }
+
+    #[test]
+    fn a_step_is_selected_then_checked_once() {
+        let mut r = CaseRun::new("hb.L03.050");
+        // Nothing selected: Check does nothing.
+        assert!(!r.check(Some(1)));
+        r.select(0);
+        r.select(1);
+        assert_eq!((r.draft, r.results.len()), (Some(1), 0));
+        assert!(r.check(Some(1)));
+        assert_eq!((r.picked, r.results.clone()), (Some(1), vec![(true, Some(1))]));
+        // Locked: a second Check or a new selection changes nothing.
+        assert!(!r.check(Some(1)));
+        r.select(2);
+        assert_eq!((r.picked, r.draft, r.results.len()), (Some(1), None, 1));
+        r.next();
+        assert_eq!((r.step, r.picked, r.draft), (1, None, None));
+        // Next without an answer stays put.
+        r.next();
+        assert_eq!(r.step, 1);
+        r.grade_self(false);
+        r.grade_self(true);
+        assert_eq!(r.results, vec![(true, Some(1)), (false, None)]);
     }
 
     #[test]

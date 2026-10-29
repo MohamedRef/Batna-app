@@ -21,12 +21,23 @@ fn area_label(area: Area) -> &'static str {
         Area::Tumour => tx::AREA_TUMOUR,
         Area::AcuteFailure => tx::AREA_ACUTE,
         Area::Pancreas => tx::AREA_PANCREAS,
+        Area::Gi => tx::AREA_GI,
         Area::Research => tx::AREA_RESEARCH,
     }
 }
 
-const AREAS: [Area; 6] =
-    [Area::Liver, Area::Ascites, Area::Tumour, Area::AcuteFailure, Area::Pancreas, Area::Research];
+/// The course whose book a calculator's page cites, so its page chip opens
+/// that book (each course's pages start at 1).
+fn area_course(area: Area) -> &'static str {
+    match area {
+        Area::Gi => "git",
+        Area::Research => "res",
+        _ => "hb",
+    }
+}
+
+const AREAS: [Area; 7] =
+    [Area::Liver, Area::Ascites, Area::Tumour, Area::AcuteFailure, Area::Pancreas, Area::Gi, Area::Research];
 
 /// Every calculator, grouped by area. On phones the list and the open
 /// calculator take turns; from 840dp they sit side by side.
@@ -295,7 +306,7 @@ pub fn OutcomeCard(id: &'static str, outcome: Outcome) -> Element {
             p { class: "small muted calc-source",
                 span { {tx::SOURCE} ": " bdi { "{source}" } }
                 if let Some(page) = outcome.page {
-                    crate::hover::BookPage { page, quote: None }
+                    crate::hover::BookPage { page, quote: None, of: calc::spec(id).map_or("hb", |s| area_course(s.area)).to_string() }
                 }
             }
         }

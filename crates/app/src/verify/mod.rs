@@ -134,7 +134,11 @@ fn Bar(item_id: String) -> Element {
     };
     rsx! {
         style { {CSS.text()} }
-        div { class: "verify", role: "group", aria_label: tx::GROUP,
+        section { class: "verify", role: "group", aria_label: tx::GROUP,
+            p { class: "verify-head",
+                strong { {tx::GROUP} }
+                span { class: "muted small", {tx::HINT} }
+            }
             {body}
             if failed() {
                 p { class: "verify-failed", role: "alert", {tx::NOT_SAVED} }

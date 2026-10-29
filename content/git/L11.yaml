@@ -1,0 +1,1056 @@
+schema: batna.content/v1
+lecture: git.L11
+title: Gastrointestinal Bleeding
+author: Prof. Abeer Ibrahim
+book: { chapter: 2, pages: [299, 312] }
+topics:
+  - { id: overview, title: "Burden, types and clinical presentation" }
+  - { id: causes, title: "Causes of upper GI bleeding" }
+  - { id: risk, title: "Risk stratification and the Glasgow-Blatchford score" }
+  - { id: resuscitation, title: "Resuscitation, fluids and transfusion" }
+  - { id: antithrombotics, title: "Antiplatelets and anticoagulants in UGIB" }
+  - { id: drugs, title: "PPI, vasoactive drugs and prokinetics" }
+  - { id: endoscopy, title: "Endoscopic and post-endoscopic management" }
+  - { id: variceal, title: "Variceal bleeding: risk, screening and management" }
+items:
+  # ---------- p299-300: overview ----------
+  - id: git.L11.001
+    kind: cloze
+    topic: overview
+    text: Acute GI bleeding causes {{c1::250,000-300,000}} hospitalizations a year, with a mortality of about {{c2::6-8%}}.
+    src: { page: 299, quote: "Acute gastrointestinal bleeding is one of the most common medical emergencies with 250,000 to 300,000 hospitalizations annually." }
+    status: unverified
+    tags: [numbers]
+  - id: git.L11.002
+    kind: card
+    topic: overview
+    front: Who has the highest risk of dying from GI bleeding?
+    back: Patients of advanced age or with severe comorbidities.
+    src: { page: 299, quote: "The risk of mortality is highest in patients of advanced age or those with severe co morbidities." }
+    status: unverified
+  - id: git.L11.003
+    kind: card
+    topic: overview
+    front: What landmark separates upper from lower GI bleeding?
+    back: The ligament of Treitz. Upper GI bleeding comes from a source proximal to it.
+    src: { page: 299, quote: "Upper GI bleeding (UGIB) is defined as bleeding derived from a source proximal to the ligament of Treitz." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L11.004
+    kind: cloze
+    topic: overview
+    text: Upper GI bleeding is about {{c1::4}} times more common than lower GI bleeding.
+    src: { page: 299, quote: "Bleeding from the upper GI tract is approximately 4 times more common than bleeding from the lower GI tract." }
+    status: unverified
+    tags: [numbers]
+  - id: git.L11.005
+    kind: card
+    topic: overview
+    front: How is GI bleeding classified by severity (course)?
+    back: Acute, chronic, intermittent, or occult.
+    src: { page: 299, quote: "Acute-chronic-intermittent- occult" }
+    status: unverified
+  - id: git.L11.006
+    kind: card
+    topic: overview
+    front: How is UGIB divided by source?
+    back: Non-variceal and variceal.
+    src: { page: 300, quote: "UGIB can be divided according to its source into non variceal and variceal." }
+    status: unverified
+  - id: git.L11.007
+    kind: card
+    topic: overview
+    front: What does hematemesis with blood clots indicate?
+    back: The most severe form; a rapid rate of bleeding that does not allow the clots to dissolve.
+    src: { page: 300, quote: "The most severe form presents with hematemesis with blood clots represent rapid rate of bleeding" }
+    status: unverified
+  - id: git.L11.008
+    kind: card
+    topic: overview
+    front: What does hematochezia mean when the source is in the upper GI tract?
+    back: Rapid, huge blood loss, about 1 liter.
+    src: { page: 300, quote: "Hematochezia (fresh bleeding per rectum) if associated with upper GI bleeding presents rapid and huge blood loss (about 1 liter)." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L11.009
+    kind: card
+    topic: overview
+    front: Describe melena and what it usually indicates.
+    back: Dark, tarry, offensive black stool from slow upper GI bleeding; it may follow hematemesis or even gum bleeding for a few days. It is rarely from very slow lower GI bleeding.
+    src: { page: 300, quote: "Melena is dark tarry blackish stool with offensive odor presents slow upper GIT bleeding" }
+    status: unverified
+  - id: git.L11.010
+    kind: cloze
+    topic: overview
+    text: Melena can develop after as little as {{c1::50-100 mL}} of upper GI blood loss.
+    src: { page: 300, quote: "Melena develops after as little as 50–100 mL of blood loss in the upper gastrointestinal tract." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: git.L11.011
+    kind: mcq
+    topic: overview
+    stem: A 60-year-old on aspirin passes large volumes of fresh red blood per rectum, and his BP is 85/50 mmHg. Nasogastric aspirate shows red blood. What does the lecture say about hematochezia from an upper source?
+    options: ["It means rapid, huge blood loss of about 1 liter", It means slow bleeding of 50-100 mL, It rules out an upper source, It is the usual picture of a Mallory-Weiss tear, It means bleeding has stopped]
+    answer: 0
+    why:
+      - Hematochezia with an upper source presents rapid and huge loss (about 1 liter).
+      - 50-100 mL is the volume that can cause melena.
+      - The red aspirate confirms an upper source; hematochezia does not exclude it.
+      - The lecture does not tie hematochezia to Mallory-Weiss tears.
+      - Fresh blood and hypotension mean active, rapid bleeding.
+    src: { page: 300, quote: "Hematochezia (fresh bleeding per rectum) if associated with upper GI bleeding presents rapid and huge blood loss (about 1 liter)." }
+    status: unverified
+  # ---------- p300-301 + table p308: causes ----------
+  - id: git.L11.012
+    kind: cloze
+    topic: causes
+    text: Peptic ulcers cause {{c1::40%}} of major upper GI bleeding, with an overall mortality below {{c2::5%}}.
+    src: { page: 300, quote: "Peptic ulcers account for 40% of major upper gastrointestinal bleeding with an overall mortality rate of less than 5%." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: git.L11.013
+    kind: card
+    topic: causes
+    front: Why is bleeding from peptic ulcers declining?
+    back: H. pylori eradication and PPI prophylaxis in high-risk patients.
+    src: { page: 300, quote: "The incidence of bleeding from ulcers is declining due to eradication of H pylori and prophylaxis with proton pump inhibitors in high-risk patients." }
+    status: unverified
+  - id: git.L11.014
+    kind: cloze
+    topic: causes
+    text: Portal hypertension causes {{c1::10-20%}} of upper GI bleeding, mostly from {{c2::esophageal varices}}.
+    src: { page: 300, quote: "Portal hypertension accounts for 10–20% of upper gastrointestinal bleeding." }
+    status: unverified
+    tags: [numbers]
+  - id: git.L11.015
+    kind: card
+    topic: causes
+    front: Apart from esophageal varices, what portal hypertensive lesions bleed?
+    back: Gastric or duodenal varices, and portal hypertensive gastropathy (less common).
+    src: { page: 300, quote: "Bleeding usually arises from esophageal varices and less commonly gastric or duodenal varices or portal hypertensive gastropathy." }
+    status: unverified
+  - id: git.L11.016
+    kind: cloze
+    topic: causes
+    text: Vascular anomalies cause {{c1::7%}} of acute upper GI bleeding; the most common are {{c2::angioectasias (angiodysplasias)}}.
+    src: { page: 300, quote: "They account for 7% of cases of acute upper tract bleeding. The most common are Angio ectasias (angiodysplasias)" }
+    status: unverified
+    tags: [numbers]
+  - id: git.L11.017
+    kind: card
+    topic: causes
+    front: What are angioectasias, and where are they most common?
+    back: Distorted, aberrant submucosal vessels of 1-10 mm from chronic intermittent obstruction of submucosal veins; bright red and stellate; most common in the right colon.
+    src: { page: 301, quote: "They have a bright red stellate appearance and occur throughout the gastrointestinal tract but most commonly in the right colon." }
+    status: unverified
+  - id: git.L11.018
+    kind: card
+    topic: causes
+    front: What are telangiectasias, and with which systemic conditions do they occur?
+    back: Small cherry-red lesions from dilated venules; part of hereditary hemorrhagic telangiectasia or CREST syndrome, or sporadic.
+    src: { page: 301, quote: "Telangiectasias are small, cherry red lesions caused by dilation of venules that may be part of systemic conditions" }
+    status: unverified
+  - id: git.L11.019
+    kind: card
+    topic: causes
+    front: What is a Dieulafoy lesion?
+    back: An aberrant, large-caliber submucosal artery, most commonly in the proximal stomach, that causes recurrent, intermittent bleeding.
+    src: { page: 301, quote: "The Dieulafoy lesion is an aberrant, large-caliber submucosal artery, most commonly in the proximal stomach that causes recurrent, intermittent bleeding." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L11.020
+    kind: cloze
+    topic: causes
+    text: Gastric neoplasms cause {{c1::1%}} of upper GI hemorrhages; erosive gastritis causes less than {{c2::5%}} of severe bleeds because it is {{c3::superficial}}.
+    src: { page: 301, quote: "Gastric neoplasms result in 1% of upper gastrointestinal hemorrhages. Erosive gastritis is superficial" }
+    status: unverified
+    tags: [numbers]
+  - id: git.L11.021
+    kind: card
+    topic: causes
+    front: Three causes of gastric mucosal erosions?
+    back: NSAIDs, alcohol, and severe medical or surgical illness (stress-related mucosal disease).
+    src: { page: 301, quote: "Gastric mucosal erosions are due to NSAIDs, alcohol, or severe medical or surgical illness (stress-related mucosal disease)." }
+    status: unverified
+  - id: git.L11.022
+    kind: card
+    topic: causes
+    front: When may erosive esophagitis cause significant upper GI bleeding?
+    back: Rarely, when severe from chronic GERD, especially in long-term bedbound patients.
+    src: { page: 301, quote: "Severe erosive esophagitis due to chronic gastroesophageal reflux may rarely cause significant upper gastrointestinal bleeding, especially in patients who are bedbound long-term." }
+    status: unverified
+  - id: git.L11.023
+    kind: cloze
+    topic: causes
+    text: An aortoenteric fistula complicates {{c1::2%}} of abdominal aortic grafts, or rarely presents a previously untreated {{c2::aneurysm}}.
+    src: { page: 301, quote: "An aortoenteric fistula complicates 2% of abdominal aortic grafts or, rarely, can occur as the initial presentation of a previously untreated aneurysm." }
+    status: unverified
+  - id: git.L11.024
+    kind: card
+    topic: causes
+    front: "Hemobilia and hemosuccus pancreaticus: what are they and their causes?"
+    back: "Unusual causes of UGIB. Hemobilia: bleeding into the biliary tree from hepatic tumor, angioma or penetrating trauma. Hemosuccus pancreaticus: from pancreatic malignancy or pseudoaneurysm."
+    src: { page: 301, quote: "Unusual causes of upper gastrointestinal bleeding include hemobilia (from hepatic tumor, angioma, penetrating trauma), and pancreatic malignancy and pseudoaneurysm" }
+    status: unverified
+  - id: git.L11.025
+    kind: table
+    topic: causes
+    title: Etiologies of non-variceal upper GI bleeding (Table 1)
+    columns: [Group, Causes]
+    rows:
+      - [Ulcer / inflammation, "Peptic ulcer; erosive esophagitis, gastritis or duodenitis; anastomotic ulcers (post gastric bypass)"]
+      - [Vascular lesions, "GAVE; Dieulafoy lesion; angiodysplasia / AVM; aorto-enteric fistula"]
+      - [Congestive gastropathy, Portal hypertensive gastropathy]
+      - [Malignant lesions, "GIST; non-GIST (lipoma, schwannoma); gastric and esophageal cancer; metastases"]
+      - [Post procedural, "Endoscopic mucosal and submucosal dissection; post sphincterotomy"]
+      - [Others, "Mallory-Weiss tear; Cameron ulcers"]
+    blanks: [[1, 1], [2, 1], [4, 1], [5, 1]]
+    src: { page: 308, quote: "Etiologies of non-variceal upper gastrointestinal bleeding" }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L11.026
+    kind: mcq
+    topic: causes
+    stem: A 55-year-old has three episodes of large painless hematemesis over a month; two endoscopies were normal. On the third, a single pulsating vessel is seen in normal mucosa of the proximal stomach. Diagnosis?
+    options: [Dieulafoy lesion, Angioectasia, Mallory-Weiss tear, Portal hypertensive gastropathy, Cameron ulcer]
+    answer: 0
+    why:
+      - An aberrant large submucosal artery in the proximal stomach with recurrent intermittent bleeding is a Dieulafoy lesion.
+      - Angioectasias are 1-10 mm bright red stellate lesions, most common in the right colon.
+      - A Mallory-Weiss tear is a mucosal tear, usually after retching.
+      - PHG occurs with portal hypertension and gives mosaic congested mucosa.
+      - Cameron ulcers sit in a hiatal hernia.
+    src: { page: 301, quote: "The Dieulafoy lesion is an aberrant, large-caliber submucosal artery, most commonly in the proximal stomach that causes recurrent, intermittent bleeding." }
+    status: unverified
+  - id: git.L11.027
+    kind: mcq
+    topic: causes
+    stem: A 68-year-old with an abdominal aortic graft placed 3 years ago has a small "herald" hematemesis followed by massive bleeding. Which cause should be suspected?
+    options: [Aortoenteric fistula, Erosive gastritis, Gastric cancer, Hemobilia, Telangiectasia]
+    answer: 0
+    why:
+      - An aortoenteric fistula complicates 2% of abdominal aortic grafts.
+      - Erosive gastritis is superficial and rarely causes severe bleeding.
+      - Gastric neoplasms cause only 1% and are not tied to grafts.
+      - Hemobilia follows hepatic tumor, angioma or trauma.
+      - Telangiectasias give small cherry-red lesions with chronic loss.
+    src: { page: 301, quote: "An aortoenteric fistula complicates 2% of abdominal aortic grafts" }
+    status: unverified
+  - id: git.L11.028
+    kind: mcq
+    topic: causes
+    stem: Which is the most common cause of major upper GI bleeding according to the lecture?
+    options: [Peptic ulcer (40%), Portal hypertension (10-20%), Vascular anomalies (7%), Erosive gastritis (<5%), Gastric neoplasms (1%)]
+    answer: 0
+    why:
+      - Peptic ulcers account for 40% of major UGIB.
+      - Portal hypertension accounts for 10-20%.
+      - Vascular anomalies account for 7%.
+      - Erosive gastritis causes under 5% of severe bleeds.
+      - Gastric neoplasms cause 1%.
+    src: { page: 300, quote: "Peptic ulcers account for 40% of major upper gastrointestinal bleeding with an overall mortality rate of less than 5%." }
+    status: unverified
+  # ---------- p301-302 + table p309: risk stratification ----------
+  - id: git.L11.029
+    kind: enumerate
+    topic: risk
+    prompt: Enumerate the questions the lecture asks in every case of GI bleeding.
+    points:
+      - How to stratify by severity
+      - What initial assessment fits the severity and type
+      - When the patient can be discharged and followed as an outpatient
+      - What the indications for admission are
+      - Where to admit (ward or ICU)
+    pass: 4
+    src: { page: 301, quote: "When the patient with acute bleeding can be discharged and followed up as an outpatient?" }
+    status: unverified
+  - id: git.L11.030
+    kind: card
+    topic: risk
+    front: Which score is recommended for pre-endoscopy risk stratification in UGIB?
+    back: The Glasgow-Blatchford score (GBS).
+    src: { page: 302, quote: "The use of the Glasgow– Blatchford Score (GBS) (Table 2) is highly recommended for preendoscopy risk stratification." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L11.031
+    kind: cloze
+    topic: risk
+    text: Patients with a GBS of {{c1::≤ 1}} are at very low risk and can be managed as {{c2::outpatients with outpatient endoscopy}}.
+    src: { page: 302, quote: "Patients with GBS ≤ 1 are at very low risk of rebleeding, mortality within 30 days, or needing hospital-based intervention" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: git.L11.032
+    kind: card
+    topic: risk
+    front: What does the GBS predict best?
+    back: The need for hospital-based intervention (RBC transfusion, endoscopic treatment, arterial embolization, surgery) or death; it has the highest accuracy for this.
+    src: { page: 302, quote: "The GBS was reported to have the highest accuracy for predicting need for hospital-based intervention" }
+    status: unverified
+  - id: git.L11.033
+    kind: enumerate
+    topic: risk
+    prompt: Enumerate the indications for ICU admission in acute upper GI bleeding.
+    points:
+      - Active bleeding (hematemesis or bright red blood on NG aspirate)
+      - Shock
+      - Persistent hemodynamic derangement despite fluid resuscitation
+      - Serious comorbid medical illness
+      - Evidence of advanced liver disease
+    pass: 4
+    src: { page: 302, quote: "shock, persistent hemodynamic derangement despite fluid resuscitation, serious comorbid medical illness, or evidence of advanced liver disease require admission to an ICU." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L11.034
+    kind: table
+    topic: risk
+    title: Glasgow-Blatchford score (Table 2)
+    columns: [Risk factor at admission, Range, Points]
+    rows:
+      - ["BUN (mg/dL)", "18.2 to <22.4", "2"]
+      - ["BUN (mg/dL)", "22.4 to <28.0", "3"]
+      - ["BUN (mg/dL)", "28.0 to <70.0", "4"]
+      - ["BUN (mg/dL)", "≥70.0", "6"]
+      - ["Hemoglobin (g/dL)", "12.0 to <13.0 (men); 10.0 to <12.0 (women)", "1"]
+      - ["Hemoglobin (g/dL)", "10.0 to <12.0 (men)", "3"]
+      - ["Hemoglobin (g/dL)", "<10.0", "6"]
+      - ["Systolic BP (mmHg)", "100-109", "1"]
+      - ["Systolic BP (mmHg)", "90-99", "2"]
+      - ["Systolic BP (mmHg)", "<90", "3"]
+      - ["Heart rate", "≥100/min", "1"]
+      - [Melena, present, "1"]
+      - [Syncope, present, "2"]
+      - [Hepatic disease, present, "2"]
+      - [Cardiac failure, present, "2"]
+    blanks: [[3, 2], [6, 2], [9, 2], [11, 2], [12, 2], [13, 2], [14, 2]]
+    src: { page: 309, quote: "Table 2: Glasgow-Blatchford score" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: git.L11.035
+    kind: cloze
+    topic: risk
+    text: In the Glasgow-Blatchford score, a hemoglobin below {{c1::10}} g/dL or a BUN of {{c2::70}} mg/dL or more each scores {{c3::6}} points.
+    src: { page: 309, quote: "Table 2: Glasgow-Blatchford score" }
+    status: unverified
+    tags: [numbers]
+  - id: git.L11.036
+    kind: cloze
+    topic: risk
+    text: "In the GBS, melena scores {{c1::1}}, while syncope, hepatic disease and cardiac failure each score {{c2::2}}."
+    src: { page: 309, quote: "Table 2: Glasgow-Blatchford score" }
+    status: unverified
+    tags: [numbers]
+  - id: git.L11.037
+    kind: mcq
+    topic: risk
+    stem: "A 30-year-old man had one black stool. HR 88/min, SBP 125 mmHg, Hb 13.8 g/dL, BUN 15 mg/dL, no syncope, no liver or heart disease. What is his GBS and the best plan?"
+    options: [GBS 1; discharge with outpatient endoscopy, GBS 0; no endoscopy needed, GBS 3; admit to the ward, GBS 6; ICU admission, GBS 1; urgent endoscopy within 12 hours]
+    answer: 0
+    why:
+      - Only melena scores (1 point); GBS ≤1 is very low risk and suits outpatient management with outpatient endoscopy.
+      - Melena scores 1, so the GBS is not 0; and he still needs outpatient endoscopy.
+      - None of BUN, Hb, SBP or HR score here.
+      - He has no ICU criteria.
+      - Endoscopy within 12 hours is for active bleeding after resuscitation or suspected varices.
+    src: { page: 302, quote: "Patients with GBS ≤ 1 are at very low risk of rebleeding, mortality within 30 days, or needing hospital-based intervention" }
+    status: unverified
+  - id: git.L11.038
+    kind: mcq
+    topic: risk
+    stem: "A 64-year-old man with melena: HR 108/min, SBP 96 mmHg, Hb 11 g/dL, BUN 30 mg/dL, no syncope, known heart failure. What is his Glasgow-Blatchford score?"
+    options: ["13", "11", "15", "9"]
+    answer: 0
+    why:
+      - "BUN 30 = 4, Hb 11 in a man = 3, SBP 96 = 2, HR 108 = 1, melena = 1, cardiac failure = 2: total 13."
+      - "11 leaves out the 2 points for cardiac failure."
+      - "15 scores BUN 30 as 6 points; 6 needs a BUN of 70 or more."
+      - "9 scores his Hb as 1 (the women's band) and leaves out cardiac failure."
+    src: { page: 309, quote: "Table 2: Glasgow-Blatchford score" }
+    status: unverified
+  # ---------- p302-303: resuscitation ----------
+  - id: git.L11.039
+    kind: card
+    topic: resuscitation
+    front: What does early intensive hemodynamic resuscitation achieve in acute UGIH?
+    back: It significantly decreases mortality, corrects hypovolemia, restores tissue perfusion and prevents multiorgan failure.
+    src: { page: 302, quote: "Early intensive hemodynamic resuscitation of patients with acute UGIH has been shown to significantly decrease mortality" }
+    status: unverified
+  - id: git.L11.040
+    kind: card
+    topic: resuscitation
+    front: Which fluids does the lecture recommend for resuscitation in UGIH?
+    back: Crystalloids, either 0.9% saline or balanced crystalloids such as Ringer's lactate (which reduced mortality and major adverse renal events in critically ill patients).
+    src: { page: 302, quote: "either saline 0.9% sodium chloride or balanced crystalloids" }
+    status: unverified
+  - id: git.L11.041
+    kind: card
+    topic: resuscitation
+    front: Is a nasogastric tube routine in UGIB, and what does its aspirate tell you?
+    back: Not routine; it may help triage selected patients with suspected active upper bleeding. Red blood or coffee grounds confirm an upper GI source.
+    src: { page: 302, quote: "Placement of a nasogastric tube is not routinely recommended." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L11.042
+    kind: card
+    topic: resuscitation
+    front: Which transfusion strategy is standard of care in non-massive acute UGIH?
+    back: A restrictive RBC transfusion strategy, in both variceal and non-variceal bleeding; it is associated with lower in-hospital mortality.
+    src: { page: 303, quote: "A restrictive red blood cell (RBC) transfusion strategy is considered standard of care in non- massive, acute UGIH both in variceal or nonvariceal." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L11.043
+    kind: cloze
+    topic: resuscitation
+    text: Transfuse packed RBCs if Hb is below {{c1::7}} g/dL, targeting {{c2::7-9}} g/dL; with cardiovascular disease start below {{c3::8}} g/dL, targeting above 10 g/dL.
+    src: { page: 303, quote: "in patients with cardiovascular diseases transfusion should start if Hg <8 gm targeting > 10 gm." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: git.L11.044
+    kind: mcq
+    topic: resuscitation
+    stem: "A 70-year-old with stable angina has a bleeding duodenal ulcer. He is no longer actively bleeding; Hb is 7.6 g/dL. Per the lecture, what about transfusion?"
+    options: [Transfuse because with cardiovascular disease the threshold is Hb <8 g/dL, No transfusion until Hb is below 7 g/dL, Transfuse only if Hb falls below 6 g/dL, Transfuse to a target above 13 g/dL, Give FFP instead of RBCs]
+    answer: 0
+    why:
+      - With cardiovascular disease transfusion starts at Hb <8 g/dL (target >10).
+      - The <7 g/dL threshold is for patients without cardiovascular disease.
+      - 6 g/dL is not a threshold in the lecture.
+      - The lecture's targets are 7-9 (or >10 with CVD), not 13.
+      - FFP does not replace red cells.
+    src: { page: 303, quote: "in patients with cardiovascular diseases transfusion should start if Hg <8 gm targeting > 10 gm." }
+    status: unverified
+  # ---------- p303-304: antithrombotics ----------
+  - id: git.L11.045
+    kind: card
+    topic: antithrombotics
+    front: "Low-dose aspirin for PRIMARY prophylaxis in a patient with acute UGIH: what to do?"
+    back: Interrupt it temporarily, then restart only after careful re-evaluation of the indication.
+    src: { page: 303, quote: "who are taking low dose aspirin as monotherapy for primary cardiovascular prophylaxis, aspirin should be temporarily interrupted." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L11.046
+    kind: card
+    topic: antithrombotics
+    front: "Low-dose aspirin for SECONDARY prophylaxis in acute UGIH: what to do?"
+    back: Do not interrupt it. If it is interrupted for any reason, restart as soon as possible, preferably within 3-5 days.
+    src: { page: 303, quote: "If for any reason it is interrupted, aspirin should be restarted as soon as possible, preferably within 3–5 days." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L11.047
+    kind: card
+    topic: antithrombotics
+    front: "Dual antiplatelet therapy (secondary prophylaxis) in acute UGIH: what to do?"
+    back: Continue aspirin. Interrupt the second antiplatelet agent and restart it as soon as possible, preferably within 5 days.
+    src: { page: 303, quote: "The second antiplatelet agent should be interrupted, but restarted as soon as possible, preferably within 5 days." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L11.048
+    kind: card
+    topic: antithrombotics
+    front: "VKA (warfarin) in acute UGIH with hemodynamic instability: what to give?"
+    back: Withhold the VKA and give low-dose vitamin K plus IV prothrombin complex concentrate (PCC), or FFP if PCC is not available.
+    src: { page: 303, quote: "low dose vitamin K supplemented with intravenous prothrombin complex concentrate (PCC), or fresh frozen plasma (FFP) if PCC is not" }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L11.049
+    kind: card
+    topic: antithrombotics
+    front: "DOAC in acute UGIH: what to do?"
+    back: Withhold the DOAC and do not delay endoscopy. In severe ongoing bleeding consider a DOAC reversal agent or IV PCC.
+    src: { page: 304, quote: "the anticoagulant should be withheld and endoscopy not delayed." }
+    status: unverified
+  - id: git.L11.050
+    kind: cloze
+    topic: antithrombotics
+    text: Resume anticoagulation once bleeding is controlled, preferably within or soon after {{c1::7 days}}, based on {{c2::thromboembolic risk}}; remember the {{c3::rapid onset}} of DOACs compared with VKAs.
+    src: { page: 304, quote: "Anticoagulation should be resumed as soon as the bleeding has been controlled, preferably within or soon after 7 days of the bleeding event" }
+    status: unverified
+    tags: [numbers]
+  - id: git.L11.051
+    kind: table
+    topic: antithrombotics
+    title: Antithrombotics in acute UGIH
+    columns: [Drug, During the bleed, Restart]
+    rows:
+      - [Aspirin for primary prophylaxis, Interrupt temporarily, After re-evaluating the indication]
+      - [Aspirin for secondary prophylaxis, Do not interrupt, "If stopped: within 3-5 days"]
+      - [DAPT (secondary prophylaxis), Keep aspirin; stop the second agent, Second agent within 5 days]
+      - [VKA, "Withhold; if unstable: low-dose vitamin K + IV PCC (FFP if no PCC)", "Within or soon after 7 days"]
+      - [DOAC, "Withhold; don't delay endoscopy; severe: reversal agent or IV PCC", "Within or soon after 7 days"]
+    blanks: [[0, 1], [1, 1], [1, 2], [2, 1], [2, 2], [3, 1], [4, 2]]
+    src: { page: 303, quote: "In patients with acute UGIH who are taking low dose aspirin as monotherapy for secondary cardiovascular prophylaxis, aspirin should not be interrupted." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L11.052
+    kind: mcq
+    topic: antithrombotics
+    stem: A 62-year-old on aspirin plus clopidogrel 4 months after a coronary stent has hematemesis from a duodenal ulcer. What is the right antiplatelet plan?
+    options: [Continue aspirin; stop clopidogrel and restart it within 5 days, Stop both until the ulcer heals, Continue both unchanged, Stop aspirin and keep clopidogrel, Stop both and restart after 4 weeks]
+    answer: 0
+    why:
+      - With DAPT for secondary prophylaxis, aspirin is not interrupted and the second agent is restarted within 5 days.
+      - Stopping both risks stent thrombosis.
+      - The second agent should be interrupted during the bleed.
+      - The lecture keeps aspirin, not the second agent.
+      - Restart should be as soon as possible, preferably within 5 days.
+    src: { page: 303, quote: "The second antiplatelet agent should be interrupted, but restarted as soon as possible, preferably within 5 days." }
+    status: unverified
+  - id: git.L11.053
+    kind: mcq
+    topic: antithrombotics
+    stem: A 75-year-old on apixaban for atrial fibrillation has melena and is hemodynamically stable. What does the lecture advise?
+    options: [Withhold apixaban and do not delay endoscopy, Delay endoscopy 48 hours for the drug to wear off, Give vitamin K and FFP, Continue apixaban and give PPI, Give a reversal agent to every patient]
+    answer: 0
+    why:
+      - With a DOAC, withhold it and do not delay endoscopy.
+      - Endoscopy should not be delayed.
+      - Vitamin K reverses VKAs, not DOACs.
+      - The anticoagulant should be withheld.
+      - Reversal agents or PCC are for severe ongoing bleeding only.
+    src: { page: 304, quote: "the anticoagulant should be withheld and endoscopy not delayed." }
+    status: unverified
+  - id: git.L11.054
+    kind: mcq
+    topic: antithrombotics
+    stem: A 58-year-old takes low-dose aspirin "for prevention" with no history of heart disease or stroke. He presents with hematemesis. What about the aspirin?
+    options: [Interrupt it temporarily and restart only after re-evaluating its indication, Continue it without interruption, Restart it within 3-5 days in all cases, Replace it with clopidogrel, Stop it and give platelet transfusion]
+    answer: 0
+    why:
+      - Aspirin for primary prophylaxis is temporarily interrupted and restarted after careful re-evaluation.
+      - Not interrupting is for secondary prophylaxis.
+      - The 3-5 day restart applies to secondary prophylaxis.
+      - Switching agents is not in the lecture.
+      - Platelet transfusion is not recommended in the lecture.
+    src: { page: 303, quote: "who are taking low dose aspirin as monotherapy for primary cardiovascular prophylaxis, aspirin should be temporarily interrupted." }
+    status: unverified
+  - id: git.L11.055
+    kind: essay
+    topic: antithrombotics
+    prompt: Illustrate management of antithrombotic agents (antiplatelet agents) and anticoagulants in acute upper GI bleeding.
+    outline:
+      - "Aspirin, primary prophylaxis: [Interrupt temporarily, Restart after re-evaluating the indication]"
+      - "Aspirin, secondary prophylaxis: [Do not interrupt, If interrupted restart within 3-5 days, Continue or reintroduce soon after hemostasis]"
+      - "DAPT, secondary prophylaxis: [Keep aspirin, Stop the second agent and restart within 5 days]"
+      - "VKA: [Withhold, If unstable low-dose vitamin K + IV PCC (FFP if no PCC)]"
+      - "DOAC: [Withhold and do not delay endoscopy, Severe ongoing bleeding: reversal agent or IV PCC]"
+      - "Resumption: [Anticoagulation within or soon after 7 days by thromboembolic risk, DOACs act faster than VKAs, Early reintroduction reduces thrombotic events and death]"
+    src: { page: 303, quote: "In patients with acute UGIH who are taking low dose aspirin as monotherapy for secondary cardiovascular prophylaxis, aspirin should not be interrupted." }
+    status: unverified
+    tags: [book-question]
+  # ---------- p304: drugs ----------
+  - id: git.L11.056
+    kind: cloze
+    topic: drugs
+    text: High-dose PPI in UGIB is an {{c1::80 mg}} bolus followed by {{c2::8 mg/h}} infusion for {{c3::72 hours}}.
+    src: { page: 304, quote: "It is advised to start high dose PPI (8 mg/hr) infusion for 72 h following a bolus dose of 80 mg." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: git.L11.057
+    kind: card
+    topic: drugs
+    front: What intermittent PPI regimen is equally effective as the infusion in reducing rebleeding?
+    back: 40 mg every 12 hours after an 80 mg bolus.
+    src: { page: 304, quote: "an intermittent dose of 40 mg of PPI as the 12th hourly dose following a bolus dose of 80 mg is equally effective" }
+    status: unverified
+  - id: git.L11.058
+    kind: card
+    topic: drugs
+    front: What does IV PPI before endoscopy achieve?
+    back: Fewer ulcers with lesions that need endoscopic therapy.
+    src: { page: 304, quote: "Administration of continuous intravenous proton pump inhibitor before endoscopy results in a decreased number of ulcers with lesions that require endoscopic therapy." }
+    status: unverified
+  - id: git.L11.059
+    kind: card
+    topic: drugs
+    front: Which PPIs are FDA-approved for acute non-variceal UGIB?
+    back: Esomeprazole, pantoprazole and lansoprazole.
+    src: { page: 304, quote: "Esomeprazole, pantoprazole, lansoprazole are approved by United States Food and Drug Administration (USFDA) for the use in acute NVUGIB." }
+    status: unverified
+  - id: git.L11.060
+    kind: card
+    topic: drugs
+    front: "Splanchnic vasoconstrictors (somatostatin, octreotide, terlipressin): in which bleeding, and how do they work?"
+    back: Only in variceal bleeding. They reduce splanchnic blood flow and portal pressure and help initial control of portal hypertensive bleeding.
+    src: { page: 304, quote: "They reduces splanchnic blood flow and portal blood pressures and is effective in the initial control of bleeding related to portal hypertension." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L11.061
+    kind: card
+    topic: drugs
+    front: Why give a prokinetic before endoscopy in UGIH, and which one is studied most?
+    back: It empties the stomach and improves mucosal visualization; most studies used erythromycin.
+    src: { page: 304, quote: "Most studies assessing the use of pre-endoscopy prokinetics in UGIH have used erythromycin." }
+    status: unverified
+  - id: git.L11.062
+    kind: mcq
+    topic: drugs
+    stem: A patient with a bleeding gastric ulcer (no liver disease) is about to have endoscopy. Which drug does the lecture reserve ONLY for variceal bleeding?
+    options: [Terlipressin, Pantoprazole infusion, Erythromycin, Esomeprazole bolus, Normal saline]
+    answer: 0
+    why:
+      - Splanchnic vasoconstrictors (somatostatin, octreotide, terlipressin) are used only in variceal bleeding.
+      - PPI infusion is standard in non-variceal bleeding.
+      - Erythromycin improves visualization before endoscopy.
+      - Esomeprazole is FDA-approved for NVUGIB.
+      - Crystalloid resuscitation is standard for any bleed.
+    src: { page: 304, quote: "terlipressin (vasopressin analogue) in patients with NVUGIH and only used in cases of variceal GI bleeding." }
+    status: unverified
+  # ---------- p305: endoscopy ----------
+  - id: git.L11.063
+    kind: cloze
+    topic: endoscopy
+    text: Without active bleeding, endoscopy is nonemergent, usually within {{c1::24}} hours; in actively bleeding or suspected variceal patients, after resuscitation, within {{c2::12}} hours.
+    src: { page: 305, quote: "Patients without evidence of active bleeding undergo nonemergent endoscopy usually within 24 hours." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: git.L11.064
+    kind: card
+    topic: endoscopy
+    front: When may endoscopy be delayed in UGIB?
+    back: In selected patients with serious comorbidities (e.g. acute coronary syndrome) who show no signs of continued bleeding.
+    src: { page: 305, quote: "It may be delayed in selected patients with serious comorbidities (eg, acute coronary syndrome) who do not have signs of continued bleeding." }
+    status: unverified
+  - id: git.L11.065
+    kind: card
+    topic: endoscopy
+    front: Three values of endoscopy in UGIB?
+    back: Identify the cause, predict rebleeding, and treat the lesion.
+    src: { page: 305, quote: "The value of endoscopy is to identify the etiology of bleeding, detect the prognosis of rebleeding, and to apply therapy for the detected lesion." }
+    status: unverified
+  - id: git.L11.066
+    kind: card
+    topic: endoscopy
+    front: Which ulcers need endoscopic therapy?
+    back: Ulcers with active bleeding and non-bleeding visible vessels; therapy may also be used for ulcers with adherent clots.
+    src: { page: 305, quote: "Ulcers with active bleeding and non-bleeding visible vessels should receive endoscopic therapy; endoscopic therapy may also be used for ulcers with adherent clots." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L11.067
+    kind: card
+    topic: endoscopy
+    front: Endoscopic hemostasis methods for bleeding ulcers, and the rule about epinephrine?
+    back: Injection (epinephrine), thermal probes (bipolar electrocoagulation, heater probe) or clips. Epinephrine must always be followed by a second modality.
+    src: { page: 305, quote: "Epinephrine injection should always be followed by a second modality." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L11.068
+    kind: card
+    topic: endoscopy
+    front: "Rebleeding after endoscopic therapy of an ulcer: what next?"
+    back: Repeat endoscopic therapy. If it bleeds again, transarterial embolization or surgery.
+    src: { page: 305, quote: "Recurrent bleeding should be treated with repeat endoscopic therapy but subsequent bleeding by transarterial embolization or surgery." }
+    status: unverified
+  - id: git.L11.069
+    kind: card
+    topic: endoscopy
+    front: Post-endoscopy PPI for high-risk ulcers?
+    back: Ulcers with active bleeding, a visible vessel or an adherent clot get high-dose PPI for 72 hours.
+    src: { page: 305, quote: "Patients who have ulcers with high risk lesions (active bleeding, visible vessel, adherent clot) should receive high dose proton pump inhibitors for 72 h." }
+    status: unverified
+  - id: git.L11.070
+    kind: card
+    topic: endoscopy
+    front: After hemostasis, what about aspirin and other antithrombotics?
+    back: Secondary-prevention aspirin is continued or reintroduced soon; other antithrombotics are reintroduced early to reduce thrombotic events and death.
+    src: { page: 305, quote: "Early reintroduction of other antithrombotic drugs is also recommended after hemostasis is achieved to reduce thrombotic events and death." }
+    status: unverified
+  - id: git.L11.071
+    kind: mcq
+    topic: endoscopy
+    stem: At endoscopy a duodenal ulcer is oozing. The endoscopist injects diluted epinephrine and the oozing stops. What should happen next?
+    options: [Add a second modality such as clips or a thermal probe, Stop; hemostasis is achieved, Send for surgery, Arrange transarterial embolization, Give octreotide]
+    answer: 0
+    why:
+      - Epinephrine injection should always be followed by a second modality.
+      - Epinephrine alone is not enough.
+      - Surgery is for repeated rebleeding.
+      - Embolization is for bleeding after repeat endoscopic therapy fails.
+      - Octreotide is for variceal bleeding.
+    src: { page: 305, quote: "Epinephrine injection should always be followed by a second modality." }
+    status: unverified
+  - id: git.L11.072
+    kind: mcq
+    topic: endoscopy
+    stem: Two days after clip therapy of a bleeding gastric ulcer, the patient has fresh hematemesis. What is the next step per the lecture?
+    options: [Repeat endoscopic therapy, Immediate surgery, Transarterial embolization first, Stop PPI, Balloon tamponade]
+    answer: 0
+    why:
+      - Recurrent bleeding is treated with repeat endoscopic therapy.
+      - Surgery or TAE come only if bleeding recurs after the repeat therapy.
+      - TAE is for subsequent bleeding.
+      - PPI should continue.
+      - Balloon tamponade is a bridge in variceal bleeding.
+    src: { page: 305, quote: "Recurrent bleeding should be treated with repeat endoscopic therapy but subsequent bleeding by transarterial embolization or surgery." }
+    status: unverified
+  - id: git.L11.073
+    kind: order
+    topic: endoscopy
+    prompt: Order the management of acute non-variceal UGIB as the lecture lays it out.
+    steps:
+      - Risk stratification with the Glasgow-Blatchford score
+      - Hemodynamic resuscitation with crystalloids and restrictive transfusion
+      - Manage antithrombotics and start high-dose PPI
+      - Endoscopy (within 24 h, or 12 h if active) with dual-modality therapy
+      - High-dose PPI for 72 h after high-risk lesions and restart antithrombotics
+    src: { page: 302, quote: "Patient assessment & risk stratification: The use of the Glasgow–" }
+    status: unverified
+  # ---------- p305-307: variceal ----------
+  - id: git.L11.074
+    kind: card
+    topic: variceal
+    front: Why do patients with variceal bleeding die more than those with non-variceal bleeding?
+    back: Mostly because of the severity of the underlying liver disease.
+    src: { page: 305, quote: "Patients with variceal bleeding have a higher mortality than those with nonvariceal bleeding, and this is largely related to the severity of underlying liver disease." }
+    status: unverified
+  - id: git.L11.075
+    kind: card
+    topic: variceal
+    front: Why is EGD screening mandatory in cirrhotic patients?
+    back: To improve outcome by detecting esophageal or gastric varices and describing and classifying them.
+    src: { page: 306, quote: "EGD screening in cirrhotic parents is mandatory to improve the outcome, detect esophageal or gastric varices, describe and classify them." }
+    status: unverified
+  - id: git.L11.076
+    kind: cloze
+    topic: variceal
+    text: Esophagogastric varices cause {{c1::5-11%}} of GI bleeding.
+    src: { page: 306, quote: "EGV are responsible for 5-11% of gastrointestinal bleeding." }
+    status: unverified
+    tags: [numbers]
+  - id: git.L11.077
+    kind: enumerate
+    topic: variceal
+    prompt: Enumerate the risk factors for variceal hemorrhage named in the lecture.
+    points:
+      - Large variceal size
+      - Red wale marks
+      - Advanced liver disease (Child C more than A)
+      - Ascites
+      - Higher MELD score
+      - Medical comorbidities
+    pass: 4
+    src: { page: 306, quote: "Variceal size, red wale marks on varices, and advanced liver disease are risk factors for variceal hemorrhage." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L11.078
+    kind: card
+    topic: variceal
+    front: Which Hb should be maintained when transfusing an acute variceal bleed?
+    back: About 8 g/dL.
+    src: { page: 306, quote: "being careful to maintain a hemoglobin of ~8 g/dL." }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: git.L11.079
+    kind: card
+    topic: variceal
+    front: Antibiotic prophylaxis in a cirrhotic with GI bleeding?
+    back: Short-term (maximum 7 days) for every cirrhotic with GI hemorrhage. Oral norfloxacin 400 mg BID, or IV ciprofloxacin if oral is not possible; IV ceftriaxone 1 g/day may be preferable in advanced cirrhosis or where quinolone resistance is high.
+    src: { page: 306, quote: "Short-term (maximum 7 days) antibiotic prophylaxis should be instituted in any patient with cirrhosis and GI hemorrhage" }
+    status: unverified
+    tags: [high-yield]
+    update:
+      text: Baveno VII (2022) recommends IV ceftriaxone 1 g/24 h for up to 7 days as the usual choice, adapted to local resistance; norfloxacin is no longer widely available.
+      ref: "Baveno VII consensus, 2022"
+  - id: git.L11.080
+    kind: cloze
+    topic: variceal
+    text: In advanced cirrhosis, IV {{c1::ceftriaxone 1 g/day}} may be preferable, especially where {{c2::quinolone-resistant organisms}} are common.
+    src: { page: 306, quote: "In patients with advanced cirrhosis intravenous ceftriaxone (1 g/day) may be preferable particularly in centers with a high prevalence of quinolone-resistant organisms." }
+    status: unverified
+  - id: git.L11.081
+    kind: card
+    topic: variceal
+    front: What is the concern with PPIs in cirrhotic patients?
+    back: They favor bacterial infections, including spontaneous peritonitis. Starting PPI before endoscopy is debated but commonly practiced.
+    src: { page: 306, quote: "the use of PPI in cirrhotic patients favors bacterial infections including spontaneous peritonitis." }
+    status: unverified
+  - id: git.L11.082
+    kind: card
+    topic: variceal
+    front: When do you start vasoactive drugs in variceal bleeding, and for how long?
+    back: Somatostatin or its analogues (octreotide, vapreotide) or terlipressin as soon as variceal hemorrhage is suspected, continued for 3-5 days after diagnosis.
+    src: { page: 306, quote: "should be initiated as soon as variceal hemorrhage is suspected and continued for 3–5 days after diagnosis is confirmed." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L11.083
+    kind: card
+    topic: variceal
+    front: Optimal endoscopic therapy for esophageal variceal bleeding, and why?
+    back: Variceal band ligation; less rebleeding and fewer side effects than sclerotherapy.
+    src: { page: 307, quote: "The optimal endoscopic therapy for esophageal variceal bleeding is variceal band ligation, which is associated with less rebleeding and fewer side effects than sclerotherapy." }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L11.084
+    kind: card
+    topic: variceal
+    front: Endoscopic treatment of bleeding gastric varices?
+    back: Ligation for GOV1 (esophageal varices extending along the lesser curve). Tissue adhesive (N-butyl-cyanoacrylate) for all other gastric varices; thrombin can be considered.
+    src: { page: 307, quote: "Injection of tissue adhesive (eg, N-butyl-cyanoacrylate) is the recommended endoscopic approach for all other types of gastric varices" }
+    status: unverified
+    tags: [high-yield]
+  - id: git.L11.085
+    kind: card
+    topic: variceal
+    front: When is TIPS indicated in esophageal variceal bleeding?
+    back: When bleeding cannot be controlled, or recurs despite combined pharmacological and endoscopic therapy.
+    src: { page: 307, quote: "TIPS is indicated in patients in whom hemorrhage from esophageal varices cannot be controlled or in whom bleeding recurs despite combined pharmacological and endoscopic therapy." }
+    status: unverified
+    update:
+      text: Baveno VII (2022) also recommends pre-emptive TIPS within 72 h (ideally 24 h) for high-risk patients (Child C <14 points, or Child B >7 with active bleeding at endoscopy, or HVPG >20 mmHg).
+      ref: "Baveno VII consensus, 2022"
+  - id: git.L11.086
+    kind: cloze
+    topic: variceal
+    text: Balloon tamponade is a {{c1::temporizing}} measure for a maximum of {{c2::24 hours}} in uncontrollable bleeding while definitive therapy (TIPS or endoscopy) is planned.
+    src: { page: 307, quote: "Balloon tamponade should be used as a temporizing measure (maximum 24 hours) in patients with uncontrollable bleeding" }
+    status: unverified
+    tags: [numbers]
+  - id: git.L11.087
+    kind: cloze
+    topic: variceal
+    text: After a first variceal bleed, rebleeding risk is {{c1::60%}} in the first year with mortality up to {{c2::33%}}; first-line prevention is {{c3::NSBB plus EVL}}.
+    src: { page: 307, quote: "high rebleeding risk (60% in the first year), with a mortality of up to 33%. Combination of NSBB/EVL is first-line therapy" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: git.L11.088
+    kind: card
+    topic: variceal
+    front: After recovering from variceal bleeding, who should be referred to a transplant center?
+    back: Patients who are otherwise transplant candidates.
+    src: { page: 307, quote: "Patients who are otherwise transplant candidates should be referred to a transplant center for evaluation." }
+    status: unverified
+  - id: git.L11.089
+    kind: table
+    topic: variceal
+    title: Variceal surveillance in compensated cirrhosis (p310 algorithm)
+    columns: [Finding, Branch, Follow-up]
+    rows:
+      - ["LS <20 kPa and platelets >150,000/µL", "EGD can be avoided", "Ongoing monitoring"]
+      - [No varices, No ongoing liver injury, EGD every 3 years]
+      - [No varices, Ongoing liver injury, EGD every 2 years]
+      - [Small varices (<5 mm), No ongoing injury or cofactor, EGD every 2 years]
+      - [Small varices (<5 mm), Ongoing injury and/or cofactor, EGD every year]
+      - [Medium or large varices, NSBBs, No follow-up EGD]
+      - [Medium or large varices, EVL, "EGD every 1-4 weeks until eradication, then every 6-12 months"]
+    blanks: [[0, 1], [1, 2], [2, 2], [3, 2], [4, 2], [5, 2], [6, 2]]
+    src: { page: 310, quote: "EGD can be avoided" }
+    status: unverified
+    tags: [numbers, high-yield]
+  - id: git.L11.090
+    kind: table
+    topic: variceal
+    title: Child-Pugh score as printed in Table 3 (SI units, INR)
+    columns: [Criterion, "1 point", "2 points", "3 points"]
+    rows:
+      - [Encephalopathy, None, "Mild to moderate (grade 1-2)", "Severe (grade 3-4)"]
+      - [Ascites, None, "Mild to moderate (diuretic responsive)", "Severe (diuretic refractory)"]
+      - ["Bilirubin (µmol/L)", "<34", "34-50", ">50"]
+      - ["Albumin (g/L)", ">35", "28-35", "<28"]
+      - [INR, "<1.7", "1.7-2.3", ">2.3"]
+    blanks: [[2, 1], [3, 3], [4, 2], [4, 3]]
+    src: { page: 310, quote: "Table 3 The Child–Pugh score." }
+    status: unverified
+    tags: [numbers]
+  - id: git.L11.091
+    kind: cloze
+    topic: variceal
+    text: The MELD score sums 3.78 × ln {{c1::bilirubin}}, 11.20 × ln {{c2::INR}}, 9.57 × ln {{c3::creatinine}} and the constant 6.43.
+    src: { page: 311, quote: "Components of the MELD score" }
+    status: unverified
+    tags: [numbers]
+  - id: git.L11.092
+    kind: card
+    topic: variceal
+    front: MELD rules for low values and for dialysis (Table 4)?
+    back: Any value below 1.0 is set to 1 (ln 1 = 0). A patient dialyzed twice in the last 7 days gets creatinine 4.0. Scores range from 6 to 40.
+    src: { page: 311, quote: "For patients dialyzed twice within the last 7 days, a value of 4.0 is used." }
+    status: unverified
+    tags: [numbers]
+  - id: git.L11.093
+    kind: mcq
+    topic: variceal
+    stem: A 52-year-old with HCV cirrhosis vomits fresh blood. BP 100/60 mmHg, Hb 7.2 g/dL. Which set of first steps fits the lecture?
+    options: ["Volume support, transfuse to Hb ~8 g/dL, start a vasoactive drug and antibiotics, then endoscopy within 12 h", Transfuse to Hb 12 g/dL and wait 24 h for endoscopy, Start PPI only and arrange endoscopy within 24 h, Insert a balloon tube for 72 h, Immediate TIPS before any drug]
+    answer: 0
+    why:
+      - Volume support, Hb ~8, vasoactive drug as soon as suspected, antibiotics up to 7 days and endoscopy within 12 h is the lecture's plan.
+      - Over-transfusion raises portal pressure; keep Hb ~8, and endoscopy should be within 12 h.
+      - Vasoactive drugs and antibiotics are core; PPI alone is not enough.
+      - Balloon tamponade is a bridge of 24 h maximum for uncontrollable bleeding.
+      - TIPS is for failure or recurrence despite drugs and endoscopy.
+    src: { page: 306, quote: "requires prompt attention with intravascular volume support and blood transfusions, being careful to maintain a hemoglobin of ~8 g/dL." }
+    status: unverified
+  - id: git.L11.094
+    kind: mcq
+    topic: variceal
+    stem: At endoscopy for hematemesis, a cirrhotic patient has an isolated fundal gastric varix (not continuous with esophageal varices) that is bleeding. Recommended endoscopic therapy?
+    options: [N-butyl-cyanoacrylate injection, Band ligation, Sclerotherapy with ethanolamine, Argon plasma coagulation, Epinephrine injection plus clip]
+    answer: 0
+    why:
+      - Tissue adhesive is recommended for all gastric varices other than GOV1.
+      - Ligation is used for GOV1, where esophageal varices extend along the lesser curve.
+      - Sclerotherapy has more rebleeding and side effects than ligation, and is not the gastric varix choice.
+      - APC is not a variceal therapy in the lecture.
+      - Epinephrine plus clip is for ulcers.
+    src: { page: 307, quote: "Injection of tissue adhesive (eg, N-butyl-cyanoacrylate) is the recommended endoscopic approach for all other types of gastric varices" }
+    status: unverified
+  - id: git.L11.095
+    kind: mcq
+    topic: variceal
+    stem: Despite terlipressin and band ligation, a cirrhotic patient keeps bleeding. TIPS is planned for tomorrow. What bridges him safely?
+    options: [Balloon tamponade for a maximum of 24 hours, Repeat ligation every 6 hours, High-dose PPI infusion, Intravenous vitamin K, Restart NSBB at high dose]
+    answer: 0
+    why:
+      - Balloon tamponade is a temporizing measure (max 24 h) before definitive therapy such as TIPS.
+      - Repeated ligation is not the lecture's bridge.
+      - PPI does not control variceal bleeding.
+      - Vitamin K is for VKA reversal.
+      - NSBBs are for secondary prophylaxis, not acute uncontrolled bleeding.
+    src: { page: 307, quote: "Balloon tamponade should be used as a temporizing measure (maximum 24 hours) in patients with uncontrollable bleeding" }
+    status: unverified
+  - id: git.L11.096
+    kind: mcq
+    topic: variceal
+    stem: A cirrhotic patient has recovered from his first variceal bleed. What is first-line prevention of rebleeding?
+    options: [NSBB plus endoscopic variceal ligation, NSBB alone, Sclerotherapy, Isosorbide mononitrate alone, Long-term PPI]
+    answer: 0
+    why:
+      - Combination NSBB/EVL is first-line for preventing rebleeding.
+      - Monotherapy is not first-line after a bleed.
+      - Ligation beats sclerotherapy.
+      - Nitrates alone are not recommended in the lecture.
+      - PPI does not prevent variceal rebleeding and favors infection in cirrhosis.
+    src: { page: 307, quote: "Combination of NSBB/EVL is first-line therapy in the prevention of rebleeding." }
+    status: unverified
+  - id: git.L11.097
+    kind: mcq
+    topic: variceal
+    stem: "In compensated cirrhosis, screening EGD shows small varices (<5 mm). The patient still drinks alcohol. Per the p310 algorithm, when is the next EGD?"
+    options: [Every year, Every 2 years, Every 3 years, No follow-up EGD, Every 1-4 weeks]
+    answer: 0
+    why:
+      - Small varices with ongoing liver injury or a cofactor need EGD every year.
+      - Every 2 years is for small varices without ongoing injury.
+      - Every 3 years is for no varices and no ongoing injury.
+      - No follow-up EGD applies to medium/large varices on NSBB.
+      - 1-4 weeks is the EVL schedule until eradication.
+    src: { page: 310, quote: "EGD can be avoided" }
+    status: unverified
+  - id: git.L11.098
+    kind: essay
+    topic: variceal
+    prompt: Outline the latest guidelines for variceal GI bleeding.
+    outline:
+      - "Screening and risk: [EGD screening in cirrhosis; LS <20 kPa and platelets >150,000 can avoid EGD, Risk: size, red wale marks, Child C, ascites, high MELD]"
+      - "Acute bleed, general: [Volume support, restrictive transfusion to Hb ~8, Antibiotics max 7 days (norfloxacin, IV ciprofloxacin, ceftriaxone 1 g/day)]"
+      - "Drugs: [Somatostatin, octreotide, vapreotide or terlipressin as soon as suspected, for 3-5 days]"
+      - "Endoscopy within 12 h: [Band ligation for esophageal varices and GOV1, Cyanoacrylate for other gastric varices; thrombin possible]"
+      - "Rescue: [TIPS when uncontrolled or recurrent, Balloon tamponade max 24 h as a bridge]"
+      - "After the bleed: [Rebleeding 60% in a year, mortality up to 33%, NSBB + EVL first line, Refer transplant candidates]"
+    src: { page: 307, quote: "Combination of NSBB/EVL is first-line therapy in the prevention of rebleeding." }
+    status: unverified
+    tags: [book-question]
+  # ---------- cases ----------
+  - id: git.L11.099
+    kind: case
+    topic: endoscopy
+    stem: A 66-year-old man on ibuprofen for knee pain and aspirin after a stent last year presents with two episodes of melena and dizziness.
+    steps:
+      - reveal: "HR 112/min, SBP 92 mmHg, Hb 9.4 g/dL, BUN 40 mg/dL. No liver disease or heart failure; no syncope."
+        question: What is his Glasgow-Blatchford score?
+        options: ["14", "12", "9", "6"]
+        answer: 0
+        why: "BUN 40 = 4, Hb below 10 = 6, SBP 92 = 2, HR 112 = 1, melena = 1: total 14. Dizziness is not syncope, so it scores nothing."
+      - question: Which fluid does the lecture recommend first?
+        options: [Crystalloids such as 0.9% saline or Ringer's lactate, Colloids, Albumin 20%, Immediate whole blood to Hb 12]
+        answer: 0
+        why: The ideal fluids are saline or balanced crystalloids such as Ringer's lactate.
+      - question: What about his aspirin (secondary prophylaxis)?
+        options: [Do not interrupt it, Stop it for 4 weeks, Swap it for clopidogrel, Stop it permanently]
+        answer: 0
+        why: Secondary-prophylaxis aspirin should not be interrupted.
+      - reveal: Endoscopy shows a duodenal ulcer with a non-bleeding visible vessel.
+        question: Best endoscopic treatment?
+        options: [Epinephrine injection plus clips or thermal probe, Epinephrine injection alone, No therapy; PPI only, Band ligation]
+        answer: 0
+        why: A visible vessel needs endoscopic therapy, and epinephrine is always followed by a second modality.
+      - question: After endoscopy?
+        options: [High-dose PPI for 72 hours, Oral PPI once daily only, Octreotide for 5 days, Tranexamic acid]
+        answer: 0
+        why: High-risk lesions (active bleeding, visible vessel, adherent clot) get high-dose PPI for 72 h.
+    src: { page: 305, quote: "Epinephrine injection should always be followed by a second modality." }
+    status: unverified
+  - id: git.L11.100
+    kind: case
+    topic: antithrombotics
+    stem: A 78-year-old woman on warfarin for a mechanical valve presents with hematemesis and BP 84/50 mmHg. INR is 4.1.
+    steps:
+      - question: Where should she be admitted?
+        options: [ICU, Ward, Outpatient follow-up, Day-care unit]
+        answer: 0
+        why: Shock and active hematemesis are ICU criteria.
+      - question: What reverses her anticoagulation per the lecture?
+        options: [Withhold warfarin; low-dose vitamin K plus IV PCC (FFP if no PCC), Idarucizumab, Protamine, Platelet transfusion]
+        answer: 0
+        why: For VKA with hemodynamic instability give low-dose vitamin K with IV PCC, or FFP if PCC is unavailable.
+      - reveal: Endoscopy controls a bleeding gastric ulcer.
+        question: When should anticoagulation be resumed?
+        options: ["As soon as bleeding is controlled, preferably within or soon after 7 days", After 6 weeks, Never, After ulcer healing is confirmed at 8 weeks]
+        answer: 0
+        why: Resume preferably within or soon after 7 days, guided by thromboembolic risk.
+    src: { page: 303, quote: "low dose vitamin K supplemented with intravenous prothrombin complex concentrate (PCC), or fresh frozen plasma (FFP) if PCC is not" }
+    status: unverified
+  - id: git.L11.101
+    kind: case
+    topic: variceal
+    stem: A 49-year-old with alcohol-related cirrhosis and ascites vomits a large amount of fresh blood.
+    steps:
+      - question: Which drug do you start before endoscopy, as soon as varices are suspected?
+        options: [Terlipressin or octreotide, Pantoprazole alone, Propranolol, Tranexamic acid]
+        answer: 0
+        why: Vasoactive drugs start as soon as variceal hemorrhage is suspected and continue 3-5 days.
+      - question: Which antibiotic plan fits advanced cirrhosis?
+        options: ["IV ceftriaxone 1 g/day, maximum 7 days", Oral rifaximin, No antibiotics unless febrile, Norfloxacin for 6 months]
+        answer: 0
+        why: Short-term (max 7 days) prophylaxis for every cirrhotic with GI bleeding; ceftriaxone is preferable in advanced cirrhosis.
+      - reveal: Endoscopy within 12 h shows bleeding esophageal varices.
+        question: Optimal endoscopic therapy?
+        options: [Band ligation, Sclerotherapy, Cyanoacrylate, Clips]
+        answer: 0
+        why: EVL has less rebleeding and fewer side effects than sclerotherapy.
+      - reveal: He bleeds again 2 days later despite terlipressin and ligation.
+        question: Definitive rescue?
+        options: [TIPS, Balloon tamponade for 3 days, Repeat sclerotherapy, Surgery for ulcer]
+        answer: 0
+        why: TIPS is indicated when bleeding recurs despite combined drug and endoscopic therapy; tamponade only bridges for 24 h.
+    src: { page: 307, quote: "TIPS is indicated in patients in whom hemorrhage from esophageal varices cannot be controlled" }
+    status: unverified
+  # ---------- Glasgow-Blatchford calculator ----------
+  - id: git.L11.102
+    kind: calc
+    topic: risk
+    calculator: glasgow_blatchford
+    stem: "A 30-year-old man had one black stool yesterday. HR 88/min, SBP 125 mmHg, Hb 13.8 g/dL, BUN 15 mg/dL. No syncope, liver or heart disease."
+    inputs: { bun_mg_dl: 15, sex: male, hb_g_dl: 13.8, sbp_mmhg: 125, hr_bpm: 88, melena: true, syncope: false, hepatic_disease: false, cardiac_failure: false }
+    expect: "GBS 1 (very low risk)"
+    interpret: "GBS ≤1: very low risk of rebleeding, 30-day death or hospital-based intervention; outpatient management with outpatient endoscopy."
+    src: { page: 302, quote: "Patients with GBS ≤ 1 are at very low risk of rebleeding, mortality within 30 days, or needing hospital-based intervention" }
+    status: unverified
+  - id: git.L11.103
+    kind: calc
+    topic: risk
+    calculator: glasgow_blatchford
+    stem: "A 64-year-old man with known heart failure has melena. HR 108/min, SBP 96 mmHg, Hb 11 g/dL, BUN 30 mg/dL, no syncope."
+    inputs: { bun_mg_dl: 30, sex: male, hb_g_dl: 11, sbp_mmhg: 96, hr_bpm: 108, melena: true, syncope: false, hepatic_disease: false, cardiac_failure: true }
+    expect: "GBS 13 (2 or more)"
+    interpret: "Well above the very-low-risk cut-off: admit, resuscitate and arrange endoscopy; the GBS predicts need for transfusion, endoscopic therapy, embolization, surgery or death."
+    src: { page: 309, quote: "Table 2: Glasgow-Blatchford score" }
+    status: unverified
+  - id: git.L11.104
+    kind: calc
+    topic: risk
+    calculator: glasgow_blatchford
+    stem: "A 45-year-old woman with cirrhosis fainted at home after melena. HR 104/min, SBP 88 mmHg, Hb 9.1 g/dL, BUN 46 mg/dL. No heart failure."
+    inputs: { bun_mg_dl: 46, sex: female, hb_g_dl: 9.1, sbp_mmhg: 88, hr_bpm: 104, melena: true, syncope: true, hepatic_disease: true, cardiac_failure: false }
+    expect: "GBS 19 (2 or more)"
+    interpret: "High score; with shock and advanced liver disease she meets ICU criteria, and suspected varices need endoscopy within 12 hours."
+    src: { page: 309, quote: "Table 2: Glasgow-Blatchford score" }
+    status: unverified

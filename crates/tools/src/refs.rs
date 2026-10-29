@@ -9,15 +9,19 @@
 //!
 //! - `batna-tools refs [--lecture hb.L01] [--book DIR] [--ocr DIR]… [--checked DIR] [--write]`
 //!   runs where the book text is (by default /mnt/project-files/medstudy).
-//!   Each reference passes when its quote is on the cited page, when the page
-//!   carries enough of the reference's terms (and no other page carries far
-//!   more), or when a person checked it (`--checked DIR/LNN.tsv`:
-//!   `ref<TAB>page<TAB>ok<TAB>reason`, or a `checked` row already in the lock).
+//!   Every reference carries a quote (Mohamed, 2026-10-29: every chip shows
+//!   the book's line), except a lesson figure showing the book's own figure.
+//!   The quote must be on the cited page in the text layer or OCR, or listed
+//!   as read off the page image (`ref<TAB>page<TAB>quote-ok<TAB>the quote`);
+//!   and the page must carry enough of the reference's terms (no other page
+//!   far more), or a person checked it (`ref<TAB>page<TAB>ok<TAB>reason`),
+//!   both in `--checked DIR/LNN.tsv`.
 //!   `--write` records the result in `content/book-refs/LNN.tsv`.
 //! - `batna-tools validate` (CI) needs no book: for each lecture that has a
 //!   lock file, every reference must match a lock row (same page, same quote),
-//!   so a changed page or quote fails until it is checked again, and every
-//!   quote must share terms with its item or step.
+//!   so a changed page or quote fails until it is checked again, every
+//!   reference needs a quote, and every quote must share a term with its
+//!   item or step.
 
 use std::collections::{BTreeMap, BTreeSet, HashMap};
 use std::fmt::Write as _;
@@ -150,6 +154,9 @@ pub struct Ref {
     pub quote: Option<String>,
     /// Everything the item or step says, for its terms.
     pub text: String,
+    /// A lesson figure step showing the book's own figure (`image.book`):
+    /// the picture is its proof, and a figure-only page has no line to quote.
+    pub book_figure: bool,
 }
 
 /// One row of `content/book-refs/LNN.tsv`.
@@ -264,7 +271,7 @@ pub fn collect(root: &Path, chapter: &str, num: &str) -> Result<Vec<Ref>, String
             continue;
         };
         let quote = src.get("quote").and_then(Value::as_str).map(String::from);
-        out.push(Ref { id: id.into(), page, quote, text: text_of(item) });
+        out.push(Ref { id: id.into(), page, quote, text: text_of(item), book_figure: false });
     }
     let lessons = root.join("content/lessons").join(chapter).join(format!("{num}.yaml"));
     if lessons.exists() {
@@ -278,7 +285,15 @@ pub fn collect(root: &Path, chapter: &str, num: &str) -> Result<Vec<Ref>, String
                     continue;
                 };
                 let quote = step.get("quote").and_then(Value::as_str).map(String::from);
-                out.push(Ref { id: format!("{id}#{}", i + 1), page, quote, text: text_of(step) });
+                let book_figure = step.get("kind").and_then(Value::as_str) == Some("figure")
+                    && step.get("image").and_then(|i| i.get("book")).and_then(Value::as_bool) == Some(true);
+                out.push(Ref {
+                    id: format!("{id}#{}", i + 1),
+                    page,
+                    quote,
+                    text: text_of(step),
+                    book_figure,
+                });
             }
         }
     }
@@ -319,7 +334,8 @@ pub fn quote_relates(r: &Ref) -> bool {
     let stem = |w: String| w.chars().take(STEM).collect::<String>();
     let q: BTreeSet<String> = terms(q).into_iter().map(stem).collect();
     let t: BTreeSet<String> = terms(&r.text).into_iter().map(stem).collect();
-    q.is_empty() || q.intersection(&t).count() >= QUOTE_SHARED
+    // A joke or analogy says too little in English to compare.
+    q.is_empty() || t.len() < 3 || q.intersection(&t).count() >= QUOTE_SHARED
 }
 
 /// The book-free half, run by `validate`: lock rows match the content, and
@@ -363,6 +379,12 @@ pub fn check_locks(root: &Path, lectures: &[String]) -> Vec<String> {
                     r.id
                 )),
                 Some(_) => {}
+            }
+            if r.quote.is_none() && !r.book_figure {
+                problems.push(format!(
+                    "{at}: {} has no quote; every page chip shows the book's line that holds its fact (pagerefs/pick_quotes.py proposes one)",
+                    r.id
+                ));
             }
             if !quote_relates(r) {
                 problems.push(format!(
@@ -422,6 +444,23 @@ fn read_checked(path: &Path) -> HashMap<String, (u32, String)> {
     out
 }
 
+/// `ref<TAB>page<TAB>quote-ok<TAB>the quote` lines: a quote a person read off
+/// the page image (a figure or table the text layer and OCR miss or garble).
+/// It counts only while the quote is exactly that text.
+fn read_image_quotes(path: &Path) -> HashMap<String, (u32, String)> {
+    let mut out = HashMap::new();
+    for line in std::fs::read_to_string(path).unwrap_or_default().lines() {
+        let f: Vec<&str> = line.split('\t').collect();
+        if line.starts_with('#') || f.len() < 4 || f[2] != "quote-ok" {
+            continue;
+        }
+        if let Ok(p) = f[1].parse() {
+            out.insert(f[0].to_string(), (p, squash(f[3])));
+        }
+    }
+    out
+}
+
 /// How well each page carries a reference's terms: the idf-weighted share.
 fn scores(
     text: &str,
@@ -476,6 +515,7 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
         let old =
             if lock_path.exists() { read_lock(&lock_path).map_err(|e| vec![e])? } else { BTreeMap::new() };
         let checked = read_checked(&checked_dir.join(format!("{num}.tsv")));
+        let image_quotes = read_image_quotes(&checked_dir.join(format!("{num}.tsv")));
         let refs = collect(root, chapter, num).map_err(|e| vec![e])?;
 
         let mut rows = Vec::new();
@@ -487,9 +527,11 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
                 bad.push(format!("{}: p{} is not in {num}'s book text", r.id, r.page));
                 continue;
             };
+            let mut from_image = false;
             if let Some(q) = &r.quote {
                 let q = squash(q);
-                if !page_text.contains(&q) {
+                from_image = image_quotes.get(&r.id).is_some_and(|(p, iq)| *p == r.page && *iq == q);
+                if !page_text.contains(&q) && !from_image {
                     let elsewhere: Vec<String> = squashed
                         .iter()
                         .filter(|(_, t)| t.contains(&q))
@@ -510,10 +552,19 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
                 .filter(|row| row.basis == "checked" && row.page == r.page && row.quote == qh)
                 .map(|row| row.note.clone())
                 .or_else(|| checked.get(&r.id).filter(|(p, _)| *p == r.page).map(|(_, n)| n.clone()));
-            let (basis, note) = if r.quote.is_some() {
-                ("quote", String::new())
+            if r.quote.is_none() && !r.book_figure {
+                bad.push(format!(
+                    "{}: has no quote; quote the line of p{} that holds its fact",
+                    r.id, r.page
+                ));
+                continue;
+            }
+            // A quote proves the line is on the page; the page itself must
+            // still be where the reference's fact is.
+            let (basis, note) = if from_image {
+                ("image", String::new())
             } else if cited >= MIN_SCORE && best - cited < MAX_GAP {
-                ("text", String::new())
+                (if r.quote.is_some() { "quote" } else { "figure" }, String::new())
             } else if let Some(n) = human {
                 ("checked", n)
             } else {
@@ -532,18 +583,18 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
         }
         let _ = writeln!(
             summary,
-            "{}: {} refs, {} by quote, {} by text, {} checked by hand, {} to look at",
+            "{}: {} refs, {} quoted, {} book figures, {} checked by hand, {} to look at",
             entry.id,
             refs.len(),
             by_basis.get("quote").unwrap_or(&0),
-            by_basis.get("text").unwrap_or(&0),
+            by_basis.get("figure").unwrap_or(&0),
             by_basis.get("checked").unwrap_or(&0),
             bad.len()
         );
         if bad.is_empty() && write {
             let mut out = format!(
                 "# {} page references, checked against the book by `batna-tools refs --lecture {} --write`.\n\
-                 # ref\tpage\tquote hash\tbasis (quote | text | checked)\tnote\n",
+                 # ref\tpage\tquote hash\tbasis (quote | image | figure | checked)\tnote\n",
                 entry.id, entry.id
             );
             for row in rows {
@@ -584,7 +635,7 @@ mod tests {
     }
 
     fn r(quote: &str, text: &str) -> Ref {
-        Ref { id: "x".into(), page: 3, quote: Some(quote.into()), text: text.into() }
+        Ref { id: "x".into(), page: 3, quote: Some(quote.into()), text: text.into(), book_figure: false }
     }
 
     #[test]
@@ -655,9 +706,9 @@ mod tests {
              === book page 2 (PDF page 6) ===\nIn alcoholism and right heart failure,\nfibrosis is predominantly in zone 3.\n",
         )
         .unwrap();
-        let yaml = |page: u32| {
+        let yaml = |page: u32, quote: &str| {
             format!(
-                "items:\n  - id: hb.L01.001\n    kind: card\n    front: Where does fibrosis start in alcoholism and right heart failure?\n    back: Zone 3.\n    src: {{ page: {page} }}\n  - id: hb.L01.002\n    kind: card\n    front: What do stellate cells store?\n    back: Vitamin A.\n    src: {{ page: 1, quote: \"store vitamin A in the space of Disse\" }}\n"
+                "items:\n  - id: hb.L01.001\n    kind: card\n    front: Where does fibrosis start in alcoholism and right heart failure?\n    back: Zone 3.\n    src: {{ page: {page}{quote} }}\n  - id: hb.L01.002\n    kind: card\n    front: What do stellate cells store?\n    back: Vitamin A.\n    src: {{ page: 1, quote: \"store vitamin A in the space of Disse\" }}\n"
             )
         };
         let args = |extra: &[&str]| {
@@ -669,15 +720,20 @@ mod tests {
             a.extend(extra.iter().map(|s| s.to_string()));
             a
         };
-        std::fs::write(root.join("content/hb/L01.yaml"), yaml(1)).unwrap();
+        let zone3 = ", quote: \"fibrosis is predominantly in zone 3\"";
+        std::fs::write(root.join("content/hb/L01.yaml"), yaml(2, "")).unwrap();
         let p = run(root, &args(&["--write"])).unwrap_err();
-        assert!(p.iter().any(|p| p.contains("hb.L01.001: p1 carries")), "{p:#?}");
+        assert!(p.iter().any(|p| p.contains("hb.L01.001: has no quote")), "{p:#?}");
         assert!(!root.join(LOCKS).join("L01.tsv").exists());
 
-        std::fs::write(root.join("content/hb/L01.yaml"), yaml(2)).unwrap();
+        std::fs::write(root.join("content/hb/L01.yaml"), yaml(1, zone3)).unwrap();
+        let p = run(root, &args(&["--write"])).unwrap_err();
+        assert!(p.iter().any(|p| p.contains("hb.L01.001: quote is not on p1 (p2)")), "{p:#?}");
+
+        std::fs::write(root.join("content/hb/L01.yaml"), yaml(2, zone3)).unwrap();
         run(root, &args(&["--write"])).unwrap();
         let lock = read_lock(&root.join(LOCKS).join("L01.tsv")).unwrap();
-        assert_eq!(lock["hb.L01.001"].basis, "text");
+        assert_eq!(lock["hb.L01.001"].basis, "quote");
         assert_eq!(lock["hb.L01.002"].basis, "quote");
         assert!(check_locks(root, &["hb.L01".into()]).is_empty());
     }

@@ -105,6 +105,7 @@ pub mod book {
     pub const TITLE: &str = "صفحة الكتاب";
     pub const NO_LECTURE: &str = "الصفحة دي برّه المحاضرات اللي في باطنة.";
     pub const QUOTE_NOTE: &str = "سطر قصير من الصفحة، عشان تتأكد من المصدر.";
+    pub const QUOTE_HELD: &str = "سطر الكتاب هيظهر هنا بعد ما تجاوب، عشان مايكشفش الإجابة.";
     pub const MADE: &str = "اللي في باطنة من الصفحة دي:";
     pub const NOTHING_YET: &str = "لسه مفيش كروت أو أسئلة من الصفحة دي.";
     pub const STUDY: &str = "ذاكر الصفحة دي";

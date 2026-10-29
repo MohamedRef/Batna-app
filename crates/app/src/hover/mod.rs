@@ -42,7 +42,13 @@ pub fn use_hover() {
 /// there is one), and a tap or click opens the page's sheet
 /// ([`crate::book`]): the quote, the lecture, and a session on that page.
 #[component]
-pub fn BookPage(page: u32, quote: Option<String>) -> Element {
+pub fn BookPage(
+    page: u32,
+    quote: Option<String>,
+    /// The item has a quote, kept back until he answers.
+    #[props(default)]
+    held: bool,
+) -> Element {
     let peek = quote.clone().unwrap_or_default();
     rsx! {
         button {
@@ -54,7 +60,7 @@ pub fn BookPage(page: u32, quote: Option<String>) -> Element {
             onclick: move |e| {
                 // Inside a card or row that has its own action, the chip only opens the page.
                 e.stop_propagation();
-                crate::pagesheet::open(page, quote.clone());
+                crate::pagesheet::open(page, quote.clone(), held);
             },
             bdi { {crate::i18n::cite::page(page)} }
         }

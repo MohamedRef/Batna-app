@@ -4,7 +4,8 @@
 //! handle: free dragging, with a pull towards a peek, half and near-full
 //! stop, a fling to the next stop, and a drag (or fling) down to close. It
 //! reopens at the size it was left. There is no scrim: the page under it
-//! keeps scrolling, and the chip that opened it is scrolled above it.
+//! keeps scrolling, and the sheet floats over it without moving it
+//! (Mohamed, 2026-10-29).
 //!
 //! Adapted from kabar-app main: crates/app/src/sheet.rs (PR #453). The
 //! gestures live in `assets/sheet.js`, installed once by [`use_gestures`]:

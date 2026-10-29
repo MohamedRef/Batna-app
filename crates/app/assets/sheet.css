@@ -4,7 +4,8 @@
    hairline and a long shadow, so it never reads as one more card on the
    page. Docked at the bottom on every width, a phone-width card from
    600dp. Its height is --sheet-f of the window: at most, until he sizes
-   it, then exactly. No scrim: the page under it stays usable. */
+   it, then exactly. No scrim: the page under it stays usable, and it floats over the page
+   without moving it. */
 .bsheet {
   --sheet-f: 0.56;
   position: fixed;
@@ -93,8 +94,3 @@
 .bsheet-body > * { flex-shrink: 0; }
 /* Tinted boxes inside (a quote, a note) stay boxes on the tinted sheet. */
 .bsheet :is(.note, blockquote, figure) { background: color-mix(in srgb, var(--surface) 55%, var(--sheet)); }
-
-/* The page under the sheet gets room to scroll its last lines up. */
-:root[data-sheet="open"] :is(.content, [data-sheet-room]) {
-  padding-block-end: calc(var(--sheet-room, 50dvh) + var(--sp-6)) !important;
-}

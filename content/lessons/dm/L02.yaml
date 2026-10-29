@@ -1,0 +1,552 @@
+schema: batna.lesson/v1
+lecture: dm.L02
+lessons:
+  # ------------------------------------------------------------------
+  - id: dm.L02.lesson1
+    title: "إشارة المرور: مين نعمله test ومتى نعيد؟"
+    hook: "أحمر، أصفر، أخضر: تلات أرقام لكل test. والأهم: مين يستاهل نكشف عليه أصلًا."
+    minutes: 8
+    pages: [18, 20]
+    topics: [diagnosis, screening]
+    goals:
+      - "تقرا الـ ADA cut-offs من إشارة المرور"
+      - "تعرف امتى الـ A1C ممنوع"
+      - "تحفظ مين نعمله screening وكل قد إيه نعيد"
+    status: unverified
+    steps:
+      - kind: figure
+        page: 18
+        title: "إشارة المرور بتاعة الكتاب"
+        image: { file: dm/L02-ada-cutoffs.webp, book: true }
+        caption: "الأحمر **diabetes**، الأصفر **prediabetes**، الأخضر **normal**. الجديد هنا عن المحاضرة الأولى: الـ A1C للـ prediabetes ليه سقف ==5.7–6.4%==."
+        alt: "Book figure: three traffic lights for A1C, fasting glucose and glucose tolerance test. Red diabetes: 6.5% or above, 126 mg/dL or above, 200 mg/dL or above. Amber prediabetes: 5.7–6.4%, 100–125, 140–199. Green normal: below 5.7%, 99 or below, 140 or below."
+      - kind: explain
+        page: 18
+        title: "الـ A1C: بشرطين"
+        quote: "In conditions such as hemoglobinopathies, HIV, hemodialysis, recent blood loss or transfusion, or erythropoietin therapy, only plasma blood glucose criteria should be used"
+        text: |
+          1. لازم يتعمل بـ method ==NGSP-certified== (National Glycohemoglobin Standardization Program)، علشان ما نشخّصش غلط أو نفوّت حالة.
+          2. في الحالات دي **plasma glucose بس**:
+          - **hemoglobinopathies**
+          - **HIV**
+          - **hemodialysis**
+          - **recent blood loss أو transfusion**
+          - **erythropoietin therapy**
+      - kind: reveal
+        page: 18
+        quote: "In conditions such as hemoglobinopathies, HIV, hemodialysis, recent blood loss or transfusion, or erythropoietin therapy, only plasma blood glucose criteria should be used"
+        prompt: "عيانة اتنقل لها دم من 3 أسابيع. الـ A1C هيطلع أعلى ولا أقل من الحقيقة؟"
+        answer: |
+          غالبًا **أقل**. الدم المنقول والكرات الجديدة ما عاشتش وسط سكرها 120 يوم، فنسبة الـ hemoglobin المسكّر بتقل.
+
+          علشان كده الكتاب بيقول: في **recent blood loss or transfusion** استخدم **plasma glucose** بس. (التفسير فسيولوجي؛ القاعدة من الكتاب.)
+      - kind: explain
+        page: 18
+        title: "مين نعمله screening؟"
+        quote: "should be considered in adults of any age with overweight or obesity (BMI ≥25 kg/m2 who have one or more risk factors"
+        text: |
+          **أي سن** لو ==BMI ≥25== ومعاه **risk factor واحد أو أكتر**:
+          - قريب درجة أولى عنده diabetes
+          - high-risk race/ethnicity
+          - history of **CVD**
+          - **hypertension**
+          - **HDL <35** و/أو **TG >250 mg/dL**
+          - **PCOS**
+          - **physical inactivity**
+          - علامات insulin resistance زي **acanthosis nigricans**
+
+          ولكل الناس: ابدأ من سن ==35==. وكمان أي حد عنده **HIV**.
+      - kind: mnemonic
+        page: 19
+        quote: "Hypertension Physical inactivity Polycystic ovary syndrome HDL level <35 mg/dL and/or a triglyceride level >250 mg/dL"
+        word: "FRESH PIA"
+        parts:
+          - { key: "F", text: "First-degree relative with diabetes" }
+          - { key: "R", text: "Race/ethnicity: high-risk" }
+          - { key: "E", text: "Event: history of CVD" }
+          - { key: "S", text: "Systolic up: hypertension" }
+          - { key: "H", text: "HDL <35 and/or TG >250" }
+          - { key: "P", text: "PCOS" }
+          - { key: "I", text: "Inactivity" }
+          - { key: "A", text: "Acanthosis nigricans (insulin resistance)" }
+        hook: "عيان **BMI ≥25** محتاج نفس **FRESH**، ومعاه **PIA**. لو عنده حرف واحد من دول، اعمله test."
+      - kind: check
+        page: 18
+        quote: "should be considered in adults of any age with overweight or obesity (BMI ≥25 kg/m2 who have one or more risk factors"
+        question: "28-year-old, BMI 27, PCOS, no symptoms. Screen?"
+        options: ["Yes, now", "No, wait until 35", "Only if BMI ≥30", "Only if she has symptoms"]
+        answer: 0
+        why:
+          - "صح: **BMI ≥25** + **PCOS** = test في أي سن."
+          - "الـ 35 لكل الناس، بس الـ overweight مع risk factor بيتكشف أي سن."
+          - "الحد 25 مش 30."
+          - "الـ screening أصلًا للناس اللي من غير أعراض."
+      - kind: explain
+        page: 19
+        title: "الحمل في الـ ADA"
+        quote: "Screen individuals with gestational diabetes mellitus for prediabetes or diabetes at 4–12 weeks postpartum"
+        text: |
+          1. **قبل الحمل:** screen اللي عندها risk factors، وفكّر تعمل test لكل الستات في سن الإنجاب.
+          2. **قبل 15 أسبوع:** في أول prenatal visit، test اللي عندها risk factors (وفكّر في الكل) بالمعايير العادية لو ما اتعملهاش قبل الحمل.
+          3. **24–28 أسبوع:** screen للـ **GDM**.
+          4. **بعد الولادة:** اللي كان عندها GDM تتعمل test في ==4–12 weeks postpartum==.
+      - kind: table
+        page: 20
+        quote: "People with prediabetes should be tested yearly. People who were diagnosed with GDM should have lifelong testing at least every 3 years"
+        title: "نعيد امتى؟"
+        columns: [Group, Repeat]
+        rows:
+          - ["Prediabetes", "Yearly"]
+          - ["Previous GDM", "Lifelong, ≥ every 3 years"]
+          - ["Normal result", "At least every 3 years"]
+          - ["Very high risk, weight gain", "Shorter intervals"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: aside
+        tone: tip
+        page: 20
+        quote: "If results are normal, testing should be repeated at a minimum of 3-year intervals"
+        text: "قاعدة **1 و 3**: الـ **prediabetes** كل **سنة**، والباقي (normal أو GDM قديم) كل **3 سنين** على الأقل. والـ GDM القديم **مدى الحياة**."
+      - kind: try
+        items: [dm.L02.001, dm.L02.004, dm.L02.006, dm.L02.012, dm.L02.013]
+    recap:
+      - "A1C: diabetes ≥6.5، prediabetes 5.7–6.4، normal <5.7؛ لازم NGSP-certified."
+      - "Glucose بس في hemoglobinopathies، HIV، dialysis، نزيف أو نقل دم، EPO."
+      - "Screen أي سن لو BMI ≥25 + risk factor (**FRESH PIA**)؛ الكل من 35؛ وأي حد عنده HIV."
+      - "GDM: 24–28 أسبوع؛ بعد الولادة 4–12 أسبوع؛ وبعدها كل 3 سنين مدى الحياة."
+      - "Prediabetes كل سنة؛ normal كل 3 سنين على الأقل."
+    practice: [dm.L02.001, dm.L02.002, dm.L02.003, dm.L02.004, dm.L02.005, dm.L02.006, dm.L02.007, dm.L02.008, dm.L02.009, dm.L02.010, dm.L02.011, dm.L02.012, dm.L02.013, dm.L02.014, dm.L02.065, dm.L02.066, dm.L02.067]
+  # ------------------------------------------------------------------
+  - id: dm.L02.lesson2
+    title: "امنع، استهدف، وخسّ: 7% و 7% و 5%"
+    hook: "رقم 7 بيتكرر: 7% وزن تمنع بيه السكر، و A1C أقل من 7 للعلاج."
+    minutes: 10
+    pages: [20, 23]
+    topics: [prevention, targets, weight]
+    goals:
+      - "تدير الـ prediabetes (سؤال كتاب)"
+      - "تحفظ الـ glycemic targets والـ CGM targets"
+      - "تعرف أرقام الوزن والأدوية والـ metabolic surgery"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 20
+        title: "منع الـ type 2: تلات أدوات"
+        quote: "intensive lifestyle behavior change program to achieve and maintain a weight reduction of at least 7% of initial body weight."
+        text: |
+          - **Monitor:** الـ prediabetes يتعمله test **كل سنة على الأقل**.
+          - **Lifestyle:** الـ overweight/obese عالي الخطورة يتحوّل لـ **intensive lifestyle program** هدفه ==≥7%== من وزنه الأصلي ويحافظ عليه.
+          - **Metformin:** للـ high risk، خصوصًا:
+          - سن **25–59**
+          - **BMI ≥35**
+          - **FPG ≥110**
+          - **A1C ≥6.0%**
+          - **prior GDM**
+      - kind: explain
+        page: 20
+        title: "Pioglitazone: علاج للمخ والقلب"
+        quote: "pioglitazone may be considered to lower the risk of stroke or myocardial infarction."
+        text: |
+          لو العيان عنده **history of stroke** + **insulin resistance** + **prediabetes**، الـ ==pioglitazone== ممكن يقلل خطر **stroke أو MI**.
+
+          بس لازم توازن مع: **weight gain**، **edema**، **fracture**.
+      - kind: check
+        page: 20
+        quote: "especially those aged 25–59 years with BMI ≥35 kg/m2, higher FPG (e.g., ≥110 mg/dL), and higher A1C (e.g., ≥6.0%), and in individuals with prior GDM."
+        question: "Prediabetes, 40 y, BMI 37, FPG 115, A1C 6.2%. Add to lifestyle?"
+        options: ["Metformin", "Pioglitazone", "Insulin", "Nothing"]
+        answer: 0
+        why:
+          - "صح: السن والـ BMI والـ FPG والـ A1C كلهم في رينج الـ metformin."
+          - "الـ pioglitazone للي عنده stroke قديم و insulin resistance."
+          - "الـ insulin مش علاج وقائي."
+          - "دي high risk؛ الوقاية مطلوبة."
+      - kind: explain
+        page: 20
+        title: "الأهداف"
+        quote: "An A1C goal for many nonpregnant adults of <7% without significant hypoglycemia is appropriate."
+        text: |
+          - **A1C <7%** لأغلب الكبار غير الحوامل، من غير hypoglycemia كبيرة.
+          - **أقل من 7** مقبول وممكن مفيد، **لو** بأمان.
+          - **أقل صرامة (<8%)** لو العمر المتوقع قصير أو ضرر العلاج أكبر من فايدته.
+
+          وبالـ **CGM** (ambulatory glucose profile):
+          - ==Time in range >70%==
+          - **Time below range <4%**
+          - **Time <54 mg/dL <1%**
+      - kind: figure
+        page: 21
+        quote: "time in range of >70% with time below range <4% and time <54 mg/dL <1%."
+        title: "شريط الـ CGM"
+        alt: "A horizontal bar of a CGM day: green time in range more than 70 percent, amber time below range less than 4 percent, of which red time below 54 less than 1 percent; the rest is above range."
+        caption: "ركّز على الأخضر: ==أكتر من 70%==. والأحمر (تحت 54) لازم يبقى أقل من **1%** لأنه الـ hypoglycemia الخطيرة."
+        svg: |
+          <svg viewBox="0 0 330 150" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="30" width="12" height="40" class="fg-dot-bad"/>
+            <rect x="22" y="30" width="24" height="40" class="fg-acc"/>
+            <rect x="46" y="30" width="220" height="40" class="fg-good"/>
+            <rect x="266" y="30" width="54" height="40" class="fg-box"/>
+            <text x="156" y="55" text-anchor="middle" class="t-b t-good">In range &gt;70%</text>
+            <text x="293" y="55" text-anchor="middle" class="t-sm">above</text>
+            <text x="16" y="20" text-anchor="middle" class="t-sm t-bad t-b">&lt;1%</text>
+            <text x="34" y="92" text-anchor="middle" class="t-sm t-b">&lt;4%</text>
+            <text x="10" y="112" class="t-sm t-mut">red: below 54 mg/dL</text>
+            <text x="10" y="128" class="t-sm t-mut">amber + red: below range</text>
+          </svg>
+      - kind: explain
+        page: 21
+        title: "الوزن: كل كيلو بيفرق"
+        quote: "Relatively small weight loss (approximately 3–7% of baseline weight) improves glycemia and other intermediate cardiovascular risk factors."
+        text: |
+          - الهدف لأغلب الـ type 2 الـ overweight: ==≥5%== بالأكل والحركة والـ behavioral therapy.
+          - **3–7%** بيحسّن السكر والـ CV risk factors.
+          - **>10%** ممكن يعمل ==remission== للـ type 2، ويحسّن الـ CV outcomes والـ mortality.
+          - المهم الـ **energy deficit**، مش نوع الـ macronutrients. والأكل **individualized**.
+          - الـ **supplements** مفيش دليل إنها بتخسّس.
+      - kind: aside
+        tone: joke
+        page: 22
+        quote: "There is no clear evidence that nutrition supplements are effective for weight loss."
+        text: "المكمّل اللي بيتعلن عنه «خسّ 10 كيلو وانت نايم» بيخسّس حاجة واحدة بالتأكيد: **محفظتك**. الكتاب صريح: **no clear evidence**."
+      - kind: explain
+        page: 22
+        title: "أدوية التخسيس"
+        quote: "effective as an adjunct to nutrition, physical activity, and behavioral counseling for selected people with type 2 diabetes and BMI ≥27 kg/m2."
+        text: |
+          - اختار دوا السكر وانت حاطط في دماغك ==effect on weight==.
+          - **Obesity pharmacotherapy:** adjunct لـ type 2 مع **BMI ≥27**.
+          - **فعّال** لو **≥5%** بعد **3 شهور**، ويكمل يخسّس لو كمّل.
+          - لو مفيش response بدري أو مشاكل tolerability: فكّر توقفه وتدوّر على بديل.
+      - kind: table
+        page: 22
+        quote: "Metabolic surgery should be a recommended option to treat type 2 diabetes with BMI ≥40 kg/m2 and in adults with BMI 35.0–39.9 kg/m2"
+        title: "Metabolic surgery بالـ BMI"
+        columns: [BMI, Surgery]
+        rows:
+          - ["≥40", "Recommended"]
+          - ["35–39.9", "Recommended if nonsurgical fails"]
+          - ["30–34.9", "May be considered if nonsurgical fails"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: explain
+        page: 23
+        title: "بعد العملية"
+        quote: "People who undergo metabolic surgery should receive long-term medical and behavioral support and routine micronutrient, nutritional, and metabolic status monitoring."
+        text: |
+          - تتعمل في **high-volume centers** مع فريق multidisciplinary فاهم في الـ obesity والسكر وجراحة الجهاز الهضمي.
+          - بعدها: **long-term** medical و behavioral support، ومتابعة ==micronutrients== والتغذية والـ metabolic status.
+      - kind: case
+        page: 22
+        quote: "Metabolic surgery may be considered as an option to treat type 2 diabetes in adults with a BMI of 30.0–34.9 kg/m2"
+        stem: "Type 2 diabetes, BMI 32. Two years of diet, exercise and drugs; uncontrolled and no durable weight loss."
+        steps:
+          - question: "Metabolic surgery?"
+            options: ["May be considered", "Recommended", "Not an option below 35", "Only if BMI ≥40"]
+            answer: 0
+            why: "الـ **30–34.9** = **may be considered** لو الطرق غير الجراحية فشلت. الـ recommended من 35."
+          - question: "After surgery, which follow-up matters most?"
+            options: ["Lifelong micronutrient and metabolic monitoring with support", "None; diabetes is cured", "Only yearly A1C", "Only weight"]
+            answer: 0
+            why: "الكتاب: **long-term** support و **routine micronutrient, nutritional, and metabolic status monitoring**."
+      - kind: try
+        items: [dm.L02.016, dm.L02.017, dm.L02.022, dm.L02.027, dm.L02.033]
+    recap:
+      - "Prediabetes: test كل سنة، lifestyle ≥7%، metformin (25–59، BMI ≥35، FPG ≥110، A1C ≥6، prior GDM)."
+      - "Pioglitazone لو stroke قديم + insulin resistance؛ احسب weight gain و edema و fracture."
+      - "A1C <7؛ <8 لو العمر قصير أو الضرر أكبر. CGM: TIR >70، TBR <4، <54 أقل من 1%."
+      - "≥5% وزن للأغلبية؛ 3–7% بيحسّن؛ >10% ممكن remission. الـ supplements لأ."
+      - "أدوية التخسيس من BMI 27، فعّالة ≥5% في 3 شهور. Surgery: ≥40 أو 35–39.9 recommended؛ 30–34.9 may be considered."
+    practice: [dm.L02.015, dm.L02.016, dm.L02.017, dm.L02.018, dm.L02.019, dm.L02.020, dm.L02.021, dm.L02.022, dm.L02.023, dm.L02.024, dm.L02.025, dm.L02.026, dm.L02.027, dm.L02.028, dm.L02.029, dm.L02.030, dm.L02.031, dm.L02.032, dm.L02.033, dm.L02.034, dm.L02.035, dm.L02.068, dm.L02.069, dm.L02.070, dm.L02.071, dm.L02.072, dm.L02.073, dm.L02.074, dm.L02.086, dm.L02.090]
+  # ------------------------------------------------------------------
+  - id: dm.L02.lesson3
+    title: "شجرة الـ ADA: العضو قبل السكر"
+    hook: "قبل ما تسأل «السكر كام؟» اسأل «القلب والكلى عاملين إيه؟». الدوا بيتختار بالعضو."
+    minutes: 10
+    pages: [23, 24]
+    topics: [pharm-t1, pharm-t2]
+    goals:
+      - "تعرف علاج الـ type 1"
+      - "تمشي على فروع الـ ADA algorithm: ASCVD، HF، CKD"
+      - "تفرّق كفاءة الأدوية على الوزن والسكر"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 23
+        title: "Type 1: insulin زي الطبيعة"
+        quote: "Most individuals with type 1 diabetes should be treated with multiple daily injections of prandial and basal insulin, or continuous subcutaneous insulin infusion."
+        text: |
+          أغلب الـ **type 1**:
+          - ==MDI==: **prandial + basal** insulin، أو **CSII** (pump).
+          - **Rapid-acting analogs** علشان تقلل الـ hypoglycemia.
+
+          الفكرة: تقلّد البنكرياس الطبيعي، basal طول اليوم و bolus مع كل أكلة.
+      - kind: explain
+        page: 24
+        title: "Type 2: هدفين ماشيين مع بعض"
+        quote: "Goal: Cardiovascular and Kidney Risk Reduction in High-Risk Individuals with Type 2 Diabetes"
+        text: |
+          الـ algorithm فيه عمودين:
+          1. ==Cardiovascular and kidney risk reduction== في الـ high risk، **بغض النظر عن الـ A1C**.
+          2. **Weight and glycemic goals**.
+
+          يعني لو العيان عنده **ASCVD** أو **HF** أو **CKD**، الدوا بيتختار علشان العضو ده الأول.
+      - kind: figure
+        page: 24
+        quote: "GLP-1 RA with proven CVD benefit OR SGLT2i with proven CVD benefit"
+        title: "الفروع التلاتة"
+        alt: "Decision tree. ASCVD or high CVD risk: GLP-1 RA or SGLT2i with proven CVD benefit. Heart failure: SGLT2i with proven HF benefit. CKD on maximal ACEi or ARB: SGLT2i with CKD evidence, start at eGFR 20 or more, or GLP-1 RA with CKD benefit."
+        caption: "الـ **SGLT2i** موجود في التلات فروع، والـ **GLP-1 RA** في اتنين. الـ HF ليه ==SGLT2i== بس."
+        svg: |
+          <svg viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L02a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-bad"/></marker></defs>
+            <rect x="40" y="6" width="250" height="34" rx="10" class="fg-bad"/>
+            <text x="165" y="28" text-anchor="middle" class="t-b">High-risk type 2</text>
+            <path d="M165 40 V56" class="fg-arrow-bad" marker-end="url(#L02a)"/>
+            <rect x="10" y="60" width="310" height="76" rx="10" class="fg-box"/>
+            <text x="20" y="80" class="t-b">+ ASCVD / high CVD risk</text>
+            <text x="20" y="100" class="t-sm">GLP-1 RA with proven CVD benefit</text>
+            <text x="20" y="116" class="t-sm t-b t-acc">OR</text>
+            <text x="44" y="116" class="t-sm">SGLT2i with proven CVD benefit</text>
+            <text x="20" y="131" class="t-sm t-mut">above goal: add the other, or pioglitazone</text>
+            <rect x="10" y="144" width="310" height="54" rx="10" class="fg-box"/>
+            <text x="20" y="164" class="t-b">+ Heart failure (HFrEF / HFpEF)</text>
+            <text x="20" y="184" class="t-sm">SGLT2i with proven HF benefit</text>
+            <rect x="10" y="206" width="310" height="118" rx="10" class="fg-box"/>
+            <text x="20" y="226" class="t-b">+ CKD on max ACEi / ARB</text>
+            <text x="20" y="243" class="t-sm t-mut">eGFR &lt;60 or ACR ≥3 mg/mmol (repeat)</text>
+            <text x="20" y="262" class="t-sm">SGLT2i: start eGFR ≥20, keep until dialysis</text>
+            <text x="20" y="278" class="t-sm t-mut">glucose effect falls below eGFR 45</text>
+            <text x="20" y="296" class="t-sm t-b t-acc">OR</text>
+            <text x="44" y="296" class="t-sm">GLP-1 RA with proven CKD benefit</text>
+            <text x="20" y="314" class="t-sm t-mut">above goal on SGLT2i: add GLP-1 RA</text>
+          </svg>
+      - kind: reveal
+        page: 24
+        quote: "SGLT2i can be started with eGFR ≥20 mL/min/1.73 m2 Continue until initiation of dialysis or transplantation"
+        prompt: "ليه الـ SGLT2i بنكمّله في الـ CKD لحد الـ dialysis، مع إن مفعوله على السكر بيقل تحت eGFR 45؟"
+        answer: |
+          لأننا هنا مش عايزينه علشان السكر. بيحمي الكلية: بيقلل الـ **intraglomerular pressure** (tubuloglomerular feedback)، فيبطّأ الـ **CKD progression**.
+
+          السكر بيتصرّف في البول بقدر ما الكلية بتفلتر، فلما الـ eGFR يقل، الجلوكوز اللي بيخرج يقل. لكن الحماية الكلوية مستمرة. (تفسير فسيولوجي؛ الأرقام **≥20** و **<45** من الكتاب.)
+      - kind: check
+        page: 24
+        quote: "SGLT2i with proven HF benefit in this population"
+        question: "Type 2 diabetes with HFpEF, A1C 7.1%. Preferred glucose-lowering class?"
+        options: ["SGLT2i with proven HF benefit", "Pioglitazone", "Sulfonylurea", "DPP-4i"]
+        answer: 0
+        why:
+          - "صح: فرع الـ **HF** فيه SGLT2i بس، والـ A1C مش مهم هنا."
+          - "الـ pioglitazone بيعمل **edema**، ودي آخر حاجة عايزها في الـ HF."
+          - "مفيش HF benefit."
+          - "مفيش HF benefit."
+      - kind: explain
+        page: 24
+        title: "العمود التاني: الوزن والسكر"
+        quote: "Metformin or other agent (including combination therapy) that provides adequate EFFICACY to achieve and maintain glycemic treatment goals"
+        text: |
+          - **Glycemic:** ==metformin== أو أي دوا (أو combination) كفاءته كفاية توصل للهدف وتحافظ عليه، وابعد عن الـ **hypoglycemia** في الـ high risk.
+          - **Weight:** اختار بالكفاءة على الوزن.
+
+          ولو لسه فوق الهدف أو فيه hypo/hyper أو barriers: **DSMES**، **CGM**، و **social determinants of health**.
+      - kind: table
+        page: 24
+        quote: "Efficacy for weight loss Very high: Semaglutide, Tirzepatide"
+        title: "كفاءة على الوزن"
+        columns: [Level, Drugs]
+        rows:
+          - ["Very high", "Semaglutide, tirzepatide"]
+          - ["High", "Dulaglutide, liraglutide"]
+          - ["Intermediate", "Other GLP-1 RA, SGLT2i"]
+          - ["Neutral", "Metformin, DPP-4i"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1]]
+      - kind: table
+        page: 24
+        quote: "Efficacy for glucose lowering Intermediate: DPP-4i"
+        title: "كفاءة على السكر"
+        columns: [Level, Drugs]
+        rows:
+          - ["Very high", "Dulaglutide (high dose), semaglutide, tirzepatide, insulin, combinations"]
+          - ["High", "Other GLP-1 RA, metformin, pioglitazone, SGLT2i, sulfonylurea"]
+          - ["Intermediate", "DPP-4i"]
+        hide: [[0, 1], [2, 1]]
+      - kind: aside
+        tone: trap
+        page: 24
+        quote: "Efficacy for glucose lowering Intermediate: DPP-4i"
+        text: "فخ: الـ **DPP-4i** هو الوحيد **intermediate** على السكر و **neutral** على الوزن. والـ **metformin** high على السكر بس **neutral** على الوزن. والـ **SGLT2i** high على السكر و intermediate على الوزن."
+      - kind: sort
+        page: 24
+        quote: "Agents with potential benefit in MASLD or MASH GLP-1 RA, dual GIP and GLP-1 RA, pioglitazone, or combination of GLP-1 RA with pioglitazone"
+        prompt: "مين الدوا اللي الـ algorithm بيحطه للحالة دي؟"
+        bins: ["ASCVD", "Heart failure", "MASLD/MASH"]
+        cards:
+          - { text: "GLP-1 RA with proven CVD benefit", bin: 0 }
+          - { text: "SGLT2i with proven CVD benefit", bin: 0 }
+          - { text: "SGLT2i with proven HF benefit", bin: 1 }
+          - { text: "Pioglitazone (fatty liver)", bin: 2 }
+          - { text: "Dual GIP and GLP-1 RA", bin: 2 }
+        why: "الـ **MASLD/MASH**: GLP-1 RA، dual GIP/GLP-1 RA، pioglitazone، أو GLP-1 RA + pioglitazone؛ وفي الـ decompensated cirrhosis استخدم **insulin**."
+      - kind: try
+        items: [dm.L02.039, dm.L02.041, dm.L02.044, dm.L02.045, dm.L02.088]
+    recap:
+      - "Type 1: MDI (prandial + basal) أو pump؛ rapid-acting analogs."
+      - "Type 2 high risk: العضو الأول. ASCVD ← GLP-1 RA أو SGLT2i (CVD benefit). HF ← SGLT2i. CKD ← SGLT2i (eGFR ≥20 لحد dialysis) أو GLP-1 RA."
+      - "Glycemic: metformin أو أي دوا كفء؛ ابعد عن الـ hypo."
+      - "وزن: semaglutide/tirzepatide very high؛ metformin و DPP-4i neutral. سكر: DPP-4i intermediate."
+      - "MASLD: GLP-1 RA، GIP/GLP-1، pioglitazone؛ insulin في الـ decompensated cirrhosis."
+    practice: [dm.L02.036, dm.L02.037, dm.L02.038, dm.L02.039, dm.L02.040, dm.L02.041, dm.L02.042, dm.L02.043, dm.L02.044, dm.L02.045, dm.L02.046, dm.L02.047, dm.L02.048, dm.L02.049, dm.L02.050, dm.L02.075, dm.L02.076, dm.L02.077, dm.L02.078, dm.L02.079, dm.L02.085, dm.L02.088]
+  # ------------------------------------------------------------------
+  - id: dm.L02.lesson4
+    title: "الضغط والكوليسترول: 130/80 و 70"
+    hook: "رقمين بيحموا قلب العيان: ضغط أقل من 130/80، و LDL أقل من 70."
+    minutes: 9
+    pages: [25, 26]
+    topics: [hypertension, lipids]
+    goals:
+      - "تشخّص وتعالج الـ hypertension في السكر بالـ algorithm"
+      - "تختار الـ statin intensity بالسن والـ risk factors (سؤال كتاب)"
+      - "تتصرّف في الـ statin intolerance"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 25
+        title: "الضغط في السكر"
+        quote: "Hypertension is defined as a systolic blood pressure ≥130 mmHg or a diastolic blood pressure ≥80 mmHg"
+        text: |
+          - **Definition:** ==≥130/80== كمتوسط ≥2 قراءات في ≥2 مرات.
+          - **Single visit:** لو **≥180/110** ومعاه **CVD**.
+          - **ابدأ دوا** لو persistently **≥130/80**.
+          - **Target:** **<130/80** لو ينفع بأمان.
+      - kind: figure
+        page: 25
+        quote: "Initial BP ≥150/90 mmHg Start two agents"
+        title: "الـ BP algorithm"
+        alt: "Two columns. Initial BP 130/80 to under 150/90: start one agent; with albuminuria or CAD it must be ACEi or ARB, otherwise ACEi or ARB or CCB or diuretic. Initial BP 150/90 or more: start two agents; with albuminuria or CAD, ACEi or ARB plus CCB or diuretic. Then add a complementary class, and after three classes add an MRA and refer."
+        caption: "سؤالين بس: الضغط **فوق 150/90**؟ (دوا ولا اتنين) وفيه **albuminuria أو CAD**؟ (لازم ==ACEi أو ARB==)."
+        svg: |
+          <svg viewBox="0 0 330 300" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L02b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker></defs>
+            <rect x="8" y="6" width="152" height="40" rx="10" class="fg-acc"/>
+            <text x="84" y="23" text-anchor="middle" class="t-sm t-b">≥130/80, &lt;150/90</text>
+            <text x="84" y="39" text-anchor="middle" class="t-sm">Start ONE agent</text>
+            <rect x="170" y="6" width="152" height="40" rx="10" class="fg-bad"/>
+            <text x="246" y="23" text-anchor="middle" class="t-sm t-b">≥150/90</text>
+            <text x="246" y="39" text-anchor="middle" class="t-sm">Start TWO agents</text>
+            <text x="165" y="68" text-anchor="middle" class="t-sm t-b">Albuminuria or CAD?</text>
+            <rect x="8" y="78" width="152" height="44" rx="8" class="fg-box"/>
+            <text x="14" y="95" class="t-sm t-b">Yes:</text>
+            <text x="14" y="112" class="t-sm">ACEi or ARB</text>
+            <rect x="170" y="78" width="152" height="44" rx="8" class="fg-box"/>
+            <text x="176" y="95" class="t-sm"><tspan class="t-b">Yes:</tspan> ACEi/ARB +</text>
+            <text x="176" y="112" class="t-sm">CCB or diuretic</text>
+            <rect x="8" y="128" width="152" height="44" rx="8" class="fg-thin"/>
+            <text x="14" y="145" class="t-sm t-b">No:</text>
+            <text x="14" y="162" class="t-sm">ACEi/ARB, CCB or diuretic</text>
+            <rect x="170" y="128" width="152" height="44" rx="8" class="fg-thin"/>
+            <text x="176" y="145" class="t-sm"><tspan class="t-b">No:</tspan> two of</text>
+            <text x="176" y="162" class="t-sm">ACEi/ARB, CCB, diuretic</text>
+            <path d="M165 178 V196" class="fg-arrow" marker-end="url(#L02b)"/>
+            <rect x="30" y="198" width="270" height="34" rx="10" class="fg-box"/>
+            <text x="165" y="220" text-anchor="middle" class="t-sm">Not at goal: add a complementary class</text>
+            <path d="M165 232 V250" class="fg-arrow" marker-end="url(#L02b)"/>
+            <rect x="30" y="252" width="270" height="42" rx="10" class="fg-ink"/>
+            <text x="165" y="270" text-anchor="middle" class="t-sm t-b">All three classes, still not at goal:</text>
+            <text x="165" y="286" text-anchor="middle" class="t-sm">add MRA, refer to BP specialist</text>
+          </svg>
+      - kind: check
+        page: 25
+        quote: "Initial BP ≥150/90 mmHg Start two agents"
+        question: "Diabetes with albuminuria, BP 158/96 on repeated visits. Start?"
+        options: ["ACEi or ARB plus CCB or diuretic", "One agent of any class", "Lifestyle only", "CCB plus diuretic"]
+        answer: 0
+        why:
+          - "صح: **≥150/90** = اتنين، و **albuminuria** = لازم ACEi أو ARB."
+          - "فوق 150/90 محتاج اتنين."
+          - "الدوا بيبدأ من ≥130/80 persistently."
+          - "مع الـ albuminuria لازم ACEi أو ARB يبقى واحد منهم."
+      - kind: reveal
+        page: 25
+        quote: "Consider addition of mineralocorticoid receptor antagonist; refer to specialist with expertise in BP management"
+        prompt: "ليه الـ ACEi أو ARB لازم يبقى موجود لو فيه albuminuria؟"
+        answer: |
+          الـ **ACEi/ARB** بيوسّع الـ **efferent arteriole**، فيقلل الضغط جوه الـ glomerulus، فالـ protein اللي بيتسرب يقل وتبطّأ الـ nephropathy. الـ CCB والـ diuretic بيوطّوا الضغط العام بس.
+
+          ولو التلات classes ما نفعوش: **mineralocorticoid receptor antagonist** وتحويل لمتخصص. (التفسير فسيولوجي؛ الخطوات من الكتاب.)
+      - kind: table
+        page: 26
+        quote: "High-intensity statin therapy (lowers LDL cholesterol by ≥50%) Rosuvastatin 20–40 mg, Atorvastatin 40–80 mg"
+        title: "Statin intensity"
+        columns: [Intensity, LDL ↓, Doses (mg)]
+        rows:
+          - ["High", "≥50%", "Rosuva 20–40, atorva 40–80"]
+          - ["Moderate", "30–49%", "Rosuva 5–10, atorva 10–20"]
+        hide: [[0, 1], [0, 2], [1, 2]]
+      - kind: mnemonic
+        page: 26
+        quote: "Rosuvastatin 20–40 mg, Atorvastatin 40–80 mg"
+        word: "R2A4"
+        parts:
+          - { key: "R", text: "Rosuvastatin" }
+          - { key: "2", text: "High starts at 20 mg" }
+          - { key: "A", text: "Atorvastatin" }
+          - { key: "4", text: "High starts at 40 mg" }
+        hook: "**R2A4** زي اسم روبوت: الـ high-intensity بيبدأ من **Rosuva 20** و **Atorva 40**، وأقصاه الضعف (40 و 80). والـ moderate هو اللي تحتهم (5–10 و 10–20)."
+      - kind: figure
+        page: 26
+        quote: "Use a high-intensity statin in those with ≥1 ASCVD risk factor, with an LDL cholesterol goal of <70 mg/dL (<1.8 mmol/L)."
+        title: "الـ statin بالسن"
+        alt: "Age ladder. 20 to 39: consider a statin if additional ASCVD risk factors. 40 to 75: moderate intensity without risk factors; high intensity with one or more risk factors, LDL goal under 70; add ezetimibe or PCSK9 inhibitor if not at goal; bempedoic acid if statin intolerant. Over 75: continue, or consider starting moderate intensity after weighing benefit and risk."
+        caption: "الـ **40–75** هو قلب الموضوع: ==risk factor واحد== بيحوّلك من moderate لـ high، والـ LDL **<70**."
+        svg: |
+          <svg viewBox="0 0 330 270" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="6" width="80" height="50" rx="10" class="fg-acc"/>
+            <text x="48" y="36" text-anchor="middle" class="t-b">20–39</text>
+            <rect x="96" y="6" width="226" height="50" rx="10" class="fg-box"/>
+            <text x="104" y="27" class="t-sm">Consider a statin if additional</text>
+            <text x="104" y="44" class="t-sm">ASCVD risk factors</text>
+            <rect x="8" y="64" width="80" height="140" rx="10" class="fg-bad"/>
+            <text x="48" y="138" text-anchor="middle" class="t-b">40–75</text>
+            <rect x="96" y="64" width="226" height="40" rx="10" class="fg-box"/>
+            <text x="104" y="81" class="t-sm t-b">No risk factor:</text>
+            <text x="104" y="97" class="t-sm">moderate intensity</text>
+            <rect x="96" y="110" width="226" height="94" rx="10" class="fg-bad"/>
+            <text x="104" y="127" class="t-sm t-b">≥1 risk factor: high intensity</text>
+            <text x="104" y="143" class="t-sm">LDL goal &lt;70 mg/dL (&lt;1.8 mmol/L)</text>
+            <text x="104" y="163" class="t-sm">not at goal: + ezetimibe or PCSK9i</text>
+            <text x="104" y="181" class="t-sm">intolerant: bempedoic acid</text>
+            <rect x="8" y="212" width="80" height="52" rx="10" class="fg-ink"/>
+            <text x="48" y="243" text-anchor="middle" class="t-b">&gt;75</text>
+            <rect x="96" y="212" width="226" height="52" rx="10" class="fg-box"/>
+            <text x="104" y="233" class="t-sm">Continue, or start moderate</text>
+            <text x="104" y="250" class="t-sm">after weighing benefit and risk</text>
+          </svg>
+      - kind: check
+        page: 26
+        quote: "Use a high-intensity statin in those with ≥1 ASCVD risk factor, with an LDL cholesterol goal of <70 mg/dL (<1.8 mmol/L)."
+        question: "52-year-old with type 2 diabetes and hypertension, no ASCVD. Statin?"
+        options: ["High intensity, LDL goal <70", "Moderate intensity", "None", "Ezetimibe alone"]
+        answer: 0
+        why:
+          - "صح: 40–75 + risk factor (hypertension) = **high intensity**."
+          - "الـ moderate للي مالوش risk factors."
+          - "في السن ده الـ statin indicated."
+          - "الـ ezetimibe بيتضاف فوق أقصى statin متحمّل."
+      - kind: explain
+        page: 26
+        title: "Statin intolerance"
+        quote: "Switching to a different high-intensity statin - Lowering the statin dose - Using nondaily dosing of statins"
+        text: |
+          ما تسيبش الـ statin من أول وجع عضلات:
+          1. **Switch** لـ statin تاني
+          2. **Lower** الجرعة
+          3. ==Nondaily dosing== (يوم ويوم مثلًا)
+          4. **Add non-statin** فوق أقصى جرعة متحمّلة
+
+          والـ figure بيقول: **bempedoic acid** للي statin intolerant، و **ezetimibe أو PCSK9i** لو الهدف ما اتحققش.
+      - kind: try
+        items: [dm.L02.051, dm.L02.054, dm.L02.057, dm.L02.060, dm.L02.089]
+    recap:
+      - "Hypertension في السكر ≥130/80 (≥2 قراءات، ≥2 مرات)؛ single visit لو ≥180/110 + CVD؛ target <130/80."
+      - "<150/90 دوا واحد، ≥150/90 اتنين؛ albuminuria/CAD = لازم ACEi أو ARB؛ بعد 3 classes: MRA وتحويل."
+      - "High statin: rosuva 20–40، atorva 40–80 (≥50%). Moderate: 5–10، 10–20 (30–49%)."
+      - "20–39 فكّر لو risk factors؛ 40–75 moderate، أو high + LDL <70 لو risk factor؛ >75 كمّل أو moderate."
+      - "Intolerance: switch، جرعة أقل، nondaily، add non-statin؛ bempedoic acid؛ ezetimibe/PCSK9i."
+    practice: [dm.L02.051, dm.L02.052, dm.L02.053, dm.L02.054, dm.L02.055, dm.L02.056, dm.L02.057, dm.L02.058, dm.L02.059, dm.L02.060, dm.L02.061, dm.L02.062, dm.L02.063, dm.L02.064, dm.L02.080, dm.L02.081, dm.L02.082, dm.L02.083, dm.L02.084, dm.L02.087, dm.L02.089]

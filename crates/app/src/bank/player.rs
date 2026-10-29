@@ -5,7 +5,7 @@ use batna_core::exam::{self, Mode};
 use dioxus::prelude::*;
 
 use super::question::QuestionView;
-use super::{PHASE, Phase, choose, finish, go, leave, minutes, now_ms, toggle_flag};
+use super::{PHASE, Phase, check, choose, finish, go, leave, minutes, now_ms, toggle_flag};
 use crate::i18n::bank as tx;
 use crate::i18n::count::{MINUTE, count};
 
@@ -19,7 +19,9 @@ pub fn Player() -> Element {
     let q = p.questions[at].clone();
     let a = p.answers[at].clone();
     let timed = p.mode.timed();
-    let reveal = !timed && a.chosen.is_some();
+    // Tutor mode: select, then check, then the explanation.
+    let checked = !timed && a.chosen.is_some();
+    let selected = if timed { a.chosen } else { a.chosen.or(p.draft) };
     let answered = p.answers.iter().filter(|a| a.chosen.is_some()).count();
     let right = p.questions.iter().zip(&p.answers).filter(|(q, a)| a.correct(q)).count();
     let left = minutes(exam::remaining_ms(n, p.started_ms, now_ms()));
@@ -28,6 +30,14 @@ pub fn Player() -> Element {
         p.answers.iter().enumerate().map(|(i, a)| (i, a.chosen.is_some(), a.flagged)).collect();
     let flagged = p.answers.iter().filter(|a| a.flagged).count();
     let first_blank = p.answers.iter().position(|a| a.chosen.is_none());
+    let mode_name = match p.mode {
+        Mode::Tutor => tx::MODE_TUTOR_NAME,
+        Mode::Timed => tx::MODE_TIMED_NAME,
+        Mode::Mock => tx::MODE_MOCK_NAME,
+    };
+    // Done questions over all, for the bar: answered on a timed paper,
+    // checked in tutor mode.
+    let progress = 100 * (if timed { answered } else { at + usize::from(checked) }) / n.max(1);
     // A timed paper with blanks or flags asks once before it goes in.
     let mut confirming = use_signal(|| false);
     let submit = move |_| {
@@ -45,57 +55,80 @@ pub fn Player() -> Element {
                 // The count, time left and clock stay in view while he
                 // scrolls a long question (#234).
                 div { class: "run-sticky",
-                div { class: "run-head",
-                    span { class: "run-count", "{tx::QUESTION} " bdi { "{at + 1}" } " {tx::OF} " bdi { "{n}" } }
+                    div { class: "run-head",
+                        button {
+                            class: "icon-button run-leave",
+                            // Android Back takes it while the bar is hidden.
+                            "data-back": "true",
+                            "aria-label": tx::LEAVE,
+                            title: if timed { tx::LEAVE_TIMED_HINT } else { tx::LEAVE },
+                            onclick: move |_| leave(),
+                            span { aria_hidden: "true", "✕" }
+                        }
+                        div {
+                            class: "progress run-progress",
+                            role: "progressbar",
+                            "aria-valuemin": "0",
+                            "aria-valuemax": "100",
+                            "aria-valuenow": "{progress}",
+                            div { class: "progress-fill", style: "inline-size: {progress}%;" }
+                        }
+                        span { class: "run-count num-ltr", "aria-label": "{tx::QUESTION} {at + 1} {tx::OF} {n}", "{at + 1} / {n}" }
+                    }
+                    div { class: "run-sub",
+                        span { class: "chip", "data-tone": "accent", {mode_name} }
+                        if timed {
+                            span { class: "muted small", "{tx::LEFT_ABOUT} " {count(left, &MINUTE)} }
+                        } else if answered > 0 {
+                            span { class: "muted small", "{tx::RIGHT} " bdi { class: "num-ltr", "{right} / {answered}" } }
+                        }
+                    }
                     if timed {
-                        span { class: "muted small", "{tx::LEFT_ABOUT} " {count(left, &MINUTE)} }
-                    } else {
-                        span { class: "muted small", "{tx::RIGHT} " bdi { "{right}/{answered}" } }
+                        Timer { key: "{p.started_ms}", n, started_ms: p.started_ms }
                     }
-                    button {
-                        class: "btn-link",
-                        title: if timed { tx::LEAVE_TIMED_HINT } else { "" },
-                        onclick: move |_| leave(),
-                        {tx::LEAVE}
-                    }
-                }
-                if timed {
-                    Timer { key: "{p.started_ms}", n, started_ms: p.started_ms }
-                }
                 }
                 QuestionView {
                     key: "{q.id}-{at}",
                     q: q.clone(),
-                    chosen: a.chosen,
-                    reveal,
-                    onchoose: if reveal { None } else { Some(EventHandler::new(choose)) },
+                    chosen: selected,
+                    reveal: checked,
+                    onchoose: if checked { None } else { Some(EventHandler::new(choose)) },
                 }
-                div { class: "run-actions",
+                // The one next step stays at the foot of the screen.
+                div { class: "run-foot",
                     if timed {
-                        button { class: "btn btn-ghost", disabled: at == 0, onclick: move |_| go(at.saturating_sub(1)), {tx::PREV} }
-                        button {
-                            class: "btn btn-ghost",
-                            "aria-pressed": if a.flagged { "true" } else { "false" },
-                            onclick: move |_| toggle_flag(),
-                            if a.flagged { "⚑ {tx::FLAGGED}" } else { "⚐ {tx::FLAG}" }
+                        div { class: "run-actions",
+                            button { class: "btn btn-ghost", disabled: at == 0, onclick: move |_| go(at.saturating_sub(1)), {tx::PREV} }
+                            button {
+                                class: "btn btn-ghost",
+                                "aria-pressed": if a.flagged { "true" } else { "false" },
+                                onclick: move |_| toggle_flag(),
+                                if a.flagged { "⚑ {tx::FLAGGED}" } else { "⚐ {tx::FLAG}" }
+                            }
+                            if last {
+                                // A whole timed paper never goes in on a stray Enter.
+                                button { class: "btn btn-primary", onclick: submit, {tx::SUBMIT} }
+                            } else {
+                                button { class: "btn btn-primary", "aria-keyshortcuts": "Enter", onclick: move |_| go(at + 1), {tx::NEXT} }
+                            }
                         }
-                    }
-                    if last {
+                    } else if checked {
                         button {
-                            class: "btn btn-primary",
-                            disabled: !timed && a.chosen.is_none(),
-                            // A whole timed paper never goes in on a stray Enter.
-                            "aria-keyshortcuts": if timed { "" } else { "Enter" },
-                            onclick: move |e| if timed { submit(e) } else { finish() },
-                            if timed { {tx::SUBMIT} } else { {tx::FINISH} }
+                            class: "btn btn-primary btn-lg run-main-action",
+                            "aria-keyshortcuts": "Enter",
+                            onclick: move |_| if last { finish() } else { go(at + 1) },
+                            if last { {tx::FINISH} } else { {tx::NEXT} }
                         }
                     } else {
+                        if selected.is_none() {
+                            p { class: "muted small run-hint", {tx::PICK_FIRST} }
+                        }
                         button {
-                            class: "btn btn-primary",
-                            disabled: !timed && a.chosen.is_none(),
+                            class: "btn btn-primary btn-lg run-main-action",
+                            disabled: selected.is_none(),
                             "aria-keyshortcuts": "Enter",
-                            onclick: move |_| go(at + 1),
-                            {tx::NEXT}
+                            onclick: move |_| check(),
+                            {tx::CHECK}
                         }
                     }
                 }
@@ -150,13 +183,12 @@ fn ConfirmSubmit(
         }
     };
     rsx! {
-        div { class: "bank-scrim", onclick: move |_| onclose.call(()),
-            div {
-                class: "bank-sheet card",
+        div { class: "sheet-backdrop", onclick: move |_| onclose.call(()) }
+        div {
+                class: "sheet bank-confirm",
                 role: "alertdialog",
                 "aria-modal": "true",
                 "aria-labelledby": "bank-confirm-title",
-                onclick: move |e| e.stop_propagation(),
                 h2 { id: "bank-confirm-title", {tx::CONFIRM_TITLE} }
                 if blank > 0 {
                     p { {tx::CONFIRM_BLANK_A} " " bdi { "{blank}" } " " {tx::CONFIRM_BLANK_B} }
@@ -187,7 +219,6 @@ fn ConfirmSubmit(
                     }
                 }
             }
-        }
     }
 }
 

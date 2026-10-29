@@ -26,9 +26,42 @@
 
 
 .start-row { display: flex; flex-wrap: wrap; gap: var(--sp-3); margin-block-start: var(--sp-2); }
-/* Start buttons are small cards: a title and a hint line. */
-.start-row .btn.start { flex-direction: column; align-items: flex-start; min-block-size: var(--tap-lg); padding-block: var(--sp-2); border-radius: var(--radius); flex: 1 1 14rem; text-align: start; }
-.start-row .btn.start .hint { font-weight: 400; font-size: var(--fs-sm); opacity: 0.85; }
+
+
+/* ---------- setup ---------- */
+/* Cards keep their natural height in the scrolling column. */
+.bank-setup { display: flex; flex-direction: column; gap: var(--sp-4); }
+.bank-setup > * { flex-shrink: 0; }
+.bank-modes > button { padding-block: var(--sp-2); }
+.bank-preset { gap: var(--sp-3); padding: var(--sp-4); }
+.bank-preset > .chip { align-self: flex-start; }
+.bank-scope-tap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--sp-1);
+  inline-size: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+.bank-scope { display: block; font-size: var(--fs-xl); font-weight: 700; line-height: 1.3; overflow-wrap: anywhere; }
+bdi.bank-scope { font-family: var(--font-latin); }
+@media (hover: hover) { .bank-scope-tap:hover .bank-scope { color: var(--accent); } }
+.bank-scope-tap:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: var(--radius); }
+.bank-count { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); flex-wrap: wrap; }
+.bank-sum { background: var(--soft); border-radius: var(--radius-control); padding: var(--sp-3) var(--sp-4); }
+.bank-sum strong { font-weight: 700; }
+.bank-go { inline-size: 100%; }
+.bank-customise { align-self: stretch; }
+.bank-customise[aria-expanded="true"] { border-color: var(--accent); color: var(--accent); }
+.bank-advanced { gap: var(--sp-2); }
+.bank-reset { align-self: flex-start; }
+.bank-empty { display: flex; flex-direction: column; gap: var(--sp-2); align-items: flex-start; }
+.bank-scope-note { color: var(--text); }
 
 /* ---------- history ---------- */
 .history { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--sp-2); }
@@ -59,7 +92,27 @@
   background: var(--bg);
 }
 .run-head { display: flex; align-items: center; gap: var(--sp-3); }
-.run-head .run-count { font-weight: 700; flex: 1; }
+.run-head .run-count { font-weight: 600; font-size: var(--fs-sm); color: var(--muted); flex: none; }
+.run-leave { flex: none; inline-size: var(--tap); block-size: var(--tap); border: 0; border-radius: 50%; background: transparent; color: var(--text); font-size: 1.1rem; cursor: pointer; }
+@media (hover: hover) { .run-leave:hover { background: var(--accent-soft); } }
+.run-progress { flex: 1; }
+.run-sub { display: flex; align-items: center; gap: var(--sp-2); flex-wrap: wrap; }
+/* The next step sits at the foot of the scroller, above the nav bar, and
+   the last option can always scroll clear of it. */
+.run-foot {
+  position: sticky;
+  inset-block-end: calc(-1 * var(--sp-4));
+  margin-block-end: calc(-1 * var(--sp-4));
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  padding-block: var(--sp-3) var(--sp-4);
+  background: var(--bg);
+  border-block-start: 1px solid var(--line);
+}
+.run-hint { text-align: center; }
+.run-main-action { inline-size: 100%; }
 .run-actions { display: flex; flex-wrap: wrap; gap: var(--sp-2); justify-content: flex-end; }
 .run-actions .btn-primary { min-inline-size: 8rem; }
 
@@ -99,47 +152,27 @@
 
 /* ---------- one question ---------- */
 .q { gap: var(--sp-3); }
-.q-meta { display: flex; flex-wrap: wrap; gap: var(--sp-2); min-inline-size: 0; }
+/* The lecture and topic are a quiet line; the clinical stem leads. */
+.q-meta { display: flex; flex-wrap: wrap; gap: var(--sp-1) var(--sp-2); min-inline-size: 0; }
+.q-meta .chip { font-size: 0.75rem; line-height: 1.7; inline-size: fit-content; max-inline-size: 100%; }
 .q-stem, .q-text, .q-why { overflow-wrap: anywhere; }
-.q-stem { font-family: var(--font-latin); font-size: var(--fs-lg); line-height: 1.55; text-align: start; }
+.q-stem { font-family: var(--font-latin); font-size: calc(var(--fs-lg) * 1.12); font-weight: 600; line-height: 1.5; text-align: start; }
 .q-options { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--sp-2); font-family: var(--font-latin); }
-.q-option {
-  inline-size: 100%;
-  min-height: 52px;
-  display: flex;
-  align-items: center;
-  gap: var(--sp-3);
-  padding: var(--sp-2) var(--sp-3);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--surface);
-  text-align: start;
-  cursor: pointer;
-  font-family: var(--font-latin);
-  transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease);
-}
-.q-option:disabled { cursor: default; color: var(--text); }
-.q-option:not(:disabled):hover { border-color: var(--accent); }
+/* The letters in the explanation list. */
 .q-letter {
   flex: none;
-  inline-size: 1.9rem;
-  block-size: 1.9rem;
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: var(--bg);
+  background: var(--surface-2);
   font-weight: 700;
-  font-size: var(--fs-sm);
+  font-family: var(--font-latin);
 }
 .q-text { flex: 1; }
-.q-mark { flex: none; font-family: var(--font); font-size: var(--fs-sm); font-weight: 700; }
-.q-option[data-state="picked"] { border-color: var(--accent); background: var(--accent-soft); }
-.q-option[data-state="right"] { border-color: var(--good); background: var(--good-soft); }
-.q-option[data-state="right"] .q-letter { background: var(--good); color: var(--surface); }
-.q-option[data-state="right"] .q-mark { color: var(--good); }
-.q-option[data-state="wrong"] { border-color: var(--bad); background: var(--bad-soft); }
-.q-option[data-state="wrong"] .q-letter { background: var(--bad); color: var(--surface); }
-.q-option[data-state="wrong"] .q-mark { color: var(--bad); }
+/* Options are the shared button.answer (assets/parts.css); only the
+   English face is set here. */
+.q-option { font-family: var(--font-latin); }
+.q-option .answer-mark { font-family: var(--font); }
 .q-why { margin: var(--sp-1) 0 0; padding-inline-start: calc(1.9rem + var(--sp-3) * 2); font-size: var(--fs-sm); color: var(--muted); line-height: 1.5; }
 .q-foot { display: flex; gap: var(--sp-2); }
 .q-update { background: var(--accent-soft); border-radius: var(--radius); padding: var(--sp-3) var(--sp-4); display: flex; flex-direction: column; gap: var(--sp-1); }
@@ -194,37 +227,14 @@
   .desk-split .q-why { display: none; }
 }
 
-/* ---------- submit confirm ---------- */
-.bank-scrim {
-  position: fixed;
-  inset: 0;
-  z-index: 40;
-  background: rgb(0 0 0 / 0.35);
-  display: grid;
-  place-items: center;
-  padding: var(--sp-4);
-}
-.bank-sheet {
-  inline-size: min(28rem, 100%);
-  max-block-size: calc(100dvh - 2rem);
-  overflow-y: auto;
-  box-shadow: 0 12px 40px rgb(0 0 0 / 0.25);
-}
-.bank-sheet .start-row .btn { flex: 1 1 10rem; }
+/* ---------- submit confirm (the shared .sheet) ---------- */
+.sheet.bank-confirm .start-row .btn { flex: 1 1 10rem; }
 
-/* ---------- tablet ---------- */
-/* From 600px the practice Start buttons stay at the foot of the screen
-   while the filters scroll (desk.css .tab-cols puts the mock exam beside
-   them from 840px). */
-@media (min-width: 600px) {
-  .bank-cols .tab-main .start-row {
-    position: sticky;
-    inset-block-end: 0;
-    z-index: 1;
-    background: var(--surface);
-    padding-block: var(--sp-2);
-    border-block-start: 1px solid var(--line);
-    /* Covers the strip of padding under it, so no chip shows below. */
-    box-shadow: 0 var(--sp-6) 0 var(--surface);
-  }
-}
+/* A running paper fills the screen, so its footer sits at the bottom even
+   under a short question. */
+.bank:has(> .bank-run) { min-block-size: 100%; }
+.bank-run { flex: 1 0 auto; }
+.run-foot { margin-block-start: auto; }
+/* Without past papers there is no side column: the setup keeps a reading
+   measure instead of stretching. */
+.bank-cols:not(.tab-cols) > .tab-main { max-inline-size: 44rem; }

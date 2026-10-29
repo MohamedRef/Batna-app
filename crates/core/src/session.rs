@@ -178,6 +178,27 @@ pub struct Session {
     pos: usize,
     retried: HashSet<String>,
     pub outcomes: Vec<Outcome>,
+    /// One per grade, newest last, so [`Self::undo`] can put it all back.
+    steps: Vec<Step>,
+}
+
+/// What one grade changed, to take it back exactly.
+#[derive(Debug, Clone, PartialEq, Eq)]
+struct Step {
+    /// The position before the grade (hidden items it skipped included).
+    pos: usize,
+    /// Where the grade queued its Again retry, if it did.
+    retry_at: Option<usize>,
+    /// The review event the grade logged, for the store to take back.
+    event: Option<String>,
+}
+
+/// A grade [`Session::undo`] took back.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Undone {
+    pub outcome: Outcome,
+    /// The logged review event to retract (`StudyStore::retract`).
+    pub event: Option<String>,
 }
 
 impl Session {
@@ -211,16 +232,47 @@ impl Session {
     /// marked ✗ (here or by sync) from what's left (#246). A hidden item is
     /// not queued for a retry either.
     pub fn grade_unless(&mut self, grade: Grade, hidden: impl Fn(&str) -> bool) {
+        self.grade_logged(grade, None, hidden);
+    }
+
+    /// [`Self::grade_unless`], remembering the review event the grade was
+    /// logged as, so [`Self::undo`] can hand it back for retraction.
+    pub fn grade_logged(&mut self, grade: Grade, event: Option<String>, hidden: impl Fn(&str) -> bool) {
         let Some(p) = self.current().cloned() else { return };
         let retry = self.is_retry();
+        let mut step = Step { pos: self.pos, retry_at: None, event };
         self.outcomes.push(Outcome { item_id: p.item_id.clone(), grade, fresh: p.fresh, retry });
         if grade == Grade::Again && !hidden(&p.item_id) && self.retried.insert(p.item_id.clone()) {
+            step.retry_at = Some(self.queue.len());
             self.queue.push(Planned { fresh: false, ..p });
         }
+        self.steps.push(step);
         self.pos += 1;
         while self.current().is_some_and(|q| hidden(&q.item_id)) {
             self.pos += 1;
         }
+    }
+
+    /// Whether there is a grade [`Self::undo`] can take back.
+    pub fn can_undo(&self) -> bool {
+        !self.steps.is_empty()
+    }
+
+    /// Takes back the newest grade: the item is current again, its outcome
+    /// and its Again retry are gone, and the event it was logged as comes
+    /// back for the store to retract. Grades before it stay; calling it again
+    /// takes those back one by one.
+    pub fn undo(&mut self) -> Option<Undone> {
+        let step = self.steps.pop()?;
+        let outcome = self.outcomes.pop()?;
+        if let Some(at) = step.retry_at {
+            if at < self.queue.len() {
+                self.queue.remove(at);
+            }
+            self.retried.remove(&outcome.item_id);
+        }
+        self.pos = step.pos;
+        Some(Undone { outcome, event: step.event })
     }
 
     /// Queues more items after what's left, skipping any still to come, so
@@ -976,6 +1028,75 @@ mod tests {
         assert_eq!(check_typed("10,000,000 copies/mL", "10000000"), Match::Right);
         assert_eq!(check_typed("1,000.5", "1000.5"), Match::Right);
         assert_eq!(check_typed("1,5", "1.5"), Match::Right);
+    }
+
+    #[test]
+    fn undo_restores_the_session_exactly() {
+        let plan = compose_with(&sample(), &[], &[], 600);
+        let mut s = Session::new(plan);
+        let start = (s.progress(), s.current().cloned());
+        s.grade_logged(Grade::Again, Some("e1".into()), |_| false);
+        s.grade_logged(Grade::Good, Some("e2".into()), |_| false);
+        let undone = s.undo().unwrap();
+        assert_eq!(undone.event.as_deref(), Some("e2"));
+        assert_eq!(undone.outcome.grade, Grade::Good);
+        let undone = s.undo().unwrap();
+        assert_eq!(undone.event.as_deref(), Some("e1"));
+        // The Again retry is gone with it, and the first item is current again.
+        assert_eq!((s.progress(), s.current().cloned()), start);
+        assert!(s.outcomes.is_empty());
+        assert!(!s.can_undo());
+        assert!(s.undo().is_none());
+        // Grading it Again afterwards still earns its one retry.
+        s.grade(Grade::Again);
+        assert_eq!(s.progress().1, start.0.1 + 1);
+    }
+
+    #[test]
+    fn undo_after_the_last_item_reopens_it_and_keeps_appended_items() {
+        let p = |id: &str| Planned {
+            item_id: id.into(),
+            lecture: "L".into(),
+            topic: "L".into(),
+            est_secs: 10,
+            fresh: true,
+        };
+        let mut s = Session::new(vec![p("a"), p("b")]);
+        s.grade(Grade::Again); // a: retry queued at the end
+        s.append(vec![p("c")]);
+        s.grade(Grade::Good); // b
+        s.grade(Grade::Good); // a (retry)
+        s.grade(Grade::Good); // c
+        assert!(s.is_done());
+        s.undo();
+        assert_eq!(s.current().unwrap().item_id, "c");
+        s.undo();
+        s.undo();
+        s.undo();
+        // Back at a, its retry gone, c still queued after b.
+        let mut seen = Vec::new();
+        while let Some(c) = s.current() {
+            seen.push(c.item_id.clone());
+            s.grade(Grade::Good);
+        }
+        assert_eq!(seen, ["a", "b", "c"]);
+        assert_eq!(s.summary().items, 3);
+    }
+
+    #[test]
+    fn undo_puts_back_hidden_items_it_skipped() {
+        let p = |id: &str| Planned {
+            item_id: id.into(),
+            lecture: "L".into(),
+            topic: "L".into(),
+            est_secs: 10,
+            fresh: true,
+        };
+        let mut s = Session::new(vec![p("a"), p("b"), p("c")]);
+        s.grade_unless(Grade::Good, |id| id == "b");
+        assert_eq!(s.current().unwrap().item_id, "c");
+        s.undo();
+        assert_eq!(s.current().unwrap().item_id, "a");
     }
 
     #[test]

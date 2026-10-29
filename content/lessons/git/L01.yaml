@@ -1,0 +1,993 @@
+schema: batna.lesson/v1
+lecture: git.L01
+lessons:
+  # ------------------------------------------------------------------
+  - id: git.L01.lesson1
+    title: "حرقان مش بيروح على الـ PPI"
+    hook: "شاب عنده heartburn، خد PPI ومتحسّنش. نكمّل علاج ولا نوقف ونبص بالمنظار؟"
+    minutes: 9
+    pages: [1, 7]
+    topics: [overview, gerd, refractory-gerd, eoe]
+    goals:
+      - "تعرّف GERD بالكلمتين: symptoms و objective evidence"
+      - "ترسم الـ algorithm بتاع PPI-refractory GERD من الذاكرة"
+      - "تعرف امتى تعمل الـ pH-impedance وانت on PPI وامتى off"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 1
+        quote: "Gastroesophageal reflux disease • Functional dyspepsia • Gastritis • Peptic ulcer • Zolinger ellisson syndrome"
+        title: "المحاضرة دي عن الحمض"
+        text: |
+          الـ **acid-related disorders** في الكتاب خمسة:
+
+          - **GERD**
+          - **Functional dyspepsia**
+          - **Gastritis**
+          - **Peptic ulcer**
+          - **Zollinger-Ellison syndrome**
+
+          كلهم بيرجعوا لنفس البطل: الـ **acid**، يا زيادة، يا في المكان الغلط، يا الغشاء مش قادر يستحمله. ونبدأ بالـ GERD.
+      - kind: explain
+        page: 1
+        quote: "GERD is the condition in which the reflux of gastric contents into the esophagus results in symptoms and/or complications."
+        title: "يعني إيه GERD؟"
+        text: |
+          الكتاب بيقول: الـ ==GERD== هو إن **reflux of gastric contents** للـ esophagus يعمل **symptoms and/or complications**.
+
+          وفيه تعريف **objective** كمان: يا **mucosal injury** باينة في المنظار، يا **abnormal esophageal acid exposure** في الـ reflux monitoring.
+
+          يعني الأعراض لوحدها مش كفاية علشان تقول GERD أكيد، وده هيفرق معانا جدًا بعد شوية.
+      - kind: check
+        page: 2
+        quote: "The Symptoms of GERD are Nonspecific and may Overlap Or Be Confused With Those Of Other Disorders"
+        question: "Which of these can mimic GERD symptoms according to the lecture?"
+        options:
+          - "All of them"
+          - "Achalasia only"
+          - "Cardiac disease only"
+          - "Eosinophilic esophagitis only"
+        answer: 0
+        why:
+          - "صح: الكتاب بيعدّ rumination، achalasia، EoE، reflux hypersensitivity، functional heartburn، وأمراض القلب والصدر."
+          - "Achalasia واحدة بس من القايمة."
+          - "القلب واحد بس من القايمة، وده سبب إنك متستخفّش بأي heartburn."
+          - "EoE واحدة بس من القايمة."
+      - kind: explain
+        page: 3
+        quote: "Escalation of PPI dose was done to double dose for 6 weeks."
+        title: "حالة الكتاب خطوة بخطوة"
+        text: |
+          شاب **28 سنة**: heartburn و regurgitation ونوبات **choking** من 3 شهور. مفيش dysphagia ولا weight loss.
+
+          - أخد **PPI once daily**، قبل الفطار بـ **30-60 minutes**، لمدة 6 أسابيع: تحسّن جزئي.
+          - زودوا لـ ==double dose==: الأعراض فضلت.
+          - وقفوا الـ PPI **أسبوعين** وعملوا **upper endoscopy off PPI**.
+
+          السؤال المهم: ليه وقفوا الـ PPI قبل المنظار؟
+      - kind: reveal
+        page: 4
+        quote: "To maximize the yield of GERD diagnosis and assess for EE, Because PPIs are highly effective for healing EE, underlying EE clearly can be missed."
+        prompt: "ليه بنوقف الـ PPI قبل المنظار؟ (ده سؤال امتحان)"
+        answer: |
+          سببين:
+
+          - الـ PPI **بيعالج الـ erosive esophagitis (EE) كويس جدًا**، فلو عملت المنظار وهو على العلاج ممكن متشوفش الـ EE اللي تحت. يعني بتوقف علشان ==maximize the yield== للتشخيص.
+          - وقف الـ PPI **2-4 weeks** بيسهّل تشخيص **EoE**، ودي احتمال وارد لما الأعراض متروحش على الـ PPI.
+      - kind: aside
+        tone: analogy
+        page: 4
+        quote: "Because PPIs are highly effective for healing EE, underlying EE clearly can be missed."
+        text: |
+          زي ما تروح تكشف على عربية بتطلّع دخان بعد ما الميكانيكي غسل الموتور: هتلاقيه لامع ومش هتعرف الزيت كان بينزل منين. 😄
+
+          الـ PPIs بتغسل الـ esophagus وبتعمل healing للـ EE، فلازم توقفها علشان تشوف الحقيقة.
+      - kind: figure
+        page: 4
+        quote: "Assess for objective GERD despite double dose PPI |"
+        title: "الـ algorithm بتاع PPI-refractory GERD"
+        alt: "Flow chart: troublesome GERD symptoms on single-dose PPI, then an 8-week double-dose PPI trial, then if no response assess for objective GERD (erosive disease on EGD or raised acid exposure on pH-impedance on PPI), ending in PPI-refractory GERD."
+        caption: "ده الـ algorithm زي الكتاب. لاحظ إن الـ refractory لازم يتثبت **objectively**، مش بالأعراض بس."
+        svg: |
+          <svg viewBox="0 0 330 430" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="G1a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="40" y="10" width="250" height="46" rx="8" class="fg-box"/>
+            <text x="165" y="30" text-anchor="middle" class="t-sm t-b">Troublesome GERD symptoms</text>
+            <text x="165" y="46" text-anchor="middle" class="t-sm">despite single-dose PPI</text>
+            <path d="M165 56v24" class="fg-arrow" marker-end="url(#G1a)"/>
+            <rect x="40" y="84" width="250" height="40" rx="8" class="fg-acc"/>
+            <text x="165" y="109" text-anchor="middle" class="t-sm t-b">8-week double-dose PPI trial</text>
+            <path d="M165 124v30" class="fg-arrow" marker-end="url(#G1a)"/>
+            <text x="175" y="144" class="t-sm t-mut">no symptom response</text>
+            <rect x="10" y="158" width="310" height="150" rx="8" class="fg-box"/>
+            <text x="165" y="178" text-anchor="middle" class="t-sm t-b">Assess for objective GERD on double-dose PPI</text>
+            <text x="20" y="204" class="t-sm t-b">1. Erosive disease on EGD</text>
+            <text x="32" y="222" class="t-sm">LA grade C or D esophagitis</text>
+            <text x="32" y="240" class="t-sm">peptic stricture, Barrett esophagus</text>
+            <text x="20" y="266" class="t-sm t-b">2. pH-impedance ON PPI</text>
+            <text x="32" y="284" class="t-sm">raised acid exposure time</text>
+            <text x="32" y="300" class="t-sm">and/or reflux burden</text>
+            <path d="M165 308v30" class="fg-arrow" marker-end="url(#G1a)"/>
+            <rect x="70" y="342" width="190" height="40" rx="8" class="fg-bad"/>
+            <text x="165" y="367" text-anchor="middle" class="t-b t-bad">PPI-refractory GERD</text>
+            <text x="165" y="412" text-anchor="middle" class="t-sm t-mut">AET above 6% on PPI = refractory</text>
+          </svg>
+      - kind: figure
+        page: 4
+        title: "LA grade C في المنظار"
+        image: { file: git/L01-la-grade-c.webp, book: true }
+        alt: "Book slide: Los Angeles classification grade C, mucosal breaks extending between the tops of two or more folds but under 75% of the circumference, with four endoscopic photos."
+        caption: |
+          **LA grade C**: mucosal breaks بتعدّي بين قمم **فولدتين أو أكتر**، بس أقل من **75%** من محيط الـ esophagus.
+
+          الـ grade C أو D بتتحسب **objective GERD**.
+      - kind: table
+        page: 5
+        quote: "Diagnostic evaluation begins with esophageal pH-impedance monitoring on PPI therapy to assess for PPI refractory acid exposure."
+        title: "الـ pH test: on ولا off PPI؟"
+        columns: ["الحالة", "الـ test", "ليه"]
+        rows:
+          - ["No previous objective GERD", "Impedance-pH OFF PPI", "Look for baseline GERD"]
+          - ["Proven pathologic GERD (LA C/D, stricture, Barrett, abnormal pH)", "pH-impedance ON PPI", "Look for PPI-refractory acid exposure"]
+        hide: [[0, 1], [1, 1]]
+      - kind: aside
+        tone: exam
+        page: 5
+        quote: "esophageal acid exposure time greater than 6% on PPI is consistent with PPI refractory GERD."
+        text: |
+          الرقم اللي هيتسأل: **acid exposure time ==greater than 6%== on PPI** = PPI-refractory GERD (GERD Consensus Group).
+
+          وخلي بالك: كتير الـ pH test off PPI بيطلع **negative**، وده مفيد مش فشل، لأنه بيبعدك عن الـ GERD وتدوّر على سبب تاني.
+      - kind: sort
+        page: 3
+        quote: "Potential mechanisms underlying symptoms suspected due to GERD but refractory to PPI therapy"
+        prompt: "أعراض شبه GERD ومش بتروح على PPI. حط كل وصف في مكانه:"
+        bins: ["Refractory GERD", "Reflux hypersensitivity", "Not reflux at all"]
+        cards:
+          - { text: "Abnormal acid reflux persists on PPI", bin: 0 }
+          - { text: "Acid normalized, but physiologic reflux triggers symptoms", bin: 1 }
+          - { text: "Eosinophilic esophagitis", bin: 2 }
+          - { text: "Achalasia", bin: 2 }
+          - { text: "Rumination or gastroparesis", bin: 2 }
+          - { text: "Functional heartburn", bin: 2 }
+        why: "الكتاب: **refractory GERD** = الحمض لسه عالي. **Reflux hypersensitivity** = الحمض اتظبط بس الـ reflux العادي بيوجع. والباقي أمراض تانية: esophageal (EoE، achalasia)، non-esophageal (rumination، gastroparesis)، أو functional."
+      - kind: explain
+        page: 7
+        quote: "Eosinophilic esophagitis is diagnosed with intraepithelial eosinophils ≥15 in ≥2 hpfs or ≥25 in any single hpf."
+        title: "المنظار طلع إيه؟"
+        text: |
+          المنظار عند المريض كان يا **LA grade D** يا **eosinophilic esophagitis**، والفرق **بالـ biopsy**، حتى لو المنظار طبيعي.
+
+          - خد **at least six biopsies** من الـ **distal** والـ **mid/proximal** esophagus.
+          - خدها **regardless of the endoscopic appearance**.
+          - التشخيص: ==≥15 eosinophils== في **≥2 hpfs**، أو **≥25** في hpf واحد.
+      - kind: mnemonic
+        page: 7
+        quote: "at least six biopsy samples taken from the distal and mid/proximal esophagus are recommended."
+        word: "EOE"
+        parts:
+          - { key: "E", text: "Eight minus two: at least 6 biopsies" }
+          - { key: "O", text: "Over two levels: distal and mid/proximal" }
+          - { key: "E", text: "Even if normal-looking: ≥15 in ≥2 hpfs or ≥25 in one" }
+        hook: "اسم المرض نفسه بيفكّرك بالقاعدة: **ستة، مستويين، ولو شكله سليم**."
+      - kind: try
+        items: [git.L01.011, git.L01.013, git.L01.019, git.L01.024]
+    recap:
+      - "GERD = reflux بيعمل symptoms أو complications، والتشخيص الأكيد objective: منظار أو pH monitoring."
+      - "PPI مرة قبل الفطار ← double dose ← لو مفيش استجابة: دوّر على objective GERD."
+      - "المنظار off PPI علشان الـ PPI بيخبّي الـ EE، وعلشان تلحق الـ EoE."
+      - "Proven GERD قبل كده: pH-impedance **on** PPI، والـ AET فوق 6% = refractory."
+      - "EoE: ست biopsies من مستويين حتى لو المنظار سليم."
+    practice: [git.L01.001, git.L01.002, git.L01.003, git.L01.004, git.L01.005, git.L01.006, git.L01.007, git.L01.008, git.L01.009, git.L01.010, git.L01.011, git.L01.012, git.L01.013, git.L01.014, git.L01.015, git.L01.016, git.L01.017, git.L01.018, git.L01.019, git.L01.020, git.L01.021, git.L01.022, git.L01.023, git.L01.024, git.L01.163, git.L01.164, git.L01.165, git.L01.166, git.L01.167, git.L01.195, git.L01.199, git.L01.200]
+  # ------------------------------------------------------------------
+  - id: git.L01.lesson2
+    title: "الـ dyspepsia: نطمّن ولا نعمل منظار؟"
+    hook: "ست عندها انتفاخ بعد الأكل. إمتى ده functional وإمتى لازم المنظار النهارده؟"
+    minutes: 8
+    pages: [7, 11]
+    topics: [dyspepsia]
+    goals:
+      - "تعدّ الـ alarm features كلها"
+      - "تعرف مين يعمل urgent endoscopy ومين non-urgent ومين test and treat"
+      - "تعرف الـ criteria بتاعة functional dyspepsia"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 7
+        quote: "Dyspepsia is an umbrella term used to encompass a number of symptoms thought to originate from the upper gastrointestinal tract."
+        title: "الـ dyspepsia شمسية مش تشخيص"
+        text: |
+          الـ ==dyspepsia== كلمة **umbrella**: أعراض كتير جاية من الـ upper GI tract، وهي **nonspecific**.
+
+          حالة الكتاب: ست **42 سنة** عندها **postprandial bloating**، مش بتقدر تكمّل الأكلة، وألم epigastric colicky من 5 شهور. مفيش NSAIDs ولا weight loss.
+
+          التحدي الأول (ص 8): إنك تلاقي **القلة** اللي عندها حاجة خطيرة زي **gastric cancer** وسط ناس أغلبهم functional.
+      - kind: mnemonic
+        page: 8
+        quote: "Unexplained iron deficiency anemia Persistent vomiting Palpable mass or lymphadenopathy"
+        word: "VBAD WOMF"
+        parts:
+          - { key: "V", text: "Vomiting, persistent" }
+          - { key: "B", text: "Bleeding, overt GI (hematemesis, hematochezia, melena)" }
+          - { key: "A", text: "Anemia, unexplained iron deficiency" }
+          - { key: "D", text: "Dysphagia" }
+          - { key: "W", text: "Weight loss: >5% of usual weight over 6-12 months" }
+          - { key: "O", text: "Odynophagia" }
+          - { key: "M", text: "Mass or lymphadenopathy, palpable" }
+          - { key: "F", text: "Family history of upper GI cancer" }
+        hook: "**«VBAD WOMF»** بتتقري «في باد ووم»: صوت المعدة وهي بتقولك «فيه حاجة غلط». أي حرف موجود = **organic** لحد ما يثبت العكس."
+      - kind: explain
+        page: 8
+        quote: "If any of the above alarm features is present then the dyspepsia is due to organic cause. If not then it is functional"
+        title: "القاعدة البسيطة"
+        text: |
+          الكتاب بيقسمها كده:
+
+          - فيه **أي alarm feature** ← الـ dyspepsia ==organic==.
+          - مفيش ← غالبًا **functional**.
+
+          والـ weight loss المهم = **unintentional**، أكتر من **5%** من الوزن في **6 to 12 months**.
+      - kind: figure
+        page: 9
+        quote: "Not included in the figure: diet and lifestyle factors (eg, tobacco, alcohol, nonsteroidal anti-inflammatory drug use)"
+        title: "ليه المعدة بتتعب من غير مرض باين؟"
+        alt: "Stomach and duodenum sketch with labels: impaired accommodation and hypersensitivity in the fundus, delayed emptying at the antrum, H. pylori, enteric pathogens entering, intraduodenal acid and lipid, duodenal eosinophilia and immune activation, plus diet, lifestyle and psychosocial factors outside the stomach."
+        caption: "الـ functional dyspepsia مش «مفيش حاجة»: فيه مشاكل في الحركة والإحساس والمناعة، بس مفيش structural disease."
+        svg: |
+          <svg viewBox="0 0 330 380" xmlns="http://www.w3.org/2000/svg">
+            <path d="M120 40 C110 90 60 120 70 190 C80 260 170 280 230 250 C280 225 300 170 280 120 C260 70 200 60 170 90 C155 105 140 80 140 40 Z" class="fg-acc"/>
+            <path d="M230 250 C250 275 250 300 225 315 C200 330 170 320 165 345" class="fg-ink" fill="none" stroke-width="14" stroke-linecap="round"/>
+            <circle cx="215" cy="120" r="40" class="fg-thin" fill="none"/>
+            <text x="215" y="116" text-anchor="middle" class="t-sm t-b">Impaired</text>
+            <text x="215" y="131" text-anchor="middle" class="t-sm t-b">accommodation</text>
+            <text x="265" y="62" class="t-sm t-bad">Hypersensitivity</text>
+            <text x="10" y="30" class="t-sm">Enteric pathogens</text>
+            <text x="20" y="215" class="t-sm t-b">H. pylori</text>
+            <text x="140" y="232" class="t-sm t-bad t-b">Delayed emptying</text>
+            <text x="180" y="295" class="t-sm">Intraduodenal acid and lipid</text>
+            <text x="10" y="355" class="t-sm">Duodenal eosinophilia</text>
+            <text x="10" y="372" class="t-sm">Immune activation</text>
+            <rect x="200" y="330" width="125" height="46" rx="6" class="fg-box"/>
+            <text x="208" y="348" class="t-sm t-mut">Diet, tobacco, NSAIDs</text>
+            <text x="208" y="366" class="t-sm t-mut">Stress, anxiety</text>
+          </svg>
+      - kind: figure
+        page: 10
+        quote: "urgent endoscopy is warranted in - Patients aged ≥55 years with dyspepsia with weight loss,"
+        title: "مين يدخل المنظار؟ سلّم الأعمار"
+        alt: "Decision ladder by age: 60 or more with pain and weight loss gets urgent CT for pancreatic cancer; 55 or more with weight loss gets urgent endoscopy; over 40 from a high gastric cancer area or family history of gastro-esophageal cancer gets urgent endoscopy; 55 or more with resistant dyspepsia, high platelets or nausea and vomiting gets non-urgent endoscopy; everyone else gets H. pylori test and treat."
+        caption: "BSG 2022 زي ما الكتاب نقلها. **أي حد مش على السلّم = test and treat.**"
+        svg: |
+          <svg viewBox="0 0 330 400" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="10" width="310" height="64" rx="8" class="fg-bad"/>
+            <text x="20" y="32" class="t-sm t-b t-bad">Urgent CT abdomen</text>
+            <text x="20" y="50" class="t-sm">age ≥60 + abdominal pain + weight loss</text>
+            <text x="20" y="66" class="t-sm t-mut">exclude pancreatic cancer</text>
+            <rect x="10" y="84" width="310" height="96" rx="8" class="fg-bad"/>
+            <text x="20" y="106" class="t-sm t-b t-bad">Urgent endoscopy</text>
+            <text x="20" y="126" class="t-sm">age ≥55 + dyspepsia + weight loss</text>
+            <text x="20" y="146" class="t-sm">age &gt;40 from a high gastric cancer area</text>
+            <text x="20" y="166" class="t-sm">family history of gastro-esophageal cancer</text>
+            <rect x="10" y="190" width="310" height="80" rx="8" class="fg-acc"/>
+            <text x="20" y="212" class="t-sm t-b t-acc">Non-urgent endoscopy (age ≥55)</text>
+            <text x="20" y="232" class="t-sm">treatment-resistant dyspepsia, or</text>
+            <text x="20" y="252" class="t-sm">raised platelets, or nausea/vomiting</text>
+            <rect x="10" y="280" width="310" height="110" rx="8" class="fg-good"/>
+            <text x="20" y="302" class="t-sm t-b t-good">Everyone else</text>
+            <text x="20" y="322" class="t-sm">non-invasive H. pylori test and treat</text>
+            <text x="20" y="342" class="t-sm">H. pylori negative: empirical acid suppression</text>
+            <text x="20" y="362" class="t-sm">confirm eradication only if high</text>
+            <text x="20" y="380" class="t-sm">gastric cancer risk</text>
+          </svg>
+      - kind: check
+        page: 10
+        quote: "We recommend that non-urgent endoscopy is considered in patients aged ≥55 years with treatment-resistant dyspepsia"
+        question: "A 57-year-old man has dyspepsia not helped by a PPI course. No weight loss, no other alarm features. What does the lecture advise?"
+        options:
+          - "Non-urgent endoscopy"
+          - "Urgent endoscopy"
+          - "Urgent CT abdomen"
+          - "Repeat PPI for another 8 weeks"
+        answer: 0
+        why:
+          - "صح: ≥55 مع **treatment-resistant** dyspepsia = non-urgent endoscopy."
+          - "الـ urgent عند ≥55 لازم يبقى فيه **weight loss**."
+          - "الـ CT لـ ≥60 مع pain و weight loss (pancreatic cancer)."
+          - "هو أصلًا resistant، فلازم نبص."
+      - kind: explain
+        page: 11
+        quote: "patients without H. pylori infection are offered empirical acid suppression therapy"
+        title: "Test and treat، وبعدين؟"
+        text: |
+          - **H. pylori positive** ← eradication. وتتأكد من الـ eradication **بس** في اللي عندهم **increased risk of gastric cancer** (توصية BSG في الكتاب).
+          - **H. pylori negative** ← ==empirical acid suppression==.
+
+          والـ test الـ non-invasive في الـ algorithm: **stool antigen** أو **urea breath test**.
+      - kind: table
+        page: 11
+        quote: "Persistent symptoms for the Yes prior 3 months"
+        title: "Functional dyspepsia: لازم التلاتة"
+        columns: ["الشرط", "الرقم"]
+        rows:
+          - ["Persistent symptoms", "For the prior 3 months"]
+          - ["Symptom onset", "At least 6 months before diagnosis"]
+          - ["Structural disease", "No evidence to explain symptoms"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+      - kind: aside
+        tone: trap
+        page: 11
+        quote: "Key causes of organic dyspepsia * Peptic ulcer disease = 4 pylori gastritis Symptomatic gallstone disease"
+        text: |
+          ما تنساش الـ **organic causes** اللي ممكن تتلبّس functional: **peptic ulcer**، **H. pylori gastritis**، **gallstones**، **NSAIDs**، **pancreatitis**، و**gastric أو esophageal cancer**.
+
+          ولما الست بتاعتنا رجعت بـ **melena** والـ Hb نزل لـ 10.5، بقت organic لحد ما يثبت العكس.
+      - kind: case
+        page: 11
+        quote: "The patient was prescribed proton pump inhibitor for 8 weeks. However one month later she revisited the clinic reporting worsening of symptoms and black stools."
+        stem: "The 42-year-old woman: Hb 12 g/dL, H. pylori stool antigen negative, normal thyroid tests, negative celiac serology, normal ECG."
+        steps:
+          - question: "Best initial treatment?"
+            options: ["Empirical PPI", "Urgent endoscopy", "H. pylori eradication", "Abdominal CT"]
+            answer: 0
+            why: "H. pylori negative ومفيش alarm features: **empirical acid suppression**. وهي أخدت PPI لمدة 8 أسابيع."
+          - reveal: "One month later: worse pain, black stools, marked pallor, Hb 10.5 g/dL."
+            question: "Now?"
+            options: ["Upper endoscopy", "Double the PPI", "Reassure", "Stool antigen again"]
+            answer: 0
+            why: "**Melena** و**anemia** = alarm features، فالمنظار بقى لازم."
+      - kind: try
+        items: [git.L01.027, git.L01.033, git.L01.036, git.L01.040]
+    recap:
+      - "Dyspepsia = umbrella؛ المهم تلاقي القلة اللي عندها cancer."
+      - "Alarm features: **VBAD WOMF**. أي واحدة = organic."
+      - "Urgent endoscopy: ≥55 + weight loss، >40 من منطقة high-risk، أو family history."
+      - "Non-urgent: ≥55 + resistant، platelets عالية، أو nausea/vomiting. CT: ≥60 + pain + weight loss."
+      - "الباقي: H. pylori test and treat؛ negative = empirical acid suppression."
+    practice: [git.L01.025, git.L01.026, git.L01.027, git.L01.028, git.L01.029, git.L01.030, git.L01.031, git.L01.032, git.L01.033, git.L01.034, git.L01.035, git.L01.036, git.L01.037, git.L01.038, git.L01.039, git.L01.040, git.L01.041, git.L01.168, git.L01.169, git.L01.170, git.L01.196]
+  # ------------------------------------------------------------------
+  - id: git.L01.lesson3
+    title: "الـ gastritis: من الـ Sydney لحد Kyoto"
+    hook: "المنظار بيقولك الـ H. pylori موجود ولا لأ، والسرطان قريب ولا بعيد، لو عرفت تقرا الـ score."
+    minutes: 10
+    pages: [12, 21]
+    topics: [gastritis, kyoto]
+    goals:
+      - "تفرّق بين autoimmune gastritis و multifocal atrophic gastritis"
+      - "تحسب Kyoto score وتفسّره"
+      - "ترتّب درجات Kimura-Takemoto"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 12
+        quote: "chronic inflammatory mucosal changes leading eventually to mucosal atrophy and intestinal metaplasia in absence of erosions"
+        title: "Chronic gastritis يعني إيه؟"
+        text: |
+          ==Chronic gastritis==: **chronic inflammatory mucosal changes** بتوصل في الآخر لـ **atrophy** و **intestinal metaplasia**، **من غير erosions**.
+
+          الملمحين تحت الميكروسكوب:
+          - **Inflammatory cells** في الـ lamina propria.
+          - **Atrophy** في الـ glandular epithelium.
+      - kind: explain
+        page: 13
+        quote: "gastritis staging is done using the OLGA (Operative Link on Gastritis Assessment) staging system"
+        title: "Sydney بيصنّف، OLGA بيعمل staging"
+        text: |
+          - **Updated Sydney System**: بيصنّف ويعمل grading بدمج **topographical** و **morphological** و **etiological** information.
+          - **OLGA** (Operative Link on Gastritis Assessment): بيعمل ==staging== بدمج **atrophy score** (من الـ biopsy) و **atrophy topography** (من الـ biopsy mapping).
+
+          علشان كده في حالة الـ dyspepsia أخدوا biopsies من **antrum, incisura, fundus and body**: محتاجين خريطة.
+      - kind: sort
+        page: 14
+        quote: "The inflammation is restricted to the corpus and fundus, sparing the antrum, which distinguishes AIG from other conditions"
+        prompt: "Autoimmune (type A) ولا multifocal atrophic (type B)؟"
+        bins: ["Type A (autoimmune)", "Type B (multifocal atrophic)"]
+        cards:
+          - { text: "Corpus and fundus only, antrum spared", bin: 0 }
+          - { text: "Anti-parietal cell antibodies", bin: 0 }
+          - { text: "B12 deficiency, megaloblastic anemia", bin: 0 }
+          - { text: "Hashimoto, type 1 DM, Addison, vitiligo", bin: 0 }
+          - { text: "Mostly H. pylori", bin: 1 }
+          - { text: "Starts in body and antrum, then spreads", bin: 1 }
+          - { text: "Pepsinogen 1/2 ratio predicts extensive atrophy", bin: 1 }
+        why: "الـ AIG بيضرب الـ **oxyntic mucosa** بس (corpus و fundus) ويسيب الـ antrum، وده اللي بيفرقه عن الـ H. pylori. الـ MAG من H. pylori بيبدأ في الـ body والـ antrum وينتشر."
+      - kind: reveal
+        page: 14
+        quote: "Parietal cells (oxyntic cells) have two main functions: HCL secretion and intrinsic factor (vitamin B12-binding glycoprotein) production."
+        prompt: "ليه الـ autoimmune gastritis بيعمل megaloblastic anemia؟"
+        answer: |
+          الـ **parietal cells** بتعمل حاجتين: **HCl** و **intrinsic factor**.
+
+          الـ **APCA** بتدمرها، فيقل الـ intrinsic factor (يعني B12 مش هيتمتص) ويقل الحمض (فالـ iron كمان امتصاصه بيقل). النتيجة **megaloblastic anemia**.
+
+          وكمان **hyposplenism** (pitted RBCs أكتر من 4%) في **55%** منهم.
+      - kind: explain
+        page: 16
+        quote: "Diffuse redness with or without RAC, which is related to H. pylori infection status, are accounted for in the Kyoto classification score"
+        title: "Kyoto: 19 علامة، بس 5 بيتحسبوا"
+        text: |
+          الـ **Kyoto classification** (2013) فيها **19** endoscopic finding، وهدفها حاجتين: تشخّص **H. pylori** بالمنظار، وتقدّر **gastric cancer risk**.
+
+          الـ score بيتعمل من 5 بس:
+          - **Atrophy**، **intestinal metaplasia**، **enlarged folds**، **nodularity**: مرتبطين بالـ ==cancer risk==.
+          - **Diffuse redness** (مع أو من غير RAC): مرتبطة بـ ==H. pylori status==.
+      - kind: table
+        page: 16
+        quote: "≥ 5 mm gastric fold width"
+        title: "Kyoto score (0-8)"
+        columns: ["Finding", "1 point", "2 points"]
+        rows:
+          - ["Atrophy", "C2-C3", "O1-O3"]
+          - ["Intestinal metaplasia", "Antrum", "Up to corpus"]
+          - ["Enlarged folds", "Fold width ≥5 mm", "-"]
+          - ["Nodularity", "Small antral nodules", "-"]
+          - ["Diffuse redness", "Mild (with RAC)", "Severe"]
+        hide: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 1], [4, 2]]
+      - kind: aside
+        tone: exam
+        page: 16
+        quote: "A score of 0 indicates no Helicobacter pylori (H. pylori) infection, a score of ≥ 2 indicates current H. pylori infection"
+        text: |
+          التفسير: **0** = مفيش H. pylori. ==≥2== = **current** H. pylori. ==≥4== = **higher gastric cancer risk**.
+
+          افتكرها بالزوجي: **صفر، اتنين، أربعة**: نضيف، مصاب، خطر.
+      - kind: figure
+        page: 18
+        title: "Kimura-Takemoto في المنظار"
+        image: { file: git/L01-kimura-takemoto.webp, book: true }
+        alt: "Six endoscopic photos A to F with a dotted atrophic border and a small stomach diagram in each corner showing the atrophic area in blue spreading from the antrum (A) up the lesser curvature (B, C) and over the cardia to the greater curvature (D to F)."
+        caption: |
+          الخط المنقّط هو حد الـ atrophy. الرسمة الزرقا في الركن بتوريك هو وصل لحد فين.
+
+          - **A-C**: closed type (**C1-C3**)، الـ atrophy لسه على الـ lesser curvature.
+          - **D-F**: open type (**O1-O3**)، عدّى الـ cardia ورايح للـ greater curvature.
+      - kind: order
+        page: 19
+        quote: "A: C1 (Atrophy is limited to the antrum);"
+        prompt: "رتّب الـ atrophy من الأقل للأوسع:"
+        steps:
+          - "C1: antrum only"
+          - "C2: minor area of lesser curvature"
+          - "C3: major area of lesser curvature"
+          - "O1: over the cardia to the fundus"
+          - "O2: border on the anterior wall"
+          - "O3: border toward the greater curvature"
+        why: "الـ atrophy بيطلع من الـ antrum على الـ lesser curvature (C)، وبعدين يعدّي الـ cardia ويلف للـ greater curvature (O). وفي Kyoto: C0-C1 = 0، C2-C3 = 1، O1-O3 = 2."
+      - kind: check
+        page: 16
+        quote: "and a score of ≥ 4 indicates higher risk of gastric cancer risk."
+        question: "Atrophy C3, intestinal metaplasia up to the corpus, enlarged folds 6 mm, no nodularity, no diffuse redness. Kyoto score and meaning?"
+        options:
+          - "4: higher gastric cancer risk"
+          - "3: current H. pylori"
+          - "5: higher gastric cancer risk"
+          - "2: current H. pylori only"
+        answer: 0
+        why:
+          - "صح: C3 = 1، IM للـ corpus = 2، folds ≥5 mm = 1، الباقي صفر. المجموع 4 ← higher cancer risk."
+          - "نسيت نقطة من الـ IM أو الـ folds."
+          - "عدّيت الـ atrophy C3 على إنها 2، بس الـ 2 لـ O1-O3."
+          - "ده أقل بكتير من المجموع الصح."
+      - kind: explain
+        page: 20
+        quote: "(light blue crest on the mucosal epithelial rim visualized using magnified NBI)"
+        title: "Intestinal metaplasia شكلها إيه؟"
+        text: |
+          - **Grayish-white**، slightly elevated plaques، وحواليها mucosa pink و pale متلخبطة، فالسطح irregular.
+          - علامات مساعدة: **villous appearance**، **whitish mucosa**، **rough surface**.
+          - الـ **NBI** حسّن الرؤية والدقة، والعلامة المشهورة: ==light blue crest== على حافة الـ epithelium في الـ magnified NBI.
+      - kind: try
+        items: [git.L01.051, git.L01.063, git.L01.064, git.L01.070]
+    recap:
+      - "Chronic gastritis = inflammation ← atrophy و intestinal metaplasia، من غير erosions."
+      - "Sydney بيصنّف؛ OLGA بيعمل staging (atrophy score + topography)."
+      - "Type A: corpus/fundus، يسيب الـ antrum، APCA، B12. Type B: H. pylori، antrum و body وينتشر."
+      - "Kyoto: 0 نضيف، ≥2 H. pylori، ≥4 cancer risk."
+      - "Kimura-Takemoto: C1-C3 بعدين O1-O3. الـ IM = light blue crest على NBI."
+    practice: [git.L01.042, git.L01.043, git.L01.044, git.L01.045, git.L01.046, git.L01.047, git.L01.048, git.L01.049, git.L01.050, git.L01.051, git.L01.052, git.L01.053, git.L01.054, git.L01.055, git.L01.056, git.L01.057, git.L01.058, git.L01.059, git.L01.060, git.L01.061, git.L01.062, git.L01.063, git.L01.064, git.L01.065, git.L01.066, git.L01.067, git.L01.068, git.L01.069, git.L01.070, git.L01.071, git.L01.072, git.L01.073, git.L01.074, git.L01.171, git.L01.172, git.L01.173, git.L01.174]
+  # ------------------------------------------------------------------
+  - id: git.L01.lesson4
+    title: "الـ H. pylori: الضيف التقيل"
+    hook: "باكتيريا عايشة في الحمض، بتعمل ulcer و lymphoma و cancer. نعرف أسلحتها، نكشف عليها، ونطردها بأنهي regimen؟"
+    minutes: 10
+    pages: [21, 31]
+    topics: [hp-biology, hp-tests, malt, hp-treatment]
+    goals:
+      - "تعرف أسلحة H. pylori: urease، adhesins، CagA، VacA"
+      - "تختار الـ test المناسب للتشخيص وللـ test of cure"
+      - "تكتب 3 regimens لمريض treatment-naive"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 21
+        quote: "Urease to create an alkaline environment, which is essential for its survival in the stomach under the mucosal barrier."
+        title: "إزاي بتعيش في الحمض؟"
+        text: |
+          الـ outcome بيتحدد من **bacterial factors** و **host factors** مع بعض.
+
+          أسلحة البكتيريا:
+          - ==Urease==: بتعمل **alkaline environment** حواليها، وده سر إنها تعيش تحت الـ mucosal barrier.
+          - **Adhesins**: **BabA** و **OipA** بيلزقوها في الـ epithelium.
+          - **Pathogenicity island**: بيشفّر **CagA** و **PicB**، ودول مرتبطين بالـ inflammation والـ epithelial injury.
+      - kind: explain
+        page: 22
+        quote: "vacA s1 and m1 strains are associated with high levels of inflammation in the gastric mucosa and increased risk for gastric atrophy and carcinoma"
+        title: "CagA و VacA: مين الأخطر؟"
+        text: |
+          - **CagA-positive** strains مرتبطة مباشرة بـ **acute gastritis** و **gastric ulcer** و **gastric cancer**.
+          - **vacA**: كل الـ strains تقريبًا فيها الجين، بس **نصهم** مش بيطلّعوا البروتين. الـ genotype بيتحدد من 3 مناطق: **signal (s)**، **mid (m)**، **intermediate (i)**.
+          - ==s1/m1== هو الأشرس: inflammation أعلى و risk أعلى للـ **atrophy** والـ **carcinoma** من s2 و m2.
+
+          ومن ناحية الـ host: **IL-1β** (مع الـ hypochlorhydria)، **TNF** و **lymphotoxin-α**، و **TLR1** locus.
+      - kind: aside
+        tone: joke
+        text: |
+          الـ H. pylori ده زي الضيف اللي جه يقعد يومين: جاب **urease** يظبط الجو، **adhesins** يلزق في الكنبة، و **CagA** يكسّر الصيني. 😄
+
+          والـ **s1/m1** ده الضيف اللي جاب عياله معاه.
+      - kind: table
+        page: 23
+        quote: "Inexpensive, convenient; not useful for early follow-up"
+        title: "تكشف على H. pylori بإيه؟"
+        columns: ["Test", "Type", "Remember"]
+        rows:
+          - ["Rapid urease", "Invasive", "False negative with recent PPI, antibiotics, bismuth"]
+          - ["Histology", "Invasive", "Gives histologic information"]
+          - ["Culture", "Invasive", "Only one with antibiotic susceptibility"]
+          - ["Serology", "Noninvasive", "Not useful for early follow-up"]
+          - ["Urea breath test", "Noninvasive", "Useful for early follow-up; 14C = low-dose radiation"]
+          - ["Stool antigen", "Noninvasive", "Inexpensive, convenient"]
+        hide: [[0, 2], [2, 2], [3, 2], [4, 2]]
+      - kind: check
+        page: 23
+        quote: "Inexpensive, convenient; not useful for early follow-up"
+        question: "Which test should NOT be used to check cure 4 weeks after eradication therapy?"
+        options:
+          - "Serology"
+          - "Urea breath test"
+          - "Stool antigen"
+          - "Biopsy-based test"
+        answer: 0
+        why:
+          - "صح: الـ serology **not useful for early follow-up**."
+          - "الـ UBT **useful for early follow-up**، وهو من الـ tests of cure."
+          - "الـ fecal antigen من الـ tests of cure المذكورة."
+          - "الـ biopsy-based test من الـ tests of cure المذكورة."
+      - kind: explain
+        page: 25
+        quote: "It may be combined with an endoscopic ultrasound examination, which is a routine procedure in lymphoma staging."
+        title: "الـ outcomes، والـ MALT lymphoma"
+        text: |
+          الـ H. pylori ممكن يعمل: **gastritis**، **peptic ulcer**، **MALT lymphoma**، و **gastric adenocarcinoma**.
+
+          الـ ==MALT lymphoma== = **marginal zone B-cell lymphoma**. في الـ white light ممكن يبان بالعافية، وفي الـ **BLI with magnification** بيبان بـ vessels شكلها **«tree-like»** و linear erosions.
+
+          تحدياته: محتاج تبص على **المعدة كلها**، **biopsies كتير** (وأحيانًا كبيرة)، **control endoscopy** بعد العلاج، gastric mapping، و **EUS** اللي هو routine في الـ staging.
+      - kind: explain
+        page: 31
+        quote: "Strong (moderate quality of evidence)"
+        title: "المنيو: 4 regimens لمريض treatment-naive"
+        text: |
+          الجدول في الكتاب فيه 4، والسؤال بيقول «اكتب 3»:
+
+          - ==Optimized bismuth quadruple==: **PPI** b.i.d. + **bismuth** q.i.d. + **tetracycline 500 mg** q.i.d. + **metronidazole 500 mg** t.i.d. or q.i.d. الوحيد اللي توصيته **strong**، وهو **مش FDA approved**.
+          - **Rifabutin triple (Talicia)**: omeprazole 10 + amoxicillin 250 + rifabutin 12.5 mg في الكبسولة، **4 capsules t.i.d.**
+          - **PCAB dual**: **vonoprazan 20 mg** b.i.d. + amoxicillin 1 g t.i.d.
+          - **PCAB triple**: vonoprazan + clarithromycin 500 + amoxicillin 1 g، الكل b.i.d.
+      - kind: mnemonic
+        page: 31
+        quote: "Opnmuzed Bismuth subcitrate (120"
+        word: "BMTP"
+        parts:
+          - { key: "B", text: "Bismuth (subcitrate 120-300 mg or subsalicylate 300 mg) q.i.d." }
+          - { key: "M", text: "Metronidazole 500 mg t.i.d. or q.i.d." }
+          - { key: "T", text: "Tetracycline 500 mg q.i.d." }
+          - { key: "P", text: "PPI standard dose b.i.d." }
+        hook: "**«بي إم تي بي»**: الـ bismuth quadruple زي **ميكروباص BMTP**، أربع ركاب، والـ PPI بس اللي بيركب مرتين في اليوم."
+      - kind: aside
+        tone: trap
+        page: 31
+        quote: "Clarithromycin- and levofloxacin-containing treatment regimens should be avoided in the absence of demonstrated macrolide and quinolone susceptibility"
+        text: |
+          فخ مشهور: **clarithromycin** و **levofloxacin** متديهمش إلا لو الـ susceptibility **متثبتة**.
+
+          وكل مريض اتعالج لازم **test of cure** (UBT أو fecal antigen أو biopsy) **at least 4 weeks** بعد العلاج.
+      - kind: match
+        page: 31
+        quote: "who have received bismuth quadruple therapy, rifabutin triple therapy is suggested"
+        prompt: "الـ H. pylori لسه موجود. وصّل كل مريض بالـ regimen اللي بعده:"
+        pairs:
+          - ["Never had bismuth quadruple", "Optimized bismuth quadruple"]
+          - ["Already had bismuth quadruple", "Rifabutin triple"]
+          - ["Proven clarithromycin-sensitive", "PPI- or PCAB-clarithromycin triple"]
+          - ["Levofloxacin-sensitive, others used or unavailable", "Levofloxacin triple"]
+        why: "الكتاب (ص 31): اللي ماخدش bismuth quadruple ياخده؛ اللي خده ياخد rifabutin triple؛ والـ clarithromycin والـ levofloxacin بس مع susceptibility متثبتة. والـ probiotics مفيش evidence إنها بتفرق."
+      - kind: try
+        items: [git.L01.086, git.L01.120, git.L01.125, git.L01.126]
+    recap:
+      - "Urease يعيّشها، BabA/OipA يلزّقوها، CagA و vacA s1/m1 الأخطر."
+      - "Culture الوحيد بالـ susceptibility. Serology مش للـ follow-up. PPI والمضاد الحيوي بيعملوا false negative."
+      - "Outcomes: gastritis، ulcer، MALT lymphoma (marginal zone B-cell، EUS للـ staging)، adenocarcinoma."
+      - "Treatment-naive: bismuth quadruple (strong)، rifabutin triple، PCAB dual أو triple."
+      - "Test of cure بعد 4 أسابيع على الأقل؛ لا clarithromycin ولا levofloxacin من غير susceptibility."
+    practice: [git.L01.075, git.L01.076, git.L01.077, git.L01.078, git.L01.079, git.L01.080, git.L01.081, git.L01.082, git.L01.083, git.L01.084, git.L01.085, git.L01.086, git.L01.087, git.L01.088, git.L01.089, git.L01.090, git.L01.091, git.L01.092, git.L01.093, git.L01.094, git.L01.095, git.L01.120, git.L01.121, git.L01.122, git.L01.123, git.L01.124, git.L01.125, git.L01.126, git.L01.127, git.L01.128, git.L01.129, git.L01.130, git.L01.175, git.L01.176, git.L01.177, git.L01.184, git.L01.185, git.L01.194, git.L01.202]
+  # ------------------------------------------------------------------
+  - id: git.L01.lesson5
+    title: "الـ peptic ulcer: من السبب لحد الجراح"
+    hook: "قرحة ساكتة، قرحة بتنزف، وقرحة خرّمت. هتعرف كل واحدة من الكشف، وتصنّف النزيف على سلّم Forrest."
+    minutes: 10
+    pages: [25, 36]
+    topics: [pud, forrest, pud-management]
+    goals:
+      - "تعرف أرقام الـ DU والـ GU ومكانهم"
+      - "تشرح إزاي الـ NSAIDs بتعمل ulcer"
+      - "تصنّف Forrest وتعرف الـ high-risk"
+      - "تدير الـ complications وتعرف indications الجراحة"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 25
+        quote: "Duodenal ulcer/gastric ulcer ratio is 4:1. • >90% of DU occur in the first part duodenum;"
+        title: "أرقام لازم تحفظها"
+        text: |
+          - ==DU : GU = 4:1==.
+          - أكتر من **90%** من الـ DU في **first part of the duodenum**.
+          - الـ GU أكتر حاجة على الـ **lesser curvature** جنب الـ **incisura angularis**.
+          - الـ prevalence: **0.12% to 4.7%** physician-diagnosed، و **0.1% to 2.6%** hospital-diagnosed.
+      - kind: table
+        page: 26
+        quote: "Co-administration of corticosteroids and bisphosphonates with NSAIDs; Sirolimus, selective serotonin reuptake inhibitors (SSRIs), 5-fluorouracil (5-FU)"
+        title: "Risk factors للـ ulcer"
+        columns: ["Risk factor", "الملاحظة"]
+        rows:
+          - ["H. pylori", "Developing nations; gastric and duodenal"]
+          - ["NSAIDs (incl. aspirin)", "More often gastric"]
+          - ["Other drugs", "Steroids or bisphosphonates with NSAIDs; sirolimus, SSRIs, 5-FU"]
+          - ["Smoking", "Synergistic with H. pylori"]
+          - ["Neoplasms", "Gastrinoma, gastric adenocarcinoma, carcinoid"]
+        hide: [[1, 1], [2, 1], [3, 1], [4, 1]]
+      - kind: figure
+        page: 27
+        quote: "Inhibition of constitutively expressed cyclooxygenase 1 (COX-1)-derived prostaglandins which is regarded as the main mechanism."
+        title: "الـ NSAIDs بتضرب من ناحيتين"
+        alt: "Two panels. Systemic: NSAID blocks COX-1 prostaglandins, causing less mucus and bicarbonate, less cell proliferation and less mucosal blood flow. Topical: the weak acid is nonionized in gastric acid, enters the epithelial cell, becomes ionized and trapped; plus higher permeability, back-diffusion of H+ and pepsin, and leukotrienes and TNF from the lipoxygenase pathway."
+        caption: "الـ **systemic** (COX-1) هو الـ **main mechanism**؛ والـ **topical** هو اللي بيكمّل الضرب على السطح."
+        svg: |
+          <svg viewBox="0 0 330 430" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="G1b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-bad"/></marker>
+            </defs>
+            <text x="165" y="20" text-anchor="middle" class="t-b t-lg">Systemic (main)</text>
+            <rect x="85" y="32" width="160" height="34" rx="6" class="fg-bad"/>
+            <text x="165" y="54" text-anchor="middle" class="t-sm t-b">NSAID blocks COX-1</text>
+            <path d="M165 66v20" class="fg-arrow-bad" marker-end="url(#G1b)"/>
+            <rect x="60" y="90" width="210" height="30" rx="6" class="fg-box"/>
+            <text x="165" y="110" text-anchor="middle" class="t-sm">Fewer prostaglandins</text>
+            <path d="M165 120v18" class="fg-arrow-bad" marker-end="url(#G1b)"/>
+            <rect x="10" y="142" width="100" height="44" rx="6" class="fg-box"/>
+            <text x="60" y="160" text-anchor="middle" class="t-sm">Less mucus</text>
+            <text x="60" y="176" text-anchor="middle" class="t-sm">and HCO3</text>
+            <rect x="115" y="142" width="100" height="44" rx="6" class="fg-box"/>
+            <text x="165" y="160" text-anchor="middle" class="t-sm">Less cell</text>
+            <text x="165" y="176" text-anchor="middle" class="t-sm">proliferation</text>
+            <rect x="220" y="142" width="100" height="44" rx="6" class="fg-box"/>
+            <text x="270" y="160" text-anchor="middle" class="t-sm">Less mucosal</text>
+            <text x="270" y="176" text-anchor="middle" class="t-sm">blood flow</text>
+            <text x="165" y="226" text-anchor="middle" class="t-b t-lg">Topical</text>
+            <rect x="10" y="240" width="310" height="40" rx="6" class="fg-acc"/>
+            <text x="20" y="258" class="t-sm">Gastric acid: NSAID nonionized, lipophilic</text>
+            <text x="20" y="274" class="t-sm">crosses the cell membrane</text>
+            <path d="M165 280v20" class="fg-arrow-bad" marker-end="url(#G1b)"/>
+            <rect x="10" y="304" width="310" height="40" rx="6" class="fg-bad"/>
+            <text x="20" y="322" class="t-sm t-b">Inside the cell: ionized and trapped</text>
+            <text x="20" y="338" class="t-sm">ion trapping = cell injury</text>
+            <text x="10" y="370" class="t-sm">+ higher surface permeability</text>
+            <text x="10" y="390" class="t-sm">+ back-diffusion of H+ and pepsin</text>
+            <text x="10" y="410" class="t-sm">+ TNF, leukotrienes (lipoxygenase)</text>
+          </svg>
+      - kind: explain
+        page: 28
+        quote: "Duodenal ulcer pain and gastric ulcer pain are clinically indistinguishable"
+        title: "المريض بيشتكي من إيه؟"
+        text: |
+          - ألم **epigastric أو retrosternal**، gnawing أو burning، **بيهدى** بالأكل (ice cream، لبن) أو antacids. والـ DD المهم: ==CAD==.
+          - **DU و GU مش بيتفرقوا clinically**، بس الـ **hunger** والـ **nocturnal pain** أكتر مع الـ DU.
+          - وكتير بييجي أول مرة بـ **complication**: bleeding، perforation، أو gastric outlet obstruction.
+      - kind: match
+        page: 28
+        quote: "Presence of a succussion splash indicates retained fluid in the stomach, suggesting gastric outlet obstruction"
+        prompt: "علامة في الكشف ← بتقولك إيه؟"
+        pairs:
+          - ["Epigastric tenderness", "The most frequent finding"]
+          - ["Tachycardia and orthostasis", "Dehydration or active bleeding"]
+          - ["Board-like abdomen", "Perforation"]
+          - ["Succussion splash", "Gastric outlet obstruction"]
+        why: "كلها من ص 28. الكشف **critically important** علشان تلقط الـ complication بدري."
+      - kind: explain
+        page: 29
+        quote: "If the GU biopsies are benign, EGD is repeated 8 weeks later to confirm healing of the GU"
+        title: "التشخيص والـ biopsies"
+        text: |
+          - **Endoscopy = gold standard**.
+          - **Test and treat** (UBT أو stool antigen) في الأصغر من **55** من غير alarm، في منطقة الـ cancer فيها قليل والـ H. pylori أكتر من **20%**. الأكبر: منظار.
+          - لقيت ulcer؟ biopsies من الـ **antrum والـ body** للـ **rapid urease test**.
+          - **GU**: biopsies من ==edges== علشان الـ cancer. ولو benign، كرر المنظار بعد **8 weeks**، لأن لحد **4%** منها بيطلع malignant.
+      - kind: figure
+        page: 30
+        quote: "Active spurting bleeding (Forrest IA), • Oozing bleeding (Forrest IB),"
+        title: "سلّم Forrest"
+        alt: "A ladder of six rungs from top (highest risk) to bottom: IA spurting, IB oozing, IIA non-bleeding visible vessel, IIB adherent clot, then a dividing line, IIC flat pigmented spot and III clean base as low risk."
+        caption: "أربع درجات فوق = **high risk**. اتنين تحت = **low risk**. كل ما تنزل، النزيف بيهدى."
+        svg: |
+          <svg viewBox="0 0 330 370" xmlns="http://www.w3.org/2000/svg">
+            <path d="M40 10v350M290 10v350" class="fg-ink" stroke-width="3"/>
+            <rect x="50" y="20" width="230" height="42" rx="6" class="fg-bad"/>
+            <text x="62" y="46" class="t-b">IA</text><text x="110" y="46" class="t-sm">Active spurting</text>
+            <rect x="50" y="72" width="230" height="42" rx="6" class="fg-bad"/>
+            <text x="62" y="98" class="t-b">IB</text><text x="110" y="98" class="t-sm">Oozing</text>
+            <rect x="50" y="124" width="230" height="42" rx="6" class="fg-bad"/>
+            <text x="62" y="150" class="t-b">IIA</text><text x="110" y="150" class="t-sm">Visible vessel</text>
+            <rect x="50" y="176" width="230" height="42" rx="6" class="fg-bad"/>
+            <text x="62" y="202" class="t-b">IIB</text><text x="110" y="202" class="t-sm">Adherent clot</text>
+            <path d="M20 232h290" class="fg-thin" stroke-width="2"/>
+            <text x="300" y="120" class="t-sm t-bad t-b" transform="rotate(90 300 120)">HIGH RISK</text>
+            <rect x="50" y="246" width="230" height="42" rx="6" class="fg-good"/>
+            <text x="62" y="272" class="t-b">IIC</text><text x="110" y="272" class="t-sm">Flat pigmented spot</text>
+            <rect x="50" y="298" width="230" height="42" rx="6" class="fg-good"/>
+            <text x="62" y="324" class="t-b">III</text><text x="110" y="324" class="t-sm">Clean base</text>
+            <text x="300" y="270" class="t-sm t-good t-b" transform="rotate(90 300 270)">LOW</text>
+          </svg>
+      - kind: mnemonic
+        page: 30
+        quote: "Low risk ulcers • Flat pigmented spot (Forrest IIC) • Clean-based ulcer (Forrest III)"
+        word: "SOVCFC"
+        parts:
+          - { key: "S", text: "IA: Spurting" }
+          - { key: "O", text: "IB: Oozing" }
+          - { key: "V", text: "IIA: Visible vessel (pigmented protuberance)" }
+          - { key: "C", text: "IIB: Clot, adherent" }
+          - { key: "F", text: "IIC: Flat pigmented spot (low risk)" }
+          - { key: "C", text: "III: Clean base (low risk)" }
+        hook: "**«سو، في سي، فك سي»**: نزّل السلّم من الفوّارة (Spurting) لحد القاع النضيف (Clean). أول أربعة high، آخر اتنين low."
+      - kind: check
+        page: 30
+        quote: "Pigmented protuberance or nonbleeding visible vessel (NBVV [Forrest IIA]) adherent clot (Forrest IIB)"
+        question: "An ulcer with a pigmented protuberance and no active bleeding. Forrest class?"
+        options:
+          - "IIA, high risk"
+          - "IIC, low risk"
+          - "IB, high risk"
+          - "III, low risk"
+        answer: 0
+        why:
+          - "صح: الـ pigmented protuberance هو الـ **non-bleeding visible vessel** = IIA، high risk."
+          - "IIC هي **flat** pigmented spot، مش protuberance."
+          - "IB فيها oozing."
+          - "III clean base."
+      - kind: table
+        page: 35
+        quote: "Patient presents with vomiting of food consumed 2 -3days before"
+        title: "الـ complications بتتعالج إزاي؟"
+        columns: ["Complication", "Clue", "Management"]
+        rows:
+          - ["Gastric outlet obstruction", "Vomiting food eaten 2-3 days before", "Resuscitation, NG suction, balloon dilatation, bypass surgery"]
+          - ["Perforation", "Acute abdomen; air under right cupola on erect X-ray", "NPO, IV antibiotics and fluids, surgery"]
+        hide: [[0, 1], [0, 2], [1, 2]]
+      - kind: explain
+        page: 36
+        quote: "Refractory ulcers • Haemorrhage not responding to endoscopic treatment • Gastric outlet obstruction • Perforation • Suspicious of Malignancy"
+        title: "إمتى الجراح؟"
+        text: |
+          خمسة:
+          - **Refractory** ulcers
+          - **Hemorrhage** مش بيستجيب للـ endoscopic treatment
+          - **Gastric outlet obstruction**
+          - **Perforation**
+          - **Suspicion of malignancy**
+
+          افتكرها بـ ==«RHOPS»==: «روبس»، الحبال اللي بيشدّ بيها الجراح المريض لأوضة العمليات. 😄
+      - kind: try
+        items: [git.L01.116, git.L01.117, git.L01.148, git.L01.104]
+    recap:
+      - "DU:GU = 4:1؛ 90% من الـ DU في D1؛ الـ GU على الـ lesser curvature عند الـ incisura."
+      - "NSAIDs: COX-1 هو الـ main، و ion trapping موضعي. أغلبها gastric."
+      - "Endoscopy gold standard؛ GU: biopsy من الحافة وتكرار بعد 8 أسابيع."
+      - "Forrest: IA, IB, IIA, IIB high؛ IIC و III low."
+      - "الجراحة: RHOPS."
+    practice: [git.L01.096, git.L01.097, git.L01.098, git.L01.099, git.L01.100, git.L01.101, git.L01.102, git.L01.103, git.L01.104, git.L01.105, git.L01.106, git.L01.107, git.L01.108, git.L01.109, git.L01.110, git.L01.111, git.L01.112, git.L01.113, git.L01.114, git.L01.115, git.L01.116, git.L01.117, git.L01.118, git.L01.119, git.L01.145, git.L01.146, git.L01.147, git.L01.148, git.L01.178, git.L01.179, git.L01.180, git.L01.181, git.L01.182, git.L01.183, git.L01.190, git.L01.198, git.L01.203]
+  # ------------------------------------------------------------------
+  - id: git.L01.lesson6
+    title: "الـ PPI صاحبك، والـ gastrinoma عدوّك"
+    hook: "دوا بنكتبه كل يوم: يتكسّر بأنهي enzyme، بيتخانق مع مين، وبيعمل إيه على المدى الطويل؟ وبعدين: الـ ulcer اللي مش بيخف."
+    minutes: 10
+    pages: [32, 39]
+    topics: [ppi, pud-management, zes]
+    goals:
+      - "تعدّ indications و adverse effects الـ PPI"
+      - "تختار الـ PPI مع الـ clopidogrel وتعرف ليه"
+      - "تشك في ZES وتمشي في الـ algorithm"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 32
+        quote: "With the exception of omeprazole (pregnancy class C) all PPIs have been categorized as class B agents."
+        title: "الـ PPI بنكتبه في إيه؟"
+        text: |
+          سبعة indications:
+          - **Acute peptic ulcer**
+          - **NSAID ulcer**: علاج ووقاية
+          - **GERD**
+          - **ZES** قبل الجراحة
+          - **GI hemorrhage**: علاج ووقاية
+          - **Stress ulcer bleeding** في الـ critically ill
+          - جزء من **H. pylori eradication**
+
+          وفي الحمل: كل الـ PPIs **class B** ما عدا ==omeprazole (class C)==.
+      - kind: explain
+        page: 32
+        quote: "CYP2C19 is responsible for > 80% of the metabolism of omeprazole, lansoprazole, and pantoprazole metabolism."
+        title: "CYP2C19: ليه نفس الجرعة بتفرق من واحد للتاني"
+        text: |
+          الـ PPIs بتتكسّر بـ ==CYP2C19== و **CYP3A4**.
+
+          - الـ CYP2C19 مسؤول عن أكتر من **80%** من metabolism الـ **omeprazole** و **lansoprazole** و **pantoprazole**.
+          - فيه 4 phenotypes: **extensive**، **intermediate**، **ultra-rapid**، **poor** metabolizers.
+          - في الـ **extensive** والـ **ultra-rapid**، الـ omeprazole والـ lansoprazole ممكن **ميكفوش**.
+          - **Esomeprazole** (الـ S-isomer) بيتكسّر بالـ CYP2C19 أقل، و **rabeprazole** أغلبه **non-enzymatic** لـ rabeprazole thioether.
+      - kind: aside
+        tone: analogy
+        page: 33
+        quote: "the effectiveness of omeprazole and lansoprazole is sometimes insufficient in EM and ultra-rapid metabolizers."
+        text: |
+          الـ **ultra-rapid metabolizer** زي واحد بياكل بسرعة: تحطله الأكل، يخلّصه قبل ما تقعد. الـ omeprazole بيتهضم قبل ما يلحق يشتغل.
+
+          علشان كده لو مريض «مش بيستجيب» على omeprazole، فكّر في الـ CYP2C19 قبل ما تقول refractory.
+      - kind: match
+        page: 33
+        quote: "Separate medications and antacids by 4 hours."
+        prompt: "التفاعل ← الحل:"
+        pairs:
+          - ["Omeprazole + clopidogrel", "Switch to pantoprazole"]
+          - ["PPI + nelfinavir or rilpivirine", "Switch to an H2 blocker"]
+          - ["PPI + Harvoni", "Omeprazole 20 mg or an H2 blocker"]
+          - ["PPI + methotrexate", "H2 blocker or watch for toxicity"]
+          - ["Antacid + fluoroquinolone or tetracycline", "Separate by 4 hours"]
+        why: "الـ omeprazole والـ esomeprazole بيمنعوا الـ CYP2C19 اللي بيفعّل الـ clopidogrel؛ الـ pantoprazole مش بيمنعه. الـ pH العالي بيقلل امتصاص الـ antiretrovirals والـ Harvoni (وبيزوّد الـ digoxin). الـ PPI بيقلل الـ renal tubular secretion للـ methotrexate. والـ antacids بتعمل chelates."
+      - kind: table
+        page: 34
+        quote: "Mechanism is reduced calcium absorption from increased gastric pH"
+        title: "الـ PPI على المدى الطويل (سؤال امتحان)"
+        columns: ["Adverse effect", "Why or note"]
+        rows:
+          - ["C. difficile infection", "Overgrowth at high gastric pH"]
+          - ["Pneumonia", "PPIs and H2 antagonists; sucralfate spares gastric pH"]
+          - ["Hip, wrist, spine fractures", "Less calcium absorption"]
+          - ["Rebound reflux on stopping", "Symptoms worsen on discontinuation"]
+          - ["Iron deficiency anemia", "Less iron absorption"]
+          - ["Cardiac events with clopidogrel", "Avoid omeprazole; pantoprazole is fine"]
+        hide: [[0, 1], [2, 1], [4, 1], [5, 1]]
+      - kind: explain
+        page: 34
+        quote: "substitution of non-selective NSAIDs with COX-2- selective NSAIDs;"
+        title: "مريض لازم ياخد NSAID؟"
+        text: |
+          الكتاب بيدي 3 طرق للوقاية:
+          - **Co-therapy** مع **PPI** أو **H2RA** أو **misoprostol**.
+          - تغيّر لـ **COX-2-selective NSAID**.
+          - أو ==COX-2-selective NSAID + gastroprotective agent==.
+      - kind: explain
+        page: 37
+        quote: "Ulcers in unusual locations; associated with severe .esophagitis; resistant to therapy with frequent recurrences;"
+        title: "الـ ulcer اللي مش طبيعي: فكّر في ZES"
+        text: |
+          إمتى تشك في **Zollinger-Ellison**؟
+          - **Multiple** ulcers أو في **أماكن غريبة** (post-bulbar).
+          - مع **severe esophagitis**، **resistant**، و **بترجع** كتير.
+          - ==مفيش NSAID ولا H. pylori==.
+          - **Diarrhea** أو steatorrhea من غير سبب.
+          - **Hypercalcemia**، أو family history لـ pancreatic islet أو pituitary أو parathyroid tumor (**MEN1**).
+          - **Ulcer** راجع بعد العملية، و **prominent gastric folds**.
+      - kind: reveal
+        page: 37
+        quote: "Gastric hypochlorhydria or achlorhydria(the most frequent), with or without pernicious anemia"
+        prompt: "الـ gastrin عالي. هل كده gastrinoma؟"
+        answer: |
+          لأ، مش لازم. الطبيعي **<150 pg/mL**، وتقريبًا كل الـ gastrinoma فوق **150-200**، وأكتر من **10 أضعاف** الطبيعي بيرجّح ZES جامد. بس فيه أسباب تانية:
+
+          - **Anti-secretory drugs** (الـ PPI نفسه!)
+          - ==Hypochlorhydria أو achlorhydria== (الأكتر)، مع أو من غير pernicious anemia
+          - **G cell hyperplasia**، **gastric outlet obstruction**، **renal insufficiency**
+          - RA، vitiligo، DM، pheochromocytoma
+
+          المنطق: لما الحمض يقل، المعدة بتعلّي الـ gastrin علشان تعوّضه. وعلشان كده بتعيد القياس.
+      - kind: figure
+        page: 39
+        quote: "Gastric pH probe (off PPI for one week)"
+        title: "الـ algorithm بتاع ZES"
+        alt: "Flow chart: suspected ZES, then serum gastrin off PPI one week. If 110 to under 1000 pg/mL, secretin stimulation test: negative means reassess later, positive goes to localization. If 1000 or more, gastric pH probe: above 4.0 no further work-up, 4.0 or less goes to localization. Localization by EUS and somatostatin receptor scintigraphy; liver metastases mean medical treatment; no liver metastases means evaluate for MEN1: positive means medical treatment (surgery if pancreatic tumor over 2 cm), negative means surgical exploration."
+        caption: "خطوتين قبل الصورة: gastrin **off PPI أسبوع**، وبعدين يا **secretin** يا **pH probe** حسب الرقم. الـ liver mets ← medical treatment؛ والـ MEN1 positive ← medical، والجراحة بس لو الـ pancreatic tumor أكبر من 2 cm."
+        svg: |
+          <svg viewBox="0 0 330 580" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="G1c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head"/></marker>
+            </defs>
+            <rect x="65" y="8" width="200" height="34" rx="6" class="fg-acc"/>
+            <text x="165" y="30" text-anchor="middle" class="t-sm t-b">Serum gastrin off PPI (1 wk)</text>
+            <path d="M120 42l-40 28M210 42l40 28" class="fg-arrow" marker-end="url(#G1c)"/>
+            <rect x="5" y="74" width="150" height="30" rx="6" class="fg-box"/>
+            <text x="80" y="94" text-anchor="middle" class="t-sm t-b">110 to 999 pg/mL</text>
+            <rect x="175" y="74" width="150" height="30" rx="6" class="fg-box"/>
+            <text x="250" y="94" text-anchor="middle" class="t-sm t-b">1000 pg/mL or more</text>
+            <path d="M80 104v20M250 104v20" class="fg-arrow" marker-end="url(#G1c)"/>
+            <rect x="5" y="128" width="150" height="34" rx="6" class="fg-box"/>
+            <text x="80" y="150" text-anchor="middle" class="t-sm">Secretin test</text>
+            <rect x="175" y="128" width="150" height="34" rx="6" class="fg-box"/>
+            <text x="250" y="150" text-anchor="middle" class="t-sm">Gastric pH probe</text>
+            <text x="6" y="186" class="t-sm t-mut">Negative: reassess</text>
+            <text x="6" y="202" class="t-sm t-mut">later</text>
+            <text x="200" y="186" class="t-sm t-mut">pH above 4.0: stop</text>
+            <path d="M145 162v56M190 162v56" class="fg-arrow"/>
+            <text x="80" y="232" class="t-sm t-good t-b">Positive</text>
+            <text x="196" y="232" class="t-sm t-good t-b">pH 4.0 or less</text>
+            <path d="M120 238l30 22M250 238l-60 22" class="fg-arrow" marker-end="url(#G1c)"/>
+            <rect x="20" y="264" width="290" height="48" rx="6" class="fg-acc"/>
+            <text x="165" y="284" text-anchor="middle" class="t-sm t-b">Localize: EUS</text>
+            <text x="165" y="302" text-anchor="middle" class="t-sm">Somatostatin receptor scintigraphy (MRI)</text>
+            <path d="M120 312l-40 26M210 312l40 26" class="fg-arrow" marker-end="url(#G1c)"/>
+            <rect x="5" y="342" width="150" height="30" rx="6" class="fg-box"/>
+            <text x="80" y="362" text-anchor="middle" class="t-sm">No liver mets</text>
+            <rect x="175" y="342" width="150" height="30" rx="6" class="fg-bad"/>
+            <text x="250" y="362" text-anchor="middle" class="t-sm">Liver mets</text>
+            <path d="M80 372v20M250 372v96" class="fg-arrow" marker-end="url(#G1c)"/>
+            <rect x="5" y="396" width="150" height="44" rx="6" class="fg-box"/>
+            <text x="80" y="414" text-anchor="middle" class="t-sm t-b">Evaluate for MEN1</text>
+            <text x="80" y="432" text-anchor="middle" class="t-sm">calcium, pituitary</text>
+            <path d="M80 440v28" class="fg-arrow" marker-end="url(#G1c)"/>
+            <rect x="5" y="472" width="150" height="100" rx="6" class="fg-good"/>
+            <text x="80" y="492" text-anchor="middle" class="t-sm">MEN1 negative:</text>
+            <text x="80" y="508" text-anchor="middle" class="t-sm t-b">surgical exploration</text>
+            <text x="80" y="528" text-anchor="middle" class="t-sm">MEN1 positive:</text>
+            <text x="80" y="544" text-anchor="middle" class="t-sm">medical; surgery if</text>
+            <text x="80" y="560" text-anchor="middle" class="t-sm">pancreatic tumor &gt;2 cm</text>
+            <rect x="175" y="472" width="150" height="80" rx="6" class="fg-acc"/>
+            <text x="250" y="516" text-anchor="middle" class="t-sm t-b">Medical treatment</text>
+          </svg>
+      - kind: explain
+        page: 38
+        quote: "An increase in gastrin of ≥120 pg within 15 min of secretin injection has a sensitivity and specificity of >90% for ZES."
+        title: "الـ secretin test"
+        text: |
+          الـ provocative tests اتنين: **secretin stimulation** و **calcium infusion**، والـ ==secretin== هو **the most sensitive and specific**.
+
+          - Positive = gastrin يزيد **≥120 pg** خلال **15 min** من الحقن ← sensitivity و specificity أكتر من **90%**.
+          - **وقف الـ PPI أسبوع** قبله، لأن الـ hypochlorhydria بتاعته بتعمل **false positive**.
+          - وفي الـ localization: **CT/MRI**، **EUS** (بيشوف الـ pancreas والـ LN بس **مش بيشوف الـ duodenal lesions**)، **octreotide scan**، و surgery.
+      - kind: case
+        page: 37
+        quote: "Family history of pancreatic islet, pituitary, or parathyroid tumor"
+        stem: "A 41-year-old woman has recurrent post-bulbar ulcers on standard PPI, watery diarrhea, and a calcium of 11.2 mg/dL. H. pylori negative; no NSAIDs."
+        steps:
+          - question: "First test?"
+            options: ["Serum gastrin off PPI for one week", "Secretin test on PPI", "CT abdomen", "Octreotide therapy"]
+            answer: 0
+            why: "الـ algorithm بيبدأ بـ **serum gastrin off PPI (one week)**."
+          - reveal: "Gastrin 1,450 pg/mL."
+            question: "Next?"
+            options: ["Gastric pH probe off PPI", "Secretin test", "Surgery now", "Repeat gastrin in a year"]
+            answer: 0
+            why: "≥1000 pg/mL ← **gastric pH probe**؛ لو ≤4.0 نروح للـ localization."
+          - reveal: "pH 2.0. EUS finds a pancreatic tumor. No liver metastases."
+            question: "What does her hypercalcemia make you evaluate?"
+            options: ["MEN1 (calcium, pituitary imaging)", "Sarcoidosis", "Vitamin D toxicity", "Nothing more"]
+            answer: 0
+            why: "من غير liver mets ← **evaluate for MEN1**. والـ hypercalcemia أصلًا من علامات الشك."
+      - kind: try
+        items: [git.L01.132, git.L01.140, git.L01.149, git.L01.155]
+    recap:
+      - "PPI: 7 indications؛ omeprazole الوحيد class C."
+      - "CYP2C19 (>80% لـ omeprazole/lansoprazole/pantoprazole)؛ الـ rapid metabolizers ممكن ميستفيدوش."
+      - "Clopidogrel ← pantoprazole. Antacids والـ quinolones ← 4 ساعات فرق."
+      - "Long-term: C. diff، pneumonia، fractures، rebound، iron deficiency، cardiac events مع clopidogrel."
+      - "ZES: gastrin off PPI ← secretin (110-999) أو pH probe (≥1000) ← EUS/scintigraphy ← MEN1."
+    practice: [git.L01.131, git.L01.132, git.L01.133, git.L01.134, git.L01.135, git.L01.136, git.L01.137, git.L01.138, git.L01.139, git.L01.140, git.L01.141, git.L01.142, git.L01.143, git.L01.144, git.L01.149, git.L01.150, git.L01.151, git.L01.152, git.L01.153, git.L01.154, git.L01.155, git.L01.156, git.L01.157, git.L01.158, git.L01.159, git.L01.160, git.L01.161, git.L01.162, git.L01.186, git.L01.187, git.L01.188, git.L01.189, git.L01.191, git.L01.192, git.L01.193, git.L01.197, git.L01.201, git.L01.204]

@@ -93,6 +93,10 @@ pub mod cite {
     pub fn page(page: u32) -> String {
         format!("ص {page}")
     }
+    /// "سلايد 25": a lecture's slide (courses taught from slides).
+    pub fn slide(n: u32) -> String {
+        format!("سلايد {n}")
+    }
 }
 
 /// A book page's sheet (pagesheet/mod.rs).
@@ -111,6 +115,8 @@ pub mod book {
     pub const STUDY: &str = "ذاكر الصفحة دي";
     pub const OPEN_LECTURE: &str = "افتح المحاضرة";
     pub const CHIP_HINT: &str = "افتح صفحة الكتاب";
+    pub const SLIDE_TITLE: &str = "سلايد";
+    pub const SLIDE_HINT: &str = "افتح سلايد المحاضرة";
 }
 
 pub mod nav {
@@ -908,6 +914,7 @@ pub mod hover {
     pub const UNVERIFIED: &str = "لسه ما اتراجعش";
     /// Under a book quote shown from the page chip.
     pub const FROM_BOOK: &str = "من الكتاب بالنص";
+    pub const FROM_SLIDE: &str = "من السلايد بالنص";
     pub const TERMS: &str = "مصطلح في القاموس";
 }
 
@@ -1770,6 +1777,7 @@ pub mod lecture {
     pub const BACK: &str = "رجوع";
     pub const KICKER: &str = "المحاضرة";
     pub const PAGES: &str = "صفحات";
+    pub const SLIDES: &str = "سلايدز";
     pub const PROGRESS: &str = "اللي بدأته من المحاضرة";
     pub const OF: &str = "من";
     pub const STARTED: &str = "بدأتهم";

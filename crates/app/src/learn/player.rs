@@ -327,7 +327,7 @@ fn Stage(
             }
             if let Some(page) = step.page {
                 footer { class: "ls-src",
-                    crate::hover::BookPage { page, quote: step.quote.clone() }
+                    crate::hover::BookPage { page, quote: step.quote.clone(), of: seed.clone() }
                 }
             }
         }

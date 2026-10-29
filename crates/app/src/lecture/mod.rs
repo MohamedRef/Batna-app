@@ -190,7 +190,10 @@ pub fn LecturePage(id: String) -> Element {
                     span { class: "num", "{number}" }
                     div { class: "lecture-main",
                         h1 { bdi { class: "lecture-title", "{entry.title}" } }
-                        span { class: "muted small", "{tx::PAGES} " bdi { dir: "ltr", "{first}–{last}" } }
+                        span { class: "muted small",
+                            if lib.program.slides(&id) { "{tx::SLIDES} " } else { "{tx::PAGES} " }
+                            bdi { dir: "ltr", "{first}–{last}" }
+                        }
                     }
                 }
                 if lecture.is_some() {

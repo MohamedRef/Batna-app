@@ -72,6 +72,7 @@ pub fn ItemView(
                         page: item.src.page,
                         quote: if revealed() { item.src.quote.clone() } else { None },
                         held: !revealed() && item.src.quote.is_some(),
+                        of: item.id.clone(),
                     }
                 }
                 if let Some(q) = item.src.quote.as_ref().filter(|_| revealed()) {

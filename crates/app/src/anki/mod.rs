@@ -147,6 +147,7 @@ fn export_now<'a>(judgement: impl Fn(&str) -> Option<&'a Judgement>) -> Result<(
         wrong: Some(&v.wrong),
         edits: Some(&v.edits),
         drafts: None,
+        program: Some(&crate::content::Library::get().program),
     };
     let deck = batna_anki::build(&lectures, &opts);
     let now_ms = std::time::SystemTime::now()

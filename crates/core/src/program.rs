@@ -39,6 +39,24 @@ pub struct Course {
     pub semester: Option<u32>,
     /// The default; Mohamed can change it in the app.
     pub status: CourseStatus,
+    /// What `src.page` counts: book pages (one numbering for the course) or
+    /// each lecture's slides (numbering starts again per lecture).
+    #[serde(default, skip_serializing_if = "Source::is_book")]
+    pub source: Source,
+}
+
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "kebab-case")]
+pub enum Source {
+    #[default]
+    Book,
+    Slides,
+}
+
+impl Source {
+    fn is_book(&self) -> bool {
+        *self == Source::Book
+    }
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
@@ -90,6 +108,16 @@ pub fn course_of(id: &str) -> &str {
     id.split_once('.').map_or(id, |(c, _)| c)
 }
 
+/// The lecture an item, lesson or step id belongs to: `res.L02.019` and
+/// `res.L02.lesson1#3` → `res.L02`.
+pub fn lecture_of(id: &str) -> &str {
+    let id = id.split('#').next().unwrap_or(id);
+    match id.match_indices('.').nth(1) {
+        Some((i, _)) => &id[..i],
+        None => id,
+    }
+}
+
 impl Program {
     pub fn course(&self, id: &str) -> Option<&Course> {
         self.courses.iter().find(|c| c.id == id)
@@ -98,6 +126,11 @@ impl Program {
     /// The course of a lecture, item or lesson id.
     pub fn course_for(&self, id: &str) -> Option<&Course> {
         self.course(course_of(id))
+    }
+
+    /// Whether an id's `src.page` is a slide of its own lecture.
+    pub fn slides(&self, id: &str) -> bool {
+        self.course_for(id).is_some_and(|c| c.source == Source::Slides)
     }
 
     pub fn total_hours(&self) -> f32 {
@@ -121,6 +154,7 @@ impl Program {
                 group: Group::Clinical,
                 semester: None,
                 status: CourseStatus::Active,
+                source: Source::Book,
             })
             .collect();
         Program { schema: SCHEMA.into(), title: String::new(), courses }
@@ -184,6 +218,7 @@ mod tests {
             group: Group::Clinical,
             semester: Some(1),
             status: CourseStatus::Active,
+            source: Source::Book,
         }
     }
 
@@ -195,6 +230,14 @@ mod tests {
         let p = Program { schema: SCHEMA.into(), title: "MSc".into(), courses: vec![course("hb", 2.0)] };
         assert_eq!(p.course_for("hb.L07.010").map(|c| c.id.as_str()), Some("hb"));
         assert!(p.course_for("hem.L01").is_none());
+    }
+
+    #[test]
+    fn lectures_of_items_lessons_and_steps() {
+        assert_eq!(lecture_of("res.L02.019"), "res.L02");
+        assert_eq!(lecture_of("res.L02.lesson1#3"), "res.L02");
+        assert_eq!(lecture_of("hb.L01"), "hb.L01");
+        assert_eq!(lecture_of("hb"), "hb");
     }
 
     #[test]
@@ -241,5 +284,6 @@ mod tests {
         let now: Vec<_> =
             p.courses.iter().filter(|c| c.status == CourseStatus::Active).map(|c| c.id.as_str()).collect();
         assert_eq!(now, ["res", "hem", "hb"]);
+        assert!(p.slides("res.L02.019") && !p.slides("hb.L02.019"));
     }
 }

@@ -426,7 +426,7 @@ fn Runner() -> Element {
                     span { class: "chip", {tx::AGAIN_BADGE} }
                 }
                 span { class: "muted small", bdi { "{lecture}" } }
-                crate::hover::BookPage { page: p.page, quote: p.quote.clone() }
+                crate::hover::BookPage { page: p.page, quote: p.quote.clone(), of: p.lecture.clone() }
                 button {
                     class: "oral-end",
                     "data-back": "true",

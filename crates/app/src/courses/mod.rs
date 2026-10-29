@@ -128,6 +128,7 @@ mod tests {
                 group: Group::Clinical,
                 semester: None,
                 status,
+                source: Default::default(),
             },
             status,
             lectures: 0,

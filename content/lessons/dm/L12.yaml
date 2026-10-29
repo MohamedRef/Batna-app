@@ -1,0 +1,739 @@
+schema: batna.lesson/v1
+lecture: dm.L12
+lessons:
+  # ------------------------------------------------------------------
+  - id: dm.L12.lesson1
+    title: "الكلية والسكر: إزاي تعرف الـ DKD"
+    hook: "السكر هو السبب الأول للـ renal failure. نعرف شكله المعتاد، والشكل اللي من غير albuminuria، وإمتى نشك في حاجة تانية."
+    minutes: 7
+    pages: [142, 144]
+    topics: [ckd-burden, dkd-diagnosis, screening]
+    goals:
+      - "تعرّف الـ CKD والـ DKD المعتاد"
+      - "تعرّف الـ non-albuminuric DKD (سؤال كتاب)"
+      - "تعرف الـ screening والـ 10 clues للـ non-DKD وتعمل staging"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 142
+        title: "الحجم الحقيقي للمشكلة"
+        quote: "defined as either kidney damage or decreased kidney function for ≥ 3 months"
+        text: |
+          الـ **CKD** = kidney damage أو decreased kidney function لمدة ==≥ 3 months==، أيًا كان السبب.
+
+          - ==Diabetes is the most common cause== of renal failure.
+          - في أمريكا الـ ESRD عند الـ diabetics **اتضاعف 3 مرات** بين 1989 و1998، والـ hypertension فضل ثابت تقريبًا.
+          - في الـ Native Americans السكر الأول، وفي الـ African Americans الضغط الأول.
+
+          وليه صعب؟ glycemic control مش كويس، وcomorbidities، والأقراص لازم تتختار بحذر.
+      - kind: check
+        page: 143
+        quote: "Problem in Insulin Metabolism 3. Reduce Gluconeogenesis 4. Incidence of Hypoglycemia"
+        question: "Why must oral antidiabetics be chosen carefully in renal impairment?"
+        options:
+          - "Insulin metabolism changes, gluconeogenesis falls, hypoglycemia rises"
+          - "The kidney makes more insulin in CKD"
+          - "CKD raises gluconeogenesis and causes hyperglycemia only"
+          - "Oral drugs stop working when eGFR falls"
+        answer: 0
+        why:
+          - "صح: التلاتة بتوع الكتاب (p143)، وكلهم بيزوّدوا الـ hypoglycemia."
+          - "بالعكس: الكلية بتكسّر الـ insulin، مش بتعمله."
+          - "الـ gluconeogenesis بيقل مش بيزيد."
+          - "مش بيبطلوا يشتغلوا، بس جرعاتهم بتتغيّر."
+      - kind: mnemonic
+        page: 143
+        quote: "include a long-standing duration of diabetes, retinopathy, albuminuria without gross hematuria, and gradually progressive loss of eGFR"
+        word: "DRAG"
+        parts:
+          - { key: "D", text: "Duration: long-standing diabetes" }
+          - { key: "R", text: "Retinopathy" }
+          - { key: "A", text: "Albuminuria without gross hematuria" }
+          - { key: "G", text: "Gradually progressive loss of eGFR" }
+        hook: "الـ DKD المعتاد بيـ**DRAG**: بيمشي ببطء. لو حاجة منهم ناقصة أو المشي بقى سريع، افتكر الـ non-DKD."
+      - kind: figure
+        page: 143
+        quote: "Intrarenal arteriosclerosis is the main cause of renal impairment"
+        title: "نوعين DKD"
+        alt: "Two kidneys side by side. The left, albuminuric DKD, leaks albumin drops into the urine. The right, non-albuminuric DKD, has narrowed thickened arteries inside it and no albumin drops, labelled intrarenal arteriosclerosis."
+        caption: "الـ ==non-albuminuric DKD==: الـ eGFR ناقص من غير albuminuria، والسبب الأساسي **intrarenal arteriosclerosis**."
+        svg: |
+          <svg viewBox="0 0 330 190" xmlns="http://www.w3.org/2000/svg">
+            <path d="M60 30 C20 30 15 110 55 125 C80 132 92 110 84 90 C78 75 90 62 92 52 C96 36 80 30 60 30 Z" class="fg-box"/>
+            <circle cx="62" cy="150" r="4" class="fg-dot-bad"/>
+            <circle cx="74" cy="162" r="4" class="fg-dot-bad"/>
+            <circle cx="52" cy="168" r="4" class="fg-dot-bad"/>
+            <text x="60" y="20" text-anchor="middle" class="t-sm t-b">Albuminuric</text>
+            <text x="100" y="160" class="t-sm t-bad">albumin</text>
+            <path d="M230 30 C190 30 185 110 225 125 C250 132 262 110 254 90 C248 75 260 62 262 52 C266 36 250 30 230 30 Z" class="fg-box"/>
+            <path d="M200 60 C215 70 225 80 240 78" class="fg-arrow-bad" fill="none" stroke-width="5"/>
+            <path d="M205 95 C218 98 228 105 245 100" class="fg-arrow-bad" fill="none" stroke-width="5"/>
+            <text x="230" y="20" text-anchor="middle" class="t-sm t-b">Non-albuminuric</text>
+            <text x="230" y="150" text-anchor="middle" class="t-sm t-acc">intrarenal</text>
+            <text x="230" y="165" text-anchor="middle" class="t-sm t-acc">arteriosclerosis</text>
+            <text x="230" y="182" text-anchor="middle" class="t-sm t-mut">↓eGFR, no albuminuria</text>
+          </svg>
+      - kind: explain
+        page: 143
+        title: "الـ NADKD: سؤال كتاب"
+        quote: "Prevalence of NADKD varies from 14.29 to 56.6% among diabetic patients"
+        text: |
+          - ==reduced eGFR without albuminuria== بيتشاف كتير في type 1 وtype 2، وممكن من غير retinopathy.
+          - الـ prevalence من **14.29 لـ 56.6%** حسب الـ ethnicity.
+          - الـ **macroangiopathy** أكتر فيه: age أكبر، hypertension، atherosclerosis، dyslipidemia.
+          - السبب الأساسي ==intrarenal arteriosclerosis==.
+
+          علشان كده الـ ACR لوحده مش كفاية: لازم eGFR كمان.
+      - kind: explain
+        page: 143
+        title: "الـ screening"
+        quote: "At least once a year, assess urinary albumin (e.g., spot urinary albumin-to-creatinine ratio) and estimated glomerular filtration rate (eGFR)"
+        text: |
+          ==At least once a year==: **spot urine ACR + eGFR**.
+
+          - **Type 1**: من بعد ==≥5 years== من التشخيص.
+          - **Type 2**: كله، من التشخيص.
+          - ACR >30 mg/g و/أو eGFR <60؟ تابع **مرتين في السنة**.
+      - kind: sort
+        page: 144
+        quote: "When to consider non-DKD and/or pursue a kidney biopsy"
+        prompt: "ده شكل DKD معتاد، ولا clue لـ non-DKD؟"
+        bins: ["DKD", "Non-DKD"]
+        cards:
+          - { text: "Retinopathy present", bin: 0 }
+          - { text: "Slow eGFR decline", bin: 0 }
+          - { text: "Albuminuria after 15 years of T1D", bin: 0 }
+          - { text: "Active urinary sediment", bin: 1 }
+          - { text: "Nephritic syndrome", bin: 1 }
+          - { text: "eGFR falls >30% after RAASi", bin: 1 }
+          - { text: "Albuminuria 2 years after T1D onset", bin: 1 }
+          - { text: "Sudden nephrotic syndrome", bin: 1 }
+        why: "الـ 10 clues: atypical presentation، no retinopathy (T1D)، albuminuria <5 أو >25 سنة (T1D)، immunological markers أو active sediment، sudden macroalbuminuria/nephrotic، nephritic، hematuria، rapid decline، eGFR ↓>30% بعد RAASi، AKI."
+      - kind: figure
+        page: 144
+        quote: "GFR categories"
+        title: "الـ staging: G × A"
+        alt: "A grid of six GFR rows (G1 at least 90 down to G5 under 15) and three albuminuria columns (A1 under 30, A2 30 to 299, A3 at least 300 mg per g). Cells shade from green at top left to red at bottom right."
+        caption: "الـ CKD بيتصنّف بالـ **Cause + GFR + Albuminuria**. كل ما تنزل وتروح يمين، الخطر يزيد."
+        svg: |
+          <svg viewBox="0 0 330 230" xmlns="http://www.w3.org/2000/svg">
+            <text x="135" y="14" text-anchor="middle" class="t-sm t-b">A1 &lt;30</text>
+            <text x="205" y="14" text-anchor="middle" class="t-sm t-b">A2 30–299</text>
+            <text x="280" y="14" text-anchor="middle" class="t-sm t-b">A3 ≥300</text>
+            <text x="4" y="42" class="t-sm">G1 ≥90</text>
+            <text x="4" y="75" class="t-sm">G2 60–89</text>
+            <text x="4" y="108" class="t-sm">G3a 45–59</text>
+            <text x="4" y="141" class="t-sm">G3b 30–44</text>
+            <text x="4" y="174" class="t-sm">G4 15–29</text>
+            <text x="4" y="207" class="t-sm">G5 &lt;15</text>
+            <rect x="100" y="24" width="70" height="30" class="fg-good"/>
+            <rect x="172" y="24" width="70" height="30" class="fg-acc"/>
+            <rect x="244" y="24" width="70" height="30" class="fg-bad"/>
+            <rect x="100" y="57" width="70" height="30" class="fg-good"/>
+            <rect x="172" y="57" width="70" height="30" class="fg-acc"/>
+            <rect x="244" y="57" width="70" height="30" class="fg-bad"/>
+            <rect x="100" y="90" width="70" height="30" class="fg-acc"/>
+            <rect x="172" y="90" width="70" height="30" class="fg-bad"/>
+            <rect x="244" y="90" width="70" height="30" class="fg-bad"/>
+            <rect x="100" y="123" width="70" height="30" class="fg-bad"/>
+            <rect x="172" y="123" width="70" height="30" class="fg-bad"/>
+            <rect x="244" y="123" width="70" height="30" class="fg-bad"/>
+            <rect x="100" y="156" width="70" height="30" class="fg-bad"/>
+            <rect x="172" y="156" width="70" height="30" class="fg-bad"/>
+            <rect x="244" y="156" width="70" height="30" class="fg-bad"/>
+            <rect x="100" y="189" width="70" height="30" class="fg-bad"/>
+            <rect x="172" y="189" width="70" height="30" class="fg-bad"/>
+            <rect x="244" y="189" width="70" height="30" class="fg-bad"/>
+            <text x="279" y="210" text-anchor="middle" class="t-sm t-b">Refer</text>
+            <text x="135" y="43" text-anchor="middle" class="t-sm">low risk</text>
+          </svg>
+      - kind: check
+        page: 144
+        quote: "<30 mg/g 30-299 mg/g"
+        question: "eGFR 52 and ACR 150 mg/g, both persistent. Stage?"
+        options:
+          - "G3a A2"
+          - "G3b A2"
+          - "G2 A3"
+          - "G3a A3"
+        answer: 0
+        why:
+          - "صح: 45–59 = G3a، و30–299 = A2."
+          - "G3b من 30 لـ 44."
+          - "G2 من 60 لـ 89، وA3 من 300."
+          - "150 لسه تحت 300."
+      - kind: try
+        items: [dm.L12.008, dm.L12.010, dm.L12.017, dm.L12.022]
+    recap:
+      - "CKD = damage أو ↓function ≥3 months. السكر السبب الأول للـ renal failure."
+      - "DKD المعتاد = **DRAG**."
+      - "NADKD: ↓eGFR من غير albuminuria، 14.29–56.6%، macroangiopathy، intrarenal arteriosclerosis."
+      - "Screening سنوي ACR + eGFR: T1D بعد 5 سنين، T2D كله. ACR >30 أو eGFR <60 ← مرتين في السنة."
+      - "10 clues للـ non-DKD، والـ staging = C + G1–G5 + A1–A3."
+    practice: [dm.L12.001, dm.L12.002, dm.L12.003, dm.L12.004, dm.L12.005, dm.L12.006, dm.L12.007, dm.L12.008, dm.L12.009, dm.L12.010, dm.L12.011, dm.L12.012, dm.L12.013, dm.L12.014, dm.L12.015, dm.L12.016, dm.L12.017, dm.L12.018, dm.L12.019, dm.L12.020, dm.L12.021, dm.L12.022, dm.L12.105, dm.L12.110]
+  # ------------------------------------------------------------------
+  - id: dm.L12.lesson2
+    title: "علاج الـ DKD: أكل وسكر وضغط"
+    hook: "أربع خطوط علاج، وقاعدة الـ 30% اللي بتنقذ الـ ACE inhibitor من إنه يتوقف على الفاضي."
+    minutes: 6
+    pages: [145, 146]
+    topics: [dkd-management]
+    goals:
+      - "تعدّ الـ main lines of treatment"
+      - "تعرف أرقام البروتين والصوديوم"
+      - "تعرف إمتى ACEi/ARB وإمتى ما توقفوش"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 145
+        title: "الهدف والخطوط الأربعة"
+        quote: "Goal: Cardiorenal Risk Reduction in High-Risk Patients with Type 2 Diabetes"
+        text: |
+          الهدف: ==Cardiorenal risk reduction== فوق الـ CV risk management الكامل.
+
+          1. **Lifestyle modification**
+          2. **Glycemic control**
+          3. **BP control**
+          4. **Control of dyslipidemia**
+      - kind: figure
+        page: 145
+        quote: "dietary protein intake should be ~0.8 g/kg body weight per day (the recommended daily allowance)"
+        title: "طبق عيان الـ DKD"
+        alt: "A plate with two labelled parts. Protein about 0.8 gram per kilogram per day, more on dialysis. A salt shaker with sodium under 2300 milligrams per day."
+        caption: "بروتين ==~0.8 g/kg/day== (الـ RDA)، وأكتر على الـ dialysis علشان الـ malnutrition. صوديوم **<2,300 mg/day**."
+        svg: |
+          <svg viewBox="0 0 330 170" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="110" cy="85" r="70" class="fg-box"/>
+            <circle cx="110" cy="85" r="52" class="fg-thin"/>
+            <path d="M110 33 L110 137" class="fg-thin"/>
+            <text x="85" y="80" text-anchor="middle" class="t-sm t-b">Protein</text>
+            <text x="85" y="96" text-anchor="middle" class="t-sm t-acc">0.8 g/kg</text>
+            <text x="137" y="80" text-anchor="middle" class="t-sm">Dialysis</text>
+            <text x="137" y="96" text-anchor="middle" class="t-sm t-good">↑ more</text>
+            <rect x="240" y="55" width="40" height="70" rx="10" class="fg-box"/>
+            <circle cx="252" cy="68" r="2" class="fg-dot-acc"/>
+            <circle cx="262" cy="64" r="2" class="fg-dot-acc"/>
+            <circle cx="270" cy="70" r="2" class="fg-dot-acc"/>
+            <text x="260" y="145" text-anchor="middle" class="t-sm t-b">Na &lt;2,300</text>
+            <text x="260" y="160" text-anchor="middle" class="t-sm t-mut">mg/day</text>
+          </svg>
+      - kind: check
+        page: 145
+        quote: "consider use of a sodium–glucose cotransporter 2 inhibitor or glucagon-like peptide 1 receptor agonist"
+        question: "Type 2 DM with CKD: which drug classes reduce CKD progression and CV events?"
+        options:
+          - "SGLT2 inhibitors or GLP-1 receptor agonists"
+          - "Sulfonylureas or glinides"
+          - "DPP-4 inhibitors only"
+          - "Thiazolidinediones"
+        answer: 0
+        why:
+          - "صح: الكتاب p145 بيقول consider SGLT2i أو GLP-1 RA."
+          - "دول بيزوّدوا الـ hypoglycemia ومالهمش renal benefit."
+          - "مش مذكورين كـ renoprotective هنا."
+          - "مش في التوصية دي."
+      - kind: explain
+        page: 146
+        title: "الـ ACEi / ARB"
+        quote: "It is strongly recommended for individuals with a urinary albumin-to-creatinine ratio of≥300 mg/g creatinine"
+        text: |
+          عيان سكر + ضغط، مش حامل:
+
+          - ACR **30–299** ← ACEi أو ARB ==recommended==.
+          - ACR **≥300** و/أو eGFR **<60** ← ==strongly recommended==.
+
+          وتابع **creatinine + potassium** بانتظام مع ACEi وARB والـ diuretics.
+      - kind: aside
+        tone: trap
+        page: 146
+        quote: "Do not discontinue renin-angiotensin system blockade for minor increases in serum creatinine (<30%) in the absence of volume depletion."
+        text: "الـ creatinine طلع 15–20% بعد الـ ACEi؟ ده متوقّع (الـ efferent بيرتاح). ==ما توقفش== طول ما الزيادة **<30%** ومفيش **volume depletion**. أما لو الـ eGFR وقع **>30%**، ده من الـ clues للـ non-DKD (p144). والكتاب كرّر البندين دول 3 مرات في الصفحة، فاحفظهم كويس 😄"
+      - kind: case
+        page: 146
+        quote: "Periodically monitor serum creatinine and potassium levels"
+        stem: "Type 2 DM, BP 148/92, ACR 340 mg/g, eGFR 58. Started on lisinopril."
+        steps:
+          - question: "How strong is the indication for lisinopril?"
+            options: ["Strongly recommended (ACR ≥300 and eGFR <60)", "Not indicated", "Only if ACR >1000", "Only in type 1"]
+            answer: 0
+            why: "ACR ≥300 و/أو eGFR <60 ← strongly recommended."
+          - question: "Creatinine rises 22%, he is not dry. What now?"
+            options: ["Continue and monitor creatinine and K", "Stop lisinopril", "Add an ARB", "Biopsy"]
+            answer: 0
+            why: "<30% من غير volume depletion ← كمّل."
+      - kind: try
+        items: [dm.L12.024, dm.L12.025, dm.L12.031, dm.L12.034]
+    recap:
+      - "الهدف cardiorenal risk reduction. الخطوط: lifestyle، glucose، BP، lipids."
+      - "بروتين ~0.8 g/kg/day (أكتر على الـ dialysis)، صوديوم <2,300 mg."
+      - "SGLT2i أو GLP-1 RA للـ T2D مع CKD."
+      - "ACEi/ARB: ACR 30–299 recommended؛ ≥300 أو eGFR <60 strongly."
+      - "Creatinine ↑ <30% من غير dehydration ← ما توقفش الـ RAS blockade."
+    practice: [dm.L12.023, dm.L12.024, dm.L12.025, dm.L12.026, dm.L12.027, dm.L12.028, dm.L12.029, dm.L12.030, dm.L12.031, dm.L12.032, dm.L12.033, dm.L12.034, dm.L12.106]
+  # ------------------------------------------------------------------
+  - id: dm.L12.lesson3
+    title: "KDIGO 2022 والـ SGLT2i بيحموا الكلية إزاي"
+    hook: "خريطة KDIGO كلها في شاشة، وليه الـ SGLT2i والـ ACEi شغالين على طرفين عكس بعض."
+    minutes: 7
+    pages: [147, 149]
+    topics: [kdigo]
+    goals:
+      - "ترتّب الـ first-line والـ targeted therapy في KDIGO 2022"
+      - "تشرح الـ nephroprotection بتاع الـ SGLT2i"
+      - "تفرّق الـ GLP-1 RA direct وindirect، والـ DPP-4i renal excretion"
+    status: unverified
+    steps:
+      - kind: figure
+        page: 147
+        quote: "KIDIGO 2022: Holistic approach for improving outcomes in patients with diabetes and CKD"
+        title: "KDIGO 2022 في أدوار"
+        alt: "A three-floor building. Ground floor lifestyle: diet, activity, no smoking, weight. First floor first-line: SGLT2i (eGFR at least 20), metformin (eGFR at least 30), RAS inhibitor at maximum dose, statin. Second floor targeted: GLP-1 RA, nonsteroidal MRA, CCB or diuretic, antiplatelet. Roof note: reassess every 3 to 6 months."
+        caption: "الأساس lifestyle، فوقه ==first-line== (SGLT2i، metformin، RASi، statin)، وفوقه الـ **targeted**. وراجع كل **3–6 months**."
+        svg: |
+          <svg viewBox="0 0 330 230" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 40 L165 8 L310 40 Z" class="fg-acc"/>
+            <text x="165" y="33" text-anchor="middle" class="t-sm t-b">Reassess every 3–6 months</text>
+            <rect x="20" y="44" width="290" height="58" class="fg-box"/>
+            <text x="28" y="58" class="t-sm t-b t-acc">Targeted</text>
+            <text x="28" y="74" class="t-sm">GLP-1 RA · nonsteroidal MRA</text>
+            <text x="28" y="90" class="t-sm">DHP CCB/diuretic · antiplatelet</text>
+            <rect x="20" y="106" width="290" height="74" class="fg-good"/>
+            <text x="28" y="121" class="t-sm t-b">First-line</text>
+            <text x="28" y="138" class="t-sm">SGLT2i (start eGFR ≥20 → dialysis)</text>
+            <text x="28" y="154" class="t-sm">Metformin (eGFR ≥30)</text>
+            <text x="28" y="170" class="t-sm">RASi max dose (HTN) · statin</text>
+            <rect x="20" y="184" width="290" height="40" class="fg-box"/>
+            <text x="28" y="200" class="t-sm t-b">Lifestyle</text>
+            <text x="28" y="216" class="t-sm">diet · activity · no smoking · weight</text>
+          </svg>
+      - kind: match
+        page: 147
+        quote: "Targeted therapy"
+        prompt: "وصّل كل targeted drug باللي بيوجّهه في الـ figure"
+        pairs:
+          - ["GLP-1 RA", "HbA1c, CGM"]
+          - ["Nonsteroidal MRA", "Urine ACR"]
+          - ["DHP CCB or diuretic", "BP"]
+          - ["Antiplatelet agent", "ASCVD risk, lipids"]
+        why: "وبعدهم: other glucose-lowering drugs، **steroidal MRA** للـ resistant HTN لو eGFR ≥45، وezetimibe أو PCSK9i أو icosapent ethyl."
+      - kind: aside
+        tone: exam
+        page: 147
+        quote: "First-line drug therapy"
+        text: "أرقام الـ first-line drug therapy بتتسأل: الـ **SGLT2i** تبدأه من eGFR ==≥20== وتكمّله لحد الـ dialysis أو الـ transplant، والـ **metformin** لو eGFR ==≥30==. والـ steroidal MRA لو eGFR ≥45 بس."
+      - kind: figure
+        page: 148
+        quote: "Nephroprotective Effect of SGLT2 Inhibitors"
+        title: "طرفين للـ glomerulus"
+        alt: "A glomerulus with an afferent arteriole on the left and an efferent arteriole on the right. On the left, SGLT2 inhibition sends more sodium to the macula densa, adenosine rises and the afferent arteriole narrows. On the right, RAAS blockade widens the efferent arteriole. Both lower intraglomerular pressure."
+        caption: "الـ SGLT2i ==بيقفل الـ afferent== (sodium ← macula densa ← adenosine)، والـ RAAS blockade ==بيفتح الـ efferent==. الاتنين بيقللوا الـ intraglomerular pressure والـ hyperfiltration."
+        svg: |
+          <svg viewBox="0 0 330 200" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L12a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="fg-head-acc"/></marker></defs>
+            <circle cx="165" cy="80" r="42" class="fg-box"/>
+            <text x="165" y="76" text-anchor="middle" class="t-sm t-b">Glomerulus</text>
+            <text x="165" y="92" text-anchor="middle" class="t-sm t-good">↓ pressure</text>
+            <path d="M20 74 H123" class="fg-arrow" stroke-width="14" fill="none"/>
+            <path d="M70 70 H110" class="fg-bad" stroke-width="5"/>
+            <text x="20" y="56" class="t-sm t-b">Afferent</text>
+            <text x="20" y="102" class="t-sm t-bad">constricts</text>
+            <path d="M207 74 H310" class="fg-arrow" stroke-width="22" fill="none"/>
+            <text x="250" y="56" class="t-sm t-b">Efferent</text>
+            <text x="250" y="102" class="t-sm t-good">dilates</text>
+            <text x="20" y="140" class="t-sm t-acc">SGLT2i → ↑Na distal</text>
+            <text x="20" y="156" class="t-sm t-acc">→ adenosine</text>
+            <path d="M60 130 L80 108" class="fg-arrow-acc" marker-end="url(#L12a)" fill="none"/>
+            <text x="230" y="140" class="t-sm t-acc">RAAS blockade</text>
+            <path d="M260 130 L262 108" class="fg-arrow-acc" marker-end="url(#L12a)" fill="none"/>
+            <text x="165" y="190" text-anchor="middle" class="t-sm t-mut">↓ hyperfiltration = nephroprotection</text>
+          </svg>
+      - kind: order
+        page: 148
+        quote: "Nephroprotective Effect of SGLT2 Inhibitors"
+        prompt: "رتّب سلسلة الـ SGLT2i nephroprotection"
+        steps:
+          - "SGLT2 inhibition"
+          - "More sodium to the distal tubule"
+          - "More adenosine"
+          - "Afferent vasoconstriction"
+          - "Lower intraglomerular pressure"
+          - "Less hyperfiltration"
+        why: "دي الـ **tubuloglomerular feedback**: الـ macula densa بتحس بالصوديوم وتقفل الـ afferent."
+      - kind: sort
+        page: 149
+        quote: "Putative renoprotective actions and effects of GLP-1R agonists on kidneys."
+        prompt: "الـ renoprotective actions بتاعة الـ GLP-1 RA على الكلية: direct ولا indirect؟"
+        bins: ["Direct", "Indirect"]
+        cards:
+          - { text: "Proximal natriuresis", bin: 0 }
+          - { text: "RAS inhibition", bin: 0 }
+          - { text: "↓ Renal hypoxia", bin: 0 }
+          - { text: "Endothelial vasodilation", bin: 0 }
+          - { text: "Better glucose", bin: 1 }
+          - { text: "Better BP", bin: 1 }
+          - { text: "Weight loss", bin: 1 }
+          - { text: "↓ Postprandial glucagon", bin: 1 }
+        why: "الـ **direct** على الكلية نفسها (natriuresis، cAMP/PKA، RAS، hypoxia، vasodilation، TGF عن طريق NHE3، ANP). الـ **indirect** من تحسين الجسم كله (glucose، BP، وزن، insulin sensitivity، glucagon، intestinal lipids، brown fat، microbiome)."
+      - kind: figure
+        page: 149
+        quote: "Renal Excretion of DPP-4 Inhibitors"
+        title: "مين بيخرج من الكلية؟"
+        alt: "Bar chart of the renal share of excretion: linagliptin 5 percent (short blue bar), sitagliptin 87, vildagliptin 85, saxagliptin 75 percent (long bars)."
+        caption: "الـ ==linagliptin 5%== بس من الكلية ← no dose adjustment. الباقيين أغلبهم renal ← لازم adjustment."
+        svg: |
+          <svg viewBox="0 0 330 160" xmlns="http://www.w3.org/2000/svg">
+            <text x="4" y="30" class="t-sm t-b">Linagliptin</text>
+            <rect x="95" y="18" width="10" height="18" class="fg-good"/>
+            <text x="110" y="32" class="t-sm t-good">5%</text>
+            <text x="4" y="65" class="t-sm">Sitagliptin</text>
+            <rect x="95" y="53" width="191" height="18" class="fg-bad"/>
+            <text x="290" y="67" class="t-sm">87%</text>
+            <text x="4" y="100" class="t-sm">Vildagliptin</text>
+            <rect x="95" y="88" width="187" height="18" class="fg-bad"/>
+            <text x="290" y="102" class="t-sm">85%</text>
+            <text x="4" y="135" class="t-sm">Saxagliptin</text>
+            <rect x="95" y="123" width="165" height="18" class="fg-bad"/>
+            <text x="266" y="137" class="t-sm">75%</text>
+          </svg>
+      - kind: try
+        items: [dm.L12.035, dm.L12.040, dm.L12.041, dm.L12.109]
+    recap:
+      - "KDIGO 2022: lifestyle ← first-line (SGLT2i ≥20، metformin ≥30، RASi max، statin) ← targeted. راجع كل 3–6 شهور."
+      - "Targeted: GLP-1 RA (HbA1c)، nsMRA (ACR + K طبيعي)، CCB/diuretic (BP)، antiplatelet (ASCVD)."
+      - "SGLT2i: Na للـ macula densa ← adenosine ← afferent constriction. RAASi: efferent dilation."
+      - "GLP-1 RA: direct على الكلية + indirect من الـ metabolic effects."
+      - "DPP-4i renal: lina 5%، sita 87%، vilda 85%، saxa 75%."
+    practice: [dm.L12.035, dm.L12.036, dm.L12.037, dm.L12.038, dm.L12.039, dm.L12.040, dm.L12.041, dm.L12.042, dm.L12.043, dm.L12.044, dm.L12.045, dm.L12.046, dm.L12.109]
+  # ------------------------------------------------------------------
+  - id: dm.L12.lesson4
+    title: "جرعات أدوية السكر والـ statins في الـ CKD"
+    hook: "جدول واحد بالألوان: مين ممنوع، مين بجرعة أقل، ومين ما يتلمسش. وبعده الـ insulin والـ statin."
+    minutes: 7
+    pages: [150, 151]
+    topics: [ckd-dosing, ckd-lipids]
+    goals:
+      - "تعدّل جرعات الأقراص حسب الـ eGFR (سؤال كتاب)"
+      - "تقلل الـ insulin صح"
+      - "تختار شدة الـ statin"
+    status: unverified
+    steps:
+      - kind: figure
+        page: 150
+        quote: "Dosing Recommendations for Available Antihyperglycemic Agents in CKD"
+        title: "الإشارة: أخضر، أصفر، أحمر"
+        alt: "A traffic-light chart of drugs by eGFR. Green, no change at any eGFR: gliclazide, glipizide, TZDs, linagliptin. Yellow, lower dose: glimepiride 1 mg, repaglinide 0.5 mg, sitagliptin, vildagliptin, saxagliptin, insulin. Red, avoid: first-generation SUs and glyburide, glimepiride under 15, nateglinide under 15, GLP-1 RAs under 30."
+        caption: "Dosing في الـ CKD: ==أخضر== ما يتغيّرش: gliclazide، glipizide، TZDs، **linagliptin**. ==أحمر==: first-generation SUs والـ **glyburide**."
+        svg: |
+          <svg viewBox="0 0 330 220" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="22" cy="35" r="12" class="fg-good"/>
+            <text x="42" y="30" class="t-sm t-b">No change</text>
+            <text x="42" y="46" class="t-sm">Gliclazide · glipizide · TZDs · linagliptin</text>
+            <circle cx="22" cy="100" r="12" class="fg-acc"/>
+            <text x="42" y="86" class="t-sm t-b">Lower dose</text>
+            <text x="42" y="102" class="t-sm">Glimepiride 1 mg · repaglinide 0.5</text>
+            <text x="42" y="118" class="t-sm">Sita 50→25 · vilda 50 · saxa 2.5</text>
+            <text x="42" y="134" class="t-sm">Insulin (caution &lt;30)</text>
+            <circle cx="22" cy="180" r="12" class="fg-bad"/>
+            <text x="42" y="166" class="t-sm t-b">Avoid</text>
+            <text x="42" y="182" class="t-sm">1st-gen SUs · glyburide</text>
+            <text x="42" y="198" class="t-sm">Glimepiride, nateglinide &lt;15</text>
+            <text x="42" y="214" class="t-sm">GLP-1 RAs &lt;30 (book table)</text>
+          </svg>
+      - kind: table
+        page: 150
+        quote: "50% dose reduction Sitagliptin 50 me. Vildagtiptin 50 mg Saxagliptin 2.5 mg"
+        title: "الـ DPP-4i حسب الـ eGFR"
+        columns: [Drug, "30–50", "<30"]
+        rows:
+          - [Sitagliptin, "50 mg", "25 mg"]
+          - [Vildagliptin, "50 mg", "50 mg"]
+          - [Saxagliptin, "2.5 mg", "2.5 mg"]
+          - [Linagliptin, "5 mg", "5 mg"]
+        hide: [[0, 1], [0, 2], [2, 1], [3, 2]]
+      - kind: check
+        page: 150
+        quote: "Initiate at low dose Repagiinide 0.5 mg Nateglinide 60 mg"
+        question: "eGFR 12. Which glinide plan fits the book's table?"
+        options:
+          - "Repaglinide from 0.5 mg; avoid nateglinide"
+          - "Nateglinide 60 mg"
+          - "Avoid all glinides"
+          - "Repaglinide at full dose"
+        answer: 0
+        why:
+          - "صح: تحت 15 الـ repaglinide 0.5 mg (limited experience)، والـ nateglinide avoid."
+          - "الـ nateglinide 60 mg ده للـ 15–29 بس."
+          - "الـ repaglinide لسه مسموح بجرعة قليلة."
+          - "لازم low dose."
+      - kind: update
+        page: 150
+        quote: "Caution Exenatide, liraglutide"
+        text: "جدول الكتاب (2011) بيقول avoid الـ GLP-1 RA تحت 30. الـ ADA 2025 بتسمح بـ liraglutide وdulaglutide وsemaglutide لحد eGFR 15 من غير تعديل، والـ exenatide بس اللي يتجنّب تحت 30. في الامتحان: جدول الكتاب."
+        ref: "ADA Standards of Care in Diabetes, 2025"
+      - kind: explain
+        page: 151
+        title: "الـ insulin في الـ CKD"
+        quote: "One third of EXOGENOUS INSULIN degradation is carried out BY THE KIDNEY!"
+        text: |
+          ==تلت الـ exogenous insulin== بيتكسّر في الكلية. لما الكلية تضعف، الـ insulin يفضل أطول ← **hypoglycemia**.
+
+          - eGFR **10–50** ← ==−25%==
+          - eGFR **<10** ← **−50%**
+      - kind: aside
+        tone: analogy
+        page: 151
+        quote: "In CKD: higher risk for hypoglycemia for a reduced exogenous insulin catabolism"
+        text: "الكلية زي الـ **مصرف**: بتسحب حتة من الـ insulin. المصرف لما يتسد، المية (الـ insulin) تفضل في الحوض أكتر، فلازم تقفل الحنفية شوية: **25%** ولو المصرف مسدود خالص (<10) **50%**."
+      - kind: explain
+        page: 151
+        title: "الـ statins"
+        quote: "Statin is mandatory in all diabetic patients ≥40 years, irrespective of their prevailing LDL-C level and the CVD."
+        text: |
+          الـ lipid-lowering ==renal-protective==: بيحسّن الـ albuminuria والـ eGFR.
+
+          - Statin ==mandatory== لكل diabetic **≥40** سنة، مهما كان الـ LDL.
+          - **High intensity**: ASCVD أو 10-year risk **>20%**.
+          - **Moderate intensity**: من غير ASCVD والـ risk **<20%**.
+      - kind: update
+        page: 151
+        quote: "High-intensity statins in pts with ASCVD 3. or 10-year ASCV risk > 20%."
+        text: "سؤال الكتاب بيقول «dose adjustments of statins» والمحاضرة ما ادّتش جرعات. الـ KDIGO 2013: لو eGFR <60 ومش على dialysis، استخدم جرعات الـ trials (مثلًا atorvastatin 20، rosuvastatin 10، pravastatin 40، simvastatin 40، simva/ezetimibe 20/10)، وما تبدأش statin لعيان dialysis."
+        ref: "KDIGO Lipid Management in CKD, 2013"
+      - kind: case
+        page: 150
+        quote: "Avoid First-generation SUs and glyburide"
+        stem: "Type 2 DM, eGFR 24, on glyburide 10 mg and vildagliptin 50 mg twice daily. Recurrent hypoglycemia."
+        steps:
+          - question: "Which SU change?"
+            options: ["Swap glyburide for gliclazide or glipizide", "Keep glyburide at half dose", "Glimepiride 4 mg", "Chlorpropamide"]
+            answer: 0
+            why: "الـ glyburide والـ first-generation ممنوعين، والـ gliclazide/glipizide no adjustment."
+          - question: "Vildagliptin dose at eGFR 24?"
+            options: ["50 mg once daily", "50 mg twice daily", "100 mg twice daily", "Stop it"]
+            answer: 0
+            why: "50% dose reduction ← 50 mg بس في اليوم."
+      - kind: try
+        items: [dm.L12.051, dm.L12.056, dm.L12.057, dm.L12.062]
+    recap:
+      - "Avoid: first-gen SUs وglyburide؛ glimepiride من 1 mg وممنوع <15."
+      - "No change: gliclazide، glipizide، TZDs، linagliptin 5 mg."
+      - "Sita 50 ← 25، vilda 50، saxa 2.5. Repaglinide 0.5، nateglinide 60 (ممنوع <15)."
+      - "GLP-1 RA: caution 30–50، avoid <30 (الكتاب). Insulin: −25% عند 10–50، −50% <10."
+      - "Statin mandatory ≥40؛ high لو ASCVD أو risk >20%، وإلا moderate."
+    practice: [dm.L12.047, dm.L12.048, dm.L12.049, dm.L12.050, dm.L12.051, dm.L12.052, dm.L12.053, dm.L12.054, dm.L12.055, dm.L12.056, dm.L12.057, dm.L12.058, dm.L12.059, dm.L12.060, dm.L12.061, dm.L12.062, dm.L12.102, dm.L12.103, dm.L12.111]
+  # ------------------------------------------------------------------
+  - id: dm.L12.lesson5
+    title: "الكبد والسكر: Child-Pugh والـ A1C اللي بيكدب"
+    hook: "في الـ cirrhosis الـ A1C ممكن يطمّنك وهو غلط. نعرف إمتى، ونتابع بإيه بداله، ونظبط الأكل والرياضة."
+    minutes: 6
+    pages: [152, 154]
+    topics: [cld-severity, cld-lifestyle]
+    goals:
+      - "تصنّف الـ hepatic impairment بالـ Child-Pugh"
+      - "تعرف ليه الـ A1C بيبقى falsely low أو high"
+      - "تحفظ أرقام الأكل والرياضة والوزن"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 152
+        title: "ليه صعب؟"
+        quote: "many Anti-hyperglycemic therapies are contraindicated or must be used with caution for safety reasons"
+        text: |
+          كتير من أدوية السكر ==contraindicated أو بحذر== في الـ CLD. فلازم نقيس الكبد الأول بالـ **Child-Pugh**.
+      - kind: figure
+        page: 152
+        quote: "Decompensation indicates cirrhosis with a Child-Pugh score of 7 or more"
+        title: "Child-Pugh على مسطرة"
+        alt: "A ruler from 5 to 15. 5 to 6 is class A, mild. 7 to 9 is class B, moderate. 10 to 15 is class C, severe. A line at 7 is marked decompensation."
+        caption: "الـ class A من 5 لـ 6، والـ B من 7 لـ 9، والـ C من 10 لـ 15. ==من 7 وطالع يبقى decompensated==."
+        svg: |
+          <svg viewBox="0 0 330 140" xmlns="http://www.w3.org/2000/svg">
+            <rect x="20" y="50" width="60" height="30" class="fg-good"/>
+            <rect x="80" y="50" width="90" height="30" class="fg-acc"/>
+            <rect x="170" y="50" width="140" height="30" class="fg-bad"/>
+            <text x="50" y="70" text-anchor="middle" class="t-sm t-b">A 5–6</text>
+            <text x="125" y="70" text-anchor="middle" class="t-sm t-b">B 7–9</text>
+            <text x="240" y="70" text-anchor="middle" class="t-sm t-b">C 10–15</text>
+            <text x="50" y="100" text-anchor="middle" class="t-sm">Mild</text>
+            <text x="125" y="100" text-anchor="middle" class="t-sm">Moderate</text>
+            <text x="240" y="100" text-anchor="middle" class="t-sm">Severe</text>
+            <path d="M80 30 V90" class="fg-arrow-bad" stroke-width="2.5"/>
+            <text x="86" y="26" class="t-sm t-bad">≥7 decompensated</text>
+            <text x="20" y="130" class="t-sm t-mut">compensated</text>
+          </svg>
+      - kind: figure
+        page: 153
+        quote: "Variceal bleeding, hemolytic anemia by hypersplenism → increase in the Hb turnover and decreased RBC survival"
+        title: "الـ A1C على ميزان"
+        alt: "A see-saw. The raised left side: iron, B12 or folate deficiency lengthen red cell life and push A1C falsely high. The lowered right side: variceal bleeding and hypersplenic hemolysis shorten red cell life and push A1C falsely low."
+        caption: "عمر الـ RBC ==أقصر== (bleeding، hypersplenism) ← A1C **واطي غلط**. عمره ==أطول== (iron، B12، folate deficiency) ← A1C **عالي غلط**."
+        svg: |
+          <svg viewBox="0 0 330 170" xmlns="http://www.w3.org/2000/svg">
+            <path d="M165 120 L150 150 H180 Z" class="fg-box"/>
+            <path d="M30 95 L300 125" class="fg-arrow" stroke-width="4"/>
+            <rect x="20" y="40" width="120" height="44" rx="6" class="fg-bad"/>
+            <text x="80" y="58" text-anchor="middle" class="t-sm t-b">Long RBC life</text>
+            <text x="80" y="74" text-anchor="middle" class="t-sm">iron · B12 · folate ↓</text>
+            <text x="80" y="30" text-anchor="middle" class="t-sm t-acc">A1C falsely HIGH ↑</text>
+            <rect x="190" y="70" width="130" height="44" rx="6" class="fg-good"/>
+            <text x="255" y="88" text-anchor="middle" class="t-sm t-b">Short RBC life</text>
+            <text x="255" y="104" text-anchor="middle" class="t-sm">bleeding · spleen</text>
+            <text x="255" y="60" text-anchor="middle" class="t-sm t-acc">A1C falsely LOW ↓</text>
+          </svg>
+      - kind: check
+        page: 153
+        quote: "Self-monitoring of blood glucose (Gluco-check) frequently at different times of the day is more accurate"
+        question: "Best way to follow glucose control in a diabetic with cirrhosis?"
+        options:
+          - "Frequent SMBG at different times of day (CGM if on insulin with hypos)"
+          - "A1C every 3 months"
+          - "Fasting glucose once a month"
+          - "Urine glucose"
+        answer: 0
+        why:
+          - "صح: الـ SMBG أدق من الـ A1C في الـ CLD، والـ CGM لو على insulin وعنده hypos متكررة."
+          - "الـ A1C unreliable في الـ cirrhosis."
+          - "قليل جدًا ومش بيبيّن الـ postprandial."
+          - "مش في المحاضرة ومش دقيق."
+      - kind: table
+        page: 154
+        quote: "Dietary modifications (fat< 30 %, protein < 20% CHO 50-60 % of total calories)"
+        title: "الـ lifestyle في الـ compensated CLD"
+        columns: [Item, Target]
+        rows:
+          - [Fat, "<30% of calories"]
+          - [Protein, "<20%"]
+          - [Carbohydrate, "50–60%"]
+          - [Exercise, "≥30 min, 3 times/week"]
+          - [Weight loss, "7%, 0.5–1 kg/week"]
+        hide: [[0, 1], [2, 1], [3, 1], [4, 1]]
+      - kind: aside
+        tone: tip
+        page: 154
+        quote: "More than 50% of these patients are malnourished"
+        text: "الـ **decompensated** حاجة تانية: ==أكتر من 50% malnourished==، فالـ TLC بتاعة الـ compensated ممكن ما تنفعش. وفي الكل: ==smoking وalcohol ممنوعين== إجباري."
+      - kind: try
+        items: [dm.L12.065, dm.L12.068, dm.L12.072, dm.L12.074]
+    recap:
+      - "Child-Pugh: A 5–6، B 7–9، C 10–15. ≥7 = decompensated."
+      - "A1C unreliable: falsely low (bleeding، hypersplenism)، falsely high (iron/B12/folate)."
+      - "تابع بـ SMBG متكرر، وCGM لو insulin + hypos."
+      - "Compensated: fat <30%، protein <20%، CHO 50–60%؛ 30 min × 3/week؛ 7% وزن بـ 0.5–1 kg/week."
+      - "Decompensated: >50% malnourished. No smoking، no alcohol."
+    practice: [dm.L12.063, dm.L12.064, dm.L12.065, dm.L12.066, dm.L12.067, dm.L12.068, dm.L12.069, dm.L12.070, dm.L12.071, dm.L12.072, dm.L12.073, dm.L12.074, dm.L12.075, dm.L12.076, dm.L12.077, dm.L12.078, dm.L12.079, dm.L12.107]
+  # ------------------------------------------------------------------
+  - id: dm.L12.lesson6
+    title: "أدوية السكر مع الكبد، والـ insulin الأأمن"
+    hook: "دوا دوا: metformin لحد إمتى، الـ SU ليه بيطوّل، الـ pioglitazone للـ NASH، وليه الـ insulin هو الملك هنا."
+    minutes: 7
+    pages: [154, 160]
+    topics: [cld-drugs, cld-insulin]
+    goals:
+      - "تعرف حدود الـ metformin والـ SU والـ pioglitazone في الـ CLD"
+      - "تعرف الـ DPP-4i والـ GLP-1 RA والـ SGLT2i في الكبد"
+      - "تعرف احتياج الـ insulin في الـ compensated والـ decompensated (سؤال الـ NAFLD)"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 155
+        title: "الـ metformin"
+        quote: "the dose should be decreased to a maximum of 1500 mg daily"
+        text: |
+          الخطر: ==lactic acidosis== لو فيه tissue hypoxia أو comorbidities (كلى، كبد، قلب)، خصوصًا مع acute deterioration.
+
+          - **Compensated** ← غالبًا آمن، بس ==max 1500 mg/day==.
+          - **وقّفه** لو الكبد أو الكلى بيسوءوا، أو acute illness، أو decompensation.
+          - **Contraindications**: creatinine ≥1.5 (رجالة) / ≥1.4 (ستات)، CrCl <30، hepatic impairment، CHF، والصبغة (ارجعله بعد 48 h والـ creatinine طبيعي).
+      - kind: explain
+        page: 155
+        title: "الـ SU والـ pioglitazone"
+        quote: "The liver metabolizes these drugs .So, their duration of action may be prolonged in patients with CLD."
+        text: |
+          - **SU**: الكبد بيكسّره (liver metabolizes) ← ==duration of action prolonged==. في الـ decompensated ==avoid== لأن الجسم مش قادر يقاوم الـ hypoglycemia.
+          - **Pioglitazone**: ليه دور في **NAFLD/NASH** (insulin sensitivity، وبيحسّن الـ histology والـ biochemistry). بس avoid في الـ decompensated وأي hepatic impairment، وما تبدأوش لو **ALT >2.5 × ULN**.
+      - kind: check
+        page: 156
+        quote: "Therapy should not be initiated if there is evidence of active liver disease or if the serum ALT level exceeds 2.5 times ULN."
+        question: "Diabetic with NASH, ALT 3 × ULN. Start pioglitazone?"
+        options:
+          - "No: ALT exceeds 2.5 × ULN"
+          - "Yes: it treats NASH"
+          - "Yes, at double dose"
+          - "Only with metformin 3 g"
+        answer: 0
+        why:
+          - "صح: الكتاب بيقول ما تبدأش لو ALT >2.5 × ULN أو active liver disease."
+          - "دوره في الـ NASH ما يلغيش الـ ALT limit."
+          - "مفيش double dose."
+          - "والـ metformin max 1500 في الـ CLD."
+      - kind: explain
+        page: 156
+        title: "الـ DPP-4i والـ GLP-1 RA والـ SGLT2i"
+        quote: "no dose recommendation is available for patients with advanced cirrhosis"
+        text: |
+          - **DPP-4i**: mild–moderate HI ← no dose adjustment. ==Severe== ← no recommendation، caution (الـ linagliptin biliary ← unknown).
+          - **GLP-1 RA**: appetite ↓، gastric emptying أبطأ، وزن ↓، قلب أحسن، وتأثير على الكبد. الـ ==liraglutide== ممكن يحسّن الـ NASH histology والـ fibrosis. بس لسه بدري تستخدمه للـ NASH من غير سكر.
+          - **SGLT2i**: شغال independent من الـ insulin. الـ cana والـ empa حسّنوا الـ steatosis (animal studies)، بيشيلوا الـ lipid overload ويقللوا الـ oxidative والـ inflammatory response.
+      - kind: update
+        page: 158
+        quote: "It is still premature to consider these agents as a specific treatment for patients with NASH without diabetes, due to inadequate evidence."
+        text: "من بعد الكتاب: الـ FDA وافقت (accelerated) على semaglutide 2.4 mg للـ MASH مع fibrosis F2–F3، بسكر أو من غيره. في الامتحان: كلام الكتاب (premature)."
+        ref: "FDA approval of semaglutide (Wegovy) for MASH, 2025"
+      - kind: figure
+        page: 159
+        quote: "Insulin therapy is the safest and most effective antihyperglycemic therapy in patients with CLD."
+        title: "احتياج الـ insulin: طالع ولا نازل؟"
+        alt: "Two arrows. Compensated CLD: arrow up for insulin need, because of insulin resistance in NAFLD and NASH. Decompensated CLD: arrow down, because of less gluconeogenesis and less hepatic insulin breakdown, with a hypoglycemia warning."
+        caption: "==Compensated ↑== (insulin resistance). ==Decompensated ↓== (gluconeogenesis أقل، والكبد بيكسّر insulin أقل) ← hypo، فتابع وعدّل كتير."
+        svg: |
+          <svg viewBox="0 0 330 170" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L12b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="fg-head-acc"/></marker><marker id="L12c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="fg-head-bad"/></marker></defs>
+            <text x="80" y="20" text-anchor="middle" class="t-sm t-b">Compensated</text>
+            <path d="M80 130 V40" class="fg-arrow-acc" stroke-width="4" marker-end="url(#L12b)"/>
+            <text x="80" y="150" text-anchor="middle" class="t-sm">insulin resistance</text>
+            <text x="80" y="165" text-anchor="middle" class="t-sm t-mut">NAFLD, NASH</text>
+            <text x="250" y="20" text-anchor="middle" class="t-sm t-b">Decompensated</text>
+            <path d="M250 35 V125" class="fg-arrow-bad" stroke-width="4" marker-end="url(#L12c)"/>
+            <text x="250" y="145" text-anchor="middle" class="t-sm">↓gluconeogenesis</text>
+            <text x="250" y="160" text-anchor="middle" class="t-sm">↓hepatic breakdown</text>
+            <text x="165" y="85" text-anchor="middle" class="t-sm t-bad">hypo risk</text>
+          </svg>
+      - kind: explain
+        page: 159
+        title: "إزاي تديه"
+        quote: "A twice-daily mixed regimen or a basal-bolus regimen may be indicated."
+        text: |
+          - ==twice-daily mixed== أو ==basal-bolus==.
+          - علّم العيان علامات الـ hypoglycemia.
+          - عنده **hepatic encephalopathy** وأكل عالي الـ CHO؟ الـ **rapid-acting analogues** (lispro، aspart، glulisine) بتمسك الـ postprandial.
+      - kind: aside
+        tone: trap
+        page: 159
+        quote: "25% of the total daily dose only should be given."
+        text: "الكتاب كاتب «25% of the total daily dose only should be given» من غير ما يقول 25% من إيه. اكتبها زي ما هي في الامتحان، وافهمها كـ **جرعات أقل بكتير مع متابعة قريبة** في الـ decompensated."
+      - kind: case
+        page: 155
+        quote: "In patients with decompensated CLD, these drugs should be avoided."
+        stem: "Type 2 DM with cirrhosis, Child-Pugh 10, on metformin 1 g twice daily and gliclazide. Recurrent hypoglycemia and ascites."
+        steps:
+          - question: "What about metformin?"
+            options: ["Withdraw it (decompensation)", "Reduce to 1500 mg", "Keep it", "Raise it"]
+            answer: 0
+            why: "الـ 1500 mg للـ compensated بس. في الـ decompensation ← وقّفه."
+          - question: "And the sulfonylurea?"
+            options: ["Avoid it in decompensated CLD", "Switch to glimepiride", "Double it", "Keep at night"]
+            answer: 0
+            why: "مفعوله بيطوّل، والعيان مش قادر يقاوم الـ hypo."
+          - question: "Best therapy now?"
+            options: ["Insulin with close monitoring and frequent adjustment", "Pioglitazone", "Saxagliptin full dose", "Nothing"]
+            answer: 0
+            why: "الـ insulin الأأمن والأقوى في الـ CLD، والـ pioglitazone ممنوع في الـ decompensated."
+      - kind: try
+        items: [dm.L12.081, dm.L12.086, dm.L12.096, dm.L12.098]
+    recap:
+      - "Metformin: compensated ≤1500 mg؛ وقّفه مع deterioration أو decompensation."
+      - "SU: مفعوله أطول؛ avoid في الـ decompensated."
+      - "Pioglitazone: NAFLD/NASH، بس مش مع decompensation ولا ALT >2.5 × ULN."
+      - "DPP-4i: no adjustment في mild–moderate؛ severe ← caution. Liraglutide ← NASH histology. SGLT2i ← steatosis."
+      - "Insulin الأأمن: ↑ في compensated، ↓ في decompensated؛ mixed أو basal-bolus؛ rapid analogues في الـ encephalopathy."
+    practice: [dm.L12.080, dm.L12.081, dm.L12.082, dm.L12.083, dm.L12.084, dm.L12.085, dm.L12.086, dm.L12.087, dm.L12.088, dm.L12.089, dm.L12.090, dm.L12.091, dm.L12.092, dm.L12.093, dm.L12.094, dm.L12.095, dm.L12.096, dm.L12.097, dm.L12.098, dm.L12.099, dm.L12.100, dm.L12.101, dm.L12.104, dm.L12.108, dm.L12.112]

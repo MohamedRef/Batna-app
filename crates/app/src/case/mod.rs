@@ -22,12 +22,22 @@ use crate::look::{Css, css};
 const CSS: Css = css!("src/case/case.css");
 
 /// The tab the screen opens on next, when Today sends him to due items.
-static START_TAB: GlobalSignal<Option<Tab>> = Signal::global(|| None);
+/// `BATNA_OPEN_CALC=child_pugh` opens the Calculators tab at launch (previews).
+static START_TAB: GlobalSignal<Option<Tab>> =
+    Signal::global(|| std::env::var_os("BATNA_OPEN_CALC").map(|_| Tab::Calculators));
 
 /// Open the Cases screen on its due items (#242): the cases tab, or the calc
 /// items tab when only calc items are due. Due items sit first in each list.
 pub fn open_due(mut ui: crate::Ui, calc_only: bool) {
     *START_TAB.write() = Some(if calc_only { Tab::CalcItems } else { Tab::Cases });
+    ui.screen.set(crate::Screen::Cases);
+}
+
+/// Open the Cases screen on its Calculators tab (More › الحاسبات).
+// Wired by the More sheet (more.rs, redesign shell PR); unused until then.
+#[allow(dead_code)]
+pub fn open_calculators(mut ui: crate::Ui) {
+    *START_TAB.write() = Some(Tab::Calculators);
     ui.screen.set(crate::Screen::Cases);
 }
 

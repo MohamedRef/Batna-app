@@ -70,6 +70,11 @@ pub fn steps() -> Element {
     stroke("M5 8h14v11H5zM7 5h10M9 2.5h6")
 }
 
+/// A magnifier, for search fields.
+pub fn search() -> Element {
+    stroke("M10.5 4a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM15.5 15.5 20 20")
+}
+
 /// A page-turn arrow. The app is right to left, so "next" points left.
 pub fn chevron(next: bool) -> Element {
     stroke(if next { "M15 5l-7 7 7 7" } else { "M9 5l7 7-7 7" })
@@ -83,11 +88,6 @@ pub fn pulse() -> Element {
 /// "Go" on a start button. The app is right to left, so it points left.
 pub fn arrow_go() -> Element {
     stroke("M19 12H5M11 6l-6 6 6 6")
-}
-
-/// A search field's magnifier.
-pub fn search() -> Element {
-    stroke("M11 4a7 7 0 1 0 0 14 7 7 0 1 0 0-14zM16 16l4 4")
 }
 
 /// A tick, for a finished lesson.

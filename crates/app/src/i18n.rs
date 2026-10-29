@@ -46,6 +46,11 @@ pub mod count {
     pub const CASE: Noun =
         Noun { one: "حالة واحدة", two: "حالتين", few: "حالات", many: "حالة" };
 
+    pub const FIELD: Noun =
+        Noun { one: "خانة واحدة", two: "خانتين", few: "خانات", many: "خانة" };
+    pub const LESSON: Noun =
+        Noun { one: "درس واحد", two: "درسين", few: "دروس", many: "درس" };
+
     /// Any integer type; a negative number counts as 0.
     pub fn count<N: TryInto<u64>>(n: N, noun: &Noun) -> String {
         let n: u64 = n.try_into().unwrap_or(0);
@@ -732,6 +737,13 @@ pub mod case {
 }
 
 pub mod calc {
+    pub const TITLE: &str = "الحاسبات";
+    pub const SUBTITLE: &str = "مدخلات واضحة، ونتيجة ليها معنى ومصدر.";
+    pub const INTRO: &str = "اكتب القيم بوحداتها. لو قيمة مش مظبوطة هتتعلّم في مكانها.";
+    /// "فاضل 3 خانات"
+    pub fn left(n: usize) -> String {
+        format!("فاضل {}", super::count::count(n, &super::count::FIELD))
+    }
     pub const PICK: &str = "اختار حاسبة";
     pub const FILL: &str = "املا البيانات وهتطلع النتيجة هنا.";
     pub const MISSING: &str = "ناقص";
@@ -901,6 +913,10 @@ pub mod own {
     pub const E_BACK_LONG: &str = "الضهر طويل، قسّمه على كذا كارت (3000 حرف بالكتير).";
     pub const E_SOURCE_LONG: &str = "«منين» طويلة، خليها اسم قصير (200 حرف بالكتير).";
     pub const FROM: &str = "من";
+    pub const FRONT_HINT: &str = "سؤال واحد يختبر فكرة واحدة…";
+    pub const BACK_HINT: &str = "الإجابة الأساسية، وبعدها شرح قصير لو محتاج…";
+    pub const PREVIEW: &str = "عاين الكارت";
+    pub const PREVIEW_NOTE: &str = "كده هيظهر في المذاكرة: السؤال الأول، والإجابة لما تكشفها.";
 }
 
 pub mod data {
@@ -1426,7 +1442,27 @@ pub mod learn {
 
     pub const CHECK: &str = "سؤال سريع";
     pub const ORDER: &str = "رتّب";
-    pub const ORDER_HINT: &str = "دوس على الخطوات بالترتيب. دوس على خطوة اترصّت علشان ترجعها.";
+    pub const ORDER_HINT: &str = "دوس على الخطوات بالترتيب. تقدر تشيل أي خطوة قبل التصحيح.";
+    pub const UNDO: &str = "تراجع";
+    pub const REMOVE: &str = "شيل";
+    pub const CHECK_HINT: &str = "اختار إجابة، وبعدين صحّح. تقدر تغيّر رأيك قبل التصحيح.";
+    pub const PICK_FIRST: &str = "اختار إجابة الأول.";
+    pub const MARK_MINE_RIGHT: &str = "✓ اختيارك";
+    pub const MARK_MINE_WRONG: &str = "✗ اختيارك";
+    pub const MARK_RIGHT: &str = "✓ الصح";
+    pub const READY: &str = "جاهز؟ دوس صحّح.";
+    pub const REVEAL_FIRST: &str = "اكشف الإجابة الأول، أو عدّي.";
+    pub const MATCH_FIRST: &str = "وصّل كل الأزواج الأول.";
+    pub const SORT_FIRST: &str = "حط كل الكروت في خاناتها الأول.";
+    pub const CASE_FIRST: &str = "كمّل الحالة للآخر الأول.";
+    pub const TRY_FIRST: &str = "جاوب الكروت الأول، أو عدّي.";
+    pub const SKIPPED: &str = "عدّيت السؤال ده. تقدر تجاوبه دلوقتي ويتحسب.";
+    pub const BEFORE: &str = "جاوبت السؤال ده قبل كده";
+    pub const BEFORE_RIGHT: &str = "وكان صح من أول مرة ✓";
+    pub const BEFORE_WRONG: &str = "وماكانش صح من أول مرة.";
+    pub const BEFORE_HINT: &str =
+        "إجابتك نفسها ماكانتش بتتحفظ في النسخة القديمة، فدي الإجابة الصح علشان تراجعها.";
+    pub const KEY: &str = "الإجابة الصح";
     pub const MATCH: &str = "وصّل";
     pub const MATCH_HINT: &str = "اختار من الشمال، وبعدين اللي يناسبه من اليمين.";
     pub const SORT: &str = "صنّف";
@@ -1434,10 +1470,8 @@ pub mod learn {
     pub const CASE: &str = "حالة صغيرة";
     pub const CASE_NEXT: &str = "اللي بعده";
     pub const CASE_SHOW: &str = "اكشف";
-    pub const CASE_DONE: &str = "خلّصت الحالة";
     pub const TABLE_HINT: &str = "فيه خانات مستخبية: فكّر فيها ودوس علشان تتأكد.";
     pub const CHECK_IT: &str = "صحّح";
-    pub const CLEAR: &str = "امسح";
     pub const RIGHT: &str = "صح كده! 👏";
     pub const NOT_QUITE: &str = "قريب، بس مش دي. اقرا السبب تحت.";
 
@@ -1455,6 +1489,22 @@ pub mod learn {
     pub const BACK_TO_LIST: &str = "رجوع للدروس";
     pub const PRACTICE_HINT: &str =
         "أحسن وقت تراجع الكروت هو دلوقتي، وهي لسه سخنة. وبعدين التطبيق يرجّعهالك قبل ما تنساها.";
+
+    pub fn placed_of(k: usize, n: usize) -> String {
+        format!("اخترت {k} من {n}")
+    }
+
+    pub fn slot(n: usize) -> String {
+        format!("الخطوة رقم {n}")
+    }
+
+    pub fn left_to_place(n: usize) -> String {
+        if n == 1 {
+            "لسه خطوة واحدة قبل التصحيح.".into()
+        } else {
+            format!("لسه {n} خطوات قبل التصحيح.")
+        }
+    }
 
     pub fn should_be(n: usize) -> String {
         format!("مكانها رقم {n}")
@@ -1521,6 +1571,22 @@ pub mod learn {
     pub const NEXT_KICKER: &str = "الدرس الجاي";
 }
 
+pub mod refs {
+    pub const TITLE: &str = "مراجعك";
+    pub const SUBTITLE: &str = "المحاضرات وصفحات الكتاب وكروتك، في مكان واحد.";
+    pub const ADD_CARD: &str = "كارت جديد";
+    pub const SEARCH: &str = "دوّر في المحاضرات";
+    pub const SEARCH_HINT: &str = "دوّر على محاضرة أو موضوع…";
+    pub const LECTURES: &str = "المحاضرات";
+    pub const NO_MATCH: &str = "مفيش محاضرة أو موضوع بالاسم ده. جرّب كلمة إنجليزي من العنوان.";
+    pub const CHECKED: &str = "راجعت صحته";
+    pub const CHECKED_HINT: &str = "اللي علّمت عليه ✓ صح وإنت بتذاكر، من كل اللي في المحاضرة.";
+    pub const WRITING: &str = "لسه بتتكتب";
+    pub const STATUS: &str = "حالة المادة";
+    pub const STATUS_BODY: &str = "إنك تخلّص درس أو تجاوب صح مش معناه إن المحتوى اتراجع. صحة المحتوى بتتحسب بس من ✓ اللي إنت بتديها للكارت وإنت بتذاكر، والباقي فاضل unverified لحد ما تراجعه.";
+    pub const CHECKED_ALL: &str = "راجعت صحته في كل المحاضرات:";
+}
+
 pub mod lecture {
     pub const BACK: &str = "رجوع";
     pub const KICKER: &str = "المحاضرة";
@@ -1538,4 +1604,6 @@ pub mod lecture {
     pub const CASES: &str = "حالة";
     pub const TOPICS: &str = "المواضيع";
     pub const TOPICS_HINT: &str = "اضغط على موضوع تذاكره لوحده.";
+    pub const CHECKED: &str = "صحة المحتوى: راجعت";
+    pub const CHECKED_NOTE: &str = "منفصلة عن إنك خلّصت الدروس.";
 }

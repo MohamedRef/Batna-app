@@ -32,7 +32,8 @@ pub enum DraftKind {
     Shared,
 }
 
-fn open_new() {
+/// Opens the form on an empty card.
+pub fn open_new() {
     let card = OwnCard {
         id: new_id(),
         front: String::new(),
@@ -106,23 +107,32 @@ fn Sheet(draft: Draft) -> Element {
     };
     let lectures: Vec<(String, String)> =
         Library::get().index.lectures.iter().map(|e| (e.id.clone(), e.title.clone())).collect();
+    let mut invalid = use_signal(|| None::<(Field, Problem)>);
     let close = move || *DRAFT.write() = None;
-    let save = move |_| {
-        let c = card().tidy();
-        match c.check() {
-            Err(p) => problem.set(Some(problem_text(p).to_string())),
-            Ok(()) => match review.backend.borrow_mut().save_own(&c) {
+    // A failed check or save keeps every word he typed: the sheet stays
+    // open on the same draft, with the problem next to its field.
+    let save = move |_| match validate(&card.read()) {
+        Err(bad) => {
+            invalid.set(Some(bad));
+            problem.set(None);
+        }
+        Ok(c) => {
+            invalid.set(None);
+            match review.backend.borrow_mut().save_own(&c) {
                 Ok(()) => *DRAFT.write() = None,
                 Err(e) => problem.set(Some(format!("{} {e}", tx::FAILED))),
-            },
+            }
         }
     };
     let c = card();
+    let bad = invalid();
+    let err = move |f: Field| bad.filter(|(at, _)| *at == f).map(|(_, p)| problem_text(p));
+    let aria = |f: Field| if err(f).is_some() { "true" } else { "false" };
     rsx! {
         style { {CSS.text()} }
-        div { class: "own-backdrop", onclick: move |_| close() }
+        div { class: "sheet-backdrop own-backdrop", onclick: move |_| close() }
         div {
-            class: "own-sheet",
+            class: "sheet own-sheet",
             role: "dialog",
             aria_modal: "true",
             aria_label: title,
@@ -131,7 +141,17 @@ fn Sheet(draft: Draft) -> Element {
                     close();
                 }
             },
-            h2 { {title} }
+            div { class: "sheet-head",
+                h2 { {title} }
+                button {
+                    class: "icon-button",
+                    "data-back": "true",
+                    aria_label: tx::CANCEL,
+                    title: tx::CANCEL,
+                    onclick: move |_| close(),
+                    span { aria_hidden: "true", "✕" }
+                }
+            }
             if draft.kind == DraftKind::Shared {
                 p { class: "muted small", {tx::SHARED_HINT} }
             }
@@ -141,29 +161,43 @@ fn Sheet(draft: Draft) -> Element {
             if QUEUED.read().is_some() {
                 p { class: "small own-waiting", role: "status", {tx::SHARE_WAITING} }
             }
-            label { class: "own-field",
-                span { {tx::FRONT} }
+            label { class: "field own-field", "data-invalid": aria(Field::Front),
+                span { class: "own-label", {tx::FRONT}
+                    bdi { class: "own-count", dir: "ltr", "{c.front.chars().count()}/{core_own::MAX_FRONT}" }
+                }
                 textarea {
                     dir: "auto",
                     lang: "en",
                     rows: 3,
                     autofocus: true,
+                    placeholder: tx::FRONT_HINT,
+                    "aria-invalid": aria(Field::Front),
                     value: "{c.front}",
                     oninput: move |e| card.write().front = e.value(),
                 }
+                if let Some(m) = err(Field::Front) {
+                    span { class: "field-error", role: "alert", {m} }
+                }
             }
-            label { class: "own-field",
-                span { {tx::BACK} }
+            label { class: "field own-field", "data-invalid": aria(Field::Back),
+                span { class: "own-label", {tx::BACK}
+                    bdi { class: "own-count", dir: "ltr", "{c.back.chars().count()}/{core_own::MAX_BACK}" }
+                }
                 textarea {
                     dir: "auto",
                     lang: "en",
                     rows: 7,
+                    placeholder: tx::BACK_HINT,
+                    "aria-invalid": aria(Field::Back),
                     value: "{c.back}",
                     oninput: move |e| card.write().back = e.value(),
                 }
+                if let Some(m) = err(Field::Back) {
+                    span { class: "field-error", role: "alert", {m} }
+                }
             }
             div { class: "own-row",
-                label { class: "own-field",
+                label { class: "field own-field",
                     span { {tx::LECTURE} }
                     select {
                         onchange: move |e| {
@@ -181,7 +215,7 @@ fn Sheet(draft: Draft) -> Element {
                         }
                     }
                 }
-                label { class: "own-field own-page",
+                label { class: "field own-field own-page",
                     span { {tx::PAGE} }
                     input {
                         r#type: "number",
@@ -193,17 +227,47 @@ fn Sheet(draft: Draft) -> Element {
                     }
                 }
             }
-            label { class: "own-field",
+            label { class: "field own-field", "data-invalid": aria(Field::Source),
                 span { {tx::SOURCE} }
                 input {
                     dir: "auto",
                     placeholder: tx::SOURCE_HINT,
+                    "aria-invalid": aria(Field::Source),
                     value: c.source.clone().unwrap_or_default(),
                     oninput: move |e| card.write().source = Some(e.value()),
                 }
+                if let Some(m) = err(Field::Source) {
+                    span { class: "field-error", role: "alert", {m} }
+                }
+            }
+            // How it will look in a session: the question, then the answer.
+            if !(c.front.trim().is_empty() && c.back.trim().is_empty()) {
+                details { class: "own-preview",
+                    summary { {tx::PREVIEW} }
+                    div { class: "own-preview-card",
+                        bdi { lang: "en", dir: "auto", class: "own-preview-front", "{c.front.trim()}" }
+                        hr {}
+                        bdi { lang: "en", dir: "auto", class: "own-preview-back", "{c.back.trim()}" }
+                        if c.lecture.is_some() || c.page.is_some() || c.source.as_deref().is_some_and(|s| !s.trim().is_empty()) {
+                            span { class: "muted small",
+                                if let Some(l) = &c.lecture {
+                                    bdi { dir: "ltr", "{l.rsplit('.').next().unwrap_or_default()}" }
+                                    " "
+                                }
+                                if let Some(p) = c.page {
+                                    "{crate::i18n::cite::page(p)} "
+                                }
+                                if let Some(s) = c.source.as_deref().filter(|s| !s.trim().is_empty()) {
+                                    "{tx::FROM} " bdi { "{s.trim()}" }
+                                }
+                            }
+                        }
+                    }
+                    p { class: "muted small", {tx::PREVIEW_NOTE} }
+                }
             }
             if let Some(p) = problem() {
-                p { class: "own-error", role: "alert", "{p}" }
+                p { class: "field-error", role: "alert", "{p}" }
             }
             div { class: "own-actions",
                 button { class: "btn btn-primary", onclick: save, {tx::SAVE} }
@@ -211,6 +275,28 @@ fn Sheet(draft: Draft) -> Element {
             }
         }
     }
+}
+
+/// The field a problem belongs to, so the message sits under it.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum Field {
+    Front,
+    Back,
+    Source,
+}
+
+/// The tidied card to save, or the first problem and its field. The draft
+/// itself is left as typed.
+fn validate(draft: &OwnCard) -> Result<OwnCard, (Field, Problem)> {
+    let c = draft.clone().tidy();
+    c.check().map(|()| c).map_err(|p| {
+        let field = match p {
+            Problem::EmptyFront | Problem::FrontTooLong => Field::Front,
+            Problem::EmptyBack | Problem::BackTooLong => Field::Back,
+            Problem::SourceTooLong => Field::Source,
+        };
+        (field, p)
+    })
 }
 
 fn problem_text(p: Problem) -> &'static str {
@@ -312,5 +398,41 @@ pub fn OwnCardsCard(on_study: EventHandler<()>) -> Element {
                 }
             }
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn card(front: &str, back: &str) -> OwnCard {
+        OwnCard {
+            id: "own.t".into(),
+            front: front.into(),
+            back: back.into(),
+            lecture: None,
+            page: Some(12),
+            source: Some(" notes ".into()),
+            created_ms: 1,
+        }
+    }
+
+    #[test]
+    fn a_failed_check_names_the_field_and_keeps_the_draft() {
+        let draft = card("  SAAG ≥ 1.1 means?  ", "   ");
+        let before = draft.clone();
+        assert_eq!(validate(&draft), Err((Field::Back, Problem::EmptyBack)));
+        assert_eq!(draft, before, "nothing he typed is touched");
+        let long = card(&"x".repeat(core_own::MAX_FRONT + 1), "y");
+        assert_eq!(validate(&long).unwrap_err().0, Field::Front);
+        let src = OwnCard { source: Some("s".repeat(core_own::MAX_SOURCE + 1)), ..card("q", "a") };
+        assert_eq!(validate(&src).unwrap_err().0, Field::Source);
+    }
+
+    #[test]
+    fn a_good_card_saves_tidied() {
+        let ok = validate(&card("  q  ", " a ")).unwrap();
+        assert_eq!(ok, card("q", "a").tidy());
+        assert_eq!(ok.page, Some(12));
     }
 }

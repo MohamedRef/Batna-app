@@ -13,7 +13,7 @@ use std::sync::Mutex;
 use batna_core::content::{Item, Lecture};
 use batna_core::own::OwnCard;
 
-pub use form::{OwnCardsCard, ShareInbox};
+pub use form::{OwnCardsCard, ShareInbox, open_new};
 
 /// The cards the deck was built from, and the deck.
 static DECK: Mutex<Option<(Vec<OwnCard>, &'static Lecture)>> = Mutex::new(None);

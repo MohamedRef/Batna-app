@@ -151,3 +151,16 @@ so nothing is fetched at runtime.
 item links, SVG safety, image files, sizes and licences, key-term counts,
 mnemonic spelling and option counts. Then run the
 app (`just run`, or `BATNA_OPEN_SCREEN=learn`) and play every lesson once.
+
+## Saved responses
+
+An unfinished lesson is the device-local setting `lessonpos.<id>`
+(`batna_core::response::Attempt`, version 2). Besides the step he is on and
+the first result of every step, it keeps each step's response (`Draft`): the
+option picked, the order built, the pairs matched, the bins chosen, the case
+parts answered, reveals, mnemonic letters and table cells opened. Responses
+use authored indexes, never screen positions, and carry a fingerprint of the
+step; editing a step drops its saved response. A step's state (open, draft,
+checked, answered before, skipped) is derived from the restored attempt before
+Check or Continue is decided. Records from before version 2 have results but
+no responses: those steps show "answered before" with the answer key.

@@ -145,14 +145,19 @@ pub fn ViewSection() -> Element {
 
 /// The lesson to do next: the first unfinished one of the earliest lecture
 /// in `prefer` that has one left, else the first unfinished in book order.
+/// The course in view (`courses::focus`) goes first.
 pub fn next_lesson(prefer: &[String]) -> Option<&'static Lesson> {
     let lib = Library::get();
     let left = |l: &&Lesson| mark(&l.id).is_none();
-    prefer
-        .iter()
-        .filter_map(|lec| lib.lessons.get(lec))
-        .find_map(|f| f.lessons.iter().find(left))
-        .or_else(|| lib.all_lessons().map(|(_, l)| l).find(left))
+    let from = |shown: &dyn Fn(&str) -> bool| {
+        prefer
+            .iter()
+            .filter(|lec| shown(lec))
+            .filter_map(|lec| lib.lessons.get(lec))
+            .find_map(|f| f.lessons.iter().find(left))
+            .or_else(|| lib.all_lessons().filter(|(lec, _)| shown(lec)).map(|(_, l)| l).find(left))
+    };
+    from(&crate::courses::focus::shows).or_else(|| from(&|_| true))
 }
 
 /// The lesson that teaches an item: one that practises it, else the first
@@ -240,28 +245,40 @@ fn matches(q: &str, lecture: &str, lecture_title: &str, l: &Lesson) -> bool {
 
 #[component]
 fn LessonList() -> Element {
+    use crate::courses::focus;
     let lib = Library::get();
-    let total: usize = lib.lessons.values().map(|f| f.lessons.len()).sum();
-    let done = lib.all_lessons().filter(|(_, l)| mark(&l.id).is_some()).count();
-    let next = next_lesson(&[]);
+    // Only the course in view (the chip above the title picks it).
+    let _ = focus::current();
+    let in_view = || lib.all_lessons().filter(|(lec, _)| focus::shows(lec));
+    let total = in_view().count();
+    let done = in_view().filter(|(_, l)| mark(&l.id).is_some()).count();
+    let next = next_lesson(&[]).filter(|l| focus::shows(&l.id));
     let next_id = next.map(|l| l.id.clone());
     let next_lecture = next.and_then(|l| l.id.rsplit_once('.')).map(|(lec, _)| lec.to_string());
-    let shown = SHOWN().filter(|id| lib.lessons.contains_key(id)).or(next_lecture).or_else(|| {
-        lib.index.lectures.iter().find(|e| lib.lessons.contains_key(&e.id)).map(|e| e.id.clone())
-    });
+    let shown = SHOWN()
+        .filter(|id| lib.lessons.contains_key(id) && focus::shows(id))
+        .or(next_lecture)
+        .or_else(|| {
+            lib.index
+                .lectures
+                .iter()
+                .find(|e| lib.lessons.contains_key(&e.id) && focus::shows(&e.id))
+                .map(|e| e.id.clone())
+        });
     let query = QUERY();
     let q = query.trim().to_lowercase();
     rsx! {
         header { class: "page-head",
+            crate::courses::CourseChip {}
             h1 { {tx::HEAD} }
             p { class: "page-sub",
                 {tx::HEAD_SUB}
                 if total > 0 { " · " span { class: "ls-nowrap", {tx::done_of(done, total)} } }
             }
         }
-        if total == 0 {
+        if total == 0 && focus::current().is_none() {
             p { class: "note", {tx::NONE_YET} }
-        } else {
+        } else if total > 0 {
             label { class: "search ls-search",
                 {crate::icons::search()}
                 input {
@@ -292,6 +309,11 @@ fn LessonList() -> Element {
             }
             div { class: "section-head", h2 { {tx::OTHER_LECTURES} } }
             Others { shown: shown.clone() }
+        } else {
+            // The course in view has lectures but no lessons yet: its
+            // lectures still open their pages (book pages, cards).
+            p { class: "note", {tx::COURSE_NO_LESSONS} }
+            Others { shown: String::new() }
         }
     }
 }
@@ -322,7 +344,8 @@ fn Others(shown: String) -> Element {
     let ui = use_context::<Ui>();
     let lib = Library::get();
     let pick = LECTURES_VIEW.pick();
-    let mut others: Vec<_> = lib.index.lectures.iter().filter(|e| e.id != shown).collect();
+    let mut others: Vec<_> =
+        lib.index.lectures.iter().filter(|e| e.id != shown && crate::courses::focus::shows(&e.id)).collect();
     let left =
         |id: &str| lib.lessons.get(id).is_some_and(|f| f.lessons.iter().any(|l| mark(&l.id).is_none()));
     sort_by(&mut others, pick.sort, |e| left(&e.id), |_| false, |e| e.title.clone());
@@ -489,6 +512,7 @@ fn Results(q: String, next_id: Option<String>) -> Element {
         .index
         .lectures
         .iter()
+        .filter(|e| crate::courses::focus::shows(&e.id))
         .filter_map(|e| {
             let file = lib.lessons.get(&e.id)?;
             let hits: Vec<(usize, Lesson)> = file
@@ -505,6 +529,13 @@ fn Results(q: String, next_id: Option<String>) -> Element {
     rsx! {
         if groups.is_empty() {
             p { class: "note", role: "status", {tx::no_match(&q)} }
+            if crate::courses::focus::current().is_some() {
+                button {
+                    class: "btn btn-ghost ls-search-all",
+                    onclick: move |_| crate::courses::focus::set(None),
+                    {tx::SEARCH_ALL_COURSES}
+                }
+            }
         }
         for (id , title , hits) in groups {
             section { key: "{id}", class: "ls-group",
@@ -629,8 +660,16 @@ pub fn LessonCard(n: usize, lesson: Lesson) -> Element {
 pub fn TodayLesson(prefer: Vec<String>) -> Element {
     let ui = use_context::<Ui>();
     let lib = Library::get();
-    let part_way = lib.all_lessons().map(|(_, l)| l).find(|l| resume_step(&l.id).is_some());
-    let Some(l) = part_way.or_else(|| next_lesson(&prefer)) else {
+    // The course in view first (`courses::focus`): a lesson part-way, else its next.
+    let part_way = |shown: &dyn Fn(&str) -> bool| {
+        lib.all_lessons().map(|(_, l)| l).find(|l| shown(&l.id) && resume_step(&l.id).is_some())
+    };
+    let next = next_lesson(&prefer);
+    let Some(l) = part_way(&crate::courses::focus::shows)
+        .or(next.filter(|l| crate::courses::focus::shows(&l.id)))
+        .or_else(|| part_way(&|_| true))
+        .or(next)
+    else {
         return rsx! {};
     };
     let lecture = l.id.rsplit_once('.').map(|(l, _)| l).unwrap_or(&l.id);

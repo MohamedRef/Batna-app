@@ -1,0 +1,556 @@
+schema: batna.lesson/v1
+lecture: geri.L06
+lessons:
+  # ------------------------------------------------------------------
+  - id: geri.L06.lesson1
+    title: "الغدة بتكبر في السن: الـ TSH بيكدب أحيانًا"
+    hook: "TSH = 7 في واحدة عندها 92 سنة؟ ممكن يكون ده طبيعي ليها. قبل ما تكتب levothyroxine، افهم الغدة العجوزة."
+    minutes: 8
+    pages: [91, 94]
+    topics: [aging, epidemiology]
+    goals:
+      - "تعرف التغيرات في الغدة والهرمونات مع السن، والفرق بين الراجل والست"
+      - "تفرّق الـ age-related TSH من الـ euthyroid sick syndrome"
+      - "تحفظ أرقام الـ epidemiology"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 91
+        quote: "the thyroid gland undergoes moderate atrophy and develops nonspecific histo-pathologic abnormalities: fibrosis, increase interfollicular connective tissues"
+        title: "الغدة مع السن"
+        text: |
+          الغدة بيحصلها ==moderate atrophy== ومعاها:
+          - **fibrosis** وconnective tissue أكتر بين الـ follicles.
+          - **colloid** أقل.
+          - شوية **lymphocytic infiltration**.
+
+          والـ **auto-antibodies** بتوصل لـ **20%** في الستات فوق 60، والهرمونات بتقل حوالي **30%**.
+      - kind: table
+        page: 91
+        quote: "In the old women the free thyroid hormones do not change but the TSH"
+        title: "الراجل غير الست"
+        columns: ["", "Free hormones", "TSH"]
+        rows:
+          - ["Old men", "↓", "No change"]
+          - ["Old women", "No change", "↑"]
+        hide: [[0, 1], [1, 2]]
+      - kind: explain
+        page: 92
+        quote: "Aging is characterized by a reduced iodine absorption and organification and a lower response to TSH, leading to reduced thyroid hormone production."
+        title: "ليه الإنتاج بيقل؟"
+        text: |
+          - ==reduced iodine absorption and organification==.
+          - **lower response to TSH**.
+          - في الـ oldest old: الـ **nocturnal TSH surge** بيروح جزئيًا أو كليًا.
+          - **reduced response to TRH** و**reduced TSH circadian variation**.
+          - والـ **clearance** بتاع الهرمون أبطأ.
+      - kind: figure
+        page: 92
+        quote: "in the population >80 years of age, the upper limit at the 95% interval of confidence was >6.0 mIU/L, reaching 8.0 mIU/L in over-90s."
+        title: "الحد الأعلى للـ TSH بيطلع مع السن"
+        alt: "A rising staircase of TSH upper limits: about 4 mIU/L in younger adults, over 6 mIU/L after 80, 8 mIU/L after 90."
+        caption: "في دراسات السكان، الحد الأعلى (95%) فوق 80 سنة أكتر من 6، وفوق 90 يوصل 8 mIU/L. يعني 7 عند تسعيني ممكن تبقى طبيعية."
+        svg: |
+          <svg viewBox="0 0 330 200" xmlns="http://www.w3.org/2000/svg">
+            <rect x="30" y="120" width="80" height="60" class="fg-good"/>
+            <text x="44" y="112" class="t-sm">~4</text>
+            <text x="40" y="196" class="t-sm">Adults</text>
+            <rect x="125" y="90" width="80" height="90" class="fg-acc"/>
+            <text x="140" y="82" class="t-sm t-b">&gt;6.0</text>
+            <text x="140" y="196" class="t-sm">&gt;80 y</text>
+            <rect x="220" y="60" width="80" height="120" class="fg-bad"/>
+            <text x="240" y="52" class="t-sm t-b">8.0</text>
+            <text x="235" y="196" class="t-sm">&gt;90 y</text>
+            <text x="30" y="24" class="t-sm t-mut">Upper TSH limit (mIU/L), 95%</text>
+          </svg>
+      - kind: aside
+        tone: analogy
+        page: 92
+        quote: "centrally mediated way to avoid excessive catabolism and promote \"physiological aging.\""
+        text: "الغدة العجوزة زي عربية قديمة بتمشي على **سرعة أهدى** علشان تعيش أطول. الـ low thyroid function عند الكبير ممكن يكون **protective** ضد الـ **catabolism**، مش دايمًا مرض. ولسه ده محل جدل."
+      - kind: explain
+        page: 92
+        quote: "euthyroid sick syndrome\", where circulating levels of TSH and T3 are reduced, whereas reverse T3 is increased"
+        title: "اوعى تتلخبط: euthyroid sick"
+        text: |
+          الـ ==euthyroid sick syndrome==: في المرض الحاد أو الـ systemic:
+          - **TSH ↓** و**T3 ↓**.
+          - **reverse T3 ↑**.
+
+          ده رد فعل للمرض، مش thyroid disease ولا شيخوخة.
+      - kind: check
+        page: 92
+        quote: "euthyroid sick syndrome\", where circulating levels of TSH and T3 are reduced, whereas reverse T3 is increased"
+        question: "An 84-year-old with pneumonia: TSH low, T3 low, reverse T3 high. Most likely?"
+        options: ["Euthyroid sick syndrome", "Hyperthyroidism", "Normal ageing", "T4 toxicosis"]
+        answer: 0
+        why:
+          - "صح: TSH وT3 واطيين وreverse T3 عالي مع مرض حاد."
+          - "الـ hyperthyroidism بيرفع الـ T3 أو الـ T4."
+          - "الشيخوخة مابتعملش reverse T3 عالي فجأة."
+          - "الـ T4 toxicosis فيها T4 عالي."
+      - kind: explain
+        page: 93
+        quote: "could be the expression of actual thyroid pathology, especially in the case of positive TΡΟ Ab and TBG Ab titters."
+        title: "الدراسات بتختلف، فما تتسرعش"
+        text: |
+          - Cohorts كبيرة (منها **Ashkenazi**): الـ TSH بيطلع مع السن، والـ longevity مع TSH أعلى.
+          - **Rotterdam** (أكتر من 9000): العكس، الـ TSH بينزل والـ **TPOAb** بيطلع.
+          - لو الـ **TPO Ab** أو الـ TBG Ab positive، فكّر في ==actual thyroid pathology==.
+
+          الخلاصة: **avoid a superficial diagnosis** وinappropriate treatment، وعلاج الـ subclinical hypothyroidism بـ TSH أقل من 10 لسه **under debate**.
+      - kind: explain
+        page: 94
+        quote: "the overall prevalence of hypothyroidism is 4.6%, with 0.3% for the overt and 4.3% for the subclinical type."
+        title: "الأرقام"
+        text: |
+          - **مصر**: primary hypothyroidism في ==10% من الستات== و**2% من الرجالة** فوق 60.
+          - **10-15%** من مرضى الـ hyperthyroidism فوق 60.
+          - البلاد الغنية باليود: hypothyroidism **1-2%**، أكتر في الستات الكبار.
+          - **NHANES III**: 4.6% (0.3% overt + 4.3% subclinical). الـ hypothyroidism أشهر thyroid disease عند الكبار.
+      - kind: try
+        items: [geri.L06.003, geri.L06.007, geri.L06.009, geri.L06.014]
+    recap:
+      - "Atrophy، fibrosis، colloid أقل؛ antibodies لحد 20% في الستات فوق 60؛ الهرمونات ↓30%."
+      - "رجالة: free hormones ↓، TSH ثابت. ستات: free ثابت، TSH ↑."
+      - "Upper TSH limit: أكتر من 6 فوق 80، 8 فوق 90."
+      - "Euthyroid sick: TSH ↓، T3 ↓، reverse T3 ↑."
+      - "مصر: 10% ستات، 2% رجالة فوق 60؛ NHANES III 4.6%."
+    practice: [geri.L06.001, geri.L06.002, geri.L06.003, geri.L06.004, geri.L06.005, geri.L06.006, geri.L06.007, geri.L06.008, geri.L06.009, geri.L06.010, geri.L06.011, geri.L06.012, geri.L06.013, geri.L06.014, geri.L06.015, geri.L06.016, geri.L06.017, geri.L06.080, geri.L06.081]
+  # ------------------------------------------------------------------
+  - id: geri.L06.lesson2
+    title: "الـ hypothyroidism اللي مالوش شكل"
+    hook: "مافيش زيادة وزن ولا برد. فيه وقعات، وتبوّل لاإرادي، وتوهان. ده الـ hypothyroidism عند جدّتك."
+    minutes: 8
+    pages: [94, 97]
+    topics: [hypo]
+    goals:
+      - "تفرّق overt من subclinical"
+      - "تعدّ الأسباب والأدوية اللي بتعمله أو بتمنع امتصاص الـ L-T4"
+      - "تعرف الـ presentation الـ atypical وعلاقته بالـ cognition"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 94
+        quote: "Subclinical hypothyroidism is characterized by increased TSH values with normal FT3 and FT4 values."
+        title: "Overt ولا subclinical؟"
+        text: |
+          - ==Overt==: **TSH ↑** مع **FT3 وFT4 ↓**. مرتبط بـ global mortality أعلى وcardiovascular events.
+          - ==Subclinical==: **TSH ↑** مع **FT3 وFT4 normal**.
+
+          والـ **2013 ETA** قسّمت الـ subclinical لاتنين: TSH من **4 لـ 10**، وأكتر من **10**.
+      - kind: explain
+        page: 95
+        quote: "Chronic autoimmune thyroiditis (Hashimoto thyroiditis) is the most frequent cause of subclinical hypothyroidism in the elderly."
+        title: "الأسباب"
+        text: |
+          - ==Hashimoto thyroiditis==: أشهر سبب للـ subclinical عند الكبار.
+          - بعد **thyroidectomy** أو **radioiodine** مع replacement مش كفاية.
+          - **Iatrogenic** (بيرجع لما توقف الدوا): methimazole، PTU، tyrosine-kinase inhibitors، β-blockers، interferon-α، IL-2، **lithium**.
+          - أدوية بتمنع **امتصاص الـ L-T4**، وده سبب شائع عند الكبار حتى مع جرعة مظبوطة.
+      - kind: sort
+        page: 95
+        quote: "bile acid sequestrates, ferrous sulphate, sucralfate, calcium carbonate, aluminium-containing antacids, phosphate binders, raloxifene and proton-pump inhibitors"
+        prompt: "الدوا ده بيعمل hypothyroidism إزاي؟"
+        bins: ["Causes it (iatrogenic)", "Blocks L-T4 absorption"]
+        cards:
+          - { text: "Lithium", bin: 0 }
+          - { text: "Interferon-α", bin: 0 }
+          - { text: "Tyrosine-kinase inhibitors", bin: 0 }
+          - { text: "Methimazole", bin: 0 }
+          - { text: "Calcium carbonate", bin: 1 }
+          - { text: "Ferrous sulphate", bin: 1 }
+          - { text: "Proton-pump inhibitors", bin: 1 }
+          - { text: "Sucralfate", bin: 1 }
+          - { text: "Phosphate binders", bin: 1 }
+        why: "الأولانيين بيأثروا على الغدة نفسها (وبيرجعوا لما توقف). التانيين بيمسكوا الـ levothyroxine في الأمعاء أو بيقلّلوا الحموضة اللي محتاجها علشان يتمص، فافصل بينهم وبين الحباية بكام ساعة."
+      - kind: explain
+        page: 95
+        quote: "Hypothyroid patients ≥70 years are significantly less likely to report weight gain, muscle cramps or cold intolerance"
+        title: "الصورة المتخفية"
+        text: |
+          عند الكبير الـ presentation **varied, non-specific, insidious**. اللي فوق 70 أقل بكتير في:
+          - **weight gain**، **muscle cramps**، **cold intolerance**.
+
+          وبدلها ==non-specific geriatric syndromes==: confusion، anorexia، **weight loss** (أيوه، نقص!)، **falls**، **incontinence**، decreased mobility، arthralgia.
+
+          وأحيانًا **noninflammatory effusions** في المفاصل والـ pleura والـ pericardium والـ peritoneum.
+      - kind: aside
+        tone: trap
+        page: 95
+        quote: "Confusion, anorexia, weight loss, falling, incontinence, and decreased mobility, arthralgias and muscular aches."
+        text: "الفخ: **weight loss** مع hypothyroidism؟ عند الكبير أيوه، من الـ anorexia. فالأعراض بتتنسب للـ «السن» أو لأمراض تانية. أي كبير بيقع وبيتوه ومش بياكل: اطلب **TSH**."
+      - kind: explain
+        page: 96
+        quote: "Hypothyroidism is associated with increase incidence of IHD and heart failure."
+        title: "القلب والمخ"
+        text: |
+          - القلب **sensitive** لأي تغيير صغير في الهرمون. الـ hypothyroidism مرتبط بـ **IHD** و**heart failure**.
+          - بس في الـ **Cardiovascular Health Study** (فوق 65)، المرضى ماكانش عندهم risk factors أسوأ (BMI، LDL، HTN، DM).
+          - ==Myxoedema madness==: confusion، disorientation، psychosis مع الـ hypothyroidism الشديد.
+          - مرتبط بضعف في learning، word fluency، visual-spatial.
+      - kind: reveal
+        page: 96
+        quote: "there is a lack of evidence to show that there is complete resolution of neurocognitive deficits following treatment of hypothyroidism."
+        prompt: "الكتب بتقول hypothyroidism = reversible dementia. الكتاب ده بيقول إيه؟"
+        answer: "إن مفيش evidence على **complete resolution** للـ neurocognitive deficits بعد العلاج. وتجربتين كبار (منهم **Birmingham elderly thyroid study**) ماحسّنوش الـ cognition. والـ **PAQUID**: الـ TSH العالي مرتبط بالـ **depression** مش بالـ cognition. ودراسة كبيرة قالت العلاقة **coincidental rather than causal**. يعني اطلب TSH، بس ماتوعدش العيلة إن الذاكرة هترجع."
+      - kind: check
+        page: 97
+        quote: "There is little evidence to clearly link overt hypothyroidism with reduced mobility or increased frailty."
+        question: "Which statement matches the lecture?"
+        options: ["Little evidence links overt hypothyroidism to frailty", "Treating hypothyroidism reverses dementia", "Raised TSH causes cognitive decline (PAQUID)", "Hypothyroid elders usually gain weight"]
+        answer: 0
+        why:
+          - "صح: little evidence للـ mobility والـ frailty."
+          - "مفيش evidence على complete resolution."
+          - "الـ PAQUID ربطه بالـ depression مش الـ cognition."
+          - "اللي فوق 70 أقل في الـ weight gain، وممكن يخسوا."
+      - kind: try
+        items: [geri.L06.018, geri.L06.021, geri.L06.023, geri.L06.026]
+    recap:
+      - "Overt: TSH ↑، FT4 ↓. Subclinical: TSH ↑، FT4 normal؛ ETA 2013: 4-10 أو أكتر من 10."
+      - "Hashimoto أشهر سبب subclinical؛ lithium، interferon، TKIs، amiodarone-like iatrogenic."
+      - "Ca، iron، PPIs، sucralfate، binders بيمنعوا امتصاص الـ L-T4."
+      - "فوق 70: مافيش weight gain ولا cold intolerance؛ falls، confusion، incontinence، anorexia."
+      - "مفيش proof إن العلاج بيرجّع الـ cognition."
+    practice: [geri.L06.018, geri.L06.019, geri.L06.020, geri.L06.021, geri.L06.022, geri.L06.023, geri.L06.024, geri.L06.025, geri.L06.026, geri.L06.027, geri.L06.028, geri.L06.029, geri.L06.030, geri.L06.031, geri.L06.032, geri.L06.033, geri.L06.082, geri.L06.083]
+  # ------------------------------------------------------------------
+  - id: geri.L06.lesson3
+    title: "نعالج ولا نستنى؟ TSH والسن والـ frailty"
+    hook: "الـ levothyroxine حباية صغيرة، بس الجرعة الزيادة عند الكبير = AF وكسور. علشان كده الكتاب بيقول: هدّي."
+    minutes: 9
+    pages: [97, 100]
+    topics: [hypo-treatment]
+    goals:
+      - "تعرف إمتى الـ TSH العالي شوية مش محتاج علاج"
+      - "تقرا جدول الـ treatment strategy بالسن"
+      - "تكتب جرعة البداية والزيادة والـ target"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 97
+        quote: "minor TSH elevations are NOT associated with important outcomes such as impaired quality of life, symptoms, cognition, cardiovascular events and mortality"
+        title: "الارتفاع البسيط مش كارثة"
+        text: |
+          - ==minor TSH elevations== **مش** مرتبطة بـ quality of life ولا symptoms ولا cognition ولا cardiovascular events ولا mortality عند الكبار.
+          - علاج الـ mild subclinical ممكن **ما يفيدش**.
+          - وممكن **يأذي**: كبار بأعراض غير محددة ياخدوا هرمون مالوش لازمة.
+      - kind: explain
+        page: 98
+        quote: "The elderly are more susceptible to the side effects of thyroid hormone excess such as AF, and osteoporotic fractures."
+        title: "ليه نخاف من الزيادة؟"
+        text: |
+          - الجرعة اللي بتظبط الـ TSH **أقل** عند الكبير، لأن الـ **lean body mass** قلّ فالـ thyroxine turnover قلّ.
+          - امتصاص أقل، أدوية تانية، وأمراض كتير.
+          - الكبير **more susceptible** للـ excess: ==AF== و==osteoporotic fractures==.
+          - تجربة **737** مريض فوق 65: الـ low-dose levothyroxine ماحسّنش الـ **ThyPRO** score. علشان كده target TSH ممكن يطلع لـ 6-7 فوق 70-80.
+      - kind: table
+        page: 98
+        quote: "Treatment strategy"
+        title: "جدول الـ treatment strategy"
+        columns: ["TSH", "65-75 y", "Over 75 y"]
+        rows:
+          - ["Over 10", "Treat", "Treat / observe"]
+          - ["6-10", "Observe / treat", "Observe / treat"]
+          - ["4-6", "Observe / treat", "Observe"]
+        hide: [[0, 1], [2, 2]]
+      - kind: explain
+        page: 99
+        quote: "In the presence of positive antithyroid autoantibody titres, symptoms of hypothyroidism, concomitant diseases potentially impaired by mild thyroid failure"
+        title: "إيه اللي يرجّح treat؟"
+        text: |
+          قبل أي حاجة: ==confirm== الـ TSH بقياس تاني بعد **3-6 months**.
+
+          يرجّح العلاج:
+          - **positive antithyroid antibodies**.
+          - **symptoms** of hypothyroidism.
+          - مرض ممكن يسوء بالـ mild failure زي **HF**.
+          - رغبة المريض.
+          - TSH بيطلع لحد **10 أو أكتر**.
+      - kind: case
+        page: 99
+        quote: "in frail patients with serum TSH levels >10 mIU/L, more caution is recommended regardless of the age, and a wait-and-see strategy is recommended."
+        stem: "Three patients, each with a confirmed raised TSH and normal FT4."
+        steps:
+          - reveal: "A: 70-year-old, fit, active, TSH 12."
+            question: "A?"
+            options: ["Treat with L-T4", "Observe only", "Radioiodine", "Repeat in 5 years"]
+            answer: 0
+            why: "**Good health** و TSH أكتر من 10 = L-T4 recommended."
+          - reveal: "B: 88-year-old, bed-bound, frail, TSH 12."
+            question: "B?"
+            options: ["Wait and see", "Treat to TSH 1", "Full replacement dose", "Thyroidectomy"]
+            answer: 0
+            why: "**Frail** مع TSH أكتر من 10: caution بغض النظر عن السن، **wait-and-see**."
+          - reveal: "C: 72-year-old woman, fit, TSH 7.5, anti-TPO positive."
+            question: "C?"
+            options: ["Consider a low-dose L-T4 trial, or monitor every 3-6 months", "Always treat", "Ignore it", "Methimazole"]
+            answer: 0
+            why: "Fit، TSH بين 6 و10، ومعاها risk factors (ست + antibodies): ممكن **low-dose trial**؛ وإلا monitor كل 3-6 شهور."
+      - kind: explain
+        page: 99
+        quote: "Usual starting doses in elderly patients without cardiac morbidities is 25 mg/day and with cardiac comorbidities is 12.5 ug/day."
+        title: "الجرعة"
+        text: |
+          - Starting dose: ==25 µg/day== من غير قلب، و==12.5 µg/day== مع cardiac comorbidity.
+          - زوّد **12.5-25 µg كل 4 weeks** بالـ TSH.
+          - Target فوق 75: **TSH 2.5-3.5 mIU/L**.
+          - الـ TSH بياخد وقت أطول ينزل عند الكبار، فالـ **slight TSH elevation** مع FT4 normal مش سبب تزوّد الجرعة.
+          - لو حصل **cardiac instability**: وقّف الهرمون أيام أو أسابيع وارجع لما يستقر.
+      - kind: aside
+        tone: trap
+        page: 99
+        quote: "Usual starting doses in elderly patients without cardiac morbidities is 25 mg/day and with cardiac comorbidities is 12.5 ug/day."
+        text: "الكتاب كاتب «25 **mg**/day» وده typo أكيد: المقصود **25 µg/day** (الـ 12.5 اللي جنبها مكتوبة ug). اكتبها **µg** في الامتحان."
+      - kind: mnemonic
+        page: 98
+        quote: "treatment with levothyroxine must be maintained for life."
+        word: "SLOW"
+        parts:
+          - { key: "S", text: "Start 25 µg (12.5 µg if cardiac)" }
+          - { key: "L", text: "Life-long: tell him at least once a year" }
+          - { key: "O", text: "Observe if frail or TSH just mildly up" }
+          - { key: "W", text: "Wait 4 weeks between 12.5-25 µg steps" }
+        hook: "الـ levothyroxine عند الكبير **SLOW**: «ابدأ قليل، وامشي براحة»."
+      - kind: try
+        items: [geri.L06.039, geri.L06.043, geri.L06.044, geri.L06.046]
+    recap:
+      - "Minor TSH elevations مش مرتبطة بـ outcomes؛ العلاج ممكن يأذي."
+      - "الكبير حساس للزيادة: AF وosteoporotic fractures."
+      - "أكد الـ TSH بعد 3-6 شهور؛ أكتر من 10 وبصحة كويسة = treat؛ frail = wait and see."
+      - "ابدأ 25 µg (12.5 مع قلب)، زوّد 12.5-25 كل 4 أسابيع؛ target فوق 75 = 2.5-3.5."
+      - "العلاج مدى الحياة."
+    practice: [geri.L06.034, geri.L06.035, geri.L06.036, geri.L06.037, geri.L06.038, geri.L06.039, geri.L06.040, geri.L06.041, geri.L06.042, geri.L06.043, geri.L06.044, geri.L06.045, geri.L06.046, geri.L06.047, geri.L06.048, geri.L06.084, geri.L06.085, geri.L06.092]
+  # ------------------------------------------------------------------
+  - id: geri.L06.lesson4
+    title: "الـ hyperthyroidism الهادي: apathetic وT3 toxicosis"
+    hook: "الشاب بيرتعش وبيعرق. الكبير بيبقى مكتئب، خاسس، وعنده AF بطيئة. نفس المرض، وش تاني."
+    minutes: 9
+    pages: [100, 102]
+    topics: [hyper, hyper-diagnosis]
+    goals:
+      - "تعرف أسباب الـ hyperthyroidism عند الكبير والـ amiodarone"
+      - "تشرح T3 وT4 toxicosis"
+      - "تعرف الـ presentations الـ atypical وحدود الفحص والـ scan"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 100
+        quote: "Graves' disease is the most common cause of hyperthyroidism in all age groups, but the incidence of toxic multinodular goitre increases with age"
+        title: "الأسباب"
+        text: |
+          - ==Graves'== أشهر سبب في كل الأعمار.
+          - **Toxic multinodular goitre** بيزيد مع السن، وأكتر لو اليود قليل.
+          - **Jod-Basedow** (iodine-induced): أكتر عند الكبار من **amiodarone**، mucolytics، وradiocontrast dyes.
+      - kind: explain
+        page: 100
+        quote: "Amiodarone causes two types of thyroid disease; multinodular goitre and destructive thyroiditis."
+        title: "الـ amiodarone"
+        text: |
+          الـ ==amiodarone== first-line في الـ AF، فلازم تنتبه:
+          - بيعمل نوعين: **multinodular goitre** و**destructive thyroiditis**.
+          - الاتنين **self-limiting**، بس الشديد يحتاج **high-dose glucocorticoids**، antithyroid drugs، وأحيانًا surgery.
+          - وقفه مش هيحسّن بسرعة لأن الـ **T½** طويل، وممكن ماينفعش توقفه أصلًا بسبب القلب.
+      - kind: figure
+        page: 101
+        quote: "T3 toxicosis is an isolated elevation of T3 with suppressed TSH, which is seen in up to 10% of the elderly thyrotoxic patients."
+        title: "T3 toxicosis ولا T4 toxicosis؟"
+        alt: "Two panels. T3 toxicosis: a toxic nodule pours out T3; T3 high, T4 normal, TSH suppressed. T4 toxicosis: the gland makes T4 but illness blocks 5-prime deiodinase so T4 high, T3 normal or low."
+        caption: "الـ T3 toxicosis من nodule بتطلّع T3 كتير (لحد 10%، تقريبًا في الكبار بس). الـ T4 toxicosis لما مرض تاني يمنع الـ 5′-deiodinase فالـ T4 مايتحولش لـ T3."
+        svg: |
+          <svg viewBox="0 0 330 260" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="T06a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-acc"/></marker>
+              <marker id="T06b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" class="fg-head-bad"/></marker>
+            </defs>
+            <rect x="10" y="10" width="310" height="110" rx="8" class="fg-acc"/>
+            <text x="20" y="32" class="t-b">T3 toxicosis</text>
+            <text x="20" y="54" class="t-sm">Toxic nodule / toxic MNG</text>
+            <path d="M190 50H240" class="fg-arrow-acc" marker-end="url(#T06a)"/>
+            <text x="250" y="55" class="t-b t-acc">T3 ↑↑</text>
+            <text x="20" y="80" class="t-sm">T4: normal · TSH: suppressed</text>
+            <text x="20" y="104" class="t-sm t-mut">up to 10%, almost only elderly</text>
+            <rect x="10" y="135" width="310" height="115" rx="8" class="fg-bad"/>
+            <text x="20" y="157" class="t-b">T4 toxicosis</text>
+            <text x="20" y="180" class="t-sm">T4 ↑</text>
+            <path d="M60 176H150" class="fg-arrow-bad" marker-end="url(#T06b)"/>
+            <text x="160" y="180" class="t-sm">T3 normal or low</text>
+            <text x="20" y="205" class="t-sm">Non-thyroidal illness blocks</text>
+            <text x="20" y="225" class="t-sm t-b">5′-deiodinase (T4 → T3)</text>
+          </svg>
+      - kind: explain
+        page: 101
+        quote: "The term \"apathetic thyrotoxicosis\" is used to describe the symptoms of elderly hyperthyroidism who present with depression, lethargy and weight loss."
+        title: "الوش التاني"
+        text: |
+          الـ tremor والـ palpitation والـ heat intolerance ممكن **مايكونوش موجودين**. بدلهم:
+          - ==Apathetic thyrotoxicosis==: **depression**، **lethargy**، **weight loss**.
+          - **Thyrotoxic encephalopathy**: agitation وconfusion.
+          - **Anorexia** وweight loss يتلخبطوا مع **malignancy**.
+          - postmenopausal **osteoporosis** تسوء.
+          - **AF with slow ventricular rate** في لحد **20%**.
+          - **angina** أو **heart failure**.
+          - fatigue، weakness، dementia، myopathy يتنسبوا للسن.
+      - kind: aside
+        tone: joke
+        page: 101
+        quote: "Most thyrotoxic patients have decreased appetite and weight loss and may be mistaken for an underlying malignancy."
+        text: "الشاب الـ thyrotoxic بياكل التلاجة وبيخس. الكبير الـ thyrotoxic مش عايز ياكل خالص وبيخس، والعيلة تعمله **CT** عن **malignancy** قبل ما حد يطلب **TSH** بخمسين جنيه."
+      - kind: explain
+        page: 102
+        quote: "If free T4 levels are normal with a suppressed TSH, the free T3 level is estimated to rule out T3 toxicosis."
+        title: "التشخيص"
+        text: |
+          - **الفحص**: الغدة غالبًا مش محسوسة. لو محسوسة: diffuse = Graves'، nodular كبيرة = toxic MNG.
+          - **FT4 ↑ + TSH ↓** = primary hyperthyroidism.
+          - **FT4 normal + TSH suppressed** ← اطلب ==free T3== (T3 toxicosis).
+          - **Isolated low TSH**: glucocorticoids أو nonthyroidal illness.
+          - **Thyroid antibodies** ترجّح Graves'.
+      - kind: explain
+        page: 102
+        quote: "Nuclear uptake is normal in up to 30% of the elderly patients with Graves' disease and in up to 70% toxic multinodular goiter"
+        title: "الـ nuclear scan أقل فايدة"
+        text: |
+          الـ ==uptake== بيبقى **normal** في لحد **30%** من الـ Graves' و**70%** من الـ toxic MNG عند الكبار، فمش بيستبعد.
+
+          - **Decreased uptake**: thyroiditis، أو amiodarone، أو iodinated dye.
+          - مهم لما تخطط لـ **radioiodine**.
+      - kind: check
+        page: 102
+        quote: "If free T4 levels are normal with a suppressed TSH, the free T3 level is estimated to rule out T3 toxicosis."
+        question: "TSH suppressed, FT4 normal, 76-year-old with a toxic nodule. Next?"
+        options: ["Free T3", "Nuclear scan to rule out hyperthyroidism", "Start levothyroxine", "Reassure: normal FT4"]
+        answer: 0
+        why:
+          - "صح: الـ free T3 علشان الـ T3 toxicosis."
+          - "الـ scan normal في نسبة كبيرة ومش بيستبعد."
+          - "الـ TSH واطي: الاتجاه الغلط."
+          - "الـ FT4 الطبيعي مايستبعدش الـ T3 toxicosis."
+      - kind: try
+        items: [geri.L06.049, geri.L06.053, geri.L06.055, geri.L06.060]
+    recap:
+      - "Graves' الأشهر؛ toxic MNG بيزيد مع السن؛ Jod-Basedow من amiodarone وcontrast."
+      - "Amiodarone: MNG أو destructive thyroiditis؛ الـ T½ طويل."
+      - "T3 toxicosis: nodule، لحد 10%. T4 toxicosis: illness يمنع 5′-deiodinase."
+      - "Apathetic: depression، lethargy، weight loss؛ AF بطيئة لحد 20%."
+      - "FT4 normal + TSH ↓ ← free T3. الـ scan normal في 30% Graves' و70% MNG."
+    practice: [geri.L06.049, geri.L06.050, geri.L06.051, geri.L06.052, geri.L06.053, geri.L06.054, geri.L06.055, geri.L06.056, geri.L06.057, geri.L06.058, geri.L06.059, geri.L06.060, geri.L06.061, geri.L06.062, geri.L06.063, geri.L06.064, geri.L06.086, geri.L06.087]
+  # ------------------------------------------------------------------
+  - id: geri.L06.lesson5
+    title: "علاج الـ hyperthyroidism والـ storm"
+    hook: "اليود المشع أحسن من المشرط عند الكبير، بس لو ماحضّرتش الغدة قبله ممكن تولّع storm."
+    minutes: 9
+    pages: [103, 105]
+    topics: [hyper-treatment, subclinical-hyper, storm]
+    goals:
+      - "تختار العلاج حسب السبب"
+      - "ترتّب خطة الـ radioiodine وتعرف side effects الـ antithyroid drugs"
+      - "تعرف إمتى تعالج الـ subclinical hyperthyroidism والـ storm"
+    status: unverified
+    steps:
+      - kind: explain
+        page: 103
+        quote: "50-70% of hyperthyroidism is due to Graves' disease, and 30-40% due to toxic nodular goitre, and <5% due to thyroiditis"
+        title: "على حسب السبب"
+        text: |
+          - **Graves'** 50-70%، **toxic nodular goitre** 30-40%، **thyroiditis** أقل من 5%.
+          - ==Thyroiditis==: subacute (goitre بيوجع مع constitutional symptoms) أو silent lymphocytic (nodules صغيرة مابتوجعش). الـ uptake **decreased**، وهي **self-limiting**: supportive و**beta-blockers** بس.
+      - kind: explain
+        page: 103
+        quote: "Radioiodine is preferred over surgery due to the increased morbidity and mortality associated with surgery."
+        title: "دوا ولا ablation؟"
+        text: |
+          - الاختيارات: **antithyroid drugs** أو **ablation** (surgery أو radioiodine).
+          - ==Radioiodine preferred== لأن الـ surgery فيها morbidity وmortality أعلى.
+          - الـ **surgery**: toxic MNG كبيرة بـ **pressure symptoms**.
+          - الأدوية: methimazole، carbimazole، propylthiouracil.
+      - kind: order
+        page: 103
+        quote: "discontinuing 3-5 days prior to radioiodine ablation and restarting 3-5 days after radioablation is preferred in most centres."
+        prompt: "رتّب خطة الـ radioiodine:"
+        steps:
+          - "Control with antithyroid drug"
+          - "Stop it 3-5 days before"
+          - "Radioiodine ablation"
+          - "Restart it 3-5 days after"
+          - "Monthly thyroid tests"
+          - "TSH above normal: switch to thyroxine"
+        why: "الـ antithyroid قبل الـ ablation بيمنع الـ **thyroid crisis**، وبتوقفه كام يوم حوالين اليود علشان مايقللش فعاليته. وبعدين أول ما الـ TSH يطلع، الغدة خلاص اتقفلت فتبدأ replacement."
+      - kind: table
+        page: 104
+        quote: "Agranulocytosis: dose-limiting side-effect, more common in elderly patients, more with propylthiouracil, usually seen within 3 months"
+        title: "Side effects الـ antithyroid drugs"
+        columns: ["Effect", "Detail"]
+        rows:
+          - ["Fever, rash, arthralgia", "1-5%"]
+          - ["Agranulocytosis", "Elderly, PTU, first 3 months"]
+          - ["Liver changes", "Dose-limiting"]
+        hide: [[0, 1], [1, 1]]
+      - kind: explain
+        page: 104
+        quote: "In AF; will usually revert spontaneously with control of hyperthyroidism or B-blockers can be used. Routine anticoagulation is recommended."
+        title: "الـ AF والعين"
+        text: |
+          - ==AF==: غالبًا بيرجع لوحده لما تتحكم في الغدة، أو **β-blockers**، و**routine anticoagulation**.
+          - **Graves' ophthalmopathy** النشطة صعبة: **parenteral steroids** مع antithyroid drugs؛ refractory = total thyroidectomy + radioiodine؛ و**selenium** اتجرب بنتايج كويسة.
+      - kind: explain
+        page: 104
+        quote: "Subnormal TSH in the presence of normal FT4 and F T3. It is seen in1-5% of the elderly population."
+        title: "الـ subclinical hyperthyroidism"
+        text: |
+          - **TSH subnormal** مع **FT4 وFT3 normal**، في **1-5%** من الكبار.
+          - مرتبط في بعض الدراسات بـ **CAD** و**cardiovascular mortality**؛ الـ fractures والـ dementia controversial.
+          - **ATA/AACE**: ==treat لو TSH أقل من 0.1==، وconsider لو **0.1-0.5**، خصوصًا لو مستمر 3-6 شهور مع **cardiac disease** أو أعراض.
+      - kind: figure
+        page: 105
+        quote: "The guidelines recommend to treat subclinical hyperthyroidism in the elderly when the TSH is <0.1 mIU/ml"
+        title: "مسطرة الـ TSH الواطي"
+        alt: "A TSH ruler: below 0.1 labelled treat in red, 0.1 to 0.5 labelled consider treatment in amber, above 0.5 normal range."
+        caption: "تحت 0.1 = عالج. من 0.1 لـ 0.5 = فكّر، وخصوصًا لو فيه قلب أو أعراض."
+        svg: |
+          <svg viewBox="0 0 330 130" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="40" width="90" height="40" class="fg-bad"/>
+            <text x="30" y="65" class="t-b t-bad">Treat</text>
+            <rect x="100" y="40" width="120" height="40" class="fg-acc"/>
+            <text x="112" y="65" class="t-sm t-b">Consider treating</text>
+            <rect x="220" y="40" width="100" height="40" class="fg-good"/>
+            <text x="235" y="65" class="t-sm">Normal range</text>
+            <text x="90" y="100" class="t-sm">0.1</text>
+            <text x="210" y="100" class="t-sm">0.5</text>
+            <text x="10" y="26" class="t-sm t-mut">Serum TSH (mIU/L), elderly, normal FT4/FT3</text>
+          </svg>
+      - kind: explain
+        page: 105
+        quote: "Thyroid storm is a state of decompensated thyrotoxicosis defined by severe hypermetabolism, fever, neuropsychiatric changes"
+        title: "الـ thyroid storm"
+        text: |
+          الـ ==thyroid storm==: decompensated thyrotoxicosis: **severe hypermetabolism**، **fever**، neuropsychiatric changes، وأحيانًا **CHF**.
+
+          - أقل عند الكبار.
+          - أشهر precipitant (غير surgery أو radioiodine من غير تحضير): ==infection==.
+      - kind: case
+        page: 105
+        quote: "Potassium iodide or lugol's iodine can be started after antithyroid medications."
+        stem: "A 79-year-old with untreated Graves' develops pneumonia, fever 40°C, AF 150/min and agitation."
+        steps:
+          - question: "Diagnosis and trigger?"
+            options: ["Thyroid storm triggered by infection", "Apathetic thyrotoxicosis", "Euthyroid sick syndrome", "Myxoedema madness"]
+            answer: 0
+            why: "**Fever**، hypermetabolism، neuropsychiatric changes = storm؛ والـ **infection** أشهر سبب."
+          - question: "Antithyroid dose?"
+            options: ["PTU 200 mg every 6 h or methimazole 40-80 mg/day", "Methimazole 5 mg/day", "Levothyroxine", "Radioiodine now"]
+            answer: 0
+            why: "**Large doses**: PTU 200 mg Q6H أو methimazole 40-80 mg/day، مع fluids وelectrolytes وعلاج الـ pneumonia."
+          - question: "When does Lugol's iodine go in?"
+            options: ["After the antithyroid drug", "First, before anything", "Never", "Instead of steroids"]
+            answer: 0
+            why: "اليود **بعد** الـ antithyroid، علشان مايبقاش مادة خام للغدة تصنع بيها هرمون أكتر. ومعاهم IV β-blockers و**stress-dose glucocorticoids**."
+      - kind: try
+        items: [geri.L06.065, geri.L06.068, geri.L06.071, geri.L06.076, geri.L06.079]
+    recap:
+      - "Graves' 50-70%، toxic nodular 30-40%، thyroiditis أقل من 5% (self-limiting، β-blockers)."
+      - "Radioiodine أحسن من الـ surgery؛ antithyroid قبله، وقف 3-5 أيام حواليه."
+      - "Agranulocytosis: كبار، PTU، أول 3 شهور. AF: β-blocker + anticoagulation."
+      - "Subclinical hyper: treat تحت 0.1، consider 0.1-0.5."
+      - "Storm: infection أشهر سبب؛ PTU 200 Q6H أو MMI 40-80، β-blocker IV، steroids، اليود بعدهم."
+    practice: [geri.L06.065, geri.L06.066, geri.L06.067, geri.L06.068, geri.L06.069, geri.L06.070, geri.L06.071, geri.L06.072, geri.L06.073, geri.L06.074, geri.L06.075, geri.L06.076, geri.L06.077, geri.L06.078, geri.L06.079, geri.L06.088, geri.L06.089, geri.L06.090, geri.L06.091, geri.L06.093]

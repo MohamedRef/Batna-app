@@ -199,3 +199,13 @@ on screen and repeats only its own write:
 
 Today's "not saved" note now clears when that same answer, verdict or
 delete later succeeds. No schema, FSRS, content or study-data changes.
+
+## Study review: touch targets and announcements (2026-10-30)
+
+Every `.btn`, `.btn-link` and `.btn-lg` inside the study screen (`.st`), the
+lecture chips, the time choice, cloze blanks and recall points use at least
+the shared 48dp `--target`; compact `--tap` alone is 40px. The progress bar
+gives `aria-valuetext` ("N من M") so it no longer reads the 0-based count.
+The session summary focuses its heading on mount so the result is announced
+after the last grade button disappears. Ratings, FSRS, Undo and review
+storage are unchanged.

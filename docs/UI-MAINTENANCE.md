@@ -134,7 +134,11 @@ When Continue is disabled without a Check action, the footer explains how
 to complete the current interaction or skip it; the disabled Next action
 references the same explanation for accessibility. Close and view-mode
 controls use the shared 48dp touch target. On the final summary, Next
-Lesson becomes the primary action only when there are no practice cards.
+Lesson becomes the primary action only when there are no practice cards;
+otherwise, Return to Lessons becomes primary if no follow-up exists. Practice
+guidance is only shown when there are practice cards. The next-lesson chain
+keeps the screen that originally opened the player as its exit destination.
+The page arrow uses the shared on-accent contrast token.
 No medical content, scoring, saved drafts, FSRS or Back stack changes.
 
 The compact footer (Back, Continue, Check and Skip) and summary actions

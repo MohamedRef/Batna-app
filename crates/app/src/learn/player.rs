@@ -359,6 +359,15 @@ fn Stage(
     }
 }
 
+/// A completed lesson always offers exactly one primary next action.
+fn summary_return_class(has_follow_up: bool) -> &'static str {
+    if has_follow_up {
+        "btn-link"
+    } else {
+        "btn btn-primary"
+    }
+}
+
 #[component]
 fn Summary(lesson: Lesson, right: u32, asked: u32) -> Element {
     let mut ui = use_context::<Ui>();
@@ -366,6 +375,7 @@ fn Summary(lesson: Lesson, right: u32, asked: u32) -> Element {
     let next = next_lesson(std::slice::from_ref(&lecture)).filter(|l| l.id != lesson.id);
     let practice = lesson.practice.clone();
     let n_practice = practice.len();
+    let return_class = summary_return_class(n_practice > 0 || next.is_some());
     rsx! {
         crate::ui::Card { class: "ls-summary",
             p { class: "ls-confetti", aria_hidden: "true", "🎉" }
@@ -410,9 +420,11 @@ fn Summary(lesson: Lesson, right: u32, asked: u32) -> Element {
                         }
                     }
                 }
-                button { class: "btn-link", "data-back": "true", "aria-keyshortcuts": "Escape", onclick: move |_| close(ui), {tx::BACK_TO_LIST} }
+                button { class: return_class, "data-back": "true", "aria-keyshortcuts": "Escape", onclick: move |_| close(ui), {tx::BACK_TO_LIST} }
             }
-            p { class: "muted small", {tx::PRACTICE_HINT} }
+            if n_practice > 0 {
+                p { class: "muted small", {tx::PRACTICE_HINT} }
+            }
         }
     }
 }
@@ -454,6 +466,12 @@ mod ux_tests {
         assert!(production.contains("aria_describedby: if needs_answer"));
         assert!(production.contains("id: \"ls-gate-hint\""));
         assert!(tx::NAV_REQUIRED.contains(tx::SKIP));
+    }
+
+    #[test]
+    fn last_lesson_has_a_primary_exit_without_practice_or_next_lesson() {
+        assert_eq!(summary_return_class(false), "btn btn-primary");
+        assert_eq!(summary_return_class(true), "btn-link");
     }
 
     #[test]

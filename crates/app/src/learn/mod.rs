@@ -31,9 +31,19 @@ pub static OPEN: GlobalSignal<Option<String>> = Signal::global(|| std::env::var(
 /// Where the open lesson was opened from: closing it goes back there.
 static FROM: GlobalSignal<Screen> = Signal::global(|| Screen::Learn);
 
+/// Following another lesson should keep the original return destination.
+fn lesson_origin(current: Screen, has_open_lesson: bool, previous: Screen) -> Screen {
+    if has_open_lesson && current == Screen::Learn {
+        previous
+    } else {
+        current
+    }
+}
+
 /// Opens a lesson from anywhere (Today, a study item, the planner).
 pub fn open(mut ui: Ui, id: &str) {
-    *FROM.write() = *ui.screen.peek();
+    let origin = lesson_origin(*ui.screen.peek(), OPEN.peek().is_some(), *FROM.peek());
+    *FROM.write() = origin;
     *OPEN.write() = Some(id.to_string());
     ui.screen.set(Screen::Learn);
 }
@@ -761,6 +771,14 @@ mod list_tests {
         assert!(cta.contains("r#type: \"button\""));
         assert!(cta.contains("e.stop_propagation();"));
         assert!(cta.contains("open(ui, id);"));
+    }
+
+    #[test]
+    fn following_next_lesson_keeps_starting_screen() {
+        assert_eq!(lesson_origin(Screen::Learn, true, Screen::Today), Screen::Today);
+        assert_eq!(lesson_origin(Screen::Learn, true, Screen::Study), Screen::Study);
+        assert_eq!(lesson_origin(Screen::Learn, false, Screen::Today), Screen::Learn);
+        assert_eq!(lesson_origin(Screen::Study, true, Screen::Today), Screen::Study);
     }
 
     #[test]

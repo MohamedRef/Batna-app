@@ -361,11 +361,7 @@ fn Stage(
 
 /// A completed lesson always offers exactly one primary next action.
 fn summary_return_class(has_follow_up: bool) -> &'static str {
-    if has_follow_up {
-        "btn-link"
-    } else {
-        "btn btn-primary"
-    }
+    if has_follow_up { "btn-link" } else { "btn btn-primary" }
 }
 
 #[component]

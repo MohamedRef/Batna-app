@@ -189,7 +189,7 @@ fn Hero(
     nothing: bool,
     minutes: u32,
 ) -> Element {
-    let mut ui = use_context::<Ui>();
+    let ui = use_context::<Ui>();
     let review = use_review();
     let ready = due + new_today > 0;
     // The card's one job: start the session, or with nothing due, the next lesson.
@@ -562,9 +562,7 @@ mod hierarchy_tests {
         ];
         let positions: Vec<usize> = sections
             .iter()
-            .map(|section| {
-                today.find(section).unwrap_or_else(|| panic!("Missing Today section: {section}"))
-            })
+            .map(|section| today.find(section).unwrap_or_else(|| panic!("Missing Today section: {section}")))
             .collect();
         assert!(positions.windows(2).all(|pair| pair[0] < pair[1]));
         assert_eq!(today.matches("Tile {").count(), 2);

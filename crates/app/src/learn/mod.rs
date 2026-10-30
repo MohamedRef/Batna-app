@@ -214,14 +214,47 @@ static QUERY: GlobalSignal<String> = Signal::global(String::new);
 /// Where an unfinished lesson stands on this device: the step it reopens at
 /// (0-based), read from the player's saved position (`player.rs`).
 pub fn resume_step(id: &str) -> Option<usize> {
+    part_way(id).map(|(at, _)| at)
+}
+
+/// An unfinished lesson's saved attempt on this device: the step it reopens
+/// at and when the attempt began (0 in records saved before that was kept).
+fn part_way(id: &str) -> Option<(usize, i64)> {
     #[derive(Deserialize)]
     struct At {
         at: usize,
+        #[serde(default)]
+        started_ms: i64,
     }
     if mark(id).is_some() {
         return None;
     }
-    crate::store::shared().local_setting::<At>(&format!("lessonpos.{id}")).map(|p| p.at).filter(|at| *at > 0)
+    crate::store::shared()
+        .local_setting::<At>(&format!("lessonpos.{id}"))
+        .filter(|p| p.at > 0)
+        .map(|p| (p.at, p.started_ms))
+}
+
+/// The item started most recently; the first one wins a tie, so records
+/// without a start time fall back to book order.
+fn latest<T>(items: impl IntoIterator<Item = (T, i64)>) -> Option<T> {
+    items
+        .into_iter()
+        .fold(None, |best: Option<(T, i64)>, (t, ms)| match best {
+            Some((_, b)) if b >= ms => best,
+            _ => Some((t, ms)),
+        })
+        .map(|(t, _)| t)
+}
+
+/// The lesson left part-way most recently among `lessons`.
+fn left_off<'a>(lessons: impl IntoIterator<Item = &'a Lesson>) -> Option<&'a Lesson> {
+    latest(lessons.into_iter().filter_map(|l| part_way(&l.id).map(|(_, ms)| (l, ms))))
+}
+
+/// A lesson id's lecture (`hb.L01.lesson1` → `hb.L01`).
+fn lecture_of(lesson_id: &str) -> &str {
+    lesson_id.rsplit_once('.').map(|(lec, _)| lec).unwrap_or(lesson_id)
 }
 
 /// A lesson's state in words: finished, part-way, the next one, or new.
@@ -268,9 +301,14 @@ fn LessonList() -> Element {
     let done = in_view().filter(|(_, l)| mark(&l.id).is_some()).count();
     let next = next_lesson(&[]).filter(|l| focus::shows(&l.id));
     let next_id = next.map(|l| l.id.clone());
-    let next_lecture = next.and_then(|l| l.id.rsplit_once('.')).map(|(lec, _)| lec.to_string());
+    let next_lecture = next.map(|l| lecture_of(&l.id).to_string());
+    // Where the learner left off: its lecture opens first, and while another
+    // lecture is picked a card leads back to it.
+    let resume = left_off(in_view().map(|(_, l)| l));
+    let resume_lecture = resume.map(|l| lecture_of(&l.id).to_string());
     let shown = SHOWN()
         .filter(|id| lib.lessons.contains_key(id) && focus::shows(id))
+        .or(resume_lecture)
         .or(next_lecture)
         .or_else(|| {
             lib.index
@@ -316,6 +354,9 @@ fn LessonList() -> Element {
         if !q.is_empty() {
             Results { q: q.clone(), next_id: next_id.clone() }
         } else if let Some(shown) = shown {
+            if let Some(l) = resume.filter(|l| lecture_of(&l.id) != shown) {
+                Resume { id: l.id.clone() }
+            }
             Shown { id: shown.clone(), next_id: next_id.clone() }
             p { class: "note small", {tx::UNVERIFIED_NOTE} }
             if done == total && total > 0 {
@@ -380,6 +421,7 @@ fn Others(shown: String) -> Element {
                             Some(file) => {
                                 let n = file.lessons.len();
                                 let d = file.lessons.iter().filter(|l| mark(&l.id).is_some()).count();
+                                let started = file.lessons.iter().any(|l| resume_step(&l.id).is_some());
                                 rsx! {
                                     li { key: "{entry.id}",
                                         button {
@@ -394,7 +436,15 @@ fn Others(shown: String) -> Element {
                                             }
                                             span { class: "coll-main",
                                                 bdi { class: "coll-title", dir: "ltr", "{entry.title}" }
-                                                span { class: "coll-sub", {tx::lessons_n(n)} " · " {tx::done_of(d, n)} }
+                                                span { class: "coll-sub",
+                                                    {tx::lessons_n(n)}
+                                                    " · "
+                                                    {tx::done_of(d, n)}
+                                                    if started {
+                                                        " · "
+                                                        span { class: "ls-started", {tx::LESSON_STARTED} }
+                                                    }
+                                                }
                                                 span { class: "coll-extra", Meter { done: d, total: n } }
                                             }
                                             span { class: "coll-end coll-when-compact",
@@ -459,12 +509,10 @@ fn Shown(id: String, next_id: Option<String>) -> Element {
     let n = file.lessons.len();
     let d = file.lessons.iter().filter(|l| mark(&l.id).is_some()).count();
     let pct = (d * 100).checked_div(n).unwrap_or(0);
-    // This lecture's way in: the lesson part-way through, else the first unfinished.
-    let go = file
-        .lessons
-        .iter()
-        .find(|l| resume_step(&l.id).is_some())
-        .or_else(|| file.lessons.iter().find(|l| mark(&l.id).is_none()));
+    // This lecture's way in: the lesson left part-way most recently, else
+    // the first unfinished.
+    let go = left_off(&file.lessons).or_else(|| file.lessons.iter().find(|l| mark(&l.id).is_none()));
+    let go_at = go.and_then(|l| resume_step(&l.id)).zip(go.map(|l| l.steps.len()));
     let go_id = go.map(|l| l.id.clone());
     let cta_id = go_id.clone();
     let next = next_id.as_deref();
@@ -503,11 +551,14 @@ fn Shown(id: String, next_id: Option<String>) -> Element {
                         }
                     },
                     span { class: "ls-btn-label",
-                        {if resume_step(&l.id).is_some() || d > 0 { tx::CONTINUE } else { tx::START_FIRST }}
+                        {if go_at.is_some() || d > 0 { tx::CONTINUE } else { tx::START_FIRST }}
                         " · "
                         text::Line { text: l.title.clone() }
                     }
                     {crate::icons::arrow_go()}
+                }
+                if let Some((at, steps)) = go_at {
+                    span { class: "small ls-lec-at", {tx::resume_at(at + 1, steps)} }
                 }
             }
         }
@@ -516,6 +567,32 @@ fn Shown(id: String, next_id: Option<String>) -> Element {
             for (n , l) in rows {
                 LessonRow { key: "{l.id}", n, lesson: l.clone(), next: next.map(str::to_string) }
             }
+        }
+    }
+}
+
+/// The lesson left part-way, shown while another lecture is picked: one
+/// tap back to it, with its lecture and the step it reopens at.
+#[component]
+fn Resume(id: String) -> Element {
+    let ui = use_context::<Ui>();
+    let lib = Library::get();
+    let Some((_, l)) = lib.lesson(&id) else { return rsx! {} };
+    let Some(at) = resume_step(&id) else { return rsx! {} };
+    let steps = l.steps.len();
+    rsx! {
+        crate::ui::CardButton { class: "tap ls-now ls-resume",
+            onclick: move |_| open(ui, &id),
+            span { class: "ls-now-top",
+                span { class: "chip", "data-tone": "accent", {tx::LEFT_OFF_KICKER} }
+                span { class: "muted small ls-now-where",
+                    {tx::step_of(at + 1, steps)}
+                    span { class: "chev", aria_hidden: "true" }
+                }
+            }
+            strong { class: "ls-now-title", text::Line { text: l.title.clone() } }
+            span { class: "muted small", bdi { "{lib.crumb(lecture_of(&l.id))}" } }
+            Meter { done: at, total: steps }
         }
     }
 }
@@ -775,6 +852,28 @@ mod list_tests {
         assert_eq!(lesson_origin(Screen::Learn, true, Screen::Study), Screen::Study);
         assert_eq!(lesson_origin(Screen::Learn, false, Screen::Today), Screen::Learn);
         assert_eq!(lesson_origin(Screen::Study, true, Screen::Today), Screen::Study);
+    }
+
+    #[test]
+    fn left_off_is_the_latest_start_and_book_order_breaks_ties() {
+        assert_eq!(latest([("a", 5), ("b", 9), ("c", 7)]), Some("b"));
+        assert_eq!(latest([("a", 0), ("b", 0)]), Some("a"));
+        assert_eq!(latest::<&str>([]), None);
+        assert_eq!(lecture_of("hb.L01.lesson1"), "hb.L01");
+    }
+
+    #[test]
+    fn resume_card_only_leads_back_from_another_lecture() {
+        let source = include_str!("mod.rs");
+        let list = source
+            .split("fn LessonList(")
+            .nth(1)
+            .unwrap()
+            .split("pub(crate) const LECTURES_VIEW")
+            .next()
+            .unwrap();
+        assert!(list.contains("resume.filter(|l| lecture_of(&l.id) != shown)"));
+        assert!(list.contains(".or(resume_lecture)"));
     }
 
     #[test]

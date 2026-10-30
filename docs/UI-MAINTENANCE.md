@@ -182,3 +182,15 @@ An optional suggested rating is now explicitly marked with the word
 focus-independent ring. It remains only a suggestion; all four grades,
 their real FSRS intervals, review storage and retry/Undo semantics are
 unchanged. The label is absent when there is no recommendation.
+
+## Lessons list: continue where you left off (2026-10-30)
+
+The Lessons screen now opens on the lecture of the lesson left part-way
+most recently (the saved attempt's `started_ms`; records without one fall
+back to book order), before the next unfinished lecture. The picked
+lecture's Continue button names the step it reopens at. While another
+lecture is picked, a `.ls-now` card (the same markup as Today's) leads back
+to the part-way lesson, and lecture rows with a started lesson say so in
+their subline. Progress shown is only what is saved: finished-lesson marks
+and the player's saved step. No player, steps, FSRS, content or schema
+changes.

@@ -470,7 +470,8 @@ mod ux_tests {
         assert!(summary.contains("onclick: move |_| close(ui)"));
         let css = include_str!("learn.css");
         assert!(css.contains(
-            ".ls-nav :is(.btn, .btn-link), .ls-summary-actions button { min-block-size: var(--target); }"
+            ".ls-nav :is(.btn, .btn-link), .ls-summary-actions button { min-block-size: max(var(--target), var(--tap)); }"
         ));
+        assert!(css.contains(".ls-nav .btn-lg { min-block-size: max(var(--target), var(--tap-lg)); }"));
     }
 }

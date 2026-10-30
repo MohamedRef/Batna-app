@@ -37,7 +37,7 @@ pub fn QuestionView(
     let locked = onchoose.is_none();
     let quote = item.src.quote.clone();
     let primary = rsx! {
-        article { class: "q card",
+        crate::ui::Card { element: crate::ui::CardElement::Article, class: "q",
             // Once the answer shows, the lecture chip opens the lecture's
             // page. While a paper runs it stays a label, so a stray tap never
             // leaves the paper.
@@ -96,7 +96,7 @@ pub fn QuestionView(
     // The explanation: why for every option (wide windows), the book page,
     // the ✓ / ✎ / ✗ check and any guideline update.
     let secondary = rsx! {
-        div { class: "q-explain card",
+        crate::ui::Card { element: crate::ui::CardElement::Div, class: "q-explain",
             ol { class: "q-why-list", lang: "en", dir: "ltr",
                 for (orig, letter, _, reason, state) in rows {
                     li { key: "{orig}", "data-state": if matches!(state, "correct" | "missed") { "right" } else { state },

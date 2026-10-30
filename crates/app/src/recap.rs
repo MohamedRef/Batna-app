@@ -96,16 +96,16 @@ pub fn TodayRecap(due_left: usize, due_tomorrow: u32) -> Element {
     rsx! {
         // Both open the progress screen, where the numbers come from.
         if let Some(line) = line {
-            button {
-                class: "card tap recap-line",
+            crate::ui::CardButton {
+                class: "tap recap-line",
                 title: tx::OPEN_PROGRESS,
                 onclick: move |_| crate::stats::open(ui, crate::stats::Tab::Progress),
                 {line}
             }
         }
         if week.worth_showing() {
-            button {
-                class: "card tap recap-week",
+            crate::ui::CardButton {
+                class: "tap recap-week",
                 title: tx::OPEN_PROGRESS,
                 onclick: move |_| crate::stats::open(ui, crate::stats::Tab::Progress),
                 h2 { {tx::WEEK_TITLE} span { class: "chev", aria_hidden: "true" } }

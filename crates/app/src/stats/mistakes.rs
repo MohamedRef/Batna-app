@@ -23,7 +23,7 @@ pub fn Mistakes(data: Rc<StudyData>) -> Element {
     let ids = stats::mistakes_session(&groups);
     let find = |id: &str| data.lectures.iter().flat_map(|l| &l.items).find(|i| i.id == id);
     rsx! {
-        section { class: "card",
+        crate::ui::Card { class: "",
             h2 { {tx::MISTAKES_TITLE} }
             p { class: "muted small", {tx::MISTAKES_NOTE} }
             if groups.is_empty() {
@@ -33,7 +33,7 @@ pub fn Mistakes(data: Rc<StudyData>) -> Element {
             }
         }
         for g in groups.iter() {
-            section { class: "card mistake-group", key: "{g.lecture}-{g.title}",
+            crate::ui::Card { class: "mistake-group", key: "{g.lecture}-{g.title}",
                 h2 {
                     button {
                         class: "tap tap-plain mistake-topic",

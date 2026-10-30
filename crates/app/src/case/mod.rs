@@ -171,7 +171,7 @@ fn ItemList(kind: &'static str, on_open: EventHandler<String>) -> Element {
     rsx! {
         if kind == "case" { p { class: "muted", {tx::INTRO} } }
         if groups.iter().all(|(_, v)| v.is_empty()) {
-            p { class: "card muted", {empty} }
+            crate::ui::Card { element: crate::ui::CardElement::Paragraph, class: "muted", {empty} }
         } else {
             ViewBar { of: view }
         }
@@ -422,7 +422,7 @@ pub fn CasePlayer(item_id: String, on_back: EventHandler) -> Element {
                     }
                 }
                 if !done {
-                    section { class: "card case-step", key: "{k}", id: "case-q",
+                    crate::ui::Card { class: "case-step", key: "{k}", id: "case-q",
                         p { class: "small muted", "{tx::STEP} " span { class: "num-ltr", "{k + 1} / {total}" } }
                         bdi { class: "case-question", lang: "en", "{steps[k].question}" }
                         if !steps[k].options.is_empty() {

@@ -136,7 +136,7 @@ pub fn Player() -> Element {
                 }
             }
             if timed {
-                aside { class: "run-side card",
+                crate::ui::Card { element: crate::ui::CardElement::Aside, class: "run-side",
                     div { class: "navigator", role: "list",
                         for (i, done, flagged) in cells {
                             button {

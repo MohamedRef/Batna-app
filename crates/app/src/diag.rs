@@ -125,7 +125,7 @@ pub fn DiagnosticsCard() -> Element {
     let count = shown.read().len();
 
     rsx! {
-        section { class: "card",
+        crate::ui::Card { class: "",
             h2 { {tx::DIAG} }
             p { class: "muted small", {tx::DIAG_BODY} }
             if count == 0 {

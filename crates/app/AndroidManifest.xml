@@ -25,6 +25,11 @@
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Auto updates need network metering status and permission to request APK installs. -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <!-- Android 12+ may install silently once Batna is the installer of record. -->
+    <uses-permission android:name="android.permission.UPDATE_PACKAGES_WITHOUT_USER_ACTION" />
 
     <!-- Android 11+ package visibility: the app must be allowed to see installed
          text-to-speech engines (Samsung, Google) or TextToSpeech can't bind to one. -->

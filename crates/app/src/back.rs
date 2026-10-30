@@ -24,20 +24,14 @@ const BACK_JS: &str = r#"
 window.__batnaBackSend = (m) => dioxus.send(m);
 if (!window.__batnaBackInit) {
   window.__batnaBackInit = true;
-  let trapped = false;
-  // Set while we pop our own trap: that popstate isn't a Back press.
+  // Trust the real WebView history entry rather than a stale local flag.
+  // Each overlay and screen shares one synthetic entry, never an entry per layer.
   let untrapping = false;
   window.__batnaTrap = () => {
-    if (!trapped) {
-      history.pushState({ batna: true }, "");
-      trapped = true;
-    }
+    if (history.state?.batna !== true) history.pushState({ batna: true }, "");
   };
-  // Nowhere left to go back to (an overlay closed by tap on Today): drop
-  // the trap, so the next Back leaves Batna instead of doing nothing.
   window.__batnaUntrap = () => {
-    if (trapped) {
-      trapped = false;
+    if (history.state?.batna === true) {
       untrapping = true;
       history.back();
     }
@@ -47,10 +41,10 @@ if (!window.__batnaBackInit) {
       untrapping = false;
       return;
     }
-    trapped = false;
-    // The last visible one: a control hidden at this width doesn't count.
+    // The last *visible* Back control is topmost. Hidden Settings controls
+    // must not swallow Back while a full-screen update sheet is open.
     const targets = [...document.querySelectorAll('[data-back="true"]')]
-      .filter((e) => e.getClientRects().length > 0);
+      .filter((e) => !e.disabled && e.getClientRects().length > 0 && !e.closest('[hidden], [inert]'));
     const top = targets[targets.length - 1];
     if (top) {
       top.click();
@@ -109,16 +103,16 @@ impl Trail {
 
 /// Wires Back for the Shell. `overlay_open`: a sheet that Back should close
 /// is showing (it carries its own `data-back` control).
-pub fn use_back(ui: Ui, current: Screen, overlay_open: bool) {
+pub fn use_back(ui: Ui, current: Screen, back_layers: u8) {
     let trail = use_hook(|| Rc::new(RefCell::new(Trail::default())));
-    let armed = use_hook(|| Rc::new(Cell::new(None::<(Screen, bool)>)));
+    let armed = use_hook(|| Rc::new(Cell::new(None::<(Screen, u8)>)));
     let wants_trap = use_hook(|| Rc::new(Cell::new(false)));
 
     // Re-arm the trap whenever the screen or an overlay changes, or drop it
     // when there is nowhere left to go back to.
-    let can_back = trail.borrow_mut().visit(current) || overlay_open;
+    let can_back = trail.borrow_mut().visit(current) || back_layers != 0;
     wants_trap.set(can_back);
-    if armed.replace(Some((current, overlay_open))) != Some((current, overlay_open)) {
+    if armed.replace(Some((current, back_layers))) != Some((current, back_layers)) {
         document::eval(if can_back {
             "window.__batnaTrap && window.__batnaTrap();"
         } else {

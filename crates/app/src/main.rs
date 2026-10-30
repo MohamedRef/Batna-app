@@ -325,4 +325,3 @@ fn NavButton(screen: Screen, class: &'static str) -> Element {
         }
     }
 }
-}

@@ -385,7 +385,7 @@ pub fn CasePlayer(item_id: String, on_back: EventHandler) -> Element {
             div { class: "case-grid",
                 // What is known so far: the stem, every reveal up to this
                 // step, and each finished step's question and answer.
-                section { class: "card case-data",
+                crate::ui::Card { class: "case-data",
                     h2 { class: "label", {tx::KNOWN} }
                     bdi { class: "case-stem", lang: "en", "{stem}" }
                     for (i, s) in steps.iter().enumerate().take(k + 1) {
@@ -565,7 +565,7 @@ struct Recap {
         Grade::Again => tx::FEW_RIGHT,
     };
     rsx! {
-        section { class: "card case-summary",
+        crate::ui::Card { class: "case-summary",
             p { class: "case-score", bdi { class: "num-ltr", "{right} / {total}" } " " {tx::SCORE} }
             p { {message} }
             // The reasoning, step by step: the question, his answer, the

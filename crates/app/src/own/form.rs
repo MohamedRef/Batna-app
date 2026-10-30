@@ -320,7 +320,7 @@ pub fn OwnCardsCard(on_study: EventHandler<()>) -> Element {
     let mut confirm = use_signal(|| None::<String>);
     rsx! {
         style { {CSS.text()} }
-        section { class: "card own",
+        crate::ui::Card { class: "own",
             div { class: "own-head",
                 h2 { {tx::TITLE} }
                 if !cards.is_empty() {

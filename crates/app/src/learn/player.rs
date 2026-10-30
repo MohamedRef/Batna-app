@@ -252,7 +252,7 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                         aria_label: tx::NEXT,
                         title: tx::NEXT,
                         disabled: !can_go,
-                        aria_describedby: if needs_answer { "ls-gate-hint" } else { "" },
+                        aria_describedby: if needs_answer { Some("ls-gate-hint") } else { None },
                         onclick: move |_| go_next(i + 1),
                         {crate::icons::chevron(true)}
                     }
@@ -262,13 +262,15 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                         "data-nav": "next",
                         "aria-keyshortcuts": "Enter",
                         disabled: !can_go,
-                        aria_describedby: if needs_answer { "ls-gate-hint" } else { "" },
+                        aria_describedby: if needs_answer { Some("ls-gate-hint") } else { None },
                         onclick: move |_| go_next(i + 1),
                         {if i + 1 == n { tx::FINISH } else { tx::NEXT }}
                     }
                 }
+                // Screen readers only: the lesson page stays free of helper notes
+                // (Mohamed, 2026-10-29); the Skip button is the visible way on.
                 if needs_answer {
-                    p { id: "ls-gate-hint", class: "ls-gate small", role: "status", {tx::NAV_REQUIRED} }
+                    p { id: "ls-gate-hint", class: "ls-sr-only", {tx::NAV_REQUIRED} }
                 }
             }
         }
@@ -375,7 +377,14 @@ fn Summary(lesson: Lesson, right: u32, asked: u32) -> Element {
     rsx! {
         crate::ui::Card { class: "ls-summary",
             p { class: "ls-confetti", aria_hidden: "true", "🎉" }
-            h1 { {tx::DONE_TITLE} }
+            // The finished button is gone: land focus on the result.
+            h1 {
+                tabindex: "-1",
+                onmounted: move |e: MountedEvent| async move {
+                    let _ = e.set_focus(true).await;
+                },
+                {tx::DONE_TITLE}
+            }
             p { class: "muted", Line { text: lesson.title.clone() } }
             if asked > 0 {
                 p { class: "ls-score",
@@ -460,7 +469,7 @@ mod ux_tests {
         let production = source.split("/// Focused navigation regressions").next().unwrap();
         assert!(production.contains("let needs_answer = !can_go && ready.is_none()"));
         assert!(production.contains("aria_describedby: if needs_answer"));
-        assert!(production.contains("id: \"ls-gate-hint\""));
+        assert!(production.contains("id: \"ls-gate-hint\", class: \"ls-sr-only\""));
         assert!(tx::NAV_REQUIRED.contains(tx::SKIP));
     }
 
@@ -487,5 +496,29 @@ mod ux_tests {
             ".ls-nav :is(.btn, .btn-link), .ls-summary-actions button { min-block-size: max(var(--target), var(--tap)); }"
         ));
         assert!(css.contains(".ls-nav .btn-lg { min-block-size: max(var(--target), var(--tap-lg)); }"));
+    }
+
+    #[test]
+    fn in_step_controls_keep_48dp_targets() {
+        let css = include_str!("learn.css");
+        let rule = |sel: &str| -> String {
+            let at = css.find(&format!("\n{sel} {{")).unwrap_or_else(|| panic!("no rule for {sel}"));
+            css[at..].split('}').next().unwrap().to_string()
+        };
+        for sel in [".ls-tile", ".ls-bin-head", ".ls-cell-hidden"] {
+            assert!(rule(sel).contains("min-block-size: var(--target);"), "{sel}");
+        }
+        assert!(css.contains(".ls-chiplet { cursor: pointer; min-block-size: var(--target); }"));
+        assert!(css.contains(".ls-undo { min-block-size: var(--target); }"));
+        assert!(
+            css.contains(
+                ".ls-viewer-zoom .ls-arrow { inline-size: var(--target); block-size: var(--target);"
+            )
+        );
+        assert!(rule(".ls-retry").contains("min-block-size: max(var(--target), var(--tap));"));
+        // No 36/40/44px tap sizes left in the lesson player.
+        for small in ["min-height: 36px", "min-height: 44px", "min-block-size: 44px", "block-size: 44px"] {
+            assert!(!css.contains(small), "{small}");
+        }
     }
 }

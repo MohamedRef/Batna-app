@@ -157,6 +157,7 @@ button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap
   padding-block: var(--sp-2);
   background: var(--bg);
 }
+.ls-summary h1:focus { outline: none; }
 .ls-close {
   flex: none;
   inline-size: var(--target);
@@ -303,9 +304,16 @@ button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap
 .ls-nav :is(.btn, .btn-link), .ls-summary-actions button { min-block-size: max(var(--target), var(--tap)); }
 .ls-nav .btn-lg { min-block-size: max(var(--target), var(--tap-lg)); }
 .ls-nav .ls-next { margin-inline-start: auto; min-inline-size: 8rem; }
-/* What the step still needs while Continue is off. */
-.ls-gate { flex: 1 0 100%; margin: 0; text-align: center; color: var(--muted); }
-.ls-retry { align-self: flex-start; font-size: 1.35rem; }
+/* Read to screen readers only (what the step needs while Continue is off). */
+.ls-sr-only {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.ls-retry { align-self: flex-start; font-size: 1.35rem; min-inline-size: max(var(--target), var(--tap)); min-block-size: max(var(--target), var(--tap)); }
 .ls-before { display: flex; flex-direction: column; gap: var(--sp-2); }
 .ls-before > p { margin: 0; }
 .ls-key-line { font-weight: 700; }
@@ -367,7 +375,7 @@ button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap
 }
 .ls-viewer-title { flex: 1; min-inline-size: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .ls-viewer-zoom { display: flex; gap: var(--sp-2); margin-inline-start: auto; }
-.ls-viewer-zoom .ls-arrow { inline-size: 44px; block-size: 44px; font-size: 1.1rem; font-weight: 700; }
+.ls-viewer-zoom .ls-arrow { inline-size: var(--target); block-size: var(--target); font-size: 1.1rem; font-weight: 700; }
 .ls-viewer-scroll {
   flex: 1;
   min-block-size: 0;
@@ -451,7 +459,7 @@ button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap
   cursor: pointer;
   transition: transform var(--dur) var(--ease), background var(--dur) var(--ease);
 }
-.ls-mn-key[aria-pressed="true"] { background: var(--accent); color: var(--surface); transform: translateY(-2px); }
+.ls-mn-key[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); transform: translateY(-2px); }
 .ls-mn-word { text-align: center; font-family: var(--font-latin); letter-spacing: 0.3em; color: var(--muted); font-weight: 700; }
 .ls-mn-lines { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
 .ls-mn-lines li { display: flex; gap: var(--sp-3); align-items: baseline; padding: 4px var(--sp-2); border-radius: 8px; }
@@ -504,7 +512,7 @@ button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap
   display: inline-flex;
   align-items: center;
   gap: var(--sp-2);
-  min-height: 44px;
+  min-block-size: var(--target);
   padding: var(--sp-2) var(--sp-3);
   border: 1.5px solid var(--line);
   border-radius: var(--radius-control, 13px);
@@ -521,7 +529,7 @@ button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap
 /* order: numbered slots that fill from the pool */
 .ls-order-bar { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-2); }
 .ls-order-count { color: var(--muted); font-variant-numeric: tabular-nums; }
-.ls-undo { min-block-size: 44px; }
+.ls-undo { min-block-size: var(--target); }
 .ls-undo:disabled { opacity: 0.4; text-decoration: none; cursor: default; }
 .ls-slots li[data-state="empty"] .ls-slot { min-block-size: 40px; }
 .ls-slots { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-2); }
@@ -558,7 +566,7 @@ button.ls-slot:hover { border-color: var(--accent); }
   place-items: center;
   border-radius: 50%;
   background: var(--accent);
-  color: var(--surface);
+  color: var(--on-accent);
   font-size: var(--fs-sm);
   font-weight: 700;
 }
@@ -586,7 +594,7 @@ button.ls-slot:hover { border-color: var(--accent); }
   background: none;
   font-weight: 800;
   padding: var(--sp-1);
-  min-height: 36px;
+  min-block-size: var(--target);
   cursor: pointer;
   text-align: center;
 }
@@ -607,7 +615,7 @@ button.ls-slot:hover { border-color: var(--accent); }
   font-size: var(--fs-sm);
   color: var(--text);
 }
-.ls-chiplet { cursor: pointer; min-block-size: 36px; }
+.ls-chiplet { cursor: pointer; min-block-size: var(--target); }
 .ls-bin-cards li[data-state="right"] .ls-chiplet-done { border-color: var(--good); background: var(--good-soft); }
 .ls-bin-cards li[data-state="wrong"] .ls-chiplet-done { border-color: var(--bad); background: var(--bad-soft); }
 .ls-sort > .btn, .ls-order .btn, .ls-case .btn { align-self: start; }
@@ -636,7 +644,7 @@ button.ls-slot:hover { border-color: var(--accent); }
 .ls-table tbody th { position: sticky; inset-inline-start: 0; z-index: 1; overflow-wrap: anywhere; min-inline-size: 6rem; }
 .ls-cell-hidden {
   inline-size: 100%;
-  min-height: 36px;
+  min-block-size: var(--target);
   border: 1.5px dashed var(--accent);
   border-radius: 8px;
   background: var(--surface);

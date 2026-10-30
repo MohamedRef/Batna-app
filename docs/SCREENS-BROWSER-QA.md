@@ -56,16 +56,8 @@ out of the failures but stay listed in the log and `report.json`; anything new
 fails. An entry nothing matches any more prints a warning: remove it with its
 fix.
 
-| Gap | Where |
-|---|---|
-| Book page chip (`.tap-chip`) 28–35px | Study items |
-| "Open the lesson" link (`.ls-explain`) 26–45px | Study items |
-| Hidden table cell under `--tap` | Study |
-| No heading on a running item | Study |
-
-Seen in the screenshots, not asserted: the study item's "open the lesson"
-button (`.st-link`) has no style of its own on the Study screen, so it shows
-as a plain grey button.
+All gaps found on 2026-10-30 were fixed in #540, #541 and #542; the list is
+empty, so every check above applies everywhere.
 
 ## Run
 

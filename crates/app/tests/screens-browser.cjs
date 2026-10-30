@@ -25,15 +25,11 @@ const FLOOR = { learn: 'var(--target)', study: 'min(var(--tap), var(--target))' 
 // its fix; an entry nothing matches any more is reported as stale.
 const KNOWN = {
   // [screen, selector]: controls still under the screen's floor.
-  small: [
-    ['study', '.tap-chip'],
-    ['study', '.ls-explain'],
-    ['study', '.tb-reveal'], // hidden table cell
-  ],
+  small: [],
   // States whose controls or content are wider than the screen.
   overflow: [],
   // Running study items have no heading for screen readers to jump to.
-  noHeading: [{ screen: 'study', phase: 'running' }],
+  noHeading: [],
 };
 
 // Everything a finger or the keyboard can reach on screen, with the layout

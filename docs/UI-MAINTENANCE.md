@@ -268,3 +268,11 @@ At Larger text on a 320px phone the setup's lecture grid asked for a 15rem
 `min(15rem, 100%)`. The course-in-view chip (Lessons, Review, Questions)
 keeps the 48dp `--target` instead of 40px. Both leave the browser suite's
 known gaps.
+### Follow-up: study item heading, «اشرحهولي» and foot targets (2026-10-30)
+
+Each study item now has a screen-reader-only `h1` (its kind and lecture), so
+TalkBack and VoiceOver can jump between items; the visible chips are
+unchanged. «اشرحهولي» (`.st-link`) had no style on the Study screen and showed
+as a grey native button; it is now an accent text link with a 48dp target.
+The book-page chip in the item foot and the table's hidden-cell button keep
+the 48dp `--target`. These leave the browser suite's known gaps.

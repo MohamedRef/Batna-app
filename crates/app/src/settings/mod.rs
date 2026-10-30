@@ -7,6 +7,9 @@
 //! simply not listed.
 // adapted from kabar-app main: crates/app/src/settings/mod.rs
 
+#[cfg(test)]
+mod browser;
+
 mod about;
 mod data;
 mod look;

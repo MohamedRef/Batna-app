@@ -718,7 +718,7 @@ fn PendingCard(
 ) -> Element {
     let n = req.items.as_ref().map(Vec::len);
     rsx! {
-        section { class: "card st-pending", role: "alertdialog", aria_label: tx::PENDING_TITLE,
+        crate::ui::Card { class: "st-pending", role: "alertdialog", aria_label: tx::PENDING_TITLE,
             p { strong { {tx::PENDING_TITLE} } }
             p { class: "muted small", {tx::PENDING_BODY} }
             div { class: "st-actions",

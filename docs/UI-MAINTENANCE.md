@@ -22,7 +22,7 @@ latter must be updated through its storage operation.
 
 | Change | Owner | Effect |
 |---|---|---|
-| Card markup | `crates/app/src/ui.rs::Card` | Settings content surfaces using the component |
+| Card markup | `crates/app/src/ui.rs::Card`, `DivCard`, `CardButton` | All base-card surfaces; explicit native tags and attributes are retained |
 | Navigation row markup and semantics | `ui.rs::ActionRow` | All Settings section links |
 | Card radius, padding, border, shadow | `assets/main.css`: `--radius-card`, `--card-pad`, `--card-border`, `--card-shadow` | Normal cards and collection surfaces; Glossy remains an explicit variant |
 | Row layout, icon, title and detail | `assets/parts.css` | Every `.activity-row` |
@@ -90,9 +90,11 @@ Dioxus reactive observer. Native WebView layout still requires device QA.
    `study/mod.rs`, `case/mod.rs` and `store/backend.rs` have large workflow
    units. Extract pure decisions and focused stage components before
    replacing their APIs. Keep review scheduling and content checks separate.
-3. **Gradual primitive adoption.** This pass migrates the direct Settings
-   content and index. Other features still have hand-written `.card` markup:
-   shared CSS changes reach them, markup changes require migration.
+3. **Guard shared component reuse.** Base cards now use `ui::Card`, the
+   compatibility `DivCard` delegate or native `CardButton`. Use `CardElement`
+   for articles, list items, paragraphs and disclosure roots; pass existing ARIA,
+   data, IDs and typed event props. The source guard rejects new copied `.card`
+   markup. Specialized overlays keep their own component and styling category.
 4. **Native visual coverage.** Verify 384/600/840dp and wider windows,
    maximum interface size, Paper/Night/True black, keyboard, Android Back and
    nested sheets on actual WebViews. A browser fixture is a narrower check.

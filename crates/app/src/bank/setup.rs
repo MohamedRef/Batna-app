@@ -406,7 +406,7 @@ pub fn Setup() -> Element {
                     }
 
                     if advanced {
-                        section { class: "card bank-advanced", id: "bank-advanced",
+                        crate::ui::Card { class: "bank-advanced", id: "bank-advanced",
                             if several_lectures {
                                 h2 { class: "label", {tx::LECTURES} }
                                 for group in crate::content::Library::get().by_course(lectures, |(id, _)| id.as_str()) {

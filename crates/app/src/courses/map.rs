@@ -155,8 +155,8 @@ fn CourseTile(
     let whole = s.course.hours.trunc() as usize;
     rsx! {
         div { class: "cm-cell", "data-open": open,
-            button {
-                class: "tap card tile cm-tile",
+            crate::ui::CardButton {
+                class: "tap tile cm-tile",
                 "data-group": group_key(s.course.group),
                 "aria-expanded": open,
                 onclick: move |_| on_toggle.call(id.clone()),
@@ -175,7 +175,7 @@ fn CourseTile(
                 }
             }
             if open {
-                div { class: "cm-detail card", role: "region", aria_label: s.course.title.clone(),
+                crate::ui::Card { element: crate::ui::CardElement::Div, class: "cm-detail", role: "region", aria_label: s.course.title.clone(),
                     p { class: "small",
                         {group_label(s.course.group)}
                         if let Some(n) = s.course.semester {

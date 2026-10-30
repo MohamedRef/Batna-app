@@ -463,8 +463,8 @@ fn ProgressCard(p: Plan) -> Element {
     let share = |n: u32| if p.total == 0 { 0.0 } else { n as f32 * 100.0 / p.total as f32 };
     rsx! {
         // The per-lecture numbers behind these bars are on the progress tab.
-        button {
-            class: "card tap",
+        crate::ui::CardButton {
+            class: "tap",
             title: tx::PROGRESS_HINT,
             onclick: move |_| crate::stats::open(ui, crate::stats::Tab::Progress),
             h2 { {tx::PROGRESS} span { class: "chev", aria_hidden: "true" } }

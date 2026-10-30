@@ -61,8 +61,8 @@ pub fn PeriodHead(data: Rc<StudyData>) -> Element {
             }
         }
         // Retention opens the mistakes: what pulled it down.
-        button {
-            class: "card tap st-hero",
+        crate::ui::CardButton {
+            class: "tap st-hero",
             title: tx::RECALL_HINT,
             onclick: move |_| open(ui, Tab::Mistakes),
             span {
@@ -89,8 +89,8 @@ pub fn PeriodHead(data: Rc<StudyData>) -> Element {
             span { class: "chev", aria_hidden: "true" }
         }
         // Minutes per day; the planner shows what's ahead.
-        button {
-            class: "card tap st-activity",
+        crate::ui::CardButton {
+            class: "tap st-activity",
             title: tx::ACTIVITY_HINT,
             onclick: move |_| open(ui, Tab::Plan),
             span { class: "st-activity-head",

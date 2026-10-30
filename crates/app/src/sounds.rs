@@ -136,7 +136,7 @@ pub fn SoundSection() -> Element {
     let now = PREFS();
     let set = move |p: SoundPrefs| p.save();
     rsx! {
-        section { class: "card",
+        crate::ui::Card { class: "",
             h2 { {tx::TITLE} }
             p { class: "muted small", {tx::BODY} }
             h3 { {tx::SOUNDS} }

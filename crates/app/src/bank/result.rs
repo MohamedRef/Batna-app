@@ -84,7 +84,7 @@ pub fn Result() -> Element {
     );
 
     rsx! {
-        section { class: "card result",
+        crate::ui::Card { class: "result",
             h1 {
                 if paper.mode == Mode::Mock { {tx::MOCK_TITLE} } else { {tx::RESULT} }
             }
@@ -106,7 +106,7 @@ pub fn Result() -> Element {
         }
 
         if several_lectures {
-            section { class: "card",
+            crate::ui::Card { class: "",
                 h2 { {tx::BY_LECTURE} }
                 ScoreRows {
                     rows: lectures.into_iter().map(|(l, s)| (crate::content::Library::get().crumb(&l), s, l, None)).collect::<Vec<_>>(),
@@ -114,7 +114,7 @@ pub fn Result() -> Element {
             }
         }
         if !topics.is_empty() {
-            section { class: "card",
+            crate::ui::Card { class: "",
                 h2 { {tx::BY_TOPIC} }
                 ScoreRows {
                     rows: topics.into_iter().map(|(l, t, s)| (topic_title(&l, &t), s, l, Some(t))).collect::<Vec<_>>(),
@@ -144,7 +144,7 @@ pub fn Result() -> Element {
             }
         }
 
-        section { class: "card",
+        crate::ui::Card { class: "",
             h2 { {tx::REVIEW} }
             div { class: "chips",
                 for (value, label) in [(Show::All, tx::SHOW_ALL), (Show::Wrong, tx::SHOW_WRONG), (Show::Flagged, tx::SHOW_FLAGGED)] {

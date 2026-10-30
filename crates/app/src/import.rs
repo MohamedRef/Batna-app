@@ -222,7 +222,7 @@ pub fn ImportCard() -> Element {
     };
 
     rsx! {
-        section { class: "card",
+        crate::ui::Card { class: "",
             h2 { {tx::IMPORT_TITLE} }
             p { class: "muted small", {tx::IMPORT_BODY} }
             {body}

@@ -104,3 +104,20 @@ Dioxus reactive observer. Native WebView layout still requires device QA.
 
 No medical content, approvals, scheduling data, runtime service or dependency
 changes are needed for this UI pass.
+
+## Today dashboard hierarchy (2026-10-30)
+
+Today keeps the existing recommended study action, due/new sessions, exam
+plan, continuation and lecture progress. The visible hero CTA now calls the
+same action as its full-card tap directly, stopping event bubbling to avoid
+double navigation. Two stat tiles still open the exact due/new sessions;
+estimated minutes without an exam plan are a quiet link to the forecast.
+The plan's own workload estimate is not repeated beneath it.
+
+After the hero and counts come Continue Learning, in-progress lectures, and
+the existing recap. Bank and content-verification shortcuts remain under a
+native disclosure, with their original destinations and no new state.
+Below 840dp the complete lecture catalogue is browsed on the Lessons screen
+via Today's existing "All Lessons" action, not repeated at the foot of Today.
+From 840dp the existing lecture aside and sticky main column are retained.
+No course focus, saved views, scheduling, study records or content data change.

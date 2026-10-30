@@ -65,10 +65,23 @@
 .td-hero .session-start .muted { color: inherit; opacity: 0.85; }
 
 /* ---------- counts (shared .stat-tile) ---------- */
-.today-cols .stat-tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.today-cols .stat-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .stat-tile[data-accent="true"] { background: var(--accent-soft); border-color: transparent; }
 .stat-tile[data-accent="true"] .stat-num { color: var(--accent-ink); }
 .due-cases { align-self: start; }
+.td-estimate { align-self: start; display: inline-flex; align-items: center; gap: var(--sp-2); font-size: var(--fs-sm); }
+
+/* Secondary destinations remain accessible without pushing study down. */
+.td-extras-toggle { cursor: pointer; list-style: none; }
+.td-extras-toggle::-webkit-details-marker { display: none; }
+.td-extras-toggle::marker { content: ""; }
+.td-extras-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: var(--radius-control); }
+.td-extras .tap-list { margin-block-start: var(--sp-1); }
+
+/* The full lecture catalogue is on Lessons at phone and tablet widths. */
+@media (max-width: 839.98px) {
+  .today-cols > .tab-aside { display: none; }
+}
 
 .in-progress, .library-head { display: flex; flex-direction: column; gap: var(--sp-2); }
 button.library-note { border: 0; color: inherit; }

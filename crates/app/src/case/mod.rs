@@ -551,8 +551,10 @@ struct Recap {
     why: String,
 }
 
-/// The order a step's options are // Option ordering and visual answer states are shared with the case player.
- Vec<Recap>,
+// Option ordering and answer states live in `choices.rs`.
+#[component]
+fn Summary(
+    recap: Vec<Recap>,
     update: Option<String>,
     on_again: EventHandler,
     on_back: EventHandler,

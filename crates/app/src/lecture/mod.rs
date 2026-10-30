@@ -190,7 +190,7 @@ pub fn LecturePage(id: String) -> Element {
                     " › {tx::KICKER} {number}"
                 }
             }
-            section { class: "card lec-hero",
+            crate::ui::Card { class: "lec-hero",
                 div { class: "lec-head",
                     span { class: "num", "{number}" }
                     div { class: "lecture-main",

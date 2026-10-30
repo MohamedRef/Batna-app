@@ -208,7 +208,7 @@ pub fn Setup() -> Element {
     });
     if pool.is_empty() {
         return rsx! {
-            section { class: "card",
+            crate::ui::Card {
                 h1 { {tx::TITLE} }
                 h2 { class: "muted", {tx::EMPTY_TITLE} }
                 p { {tx::EMPTY_BODY} }
@@ -310,7 +310,7 @@ pub fn Setup() -> Element {
                 }
 
                 if mode == Mode::Mock {
-                    section { class: "card bank-preset",
+                    crate::ui::Card { class: "bank-preset",
                         span { class: "chip", "data-tone": "accent", {tx::MOCK_SCOPE_CHIP} }
                         h2 { class: "bank-scope", {all_lectures()} }
                         p { class: "muted small", {tx::MOCK_LEAD} }
@@ -333,7 +333,7 @@ pub fn Setup() -> Element {
                     }
                     p { class: "note bank-scope-note", {tx::MOCK_SCOPE_NOTE} }
                 } else {
-                    section { class: "card bank-preset",
+                    crate::ui::Card { class: "bank-preset",
                         // The scope is what the card shows: tapping it opens
                         // the lecture, topic and tag choices.
                         button {
@@ -540,7 +540,7 @@ fn History() -> Element {
         return rsx! {};
     }
     rsx! {
-        section { class: "card",
+        crate::ui::Card {
             h2 { {tx::HISTORY} }
             ol { class: "history", reversed: true,
                 // A paper opens to its score per lecture; each lecture opens its page.
@@ -586,7 +586,7 @@ fn Paused() -> Element {
     let answered = p.answers.iter().filter(|a| a.chosen.is_some()).count();
     let left = exam::remaining_ms(n, p.started_ms, now_ms());
     rsx! {
-        section { class: "card paused",
+        crate::ui::Card { class: "paused",
             h2 { {tx::PAUSED_TITLE} }
             p { class: "muted small",
                 "{tx::PAUSED_BODY} " bdi { "{answered}/{n}" }

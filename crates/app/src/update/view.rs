@@ -223,7 +223,7 @@ pub fn UpdatesSection() -> Element {
             }
         }
         div { class: "section-head", h2 { {tx::GROUP_CHECK} } }
-        section { class: "card",
+        crate::ui::Card {
             if let Some(off) = off {
                 p { class: "muted small", role: "status",
                     {match off {
@@ -265,7 +265,7 @@ pub fn UpdatesSection() -> Element {
             }
         }
         if let Some(s) = s.filter(|s| s.off.is_none()) {
-            section { class: "card",
+            crate::ui::Card {
                 h2 { {tx::MODE} DeviceOnly {} }
                 div { class: "choice-list", role: "radiogroup", aria_label: tx::MODE,
                     for m in Mode::ALL {
@@ -288,7 +288,7 @@ pub fn UpdatesSection() -> Element {
                 }
             }
             if s.prefs.mode != Mode::Off {
-                section { class: "card",
+                crate::ui::Card {
                     label { class: "update-toggle",
                         span { class: "update-toggle-text",
                             span { {tx::NOTIFY} DeviceOnly {} }
@@ -307,7 +307,7 @@ pub fn UpdatesSection() -> Element {
                     }
                 }
             }
-            section { class: "card",
+            crate::ui::Card {
                 h2 { {tx::CHANNEL} DeviceOnly {} }
                 if s.preview {
                     p { span { class: "chip", {tx::PREVIEW} } }
@@ -330,7 +330,7 @@ pub fn UpdatesSection() -> Element {
                 }
             }
         }
-        section { class: "card",
+        crate::ui::Card {
             p { class: "muted small", {tx::SAFETY} }
             p { class: "muted small", {tx::CONTENT} }
         }

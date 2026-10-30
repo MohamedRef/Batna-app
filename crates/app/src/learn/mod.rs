@@ -124,7 +124,7 @@ pub fn set_view(v: View) {
 pub fn ViewSection() -> Element {
     let now = VIEW();
     rsx! {
-        section { class: "card",
+        crate::ui::Card {
             h2 { {tx::VIEW_TITLE} }
             p { class: "muted small", {tx::VIEW_BODY} }
             div { class: "segmented", role: "radiogroup", aria_label: tx::VIEW_TITLE,

@@ -169,7 +169,7 @@ fn Setup() -> Element {
                 if lectures.is_empty() {
                     p { class: "note", {tx::EMPTY} }
                 } else {
-                    section { class: "card oral-setup",
+                    crate::ui::Card { class: "oral-setup",
                         label { class: "oral-field",
                             span { {tx::LECTURE} }
                             select {
@@ -440,7 +440,7 @@ fn Runner() -> Element {
             }
             crate::desk::Panes {
                 primary: rsx! {
-                    section { class: "card oral-question",
+                    crate::ui::Card { class: "oral-question",
                         h2 { class: "muted small", {tx::LISTEN} }
                         div { class: "en", dir: "ltr", lang: "en",
                             for (i, line) in p.question.iter().enumerate() {
@@ -500,7 +500,7 @@ fn Runner() -> Element {
                     }
                 },
                 secondary: revealed.then(|| rsx! {
-                    section { class: "card oral-answer",
+                    crate::ui::Card { class: "oral-answer",
                         h2 { class: "small", {tx::ANSWER} }
                         p { class: "muted small", {tx::TICK_HINT} }
                         // The model answer as a checklist he ticks against
@@ -677,7 +677,7 @@ fn Summary() -> Element {
     let t = s.tally.clone();
     drop(session);
     rsx! {
-        section { class: "card oral-summary",
+        crate::ui::Card { class: "oral-summary",
             h1 { {tx::DONE} }
             dl { class: "oral-tally",
                 div { dt { {tx::DONE_GOOD} } dd { "{t.good}" } }
@@ -687,7 +687,7 @@ fn Summary() -> Element {
                 }
             }
         }
-        section { class: "card",
+        crate::ui::Card {
             h2 { {tx::MISSED} }
             if t.missed.is_empty() {
                 p { class: "muted", {tx::NONE_MISSED} }

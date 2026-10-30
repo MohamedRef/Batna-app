@@ -80,7 +80,7 @@ pub fn Map() -> Element {
                     p { class: "page-sub", bdi { "{lib.program.title}" } }
                 }
             }
-            section { class: "card cm-hours",
+            crate::ui::Card { class: "cm-hours",
                 svg {
                     class: "cm-ring",
                     view_box: "0 0 104 104",

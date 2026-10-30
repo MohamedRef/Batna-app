@@ -110,7 +110,7 @@ pub fn DeviceSettings(section: Section) -> Element {
     let set = move |f: &dyn Fn(&mut crate::prefs::DevicePrefs)| ui.update_prefs(f);
     let tablet = section == Section::Tablet;
     rsx! {
-        section { class: "card desk-settings",
+        crate::ui::Card { class: "desk-settings",
             h2 { {tx::NAV_STYLE} DeviceOnly {} }
             div { class: "desk-segment", role: "radiogroup", aria_label: tx::NAV_STYLE,
                 for (style, label) in [(NavStyle::Labels, tx::NAV_LABELS), (NavStyle::Slim, tx::NAV_SLIM)] {
@@ -124,7 +124,7 @@ pub fn DeviceSettings(section: Section) -> Element {
                 }
             }
         }
-        section { class: "card desk-settings",
+        crate::ui::Card { class: "desk-settings",
             h2 { {htx::TITLE} DeviceOnly {} }
             if tablet {
                 Toggle {

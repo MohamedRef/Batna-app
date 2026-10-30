@@ -11,13 +11,14 @@ mod enumerate;
 mod essay;
 pub mod grade;
 mod item;
+mod planning;
 
 use std::collections::{BTreeSet, HashMap, HashSet};
 use std::time::Instant;
 
 use batna_core::content::{Item, Lecture};
 use batna_core::review::{Grade, Origin, ReviewEvent};
-use batna_core::session::{Inputs, Planned, Session, compose};
+use batna_core::session::Session;
 use dioxus::prelude::*;
 
 pub(crate) use backend::use_store;
@@ -30,6 +31,7 @@ use crate::i18n::study as tx;
 use crate::look::{Css, css};
 use backend::now_ms;
 use item::short_text;
+use planning::{plan, plan_items};
 
 pub(crate) const STUDY_CSS: Css = css!("assets/study.css");
 const MINUTES: [u32; 4] = [5, 10, 15, 20];
@@ -107,48 +109,6 @@ fn due_elsewhere(store: &StudyStoreHandle) -> usize {
         .iter()
         .filter(|id| !in_view(batna_core::program::lecture_of(id)) && !s.is_hidden(id))
         .count()
-}
-
-fn plan(
-    store: &StudyStoreHandle,
-    lectures: &[&Lecture],
-    topics: &HashSet<String>,
-    minutes: u32,
-) -> Vec<Planned> {
-    let now = now_ms();
-    let s = store.0.borrow();
-    let all = lectures.iter().flat_map(|l| l.items.iter());
-    let seen: HashSet<String> = all.clone().filter(|i| !s.is_new(&i.id)).map(|i| i.id.clone()).collect();
-    let hidden: HashSet<String> = all.filter(|i| s.is_hidden(&i.id)).map(|i| i.id.clone()).collect();
-    compose(&Inputs {
-        lectures,
-        topics,
-        kinds: PLAYABLE,
-        due: &s.due(now),
-        seen: &seen,
-        hidden: &hidden,
-        max_new: crate::plan::new_left_today(&*s, now),
-        budget_secs: minutes * 60,
-    })
-}
-
-/// A session on exactly the given items, in order, skipping duplicates and
-/// anything this player can't show or the learner hid.
-fn plan_items(store: &StudyStoreHandle, ids: &[String]) -> Vec<Planned> {
-    let s = store.0.borrow();
-    let mut seen = HashSet::new();
-    ids.iter()
-        .filter(|id| seen.insert(id.as_str()))
-        .filter_map(|id| find(id))
-        .filter(|(_, i)| PLAYABLE.contains(&i.body.kind()) && !s.is_hidden(&i.id))
-        .map(|(l, i)| Planned {
-            item_id: i.id.clone(),
-            lecture: l.lecture.clone(),
-            topic: i.topic.as_ref().map_or_else(|| l.lecture.clone(), |t| format!("{}/{t}", l.lecture)),
-            est_secs: batna_core::session::estimate_secs(&i.body),
-            fresh: s.is_new(&i.id),
-        })
-        .collect()
 }
 
 static SESSION: GlobalSignal<Session> = Signal::global(Session::default);
@@ -309,7 +269,7 @@ pub fn Study() -> Element {
 
     let body = match phase() {
         Phase::Setup if ready.is_empty() => rsx! {
-            section { class: "card",
+            crate::ui::Card {
                 h1 { {tx::TITLE} }
                 p { {tx::EMPTY_LIBRARY} }
             }
@@ -519,7 +479,7 @@ fn Setup(
     let all_ids: Vec<String> = ready.iter().map(|(id, _)| id.clone()).collect();
     let all_chosen = chosen.read().len() == all_ids.len();
     rsx! {
-        section { class: "card st-setup",
+        crate::ui::Card { class: "st-setup",
             // Tablet landscape and the Mac: the time and Start stay in view
             // beside the lecture and topic picker.
             div { class: "tab-cols", "data-wide": "aside",
@@ -650,7 +610,7 @@ fn SummaryView(
     on_again: EventHandler<()>,
 ) -> Element {
     rsx! {
-        section { class: "card st-summary",
+        crate::ui::Card { class: "st-summary",
             h1 { {if items == 0 { tx::SUMMARY_EMPTY } else { tx::SUMMARY_TITLE }} }
             if items > 0 {
                 dl { class: "st-stats",

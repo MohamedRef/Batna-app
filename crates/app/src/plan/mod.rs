@@ -204,7 +204,7 @@ fn Setup(today: Day, settings: PlanSettings, on_done: EventHandler<()>) -> Eleme
         on_done.call(());
     };
     rsx! {
-        section { class: "card plan-setup",
+        crate::ui::Card { class: "plan-setup",
             h2 { {tx::SETUP_TITLE} }
             p { class: "muted", {tx::SETUP_BODY} }
             label { class: "field",
@@ -286,7 +286,7 @@ fn StatusCard(p: Plan, exam: Option<Day>) -> Element {
     };
     let tight = matches!(p.status, PlanStatus::Tight { .. });
     rsx! {
-        section { class: "card plan-status",
+        crate::ui::Card { class: "plan-status",
             if let Some(exam) = exam {
                 h2 { "{tx::EXAM_ON}: {long_date(exam)}" }
             }
@@ -318,7 +318,7 @@ fn TodayCard(p: Plan) -> Element {
     if today.focus == Focus::Rest {
         let next = p.next_study_day();
         return rsx! {
-            section { class: "card plan-today",
+            crate::ui::Card { class: "plan-today",
                 h2 { {tx::TODAY} }
                 p { {tx::REST_TODAY} }
                 if let Some(next) = next {
@@ -328,7 +328,7 @@ fn TodayCard(p: Plan) -> Element {
         };
     }
     rsx! {
-        section { class: "card plan-today",
+        crate::ui::Card { class: "plan-today",
             h2 { "{tx::TODAY}: {focus_label(today.focus)}" }
             div { class: "summary",
                 // Both start today's session: on today's lectures, or on everything due.
@@ -395,7 +395,7 @@ fn LoadCard(p: Plan, cap: u32) -> Element {
     });
     let peak = days.iter().max_by_key(|(_, l)| l.reviews + l.new).map(|(d, l)| (*d, l.reviews + l.new));
     rsx! {
-        section { class: "card chart-card",
+        crate::ui::Card { class: "chart-card",
             h2 { {tx::LOAD_TITLE} }
             div { class: "chart-box", dangerous_inner_html: "{svg}" }
             div { class: "chart-key small muted",
@@ -439,7 +439,7 @@ fn PaceCard(p: Plan, past: Vec<(i32, u32)>) -> Element {
         tx::PACE_LABEL,
     );
     rsx! {
-        section { class: "card chart-card",
+        crate::ui::Card { class: "chart-card",
             h2 { {tx::PACE_TITLE} }
             div { class: "chart-box", dangerous_inner_html: "{svg}" }
             div { class: "chart-key small muted",
@@ -484,7 +484,7 @@ fn WeekCard(p: Plan) -> Element {
     let week: Vec<DayPlan> = p.days.iter().skip(1).take(7).cloned().collect();
     let rest: Vec<DayPlan> = p.days.iter().skip(8).cloned().collect();
     rsx! {
-        section { class: "card",
+        crate::ui::Card {
             h2 { {tx::WEEK} }
             ol { class: "plan-days",
                 for d in week {

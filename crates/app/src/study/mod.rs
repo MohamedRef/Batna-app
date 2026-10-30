@@ -363,6 +363,7 @@ pub fn Study() -> Element {
                             div { class: "progress st-bar", "data-tone": "good", role: "progressbar",
                                 aria_valuemin: "0", aria_valuemax: "{len}", aria_valuenow: "{pos}",
                                 aria_label: "{pos + 1} {tx::OF} {len}",
+                                aria_valuetext: "{pos + 1} {tx::OF} {len}",
                                 div { class: "progress-fill", style: "inline-size: {pos * 100 / len.max(1)}%" }
                             }
                             span { class: "muted small num-ltr st-count", "{pos + 1} / {len}" }

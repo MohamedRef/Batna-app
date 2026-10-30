@@ -16,7 +16,14 @@ pub(super) fn SummaryView(
 ) -> Element {
     rsx! {
         crate::ui::Card { class: "st-summary",
-            h1 { {if items == 0 { tx::SUMMARY_EMPTY } else { tx::SUMMARY_TITLE }} }
+            // The last grade button is gone: land focus on the result.
+            h1 {
+                tabindex: "-1",
+                onmounted: move |e: MountedEvent| async move {
+                    let _ = e.set_focus(true).await;
+                },
+                {if items == 0 { tx::SUMMARY_EMPTY } else { tx::SUMMARY_TITLE }}
+            }
             if items > 0 {
                 dl { class: "st-stats",
                     div { dt { {tx::SUM_ITEMS} } dd { "{items}" } }

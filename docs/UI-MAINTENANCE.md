@@ -146,3 +146,13 @@ use 48dp minimum touch heights independently of the compact button token.
 The summary's return-to-list button also participates in the shared Android
 Back controller, so Back exits the finished lesson instead of skipping past
 its origin. Actual gesture and screen-reader behavior still need device QA.
+
+### Follow-up: clean page and in-step targets (2026-10-30)
+
+The "complete this step or skip it" explanation is read to screen readers
+only (`.ls-sr-only`, referenced by the disabled Continue). The visible page
+stays free of helper notes, as Mohamed asked on 2026-10-29; the visible
+Skip button is the way on. In-step controls (tiles, sort bins and chips,
+hidden table cells, order Undo, retry, image zoom) use the shared 48dp
+`--target`. Text on solid accent fills uses `--on-accent`. The finished
+summary takes focus on its heading so screen readers announce the result.

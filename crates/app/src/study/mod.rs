@@ -309,7 +309,7 @@ pub fn Study() -> Element {
 
     let body = match phase() {
         Phase::Setup if ready.is_empty() => rsx! {
-            section { class: "card",
+            crate::ui::Card {
                 h1 { {tx::TITLE} }
                 p { {tx::EMPTY_LIBRARY} }
             }
@@ -519,7 +519,7 @@ fn Setup(
     let all_ids: Vec<String> = ready.iter().map(|(id, _)| id.clone()).collect();
     let all_chosen = chosen.read().len() == all_ids.len();
     rsx! {
-        section { class: "card st-setup",
+        crate::ui::Card { class: "st-setup",
             // Tablet landscape and the Mac: the time and Start stay in view
             // beside the lecture and topic picker.
             div { class: "tab-cols", "data-wide": "aside",
@@ -650,7 +650,7 @@ fn SummaryView(
     on_again: EventHandler<()>,
 ) -> Element {
     rsx! {
-        section { class: "card st-summary",
+        crate::ui::Card { class: "st-summary",
             h1 { {if items == 0 { tx::SUMMARY_EMPTY } else { tx::SUMMARY_TITLE }} }
             if items > 0 {
                 dl { class: "st-stats",

@@ -1,4 +1,4 @@
-//! Settings › Look: colours, the Calm/Glossy style and text size, per device.
+//! Settings › Look: colour themes, appearance styles and text size, per device.
 
 use batna_core::theme::Theme;
 use dioxus::prelude::*;
@@ -25,6 +25,7 @@ fn appearance_label(a: Appearance) -> (&'static str, &'static str) {
     match a {
         Appearance::Calm => (tx::APPEARANCE_CALM, tx::APPEARANCE_CALM_SUB),
         Appearance::Glossy => (tx::APPEARANCE_GLOSSY, tx::APPEARANCE_GLOSSY_SUB),
+        Appearance::LiquidGlass => (tx::APPEARANCE_LIQUID_GLASS, tx::APPEARANCE_LIQUID_GLASS_SUB),
     }
 }
 
@@ -87,7 +88,7 @@ pub fn LookSection() -> Element {
                         span { class: "appearance-swatch", "data-swatch": a.as_str(), aria_hidden: "true" }
                         span { class: "choice-text",
                             span { class: "choice-title",
-                                if a == Appearance::Glossy {
+                                if matches!(a, Appearance::Glossy | Appearance::LiquidGlass) {
                                     bdi { {appearance_label(a).0} }
                                 } else {
                                     {appearance_label(a).0}

@@ -83,7 +83,7 @@
   border: 1px solid var(--line);
   background: linear-gradient(135deg, var(--sw-a) 50%, var(--sw-b) 50%);
 }
-/* Calm or Glossy: a small card in each style. */
+/* Preview each appearance without changing the colour theme. */
 .appearance-swatch {
   flex: none; inline-size: 2.25rem; block-size: 2.25rem; border-radius: 10px;
   border: 1px solid var(--line); background: var(--surface);
@@ -92,6 +92,15 @@
   border-radius: 50%; border-color: color-mix(in srgb, var(--accent) 30%, var(--line));
   background: linear-gradient(150deg, color-mix(in srgb, var(--accent-soft) 60%, var(--glass-white, white)), var(--accent-soft) 55%, var(--accent));
   box-shadow: inset 0 1px 0 color-mix(in srgb, var(--glass-white, white) 45%, transparent);
+}
+.appearance-swatch[data-swatch="liquid-glass"] {
+  border-radius: var(--radius-pill);
+  border-color: color-mix(in srgb, var(--accent) 28%, var(--line));
+  background: linear-gradient(145deg,
+    color-mix(in srgb, var(--surface) 72%, var(--glass-white, white)),
+    color-mix(in srgb, var(--accent-soft) 72%, var(--surface)));
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--glass-white, white) 55%, transparent),
+    0 3px 8px rgb(0 0 0 / 0.1);
 }
 .text-sample { background: var(--bg); border-radius: var(--radius); padding: var(--sp-3) var(--sp-4); }
 .path { font-family: ui-monospace, monospace; font-size: var(--fs-sm); overflow-wrap: anywhere; }

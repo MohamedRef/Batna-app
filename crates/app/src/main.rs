@@ -62,6 +62,7 @@ const MAIN_CSS: Css = css!("assets/main.css");
 const SHAPE_CSS: Css = css!("assets/shape.css");
 const PARTS_CSS: Css = css!("assets/parts.css");
 const APPEARANCE_CSS: Css = css!("assets/appearance.css");
+const LIQUID_GLASS_CSS: Css = css!("assets/liquid-glass.css");
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Screen {
@@ -205,14 +206,15 @@ fn App() -> Element {
         style { {PARTS_CSS.text()} }
         style { {APPEARANCE_CSS.text()} }
         style { {sheet::CSS.text()} }
+        style { {LIQUID_GLASS_CSS.text()} }
         style { {look} }
         desk::Chrome {}
         div {
             class: "app",
             lang: "ar",
             dir: "rtl",
-            // Calm or Glossy (Settings › Look): only CSS keys on it, so a
-            // switch keeps every screen's state (assets/appearance.css).
+            // Changing appearance only switches CSS; navigation state, input,
+            // and scroll position stay mounted (assets/liquid-glass.css).
             "data-appearance": ui.prefs.read().appearance.as_str(),
             "data-focus": if *ui.focus.read() { "true" } else { "false" },
             header { class: "topbar",

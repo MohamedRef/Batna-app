@@ -141,3 +141,8 @@ markup so all three layouts work without per-layout code.
   sticky action bar. `.tab-grid` and `.tab-cols` rows are `max-content`
   and start-aligned, so a short card never stretches and a tall one never
   collapses.
+
+## Maintenance and shared primitives
+
+See [UI-MAINTENANCE.md](UI-MAINTENANCE.md) for the code review, shared Card
+and ActionRow components, Settings search and the remaining improvements.

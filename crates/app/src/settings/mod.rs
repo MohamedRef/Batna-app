@@ -12,11 +12,13 @@ mod data;
 mod look;
 #[cfg(all(feature = "desktop", not(target_os = "android")))]
 pub mod menu;
+mod search;
 
 use dioxus::prelude::*;
 
 use crate::i18n::settings as tx;
 use crate::look::{Css, css};
+use crate::ui::{ActionRow, Card};
 
 const SETTINGS_CSS: Css = css!("assets/settings.css");
 
@@ -103,6 +105,24 @@ impl Section {
             Self::About => tx::ABOUT_SUB,
         }
     }
+    fn matches(self, query: &str) -> bool {
+        let keywords = match self {
+            Self::Study => {
+                "study review daily limit fsrs sounds vibration onboarding مذاكرة مراجعة حد يومي صوت اهتزاز ترحيب"
+            }
+            Self::Reminders => "notifications permission quiet hours اشعارات تنبيهات اذونات هدوء مواعيد",
+            Self::Sync => "google sign in account cloud devices جوجل دخول حساب مزامنة أجهزة",
+            Self::Look => "theme font text size appearance calm glossy ثيم خط حجم ألوان شكل",
+            Self::Tablet => "pen hover sidebar navigation قلم قائمة تابلت",
+            Self::Mac => "keyboard shortcuts mouse hover sidebar كيبورد اختصارات ماوس قائمة",
+            Self::Data => {
+                "backup restore export import anki diagnostics نسخة احتياطية استرجاع تصدير استيراد تشخيص"
+            }
+            Self::Updates => "version download install changelog اصدار نسخة تنزيل تثبيت جديد",
+            Self::About => "version content book source اصدار نسخة محتوى كتاب مصدر",
+        };
+        search::matches(query, &format!("{} {} {} {keywords}", self.id(), self.title(), self.summary()))
+    }
 }
 
 /// Whether the sheet is open and on which section. `section: None` is the
@@ -111,6 +131,7 @@ impl Section {
 pub struct SettingsNav {
     pub open: Signal<bool>,
     pub section: Signal<Option<Section>>,
+    query: Signal<String>,
 }
 
 impl SettingsNav {
@@ -120,10 +141,12 @@ impl SettingsNav {
         Self {
             open: Signal::new(start.is_some()),
             section: Signal::new(start.as_deref().and_then(Section::from_id)),
+            query: Signal::new(String::new()),
         }
     }
 
     pub fn show(mut self, section: Option<Section>) {
+        self.query.set(String::new());
         self.section.set(section);
         self.open.set(true);
     }
@@ -137,39 +160,10 @@ impl SettingsNav {
 #[component]
 pub fn SettingsSheet() -> Element {
     let nav = use_context::<SettingsNav>();
-    // The Updates row says where things stand, not only what it holds.
-    let updates = crate::update::view::use_update_status();
-    // Escape steps back out of a section on the phone, else closes. Listened
-    // for on the document: WebKit doesn't focus buttons on click.
-    use_future(move || async move {
-        let mut eval = document::eval(
-            r#"
-            if (!window.__batnaSettingsEsc) {
-              window.__batnaSettingsEsc = true;
-              document.addEventListener("keydown", (e) => {
-                if (e.key === "Escape" && document.querySelector(".settings-window")) {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  dioxus.send(window.matchMedia("(max-width: 599.98px)").matches);
-                }
-              }, true);
-            }
-            await new Promise(() => {});
-            "#,
-        );
-        let mut section = nav.section;
-        while let Ok(compact) = eval.recv::<bool>().await {
-            if compact && section.peek().is_some() {
-                section.set(None);
-            } else {
-                nav.close();
-            }
-        }
-    });
     if !*nav.open.read() {
         return rsx! {};
     }
-    let chosen = *nav.section.read();
+    let chosen = nav.section.read().filter(|s| s.applies());
     // Phones show the list until a section is picked; wider windows show both.
     let current = chosen.unwrap_or(Section::ALL[0]);
     let drilled = chosen.is_some();
@@ -185,8 +179,8 @@ pub fn SettingsSheet() -> Element {
             aria_labelledby: "settings-title",
             tabindex: "-1",
             "data-drilled": if drilled { "true" } else { "false" },
-            onmounted: move |e: MountedEvent| async move {
-                let _ = e.set_focus(true).await;
+            onmounted: move |_| {
+                document::eval(include_str!("../../assets/settings-dialog.js"));
             },
             header { class: "settings-head",
                 h2 { id: "settings-title",
@@ -212,27 +206,78 @@ pub fn SettingsSheet() -> Element {
                 }
             }
             div { class: "settings-body",
-                nav { class: "settings-sections", aria_label: tx::SECTIONS,
-                    for s in Section::ALL.into_iter().filter(|s| s.applies()) {
-                        button {
-                            key: "{s.id()}",
-                            aria_current: if current == s { "true" } else { "false" },
-                            onclick: move |_| section_sig.set(Some(s)),
-                            span { class: "row-icon", aria_hidden: "true", {crate::icons::section(s.id())} }
-                            span { class: "ss-text",
-                                span { class: "ss-title", {s.title()} }
-                                span { class: "ss-sub",
-                                    match updates.read().as_ref().filter(|_| s == Section::Updates).and_then(crate::update::view::summary) {
-                                        Some(live) => rsx! { "{live}" },
-                                        None => rsx! { {s.summary()} },
+                SectionList { current }
+                div { class: "settings-pane", key: "{current.id()}", role: "region", aria_labelledby: "settings-section-title",
+                    header { class: "settings-intro",
+                        h3 { id: "settings-section-title", {current.title()} }
+                        p { {current.summary()} }
+                    }
+                    SectionView { section: current }
+                }
+            }
+        }
+    }
+}
+
+const GROUPS: [(&str, &[Section]); 3] = [
+    (tx::GROUP_STUDY, &[Section::Study, Section::Reminders]),
+    (tx::GROUP_DEVICE, &[Section::Look, Section::Tablet, Section::Mac]),
+    (tx::GROUP_DATA, &[Section::Sync, Section::Data, Section::Updates, Section::About]),
+];
+
+#[component]
+fn SectionList(current: Section) -> Element {
+    let nav = use_context::<SettingsNav>();
+    let mut section = nav.section;
+    let mut query = nav.query;
+    let updates = crate::update::view::use_update_status().read().clone();
+    let filtered: Vec<Section> =
+        Section::ALL.into_iter().filter(|s| s.applies() && s.matches(&query.read())).collect();
+    let detail = |s: Section| -> String {
+        match s {
+            Section::Updates => updates
+                .as_ref()
+                .and_then(crate::update::view::summary)
+                .unwrap_or_else(|| s.summary().to_string()),
+            Section::About => format!("{} {}", tx::VERSION, env!("CARGO_PKG_VERSION")),
+            _ => s.summary().to_string(),
+        }
+    };
+    rsx! {
+        aside { class: "settings-index",
+            div { class: "settings-tools",
+                input {
+                    class: "settings-search", r#type: "search",
+                    aria_label: tx::SEARCH, placeholder: tx::SEARCH,
+                    value: "{query}", oninput: move |event| query.set(event.value()),
+                }
+                p { class: "settings-save-hint", {tx::IMMEDIATE} }
+            }
+            nav { class: "settings-sections", aria_label: tx::SECTIONS,
+                for (title, members) in GROUPS {
+                    {
+                        let shown: Vec<Section> = members.iter().copied().filter(|s| filtered.contains(s)).collect();
+                        rsx! {
+                            if !shown.is_empty() {
+                                div { key: "{title}", class: "section-head", h2 { {title} } }
+                                Card { class: "grouped",
+                                    for s in shown {
+                                        ActionRow {
+                                            key: "{s.id()}", title: s.title(), detail: detail(s),
+                                            selected: current == s, icon: crate::icons::section(s.id()),
+                                            onclick: move |_| section.set(Some(s)),
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
-                div { class: "settings-pane", key: "{current.id()}",
-                    SectionView { section: current }
+                if filtered.is_empty() {
+                    div { class: "settings-empty", role: "status",
+                        p { {tx::NO_RESULTS} }
+                        button { r#type: "button", class: "btn btn-secondary", onclick: move |_| query.set(String::new()), {tx::CLEAR_SEARCH} }
+                    }
                 }
             }
         }
@@ -276,5 +321,24 @@ mod tests {
             assert_eq!(Section::from_id(s.id()), Some(s));
         }
         assert_eq!(Section::from_id("nope"), None);
+    }
+
+    #[test]
+    fn search_finds_preferences_inside_their_section() {
+        assert!(Section::Look.matches("حجم الخط"));
+        assert!(Section::Look.matches("FONT size"));
+        assert!(Section::Reminders.matches("إِشْعَارات"));
+        assert!(Section::Data.matches("نسخة احتياطية"));
+        assert!(!Section::ALL.into_iter().any(|s| s.matches("zzzz-no-setting")));
+        for section in Section::ALL {
+            assert!(section.matches(section.id()));
+        }
+    }
+
+    #[test]
+    fn every_section_is_in_exactly_one_group() {
+        for section in Section::ALL {
+            assert_eq!(GROUPS.iter().filter(|(_, members)| members.contains(&section)).count(), 1);
+        }
     }
 }

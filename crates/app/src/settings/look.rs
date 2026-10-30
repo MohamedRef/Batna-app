@@ -3,6 +3,8 @@
 use batna_core::theme::Theme;
 use dioxus::prelude::*;
 
+use crate::ui::Card;
+
 use super::DeviceOnly;
 use crate::Ui;
 use crate::i18n::settings as tx;
@@ -52,7 +54,7 @@ pub fn LookSection() -> Element {
     let mut prefs = ui.prefs;
     let now = *prefs.read();
     rsx! {
-        section { class: "card",
+        Card {
             h2 { {tx::THEME} DeviceOnly {} }
             div { class: "choice-list", role: "radiogroup", aria_label: tx::THEME,
                 for t in Theme::ALL {
@@ -74,7 +76,7 @@ pub fn LookSection() -> Element {
                 }
             }
         }
-        section { class: "card",
+        Card {
             h2 { {tx::APPEARANCE} DeviceOnly {} }
             div { class: "choice-list", role: "radiogroup", aria_label: tx::APPEARANCE,
                 for a in Appearance::ALL {
@@ -104,7 +106,7 @@ pub fn LookSection() -> Element {
                 }
             }
         }
-        section { class: "card",
+        Card {
             h2 { {tx::TEXT_SIZE} DeviceOnly {} }
             div { class: "segmented", role: "radiogroup", aria_label: tx::TEXT_SIZE,
                 for s in TextSize::ALL {

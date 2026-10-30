@@ -70,7 +70,7 @@ pub fn rows(lib: &Library, data: &StudyData) -> Vec<Row> {
 /// puts lectures with content he hasn't checked yet on top.
 const VIEW: Collection = Collection {
     key: "refs",
-    layout: Layout::List,
+    layout: Layout::DEFAULT,
     sorts: &[Sort::Book, Sort::Left, Sort::Name],
     groups: false,
 };

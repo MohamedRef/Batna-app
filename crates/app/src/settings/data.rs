@@ -3,6 +3,8 @@
 
 use dioxus::prelude::*;
 
+use crate::ui::Card;
+
 use crate::i18n::settings as tx;
 
 #[component]
@@ -19,7 +21,7 @@ pub fn DataSection() -> Element {
         crate::anki::AnkiExport {}
         crate::verify::ExportVerdicts {}
         div { class: "section-head", h2 { {tx::DATA_GROUP_DEVICE} } }
-        section { class: "card",
+        Card {
             h2 { {tx::DATA_FOLDER} }
             match folder {
                 Some(f) => rsx! { bdi { class: "path", dir: "ltr", "{f}" } },

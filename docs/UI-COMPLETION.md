@@ -54,7 +54,9 @@ The remaining facade code owns integration and shared state. Tests live in
   focus boundary across compact/medium/expanded widths, all themes, both surface
   appearances and largest text, including RTL/LTR where the app supports it.
 - Browser execution and screenshot evidence belong to this item's CI head; see
-  [SETTINGS-BROWSER-QA.md](SETTINGS-BROWSER-QA.md) for commands and scope.
+  [SETTINGS-BROWSER-QA.md](SETTINGS-BROWSER-QA.md) for commands and scope. The
+  lesson player and study screen have the same kind of job:
+  [SCREENS-BROWSER-QA.md](SCREENS-BROWSER-QA.md).
 - [ ] Complete broader screen integration and the physical-device matrix. SSR
   callbacks are not hydrated; no application-close or native-device pass is claimed.
 

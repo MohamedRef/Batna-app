@@ -242,3 +242,13 @@ to the part-way lesson, and lecture rows with a started lesson say so in
 their subline. Progress shown is only what is saved: finished-lesson marks
 and the player's saved step. No player, steps, FSRS, content or schema
 changes.
+## Lesson and study browser checks (2026-10-30)
+
+A second Chromium job (`screens-browser.yml`) renders the production lesson
+player (every step kind, Steps and Pages) and study screen (setup, each item
+kind, Undo-reopened card, summary) and checks layout, RTL, touch targets,
+accessible names, headings and Back targets across 1,400 width, scheme,
+appearance and text-size cases. Test-only: no app behaviour, FSRS, content or
+schema changes. Gaps already on `main` are listed, not hidden, in
+[SCREENS-BROWSER-QA.md](SCREENS-BROWSER-QA.md) § Known gaps; each is a
+follow-up fix.

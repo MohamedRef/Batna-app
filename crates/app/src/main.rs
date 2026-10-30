@@ -6,6 +6,8 @@
 mod anki;
 mod back;
 mod bank;
+#[cfg(test)]
+mod browser_fixture;
 mod calc;
 mod case;
 mod cloud;

@@ -1,0 +1,86 @@
+# Lesson and study browser regression
+
+The `Lesson and study browser regression` workflow renders the production
+lesson player and study screen through the test-only SSR renderer
+(`crates/app/src/learn/browser.rs`, `crates/app/src/study/browser.rs`) and
+checks them in Chromium with the app's own stylesheets, fonts, theme and
+text-size CSS (`crates/app/src/browser_fixture.rs`). It sits beside the
+Settings suite ([SETTINGS-BROWSER-QA.md](SETTINGS-BROWSER-QA.md)) and uses the
+same pinned Playwright 1.62.1. There is no copied HTML or CSS, no real user
+data, no live API and no app launch.
+
+## What is rendered
+
+| Screen | States |
+|---|---|
+| Lesson player | The first step of each of the 13 step kinds in book order, opened at that step from a saved attempt (the way the app reopens a lesson), in Steps and in Pages: 26 files |
+| Study | Setup; a running session on the first item of each kind the player shows (card, cloze, enumerate, essay, table, order); a card reopened by Undo; the summary: 9 files |
+
+The store is in memory and the review log is empty, so items are fresh.
+
+## Matrix
+
+| Dimension | Cases |
+|---|---|
+| Width | 320, 384, 600, 840, 1280 CSS px (height 900) |
+| Theme | System, in the light and dark OS schemes |
+| Appearance | Calm and Glossy |
+| Text size | Normal and Larger |
+| Direction | Arabic RTL |
+
+Each file is loaded once and switched the way the app switches: the prefs
+stylesheet and `data-appearance` on `.app`. 35 files × 40 = 1,400 cases, about
+20 seconds.
+
+## Assertions
+
+| Check | Rule |
+|---|---|
+| Layout | RTL; the page and `main.content` are no wider than the screen; no control outside it (sideways table scrollers excepted) |
+| Touch targets | Lesson player: every control at least the shared 48dp `--target`. Study: at least `--tap` capped at 48px, the token its buttons use; how many study cases still have a control under 48px is printed |
+| Names | Every visible control has an accessible name (text, label, `aria-label` or `title`) |
+| Heading | A visible `h1` |
+| Back | A visible `data-back` target for Escape and Android Back while a lesson or a session runs |
+| Lesson | Exactly the saved step is shown, with its kind; the step meter's `progressbar` value; a visible way forward; an unanswered question offers Skip and keeps its gate note screen-reader only |
+| Study | The running item's kind and the session `progressbar` |
+| Errors | Any browser page error fails the job |
+
+Calm, Larger, 384px screenshots in both schemes and `report.json` are
+uploaded as `screens-browser-results`; a failure attaches `failure.png`.
+
+## Known gaps
+
+`KNOWN` at the top of `crates/app/tests/screens-browser.cjs` lists what was
+already off on `main` when the suite was added (2026-10-30). Those are left
+out of the failures but stay listed in the log and `report.json`; anything new
+fails. An entry nothing matches any more prints a warning: remove it with its
+fix.
+
+| Gap | Where |
+|---|---|
+| Book page chip (`.tap-chip`) 28–35px | Lesson steps, study items |
+| "Open the lesson" link (`.ls-explain`) 26–45px | Try steps, study items |
+| Reveal, "reveal all", Try "show answer" buttons 40–44px | Lesson reveal, mnemonic, table and Try steps |
+| Course chip and hidden table cell under `--tap` | Study |
+| Lecture chips 11px wider than a 320px screen at Larger text | Study setup |
+| No heading on a running item | Study |
+
+Seen in the screenshots, not asserted: the study item's "open the lesson"
+button (`.st-link`) has no style of its own on the Study screen, so it shows
+as a plain grey button.
+
+## Run
+
+```sh
+APP_BROWSER_FIXTURES="$PWD/target/screen-fixtures" cargo test -p batna-app --no-default-features --locked export_screen_fixtures -- --ignored
+# Install the pinned Playwright package and Chromium in a separate tool folder.
+NODE_PATH=/path/to/browser-tools/node_modules node crates/app/tests/screens-browser.cjs target/screen-fixtures target/screen-results
+```
+
+## Scope
+
+Rust callbacks are not hydrated, so taps, answers, saving, grading, swiping
+and navigation are not exercised here; the Rust tests and `system-back.test.cjs`
+keep those. A passing Chromium run is not device QA: Android WebView, the S24
+Ultra and Tab S11, the Mac app, TalkBack, VoiceOver and S Pen stay in the
+device matrix.

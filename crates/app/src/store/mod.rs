@@ -486,6 +486,13 @@ pub fn shared() -> &'static Store {
 static STORE: OnceLock<Store> = OnceLock::new();
 static OPEN_ERROR: OnceLock<String> = OnceLock::new();
 
+/// Test-only: the shared store in memory, for fixtures that render screens
+/// reading it (`browser_fixture`). Call before anything opens the store.
+#[cfg(test)]
+pub fn use_memory_store() {
+    let _ = STORE.set(Store::open_in_memory().expect("an in-memory database always opens"));
+}
+
 /// Why the store fell back to memory, if it did.
 pub fn open_error() -> Option<&'static str> {
     OPEN_ERROR.get().map(String::as_str)

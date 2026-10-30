@@ -18,7 +18,7 @@ use crate::{Screen, Ui};
 
 /// Local (per device) setting: the unfinished attempt (`Attempt`), so the
 /// lesson reopens at the same step with the same responses and score.
-fn pos_key(id: &str) -> String {
+pub(super) fn pos_key(id: &str) -> String {
     format!("lessonpos.{id}")
 }
 

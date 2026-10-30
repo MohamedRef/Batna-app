@@ -16,15 +16,6 @@ pub fn StudySection() -> Element {
     // With an exam day the plan sets the new items, so only its number shows (#99).
     let plan_new = crate::plan::target_now(&*review.backend.borrow()).map(|t| t.new_goal());
 
-    let set = {
-        let review = review.clone();
-        move |s: ReviewSettings| {
-            review.backend.borrow_mut().set_settings(s);
-        }
-    };
-    let set_retention = set.clone();
-    let set_new = set;
-
     rsx! {
         style { {super::CSS.text()} }
         section { class: "card",
@@ -37,9 +28,8 @@ pub fn StudySection() -> Element {
                         role: "radio",
                         "aria-checked": settings.retention == r,
                         onclick: {
-                            let s = settings.clone();
-                            let f = set_retention.clone();
-                            move |_| f(ReviewSettings { retention: r, ..s.clone() })
+                            let review = review.clone();
+                            move |_| save_choice(&review, ReviewChoice::Retention(r))
                         },
                         "{r.percent()}%"
                         span { class: "seg-hint", {retention_hint(r)} }
@@ -66,9 +56,8 @@ pub fn StudySection() -> Element {
                             role: "radio",
                             "aria-checked": settings.new_per_day == n,
                             onclick: {
-                                let s = settings.clone();
-                                let f = set_new.clone();
-                                move |_| f(ReviewSettings { new_per_day: n, ..s.clone() })
+                                let review = review.clone();
+                                move |_| save_choice(&review, ReviewChoice::NewPerDay(n))
                             },
                             "{n}"
                         }
@@ -84,5 +73,56 @@ fn retention_hint(r: Retention) -> &'static str {
         Retention::R85 => tx::R85,
         Retention::R90 => tx::R90,
         Retention::R95 => tx::R95,
+    }
+}
+
+/// Commands change one field in current settings, including after sync or refit.
+#[derive(Clone, Copy)]
+enum ReviewChoice {
+    Retention(Retention),
+    NewPerDay(u32),
+}
+
+impl ReviewChoice {
+    fn key(self) -> &'static str {
+        match self {
+            Self::Retention(_) => "review.retention",
+            Self::NewPerDay(_) => "review.new_per_day",
+        }
+    }
+
+    fn apply(self, settings: &mut ReviewSettings) {
+        match self {
+            Self::Retention(value) => settings.retention = value,
+            Self::NewPerDay(value) => settings.new_per_day = value,
+        }
+    }
+}
+
+fn save_choice(review: &crate::store::Review, choice: ReviewChoice) {
+    let backend = review.backend.clone();
+    crate::persistence::save(choice.key(), move || {
+        let mut backend = backend.borrow_mut();
+        let mut settings = backend.settings.clone();
+        choice.apply(&mut settings);
+        if backend.set_settings(settings) {
+            Ok(())
+        } else {
+            Err("Review preferences could not be saved".into())
+        }
+    });
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn a_retry_changes_only_its_field_in_the_current_settings() {
+        let mut current = ReviewSettings { new_per_day: 60, ..Default::default() };
+        ReviewChoice::Retention(Retention::R95).apply(&mut current);
+        assert_eq!(current.new_per_day, 60);
+        ReviewChoice::NewPerDay(15).apply(&mut current);
+        assert_eq!(current.retention, Retention::R95);
     }
 }

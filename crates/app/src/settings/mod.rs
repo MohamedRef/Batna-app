@@ -205,6 +205,7 @@ pub fn SettingsSheet() -> Element {
                     span { aria_hidden: "true", "→" }
                 }
             }
+            crate::persistence::SaveNotice {}
             div { class: "settings-body",
                 SectionList { current }
                 div { class: "settings-pane", key: "{current.id()}", role: "region", aria_labelledby: "settings-section-title",

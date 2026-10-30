@@ -51,8 +51,7 @@ fn swatch_style(t: Theme) -> String {
 #[component]
 pub fn LookSection() -> Element {
     let ui = use_context::<Ui>();
-    let mut prefs = ui.prefs;
-    let now = *prefs.read();
+    let now = *ui.prefs.read();
     rsx! {
         Card {
             h2 { {tx::THEME} DeviceOnly {} }
@@ -63,10 +62,7 @@ pub fn LookSection() -> Element {
                         class: "choice",
                         role: "radio",
                         aria_checked: if now.theme == t { "true" } else { "false" },
-                        onclick: move |_| {
-                            prefs.write().theme = t;
-                            prefs.peek().save();
-                        },
+                        onclick: move |_| ui.update_prefs(|prefs| prefs.theme = t),
                         span { class: "swatch", aria_hidden: "true", style: swatch_style(t) }
                         span { class: "choice-text",
                             span { class: "choice-title", {theme_label(t).0} }
@@ -87,10 +83,7 @@ pub fn LookSection() -> Element {
                         aria_checked: if now.appearance == a { "true" } else { "false" },
                         // Only the look changes: the screen under the sheet
                         // keeps its answer, scroll and typing.
-                        onclick: move |_| {
-                            prefs.write().appearance = a;
-                            prefs.peek().save();
-                        },
+                        onclick: move |_| ui.update_prefs(|prefs| prefs.appearance = a),
                         span { class: "appearance-swatch", "data-swatch": a.as_str(), aria_hidden: "true" }
                         span { class: "choice-text",
                             span { class: "choice-title",
@@ -114,10 +107,7 @@ pub fn LookSection() -> Element {
                         key: "{s.as_str()}",
                         role: "radio",
                         aria_checked: if now.text_size == s { "true" } else { "false" },
-                        onclick: move |_| {
-                            prefs.write().text_size = s;
-                            prefs.peek().save();
-                        },
+                        onclick: move |_| ui.update_prefs(|prefs| prefs.text_size = s),
                         {size_label(s)}
                     }
                 }

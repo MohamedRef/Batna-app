@@ -24,6 +24,12 @@ pub(crate) const CSS: Css = css!("src/today/today.css");
 
 #[component]
 pub fn Today() -> Element {
+    // A failed preference save has its own notice with Retry above the
+    // screen; the note below then only repeats it.
+    let preferences_pending = crate::persistence::use_pending_saves();
+    let write_error = store::write_error().filter(|e| {
+        !(preferences_pending && (e.starts_with("setting ") || e.starts_with("review settings: ")))
+    });
     let lib = Library::get();
     let review = use_review();
     let o = review.backend.borrow().overview(lib, store::now_ms());
@@ -99,7 +105,7 @@ pub fn Today() -> Element {
                 }
                 if let Some(e) = store::open_error() {
                     p { class: "note", "{tx::STORE_FAILED} " bdi { dir: "ltr", "{e}" } }
-                } else if let Some(e) = store::write_error() {
+                } else if let Some(e) = write_error {
                     p { class: "note", "{tx::WRITE_FAILED} " bdi { dir: "ltr", "{e}" } }
                 }
                 div { class: "section-head",

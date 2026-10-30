@@ -159,6 +159,7 @@ fn CourseTile(
 ) -> Element {
     let s = summary;
     let id = s.course.id.clone();
+    let lecture_id = id.clone();
     let half = s.course.hours.fract() != 0.0;
     let whole = s.course.hours.trunc() as usize;
     rsx! {
@@ -204,7 +205,7 @@ fn CourseTile(
                         p { class: "small", {tx::content_line(s.written, s.lectures, s.items, s.lessons)} }
                         button {
                             class: "btn btn-ghost cm-open",
-                            onclick: move |_| on_lectures.call(s.course.id.clone()),
+                            onclick: move |_| on_lectures.call(lecture_id.clone()),
                             {tx::OPEN_LECTURES}
                         }
                     } else {

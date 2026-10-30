@@ -7,7 +7,7 @@ The first content is Chapter 1 (Hepato-Biliary Pancreatic Unit) of the Alexandri
 | Part | State |
 |---|---|
 | Content schema `batna.content/v1` and validator | ✓ |
-| App shell: navigation, RTL layout for phone and tablet, Settings sheet, themes (Paper, Night, Night shift), text size, bundled fonts, drawn icons, Android Back, diagnostics | ✓ |
+| App shell: navigation, RTL layout for phone and tablet, searchable grouped Settings sheet, themes (Paper, Night, Night shift), text size, bundled fonts, drawn icons, Android Back, diagnostics | ✓ |
 | Review: FSRS scheduling, Today screen, ✓ / ✎ / ✗ content checks, export and restore | ✓ |
 | Sync between Mac, phone and tablet: Batna's own free Cloudflare Worker, Google sign-in, devices list ([docs/CLOUD.md](docs/CLOUD.md)) | ✓ (deploy pending) |
 | Your own cards: add-a-card form, Share-to-Batna on Android, their own study deck and Anki subdeck | ✓ |
@@ -16,3 +16,5 @@ The first content is Chapter 1 (Hepato-Biliary Pancreatic Unit) of the Alexandri
 | Anki export | `batna-tools anki`: one `batna.apkg`, a subdeck per lecture ([docs/ANKI.md](docs/ANKI.md)) |
 
 How to run it: [docs/RUN.md](docs/RUN.md). How to write content: [docs/CONTENT.md](docs/CONTENT.md).
+
+UI architecture and improvement priorities: [docs/UI-MAINTENANCE.md](docs/UI-MAINTENANCE.md).

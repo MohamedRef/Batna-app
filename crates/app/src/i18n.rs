@@ -1162,6 +1162,13 @@ pub mod settings {
     pub const CLOSE: &str = "اقفل";
     pub const BACK: &str = "رجوع";
     pub const SECTIONS: &str = "أقسام الإعدادات";
+    pub const SEARCH: &str = "دوّر في الإعدادات";
+    pub const NO_RESULTS: &str = "مفيش قسم مناسب. جرّب كلمة تانية زي الخط أو التذكيرات.";
+    pub const CLEAR_SEARCH: &str = "امسح البحث";
+    pub const IMMEDIATE: &str = "الاختيارات بتتطبّق أول ما تغيّرها";
+    pub const GROUP_STUDY: &str = "المذاكرة والتذكير";
+    pub const GROUP_DEVICE: &str = "الشكل والجهاز";
+    pub const GROUP_DATA: &str = "الحساب والبيانات";
     pub const THIS_DEVICE: &str = "للجهاز ده بس";
 
     pub const LOOK: &str = "الشكل";

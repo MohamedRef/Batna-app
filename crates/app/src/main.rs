@@ -45,6 +45,7 @@ mod study;
 mod synced;
 mod table;
 mod today;
+mod ui;
 mod update;
 mod verify;
 

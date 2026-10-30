@@ -134,9 +134,9 @@ pub fn find_item(id: &str) -> Option<(&'static str, &'static Item)> {
 /// The cases and calc-items lists: due first by default, cards by default
 /// (each shows a few lines of its stem), and optionally grouped by lecture.
 const CASES_VIEW: Collection =
-    Collection { key: "cases", layout: Layout::Cards, sorts: &[Sort::Due, Sort::Book], groups: true };
+    Collection { key: "cases", layout: Layout::DEFAULT, sorts: &[Sort::Due, Sort::Book], groups: true };
 const CALC_VIEW: Collection =
-    Collection { key: "calc_items", layout: Layout::Cards, sorts: &[Sort::Due, Sort::Book], groups: true };
+    Collection { key: "calc_items", layout: Layout::DEFAULT, sorts: &[Sort::Due, Sort::Book], groups: true };
 
 #[component]
 fn ItemList(kind: &'static str, on_open: EventHandler<String>) -> Element {

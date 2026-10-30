@@ -322,17 +322,21 @@ fn LessonList() -> Element {
 /// or one line each, and the order.
 pub(crate) const LECTURES_VIEW: Collection = Collection {
     key: "lessons.lectures",
-    layout: Layout::Cards,
+    layout: Layout::DEFAULT,
     sorts: &[Sort::Book, Sort::Left, Sort::Name],
     groups: false,
 };
 /// A lecture's lessons on this screen (the picked lecture, search results).
-pub(crate) const LESSONS_VIEW: Collection =
-    Collection { key: "lessons.rows", layout: Layout::List, sorts: &[Sort::Book, Sort::Left], groups: false };
+pub(crate) const LESSONS_VIEW: Collection = Collection {
+    key: "lessons.rows",
+    layout: Layout::DEFAULT,
+    sorts: &[Sort::Book, Sort::Left],
+    groups: false,
+};
 /// A lecture's lessons on its page.
 pub(crate) const LECTURE_PAGE_VIEW: Collection = Collection {
     key: "lecture.lessons",
-    layout: Layout::List,
+    layout: Layout::DEFAULT,
     sorts: &[Sort::Book, Sort::Left],
     groups: false,
 };

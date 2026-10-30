@@ -26,15 +26,12 @@ const FLOOR = { learn: 'var(--target)', study: 'min(var(--tap), var(--target))' 
 const KNOWN = {
   // [screen, selector]: controls still under the screen's floor.
   small: [
-    ['study', '.tap-chip'],
-    ['study', '.ls-explain'],
     ['study', '.cf-chip'], // course-in-view chip
-    ['study', '.tb-reveal'], // hidden table cell
   ],
   // States whose controls or content are wider than the screen.
   overflow: [{ file: 'study-setup.html', width: 320, size: 'larger' }],
   // Running study items have no heading for screen readers to jump to.
-  noHeading: [{ screen: 'study', phase: 'running' }],
+  noHeading: [],
 };
 
 // Everything a finger or the keyboard can reach on screen, with the layout

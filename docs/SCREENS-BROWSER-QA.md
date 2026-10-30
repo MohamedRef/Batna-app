@@ -58,15 +58,8 @@ fix.
 
 | Gap | Where |
 |---|---|
-| Book page chip (`.tap-chip`) 28–35px | Study items |
-| "Open the lesson" link (`.ls-explain`) 26–45px | Study items |
-| Course chip and hidden table cell under `--tap` | Study |
+| Course chip under `--tap` | Study |
 | Lecture chips 11px wider than a 320px screen at Larger text | Study setup |
-| No heading on a running item | Study |
-
-Seen in the screenshots, not asserted: the study item's "open the lesson"
-button (`.st-link`) has no style of its own on the Study screen, so it shows
-as a plain grey button.
 
 ## Run
 

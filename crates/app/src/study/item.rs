@@ -46,6 +46,9 @@ pub fn ItemView(
     };
     rsx! {
         crate::ui::Card { element: crate::ui::CardElement::Article, class: "st-item", "data-kind": item.body.kind(),
+            // Screen readers only: a heading to jump to for each item; the
+            // chips below show the same on screen.
+            h1 { class: "st-sr-only", "{kind_label(&item.body)} · {lecture_title}" }
             header { class: "st-item-head",
                 span { class: "chip st-badge", "data-badge": if retry { "retry" } else if fresh { "new" } else { "review" }, {badge} }
                 span { class: "chip", {kind_label(&item.body)} }

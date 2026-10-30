@@ -260,3 +260,12 @@ The browser suite found controls inside lesson steps under the 48dp
 "show answer" and "explain it". They now keep `--target` in the lesson
 player only (`learn.css`); their look is unchanged. The suite's known-gap
 list drops them, so a regression fails CI.
+
+### Follow-up: study item heading, «اشرحهولي» and foot targets (2026-10-30)
+
+Each study item now has a screen-reader-only `h1` (its kind and lecture), so
+TalkBack and VoiceOver can jump between items; the visible chips are
+unchanged. «اشرحهولي» (`.st-link`) had no style on the Study screen and showed
+as a grey native button; it is now an accent text link with a 48dp target.
+The book-page chip in the item foot and the table's hidden-cell button keep
+the 48dp `--target`. These leave the browser suite's known gaps.

@@ -250,10 +250,7 @@ mod ux_tests {
     #[test]
     fn an_expanded_course_exposes_real_readiness_and_its_detail_region() {
         let lib = Library::get();
-        let summary = summaries(lib, |c| c.status)
-            .into_iter()
-            .find(|s| s.course.id == "hb")
-            .unwrap();
+        let summary = summaries(lib, |c| c.status).into_iter().find(|s| s.course.id == "hb").unwrap();
         let expected = tx::ready_lectures(summary.written, summary.lectures);
         let html = dioxus::ssr::render_element(rsx! {
             CourseTile {

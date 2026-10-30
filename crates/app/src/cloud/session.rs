@@ -100,9 +100,11 @@ pub struct Auth {
 }
 
 impl Auth {
-    pub fn new(session: Session, vault: Box<dyn SessionVault>) -> Self {
-        vault.save(&session);
-        Self { session, vault }
+    pub fn new(session: Session, vault: Box<dyn SessionVault>) -> Result<Self, Box<dyn SessionVault>> {
+        if !vault.save(&session) {
+            return Err(vault);
+        }
+        Ok(Self { session, vault })
     }
 
     pub fn restore(vault: Box<dyn SessionVault>, now_ms: u64) -> Result<Self, Box<dyn SessionVault>> {

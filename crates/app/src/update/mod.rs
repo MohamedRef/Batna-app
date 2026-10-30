@@ -1102,6 +1102,15 @@ impl Updater {
     /// start.
     fn fetch_build(&self, url: &str, offer: &Offer, path: &Path) -> Result<(), Failure> {
         let part = part_of(path);
+        let meta = meta_of(path);
+        let expected = PartMeta { size: offer.asset.size, sha256: offer.asset.sha256.clone() };
+        // A .part from another signed build must never be resumed, even if
+        // that build used the same filename and byte count.
+        if read_part_meta(&meta).as_ref() != Some(&expected) {
+            let _ = fs::remove_file(&part);
+        }
+        fs::write(&meta, serde_json::to_vec(&expected).map_err(|e| Failure::Install(e.to_string()))?)
+            .map_err(|e| Failure::Install(e.to_string()))?;
         let mut fresh_after_bad = false;
         let mut tries = 0;
         loop {
@@ -1122,7 +1131,11 @@ impl Updater {
             }
             let (size, sha) = hash_file(&part).map_err(|e| Failure::Install(e.to_string()))?;
             match check_download(&offer.asset, size, &sha) {
-                Ok(()) => return fs::rename(&part, path).map_err(|e| Failure::Install(e.to_string())),
+                Ok(()) => {
+                    fs::rename(&part, path).map_err(|e| Failure::Install(e.to_string()))?;
+                    let _ = fs::remove_file(&meta);
+                    return Ok(());
+                }
                 Err(e) => {
                     let _ = fs::remove_file(&part);
                     if fresh_after_bad {
@@ -1151,7 +1164,9 @@ impl Updater {
         }
         let mut res = req.call().map_err(|_| Failure::Network)?;
         let mut file = match res.status().as_u16() {
-            206 if have > 0 => fs::OpenOptions::new().append(true).open(part),
+            206 if have > 0 && range_start(&res) == Some(have) => {
+                fs::OpenOptions::new().append(true).open(part)
+            }
             // The server sent all of it: start over.
             200 => fs::File::create(part),
             // The part is no use to the server (changed file): start over.
@@ -1275,7 +1290,7 @@ impl Updater {
                 name.as_str(),
                 "prefs.json" | changelog::FILE | PACK_FILE | PACK_INFO | PACK_REJECTED | PACK_STARTS
             ) || Some(name.as_str()) == keep
-                || keep.is_some_and(|k| name == format!("{k}.part"))
+                || keep.is_some_and(|k| name == format!("{k}.part") || name == format!("{k}.part.json"))
             {
                 continue;
             }
@@ -1467,6 +1482,12 @@ fn update_failure(e: UpdateError) -> Failure {
 }
 
 /// An HTTP agent; local development feeds skip any proxy in the environment.
+/// The first byte of a partial HTTP response, if it supplies a valid range.
+fn range_start<B>(res: &ureq::http::Response<B>) -> Option<u64> {
+    let value = res.headers().get("content-range")?.to_str().ok()?;
+    value.strip_prefix("bytes ")?.split('-').next()?.trim().parse().ok()
+}
+
 fn agent(url: &str, timeout: Duration) -> ureq::Agent {
     let local = url.starts_with("http://127.0.0.1") || url.starts_with("http://localhost");
     let mut config = ureq::Agent::config_builder().http_status_as_error(false).timeout_global(Some(timeout));
@@ -1484,6 +1505,23 @@ fn part_of(path: &Path) -> PathBuf {
     let mut name = path.file_name().unwrap_or_default().to_os_string();
     name.push(".part");
     path.with_file_name(name)
+}
+
+/// Signed build identity for a resumable download.
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+struct PartMeta {
+    size: u64,
+    sha256: String,
+}
+
+fn meta_of(path: &Path) -> PathBuf {
+    let mut name = path.file_name().unwrap_or_default().to_os_string();
+    name.push(".part.json");
+    path.with_file_name(name)
+}
+
+fn read_part_meta(path: &Path) -> Option<PartMeta> {
+    serde_json::from_slice(&fs::read(path).ok()?).ok()
 }
 
 /// Size and SHA-256 (hex) of a file on disk.
@@ -1804,6 +1842,8 @@ mod tests {
         fs::create_dir_all(&u.dir).unwrap();
         // Batna closed half-way last time.
         fs::write(u.dir.join(format!("{file}.part")), &FIXTURE_APK[..5]).unwrap();
+        let expected = PartMeta { size: FIXTURE_APK.len() as u64, sha256: sha256_hex(FIXTURE_APK) };
+        fs::write(u.dir.join(format!("{file}.part.json")), serde_json::to_vec(&expected).unwrap()).unwrap();
         u.check(true);
         assert!(matches!(u.status().phase, Phase::Ready(_)), "{:?}", u.status().phase);
         let ranges = |seen: &Seen| -> Vec<Option<String>> {
@@ -1818,6 +1858,7 @@ mod tests {
         let (u, _data) = updater(&url, build("0.1.0", 41, true));
         fs::create_dir_all(&u.dir).unwrap();
         fs::write(u.dir.join(format!("{file}.part")), b"XXXXX").unwrap();
+        fs::write(u.dir.join(format!("{file}.part.json")), serde_json::to_vec(&expected).unwrap()).unwrap();
         u.check(true);
         assert!(matches!(u.status().phase, Phase::Ready(_)), "{:?}", u.status().phase);
         assert_eq!(ranges(&seen), [Some("bytes=5-".to_owned()), None]);

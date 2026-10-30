@@ -86,3 +86,12 @@ jobs:
         with:
           save-if: ${{ github.ref == 'refs/heads/main' }}
       - run: cargo clippy -p batna-server --target wasm32-unknown-unknown -- -D warnings
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - name: Local Worker test tools
+        run: |
+          cargo install worker-build --version ^0.8 --locked
+          npm install -g wrangler@4
+      - name: Batna Cloud end-to-end (fake Google, two devices)
+        run: node crates/server/tests/e2e.mjs

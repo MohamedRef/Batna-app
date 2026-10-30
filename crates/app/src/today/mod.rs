@@ -45,8 +45,8 @@ pub fn Today() -> Element {
 
     rsx! {
         style { {CSS.text()} }
-        // Tablet landscape and the Mac: today's plan stays in view on one
-        // side while the lecture library scrolls on the other.
+        // At expanded widths the plan stays beside the lecture library.
+        // Compact and medium widths use the full Lessons screen for browsing.
         div { class: "tab-cols today-cols", "data-wide": "aside",
             div { class: "tab-main tab-sticky",
                 header { class: "page-head td-greet",
@@ -93,11 +93,18 @@ pub fn Today() -> Element {
                             move |_| if fresh.is_empty() { crate::stats::open(ui, crate::stats::Tab::Plan) } else { session(ui, fresh.clone()) }
                         },
                     }
-                    Tile {
-                        value: all_minutes as usize,
-                        label: tx::MINUTES_ALL,
-                        hint: tx::MINUTES_HINT,
+                }
+                // The active plan already shows its estimated minutes; without
+                // a plan this stays a quiet link, not another large metric tile.
+                if target.is_none() && all_minutes > 0 {
+                    button {
+                        class: "btn-link td-estimate",
+                        title: tx::MINUTES_HINT,
+                        aria_label: "{all_minutes} {tx::MINUTES_ALL}. {tx::MINUTES_HINT}",
                         onclick: move |_| crate::stats::open(ui, crate::stats::Tab::Plan),
+                        bdi { class: "num-ltr", "{all_minutes}" }
+                        span { {tx::MINUTES_ALL} }
+                        span { class: "chev", aria_hidden: "true" }
                     }
                 }
                 if !o.due_cases.is_empty() {
@@ -121,38 +128,44 @@ pub fn Today() -> Element {
                     }
                 }
                 crate::learn::TodayLesson { prefer: o.lectures.iter().map(|l| l.id.clone()).collect::<Vec<_>>() }
-                crate::recap::TodayRecap { due_left: o.due, due_tomorrow: o.due_tomorrow }
-                div { class: "section-head", h2 { {tx::MORE_HEAD} } }
-                ul { class: "tap-list",
-                    li {
-                        button { class: "tap tap-row", onclick: move |_| ui.screen.set(Screen::Bank),
-                            span { class: "row-icon", aria_hidden: "true", {crate::icons::nav(Screen::Bank)} }
-                            span { class: "tap-row-main",
-                                strong { {tx::QUICK_BANK} }
-                                span { class: "muted small", {tx::QUICK_BANK_SUB} }
-                            }
-                            span { class: "chev", aria_hidden: "true" }
-                        }
-                    }
-                    // Content checks are a separate thing from memory: their
-                    // marks and export live in Settings › Data.
-                    li {
-                        button { class: "tap tap-row", title: tx::CHECKED_HINT, onclick: move |_| settings.show(Some(crate::settings::Section::Data)),
-                            span { class: "row-icon", aria_hidden: "true", {crate::icons::check()} }
-                            span { class: "tap-row-main",
-                                strong { {tx::CHECKED_ROW} }
-                                span { class: "muted small", {tx::checked_sub(o.checked)} }
-                            }
-                            span { class: "chev", aria_hidden: "true" }
-                        }
-                    }
-                }
                 if !o.lectures.is_empty() {
                     section { class: "in-progress",
                         div { class: "section-head", h2 { {tx::IN_PROGRESS} } }
                         ul { class: "tap-list progress-list",
                             for l in o.lectures.iter() {
                                 Progress { key: "{l.id}", lecture: l.clone() }
+                            }
+                        }
+                    }
+                }
+                crate::recap::TodayRecap { due_left: o.due, due_tomorrow: o.due_tomorrow }
+                // Extra shortcuts remain available without competing with today's work.
+                details { class: "td-extras",
+                    summary { class: "section-head td-extras-toggle",
+                        h2 { {tx::MORE_HEAD} }
+                        span { class: "chev", aria_hidden: "true" }
+                    }
+                    ul { class: "tap-list",
+                        li {
+                            button { class: "tap tap-row", onclick: move |_| ui.screen.set(Screen::Bank),
+                                span { class: "row-icon", aria_hidden: "true", {crate::icons::nav(Screen::Bank)} }
+                                span { class: "tap-row-main",
+                                    strong { {tx::QUICK_BANK} }
+                                    span { class: "muted small", {tx::QUICK_BANK_SUB} }
+                                }
+                                span { class: "chev", aria_hidden: "true" }
+                            }
+                        }
+                        // Content checks are a separate thing from memory: their
+                        // marks and export live in Settings › Data.
+                        li {
+                            button { class: "tap tap-row", title: tx::CHECKED_HINT, onclick: move |_| settings.show(Some(crate::settings::Section::Data)),
+                                span { class: "row-icon", aria_hidden: "true", {crate::icons::check()} }
+                                span { class: "tap-row-main",
+                                    strong { {tx::CHECKED_ROW} }
+                                    span { class: "muted small", {tx::checked_sub(o.checked)} }
+                                }
+                                span { class: "chev", aria_hidden: "true" }
                             }
                         }
                     }
@@ -176,24 +189,16 @@ fn Hero(
     nothing: bool,
     minutes: u32,
 ) -> Element {
-    let mut ui = use_context::<Ui>();
+    let ui = use_context::<Ui>();
     let review = use_review();
     let ready = due + new_today > 0;
     // The card's one job: start the session, or with nothing due, the next lesson.
     let next = crate::learn::next_lesson(&[]).map(|l| l.id.clone());
+    let cta_next = next.clone();
     rsx! {
         crate::ui::Card {
             class: "hero card-action td-hero",
-            onclick: move |_| {
-                if ready {
-                    *crate::study::START.write() = Some(crate::study::Start { lectures: None, items: None, minutes });
-                    ui.screen.set(Screen::Study);
-                } else if let Some(id) = &next {
-                    crate::learn::open(ui, id);
-                } else {
-                    ui.screen.set(Screen::Learn);
-                }
-            },
+            onclick: move |_| open_recommended(ui, ready, next.as_deref(), minutes),
             div { class: "hero-meta",
                 span { {if target.is_some() { tx::HERO_KICKER_PLAN } else if due > 0 { tx::HERO_KICKER } else { tx::HERO_KICKER_NEW }} }
                 match target.clone() {
@@ -233,8 +238,14 @@ fn Hero(
                     }
                 }
             }
-            // No handler of its own: its click is the card's.
-            button { class: "btn btn-lg btn-on-hero td-go",
+            // A direct keyboard action; prevent also firing the full-card click.
+            button {
+                class: "btn btn-lg btn-on-hero td-go",
+                r#type: "button",
+                onclick: move |e: MouseEvent| {
+                    e.stop_propagation();
+                    open_recommended(ui, ready, cta_next.as_deref(), minutes);
+                },
                 if ready {
                     {tx::start_session(minutes)}
                 } else {
@@ -243,6 +254,18 @@ fn Hero(
                 {crate::icons::arrow_go()}
             }
         }
+    }
+}
+
+/// The whole-card tap and visible button share one route and study budget.
+fn open_recommended(mut ui: Ui, ready: bool, next: Option<&str>, minutes: u32) {
+    if ready {
+        *crate::study::START.write() = Some(crate::study::Start { lectures: None, items: None, minutes });
+        ui.screen.set(Screen::Study);
+    } else if let Some(id) = next {
+        crate::learn::open(ui, id);
+    } else {
+        ui.screen.set(Screen::Learn);
     }
 }
 
@@ -520,5 +543,45 @@ fn LibraryList() -> Element {
                 }
             }
         }
+    }
+}
+
+#[cfg(test)]
+mod hierarchy_tests {
+    #[test]
+    fn daily_study_and_continuation_come_before_secondary_shortcuts() {
+        let source = include_str!("mod.rs");
+        let today = source.split("/// The one recommended start").next().unwrap();
+        let sections = [
+            "Hero { target:",
+            "div { class: \"stat-tiles\"",
+            "crate::learn::TodayLesson {",
+            "section { class: \"in-progress\"",
+            "crate::recap::TodayRecap {",
+            "details { class: \"td-extras\"",
+        ];
+        let positions: Vec<usize> = sections
+            .iter()
+            .map(|section| today.find(section).unwrap_or_else(|| panic!("Missing Today section: {section}")))
+            .collect();
+        assert!(positions.windows(2).all(|pair| pair[0] < pair[1]));
+        assert_eq!(today.matches("Tile {").count(), 2);
+        assert!(today.contains("if target.is_none() && all_minutes > 0"));
+    }
+
+    #[test]
+    fn visible_hero_button_has_its_own_non_bubbling_click_handler() {
+        let source = include_str!("mod.rs");
+        let hero = source.split("fn Hero(").nth(1).unwrap().split("fn unseen_ids(").next().unwrap();
+        assert!(hero.contains("onclick: move |_| open_recommended("));
+        assert!(hero.contains("r#type: \"button\""));
+        assert!(hero.contains("e.stop_propagation();\n                    open_recommended("));
+    }
+
+    #[test]
+    fn full_library_remains_in_lessons_at_compact_and_medium_widths() {
+        let css = include_str!("today.css");
+        assert!(css.contains("@media (max-width: 839.98px)"));
+        assert!(css.contains(".today-cols > .tab-aside { display: none; }"));
     }
 }

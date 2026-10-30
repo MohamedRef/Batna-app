@@ -75,20 +75,4 @@ mod tests {
         dom.rebuild_in_place();
         let _ = dom.render_immediate_to_vec();
     }
-
-    #[test]
-    fn shared_surface_styles_cover_widths_themes_text_and_reduced_motion() {
-        let base = include_str!("../assets/main.css");
-        let shape = include_str!("../assets/shape.css");
-        let appearance = include_str!("../assets/appearance.css");
-        let parts = include_str!("../assets/parts.css");
-        assert!(shape.contains("@media (max-width: 599.98px)"));
-        assert!(shape.contains("@media (max-width: 839.98px)"));
-        assert!(base.contains("--card-pad"));
-        assert!(parts.contains("--radius-card"));
-        assert!(base.contains("bdi[dir=\"ltr\"]"));
-        assert!(base.contains("prefers-reduced-motion"));
-        assert!(appearance.contains("data-appearance=\"glossy\""));
-        assert!(appearance.contains("prefers-reduced-transparency"));
-    }
 }

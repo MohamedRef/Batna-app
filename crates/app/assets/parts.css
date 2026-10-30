@@ -84,7 +84,7 @@
 .stat-tile {
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
   min-block-size: 5rem; padding: var(--sp-2); text-align: center;
-  background: var(--surface); border: 1px solid var(--card-border); border-radius: var(--radius-card);
+  background: var(--surface); border: 1px solid var(--card-border); border-radius: var(--radius-card); box-shadow: var(--card-shadow);
 }
 .stat-num { font-size: var(--fs-xl); font-weight: 700; font-family: var(--font-latin); direction: ltr; unicode-bidi: isolate; font-variant-numeric: tabular-nums; }
 .stat-label { font-size: var(--fs-sm); color: var(--muted); line-height: 1.4; }
@@ -283,7 +283,7 @@ input[type="checkbox"][role="switch"]:checked::after { inset-inline-start: calc(
 .coll-group { margin: var(--sp-2) 0 0; font-size: var(--fs-sm); font-weight: 700; color: var(--muted); }
 button.coll-btn {
   inline-size: 100%; display: flex; align-items: center; gap: var(--sp-3); min-block-size: var(--row, 48px);
-  padding: var(--sp-3) var(--sp-4); border: 0; border-radius: 0; background: none; color: inherit;
+  padding: var(--sp-3) var(--card-pad); border: 0; border-radius: 0; background: none; color: inherit;
   font: inherit; text-align: start; cursor: pointer;
 }
 button.coll-btn:not(:disabled):active { transform: var(--press, scale(0.98)); }
@@ -309,7 +309,7 @@ button.coll-btn:focus-visible { outline: 2px solid var(--accent); outline-offset
 
 /* List and compact: rows in one surface with hairlines. */
 .coll:is([data-layout="list"], [data-layout="compact"]) {
-  background: var(--surface); border: 1px solid var(--card-border); border-radius: var(--radius-card); overflow: hidden;
+  background: var(--surface); border: 1px solid var(--card-border); border-radius: var(--radius-card); box-shadow: var(--card-shadow); overflow: hidden;
 }
 .coll:is([data-layout="list"], [data-layout="compact"]) > li + li { border-block-start: 1px solid var(--line-soft, var(--line)); }
 @media (hover: hover) and (pointer: fine) {
@@ -327,15 +327,15 @@ button.coll-btn:focus-visible { outline: 2px solid var(--accent); outline-offset
 @media (min-width: 840px) { .coll[data-layout="cards"] { grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); } }
 .coll[data-layout="cards"] > li { display: flex; min-inline-size: 0; }
 .coll[data-layout="cards"] button.coll-btn {
-  position: relative; flex-direction: column; align-items: stretch; gap: var(--sp-2); padding: var(--sp-3);
-  background: var(--surface); border: 1px solid var(--card-border); border-radius: var(--radius-card);
+  position: relative; flex-direction: column; align-items: stretch; gap: var(--sp-2); padding: var(--card-pad);
+  background: var(--surface); border: 1px solid var(--card-border); border-radius: var(--radius-card); box-shadow: var(--card-shadow);
 }
 .coll[data-layout="cards"] .coll-lead { padding-inline-end: var(--sp-4); }
 .coll[data-layout="cards"] .coll-main { flex: 1; }
 /* The progress line sits at the foot of every card in a row. */
 .coll[data-layout="cards"] .coll-extra { margin-block-start: auto; padding-block-start: var(--sp-1); }
 .coll[data-layout="cards"] .coll-end { flex-direction: row; flex-wrap: wrap; align-items: center; gap: var(--sp-1) var(--sp-2); text-align: start; }
-.coll[data-layout="cards"] .chev { position: absolute; inset-block-start: calc(var(--sp-3) + 1rem); inset-inline-end: var(--sp-3); }
+.coll[data-layout="cards"] .chev { position: absolute; inset-block-start: calc(var(--card-pad) + 1rem); inset-inline-end: var(--card-pad); }
 @media (hover: hover) and (pointer: fine) { .coll[data-layout="cards"] button.coll-btn:hover { border-color: var(--accent); } }
 
 /* A course's heading over its lectures (parts::CourseHead). */

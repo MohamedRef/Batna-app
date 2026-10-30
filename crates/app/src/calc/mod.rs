@@ -147,7 +147,7 @@ pub fn CalcForm(id: &'static str, initial: Inputs) -> Element {
     rsx! {
         style { {CSS.text()} }
         div { class: "calc-form",
-            section { class: "card calc-fields",
+            crate::ui::Card { class: "calc-fields",
                 h1 { bdi { {spec.name} } }
                 p { class: "muted small calc-intro", {tx::INTRO} }
                 for field in spec.fields {

@@ -1,6 +1,6 @@
 # Shared UI completion: Batna
 
-Updated: 2026-10-30. Current branch: `improve/workflow-modules-20261030`.
+Updated: 2026-10-30. Current branch: `test/settings-browser-20261030`.
 Previous checkpoint: merged PR #526; subsequent merged UX changes are retained.
 
 ## Item 1: interactive and dynamic cards (2026-10-30)
@@ -45,6 +45,18 @@ numbered items. Passing these component tests does not certify pixel layout.
 
 The remaining facade code owns integration and shared state. Tests live in
 `tests.rs`; they are not replaced with new tests of the extraction itself.
+
+## Item 3: rendered Settings browser checks (2026-10-30)
+
+- [x] Export actual Settings/Look components and production styles through the
+  test-only SSR renderer, using synthetic preferences and an in-memory store.
+- [x] Add a pinned Chromium job for computed layout and the production Settings
+  focus boundary across compact/medium/expanded widths, all themes, both surface
+  appearances and largest text, including RTL/LTR where the app supports it.
+- Browser execution and screenshot evidence belong to this item's CI head; see
+  [SETTINGS-BROWSER-QA.md](SETTINGS-BROWSER-QA.md) for commands and scope.
+- [ ] Complete broader screen integration and the physical-device matrix. SSR
+  callbacks are not hydrated; no application-close or native-device pass is claimed.
 
 ## Implementation checkpoint
 

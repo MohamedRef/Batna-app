@@ -450,7 +450,7 @@ fn Questions() -> Element {
                 div { class: "onboard-top",
                     span { class: "chip", {tx::progress(step() + 1, STEPS.len())} }
                     if !last {
-                        button { class: "btn btn-ghost", onclick: move |_| close(), {tx::LATER} }
+                        button { class: "btn btn-ghost", "data-back": if step() == 0 && detail().is_none() { "true" } else { "false" }, onclick: move |_| close(), {tx::LATER} }
                     }
                 }
                 section { class: "onboard-body", {body} }

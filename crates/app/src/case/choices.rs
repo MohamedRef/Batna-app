@@ -35,4 +35,3 @@ pub(super) fn option_state(
         Some(_) => "dim",
     }
 }
-

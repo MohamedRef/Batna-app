@@ -33,11 +33,7 @@ static FROM: GlobalSignal<Screen> = Signal::global(|| Screen::Learn);
 
 /// Following another lesson should keep the original return destination.
 fn lesson_origin(current: Screen, has_open_lesson: bool, previous: Screen) -> Screen {
-    if has_open_lesson && current == Screen::Learn {
-        previous
-    } else {
-        current
-    }
+    if has_open_lesson && current == Screen::Learn { previous } else { current }
 }
 
 /// Opens a lesson from anywhere (Today, a study item, the planner).

@@ -189,15 +189,18 @@ fn App() -> Element {
     lecture::use_lecture_page(ui);
     sheet::use_gestures();
     courses::focus::use_close_on_screen_change(ui);
-    back::use_back(
-        ui,
-        current,
-        *settings.open.read()
-            || lecture::is_open()
-            || pagesheet::is_open()
-            || shortcuts::is_open()
-            || courses::focus::is_open(),
-    );
+    let settings_open = *settings.open.read();
+    let settings_detail = settings_open && settings.section.read().is_some();
+    let updates_open = use_context::<update::sheet::UpdateSheetNav>().0.read().is_some();
+    // A boolean misses transitions between nested settings/update layers.
+    let back_layers = u8::from(settings_open)
+        | (u8::from(settings_detail) << 1)
+        | (u8::from(updates_open) << 2)
+        | (u8::from(lecture::is_open()) << 3)
+        | (u8::from(pagesheet::is_open()) << 4)
+        | (u8::from(shortcuts::is_open()) << 5)
+        | (u8::from(courses::focus::is_open()) << 6);
+    back::use_back(ui, current, back_layers);
     update::view::use_android_install(ui);
     update::view::use_content_switch(ui);
     update::view::use_update_notice_taps(settings);

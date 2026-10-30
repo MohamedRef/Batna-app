@@ -14,7 +14,9 @@
 }
 .st-chip[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); }
 .st-section-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--sp-2); }
-.st-lectures { display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); }
+/* min(): one column on a narrow phone at the larger text sizes, never wider
+   than the screen. */
+.st-lectures { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(15rem, 100%), 1fr)); }
 .st-lectures .st-chip { border-radius: var(--radius); padding-block: var(--sp-1); line-height: 1.4; }
 .st-chip-num { color: var(--accent); font-weight: 700; font-variant-numeric: tabular-nums; }
 .st-preview { color: var(--muted); }

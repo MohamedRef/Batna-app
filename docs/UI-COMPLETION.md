@@ -1,7 +1,7 @@
 # Shared UI completion: Batna
 
-Updated: 2026-10-30. Current branch: `improve/interactive-cards-20261030`.
-Previous checkpoint: merged PR #523.
+Updated: 2026-10-30. Current branch: `improve/workflow-modules-20261030`.
+Previous checkpoint: merged PR #526; subsequent merged UX changes are retained.
 
 ## Item 1: interactive and dynamic cards (2026-10-30)
 
@@ -23,6 +23,29 @@ Previous checkpoint: merged PR #523.
 The existing physical-device and browser-layout gaps below remain separate
 numbered items. Passing these component tests does not certify pixel layout.
 
+## Item 2: workflow ownership (2026-10-30)
+
+- [x] Split rendering stages, update state and orchestration, persistence
+  responsibilities and existing tests into focused sibling modules.
+- [x] Preserve the public feature facades and original function bodies. Child
+  modules keep parent-only visibility for implementation helpers; no new runtime
+  dependency, persistence format, scheduler or content approval change is involved.
+- [x] Retain each original behavior test once, rebasing physical fixture paths.
+  A function inventory confirms that no function was lost or duplicated.
+- Validation results and full native/target CI are recorded on this item's PR.
+  Local checks omit desktop features because this runner has no WebView libraries.
+
+| Feature facade | Before (lines) | After (lines) |
+|---|---:|---:|
+| `learn/steps.rs` | 976 | 208 |
+| `study/mod.rs` | 740 | 500 |
+| `case/mod.rs` | 725 | 355 |
+| `store/backend.rs` | 773 | 423 |
+| `update/mod.rs` | 2,234 | 492 |
+
+The remaining facade code owns integration and shared state. Tests live in
+`tests.rs`; they are not replaced with new tests of the extraction itself.
+
 ## Implementation checkpoint
 
 - [x] Added scanner regression coverage for shared Card/DivCard classes on the next source line, so migrated cards remain checked for dead-end interactions.
@@ -33,7 +56,7 @@ numbered items. Passing these component tests does not certify pixel layout.
 - [x] Added VirtualDom smoke tests exercising shared components with a real button, label, text input, and action row.
 - [x] Added production CSS contract assertions for compact/medium breakpoints, appearance, reduced motion/transparency, RTL/LTR isolation and shared card tokens.
 - [x] Completed the remaining base-card migration, including interactive and dynamic variants, with events, keys, IDs and ARIA preserved.
-- [ ] Continue splitting large independent workflows (`update/mod.rs`, `learn/steps.rs`, `study/mod.rs`, `store/backend.rs`) in separately validated changes.
+- [x] Split the targeted large workflows behind their existing feature APIs (see item 2).
 - [ ] Add rendered browser/WebView responsive, focus and keyboard checks. VirtualDom and CSS-selector assertions are not visual QA.
 - [ ] Complete the separate Mac/S24 Ultra/Tab S11 device matrix. Current-item CI status is recorded on its PR.
 

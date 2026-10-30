@@ -79,6 +79,24 @@ Tests cover a real blocked directory, retained prior files where applicable,
 latest-choice replacement, unrelated failures, repeated failed retry and a real
 Dioxus reactive observer. Native WebView layout still requires device QA.
 
+## Workflow module ownership (2026-10-30)
+
+| Responsibility | Module |
+|---|---|
+| Lesson dispatch, shared gate and response context | `learn/steps.rs` |
+| Figures, reveals and instructional blocks | `learn/steps/presentation.rs` |
+| Check, order, match, sort, mini-case and table interactions | `learn/steps/{check,order,matching,sorting,mini_case,table}.rs` |
+| Study setup and completion | `study/{setup,outcome}.rs` |
+| Clinical case stages and recap | `case/player.rs` |
+| Review backend's StudyStore implementation | `store/backend/study.rs` |
+| Update state and execution | `update/{model,service}.rs` |
+
+Keep callers on the existing feature facade. Change the owning stage rather
+than copying its state into another screen. Public names are re-exported with
+their existing visibility; internal helpers use parent-only visibility. Shared
+state stays with the parent, and persistence operations keep their transactions.
+Existing tests live beside the owning facade in a child `tests.rs` module.
+
 ## Remaining work, in priority order
 
 1. **Feature-specific write recovery.** Shared preference writes now use

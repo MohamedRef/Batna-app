@@ -269,7 +269,7 @@ mod ux_tests {
         dom.rebuild_in_place();
         let html = dioxus::ssr::render(&dom);
         for required in [
-            "aria-expanded=\"true\"",
+            "aria-expanded=true",
             "aria-controls=\"cm-detail-hb\"",
             "id=\"cm-detail-hb\"",
             tx::OPEN_LECTURES,

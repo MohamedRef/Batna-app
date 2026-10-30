@@ -4,6 +4,7 @@ Updated: 2026-10-30. Branch: `improve/shared-ui-completion` (PR #523).
 
 ## Implementation checkpoint
 
+- [x] Added scanner regression coverage for shared Card/DivCard classes on the next source line, so migrated cards remain checked for dead-end interactions.
 - [x] Incorporated merged preference-recovery and Android Back changes from `main`.
 - [x] Added semantic shared content surfaces: `ui::Card` retains `section`, `ui::DivCard` retains `div`. Existing `ui::ActionRow` keeps its native accessible button.
 - [x] Migrated a first set of static cards in Study, Plan, Oral, Cases, Stats, Learn, and related views without changing the original child controls. Special-case clickable, keyed, labelled and alertdialog surfaces remain native.

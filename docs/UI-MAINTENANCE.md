@@ -183,6 +183,15 @@ focus-independent ring. It remains only a suggestion; all four grades,
 their real FSRS intervals, review storage and retry/Undo semantics are
 unchanged. The label is absent when there is no recommendation.
 
+## Study review: touch targets and announcements (2026-10-30)
+
+Every `.btn`, `.btn-link` and `.btn-lg` inside the study screen (`.st`), the
+lecture chips, the time choice, cloze blanks and recall points use at least
+the shared 48dp `--target`; compact `--tap` alone is 40px. The progress bar
+gives `aria-valuetext` ("N من M") so it no longer reads the 0-based count.
+The session summary focuses its heading on mount so the result is announced
+after the last grade button disappears. Ratings, FSRS, Undo and review
+storage are unchanged.
 ## Lesson and study browser checks (2026-10-30)
 
 A second Chromium job (`screens-browser.yml`) renders the production lesson

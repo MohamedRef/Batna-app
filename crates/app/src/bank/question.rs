@@ -74,8 +74,12 @@ pub fn QuestionView(
                             },
                             span { class: "answer-key", "{letter}" }
                             span { class: "q-text answer-text", "{text}" }
-                            if reveal && matches!(state, "correct" | "missed") {
-                                span { class: "answer-mark", lang: "ar", dir: "rtl", "✓ {tx::RIGHT}" }
+                            // The state in words, so it never rests on colour alone.
+                            if reveal && state == "correct" {
+                                span { class: "answer-mark", lang: "ar", dir: "rtl", "✓ {tx::RIGHT_PICKED}" }
+                            }
+                            if reveal && state == "missed" {
+                                span { class: "answer-mark", lang: "ar", dir: "rtl", "✓ {tx::RIGHT_ANSWER}" }
                             }
                             if reveal && state == "wrong" {
                                 span { class: "answer-mark", lang: "ar", dir: "rtl", "✗ {tx::YOUR_ANSWER}" }
@@ -101,6 +105,11 @@ pub fn QuestionView(
                 for (orig, letter, _, reason, state) in rows {
                     li { key: "{orig}", "data-state": if matches!(state, "correct" | "missed") { "right" } else { state },
                         span { class: "q-letter", "{letter}" }
+                        if matches!(state, "correct" | "missed") {
+                            span { class: "q-why-mark", lang: "ar", dir: "rtl", "✓ {tx::RIGHT}" }
+                        } else if state == "wrong" {
+                            span { class: "q-why-mark", lang: "ar", dir: "rtl", "✗ {tx::YOUR_ANSWER}" }
+                        }
                         span { "{reason}" }
                     }
                 }

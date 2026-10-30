@@ -1,11 +1,12 @@
 //! Keyboard shortcuts for tablet keyboards and the Mac (PARITY.md §6.5):
 //! Ctrl/⌘ + 1–7 for the screens, Ctrl/⌘ + , for Settings, and on study
 //! screens Space to reveal, 1–4 to rate, A–E for MCQ options, Enter for next,
-//! Esc to close, ? for the list.
+//! ← / → between questions of a timed paper, F to flag, Esc to close, ? for
+//! the list.
 //!
 //! Screens don't register handlers: a key presses the visible, enabled button
 //! whose `aria-keyshortcuts` names it (`"Space"`, `"1"`, `"A"`, `"Enter"`,
-//! `"Escape"`). That is also how screen readers learn the key.
+//! `"Escape"`, `"ArrowLeft"`, `"F"`). That is also how screen readers learn the key.
 // adapted from kabar-app main: crates/app/src/settings/menu.rs ("?" key) and
 // crates/app/src/review.rs (keys on visible buttons).
 
@@ -43,10 +44,11 @@ window.__batnaKeys = (e) => {
   else if (e.key === "Enter") key = "enter";
   else if (e.key === "Escape") key = "escape";
   else if (/^(Digit|Numpad)[1-9]$/.test(e.code)) key = e.code.slice(-1);
-  else if (/^Key[A-E]$/.test(e.code)) key = e.code.slice(3).toLowerCase();
+  else if (e.key === "ArrowLeft" || e.key === "ArrowRight") key = e.key.toLowerCase();
+  else if (/^Key[A-F]$/.test(e.code)) key = e.code.slice(3).toLowerCase();
   if (!key) return;
   // An open dialog (the shortcut list) takes the keys first.
-  const scope = document.querySelector("[role=dialog][aria-modal=true]") || document;
+  const scope = document.querySelector("[role=dialog][aria-modal=true], [role=alertdialog][aria-modal=true]") || document;
   const hit = [...scope.querySelectorAll("[aria-keyshortcuts]")].find((el) =>
     !el.disabled && el.getClientRects().length > 0 &&
     el.getAttribute("aria-keyshortcuts").toLowerCase().split(/\s+/).includes(key));
@@ -114,13 +116,15 @@ pub fn KeysSheet() -> Element {
         return rsx! {};
     }
     let screens = format!("{} … {}", nav::TODAY, nav::STATS);
-    let rows: [(&[&str], String); 9] = [
+    let rows: [(&[&str], String); 11] = [
         (&["Ctrl", "1–7"], format!("{} ({screens})", tx::SCREENS)),
         (&["Ctrl", ","], tx::SETTINGS.into()),
         (&["Space"], tx::REVEAL.into()),
         (&["1", "2", "3", "4"], tx::RATE.into()),
         (&["A", "B", "C", "D", "E"], tx::OPTIONS.into()),
         (&["Enter"], tx::NEXT.into()),
+        (&["←", "→"], tx::MOVE.into()),
+        (&["F"], tx::FLAG.into()),
         (&["Esc"], tx::ESC.into()),
         (&["?"], tx::HELP.into()),
         (&["⌘"], tx::NOTE.into()),

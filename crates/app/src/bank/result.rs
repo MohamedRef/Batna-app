@@ -69,23 +69,35 @@ pub fn Result() -> Element {
         .collect();
     let any_flagged = paper.answers.iter().any(|a| a.flagged);
     let mut open = use_signal(|| None::<usize>);
-    let detail = open().and_then(|i| Some((i, paper.questions.get(i)?.clone(), paper.answers.get(i)?.clone()))).map(
-        |(i, q, a)| {
+    let detail = open()
+        .and_then(|i| Some((i, paper.questions.get(i)?.clone(), paper.answers.get(i)?.clone())))
+        .map(|(i, q, a)| {
             rsx! {
                 div { class: "review-detail",
                     div { class: "review-detail-head",
                         span { class: "run-count", "{tx::QUESTION} " bdi { "{i + 1}" } }
-                        button { class: "btn-link", "aria-keyshortcuts": "Escape", onclick: move |_| open.set(None), {tx::CLOSE} }
+                        button {
+                            class: "btn-link bank-close",
+                            "aria-keyshortcuts": "Escape",
+                            // Android Back closes the question before leaving the result.
+                            "data-back": "true",
+                            onclick: move |_| open.set(None),
+                            {tx::CLOSE}
+                        }
                     }
                     QuestionView { key: "{i}", q, chosen: a.chosen, reveal: true }
                 }
             }
-        },
-    );
+        });
 
     rsx! {
         crate::ui::Card { class: "result",
+            // Submit is gone: land focus on the result so it is read out.
             h1 {
+                tabindex: "-1",
+                onmounted: move |e: MountedEvent| async move {
+                    let _ = e.set_focus(true).await;
+                },
                 if paper.mode == Mode::Mock { {tx::MOCK_TITLE} } else { {tx::RESULT} }
             }
             div { class: "big-score",
@@ -102,6 +114,18 @@ pub fn Result() -> Element {
             }
             if has_wrong {
                 p { class: "small", {tx::SENT_TO_REVIEW} }
+            }
+            // The one next step sits with the score, not under the review list.
+            div { class: "start-row",
+                if has_wrong {
+                    button {
+                        class: "btn btn-primary btn-lg",
+                        onclick: { let wrong = wrong.clone(); move |_| start(Mode::Tutor, wrong.clone()) },
+                        {tx::RETRY_WRONG}
+                    }
+                } else {
+                    button { class: "btn btn-primary btn-lg", onclick: move |_| back_to_setup(), {tx::NEW_PAPER} }
+                }
             }
         }
 
@@ -169,11 +193,13 @@ pub fn Result() -> Element {
                             "data-right": if a.correct(&q) { "yes" } else { "no" },
                             "aria-current": if open() == Some(i) { "true" } else { "false" },
                             onclick: move |_| open.set(Some(i)),
-                            span { class: "mark", if a.correct(&q) { "✓" } else { "✗" } }
+                            span { class: "mark", aria_hidden: "true", if a.correct(&q) { "✓" } else { "✗" } }
                             span { "{tx::QUESTION} " bdi { "{i + 1}" } }
+                            span { class: "bank-sr", if a.correct(&q) { "، {tx::RIGHT}" } else { "، {tx::WRONG}" } }
                             bdi { class: "stem-peek", {stem_peek(&q.id)} }
                             if a.flagged {
-                                span { class: "muted", " ⚑" }
+                                span { class: "muted", aria_hidden: "true", " ⚑" }
+                                span { class: "bank-sr", "، {tx::FLAGGED}" }
                             }
                         }
                     }
@@ -183,14 +209,14 @@ pub fn Result() -> Element {
         }
 
         div { class: "start-row",
-            if has_wrong {
-                button {
-                    class: "btn btn-primary",
-                    onclick: move |_| start(Mode::Tutor, wrong.clone()),
-                    {tx::RETRY_WRONG}
-                }
+            button {
+                class: "btn btn-secondary",
+                // Android Back on the result returns to the bank; an open
+                // question's Close takes it first.
+                "data-back": if open().is_none() { "true" } else { "false" },
+                onclick: move |_| back_to_setup(),
+                {tx::BACK}
             }
-            button { class: "btn btn-secondary", onclick: move |_| back_to_setup(), {tx::BACK} }
         }
     }
 }

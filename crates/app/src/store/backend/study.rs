@@ -11,6 +11,8 @@ impl StudyStore for ReviewBackend {
         let id = event.item_id.clone();
         match self.store.append_review(event) {
             Ok(logged) => {
+                // Rating again after a failed save clears Today's note.
+                super::super::write_recovered(&format!("the answer to {id}"));
                 let logged_id = logged.id.clone();
                 self.log.push(logged);
                 self.replay();
@@ -29,6 +31,7 @@ impl StudyStore for ReviewBackend {
     fn retract(&mut self, event_id: &str) -> bool {
         match self.store.retract_review(event_id) {
             Ok(_) => {
+                super::super::write_recovered(&format!("taking back the answer {event_id}"));
                 let before = self.log.len();
                 self.log.retain(|l| l.id != event_id);
                 if self.log.len() != before {

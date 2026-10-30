@@ -477,6 +477,19 @@ pub mod bank {
     pub const UPDATE_NOTE: &str = "إجابة الامتحان هي إجابة الكتاب.";
     pub const RIGHT: &str = "صح";
     pub const YOUR_ANSWER: &str = "إجابتك";
+    pub const RIGHT_PICKED: &str = "إجابتك صح";
+    pub const RIGHT_ANSWER: &str = "دي الإجابة الصح";
+    pub const WRONG: &str = "غلط";
+    pub const ANSWERED: &str = "متجاوب";
+    pub const NOW_HERE: &str = "إنت هنا";
+    /// Read out once a tutor answer is checked (the Check button is gone).
+    pub fn checked(right: bool, letter: char) -> String {
+        if right {
+            "إجابتك صح.".to_string()
+        } else {
+            format!("إجابتك غلط. الإجابة الصح {letter}.")
+        }
+    }
     pub const NOT_FOUND: &str = "السؤال ده اتشال من المحتوى.";
 
     pub const RESULT: &str = "النتيجة";
@@ -492,6 +505,7 @@ pub mod bank {
     pub const SHOW_FLAGGED: &str = "المتعلّم عليها";
     pub const RETRY_WRONG: &str = "جاوب الغلط تاني بالشرح";
     pub const BACK: &str = "رجوع للبنك";
+    pub const NEW_PAPER: &str = "حل ورقة جديدة";
     pub const SENT_TO_REVIEW: &str = "الأسئلة اللي غلطت فيها هترجعلك في المراجعة قريب.";
     pub const REPORT: &str = "بلّغ عن مشكلة في السؤال ده";
     pub const CLOSE: &str = "اقفل";
@@ -966,6 +980,8 @@ pub mod keys {
     pub const RATE: &str = "تقيّم نفسك (من نسيت لسهل)";
     pub const OPTIONS: &str = "تختار إجابة في سؤال الاختيارات";
     pub const NEXT: &str = "اللي بعده";
+    pub const MOVE: &str = "السؤال اللي بعده أو اللي قبله في الامتحان";
+    pub const FLAG: &str = "تعلّم السؤال عشان ترجعله";
     pub const ESC: &str = "تقفل أي حاجة مفتوحة";
     pub const HELP: &str = "القايمة دي";
 }
@@ -983,7 +999,7 @@ pub mod verify {
     pub const SAVED_APPROVED: &str = "✓ اتسجّل إنه صح، ومش هيسألك عليه تاني.";
     pub const SAVED_EDITED: &str = "✎ اتسجّل تعديلك، وهتذاكره بكلامك من هنا ورايح.";
     pub const SAVED_WRONG: &str = "✗ اتشال من المراجعة لحد ما يتصلّح.";
-    pub const NOT_SAVED: &str = "ما اتحفظش. جرّب تاني بعد شوية.";
+    pub const NOT_SAVED: &str = "ما اتحفظش، واختيارك لسه زي ما هو. اضغط «حاول تاني».";
     pub const WRONG_NOTE: &str = "إيه الغلط؟ (اختياري)";
     pub const WRONG_PLACEHOLDER: &str = "مثلاً: الكتاب صفحة 14 بيقول 7–9 نقط";
     pub const WRONG_CONFIRM: &str = "شيله من المراجعة";
@@ -1043,6 +1059,7 @@ pub mod own {
     pub const SAVE: &str = "احفظ";
     pub const CANCEL: &str = "إلغاء";
     pub const FAILED: &str = "ما عرفتش أحفظ الكارت:";
+    pub const DELETE_FAILED: &str = "ما عرفتش أمسح الكارت، ولسه موجود:";
     pub const E_FRONT: &str = "اكتب السؤال في الوش.";
     pub const E_BACK: &str = "اكتب الإجابة في الضهر.";
     pub const E_FRONT_LONG: &str = "الوش طويل، خليه سؤال قصير (600 حرف بالكتير).";
@@ -1874,4 +1891,5 @@ pub mod lecture {
 pub mod saving {
     pub const FAILED: &str = "فيه إعدادات ما اتحفظتش. اختياراتك شغالة دلوقتي، بس ممكن تضيع لما تقفل التطبيق.";
     pub const RETRY: &str = "حاول تحفظ تاني";
+    pub const TRY_AGAIN: &str = "حاول تاني";
 }

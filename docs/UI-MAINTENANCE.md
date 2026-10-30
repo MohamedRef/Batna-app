@@ -99,11 +99,10 @@ Existing tests live beside the owning facade in a child `tests.rs` module.
 
 ## Remaining work, in priority order
 
-1. **Feature-specific write recovery.** Shared preference writes now use
-   `persistence/`, but domain writes such as reviews, content edits and exports
-   retain their existing error handling. Give those workflows an appropriate
-   recovery UI; never blindly replay append-only events through the preference
-   queue.
+1. **Feature-specific write recovery.** Done for reviews, content checks,
+   own-card deletes and exports (see "Save failures: retry in place" below).
+   New domain writes use `persistence::WriteFailed`; never replay append-only
+   events through the preference queue.
 2. **Smaller workflow modules.** `update/mod.rs`, `learn/steps.rs`,
    `study/mod.rs`, `case/mod.rs` and `store/backend.rs` have large workflow
    units. Extract pure decisions and focused stage components before
@@ -183,6 +182,24 @@ focus-independent ring. It remains only a suggestion; all four grades,
 their real FSRS intervals, review storage and retry/Undo semantics are
 unchanged. The label is absent when there is no recommendation.
 
+## Save failures: retry in place (2026-10-30)
+
+Feature writes that fail now say so where they happened, with a
+«حاول تاني» button, through the shared `persistence::WriteFailed` notice
+(`.save-notice` styling, `role="alert"`). Each feature keeps its own state
+on screen and repeats only its own write:
+
+- Content checks (✓ / ✎ / ✗ and their Undo) keep the failed choice, edit and
+  note; retry runs the same idempotent verdict write.
+- Deleting an own card keeps the confirm row open with the reason.
+- Backup, check and Anki exports retry the same export; a failed export
+  writes nothing.
+- A study answer that fails is still retried by rating again (the answer
+  stays on screen); review events are append-only and never queued.
+
+Today's "not saved" note now clears when that same answer, verdict or
+delete later succeeds. No schema, FSRS, content or study-data changes.
+
 ## Study review: touch targets and announcements (2026-10-30)
 
 Every `.btn`, `.btn-link` and `.btn-lg` inside the study screen (`.st`), the
@@ -192,6 +209,27 @@ gives `aria-valuetext` ("N من M") so it no longer reads the 0-based count.
 The session summary focuses its heading on mount so the result is announced
 after the last grade button disappears. Ratings, FSRS, Undo and review
 storage are unchanged.
+
+## Question bank player and result (2026-10-30)
+
+Answer states are words as well as colours: after a tutor check the
+picked right option says "إجابتك صح", an unpicked right option says
+"دي الإجابة الصح", and a wrong pick says "إجابتك"; the wide-window
+explanation list carries the same ✓/✗ words. A polite live region reads
+the verdict because the Check button disappears, and focus moves to the
+Next button. Navigator cells speak "question N, answered/unanswered,
+flagged" and show a ⚑ glyph besides the bar. The submit confirm keeps
+`role="alertdialog"`; the shortcut handler now scopes keys to an open
+alertdialog as well as a dialog, so A–E never change an answer under it.
+
+The result screen has one primary action, next to the score: retry the
+wrong ones in tutor mode, or a new paper when none are wrong. "Back to the
+bank" is secondary at the foot and takes Android Back; an open review
+question's Close takes Back first. The result heading takes focus on mount.
+Timed papers add ← (next, since the app reads right to left), → (previous)
+and F (flag). Filter chips, navigator cells, review rows, score rows, the
+lecture chip, Close and Report use the shared 48dp `--target`. No scoring,
+FSRS, content, stored papers or schemas changed.
 
 ## Lessons list: continue where you left off (2026-10-30)
 

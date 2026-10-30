@@ -6,6 +6,8 @@
 //! (`player.rs`). Finishing one is saved as a synced setting
 //! `lesson.<id>` ([`Mark`]), and its practice items start a study session.
 
+#[cfg(test)]
+mod browser;
 mod player;
 mod practice;
 mod steps;

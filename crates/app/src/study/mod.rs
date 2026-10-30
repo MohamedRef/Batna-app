@@ -11,6 +11,8 @@ mod setup;
 use setup::*;
 
 mod backend;
+#[cfg(test)]
+mod browser;
 mod card;
 mod cloze;
 mod enumerate;

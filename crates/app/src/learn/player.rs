@@ -410,7 +410,7 @@ fn Summary(lesson: Lesson, right: u32, asked: u32) -> Element {
                         }
                     }
                 }
-                button { class: "btn-link", onclick: move |_| close(ui), {tx::BACK_TO_LIST} }
+                button { class: "btn-link", "data-back": "true", "aria-keyshortcuts": "Escape", onclick: move |_| close(ui), {tx::BACK_TO_LIST} }
             }
             p { class: "muted small", {tx::PRACTICE_HINT} }
         }
@@ -454,5 +454,23 @@ mod ux_tests {
         assert!(production.contains("aria_describedby: if needs_answer"));
         assert!(production.contains("id: \"ls-gate-hint\""));
         assert!(tx::NAV_REQUIRED.contains(tx::SKIP));
+    }
+
+    #[test]
+    fn summary_android_back_and_compact_touch_targets() {
+        let source = include_str!("player.rs");
+        let summary = source
+            .split("fn Summary(")
+            .nth(1)
+            .unwrap()
+            .split("/// Focused navigation regressions")
+            .next()
+            .unwrap();
+        assert!(summary.contains("\"data-back\": \"true\""));
+        assert!(summary.contains("onclick: move |_| close(ui)"));
+        let css = include_str!("learn.css");
+        assert!(css.contains(
+            ".ls-nav :is(.btn, .btn-link), .ls-summary-actions button { min-block-size: var(--target); }"
+        ));
     }
 }

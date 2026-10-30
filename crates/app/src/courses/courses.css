@@ -14,7 +14,7 @@
 .cm-key-done { background: var(--accent); }
 .cm-key-now { background: var(--accent-soft); border: 1px solid var(--accent); }
 .cm-group { display: flex; flex-direction: column; gap: var(--sp-2); }
-.cm-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr)); gap: var(--sp-2); }
+.cm-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 13rem), 1fr)); gap: var(--sp-2); }
 .cm-cell { display: contents; }
 .cm-cell[data-open="true"] .cm-detail { grid-column: 1 / -1; }
 .cm-tile { position: relative; gap: var(--sp-2); min-block-size: 5.5rem; padding-block-start: var(--sp-4); }
@@ -24,7 +24,9 @@
 .cm-tile[data-group="clinical"] { --cm-c: var(--good); }
 .cm-tile[data-group="subspecialty"] { --cm-c: var(--gold); }
 .cm-tile[data-group="basic"] { --cm-c: var(--muted); }
-.cm-name { font-weight: 600; font-size: var(--fs-sm); line-height: 1.4; }
+.cm-name { font-weight: 600; font-size: var(--fs-sm); line-height: 1.4; overflow-wrap: anywhere; }
+.cm-coverage { margin-block-start: var(--sp-1); line-height: 1.5; }
+.cm-tile:focus-visible { outline-offset: 2px; }
 .cm-meta { display: flex; justify-content: space-between; align-items: center; gap: var(--sp-2); margin-block-start: auto; }
 .cm-meta > .small { min-inline-size: 0; white-space: nowrap; }
 .cm-dots { flex: none; display: inline-flex; gap: 3px; color: var(--cm-c, var(--accent)); }

@@ -1818,6 +1818,9 @@ pub mod courses {
     pub fn content_line(written: usize, lectures: usize, items: usize, lessons: usize) -> String {
         format!("{written} من {lectures} محاضرة مكتوبة · {items} كارت · {lessons} درس")
     }
+    pub fn ready_lectures(written: usize, total: usize) -> String {
+        format!("{written} من {total} محاضرة مكتوبة")
+    }
 }
 
 pub mod refs {

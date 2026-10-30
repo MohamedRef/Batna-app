@@ -136,3 +136,9 @@ references the same explanation for accessibility. Close and view-mode
 controls use the shared 48dp touch target. On the final summary, Next
 Lesson becomes the primary action only when there are no practice cards.
 No medical content, scoring, saved drafts, FSRS or Back stack changes.
+
+The compact footer (Back, Continue, Check and Skip) and summary actions
+use 48dp minimum touch heights independently of the compact button token.
+The summary's return-to-list button also participates in the shared Android
+Back controller, so Back exits the finished lesson instead of skipping past
+its origin. Actual gesture and screen-reader behavior still need device QA.

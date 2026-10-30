@@ -539,7 +539,7 @@ fn theme_name(t: Theme) -> &'static str {
 #[component]
 pub fn ReopenCard() -> Element {
     rsx! {
-        section { class: "card onboard-reopen",
+        crate::ui::Card { class: "onboard-reopen",
             h2 { {tx::REOPEN_TITLE} }
             p { class: "muted small", {tx::REOPEN_BODY} }
             button { class: "btn btn-secondary", onclick: move |_| reopen(), {tx::REOPEN} }

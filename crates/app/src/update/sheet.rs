@@ -28,8 +28,6 @@ use crate::i18n::update as tx;
 
 const SHEET_CSS: &str = include_str!("sheet.css");
 
-
-
 /// Which sheet is open.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum SheetMode {
@@ -91,7 +89,6 @@ fn earlier_divider(
         *earlier && (mode == SheetMode::History || build.key() != installed_key)
     })
 }
-
 
 fn kind_label(k: ChangeKind) -> &'static str {
     match k {

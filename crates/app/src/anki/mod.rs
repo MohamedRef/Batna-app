@@ -52,7 +52,7 @@ pub fn AnkiExport() -> Element {
     let items: usize = lib.lectures.values().map(|l| l.items.len()).sum();
     let busy = *state.read() == State::Working;
 
-    let export = move |_| {
+    let export = move || {
         state.set(State::Working);
         // Let the button show "working" before the (sub-second) build runs.
         let review = review.clone();
@@ -72,7 +72,11 @@ pub fn AnkiExport() -> Element {
             h2 { {tx::TITLE} }
             p { class: "muted small", {tx::BODY} }
             p { class: "muted small", "{lectures} {tx::LECTURES} · {items} {tx::ITEMS}" }
-            button { class: "btn btn-primary", disabled: busy, onclick: export,
+            button { class: "btn btn-primary", disabled: busy,
+                onclick: {
+                    let mut export = export.clone();
+                    move |_| export()
+                },
                 if busy { {tx::WORKING} } else { {tx::BUTTON} }
             }
             match &*state.read() {
@@ -81,7 +85,14 @@ pub fn AnkiExport() -> Element {
                     p { class: "muted small", {tx::REIMPORT} }
                 },
                 State::Failed(e) => rsx! {
-                    p { class: "verify-error result", role: "alert", {tx::FAILED} " " bdi { dir: "ltr", "{e}" } }
+                    crate::persistence::WriteFailed {
+                        message: tx::FAILED,
+                        detail: e.clone(),
+                        on_retry: {
+                            let mut export = export.clone();
+                            move |_| export()
+                        },
+                    }
                 },
                 _ => rsx! {},
             }

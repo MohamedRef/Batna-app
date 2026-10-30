@@ -38,7 +38,36 @@ fn an_answer_that_isnt_saved_says_so_and_changes_nothing() {
     assert!(got.is_err());
     assert_eq!(b.reviews_logged(), 1);
     assert_eq!(b.states.get("hb.L01.001").cloned(), before);
-    assert!(super::super::write_error().is_some_and(|e| e.contains("hb.L01.001")));
+}
+
+#[test]
+fn rating_again_after_a_failed_save_clears_todays_note() {
+    // An id no other test answers: Today's note is one process-wide slot.
+    const ID: &str = "hb.L01.retry-note";
+    let mut b = backend();
+    let event = || ReviewEvent {
+        item_id: ID.into(),
+        grade: Grade::Good,
+        origin: Origin::Study,
+        at_ms: T0,
+        took_ms: 4000,
+    };
+    b.store.conn.lock().unwrap().execute("DROP TABLE sync_outbox", []).unwrap();
+    assert!(StudyStore::record_logged(&mut b, event()).is_err());
+    assert!(super::super::write_error().is_some_and(|e| e.contains(ID)));
+    b.store
+        .conn
+        .lock()
+        .unwrap()
+        .execute(
+            "CREATE TABLE sync_outbox (seq INTEGER PRIMARY KEY AUTOINCREMENT, \
+             op_id TEXT NOT NULL UNIQUE, op TEXT NOT NULL) STRICT",
+            [],
+        )
+        .unwrap();
+    assert!(StudyStore::record_logged(&mut b, event()).is_ok());
+    assert_eq!(b.reviews_logged(), 1);
+    assert!(super::super::write_error().is_none_or(|e| !e.contains(ID)));
 }
 
 fn answer(b: &mut ReviewBackend, id: &str, grade: Grade, at_ms: i64) {

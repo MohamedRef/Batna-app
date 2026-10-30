@@ -505,7 +505,7 @@ fn Questions() -> Element {
                     if step() > 0 && !is_detail {
                         button { class: "btn btn-ghost btn-block", "data-back": "true", onclick: move |_| { error.set(None); step -= 1; }, {tx::BACK} }
                     } else if is_detail {
-                        button { class: "btn btn-ghost btn-block", onclick: move |_| { error.set(None); detail.set(None); }, {tx::BACK} }
+                        button { class: "btn btn-ghost btn-block", "data-back": "true", onclick: move |_| { error.set(None); detail.set(None); }, {tx::BACK} }
                     }
                 }
             }

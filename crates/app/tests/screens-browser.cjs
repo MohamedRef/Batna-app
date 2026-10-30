@@ -25,11 +25,9 @@ const FLOOR = { learn: 'var(--target)', study: 'min(var(--tap), var(--target))' 
 // its fix; an entry nothing matches any more is reported as stale.
 const KNOWN = {
   // [screen, selector]: controls still under the screen's floor.
-  small: [
-    ['study', '.cf-chip'], // course-in-view chip
-  ],
+  small: [],
   // States whose controls or content are wider than the screen.
-  overflow: [{ file: 'study-setup.html', width: 320, size: 'larger' }],
+  overflow: [],
   // Running study items have no heading for screen readers to jump to.
   noHeading: [],
 };

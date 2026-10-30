@@ -261,6 +261,13 @@ The browser suite found controls inside lesson steps under the 48dp
 player only (`learn.css`); their look is unchanged. The suite's known-gap
 list drops them, so a regression fails CI.
 
+### Follow-up: study setup on narrow phones (2026-10-30)
+
+At Larger text on a 320px phone the setup's lecture grid asked for a 15rem
+(300px) column, 11px wider than the screen. The column minimum is now
+`min(15rem, 100%)`. The course-in-view chip (Lessons, Review, Questions)
+keeps the 48dp `--target` instead of 40px. Both leave the browser suite's
+known gaps.
 ### Follow-up: study item heading, «اشرحهولي» and foot targets (2026-10-30)
 
 Each study item now has a screen-reader-only `h1` (its kind and lecture), so

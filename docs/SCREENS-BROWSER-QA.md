@@ -56,10 +56,8 @@ out of the failures but stay listed in the log and `report.json`; anything new
 fails. An entry nothing matches any more prints a warning: remove it with its
 fix.
 
-| Gap | Where |
-|---|---|
-| Course chip under `--tap` | Study |
-| Lecture chips 11px wider than a 320px screen at Larger text | Study setup |
+All gaps found on 2026-10-30 were fixed in #540, #541 and #542; the list is
+empty, so every check above applies everywhere.
 
 ## Run
 

@@ -26,11 +26,6 @@ const FLOOR = { learn: 'var(--target)', study: 'min(var(--tap), var(--target))' 
 const KNOWN = {
   // [screen, selector]: controls still under the screen's floor.
   small: [
-    ['learn', '.tap-chip'], // book page chip under a step
-    ['learn', '.ls-explain'], // "open the lesson" link in a Try card
-    ['learn', '.ls-stage[data-kind=reveal] .btn'],
-    ['learn', '.ls-stage[data-kind=mnemonic] .btn-link, .ls-stage[data-kind=table] .btn-link'],
-    ['learn', '.ls-stage[data-kind=try] .btn-lg'],
     ['study', '.tap-chip'],
     ['study', '.ls-explain'],
     ['study', '.cf-chip'], // course-in-view chip

@@ -58,9 +58,8 @@ fix.
 
 | Gap | Where |
 |---|---|
-| Book page chip (`.tap-chip`) 28–35px | Lesson steps, study items |
-| "Open the lesson" link (`.ls-explain`) 26–45px | Try steps, study items |
-| Reveal, "reveal all", Try "show answer" buttons 40–44px | Lesson reveal, mnemonic, table and Try steps |
+| Book page chip (`.tap-chip`) 28–35px | Study items |
+| "Open the lesson" link (`.ls-explain`) 26–45px | Study items |
 | Course chip and hidden table cell under `--tap` | Study |
 | Lecture chips 11px wider than a 320px screen at Larger text | Study setup |
 | No heading on a running item | Study |

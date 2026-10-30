@@ -252,3 +252,11 @@ appearance and text-size cases. Test-only: no app behaviour, FSRS, content or
 schema changes. Gaps already on `main` are listed, not hidden, in
 [SCREENS-BROWSER-QA.md](SCREENS-BROWSER-QA.md) § Known gaps; each is a
 follow-up fix.
+
+### Follow-up: every lesson-step control at 48dp (2026-10-30)
+
+The browser suite found controls inside lesson steps under the 48dp
+`--target`: the book-page chip, Reveal and "reveal all", and a Try card's
+"show answer" and "explain it". They now keep `--target` in the lesson
+player only (`learn.css`); their look is unchanged. The suite's known-gap
+list drops them, so a regression fails CI.

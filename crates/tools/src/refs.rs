@@ -357,13 +357,23 @@ pub fn quote_relates(r: &Ref) -> bool {
 }
 
 /// The book-free half, run by `validate`: lock rows match the content, and
-/// quotes relate to their items. Lectures without a lock file are skipped.
+/// quotes relate to their items. Unwritten lectures have no content or lock yet.
 pub fn check_locks(root: &Path, lectures: &[String]) -> Vec<String> {
     let mut problems = Vec::new();
     for id in lectures {
         let (chapter, num) = id.split_once('.').unwrap_or((id, ""));
         let lock_path = lock_dir(root, chapter).join(format!("{num}.tsv"));
-        if !lock_path.exists() || !root.join("content").join(chapter).join(format!("{num}.yaml")).exists() {
+        let content_path = root.join("content").join(chapter).join(format!("{num}.yaml"));
+        // Index entries for lectures not yet authored are permitted; once
+        // content exists, a missing page-reference lock must fail validation.
+        if !content_path.exists() {
+            if lock_path.exists() {
+                problems.push(format!("{}: lock exists but lecture content is missing", crate::rel(root, &lock_path)));
+            }
+            continue;
+        }
+        if !lock_path.exists() {
+            problems.push(format!("{}: missing page-reference lock; run batna-tools refs --lecture {id} --write", crate::rel(root, &lock_path)));
             continue;
         }
         let at = crate::rel(root, &lock_path);

@@ -1151,7 +1151,9 @@ impl Updater {
         }
         let mut res = req.call().map_err(|_| Failure::Network)?;
         let mut file = match res.status().as_u16() {
-            206 if have > 0 => fs::OpenOptions::new().append(true).open(part),
+            206 if have > 0 && range_start(&res) == Some(have) => {
+                fs::OpenOptions::new().append(true).open(part)
+            }
             // The server sent all of it: start over.
             200 => fs::File::create(part),
             // The part is no use to the server (changed file): start over.
@@ -1467,6 +1469,12 @@ fn update_failure(e: UpdateError) -> Failure {
 }
 
 /// An HTTP agent; local development feeds skip any proxy in the environment.
+/// The first byte of a partial HTTP response, if it supplies a valid range.
+fn range_start<B>(res: &ureq::http::Response<B>) -> Option<u64> {
+    let value = res.headers().get("content-range")?.to_str().ok()?;
+    value.strip_prefix("bytes ")?.split('-').next()?.trim().parse().ok()
+}
+
 fn agent(url: &str, timeout: Duration) -> ureq::Agent {
     let local = url.starts_with("http://127.0.0.1") || url.starts_with("http://localhost");
     let mut config = ureq::Agent::config_builder().http_status_as_error(false).timeout_global(Some(timeout));

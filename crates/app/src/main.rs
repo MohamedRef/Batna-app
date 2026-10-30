@@ -305,7 +305,8 @@ fn screen_body(screen: Screen) -> Element {
         Screen::Cases => rsx! { case::CasesScreen {} },
         Screen::Oral => rsx! { oral::Oral {} },
         Screen::Stats => rsx! { stats::Stats {} },
-        Screen::Settings => rsx! { Soon { screen } },
+        // Settings is a sheet over the current screen, not a standalone page.
+        Screen::Settings => rsx! { today::Today {} },
     }
 }
 

@@ -196,19 +196,19 @@ impl Store {
     /// Moves the clock past rows another connection wrote (the sync
     /// thread), so this device's next write sorts after them.
     pub fn observe_stored(&self) -> Result<()> {
-        let last = newest_stamp(&self.conn.lock().unwrap())?;
+        let last = newest_stamp(&self.conn.lock().unwrap_or_else(std::sync::PoisonError::into_inner))?;
         if let Some(last) = last {
-            self.clock.lock().unwrap().observe(&last);
+            self.clock.lock().unwrap_or_else(std::sync::PoisonError::into_inner).observe(&last);
         }
         Ok(())
     }
 
     pub fn device(&self) -> String {
-        self.clock.lock().unwrap().device().to_string()
+        self.clock.lock().unwrap_or_else(std::sync::PoisonError::into_inner).device().to_string()
     }
 
     fn tick(&self, now_ms: i64) -> Hlc {
-        self.clock.lock().unwrap().tick(now_ms)
+        self.clock.lock().unwrap_or_else(std::sync::PoisonError::into_inner).tick(now_ms)
     }
 
     /// Appends one answer and returns it as logged.
@@ -217,7 +217,7 @@ impl Store {
         let logged =
             LoggedReview { id: format!("{}-{}-{}", hlc.device, hlc.wall_ms, hlc.counter), hlc, event };
         // The answer and its outbox entry land together or not at all.
-        let mut conn = self.conn.lock().unwrap();
+        let mut conn = self.conn.lock().unwrap_or_else(std::sync::PoisonError::into_inner);
         let tx = conn.transaction()?;
         insert_review(&tx, &logged)?;
         sync::enqueue(&tx, "review_events", "id", &logged.id, &logged.hlc.device)?;
@@ -229,11 +229,11 @@ impl Store {
     /// sync, so every device replays the schedule without it. False when it
     /// was already gone (or never existed): nothing is written twice.
     pub fn retract_review(&self, id: &str) -> Result<bool> {
-        let mut conn = self.conn.lock().unwrap();
+        let mut conn = self.conn.lock().unwrap_or_else(std::sync::PoisonError::into_inner);
         let tx = conn.transaction()?;
         let n = tx.execute("UPDATE review_events SET deleted = 1 WHERE id = ?1 AND deleted = 0", [id])?;
         if n > 0 {
-            let device = self.clock.lock().unwrap().device().to_string();
+            let device = self.clock.lock().unwrap_or_else(std::sync::PoisonError::into_inner).device().to_string();
             sync::enqueue(&tx, "review_events", "id", id, &device)?;
         }
         tx.commit()?;
@@ -242,7 +242,7 @@ impl Store {
 
     /// The whole review log, in HLC order. Rows this build can't read are skipped.
     pub fn reviews(&self) -> Result<Vec<LoggedReview>> {
-        let conn = self.conn.lock().unwrap();
+        let conn = self.conn.lock().unwrap_or_else(std::sync::PoisonError::into_inner);
         let mut stmt = conn.prepare(
             "SELECT id, item_id, grade, origin, at_ms, took_ms, device_id, hlc_wall, hlc_counter
              FROM review_events WHERE deleted = 0
@@ -278,7 +278,7 @@ impl Store {
 
     /// Every current verdict, by item id.
     pub fn judgements(&self) -> Result<BTreeMap<String, Judgement>> {
-        let conn = self.conn.lock().unwrap();
+        let conn = self.conn.lock().unwrap_or_else(std::sync::PoisonError::into_inner);
         let mut stmt = conn.prepare("SELECT item_id, value FROM item_status WHERE deleted = 0")?;
         let rows = stmt.query_map([], |r| Ok((r.get::<_, String>(0)?, r.get::<_, String>(1)?)))?;
         let mut out = BTreeMap::new();
@@ -303,7 +303,7 @@ impl Store {
 
     /// A synced setting (last writer wins across devices), by key.
     pub fn setting<T: DeserializeOwned>(&self, key: &str) -> Option<T> {
-        let conn = self.conn.lock().unwrap();
+        let conn = self.conn.lock().unwrap_or_else(std::sync::PoisonError::into_inner);
         conn.query_row("SELECT value FROM settings WHERE key = ?1 AND deleted = 0", [key], |r| {
             r.get::<_, String>(0)
         })
@@ -317,7 +317,7 @@ impl Store {
     /// For records that are one key each, so two devices never overwrite
     /// each other (the bank's finished papers).
     pub fn settings_with_prefix<T: DeserializeOwned>(&self, prefix: &str) -> Vec<(String, T)> {
-        let conn = self.conn.lock().unwrap();
+        let conn = self.conn.lock().unwrap_or_else(std::sync::PoisonError::into_inner);
         let Ok(mut stmt) = conn.prepare(
             "SELECT key, value FROM settings WHERE substr(key, 1, length(?1)) = ?1 AND deleted = 0 ORDER BY key",
         ) else {
@@ -338,7 +338,7 @@ impl Store {
     /// A setting for this device only (never synced, never imported), kept
     /// in `meta` under `local.<key>`.
     pub fn local_setting<T: DeserializeOwned>(&self, key: &str) -> Option<T> {
-        let conn = self.conn.lock().unwrap();
+        let conn = self.conn.lock().unwrap_or_else(std::sync::PoisonError::into_inner);
         conn.query_row("SELECT value FROM meta WHERE key = ?1", [format!("local.{key}")], |r| {
             r.get::<_, String>(0)
         })
@@ -349,7 +349,7 @@ impl Store {
     }
 
     pub fn put_local_setting<T: Serialize>(&self, key: &str, value: &T) -> Result<()> {
-        self.conn.lock().unwrap().execute(
+        self.conn.lock().unwrap_or_else(std::sync::PoisonError::into_inner).execute(
             "INSERT INTO meta (key, value) VALUES (?1, ?2)
              ON CONFLICT (key) DO UPDATE SET value = excluded.value",
             params![format!("local.{key}"), serde_json::to_string(value)?],
@@ -391,8 +391,8 @@ impl Store {
              WHERE (excluded.hlc_wall, excluded.hlc_counter, excluded.device_id)
                  > ({table}.hlc_wall, {table}.hlc_counter, {table}.device_id)"
         );
-        let mine = hlc.device == self.clock.lock().unwrap().device();
-        let mut conn = self.conn.lock().unwrap();
+        let mine = hlc.device == self.clock.lock().unwrap_or_else(std::sync::PoisonError::into_inner).device();
+        let mut conn = self.conn.lock().unwrap_or_else(std::sync::PoisonError::into_inner);
         // The row and its outbox entry land together or not at all.
         let tx = conn.transaction()?;
         let base = params![key, value, hlc.device, hlc.wall_ms, hlc.counter, deleted];

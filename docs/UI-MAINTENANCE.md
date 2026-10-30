@@ -11,7 +11,7 @@ composition. It does not need an inheritance hierarchy to share card behavior.
 rendering, persistence and platform adapters. Batna remains independent of
 Kabar; adapted primitives live in this repository.
 
-`Ui` in `main.rs` supplies reactive device preferences. Study data already has
+`Ui` in `state.rs` supplies reactive device preferences. Study data already has
 a central `store::Review` context: `store/backend.rs` bumps its revision after
 writes and after sync reloads. Use that write path and subscribe to its
 revision rather than keeping another editable copy in each screen. A UI Card

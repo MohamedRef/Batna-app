@@ -1858,3 +1858,9 @@ pub mod lecture {
     pub const CHECKED: &str = "صحة المحتوى: راجعت";
     pub const CHECKED_NOTE: &str = "منفصلة عن إنك خلّصت الدروس.";
 }
+
+/// Shared preference write recovery.
+pub mod saving {
+    pub const FAILED: &str = "فيه إعدادات ما اتحفظتش. اختياراتك شغالة دلوقتي، بس ممكن تضيع لما تقفل التطبيق.";
+    pub const RETRY: &str = "حاول تحفظ تاني";
+}

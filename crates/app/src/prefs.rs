@@ -3,6 +3,8 @@
 //! `key=value` file in the app's data folder, written whole on every change.
 // adapted from kabar-app main: crates/app/src/settings/device.rs
 
+mod storage;
+
 use std::collections::BTreeMap;
 use std::path::PathBuf;
 
@@ -159,21 +161,17 @@ impl Default for DevicePrefs {
 
 impl DevicePrefs {
     pub fn load() -> Self {
-        let text = data_dir().and_then(|d| std::fs::read_to_string(d.join(FILE)).ok()).unwrap_or_default();
+        let text = data_dir().and_then(|d| storage::read(&d).ok()).unwrap_or_default();
         Self::parse(&text)
     }
 
-    /// Best effort: a folder that can't be written keeps the choice for this
-    /// run, and says why in the log.
+    /// Apply immediately, and keep the newest complete device choice for retry.
     pub fn save(&self) {
-        let Some(dir) = data_dir() else { return };
-        let tmp = dir.join(format!("{FILE}.tmp"));
-        let saved = std::fs::create_dir_all(&dir)
-            .and_then(|()| std::fs::write(&tmp, self.render()))
-            .and_then(|()| std::fs::rename(&tmp, dir.join(FILE)));
-        if let Err(e) = saved {
-            crate::diag::report!("saving device prefs in {}: {e}", dir.display());
-        }
+        let choice = *self;
+        crate::persistence::save("device.preferences", move || {
+            let dir = data_dir().ok_or("No device data folder is available")?;
+            storage::write(&dir, &choice.render()).map_err(|e| e.to_string())
+        });
     }
 
     fn parse(text: &str) -> Self {

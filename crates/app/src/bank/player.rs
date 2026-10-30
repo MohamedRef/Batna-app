@@ -203,6 +203,7 @@ fn ConfirmSubmit(
                     button {
                         class: "btn btn-primary",
                         autofocus: true,
+                        "data-back": "true",
                         "aria-keyshortcuts": "Escape",
                         onclick: back,
                         if let Some(i) = first_blank {

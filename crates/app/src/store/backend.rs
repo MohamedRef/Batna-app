@@ -231,6 +231,7 @@ impl ReviewBackend {
             super::write_failed("review settings", &e);
             return false;
         }
+        super::write_recovered("review settings");
         self.settings = settings;
         self.scheduler = Scheduler::from_settings(&self.settings, super::zone());
         self.replay();

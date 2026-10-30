@@ -20,48 +20,7 @@ use dioxus::prelude::*;
 
 use crate::{Screen, Ui};
 
-const BACK_JS: &str = r#"
-window.__batnaBackSend = (m) => dioxus.send(m);
-if (!window.__batnaBackInit) {
-  window.__batnaBackInit = true;
-  let trapped = false;
-  // Set while we pop our own trap: that popstate isn't a Back press.
-  let untrapping = false;
-  window.__batnaTrap = () => {
-    if (!trapped) {
-      history.pushState({ batna: true }, "");
-      trapped = true;
-    }
-  };
-  // Nowhere left to go back to (an overlay closed by tap on Today): drop
-  // the trap, so the next Back leaves Batna instead of doing nothing.
-  window.__batnaUntrap = () => {
-    if (trapped) {
-      trapped = false;
-      untrapping = true;
-      history.back();
-    }
-  };
-  window.addEventListener("popstate", () => {
-    if (untrapping) {
-      untrapping = false;
-      return;
-    }
-    trapped = false;
-    // The last visible one: a control hidden at this width doesn't count.
-    const targets = [...document.querySelectorAll('[data-back="true"]')]
-      .filter((e) => e.getClientRects().length > 0);
-    const top = targets[targets.length - 1];
-    if (top) {
-      top.click();
-      window.__batnaTrap();
-    } else {
-      window.__batnaBackSend(true);
-    }
-  });
-}
-await new Promise(() => {});
-"#;
+const BACK_JS: &str = include_str!("../assets/system-back.js");
 
 /// How many screens Back remembers.
 const DEPTH: usize = 30;
@@ -107,47 +66,52 @@ impl Trail {
     }
 }
 
-/// Wires Back for the Shell. `overlay_open`: a sheet that Back should close
-/// is showing (it carries its own `data-back` control).
-pub fn use_back(ui: Ui, current: Screen, overlay_open: bool) {
+/// One navigation trail for top-level screens. Every visible control with
+/// data-back="true" participates automatically, without feature-specific flags.
+pub fn use_back(ui: Ui, current: Screen) {
     let trail = use_hook(|| Rc::new(RefCell::new(Trail::default())));
-    let armed = use_hook(|| Rc::new(Cell::new(None::<(Screen, bool)>)));
-    let wants_trap = use_hook(|| Rc::new(Cell::new(false)));
-
-    // Re-arm the trap whenever the screen or an overlay changes, or drop it
-    // when there is nowhere left to go back to.
-    let can_back = trail.borrow_mut().visit(current) || overlay_open;
-    wants_trap.set(can_back);
-    if armed.replace(Some((current, overlay_open))) != Some((current, overlay_open)) {
-        document::eval(if can_back {
-            "window.__batnaTrap && window.__batnaTrap();"
-        } else {
-            "window.__batnaUntrap && window.__batnaUntrap();"
-        });
+    // What the script was last told: the Shell re-renders often, and only a
+    // change needs a round trip to the WebView.
+    let told = use_hook(|| Rc::new(Cell::new(None::<bool>)));
+    let can_back = trail.borrow_mut().visit(current);
+    if told.replace(Some(can_back)) != Some(can_back) {
+        tell(can_back);
     }
 
     use_future({
         let trail = trail.clone();
+        let told = told.clone();
         move || {
             let trail = trail.clone();
-            let wants_trap = wants_trap.clone();
+            let told = told.clone();
             async move {
                 let mut eval = document::eval(BACK_JS);
-                // The first screen may already have somewhere to go (the
-                // evals above ran before the script was there).
-                if wants_trap.get() {
-                    document::eval("window.__batnaTrap && window.__batnaTrap();");
-                }
-                while eval.recv::<bool>().await.is_ok() {
-                    let now = *ui.screen.peek();
-                    let to = trail.borrow_mut().back(now);
-                    if let Some(to) = to {
-                        let mut screen = ui.screen;
-                        screen.set(to);
+                while let Ok(message) = eval.recv::<String>().await {
+                    if message == "back" {
+                        let now = *ui.screen.peek();
+                        if let Some(to) = trail.borrow_mut().back(now) {
+                            let mut screen = ui.screen;
+                            screen.set(to);
+                        }
+                    }
+                    if message == "ready" || message == "back" {
+                        // Always answer: the script waits for this after a Back.
+                        let can_back = trail.borrow_mut().visit(*ui.screen.peek());
+                        told.set(Some(can_back));
+                        tell(can_back);
                     }
                 }
             }
         }
+    });
+}
+
+/// Tells the script whether the screen trail has somewhere to go back to.
+fn tell(can_back: bool) {
+    document::eval(if can_back {
+        "window.__batnaSetScreenBack && window.__batnaSetScreenBack(true);"
+    } else {
+        "window.__batnaSetScreenBack && window.__batnaSetScreenBack(false);"
     });
 }
 

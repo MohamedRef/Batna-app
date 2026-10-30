@@ -450,7 +450,7 @@ fn Questions() -> Element {
                 div { class: "onboard-top",
                     span { class: "chip", {tx::progress(step() + 1, STEPS.len())} }
                     if !last {
-                        button { class: "btn btn-ghost", onclick: move |_| close(), {tx::LATER} }
+                        button { class: "btn btn-ghost", "data-back": if step() == 0 && detail().is_none() { "true" } else { "false" }, onclick: move |_| close(), {tx::LATER} }
                     }
                 }
                 section { class: "onboard-body", {body} }
@@ -503,9 +503,9 @@ fn Questions() -> Element {
                         }
                     }
                     if step() > 0 && !is_detail {
-                        button { class: "btn btn-ghost btn-block", onclick: move |_| { error.set(None); step -= 1; }, {tx::BACK} }
+                        button { class: "btn btn-ghost btn-block", "data-back": "true", onclick: move |_| { error.set(None); step -= 1; }, {tx::BACK} }
                     } else if is_detail {
-                        button { class: "btn btn-ghost btn-block", onclick: move |_| { error.set(None); detail.set(None); }, {tx::BACK} }
+                        button { class: "btn btn-ghost btn-block", "data-back": "true", onclick: move |_| { error.set(None); detail.set(None); }, {tx::BACK} }
                     }
                 }
             }

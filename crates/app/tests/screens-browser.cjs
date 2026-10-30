@@ -28,11 +28,10 @@ const KNOWN = {
   small: [
     ['study', '.tap-chip'],
     ['study', '.ls-explain'],
-    ['study', '.cf-chip'], // course-in-view chip
     ['study', '.tb-reveal'], // hidden table cell
   ],
   // States whose controls or content are wider than the screen.
-  overflow: [{ file: 'study-setup.html', width: 320, size: 'larger' }],
+  overflow: [],
   // Running study items have no heading for screen readers to jump to.
   noHeading: [{ screen: 'study', phase: 'running' }],
 };

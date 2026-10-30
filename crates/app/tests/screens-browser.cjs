@@ -35,7 +35,6 @@ const KNOWN = {
     ['study', '.ls-explain'],
     ['study', '.cf-chip'], // course-in-view chip
     ['study', '.tb-reveal'], // hidden table cell
-    ['study', '.st-blank'], // cloze fields
   ],
   // States whose controls or content are wider than the screen.
   overflow: [{ file: 'study-setup.html', width: 320, size: 'larger' }],

@@ -6,7 +6,7 @@ use std::collections::HashSet;
 use batna_core::content::Lecture;
 use batna_core::session::{Inputs, Planned, compose};
 
-use super::{StudyStoreHandle, PLAYABLE, find, now_ms};
+use super::{PLAYABLE, StudyStoreHandle, find, now_ms};
 
 pub(super) fn plan(
     store: &StudyStoreHandle,
@@ -49,4 +49,3 @@ pub(super) fn plan_items(store: &StudyStoreHandle, ids: &[String]) -> Vec<Planne
         })
         .collect()
 }
-

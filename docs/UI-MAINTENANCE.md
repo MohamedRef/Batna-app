@@ -50,12 +50,42 @@ fall back to Study. While Settings is open, background controls are inert;
 Tab stays inside the active dialog and Escape uses the visible Back/Close
 control. Closing restores focus while the study screen remains mounted.
 
+## Preference recovery
+
+`state.rs` owns app-wide state; root re-exports preserve existing imports.
+`persistence/queue.rs` stores only the newest failed action per stable key.
+A successful unrelated write does not hide another failure. Retrying snapshots
+checks each generation before executing, performs IO without a live signal
+borrow, and removes only successful current actions. Pending choices live in
+memory; closing the app can lose them, as the notice explicitly states.
+
+The notice appears in Settings while open and on the main surface otherwise.
+Its live region announces failure and the retry action stays keyboard accessible.
+Capture owned desired values and durable storage handles; do not capture
+screen-local signals that could be dropped when a section closes.
+
+`Ui::update_prefs` is the shared device update path. `prefs/storage.rs` writes
+a uniquely owned temporary file, flushes it, then atomically replaces the
+existing file; a failed publication keeps the previous preference file intact.
+Device snapshots use one stable key so the newest complete choice wins.
+
+Synced settings and collection/reminder choices use stable separate keys.
+Review retention and daily-goal retries apply one command to current backend
+settings, keeping unrelated updates and the existing fitted-parameter merge.
+Recovery clears only the corresponding legacy write diagnostic. A successful
+retry reloads synced preference globals so screens observe the recovered data.
+
+Tests cover a real blocked directory, retained prior files where applicable,
+latest-choice replacement, unrelated failures, repeated failed retry and a real
+Dioxus reactive observer. Native WebView layout still requires device QA.
+
 ## Remaining work, in priority order
 
-1. **Visible persistence failures.** `prefs.rs::DevicePrefs::save` and
-   collection writes log errors while retaining the in-memory choice. Add a
-   shared save-result state and retry, rather than assuming a successful
-   save. The new hint says preferences apply; it does not claim they saved.
+1. **Feature-specific write recovery.** Shared preference writes now use
+   `persistence/`, but domain writes such as reviews, content edits and exports
+   retain their existing error handling. Give those workflows an appropriate
+   recovery UI; never blindly replay append-only events through the preference
+   queue.
 2. **Smaller workflow modules.** `update/mod.rs`, `learn/steps.rs`,
    `study/mod.rs`, `case/mod.rs` and `store/backend.rs` have large workflow
    units. Extract pure decisions and focused stage components before

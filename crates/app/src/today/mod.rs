@@ -24,6 +24,7 @@ pub(crate) const CSS: Css = css!("src/today/today.css");
 
 #[component]
 pub fn Today() -> Element {
+    let _preferences_pending = crate::persistence::use_pending_saves();
     let lib = Library::get();
     let review = use_review();
     let o = review.backend.borrow().overview(lib, store::now_ms());

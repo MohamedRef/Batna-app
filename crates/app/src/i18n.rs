@@ -1334,7 +1334,6 @@ pub mod update {
     #[cfg_attr(not(target_os = "android"), allow(dead_code))]
     pub const INSTALL_CHANNEL_SUB: &str = "تحديث جاهز يتثبّت، وباطنة اتحدّث";
     /// Before the version in the "what's new" sheet.
-    pub const SHEET_APP: &str = "باطنة · ";
 
     // The "new version" notification, and its switch.
     pub const NOTICE_AVAILABLE: &str = "نزلت نسخة جديدة من باطنة";

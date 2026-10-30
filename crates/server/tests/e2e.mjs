@@ -131,7 +131,7 @@ assert.equal((await api("DELETE", "/v1/devices/s24u", { token: refreshed.json.ac
 assert.equal((await a.next("revoked")).type, "revoked");
 assert.equal((await a.closed).code, 4001);
 const blocked = await api("POST", "/v1/auth/refresh", { body: { refresh_token: phone.json.refresh_token } });
-assert.equal(blocked.status, 403);
+assert.equal(blocked.status, 401);
 b.ws.close();
 console.log("Batna Cloud e2e: sign-in, refresh, sync, devices and revoke passed");
 process.exit(0);

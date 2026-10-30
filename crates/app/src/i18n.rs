@@ -364,6 +364,7 @@ pub mod study {
     pub const SAVE_FAILED: &str = "ما عرفتش أحفظ تقييمك، فلسه على نفس السؤال وإجابتك زي ما هي. قيّم تاني.";
     pub const UNDO_LAST: &str = "↶ رجّع آخر تقييم";
     pub const SUGGESTED: &str = "اقتراحي متعلّم عليه، والقرار ليك.";
+    pub const SUGGESTED_SHORT: &str = "مقترح";
     pub const AGAIN: &str = "تاني";
     pub const HARD: &str = "صعب";
     pub const GOOD: &str = "تمام";

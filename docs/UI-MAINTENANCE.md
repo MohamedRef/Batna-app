@@ -121,3 +121,11 @@ Below 840dp the complete lecture catalogue is browsed on the Lessons screen
 via Today's existing "All Lessons" action, not repeated at the foot of Today.
 From 840dp the existing lecture aside and sticky main column are retained.
 No course focus, saved views, scheduling, study records or content data change.
+
+## Study review: suggested grade in words (2026-10-30)
+
+An optional suggested rating is now explicitly marked with the word
+"مقترح" inside its existing rating button, in addition to the current
+focus-independent ring. It remains only a suggestion; all four grades,
+their real FSRS intervals, review storage and retry/Undo semantics are
+unchanged. The label is absent when there is no recommendation.

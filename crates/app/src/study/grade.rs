@@ -53,6 +53,9 @@ pub fn GradeRow(item_id: String, suggested: Option<Grade>, on_grade: EventHandle
                             }
                         },
                         span { {grade_label(grade)} }
+                        if let Some(label) = suggestion_label(suggested, grade) {
+                            span { class: "rating-suggested", "{label}" }
+                        }
                         if let Some(days) = intervals.map(|v| v[i]) {
                             span { class: "rating-when", {interval_label(days)} }
                         }
@@ -61,6 +64,11 @@ pub fn GradeRow(item_id: String, suggested: Option<Grade>, on_grade: EventHandle
             }
         }
     }
+}
+
+/// Mark an optional recommendation in words, not just with a CSS ring.
+fn suggestion_label(suggested: Option<Grade>, grade: Grade) -> Option<&'static str> {
+    (suggested == Some(grade)).then_some(tx::SUGGESTED_SHORT)
 }
 
 fn grade_name(g: Grade) -> &'static str {
@@ -93,5 +101,21 @@ fn interval_label(days: f32) -> String {
         count(n(days), &DAY)
     } else {
         count(n(days / 30.0), &MONTH)
+    }
+}
+
+#[cfg(test)]
+mod suggestion_tests {
+    use super::*;
+
+    #[test]
+    fn only_the_recommended_grade_has_a_text_label() {
+        for grade in GRADES {
+            assert_eq!(
+                suggestion_label(Some(Grade::Hard), grade),
+                (grade == Grade::Hard).then_some(tx::SUGGESTED_SHORT),
+            );
+        }
+        assert!(GRADES.into_iter().all(|grade| suggestion_label(None, grade).is_none()));
     }
 }

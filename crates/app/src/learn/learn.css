@@ -140,6 +140,12 @@ button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap
 /* "Explain it to me" under a study item */
 .ls-explain { font-size: var(--fs-sm); }
 
+/* Every control inside a lesson step keeps the shared 48dp target: the
+   book-page chip under a step, Reveal and "reveal all", a Try card's
+   "show answer" and "explain it" (screens-browser.cjs). */
+.ls-stage :is(.btn, .btn-link, .ls-explain) { min-block-size: var(--target); }
+.ls-stage button.tap-chip { display: inline-flex; align-items: center; min-block-size: var(--target); }
+
 /* ---------- the player ---------- */
 .ls-player {
   max-inline-size: 48rem;

@@ -8,7 +8,7 @@
 .st-chips { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
 .st-chip {
   display: inline-flex; align-items: center; gap: var(--sp-2);
-  min-block-size: var(--tap); padding-inline: var(--sp-3);
+  min-block-size: max(var(--target), var(--tap)); padding-inline: var(--sp-3);
   border: 1px solid var(--line); border-radius: var(--radius-pill);
   background: var(--surface); cursor: pointer; text-align: start;
 }
@@ -22,6 +22,7 @@
 .st-setup .st-start + .st-section-head, .st-setup .note + .st-section-head { margin-block-start: var(--sp-3); }
 @media (min-width: 600px) { .st-start { align-self: flex-start; min-inline-size: 16rem; } }
 .st-setup .tab-cols { gap: var(--sp-3); }
+.st-setup .segmented > button { min-block-size: max(var(--target), var(--tap)); }
 .st-setup .tab-main, .st-setup .tab-aside { gap: var(--sp-2); }
 /* Tablet landscape and the Mac: setup uses the full width, the picker
    beside the time and Start (desk.css .tab-cols). */
@@ -52,7 +53,9 @@
   background: var(--bg);
 }
 .st-progress > span, .st-progress > button { white-space: nowrap; }
-.st-undo { min-block-size: var(--tap); }
+/* Every study control is 48dp to touch, even where compact --tap is 40px. */
+.st :is(.btn, .btn-link) { min-block-size: max(var(--target), var(--tap)); }
+.st .btn-lg { min-block-size: max(var(--target), var(--tap-lg)); }
 .st-undo-note { margin: 0; }
 .st-undo-note[data-failed="yes"] { color: var(--bad); }
 .st-bar { flex: 1; }
@@ -86,7 +89,7 @@
 /* ---------- cloze ---------- */
 .st-cloze { line-height: 2.4; }
 .st-blank {
-  font: inherit; font-size: var(--fs-md); min-block-size: 40px;
+  font: inherit; font-size: var(--fs-md); min-block-size: var(--target);
   padding-inline: var(--sp-2); margin-inline: 2px;
   border: 0; border-block-end: 2px solid var(--accent); border-radius: 6px 6px 0 0;
   background: var(--accent-soft); color: var(--text); max-inline-size: 100%;
@@ -110,7 +113,7 @@
 .st-points, .st-outline { margin: 0; padding-inline-start: var(--sp-4); display: flex; flex-direction: column; gap: var(--sp-1); font-family: var(--font-latin); }
 .st-points, .st-outline { list-style: none; padding-inline-start: 0; }
 .st-outline > li { display: flex; flex-direction: column; }
-.st-point { display: flex; align-items: center; gap: var(--sp-3); min-block-size: var(--tap); cursor: pointer; }
+.st-point { display: flex; align-items: center; gap: var(--sp-3); min-block-size: max(var(--target), var(--tap)); cursor: pointer; }
 .st-point input { inline-size: 22px; block-size: 22px; --check: var(--good); flex: none; }
 .st-outline ul { margin: 0 0 var(--sp-2); padding-inline-start: calc(22px + var(--sp-3) + var(--sp-4)); color: var(--muted); font-size: var(--fs-sm); }
 .st-compare { display: grid; gap: var(--sp-3); }
@@ -152,6 +155,7 @@
 }
 
 /* ---------- summary ---------- */
+.st-summary h1:focus { outline: none; }
 .st-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-2); margin: 0; }
 .st-stats div { background: var(--bg); border-radius: var(--radius); padding: var(--sp-3); text-align: center; }
 .st-stats dt { color: var(--muted); font-size: var(--fs-sm); }

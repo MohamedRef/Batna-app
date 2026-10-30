@@ -102,6 +102,7 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
     });
     let view = VIEW();
     let pages = view == View::Pages;
+    let question_steps: Vec<bool> = lesson.steps.iter().map(|step| step.body.is_question()).collect();
 
     let go = {
         let id = id.clone();
@@ -138,6 +139,7 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
     let can_go = state.can_continue();
     let gate = check.read().get(i).cloned().unwrap_or_default();
     let ready = gate.check;
+    let needs_answer = !can_go && ready.is_none();
     let mut go_next = go.clone();
     let mut go_back = go.clone();
     let mut go_skip = go.clone();
@@ -157,16 +159,7 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                     onclick: move |_| close(ui),
                     "×"
                 }
-                div { class: "ls-segs", role: "progressbar", aria_valuemin: "0", aria_valuemax: "{n}", aria_valuenow: "{i + 1}",
-                    for (k , s) in lesson.steps.iter().enumerate() {
-                        span {
-                            key: "{k}",
-                            class: "ls-seg",
-                            "data-q": if s.body.is_question() { "yes" } else { "no" },
-                            "data-state": if k < i { "done" } else if k == i { "now" } else { "todo" },
-                        }
-                    }
-                }
+                StepMeter { current: i + 1, question_steps }
                 span { class: "muted small ls-count num-ltr", "{i + 1}/{n}" }
                 button {
                     class: "ls-view",
@@ -176,10 +169,12 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                     {if pages { crate::icons::steps() } else { crate::icons::book() }}
                 }
             }
-            p { class: "ls-where muted small",
-                Line { text: lesson.title.clone() }
-                " · "
-                bdi { "{lecture_title}" }
+            // Name the lesson independently of the exercise step below.
+            header { class: "ls-context",
+                h1 { class: "ls-context-title", Line { text: lesson.title.clone() } }
+                p { class: "ls-context-lecture muted small",
+                    bdi { dir: "ltr", lang: "en", "{lecture_title}" }
+                }
             }
             for (k , st) in lesson.steps.iter().enumerate().filter(|(k, _)| seen.read()[*k]) {
                 Stage {
@@ -227,7 +222,7 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                         {tx::BACK}
                     }
                 }
-                if !can_go && ready.is_none() {
+                if needs_answer {
                     button {
                         class: "btn-link ls-skip",
                         onclick: move |_| {
@@ -257,6 +252,7 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                         aria_label: tx::NEXT,
                         title: tx::NEXT,
                         disabled: !can_go,
+                        aria_describedby: if needs_answer { Some("ls-gate-hint") } else { None },
                         onclick: move |_| go_next(i + 1),
                         {crate::icons::chevron(true)}
                     }
@@ -266,9 +262,40 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                         "data-nav": "next",
                         "aria-keyshortcuts": "Enter",
                         disabled: !can_go,
+                        aria_describedby: if needs_answer { Some("ls-gate-hint") } else { None },
                         onclick: move |_| go_next(i + 1),
                         {if i + 1 == n { tx::FINISH } else { tx::NEXT }}
                     }
+                }
+                // Screen readers only: the lesson page stays free of helper notes
+                // (Mohamed, 2026-10-29); the Skip button is the visible way on.
+                if needs_answer {
+                    p { id: "ls-gate-hint", class: "ls-sr-only", {tx::NAV_REQUIRED} }
+                }
+            }
+        }
+    }
+}
+
+/// Visual progress indicates the current step, not completion or a score.
+#[component]
+fn StepMeter(current: usize, question_steps: Vec<bool>) -> Element {
+    let total = question_steps.len();
+    rsx! {
+        div {
+            class: "ls-segs",
+            role: "progressbar",
+            aria_label: tx::PROGRESS_LABEL,
+            aria_valuemin: "1",
+            aria_valuemax: "{total}",
+            aria_valuenow: "{current}",
+            aria_valuetext: tx::step_of(current, total),
+            for (k , is_question) in question_steps.iter().enumerate() {
+                span {
+                    key: "{k}",
+                    class: "ls-seg",
+                    "data-q": if *is_question { "yes" } else { "no" },
+                    "data-state": if k + 1 < current { "done" } else if k + 1 == current { "now" } else { "todo" },
                 }
             }
         }
@@ -334,6 +361,11 @@ fn Stage(
     }
 }
 
+/// A completed lesson always offers exactly one primary next action.
+fn summary_return_class(has_follow_up: bool) -> &'static str {
+    if has_follow_up { "btn-link" } else { "btn btn-primary" }
+}
+
 #[component]
 fn Summary(lesson: Lesson, right: u32, asked: u32) -> Element {
     let mut ui = use_context::<Ui>();
@@ -341,10 +373,18 @@ fn Summary(lesson: Lesson, right: u32, asked: u32) -> Element {
     let next = next_lesson(std::slice::from_ref(&lecture)).filter(|l| l.id != lesson.id);
     let practice = lesson.practice.clone();
     let n_practice = practice.len();
+    let return_class = summary_return_class(n_practice > 0 || next.is_some());
     rsx! {
         crate::ui::Card { class: "ls-summary",
             p { class: "ls-confetti", aria_hidden: "true", "🎉" }
-            h1 { {tx::DONE_TITLE} }
+            // The finished button is gone: land focus on the result.
+            h1 {
+                tabindex: "-1",
+                onmounted: move |e: MountedEvent| async move {
+                    let _ = e.set_focus(true).await;
+                },
+                {tx::DONE_TITLE}
+            }
             p { class: "muted", Line { text: lesson.title.clone() } }
             if asked > 0 {
                 p { class: "ls-score",
@@ -377,7 +417,7 @@ fn Summary(lesson: Lesson, right: u32, asked: u32) -> Element {
                 }
                 if let Some(l) = next {
                     button {
-                        class: "btn btn-secondary",
+                        class: if n_practice > 0 { "btn btn-secondary" } else { "btn btn-primary" },
                         onclick: move |_| super::open(ui, &l.id),
                         span { class: "ls-btn-label",
                             "{tx::NEXT_LESSON}: "
@@ -385,9 +425,100 @@ fn Summary(lesson: Lesson, right: u32, asked: u32) -> Element {
                         }
                     }
                 }
-                button { class: "btn-link", onclick: move |_| close(ui), {tx::BACK_TO_LIST} }
+                button { class: return_class, "data-back": "true", "aria-keyshortcuts": "Escape", onclick: move |_| close(ui), {tx::BACK_TO_LIST} }
             }
-            p { class: "muted small", {tx::PRACTICE_HINT} }
+            if n_practice > 0 {
+                p { class: "muted small", {tx::PRACTICE_HINT} }
+            }
+        }
+    }
+}
+
+/// Focused navigation regressions: no study records or score changes.
+#[cfg(test)]
+mod ux_tests {
+    use super::*;
+
+    #[test]
+    fn step_progress_announces_position_and_question_steps() {
+        fn app() -> Element {
+            rsx! { StepMeter { current: 2, question_steps: vec![false, true, false] } }
+        }
+        let mut dom = VirtualDom::new(app);
+        dom.rebuild_in_place();
+        let html = dioxus::ssr::render(&dom);
+        for attribute in [
+            "role=\"progressbar\"",
+            "aria-label=\"موضعك في الدرس\"",
+            "aria-valuemin=\"1\"",
+            "aria-valuemax=\"3\"",
+            "aria-valuenow=\"2\"",
+            "aria-valuetext=\"خطوة 2 من 3\"",
+            "data-q=\"yes\"",
+            "data-state=\"done\"",
+            "data-state=\"now\"",
+        ] {
+            assert!(html.contains(attribute), "missing {attribute}: {html}");
+        }
+        assert_eq!(html.matches("class=\"ls-seg\"").count(), 3, "{html}");
+    }
+
+    #[test]
+    fn gated_navigation_describes_the_available_skip() {
+        let source = include_str!("player.rs");
+        let production = source.split("/// Focused navigation regressions").next().unwrap();
+        assert!(production.contains("let needs_answer = !can_go && ready.is_none()"));
+        assert!(production.contains("aria_describedby: if needs_answer"));
+        assert!(production.contains("id: \"ls-gate-hint\", class: \"ls-sr-only\""));
+        assert!(tx::NAV_REQUIRED.contains(tx::SKIP));
+    }
+
+    #[test]
+    fn last_lesson_has_a_primary_exit_without_practice_or_next_lesson() {
+        assert_eq!(summary_return_class(false), "btn btn-primary");
+        assert_eq!(summary_return_class(true), "btn-link");
+    }
+
+    #[test]
+    fn summary_android_back_and_compact_touch_targets() {
+        let source = include_str!("player.rs");
+        let summary = source
+            .split("fn Summary(")
+            .nth(1)
+            .unwrap()
+            .split("/// Focused navigation regressions")
+            .next()
+            .unwrap();
+        assert!(summary.contains("\"data-back\": \"true\""));
+        assert!(summary.contains("onclick: move |_| close(ui)"));
+        let css = include_str!("learn.css");
+        assert!(css.contains(
+            ".ls-nav :is(.btn, .btn-link), .ls-summary-actions button { min-block-size: max(var(--target), var(--tap)); }"
+        ));
+        assert!(css.contains(".ls-nav .btn-lg { min-block-size: max(var(--target), var(--tap-lg)); }"));
+    }
+
+    #[test]
+    fn in_step_controls_keep_48dp_targets() {
+        let css = include_str!("learn.css");
+        let rule = |sel: &str| -> String {
+            let at = css.find(&format!("\n{sel} {{")).unwrap_or_else(|| panic!("no rule for {sel}"));
+            css[at..].split('}').next().unwrap().to_string()
+        };
+        for sel in [".ls-tile", ".ls-bin-head", ".ls-cell-hidden"] {
+            assert!(rule(sel).contains("min-block-size: var(--target);"), "{sel}");
+        }
+        assert!(css.contains(".ls-chiplet { cursor: pointer; min-block-size: var(--target); }"));
+        assert!(css.contains(".ls-undo { min-block-size: var(--target); }"));
+        assert!(
+            css.contains(
+                ".ls-viewer-zoom .ls-arrow { inline-size: var(--target); block-size: var(--target);"
+            )
+        );
+        assert!(rule(".ls-retry").contains("min-block-size: max(var(--target), var(--tap));"));
+        // No 36/40/44px tap sizes left in the lesson player.
+        for small in ["min-height: 36px", "min-height: 44px", "min-block-size: 44px", "block-size: 44px"] {
+            assert!(!css.contains(small), "{small}");
         }
     }
 }

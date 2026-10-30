@@ -300,7 +300,8 @@ button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap
 }
 .ls-nav { flex-wrap: wrap; }
 /* Use the shared 48dp minimum even when compact --tap is smaller. */
-.ls-nav :is(.btn, .btn-link), .ls-summary-actions button { min-block-size: var(--target); }
+.ls-nav :is(.btn, .btn-link), .ls-summary-actions button { min-block-size: max(var(--target), var(--tap)); }
+.ls-nav .btn-lg { min-block-size: max(var(--target), var(--tap-lg)); }
 .ls-nav .ls-next { margin-inline-start: auto; min-inline-size: 8rem; }
 /* What the step still needs while Continue is off. */
 .ls-gate { flex: 1 0 100%; margin: 0; text-align: center; color: var(--muted); }

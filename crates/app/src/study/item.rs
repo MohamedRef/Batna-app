@@ -45,7 +45,7 @@ pub fn ItemView(
         tx::BADGE_REVIEW
     };
     rsx! {
-        article { class: "card st-item", "data-kind": item.body.kind(),
+        crate::ui::Card { element: crate::ui::CardElement::Article, class: "st-item", "data-kind": item.body.kind(),
             header { class: "st-item-head",
                 span { class: "chip st-badge", "data-badge": if retry { "retry" } else if fresh { "new" } else { "review" }, {badge} }
                 span { class: "chip", {kind_label(&item.body)} }

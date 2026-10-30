@@ -18,7 +18,7 @@ pub fn StudySection() -> Element {
 
     rsx! {
         style { {super::CSS.text()} }
-        section { class: "card",
+        crate::ui::Card { class: "",
             h2 { {tx::RETENTION} }
             p { class: "muted small", {tx::RETENTION_BODY} }
             div { class: "segmented", role: "radiogroup", aria_label: tx::RETENTION,
@@ -43,7 +43,7 @@ pub fn StudySection() -> Element {
                 }
             }
         }
-        section { class: "card",
+        crate::ui::Card { class: "",
             h2 { {tx::NEW_PER_DAY} }
             if let Some(n) = plan_new {
                 p { "{tx::NEW_FROM_PLAN_1} {n} {tx::NEW_FROM_PLAN_2}" }

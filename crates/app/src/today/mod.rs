@@ -182,8 +182,8 @@ fn Hero(
     // The card's one job: start the session, or with nothing due, the next lesson.
     let next = crate::learn::next_lesson(&[]).map(|l| l.id.clone());
     rsx! {
-        section {
-            class: "card hero card-action td-hero",
+        crate::ui::Card {
+            class: "hero card-action td-hero",
             onclick: move |_| {
                 if ready {
                     *crate::study::START.write() = Some(crate::study::Start { lectures: None, items: None, minutes });

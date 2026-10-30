@@ -68,7 +68,7 @@ pub fn AnkiExport() -> Element {
 
     rsx! {
         style { {CSS} }
-        section { class: "card anki-export",
+        crate::ui::Card { class: "anki-export",
             h2 { {tx::TITLE} }
             p { class: "muted small", {tx::BODY} }
             p { class: "muted small", "{lectures} {tx::LECTURES} · {items} {tx::ITEMS}" }

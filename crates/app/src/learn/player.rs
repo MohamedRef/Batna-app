@@ -298,7 +298,7 @@ fn Stage(
     let (checked, answered_before) = retry;
     let can_retry = checked || (answered_before && !fresh());
     rsx! {
-        article { class: "card ls-stage", hidden: !current, "data-kind": step.body.kind(), "data-n": k + 1,
+        crate::ui::Card { element: crate::ui::CardElement::Article, class: "ls-stage", hidden: !current, "data-kind": step.body.kind(), "data-n": k + 1,
             if try_done {
                 div { class: "ls-try-done",
                     p { class: "ls-kicker", {tx::TRY} }
@@ -342,7 +342,7 @@ fn Summary(lesson: Lesson, right: u32, asked: u32) -> Element {
     let practice = lesson.practice.clone();
     let n_practice = practice.len();
     rsx! {
-        section { class: "card ls-summary",
+        crate::ui::Card { class: "ls-summary",
             p { class: "ls-confetti", aria_hidden: "true", "🎉" }
             h1 { {tx::DONE_TITLE} }
             p { class: "muted", Line { text: lesson.title.clone() } }

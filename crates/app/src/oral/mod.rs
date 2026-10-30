@@ -149,8 +149,8 @@ fn Setup() -> Element {
         div { class: "tab-cols oral-cols",
             div { class: "tab-main tab-sticky",
                 // With questions to ask, the whole card starts (the button's click bubbles up).
-                section {
-                    class: if available > 0 { "card card-action oral-setup" } else { "card oral-setup" },
+                crate::ui::Card {
+                    class: if available > 0 { "card-action oral-setup" } else { "oral-setup" },
                     onclick: move |_| if available > 0 { start(&store.read()) },
                     h1 { {tx::TITLE} }
                     p { class: "muted", {tx::INTRO} }

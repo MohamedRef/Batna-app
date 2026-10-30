@@ -102,7 +102,7 @@ pub fn Calculators() -> Element {
                             CalcForm { id: spec.id, initial: Inputs::new() }
                         }
                     },
-                    None => rsx! { p { class: "card muted", {tx::PICK} } },
+                    None => rsx! { crate::ui::Card { element: crate::ui::CardElement::Paragraph, class: "muted", {tx::PICK} } },
                 }
             }
         }
@@ -186,7 +186,7 @@ pub fn CalcForm(id: &'static str, initial: Inputs) -> Element {
                 Err(e) => {
                     let (what, label) = error_text(spec, &e);
                     rsx! {
-                        section { class: "card calc-wait", "aria-live": "polite",
+                        crate::ui::Card { class: "calc-wait", "aria-live": "polite",
                             p { class: "small muted", {tx::RESULT} }
                             p { {tx::FILL} }
                             if left > 0 {
@@ -297,7 +297,7 @@ fn error_text(spec: &CalcSpec, e: &CalcError) -> (&'static str, String) {
 pub fn OutcomeCard(id: &'static str, outcome: Outcome) -> Element {
     let source = calc::spec(id).map_or("", |s| s.source);
     rsx! {
-        section { class: "card calc-result", "aria-live": "polite",
+        crate::ui::Card { class: "calc-result", "aria-live": "polite",
             p { class: "small muted", {tx::RESULT} }
             div { class: "calc-headline",
                 bdi { class: "calc-display", "{outcome.display}" }

@@ -458,8 +458,8 @@ fn Shown(id: String, next_id: Option<String>) -> Element {
     rsx! {
         // The whole header opens the lecture's next lesson (its button's
         // click bubbles up); the lecture page has its own link.
-        section {
-            class: if go_id.is_some() { "card card-flat card-action ls-lec" } else { "card card-flat ls-lec" },
+        crate::ui::Card {
+            class: if go_id.is_some() { "card-flat card-action ls-lec" } else { "card-flat ls-lec" },
             onclick: move |_| if let Some(g) = &go_id { open(ui, g) },
             div { class: "ls-lec-meta",
                 span { "{kicker}" }
@@ -682,7 +682,7 @@ pub fn TodayLesson(prefer: Vec<String>) -> Element {
     let done_steps = at.unwrap_or(0);
     rsx! {
         style { {CSS.text()} }
-        button { class: "card tap ls-now",
+        crate::ui::CardButton { class: "tap ls-now",
             onclick: { let id = l.id.clone(); move |_| open(ui, &id) },
             span { class: "ls-now-top",
                 span { class: "chip", "data-tone": "accent", {if at.is_some() { tx::NOW_KICKER } else { tx::NEXT_KICKER }} }

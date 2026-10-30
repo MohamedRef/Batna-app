@@ -183,7 +183,7 @@ pub fn UpdatesSection() -> Element {
         // What is on this device: the app, and the lessons/questions/look
         // apart from it, since a content-only update changes only the second.
         div { class: "section-head", h2 { id: "updates-title", {tx::GROUP_HAVE} } }
-        section { class: "card ur-card", aria_labelledby: "updates-title",
+        crate::ui::Card { class: "ur-card", aria_labelledby: "updates-title",
             button {
                 class: "ur-row",
                 disabled: sheet.is_none(),
@@ -527,7 +527,7 @@ pub fn UpdateBanner() -> Element {
     let sheet = try_use_context::<UpdateSheetNav>();
     rsx! {
         style { {UPDATE_CSS} }
-        section { class: "card update-banner", role: "status",
+        crate::ui::Card { class: "update-banner", role: "status",
             div { class: "ub-text",
                 p {
                     strong { {headline} }
@@ -576,7 +576,7 @@ pub fn ContentNote() -> Element {
     let sheet = try_use_context::<UpdateSheetNav>();
     rsx! {
         style { {UPDATE_CSS} }
-        section { class: "card content-note", role: "status",
+        crate::ui::Card { class: "content-note", role: "status",
             p {
                 strong { {tx::CONTENT_NOTE} }
                 if let Some(f) = first {

@@ -69,14 +69,14 @@ pub fn CalcItem(item_id: String, on_back: EventHandler) -> Element {
         style { {super::CSS.text()} }
         article { class: "player calc-item",
             ItemMeta { lecture: lecture.to_owned(), item_id: item.id.clone(), on_back }
-            section { class: "card",
+            crate::ui::Card { class: "",
                 bdi { class: "case-stem", "{stem}" }
                 p { class: "case-question", dir: "auto",
                     {question.clone().unwrap_or_else(|| format!("Calculate {}.", spec.name))}
                 }
             }
             if state == Computed::Open {
-                section { class: "card",
+                crate::ui::Card { class: "",
                     label { r#for: "calc-answer", {tx::YOUR_RESULT} }
                     input {
                         id: "calc-answer",
@@ -99,7 +99,7 @@ pub fn CalcItem(item_id: String, on_back: EventHandler) -> Element {
                 } else if let Some(o) = outcome.clone() {
                     OutcomeCard { id, outcome: o }
                 }
-                section { class: "card",
+                crate::ui::Card { class: "",
                     h2 { {tx::MEANING} }
                     if !meaning_open() {
                         p { class: "small muted", {tx::MEANING_HINT} }

@@ -122,6 +122,41 @@ via Today's existing "All Lessons" action, not repeated at the foot of Today.
 From 840dp the existing lecture aside and sticky main column are retained.
 No course focus, saved views, scheduling, study records or content data change.
 
+## Lesson player focus and accessible navigation (2026-10-30)
+
+The focused lesson player retains its saved Attempt, first-try grading,
+step guard, Skip, Steps/Pages choice, citations and return navigation.
+The lesson is now a page heading, its English lecture title is on a separate
+LTR-isolated line, and a semantic progress meter describes the *current
+step*, not a completion score. Question steps stay visibly distinguished.
+
+When Continue is disabled without a Check action, the footer explains how
+to complete the current interaction or skip it; the disabled Next action
+references the same explanation for accessibility. Close and view-mode
+controls use the shared 48dp touch target. On the final summary, Next
+Lesson becomes the primary action only when there are no practice cards;
+otherwise, Return to Lessons becomes primary if no follow-up exists. Practice
+guidance is only shown when there are practice cards. The next-lesson chain
+keeps the screen that originally opened the player as its exit destination.
+The page arrow uses the shared on-accent contrast token.
+No medical content, scoring, saved drafts, FSRS or Back stack changes.
+
+The compact footer (Back, Continue, Check and Skip) and summary actions
+use 48dp minimum touch heights independently of the compact button token.
+The summary's return-to-list button also participates in the shared Android
+Back controller, so Back exits the finished lesson instead of skipping past
+its origin. Actual gesture and screen-reader behavior still need device QA.
+
+### Follow-up: clean page and in-step targets (2026-10-30)
+
+The "complete this step or skip it" explanation is read to screen readers
+only (`.ls-sr-only`, referenced by the disabled Continue). The visible page
+stays free of helper notes, as Mohamed asked on 2026-10-29; the visible
+Skip button is the way on. In-step controls (tiles, sort bins and chips,
+hidden table cells, order Undo, retry, image zoom) use the shared 48dp
+`--target`. Text on solid accent fills uses `--on-accent`. The finished
+summary takes focus on its heading so screen readers announce the result.
+
 ## Study review: suggested grade in words (2026-10-30)
 
 An optional suggested rating is now explicitly marked with the word

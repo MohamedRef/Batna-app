@@ -368,12 +368,18 @@ pub fn check_locks(root: &Path, lectures: &[String]) -> Vec<String> {
         // content exists, a missing page-reference lock must fail validation.
         if !content_path.exists() {
             if lock_path.exists() {
-                problems.push(format!("{}: lock exists but lecture content is missing", crate::rel(root, &lock_path)));
+                problems.push(format!(
+                    "{}: lock exists but lecture content is missing",
+                    crate::rel(root, &lock_path)
+                ));
             }
             continue;
         }
         if !lock_path.exists() {
-            problems.push(format!("{}: missing page-reference lock; run batna-tools refs --lecture {id} --write", crate::rel(root, &lock_path)));
+            problems.push(format!(
+                "{}: missing page-reference lock; run batna-tools refs --lecture {id} --write",
+                crate::rel(root, &lock_path)
+            ));
             continue;
         }
         let at = crate::rel(root, &lock_path);

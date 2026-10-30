@@ -295,7 +295,7 @@ fn App() -> Element {
     }
 }
 
-/// The body of each screen. A feature chunk swaps its `Soon` for its own component.
+/// The body of each screen; Settings is presented as an overlay.
 fn screen_body(screen: Screen) -> Element {
     match screen {
         Screen::Today => rsx! { today::Today {} },
@@ -325,15 +325,4 @@ fn NavButton(screen: Screen, class: &'static str) -> Element {
         }
     }
 }
-
-/// A placeholder for a screen whose chunk hasn't landed yet.
-#[component]
-fn Soon(screen: Screen) -> Element {
-    rsx! {
-        section { class: "card soon",
-            h1 { {screen.label()} }
-            h2 { {i18n::soon::TITLE} }
-            p { {i18n::soon::BODY} }
-        }
-    }
 }

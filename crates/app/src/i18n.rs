@@ -385,11 +385,6 @@ pub mod study {
     pub const TOMORROW: &str = "بكرة";
 }
 
-pub mod soon {
-    pub const TITLE: &str = "الشاشة دي بتتبني دلوقتي";
-    pub const BODY: &str = "هتظهر هنا أول ما تخلص. لحد ما ده يحصل، تقدر تذاكر نفس المحتوى من Anki.";
-}
-
 pub mod anki {
     pub const TITLE: &str = "ذاكر في Anki";
     pub const BODY: &str =

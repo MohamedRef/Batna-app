@@ -233,7 +233,8 @@ impl Store {
         let tx = conn.transaction()?;
         let n = tx.execute("UPDATE review_events SET deleted = 1 WHERE id = ?1 AND deleted = 0", [id])?;
         if n > 0 {
-            let device = self.clock.lock().unwrap_or_else(std::sync::PoisonError::into_inner).device().to_string();
+            let device =
+                self.clock.lock().unwrap_or_else(std::sync::PoisonError::into_inner).device().to_string();
             sync::enqueue(&tx, "review_events", "id", id, &device)?;
         }
         tx.commit()?;
@@ -391,7 +392,8 @@ impl Store {
              WHERE (excluded.hlc_wall, excluded.hlc_counter, excluded.device_id)
                  > ({table}.hlc_wall, {table}.hlc_counter, {table}.device_id)"
         );
-        let mine = hlc.device == self.clock.lock().unwrap_or_else(std::sync::PoisonError::into_inner).device();
+        let mine =
+            hlc.device == self.clock.lock().unwrap_or_else(std::sync::PoisonError::into_inner).device();
         let mut conn = self.conn.lock().unwrap_or_else(std::sync::PoisonError::into_inner);
         // The row and its outbox entry land together or not at all.
         let tx = conn.transaction()?;

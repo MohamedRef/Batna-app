@@ -121,3 +121,18 @@ Below 840dp the complete lecture catalogue is browsed on the Lessons screen
 via Today's existing "All Lessons" action, not repeated at the foot of Today.
 From 840dp the existing lecture aside and sticky main column are retained.
 No course focus, saved views, scheduling, study records or content data change.
+
+## Lesson player focus and accessible navigation (2026-10-30)
+
+The focused lesson player retains its saved Attempt, first-try grading,
+step guard, Skip, Steps/Pages choice, citations and return navigation.
+The lesson is now a page heading, its English lecture title is on a separate
+LTR-isolated line, and a semantic progress meter describes the *current
+step*, not a completion score. Question steps stay visibly distinguished.
+
+When Continue is disabled without a Check action, the footer explains how
+to complete the current interaction or skip it; the disabled Next action
+references the same explanation for accessibility. Close and view-mode
+controls use the shared 48dp touch target. On the final summary, Next
+Lesson becomes the primary action only when there are no practice cards.
+No medical content, scoring, saved drafts, FSRS or Back stack changes.

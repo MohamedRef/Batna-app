@@ -159,8 +159,8 @@ button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap
 }
 .ls-close {
   flex: none;
-  inline-size: 44px;
-  block-size: 44px;
+  inline-size: var(--target);
+  block-size: var(--target);
   border-radius: 50%;
   border: 1px solid var(--line);
   background: var(--surface);
@@ -180,7 +180,10 @@ button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap
 .ls-seg[data-state="done"] { background: var(--accent); }
 .ls-seg[data-state="now"] { background: var(--accent); opacity: 0.55; }
 .ls-count { flex: none; font-variant-numeric: tabular-nums; }
-.ls-where { margin: 0; }
+/* Name the lesson and keep its English lecture label separate. */
+.ls-context { display: flex; flex-direction: column; gap: var(--sp-1); min-inline-size: 0; }
+.ls-context-title { margin: 0; font-size: var(--fs-lg); font-weight: 700; line-height: 1.5; overflow-wrap: anywhere; }
+.ls-context-lecture { margin: 0; overflow-wrap: anywhere; }
 .ls-stage {
   gap: var(--sp-3);
   min-block-size: 14rem;
@@ -209,8 +212,8 @@ button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap
 }
 .ls-view {
   flex: none;
-  inline-size: 40px;
-  block-size: 40px;
+  inline-size: var(--target);
+  block-size: var(--target);
   display: grid;
   place-items: center;
   border-radius: 50%;
@@ -685,3 +688,8 @@ button.ls-soon .coll-title { color: var(--muted); }
 }
 .app[data-appearance="glossy"] .ls-verdict { border-radius: var(--radius-card); }
 .app[data-appearance="glossy"] .ls-bin { border-radius: var(--radius-card); }
+
+/* Follow reduced-motion preferences for the step indicator as well. */
+@media (prefers-reduced-motion: reduce) {
+  .ls-seg { transition: none; }
+}

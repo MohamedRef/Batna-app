@@ -364,6 +364,7 @@ pub mod study {
     pub const SAVE_FAILED: &str = "ما عرفتش أحفظ تقييمك، فلسه على نفس السؤال وإجابتك زي ما هي. قيّم تاني.";
     pub const UNDO_LAST: &str = "↶ رجّع آخر تقييم";
     pub const SUGGESTED: &str = "اقتراحي متعلّم عليه، والقرار ليك.";
+    pub const SUGGESTED_SHORT: &str = "مقترح";
     pub const AGAIN: &str = "تاني";
     pub const HARD: &str = "صعب";
     pub const GOOD: &str = "تمام";
@@ -1600,6 +1601,8 @@ pub mod learn {
     pub const OPEN_LECTURE: &str = "افتح المحاضرة";
 
     pub const CLOSE: &str = "اقفل الدرس";
+    pub const PROGRESS_LABEL: &str = "موضعك في الدرس";
+    pub const NAV_REQUIRED: &str = "كمّل المطلوب في الخطوة دي أو اختار «عدّي الخطوة دي» عشان تكمل.";
     pub const VIEW_TITLE: &str = "شكل الدرس";
     pub const VIEW_BODY: &str =
         "في الاتنين تقدر تسحب الشاشة يمين وشمال علشان تقلب. لو فيه سؤال لسه ما جاوبتوش، الصفحة مش هتتقلب.";
@@ -1614,7 +1617,7 @@ pub mod learn {
     pub const BACK: &str = "رجوع";
     pub const NEXT: &str = "كمّل";
     pub const FINISH: &str = "خلّصت";
-    pub const SKIP: &str = "عدّي السؤال ده";
+    pub const SKIP: &str = "عدّي الخطوة دي";
 
     pub const THINK: &str = "فكّر الأول";
     pub const THINK_HINT: &str = "قول الإجابة في دماغك، وبعدين اكشف.";

@@ -18,7 +18,7 @@ pub fn ExportVerdicts() -> Element {
     let count = |v| counts.get(&v).copied().unwrap_or(0);
     let total: usize = counts.values().sum();
 
-    let export = move |_| {
+    let export = move || {
         let now = now_ms();
         let verdicts = review.backend.borrow().verdicts(now);
         let yaml = match serde_yaml_ng::to_string(&verdicts) {
@@ -42,7 +42,12 @@ pub fn ExportVerdicts() -> Element {
             p { class: "small",
                 "✓ {count(Verdict::Approved)} · ✎ {count(Verdict::Edited)} · ✗ {count(Verdict::Wrong)}"
             }
-            button { class: "btn btn-primary", disabled: total == 0, onclick: export, {tx::EXPORT_BUTTON} }
+            button { class: "btn btn-primary", disabled: total == 0, onclick: {
+                    let mut export = export.clone();
+                    move |_| export()
+                },
+                {tx::EXPORT_BUTTON}
+            }
             match result() {
                 Some(Ok((path, yaml))) => rsx! {
                     p { class: "small", role: "status", "{tx::EXPORT_SAVED} " bdi { dir: "ltr", "{path}" } }
@@ -54,7 +59,16 @@ pub fn ExportVerdicts() -> Element {
                         textarea { class: "export-text", dir: "ltr", readonly: true, rows: 10, value: "{yaml}" }
                     }
                 },
-                Some(Err(e)) => rsx! { p { class: "verify-error", role: "alert", "{tx::EXPORT_FAILED} " bdi { dir: "ltr", "{e}" } } },
+                Some(Err(e)) => rsx! {
+                    crate::persistence::WriteFailed {
+                        message: tx::EXPORT_FAILED,
+                        detail: e,
+                        on_retry: {
+                            let mut export = export.clone();
+                            move |_| export()
+                        },
+                    }
+                },
                 None => rsx! {},
             }
         }

@@ -23,6 +23,13 @@ pub fn VerifyBar(item_id: String) -> Element {
     rsx! { Bar { key: "{item_id}", item_id: item_id.clone() } }
 }
 
+/// A verdict write, kept when it fails so "try again" repeats it.
+#[derive(Clone, PartialEq)]
+enum Attempt {
+    Judge(Verdict, Edit, Option<String>),
+    Undo,
+}
+
 #[derive(Clone, Copy, PartialEq)]
 enum Mode {
     Ask,
@@ -37,31 +44,48 @@ fn Bar(item_id: String) -> Element {
     // The verdict given in this bar, so it can say what happened and undo it.
     let mut done = use_signal(|| None::<Verdict>);
     let mut note = use_signal(String::new);
-    // The last tap wasn't saved.
-    let mut failed = use_signal(|| false);
+    // The last tap that wasn't saved; "try again" repeats exactly it.
+    let mut failed = use_signal(|| None::<Attempt>);
 
     let check = review.backend.borrow().check(&item_id);
     if done().is_none() && check != Check::Ask {
         return rsx! {};
     }
 
-    let id = item_id.clone();
-    let judge = {
+    // Both writes are idempotent (a verdict replaces the last one), so a
+    // retry may simply run the same attempt again.
+    let attempt = {
+        let id = item_id.clone();
         let review = review.clone();
-        move |verdict: Verdict, edit: Edit, n: Option<String>| {
-            let saved = review.backend.borrow_mut().judge(&id, verdict, edit, n);
-            failed.set(!saved);
-            if saved {
-                done.set(Some(verdict));
-                mode.set(Mode::Ask);
+        move |attempt: Attempt| {
+            let saved = match &attempt {
+                Attempt::Judge(verdict, edit, n) => {
+                    review.backend.borrow_mut().judge(&id, *verdict, edit.clone(), n.clone())
+                }
+                Attempt::Undo => review.backend.borrow_mut().undo_judgement(&id),
+            };
+            if !saved {
+                failed.set(Some(attempt));
+                return;
+            }
+            failed.set(None);
+            match attempt {
+                Attempt::Judge(verdict, ..) => {
+                    done.set(Some(verdict));
+                    mode.set(Mode::Ask);
+                }
+                Attempt::Undo => done.set(None),
             }
         }
+    };
+    let judge = {
+        let mut attempt = attempt.clone();
+        move |verdict: Verdict, edit: Edit, n: Option<String>| attempt(Attempt::Judge(verdict, edit, n))
     };
 
     let body = match (done(), mode()) {
         (Some(v), _) => {
-            let id = item_id.clone();
-            let review = review.clone();
+            let mut undo = attempt.clone();
             let said = match v {
                 Verdict::Approved => tx::SAVED_APPROVED,
                 Verdict::Edited => tx::SAVED_EDITED,
@@ -71,13 +95,7 @@ fn Bar(item_id: String) -> Element {
                 p { class: "verify-saved", role: "status", "data-verdict": v.as_str(), {said} }
                 button {
                     class: "verify-undo",
-                    onclick: move |_| {
-                        let saved = review.backend.borrow_mut().undo_judgement(&id);
-                        failed.set(!saved);
-                        if saved {
-                            done.set(None);
-                        }
-                    },
+                    onclick: move |_| undo(Attempt::Undo),
                     {tx::UNDO}
                 }
             }
@@ -140,8 +158,14 @@ fn Bar(item_id: String) -> Element {
                 span { class: "muted small", {tx::HINT} }
             }
             {body}
-            if failed() {
-                p { class: "verify-failed", role: "alert", {tx::NOT_SAVED} }
+            if let Some(last) = failed() {
+                crate::persistence::WriteFailed {
+                    message: tx::NOT_SAVED,
+                    on_retry: {
+                        let mut attempt = attempt.clone();
+                        move |_| attempt(last.clone())
+                    },
+                }
             }
         }
     }

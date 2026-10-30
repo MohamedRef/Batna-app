@@ -318,6 +318,22 @@ pub fn OwnCardsCard(on_study: EventHandler<()>) -> Element {
     let _ = review.revision.read();
     let cards = super::cards();
     let mut confirm = use_signal(|| None::<String>);
+    // A delete that didn't land keeps its confirm row open, with the reason.
+    let mut delete_failed = use_signal(|| None::<String>);
+    let delete = {
+        let review = review.clone();
+        move |id: String| match review.backend.borrow_mut().delete_own(&id) {
+            Ok(()) => {
+                crate::store::write_recovered(&format!("deleting own card {id}"));
+                delete_failed.set(None);
+                confirm.set(None);
+            }
+            Err(e) => {
+                crate::store::write_failed(&format!("deleting own card {id}"), &e);
+                delete_failed.set(Some(e.to_string()));
+            }
+        }
+    };
     rsx! {
         style { {CSS.text()} }
         crate::ui::Card { class: "own",
@@ -363,17 +379,30 @@ pub fn OwnCardsCard(on_study: EventHandler<()>) -> Element {
                                     class: "btn btn-danger",
                                     onclick: {
                                         let id = c.id.clone();
-                                        let review = review.clone();
-                                        move |_| {
-                                            if let Err(e) = review.backend.borrow_mut().delete_own(&id) {
-                                                crate::store::write_failed(&format!("deleting own card {id}"), &e);
-                                            }
-                                            confirm.set(None);
-                                        }
+                                        let mut delete = delete.clone();
+                                        move |_| delete(id.clone())
                                     },
                                     {tx::DELETE_YES}
                                 }
-                                button { class: "btn btn-secondary", onclick: move |_| confirm.set(None), {tx::CANCEL} }
+                                button {
+                                    class: "btn btn-secondary",
+                                    onclick: move |_| {
+                                        delete_failed.set(None);
+                                        confirm.set(None);
+                                    },
+                                    {tx::CANCEL}
+                                }
+                            }
+                            if let Some(e) = delete_failed() {
+                                crate::persistence::WriteFailed {
+                                    message: tx::DELETE_FAILED,
+                                    detail: e,
+                                    on_retry: {
+                                        let id = c.id.clone();
+                                        let mut delete = delete.clone();
+                                        move |_| delete(id.clone())
+                                    },
+                                }
                             }
                         } else {
                             div { class: "own-actions",
@@ -389,7 +418,10 @@ pub fn OwnCardsCard(on_study: EventHandler<()>) -> Element {
                                     class: "btn btn-secondary",
                                     onclick: {
                                         let id = c.id.clone();
-                                        move |_| confirm.set(Some(id.clone()))
+                                        move |_| {
+                                            delete_failed.set(None);
+                                            confirm.set(Some(id.clone()))
+                                        }
                                     },
                                     {tx::DELETE}
                                 }

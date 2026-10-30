@@ -98,6 +98,27 @@ pub fn SaveNotice() -> Element {
     }
 }
 
+/// Inline failure for a feature's own write (an answer, a content check, an
+/// export). The feature keeps its state on screen and `on_retry` repeats its
+/// own write; append-only events never go through the preference queue.
+#[component]
+pub fn WriteFailed(message: &'static str, detail: Option<String>, on_retry: EventHandler<()>) -> Element {
+    rsx! {
+        div { class: "save-notice write-failed", role: "alert", aria_atomic: "true",
+            p {
+                "{message}"
+                if let Some(detail) = detail {
+                    " "
+                    bdi { class: "small", dir: "ltr", "{detail}" }
+                }
+            }
+            button { class: "btn btn-secondary save-retry", onclick: move |_| on_retry.call(()),
+                {crate::i18n::saving::TRY_AGAIN}
+            }
+        }
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

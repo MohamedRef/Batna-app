@@ -230,6 +230,18 @@ Timed papers add ← (next, since the app reads right to left), → (previous)
 and F (flag). Filter chips, navigator cells, review rows, score rows, the
 lecture chip, Close and Report use the shared 48dp `--target`. No scoring,
 FSRS, content, stored papers or schemas changed.
+
+## Lessons list: continue where you left off (2026-10-30)
+
+The Lessons screen now opens on the lecture of the lesson left part-way
+most recently (the saved attempt's `started_ms`; records without one fall
+back to book order), before the next unfinished lecture. The picked
+lecture's Continue button names the step it reopens at. While another
+lecture is picked, a `.ls-now` card (the same markup as Today's) leads back
+to the part-way lesson, and lecture rows with a started lesson say so in
+their subline. Progress shown is only what is saved: finished-lesson marks
+and the player's saved step. No player, steps, FSRS, content or schema
+changes.
 ## Lesson and study browser checks (2026-10-30)
 
 A second Chromium job (`screens-browser.yml`) renders the production lesson

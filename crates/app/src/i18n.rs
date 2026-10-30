@@ -1765,6 +1765,14 @@ pub mod learn {
     }
     pub const NOW_KICKER: &str = "الدرس الحالي";
     pub const NEXT_KICKER: &str = "الدرس الجاي";
+    /// The Lessons list's card back to the lesson left part-way.
+    pub const LEFT_OFF_KICKER: &str = "كمّل من حيث وقفت";
+    /// After a lecture's lesson counts, when one of them is part-way.
+    pub const LESSON_STARTED: &str = "فيه درس بدأته";
+    /// Under the picked lecture's Continue button: "هتكمّل من خطوة 4 من 9".
+    pub fn resume_at(at: usize, n: usize) -> String {
+        format!("هتكمّل من خطوة {at} من {n}")
+    }
 }
 
 /// The view switcher on list screens (parts::ViewBar).

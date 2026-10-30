@@ -96,6 +96,8 @@ mark {
 .ls-lec-go { margin-block-start: var(--sp-2); gap: var(--sp-2); justify-content: center; }
 .ls-lec-go .icon { flex: none; inline-size: 1.1rem; block-size: 1.1rem; }
 @media (max-width: 599px) { .ls-lec-go { inline-size: 100%; } }
+/* The step the Continue button reopens at, under it. */
+.ls-lec-at { color: var(--muted); }
 @media (min-width: 600px) { .ls-lec-go { align-self: start; } }
 
 /* The shared .progress line, spaced and on a tinted card. */
@@ -106,7 +108,9 @@ mark {
 /* Lesson rows (the shared .coll layouts): number (a tick when done), title
    and hook, state in words. Natural height: the screen is a flex column, and a clipped list would
    otherwise shrink to nothing. */
-.ls-rows, .ls-lec, .ls-others, .ls-group, .ls-search { flex-shrink: 0; margin: 0; }
+.ls-rows, .ls-lec, .ls-others, .ls-group, .ls-search, .ls-resume { flex-shrink: 0; margin: 0; }
+/* A lecture with a lesson part-way says so in its subline. */
+.ls-started { color: var(--accent); font-weight: 600; }
 .ls-search { flex: none; }
 /* A lesson's state word takes its tone. */
 .ls-state { font-weight: 700; }

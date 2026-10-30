@@ -55,6 +55,14 @@ pub fn forget() {
     *FROM.write() = Screen::Learn;
 }
 
+/// Enter a chosen course's catalogue without a stale search or selected
+/// lecture; completion data and saved list-view preferences remain intact.
+pub(crate) fn reset_course_browse() {
+    forget();
+    *SHOWN.write() = None;
+    QUERY.write().clear();
+}
+
 /// A finished lesson, saved as the synced setting `lesson.<id>`.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Mark {
@@ -452,12 +460,13 @@ fn Shown(id: String, next_id: Option<String>) -> Element {
         .find(|l| resume_step(&l.id).is_some())
         .or_else(|| file.lessons.iter().find(|l| mark(&l.id).is_none()));
     let go_id = go.map(|l| l.id.clone());
+    let cta_id = go_id.clone();
     let next = next_id.as_deref();
     let pick = LESSONS_VIEW.pick();
     let rows = numbered(&file.lessons, pick.sort);
     rsx! {
-        // The whole header opens the lecture's next lesson (its button's
-        // click bubbles up); the lecture page has its own link.
+        // The card and its explicit keyboard CTA open the same next lesson,
+        // without double activation from button event bubbling.
         crate::ui::Card {
             class: if go_id.is_some() { "card-flat card-action ls-lec" } else { "card-flat ls-lec" },
             onclick: move |_| if let Some(g) = &go_id { open(ui, g) },
@@ -478,7 +487,15 @@ fn Shown(id: String, next_id: Option<String>) -> Element {
                 bdi { dir: "ltr", "{pct}%" }
             }
             if let Some(l) = go {
-                button { class: "btn btn-primary ls-lec-go",
+                button {
+                    class: "btn btn-primary ls-lec-go",
+                    r#type: "button",
+                    onclick: move |e: MouseEvent| {
+                        e.stop_propagation();
+                        if let Some(id) = &cta_id {
+                            open(ui, id);
+                        }
+                    },
                     span { class: "ls-btn-label",
                         {if resume_step(&l.id).is_some() || d > 0 { tx::CONTINUE } else { tx::START_FIRST }}
                         " · "
@@ -734,6 +751,16 @@ mod list_tests {
             assert!(matches(&t.to_lowercase(), lec, &title, l));
         }
         assert!(!matches("zzz-no-such-word", lec, &title, l));
+    }
+
+    #[test]
+    fn selected_lecture_cta_is_directly_keyboard_operable() {
+        let source = include_str!("mod.rs");
+        let shown = source.split("fn Shown(").nth(1).unwrap().split("pub(crate) fn numbered").next().unwrap();
+        let cta = shown.split("class: \"btn btn-primary ls-lec-go\"").nth(1).unwrap();
+        assert!(cta.contains("r#type: \"button\""));
+        assert!(cta.contains("e.stop_propagation();"));
+        assert!(cta.contains("open(ui, id);"));
     }
 
     #[test]

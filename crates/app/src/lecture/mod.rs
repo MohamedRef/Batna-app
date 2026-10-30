@@ -226,19 +226,21 @@ pub fn LecturePage(id: String) -> Element {
                         "{seen} {tx::OF} {total} {tx::STARTED}"
                         if due_n > 0 { " · " span { class: "lec-due", "{due_n} {tx::DUE}" } }
                     }
+                    // When reviews are due, give them the one primary action.
+                    // A full-lecture study session is still available.
                     div { class: "lec-actions",
-                        if playable > 0 {
-                            button {
-                                class: "btn btn-primary",
-                                onclick: { let id = id.clone(); move |_| start(ui, &id, None) },
-                                {tx::STUDY}
-                            }
-                        }
                         if due_n > 0 {
                             button {
-                                class: "btn btn-tonal",
+                                class: "btn btn-primary",
                                 onclick: { let id = id.clone(); move |_| start(ui, &id, Some(due.clone())) },
                                 "{tx::REVIEW_DUE} ({due_n})"
+                            }
+                        }
+                        if playable > 0 {
+                            button {
+                                class: if due_n > 0 { "btn btn-tonal" } else { "btn btn-primary" },
+                                onclick: { let id = id.clone(); move |_| start(ui, &id, None) },
+                                {tx::STUDY}
                             }
                         }
                     }

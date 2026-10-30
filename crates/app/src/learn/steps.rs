@@ -12,6 +12,9 @@ use super::text::{Line, Rich, is_latin};
 use crate::i18n::learn as tx;
 use crate::order::grade::{misplaced, shuffled};
 
+mod decision;
+use decision::{answer_state, is_value};
+
 const LETTERS: [&str; 5] = ["A", "B", "C", "D", "E"];
 
 /// The player's footer gate, one slot per step (visited steps stay
@@ -292,25 +295,6 @@ fn Aside(tone: Tone, text: String) -> Element {
             p { class: "ls-aside-label", span { aria_hidden: "true", "{glyph} " } {label} }
             Rich { text }
         }
-    }
-}
-
-/// An answer choice's look (parts.css `button.answer`) and its mark in
-/// words: picked before Check, then his pick right or wrong and the right
-/// one he missed. Other options stay plain (and dimmed once checked).
-fn answer_state(
-    checked: bool,
-    picked: Option<usize>,
-    i: usize,
-    answer: usize,
-) -> (Option<&'static str>, Option<&'static str>) {
-    match (checked, picked) {
-        (false, Some(p)) if p == i => (Some("selected"), None),
-        (false, _) => (None, None),
-        (true, Some(p)) if p == i && i == answer => (Some("correct"), Some(tx::MARK_MINE_RIGHT)),
-        (true, Some(p)) if p == i => (Some("wrong"), Some(tx::MARK_MINE_WRONG)),
-        (true, _) if i == answer => (Some("missed"), Some(tx::MARK_RIGHT)),
-        (true, _) => (None, None),
     }
 }
 
@@ -859,12 +843,6 @@ fn MiniCase(stem: String, steps: Vec<CaseStep>, seed: String, on_answer: EventHa
             }
         }
     }
-}
-
-/// A short value ("8–11", "F0–F1", "> 12.5") that must not break inside a
-/// table cell.
-fn is_value(cell: &str) -> bool {
-    cell.chars().count() <= 14 && !cell.contains(' ') || cell.chars().count() <= 9
 }
 
 #[component]

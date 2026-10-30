@@ -150,21 +150,10 @@ mod tests {
     #[test]
     fn revisits_follow_the_exact_navigation_order() {
         let mut t = Trail::default();
-        for screen in [
-            Screen::Today,
-            Screen::Study,
-            Screen::Bank,
-            Screen::Study,
-            Screen::Bank,
-        ] {
+        for screen in [Screen::Today, Screen::Study, Screen::Bank, Screen::Study, Screen::Bank] {
             t.visit(screen);
         }
-        for expected in [
-            Screen::Study,
-            Screen::Bank,
-            Screen::Study,
-            Screen::Today,
-        ] {
+        for expected in [Screen::Study, Screen::Bank, Screen::Study, Screen::Today] {
             let from = t.last.expect("visited screen");
             assert_eq!(t.back(from), Some(expected));
             t.visit(expected);

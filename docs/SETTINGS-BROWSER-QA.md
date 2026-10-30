@@ -19,7 +19,7 @@ No real user data, live APIs, app launch, installation or release is involved.
 | Direction | Arabic RTL with the production Latin medical sample |
 
 The matrix runs 160 browser cases. Assertions inspect computed dialog bounds,
-document and pane overflow, the responsive section index and Back target, actual
+document and pane overflow, the exact production text-size scale (15px compact\nNormal / 16px wider Normal, multiplied by 125% for Larger), the responsive\nsection index and Back target, actual
 focus after Tab/Shift+Tab, the Escape target, inert background and focus restored
 after removal. Browser errors fail the job. Largest-text Calm screenshots and a
 JSON report are attached as `settings-browser-results`; failures attach a screenshot.

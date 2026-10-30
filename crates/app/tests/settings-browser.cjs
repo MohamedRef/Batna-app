@@ -37,6 +37,7 @@ async function run() {
         return {
           direction: getComputedStyle(root).direction,
           fontSize: parseFloat(getComputedStyle(root).fontSize),
+          htmlFontSize: parseFloat(getComputedStyle(document.documentElement).fontSize),
           viewport: innerWidth,
           documentWidth: document.documentElement.scrollWidth,
           dialog: { left: box.left, right: box.right, width: box.width, height: box.height },
@@ -57,7 +58,14 @@ async function run() {
       assert.ok(layout.dialog.left >= -1 && layout.dialog.right <= item.width + 1, `${name}: dialog outside viewport`);
       assert.ok(layout.dialog.width > 100 && layout.dialog.height > 100, `${name}: hidden dialog`);
       assert.ok(layout.paneOverflow <= 1, `${name}: pane overflow ${layout.paneOverflow}`);
-      assert.ok(layout.fontSize >= 16, `${name}: unexpectedly small text`);
+      // Batna intentionally uses 0.9375rem on compact screens; verify the
+      // real CSS scale, not an incorrect hard-coded 16px minimum for .app.
+      const expectedRootSize = item.size === 'larger' ? 20 : 16;
+      const expectedAppSize = expectedRootSize * (item.width < 600 ? 0.9375 : 1);
+      assert.ok(Math.abs(layout.htmlFontSize - expectedRootSize) < 0.1,
+        `${name}: root text-size preference not applied: ${JSON.stringify(layout)}`);
+      assert.ok(Math.abs(layout.fontSize - expectedAppSize) < 0.1,
+        `${name}: unexpected responsive text size: ${JSON.stringify(layout)}`);
       assert.equal(layout.listVisible, item.width >= 600, `${name}: section index visibility`);
       assert.equal(layout.back.includes('settings-back'), item.width < 600, `${name}: responsive Back target`);
 

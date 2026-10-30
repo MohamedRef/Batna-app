@@ -477,6 +477,19 @@ pub mod bank {
     pub const UPDATE_NOTE: &str = "إجابة الامتحان هي إجابة الكتاب.";
     pub const RIGHT: &str = "صح";
     pub const YOUR_ANSWER: &str = "إجابتك";
+    pub const RIGHT_PICKED: &str = "إجابتك صح";
+    pub const RIGHT_ANSWER: &str = "دي الإجابة الصح";
+    pub const WRONG: &str = "غلط";
+    pub const ANSWERED: &str = "متجاوب";
+    pub const NOW_HERE: &str = "إنت هنا";
+    /// Read out once a tutor answer is checked (the Check button is gone).
+    pub fn checked(right: bool, letter: char) -> String {
+        if right {
+            "إجابتك صح.".to_string()
+        } else {
+            format!("إجابتك غلط. الإجابة الصح {letter}.")
+        }
+    }
     pub const NOT_FOUND: &str = "السؤال ده اتشال من المحتوى.";
 
     pub const RESULT: &str = "النتيجة";
@@ -492,6 +505,7 @@ pub mod bank {
     pub const SHOW_FLAGGED: &str = "المتعلّم عليها";
     pub const RETRY_WRONG: &str = "جاوب الغلط تاني بالشرح";
     pub const BACK: &str = "رجوع للبنك";
+    pub const NEW_PAPER: &str = "حل ورقة جديدة";
     pub const SENT_TO_REVIEW: &str = "الأسئلة اللي غلطت فيها هترجعلك في المراجعة قريب.";
     pub const REPORT: &str = "بلّغ عن مشكلة في السؤال ده";
     pub const CLOSE: &str = "اقفل";
@@ -966,6 +980,8 @@ pub mod keys {
     pub const RATE: &str = "تقيّم نفسك (من نسيت لسهل)";
     pub const OPTIONS: &str = "تختار إجابة في سؤال الاختيارات";
     pub const NEXT: &str = "اللي بعده";
+    pub const MOVE: &str = "السؤال اللي بعده أو اللي قبله في الامتحان";
+    pub const FLAG: &str = "تعلّم السؤال عشان ترجعله";
     pub const ESC: &str = "تقفل أي حاجة مفتوحة";
     pub const HELP: &str = "القايمة دي";
 }

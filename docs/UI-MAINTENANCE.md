@@ -182,3 +182,24 @@ An optional suggested rating is now explicitly marked with the word
 focus-independent ring. It remains only a suggestion; all four grades,
 their real FSRS intervals, review storage and retry/Undo semantics are
 unchanged. The label is absent when there is no recommendation.
+
+## Question bank player and result (2026-10-30)
+
+Answer states are words as well as colours: after a tutor check the
+picked right option says "إجابتك صح", an unpicked right option says
+"دي الإجابة الصح", and a wrong pick says "إجابتك"; the wide-window
+explanation list carries the same ✓/✗ words. A polite live region reads
+the verdict because the Check button disappears, and focus moves to the
+Next button. Navigator cells speak "question N, answered/unanswered,
+flagged" and show a ⚑ glyph besides the bar. The submit confirm keeps
+`role="alertdialog"`; the shortcut handler now scopes keys to an open
+alertdialog as well as a dialog, so A–E never change an answer under it.
+
+The result screen has one primary action, next to the score: retry the
+wrong ones in tutor mode, or a new paper when none are wrong. "Back to the
+bank" is secondary at the foot and takes Android Back; an open review
+question's Close takes Back first. The result heading takes focus on mount.
+Timed papers add ← (next, since the app reads right to left), → (previous)
+and F (flag). Filter chips, navigator cells, review rows, score rows, the
+lecture chip, Close and Report use the shared 48dp `--target`. No scoring,
+FSRS, content, stored papers or schemas changed.

@@ -86,9 +86,9 @@ mod tests {
         assert!(shape.contains("@media (max-width: 839.98px)"));
         assert!(base.contains("--card-pad"));
         assert!(parts.contains("--radius-card"));
-        assert!(base.contains("bdi[dir=\\\"ltr\\\"]"));
+        assert!(base.contains("bdi[dir=\"ltr\"]"));
         assert!(base.contains("prefers-reduced-motion"));
-        assert!(appearance.contains("data-appearance=\\\"glossy\\\""));
+        assert!(appearance.contains("data-appearance=\"glossy\""));
         assert!(appearance.contains("prefers-reduced-transparency"));
     }
 }

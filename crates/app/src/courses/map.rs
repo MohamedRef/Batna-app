@@ -240,26 +240,34 @@ mod ux_tests {
     #[test]
     fn courses_open_their_lessons_instead_of_the_references_page() {
         let source = include_str!("map.rs");
-        assert!(source.contains("on_lectures: move |id: String| open_course_lessons(ui, &id)"));
-        assert!(source.contains("super::focus::set(Some(id.to_string()))"));
-        assert!(source.contains("crate::learn::reset_course_browse()"));
-        assert!(source.contains("crate::lecture::close_all()"));
-        assert!(!source.contains("open_references(ui)"));
+        let production = source.split("/// Course discovery must lead").next().unwrap();
+        assert!(production.contains("on_lectures: move |id: String| open_course_lessons(ui, &id)"));
+        assert!(production.contains("super::focus::set(Some(id.to_string()))"));
+        assert!(production.contains("crate::learn::reset_course_browse()"));
+        assert!(production.contains("crate::lecture::close_all()"));
+        assert!(!production.contains("open_references(ui)"));
     }
 
     #[test]
     fn an_expanded_course_exposes_real_readiness_and_its_detail_region() {
+        fn app() -> Element {
+            let lib = Library::get();
+            let summary = summaries(lib, |c| c.status).into_iter().find(|s| s.course.id == "hb").unwrap();
+            rsx! {
+                CourseTile {
+                    summary,
+                    open: true,
+                    on_toggle: move |_: String| {},
+                    on_lectures: move |_: String| {},
+                }
+            }
+        }
         let lib = Library::get();
         let summary = summaries(lib, |c| c.status).into_iter().find(|s| s.course.id == "hb").unwrap();
         let expected = tx::ready_lectures(summary.written, summary.lectures);
-        let html = dioxus::ssr::render_element(rsx! {
-            CourseTile {
-                summary,
-                open: true,
-                on_toggle: move |_: String| {},
-                on_lectures: move |_: String| {},
-            }
-        });
+        let mut dom = VirtualDom::new(app);
+        dom.rebuild_in_place();
+        let html = dioxus::ssr::render(&dom);
         for required in [
             "aria-expanded=\"true\"",
             "aria-controls=\"cm-detail-hb\"",

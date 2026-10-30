@@ -130,7 +130,7 @@ pub fn Map() -> Element {
                                         let same = open() == Some(id.clone());
                                         open.set(if same { None } else { Some(id) });
                                     },
-                                    on_lectures: move |_| crate::lecture::open_references(ui),
+                                    on_lectures: move |id: String| open_course_lessons(ui, &id),
                                     summary: s,
                                 }
                             }
@@ -142,12 +142,20 @@ pub fn Map() -> Element {
     }
 }
 
+/// Browse the selected course's lectures and lessons, not References.
+fn open_course_lessons(mut ui: crate::Ui, id: &str) {
+    super::focus::set(Some(id.to_string()));
+    crate::learn::reset_course_browse();
+    crate::lecture::close_all();
+    ui.screen.set(crate::Screen::Learn);
+}
+
 #[component]
 fn CourseTile(
     summary: Summary,
     open: bool,
     on_toggle: EventHandler<String>,
-    on_lectures: EventHandler<()>,
+    on_lectures: EventHandler<String>,
 ) -> Element {
     let s = summary;
     let id = s.course.id.clone();
@@ -159,6 +167,7 @@ fn CourseTile(
                 class: "tap tile cm-tile",
                 "data-group": group_key(s.course.group),
                 "aria-expanded": open,
+                "aria-controls": "cm-detail-{s.course.id}",
                 onclick: move |_| on_toggle.call(id.clone()),
                 span { class: "cm-bar", aria_hidden: "true" }
                 span { class: "cm-name", bdi { "{s.course.title}" } }
@@ -173,9 +182,17 @@ fn CourseTile(
                     }
                     span { class: "muted small", {tx::tile_line(&s.course.short, &fmt_hours(s.course.hours))} }
                 }
+                if s.lectures > 0 {
+                    span { class: "cm-coverage muted small", {tx::ready_lectures(s.written, s.lectures)} }
+                }
             }
             if open {
-                crate::ui::Card { element: crate::ui::CardElement::Div, class: "cm-detail", role: "region", aria_label: s.course.title.clone(),
+                crate::ui::Card {
+                    element: crate::ui::CardElement::Div,
+                    class: "cm-detail",
+                    id: "cm-detail-{s.course.id}",
+                    role: "region",
+                    aria_label: s.course.title.clone(),
                     p { class: "small",
                         {group_label(s.course.group)}
                         if let Some(n) = s.course.semester {
@@ -187,7 +204,7 @@ fn CourseTile(
                         p { class: "small", {tx::content_line(s.written, s.lectures, s.items, s.lessons)} }
                         button {
                             class: "btn btn-ghost cm-open",
-                            onclick: move |_| on_lectures.call(()),
+                            onclick: move |_| on_lectures.call(s.course.id.clone()),
                             {tx::OPEN_LECTURES}
                         }
                     } else {
@@ -210,6 +227,49 @@ fn CourseTile(
                     }
                 }
             }
+        }
+    }
+}
+
+/// Course discovery must lead into the chosen course, with native controls.
+#[cfg(test)]
+mod ux_tests {
+    use super::*;
+
+    #[test]
+    fn courses_open_their_lessons_instead_of_the_references_page() {
+        let source = include_str!("map.rs");
+        assert!(source.contains("on_lectures: move |id: String| open_course_lessons(ui, &id)"));
+        assert!(source.contains("super::focus::set(Some(id.to_string()))"));
+        assert!(source.contains("crate::learn::reset_course_browse()"));
+        assert!(source.contains("crate::lecture::close_all()"));
+        assert!(!source.contains("open_references(ui)"));
+    }
+
+    #[test]
+    fn an_expanded_course_exposes_real_readiness_and_its_detail_region() {
+        let lib = Library::get();
+        let summary = summaries(lib, |c| c.status)
+            .into_iter()
+            .find(|s| s.course.id == "hb")
+            .unwrap();
+        let expected = tx::ready_lectures(summary.written, summary.lectures);
+        let html = dioxus::ssr::render_element(rsx! {
+            CourseTile {
+                summary,
+                open: true,
+                on_toggle: move |_: String| {},
+                on_lectures: move |_: String| {},
+            }
+        });
+        for required in [
+            "aria-expanded=\"true\"",
+            "aria-controls=\"cm-detail-hb\"",
+            "id=\"cm-detail-hb\"",
+            tx::OPEN_LECTURES,
+            expected.as_str(),
+        ] {
+            assert!(html.contains(required), "missing {required}: {html}");
         }
     }
 }

@@ -13,7 +13,7 @@
 .chip-label { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; min-inline-size: 0; }
 .chip.toggle {
   cursor: pointer;
-  min-height: 40px;
+  min-block-size: var(--target);
   padding-block: var(--sp-1);
   padding-inline: var(--sp-3);
   font-size: var(--fs-sm);
@@ -93,7 +93,7 @@ bdi.bank-scope { font-family: var(--font-latin); }
 }
 .run-head { display: flex; align-items: center; gap: var(--sp-3); }
 .run-head .run-count { font-weight: 600; font-size: var(--fs-sm); color: var(--muted); flex: none; }
-.run-leave { flex: none; inline-size: var(--tap); block-size: var(--tap); border: 0; border-radius: 50%; background: transparent; color: var(--text); font-size: 1.1rem; cursor: pointer; }
+.run-leave { flex: none; inline-size: var(--target); block-size: var(--target); border: 0; border-radius: 50%; background: transparent; color: var(--text); font-size: 1.1rem; cursor: pointer; }
 @media (hover: hover) { .run-leave:hover { background: var(--accent-soft); } }
 .run-progress { flex: 1; }
 .run-sub { display: flex; align-items: center; gap: var(--sp-2); flex-wrap: wrap; }
@@ -130,9 +130,10 @@ bdi.bank-scope { font-family: var(--font-latin); }
 .run-side { display: flex; flex-direction: column; gap: var(--sp-3); min-inline-size: 0; }
 .navigator { display: flex; gap: var(--sp-1); overflow-x: auto; padding: 3px; max-inline-size: 100%; scroll-padding-inline: var(--sp-4); }
 .nav-cell {
+  position: relative;
   flex: none;
-  inline-size: 40px;
-  block-size: 40px;
+  inline-size: var(--target);
+  block-size: var(--target);
   border-radius: 8px;
   border: 1px solid var(--line);
   background: var(--surface);
@@ -142,6 +143,8 @@ bdi.bank-scope { font-family: var(--font-latin); }
 }
 .nav-cell[data-done="yes"] { background: var(--accent-soft); border-color: transparent; }
 .nav-cell[data-flag="yes"] { box-shadow: inset 0 -3px 0 var(--accent); }
+/* Flagged is a glyph as well as the bar, so it shows without colour. */
+.nav-flag { position: absolute; inset-block-start: 1px; inset-inline-end: 3px; font-size: 0.625rem; line-height: 1; color: var(--accent); }
 .nav-cell[aria-current="true"] { outline: 2px solid var(--accent); outline-offset: 1px; font-weight: 700; }
 
 @media (min-width: 840px) {
@@ -155,6 +158,12 @@ bdi.bank-scope { font-family: var(--font-latin); }
 /* The lecture and topic are a quiet line; the clinical stem leads. */
 .q-meta { display: flex; flex-wrap: wrap; gap: var(--sp-1) var(--sp-2); min-inline-size: 0; }
 .q-meta .chip { font-size: 0.75rem; line-height: 1.7; inline-size: fit-content; max-inline-size: 100%; }
+/* The lecture chip opens the lecture: a full 48dp to touch. */
+.q-meta .chip.tap {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: var(--target);
+}
 .q-stem, .q-text, .q-why { overflow-wrap: anywhere; }
 .q-stem { font-family: var(--font-latin); font-size: calc(var(--fs-lg) * 1.12); font-weight: 600; line-height: 1.5; text-align: start; }
 .q-options { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--sp-2); font-family: var(--font-latin); }
@@ -181,7 +190,14 @@ bdi.bank-scope { font-family: var(--font-latin); }
 .big-score { display: flex; align-items: baseline; gap: var(--sp-3); }
 .big-score .pct { font-size: 2.6rem; font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
 .score-rows { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--sp-2); }
-.score-row { display: grid; grid-template-columns: minmax(0, 1fr) 5rem 3.5rem; align-items: center; gap: var(--sp-3); padding-block: var(--sp-1); }
+.score-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 5rem 3.5rem;
+  align-items: center;
+  gap: var(--sp-3);
+  min-block-size: var(--target);
+  padding-block: var(--sp-1);
+}
 @media (hover: hover) { .score-row:hover .score-label { color: var(--accent); } }
 .score-label { overflow-wrap: anywhere; font-size: var(--fs-sm); }
 .score-bar { block-size: 8px; border-radius: var(--radius-pill); background: var(--line); overflow: hidden; }
@@ -195,7 +211,7 @@ bdi.bank-scope { font-family: var(--font-latin); }
   align-items: center;
   gap: var(--sp-2);
   cursor: pointer;
-  min-height: var(--tap-lg);
+  min-block-size: var(--target);
   padding-inline: var(--sp-3);
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -211,6 +227,23 @@ bdi.bank-scope { font-family: var(--font-latin); }
 .review-detail { display: flex; flex-direction: column; gap: var(--sp-3); }
 .review-detail-head { display: flex; align-items: center; gap: var(--sp-3); }
 .review-detail-head .run-count { font-weight: 700; flex: 1; }
+.bank-close {
+  min-block-size: var(--target);
+  padding-inline: var(--sp-3);
+}
+.report {
+  align-self: flex-start;
+  min-block-size: var(--target);
+}
+/* Read to screen readers only: states that are drawn as glyphs or colour. */
+.bank-sr {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
 /* In the review's detail pane the question and its explanation stack. */
 .desk-detail .desk-split { display: flex; flex-direction: column; }
 
@@ -219,6 +252,9 @@ bdi.bank-scope { font-family: var(--font-latin); }
 .q-why-list { display: none; list-style: none; margin: 0; padding: 0; flex-direction: column; gap: var(--sp-2); font-family: var(--font-latin); font-size: var(--fs-sm); line-height: 1.5; }
 .q-why-list li { display: flex; gap: var(--sp-2); align-items: flex-start; color: var(--muted); }
 .q-why-list .q-letter { inline-size: 1.5rem; block-size: 1.5rem; font-size: 0.75rem; }
+.q-why-mark { flex: none; font-family: var(--font); font-weight: 700; }
+.q-why-list li[data-state="right"] .q-why-mark { color: var(--good); }
+.q-why-list li[data-state="wrong"] .q-why-mark { color: var(--bad); }
 .q-why-list li[data-state="right"] { color: var(--text); }
 .q-why-list li[data-state="right"] .q-letter { background: var(--good); color: var(--surface); }
 .q-why-list li[data-state="wrong"] .q-letter { background: var(--bad); color: var(--surface); }

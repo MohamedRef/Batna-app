@@ -174,3 +174,11 @@ Skip button is the way on. In-step controls (tiles, sort bins and chips,
 hidden table cells, order Undo, retry, image zoom) use the shared 48dp
 `--target`. Text on solid accent fills uses `--on-accent`. The finished
 summary takes focus on its heading so screen readers announce the result.
+
+## Study review: suggested grade in words (2026-10-30)
+
+An optional suggested rating is now explicitly marked with the word
+"مقترح" inside its existing rating button, in addition to the current
+focus-independent ring. It remains only a suggestion; all four grades,
+their real FSRS intervals, review storage and retry/Undo semantics are
+unchanged. The label is absent when there is no recommendation.

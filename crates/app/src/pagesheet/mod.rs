@@ -59,11 +59,6 @@ pub fn close() {
     *OPEN.write() = None;
 }
 
-/// Whether the sheet is open (Back closes it first).
-pub fn is_open() -> bool {
-    OPEN.read().is_some()
-}
-
 /// What Batna has made from one book page.
 #[derive(Debug, Default, PartialEq)]
 pub struct PageContent {

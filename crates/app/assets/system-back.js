@@ -1,0 +1,76 @@
+// Android Back for the whole app. Every visible data-back="true" control
+// participates automatically; Rust only supplies the top-level screen trail.
+window.__batnaBackSend = (message) => dioxus.send(message);
+if (!window.__batnaBackInit) {
+  window.__batnaBackInit = true;
+  let screenCanBack = false;
+  let waitingForScreen = false;
+  let releasing = false;
+  let scheduled = false;
+
+  const trapped = () => history.state?.batnaBackTrap === true;
+  const visible = (element) =>
+    !element.disabled &&
+    element.getClientRects().length > 0 &&
+    !element.closest('[hidden], [inert], [aria-hidden="true"]') &&
+    getComputedStyle(element).visibility !== 'hidden';
+  // Sheets and dialogs render after their parent screen; last visible wins.
+  const topBackControl = () =>
+    [...document.querySelectorAll('[data-back="true"]')].filter(visible).at(-1);
+
+  function sync() {
+    if (releasing || waitingForScreen) return;
+    const wantsBack = screenCanBack || !!topBackControl();
+    if (wantsBack && !trapped()) {
+      history.pushState({ ...(history.state || {}), batnaBackTrap: true }, '');
+    } else if (!wantsBack && trapped()) {
+      // Closing the final overlay with X must not leave a phantom Back.
+      releasing = true;
+      history.back();
+    }
+  }
+  function scheduleSync() {
+    if (scheduled) return;
+    scheduled = true;
+    queueMicrotask(() => {
+      scheduled = false;
+      sync();
+    });
+  }
+
+  window.__batnaSetScreenBack = (canBack) => {
+    screenCanBack = !!canBack;
+    waitingForScreen = false;
+    scheduleSync();
+  };
+
+  // Covers any new dialog, popover, sheet or in-screen Back control,
+  // including those which never change the top-level Screen signal.
+  new MutationObserver(scheduleSync).observe(document.documentElement, {
+    subtree: true,
+    childList: true,
+    attributes: true,
+    attributeFilter: ['data-back', 'class', 'style', 'hidden', 'inert', 'disabled', 'aria-hidden'],
+  });
+
+  window.addEventListener('popstate', () => {
+    if (releasing) {
+      releasing = false;
+      scheduleSync();
+      return;
+    }
+    const top = topBackControl();
+    if (top) {
+      top.click();
+      scheduleSync();
+    } else if (screenCanBack) {
+      // A screen change is asynchronous. Wait for Rust to confirm the
+      // next destination before installing the next history trap.
+      waitingForScreen = true;
+      window.__batnaBackSend('back');
+    }
+  });
+  scheduleSync();
+}
+window.__batnaBackSend('ready');
+await new Promise(() => {});

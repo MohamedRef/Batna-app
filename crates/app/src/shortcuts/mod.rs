@@ -21,11 +21,6 @@ pub fn open_sheet(open: bool) {
     *SHEET_OPEN.write() = open;
 }
 
-/// The shortcut list is showing (Android Back closes it first).
-pub fn is_open() -> bool {
-    *SHEET_OPEN.read()
-}
-
 const KEYS_JS: &str = r#"
 if (window.__batnaKeys) document.removeEventListener("keydown", window.__batnaKeys, true);
 window.__batnaKeys = (e) => {

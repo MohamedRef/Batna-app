@@ -773,7 +773,7 @@ fn PendingCard(
                     },
                     {tx::PENDING_REPLACE}
                 }
-                button { class: "btn-link", onclick: move |_| on_keep.call(()), {tx::PENDING_KEEP} }
+                button { class: "btn-link", "data-back": "true", onclick: move |_| on_keep.call(()), {tx::PENDING_KEEP} }
             }
         }
     }

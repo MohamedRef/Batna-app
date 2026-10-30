@@ -183,15 +183,7 @@ fn App() -> Element {
     lecture::use_lecture_page(ui);
     sheet::use_gestures();
     courses::focus::use_close_on_screen_change(ui);
-    back::use_back(
-        ui,
-        current,
-        *settings.open.read()
-            || lecture::is_open()
-            || pagesheet::is_open()
-            || shortcuts::is_open()
-            || courses::focus::is_open(),
-    );
+    back::use_back(ui, current);
     update::view::use_android_install(ui);
     update::view::use_content_switch(ui);
     update::view::use_update_notice_taps(settings);

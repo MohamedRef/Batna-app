@@ -104,7 +104,7 @@ pub fn ExportCard() -> Element {
         outcome.set(Some(result));
     };
     rsx! {
-        section { class: "card",
+        crate::ui::Card {
             h2 { {tx::EXPORT_TITLE} }
             p { class: "muted small", {tx::EXPORT_BODY} }
             button { class: "btn btn-primary", onclick: run, {tx::EXPORT_BUTTON} }

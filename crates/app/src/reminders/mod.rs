@@ -63,9 +63,9 @@ pub static HERE: GlobalSignal<bool> =
 const HERE_KEY: &str = "remind_here";
 
 pub fn set_here(here: bool) {
-    if let Err(e) = shared().put_local_setting(HERE_KEY, &here) {
-        crate::diag::report!("saving reminder device: {e}");
-    }
+    crate::persistence::save("local.remind_here", move || {
+        shared().put_local_setting(HERE_KEY, &here).map_err(|e| e.to_string())
+    });
     *HERE.write() = here;
 }
 

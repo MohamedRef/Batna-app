@@ -105,13 +105,9 @@ pub fn ListDetail(list: Element, detail: Option<Element>) -> Element {
 #[component]
 pub fn DeviceSettings(section: Section) -> Element {
     let ui = use_context::<Ui>();
-    let mut prefs = ui.prefs;
-    let now = *prefs.read();
+    let now = *ui.prefs.read();
     let terms = crate::hover::term_count();
-    let mut set = move |f: &dyn Fn(&mut crate::prefs::DevicePrefs)| {
-        f(&mut prefs.write());
-        prefs.peek().save();
-    };
+    let set = move |f: &dyn Fn(&mut crate::prefs::DevicePrefs)| ui.update_prefs(f);
     let tablet = section == Section::Tablet;
     rsx! {
         section { class: "card desk-settings",

@@ -496,19 +496,53 @@ static WRITE_ERROR: Mutex<Option<String>> = Mutex::new(None);
 /// Saves a synced setting in the app's store. A failure is reported to the
 /// log and shown on Today, so a choice never vanishes silently.
 pub fn save_setting<T: Serialize>(key: &str, value: &T) -> bool {
-    match shared().put_setting(key, value) {
-        Ok(()) => true,
-        Err(e) => {
-            write_failed(&format!("setting {key}"), &e);
-            false
+    let key = key.to_owned();
+    let value = serde_json::to_value(value).map_err(|e| e.to_string());
+    crate::persistence::save(format!("synced.{key}"), move || {
+        let operation = format!("setting {key}");
+        let result = value
+            .as_ref()
+            .map_err(Clone::clone)
+            .and_then(|value| shared().put_setting(&key, value).map_err(|e| e.to_string()));
+        match &result {
+            Ok(()) => write_recovered(&operation),
+            Err(e) => write_failed(&operation, e),
         }
-    }
+        result
+    })
 }
 
 /// Reports a write that didn't land, to the log and on Today.
 pub fn write_failed(what: &str, e: &dyn std::fmt::Display) {
     crate::diag::report!("saving {what}: {e}");
     *WRITE_ERROR.lock().unwrap() = Some(format!("{what}: {e}"));
+}
+
+/// Clear only this operation's previous diagnostic after successful recovery.
+pub fn write_recovered(what: &str) {
+    clear_recovered(&mut WRITE_ERROR.lock().unwrap_or_else(std::sync::PoisonError::into_inner), what);
+}
+
+fn clear_recovered(error: &mut Option<String>, what: &str) {
+    if error.as_deref().is_some_and(|message| message.starts_with(&format!("{what}: "))) {
+        *error = None;
+    }
+}
+
+#[cfg(test)]
+mod recovery_tests {
+    use super::clear_recovered;
+
+    #[test]
+    fn unrelated_recovery_does_not_erase_another_write_error() {
+        let mut error = Some("setting sounds: blocked".to_owned());
+        clear_recovered(&mut error, "setting plan");
+        assert!(error.is_some());
+        clear_recovered(&mut error, "setting sound");
+        assert!(error.is_some());
+        clear_recovered(&mut error, "setting sounds");
+        assert!(error.is_none());
+    }
 }
 
 /// The last setting that couldn't be saved, if any.

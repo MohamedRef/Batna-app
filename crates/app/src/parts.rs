@@ -175,9 +175,10 @@ impl Collection {
     }
 
     pub fn set(&self, p: ViewPick) {
-        if let Err(e) = crate::store::shared().put_local_setting(&format!("view.{}", self.key), &p) {
-            crate::diag::report!("saving the {} view failed: {e}", self.key);
-        }
+        let key = format!("view.{}", self.key);
+        crate::persistence::save(format!("local.{key}"), move || {
+            crate::store::shared().put_local_setting(&key, &p).map_err(|e| e.to_string())
+        });
         PICKS.write().insert(self.key, p);
     }
 }

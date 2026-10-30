@@ -30,6 +30,7 @@ mod order;
 mod own;
 mod pagesheet;
 mod parts;
+mod persistence;
 mod plan;
 mod platform;
 mod prefs;
@@ -39,6 +40,7 @@ mod settings;
 mod sheet;
 mod shortcuts;
 mod sounds;
+mod state;
 mod stats;
 mod store;
 mod study;
@@ -51,6 +53,8 @@ mod verify;
 
 use crate::look::{Css, css};
 use dioxus::prelude::*;
+
+pub use state::Ui;
 
 const MAIN_CSS: Css = css!("assets/main.css");
 const SHAPE_CSS: Css = css!("assets/shape.css");
@@ -99,17 +103,6 @@ impl Screen {
     }
 }
 
-/// App-wide UI state, shared through context.
-#[derive(Clone, Copy)]
-pub struct Ui {
-    pub screen: Signal<Screen>,
-    /// This device's theme and text size (Settings › Look).
-    pub prefs: Signal<prefs::DevicePrefs>,
-    /// A focused study task is open: the phone bar hides
-    /// (`parts::use_focus_mode`).
-    pub focus: Signal<bool>,
-}
-
 fn main() {
     diag::install_panic_hook();
     // Mac, automatic updates: a verified Batna.app staged last time goes in
@@ -147,6 +140,7 @@ fn main() {
 
 #[component]
 fn App() -> Element {
+    persistence::use_provide_saves();
     let ui = use_context_provider(|| Ui {
         screen: Signal::new(Screen::from_env().unwrap_or(Screen::Today)),
         prefs: Signal::new(prefs::DevicePrefs::load()),
@@ -268,6 +262,7 @@ fn App() -> Element {
                 }
             }
             main { class: "content", "data-screen": "{current:?}",
+                if !*settings.open.read() { persistence::SaveNotice {} }
                 update::view::UpdateBanner {}
                 if current == Screen::Today {
                     update::view::ContentNote {}

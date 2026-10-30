@@ -8,10 +8,11 @@ on this PR branch; update this checkpoint with evidence and the next step.
 
 - Started from main `200b2530fb94a475d76fa8abf7df4822937c78ad`.
 - Merged work already present: #517 (shared Settings), #518 (WebView guard), #519 (audit hardening).
-- Open #520 adds Android WebView renderer regression tests, injectable
+- #520 merged as `2c581cc`; integrated latest main into this follow-up. It adds
+  Android WebView renderer regression tests, injectable
   recovery hooks and cleanup of destroyed renderers. Its changed files are
   Android Kotlin/test harness/workflow files and its own release note. This
-  follow-up does not edit those files. Preserve the existing startup guard.
+  follow-up retains those files unchanged. The existing startup guard is preserved.
 - Previous UI PR is merged; this is a new follow-up PR, not a replacement.
 
 ## Scope

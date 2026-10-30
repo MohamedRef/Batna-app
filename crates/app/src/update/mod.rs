@@ -1842,10 +1842,7 @@ mod tests {
         fs::create_dir_all(&u.dir).unwrap();
         // Batna closed half-way last time.
         fs::write(u.dir.join(format!("{file}.part")), &FIXTURE_APK[..5]).unwrap();
-        let expected = PartMeta {
-            size: FIXTURE_APK.len() as u64,
-            sha256: sha256_hex(FIXTURE_APK),
-        };
+        let expected = PartMeta { size: FIXTURE_APK.len() as u64, sha256: sha256_hex(FIXTURE_APK) };
         fs::write(u.dir.join(format!("{file}.part.json")), serde_json::to_vec(&expected).unwrap()).unwrap();
         u.check(true);
         assert!(matches!(u.status().phase, Phase::Ready(_)), "{:?}", u.status().phase);

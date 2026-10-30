@@ -999,7 +999,7 @@ pub mod verify {
     pub const SAVED_APPROVED: &str = "✓ اتسجّل إنه صح، ومش هيسألك عليه تاني.";
     pub const SAVED_EDITED: &str = "✎ اتسجّل تعديلك، وهتذاكره بكلامك من هنا ورايح.";
     pub const SAVED_WRONG: &str = "✗ اتشال من المراجعة لحد ما يتصلّح.";
-    pub const NOT_SAVED: &str = "ما اتحفظش. جرّب تاني بعد شوية.";
+    pub const NOT_SAVED: &str = "ما اتحفظش، واختيارك لسه زي ما هو. اضغط «حاول تاني».";
     pub const WRONG_NOTE: &str = "إيه الغلط؟ (اختياري)";
     pub const WRONG_PLACEHOLDER: &str = "مثلاً: الكتاب صفحة 14 بيقول 7–9 نقط";
     pub const WRONG_CONFIRM: &str = "شيله من المراجعة";
@@ -1059,6 +1059,7 @@ pub mod own {
     pub const SAVE: &str = "احفظ";
     pub const CANCEL: &str = "إلغاء";
     pub const FAILED: &str = "ما عرفتش أحفظ الكارت:";
+    pub const DELETE_FAILED: &str = "ما عرفتش أمسح الكارت، ولسه موجود:";
     pub const E_FRONT: &str = "اكتب السؤال في الوش.";
     pub const E_BACK: &str = "اكتب الإجابة في الضهر.";
     pub const E_FRONT_LONG: &str = "الوش طويل، خليه سؤال قصير (600 حرف بالكتير).";
@@ -1882,4 +1883,5 @@ pub mod lecture {
 pub mod saving {
     pub const FAILED: &str = "فيه إعدادات ما اتحفظتش. اختياراتك شغالة دلوقتي، بس ممكن تضيع لما تقفل التطبيق.";
     pub const RETRY: &str = "حاول تحفظ تاني";
+    pub const TRY_AGAIN: &str = "حاول تاني";
 }

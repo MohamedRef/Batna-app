@@ -99,11 +99,10 @@ Existing tests live beside the owning facade in a child `tests.rs` module.
 
 ## Remaining work, in priority order
 
-1. **Feature-specific write recovery.** Shared preference writes now use
-   `persistence/`, but domain writes such as reviews, content edits and exports
-   retain their existing error handling. Give those workflows an appropriate
-   recovery UI; never blindly replay append-only events through the preference
-   queue.
+1. **Feature-specific write recovery.** Done for reviews, content checks,
+   own-card deletes and exports (see "Save failures: retry in place" below).
+   New domain writes use `persistence::WriteFailed`; never replay append-only
+   events through the preference queue.
 2. **Smaller workflow modules.** `update/mod.rs`, `learn/steps.rs`,
    `study/mod.rs`, `case/mod.rs` and `store/backend.rs` have large workflow
    units. Extract pure decisions and focused stage components before
@@ -182,6 +181,24 @@ An optional suggested rating is now explicitly marked with the word
 focus-independent ring. It remains only a suggestion; all four grades,
 their real FSRS intervals, review storage and retry/Undo semantics are
 unchanged. The label is absent when there is no recommendation.
+
+## Save failures: retry in place (2026-10-30)
+
+Feature writes that fail now say so where they happened, with a
+«حاول تاني» button, through the shared `persistence::WriteFailed` notice
+(`.save-notice` styling, `role="alert"`). Each feature keeps its own state
+on screen and repeats only its own write:
+
+- Content checks (✓ / ✎ / ✗ and their Undo) keep the failed choice, edit and
+  note; retry runs the same idempotent verdict write.
+- Deleting an own card keeps the confirm row open with the reason.
+- Backup, check and Anki exports retry the same export; a failed export
+  writes nothing.
+- A study answer that fails is still retried by rating again (the answer
+  stays on screen); review events are append-only and never queued.
+
+Today's "not saved" note now clears when that same answer, verdict or
+delete later succeeds. No schema, FSRS, content or study-data changes.
 
 ## Study review: touch targets and announcements (2026-10-30)
 

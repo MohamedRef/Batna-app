@@ -96,7 +96,7 @@ pub fn ExportCard() -> Element {
     let mut outcome = use_signal(|| None::<Result<(String, u64), String>>);
     // Each export opens the "Save to" dialog afresh.
     let mut attempt = use_signal(|| 0u32);
-    let run = move |_| {
+    let mut run = move || {
         let result = store::export_dir()
             .and_then(|dir| save(store::shared(), &dir, &local_date(), store::now_ms()))
             .map(|(p, rows)| (p.display().to_string(), rows));
@@ -107,7 +107,7 @@ pub fn ExportCard() -> Element {
         crate::ui::Card {
             h2 { {tx::EXPORT_TITLE} }
             p { class: "muted small", {tx::EXPORT_BODY} }
-            button { class: "btn btn-primary", onclick: run, {tx::EXPORT_BUTTON} }
+            button { class: "btn btn-primary", onclick: move |_| run(), {tx::EXPORT_BUTTON} }
             match outcome() {
                 Some(Ok((path, rows))) => rsx! {
                     div { role: "status",
@@ -118,8 +118,9 @@ pub fn ExportCard() -> Element {
                         }
                     }
                 },
+                // Nothing was written; the same export runs again.
                 Some(Err(e)) => rsx! {
-                    p { class: "verify-error", role: "alert", "{tx::EXPORT_FAILED} " bdi { dir: "ltr", "{e}" } }
+                    crate::persistence::WriteFailed { message: tx::EXPORT_FAILED, detail: e, on_retry: move |_| run() }
                 },
                 None => rsx! {},
             }

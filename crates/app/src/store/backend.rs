@@ -206,6 +206,7 @@ impl ReviewBackend {
             super::write_failed(&format!("the verdict on {item_id}"), &e);
             return false;
         }
+        super::write_recovered(&format!("the verdict on {item_id}"));
         self.judgements.insert(item_id.to_string(), j);
         self.changed();
         true
@@ -218,6 +219,7 @@ impl ReviewBackend {
             super::write_failed(&format!("taking back the verdict on {item_id}"), &e);
             return false;
         }
+        super::write_recovered(&format!("taking back the verdict on {item_id}"));
         self.judgements.remove(item_id);
         self.changed();
         true

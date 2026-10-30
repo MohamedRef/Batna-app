@@ -142,14 +142,14 @@ pub fn RemindSection() -> Element {
 
     if !native::local() {
         return rsx! {
-            section { class: "card",
+            crate::ui::Card {
                 h2 { {tx::SECTION} }
                 p { class: "muted", {tx::PHONE_ONLY} }
             }
         };
     }
     rsx! {
-        section { class: "card",
+        crate::ui::Card {
             h2 { {tx::DAILY} }
             p { class: "muted small", {tx::DAILY_BODY} }
             div { class: "segmented", role: "radiogroup", aria_label: tx::DAILY,
@@ -227,7 +227,7 @@ pub fn RemindSection() -> Element {
             }
         }
         if prefs.on {
-            section { class: "card",
+            crate::ui::Card {
                 h2 { {tx::HERE} DeviceOnly {} }
                 p { class: "muted small", {tx::HERE_BODY} }
                 div { class: "segmented", role: "radiogroup", aria_label: tx::HERE,

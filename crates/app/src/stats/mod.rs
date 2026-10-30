@@ -171,7 +171,7 @@ fn Progress(data: std::rc::Rc<StudyData>) -> Element {
         // Tablet landscape and the Mac: the totals and the weakest topics side by side.
         div { class: "tab-cols", "data-align": "stretch",
             div { class: "tab-main",
-                section { class: "card",
+                crate::ui::Card {
                     h2 { {tx::SUMMARY} }
                     div { class: "summary",
                         // Seen and seen twice grow by studying; approved by the
@@ -232,7 +232,7 @@ fn Big(
 #[component]
 fn WeakCard(weak: Vec<WeakTopic>, ids: Vec<String>, data: std::rc::Rc<StudyData>) -> Element {
     rsx! {
-        section { class: "card",
+        crate::ui::Card {
             h2 { {tx::NEXT_STEP} }
             p { class: "muted small", {tx::WEAK_TITLE} }
             if weak.is_empty() {

@@ -1138,6 +1138,10 @@ pub mod cloud {
     /// The browser page after Google sends him back (HTML).
     pub const BROWSER_DONE: &str = "<h1>✓</h1><p>تمام، ارجع لباطنة.</p>";
     pub const BROWSER_CANCELLED: &str = "<p>ما اتسجلتش. ارجع لباطنة وجرّب تاني.</p>";
+    /// The browser page's button back to the app (Android).
+    pub const BROWSER_BACK: &str = "ارجع لباطنة";
+    /// Google said yes; Batna is finishing with the server.
+    pub const FINISHING: &str = "بيكمّل تسجيل الدخول…";
     /// "من" in "من 3 دقايق".
     pub const AGO: &str = "من";
     pub const SIGNED_IN_AS: &str = "داخل بـ";
@@ -1164,6 +1168,8 @@ pub mod cloud {
     pub const P_FAILED: &str = "تسجيل الدخول ما نجحش. جرّب تاني.";
     pub const P_REMOTE: &str = "الجهاز ده اتخرّج من جهاز تاني. سجّل دخول تاني وقت ما تحب.";
     pub const P_NETWORK: &str = "مش قادر يوصل للسيرفر دلوقتي. هيحاول تاني لوحده، ومذاكرتك محفوظة على الجهاز.";
+    pub const P_SIGN_IN_WAITING: &str = "جوجل وافقت، بس النت مش واصل لباطنة دلوقتي. هيكمّل الدخول لوحده أول ما النت يرجع، أو دوس «جرّب دلوقتي».";
+    pub const TRY_NOW: &str = "جرّب دلوقتي";
     pub const P_SERVER: &str = "السيرفر فيه مشكلة دلوقتي. هيحاول تاني لوحده.";
     pub const P_OUTDATED: &str = "السيرفر أحدث من النسخة دي. حدّث باطنة.";
     pub const P_CLOCK: &str =

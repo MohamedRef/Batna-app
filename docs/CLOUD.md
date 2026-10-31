@@ -47,7 +47,7 @@ The list lives in `batna_protocol::sync::TABLES`. **A new synced table must be a
 ### 3.2 Google sign-in (Google Cloud Console, free)
 1. <https://console.cloud.google.com/> → create a **new** project "Batna" (not Kabar's).
 2. **Google Auth Platform → Branding/Audience**: External, keep it in *Testing*, add your Gmail as a test user.
-3. **Clients → Create client → Desktop app** "Batna desktop". The Mac and Android both use it (browser sign-in with PKCE and a loopback redirect).
+3. **Clients → Create client → Desktop app** "Batna desktop". The Mac and Android both use it (browser sign-in with PKCE and a loopback redirect). On Android the redirect lands while Chrome is in front and Android keeps a backgrounded Batna off the network, so the app only waits for the code there; the code exchange and the Batna Cloud sign-in run once Batna is back in front (the page's "ارجع لباطنة" button opens `app.batna://signed-in`), retrying for up to nine minutes.
 4. Put its client id in `crates/server/wrangler.toml`:
    ```toml
    GOOGLE_CLIENT_IDS = "1234-desktop.apps.googleusercontent.com"

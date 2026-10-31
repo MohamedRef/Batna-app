@@ -75,6 +75,22 @@ pub fn use_provide_cloud() {
             }
         });
     });
+    // Back in front (Android hands a backgrounded app no network): a sign-in
+    // Google approved meanwhile finishes now, and the outbox goes up.
+    use_future(move || async move {
+        let mut eval = document::eval(
+            r#"
+            const send = () => { if (!document.hidden) dioxus.send(true); };
+            document.addEventListener("visibilitychange", send);
+            window.addEventListener("focus", send);
+            window.addEventListener("pageshow", send);
+            await new Promise(() => {});
+            "#,
+        );
+        while eval.recv::<bool>().await.is_ok() {
+            cloud.send(Command::Kick);
+        }
+    });
     // Every answer and verdict is in the outbox: push it now.
     let revision = use_context::<crate::store::Review>().revision;
     use_effect(move || {
@@ -91,6 +107,7 @@ fn problem_text(p: Problem) -> &'static str {
         Problem::SignInFailed => tx::P_FAILED,
         Problem::SignedOutRemotely => tx::P_REMOTE,
         Problem::Network => tx::P_NETWORK,
+        Problem::SignInWaiting => tx::P_SIGN_IN_WAITING,
         Problem::Server => tx::P_SERVER,
         Problem::Outdated => tx::P_OUTDATED,
         Problem::ClockOff => tx::P_CLOCK,
@@ -152,6 +169,9 @@ pub fn SyncSection() -> Element {
                 p { class: "muted small", {tx::INTRO} }
                 if *cloud.signing_in.read() {
                     p { class: "muted", aria_live: "polite", {tx::SIGNING_IN} }
+                } else if status.finishing_sign_in {
+                    p { class: "muted", aria_live: "polite", {tx::FINISHING} }
+                    button { class: "btn btn-primary", onclick: move |_| cloud.send(Command::Kick), {tx::TRY_NOW} }
                 } else {
                     button { class: "btn btn-primary", onclick: move |_| cloud.send(Command::SignInGoogle), {tx::SIGN_IN} }
                 }

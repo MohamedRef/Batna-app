@@ -60,7 +60,7 @@ async function run() {
         assert.ok(layout.settingsBackground.includes('radial-gradient'), `${name}: glass must be visible in Settings`);
         assert.ok(layout.settingsCardBackground.includes('linear-gradient'), `${name}: content cards must gain a glass surface`);
         assert.notEqual(layout.settingsCardShadow, 'none', `${name}: card rim must be present`);
-        const calmBackground = await page.locator('.settings-pane .card').evaluate(el => {
+        const calmBackground = await page.locator('.settings-pane .card').first().evaluate(el => {
           const root = document.querySelector('.app');
           root.setAttribute('data-appearance', 'calm');
           const background = getComputedStyle(el).backgroundImage;

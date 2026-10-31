@@ -1,0 +1,102 @@
+/* iOS-inspired Liquid Glass, opt-in from Settings > Look. This is a CSS
+   interpretation (not Apple's native refractive material). Keep study
+   content, answers and long sheets solid and legible. RTL-safe chrome only.
+   Loaded after the common components and sheet styles. */
+.app[data-appearance="liquid-glass"] {
+  --liquid-rim: color-mix(in srgb, var(--glass-white, white) 24%, var(--line));
+  --liquid-shine: inset 0 1px 0 color-mix(in srgb, var(--glass-white, white) 46%, transparent);
+  --liquid-shadow: 0 8px 24px rgb(0 0 0 / 0.16);
+  background:
+    radial-gradient(ellipse at 95% 0%,
+      color-mix(in srgb, var(--glass-glow, var(--accent-soft)) 20%, transparent),
+      transparent 52%), var(--bg);
+}
+
+/* A separate controls layer, without putting glass behind learning text. */
+.app[data-appearance="liquid-glass"] .topbar {
+  background: color-mix(in srgb, var(--surface) 97%, var(--glass-white, white));
+  border-block-end: 1px solid var(--liquid-rim);
+  box-shadow: var(--liquid-shine);
+}
+.app[data-appearance="liquid-glass"] .nav {
+  background: color-mix(in srgb, var(--surface) 97%, var(--glass-white, white));
+  border-color: var(--liquid-rim);
+  box-shadow: var(--liquid-shine);
+}
+.app[data-appearance="liquid-glass"] .nav-item[aria-current="page"] .glyph {
+  border-radius: var(--radius-pill);
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+}
+.app[data-appearance="liquid-glass"] :is(.topbar .icon-button, .settings-head .icon-button, .bsheet-close) {
+  border-color: var(--liquid-rim);
+  background: color-mix(in srgb, var(--surface) 94%, var(--glass-white, white));
+  box-shadow: var(--liquid-shine);
+}
+.app[data-appearance="liquid-glass"] :is(.more-sheet, .sheet) {
+  background: color-mix(in srgb, var(--surface) 97%, var(--glass-white, white));
+  border-color: var(--liquid-rim);
+  box-shadow: var(--liquid-shine), var(--liquid-shadow);
+}
+.app[data-appearance="liquid-glass"] .bsheet {
+  /* An information sheet contains reading material: never blur its body. */
+  background: var(--sheet);
+  border-color: var(--liquid-rim);
+  box-shadow: var(--liquid-shine), var(--liquid-shadow);
+}
+.app[data-appearance="liquid-glass"] .settings-head {
+  background: color-mix(in srgb, var(--surface) 98%, var(--glass-white, white));
+  box-shadow: var(--liquid-shine);
+}
+
+/* Preserve the bottom bar's grid, tab order and target heights on phones. */
+@media (max-width: 599.98px) {
+  .app[data-appearance="liquid-glass"] .nav {
+    margin-inline: var(--sp-2);
+    margin-block-end: calc(var(--sp-2) + env(safe-area-inset-bottom, 0px));
+    padding: var(--sp-1);
+    border: 1px solid var(--liquid-rim);
+    border-radius: var(--radius-pill);
+    box-shadow: var(--liquid-shine), var(--liquid-shadow);
+  }
+  .app[data-appearance="liquid-glass"] .nav-item {
+    min-inline-size: 0;
+    border-radius: var(--radius-pill);
+  }
+  .app[data-appearance="liquid-glass"] .nav-item .label {
+    max-inline-size: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+/* Blur only the small floating functional surfaces, never full-height rails,
+   long reading sheets, content cards or large settings windows. */
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  @media (max-width: 599.98px) {
+    .app[data-appearance="liquid-glass"] :is(.nav, .topbar) {
+      background: color-mix(in srgb, var(--surface) 86%, transparent);
+      -webkit-backdrop-filter: blur(14px) saturate(1.2);
+      backdrop-filter: blur(14px) saturate(1.2);
+    }
+  }
+  .app[data-appearance="liquid-glass"] .more-sheet {
+    background: color-mix(in srgb, var(--surface) 93%, transparent);
+    -webkit-backdrop-filter: blur(12px) saturate(1.15);
+    backdrop-filter: blur(12px) saturate(1.15);
+  }
+}
+
+/* A solid, high-contrast view always beats a decorative material. */
+@media (prefers-reduced-transparency: reduce), (prefers-contrast: more), (forced-colors: active) {
+  .app[data-appearance="liquid-glass"] { background: var(--bg); }
+  .app[data-appearance="liquid-glass"] :is(.nav, .topbar, .more-sheet, .sheet, .settings-head) {
+    background: var(--surface);
+    border-color: var(--line);
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  .app[data-appearance="liquid-glass"] .bsheet { box-shadow: none; border-color: var(--line); }
+}

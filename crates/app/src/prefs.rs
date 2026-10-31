@@ -108,22 +108,25 @@ impl NavStyle {
 /// The surface style (Settings › Look › "نمط الواجهة"), independent of the
 /// colour theme: Calm is solid and quiet; Glossy adds tonal gradients, a
 /// soft top highlight, pill buttons and blur on small floating surfaces.
-/// `data-appearance` on `.app` (assets/appearance.css).
+/// Liquid Glass keeps content solid and brings a frosted treatment to navigation.
+/// `data-appearance` on `.app` (assets/appearance.css, assets/liquid-glass.css).
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub enum Appearance {
     #[default]
     Calm,
     Glossy,
+    LiquidGlass,
 }
 
 impl Appearance {
-    pub const ALL: [Self; 2] = [Self::Calm, Self::Glossy];
+    pub const ALL: [Self; 3] = [Self::Calm, Self::Glossy, Self::LiquidGlass];
 
     /// Stored value and `data-appearance`.
     pub fn as_str(self) -> &'static str {
         match self {
             Self::Calm => "calm",
             Self::Glossy => "glossy",
+            Self::LiquidGlass => "liquid-glass",
         }
     }
 
@@ -141,7 +144,7 @@ pub struct DevicePrefs {
     pub pen_hover: bool,
     /// Peeks when the mouse rests on a word (Settings › Mac).
     pub mouse_hover: bool,
-    /// Calm or Glossy. A file from before the redesign has no line for it
+    /// Calm, Glossy or Liquid Glass. Older files have no line for it
     /// and loads as Calm.
     pub appearance: Appearance,
 }
@@ -245,8 +248,24 @@ mod tests {
         assert_eq!(p.appearance, Appearance::Calm);
         assert_eq!((p.theme, p.text_size, p.mouse_hover), (Theme::Night, TextSize::Small, false));
         assert_eq!(DevicePrefs::parse("appearance=sparkly").appearance, Appearance::Calm);
-        let glossy = DevicePrefs { appearance: Appearance::Glossy, ..p };
-        assert_eq!(DevicePrefs::parse(&glossy.render()), glossy);
+        for appearance in Appearance::ALL {
+            let with_appearance = DevicePrefs { appearance, ..p };
+            assert_eq!(DevicePrefs::parse(&with_appearance.render()), with_appearance);
+        }
+    }
+
+    #[test]
+    fn liquid_glass_has_solid_accessibility_fallbacks() {
+        let css = include_str!("../assets/liquid-glass.css");
+        for expected in [
+            ".app[data-appearance=\"liquid-glass\"]",
+            "@supports",
+            "prefers-reduced-transparency: reduce",
+            "prefers-contrast: more",
+            "forced-colors: active",
+        ] {
+            assert!(css.contains(expected), "Missing {expected}");
+        }
     }
 
     #[test]

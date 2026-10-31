@@ -1,6 +1,6 @@
 # Batna design system
 
-The 2026-10 redesign (Calm / Glossy · Material You). Every screen builds
+The 2026-10 redesign (Calm / Glossy · Material You / Liquid Glass). Every screen builds
 from the tokens and shared classes below; feature stylesheets add layout,
 never their own colours or their own copy of a button, chip or sheet.
 
@@ -8,7 +8,7 @@ never their own colours or their own copy of a button, chip or sheet.
 
 The foundation (this file, `crates/core/src/theme.rs`, `crates/app/src/prefs.rs`,
 `crates/app/src/look.rs`, `assets/main.css` root tokens, `assets/parts.css`,
-`assets/appearance.css`, `assets/shape.css`, `assets/nav.css`,
+`assets/appearance.css`, `assets/liquid-glass.css`, `assets/shape.css`,  `assets/nav.css`,
 `assets/desk.css`, `more.rs`, the shell in `main.rs`, Settings › Look) is
 changed by one owner at a time. A screen that needs a new token or shared
 part asks for it, or adds a feature-local class in its own stylesheet.
@@ -48,11 +48,11 @@ brand blue. Night shift keeps its amber accent: it must have no colour where
 blue outweighs red. Theme ids never change. `theme.rs` tests every pairing
 above against WCAG AA (4.5:1).
 
-## Appearance: Calm and Glossy
+## Appearance: Calm, Glossy and Liquid Glass
 
 A device preference (`prefs::Appearance`, `appearance=` in
 `device-prefs.txt`, default Calm, never synced), picked in
-Settings › Look › "نمط الواجهة". It sets `data-appearance="calm|glossy"`
+Settings › Look › "نمط الواجهة". It sets `data-appearance="calm|glossy|liquid-glass"`
 on `.app`; only CSS reads it, so switching keeps every screen's state.
 
 - Calm (default): solid surfaces, hairlines, 18px cards, 13px controls.
@@ -64,6 +64,16 @@ on `.app`; only CSS reads it, so switching keeps every screen's state.
   `prefers-reduced-transparency` and `prefers-contrast: more` fall back to
   solid surfaces. On True black, `--glass-white` is black so pixels stay
   off. It does not take colours from the wallpaper; don't claim it does.
+- Liquid Glass (`assets/liquid-glass.css`): an **iOS-inspired CSS treatment**, not
+  Apple's native refractive material. Theme-aware frosted top/bottom chrome,
+  a floating pill navigation bar on compact widths, subtle rims, and small
+  icon controls. Main reading cards, answers, and full-screen Settings stay
+  opaque. Only the compact nav/topbar and the More popover use blur when
+  supported by the WebView; unsupported devices use an almost-solid fill.
+  Reduced-transparency, increased-contrast and forced-colours preferences
+  disable blur and restore solid chrome. The true-black palette keeps its
+  page glow and highlights off using `--glass-white`/`--glass-glow`.
+  No motion or external assets are introduced.
 
 A feature that needs a Glossy variant of its own class writes
 `.app[data-appearance="glossy"] .my-class { … }` in its own stylesheet,

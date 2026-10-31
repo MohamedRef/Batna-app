@@ -1,0 +1,22 @@
+# TEMPORARY: probe Batna Cloud from outside (removed before merge).
+name: Probe Batna Cloud
+on:
+  push:
+    branches: [claude/project-thread-cp83dj]
+permissions: {}
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: health + sign-in endpoint
+        run: |
+          set -x
+          U=https://batna-cloud.hamorefaat85.workers.dev
+          dig +short batna-cloud.hamorefaat85.workers.dev A || true
+          dig +short batna-cloud.hamorefaat85.workers.dev AAAA || true
+          curl -sS -m 30 -w '\n%{http_code} %{time_total}s\n' $U/v1/health
+          curl -sS -m 30 -w '\n%{http_code} %{time_total}s\n' -X POST -H 'content-type: application/json' \
+            -d '{"id_token":"x.y.z","device":{"device_id":"probe","name":"probe","model":null,"platform":"other"}}' $U/v1/auth/google
+          curl -sS -m 30 -w '\n%{http_code} %{time_total}s\n' -X POST -H 'content-type: application/json' \
+            -d '{"refresh_token":"x"}' $U/v1/auth/refresh
+          echo | openssl s_client -connect batna-cloud.hamorefaat85.workers.dev:443 -servername batna-cloud.hamorefaat85.workers.dev 2>/dev/null | openssl x509 -noout -issuer -subject -dates
